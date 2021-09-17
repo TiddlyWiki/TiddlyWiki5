@@ -7,9 +7,11 @@ type: text/vnd.tiddlywiki
 When used to display date values (with the `format` attribute set to ''date''), the ViewWidget accepts a `template` attribute that allows the format of the date values to be specified. The format string is processed with the following substitutions:
 
 |!Token |!Substituted Value |
+|`dddd` |Day of year (1 to 365, or 366 for leap years) |
+|`0dddd` |Zero padded day of year (001 to 365, or 366 for leap years) 
 |`DDD` |Day of week in full (eg, "Monday") |
 |`ddd` |Short day of week (eg, "Mon") |
-|`dddd` |<<.from-version "5.2.0">> Weekday number from 1 through 7, beginning with Monday and ending with Sunday |
+|`dd` |<<.from-version "5.2.0">> Weekday number from 1 through 7, beginning with Monday and ending with Sunday |
 |`DD` |Day of month |
 |`0DD` |Adds a leading zero |
 |`DDth` |Adds a suffix |
