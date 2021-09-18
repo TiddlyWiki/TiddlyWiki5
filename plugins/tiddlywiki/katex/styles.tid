@@ -13,7 +13,7 @@ tags: [[$:/tags/Stylesheet]]
     text-rendering: auto;
 }
 
-/* Reset Automatic Numbering on a per tiddler body basis */
+/* Reset Automatic Numbering on a per tiddler basis */
 
 .tc-tiddler-frame {
 	counter-reset: katexEqnNo;
