@@ -15,8 +15,8 @@ function LinkedList() {
 
 LinkedList.prototype.clear = function() {
 	// LinkedList performs the duty of both the head and tail node
-	this.next = Object.create(null);
-	this.prev = Object.create(null);
+	this.next = new OurMap();
+	this.prev = new OurMap();
 	this.first = undefined;
 	this.last = undefined;
 	this.length = 0;
@@ -77,7 +77,7 @@ LinkedList.prototype.each = function(callback) {
 		value = this.first;
 	while(value !== undefined) {
 		callback(value);
-		var next = this.next[value];
+		var next = this.next.get(value);
 		if(typeof next === "object") {
 			var i = visits[value] || 0;
 			visits[value] = i+1;
@@ -105,8 +105,8 @@ LinkedList.prototype.makeTiddlerIterator = function(wiki) {
 };
 
 function _removeOne(list,value) {
-	var prevEntry = list.prev[value],
-		nextEntry = list.next[value],
+	var prevEntry = list.prev.get(value),
+		nextEntry = list.next.get(value),
 		prev = prevEntry,
 		next = nextEntry;
 	if(typeof nextEntry === "object") {
@@ -117,16 +117,16 @@ function _removeOne(list,value) {
 	if(list.first === value) {
 		list.first = next
 	} else if(prev !== undefined) {
-		if(typeof list.next[prev] === "object") {
+		if(typeof list.next.get(prev) === "object") {
 			if(next === undefined) {
 				// Must have been last, and 'i' would be last element.
-				list.next[prev].pop();
+				list.next.get(prev).pop();
 			} else {
-				var i = list.next[prev].indexOf(value);
-				list.next[prev][i] = next;
+				var i = list.next.get(prev).indexOf(value);
+				list.next.get(prev)[i] = next;
 			}
 		} else {
-			list.next[prev] = next;
+			list.next.set(prev,next);
 		}
 	} else {
 		return;
@@ -135,16 +135,16 @@ function _removeOne(list,value) {
 	// Check "next !== undefined" rather than "list.last === value" because
 	// we need to know if the FIRST value is the last in the list, not the last.
 	if(next !== undefined) {
-		if(typeof list.prev[next] === "object") {
+		if(typeof list.prev.get(next) === "object") {
 			if(prev === undefined) {
 				// Must have been first, and 'i' would be 0.
-				list.prev[next].shift();
+				list.prev.get(next).shift();
 			} else {
-				var i = list.prev[next].indexOf(value);
-				list.prev[next][i] = prev;
+				var i = list.prev.get(next).indexOf(value);
+				list.prev.get(next)[i] = prev;
 			}
 		} else {
-			list.prev[next] = prev;
+			list.prev.set(next,prev);
 		}
 	} else {
 		list.last = prev;
@@ -154,8 +154,8 @@ function _removeOne(list,value) {
 		nextEntry.shift();
 		prevEntry.shift();
 	} else {
-		list.next[value] = undefined;
-		list.prev[value] = undefined;
+		list.next.set(value,undefined);
+		list.prev.set(value,undefined);
 	}
 	list.length -= 1;
 };
@@ -166,27 +166,27 @@ function _linkToEnd(list,value) {
 		list.first = value;
 	} else {
 		// Does it already exists?
-		if(list.first === value || list.prev[value] !== undefined) {
-			if(typeof list.next[value] === "string") {
-				list.next[value] = [list.next[value]];
-				list.prev[value] = [list.prev[value]];
-			} else if(typeof list.next[value] === "undefined") {
+		if(list.first === value || list.prev.get(value) !== undefined) {
+			if(typeof list.next.get(value) === "string") {
+				list.next.set(value,[list.next.get(value)]);
+				list.prev.set(value,[list.prev.get(value)]);
+			} else if(typeof list.next.get(value) === "undefined") {
 				// list.next[value] must be undefined.
 				// Special case. List already has 1 value. It's at the end.
-				list.next[value] = [];
-				list.prev[value] = [list.prev[value]];
+				list.next.set(value,[]);
+				list.prev.set(value,[list.prev.get(value)]);
 			}
-			list.prev[value].push(list.last);
+			list.prev.get(value).push(list.last);
 			// We do NOT append a new value onto "next" list. Iteration will
 			// figure out it must point to End-of-List on its own.
 		} else {
-			list.prev[value] = list.last;
+			list.prev.set(value,list.last);
 		}
 		// Make the old last point to this new one.
-		if(typeof list.next[list.last] === "object") {
-			list.next[list.last].push(value);
+		if(typeof list.next.get(list.last) === "object") {
+			list.next.get(list.last).push(value);
 		} else {
-			list.next[list.last] = value;
+			list.next.set(list.last,value);
 		}
 	}
 	list.last = value;
@@ -198,6 +198,25 @@ function _assertString(value) {
 		throw "Linked List only accepts string values, not " + value;
 	}
 };
+
+var OurMap;
+
+if (typeof Map === "function") {
+	OurMap = Map;
+} else {
+	// Create a simple backup map for IE and such which handles undefined.
+	OurMap = function() {
+		this.map = Object.create(null);
+	};
+
+	OurMap.prototype.set = function(key,value) {
+		(key === undefined) ? (this.undef = value) : (this.map[key] = value);
+	};
+
+	OurMap.prototype.get = function(key) {
+		return (key === undefined) ? this.undef : this.map[key];
+	};
+}
 
 exports.LinkedList = LinkedList;
 
