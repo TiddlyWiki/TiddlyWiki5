@@ -17,7 +17,6 @@ LinkedList.prototype.clear = function() {
 	// LinkedList performs the duty of both the head and tail node
 	this.next = new OurMap();
 	this.prev = new OurMap();
-	this.first = undefined;
 	this.length = 0;
 };
 
@@ -73,7 +72,7 @@ LinkedList.prototype.pushTop = function(value) {
 
 LinkedList.prototype.each = function(callback) {
 	var visits = Object.create(null),
-		value = this.first;
+		value = this.next.get();
 	while(value !== undefined) {
 		callback(value);
 		var next = this.next.get(value);
@@ -113,8 +112,8 @@ function _removeOne(list,value) {
 		prev = prevEntry[0];
 	}
 	// Relink preceding element.
-	if(list.first === value) {
-		list.first = next
+	if(list.next.get() === value) {
+		list.next.set(undefined,next);
 	} else if(prev !== undefined) {
 		if(typeof list.next.get(prev) === "object") {
 			if(next === undefined) {
@@ -161,11 +160,11 @@ function _removeOne(list,value) {
 
 // Sticks the given node onto the end of the list.
 function _linkToEnd(list,value) {
-	if(list.first === undefined) {
-		list.first = value;
+	if(list.next.get() === undefined) {
+		list.next.set(undefined,value);
 	} else {
 		// Does it already exists?
-		if(list.first === value || list.prev.get(value) !== undefined) {
+		if(list.next.get() === value || list.prev.get(value) !== undefined) {
 			if(typeof list.next.get(value) === "string") {
 				list.next.set(value,[list.next.get(value)]);
 				list.prev.set(value,[list.prev.get(value)]);
