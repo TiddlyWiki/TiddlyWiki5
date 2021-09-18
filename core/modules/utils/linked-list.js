@@ -152,8 +152,8 @@ function _removeOne(list,value) {
 		nextEntry.shift();
 		prevEntry.shift();
 	} else {
-		list.next.set(value,undefined);
-		list.prev.set(value,undefined);
+		list.next.delete(value);
+		list.prev.delete(value);
 	}
 	list.length -= 1;
 };
@@ -208,12 +208,19 @@ if (typeof Map === "function") {
 		this.map = Object.create(null);
 	};
 
-	OurMap.prototype.set = function(key,value) {
-		(key === undefined) ? (this.undef = value) : (this.map[key] = value);
-	};
-
-	OurMap.prototype.get = function(key) {
-		return (key === undefined) ? this.undef : this.map[key];
+	OurMap.prototype = {
+		set: function(key,val) {
+			(key === undefined) ? (this.undef = val) : (this.map[key] = val);
+		},
+		get: function(key) {
+			return (key === undefined) ? this.undef : this.map[key];
+		},
+		delete: function(key) {
+			delete this.map[key];
+		},
+		has: function(key) {
+			return $tw.utils.hop(this.map, key);
+		}
 	};
 }
 
