@@ -18,7 +18,6 @@ LinkedList.prototype.clear = function() {
 	this.next = new OurMap();
 	this.prev = new OurMap();
 	this.first = undefined;
-	this.last = undefined;
 	this.length = 0;
 };
 
@@ -147,7 +146,7 @@ function _removeOne(list,value) {
 			list.prev.set(next,prev);
 		}
 	} else {
-		list.last = prev;
+		list.prev.set(undefined,prev);
 	}
 	// Delink actual value. If it uses arrays, just remove first entries.
 	if(typeof nextEntry === "object") {
@@ -176,20 +175,21 @@ function _linkToEnd(list,value) {
 				list.next.set(value,[]);
 				list.prev.set(value,[list.prev.get(value)]);
 			}
-			list.prev.get(value).push(list.last);
+			list.prev.get(value).push(list.prev.get());
 			// We do NOT append a new value onto "next" list. Iteration will
 			// figure out it must point to End-of-List on its own.
 		} else {
-			list.prev.set(value,list.last);
+			list.prev.set(value,list.prev.get());
 		}
 		// Make the old last point to this new one.
-		if(typeof list.next.get(list.last) === "object") {
-			list.next.get(list.last).push(value);
+		var last = list.prev.get();
+		if(typeof list.next.get(last) === "object") {
+			list.next.get(last).push(value);
 		} else {
-			list.next.set(list.last,value);
+			list.next.set(last,value);
 		}
 	}
-	list.last = value;
+	list.prev.set(undefined,value);
 	list.length += 1;
 };
 
