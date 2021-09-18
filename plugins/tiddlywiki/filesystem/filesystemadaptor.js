@@ -82,12 +82,12 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		if(err) {
 			return callback(err);
 		}
-		$tw.utils.saveTiddlerToFile(tiddler,fileInfo, (err,fileInfo) => {
+		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
-					this.boot.files[tiddler.fields.title] = fileInfo;
+					self.boot.files[tiddler.fields.title] = fileInfo;
 					$tw.syncer.logger.log("Sync failed for \""+tiddler.fields.title+"\" and will be retried with encoded filepath",encodeURIComponent(fileInfo.filepath));
 					return callback(err);
 				} else {
@@ -95,7 +95,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				}
 			}
 			// Store new boot info only after successful writes
-			this.boot.files[tiddler.fields.title] = fileInfo;
+			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
 			var options = {
 				adaptorInfo: syncerInfo.adaptorInfo || {},
@@ -122,22 +122,14 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 };
 
 /*
-	Delete a tiddler and invoke the callback with (err)
-	@params title title of tiddler to delete
-	@params callback callback to execute after tiddler deletion
-	@params options `{ cacheOnly: boolean }` cacheOnly: if set cacheOnly as true, we won't touch fs, just delete file from this.boot.files
+Delete a tiddler and invoke the callback with (err)
 */
 FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
-	const fileInfo = this.boot.files[title];
+	var self = this,
+		fileInfo = this.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
-	var cacheOnly = options.cacheOnly || false;
-	if(cacheOnly) {
-		// Remove the tiddler from this.boot.files & return null adaptorInfo
-		delete this.boot.files[title];
-		return callback(null,null);	
-	}
 	if(fileInfo) {
-		$tw.utils.deleteTiddlerFile(fileInfo, (err,fileInfo) => {
+		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
@@ -147,13 +139,23 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 					return callback(err);
 				}
 			}
-			// Remove the tiddler from this.boot.files & return null adaptorInfo
-			delete this.boot.files[title];
+			// Remove the tiddler from self.boot.files & return null adaptorInfo
+			self.deleteTiddlerInCache(title);
 			return callback(null,null);
 		});
 	} else {
 		callback(null,null);
 	}
+};
+
+/*
+Delete a tiddler in cache, without modifying file system.
+*/
+FileSystemAdaptor.prototype.deleteTiddlerInCache = function(title) {
+	// Only delete the tiddler if we have writable information for the file
+	if(this.boot.files[title]) {
+		delete self.boot.files[title];
+	};
 };
 
 if(fs) {
