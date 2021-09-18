@@ -154,7 +154,7 @@ Delete a tiddler in cache, without modifying file system.
 FileSystemAdaptor.prototype.deleteTiddlerInCache = function(title) {
 	// Only delete the tiddler if we have writable information for the file
 	if(this.boot.files[title]) {
-		delete self.boot.files[title];
+		delete this.boot.files[title];
 	};
 };
 
