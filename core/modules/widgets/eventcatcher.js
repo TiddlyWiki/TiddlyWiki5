@@ -76,20 +76,22 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 						variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
 						variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
 						variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+						
+						if(event.clientX && event.clientY) {
+							//Add variables for event X and Y position relative to selected node
+							selectedNodeRect = selectedNode.getBoundingClientRect();
+							variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
+							variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
 
-						//Add variables for event X and Y position relative to selected node
-						selectedNodeRect = selectedNode.getBoundingClientRect();
-						variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
-						variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
+							//Add variables for event X and Y position relative to event catcher node
+							catcherNodeRect = self.domNode.getBoundingClientRect();
+							variables["event-fromcatcher-posx"] = (event.clientX - catcherNodeRect.left).toString();
+							variables["event-fromcatcher-posy"] = (event.clientY - catcherNodeRect.top).toString();
 
-						//Add variables for event X and Y position relative to event catcher node
-						catcherNodeRect = self.domNode.getBoundingClientRect();
-						variables["event-fromcatcher-posx"] = (event.clientX - catcherNodeRect.left).toString();
-						variables["event-fromcatcher-posy"] = (event.clientY - catcherNodeRect.top).toString();
-
-						//Add variables for event X and Y position relative to the viewport
-						variables["event-fromviewport-posx"] = event.clientX.toString();
-						variables["event-fromviewport-posy"] = event.clientY.toString();
+							//Add variables for event X and Y position relative to the viewport
+							variables["event-fromviewport-posx"] = event.clientX.toString();
+							variables["event-fromviewport-posy"] = event.clientY.toString();
+						}
 					}
 				} else {
 					return false;
