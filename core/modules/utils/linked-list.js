@@ -103,52 +103,40 @@ LinkedList.prototype.makeTiddlerIterator = function(wiki) {
 };
 
 function _removeOne(list,value) {
+	if(!list.next.has(value)) {
+		return;
+	}
 	var prevEntry = list.prev.get(value),
 		nextEntry = list.next.get(value),
 		prev = prevEntry,
-		next = nextEntry;
+		next = nextEntry,
+		ref;
 	if(typeof nextEntry === "object") {
 		next = nextEntry[0];
 		prev = prevEntry[0];
 	}
 	// Relink preceding element.
-	if(list.next.get() === value) {
-		list.next.set(undefined,next);
-	} else if(prev !== undefined) {
-		if(typeof list.next.get(prev) === "object") {
-			if(next === undefined) {
-				// Must have been last, and 'i' would be last element.
-				list.next.get(prev).pop();
-			} else {
-				var i = list.next.get(prev).indexOf(value);
-				list.next.get(prev)[i] = next;
-			}
-		} else {
-			list.next.set(prev,next);
-		}
+	ref = list.next.get(prev);
+	if(typeof ref === "object") {
+		var i = ref.indexOf(value);
+		ref[i] = next;
 	} else {
-		return;
+		list.next.set(prev,next);
 	}
+
 	// Now relink following element
 	// Check "next !== undefined" rather than "list.last === value" because
 	// we need to know if the FIRST value is the last in the list, not the last.
-	if(next !== undefined) {
-		if(typeof list.prev.get(next) === "object") {
-			if(prev === undefined) {
-				// Must have been first, and 'i' would be 0.
-				list.prev.get(next).shift();
-			} else {
-				var i = list.prev.get(next).indexOf(value);
-				list.prev.get(next)[i] = prev;
-			}
-		} else {
-			list.prev.set(next,prev);
-		}
+	ref = list.prev.get(next);
+	if(typeof ref === "object") {
+		var i = ref.indexOf(value);
+		ref[i] = prev;
 	} else {
-		list.prev.set(undefined,prev);
+		list.prev.set(next,prev);
 	}
+
 	// Delink actual value. If it uses arrays, just remove first entries.
-	if(typeof nextEntry === "object") {
+	if(typeof nextEntry === "object" && nextEntry.length > 1) {
 		nextEntry.shift();
 		prevEntry.shift();
 	} else {
@@ -160,35 +148,37 @@ function _removeOne(list,value) {
 
 // Sticks the given node onto the end of the list.
 function _linkToEnd(list,value) {
-	if(list.next.get() === undefined) {
-		list.next.set(undefined,value);
-	} else {
-		// Does it already exists?
-		if(list.next.get() === value || list.prev.get(value) !== undefined) {
-			if(typeof list.next.get(value) === "string") {
-				list.next.set(value,[list.next.get(value)]);
-				list.prev.set(value,[list.prev.get(value)]);
-			} else if(typeof list.next.get(value) === "undefined") {
-				// list.next[value] must be undefined.
-				// Special case. List already has 1 value. It's at the end.
-				list.next.set(value,[]);
-				list.prev.set(value,[list.prev.get(value)]);
-			}
-			list.prev.get(value).push(list.prev.get());
-			// We do NOT append a new value onto "next" list. Iteration will
-			// figure out it must point to End-of-List on its own.
-		} else {
-			list.prev.set(value,list.prev.get());
+	var old;
+	var last = list.prev.get();
+	// Does it already exists?
+	if(list.next.has(value)) {
+		old = list.next.get(value);
+		if(typeof old !== "object") {
+			old = [old];
+			list.next.set(value,old);
+			list.prev.set(value,[list.prev.get(value)]);
 		}
-		// Make the old last point to this new one.
-		var last = list.prev.get();
-		if(typeof list.next.get(last) === "object") {
-			list.next.get(last).push(value);
+		old.push(undefined);
+		list.prev.get(value).push(last);
+	} else {
+		list.next.set(value,undefined);
+		list.prev.set(value,last);
+	}
+	// Make the old last point to this new one.
+	if (value !== last) {
+		var array = list.next.get(last);
+		if(typeof array === "object") {
+			array[array.length-1] = value;
 		} else {
 			list.next.set(last,value);
 		}
+		list.prev.set(undefined,value);
+	} else {
+		// Edge case, the pushed value was already the last value.
+		// The second-to-last nextPtr for that value must point to itself now.
+		var array = list.next.get(last);
+		array[array.length-2] = value;
 	}
-	list.prev.set(undefined,value);
 	list.length += 1;
 };
 
