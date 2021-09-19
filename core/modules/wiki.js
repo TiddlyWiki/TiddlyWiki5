@@ -378,12 +378,12 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			var tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
 			if(tiddlerA) {
-				a = tiddlerA.getFieldString(sortField) || "";
+				a = tiddlerA.fields[sortField] || "";
 			} else {
 				a = "";
 			}
 			if(tiddlerB) {
-				b = tiddlerB.getFieldString(sortField) || "";
+				b = tiddlerB.fields[sortField] || "";
 			} else {
 				b = "";
 			}
@@ -395,6 +395,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
 		} else if(isAlphaNumeric) {
+			a = String(a);
+			b = String(b);
 			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else {
 			a = String(a);
