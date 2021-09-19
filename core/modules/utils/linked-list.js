@@ -17,6 +17,8 @@ LinkedList.prototype.clear = function() {
 	// LinkedList performs the duty of both the head and tail node
 	this.next = new OurMap();
 	this.prev = new OurMap();
+	this.next.set(null, null);
+	this.prev.set(null, null);
 	this.length = 0;
 };
 
@@ -39,28 +41,29 @@ Push behaves like array.push and accepts multiple string arguments. But it also
 accepts a single array argument too, to be consistent with its other methods.
 */
 LinkedList.prototype.push = function(/* values */) {
-	var values = arguments;
+	var i, values = arguments;
 	if($tw.utils.isArray(values[0])) {
 		values = values[0];
 	}
-	for(var i = 0; i < values.length; i++) {
+	for(i = 0; i < values.length; i++) {
 		_assertString(values[i]);
 	}
-	for(var i = 0; i < values.length; i++) {
+	for(i = 0; i < values.length; i++) {
 		_linkToEnd(this,values[i]);
 	}
 	return this.length;
 };
 
 LinkedList.prototype.pushTop = function(value) {
+	var t;
 	if($tw.utils.isArray(value)) {
-		for (var t=0; t<value.length; t++) {
+		for (t=0; t<value.length; t++) {
 			_assertString(value[t]);
 		}
-		for(var t=0; t<value.length; t++) {
+		for(t=0; t<value.length; t++) {
 			_removeOne(this,value[t]);
 		}
-		for(var t=0; t<value.length; t++) {
+		for(t=0; t<value.length; t++) {
 			_linkToEnd(this,value[t]);
 		}
 	} else {
@@ -72,11 +75,11 @@ LinkedList.prototype.pushTop = function(value) {
 
 LinkedList.prototype.each = function(callback) {
 	var visits = Object.create(null),
-		value = this.next.get();
-	while(value !== undefined) {
+		value = this.next.get(null);
+	while(value !== null) {
 		callback(value);
 		var next = this.next.get(value);
-		if(typeof next === "object") {
+		if(Array.isArray(next)) {
 			var i = visits[value] || 0;
 			visits[value] = i+1;
 			value = next[i];
@@ -103,21 +106,21 @@ LinkedList.prototype.makeTiddlerIterator = function(wiki) {
 };
 
 function _removeOne(list,value) {
-	if(!list.next.has(value)) {
+	var nextEntry = list.next.get(value);
+	if(nextEntry === undefined) {
 		return;
 	}
 	var prevEntry = list.prev.get(value),
-		nextEntry = list.next.get(value),
 		prev = prevEntry,
 		next = nextEntry,
 		ref;
-	if(typeof nextEntry === "object") {
+	if(Array.isArray(nextEntry)) {
 		next = nextEntry[0];
 		prev = prevEntry[0];
 	}
 	// Relink preceding element.
 	ref = list.next.get(prev);
-	if(typeof ref === "object") {
+	if(Array.isArray(ref)) {
 		var i = ref.indexOf(value);
 		ref[i] = next;
 	} else {
@@ -125,10 +128,8 @@ function _removeOne(list,value) {
 	}
 
 	// Now relink following element
-	// Check "next !== undefined" rather than "list.last === value" because
-	// we need to know if the FIRST value is the last in the list, not the last.
 	ref = list.prev.get(next);
-	if(typeof ref === "object") {
+	if(Array.isArray(ref)) {
 		var i = ref.indexOf(value);
 		ref[i] = prev;
 	} else {
@@ -136,7 +137,7 @@ function _removeOne(list,value) {
 	}
 
 	// Delink actual value. If it uses arrays, just remove first entries.
-	if(typeof nextEntry === "object" && nextEntry.length > 1) {
+	if(Array.isArray(nextEntry) && nextEntry.length > 1) {
 		nextEntry.shift();
 		prevEntry.shift();
 	} else {
@@ -148,31 +149,30 @@ function _removeOne(list,value) {
 
 // Sticks the given node onto the end of the list.
 function _linkToEnd(list,value) {
-	var old;
-	var last = list.prev.get();
+	var old = list.next.get(value);
+	var last = list.prev.get(null);
 	// Does it already exists?
-	if(list.next.has(value)) {
-		old = list.next.get(value);
-		if(typeof old !== "object") {
+	if(old !== undefined) {
+		if(!Array.isArray(old)) {
 			old = [old];
 			list.next.set(value,old);
 			list.prev.set(value,[list.prev.get(value)]);
 		}
-		old.push(undefined);
+		old.push(null);
 		list.prev.get(value).push(last);
 	} else {
-		list.next.set(value,undefined);
+		list.next.set(value,null);
 		list.prev.set(value,last);
 	}
 	// Make the old last point to this new one.
 	if (value !== last) {
 		var array = list.next.get(last);
-		if(typeof array === "object") {
+		if(Array.isArray(array)) {
 			array[array.length-1] = value;
 		} else {
 			list.next.set(last,value);
 		}
-		list.prev.set(undefined,value);
+		list.prev.set(null,value);
 	} else {
 		// Edge case, the pushed value was already the last value.
 		// The second-to-last nextPtr for that value must point to itself now.
@@ -200,10 +200,10 @@ if (typeof Map === "function") {
 
 	OurMap.prototype = {
 		set: function(key,val) {
-			(key === undefined) ? (this.undef = val) : (this.map[key] = val);
+			(key === null) ? (this.undef = val) : (this.map[key] = val);
 		},
 		get: function(key) {
-			return (key === undefined) ? this.undef : this.map[key];
+			return (key === null) ? this.undef : this.map[key];
 		},
 		delete: function(key) {
 			delete this.map[key];

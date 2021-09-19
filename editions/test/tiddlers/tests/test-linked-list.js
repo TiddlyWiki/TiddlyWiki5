@@ -115,7 +115,7 @@ describe("LinkedList class tests", function() {
 		// for list.last to be anything other than a string, but I
 		// can't figure out how to make that corruption manifest a problem.
 		// So I dig into its private members. Bleh...
-		expect(typeof pair.list.prev.get()).toBe("string");
+		expect(typeof pair.list.prev.get(null)).toBe("string");
 	});
 
 	it("can pushTop value linked to by a repeat item", function() {
