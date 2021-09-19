@@ -17,7 +17,6 @@ Export our filter function
 */
 exports.modules = function(source,operator,options) {
 	var results = [];
-
 	if(operator.operands.length >= 2) {
 		// Return the modules that have the module property specified in the first operand with the value in the second operand
 		source(function(tiddler,title) {
