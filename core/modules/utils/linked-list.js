@@ -15,8 +15,9 @@ function LinkedList() {
 
 LinkedList.prototype.clear = function() {
 	// LinkedList performs the duty of both the head and tail node
-	this.next = new OurMap();
-	this.prev = new OurMap();
+	this.next = new LLMap();
+	this.prev = new LLMap();
+	// Linked list head initially points to itself
 	this.next.set(null, null);
 	this.prev.set(null, null);
 	this.length = 0;
@@ -141,8 +142,8 @@ function _removeOne(list,value) {
 		nextEntry.shift();
 		prevEntry.shift();
 	} else {
-		list.next.delete(value);
-		list.prev.delete(value);
+		list.next.set(value,undefined);
+		list.prev.set(value,undefined);
 	}
 	list.length -= 1;
 };
@@ -188,31 +189,19 @@ function _assertString(value) {
 	}
 };
 
-var OurMap;
+var LLMap = function() {
+	this.map = Object.create(null);
+};
 
-if (typeof Map === "function") {
-	OurMap = Map;
-} else {
-	// Create a simple backup map for IE and such which handles undefined.
-	OurMap = function() {
-		this.map = Object.create(null);
-	};
-
-	OurMap.prototype = {
-		set: function(key,val) {
-			(key === null) ? (this.undef = val) : (this.map[key] = val);
-		},
-		get: function(key) {
-			return (key === null) ? this.undef : this.map[key];
-		},
-		delete: function(key) {
-			delete this.map[key];
-		},
-		has: function(key) {
-			return $tw.utils.hop(this.map, key);
-		}
-	};
-}
+// Just a wrapper so our object map can also accept null.
+LLMap.prototype = {
+	set: function(key,val) {
+		(key === null) ? (this.null = val) : (this.map[key] = val);
+	},
+	get: function(key) {
+		return (key === null) ? this.null : this.map[key];
+	}
+};
 
 exports.LinkedList = LinkedList;
 
