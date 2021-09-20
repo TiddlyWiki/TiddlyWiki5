@@ -396,7 +396,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 					y = Number(b);
 					if(isNaN(x)) {
 						if(isNaN(y)) {
-							return 0;
+							// If neither value is a number then fall through to a textual comparison
 						} else {
 							return isDescending ? -1 : 1;
 						}
@@ -440,7 +440,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				y = Number(b);
 				if(isNaN(x)) {
 					if(isNaN(y)) {
-						return 0;
+						// If neither value is a number then fall through to a textual comparison
 					} else {
 						return isDescending ? -1 : 1;
 					}
