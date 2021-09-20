@@ -166,7 +166,7 @@ function _linkToEnd(list,value) {
 		list.prev.set(value,last);
 	}
 	// Make the old last point to this new one.
-	if (value !== last) {
+	if(value !== last) {
 		var array = list.next.get(last);
 		if(Array.isArray(array)) {
 			array[array.length-1] = value;
