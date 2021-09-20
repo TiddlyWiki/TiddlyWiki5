@@ -265,8 +265,6 @@ function runTests(wiki) {
 	it("should handle the sort and sortcs operators", function() {
 		expect(wiki.filterTiddlers("[sort[title]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,a fourth tiddler,filter regexp test,has filter,hasList,one,Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[!sort[title]]").join(",")).toBe("TiddlerOne,Tiddler Three,one,hasList,has filter,filter regexp test,a fourth tiddler,$:/TiddlerTwo,$:/ShadowPlugin");
-		expect(wiki.filterTiddlers("[sort[modified]]").join(",")).toBe("$:/ShadowPlugin,a fourth tiddler,one,hasList,has filter,filter regexp test,$:/TiddlerTwo,TiddlerOne,Tiddler Three");
-		expect(wiki.filterTiddlers("[!sort[modified]]").join(",")).toBe("Tiddler Three,TiddlerOne,$:/TiddlerTwo,$:/ShadowPlugin,a fourth tiddler,one,hasList,has filter,filter regexp test");
 		// Temporarily commenting out the following two lines because of platform differences for localeCompare between the browser and Node.js
 		// expect(wiki.filterTiddlers("[sortcs[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne,a fourth tiddler,one");
 		// expect(wiki.filterTiddlers("[!sortcs[title]]").join(",")).toBe("one,a fourth tiddler,TiddlerOne,Tiddler Three,$:/TiddlerTwo");
@@ -747,7 +745,6 @@ function runTests(wiki) {
 
 	it("should handle the sortan operator sorting on date fields", function() {
 		expect(wiki.filterTiddlers("TiddlerOne $:/TiddlerTwo [[Tiddler Three]] +[sortan[modified]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne,Tiddler Three");
-		expect(wiki.filterTiddlers("hasList TiddlerOne $:/TiddlerTwo [[Tiddler Three]] +[sortan[modified]]").join(",")).toBe("hasList,$:/TiddlerTwo,TiddlerOne,Tiddler Three");
 	});
 
 	it("should handle the slugify operator", function() {
