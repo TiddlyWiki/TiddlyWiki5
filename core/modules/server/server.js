@@ -59,6 +59,10 @@ function Server(options) {
 		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
+	if(this.get("path-prefix")) {
+		this.authorizationPrinciples[this.get("path-prefix")+"/readers"] = this.authorizationPrinciples["readers"];
+		this.authorizationPrinciples[this.get("path-prefix")+"/writers"] = this.authorizationPrinciples["writers"];
+	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
 		// console.log("Loading server route " + title);
@@ -244,6 +248,9 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
+	if(state.pathPrefix) {
+		authorizationType = state.pathPrefix+"/"+authorizationType;
+	}
 	// Check for the CSRF header if this is a write
 	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
