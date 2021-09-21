@@ -95,6 +95,15 @@ LinkedList.prototype.toArray = function() {
 	return output;
 };
 
+LinkedList.prototype.makeTiddlerIterator = function(wiki) {
+	var self = this;
+	return function(callback) {
+		self.each(function(title) {
+			callback(wiki.getTiddler(title),title);
+		});
+	};
+};
+
 function _removeOne(list,value) {
 	var prevEntry = list.prev[value],
 		nextEntry = list.next[value],

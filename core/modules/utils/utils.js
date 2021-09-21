@@ -383,8 +383,17 @@ exports.formatDateString = function(date,template) {
 			[/^0WW/, function() {
 				return $tw.utils.pad($tw.utils.getWeek(date));
 			}],
+			[/^0dddd/, function() {
+				return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),3);
+			}],
+			[/^dddd/, function() {
+				return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+			}],
 			[/^ddd/, function() {
 				return $tw.language.getString("Date/Short/Day/" + date.getDay());
+			}],
+			[/^dd/, function() {
+				return [7,1,2,3,4,5,6][date.getDay()];
 			}],
 			[/^mmm/, function() {
 				return $tw.language.getString("Date/Short/Month/" + (date.getMonth() + 1));
@@ -967,6 +976,24 @@ exports.makeCompareFunction = function(type,options) {
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);
+};
+
+exports.decodeURIComponentSafe = function(str) {
+	var value = str;
+	try {
+		value = decodeURIComponent(str);
+	} catch(e) {
+	}
+	return value;
+};
+
+exports.decodeURISafe = function(str) {
+	var value = str;
+	try {
+		value = decodeURI(str);
+	} catch(e) {
+	}
+	return value;
 };
 
 })();

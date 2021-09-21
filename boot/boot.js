@@ -1212,8 +1212,12 @@ $tw.Wiki = function(options) {
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			var shadowInfo = shadowTiddlers[title];
-			callback(shadowInfo.tiddler,title);
+			if(tiddlers[title]) {
+				callback(tiddlers[title],title);
+			} else {
+				var shadowInfo = shadowTiddlers[title];
+				callback(shadowInfo.tiddler,title);
+			}
 		}
 	};
 
@@ -1885,13 +1889,13 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							value = path.basename(filename);
 							break;
 						case "filename-uri-decoded":
-							value = decodeURIComponent(path.basename(filename));
+							value = $tw.utils.decodeURIComponentSafe(path.basename(filename));
 							break;
 						case "basename":
 							value = path.basename(filename,path.extname(filename));
 							break;
 						case "basename-uri-decoded":
-							value = decodeURIComponent(path.basename(filename,path.extname(filename)));
+							value = $tw.utils.decodeURIComponentSafe(path.basename(filename,path.extname(filename)));
 							break;
 						case "extname":
 							value = path.extname(filename);

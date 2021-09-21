@@ -16,7 +16,7 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 Options:
 
 domNode: dom node to make draggable
-dragImageType: "pill" or "dom"
+dragImageType: "pill", "blank" or "dom" (the default)
 dragTiddlerFn: optional function to retrieve the title of tiddler to drag
 dragFilterFn: optional function to retreive the filter defining a list of tiddlers to drag
 widget: widget to use as the contect for the filter
@@ -73,6 +73,9 @@ exports.makeDraggable = function(options) {
 				if(dataTransfer.setDragImage) {
 					if(dragImageType === "pill") {
 						dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
+					} else if (dragImageType === "blank") {
+						dragImage.removeChild(dragImage.firstChild);
+						dataTransfer.setDragImage(dragImage,0,0);
 					} else {
 						var r = domNode.getBoundingClientRect();
 						dataTransfer.setDragImage(domNode,event.clientX-r.left,event.clientY-r.top);
@@ -164,7 +167,7 @@ var importDataTypes = [
 	}},
 	{type: "URL", IECompatible: true, toTiddlerFieldsArray: function(data,fallbackTitle) {
 		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = $tw.utils.decodeURIComponentSafe(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {
@@ -173,7 +176,7 @@ var importDataTypes = [
 	}},
 	{type: "text/x-moz-url", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
 		// Check for tiddler data URI
-		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = $tw.utils.decodeURIComponentSafe(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return parseJSONTiddlers(match[1],fallbackTitle);
 		} else {

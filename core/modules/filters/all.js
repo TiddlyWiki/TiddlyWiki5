@@ -52,7 +52,7 @@ exports.all = function(source,operator,options) {
 			results.pushTop(subop(source,operator.prefix,options));
 		}
 	}
-	return results.toArray();
+	return results.makeTiddlerIterator(options.wiki);
 };
 
 })();

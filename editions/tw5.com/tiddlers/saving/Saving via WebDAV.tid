@@ -4,28 +4,51 @@ created: 20160216191710789
 delivery: Protocol
 description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20200507202752943
+modified: 20210830210442369
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki
 
-If hosted on a [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]-enabled server, TiddlyWiki will automatically save changes via HTTP.
+If hosted on a [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]-enabled server, TiddlyWiki will automatically save changes via HTTP for TiddlyWiki's created after 2016. If you created your wiki before Feb 16 2016  you'll need to [[Upgrade|Upgrading]] to enable ~WebDAV.
 
-!! Servers
 
-Many [[NAS|https://en.wikipedia.org/wiki/NAS]] or [[Subversion|https://en.wikipedia.org/wiki/Apache_Subversion]] servers support WebDAV out of the box. Setting up your own server might take some effort though:
 
-[[dav-server|https://github.com/edrex/dav-server]] is a quick way to serve up a folder of HTML ~TiddlyWikis.
+!! Cross platform lightweight servers
+
+Lightweight, portable and easy to use solutions
+
+*   [[rclone|https://rclone.org/commands/rclone_serve_webdav/]]
+**  Running it can be as simple as: <br/>`rclone serve webdav some_directory_containing_tiddlywiki_files`
+*   [[micromata dave - the simple webdav server|https://github.com/micromata/dave]]
+* [[dav-server|https://github.com/edrex/dav-server]] is a quick way to serve up a folder of HTML ~TiddlyWikis.
+*   [[hacdias webdav server|https://github.com/hacdias/webdav/]]
+    **   Guide for using this ~WebDAV server by Mohammad [[Scripts in Tiddlywiki — codes, macros, and solutions in TW|https://kookma.github.io/TW-Scripts/#Easy%20Local%20Saving%20with%20WebDav]]
+
+
+!! Windows
+
+*   IIS
+    **   Video guide by [[pmario|https://talk.tiddlywiki.org/u/pmario]]: [[01 Intro - How to use TiddlyWiki with IIS and WebDAV - YouTube|https://www.youtube.com/watch?v=tpkQhKyqPzc&list=PLuiC_HFhI4OwoVDb-B-VK0ydj-mBPNn-1]]
+    **  Step-by-step ~HowTo video by ~MagoArcade on using a “real” IIS server + SSL + ~WindowsAuth with self-signed certificate: [[TiddlyWiki Install - Windows IIS WebDAV Method - YouTube|https://youtu.be/VMQ3Lfko8uQ]]
+
+*   ~SharePoint / ~OneDrive for Windows
+** Save your ~TiddlyWiki file with an `.aspx` extension
+** Copy it to a ~SharePoint/~OneDrive for Business sync'd library
+**   As long as ~WebDAV hasn’t been disabled, renaming single-file wiki from .html to .aspx “just works” when stored in one of these folders
+** This //might// work with Mac also.
+
+!! OSX
+*   ~WebDavNav Server via the Mac App store.
+
+!! Android
 
 [[webdav server|https://play.google.com/store/apps/details?id=com.theolivetree.webdavserver&hl=en]] for Android lets you put wikis in your pocket. You can share with other devices on the local network too.
 
-!! Existing Wikis
+!! Servers
 
-~WebDAV support was added Feb 16 2016. If you created your wiki before that, you'll need to [[Upgrade|Upgrading]] to enable ~WebDAV.
+Many [[NAS|https://en.wikipedia.org/wiki/NAS]] or [[Subversion|https://en.wikipedia.org/wiki/Apache_Subversion]] servers support ~WebDAV out of the box. Setting up your own server might take some effort though:
 
-!! Video HowTo's
 
-[[Mario Pietsch|"Wikilabs" by PMario]] has [[created several videos|https://www.youtube.com/watch?v=tpkQhKyqPzc&list=PLuiC_HFhI4OwoVDb-B-VK0ydj-mBPNn-1]] that show how to prepare Microsoft Internet Information Service (IIS) to host a local TiddlyWiki using ~WebDav
 
 !! Free Hosting
 
