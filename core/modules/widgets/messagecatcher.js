@@ -36,9 +36,14 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 	// Helper to add an event handler
 	var addEventHandler = function(type,actions) {
 		if(type && actions) {
+			var isActionStringExecuting = false;
 			self.addEventListener(
 				type,
 				function(event) {
+					// Don't trap the event if it came from one of our action handlers
+					if(isActionStringExecuting) {
+						return true;
+					}
 					// Collect all the event properties into variables
 					var collectProps = function(obj,prefix) {
 						prefix = prefix || "";
@@ -60,7 +65,9 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 						{
 							modifier: $tw.keyboardManager.getEventModifierKeyDescriptor(event)
 						});
+					isActionStringExecuting = true;
 					self.invokeActionString(actions,self,event,variables);
+					isActionStringExecuting = false;
 					return false;
 				}
 			);

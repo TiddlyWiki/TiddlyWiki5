@@ -340,7 +340,7 @@ table tfoot tr td {
 button.tc-tiddlylink,
 a.tc-tiddlylink {
 	text-decoration: none;
-	font-weight: normal;
+	font-weight: 500;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }

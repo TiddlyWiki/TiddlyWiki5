@@ -2,6 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/katex",
 	"name": "KaTeX",
 	"description": "KaTeX library for mathematical typography",
-	"list": "readme usage",
-	"library-version": "v0.12.0"
+	"list": "readme usage config",
+	"library-version": "v0.13.18"
 }
