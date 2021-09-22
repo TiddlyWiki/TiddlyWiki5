@@ -247,18 +247,15 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
-	var authorizationType = this.methodMappings[request.method] || "readers";
-	if(state.pathPrefix) {
-		authorizationType = state.pathPrefix+"/"+authorizationType;
-	}
+	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write
-	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+	if(!this.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
 		return;
 	}
 	// Check whether anonymous access is granted
-	state.allowAnon = this.isAuthorized(authorizationType,null);
+	state.allowAnon = this.isAuthorized(state.authorizationType,null);
 	// Authenticate with the first active authenticator
 	if(this.authenticators.length > 0) {
 		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
@@ -267,7 +264,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 		}
 	}
 	// Authorize with the authenticated username
-	if(!this.isAuthorized(authorizationType,state.authenticatedUsername)) {
+	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername)) {
 		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 		response.end();
 		return;
