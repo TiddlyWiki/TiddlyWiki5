@@ -1622,7 +1622,12 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 				}
 				return true;
 			},
-			data = JSON.parse(text);
+			data = {};
+		try {
+			data = JSON.parse(text);			
+		} catch(e) {
+			// Ignore JSON parse errors
+		}
 		if($tw.utils.isArray(data) && isTiddlerArrayValid(data)) {
 			return data;
 		} else if(isTiddlerValid(data)) {
