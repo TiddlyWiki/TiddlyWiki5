@@ -365,49 +365,108 @@ Sort an array of tiddler titles by a specified field
 */
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
 	var self = this;
-	titles.sort(function(a,b) {
-		var x,y,
-			compareNumbers = function(x,y) {
-				var result = 
-					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
-					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-											(isDescending ? y - x :  x - y);
-				return result;
-			};
-		if(sortField !== "title") {
-			var tiddlerA = self.getTiddler(a),
-				tiddlerB = self.getTiddler(b);
-			if(tiddlerA) {
-				a = tiddlerA.fields[sortField] || "";
+	if(sortField === "title") {
+		if(!isNumeric && !isAlphaNumeric) {
+			if(isCaseSensitive) {
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.localeCompare(a);
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.localeCompare(b);
+					});
+				}	
 			} else {
-				a = "";
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.toLowerCase().localeCompare(a.toLowerCase());
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.toLowerCase().localeCompare(b.toLowerCase());
+					});
+				}	
 			}
-			if(tiddlerB) {
-				b = tiddlerB.fields[sortField] || "";
-			} else {
-				b = "";
-			}
-		}
-		x = Number(a);
-		y = Number(b);
-		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
-			return compareNumbers(x,y);
-		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
-			return isDescending ? b - a : a - b;
-		} else if(isAlphaNumeric) {
-			a = String(a);
-			b = String(b);
-			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else {
+			titles.sort(function(a,b) {
+				var x,y;
+				if(isNumeric) {
+					x = Number(a);
+					y = Number(b);
+					if(isNaN(x)) {
+						if(isNaN(y)) {
+							// If neither value is a number then fall through to a textual comparison
+						} else {
+							return isDescending ? -1 : 1;
+						}
+					} else {
+						if(isNaN(y)) {
+							return isDescending ? 1 : -1;
+						} else {
+							return isDescending ? y - x :  x - y;
+						}
+					}
+				}
+				if(isAlphaNumeric) {
+					return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+				}
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return isDescending ? b.localeCompare(a) : a.localeCompare(b);
+			});
+		}
+	} else {
+		titles.sort(function(a,b) {
+			var x,y;
+			if(sortField !== "title") {
+				var tiddlerA = self.getTiddler(a),
+					tiddlerB = self.getTiddler(b);
+				if(tiddlerA) {
+					a = tiddlerA.fields[sortField] || "";
+				} else {
+					a = "";
+				}
+				if(tiddlerB) {
+					b = tiddlerB.fields[sortField] || "";
+				} else {
+					b = "";
+				}
+			}
+			if(isNumeric) {
+				x = Number(a);
+				y = Number(b);
+				if(isNaN(x)) {
+					if(isNaN(y)) {
+						// If neither value is a number then fall through to a textual comparison
+					} else {
+						return isDescending ? -1 : 1;
+					}
+				} else {
+					if(isNaN(y)) {
+						return isDescending ? 1 : -1;
+					} else {
+						return isDescending ? y - x :  x - y;
+					}
+				}
+			}
+			if(Object.prototype.toString.call(a) === "[object Date]" && Object.prototype.toString.call(b) === "[object Date]") {
+				return isDescending ? b - a : a - b;
+			}
 			a = String(a);
 			b = String(b);
+			if(isAlphaNumeric) {
+				return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+			}
 			if(!isCaseSensitive) {
 				a = a.toLowerCase();
 				b = b.toLowerCase();
 			}
 			return isDescending ? b.localeCompare(a) : a.localeCompare(b);
-		}
-	});
+		});
+	}
 };
 
 /*
