@@ -59,7 +59,7 @@ Invoke the action associated with this widget
 ConfirmWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var invokeActions = true,
 		handled = true,
-	    	win = event.event && event.event.view ? event.event.view : window;
+	    	win = event && event.event && event.event.view ? event.event.view : window;
 	if(this.prompt) {
 		invokeActions = win.confirm(this.message);
 	}
