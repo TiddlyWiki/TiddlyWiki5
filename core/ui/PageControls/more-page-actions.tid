@@ -16,9 +16,7 @@ description: {{$:/language/Buttons/More/Hint}}
 </$button><$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
 
 <div class="tc-drop-down">
-
 <<toolbar-drop-down-list "$:/tags/PageControls" "$:/config/PageControlButtons/Visibility/">>
-
 </div>
 
 </$reveal>

@@ -8,7 +8,7 @@ fill:$(foregroundColor)$;
 <div class="tc-tiddler-title">
 <div class="tc-titlebar">
 <span class="tc-tiddler-controls">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] :filter[lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]]" storyview="pop" variable="listItem"><$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]"><$transclude tiddler=<<listItem>>/></$set></$list>
+<<toolbar "$:/tags/ViewToolbar" "$:/config/ViewToolbarButtons/Visibility/">>
 </span>
 <$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 <$link>
