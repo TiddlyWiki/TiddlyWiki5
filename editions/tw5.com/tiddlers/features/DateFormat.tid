@@ -8,7 +8,7 @@ When used to display date values (with the `format` attribute set to ''date''), 
 
 |!Token |!Substituted Value |
 |`dddd` |Day of year (1 to 365, or 366 for leap years) |
-|`0dddd` |Zero padded day of year (001 to 365, or 366 for leap years) 
+|`0dddd` |Zero padded day of year (001 to 365, or 366 for leap years) |
 |`DDD` |Day of week in full (eg, "Monday") |
 |`ddd` |Short day of week (eg, "Mon") |
 |`dd` |<<.from-version "5.2.0">> Weekday number from 1 through 7, beginning with Monday and ending with Sunday |
