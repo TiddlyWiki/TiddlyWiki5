@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 
 The major change in this release is that the format used to store tiddlers in TiddlyWiki's HTML file has changed from an HTML DIV-based format to a new JSON-based format. The consequences of this change are far-reaching. They are thus the primary rationale for bumping the version number from v5.1.x to v5.2.0:
 
-Firstly, the ''characters that can be used in field names are now unrestricted'' (just like tiddler titles), making it possible to use fieldnames like `My^Field` or `☃️`. This became possible because every other part of TiddlyWiki was already capable of dealing with unrestricted field names apart from saving as an HTML file.
+Firstly, the ''characters that can be used in field names are now unrestricted'' (just like tiddler titles), making it possible to use fieldnames like `My^Field` or `☃️`. This has become possible because every other part of TiddlyWiki was already capable of dealing with unrestricted field names apart from saving as an HTML file.
 
 Secondly, external tools that read, write or otherwise process TiddlyWiki HTML files will need modification to understand the new store area format.  The details are documented in the [[/dev wiki|https://tiddlywiki.com/prerelease/dev/#Data%20Storage%20in%20Single%20File%20TiddlyWiki]].
 
@@ -84,10 +84,9 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 ! Performance Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5380">> (and again [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5488]]) the efficiency of the linked list implementation used in filter processing
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5362">> the [[all Operator]] and ([[here|https://github.com/Jermolene/TiddlyWiki5/pull/5369"]]) the [[links Operator]] to use the new linked list implementation
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5362">> the [[all Operator]] and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5369"]] the [[links Operator]], and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/6050]] the [[backlinks Operator]] to use the new linked list implementation
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5436">> [[ETag|https://en.wikipedia.org/wiki/HTTP_ETag]]-based browser-side caching for all resources and GZip or Deflate compression for all responses to GET requests
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/70e60cd93fe26e9cde1e350e3236578fa5abfe48">> plugin internal formatting to remove unneeded whitespace, saving about 6% on the size of the $:/core plugin
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6050">> [[backlinks Operator]] to use more efficient linked list implementation
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6053">> performance of [[sort Operator]] through optimising common cases
 
 ! Usability Improvements
@@ -109,6 +108,19 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/a4421f50c6886b02c3595b7ffa6ba72674d6bf21">> GitHub, Gitea and GitLab savers to wikify the commit message, enabling macros to be used in the message
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5981">> the [[text editor stamp toolbar button|Using Stamp]] dropdown to allow sorting by drag and drop
 
+! Widget Improvements
+
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5611">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/4a99e0cc7d4a6b9e7071c0b2a9a0f63c3c7d2492]]) [[ListWidget]] with optional `counter` attribute specifying a variable to contain the numeric index of each list item
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/9eda02868f21e9dd1733ffe26352bd7ac96285b4">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/f87b3bfcdba79b6ad198af286bd827c61044891f]]) new MessageCatcherWidget to catch arbitrary messages and execute action strings
+* <<.link-badge-modified "https://github.com/Jermolene/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5597">> [[DropzoneWidget]] to optionally invoke actions after the `tm-import-tiddlers` message has been sent, and to specify an optional `contentTypesFilter` which determines which content types are accepted by the dropzone.
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/07caa16e8714afe9a64eb202375e4a2f95da1508">> [[DropzoneWidget]] to also use the specified deserializer for strings either dropped or pasted on to the dropzone
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5635">> [[SelectWidget]] refreshing
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5644">> [[ActionListopsWidget]] bug by avoiding concatenating fragmnts of filter expressions
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3f986861538a3cc5c3c6da578b45d0d9138a6b2b">> [[ActionPopupWidget]] to create floating popups that must be manually cleared
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5648">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5782]]) [[KeyboardWidget]] to provide additional information variables
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/e9e5d37ff01cc1aaa3419798904dac8b0e9775af">> DraggableWidget with option to hide the drag image
+
 ! Filter improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5813">> new [[:map filter run prefix|Map Filter Run Prefix]]
@@ -120,11 +132,11 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5252">> support for suffixes to filter run prefixes
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5968">> [[search-replace Operator]] with ''m'' flag for multiline mode
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/e6fd0caf6b997c24c116def354b2a65d8909279e">> [[range Operator]] to allow parameters to be specified as independent operands
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6055">> [[modulesproperty Operator]] and extended [[modules Operator]] to provide access to internal JavaScript modules
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6055">> [[moduleproperty Operator]] and extended [[modules Operator]] to provide access to internal JavaScript modules
 
 ! Hackability Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3094e062366830bdecfb91e3d852667fa951dc50">> action widget execution to ensure all widgets are refreshed before invocation
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3094e062366830bdecfb91e3d852667fa951dc50">> action widget execution with an optional new mode that ensures that all widgets are refreshed before invocation
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5361">> [[unusedtitle Macro]] to add ''separator'' and ''template'' parameters
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5720">> ''color-scheme'' field to all themes to differentiate between light and dark themes
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/d25e540dd2f0decf61c52fdc665a28a5dfeda93f">> support for `image/vnd.microsoft.icon` content type
@@ -135,19 +147,6 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5294">> support for [[dynamic toolbar buttons|How to create dynamic editor toolbar buttons]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5694">> new [[SystemTag: $:/tags/ControlPanel/Plugins]] for customising the tabs shown under the "Plugins" tab of control panel
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/59a53e695b28144f8f788469dad7865499d95d79">> support for DateFormat tokens for weekday number and day of year
-
-! Widget Improvements
-
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5611">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/4a99e0cc7d4a6b9e7071c0b2a9a0f63c3c7d2492]]) [[ListWidget]] with optional `counter` attribute specifying a variable to contain the numeric index of each list item
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/9eda02868f21e9dd1733ffe26352bd7ac96285b4">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/f87b3bfcdba79b6ad198af286bd827c61044891f]]) new MessageCatcherWidget to catch arbitrary messages and execute action strings
-* <<.link-badge-modified "https://github.com/Jermolene/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5597">> [[DropzoneWidget]] to optionally invoke actions after the `tm-import-tiddlers` message has been sent, and to specify an optional `contentTypesFilter` which determines which content types are accepted by the dropzone.
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5635">> [[SelectWidget]] refreshing
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5644">> [[ActionListopsWidget]] bug by avoiding concatenating fragmnts of filter expressions
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/07caa16e8714afe9a64eb202375e4a2f95da1508">> [[DropzoneWidget]] to also use the specified deserializer for strings either dropped or pasted on to the dropzone
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3f986861538a3cc5c3c6da578b45d0d9138a6b2b">> [[ActionPopupWidget]] to create floating popups that must be manually cleared
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5648">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5782]]) [[KeyboardWidget]] to provide additional information variables
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/e9e5d37ff01cc1aaa3419798904dac8b0e9775af">> DraggableWidget with option to hide the drag image
 
 ! Client-server Improvements
 
@@ -253,7 +252,8 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* <<contributor Arlen22
+* <<contributor 8d1h>>
+* <<contributor Arlen22>>
 * <<contributor BlueGreenMagick>>
 * <<contributor BramChen>>
 * <<contributor BurningTreeC>>
@@ -272,6 +272,7 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<contributor kookma>>
 * <<contributor laomaiweng>>
 * <<contributor leehawk787>>
+* <<contributor Marxsal>>
 * <<contributor morosanuae>>
 * <<contributor neumark>>
 * <<contributor NicolasPetton>>
@@ -281,4 +282,6 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<contributor saqimtiaz>>
 * <<contributor simonbaird>>
 * <<contributor slaymaker1907>>
+* <<contributor sobjornstad>>
 * <<contributor twMat>>
+* <<contributor xcazin>>
