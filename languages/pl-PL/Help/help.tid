@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: Wyświetl dodatkowe informacje o komendzie
+
+Wyświetla dodatkowe informacje o komendzie:
+
+```
+--help [<command>]
+```
+
+Jeżeli nie podasz nazwa komendy, wyświetli listę wszystkich dostępnych komend.

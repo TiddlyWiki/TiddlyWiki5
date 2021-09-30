@@ -1,0 +1,42 @@
+title: $:/language/Help/server
+description: Tworzy serwer HTTP wystawiający TiddlyWiki (zalecamy użycie komendy "--listen" zamiast tej)
+
+Dawna komenda do stawiania serwera wystawiającego wiki.
+
+```
+--server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
+```
+
+The parameters are:
+
+* ''port'' - port na którym nasłuchuje serwer; nie-numeryczne wartości sa interpretowane jakby to były zmienne środowiskowe z których należy pobrać numer portu (domyślnie to "8080")
+* ''root-tiddler'' - tiddler, który będzie stroną główną (domyślnie to "$:/core/save/all")
+* ''root-render-type'' - typ treści w którym główny tiddler bedzie wyświetlony (domyślnie to "text/plain")
+* ''root-serve-type'' - typ treści w którym główny tiddler ma być wysłany (domyślnie to "text/html")
+* ''username'' - opcjonalna nazwa użytkownika do autoryzacji basic
+* ''password'' - opcjonalne hasło do autoryzacji basic
+* ''host'' - opcjonalna nazwa hosta (domyślnie to "127.0.0.1", czyli "localhost")
+* ''path-prefix'' - opcjonalny przedrostek dodawany do ścieżek
+* ''debug-level'' - opcjonalny poziom logowania; ustaw na "debug" by wyświetlać zapytania (domyślnie to "none")
+
+Jeżeli argument ''password'' jest podany to przeglądarka poprosi o login i hasło. Zwróć uwagę, że hasło przesyłane jest jako niezaszyfrowany tekst, więc tej implementacji należy używać tylko w zaufanej sieci lub poprzez HTTPS.
+
+Na przykład:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+Użytkownik i hasło mogą być pustymi wartościami tekstowymi, jeżeli potrzebujesz ustawić argumenty po nich.
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+By zdobyć informacje o tym jak udostępnić swoją lokalną wiki dla całej lokalnej sieci oraz wynikające z tego problemy bezpieczeństwa, przeczytaj sekcję WebServer tiddler na TiddlyWiki.com.
+
+By uruchomić kilka serwerów TiddlyWiki jednocześnie, musisz wystawić każde z nich za innym portem. Może tu być pomocne użycie zmiennych środowiskowych jako wartości portu. Poniższy przykład używa zmiennej środowiskoej `MY_PORT_NUMBER`:
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

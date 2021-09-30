@@ -1,0 +1,16 @@
+title: $:/language/Help/savetiddlers
+description: Zapisuje tiddlery do folderu
+
+(Uwaga: zalecamy użycie komendy `--save`, która jest dużo bardziej elastyczna i dalej wspierana)
+
+Zapisuje grupę tiddlerów jako surowy tekst lub dane binarne w wybranym folderze.
+
+```
+--savetiddlers <filter> <pathname> ["noclean"]
+```
+
+Domyślnie ścieżka do zapisu jest relatywna do folderu `output` w folderze wiki. Komenda `--output` może być użyta by wybrać inny folder wyjściowy.
+
+Wszystkie pliki z folderu wyjściowego są usuwane przed rozpocząciem zapisu. Można użyć argumentu ''noclean'' by tego nie robić.
+
+Brakujące foldery w ścieżce zostają automatycznie utworzone.

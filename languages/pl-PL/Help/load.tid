@@ -1,0 +1,19 @@
+title: $:/language/Help/load
+description: Wczytaj tiddlery z pliku
+
+Wczytuje tiddlery z TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` lub innych plików lokalnych. Deserializator jest automatycznie ustalany na podstawie rozszerzenia. Użyj komendy `import` jeżeli chcesz ręcznie wybrać deserializator.
+
+```
+--load <filepath> [noerror]
+--load <dirpath> [noerror]
+```
+
+Domyślne komenda ta zwraca błąd, jeżeli nie znajdzie tiddlera. Bład może zostać ukryty przy użyciu argumentu "noerror".
+
+By wczytać tiddlery z zaszyfrowanego pliku TiddlyWiki musisz najpierw podać hasło przy pomocy PasswordCommand. Dla przykładu:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+Zwróc uwagę, że TiddlyWiki nie wczyta starszych wersji już wczytanych wtyczek.
