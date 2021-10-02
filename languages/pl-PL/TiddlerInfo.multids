@@ -3,10 +3,10 @@ title: $:/language/TiddlerInfo/
 Advanced/Caption: Zaawansowane
 Advanced/PluginInfo/Empty/Hint: pusto
 Advanced/PluginInfo/Heading: Szczegóły Wtyczki
-Advanced/PluginInfo/Hint: Ta wtyczka zawiera takie ukryte tiddlery:
+Advanced/PluginInfo/Hint: Ta wtyczka zawiera takie tiddlery-cienie:
 Advanced/ShadowInfo/Heading: Status ukrycia
-Advanced/ShadowInfo/NotShadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> nie jest ukrytym tiddlerem
-Advanced/ShadowInfo/Shadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> jest ukrytym tiddlerem
+Advanced/ShadowInfo/NotShadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> nie jest tiddlerem-cieniem
+Advanced/ShadowInfo/Shadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> jest tiddlerem-cieniem
 Advanced/ShadowInfo/Shadow/Source: Zdefiniiowany we wtyczce <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
 Advanced/ShadowInfo/OverriddenShadow/Hint: Nadpisany przez zwykłego tiddlera
 Fields/Caption: Pola

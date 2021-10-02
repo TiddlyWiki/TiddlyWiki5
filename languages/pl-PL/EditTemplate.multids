@@ -3,7 +3,7 @@ title: $:/language/EditTemplate/
 Body/External/Hint: Ten tiddler zawiera treść trzymaną poza głównym plikiem TiddlyWIki. Możesz edytować tagi i pola, ale nie możesz bezpośrednio edytować jego treści.
 Body/Placeholder: Wpisz treść tiddlera
 Body/Preview/Type/Output: rezultat
-Body/Preview/Type/DiffShadow: różnice z ukrytym (jeżeli są)
+Body/Preview/Type/DiffShadow: różnice z cieniem (jeżeli są)
 Body/Preview/Type/DiffCurrent: róznice z obecnym
 Field/Remove/Caption: usuń pole
 Field/Remove/Hint: Usuń pole
@@ -16,8 +16,8 @@ Fields/Add/Prompt: Dodaj nowe pole:
 Fields/Add/Value/Placeholder: wartość pola
 Fields/Add/Dropdown/System: Pola systemowe
 Fields/Add/Dropdown/User: Pola własne
-Shadow/Warning: To jest ukryty tiddler. Wszelkie zmiany jakich tu dokonasz nadpiszą domyślną wersję z wtyczki <<pluginLink>>
-Shadow/OverriddenWarning: To jest zmodyfikowany ukryty tiddler. Usuń go, by przywrócić oryginalną wersję z pluginu <<pluginLink>>
+Shadow/Warning: To jest tiddler-cień. Wszelkie zmiany jakich tu dokonasz nadpiszą domyślną wersję z wtyczki <<pluginLink>>
+Shadow/OverriddenWarning: To jest zmodyfikowany tiddler-cień. Usuń go, by przywrócić oryginalną wersję z pluginu <<pluginLink>>
 Tags/Add/Button: dodaj
 Tags/Add/Button/Hint: dodaj tag
 Tags/Add/Placeholder: nazwa taga

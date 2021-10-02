@@ -17,10 +17,10 @@ Basics/NewJournal/Text/Prompt: Treść nowych dzienników
 Basics/NewJournal/Tags/Prompt: Tagi nowych dzienników
 Basics/NewTiddler/Title/Prompt: Tytuł nowych tiddlerów
 Basics/NewTiddler/Tags/Prompt: Tagi nowych tiddlerów
-Basics/OverriddenShadowTiddlers/Prompt: Liczba nadpisanych ukrytych tiddlerów
+Basics/OverriddenShadowTiddlers/Prompt: Liczba nadpisanych tiddlerów-cieni
 Basics/RemoveTags: Zaktualizuj do obecnego formatu
 Basics/RemoveTags/Hint: Zaktualizuj konfigurację tagów do najnowszego formatu
-Basics/ShadowTiddlers/Prompt: Liczba ukrytych tiddlerów
+Basics/ShadowTiddlers/Prompt: Liczba tiddlerów-cieni
 Basics/Subtitle/Prompt: Podtytuł
 Basics/SystemTiddlers/Prompt: Liczba systemowych tiddlerów
 Basics/Tags/Prompt: Liczba tagów
@@ -201,7 +201,7 @@ Stylesheets/Restore/Caption: Przywróć
 Theme/Caption: Motyw
 Theme/Prompt: Obecny motyw:
 TiddlerFields/Caption: Pola Tiddlerów
-TiddlerFields/Hint: To jest pełna lista wszystich pól użytych w tej wiki (wliczając systemowych ale nie ukrytych tiddlerów)
+TiddlerFields/Hint: To jest pełna lista wszystich pól użytych w tej wiki (wliczając systemowe tiddlery ale nie tiddlery-cienie)
 Toolbars/Caption: Paski Narzędzi
 Toolbars/EditToolbar/Caption: Edytuj Pasek Narzędzi
 Toolbars/EditToolbar/Hint: Wybierz, które przyciski mają być widoczne podczas edycji tiddlera. Przeciągaj by zmieniać kolejność.

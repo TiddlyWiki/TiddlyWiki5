@@ -8,8 +8,8 @@ Missing: Brakujące tiddlery
 Drafts: Szkice tiddlerów
 Orphans: Tiddlery bez rodzica
 SystemTiddlers: Systemowe tiddlery
-ShadowTiddlers: Ukryte tiddlery
-OverriddenShadowTiddlers: Nadpisane ukryte tiddlery
+ShadowTiddlers: Tiddlery-cienie
+OverriddenShadowTiddlers: Nadpisane tiddlery-cienie
 SessionTiddlers: Tiddlery zmodyfikowane od wczytania wiki
 SystemTags: Tagi systemowe
 StoryList: Tiddlery w Story River, wyłączając <$text text="$:/AdvancedSearch"/>

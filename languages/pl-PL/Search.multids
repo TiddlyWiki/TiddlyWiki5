@@ -9,8 +9,8 @@ Matches/All: Wszystkie trafienia
 Matches/Title: Trafienia w nazwach:
 Search: Szukaj
 Search/TooShort: Zbyt krótki tekst wyszukiwania
-Shadows/Caption: Ukryte
-Shadows/Hint: Szukaj wśród ukrytych tiddlerów
+Shadows/Caption: Cienie
+Shadows/Hint: Szukaj wśród tiddlerów-cieni
 Shadows/Matches: //<small>trafienia: <<resultCount>></small>//
 Standard/Caption: Standardowe
 Standard/Hint: Szukaj wśród własnych tiddlerów
