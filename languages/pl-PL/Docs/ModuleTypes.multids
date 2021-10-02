@@ -16,7 +16,7 @@ parser: Parsery (analizatory składniowe) dla róznych typów treści.
 route: Definiują jak indywidualne wzorce adresów URL są obsługiwane przez wbudowany serwer HTTP.
 saver: Obsługa różnych metod zapisu plików z poziomu przeglądarki.
 startup: Funkcje wywoływane przy uruchomieniu.
-storyview: Widoki tiddlerów zmieniają sposób w jaki tiddlery pojawiają się i jak się zachowują na głównej liście.
+storyview: Zmienają sposób w jaki tiddlery pojawiają się, znikają i zachowują w Story River (widok otwartych tiddlerów)
 texteditoroperation: Operacja na pasku narzędzi edytora tekstu.
 tiddlerdeserializer: Przetwarzanie róznych typów danych na tiddlery.
 tiddlerfield: Definiuje zachowanie pojedyńczego pola w tiddlerze.

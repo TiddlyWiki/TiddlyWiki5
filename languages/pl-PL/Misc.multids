@@ -67,7 +67,7 @@ OfficialPluginLibrary: Oficjalna Biblioteka Wtyczek ~TiddlyWiki
 OfficialPluginLibrary/Hint: Oficjalna biblioteka wtyczek ~TiddlyWiki z tiddlywiki.com. Wtyczki, motywi i paczki językowe są utrzymywane przez główny zespół TiddlyWiki.
 PageTemplate/Description: domyślny motyw ~TiddlyWiki
 PageTemplate/Name: Domyślny szablon strony
-RecentChanges/DateFormat: YYYY-0MM-0DD
+RecentChanges/DateFormat: 0DD-0MM-YYYY
 Shortcuts/Input/AdvancedSearch/Hint: Otwórzy panel zaawansowanego wyszukiwania z poziomu menu bocznego
 Shortcuts/Input/Accept/Hint: Zaakceptuj zaznaczenia
 Shortcuts/Input/AcceptVariant/Hint: Zaakceptuj zaznaczenia (warianty)
@@ -89,7 +89,7 @@ TagManager/Icon/Heading: Ikona
 TagManager/Icons/None: Brak
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
-Tiddler/DateFormat: YYYY-0MM-0DD o 0hh:0mm:0ss
+Tiddler/DateFormat: 0DD-0MM-YYYY o 0hh:0mm:0ss
 UnsavedChangesWarning: Masz niezapisane zmiany
 Yes: Tak
 

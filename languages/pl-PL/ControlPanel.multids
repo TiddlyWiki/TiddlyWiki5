@@ -8,8 +8,8 @@ Appearance/Hint: Dostosowywanie wyglądu tej TiddlyWiki
 Basics/AnimDuration/Prompt: Długość animacji
 Basics/AutoFocus/Prompt: Domyślne pole z fokusem dla nowych tiddlerów
 Basics/Caption: Podstawowe
-Basics/DefaultTiddlers/BottomHint: Używaj &#91;&#91;podwójnych nawiasów kwadratowych&#93;&#93; dla nazw ze spacjami. Możesz też <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">zachować kolejność tiddlerów</$button>
-Basics/DefaultTiddlers/Prompt: Domyślne tiddlery
+Basics/DefaultTiddlers/BottomHint: Używaj &#91;&#91;podwójnych nawiasów kwadratowych&#93;&#93; dla nazw ze spacjami. Możesz też <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">przywrócić ostatnią sesję</$button>
+Basics/DefaultTiddlers/Prompt: Domyślnie otwarte tiddlery
 Basics/DefaultTiddlers/TopHint: Wybierz które tiddlery mają być widoczne przy uruchomieniu
 Basics/Language/Prompt: Cześć! Wybrany język to:
 Basics/NewJournal/Title/Prompt: Tytuł nowych dzienników
@@ -41,8 +41,8 @@ KeyboardShortcuts/Hint: Zarządzaj skrótami klawiszowymi
 KeyboardShortcuts/NoShortcuts/Caption: Brak skrótów klawiszowych
 KeyboardShortcuts/Remove/Hint: usuń skrót klawiszowy
 KeyboardShortcuts/Platform/All: Wszystkie platformy
-KeyboardShortcuts/Platform/Mac: Tylko na Macintoshu
-KeyboardShortcuts/Platform/NonMac: Tylko na nie-Macintoshach
+KeyboardShortcuts/Platform/Mac: Tylko na Macach
+KeyboardShortcuts/Platform/NonMac: Tylko na nie-Macach
 KeyboardShortcuts/Platform/Linux: Tylko na Linuxie
 KeyboardShortcuts/Platform/NonLinux: Tylko na nie-Linuxach
 KeyboardShortcuts/Platform/Windows: Tylko na Windowsie
@@ -113,9 +113,9 @@ Saving/GitService/Path: Ścieżka docelowa do pliku (np. `/wiki/`)
 Saving/GitService/Repo: Docelowe repozytorium (np. `Jermolene/TiddlyWiki5`)
 Saving/GitService/ServerURL: URL do serwera API
 Saving/GitService/UserName: Nazwa użytkownika
-Saving/GitService/GitHub/Caption: ~Zapisywacz GitHub
+Saving/GitService/GitHub/Caption: Zapisywacz GitHub
 Saving/GitService/GitHub/Password: Hasło, token OAUTH lub osobisty token dospu ((sprawdź [[pomoc Githuba|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] by uzyskać więcej szczegółów)
-Saving/GitService/GitLab/Caption: ~Zapisywacz GitLab
+Saving/GitService/GitLab/Caption: Zapisywacz GitLab
 Saving/GitService/GitLab/Password: Osobisty token do API ((sprawdź [[pomoc GitLaba|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] by uzyskać więcej szczegółów)
 Saving/GitService/Gitea/Caption: Zapisywacz Gitea
 Saving/GitService/Gitea/Password: Osobisty token do API (przez interfejs webowy Gitea: `Settings | Applications | Generate New Token`)
@@ -153,7 +153,7 @@ Settings/NavigationAddressBar/Caption: Pasek adresu
 Settings/NavigationAddressBar/Hint: Zachowanie paska adresu w przeglądarce przy otworzeniu tiddlera:
 Settings/NavigationAddressBar/No/Description: Nie aktualizuj paska adresu
 Settings/NavigationAddressBar/Permalink/Description: Pokaż docelowego tiddlera
-Settings/NavigationAddressBar/Permaview/Description: Pokaż docelowego tiddlera i obecny widok
+Settings/NavigationAddressBar/Permaview/Description: Pokaż docelowego tiddlera i obecny Story River
 Settings/NavigationHistory/Caption: Historia Nawigacji
 Settings/NavigationHistory/Hint: Aktualizuj historię nawigacji przeglądarki przy zmianie tiddlera:
 Settings/NavigationHistory/No/Description: Nie aktualizuj historii
@@ -162,9 +162,9 @@ Settings/NavigationPermalinkviewMode/Caption: Tryb linków bezpośrednich/widoku
 Settings/NavigationPermalinkviewMode/Hint: Ustal jak linki bezośrednie/widok się zachowują:
 Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Skopiuj URL do linku bezpośredniego/widoku do schowka
 Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Zaktualizuj pasek adresu o URL do linku bezpośredniego/widoku
-Settings/PerformanceInstrumentation/Caption: Statystyki Działania
-Settings/PerformanceInstrumentation/Hint: Wyświetla statystyki działania w konsoli deweloperskiej przeglądarki. Wymagane ponowne uruchmoenie
-Settings/PerformanceInstrumentation/Description: Włącz statystyki działania
+Settings/PerformanceInstrumentation/Caption: Logowanie w Konsoli
+Settings/PerformanceInstrumentation/Hint: Uruchamia lokowanie w konsoli deweloperskiej przeglądarki. Wymagane ponowne uruchmoenie
+Settings/PerformanceInstrumentation/Description: Włącz logowanie
 Settings/ToolbarButtonStyle/Caption: Styl Przycisków Paska Narzędzi
 Settings/ToolbarButtonStyle/Hint: Wybierz styl przycisków w pasku narzędzi
 Settings/ToolbarButtonStyle/Styles/Borderless: Bez ramki
@@ -179,12 +179,12 @@ Settings/DefaultSidebarTab/Hint: Wybierz która zakładka jest domyślnie otwart
 Settings/DefaultMoreSidebarTab/Caption: Domyślna zakładka w podmenu "Więcej"
 Settings/DefaultMoreSidebarTab/Hint: Wybierz która zakładka ma być domyślnie wybrana w podmenu "Więcej"
 Settings/LinkToBehaviour/Caption: Zachowania Otwierania Tiddlerów
-Settings/LinkToBehaviour/InsideRiver/Hint: Nawigacja //z wewnątrz// widoku tiddlerów
-Settings/LinkToBehaviour/OutsideRiver/Hint: Nawgiacja //z poza// widoku tiddlerów
+Settings/LinkToBehaviour/InsideRiver/Hint: Nawigacja //z wewnątrz// Story River
+Settings/LinkToBehaviour/OutsideRiver/Hint: Nawgiacja //spoza// Story River
 Settings/LinkToBehaviour/OpenAbove: Otwórz ponad obecnym tiddlerem
 Settings/LinkToBehaviour/OpenBelow: Otwórz pod obecnym tiddlerem
-Settings/LinkToBehaviour/OpenAtTop: Otwórz na szczycie widoku tiddlerów
-Settings/LinkToBehaviour/OpenAtBottom: Otwórz na dole widoku tiddlerów
+Settings/LinkToBehaviour/OpenAtTop: Otwórz na szczycie Story River
+Settings/LinkToBehaviour/OpenAtBottom: Otwórz na dole Story River
 Settings/TitleLinks/Caption: Tytuły Tiddlerów
 Settings/TitleLinks/Hint: Opcjonanie wyświetlaj nazwy tiddlerów jako linki
 Settings/TitleLinks/No/Description: Nie wyświetlaj nazw jako linki
@@ -192,7 +192,7 @@ Settings/TitleLinks/Yes/Description: Wyświetlaj nazwy jako linki
 Settings/MissingLinks/Caption: Wiki Linki
 Settings/MissingLinks/Hint: Wybierz czy linkować do nieistniejących jeszcze tiddlerów
 Settings/MissingLinks/Description: Włacz linowanie do nieistniejących tiddlerów
-StoryView/Caption: Widok Tiddlerów
+StoryView/Caption: Widok Story River
 StoryView/Prompt: Obecny widok:
 Stylesheets/Caption: Style:
 Stylesheets/Expand/Caption: Rozwiń Wszystko

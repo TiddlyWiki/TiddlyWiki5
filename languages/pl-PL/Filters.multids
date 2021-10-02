@@ -12,5 +12,5 @@ ShadowTiddlers: Ukryte tiddlery
 OverriddenShadowTiddlers: Nadpisane ukryte tiddlery
 SessionTiddlers: Tiddlery zmodyfikowane od wczytania wiki
 SystemTags: Tagi systemowe
-StoryList: Tiddlery w głównym widoku, wyłączając <$text text="$:/AdvancedSearch"/>
+StoryList: Tiddlery w Story River, wyłączając <$text text="$:/AdvancedSearch"/>
 TypedTiddlers: Tiddlery o typie innym niż wikitext

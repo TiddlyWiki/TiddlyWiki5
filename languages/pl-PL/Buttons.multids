@@ -80,7 +80,7 @@ Palette/Hint: Wybierz paletę kolorów
 Permalink/Caption: bezpośredni link
 Permalink/Hint: Ustaw adres w przeglądarce na bezpośredni link do tego tiddlera
 Permaview/Caption: permanenty widok
-Permaview/Hint: Ustaw adres w przeglądarce na bezpośredni link do obecnego widoku tiddlerów
+Permaview/Hint: Ustaw adres w przeglądarce na bezpośredni link do obecnego Story River
 Print/Caption: wydrukuj stronę
 Print/Hint: Drukuje aktualną stronę
 Refresh/Caption: odśwież
@@ -89,8 +89,8 @@ Save/Caption: zapisz
 Save/Hint: Zapisz zmiany w tiddlerze
 SaveWiki/Caption: zapisz zmiany
 SaveWiki/Hint: Zapisz zmiany w całej wiki
-StoryView/Caption: widok tiddlerów
-StoryView/Hint: Ustal sposób w jaki tiddlery są wyświetlane
+StoryView/Caption: widok Story River
+StoryView/Hint: Ustal sposób w jaki tiddlery są wyświetlane w Story River (widoku otwartych tiddlerów)
 HideSideBar/Caption: ukryj menu boczne
 HideSideBar/Hint: Ukryj menu boczne
 ShowSideBar/Caption: pokaż menu boczne
