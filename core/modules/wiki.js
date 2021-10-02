@@ -549,6 +549,68 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 	return backlinks;
 };
 
+
+/*
+Return an array of tiddler titles that are directly transcluded within the given parse tree
+ */
+exports.extractTranscludes = function(parseTreeRoot) {
+	// Count up the transcludes
+	var transcludes = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
+					var value = parseTreeNode.attributes.tiddler.value;
+					if(transcludes.indexOf(value) === -1) {
+						transcludes.push(value);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return transcludes;
+};
+
+
+/*
+Return an array of tiddler titles that are directly transcludeed from the specified tiddler
+*/
+exports.getTiddlerTranscludes = function(title) {
+	var self = this;
+	// We'll cache the transcludes so they only get computed if the tiddler changes
+	return this.getCacheForTiddler(title,"transcludes",function() {
+		// Parse the tiddler
+		var parser = self.parseTiddler(title);
+		if(parser) {
+			return self.extractTranscludes(parser.tree);
+		}
+		return [];
+	});
+};
+
+/*
+Return an array of tiddler titles that transclude to the specified tiddler
+*/
+exports.getTiddlerBacktranscludes = function(targetTitle) {
+	var self = this,
+		backtranscludesIndexer = this.getIndexer("BacktranscludesIndexer"),
+		backtranscludes = backtranscludesIndexer && backtranscludesIndexer.lookup(targetTitle);
+
+	if(!backtranscludes) {
+		backtranscludes = [];
+		this.forEachTiddler(function(title,tiddler) {
+			var transcludes = self.getTiddlertranscludes(title);
+			if(transcludes.indexOf(targetTitle) !== -1) {
+				backtranscludes.push(title);
+			}
+		});
+	}
+	return backtranscludes;
+};
+
 /*
 Return a hashmap of tiddler titles that are referenced but not defined. Each value is the number of times the missing tiddler is referenced
 */
