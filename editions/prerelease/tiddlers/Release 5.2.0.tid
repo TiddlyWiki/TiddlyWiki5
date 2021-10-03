@@ -240,7 +240,7 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d6ea369f5ef9d3092a360a4286a99902df37782b">> EditTextWidget to use default text for missing fields
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5552">> css-escape-polyfill to work under Node.js
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/dbd3f835bf8399ed1a3da7cc322ec9b6ab783d53">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/fb4d77ef46e23c23f4e46c13f4a529aa29a27dcd]]) crash when sorting by non-string fields
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5711">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5868]]) some bugs in the [[EventCatcherWidget]], introduced new `stopPorpagation` attribute and new syntax for specifying actions
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5711">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5868]]) some bugs in the [[EventCatcherWidget]], introduced new `stopPropagation` attribute and new syntax for specifying actions
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5691">> CurrentTiddler variable consistency in subfilters and prefixes
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/485779f5b2136b7bcd739352b56188d94b0eb9e4">> crash when accessing variables in filters that don't have a widget context
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8fbf52e419e71d726ea32b6c44e3ccfc4245d825">> unnecessary triggering of reload warning when JavaScript tiddlers are not subsequently imported
