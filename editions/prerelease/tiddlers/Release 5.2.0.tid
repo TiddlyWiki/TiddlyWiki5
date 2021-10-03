@@ -81,6 +81,16 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5736">> the TranscludeWidget to avoid triggering a refresh unless the transcluded field changes (previously it was also triggered for changes to other fields)
 
+!! Other Notable Improvements
+
+<<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5611">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/4a99e0cc7d4a6b9e7071c0b2a9a0f63c3c7d2492]]) the [[ListWidget]] with an optional `counter` attribute specifying a variable to contain the numeric index of each list item. This is useful for creating a list of numbered items, and for detecting the first and last entries in a list
+
+<<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3094e062366830bdecfb91e3d852667fa951dc50">> action widget execution with an optional new mode that ensures that all widgets are refreshed before invocation -- see [[ActionWidget Execution Modes]]. This resolves a long-standing inconsistency in the way that ActionWidgets are executed, making them behave much more like a conventional programming language
+
+<<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5726">> the HTML comment syntax to enable it to be used before and in between pragmas such as macro definitions. This makes it much easier to provide documentation within complex wikitext tiddlers
+
+<<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/a360adbba924d222c5b55709133c18890c04398d">> size of dropzone when story river is empty. For a long time, TiddlyWiki confusingly wouldn't recognise a drag and drop operation if the story river was empty
+
 ! Performance Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5380">> (and again [[here|https://github.com/Jermolene/TiddlyWiki5/pull/5488]]) the efficiency of the linked list implementation used in filter processing
@@ -95,7 +105,6 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5812">> warning message when cancelling a pending import
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/f97850dd05693e84dd36b8af5d72b22fbfd74958">> the default font weights in the "Snow White" theme to be thicker and more legible
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5816">> modal mechanism to prevent page from scrolling while modals are displayed
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/a360adbba924d222c5b55709133c18890c04398d">> size of dropzone when story river is empty
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5326">> fill colour for "remove tag" button
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5370">> page title so that the separating em-dash is only used if the site subtitle is present
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/5397">> broken aria-label in $:/PaletteManager
@@ -103,14 +112,12 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/c325380231a8c592a6e51d4498c1e6c3a241b539">> plus/minus SVG icons: <<.icon $:/core/images/plus-button>> and <<.icon $:/core/images/minus-button>>
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5672">> link to the existing tiddler when the warning "Target tiddler already exists" is displayed in the edit template
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5727">> class to make tag pills in the edit template look like those in the ViewTemplate
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5726">> the HTML comment syntax to enable it to be used before and in between pragmas such as macro definitions
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/1661">> overflow of long field values that do not contain whitespace
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/a4421f50c6886b02c3595b7ffa6ba72674d6bf21">> GitHub, Gitea and GitLab savers to wikify the commit message, enabling macros to be used in the message
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5981">> the [[text editor stamp toolbar button|Using Stamp]] dropdown to allow sorting by drag and drop
 
 ! Widget Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5611">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/4a99e0cc7d4a6b9e7071c0b2a9a0f63c3c7d2492]]) [[ListWidget]] with optional `counter` attribute specifying a variable to contain the numeric index of each list item
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/9eda02868f21e9dd1733ffe26352bd7ac96285b4">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/f87b3bfcdba79b6ad198af286bd827c61044891f]]) new MessageCatcherWidget to catch arbitrary messages and execute action strings
 * <<.link-badge-modified "https://github.com/Jermolene/TiddlyWiki5/commit/b9647b2c48152dac069a1099a0822b32375a66cf">> [[FieldManglerWidget]] to ensure it doesn't propogate events that it traps
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5597">> [[DropzoneWidget]] to optionally invoke actions after the `tm-import-tiddlers` message has been sent, and to specify an optional `contentTypesFilter` which determines which content types are accepted by the dropzone.
@@ -136,7 +143,6 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 
 ! Hackability Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/3094e062366830bdecfb91e3d852667fa951dc50">> action widget execution with an optional new mode that ensures that all widgets are refreshed before invocation
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5361">> [[unusedtitle Macro]] to add ''separator'' and ''template'' parameters
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5720">> ''color-scheme'' field to all themes to differentiate between light and dark themes
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/d25e540dd2f0decf61c52fdc665a28a5dfeda93f">> support for `image/vnd.microsoft.icon` content type
@@ -267,6 +273,7 @@ For end users, if an upgrade to v5.2.0 causes problems then consult the discussi
 * <<contributor felixhayashi>>
 * <<contributor FlashSystems>>
 * <<contributor flibbles>>
+* <<contributor FND>>
 * <<contributor hoelzro>>
 * <<contributor jeremyredhead>>
 * <<contributor joebordes>>
