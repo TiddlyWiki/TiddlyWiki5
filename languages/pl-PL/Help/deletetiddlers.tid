@@ -1,0 +1,8 @@
+title: $:/language/Help/deletetiddlers
+description: Usuwa grupę tiddlerów
+
+<<.from-version "5.1.20">> Usuwa grupę tiddlerów wedle podanego filtra.
+
+```
+--deletetiddlers <filter>
+```

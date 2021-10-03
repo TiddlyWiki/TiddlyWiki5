@@ -1,0 +1,62 @@
+caption: 5.2.1
+created: 20211003152250369
+modified: 20211003152250369
+tags: ReleaseNotes
+title: Release 5.2.1
+type: text/vnd.tiddlywiki
+
+\define contributor(username)
+<a href="https://github.com/$username$" style="text-decoration:none;font-size:24px;" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src="https://github.com/$username$.png?size=32" width="32" height="32"/> @<$text text=<<__username__>>/></a>
+\end
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.0...master]]//
+
+! Highlights
+
+! Performance Improvements
+
+* 
+
+! Usability Improvements
+
+* 
+
+! Widget Improvements
+
+* 
+
+! Filter improvements
+
+* 
+
+! Hackability Improvements
+
+* 
+
+! Client-server Improvements
+
+* 
+
+! Node.js Improvements
+
+* 
+
+! Plugin Improvements
+
+! Developer Experience Improvements
+
+* 
+
+! Translation improvements
+
+* 
+
+! Other Bug Fixes
+
+* 
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* <<contributor Jermolene>>

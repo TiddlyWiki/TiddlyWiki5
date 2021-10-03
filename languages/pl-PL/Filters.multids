@@ -1,0 +1,16 @@
+title: $:/language/Filters/
+
+AllTiddlers: Wszystkie tiddlery poza systemowymi
+RecentSystemTiddlers: Ostatnio modyfikowane tiddlery, wliczając systemowe
+RecentTiddlers: Ostatnio modyfikowane tiddlery
+AllTags: Wszystkie tagi poza systemowymi
+Missing: Brakujące tiddlery
+Drafts: Szkice tiddlerów
+Orphans: Tiddlery bez rodzica
+SystemTiddlers: Systemowe tiddlery
+ShadowTiddlers: Tiddlery-cienie
+OverriddenShadowTiddlers: Nadpisane tiddlery-cienie
+SessionTiddlers: Tiddlery zmodyfikowane od wczytania wiki
+SystemTags: Tagi systemowe
+StoryList: Tiddlery w Story River, wyłączając <$text text="$:/AdvancedSearch"/>
+TypedTiddlers: Tiddlery o typie innym niż wikitext
