@@ -30,7 +30,7 @@ exports.handler = function(request,response,state) {
 	if(fields.revision) {
 		delete fields.revision;
 	}
-	state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title},state.wiki.getModificationFields()));
+	state.wiki.addTiddler(new $tw.Tiddler(fields,{title: title}));
 	var changeCount = state.wiki.getChangeCount(title).toString();
 	response.writeHead(204, "OK",{
 		Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\"",
