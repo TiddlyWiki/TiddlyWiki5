@@ -34,7 +34,7 @@ Error/NetworkErrorAlert: `<h2>''Bład sieciowy''</h2>Połaczenie z serwerem zost
 Error/PutEditConflict: Pliki zostały zmienione na serwerze
 Error/PutForbidden: Brak uprawnień
 Error/PutUnauthorized: Wymagane uwierzytelnienie
-Error/RecursiveTransclusion: Rekursywna transkluzja wykryta we widżecie transkluzji
+Error/RecursiveTransclusion: Rekursywna transkluzja wykryta w widżecie transkluzji
 Error/RetrievingSkinny: Bład przy pobieraniu listy tiddlerów
 Error/SavingToTWEdit: Bład przy zapisywaniu do TWEdit
 Error/WhileSaving: Bład przy zapisywaniu
