@@ -173,7 +173,7 @@ Settings/ToolbarButtonStyle/Styles/Rounded: Zaokrąglone
 Settings/ToolbarButtons/Caption: Przyciski Menu Narzędzi
 Settings/ToolbarButtons/Hint: Domyślnie wyświetlane przyciski paska narzędzi:
 Settings/ToolbarButtons/Icons/Description: Pokaż ikonę
-Settings/ToolbarButtons/Text/Description: Pokażtekst
+Settings/ToolbarButtons/Text/Description: Pokaż tekst
 Settings/DefaultSidebarTab/Caption: Domyślna zakładka w menu bocznym
 Settings/DefaultSidebarTab/Hint: Wybierz która zakładka jest domyślnie otwarta w menu bocznym
 Settings/DefaultMoreSidebarTab/Caption: Domyślna zakładka w podmenu "Więcej"
