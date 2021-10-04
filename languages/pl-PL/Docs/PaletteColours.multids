@@ -8,7 +8,7 @@ background: Ogólne tło
 blockquote-bar: Lewa ramka cytatu
 button-background: Ogólne tło przycisku
 button-border: Ogólna ramka przycisku
-button-foreground: Ogólne tekst przycisku
+button-foreground: Ogólny tekst przycisku
 dirty-indicator: Wskażnik niezapisanych zmian
 code-background: Tło kodu
 code-border: Ramka kodu
