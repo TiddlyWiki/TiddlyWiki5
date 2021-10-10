@@ -68,6 +68,24 @@ is mostly equivalent to using `$subfilter` along with "tags" for the value of `$
 <$action-listops $field="tags" $subfilter="abc 123"/>
 ```
 
+! $action-listops widget vs. $action-setfield widget
+
+The ActionSetFieldWidget replaces a field's value using `$field`/`$value` attributes. A single ActionSetFieldWidget can be used to set any number of fields by using attributes not starting with $.
+
+The ActionListopsWidget replaces or modifies a single field's value. The new value is generated using filters.
+
+The following two examples are functionally equivalent:
+
+```
+<$action-setfield $field="myfield" $value="abc 123"/>
+```
+
+```
+<$action-listops $field="myfield" $filter="abc 123"/>
+```
+
+In general, ActionSetFieldWidget is better for setting multiple fields at once and for replacing a field's value. The ActionListopsWidget is better for modifying a field based on the field's existing value and for using a [[Filter Expression]] to derive the value.
+
 ! Extended Filter Operators
 
 A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
