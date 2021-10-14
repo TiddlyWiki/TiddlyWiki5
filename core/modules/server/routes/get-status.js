@@ -21,7 +21,7 @@ exports.handler = function(request,response,state) {
 		text = JSON.stringify({
 		username: state.authenticatedUsername || state.server.get("anon-username") || "",
 		anonymous: !state.authenticatedUsername,
-		read_only: !state.server.isAuthorized(state.authorizationType || "writers",state.authenticatedUsername),
+		read_only: !state.server.isAuthorized(authorizationType,state.authenticatedUsername),
 		space: {
 			recipe: "default"
 		},
