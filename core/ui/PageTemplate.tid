@@ -14,7 +14,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 	tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}}
 	tv-enable-drag-and-drop={{$:/config/DragAndDrop/Enable}}
 	tv-show-missing-links={{$:/config/MissingLinks}}
-  tv-auto-paragraph={{$:/config/AutoParagraph}}
+	tv-auto-paragraph={{$:/config/AutoParagraph}}
 	storyviewTitle={{$:/view}}
 	languageTitle={{{ [{$:/language}get[name]] }}}>
 
