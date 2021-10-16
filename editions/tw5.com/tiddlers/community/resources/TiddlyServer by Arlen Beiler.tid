@@ -1,10 +1,12 @@
 caption: ~TiddlyServer
+color: #f06292
+community-author: Arlen Beiler
 created: 20171109171415540
-delivery: App
+delivery: DIY
 description: An extension to TiddlyWiki's Node.js server
 method: sync
-modified: 20171113134624304
-tags: Linux Mac Windows Saving Resources
+modified: 20210106151027596
+tags: Linux Mac Windows Saving [[Other Resources]]
 title: TiddlyServer by Arlen Beiler
 type: text/vnd.tiddlywiki
 url: https://github.com/Arlen22/TiddlyServer

@@ -3,11 +3,14 @@ title: $:/language/EditTemplate/
 Body/External/Hint: This tiddler shows content stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
 Body/Placeholder: Type the text for this tiddler
 Body/Preview/Type/Output: output
+Body/Preview/Type/DiffShadow: differences from shadow (if any)
+Body/Preview/Type/DiffCurrent: differences from current
 Field/Remove/Caption: remove field
 Field/Remove/Hint: Remove field
 Field/Dropdown/Caption: field list
 Field/Dropdown/Hint: Show field list
 Fields/Add/Button: add
+Fields/Add/Button/Hint: Add the new field to the tiddler
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:
 Fields/Add/Value/Placeholder: field value
@@ -16,7 +19,10 @@ Fields/Add/Dropdown/User: User fields
 Shadow/Warning: This is a shadow tiddler. Any changes you make will override the default version from the plugin <<pluginLink>>
 Shadow/OverriddenWarning: This is a modified shadow tiddler. You can revert to the default version in the plugin <<pluginLink>> by deleting this tiddler
 Tags/Add/Button: add
+Tags/Add/Button/Hint: add tag
 Tags/Add/Placeholder: tag name
+Tags/ClearInput/Caption: clear input
+Tags/ClearInput/Hint: Clear tag input
 Tags/Dropdown/Caption: tag list
 Tags/Dropdown/Hint: Show tag list
 Title/BadCharacterWarning: Warning: avoid using any of the characters <<bad-chars>> in tiddler titles

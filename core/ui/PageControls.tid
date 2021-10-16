@@ -7,7 +7,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 <div class="tc-page-controls">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
 <$set name="hidden" value=<<config-title>>>
-<$list filter="[<hidden>!text[hide]]" storyview="pop">
+<$list filter="[<hidden>!text[hide]]" storyview="pop" variable="ignore">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>> mode="inline"/>
 </$set>

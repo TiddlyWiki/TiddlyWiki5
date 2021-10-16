@@ -1,0 +1,12 @@
+title: $:/language/Help/build
+description: Automatycznie uruchom skonfigurowane komendy
+
+Zbuduj wybrane 'build targets' dla aktualnej wiki. Jeżeli nie podasz żadnych 'build targets' komenda zbuduje je wszystkie
+Build the specified build targets for the current wiki. If no build targets are specified then all available targets will be built.
+
+```
+--build <target> [<target> ...]
+```
+
+'Build targets' są zdefiniowane w pliku `tiddlywiki.info` w folderze gdzie znajduje się wiki.
+

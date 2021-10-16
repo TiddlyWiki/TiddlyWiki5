@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/menubar/items/contents
+caption: Contents
+description: Table of Contents
+is-dropdown: yes
+tags: $:/tags/MenuBar
+
+<div class="tc-table-of-contents">
+
+<$macrocall $name="toc-selective-expandable" tag={{$:/config/plugins/menubar/TableOfContents/Tag}}/>
+
+</div>

@@ -16,7 +16,10 @@ if($tw.node) {
 	var util = require("util"),
 		fs = require("fs"),
 		url = require("url"),
-		path = require("path");
+		path = require("path"),
+		querystring = require("querystring"),
+		crypto = require("crypto"),
+		zlib = require("zlib");
 }
 
 /*
@@ -30,6 +33,7 @@ function Server(options) {
 	this.routes = options.routes || [];
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
+	this.boot = options.boot || $tw.boot;
 	this.servername = $tw.utils.transliterateToSafeASCII(this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
@@ -38,13 +42,15 @@ function Server(options) {
 			if(options.variables[variable]) {
 				this.variables[variable] = options.variables[variable];
 			}
-		}		
+		}
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
 	this.enableGzip = this.get("gzip") === "yes";
+	// Initialize browser-caching
+	this.enableBrowserCache = this.get("use-browser-cache") === "yes";
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
@@ -68,12 +74,77 @@ function Server(options) {
 		tlsCertFilepath = this.get("tls-cert");
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
-			key: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsKeyFilepath),"utf8"),
-			cert: fs.readFileSync(path.resolve($tw.boot.wikiPath,tlsCertFilepath),"utf8")
+			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
+			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8")
 		};
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
+}
+
+/*
+Send a response to the client. This method checks if the response must be sent
+or if the client alrady has the data cached. If that's the case only a 304
+response will be transmitted and the browser will use the cached data.
+Only requests with status code 200 are considdered for caching.
+request: request instance passed to the handler
+response: response instance passed to the handler
+statusCode: stauts code to send to the browser
+headers: response headers (they will be augmented with an `Etag` header)
+data: the data to send (passed to the end method of the response instance)
+encoding: the encoding of the data to send (passed to the end method of the response instance)
+*/
+function sendResponse(request,response,statusCode,headers,data,encoding) {
+	if(this.enableBrowserCache && (statusCode == 200)) {
+		var hash = crypto.createHash('md5');
+		// Put everything into the hash that could change and invalidate the data that
+		// the browser already stored. The headers the data and the encoding.
+		hash.update(data);
+		hash.update(JSON.stringify(headers));
+		if(encoding) {
+			hash.update(encoding);
+		}
+		var contentDigest = hash.digest("hex");
+		// RFC 7232 section 2.3 mandates for the etag to be enclosed in quotes
+		headers["Etag"] = '"' + contentDigest + '"';
+		headers["Cache-Control"] = "max-age=0, must-revalidate";
+		// Check if any of the hashes contained within the if-none-match header
+		// matches the current hash.
+		// If one matches, do not send the data but tell the browser to use the
+		// cached data.
+		// We do not implement "*" as it makes no sense here.
+		var ifNoneMatch = request.headers["if-none-match"];
+		if(ifNoneMatch) {
+			var matchParts = ifNoneMatch.split(",").map(function(etag) {
+				return etag.replace(/^[ "]+|[ "]+$/g, "");
+			});
+			if(matchParts.indexOf(contentDigest) != -1) {
+				response.writeHead(304,headers);
+				response.end();
+				return;
+			}
+		}
+	}
+	/*
+	If the gzip=yes is set, check if the user agent permits compression. If so,
+	compress our response if the raw data is bigger than 2k. Compressing less
+	data is inefficient. Note that we use the synchronous functions from zlib
+	to stay in the imperative style. The current `Server` doesn't depend on
+	this, and we may just as well use the async versions.
+	*/
+	if(this.enableGzip && (data.length > 2048)) {
+		var acceptEncoding = request.headers["accept-encoding"] || "";
+		if(/\bdeflate\b/.test(acceptEncoding)) {
+			headers["Content-Encoding"] = "deflate";
+			data = zlib.deflateSync(data);
+		} else if(/\bgzip\b/.test(acceptEncoding)) {
+			headers["Content-Encoding"] = "gzip";
+			data = zlib.gzipSync(data);
+		}
+	}
+
+	response.writeHead(statusCode,headers);
+	response.end(data,encoding);
 }
 
 Server.prototype.defaultVariables = {
@@ -87,7 +158,8 @@ Server.prototype.defaultVariables = {
 	"system-tiddler-render-type": "text/plain",
 	"system-tiddler-render-template": "$:/core/templates/wikified-tiddler",
 	"debug-level": "none",
-	"gzip": "no"
+	"gzip": "no",
+	"use-browser-cache": "no"
 };
 
 Server.prototype.get = function(name) {
@@ -111,15 +183,14 @@ Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 };
 
 Server.prototype.findMatchingRoute = function(request,state) {
-	var pathprefix = this.get("path-prefix") || "";
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
 			pathRegExp = potentialRoute.path,
 			pathname = state.urlInfo.pathname,
 			match;
-		if(pathprefix) {
-			if(pathname.substr(0,pathprefix.length) === pathprefix) {
-				pathname = pathname.substr(pathprefix.length) || "/";
+		if(state.pathPrefix) {
+			if(pathname.substr(0,state.pathPrefix.length) === state.pathPrefix) {
+				pathname = pathname.substr(state.pathPrefix.length) || "/";
 				match = potentialRoute.path.exec(pathname);
 			} else {
 				match = false;
@@ -155,20 +226,25 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
-Server.prototype.requestHandler = function(request,response) {
+Server.prototype.requestHandler = function(request,response,options) {
+	options = options || {};
 	// Compose the state object
 	var self = this;
 	var state = {};
-	state.wiki = self.wiki;
+	state.wiki = options.wiki || self.wiki;
+	state.boot = options.boot || self.boot;
 	state.server = self;
 	state.urlInfo = url.parse(request.url);
+	state.queryParameters = querystring.parse(state.urlInfo.query);
+	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
+	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write
 	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
-		return;		
+		return;
 	}
 	// Check whether anonymous access is granted
 	state.allowAnon = this.isAuthorized(authorizationType,null);
@@ -177,7 +253,7 @@ Server.prototype.requestHandler = function(request,response) {
 		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
 			// Bail if we failed (the authenticator will have sent the response)
 			return;
-		}		
+		}
 	}
 	// Authorize with the authenticated username
 	if(!this.isAuthorized(authorizationType,state.authenticatedUsername)) {
@@ -236,6 +312,7 @@ host: optional host address (falls back to value of "host" variable)
 prefix: optional prefix (falls back to value of "path-prefix" variable)
 */
 Server.prototype.listen = function(port,host,prefix) {
+	var self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
 	host = host || this.get("host");
@@ -244,19 +321,24 @@ Server.prototype.listen = function(port,host,prefix) {
 	if(parseInt(port,10).toString() !== port) {
 		port = process.env[port] || 8080;
 	}
-	$tw.utils.log("Serving on " + this.protocol + "://" + host + ":" + port + prefix,"brown/orange");
-	$tw.utils.log("(press ctrl-C to exit)","red");
 	// Warn if required plugins are missing
-	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
+	if(!this.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !this.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
-	// Listen
+	// Create the server
 	var server;
 	if(this.listenOptions) {
 		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
 	} else {
 		server = this.transport.createServer(this.requestHandler.bind(this));
 	}
+	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
+	server.on("listening",function() {
+		var address = server.address();
+		$tw.utils.log("Serving on " + self.protocol + "://" + address.address + ":" + address.port + prefix,"brown/orange");
+		$tw.utils.log("(press ctrl-C to exit)","red");
+	});
+	// Listen
 	return server.listen(port,host);
 };
 

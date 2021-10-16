@@ -54,6 +54,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 		dragFilterFn: function() {return self.getAttribute("filter");},
 		startActions: self.startActions,
 		endActions: self.endActions,
+		dragImageType: self.dragImageType,
 		widget: this
 	});
 	// Insert the link into the DOM and render any children
@@ -71,6 +72,7 @@ DraggableWidget.prototype.execute = function() {
 	this.draggableClasses = this.getAttribute("class");
 	this.startActions = this.getAttribute("startactions");
 	this.endActions = this.getAttribute("endactions");
+	this.dragImageType = this.getAttribute("dragimagetype"); 
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -80,7 +82,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedTiddlers.tag || changedTiddlers["class"]) {
+	if(changedAttributes.tag || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	}

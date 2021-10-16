@@ -6,11 +6,11 @@ type: text/vnd.tiddlywiki
 
 
 ! Excise text
-From the EditorToolbar you can export selected text to a new tiddler and insert a [[link|Linking in WikiText]] [[Transclusion]] or [[macro|Macros]] in its place. Click ''Excise text'' ({{$:/core/images/excise}}), input name of the new tiddler, and choose excise method.
+From the EditorToolbar you can export selected text to a new tiddler and insert a [[link|Linking in WikiText]] [[Transclusion]] or [[macro|Macros]] in its place. Click ''Excise text'' (<<.icon $:/core/images/excise>>), input name of the new tiddler, and choose excise method.
 
 !! How to excise text
 # Highlight the relevant piece of text 
-#Click ''Excise text'' ({{$:/core/images/excise}})
+#Click ''Excise text'' (<<.icon $:/core/images/excise>>)
 # Give the new tiddler a title.
 # Chosse if the new tiddler will be tagged with the title of the current tiddler''*''.
 # Choose replacing method. [[link|Linking in WikiText]] [[Transclusion]] or [[macro|Macros]].

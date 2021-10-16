@@ -6,7 +6,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \define lingo-base() $:/language/CloseAll/
 
 \define drop-actions()
-<$action-listops $tiddler=<<tv-config-story-list>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 \end
 
 \define placeholder()
@@ -15,7 +15,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 
 \define droppable-item(button)
 \whitespace trim
-<$droppable actions=<<drop-actions>>>
+<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>>>
 <<placeholder>>
 <div>
 $button$
@@ -26,7 +26,7 @@ $button$
 <div class="tc-sidebar-tab-open">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
-<$macrocall $name="droppable-item" button="""<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">{{$:/core/images/close-button}}</$button>&nbsp;<$link to={{!!title}}><$view field="title"/></$link>"""/>
+<$macrocall $name="droppable-item" button="""<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini tc-small-gap-right">{{$:/core/images/close-button}}</$button><$link to={{!!title}}><$view field="title"/></$link>"""/>
 </div>
 </$list>
 <$tiddler tiddler="">

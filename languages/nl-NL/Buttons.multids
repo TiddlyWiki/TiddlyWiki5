@@ -143,6 +143,7 @@ SaveWiki/Caption: opslaan
 SaveWiki/Hint: Sla wijzigingen op
 ShowSideBar/Caption: toon zijpaneel
 ShowSideBar/Hint: Toon zijpaneel
+SidebarSearch/Hint: Kies het zoekvak in het zijpaneel
 Size/Caption: formaat van de afbeelding
 Size/Caption/Height: Hoogte:
 Size/Caption/Resize: Wijzig het formaat van de afbeelding
@@ -171,6 +172,7 @@ Timestamp/Off/Caption: tijdstempels zijn uit
 Timestamp/Off/Hint: Werk tijdstempels niet bij als tiddlers veranderd zijn
 Timestamp/On/Caption: tijdstempels zijn aan
 Timestamp/On/Hint: Werk tijdstempels bij als tiddlers veranderd zijn
+ToggleSidebar/Hint: 'Toggle' het zijpaneel
 Transcludify/Caption: transclusie
 Transcludify/Hint: Zet selectie tussen accolades
 Underline/Caption: onderstreept

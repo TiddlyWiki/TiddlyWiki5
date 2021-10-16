@@ -1,6 +1,6 @@
 created: 20160107222352710
-modified: 20160720145836265
-tags: Plugins
+modified: 20191022095637710
+tags: [[TiddlyWiki on Node.js]] Plugins
 title: Installing a plugin from the plugin library
 type: text/vnd.tiddlywiki
 
@@ -10,14 +10,15 @@ Follow these instructions when using TiddlyWiki as a standalone HTML file:
 
 # Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
 # Open your TiddlyWiki in a browser
-# Open the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}, click on the ''Plugins'' tab and then the {{$:/core/images/download-button}} ''Get more plugins'' button
-# Click {{$:/core/images/chevron-right}} ''open plugin library'' to open the official plugin library
+# Open the [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>>, click on the ''Plugins'' tab and then the <<.icon $:/core/images/download-button>> ''Get more plugins'' button
+# Click <<.icon $:/core/images/chevron-right>> ''open plugin library'' to open the official plugin library
 # When the library listing is loaded:
 ## Use the tab to select between ''plugins'', ''themes'' and ''languages''
 ## Use the ''search'' box to search the plugin details
 # Click the ''install'' button to install a plugin
-# Save your TiddlyWiki {{$:/core/images/save-button}}
-# ''Refresh the page so that TiddlyWiki loads the new plugin'' {{$:/core/images/refresh-button}}
+# Save your TiddlyWiki <<.icon $:/core/images/save-button>>
+# If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completes installation of the plugin <<.icon $:/core/images/refresh-button>>
+#* <<.from-version "5.1.22">> It is no longer necessary to refresh TiddlyWiki when deleting plugins that support dynamic loading. See PluginMechanism for more details
 # The plugin should now be available for use
 
 ! Client-Server Configuration
@@ -46,3 +47,5 @@ Follow these instructions when using TiddlyWiki under Node.js:
     ]
 }
 ```
+
+See also [[Installing custom plugins on Node.js]].

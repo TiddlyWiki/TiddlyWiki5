@@ -1,6 +1,8 @@
 title: $:/language/Help/rendertiddler
 description: Exécute le contenu d'un tiddler pour le type spécifié
 
+(À noter : la commande `--rendertiddler` est dépréciée. Il est préférable d'utiliser la nouvelle commande `--render`, plus souple)
+
 Enregistre vers le chemin indiqué le résultat de l'exécution d'un tiddler pour le type de contenu (ContentType) spécifié — par défaut `text/html`.
 
 Un tiddler modèle (template) peut être indiqué optionnellement. Dans ce cas, le tiddler modèle est exécuté après initialisation de la variable "currentTiddler" avec le tiddler dont le titre est donné en premier paramètre de la commande.

@@ -1,21 +1,21 @@
 title: $:/core/ui/EditTemplate
 
-\define actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
-<$action-sendmessage $message="tm-add-field" $name={{$:/temp/newfieldname}} $value={{$:/temp/newfieldvalue}}/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+\define delete-edittemplate-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<newFieldNameInputTiddler>] [<newFieldNameSelectionTiddler>] [<newTagNameTiddler>] [<newTagNameInputTiddler>] [<newTagNameSelectionTiddler>] [<typeInputTiddler>] [<typeSelectionTiddler>]"/>
+\define save-tiddler-actions()
+<$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
+<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldValueTiddler>get[text]] }}}/>
+<<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
-\define frame-classes()
-tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
+\define cancel-delete-tiddler-actions(message)
+<<delete-edittemplate-state-tiddlers>>
+<$action-sendmessage $message="tm-$message$-tiddler"/>
 \end
-<div class=<<frame-classes>> data-tiddler-title=<<currentTiddler>>>
+<div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-edit-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}>
 <$fieldmangler>
-<$set name="storyTiddler" value=<<currentTiddler>>>
-<$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
-<$keyboard key="((save-tiddler))" actions=<<actions>>>
+<$vars storyTiddler=<<currentTiddler>> newTagNameTiddler=<<qualify "$:/temp/NewTagName">> newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">> newFieldValueTiddler=<<qualify "$:/temp/NewFieldValue">> newFieldNameInputTiddler=<<qualify "$:/temp/NewFieldName/input">> newFieldNameSelectionTiddler=<<qualify "$:/temp/NewFieldName/selected-item">> newTagNameInputTiddler=<<qualify "$:/temp/NewTagName/input">> newTagNameSelectionTiddler=<<qualify "$:/temp/NewTagName/selected-item">> typeInputTiddler=<<qualify "$:/temp/Type/input">> typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
+<$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">>>
+<$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>>/>
@@ -23,6 +23,6 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 </$list>
 </$keyboard>
 </$keyboard>
-</$set>
+</$vars>
 </$fieldmangler>
 </div>

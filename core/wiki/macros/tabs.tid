@@ -1,10 +1,12 @@
 title: $:/core/macros/tabs
 tags: $:/tags/Macro
 
-\define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain)
+\define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
+<$set name="qualifiedState" value=<<qualify "$state$">>>
+<$vars tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
 <div class="tc-tab-set $class$">
 <div class="tc-tab-buttons $class$">
-<$list filter="$tabsList$" variable="currentTab" storyview="pop"><$set name="save-currentTiddler" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
+<$list filter="$tabsList$" variable="currentTab" storyview="pop"><$set name="save-currentTiddler" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<tabsState>> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
 <$tiddler tiddler=<<save-currentTiddler>>>
 <$set name="tv-wikilinks" value="no">
 <$transclude tiddler="$buttonTemplate$" mode="inline">
@@ -12,13 +14,13 @@ tags: $:/tags/Macro
 <$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
 </$transclude>
 </$transclude>
-</$set></$tiddler></$button></$tiddler></$set></$list>
+</$set></$tiddler>$actions$</$button></$tiddler></$set></$list>
 </div>
 <div class="tc-tab-divider $class$"/>
 <div class="tc-tab-content $class$">
 <$list filter="$tabsList$" variable="currentTab">
 
-<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$" retain="""$retain$""">
+<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default="$default$" retain="""$retain$""">
 
 <$transclude tiddler="$template$" mode="block">
 
@@ -31,4 +33,6 @@ tags: $:/tags/Macro
 </$list>
 </div>
 </div>
+</$vars>
+</$set>
 \end

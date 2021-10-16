@@ -3,7 +3,7 @@ title: $:/core/modules/server/routes/get-tiddlers-json.js
 type: application/javascript
 module-type: route
 
-GET /recipes/default/tiddlers/tiddlers.json
+GET /recipes/default/tiddlers.json?filter=<filter>
 
 \*/
 (function() {
@@ -12,26 +12,39 @@ GET /recipes/default/tiddlers/tiddlers.json
 /*global $tw: false */
 "use strict";
 
+var DEFAULT_FILTER = "[all[tiddlers]!is[system]sort[title]]";
+
 exports.method = "GET";
 
 exports.path = /^\/recipes\/default\/tiddlers.json$/;
 
 exports.handler = function(request,response,state) {
-	response.writeHead(200, {"Content-Type": "application/json"});
+	var filter = state.queryParameters.filter || DEFAULT_FILTER;
+	if(state.wiki.getTiddlerText("$:/config/Server/AllowAllExternalFilters") !== "yes") {
+		if(state.wiki.getTiddlerText("$:/config/Server/ExternalFilters/" + filter) !== "yes") {
+			console.log("Blocked attempt to GET /recipes/default/tiddlers.json with filter: " + filter);
+			response.writeHead(403);
+			response.end();
+			return;
+		}
+	}
+	if(state.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "no") {
+		filter += "+[!is[system]]";
+	}
+	var excludeFields = (state.queryParameters.exclude || "text").split(","),
+		titles = state.wiki.filterTiddlers(filter);
 	var tiddlers = [];
-	state.wiki.forEachTiddler({sortField: "title"},function(title,tiddler) {
-		var tiddlerFields = {};
-		$tw.utils.each(tiddler.fields,function(field,name) {
-			if(name !== "text") {
-				tiddlerFields[name] = tiddler.getFieldString(name);
-			}
-		});
-		tiddlerFields.revision = state.wiki.getChangeCount(title);
-		tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-		tiddlers.push(tiddlerFields);
+	$tw.utils.each(titles,function(title) {
+		var tiddler = state.wiki.getTiddler(title);
+		if(tiddler) {
+			var tiddlerFields = tiddler.getFieldStrings({exclude: excludeFields});
+			tiddlerFields.revision = state.wiki.getChangeCount(title);
+			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
+			tiddlers.push(tiddlerFields);
+		}
 	});
 	var text = JSON.stringify(tiddlers);
-	response.end(text,"utf8");
+	state.sendResponse(200,{"Content-Type": "application/json"},text,"utf8");
 };
 
 }());

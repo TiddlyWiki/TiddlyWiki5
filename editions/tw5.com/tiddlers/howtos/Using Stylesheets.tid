@@ -1,5 +1,5 @@
 created: 20140305091244145
-modified: 201804111739
+modified: 20210104090402829
 tags: [[Customise TiddlyWiki]]
 title: Using Stylesheets
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ The first steps to changing the appearance of ~TiddlyWiki are to choose and appl
 
 * One of the available themes: <span class="tc-btn-standard"> {{$:/core/ui/Buttons/theme}} </span>
 * Modify the colour palette: <span class="tc-btn-standard"> {{$:/core/ui/Buttons/palette}} </span>
-* Experiment with the <$button actions=<<openCpTheme>> >{{$:/core/images/options-button}} ControlPanel</$button>
+* Experiment with the <$button actions=<<openCpTheme>> ><<.icon $:/core/images/options-button>> ControlPanel</$button>
 
 ! Work with Stylesheets
 
@@ -29,6 +29,8 @@ body.tc-body {
 	background: red;
 }
 ```
+
+You can then use your own [[styles and classes in WikiText|Styles and Classes in WikiText]].
 
 !! Additional Resrouces
 

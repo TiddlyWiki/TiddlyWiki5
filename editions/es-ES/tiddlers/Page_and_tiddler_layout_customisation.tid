@@ -40,10 +40,10 @@ Digamos que tienes un tiddler llamado <<.tid "Plantilla Recetas">> y quieres un 
 $param="TÍTULO DE LA PLANTILLA QUE QUIERES QUE ABRA"
 title="New tiddler"
   tags=<<newHereButtonTags>> />
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{NOMBRE DE LA IMAGEN DEL BOTÓN}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text="NOMBRE DEL BOTÓN PARA MOSTRAR EN PANTALLA"/></span>
 </$list>
 </$button>
@@ -54,7 +54,7 @@ title="New tiddler"
 
 #* Asígnale la etiqueta <<.tag ~$:/tags/ViewToolbar]]>>
 
-# Hay que crear un tiddler que le diga a ~TiddlyWIki si el botón será o no visible en la barra. Llamémosle por ejemplo <<.tid "~$:/config/ViewToolbarButtons/Visibility/Receta"">>. Escribe `reveal` en el cuerpo y guárdalo.
+# Hay que crear un tiddler que le diga a ~TiddlyWIki si el botón será o no visible en la barra. Llamémosle por ejemplo <<.tid "~$:/config/ViewToolbarButtons/Visibility/Receta"">>. Escribe `show` en el cuerpo y guárdalo.
 
 # Habrá que posicionar el botón adecuadamente. Abre el tiddler <<.tid ~$:/tags/ViewToolbar>> e inserta el nombre de tu botón en el lugar adecuado del campo <<.field list>>.
 

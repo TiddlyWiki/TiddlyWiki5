@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/xlsx-utils",
+	"name": "XLSX Utils",
 	"description": "XLSX spreadsheet utilities",
-	"author": "Jeremy Ruston and SheetJS",
-	"core-version": ">=5.0.0",
-	"list": "readme controls license"
+	"list": "readme controls license",
+	"dependents": ["$:/plugins/tiddlywiki/jszip"]
 }

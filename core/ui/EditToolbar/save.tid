@@ -3,13 +3,10 @@ tags: $:/tags/EditToolbar
 caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 description: {{$:/language/Buttons/Save/Hint}}
 
+\define save-tiddler-button()
+\whitespace trim
 <$fieldmangler><$button tooltip={{$:/language/Buttons/Save/Hint}} aria-label={{$:/language/Buttons/Save/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
-<$action-sendmessage $message="tm-add-field" $name={{$:/temp/newfieldname}} $value={{$:/temp/newfieldvalue}}/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
-<$action-sendmessage $message="tm-save-tiddler"/>
+<<save-tiddler-actions>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/done-button}}
 </$list>
@@ -17,3 +14,5 @@ description: {{$:/language/Buttons/Save/Hint}}
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Save/Caption}}/></span>
 </$list>
 </$button></$fieldmangler>
+\end
+<<save-tiddler-button>>

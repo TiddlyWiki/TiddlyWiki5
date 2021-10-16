@@ -1,0 +1,8 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/indentWithTabs
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/indentWithTabs/hint}}
+
+\define lingo-base() $:/language/codemirror/indentWithTabs/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/indentWithTabs" field="text" checked="true" unchecked="false" default="true"> <$link to="$:/config/codemirror/indentWithTabs"><<lingo info>></$link> </$checkbox>

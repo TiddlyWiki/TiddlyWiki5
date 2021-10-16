@@ -7,9 +7,9 @@ First of all: ''Keep calm!''
 
 {{$:/deprecated}}
 
-For ~TiddlyWiki it means, that you should not use this mechanism for new content anymore! ''AND you should update your existing content''!
+For ~TiddlyWiki it means that you should not use this mechanism for new content anymore, ''AND you should update your existing content''!
 
-Deprecated features have a marker. see: [[Custom styles by tag]]
+Deprecated features have a marker. See: [[How to apply custom styles by tag]]
 
 ''Tiddlers tagged `$:/deprecated`''
 

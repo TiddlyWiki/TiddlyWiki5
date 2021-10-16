@@ -8,8 +8,9 @@ CloseAll/Button: 全部关闭
 ColourPicker/Recent: 最近︰
 ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的更改？
 ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>"？
-ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>"？
-ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会覆盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: 您确定要复写条目 "<$text text=<<title>>/>"？
+ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会复盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
+ConfirmAction: 是否要继续？
 Count: 计数
 DefaultNewTiddlerTitle: 新条目
 Diffs/CountMessage: <<diff-count>> 个差异
@@ -23,11 +24,16 @@ Encryption/RepeatPassword: 重复输入密码
 Encryption/PasswordNoMatch: 密码不匹配
 Encryption/SetPassword: 设定密码
 Error/Caption: 错误
-Error/EditConflict: 服务器上的文件已更改
 Error/Filter: 筛选器错误
+Error/FilterRunPrefix: 筛选器错误：筛选器 run 的未知首码
 Error/FilterSyntax: 筛选器运算式中的语法错误
+Error/FormatFilterOperator: 筛选器错误：`format` 筛选器运算符的未知尾码
 Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算符的未知操作数
 Error/LoadingPluginLibrary: 加载插件程式库时，发生错误
+Error/NetworkErrorAlert: `<h2>''网络错误''</h2>与服务器的连缐似乎已中断。这可能表示您的网络连缐有问题。请尝试恢复网路连缐才能继续。<br><br>''恢复连缐时，所有未保存的更改，将自动同步''。`
+Error/PutEditConflict: 服务器上的文件已更改
+Error/PutForbidden: 没有权限
+Error/PutUnauthorized: 需要身分验证
 Error/RecursiveTransclusion: 于 transclude 小部件中的递回嵌入错误
 Error/RetrievingSkinny: 简要条目清单撷取错误
 Error/SavingToTWEdit: 保存到 TWEdit 时，发生错误
@@ -35,7 +41,7 @@ Error/WhileSaving: 保存时，发生错误
 Error/XMLHttpRequest: XMLHttpRequest 错误代码
 InternalJavaScriptError/Title: 内部的 JavaScript 错误
 InternalJavaScriptError/Hint: 喔，真是令人尴尬。建议刷新您的浏览器，重新启动 TiddlyWiki
-InvalidFieldName: 栏位名称 "<$text text=<<fieldName>>/>" 包含无效字符，栏位名称只能包含小写字母、数字、底线 (`_`)、 连字号 (`-`) 和小数点 (`.`)
+LayoutSwitcher/Description: 打开布局切换器
 LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部内容 ...</p><p>如果此信息未消失，可能是条目内容类型与外部内容的类型不匹配，或是您可能正在使用的浏览器，不支援单文件式维基的外部内容。请参阅 https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登录 TiddlySpace
 Manager/Controls/FilterByTag/None: (无)
@@ -48,7 +54,7 @@ Manager/Controls/Show/Option/Tiddlers: 条目
 Manager/Controls/Show/Prompt: 显示︰
 Manager/Controls/Sort/Prompt: 排序︰
 Manager/Item/Colour: 颜色
-Manager/Item/Fields: 栏位
+Manager/Item/Fields: 字段
 Manager/Item/Icon/None: (无)
 Manager/Item/Icon: 图标
 Manager/Item/RawText: 原始文字
@@ -59,13 +65,29 @@ MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{
 No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式库
 OfficialPluginLibrary/Hint: 此为在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式库。由核心团队维护的插件、主题和语言包。
-PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} 允许更改插件才能生效
+PageTemplate/Description: 默认的 ~Tiddlywiki 布局
+PageTemplate/Name: 默认的 ~PageTemplate
+PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
+Shortcuts/Input/Accept/Hint: 接受选取的项目
+Shortcuts/Input/AcceptVariant/Hint: 接受选取项目 (变种)
+Shortcuts/Input/AdvancedSearch/Hint: 从侧边栏搜寻字段内打开[[进阶搜寻|$:/AdvancedSearch]]面板
+Shortcuts/Input/Cancel/Hint: 清除输入字段
+Shortcuts/Input/Down/Hint: 选择下一个项目
+Shortcuts/Input/Tab-Left/Hint: 选择上一个页签
+Shortcuts/Input/Tab-Right/Hint: 选择下一个页签
+Shortcuts/Input/Up/Hint: 选择前一个项目
+Shortcuts/SidebarLayout/Hint: 更改侧边栏布局
+Switcher/Subtitle/theme: 切换布景主题
+Switcher/Subtitle/layout: 切换布局
+Switcher/Subtitle/language: 切换语言
+Switcher/Subtitle/palette: 切换调色板
 SystemTiddler/Tooltip: 此为系统条目
 SystemTiddlers/Include/Prompt: 包括系统条目
 TagManager/Colour/Heading: 颜色
 TagManager/Count/Heading: 计数
 TagManager/Icon/Heading: 图标
+TagManager/Icons/None: 无
 TagManager/Info/Heading: 信息
 TagManager/Tag/Heading: 标签
 Tiddler/DateFormat: YYYY年0MM月0DD日 0hh:0mm

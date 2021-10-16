@@ -60,6 +60,8 @@ PluginSwitcher.prototype.switchPlugins = function() {
 			}
 		};
 	accumulatePlugin(selectedPluginTitle);
+	// Read the plugin info for the incoming plugins
+	var changes = $tw.wiki.readPluginInfo(plugins);
 	// Unregister any existing theme tiddlers
 	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
 	// Register any new theme tiddlers

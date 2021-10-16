@@ -1,0 +1,56 @@
+title: $:/plugins/tiddlywiki/dynannotate/examples/snippets
+tags: $:/tags/dynannotateExamples
+caption: Snippets
+
+\define show-example(example)
+<$codeblock code=<<__example__>>/>
+
+//''Displays as:''//
+
+$example$
+\end
+
+<div class="tc-dynannotation-example-info">
+
+!! Search result snippets
+
+The `searchDisplay` attribute can be set to `snippet` (instead of the default `overlay`) in order to display contextual snippets around search results. 
+
+</div>
+
+<<show-example """
+<$dynannotate
+	search="the"
+	searchDisplay="snippet"
+><$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+</$dynannotate>
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Multiple search result snippets
+
+This example searches across multiple tiddlers and shows snippets for those tiddlers that match.
+
+</div>
+
+<$macrocall $name="show-example" example="""
+Search: <$edit-text tiddler="$:/temp/search" tag="input"/>
+<$list filter="[all[tiddlers+shadows]tag[DynannotateDemo]search:text{$:/temp/search}sort[title]]">
+<dl>
+<dt>
+<$link>
+<$text text=<<currentTiddler>>/>
+</$link>
+</dt>
+<dd>
+<$dynannotate
+	search={{$:/temp/search}}
+	searchMode="whitespace"
+	searchDisplay="snippet"
+><$transclude tiddler=<<currentTiddler>> mode="block"/>
+</$dynannotate>
+</dd>
+</dl>
+</$list>
+"""/>

@@ -32,7 +32,9 @@
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/katex/mhchem.min.js",
 				"module-type": "library"
-			}
+			},
+			"prefix": "(function(realRequire) {var require = function(m) {if(m===\"katex\"){m = \"$:/plugins/tiddlywiki/katex/katex.min.js\"};return realRequire(m);};",
+			"suffix": "})(require);\n"
 		}
 	]
 }

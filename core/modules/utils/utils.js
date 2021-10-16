@@ -54,6 +54,19 @@ exports.warning = function(text) {
 };
 
 /*
+Log a table of name: value pairs
+*/
+exports.logTable = function(data) {
+	if(console.table) {
+		console.table(data);
+	} else {
+		$tw.utils.each(data,function(value,name) {
+			console.log(name + ": " + value);
+		});
+	}
+}
+
+/*
 Return the integer represented by the str (string).
 Return the dflt (default) parameter if str is not a base-10 number.
 */
@@ -94,6 +107,36 @@ exports.trim = function(str) {
 	}
 };
 
+exports.trimPrefix = function(str,unwanted) {
+	if(typeof str === "string" && typeof unwanted === "string") {
+		if(unwanted === "") {
+			return str.replace(/^\s\s*/, '');
+		} else {
+			// Safely regexp-escape the unwanted text
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+			var regex = new RegExp('^(' + unwanted + ')+');
+			return str.replace(regex, '');
+		}
+	} else {
+		return str;
+	}
+};
+
+exports.trimSuffix = function(str,unwanted) {
+	if(typeof str === "string" && typeof unwanted === "string") {
+		if(unwanted === "") {
+			return str.replace(/\s\s*$/, '');
+		} else {
+			// Safely regexp-escape the unwanted text
+			unwanted = unwanted.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&');
+			var regex = new RegExp('(' + unwanted + ')+$');
+			return str.replace(regex, '');
+		}
+	} else {
+		return str;
+	}
+};
+
 /*
 Convert a string to sentence case (ie capitalise first letter)
 */
@@ -107,7 +150,7 @@ Convert a string to title case (ie capitalise each initial letter)
 exports.toTitleCase = function(str) {
 	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
 }
-	
+
 /*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
@@ -180,6 +223,7 @@ exports.removeArrayEntries = function(array,value) {
 			array.splice(p,1);
 		}
 	}
+	return array;
 };
 
 /*
@@ -251,6 +295,47 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
+exports.formatTitleString = function(template,options) {
+	var base = options.base || "",
+		separator = options.separator || "",
+		counter = options.counter || "";
+	var result = "",
+		t = template,
+		matches = [
+			[/^\$basename\$/i, function() {
+				return base;
+			}],
+			[/^\$count:(\d+)\$/i, function(match) {
+				return $tw.utils.pad(counter,match[1]);
+			}],
+			[/^\$separator\$/i, function() {
+				return separator;
+			}],
+			[/^\$count\$/i, function() {
+				return counter + "";
+			}]
+		];
+	while(t.length){
+		var matchString = "";
+		$tw.utils.each(matches, function(m) {
+			var match = m[0].exec(t);
+			if(match) {
+				matchString = m[1].call(null,match);
+				t = t.substr(match[0].length);
+				return false;
+			}
+		});
+		if(matchString) {
+			result += matchString;
+		} else {
+			result += t.charAt(0);
+			t = t.substr(1);
+		}
+	}
+	result = result.replace(/\\(.)/g,"$1");
+	return result;
+};
+
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
@@ -259,7 +344,7 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad($tw.utils.getHours12(date));
 			}],
 			[/^wYYYY/, function() {
-				return $tw.utils.getYearForWeekNo(date);
+				return $tw.utils.pad($tw.utils.getYearForWeekNo(date),4);
 			}],
 			[/^hh12/, function() {
 				return $tw.utils.getHours12(date);
@@ -268,7 +353,14 @@ exports.formatDateString = function(date,template) {
 				return date.getDate() + $tw.utils.getDaySuffix(date);
 			}],
 			[/^YYYY/, function() {
-				return date.getFullYear();
+				return $tw.utils.pad(date.getFullYear(),4);
+			}],
+			[/^aYYYY/, function() {
+				return $tw.utils.pad(Math.abs(date.getFullYear()),4);
+			}],
+			[/^\{era:([^,\|}]*)\|([^}\|]*)\|([^}]*)\}/, function(match) {
+				var year = date.getFullYear();
+				return year === 0 ? match[2] : (year < 0 ? match[1] : match[3]);
 			}],
 			[/^0hh/, function() {
 				return $tw.utils.pad(date.getHours());
@@ -280,7 +372,7 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.pad(date.getSeconds());
 			}],
 			[/^0XXX/, function() {
-				return $tw.utils.pad(date.getMilliseconds());
+				return $tw.utils.pad(date.getMilliseconds(),3);
 			}],
 			[/^0DD/, function() {
 				return $tw.utils.pad(date.getDate());
@@ -290,6 +382,15 @@ exports.formatDateString = function(date,template) {
 			}],
 			[/^0WW/, function() {
 				return $tw.utils.pad($tw.utils.getWeek(date));
+			}],
+			[/^0ddddd/, function() {
+				return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),3);
+			}],
+			[/^ddddd/, function() {
+				return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+			}],
+			[/^dddd/, function() {
+				return [7,1,2,3,4,5,6][date.getDay()];
 			}],
 			[/^ddd/, function() {
 				return $tw.language.getString("Date/Short/Day/" + date.getDay());
@@ -357,7 +458,7 @@ exports.formatDateString = function(date,template) {
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
 			if(match) {
-				matchString = m[1].call();
+				matchString = m[1].call(null,match);
 				t = t.substr(match[0].length);
 				return false;
 			}
@@ -465,6 +566,15 @@ exports.htmlEncode = function(s) {
 	}
 };
 
+// Converts like htmlEncode, but forgets the double quote for brevity
+exports.htmlTextEncode = function(s) {
+	if(s) {
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;");
+	} else {
+		return "";
+	}
+};
+
 // Converts all HTML entities to their character equivalents
 exports.entityDecode = function(s) {
 	var converter = String.fromCodePoint || String.fromCharCode,
@@ -514,7 +624,7 @@ exports.escape = function(ch) {
 
 // Turns a string into a legal JavaScript string
 // Copied from peg.js, thanks to David Majda
-exports.stringify = function(s) {
+exports.stringify = function(s, rawUnicode) {
 	/*
 	* ECMA-262, 5th ed., 7.8.4: All characters may appear literally in a string
 	* literal except for the closing quote character, backslash, carriage return,
@@ -523,19 +633,21 @@ exports.stringify = function(s) {
 	*
 	* For portability, we also escape all non-ASCII characters.
 	*/
+	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
 		.replace(/\\/g, '\\\\')            // backslash
 		.replace(/"/g, '\\"')              // double quote character
 		.replace(/'/g, "\\'")              // single quote character
 		.replace(/\r/g, '\\r')             // carriage return
 		.replace(/\n/g, '\\n')             // line feed
-		.replace(/[\x00-\x1f\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
+		.replace(regex, exports.escape);   // non-ASCII characters
 };
 
 // Turns a string into a legal JSON string
 // Derived from peg.js, thanks to David Majda
-exports.jsonStringify = function(s) {
+exports.jsonStringify = function(s, rawUnicode) {
 	// See http://www.json.org/
+	var regex = rawUnicode ? /[\x00-\x1f]/g : /[\x00-\x1f\x80-\uFFFF]/g;
 	return (s || "")
 		.replace(/\\/g, '\\\\')            // backslash
 		.replace(/"/g, '\\"')              // double quote character
@@ -544,7 +656,7 @@ exports.jsonStringify = function(s) {
 		.replace(/\x08/g, '\\b')           // backspace
 		.replace(/\x0c/g, '\\f')           // formfeed
 		.replace(/\t/g, '\\t')             // tab
-		.replace(/[\x00-\x1f\x80-\uFFFF]/g,function(s) {
+		.replace(regex,function(s) {
 			return '\\u' + $tw.utils.pad(s.charCodeAt(0).toString(16).toUpperCase(),4);
 		}); // non-ASCII characters
 };
@@ -566,7 +678,7 @@ exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
-		window.setTimeout(fn,4);
+		window.setTimeout(fn,0);
 	} else {
 		process.nextTick(fn);
 	}
@@ -638,9 +750,8 @@ exports.isValidFieldName = function(name) {
 	if(!name || typeof name !== "string") {
 		return false;
 	}
-	name = name.toLowerCase().trim();
-	var fieldValidatorRegEx = /^[a-z0-9\-\._]+$/mg;
-	return fieldValidatorRegEx.test(name);
+	// Since v5.2.x, there are no restrictions on characters in field names
+	return name;
 };
 
 /*
@@ -728,16 +839,20 @@ exports.timer = function(base) {
 /*
 Convert text and content type to a data URI
 */
-exports.makeDataUri = function(text,type) {
+exports.makeDataUri = function(text,type,_canonical_uri) {
 	type = type || "text/vnd.tiddlywiki";
 	var typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"],
 		isBase64 = typeInfo.encoding === "base64",
 		parts = [];
-	parts.push("data:");
-	parts.push(type);
-	parts.push(isBase64 ? ";base64" : "");
-	parts.push(",");
-	parts.push(isBase64 ? text : encodeURIComponent(text));
+	if(_canonical_uri) {
+		parts.push(_canonical_uri);
+	} else {
+		parts.push("data:");
+		parts.push(type);
+		parts.push(isBase64 ? ";base64" : "");
+		parts.push(",");
+		parts.push(isBase64 ? text : encodeURIComponent(text));
+	}
 	return parts.join("");
 };
 
@@ -777,6 +892,108 @@ exports.strEndsWith = function(str,ending,position) {
 		var lastIndex = str.indexOf(ending, position);
 		return lastIndex !== -1 && lastIndex === position;
 	}
+};
+
+/*
+Return system information useful for debugging
+*/
+exports.getSystemInfo = function(str,ending,position) {
+	var results = [],
+		save = function(desc,value) {
+			results.push(desc + ": " + value);
+		};
+	if($tw.browser) {
+		save("User Agent",navigator.userAgent);
+		save("Online Status",window.navigator.onLine);
+	}
+	if($tw.node) {
+		save("Node Version",process.version);
+	}
+	return results.join("\n");
+};
+
+exports.parseNumber = function(str) {
+	return parseFloat(str) || 0;
+};
+
+exports.parseInt = function(str) {
+	return parseInt(str,10) || 0;
+};
+
+exports.stringifyNumber = function(num) {
+	return num + "";
+};
+
+exports.makeCompareFunction = function(type,options) {
+	options = options || {};
+	// set isCaseSensitive to true if not defined in options
+	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
+		gt = options.invert ? -1 : +1,
+		lt = options.invert ? +1 : -1,
+		compare = function(a,b) {
+			if(a > b) {
+				return gt ;
+			} else if(a < b) {
+				return lt;
+			} else {
+				return 0;
+			}
+		},
+		types = {
+			"number": function(a,b) {
+				return compare($tw.utils.parseNumber(a),$tw.utils.parseNumber(b));
+			},
+			"integer": function(a,b) {
+				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
+			},
+			"string": function(a,b) {
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return compare("" + a,"" + b);
+			},
+			"date": function(a,b) {
+				var dateA = $tw.utils.parseDate(a),
+					dateB = $tw.utils.parseDate(b);
+				if(!isFinite(dateA)) {
+					dateA = new Date(0);
+				}
+				if(!isFinite(dateB)) {
+					dateB = new Date(0);
+				}
+				return compare(dateA,dateB);
+			},
+			"version": function(a,b) {
+				return $tw.utils.compareVersions(a,b);
+			},
+			"alphanumeric": function(a,b) {
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+			}
+		};
+	return (types[type] || types[options.defaultType] || types.number);
+};
+
+exports.decodeURIComponentSafe = function(str) {
+	var value = str;
+	try {
+		value = decodeURIComponent(str);
+	} catch(e) {
+	}
+	return value;
+};
+
+exports.decodeURISafe = function(str) {
+	var value = str;
+	try {
+		value = decodeURI(str);
+	} catch(e) {
+	}
+	return value;
 };
 
 })();

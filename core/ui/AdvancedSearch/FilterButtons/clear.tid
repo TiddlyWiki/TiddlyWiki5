@@ -3,7 +3,8 @@ tags: $:/tags/AdvancedSearch/FilterButton
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>
+<<cancel-search-actions>>
+<$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input""" />
 {{$:/core/images/close-button}}
 </$button>
 </$reveal>

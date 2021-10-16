@@ -60,7 +60,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		tag = "a";
 	}
 	// Create our element
-	var domNode = this.document.createElement(tag);
+	var namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"}),
+		domNode = this.document.createElementNS(namespace,tag);
 	// Assign classes
 	var classes = [];
 	if(this.overrideClasses === undefined) {
@@ -76,7 +77,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			}
 		}
 		if(this.linkClasses) {
-			classes.push(this.linkClasses);			
+			classes.push(this.linkClasses);
 		}
 	} else if(this.overrideClasses !== "") {
 		classes.push(this.overrideClasses)
@@ -102,7 +103,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Override with the value of tv-get-export-link if defined
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
 	if(tag === "a") {
-		domNode.setAttribute("href",wikiLinkText);
+		var namespaceHref = (namespace === "http://www.w3.org/2000/svg") ? "http://www.w3.org/1999/xlink" : undefined;
+		domNode.setAttributeNS(namespaceHref,"href",wikiLinkText);
 	}
 	// Set the tabindex
 	if(this.tabIndex) {
@@ -152,11 +154,18 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
+		navigateFromClientTop: bounds.top,
+		navigateFromClientLeft: bounds.left,
+		navigateFromClientWidth: bounds.width,
+		navigateFromClientRight: bounds.right,
+		navigateFromClientBottom: bounds.bottom,
+		navigateFromClientHeight: bounds.height,
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
 		altKey: event.altKey,
-		shiftKey: event.shiftKey
+		shiftKey: event.shiftKey,
+		event: event
 	});
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();

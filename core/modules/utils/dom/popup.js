@@ -145,50 +145,25 @@ Popup.prototype.show = function(options) {
 	}
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
-		this.rootElement.addEventListener("click",this,true);		
+		this.rootElement.addEventListener("click",this,true);
 	}
-};
-
-/*
-Detect if a Popup contains an input field that has focus
-Returns true or false
-*/
-Popup.prototype.detectInputWithinPopup = function(node) {
-	var withinPopup = false,
-	    currNode = node;
-	for(var i=0; i<this.popups.length; i++) {
-		var popup = (this.popups[i] && this.popups[i].domNode) ? this.popups[i].domNode : null;
-		while(node && popup) {
-			if(node === popup || (node.classList && (node.classList.contains("tc-popup-keep") || (node !== currNode && node.classList.contains("tc-popup-handle"))))) {
-				withinPopup = true;
-			}
-			node = node.parentNode;
-		}
-	}
-	return withinPopup;
 };
 
 /*
 Cancel all popups at or above a specified level or DOM node
 level: popup level to cancel (0 cancels all popups)
 */
-Popup.prototype.cancel = function(level,focusedInputNode) {
+Popup.prototype.cancel = function(level) {
 	var numPopups = this.popups.length;
 	level = Math.max(0,Math.min(level,numPopups));
 	for(var t=level; t<numPopups; t++) {
-		var inputWithinPopup;
-		if(focusedInputNode) {
-			inputWithinPopup = this.detectInputWithinPopup(focusedInputNode);
-		}
-		if(!inputWithinPopup) {
-			var popup = this.popups.pop();
-		  	if(popup.title) {
-				if(popup.noStateReference) {
-					popup.wiki.deleteTiddler(popup.title);
-				} else {
-					popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
-        			}
-			}
+		var popup = this.popups.pop();
+		if(popup.title) {
+			if(popup.noStateReference) {
+				popup.wiki.deleteTiddler(popup.title);
+			} else {
+				popup.wiki.deleteTiddler($tw.utils.parseTextReference(popup.title).title);
+        		}
 		}
 	}
 	if(this.popups.length === 0) {

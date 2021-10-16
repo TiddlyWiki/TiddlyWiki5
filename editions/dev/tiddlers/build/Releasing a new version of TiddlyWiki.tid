@@ -5,10 +5,12 @@ type: text/vnd.tiddlywiki
 
 !! Preparation on master
 
+# Ensure the new release banner image is up to date
 # Update ''master'' with changes from ''tiddlywiki-com''
-# Verify the version numbers in [[$:/config/OfficialPluginLibrary]] in `editions/tw5.com`
+# Verify the version numbers in [[$:/config/OfficialPluginLibrary]] in `core/wiki/config/OfficialPluginLibrary.tid`
 # Move the latest release note from the prerelease edition into the tw5.com edition
 # Adjust the release date and the ''released'' field of the latest release tiddler (eg, [[Release 5.1.3]])
+# Also adjust the github.com comparison link to point to the tag for the new release
 # Ensure [[TiddlyWiki Releases]] has the new version as the default tab
 # Adjust the modified time of HelloThere
 # Make sure ''master'' is fully committed
@@ -41,5 +43,4 @@ type: text/vnd.tiddlywiki
 # Adjust version number in [[$:/config/OfficialPluginLibrary]] (both in `editions/tw5.com` and `editions/prerelease/tiddlers/system`) and [[$:/config/LocalPluginLibrary]]
 # Adjust new release banner
 # Create the release note for the new release
-# Adjust version number in https://github.com/Jermolene/build.jermolene.github.io in `prerelease-bld.sh`, `bld.sh` and `make-library-bld.sh`
 # Commit changes to ''master'' and push to ~GitHub

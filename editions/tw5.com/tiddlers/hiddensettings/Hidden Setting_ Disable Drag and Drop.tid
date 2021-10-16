@@ -1,0 +1,19 @@
+created: 20200315143638556
+modified: 20210519155433742
+tags: [[Hidden Settings]]
+title: Hidden Setting: Disable Drag and Drop
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.22">> To disable all the drag and drop operations that are built into the core, set the following tiddler to "no":
+
+$:/config/DragAndDrop/Enable
+
+To selectively re-enable drag and drop for an instance of the [[list-tagged-draggable Macro]] or [[list-links-draggable Macro]] you must ensure that the variable `tv-enable-drag-and-drop` is set to `yes` for the scope of the macro invocation. For example, note how it is still possible to use drag and drop within this list even if $:/config/DragAndDrop/Enable is set to "no":
+
+<$macrocall $name="wikitext-example-without-html" src="""<$set name="tv-enable-drag-and-drop" value="yes">
+
+<<list-tagged-draggable tag:"HelloThere">>
+
+</$set>"""/>
+
+Note that when using the DropzoneWidget and the DroppableWidget directly the ''enable'' attribute works independently of the global setting.

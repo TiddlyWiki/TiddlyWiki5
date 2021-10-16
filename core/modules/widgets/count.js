@@ -45,7 +45,7 @@ CountWidget.prototype.execute = function() {
 	if(this.filter) {
 		this.currentCount = this.wiki.filterTiddlers(this.filter,this).length;
 	} else {
-		this.currentCount = undefined;
+		this.currentCount = "0";
 	}
 };
 

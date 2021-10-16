@@ -29,6 +29,8 @@ external-link-foreground-hover: Premier plan lors du passage de la souris sur un
 external-link-foreground-visited: Premier plan pour un lien externe déjà visité
 external-link-foreground: Premier plan pour un lien externe
 foreground: Premier plan
+menubar-background: Fond pour la barre de menu
+menubar-foreground: Premier plan pour la barre de menu
 message-background: Fond pour les messages
 message-border: Bordure pour les messages
 message-foreground: Premier plan pour les messages

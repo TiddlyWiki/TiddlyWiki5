@@ -27,18 +27,20 @@ ButtonWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ButtonWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	var self = this,
+		tag = "button",
+		domNode;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var tag = "button";
 	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
 		tag = this.buttonTag;
 	}
-	var domNode = this.document.createElement(tag);
+	domNode = this.document.createElement(tag);
+	this.domNode = domNode;
 	// Assign classes
 	var classes = this["class"].split(" ") || [],
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
@@ -64,6 +66,16 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
+	if(this.popup || this.popupTitle) {
+		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
+	}
+	// Set the tabindex
+	if(this.tabIndex) {
+		domNode.setAttribute("tabindex",this.tabIndex);
+	}
+	if(this.isDisabled === "yes") {
+		domNode.setAttribute("disabled",true);
+	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
@@ -87,7 +99,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 			handled = true;
 		}
 		if(self.actions) {
-			self.invokeActionString(self.actions,self,event);
+			var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+			self.invokeActionString(self.actions,self,event,{modifier: modifierKey});
 		}
 		if(handled) {
 			event.preventDefault();
@@ -192,10 +205,10 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this["class"] = this.getAttribute("class","");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
+	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
@@ -205,18 +218,40 @@ ButtonWidget.prototype.execute = function() {
 	this.setField = this.getAttribute("setField");
 	this.setIndex = this.getAttribute("setIndex");
 	this.popupTitle = this.getAttribute("popupTitle");
+	this.tabIndex = this.getAttribute("tabindex");
+	this.isDisabled = this.getAttribute("disabled","no");
 	// Make child widgets
 	this.makeChildWidgets();
 };
+
+ButtonWidget.prototype.updateDomNodeClasses = function() {
+	var domNodeClasses = this.domNode.className.split(" "),
+		oldClasses = this.class.split(" "),
+		newClasses;
+	this["class"] = this.getAttribute("class","");
+	newClasses = this.class.split(" ");
+	//Remove classes assigned from the old value of class attribute
+	$tw.utils.each(oldClasses,function(oldClass){
+		var i = domNodeClasses.indexOf(oldClass);
+		if(i !== -1) {
+			domNodeClasses.splice(i,1);
+		}
+	});
+	//Add new classes from updated class attribute.
+	$tw.utils.pushTop(domNodeClasses,newClasses);
+	this.domNode.className = domNodeClasses.join(" ");
+}
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle) {
+	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
+	} else if(changedAttributes["class"]) {
+		this.updateDomNodeClasses();
 	}
 	return this.refreshChildren(changedTiddlers);
 };

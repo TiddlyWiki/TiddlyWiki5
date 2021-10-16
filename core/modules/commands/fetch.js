@@ -71,7 +71,7 @@ Command.prototype.fetchFiles = function(options) {
 	if(options.url) {
 		urls = [options.url]
 	} else if(options.urlFilter) {
-		urls = $tw.wiki.filterTiddlers(options.urlFilter);
+		urls = this.commander.wiki.filterTiddlers(options.urlFilter);
 	} else {
 		return "Missing URL";
 	}
@@ -115,7 +115,7 @@ Command.prototype.fetchFile = function(url,options,callback,redirectCount) {
 	        	if(response.statusCode === 302 || response.statusCode === 303 || response.statusCode === 307) {
 	        		return self.fetchFile(response.headers.location,options,callback,redirectCount + 1);
 	        	} else {
-		        	return callback("Error " + response.statusCode + " retrieving " + url)	        		
+		        	return callback("Error " + response.statusCode + " retrieving " + url)
 	        	}
 	        }
 	   	});

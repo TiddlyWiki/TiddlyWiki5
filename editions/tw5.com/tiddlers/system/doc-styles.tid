@@ -145,6 +145,12 @@ tr.doc-table-subheading {
 	margin-top: 2em;
 }
 
+.doc-icon svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: middle;
+}
+
 .doc-icon-block {
 	border-left: 2px solid <<colour code-border>>;
 	margin-left: 3em;
@@ -196,4 +202,18 @@ tr.doc-table-subheading {
 	width: 1em;
 	height: 1em;
     vertical-align: text-bottom;
+}
+
+.doc-link-badge {
+    text-decoration: none;
+    background-color: #7eba4c;
+    color: <<colour foreground>>;
+    padding: 3px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75em;
+}
+
+.doc-link-badge:hover {
+    text-decoration: underline;
 }

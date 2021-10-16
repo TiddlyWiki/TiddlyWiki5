@@ -5,11 +5,12 @@ description: {{$:/language/Buttons/NewHere/Hint}}
 
 \whitespace trim
 \define newHereActions()
-<$set name="tags" filter="[<currentTiddler>]">
+<$set name="tags" filter="[<currentTiddler>] [{$:/config/NewTiddler/Tags}]">
 <$action-sendmessage $message="tm-new-tiddler" tags=<<tags>>/>
 </$set>
 \end
 \define newHereButton()
+\whitespace trim
 <$button actions=<<newHereActions>> tooltip={{$:/language/Buttons/NewHere/Hint}} aria-label={{$:/language/Buttons/NewHere/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/new-here-button}}

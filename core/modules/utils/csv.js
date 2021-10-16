@@ -38,7 +38,7 @@ exports.parseCsvStringWithHeader = function(text,options) {
 			var columnName = headings[column];
 			columnResult[columnName] = $tw.utils.trim(columns[column] || "");
 		}
-		results.push(columnResult);			
+		results.push(columnResult);
 	}
 	return results;
 }

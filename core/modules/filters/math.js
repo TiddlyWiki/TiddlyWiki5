@@ -91,6 +91,20 @@ exports.exponential = makeNumericBinaryOperator(
 	function(a,b) {return Number.prototype.toExponential.call(a,Math.min(Math.max(b,0),100));}
 );
 
+exports.power = makeNumericBinaryOperator(
+	function(a,b) {return Math.pow(a,b);}
+);
+
+exports.log = makeNumericBinaryOperator(
+	function(a,b) {
+		if(b) {
+			return Math.log(a)/Math.log(b);
+		} else {
+			return Math.log(a);
+		}
+	}
+);
+
 exports.sum = makeNumericReducingOperator(
 	function(accumulator,value) {return accumulator + value},
 	0 // Initial value
@@ -111,36 +125,94 @@ exports.minall = makeNumericReducingOperator(
 	Infinity // Initial value
 );
 
+exports.median = makeNumericArrayOperator(
+	function(values) {
+		var len = values.length, median;
+		values.sort();
+		if(len % 2) { 
+			// Odd, return the middle number
+			median = values[(len - 1) / 2];
+		} else {
+			// Even, return average of two middle numbers
+			median = (values[len / 2 - 1] + values[len / 2]) / 2;
+		}
+		return [median];
+	}
+);
+
+exports.average = makeNumericReducingOperator(
+	function(accumulator,value) {return accumulator + value},
+	0, // Initial value
+	function(finalValue,numberOfValues) {
+		return finalValue/numberOfValues;
+	}
+);
+
+exports.variance = makeNumericReducingOperator(
+	function(accumulator,value) {return accumulator + value},
+	0,
+	function(finalValue,numberOfValues,originalValues) {
+		return getVarianceFromArray(originalValues,finalValue/numberOfValues);
+	}
+);
+
+exports["standard-deviation"] = makeNumericReducingOperator(
+	function(accumulator,value) {return accumulator + value},
+	0,
+	function(finalValue,numberOfValues,originalValues) {
+		var variance = getVarianceFromArray(originalValues,finalValue/numberOfValues);
+		return Math.sqrt(variance);
+	}
+);
+
+//Calculate the variance of a population of numbers in an array given its mean
+function getVarianceFromArray(values,mean) {
+	var deviationTotal = values.reduce(function(accumulator,value) {
+		return accumulator + Math.pow(value - mean, 2);
+	},0);
+	return deviationTotal/values.length;
+};
+
 function makeNumericBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [],
-			numOperand = parseNumber(operator.operand);
+			numOperand = $tw.utils.parseNumber(operator.operand);
 		source(function(tiddler,title) {
-			result.push(stringifyNumber(fnCalc(parseNumber(title),numOperand)));
+			result.push($tw.utils.stringifyNumber(fnCalc($tw.utils.parseNumber(title),numOperand)));
 		});
 		return result;
 	};
-}
+};
 
-function makeNumericReducingOperator(fnCalc,initialValue) {
+function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 	initialValue = initialValue || 0;
 	return function(source,operator,options) {
 		var result = [];
 		source(function(tiddler,title) {
-			result.push(title);
+			result.push($tw.utils.parseNumber(title));
 		});
-		return [stringifyNumber(result.reduce(function(accumulator,currentValue) {
-			return fnCalc(accumulator,parseNumber(currentValue));
-		},initialValue))];
+		var value = result.reduce(function(accumulator,currentValue) {
+				return fnCalc(accumulator,currentValue);
+			},initialValue);
+		if(fnFinal) {
+			value = fnFinal(value,result.length,result);
+		}
+		return [$tw.utils.stringifyNumber(value)];
 	};
-}
+};
 
-function parseNumber(str) {
-	return parseFloat(str) || 0;
-}
-
-function stringifyNumber(num) {
-	return num + "";
-}
+function makeNumericArrayOperator(fnCalc) {
+	return function(source,operator,options) {
+		var results = [];
+		source(function(tiddler,title) {
+			results.push($tw.utils.parseNumber(title));
+		});
+		results = fnCalc(results);
+		$tw.utils.each(results,function(value,index) {
+			results[index] = $tw.utils.stringifyNumber(value);
+		});
+		return results;
+	};
+};
 
 })();

@@ -96,11 +96,8 @@ SelectWidget.prototype.setSelectValue = function() {
 		var select = this.getSelectDomNode();
 		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
-			if(values.indexOf(select.children[i].value) != -1) {
-				select.children[i].selected = true;
-			}
+			select.children[i].selected = values.indexOf(select.children[i].value) !== -1
 		}
-		
 	} else {
 		var domNode = this.getSelectDomNode();
 		if(domNode.value !== value) {
@@ -173,7 +170,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.selectTitle || changedAttributes.selectField || changedAttributes.selectIndex || changedAttributes.selectTooltip) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
 	// If the target tiddler value has changed, just update setting and refresh the children

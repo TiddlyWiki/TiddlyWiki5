@@ -7,13 +7,13 @@ type: text/vnd.tiddlywiki
 
 Available character formatting includes:
 
-* <code>&#96;backticks&#96;</code> for `code` ({{$:/core/images/mono-line}})
+* <code>&#96;backticks&#96;</code> for `code` (<<.icon $:/core/images/mono-line>>)
 ** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>
-* `''bold''` for ''bold text'' ({{$:/core/images/bold}})
-* `//italic//` for //italic text// ({{$:/core/images/italic}})
-* `__underscore__` for __underscored text__ ({{$:/core/images/underline}})
-* `^^superscript^^` for ^^superscripted^^ text ({{$:/core/images/superscript}})
-* `,,subscript,,` for ,,subscripted,, text ({{$:/core/images/subscript}})
-* `~~strikethrough~~` for ~~strikethrough~~ text ({{$:/core/images/strikethrough}})
+* `''bold''` for ''bold text'' (<<.icon $:/core/images/bold>>)
+* `//italic//` for //italic text// (<<.icon $:/core/images/italic>>)
+* `__underscore__` for __underscored text__ (<<.icon $:/core/images/underline>>)
+* `^^superscript^^` for ^^superscripted^^ text (<<.icon $:/core/images/superscript>>)
+* `,,subscript,,` for ,,subscripted,, text (<<.icon $:/core/images/subscript>>)
+* `~~strikethrough~~` for ~~strikethrough~~ text (<<.icon $:/core/images/strikethrough>>)
 
 See also: [[Code Blocks in WikiText]]

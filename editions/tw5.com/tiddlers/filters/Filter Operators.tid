@@ -1,12 +1,12 @@
 created: 20140410103123179
-modified: 20190206140446821
+modified: 20210830010231559
 tags: Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
 
 \define .operator-rows(filter)
 <$list filter="$filter$"><tr>
-<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td><$link>{{!!caption}}</$link></td>
 <td>{{!!op-purpose}}</td>
 <td align="center"><$list filter="[all[current]tag[Common Operators]]">✓</$list></td>
 <td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
@@ -36,9 +36,9 @@ The following table lists all core operators, the most common ones marked ✓. T
 <<.group-heading "Listops Operators">>
 <<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "String Operators">>
-<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[Mathematics Operators]tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "Mathematics Operators">>
-<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]tag[Mathematics Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "Tag Operators">>
 <<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[Mathematics Operators]!tag[String Operators]tag[Tag Operators]!tag[Special Operators]sort[]]">>
 <<.group-heading "Special Operators">>

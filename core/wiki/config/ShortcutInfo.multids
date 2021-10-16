@@ -1,8 +1,12 @@
 title: $:/config/ShortcutInfo/
 
+add-field: {{$:/language/EditTemplate/Fields/Add/Button/Hint}}
 advanced-search: {{$:/language/Buttons/AdvancedSearch/Hint}}
+advanced-search-sidebar: {{$:/language/Shortcuts/Input/AdvancedSearch/Hint}}
 bold: {{$:/language/Buttons/Bold/Hint}}
 cancel-edit-tiddler: {{$:/language/Buttons/Cancel/Hint}}
+change-sidebar-layout: {{$:/language/Shortcuts/SidebarLayout/Hint}}
+delete-field: {{$:/language/EditTemplate/Field/Remove/Hint}}
 excise: {{$:/language/Buttons/Excise/Hint}}
 heading-1: {{$:/language/Buttons/Heading1/Hint}}
 heading-2: {{$:/language/Buttons/Heading2/Hint}}
@@ -10,8 +14,17 @@ heading-3: {{$:/language/Buttons/Heading3/Hint}}
 heading-4: {{$:/language/Buttons/Heading4/Hint}}
 heading-5: {{$:/language/Buttons/Heading5/Hint}}
 heading-6: {{$:/language/Buttons/Heading6/Hint}}
+input-accept: {{$:/language/Shortcuts/Input/Accept/Hint}}
+input-accept-variant: {{$:/language/Shortcuts/Input/AcceptVariant/Hint}}
+input-cancel: {{$:/language/Shortcuts/Input/Cancel/Hint}}
+input-down: {{$:/language/Shortcuts/Input/Down/Hint}}
+input-tab-left: {{$:/language/Shortcuts/Input/Tab-Left/Hint}}
+input-tab-right: {{$:/language/Shortcuts/Input/Tab-Right/Hint}}
+input-up: {{$:/language/Shortcuts/Input/Up/Hint}}
 italic: {{$:/language/Buttons/Italic/Hint}}
+layout-switcher: {{$:/language/LayoutSwitcher/Description}}
 link: {{$:/language/Buttons/Link/Hint}}
+linkify: {{$:/language/Buttons/Linkify/Hint}}
 list-bullet: {{$:/language/Buttons/ListBullet/Hint}}
 list-number: {{$:/language/Buttons/ListNumber/Hint}}
 mono-block: {{$:/language/Buttons/MonoBlock/Hint}}
@@ -23,10 +36,12 @@ picture: {{$:/language/Buttons/Picture/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}
 save-tiddler: {{$:/language/Buttons/Save/Hint}}
+save-wiki: {{$:/language/Buttons/SaveWiki/Hint}}
 sidebar-search: {{$:/language/Buttons/SidebarSearch/Hint}}
 stamp: {{$:/language/Buttons/Stamp/Hint}}
 strikethrough: {{$:/language/Buttons/Strikethrough/Hint}}
 subscript: {{$:/language/Buttons/Subscript/Hint}}
 superscript: {{$:/language/Buttons/Superscript/Hint}}
 toggle-sidebar: {{$:/language/Buttons/ToggleSidebar/Hint}}
+transcludify: {{$:/language/Buttons/Transcludify/Hint}}
 underline: {{$:/language/Buttons/Underline/Hint}}

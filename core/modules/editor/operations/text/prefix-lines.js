@@ -13,12 +13,13 @@ Text editor operation to add a prefix to the selected lines
 "use strict";
 
 exports["prefix-lines"] = function(event,operation) {
+	var targetCount = parseInt(event.paramObject.count + "",10);
 	// Cut just past the preceding line break, or the start of the text
 	operation.cutStart = $tw.utils.findPrecedingLineBreak(operation.text,operation.selStart);
 	// Cut to just past the following line break, or to the end of the text
 	operation.cutEnd = $tw.utils.findFollowingLineBreak(operation.text,operation.selEnd);
 	// Compose the required prefix
-	var prefix = $tw.utils.repeat(event.paramObject.character,event.paramObject.count);
+	var prefix = $tw.utils.repeat(event.paramObject.character,targetCount);
 	// Process each line
 	var lines = operation.text.substring(operation.cutStart,operation.cutEnd).split(/\r?\n/mg);
 	$tw.utils.each(lines,function(line,index) {
@@ -33,7 +34,7 @@ exports["prefix-lines"] = function(event,operation) {
 			line = line.substring(1);
 		}
 		// We're done if we removed the exact required prefix, otherwise add it
-		if(count !== event.paramObject.count) {
+		if(count !== targetCount) {
 			// Apply the prefix
 			line =  prefix + " " + line;
 		}

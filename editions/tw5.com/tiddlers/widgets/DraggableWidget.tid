@@ -1,6 +1,6 @@
 caption: draggable
 created: 20170406081938627
-modified: 20190118084621046
+modified: 20210912141544224
 tags: Widgets
 title: DraggableWidget
 type: text/vnd.tiddlywiki
@@ -20,6 +20,7 @@ See DragAndDropMechanism for an overview.
 |tag |Optional tag to override the default "div" element |
 |startactions |Optional action string that gets invoked when dragging ''starts'' |
 |endactions |Optional action string that gets invoked when dragging ''ends'' |
+|dragimagetype |<<.from-version "5.2.0">> Optional type of drag image: `dom` (the default) or `blank` to disable the drag image |
 
 Either or both of the ''tiddler'' and ''filter'' attributes must be specified in order for there to be a payload to drag.
 

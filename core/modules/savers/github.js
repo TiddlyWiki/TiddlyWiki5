@@ -24,17 +24,18 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 		username = this.wiki.getTiddlerText("$:/GitHub/Username"),
 		password = $tw.utils.getPassword("github"),
 		repo = this.wiki.getTiddlerText("$:/GitHub/Repo"),
-		path = this.wiki.getTiddlerText("$:/GitHub/Path"),
+		path = this.wiki.getTiddlerText("$:/GitHub/Path",""),
 		filename = this.wiki.getTiddlerText("$:/GitHub/Filename"),
-		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "master",
+		branch = this.wiki.getTiddlerText("$:/GitHub/Branch") || "main",
 		endpoint = this.wiki.getTiddlerText("$:/GitHub/ServerURL") || "https://api.github.com",
 		headers = {
 			"Accept": "application/vnd.github.v3+json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password)
+			"Authorization": "Basic " + window.btoa(username + ":" + password),
+			"If-None-Match": ""
 		};
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
+	if(!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash
@@ -68,7 +69,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 				});
 			}
 			var data = {
-				message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				message: $tw.language.getString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: $tw.utils.base64Encode(text),
 				branch: branch,
 				sha: sha

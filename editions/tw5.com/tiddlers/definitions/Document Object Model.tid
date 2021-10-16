@@ -4,7 +4,7 @@ tags: Definitions
 title: Document Object Model
 type: text/vnd.tiddlywiki
 
-The <<.dlink-ex DOM "http://en.wikipedia.org/wiki/Document_Object_Model">> of a web page is a tree-shaped model of its content, maintained internally by the web browser as the user interacts with that content. Each point in the tree is called a <<.def node>>.
+The <<.dlink-ex DOM "https://en.wikipedia.org/wiki/Document_Object_Model">> of a web page is a tree-shaped model of its content, maintained internally by the web browser as the user interacts with that content. Each point in the tree is called a <<.def node>>.
 
 When ~TiddlyWiki is running in a web browser, its [[widgets|Widgets]] are rendered into DOM nodes for display.
 

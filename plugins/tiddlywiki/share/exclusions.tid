@@ -1,0 +1,2 @@
+title: $:/config/plugins/share/exclusions
+text: $:/library/sjcl.js $:/boot/bootprefix.js $:/boot/boot.js $:/boot/boot.css $:/core $:/isEncrypted $:/plugins/tiddlywiki/share $:/status/RequireReloadDueToPluginChange $:/temp/info-plugin $:/themes/tiddlywiki/snowwhite $:/themes/tiddlywiki/vanilla $:/HistoryList [prefix[$:/temp/]] [[$:/build]]

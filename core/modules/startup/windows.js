@@ -19,7 +19,7 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 // Global to keep track of open windows (hashmap by title)
-var windows = {};
+$tw.windows = {};
 
 exports.startup = function() {
 	// Handle open window message
@@ -44,7 +44,7 @@ exports.startup = function() {
 		catch(e) {
 			return;
 		}
-		windows[title] = srcWindow;
+		$tw.windows[title] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
 			return;
@@ -54,7 +54,7 @@ exports.startup = function() {
 		srcDocument.close();
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
-			delete windows[title];
+			delete $tw.windows[title];
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
@@ -84,16 +84,13 @@ exports.startup = function() {
 			name: "keydown",
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
-		},{
-			name: "click",
-			handlerObject: $tw.popup,
-			handlerMethod: "handleEvent"
 		}]);
+		srcWindow.document.documentElement.addEventListener("click",$tw.popup,true);
 		srcWindow.haveInitialisedWindow = true;
 	});
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(function() {
-		$tw.utils.each(windows,function(win) {
+		$tw.utils.each($tw.windows,function(win) {
 			win.close();
 		});
 	});

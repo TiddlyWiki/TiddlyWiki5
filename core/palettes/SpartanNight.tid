@@ -3,6 +3,7 @@ tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 description: Dark spartan colors
 name: Spartan Night
+color-scheme: dark
 
 alert-background: <<colour background>>
 alert-border: <<colour very-muted-foreground>>

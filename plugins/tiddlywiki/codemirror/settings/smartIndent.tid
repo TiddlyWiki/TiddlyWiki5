@@ -1,0 +1,8 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/smartIndent
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/smartIndent/hint}}
+
+\define lingo-base() $:/language/codemirror/smartIndent/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/smartIndent" field="text" checked="true" unchecked="false" default="true"> <$link to="$:/config/codemirror/smartIndent"><<lingo info>></$link> </$checkbox>

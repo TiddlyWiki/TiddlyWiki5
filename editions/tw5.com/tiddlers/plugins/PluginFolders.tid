@@ -1,5 +1,5 @@
 created: 20161015113519246
-modified: 20161015113833256
+modified: 20190927172743140
 tags: PluginMechanism
 title: PluginFolders
 type: text/vnd.tiddlywiki
@@ -13,6 +13,7 @@ The JSON structure for plugin tiddlers is as follows:
 ```
 {
 	"title": "$:/plugins/publisher/name",
+	"name": "name",
 	"description": "An exemplary plugin for demonstration purposes",
 	"author": "JeremyRuston",
 	"version": "1.2.3-alpha3",

@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/tiddlyweb",
-	"description": "TiddlyWeb and TiddlySpace components",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"list": "readme"
+	"name": "TiddlyWeb",
+	"description": "Sync changes from the browser to TW5 (node.js) or TiddlyWeb server",
+	"list": "readme",
+	"plugin-priority": 10
 }

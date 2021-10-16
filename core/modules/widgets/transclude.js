@@ -43,6 +43,7 @@ TranscludeWidget.prototype.execute = function() {
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	this.transcludeMode = this.getAttribute("mode");
+	this.recursionMarker = this.getAttribute("recursionMarker","yes");
 	// Parse the text reference
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
@@ -60,9 +61,13 @@ TranscludeWidget.prototype.execute = function() {
 							subTiddler: this.transcludeSubTiddler
 						}),
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
+	this.sourceText = parser ? parser.source : null;
+	this.parserType = parser? parser.type : null;
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();
-	this.setVariable("transclusion",recursionMarker);
+	if(this.recursionMarker === "yes") {
+		this.setVariable("transclusion",recursionMarker);
+	}
 	// Check for recursion
 	if(parser) {
 		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
@@ -96,16 +101,21 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 	return output.join("");
 };
 
+TranscludeWidget.prototype.parserNeedsRefresh = function() {
+	var parserInfo = this.wiki.getTextReferenceParserInfo(this.transcludeTitle,this.transcludeField,this.transcludeIndex,{subTiddler:this.transcludeSubTiddler});
+	return (this.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType)
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.transcludeTitle]) {
+	if(($tw.utils.count(changedAttributes) > 0) || (changedTiddlers[this.transcludeTitle] && this.parserNeedsRefresh())) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 

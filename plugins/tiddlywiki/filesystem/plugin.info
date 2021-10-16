@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/filesystem",
-	"description": "Local filesystem syncadaptor",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
+	"name": "Filesystem",
+	"description": "Synchronize changes from the node.js server to the local filesystem",
 	"list": "readme"
 }

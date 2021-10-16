@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/storyview-classic}} {{$:/language/Buttons/StoryView/Caption}}
 description: {{$:/language/Buttons/StoryView/Hint}}
 
+\whitespace trim
 \define icon()
 $:/core/images/storyview-$(storyview)$
 \end

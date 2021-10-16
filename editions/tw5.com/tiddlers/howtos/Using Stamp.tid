@@ -5,24 +5,23 @@ title: Using Stamp
 type: text/vnd.tiddlywiki
 
 ! Insert snippets
-You can insert preconfigured snippets of text to use stamp from toolbar. Click ''stamp'' ({{$:/core/images/stamp}}) and just select a snippet.
+You can insert preconfigured snippets of text to use stamp from toolbar. Click ''stamp'' (<<.icon $:/core/images/stamp>>) and just select a snippet.
 
 ! Create a snippet
-# Click ''stamp'' ({{$:/core/images/stamp}})
+# Click ''stamp'' (<<.icon $:/core/images/stamp>>)
 # Create a snippet tiddler through the "//Add your own//" menu entry
 # Type some text as snippet for the tiddler, add a caption for the name as shown in the menu
-# Click the {{$:/core/images/done-button}} ''ok'' button
+# Click the <<.icon $:/core/images/done-button>> ''ok'' button
 
-<<.tip """''Tip:'' You can also create a snippet tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar, and add tag ''~$:/tags/TextEditor/Snippet''""">>
-
+<$macrocall $name=".tip" _="""''Tip:'' You can also create a snippet tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar, and add tag ''~$:/tags/TextEditor/Snippet''""" />
 
 !!<<.from-version "5.1.20">> Adding a prefix and/or suffix to a selection
 
-# Click ''stamp'' ({{$:/core/images/stamp}})
+# Click ''stamp'' (<<.icon $:/core/images/stamp>>)
 # Create a snippet tiddler through the "//Add your own//" menu entry
 # Add a caption for the name as shown in the menu
 # Create a tiddler with the same title but add the suffix `/prefix`
 # Insert the prefix in its text field
 # Create a tiddler with the same title but add the suffix `/suffix`
 # Insert the suffix in its text field
-# Click the {{$:/core/images/done-button}} ''ok'' button
+# Click the <<.icon $:/core/images/done-button>> ''ok'' button

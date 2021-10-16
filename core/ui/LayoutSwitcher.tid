@@ -1,0 +1,17 @@
+title: $:/snippets/LayoutSwitcher
+tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
+
+<$linkcatcher to="$:/layout">
+<div class="tc-chooser">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] [[$:/core/ui/PageTemplate]] +[!is[draft]sort[name]]">
+<$list filter="[{$:/layout}!has[text]]" variable="ignore" emptyMessage="""
+<$set name="cls" filter="[all[current]field:title{$:/layout}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>><$link to={{!!title}}>''<$transclude field="name"/>'' - <$transclude field="description"/></$link></div>
+</$set>
+""">
+<$set name="cls" filter="[all[current]field:title[$:/core/ui/PageTemplate]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>><$link to={{!!title}}>''<$transclude field="name"/>'' - <$transclude field="description"/></$link></div>
+</$set>
+</$list>
+</$list>
+</div>
+</$linkcatcher>

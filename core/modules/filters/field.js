@@ -17,7 +17,7 @@ Export our filter function
 */
 exports.field = function(source,operator,options) {
 	var results = [],indexedResults,
-		fieldname = (operator.suffix || operator.operator || "title").toLowerCase();
+		fieldname = operator.suffix || operator.operator || "title";
 	if(operator.prefix === "!") {
 		if(operator.regexp) {
 			source(function(tiddler,title) {
@@ -53,7 +53,7 @@ exports.field = function(source,operator,options) {
 				}
 			});
 		} else {
-			if(source.byField) {
+			if(source.byField && operator.operand) {
 				indexedResults = source.byField(fieldname,operator.operand);
 				if(indexedResults) {
 					return indexedResults

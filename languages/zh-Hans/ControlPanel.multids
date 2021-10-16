@@ -4,25 +4,29 @@ Advanced/Caption: 高级
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Appearance/Caption: 视觉外观
 Appearance/Hint: 定制您的 TiddlyWiki 外观。
-Basics/AnimDuration/Prompt: 动画持续时间：
+Basics/AnimDuration/Prompt: 动画持续时间
+Basics/AutoFocus/Prompt: 编辑条目时的默认自动停留栏位
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
-Basics/DefaultTiddlers/Prompt: 首页：
-Basics/DefaultTiddlers/TopHint: 默认开启的条目：
+Basics/DefaultTiddlers/Prompt: 首页
+Basics/DefaultTiddlers/TopHint: 默认开启的条目
 Basics/Language/Prompt: 您好！当前的语言：
 Basics/NewJournal/Tags/Prompt: 新日志条目的标签
 Basics/NewJournal/Text/Prompt: 新日志条目的内容
 Basics/NewJournal/Title/Prompt: 新日志条目的名称
+Basics/NewTiddler/Tags/Prompt: 新条目的标签
 Basics/NewTiddler/Title/Prompt: 新条目的名称
-Basics/OverriddenShadowTiddlers/Prompt: 被覆写的默认条目数量：
-Basics/ShadowTiddlers/Prompt: 默认条目数量：
-Basics/Subtitle/Prompt: 副标题：
-Basics/SystemTiddlers/Prompt: 系统条目数量：
-Basics/Tags/Prompt: 标签数量：
-Basics/Tiddlers/Prompt: 一般条目数量：
-Basics/Title/Prompt: 标题：
-Basics/Username/Prompt: 编辑者署名：
-Basics/Version/Prompt: ~TiddlyWiki 版本：
+Basics/OverriddenShadowTiddlers/Prompt: 被覆盖的默认条目数量
+Basics/RemoveTags: 更新到当前格式
+Basics/RemoveTags/Hint: 将标签配置更新为最新格式
+Basics/ShadowTiddlers/Prompt: 默认条目数量
+Basics/Subtitle/Prompt: 副标题
+Basics/SystemTiddlers/Prompt: 系统条目数量
+Basics/Tags/Prompt: 标签数量
+Basics/Tiddlers/Prompt: 一般条目数量
+Basics/Title/Prompt: 标题
+Basics/Username/Prompt: 编辑者署名
+Basics/Version/Prompt: ~TiddlyWiki 版本
 EditorTypes/Caption: 编辑器类型
 EditorTypes/Editor/Caption: 编辑器
 EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
@@ -42,6 +46,7 @@ KeyboardShortcuts/Platform/Linux: 仅 Linux 平台
 KeyboardShortcuts/Platform/NonLinux: 仅非 Linux 平台
 KeyboardShortcuts/Platform/Windows: 仅 Windows 平台
 KeyboardShortcuts/Platform/NonWindows: 仅非 Windows 平台
+LayoutSwitcher/Caption: 布局
 LoadedModules/Caption: 已加载的模块
 LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
 Palette/Caption: 调色板
@@ -58,10 +63,12 @@ Palette/ShowEditor/Caption: 显示编辑器
 Plugins/Add/Hint: 从官方插件库安装插件
 Plugins/Add/Caption: 获取更多插件
 Plugins/AlreadyInstalled/Hint: 此插件已经安装版本 <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: 还需要：
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 禁用
 Plugins/Disable/Hint: 重新加载页面时禁用此插件
 Plugins/Disabled/Status: (已禁用)
+Plugins/Downgrade/Caption: 降级
 Plugins/Empty/Hint: 无
 Plugins/Enable/Caption: 启用
 Plugins/Enable/Hint: 重新加载页面时启用此插件
@@ -74,11 +81,17 @@ Plugins/NoInformation/Hint: 未提供信息
 Plugins/NotInstalled/Hint: 尚未安装此插件
 Plugins/OpenPluginLibrary: 开启插件程式库
 Plugins/ClosePluginLibrary: 关闭插件程式库
+Plugins/PluginWillRequireReload: （需要重新加载）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装
 Plugins/Themes/Caption: 布景主题
 Plugins/Themes/Hint: 布景主题插件
+Plugins/Update/Caption: 更新
+Plugins/Updates/Caption: 更新
+Plugins/Updates/Hint: 已安装插件的可用更新
+Plugins/Updates/UpdateAll/Caption: 更新 <<update-count>> 个插件
+Plugins/SubPluginPrompt: 提供 <<count>> 个可用的附加插件
 Parsing/Caption: 解析
 Parsing/Hint: 在此您可以全域禁用或启用维基解析规则。要使更改生效，请保存并重新加载您的维基。禁用某些解析规则，会妨碍 <$text text="TiddlyWiki"/> 正常运作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢复正常操作。
 Parsing/Block/Caption: 区块解析规则
@@ -104,15 +117,19 @@ Saving/GitService/GitHub/Caption: ~GitHub 保存模块
 Saving/GitService/GitHub/Password: 密码、OAUTH 令牌，或个人存取令牌 (详见 [[GitHub 帮助页面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
 Saving/GitService/GitLab/Caption: ~GitLab 保存模块
 Saving/GitService/GitLab/Password: 个人存取令牌的 API (详见 [[GitLab 帮助页面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
+Saving/GitService/Gitea/Caption: Gitea 保存模块
+Saving/GitService/Gitea/Password: 个人存取令牌的 API (通过 Gitea 的 Web 界面：`设定 | 应用程序 | 产生新的令牌`)
 Saving/TiddlySpot/Advanced/Heading: 高级设置
 Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
 Saving/TiddlySpot/Caption: ~TiddlySpot 保存模块
-Saving/TiddlySpot/Description: 这些设置只适用于保存到 http://tiddlyspot.com 或兼容的远程服务器时。
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
+Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlySpot|http://tiddlyspot.com]]、[[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlySpot 和 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]。
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密码
+Saving/TiddlySpot/ReadOnly: 请注意，[[TiddlySpot|http://tiddlyspot.com]] 不再允许创建新网站。对于新网站，您可以使用 [[TiddlyHost|https://tiddlyhost.com]]，一个新的取代 ~TiddlySpot 的讬管服务 。
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹
 Saving/TiddlySpot/UserName: 用户

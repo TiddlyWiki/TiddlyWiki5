@@ -19,32 +19,30 @@ exports.path = /^\/files\/(.+)$/;
 exports.handler = function(request,response,state) {
 	var path = require("path"),
 		fs = require("fs"),
-		util = require("util");
-	var filename = path.resolve($tw.boot.wikiPath,"files",decodeURIComponent(state.params[0])),
+		util = require("util"),
+		suppliedFilename = $tw.utils.decodeURIComponentSafe(state.params[0]),
+		baseFilename = path.resolve(state.boot.wikiPath,"files"),
+		filename = path.resolve(baseFilename,suppliedFilename),
 		extension = path.extname(filename);
-	fs.readFile(filename,function(err,content) {
-		var status,content,type = "text/plain";
-		if(err) {
-			if(err.code === "ENOENT") {
+	// Check that the filename is inside the wiki files folder
+	if(path.relative(baseFilename,filename).indexOf("..") !== 0) {
+		// Send the file
+		fs.readFile(filename,function(err,content) {
+			var status,content,type = "text/plain";
+			if(err) {
+				console.log("Error accessing file " + filename + ": " + err.toString());
 				status = 404;
-				content = "File '" + filename + "' not found";
-			} else if(err.code === "EACCES") {
-				status = 403;
-				content = "You do not have permission to access the file '" + filename + "'";
+				content = "File '" + suppliedFilename + "' not found";
 			} else {
-				status = 500;
-				content = err.toString();
+				status = 200;
+				content = content;
+				type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream");
 			}
-		} else {
-			status = 200;
-			content = content;
-			type = ($tw.config.fileExtensionInfo[extension] ? $tw.config.fileExtensionInfo[extension].type : "application/octet-stream");
-		}
-		response.writeHead(status,{
-			"Content-Type": type
+			state.sendResponse(status,{"Content-Type": type},content);
 		});
-		response.end(content);
-	});
+	} else {
+		state.sendResponse(404,{"Content-Type": "text/plain"},"File '" + suppliedFilename + "' not found");
+	}
 };
 
 }());

@@ -4,25 +4,29 @@ Advanced/Caption: Advanced
 Advanced/Hint: Internal information about this TiddlyWiki
 Appearance/Caption: Appearance
 Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
-Basics/AnimDuration/Prompt: Animation duration:
+Basics/AnimDuration/Prompt: Animation duration
+Basics/AutoFocus/Prompt: Default focus field for new tiddlers
 Basics/Caption: Basics
 Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
-Basics/DefaultTiddlers/Prompt: Default tiddlers:
-Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup:
+Basics/DefaultTiddlers/Prompt: Default tiddlers
+Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup
 Basics/Language/Prompt: Hello! Current language:
 Basics/NewJournal/Title/Prompt: Title of new journal tiddlers
 Basics/NewJournal/Text/Prompt: Text for new journal tiddlers
 Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
 Basics/NewTiddler/Title/Prompt: Title of new tiddlers
-Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
-Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:
-Basics/Subtitle/Prompt: Subtitle:
-Basics/SystemTiddlers/Prompt: Number of system tiddlers:
-Basics/Tags/Prompt: Number of tags:
-Basics/Tiddlers/Prompt: Number of tiddlers:
-Basics/Title/Prompt: Title of this ~TiddlyWiki:
-Basics/Username/Prompt: Username for signing edits:
-Basics/Version/Prompt: ~TiddlyWiki version:
+Basics/NewTiddler/Tags/Prompt: Tags for new tiddlers
+Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers
+Basics/RemoveTags: Update to current format
+Basics/RemoveTags/Hint: Update the tags configuration to the latest format
+Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers
+Basics/Subtitle/Prompt: Subtitle
+Basics/SystemTiddlers/Prompt: Number of system tiddlers
+Basics/Tags/Prompt: Number of tags
+Basics/Tiddlers/Prompt: Number of tiddlers
+Basics/Title/Prompt: Title of this ~TiddlyWiki
+Basics/Username/Prompt: Username for signing edits
+Basics/Version/Prompt: ~TiddlyWiki version
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
@@ -42,6 +46,7 @@ KeyboardShortcuts/Platform/Linux: Linux platform only
 KeyboardShortcuts/Platform/NonLinux: Non-Linux platforms only
 KeyboardShortcuts/Platform/Windows: Windows platform only
 KeyboardShortcuts/Platform/NonWindows: Non-Windows platforms only
+LayoutSwitcher/Caption: Layout
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
@@ -63,10 +68,12 @@ Parsing/Pragma/Caption: Pragma Parse Rules
 Plugins/Add/Caption: Get more plugins
 Plugins/Add/Hint: Install plugins from the official library
 Plugins/AlreadyInstalled/Hint: This plugin is already installed at version <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Also requires:
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
 Plugins/Disabled/Status: (disabled)
+Plugins/Downgrade/Caption: downgrade
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
@@ -78,11 +85,17 @@ Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
 Plugins/NotInstalled/Hint: This plugin is not currently installed
 Plugins/OpenPluginLibrary: open plugin library
 Plugins/ClosePluginLibrary: close plugin library
+Plugins/PluginWillRequireReload: (requires reload)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
+Plugins/Update/Caption: update
+Plugins/Updates/Caption: Updates
+Plugins/Updates/Hint: Available updates to installed plugins
+Plugins/Updates/UpdateAll/Caption: Update <<update-count>> plugins
+Plugins/SubPluginPrompt: With <<count>> sub-plugins available
 Saving/Caption: Saving
 Saving/DownloadSaver/AutoSave/Description: Permit automatic saving for the download saver
 Saving/DownloadSaver/AutoSave/Hint: Enable Autosave for Download Saver
@@ -103,15 +116,19 @@ Saving/GitService/GitHub/Caption: ~GitHub Saver
 Saving/GitService/GitHub/Password: Password, OAUTH token, or personal access token (see [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] for details)
 Saving/GitService/GitLab/Caption: ~GitLab Saver
 Saving/GitService/GitLab/Password: Personal access token for API (see [[GitLab help page|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] for details)
+Saving/GitService/Gitea/Caption: Gitea Saver
+Saving/GitService/Gitea/Password: Personal access token for API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
 Saving/TiddlySpot/BackupDir: Backup Directory
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot Control Panel
 Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Caption: ~TiddlySpot Saver
-Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
+Saving/TiddlySpot/Description: These settings are only used when saving to [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], or a compatible remote server. See [[here|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] for information on ~TiddlySpot and ~TiddlyHost saving configuration.
 Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
+Saving/TiddlySpot/ReadOnly: Note that [[TiddlySpot|http://tiddlyspot.com]] no longer allows the creation of new sites. For new sites, you can use [[TiddlyHost|https://tiddlyhost.com]], a new hosting service that replaces ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name

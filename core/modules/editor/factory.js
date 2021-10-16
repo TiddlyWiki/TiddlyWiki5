@@ -103,7 +103,11 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 			var tiddler = this.wiki.getTiddler(this.editTitle);
 			if(tiddler) {
 				// If we've got a tiddler, the value to display is the field string value
-				value = tiddler.getFieldString(this.editField);
+				if(tiddler.hasField(this.editField)) {
+					value = tiddler.getFieldString(this.editField);
+				} else {
+					value = this.editDefault || "";
+				}
 				if(this.editField === "text") {
 					type = tiddler.fields.type || "text/vnd.tiddlywiki";
 				}
@@ -177,6 +181,12 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
 		this.editTabIndex = this.getAttribute("tabindex");
+		this.editCancelPopups = this.getAttribute("cancelPopups","") === "yes";
+		this.editInputActions = this.getAttribute("inputActions");
+		this.editRefreshTitle = this.getAttribute("refreshTitle");
+		this.editAutoComplete = this.getAttribute("autocomplete");
+		this.isDisabled = this.getAttribute("disabled","no");
+		this.isFileDropEnabled = this.getAttribute("fileDrop","no") === "yes";
 		// Get the default editor element tag and type
 		var tag,type;
 		if(this.editField === "text") {
@@ -208,9 +218,11 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE]) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
+		} else if (changedTiddlers[this.editRefreshTitle]) {
+			this.engine.updateDomNodeText(this.getEditInfo().value);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
@@ -246,13 +258,6 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(text !== editInfo.value) {
 			editInfo.update(text);
 		}
-	};
-
-	/*
-	Cancel Popups
-	*/
-	EditTextWidget.prototype.cancelPopups = function() {
-		$tw.popup.cancel(0,this.engine.domNode);
 	};
 
 	/*
@@ -293,21 +298,89 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	Propogate keydown events to our container for the keyboard widgets benefit
 	*/
 	EditTextWidget.prototype.propogateKeydownEvent = function(event) {
-		var newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
-		if(newEvent.initEvent) {
-			newEvent.initEvent("keydown", true, true);
-		}
-		newEvent.keyCode = event.keyCode;
-		newEvent.which = event.which;
-		newEvent.metaKey = event.metaKey;
-		newEvent.ctrlKey = event.ctrlKey;
-		newEvent.altKey = event.altKey;
-		newEvent.shiftKey = event.shiftKey;
+		var newEvent = this.cloneEvent(event,["keyCode","which","metaKey","ctrlKey","altKey","shiftKey"]);
 		return !this.parentDomNode.dispatchEvent(newEvent);
 	};
 
-	return EditTextWidget;
+	EditTextWidget.prototype.cloneEvent = function(event,propertiesToCopy) {
+		var propertiesToCopy = propertiesToCopy || [],
+			newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
+		if(newEvent.initEvent) {
+			newEvent.initEvent(event.type, true, true);
+		}
+		$tw.utils.each(propertiesToCopy,function(prop){
+			newEvent[prop] = event[prop];
+		});
+		return newEvent;
+	};
 
+	EditTextWidget.prototype.dispatchDOMEvent = function(newEvent) {
+		var dispatchNode = this.engine.iframeNode || this.engine.parentNode;
+		return dispatchNode.dispatchEvent(newEvent);
+	};
+
+	/*
+	Propogate drag and drop events with File data to our container for the dropzone widgets benefit.
+	If there are no Files, let the browser handle it.
+	*/
+	EditTextWidget.prototype.handleDropEvent = function(event) {
+		if(event.dataTransfer.files.length) {
+			event.preventDefault();
+			event.stopPropagation();
+			this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
+		} 
+	};
+
+	EditTextWidget.prototype.handlePasteEvent = function(event) {
+		if(event.clipboardData && event.clipboardData.files && event.clipboardData.files.length) {
+			event.preventDefault();
+			event.stopPropagation();
+			this.dispatchDOMEvent(this.cloneEvent(event,["clipboardData"]));
+		}
+	};
+
+	EditTextWidget.prototype.handleDragEnterEvent = function(event) {
+		if($tw.utils.dragEventContainsFiles(event)) {
+			// Ignore excessive events fired by FF when entering and leaving text nodes in a text area.
+			if( event.relatedTarget && (event.relatedTarget.nodeType === 3 || event.target === event.relatedTarget)) {
+				return true;
+			}
+			event.preventDefault();
+			return this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
+		}
+		return true;
+	};
+
+	EditTextWidget.prototype.handleDragOverEvent = function(event) {
+		if($tw.utils.dragEventContainsFiles(event)) {
+			// Call preventDefault() in browsers that default to not allowing drop events on textarea
+			if($tw.browser.isFirefox || $tw.browser.isIE) {
+				event.preventDefault();
+			}
+			event.dataTransfer.dropEffect = "copy";
+			return this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
+		}
+		return true;
+	};
+
+	EditTextWidget.prototype.handleDragLeaveEvent = function(event) {
+		// Ignore excessive events fired by FF when entering and leaving text nodes in a text area.
+		if(event.relatedTarget && ((event.relatedTarget.nodeType === 3) || (event.target === event.relatedTarget))) {
+			return true;
+		}
+		event.preventDefault();
+		this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
+	};
+
+	EditTextWidget.prototype.handleDragEndEvent = function(event) {
+		this.dispatchDOMEvent(this.cloneEvent(event));
+	};
+
+	EditTextWidget.prototype.handleClickEvent = function(event) {
+		return !this.dispatchDOMEvent(this.cloneEvent(event));
+	};
+
+	return EditTextWidget;
 }
 
 exports.editTextWidgetFactory = editTextWidgetFactory;

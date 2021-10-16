@@ -5,4 +5,4 @@ caption: {{$:/language/ControlPanel/Plugins/Caption}}
 
 {{$:/language/ControlPanel/Plugins/Installed/Hint}}
 
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/MoreSideBar/Plugins]!has[draft.of]]" "$:/core/ui/MoreSideBar/Plugins/Plugins">>
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/MoreSideBar/Plugins]!has[draft.of]]" default="$:/core/ui/MoreSideBar/Plugins/Plugins" explicitState="$:/state/tab-1163638994"/>

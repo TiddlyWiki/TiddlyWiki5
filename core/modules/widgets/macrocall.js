@@ -44,7 +44,7 @@ MacroCallWidget.prototype.execute = function() {
 	var params = this.parseTreeNode.params ? this.parseTreeNode.params.slice(0) : [];
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
-			params.push({name: name, value: attribute});			
+			params.push({name: name, value: attribute});
 		}
 	});
 	// Get the macro value
@@ -55,12 +55,24 @@ MacroCallWidget.prototype.execute = function() {
 	// Are we rendering to HTML?
 	if(this.renderOutput === "text/html") {
 		// If so we'll return the parsed macro
-		var parser = this.wiki.parseText(this.parseType,text,
-							{
-								parseAsInline: !this.parseTreeNode.isBlock,
-								autoParagraph: this.getVariable("tv-auto-paragraph") !== "no"
-							});
-		parseTreeNodes = parser ? parser.tree : [];
+		// Check if we've already cached parsing this macro
+		var mode = this.parseTreeNode.isBlock ? "blockParser" : "inlineParser",
+      para = this.getVariable("tv-auto-paragraph") !== "no" ? "paraYes" : "paraNo",
+			parser;
+		if(variableInfo.srcVariable && variableInfo.srcVariable[mode] && variableInfo.srcVariable[mode][para]) {
+			parser = variableInfo.srcVariable[mode][para];
+		} else {
+			parser = this.wiki.parseText(this.parseType,text,
+            {
+              parseAsInline: !this.parseTreeNode.isBlock,
+              autoParagraph: this.getVariable("tv-auto-paragraph") !== "no"
+            });
+			if(variableInfo.isCacheable && variableInfo.srcVariable) {
+				variableInfo.srcVariable[mode] = variableInfo.srcVariable[mode] || {};
+        variableInfo.srcVariable[mode][para] = parser;
+			}
+		}
+		var parseTreeNodes = parser ? parser.tree : [];
 		// Wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 		var attributes = {};
 		$tw.utils.each(variableInfo.params,function(param) {
@@ -76,6 +88,8 @@ MacroCallWidget.prototype.execute = function() {
 			attributes: attributes,
 			children: parseTreeNodes
 		}];
+	} else if(this.renderOutput === "text/raw") {
+		parseTreeNodes = [{type: "text", text: text}];
 	} else {
 		// Otherwise, we'll render the text
 		var plainText = this.wiki.renderText("text/plain",this.parseType,text,{parentWidget: this});

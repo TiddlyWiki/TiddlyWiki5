@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/globe}} {{$:/language/Buttons/Language/Caption}}
 description: {{$:/language/Buttons/Language/Hint}}
 
+\whitespace trim
 \define flag-title()
 $(languagePluginTitle)$/icon
 \end

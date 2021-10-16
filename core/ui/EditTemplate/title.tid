@@ -1,7 +1,7 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
-<$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus="true" tabindex={{$:/config/EditTabIndex}}/>
+<$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}} tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
 
@@ -23,7 +23,7 @@ tags: $:/tags/EditTemplate
 
 <div class="tc-message-box">
 
-{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/Exists/Prompt}}
+{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/Exists/Prompt}}: <$link to={{!!draft.title}} />
 
 </div>
 

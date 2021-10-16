@@ -1,10 +1,12 @@
 caption: ~TiddlyIE
+color: #4DB6AC
+community-author: David Jade
 created: 20131211220000000
 delivery: Browser Extension
 description: Browser extension for Internet Explorer
 method: save
-modified: 20171113110036278
-tags: Saving InternetExplorer
+modified: 20200507201415232
+tags: [[Internet Explorer]] Saving
 title: Saving with TiddlyIE
 type: text/vnd.tiddlywiki
 
@@ -17,6 +19,6 @@ type: text/vnd.tiddlywiki
 # Locate the file you just downloaded
 #* You may rename it, but be sure to keep the `.html` or `.htm` extension
 # Open the file in Internet Explorer
-# Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''ok'' button
-# Save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar. Internet Explorer will ask for your consent to save the file locally by presenting a file ''Save As'' dialog.
+# Try creating a new tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar. Type some content for the tiddler, and click the <<.icon $:/core/images/done-button>> ''ok'' button
+# Save your changes by clicking the <<.icon $:/core/images/save-button>> ''save changes'' button in the sidebar. Internet Explorer will ask for your consent to save the file locally by presenting a file ''Save As'' dialog.
 # Refresh the browser window to verify that your changes have been saved correctly

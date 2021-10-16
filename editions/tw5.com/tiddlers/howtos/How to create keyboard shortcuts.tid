@@ -14,7 +14,7 @@ A tiddler with the <<.def prefix>> `$:/config/ShortcutInfo/` and a ''unique suff
 
 In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the ''key combination'' that should trigger the shortcut can be configured:
 
-> Look for the ''unique suffix'' defined for the new shortcut and click the <$button class="tc-btn-invisible">{{$:/core/images/edit-button}}<$action-sendmessage $message="tm-notify" $param="$:/core/images/edit-button"/></$button> button to open a popup that detects ''key combinations'' and shows the detected combination in its input field
+> Look for the ''unique suffix'' defined for the new shortcut and click the <$button class="tc-btn-invisible"><<.icon $:/core/images/edit-button>><$action-sendmessage $message="tm-notify" $param="$:/core/images/edit-button"/></$button> button to open a popup that detects ''key combinations'' and shows the detected combination in its input field
 
 >The ''add shortcut'' assigns the key-combination to the shortcut
 
@@ -34,7 +34,7 @@ In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the 
 * $:/config/shortcuts-not-windows/`my-shortcut`
 * $:/config/shortcuts-not-linux/`my-shortcut`
 
-<<.tip """Note that those platform-specific tiddlers don't have to be created manually if the ''ShortcutInfo'' tiddler as mentioned above is created first and and the shortcut is configured in the ~ControlPanel""">>
+<<.tip """Note that those platform-specific tiddlers don't have to be created manually if the ''ShortcutInfo'' tiddler as mentioned above is created first and the shortcut is configured in the ~ControlPanel""">>
 
 <br>
 
@@ -98,7 +98,7 @@ If the tiddler that contains the macro definition is known and - for example - t
 !!! Messages
 
 <$list filter="[tag[navigator-message]]">
-<$link to={{!!title}}><$view field="title"/></$link><br>
+<$link/><br>
 </$list>
 
 </$vars>

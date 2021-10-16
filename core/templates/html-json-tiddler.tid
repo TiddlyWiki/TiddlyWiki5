@@ -1,0 +1,3 @@
+title: $:/core/templates/html-json-tiddler
+
+<$list filter="[<counter>!match[1]]">`,`<$text text=<<newline>>/></$list><$jsontiddler tiddler=<<currentTiddler>> escapeUnsafeScriptChars="yes"/>

@@ -17,7 +17,7 @@ exports.name = "favicon";
 exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
-		
+
 // Favicon tiddler
 var FAVICON_TITLE = "$:/favicon.ico";
 
@@ -36,7 +36,7 @@ function setFavicon() {
 	var tiddler = $tw.wiki.getTiddler(FAVICON_TITLE);
 	if(tiddler) {
 		var faviconLink = document.getElementById("faviconLink");
-		faviconLink.setAttribute("href","data:" + tiddler.fields.type + ";base64," + tiddler.fields.text);
+		faviconLink.setAttribute("href",$tw.utils.makeDataUri(tiddler.fields.text,tiddler.fields.type,tiddler.fields._canonical_uri));
 	}
 }
 

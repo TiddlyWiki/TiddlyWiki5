@@ -5,6 +5,7 @@ Advanced/Hint: Interne informatie over deze TiddlyWiki
 Appearance/Caption: Uiterlijk
 Appearance/Hint: Manieren om het uiterlijk van je TiddlyWiki aan te passen
 Basics/AnimDuration/Prompt: Duur van de animatie:
+Basics/AutoFocus/Prompt: Standaard 'focus' veld van een nieuwe tiddler
 Basics/Caption: Standaard
 Basics/DefaultTiddlers/BottomHint: Gebruik &#91;&#91;dubbele rechte haken&#93;&#93; voor titels met spaties. Of je kan <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]"> kiezen voor behoud van open tiddlers
 Basics/DefaultTiddlers/Prompt: Standaard tiddlers:
@@ -13,6 +14,7 @@ Basics/Language/Prompt: Hallo! Huidige taal:
 Basics/NewJournal/Tags/Prompt: Labels voor nieuwe journaaltiddlers
 Basics/NewJournal/Text/Prompt: Tekst voor nieuwe journaaltiddlers
 Basics/NewJournal/Title/Prompt: Titel voor nieuwe journaaltiddlers
+Basics/NewTiddler/Tags/Prompt: Labels voor nieuwe tiddlers
 Basics/NewTiddler/Title/Prompt: Titel voor nieuwe tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Aantal overschreven schaduwtiddlers:
 Basics/ShadowTiddlers/Prompt: Aantal schaduwtiddlers:
@@ -47,6 +49,8 @@ LoadedModules/Hint: Dit zijn de nu geladen tiddler modules gekoppeld aan hun bro
 Palette/Caption: Palet
 Palette/Editor/Clone/Caption: kloon
 Palette/Editor/Clone/Prompt: Het wordt aanbevolen dit schaduwpalet te klonen alvorens het te wijzigen.
+Palette/Editor/Delete/Hint: verwijder deze invoer van het huidige palet
+Palette/Editor/Names/External/Show: Toon namen van kleuren die niet tot het huiddige palet behoren
 Palette/Editor/Prompt: Wijzigen
 Palette/Editor/Prompt/Modified: Dit schaduwpalet is gewijzigd
 Palette/Editor/Reset/Caption: reset
@@ -61,6 +65,7 @@ Parsing/Pragma/Caption: 'Pragma parse' regels
 Plugins/Add/Caption: Verkrijg meer plugins
 Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
 Plugins/AlreadyInstalled/Hint: Deze plugin is al geïnstalleerd met versie <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Vereist ook:
 Plugins/Caption: Plugins
 Plugins/ClosePluginLibrary: schakel pluginbibliotheek uit
 Plugins/Disable/Caption: schakel uit
@@ -78,10 +83,12 @@ Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' niet gevonden
 Plugins/NotInstalled/Hint: Deze plugin is nu niet geïnstalleerd
 Plugins/OpenPluginLibrary: open pluginbibliotheek
 Plugins/Plugin/Prompt: Plugins
+Plugins/PluginWillRequireReload: (vereist een 'reload')
 Plugins/Reinstall/Caption: herinstalleer
 Plugins/Theme/Prompt: Thema's
 Plugins/Themes/Caption: Thema's
 Plugins/Themes/Hint: Thema plugins
+Plugins/Updates/Hint: Beschikbare updates voor geïnstalleerde plugins
 Saving/Caption: Opslaan
 Saving/DownloadSaver/AutoSave/Description: Sta automatisch opslaan toe voor de opslagmodule
 Saving/DownloadSaver/AutoSave/Hint: Sla automatisch op voor de opslagmodule
@@ -89,11 +96,35 @@ Saving/DownloadSaver/Caption: Opslagmodule
 Saving/DownloadSaver/Hint: Deze instellingen gelden voor de HTML5 compatibele opslagmodule
 Saving/General/Caption: Algemeen
 Saving/General/Hint: Deze instellingen gelden voor alle geladen opslagmodules
+Saving/GitHub/Branch: 'Tak' (branch) voor opslaan (standaard `master`)
+Saving/GitHub/Caption: ~GitHub opslagmodule
+Saving/GitHub/Description: Deze instellingen worden alleen gebruikt voor opslaan bij ~GitHub
+Saving/GitHub/Filename: Bestandsnaam van doelbestand (b.v. `index.html`)
+Saving/GitHub/Password: Wachtwoord, OAUTH token of persoonlijk toegangstoken
+Saving/GitHub/Path: Pad naar doelbestand (b.v. `/wiki/`)
+Saving/GitHub/Repo: Opslagplaats (b.v. `Jermolene/TiddlyWiki5`)
+Saving/GitHub/ServerURL: Server URL (standaard `https://api.github.com`)
+Saving/GitHub/UserName: Gebruikersnaam
+Saving/GitService/Branch: Doeltak (branch) voor opslaan
+Saving/GitService/CommitMessage: Opgeslagen door TiddlyWiki
+Saving/GitService/Description: Deze instellingen worden alleen gebruikt bij opslaan naar <<service-name>>
+Saving/GitService/Filename: Bestandsnaam van doelbestand (b.v. `index.html`)
+Saving/GitService/Gitea/Caption: Gitea opslagmodule
+Saving/GitService/Gitea/Password: Persoonlijk toegangs-token voor API (via Gitea’s web interface: `Settings | Applications | Generate New Token`)
+Saving/GitService/GitHub/Caption: ~GitHub opslagmodule
+Saving/GitService/GitHub/Password: Wachtwoord, OAUTH token, of persoonlijk toegangs-token (zie [[GitHub help-pagina|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] voor details)
+Saving/GitService/GitLab/Caption: ~GitLab opslagmodule
+Saving/GitService/GitLab/Password: Persoonlijk toegangs-token voor API (zie [[GitLab help-pagina|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] voor details)
+Saving/GitService/Path: Pad naar doelbestand (b.v. `/wiki/`)
+Saving/GitService/Repo: Opslagdoel (b.v. `Jermolene/TiddlyWiki5`)
+Saving/GitService/UserName: Gebruikersnaam
 Saving/Heading: Opslaan
 Saving/Hint: Instellingen voor opslaan van de gehele TiddlyWiki als één bestand via een opslagmodule
 Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
 Saving/TiddlySpot/BackupDir: Backup folder
 Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Caption: ~TiddlySpot opslagmodule
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot bedieningspaneel
 Saving/TiddlySpot/Description: Deze instellingen worden alleen gebruikt bij http://tiddlyspot.com of een vergelijkbare server
 Saving/TiddlySpot/Filename: Upload bestandsnaam
 Saving/TiddlySpot/Heading: ~TiddlySpot
@@ -141,6 +172,7 @@ Settings/NavigationHistory/Caption: Navigeer-geschiedenis
 Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij
+Settings/NavigationPermalinkviewMode/Caption: Permalink/permaview modus
 Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Kopieer permalink/permaview URL naar klembord
 Settings/NavigationPermalinkviewMode/Hint: Kies hoe permalink/permaview wordt behandeld:
 Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Werk de adresbalk bij met permalink/permaview URL

@@ -1,0 +1,109 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Fondo de alerta
+alert-border: Borde de alerta
+alert-highlight: Resaltado de alerta
+alert-muted-foreground: Primario de alerta muda
+background: Fondo general
+blockquote-bar: Barra de cita
+button-background: Fondo del botón predeterminado
+button-border: Borde del botón predeterminado
+button-foreground: Primario del botón predeterminado
+dirty-indicator: Indicador de cambios no guardados
+code-background: Fondo del código
+code-border: Borde del código
+code-foreground: Primario del código
+download-background: Fondo botón de descarga
+download-foreground: Primario botón de descarga
+dragger-background: Fondo de arrastre
+dragger-foreground: Primario de arrastre
+dropdown-background: Fondo desplegable
+dropdown-border: Borde desplegable
+dropdown-tab-background-selected: Fondo de la pestaña desplegable de pestañas seleccionadas
+dropdown-tab-background: Fondo de la pestaña desplegable
+dropzone-background: Fondo arrastre ficheros
+external-link-background-hover: Fondo de enlace externo al pasar por encima
+external-link-background-visited: Fondo de enlace externo visitado
+external-link-background: Fondo de enlace externo
+external-link-foreground-hover: Primario de enlace externo al pasar por encima
+external-link-foreground-visited: Primario de enlace externo visitado
+external-link-foreground: Primario de enlace externo
+foreground: Primario general
+menubar-background: Fondo de la barra de menú
+menubar-foreground: Primario de la barra de menú
+message-background: Fondo del cuadro de mensaje
+message-border: Borde del cuadro de mensaje
+message-foreground: Primario del cuadro de mensaje
+modal-backdrop: Telón de fondo modal
+modal-background: Fondo Modal
+modal-border: Borde Modal
+modal-footer-background: Fondo del pie en Modal
+modal-footer-border: Borde del pie en Modal
+modal-header-border: Borde de la cabecera en Modal
+muted-foreground: Primario general silenciado
+notification-background: Fondo Notificación
+notification-border: Borde Notificación
+page-background: Fondo Página
+pre-background: Preformatted code background
+pre-border: Preformatted code border
+primary: Primario general
+select-tag-background: Fondo `<select>`
+select-tag-foreground: Primario `<select>`
+sidebar-button-foreground: Primario del botón de la barra lateral
+sidebar-controls-foreground-hover: Primario de controles de la barra lateral al pasar por encima
+sidebar-controls-foreground: Primario de controles de la barra lateral
+sidebar-foreground-shadow: Sombra de la barra lateral
+sidebar-foreground: Primario de la barra lateral
+sidebar-muted-foreground-hover: Primario de controles silenciados de la barra lateral al pasar por encima
+sidebar-muted-foreground: Primario de controles silenciados de la barra lateral
+sidebar-tab-background-selected: Fondo de la pestaña de la barra lateral para las pestañas seleccionadas
+sidebar-tab-background: Fondo de la pestaña de la barra lateral
+sidebar-tab-border-selected: Borde de la pestaña de la barra lateral para las pestañas seleccionadas
+sidebar-tab-border: Borde de la pestaña de la barra lateral
+sidebar-tab-divider: Divisor de pestañas de la barra lateral
+sidebar-tab-foreground-selected: Divisor de pestañas de la barra lateral para las pestañas seleccionadas
+sidebar-tab-foreground: Primario de la pestaña de la barra lateral
+sidebar-tiddler-link-foreground-hover: Primario enlace tiddler en la barra lateral al pasar por encima
+sidebar-tiddler-link-foreground: Primario enlace tiddler en la barra lateral
+site-title-foreground: Primario título sitio
+static-alert-foreground: Primario de alerta estática
+tab-background-selected: Fondo de pestaña para pestañas seleccionadas
+tab-background: Fondo de pestaña
+tab-border-selected: Borde de pestaña para pestañas seleccionadas
+tab-border: Borde de pestañas
+tab-divider: Divisor de pestañas
+tab-foreground-selected: Primario de pestaña para pestañas seleccionadas
+tab-foreground: Primario de pestaña
+table-border: Borde Tabla
+table-footer-background: Fondo pie tabla
+table-header-background: Fondo cabecera tabla
+tag-background: Fondo etiqueta
+tag-foreground: Primario etiqueta
+tiddler-background: Fondo Tiddler
+tiddler-border: Borde Tiddler
+tiddler-controls-foreground-hover: Primario controles Tiddler al pasar por encima
+tiddler-controls-foreground-selected: Primario controles seleccionados en Tiddler
+tiddler-controls-foreground: Primario controles Tiddler
+tiddler-editor-background: Fondo editor Tiddler
+tiddler-editor-border-image: Borde imagen en editor Tiddler
+tiddler-editor-border: Borde editor Tiddler
+tiddler-editor-fields-even: Fondo editor Tiddler para campos pares
+tiddler-editor-fields-odd: Fondo editor Tiddler para campos impares
+tiddler-info-background: Fondo panel información en Tiddler
+tiddler-info-border: Borde panel información en Tiddler
+tiddler-info-tab-background: Fondo pestaña panel información en Tiddler
+tiddler-link-background: Fondo enlace Tiddler
+tiddler-link-foreground: Primario enlace Tiddler
+tiddler-subtitle-foreground: Primario subtítulo Tiddler
+tiddler-title-foreground: Primario título Tiddler
+toolbar-new-button: Primario botón 'nuevo tiddler'
+toolbar-options-button: Primario botón 'opciones'
+toolbar-save-button: Primario botón 'guardar'
+toolbar-info-button: Primario botón 'información'
+toolbar-edit-button: Primario botón 'editar'
+toolbar-close-button: Primario botón 'cerrar'
+toolbar-delete-button: Primario botón 'eliminar'
+toolbar-cancel-button: Primario botón 'cancelar'
+toolbar-done-button: Primario botón 'hecho'
+untagged-background: Fondo de píldora sin etiquetar
+very-muted-foreground: Primario muy silenciado

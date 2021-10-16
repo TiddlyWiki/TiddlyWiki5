@@ -199,6 +199,8 @@ exports.transliterationPairs = {
 	"ǋ":"N",
 	"Ñ":"N",
 	"Ǌ":"NJ",
+	"ð":"d",
+	"Ð":"D",
 	"Ó":"O",
 	"Ŏ":"O",
 	"Ǒ":"O",
@@ -265,6 +267,8 @@ exports.transliterationPairs = {
 	"Ɽ":"R",
 	"Ꜿ":"C",
 	"Ǝ":"E",
+	"ß":"ss",
+	"ẞ":"SS",
 	"Ś":"S",
 	"Ṥ":"S",
 	"Š":"S",
@@ -275,6 +279,8 @@ exports.transliterationPairs = {
 	"Ṡ":"S",
 	"Ṣ":"S",
 	"Ṩ":"S",
+	"þ": "th",
+	"Þ": "TH",
 	"Ť":"T",
 	"Ţ":"T",
 	"Ṱ":"T",
@@ -907,7 +913,8 @@ exports.transliterationPairs = {
 	"т":"t",
 	"ь":"'",
 	"б":"b",
-	"ю":"yu"
+	"ю":"yu",
+	"…":"..."
 };
 
 exports.transliterate = function(str) {

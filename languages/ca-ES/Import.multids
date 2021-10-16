@@ -1,7 +1,9 @@
 title: $:/language/Import/
 
+Editor/Import/Heading: Importa imatges i afegeix-les a l'editor.
 Imported/Hint: S'han importat els següents tiddlers:
 Listing/Cancel/Caption: Anul·la
+Listing/Cancel/Warning: Voley anul·lar la importació?
 Listing/Hint: Aquests tiddlers estàn llestos per a ser importats
 Listing/Import/Caption: Importa
 Listing/Preview: Vista prèvia:
@@ -9,6 +11,11 @@ Listing/Preview/Diff: Diferències
 Listing/Preview/DiffFields: Diferències (Camps)
 Listing/Preview/Fields: Camps
 Listing/Preview/TextRaw: Text (Cru)
+Listing/Rename/CancelRename: Anul·la
+Listing/Rename/ConfirmRename: Canvia el nom del tiddler
+Listing/Rename/OverwriteWarning: Ja existeix un tiddler amb aquest nom.
+Listing/Rename/Prompt: Canvia el nom a:
+Listing/Rename/Tooltip: Canvia el nom del tiddler abans d'importar
 Listing/Select/Caption: Trieu
 Listing/Status/Caption: Estat
 Listing/Title/Caption: Títol
@@ -17,6 +24,10 @@ Upgrader/Plugins/Suppressed/Version: Connector bloquejat (degut a que la nova ve
 Upgrader/Plugins/Upgraded: Connector actualitzat de <<entrant>> a <<actualitzat>>
 Upgrader/State/Suppressed: Tiddler temporalment bloquejat
 Upgrader/System/Alert: Esteu a punt d’importar un tiddler que sobreescrigui un tiddler del nucli central. Això no és recomanable, ja que pot fer que el sistema sigui inestable
+Upgrader/System/Disabled: Tiddler del sistema inhabilitat
 Upgrader/System/Suppressed: Tiddler del sistema bloquejat
 Upgrader/System/Warning: Tiddler del nucli central
 Upgrader/ThemeTweaks/Created: Tema migrat des de <$text text=<<desde>>/>
+Upgrader/Tiddler/Disabled: Tiddler inhabilitat
+Upgrader/Tiddler/Selected: Triat pel usuari
+Upgrader/Tiddler/Unselected: Tiddler no triat.

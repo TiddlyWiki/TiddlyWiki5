@@ -21,7 +21,7 @@ To link to a tiddler and specify the text of the link:
 [[Displayed Link Title|Tiddler Title]]
 ```
 
-You can also create a link from the editor toolbar. Click ''link'' ({{$:/core/images/link}}), and search and select a tiddler.
+You can also create a link from the editor toolbar. Click ''link'' (<<.icon $:/core/images/link>>), and search and select a tiddler.
 
 ! ~CamelCase Links
 

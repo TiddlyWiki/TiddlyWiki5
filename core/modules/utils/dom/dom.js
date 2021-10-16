@@ -22,6 +22,10 @@ exports.domContains = function(a,b) {
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
+exports.domMatchesSelector = function(node,selector) {
+	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
+};
+
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);
@@ -29,23 +33,23 @@ exports.removeChildren = function(node) {
 };
 
 exports.hasClass = function(el,className) {
-	return el && el.className && el.className.toString().split(" ").indexOf(className) !== -1;
+	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
 };
 
 exports.addClass = function(el,className) {
-	var c = el.className.split(" ");
+	var c = (el.getAttribute("class") || "").split(" ");
 	if(c.indexOf(className) === -1) {
 		c.push(className);
+		el.setAttribute("class",c.join(" "));
 	}
-	el.className = c.join(" ");
 };
 
 exports.removeClass = function(el,className) {
-	var c = el.className.split(" "),
+	var c = (el.getAttribute("class") || "").split(" "),
 		p = c.indexOf(className);
 	if(p !== -1) {
 		c.splice(p,1);
-		el.className = c.join(" ");
+		el.setAttribute("class",c.join(" "));
 	}
 };
 
@@ -65,7 +69,7 @@ Get the first parent element that has scrollbars or use the body as fallback.
 */
 exports.getScrollContainer = function(el) {
 	var doc = el.ownerDocument;
-	while(el.parentNode) {	
+	while(el.parentNode) {
 		el = el.parentNode;
 		if(el.scrollTop) {
 			return el;
@@ -204,7 +208,7 @@ exports.addEventListeners = function(domNode,events) {
 			if(eventInfo.handlerMethod) {
 				handler = function(event) {
 					eventInfo.handlerObject[eventInfo.handlerMethod].call(eventInfo.handlerObject,event);
-				};	
+				};
 			} else {
 				handler = eventInfo.handlerObject;
 			}
