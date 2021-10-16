@@ -96,9 +96,9 @@ ListWidget.prototype.getEmptyMessage = function() {
 		return [];
 	}
 	parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{
-    parseAsInline: true,
-    autoParagraph:this.getVariable("tv-auto-paragraph") !== "no"
-  });
+		parseAsInline: true,
+		autoParagraph:this.getVariable("tv-auto-paragraph") !== "no"
+	});
 	if(parser) {
 		return parser.tree;
 	} else {
