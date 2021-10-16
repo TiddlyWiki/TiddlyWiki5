@@ -57,19 +57,18 @@ MacroCallWidget.prototype.execute = function() {
 		// If so we'll return the parsed macro
 		// Check if we've already cached parsing this macro
 		var mode = this.parseTreeNode.isBlock ? "blockParser" : "inlineParser",
-      para = this.getVariable("tv-auto-paragraph") !== "no" ? "paraYes" : "paraNo",
+			para = this.getVariable("tv-auto-paragraph") !== "no" ? "paraYes" : "paraNo",
 			parser;
 		if(variableInfo.srcVariable && variableInfo.srcVariable[mode] && variableInfo.srcVariable[mode][para]) {
 			parser = variableInfo.srcVariable[mode][para];
 		} else {
-			parser = this.wiki.parseText(this.parseType,text,
-            {
-              parseAsInline: !this.parseTreeNode.isBlock,
-              autoParagraph: this.getVariable("tv-auto-paragraph") !== "no"
-            });
+			parser = this.wiki.parseText(this.parseType,text,{
+				parseAsInline: !this.parseTreeNode.isBlock,
+				autoParagraph: this.getVariable("tv-auto-paragraph") !== "no"
+			});
 			if(variableInfo.isCacheable && variableInfo.srcVariable) {
 				variableInfo.srcVariable[mode] = variableInfo.srcVariable[mode] || {};
-        variableInfo.srcVariable[mode][para] = parser;
+				variableInfo.srcVariable[mode][para] = parser;
 			}
 		}
 		var parseTreeNodes = parser ? parser.tree : [];
