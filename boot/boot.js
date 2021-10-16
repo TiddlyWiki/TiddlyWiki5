@@ -1626,7 +1626,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 		try {
 			data = JSON.parse(text);			
 		} catch(e) {
-			// Ignore JSON parse errors
+			console.error("JSON tiddler parse error in $:/boot/tiddlerdeserializer/json, tiddler text:\n" + text)
 		}
 		if($tw.utils.isArray(data) && isTiddlerArrayValid(data)) {
 			return data;
