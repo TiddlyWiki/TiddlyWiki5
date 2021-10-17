@@ -54,15 +54,18 @@ exports.parse = function() {
 		match = reMatch.exec(this.parser.source);
 	}
 	if(tokens.length > 0) {
-		// Set it for the current file
-		if(tokens[0] === "yes") this.parser.autoParagraph = true;
-		else if (tokens[0] === "no") this.parser.autoParagraph = false;
+		// Set it for the current file and leave it on if malformed
+		if(tokens[0] === "no") {
+			this.parser.autoParagraph = false;
+		} else {
+			this.parser.autoParagraph = true;
+		}
 		// And set it for everything transcluded or otherwise parsed
 		return [{
 			type: "set",
 			attributes: {
 				name: {type: "string", value: "tv-auto-paragraph"},
-				value: {type: "string", value: tokens[0]}
+				value: {type: "string", value: this.parser.autoParagraph ? "yes" : "no"}
 			},
 			children: []
 		}];
