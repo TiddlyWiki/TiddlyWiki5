@@ -1,7 +1,7 @@
 created: 20211013132515594
-modified: 20211013133545384
+modified: 20211018102307833
 tags: Learning
-title: Select Core Icons
+title: Icon Gallery
 type: text/vnd.tiddlywiki
 
 \define copyActions() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<imageTitle>>/>
