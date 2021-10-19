@@ -262,7 +262,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CORS header
-	let corsHeader = Object.keys(request.headers).indexOf("Origin") !== -1? request.headers["Origin"] || "null": false,
+	let corsHeader = Object.keys(request.headers).indexOf("origin") !== -1? request.headers["origin"] || "null": false,
 		corsWhitelisted = this.isOriginWhitelisted(corsHeader);
 	if(corsHeader && corsWhitelisted) {
 		// add the corsHeader to the response
