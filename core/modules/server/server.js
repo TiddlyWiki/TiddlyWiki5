@@ -234,7 +234,7 @@ Server.prototype.isOriginWhitelisted = function(origin) {
 	// Check if any of the originFilters applies
 	var self = this,
 		valid = (this.origin == origin),
-		originFilters = this.wiki.getTiddlerList(this.corsTitle);
+		originFilters = this.wiki.getTiddlerList(this.corsTitle,"text");
 	$tw.utils.each(originFilters,function(filter) {
 		if(!valid) {
 			var source = self.wiki.makeTiddlerIterator([title]),
@@ -262,7 +262,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CORS header
-	let corsHeader = Object.keys(request.headers).indexOf("origin") !== -1? request.headers["origin"] || "null": false,
+	let corsHeader = !!request.headers["origin"] && request.headers["origin"],
 		corsWhitelisted = this.isOriginWhitelisted(corsHeader);
 	if(corsHeader && corsWhitelisted) {
 		// add the corsHeader to the response
