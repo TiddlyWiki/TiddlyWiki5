@@ -80,6 +80,9 @@ function Server(options) {
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
+	// Initialise CORS options
+	this.origin = this.get("origin") || this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.corsTitle = this.get("cors-tiddler") || "$:/config/tiddlyweb/cors";
 }
 
 /*
@@ -150,6 +153,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
+	"cors-tiddler": "$:/config/tiddlyweb/corsOrigins",
 	"root-tiddler": "$:/core/save/all",
 	"root-render-type": "text/plain",
 	"root-serve-type": "text/html",
@@ -226,6 +230,23 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
+Server.prototype.isOriginWhitelisted = function(origin) {
+	// Check if any of the originFilters applies
+	var self = this,
+		valid = (this.origin == origin),
+		originFilters = this.wiki.getTiddlerList(this.corsTitle);
+	$tw.utils.each(originFilters,function(filter) {
+		if(!valid) {
+			var source = self.wiki.makeTiddlerIterator([title]),
+				result = self.wiki.filterTiddlers(filter,null,source);
+			if(result.length > 0) {
+				valid = result[0];
+			}
+		}
+	});
+	return valid;
+}
+
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
 	// Compose the state object
@@ -239,7 +260,18 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
-	var authorizationType = this.methodMappings[request.method] || "readers";
+	var authorizationType = this.methodMappings[request.method] || "readers";debugger;
+	// Check for the CORS header
+	let corsHeader = Object.keys(request.headers).indexOf("Origin") !== -1? request.headers["Origin"] || "null": false,
+		corsWhitelisted = this.isOriginWhitelisted(corsHeader);
+	if(corsHeader && !corsWhitelisted) {
+		response.writeHead(403,"'Origin' header not authorized from '" + corsHeader + "'");
+		response.end();
+		return;
+	} else {
+		// add the corsHeader to the response
+		response.setHeader('Access-Control-Allow-Origin',corsWhitelisted)
+	}
 	// Check for the CSRF header if this is a write
 	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
