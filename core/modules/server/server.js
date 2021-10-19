@@ -263,7 +263,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CORS header
 	let corsHeader = !!request.headers["origin"] && request.headers["origin"],
-		corsWhitelisted = this.isOriginWhitelisted(corsHeader);
+		corsWhitelisted = corsHeader && this.isOriginWhitelisted(corsHeader);
 	if(corsHeader && corsWhitelisted) {
 		// add the corsHeader to the response
 		response.setHeader('Access-Control-Allow-Origin',corsWhitelisted)
