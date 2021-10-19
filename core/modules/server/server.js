@@ -264,13 +264,13 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Check for the CORS header
 	let corsHeader = Object.keys(request.headers).indexOf("Origin") !== -1? request.headers["Origin"] || "null": false,
 		corsWhitelisted = this.isOriginWhitelisted(corsHeader);
-	if(corsHeader && !corsWhitelisted) {
+	if(corsHeader && corsWhitelisted) {
+		// add the corsHeader to the response
+		response.setHeader('Access-Control-Allow-Origin',corsWhitelisted)
+	} else if (corsHeader) {
 		response.writeHead(403,"'Origin' header not authorized from '" + corsHeader + "'");
 		response.end();
 		return;
-	} else {
-		// add the corsHeader to the response
-		response.setHeader('Access-Control-Allow-Origin',corsWhitelisted)
 	}
 	// Check for the CSRF header if this is a write
 	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
