@@ -260,7 +260,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
-	var authorizationType = this.methodMappings[request.method] || "readers";debugger;
+	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CORS header
 	let corsHeader = Object.keys(request.headers).indexOf("Origin") !== -1? request.headers["Origin"] || "null": false,
 		corsWhitelisted = this.isOriginWhitelisted(corsHeader);
