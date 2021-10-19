@@ -237,7 +237,7 @@ Server.prototype.isOriginWhitelisted = function(origin) {
 		originFilters = this.wiki.getTiddlerList(this.corsTitle,"text");
 	$tw.utils.each(originFilters,function(filter) {
 		if(!valid) {
-			var source = self.wiki.makeTiddlerIterator([title]),
+			var source = self.wiki.makeTiddlerIterator([origin]),
 				result = self.wiki.filterTiddlers(filter,null,source);
 			if(result.length > 0) {
 				valid = result[0];
