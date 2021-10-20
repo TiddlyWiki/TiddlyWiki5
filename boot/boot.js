@@ -257,6 +257,28 @@ $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 };
 
 /*
+Convert a URIComponent encoded string to a string safely
+*/
+$tw.utils.decodeURIComponentSafe = function(s) {
+	var v = s;
+	try {
+		v = decodeURIComponent(s);
+	} catch(e) {}
+	return v;
+};
+
+/*
+Convert a URI encoded string to a string safely
+*/
+$tw.utils.decodeURISafe = function(s) {
+	var v = s;
+	try {
+		v = decodeURI(s);
+	} catch(e) {}
+	return v;
+};
+
+/*
 Convert "&amp;" to &, "&nbsp;" to nbsp, "&lt;" to <, "&gt;" to > and "&quot;" to "
 */
 $tw.utils.htmlDecode = function(s) {
