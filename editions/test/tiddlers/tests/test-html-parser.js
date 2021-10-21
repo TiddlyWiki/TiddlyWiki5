@@ -170,6 +170,12 @@ describe("HTML tag new parser tests", function() {
 		expect(parser.parseTag("<mytag attrib1='something'>",0)).toEqual(
 			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', start : 6, name : 'attrib1', value : 'something', end : 26 } }, orderedAttributes: [ 'attrib1' ], tag : 'mytag', end : 27 }
 		);
+		expect(parser.parseTag("<mytag attrib1 attrib1='something'>",0)).toEqual(
+			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', start : 15, name : 'attrib1', value : 'something', end : 34 } }, orderedAttributes: [ 'attrib1', 'attrib1' ], tag : 'mytag', end : 35 }
+		);
+		expect(parser.parseTag("<mytag attrib1 attrib1='something' attrib1='else'>",0)).toEqual(
+			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', start : 34, name : 'attrib1', value : 'else', end : 49 } }, orderedAttributes: [ 'attrib1', 'attrib1', 'attrib1' ], tag : 'mytag', end : 50 }
+		);
 		expect(parser.parseTag("<$mytag attrib1='something' attrib2=else thing>",0)).toEqual(
 			{ type : 'mytag', start : 0, attributes : { attrib1 : { type : 'string', start : 7, name : 'attrib1', value : 'something', end : 27 }, attrib2 : { type : 'string', start : 27, name : 'attrib2', value : 'else', end : 40 }, thing : { type : 'string', start : 40, name : 'thing', value : 'true', end : 46 } }, orderedAttributes: [ 'attrib1', 'attrib2', 'thing' ], tag : '$mytag', end : 47 }
 		);
