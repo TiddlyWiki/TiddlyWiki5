@@ -1,11 +1,14 @@
 created: 20161226165024380
 creator: Matt Lauber
-modified: 20210106151027226
+modified: 20211008161027226
 tags: [[Other resources]]
 title: "TiddlyServer" by Matt Lauber
 type: text/vnd.tiddlywiki
 url: https://github.com/mklauber/TiddlyServer/releases/
 
+''Note:'' This is an older version of ~TiddlyServer.   A modern version can be referenced [[here.|TiddlyServer by Arlen Beiler]] 
+
+----
 TiddlyServer is a special purpose Desktop app, designed to facilitate managing multiple instances of TiddlyWiki running as a server.  It does not require internet acess to access the wikis.
 
 {{!!url}}
@@ -14,4 +17,3 @@ TiddlyServer is a special purpose Desktop app, designed to facilitate managing m
 TiddlyServer can import both TiddlyWiki files and TiddlyFolder wikis.  For each wiki, you specify a prefix to serve it with and the source to import from.  It will copy the wikis to its own internal store and begin serving them up at http://localhost:8080/{prefix}/.  The export button for each wiki will convert it to a single file wiki. 
 
 <<<
-
