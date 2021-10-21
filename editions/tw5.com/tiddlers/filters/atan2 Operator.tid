@@ -13,5 +13,3 @@ type: text/vnd.tiddlywiki
 <<.from-version "5.1.21">> See [[Mathematics Operators]] for an overview.
 
 <<.operator-examples "atan2">>
-
-
