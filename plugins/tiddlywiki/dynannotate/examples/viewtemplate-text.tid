@@ -23,7 +23,8 @@ title: $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text
 
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 <$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
-<div style="position:relative;"><!-- Needed for the popups to work -->
+<div style="position:relative;">
+<!-- ^^ Needed for the popups to work ^^ -->
 <$dynannotate
 	filter="[all[shadows+tiddlers]!has[draft.of]annotate-tiddler<currentTiddler>]"
 	actions=<<click-annotation-actions>>
@@ -44,11 +45,9 @@ title: $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text
 <div class="tc-drop-down-wrapper">
 <div class="tc-drop-down tc-popup-keep" style="max-width:550px;white-space: normal;overflow-y:hidden;">
 <$tiddler tiddler={{$:/temp/dynannotate/demo/annotation-title}}>
-<p>
 <h2>
 This is an annotation
 </h2>
-</p>
 <p>
 The annotation is stored in the tiddler:
 </p>
