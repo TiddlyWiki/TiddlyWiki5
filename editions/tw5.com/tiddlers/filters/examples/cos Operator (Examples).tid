@@ -1,0 +1,7 @@
+created: 20211020142042072
+modified: 20211020142110929
+tags: [[Operator Examples]] [[cos Operator]]
+title: cos Operator (Examples)
+
+<<.operator-example 1 "[[2]cos[]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[cos[]]">>
