@@ -92,6 +92,14 @@ var WikiParser = function(type,text,options) {
 };
 
 /*
+Precompiled regular expression patterns used in this file. They have the "g" flag set ("search globally").
+*/
+WikiParser.prototype.whitespacePattern = /\s+/g;
+WikiParser.prototype.inlineWhitespacePattern = /[^\S\n]+/g;
+WikiParser.prototype.newlinesPattern = /\s*\n/g;
+WikiParser.prototype.escapedLinebreakPattern = /\\\r?\n/g;
+
+/*
 */
 WikiParser.prototype.loadRemoteTiddler = function(url) {
 	var self = this;
@@ -149,17 +157,38 @@ WikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 };
 
 /*
+Skip a thing at the current parse position if it matches the pattern. The pattern must have the "g" flag set ("search globally").
+*/
+WikiParser.prototype.skip = function(pattern) {
+	var pos = this.pos;
+	pattern.lastIndex = pos;
+	var match = pattern.exec(this.source);
+	if(match && match.index === pos) {
+		this.pos = pattern.lastIndex;
+	}
+};
+
+/*
 Skip any whitespace at the current position. Options are:
 	treatNewlinesAsNonWhitespace: true if newlines are NOT to be treated as whitespace
 */
 WikiParser.prototype.skipWhitespace = function(options) {
 	options = options || {};
-	var whitespaceRegExp = options.treatNewlinesAsNonWhitespace ? /([^\S\n]+)/mg : /(\s+)/mg;
-	whitespaceRegExp.lastIndex = this.pos;
-	var whitespaceMatch = whitespaceRegExp.exec(this.source);
-	if(whitespaceMatch && whitespaceMatch.index === this.pos) {
-		this.pos = whitespaceRegExp.lastIndex;
-	}
+	this.skip(options.treatNewlinesAsNonWhitespace ? this.inlineWhitespacePattern : this.whitespacePattern);
+};
+
+/*
+Skip zero or more whitespace followed by a newline at the current position.
+*/
+WikiParser.prototype.skipNewlines = function() {
+	this.skip(this.newlinesPattern);
+};
+
+/*
+Skip a "\" directly followed by a newline at the current position.
+*/
+WikiParser.prototype.skipEscapedLinebreak = function() {
+	this.skip(this.escapedLinebreakPattern);
 };
 
 /*
