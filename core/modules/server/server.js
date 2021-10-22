@@ -81,7 +81,7 @@ function Server(options) {
 	}
 	this.transport = require(this.protocol);
 	// Initialise CORS options
-	this.origin = this.protocol+"://"+this.get("origin") || this.protocol+"://"+this.get("host");
+	this.origin = this.get("origin")? this.protocol+"://"+this.get("origin"): this.protocol+"://"+this.get("host");
 }
 
 /*
