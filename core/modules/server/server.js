@@ -81,7 +81,7 @@ function Server(options) {
 	}
 	this.transport = require(this.protocol);
 	// Initialise CORS options
-	this.origin = this.get("origin") || this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.origin = this.get("origin") || this.protocol+"://"+this.get("host");
 	this.corsTitle = this.get("cors-tiddler") || "$:/config/tiddlyweb/cors";
 }
 
