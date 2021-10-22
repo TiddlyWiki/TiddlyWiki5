@@ -887,6 +887,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
+.tc-sidebar-search {
+	margin-top: 14px;
+}
+
+.tc-sidebar-tabs {
+	margin-top: 3px;
+}
+
 .tc-sidebar-lists .tc-menu-list-item {
 	white-space: nowrap;
 }
