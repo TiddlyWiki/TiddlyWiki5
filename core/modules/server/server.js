@@ -238,15 +238,17 @@ Server.prototype.isOriginWhitelisted = function(origin) {
 	if(self.get("debug-level") !== "none") {
 		$tw.utils.log(`CORS valid=${valid} this.origin=${this.origin} request.origin=${origin}`)
 	}
-	$tw.utils.each(originFilters,function(filter) {
-		if(!valid) {
-			var source = self.wiki.makeTiddlerIterator([origin]),
-				result = self.wiki.filterTiddlers(filter,null,source);
-			if(result.length > 0) {
-				valid = result[0];
+	if(!valid) {
+		$tw.utils.each(originFilters,function(filter) {
+			if(!valid) {
+				var source = self.wiki.makeTiddlerIterator([origin]),
+					result = self.wiki.filterTiddlers(filter,null,source);
+				if(result.length > 0) {
+					valid = true;
+				}
 			}
-		}
-	});
+		});
+	}
 	return valid;
 }
 
