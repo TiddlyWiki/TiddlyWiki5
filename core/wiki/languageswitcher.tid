@@ -7,7 +7,8 @@ $(languagePluginTitle)$/icon
 <$linkcatcher to="$:/language">
 <div class="tc-chooser tc-language-chooser">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[description]]">
-<$set name="cls" filter="[all[current]field:title{$:/language}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>>
+<$set name="cls" filter="[all[current]field:title{$:/language}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
+<div class=<<cls>>>
 <$link>
 <span class="tc-image-button">
 <$set name="languagePluginTitle" value=<<currentTiddler>>>

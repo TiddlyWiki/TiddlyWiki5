@@ -36,7 +36,8 @@ background-color: $(swatchColour)$;
 </$set>
 </$set>
 \end
-<div class="tc-swatches-horiz"><$list filter="
+<div class="tc-swatches-horiz">
+<$list filter="
 foreground
 background
 muted-foreground
@@ -44,4 +45,5 @@ primary
 page-background
 tab-background
 tiddler-info-background
-" variable="colour"><<swatch>></$list></div>
+" variable="colour"><<swatch>></$list>
+</div>

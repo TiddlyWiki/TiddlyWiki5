@@ -66,7 +66,9 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 <h1><strong><$text text={{{ [<assetInfo>get[name]] ~[<assetInfo>get[original-title]split[/]last[1]] }}}/></strong>: <$view tiddler=<<assetInfo>> field="description"/></h1>
 <h2><$view tiddler=<<assetInfo>> field="original-title"/></h2>
 <div><em><$view tiddler=<<assetInfo>> field="version"/></em></div>
-<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion"><div><em>{{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}</em></div></$list>
+<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion">
+<div><em>{{$:/language/ControlPanel/Plugins/AlreadyInstalled/Hint}}</em></div>
+</$list>
 </div>
 <div class="tc-plugin-info-chunk tc-plugin-info-buttons">
 <<install-plugin-button>>

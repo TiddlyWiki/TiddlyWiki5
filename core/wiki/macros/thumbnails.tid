@@ -3,18 +3,26 @@ tags: $:/tags/Macro
 
 \define thumbnail(link,icon,color,background-color,image,caption,width:"280",height:"157")
 <$link to="""$link$"""><div class="tc-thumbnail-wrapper">
-<div class="tc-thumbnail-image" style="width:$width$px;height:$height$px;"><$reveal type="nomatch" text="" default="""$image$""" tag="div" style="width:$width$px;height:$height$px;">
+<div class="tc-thumbnail-image" style="width:$width$px;height:$height$px;">
+<$reveal type="nomatch" text="" default="""$image$""" tag="div" style="width:$width$px;height:$height$px;">
 [img[$image$]]
-</$reveal><$reveal type="match" text="" default="""$image$""" tag="div" class="tc-thumbnail-background" style="width:$width$px;height:$height$px;background-color:$background-color$;"></$reveal></div><div class="tc-thumbnail-icon" style="fill:$color$;color:$color$;">
+</$reveal>
+<$reveal type="match" text="" default="""$image$""" tag="div" class="tc-thumbnail-background" style="width:$width$px;height:$height$px;background-color:$background-color$;"></$reveal>
+</div>
+<div class="tc-thumbnail-icon" style="fill:$color$;color:$color$;">
 $icon$
-</div><div class="tc-thumbnail-caption">
+</div>
+<div class="tc-thumbnail-caption">
 $caption$
 </div>
-</div></$link>
+</div>
+</$link>
 \end
 
 \define thumbnail-right(link,icon,color,background-color,image,caption,width:"280",height:"157")
-<div class="tc-thumbnail-right-wrapper"><<thumbnail """$link$""" """$icon$""" """$color$""" """$background-color$""" """$image$""" """$caption$""" """$width$""" """$height$""">></div>
+<div class="tc-thumbnail-right-wrapper">
+<<thumbnail """$link$""" """$icon$""" """$color$""" """$background-color$""" """$image$""" """$caption$""" """$width$""" """$height$""">>
+</div>
 \end
 
 \define list-thumbnails(filter,width:"280",height:"157")

@@ -6,7 +6,8 @@ $:/core/images/storyview-$(storyview)$
 <$linkcatcher to="$:/view">
 <div class="tc-chooser tc-viewswitcher">
 <$list filter="[storyviews[]]" variable="storyview">
-<$set name="cls" filter="[<storyview>prefix{$:/view}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>>
+<$set name="cls" filter="[<storyview>prefix{$:/view}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
+<div class=<<cls>>>
 <$button tag="a" class="tc-tiddlylink tc-btn-invisible" to=<<storyview>>><$transclude tiddler=<<icon>>/><$text text=<<storyview>>/></$button>
 </div>
 </$set>

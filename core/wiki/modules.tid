@@ -9,8 +9,9 @@ title: $:/snippets/modules
 
 <$macrocall $name="describeModuleType" type=<<currentTiddler>>/>
 
-<ul><$list filter="[all[current]modules[]]"><li><$link><<currentTiddler>></$link>
-</li>
+<ul>
+<$list filter="[all[current]modules[]]">
+<li><$link><<currentTiddler>></$link></li>
 </$list>
 </ul>
 </$list>
