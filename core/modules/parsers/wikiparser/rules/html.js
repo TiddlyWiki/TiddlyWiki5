@@ -107,7 +107,7 @@ exports.parseTag = function(source,pos,options) {
 	// Process attributes
 	var attribute = $tw.utils.parseAttribute(source,pos);
 	while(attribute) {
-		node.orderedAttributes.push(attribute.name);
+		node.orderedAttributes.push(attribute);
 		node.attributes[attribute.name] = attribute;
 		pos = attribute.end;
 		// Get the next attribute
