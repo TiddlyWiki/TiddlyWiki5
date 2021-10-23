@@ -1,0 +1,13 @@
+caption: sin
+created: 20211019203650938
+modified: 20211021222816944
+op-input: a [[selection of titles|Title Selection]]
+op-output: the sine of the input angles (numeric value between -1 and 1)
+op-purpose: calculate the sine value of a list of angles (given in radians)
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Trigonometric Operators]] [[Unary Mathematics Operators]]
+title: sin Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.21">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "sin">>

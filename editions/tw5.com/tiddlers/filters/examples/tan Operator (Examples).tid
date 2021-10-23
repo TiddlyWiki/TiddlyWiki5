@@ -1,0 +1,7 @@
+created: 20211020142158187
+modified: 20211020142222782
+tags: [[Operator Examples]] [[tan Operator]]
+title: tan Operator (Examples)
+
+<<.operator-example 1 "[[2]tan[]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[tan[]]">>
