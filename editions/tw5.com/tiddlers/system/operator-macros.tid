@@ -23,7 +23,9 @@ tags: $:/tags/Macro
 	<dl>
 	<dd>
   <$button set=<<.state>> setTo="">Hide</$button>
-  <$button actions=<<.operator-example-tryit-actions>>>Reset</$button>
+  <$reveal stateTitle=<<.state>> stateField="filter" type="nomatch" text=<<__eg__>>>
+    <$button actions=<<.operator-example-tryit-actions>>>Reset</$button>
+  </$reveal>
   </dd>
 	</dl>
 	<$list filter="[<.state>get[filter]]" variable=".filter">
