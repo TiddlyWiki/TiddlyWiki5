@@ -11,8 +11,11 @@ title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
 
 ----
+
 <<.warning "''Please note: ~TiddlySpot is in maintenance mode and no longer allows new sites to be created. Instead of ~TiddlySpot you can now use [[TiddlyHost|Saving on TiddlyHost]], a new service from the creator of ~TiddlySpot.''">>
+
 ----
+
 [img[https://raw.githubusercontent.com/simonbaird/tiddlyhost/main/rails/app/assets/images/tiddlyspot-banner-logo.png]]
 
 [[TiddlySpot.com|http://tiddlyspot.com]] is a hosting service for TiddlyWiki created in 2006 by Simon Baird and Daniel Baird.

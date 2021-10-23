@@ -36,7 +36,9 @@ This means that you can control the text of a link tooltip in several ways:
 <$link to="HelloThere" tooltip="Another tooltip">{{$:/core/icon}}</$link>
 
 <$set name="tv-wikilink-tooltip" value="I'm a link to {{!!title}}">
+
 <$link to="HelloThere">Link 2</$link>
+
 </$set>
 
 ```
@@ -48,7 +50,9 @@ Renders as:
 <$link to="HelloThere" tooltip="Another tooltip">{{$:/core/icon}}</$link>
 
 <$set name="tv-wikilink-tooltip" value="I'm a link to {{!!title}}">
+
 <$link to="HelloThere">Link 2</$link>
+
 </$set>
 
 Note that the tooltip is rendered with the current tiddler set to the target of the link.

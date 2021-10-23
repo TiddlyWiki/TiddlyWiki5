@@ -13,7 +13,9 @@ This is a list of palettes made by members of the ~TiddlyWiki [[Community]]. Pal
 
 ! <$link><$view field="title"/></$link>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/>
+</div>
 
 <$transclude/>
 

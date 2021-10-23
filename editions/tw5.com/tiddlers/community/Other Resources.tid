@@ -13,7 +13,9 @@ This list contains any usefull resource that have been shared with the ~TiddlyWi
 
 ! <$link><$view field="title"/></$link>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/>
+</div>
 
 <$transclude/>
 

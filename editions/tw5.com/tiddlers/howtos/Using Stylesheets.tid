@@ -64,7 +64,8 @@ A stylesheet tiddler is processed such that it is first wikified and then the te
 ```
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
 
-<pre>body.tc-body pre {
+<pre>
+body.tc-body pre {
 	<<box-shadow "inset 0 1px 0 #fff">>
 }
 </pre>

@@ -5,8 +5,19 @@ title: enlist-input Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[[Days of the Week]get[list]enlist-input[]]">>
-Contrast with: <<.operator-example 2 "[[Days of the Week]get[list]]">>
+
+Contrast with:
+
+<<.operator-example 2 "[[Days of the Week]get[list]]">>
+
 <<.operator-example 3 "'HelloThere GettingStarted [[Customise TiddlyWiki]]' +[enlist-input[]]">>
-Contrast with: <<.operator-example 4 "'HelloThere GettingStarted [[Customise TiddlyWiki]]'">>
+
+Contrast with:
+
+<<.operator-example 4 "'HelloThere GettingStarted [[Customise TiddlyWiki]]'">>
+
 <<.operator-example 5 "'HelloThere HelloThere GettingStarted [[Customise TiddlyWiki]]' +[enlist-input:raw[]]">>
-Contrast with: <<.operator-example 6 "'HelloThere HelloThere GettingStarted [[Customise TiddlyWiki]]' +[enlist-input[]]">>
+
+Contrast with:
+
+<<.operator-example 6 "'HelloThere HelloThere GettingStarted [[Customise TiddlyWiki]]' +[enlist-input[]]">>

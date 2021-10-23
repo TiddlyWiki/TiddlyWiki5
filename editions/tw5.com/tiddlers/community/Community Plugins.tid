@@ -13,7 +13,9 @@ These are plugins created by the ~TiddlyWiki [[Community]]. Visit their website 
 
 ! <$link><$view field="title"/></$link>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/>
+</div>
 
 <$transclude/>
 

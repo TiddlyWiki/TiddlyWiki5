@@ -17,12 +17,12 @@ It will overwrite the tiddler, if the button is clicked several times.
 <$action-createtiddler $basetitle={{$:/language/DefaultNewTiddlerTitle}} $overwrite="yes"/>
 \end
 
-<$button actions=<<testCreate>> >
+<$button actions=<<testCreate>> >\
 Create Tiddler
 </$button>
 ```
 
-<$button actions=<<testCreate>> >
+<$button actions=<<testCreate>> >\
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
 Create Tiddler
 </$button> - Clicking this button, will also open the Right sidebar: Recent tab

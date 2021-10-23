@@ -16,4 +16,5 @@ The content of the `<$count>` widget is ignored.
 |filter |The filter expression to count |
 
 ! Example
+
 <<wikitext-example-without-html """There are <$count filter="[tag[Examples]]"/> tiddlers tagged with Examples""">>

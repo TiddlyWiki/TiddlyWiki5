@@ -65,8 +65,19 @@ type: text/vnd.tiddlywiki
 
 \define .icon(_) <span class="doc-icon">{{$_$}}</span>
 
-\define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
-\define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
+\define .tip(_)
+<div class="doc-icon-block">
+<div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$
+</div>
+\end
+
+\define .warning(_)
+<div class="doc-icon-block">
+<div class="doc-block-icon">
+{{$:/core/images/warning}}
+</div> $_$
+</div>
+\end
 
 \define .state-prefix() $:/state/editions/tw5.com/
 
@@ -130,4 +141,6 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 \define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renamed" """$link$""" """$colour$""">>
 \define .link-badge-updated(link,colour:#91ba66) <<.link-badge "updated" """$link$""" """$colour$""">>
 
-<pre><$view field="text"/></pre>
+<pre>
+<$view field="text"/>
+</pre>

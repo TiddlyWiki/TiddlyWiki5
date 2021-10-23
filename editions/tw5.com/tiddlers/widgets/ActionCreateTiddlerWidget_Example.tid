@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 Caption for new button: <$edit-text tiddler="$:/state/new-button-caption" tag="input" default=""/>
 
-<$button>
+<$button>\
 <$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}>
 <$action-navigate $to=<<createTiddler-title>>/>
 </$action-createtiddler>

@@ -23,7 +23,7 @@ The ''action-deletefield'' widget is invisible. Any content within it is ignored
 Here is an example of a button that deletes the caption and tags fields of the current tiddler:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-deletefield caption tags/>
 Delete "caption" and "tags"
 </$button>'/>
@@ -31,7 +31,7 @@ Delete "caption" and "tags"
 Here is an example of a button that deletes the modified date and tags fields of the tiddler HelloThere:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-deletefield $tiddler="HelloThere" modified tags/>
 Delete "modified" and "tags" from ~HelloThere
 </$button>'/>
@@ -39,7 +39,7 @@ Delete "modified" and "tags" from ~HelloThere
 Here is an example of a button that uses the optional $field attribute to delete the text field of the tiddler HelloThere:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-deletefield $tiddler="HelloThere" $field="text"/>
 Delete text from ~HelloThere
 </$button>'/>

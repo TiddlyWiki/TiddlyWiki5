@@ -16,7 +16,7 @@ The `tm-load-plugin-library` message loads the specified plugin library and impo
 The following snippet will load the official plugin library:
 
 ```
-<$button>
+<$button>\
 <$action-sendmessage $message="tm-load-plugin-library" infoTitlePrefix="$:/temp/RemoteAssetInfo/" url="https://tiddlywiki.com/library/v5.1.11/index.html"/>
 Load official plugin library
 </$button>

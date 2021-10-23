@@ -25,7 +25,7 @@ The action widgets are passed as a string to the `actions` attribute of the trig
 <$action-sendmessage $message="tm-full-screen"/>
 \end
 
-<$button actions=<<my-actions>>>
+<$button actions=<<my-actions>>>\
 Click me!
 </$button>
 ```
@@ -35,7 +35,7 @@ Click me!
 The action widgets need not be immediate children of their triggering widget, but they must be descendents of it. The actions are performed in sequence. Here is the above example rewritten to use embedding:
 
 ```
-<$button>
+<$button>\
 <$action-sendmessage $message="tm-home"/>
 <$action-sendmessage $message="tm-full-screen"/>
 Click me!

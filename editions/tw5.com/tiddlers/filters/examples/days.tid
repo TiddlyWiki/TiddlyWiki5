@@ -4,7 +4,9 @@ type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[days[-14]]" "tiddlers modified within the last 14 days">>
 <<.operator-example 2 "[!days:created[-800]]" "tiddlers created more than 800 days ago">>
+
 The filter can be used to highlight new items in a list. For example:
+
 <$macrocall
   $name="wikitext-example-without-html" src=
 """
@@ -12,8 +14,8 @@ The filter can be used to highlight new items in a list. For example:
   <$list filter="[tag[ReleaseNotes]!<currentTiddler>!sort[modified]]">
     <li>
       <$link><$view field="title"/></$link>
-         <$list filter="[<currentTiddler>days[-180]]"> @@color:red;^^new^^@@</$list>
-         <$list filter="[<currentTiddler>days[-500]!days[-180]]"> @@color:black;^^recent^^@@</$list>
+      <$list filter="[<currentTiddler>days[-180]]"> @@color:red;^^new^^@@</$list>
+      <$list filter="[<currentTiddler>days[-500]!days[-180]]"> @@color:black;^^recent^^@@</$list>
     </li>
   </$list>
 </ul>

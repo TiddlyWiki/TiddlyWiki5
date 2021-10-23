@@ -72,7 +72,7 @@ Revert
 
 There's a new core palette "Solar Flare", contributed by Rustem Akbulatov (@nameanyone).
 
-<$button>
+<$button>\
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/SolarFlare"/>
 Try it out

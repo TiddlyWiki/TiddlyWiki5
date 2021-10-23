@@ -105,7 +105,7 @@ A number of [[extended filter operators|The Extended Listops Filters]] are neces
 In this example we shall populate and then clear a list in an ordinary field (myfield) of this tiddler (the default.)
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$button>
+src="""<$button>\
 <$action-listops $field="myfield" $subfilter="efg hlm pqr"/>
 Populate 'myfield'
 </$button>
@@ -130,7 +130,7 @@ Clear 'myfield'
 In this example we shall append and remove items from a list in an ordinary field (myfield) of this tiddler (the default) and sort the resultant list. We shall then remove some of the appended items and sort the resulting list in reverse order.
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$button>
+src="""<$button>\
 <$action-listops $field="myfield" $subfilter="-efg ijk xyz [[this is a title]] +[sort[]]"/>
 Mangle List
 </$button>
@@ -147,7 +147,7 @@ Unmangle List
 In this example we shall append a few tags to the 'tags' field of this tiddler (the default.) We shall then remove some of the appended tags. 
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$button>
+src="""<$button>\
 <$action-listops $tags="+[append{Days of the Week!!short}] $:/tag1 $:/tag2 $:/tag3"/>
 Populate 'tags'
 </$button>

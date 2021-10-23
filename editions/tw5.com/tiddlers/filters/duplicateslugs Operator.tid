@@ -11,7 +11,8 @@ type: text/vnd.tiddlywiki
 <<.from-version "5.1.23">> The <<.olink slugify>> operator can be used to transform arbitrary tiddler titles into human readable strings suitable for use in URLs or filenames. However, it is possible for multiple different titles to slugify to the same string. The <<.olink duplicateslugs>> operator can be used to display a warning. For example:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$list filter="[!is[system]duplicateslugs[]limit[1]]" emptyMessage="There are no duplicate slugs">
+src='<$list filter="[!is[system]duplicateslugs[]limit[1]]" emptyMessage="<p>There are no duplicate slugs</p>">
+
 The following tiddlers have duplicate slugs:
 
 <ul>
@@ -19,4 +20,5 @@ The following tiddlers have duplicate slugs:
 <li><$link><$text text=<<currentTiddler>>/></$link></li>
 </$list>
 </ul>
+
 </$list>'/>

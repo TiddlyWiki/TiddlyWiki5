@@ -10,7 +10,9 @@ title: $:/SavingDetailsTemplate
 </$set>
 \end
 
-<h1><$link to=<<currentTab>>><$view tiddler=<<currentTab>> field="title"/></$link></h1>
+<h1>
+<$link to=<<currentTab>>><$view tiddler=<<currentTab>> field="title"/></$link>
+</h1>
 
 |!Method |<$view tiddler=<<currentTab>> field="method"/> |
 |!Delivery |<$view tiddler=<<currentTab>> field="delivery"/> |

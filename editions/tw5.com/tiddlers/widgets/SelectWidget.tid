@@ -14,7 +14,7 @@ In multiple selection mode, the list of selected values is bound to the specifie
 
 For example, this select widget displays a list of the tags in this wiki:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler=<<qualify 'select-demo'>> default='HelloThere'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler=<<qualify 'select-demo'>> default='HelloThere'>\
 <$list filter='[all[shadows+tiddlers]tags[]sort[title]]'>
 <option value=<<currentTiddler>>><$view field='title'/></option>
 </$list>
@@ -47,7 +47,7 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 
 This example sets the title of the current wiki [[$:/SiteTitle]] to one of a list of book titles:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle' tooltip='Choose a new site title'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle' tooltip='Choose a new site title'>\
 <option>A Tale of Two Cities</option>
 <option>A New Kind of Science</option>
 <option>The Dice Man</option>
@@ -57,7 +57,7 @@ This example sets the title of the current wiki [[$:/SiteTitle]] to one of a lis
 
 To display a default value that is also disabled, effectively functioning as a placeholder, the following form can be used. Note that the targeted field must be empty, or not exist, for the placeholder to show in the widget:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='New Tiddler' field='text' default='Choose a new text'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='New Tiddler' field='text' default='Choose a new text'>\
 <option disabled>Choose a new text</option>
 <option>A Tale of Two Cities</option>
 <option>A New Kind of Science</option>
@@ -68,7 +68,7 @@ To display a default value that is also disabled, effectively functioning as a p
 
 In this example the `value` attribute has been used to specify the text that should be used as the value of the entry instead of the display text.
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>\
 <option value='cities'>A Tale of Two Cities</option>
 <option value='science'>A New Kind of Science</option>
 <option value='dice'>The Dice Man</option>
@@ -78,7 +78,7 @@ In this example the `value` attribute has been used to specify the text that sho
 
 Entries in the list can be grouped together with the `<optgroup>` element
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle'>\
 <optgroup label='Fiction'>
 <option value='cities'>A Tale of Two Cities</option>
 <option value='dice'>The Dice Man</option>
@@ -93,7 +93,7 @@ Entries in the list can be grouped together with the `<optgroup>` element
 
 The ListWidget can be used to generate the options for a select widget. For example, here we combine a select widget listing all the tiddlers tagged ''TableOfContents'' with a transclusion to display the text of the selected one.
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state'>\
 <$list filter='[tag[TableOfContents]]'>
 <option><$view field='title'/></option>
 </$list>
@@ -106,7 +106,7 @@ The ListWidget can be used to generate the options for a select widget. For exam
 
 This example uses a nested pair of list widgets. The outer one generates the `<optgroup>` elements, and the inner one generates `<option>` elements:
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-nestedstate' field='type' default='text/vnd.tiddlywiki'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-nestedstate' field='type' default='text/vnd.tiddlywiki'>\
 <$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
 <optgroup label={{!!group}}>
 <$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]'>
@@ -120,7 +120,7 @@ This example uses a nested pair of list widgets. The outer one generates the `<o
 
 This example uses the `multiple` keyword to specify that we should be able to select multiple items.
 
-<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state' field='testing' multiple size='8'>
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-state' field='testing' multiple size='8'>\
 <$list filter='[tag[TableOfContents]]'>
 <option><$view field='title'/></option>
 </$list>
