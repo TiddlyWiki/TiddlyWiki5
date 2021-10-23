@@ -17,9 +17,7 @@ tags: $:/tags/Macro
 	</dl>
 </$reveal>
 <$reveal state=<<.state>> type="match" text="show">
-	<div class="tc-search tc-advanced-search">
 	<$edit-text tiddler=<<.state>> field="filter" tag="input" type=search/>
-	</div>
 	<dl>
 	<dd>
   <$button set=<<.state>> setTo="">Hide</$button>
