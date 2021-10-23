@@ -11,7 +11,8 @@ Eine Schlüssel Fähigkeit von WikiText ist die einfache Möglichkeit, Verknüpf
 
 !! Manuelle Verknüpfungen
 
-<table><tbody>
+<table>
+<tbody>
 <tr class="evenRow">
   <td>`[[Tiddler Titel]]`</td>
   <td>[[Tiddler Titel]]</td>
@@ -22,7 +23,8 @@ Eine Schlüssel Fähigkeit von WikiText ist die einfache Möglichkeit, Verknüpf
   <td>[[Angezeigter Link Text|Tiddler Titel]]</td>
   <td>Verknüpfung zu einem Tiddler und Festlegen des angezeigten Textes.</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
 !! ~CamelCase Verknüpfungen
 

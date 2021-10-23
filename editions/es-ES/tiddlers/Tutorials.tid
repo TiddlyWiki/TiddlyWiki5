@@ -18,7 +18,9 @@ Envía más tutoriales que encuentres para ampliar esta lista via [[GitHub|https
 
 ! <$link><$view field="title"/></$link>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/>
+</div>
 
 <$transclude/>
 

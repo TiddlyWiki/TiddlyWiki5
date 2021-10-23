@@ -15,7 +15,9 @@ color:$(foregroundColor)$;
 <$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
 <$transclude tiddler={{!!icon}}/> <$view field="es-title"><$view field="title" format="text" /></$view>
 </$button>
-<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes">
+<div class="tc-drop-down">
+<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
 </div>

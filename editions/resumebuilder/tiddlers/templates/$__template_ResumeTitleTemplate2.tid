@@ -8,7 +8,9 @@ template_name: Title Template 2
 title: $:/template/ResumeTitleTemplate2
 
 \define thisShowTitle()
-<h1>__<$reveal type='nomatch' state='$:/settings/$(ThisResume)$/ResumeTitle' text='use name'>''{{$:/settings/$(ThisResume)$/ResumeTitle}}''</$reveal><$reveal type='match' state='$:/settings/$(ThisResume)$/ResumeTitle' text='use name'>''{{$:/data/Personal Information!!name}}''</$reveal>__</h1>
+<h1>
+__<$reveal type='nomatch' state='$:/settings/$(ThisResume)$/ResumeTitle' text='use name'>''{{$:/settings/$(ThisResume)$/ResumeTitle}}''</$reveal><$reveal type='match' state='$:/settings/$(ThisResume)$/ResumeTitle' text='use name'>''{{$:/data/Personal Information!!name}}''</$reveal>__
+</h1>
 \end
 
 <div style='text-align:center'>

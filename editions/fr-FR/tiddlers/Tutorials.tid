@@ -18,7 +18,9 @@ Voici quelques pages web contenant des astuces et des tutoriels liés à ~Tiddly
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/>
+</div>
 
 <$transclude/>
 

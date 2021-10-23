@@ -52,7 +52,9 @@ Add Education
 </$set>
 </$set>
 
-<h2>Current list:</h2>
+<h2>
+Current list:
+</h2>
 
 <$vars ThisResume={{$:/settings/Global!!selected_resume}}>
 <table style='width:100%'>

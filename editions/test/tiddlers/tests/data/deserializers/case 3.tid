@@ -10,7 +10,8 @@ type: text/html
 <body>
 
 <!--~~ Ordinary tiddlers ~~-->
-<div id="storeArea" style="display:none;"><div title="Hello &quot;There&quot;" type="text/vnd.tiddlywiki">
+<div id="storeArea" style="display:none;">
+<div title="Hello &quot;There&quot;" type="text/vnd.tiddlywiki">
 <pre>Abacus</pre>
 </div>
 </div>

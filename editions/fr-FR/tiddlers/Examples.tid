@@ -17,7 +17,9 @@ Cette compilation montre des exemples intéressants et inspirants d'utilisation 
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/>
+</div>
 
 <$transclude/>
 

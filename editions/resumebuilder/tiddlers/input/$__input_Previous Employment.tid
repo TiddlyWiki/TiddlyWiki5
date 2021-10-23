@@ -29,7 +29,9 @@ Add Employment
 </$set>
 </$set>
 
-<h2>Current Listing:</h2>
+<h2>
+Current Listing:
+</h2>
 
 <table style='width:100%'>
 <tr><th></th><th>Visible</th><th>Entry</th><th>Order</th></tr>

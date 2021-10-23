@@ -21,9 +21,11 @@ type: text/vnd.tiddlywiki
 	<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
 	</dl>
 	<blockquote class="doc-example-result">
-	<ul><$list filter="$eg$" emptyMessage="(empty)">
+	<ul>
+	<$list filter="$eg$" emptyMessage="(empty)">
 	<li><$link><$view field="title"/></$link></li>
-	</$list></ul>
+	</$list>
+	</ul>
 	</blockquote>
 </$reveal>
 </$list>

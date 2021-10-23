@@ -47,7 +47,9 @@ Le contenu HTML or WikiText peut être inclu dans des images en mode ligne via l
 
 Lors de l'intégration d'éléments SVG vous pouvez faire appel à des fonctionnalités WikiText comme la transclusion. Par exemple, voici un cercle SVG dont la valeur du rayon est réglée dans le tiddler [[$:/SVGExampleRadius]]<<:>>
 
-<svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
+<svg width="150" height="150">
+<circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/>
+</svg>
 
 Vous pouvez modifier la valeur du rayon<<:>> <$edit-text tiddler="$:/SVGExampleRadius" tag="input"/>
 
