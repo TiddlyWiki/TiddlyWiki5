@@ -59,19 +59,24 @@ Invoke the action associated with this widget
 */
 SetMultipleFieldsWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var tiddler = this.wiki.getTiddler(this.actionTiddler),
-		additions = {},
-		values = this.wiki.filterTiddlers(this.actionValues,this),
-		names;
+		names, values = this.wiki.filterTiddlers(this.actionValues,this);
 	if(this.actionFields) {
+		var additions = {};
 		names = this.wiki.filterTiddlers(this.actionFields,this);
 		$tw.utils.each(names,function(fieldname,index) {
 			additions[fieldname] = values[index] || "";
 		});
+		var creationFields = this.actionTimestamp ? this.wiki.getCreationFields() : undefined,
+			modificationFields = this.actionTimestamp ? this.wiki.getModificationFields() : undefined;
+		this.wiki.addTiddler(new $tw.Tiddler(creationFields,tiddler,{title: this.actionTiddler},modificationFields,additions));
 	} else if(this.actionIndexes) {
-		// TODO: Set indexes
+		var data = this.wiki.getTiddlerData(this.actionTiddler,Object.create(null));
+		names = this.wiki.filterTiddlers(this.actionIndexes,this);
+		$tw.utils.each(names,function(name,index) {
+			data[name] = values[index] || "";
+		});
+		this.wiki.setTiddlerData(this.actionTiddler,data,{},{suppressTimestamp: !this.actionTimestamp});
 	}
-	// TODO: Respect this.actionTimestamp
-	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{title: this.actionTiddler},this.wiki.getModificationFields(),additions));
 	return true; // Action was invoked
 };
 
