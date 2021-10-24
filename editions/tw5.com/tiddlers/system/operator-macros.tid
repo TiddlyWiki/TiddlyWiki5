@@ -20,11 +20,11 @@ tags: $:/tags/Macro
 	<$edit-text tiddler=<<.state>> field="filter" tag="input" type=search focus="true"/>
 	<dl>
 	<dd>
-  <$button set=<<.state>> setTo="">Hide</$button>
-  <$reveal stateTitle=<<.state>> stateField="filter" type="nomatch" text=<<__eg__>>>
-    <$button actions=<<.operator-example-tryit-actions>>>Reset</$button>
-  </$reveal>
-  </dd>
+	<$button set=<<.state>> setTo="">Hide</$button>
+	<$reveal stateTitle=<<.state>> stateField="filter" type="nomatch" text=<<__eg__>>>
+		<$button actions=<<.operator-example-tryit-actions>>>Reset</$button>
+	</$reveal>
+	</dd>
 	</dl>
 	<blockquote class="doc-example-result">
 	<ul><$list filter={{{[<.state>get[filter]]}}} emptyMessage="(empty)">
