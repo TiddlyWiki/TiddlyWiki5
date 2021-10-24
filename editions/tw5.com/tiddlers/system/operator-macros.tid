@@ -26,13 +26,11 @@ tags: $:/tags/Macro
   </$reveal>
   </dd>
 	</dl>
-	<$list filter="[<.state>get[filter]]" variable=".filter">
 	<blockquote class="doc-example-result">
-	<ul><$list filter=<<.filter>> emptyMessage="(empty)">
+	<ul><$list filter={{{[<.state>get[filter]]}}} emptyMessage="(empty)">
 	<li><$link><$view field="title"/></$link></li>
 	</$list></ul>
 	</blockquote>
-	</$list>
 </$reveal>
 </$list>
 \end
