@@ -81,7 +81,7 @@ exports.setText = function(title,field,index,value,options) {
 		} else {
 			delete data[index];
 		}
-		this.setTiddlerData(title,data,modificationFields);
+		this.setTiddlerData(title,data,{},{suppressTimestamp: options.suppressTimestamp});
 	} else {
 		var tiddler = this.getTiddler(title),
 			fields = {title: title};
@@ -856,19 +856,24 @@ Set a tiddlers content to a JavaScript object. Currently this is done by setting
 title: title of tiddler
 data: object that can be serialised to JSON
 fields: optional hashmap of additional tiddler fields to be set
+options: optional hashmap of options including:
+	suppressTimestamp: if true, don't set the creation/modification timestamps
 */
-exports.setTiddlerData = function(title,data,fields) {
+exports.setTiddlerData = function(title,data,fields,options) {
+	options = options || {};
 	var existingTiddler = this.getTiddler(title),
+		creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
+		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields(),
 		newFields = {
 			title: title
-	};
+		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
-	this.addTiddler(new $tw.Tiddler(this.getCreationFields(),existingTiddler,fields,newFields,this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(creationFields,existingTiddler,fields,newFields,modificationFields));
 };
 
 /*
