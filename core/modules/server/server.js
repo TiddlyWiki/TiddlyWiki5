@@ -81,7 +81,7 @@ function Server(options) {
 	}
 	this.transport = require(this.protocol);
 	// Initialise CORS options
-	this.origin = this.get("origin")? this.protocol+"://"+this.get("origin"): this.protocol+"://"+this.get("host");
+	this.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 }
 
 /*
@@ -235,8 +235,8 @@ Server.prototype.isOriginWhitelisted = function(origin) {
 		valid = (this.origin == origin),
 		originFilters = this.wiki.getTiddlerList(this.get("cors-tiddler"),"text");
 	// Optionally output debug info
-	if(self.get("debug-level") !== "none") {
-		$tw.utils.log(`CORS valid=${valid} this.origin=${this.origin} request.origin=${origin}`)
+	if(this.get("debug-level") !== "none") {
+		$tw.utils.log(`CORS=${valid?'valid':'invalid'} this.origin=${this.origin} request.origin=${origin}`)
 	}
 	if(!valid) {
 		$tw.utils.each(originFilters,function(filter) {
