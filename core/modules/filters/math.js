@@ -191,7 +191,7 @@ exports.atan = makeNumericBinaryOperator(
 );
 
 exports.atan2 = makeNumericBinaryOperator(
-	function(a) {return Math.atan2(a)}
+	function(a,b) {return Math.atan2(a,b)}
 );
 
 //Calculate the variance of a population of numbers in an array given its mean
