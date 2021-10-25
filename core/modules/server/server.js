@@ -152,7 +152,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
-	"cors-tiddler": "$:/config/tiddlyweb/corsOrigins",
+	"cors-tiddler": "$:/config/tiddlyweb/cors",
 	"root-tiddler": "$:/core/save/all",
 	"root-render-type": "text/plain",
 	"root-serve-type": "text/html",
