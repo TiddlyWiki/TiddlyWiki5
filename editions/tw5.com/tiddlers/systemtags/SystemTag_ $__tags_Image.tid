@@ -6,4 +6,4 @@ tags: SystemTags
 title: SystemTag: $:/tags/Image
 type: text/vnd.tiddlywiki
 
-The [[system tag|SystemTags]] `$:/tags/Image` marks (core) images. An overview of system icons can be found at: [[Icon Gallery]]
+The [[system tag|SystemTags]] `$:/tags/Image` marks core images. An overview of system icons can be found in the [[Icon Gallery]]

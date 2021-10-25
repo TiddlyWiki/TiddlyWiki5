@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 \define copyActions() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<imageTitle>>/>
 
-This gallery let's you ''click'' the ''icons'' and ''copies the title to the clipboard''. So it's easy to transclude them into other UI elements.
+<<.tip "Click an icon to copy the title to the clipboard">>
 
 <div class="tc-image-chooser">
 <$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]]" actions=<<copyActions>> />

@@ -1,6 +1,6 @@
 caption: image-picker
 created: 20160418155531395
-modified: 20211018102346306
+modified: 20160418155805435
 tags: Macros [[Core Macros]]
 title: image-picker Macro
 type: text/vnd.tiddlywiki
@@ -18,4 +18,4 @@ The images are selected by means of a [[filter expression|Filter Expression]], i
 
 > `[all[shadows+tiddlers]is[image]$subfilter$!has[draft.of]] -[type[application/pdf]] +[sort[title]]`
 
-See: <<.macro-examples "image-picker">> and [[Icon Gallery]]
+<<.macro-examples "image-picker">>
