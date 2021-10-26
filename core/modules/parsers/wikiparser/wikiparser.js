@@ -32,6 +32,7 @@ options: see below:
 	parseAsInline: true to parse text as inline instead of block
 	wiki: reference to wiki to use
 	_canonical_uri: optional URI of content if text is missing or empty
+	autoparagraph: false to skip the p tags
 */
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
@@ -80,12 +81,12 @@ var WikiParser = function(type,text,options) {
 	// Instantiate the parser block and inline rules
 	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(inlineRuleClasses,"inline",0);
-	// set the autoparagraph variable from constructor arguments
+	// set the autoparagraph variable from the constructor arguments
 	if(typeof options.autoParagraph === "boolean") {
 		// set it from the options if available
 		this.autoParagraph = options.autoParagraph;
-	} else if(typeof type === "string" && type.indexOf("; structure") !== -1) {
-		// set it from the content type
+	} else if(type === "text/vnd.tiddlywiki; structure") {
+		// set it based on the content type
 		this.autoParagraph = false;
 	} else {
 		// fallback to true for backward compatibility
@@ -243,7 +244,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	}
 	// Treat it as a paragraph if we didn't find a block rule
 	var children = this.parseInlineRun(terminatorRegExp);
-	if(this.autoParagraph) return [{type: "element", tag: "p", children: children}];
+	if(this.autoParagraph) return [{type: "element",tag: "p",children: children}];
 	else return children;
 };
 
