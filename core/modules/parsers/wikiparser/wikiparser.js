@@ -35,13 +35,6 @@ options: see below:
 */
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
-	//fallback to true for weird edge cases or third party libraries
-	if(typeof options.autoParagraph === "boolean"){
-		this.autoParagraph = options.autoParagraph;
-	} else {
-		this.autoParagraph = true;
-		// console.log(new Error("autoParagraph is undefined\n" + this.source));
-	}
 	var self = this;
 	// Check for an externally linked tiddler
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {
@@ -87,6 +80,17 @@ var WikiParser = function(type,text,options) {
 	// Instantiate the parser block and inline rules
 	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(inlineRuleClasses,"inline",0);
+	// set the autoparagraph variable from constructor arguments
+	if(typeof options.autoParagraph === "boolean") {
+		// set it from the options if available
+		this.autoParagraph = options.autoParagraph;
+	} else if(type.indexOf("; structure") !== -1) {
+		// set it from the content type
+		this.autoParagraph = false;
+	} else {
+		// fallback to true for backward compatibility
+		this.autoParagraph = true;
+	}
 	// Parse any pragmas
 	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
@@ -438,6 +442,7 @@ WikiParser.prototype.amendRules = function(type,names) {
 };
 
 exports["text/vnd.tiddlywiki"] = WikiParser;
+exports["text/vnd.tiddlywiki; structure"] = WikiParser;
 
 })();
 
