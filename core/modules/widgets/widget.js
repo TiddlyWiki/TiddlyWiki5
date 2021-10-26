@@ -570,7 +570,7 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t],
 			childIsActionWidget = !!child.invokeAction,
-			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy");
+			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy"); // Default is "once"
 		// Refresh the child if required
 		if(childIsActionWidget || actionRefreshPolicy === "always") {
 			child.refreshSelf();
