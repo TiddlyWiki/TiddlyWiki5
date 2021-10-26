@@ -84,7 +84,7 @@ var WikiParser = function(type,text,options) {
 	if(typeof options.autoParagraph === "boolean") {
 		// set it from the options if available
 		this.autoParagraph = options.autoParagraph;
-	} else if(type.indexOf("; structure") !== -1) {
+	} else if(typeof type === "string" && type.indexOf("; structure") !== -1) {
 		// set it from the content type
 		this.autoParagraph = false;
 	} else {
