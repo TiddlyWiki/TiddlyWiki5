@@ -23,25 +23,25 @@ list-before: $:/core/ui/ViewTemplate/body
 <$set name="op-name" value="">
 <$list filter="[all[current]tag[Filter Operators]]">
 <table class="doc-table before-tiddler-body">
-<!-->
+<!-- -->
 <$set name="op-head" value="purpose">
 <$set name="op-body" value={{!!op-purpose}}>
 <<.op-row>>
 </$set>
 </$set>
-<!-->
+<!-- -->
 <$set name="op-head" value="[[input|Filter Syntax]]">
 <$set name="op-body" value={{!!op-input}}>
 <<.op-row>>
 </$set>
 </$set>
-<!-->
+<!-- -->
 <$set name="op-head" value="`!` input">
 <$set name="op-body" value={{!!op-neg-input}}>
 <<.op-row>>
 </$set>
 </$set>
-<!-->
+<!-- -->
 <$set name="op-head" value="[[suffix|Filter Step]]">
 <$set name="op-body" value={{!!op-suffix}}>
 <$set name="op-name" value={{!!op-suffix-name}}>
@@ -49,7 +49,7 @@ list-before: $:/core/ui/ViewTemplate/body
 </$set>
 </$set>
 </$set>
-<!-->
+<!-- -->
 <$set name="op-head" value="[[parameter|Filter Parameter]]">
 <$set name="op-body" value={{!!op-parameter}}>
 <$set name="op-name" value={{!!op-parameter-name}}>
@@ -57,19 +57,19 @@ list-before: $:/core/ui/ViewTemplate/body
 </$set>
 </$set>
 </$set>
-<!-->
+<!-- -->
 <$set name="op-head" value="output">
 <$set name="op-body" value={{!!op-output}}>
 <<.op-row>>
 </$set>
 </$set>
-<!-->
+<!-- -->
 <$set name="op-head" value="`!` output">
 <$set name="op-body" value={{!!op-neg-output}}>
 <<.op-row>>
 </$set>
 </$set>
-<!-->
+<!-- -->
 </table>
 <$list filter="[all[current]has[from-version]]" variable="listItem">
 <$macrocall $name=".from-version" version={{!!from-version}}/>
