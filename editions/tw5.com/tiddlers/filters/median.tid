@@ -1,0 +1,13 @@
+caption: median
+created: 20210417090137714
+modified: 20210426131553507
+op-input: a [[selection of titles|Title Selection]]
+op-output: the median of the input numbers
+op-purpose: treating each input title as a number, compute their median value
+tags: [[Filter Operators]] [[Mathematics Operators]]
+title: median Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.0">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "median">>

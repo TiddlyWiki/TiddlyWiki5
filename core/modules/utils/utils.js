@@ -150,7 +150,7 @@ Convert a string to title case (ie capitalise each initial letter)
 exports.toTitleCase = function(str) {
 	return (str || "").replace(/(^|\s)\S/g, function(c) {return c.toUpperCase();});
 }
-	
+
 /*
 Find the line break preceding a given position in a string
 Returns position immediately after that line break, or the start of the string
@@ -223,6 +223,7 @@ exports.removeArrayEntries = function(array,value) {
 			array.splice(p,1);
 		}
 	}
+	return array;
 };
 
 /*
@@ -294,6 +295,47 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
+exports.formatTitleString = function(template,options) {
+	var base = options.base || "",
+		separator = options.separator || "",
+		counter = options.counter || "";
+	var result = "",
+		t = template,
+		matches = [
+			[/^\$basename\$/i, function() {
+				return base;
+			}],
+			[/^\$count:(\d+)\$/i, function(match) {
+				return $tw.utils.pad(counter,match[1]);
+			}],
+			[/^\$separator\$/i, function() {
+				return separator;
+			}],
+			[/^\$count\$/i, function() {
+				return counter + "";
+			}]
+		];
+	while(t.length){
+		var matchString = "";
+		$tw.utils.each(matches, function(m) {
+			var match = m[0].exec(t);
+			if(match) {
+				matchString = m[1].call(null,match);
+				t = t.substr(match[0].length);
+				return false;
+			}
+		});
+		if(matchString) {
+			result += matchString;
+		} else {
+			result += t.charAt(0);
+			t = t.substr(1);
+		}
+	}
+	result = result.replace(/\\(.)/g,"$1");
+	return result;
+};
+
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
@@ -340,6 +382,15 @@ exports.formatDateString = function(date,template) {
 			}],
 			[/^0WW/, function() {
 				return $tw.utils.pad($tw.utils.getWeek(date));
+			}],
+			[/^0ddddd/, function() {
+				return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),3);
+			}],
+			[/^ddddd/, function() {
+				return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+			}],
+			[/^dddd/, function() {
+				return [7,1,2,3,4,5,6][date.getDay()];
 			}],
 			[/^ddd/, function() {
 				return $tw.language.getString("Date/Short/Day/" + date.getDay());
@@ -510,6 +561,15 @@ exports.getRelativeDate = function(delta) {
 exports.htmlEncode = function(s) {
 	if(s) {
 		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
+	} else {
+		return "";
+	}
+};
+
+// Converts like htmlEncode, but forgets the double quote for brevity
+exports.htmlTextEncode = function(s) {
+	if(s) {
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;");
 	} else {
 		return "";
 	}
@@ -690,9 +750,8 @@ exports.isValidFieldName = function(name) {
 	if(!name || typeof name !== "string") {
 		return false;
 	}
-	name = name.toLowerCase().trim();
-	var fieldValidatorRegEx = /^[a-z0-9\-\._]+$/mg;
-	return fieldValidatorRegEx.test(name);
+	// Since v5.2.x, there are no restrictions on characters in field names
+	return name;
 };
 
 /*
@@ -792,7 +851,7 @@ exports.makeDataUri = function(text,type,_canonical_uri) {
 		parts.push(type);
 		parts.push(isBase64 ? ";base64" : "");
 		parts.push(",");
-		parts.push(isBase64 ? text : encodeURIComponent(text));		
+		parts.push(isBase64 ? text : encodeURIComponent(text));
 	}
 	return parts.join("");
 };
@@ -867,7 +926,9 @@ exports.stringifyNumber = function(num) {
 
 exports.makeCompareFunction = function(type,options) {
 	options = options || {};
-	var gt = options.invert ? -1 : +1,
+	// set isCaseSensitive to true if not defined in options
+	var isCaseSensitive = (options.isCaseSensitive === false) ? false : true,
+		gt = options.invert ? -1 : +1,
 		lt = options.invert ? +1 : -1,
 		compare = function(a,b) {
 			if(a > b) {
@@ -886,7 +947,11 @@ exports.makeCompareFunction = function(type,options) {
 				return compare($tw.utils.parseInt(a),$tw.utils.parseInt(b));
 			},
 			"string": function(a,b) {
-				return compare("" + a,"" +b);
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return compare("" + a,"" + b);
 			},
 			"date": function(a,b) {
 				var dateA = $tw.utils.parseDate(a),
@@ -901,6 +966,13 @@ exports.makeCompareFunction = function(type,options) {
 			},
 			"version": function(a,b) {
 				return $tw.utils.compareVersions(a,b);
+			},
+			"alphanumeric": function(a,b) {
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return options.invert ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);

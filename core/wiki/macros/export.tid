@@ -6,6 +6,7 @@ $baseFilename$$(extension)$
 \end
 
 \define exportButton(exportFilter:"[!is[system]sort[title]]",lingoBase,baseFilename:"tiddlers")
+\whitespace trim
 <$vars hint={{{ [<__lingoBase__>addsuffix[Hint]get[text]] }}} caption={{{  [<__lingoBase__>addsuffix[Caption]get[text]] }}}>
 <span class="tc-popup-keep"><$button popup=<<qualify "$:/state/popup/export">> tooltip=<<hint>> aria-label=<<caption>> class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">

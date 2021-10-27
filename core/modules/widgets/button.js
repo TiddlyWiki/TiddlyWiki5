@@ -227,7 +227,7 @@ ButtonWidget.prototype.execute = function() {
 ButtonWidget.prototype.updateDomNodeClasses = function() {
 	var domNodeClasses = this.domNode.className.split(" "),
 		oldClasses = this.class.split(" "),
-		newClasses;	
+		newClasses;
 	this["class"] = this.getAttribute("class","");
 	newClasses = this.class.split(" ");
 	//Remove classes assigned from the old value of class attribute

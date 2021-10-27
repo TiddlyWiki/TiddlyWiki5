@@ -69,7 +69,7 @@ GitHubSaver.prototype.save = function(text,method,callback) {
 				});
 			}
 			var data = {
-				message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				message: $tw.language.getString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: $tw.utils.base64Encode(text),
 				branch: branch,
 				sha: sha

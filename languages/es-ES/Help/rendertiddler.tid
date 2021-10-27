@@ -1,13 +1,24 @@
 title: $:/language/Help/rendertiddler
 description: Genera un tiddler del ContentType que se especifique
 
+(Nota: el comando `--rendertiddler` está obsoleto en favor del nuevo y más flexible comando `--render`)
+
 Genera un tiddler del ContentType que se especifique (por defecto `text/html`) y lo guarda con el nombre de archivo especificado
 
+Opcionalmente, se puede especificar el título de un tiddler de plantilla, en cuyo caso el tiddler de plantilla se representa con la variable "currentTiddler" establecida en el tiddler que se está procesando (el primer valor de parámetro).
+
+También se puede especificar un nombre y valor para variables adicionales.
+
 ```
---rendertiddler <title> <filename> [<type>]
+--rendertiddler <title> <filename> [<type>] [<template>] [<name>] [<value>]
 ```
 
-Por defecto, el nombre de archivo es relativo al subdirectorio `output` en el directorio del wiki<br>
-Puede usarse el comando `--output` para dirigir la salida a cualquier otro directorio
+Por defecto, el nombre de archivo es relativo al subdirectorio `output` en el directorio del wiki. Puede usarse el comando `--output` para dirigir la salida a cualquier otro directorio
 
 Los directorios no existentes en la ruta del nombre de archivo se crean automáticamente.
+
+Por ejemplo, el siguiente comando guarda todos los tiddlers que coinciden con el filtro `[tag[done]]` en un archivo JSON titulado `output.json` aplicando la plantilla principal `$:/core/templates/exporters/JsonFile`.
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
+```

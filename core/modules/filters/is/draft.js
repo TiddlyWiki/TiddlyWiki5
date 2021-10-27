@@ -28,7 +28,7 @@ exports.draft = function(source,prefix,options) {
 			if(tiddler && $tw.utils.hop(tiddler.fields,"draft.of") && (tiddler.fields["draft.of"].length !== 0)) {
 				results.push(title);
 			}
-		});				
+		});
 	}
 	return results;
 };

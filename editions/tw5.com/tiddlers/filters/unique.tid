@@ -1,0 +1,10 @@
+caption: unique
+op-input: a list of items
+op-output: a list of unique items
+op-parameter: ignored
+op-purpose: remove all duplicate items from the current list
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: unique Operator
+type: text/vnd.tiddlywiki
+
+<<.operator-examples "unique">>

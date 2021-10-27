@@ -13,10 +13,16 @@ tags: [[$:/tags/Stylesheet]]
     text-rendering: auto;
 }
 
+/* Reset Automatic Numbering on a per tiddler basis */
+
+.tc-tiddler-frame {
+	counter-reset: katexEqnNo;
+}
+
 /* Avoid TW5's max-width: 100% */
 
 .katex svg {
-  max-width: initial;
+	max-width: initial;
 }
 
 /* Override font URLs */

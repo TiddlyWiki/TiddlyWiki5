@@ -1,5 +1,5 @@
 created: 20141008134425548
-modified: 20160429165240169
+modified: 20210630163127249
 tags: Widgets
 title: ActionWidgets
 type: text/vnd.tiddlywiki
@@ -12,10 +12,10 @@ The following action widgets are provided:
 
 There are two ways to use action widgets:
 
-* Using the `actions` attribute of the triggering widget (this is the preferred way)
+* Placing them within an action string attribute (typically called `actions`) on the triggering widget (this is the preferred way)
 * Embedding the actions within the triggering widget (an older technique that is now deprecated)
 
-!! Assigning action widgets with the `actions` attribute
+!! Using action string attributes
 
 The action widgets are passed as a string to the `actions` attribute of the triggering widget. Usually, it is more convenient to use a macro to assign the action widgets to a variable. For example, here is a button that triggers two actions of sending different messages:
 
@@ -30,7 +30,7 @@ Click me!
 </$button>
 ```
 
-!! Assigning action widgets by embedding
+!! Directly embedding action widgets
 
 The action widgets need not be immediate children of their triggering widget, but they must be descendents of it. The actions are performed in sequence. Here is the above example rewritten to use embedding:
 
@@ -42,3 +42,6 @@ Click me!
 </$button>
 ```
 
+! Action Execution Modes
+
+{{ActionWidget Execution Modes}}

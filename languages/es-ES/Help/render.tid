@@ -1,0 +1,35 @@
+title: $:/language/Help/render
+description: Renderiza tiddlers individuales en archivos
+
+Renderiza tiddlers individuales identificados por un filtro y guarda los resultados en los archivos especificados.
+
+Opcionalmente, se puede especificar el título de un tiddler de plantilla. En este caso, en lugar de representar directamente cada tiddler, la plantilla tiddler se procesa con la variable "currentTiddler" establecida en el título del tiddler que se está procesando.
+
+También se puede especificar un nombre y valor para variables adicionales.
+
+```
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
+```
+
+* ''tiddler-filter'': Un filtro que identifica los tiddlers que se procesarán
+* ''filename-filter'': Filtro opcional que transforma los títulos de tiddler en nombres de ruta. Si se omite, el valor predeterminado es `[is[tiddler]addsuffix[.html]]`, que utiliza el título del tiddler sin cambios como nombre de archivo
+* ''render-type'': Tipo de renderizado opcional: `text/html` (el predeterminado) devuelve el texto HTML completo y `text/plain` simplemente devuelve el contenido del texto (es decir, ignora las etiquetas HTML y otros elementos no imprimibles)
+* ''template'': Plantilla opcional a través de la cual se representa cada tiddler
+* ''name'': Nombre de variables opcionales
+* ''value'': Valor de variables opcionales
+
+De forma predeterminada, el nombre del archivo se resuelve relativo al subdirectorio `output` del directorio de edición. El comando `--output` se puede usar para dirigir la salida a otro directorio diferente.
+
+Notas:
+
+* No se elimina ningún contenido del directorio de salida
+* Los directorios que faltan en la ruta al nombre del archivo se crean automáticamente.
+* Cuando se refiera a un tiddler con espacios en su título, ten cuidado de usar las comillas requeridas por la línea de comandos y también los corchetes dobles de TiddlyWiki: `--render "[[Motovun Jack.jpg]]"`
+* El filtro de nombre de archivo se evalúa con los elementos seleccionados que se establecen en el título del tiddler que se está procesando actualmente, lo que permite que el título se utilice como base para calcular el nombre de archivo. Por ejemplo, `[encodeuricomponent[]addprefix[static/]]` aplica codificación URI a cada título y luego añade el prefijo `static/`
+* Se pueden usar múltiples pares ''nombre''/''valor'' para pasar más de una variable
+* El comando `--render` es un reemplazo más flexible para los comandos `--rendertiddler` y `--rendertiddlers`, que están en desuso
+
+Ejemplos:
+
+* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- muestra todos los tiddlers que no son del sistema como archivos en el subdirectorio "tiddlers" con títulos codificados en URL y la extensión HTML
+

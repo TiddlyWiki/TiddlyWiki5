@@ -235,7 +235,7 @@ Object.defineProperty(TW_Element.prototype, "innerHTML", {
 				if(node instanceof TW_Element) {
 					b.push(node.outerHTML);
 				} else if(node instanceof TW_TextNode) {
-					b.push($tw.utils.htmlEncode(node.textContent));
+					b.push($tw.utils.htmlTextEncode(node.textContent));
 				}
 			});
 			return b.join("");

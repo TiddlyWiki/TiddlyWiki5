@@ -81,7 +81,7 @@ exports.setText = function(title,field,index,value,options) {
 		} else {
 			delete data[index];
 		}
-		this.setTiddlerData(title,data,modificationFields);
+		this.setTiddlerData(title,data,{},{suppressTimestamp: options.suppressTimestamp});
 	} else {
 		var tiddler = this.getTiddler(title),
 			fields = {title: title};
@@ -111,7 +111,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 exports.addEventListener = function(type,listener) {
 	this.eventListeners = this.eventListeners || {};
 	this.eventListeners[type] = this.eventListeners[type]  || [];
-	this.eventListeners[type].push(listener);	
+	this.eventListeners[type].push(listener);
 };
 
 exports.removeEventListener = function(type,listener) {
@@ -190,15 +190,25 @@ exports.getChangeCount = function(title) {
 
 /*
 Generate an unused title from the specified base
+options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
-		title = baseTitle;
-	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-		title = baseTitle + 
-			(options.prefix || " ") + 
-			(++c);
+		title = baseTitle,
+		template = options.template,
+		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
+	if (template) {
+		// "count" is important to avoid an endless loop in while(...)!!
+		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
+		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
+		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
+			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
+		}
+	} else {
+		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
+			title = baseTitle + prefix + (++c);
+		}
 	}
 	return title;
 };
@@ -211,9 +221,13 @@ exports.isTemporaryTiddler = function(title) {
 	return title && title.indexOf("$:/temp/") === 0;
 };
 
+exports.isVolatileTiddler = function(title) {
+	return title && title.indexOf("$:/temp/volatile/") === 0;
+};
+
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler) {		
+	if(tiddler) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
 		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
 	} else {
@@ -223,7 +237,7 @@ exports.isImageTiddler = function(title) {
 
 exports.isBinaryTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler) {		
+	if(tiddler) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
 		return !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 	} else {
@@ -351,47 +365,108 @@ Sort an array of tiddler titles by a specified field
 */
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
 	var self = this;
-	titles.sort(function(a,b) {
-		var x,y,
-			compareNumbers = function(x,y) {
-				var result = 
-					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
-					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-											(isDescending ? y - x :  x - y);
-				return result;
-			};
-		if(sortField !== "title") {
-			var tiddlerA = self.getTiddler(a),
-				tiddlerB = self.getTiddler(b);
-			if(tiddlerA) {
-				a = tiddlerA.fields[sortField] || "";
+	if(sortField === "title") {
+		if(!isNumeric && !isAlphaNumeric) {
+			if(isCaseSensitive) {
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.localeCompare(a);
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.localeCompare(b);
+					});
+				}	
 			} else {
-				a = "";
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.toLowerCase().localeCompare(a.toLowerCase());
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.toLowerCase().localeCompare(b.toLowerCase());
+					});
+				}	
 			}
-			if(tiddlerB) {
-				b = tiddlerB.fields[sortField] || "";
-			} else {
-				b = "";
-			}
-		}
-		x = Number(a);
-		y = Number(b);
-		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
-			return compareNumbers(x,y);
-		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
-			return isDescending ? b - a : a - b;
-		} else if(isAlphaNumeric) {
-			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else {
+			titles.sort(function(a,b) {
+				var x,y;
+				if(isNumeric) {
+					x = Number(a);
+					y = Number(b);
+					if(isNaN(x)) {
+						if(isNaN(y)) {
+							// If neither value is a number then fall through to a textual comparison
+						} else {
+							return isDescending ? -1 : 1;
+						}
+					} else {
+						if(isNaN(y)) {
+							return isDescending ? 1 : -1;
+						} else {
+							return isDescending ? y - x :  x - y;
+						}
+					}
+				}
+				if(isAlphaNumeric) {
+					return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+				}
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return isDescending ? b.localeCompare(a) : a.localeCompare(b);
+			});
+		}
+	} else {
+		titles.sort(function(a,b) {
+			var x,y;
+			if(sortField !== "title") {
+				var tiddlerA = self.getTiddler(a),
+					tiddlerB = self.getTiddler(b);
+				if(tiddlerA) {
+					a = tiddlerA.fields[sortField] || "";
+				} else {
+					a = "";
+				}
+				if(tiddlerB) {
+					b = tiddlerB.fields[sortField] || "";
+				} else {
+					b = "";
+				}
+			}
+			if(isNumeric) {
+				x = Number(a);
+				y = Number(b);
+				if(isNaN(x)) {
+					if(isNaN(y)) {
+						// If neither value is a number then fall through to a textual comparison
+					} else {
+						return isDescending ? -1 : 1;
+					}
+				} else {
+					if(isNaN(y)) {
+						return isDescending ? 1 : -1;
+					} else {
+						return isDescending ? y - x :  x - y;
+					}
+				}
+			}
+			if(Object.prototype.toString.call(a) === "[object Date]" && Object.prototype.toString.call(b) === "[object Date]") {
+				return isDescending ? b - a : a - b;
+			}
 			a = String(a);
 			b = String(b);
+			if(isAlphaNumeric) {
+				return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+			}
 			if(!isCaseSensitive) {
 				a = a.toLowerCase();
 				b = b.toLowerCase();
 			}
 			return isDescending ? b.localeCompare(a) : a.localeCompare(b);
-		}
-	});
+		});
+	}
 };
 
 /*
@@ -720,7 +795,7 @@ exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
 	var self = this,
 		tiddler = titleOrTiddler;
 	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = this.getTiddler(tiddler);	
+		tiddler = this.getTiddler(tiddler);
 	}
 	if(tiddler) {
 		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
@@ -741,7 +816,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	var tiddler = titleOrTiddler,
 		data;
 	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = this.getTiddler(tiddler);	
+		tiddler = this.getTiddler(tiddler);
 	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
@@ -781,19 +856,24 @@ Set a tiddlers content to a JavaScript object. Currently this is done by setting
 title: title of tiddler
 data: object that can be serialised to JSON
 fields: optional hashmap of additional tiddler fields to be set
+options: optional hashmap of options including:
+	suppressTimestamp: if true, don't set the creation/modification timestamps
 */
-exports.setTiddlerData = function(title,data,fields) {
+exports.setTiddlerData = function(title,data,fields,options) {
+	options = options || {};
 	var existingTiddler = this.getTiddler(title),
+		creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
+		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields(),
 		newFields = {
 			title: title
-	};
+		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
-	this.addTiddler(new $tw.Tiddler(this.getCreationFields(),existingTiddler,fields,newFields,this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(creationFields,existingTiddler,fields,newFields,modificationFields));
 };
 
 /*
@@ -830,7 +910,7 @@ exports.clearGlobalCache = function() {
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	this.caches = this.caches || Object.create(null);
 	var caches = this.caches[title];
-	if(caches && caches[cacheName]) {
+	if(caches && caches[cacheName] !== undefined) {
 		return caches[cacheName];
 	} else {
 		if(!caches) {
@@ -871,7 +951,7 @@ exports.initParsers = function(moduleType) {
 			if(!$tw.utils.hop($tw.Wiki.parsers,type) && $tw.config.contentTypeInfo[type].encoding === "base64") {
 				$tw.Wiki.parsers[type] = $tw.Wiki.parsers["application/octet-stream"];
 			}
-		});		
+		});
 	}
 };
 
@@ -923,41 +1003,57 @@ exports.parseTiddler = function(title,options) {
 };
 
 exports.parseTextReference = function(title,field,index,options) {
-	var tiddler,text;
-	if(options.subTiddler) {
-		tiddler = this.getSubTiddler(title,options.subTiddler);
-	} else {
+	var tiddler,
+		text,
+		parserInfo;
+	if(!options.subTiddler) {
 		tiddler = this.getTiddler(title);
 		if(field === "text" || (!field && !index)) {
 			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 			return this.parseTiddler(title,options);
 		}
+	} 
+	parserInfo = this.getTextReferenceParserInfo(title,field,index,options);
+	if(parserInfo.sourceText !== null) {
+		return this.parseText(parserInfo.parserType,parserInfo.sourceText,options);
+	} else {
+		return null;
+	}
+};
+
+exports.getTextReferenceParserInfo = function(title,field,index,options) {
+	var tiddler,
+		parserInfo = {
+			sourceText : null,
+			parserType : "text/vnd.tiddlywiki"
+		};
+	if(options.subTiddler) {
+		tiddler = this.getSubTiddler(title,options.subTiddler);
+	} else {
+		tiddler = this.getTiddler(title);
 	}
 	if(field === "text" || (!field && !index)) {
 		if(tiddler && tiddler.fields) {
-			return this.parseText(tiddler.fields.type,tiddler.fields.text,options);			
-		} else {
-			return null;
+			parserInfo.sourceText = tiddler.fields.text || "";
+			if(tiddler.fields.type) {
+				parserInfo.parserType = tiddler.fields.type;
+			}
 		}
 	} else if(field) {
 		if(field === "title") {
-			text = title;
-		} else {
-			if(!tiddler || !tiddler.hasField(field)) {
-				return null;
-			}
-			text = tiddler.fields[field];
+			parserInfo.sourceText = title;
+		} else if(tiddler && tiddler.fields) {
+			parserInfo.sourceText = tiddler.hasField(field) ? tiddler.fields[field].toString() : null;
 		}
-		return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 	} else if(index) {
 		this.getTiddlerText(title); // Force the tiddler to be lazily loaded
-		text = this.extractTiddlerDataItem(tiddler,index,undefined);
-		if(text === undefined) {
-			return null;
-		}
-		return this.parseText("text/vnd.tiddlywiki",text,options);
+		parserInfo.sourceText = this.extractTiddlerDataItem(tiddler,index,null);
 	}
-};
+	if(parserInfo.sourceText === null) {
+		parserInfo.parserType = null;
+	}
+	return parserInfo;
+}
 
 /*
 Make a widget tree for a parse tree
@@ -1143,7 +1239,7 @@ exports.search = function(text,options) {
 		searchTermsRegExps = [new RegExp("(" + anchor + terms.join("\\s+") + ")",flags)];
 	} else if(options.regexp) {
 		try {
-			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];			
+			searchTermsRegExps = [new RegExp("(" + text + ")",flags)];
 		} catch(e) {
 			searchTermsRegExps = null;
 			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
@@ -1165,7 +1261,7 @@ exports.search = function(text,options) {
 		if($tw.utils.isArray(options.field)) {
 			$tw.utils.each(options.field,function(fieldName) {
 				if(fieldName) {
-					fields.push(fieldName);					
+					fields.push(fieldName);
 				}
 			});
 		} else {
@@ -1434,7 +1530,7 @@ historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
 	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
-	story.addToHistory(title,fromPageRect);	
+	story.addToHistory(title,fromPageRect);
 	console.log("$tw.wiki.addToHistory() is deprecated since V5.1.23! Use the this.story.addToHistory() from the story-object!")
 };
 
@@ -1495,6 +1591,13 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 
 // Determine whether a plugin by title is dynamically loadable
 exports.doesPluginRequireReload = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"]) {
+		if(tiddler.fields["plugin-type"] === "import") {
+			// The import plugin never requires reloading
+			return false;
+		}
+	}
 	return this.doesPluginInfoRequireReload(this.getPluginInfo(title) || this.getTiddlerDataCached(title));
 };
 
@@ -1539,4 +1642,3 @@ exports.slugify = function(title,options) {
 };
 
 })();
-

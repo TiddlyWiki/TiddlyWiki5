@@ -1,6 +1,6 @@
 caption: tabs
 created: 20131228162203521
-modified: 20180408084453861
+modified: 20210721122823354
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ By default the tabs are arranged horizontally above the content. To get vertical
 ;tabsList
 : A [[filter|Filters]] selecting which tiddlers to include
 ;default
-: The title of the tiddler whose tab is to be selected by default
+: The title of the tiddler whose tab is to be selected by default, if the [[state tiddler|StateMechanism]] doesn't exist. The state tiddler takes precedence over this setting
 ;state
 : The prefix for the title of a [[state tiddler|StateMechanism]] for noting the currently selected tab, defaulting to `$:/state/tab`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
 ;class
@@ -28,7 +28,7 @@ By default the tabs are arranged horizontally above the content. To get vertical
 ;retain
 : Optionally, "yes" specifies that the content of the tabs should be retained when switching to another tab, avoiding re-rendering it (this can be useful to avoid video or audio sources unexpectedly resetting)
 ;actions
-: Optionally, actions can be specified that are triggered when changing a tab
+: Optionally, actions can be specified that are triggered when changing a tab. Within the actions, the title of the selected tab is available in the <<.var currentTab>> variable and the `currentTiddler` variable from outside the tabs macro is available in the <<.var save-currentTiddler>>
 ;explicitState
 : Optionally, an explicit state title can be specified. It will be preferred over the internally computed (qualified) state title
 

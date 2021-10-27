@@ -1,17 +1,59 @@
 created: 20131101111400000
-modified: 20190115165616599
+modified: 20210402095728684
 tags: Community
 title: Contributing
 type: text/vnd.tiddlywiki
 
-We welcome contributions to the code and documentation of TiddlyWiki in several ways:
+Here we focus on contributions via GitHub Pull Requests but there are many other ways that anyone can help the TiddlyWiki project, such as [[reporting bugs|ReportingBugs]] or helping to [[improve our documentation|Improving TiddlyWiki Documentation]].
 
-* ReportingBugs
-* Helping to [[improve our documentation|Improving TiddlyWiki Documentation]]
-* Contributing to the code via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]
-** See https://tiddlywiki.com/dev for more details
+! Rules for Pull Requests
 
-There are other ways to [[help TiddlyWiki|HelpingTiddlyWiki]] too.
+PRs must meet these minimum requirements before they can be considered for merging:
+
+* The material in the PR must be free of licensing restrictions. Which means that either:
+** The author must hold the copyright in all of the material themselves
+** The material must be licensed under a license compatible with TiddlyWiki's BSD license
+* The author must sign the Contributors License Agreement (see below)
+* Each PR should only make a single feature change
+* The title of the PR should be 50 characters or less
+* The title of the PR should be capitalised, and should not end with a period
+* The title of the PR should be written in the imperative mood. See below
+* Adequate explanation in the body of the PR for the motivation and implementation of the change. Focus on the //why// and //what//, rather than the //how//
+* PRs must be self-contained. Although they can link to material elsewhere, everything needed to understand the intention of the PR should be included
+* Documentation as appropriate for end-users or developers
+* Observe the coding style
+* Read the developers documentation
+* Please open a consultation issue prior to investing time in making a large PR
+
+!! Imperative Mood for PR Titles
+
+The "imperative mood" means written as if giving a command or instruction. See [[this post|https://chris.beams.io/posts/git-commit/#imperative]] for more details, but the gist is that the title of the PR should make sense when used to complete the sentence "If applied, this commit will...". So for example, these are good PR titles:
+
+* If applied, this commit will //update the contributing guidelines//
+* If applied, this commit will //change css-escape-polyfill to a $tw.utils method//
+* If applied, this commit will //make it easier to subclass the wikitext parser with a custom rule set//
+
+These a poorly worded PR titles:
+
+* ~~If applied, this commit will //edit text widgets should use default text for missing fields//~~
+* ~~If applied, this commit will //signing the CLA//~~
+* ~~If applied, this commit will //don't crash if options.event is missing//~~
+
+PR titles may also include a short prefix to indicate the subsystem to which they apply. For example:
+
+* //Menu plugin: Include menu text in aerial rotator//
+
+! Commenting on Pull Requests
+
+One of the principles of open source is that many pairs of eyes on the code can improve quality. So, we welcome comments and critiques of pending PRs. [[Conventional Comments|https://conventionalcomments.org]] has some techcniques to help make comments as constructive and actionable as possible. Notably, they recommend prefixing a comment with a label to clarify the intention:
+
+|praise |Praises highlight something positive. Try to leave at least one of these comments per review. Do not leave false praise (which can actually be damaging). Do look for something to sincerely praise |
+|nitpick |Nitpicks are small, trivial, but necessary changes. Distinguishing nitpick comments significantly helps direct the reader's attention to comments requiring more involvement |
+|suggestion |Suggestions are specific requests to improve the subject under review. It is assumed that we all want to do what's best, so these comments are never dismissed as “mere suggestions”, but are taken seriously |
+|issue |Issues represent user-facing problems. If possible, it's great to follow this kind of comment with a suggestion |
+|question |Questions are appropriate if you have a potential concern but are not quite sure if it's relevant or not. Asking the author for clarification or investigation can lead to a quick resolution |
+|thought |Thoughts represent an idea that popped up from reviewing. These comments are non-blocking by nature, but they are extremely valuable and can lead to more focused initiatives and mentoring opportunities |
+|chore |Chores are simple tasks that must be done before the subject can be “officially” accepted. Usually, these comments reference some common process. Try to leave a link to the process description so that the reader knows how to resolve the chore |
 
 ! Contributor License Agreement
 
@@ -24,9 +66,3 @@ There are other ways to [[help TiddlyWiki|HelpingTiddlyWiki]] too.
 ---
 
 //The CLA documents used for this project were created using [[Harmony Project Templates|http://www.harmonyagreements.org]]. "HA-CLA-I-LIST Version 1.0" for "CLA-individual" and "HA-CLA-E-LIST Version 1.0" for "CLA-entity".//
-
-!! Remarks
-
-''If you do not own the copyright in the entire work of authorship'':
-
-In this case, please clearly state so and provide links and any additional information that clarify under which license the rest of the code is distributed.

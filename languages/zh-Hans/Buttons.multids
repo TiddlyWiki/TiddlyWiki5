@@ -52,7 +52,7 @@ Help/Hint: 显示帮助面板
 Home/Caption: 首页
 Home/Hint: 开启首页条目
 Import/Caption: 导入
-Import/Hint: 导入许多类型的文件包括文本、图像、TiddlyWiki 或 JSON
+Import/Hint: 导入许多类型的文件包括文本、图像、~TiddlyWiki 或 JSON
 Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 Language/Caption: 语言

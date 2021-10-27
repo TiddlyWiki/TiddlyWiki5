@@ -11,7 +11,6 @@ ConfirmOverwriteTiddler: 本当にこの tiddler "<$text text=<<title>>/>" を�
 DropMessage: ドロップしてください。（止めるには、キャンセルをクリックしてください。）
 Encryption/ConfirmClearPassword: パスワードを削除すると暗号化も解除されますが、本当にパスワードを削除しますか？
 Encryption/PromptSetPassword: パスワードを入力してください。
-InvalidFieldName: フィールド名に不正な文字が使われています "<$text text=<<fieldName>>/>". フィールド名に使用できるのは英小文字かアンダースコア(`_`)、ハイフン(`-`)、ピリオド(`.`)のみです。
 MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{||$:/core/ui/Buttons/edit}} して作成
 RecentChanges/DateFormat: YYYY-MM-DD
 SystemTiddler/Tooltip: これはシステム tiddler です

@@ -1,5 +1,5 @@
 created: 20161015114118243
-modified: 20201201000000000
+modified: 20201214234334440
 tags: TiddlyWikiFolders
 title: tiddlywiki.files Files
 type: text/vnd.tiddlywiki
@@ -48,13 +48,14 @@ Directory specifications in the `directories` array may take the following forms
 
 * a ''string'' literal, specifying the absolute or relative path to the directory containing the tiddler files (relative paths are interpreted relative to the path of the `tiddlywiki.files` file). The directory is recursively searched for tiddler files
 * <<.from-version "5.1.14">> an ''object'' with the following properties:
-** ''path'' - (required) the absolute or relative path to the directory containing the tiddler files (relative paths are interpreted relative to the path of the `tiddlywiki.files` file). Note that the directory is not recursively searched; sub-directories are ignored
+** ''path'' - (required) the absolute or relative path to the directory containing the tiddler files (relative paths are interpreted relative to the path of the `tiddlywiki.files` file). Note that by default the directory is not recursively searched; sub-directories are ignored unless the //searchSubdirectories// flag is set to `true` (see below).
 ** ''filesRegExp'' - (optional) a [[regular expression|https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions]] that matches the filenames of the files that should be processed within the directory
 ** ''isTiddlerFile'' - (required) if `true`, the file will be treated as a [[tiddler file|TiddlerFiles]] and deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
-** ''isEditableFile'' - (optional) if `true`, changes to the tiddler be saved back to the original file. The tiddler will be saved back to the original filepath as long as it does not generate a result from the $:/config/FileSystemPath filters, which will override the final filepath generated if a result is returned from a filter. <<.from-version "5.1.23">>
+** ''isEditableFile'' - <<.from-version "5.1.23">> (optional) if `true`, changes to the tiddler be saved back to the original file. The tiddler will be saved back to the original filepath as long as it does not generate a result from the $:/config/FileSystemPath filters, which will override the final filepath generated if a result is returned from a filter.
+** ''searchSubdirectories'' - <<.from-version "5.1.23">> (optional) if `true`, all subdirectories of the //path// are searched recursively for files that match the (optional) //filesRegExp//. If no //filesRegExp// is provided, all files in all subdirectoies of the //path// are loaded. Tiddler titles generated via a //source// attribute (see above) will only include the filename, not any of the subdirectories of the path. If this results in multiple files with loaded with the same tiddler title, then only the last file loaded under that tiddler title will be in memory. In order to prevent this, you must have multiple directory objects listed and customize the title field with a //prefix// or //suffix// alongside the //source// attribute.
 ** ''fields'' - (required) an object containing values that override or customise the fields provided in the tiddler file (see above)
 
-Fields can be overridden for particular files by creating a file with the same name plus the suffix `.meta` -- see TiddlerFiles.
+Fields can also be overridden for particular files by creating a file with the same name plus the suffix `.meta` -- see TiddlerFiles.
 
 ! Examples
 

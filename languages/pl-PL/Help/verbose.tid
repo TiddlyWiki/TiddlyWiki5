@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Przełącz wyświetlanie szczegółowych informacji
+
+Przełącza wyswietlanie szczegółowych informacji podczas wykonywania operacji, przydatne podczas analizy problemów.
+
+```
+--verbose
+```

@@ -22,6 +22,7 @@ Tous les paramètres sont optionnels avec des valeurs par défaut sûres, et peu
 * ''readers'' - liste de personnes de confiance autorisées à lire ce wiki, séparées par des virgules 
 * ''writers'' - liste de personnes de confiance autorisées à modifier ce wiki, séparées par des virgules
 * ''csrf-disable'' - donner la valeur "yes" pour désactiver les vérifications CSRF (vaut "no" par défaut)
+* ''sse-enabled'' - donner la valeur "yes" pour activer les événement envoyés par le serveur (valeur "no" par défaut)
 * ''root-tiddler'' - le tiddler à servir à la racine (par défaut "$:/core/save/all")
 * ''root-render-type'' - le type de contenu avec lequel le tiddler racine doit être rendu (par défaut "text/plain")
 * ''root-serve-type'' - le type de contenu avec lequel le tiddler racine doit être servi (par défaut "text/html")
@@ -29,6 +30,7 @@ Tous les paramètres sont optionnels avec des valeurs par défaut sûres, et peu
 * ''tls-key'' - nom de chemin du fichier de clé TLS (relativement au dossier du wiki)
 * ''debug-level'' - niveau de débogage optionnel ; mettre à "debug" pour voir le détail des requêtes (par défaut à "none")
 * ''gzip'' - donner la valeur "yes" pour activer la compression gzip pour certaines interactions http (par défaut à "no")
+* ''use-browser-cache'' - une valeur "yes" autorise le navigateur à mettre en cache les réponses pour économiser de la bande passante ("no" par défaut)
 
 Pour plus d'informations sur la manière de donner accès à votre instance de serveur à l'ensemble de votre réseau local, ainsi que sur les risques éventuels en matière de sécurité, voir le tiddler [[WebServer sur tiddlywiki.com|https://tiddlywiki.com/#WebServer]].
 

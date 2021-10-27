@@ -12,7 +12,6 @@ DefaultNewTiddlerTitle: Nove nota
 DropMessage: Lassa cader ci (o clicca Esc pro cancellar)
 Encryption/ConfirmClearPassword: Desira tu remover le contrasigno? Isto va remover le usate codification quando iste wiki es conservate
 Encryption/PromptSetPassword: Fixa un nove contrasigno pro iste TiddlyWiki
-InvalidFieldName: Signos illegal in le quadro "<$text text=<<fieldName>>/>". Quadros pote solmente continer litteras minuscule, cifras e le signos sublineate (`_`), ligamine (`-`) and puncto (`.`)
 MissingTiddler/Hint: Notas mancante "<$text text=<<currentTiddler>>/>" - clicca {{||$:/core/ui/Buttons/edit}} pro crear
 RecentChanges/DateFormat: le DD de MMM YYYY
 SystemTiddler/Tooltip: Isto es un notitia de systema

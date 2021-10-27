@@ -1,0 +1,7 @@
+created: 20211020140733724
+modified: 20211020140827194
+tags: [[atan2 Operator]] [[Operator Examples]]
+title: atan2 Operator (Examples)
+
+<<.operator-example 1 "[[2]atan2[5]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[atan2[4]]">>

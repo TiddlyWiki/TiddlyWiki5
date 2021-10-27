@@ -3,6 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/save-button}} {{$:/language/Buttons/SaveWiki/Caption}}
 description: {{$:/language/Buttons/SaveWiki/Hint}}
 
+\whitespace trim
 <$button tooltip={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class=<<tv-config-toolbar-class>>>
 <$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
 <$action-sendmessage $message="tm-save-wiki" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
@@ -12,7 +13,9 @@ description: {{$:/language/Buttons/SaveWiki/Hint}}
 {{$:/core/images/save-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/SaveWiki/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/SaveWiki/Caption}}/>
+</span>
 </$list>
 </span>
 </$button>

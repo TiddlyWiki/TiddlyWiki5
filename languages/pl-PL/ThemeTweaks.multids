@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+ThemeTweaks: Dostosowania Motywu
+ThemeTweaks/Hint: Możesz dostosować pewne aspekty motywu ''Vanilla''
+Options: Opcje
+Options/SidebarLayout: Układ menu bocznego
+Options/SidebarLayout/Fixed-Fluid: Stałe Story River, zmienne menu boczne
+Options/SidebarLayout/Fluid-Fixed: Zmienne Story River, stałe menu boczne
+Options/StickyTitles: Przyczep nazwy
+Options/StickyTitles/Hint: Spowoduje, że nazwa tiddlera będzie "przyklejona" do górnej części okna przeglądarki
+Options/CodeWrapping: Łam długie linie kodu do nowej linii
+Settings: Ustawienia
+Settings/FontFamily: Czcionka
+Settings/CodeFontFamily: Czcionka kodu
+Settings/EditorFontFamily: Czcionka edytora
+Settings/BackgroundImage: Obraz tła
+Settings/BackgroundImageAttachment: Pozycja obrazu tła
+Settings/BackgroundImageAttachment/Scroll: Przewijaj ze stroną
+Settings/BackgroundImageAttachment/Fixed: Stała pozycja
+Settings/BackgroundImageSize: Rozmiar obrazu tła
+Settings/BackgroundImageSize/Auto: Automatyczny
+Settings/BackgroundImageSize/Cover: Zapełnij
+Settings/BackgroundImageSize/Contain: Zawrzyj
+Metrics: Rozmiary
+Metrics/FontSize: Rozmiar czcionki
+Metrics/LineHeight: Wysokość linii
+Metrics/BodyFontSize: Rozmiar czcionki w treści tiddlera
+Metrics/BodyLineHeight: Wysokość linii w treści tiddlera
+Metrics/StoryLeft: Lewy margines Story River
+Metrics/StoryLeft/Hint: Odległość lewej krawędzi Story River od<br>lewej krawędzi strony
+Metrics/StoryTop: Górny margines Story River
+Metrics/StoryTop/Hint: Odległość górnej krawędzi Story River od<br>górnej krawędzi strony
+Metrics/StoryRight: Prawy margines Story River
+Metrics/StoryRight/Hint: Odległość prawej krawędzi Story River od<br>lewej krawędzi menu boczne
+Metrics/StoryWidth: Szerokość Story River
+Metrics/StoryWidth/Hint: Ogólna szerokość Story River
+Metrics/TiddlerWidth: Szerokość tiddlera
+Metrics/TiddlerWidth/Hint: Wewnątrz Story River
+Metrics/SidebarBreakpoint: Breakpoint menu bocznego
+Metrics/SidebarBreakpoint/Hint: Minimalna szerokość strony, przy której<br>menu boczne i Story River zostaną wyświetlone obok siebie
+Metrics/SidebarWidth: Szerokość menu bocznego
+Metrics/SidebarWidth/Hint: Szerokość menu bocznego w widoku zmienny-stały

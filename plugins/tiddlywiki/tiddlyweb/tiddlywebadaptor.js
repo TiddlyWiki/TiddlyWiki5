@@ -91,12 +91,10 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				self.isLoggedIn = json.username !== "GUEST";
 				self.isReadOnly = !!json["read_only"];
 				self.isAnonymous = !!json.anonymous;
-
-				var isSseEnabled = !!json.sse_enabled;
 			}
 			// Invoke the callback if present
 			if(callback) {
-				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous,isSseEnabled);
+				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous);
 			}
 		}
 	});
@@ -116,6 +114,10 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 		},
 		callback: function(err) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging in:",options);
@@ -134,6 +136,10 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 		},
 		callback: function(err,data) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging out:",options);
@@ -380,8 +386,8 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 		return null;
 	} else {
 		return {
-			bag: decodeURIComponent(etag.substring(1,firstSlash)),
-			title: decodeURIComponent(etag.substring(firstSlash + 1,lastSlash)),
+			bag: $tw.utils.decodeURIComponentSafe(etag.substring(1,firstSlash)),
+			title: $tw.utils.decodeURIComponentSafe(etag.substring(firstSlash + 1,lastSlash)),
 			revision: etag.substring(lastSlash + 1,colon)
 		};
 	}

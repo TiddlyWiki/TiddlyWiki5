@@ -122,7 +122,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		});
 		// Only substitute variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
-			value = this.substituteVariableReferences(value);			
+			value = this.substituteVariableReferences(value);
 		}
 		return {
 			text: value,
@@ -568,10 +568,15 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	var handled = false;
 	// For each child widget
 	for(var t=0; t<this.children.length; t++) {
-		var child = this.children[t];
-		// Invoke the child if it is an action widget
-		if(child.invokeAction) {
+		var child = this.children[t],
+			childIsActionWidget = !!child.invokeAction,
+			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy"); // Default is "once"
+		// Refresh the child if required
+		if(childIsActionWidget || actionRefreshPolicy === "always") {
 			child.refreshSelf();
+		}
+		// Invoke the child if it is an action widget
+		if(childIsActionWidget) {
 			if(child.invokeAction(triggeringWidget,event)) {
 				handled = true;
 			}
