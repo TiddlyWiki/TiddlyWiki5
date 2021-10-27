@@ -10,9 +10,10 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 \define backgroundimage-dropdown()
 <div class="tc-drop-down-wrapper">
-<$button popup=<<qualify "$:/state/popup/themetweaks/backgroundimage">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
-<$reveal state=<<qualify "$:/state/popup/themetweaks/backgroundimage">> type="popup" position="belowleft" text="" default="">
-<div class="tc-drop-down">
+<$set name="state" value=<<qualify "$:/state/popup/themetweaks/backgroundimage">>>
+<$button popup=<<state>> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$reveal state=<<state>> type="popup" position="belowleft" text="" default="" class="tc-popup-keep">
+<div class="tc-drop-down" style="text-align:center;">
 <$macrocall $name="image-picker" actions="""
 
 <$action-setfield
@@ -20,9 +21,12 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 	$value=<<imageTitle>>
 />
 
+<$action-deletetiddler $tiddler=<<state>>/>
+
 """/>
 </div>
 </$reveal>
+</$set>
 </div>
 \end
 
