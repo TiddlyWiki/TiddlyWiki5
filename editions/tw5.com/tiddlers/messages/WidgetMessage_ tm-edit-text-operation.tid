@@ -115,6 +115,8 @@ Inserts the text specified in <<.param "text">> at the caret position. If there 
 </div>
 \end
 
+\define focusEditorDescription() Simply focuses the Text Editor
+
 A `tm-edit-text-operation` invokes one of the available operations on a __surrounding__ text editor. Therefore the message has to be dispatched within the editor in order for it to catch it. The following properties on the `event` object are required:
 
 |!Name |!Description |
@@ -137,6 +139,7 @@ At this point the following text operations have been implemented:
 |<<.def "save-selection">>|<<saveSelectionDescription>> |
 |<<.def "make-link">>|<<makeLinkDescription>> |
 |<<.def "insert-text">>|<<insertTextDescription>>|
+|<<.def "focus-editor">>|<<.from-version 5.2.0>> <<focusEditorDescription>> |
 
 
 !Example
