@@ -33,7 +33,7 @@ The content of the `<$edit-text>` widget is ignored.
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
 |rows|Sets the rows attribute of a generated textarea |
 |cancelPopups |<<.from-version "5.1.23">> if set to "yes", cancels all popups when the input gets focus |
-|inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
+|inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea.<br><<.from-version "5.2.1">> The variable `actionValue` is available to the `inputActions` and contains the value of the input field. |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 |disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
 |fileDrop|<<.from-version "5.2.0">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. Defaults to "no"|
