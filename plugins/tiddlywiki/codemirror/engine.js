@@ -122,7 +122,7 @@ function CodeMirrorEngine(options) {
 	this.cm.on("change",function() {
 		self.widget.saveChanges(self.getText());
 		if(self.widget.editInputActions) {
-			self.widget.invokeActionString(self.widget.editInputActions);
+			self.widget.invokeActionString(self.widget.editInputActions,this,event,{actionValue: this.getText()});
 		}
 	});
 	
