@@ -1,0 +1,8 @@
+title: Hidden Setting: Show Edit Preview per Tiddler
+tags: [[Hidden Settings]]
+created: 20211028083211182
+modified: 20211028083211182
+
+The Tiddler Edit-Preview can be shown for all Tiddlers (no) or on a per-Tiddler basis (yes)
+
+$:/config/ShowEditPreview/PerTiddler
