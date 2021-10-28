@@ -48,21 +48,23 @@ LetWidget.prototype.computeAttributes = function() {
 	// Before computing attributes, we must make clear that none of the
 	// existing attributes are staged for lookup, even on a refresh
 	var changedAttributes = {},
-		self = this,
-		value;
-	this.stagedVariables = Object.create(null);
-	$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute) {
+		self = this;
+	this.currentValueFor = Object.create(null);
+	$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
 		var value = self.computeAttribute(attribute),
 			name = attribute.name;
-		if (self.attributes[name] !== value) {
-			self.attributes[name] = value;
-			changedAttributes[name] = true;
-		}
 		if(name.charAt(0) !== "$") {
-			self.setVariable(name,value);
 			// Now that it's prepped, we're allowed to look this variable up
 			// when defining later variables
-			self.stagedVariables[name] = true;
+			self.currentValueFor[name] = value;
+		}
+	});
+	// Run through again, setting variables and looking for differences
+	$tw.utils.each(this.currentValueFor,function(value,name) {
+		if (self.attributes[name] !== value) {
+			self.attributes[name] = value;
+			self.setVariable(name,value);
+			changedAttributes[name] = true;
 		}
 	});
 	return changedAttributes;
@@ -71,9 +73,9 @@ LetWidget.prototype.computeAttributes = function() {
 LetWidget.prototype.getVariableInfo = function(name,options) {
 	// Special handling: If this variable exists in this very $vars, we can
 	// use it, but only if it's been staged.
-	if (this.stagedVariables[name]) {
+	if ($tw.utils.hop(this.currentValueFor,name)) {
 		return {
-			text: this.variables[name].value
+			text: this.currentValueFor[name]
 		};
 	}
 	return Widget.prototype.getVariableInfo.call(this,name,options);

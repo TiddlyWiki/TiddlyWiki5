@@ -263,8 +263,7 @@ Compute the current values of the attributes of the widget. Returns a hashmap of
 */
 Widget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
-		self = this,
-		value;
+		self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		var value = self.computeAttribute(attribute);
 		if(self.attributes[name] !== value) {
