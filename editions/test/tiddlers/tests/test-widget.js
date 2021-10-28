@@ -247,6 +247,25 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[2].sequenceNumber).toBe(4);
 	});
 
+	it("should deal with the let widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "lookup"},
+			{title: "TiddlerTwo", lookup: "value"},
+			{title: "TiddlerThree", value: "Happy Result"}
+		]);
+		var text="\\define macro() TiddlerTwo\n<$let "+
+			"currentTiddler='TiddlerOne' "+
+			"field={{!!text}} "+
+			"currentTiddler=<<macro>> "+
+			"field={{{ [all[current]get<field>] }}} "+
+			"currentTiddler='TiddlerThree'>"+
+				"<$transclude field=<<field>>/></$let>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>Happy Result</p>");
+	});
+
 	it("should deal with attributes specified as macro invocations", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node

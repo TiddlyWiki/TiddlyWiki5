@@ -266,22 +266,27 @@ Widget.prototype.computeAttributes = function() {
 		self = this,
 		value;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "filtered") {
-			value = self.wiki.filterTiddlers(attribute.filter,self)[0] || "";
-		} else if(attribute.type === "indirect") {
-			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
-		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
-		} else { // String attribute
-			value = attribute.value;
-		}
-		// Check whether the attribute has changed
+		var value = self.computeAttribute(attribute);
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
 		}
 	});
 	return changedAttributes;
+};
+
+Widget.prototype.computeAttribute = function(attribute) {
+	var value;
+	if(attribute.type === "filtered") {
+		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
+	} else if(attribute.type === "indirect") {
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+	} else if(attribute.type === "macro") {
+		value = this.getVariable(attribute.value.name,{params: attribute.value.params});
+	} else { // String attribute
+		value = attribute.value;
+	}
+	return value;
 };
 
 /*
