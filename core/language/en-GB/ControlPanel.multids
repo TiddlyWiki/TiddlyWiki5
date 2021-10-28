@@ -184,6 +184,8 @@ Settings/LinkToBehaviour/OpenAbove: Open above the current tiddler
 Settings/LinkToBehaviour/OpenBelow: Open below the current tiddler
 Settings/LinkToBehaviour/OpenAtTop: Open at the top of the story river
 Settings/LinkToBehaviour/OpenAtBottom: Open at the bottom of the story river
+Settings/ShowEditPreviewPerTiddler/Description: Whether or not the Editor Preview should be toggled for all Tiddlers or the current Tiddler only
+Settings/ShowEditPreviewPerTiddler/Hint: Editor Preview for current Tiddler or all Tiddlers
 Settings/TitleLinks/Caption: Tiddler Titles
 Settings/TitleLinks/Hint: Optionally display tiddler titles as links
 Settings/TitleLinks/No/Description: Do not display tiddler titles as links
