@@ -32,13 +32,7 @@ JSONTiddlerWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Collect the fields from the optional base tiddler
-	var fields = {};
-	if(this.attTiddler) {
-		var tiddler = this.wiki.getTiddler(this.attTiddler);
-		if(tiddler) {
-			fields = tiddler.getFieldStrings({exclude: this.attExclude.split(" ")});
-		}
-	}
+	var fields = this.getTiddlerFields();
 	// Add custom fields specified in attributes starting with $
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) === "$") {
@@ -77,6 +71,19 @@ JSONTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		return false;
 	}
+};
+
+JSONTiddlerWidget.prototype.getTiddlerFields = function() {
+	var fields = {};
+	if(this.attTiddler) {
+		var tiddler = this.wiki.getTiddler(this.attTiddler);
+		if(tiddler) {
+			fields = tiddler.getFieldStrings({exclude: this.attExclude.split(" ")});
+		} else {
+			fields = {title: this.attTiddler};
+		}
+	}
+	return fields;
 };
 
 exports.jsontiddler = JSONTiddlerWidget;

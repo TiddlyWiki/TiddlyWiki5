@@ -32,8 +32,6 @@ ExportTiddler/Caption: export tiddler
 ExportTiddler/Hint: Export tiddler
 ExportTiddlers/Caption: export tiddlers
 ExportTiddlers/Hint: Export tiddlers
-ExportTiddlyWikiCore/Caption: export TiddlyWiki core
-ExportTiddlyWikiCore/Hint: Export the ~TiddlyWiki core code for running with external ~JavaScript   
 SidebarSearch/Hint: Select the sidebar search field
 Fold/Caption: fold tiddler
 Fold/Hint: Fold the body of this tiddler

@@ -3,6 +3,7 @@
 Editor/Import/Heading: Bilder in den Editor importieren.
 Imported/Hint:  Folgende Tiddler wurden importiert: 
 Listing/Cancel/Caption: Abbrechen
+Listing/Cancel/Warning: Möchten Sie den Import abbrechen?
 Listing/Hint: Diese Tiddler können importiert werden: 
 Listing/Import/Caption: Importieren
 Listing/Select/Caption: Auswahl
@@ -29,5 +30,5 @@ Upgrader/System/Warning: "Core Modul Tiddler".
 Upgrader/System/Alert: Sie sind dabei einen Tiddler zu importieren, der einen "Core Tiddler" überschreibt. Diese Aktion wird nicht empfohlen! Das System kann instabil werden.
 Upgrader/ThemeTweaks/Created: Migrieren der "theme tweaks" von: <$text text=<<from>>/>.
 Upgrader/Tiddler/Disabled: Deaktivierter Tiddler.
-Upgrader/Tiddler/Selected: Vom Anwender ausgewählt.
+Upgrader/Tiddler/Selected: Ausgewählter Tiddler.
 Upgrader/Tiddler/Unselected: Auswahl aufgehoben.

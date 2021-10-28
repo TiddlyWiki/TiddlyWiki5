@@ -459,3 +459,13 @@ Frank Bruns-Ballhausen, @FBB-de, 2021/06/09
 Álvaro González Rincón, @Alzacon, 2021/06/10
 
 RJ Skerry-Ryan, @rryan, 2021/07/03
+
+J. Song, @8d1h, 2021/08/05
+
+Soren Bjornstad, @sobjornstad, 2021/08/18
+
+Maurycy Zarzycki, @evidentlycube, 2021-10-01
+
+Brian Theado, @btheado, 2021-10-10
+
+@Telumire, 2021-10-18

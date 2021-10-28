@@ -122,6 +122,7 @@ RadioWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else if(changedTiddlers[this.radioTitle]) {
 		this.inputDomNode.checked = this.getValue() === this.radioValue;
+		$tw.utils.toggleClass(this.labelDomNode,"tc-radio-selected",this.inputDomNode.checked);
 		return this.refreshChildren(changedTiddlers);
 	} else {
 		return this.refreshChildren(changedTiddlers);

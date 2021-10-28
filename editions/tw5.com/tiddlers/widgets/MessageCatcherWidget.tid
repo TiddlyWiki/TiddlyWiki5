@@ -21,7 +21,7 @@ The content of the `<$messagecatcher>` widget is displayed normally.
 
 ! Variables
 
-The message catcher widget
+The message catcher widget sets the following variables within each action string:
 
 |!Variables |!Description |
 |`event-*` |All string-based properties of the `event` object, with the names prefixed with `event-` |

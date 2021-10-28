@@ -332,7 +332,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 
 	EditTextWidget.prototype.handlePasteEvent = function(event) {
-		if(event.clipboardData.files.length) {
+		if(event.clipboardData && event.clipboardData.files && event.clipboardData.files.length) {
 			event.preventDefault();
 			event.stopPropagation();
 			this.dispatchDOMEvent(this.cloneEvent(event,["clipboardData"]));

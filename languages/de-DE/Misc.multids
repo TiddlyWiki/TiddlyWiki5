@@ -41,7 +41,6 @@ Error/WhileSaving: Fehler beim Speichern
 Error/XMLHttpRequest: XMLHttpRequest Fehler-Code
 InternalJavaScriptError/Title: Interner JavaScript Fehler
 InternalJavaScriptError/Hint: Es tut uns leid, aber bitte starten Sie Ihr TiddlyWiki neu, indem sie die Seite im Browser neu laden.
-InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
 LayoutSwitcher/Description: "Layout" Selektor anzeigen
 LazyLoadingWarning: <p>Lade externe Datei von ''<$text text={{!!_canonical_uri}}/>''</p><p>Wenn diese Meldung nicht automatisch gelöscht wird, dann verwenden Sie wahrscheinlich einen Browser der diese Funktion nicht unterstützt. Oder die Tiddler "conent-type" Eistellung passt nicht, zu der, der externen Datei. Siehe https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login bei TiddlySpace

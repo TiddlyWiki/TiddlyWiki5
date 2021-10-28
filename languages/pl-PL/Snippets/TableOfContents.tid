@@ -1,0 +1,9 @@
+title: $:/language/Snippets/TableOfContents
+tags: $:/tags/TextEditor/Snippet
+caption: Spis Treśći
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'Spis Treści'>>
+
+</div>
