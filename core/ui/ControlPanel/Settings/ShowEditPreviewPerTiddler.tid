@@ -1,9 +1,0 @@
-title: $:/core/ui/ControlPanel/Settings/ShowEditPreviewPerTiddler
-tags: $:/tags/ControlPanel/Settings
-caption: {{$:/language/ControlPanel/Settings/EditorPreviewPerTiddler/Caption}}
-
-\define lingo-base() $:/language/ControlPanel/Settings/EditorPreviewPerTiddler/
-<<lingo Hint>>
-
-<$checkbox tiddler="$:/config/showeditpreview-per-tiddler" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/showeditpreview-per-tiddler"><<lingo Description>></$link> </$checkbox>
-
