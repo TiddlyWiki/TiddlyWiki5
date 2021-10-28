@@ -274,6 +274,11 @@ describe("Widget module", function() {
 		// refresh.
 		wiki.addTiddler({title: "TiddlerOne", text: "newlookup"});
 		expect(widgetNode.refresh({})).toBe(false);
+
+		// But if we make a change that might result in different outfacing
+		// variables, then it should refresh
+		wiki.addTiddler({title: "TiddlerOne", text: "badlookup"});
+		expect(widgetNode.refresh({})).toBe(true);
 	});
 
 	it("should deal with attributes specified as macro invocations", function() {

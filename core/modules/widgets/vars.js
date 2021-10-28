@@ -35,8 +35,6 @@ VarsWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 VarsWidget.prototype.render = function(parent,nextSibling) {
-	// Call the constructor
-	Widget.call(this);
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
