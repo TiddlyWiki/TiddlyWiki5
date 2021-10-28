@@ -30,7 +30,7 @@ var LetWidget = function(parseTreeNode,options) {
 /*
 Inherit from the base widget class
 */
-LetWidget.prototype = Object.create(Widget.prototype);
+LetWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
@@ -71,7 +71,7 @@ LetWidget.prototype.computeAttributes = function() {
 };
 
 LetWidget.prototype.getVariableInfo = function(name,options) {
-	// Special handling: If this variable exists in this very $vars, we can
+	// Special handling: If this variable exists in this very $let, we can
 	// use it, but only if it's been staged.
 	if ($tw.utils.hop(this.currentValueFor,name)) {
 		return {
@@ -86,7 +86,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 LetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(Object.keys(changedAttributes).length) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}

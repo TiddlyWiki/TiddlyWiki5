@@ -5,7 +5,7 @@ caption: let
 
 ! Introduction
 
-The <<.wid let>> widget allows multiple variables to be set in one operation. In some situations it can result in simpler code than using the more flexible <<.wlink SetWidget>> widget. It differs from the <<.wlink VarsWidget>> widget in that variables you're defining may depend on earlier variables defined within the same <<.wid let>>.
+<<.from-version "5.2.1">> The <<.wid let>> widget allows multiple variables to be set in one operation. In some situations it can result in simpler code than using the more flexible <<.wlink SetWidget>> widget. It differs from the <<.wlink VarsWidget>> widget in that variables you're defining may depend on earlier variables defined within the same <<.wid let>>.
 
 ! Content and Attributes
 
