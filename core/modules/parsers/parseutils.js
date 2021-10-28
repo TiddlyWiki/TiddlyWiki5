@@ -241,6 +241,8 @@ exports.parseFilterVariable = function(source) {
 /*
 Look for an HTML attribute definition. Returns null if not found, otherwise returns {type: "attribute", name:, valueType: "string|indirect|macro", value:, start:, end:,}
 */
+var AttributeRules = null;
+
 exports.parseAttribute = function(source,pos) {
 	var node = {
 		start: pos
@@ -270,44 +272,33 @@ exports.parseAttribute = function(source,pos) {
 		// Look for a string literal
 		var stringLiteral = $tw.utils.parseStringLiteral(source,pos);
 		if(stringLiteral) {
-			pos = stringLiteral.end;
 			node.type = "string";
 			node.value = stringLiteral.value;
+			node.end = stringLiteral.end;
+			return node;
+		}
+		// Load attribute rules if needed
+		if (!AttributeRules) {
+			AttributeRules = {};
+			$tw.modules.applyMethods("attributerule",AttributeRules);
+		}
+		// Look for an attribute rule
+		var match = null;
+		$tw.utils.each(AttributeRules,function(rule) {
+			match = rule(source,pos,node);
+			return !match;
+		});
+		if (match) return match;
+		// Look for a unquoted value
+		var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
+		if(unquotedValue) {
+			node.type = "string";
+			node.value = unquotedValue.match[1];
+			node.end = unquotedValue.end;
+			return node;
 		} else {
-			// Look for a filtered value
-			var filteredValue = $tw.utils.parseTokenRegExp(source,pos,reFilteredValue);
-			if(filteredValue) {
-				pos = filteredValue.end;
-				node.type = "filtered";
-				node.filter = filteredValue.match[1];
-			} else {
-				// Look for an indirect value
-				var indirectValue = $tw.utils.parseTokenRegExp(source,pos,reIndirectValue);
-				if(indirectValue) {
-					pos = indirectValue.end;
-					node.type = "indirect";
-					node.textReference = indirectValue.match[1];
-				} else {
-					// Look for a unquoted value
-					var unquotedValue = $tw.utils.parseTokenRegExp(source,pos,reUnquotedAttribute);
-					if(unquotedValue) {
-						pos = unquotedValue.end;
-						node.type = "string";
-						node.value = unquotedValue.match[1];
-					} else {
-						// Look for a macro invocation value
-						var macroInvocation = $tw.utils.parseMacroInvocation(source,pos);
-						if(macroInvocation) {
-							pos = macroInvocation.end;
-							node.type = "macro";
-							node.value = macroInvocation;
-						} else {
-							node.type = "string";
-							node.value = "true";
-						}
-					}
-				}
-			}
+			node.type = "string";
+			node.value = "true";
 		}
 	} else {
 		node.type = "string";

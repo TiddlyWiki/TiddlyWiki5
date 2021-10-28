@@ -64,6 +64,10 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 			}
 		});
 	}
+	// Hashmap of the attribute classes
+	if(!this.attributeClasses) {
+		Widget.prototype.attributeClasses = $tw.modules.applyMethods("attributevalue");
+	}
 };
 
 /*
@@ -265,17 +269,54 @@ Widget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
 		self = this,
 		value;
-	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "filtered") {
-			value = self.wiki.filterTiddlers(attribute.filter,self)[0] || "";
-		} else if(attribute.type === "indirect") {
-			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
-		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
-		} else { // String attribute
-			value = attribute.value;
-		}
-		// Check whether the attribute has changed
+	if (!this.attributeGizmos) {
+		// First-time attribute preparation
+		this.attributeGizmos = {};
+		$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
+			// Does the attribute type have a known module?
+			var AttributeClass = self.attributeClasses[attribute.type];
+			if (AttributeClass) {
+				// Instantiate an attribute object.
+				self.attributeGizmos[name] = new AttributeClass(self,attribute);
+				value = self.attributeGizmos[name].value;
+			}
+			else {
+				// Unknown attribute types are treated as strings.
+				// String attributes don't change after the first computeAttributes().
+				value = attribute.value;
+			}
+			// Is the value changed?
+			if (self.attributes[name] !== value) {
+				self.attributes[name] = value;
+				changedAttributes[name] = true;
+			}
+			return true;
+		});
+	}
+	else {
+		// Fully recompute all dynamic attributes (no selectivity is available)
+		$tw.utils.each(this.attributeGizmos,function(gizmo,name) {
+			value = gizmo.compute();
+			if(self.attributes[name] !== value) {
+				self.attributes[name] = value;
+				changedAttributes[name] = true;
+			}
+		});
+	}
+	return changedAttributes;
+};
+
+/*
+Selectively re-compute previously computed attributes. Returns a hashmap of the names of the attributes that have changed
+*/
+Widget.prototype.refreshAttributes = function(changedTiddlers) {
+	if (!this.attributeGizmos) return computeAttributes();
+	var changedAttributes = {},
+		self = this,
+		value;
+	// Fully recompute all dynamic attributes (no selectivity is available)
+	$tw.utils.each(this.attributeGizmos,function(gizmo,name) {
+		value = gizmo.refresh(changedTiddlers);
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
