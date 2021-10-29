@@ -1,8 +1,10 @@
-title: Hidden Setting: Show Edit Preview per Tiddler
-tags: [[Hidden Settings]]
 created: 20211028083211182
-modified: 20211028083211182
+modified: 20211029090311444
+tags: [[Hidden Settings]]
+title: Hidden Setting: Show Edit Preview per Tiddler
 
-The Tiddler Edit-Preview can be shown for all Tiddlers (no) or on a per-Tiddler basis (yes)
+Controls whether the [[tiddler editing preview|Text preview]] is controlled globally (the default) or on a per-tiddler basis.
+
+Set it to ''yes'' to enable per-tiddler mode.
 
 $:/config/ShowEditPreview/PerTiddler
