@@ -9,7 +9,7 @@ ColourPicker/Recent: Ostatnie:
 ConfirmCancelTiddler: Czy na pewno chcesz odrzucić zmiany w tiddlerze "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Czy na pewno chcesz usunąc tiddlera "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Czy na pewno chcesz nadpisać tiddlera "<$text text=<<title>>/>"?
-ConfirmEditShadowTiddler: Próbujesz utworzyć tiddlera-cienia. Zmiany te nadpiszą oryginalne, systemowe tiddlery co może utrudniać aktualizację wiki. Czy na pewno chcesz zmodyfikować"<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Próbujesz utworzyć tiddler-cień. Zmiany te nadpiszą oryginalne, systemowe tiddlery co może utrudniać aktualizację wiki. Czy na pewno chcesz zmodyfikować"<$text text=<<title>>/>"?
 ConfirmAction: Na pewno chcesz kontynuować?
 Count: Ilość
 DefaultNewTiddlerTitle: Nowy Tiddler
@@ -34,7 +34,7 @@ Error/NetworkErrorAlert: `<h2>''Bład sieciowy''</h2>Połaczenie z serwerem zost
 Error/PutEditConflict: Pliki zostały zmienione na serwerze
 Error/PutForbidden: Brak uprawnień
 Error/PutUnauthorized: Wymagane uwierzytelnienie
-Error/RecursiveTransclusion: Rekursywna transkluzja wykryta we widżecie transkluzji
+Error/RecursiveTransclusion: Rekursywna transkluzja wykryta w widżecie transkluzji
 Error/RetrievingSkinny: Bład przy pobieraniu listy tiddlerów
 Error/SavingToTWEdit: Bład przy zapisywaniu do TWEdit
 Error/WhileSaving: Bład przy zapisywaniu
