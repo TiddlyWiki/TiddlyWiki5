@@ -384,6 +384,8 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[description]else{!!title}]").join(",")).toBe("A square of rich chocolate cake,a round yellow seed,Milk,Rice Pudding");
 		// Return the first title from :map if the filter returns more than one result
 		expect(wiki.filterTiddlers("[tag[shopping]] :map[tags[]]").join(",")).toBe("shopping,shopping,shopping,shopping");
+		// Prepend the position in the list using the index and length variables
+		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[title]addprefix[-]addprefix<length>addprefix[of]addprefix<index>]").join(",")).toBe("0of4-Brownies,1of4-Chick Peas,2of4-Milk,3of4-Rice Pudding");
 	});
 });
 
