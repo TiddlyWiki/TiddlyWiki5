@@ -18,9 +18,9 @@ The following variables are available within the filter run:
 
 * ''currentTiddler'' - the input title
 * ''..currentTiddler'' - the value of the variable `currentTiddler` outside the filter run.
-* ''index'' - the numeric index of the current list item (with zero being the first item in the list) <<.from-version "5.2.1">>
-* ''revIndex'' - the reverse numeric index of the current list item (with zero being the last item in the list) <<.from-version "5.2.1">>
-* ''length'' - the total length of the input list <<.from-version "5.2.1">>
+* ''index'' - <<.from-version "5.2.1">> the numeric index of the current list item (with zero being the first item in the list).
+* ''revIndex'' - <<.from-version "5.2.1">> the reverse numeric index of the current list item (with zero being the last item in the list).
+* ''length'' - <<.from-version "5.2.1">> the total length of the input list.
 
 Filter runs used with the `:map` prefix should return the same number of items that they are passed. Any missing entries will be treated as an empty string. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `[get[myfield]else[default-value]...`.
 
