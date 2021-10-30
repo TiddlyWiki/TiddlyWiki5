@@ -56,6 +56,10 @@ exports.parse = function() {
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
+		// Inside pre and code elements, skip newlines (but not indents) at the start
+		if (tag.tag === 'pre' || tag.tag === 'code') {
+			this.parser.skipNewlines();
+		}
 		if(followedByTwoLinebreaks) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {

@@ -94,6 +94,7 @@ var WikiParser = function(type,text,options) {
 /*
 Precompiled regular expression patterns used in this file. They have the "g" flag set ("search globally"), so that `<pattern>.lastIndex` can be set to `this.pos`, and will not be forgotten between multiple calls to `<pattern>.exec(this.source)`.
 */
+WikiParser.prototype.newlinesPattern = /\s*\n/g;
 WikiParser.prototype.escapedLinebreakPattern = /\\\r?\n/g;
 
 /*
@@ -177,6 +178,13 @@ WikiParser.prototype.skipWhitespace = function(options) {
 	if(whitespaceMatch && whitespaceMatch.index === this.pos) {
 		this.pos = whitespaceRegExp.lastIndex;
 	}
+};
+
+/*
+Skip zero or more whitespace followed by a newline at the current position.
+*/
+WikiParser.prototype.skipNewlines = function() {
+	this.skip(this.newlinesPattern);
 };
 
 /*
