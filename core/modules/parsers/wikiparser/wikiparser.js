@@ -92,6 +92,11 @@ var WikiParser = function(type,text,options) {
 };
 
 /*
+Precompiled regular expression patterns used in this file. They have the "g" flag set ("search globally"), so that `<pattern>.lastIndex` can be set to `this.pos`, and will not be forgotten between multiple calls to `<pattern>.exec(this.source)`.
+*/
+WikiParser.prototype.escapedLinebreakPattern = /\\\r?\n/g;
+
+/*
 */
 WikiParser.prototype.loadRemoteTiddler = function(url) {
 	var self = this;
@@ -149,6 +154,18 @@ WikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 };
 
 /*
+Skip a thing at the current parse position if it matches the pattern. The pattern must have the "g" flag set ("search globally").
+*/
+WikiParser.prototype.skip = function(pattern) {
+	var pos = this.pos;
+	pattern.lastIndex = pos;
+	var match = pattern.exec(this.source);
+	if(match && match.index === pos) {
+		this.pos = pattern.lastIndex;
+	}
+};
+
+/*
 Skip any whitespace at the current position. Options are:
 	treatNewlinesAsNonWhitespace: true if newlines are NOT to be treated as whitespace
 */
@@ -160,6 +177,13 @@ WikiParser.prototype.skipWhitespace = function(options) {
 	if(whitespaceMatch && whitespaceMatch.index === this.pos) {
 		this.pos = whitespaceRegExp.lastIndex;
 	}
+};
+
+/*
+Skip a "\" directly followed by a newline at the current position.
+*/
+WikiParser.prototype.skipEscapedLinebreak = function() {
+	this.skip(this.escapedLinebreakPattern);
 };
 
 /*

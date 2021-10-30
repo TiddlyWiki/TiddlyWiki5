@@ -47,6 +47,8 @@ exports.parse = function() {
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
+	// 'Skip a '\' followed by a linebreak, we dont need it any more (It made the parseTag() function, called earlier, return null, which results in this html element being parsed by the html inline rule).
+	this.parser.skipEscapedLinebreak();
 	// Check for an immediately following double linebreak
 	var followedByTwoLinebreaks = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
