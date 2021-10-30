@@ -19,19 +19,28 @@ type: text/vnd.tiddlywiki
 
 ! Usability Improvements
 
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6015">> image picker in theme tweaks to not dismiss when an image is selected
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5998">> a [[new hidden setting|Hidden Setting: Show Edit Preview per Tiddler]] for controlling the visibility of the editor preview pane on a per-tiddler basis
 
 ! Widget Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6148">> new LetWidget, a more flexible alternative to the SetWidget and the VarsWidget
 
 ! Filter improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6150">> new [[zth Operator]] that works like [[nth Operator]] but counts from zero instead of one
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6149">> [[Map Filter Run Prefix]] to provide additional variables to the filter
 
 ! Hackability Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6012/files">> new `focus-editor` operation to [[WidgetMessage: tm-edit-text-operation]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6130">> new ActionSetMultipleFieldsWidget, new SetMultipleVariablesWidget and extended ActionSendMessageWidget for working with multiple variables/fields/indexes/parameters in one operation
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6127">> new trigonometric operators: [[acos|acos Operator]], [[asin|asin Operator]], [[atan|atan Operator]], [[cos|cos Operator]], [[sin|sin Operator]] and [[tan|tan Operator]]
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6145">> EditTextWidget to provide a new ''actionValue'' variable to action strings that contains the value of the input
+
+! Developer Improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6132">> support for widgets to access the order in which attributes are defined
 
 ! Client-server Improvements
 
@@ -39,7 +48,7 @@ type: text/vnd.tiddlywiki
 
 ! Node.js Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5275">> support for recursively loading subdirectories with [[tiddlywiki.files Files]]
 
 ! Plugin Improvements
 
@@ -49,14 +58,25 @@ type: text/vnd.tiddlywiki
 
 ! Translation improvements
 
-* 
+* Polish
 
 ! Other Bug Fixes
 
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6013">> refreshing of LinkWidget attributes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6107">> crash when using "source=basename-uri-decoded" in tiddlywiki.files
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8ae4428332e03a1fdaee26f777a0c3a372fff401">> ''$timestamp'' attribute ignored when using ActionSetFieldWidget to set the value of an index
 
 ! Acknowledgements
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* <<contributor Jermolene>>
+* <<contributor btheado>>
+* <<contributor BurningTreeC>>
+* <<contributor EvidentlyCube>>
+* <<contributor flibbles>>
+* <<contributor joshuafontany>>
+* <<contributor Marxsal>>
+* <<contributor pmario>>
+* <<contributor saqimtiaz>>
+* <<contributor Telumire>>
+
