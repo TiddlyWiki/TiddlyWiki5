@@ -26,6 +26,6 @@ Here is an example of button that uses the data in [[Days of the Week]] to assig
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>
-<$action-setmultiplefields $tiddler="HelloThere" $fields="[list[Days of the Week]addprefix[day-]]" $values="[list[Days of the Week]]">>/>
+<$action-setmultiplefields $tiddler="HelloThere" $fields="[list[Days of the Week]addprefix[day-]]" $values="[list[Days of the Week]]"/>
 Click me!
 </$button>'/>
