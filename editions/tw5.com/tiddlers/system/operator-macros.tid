@@ -5,22 +5,29 @@ tags: $:/tags/Macro
 
 \define .operator-examples(op,text:"Examples") <$link to="$op$ Operator (Examples)">$text$</$link>
 
+\define .operator-example-tryit-actions() <$action-setfield $tiddler=<<.state>> text="show" filter=<<__eg__>>/>
 \define .operator-example(n,eg,ie)
 <div class="doc-example">
-`$eg$`
-<$macrocall $name=".if" cond="""$ie$""" then="""<dd>&rarr; $ie$</dd>"""/>
 <$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$n$]]" variable=".state">
 <$reveal state=<<.state>> type="nomatch" text="show">
+	`$eg$`
+	<$macrocall $name=".if" cond="""$ie$""" then="""<dd>&rarr; $ie$</dd>"""/>
 	<dl>
-	<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
+	<dd><$button actions=<<.operator-example-tryit-actions>>>Try it</$button></dd>
 	</dl>
 </$reveal>
 <$reveal state=<<.state>> type="match" text="show">
+	<$edit-text tiddler=<<.state>> field="filter" tag="input" type=search focus="true"/>
 	<dl>
-	<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
+	<dd>
+	<$button set=<<.state>> setTo="">Hide</$button>
+	<$reveal stateTitle=<<.state>> stateField="filter" type="nomatch" text=<<__eg__>>>
+		<$button actions=<<.operator-example-tryit-actions>>>Reset</$button>
+	</$reveal>
+	</dd>
 	</dl>
 	<blockquote class="doc-example-result">
-	<ul><$list filter="""$eg$""" emptyMessage="(empty)">
+	<ul><$list filter={{{[<.state>get[filter]]}}} emptyMessage="(empty)">
 	<li><$link><$view field="title"/></$link></li>
 	</$list></ul>
 	</blockquote>
