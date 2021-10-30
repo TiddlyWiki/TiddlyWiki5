@@ -1,5 +1,5 @@
 created: 20210618134753828
-modified: 20210618140945870
+modified: 20211029082538212
 tags: [[Filter Syntax]] [[Filter Run Prefix Examples]] [[Map Filter Run Prefix]]
 title: Map Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
@@ -14,3 +14,6 @@ Replace the input titles with the caption field if it exists, otherwise preserve
 For each title in a shopping list, calculate the total cost of purchasing each item:
 
 <<.operator-example 2 "[tag[shopping]] :map[get[quantity]else[0]multiply{!!price}]">>
+
+For each title in a shopping list, prefix it with its position in the list:
+<<.operator-example 2 "[tag[shopping]] :map[<currentTiddler>addprefix[-]addprefix<index>]">>
