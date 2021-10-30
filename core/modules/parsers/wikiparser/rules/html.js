@@ -48,13 +48,13 @@ exports.parse = function() {
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
 	// Check for an immediately following double linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+	var followedByTwoLinebreaks = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
-	tag.isBlock = this.is.block || hasLineBreak;
+	tag.isBlock = this.is.block || followedByTwoLinebreaks;
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
 		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
-		if(hasLineBreak) {
+		if(followedByTwoLinebreaks) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
 			var reEnd = new RegExp("(" + reEndString + ")","mg");
