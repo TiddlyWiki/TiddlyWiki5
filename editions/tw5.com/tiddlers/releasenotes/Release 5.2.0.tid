@@ -35,7 +35,7 @@ It is now possible to drag and drop an image file directly into the tiddler text
 It is now possible to embed actions within the body of the ActionCreateTiddlerWidget, and those actions can directly access the title of the newly created tidddler via the variable `createTiddler-title`, and the title of the corresponding draft in the variable `createTiddler-draftTitle`. The old `$savetitle` and `$savedrafttitle` attributes are now deprecated.
 
 ```
-<$button>
+<$button>\
   <$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}>
     <$action-navigate $to=<<createTiddler-title>>/>
   </$action-createtiddler>

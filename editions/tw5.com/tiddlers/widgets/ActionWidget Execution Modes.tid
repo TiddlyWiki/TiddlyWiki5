@@ -19,7 +19,7 @@ src='\define actions()
 
 Current value of ActionTestTiddler: {{ActionTestTiddler}}
 
-<$button actions=<<actions>>>
+<$button actions=<<actions>>>\
 Click me
 </$button>'/>
 
@@ -43,6 +43,6 @@ src='\define tv-action-refresh-policy() always
 
 Current value of ActionTestTiddler: {{ActionTestTiddler}}
 
-<$button actions=<<actions>>>
+<$button actions=<<actions>>>\
 Click me
 </$button>'/>

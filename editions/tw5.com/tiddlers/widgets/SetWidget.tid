@@ -35,7 +35,7 @@ The simplest way of using set variable widget assigns a string to a variable. Th
 <<<
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$set name="myVariable" value="Some text">
+src='<$set name="myVariable" value="Some text">\
 <$text text=<<myVariable>>/>
 </$set>' />
 
@@ -46,7 +46,7 @@ Both the name and value attributes can be transcluded. For example:
 <<<
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$set name=anotherVariable value="myVariable">
+src='<$set name=anotherVariable value="myVariable">\
   <$set name=<<anotherVariable>> value={{$:/language/DefaultNewTiddlerTitle}}>
     <$text text=<<myVariable>>/>
   </$set>
@@ -61,7 +61,7 @@ This form of the set variable widget chooses one of two specified values accordi
 <<<
 
 <$macrocall $name='wikitext-example-without-html' 
-src="""<$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" value="It's magic" emptyValue="It's not magic">
+src="""<$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" value="It's magic" emptyValue="It's not magic">\
 <$text text=<<myVariable>>/>
 </$set>""" />
 
@@ -74,7 +74,7 @@ This form of the set variable widget evaluates the filter and assigns the result
 <<<
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$set name="myVariable" filter="[tag[HelloThere]]">
+src='<$set name="myVariable" filter="[tag[HelloThere]]">\
 <$text text=<<myVariable>>/>
 </$set>' />
 
@@ -87,7 +87,7 @@ src='<$set name="myVariable" filter="[tag[HelloThere]]">
 <<<
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$set name="myVariable" filter="[tag[HelloThere]]" select="0">
+src='<$set name="myVariable" filter="[tag[HelloThere]]" select="0">\
 <$text text=<<myVariable>>/>
 </$set>'/>
 
@@ -100,7 +100,7 @@ src='<$set name="myVariable" filter="[tag[HelloThere]]" select="0">
 <<<
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$set name="myVariable" tiddler="HelloThere" field="list">
+src='<$set name="myVariable" tiddler="HelloThere" field="list">\
 <$text text=<<myVariable>>/>
 </$set>'/>
 
@@ -111,7 +111,7 @@ The example above could also be written as `<$set name="myVariable" value={{Hell
 <<<
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$set name="myTiddler" value="HelloThere">
+src='<$set name="myTiddler" value="HelloThere">\
   <$set name="myVariable" tiddler=<<myTiddler>> field={{$:/docs/anyField!!field}}>
     <$text text=<<myVariable>>/>
   </$set>

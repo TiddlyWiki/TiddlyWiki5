@@ -31,7 +31,7 @@ To make a button that creates new tiddlers tagged "task", create a tiddler calle
 To create a new tiddler with given attributes rather than from a template:
 
 ```
-<$button>
+<$button>\
 <$action-sendmessage $message="tm-new-tiddler" title="This is newly created tiddler" tags="OneTag [[Another Tag]]" text=<<now "Today is DDth, MMM YYYY">>/>
 New Tiddler
 </$button>

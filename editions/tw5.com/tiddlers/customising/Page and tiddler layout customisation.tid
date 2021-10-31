@@ -34,7 +34,7 @@ Let's say you have a skeleton tiddler called 'Recipe template', and you want to 
 [[$(currentTiddler)$]]
 \end
 \define newHereButton()
-<$button class=<<tv-config-toolbar-class>>>
+<$button class=<<tv-config-toolbar-class>>>\
 <$action-sendmessage
   $message="tm-new-tiddler"
 $param="TITLE OF YOUR SKELETON BUTTON"

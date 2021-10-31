@@ -97,7 +97,7 @@ If the tiddler that contains the macro definition is known and - for example - t
 
 !!! Messages
 
-<$list filter="[tag[navigator-message]]">
+<$list filter="[tag[navigator-message]]">\
 <$link/><br>
 </$list>
 
