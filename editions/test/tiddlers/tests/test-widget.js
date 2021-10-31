@@ -195,7 +195,7 @@ describe("Widget module", function() {
 			{title: "TiddlerOne", text: "Jolly Old World"}
 		]);
 		// Construct the widget node
-		var text = "<$view tiddler='TiddlerOne'/>";
+		var text = "<$view tiddler='TiddlerOne'></$view>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
