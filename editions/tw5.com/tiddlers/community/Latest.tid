@@ -14,7 +14,8 @@ The latest news, articles, resources and examples.
 
 ! <$link><$view field="title"/></$link>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/></div>
 
 <$transclude/>
 

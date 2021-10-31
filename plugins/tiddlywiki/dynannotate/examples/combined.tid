@@ -39,7 +39,8 @@ See the [[source|$:/plugins/tiddlywiki/dynannotate/examples/combined]] for detai
 Search: <$edit-text tiddler="$:/temp/search" tag="input"/>
 
 <$list filter="[all[tiddlers+shadows]tag[DynannotateDemo]sort[title]]" variable="chunk">
-<div style="position:relative;"><!-- Needed for the popups to work -->
+<div style="position:relative;">
+<!-- ^^ Needed for the popups to work ^^ -->
 <$dynannotate
 	filter="[all[shadows+tiddlers]!has[draft.of]annotate-tiddler<chunk>]"
 	actions=<<click-annotation-actions>>

@@ -12,4 +12,5 @@ type: text/vnd.tiddlywiki
 <$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: $version$ </$button>. Use [[$superseded$]] instead
 \end
 
-<pre><$view field="text"/></pre>
+<pre>
+<$view field="text"/></pre>

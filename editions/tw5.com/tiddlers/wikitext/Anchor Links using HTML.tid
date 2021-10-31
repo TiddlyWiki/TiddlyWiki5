@@ -5,7 +5,8 @@ title: Anchor Links using HTML
 
 <a id=<<qualify "#Top">>></a>
 
-<h2 id="#Introduction:Anchor-Links-using-HTML">''HTML Anchor Links in Tiddlers''</h2>
+<h2 id="#Introduction:Anchor-Links-using-HTML">
+''HTML Anchor Links in Tiddlers''</h2>
 
 
 
@@ -65,7 +66,8 @@ Yes, it's that simple. BUT...  in ~TiddlyWiki there are some small differences f
 
 <a href=<<qualify "##Top">>>Back to the top</a>
 
-<h2 id=<<qualify "#Anchor-link-limitations">>>Limitations and things to watch out for</h2>
+<h2 id=<<qualify "#Anchor-link-limitations">>>
+Limitations and things to watch out for</h2>
 
 ''Step 1:'' Creating the target anchor
 
@@ -95,7 +97,9 @@ Normally you can click on the link and ~TiddlyWiki will scroll the window so the
 
 <a href=<<qualify "##Top">>>Back to the top</a>
 
-<h2 id=<<qualify "#More_examples">>>More examples</h2>
+<h2 id=<<qualify "#More_examples">>>
+More examples</h2>
+
 In each case the target code is placed at the destination the reader navigates to, the link code is placed where it will help the reader navigate from.
 
 ```
@@ -108,7 +112,8 @@ In each case the target code is placed at the destination the reader navigates t
 This looks like:
 
 <hr>
-<h2 id="#heading-01">My Target Heading</h2>
+<h2 id="#heading-01">
+My Target Heading</h2>
 
 <a href="##heading-01">Link to My Target Heading</a>
 <hr>
@@ -139,7 +144,8 @@ Clicking this anchor link goes to: <a href="##unique001">Link to My Target Secti
 
 <a href=<<qualify "##Top">>>Back to the top</a>
 
-<h2 id=<<qualify "#Suggestions-for-elements">>>''Suggestions for HTML elements to use''</h2>
+<h2 id=<<qualify "#Suggestions-for-elements">>>
+''Suggestions for HTML elements to use''</h2>
 
 Some suggestions for the HTML element you choose for marking a position using the <<.attr id>> attribute:
 
@@ -151,7 +157,8 @@ Some suggestions for the HTML element you choose for marking a position using th
 
 <a href=<<qualify "##Top">>>Back to the top</a>
 
-<h2 id=<<qualify "#Suggestions-for-ids">>>Suggestions for target names to use</h2>
+<h2 id=<<qualify "#Suggestions-for-ids">>>
+Suggestions for target names to use</h2>
 
 | ! | ! Sample code | ! Observations |
 |<<.def Recommended>> |<$text text="""<a id="#part001-of-TiddlerName"></a>"""/> |Include the tiddler name for easy unique <<.attr id>>s|
@@ -162,13 +169,17 @@ Some suggestions for the HTML element you choose for marking a position using th
 
 <a href=<<qualify "##Top">>>Back to the top</a>
 
-<h2 id=<<qualify "#qualify-example">>> ''Avoiding duplicate IDs when transcluding''</h2>
+<h2 id=<<qualify "#qualify-example">>>
+''Avoiding duplicate IDs when transcluding''</h2>
+
 The <<.attr id>> and anchor link to this header has been made as follows:
 
 ```
 <a href=<<qualify "##qualify-example">>>Avoiding duplicate IDs when transcluding</a>
 
-<h2 id=<<qualify "#qualify-example">>>Avoiding duplicate IDs when transcluding</h2>
+<h2 id=<<qualify "#qualify-example">>>
+Avoiding duplicate IDs when transcluding</h2>
+
 ```
 ;For this to work:
 
@@ -180,7 +191,8 @@ The <<.attr id>> and anchor link to this header has been made as follows:
 
 <a href=<<qualify "##Top">>>Back to the top</a>
 
-<h2 id=<<qualify #Style_Hints>>>''Style Hints'' </h2>
+<h2 id=<<qualify #Style_Hints>>>
+''Style Hints''</h2>
 
 If you don't want the link to look like an external link, give the `<a>` element's <<.attr class>> attribute the value <<.def tc-tiddlylink>> and if you want the link to also be italic & bold, give the additional classes <<.def "tc-tiddlylink-missing tc-tiddlylink-shadow">> like below:
 

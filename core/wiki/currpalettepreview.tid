@@ -36,7 +36,8 @@ background-color: $(swatchColour)$;
 </$set>
 </$set>
 \end
-<div class="tc-swatches-horiz"><$list filter="
+<div class="tc-swatches-horiz">
+<$list filter="
 foreground
 background
 muted-foreground

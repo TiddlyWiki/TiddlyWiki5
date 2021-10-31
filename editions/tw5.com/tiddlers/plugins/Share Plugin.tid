@@ -4,7 +4,8 @@ tags: OfficialPlugins
 title: Share Plugin
 type: text/vnd.tiddlywiki
 
-<div class="tc-message-box">Do not install this plugin unless you understand exactly what it does</div>
+<div class="tc-message-box">
+Do not install this plugin unless you understand exactly what it does</div>
 
 This experimental plugin provides tools to share tiddlers via URLs, comprising:
 
