@@ -44,8 +44,7 @@ $actions$
 
 ---
 
-<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder=""/>
-<$edit-text tiddler="$:/config/ColourPicker/New" type="color" tag="input"/>
+<$edit-text tiddler="$:/config/ColourPicker/New" tag="input" default="" placeholder=""/> <$edit-text tiddler="$:/config/ColourPicker/New" type="color" tag="input"/>
 <$set name="colour-picker-value" value={{$:/config/ColourPicker/New}}>
 <$macrocall $name="colour-picker-inner" actions="""$actions$"""/>
 </$set>
