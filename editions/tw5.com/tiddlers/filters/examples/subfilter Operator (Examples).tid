@@ -1,8 +1,30 @@
 created: 20181031175129475
-modified: 20181031175129475
+modified: 20211030223407188
 tags: [[subfilter Operator]] [[Operator Examples]]
 title: subfilter Operator (Examples)
 type: text/vnd.tiddlywiki
 
-<<.operator-example 1 "[subfilter[one two three]addsuffix[!]]">>
-<<.operator-example 2 "[subfilter{$:/StoryList!!list}]">>
+\define recent-mods() [has[modified]!sort[modified]limit[5]]
+\define display-variable(name)
+''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
+\end
+
+Literal filter operands can be used, but such cases are better rewritten without using <<.op subfilter>>:
+<<.operator-example 1 "[subfilter[one two three]addsuffix[!]]" "same as `one two three +[addsuffix[!]]`">>
+
+The <<.op subfilter>> operator can be used to dynamically define parts of a [[filter run|Filter Run]]. This is useful for sharing a common pieces of a filter across multiple filters.
+
+For example, this variable:
+
+* <<display-variable recent-mods>>
+
+can be used in one filter like this:
+
+<<.operator-example 2 "[tag[Filter Operators]subfilter<recent-mods>addsuffix[!]]" "same as `[tag[Filter Operators]has[modified]!sort[modified]limit[5]addsuffix[!]]`">>
+
+and in another similar filter like this:
+<<.operator-example 3 "[tag[ActionWidgets]subfilter<recent-mods>addprefix[!]]">>
+
+Variables are not the only way to define dynamic subfilters. [[Text references|TextReference]] can be used to load a subfilter from a tiddler field (see also [[Filter Parameter]]):
+<<.operator-example 4 "[subfilter{$:/StoryList!!list}limit[5]]">>
+<<.operator-example 5 "[subfilter{$:/StoryList!!list}subfilter<recent-mods>]">>
