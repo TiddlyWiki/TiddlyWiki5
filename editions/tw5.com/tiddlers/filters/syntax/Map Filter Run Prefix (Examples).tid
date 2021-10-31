@@ -16,4 +16,5 @@ For each title in a shopping list, calculate the total cost of purchasing each i
 <<.operator-example 2 "[tag[shopping]] :map[get[quantity]else[0]multiply{!!price}]">>
 
 For each title in a shopping list, prefix it with its position in the list:
+
 <<.operator-example 2 "[tag[shopping]] :map[<currentTiddler>addprefix[-]addprefix<index>]">>

@@ -21,13 +21,17 @@ Sort by newest of modified dates:
 <<.operator-example 4 "[tag[Field Operators]] :sort:date[get[modified]else[19700101]] +[limit[10]]">>
 
 Sort by title:
+
 <<.operator-example 5 "[tag[Field Operators]] :sort:string:casesensitive[get[caption]] +[limit[10]]">>
 
 Sort by title in reverse order:
+
 <<.operator-example 6 "[tag[Field Operators]] :sort:string:casesensitive,reverse[get[caption]] +[limit[10]]">>
 
 Sort as text with case sensitivity:
+
 <<.operator-example 7 "Apple Banana Orange Grapefruit guava DragonFruit Kiwi apple orange  :sort:string:casesensitive[{!!title}]">>
 
 Sort as text ignoring case:
+
 <<.operator-example 8 "Apple Banana Orange Grapefruit guava DragonFruit Kiwi apple orange :sort:string:caseinsensitive[{!!title}]">>

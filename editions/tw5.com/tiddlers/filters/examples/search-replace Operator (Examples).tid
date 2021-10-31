@@ -11,22 +11,27 @@ type: text/vnd.tiddlywiki
 \define names() (\w+)\s(\w+)
 
 Replace one string with another:
+
 <<.operator-example 1 """[[The quick brown fox jumps over the lazy dog]search-replace[dog],[cat]]""">>
 
 Replace all matches of a regular expression:
 
 `\define myregexp() e|o`
+
 <<.operator-example 2 """[[Hello There]search-replace:g:regexp<myregexp>,[]]""">>
 
 Replace all matches of a string irrespective of case:
+
 <<.operator-example 3 """[[Hello There]search-replace:gi[H],[]]""">>
 
 You can also use regular expression capture groups in the replacement string:
 `\define names() (\w+)\s(\w+)`
+
 <<.operator-example 4 """[[John Smith]search-replace::regexp<names>,[$2,$1]]""" >>
 
 To replace everything but a match using a regular expression and the ''multiline'' (m) flag:
 `\define myregexp2() ^(?!Unlike).*$`
+
 <<.operator-example 5 """[[HelloThere]get[text]search-replace:gm:regexp<myregexp2>,[]]""">>
 
 {{How to remove stop words}}
