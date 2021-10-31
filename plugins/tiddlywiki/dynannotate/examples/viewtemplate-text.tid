@@ -45,11 +45,9 @@ title: $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text
 <div class="tc-drop-down-wrapper">
 <div class="tc-drop-down tc-popup-keep" style="max-width:550px;white-space: normal;overflow-y:hidden;">
 <$tiddler tiddler={{$:/temp/dynannotate/demo/annotation-title}}>
-<p>
 <h2>
 This is an annotation
 </h2>
-</p>
 <p>
 The annotation is stored in the tiddler:
 </p>
