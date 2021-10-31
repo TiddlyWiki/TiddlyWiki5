@@ -2,7 +2,6 @@ tags: [[Customise TiddlyWiki]] Learning
 title: How to create keyboard shortcuts
 type: text/vnd.tiddlywiki
 
-<br>
 <<.tip """[[TiddlyWiki]] distinguishes two types of keyboard shortcuts. Those that are limited to work within <$macrocall $name=".tag" _="input"/> fields or <$macrocall $name=".tag" _="textareas"/> which are handled by the <$macrocall $name=".wlink" to="KeyboardWidget"/> widget and keyboard shortcuts that work globally - which means that only the page needs to have focus in order for them to be accessible. The latter are handled by a mechanism that starts to work when a wiki is loaded""">>
 
 
