@@ -126,7 +126,6 @@ exports["search-replace"] = function(source,operator,options) {
 		//Escape $ character in replacement string if not in regular expression mode
 		replacement = isRegExp ? operator.operands[1] : (operator.operands[1]||"").replace(/\$/g,"$$$$"),
 		regExp;
-		console.log(replacement)
 	try {
 		regExp = new RegExp(searchTerm,flags);
 	} catch(ex) {
@@ -138,6 +137,7 @@ exports["search-replace"] = function(source,operator,options) {
 			results.push(
 				title.replace(regExp,replacement)
 			);
+			regExp.lastIndex = 0;
 		} else {
 			results.push(title);
 		}
