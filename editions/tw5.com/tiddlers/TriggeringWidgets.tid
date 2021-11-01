@@ -1,0 +1,12 @@
+created: 20211031172716741
+modified: 20211031174029381
+title: TriggeringWidgets
+type: text/vnd.tiddlywiki
+
+Triggering widgets are a type of widget which can trigger ActionWidgets. Typically these widgets (such as the ButtonWidget) will trigger actions based on interaction from the user.
+
+The following triggering widgets are provided:
+
+<<list-links "[tag[TriggeringWidgets]]">>
+
+See ActionWidgets for more information and examples of how TriggeringWidgets and ActionWidgets work together.
