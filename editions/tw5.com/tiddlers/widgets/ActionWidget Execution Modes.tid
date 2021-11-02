@@ -1,4 +1,6 @@
 title: ActionWidget Execution Modes
+modified: 20211026094722447
+created: 20211003094722447
 
 <<.from-version "5.2.0">> The default behaviour of action widgets has some peculiarities that often cause confusion. There is now an improved mode that simplifies how things work, but due to BackwardsCompatibility constraints, it must be explicitly engaged in order to take advantage of it.
 
@@ -21,9 +23,9 @@ Current value of ActionTestTiddler: {{ActionTestTiddler}}
 Click me
 </$button>'/>
 
-The new behaviour avoids these problems by refreshing all widgets before execution, not just action widgets. It is engaged by running the actions in a scopr that includes the variable `tv-action-refresh-policy` set to the value `always`.
+The new behaviour avoids these problems by refreshing all widgets before execution, not just action widgets. It is engaged by running the actions in a scope that includes the variable `tv-action-refresh-policy` set to the value `always`.  (The default value for `tv-action-refresh-policy` is `once`).
 
-This can be done within an action string, or via a local variable declaration containing the widget triggering the action.
+The assignment can be done within an action string, or via a local variable declaration containing the widget triggering the action.
 
 <<.warning "Do not attempt to set `tv-action-refresh-policy` globally; the core will only work correctly with the default setting">>
 

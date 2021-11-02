@@ -110,6 +110,9 @@ td svg {
 	padding-bottom: 0;
 	margin-top: 0.2em;
 }
+.doc-example input {
+  width: 60%;
+}
 .doc-example pre:first-child {
 	margin-top: 0;
 }

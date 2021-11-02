@@ -103,4 +103,16 @@ exports.nth = function(source,operator,options) {
 	return results.slice(count - 1,count);
 };
 
+/*
+The zero based nth member of the list
+*/
+exports.zth = function(source,operator,options) {
+	var count = $tw.utils.getInt(operator.operand,0),
+		results = [];
+	source(function(tiddler,title) {
+		results.push(title);
+	});
+	return results.slice(count,count + 1);
+};
+
 })();

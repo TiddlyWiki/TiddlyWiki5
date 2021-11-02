@@ -19,7 +19,7 @@ The ''action-sendmessage'' widget is invisible. Any content within it is ignored
 |$name |Optional name of additional parameter |
 |$value |Value for optional parameter whose name is specified in `$name` |
 |$names |<<.from-version "5.2.1">> Optional filter evaluating to a list of additional parameter names |
-|$values |<<.from-version "5.2.1">> Optional filter evaluating to a list of parameter values corresponding to the parameters names specified in `$names` | 
+|$values |<<.from-version "5.2.1">> Optional filter evaluating to a list of parameter values corresponding to the parameters names specified in `$names` |
 |//{any attributes not starting with $}// |Multiple additional, optional named parameters that are attached to the message |
 
 ! Examples
