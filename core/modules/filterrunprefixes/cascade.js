@@ -21,7 +21,18 @@ exports.cascade = function(operationSubFunction,options) {
 			$tw.utils.each(inputResults,function(title) {
 				var result = ""; // If no filter matches, we return an empty string
 				$tw.utils.each(filterList,function(filter) {
-					var output = options.wiki.filterTiddlers(filter,widget,options.wiki.makeTiddlerIterator([title]));
+					var output = options.wiki.filterTiddlers(filter,{
+							getVariable: function(name) {
+								switch(name) {
+									case "currentTiddler":
+										return "" + title;
+									case "..currentTiddler":
+										return widget.getVariable("currentTiddler");
+									default:
+										return widget.getVariable(name);
+								}
+							}
+						},options.wiki.makeTiddlerIterator([title]));
 					if(output.length !== 0) {
 						result = output[0];
 						return false;

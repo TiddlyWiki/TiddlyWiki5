@@ -295,7 +295,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 	});
 	wiki.addTiddler({
 		title: "$:/filter2",
-		text: "[tag[shopping]then[It is not customary]]",
+		text: "[<currentTiddler>tag[shopping]then[It is not customary]]",
 		tags: "$:/tags/Filter"
 	});
 	wiki.addTiddler({
