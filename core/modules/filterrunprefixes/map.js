@@ -23,7 +23,7 @@ exports.map = function(operationSubFunction,options) {
 					getVariable: function(name,options) {
 						options = options || {};
 						options.variables = {
-							"currentTiddler": title,
+							"currentTiddler": "" + title,
 							"..currentTiddler": widget.getVariable("currentTiddler"),
 							"index": "" + index,
 							"revIndex": "" +  (inputTitles.length - 1 - index),

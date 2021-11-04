@@ -16,23 +16,30 @@ Export our filter function
 exports.filter = function(operationSubFunction,options) {
 	return function(results,source,widget) {
 		if(results.length > 0) {
-			var resultsToRemove = [];
+			var resultsToRemove = [],
+				index = 0;
 			results.each(function(title) {
 				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name) {
-						switch(name) {
-							case "currentTiddler":
-								return "" + title;
-							case "..currentTiddler":
-								return widget.getVariable("currentTiddler");
-							default:
-								return widget.getVariable(name);
+					getVariable: function(name,options) {
+						options = options || {};
+						options.variables = {
+							"currentTiddler": "" + title,
+							"..currentTiddler": widget.getVariable("currentTiddler"),
+							"index": "" + index,
+							"revIndex": "" +  (results.length - 1 - index),
+							"length": "" + results.length
+						};
+						if(name in options.variables) {
+							return options.variables[name];
+						} else {
+							return widget.getVariable(name,options);
 						}
 					}
 				});
 				if(filtered.length === 0) {
 					resultsToRemove.push(title);
 				}
+				++index;
 			});
 			results.remove(resultsToRemove);
 		}

@@ -26,14 +26,16 @@ exports.sort = function(operationSubFunction,options) {
 				compareFn;
 			results.each(function(title) {
 				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name) {
-						switch(name) {
-							case "currentTiddler":
-								return "" + title;
-							case "..currentTiddler":
-								return widget.getVariable("currentTiddler");
-							default:
-								return widget.getVariable(name);
+					getVariable: function(name,options) {
+						options = options || {};
+						options.variables = {
+							"currentTiddler": "" + title,
+							"..currentTiddler": widget.getVariable("currentTiddler")
+						};
+						if(name in options.variables) {
+							return options.variables[name];
+						} else {
+							return widget.getVariable(name,options);
 						}
 					}
 				});
