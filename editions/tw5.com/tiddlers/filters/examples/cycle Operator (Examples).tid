@@ -18,4 +18,4 @@ Cycle through a list of values to add as a tag, in reverse order:
 
 <<.using-days-of-week>>
 <<.operator-example 1 """[list[Days of the Week]first[]] +[cycle{Days of the Week!!list}]""">>
-<<.operator-example 1 """[list[Days of the Week]first[]] +[cycle{Days of the Week!!list},[2]]""">>
+<<.operator-example 2 """[list[Days of the Week]first[]] +[cycle{Days of the Week!!list},[2]]""">>
