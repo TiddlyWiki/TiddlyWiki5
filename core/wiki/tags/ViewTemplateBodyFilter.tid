@@ -1,0 +1,3 @@
+title: $:/tags/ViewTemplateBodyFilter
+list: $:/config/ViewTemplateBodyFilters/plugin $:/config/ViewTemplateBodyFilters/system $:/config/ViewTemplateBodyFilters/hide-body $:/config/ViewTemplateBodyFilters/default
+
