@@ -19,9 +19,9 @@ exports.reduce = function(operationSubFunction,options) {
 				index = 0;
 			results.each(function(title) {
 				var list = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name,options) {
-						options = options || {};
-						options.variables = {
+					getVariable: function(name,opts) {
+						opts = opts || {};
+						opts.variables = {
 							"currentTiddler": "" + title,
 							"..currentTiddler": widget.getVariable("currentTiddler"),
 							"index": "" + index,
@@ -29,10 +29,10 @@ exports.reduce = function(operationSubFunction,options) {
 							"length": "" + results.length,
 							"accumulator": "" + accumulator
 						};
-						if(name in options.variables) {
-							return options.variables[name];
+						if(name in opts.variables) {
+							return opts.variables[name];
 						} else {
-							return widget.getVariable(name,options);
+							return widget.getVariable(name,opts);
 						}
 					}
 				});

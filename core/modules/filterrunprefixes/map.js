@@ -20,19 +20,19 @@ exports.map = function(operationSubFunction,options) {
 			results.clear();
 			$tw.utils.each(inputTitles,function(title) {
 				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name,options) {
-						options = options || {};
-						options.variables = {
+					getVariable: function(name,opts) {
+						opts = opts || {};
+						opts.variables = {
 							"currentTiddler": "" + title,
 							"..currentTiddler": widget.getVariable("currentTiddler"),
 							"index": "" + index,
 							"revIndex": "" +  (inputTitles.length - 1 - index),
 							"length": "" + inputTitles.length
 						};
-						if(name in options.variables) {
-							return options.variables[name];
+						if(name in opts.variables) {
+							return opts.variables[name];
 						} else {
-							return widget.getVariable(name,options);
+							return widget.getVariable(name,opts);
 						}
 					}
 				});
