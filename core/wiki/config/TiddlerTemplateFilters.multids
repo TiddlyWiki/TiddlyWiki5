@@ -1,0 +1,5 @@
+title: $:/config/TiddlerTemplateFilters/
+tags: $:/tags/TiddlerTemplateFilter
+
+draft: [is[draft]then[$:/core/ui/EditTemplate]]
+default: [[$:/core/ui/ViewTemplate]]
