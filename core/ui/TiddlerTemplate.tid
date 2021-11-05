@@ -1,7 +1,3 @@
 title: $:/core/ui/TiddlerTemplate
 
-<$let template={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerTemplateFilter]get[text]] }}}>
-
-<$transclude tiddler={{{ [<template>!is[blank]] ~[[$:/core/ui/ViewTemplate]] }}}/>
-
-</$let>
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerTemplateFilter]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate]] }}} />

@@ -3,10 +3,6 @@ tags: $:/tags/ViewTemplate
 
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 
-<$let template={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]get[text]] }}}>
-
-<$transclude tiddler={{{ [<template>!is[blank]] ~[[$:/core/ui/ViewTemplate/body/default]] }}}/>
-
-</$let>
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />
 
 </$reveal>
