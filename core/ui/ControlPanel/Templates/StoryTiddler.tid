@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/StoryTiddler
+tags: $:/tags/ControlPanel/Templates
+caption: {{$:/language/ControlPanel/StoryTiddler/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/StoryTiddler/
+
+<<lingo Hint>>
+
+{{$:/tags/TiddlerTemplateFilter||$:/snippets/ListTaggedCascade}}

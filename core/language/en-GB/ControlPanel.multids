@@ -191,12 +191,17 @@ Settings/TitleLinks/Yes/Description: Display tiddler titles as links
 Settings/MissingLinks/Caption: Wiki Links
 Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
 Settings/MissingLinks/Description: Enable links to missing tiddlers
+StoryTiddler/Caption: Story Tiddler
+StoryTiddler/Hint: These rules are used to dynamically choose the template for displaying a tiddler in the story river.
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Stylesheets/Caption: Stylesheets
 Stylesheets/Expand/Caption: Expand All
 Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restore
+Templates/Caption: Templates
+Templates/Hint: These are the global rules used to dynamically choose templates.
+Templates/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
@@ -212,3 +217,5 @@ Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor to
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode. Drag and drop to change the ordering
 Tools/Download/Full/Caption: Download full wiki
+ViewTemplateBody/Caption: View Template Body
+ViewTemplateBody/Hint: These rules are used by the default view template to dynamically choose the template for displaying the body of a tiddler.
