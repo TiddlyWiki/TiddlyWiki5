@@ -1,0 +1,9 @@
+caption: {{$:/language/ControlPanel/Client/Caption}}
+tags: $:/tags/ControlPanel/Appearance
+title: $:/core/ui/ControlPanel/Client
+
+\define lingo-base() $:/language/ControlPanel/Client/
+
+<<lingo Hint>>
+
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Appearance/Client]!has[draft.of]]">>

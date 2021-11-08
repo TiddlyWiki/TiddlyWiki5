@@ -1,0 +1,11 @@
+caption: {{$:/language/ControlPanel/Client/Tiddloid/Caption}}
+tags: $:/tags/ControlPanel/Appearance/Client
+title: $:/core/ui/ControlPanel/Client/Tiddloid
+
+\define lingo-base() $:/language/ControlPanel/Client/Tiddloid/
+
+<<lingo Hint>>
+
+<$checkbox tiddler="$:/config/Tiddloid/HideToolbar" field="text" checked="yes" unchecked="no" default="no"> <<lingo HideToolbar/Description>> </$checkbox>
+
+<$checkbox tiddler="$:/config/Tiddloid/ApplyTheme" field="text" checked="yes" unchecked="no" default="no"> <<lingo ApplyTheme/Description>> </$checkbox>

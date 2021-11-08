@@ -27,6 +27,12 @@ Basics/Tiddlers/Prompt: Anzahl Tiddler
 Basics/Title/Prompt: Titel dieses ~TiddlyWikis
 Basics/Username/Prompt: Benutzersignatur zum Editieren
 Basics/Version/Prompt: ~TiddlyWiki Version
+Client/Caption: Client-Optimierungen
+Client/Hint: Hier können Sie das Erscheinungsbild Ihres Kunden anpassen.
+Client/Tiddloid/Caption: Tiddloid
+Client/Tiddloid/Hint: Diese Einstellungen gelten für den Tiddloid-Client.
+Client/Tiddloid/ApplyTheme/Description: Wenden Sie die Themenfarbe auf die Systemleisten an
+Client/Tiddloid/HideToolbar/Description: Ausblenden Symbolleiste auf der Ladevorgang abgeschlossen
 EditorTypes/Caption: Editor Typen
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden soll.

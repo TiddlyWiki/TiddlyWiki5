@@ -21,6 +21,12 @@ Basics/Tiddlers/Prompt: tiddler 数:
 Basics/Title/Prompt: この ~TiddlyWiki のタイトル:
 Basics/Username/Prompt: 編集者として表示するユーザ名:
 Basics/Version/Prompt: ~TiddlyWiki バージョン:
+Client/Caption: クライアントの調整
+Client/Hint: ここでは、クライアントの外観をカスタマイズできます。
+Client/Tiddloid/Caption: Tiddloid
+Client/Tiddloid/Hint: これらの設定はTiddloidクライアントに適用されます。
+Client/Tiddloid/ApplyTheme/Description: システムバーにテーマカラーを適用する
+Client/Tiddloid/HideToolbar/Description: 読み込み完了時にツールバーを非表示
 EditorTypes/Caption: エディタ
 EditorTypes/Editor/Caption: エディタ
 EditorTypes/Hint: tiddlerの種類と、それを編集するエディタの関係です。
