@@ -1,5 +1,5 @@
-title: $:/config/TiddlerTemplateFilters/
-tags: $:/tags/TiddlerTemplateFilter
+title: $:/config/StoryTiddlerTemplateFilters/
+tags: $:/tags/StoryTiddlerTemplateFilter
 
 draft: [is[draft]then{$:/config/ui/EditTemplate}]
 default: [{$:/config/ui/ViewTemplate}]

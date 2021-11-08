@@ -6,4 +6,4 @@ caption: {{$:/language/ControlPanel/StoryTiddler/Caption}}
 
 <<lingo Hint>>
 
-{{$:/tags/TiddlerTemplateFilter||$:/snippets/ListTaggedCascade}}
+{{$:/tags/StoryTiddlerTemplateFilter||$:/snippets/ListTaggedCascade}}
