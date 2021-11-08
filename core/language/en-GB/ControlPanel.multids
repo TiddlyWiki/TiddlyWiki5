@@ -31,6 +31,8 @@ EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
 EditorTypes/Type/Caption: Type
+EditTemplateBody/Caption: Edit Template Body
+EditTemplateBody/Hint: This rule cascade is used by the default edit template to dynamically choose the template for editing the body of a tiddler.
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Type shortcut here
