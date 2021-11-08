@@ -1,0 +1,5 @@
+title: $:/core/ui/ViewTemplate/title/system
+
+<h2 class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
+<span class="tc-system-title-prefix">$:/</span><$text text={{{ [<currentTiddler>removeprefix[$:/]] }}}/>
+</h2>

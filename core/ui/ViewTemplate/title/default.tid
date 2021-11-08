@@ -1,0 +1,5 @@
+title: $:/core/ui/ViewTemplate/title/default
+
+<h2 class="tc-title">
+<$view field="title"/>
+</h2>
