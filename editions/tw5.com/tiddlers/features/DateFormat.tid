@@ -4,7 +4,13 @@ tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-When used to display date values (with the `format` attribute set to ''date''), the ViewWidget accepts a `template` attribute that allows the format of the date values to be specified. The format string is processed with the following substitutions:
+The default representation of dates is a compact string such as `20211002153802059`. For example, the `created` and `modified` fields are stored like this. 
+
+The display format for this string can be controlled with a template. For example, transcluding the `modified` field automatically applies a template to display the date as `Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)`. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
+
+`<$view field=modified format=date template=“DDth mmm YYYY 0hh:0mm:0ss” />`
+
+The date string is processed with the following substitutions:
 
 |!Token |!Substituted Value |
 |`ddddd` |<<.from-version "5.2.0">> Day of year (1 to 365, or 366 for leap years) |
