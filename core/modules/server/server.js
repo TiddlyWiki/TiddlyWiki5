@@ -41,9 +41,10 @@ function Server(options) {
 		try {
 			settings = JSON.parse(fs.readFileSync(path.join($tw.boot.wikiPath,options.variables['server-settings'])));
 		} catch (err) {
-			$tw.utils.log(`Server Settings - Error reading file ${target}, using default settings.`);
-			$tw.utils.log("Error: "+err.toString());
+			$tw.utils.log(`Server Settings - Error reading file ${target}, using default settings.`,"brown/orange");
+			$tw.utils.log(err.toString());
 		}
+		options.variables['server-settings'] = null;
 	}
 	this.variables = $tw.utils.extend({},this.defaultVariables,settings);
 	if(options.variables) {
@@ -53,8 +54,6 @@ function Server(options) {
 			}
 		}
 	}
-	$tw.utils.extend({},this.defaultVariables,options.variables);
-
 	// Name the server
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("servername"));
 	// Setup the default required plugins
@@ -68,6 +67,7 @@ function Server(options) {
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
+		admin: (this.get("admin") || (authorizedUserName !== "(anon)" ? authorizedUserName : null)).split(',').map($tw.utils.trim),
 		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
 	}
