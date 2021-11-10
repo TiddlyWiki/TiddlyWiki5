@@ -34,9 +34,18 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.servername = $tw.utils.transliterateToSafeASCII(options.servername || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	
 	// Initialise the variables
-	this.variables = $tw.utils.extend({},this.defaultVariables);
+	let settings = {};
+	if(options.variables && options.variables['server-settings']) {
+		try {
+			settings = JSON.parse(fs.readFileSync(path.join($tw.boot.wikiPath,options.variables['server-settings'])));
+		} catch (err) {
+			$tw.utils.log(`Server Settings - Error reading file ${target}, using default settings.`);
+			$tw.utils.log("Error: "+err.toString());
+		}
+	}
+	this.variables = $tw.utils.extend({},this.defaultVariables,settings);
 	if(options.variables) {
 		for(var variable in options.variables) {
 			if(options.variables[variable]) {
@@ -45,6 +54,9 @@ function Server(options) {
 		}
 	}
 	$tw.utils.extend({},this.defaultVariables,options.variables);
+
+	// Name the server
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("servername"));
 	// Setup the default required plugins
 	this.requiredPlugins = (options.requiredPlugins || "$:/plugins/tiddlywiki/filesystem,$:/plugins/tiddlywiki/tiddlyweb").split(',');
 	// Initialise CSRF
@@ -156,6 +168,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 }
 
 Server.prototype.defaultVariables = {
+	"servername": "TiddlyWiki5",
 	port: "8080",
 	host: "127.0.0.1",
 	"root-tiddler": "$:/core/save/all",
