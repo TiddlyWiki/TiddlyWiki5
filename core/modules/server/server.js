@@ -36,15 +36,15 @@ function Server(options) {
 	this.boot = options.boot || $tw.boot;
 	
 	// Initialise the variables
-	let settings = {};
+	var settings = {};
 	if(options.variables && options.variables['server-settings']) {
 		try {
 			settings = JSON.parse(fs.readFileSync(path.join($tw.boot.wikiPath,options.variables['server-settings'])));
 		} catch (err) {
-			$tw.utils.log(`Server Settings - Error reading file ${target}, using default settings.`,"brown/orange");
+			$tw.utils.log(`Server Settings - Error reading file ${target}, using defaultVariables.`,"brown/orange");
 			$tw.utils.log(err.toString());
 		}
-		options.variables['server-settings'] = null;
+		delete options.variables['server-settings'];
 	}
 	this.variables = $tw.utils.extend({},this.defaultVariables,settings);
 	if(options.variables) {
@@ -99,7 +99,7 @@ function Server(options) {
 	}
 	this.transport = require(this.protocol);
 	// Name the server and init the boot state
-	this.servername = $tw.utils.transliterateToSafeASCII(this.get("servername"));
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name"));
 	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
@@ -170,7 +170,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 }
 
 Server.prototype.defaultVariables = {
-	"servername": "TiddlyWiki5",
+	"server-name": "TiddlyWiki5",
 	port: "8080",
 	host: "127.0.0.1",
 	"root-tiddler": "$:/core/save/all",
