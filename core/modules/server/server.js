@@ -100,7 +100,7 @@ function Server(options) {
 	this.transport = require(this.protocol);
 	// Name the server and init the boot state
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("servername"));
-	this.boot.origin = this.get("origin") || "$protocol$//$host$";
+	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
