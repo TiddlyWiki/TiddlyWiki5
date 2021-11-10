@@ -10,18 +10,18 @@ color:$(foregroundColor)$;
 \define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions)
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <$element-tag$ $element-attributes$ class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>>>
-$actions$<$transclude tiddler="""$icon$"""/><$view tiddler=<<__tag__>> field="title" format="text" />
+$actions${{||$:/core/ui/TiddlerIcon}}<$view tiddler=<<__tag__>> field="title" format="text" />
 </$element-tag$>
 </$vars>
 \end
 
 \define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)
-<$macrocall $name="tag-pill-inner" tag=<<__tag__>> icon="""$icon$""" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+<$macrocall $name="tag-pill-inner" tag=<<__tag__>> colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
 \end
 
 \define tag-pill(tag,element-tag:"span",element-attributes:"",actions:"")
 <span class="tc-tag-list-item" data-tag-title=<<__tag__>>>
-<$macrocall $name="tag-pill-body" tag=<<__tag__>> icon={{{ [<__tag__>get[icon]] }}} colour={{{ [<__tag__>get[color]] }}} palette={{$:/palette}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+<$macrocall $name="tag-pill-body" tag=<<__tag__>> colour={{{ [<__tag__>get[color]] }}} palette={{$:/palette}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
 </span>
 \end
 

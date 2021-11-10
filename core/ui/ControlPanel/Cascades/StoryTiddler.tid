@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/StoryTiddler
-tags: $:/tags/ControlPanel/Templates
+tags: $:/tags/ControlPanel/Cascades
 caption: {{$:/language/ControlPanel/StoryTiddler/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/StoryTiddler/

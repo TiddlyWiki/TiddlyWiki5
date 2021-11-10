@@ -27,6 +27,9 @@ Basics/Tiddlers/Prompt: Number of tiddlers
 Basics/Title/Prompt: Title of this ~TiddlyWiki
 Basics/Username/Prompt: Username for signing edits
 Basics/Version/Prompt: ~TiddlyWiki version
+Cascades/Caption: Cascades
+Cascades/Hint: These global rules are used to dynamically choose certain templates. The result of the cascade is the result of the first filter in the sequence that returns a result
+Cascades/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
@@ -201,13 +204,12 @@ Stylesheets/Caption: Stylesheets
 Stylesheets/Expand/Caption: Expand All
 Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restore
-Templates/Caption: Templates
-Templates/Hint: These are the global rules used to dynamically choose templates.
-Templates/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
 TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+TiddlerIcon/Caption: Tiddler Icon
+TiddlerIcon/Hint: This rules cascade is used to dynamically choose the icon for a tiddler.
 Toolbars/Caption: Toolbars
 Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode. Drag and drop to change the ordering

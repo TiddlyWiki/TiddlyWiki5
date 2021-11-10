@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/ViewTemplateTitle
-tags: $:/tags/ControlPanel/Templates
+tags: $:/tags/ControlPanel/Cascades
 caption: {{$:/language/ControlPanel/ViewTemplateTitle/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/ViewTemplateTitle/

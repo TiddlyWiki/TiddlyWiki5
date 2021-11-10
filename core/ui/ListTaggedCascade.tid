@@ -1,6 +1,6 @@
 title: $:/snippets/ListTaggedCascade
 
-{{||$:/language/ControlPanel/Templates/TagPrompt}}
+{{||$:/language/ControlPanel/Cascades/TagPrompt}}
 
 <ol>
 <$list filter="[all[shadows+tiddlers]tag<currentTiddler>]">

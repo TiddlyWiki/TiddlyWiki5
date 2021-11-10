@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/EditTemplateBody
-tags: $:/tags/ControlPanel/Templates
+tags: $:/tags/ControlPanel/Cascade
 caption: {{$:/language/ControlPanel/EditTemplateBody/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/EditTemplateBody/
