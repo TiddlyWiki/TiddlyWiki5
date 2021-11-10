@@ -80,8 +80,6 @@ function Server(options) {
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
-	// Initialise CORS options
-	this.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 }
 
 /*
@@ -232,11 +230,11 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 Server.prototype.isOriginWhitelisted = function(origin) {
 	// Check if any of the originFilters applies
 	var self = this,
-		valid = (this.origin == origin),
+		valid = (this.boot.origin == origin),
 		originFilters = this.wiki.getTiddlerList(this.get("cors-tiddler"),"text");
 	// Optionally output debug info
 	if(this.get("debug-level") !== "none") {
-		$tw.utils.log(`CORS=${valid?'valid':'invalid'} this.origin=${this.origin} request.origin=${origin}`)
+		$tw.utils.log(`CORS=${valid?'valid':'invalid'} boot.origin=${this.boot.origin} request.origin=${origin}`)
 	}
 	if(!valid && originFilters.length > 0) {
 		$tw.utils.each(originFilters,function(filter) {
