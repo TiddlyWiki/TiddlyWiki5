@@ -1,0 +1,21 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Lista
+Filter/Caption: Filtr
+Filter/Hint: Szukaj przy pomocy [[wyrażenia filtrującego|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small>trafienia: <<resultCount>></small>//
+Matches: //<small>trafienia: <<resultCount>></small>//
+Matches/All: Wszystkie trafienia
+Matches/Title: Trafienia w nazwach:
+Search: Szukaj
+Search/TooShort: Zbyt krótki tekst wyszukiwania
+Shadows/Caption: Cienie
+Shadows/Hint: Szukaj wśród tiddlerów-cieni
+Shadows/Matches: //<small>trafienia: <<resultCount>></small>//
+Standard/Caption: Standardowe
+Standard/Hint: Szukaj wśród własnych tiddlerów
+Standard/Matches: //<small>trafienia: <<resultCount>></small>//
+System/Caption: Systemowe
+System/Hint: Szukaj wśród systemowych tiddlerów
+System/Matches: //<small>trafienia: <<resultCount>></small>//
+

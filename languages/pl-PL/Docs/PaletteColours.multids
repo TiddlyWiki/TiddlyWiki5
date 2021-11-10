@@ -1,0 +1,109 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Tło alertu
+alert-border: Ramka alertu
+alert-highlight: Podświetlenie alertu
+alert-muted-foreground: Stonowany tekst alertu
+background: Ogólne tło
+blockquote-bar: Lewa ramka cytatu
+button-background: Ogólne tło przycisku
+button-border: Ogólna ramka przycisku
+button-foreground: Ogólny tekst przycisku
+dirty-indicator: Wskażnik niezapisanych zmian
+code-background: Tło kodu
+code-border: Ramka kodu
+code-foreground: Tekst kodu
+download-background: Tło przycisku pobierania
+download-foreground: Tekst przycisku pobierania
+dragger-background: Tło przeciąganego tiddlera
+dragger-foreground: Tekst przeciąganego tiddlera
+dropdown-background: Tło rozwijanego elementu
+dropdown-border: Ramka rozwijanego elementu
+dropdown-tab-background-selected: Tło wybranej rowijanej zakładki
+dropdown-tab-background: Tło rozwijanej zakładki
+dropzone-background: Tło komunikatu o wrzucaniu pliku
+external-link-background-hover: Tło po najechaniu na zewnętrzny link
+external-link-background-visited: Tło odwiedzonego zewnętrznego linku
+external-link-background: Tło zewnętrznego linku
+external-link-foreground-hover: Tekst po najechaniu na zewnętrzny link
+external-link-foreground-visited: Tekst odwiedzonego zewnętrznego linku
+external-link-foreground: Tekst zewnętrznego linku
+foreground: Tekst
+menubar-background: Tło paska menu
+menubar-foreground: Tekst paska menu
+message-background: Tło bloku z wiadomością
+message-border: Ramka bloku z wiadomością
+message-foreground: Tekst bloku z wiadomością
+modal-backdrop: Przyciemnieni okna modalnego
+modal-background: Tło okna modalnego
+modal-border: Ramka okna modalnego
+modal-footer-background: Tło stópki okna modalnego
+modal-footer-border: Ramka stópki okna modalnego
+modal-header-border: Ramka nagłówka okna modalnego
+muted-foreground: Ogólny  stonowany tekst
+notification-background: Tło notyfikacji
+notification-border: Ramka notyfikacji
+page-background: Tło strony
+pre-background: Tło sformatowanego kodu
+pre-border: Ramka sformatowanego kodu
+primary: Ogólny, główny kolor
+select-tag-background: Tło elementu `<select>`
+select-tag-foreground: Tekst elementu `<select>`
+sidebar-button-foreground: Kolor przycisku w menu bocznym
+sidebar-controls-foreground-hover: Kolor kontrolki w menu bocznym po najechaniu
+sidebar-controls-foreground: Kolor kontrolki w menu bocznym
+sidebar-foreground-shadow: Cień tekstu w menu bocznym
+sidebar-foreground: Tekst w menu bocznym
+sidebar-muted-foreground-hover: Stonowany tekst w menu bocznym po najechaniu
+sidebar-muted-foreground: Stonowany tekst w menu bocznym
+sidebar-tab-background-selected: Tło wybranej zakładki w menu bocznym
+sidebar-tab-background: Tło zakładki w menu bocznym
+sidebar-tab-border-selected: Ramka wybranej zakładki w menu bocznym
+sidebar-tab-border: Ramka zakładki w menu bocznym
+sidebar-tab-divider: Separator zakładek w menu bocznym
+sidebar-tab-foreground-selected: Tekst wybranej zakładki w menu bocznym
+sidebar-tab-foreground: Tekst zakładki w menu bocznym
+sidebar-tiddler-link-foreground-hover: Tekst po najechaniu linku do tiddlera w menu bocznym
+sidebar-tiddler-link-foreground: Tekst linka do tiddlera w menu bocznym
+site-title-foreground: Tekst nazwy strony
+static-alert-foreground: Tekst statycznego alertu
+tab-background-selected: Tło wybranej zakładki
+tab-background: Tło zakładki
+tab-border-selected: Ramka wybranej zakładki
+tab-border: Ramka zakłądki
+tab-divider: Separator zakładek
+tab-foreground-selected: Tekst wybranej zakładki
+tab-foreground: Tekst zakładki
+table-border: Ramka tabeli
+table-footer-background: Tło stópki tabeli
+table-header-background: Tło nagłówka tabeli
+tag-background: Tło tabeli
+tag-foreground: Tekst tabeli
+tiddler-background: Tło tiddlera
+tiddler-border: Ramka tiddlera
+tiddler-controls-foreground-hover: Tekst kontrolek tiddlera po najechaniu
+tiddler-controls-foreground-selected: Tekst wybranej kontrolki tiddlera
+tiddler-controls-foreground: Tekst kontrolki tiddlera
+tiddler-editor-background: Tło edytora tiddlera
+tiddler-editor-border-image: Ramka obrazka w edytorze tiddlera
+tiddler-editor-border: Ramka editora tiddlera
+tiddler-editor-fields-even: Tło parzystego pola w edytorze tiddlera
+tiddler-editor-fields-odd: Tło nieparzystego pola w edytorze tiddlera
+tiddler-info-background: Tło panelu info tiddlera
+tiddler-info-border: Ramka panelu info tiddlera
+tiddler-info-tab-background: Tło zakładki panelu info tiddlera
+tiddler-link-background: Tło linka tiddlera
+tiddler-link-foreground: Tekst linka tiddlera
+tiddler-subtitle-foreground: Tekst podtytułu tiddlera
+tiddler-title-foreground: Tekst nazwy tiddlera
+toolbar-new-button: Tekst przycisku 'nowy tiddler' w pasku narzędzi
+toolbar-options-button: Tekst przycisku 'opcje' w pasku narzędzi
+toolbar-save-button: Tekst przycisku 'zapisz' w pasku narzędzi
+toolbar-info-button: Tekst przycisku 'info' w pasku narzędzi
+toolbar-edit-button: Tekst przycisku 'edytuj' w pasku narzędzi
+toolbar-close-button: Tekst przycisku 'zamknij' w pasku narzędzi
+toolbar-delete-button: Tekst przycisku 'usuń' w pasku narzędzi
+toolbar-cancel-button: Tekst przycisku 'anuluj' w pasku narzędzi
+toolbar-done-button: Tekst przycisku 'zakończ' w pasku narzędzi
+untagged-background: Tło taga "nieotagowane"
+very-muted-foreground: Bardzo stonowany tekst

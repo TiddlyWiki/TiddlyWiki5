@@ -247,6 +247,40 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[2].sequenceNumber).toBe(4);
 	});
 
+	it("should deal with the let widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "lookup"},
+			{title: "TiddlerTwo", lookup: "value", newlookup: "value", wrong: "wrong"},
+			{title: "TiddlerThree", text: "wrong", value: "Happy Result", wrong: "ALL WRONG!!"}
+		]);
+		var text="\\define macro() TiddlerThree\n"+
+			"\\define currentTiddler() TiddlerOne\n"+
+			"<$let "+
+				"field={{!!text}} "+
+				"currentTiddler='TiddlerTwo' "+
+				"field={{{ [all[current]get<field>] }}} "+
+				"currentTiddler=<<macro>>>"+
+					"<$transclude field=<<field>>/></$let>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>Happy Result</p>");
+
+		// This is important. $Let needs to be aware enough not to let its
+		// own variables interfere with its ability to recognize no change.
+		// Doesn't matter that nothing has changed, we just need to make sure
+		// it recognizes that that its outward facing variables are unchanged
+		// EVEN IF some intermediate variables did change, there's no need to
+		// refresh.
+		wiki.addTiddler({title: "TiddlerOne", text: "newlookup"});
+		expect(widgetNode.refresh({})).toBe(false);
+
+		// But if we make a change that might result in different outfacing
+		// variables, then it should refresh
+		wiki.addTiddler({title: "TiddlerOne", text: "badlookup"});
+		expect(widgetNode.refresh({})).toBe(true);
+	});
+
 	it("should deal with attributes specified as macro invocations", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node

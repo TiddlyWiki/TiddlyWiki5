@@ -8,11 +8,11 @@ condition: [<targetTiddler>]
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((preview))
 
-<$reveal state="$:/state/showeditpreview" type="match" text="yes" tag="span">
+<$reveal state=<<edit-preview-state>> type="match" text="yes" tag="span">
 {{$:/core/images/preview-open}}
-<$action-setfield $tiddler="$:/state/showeditpreview" $value="no"/>
+<$action-setfield $tiddler=<<edit-preview-state>> $value="no"/>
 </$reveal>
-<$reveal state="$:/state/showeditpreview" type="nomatch" text="yes" tag="span">
+<$reveal state=<<edit-preview-state>> type="nomatch" text="yes" tag="span">
 {{$:/core/images/preview-closed}}
-<$action-setfield $tiddler="$:/state/showeditpreview" $value="yes"/>
+<$action-setfield $tiddler=<<edit-preview-state>> $value="yes"/>
 </$reveal>

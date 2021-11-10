@@ -36,6 +36,56 @@ The ''action-listops'' widget is invisible. Any content within it is ignored.
 |$subfilter |An optional subfilter expression, which takes the list being manipulated as input, and saves the modified list back to the field/index being manipulated |
 |$tags |An optional subfilter expression, which takes the 'tags' field of the target tiddler as input, and saves the modified list of tags back to the 'tags' field |
 
+! $filter vs. $subfilter
+
+Standalone use of the `$subfilter` attribute can be replaced by using a (more complicated) `$filter` attribute value.
+
+For example, the items "abc" and "123" can be appended to the field `myfield` using the `$subfilter` attribute:
+
+```
+<$action-listops $field="myfield" $subfilter="abc 123"/>
+```
+
+The same can be achieved using the `$filter` attribute and prepending the [[Filter Run]] `[all[current]get[myfield]enlist-input[]]` to the [[Filter Expression]]:
+
+```
+<$action-listops $field="myfield" $filter="[all[current]get[myfield]enlist-input[]] abc 123"/>
+```
+
+The short form is more convenient, but the long form is useful for live-debugging complicated `$subfilter` values using the filter tab of [[$:/AdvancedSearch]]. By using [[$:/AdvancedSearch]], the [[Filter Expression]] can be tested before using ''action-listops'' to modify actual tiddler fields. For this use case, the `all[current]` portion of the expression needs to be changed to select the proper test tiddler.
+
+! $tags vs. $field + $subfilter
+
+[[Tagging]] is implemented using a tiddler's 'tags' field, so appending the tags "abc" and "123" using the `$tags` attribute like this:
+
+```
+<$action-listops $tags="abc 123"/>
+```
+
+is mostly equivalent to using `$subfilter` along with "tags" for the value of `$field`:
+
+```
+<$action-listops $field="tags" $subfilter="abc 123"/>
+```
+
+! $action-listops widget vs. $action-setfield widget
+
+The ActionSetFieldWidget replaces a field's value using `$field`/`$value` attributes. A single ActionSetFieldWidget can be used to set any number of fields by using attributes not starting with $.
+
+The ActionListopsWidget replaces or modifies a single field's value. The new value is generated using filters.
+
+The following two examples are functionally equivalent:
+
+```
+<$action-setfield $field="myfield" $value="abc 123"/>
+```
+
+```
+<$action-listops $field="myfield" $filter="abc 123"/>
+```
+
+In general, ActionSetFieldWidget is better for setting multiple fields at once and for replacing a field's value. The ActionListopsWidget is better for modifying a field based on the field's existing value and for using a [[Filter Expression]] to derive the value.
+
 ! Extended Filter Operators
 
 A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.

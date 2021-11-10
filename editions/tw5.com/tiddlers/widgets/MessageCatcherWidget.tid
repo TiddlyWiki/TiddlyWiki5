@@ -1,6 +1,6 @@
 created: 20210309133636211
-modified: 20210711193113104
-tags: Widgets
+modified: 20211009122821123
+tags: Widgets MessageHandlerWidgets TriggeringWidgets
 title: MessageCatcherWidget
 type: text/vnd.tiddlywiki
 
@@ -21,7 +21,7 @@ The content of the `<$messagecatcher>` widget is displayed normally.
 
 ! Variables
 
-The message catcher widget
+The message catcher widget sets the following variables within each action string:
 
 |!Variables |!Description |
 |`event-*` |All string-based properties of the `event` object, with the names prefixed with `event-` |

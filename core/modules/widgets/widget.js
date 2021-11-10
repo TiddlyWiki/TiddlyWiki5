@@ -263,25 +263,29 @@ Compute the current values of the attributes of the widget. Returns a hashmap of
 */
 Widget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
-		self = this,
-		value;
+		self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "filtered") {
-			value = self.wiki.filterTiddlers(attribute.filter,self)[0] || "";
-		} else if(attribute.type === "indirect") {
-			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
-		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
-		} else { // String attribute
-			value = attribute.value;
-		}
-		// Check whether the attribute has changed
+		var value = self.computeAttribute(attribute);
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
 		}
 	});
 	return changedAttributes;
+};
+
+Widget.prototype.computeAttribute = function(attribute) {
+	var value;
+	if(attribute.type === "filtered") {
+		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
+	} else if(attribute.type === "indirect") {
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+	} else if(attribute.type === "macro") {
+		value = this.getVariable(attribute.value.name,{params: attribute.value.params});
+	} else { // String attribute
+		value = attribute.value;
+	}
+	return value;
 };
 
 /*
@@ -570,7 +574,7 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t],
 			childIsActionWidget = !!child.invokeAction,
-			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy");
+			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy"); // Default is "once"
 		// Refresh the child if required
 		if(childIsActionWidget || actionRefreshPolicy === "always") {
 			child.refreshSelf();

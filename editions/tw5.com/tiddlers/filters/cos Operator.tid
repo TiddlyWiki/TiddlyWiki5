@@ -1,0 +1,13 @@
+caption: cos
+created: 20211019211007324
+modified: 20211021222900121
+op-input: a [[selection of titles|Title Selection]]
+op-output: the cosine of the input angles (numeric value between -1 and 1)
+op-purpose: calculate the cosine value of a list of angles (given in radians)
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Trigonometric Operators]] [[Unary Mathematics Operators]]
+title: cos Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.21">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "cos">>

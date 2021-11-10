@@ -24,9 +24,10 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 </$list>
 
+<$set name="edit-preview-state" value={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualify "$:/state/showeditpreview">] }}}>
 <$list filter="[all[current]!has[_canonical_uri]]">
 <$vars importTitle=<<qualify $:/ImportImage>> importState=<<qualify $:/state/ImportImage>> >
-<$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> ><$reveal state="$:/state/showeditpreview" type="match" text="yes">
+<$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> ><$reveal stateTitle=<<edit-preview-state>> type="match" text="yes">
 <div class="tc-tiddler-preview">
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
@@ -44,7 +45,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </div>
 </$reveal>
 
-<$reveal state="$:/state/showeditpreview" type="nomatch" text="yes">
+<$reveal stateTitle=<<edit-preview-state>> type="nomatch" text="yes">
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
@@ -52,3 +53,4 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </$dropzone>
 </$vars>
 </$list>
+</$set>

@@ -66,7 +66,7 @@ exports.parse = function() {
 };
 
 /*
-Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: [], isSelfClosing:, start:, end:,}
+Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: {}, orderedAttributes: [], isSelfClosing:, start:, end:,}
 */
 exports.parseTag = function(source,pos,options) {
 	options = options || {};
@@ -74,7 +74,8 @@ exports.parseTag = function(source,pos,options) {
 		node = {
 			type: "element",
 			start: pos,
-			attributes: {}
+			attributes: {},
+			orderedAttributes: []
 		};
 	// Define our regexps
 	var reTagName = /([a-zA-Z0-9\-\$]+)/g;
@@ -106,6 +107,7 @@ exports.parseTag = function(source,pos,options) {
 	// Process attributes
 	var attribute = $tw.utils.parseAttribute(source,pos);
 	while(attribute) {
+		node.orderedAttributes.push(attribute);
 		node.attributes[attribute.name] = attribute;
 		pos = attribute.end;
 		// Get the next attribute

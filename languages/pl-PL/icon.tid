@@ -1,0 +1,7 @@
+title: $:/languages/pl-PL/icon
+type: image/svg+xml
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 60 30">
+<rect width="60" height="30" fill="#fff"/>
+<rect width="60" height="15" fill="#dc143c" y="15"/>
+</svg>

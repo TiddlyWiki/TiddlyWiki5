@@ -29,14 +29,12 @@ var VarsWidget = function(parseTreeNode,options) {
 /*
 Inherit from the base widget class
 */
-VarsWidget.prototype = Object.create(Widget.prototype);
+VarsWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
 VarsWidget.prototype.render = function(parent,nextSibling) {
-	// Call the constructor
-	Widget.call(this);
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -63,7 +61,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 VarsWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(Object.keys(changedAttributes).length) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}

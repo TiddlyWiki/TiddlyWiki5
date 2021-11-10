@@ -37,8 +37,6 @@ Example:
 </div>
 ```
 
-
-
 !!! With encryption
 
 If the ~TiddlyWiki is configured to encrypt its content, the tiddlers are stored as as an encrypted JSON string in a `<pre>` tag with the `id` attribute "encryptedStoreArea". 
@@ -83,14 +81,19 @@ Any tiddlers in the older format `<div>` store area are also loaded before tiddl
 
 Tiddlers from the new `<script>` tag store areas are loaded in the order of their store areas in the HTML file. Therefore if the same tiddler exists in two different `<script>` tag store areas, the tiddler from the later store area takes precedence. Note however that tiddlers from `<script>` tag store areas always take precedence over tiddlers from the older format  `<div>` store area. Therefore a tiddler from the older `<div>` store area can never overwrite a tiddler from  a `<script>` tag store area.
 
-Note that all `<script>` tags with the `class` attribute "tiddlywiki-tiddler-store" have their content parsed as JSON and loaded as tiddlers. This allows external tools to easily insert tiddlers into an HTML file by appending additional `<script>` tag(s) at the very end of the HTML file:
+Note that all `<script>` tags with the `class` attribute "tiddlywiki-tiddler-store" that precede the `$:/boot.js` module in the HTML file will have their content parsed as JSON and loaded as tiddlers.
+
+This allows external tools to easily insert tiddlers into an HTML file by prepending an additional `<script>` tag(s) at the very start of the HTML file:
 
 ```html
-</html>
 <script class="tiddlywiki-tiddler-store" type="application/json">[
 {"created":"20210525212411223","text":"This is some test text","tags":"[[test tag]] [[another tag]]","title":"My new tiddler to insert","modified":"20210525212430577"}
 ]</script>
+<!doctype html>
+...
 ```
+
+Although invalid HTML, all known browsers will silently move the script tag to a valid position within the 
 
 Additional topics:
 
