@@ -238,7 +238,7 @@ Server.prototype.isOriginWhitelisted = function(origin) {
 	if(this.get("debug-level") !== "none") {
 		$tw.utils.log(`CORS=${valid?'valid':'invalid'} this.origin=${this.origin} request.origin=${origin}`)
 	}
-	if(!valid) {
+	if(!valid && originFilters.length > 0) {
 		$tw.utils.each(originFilters,function(filter) {
 			if(!valid) {
 				var source = self.wiki.makeTiddlerIterator([origin]),
