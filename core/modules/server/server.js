@@ -54,10 +54,6 @@ function Server(options) {
 			}
 		}
 	}
-	// Name the server and init the boot state
-	this.servername = $tw.utils.transliterateToSafeASCII(this.get("servername"));
-	this.boot.origin = this.get("origin") || "$protocol$//$host$";
-	this.boot.pathPrefix = this.get("path-prefix") || "";
 	// Setup the default required plugins
 	this.requiredPlugins = (options.requiredPlugins || "$:/plugins/tiddlywiki/filesystem,$:/plugins/tiddlywiki/tiddlyweb").split(',');
 	// Initialise CSRF
@@ -102,6 +98,10 @@ function Server(options) {
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
+	// Name the server and init the boot state
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("servername"));
+	this.boot.origin = this.get("origin") || "$protocol$//$host$";
+	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
 /*
