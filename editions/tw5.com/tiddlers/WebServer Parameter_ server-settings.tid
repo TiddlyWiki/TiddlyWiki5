@@ -1,0 +1,29 @@
+caption: server-settings
+created: 20211111003224763
+creator: Joshua Fontany
+modified: 20211111022143236
+modifier: Joshua Fontany
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: server-settings
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''server-settings'' contains the pathname of a [[JSON file|https://en.wikipedia.org/wiki/JSON]] containing attribute-value pairs for //all other// [[web server configuration parameter|WebServer Parameters]].
+
+The server admin may not want to set certain parameters in this file, and may choose to pass them along on the command line as arguments. Parameters supplied by command line arguments always take precedence over parameters set in a ''server-settings'' file. This can be useful for setting up different configurations, or allowing command line arguments override specific pre-set parameters.
+
+The filepath is relative to the wiki boot path, and can be any filename and extension, although `server.info` is recommended. For security purposes, it is recommended that this file is NOT checked into source control systems (such as Git, etc) if it contains sensitive information, such as an HTTPS Certificate Passphrase, a path on disk to a [[WebServer Parameter: credentials]] CSV file, etc. In this case, you can use a path like `./settings/sever.info`, and configure the `./settings` directory to be ignored by your source-control system.
+
+The JSON file must contain a set of simple text attribute-value pairs. For example, the below `./settings/server.info` file pulls the active credentials from a CSV file in the same folder, and sets the optional `admin` [[security principals|WebServer Authorization]] to all authenticated users:
+
+```
+{
+  "server-name": "My Tiddlywiki Server",
+  "host": "127.0.0.1",
+  "port": 8080,
+  "admin": "(authenticated)",
+  "readers": "(anon)",
+  "writers": "(authenticated)",
+  "credentials": "./settings/credentials.csv"
+}
+```
+

@@ -34,7 +34,6 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	
 	// Initialise the variables
 	var settings = {};
 	if(options.variables && options.variables['server-settings']) {
