@@ -34,9 +34,19 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.servername = $tw.utils.transliterateToSafeASCII(this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	
 	// Initialise the variables
-	this.variables = $tw.utils.extend({},this.defaultVariables);
+	var settings = {};
+	if(options.variables && options.variables['server-settings']) {
+		try {
+			settings = JSON.parse(fs.readFileSync(path.join($tw.boot.wikiPath,options.variables['server-settings'])));
+		} catch (err) {
+			$tw.utils.log(`Server Settings - Error reading file ${target}, using defaultVariables.`,"brown/orange");
+			$tw.utils.log(err.toString());
+		}
+		delete options.variables['server-settings'];
+	}
+	this.variables = $tw.utils.extend({},this.defaultVariables,settings);
 	if(options.variables) {
 		for(var variable in options.variables) {
 			if(options.variables[variable]) {
@@ -44,7 +54,8 @@ function Server(options) {
 			}
 		}
 	}
-	$tw.utils.extend({},this.defaultVariables,options.variables);
+	// Setup the default required plugins
+	this.requiredPlugins = (options.requiredPlugins || "$:/plugins/tiddlywiki/filesystem,$:/plugins/tiddlywiki/tiddlyweb").split(',');
 	// Initialise CSRF
 	this.csrfDisable = this.get("csrf-disable") === "yes";
 	// Initialize Gzip compression
@@ -54,8 +65,13 @@ function Server(options) {
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
+		admin: (this.get("admin") || (authorizedUserName !== "(anon)" ? authorizedUserName : null)).split(',').map($tw.utils.trim),
 		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
+	}
+	if(this.get("path-prefix")) {
+		this.authorizationPrinciples[this.get("path-prefix")+"/readers"] = this.authorizationPrinciples["readers"];
+		this.authorizationPrinciples[this.get("path-prefix")+"/writers"] = this.authorizationPrinciples["writers"];
 	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
@@ -71,15 +87,21 @@ function Server(options) {
 	this.listenOptions = null;
 	this.protocol = "http";
 	var tlsKeyFilepath = this.get("tls-key"),
-		tlsCertFilepath = this.get("tls-cert");
+		tlsCertFilepath = this.get("tls-cert"),
+		tlsPassphrase = this.get("tls-passphrase");
 	if(tlsCertFilepath && tlsKeyFilepath) {
 		this.listenOptions = {
 			key: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsKeyFilepath),"utf8"),
-			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8")
+			cert: fs.readFileSync(path.resolve(this.boot.wikiPath,tlsCertFilepath),"utf8"),
+			passphrase: tlsPassphrase || ''
 		};
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
+	// Name the server and init the boot state
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
 /*
@@ -239,15 +261,15 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
-	var authorizationType = this.methodMappings[request.method] || "readers";
+	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
 	// Check for the CSRF header if this is a write
-	if(!this.csrfDisable && authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+	if(!this.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
 		return;
 	}
 	// Check whether anonymous access is granted
-	state.allowAnon = this.isAuthorized(authorizationType,null);
+	state.allowAnon = this.isAuthorized(state.authorizationType,null);
 	// Authenticate with the first active authenticator
 	if(this.authenticators.length > 0) {
 		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
@@ -256,7 +278,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 		}
 	}
 	// Authorize with the authenticated username
-	if(!this.isAuthorized(authorizationType,state.authenticatedUsername)) {
+	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername)) {
 		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 		response.end();
 		return;
@@ -322,8 +344,17 @@ Server.prototype.listen = function(port,host,prefix) {
 		port = process.env[port] || 8080;
 	}
 	// Warn if required plugins are missing
-	if(!this.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !this.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
-		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
+	var missing = [];
+	for (var index=0; index<this.requiredPlugins.length; index++) {
+		var name = this.requiredPlugins[index];
+		if (!this.wiki.getTiddler(name)) {
+			missing.push(name);
+		}
+	}
+	if(missing.length > 0) {
+		var error = "Warning: Plugin(s) required for client-server operation are missing.\n"+
+			"\""+ missing.join("\", \"")+"\"";
+		$tw.utils.warning(error);
 	}
 	// Create the server
 	var server;
