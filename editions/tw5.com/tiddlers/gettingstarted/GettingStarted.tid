@@ -1,12 +1,12 @@
 created: 20131129090249275
-modified: 20200507203622933
+modified: 20211111163520352
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-Click here to download an empty copy of TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
+In its basic form, TiddlyWiki is an HTML file. Click here to download an empty HTML copy of TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
 
-The next step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
+Because it is an HTML file, there is no built-in mechanism for saving changes except the [[fallback saver|Saving with the HTML5 fallback saver]], which can be somewhat inconvenient. But there are other methods for saving. So the next step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
 
 <<.warning "Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)">><br/><br/>
 
