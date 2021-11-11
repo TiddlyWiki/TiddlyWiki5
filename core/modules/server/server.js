@@ -99,7 +99,7 @@ function Server(options) {
 	}
 	this.transport = require(this.protocol);
 	// Name the server and init the boot state
-	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name"));
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
@@ -170,7 +170,6 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 }
 
 Server.prototype.defaultVariables = {
-	"server-name": "TiddlyWiki5",
 	port: "8080",
 	host: "127.0.0.1",
 	"root-tiddler": "$:/core/save/all",
