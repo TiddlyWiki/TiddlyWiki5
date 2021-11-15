@@ -1,5 +1,4 @@
-title: $:/core/ui/ViewTemplate/import
-tags: $:/tags/ViewTemplate
+title: $:/core/ui/ViewTemplate/body/import
 
 \define lingo-base() $:/language/Import/
 

@@ -1,0 +1,10 @@
+title: $:/core/ui/ViewTemplate/body/plugin
+
+<div class="tc-tiddler-plugin-info">
+<$let plugin-type={{!!plugin-type}}
+	default-popup-state="yes"
+	qualified-state=<<qualify "$:/state/plugin-info">>
+>
+{{||$:/core/ui/Components/plugin-info}}
+</$let>
+</div>
