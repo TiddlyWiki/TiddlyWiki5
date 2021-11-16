@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Cascades
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/Cascades/Caption}}
+
+{{$:/language/ControlPanel/Cascades/Hint}}
+
+<div class="tc-control-panel">
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Cascades]!has[draft.of]]" default="$:/core/ui/ControlPanel/StoryTiddler"/>
+</div>

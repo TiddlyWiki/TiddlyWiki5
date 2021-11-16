@@ -2,9 +2,6 @@ title: $:/core/ui/ViewTemplate/title
 tags: $:/tags/ViewTemplate
 
 \whitespace trim
-\define title-styles()
-fill:$(foregroundColor)$;
-\end
 <div class="tc-tiddler-title">
 <div class="tc-titlebar">
 <span class="tc-tiddler-controls">
@@ -12,25 +9,10 @@ fill:$(foregroundColor)$;
 </span>
 <$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 <$link>
-<$set name="foregroundColor" value={{!!color}}>
-<$list filter="[all[current]has[icon]]~[[$:/config/DefaultTiddlerIcon]has[text]]">
-<span class="tc-tiddler-title-icon" style=<<title-styles>>>
-<$transclude tiddler={{!!icon}}>
-<$transclude tiddler={{$:/config/DefaultTiddlerIcon}}/>
-</$transclude>
-</span>
-</$list>
-</$set>
-<$list filter="[all[current]removeprefix[$:/]]">
-<h2 class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
-<span class="tc-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
-</h2>
-</$list>
-<$list filter="[all[current]!prefix[$:/]]">
-<h2 class="tc-title">
-<$view field="title"/>
-</h2>
-</$list>
+<$let iconSpanClass="tc-tiddler-title-icon">
+{{||$:/core/ui/TiddlerIcon}}
+</$let>
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateTitleFilter]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/title/default]] }}} />
 </$link>
 </$set>
 </div>
