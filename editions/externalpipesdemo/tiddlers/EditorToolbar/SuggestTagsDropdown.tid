@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/externaltasksdemo/EditorToolbar/SuggestTagsDropdown
+
+<$button message="tm-server-refresh">Refresh</$button>
+
+Status: {{JobStatus}} {{JobStatus!!message}}
+
+Results: {{PipeOutput}}

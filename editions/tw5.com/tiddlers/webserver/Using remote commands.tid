@@ -1,0 +1,80 @@
+created: 20181014180409461
+modified: 20181017202202358
+tags: [[WebServer Guides]]
+title: Using remote commands
+type: text/vnd.tiddlywiki
+
+The remote commands mechanism allows browsers connected to TiddlyWiki's WebServer to initiate the execution of [[commands|Commands]] on the server.
+
+In the browser it is initiated by the [[tm-execute-job|WidgetMessage: tm-execute-job]] message:
+
+```
+<$action-sendmessage $message="tm-execute-job" commands="--version" statusTitle="JobStatus"/>
+```
+
+On the server, it is implemented by the [[WebServer API: Post Commands]].
+
+<<.warning """To avoid potential security risks the remote commands mechanism is disabled by default. Please carefully read the security notes below before enabling it. """>>
+
+!! Security Considerations for Remote Commands
+
+Enabling the remote command mechanism allows any authenticated user connecting via the [[WebServer API]] to execute arbitrary [[commands|Commands]] on the server. TiddlyWiki's built-in commands are generally unfettered: for example, they include the ability to write to any file in the file system. This risks giving an adversary complete control of the system.
+
+The risks can be mitigated in several ways:
+
+* Restrict listening to [[host|WebServer Parameter: host]] 127.0.0.1 so that only processes running on the same machine can connect to the server
+* Require [[authentication|WebServer Authentication]]
+* Enable [[HTTPS|Using HTTPS]]
+
+!! Enabling Remote Commands
+
+Remote command execution is enabled by setting to 'true' the property `allow-remote-commands` of the `config` section of [[tiddlywiki.info Files]]. For example:
+
+```
+"config": {
+	"allow-remote-commands": true
+},
+```
+
+!! Using Remote Commands
+
+Remote commands are invoked from the browser using the [[tm-execute-job|WidgetMessage: tm-execute-job]] message.
+
+This example fetches JSON data from  `http://api.open-notify.org/astros.json` and places it in a tiddler called [[http://api.open-notify.org/astros.json]].
+
+```
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" 0="--verbose" 1="--fetch" 2="raw-file" 3="http://api.open-notify.org/astros.json" statusTitle="JobStatus"/>
+Fetch number of people in space
+</$button>
+```
+
+
+!! Remote Command Tests
+
+<$button message="tm-server-refresh">Refresh</$button>
+
+Status: {{JobStatus}} {{JobStatus!!message}}
+
+These tests don't produce any output.
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" commands="--version" statusTitle="JobStatus"/>
+Job!
+</$button>
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" commands="--versionitis" statusTitle="JobStatus"/>
+Illegal command
+</$button>
+
+<$button>
+<$action-sendmessage $message="tm-execute-job" 0="--verbose" 1="--fetch" 2="raw-file" 3="http://api.open-notify.org/astros.json" statusTitle="JobStatus"/>
+Fetch number of people in space
+</$button>
+
+Output:
+
+{{http://api.open-notify.org/astros.json}}
+

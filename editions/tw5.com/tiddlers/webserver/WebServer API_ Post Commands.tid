@@ -1,0 +1,27 @@
+created: 20181014175732191
+modified: 20181014180331643
+tags: [[WebServer API]]
+title: WebServer API: Post Commands
+type: text/vnd.tiddlywiki
+
+Posts a string of command tokens for execution by the server.
+
+Note that remote command execution is only permitted if explicitly enabled -- see [[Using remote commands]].
+
+```
+POST /commands/
+```
+
+The body should be an object in JSON format with the following properties:
+
+* ''commands'' - an array of command token strings
+* ''statusTitle'' - the title of a tiddler to receive a status string resulting from executing the commands
+
+Parameters:
+
+* none
+
+Response:
+
+* 204 No Content
+* 404 Not Found

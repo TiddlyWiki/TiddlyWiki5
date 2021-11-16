@@ -160,6 +160,46 @@ TiddlyWebAdaptor.prototype.getCsrfToken = function() {
 };
 
 /*
+*/
+TiddlyWebAdaptor.prototype.executeJob = function(event,callback) {
+	var paramObject = event.paramObject || {};
+	// Collect the commands
+	var commands;
+	if(paramObject.commands) {
+		commands = $tw.utils.parseStringArray(paramObject.commands);
+	} else {
+		// Get the values of the numeric parameters and sort them by their numeric name
+		commands = Object.keys(paramObject).filter(function(name) {
+			// We just include parameters that are identical to their numeric representation
+			return (parseInt(name,10) + "") === name;
+		}).map(function(name) {
+			return parseInt(name,10);
+		}).sort().map(function(index) {
+			return paramObject[index + ""];
+		});
+	}
+	// Compose the request
+	var options = {
+			url: this.host + "commands/",
+			type: "POST",
+			data: JSON.stringify({
+				commands: commands,
+				statusTitle: paramObject.statusTitle,
+				outputTitle: paramObject.outputTitle,
+				errorTitle: paramObject.errorTitle
+			}),
+			callback: function(err,data) {
+				if(callback) {
+					callback(err,data);					
+				}
+			}
+		};
+	// Send the request
+	this.logger.log("Executing job:",options);
+	$tw.utils.httpRequest(options);
+};
+
+/*
 Get an array of skinny tiddler fields from the server
 */
 TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {

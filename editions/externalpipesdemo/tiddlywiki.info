@@ -1,0 +1,119 @@
+{
+	"description": "Edition demonstrating external pipes",
+	"plugins": [
+		"tiddlywiki/tiddlyweb"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+	},
+	"config": {
+		"allow-remote-commands": true
+	},
+	"external-pipes": {
+		"reverser": {
+			"type": "socket",
+			"host": "127.0.0.1",
+			"port": 8081,
+			"input": {
+				"format": "rendered-text"
+			},
+			"output": {
+				"format": "text",
+				"tiddler": {
+					"title": "PipeOutput",
+					"type": "text/plain"
+				}
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"timeout": 100
+		},
+		"stats": {
+			"type": "task",
+			"path": "./demo-tasks/stats.js",
+			"input": {
+				"format": "json-raw-tiddlers"
+			},
+			"output": {
+				"format": "json-raw-tiddlers"
+			},
+			"error": {
+				"format": "text",
+				"tiddler": {
+					"title": "PipeOutput",
+					"type": "text/plain",
+					"result": "error"
+				}
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"timeout": 100
+		},
+		"mimic": {
+			"type": "task",
+			"path": "./demo-tasks/mimic.js",
+			"arguments": ["ngram-length"],
+			"input": {
+				"format": "rendered-text"
+			},
+			"output": {
+				"format": "text",
+				"tiddler": {
+					"title": "PipeOutput",
+					"type": "text/plain"
+				}
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"timeout": 100
+		},
+		"recaser": {
+			"type": "socket-erlang",
+			"host": "127.0.0.1",
+			"port": 8081,
+			"encoding": "latin1",
+			"input": {
+				"format": "rendered-text"
+			},
+			"output": {
+				"format": "text",
+				"tiddler": {
+					"title": "PipeOutput",
+					"type": "text/plain"
+				}
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"timeout": 100
+		},
+		"badtagger": {
+			"type": "socket-erlang",
+			"host": "127.0.0.1",
+			"port": 8081,
+			"encoding": "latin1",
+			"input": {
+				"format": "rendered-text"
+			},
+			"output": {
+				"format": "text",
+				"tiddler": {
+					"title": "PipeOutput",
+					"type": "text/plain"
+				}
+			},
+			"environment": {
+				"MY_VARIABLE": "value"
+			},
+			"timeout": 100
+		}
+	}
+}

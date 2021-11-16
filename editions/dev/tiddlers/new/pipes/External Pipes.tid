@@ -1,0 +1,123 @@
+created: 20181001171604072
+modified: 20181001184306738
+title: External Pipes
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+The external pipes mechanism is intended to address the fact that it can be difficult for experienced developers to quickly get started working with TiddlyWiki's code because it requires a good understanding of JavaScript, and some relatively unusual concepts and techniques that are likely to be unfamiliar to most.
+
+Many software developers are comfortable using and building text-based command line tools that follow the Unix philosophy of using stdin/stdout or TCP sockets for input and output, allowing tools to be chained together in powerful ways.
+
+External pipes support data transfer with external programs via two techniques:
+
+* By directly executing the program and communicating with it via stdin and stdout ([[mimic.js|External Pipes mimic.js]] and [[stats.js|External Pipes stats.js]])
+* By connecting to an existing TCP socket via a host address and port ([[reverser.js|External Pipes reverser.js]])
+
+Pipes are registered and executed under Node.js. Execution can be triggered via a server command or via a message propagated from the browser.
+
+Pipes currently support a simple question/response model:
+
+* TiddlyWiki opens a connection to the host/port, or starts the external task
+* TiddlyWiki sends the outgoing data through the pipe
+* TiddlyWiki receives the incoming data through the pipe
+* The connection is close, or the external task exits
+
+!! `externalpipesdemo` Edition
+
+The edition at `editions/externalpipesdemo` in the TiddlyWiki 5 repo contains the example tasks referenced in this documentation.
+
+!! Configuration
+
+Pipes must be registered in the `tiddlywiki.info` file of a wiki folder. For example:
+
+{{External Pipes tiddlywiki.info}}
+
+!!! Task Configuration Properties
+
+TBD
+
+!!! Input Formats
+
+The available input formats are:
+
+* `raw-text` - concatenated raw text of the tiddlers
+* `rendered-text` - concatenated rendered text of the tiddlers
+* `rendered-html` - concatenated rendered html of the tiddlers
+* `json-raw-tiddlers` - raw tiddlers in JSON
+* `json-rendered-text-tiddlers` - rendered tiddlers in JSON
+
+!!! Output Formats
+
+The available output formats include:
+
+* `raw-text` - raw text
+* `json-raw-tiddlers` - raw tiddlers in JSON
+
+!! Usage
+
+Pipes can be invoked via the `--pipe` command, or via a widget message propagated from the browser to the server.
+
+!!! `--pipe` Command
+
+The `--pipe` command triggers the invocation of a pipe task. The parameters are:
+
+```
+tiddlywiki <wikifolder> --pipe <pipename> <filter> <incomingTitle> <arguments>...
+```
+
+The ''pipename'' identifies the pipe, and must match the name defined in the `tiddlywiki.info` file.
+
+The ''filter'' identifies the tiddlers to be passed to the pipe
+
+The ''incomingTitle'' provides a title to be applied to incoming tiddlers for the `raw-text` output format
+
+The remaining ''arguments'' are passed through to external task pipes, and ignored for other types of pipe.
+
+!!! `tm-exec-task` Message
+
+TBD
+
+!! Examples
+
+The edition `editions/externalpipesdemo` in the TiddlyWiki5 repo contains a demo wiki that invokes sample tasks.
+
+!!! Mimic
+
+The `mimic.js` example is a simple command line tool that accepts source text via stdin and outputs a sort of statistical parody of the input text. It is written without any knowledge of TiddlyWiki, and so serves as an example of using an existing text-based tool with TiddlyWiki.
+
+```
+tiddlywiki editions/externalpipesdemo/ --verbose --pipe mimic '[[Alice in Wonderland]]' HelloThere 5 4000 --build index
+```
+
+View the resulting wiki at `editions/externaltaskdemo/output/index.html`: the tiddler "HelloThere" will contain a garbled version of the "Alice in Wonderland" text.
+
+!!! Stats
+
+The `stats.js` example is a simple command line tool that accepts source text via stdin and outputs a sort of statistical parody of the input text. It is written without any knowledge of TiddlyWiki, and so serves as an example of using an existing text-based tool with TiddlyWiki.
+
+```
+tiddlywiki editions/externalpipesdemo/ --verbose --pipe stats '[[Alice in Wonderland]]' HelloThere --build index
+```
+
+View the resulting wiki at `editions/externaltaskdemo/output/index.html`: the tiddler "HelloThere" will contain statistics about the "Alice in Wonderland" text.
+
+!!! Reverser
+
+The `reverser.js` example is an simple command line tool that listens for connections on a host address and port, accepts source text and then returns the same text with the characters reversed.
+
+Two separate commands are needed to run the sample: one to get the server running, and the second to run TiddlyWiki and invoke the server.
+
+To run the server, open a command prompt in the `demo-tasks` directory and run:
+
+```
+../reverser.js 8081
+```
+
+And then in another command prompt in the root of the repo run:
+
+```
+tiddlywiki editions/externalpipesdemo/ --verbose --pipe reverser '[[Alice in Wonderland]]' HelloThere --build index
+```
+
+View the resulting wiki at `editions/externaltaskdemo/output/index.html`: the tiddler "HelloThere" will contain the reversed text of "Alice in Wonderland".

@@ -1,0 +1,32 @@
+{
+	"tiddlers": [
+		{
+			"file": "../../../../../externalpipesdemo/tiddlywiki.info",
+			"fields": {
+				"type": "text/plain",
+				"title": "External Pipes tiddlywiki.info"
+			}
+		},
+		{
+			"file": "../../../../../externalpipesdemo/demo-tasks/mimic.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "External Pipes mimic.js"
+			}
+		},
+		{
+			"file": "../../../../../externalpipesdemo/demo-tasks/reverser.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "External Pipes reverser.js"
+			}
+		},
+		{
+			"file": "../../../../../externalpipesdemo/demo-tasks/stats.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "External Pipes stats.js"
+			}
+		}
+	]
+}

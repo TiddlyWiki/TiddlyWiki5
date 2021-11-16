@@ -1,0 +1,24 @@
+caption: tm-execute-job
+created: 20181017140932589
+modified: 20181017171440568
+tags: Messages
+title: WidgetMessage: tm-execute-job
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.18">> The "execute job" message triggers the execution of [[remote commands|Using remote commands]]. It uses the message parameters as follows:
+
+|!Name |!Description |
+|$param |Not used |
+|commands |Command string to be executed |
+|0...n |Command tokens to be executed |
+|statusTitle |Optional title of tiddler in which to store status updates as the commands are executed |
+
+Note that the command string to be executed can either be passed as a single string, or as a sequence of tokens:
+
+* A single string:
+*> `<$action-sendmessage $message="tm-execute-job" commands="--version"/>`
+* Separate command tokens with numeric indices:
+*> `<$action-sendmessage $message="tm-execute-job" 0="--version" 1="--version"/>`
+** Note that the numeric indices must be non-negative integers with no leading zeros
+
+The "execute job" message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SyncAdaptorModule|SyncAdaptorModules]] (typically the ''tiddlywiki/tiddlywebadaptor'' plugin).
