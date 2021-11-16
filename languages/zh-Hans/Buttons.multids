@@ -83,6 +83,8 @@ Permaview/Caption: 永久链接
 Permaview/Hint: 设置浏览器网址栏为直接链接到当前所有已开启条目
 Print/Caption: 打印页面
 Print/Hint: 打印当前页面
+PrintWindow/Caption: 在新窗口中打印
+PrintWindow/Hint: 在新窗口中打印条目
 Refresh/Caption: 刷新
 Refresh/Hint: 执行维基的完全刷新
 Save/Caption: 确定

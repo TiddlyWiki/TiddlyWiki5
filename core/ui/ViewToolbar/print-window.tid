@@ -1,0 +1,18 @@
+title: $:/core/ui/Buttons/print-window
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/print-button}} {{$:/language/Buttons/PrintWindow/Caption}}
+description: {{$:/language/Buttons/PrintWindow/Hint}}
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/PrintWindow/Hint}} aria-label={{$:/language/Buttons/PrintWindow/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-open-window" print="yes"/>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/print-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<span class="tc-btn-text">
+<$text text=" "/>
+<$text text={{$:/language/Buttons/PrintWindow/Caption}}/>
+</span>
+</$list>
+</$button>

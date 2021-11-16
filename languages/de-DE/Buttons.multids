@@ -83,6 +83,8 @@ Permaview/Caption: Permaview
 Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser Story
 Print/Caption: Seite drucken
 Print/Hint: Aktuelle Seite drucken
+PrintWindow/Caption: Drucken in neuem Fenster
+PrintWindow/Hint: Tiddler zum Drucken in neuem Fenster öffnen
 Refresh/Caption: Aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
 Save/Caption: Fertig

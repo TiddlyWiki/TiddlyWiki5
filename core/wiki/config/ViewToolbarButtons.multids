@@ -10,6 +10,7 @@ core/ui/Buttons/new-journal-here: hide
 core/ui/Buttons/open-window: hide
 core/ui/Buttons/permalink: hide
 core/ui/Buttons/permaview: hide
+core/ui/Buttons/print-window: hide
 core/ui/Buttons/delete: hide
 core/ui/Buttons/fold: hide
 core/ui/Buttons/fold-bar: hide

@@ -30,6 +30,7 @@ exports.startup = function() {
 			paramObject = event.paramObject || {},
 			windowTitle = paramObject.windowTitle || title,
 			template = paramObject.template || "$:/core/templates/single.tiddler.window",
+			print = paramObject.print === "yes",
 			width = paramObject.width || "700",
 			height = paramObject.height || "600",
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
@@ -71,6 +72,10 @@ exports.startup = function() {
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
+		// Print the window if required
+		if(print) {
+				srcWindow.print();
+		}
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {

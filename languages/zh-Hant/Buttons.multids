@@ -83,6 +83,8 @@ Permaview/Caption: 固定連結
 Permaview/Hint: 設定瀏覽器網址列為直接連結到當前所有已開啟條目
 Print/Caption: 列印頁面
 Print/Hint: 列印當前頁面
+PrintWindow/Caption: 在新視窗中列印
+PrintWindow/Hint: 在新視窗中列印條目
 Refresh/Caption: 重新整理
 Refresh/Hint: 執行維基的完全刷新
 Save/Caption: 確定
