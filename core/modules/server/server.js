@@ -35,12 +35,12 @@ function Server(options) {
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
 	// Initialise the variables
-	var settings = {};
+	var settings = {}, target = path.join($tw.boot.wikiPath,options.variables['server-settings']);
 	if(options.variables && options.variables['server-settings']) {
 		try {
-			settings = JSON.parse(fs.readFileSync(path.join($tw.boot.wikiPath,options.variables['server-settings'])));
+			settings = JSON.parse(fs.readFileSync(target));
 		} catch (err) {
-			$tw.utils.log(`Server Settings - Error reading file ${target}, using defaultVariables.`,"brown/orange");
+			$tw.utils.log("Server Settings - Error reading file " + target + ", using defaultVariables.","brown/orange");
 			$tw.utils.log(err.toString());
 		}
 		delete options.variables['server-settings'];
