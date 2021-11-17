@@ -1,5 +1,7 @@
+created: 20211116222524148
+modified: 20211116222535549
+tags: [[Hidden Settings]]
 title: Hidden Setting: New-Image Type
-tags: [[Hidden Setting]]
 type: text/vnd.tiddlywiki
 
 By default new images are created with the image-type `jpeg`

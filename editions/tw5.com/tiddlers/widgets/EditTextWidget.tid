@@ -1,7 +1,7 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20211021091910134
-tags: Widgets TriggeringWidgets
+modified: 20211104200554064
+tags: Widgets
 title: EditTextWidget
 type: text/vnd.tiddlywiki
 
@@ -37,3 +37,14 @@ The content of the `<$edit-text>` widget is ignored.
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 |disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
 |fileDrop|<<.from-version "5.2.0">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. Defaults to "no"|
+
+
+! Example
+
+If you wanted to change the field //myconfig// of the tiddler //AppSettings//, you could use an EditTextWidget to edit the field, and then show the result anywhere else by using `{{AppSettings!!myconfig}}`. Note that this will create tiddler AppSettings if it doesn't already exist.
+
+<$macrocall $name=".example" n="1"
+eg="""<$edit-text tiddler="AppSettings" field="myconfig"/><p/>
+Value of ''myconfig'' : {{AppSettings!!myconfig}}
+"""/>
+
