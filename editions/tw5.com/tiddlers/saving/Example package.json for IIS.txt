@@ -1,8 +1,7 @@
-{
-    "name": "MyStuff",
-    "description": "A description of this wiki",
-    "dependencies": {
-        "sax": "1.2.4",
-        "tiddlywiki": "*"
-    }
-}
+<!--
+
+This template is used for saving tiddlers in TiddlyWeb *.tid format
+
+--><$fields exclude='text bag' template='$name$: $value$
+'></$fields>`
+`<$view field="text" format="text" />

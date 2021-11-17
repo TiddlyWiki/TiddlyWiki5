@@ -1,2 +1,7 @@
-title: $:/config/tiddlyweb/host
-text: $protocol$//$host$/MyApp/
+<!--
+
+This template is used for saving tiddlers in TiddlyWeb *.tid format
+
+--><$fields exclude='text bag' template='$name$: $value$
+'></$fields>`
+`<$view field="text" format="text" />
