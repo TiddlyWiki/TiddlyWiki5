@@ -1,11 +1,11 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20211109211546852
+modified: 20211117042202771
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
 
-The `tm-open-window` message opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are provided as variables to the new window.
+The `tm-open-window` [[message|Message]] opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are provided as variables to the new window.
 
 |!Name |!Description |
 |param |Title of the tiddler to be opened in a new browser window, defaults to <<.var "currentTiddler">> if empty |
