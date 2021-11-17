@@ -1,11 +1,11 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20211117042202771
+modified: 20211117212929052
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
 
-The `tm-open-window` [[message|Message]] opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are provided as variables to the new window.
+The `tm-open-window` [[message|Messages]] opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similar to `tm-modal` any additional parameters passed  are provided as variables to the new window.
 
 |!Name |!Description |
 |param |Title of the tiddler to be opened in a new browser window, defaults to <<.var "currentTiddler">> if empty |
@@ -13,7 +13,7 @@ The `tm-open-window` [[message|Message]] opens a tiddler in a new //browser// wi
 |windowTitle |Title string for the opened window |
 |width |Width of the new browser window |
 |height |Height of the new browser window |
-|paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
+|any additional parameters |Provided as variables to the new window |
 
 The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
 
@@ -29,8 +29,8 @@ src="""
   $param="$:/temp/openme" 
   template="SampleWindowTemplate" 
   windowTitle="My Window Title"
-  width="100em"
-  height="50em"
+  width="100"
+  height="50"
   something="I just in over in a variable, and boy is my Hashmap tired." />
 </$button>
 """ />
