@@ -1,6 +1,7 @@
 title: $:/snippets/peek-stylesheets
 
 \define expandable-stylesheets-list()
+\whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
 <$vars state=<<qualify "$:/state/peek-stylesheets/open/">>>
@@ -38,6 +39,7 @@ title: $:/snippets/peek-stylesheets
 \end
 
 \define stylesheets-list()
+\whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
 <li>
@@ -57,6 +59,7 @@ title: $:/snippets/peek-stylesheets
 </$list>
 </ol>
 \end
+\whitespace trim
 
 <$vars modeState=<<qualify "$:/state/peek-stylesheets/mode/">>>
 
