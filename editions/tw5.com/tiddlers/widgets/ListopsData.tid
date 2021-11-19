@@ -1,7 +1,7 @@
-created: 20151017094630847
-daysoftheweek: four three Fri Thu Wed Tue Mon
-modified: 20151108041839747
-title: ListopsData
-type: application/x-tiddler-dictionary
+<!--
 
-DataIndex: 
+This template is used for saving tiddlers in TiddlyWeb *.tid format
+
+--><$fields exclude='text bag' template='$name$: $value$
+'></$fields>`
+`<$view field="text" format="text" />
