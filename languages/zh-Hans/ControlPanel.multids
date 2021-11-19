@@ -207,6 +207,8 @@ Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式�
 Stylesheets/Restore/Caption: 复原
 Theme/Caption: 布景主题
 Theme/Prompt: 当前的布景主题：
+TiddlerColour/Caption: 条目颜色
+TiddlerColour/Hint: 此规则级联用于动态地为条目选择颜色 (用于图示和关联的标签丸)。
 TiddlerFields/Caption: 条目栏位
 TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
 TiddlerIcon/Caption: 条目图示
