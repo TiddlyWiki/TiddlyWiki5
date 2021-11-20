@@ -208,7 +208,7 @@ Stylesheets/Restore/Caption: 復原
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
 TiddlerColour/Caption: 條目顏色
-TiddlerColour/Hint: 此規則級聯用於動態地為條目選擇顏色 (用於圖示和關聯的標籤丸).
+TiddlerColour/Hint: 此規則級聯用於動態地為條目選擇顏色 (用於圖示和關聯的標籤丸)。
 TiddlerFields/Caption: 條目欄位
 TiddlerFields/Hint: 這是本維基使用中的所有條目欄位（含系統條目的欄位，但預設條目的欄位除外）。
 TiddlerIcon/Caption: 條目圖示
