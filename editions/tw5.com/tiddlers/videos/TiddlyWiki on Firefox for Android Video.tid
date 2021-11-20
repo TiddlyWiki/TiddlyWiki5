@@ -1,0 +1,12 @@
+created: 20140104134947485
+modified: 20211120190902082
+tags: Videos [[Saving with TiddlyFox]]
+title: TiddlyWiki on Firefox for Android Video
+type: text/vnd.tiddlywiki
+
+<<.warning """TiddlyFox is now obsolete due to its incompatibility with the latest versions of Firefox - see [[TiddlyFox Apocalypse]]. There are many alternatives to TiddlyFox, but none that work in precisely the same way – see GettingStarted for details.""">>
+
+----
+This brief screencast shows how to setup Firefox for Android so you can save changes to TiddlyWiki:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iikkv9orGGI" frameborder="0" allowfullscreen></iframe>
