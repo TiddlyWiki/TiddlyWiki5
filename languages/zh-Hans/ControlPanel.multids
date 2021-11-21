@@ -27,10 +27,15 @@ Basics/Tiddlers/Prompt: 一般条目数量
 Basics/Title/Prompt: 标题
 Basics/Username/Prompt: 编辑者署名
 Basics/Version/Prompt: ~TiddlyWiki 版本
+Cascades/Caption: 级联
+Cascades/Hint: 这些全域规则用于动态选择某些模板。级联的结果是返回结果的序列中的第一个筛选的结果
+Cascades/TagPrompt: 筛选器标签为 <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: 编辑器类型
 EditorTypes/Editor/Caption: 编辑器
 EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
 EditorTypes/Type/Caption: 类型
+EditTemplateBody/Caption: 编辑模板主体
+EditTemplateBody/Hint: 默认的编辑模板使用此规则级联，动态选择模板来编辑条目的主体。
 Info/Caption: 信息
 Info/Hint: 有关此 TiddlyWiki 的信息
 KeyboardShortcuts/Add/Prompt: 在此输入快捷键
@@ -192,6 +197,8 @@ Settings/TitleLinks/Caption: 条目标题
 Settings/TitleLinks/Hint: 可选地显示条目标题为链接
 Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
+StoryTiddler/Caption: 故事条目
+StoryTiddler/Hint: 此规则级联用于动态选择模板，以便在故事河中显示条目。
 StoryView/Caption: 查看模式
 StoryView/Prompt: 当前的查看模式：
 Stylesheets/Caption: 样式表
@@ -200,8 +207,12 @@ Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式�
 Stylesheets/Restore/Caption: 复原
 Theme/Caption: 布景主题
 Theme/Prompt: 当前的布景主题：
+TiddlerColour/Caption: 条目颜色
+TiddlerColour/Hint: 此规则级联用于动态地为条目选择颜色 (用于图示和关联的标签丸)。
 TiddlerFields/Caption: 条目栏位
 TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
+TiddlerIcon/Caption: 条目图示
+TiddlerIcon/Hint: 此规则级联用于动态地为条目选择图示。
 Toolbars/Caption: 工具栏
 Toolbars/EditToolbar/Caption: 编辑工具栏
 Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式工具栏。拖放可改变顺序。
@@ -213,3 +224,7 @@ Toolbars/EditorToolbar/Hint: 选择将显示哪些按钮于编辑器工具栏。
 Toolbars/ViewToolbar/Caption: 查看工具栏
 Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏。拖放可改变顺序。
 Tools/Download/Full/Caption: 下载完整副本
+ViewTemplateBody/Caption: 查看模板主体
+ViewTemplateBody/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的主体。
+ViewTemplateTitle/Caption: 查看模板标题
+ViewTemplateTitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标题。

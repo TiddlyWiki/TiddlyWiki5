@@ -3,14 +3,6 @@ tags: $:/tags/ViewTemplate
 
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 
-<$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
-
-<$transclude>
-
-<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
-
-</$transclude>
-
-</$list>
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />
 
 </$reveal>
