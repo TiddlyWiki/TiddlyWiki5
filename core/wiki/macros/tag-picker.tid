@@ -8,21 +8,14 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 \define delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 
 \define add-tag-actions(actions,tagField:"tags")
-<$set
-	name="tag"
-	value={{{ [<__tiddler__>get[text]] }}}
-><$list
-	filter="[<saveTiddler>!contains:$tagField$<tag>!match[]]"
-	variable="ignore"
-	emptyMessage='<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="-[<tag>]"/>'
-><$action-listops
-	$tiddler=<<saveTiddler>>
-	$field=<<__tagField__>>
-	$subfilter="[<tag>]"/>
+<$set name="tag" value={{{ [<__tiddler__>get[text]] }}}>
+<$list filter="[<saveTiddler>!contains:$tagField$<tag>!match[]]" variable="ignore" emptyMessage='<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="-[<tag>]"/>'>
+<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>]"/>
 $actions$
-</$list></$set><<delete-tag-state-tiddlers>><$action-setfield
-	$tiddler=<<refreshTitle>>
-	text="yes"/>
+</$list>
+</$set>
+<<delete-tag-state-tiddlers>>
+<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 \end
 
 \define clear-tags-actions-inner()
