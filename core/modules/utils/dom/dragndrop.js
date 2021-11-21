@@ -221,7 +221,7 @@ function dragEventContainsType(event,targetType) {
 };
 
 exports.dragEventContainsFiles = function(event) {
-	return (dragEventContainsType(event,"Files") && dragEventContainsType(event,"text/plain"));
+	return (dragEventContainsType(event,"Files") && !dragEventContainsType(event,"text/plain"));
 };
 
 exports.dragEventContainsType = dragEventContainsType;
