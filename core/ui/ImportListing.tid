@@ -44,6 +44,7 @@ title: $:/core/ui/ImportListing
 \define renameFieldState() $(currentTiddler)$!!state-rename-$(payloadTiddler)$
 
 \define select-all-actions()
+\whitespace trim
 <$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
 <$action-setfield $field={{{ [<payloadTiddler>addprefix[selection-]] }}} $value={{$:/state/import/select-all}}/>
 </$list>
