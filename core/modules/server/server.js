@@ -35,9 +35,10 @@ function Server(options) {
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
 	// Initialise the variables
-	var settings = {}, target = path.join($tw.boot.wikiPath,options.variables['server-settings']);
+	var settings = {}, target = null;
 	if(options.variables && options.variables['server-settings']) {
 		try {
+			target = path.join($tw.boot.wikiPath,options.variables['server-settings']);
 			settings = JSON.parse(fs.readFileSync(target));
 		} catch (err) {
 			$tw.utils.log("Server Settings - Error reading file " + target + ", using defaultVariables.","brown/orange");
@@ -64,9 +65,11 @@ function Server(options) {
 	// Initialise authorization
 	var authorizedUserName = (this.get("username") && this.get("password")) ? this.get("username") : "(anon)";
 	this.authorizationPrincipals = {
-		admin: (this.get("admin") || (authorizedUserName !== "(anon)" ? authorizedUserName : null)).split(',').map($tw.utils.trim),
 		readers: (this.get("readers") || authorizedUserName).split(",").map($tw.utils.trim),
 		writers: (this.get("writers") || authorizedUserName).split(",").map($tw.utils.trim)
+	}
+	if(this.get("admin") || authorizedUserName !== "(anon)") {
+		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim)
 	}
 	if(this.get("path-prefix")) {
 		this.authorizationPrinciples[this.get("path-prefix")+"/readers"] = this.authorizationPrinciples["readers"];
