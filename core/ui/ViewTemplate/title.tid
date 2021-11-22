@@ -2,6 +2,9 @@ title: $:/core/ui/ViewTemplate/title
 tags: $:/tags/ViewTemplate
 
 \whitespace trim
+\define title-styles()
+fill:$(foregroundColor)$;
+\end
 <div class="tc-tiddler-title">
 <div class="tc-titlebar">
 <span class="tc-tiddler-controls">
@@ -9,8 +12,10 @@ tags: $:/tags/ViewTemplate
 </span>
 <$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 <$link>
-<$let iconSpanClass="tc-tiddler-title-icon">
+<$let foregroundColor={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]get[text]] }}}>
+<span class="tc-tiddler-title-icon" style=<<title-styles>>>
 {{||$:/core/ui/TiddlerIcon}}
+</span>
 </$let>
 <$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateTitleFilter]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/title/default]] }}} />
 </$link>

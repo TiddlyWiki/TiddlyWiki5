@@ -208,6 +208,8 @@ Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
 TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+TiddlerColour/Caption: Tiddler Colour
+TiddlerColour/Hint: This rules cascade is used to dynamically choose the colour for a tiddler (used for the icon and the associated tag pill).
 TiddlerIcon/Caption: Tiddler Icon
 TiddlerIcon/Hint: This rules cascade is used to dynamically choose the icon for a tiddler.
 Toolbars/Caption: Toolbars

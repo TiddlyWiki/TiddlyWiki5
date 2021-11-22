@@ -29,7 +29,7 @@ color:$(foregroundColor)$;
 \whitespace trim
 <div class="tc-edit-tags">
 <$list filter="[list[!!$tagField$]sort[title]]" storyview="pop">
-<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} icon={{!!icon}} tagField=<<__tagField__>>/>
+<$macrocall $name="tag-body" colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]get[text]] }}} palette={{$:/palette}} icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]get[text]] }}} tagField=<<__tagField__>>/>
 </$list>
 <$vars tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 <$macrocall $name="tag-picker" tagField=<<__tagField__>>/>

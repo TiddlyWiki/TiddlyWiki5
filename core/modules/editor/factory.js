@@ -324,7 +324,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	If there are no Files, let the browser handle it.
 	*/
 	EditTextWidget.prototype.handleDropEvent = function(event) {
-		if(event.dataTransfer.files.length) {
+		if($tw.utils.dragEventContainsFiles(event)) {
 			event.preventDefault();
 			event.stopPropagation();
 			this.dispatchDOMEvent(this.cloneEvent(event,["dataTransfer"]));
