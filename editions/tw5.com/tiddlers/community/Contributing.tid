@@ -1,5 +1,5 @@
 created: 20131101111400000
-modified: 20210402095728684
+modified: 20211115092001000
 tags: Community
 title: Contributing
 type: text/vnd.tiddlywiki
@@ -45,7 +45,7 @@ PR titles may also include a short prefix to indicate the subsystem to which the
 
 ! Commenting on Pull Requests
 
-One of the principles of open source is that many pairs of eyes on the code can improve quality. So, we welcome comments and critiques of pending PRs. [[Conventional Comments|https://conventionalcomments.org]] has some techcniques to help make comments as constructive and actionable as possible. Notably, they recommend prefixing a comment with a label to clarify the intention:
+One of the principles of open source is that many pairs of eyes on the code can improve quality. So, we welcome comments and critiques of pending PRs. [[Conventional Comments|https://conventionalcomments.org]] has some techniques to help make comments as constructive and actionable as possible. Notably, they recommend prefixing a comment with a label to clarify the intention:
 
 |praise |Praises highlight something positive. Try to leave at least one of these comments per review. Do not leave false praise (which can actually be damaging). Do look for something to sincerely praise |
 |nitpick |Nitpicks are small, trivial, but necessary changes. Distinguishing nitpick comments significantly helps direct the reader's attention to comments requiring more involvement |

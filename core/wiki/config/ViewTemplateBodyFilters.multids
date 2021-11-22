@@ -1,0 +1,8 @@
+title: $:/config/ViewTemplateBodyFilters/
+tags: $:/tags/ViewTemplateBodyFilter
+
+system: [prefix[$:/boot/]] [prefix[$:/config/]] [prefix[$:/core/]!field:title[$:/core/readme]!field:title[$:/core/icon]] [prefix[$:/info/]] [prefix[$:/language/]] [prefix[$:/languages/]] [prefix[$:/snippets/]] [prefix[$:/state/]] [prefix[$:/status/]] [prefix[$:/info/]] [prefix[$:/temp/]] +[limit[1]then[$:/core/ui/ViewTemplate/body/code]]
+import: [field:plugin-type[import]then[$:/core/ui/ViewTemplate/body/import]]
+plugin: [has[plugin-type]then[$:/core/ui/ViewTemplate/body/plugin]]
+hide-body: [field:hide-body[yes]then[$:/core/ui/ViewTemplate/body/blank]]
+default: [[$:/core/ui/ViewTemplate/body/default]]

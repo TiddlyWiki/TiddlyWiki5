@@ -1,0 +1,5 @@
+title: $:/config/ViewTemplateTitleFilters/
+tags: $:/tags/ViewTemplateTitleFilter
+
+system: [prefix[$:/]then[$:/core/ui/ViewTemplate/title/system]]
+default: [[$:/core/ui/ViewTemplate/title/default]]

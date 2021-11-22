@@ -469,3 +469,5 @@ Maurycy Zarzycki, @evidentlycube, 2021-10-01
 Brian Theado, @btheado, 2021-10-10
 
 @Telumire, 2021-10-18
+
+@eiro10, 2021-11-14
