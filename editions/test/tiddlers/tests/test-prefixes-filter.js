@@ -288,6 +288,38 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		tags: ["cakes","with tea"],
 		text: "Does anyone eat pound cake?"
 	});
+	wiki.addTiddler({
+		title: "$:/filter1",
+		text: "[tag[cakes]then[It is customary]]",
+		tags: "$:/tags/Filter $:/tags/SecondFilter"
+	});
+	wiki.addTiddler({
+		title: "$:/filter2",
+		text: "[<currentTiddler>tag[shopping]then[It is not customary]]",
+		tags: "$:/tags/Filter $:/tags/SecondFilter"
+	});
+	wiki.addTiddler({
+		title: "$:/filter3",
+		text: "[[Just a default]]",
+		tags: "$:/tags/Filter"
+	});
+	wiki.addTiddler({
+		title: "$:/tags/Filter",
+		list: "$:/filter1 $:/filter2 $:/filter3"
+	});
+	wiki.addTiddler({
+		title: "$:/tags/SecondFilter",
+		list: "$:/filter1 $:/filter2"
+	});
+	
+	it("should handle the :cascade filter prefix", function() {
+		expect(wiki.filterTiddlers("[[Rice Pudding]] :cascade[all[shadows+tiddlers]tag[$:/tags/Filter]get[text]]").join(",")).toBe("It is not customary");
+		expect(wiki.filterTiddlers("[[chocolate cake]] :cascade[all[shadows+tiddlers]tag[$:/tags/Filter]get[text]]").join(",")).toBe("It is customary");
+		expect(wiki.filterTiddlers("[[Sparkling water]] :cascade[all[shadows+tiddlers]tag[$:/tags/Filter]get[text]]").join(",")).toBe("Just a default");
+		expect(wiki.filterTiddlers("[[Rice Pudding]] :cascade[all[shadows+tiddlers]tag[$:/tags/SecondFilter]get[text]]").join(",")).toBe("It is not customary");
+		expect(wiki.filterTiddlers("[[chocolate cake]] :cascade[all[shadows+tiddlers]tag[$:/tags/SecondFilter]get[text]]").join(",")).toBe("It is customary");
+		expect(wiki.filterTiddlers("[[Sparkling water]] :cascade[all[shadows+tiddlers]tag[$:/tags/SecondFilter]get[text]]").join(",")).toBe("");
+	});
 
 	it("should handle the :reduce filter prefix", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]] :reduce[get[quantity]add<accumulator>]").join(",")).toBe("22");

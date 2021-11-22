@@ -1,0 +1,31 @@
+title: $:/_tw5.com/CustomStoryTiddlerTemplateDemo/Styles
+tags: $:/tags/Stylesheet
+
+.tc-custom-tiddler-template {
+	border: 3px solid <<colour muted-foreground>>;
+	border-radius: 1em;
+	margin-bottom: 1em;
+}
+
+.tc-custom-tiddler-template-inner {
+	background: <<colour muted-foreground>>;
+	padding: 1em;
+}
+
+.tc-custom-tiddler-template-list {
+	position: relative;
+	height: 33vh;
+}
+
+.tc-custom-tiddler-template-list .tc-custom-tiddler-template-list-item {
+	position: absolute;
+	width: 100%;
+	transform-origin: 50% 0;
+	top: 50px;
+	left: 0;
+	<<box-shadow "0px 0px 15px rgba(0, 0, 0, 0.3)">>
+}
+
+.tc-custom-tiddler-template-list .tc-custom-tiddler-template-list-item .tc-tiddler-frame {
+	margin: 0;
+}
