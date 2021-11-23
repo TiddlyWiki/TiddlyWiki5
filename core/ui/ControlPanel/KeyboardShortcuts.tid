@@ -80,7 +80,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 
 \define shortcut-editor()
 \whitespace trim
-<<shortcut-list "All" "$:/config/shortcuts/">>
+<<shortcut-list "All" "$:/config/shortcuts/">> 
 <<shortcut-list "Mac" "$:/config/shortcuts-mac/">>
 <<shortcut-list "NonMac" "$:/config/shortcuts-not-mac/">>
 <<shortcut-list "Linux" "$:/config/shortcuts-linux/">>
