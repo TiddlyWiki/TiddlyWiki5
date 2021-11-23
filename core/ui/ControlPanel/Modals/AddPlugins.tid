@@ -23,12 +23,12 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 {{$:/core/images/download-button}}
 &#32;
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="ignore" emptyMessage="{{$:/language/ControlPanel/Plugins/Install/Caption}}">
-<$list filter="[<libraryVersion>compare:version:gt<installedVersion>]" variable="ignore" emptyMessage='
+<$list filter="[<libraryVersion>compare:version:gt<installedVersion>]" variable="ignore" emptyMessage="
 \whitespace trim
-<$list filter="[<libraryVersion>compare:version:lt<installedVersion>]" variable="ignore" emptyMessage="{{$:/language/ControlPanel/Plugins/Reinstall/Caption}}">
+<$list filter='[<libraryVersion>compare:version:lt<installedVersion>]' variable='ignore' emptyMessage='{{$:/language/ControlPanel/Plugins/Reinstall/Caption}}'>
 {{$:/language/ControlPanel/Plugins/Downgrade/Caption}}
 </$list>
-'>
+">
 {{$:/language/ControlPanel/Plugins/Update/Caption}}
 </$list>
 </$list>
