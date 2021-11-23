@@ -15,7 +15,7 @@ caption: {{$:/language/Manager/Item/Icon}}
 <div class="tc-block-dropdown tc-popup-keep" style="width: 80%; left: 10%; right: 10%; padding: 0.5em;">
 <$macrocall
 	$name="image-picker-include-tagged-images"
-	actions='<$action-setfield $field="icon" $value=<<imageTitle>>/><$action-deletetiddler $tiddler=<<qualify "$:/state/popup/image-picker">>/>'/>
+	actions="<$action-setfield $field='icon' $value=<<imageTitle>>/><$action-deletetiddler $tiddler=<<qualify '$:/state/popup/image-picker'>>/>"/>
 </div>
 </$reveal>
 </div>
