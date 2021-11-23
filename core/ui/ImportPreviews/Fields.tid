@@ -2,6 +2,7 @@ title: $:/core/ui/ImportPreviews/Fields
 tags: $:/tags/ImportPreview
 caption: {{$:/language/Import/Listing/Preview/Fields}}
 
+\whitespace trim
 <table class="tc-view-field-table">
 <tbody>
 <$list filter="[<payloadTiddler>subtiddlerfields<currentTiddler>sort[]] -text" variable="fieldName">
