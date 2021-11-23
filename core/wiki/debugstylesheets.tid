@@ -1,0 +1,12 @@
+title: $:/snippets/DebugStylesheets
+
+Broken stylesheet will have a red cross next to their name :
+
+<style>
+[class*="debug"] {display: block;}
+[class*="debug"]:before{content:"❌";}
+</style>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]has[modified]]" counter=n>
+<style>{{!!text}}.debug<<n>>:before{content:"✔";}</style>
+<$link class={{{[[debug]][<n>]+[join[]]}}}/>
+</$list>
