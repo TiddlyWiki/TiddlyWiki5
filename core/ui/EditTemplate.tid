@@ -12,7 +12,7 @@ title: $:/core/ui/EditTemplate
 
 \define cancel-delete-tiddler-actions(message)
 \whitespace trim
-<<delete-edittemplate-state-tiddlers>>
+<<delete-edittemplate-state-tiddlers>> 
 <$action-sendmessage $message="tm-$message$-tiddler"/>
 \end
 
