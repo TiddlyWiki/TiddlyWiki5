@@ -2,11 +2,15 @@ title: $:/core/macros/tabs
 tags: $:/tags/Macro
 
 \define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
-<$set name="qualifiedState" value=<<qualify "$state$">>>
-<$vars tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
+\whitespace trim
+<$let
+	qualifiedState=<<qualify "$state$">>
+	tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
 <div class="tc-tab-set $class$">
 <div class="tc-tab-buttons $class$">
-<$list filter="$tabsList$" variable="currentTab" storyview="pop"><$set name="save-currentTiddler" value=<<currentTiddler>>><$tiddler tiddler=<<currentTab>>><$button set=<<tabsState>> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
+<$list filter="$tabsList$" variable="currentTab" storyview="pop"><$set name="save-currentTiddler" value=<<currentTiddler>>>
+<$tiddler tiddler=<<currentTab>>>
+<$button set=<<tabsState>> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
 <$tiddler tiddler=<<save-currentTiddler>>>
 <$set name="tv-wikilinks" value="no">
 <$transclude tiddler="$buttonTemplate$" mode="inline">
@@ -33,6 +37,5 @@ tags: $:/tags/Macro
 </$list>
 </div>
 </div>
-</$vars>
-</$set>
+</$let>
 \end
