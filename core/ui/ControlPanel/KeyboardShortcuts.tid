@@ -44,7 +44,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 <$list
 	filter="[list[$(shortcutTitle)$!!text]sort[title]]"
 	variable="shortcut"
-	emptyMessage='<div class="tc-dropdown-item-plain">//<<lingo NoShortcuts/Caption>>//</div>'>
+	emptyMessage="<div class='tc-dropdown-item-plain'>//<<lingo NoShortcuts/Caption>>//</div>">
 <div class="tc-dropdown-item-plain">
 <$button class="tc-btn-invisible" tooltip={{$:/language/ControlPanel/KeyboardShortcuts/Remove/Hint}}>
 <$action-listops
