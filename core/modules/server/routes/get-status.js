@@ -17,11 +17,10 @@ exports.method = "GET";
 exports.path = /^\/status$/;
 
 exports.handler = function(request,response,state) {
-	var authorizationType = state.pathPrefix? state.pathPrefix+"/writers": "writers",
-		text = JSON.stringify({
+	var text = JSON.stringify({
 		username: state.authenticatedUsername || state.server.get("anon-username") || "",
 		anonymous: !state.authenticatedUsername,
-		read_only: !state.server.isAuthorized(authorizationType,state.authenticatedUsername),
+		read_only: !state.server.isAuthorized( "writers",state.authenticatedUsername),
 		space: {
 			recipe: "default"
 		},

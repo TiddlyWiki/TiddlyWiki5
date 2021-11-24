@@ -71,10 +71,6 @@ function Server(options) {
 	if(this.get("admin") || authorizedUserName !== "(anon)") {
 		this.authorizationPrincipals["admin"] = (this.get("admin") || authorizedUserName).split(',').map($tw.utils.trim)
 	}
-	if(this.get("path-prefix")) {
-		this.authorizationPrinciples[this.get("path-prefix")+"/readers"] = this.authorizationPrinciples["readers"];
-		this.authorizationPrinciples[this.get("path-prefix")+"/writers"] = this.authorizationPrinciples["writers"];
-	}
 	// Load and initialise authenticators
 	$tw.modules.forEachModuleOfType("authenticator", function(title,authenticatorDefinition) {
 		// console.log("Loading server route " + title);
