@@ -1,0 +1,13 @@
+created: 20211124205744669
+modified: 20211124210238900
+tags: [[Page and tiddler layout customisation]]
+title: Removing shadow tiddlers from the user interface
+type: text/vnd.tiddlywiki
+
+In the More > Shadows tab you will find a list of all the shadow tiddlers. In this list you will find many tiddlers with the prefix `$:/core/ui/`. These are the core tiddlers that define the user interface. These tiddlers are tagged with SystemTags, and removing or adding these tags will adjust the tiddler and page layouts.
+
+For example, $:/core/ui/SideBar/More is the tiddler for the More tab in the Sidebar, and it is tagged with the [[SystemTag: $:/tags/MoreSideBar]] so that it appears in the Sidebar. Removing the tag from that tiddler will remove the More tab from the Sidebar, and reinserting the Sidebar tag to that tiddler will make it reappear in the Sidebar. 
+
+You can use the same process for any of the core user interface tiddlers with the `$:/core/ui/` prefix. For example, removing the [[SystemTag: $:/tags/ViewTemplate]] from the tiddler `$:/core/ui/ViewTemplate/subtitle` will remove the subtitles from all tiddlers.
+
+If you modify a shadow tiddler in this way you will overwrite the pre-installed value. If you want to revert, just delete the modified tiddler to restore the underlying shadow tiddler.
