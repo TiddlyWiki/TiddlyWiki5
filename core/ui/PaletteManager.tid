@@ -7,7 +7,7 @@ title: $:/PaletteManager
 \define edit-colour-placeholder()
  edit $(colourName)$
 \end
-\define colour-tooltip(showhide) $showhide$ editor for $(newColourName)$
+\define colour-tooltip(showhide) $showhide$ editor for $(newColourName)$ 
 
 \define resolve-colour(macrocall)
 \import $:/core/macros/utils
