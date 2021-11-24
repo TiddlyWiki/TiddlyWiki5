@@ -419,6 +419,22 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		// Prepend the position in the list using the index and length variables
 		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[title]addprefix[-]addprefix<length>addprefix[of]addprefix<index>]").join(",")).toBe("0of4-Brownies,1of4-Chick Peas,2of4-Milk,3of4-Rice Pudding");
 	});
+
+	it("should handle macro parameters for filter run prefixes",function() {
+		var widget = require("$:/core/modules/widgets/widget.js");
+		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
+										   { wiki:wiki, document:$tw.document});
+		rootWidget.makeChildWidgets();
+		var anchorWidget = rootWidget.children[0];
+		rootWidget.setVariable("greet","Hello $name$",[{name:"name"}],true);
+		rootWidget.setVariable("echo","$text$",[{name:"text"}],true);
+		// :map prefix
+		expect(wiki.filterTiddlers("1 :map[subfilter<greet Tom>join[ ]]",anchorWidget).join(",")).toBe("Hello Tom");
+		expect(wiki.filterTiddlers('[tag[shopping]] :map[<echo "$(index)$ $(currentTiddler)$">]',anchorWidget).join(",")).toBe("0 Brownies,1 Chick Peas,2 Milk,3 Rice Pudding");
+		// :reduce prefix
+		expect(wiki.filterTiddlers("1 :reduce[subfilter<greet Tom>join[ ]]",anchorWidget).join(",")).toBe("Hello Tom");
+		expect(wiki.filterTiddlers('[tag[shopping]] :reduce[<echo "$(accumulator)$ $(index)$ $(currentTiddler)$,">]',anchorWidget).join(",")).toBe(" 0 Brownies, 1 Chick Peas, 2 Milk, 3 Rice Pudding,");
+	});
 });
 
 })();

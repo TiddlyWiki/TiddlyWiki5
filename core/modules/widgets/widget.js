@@ -122,7 +122,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		});
 		// Only substitute variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
-			value = this.substituteVariableReferences(value);
+			value = this.substituteVariableReferences(value,options);
 		}
 		return {
 			text: value,
@@ -175,10 +175,10 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 	return results;
 };
 
-Widget.prototype.substituteVariableReferences = function(text) {
+Widget.prototype.substituteVariableReferences = function(text,options) {
 	var self = this;
 	return (text || "").replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
-		return self.getVariable(p1,{defaultValue: ""});
+		return options.variables && options.variables[p1] || (self.getVariable(p1,{defaultValue: ""}));
 	});
 };
 
