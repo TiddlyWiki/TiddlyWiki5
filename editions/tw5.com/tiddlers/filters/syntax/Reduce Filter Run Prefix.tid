@@ -1,5 +1,5 @@
 created: 20211124151912931
-modified: 20211124160210519
+modified: 20211124170117511
 tags: [[Filter Syntax]] [[Filter Run Prefix]]
 title: Reduce Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -21,7 +21,7 @@ The following variables are available within the filter run:
 * ''revIndex'' - the reverse numeric index of the current list item (with zero being the last item in the list)
 * ''length'' - the total length of the input list
 
-<<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to used to flatten a list of items down to a single item by repeatedly applying a subfilter.">> 
+<<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to flatten a list of items down to a single item by repeatedly applying a subfilter.">> 
 
 ```
 [tag[shopping]] :reduce[get[quantity]add<accumulator>]
