@@ -1,7 +1,7 @@
 caption: select
 created: 20131024141900000
-modified: 20211009121812691
-tags: Widgets TriggeringWidgets
+modified: 20211108165037846
+tags: TriggeringWidgets Widgets
 title: SelectWidget
 type: text/vnd.tiddlywiki
 
@@ -129,3 +129,16 @@ This example uses the `multiple` keyword to specify that we should be able to se
 <$view field='title' /><br />
 </$list>
 "/>
+
+!! Actions 
+
+This example uses the actions attribute to apply days of the week as tags to the current tiddler.
+
+<$macrocall $name="wikitext-example-without-html" src="""<$select tiddler='$:/generated-list-demo-state' field='actions-test' 
+actions='<$action-listops $field="myfield" $tags={{$:/generated-list-demo-state!!actions-test}}/>'
+>
+<$list filter='[list[Days of the Week]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
+"""/>

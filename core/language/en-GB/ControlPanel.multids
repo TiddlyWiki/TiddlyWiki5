@@ -27,10 +27,15 @@ Basics/Tiddlers/Prompt: Number of tiddlers
 Basics/Title/Prompt: Title of this ~TiddlyWiki
 Basics/Username/Prompt: Username for signing edits
 Basics/Version/Prompt: ~TiddlyWiki version
+Cascades/Caption: Cascades
+Cascades/Hint: These global rules are used to dynamically choose certain templates. The result of the cascade is the result of the first filter in the sequence that returns a result
+Cascades/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
 EditorTypes/Type/Caption: Type
+EditTemplateBody/Caption: Edit Template Body
+EditTemplateBody/Hint: This rule cascade is used by the default edit template to dynamically choose the template for editing the body of a tiddler.
 Info/Caption: Info
 Info/Hint: Information about this TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Type shortcut here
@@ -191,6 +196,8 @@ Settings/TitleLinks/Yes/Description: Display tiddler titles as links
 Settings/MissingLinks/Caption: Wiki Links
 Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
 Settings/MissingLinks/Description: Enable links to missing tiddlers
+StoryTiddler/Caption: Story Tiddler
+StoryTiddler/Hint: This rule cascade is used to dynamically choose the template for displaying a tiddler in the story river.
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Stylesheets/Caption: Stylesheets
@@ -201,6 +208,10 @@ Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
 TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+TiddlerColour/Caption: Tiddler Colour
+TiddlerColour/Hint: This rules cascade is used to dynamically choose the colour for a tiddler (used for the icon and the associated tag pill).
+TiddlerIcon/Caption: Tiddler Icon
+TiddlerIcon/Hint: This rules cascade is used to dynamically choose the icon for a tiddler.
 Toolbars/Caption: Toolbars
 Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode. Drag and drop to change the ordering
@@ -212,3 +223,7 @@ Toolbars/EditorToolbar/Hint: Choose which buttons are displayed in the editor to
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode. Drag and drop to change the ordering
 Tools/Download/Full/Caption: Download full wiki
+ViewTemplateBody/Caption: View Template Body
+ViewTemplateBody/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the body of a tiddler.
+ViewTemplateTitle/Caption: View Template Title
+ViewTemplateTitle/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the title of a tiddler.

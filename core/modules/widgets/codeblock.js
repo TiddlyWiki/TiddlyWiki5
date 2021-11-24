@@ -52,7 +52,13 @@ CodeBlockWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
-	return false;
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.code || changedAttributes.language) {
+		this.refreshSelf();
+		return true;
+	} else {
+		return false;
+	}
 };
 
 exports.codeblock = CodeBlockWidget;

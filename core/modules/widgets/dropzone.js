@@ -198,7 +198,8 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	this.resetState();
 	// Import any files in the drop
 	var numFiles = 0;
-	if(dataTransfer.files) {
+	// If we have type text/vnd.tiddlywiki then skip trying to import files
+	if(dataTransfer.files && !$tw.utils.dragEventContainsType(event,"text/vnd.tiddler")) {
 		numFiles = this.wiki.readFiles(dataTransfer.files,{
 			callback: readFileCallback,
 			deserializer: this.dropzoneDeserializer

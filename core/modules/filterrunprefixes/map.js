@@ -20,20 +20,19 @@ exports.map = function(operationSubFunction,options) {
 			results.clear();
 			$tw.utils.each(inputTitles,function(title) {
 				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name) {
-						switch(name) {
-							case "currentTiddler":
-								return "" + title;
-							case "..currentTiddler":
-								return widget.getVariable("currentTiddler");
-							case "index":
-								return "" + index;
-							case "revIndex":
-								return "" +  (inputTitles.length - 1 - index);
-							case "length":
-								return "" + inputTitles.length;
-							default:
-								return widget.getVariable(name);
+					getVariable: function(name,opts) {
+						opts = opts || {};
+						opts.variables = {
+							"currentTiddler": "" + title,
+							"..currentTiddler": widget.getVariable("currentTiddler"),
+							"index": "" + index,
+							"revIndex": "" +  (inputTitles.length - 1 - index),
+							"length": "" + inputTitles.length
+						};
+						if(name in opts.variables) {
+							return opts.variables[name];
+						} else {
+							return widget.getVariable(name,opts);
 						}
 					}
 				});

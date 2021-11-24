@@ -1,7 +1,7 @@
 caption: action-listops
 created: 20141025120850184
 list: efg hlm pqr
-modified: 20151228083329099
+modified: 20211115091121133
 myfield: 
 revision: 0
 tags: ActionWidgets Widgets
@@ -29,7 +29,7 @@ The ''action-listops'' widget is an [[action widget|ActionWidgets]] that manipul
 The ''action-listops'' widget is invisible. Any content within it is ignored.
 
 |!Attribute |!Description |
-|$tiddler |The title of the tiddler whose lists are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]] |
+|$tiddler |The title of the tiddler whose lists are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]]) |
 |$field |The name of a field to be manipulated as a list (defaults to 'list') |
 |$index |Optional index of a property in a [[data tiddler|DataTiddlers]] index to be manipulated as a list |
 |$filter |An optional filter expression, the output of which will be saved to the field/index being manipulated |

@@ -252,6 +252,6 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 	return newText;
 };
 
-exports.CodeMirrorEngine = CodeMirrorEngine;
+exports.CodeMirrorEngine = $tw.browser ? CodeMirrorEngine : require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
 
 })();

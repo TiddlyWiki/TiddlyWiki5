@@ -1,6 +1,7 @@
-title: ActionWidget Execution Modes
-modified: 20211026094722447
 created: 20211003094722447
+modified: 20211116193245990
+tags: Widgets
+title: ActionWidget Execution Modes
 
 <<.from-version "5.2.0">> The default behaviour of action widgets has some peculiarities that often cause confusion. There is now an improved mode that simplifies how things work, but due to BackwardsCompatibility constraints, it must be explicitly engaged in order to take advantage of it.
 
