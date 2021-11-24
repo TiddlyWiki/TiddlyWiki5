@@ -1,5 +1,5 @@
 created: 20141120125300000
-modified: 20201123173002935
+modified: 20211124210034410
 tags: [[Customise TiddlyWiki]]
 title: Page and tiddler layout customisation
 type: text/vnd.tiddlywiki
@@ -12,52 +12,4 @@ One major feature of TiddlyWiki that many new users are unaware of is the degree
 
 Once you know what you are doing, all of these things are actually pretty easy to do.
 
-<<.from-version "5.1.23">> You can also create [[alternative page layouts|Alternative page layouts]] and switch between them.
-
-! Adding custom-made tiddlers to the user interface
-
-You can also create any tiddler you want and tag it with the appropriate SystemTag, and it will appear in that place. For example, if you create a tiddler 'Reminder to self', add the text 'This is a reminder' and tag it `$:/tags/EditTemplate`, the words 'This is a reminder' will appear inside every tiddler when you edit it.
-
-When you add new tiddlers to be displayed within tiddlers or within the page layout, you will also probably need to reposition it so that it appears precisely where you want it to appear. To do this, edit the appropriate shadow tiddler with the prefix `$:/tags/`, and insert the title of your tiddler in the proper place in the list field. For example, if you want the words 'This is a reminder' from the example above to appear above the tags editor in editing mode, edit the tiddler $:/tags/EditTemplate, go to the 'list' field, and insert `[[Reminder to self]]` right before `$:/core/ui/EditTemplate/tags`. 
-
-! Creating new buttons for the ViewToolbar and page controls
-
-Let's say you have a skeleton tiddler called 'Recipe template', and you want to have a button available in the tiddler ViewToolbar to create new recipe tiddlers on demand. This will require the following steps:
-
-# You will want an image for your button. If none of the core images (shadow tiddlers with the prefix $:/core/images/) work for you, then you will need to create or acquire an SVG image (for example, one of the images at http://flaticon.com), drag it into your file so that it becomes a tiddler, edit the tiddler and adjust the height and width to 22px
-# You will want to create the tiddler that contains your tiddler. Create it, title it, and add the button code (see the code at the bottom of this tiddler for an example, with hints where you will need to adapt it). Tag it [[$:/tags/ViewToolbar]]
-# You will need to create a tiddler that tells TiddlyWiki whether your button should be visible in the toolbar or hidden. Let's title it [[$:/config/ViewToolbarButtons/Visibility/Recipe]]. Type `show` into the text area, and save. If you want to hide it, type `hide` into the text area and save. The button will also be accessable from the ''ControlPanel : Appearance : Toolbars : ViewToolbar'' tab
-# You will want to position the button properly. Open the tiddler $:/tags/ViewToolbar and insert your button tiddler's title in the appropriate place in the list field.
-
-```
-\define newHereButtonTags()
-[[$(currentTiddler)$]]
-\end
-\define newHereButton()
-<$button class=<<tv-config-toolbar-class>>>
-<$action-sendmessage
-  $message="tm-new-tiddler"
-$param="TITLE OF YOUR SKELETON BUTTON"
-title="New tiddler"
-  tags=<<newHereButtonTags>> />
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{TITLE OF YOUR SVG IMAGE TIDDLER}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text="CAPTION FOR YOUR BUTTON"/></span>
-</$list>
-</$button>
-\end
-
-<<newHereButton>>
-```
-
-! Removing shadow tiddlers from the user interface
-
-In the More > Shadows tab you will find a list of all the shadow tiddlers. In this list you will find many tiddlers with the prefix `$:/core/ui/`. These are the core tiddlers that define the user interface. These tiddlers are tagged with SystemTags, and removing or adding these tags will adjust the tiddler and page layouts.
-
-For example, $:/core/ui/SideBar/More is the tiddler for the More tab in the Sidebar, and it is tagged with the SystemTag `$:/tags/SideBar` so that it appears in the Sidebar. Removing the tag from that tiddler will remove the More tab from the Sidebar, and reinserting the Sidebar tag to that tiddler will make it reappear in the Sidebar. 
-
-You can use the same process for any of the core user interface tiddlers with the $:/core/ui/ prefix. For example, removing the SystemTag `$:/tags/ViewTemplate` from the tiddler `$:/core/ui/ViewTemplate/subtitle` will remove the subtitles from all tiddlers.
-
-If you modify a shadow tiddler in this way you will overwrite the pre-installed value. If you want to revert, just delete the modified tiddler to restore the underlying shadow tiddler.
+<<list-links "[tag[Page and tiddler layout customisation]]">>
