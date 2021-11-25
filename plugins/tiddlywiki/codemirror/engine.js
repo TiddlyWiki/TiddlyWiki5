@@ -173,7 +173,7 @@ function CodeMirrorEngine(options) {
 					}
 					cm.setCursor(cm.coordsChar({left:event.pageX,top:event.pageY}));
 					//setSelectionNoUndo(cm.doc, simpleSelection(pos, pos))
-					if (selected) for (let i = 0; i < selected.length; ++i) {
+					if (selected) for (var i = 0; i < selected.length; ++i) {
 						replaceRange(cm.doc, "", selected[i].anchor, selected[i].head, "drag");
 					}
 					cm.replaceSelection(text, "around", "paste");
