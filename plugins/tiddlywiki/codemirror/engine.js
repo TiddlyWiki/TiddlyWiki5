@@ -132,7 +132,7 @@ function CodeMirrorEngine(options) {
 		}
 		// Detect if Chrome has added a pseudo File object to the dataTransfer
 		if(!$tw.utils.dragEventContainsFiles(event) && event.dataTransfer.files.length) {
-			//Make codemirror ignore the event as well will handle the drop ourselves
+			//Make codemirror ignore the event as we will handle the drop ourselves
 			event.codemirrorIgnore = true;
 			event.preventDefault();
 
