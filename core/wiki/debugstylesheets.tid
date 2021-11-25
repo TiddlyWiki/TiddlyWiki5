@@ -1,0 +1,15 @@
+title: $:/snippets/DebugStylesheets
+
+Broken stylesheets will have a red cross next to their name :
+
+<style>[test]{list-style:'❌'}</style>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]has[modified]]" counter=n>
+<style>{{!!text}}[test="<<n>>"]{list-style:disc;}</style>
+<li test=<<n>>><$link/></li>
+</$list>
+</ul>
+
+Replace "list-style:disc;" by "display:none;" to only display the stylesheets with css syntax error.
+
+These may contains [[unclosed block(s)|https://www.w3.org/TR/css-syntax-3/#consume-a-simple-block]], please review and fix them to prevent tiddlywiki's interface from malfunctioning.
