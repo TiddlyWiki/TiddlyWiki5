@@ -2,8 +2,6 @@ title: Demo Tiddler List with Custom Story Tiddler Template
 tags: $:/tags/TiddlerList
 filter: HelloThere Community GettingStarted Features Reference Plugins Learning
 
-This is a demo tiddler with a custom story tiddler template. See [[Story Tiddler Templates]] for details.
+This is a demo tiddler with a custom story tiddler template that displays the tiddlers named in the list field as a fan.
 
-Click to close this tiddler: {{||$:/core/ui/Buttons/close}}
-
-Click to edit this tiddler: {{||$:/core/ui/Buttons/edit}}
+See [[Story Tiddler Templates]] for details.
