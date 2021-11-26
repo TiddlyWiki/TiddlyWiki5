@@ -6,6 +6,9 @@ transform: translate($(left)$%,$(top)$%) scale(0.3) rotate($(angle)$deg);
 
 <div class="tc-custom-tiddler-template">
 	<div class="tc-custom-tiddler-template-inner">
+		<div style="text-align: right;">
+			{{||$:/core/ui/Buttons/more-tiddler-actions}} {{||$:/core/ui/Buttons/edit}} {{||$:/core/ui/Buttons/close}}
+		</div>
 		<$transclude mode="block"/>
 	</div>
 	<div class="tc-custom-tiddler-template-list">
