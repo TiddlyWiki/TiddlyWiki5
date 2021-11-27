@@ -1,6 +1,6 @@
 caption: navigator
 created: 20131024141900000
-modified: 20211126175955641
+modified: 20211127023932158
 tags: Widgets MessageHandlerWidgets
 title: NavigatorWidget
 type: text/vnd.tiddlywiki
@@ -41,19 +41,4 @@ The following [[Variables]] are assigned by the navigator widget:
 
 ! Examples
 
-Here is an example of using the NavigatorWidget and ListWidget to embed a storyriver inside this tiddler:
-
-<$macrocall $name='wikitext-example-without-html'
-src='<$navigator story="$:/temp/DemoStoryList" history="$:/temp/DemoHistoryList">
-
-{{$:/core/ui/SideBarSegments/search}}
-
-<$list
-  filter="[list[$:/temp/DemoStoryList]]"
-  history="$:/temp/DemoHistoryList"
-  template={{$:/config/ui/ViewTemplate}}
-  editTemplate={{$:/config/ui/EditTemplate}}
-  storyview={{$:/view}}
-  emptyMessage="Use search box above. Clicked search links will open here instead of in the main storyriver.<p>No search ideas? Open a tiddler here by clicking this link: [[Widgets]]</p>"/>
-
-</$navigator>'>
+See [[Creating SubStories]].

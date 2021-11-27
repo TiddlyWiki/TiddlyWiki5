@@ -1,44 +1,32 @@
 created: 20140214215718317
-modified: 20140919161514318
+modified: 20211127032217828
 tags: Learning
 title: Creating SubStories
 type: text/vnd.tiddlywiki
 
-This example shows how to create a sub-story within a tiddler that is independent of the main story.
+This example shows how to create a sub-story within a tiddler that is independent of the main [[story|Story River]].  The NavigatorWidget and ListWidget work together to:
 
-Here's the code:
+# Add tiddlers to the [[story|Story River]] when links are clicked. Navigate to the tiddler corresponding to the link click. (''story'' attribute of the NavigatorWidget)
+# Remove tiddlers from the [[story|Story River]] when tiddler close buttons are clicked. (''story'' attribute of NavigatorWidget)
+# Animate the opening and closing of tiddlers. (''storyview'' attribute of the ListWidget)
+# Display the list of open tiddlers. (''filter'' and ''template'' attributes of the ListWidget)
+# Display tiddlers in [[draft mode|DraftMechanism]]. (''editTemplate'' attribute of the ListWidget)
+# Track [[navigation history|HistoryMechanism]]. (''history'' attribute of both NavigatorWidget and ListWidget)
+# And more!
 
-```
-<$navigator story="MySubStoryList" history="MySubHistoryList">
+Here is the example code (see also StateMechanism for related discussion):
 
-Click this link to get started: HelloThere
+<$macrocall $name='wikitext-example-without-html'
+src='<$navigator story="$:/temp/DemoStoryList" history="$:/temp/DemoHistoryList">
 
-<$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
-<div>
+{{$:/core/ui/SideBarSegments/search}}
 
-! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
+<$list
+  filter="[list[$:/temp/DemoStoryList]]"
+  history="$:/temp/DemoHistoryList"
+  template={{$:/config/ui/ViewTemplate}}
+  editTemplate={{$:/config/ui/EditTemplate}}
+  storyview="classic"
+  emptyMessage="Use search box above. Clicked search links will open here instead of in the main story.<p>No search ideas? Click this link to get started: HelloThere</p>"/>
 
-<$transclude/>
-</div>
-</$list>
-
-</$navigator>
-```
-
-Note how you can open the HelloThere tiddler in the substory by clicking on the link below. Links within the substory open within the substory, and not in the main story.
-
-<$navigator story="MySubStoryList" history="MySubHistoryList">
-
-Click this link to get started: HelloThere
-
-<$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
-<div>
-
-! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
-
-<$transclude/>
-
-</div>
-</$list>
-
-</$navigator>
+</$navigator>'>
