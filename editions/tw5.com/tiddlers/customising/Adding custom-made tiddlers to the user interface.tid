@@ -1,0 +1,9 @@
+created: 20211124205353184
+modified: 20211124215729065
+tags: [[Page and tiddler layout customisation]]
+title: Adding custom-made tiddlers to the user interface
+type: text/vnd.tiddlywiki
+
+You can  create any tiddler you want and tag it with the appropriate [[system tag|SystemTags]], and it will appear in that place. For example, if you create a tiddler 'Reminder to self', add the text 'This is a reminder' and tag it `$:/tags/EditTemplate`, the words 'This is a reminder' will appear inside every tiddler when you edit it.
+
+When you add new tiddlers to be displayed within tiddlers or within the page layout, you will also probably need to reposition it so that it appears precisely where you want it to appear. To do this, edit the appropriate shadow tiddler with the prefix `$:/tags/`, and insert the title of your tiddler in the proper place in the list field. For example, if you want the words 'This is a reminder' from the example above to appear above the tags editor in editing mode, edit the tiddler $:/tags/EditTemplate, go to the 'list' field, and insert `[[Reminder to self]]` right before `$:/core/ui/EditTemplate/tags`. 
