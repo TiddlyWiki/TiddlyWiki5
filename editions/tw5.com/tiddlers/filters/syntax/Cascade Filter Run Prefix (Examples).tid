@@ -1,5 +1,5 @@
 created: 20211130114857532
-modified: 20211130132159169
+modified: 20211130132353406
 tags: [[Filter Run Prefix Examples]] [[Filter Syntax]] [[Cascade Filter Run Prefix]]
 title: Cascade Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ The filter expression inside the above <<.op :cascade>> filter run returns a lis
 </$list>
 </ul>
 
-For each input title, each of these filters is now applied to in turn until the first filter that returns a non-empty list. The first result from this non-empty list replaces that input title and is used as the icon for that tiddler.
+For each input title, each of these filters is now applied to in turn until the first filter that returns a non-empty list. The first result from this non-empty list replaces that input title and is used as the colour for that tiddler.
 
 <<.operator-example 1 """[all[shadows+tiddlers]] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]get[text]] +[!is[blank]limit[10]]""">>
 
