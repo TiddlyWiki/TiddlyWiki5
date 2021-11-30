@@ -1,0 +1,20 @@
+created: 20211130114043280
+modified: 20211130121544118
+tags: [[Filter Syntax]] [[Filter Run Prefix]]
+title: Cascade Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.1">>
+
+|''purpose'' |modify input titles by evaluating in turn a list of filters - as returned by the filter expression for this run - for each input title. |
+|''input'' |all titles from previous filter runs |
+|''output''|the input titles as modified by the filters returned by this filter run |
+
+The filter expression for this filter run is evaluated to return a list of filters. Each input title is then evaluated against each of the filters in turn, and the input title is replaced with the first result of the first filter that returns a non-empty list. If none of the filters return a result for an input title, it is replaced with an empty string.
+
+The following variables are available within the filter run:
+
+* <<.var currentTiddler>> - the input title
+* <<.var ..currentTiddler>> - the value of the variable `currentTiddler` outside the filter run.
+
+[[Examples|Cascade Filter Run Prefix (Examples)]]
