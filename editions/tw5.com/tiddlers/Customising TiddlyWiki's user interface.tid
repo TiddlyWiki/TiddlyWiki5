@@ -1,0 +1,55 @@
+created: 20211127084727217
+modified: 20211128200929866
+tags: [[Customise TiddlyWiki]]
+title: Customising TiddlyWiki's user interface
+type: text/vnd.tiddlywiki
+
+TiddlyWiki’s user interface is designed to be highly extensible. Every element can be augmented, removed, or rearranged.
+
+Several different mechanisms are used to achieve this:
+
+* special fields
+* special titles
+* special tags
+
+Here we provide an overview of those mechanisms and how they relate together.
+
+!! Special Fields
+
+Special fields are used to assign an appearance or behaviour to individual tiddlers. They can be thought of as flags or values that directly control the tiddler to which they are applied.
+
+For example:
+
+* Set the `icon` field to the title of an image tiddler to be used as the icon for this tiddler
+* Set the `color` field to a CSS colour that is then used for icons and tag pills associated with this tiddler
+* Set the `hide-body` field to `yes` to hide the view template body for this tiddler
+
+See TiddlerFields for details of all the special fields.
+
+!! Special Titles
+
+Certain special titles identify configuration tiddlers that customise TiddlyWiki's appearance or behaviour. They can be thought of as global settings that affect an entire wiki. 
+
+For example:
+
+* $:/DefaultTiddlers is a filter yielding the titles of the tiddlers that should be displayed at startup
+* $:/SiteTitle specifies the text of the wiki title
+* $:/config/Tags/MinLength controls the minimum number of characters to trigger tag autocompletion
+
+Many of TiddlyWiki's configuration tiddlers are presented as options in [[$:/ControlPanel]]. Less commonly used configuration tiddlers do not have a user interface, but are documented in [[Hidden Settings]].
+
+!! Special Tags
+
+Special tags assign special behaviour or appearance to all of the tiddlers to which they are applied. They can be thought of as establishing ordered lists of tiddlers that are processed or displayed in a particular way.
+
+For example:
+
+* $:/tags/Macro causes the macros defined in a tiddler to be available globally
+* $:/tags/Stylesheet causes the tiddler to be interpreted as a CSS stylesheet
+* $:/tags/SideBar causes the tiddler to be displayed as a sidebar tab
+
+See SystemTags for details of all the special tags.
+
+The  entire TiddlyWiki user interface is constructed from lists formed from special system tags.
+
+The ordering of these lists is determined by the [[order of tagged tiddlers|Order of Tagged Tiddlers]] rules. Users can re-order tags using drag and drop within a tag dropdown.
