@@ -38,4 +38,19 @@ exports.htmlBlockElements = "address,article,aside,audio,blockquote,canvas,dd,de
 
 exports.htmlUnsafeElements = "script".split(",");
 
+
+// Character code lookups used in charcode filter and macro
+exports.lookup = {
+	"tab": 9,
+	"\\t": 9,
+	"lf": 10,
+	"\\n": 10,
+	"ff": 12,
+	"\\f": 12,
+	"cr": 13,
+	"\\r": 13,
+	"\\_": 32,
+	"space": 32
+}
+
 })();

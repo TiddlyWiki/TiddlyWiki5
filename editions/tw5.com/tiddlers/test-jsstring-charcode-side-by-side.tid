@@ -1,0 +1,47 @@
+created: 20211201182207801
+modified: 20211201212946496
+tags: 
+title: test-jsstring-charcode-side-by-side
+type: text/vnd.tiddlywiki
+
+The lookup for the "placeholders" looks like this atm
+
+```
+// Character code lookups used in charcode filter and macro
+exports.lookup = {
+	"tab": 9,
+	"\\t": 9,
+	"lf": 10,
+	"\\n": 10,
+	"ff": 12,
+	"\\f": 12,
+	"cr": 13,
+	"\\r": 13,
+	"\\_": 32,
+	"space": 32
+}
+```
+
+---
+
+''macros''
+
+<<wikitext-example-without-html """{{{ [<jsstring "\n">match[
+]then[matches]else[doesn't match]] }}}  """>>
+
+
+There are 2 possibilities atm `\n  and lf`
+
+<<wikitext-example-without-html """{{{ [<charcode "\n">match[
+]then[matches]else[doesn't match]] }}}  """>>
+
+<<wikitext-example-without-html """{{{ [<charcode "lf">match[
+]then[matches]else[doesn't match]] }}}  """>>
+
+
+''filter operator''
+
+<<wikitext-example-without-html """{{{ [charcode[lf]match[
+]then[matches]else[doesn't match]] }}}  """>>
+
+<<wikitext-example-without-html """{{{ [charcode[lf]match<charcode "10">then[matches]else[doesn't match]] }}}  """>>

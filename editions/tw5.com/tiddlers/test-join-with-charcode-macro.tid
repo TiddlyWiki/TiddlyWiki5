@@ -1,0 +1,13 @@
+created: 20211201181012026
+modified: 20211201213002360
+tags: 
+title: test-join-with-charcode-macro
+type: text/vnd.tiddlywiki
+
+Something like this was discussed at GH: [[ [IDEA] String manipulation operators should be able to deal with \n\t .. and others #4697 |https://github.com/Jermolene/TiddlyWiki5/issues/4697]]
+
+
+<<wikitext-example-without-html """<$button>
+<$action-setfield $tiddler=a text={{{[[go to edit mode to see the linebreaks]split[ ]join<charcode "lf">]}}} />click to write new text to tiddler "a"
+</$button>
+""">>
