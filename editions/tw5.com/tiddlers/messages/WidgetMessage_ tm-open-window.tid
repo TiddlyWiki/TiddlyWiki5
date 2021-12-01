@@ -1,11 +1,11 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20190704145627537
+modified: 20211117042202771
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
 
-The `tm-open-window` message opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are being provided as variables to the new window.
+The `tm-open-window` [[message|Message]] opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are provided as variables to the new window.
 
 |!Name |!Description |
 |param |Title of the tiddler to be opened in a new browser window, defaults to <<.var "currentTiddler">> if empty |
@@ -13,7 +13,25 @@ The `tm-open-window` message opens a tiddler in a new //browser// window. If no 
 |windowTitle |Title string for the opened window |
 |width |Width of the new browser window |
 |height |Height of the new browser window |
-|paramObject |Hashmap of variables that will be provided to the window  |
+|paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
+
+The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
+
+<<.tip """When used with the ActionSendMessage Widget, <<.param 'param'>> becomes <<.param '$param'>> """>>
+<<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, and <<.param height>> require the ActionSendMessageWidget.""">>
 
 
-The `tm-open-window` message is usually generated with the ButtonWidget and is handled by the core itself.
+<$macrocall $name='wikitext-example-without-html'
+src="""
+<$button>Open Window
+<$action-sendmessage 
+  $message="tm-open-window" 
+  $param="$:/temp/openme" 
+  template="SampleWindowTemplate" 
+  windowTitle="My Window Title"
+  width="100em"
+  height="50em"
+  something="I just in over in a variable, and boy is my Hashmap tired." />
+</$button>
+""" />
+

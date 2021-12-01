@@ -79,6 +79,8 @@ JSONTiddlerWidget.prototype.getTiddlerFields = function() {
 		var tiddler = this.wiki.getTiddler(this.attTiddler);
 		if(tiddler) {
 			fields = tiddler.getFieldStrings({exclude: this.attExclude.split(" ")});
+		} else {
+			fields = {title: this.attTiddler};
 		}
 	}
 	return fields;

@@ -1,0 +1,35 @@
+title: $:/language/Help/render
+description: Renderuje pojedyncze tiddlery do plików
+
+Renderuje pojedyncze tiddlery po filtrze i zapisuje wyniki do plików.
+
+Opcjonalnie można też podać nazwę szablonowego tiddlera. W tym przypadku zamiast bezpośrednio renderować każdego tiddlera, nazwa każdego pliku zostanie po kolei przekazana do szablonu w zmiennej "currentTiddler" i wyrenderowana.
+
+Nazwy i wartości dodatkowych zmiennych mogą być też podane.
+
+```
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
+```
+
+* ''tiddler-filter'': Filtr określający tiddlery, które mają być wyrenderowane
+* ''filename-filter'': Opcjonalny filtr zmieniający nazwy plików. Domyślnie to `[is[tiddler]addsuffix[.html]]`, który używa nazwy tiddleru jako pliku.
+* ''render-type'': Opcjonalny typ renderowania: `text/html` (domyślny) zwraca kod HTML a `text/plain` samą treść z pominięciem tagów HTML i innych nietekstowych treści
+* ''template'': Opcjonalny szablon
+* ''name'': Nazwy zmiennych
+* ''value'': Wartości zmiennych
+
+Domyślnie pliki są zapisywane w folderze `./output`, relatywnych do folderu z wiki. Komenda `--output` może być użyta by zmienić ścieżkę.
+
+Notatki:
+
+* Żadne pliki nie są usuwane z folderu wyjściowego.
+* Wszelkie brakujące foldery zostaną automatycznie utworzone.
+* Jeżeli chcesz użyć tiddlera, który w nazwie ma spacje pamiętaj, by otoczyć go nawiasami kwadratowymi i cudzysłowiem: `--render "[[Motovun Jack.jpg]]"`
+* Do ''filename-filter'' przekazywana jest nazwa obecnie renderowanego tiddlera, tak by można było jej użyć do określenia ścieżki. Na przykład `[encodeuricomponent[]addprefix[static/]]` koduje znaki URI w każdej nazwie, po czym dodaje przedrostek `static/`.
+* Możesz podać kilka zmiennych powtarzając pary ''name''/''value''
+* Komenda `--render` jest bardziej elastyczna niż `--rendertiddler` i `--rendertiddlers`, które są obecnie eliminowane
+
+Przykłady:
+
+* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- renderuje wszystkie niesystemowe tiddlery jako pliki w podfolderze "tiddlers", kodując znaki URI w nazwie i dodając rozszerzenie .html
+

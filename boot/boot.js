@@ -257,6 +257,28 @@ $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 };
 
 /*
+Convert a URIComponent encoded string to a string safely
+*/
+$tw.utils.decodeURIComponentSafe = function(s) {
+	var v = s;
+	try {
+		v = decodeURIComponent(s);
+	} catch(e) {}
+	return v;
+};
+
+/*
+Convert a URI encoded string to a string safely
+*/
+$tw.utils.decodeURISafe = function(s) {
+	var v = s;
+	try {
+		v = decodeURI(s);
+	} catch(e) {}
+	return v;
+};
+
+/*
 Convert "&amp;" to &, "&nbsp;" to nbsp, "&lt;" to <, "&gt;" to > and "&quot;" to "
 */
 $tw.utils.htmlDecode = function(s) {
@@ -1928,6 +1950,20 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			tiddlers.push({tiddlers: fileTiddlers});
 		}
 	};
+	// Helper to recursively search subdirectories
+	var getAllFiles = function(dirPath, recurse, arrayOfFiles) {
+		recurse = recurse || false;
+		arrayOfFiles = arrayOfFiles || [];
+		var files = fs.readdirSync(dirPath);
+		files.forEach(function(file) {
+			if (recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
+				arrayOfFiles = getAllFiles(dirPath + path.sep + file, recurse, arrayOfFiles);
+			} else if(fs.statSync(dirPath + path.sep + file).isFile()){
+				arrayOfFiles.push(path.join(dirPath, path.sep, file));
+			}
+		});
+		return arrayOfFiles;
+	}
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 		if(tidInfo.prefix && tidInfo.suffix) {
@@ -1951,13 +1987,14 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-				var	files = fs.readdirSync(dirPath),
+				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
 				for(var t=0; t<files.length; t++) {
-					var filename = files[t];
+					var thisPath = path.relative(filepath, files[t]),
+					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-						processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
 					}
 				}
 			} else {

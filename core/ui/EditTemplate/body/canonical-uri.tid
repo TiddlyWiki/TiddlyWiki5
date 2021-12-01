@@ -1,0 +1,13 @@
+title: $:/core/ui/EditTemplate/body/canonical-uri
+
+\define lingo-base() $:/language/EditTemplate/Body/
+
+<div class="tc-message-box">
+
+<<lingo External/Hint>>
+
+<a href={{!!_canonical_uri}}><$text text={{!!_canonical_uri}}/></a>
+
+<$edit-text field="_canonical_uri" class="tc-edit-fields" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"></$edit-text>
+
+</div>

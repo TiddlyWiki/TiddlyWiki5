@@ -42,7 +42,7 @@ Lightweight, portable and easy to use solutions
 
 !! Android
 
-[[webdav server|https://play.google.com/store/apps/details?id=com.theolivetree.webdavserver&hl=en]] for Android lets you put wikis in your pocket. You can share with other devices on the local network too.
+* RCX is an open source file manager for Android based on //rclone//. It is available on both //F-Droid// and //Google Play//. Thanks to its integrated WebDAV server, it lets you edit the wikis that you keep in your pocket. You can share them with other devices on the local network too.
 
 !! Servers
 

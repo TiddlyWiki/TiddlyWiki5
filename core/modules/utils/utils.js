@@ -978,22 +978,4 @@ exports.makeCompareFunction = function(type,options) {
 	return (types[type] || types[options.defaultType] || types.number);
 };
 
-exports.decodeURIComponentSafe = function(str) {
-	var value = str;
-	try {
-		value = decodeURIComponent(str);
-	} catch(e) {
-	}
-	return value;
-};
-
-exports.decodeURISafe = function(str) {
-	var value = str;
-	try {
-		value = decodeURI(str);
-	} catch(e) {
-	}
-	return value;
-};
-
 })();

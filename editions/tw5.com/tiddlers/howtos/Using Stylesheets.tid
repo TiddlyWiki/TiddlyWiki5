@@ -1,5 +1,5 @@
 created: 20140305091244145
-modified: 20210104090402829
+modified: 20211125175708977
 tags: [[Customise TiddlyWiki]]
 title: Using Stylesheets
 type: text/vnd.tiddlywiki
@@ -16,9 +16,9 @@ type: text/vnd.tiddlywiki
 
 The first steps to changing the appearance of ~TiddlyWiki are to choose and apply:
 
-* One of the available themes: <span class="tc-btn-standard"> {{$:/core/ui/Buttons/theme}} </span>
-* Modify the colour palette: <span class="tc-btn-standard"> {{$:/core/ui/Buttons/palette}} </span>
-* Experiment with the <$button actions=<<openCpTheme>> ><<.icon $:/core/images/options-button>> ControlPanel</$button>
+* One of the available themes: {{$:/core/ui/Buttons/theme}}
+* Modify the colour palette: {{$:/core/ui/Buttons/palette}}
+* Experiment with the <$button actions=<<openCpTheme>> class="tc-btn-invisible"><<.icon $:/core/images/options-button>> ~ControlPanel</$button>
 
 ! Work with Stylesheets
 
@@ -73,3 +73,7 @@ A stylesheet tiddler is processed such that it is first wikified and then the te
 !! Stylesheet Macros
 
 The ~TiddlyWiki core provides several [[global macros that are helpful in constructing stylesheets|Stylesheet Macros]].
+
+!! See Also
+
+* <<list-links "[tag[Using Stylesheets]]">>
