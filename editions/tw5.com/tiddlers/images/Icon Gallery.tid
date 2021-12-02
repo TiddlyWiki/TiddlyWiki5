@@ -1,0 +1,14 @@
+created: 20211013132515594
+modified: 20211018102307833
+tags: Learning
+title: Icon Gallery
+type: text/vnd.tiddlywiki
+
+\define copyActions() <$action-sendmessage $message="tm-copy-to-clipboard" $param=<<imageTitle>>/>
+
+<<.tip "Click an icon to copy the title to the clipboard">>
+
+<div class="tc-image-chooser">
+<$macrocall $name="image-picker-list" filter="[all[shadows+tiddlers]tag[$:/tags/Image]]" actions=<<copyActions>> />
+</div>
+

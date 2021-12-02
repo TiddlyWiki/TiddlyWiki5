@@ -1,12 +1,7 @@
 created: 20131129100250644
-modified: 20150412185535373
-tags: [[Hosting your TiddlyWiki on the web]] Platforms
+modified: 20211124214855770
+tags: $:/deprecated
 title: TiddlyWiki in the Sky for TiddlyWeb
 type: text/vnd.tiddlywiki
 
-TiddlyWiki in the Sky for TiddlyWeb allows content to be synchronised between TiddlyWiki running in the browser and a TiddlyWeb server. Features include:
-
-* Lazy loading
-* Two way synchronisation between the browser and the server
-** Synchronising from the server is accomplished by polling (currently every 60 seconds)
-* Throttling so that rapidly changing tiddlers don't overwhelm the server
+The term "TiddlyWiki in the Sky for TiddlyWeb" was used to refer to the ability for content to be synchronised between TiddlyWiki running in the browser and a TiddlyWeb server. This configuration should still work but is no longer commonly used.

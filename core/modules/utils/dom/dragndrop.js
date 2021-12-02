@@ -208,10 +208,10 @@ function parseJSONTiddlers(json,fallbackTitle) {
 	return data;
 };
 
-exports.dragEventContainsFiles = function(event) {
+function dragEventContainsType(event,targetType) {
 	if(event.dataTransfer.types) {
 		for(var i=0; i<event.dataTransfer.types.length; i++) {
-			if(event.dataTransfer.types[i] === "Files") {
+			if(event.dataTransfer.types[i] === targetType) {
 				return true;
 				break;
 			}
@@ -219,5 +219,11 @@ exports.dragEventContainsFiles = function(event) {
 	}
 	return false;
 };
+
+exports.dragEventContainsFiles = function(event) {
+	return (dragEventContainsType(event,"Files") && !dragEventContainsType(event,"text/plain"));
+};
+
+exports.dragEventContainsType = dragEventContainsType;
 
 })();

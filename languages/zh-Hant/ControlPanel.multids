@@ -27,10 +27,15 @@ Basics/Tiddlers/Prompt: 一般條目數量
 Basics/Title/Prompt: 標題
 Basics/Username/Prompt: 編輯者署名
 Basics/Version/Prompt: ~TiddlyWiki 版本
+Cascades/Caption: 級聯
+Cascades/Hint: 這些全域規則用於動態選擇某些範本。級聯的結果是傳回結果的序列中的第一個篩選的結果
+Cascades/TagPrompt: 篩選器標籤為 <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: 編輯器類型
 EditorTypes/Editor/Caption: 編輯器
 EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目類型。
 EditorTypes/Type/Caption: 類型
+EditTemplateBody/Caption: 編輯範本主體
+EditTemplateBody/Hint: 預設的編輯範本使用此規則級聯，動態選擇範本來編輯條目的主體。
 Info/Caption: 資訊
 Info/Hint: 有關此 TiddlyWiki 的資訊
 KeyboardShortcuts/Add/Prompt: 在此輸入快捷鍵
@@ -192,6 +197,8 @@ Settings/TitleLinks/Caption: 條目標題
 Settings/TitleLinks/Hint: 可選地顯示條目標題為鏈接
 Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
 Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
+StoryTiddler/Caption: 故事條目
+StoryTiddler/Hint: 此規則級聯用於動態選擇範本，以便在故事河中顯示條目。
 StoryView/Caption: 檢視模式
 StoryView/Prompt: 當前的檢視模式：
 Stylesheets/Caption: 樣式表
@@ -200,8 +207,12 @@ Stylesheets/Hint: 這是當前標籤為 <<tag "$:/tags/Stylesheet">> 的樣式�
 Stylesheets/Restore/Caption: 復原
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
+TiddlerColour/Caption: 條目顏色
+TiddlerColour/Hint: 此規則級聯用於動態地為條目選擇顏色 (用於圖示和關聯的標籤丸)。
 TiddlerFields/Caption: 條目欄位
 TiddlerFields/Hint: 這是本維基使用中的所有條目欄位（含系統條目的欄位，但預設條目的欄位除外）。
+TiddlerIcon/Caption: 條目圖示
+TiddlerIcon/Hint: 此規則級聯用於動態地為條目選擇圖示。
 Toolbars/Caption: 工具列
 Toolbars/EditToolbar/Caption: 編輯工具列
 Toolbars/EditToolbar/Hint: 選擇將顯示哪些按鈕於條目的編輯模式工具列。拖放可改變順序。
@@ -213,3 +224,7 @@ Toolbars/EditorToolbar/Hint: 選擇將顯示哪些按鈕於編輯器工具列。
 Toolbars/ViewToolbar/Caption: 檢視工具列
 Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列。拖放可改變順序。
 Tools/Download/Full/Caption: 下載完整副本
+ViewTemplateBody/Caption: 檢視範本主體
+ViewTemplateBody/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的主體。
+ViewTemplateTitle/Caption: 檢視範本標題
+ViewTemplateTitle/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的標題。

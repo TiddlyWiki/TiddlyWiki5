@@ -1,5 +1,5 @@
 created: 20140617211749290
-modified: 20140912141809800
+modified: 20211104172343220
 tags: [[TiddlyWiki on Node.js]]
 title: Environment Variables on Node.js
 type: text/vnd.tiddlywiki
@@ -11,7 +11,9 @@ type: text/vnd.tiddlywiki
 * `TIDDLYWIKI_LANGUAGE_PATH` - Search path for languages
 * `TIDDLYWIKI_EDITION_PATH` - Search path for editions (used by the InitCommand)
 
-''Note'': The delimiter may vary between operating systems. While on Windows a semicolon `;` is used, Linux implements a colon `:`.
+''Note 1'': The delimiter may vary between operating systems. While on Windows a semicolon `;` is used, Linux implements a colon `:`.
+
+''Note 2'': On Linux systems, it may be necessary to //''export''// the variable as well as to define it.
 
 The additional paths should each point to folders structured like the equivalent directories in the TiddlyWiki5 GitHub repository: the plugin, theme and language directories contain `publisher/pluginname/<files>` while the edition directories contain `editionname/<files>`
 

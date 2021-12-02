@@ -4,14 +4,21 @@ created: 20131219100608529
 delivery: DIY
 description: Flexible hosting on your own machine or in the cloud
 method: sync
-modified: 20200507110222866
+modified: 20211003230831173
 tags: Saving [[TiddlyWiki on Node.js]] Windows Mac Linux
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
 # Install [[Node.js]]
-#* either from your favourite package manager: typically `apt-get install nodejs` on Debian/Ubuntu Linux or [[Termux for Android|Serving TW5 from Android]], or `brew install node` on a Mac
-#* or directly from http://nodejs.org
+#* Linux: 
+#*> //Debian/Ubuntu//:<br/>`apt install nodejs`<br/>May need to be followed up by:<br/>`apt install npm`
+#*> //Arch Linux//<br/>`pacman -S tiddlywiki` <br/>(installs node and tiddlywiki)
+#* Mac
+#*> `brew install node`
+#* Android
+#*> [[Termux for Android|Serving TW5 from Android]]
+#* Other 
+#*> See http://nodejs.org
 # Open a command line terminal and type:
 #> `npm install -g tiddlywiki`
 #> If it fails with an error you may need to re-run the command as an administrator:
