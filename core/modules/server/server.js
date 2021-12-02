@@ -80,6 +80,9 @@ function Server(options) {
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
+	// Init the boot state
+	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
 /*
@@ -227,14 +230,14 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
-Server.prototype.isOriginWhitelisted = function(origin) {
+Server.prototype.isOriginApproved = function(origin) {
 	// Check if any of the originFilters applies
 	var self = this,
-		valid = (this.boot.origin == origin),
+		valid = (this.boot.origin === origin),
 		originFilters = this.wiki.getTiddlerList(this.get("cors-tiddler"),"text");
 	// Optionally output debug info
 	if(this.get("debug-level") !== "none") {
-		$tw.utils.log(`CORS=${valid?'valid':'invalid'} boot.origin=${this.boot.origin} request.origin=${origin}`)
+		$tw.utils.log('CORS request' + (valid?'approved':'denied') + ' boot.origin=' + this.boot.origin + ' request.origin=' + origin)
 	}
 	if(!valid && originFilters.length > 0) {
 		$tw.utils.each(originFilters,function(filter) {
@@ -266,12 +269,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CORS header
 	let corsHeader = !!request.headers["origin"] && request.headers["origin"],
-		corsWhitelisted = corsHeader && this.isOriginWhitelisted(corsHeader);
-	if(corsHeader && corsWhitelisted) {
+		corsApproved = corsHeader && this.isOriginApproved(corsHeader);
+	if(corsHeader && corsApproved) {
 		// add the corsHeader to the response
-		response.setHeader('Access-Control-Allow-Origin',corsWhitelisted)
+		response.setHeader('Access-Control-Allow-Origin',corsApproved)
 	} else if (corsHeader) {
-		response.writeHead(403,"'Origin' header not authorized from '" + corsHeader + "'");
+		response.writeHead(403,"'Origin' header not approved from '" + corsHeader + "'");
 		response.end();
 		return;
 	}
