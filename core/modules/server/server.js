@@ -234,7 +234,7 @@ Server.prototype.isOriginApproved = function(origin) {
 	var approved = (this.boot.origin === origin) || !!this.wiki.filterTiddlers("[[" + origin + "]] :cascade[all[shadows+tiddlers]tag[$:/tags/CorsFilter]get[text]]");
 	// Optionally output debug info
 	if(this.get("debug-level") !== "none") {
-		$tw.utils.log('CORS request' + (approved?'approved':'denied') + ' boot.origin=' + this.boot.origin + ' request.origin=' + origin)
+		$tw.utils.log('CORS request ' + (approved?'approved':'denied') + ' boot.origin=' + this.boot.origin + ' request.origin=' + origin)
 	}
 	return approved;
 }
