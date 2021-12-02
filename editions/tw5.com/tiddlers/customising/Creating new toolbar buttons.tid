@@ -1,7 +1,7 @@
 created: 20211124205415217
-modified: 20211124205413283
-tags: [[Page and tiddler layout customisation]]
-title: Creating new buttons for the ViewToolbar and page controls
+modified: 20211126162937536
+tags: [[Customise TiddlyWiki]]
+title: Creating new toolbar buttons
 type: text/vnd.tiddlywiki
 
 Let's say you have a skeleton tiddler called 'Recipe template', and you want to have a button available in the tiddler ViewToolbar to create new recipe tiddlers on demand. This will require the following steps:
