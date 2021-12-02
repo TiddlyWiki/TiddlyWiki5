@@ -153,7 +153,6 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
-	"cors-tiddler": "$:/config/tiddlyweb/cors",
 	"root-tiddler": "$:/core/save/all",
 	"root-render-type": "text/plain",
 	"root-serve-type": "text/html",
@@ -232,25 +231,12 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 
 Server.prototype.isOriginApproved = function(origin) {
 	// Check if any of the originFilters applies
-	var self = this,
-		valid = (this.boot.origin === origin),
-		originFilters = this.wiki.getTiddlerList(this.get("cors-tiddler"),"text");
+	var approved = (this.boot.origin === origin) || !!this.wiki.filterTiddlers("[[" + origin + "]] :cascade[all[shadows+tiddlers]tag[$:/tags/CorsFilter]get[text]]");
 	// Optionally output debug info
 	if(this.get("debug-level") !== "none") {
-		$tw.utils.log('CORS request' + (valid?'approved':'denied') + ' boot.origin=' + this.boot.origin + ' request.origin=' + origin)
+		$tw.utils.log('CORS request' + (approved?'approved':'denied') + ' boot.origin=' + this.boot.origin + ' request.origin=' + origin)
 	}
-	if(!valid && originFilters.length > 0) {
-		$tw.utils.each(originFilters,function(filter) {
-			if(!valid) {
-				var source = self.wiki.makeTiddlerIterator([origin]),
-					result = self.wiki.filterTiddlers(filter,null,source);
-				if(result.length > 0) {
-					valid = true;
-				}
-			}
-		});
-	}
-	return valid;
+	return approved;
 }
 
 Server.prototype.requestHandler = function(request,response,options) {
@@ -268,11 +254,10 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CORS header
-	let corsHeader = !!request.headers["origin"] && request.headers["origin"],
-		corsApproved = corsHeader && this.isOriginApproved(corsHeader);
-	if(corsHeader && corsApproved) {
+	let corsHeader = !!request.headers["origin"] && request.headers["origin"];
+	if(corsHeader && this.isOriginApproved(corsHeader)) {
 		// add the corsHeader to the response
-		response.setHeader('Access-Control-Allow-Origin',corsApproved)
+		response.setHeader('Access-Control-Allow-Origin','true')
 	} else if (corsHeader) {
 		response.writeHead(403,"'Origin' header not approved from '" + corsHeader + "'");
 		response.end();
