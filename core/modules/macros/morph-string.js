@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/macros/morph-string.js
+title: $:/core/modules/macros/morph.js
 type: application/javascript
 module-type: macro
 
@@ -13,42 +13,55 @@ Macro to return a string that is shifted in the unicode character space
 	"use strict";
 	
 
-exports.name = "morph-string";
+exports.name = "morph";
 
 exports.params = [
 	{name: "text"},
-	{name: "by"}
+	{name: "from"},
+	{name: "to"},
+	{name: "prefix"}
 ];
 
-exports.run = function(text, by) {
-	// var result = text.fromCharCode($tw.utils.parseInt(operand)));
+function fromCharacter(character) {
+	return character.codePointAt(undefined);
+}
 
-	// String.prototype.toUnicode = function () {
-	// 	return this.replace(/./g, function (char) {
-	// 		return "&#" + String.charCodeAt(char) + ";";
-	// 	});
-	// };
+/*
+* toUnicodeFromString('🐘 🐨');
+* //> 0x1f418; 0x20; 0x1f428;
+*/
 
-    // function fromCharacter(character) {
-    //     return character.codePointAt(undefined).toString(16);
-    // }
-	// /*
-    //  * toUnicode.fromString('🎉 👋');
-    //  * //> [ '1f389', '20', '1f44b' ]
-    //  */
-    // function fromString(characters, prefix = '') {
-    //     return [...characters].reduce((accumulator, character) => {
-    //         const unicode = toUnicode.fromCharacter(character);
-    //         accumulator.push(`${prefix}${unicode}`);
-    //         return accumulator;
-    //     }, []);
-    // }
+function toUnicodeFromString(text, from, to, prefix) {
+	prefix = prefix || "";
+	from = fromCharacter(from) || 0;
+	to = fromCharacter(to) || 0;
+	var results = [];
 
+	// if (from === 0 || to === 0) {
+	// 	return "from / to parameter missing";
+	// }
 
+	for (var codePoint of text) {
+		if (prefix.trim() === "0x") {
+			if (codePoint === " ") {
+				results.push(prefix + (fromCharacter(codePoint)).toString(16))
+			} else {
+				results.push(prefix + (fromCharacter(codePoint) - from + to).toString(16));
+			}
+		} else {
+			if (codePoint === " ") {
+				results.push(prefix + fromCharacter(codePoint));
+			} else {
+				results.push(prefix + (fromCharacter(codePoint) - from + to));
+			}
+		}
+	}
+	return results.join(";") + ";";
+}
 
-
-
-	return result;
+exports.run = function(text, from, to, prefix) {
+	prefix = prefix || "&#";
+	return toUnicodeFromString(text, from, to, prefix);
 };
 
 })();

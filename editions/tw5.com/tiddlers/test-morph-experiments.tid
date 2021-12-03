@@ -1,0 +1,26 @@
+created: 20211203125013193
+modified: 20211203135651205
+tags: 
+title: test-morph-experiments
+type: text/vnd.tiddlywiki
+
+Calling the macro without any params, just returns the text as it was.
+
+<<wikitext-example-without-html """<<morph "🐘 🐨">>""">>
+
+----
+
+Converting to unicode hex values for debugging.
+
+<<wikitext-example-without-html """<<morph "🐘 🐨" prefix:" 0x">>""">>
+
+----
+
+Cool things can happen ;) .... The `to` parameter should always be inserted as a character, to see if the OS / App can handle the character. 
+
+<<wikitext-example-without-html """<<morph "abcdefg" from:a to:"😀">>""">>
+
+---
+
+<<wikitext-example-without-html """<<morph "abcdefg" from:a to:"😀" prefix:" 0x">>""">>
+
