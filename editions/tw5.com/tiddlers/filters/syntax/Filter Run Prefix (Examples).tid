@@ -1,8 +1,12 @@
 created: 20201117073343969
-modified: 20210428084013109
+modified: 20211129032537195
 tags: [[Filter Syntax]] [[Filter Run Prefix Examples]]
 title: Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
+
+!! `:filter` examples
+
+See [[Filter Filter Run Prefix (Examples)]]
 
 !! Difference between `+` and `:intersection`
 
