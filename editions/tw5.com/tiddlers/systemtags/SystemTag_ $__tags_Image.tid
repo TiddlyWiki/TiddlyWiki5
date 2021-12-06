@@ -1,9 +1,9 @@
 caption: $:/tags/Image
 created: 20180926170345251
 description: marks (core) images
-modified: 20180926171456494
+modified: 20211018102336342
 tags: SystemTags
 title: SystemTag: $:/tags/Image
 type: text/vnd.tiddlywiki
 
-The [[system tag|SystemTags]] `$:/tags/Image` marks (core) images
+The [[system tag|SystemTags]] `$:/tags/Image` marks core images. An overview of system icons can be found in the [[Icon Gallery]]

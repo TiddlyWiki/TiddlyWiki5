@@ -226,7 +226,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 				this.refreshSelf();
 				return true;
 			}
-		} else if(this.type === "popup" && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
+		} else if(this.type === "popup" && this.isOpen && this.updatePopupPosition && (changedTiddlers[this.state] || changedTiddlers[this.stateTitle])) {
 			this.positionPopup(this.domNode);
 		}
 		if(changedAttributes.style) {

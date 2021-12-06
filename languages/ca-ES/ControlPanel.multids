@@ -17,6 +17,8 @@ Basics/NewJournal/Title/Prompt: Títol dels nous tiddlers del diari
 Basics/NewTiddler/Tags/Prompt: Etiquetes dels nous tiddlers
 Basics/NewTiddler/Title/Prompt: Títol dels nous tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Número de tiddlers ombra sobreescrits:
+Basics/RemoveTags: Actualitza al format actual
+Basics/RemoveTags/Hint: Actualitza la configuració de les etiquetes al format actual
 Basics/ShadowTiddlers/Prompt: Número de tiddlers ombra:
 Basics/Subtitle/Prompt: Subtítol:
 Basics/SystemTiddlers/Prompt: Número de tiddlers del sistema:
@@ -44,6 +46,7 @@ KeyboardShortcuts/Platform/NonMac: Només per a les plataformes No Macintosh
 KeyboardShortcuts/Platform/NonWindows: Només per a les plataformes No Windows
 KeyboardShortcuts/Platform/Windows: Només per a la plataforma Windows
 KeyboardShortcuts/Remove/Hint: suprimeix la drecera del teclat
+LayoutSwitcher/Caption: Disposició
 LoadedModules/Caption: Mòduls carregats
 LoadedModules/Hint: Aquests són els mòduls tiddlers enllaçats als seus tiddlers font. Els mòduls indicats en cursiva no disposen de tiddler font, sovint per que s'han configurat a l'arrencada.
 Palette/Caption: Paleta
@@ -71,7 +74,7 @@ Plugins/ClosePluginLibrary: tanca la biblioteca de connectors
 Plugins/Disable/Caption: desactiva
 Plugins/Disable/Hint: Desactiva aquest connector quan la pàgina es torni a carregar
 Plugins/Disabled/Status: (desactivat)
-Plugins/Downgrade/Caption: seactualitza
+Plugins/Downgrade/Caption: desactualitza
 Plugins/Empty/Hint: Cap
 Plugins/Enable/Caption: activa
 Plugins/Enable/Hint: Activa aquest connector quan la pàgina es torni a carregar

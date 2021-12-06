@@ -3,6 +3,7 @@ title: $:/language/Import/
 Editor/Import/Heading: 導入圖像並將其插入至編輯器。
 Imported/Hint:  下列條目已被導入：
 Listing/Cancel/Caption: 取消
+Listing/Cancel/Warning: 您要取消導入嗎？
 Listing/Hint: 這些條目已備妥導入：
 Listing/Import/Caption: 導入
 Listing/Select/Caption: 選擇
@@ -29,5 +30,5 @@ Upgrader/System/Warning: 核心模組條目。
 Upgrader/System/Alert: 您即將導入一個條目會覆蓋一個核心模組條目。不建議這樣做，因為可能會使系統不穩定。
 Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題。
 Upgrader/Tiddler/Disabled: 停用條目。
-Upgrader/Tiddler/Selected: 使用者選定。
+Upgrader/Tiddler/Selected: 選定的條目。
 Upgrader/Tiddler/Unselected: 未選定的條目。

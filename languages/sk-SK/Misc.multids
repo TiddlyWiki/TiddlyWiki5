@@ -12,7 +12,6 @@ DefaultNewTiddlerTitle: Nový tiddler
 DropMessage: Dropnúť sem (alebo zrušiť cez escape)
 Encryption/ConfirmClearPassword: Želáte si zrušiť heslo? Odstráni sa tým šifrovanie obsahu pri ukladaní wiki
 Encryption/PromptSetPassword: Nastav pre tento TiddlyWiki nové heslo
-InvalidFieldName: Nepovolené znaky v názve poľa "<$text text=<<fieldName>>/>". Polia môžu obsahovať iba malé písmená, číslice a podčiarnik (`_`), pomlčku (`-`) alebo bodku (`.`)
 MissingTiddler/Hint: Chýbajúci tiddler "<$text text=<<currentTiddler>>/>" - ak ho chcete vytvoriť, kliknite {{||$:/core/ui/Buttons/edit}} 
 RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: Toto je systémový tiddler

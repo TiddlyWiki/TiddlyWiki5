@@ -135,7 +135,11 @@ FramedEngine.prototype.setText = function(text,type) {
 Update the DomNode with the new text
 */
 FramedEngine.prototype.updateDomNodeText = function(text) {
-	this.domNode.value = text;
+	try {
+		this.domNode.value = text;
+	} catch(e) {
+		// Ignore
+	}
 };
 
 /*
@@ -201,7 +205,7 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	if(this.widget.editInputActions) {
-		this.widget.invokeActionString(this.widget.editInputActions);
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
 	}
 	return true;
 };

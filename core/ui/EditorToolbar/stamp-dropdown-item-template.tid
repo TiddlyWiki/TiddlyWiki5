@@ -1,0 +1,53 @@
+title: $:/core/ui/EditorToolbar/StampDropdown/ItemTemplate
+
+<$linkcatcher actions="""
+
+<$list filter="[<modifier>!match[ctrl]]" variable="ignore">
+
+<$list filter="[<currentTiddler>addsuffix[/prefix]!is[tiddler]!is[shadow]removesuffix[/prefix]addsuffix[/suffix]!is[tiddler]!is[shadow]]" variable="ignore">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{{ [<currentTiddler>get[text]] }}}
+/>
+
+</$list>
+
+
+<$list filter="[<currentTiddler>addsuffix[/prefix]] [<currentTiddler>addsuffix[/suffix]] +[is[shadow]] :else[is[tiddler]] +[limit[1]]" variable="ignore">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix={{{ [<currentTiddler>addsuffix[/prefix]get[text]] }}}
+  suffix={{{ [<currentTiddler>addsuffix[/suffix]get[text]] }}}
+/>
+
+</$list>
+
+</$list>
+
+<$list filter="[<modifier>match[ctrl]]" variable="ignore">
+
+<$action-sendmessage $message="tm-edit-tiddler"/>
+
+</$list>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+""">
+
+<$link tooltip={{{ [<currentTiddler>get[description]] }}}>
+
+<$transclude tiddler=<<currentTiddler>> field="caption" mode="inline">
+
+<$view tiddler=<<currentTiddler>> field="title" />
+
+</$transclude>
+
+</$link>
+
+</$linkcatcher>

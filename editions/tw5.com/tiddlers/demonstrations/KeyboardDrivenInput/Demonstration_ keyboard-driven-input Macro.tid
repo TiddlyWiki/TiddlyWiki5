@@ -1,0 +1,121 @@
+created: 20210222140234737
+modified: 20211123034501278
+tags: Learning KeyboardDrivenInput
+title: Demonstration: keyboard-driven-input Macro
+type: text/vnd.tiddlywiki
+
+\define allshortcuts(descriptor)
+<$wikify name=scutlist text=<<displayshortcuts (($descriptor$)) '' ' ' ''>> >
+<$list filter="[<scutlist>split[ ]join[</kbd> or <kbd>]addprefix[<kbd>]addsuffix[</kbd>]]" variable=scts><<scts>></$list>
+</$wikify>
+\end
+
+\define kdi-demo-textmacrocall()
+```
+<$macrocall $name=keyboard-driven-input 
+        tiddler="$(tiddler)$"
+        storeTitle="$(storeTitle)$" 
+        selectionStateTitle="$(selectionStateTitle)$" 
+        configTiddlerFilter="$(configTiddlerFilter)$" 
+ />
+```
+\end
+
+<$vars configTiddlerFilter="[[kdi-demo-configtid]]" tiddler="kdi-demo-tiddler" storeTitle="kdi-demo-storeTitle" selectionStateTitle="kdi-demo-selectionStateTitle" >
+
+The [[keyboard-driven-input Macro]] is used to create filtered lists that update as the user types. It also allows navigating the lists, and invoking macros using list items, with the keyboard.
+
+It consists of an ''[[edit-text widget|EditTextWidget]]'' wrapped in [[keyboard widgets|KeyboardWidget]]. There are <<.def keyboard>> widgets to listen for `((input-accept))`, `((input-accept-variant))`, and `((input-cancel))` keyboard shortcuts, but there is no default behaviour in response to these events; macros must be written to suit the use-case. There is also no default visualisation of the filtered options list.
+
+!!Types of keyboard input handled by the <<.var keyboard-driven-input>> macro:
+
+!!!Non-configurable: 
+
+The following keyboard events invoke macros defined alongside <<.var keyboard-driven-input>> in [[$:/core/macros/keyboard-driven-input]].
+
+|Input |Purpose |Macro |h
+|typing input |composing a string to be used within list filters |<<.var keyboard-input-actions>> |
+|`((input-up))` (<<allshortcuts input-up>>) |temporarily selecting the previous item in the filtered list |<<.var input-next-actions>>  with parameters <<.param afterOrBefore>>=`"before"`, <<.param reverse>>=`"reverse[]"` |
+|`((input-down))` (<<allshortcuts input-down>>) |temporarily selecting the next item in the filtered list |<<.var input-next-actions>> with <<.param afterOrBefore>>=`"after"`, <<.param reverse>>=`""` |
+
+All of the above actions generate or modify data which <<.var keyboard-driven-input>> keeps in tiddlers specified using the macro's parameters. The data can then be accessed not only by the macros invoked by keyboard shortcuts, but also outside of these, e.g. a macro to display the filtered list(s).
+
+!!!Configurable through parameters:
+
+The following keyboard events invoke macros whose names are specified in parameters to <<.var keyboard-driven-input>>. The intended purpose is suggested by the parameter name, but there are no default macros defined within [[$:/core/macros/keyboard-driven-input]].
+
+|[[Keyboard shortcut descriptor |Keyboard Shortcut Descriptor]] |Key combination |Parameter |h
+|`((input-accept))` |<<allshortcuts input-accept>> |<<.param inputAcceptActions>> |
+|`((input-accept-variant))` |<<allshortcuts input-accept-variant>> |<<.param inputAcceptVariantActions>> |
+|`((input-cancel))` |<<allshortcuts input-cancel>> |<<.param inputCancelActions>> |
+
+<<.var keyboard-driven-input>> can be seen in action as part of various core features in TiddlyWiki, e.g.: the [[search feature|Searching in TiddlyWiki]], the [[tag-picker Macro]], and dropdown interfaces in the [[Editor toolbar]] such as [[Insert link]].
+
+!!Minimal ingredients for a demonstration
+
+Keeping in mind that the <<.var keyboard-driven-input>> macro does not, by itself, display list results, or do anything with a selected option, a minimal demonstration of the <<.var keyboard-driven-input>> macro requires: 
+
+# ''a tiddler, containing a filter'' whose results depend on the user's text input, to generate the options from which the user can select
+# ''several parameters:''
+#*''a filter'' to return the title of the tiddler where the filter described in step 1 can be found, and 
+#*''tiddler titles'' to use for storing state information in response to input events. These tiddlers do not need to exist already. If they do exist, the <<.var keyboard-driven-input>> macro will change their contents.
+
+!!The search filter(s)
+
+By default, <<.var keyboard-driven-input>> will look for filters in the <<.field first-search-filter>> and <<.field second-search-filter>> fields of a tiddler (whose title is specified by a parameter discussed below).
+
+This filter can refer to a variable called <<.var userInput>>, which shows the contents of the <<.def edit-text>> widget, as stored in a state tiddler (discussed below), at the time of the latest <kbd><<displayshortcuts ((input-up))>></kbd> or <kbd><<displayshortcuts ((input-down))>></kbd> event.
+
+''Note:'' If this filter is to be referred to in a context outside the <<.var keyboard-driven-input>> macro (such as in a popup showing the filtered options), the variable <<.var userInput>> has to be defined in those contexts as well (by reading it from a state tiddler).
+
+!!Minimal parameters
+
+|Parameter name |Notes |h
+|<<.param configTiddlerFilter>> |This is a filter, rather than a tiddler title, allowing conditional behaviour (e.g. checking for an active tab, or preferring a filter that may not be present, with a fallback).<br>The title returned must belong to an existing tiddler, containing at least one filter with which <<.var keyboard-driven-input>> can generate its results list. |
+|<<.param tiddler>> |This tiddler contains either the typed input, or the instantaneous result selection, depending upon the most recent event. It is updated with each keystroke in the ''edit-text'' widget, //and// when the user uses the <kbd><<displayshortcuts ((input-up))>></kbd> or <kbd><<displayshortcuts ((input-down))>></kbd> key to cycle through filtered results. |
+|<<.param storeTitle>> |This tiddler always reflects the user input (transcluded from the tiddler <<.param tiddler>> after each keystroke into the ''edit-text'' widget). |
+|<<.param selectionStateTitle>> |This tiddler is updated on <kbd><<displayshortcuts ((input-up))>></kbd> or <kbd><<displayshortcuts ((input-down))>></kbd> events and contains either the user input with the suffix `-userInput`, or the instantaneous selection with the suffix `-primaryList` or `-secondaryList`, depending on which of up to two filters generated the list it came from. |
+
+!!Demonstration setup
+
+I have created a tiddler called <$list filter=<<configTiddlerFilter>> /> and put the following filter into its <<.field first-search-filter>> field:  
+
+<code><$list filter=<<configTiddlerFilter>> ><$text text={{!!first-search-filter}}/></$list></code>. 
+
+This filters for non-system tiddlers whose titles contain the text the user has typed.
+
+To use the above filter with <<.var keyboard-driven-input>>, the value of the parameter <<.param configTiddlerFilter>> should be a filter that returns <$list filter=<<configTiddlerFilter>> />.
+
+I can select <<.param tiddler>>, <<.param storeTitle>>, and <<.param selectionStateTitle>> fairly arbitrarily (just making sure not to use titles of tiddlers that I do not want changed).
+
+This demonstration can now be invoked with the following macro call:
+
+<<kdi-demo-textmacrocall>>
+
+!!Demo
+
+Try typing in here: <$macrocall $name=keyboard-driven-input 
+        tiddler=<<tiddler>>
+        storeTitle=<<storeTitle>> 
+        selectionStateTitle=<<selectionStateTitle>> 
+        configTiddlerFilter=<<configTiddlerFilter>> 
+ />  
+
+Observe the changes in the various state tiddlers in the below table. Use <kbd><<displayshortcuts ((input-up))>></kbd> and <kbd><<displayshortcuts ((input-down))>></kbd> keys to navigate among filter results. If nothing changes, try a shorter input to widen the filter. If the input has zero length, the list will contain all non-system tiddlers.
+
+@@.tablestyle
+
+|Parameter name |Tiddler title |Contents of <<.field text>> field of the tiddler |h
+|<<.param tiddler>> |{{{[<tiddler>]}}} |<pre><$text text={{{[<tiddler>get[text]]}}}/></pre>|
+|<<.param storeTitle>> |{{{[<storeTitle>]}}} |<pre><$text text= {{{[<storeTitle>get[text]]}}}/></pre>|
+|<<.param selectionStateTitle>> |{{{[<selectionStateTitle>]}}} |<pre><$text text={{{[<selectionStateTitle>get[text]]}}}/></pre>|
+@@
+
+The <<.var keyboard-driven-input>> macro has many parameters available, including all the attributes of the enclosed ''edit-text'' widget, which make it very flexible in how it is used and how results can be displayed and interacted with.
+
+See also: [[Customising search results]] and [[$:/core/ui/DefaultSearchResultList]]
+
+<style>
+.tablestyle {width:100%;}
+.tablestyle td + td + td {width: 50%;}
+</style>

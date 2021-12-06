@@ -17,7 +17,7 @@ Export our filter function
 */
 exports.contains = function(source,operator,options) {
 	var results = [],
-		fieldname = (operator.suffix || "list").toLowerCase();
+		fieldname = operator.suffix || "list";
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
 			if(tiddler) {

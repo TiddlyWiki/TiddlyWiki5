@@ -91,12 +91,10 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				self.isLoggedIn = json.username !== "GUEST";
 				self.isReadOnly = !!json["read_only"];
 				self.isAnonymous = !!json.anonymous;
-
-				var isSseEnabled = !!json.sse_enabled;
 			}
 			// Invoke the callback if present
 			if(callback) {
-				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous,isSseEnabled);
+				callback(null,self.isLoggedIn,json.username,self.isReadOnly,self.isAnonymous);
 			}
 		}
 	});
@@ -116,6 +114,10 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 		},
 		callback: function(err) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging in:",options);
@@ -134,6 +136,10 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 		},
 		callback: function(err,data) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging out:",options);
@@ -182,14 +188,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
-	// Check for pre v5.2.0 method signature:
-	if(typeof callback !== "function" && typeof options === "function"){
-		var optionsArg = callback;
-		callback = options;
-		options = optionsArg;
-	}
-	options = options || {};
+TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
 		return callback(null,options.tiddlerInfo.adaptorInfo);
@@ -223,14 +222,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,options,callback) {
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-TiddlyWebAdaptor.prototype.loadTiddler = function(title,options,callback) {
-	// Check for pre v5.2.0 method signature:
-	if(typeof callback !== "function" && typeof options === "function"){
-		var optionsArg = callback;
-		callback = options;
-		options = optionsArg;
-	}
-	options = options || {};
+TiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {
 	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
@@ -249,14 +241,7 @@ Delete a tiddler and invoke the callback with (err)
 options include:
 tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
-TiddlyWebAdaptor.prototype.deleteTiddler = function(title,options,callback) {
-	// Check for pre v5.2.0 method signature:
-	if(typeof callback !== "function" && typeof options === "function"){
-		var optionsArg = callback;
-		callback = options;
-		options = optionsArg;
-	}
-	options = options || {};
+TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
 		return callback(null,options.tiddlerInfo.adaptorInfo);
@@ -361,8 +346,8 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 		return null;
 	} else {
 		return {
-			bag: decodeURIComponent(etag.substring(1,firstSlash)),
-			title: decodeURIComponent(etag.substring(firstSlash + 1,lastSlash)),
+			bag: $tw.utils.decodeURIComponentSafe(etag.substring(1,firstSlash)),
+			title: $tw.utils.decodeURIComponentSafe(etag.substring(firstSlash + 1,lastSlash)),
 			revision: etag.substring(lastSlash + 1,colon)
 		};
 	}

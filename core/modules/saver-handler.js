@@ -157,7 +157,8 @@ SaverHandler.prototype.saveWiki = function(options) {
 		return false;
 	}
 	var	variables = options.variables || {},
-		template = options.template || "$:/core/save/all",
+		template = (options.template || 
+		           this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {

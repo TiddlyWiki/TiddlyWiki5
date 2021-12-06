@@ -2,13 +2,13 @@ caption: duplicateslugs
 created: 20200509141702846
 modified: 20200509141702846
 op-input: a [[selection of titles|Title Selection]]
-op-output: the input titles transformed so that they only contain lower case letters, numbers, periods, dashes and underscores
-op-purpose: returns each item in the list in a human-readable form for use in URLs or filenames
+op-output: input titles that yield duplicate slugs
+op-purpose: find titles that yield duplicate slugs
 tags: [[Filter Operators]]
 title: duplicateslugs Operator
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.23">> The <<.olink slugify>> can be used to transform arbitrary tiddler titles into human readable strings suitable for use in URLs or filenames. However, itis possible for multiple different titles to slugify to the same string. The <<.olink duplicateslugs>> operator can be used to display a warning. For example:
+<<.from-version "5.1.23">> The <<.olink slugify>> operator can be used to transform arbitrary tiddler titles into human readable strings suitable for use in URLs or filenames. However, it is possible for multiple different titles to slugify to the same string. The <<.olink duplicateslugs>> operator can be used to display a warning. For example:
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$list filter="[!is[system]duplicateslugs[]limit[1]]" emptyMessage="There are no duplicate slugs">

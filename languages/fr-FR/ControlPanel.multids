@@ -122,7 +122,7 @@ Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
 Saving/TiddlySpot/Caption: Enregistreur ~TiddlySpot
-Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]] ou vers un serveur distant compatible. Voir [[here|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] pour plus d'informations sur la configuration de la sauvegarde sur ~TiddlySpot et ~TiddlyHost.
+Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]] ou vers un serveur distant compatible. Voir [[ici|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] pour plus d'informations sur la configuration de la sauvegarde sur ~TiddlySpot et ~TiddlyHost.
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<nom du wiki>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée, comme `http://example.com/store.php`.//

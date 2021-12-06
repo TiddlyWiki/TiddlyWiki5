@@ -154,6 +154,12 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
+		navigateFromClientTop: bounds.top,
+		navigateFromClientLeft: bounds.left,
+		navigateFromClientWidth: bounds.width,
+		navigateFromClientRight: bounds.right,
+		navigateFromClientBottom: bounds.bottom,
+		navigateFromClientHeight: bounds.height,
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
@@ -201,7 +207,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip) {
+	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip ||
+		changedAttributes["class"] || changedAttributes.tabindex || changedAttributes.draggable || changedAttributes.tag) {
 		this.refreshSelf();
 		return true;
 	}

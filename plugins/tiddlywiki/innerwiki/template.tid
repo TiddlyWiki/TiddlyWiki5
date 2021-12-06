@@ -1,11 +1,7 @@
 title: $:/plugins/tiddlywiki/innerwiki/template
 
 \define saveTiddlerFilter()
-$:/boot/boot.css
-$:/boot/boot.js
-$:/boot/bootprefix.js
 $:/core
-$:/library/sjcl.js
 $:/plugins/tiddlywiki/innerwiki
 $:/plugins/tiddlywiki/railroad
 $:/themes/tiddlywiki/snowwhite

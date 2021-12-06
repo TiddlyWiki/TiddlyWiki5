@@ -19,71 +19,73 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 \end
 
 \define plugin-table-body(type,disabledMessage,default-popup-state)
+\whitespace trim
 <div class="tc-plugin-info-chunk tc-plugin-info-toggle">
-<$reveal type="nomatch" state=<<popup-state>> text="yes" default="""$default-popup-state$""">
-<$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="yes">
-{{$:/core/images/chevron-right}}
-</$button>
-</$reveal>
-<$reveal type="match" state=<<popup-state>> text="yes" default="""$default-popup-state$""">
-<$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="no">
-{{$:/core/images/chevron-down}}
-</$button>
-</$reveal>
+	<$reveal type="nomatch" state=<<popup-state>> text="yes" default="""$default-popup-state$""">
+		<$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="yes">
+			{{$:/core/images/chevron-right}}
+		</$button>
+	</$reveal>
+	<$reveal type="match" state=<<popup-state>> text="yes" default="""$default-popup-state$""">
+		<$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="no">
+			{{$:/core/images/chevron-down}}
+		</$button>
+	</$reveal>
 </div>
 <div class="tc-plugin-info-chunk tc-plugin-info-icon">
-<$transclude tiddler=<<currentTiddler>> subtiddler=<<plugin-icon-title>>>
-<$transclude tiddler="$:/core/images/plugin-generic-$type$"/>
-</$transclude>
+	<$transclude tiddler=<<currentTiddler>> subtiddler=<<plugin-icon-title>>>
+		<$transclude tiddler="$:/core/images/plugin-generic-$type$"/>
+	</$transclude>
 </div>
 <div class="tc-plugin-info-chunk tc-plugin-info-description">
-<h1>
-''<$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}}/>'': <$view field="description"><$view field="title"/></$view> $disabledMessage$
-</h1>
-<h2>
-<$view field="title"/>
-</h2>
-<h2>
-<div><em><$view field="version"/></em></div>
-</h2>
+	<h1>
+		''<$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}}/>'':&nbsp;<$view field="description"><$view field="title"/></$view>&nbsp;$disabledMessage$
+	</h1>
+	<h2>
+		<$view field="title"/>
+	</h2>
+	<h2>
+		<div><em><$view field="version"/></em></div>
+	</h2>
 </div>
 \end
 
 \define plugin-info(type,default-popup-state)
+\whitespace trim
 <$set name="popup-state" value=<<popup-state-macro>>>
-<$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
-<$link to={{!!title}} class="tc-plugin-info">
-<<plugin-table-body type:"$type$" default-popup-state:"""$default-popup-state$""">>
-</$link>
-</$reveal>
-<$reveal type="match" state=<<plugin-disable-title>> text="yes">
-<$link to={{!!title}} class="tc-plugin-info tc-plugin-info-disabled">
-<<plugin-table-body type:"$type$" default-popup-state:"""$default-popup-state$""" disabledMessage:"<$macrocall $name='lingo' title='Disabled/Status'/>">>
-</$link>
-</$reveal>
-<$reveal type="match" text="yes" state=<<popup-state>> default="""$default-popup-state$""">
-<div class="tc-plugin-info-dropdown">
-<div class="tc-plugin-info-dropdown-body">
-<$list filter="[all[current]] -[[$:/core]]">
-<div style="float:right;">
-<$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
-<$button set=<<plugin-disable-title>> setTo="yes" tooltip={{$:/language/ControlPanel/Plugins/Disable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Disable/Caption}}>
-<<lingo Disable/Caption>>
-</$button>
-</$reveal>
-<$reveal type="match" state=<<plugin-disable-title>> text="yes">
-<$button set=<<plugin-disable-title>> setTo="no" tooltip={{$:/language/ControlPanel/Plugins/Enable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Enable/Caption}}>
-<<lingo Enable/Caption>>
-</$button>
-</$reveal>
-</div>
-</$list>
-<$set name="tabsList" filter="[<currentTiddler>list[]] contents">
-<$macrocall $name="tabs" state=<<tabs-state-macro>> tabsList=<<tabsList>> default={{{ [enlist<tabsList>] }}} template="$:/core/ui/PluginInfo"/>
-</$set>
-</div>
-</div>
-</$reveal>
+	<$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
+		<$link to={{!!title}} class="tc-plugin-info">
+			<<plugin-table-body type:"$type$" default-popup-state:"""$default-popup-state$""">>
+		</$link>
+	</$reveal>
+	<$reveal type="match" state=<<plugin-disable-title>> text="yes">
+		<$link to={{!!title}} class="tc-plugin-info tc-plugin-info-disabled">
+			<<plugin-table-body type:"$type$" default-popup-state:"""$default-popup-state$""" disabledMessage:"<$macrocall $name='lingo' title='Disabled/Status'/>">>
+		</$link>
+	</$reveal>
+	<$reveal type="match" text="yes" state=<<popup-state>> default="""$default-popup-state$""">
+		<div class="tc-plugin-info-dropdown">
+			<div class="tc-plugin-info-dropdown-body">
+				<$list filter="[all[current]] -[[$:/core]]">
+					<div style="float:right;">
+						<$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
+							<$button set=<<plugin-disable-title>> setTo="yes" tooltip={{$:/language/ControlPanel/Plugins/Disable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Disable/Caption}}>
+								<<lingo Disable/Caption>>
+							</$button>
+						</$reveal>
+						<$reveal type="match" state=<<plugin-disable-title>> text="yes">
+							<$button set=<<plugin-disable-title>> setTo="no" tooltip={{$:/language/ControlPanel/Plugins/Enable Hint}} aria-label={{$:/language/ControlPanel/Plugins/Enable/Caption}}>
+								<<lingo Enable/Caption>>
+							</$button>
+						</$reveal>
+					</div>
+				</$list>
+				<$set name="tabsList" filter="[<currentTiddler>list[]] contents">
+					<$macrocall $name="tabs" state=<<tabs-state-macro>> tabsList=<<tabsList>> default={{{ [enlist<tabsList>] }}} template="$:/core/ui/PluginInfo"/>
+				</$set>
+			</div>
+		</div>
+	</$reveal>
 </$set>
 \end
 

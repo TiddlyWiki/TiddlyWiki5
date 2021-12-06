@@ -3,6 +3,7 @@ title: $:/language/Import/
 Editor/Import/Heading: Import images and insert them into the editor.
 Imported/Hint: The following tiddlers were imported:
 Listing/Cancel/Caption: Cancel
+Listing/Cancel/Warning: Do you wish to cancel the import?
 Listing/Hint: These tiddlers are ready to import:
 Listing/Import/Caption: Import
 Listing/Select/Caption: Select
@@ -29,5 +30,5 @@ Upgrader/System/Warning: Core module tiddler.
 Upgrader/System/Alert: You are about to import a tiddler that will overwrite a core module tiddler. This is not recommended as it may make the system unstable.
 Upgrader/ThemeTweaks/Created: Migrated theme tweak from <$text text=<<from>>/>.
 Upgrader/Tiddler/Disabled: Disabled tiddler.
-Upgrader/Tiddler/Selected: User selected.
+Upgrader/Tiddler/Selected: Selected tiddler.
 Upgrader/Tiddler/Unselected: Unselected tiddler.

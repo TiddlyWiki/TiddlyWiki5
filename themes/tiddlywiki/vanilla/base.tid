@@ -135,7 +135,7 @@ h1 {
 
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2;
-	font-weight: 300;
+	font-weight: normal;
 }
 
 pre {
@@ -331,10 +331,6 @@ table tfoot tr td {
 .tc-tiddler-body > iframe {
 	width: 100%;
 	height: 600px;
-}
-
-:root {
-	color-scheme: {{{ [{$:/palette}get[color-scheme]] }}};
 }
 
 /*
@@ -730,7 +726,7 @@ button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
 	padding: 0.16em 0.7em;
 	font-size: 0.9em;
-	font-weight: 400;
+	font-weight: normal;
 	line-height: 1.2em;
 	color: <<colour tag-foreground>>;
 	white-space: nowrap;
@@ -840,7 +836,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-sidebar-header .tc-title a.tc-tiddlylink-resolves {
-	font-weight: 300;
+	font-weight: normal;
 }
 
 .tc-sidebar-header .tc-sidebar-lists p {
@@ -1048,10 +1044,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	width: 1%; /* Makes this column be as narrow as possible */
 	text-align: right;
 	font-style: italic;
-	font-weight: 200;
+	font-weight: normal;
 }
 
 .tc-view-field-value {
+	word-break: break-all;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
@@ -1087,7 +1084,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-site-title,
 .tc-titlebar {
-	font-weight: 300;
+	font-weight: normal;
 	font-size: 2.35em;
 	line-height: 1.35em;
 	color: <<colour tiddler-title-foreground>>;
@@ -1119,7 +1116,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-subtitle {
 	font-size: 0.9em;
 	color: <<colour tiddler-subtitle-foreground>>;
-	font-weight: 300;
+	font-weight: normal;
 }
 
 .tc-subtitle .tc-tiddlylink {
@@ -1322,6 +1319,15 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-editor-toolbar .tc-search-results {
 	padding: 0;
+}
+
+.tc-editor-toolbar button.tc-editortoolbar-stamp-button + .tc-popup .tc-drop-down > p {
+	margin: 0;
+	padding: 0;
+}
+
+.tc-editor-toolbar button.tc-editortoolbar-stamp-button + .tc-popup .tc-drop-down a.tc-tiddlylink {
+	font-weight: normal;
 }
 
 /*
@@ -1583,7 +1589,7 @@ html body.tc-body.tc-single-tiddler-window {
 	justify-content: center;
 	background-color: <<color background>>;
 	border: 4px dashed <<color modal-border>>;
-	font-weight: 600;
+	font-weight: bold;
 	font-size: 150%;
 	opacity: 0.8;
 	color: <<color foreground>>;
@@ -1945,6 +1951,9 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top: 1px solid <<colour modal-footer-border>>;
 }
 
+.tc-modal-prevent-scroll {
+	overflow: hidden;
+}
 
 /*
 ** Centered modals
@@ -2011,7 +2020,7 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour tab-foreground>>;
 	padding: 3px 5px 3px 5px;
 	margin-right: 0.3em;
-	font-weight: 300;
+	font-weight: normal;
 	border: none;
 	background: inherit;
 	background-color: <<colour tab-background>>;
@@ -2692,13 +2701,13 @@ input.tc-palette-manager-colour-input {
 
 .tc-table-of-contents li li li {
 	font-size: 0.95em;
-	font-weight: 200;
+	font-weight: normal;
 	line-height: 1.5;
 }
 
 .tc-table-of-contents li li li li {
 	font-size: 0.95em;
-	font-weight: 200;
+	font-weight: normal;
 }
 
 .tc-tabbed-table-of-contents {

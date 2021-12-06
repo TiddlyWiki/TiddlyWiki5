@@ -223,6 +223,7 @@ exports.removeArrayEntries = function(array,value) {
 			array.splice(p,1);
 		}
 	}
+	return array;
 };
 
 /*
@@ -381,6 +382,15 @@ exports.formatDateString = function(date,template) {
 			}],
 			[/^0WW/, function() {
 				return $tw.utils.pad($tw.utils.getWeek(date));
+			}],
+			[/^0ddddd/, function() {
+				return $tw.utils.pad(Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24),3);
+			}],
+			[/^ddddd/, function() {
+				return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+			}],
+			[/^dddd/, function() {
+				return [7,1,2,3,4,5,6][date.getDay()];
 			}],
 			[/^ddd/, function() {
 				return $tw.language.getString("Date/Short/Day/" + date.getDay());
@@ -740,9 +750,8 @@ exports.isValidFieldName = function(name) {
 	if(!name || typeof name !== "string") {
 		return false;
 	}
-	name = name.toLowerCase().trim();
-	var fieldValidatorRegEx = /^[a-z0-9\-\._]+$/mg;
-	return fieldValidatorRegEx.test(name);
+	// Since v5.2.x, there are no restrictions on characters in field names
+	return name;
 };
 
 /*

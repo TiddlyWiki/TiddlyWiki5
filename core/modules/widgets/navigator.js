@@ -160,6 +160,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 
 // Close a specified tiddler
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-closing-tiddler",event);
 	var title = event.param || event.tiddlerTitle,
 		storyList = this.getStoryList();
 	// Look for tiddlers with this title to close
@@ -183,7 +184,8 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 
 // Place a tiddler in edit mode
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
-	var editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event);
+	var editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event),
+	    win = event.event && event.event.view ? event.event.view : window;
 	if(!editTiddler) {
 		return false;
 	}
@@ -192,7 +194,7 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 		return self.wiki.isShadowTiddler(title) && !self.wiki.tiddlerExists(title);
 	}
 	function confirmEditShadow(title) {
-		return confirm($tw.language.getString(
+		return win.confirm($tw.language.getString(
 			"ConfirmEditShadowTiddler",
 			{variables:
 				{title: title}
@@ -225,7 +227,8 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		storyList = this.getStoryList(),
 		originalTitle = tiddler ? tiddler.fields["draft.of"] : "",
 		originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined,
-		confirmationTitle;
+		confirmationTitle,
+	    	win = event.event && event.event.view ? event.event.view : window;
 	if(!tiddler) {
 		return false;
 	}
@@ -238,7 +241,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !confirm($tw.language.getString(
+	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !win.confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
@@ -304,7 +307,8 @@ NavigatorWidget.prototype.generateDraftTitle = function(title) {
 NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList();
+		storyList = this.getStoryList(),
+	    	win = event.event && event.event.view ? event.event.view : window;
 	// Replace the original tiddler with the draft
 	if(tiddler) {
 		var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
@@ -313,7 +317,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 			var isRename = draftOf !== draftTitle,
 				isConfirmed = true;
 			if(isRename && this.wiki.tiddlerExists(draftTitle)) {
-				isConfirmed = confirm($tw.language.getString(
+				isConfirmed = win.confirm($tw.language.getString(
 					"ConfirmOverwriteTiddler",
 					{variables:
 						{title: draftTitle}
@@ -362,6 +366,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 // Take a tiddler out of edit mode without saving the changes
 NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-cancelling-tiddler", event);
+	var win = event.event && event.event.view ? event.event.view : window;
 	// Flip the specified tiddler from draft back to the original
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
@@ -372,7 +377,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 			originalTiddler = this.wiki.getTiddler(originalTitle),
 			storyList = this.getStoryList();
 		if(this.wiki.isDraftModified(draftTitle)) {
-			isConfirmed = confirm($tw.language.getString(
+			isConfirmed = win.confirm($tw.language.getString(
 				"ConfirmCancelTiddler",
 				{variables:
 					{title: draftTitle}

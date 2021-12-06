@@ -1,0 +1,3 @@
+title: $:/core/ui/StoryTiddlerTemplate
+
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/StoryTiddlerTemplateFilter]get[text]] :and[!is[blank]else{$:/config/ui/ViewTemplate}] }}} />

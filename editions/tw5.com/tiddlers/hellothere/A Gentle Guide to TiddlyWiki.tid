@@ -1,5 +1,5 @@
 created: 20150325170720682
-modified: 20150926171049725
+modified: 20210519110623819
 tags: HelloThere
 title: A Gentle Guide to TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -16,4 +16,7 @@ How can you make ~TiddlyWiki work for you? We recommend you start with our intro
 
 <<list-links "[tag[HelloThere]]">>
 
-Also see [[TiddlyWiki Video Tutorials by Francis Meetze]]
+Also see:
+
+* [["Grok TiddlyWiki" by Soren Bjornstad]]
+* [[TiddlyWiki Video Tutorials by Francis Meetze]]

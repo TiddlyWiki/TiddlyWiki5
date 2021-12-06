@@ -1,6 +1,6 @@
 created: 20201214044413473
-modified: 20201214053018350
-tags: 
+modified: 20211118025845599
+tags: [[Filter Syntax]]
 title: Named Filter Run Prefix
 
 <$set name="prefixlist" filter="""[all[shadows+tiddlers]has[module-type]module-type[filterrunprefix]trim:prefix[$:/core/modules/filterrunprefixes/]trim:suffix[.js]addprefix["]addsuffix["]join[|]addprefix[(]addsuffix[)]]""">

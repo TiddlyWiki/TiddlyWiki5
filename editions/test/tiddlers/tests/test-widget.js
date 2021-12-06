@@ -247,6 +247,40 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[2].sequenceNumber).toBe(4);
 	});
 
+	it("should deal with the let widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "lookup"},
+			{title: "TiddlerTwo", lookup: "value", newlookup: "value", wrong: "wrong"},
+			{title: "TiddlerThree", text: "wrong", value: "Happy Result", wrong: "ALL WRONG!!"}
+		]);
+		var text="\\define macro() TiddlerThree\n"+
+			"\\define currentTiddler() TiddlerOne\n"+
+			"<$let "+
+				"field={{!!text}} "+
+				"currentTiddler='TiddlerTwo' "+
+				"field={{{ [all[current]get<field>] }}} "+
+				"currentTiddler=<<macro>>>"+
+					"<$transclude field=<<field>>/></$let>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>Happy Result</p>");
+
+		// This is important. $Let needs to be aware enough not to let its
+		// own variables interfere with its ability to recognize no change.
+		// Doesn't matter that nothing has changed, we just need to make sure
+		// it recognizes that that its outward facing variables are unchanged
+		// EVEN IF some intermediate variables did change, there's no need to
+		// refresh.
+		wiki.addTiddler({title: "TiddlerOne", text: "newlookup"});
+		expect(widgetNode.refresh({})).toBe(false);
+
+		// But if we make a change that might result in different outfacing
+		// variables, then it should refresh
+		wiki.addTiddler({title: "TiddlerOne", text: "badlookup"});
+		expect(widgetNode.refresh({})).toBe(true);
+	});
+
 	it("should deal with attributes specified as macro invocations", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node
@@ -465,6 +499,31 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[13].sequenceNumber).toBe(43);
 		expect(wrapper.children[0].children[14].sequenceNumber).toBe(44);
 		expect(wrapper.children[0].children[15].sequenceNumber).toBe(45);
+		//Remove last tiddler
+		wiki.deleteTiddler("TiddlerTwo");
+		//Refresh
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerTwo"]);
+		//Test the refreshing
+		expect(wrapper.innerHTML).toBe("<p>Jalapeno Peppers1yesnoLemon Squash2nonoJolly Old World3nonoSomething4noyes</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(18);
+		expect(wrapper.children[0].children[1].sequenceNumber).toBe(19);
+		expect(wrapper.children[0].children[2].sequenceNumber).toBe(20);
+		expect(wrapper.children[0].children[3].sequenceNumber).toBe(21);
+		expect(wrapper.children[0].children[4].sequenceNumber).toBe(22);
+		expect(wrapper.children[0].children[5].sequenceNumber).toBe(23);
+		expect(wrapper.children[0].children[6].sequenceNumber).toBe(24);
+		expect(wrapper.children[0].children[7].sequenceNumber).toBe(25);
+		expect(wrapper.children[0].children[8].sequenceNumber).toBe(26);
+		expect(wrapper.children[0].children[9].sequenceNumber).toBe(27);
+		expect(wrapper.children[0].children[10].sequenceNumber).toBe(28);
+		expect(wrapper.children[0].children[11].sequenceNumber).toBe(29);
+		expect(wrapper.children[0].children[12].sequenceNumber).toBe(50);
+		expect(wrapper.children[0].children[13].sequenceNumber).toBe(51);
+		expect(wrapper.children[0].children[14].sequenceNumber).toBe(52);
+		expect(wrapper.children[0].children[15].sequenceNumber).toBe(53);
 	});
 
 	it("should deal with the list widget followed by other widgets", function() {

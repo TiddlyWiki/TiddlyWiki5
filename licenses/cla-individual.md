@@ -449,3 +449,28 @@ J. Wilhelm, @jeremyredhead, 2021/01/27
 Quentin Minster, @laomaiweng, 2021/03/10
 
 Cindy Ruan, @cdruan, 2021/03/18
+
+Urban Alič, @ualich, 2021/05/06
+
+Joe Bordes, @joebordes, 2021/05/30
+
+Frank Bruns-Ballhausen, @FBB-de, 2021/06/09
+
+Álvaro González Rincón, @Alzacon, 2021/06/10
+
+RJ Skerry-Ryan, @rryan, 2021/07/03
+
+J. Song, @8d1h, 2021/08/05
+
+Soren Bjornstad, @sobjornstad, 2021/08/18
+
+Boris Mann, @bmann, 2021/09/28
+ 
+Maurycy Zarzycki, @evidentlycube, 2021-10-01
+
+Brian Theado, @btheado, 2021-10-10
+
+@Telumire, 2021-10-18
+
+@eiro10, 2021-11-14
+
