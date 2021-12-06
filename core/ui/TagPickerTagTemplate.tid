@@ -13,7 +13,7 @@ title: $:/core/ui/TagPickerTagTemplate
 <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 <<actions>>
-<$set name="backgroundColor" value={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]get[text]] }}}>
+<$set name="backgroundColor" value={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}>
 <$wikify name="foregroundColor" text="""<$macrocall $name="contrastcolour" target=<<backgroundColor>> fallbackTarget=<<fallbackTarget>> colourA=<<colourA>> colourB=<<colourB>>/>""">
 <span class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>>>
 {{||$:/core/ui/TiddlerIcon}}<$view field="title" format="text"/>
