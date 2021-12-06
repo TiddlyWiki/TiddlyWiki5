@@ -1,0 +1,9 @@
+title: $:/snippets/DebugStylesheets
+
+<style>[test]{list-style:'❌'}</style>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]has[modified]]" counter="n">
+<style>{{!!text}}[test="<<n>>"]{list-style:disc;}</style>
+<li test=<<n>>><$link/></li>
+</$list>
+</ul>

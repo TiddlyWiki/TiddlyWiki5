@@ -1,3 +1,6 @@
+created: 20211117231152248
+modified: 20211119231156728
+tags: [[Release Template]]
 title: ReleaseTemplate
 
 <h2><$link to=<<currentTab>>><$view tiddler=<<currentTab>> field="title"/></$link></h2>
