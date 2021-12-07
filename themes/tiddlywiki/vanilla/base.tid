@@ -2378,6 +2378,11 @@ html body.tc-body.tc-single-tiddler-window {
 	align-items: center;
 }
 
+.tc-sidebar-lists a.tc-tiddlylink.tc-plugin-info {
+	color: <<colour tiddler-link-foreground>>;
+}
+
+
 .tc-plugin-info-sub-plugins .tc-plugin-info {
 	margin: 0.5em;
 	background: <<colour background>>;
