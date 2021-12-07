@@ -65,6 +65,7 @@ The chief advantage is that the LetWidget performs the variable assignments in t
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6015">> image picker in theme tweaks to not dismiss when an image is selected
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5998">> a [[new hidden setting|Hidden Setting: Show Edit Preview per Tiddler]] for controlling the visibility of the editor preview pane on a per-tiddler basis
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/b0f72d069086dee8506758c643f953f9ec55f403">> sidebar plugin listing to show icon and more details
 
 ! Widget Improvements
 
