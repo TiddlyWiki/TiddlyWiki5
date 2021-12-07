@@ -1,0 +1,36 @@
+created: 20211204161649863
+modified: 20211206165129215
+tags: Learning Cascades [[Tiddler Icon Cascade]] [[Customise TiddlyWiki]]
+title: How to create a custom tiddler icon rule
+type: text/vnd.tiddlywiki
+
+Here we show how to add a rule to the [[Tiddler Icon Cascade]] that causes tiddlers with the tag <<tag "TableOfContents">> to be given the "globe" icon <<.icon $:/core/images/globe>> and tiddlers with the tag <<tag "Working with TiddlyWiki">> to be given the "help" icon <<.icon $:/core/images/help>>.
+
+<<.tip "[[How to create a custom tiddler colour rule]] describes how the same tiddlers have been given a custom colour">>
+
+First, we add a new step to the tiddler icon cascade. The new filter step is:
+
+```
+[tag[TableOfContents]then[$:/core/images/globe]]
+[tag[Working with TiddlyWiki]then[$:/core/images/help]] 
+```
+
+It can be read as:
+
+```
+If the tiddler has the tag "TableOfContents" then return $:/core/images/globe
+Else if the tiddler has the tag "Working with TiddlyWiki" then return $:/core/images/help
+```
+
+The tiddler icon cascade is defined by the tag <<tag "$:/tags/TiddlerIconFilter">>, so we need to create a configuration tiddler with that tag.
+
+We also need to make sure that it is inserted at the correct point in the cascade:
+
+* The new rule must be after the "icon-field" rule to ensure that tiddlers with an explicit ''icon'' field will respect the value of that field
+* The new rule must be before the "default" icon otherwise it will never be seen if the default icon is specified
+
+The control panel "Cascades" tab shows that this can be achieved by inserting the new step immediately before the default step using the `list-before` field.
+
+The full list of fields in the configuration tiddler is:
+
+<<.tiddler-fields "$:/_tw5.com/CustomTiddlerIconCascadeDemo">>

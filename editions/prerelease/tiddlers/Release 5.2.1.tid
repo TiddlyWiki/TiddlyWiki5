@@ -1,6 +1,6 @@
 caption: 5.2.1
-created: 20211003152250369
-modified: 20211003152250369
+created: 20211206165748330
+modified: 20211206165748330
 tags: ReleaseNotes
 title: Release 5.2.1
 type: text/vnd.tiddlywiki
@@ -15,15 +15,30 @@ type: text/vnd.tiddlywiki
 
 !! <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6168">> New Filter Cascade Mechanism
 
-There are two parts to these changes. The key is a new [[Cascade Filter Run Prefix]] that takes a list of filters and runs them in order, returning the result of the first one to return a value. It forms the basis of a new flexible mechanism for choosing between multiple options. The second part is a series of improvements based on this new filter cascade mechanism:
+The [[cascade mechanism|Cascades]] provides a flexible way to choose between multiple options. Crucially, it is done in a way that makes it simple for plugins to tweak the logic or add their own options.
 
-* Story Tiddler Templates
-* View Template Body
-* View Template Title
-* Tiddler Colour
-* Tiddler Icons
+Some of the things that can be done with cascades are:
+
+* Replacing the default tiddler body template with a custom one for a certain type of tiddler
+* Giving all journal tiddlers a custom icon
+* Implementing a custom editor for certain types of tiddler
+
+There are two parts to these changes. The underpinning is a new [[Cascade Filter Run Prefix]] that takes a list of filters and runs them in order, returning the result of the first one to return a value.
+
+The second part is a series of improvements based on this new filter cascade mechanism. Conditional logic that was previously hidden within core templates can now be extended and tweaked much more easily than before.
+
+Choosing the following elements of the core user interface is now handled with cascades:
+
+* [[Story Tiddler Templates|Story Tiddler Template Cascade]]
+* [[Tiddler Colour|Tiddler Colour Cascade]]
+* [[Tiddler Icons|Tiddler Icon Cascade]]
+* [[View Template Body|View Template Body Cascade]]
+* [[View Template Title|View Template Title Cascade]]
+* [[Edit Template Body|Edit Template Body Cascade]]
 
 The cascades can be inspected in $:/ControlPanel under ''Info'' -> ''Advanced'' -> ''Cascades''.
+
+See [[Cascades]] for more information.
 
 !! <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6148">> New LetWidget
 
@@ -40,9 +55,11 @@ The chief advantage is that the LetWidget performs the variable assignments in t
 ! Bug Fixes
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6261">> fixed issue with drag and drop in Chrome 96
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6278">> fixed issue with drag and drop and the [[CodeMirror Plugin]] in Chrome 96
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6013">> refreshing of LinkWidget attributes
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6107">> crash when using "source=basename-uri-decoded" in tiddlywiki.files
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8ae4428332e03a1fdaee26f777a0c3a372fff401">> ''$timestamp'' attribute ignored when using ActionSetFieldWidget to set the value of an index
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/2af632a46d74e223f99a67c6aaa5bc6931e9466e">> crash during static rendering of [[CodeMirror Plugin]]
 
 ! Usability Improvements
 

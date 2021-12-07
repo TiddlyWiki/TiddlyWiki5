@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20211124193218807
+modified: 20211129014550442
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -23,7 +23,9 @@ If a run has:
 * the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored. <<.from-version "5.1.18">>
 * named prefixes for filter runs are available. <<.from-version "5.1.23">>
 * named prefix `:filter`, it receives the filter output so far as its input. The next run is evaluated for each title of the input, removing every input title for which the output is an empty list. <<.from-version "5.1.23">>
+** See [[Filter Filter Run Prefix]].
 * named prefix `:intersection` replaces all filter output so far with titles that are present in the output of this run, as well as the output from previous runs. Forms the input for the next run. <<.from-version "5.1.23">>
+** See [[Intersection Filter Run Prefix]].
 * named prefix `:reduce` replaces all filter output so far with a single item by repeatedly applying a formula to each input title. A typical use is to add up the values in a given field of each input title. <<.from-version "5.1.23">>
 ** See [[Reduce Filter Run Prefix]].
 * named prefix `:sort` sorts all filter output so far by applying this run to each input title and sorting according to that output. <<.from-version "5.2.0">>

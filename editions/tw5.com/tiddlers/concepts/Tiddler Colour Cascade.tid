@@ -1,0 +1,16 @@
+created: 20211206160300525
+modified: 20211206165301231
+tags: Cascades
+title: Tiddler Colour Cascade
+type: text/vnd.tiddlywiki
+
+The tiddler colour cascade is a [[cascade|Cascades]] used to choose which colour should be used for a particular tiddler.
+
+The default tiddler colour cascade consists of:
+
+# If the tiddler has a ''color'' field, use the value as the colour
+# If the tiddler $:/config/DefaultTiddlerColour exists, use the value as the colour
+
+You can see the current settings for the tiddler colour cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades''  -> ''Tiddler Colour'' tab.
+
+<<list-links "[tag[Tiddler Colour Cascade]]">>
