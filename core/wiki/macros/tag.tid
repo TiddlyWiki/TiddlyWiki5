@@ -22,7 +22,7 @@ $actions$<$transclude tiddler="""$icon$"""/><$view tiddler=<<__tag__>> field="ti
 \define tag-pill(tag,element-tag:"span",element-attributes:"",actions:"")
 <span class="tc-tag-list-item" data-tag-title=<<__tag__>>>
 <$let currentTiddler=<<__tag__>>>
-<$macrocall $name="tag-pill-body" tag=<<__tag__>> icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]get[text]] }}} colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]get[text]] }}} palette={{$:/palette}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
+<$macrocall $name="tag-pill-body" tag=<<__tag__>> icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}} colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}} palette={{$:/palette}} element-tag="""$element-tag$""" element-attributes="""$element-attributes$""" actions="""$actions$"""/>
 </$let>
 </span>
 \end
