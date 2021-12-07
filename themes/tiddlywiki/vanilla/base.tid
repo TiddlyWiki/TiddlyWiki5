@@ -2369,6 +2369,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-plugin-info {
 	display: flex;
+	text-shadow: none;
 	border: 1px solid <<colour muted-foreground>>;
 	fill: <<colour muted-foreground>>;
 	background-color: <<colour background>>;
