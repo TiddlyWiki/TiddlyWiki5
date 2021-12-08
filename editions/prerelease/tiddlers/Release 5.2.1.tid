@@ -101,6 +101,7 @@ The chief advantage is that the LetWidget performs the variable assignments in t
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* <<contributor bmann>>
 * <<contributor btheado>>
 * <<contributor BramChen>>
 * <<contributor BurningTreeC>>
@@ -112,4 +113,5 @@ The chief advantage is that the LetWidget performs the variable assignments in t
 * <<contributor pmario>>
 * <<contributor saqimtiaz>>
 * <<contributor Telumire>>
+* <<contributor tw-FRed>>
 * <<contributor twMat>>
