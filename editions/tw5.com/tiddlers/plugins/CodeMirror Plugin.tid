@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 
 The CodeMirror plugin adds a sophisticated web-based editor to TiddlyWiki.
 
-See [ext[https://tiddlywiki.com/plugins/tiddlywiki/codemirror|plugins/tiddlywiki/codemirror]] for a demo.
+See the demo at [ext[plugins/tiddlywiki/codemirror|https://tiddlywiki.com/plugins/tiddlywiki/codemirror]].

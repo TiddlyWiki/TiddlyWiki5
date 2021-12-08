@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 
 This experimental plugin adds the ability to display WikiText written for the original Classic version of TiddlyWiki.
 
-See [ext[https://tiddlywiki.com/plugins/tiddlywiki/tw2parser|plugins/tiddlywiki/tw2parser]]
+See the demo at [ext[plugins/tiddlywiki/tw2parser|https://tiddlywiki.com/plugins/tiddlywiki/tw2parser]]

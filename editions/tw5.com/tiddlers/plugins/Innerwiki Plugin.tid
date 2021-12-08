@@ -8,4 +8,4 @@ The Innerwiki Plugin enables TiddlyWiki to embed a modified copy of itself (an "
 
 In the browser, innerwikis are displayed as an embedded iframe. Under Node.js [[Google's Puppeteer|https://pptr.dev/]] is used to load the innerwikis as off-screen web pages and then snapshot them as a PNG image.
 
-See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/innerwiki|plugins/tiddlywiki/innerwiki]]
+See the demo at [ext[plugins/tiddlywiki/innerwiki|https://tiddlywiki.com/plugins/tiddlywiki/innerwiki]]

@@ -9,4 +9,4 @@ The Dynaview Plugin makes it possible to build user interfaces that dynamically 
 * CSS classes that allow rendering to be deferred until the output is scrolled into view
 * CSS classes that allow the opacity of DOM elements to vary according to the current zoom level
 
-See the demo at [ext[https://tiddlywiki.com/plugins/tiddlywiki/dynaview|plugins/tiddlywiki/dynaview]]
+See the demo at [ext[plugins/tiddlywiki/dynaview|https://tiddlywiki.com/plugins/tiddlywiki/dynaview]].
