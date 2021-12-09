@@ -12,6 +12,12 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.0...v5.2.1]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[Mohammad Rahmani|https://github.com/kookma]] and [[Elise Springer|https://www.wesleyan.edu/academics/faculty/espringer/profile.html]] for their winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/GU0TPGNMPvw/m/y1SyQk_nAQAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/cb43b91ab6b14c2a16af917cfab0e5b2371502c6/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
 ! Highlights
 
 !! <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6168">> New Filter Cascade Mechanism
