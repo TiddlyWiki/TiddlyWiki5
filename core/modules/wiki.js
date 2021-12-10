@@ -638,14 +638,20 @@ exports.getTagMap = function() {
 Lookup a given tiddler and return a list of all the tiddlers that include it in the specified list field
 */
 exports.findListingsOfTiddler = function(targetTitle,fieldName) {
+	var titles,
+		fieldIndexer = this.getIndexer("FieldIndexer");
 	fieldName = fieldName || "list";
-	var titles = [];
-	this.each(function(tiddler,title) {
-		var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
-		if(list && list.indexOf(targetTitle) !== -1) {
-			titles.push(title);
-		}
-	});
+	if(fieldIndexer) {
+		titles = fieldIndexer.lookup(fieldName, targetTitle);
+	} else {
+		titles = [];
+		this.each(function(tiddler,title) {
+			var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
+			if(list && list.indexOf(targetTitle) !== -1) {
+				titles.push(title);
+			}
+		});
+	}
 	return titles;
 };
 
