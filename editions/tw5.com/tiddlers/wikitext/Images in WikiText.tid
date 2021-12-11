@@ -63,6 +63,6 @@ Renders as:
 ! Importing Images
 
 Use the <<.button import>> button (under the <<.sidebar-tab Tools>> tab in the sidebar), or drag and drop.
-See [[ImportingTiddlers]] for details.
+See [[Importing Tiddlers]] for details.
 
 <<.from-version "5.2.0">> You can also import images by dropping or pasting images into the tiddler editor.
