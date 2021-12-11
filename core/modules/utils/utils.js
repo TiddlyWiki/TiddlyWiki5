@@ -336,6 +336,10 @@ exports.formatTitleString = function(template,options) {
 	return result;
 };
 
+exports.isValidDate = function(date) {
+	return (date instanceof Date) && !isNaN(date.valueOf());
+}
+
 exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,

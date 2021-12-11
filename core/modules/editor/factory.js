@@ -32,6 +32,11 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 
 	/*
+	Initialize the global List of type modules
+	*/
+	EditTextWidget.typeModules = $tw.modules.getModulesByTypeAsHashmap("inputtype", "type");
+
+	/*
 	Inherit from the base widget class
 	*/
 	EditTextWidget.prototype = new Widget();
@@ -134,12 +139,18 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					updateFields = {
 						title: self.editTitle
 					};
+				if (self.typeModule && self.typeModule.fromValue) {
+					value = self.typeModule.fromValue.call(this,value);
+				}
 				updateFields[self.editField] = value;
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
 			};
 		}
 		if(this.editType) {
 			type = this.editType;
+		}
+		if(this.typeModule && this.typeModule.toValue) {
+			value = this.typeModule.toValue.call(this,value);
 		}
 		return {value: value || "", type: type, update: update};
 	};
@@ -205,6 +216,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Get the rest of our parameters
 		this.editTag = this.getAttribute("tag",tag) || "input";
 		this.editType = this.getAttribute("type",type);
+		// Fetch type module if any exists.
+		// This module takes kare of converting between TW5 and HTML5 representation of the value.
+		this.typeModule = EditTextWidget.typeModules[this.editType];
 		// Make the child widgets
 		this.makeChildWidgets();
 		// Determine whether to show the toolbar
