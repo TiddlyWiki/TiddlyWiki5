@@ -1,0 +1,47 @@
+created: 202112111013000000
+modified: 202112111013000000
+title: inputtype-modules
+type: text/vnd.tiddlywiki
+
+Modules of the type `inputtype` provide a way to convert the TiddlyWiki internal representation of a value into a value used within the HTML-value-attribute of an input tag and back.
+
+These modules are used to allow the date and time types of HTML5 input tags to function seamlessly with TiddlyWiki's date/time format.
+
+A module of type `inputtype` exports the `type` property that specifies on which type of `input` element they are applied to. In addition to that, they contain two exported functions `toValue` and `fromValue`. These functions are called each time a value needs to be converted from TW5`s representation into the HTML-value-attribute and vice versa.
+
+```js
+/*\
+title: $:/core/modules/editor/types/date.js
+type: application/javascript
+module-type: inputtype
+
+Type module for HTML5 input elements with type="date"
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+exports.type = "date";
+
+exports.toValue = function(twDateTimeString) {
+    var date = $tw.utils.parseDate(twDateTimeString);
+    return $tw.utils.isValidDate(date) ? date.toISOString().substring(0,10) : "";
+};
+
+
+exports.fromValue = function(isoDateString) {
+    var date = new Date(isoDateString);
+    return $tw.utils.isValidDate(date) ? $tw.utils.stringifyDate(date) : "";
+}
+
+})();
+```
+
+The above example shows the inputtype-module for the type `date`. The `toValue` function parses the TiddlyWiki Date-Format into a date value and converts it into ISO-8601 format. The `date` input-element does not support the time portion of the ISO-8601 format. Therefore the value is truncate to only contain the date part.
+
+The `fromValue` function reverses the process by parsing the ISO-8601 value supplied by the input-element and converting it into a TiddlyWiki's DateFormat. This value is returned to be used by TiddlyWiki.
+
+All `inputtype` modules are stored within the `core/modules/editor/types/` directory.
