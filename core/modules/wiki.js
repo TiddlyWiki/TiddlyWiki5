@@ -638,21 +638,26 @@ exports.getTagMap = function() {
 Lookup a given tiddler and return a list of all the tiddlers that include it in the specified list field
 */
 exports.findListingsOfTiddler = function(targetTitle,fieldName) {
-	var titles,
-		fieldIndexer = this.getIndexer("FieldIndexer");
 	fieldName = fieldName || "list";
-	if(fieldIndexer) {
-		titles = fieldIndexer.lookup(fieldName, targetTitle);
-	} else {
-		titles = [];
-		this.each(function(tiddler,title) {
+	var wiki = this;
+	var listings = this.getGlobalCache("listings-" + fieldName,function() {
+		var listings = Object.create(null);
+		wiki.each(function(tiddler,title) {
 			var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
-			if(list && list.indexOf(targetTitle) !== -1) {
-				titles.push(title);
+			if(list) {
+				for(var i = 0; i < list.length; i++) {
+					var listItem = list[i],
+						listing = listings[listItem] || [];
+					if (listing.indexOf(title) === -1) {
+						listing.push(title);
+					}
+					listings[listItem] = listing;
+				}
 			}
 		});
-	}
-	return titles;
+		return listings;
+	});
+	return listings[targetTitle] || [];
 };
 
 /*

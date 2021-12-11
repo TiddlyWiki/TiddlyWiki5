@@ -383,6 +383,11 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[list[TiddlerSeventh]sort[title]]").join(",")).toBe("a fourth tiddler,MissingTiddler,Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[tag[one]list[TiddlerSeventh]sort[title]]").join(",")).toBe("a fourth tiddler,MissingTiddler,Tiddler Three,TiddlerOne");
 		});
+
+		it("should handle the listed operator", function() {
+			expect(wiki.filterTiddlers("TiddlerOne MissingTiddler +[listed[]]").join(",")).toBe('one,hasList');
+			expect(wiki.filterTiddlers("one two +[listed[tags]]").join(",")).toBe('TiddlerOne,$:/TiddlerTwo,Tiddler Three');
+		});
 	
 		it("should handle the next operator", function() {
 			expect(wiki.filterTiddlers("[[Tiddler Three]next[TiddlerSeventh]]").join(",")).toBe("a fourth tiddler");
