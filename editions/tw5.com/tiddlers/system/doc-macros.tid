@@ -130,4 +130,31 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 \define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renamed" """$link$""" """$colour$""">>
 \define .link-badge-updated(link,colour:#91ba66) <<.link-badge "updated" """$link$""" """$colour$""">>
 
+\define .tiddler-fields(tiddler)
+<$tiddler tiddler=<<__tiddler__>>>
+<div class="doc-tiddler-fields">
+<h2>
+<$link>
+<span class="tc-tiddler-title-icon">{{||$:/core/ui/TiddlerIcon}}</span><$text text=<<currentTiddler>>/>
+</$link>
+</h2>
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -title" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>
+</div>
+</$tiddler>
+\end
+
+\define .banner-credits(credit,url)
+<img src=<<__url__>> width="140" style="float:left;margin-right:0.5em;"/>
+
+$credit$
+
+<div style="clear:both;">
+
+</div>
+\end
+
 <pre><$view field="text"/></pre>

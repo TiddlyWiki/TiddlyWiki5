@@ -221,3 +221,30 @@ tr.doc-table-subheading {
 .doc-link-badge:hover {
     text-decoration: underline;
 }
+
+.doc-tiddler-fields {
+	background-color: <<colour code-background>>;
+	border: 1px solid <<colour tiddler-border>>;
+	border-radius: 4px;
+    padding: 0 0.5em;
+}
+
+.doc-tiddler-fields h2 svg {
+	height: 1em;
+}
+
+
+.doc-tiddler-fields table, 
+.doc-tiddler-fields h2 {
+	margin: 0.5em 0;
+}
+
+.doc-tiddler-fields table {
+	background-color: <<colour tiddler-background>>;
+}
+
+@media screen {
+	.doc-tiddler-fields {
+		<<box-shadow "1px 1px 6px rgba(0, 0, 0, 0.6)">>
+	}
+}

@@ -4,7 +4,7 @@ created: 20160216191710789
 delivery: Protocol
 description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20210830210442369
+modified: 20211129222601543
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki
@@ -53,3 +53,33 @@ Many [[NAS|https://en.wikipedia.org/wiki/NAS]] or [[Subversion|https://en.wikipe
 !! Free Hosting
 
 Several ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) don't support accessing HTML files via a webbrowser, so they won't work with ~TiddlyWiki. However, The GMX mediacenter (www.gmx.net) has been reported as working with WebDAV with a free account.
+
+!!! Koofr
+
+//''Koofr''// is a cloud service that emphasizes privacy. To use their webdav services, sign up for an account at `koofr.eu` . Then go to `preferences` on their web app. Then `password` from the menu on the left. Scroll down to `App Passwords`. Use some name like 'tiddlywiki' and generate a password. Despite what it says, save the password somewhere. Upload your file on some path, preferably without spaces to their site. Then in the browser link to the site with an address like:
+
+```
+https://app.koofr.net/dav/Koofr/myfile.html
+
+```
+When you do, an authentication dialog will come up. Use your email address that you used to sign up and the password you just generated to login.
+
+You should be able to load the file and save changes back in place.
+
+!!! pCloud
+
+//''pCloud''// is cloud service with servers in Europe and the United States. When you sign up, you need to select which server location is best for you. Then in your web browser, sign in to the service. Upload the file you wish to access via the browser interface. Then, in another tab, open either
+
+```
+https://webdav.pcloud.com
+```
+
+if your servers are in the U.S. or
+
+```
+https://ewebdav.pcloud.com
+```
+
+if your servers are in Europe.
+
+A file navigation page should come up. Navigate to your file and open in your browser. You should be able create and save changes.
