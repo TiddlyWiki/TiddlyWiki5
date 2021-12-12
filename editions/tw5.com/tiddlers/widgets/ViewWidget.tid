@@ -31,14 +31,16 @@ The following formats can be specified in the `format` attribute:
 |''htmlencoded'' |The field is displayed with HTML encoding |
 |''htmltextencoded'' |<<.from-version "5.2.0">> The field is displayed with HTML encoding, only double quotes (") are not escaped. This creates a more compact htmlencoding appropriate for html text content, but //not// for attributes. |
 |''urlencoded'' |The field is displayed with URL encoding |
-|''doubleurlencoded'' |The field is displayed with double URL encoding |
+|''doubleurlencoded'' |The field is displayed with double URL encoding ''(deprecated. Use "urlencoded+urlencoded" instead)'' |
 |''htmlwikified'' |The field is wikified according to the mode attribute and the resulting HTML returned as plain text (ie HTML elements will appear in plain text) |
 |''plainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as plain text (ie HTML elements will be removed) |
-|''htmlencodedplainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as HTML encoded plain text (ie HTML elements will be removed) |
+|''htmlencodedplainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as HTML encoded plain text (ie HTML elements will be removed) ''(deprecated. Use "plainwikified+htmlencoded" instead)'' |
 |''date'' |The field is interpreted as a UTC date and displayed according to the DateFormat specified in the `template` attribute |
 |''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant |
 |''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
 |''jsencoded'' |The field is displayed as a JavaScript encoded string |
+
+<<.tip """<$macrocall $name=".from-version" version="5.1.24"/> Formats can be chained together. For instance, having a `format` attribute of "plainwikified+htmlencoded" will first wikify the incoming content, and then encoded it for html. There is no limit to haw many formats can be chained together.""">>
 
 !! "WikiText format"
 

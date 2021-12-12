@@ -44,6 +44,8 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ViewWidget.prototype.execute = function() {
+	var formats = getViewWidgetFormats(),
+		formatMethods;
 	// Get parameters from our attributes
 	this.viewTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.viewSubtiddler = this.getAttribute("subtiddler");
@@ -52,49 +54,30 @@ ViewWidget.prototype.execute = function() {
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
 	this.viewMode = this.getAttribute("mode","block");
-	switch(this.viewFormat) {
-		case "htmlwikified":
-			this.text = this.getValueAsHtmlWikified(this.viewMode);
-			break;
-		case "plainwikified":
-			this.text = this.getValueAsPlainWikified(this.viewMode);
-			break;
-		case "htmlencodedplainwikified":
-			this.text = this.getValueAsHtmlEncodedPlainWikified(this.viewMode);
-			break;
-		case "htmlencoded":
-			this.text = this.getValueAsHtmlEncoded();
-			break;
-		case "htmltextencoded":
-			this.text = this.getValueAsHtmlTextEncoded();
-			break;
-		case "urlencoded":
-			this.text = this.getValueAsUrlEncoded();
-			break;
-		case "doubleurlencoded":
-			this.text = this.getValueAsDoubleUrlEncoded();
-			break;
-		case "date":
-			this.text = this.getValueAsDate(this.viewTemplate);
-			break;
-		case "relativedate":
-			this.text = this.getValueAsRelativeDate();
-			break;
-		case "stripcomments":
-			this.text = this.getValueAsStrippedComments();
-			break;
-		case "jsencoded":
-			this.text = this.getValueAsJsEncoded();
-			break;
-		default: // "text"
-			this.text = this.getValueAsText();
-			break;
+
+	formatMethods = (this.viewFormat || "").split("+");
+	this.text = this.getValue({asString: true});
+	for (var i = 0; i < formatMethods.length; i++) {
+		var method = formats[formatMethods[i]];
+		if(method) {
+			this.text = method(this.text,this);
+		}
 	}
 };
 
 /*
-The various formatter functions are baked into this widget for the moment. Eventually they will be replaced by macro functions
+The various formatter functions are defined by the viewwidgetformat module-type. The default format is "text".
 */
+
+var viewWidgetFormats;
+
+function getViewWidgetFormats() {
+	if(!viewWidgetFormats) {
+		viewWidgetFormats = Object.create(null);
+		$tw.modules.applyMethods("viewwidgetformat",viewWidgetFormats);
+	}
+	return viewWidgetFormats;
+};
 
 /*
 Retrieve the value of the widget. Options are:
@@ -132,82 +115,6 @@ ViewWidget.prototype.getValue = function(options) {
 		}
 	}
 	return value;
-};
-
-ViewWidget.prototype.getValueAsText = function() {
-	return this.getValue({asString: true});
-};
-
-ViewWidget.prototype.getValueAsHtmlWikified = function(mode) {
-	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),{
-		parseAsInline: mode !== "block",
-		parentWidget: this
-	});
-};
-
-ViewWidget.prototype.getValueAsPlainWikified = function(mode) {
-	return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
-		parseAsInline: mode !== "block",
-		parentWidget: this
-	});
-};
-
-ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function(mode) {
-	return $tw.utils.htmlEncode(this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
-		parseAsInline: mode !== "block",
-		parentWidget: this
-	}));
-};
-
-ViewWidget.prototype.getValueAsHtmlEncoded = function() {
-	return $tw.utils.htmlEncode(this.getValueAsText());
-};
-
-ViewWidget.prototype.getValueAsHtmlTextEncoded = function() {
-	return $tw.utils.htmlTextEncode(this.getValueAsText());
-};
-
-ViewWidget.prototype.getValueAsUrlEncoded = function() {
-	return encodeURIComponent(this.getValueAsText());
-};
-
-ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
-	return encodeURIComponent(encodeURIComponent(this.getValueAsText()));
-};
-
-ViewWidget.prototype.getValueAsDate = function(format) {
-	format = format || "YYYY MM DD 0hh:0mm";
-	var value = $tw.utils.parseDate(this.getValue());
-	if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
-		return $tw.utils.formatDateString(value,format);
-	} else {
-		return "";
-	}
-};
-
-ViewWidget.prototype.getValueAsRelativeDate = function(format) {
-	var value = $tw.utils.parseDate(this.getValue());
-	if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
-		return $tw.utils.getRelativeDate((new Date()) - (new Date(value))).description;
-	} else {
-		return "";
-	}
-};
-
-ViewWidget.prototype.getValueAsStrippedComments = function() {
-	var lines = this.getValueAsText().split("\n"),
-		out = [];
-	for(var line=0; line<lines.length; line++) {
-		var text = lines[line];
-		if(!/^\s*\/\/#/.test(text)) {
-			out.push(text);
-		}
-	}
-	return out.join("\n");
-};
-
-ViewWidget.prototype.getValueAsJsEncoded = function() {
-	return $tw.utils.stringify(this.getValueAsText());
 };
 
 /*
