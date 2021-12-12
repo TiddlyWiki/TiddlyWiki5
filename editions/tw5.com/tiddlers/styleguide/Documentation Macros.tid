@@ -1,7 +1,8 @@
 created: 20150110182600000
-modified: 20150228082845000
-title: Documentation Macros
+modified: 20211206080809651
 tags: [[Improving TiddlyWiki Documentation]]
+title: Documentation Macros
+type: text/vnd.tiddlywiki
 
 The following macros are used throughout ~TiddlyWiki's documentation. Their names start with a dot to keep them out of the way of names that a user might try experimenting with.
 
@@ -13,6 +14,7 @@ The following macros are used throughout ~TiddlyWiki's documentation. Their name
 |.place |a placeholder for the user to fill in |<<.place tagname>> |
 |.strong |major emphasis within a tiddler |<<.strong Important!>> |
 |.word |a mention of an ordinary word or phrase |<<.word "hello world">> |
+|.icon |an icon, sized to match the surrounding text |<<.icon "$:/core/images/globe">> |
 
 !Advice
 
@@ -36,6 +38,8 @@ The following macros are used throughout ~TiddlyWiki's documentation. Their name
 |.wid |a widget name |<<.wid list>> |
 |.attr |an attribute name |<<.attr filter>> |
 |.param |a macro parameter name |<<.param text>> |
+|.tiddler-fields |a list of tiddler fields |<<.tiddler-fields "Monday">> |
+
 
 !Links
 

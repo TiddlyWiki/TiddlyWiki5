@@ -1,5 +1,5 @@
 created: 20211127084727217
-modified: 20211128200929866
+modified: 20211204120054422
 tags: [[Customise TiddlyWiki]]
 title: Customising TiddlyWiki's user interface
 type: text/vnd.tiddlywiki
@@ -11,6 +11,7 @@ Several different mechanisms are used to achieve this:
 * special fields
 * special titles
 * special tags
+* cascades
 
 Here we provide an overview of those mechanisms and how they relate together.
 
@@ -53,3 +54,22 @@ See SystemTags for details of all the special tags.
 The  entire TiddlyWiki user interface is constructed from lists formed from special system tags.
 
 The ordering of these lists is determined by the [[order of tagged tiddlers|Order of Tagged Tiddlers]] rules. Users can re-order tags using drag and drop within a tag dropdown.
+
+!! Cascades
+
+Cascades provide a means to select one of multiple values based on flexible, extensible criteria. They can be thought of as a list of conditions that are evaluated in turn until one of them matches.
+
+For example, the core uses the template $:/core/ui/ViewTemplate to display tiddlers in view mode, and $:/core/ui/EditTemplate to display tiddlers in edit mode. A cascade is used to choose which template to use for a particular tiddler:
+
+# If the tiddler is a draft, then use $:/core/ui/EditTemplate
+# Otherwise, use $:/core/ui/EditTemplate
+
+The list of conditions is defined via a special tag, making it possible to insert additional conditions anywhere in the list.
+
+For example, a plugin might add a special template $:/plugins/example/map-template for tiddlers that have the tag [[$:/tags/Map]] by inserting an additional rule:
+
+# If the tiddler is a draft, then use $:/core/ui/EditTemplate
+# @@background: yellow; If the tiddler is tagged $:/tags/Map, then use $:/plugins/example/map-template@@
+# Otherwise, use $:/core/ui/EditTemplate
+
+See [[Cascades]] for more details.

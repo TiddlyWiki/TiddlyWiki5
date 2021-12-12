@@ -1,29 +1,16 @@
 created: 20201117073343969
-modified: 20211124153029405
+modified: 20211129032537195
 tags: [[Filter Syntax]] [[Filter Run Prefix Examples]]
 title: Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
 
-!! Difference between `+` and `:intersection`
+!! `:filter` examples
 
-The `+` prefix should be thought of as an "AND" in formal logic, e.g. "give me all titles that satisfy condition A ''and'' condition B". But it's not suitable for all cases; if condition B uses a filter operator that replaces its input, then it will be difficult to use the `+` prefix. For example, if you wanted to find out what tags two tiddlers have in common, you might try to write a filter expression like:
+See [[Filter Filter Run Prefix (Examples)]]
 
-* <$link to="tags Operator">`[[field Operator]tags[]] +[[compare Operator]tags[]]`</$link>
+!! `:intersection` examples
 
-But that won't work, because the second filter run will end up throwing away its input and replacing it with an input consisting of the single title `[[compare Operator]]`. So the result you'd get from that filter expression would be just the tags of the `compare Operator` tiddler.
-
-For cases like this, the `:intersection` prefix is what you need. It takes the filter output so far, //sets it aside//, and starts the next filter run with all tiddler titles as input. Then once the latest filter run has completed, it takes the latest output, compares it to the set-aside output, and produces a new output that contains only titles that appeared in both the set-aside output and the latest output. So to get only the tags that the `field Operator` and `compare Operator` tiddlers have in common, you would write a filter expression like this:
-
-* <$link to="tags Operator">`[[field Operator]tags[]] :intersection[[compare Operator]tags[]]`</$link>
-
-The following examples use the [[field Operator]] and [[compare Operator]] tiddlers and their respective tags.
-
-<<.operator-example 1 "[[field Operator]tags[]]">>
-<<.operator-example 2 "[[compare Operator]tags[]]">>
-
-<<.operator-example 3 "[[field Operator]tags[]] +[[compare Operator]tags[]]" """The "field Operator" tiddler's tags are lost, so only the "compare Operator" tiddler's tags are returned""">>
-
-<<.operator-example 4 "[[field Operator]tags[]] :intersection[[compare Operator]tags[]]" """Returns the tags that both tiddlers have in common""">>
+See [[Intersection Filter Run Prefix (Examples)]]
 
 !! `:reduce` examples
 

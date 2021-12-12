@@ -1,5 +1,9 @@
-title: $:/_tw5.com/CustomTiddlerIconCascadeDemo
+created: 20211205195110592
+list-before: $:/config/TiddlerIconFilters/default
+modified: 20211205195217941
 tags: $:/tags/TiddlerIconFilter
+title: $:/_tw5.com/CustomTiddlerIconCascadeDemo
+type: text/vnd.tiddlywiki
 
 [tag[TableOfContents]then[$:/core/images/globe]]
 [tag[Working with TiddlyWiki]then[$:/core/images/help]] 

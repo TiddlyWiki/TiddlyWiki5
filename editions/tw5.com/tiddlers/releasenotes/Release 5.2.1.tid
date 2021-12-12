@@ -1,6 +1,7 @@
 caption: 5.2.1
-created: 20211003152250369
-modified: 20211003152250369
+created: 20211208115833846
+modified: 20211208115833846
+released: 20211208115833846
 tags: ReleaseNotes
 title: Release 5.2.1
 type: text/vnd.tiddlywiki
@@ -9,7 +10,13 @@ type: text/vnd.tiddlywiki
 <a href="https://github.com/$username$" style="text-decoration:none;font-size:24px;" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src="https://github.com/$username$.png?size=32" width="32" height="32"/> @<$text text=<<__username__>>/></a>
 \end
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.0...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.0...v5.2.1]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[Mohammad Rahmani|https://github.com/kookma]] and [[Elise Springer|https://www.wesleyan.edu/academics/faculty/espringer/profile.html]] for their winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/GU0TPGNMPvw/m/y1SyQk_nAQAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/cb43b91ab6b14c2a16af917cfab0e5b2371502c6/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
 
 ! Highlights
 
@@ -17,18 +24,24 @@ type: text/vnd.tiddlywiki
 
 The [[cascade mechanism|Cascades]] provides a flexible way to choose between multiple options. Crucially, it is done in a way that makes it simple for plugins to tweak the logic or add their own options.
 
+Some of the things that can be done with cascades are:
+
+* Replacing the default tiddler body template with a custom one for a certain type of tiddler
+* Giving all journal tiddlers a custom icon
+* Implementing a custom editor for certain types of tiddler
+
 There are two parts to these changes. The underpinning is a new [[Cascade Filter Run Prefix]] that takes a list of filters and runs them in order, returning the result of the first one to return a value.
 
 The second part is a series of improvements based on this new filter cascade mechanism. Conditional logic that was previously hidden within core templates can now be extended and tweaked much more easily than before.
 
 Choosing the following elements of the core user interface is now handled with cascades:
 
-* Story Tiddler Templates
-* Tiddler Colour
-* Tiddler Icons
-* View Template Body
-* View Template Title
-* Edit Template Body
+* [[Story Tiddler Templates|Story Tiddler Template Cascade]]
+* [[Tiddler Colour|Tiddler Colour Cascade]]
+* [[Tiddler Icons|Tiddler Icon Cascade]]
+* [[View Template Body|View Template Body Cascade]]
+* [[View Template Title|View Template Title Cascade]]
+* [[Edit Template Body|Edit Template Body Cascade]]
 
 The cascades can be inspected in $:/ControlPanel under ''Info'' -> ''Advanced'' -> ''Cascades''.
 
@@ -59,6 +72,7 @@ The chief advantage is that the LetWidget performs the variable assignments in t
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6015">> image picker in theme tweaks to not dismiss when an image is selected
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5998">> a [[new hidden setting|Hidden Setting: Show Edit Preview per Tiddler]] for controlling the visibility of the editor preview pane on a per-tiddler basis
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/b0f72d069086dee8506758c643f953f9ec55f403">> sidebar plugin listing to show icon and more details
 
 ! Widget Improvements
 
@@ -94,6 +108,7 @@ The chief advantage is that the LetWidget performs the variable assignments in t
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* <<contributor bmann>>
 * <<contributor btheado>>
 * <<contributor BramChen>>
 * <<contributor BurningTreeC>>
@@ -105,4 +120,5 @@ The chief advantage is that the LetWidget performs the variable assignments in t
 * <<contributor pmario>>
 * <<contributor saqimtiaz>>
 * <<contributor Telumire>>
+* <<contributor tw-FRed>>
 * <<contributor twMat>>

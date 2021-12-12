@@ -1042,6 +1042,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-view-field-name {
 	width: 1%; /* Makes this column be as narrow as possible */
+	white-space: nowrap;
+	vertical-align: top;
 	text-align: right;
 	font-style: italic;
 	font-weight: normal;
@@ -2369,6 +2371,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-plugin-info {
 	display: flex;
+	text-shadow: none;
 	border: 1px solid <<colour muted-foreground>>;
 	fill: <<colour muted-foreground>>;
 	background-color: <<colour background>>;
@@ -2376,6 +2379,11 @@ html body.tc-body.tc-single-tiddler-window {
 	padding: 4px;
 	align-items: center;
 }
+
+.tc-sidebar-lists a.tc-tiddlylink.tc-plugin-info {
+	color: <<colour tiddler-link-foreground>>;
+}
+
 
 .tc-plugin-info-sub-plugins .tc-plugin-info {
 	margin: 0.5em;
