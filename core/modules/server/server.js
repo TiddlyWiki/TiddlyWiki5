@@ -233,7 +233,7 @@ Server.prototype.isOriginApproved = function(origin) {
 	// Check if any of the originFilters applies
 	var approved = (this.boot.origin === origin) || !!this.wiki.filterTiddlers("[[" + origin + "]] :cascade[all[shadows+tiddlers]tag[$:/tags/CorsFilter]get[text]]");
 	// Optionally output debug info
-	if(this.get("debug-level") !== "none") {
+	if(this.get("debug-level") !== "none" && (this.boot.origin !== origin)) {
 		$tw.utils.log('CORS request ' + (approved?'approved':'denied') + ' boot.origin=' + this.boot.origin + ' request.origin=' + origin)
 	}
 	return approved;
@@ -254,12 +254,11 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Get the principals authorized to access this resource
 	var authorizationType = this.methodMappings[request.method] || "readers";
 	// Check for the CORS header
-	let corsHeader = !!request.headers["origin"] && request.headers["origin"];
-	if(corsHeader && this.isOriginApproved(corsHeader)) {
+	if(request.headers["origin"] && this.isOriginApproved(request.headers["origin"])) {
 		// add the corsHeader to the response
 		response.setHeader('Access-Control-Allow-Origin','true')
-	} else if (corsHeader) {
-		response.writeHead(403,"'Origin' header not approved from '" + corsHeader + "'");
+	} else if (request.headers["origin"]) {
+		response.writeHead(403,"'Origin' header not approved from '" + request.headers["origin"] + "'");
 		response.end();
 		return;
 	}
