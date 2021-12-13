@@ -231,12 +231,12 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 
 Server.prototype.isOriginApproved = function(origin) {
 	// Check if any of the originFilters applies
-	var approved = (this.boot.origin === origin) || !!this.wiki.filterTiddlers("[[" + origin + "]] :cascade[all[shadows+tiddlers]tag[$:/tags/CorsFilter]get[text]]");
+	var approved = this.wiki.filterTiddlers("[[" + origin + "]] :cascade[all[shadows+tiddlers]tag[$:/tags/CorsFilter]get[text]] +[!is[blank]]");
 	// Optionally output debug info
 	if(this.get("debug-level") !== "none" && (this.boot.origin !== origin)) {
-		$tw.utils.log('CORS request ' + (approved?'approved':'denied') + ' boot.origin=' + this.boot.origin + ' request.origin=' + origin)
+		$tw.utils.log('CORS request: boot.origin=' + this.boot.origin + ' request.origin=' + origin + ' ' + ((this.boot.origin === origin) || approved.length > 0?'approved':'denied'))
 	}
-	return approved;
+	return (this.boot.origin === origin) || approved.length > 0;
 }
 
 Server.prototype.requestHandler = function(request,response,options) {
