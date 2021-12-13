@@ -256,7 +256,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Check for the CORS header
 	if(request.headers["origin"] && this.isOriginApproved(request.headers["origin"])) {
 		// add the corsHeader to the response
-		response.setHeader('Access-Control-Allow-Origin','true')
+		response.setHeader('Access-Control-Allow-Origin',request.headers["origin"])
 	} else if (request.headers["origin"]) {
 		response.writeHead(403,"'Origin' header not approved from '" + request.headers["origin"] + "'");
 		response.end();
