@@ -1,11 +1,13 @@
 caption: list-links-draggable
 created: 20170328204925306
-modified: 20170329093008550
+modified: 20211214141650488
 tags: Macros [[Core Macros]]
 title: list-links-draggable Macro
 type: text/vnd.tiddlywiki
 
 The <<.def list-links-draggable>> [[macro|Macros]] renders the ListField of a tiddler as a list of links that can be reordered via [[drag and drop|Drag and Drop]].
+
+Note: The list must be contained in a different tiddler. I.e. If the list is populated in the list field of the current tiddler, the drag and drop action will have no effect. 
 
 !! Parameters
 
