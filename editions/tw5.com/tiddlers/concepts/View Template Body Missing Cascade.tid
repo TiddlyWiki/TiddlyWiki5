@@ -1,0 +1,15 @@
+created: 20211216145741618
+modified: 20211216150319364
+tags: Cascades
+title: View Template Body Missing Cascade
+type: text/vnd.tiddlywiki
+
+The view template "body missing" cascade is a [[cascade|Cascades]] used by the default view template to choose the template for displaying the ''missing tiddler'' hint.
+
+The default missing tiddler hint template cascade consists of:
+
+#  If the tiddler is a missing tiddler then use the template $:/config/ViewTemplateBodyMissingFilters/missing/hint to show the "missing tiddler hint".
+
+You can see the current settings for the missing tiddler cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades''  -> ''View Template Body Missing'' tab.
+
+<<list-links "[tag[View Template Body Missing Cascade]]">>

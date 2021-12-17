@@ -1,0 +1,4 @@
+title: $:/config/ViewTemplateBodyMissingFilters/missing/
+tags: $:/tags/ViewTemplateBodyMissingFilter
+
+hint: [all[current]is[missing]then[$:/core/ui/ViewTemplate/body/missing/hint]]

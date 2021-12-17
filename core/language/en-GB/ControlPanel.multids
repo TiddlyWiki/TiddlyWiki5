@@ -225,5 +225,7 @@ Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in vi
 Tools/Download/Full/Caption: Download full wiki
 ViewTemplateBody/Caption: View Template Body
 ViewTemplateBody/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the body of a tiddler.
+ViewTemplateBodyMissing/Caption: View Template Body Missing
+ViewTemplateBodyMissing/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the ''missing tiddler body''.
 ViewTemplateTitle/Caption: View Template Title
 ViewTemplateTitle/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the title of a tiddler.

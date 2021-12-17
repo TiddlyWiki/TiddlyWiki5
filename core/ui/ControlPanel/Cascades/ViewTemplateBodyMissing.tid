@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/ViewTemplateBodyMissing
+tags: $:/tags/ControlPanel/Cascades
+caption: {{$:/language/ControlPanel/ViewTemplateBodyMissing/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/ViewTemplateBodyMissing/
+
+<<lingo Hint>> 
+
+{{$:/tags/ViewTemplateBodyMissingFilter||$:/snippets/ListTaggedCascade}}

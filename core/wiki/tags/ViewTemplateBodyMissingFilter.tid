@@ -1,0 +1,4 @@
+title: $:/tags/ViewTemplateBodyMissingFilter
+list: $:/config/ViewTemplateBodyMissingFilters/missing/hint
+
+If you are a plugin author don't modify this tiddler. Use the `list-before` or the `list-after` field in your plugin to modify the sort order

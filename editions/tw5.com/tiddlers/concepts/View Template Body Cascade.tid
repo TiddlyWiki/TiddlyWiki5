@@ -1,5 +1,5 @@
 created: 20211206161124327
-modified: 20211206161613268
+modified: 20211216145516376
 tags: Cascades
 title: View Template Body Cascade
 type: text/vnd.tiddlywiki
@@ -12,6 +12,8 @@ The default view template body cascade consists of:
 # If the tiddler has the field ''plugin-type'' set to ''import'' then use the template $:/core/ui/ViewTemplate/body/import which displays the custom import user interface
 # If the tiddler has the field ''plugin-type'' then use the template $:/core/ui/ViewTemplate/body/plugin to display the plugin information badge
 # If the tiddler has the field ''hide-body'' set to ''yes'' then use the template $:/core/ui/ViewTemplate/body/blank to hide the body
+# If the tiddler is a ''shadow'' or a ''modified shadow'' tiddler then use the template $:/core/ui/ViewTemplate/body/shadow to show the body
+# If the tiddler is a ''missing'' tiddler then use the template $:/core/ui/ViewTemplate/body/missing which also contains a cascade
 # Otherwise, use the default template $:/core/ui/ViewTemplate/body/default
 
 You can see the current settings for the view template body cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades''  -> ''View Template Body'' tab.

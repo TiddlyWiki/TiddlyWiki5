@@ -1,0 +1,3 @@
+title: $:/core/ui/ViewTemplate/body/missing
+
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyMissingFilter]!is[draft]get[text]] }}} />

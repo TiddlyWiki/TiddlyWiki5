@@ -1,3 +1,2 @@
 title: $:/tags/ViewTemplateBodyFilter
-list: $:/config/ViewTemplateBodyFilters/system $:/config/ViewTemplateBodyFilters/code-body $:/config/ViewTemplateBodyFilters/import $:/config/ViewTemplateBodyFilters/plugin $:/config/ViewTemplateBodyFilters/hide-body $:/config/ViewTemplateBodyFilters/default
-
+list: $:/config/ViewTemplateBodyFilters/system $:/config/ViewTemplateBodyFilters/code-body $:/config/ViewTemplateBodyFilters/import $:/config/ViewTemplateBodyFilters/plugin $:/config/ViewTemplateBodyFilters/hide-body $:/config/ViewTemplateBodyFilters/shadow $:/config/ViewTemplateBodyFilters/missing $:/config/ViewTemplateBodyFilters/default
