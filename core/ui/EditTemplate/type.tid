@@ -23,7 +23,7 @@ first-search-filter: [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]sort[d
 <$text text={{!!group}}/>
 </div>
 <$set name="userInput" value={{{ [<typeInputTiddler>get[text]] }}}>
-<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]] +[removeprefix[$:/language/Docs/Types/]] +[search<userInput>]"><span class={{{ [<currentTiddler>addsuffix[-primaryList]] -[<typeSelectionTiddler>get[text]] +[then[]else[tc-list-item-selected]] }}}><$link to={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]get[name]] }}}><$view tiddler={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]] }}} field="description"/> (<$view tiddler={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]] }}} field="name"/>)</$link></span>
+<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]] +[removeprefix[$:/language/Docs/Types/]] +[search<userInput>]"><span class={{{ [<currentTiddler>addsuffix[-primaryList]] -[<typeSelectionTiddler>get[text]] +[then[]else[tc-list-item-selected]] }}}><$link to={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]get[name]] }}}><$view tiddler={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]] }}} field="description"/><$text text=" "/>(<$view tiddler={{{ [<currentTiddler>addprefix[$:/language/Docs/Types/]] }}} field="name"/>)</$link></span>
 </$list>
 </$set>
 </$list>

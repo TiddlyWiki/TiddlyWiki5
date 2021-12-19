@@ -21,7 +21,7 @@ exports.extractEncryptedStoreArea = function(text) {
 	if(encryptedStoreAreaStart !== -1) {
 		var encryptedStoreAreaEnd = text.indexOf("</pre>",encryptedStoreAreaStart);
 		if(encryptedStoreAreaEnd !== -1) {
-			return $tw.utils.htmlDecode(text.substring(encryptedStoreAreaStart + encryptedStoreAreaStartMarker.length,encryptedStoreAreaEnd-1));
+			return $tw.utils.htmlDecode(text.substring(encryptedStoreAreaStart + encryptedStoreAreaStartMarker.length,encryptedStoreAreaEnd));
 		}
 	}
 	return null;

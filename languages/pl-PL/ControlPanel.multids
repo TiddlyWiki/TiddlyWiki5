@@ -1,6 +1,5 @@
 title: $:/language/ControlPanel/
 
-
 Advanced/Caption: Zaawansowane
 Advanced/Hint: Wewnętrzne informacje na temat TiddlyWiki
 Appearance/Caption: Wyświetlanie
@@ -28,10 +27,15 @@ Basics/Tiddlers/Prompt: Liczba tiddlerów
 Basics/Title/Prompt: Tytuł tej ~TiddlyWiki
 Basics/Username/Prompt: Nazwa użytkownika do podpisywania zmian
 Basics/Version/Prompt: Wersja ~TiddlyWiki
+Cascades/Caption: Kaskada
+Cascades/Hint: Kaskady pozwalaja dynamicznie zmieniać sposób wyświetlania tiddlera zależnie od jej wyniku. Pierwszy niepusty wynik filtra poniżej będzie użyty jako szablon. Rózne kaskady zmieniają rózne elementy szablonu.
+Cascades/TagPrompt: Filtry z tagiem <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Typy edytorów
 EditorTypes/Editor/Caption: Edytor
 EditorTypes/Hint: Te tiddlery określają który edytor jest używany do edycji tiddlerów danych typów.
 EditorTypes/Type/Caption: Typ
+EditTemplateBody/Caption: Treść Edytora Tiddlera
+EditTemplateBody/Hint: Ta kaskada określa szablon do edycji treści tiddlera, używany podczas edycji tiddlera.
 Info/Caption: Info
 Info/Hint: Informacje o tej TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Wpisz tu skrót
@@ -192,6 +196,8 @@ Settings/TitleLinks/Yes/Description: Wyświetlaj nazwy jako linki
 Settings/MissingLinks/Caption: Wiki Linki
 Settings/MissingLinks/Hint: Wybierz czy linkować do nieistniejących jeszcze tiddlerów
 Settings/MissingLinks/Description: Włacz linowanie do nieistniejących tiddlerów
+StoryTiddler/Caption: Widok Tiddlera
+StoryTiddler/Hint: Ta kaskada określa szablon używany podczas wyświetlania tiddlera w Story River.
 StoryView/Caption: Widok Story River
 StoryView/Prompt: Obecny widok:
 Stylesheets/Caption: Style:
@@ -202,6 +208,10 @@ Theme/Caption: Motyw
 Theme/Prompt: Obecny motyw:
 TiddlerFields/Caption: Pola Tiddlerów
 TiddlerFields/Hint: To jest pełna lista wszystich pól użytych w tej wiki (wliczając systemowe tiddlery ale nie tiddlery-cienie)
+TiddlerColour/Caption: Kolor Tiddlera
+TiddlerColour/Hint: Ta kaskada określa kolor używany do wyswietlania tiddlera (kolor ikony oraz taga).
+TiddlerIcon/Caption: Ikona Tiddlera
+TiddlerIcon/Hint: Ta kaskada określa ikonę używaną przez Tiddlera.
 Toolbars/Caption: Paski Narzędzi
 Toolbars/EditToolbar/Caption: Edytuj Pasek Narzędzi
 Toolbars/EditToolbar/Hint: Wybierz, które przyciski mają być widoczne podczas edycji tiddlera. Przeciągaj by zmieniać kolejność.
@@ -213,4 +223,7 @@ Toolbars/EditorToolbar/Hint: Wybierz które przyciski mają być widoczne w pask
 Toolbars/ViewToolbar/Caption: Pasek Narzędzi Oglądania
 Toolbars/ViewToolbar/Hint: Wybierz które przyciski są widoczne podczas oglądania tiddlera. Przeciągaj by zmieniać kolejność.
 Tools/Download/Full/Caption: Pobierz całą wiki.
-
+ViewTemplateBody/Caption: Treść Wyświetlanego Tiddlera
+ViewTemplateBody/Hint: Ta kaskada określa szablon wyświetlania treści tiddlera (czyli jego tekstu, w przeciwieństwie do kaskady 'Widok Tiddlera').
+ViewTemplateTitle/Caption: Tytuł Wyświetlanego Tiddlera
+ViewTemplateTitle/Hint: Ta kaskada określa szablon wyświetlania tytułu tiddlera.

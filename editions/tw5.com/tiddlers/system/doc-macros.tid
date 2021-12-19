@@ -154,4 +154,14 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 </$tiddler>
 \end
 
+\define .banner-credits(credit,url)
+<img src=<<__url__>> width="140" style="float:left;margin-right:0.5em;"/>
+
+$credit$
+
+<div style="clear:both;">
+
+</div>
+\end
+
 <pre><$view field="text"/></pre>
