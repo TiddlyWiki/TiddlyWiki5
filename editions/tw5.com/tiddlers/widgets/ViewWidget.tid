@@ -1,6 +1,6 @@
 caption: view
 created: 20131024141900000
-modified: 20211219161935254
+modified: 20211219205633384
 tags: Widgets
 title: ViewWidget
 type: text/vnd.tiddlywiki
@@ -26,19 +26,19 @@ The content of the `<$view>` widget is displayed if the field or property is mis
 
 The following formats can be specified in the `format` attribute:
 
-|!Format |!Description |!Similar filter operator |
-|''text'' |Plain text (default) ||
-|''htmlencoded'' |The field is displayed with HTML encoding |[[encodehtml|encodehtml Operator]] |
-|''htmltextencoded'' |<<.from-version "5.2.0">> The field is displayed with HTML encoding, only double quotes (") are not escaped. This creates a more compact htmlencoding appropriate for html text content, but //not// for attributes. ||
-|''urlencoded'' |The field is displayed with URL encoding |[[encodeuri|encodeuri Operator]] |
-|''doubleurlencoded'' |The field is displayed with double URL encoding |[[encodeuri|encodeuri Operator]] called twice |
-|''htmlwikified'' |The field is wikified according to the mode attribute and the resulting HTML returned as plain text (ie HTML elements will appear in plain text) ||
-|''plainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as plain text (ie HTML elements will be removed) ||
-|''htmlencodedplainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as HTML encoded plain text (ie HTML elements will be removed) ||
-|''date'' |The field is interpreted as a UTC date and displayed according to the DateFormat specified in the `template` attribute ||
-|''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant ||
-|''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped ||
-|''jsencoded'' |The field is displayed as a JavaScript encoded string |[[stringify|stringify Operator]] |
+|!Format |!Description |
+|''text'' |Plain text (default) <<.tip "See also the TextWidget. `<$view format=text tiddler=MyTiddler/>` renders the same as `<$text text={{MyTiddler}}/>`">>|
+|''htmlencoded'' |The field is displayed with HTML encoding. <<.tip "Gives the same output as the [[encodehtml|encodehtml Operator]] filter operator">>  |
+|''htmltextencoded'' |<<.from-version "5.2.0">> The field is displayed with HTML encoding, only double quotes (") are not escaped. This creates a more compact htmlencoding appropriate for html text content, but //not// for attributes. |
+|''urlencoded'' |The field is displayed with URL encoding <<.tip "Gives the same output as the [[encodeuri|encodeuri Operator]] filter operator">> |
+|''doubleurlencoded'' |The field is displayed with double URL encoding <<.tip "Gives the same output as calling the [[encodeuri|encodeuri Operator]] filter operator twice">> |
+|''htmlwikified'' |The field is wikified according to the mode attribute and the resulting HTML returned as plain text (ie HTML elements will appear in plain text) |
+|''plainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as plain text (ie HTML elements will be removed) |
+|''htmlencodedplainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as HTML encoded plain text (ie HTML elements will be removed) |
+|''date'' |The field is interpreted as a UTC date and displayed according to the DateFormat specified in the `template` attribute |
+|''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant |
+|''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
+|''jsencoded'' |The field is displayed as a JavaScript encoded string <<.tip "Gives the same output as the [[stringify|stringify Operator]] filter operator">> |
 
 !! "WikiText format"
 
