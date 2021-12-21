@@ -40,6 +40,7 @@ background-color: $(swatchColour)$;
 </$set>
 </$set>
 \end
+\whitespace trim
 <div class="tc-swatches-horiz"><$list filter="
 foreground
 background
