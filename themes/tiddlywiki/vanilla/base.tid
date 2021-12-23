@@ -1197,15 +1197,22 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame input.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor,
-.tc-tiddler-frame iframe.tc-edit-texteditor {
+.tc-tiddler-frame iframe.tc-edit-texteditor,
+.tc-tiddler-frame select.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.3em;
-	-webkit-appearance: none;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor,
+.tc-tiddler-frame iframe.tc-edit-texteditor {
+	-webkit-appearance: none;
+}
+
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame select.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor {
 	background-color: <<colour tiddler-editor-background>>;
 }
