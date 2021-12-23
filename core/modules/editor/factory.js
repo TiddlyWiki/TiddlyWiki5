@@ -134,12 +134,24 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 					updateFields = {
 						title: self.editTitle
 					};
-				updateFields[self.editField] = value;
-				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+				if(self.editFromInputValueFilter) {
+					value = self.wiki.filterTiddlers(self.editFromInputValueFilter,self,self.wiki.makeTiddlerIterator([value]))[0];
+				}
+				if(value !== undefined) {
+					updateFields[self.editField] = value;
+					self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+					self.setValidationStatus(true);
+				} else {
+					self.setValidationStatus(false);
+				}
 			};
 		}
 		if(this.editType) {
 			type = this.editType;
+		}
+		if(this.editToInputValueFilter) {
+			var source = this.wiki.makeTiddlerIterator([value]);
+			value = this.wiki.filterTiddlers(this.editToInputValueFilter,self,source)[0];
 		}
 		return {value: value || "", type: type, update: update};
 	};
@@ -172,6 +184,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editIndex = this.getAttribute("index");
 		this.editDefault = this.getAttribute("default");
 		this.editClass = this.getAttribute("class");
+		this.editErrorClass = this.getAttribute("errorClass","tw-input-error");
 		this.editPlaceholder = this.getAttribute("placeholder");
 		this.editSize = this.getAttribute("size");
 		this.editRows = this.getAttribute("rows");
@@ -185,6 +198,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editInputActions = this.getAttribute("inputActions");
 		this.editRefreshTitle = this.getAttribute("refreshTitle");
 		this.editAutoComplete = this.getAttribute("autocomplete");
+		this.editToInputValueFilter = this.getAttribute("toInputValue");
+		this.editFromInputValueFilter = this.getAttribute("fromInputValue");
 		this.isDisabled = this.getAttribute("disabled","no");
 		this.isFileDropEnabled = this.getAttribute("fileDrop","no") === "yes";
 		// Get the default editor element tag and type
@@ -205,6 +220,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Get the rest of our parameters
 		this.editTag = this.getAttribute("tag",tag) || "input";
 		this.editType = this.getAttribute("type",type);
+		// Initialize global variables
+		this.isCurrentlyValid = true;
 		// Make the child widgets
 		this.makeChildWidgets();
 		// Determine whether to show the toolbar
@@ -213,19 +230,37 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	};
 
 	/*
+	Called by different codepaths to set the validation status.
+	Only forwards the validation status to the engine (as an update) if it has changed. this minimizes update calls.
+	It is checked, that the engine supports `updateValidationStatus`. If it is not implemented, the call is essentially a NoOp.
+	*/
+	EditTextWidget.prototype.setValidationStatus = function(isValid) {
+		if(isValid !== this.isCurrentlyValid) {
+			this.isCurrentlyValid = isValid;
+			if(typeof this.engine.updateValidationStatus === "function") {
+				this.engine.updateValidationStatus(isValid)
+			}
+		}
+	}
+
+	/*
 	Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 	*/
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedAttributes.disabled || changedAttributes.fileDrop || changedAttributes.toInputValue || changedAttributes.fromInputValue || changedAttributes.errorClass) {
 			this.refreshSelf();
 			return true;
 		} else if(changedTiddlers[this.editRefreshTitle]) {
 			this.engine.updateDomNodeText(this.getEditInfo().value);
+			// If an external value is set, it's always considered valid because it is already
+			// contained within the field.
+			this.setValidationStatus(true);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
 			this.updateEditor(editInfo.value,editInfo.type);
+			this.setValidationStatus(true);
 		}
 		this.engine.fixHeight();
 		if(this.editShowToolbar) {
@@ -257,6 +292,11 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		var editInfo = this.getEditInfo();
 		if(text !== editInfo.value) {
 			editInfo.update(text);
+		} else {
+			// If the text matches the saved value exactly we've to remove
+			// the error-flag. There will be no call to update, but the input
+			// is valid, because ist was valid before.
+			this.setValidationStatus(true);
 		}
 	};
 

@@ -82,6 +82,19 @@ SimpleEngine.prototype.setText = function(text,type) {
 };
 
 /*
+Set the validation status of the input field
+If the parameter is true, the field is valid. If it's false it is not valid
+and should be shown as such to the user.
+*/
+SimpleEngine.prototype.updateValidationStatus = function(isValid) {
+	if(isValid) {
+		$tw.utils.removeClass(this.domNode,this.widget.editErrorClass);
+	} else {
+		$tw.utils.addClass(this.domNode,this.widget.editErrorClass);
+	}
+}
+
+/*
 Update the DomNode with the new text
 */
 SimpleEngine.prototype.updateDomNodeText = function(text) {

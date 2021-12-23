@@ -245,6 +245,10 @@ input[type="search"]::-webkit-search-results-decoration {
 	-webkit-appearance:none;
 }
 
+input.tw-input-error {
+	text-decoration: red solid underline;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
