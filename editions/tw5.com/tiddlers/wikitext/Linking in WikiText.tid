@@ -1,6 +1,6 @@
 caption: Linking
 created: 20131205155230596
-modified: 20211221221052922
+modified: 20211230145939554
 tags: WikiText
 title: Linking in WikiText
 type: text/vnd.tiddlywiki
@@ -98,19 +98,19 @@ Since both the link title ("link to myself") and the link target ("Linking in ~W
 
 For example, an attempt to use a [[reference|TextReference]] and a [[variable|Variables]] to dynamically generate a link like this:
 
-```
-[[{{!!caption}}|<<currentTiddler>>]]
-```
+<<.bad-example "`[[{{!!caption}}|<<currentTiddler>>]]`">>
+
 is the same as trying to use the LinkWidget and TextWidget like this:
 
-```
+<<.bad-example """```
 <$link to="<<currentTiddler>>">
   <$text text="{{!!caption}}"/>
 </$link>
-```
+```""">>
+
 This will not work as desired. Content inside of quoted widget attributes is [[treated as a literal value|HTML in WikiText]] and protected from WikiText expansion, so it will render like this:
 
-[[{{!!caption}}|<<currentTiddler>>]]
+<<.bad-example "[[{{!!caption}}|<<currentTiddler>>]]">>
 
 In order to get the desired result, the LinkWidget can be used directly like this:
 
