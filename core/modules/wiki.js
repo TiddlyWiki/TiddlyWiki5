@@ -1363,7 +1363,7 @@ exports.getTiddlerText = function(title,defaultText) {
 	if(!tiddler) {
 		return defaultText;
 	}
-	if(!tiddler.hasField("_is_skinny")) {
+	if(!tiddler.hasField("_is_skinny") && tiddler.hasField("text")) {
 		// Just return the text if we've got it
 		return tiddler.fields.text || "";
 	} else {

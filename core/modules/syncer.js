@@ -29,6 +29,7 @@ Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they'v
 Syncer.prototype.errorRetryInterval = 5 * 1000; // Interval to retry after an error
 Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
 Syncer.prototype.pollTimerInterval = 60 * 1000; // Interval for polling for changes from the adaptor
+Syncer.prototype.alwaysFetchAllSkinnyTiddlers = true; // Should all skinny tiddler be immediately loaded?
 
 /*
 Instantiate the syncer with the following options:
@@ -50,6 +51,7 @@ function Syncer(options) {
 	this.errorRetryInterval = options.errorRetryInterval || this.errorRetryInterval;
 	this.fallbackInterval = options.fallbackInterval || this.fallbackInterval;
 	this.pollTimerInterval = options.pollTimerInterval || parseInt(this.wiki.getTiddlerText(this.titleSyncPollingInterval,""),10) || this.pollTimerInterval;
+	this.alwaysFetchAllSkinnyTiddlers = options.alwaysFetchAllSkinnyTiddlers || this.alwaysFetchAllSkinnyTiddlers;
 	this.logging = "logging" in options ? options.logging : true;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""),{
@@ -359,11 +361,13 @@ Syncer.prototype.syncFromServer = function() {
 				// Ignore the incoming tiddler if it's the same as the revision we've already got
 				if(currRevision !== incomingRevision) {
 					// Only load the skinny version if we don't already have a fat version of the tiddler
-					if(!tiddler || tiddler.fields.text === undefined) {
+					if(!tiddler || tiddler.fields._is_skinny || tiddler.fields.text === undefined) {
 						self.storeTiddler(tiddlerFields);
 					}
-					// Do a full load of this tiddler
-					self.titlesToBeLoaded[tiddlerFields.title] = true;
+					// Only load skinny tiddler immediately if configured to do so.
+					if (self.alwaysFetchAllSkinnyTiddlers) {
+						self.titlesToBeLoaded[tiddlerFields.title] = true;
+					}
 				}
 			}
 			// Delete any tiddlers that were previously reported but missing this time
@@ -402,6 +406,9 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 			// Mark the tiddler as needing loading, and having already been lazily loaded
 			this.titlesToBeLoaded[title] = true;
 			this.titlesHaveBeenLazyLoaded[title] = true;
+			// Since we're handling on-demand lazyLoad event, we shouldn't wait for the poll interval
+			// and instead just sync now.
+			this.syncFromServer();
 		}
 	}
 };
