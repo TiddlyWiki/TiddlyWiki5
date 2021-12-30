@@ -95,8 +95,8 @@ function FramedEngine(options) {
 			{name: "dragover",handlerObject: this.widget,handlerMethod: "handleDragOverEvent"},
 			{name: "dragleave",handlerObject: this.widget,handlerMethod: "handleDragLeaveEvent"},
 			{name: "dragend",handlerObject: this.widget,handlerMethod: "handleDragEndEvent"},
-			{name: "drop", handlerObject: this.widget,handlerMethod: "handleDropEvent"},
-			{name: "paste", handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
+			{name: "drop",handlerObject: this.widget,handlerMethod: "handleDropEvent"},
+			{name: "paste",handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
 			{name: "click",handlerObject: this.widget,handlerMethod: "handleClickEvent"}
 		]);
 	}

@@ -221,7 +221,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
-		} else if (changedTiddlers[this.editRefreshTitle]) {
+		} else if(changedTiddlers[this.editRefreshTitle]) {
 			this.engine.updateDomNodeText(this.getEditInfo().value);
 		} else if(changedTiddlers[this.editTitle]) {
 			var editInfo = this.getEditInfo();
@@ -306,7 +306,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		var propertiesToCopy = propertiesToCopy || [],
 			newEvent = this.document.createEventObject ? this.document.createEventObject() : this.document.createEvent("Events");
 		if(newEvent.initEvent) {
-			newEvent.initEvent(event.type, true, true);
+			newEvent.initEvent(event.type,true,true);
 		}
 		$tw.utils.each(propertiesToCopy,function(prop){
 			newEvent[prop] = event[prop];
