@@ -2649,3 +2649,4 @@ if(typeof(exports) !== "undefined") {
 } else {
 	_boot(window.$tw);
 }
+//# sourceURL=$:/boot/boot.js
