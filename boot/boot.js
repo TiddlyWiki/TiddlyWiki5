@@ -1081,7 +1081,7 @@ $tw.Wiki = function(options) {
 		tiddlerTitles = null, // Array of tiddler titles
 		getTiddlerTitles = function() {
 			if(!tiddlerTitles) {
-				tiddlerTitles = Object.keys(tiddlers);
+				tiddlerTitles = Object.keys(tiddlers).sort();
 			}
 			return tiddlerTitles;
 		},
@@ -1091,7 +1091,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers);
+				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort();
 			}
 			return shadowTiddlerTitles;
 		},
