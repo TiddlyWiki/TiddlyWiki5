@@ -69,6 +69,26 @@ $tw.utils.isArrayEqual = function(array1,array2) {
 };
 
 /*
+Add an entry to a sorted array if it doesn't already exist, while maintaining the sort order
+*/
+$tw.utils.insertSortedArray = function(array,value) {
+	var low = 0, high = array.length - 1, mid, cmp;
+	while(low <= high) {
+		mid = (low + high) >> 1;
+		cmp = array[mid];
+		if(value > cmp) {
+			low = mid + 1;
+		} else if(value < cmp) {
+			high = mid - 1;
+		} else {
+			return array;
+		}
+	}
+	array.splice(low,0,value);
+	return array;
+};
+
+/*
 Push entries onto an array, removing them first if they already exist in the array
 	array: array to modify (assumed to be free of duplicates)
 	value: a single value to push or an array of values to push
@@ -1134,10 +1154,8 @@ $tw.Wiki = function(options) {
 				}
 				// Save the new tiddler
 				tiddlers[title] = tiddler;
-				// Check we've got it's title
-				if(tiddlerTitles && tiddlerTitles.indexOf(title) === -1) {
-					tiddlerTitles.push(title);
-				}
+				// Check we've got the title
+				tiddlerTitles = $tw.utils.insertSortedArray(tiddlerTitles || [],title);
 				// Record the new tiddler state
 				updateDescriptor["new"] = {
 					tiddler: tiddler,
