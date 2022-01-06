@@ -314,8 +314,7 @@ excludeEventAttributes: ignores attributes whose name begins with "on"
 Widget.prototype.assignAttributes = function(domNode,options) {
 	options = options || {};
 	var self = this;
-	$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
-		var name = attribute.name, value = self.getAttribute(name);
+	var assignAttribute = function(name,value) {
 		// Check for excluded attribute names
 		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
 			value = undefined;
@@ -338,7 +337,17 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 				}
 			}
 		}
-	});
+	}
+	// Not all parse tree nodes have the orderedAttributes property
+	if(this.parseTreeNode.orderedAttributes) {
+		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
+			assignAttribute(attribute.name,self.getAttribute(attribute.name));
+		});	
+	} else {
+		$tw.utils.each(self.attributes,function(value,name) {
+			assignAttribute(name,value);
+		});	
+	}
 };
 
 /*
