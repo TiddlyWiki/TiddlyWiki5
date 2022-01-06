@@ -341,11 +341,11 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 	// Not all parse tree nodes have the orderedAttributes property
 	if(this.parseTreeNode.orderedAttributes) {
 		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
-			assignAttribute(attribute.name,self.getAttribute(attribute.name));
+			assignAttribute(attribute.name,self.attributes[attribute.name]);
 		});	
 	} else {
-		$tw.utils.each(self.attributes,function(value,name) {
-			assignAttribute(name,value);
+		$tw.utils.each(Object.keys(self.attributes).sort(),function(name) {
+			assignAttribute(name,self.attributes[name]);
 		});	
 	}
 };
