@@ -57,8 +57,19 @@ Tests the filtering mechanism.
 			);
 		});
 	
+		describe("With tiddlers in the store unsorted",function() {
+			testWithAndWithoutIndexers();
+		});
+		describe("With tiddlers in the store sorted ascending",function() {
+			testWithAndWithoutIndexers({sort: "ascending"});
+		});
+		describe("With tiddlers in the store sorted descending",function() {
+			testWithAndWithoutIndexers({sort: "descending"});
+		});
+
+	function testWithAndWithoutIndexers(options) {
 		describe("With no indexers", function() {
-			var wiki = setupWiki({enableIndexers: []});
+			var wiki = setupWiki(Object.assign({},options,{enableIndexers: []}));
 			it("should not create indexes when requested not to",function() {
 				expect(wiki.getIndexer("FieldIndexer")).toBe(null);
 			});
@@ -66,14 +77,16 @@ Tests the filtering mechanism.
 		});
 	
 		describe("With all indexers", function() {
-			var wiki = setupWiki();
+			var wiki = setupWiki(options);
 			if(wiki.getIndexer("FieldIndexer")) {
 				wiki.getIndexer("FieldIndexer").setMaxIndexedValueLength(8); // Note that JoeBloggs is 9, and John is 5
 			}
 			runTests(wiki);
 		});
+	}
 	
 	function setupWiki(wikiOptions) {
+		wikiOptions = wikiOptions || {};
 		// Create a wiki
 		var wiki = new $tw.Wiki(wikiOptions);
 		// Add a plugin containing some shadow tiddlers
@@ -104,13 +117,12 @@ Tests the filtering mechanism.
 				}
 			}
 		};
-		wiki.addTiddler({
+		var tiddlers = [{
 			title: "$:/ShadowPlugin",
 			text: JSON.stringify(shadowTiddlers),
 			"plugin-type": "plugin",
-			type: "application/json"});
-		// Add a few  tiddlers
-		wiki.addTiddler({
+			type: "application/json"
+		},{
 			title: "TiddlerOne",
 			text: "The quick brown fox in $:/TiddlerTwo",
 			tags: ["one"],
@@ -119,8 +131,8 @@ Tests the filtering mechanism.
 			slug: "tiddler-one",
 			authors: "Joe Bloggs",
 			modifier: "JoeBloggs",
-			modified: "201304152222"});
-		wiki.addTiddler({
+			modified: "201304152222"
+		},{
 			title: "$:/TiddlerTwo",
 			text: "The rain in Spain\nfalls mainly on the plain and [[a fourth tiddler]]",
 			tags: ["two"],
@@ -129,44 +141,75 @@ Tests the filtering mechanism.
 			slug: "tiddler-two",
 			authors: "[[John Doe]]",
 			modifier: "John",
-			modified: "201304152211"});
-		wiki.addTiddler({
+			modified: "201304152211"
+		},{
 			title: "Tiddler Three",
 			text: "The speed of sound in light\n\nThere is no TiddlerZero but TiddlerSix",
 			tags: ["one","two"],
 			cost: "56",
 			value: "80",
 			modifier: "John",
-			modified: "201304162202"});
-		wiki.addTiddler({
+			modified: "201304162202"
+		},{
 			title: "a fourth tiddler",
 			text: "The quality of mercy is not drained by [[Tiddler Three]]",
 			tags: [],
 			cost: "82",
 			value: "72",
 			empty: "not",
-			modifier: "John"});
-		wiki.addTiddler({
+			modifier: "John"
+		},{
 			title: "one",
 			text: "This is the text of tiddler [[one]]",
 			list: "[[Tiddler Three]] [[TiddlerOne]]",
 			empty: "",
-			modifier: "John"});
-		wiki.addTiddler({
+			modifier: "John"
+		},{
 			title: "hasList",
 			text: "This is the text of tiddler [[hasList]]",
 			list: "[[Tiddler Three]] [[TiddlerOne]]",
-			modifier: "PMario"});
-		wiki.addTiddler({
+			modifier: "PMario"
+		},{
 			title: "has filter",
 			text: "This is the text of tiddler [[has filter]]",
 			filter: "[[Tiddler Three]] [[TiddlerOne]] [subfilter{hasList!!list}]",
-			modifier: "PMario"});
-		wiki.addTiddler({
+			modifier: "PMario"
+		},{
 			title: "filter regexp test",
 			text: "Those strings have been used to create the `regexp = /[+|\-|~]?([[](?:[^\]])*\]+)|([+|-|~|\S]\S*)/;`",
 			filter: "+aaa -bbb ~ccc aaaaaabbbbbbbbaa \"bb'b\" 'cc\"c' [[abc]] [[tiddler with spaces]] [is[test]] [is[te st]] a s df [enlist<hugo>] +[enlist:raw{test with spaces}] [enlist:raw{test with spaces}] [[a a]] [[ ] [ ]] [[ [hugo]] [subfilter{Story/Tower of Hanoi/A-C Sequence}]",
-			modifier: "PMario"});
+			modifier: "PMario"
+		}];
+		// Load the tiddlers in the required order
+		var fnCompare;
+		switch(wikiOptions.sort) {
+			case "ascending":
+				fnCompare = function(a,b) {
+					if(a.title < b.title) {
+						return -1;
+					} else if(a.title > b.title) {
+						return +1;
+					} else {
+						return 0;
+					}
+				};
+				break;
+			case "descending":
+				fnCompare = function(a,b) {
+					if(a.title < b.title) {
+						return +1;
+					} else if(a.title > b.title) {
+						return -1;
+					} else {
+						return 0;
+					}
+				};
+				break;
+		}
+		if(fnCompare) {
+			tiddlers.sort(fnCompare);
+		}
+		wiki.addTiddlers(tiddlers);
 		// Unpack plugin tiddlers
 		wiki.readPluginInfo();
 		wiki.registerPluginTiddlers("plugin");
