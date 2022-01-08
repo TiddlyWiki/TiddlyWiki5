@@ -1111,7 +1111,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort();
+				shadowTiddlerTitles = Object.keys(shadowTiddlers);
 			}
 			return shadowTiddlerTitles;
 		},
