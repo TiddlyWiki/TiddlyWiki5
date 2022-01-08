@@ -75,10 +75,10 @@ $tw.utils.insertSortedArray = function(array,value) {
 	var low = 0, high = array.length - 1, mid, cmp;
 	while(low <= high) {
 		mid = (low + high) >> 1;
-		cmp = array[mid];
-		if(value > cmp) {
+		cmp = value.localeCompare(array[mid]);
+		if(cmp > 0) {
 			low = mid + 1;
-		} else if(value < cmp) {
+		} else if(cmp < 0) {
 			high = mid - 1;
 		} else {
 			return array;
@@ -1101,7 +1101,7 @@ $tw.Wiki = function(options) {
 		tiddlerTitles = null, // Array of tiddler titles
 		getTiddlerTitles = function() {
 			if(!tiddlerTitles) {
-				tiddlerTitles = Object.keys(tiddlers).sort();
+				tiddlerTitles = Object.keys(tiddlers).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return tiddlerTitles;
 		},
