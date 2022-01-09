@@ -17,11 +17,13 @@ type: text/vnd.tiddlywiki
 
 ! Bug Fixes
 
-*
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/60187dc59e6546d9ca8e6a35418f782a9627cda0">> importing/upgrading encrypted single file wikis
 
 ! Usability Improvements
 
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/853a899c77766e47eade1dfa5822640ef9915637">> wrapping and wikification of field names in field viewer
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/0186c6490fbd1d8fd4de7c3fa99ccf4d129fbd80">> missing whitespace between description and MIME type in edit template dropdown for the ''type'' field
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/c7e8c87f85b54f60302ff8e396a7569d996e3f67">> incorrect usage of code view for certain system tiddlers
 
 ! Widget Improvements
 
@@ -33,7 +35,9 @@ type: text/vnd.tiddlywiki
 
 ! Hackability Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/54cfda76ee353190f1cf0210b9071894fb1a5690">> support for ''code-body'' field set to ''yes'' to trigger display of a tiddler in the code view
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/66ae1d6930796a9eb062fdb64a755adab8f39294">> classes to the ImageWidget to indicate whether it is loading, loaded or has encountered an error
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6381">> sourceURL tags to $:/boot/boot.js and $:/boot/bootprefix.js, enabling them to be accessed in the browser debugger more easily
 
 ! Developer Improvements
 
@@ -45,7 +49,7 @@ type: text/vnd.tiddlywiki
 
 ! Translation improvements
 
-* 
+* Polish
 
 ! Acknowledgements
 
