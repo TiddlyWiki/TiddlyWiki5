@@ -3,6 +3,7 @@ title: $:/language/Docs/Fields/
 _canonical_uri: 外部图像条目的完整的 URI
 bag: 条目的来源集的名称
 caption: 显示于页签或按钮上的标题文字
+code-body: 若设置为 ''yes''，视图模板将以程式码形式显示条目
 color: 条目的 CSS 颜色值
 component: 负责[[警示条目|AlertMechanism]]的组件名称
 created: 条目的创建日期
@@ -13,8 +14,9 @@ description: 插件的说明、描述
 draft.of: 草稿条目，包含条目的标题、标签、栏位 ...
 draft.title: 草稿条目的标题
 footer: wizard 的注脚
+hide-body: 若设置为 ''yes''，视图模板将隐藏条目的主体
 icon: 条目的标题含有与条目关联的图标
-library: 若设为 "yes"，表示条目应该被保存为一个 JavaScript 程序库
+library: 若设置为 ''yes''，表示条目应该被保存为一个 JavaScript 程序库
 list: 条目的列表，指定一些条目的标题清单
 list-before:当前条目名称将被添加到条目排序清单中的设置条目名称之前，或若此栏位存在但是空的，则被添加于清单的前端
 list-after: 当前条目名称将被添加到条目排序清单的设置条目名称之后，或若此栏位存在但是空的，则被添加于清单的尾端
@@ -31,7 +33,7 @@ tags: 条目的标签清单
 text: 条目的内文
 throttle.refresh: 如果存在，则限制此条目的刷新
 title: 条目的唯一名称
-toc-link: 若设为: "no"，则抑制目录树中的条目链接。
+toc-link: 若设置为 ''no''，则抑制目录树中的条目链接。
 type: 条目的内容类型
 version: 插件的版本信息
 _is_skinny: 如果存在，则表示必须从服务器加载条目的文本字段
