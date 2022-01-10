@@ -1,0 +1,39 @@
+created: 20220110203115000
+modified: 20220110203115000
+tags: [[Operator Examples]] [[parsedate Operator]]
+title: parsedate Operator (Examples)
+isodate: 2022-01-01T12:15:00
+type: text/vnd.tiddlywiki
+
+\define utc-datetime() [UTC]MMM the DD. YYYY 0hh:0mm UTC
+
+<<.operator-example 1 "[[2011-01-01T12:15:21]parsedate[JS]]">>
+
+This example uses the `isodate` field of this tiddler containing "<$view field="isodate"/>":
+
+<<.operator-example 2 "[get[isodate]parsedate[JS]]">>
+
+The following example uses a HTML5 date and time picker in combination with the `parsedate` operator to convert the output of the HTML5 input element into TiddlyWiki's [[DateFormat|date format]]. It uses the [[format Operator]] to output the date in human-readable form.
+
+<$macrocall $name=".example" n="3"
+eg="""<$edit-text field="isodate" type="datetime-local"/><br/><$text text={{{[get[isodate]parsedate[JS]format:date[MMM the DDth YYYY at 0hh:0mm]]}}}/>"""/>
+
+! Time zone examples for format `JS`
+
+The following examples use the predefined variable `utc-datetime` that outputs the date and time in UTC for illustration.
+
+Values that contain date and time but no time zone information are interpreted within the local timezone. This date is midnight on January the 1st, 2011 in the local timezone. Observe how it is converted to UTC.
+
+<<.operator-example 4 "[[2011-01-01T00:00:00]parsedate[JS]format:date<utc-datetime>]">>
+
+Values that contain only a date are interpreted as UTC. This makes sure that the date is not changed by the conversion. If your time zone is ahead of UTC in the above example, the date will change to December the 31st, 2010. In this example, the date will be correctly represented.
+
+<<.operator-example 5 "[[2011-01-01]parsedate[JS]format:date<utc-datetime>]">>
+
+Appending a `Z` to the Date and Time information makes sure it is always interpreted as UTC. The local time zone is ignored.
+
+<<.operator-example 6 "[[2011-01-01T00:00:00Z]parsedate[JS]format:date<utc-datetime>]">>
+
+Instead of `Z` a time zone offset can be specified. This offset will be used to interprete the date and time information. The local time zone is ignored.
+
+<<.operator-example 7 "[[2011-01-01T00:00:00+05:00]parsedate[JS]format:date<utc-datetime>]">>
