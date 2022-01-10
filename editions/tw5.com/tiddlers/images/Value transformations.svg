@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64.157005mm"
+   height="29.740005mm"
+   viewBox="0 0 64.157005 29.740005"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9562" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Send-3"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9562-6" />
+    </marker>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-16.643257,-18.311505)">
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="37.550411"
+       y="21.527843"
+       id="text5090"><tspan
+         id="tspan5088"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="37.550411"
+         y="21.527843">TW5 field</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Send)"
+       d="M 40.760143,24.493964 V 35.384493"
+       id="path9429" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Send-3)"
+       d="M 52.42257,37.169834 V 26.279305"
+       id="path9429-7" />
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="16.548517"
+       y="31.805136"
+       id="text10857"><tspan
+         id="tspan10855"
+         style="stroke-width:0.264583"
+         x="16.548517"
+         y="31.805136">toInputValue</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="53.956135"
+       y="31.805136"
+       id="text11301"><tspan
+         id="tspan11299"
+         style="stroke-width:0.264583"
+         x="53.956135"
+         y="31.805136">fromInputValue</tspan></text>
+    <g
+       id="g15663">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.612694;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect6690"
+         width="35.519291"
+         height="7.5835614"
+         x="29.564837"
+         y="40.161602" />
+      <path
+         d="m 65.084131,40.161603 v 7.583561 H 29.564837"
+         style="fill:none;stroke:#787878;stroke-width:0.612694;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path2552" />
+      <path
+         id="rect846"
+         style="fill:none;stroke:#282828;stroke-width:0.612694;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 29.564837,47.745164 V 40.161603 H 65.08413" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:0;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583"
+         x="30.247374"
+         y="45.370037"
+         id="text13577"><tspan
+           id="tspan13575"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;line-height:2;font-family:sans-serif;-inkscape-font-specification:sans-serif;stroke-width:0.264583"
+           x="30.247374"
+           y="45.370037">HTML element<tspan
+   style="font-size:4.58611px;line-height:2;letter-spacing:0px;baseline-shift:baseline"
+   id="tspan16786">|</tspan></tspan></text>
+    </g>
+  </g>
+</svg>

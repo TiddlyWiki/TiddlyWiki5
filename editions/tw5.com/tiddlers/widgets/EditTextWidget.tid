@@ -1,6 +1,6 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20211104200554064
+modified: 20220109200041033
 tags: Widgets
 title: EditTextWidget
 type: text/vnd.tiddlywiki
@@ -37,7 +37,9 @@ The content of the `<$edit-text>` widget is ignored.
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 |disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
 |fileDrop|<<.from-version "5.2.0">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. Defaults to "no"|
-
+|toInputValue|<<.from-version "5.2.2">> Optional. Filter used to convert the value of the field into a value assigned to the generated `<input>`/`<textarea>`. See [[EditTextWidget value transformations|EditTextWidget value transformations]] for more information.|
+|fromInputValue|<<.from-version "5.2.2">> Optional. Filter used to convert the text entered into the generated `<input>`/`<textarea>` into a value to be stored in the field. See [[EditTextWidget value transformations|EditTextWidget value transformations]] for more information.|
+|errorClass|<<.from-version "5.2.2">> A CSS class that is assigned to the generated HTML editing element if `fromInputValue` returns an empty result. (defaults to `tw-input-error`)|
 
 ! Example
 

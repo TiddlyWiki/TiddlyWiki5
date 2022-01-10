@@ -1,0 +1,44 @@
+created: 20220109200433409
+modified: 20220109200433409
+tags: Widgets
+title: EditTextWidget value transformations
+type: text/vnd.tiddlywiki
+
+By default, the [[<$edit-text> widget|EditTextWidget]] show the value of a field exactly like it is stored within the associated field. The `toInputValue` and `fromInputValue` attributes provide a way to change this behaviour.
+
+The filter assigned `toInputValue` attribute is used to modify the value after it was read from the field, before it is displayed to the user. If this filter returns no value, an empty value is assigned to the generated HTML editing element.
+
+The filter assigned to the `fromInputValue` attribute is used to modify the value that was entered by the user, before it is stored into the field. If this filter returns no value, the CSS class specified in the `errorClass` attribute is assigned to the generated HTML editing element.
+
+! Transforming values
+
+As an example for the transformation that can be done by using the `toInputValue` and `fromInputValue` attributes, let's build a date picker that uses the HTML5 "date" input type and stores its value inside a TW5 field.
+
+HTML5 defines an input type "date" that expects its value to be a simplified form of the [[ISO 8601|https://en.wikipedia.org/wiki/ISO_8601]] date format. TiddlyWiki uses its own [[date format||date format]]. We use `fromInputValue` and `toInputValue` to convert between the two formats:
+
+<$macrocall $name=".example" n="1"
+eg="""<$edit-text field="mydate" type="date" placeholder="Set your date" toInputValue="[format:date[YYYY-0MM-0DD]]" fromInputValue="[parsedate[ISO]]"/>
+<$view field="mydatetime"/>
+"""/>
+
+The `toInputValue` filter uses the `format` filter to convert the date from the TW5 date format into the HTML representation. For example, the field value "20220102000000000" will be converted into "2022-01-02".
+
+The `fromInputValue` filter is used after the user changed the value. It converts the HTML5 representation of the value back to the TW5 [[date format|date format]] via the `parsedate` filter. For example, the HTML value `2022-02-05" will be converted back to `20220205000000000".
+
+[img[Value transformation.svg]]
+
+For everything to work correctly, the `toInputValue` and `fromInputValue` filters must be complementary. If the output of the `toInputValue` filter can not be converted back to the original value by the `fromInputValue` filter, strange things may happen.
+
+! Input validation
+
+The `fromInputValue` filter can be used on its own to validate the input value. This works by assigning a filter to `fromInputValue` that returns the original value or nothing. If nothing is returned, the value will __not__ be saved to the field and the `errorClass` CSS class will be assigned to the generated editing element.
+
+As an example, let's generate an input field that only accepts integer numbers:
+
+<$macrocall $name=".example" n="1"
+eg="""<$set name="digits-only" value="^[0-9]*$">
+<$edit-text field="mynumbers" placeholder="Input only numbers" fromInputValue="[regexp<digits-only>]"/><br/>
+</$set>
+"""/>
+
+The `regexp` filter only returns the original value if it matches the supplied regular expression. If the regular expression does not match, no value is returned.
