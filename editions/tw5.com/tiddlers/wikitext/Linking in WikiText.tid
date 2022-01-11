@@ -1,6 +1,6 @@
 caption: Linking
 created: 20131205155230596
-modified: 20160607095245257
+modified: 20211230145939554
 tags: WikiText
 title: Linking in WikiText
 type: text/vnd.tiddlywiki
@@ -80,3 +80,40 @@ You can also use the extended syntax to force an external link:
 
 See the LinkWidget for details of the underlying widget used to implement tiddler links, including macros that can be used to customise its behaviour.
 
+! Generating dynamic links
+
+[[Linking in WikiText]] does not lend itself well to creating dynamic links. The reason is because this WikiText link:
+
+```
+[[link to myself|Linking in WikiText]]
+```
+is shorthand for using the LinkWidget and TextWidget like this:
+
+```
+<$link to="Linking in WikiText">
+  <$text text="link to myself"/>
+</$link>
+```
+Since both the link title ("link to myself") and the link target ("Linking in ~WikiText") are used as widget attributes, no WikiText expansion takes place.
+
+For example, an attempt to use a [[reference|TextReference]] and a [[variable|Variables]] to dynamically generate a link like this:
+
+<<.bad-example "`[[{{!!caption}}|<<currentTiddler>>]]`">>
+
+is the same as trying to use the LinkWidget and TextWidget like this:
+
+<<.bad-example """```
+<$link to="<<currentTiddler>>">
+  <$text text="{{!!caption}}"/>
+</$link>
+```""">>
+
+This will not work as desired. Content inside of quoted widget attributes is [[treated as a literal value|HTML in WikiText]] and protected from WikiText expansion, so it will render like this:
+
+<<.bad-example "[[{{!!caption}}|<<currentTiddler>>]]">>
+
+In order to get the desired result, the LinkWidget can be used directly like this:
+
+<<wikitext-example-without-html src:"<$link to=<<currentTiddler>>>{{!!caption}}</$link>">>
+
+See also another example of [[constructing dynamic links|Concatenating text and variables using macro substitution]].
