@@ -24,13 +24,13 @@ exports.isDraft = function() {
 	return this.hasField("draft.of");
 };
 
-exports.getFieldString = function(field) {
+exports.getFieldString = function(field,defaultValue) {
 	var value = this.fields[field];
 	// Check for a missing field
 	if(value === undefined || value === null) {
-		return "";
+		return defaultValue || "";
 	}
-	// Parse the field with the associated module (if any)
+	// Stringify the field with the associated tiddler field module (if any)
 	var fieldModule = $tw.Tiddler.fieldModules[field];
 	if(fieldModule && fieldModule.stringify) {
 		return fieldModule.stringify.call(this,value);

@@ -368,7 +368,7 @@ Mark Kerrigan, @markkerrigan, 2019/08/24
 
 Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
 
-Nils-Hero Lindemann, @heronils, 2019/08/26
+Nils Lindemann, @nilslindemann, 2022/01/10
 
 Marica Odagaki, @ento, 2019/08/30
 
