@@ -1009,6 +1009,46 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[title[HelloThere]] +[format:titlelist[]]").join(" ")).toBe("HelloThere");		
 		});
 	
+		it("should handle the parsedate operator", function() {
+			// The following test cases are based on the
+			// [ES5 date format test cases](https://github.com/tc39/test262/blob/0bccacda693ada2cd1736d35eb912b27291ac6ff/implementation-contributed/v8/mjsunit/date-parse.js#L236)
+			// of the [Test262: ECMAScript Test Suite](https://github.com/tc39/test262).
+			// They are necessary to test the validator regexp.
+			expect(wiki.filterTiddlers("[[2000-01-01T08:00:00.000Z]parsedate[JS]]").join(" ")).toBe("20000101080000000");
+			expect(wiki.filterTiddlers("[[2000-01-01T08:00:00Z]parsedate[JS]]").join(" ")).toBe("20000101080000000");
+			expect(wiki.filterTiddlers("[[2000-01-01T08:00Z]parsedate[JS]]").join(" ")).toBe("20000101080000000");
+			expect(wiki.filterTiddlers("[[2000-01T08:00:00.000Z]parsedate[JS]]").join(" ")).toBe("20000101080000000");
+			expect(wiki.filterTiddlers("[[2000T08:00:00.000Z]parsedate[JS]]").join(" ")).toBe("20000101080000000");
+			expect(wiki.filterTiddlers("[[2000T08:00Z]parsedate[JS]]").join(" ")).toBe("20000101080000000");
+			expect(wiki.filterTiddlers("[[2000-01T00:00:00.000-08:00]parsedate[JS]]").join(" ")).toBe("20000101080000000");
+			expect(wiki.filterTiddlers("[[2000-01T08:00:00.001Z]parsedate[JS]]").join(" ")).toBe("20000101080000001");
+			expect(wiki.filterTiddlers("[[2000-01T08:00:00.099Z]parsedate[JS]]").join(" ")).toBe("20000101080000099");
+			expect(wiki.filterTiddlers("[[2000-01T08:00:00.999Z]parsedate[JS]]").join(" ")).toBe("20000101080000999");
+			expect(wiki.filterTiddlers("[[2000-01T00:00:00.001-08:00]parsedate[JS]]").join(" ")).toBe("20000101080000001");
+			expect(wiki.filterTiddlers("[[2000-01-01T24:00Z]parsedate[JS]]").join(" ")).toBe("20000102000000000");
+			expect(wiki.filterTiddlers("[[2000-01-01T24:00:00Z]parsedate[JS]]").join(" ")).toBe("20000102000000000");
+			expect(wiki.filterTiddlers("[[2000-01-01T24:00:00.000Z]parsedate[JS]]").join(" ")).toBe("20000102000000000");
+			// Invalid dates for the regexp validator
+			expect(wiki.filterTiddlers("[[2000-01-01TZ]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-01T60Z]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-01T60:60Z]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-0108:00Z]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-01T08Z]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-01T24:01]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-01T24:00:01]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-01T24:00:00.001]parsedate[JS]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[2000-01-01T24:00:00.999Z']parsedate[JS]]").join(" ")).toBe("");
+			// Date that pass the validation regexp, but is invalid for Date.parse.
+			// This checks the error handling after the regex validator.
+			expect(wiki.filterTiddlers("[[2000-14-01]parsedate[JS]]").join(" ")).toBe("");
+			// Invalid operator
+			expect(wiki.filterTiddlers("[[2015-03-25]parsedate[INVALID]]")).toEqual([$tw.language.getString("Error/ParseDateFilterOperator")]);
+			// Validate that a date in the local timezone is correctly parsed and represented as UTC
+			// This is tricky because we can not set the used timezone.
+			expect(wiki.filterTiddlers("[[2015-03-25T15:40]parsedate[JS]]").join(" ").substr(8, 2)).toBe((new Date("2015-03-15T15:40:32")).getUTCHours().toString());
+			expect(wiki.filterTiddlers("[[2015]] [[2020]] +[parsedate[JS]]").join(" ")).toBe("20150101000000000 20200101000000000");
+		});
+
 		it("should handle the deserializers operator", function() {
 		expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe("application/javascript,application/json,application/x-tiddler,application/x-tiddler-html-div,application/x-tiddlers,text/css,text/html,text/plain");
 		});
