@@ -43,6 +43,10 @@ $$$
 </div>
 \end
 
+\define wikitext-example-compact(src)
+<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/> `$src$` That renders as:  "$src$"
+\end
+
 \define tw-code(tiddler)
 <$codeblock language={{$tiddler$!!type}} code={{$tiddler$}}/>
 \end
