@@ -17,12 +17,13 @@ exports["application/x-tiddler-html-div"] = function(text,fields) {
 };
 
 exports["application/json"] = function(text,fields) {
-	var incoming,
-		results = [];
-	incoming = $tw.utils.parseJSONSafe(text,[{
-		title: "JSON error: " + e,
-		text: ""
-	}]);
+	var results = [],
+		incoming = $tw.utils.parseJSONSafe(text,function(err) {
+			return [{
+				title: "JSON error: " + err,
+				text: ""
+			}];
+		});
 	if(!$tw.utils.isArray(incoming)) {
 		incoming = [incoming];
 	}

@@ -414,7 +414,11 @@ $tw.utils.parseJSONSafe = function(text,defaultJSON) {
 	try {
 		return JSON.parse(text);
 	} catch(e) {
-		return defaultJSON || {};
+		if(typeof defaultJSON === "function") {
+			return defaultJSON(e);
+		} else {
+			return defaultJSON || {};
+		}
 	}
 };
 
