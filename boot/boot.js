@@ -409,6 +409,15 @@ $tw.utils.parseFields = function(text,fields) {
 	return fields;
 };
 
+// Safely parse a string as JSON
+$tw.utils.parseJSONSafe = function(text,defaultJSON) {
+	try {
+		return JSON.parse(text);
+	} catch(e) {
+		return defaultJSON || {};
+	}
+};
+
 /*
 Resolves a source filepath delimited with `/` relative to a specified absolute root filepath.
 In relative paths, the special folder name `..` refers to immediate parent directory, and the
@@ -1322,7 +1331,7 @@ $tw.Wiki = function(options) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
-					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+					pluginInfo[tiddler.fields.title] = $tw.utils.parseJSONSafe(tiddler.fields.text);
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
 			} else {
@@ -1455,7 +1464,7 @@ $tw.Wiki.prototype.defineTiddlerModules = function() {
 					}
 					break;
 				case "application/json":
-					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],JSON.parse(tiddler.fields.text));
+					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],$tw.utils.parseJSONSafe(tiddler.fields.text));
 					break;
 				case "application/x-tiddler-dictionary":
 					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],$tw.utils.parseFields(tiddler.fields.text));
@@ -1644,12 +1653,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 				}
 				return true;
 			},
-			data = {};
-		try {
-			data = JSON.parse(text);			
-		} catch(e) {
-			// Ignore JSON parse errors
-		}
+			data = $tw.utils.parseJSONSafe(text);
 		if($tw.utils.isArray(data) && isTiddlerArrayValid(data)) {
 			return data;
 		} else if(isTiddlerValid(data)) {
@@ -1689,7 +1693,7 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 				$tw.crypto.setPassword(data.password);
 				var decryptedText = $tw.crypto.decrypt(encryptedText);
 				if(decryptedText) {
-					var json = JSON.parse(decryptedText);
+					var json = $tw.utils.parseJSONSafe(decryptedText);
 					for(var title in json) {
 						$tw.preloadTiddler(json[title]);
 					}
@@ -1889,7 +1893,7 @@ filepath: pathname of the directory containing the specification file
 $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	var tiddlers = [];
 	// Read the specification
-	var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
+	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 	// Helper to process a file
 	var processFile = function(filename,isTiddlerFile,fields,isEditableFile) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
@@ -2019,7 +2023,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			console.log("Warning: missing plugin.info file in " + filepath);
 			return null;
 		}
-		var pluginInfo = JSON.parse(fs.readFileSync(infoPath,"utf8"));
+		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"));
 		// Read the plugin files
 		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
 		// Save the plugin tiddlers into the plugin info
@@ -2136,7 +2140,7 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		pluginFields;
 	// Bail if we don't have a wiki info file
 	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
+		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"));
 	} else {
 		return null;
 	}

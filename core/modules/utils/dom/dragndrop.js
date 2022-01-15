@@ -198,7 +198,7 @@ var importDataTypes = [
 ];
 
 function parseJSONTiddlers(json,fallbackTitle) {
-	var data = JSON.parse(json);
+	var data = $tw.utils.parseJSONSafe(json);
 	if(!$tw.utils.isArray(data)) {
 		data = [data];
 	}
