@@ -25,7 +25,6 @@ Use of the event catcher widget is beneficial when using large numbers of other 
 The content of the `<$eventcatcher>` widget is displayed normally.
 
 |!Attribute |!Description |
-
 |selector |A CSS selector. Only events originating inside a DOM node with this selector will be trapped |
 |//{any attributes starting with $}// |<<.from-version "5.2.0">> Each attribute name (excluding the $) specifies the name of an event, and the value specifies the action string to be invoked. For example: `$click=<<clickActions>>`  |
 |tag |Optional. The HTML element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
