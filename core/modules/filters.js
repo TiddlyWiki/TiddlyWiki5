@@ -218,6 +218,13 @@ source: an iterator function for the source tiddlers, called source(iterator), w
 widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
+	if(!this.filterCache) {
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	if(this.filterCache[filterString] !== undefined) {
+		return this.filterCache[filterString];
+	}
 	var filterParseTree;
 	try {
 		filterParseTree = this.parseFilter(filterString);
@@ -318,7 +325,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	return $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+	var compiled = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -333,6 +340,19 @@ exports.compileFilter = function(filterString) {
 		});
 		return results.toArray();
 	});
+	if(this.filterCacheCount >= 5000) {
+		// I doubt anyone will come close to 5000 cached filters (~7 Mb)
+		// but if we do, it's because something is dynamically creating
+		// filters, in which case, letting the cache grow indefinitely
+		// is a memory leak. The simplest solution is to just clear it
+		// if it gets too large. This'll result in a recaching every
+		// minute or so, which is fine.
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	this.filterCache[filterString] = compiled;
+	this.filterCacheCount++;
+	return compiled;
 };
 
 })();
