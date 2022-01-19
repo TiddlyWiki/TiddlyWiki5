@@ -51,6 +51,9 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 	} else {
 		this.storyview = null;
 	}
+	if(this.storyview && this.storyview.renderEnd) {
+		this.storyview.renderEnd();
+	}
 };
 
 /*
