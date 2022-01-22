@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20210614100305329
+modified: 20220122192311669
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -35,9 +35,11 @@ some text <!-- inline comment -->
 
 ! Block mode versus Inline mode
 
-To get the content of an HTML element to be parsed in block mode, the opening tag must be followed by two linebreaks.
+To get the content of an HTML element to be [[parsed|WikiText Parser Modes]] in [[block mode|Block Mode WikiText]], the opening tag must be followed by two linebreaks.
 
-Without the two linebreaks, the tag content will be parsed in inline mode which means that block mode formatting such as wikitext tables, lists and headings is not recognised.
+Without the two linebreaks, the tag content will be [[parsed|WikiText Parser Modes]] in [[inline mode|Inline Mode WikiText]] which means that block mode formatting such as wikitext tables, lists and headings is not recognised.
+
+See also [[WikiText parser mode: HTML examples]] and [[WikiText parser mode transitions]].
 
 ! Self closing elements
 
