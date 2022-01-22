@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 <<<
 <<wikitext-example-without-html src:'This is a paragraph.
-Only __//inline mode//__ punctuation is recognized here.
+Only __//inline mode//__ punctuation is recognised here.
 Block mode punctuation will be <b>ignored</b> until
 the paragraph ends (i.e. a blank line is encountered).
 For example:
@@ -23,11 +23,11 @@ multi-line block quotes are ignored
 '>>
 <<<
 
-To get the parser to recognize the above ''block mode'' WikiText, a blank line needs to be inserted after the "For example:" line. The blank line will be treated as the end of the paragraph and the parser will start recognizing ''block mode'' punctuation again. Like this:
+To get the parser to recognise the above ''block mode'' WikiText, a blank line needs to be inserted after the "For example:" line. The blank line will be treated as the end of the paragraph and the parser will start recognising ''block mode'' punctuation again. Like this:
 
 <<<
 <<wikitext-example-without-html src:'This is a paragraph.
-Only __//inline mode//__ punctuation is recognized here.
+Only __//inline mode//__ punctuation is recognised here.
 Block mode punctuation will be <b>ignored</b> until
 the paragraph ends (i.e. a blank line is encountered).
 For example, here is a blank line:

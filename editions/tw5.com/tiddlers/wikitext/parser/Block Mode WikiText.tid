@@ -5,7 +5,7 @@ tags: [[WikiText Parser Modes]]
 title: Block Mode WikiText
 type: text/vnd.tiddlywiki
 
-Some WikiText is recognized only while the parser is in block mode.
+Some WikiText is recognised only while the parser is in block mode.
 
 Common characteristics of such block mode WikiText:
 
@@ -25,7 +25,7 @@ Common characteristics of such block mode WikiText:
 |[[Tables in WikiText]]|Each table row is a line starting and ending with `|`.|
 |[[Typed Blocks in WikiText]]|Enclosed by lines starting with `$$`.|
 
-The above WikiText types are only recognized in ''block mode''. However, the text <<.em enclosed>> by most of them will be parsed in ''inline mode'' ([[Block Quotes in WikiText]] and [[Styles and Classes in WikiText]] are the two exceptions in which the parser will continue in ''block mode''). While in ''inline mode'' the parser may encounter something which moves it to ''block mode'' (see [[WikiText parser mode transitions]]).
+The above WikiText types are only recognised in ''block mode''. However, the text <<.em enclosed>> by most of them will be parsed in ''inline mode'' ([[Block Quotes in WikiText]] and [[Styles and Classes in WikiText]] are the two exceptions in which the parser will continue in ''block mode''). While in ''inline mode'' the parser may encounter something which moves it to ''block mode'' (see [[WikiText parser mode transitions]]).
 
 At the end of the terminating line, the parser will return to ''block mode''. 
 <<.tip 'Note: [[Hard Linebreaks in WikiText]] require an extra blank line after the trailing `"""` before the parser will return to <b>block mode</b>'>>.

@@ -25,9 +25,9 @@ then
 </$macrocall>""">>
 </tbody></table>
 
-The list syntax is recognized in [[block mode|Block Mode WikiText]] and the enclosed contents are parsed using [[inline mode|Inline Mode WikiText]]. When the parser encounters a [[wikitext macro call|Macro Calls in WikiText]] it will use the current parse mode to parse the contents of the macro. The contents of the macro contains table syntax which is only recognized in [[block mode|Block Mode WikiText]]. 
+The list syntax is recognised in [[block mode|Block Mode WikiText]] and the enclosed contents are parsed using [[inline mode|Inline Mode WikiText]]. When the parser encounters a [[wikitext macro call|Macro Calls in WikiText]] it will use the current parse mode to parse the contents of the macro. The contents of the macro contains table syntax which is only recognised in [[block mode|Block Mode WikiText]]. 
 
-Therefore, in #1 above the table syntax is not recognized. In #2 above, the blank line after the open `div` tag moves the parser back into [[block mode|Block Mode WikiText]], the macro call inherits it and the table is recognized.
+Therefore, in #1 above the table syntax is not recognised. In #2 above, the blank line after the open `div` tag moves the parser back into [[block mode|Block Mode WikiText]], the macro call inherits it and the table is recognised.
 
 When calling macros using the [[widget|MacroCallWidget]], the parse mode will be inline (#3 and #4 above) unless it is written as an open tag with a following blank line (#5 above).
 
