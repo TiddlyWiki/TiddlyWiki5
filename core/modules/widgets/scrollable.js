@@ -54,7 +54,7 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 Scroll an element into view
 */
 ScrollableWidget.prototype.scrollIntoView = function(element,callback,options) {
-	var duration = ($tw.utils.hop(options,"animationDuration")) ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
+	var duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
 		srcWindow = element ? element.ownerDocument.defaultView : window;
 	this.cancelScroll();
 	this.startTime = Date.now();

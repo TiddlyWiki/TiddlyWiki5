@@ -68,7 +68,7 @@ Handle a scroll event hitting the page document
 */
 PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
-		duration = ($tw.utils.hop(options,"animationDuration")) ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
+		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
 		srcWindow = element ? element.ownerDocument.defaultView : window;
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
