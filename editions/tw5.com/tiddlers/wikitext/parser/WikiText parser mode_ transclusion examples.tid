@@ -1,0 +1,56 @@
+created: 20220122145022547
+modified: 20220122180845946
+tags: [[WikiText parser mode transitions]]
+title: WikiText parser mode: transclusion examples
+type: text/vnd.tiddlywiki
+
+
+Given the tiddler  [[table-example]] defined with these contents:
+<$codeblock code={{table-example}}/>
+then
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "* {{table-example}}">>
+<<wikitext-example-table-row 2 """* <div>
+
+{{table-example}}
+</div>
+""">>
+<<wikitext-example-table-row 3 "* <$transclude tiddler=table-example/>">>
+<<wikitext-example-table-row 4 "* <$transclude tiddler=table-example></$transclude>">>
+<<wikitext-example-table-row 5 """* <$transclude tiddler=table-example>
+
+</$transclude>""">>
+<<wikitext-example-table-row  6 "* <$transclude tiddler=table-example mode=block/>">>
+</tbody></table>
+
+The list syntax is recognised in [[block mode|Block Mode WikiText]] and the enclosed contents are parsed using [[inline mode|Inline Mode WikiText]]. When the parser encounters a [[wikitext transclusion|Transclusion in WikiText]] it will use the current parse mode to parse the contents of the transcluded tiddler. The contents of the example tiddler contains table syntax which is only recognised in [[block mode|Block Mode WikiText]]. 
+
+Therefore, in #1 above the table syntax is not recognised. In #2 above, the blank line after the open `div` tag moves the parser back into [[block mode|Block Mode WikiText]], the transcluded text inherits it and the table is recognised.
+
+When transcluding tiddlers using the [[widget|TranscludeWidget]], the parse mode will be inline (#3 and #4 above) unless it is written as an open tag with a following blank line (#5 above).
+
+<<.tip "See also [[WikiText parser mode: macro examples]] for similar examples. The only difference here is <<.wlink TranscludeWidget>> has a <<.attr mode>> attribute (extra example #6) which allows the parse mode to be explicitly overridden rather than come implicitly based on the they way the tag is written">>
+
+---
+
+In these examples, the transclusions are at the top level instead of enclosed in list items:
+
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "{{table-example}}">>
+<<wikitext-example-table-row 2 """<div>
+
+{{table-example}}
+</div>
+""">>
+<<wikitext-example-table-row 3 "<$transclude tiddler=table-example/>">>
+<<wikitext-example-table-row 4 "<$transclude tiddler=table-example></$transclude>">>
+<<wikitext-example-table-row 5 """<$transclude tiddler=table-example>
+
+</$transclude>""">>
+<<wikitext-example-table-row  6 "<$transclude tiddler=table-example mode=inline/>">>
+</tbody></table>
+
+
+Of these examples, only the two <<.wlink TranscludeWidget>> tags which are not followed by a blank line and the widget call using <<.attr mode>>=<<.value inline>> are parsed using [[inline mode|Inline Mode WikiText]].
+
+<<.tip "See also [[WikiText parser mode: macro examples]] for similar examples">>
