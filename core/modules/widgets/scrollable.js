@@ -39,7 +39,7 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 		return true;
 	}
 	var options = {};
-	if(event.paramObject && event.paramObject.hasOwnProperty("animationDuration")) {
+	if(event.paramObject && $tw.utils.hop(event.paramObject,"animationDuration")) {
 		options.animationDuration = event.paramObject.animationDuration;
 	}
 	if(event.paramObject && event.paramObject.selector) {
@@ -54,8 +54,8 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 Scroll an element into view
 */
 ScrollableWidget.prototype.scrollIntoView = function(element,callback,options) {
-	var duration = (options && options.hasOwnProperty("animationDuration")) ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
-	srcWindow = element ? element.ownerDocument.defaultView : window;
+	var duration = (options && $tw.utils.hop(options,"animationDuration")) ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
+		srcWindow = element ? element.ownerDocument.defaultView : window;
 	this.cancelScroll();
 	this.startTime = Date.now();
 	var scrollPosition = {

@@ -50,7 +50,7 @@ Handle an event
 PageScroller.prototype.handleEvent = function(event) {
 	if(event.type === "tm-scroll") {
 		var options = {};
-		if(event.paramObject && event.paramObject.hasOwnProperty("animationDuration")) {
+		if(event.paramObject && $tw.utils.hop(event.paramObject,"animationDuration")) {
 			options.animationDuration = event.paramObject.animationDuration;
 		}
 		if(event.paramObject && event.paramObject.selector) {
@@ -68,8 +68,8 @@ Handle a scroll event hitting the page document
 */
 PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
-		duration = (options && options.hasOwnProperty("animationDuration")) ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
-	    srcWindow = element ? element.ownerDocument.defaultView : window;
+		duration = (options && $tw.utils.hop(options,"animationDuration")) ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
+		srcWindow = element ? element.ownerDocument.defaultView : window;
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
