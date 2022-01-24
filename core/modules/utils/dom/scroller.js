@@ -49,10 +49,14 @@ Handle an event
 */
 PageScroller.prototype.handleEvent = function(event) {
 	if(event.type === "tm-scroll") {
+		var options = {};
+		if($tw.utils.hop(event.paramObject,"animationDuration")) {
+			options.animationDuration = event.paramObject.animationDuration;
+		}
 		if(event.paramObject && event.paramObject.selector) {
-			this.scrollSelectorIntoView(null,event.paramObject.selector);
+			this.scrollSelectorIntoView(null,event.paramObject.selector,null,options);
 		} else {
-			this.scrollIntoView(event.target);
+			this.scrollIntoView(event.target,null,options);
 		}
 		return false; // Event was handled
 	}
@@ -62,10 +66,10 @@ PageScroller.prototype.handleEvent = function(event) {
 /*
 Handle a scroll event hitting the page document
 */
-PageScroller.prototype.scrollIntoView = function(element,callback) {
+PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
-		duration = $tw.utils.getAnimationDuration(),
-	    srcWindow = element ? element.ownerDocument.defaultView : window;
+		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
+		srcWindow = element ? element.ownerDocument.defaultView : window;
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
@@ -122,11 +126,11 @@ PageScroller.prototype.scrollIntoView = function(element,callback) {
 	drawFrame();
 };
 
-PageScroller.prototype.scrollSelectorIntoView = function(baseElement,selector,callback) {
+PageScroller.prototype.scrollSelectorIntoView = function(baseElement,selector,callback,options) {
 	baseElement = baseElement || document.body;
 	var element = baseElement.querySelector(selector);
 	if(element) {
-		this.scrollIntoView(element,callback);
+		this.scrollIntoView(element,callback,options);
 	}
 };
 
