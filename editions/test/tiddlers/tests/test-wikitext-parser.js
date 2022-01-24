@@ -119,10 +119,23 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should parse comment in pragma area. Comment will be INVISIBLE", function() {
+	it("should parse comment in pragma area. Comment will be invisible", function() {
 		expect(parse("<!-- comment in pragma area -->\n\\define aMacro()\nnothing\n\\end\n")).toEqual(
 
 			[ { type : 'set', attributes : { name : { type : 'string', value : 'aMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
+
+		);
+	});
+
+	it("should block mode filtered transclusions", function() {
+		expect(parse("{{{ filter }}}")).toEqual(
+
+			[ { type: 'list', attributes: { filter: { type: 'string', value: ' filter ' } }, isBlock: true } ]
+
+		);
+		expect(parse("{{{ fil\nter }}}")).toEqual(
+
+			[ { type: 'list', attributes: { filter: { type: 'string', value: ' fil\nter ' } }, isBlock: true } ]
 
 		);
 	});
