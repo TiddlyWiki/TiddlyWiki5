@@ -13,8 +13,8 @@ Text editor operation to wrap the selected lines with a prefix and suffix
 "use strict";
 
 exports["wrap-lines"] = function(event,operation) {
-	var prefix = operation.paramObject.prefix || "",
-		suffix = operation.paramObject.suffix || "";
+	var prefix = event.paramObject.prefix || "",
+		suffix = event.paramObject.suffix || "";
 	// Cut just past the preceding line break, or the start of the text
 	operation.cutStart = $tw.utils.findPrecedingLineBreak(operation.text,operation.selStart);
 	// Cut to just past the following line break, or to the end of the text
