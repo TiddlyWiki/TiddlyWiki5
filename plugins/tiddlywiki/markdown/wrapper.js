@@ -36,6 +36,10 @@ var accumulatingTypes = {
 	"text": true,
 	"softbreak": true
 };
+// If rendering WikiText, we treat katex nodes as text.
+if (pluginOpts.renderWikiText) {
+	accumulatingTypes["katex"] = true;
+}
 
 var md = new Remarkable(remarkableOpts);
 
@@ -237,13 +241,20 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			break;
 
 		case "katex":
-			out.push({
-				type: "latex",
-				attributes: {
-					text: { type: "text", value: currentNode.content },
-					displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
-				}
-			});
+			// If rendering WikiText, convert the katex node back to text for parsing by the WikiText LaTeX parser.
+			if (pluginOpts.renderWikiText) {
+				// If this is a block, add a newline to trigger the KaTeX plugins block detection.
+				var displayModeSuffix = currentNode.block ? "\n" : "";
+				accumulatedText = accumulatedText + "$$" + currentNode.content + displayModeSuffix + "$$";
+			} else {
+				out.push({
+					type: "latex",
+					attributes: {
+						text: { type: "text", value: currentNode.content },
+						displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
+					}
+				});
+			}
 			break;
 
 		default:
