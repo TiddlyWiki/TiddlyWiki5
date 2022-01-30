@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/highlight",
-	"name": "Highlight",
-	"description": "Highlight.js syntax highlighting",
+	"name": "Highlight (Legacy)",
+	"description": "Highlight.js syntax highlighting for legacy browsers",
 	"author": "Joao Bolila",
 	"list": "readme usage howto license"
 }
