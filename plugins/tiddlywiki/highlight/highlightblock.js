@@ -18,10 +18,10 @@ var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
 
 var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js");
 
-if (hljs.getLanguage !== undefined) {
+if(hljs.getLanguage !== undefined) {
 	// load language definitions
 	$tw.utils.each($tw.modules.types["highlight"],function(moduleInfo,moduleName) {
-		$tw.utils.evalSandboxed(moduleInfo.definition , {hljs:hljs, exports:{}}, moduleName);
+		$tw.utils.evalSandboxed(moduleInfo.definition,{hljs:hljs, exports:{}},moduleName);
 	});
 	
 	CodeBlockWidget.prototype.postRender = function() {
