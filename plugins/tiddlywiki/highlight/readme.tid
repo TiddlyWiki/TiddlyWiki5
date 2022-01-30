@@ -20,7 +20,7 @@ If no language is specified highlight.js will attempt to automatically detect th
 
 ! Built-in Language Brushes
 
-The plugin includes support for the following languages (referred to as "brushes" by highlight.js):
+The plugin includes support for the following common languages (referred to as "brushes" by highlight.js):
 
 * bash
 * c
@@ -55,31 +55,12 @@ The plugin includes support for the following languages (referred to as "brushes
 * visual basic .net
 * yaml
 
-The v9.18.1 version contains these additional languages:
+And these additional ones:
 
-* apache
-* arduino
-* arm assembly
-* asciidoc
-* autohotkey
-* awk
-* cmake
-* coffeescript
+* apache config
 * dockerfile
-* erlang
-* elixir
 * fortran
-* gradle
-* haskell
-* http
-* ini
-* intel x86 assembly
-* mathematica
-* matlab
-* nginx
-* powershell
-* properties
-* vala
-* vim script
+* latex
+* nginx config
 
 You can also specify the language as a MIME content type (eg `text/html` or `text/css`). The mapping is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.
