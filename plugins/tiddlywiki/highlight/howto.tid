@@ -1,9 +1,9 @@
 title: $:/plugins/tiddlywiki/highlight/howto
 
 ! Supporting Additional Languages
- 
+
 The [[highlight.js|https://github.com/highlightjs/highlight.js]] project supports many languages. Only a subset of these languages are supported by the plugin. It is possible for users to change the set of languages supported by the plugin by following these steps:
- 
+
 # Go to the highlight.js project [[download page|https://highlightjs.org/download/]], select the language definitions to include, and press the Download button to download a zip archive containing customised support files for a highlight.js syntax highlighting server.
 # Locate the `highlight.pack.js` file in the highlight plugin -- on a stock Debian 8 system running Tiddlywiki5 under node-js it is located at `/usr/local/lib/node_modules/tiddlywiki/plugins/tiddlywiki/highlight/files/highlight.pack.js`.
 # Replace the plugin `highlight.pack.js` file located in step 2 with the one from the downloaded archive obtained in step 1.
