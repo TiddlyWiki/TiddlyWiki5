@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/highlight/readme
 
-This plugin provides syntax highlighting of code blocks using v11.4.0 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev. If you are using a legacy browser, this plugin falls back to using v9.18.1.
+This plugin provides syntax highlighting of code blocks using v11.4.0 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev. If you need this plugin to work on legacy browsers, you would need to install the "Highlight Legacy" version instead.
 
 ! Usage
 
