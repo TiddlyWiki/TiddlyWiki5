@@ -1,0 +1,85 @@
+title: $:/plugins/tiddlywiki/highlight/readme
+
+This plugin provides syntax highlighting of code blocks using v11.4.0 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev. If you are using a legacy browser, this plugin falls back to using v9.18.1.
+
+! Usage
+
+When the plugin is installed it automatically applies highlighting to all codeblocks defined with triple backticks or with the CodeBlockWidget.
+
+The language can optionally be specified after the opening triple braces:
+
+<$codeblock code="""```css
+ * { margin: 0; padding: 0; } /* micro reset */
+
+html { font-size: 62.5%; }
+body { font-size: 14px; font-size: 1.4rem; } /* =14px */
+h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
+```"""/>
+
+If no language is specified highlight.js will attempt to automatically detect the language.
+
+! Built-in Language Brushes
+
+The plugin includes support for the following languages (referred to as "brushes" by highlight.js):
+
+* bash
+* c
+* cpp
+* csharp
+* css
+* diff
+* go
+* html, xml
+* java
+* javascript
+* json
+* kotlin
+* less
+* lua
+* makefile
+* markdown
+* objectivec
+* perl
+* php
+* plaintext
+* python
+* R
+* ruby
+* rust
+* scss
+* sql
+* shell session
+* swift
+* toml, ini
+* typescript
+* visual basic .net
+* yaml
+
+The v9.18.1 version contains these additional languages:
+
+* apache
+* arduino
+* arm assembly
+* asciidoc
+* autohotkey
+* awk
+* cmake
+* coffeescript
+* dockerfile
+* erlang
+* elixir
+* fortran
+* gradle
+* haskell
+* http
+* ini
+* intel x86 assembly
+* mathematica
+* matlab
+* nginx
+* powershell
+* properties
+* vala
+* vim script
+
+You can also specify the language as a MIME content type (eg `text/html` or `text/css`). The mapping is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.

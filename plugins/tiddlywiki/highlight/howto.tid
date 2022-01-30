@@ -1,0 +1,34 @@
+title: $:/plugins/tiddlywiki/highlight/howto
+
+! Supporting Additional Languages
+
+The [[highlight.js|https://github.com/highlightjs/highlight.js]] project supports many languages. Only a subset of these languages are supported by the plugin. You can change the set of languages using either of the following methods:
+
+!! Adding Language Definition Tiddlers
+
+You can save the language definitions as <$text text="JavaScript"/> modules and setting their `module-type` to ''highlight''.
+
+First, locate the language file(s) you need. You can fetch the files from the following CDNs:
+
+* [[jsDelivr|https://www.jsdelivr.com/package/gh/highlightjs/cdn-release?path=build%2Flanguages]]
+* [[unpkg|https://unpkg.com/browse/@highlightjs/cdn-assets/languages/]]
+
+Then, click the button below. A new javascript tiddler will pop up ready for edits. Copy and paste the content of a language file into the the text area. You may choose to either create one tiddler per language or lump all language definitions into one tiddler. Save and reload your wiki.
+
+<$button tooltip="add new language" aria-label="add new language"  >
+<$action-createtiddler $basetitle="highlight-language.js"  text="" type="application/javascript" module-type="highlight">
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<createTiddler-title>>/>
+</$action-createtiddler>
+Add New Language(s)
+</$button>
+
+''NOTE:'' Remember to update your language definitions whenever this plugin is upgraded.
+
+!! Installing Customized highlight.js library
+
+This is the original method. You replace the supplied highlight.js library with a custom version:
+
+# Go to the highlight.js project [[download page|https://highlightjs.org/download/]], select the language definitions to include, and press the Download button to download a zip archive containing customised support files for a highlight.js syntax highlighting server.
+# Locate the `highlight.min.js` file in the highlight plugin -- on a stock Debian 8 system running Tiddlywiki5 under node-js it is located at `/usr/local/lib/node_modules/tiddlywiki/plugins/tiddlywiki/highlight/files/highlight.min.js`.
+# Replace the plugin `highlight.min.js` file located in step 2 with the one from the downloaded archive obtained in step 1.
+# Restart the Tiddlywiki server.
