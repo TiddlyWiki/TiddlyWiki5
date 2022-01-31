@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/highlight/styles
+title: $:/plugins/tiddlywiki/highlight-legacy/styles
 tags: [[$:/tags/Stylesheet]]
 
 .hljs {

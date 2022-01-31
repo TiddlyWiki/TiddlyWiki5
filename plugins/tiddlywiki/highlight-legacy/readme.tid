@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/highlight/readme
+title: $:/plugins/tiddlywiki/highlight-legacy/readme
 
 This plugin provides syntax highlighting of code blocks using v9.18.1 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev.
 

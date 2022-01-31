@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/highlight/highlightblock.js
+title: $:/plugins/tiddlywiki/highlight-legacy/highlightblock.js
 type: application/javascript
 module-type: widget
 
@@ -11,12 +11,11 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-
 var TYPE_MAPPINGS_BASE = "$:/config/HighlightPlugin/TypeMappings/";
 
 var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
 
-var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js");
+var hljs = require("$:/plugins/tiddlywiki/highlight-legacy/highlight.js");
 
 hljs.configure({tabReplace: "    "});	
 
