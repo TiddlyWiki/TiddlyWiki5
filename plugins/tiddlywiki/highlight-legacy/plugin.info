@@ -3,5 +3,5 @@
 	"name": "Highlight (Legacy)",
 	"description": "Highlight.js syntax highlighting for legacy browsers",
 	"author": "Joao Bolila",
-	"list": "readme usage howto license"
+	"list": "readme usage license"
 }

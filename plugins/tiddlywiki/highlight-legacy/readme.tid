@@ -1,22 +1,6 @@
 title: $:/plugins/tiddlywiki/highlight-legacy/readme
 
-This plugin provides syntax highlighting of code blocks using v9.18.1 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev.
-
-! Usage
-
-When the plugin is installed it automatically applies highlighting to all codeblocks defined with triple backticks or with the CodeBlockWidget.
-
-The language can optionally be specified after the opening triple braces:
-
-<$codeblock code="""```css
- * { margin: 0; padding: 0; } /* micro reset */
-
-html { font-size: 62.5%; }
-body { font-size: 14px; font-size: 1.4rem; } /* =14px */
-h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
-```"""/>
-
-If no language is specified highlight.js will attempt to automatically detect the language.
+This plugin provides syntax highlighting of code blocks using v9.18.1 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev. This legacy version should be installed in place of the regular Highlight plugin when you require your wiki to be opened in browsers that do not fully support <$text text="JavaScript"/> ES6 (2015). Here's a [[ES6 compatibility table|https://caniuse.com/?search=es6]].
 
 ! Built-in Language Brushes
 
@@ -78,4 +62,4 @@ The plugin includes support for the following languages (referred to as "brushes
 * xml
 * yaml
 
-You can also specify the language as a MIME content type (eg `text/html` or `text/css`). The mapping is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.
+The mapping between a MIME type and a highlight.js language specifier is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.
