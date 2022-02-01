@@ -95,7 +95,11 @@ function parseFilterOperation(operators,filterString,p) {
 			if(nextBracketPos === -1) {
 				throw "Missing closing bracket in filter expression";
 			}
-			operand.text = filterString.substring(p,nextBracketPos);
+			if(operator.regexp) {
+				operand.text = "";
+			} else {
+				operand.text = filterString.substring(p,nextBracketPos);
+			}
 			operator.operands.push(operand);
 			p = nextBracketPos + 1;
 		}
