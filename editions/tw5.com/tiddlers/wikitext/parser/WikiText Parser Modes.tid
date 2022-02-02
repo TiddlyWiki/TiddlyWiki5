@@ -1,13 +1,16 @@
 created: 20220110233944530
-modified: 20220122182842030
+modified: 20220202022415581
 tags: WikiText
 title: WikiText Parser Modes
 type: text/vnd.tiddlywiki
 
-The WikiText parser has three modes:
+In order to display Tiddlers (usually the text field), the WikiText parser reads and interprets the content and applies WikiText rules. The parser has three modes:
 
 * ''pragma mode'' - the parser will recognise only [[pragma mode WikiText|Pragma]] punctuation 
 * ''block mode'' - the parser will recognise only [[block mode WikiText|Block Mode WikiText]] punctuation
 * ''inline mode'' - the parser will recognise only [[inline mode WikiText|Inline Mode WikiText]]
 
 The parser [[transitions between these modes|WikiText parser mode transitions]] based on the text it encounters. In addition, there are  [[places where the parser ignores WikiText|Places where the parser ignores WikiText]] punctuation.
+
+<<.tip "The concept of inline vs block also exists for standard HTML elements. For HTML, these [[two layout modes|https://www.w3schools.com/html/html_blocks.asp]] determine if the output flows together on the same line or not.
+<p>Most [[block mode WikiText|Block Mode WikiText]] corresponds to [[block level HTML elements|https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements]] and most [[inline mode WikiText|Inline Mode WikiText]] corresponds to [[inline level HTML elements|https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements]]. However, for Wikitext the two modes are just as important for determining which syntax will be recognised by the parser as they are for determining how the output will flow.</p>">>
