@@ -463,6 +463,24 @@ Tests the filtering mechanism.
 				expect(wiki.filterTiddlers("[!title[Tiddler Three]is[orphan]sort[title]]").join(",")).toBe("a fourth tiddler,filter regexp test,TiddlerOne");
 				expect(wiki.filterTiddlers("[!title[Tiddler Three]!is[orphan]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,one,hasList,has filter");
 			});
+
+			it("should handle the '[is[draft]]' operator", function() {
+				var wiki = new $tw.Wiki();
+				wiki.addTiddlers([
+					{title: "A"},
+					{title: "Draft of 'A'", "draft.of": "A", "draft.title": "A"},
+					{title: "B"},
+					{title: "Draft of 'B'", "draft.of": "B"},
+					{title: "C"},
+					{title: "Draft of 'C'", "draft.title": "C"},
+					{title: "E"},
+					{title: "Draft of 'E'", "draft.of": "", "draft.title": ""}
+					//{title: "F"} // This one is deliberately missing
+				]);
+				expect(wiki.filterTiddlers("[all[]] F +[is[draft]]")).toEqual(wiki.filterTiddlers("[all[]] F +[has[draft.of]]"));
+				expect(wiki.filterTiddlers("[all[]] F +[!is[draft]]")).toEqual(wiki.filterTiddlers("[all[]] F +[!has[draft.of]]"));
+
+			});
 	
 		});
 	
