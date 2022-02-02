@@ -477,9 +477,15 @@ Tests the filtering mechanism.
 					{title: "Draft of 'E'", "draft.of": "", "draft.title": ""}
 					//{title: "F"} // This one is deliberately missing
 				]);
+				// is analagous to [has[draft.of]]
 				expect(wiki.filterTiddlers("[all[]] F +[is[draft]]")).toEqual(wiki.filterTiddlers("[all[]] F +[has[draft.of]]"));
 				expect(wiki.filterTiddlers("[all[]] F +[!is[draft]]")).toEqual(wiki.filterTiddlers("[all[]] F +[!has[draft.of]]"));
-
+				// [is[draft]] and [!is[draft]] are proper complements
+				var included = wiki.filterTiddlers("[all[]] F +[is[draft]]")
+				var excluded = wiki.filterTiddlers("[all[]] F +[!is[draft]]")
+				var all = [].concat(included, excluded).sort();
+				// combined, they should have exactly one of everything.
+				expect(wiki.filterTiddlers("[all[]] F +[sort[]]")).toEqual(all);
 			});
 	
 		});
