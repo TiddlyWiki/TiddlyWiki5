@@ -32,6 +32,7 @@ if(hljs.getLanguage !== undefined) {
 			language = tiddler.fields.text || "";
 		}
 		if(language && hljs.getLanguage(language)) {
+			domNode.className = "hljs";
 			domNode.children[0].className = language.toLowerCase() + " hljs";
 			if($tw.browser && !domNode.isTiddlyWikiFakeDom) {
 				hljs.highlightElement(domNode.children[0]);

@@ -1,6 +1,10 @@
 title: $:/plugins/tiddlywiki/highlight/styles
 tags: [[$:/tags/Stylesheet]]
 
+pre.hljs {
+  padding: 0;
+}
+
 pre code.hljs {
   padding: 0.5em;
 }
