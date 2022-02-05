@@ -1,0 +1,13 @@
+created: 20220110233944530
+modified: 20220122182842030
+tags: WikiText
+title: WikiText Parser Modes
+type: text/vnd.tiddlywiki
+
+The WikiText parser has three modes:
+
+* ''pragma mode'' - the parser will recognise only [[pragma mode WikiText|Pragma]] punctuation 
+* ''block mode'' - the parser will recognise only [[block mode WikiText|Block Mode WikiText]] punctuation
+* ''inline mode'' - the parser will recognise only [[inline mode WikiText|Inline Mode WikiText]]
+
+The parser [[transitions between these modes|WikiText parser mode transitions]] based on the text it encounters. In addition, there are  [[places where the parser ignores WikiText|Places where the parser ignores WikiText]] punctuation.
