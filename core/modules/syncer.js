@@ -269,7 +269,7 @@ Syncer.prototype.getStatus = function(callback) {
 		// Get login status
 		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous) {
 			if(err) {
-				self.logger.alert(err);
+				self.displayError("Get Status Error",err);
 			} else {
 				// Set the various status tiddlers
 				self.wiki.addTiddler({title: self.titleIsReadOnly,text: isReadOnly ? "yes" : "no"});
@@ -472,7 +472,7 @@ Syncer.prototype.handleLogoutEvent = function() {
 	if(this.syncadaptor.logout) {
 		this.syncadaptor.logout(function(err) {
 			if(err) {
-				self.logger.alert(err);
+				self.displayError("Logout Error",err);
 			} else {
 				self.getStatus();
 			}
@@ -633,10 +633,6 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 		}
 		// Remove the info stored about this tiddler
 		delete self.syncer.tiddlerInfo[self.title];
-		if($tw.boot.files){
-			// Remove the tiddler from $tw.boot.files
-			delete $tw.boot.files[self.title];
-		}
 		// Invoke the callback
 		callback(null);
 	},{

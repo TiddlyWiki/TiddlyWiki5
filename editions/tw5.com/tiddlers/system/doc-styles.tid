@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 201804111739
+modified: 20211230150725145
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -110,6 +110,10 @@ td svg {
 	padding-bottom: 0;
 	margin-top: 0.2em;
 }
+
+.doc-example input[type=search] { 
+  width: 95%;
+}
 .doc-example pre:first-child {
 	margin-top: 0;
 }
@@ -127,6 +131,10 @@ td svg {
 .doc-example-result ol {
 	margin-left: 0;
 	padding-left: 20px;
+}
+
+.doc-bad-example code, .doc-bad-example pre, table.doc-bad-example {
+  background-color:#ffff80;
 }
 
 .doc-table th, .doc-table tr {
@@ -218,8 +226,29 @@ tr.doc-table-subheading {
     text-decoration: underline;
 }
 
-.doc-plain-list ul,
-.doc-plain-list ol {
-	list-style: none;
-	padding-left: 0;
+.doc-tiddler-fields {
+	background-color: <<colour code-background>>;
+	border: 1px solid <<colour tiddler-border>>;
+	border-radius: 4px;
+    padding: 0 0.5em;
+}
+
+.doc-tiddler-fields h2 svg {
+	height: 1em;
+}
+
+
+.doc-tiddler-fields table, 
+.doc-tiddler-fields h2 {
+	margin: 0.5em 0;
+}
+
+.doc-tiddler-fields table {
+	background-color: <<colour tiddler-background>>;
+}
+
+@media screen {
+	.doc-tiddler-fields {
+		<<box-shadow "1px 1px 6px rgba(0, 0, 0, 0.6)">>
+	}
 }

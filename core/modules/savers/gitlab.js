@@ -67,7 +67,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 				});
 			}
 			var data = {
-				commit_message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				commit_message: $tw.language.getString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: text,
 				branch: branch,
 				sha: sha

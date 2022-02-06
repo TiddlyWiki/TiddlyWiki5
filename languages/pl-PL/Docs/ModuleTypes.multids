@@ -1,0 +1,30 @@
+title: $:/language/Docs/ModuleTypes/
+
+allfilteroperator: Podoperatory dla filtra ''all''.
+animation: Animacje, których można użyć z RevealWidget.
+authenticator: Dostępne uwierzytelniania zapytań przez wbudowany serwer HTTP.
+bitmapeditoroperation: Operacje w pasku narzędzi edytora obrazów.
+command: Komendy, które można wykonać w Node.js.
+config: Dane do dodania do konfiguracji `$tw.config`.
+filteroperator: Operatory filtrów.
+global: Globalne dane do dodania do `$tw`.
+info: Publikują informacje systemowe poprzes pseudo-wtyczkę [[$:/temp/info-plugin]].
+isfilteroperator: Argumenty dla operatora filtra ''is''.
+library: Generyczny typ modułu dla modułów robiących inne rzeczy w JavaScripcie.
+macro: JavaScriptowe definicje makr.
+parser: Parsery (analizatory składniowe) dla róznych typów treści.
+route: Definiują jak indywidualne wzorce adresów URL są obsługiwane przez wbudowany serwer HTTP.
+saver: Obsługa różnych metod zapisu plików z poziomu przeglądarki.
+startup: Funkcje wywoływane przy uruchomieniu.
+storyview: Zmienają sposób w jaki tiddlery pojawiają się, znikają i zachowują w Story River (widok otwartych tiddlerów)
+texteditoroperation: Operacja na pasku narzędzi edytora tekstu.
+tiddlerdeserializer: Przetwarzanie róznych typów danych na tiddlery.
+tiddlerfield: Definiuje zachowanie pojedyńczego pola w tiddlerze.
+tiddlermethod: Dodaje funkcję do prototype `$tw.Tiddler`.
+upgrader: Aktualizuje tiddlery podczas aktualizacji wiki/importu.
+utils: Dodaje funkcję do `$tw.utils`.
+utils-browser: Dodaje funkcje dla przeglądarki do `$tw.utils`.
+utils-node: Dodaje funkcje dla Node.js do `$tw.utils`.
+widget: Widzety obsługują wyświetlanie i aktualizowanie DOM.
+wikimethod: Dodaje funkcje do `$tw.Wiki`.
+wikirule: Indywidualne zasady parsera (analizatora składniowego) do głównego silnika WikiText.

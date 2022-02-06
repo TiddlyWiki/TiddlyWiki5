@@ -105,13 +105,13 @@ exports.splitregexp = function(source,operator,options) {
 		flags = (suffix.indexOf("m") !== -1 ? "m" : "") + (suffix.indexOf("i") !== -1 ? "i" : ""),
 		regExp;
 	try {
-		regExp = new RegExp(operator.operand || "",flags);		
+		regExp = new RegExp(operator.operand || "",flags);
 	} catch(ex) {
 		return ["RegExp error: " + ex];
 	}
 	source(function(tiddler,title) {
 		Array.prototype.push.apply(result,title.split(regExp));
-	});		
+	});
 	return result;
 };
 
@@ -119,23 +119,25 @@ exports["search-replace"] = function(source,operator,options) {
 	var results = [],
 		suffixes = operator.suffixes || [],
 		flagSuffix = (suffixes[0] ? (suffixes[0][0] || "") : ""),
-		flags = (flagSuffix.indexOf("g") !== -1 ? "g" : "") + (flagSuffix.indexOf("i") !== -1 ? "i" : ""),
+		flags = (flagSuffix.indexOf("g") !== -1 ? "g" : "") + (flagSuffix.indexOf("i") !== -1 ? "i" : "") + (flagSuffix.indexOf("m") !== -1 ? "m" : ""),
 		isRegExp = (suffixes[1] && suffixes[1][0] === "regexp") ? true : false,
-		searchTerm,
+		//Escape regexp characters if the operand is not a regular expression
+		searchTerm = isRegExp ? operator.operand : $tw.utils.escapeRegExp(operator.operand),
+		//Escape $ character in replacement string if not in regular expression mode
+		replacement = isRegExp ? operator.operands[1] : (operator.operands[1]||"").replace(/\$/g,"$$$$"),
 		regExp;
-	
+	try {
+		regExp = new RegExp(searchTerm,flags);
+	} catch(ex) {
+		return ["RegExp error: " + ex];
+	}
+
 	source(function(tiddler,title) {
 		if(title && (operator.operands.length > 1)) {
-			//Escape regexp characters if the operand is not a regular expression
-			searchTerm = isRegExp ? operator.operand : $tw.utils.escapeRegExp(operator.operand);
-			try {
-				regExp = new RegExp(searchTerm,flags);
-			} catch(ex) {
-				return ["RegExp error: " + ex];
-			}
 			results.push(
-				title.replace(regExp,operator.operands[1])
+				title.replace(regExp,replacement)
 			);
+			regExp.lastIndex = 0;
 		} else {
 			results.push(title);
 		}
@@ -156,7 +158,7 @@ exports.pad = function(source,operator,options) {
 				var padString = "",
 					padStringLength = targetLength - title.length;
 				while (padStringLength > padString.length) {
-					padString += fill;					
+					padString += fill;
 				}
 				//make sure we do not exceed the specified length
 				padString = padString.slice(0,padStringLength);
@@ -171,5 +173,15 @@ exports.pad = function(source,operator,options) {
 	});
 	return results;
 }
+
+exports.charcode = function(source,operator,options) {
+	var chars = [];
+	$tw.utils.each(operator.operands,function(operand) {
+		if(operand !== "") {
+			chars.push(String.fromCharCode($tw.utils.parseInt(operand)));
+		}
+	});
+	return [chars.join("")];
+};
 
 })();

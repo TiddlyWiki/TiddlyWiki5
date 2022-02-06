@@ -31,7 +31,7 @@ Modal.prototype.display = function(title,options) {
 	options = options || {};
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
 				options.variables.rootwindow === "yes") ? document :
-				(options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
+				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
 	this.srcWindow = this.srcDocument.defaultView;
 	var self = this,
 		refreshHandler,
@@ -105,7 +105,7 @@ Modal.prototype.display = function(title,options) {
 		parentWidget: $tw.rootWidget
 	});
 	navigatorWidgetNode.render(modalBody,null);
-	
+
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
@@ -243,6 +243,7 @@ Modal.prototype.adjustPageClass = function() {
 	if(windowContainer) {
 		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
+	$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
 };
 
 exports.Modal = Modal;

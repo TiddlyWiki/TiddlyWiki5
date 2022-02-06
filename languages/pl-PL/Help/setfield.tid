@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Przygotowuje zewnętrze tiddlery do użycia
+
+//Uwaga: ta komenda jest eksperymentalna i może zostać w przyszłosci zmieniona lub zastąpiona//
+
+Ustawia wybrane pole grupie tiddlerów na wynik wikifikacji szablonu. Zmienna `currentTiddler` w szablonie jest ustawiana na nazwę aktualnego tiddlera.
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+Argumenty to:
+
+* ''filter'' - filtr określający tiddlery, które mają być przygotowane
+* ''fieldname'' - pole do zmiany (domyślnie to "text")
+* ''templatetitle'' - nazwa szablonu, który ma być zwikifikowany do wybranego pola. Jeżeli puste lub niepodane to pole jest usuwane
+* ''rendertype'' - typ tekstu do renderownania (domyślnie to "text/plain"; "text/html" może być użyty by uwzględnić kod HTML)

@@ -122,7 +122,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		});
 		// Only substitute variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
-			value = this.substituteVariableReferences(value);			
+			value = this.substituteVariableReferences(value,options);
 		}
 		return {
 			text: value,
@@ -175,10 +175,10 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 	return results;
 };
 
-Widget.prototype.substituteVariableReferences = function(text) {
+Widget.prototype.substituteVariableReferences = function(text,options) {
 	var self = this;
 	return (text || "").replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
-		return self.getVariable(p1,{defaultValue: ""});
+		return options.variables && options.variables[p1] || (self.getVariable(p1,{defaultValue: ""}));
 	});
 };
 
@@ -263,25 +263,29 @@ Compute the current values of the attributes of the widget. Returns a hashmap of
 */
 Widget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
-		self = this,
-		value;
+		self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "filtered") {
-			value = self.wiki.filterTiddlers(attribute.filter,self)[0] || "";
-		} else if(attribute.type === "indirect") {
-			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
-		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
-		} else { // String attribute
-			value = attribute.value;
-		}
-		// Check whether the attribute has changed
+		var value = self.computeAttribute(attribute);
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
 		}
 	});
 	return changedAttributes;
+};
+
+Widget.prototype.computeAttribute = function(attribute) {
+	var value;
+	if(attribute.type === "filtered") {
+		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
+	} else if(attribute.type === "indirect") {
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+	} else if(attribute.type === "macro") {
+		value = this.getVariable(attribute.value.name,{params: attribute.value.params});
+	} else { // String attribute
+		value = attribute.value;
+	}
+	return value;
 };
 
 /*
@@ -333,9 +337,22 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 /*
 Make child widgets correspondng to specified parseTreeNodes
 */
-Widget.prototype.makeChildWidgets = function(parseTreeNodes) {
+Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
+	options = options || {};
 	this.children = [];
 	var self = this;
+	// Create set variable widgets for each variable
+	$tw.utils.each(options.variables,function(value,name) {
+		var setVariableWidget = {
+			type: "set",
+			attributes: {
+				name: {type: "string", value: name},
+				value: {type: "string", value: value}
+			},
+			children: parseTreeNodes
+		};
+		parseTreeNodes = [setVariableWidget];
+	});
 	$tw.utils.each(parseTreeNodes || (this.parseTreeNode && this.parseTreeNode.children),function(childNode) {
 		self.children.push(self.makeChildWidget(childNode));
 	});
@@ -343,16 +360,32 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes) {
 
 /*
 Construct the widget object for a parse tree node
+options include:
+	variables: optional hashmap of variables to wrap around the widget
 */
-Widget.prototype.makeChildWidget = function(parseTreeNode) {
+Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
+	options = options || {};
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
 	}
+	// Create set variable widgets for each variable
+	$tw.utils.each(options.variables,function(value,name) {
+		var setVariableWidget = {
+			type: "set",
+			attributes: {
+				name: {type: "string", value: name},
+				value: {type: "string", value: value}
+			},
+			children: [
+				parseTreeNode
+			]
+		};
+		parseTreeNode = setVariableWidget;
+	});
 	return new WidgetClass(parseTreeNode,{
 		wiki: this.wiki,
-		variables: {},
 		parentWidget: this,
 		document: this.document
 	});
@@ -539,10 +572,15 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	var handled = false;
 	// For each child widget
 	for(var t=0; t<this.children.length; t++) {
-		var child = this.children[t];
-		// Invoke the child if it is an action widget
-		if(child.invokeAction) {
+		var child = this.children[t],
+			childIsActionWidget = !!child.invokeAction,
+			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy"); // Default is "once"
+		// Refresh the child if required
+		if(childIsActionWidget || actionRefreshPolicy === "always") {
 			child.refreshSelf();
+		}
+		// Invoke the child if it is an action widget
+		if(childIsActionWidget) {
 			if(child.invokeAction(triggeringWidget,event)) {
 				handled = true;
 			}

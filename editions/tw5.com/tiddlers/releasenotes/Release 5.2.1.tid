@@ -1,0 +1,124 @@
+caption: 5.2.1
+created: 20211208115833846
+modified: 20211208115833846
+released: 20211208115833846
+tags: ReleaseNotes
+title: Release 5.2.1
+type: text/vnd.tiddlywiki
+
+\define contributor(username)
+<a href="https://github.com/$username$" style="text-decoration:none;font-size:24px;" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src="https://github.com/$username$.png?size=32" width="32" height="32"/> @<$text text=<<__username__>>/></a>
+\end
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.0...v5.2.1]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[Mohammad Rahmani|https://github.com/kookma]] and [[Elise Springer|https://www.wesleyan.edu/academics/faculty/espringer/profile.html]] for their winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/GU0TPGNMPvw/m/y1SyQk_nAQAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/cb43b91ab6b14c2a16af917cfab0e5b2371502c6/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
+! Highlights
+
+!! <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6168">> New Filter Cascade Mechanism
+
+The [[cascade mechanism|Cascades]] provides a flexible way to choose between multiple options. Crucially, it is done in a way that makes it simple for plugins to tweak the logic or add their own options.
+
+Some of the things that can be done with cascades are:
+
+* Replacing the default tiddler body template with a custom one for a certain type of tiddler
+* Giving all journal tiddlers a custom icon
+* Implementing a custom editor for certain types of tiddler
+
+There are two parts to these changes. The underpinning is a new [[Cascade Filter Run Prefix]] that takes a list of filters and runs them in order, returning the result of the first one to return a value.
+
+The second part is a series of improvements based on this new filter cascade mechanism. Conditional logic that was previously hidden within core templates can now be extended and tweaked much more easily than before.
+
+Choosing the following elements of the core user interface is now handled with cascades:
+
+* [[Story Tiddler Templates|Story Tiddler Template Cascade]]
+* [[Tiddler Colour|Tiddler Colour Cascade]]
+* [[Tiddler Icons|Tiddler Icon Cascade]]
+* [[View Template Body|View Template Body Cascade]]
+* [[View Template Title|View Template Title Cascade]]
+* [[Edit Template Body|Edit Template Body Cascade]]
+
+The cascades can be inspected in $:/ControlPanel under ''Info'' -> ''Advanced'' -> ''Cascades''.
+
+See [[Cascades]] for more information.
+
+!! <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6148">> New LetWidget
+
+The LetWidget is an improved alternative to the existing VarsWidget. It is recommended to use the new LetWidget instead of the VarsWidget in all circumstances.
+
+The chief advantage is that the LetWidget performs the variable assignments in the same order as they are written, and permits references to earlier assignments. For example, here we swap the values of two variables:
+
+```
+<$let temp=<<foo>> foo=<<bar>> bar=<<temp>>>
+...
+</$let>
+```
+
+! Bug Fixes
+
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6261">> fixed issue with drag and drop in Chrome 96
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6278">> fixed issue with drag and drop and the [[CodeMirror Plugin]] in Chrome 96
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6013">> refreshing of LinkWidget attributes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6107">> crash when using "source=basename-uri-decoded" in tiddlywiki.files
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8ae4428332e03a1fdaee26f777a0c3a372fff401">> ''$timestamp'' attribute ignored when using ActionSetFieldWidget to set the value of an index
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/2af632a46d74e223f99a67c6aaa5bc6931e9466e">> crash during static rendering of [[CodeMirror Plugin]]
+
+! Usability Improvements
+
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6015">> image picker in theme tweaks to not dismiss when an image is selected
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5998">> a [[new hidden setting|Hidden Setting: Show Edit Preview per Tiddler]] for controlling the visibility of the editor preview pane on a per-tiddler basis
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/b0f72d069086dee8506758c643f953f9ec55f403">> sidebar plugin listing to show icon and more details
+
+! Widget Improvements
+
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/9caba544eb04f56ed772340a2d8767974b2617c9">> refreshing of the CodeBlockWidget
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6145">> EditTextWidget to provide a new ''actionValue'' variable to action strings that contains the value of the input
+
+! Filter improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6127">> new trigonometric operators: [[acos|acos Operator]], [[asin|asin Operator]], [[atan|atan Operator]], [[cos|cos Operator]], [[sin|sin Operator]] and [[tan|tan Operator]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6150">> new [[zth Operator]] that works like [[nth Operator]] but counts from zero instead of one
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6149">> [[Map Filter Run Prefix]] to provide additional variables to the filter
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6164">> macro parameters in filter run prefixes
+
+! Hackability Improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6130">> new ActionSetMultipleFieldsWidget, new SetMultipleVariablesWidget and extended ActionSendMessageWidget for working with multiple variables/fields/indexes/parameters in one operation
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6012/files">> new `focus-editor` operation to [[WidgetMessage: tm-edit-text-operation]]
+
+! Developer Improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6132">> support for widgets to access the order in which attributes are defined
+
+! Node.js Improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/5275">> support for recursively loading subdirectories with [[tiddlywiki.files Files]]
+
+! Translation improvements
+
+* Polish
+* Chinese
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* <<contributor bmann>>
+* <<contributor btheado>>
+* <<contributor BramChen>>
+* <<contributor BurningTreeC>>
+* <<contributor eiro10>>
+* <<contributor EvidentlyCube>>
+* <<contributor flibbles>>
+* <<contributor joshuafontany>>
+* <<contributor Marxsal>>
+* <<contributor pmario>>
+* <<contributor saqimtiaz>>
+* <<contributor Telumire>>
+* <<contributor tw-FRed>>
+* <<contributor twMat>>

@@ -25,11 +25,6 @@ var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
-	// Initialise the editor operations if they've not been done already
-	if(!this.editorOperations) {
-		EditBitmapWidget.prototype.editorOperations = {};
-		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
-	}
 	this.initialise(parseTreeNode,options);
 };
 
@@ -43,6 +38,11 @@ Render this widget into the DOM
 */
 EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
+	// Initialise the editor operations if they've not been done already
+	if(!this.editorOperations) {
+		EditBitmapWidget.prototype.editorOperations = {};
+		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
+	}
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -156,7 +156,7 @@ EditBitmapWidget.prototype.loadCanvas = function() {
 	};
 	// Get the current bitmap into an image object
 	if(tiddler && tiddler.fields.type && tiddler.fields.text) {
-		currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;		
+		currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
 	} else {
 		currImage.width = DEFAULT_IMAGE_WIDTH;
 		currImage.height = DEFAULT_IMAGE_HEIGHT;

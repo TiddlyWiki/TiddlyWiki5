@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 201804111739
+modified: 20211230150413997
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -113,6 +113,20 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 </$list>
 \end
 
+\define .bad-example(eg)
+<table class="doc-bad-example">
+<tbody>
+<tr class="evenRow">
+<td><span class="tc-inline-style" style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
+<td>
+
+$eg$
+</td>
+</tr>
+</tbody>
+</table>
+\end
+
 \define .link-badge(text,link,colour)
 <a href=<<__link__>> class="doc-link-badge" style="background-color:$colour$;" target="_blank" rel="noopener noreferrer"><$text text=<<__text__>>/></a>
 \end
@@ -129,5 +143,32 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 \define .link-badge-removed(link,colour:#a9aabc) <<.link-badge "removed" """$link$""" """$colour$""">>
 \define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renamed" """$link$""" """$colour$""">>
 \define .link-badge-updated(link,colour:#91ba66) <<.link-badge "updated" """$link$""" """$colour$""">>
+
+\define .tiddler-fields(tiddler)
+<$tiddler tiddler=<<__tiddler__>>>
+<div class="doc-tiddler-fields">
+<h2>
+<$link>
+<span class="tc-tiddler-title-icon">{{||$:/core/ui/TiddlerIcon}}</span><$text text=<<currentTiddler>>/>
+</$link>
+</h2>
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -title" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>
+</div>
+</$tiddler>
+\end
+
+\define .banner-credits(credit,url)
+<img src=<<__url__>> width="140" style="float:left;margin-right:0.5em;"/>
+
+$credit$
+
+<div style="clear:both;">
+
+</div>
+\end
 
 <pre><$view field="text"/></pre>

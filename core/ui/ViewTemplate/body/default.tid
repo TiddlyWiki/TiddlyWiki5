@@ -1,0 +1,7 @@
+title: $:/core/ui/ViewTemplate/body/default
+
+<$transclude>
+
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+
+</$transclude>

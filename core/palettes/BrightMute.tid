@@ -1,5 +1,6 @@
 title: $:/palettes/Muted
 name: Muted
+color-scheme: light
 description: Bright tiddlers on a muted background
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary

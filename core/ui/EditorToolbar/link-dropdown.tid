@@ -13,7 +13,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}><$list filter="[<searchTiddler>get[text]!match<userInput>]" emptyMessage="""<$action-deletetiddler $filter="[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>"""><$action-setfield $tiddler=<<searchTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/></$list></$set>
 \end
 
-\define cancel-search-actions() <$list filter="[<storeTitle>!has[text]] +[<searchTiddler>!has[text]]" emptyMessage="""<<cancel-search-actions-inner>>"""><$action-sendmessage $message="tm-edit-text-operation" $param="wrap-selection" prefix="" suffix=""/></$list>
+\define cancel-search-actions() <$list filter="[<storeTitle>!has[text]] +[<searchTiddler>!has[text]]" emptyMessage="""<<cancel-search-actions-inner>>"""><$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/></$list>
 
 \define external-link()
 <$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;" actions=<<add-link-actions>>>

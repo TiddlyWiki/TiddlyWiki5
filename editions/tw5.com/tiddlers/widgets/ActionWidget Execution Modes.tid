@@ -1,0 +1,49 @@
+created: 20211003094722447
+modified: 20211116193245990
+tags: Widgets
+title: ActionWidget Execution Modes
+
+<<.from-version "5.2.0">> The default behaviour of action widgets has some peculiarities that often cause confusion. There is now an improved mode that simplifies how things work, but due to BackwardsCompatibility constraints, it must be explicitly engaged in order to take advantage of it.
+
+The peculiarities relate to the way that the results of previous action widgets are available to subsequent action widgets. By default, action widgets are refreshed before each execution which ensure that they reflect the results of previous actions. However, ordinary widgets are not updated in the same way.
+
+In the following contrived example, a button triggers a series of actions that should result in the string `foo` being assigned to the ''text'' field of the tiddler ActionTestTiddler. However, it fails to produce the expected result because the `<$set>` widget is not refreshed with the new value of ActionTestTiddler after the execution of the first `<$action-setfield>` widget.
+
+
+<$macrocall $name='wikitext-example-without-html'
+src='\define actions()
+<$action-setfield $tiddler="ActionTestTiddler" $field="text" $value="FOO"/>
+<$set name="newvalue" value={{{ [{ActionTestTiddler}lowercase[]] }}}>
+<$action-setfield $tiddler="ActionTestTiddler" $field="text" $value=<<newvalue>>/>
+</$set>
+\end
+
+Current value of ActionTestTiddler: {{ActionTestTiddler}}
+
+<$button actions=<<actions>>>
+Click me
+</$button>'/>
+
+The new behaviour avoids these problems by refreshing all widgets before execution, not just action widgets. It is engaged by running the actions in a scope that includes the variable `tv-action-refresh-policy` set to the value `always`.  (The default value for `tv-action-refresh-policy` is `once`).
+
+The assignment can be done within an action string, or via a local variable declaration containing the widget triggering the action.
+
+<<.warning "Do not attempt to set `tv-action-refresh-policy` globally; the core will only work correctly with the default setting">>
+
+The example above works as expected with the addition of `tv-action-refresh-policy`:
+
+<$macrocall $name='wikitext-example-without-html'
+src='\define tv-action-refresh-policy() always
+
+\define actions()
+<$action-setfield $tiddler="ActionTestTiddler" $field="text" $value="FOO"/>
+<$set name="newvalue" value={{{ [{ActionTestTiddler}lowercase[]] }}}>
+<$action-setfield $tiddler="ActionTestTiddler" $field="text" $value=<<newvalue>>/>
+</$set>
+\end
+
+Current value of ActionTestTiddler: {{ActionTestTiddler}}
+
+<$button actions=<<actions>>>
+Click me
+</$button>'/>

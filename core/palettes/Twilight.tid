@@ -4,6 +4,7 @@ author: Thomas Elmiger
 type: application/x-tiddler-dictionary
 name: Twilight
 description: Delightful, soft darkness.
+color-scheme: dark
 
 alert-background: rgb(255, 255, 102)
 alert-border: rgb(232, 232, 125)

@@ -1,0 +1,46 @@
+created: 20210309133636211
+modified: 20211222153049771
+tags: Widgets MessageHandlerWidgets TriggeringWidgets
+title: MessageCatcherWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.2.0">>
+
+The message catcher widget traps [[messages|Messages]] dispatched within its child content, and allows invoking a series of ActionWidgets in response to those messages.
+
+! Content and Attributes
+
+The content of the `<$messagecatcher>` widget is displayed normally.
+
+|!Attribute |!Description |
+|//{any attributes starting with $}// |Each attribute name (excluding the $) specifies the name of a message, and the value specifies the action string to be invoked |
+|type |Name of the message be trapped, for example "tm-scroll" or "tm-navigate". The `type` and `actions` attributes can be useful when the type of event needs to be specified via a variable or text reference |
+|actions |Action string to be invoked when a matching message is trapped. Must be used in conjunction with the `type` attribute |
+
+! Variables
+
+The message catcher widget sets the following variables within each action string:
+
+|!Variables |!Description |
+|`event-*` |All string-based properties of the `event` object, with the names prefixed with `event-` |
+|`list-event` |A list of the names of each the string-based properties of the `event` object (the names are not prefixed with `event-`) |
+|`event-paramObject-*` |All string-based properties of the `event.paramObject` object, with the names prefixed with `event-paramObject-` |
+|`list-event-paramObject` |A list of the names of each the string-based properties of the `event.paramObject` object (the names are not prefixed with `event-paramObject-`) |
+|`modifier` |For messages that originated with browser events, the modifier keys that were pressed when the event was fired. The possible modifiers are ''normal'' (no modifiers), ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+
+! Example
+
+<$macrocall $name="wikitext-example-without-html" src="""
+\define actions()
+<$action-log/>
+\end
+
+<$messagecatcher $tm-navigate=<<actions>>>
+
+Click on [[this link]] to fire an action. See the browser JavaScript console for the output
+
+</$messagecatcher>
+"""/>
+

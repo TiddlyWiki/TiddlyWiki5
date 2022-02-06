@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: Wyświetla listę wszystkich dostępnych wydań TiddlyWiki
+
+Wyświetla nazwy i opisy wszystkich dostępnych wydań. Możesz utworzyć nową wiki w wybranej wersji przy pomocy komend `--init`.
+
+```
+--editions
+```

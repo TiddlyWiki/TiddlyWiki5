@@ -78,7 +78,7 @@ function FramedEngine(options) {
 	}
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
-	}	
+	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners
@@ -88,6 +88,18 @@ function FramedEngine(options) {
 		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
 		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
+	// Add drag and drop event listeners if fileDrop is enabled
+	if(this.widget.isFileDropEnabled) {
+		$tw.utils.addEventListeners(this.domNode,[
+			{name: "dragenter",handlerObject: this.widget,handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover",handlerObject: this.widget,handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave",handlerObject: this.widget,handlerMethod: "handleDragLeaveEvent"},
+			{name: "dragend",handlerObject: this.widget,handlerMethod: "handleDragEndEvent"},
+			{name: "drop", handlerObject: this.widget,handlerMethod: "handleDropEvent"},
+			{name: "paste", handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
+			{name: "click",handlerObject: this.widget,handlerMethod: "handleClickEvent"}
+		]);
+	}
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
 }
@@ -123,7 +135,11 @@ FramedEngine.prototype.setText = function(text,type) {
 Update the DomNode with the new text
 */
 FramedEngine.prototype.updateDomNodeText = function(text) {
-	this.domNode.value = text;
+	try {
+		this.domNode.value = text;
+	} catch(e) {
+		// Ignore
+	}
 };
 
 /*
@@ -170,7 +186,7 @@ Handle a focus event
 */
 FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
-		$tw.popup.cancel(0);	
+		$tw.popup.cancel(0);
 	}
 };
 
@@ -189,7 +205,7 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	if(this.widget.editInputActions) {
-		this.widget.invokeActionString(this.widget.editInputActions);
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
 	}
 	return true;
 };

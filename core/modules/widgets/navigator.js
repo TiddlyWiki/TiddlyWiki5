@@ -18,6 +18,17 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var NavigatorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+};
+
+/*
+Inherit from the base widget class
+*/
+NavigatorWidget.prototype = new Widget();
+
+/*
+Render this widget into the DOM
+*/
+NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.addEventListeners([
 		{type: "tm-navigate", handler: "handleNavigateEvent"},
 		{type: "tm-edit-tiddler", handler: "handleEditTiddlerEvent"},
@@ -36,17 +47,6 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"},
 		{type: "tm-rename-tiddler", handler: "handleRenameTiddlerEvent"}
 	]);
-};
-
-/*
-Inherit from the base widget class
-*/
-NavigatorWidget.prototype = new Widget();
-
-/*
-Render this widget into the DOM
-*/
-NavigatorWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -95,7 +95,7 @@ NavigatorWidget.prototype.saveStoryList = function(storyList) {
 			{title: this.storyTitle},
 			storyTiddler,
 			{list: storyList}
-		));		
+		));
 	}
 };
 
@@ -105,7 +105,7 @@ NavigatorWidget.prototype.removeTitleFromStory = function(storyList,title) {
 		while(p !== -1) {
 			storyList.splice(p,1);
 			p = storyList.indexOf(title);
-		}		
+		}
 	}
 };
 
@@ -122,7 +122,7 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 			} while(pos !== -1);
 		} else {
 			storyList.splice(0,0,newTitle);
-		}		
+		}
 	}
 };
 
@@ -160,6 +160,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 
 // Close a specified tiddler
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
+	event = $tw.hooks.invokeHook("th-closing-tiddler",event);
 	var title = event.param || event.tiddlerTitle,
 		storyList = this.getStoryList();
 	// Look for tiddlers with this title to close
@@ -183,7 +184,8 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 
 // Place a tiddler in edit mode
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
-	var editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event);
+	var editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event),
+	    win = event.event && event.event.view ? event.event.view : window;
 	if(!editTiddler) {
 		return false;
 	}
@@ -192,7 +194,7 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 		return self.wiki.isShadowTiddler(title) && !self.wiki.tiddlerExists(title);
 	}
 	function confirmEditShadow(title) {
-		return confirm($tw.language.getString(
+		return win.confirm($tw.language.getString(
 			"ConfirmEditShadowTiddler",
 			{variables:
 				{title: title}
@@ -225,7 +227,8 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		storyList = this.getStoryList(),
 		originalTitle = tiddler ? tiddler.fields["draft.of"] : "",
 		originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined,
-		confirmationTitle;
+		confirmationTitle,
+	    	win = event.event && event.event.view ? event.event.view : window;
 	if(!tiddler) {
 		return false;
 	}
@@ -238,7 +241,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !confirm($tw.language.getString(
+	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !win.confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
@@ -304,7 +307,8 @@ NavigatorWidget.prototype.generateDraftTitle = function(title) {
 NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList();
+		storyList = this.getStoryList(),
+	    	win = event.event && event.event.view ? event.event.view : window;
 	// Replace the original tiddler with the draft
 	if(tiddler) {
 		var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
@@ -313,7 +317,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 			var isRename = draftOf !== draftTitle,
 				isConfirmed = true;
 			if(isRename && this.wiki.tiddlerExists(draftTitle)) {
-				isConfirmed = confirm($tw.language.getString(
+				isConfirmed = win.confirm($tw.language.getString(
 					"ConfirmOverwriteTiddler",
 					{variables:
 						{title: draftTitle}
@@ -362,6 +366,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 // Take a tiddler out of edit mode without saving the changes
 NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-cancelling-tiddler", event);
+	var win = event.event && event.event.view ? event.event.view : window;
 	// Flip the specified tiddler from draft back to the original
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
@@ -372,7 +377,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 			originalTiddler = this.wiki.getTiddler(originalTitle),
 			storyList = this.getStoryList();
 		if(this.wiki.isDraftModified(draftTitle)) {
-			isConfirmed = confirm($tw.language.getString(
+			isConfirmed = win.confirm($tw.language.getString(
 				"ConfirmCancelTiddler",
 				{variables:
 					{title: draftTitle}
@@ -522,10 +527,15 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	});
 	// Give the active upgrader modules a chance to process the incoming tiddlers
 	var messages = this.wiki.invokeUpgraders(incomingTiddlers,importData.tiddlers);
+	// Deselect any disabled, but _not_ suppressed tiddlers
+	var systemMessage = $tw.language.getString("Import/Upgrader/Tiddler/Unselected");
 	$tw.utils.each(messages,function(message,title) {
 		newFields["message-" + title] = message;
+		if (message.indexOf(systemMessage) !== -1) {
+			newFields["selection-" + title] = "unchecked";
+		}
 	});
-	// Deselect any suppressed tiddlers
+	// Deselect suppressed tiddlers ... they have been removed and can't be selected anymore
 	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
 		if($tw.utils.count(tiddler) === 0) {
 			newFields["selection-" + title] = "unchecked";
@@ -557,10 +567,12 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
 		importTiddler = this.wiki.getTiddler(event.param),
-		importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
+		importData,
 		importReport = [];
-	// Add the tiddlers to the store
 	importReport.push($tw.language.getString("Import/Imported/Hint") + "\n");
+	// If you need to modify the import tiddler payload then consider th-importing-tiddler instead
+	importTiddler = $tw.hooks.invokeHook("th-before-importing",importTiddler);
+	importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
@@ -569,7 +581,10 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 			} else {
 				var tiddler = new $tw.Tiddler(tiddlerFields);
 			}
+			// th-importing-tiddler doesn't allow user interaction by default
+			// If you want to use the default UI then use: $:/core/modules/upgraders/ instead
 			tiddler = $tw.hooks.invokeHook("th-importing-tiddler",tiddler);
+			// Add the tiddlers to the store
 			self.wiki.addTiddler(tiddler);
 			importReport.push("# [[" + tiddler.fields.title + "]]");
 		}

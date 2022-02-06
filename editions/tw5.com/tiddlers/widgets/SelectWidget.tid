@@ -1,7 +1,7 @@
 caption: select
 created: 20131024141900000
-modified: 20190304122040876
-tags: Widgets
+modified: 20211108165037846
+tags: TriggeringWidgets Widgets
 title: SelectWidget
 type: text/vnd.tiddlywiki
 
@@ -48,6 +48,17 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 This example sets the title of the current wiki [[$:/SiteTitle]] to one of a list of book titles:
 
 <$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/SiteTitle' tooltip='Choose a new site title'>
+<option>A Tale of Two Cities</option>
+<option>A New Kind of Science</option>
+<option>The Dice Man</option>
+</$select>"/>
+
+!!! Simple List with Placeholder Value
+
+To display a default value that is also disabled, effectively functioning as a placeholder, the following form can be used. Note that the targeted field must be empty, or not exist, for the placeholder to show in the widget:
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='New Tiddler' field='text' default='Choose a new text'>
+<option disabled>Choose a new text</option>
 <option>A Tale of Two Cities</option>
 <option>A New Kind of Science</option>
 <option>The Dice Man</option>
@@ -118,3 +129,16 @@ This example uses the `multiple` keyword to specify that we should be able to se
 <$view field='title' /><br />
 </$list>
 "/>
+
+!! Actions 
+
+This example uses the actions attribute to apply days of the week as tags to the current tiddler.
+
+<$macrocall $name="wikitext-example-without-html" src="""<$select tiddler='$:/generated-list-demo-state' field='actions-test' 
+actions='<$action-listops $field="myfield" $tags={{$:/generated-list-demo-state!!actions-test}}/>'
+>
+<$list filter='[list[Days of the Week]]'>
+<option><$view field='title'/></option>
+</$list>
+</$select>
+"""/>

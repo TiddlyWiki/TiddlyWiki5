@@ -115,7 +115,7 @@ Command.prototype.fetchFile = function(url,options,callback,redirectCount) {
 	        	if(response.statusCode === 302 || response.statusCode === 303 || response.statusCode === 307) {
 	        		return self.fetchFile(response.headers.location,options,callback,redirectCount + 1);
 	        	} else {
-		        	return callback("Error " + response.statusCode + " retrieving " + url)	        		
+		        	return callback("Error " + response.statusCode + " retrieving " + url)
 	        	}
 	        }
 	   	});

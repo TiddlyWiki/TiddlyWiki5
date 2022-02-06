@@ -1,0 +1,10 @@
+created: 20211204122107920
+filter: HelloThere Community GettingStarted Features Reference Plugins Learning
+modified: 20211204131610322
+tags: $:/tags/TiddlerList
+title: Demo Tiddler List with Custom Story Tiddler Template
+type: text/vnd.tiddlywiki
+
+This is a demo tiddler with a custom story tiddler template that displays the tiddlers named in the list field as a fan.
+
+See [[How to create a custom story tiddler template]] for details.

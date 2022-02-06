@@ -1,0 +1,126 @@
+created: 20201216182347597
+modified: 20211018102328148
+tags: 
+title: How to create dynamic editor toolbar buttons
+type: text/vnd.tiddlywiki
+
+\define disabledFilterExample()`[[$(tempBoldDisabled)$]get[state-disabled]else[no]]`
+
+\define remove-shortcuts()
+<$action-deletetiddler $tiddler=<<shortcutInfo>>/>
+<$action-deletetiddler $tiddler=<<shortcutConfigMac>>/>
+<$action-deletetiddler $tiddler=<<shortcutConfigNotMac>>/>
+<$action-deletetiddler $tiddler=<<tempBold>>/>
+<$action-deletetiddler $tiddler=<<tempBoldDisabled>>/>
+\end
+
+\define create-shortcut-tiddlers()
+<$action-createtiddler $basetitle=<<shortcutInfo>> 
+  $template="$:/config/ShortcutInfo/bold" 
+  $overwrite="yes"
+/>
+<$action-navigate $to=<<shortcutInfo>>/>
+
+<$action-createtiddler $basetitle=<<shortcutConfigMac>> 
+  $template="$:/config/shortcuts-mac/bold" 
+  $overwrite="yes"
+  text="meta-shift-X"
+/>
+<$action-navigate $to=<<shortcutConfigMac>>/>
+
+<$action-createtiddler $basetitle=<<shortcutConfigNotMac>> 
+  $template="$:/config/shortcuts-not-mac/bold" 
+  $overwrite="yes"
+  text="ctrl-shift-X"
+/>
+<$action-navigate $to=<<shortcutConfigNotMac>>/>
+
+\end
+
+\define clone-bold()
+<$action-createtiddler $basetitle=<<tempBold>> 
+  $template="$:/core/ui/EditorToolbar/bold" 
+  $overwrite="yes"
+  icon="$:/core/images/spiral"
+  shortcuts="((temp-bold))"
+  condition-disabled="[[$(tempBoldDisabled)$]get[state-disabled]else[no]]"
+/>
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<tempBold>>/>
+\end
+
+\define clone-button-bold()
+<$button actions=<<clone-bold>> >Create a Temporary Bold Button</$button>
+\end
+
+\define toggle-bold()
+<$action-listops  $tiddler=<<tempBoldDisabled>> $field="state-disabled" $subfilter="+[toggle[yes],[no]]" />
+\end
+
+<!-- $vars is needed don't remove it! -->
+<$vars tempBold="$:/temp/bold" tempBoldDisabled="$:/temp/bold/disabled" shortcutInfo="$:/config/ShortcutInfo/temp-bold"  shortcutConfigMac="$:/config/shortcuts-mac/temp-bold" shortcutConfigNotMac="$:/config/shortcuts-not-mac/temp-bold">
+
+!! Create a New Toolbar Button
+
+The easiest way to create new editor toolbar button is to clone and open one.
+
+><<clone-button-bold>> 
+
+This tiddler contains all the necessary elements that are important for toolbar buttons. 
+
+<<<
+
+; text
+: We don't discuss the text field details in this howto
+
+; caption
+: The caption field is used to display the shortcut name in the $:/ControlPanel : Keyboard Shortcuts tab
+
+; condition
+: A filter, that defines the button visibility state
+
+; condition-disabled  <<.from-version "5.1.23">>
+: A ''filter'', that allows us to define the "disabled" attribute for buttons. eg: <<disabledFilterExample>>
+:  This condition ''must'' return "no", if the "state tiddler" or "state field" doesn't exist! So there has to be a `else[no]` element in the filter.
+
+; description
+: Is used as the button tooltip
+
+; icon 
+: Assigns the button icon. We use `$:/core/images/spiral` {{$:/core/images/spiral}} here. More button icons can be found in the [[Icon Gallery]]
+
+; shortcuts
+: This is the [[Keyboard Shortcut Descriptor]] eg: `((temp-bold))`
+
+<<<
+
+!! Disabled State
+
+You can use any "state tiddler" to define the button disabled state. It's important, that the ''condition-disabled'' field is a ''filter''. For our example we use the `state-disabled` field from tiddler: <<tempBoldDisabled>>
+
+The easiest way to test filters is with the $:/AdvancedSearch : Filter tab
+
+> The temporary "bold button" is disabled: ''"{{{ [<tempBoldDisabled>get[state-disabled]else[no]] }}}"'' ... You can see the button in the editor toolbar if you edit any tiddler!
+
+> <$button actions=<<toggle-bold>>>Toggle Temporary Bold Button Visisbility</$button>
+
+!! Create Keyboard Shortcuts for New Button
+
+For our ~HowTo we use the ''Keyboard Shortcut Descriptor'': `((temp-bold))`
+
+To create a valid shortcut configuration we need 2 tiddlers: 
+
+>[[$:/config/ShortcutInfo/|$:/config/ShortcutInfo/temp-bold]]''temp-bold'' .. and
+>[[$:/config/shortcuts/|$:/config/shortcuts/temp-bold]]''temp-bold''
+
+> <$button actions=<<create-shortcut-tiddlers>>>Create Shortcut Tiddlers</$button>
+
+!! 
+
+!! Clean up the Configuration Tiddlers
+
+If you don't need the config tiddlers anymore you can 
+
+><$button actions=<<remove-shortcuts>>>Remove the Shortcut Configuration</$button>
+
+
+</$vars><!-- needed don't remove! -->

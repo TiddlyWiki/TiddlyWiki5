@@ -1,5 +1,5 @@
 created: 20201020102735123
-modified: 20201020104004306
+modified: 20210524044020645
 tags: [[Operator Examples]] [[format Operator]]
 title: format Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -14,3 +14,18 @@ Created date with a format string supplied as operator parameter:
 
 Modified date shown as a relative date:
 <<.operator-example 3 "[[HelloThere]get[modified]format:relativedate[]]">>
+
+A tiddler title with spaces formatted as a title list:
+<<.operator-example 4 """[[Hello There]format:titlelist[]]""">>
+
+All tiddler titles tagged with <<tag TableOfContents>> formatted as a title list :
+<<.operator-example 5 """[tag[TableOfContents]format:titlelist[]]""">>
+
+<<.tip "To create a string to save a [[title list|Title List]] into a list field, use `format:titlelist[]` with the [[join operator|join Operator]]">>
+<<.operator-example 6 """[tag[TableOfContents]format:titlelist[]join[ ]]""">>
+For example, to save titles tagged `TableOfContents` to the titles field of the tiddler [[format titlelist test]]:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button> test
+<$action-setfield $tiddler="format titlelist test" titles={{{ [tag[TableOfContents]format:titlelist[]join[ ]] }}}/>
+</$button>'/>

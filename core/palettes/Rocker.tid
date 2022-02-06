@@ -1,5 +1,6 @@
 title: $:/palettes/Rocker
 name: Rocker
+color-scheme: dark
 description: A dark theme
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary

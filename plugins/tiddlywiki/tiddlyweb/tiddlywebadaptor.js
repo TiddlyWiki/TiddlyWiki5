@@ -114,6 +114,10 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 		},
 		callback: function(err) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging in:",options);
@@ -132,6 +136,10 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 		},
 		callback: function(err,data) {
 			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
 		}
 	};
 	this.logger.log("Logging out:",options);
@@ -180,10 +188,10 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
-TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
@@ -197,11 +205,16 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				return callback(err);
 			}
 			// Save the details of the new revision of the tiddler
-			var etagInfo = self.parseEtag(request.getResponseHeader("Etag"));
-			// Invoke the callback
-			callback(null,{
-				bag: etagInfo.bag
-			}, etagInfo.revision);
+			var etag = request.getResponseHeader("Etag");
+			if(!etag) {
+				callback("Response from server is missing required `etag` header");
+			} else {
+				var etagInfo = self.parseEtag(etag);
+				// Invoke the callback
+				callback(null,{
+					bag: etagInfo.bag
+				},etagInfo.revision);				
+			}
 		}
 	});
 };
@@ -231,12 +244,12 @@ tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
 	if(!bag) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
@@ -246,8 +259,8 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 			if(err) {
 				return callback(err);
 			}
-			// Invoke the callback
-			callback(null);
+			// Invoke the callback & return null adaptorInfo
+			callback(null,null);
 		}
 	});
 };
@@ -333,8 +346,8 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 		return null;
 	} else {
 		return {
-			bag: decodeURIComponent(etag.substring(1,firstSlash)),
-			title: decodeURIComponent(etag.substring(firstSlash + 1,lastSlash)),
+			bag: $tw.utils.decodeURIComponentSafe(etag.substring(1,firstSlash)),
+			title: $tw.utils.decodeURIComponentSafe(etag.substring(firstSlash + 1,lastSlash)),
 			revision: etag.substring(lastSlash + 1,colon)
 		};
 	}

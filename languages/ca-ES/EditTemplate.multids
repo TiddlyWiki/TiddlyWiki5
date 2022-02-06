@@ -2,6 +2,8 @@ title: $:/language/EditTemplate/
 
 Body/External/Hint: Aquest és un tiddler extern desat fora del fitxer del TiddlyWiki principal. Podeu editar les etiquetes i camps però no podeu editar directament el seu contingut
 Body/Placeholder: Escriviu el text per aquest tiddler
+Body/Preview/Type/DiffCurrent: diferències respecte l'actual
+Body/Preview/Type/DiffShadow: diferències respecte de l'ombre (si hi ha)
 Body/Preview/Type/Output: resultat
 Field/Dropdown/Caption: llista de camps
 Field/Dropdown/Hint: Mostra la llista de camps
@@ -19,6 +21,8 @@ Shadow/Warning: Aquest és un tiddler ombra. Qualsevol canvi sobreescriurà la v
 Tags/Add/Button: afegeix
 Tags/Add/Button/Hint: afegeix una etiqueta
 Tags/Add/Placeholder: nom de l'etiqueta
+Tags/ClearInput/Caption: neteja
+Tags/ClearInput/Hint: Neteja l'etiqueta
 Tags/Dropdown/Caption: llista d'etiquetes
 Tags/Dropdown/Hint: Mostra la llista d'etiquetes
 Title/BadCharacterWarning: Avís: eviteu qualsevol dels caràcters <<bad-chars>> al títol d'un tiddler

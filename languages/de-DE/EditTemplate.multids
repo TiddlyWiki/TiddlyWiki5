@@ -3,6 +3,8 @@ title: $:/language/EditTemplate/
 Body/External/Hint: Dieser Tiddler zeigt den Inhalt einer Datei, die nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Type/Output: Anzeige
+Body/Preview/Type/DiffShadow: Unterschiede zum Schatten-Tiddler (wenn vorhanden)
+Body/Preview/Type/DiffCurrent: Unterschiede zum aktuellen Tiddler
 Field/Remove/Caption: Lösche Feld
 Field/Remove/Hint: Lösche Feld
 Field/Dropdown/Caption: Feld Liste

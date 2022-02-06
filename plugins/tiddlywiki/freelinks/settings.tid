@@ -1,5 +1,7 @@
 title: $:/plugins/tiddlywiki/freelinks/settings
 
+Filter defining tiddlers to which freelinks are made: <$edit-text tiddler="$:/config/Freelinks/TargetFilter" tag="input" placeholder="Filter expression..." default=""/>
+
 <$checkbox tiddler="$:/config/Freelinks/Enable" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/Enable">Enable freelinking within tiddler view templates</$link> </$checkbox>
 
 <$checkbox tiddler="$:/config/Freelinks/IgnoreCase" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Freelinks/IgnoreCase">Ignore case</$link> </$checkbox>

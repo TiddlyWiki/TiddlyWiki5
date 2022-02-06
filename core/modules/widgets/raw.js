@@ -32,7 +32,7 @@ RawWidget.prototype.render = function(parent,nextSibling) {
 	var div = this.document.createElement("div");
 	div.innerHTML=this.parseTreeNode.html;
 	parent.insertBefore(div,nextSibling);
-	this.domNodes.push(div);	
+	this.domNodes.push(div);
 };
 
 /*

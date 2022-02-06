@@ -33,7 +33,7 @@ EditShortcutWidget.prototype.render = function(parent,nextSibling) {
 	this.inputNode = this.document.createElement("input");
 	// Assign classes
 	if(this.shortcutClass) {
-		this.inputNode.className = this.shortcutClass;		
+		this.inputNode.className = this.shortcutClass;
 	}
 	// Assign other attributes
 	if(this.shortcutStyle) {
@@ -117,7 +117,7 @@ EditShortcutWidget.prototype.handleKeydownEvent = function(event) {
 		// Ignore the keydown if it was already handled
 		event.preventDefault();
 		event.stopPropagation();
-		return true;		
+		return true;
 	} else {
 		return false;
 	}
@@ -145,7 +145,7 @@ EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
 		this.updateInputNode();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

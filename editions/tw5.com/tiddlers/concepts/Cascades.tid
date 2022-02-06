@@ -1,0 +1,47 @@
+created: 20211201100326006
+modified: 20211206164704335
+tags: Concepts
+title: Cascades
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+Cascades are a key mechanism used to construct and customise TiddlyWiki's user interface.
+
+<<.tip "See [[Customising TiddlyWiki's user interface]] for an overview of all the customisation mechanisms">>
+
+!! How cascades work
+
+Cascades provide a means to select one of multiple values based on flexible, extensible criteria. They can be thought of as a list of conditions that are evaluated in turn until one of them matches.
+
+Each cascade is defined by a special tag which identifies the tiddlers containing the conditions to be matched. The [[Order of Tagged Tiddlers]] determines the order in which the conditions are processed, and provides the means for arranging new rules at specific points in the cascade.
+
+The conditions are defined by a [[Filter Expression]] in the text field. The filters are evaluated with the list of input titles set to the title of the tiddler to be considered. The `currentTiddler` variable is also set to the title of the tiddler to be considered.
+
+If the filter returns no result then that result will be ignored and the cascade proceeds to test the next condition. If the filter expression does return at least one result then it serves as the result of the entire cascade.
+
+The [[Cascade Filter Run Prefix]] provides the implementation of the underlying logic.
+
+!! Example
+
+The [[Story Tiddler Template Cascade]] contains the logic for determining a tiddler should be displayed as an editable draft or in view mode. By default, it consists of two tiddlers containing the following list of rules:
+
+# `[is[draft]then{$:/config/ui/EditTemplate}]` – if it is a draft tiddler, use the template title given in the tiddler $:/config/ui/EditTemplate
+# `[{$:/config/ui/ViewTemplate}] ` – otherwise, use the template title given in the tiddler $:/config/ui/ViewTemplate
+
+!! Usage in the core
+
+The TiddlyWiki core uses cascades to choose the following elements:
+
+|[[Story Tiddler Template Cascade]] |The template used to display a particular tiddler in the story river. By default, the edit template is chosen for draft tiddlers, and the view template for others |
+|[[Tiddler Icon Cascade]] |The optional icon associated with a particular tiddler (displayed alongside the title) |
+|[[Tiddler Colour Cascade]] |The optional colour associated with a particular tiddler (used to colour the tiddler icon and if the tiddler is used as a tag also provides the colour for the tag pill) |
+|[[View Template Title Cascade]] |The template used to display the title of a particular tiddler (used by the default view template to display the tiddler title) |
+|[[View Template Body Cascade]] |The template used to display the view mode body of a particular tiddler (used by the default view template to display the tiddler body) |
+|[[Edit Template Body Cascade]] |The template used to display the edit mode body of a particular tiddler (used by the default edit template to display the tiddler body editor) |
+
+You can see the current settings for each cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades'' tab.
+
+!! See Also
+
+<<list-links "[tag[Cascades]]">>

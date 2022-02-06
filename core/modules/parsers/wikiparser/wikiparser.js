@@ -25,6 +25,14 @@ Attributes are stored as hashmaps of the following objects:
 /*global $tw: false */
 "use strict";
 
+/*
+type: content type of text
+text: text to be parsed
+options: see below:
+	parseAsInline: true to parse text as inline instead of block
+	wiki: reference to wiki to use
+	_canonical_uri: optional URI of content if text is missing or empty
+*/
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
 	var self = this;
@@ -32,19 +40,6 @@ var WikiParser = function(type,text,options) {
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {
 		this.loadRemoteTiddler(options._canonical_uri);
 		text = $tw.language.getRawString("LazyLoadingWarning");
-	}
-	// Initialise the classes if we don't have them already
-	if(!this.pragmaRuleClasses) {
-		WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
-	}
-	if(!this.blockRuleClasses) {
-		WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
-	}
-	if(!this.inlineRuleClasses) {
-		WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
 	}
 	// Save the parse text
 	this.type = type || "text/vnd.tiddlywiki";
@@ -54,13 +49,38 @@ var WikiParser = function(type,text,options) {
 	this.configTrimWhiteSpace = false;
 	// Set current parse position
 	this.pos = 0;
-	// Instantiate the pragma parse rules
-	this.pragmaRules = this.instantiateRules(this.pragmaRuleClasses,"pragma",0);
-	// Instantiate the parser block and inline rules
-	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
-	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
-	// Parse any pragmas
+	// Start with empty output
 	this.tree = [];
+	// Assemble the rule classes we're going to use
+	var pragmaRuleClasses, blockRuleClasses, inlineRuleClasses;
+	if(options.rules) {
+		pragmaRuleClasses = options.rules.pragma;
+		blockRuleClasses = options.rules.block;
+		inlineRuleClasses = options.rules.inline;
+	} else {
+		// Setup the rule classes if we don't have them already
+		if(!this.pragmaRuleClasses) {
+			WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
+		}
+		pragmaRuleClasses = this.pragmaRuleClasses;
+		if(!this.blockRuleClasses) {
+			WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
+		}
+		blockRuleClasses = this.blockRuleClasses;
+		if(!this.inlineRuleClasses) {
+			WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
+		}
+		inlineRuleClasses = this.inlineRuleClasses;
+	}
+	// Instantiate the pragma parse rules
+	this.pragmaRules = this.instantiateRules(pragmaRuleClasses,"pragma",0);
+	// Instantiate the parser block and inline rules
+	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
+	this.inlineRules = this.instantiateRules(inlineRuleClasses,"inline",0);
+	// Parse any pragmas
 	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
 	if(options.parseAsInline) {
@@ -211,7 +231,10 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 		return nextMatch.rule.parse();
 	}
 	// Treat it as a paragraph if we didn't find a block rule
-	return [{type: "element", tag: "p", children: this.parseInlineRun(terminatorRegExp)}];
+	var start = this.pos;
+	var children = this.parseInlineRun(terminatorRegExp);
+	var end = this.pos;
+	return [{type: "element", tag: "p", children: children, start: start, end: end }];
 };
 
 /*
@@ -287,7 +310,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	while(this.pos < this.sourceLength && nextMatch) {
 		// Process the text preceding the run rule
 		if(nextMatch.matchIndex > this.pos) {
-			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex));
+			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex),this.pos,nextMatch.matchIndex);
 			this.pos = nextMatch.matchIndex;
 		}
 		// Process the run rule
@@ -297,7 +320,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
+		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -317,7 +340,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(terminatorMatch) {
 			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
 				if(terminatorMatch.index > this.pos) {
-					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index));
+					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index),this.pos,terminatorMatch.index);
 				}
 				this.pos = terminatorMatch.index;
 				if(options.eatTerminator) {
@@ -330,7 +353,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(inlineRuleMatch) {
 			// Preceding text
 			if(inlineRuleMatch.matchIndex > this.pos) {
-				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex));
+				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex),this.pos,inlineRuleMatch.matchIndex);
 				this.pos = inlineRuleMatch.matchIndex;
 			}
 			// Process the inline rule
@@ -344,7 +367,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		this.pushTextWidget(tree,this.source.substr(this.pos));
+		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -353,12 +376,12 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 /*
 Push a text widget onto an array, respecting the configTrimWhiteSpace setting
 */
-WikiParser.prototype.pushTextWidget = function(array,text) {
+WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 	if(this.configTrimWhiteSpace) {
 		text = $tw.utils.trim(text);
 	}
 	if(text) {
-		array.push({type: "text", text: text});		
+		array.push({type: "text", text: text, start: start, end: end});		
 	}
 };
 

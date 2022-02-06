@@ -39,6 +39,12 @@ var accumulatingTypes = {
 
 var md = new Remarkable(remarkableOpts);
 
+// If tiddlywiki/katex plugin is present, use remarkable-katex to enable katex support.
+if ($tw.modules.titles["$:/plugins/tiddlywiki/katex/katex.min.js"]) {
+	var rk = require("$:/plugins/tiddlywiki/markdown/remarkable-katex.js");
+	md = md.use(rk);
+}
+
 if (parseAsBoolean("$:/config/markdown/linkify")) {
 	md = md.use(linkify);
 }
@@ -94,7 +100,14 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		var currentNode = remarkableTree[i];
 		switch (currentNode.type) {
 		case "paragraph_open":
-			i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
+			// If the paragraph is a "tight" layout paragraph, don't wrap children in a <p> tag.
+			if (currentNode.tight) {
+				i = withChildren(i, currentNode.level, "paragraph_close", remarkableTree, function(children) {
+					Array.prototype.push.apply(out, children);
+				});
+			} else {
+				i = wrappedElement("p", i, currentNode.level, "paragraph_close", remarkableTree);
+			}
 			break;
 
 		case "heading_open":
@@ -136,7 +149,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 					out.push({
 						type: "link",
 						attributes: {
-							to: { type: "string", value: decodeURI(currentNode.href.substr(1)) }
+							to: { type: "string", value: $tw.utils.decodeURISafe(currentNode.href.substr(1)) }
 						},
 						children: children
 					});
@@ -167,7 +180,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				type: "image",
 				attributes: {
 					tooltip: { type: "string", value: currentNode.alt },
-					source: { type: "string", value: decodeURIComponent(currentNode.src) }
+					source: { type: "string", value: $tw.utils.decodeURIComponentSafe(currentNode.src) }
 				}
 			});
 			break;
@@ -221,6 +234,16 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		case "text":
 			// We need to merge this text block with the upcoming text block and parse it all together.
 			accumulatedText = accumulatedText + currentNode.content;
+			break;
+
+		case "katex":
+			out.push({
+				type: "latex",
+				attributes: {
+					text: { type: "text", value: currentNode.content },
+					displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
+				}
+			});
 			break;
 
 		default:

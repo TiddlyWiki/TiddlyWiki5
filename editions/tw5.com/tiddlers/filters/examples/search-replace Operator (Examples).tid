@@ -1,10 +1,12 @@
 created: 20201107112846692
-modified: 20201118103305351
+modified: 20211101125225197
 tags: [[Operator Examples]] [[search-replace Operator]]
 title: search-replace Operator (Examples)
 type: text/vnd.tiddlywiki
 
 \define myregexp() e|o
+
+\define myregexp2() ^(?!Unlike).*$
 
 \define names() (\w+)\s(\w+)
 
@@ -22,5 +24,15 @@ Replace all matches of a string irrespective of case:
 You can also use regular expression capture groups in the replacement string:
 `\define names() (\w+)\s(\w+)`
 <<.operator-example 4 """[[John Smith]search-replace::regexp<names>,[$2,$1]]""" >>
+
+You can reference the portion of the input that matches the regular expression with `$&`:
+<<.operator-example 5 """[[John Smith]search-replace::regexp[John .*],[His name is $&]]""">>
+
+<<.operator-example 6 """[[This is an exciting feature]search-replace::regexp[exciting],[amazing and $&]]""">>
+
+To replace everything but a match using a regular expression and the ''multiline'' (m) flag:
+`\define myregexp2() ^(?!Unlike).*$`
+<<.operator-example 7 """[[HelloThere]get[text]search-replace:gm:regexp<myregexp2>,[]]""">>
+
 
 {{How to remove stop words}}

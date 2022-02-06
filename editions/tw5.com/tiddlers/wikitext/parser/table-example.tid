@@ -1,0 +1,8 @@
+created: 20220118023452157
+modified: 20220118023529825
+tags: [[WikiText parser mode transitions (Examples)]]
+title: table-example
+type: text/vnd.tiddlywiki
+
+|cell one|cell two|
+|cell three|cell four|

@@ -24,7 +24,6 @@ Encryption/RepeatPassword: Repeat password
 Encryption/PasswordNoMatch: Passwords do not match
 Encryption/SetPassword: Set password
 Error/Caption: Error
-Error/EditConflict: File changed on server
 Error/Filter: Filter error
 Error/FilterSyntax: Syntax error in filter expression
 Error/FilterRunPrefix: Filter Error: Unknown prefix for filter run
@@ -32,6 +31,9 @@ Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operat
 Error/FormatFilterOperator: Filter Error: Unknown suffix for the 'format' filter operator
 Error/LoadingPluginLibrary: Error loading plugin library
 Error/NetworkErrorAlert: `<h2>''Network Error''</h2>It looks like the connection to the server has been lost. This may indicate a problem with your network connection. Please attempt to restore network connectivity before continuing.<br><br>''Any unsaved changes will be automatically synchronised when connectivity is restored''.`
+Error/PutEditConflict: File changed on server
+Error/PutForbidden: Permission denied
+Error/PutUnauthorized: Authentication required
 Error/RecursiveTransclusion: Recursive transclusion error in transclude widget
 Error/RetrievingSkinny: Error retrieving skinny tiddler list
 Error/SavingToTWEdit: Error saving to TWEdit
@@ -39,7 +41,6 @@ Error/WhileSaving: Error while saving
 Error/XMLHttpRequest: XMLHttpRequest error code
 InternalJavaScriptError/Title: Internal JavaScript Error
 InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
-InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 LayoutSwitcher/Description: Open the layout switcher
 LazyLoadingWarning: <p>Trying to load external content from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear, either the tiddler content type doesn't match the type of the external content, or you may be using a browser that doesn't support external content for wikis loaded as standalone files. See https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login to TiddlySpace

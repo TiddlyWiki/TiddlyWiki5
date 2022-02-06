@@ -3,6 +3,8 @@ title: $:/language/EditTemplate/
 Body/External/Hint: This tiddler shows content stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
 Body/Placeholder: Type the text for this tiddler
 Body/Preview/Type/Output: output
+Body/Preview/Type/DiffShadow: differences from shadow (if any)
+Body/Preview/Type/DiffCurrent: differences from current
 Field/Remove/Caption: remove field
 Field/Remove/Hint: Remove field
 Field/Dropdown/Caption: field list
