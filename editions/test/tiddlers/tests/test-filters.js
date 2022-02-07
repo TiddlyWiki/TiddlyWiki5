@@ -256,6 +256,16 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
 			expect(console.log).toHaveBeenCalledWith("WARNING: Filter", "modifier", "has a deprecated regexp operand", /Jo/);
 		});
+
+		it("should handle regular expression operands without crashing", function() {
+			spyOn(console, 'log');
+			// We don't really care about the results. Just don't get RSoD.
+			expect(() => wiki.filterTiddlers("[all/current/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[prefix/anything/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[title/anything/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[/anything/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[//]")).not.toThrow();
+		});
 	
 		it("should handle the prefix operator", function() {
 			expect(wiki.filterTiddlers("[prefix[Tiddler]]").join(",")).toBe("TiddlerOne,Tiddler Three");
