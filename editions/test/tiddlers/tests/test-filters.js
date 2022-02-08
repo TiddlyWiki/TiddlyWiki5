@@ -472,14 +472,18 @@ Tests the filtering mechanism.
 					{title: "B"},
 					{title: "Draft of 'B'", "draft.of": "B"},
 					{title: "C"},
+					// Not a true draft. Doesn't have draft.of
 					{title: "Draft of 'C'", "draft.title": "C"},
 					{title: "E"},
+					// Broken. Has draft.of, but it's empty. Still a draft
 					{title: "Draft of 'E'", "draft.of": "", "draft.title": ""}
+					// Not a draft. It doesn't exist.
 					//{title: "F"} // This one is deliberately missing
 				]);
-				// is analagous to [has[draft.of]]
-				expect(wiki.filterTiddlers("[all[]] F +[is[draft]]")).toEqual(wiki.filterTiddlers("[all[]] F +[has[draft.of]]"));
-				expect(wiki.filterTiddlers("[all[]] F +[!is[draft]]")).toEqual(wiki.filterTiddlers("[all[]] F +[!has[draft.of]]"));
+				// is analagous to [has[draft.of]],
+				// except they handle empty draft.of differently
+				expect(wiki.filterTiddlers("[all[]] F +[is[draft]]").join(",")).toEqual("Draft of 'A',Draft of 'B',Draft of 'E'");
+				expect(wiki.filterTiddlers("[all[]] F +[!is[draft]]").join(",")).toEqual("A,B,C,Draft of 'C',E,F");
 				// [is[draft]] and [!is[draft]] are proper complements
 				var included = wiki.filterTiddlers("[all[]] F +[is[draft]]")
 				var excluded = wiki.filterTiddlers("[all[]] F +[!is[draft]]")
