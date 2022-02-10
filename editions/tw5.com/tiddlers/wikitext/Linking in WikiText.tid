@@ -117,3 +117,9 @@ In order to get the desired result, the LinkWidget can be used directly like thi
 <<wikitext-example-without-html src:"<$link to=<<currentTiddler>>>{{!!caption}}</$link>">>
 
 See also another example of [[constructing dynamic links|Concatenating text and variables using macro substitution]].
+
+! Linking within tiddlers - "anchor links"
+
+In TiddlyWiki anchor links can help us link to target points and distinct sections within rendered tiddlers. They can help the reader navigate longer tiddler content.
+
+See [[Anchor Links using HTML]] for more information.

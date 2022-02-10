@@ -36,22 +36,26 @@ var accumulatingTypes = {
 	"text": true,
 	"softbreak": true
 };
+// If rendering WikiText, we treat katex nodes as text.
+if(pluginOpts.renderWikiText) {
+	accumulatingTypes["katex"] = true;
+}
 
 var md = new Remarkable(remarkableOpts);
 
 // If tiddlywiki/katex plugin is present, use remarkable-katex to enable katex support.
-if ($tw.modules.titles["$:/plugins/tiddlywiki/katex/katex.min.js"]) {
+if($tw.modules.titles["$:/plugins/tiddlywiki/katex/katex.min.js"]) {
 	var rk = require("$:/plugins/tiddlywiki/markdown/remarkable-katex.js");
 	md = md.use(rk);
 }
 
-if (parseAsBoolean("$:/config/markdown/linkify")) {
+if(parseAsBoolean("$:/config/markdown/linkify")) {
 	md = md.use(linkify);
 }
 
 function findTagWithType(nodes, startPoint, type, level) {
 	for (var i = startPoint; i < nodes.length; i++) {
-		if (nodes[i].type === type && nodes[i].level === level) {
+		if(nodes[i].type === type && nodes[i].level === level) {
 			return i;
 		}
 	}
@@ -77,7 +81,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 	var accumulatedText = '';
 	function withChildren(currentIndex, currentLevel, closingType, nodes, callback) {
 		var j = findTagWithType(nodes, currentIndex + 1, closingType, currentLevel);
-		if (j === false) {
+		if(j === false) {
 			console.error("Failed to find a " + closingType + " node after position " + currentIndex);
 			console.log(nodes);
 			return currentIndex + 1;
@@ -101,7 +105,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		switch (currentNode.type) {
 		case "paragraph_open":
 			// If the paragraph is a "tight" layout paragraph, don't wrap children in a <p> tag.
-			if (currentNode.tight) {
+			if(currentNode.tight) {
 				i = withChildren(i, currentNode.level, "paragraph_close", remarkableTree, function(children) {
 					Array.prototype.push.apply(out, children);
 				});
@@ -128,14 +132,14 @@ function convertNodes(remarkableTree, isStartOfInline) {
 
 		case "link_open":
 			i = withChildren(i, currentNode.level, "link_close", remarkableTree, function(children) {
-				if (currentNode.href[0] !== "#") {
+				if(currentNode.href[0] !== "#") {
 					// External link
 					var attributes = {
 						class: { type: "string", value: "tc-tiddlylink-external" },
 						href: { type: "string", value: currentNode.href },
 						rel: { type: "string", value: "noopener noreferrer" }
 					};
-					if (pluginOpts.linkNewWindow) {
+					if(pluginOpts.linkNewWindow) {
 						attributes.target = { type: "string", value: "_blank" };
 					}
 					out.push({
@@ -186,7 +190,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			break;
 
 		case "softbreak":
-			if (remarkableOpts.breaks) {
+			if(remarkableOpts.breaks) {
 				out.push({
 					type: "element",
 					tag: "br",
@@ -208,7 +212,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			var elementTag = currentNode.type.slice(0, 2);
 			i = withChildren(i, currentNode.level, elementTag + "_close", remarkableTree, function(children) {
 				var attributes = {};
-				if (currentNode.align) {
+				if(currentNode.align) {
 					attributes.style = { type: "string", value: "text-align:" + currentNode.align };
 				}
 				out.push({
@@ -237,17 +241,24 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			break;
 
 		case "katex":
-			out.push({
-				type: "latex",
-				attributes: {
-					text: { type: "text", value: currentNode.content },
-					displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
-				}
-			});
+			// If rendering WikiText, convert the katex node back to text for parsing by the WikiText LaTeX parser.
+			if(pluginOpts.renderWikiText) {
+				// If this is a block, add a newline to trigger the KaTeX plugins block detection.
+				var displayModeSuffix = currentNode.block ? "\n" : "";
+				accumulatedText = accumulatedText + "$$" + currentNode.content + displayModeSuffix + "$$";
+			} else {
+				out.push({
+					type: "latex",
+					attributes: {
+						text: { type: "text", value: currentNode.content },
+						displayMode: { type: "text", value: currentNode.block ? "true" : "false" }
+					}
+				});
+			}
 			break;
 
 		default:
-			if (currentNode.type.substr(currentNode.type.length - 5) === "_open") {
+			if(currentNode.type.substr(currentNode.type.length - 5) === "_open") {
 				var tagName = currentNode.type.substr(0, currentNode.type.length - 5);
 				i = wrappedElement(tagName, i, currentNode.level, tagName + "_close", remarkableTree);
 			} else {
@@ -261,7 +272,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 		}
 		// We test to see if we process the block now, or if there's
 		// more to accumulate first.
-		if (accumulatedText
+		if(accumulatedText
 			&& (
 				remarkableOpts.breaks ||
 				(i+1) >= remarkableTree.length ||
@@ -271,7 +282,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 			// The Markdown compiler thinks this is just text.
 			// Hand off to the WikiText parser to see if there's more to render
 			// But only if it's configured to, and we have more than whitespace
-			if (!pluginOpts.renderWikiText || accumulatedText.match(/^\s*$/)) {
+			if(!pluginOpts.renderWikiText || accumulatedText.match(/^\s*$/)) {
 				out.push({
 					type: "text",
 					text: accumulatedText
@@ -281,7 +292,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				// handle as a block-level parse. Otherwise not.
 				var parseAsInline = !(isStartOfInline && i === 0);
 				var textToParse = accumulatedText;
-				if (pluginOpts.renderWikiTextPragma !== "") {
+				if(pluginOpts.renderWikiTextPragma !== "") {
 					textToParse = pluginOpts.renderWikiTextPragma + "\n" + textToParse;
 				}
 				var wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki", textToParse, {
@@ -292,7 +303,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				// If we parsed as a block, but the root element the WikiText parser gave is a paragraph,
 				// we should discard the paragraph, since the way Remarkable nests its nodes, this "inline"
 				// node is always inside something else that's a block-level element
-				if (!parseAsInline
+				if(!parseAsInline
 					&& rs.length === 1
 					&& rs[0].type === "element"
 					&& rs[0].tag === "p"
@@ -301,7 +312,7 @@ function convertNodes(remarkableTree, isStartOfInline) {
 				}
 
 				// If the original text element started with a space, add it back in
-				if (rs.length > 0
+				if(rs.length > 0
 					&& rs[0].type === "text"
 					&& (accumulatedText[0] === " " || accumulatedText[0] === "\n")
 				) {
