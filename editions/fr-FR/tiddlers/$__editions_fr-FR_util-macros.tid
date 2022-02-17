@@ -36,3 +36,4 @@ type: text/vnd.tiddlywiki
 <!-- NO-BREAK SPACE Unicode: U+00A0, UTF-8: C2 A0, ISO-8859-1: A0 -->
 «&#160;$text$&#160;»
 \end
+\define fr(cible) <$link to="$cible$"><$view tiddler="$cible$" field="fr-title">{{$cible$!!title}}</$view></$link>
