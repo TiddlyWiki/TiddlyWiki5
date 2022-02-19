@@ -20,7 +20,7 @@ The `tm-open-window` [[message|Messages]] opens a tiddler in a new //browser// w
 The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
 
 <<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
-<<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, and <<.param height>> require the ActionSendMessageWidget.""">>
+<<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, <<.param height>>, <<.param left>> and <<.param top>> require the ActionSendMessageWidget.""">>
 
 
 <$macrocall $name='wikitext-example-without-html'
