@@ -51,6 +51,16 @@ exports.startup = function() {
 			element.focus(event.paramObject);
 		}
 	});
+	// Install the tm-rename-tiddler message
+	$tw.rootWidget.addEventListener("tm-rename-tiddler",function(event) {
+		var options = {},
+			paramObject = event.paramObject || {},
+			from = paramObject.from || event.tiddlerTitle,
+			to = paramObject.to;
+		options.dontRenameInTags = (paramObject.renameInTags === "false" || paramObject.renameInTags === "no") ? true : false;
+		options.dontRenameInLists = (paramObject.renameInLists === "false" || paramObject.renameInLists === "no") ? true : false;
+		$tw.wiki.renameTiddler(from,to,options);
+	});
 	// Install the scroller
 	$tw.pageScroller = new $tw.utils.PageScroller();
 	$tw.rootWidget.addEventListener("tm-scroll",function(event) {
