@@ -40,7 +40,7 @@ exports.startup = function() {
 		    srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
-			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width +  ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
+			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
 			srcDocument = srcWindow.document;
 		}
 		catch(e) {
