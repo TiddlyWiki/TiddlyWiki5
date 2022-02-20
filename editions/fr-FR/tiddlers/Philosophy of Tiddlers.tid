@@ -1,18 +1,9 @@
-C.modified: 20140919160655340
-C.tags: Learning
-C.text: The purpose of recording and organising information is so that it can be used again. The value of recorded information is directly proportional to the ease with which it can be re-used.
-
-The philosophy of [[tiddlers|Tiddlers]] is that we maximise the possibilities for re-use by slicing information up into the smallest semantically meaningful units with [[rich modelling of relationships between them|Structuring TiddlyWiki]]. Then we use aggregation and composition to weave the fragments together to present narrative stories.
-
-TiddlyWiki aspires to provide an algebra for tiddlers, a concise way of expressing and exploring the relationships between items of information.
-
 created: 20131128075743966
 fr-title: Philosophie des tiddlers
 modified: 20220220004339779
 tags: Learning
 title: Philosophy of Tiddlers
 type: text/vnd.tiddlywiki
-wl-field-name-note: C.text
 
 Lorsqu'on enregistre et organise des informations, on se donne pour objectif de pouvoir les réutiliser plus tard. La valeur d'une information conservée est directement proportionnelle à la facilité avec laquelle on peut la réutiliser.
 

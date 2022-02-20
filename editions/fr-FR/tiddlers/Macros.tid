@@ -1,34 +1,9 @@
-C.modified: 20220128112317724
-C.tags: Concepts Reference
-C.text: A <<.def macro>> is a named snippet of text. WikiText can use the name as a shorthand way of [[transcluding|Transclusion]] the snippet. Such transclusions are known as <<.def "macro calls">>, and each call can supply a different set of parameters that get substituted for special placeholders within the snippet.
-
-For the syntax, see [[Macros in WikiText]].
-
-Most macros are in fact just parameterised [[variables|Variables]].
-
-They are created using the `\define` [[pragma|Pragma]]. (Behind the scenes, this is transformed into a <<.wlink SetWidget>>, i.e. macros and variables are two sides of the same coin.)
-
-The snippet and its incoming parameter values are treated as simple strings of characters with no WikiText meaning, at least until the placeholders have been filled in and the macro call has returned. This means that a macro can assemble and return the complete syntax of a ~WikiText component, such as a [[link|Linking in WikiText]]. (See [[Transclusion and Substitution]] for further discussion of this.)
-
-Within a snippet itself, the only markup detected is `$name$` (a placeholder for a macro parameter) and `$(name)$` (a placeholder for a [[variable|Variables]]).
-
-The <<.mlink dumpvariables>> macro lists all variables (including macros) that are available at that position in the widget tree.
-
-An <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions to another branch of the [[widget tree|Widgets]]. ~TiddlyWiki uses this technique internally to implement global macros -- namely any macros defined in tiddlers with the <<.tag $:/tags/Macro>> tag. (The tag <<.tag $:/tags/Macro/View>> is used to define macros that should only be available within the main view template and the preview panel).
-
-For maximum flexibility, macros can also be <<.js-macro-link "written as JavaScript modules">>.
-
-A similar effect to a parameterised macro call can be produced by setting [[variables|Variables]] around a [[transclusion|Transclusion]].
-
-~TiddlyWiki's core has [[several macros|Core Macros]] built in.
-
 caption: Macros
 created: 20140211171341271
 modified: 20220219192959452
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
-wl-field-name-note: C.text
 
 Une <<.def macro>> est un //bout de texte// auquel on donne un nom. Le <<fr WikiText>> utilise ce nom comme raccourci pour [[transclure|Transclusion]] le //bout de texte//. Ces [[transclusions|Transclusion]] particulières s'appellent des <<.def "appels de macro">>, et chaque appel peut transmettre un ensemble différent d'arguments, qui se substituent à leur emplacement dans le //bout de texte//.
 

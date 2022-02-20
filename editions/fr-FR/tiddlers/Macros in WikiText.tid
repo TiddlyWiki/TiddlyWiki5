@@ -1,10 +1,3 @@
-C.modified: 20150221094003000
-C.tags: WikiText
-C.text: The use of [[macros|Macros]] in WikiText has two distinct aspects:
-
-* [[Defining macros|Macro Definitions in WikiText]]
-* [[Calling macros|Macro Calls in WikiText]]
-
 caption: Macros
 created: 20131205160746466
 fr-title: Macros en WikiTexte

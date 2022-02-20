@@ -1,19 +1,9 @@
-C.modified: 20150124211518000
-C.tags: [[Working with TiddlyWiki]]
-C.text: TiddlyWiki5 provides several features to help you structure information as [[tiddlers|Tiddlers]], and model the relationships between them:
-
-* TiddlerLinks
-* [[Tagging]]
-* [[Title Lists|Title List]]
-* DataTiddlers
-
 created: 20131128090536894
 fr-title: Structurer TiddlyWiki
 modified: 20220220003638545
 tags: [[Working with TiddlyWiki]]
 title: Structuring TiddlyWiki
 type: text/vnd.tiddlywiki
-wl-field-name-note: C.text
 
 TiddlyWiki5 fournit plusieurs fonctionnalités qui vous aideront à structurer les informations sous forme de [[tiddlers|Tiddlers]], et à modéliser les relations entre eux<<:>>
 
