@@ -32,13 +32,15 @@ exports.startup = function() {
 			template = paramObject.template || "$:/core/templates/single.tiddler.window",
 			width = paramObject.width || "700",
 			height = paramObject.height || "600",
+			top = paramObject.top,
+			left = paramObject.left,
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
 		// Open the window
 		var srcWindow,
 		    srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
-			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
+			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
 			srcDocument = srcWindow.document;
 		}
 		catch(e) {
