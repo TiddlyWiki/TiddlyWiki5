@@ -1,12 +1,25 @@
+C.modified: 20170127221451610
+C.tags: Concepts
+C.text: ~TiddlyWiki is a rich, interactive tool for manipulating complex data with structure that doesn't easily fit into conventional tools like spreadsheets or wordprocessors.
+
+~TiddlyWiki is designed to fit around your brain, helping you deal with the things that won't fit. The [[fundamental idea|Philosophy of Tiddlers]] is that information is more useful and reusable if we cut it up into the smallest semantically meaningful chunks -- [[tiddlers|Tiddlers]] -- and give them titles so that they can be [[structured|Structuring TiddlyWiki]] with [[links|TiddlerLinks]], [[tags|Tagging]], [[lists|ListField]] and [[macros|Macros]]. Tiddlers use a WikiText notation that concisely represents a wide range of text formatting and hypertext features. ~TiddlyWiki aims to provide a fluid interface for working with tiddlers, allowing them to be aggregated and composed into longer narratives.
+
+People love using ~TiddlyWiki. Because it can be used without any complicated server infrastructure, and because it is [[open source|OpenSource]], it has brought unprecedented freedom to everyone to keep their precious information under their own control.
+
+~TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|License]] project with a busy [[Community]] of independent developers.
+
 caption: TiddlyWiki
 created: 20130822170700000
-modified: 20150622113210434
+modified: 20220219162827424
 tags: Concepts
 title: TiddlyWiki
 type: text/vnd.tiddlywiki
+wl-field-name-note: C.text
 
-~TiddlyWiki est un outil riche et interactif, capable de manipuler des données structurées complexes. Il est assez éloigné des outils conventionnels comme les traitements de texte ou les feuilles de calcul.
+<<tw>> est un outil riche et interactif, capable de manipuler des données complexes dont la structure n'est pas adaptée aux outils conventionnels comme les traitements de texte ou les feuilles de calcul.
 
-~TiddlyWiki est conçu pour s'adapter à votre cerveau, en vous aidant à gérer ce qui s'adapte mal. L'[[idée fondamentale|Philosophy of Tiddlers]] est que les informations sont plus utiles et plus facilement réutilisables quand on les découpe en morceaux sémantiques aussi petits que possible -- [[les tiddlers|Tiddlers]] -- en leur donnant des titres à partir desquels le wiki pourra se [[structurer|Structuring TiddlyWiki]] à l'aide de [[liens|TiddlerLinks]], d'[[étiquettes|Tagging]], de [[listes|ListField]] et de [[macros|Macros]]. Les tiddlers utilisent une notation [[WikiTexte|WikiText]] qui permet de représenter de façon concise une grande panoplie de fonctions hypertexte et de formatage. Le but de ~TiddlyWiki est de fournir une interface de travail fluide, à même de faciliter l'agrégation des tiddlers et leur recomposition en textes plus long.
+<<tw>> est conçu pour s'adapter à votre cerveau, en vous aidant à gérer ce qui s'adapte mal. L'[[idée fondamentale|Philosophy of Tiddlers]] est que les informations sont plus utiles et plus facilement réutilisables quand on les découpe en morceaux sémantiques aussi petits que possible -- [[les tiddlers|Tiddlers]] -- en leur donnant des titres à partir desquels le wiki pourra se [[structurer|Structuring TiddlyWiki]] à l'aide de [[liens|TiddlerLinks]], d'[[étiquettes|Tagging]], de [[listes|ListField]] et de [[macros|Macros]]. Les tiddlers utilisent une notation [[WikiTexte|WikiText]] qui permet de représenter de façon concise une grande panoplie de fonctions hypertexte et de formatage. Le but de <<tw>> est de fournir une interface de travail fluide, à même de faciliter l'agrégation des tiddlers et leur recomposition en textes plus long.
 
-Les gens [[adorent utiliser|Raves]] ~TiddlyWiki. Parce qu'on peut l'utiliser en l'absence d'infrastructure de serveurs compliquée, et parce qu'il est [[open source|OpenSource]], il a apporté une liberté inédite à ceux qui veulent garder le contrôle de leurs précieuses informations. ~TiddlyWiki a été créé initialement par JeremyRuston et est maintenant devenu un projet //open source// qui s'épanouit grâce à une [[communauté|Community]] active de développeurs indépendants.
+Les gens adorent utiliser <<tw>>. Comme on peut l'utiliser en l'absence d'infrastructure de serveurs compliquée, et qu'il est [[open source|OpenSource]], il a apporté une liberté inédite à ceux qui veulent garder le contrôle de leurs précieuses informations.
+
+<<tw>> a été créé initialement par JeremyRuston et est maintenant devenu un projet //open source// qui s'épanouit grâce à une [[communauté|Community]] active de développeurs indépendants.
