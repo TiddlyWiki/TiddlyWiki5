@@ -39,7 +39,7 @@ The available flags are:
 ** ''whitespace'': considers the search string to be a literal string, but will consider all runs of whitespace to be equivalent to a single space. Thus `A B` matches `A   B`
 ** ''regexp'': treats the search string as a regular expression. Note that the ''regexp'' option obviates the need for the older <<.olink regexp>> operator.
 ** ''words'': (the default) treats the search string as a list of tokens separated by whitespace, and matches if ''all of the tokens'' appear in the string (regardless of ordering and whether there is other text in between)
-** ''some'': <<.from-version "5.2.1">> treats the search string as a list of tokens separated by whitespace, and matches if ''at least one'' of the tokens appear in the string
+** ''some'': <<.from-version "5.2.2">> treats the search string as a list of tokens separated by whitespace, and matches if ''at least one'' of the tokens appear in the string
 * ''casesensitive'': if present, this flag forces a case-sensitive match, where upper and lower case letters are considered different. By default, upper and lower case letters are considered identical for matching purposes.
 * ''anchored'': <<.from-version "5.1.20">> anchors the search to the start of the string (applies to ''whitespace'', ''literal'' and ''words'' modes)
 
