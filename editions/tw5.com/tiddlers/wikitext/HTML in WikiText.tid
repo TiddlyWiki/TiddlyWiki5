@@ -58,6 +58,26 @@ In an extension of conventional HTML syntax, attributes of elements/widgets can 
 * a transclusion of a [[macro/variable|Macros in WikiText]]
 * as the result of a [[Filter Expression]]
 
+!! Style Attributes
+
+<<.from-version "5.2.2">> TiddlyWiki supports the usual HTML ''style'' attribute for assigning CSS styles to elements:
+
+```
+<div style="color:red;">Hello</div>
+```
+
+In an extension to HTML, TiddlyWiki also supports accessing individual CSS styles as independent attributes. For example:
+
+```
+<div style.color="red">Hello</div>
+```
+
+The advantage of this syntax is that it simplifies assigning computed values to CSS styles. For example:
+
+```
+<div style.color={{!!color}}>Hello</div>
+```
+
 !! Literal Attribute Values
 
 Literal attribute values can use several different styles of quoting:

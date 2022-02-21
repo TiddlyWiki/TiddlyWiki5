@@ -314,24 +314,40 @@ excludeEventAttributes: ignores attributes whose name begins with "on"
 Widget.prototype.assignAttributes = function(domNode,options) {
 	options = options || {};
 	var self = this;
-	$tw.utils.each(this.attributes,function(v,a) {
-		// Check exclusions
-		if(options.excludeEventAttributes && a.substr(0,2) === "on") {
-			v = undefined;
+	var assignAttribute = function(name,value) {
+		// Check for excluded attribute names
+		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
+			value = undefined;
 		}
-		if(v !== undefined) {
-			var b = a.split(":");
-			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
-			try {
-				if (b.length == 2 && b[0] == "xlink"){
-					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
-				} else {
-					domNode.setAttributeNS(null,a,v);
+		if(value !== undefined) {
+			// Handle the xlink: namespace
+			var namespace = null;
+			if(name.substr(0,6) === "xlink:" && name.length > 6) {
+				namespace = "http://www.w3.org/1999/xlink";
+				name = name.substr(6);
+			}
+			// Handle styles
+			if(name.substr(0,6) === "style." && name.length > 6) {
+				domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+			} else {
+				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+				try {
+					domNode.setAttributeNS(namespace,name,value);
+				} catch(e) {
 				}
-			} catch(e) {
 			}
 		}
-	});
+	}
+	// Not all parse tree nodes have the orderedAttributes property
+	if(this.parseTreeNode.orderedAttributes) {
+		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
+			assignAttribute(attribute.name,self.attributes[attribute.name]);
+		});	
+	} else {
+		$tw.utils.each(Object.keys(self.attributes).sort(),function(name) {
+			assignAttribute(name,self.attributes[name]);
+		});	
+	}
 };
 
 /*
