@@ -1,18 +1,13 @@
-title: $:/plugins/tiddlywiki/highlight/styles
+title: $:/plugins/tiddlywiki/highlight-legacy/styles
 tags: [[$:/tags/Stylesheet]]
 
-pre.hljs {
-  padding: 0;
-}
-
-pre code.hljs {
-  padding: 0.5em;
-}
-
 .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
   background: <<colour tiddler-editor-background>>;
   color: <<colour foreground>>;
-  -webkit-text-size-adjust:none;
+  -webkit-text-size-adjust:none
 }
 
 .hljs-comment,
@@ -30,7 +25,7 @@ pre code.hljs {
 /* Solarized Cyan */
 .hljs-number,
 .hljs-string,
-.hljs-meta .hljs-string,
+.hljs-meta .hljs-meta-string,
 .hljs-literal,
 .hljs-doctag,
 .hljs-regexp {
