@@ -5,4 +5,4 @@ tags: [[WebServer Parameters]]
 title: WebServer Parameter: required-plugins
 type: text/vnd.tiddlywiki
 
-The [[web server configuration parameter|WebServer Parameters]] ''required-plugins'' is used to specify the plugins required to start the [[WebServer]]. It take a comma seperated list of plugin titles. The WebServer will issue a warnign in the console if the required plugins are not loaded. This parameter defaults to `$:/plugins/tiddlywiki/filesystem,$:/plugins/tiddlywiki/tiddlyweb`.
+<<.from-version "5.2.2">> The [[web server configuration parameter|WebServer Parameters]] ''required-plugins'' is used to specify the plugins required to start the [[WebServer]]. It take a comma seperated list of plugin titles. The WebServer will issue a warnign in the console if the required plugins are not loaded. This parameter defaults to `$:/plugins/tiddlywiki/filesystem,$:/plugins/tiddlywiki/tiddlyweb`.

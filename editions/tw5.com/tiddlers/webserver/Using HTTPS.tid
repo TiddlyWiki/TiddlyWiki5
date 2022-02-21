@@ -8,7 +8,7 @@ By default, TiddlyWiki's WebServer serves resources over the insecure HTTP proto
 
 HTTPS requires the server to be configured with a certificate via a "cert" file and a "key" file, configured via the [[tls-cert|WebServer Parameter: tls-cert]] and [[tls-key|WebServer Parameter: tls-key]] parameters.
 
-The optional [[tls-passphrase|WebServer Parameter: tls-passphrase]] parameter allows the server to use certificate files that have been generated with a passphrase/password.
+<<.from-version "5.2.2">> The optional [[tls-passphrase|WebServer Parameter: tls-passphrase]] parameter allows the server to use certificate files that have been generated with a passphrase/password.
 
 Certificates can be obtained from a certification authority such as https://letsencrypt.org/, or you can create a self-signed certificate for internal testing.
 
