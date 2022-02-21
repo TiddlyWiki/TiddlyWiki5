@@ -131,6 +131,8 @@ Variable attribute values are indicated with double angle brackets around a [[ma
 
 Filtered attribute values are indicated with triple curly braces around a [[Filter Expression]]. The value will be the first item in the resulting list, or the empty string if the list is empty.
 
+<<.from-version "5.2.2">> To improve readability, newlines can be included anywhere that whitespace is allowed within filtered attributes.
+
 This example shows how to add a prefix to a value:
 
 ```
