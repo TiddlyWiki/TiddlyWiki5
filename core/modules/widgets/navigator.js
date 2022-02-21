@@ -498,11 +498,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 // Import JSON tiddlers into a pending import tiddler
 NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Get the tiddlers
-	var tiddlers = [];
-	try {
-		tiddlers = JSON.parse(event.param);
-	} catch(e) {
-	}
+	var tiddlers = $tw.utils.parseJSONSafe(event.param,[]);
 	// Get the current $:/Import tiddler
 	var importTitle = event.importTitle ? event.importTitle : IMPORT_TITLE,
 		importTiddler = this.wiki.getTiddler(importTitle),

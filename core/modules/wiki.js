@@ -833,12 +833,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 		switch(tiddler.fields.type) {
 			case "application/json":
 				// JSON tiddler
-				try {
-					data = JSON.parse(tiddler.fields.text);
-				} catch(ex) {
-					return defaultData;
-				}
-				return data;
+				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
 			case "application/x-tiddler-dictionary":
 				return $tw.utils.parseFields(tiddler.fields.text);
 		}
