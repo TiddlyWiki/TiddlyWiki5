@@ -18,7 +18,11 @@ Export our filter function
 exports.suffix = function(source,operator,options) {
 	var results = [],
 		suffixes = (operator.suffixes || [])[0] || [];
-	if(suffixes.indexOf("caseinsensitive") !== -1) {
+	if (!operator.operand) {
+		source(function(tiddler,title) {
+			results.push(title);
+		});
+	} else if(suffixes.indexOf("caseinsensitive") !== -1) {
 		var operand = operator.operand.toLowerCase();
 		if(operator.prefix === "!") {
 			source(function(tiddler,title) {

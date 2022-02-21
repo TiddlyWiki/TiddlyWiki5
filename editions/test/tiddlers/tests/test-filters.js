@@ -325,7 +325,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[suffix:casesensitive[one]]").join(",")).toBe("one");
 			expect(wiki.filterTiddlers("[suffix:caseinsensitive[one]]").join(",")).toBe("one,TiddlerOne");
 			expect(wiki.filterTiddlers("[suffix[nothing]]").join(",")).toBe("");
-			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]suffix[]]").join(",")).toBe("");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]suffix[]]").join(",")).toBe("ABCDE,abcde");
 		});
 
 		it("should handle the removeprefix operator", function() {
@@ -339,7 +339,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix[DE]]").join(",")).toBe("ABC");
 			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix:casesensitive[DE]]").join(",")).toBe("ABC");
 			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix:caseinsensitive[de]]").join(",")).toBe("ABC,abc")
-			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix[]]").join(",")).toBe("");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix[]]").join(",")).toBe("ABCDE,abcde");
 		});
 	
 		it("should handle the sort and sortcs operators", function() {
