@@ -440,7 +440,7 @@ Tests the filtering mechanism.
 		});
 
 		it("should handle the listed operator", function() {
-			expect(wiki.filterTiddlers("TiddlerOne MissingTiddler +[listed[]]").join(",")).toBe('one,hasList');
+			expect(wiki.filterTiddlers("TiddlerOne MissingTiddler +[listed[]]").join(",")).toBe('hasList,one');
 			expect(wiki.filterTiddlers("one two +[listed[tags]]").join(",")).toBe('TiddlerOne,$:/TiddlerTwo,Tiddler Three');
 		});
 	
