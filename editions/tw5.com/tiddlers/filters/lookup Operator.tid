@@ -21,7 +21,7 @@ The action of this operator is as follows with 1 parameter:
 ** Substitute the default value for missing or empty values
 * Return the list of values
 
-<<.from-version "5.1.24">>
+<<.from-version "5.2.2">>
 
 The use of the `:index` second suffix changes the default lookup location from field: `text` to index: `0`. This is used if no 2nd parameter is provided.
 
