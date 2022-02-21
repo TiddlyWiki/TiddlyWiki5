@@ -1,5 +1,6 @@
 title: $:/_tw5.com/CustomStoryTiddlerTemplateDemo/Filter
 tags: $:/tags/StoryTiddlerTemplateFilter
 list-before: $:/config/StoryTiddlerTemplateFilters/default
+code-body: yes
 
 [tag[$:/tags/TiddlerList]then[$:/_tw5.com/CustomStoryTiddlerTemplateDemo/Template]]

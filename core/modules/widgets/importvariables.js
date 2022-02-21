@@ -46,7 +46,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
 	// Accumulate the <$set> widgets from each tiddler
 	$tw.utils.each(this.tiddlerList,function(title) {
-		var parser = widgetPointer.wiki.parseTiddler(title);
+		var parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline:true});
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
 			while(parseTreeNode && parseTreeNode.type === "set") {

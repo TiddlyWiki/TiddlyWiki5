@@ -40,6 +40,7 @@ exports.search = function(source,operator,options) {
 			invert: invert,
 			field: fields,
 			excludeField: excludeFields,
+			some: hasFlag("some"),
 			caseSensitive: hasFlag("casesensitive"),
 			literal: hasFlag("literal"),
 			whitespace: hasFlag("whitespace"),
