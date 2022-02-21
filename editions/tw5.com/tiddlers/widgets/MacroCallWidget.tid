@@ -1,6 +1,6 @@
 caption: macrocall
 created: 20131024141900000
-modified: 20200928102843275
+modified: 20220122193731433
 tags: Widgets
 title: MacroCallWidget
 type: text/vnd.tiddlywiki
@@ -37,6 +37,8 @@ You can see several examples of the macro call widget within the core:
 * Listing module information: [[$:/snippets/modules]]
 * Listing field information: [[$:/snippets/allfields]]
 * Generating `data:` URIs: [[$:/themes/tiddlywiki/starlight/styles.tid]]
+
+See also [[WikiText parser mode: macro examples]]
 
 ! Content and Attributes
 

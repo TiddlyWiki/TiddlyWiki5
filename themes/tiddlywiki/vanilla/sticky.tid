@@ -1,4 +1,5 @@
 title: $:/themes/tiddlywiki/vanilla/sticky
+code-body: yes
 
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/stickytitles" type="match" text="yes">
 ``

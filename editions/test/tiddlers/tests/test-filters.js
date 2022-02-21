@@ -254,6 +254,8 @@ Tests the filtering mechanism.
 		it("should handle the lookup operator", function() {
 			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
 			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
+			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler],[text]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
+			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler],[tags]]").join(",")).toBe(",one,one");
 		});
 	
 		it("should retrieve shadow tiddlers", function() {
@@ -298,6 +300,16 @@ Tests the filtering mechanism.
 			console.log.calls.reset();
 			expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
 			expect(console.log).toHaveBeenCalledWith("WARNING: Filter", "modifier", "has a deprecated regexp operand", /Jo/);
+		});
+
+		it("should handle regular expression operands without crashing", function() {
+			spyOn(console, 'log');
+			// We don't really care about the results. Just don't get RSoD.
+			expect(() => wiki.filterTiddlers("[all/current/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[prefix/anything/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[title/anything/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[/anything/]")).not.toThrow();
+			expect(() => wiki.filterTiddlers("[//]")).not.toThrow();
 		});
 	
 		it("should handle the prefix operator", function() {
@@ -426,6 +438,11 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[list[TiddlerSeventh]sort[title]]").join(",")).toBe("a fourth tiddler,MissingTiddler,Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[tag[one]list[TiddlerSeventh]sort[title]]").join(",")).toBe("a fourth tiddler,MissingTiddler,Tiddler Three,TiddlerOne");
 		});
+
+		it("should handle the listed operator", function() {
+			expect(wiki.filterTiddlers("TiddlerOne MissingTiddler +[listed[]]").join(",")).toBe('one,hasList');
+			expect(wiki.filterTiddlers("one two +[listed[tags]]").join(",")).toBe('TiddlerOne,$:/TiddlerTwo,Tiddler Three');
+		});
 	
 		it("should handle the next operator", function() {
 			expect(wiki.filterTiddlers("[[Tiddler Three]next[TiddlerSeventh]]").join(",")).toBe("a fourth tiddler");
@@ -449,11 +466,44 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[search:*:[g]sort[title]]").join(",")).toBe("$:/ShadowPlugin,filter regexp test,Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[search:text:anchored[the]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three,TiddlerOne");
 		});
-	
+
+		it("should yield search results where 'default' search finds at least 1 token", function() {
+			expect(wiki.filterTiddlers("[search::some[one two]sort[title]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,one,Tiddler Three,TiddlerOne");
+		});
+
+		it("should yield search results where 'title' finds at least one token", function() {
+			expect(wiki.filterTiddlers("[search:title:some[tiddler]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three,TiddlerOne");
+			expect(wiki.filterTiddlers("[search:title:some[tiddler one]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		});
+
+		it("should yield search results where 'tags' finds at least one token", function() {
+			expect(wiki.filterTiddlers("[search:tags:some[one]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+			expect(wiki.filterTiddlers("[search:tags:some[two]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
+			expect(wiki.filterTiddlers("[search:tags:some[two one]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+		});
+
+		it("should yield search results where 'tags' finds at least one token / casesensitive", function() {
+			expect(wiki.filterTiddlers("[search:tags:some[ONE]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+			expect(wiki.filterTiddlers("[search:tags:some,casesensitive[two ONE]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
+		});
+
+		it("should yield search results where 'tags' finds at least one token / anchored", function() {
+			expect(wiki.filterTiddlers("[search:tags:some,anchored[one]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+			expect(wiki.filterTiddlers("[search:tags:some,anchored[two]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
+			// search:title
+			expect(wiki.filterTiddlers("[search:title:some,anchored[tiddler]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+			expect(wiki.filterTiddlers("[search:title:some,anchored[tiddler one]sort[title]]").join(",")).toBe("one,Tiddler Three,TiddlerOne");
+		});
+
+		it("should yield search results where 'tags' finds at least one token / anchored & casesensitive", function() {
+				expect(wiki.filterTiddlers("[search:title:some,anchored,casesensitive[Tiddler one]sort[title]]").join(",")).toBe("one,Tiddler Three,TiddlerOne");
+			expect(wiki.filterTiddlers("[search:title:some,anchored,casesensitive[Tiddler ONE]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+		});
+
 		it("should yield search results that have search tokens spread across different fields", function() {
 			expect(wiki.filterTiddlers("[search[fox one]sort[title]]").join(",")).toBe("TiddlerOne");
 		});
-	
+
 		it("should handle the each operator", function() {
 			expect(wiki.filterTiddlers("[each[modifier]sort[title]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,filter regexp test,TiddlerOne");
 			expect(wiki.filterTiddlers("[each:list-item[tags]sort[title]]").join(",")).toBe("one,two");

@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 201804111739
+modified: 20211230150413997
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -111,6 +111,20 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 	</blockquote>
 </$reveal>
 </$list>
+\end
+
+\define .bad-example(eg)
+<table class="doc-bad-example">
+<tbody>
+<tr class="evenRow">
+<td><span class="tc-inline-style" style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
+<td>
+
+$eg$
+</td>
+</tr>
+</tbody>
+</table>
 \end
 
 \define .link-badge(text,link,colour)

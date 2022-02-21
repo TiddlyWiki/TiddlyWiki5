@@ -1,5 +1,6 @@
 title: $:/_tw5.com/CustomStoryTiddlerTemplateDemo/Styles
 tags: $:/tags/Stylesheet
+code-body: yes
 
 .tc-custom-tiddler-template {
 	border: 3px solid <<colour muted-foreground>>;

@@ -1,6 +1,6 @@
 caption: subfilter
 created: 20181031175129475
-modified: 20211030223407188
+modified: 20211217135706478
 op-input: a [[selection of titles|Title Selection]] passed as input to the subfilter
 op-neg-input: a [[selection of titles|Title Selection]] passed as input to the subfilter
 op-neg-output: those input titles that are <<.em not>> returned from the subfilter  <<.place S>>
@@ -8,7 +8,7 @@ op-output: the [[selection of titles|Title Selection]] returned from the subfilt
 op-parameter: a [[filter expression|Filter Expression]]
 op-parameter-name: S
 op-purpose: select titles from the operand interpreted as a [[filter expression|Filter Expression]]
-tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Negatable Operators]]
+tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Negatable Operators]] [[Selection Constructors: Conditional]]
 title: subfilter Operator
 type: text/vnd.tiddlywiki
 

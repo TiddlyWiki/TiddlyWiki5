@@ -1,11 +1,11 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20211117042202771
+modified: 20220219125413255
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
 
-The `tm-open-window` [[message|Message]] opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are provided as variables to the new window.
+The `tm-open-window` [[message|Messages]] opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are provided as variables to the new window.
 
 |!Name |!Description |
 |param |Title of the tiddler to be opened in a new browser window, defaults to <<.var "currentTiddler">> if empty |
@@ -13,12 +13,14 @@ The `tm-open-window` [[message|Message]] opens a tiddler in a new //browser// wi
 |windowTitle |Title string for the opened window |
 |width |Width of the new browser window |
 |height |Height of the new browser window |
+|left|<<.from-version "5.2.2">> Optional, left position of new browser window|
+|top|<<.from-version "5.2.2">> Optional, top position of new browser window|
 |paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
 
 The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
 
-<<.tip """When used with the ActionSendMessage Widget, <<.param 'param'>> becomes <<.param '$param'>> """>>
-<<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, and <<.param height>> require the ActionSendMessageWidget.""">>
+<<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
+<<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, <<.param height>>, <<.param left>> and <<.param top>> require the ActionSendMessageWidget.""">>
 
 
 <$macrocall $name='wikitext-example-without-html'

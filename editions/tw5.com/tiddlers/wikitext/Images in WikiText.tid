@@ -1,6 +1,6 @@
 caption: Images
 created: 20131205160221762
-modified: 20210519160846733
+modified: 20220129152627668
 tags: WikiText [[Working with TiddlyWiki]]
 title: Images in WikiText
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ Images can be included in WikiText with the following syntax:
 [img[https://tiddlywiki.com/favicon.ico]]
 ```
 
-You can also insert images from the editor toolbar. Click ''picture'' (<<.icon $:/core/images/picture>>) and select a picture file.
+You can also insert image tiddlers from the editor toolbar. Click ''picture'' (<<.icon $:/core/images/picture>>) and select a picture file.
 
 If the image source is the title of an image tiddler then that tiddler is directly displayed. Otherwise it is interpreted as a URL and an HTML `<img>` tag is generated with the `src` attribute containing the URL.
 

@@ -1,6 +1,6 @@
 caption: tm-rename-tiddler
 created: 20190909133618113
-modified: 20190909133618113
+modified: 20220219093748993
 tags: Messages navigator-message
 title: WidgetMessage: tm-rename-tiddler
 type: text/vnd.tiddlywiki
@@ -13,7 +13,9 @@ The `tm-rename-tiddler` message renames a tiddler by deleting it and recreating 
 |renameInTags |<<.from-version "5.1.23">> Optional value "no" to disable renaming in tags fields of other tiddlers (defaults to "yes") |
 |renameInLists |<<.from-version "5.1.23">> Optional value "no" to disable renaming in list fields of other tiddlers (defaults to "yes") |
 
-The rename tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+The very similar [[WidgetMessage: tm-relink-tiddler]] message does not rename the tiddler, it just relinks the references to it.
+
+The rename tiddler message is usually generated with the ButtonWidget and is handled by the core.
 
 ! Examples
 
