@@ -211,6 +211,8 @@ Tests the filtering mechanism.
 		it("should handle the lookup operator", function() {
 			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
 			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
+			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler],[text]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
+			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler],[tags]]").join(",")).toBe(",one,one");
 		});
 	
 		it("should retrieve shadow tiddlers", function() {
