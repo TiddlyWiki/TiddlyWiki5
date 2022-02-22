@@ -314,7 +314,32 @@ Tests the filtering mechanism.
 	
 		it("should handle the prefix operator", function() {
 			expect(wiki.filterTiddlers("[prefix[Tiddler]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+			expect(wiki.filterTiddlers("[prefix:casesensitive[tiddler]]").join(",")).toBe("");
+			expect(wiki.filterTiddlers("[prefix:caseinsensitive[tiddler]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[prefix[nothing]]").join(",")).toBe("");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]prefix[]]").join(",")).toBe("ABCDE,abcde");
+		});
+
+		it("should handle the suffix operator", function() {
+			expect(wiki.filterTiddlers("[suffix[One]]").join(",")).toBe("TiddlerOne");
+			expect(wiki.filterTiddlers("[suffix:casesensitive[one]]").join(",")).toBe("one");
+			expect(wiki.filterTiddlers("[suffix:caseinsensitive[one]]").join(",")).toBe("one,TiddlerOne");
+			expect(wiki.filterTiddlers("[suffix[nothing]]").join(",")).toBe("");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]suffix[]]").join(",")).toBe("ABCDE,abcde");
+		});
+
+		it("should handle the removeprefix operator", function() {
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removeprefix[ABC]]").join(",")).toBe("DE");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removeprefix:casesensitive[ABC]]").join(",")).toBe("DE");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removeprefix:caseinsensitive[abc]]").join(",")).toBe("DE,de");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removeprefix[]]").join(",")).toBe("ABCDE,abcde");
+		});
+
+		it("should handle the removesuffix operator", function() {
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix[DE]]").join(",")).toBe("ABC");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix:casesensitive[DE]]").join(",")).toBe("ABC");
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix:caseinsensitive[de]]").join(",")).toBe("ABC,abc")
+			expect(wiki.filterTiddlers("[enlist[ABCDE abcde]removesuffix[]]").join(",")).toBe("ABCDE,abcde");
 		});
 	
 		it("should handle the sort and sortcs operators", function() {
