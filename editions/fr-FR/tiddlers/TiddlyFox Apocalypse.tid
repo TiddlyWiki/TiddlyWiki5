@@ -1,0 +1,46 @@
+created: 20171109170823847
+fr-title: L'apocalypse de TiddlyFox
+modified: 20220217174448054
+tags: TiddlyFox
+title: TiddlyFox Apocalypse
+type: text/vnd.tiddlywiki
+
+! Résumé
+
+Le 14 novembre 2017 Mozilla [[a publié Firefox 57|https://blog.mozilla.org/blog/2017/09/26/firefox-quantum-beta-developer-edition/]], une nouvelle version majeure comprenant de nombreuses améliorations et correctifs de sécurité. Toutefois, ces améliorations comportaient ''des changements fondamentaux du modèle de sécurité qui ont eu comme effet indésirable d'empêcher ~TiddlyFox de fonctionner''.
+
+TiddlyFox restera disponible pour les [[utilisateurs d'anciennes versions de Firefox|https://groups.google.com/d/topic/tiddlywiki/OJQ0yRq4zog/discussion]], mais ceux qui passeront à une version plus récente devront choisir une autre façon de gérer la sauvegarde des modifications avec TiddlyWiki.
+
+Heureusement, il existe de nouvelles façons de travailler avec TiddlyWiki et les utilisateurs ont de nombreux choix alternatifs (voir les détails dans <<fr GettingStarted>>). La disparition de TiddlyFox a provoqué plusieurs de ces développements récents et pourrait finalement être bénéfique pour la communauté.
+
+Ces développements font l'objet d'une [[discussion|https://groups.google.com/d/topic/tiddlywiki/LcldXzPlTK0/discussion]] sur les forums TiddlyWiki.
+
+! Contexte
+
+Firefox a été initialement publié en novembre 2004, quelques mois après la première version de TiddlyWiki. C'était très comparable au Faucon Millénium pour l'Étoile de la Mort de Microsoft (incarnée par Internet Explorer). IE écrasait depuis 5 ans le marché des navigateurs, provoquant la frustration de nombreux développeurs web face aux extensions au HTML de Microsoft qui étaient devenus des standards //de facto// au détriment d'une innovation qui aurait pu bénéficier à l'ensemble de la communauté web.
+
+Firefox a vite eu du succès car il réussissait à afficher les pages web avec un rendu assez proche d'Internet Explorer tout en offrant une meilleure expérience utilisateur. Ses avantages résidaient en grande partie dans la possibilité offerte à l'utilisateur de modifier chaque aspect du navigateur. Deux innovations étaient à l'origine de cette capacité<<:>>
+
+* L'intégralité de l'interface utilisateur du navigateur était écrite en [[XUL|https://en.wikipedia.org/wiki/XUL]], une extension au HTML qui lui permettait d'afficher des interface utilisateur conventionnelles (à l'époque, le HTML était limité à un simple rendu de documents structurés). Ajuster quelques lignes de code en XUL pouvait radicalement transformer l'interface du navigateur.
+* L'architecture d'extensions de Mozilla donnait les pleins pouvoirs aux extensions, leur permettant d'observer et d'interagir profondément avec le moteur du navigateur lui-même, ainsi qu'avec le système de fichiers de l'ordinateur sur lequel il s'exécutait.
+
+Ces deux conditions permirent l'épanouissement d'un large écosystème d'extensions autour de Firefox, pour certaines extrêmement populaires. Dans de nombreux cas, les innovations apportées par des extensions furent ensuite intégrées dans le navigateur, en particulier le débogueur [[Firebug|https://en.wikipedia.org/wiki/Firebug_(software)]] qui fut par la suite cloné par tous les éditeurs de navigateurs.
+
+Firefox resta très populaire jusqu'à ce que Google rejoigne le développement du moteur rival ~WebKit pour développer Chome. Google choisit une approche très différente des compromis au cœur d'un navigateur, se concentrant sur l'amélioration de la sécurité au détriment de toute autre considération. Ils innovèrent avec l'isolation de chaque onglet dans un processus dédié, qui fut rapidement repris par les principaux navigateurs concurrents.
+
+L'orientation de Google les empêcha d'adopter l'approche libertaire de Mozilla pour les extensions. Au lieu d'avoir accès à tout l'environnement du navigateur et au système, les extensions de Chrome ne voient qu'une petite partie de ce qui se passe dans le navigateur, et n'ont qu'un accès minimal aux ressources de l'hôte.
+
+Le ralliement de Mozilla à l'approche de la [[sécurité des extensions de navigateurs|https://support.mozilla.org/en-US/kb/firefox-add-technology-modernizing]] de Google était inévitable. A ce point, Mozilla aurait été irresponsable de publier un navigateur construit sur un modèle de sécurité notoirement inférieur à celui du leader du marché.
+
+! Leçons
+
+Une partie de la fécondité de l'écosystème autour de TiddlyWiki provient de l'adoption des deux principes de Firefox cités précédemment<<:>>
+
+* Construire l'interface utilisateur de l'application avec les mêmes primitives que son contenu
+* Permettre aux extensions d'accéder et interagir librement avec la logique interne de l'application.
+
+Ces deux caractéristiques confrontent TiddlyWiki aux mêmes défis de sécurité que Firefox en son temps. Un TiddlyWiki orienté principalement vers la sécurité serait contraint de réduire ces possibilités.
+
+! Le futur
+
+Dans le domaine des interfaces basées sur les navigateurs et des interactions utilisateur, l'innovation a maintenant quitté les extensions pour migrer vers une nouvelle génération d'environnements qui simplifient la créations de navigateurs sur-mesure basés sur des moteurs de rendu HTML libres sur étagère. Ainsi, TiddlyDesktop utilise [[nwjs|https://nwjs.io]], et [[Beaker Browser]] utilise une alternative nommée [[Electron|https://electron.atom.io/]].
