@@ -4,7 +4,7 @@ created: 20160216191710789
 delivery: Protocol
 description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20211129222601543
+modified: 20220222190056634
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki
@@ -65,6 +65,8 @@ https://app.koofr.net/dav/Koofr/myfile.html
 When you do, an authentication dialog will come up. Use your email address that you used to sign up and the password you just generated to login.
 
 You should be able to load the file and save changes back in place.
+
+!! Paid Hosting
 
 !!! pCloud
 
