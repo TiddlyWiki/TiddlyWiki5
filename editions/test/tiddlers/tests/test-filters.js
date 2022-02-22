@@ -581,6 +581,34 @@ Tests the filtering mechanism.
 				expect(wiki.filterTiddlers("[!title[Tiddler Three]is[orphan]sort[title]]").join(",")).toBe("a fourth tiddler,filter regexp test,TiddlerOne");
 				expect(wiki.filterTiddlers("[!title[Tiddler Three]!is[orphan]]").join(",")).toBe("$:/ShadowPlugin,$:/TiddlerTwo,has filter,hasList,one");
 			});
+
+			it("should handle the '[is[draft]]' operator", function() {
+				var wiki = new $tw.Wiki();
+				wiki.addTiddlers([
+					{title: "A"},
+					{title: "Draft of 'A'", "draft.of": "A", "draft.title": "A"},
+					{title: "B"},
+					{title: "Draft of 'B'", "draft.of": "B"},
+					{title: "C"},
+					// Not a true draft. Doesn't have draft.of
+					{title: "Draft of 'C'", "draft.title": "C"},
+					{title: "E"},
+					// Broken. Has draft.of, but it's empty. Still a draft
+					{title: "Draft of 'E'", "draft.of": "", "draft.title": ""}
+					// Not a draft. It doesn't exist.
+					//{title: "F"} // This one is deliberately missing
+				]);
+				// is analagous to [has[draft.of]],
+				// except they handle empty draft.of differently
+				expect(wiki.filterTiddlers("[all[]] F +[is[draft]]").join(",")).toEqual("Draft of 'A',Draft of 'B',Draft of 'E'");
+				expect(wiki.filterTiddlers("[all[]] F +[!is[draft]]").join(",")).toEqual("A,B,C,Draft of 'C',E,F");
+				// [is[draft]] and [!is[draft]] are proper complements
+				var included = wiki.filterTiddlers("[all[]] F +[is[draft]]")
+				var excluded = wiki.filterTiddlers("[all[]] F +[!is[draft]]")
+				var all = [].concat(included, excluded).sort();
+				// combined, they should have exactly one of everything.
+				expect(wiki.filterTiddlers("[all[]] F +[sort[]]")).toEqual(all);
+			});
 	
 		});
 	
