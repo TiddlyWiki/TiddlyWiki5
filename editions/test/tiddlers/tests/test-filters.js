@@ -428,6 +428,9 @@ Tests the filtering mechanism.
 		it("should handle the untagged operator", function() {
 			expect(wiki.filterTiddlers("[untagged[]sort[title]]").join(",")).toBe("$:/ShadowPlugin,a fourth tiddler,filter regexp test,has filter,hasList,one");
 			expect(wiki.filterTiddlers("[!untagged[]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+			// Should consider non-existent tiddlers untagged.
+			expect(wiki.filterTiddlers("[enlist[a b c]untagged[]]").join(",")).toBe("a,b,c");
+			expect(wiki.filterTiddlers("[enlist[a b c]!untagged[]]").join(",")).toBe("");
 		});
 	
 		it("should handle the links operator", function() {
