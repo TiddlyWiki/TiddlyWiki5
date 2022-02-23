@@ -26,7 +26,6 @@ exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
 		domNode = options.domNode,
-		selector = options.selector,
 		dragHandle = options.selector && domNode.querySelector(options.selector) || domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if((domNode.tagName || "").toLowerCase() !== "a") {
