@@ -6,7 +6,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \define lingo-base() $:/language/CloseAll/
 
 \define drop-actions()
-<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
 \define placeholder()

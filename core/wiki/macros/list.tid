@@ -17,7 +17,7 @@ tags: $:/tags/Macro
 \end
 
 \define list-links-draggable-drop-actions()
-<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
 \define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
@@ -61,7 +61,7 @@ tags: $:/tags/Macro
 <$action-deletefield $field="list-after"/>
 </$list>
 <!-- Save the new order to the Tag Tiddler -->
-<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore<actionTiddler>,<currentTiddler>]"/>
 <!-- Make sure the newly added item has the right tag -->
 <!-- Removing this line makes dragging tags within the dropdown work as intended -->
 <!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
