@@ -1,6 +1,6 @@
 caption: draggable
 created: 20170406081938627
-modified: 20211009122105437
+modified: 20220223145136863
 tags: Widgets TriggeringWidgets
 title: DraggableWidget
 type: text/vnd.tiddlywiki
@@ -16,8 +16,10 @@ See DragAndDropMechanism for an overview.
 |!Attribute |!Description |
 |tiddler |Optional title of the payload tiddler for the drag |
 |filter |Optional filter defining the payload tiddlers for the drag |
-|class |Optional CSS classes to assign to the draggable element. The class `tc-draggable` is added automatically, and the class `tc-dragging` is applied while the element is being dragged |
-|tag |Optional tag to override the default "div" element |
+|tag |Optional tag to override the default "div" element created by the widget|
+|selector|<<.from-version 5.2.2>> Optional CSS Selector to identify a DOM element within the widget that will be used as the drag handle |
+|class |Optional CSS classes to assign to the DOM element created by the widget. The class `tc-draggable` is added to the drag handle, which is the same as the DOM element created by the widget unless the <<.param selector>> attribute is used. The class `tc-dragging` is applied to the drag handle while the element is being dragged |
+
 |startactions |Optional action string that gets invoked when dragging ''starts'' |
 |endactions |Optional action string that gets invoked when dragging ''ends'' |
 |dragimagetype |<<.from-version "5.2.0">> Optional type of drag image: `dom` (the default) or `blank` to disable the drag image |
@@ -27,6 +29,8 @@ Either or both of the ''tiddler'' and ''filter'' attributes must be specified in
 The [[actionTiddler Variable]] is accessible in both //startactions// and //endactions//. It holds the payload tiddler(s) specified through the //tiddler// and //filter// attributes as a [[Title List]] using double square brackets to quote titles that include whitespace.
 
 <<.tip """Note that the [[actionTiddler Variable]] holds a [[Title List]] quoted with double square brackets. This is unlike the DroppableWidget which uses the same variable to pass a single unquoted title.""">>
+
+<<.tip """When specifying a DOM node to use as the drag handle with the <<.param selector>> attribute, give it the class `tc-draggable` in order for it to have the appropriate cursor.""">>
 
 
 The LinkWidget incorporates the functionality of the DraggableWidget via the ''draggable'' attribute.
