@@ -755,16 +755,27 @@ Tests the filtering mechanism.
 			rootWidget.setVariable("tidTitle","e");
 			rootWidget.setVariable("tidList","one tid with spaces");
 			
+			// Position title specified as suffix.
 			expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar[f]]",anchorWidget).join(",")).toBe("a,b,f,c,d,e");
 			expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar<tidTitle>]",anchorWidget).join(",")).toBe("a,b,e,c,d,f");
 			expect(wiki.filterTiddlers("a b c d e f +[insertbefore:myVar[gg gg]]",anchorWidget).join(",")).toBe("a,b,gg gg,c,d,e,f");
-			
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore:myVar<tidList>]",anchorWidget).join(",")).toBe("a,b,one tid with spaces,c,d,e");
 			expect(wiki.filterTiddlers("a b c d e f +[insertbefore:tidTitle{TiddlerOne!!tags}]",anchorWidget).join(",")).toBe("a,b,c,d,one,e,f");
+
+			// Position title specified as parameter.
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore[f],[a]]",anchorWidget).join(",")).toBe("f,a,b,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore[f],<myVar>]",anchorWidget).join(",")).toBe("a,b,f,c,d,e");
+
+			// Parameter takes precedence over suffix.
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:myVar[f],[a]]",anchorWidget).join(",")).toBe("f,a,b,c,d,e");
 	
-			// Next 2 tests do weired things, but will pass - there for compatibility reasons
+			// No position title.
 			expect(wiki.filterTiddlers("a b c [[with space]] +[insertbefore[b]]").join(",")).toBe("a,c,with space,b");
-			expect(wiki.filterTiddlers("a b c d e +[insertbefore:2[b]]").join(",")).toBe("a,c,d,e,b");
+
+			// Position title does not exist.
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:foo[b]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore[b],[foo]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore[b],<foo>]").join(",")).toBe("a,c,d,e,b");
 		});
 	
 		it("should handle the move operator", function() {
