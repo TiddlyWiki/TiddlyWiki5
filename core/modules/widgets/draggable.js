@@ -27,7 +27,10 @@ DraggableWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DraggableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	var self = this,
+		tag,
+		domNode,
+		classes = [];
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -35,18 +38,23 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Sanitise the specified tag
-	var tag = this.draggableTag;
+	tag = this.draggableTag;
 	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 		tag = "div";
 	}
 	// Create our element
-	var domNode = this.document.createElement(tag);
+	domNode = this.document.createElement(tag);
 	// Assign classes
-	var classes = ["tc-draggable"];
 	if(this.draggableClasses) {
 		classes.push(this.draggableClasses);
 	}
+	if(!this.dragHandleSelector) {
+		classes.push("tc-draggable");
+	}
 	domNode.setAttribute("class",classes.join(" "));
+	// Insert the node into the DOM and render any children
+	parent.insertBefore(domNode,nextSibling);
+	this.renderChildren(domNode,null);
 	// Add event handlers
 	$tw.utils.makeDraggable({
 		domNode: domNode,
@@ -55,11 +63,9 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 		startActions: self.startActions,
 		endActions: self.endActions,
 		dragImageType: self.dragImageType,
-		widget: this
+		widget: this,
+		selector: self.dragHandleSelector
 	});
-	// Insert the link into the DOM and render any children
-	parent.insertBefore(domNode,nextSibling);
-	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
 };
 
@@ -72,7 +78,8 @@ DraggableWidget.prototype.execute = function() {
 	this.draggableClasses = this.getAttribute("class");
 	this.startActions = this.getAttribute("startactions");
 	this.endActions = this.getAttribute("endactions");
-	this.dragImageType = this.getAttribute("dragimagetype"); 
+	this.dragImageType = this.getAttribute("dragimagetype");
+	this.dragHandleSelector = this.getAttribute("selector");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
