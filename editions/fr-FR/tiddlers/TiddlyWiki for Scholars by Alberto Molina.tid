@@ -1,0 +1,15 @@
+created: 20140720085406905
+fr-title: "TiddlyWiki for Scholars" par Alberto Molina
+modified: 20220226175137835
+tags: Resources
+title: "TiddlyWiki for Scholars" by Alberto Molina
+type: text/vnd.tiddlywiki
+url: http://tw5.scholars.tiddlyspot.com/
+
+Une version préliminaire d'une //édition// de TiddlyWiki adaptée à une rigoureuse prise de notes universitaire.
+
+{{!!url}}
+
+<<<
+//<<tw>> for Scholars// est une personnalisation de ~TiddlyWiki 5.0.13-beta, que j'ai écrite en pensant à la prise de notes à partir de lectures, mais qui peut servir à d'autres choses. L'idée est de montrer et de faciliter la création des données liées au tiddler courant sans quitter le tiddler.
+<<<
