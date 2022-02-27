@@ -1,0 +1,31 @@
+created: 20151006145934884
+fr-title: Exporter des tiddlers
+modified: 20220222182612947
+tags: Learning
+title: How to export tiddlers
+type: text/vnd.tiddlywiki
+
+! Sélectionner tous les tiddlers pour l'exportation
+
+Pour exporter ''tous'' les tiddlers, cliquez sur l'onglet ''Outils'' de la barre latérale. Trouvez le bouton <<.icon $:/core/images/export-button>> ''exporter tout'' et cliquez dessus. Un menu flottant vous permet alors de choisir l'un des nombreux formats d'exportation des tiddlers.
+
+! Exporter un tiddler
+
+Pour exporter un tiddler particulier, commencez par l'afficher, puis cliquez sur le bouton <<.icon $:/core/images/down-arrow>> ''plus'' situé vers le haut du tiddler. Dans la liste qui apparaît, sélectionnez <<.icon $:/core/images/export-button>> ''exporter ce tiddler''. Un menu flottant vous permet alors de choisir l'un des nombreux formats d'exportation des tiddlers.
+
+! Exporter des tiddlers selon un critère (filtre)
+
+Pour exporter une sélection de tiddlers, cliquez sur le symbole de loupe <<.icon $:/core/images/advanced-search-button>> à proximité de la zone de recherche de la barre latérale, ce qui va ouvrir le tiddler de [[recherche avancée|$:/AdvancedSearch]]. Choisissez l'onglet ''Filtrer'' car c'est le seul qui permet d'exporter une sélection de tiddlers. Les [[filtres|Filters]] utilisent une syntaxe particulière, cliquez sur [[ce lien|Filters]] pour découvrir comment concevoir des filtres.
+
+Lorsque vous aurez rédigé un filtre, la liste des tiddlers correspondants apparaîtra. Vous pourrez alors cliquer sur le bouton <<.icon $:/core/images/export-button>> ''Exporte ces tiddlers'' situé à droite de la zone de saisie du filtre. Un menu flottant vous permettra alors de choisir l'un des nombreux formats d'exportation des tiddlers.
+
+! Formats d'exportation
+
+Actuellement, les formats d'exportation disponibles sont<<:>>
+
+* Le fichier au format CSV
+* Le fichier au format JSON
+* Le fichier HTML statique
+* Le fichier au format <<gf ".tid">>
+
+Le format <<gf ".tid">> est particulier en ce qu'il ne permet d'exporter qu'un seul tiddler à la fois, même si vous essayer d'en exporter plusieurs à l'aide d'un filtre ou avec le bouton ''exporter tout''.
