@@ -20,6 +20,8 @@ exports.synchronous = true;
 
 // Global to keep track of open windows (hashmap by title)
 $tw.windows = {};
+// Default template to use for new windows
+var DEFAULT_WINDOW_TEMPLATE = "$:/core/templates/single.tiddler.window";
 
 exports.startup = function() {
 	// Handle open window message
@@ -29,12 +31,13 @@ exports.startup = function() {
 			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
 			windowTitle = paramObject.windowTitle || title,
-			template = paramObject.template || "$:/core/templates/single.tiddler.window",
+			template = paramObject.template || DEFAULT_WINDOW_TEMPLATE,
 			width = paramObject.width || "700",
 			height = paramObject.height || "600",
 			top = paramObject.top,
 			left = paramObject.left,
-			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
+			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-template": template}),
+			stateTitle = $tw.utils.stringifyList([title, template]);
 		// Open the window
 		var srcWindow,
 		    srcDocument;
@@ -46,7 +49,7 @@ exports.startup = function() {
 		catch(e) {
 			return;
 		}
-		$tw.windows[title] = srcWindow;
+		$tw.windows[stateTitle] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
 			return;
@@ -56,7 +59,7 @@ exports.startup = function() {
 		srcDocument.close();
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
-			delete $tw.windows[title];
+			delete $tw.windows[stateTitle];
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
@@ -89,6 +92,21 @@ exports.startup = function() {
 		}]);
 		srcWindow.document.documentElement.addEventListener("click",$tw.popup,true);
 		srcWindow.haveInitialisedWindow = true;
+	});
+	$tw.rootWidget.addEventListener("tm-close-window",function(event) {
+		var title = event.param,
+			template = event.paramObject.template || DEFAULT_WINDOW_TEMPLATE;
+		if(!title) {
+			$tw.utils.each($tw.windows,function(win) {
+				win.close();
+			});
+		} else {
+			var stateTitle = $tw.utils.stringifyList([title, template]),
+				win = $tw.windows[stateTitle];
+			if(win) {
+				win.close();
+			}
+		}
 	});
 	// Close open windows when unloading main window
 	$tw.addUnloadTask(function() {

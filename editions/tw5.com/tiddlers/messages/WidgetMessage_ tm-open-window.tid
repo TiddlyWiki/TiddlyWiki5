@@ -1,6 +1,6 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20220219125413255
+modified: 20220228142325616
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
@@ -21,7 +21,7 @@ The `tm-open-window` message is best generated with the ActionSendMessageWidget,
 
 <<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
 <<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, <<.param height>>, <<.param left>> and <<.param top>> require the ActionSendMessageWidget.""">>
-
+<<.tip """<<.from-version 5.2.2>> To close a window opened with tm-open-window use [[WidgetMessage: tm-close-window]]""">>
 
 <$macrocall $name='wikitext-example-without-html'
 src="""
