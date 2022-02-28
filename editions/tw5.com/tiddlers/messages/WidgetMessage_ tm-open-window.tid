@@ -1,6 +1,6 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20211117042202771
+modified: 20220227212704337
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
@@ -9,16 +9,16 @@ The `tm-open-window` [[message|Message]] opens a tiddler in a new //browser// wi
 
 |!Name |!Description |
 |param |Title of the tiddler to be opened in a new browser window, defaults to <<.var "currentTiddler">> if empty |
-|template |Template in which the tiddler will be rendered in |
-|windowTitle |Title string for the opened window |
-|width |Width of the new browser window |
-|height |Height of the new browser window |
-|paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
+|template |Template tiddler used to render the tiddler in the new browser window |
+|windowTitle |Title for the new browser window |
+|width |Width of the new browser window (in pixels without units) |
+|height |Height of the new browser window (in pixels without units) |
+|paramObject |Hashmap of variables to be provided to the template, contains all extra parameters passed to the widget sending the message |
 
-The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
+The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. The message is handled by the core itself.
 
-<<.tip """When used with the ActionSendMessage Widget, <<.param 'param'>> becomes <<.param '$param'>> """>>
-<<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, and <<.param height>> require the ActionSendMessageWidget.""">>
+<<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
+<<.tip """The parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, and <<.param height>> ''require'' the ActionSendMessageWidget.""">>
 
 
 <$macrocall $name='wikitext-example-without-html'
@@ -29,9 +29,9 @@ src="""
   $param="$:/temp/openme" 
   template="SampleWindowTemplate" 
   windowTitle="My Window Title"
-  width="100em"
-  height="50em"
-  something="I just in over in a variable, and boy is my Hashmap tired." />
+  width="640"
+  height="480"
+  something="This is my new window. There are many like it, but this one is mine." />
 </$button>
 """ />
 
