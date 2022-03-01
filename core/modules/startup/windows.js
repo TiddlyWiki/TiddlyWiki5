@@ -103,7 +103,7 @@ exports.startup = function() {
 	var closeAllWindows = function() {
 		$tw.utils.each($tw.windows,function(win) {
 			win.close();
-		});		
+		});
 	}
 	$tw.rootWidget.addEventListener("tm-close-all-windows",closeAllWindows);
 	// Close open windows when unloading main window
