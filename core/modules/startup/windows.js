@@ -31,25 +31,25 @@ exports.startup = function() {
 			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
 			windowTitle = paramObject.windowTitle || title,
+			windowID = paramObject.windowID || title,
 			template = paramObject.template || DEFAULT_WINDOW_TEMPLATE,
 			width = paramObject.width || "700",
 			height = paramObject.height || "600",
 			top = paramObject.top,
 			left = paramObject.left,
-			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-template": template}),
-			stateTitle = $tw.utils.stringifyList([title, template]);
+			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-template": template});
 		// Open the window
 		var srcWindow,
 		    srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
-			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
+			srcWindow = window.open("","external-" + windowID,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
 			srcDocument = srcWindow.document;
 		}
 		catch(e) {
 			return;
 		}
-		$tw.windows[stateTitle] = srcWindow;
+		$tw.windows[windowID] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
 			return;
@@ -59,7 +59,7 @@ exports.startup = function() {
 		srcDocument.close();
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
-			delete $tw.windows[stateTitle];
+			delete $tw.windows[windowID];
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
@@ -94,27 +94,20 @@ exports.startup = function() {
 		srcWindow.haveInitialisedWindow = true;
 	});
 	$tw.rootWidget.addEventListener("tm-close-window",function(event) {
-		var title = event.param,
-			template = event.paramObject.template || DEFAULT_WINDOW_TEMPLATE;
-		if(!title) {
-			$tw.utils.each($tw.windows,function(win) {
-				win.close();
-			});
-		} else {
-			var stateTitle = $tw.utils.stringifyList([title, template]),
-				win = $tw.windows[stateTitle];
+		var windowID = event.param,
+			win = $tw.windows[windowID];
 			if(win) {
 				win.close();
 			}
-		}
 	});
-	// Close open windows when unloading main window
-	$tw.addUnloadTask(function() {
+	var closeAllWindows = function() {
 		$tw.utils.each($tw.windows,function(win) {
 			win.close();
-		});
-	});
-
+		});		
+	}
+	$tw.rootWidget.addEventListener("tm-close-all-windows",closeAllWindows);
+	// Close open windows when unloading main window
+	$tw.addUnloadTask(closeAllWindows);
 };
 
 })();
