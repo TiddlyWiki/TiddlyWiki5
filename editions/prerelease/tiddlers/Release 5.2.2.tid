@@ -60,19 +60,25 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/853a899c77766e47eade1dfa5822640ef9915637">> wrapping and wikification of field names in field viewer
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/0186c6490fbd1d8fd4de7c3fa99ccf4d129fbd80">> missing whitespace between description and MIME type in edit template dropdown for the ''type'' field
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/c7e8c87f85b54f60302ff8e396a7569d996e3f67">> incorrect usage of code view for certain system tiddlers
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6501">> sidebar plugin listing to be sorted by name rather than description
 
 ! Widget Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/66ae1d6930796a9eb062fdb64a755adab8f39294">> classes to the ImageWidget to indicate whether it is loading, loaded or has encountered an error
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6389">> RadioWidget not using default value if the field or index is missing
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6426">> issue with ImportVariablesWidget when importing block mode widgets
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6480">> DraggableWidget to support an optional drag handle
 
 ! Filter improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6468">> support for case insensitive matching for the [[prefix Operator]] and [[suffix Operator]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/1a0c831216c397c6fef8e5685e47857193411a1b">> [[sha256 Operator]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6438">> crash when using deprecated regexp operands for filter operators
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5742">> [[lookup Operator]] to support indexes as well as fields
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6293">> [[search Operator]] with new 'some' flag
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6478">> [[untagged Operator]] to consider non-existent tiddlers to be untagged
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6477">> [[insertbefore Operator]] to accept the position title as a parameter, instead of as a variable name in the suffix
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6483">> [[butlast Operator]] to be consistent with the [[rest Operator]]
 
 ! Hackability Improvements
 
@@ -107,6 +113,7 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* <<contributor benwebber>>
 * <<contributor BramChen>>
 * <<contributor btheado>>
 * <<contributor cdruan>>
