@@ -1,13 +1,13 @@
 created: 20140904140300000
 fr-title: Créer et modifier des tiddlers
-modified: 20150620081426868
+modified: 20220221002250215
 tags: [[Working with TiddlyWiki]]
 title: Creating and editing tiddlers
 type: text/vnd.tiddlywiki
 
 ! Créer des tiddlers
 
-Vous créez un tiddler soit en cliquant sur le bouton {{$:/core/images/new-button}} du menu latéral, soit en cliquant sur un lien vers un tiddler absent. Les liens vers les tiddlers absents sont affichés en [[italique bleu]].
+Vous créez un tiddler soit en cliquant sur le bouton <<.icon $:/core/images/new-button>> du menu latéral, soit en cliquant sur un lien vers un tiddler absent. Les liens vers les tiddlers absents sont affichés en [[italique bleu]].
 
 Voir aussi<<:>>
 
@@ -15,23 +15,23 @@ Voir aussi<<:>>
 
 ! Modifier des tiddlers
 
-Pour modifier un tiddler existant, cliquez sur le bouton {{$:/core/images/edit-button}} en haut et à droit du tiddler.
+Pour modifier un tiddler existant, cliquez sur le bouton <<.icon $:/core/images/edit-button>> en haut et à droite du tiddler.
 
 !! Mode ébauche
 
-Quand vous créez un nouveau tiddler ou modifiez un existant, le tiddler passe en mode ébauche. Ce qui propose un panneau de contrôle pour apporter différents types de modifications. Il a plusieurs parties, de bas en haut<<:>>
+Quand vous créez un nouveau tiddler ou modifiez un existant, le tiddler passe en mode ébauche. Ce mode propose un panneau de contrôle pour apporter différents types de modifications. Il a plusieurs parties, de bas en haut<<:>>
 
 *''Le champ titre'' - pour modifier le titre du tiddler
-*''Le sélecteur de tags'' - pour ajouter ou supprimer des tags. Lors de la saisie d'un tag, une liste déroulante affiche les tags correspondant sous forme de complétions. Vous pouvez choisir dans cette liste ou créer un tag entièrement nouveau. Puis cliquez sur le bouton ''ajouter'' pour ajouter le tag au tiddler. Chaque tag est affiché sous forme d'une pilule colorée. Cliquez le &quot;×&quot; d'un pilule pour supprimer le tag
-*''La zone de texte'' - pour modifier le contenu principal du tiddler. Cliquez sur le bouton ''afficher la prévisualiation'' pour visualiser l'apparence des modifications
-*''Le sélecteur de type'' - pour afficher vos tiddlers dans un format spécial, comme une image. Voir ContentType pour la liste des options. Le choix par défaut est `text/vnd.tiddlywiki`, qui indique que le tiddler contient du [[WikiTexte|WikiText]]
-*''Le sélecteur de champ'' - pour ajouter ou supprimer des champs du tiddler. Par exemple, si vous modifiez un tiddler utilisé comme tag par d'autres tiddlers, vous pouvez ajouter un [[champ ''list''|ListField]] pour modifier l'ordre dans lequel ces tiddlers seront listé
+*''Le sélecteur de tags'' - pour ajouter ou supprimer des tags. Lors de la saisie d'un tag, une liste déroulante affiche les tags correspondant sous forme de complétions. Vous pouvez choisir dans cette liste ou créer un tag entièrement nouveau. Puis cliquez sur le bouton ''ajouter'' ou utilisez la touche <kbd>Entrée</kbd> pour ajouter le tag au tiddler. Chaque tag est affiché sous forme d'une pilule colorée. Cliquez le &quot;×&quot; d'une pilule pour supprimer le tag
+*''La zone de texte'' - pour modifier le contenu principal du tiddler. Cliquez sur le bouton ''afficher la prévisualiation'' (<<.icon $:/core/images/preview-closed>> / <<.icon $:/core/images/preview-open>>) pour visualiser l'apparence des modifications
+*''Le sélecteur de type'' - pour afficher vos tiddlers dans un format spécial, comme une image. Voir ContentType pour la liste des options. Le choix par défaut est `text/vnd.tiddlywiki`, qui indique que le tiddler contient du <<fr WikiText>>
+*''Le sélecteur de champ'' - pour ajouter ou supprimer des champs du tiddler. Par exemple, si vous modifiez un tiddler utilisé comme tag par d'autres tiddlers, vous pouvez ajouter un [[champ ''list''|ListField]] pour modifier l'ordre dans lequel ces tiddlers seront listés
 
 
 ! Confirmer, annuler ou supprimer
 
 Quand vous avez terminé les modifications, cliquez sur le bouton en haut et à droite du tiddler<<:>>
 
-*Le bouton ''confirmer'' ({{$:/core/images/done-button}}) mémorise vos modifications dans le tiddler et quitte le mode ébauche. Si votre wiki est configuré en [[AutoSave]], vos modifications seront enregistrées de façon permanente. Autrement elles sont mémorisées temporairement dans votre navigateur web, et vous les perdrez si vous fermez votre page ~TiddlyWiki sans avoir cliqué sur le bouton principal pour ''Enregistrer'' {{$:/core/images/save-button}} dans le menu latéral.
-*Le bouton ''annuler'' ({{$:/core/images/cancel-button}}) ignore vos modifications (après demande de confirmation) et quitte le mode ébauche.
-*Le bouton ''supprimer'' ({{$:/core/images/delete-button}}) supprime tout le tiddler (après demande de confirmation).
+*Le bouton ''confirmer'' (<<.icon $:/core/images/done-button>>) mémorise vos modifications dans le tiddler et quitte le mode ébauche. Si votre wiki est configuré en <<fr AutoSave>>, vos modifications seront enregistrées de façon permanente. Autrement elles sont mémorisées temporairement dans votre navigateur web, et vous les perdrez si vous fermez votre page ~TiddlyWiki sans avoir cliqué sur le bouton principal pour ''Enregistrer'' (<<.icon $:/core/images/save-button>>) dans le menu latéral.
+*Le bouton ''annuler'' (<<.icon $:/core/images/cancel-button>>) ignore vos modifications (après demande de confirmation) et quitte le mode ébauche.
+*Le bouton ''supprimer'' (<<.icon $:/core/images/delete-button>>) supprime tout le tiddler (après demande de confirmation).
