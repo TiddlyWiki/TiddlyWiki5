@@ -37,7 +37,7 @@ exports.startup = function() {
 			height = paramObject.height || "600",
 			top = paramObject.top,
 			left = paramObject.left,
-			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-template": template});
+			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-id": windowID});
 		// Open the window
 		var srcWindow,
 		    srcDocument;
