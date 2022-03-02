@@ -1,6 +1,6 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20220219125413255
+modified: 20220301162140993
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
@@ -8,20 +8,22 @@ type: text/vnd.tiddlywiki
 The `tm-open-window` [[message|Messages]] opens a tiddler in a new //browser// window. If no parameters are specified, the current tiddler is opened in a new window. Similiar to `tm-modal` any additional parameters passed via the <<.param "paramObject">> are provided as variables to the new window.
 
 |!Name |!Description |
-|param |Title of the tiddler to be opened in a new browser window, defaults to <<.var "currentTiddler">> if empty |
-|template |Template in which the tiddler will be rendered in |
+|param //{default param}//  |Title of the tiddler to be opened in a new browser window, defaults to <<.var "currentTiddler">> if empty |
+|template |Template in which the tiddler will be rendered |
 |windowTitle |Title string for the opened window |
 |width |Width of the new browser window |
 |height |Height of the new browser window |
 |left|<<.from-version "5.2.2">> Optional, left position of new browser window|
 |top|<<.from-version "5.2.2">> Optional, top position of new browser window|
-|paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
+|windowID|<<.from-version "5.2.2">> Optional, unique string used to identify the widow. Can be used with [[WidgetMessage: tm-close-window]] to close the window. Defaults to the value of <<.param param>> |
+|//{any other params}// |Any other parameters are made available as variables within the new window |
 
 The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
 
 <<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
 <<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, <<.param height>>, <<.param left>> and <<.param top>> require the ActionSendMessageWidget.""">>
-
+<<.tip """<<.from-version 5.2.2>> To close a window opened with tm-open-window use [[WidgetMessage: tm-close-window]]""">>
+<<.tip """<<.from-version 5.2.2>> To open a tiddler in more than one new window, use a unique value for <<.param windowID>>""">>
 
 <$macrocall $name='wikitext-example-without-html'
 src="""
