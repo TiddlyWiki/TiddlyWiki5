@@ -3,6 +3,7 @@ title: $:/language/Docs/Fields/
 _canonical_uri: Pełny adres URL do zewnętrznego obrazu
 bag: Nazwa worka, z ktorego pochodzi tiddler
 caption: Tekst wyświetlany na zakładce lub przycisku
+code-body: Ustawienie wartości na ''yes'' spowoduje wyświetlanie tiddlera jako kod
 color: Wartość koloru CSS powiążanego z tym tiddlerem
 component: Nazwa komponentu odpowiedzialnego za [[alert|AlertMechanism]]
 current-tiddler: Używane by zapamiętać ostatniego tiddlera w [[liście historii|HistoryMechanism]]
@@ -36,4 +37,3 @@ toc-link: Powoduje, że spisie treści ten tiddler nie będzie podlinkowany (ale
 type: Typ treści tiddlera
 version: Informacja o wersji wtyczki
 _is_skinny: Jeżeli obecne, oznacza, że treść tego tiddlera musi być wczytana z serwera
-
