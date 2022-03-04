@@ -1,30 +1,31 @@
 caption: Styles et Classes
 created: 20131205160532119
-modified: 20141116085003914
+fr-title: Styles et Classes en WikiTexte
+modified: 20220304133607415
 tags: WikiText
 title: Styles and Classes in WikiText
 type: text/vnd.tiddlywiki
 
-You can use this construction to cause the wrapped content to be assigned specified CSS classes or styles:
+Vous pouvez utiliser cette structure pour affecter un style ou des classes CSS au contenu encadré<<:>>
 
-<<wikitext-example src:"@@.myStyle
-* List One
-* List Two
+<<wikitext-example src:"@@.monStyle
+* Liste Une
+* Liste Deux
 @@
 ">>
 
-Similar syntax is used to assign styles. For example:
+Une syntaxe similaire permet d'affecter des styles. Par exemple<<:>>
 
 <<wikitext-example src:"@@background-color:red;
-* List One
-* List Two
+* Liste Une
+* Liste Deux
 @@
 ">>
 
-Multiple styles and classes can be mixed. For example:
+Plusieurs styles et classes peuvent être affectés en même temps<<:>>
 
 <<wikitext-example src:"@@.tc-tiddler-frame
 @@width:400px;
-Some text
+Du texte
 @@
 ">>

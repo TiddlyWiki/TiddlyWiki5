@@ -1,0 +1,15 @@
+created: 20161008085627406
+modified: 20220303000119560
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/version-macros
+type: text/vnd.tiddlywiki
+
+\define .from-version(version)
+<span class="doc-from-version">{{$:/core/images/warning}} Depuis<<:>> $version$</span>
+\end
+
+\define .deprecated-since(version, superseded:"TODO-Link")
+<$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Obsolète depuis<<:>> $version$ </$button>. Utilisez [[$superseded$]] à la place
+\end
+
+<pre><$view field="text"/></pre>
