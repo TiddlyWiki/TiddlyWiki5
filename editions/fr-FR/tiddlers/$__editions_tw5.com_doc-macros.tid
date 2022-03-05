@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20220220000852855
+modified: 20220304140636794
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -30,9 +30,9 @@ type: text/vnd.tiddlywiki
 \define .attr(_) <code class="doc-attr">$_$</code>
 \define .param(_) <code class="doc-param">$_$</code>
 
-\define .mtitle(_) $_$ Macro
-\define .otitle(_) $_$ Operator
-\define .vtitle(_) $_$ Variable
+\define .mtitle(_) Macro $_$
+\define .otitle(_) Opérateur $_$
+\define .vtitle(_) Variable $_$
 
 \define .link(_,to) <$link to="$to$">$_$</$link>
 \define .clink(_,to) <span class="doc-clink"><<.link """$_$""" "$to$">></span>
@@ -117,7 +117,7 @@ C'est un exemple de tiddler. Voir [[Macros Table des matières (Exemples)|Table-
 <table class="doc-bad-example">
 <tbody>
 <tr class="evenRow">
-<td><span class="tc-inline-style" style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
+<td><span class="tc-inline-style" style="font-size:1.5em;">&#9888;</span> Attention&nbsp;:<br> Ne faites pas comme ça !</td>
 <td>
 
 $eg$
@@ -132,17 +132,17 @@ $eg$
 \end
 
 
-\define .link-badge-added(link,colour:#ffe246) <<.link-badge "added" """$link$""" """$colour$""">>
+\define .link-badge-added(link,colour:#ffe246) <<.link-badge "ajouté" """$link$""" """$colour$""">>
 \define .link-badge-addendum(link,colour:#fcc84a) <<.link-badge "addendum" """$link$""" """$colour$""">>
-\define .link-badge-extended(link,colour:#f9a344) <<.link-badge "extended" """$link$""" """$colour$""">>
-\define .link-badge-fixed(link,colour:#ffa86d) <<.link-badge "fixed" """$link$""" """$colour$""">>
-\define .link-badge-here(link,colour:#d88e63) <<.link-badge "here" """$link$""" """$colour$""">>
-\define .link-badge-hide(link,colour:#9d959f) <<.link-badge "hide" """$link$""" """$colour$""">>
-\define .link-badge-improved(link,colour:#7593c7) <<.link-badge "improved" """$link$""" """$colour$""">>
-\define .link-badge-modified(link,colour:#7f99c9) <<.link-badge "modified" """$link$""" """$colour$""">>
-\define .link-badge-removed(link,colour:#a9aabc) <<.link-badge "removed" """$link$""" """$colour$""">>
-\define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renamed" """$link$""" """$colour$""">>
-\define .link-badge-updated(link,colour:#91ba66) <<.link-badge "updated" """$link$""" """$colour$""">>
+\define .link-badge-extended(link,colour:#f9a344) <<.link-badge "étendu" """$link$""" """$colour$""">>
+\define .link-badge-fixed(link,colour:#ffa86d) <<.link-badge "corrigé" """$link$""" """$colour$""">>
+\define .link-badge-here(link,colour:#d88e63) <<.link-badge "ici" """$link$""" """$colour$""">>
+\define .link-badge-hide(link,colour:#9d959f) <<.link-badge "cacher" """$link$""" """$colour$""">>
+\define .link-badge-improved(link,colour:#7593c7) <<.link-badge "amélioré" """$link$""" """$colour$""">>
+\define .link-badge-modified(link,colour:#7f99c9) <<.link-badge "modifié" """$link$""" """$colour$""">>
+\define .link-badge-removed(link,colour:#a9aabc) <<.link-badge "retiré" """$link$""" """$colour$""">>
+\define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renommé" """$link$""" """$colour$""">>
+\define .link-badge-updated(link,colour:#91ba66) <<.link-badge "mis à jour" """$link$""" """$colour$""">>
 
 \define .tiddler-fields(tiddler)
 <$tiddler tiddler=<<__tiddler__>>>
