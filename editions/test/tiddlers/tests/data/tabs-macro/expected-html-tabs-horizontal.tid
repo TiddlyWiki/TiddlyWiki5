@@ -1,6 +1,6 @@
-title: expected-html-tabs.5.2.1
+title: expected-html-tabs-horizontal
 type: text/html
-description: This is the real structure, which contains a lot of redundant whtiespace
+description: Horizontal tabs test - This is the expected HTML output from a test in test-wikitext-tabs-macro.js
 
 <p>
 
