@@ -1,5 +1,5 @@
 created: 20190206140446821
-modified: 20210417090408263
+modified: 20220304143533616
 tags: Filters
 title: Mathematics Operators
 type: text/vnd.tiddlywiki
@@ -28,6 +28,9 @@ The mathematics operators take three different forms:
 ** <<.inline-operator-example "=1 =2 =3 =4 +[product[]]">>
 ** <<.inline-operator-example "=1 =2 =3 =4 +[average[]]">>
 
+
+! Complex calculus with operator combination
+
 Operators can be combined:
 
 * <<.inline-operator-example "[[355]divide[113]fixed[5]]">>
@@ -41,4 +44,11 @@ src="""<$set name="number-of-tiddlers" value={{{ [tag[HelloThere]count[]] }}}>
 Average length of <$text text=<<number-of-tiddlers>>/> tiddlers tagged <<tag "HelloThere">>: <$text text={{{ [tag[HelloThere]get[text]length[]sum[]divide<number-of-tiddlers>fixed[3]] }}}/>
 </$set>""" />
 
-<<list-links "[tag[Mathematics Operators]]">>
+! Mathematics Operators list
+
+<$list filter="[tag[Mathematics Operators]sort[caption]]">
+
+; <$link>{{!!caption}}</$link>
+: {{!!op-purpose}}
+
+</$list>
