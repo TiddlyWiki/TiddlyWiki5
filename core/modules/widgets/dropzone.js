@@ -181,6 +181,7 @@ DropZoneWidget.prototype.readFileCallback = function(tiddlerFieldsArray) {
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
+			tiddlerFieldsArray = $tw.hooks.invokeHook("th-readFileCallback",tiddlerFieldsArray,self,event);
 			self.readFileCallback(tiddlerFieldsArray);
 		};
 	this.leaveDrag(event);
@@ -234,6 +235,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	var self = this,
 		readFileCallback = function(tiddlerFieldsArray) {
+			tiddlerFieldsArray = $tw.hooks.invokeHook("th-readFileCallback",tiddlerFieldsArray,self,event);
 			self.readFileCallback(tiddlerFieldsArray);
 		};
 	// Let the browser handle it if we're in a textarea or input box
