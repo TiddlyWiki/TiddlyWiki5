@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20211031180336257
+modified: 20220311154749139
 tags: Widgets TriggeringWidgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -12,11 +12,12 @@ type: text/vnd.tiddlywiki
 
 The event catcher widget traps DOM-initiated Javascript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to those events. 
 
-In order for the events to be trapped they must:
+In order for the events to be trapped:
 
-* be of one of the events specified in the event catcher widget's `events` attribute
-* arise within a DOM node specified by the widget's `selector` attribute
-* support event bubbling
+* The event must be of one of the events specified in the event catcher widget's `events` attribute
+* The event must target a DOM node with an ancestor that matches the widget's `selector` attribute
+* <<.from-version "5.2.2">> Optionally, the DOM node targetted by the event must also match the widgets `matchSelector` attribute
+* The event must support event bubbling
 
 Use of the event catcher widget is beneficial when using large numbers of other trigger widgets such as the ButtonWidget is causing performance problems. The workflow it enables is akin to what is referred to as "event delegation" in JavaScript parlance.
 
@@ -26,6 +27,7 @@ The content of the `<$eventcatcher>` widget is displayed normally.
 
 |!Attribute |!Description |
 |selector |A CSS selector. Only events originating inside a DOM node with this selector will be trapped |
+|matchSelector |<<.from-version "5.2.2">> An optional CSS selector. Only events targetting DOM nodes matching this selector will be trapped |
 |//{any attributes starting with $}// |<<.from-version "5.2.0">> Each attribute name (excluding the $) specifies the name of an event, and the value specifies the action string to be invoked. For example: `$click=<<clickActions>>`  |
 |tag |Optional. The HTML element the widget creates to capture the events, defaults to:<br>» `span` when parsed in inline-mode<br>» `div` when parsed in block-mode |
 |class |Optional. A CSS class name (or names) to be assigned to the widget HTML element |
