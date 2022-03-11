@@ -16,13 +16,12 @@ Once enabled, this example demonstrates several features:
 </div>
 
 <$button>
-<$action-setfield $tiddler="$:/core/ui/ViewTemplate/body" $field="text" $value={{$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text}}/>
-<$action-setfield $tiddler="$:/core/ui/ViewTemplate/body" $field="tags" $value="$:/tags/ViewTemplate"/>
+<$action-setfield $tiddler="$:/config/ViewTemplateTitleFilters/dynannotate" tags="$:/tags/ViewTemplateTitleFilter" text="[[$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text]]" list-before="$:/config/ViewTemplateBodyFilters/default"/>
 Click here to use the custom view template
 </$button>
 
 <$button>
-<$action-deletetiddler $tiddler="$:/core/ui/ViewTemplate/body"/>
+<$action-deletetiddler $tiddler="$:/config/ViewTemplateTitleFilters/dynannotate"/>
 Click here to revert to the core view template
 </$button>
 
