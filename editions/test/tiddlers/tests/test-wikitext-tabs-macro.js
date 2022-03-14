@@ -54,31 +54,32 @@ describe("Tabs-macro HTML tests", function() {
 	/ Run the tests
 	--------------------*/
 	// horizontal
-	it("should render horizontal tabs v5.2.1", function() {
+/*
+	xit("should render horizontal tabs v5.2.1", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-horizontal")).toBe(expected.fields.text);
 	});
 
-	it("should render horizontal tabs macro with all parameters modified V5.2.1", function() {
+	xit("should render horizontal tabs macro with all parameters modified V5.2.1", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-horizontal-all")).toBe(expectedAll.fields.text);
 	});
 
 	// vertical
-	it("should render tabs vertical tabs v5.2.1", function() {
+	xit("should render tabs vertical tabs v5.2.1", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-vertical")).toBe(expectedVert.fields.text);
 	});
-
+*/
 	// Future tests
 	// horizontal
-	xit("should render 'horizontal' tabs from v5.2.2 and up with whitespace trim", function() {
+	it("should render 'horizontal' tabs from v5.2.2 and up with whitespace trim", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-horizontal")).toBe(expected.fields.text.replace(/\n/g,""));
 	});
 
-	xit("should render 'horizontal' tabs from v5.2.2 and up with whitespace trim", function() {
+	it("should render 'horizontal' tabs from v5.2.2 and up with whitespace trim", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-horizontal-all")).toBe(expectedAll.fields.text.replace(/\n/g,""));
 	});
 
 	// vertical
-	xit("should render 'vertical' tabs from v5.2.2 and up with whitespace trim", function() {
+	it("should render 'vertical' tabs from v5.2.2 and up with whitespace trim", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-vertical")).toBe(expectedVert.fields.text.replace(/\n/g,""));
 	});
 });

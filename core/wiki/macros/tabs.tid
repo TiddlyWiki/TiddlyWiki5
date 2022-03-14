@@ -2,6 +2,7 @@ title: $:/core/macros/tabs
 tags: $:/tags/Macro
 
 \define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
+\whitespace trim
 <$set name="qualifiedState" value=<<qualify "$state$">>>
 <$vars tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
 <div class="tc-tab-set $class$">
@@ -20,7 +21,7 @@ tags: $:/tags/Macro
 <div class="tc-tab-content $class$">
 <$list filter="$tabsList$" variable="currentTab">
 
-<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default="$default$" retain="""$retain$""">
+<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default="$default$" retain="""$retain$""" tag="div">
 
 <$transclude tiddler="$template$" mode="block">
 
