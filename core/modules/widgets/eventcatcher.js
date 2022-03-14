@@ -57,11 +57,11 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 			if(selectedNode.nodeType === 3) {
 				selectedNode = selectedNode.parentNode;
 			}
+			// Check that the selected node matches any matchSelector
+			if(matchSelector && !$tw.utils.domMatchesSelector(selectedNode,matchSelector)) {
+				return false;
+			}
 			if(selector) {
-				// Check that the selected node matches any matchSelector
-				if(matchSelector && !$tw.utils.domMatchesSelector(selectedNode,matchSelector)) {
-					return false;
-				}
 				// Search ancestors for a node that matches the selector
 				while(!$tw.utils.domMatchesSelector(selectedNode,selector) && selectedNode !== domNode) {
 					selectedNode = selectedNode.parentNode;
