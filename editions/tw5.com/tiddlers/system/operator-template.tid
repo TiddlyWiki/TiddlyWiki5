@@ -1,8 +1,8 @@
 created: 20150203173506000
-modified: 20150203181725000
-title: $:/editions/tw5.com/operator-template
-tags: $:/tags/ViewTemplate
 list-before: $:/core/ui/ViewTemplate/body
+modified: 20220316121232243
+tags: $:/tags/ViewTemplate
+title: $:/editions/tw5.com/operator-template
 
 \define .op-place()
 <$macrocall $name=".if"
@@ -71,6 +71,9 @@ list-before: $:/core/ui/ViewTemplate/body
 </$set>
 <!-- -->
 </table>
+
+[[Learn more about how to use Filters|Filters]]
+
 <$list filter="[all[current]has[from-version]]" variable="listItem">
 <$macrocall $name=".from-version" version={{!!from-version}}/>
 </$list>
