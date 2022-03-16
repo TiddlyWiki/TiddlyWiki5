@@ -1,6 +1,6 @@
 created: 20130827080000000
 list: [[Introduction to filter notation]] [[Filter Syntax]]
-modified: 20220316120141494
+modified: 20220316145511797
 tags: Reference Concepts
 title: Filters
 type: text/vnd.tiddlywiki
@@ -8,6 +8,7 @@ type: text/vnd.tiddlywiki
 \define openAdvancedSearch()
 <$action-setfield $tiddler="$:/state/tab--1498284803" text="$:/core/ui/AdvancedSearch/Filter"/>
 <$action-setfield $tiddler="$:/temp/advancedsearch/input" text="[tag[Filters]]"/>
+<$action-setfield $tiddler="$:/temp/advancedsearch" text="[tag[Filters]]"/>
 \end
 
 You can think of TiddlyWiki as a database in which the records are tiddlers. A database typically provides a way of discovering which records match a given pattern, and in ~TiddlyWiki this is done with filters.
