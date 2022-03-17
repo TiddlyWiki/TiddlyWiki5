@@ -39,6 +39,7 @@ The TiddlyWiki core uses cascades to choose the following elements:
 |[[View Template Title Cascade]] |The template used to display the title of a particular tiddler (used by the default view template to display the tiddler title) |
 |[[View Template Body Cascade]] |The template used to display the view mode body of a particular tiddler (used by the default view template to display the tiddler body) |
 |[[Edit Template Body Cascade]] |The template used to display the edit mode body of a particular tiddler (used by the default edit template to display the tiddler body editor) |
+|[[Field Editor Cascade]] |The template used to display the edit mode of a tiddler field (used by the default edit template to display the field editor) |
 
 You can see the current settings for each cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades'' tab.
 
