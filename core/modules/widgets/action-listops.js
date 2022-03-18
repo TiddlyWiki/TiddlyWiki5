@@ -1,5 +1,3 @@
-const { makeTiddlerIterator } = require("../wiki");
-
 /*\
 title: $:/core/modules/widgets/action-listops.js
 type: application/javascript
