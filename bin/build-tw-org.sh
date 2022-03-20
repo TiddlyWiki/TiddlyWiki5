@@ -41,7 +41,7 @@ echo "Using TWORG_BUILD_OUTPUT as [$TWORG_BUILD_OUTPUT]"
 
 # Pull existing GitHub pages content
 
-git clone --depth=1 --branch=master "https://github.com/TiddlyWiki/tiddlywiki.org-gh-pages.git" output
+git clone --depth=1 --branch=master "https://github.com/TiddlyWiki/tiddlywiki.org-gh-pages.git" $TWORG_BUILD_OUTPUT
 
 # Make the CNAME file that GitHub Pages requires
 
@@ -87,11 +87,11 @@ rm $TWORG_BUILD_OUTPUT/build.tid || exit 1
 # Exit script immediately if any command fails
 set -e
 
-cd output
+pushd $TWORG_BUILD_OUTPUT
 git config --global user.email "actions@github.com"
 git config --global user.name "GitHub Actions"
 git add -A .
 git commit --message "GitHub build: $GITHUB_RUN_NUMBER of $TW5_BUILD_BRANCH ($(date +'%F %T %Z'))"
 git remote add deploy "https://$GH_TOKEN@github.com/TiddlyWiki/tiddlywiki.org-gh-pages.git" &>/dev/null
 git push deploy master &>/dev/null
-cd ..
+popd
