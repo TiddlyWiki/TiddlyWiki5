@@ -41,7 +41,7 @@ echo "Using TWORG_BUILD_OUTPUT as [$TWORG_BUILD_OUTPUT]"
 
 # Pull existing GitHub pages content
 
-git clone --depth=1 --branch=master "https://github.com/TiddlyWiki/tiddlywiki.org-gh-pages.git" $TWORG_BUILD_OUTPUT
+git clone --depth=1 --branch=main "https://github.com/TiddlyWiki/tiddlywiki.org-gh-pages.git" $TWORG_BUILD_OUTPUT
 
 # Make the CNAME file that GitHub Pages requires
 
