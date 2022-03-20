@@ -70,6 +70,6 @@ jobs:
           echo "TW5_BUILD_DETAILS=Built from branch '$TW5_BUILD_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')" >> $GITHUB_ENV
       - run: "./bin/build-site.sh"
       - run: "./bin/ci-push.sh"
-      - run: "./bin/build-tw-org.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
+      - run: "./bin/build-tw-org.sh"
