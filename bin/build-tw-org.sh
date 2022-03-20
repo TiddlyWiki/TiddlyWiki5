@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Build tiddlywiki.org assets
+# Build tiddlywiki.org assets.
 
 # Default to the version of TiddlyWiki installed in this repo
 
