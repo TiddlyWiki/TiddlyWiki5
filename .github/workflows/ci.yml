@@ -73,4 +73,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
       - run: "./bin/build-tw-org.sh"
+        env:
           GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
