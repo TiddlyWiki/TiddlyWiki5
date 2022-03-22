@@ -1,16 +1,16 @@
 caption: Permaliens
 created: 20140502213500000
 fr-title: Permaliens
-modified: 20150622112455420
+modified: 20220223144222832
 tags: Features Concepts
 title: PermaLinks
 type: text/vnd.tiddlywiki
 
-Les permaliens offrent la possibilités de faire des liens directs vers des tiddlers individuels dans un TiddlyWiki.
+Les permaliens sont des liens directs vers des tiddlers individuels à l'intérieur d'un TiddlyWiki.
 
 ! La forme simple des permaliens
 
-La forme la plus simple d'un permalien vers un tiddler cible unique est son nom précédé de "#" accolé au lien URL de base <<:>>
+La forme la plus simple d'un permalien (<<.icon $:/core/images/permalink-button>>) vers un tiddler cible unique est son nom précédé de "#" accolé au lien URL de base <<:>>
 
 https://tiddlywiki.com/#HelloThere
 
@@ -20,47 +20,47 @@ Le titre du tiddler peut contenir des espaces si nécessaire<<:>>
 
 Remarquez que les doubles crochets ne sont pas requis autour du titre du tiddler cible<<;>> cependant, s'ils sont présents ils seront supprimés automatiquement.
 
-(NDT Attention en cas de traduction, c'est le lien doit pointer vers `title` le titre original et pas vers le titre traduit affiché qui ne reflète que le contenu du champ `fr-title`)
+(NDT<<:>> Attention en cas de traduction, le lien doit pointer vers le titre original `title` et pas vers le titre traduit affiché qui ne reflète que le contenu du champ `fr-title`)
 
 ! Permaliens vers un déroulé
 
-Le permalien peut aussi spécifier le déroulé de la liste de tiddlers qui seront ouverts avec le [[Tiddler Filtre|Filters]] cible<<:>>
+Le permalien peut aussi spécifier la liste de tiddlers qui seront ouverts dans le déroulé en plus du tiddler cible, à l'aide d'un [[filtre|Filters]]<<:>>
 
 [[https://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
 
-Si le tiddler cible est absent du déroulé de la liste, il est alors automatiquement inséré au début. Ce qui veut dire que les exemples suivants ciblent tous les deux le tiddler `Tiddlers` avec le déroulé de la suite `Tiddlers`, `Tags`, `TiddlerFields`:
+Si le tiddler cible est absent de la liste, il est alors automatiquement inséré au début du déroulé. Ce qui veut dire que les exemples suivants désignent tous les deux le tiddler `Tiddlers` dans le déroulé `Tiddlers`, `Tags`, `TiddlerFields`<<:>>
 
 [[https://tiddlywiki.com/#Tiddlers:Tags TiddlerFields]]
 
 [[https://tiddlywiki.com/#Tiddlers:Tiddlers Tags TiddlerFields]]
 
-Il est aussi possible de spécifier, pour les besoins de la navigation, un déroulé filtre sans spécifier de tiddler cible<<:>>
+Il est aussi possible de spécifier un filtre sans spécifier de tiddler cible de navigation<<:>>
 
-<a href="https://tiddlywiki.com/#:[tags[task]]">~https://tiddlywiki.com/#:[tags[task]]</a>
+<a href="https://tiddlywiki.com/#:[tags[task]]" rel="noopener noreferrer">~https://tiddlywiki.com/#:[tags[task]]</a>
 
 ! Concernant le codage URL
 
-Il existe des restrictions techniques aux caractères légaux d'un adressage URL. Afin de permettre à tous les titres de tiddler d'être adressés, les caractères illégaux font l'objet d'un processus appelé "codage URL" où les caractères problématique sont remplacés par leurs codes numériques. Par exemple, le caractère espace est remplacé par `%20`.
+Il existe des restrictions techniques aux caractères autorisés dans un adressage URL. Afin de permettre à tous les titres de tiddler d'être adressés, les caractères illégaux font l'objet d'un processus appelé <<gf "codage URL">> où les caractères problématiques sont remplacés par leurs codes numériques. Par exemple, le caractère espace est remplacé par `%20`.
 
-Aussi bien le tiddler cible que le déroulé filtre seront encodé (mais pas le séparateur ":"). TiddlyWiki génère des URLs encodées correctement qui peuvent paraître un peu "moche". Cependant, dans la pratique les navigateurs parviennent heureusement et parfaitement à interpréter des caractères arbitraires dans les extraits URL. De ce fait, quand vous créez des permaliens manuellement vous pouvez choisir d'ignorer le codage URL.
+Aussi bien le tiddler cible que le déroulé filtre devraient être encodés (mais pas le séparateur <<gf ":">>). <<tw>> génère des URLs encodées correctement qui peuvent paraître un peu "moche". Cependant, dans la pratique les navigateurs parviennent heureusement à interpréter parfaitement des caractères arbitraires dans les extraits URL. De ce fait, quand vous créez des permaliens manuellement vous pouvez choisir d'ignorer le codage URL.
 
-! Comportement de TiddlyWiki avec les Permaliens
+! Comportement de <<tw>> avec les Permaliens
 
-Deux aspects importants du comportement de TiddliWiki avec les permaliens peuvent être réglés avec les options de l'onglet ''Réglages avancés'' du $:/ControlPanel <<:>>
+Deux aspects importants du comportement de <<tw>> avec les permaliens peuvent être réglés avec les options de l'onglet ''Réglages avancés'' du <<.icon $:/core/images/options-button>> $:/ControlPanel <<:>>
 
 * d'une part la mise à jour automatique de la zone d'adresse à chaque navigation, et dans ce cas s'il faut inclure la séquence du déroulé aussi bien que le tiddler cible
-* d'autre part si les mises à jour de la zone d'adresse doivent affecter l'historique du navigateur. Par défaut, c'est ''non''<<;>> mais lorsque que ''oui'' est sélectionné, vous pouvez reprendre votre navigation entre les tiddlers en utilisant les boutons avancer et reculer du navigateur
+* d'autre part si les mises à jour de la zone d'adresse doivent affecter l'historique du navigateur. Par défaut, c'est ''non''<<;>> mais lorsque ''oui'' est sélectionné, vous pouvez reprendre votre navigation entre les tiddlers en utilisant les boutons avancer et reculer du navigateur
 
-Notez que saisir un permalien ou s'y rendre causera toujours le traitement du permalien, et les tiddlers ouverts ou fermés en fonction de lui.
+Notez que saisir un permalien ou s'y rendre causera toujours le traitement du permalien, ainsi que l'ouverture et la fermeture des tiddlers appropriés en fonction de son contenu.
 
 !! Détails techniques
 
-Quand TiddlyWiki se lance il traite les permaliens selon les étapes suivantes<<;>> les même étapes sont répétées dynamiquement lors des modifications du permalien (cela survient en réaction à l'édition par l'adresse de la barre d'adresse, par exemple).
+Quand <<tw>> se lance il traite les permaliens selon les étapes ci-dessous<<;>> ces même étapes sont répétées dynamiquement lors des modifications du permalien (ce qui survient en réaction à l'édition de la barre d'adresse par l'utilisateur, par exemple).
 
-# Si le permalien contient un ":", traiter la chaine précédente comme la cible et la chaine qui suit comme le ''filtre du déroulé''
-# Si ":" est absent, traiter toute la chaine comme la ''cible'' et marquer le ''filtre du déroulé'' comme //non-spécifié//
-# Si le ''filtre du déroulé'' est //non-spécifié// dans le processus de lancement, alors mettre une chaine vide dans le ''filtre du déroulé'' si la ''cible'' est spécifiée, ou aux tiddlers par défaut si la ''cible'' n'est pas spécifiée
-# Si le ''filtre du déroulé'' est //non-spécifié// hors du processus de lancement, alors affecter le déroulé actuel au ''filtre du déroulé''
+# Si le permalien contient un <<gf ":">>, traiter la chaine précédente comme la ''cible'' et la chaine qui suit comme le ''filtre du déroulé''
+# Si <<gf ":">> est absent, traiter toute la chaine comme la ''cible'' et marquer le ''filtre du déroulé'' comme //non-spécifié//
+# Si le ''filtre du déroulé'' est //non-spécifié// pendant le processus de lancement, alors mettre une chaine vide dans le ''filtre du déroulé'' si la ''cible'' est spécifiée, ou les tiddlers par défaut si la ''cible'' n'est pas spécifiée
+# Si le ''filtre du déroulé'' est //non-spécifié// hors du processus de lancement, alors affecter le ''filtre du déroulé'' au déroulé actuel
 # Évaluer le ''filtre du déroulé'' comme ''liste du déroulé''
 # Si la ''cible'' est spécifiée et absente de la ''liste du déroulé'' alors l'ajouter au début
 # Si la ''cible'' est spécifiée alors s'y rendre, autrement naviguer au premier tiddler de la ''liste du déroulé''

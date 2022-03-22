@@ -1,5 +1,5 @@
 created: 20150117184156000
-modified: 20220122143551571
+modified: 20220227210152153
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
@@ -64,3 +64,5 @@ $$$
 
 <<tw-code $tiddler$>>
 \end
+
+<pre><$view field="text"/></pre>
