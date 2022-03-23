@@ -2346,7 +2346,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	border: 1px solid <<colour background>>;
-	border-bottom-none;
+	border-bottom: none;
 	background: <<colour dirty-indicator>>;
 	color: <<colour background>>;
 	fill: <<colour background>>;
