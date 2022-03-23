@@ -13,6 +13,12 @@ type: text/vnd.tiddlywiki
 
 ! Highlights
 
+!! <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6553">> incorrectly nested `<span>` and `<div>` elements
+
+Until now, TiddlyWiki's core page layout included several instances of inline `<span>` elements containing block `<div>` elements, something that is technically invalid HTML. In practice, browsers have always handled these cases leniently to make the page work but it has also been unhelpful for developers to encountering invalid HTML constructions in their first interactions with TiddlyWiki.
+
+The immediate prompt for fixing the issue now is that Chrome v100 [[includes a change|https://chromium.googlesource.com/chromium/src/+/4a76c96d2a4021257e691058c1fe1fb60d9d8327]] that causes these misnested elements to be rendered correctly visually but to be unclickable in some situations. This change is [[reverted|https://chromium.googlesource.com/chromium/src/+/abadd1181ca70cf3d1ac7e7878d46b1d3173a2e0]] in Chrome v102.
+
 !! <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6498">> support for secondary windows
 
 The [[WidgetMessage: tm-open-window]] now supports an optional `windowID` parameter so that opened windows can be closed with the new [[WidgetMessage: tm-close-window]] message. There is also a new [[WidgetMessage: tm-close-all-windows]] message which closes all secondary windows.
