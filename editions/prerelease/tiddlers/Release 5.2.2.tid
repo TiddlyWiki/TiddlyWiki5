@@ -116,7 +116,7 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6395">> processing of $:/tags/RawMarkupWikified/TopHead tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6398">> issue whereby renaming tags could result in duplicate tags
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6440">> search results obscured on narrow screens
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6540">> ActionListOpsWidget bug with input list items starting with `-`, `+`, `~`, `:` or other character with a special meaning in filters
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6540">> ActionListopsWidget bug with input list items starting with `-`, `+`, `~`, `:` or other character with a special meaning in filters
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/28a91aafa74da04842dbff4b8d0eb7a8dad5dbaa">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/6531]]) refreshing of the ButtonWidget when the `default` attribute changes
 
 ! Acknowledgements
