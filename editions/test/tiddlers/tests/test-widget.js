@@ -188,6 +188,148 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>My Jolly Old World is Jolly</p>");
 	});
 
+	const checkboxTestTiddlers = [
+		{title: "TiddlerOne", text: "Jolly Old World", expand: "yes"},
+		{title: "TiddlerTwo", text: "Jolly Old World", expand: "no"},
+	];
+
+	const checkboxTestData = [
+		{
+			testName: "field mode checked",
+			widgetText: "<$checkbox tiddler='TiddlerOne' field='expand' checked='yes' />",
+			startsOutChecked: true,
+			expectedChange: { "TiddlerOne": { expand: undefined } }
+		},
+		// Fails because checkbox logic can't handle this case. Will fix.
+		// {
+		// 	testName: "field mode unchecked",
+		// 	widgetText: "<$checkbox tiddler='TiddlerTwo' field='expand' unchecked='no' />",
+		// 	startsOutChecked: false,
+		// 	expectedChange: { "TiddlerTwo": { expand: "yes" } }
+		// },
+		{
+			testName: "field mode toggle",
+			widgetText: "<$checkbox tiddler='TiddlerTwo' field='expand' checked='yes' unchecked='no' />",
+			startsOutChecked: false,
+			expectedChange: { "TiddlerTwo": { expand: "yes" } }
+		},
+		{
+			testName: "list mode add",
+			tiddlers: [{title: "Colors", colors: "orange yellow"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' checked='green' />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "orange yellow green" } }
+		},
+		{
+			testName: "list mode remove",
+			tiddlers: [{title: "Colors", colors: "green orange yellow"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' checked='green' />",
+			startsOutChecked: true,
+			expectedChange: { "Colors": { colors: "orange yellow" } }
+		},
+		{
+			testName: "list mode remove inverted",
+			tiddlers: [{title: "Colors", colors: "red orange yellow"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "orange yellow" } }
+		},
+		{
+			testName: "list mode remove in middle position",
+			tiddlers: [{title: "Colors", colors: "orange green yellow"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' checked='green' />",
+			startsOutChecked: true,
+			expectedChange: { "Colors": { colors: "orange yellow" } }
+		},
+		{
+			testName: "list mode remove in final position",
+			tiddlers: [{title: "Colors", colors: "orange yellow green"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' checked='green' />",
+			startsOutChecked: true,
+			expectedChange: { "Colors": { colors: "orange yellow" } }
+		},
+		{
+			testName: "list mode toggle",
+			tiddlers: [{title: "Colors", colors: "red orange yellow"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' checked='green' />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "green orange yellow" } }
+		},
+		{
+			testName: "list mode toggle in middle position",
+			tiddlers: [{title: "Colors", colors: "orange red yellow"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' checked='green' />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "orange green yellow" } }
+		},
+		{
+			testName: "list mode remove in final position",
+			tiddlers: [{title: "Colors", colors: "orange yellow red"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' checked='green' />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "orange yellow green" } }
+		},
+	];
+
+	for (const data of checkboxTestData) {
+		fit('checkbox widget test: ' + data.testName, function() {
+			// Setup
+
+			// Create the wiki
+			var wiki = new $tw.Wiki();
+			// Add test tiddlers
+			wiki.addTiddlers(checkboxTestTiddlers);
+			if(data.tiddlers) wiki.addTiddlers(data.tiddlers);
+			// Construct the widget node
+			var widgetNode = createWidgetNode(parseText(data.widgetText,wiki),wiki);
+			// Render the widget node to the DOM
+			var wrapper = renderWidgetNode(widgetNode);
+
+			// Check initial state
+
+			// Extract the input node from inside the widget tree for later tests
+			function findNodeOfType(targetType, currentNode) {
+				if(currentNode.parseTreeNode && currentNode.parseTreeNode.type === targetType) {
+					return currentNode;
+				} else if(currentNode.children && currentNode.children.length) {
+					var child;
+					var result;
+					var i;
+					for (i = 0; i < currentNode.children.length; i++) {
+						child = currentNode.children[i];
+						result = findNodeOfType(targetType, child);
+						if(result) return result;
+					}
+				}
+				return undefined;
+			}
+			const widget = findNodeOfType('checkbox', widgetNode);
+			// Verify that the widget is or is not checked as expected
+			expect(Object.getPrototypeOf(widget).getValue.call(widget)).toBe(data.startsOutChecked);
+
+			// Fake an event that toggles the checkbox
+			// fakedom elmenets don't have a "checked" property. so we fake it because
+			// Checkbox.prototype.handleChangeEvent looks at the "checked" DOM property
+			widget.inputDomNode.checked = !!widget.inputDomNode.attributes.checked;
+			// Now simulate checking the box
+			widget.inputDomNode.checked = !widget.inputDomNode.checked;
+			Object.getPrototypeOf(widget).handleChangeEvent.call(widget, null);
+
+			// Check state again: checkbox should be inverse of what it was
+			expect(Object.getPrototypeOf(widget).getValue.call(widget)).toBe(!data.startsOutChecked);
+			// Check that tiddler(s) has/have gone through expected change(s)
+			for (const key of Object.keys(data.expectedChange)) {
+				const tiddler = wiki.getTiddler(key);
+				const change = data.expectedChange[key];
+				for (const fieldName of Object.keys(change)) {
+					const expectedValue = change[fieldName];
+					const fieldValue = tiddler.fields[fieldName];
+					expect(fieldValue).toBe(expectedValue);
+				}
+			}
+		})
+	}
+
 	it("should render the view widget", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
