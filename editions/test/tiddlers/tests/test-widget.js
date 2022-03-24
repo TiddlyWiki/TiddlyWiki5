@@ -269,6 +269,24 @@ describe("Widget module", function() {
 			startsOutChecked: false,
 			expectedChange: { "Colors": { colors: "orange yellow green" } }
 		},
+		{
+			testName: "filter mode 1",
+			tiddlers: [{title: "Colors", colors: "red orange yellow"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-red green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='red -green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' checked='green' unchecked='red' default='green' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "orange yellow green" } }
+		},
+		{
+			testName: "filter mode 2",
+			tiddlers: [{title: "Colors", colors: "green orange yellow"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-red green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='red -green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' checked='green' unchecked='red' default='green' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: true,
+			expectedChange: { "Colors": { colors: "orange yellow red" } }
+		},
 	];
 
 	for (const data of checkboxTestData) {

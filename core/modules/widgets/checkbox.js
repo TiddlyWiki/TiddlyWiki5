@@ -59,7 +59,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 
 CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
-	if(tiddler) {
+	if(tiddler || this.checkboxFilter) {
 		if(this.checkboxTag) {
 			if(this.checkboxInvertTag) {
 				return !tiddler.hasTag(this.checkboxTag);
@@ -90,12 +90,17 @@ CheckboxWidget.prototype.getValue = function() {
 				return false;
 			}
 		}
-		if(this.checkboxListField) {
+		if(this.checkboxListField || this.checkboxFilter) {
+			// Same logic applies to lists and filters
 			var list;
-			if($tw.utils.hop(tiddler.fields,this.checkboxListField)) {
-				list = tiddler.getFieldList(this.checkboxListField);
+			if(this.checkboxListField) {
+				if($tw.utils.hop(tiddler.fields,this.checkboxListField)) {
+					list = tiddler.getFieldList(this.checkboxListField);
+				} else {
+					list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
+				}
 			} else {
-				list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
+				list = this.wiki.filterTiddlers(this.checkboxFilter,this) || [];
 			}
 			if(list.indexOf(this.checkboxChecked) !== -1) {
 				return true;
@@ -233,6 +238,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxField = this.getAttribute("field");
 	this.checkboxIndex = this.getAttribute("index");
 	this.checkboxListField = this.getAttribute("listField");
+	this.checkboxFilter = this.getAttribute("filter");
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
@@ -248,7 +254,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {
