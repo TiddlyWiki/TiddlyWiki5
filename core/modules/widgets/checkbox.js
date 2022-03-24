@@ -90,6 +90,27 @@ CheckboxWidget.prototype.getValue = function() {
 				return false;
 			}
 		}
+		if(this.checkboxListField) {
+			var list;
+			if($tw.utils.hop(tiddler.fields,this.checkboxListField)) {
+				list = tiddler.getFieldList(this.checkboxListField);
+			} else {
+				list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
+			}
+			if(list.indexOf(this.checkboxChecked) !== -1) {
+				return true;
+			}
+			if(list.indexOf(this.checkboxUnchecked) !== -1) {
+				return false;
+			}
+			// Neither one present
+			if(this.checkboxChecked && !this.checkboxUnchecked) {
+				return false; // Absence of checked value
+			}
+			if(this.checkboxUnchecked && !this.checkboxChecked) {
+				return true; // Absence of unchecked value
+			}
+		}
 	} else {
 		if(this.checkboxTag) {
 			return false;
@@ -114,7 +135,8 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		hasChanged = false,
 		tagCheck = false,
 		hasTag = tiddler && tiddler.hasTag(this.checkboxTag),
-		value = checked ? this.checkboxChecked : this.checkboxUnchecked;
+		value = checked ? this.checkboxChecked : this.checkboxUnchecked,
+		notValue = checked ? this.checkboxUnchecked : this.checkboxChecked;
 	if(this.checkboxTag && this.checkboxInvertTag === "yes") {
 		tagCheck = hasTag === checked;
 	} else {
@@ -148,6 +170,37 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 			hasChanged = true;
 		}
 	}
+	// Set the list field if specified
+	if(this.checkboxListField) {
+		var fieldContents = tiddler.getFieldList(this.checkboxListField);
+		var oldPos = notValue ? fieldContents.indexOf(notValue) : -1;
+		var newPos = value ? fieldContents.indexOf(value) : -1;
+		if(oldPos === -1 && newPos !== -1) {
+			// old value absent, new value present: no change needed
+		} else if(oldPos === -1) {
+			// neither one was present
+			if(value) {
+				fieldContents.push(value);
+				hasChanged = true;
+			} else {
+				// value unspecified? then leave list unchanged
+			}
+		} else if(newPos === -1) {
+			// old value present, new value absent
+			if(value) {
+				fieldContents[oldPos] = value;
+				hasChanged = true;
+			} else {
+				fieldContents.splice(oldPos, 1)
+				hasChanged = true;
+			}
+		} else {
+			// both were present: just remove the old one, leave new alone
+			fieldContents.splice(oldPos, 1)
+			hasChanged = true;
+		}
+		newFields[this.checkboxListField] = $tw.utils.stringifyList(fieldContents);
+	}
 	if(hasChanged) {
 		if(this.checkboxIndex) {
 			this.wiki.setText(this.checkboxTitle,"",this.checkboxIndex,value);
@@ -179,6 +232,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxTag = this.getAttribute("tag");
 	this.checkboxField = this.getAttribute("field");
 	this.checkboxIndex = this.getAttribute("index");
+	this.checkboxListField = this.getAttribute("listField");
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
