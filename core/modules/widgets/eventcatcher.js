@@ -46,6 +46,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	$tw.utils.each(this.types,function(type) {
 		domNode.addEventListener(type,function(event) {
 			var selector = self.getAttribute("selector"),
+				matchSelector = self.getAttribute("matchSelector"),
 				actions = self.getAttribute("$"+type) || self.getAttribute("actions-"+type),
 				stopPropagation = self.getAttribute("stopPropagation","onaction"),
 				selectedNode = event.target,
@@ -56,45 +57,48 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 			if(selectedNode.nodeType === 3) {
 				selectedNode = selectedNode.parentNode;
 			}
+			// Check that the selected node matches any matchSelector
+			if(matchSelector && !$tw.utils.domMatchesSelector(selectedNode,matchSelector)) {
+				return false;
+			}
 			if(selector) {
 				// Search ancestors for a node that matches the selector
 				while(!$tw.utils.domMatchesSelector(selectedNode,selector) && selectedNode !== domNode) {
 					selectedNode = selectedNode.parentNode;
 				}
-				// If we found one, copy the attributes as variables, otherwise exit
-				if($tw.utils.domMatchesSelector(selectedNode,selector)) {
-					// Only set up variables if we have actions to invoke
-					if(actions) {
-						$tw.utils.each(selectedNode.attributes,function(attribute) {
-							variables["dom-" + attribute.name] = attribute.value.toString();
-						});
-						//Add a variable with a popup coordinate string for the selected node
-						variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
-
-						//Add variables for offset of selected node
-						variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
-						variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
-						variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
-						variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
-						
-						if(event.clientX && event.clientY) {
-							//Add variables for event X and Y position relative to selected node
-							selectedNodeRect = selectedNode.getBoundingClientRect();
-							variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
-							variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
-
-							//Add variables for event X and Y position relative to event catcher node
-							catcherNodeRect = self.domNode.getBoundingClientRect();
-							variables["event-fromcatcher-posx"] = (event.clientX - catcherNodeRect.left).toString();
-							variables["event-fromcatcher-posy"] = (event.clientY - catcherNodeRect.top).toString();
-
-							//Add variables for event X and Y position relative to the viewport
-							variables["event-fromviewport-posx"] = event.clientX.toString();
-							variables["event-fromviewport-posy"] = event.clientY.toString();
-						}
-					}
-				} else {
+				// Exit if we didn't find one
+				if(selectedNode === domNode) {
 					return false;
+				}
+				// Only set up variables if we have actions to invoke
+				if(actions) {
+					$tw.utils.each(selectedNode.attributes,function(attribute) {
+						variables["dom-" + attribute.name] = attribute.value.toString();
+					});
+					//Add a variable with a popup coordinate string for the selected node
+					variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
+
+					//Add variables for offset of selected node
+					variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
+					variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
+					variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
+					variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+					
+					if(event.clientX && event.clientY) {
+						//Add variables for event X and Y position relative to selected node
+						selectedNodeRect = selectedNode.getBoundingClientRect();
+						variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
+						variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
+
+						//Add variables for event X and Y position relative to event catcher node
+						catcherNodeRect = self.domNode.getBoundingClientRect();
+						variables["event-fromcatcher-posx"] = (event.clientX - catcherNodeRect.left).toString();
+						variables["event-fromcatcher-posy"] = (event.clientY - catcherNodeRect.top).toString();
+
+						//Add variables for event X and Y position relative to the viewport
+						variables["event-fromviewport-posx"] = event.clientX.toString();
+						variables["event-fromviewport-posy"] = event.clientY.toString();
+					}
 				}
 			}
 			// Execute our actions with the variables

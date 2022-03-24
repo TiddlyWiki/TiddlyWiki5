@@ -1,0 +1,4 @@
+title: $:/config/FieldEditorFilters/
+tags: $:/tags/FieldEditorFilter
+
+default: [[$:/core/ui/EditTemplate/fieldEditor/default]]

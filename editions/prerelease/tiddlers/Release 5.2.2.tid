@@ -13,6 +13,16 @@ type: text/vnd.tiddlywiki
 
 ! Highlights
 
+!! <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6553">> incorrectly nested `<span>` and `<div>` elements
+
+Until now, TiddlyWiki's core page layout included several instances of inline `<span>` elements containing block `<div>` elements, something that is technically invalid HTML. In practice, browsers have always handled these cases leniently to make the page work but it has also been unhelpful for developers to encountering invalid HTML constructions in their first interactions with TiddlyWiki.
+
+The immediate prompt for fixing the issue now is that Chrome v100 [[includes a change|https://chromium.googlesource.com/chromium/src/+/4a76c96d2a4021257e691058c1fe1fb60d9d8327]] that causes these misnested elements to be rendered correctly visually but to be unclickable in some situations. This change is [[reverted|https://chromium.googlesource.com/chromium/src/+/abadd1181ca70cf3d1ac7e7878d46b1d3173a2e0]] in Chrome v102.
+
+!! <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6498">> support for secondary windows
+
+The [[WidgetMessage: tm-open-window]] now supports an optional `windowID` parameter so that opened windows can be closed with the new [[WidgetMessage: tm-close-window]] message. There is also a new [[WidgetMessage: tm-close-all-windows]] message which closes all secondary windows.
+
 !! <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6421">> support for line breaks within filtered transcluded attributes
 
 To improve readability, it is now possible to use newlines as whitespace within filtered transcluded attributes of HTML elements and widgets. For example:
@@ -47,6 +57,7 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6428">> issue with ~LaTeX content within Markdown tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6457">> incorrect handling of dropdown classes in the menu bar plugin
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6520">> the Dynannotate plugin to use the new [[View Template Body Cascade]] to avoid modifying the default view template.
 
 ! Translation improvements
 
@@ -60,28 +71,36 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/853a899c77766e47eade1dfa5822640ef9915637">> wrapping and wikification of field names in field viewer
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/0186c6490fbd1d8fd4de7c3fa99ccf4d129fbd80">> missing whitespace between description and MIME type in edit template dropdown for the ''type'' field
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/c7e8c87f85b54f60302ff8e396a7569d996e3f67">> incorrect usage of code view for certain system tiddlers
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6501">> sidebar plugin listing to be sorted by name rather than description
 
 ! Widget Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/66ae1d6930796a9eb062fdb64a755adab8f39294">> classes to the ImageWidget to indicate whether it is loading, loaded or has encountered an error
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6389">> RadioWidget not using default value if the field or index is missing
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6426">> issue with ImportVariablesWidget when importing block mode widgets
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6480">> DraggableWidget to support an optional drag handle
 
 ! Filter improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6468">> support for case insensitive matching for the [[prefix Operator]] and [[suffix Operator]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/1a0c831216c397c6fef8e5685e47857193411a1b">> [[sha256 Operator]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6438">> crash when using deprecated regexp operands for filter operators
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5742">> [[lookup Operator]] to support indexes as well as fields
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6293">> [[search Operator]] with new 'some' flag
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6478">> [[untagged Operator]] to consider non-existent tiddlers to be untagged
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6477">> [[insertbefore Operator]] to accept the position title as a parameter, instead of as a variable name in the suffix
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6483">> [[butlast Operator]] to be consistent with the [[rest Operator]]
 
 ! Hackability Improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6511">> [[Field Editor Cascade]] for customising how fields are displayed in the edit template
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6388">> support for directly specifying style properties on [[HTML elements|HTML in WikiText]] (for example, `<div style.color={{!!color}}>`)
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/54cfda76ee353190f1cf0210b9071894fb1a5690">> support for ''code-body'' field set to ''yes'' to trigger display of a tiddler in the code view
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6410">> support to [[WidgetMessage: tm-scroll]] for scrolling without animating
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/1d16206188ebd5ca7481a7f565bf5fc4c08239fd">> support for [[WidgetMessage: tm-relink-tiddler]]
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6470">> [[WidgetMessage: tm-open-window]] to support 'top' and 'left' parameters
- 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6523">> new ''matchSelector'' attribute to the EventCatcherWidget
+
 ! Developer Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6409">> support for ''renderEnd()'' method for storyviews
@@ -94,6 +113,7 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 ! Performance Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6327">> support for caching the [[listed Operator]]
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6537">> stylesheet handling to avoid unnecessary refreshes
 
 ! Bug Fixes
 
@@ -102,23 +122,30 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6395">> processing of $:/tags/RawMarkupWikified/TopHead tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6398">> issue whereby renaming tags could result in duplicate tags
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6440">> search results obscured on narrow screens
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6540">> ActionListopsWidget bug with input list items starting with `-`, `+`, `~`, `:` or other character with a special meaning in filters
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/28a91aafa74da04842dbff4b8d0eb7a8dad5dbaa">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/6531]]) refreshing of the ButtonWidget when the `default` attribute changes
 
 ! Acknowledgements
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* <<contributor benwebber>>
 * <<contributor BramChen>>
 * <<contributor btheado>>
+* <<contributor CodaCodr>>
 * <<contributor cdruan>>
 * <<contributor davout1806>>
 * <<contributor EvidentlyCube>>
+* <<contributor FlashSystems>>
 * <<contributor flibbles>>
+* <<contributor FSpark>>
 * <<contributor ibnishak>>
 * <<contributor jc-ose>>
 * <<contributor joshuafontany>>
 * <<contributor linonetwo>>
 * <<contributor Marxsal>>
 * <<contributor nilslindemann>>
+* <<contributor oflg>>
 * <<contributor pmario>>
 * <<contributor rryan>>
 * <<contributor saqimtiaz>>

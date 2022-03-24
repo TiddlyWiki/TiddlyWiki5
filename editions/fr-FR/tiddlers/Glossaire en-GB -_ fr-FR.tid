@@ -1,5 +1,5 @@
 created: 20141217193625476
-modified: 20150624092403261
+modified: 20220304170551125
 title: Glossaire en-GB -> fr-FR
 type: text/vnd.tiddlywiki
 
@@ -8,9 +8,11 @@ type: text/vnd.tiddlywiki
 |background|arrière plan||
 |bug|bogue||
 |core |noyau ||
+|dominant append|ajout prépondérant|//ajouté par prépondérance//|
 |draft|ébauche||
 |empty édition |édition basique ||
 |encryption|cryptage||
+|filter run|séquence de filtre||
 |fixed|corrigé||
 |flexible|souple|maléable |
 |improved|amélioré||

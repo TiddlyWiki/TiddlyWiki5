@@ -1,0 +1,39 @@
+caption: tm-open-window
+created: 20220228140417116
+modified: 20220301180905777
+tags: Messages
+title: WidgetMessage: tm-close-window
+type: text/vnd.tiddlywiki
+
+<<.from-version 5.2.2>>
+The `tm-close-window` [[message|Messages]] closes an additional //browser// window that was opened with [[tm-open-window|WidgetMessage: tm-open-window]]. Specify which window to close by setting the value of <<.param param>> to the string used as <<.param windowID>> when opening the window.
+
+|!Name |!Description |
+|param //{default param}//  |String used as <<.param windowID>> when opening the window |
+
+The `tm-close-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
+
+<<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
+<<.tip """To close all additional browser windows that were opened with [[tm-open-window|WidgetMessage: tm-open-window]] use [[WidgetMessage: tm-close-all-windows]]""">>
+
+<$macrocall $name='wikitext-example-without-html'
+src="""
+<$button>Open Window
+<$action-sendmessage 
+  $message="tm-open-window" 
+  $param="$:/temp/openme" 
+  template="SampleWindowTemplate" 
+  windowTitle="My Window Title"
+  width="400"
+  height="500"
+  windowID="window1"
+  something="I just in over in a variable, and boy is my Hashmap tired." />
+</$button>
+<$button>Close Window
+<$action-sendmessage 
+  $message="tm-close-window" 
+  $param="window1" 
+/>
+</$button>
+""" />
+

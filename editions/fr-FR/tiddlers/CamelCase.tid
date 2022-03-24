@@ -1,11 +1,14 @@
 caption: CamelCase
 created: 20130828185300000
-modified: 20150623062412435
+fr-title: Notation chameau
+modified: 20220304015529727
 tags: Definitions
 title: CamelCase
 type: text/vnd.tiddlywiki
 
-La convention de casse Camel est formée à partir d'une phrase, dont on met en capital la première lettre de chaque mot et dont on supprime les espaces entre eux, formant ainsi un seul et unique mot. De nombreux wiki utilisent CamelCase pour marquer les phrases qui génèrent un lien de façon automatique.
+La <<gf "notation chameau">> (en anglais <<gf "//Camel Case//">>) est une convention de casse formée en passant en majuscule l'initiale de chaque mot d'une phrase et en supprimant les espaces entre les mots, ce qui forme un long mot composé. De nombreux wikis utilisent la <<fr CamelCase>> pour marquer les phrases qui produisent automatiquement un lien.
 
 Exemple&nbsp;:
-ExempleDeCamelCaseQuiGénèreUnLienVersUnNouveauTiddlerPortantCeNom
+ExempleDeNotationChameauQuiProduitUnLienVersUnNouveauTiddlerPortantCeNom
+
+NDT<<:>> Visuellement, l'alternance des lettres en majuscules et en minuscules dans les phrases en notation chameau produit une sorte d'ondulation, comme les bosses d'un chameau.

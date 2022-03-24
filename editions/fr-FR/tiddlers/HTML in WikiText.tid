@@ -1,12 +1,14 @@
 caption: HTML
 created: 20141017141153174
-modified: 20141118192457947
+fr-title: HTML dans le WikiTexte
+modified: 20220227020401008
 tags: WikiText
 title: HTML in WikiText
-fr-title: HTML dans le WikiTexte
 type: text/vnd.tiddlywiki
 
-Les balises HTML (dont les commentaires `<!-- -->`) peuvent être utilisées directement en [[WikiTexte|WikiText]] :
+! Balises HTML et commentaires
+
+Les balises et les commentaires HTML peuvent être utilisées directement en [[WikiTexte|WikiText]]. Par exemple<<:>>
 
 <<wikitexte-exemple "<article class='hello'>
 Ceci est un simple bloc de texte. HelloThere
@@ -14,47 +16,60 @@ Ceci est un simple bloc de texte. HelloThere
 </article>">>
 
 ; Remarque
-* Par conséquent, un mot écrit entre "chevrons" `< >` sera interprété comme une balise HTML, ce qui peut entraîner des effets de bord (notamment à cause de l'inexistence de la balise fermante).<br>À la place, mieux vaut utiliser le [[code HTML|Codes HTML]] des caractères "chevrons" : `&lt;` et `&gt;`
+: Par conséquent, un mot écrit entre "chevrons" `< >` sera interprété comme une balise HTML, ce qui peut entraîner des effets de bord (notamment à cause de l'inexistence de la balise fermante).<br>À la place, mieux vaut utiliser le [[code HTML|Codes HTML]] des caractères "chevrons" : `&lt;` et `&gt;`
 
-! Interprétation du contenu
+!! Commentaires //Pragma//
 
-Par défaut, le contenu d'un élément HTML est interprété en mode texte ("inline mode" en anglais). Cela signifie que les [[formatages de texte|Formatting in WikiText]] (comme du gras ou un exposant) s'appliquent, mais que les formatages de type bloc (comme les tables, les listes ou les titres) ne sont pas reconnus.
+<<.from-version 5.2.0>> Les commentaires peuvent maintenant être librement entremêlés avec les pragmas ou bien à l'intérieur du corps d'un bloc de wikitexte.
 
-Pour que le contenu de l'élément HTML soit interprété en mode bloc ("block mode" en anglais), il faut faire suivre la balise ouvrante de deux retours à la ligne.
+```
+<!-- NOUVEAU ! : Commentaire qui décrit la macro -->
+\define test()
+Un peu de texte <!-- commentaire en ligne -->
+\end
 
-<<wikitexte-exemple "<article class='hello'>
-Ceci est du contenu en ''mode texte''.
+<<test>>
+```
 
-* Les listes ne sont pas reconnues
+! Important
 
--- pas plus que les paragraphes !
-</article>
+<<.tip """[[Les Widgets utilisent la même syntaxe que les balises HTML|Widgets in WikiText]], donc les informations suivantes s'appliquent aussi à eux.""">>
 
----
-<article class='hello'>
+! Mode //bloc// ou mode //texte// ? 
 
-Ceci est du contenu en ''mode bloc''.
+Pour que le contenu d'un élément HTML soit [[interprété|WikiText Parser Modes]] en [[mode bloc|Block Mode WikiText]], la balise ouvrante doit être suivie par deux retours à la ligne.
 
-* Les listes sont reconnues
-</article>">>
+Sans les deux retours à la ligne, le contenu des balises sera [[interprété|WikiText Parser Modes]] en [[mode texte|Inline Mode WikiText]], ce qui signifie que les formatages de mode bloc tels que les tableaux, les listes et les titres ne seront pas reconnus.
+
+Voir aussi <<fr "WikiText parser mode: HTML examples">> et <<fr "WikiText parser mode transitions">>.
+
+! Éléments auto-fermants
+
+Les balises suivantes sont traitées comme si elles étaient vides, ce qui signifie que `<balise>` est traitée comme si c'était `<balise/>`, et qu'aucune balise de fermeture `</balise>` n'est nécessaire. Mais si la balise fermante existe elle est ignorée et traitée comme du texte.
+
+* `<area>`, `<base>`, `<br>`, `<col>`, `<command>`, `<embed>`, `<hr>`, `<img>`, `<input>`, `<keygen>`, `<link>`, `<meta>`, `<param>`, `<source>`, `<track>`, `<wbr>`
+
+Si vous ne fermez pas n'importe quelle autre balise HTML, <<tw>> se comportera comme si les balises manquantes étaient déportées à la fin du tiddler. 
 
 ! Attributs
 
-Les attributs d'une balise HTML peuvent être spécifiés littéralement, à l'aide d'une [[transclusion|Transclusion in WikiText]] ou par l'invocation d'une [[macro|Macros in WikiText]] :
+Par extension à la syntaxe conventionnelle HTML, les attributs des éléments ou widgets peuvent être écrits de différentes façons<<:>>
 
-Par exemple, ici la valeur de l'attribut `href` sera égale à la valeur du tiddler ~MonLienDestination :
+* en tant que chaîne littérale
+* en tant que transclusion de <<fr TextReference>>
+* en tant que transclusion de [[macro ou de variable|Macros in WikiText]]
+* en tant que résultat d'une [[expression de filtre|Filter Expression]]
 
-```
-<a href={{MonLienDestination}}>label du lien</a>
-```
+!! Valeurs littérales d'attributs
 
-Et là, l'attribut est spécifié en invoquant une macro (qui génère elle-même un lien qui peut être paramétré) :
+Les valeurs littérales d'attribut peuvent utiliser différents styles de ponctuation<<:>>
 
-```
-<a href=<<MaMacro "valeur du paramètre">>>label du lien</a>
-```
+* Guillemets simples (c-à-d `attribut='valeur'`)
+* Guillemets doubles (c-à-d `attribut="valeur"`)
+* Triples guillemets doubles (c-à-d `attribut="""valeur"""`)
+* Aucune ponctuation n'est nécessaire pour les valeurs qui ne contiennent pas d'espace (c-à-d `attribut=valeur`)
 
-Les valeurs d'attribut littérales peuvent contenir des retours à la ligne (ignoré par le HTML) :
+Les valeurs littérales d'attribut peuvent contenir des retours à la ligne. Par exemple<<:>>
 
 ```
 <div data-address="Maison Souris,
@@ -62,9 +77,43 @@ Les valeurs d'attribut littérales peuvent contenir des retours à la ligne (ign
 Ratville"/>
 ```
 
-L'utilisation de trois caractères "guillemets doubles" `"""` permet de spécifier des valeurs d'attributs qui contiennent un seul caractère "guillemet double" :
+L'utilisation des triples guillemets doubles `"""` permet de spécifier des valeurs d'attributs qui contiennent des caractères "guillemet double"<<:>>
 
 ```
 <div data-address="""Maison "Souris",
 3 rue des rongeurs,
 Ratville"""/>
+```
+
+!! Valeurs d'attributs par transclusion
+
+Les valeurs d'attributs par transclusion sont encadrées par des doubles accolades autour d'une <<fr TextReference>>, par exemple<<:>>
+
+```
+attr={{tiddler}}
+attr={{!!field}}
+attr={{tiddler!!field}}
+```
+<<.warning "La valeur de l'attribut sera le résultat exact de la transclusion, sans aucune interprétation supplémentaire de <<fr WikiText>>. Toute syntaxe de wiki dans ce résultat sera laissée en l'état.">>
+
+!! Valeur d'attribut par variable
+
+Les valeurs d'attributs par variable sont encadrées par des doubles crochets autour d'un [[appel de macro|Macro Calls in WikiText]], par exemple<<:>>
+
+```
+<div title=<<MaMacro "Jacques">>>
+...
+</div>
+```
+<<.warning "Le texte de la définition de la macro est retrouvé et la substitution des arguments a lieu (c-à-d la syntaxe <<.param $param$>> et <<.param  &#36;(...)&#36;>>). Le texte résultant est affecté à la valeur de l'attribut. Toute syntaxe wiki dans ce texte, y-compris d'autres appels de macros ou des références de variables, sera laissée en l'état.">>
+
+!! Valeurs d'attributs par filtre
+
+Les valeurs d'attributs par filtre sont encadrées par des accolades triples autour d'une [[expression de filtre|Filter Expression]]. Le premier élément de la liste renvoyée par le filtre est affecté à l'attribut, ou une chaîne vide si la liste est vide.
+
+Cet exemple montre comment ajouter un préfixe à une valeur<<:>>
+
+```
+<$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
+```
+<<.warning "La valeur de l'attribut sera le résultat exact du premier élément de la liste renvoyée par le filtre, sans aucune interprétation du <<fr WikiText>>. Toute syntaxe de wiki dans ce résultat sera laissée telle quelle.">>
