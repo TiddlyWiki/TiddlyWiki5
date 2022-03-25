@@ -92,9 +92,7 @@ CheckboxWidget.prototype.getValue = function() {
 			if(this.checkboxUnchecked && !this.checkboxChecked) {
 				return true; // Absence of unchecked value
 			}
-			if(this.checkboxChecked && this.checkboxUnchecked) {
-				return undefined; // Will be rendered as indeterminate
-			}
+			// Do *not* return `undefined` in field or index mode: no indeterminate checkboxes in these modes
 		}
 		if(this.checkboxListField || this.checkboxFilter) {
 			// Same logic applies to lists and filters
