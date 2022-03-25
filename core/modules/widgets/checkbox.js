@@ -115,6 +115,11 @@ CheckboxWidget.prototype.getValue = function() {
 			if(this.checkboxUnchecked && !this.checkboxChecked) {
 				return true; // Absence of unchecked value
 			}
+			if(this.checkboxChecked && this.checkboxUnchecked) {
+				return undefined; // Will be rendered as indeterminate
+			}
+			// Neither specified, so empty list is false, non-empty is true
+			return !!list.length;
 		}
 	} else {
 		if(this.checkboxTag) {
