@@ -1016,6 +1016,42 @@ describe("Widget module", function() {
 			startsOutChecked: true,
 			expectedChange: { "Colors": { colors: "orange yellow red" } }
 		},
+		{
+			testName: "filter mode neither checked nor unchecked specified false -> true",
+			tiddlers: [{title: "Colors"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' default='green' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "green" } }
+		},
+		{
+			testName: "filter mode neither checked nor unchecked specified true -> false",
+			tiddlers: [{title: "Colors", colors: "green"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' default='green' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: true,
+			expectedChange: { "Colors": { colors: "" } }
+		},
+		{
+			testName: "filter mode neither checked nor unchecked no default specified false -> true",
+			tiddlers: [{title: "Colors", colors: ""}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "green" } }
+		},
+		{
+			testName: "filter mode neither checked nor unchecked no default specified true -> false",
+			tiddlers: [{title: "Colors", colors: "green"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: true,
+			expectedChange: { "Colors": { colors: "" } }
+		},
 	];
 
 	/*
