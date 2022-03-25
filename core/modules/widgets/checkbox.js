@@ -27,6 +27,7 @@ CheckboxWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 CheckboxWidget.prototype.render = function(parent,nextSibling) {
+	var value;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -38,8 +39,12 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.setAttribute("class",this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
-	if(this.getValue()) {
+	value = this.getValue();
+	if(value) {
 		this.inputDomNode.setAttribute("checked","true");
+	}
+	if(value === undefined) {
+		this.inputDomNode.indeterminate = true;
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -267,9 +272,13 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var refreshed = false;
+		var refreshed = false, value;
 		if(changedTiddlers[this.checkboxTitle]) {
-			this.inputDomNode.checked = this.getValue();
+			value = this.getValue();
+			this.inputDomNode.checked = !!value;
+			if(value === undefined) {
+				this.inputDomNode.indeterminate = true;
+			}
 			refreshed = true;
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;
