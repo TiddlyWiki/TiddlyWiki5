@@ -1058,13 +1058,9 @@ describe("Widget module", function() {
 		fit('checkbox widget test: ' + data.testName, function() {
 			// Setup
 
-			// Create the wiki
 			var wiki = new $tw.Wiki();
-			// Add test tiddlers
 			wiki.addTiddlers(data.tiddlers);
-			// Construct the widget node
 			var widgetNode = createWidgetNode(parseText(data.widgetText,wiki),wiki);
-			// Render the widget node to the DOM
 			var wrapper = renderWidgetNode(widgetNode);
 
 			// Check initial state
@@ -1074,6 +1070,7 @@ describe("Widget module", function() {
 			expect(Object.getPrototypeOf(widget).getValue.call(widget)).toBe(data.startsOutChecked);
 
 			// Fake an event that toggles the checkbox
+
 			// fakedom elmenets don't have a "checked" property. so we fake it because
 			// Checkbox.prototype.handleChangeEvent looks at the "checked" DOM property
 			widget.inputDomNode.checked = !!widget.inputDomNode.attributes.checked;
@@ -1083,6 +1080,7 @@ describe("Widget module", function() {
 
 			// Check state again: checkbox should be inverse of what it was
 			expect(Object.getPrototypeOf(widget).getValue.call(widget)).toBe(!data.startsOutChecked);
+
 			// Check that tiddler(s) has/have gone through expected change(s)
 			for (const key of Object.keys(data.expectedChange)) {
 				const tiddler = wiki.getTiddler(key);
