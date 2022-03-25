@@ -47,6 +47,23 @@ describe("Widget module", function() {
 // console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
+	// Find a particular type of node from inside the widget tree
+	// Less brittle than wrapper.children[0].children[0] if the parse
+	// tree ever changes in the future
+	function findNodeOfType(targetType, currentNode) {
+		if(currentNode.parseTreeNode && currentNode.parseTreeNode.type === targetType) {
+			return currentNode;
+		} else if(currentNode.children && currentNode.children.length) {
+			var child, result, i;
+			for (i = 0; i < currentNode.children.length; i++) {
+				child = currentNode.children[i];
+				result = findNodeOfType(targetType, child);
+				if(result) return result;
+			}
+		}
+		return undefined;
+	}
+
 	it("should deal with text nodes and HTML elements", function() {
 		var wiki = new $tw.Wiki();
 		// Test parse tree
@@ -305,22 +322,6 @@ describe("Widget module", function() {
 
 			// Check initial state
 
-			// Extract the input node from inside the widget tree for later tests
-			function findNodeOfType(targetType, currentNode) {
-				if(currentNode.parseTreeNode && currentNode.parseTreeNode.type === targetType) {
-					return currentNode;
-				} else if(currentNode.children && currentNode.children.length) {
-					var child;
-					var result;
-					var i;
-					for (i = 0; i < currentNode.children.length; i++) {
-						child = currentNode.children[i];
-						result = findNodeOfType(targetType, child);
-						if(result) return result;
-					}
-				}
-				return undefined;
-			}
 			const widget = findNodeOfType('checkbox', widgetNode);
 			// Verify that the widget is or is not checked as expected
 			expect(Object.getPrototypeOf(widget).getValue.call(widget)).toBe(data.startsOutChecked);
