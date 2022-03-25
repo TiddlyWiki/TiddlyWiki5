@@ -827,26 +827,24 @@ describe("Widget module", function() {
 	 * Test data for checkbox widget tests
 	 */
 
-	const checkboxTestTiddlers = [
-		{title: "TiddlerOne", text: "Jolly Old World", expand: "yes"},
-		{title: "TiddlerTwo", text: "Jolly Old World", expand: "no"},
-	];
-
 	const checkboxTestData = [
 		{
 			testName: "field mode checked",
+			tiddlers: [{title: "TiddlerOne", text: "Jolly Old World", expand: "yes"}],
 			widgetText: "<$checkbox tiddler='TiddlerOne' field='expand' checked='yes' />",
 			startsOutChecked: true,
 			expectedChange: { "TiddlerOne": { expand: undefined } }
 		},
 		{
 			testName: "field mode unchecked",
+			tiddlers: [{title: "TiddlerTwo", text: "Jolly Old World", expand: "no"}],
 			widgetText: "<$checkbox tiddler='TiddlerTwo' field='expand' unchecked='no' />",
 			startsOutChecked: false,
 			expectedChange: { "TiddlerTwo": { expand: undefined } }
 		},
 		{
 			testName: "field mode toggle",
+			tiddlers: [{title: "TiddlerTwo", text: "Jolly Old World", expand: "no"}],
 			widgetText: "<$checkbox tiddler='TiddlerTwo' field='expand' checked='yes' unchecked='no' />",
 			startsOutChecked: false,
 			expectedChange: { "TiddlerTwo": { expand: "yes" } }
@@ -1063,8 +1061,7 @@ describe("Widget module", function() {
 			// Create the wiki
 			var wiki = new $tw.Wiki();
 			// Add test tiddlers
-			wiki.addTiddlers(checkboxTestTiddlers);
-			if(data.tiddlers) wiki.addTiddlers(data.tiddlers);
+			wiki.addTiddlers(data.tiddlers);
 			// Construct the widget node
 			var widgetNode = createWidgetNode(parseText(data.widgetText,wiki),wiki);
 			// Render the widget node to the DOM
