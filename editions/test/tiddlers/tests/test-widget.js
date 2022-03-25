@@ -878,10 +878,24 @@ describe("Widget module", function() {
 			expectedChange: { "Colors": { colors: "orange yellow" } }
 		},
 		{
+			testName: "list mode remove in middle position inverted",
+			tiddlers: [{title: "Colors", colors: "orange red yellow"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' />",
+			startsOutChecked: false,
+			expectedChange: { "Colors": { colors: "orange yellow" } }
+		},
+		{
 			testName: "list mode remove in final position",
 			tiddlers: [{title: "Colors", colors: "orange yellow green"}],
 			widgetText: "<$checkbox tiddler='Colors' listField='colors' checked='green' />",
 			startsOutChecked: true,
+			expectedChange: { "Colors": { colors: "orange yellow" } }
+		},
+		{
+			testName: "list mode remove in final position inverted",
+			tiddlers: [{title: "Colors", colors: "orange yellow red"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' />",
+			startsOutChecked: false,
 			expectedChange: { "Colors": { colors: "orange yellow" } }
 		},
 		{
