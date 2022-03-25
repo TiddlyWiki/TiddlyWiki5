@@ -1081,7 +1081,7 @@ describe("Widget module", function() {
 
 			const widget = findNodeOfType('checkbox', widgetNode);
 			// Verify that the widget is or is not checked as expected
-			expect(Object.getPrototypeOf(widget).getValue.call(widget)).toBe(data.startsOutChecked);
+			expect(widget.getValue()).toBe(data.startsOutChecked);
 
 			// Fake an event that toggles the checkbox
 
@@ -1090,10 +1090,10 @@ describe("Widget module", function() {
 			widget.inputDomNode.checked = !!widget.inputDomNode.attributes.checked;
 			// Now simulate checking the box
 			widget.inputDomNode.checked = !widget.inputDomNode.checked;
-			Object.getPrototypeOf(widget).handleChangeEvent.call(widget, null);
+			widget.handleChangeEvent(null);
 
 			// Check state again: checkbox should be inverse of what it was
-			expect(Object.getPrototypeOf(widget).getValue.call(widget)).toBe(!data.startsOutChecked);
+			expect(widget.getValue()).toBe(!data.startsOutChecked);
 
 			// Check that tiddler(s) has/have gone through expected change(s)
 			for (const key of Object.keys(data.expectedChange)) {
