@@ -837,17 +837,17 @@ describe("Widget module", function() {
 		},
 		{
 			testName: "field mode unchecked",
-			tiddlers: [{title: "TiddlerTwo", text: "Jolly Old World", expand: "no"}],
-			widgetText: "<$checkbox tiddler='TiddlerTwo' field='expand' unchecked='no' />",
+			tiddlers: [{title: "TiddlerOne", text: "Jolly Old World", expand: "no"}],
+			widgetText: "<$checkbox tiddler='TiddlerOne' field='expand' unchecked='no' />",
 			startsOutChecked: false,
-			expectedChange: { "TiddlerTwo": { expand: undefined } }
+			expectedChange: { "TiddlerOne": { expand: undefined } }
 		},
 		{
 			testName: "field mode toggle",
-			tiddlers: [{title: "TiddlerTwo", text: "Jolly Old World", expand: "no"}],
-			widgetText: "<$checkbox tiddler='TiddlerTwo' field='expand' checked='yes' unchecked='no' />",
+			tiddlers: [{title: "TiddlerOne", text: "Jolly Old World", expand: "no"}],
+			widgetText: "<$checkbox tiddler='TiddlerOne' field='expand' checked='yes' unchecked='no' />",
 			startsOutChecked: false,
-			expectedChange: { "TiddlerTwo": { expand: "yes" } }
+			expectedChange: { "TiddlerOne": { expand: "yes" } }
 		},
 		{
 			testName: "list mode add",
