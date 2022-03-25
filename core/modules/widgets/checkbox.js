@@ -67,12 +67,17 @@ CheckboxWidget.prototype.getValue = function() {
 				return tiddler.hasTag(this.checkboxTag);
 			}
 		}
-		if(this.checkboxField) {
+		if(this.checkboxField || this.checkboxIndex) {
+			// Same logic applies to fields and indexes
 			var value;
-			if($tw.utils.hop(tiddler.fields,this.checkboxField)) {
-				value = tiddler.fields[this.checkboxField] || "";
+			if(this.checkboxField) {
+				if($tw.utils.hop(tiddler.fields,this.checkboxField)) {
+					value = tiddler.fields[this.checkboxField] || "";
+				} else {
+					value = this.checkboxDefault || "";
+				}
 			} else {
-				value = this.checkboxDefault || "";
+				value = this.wiki.extractTiddlerDataItem(tiddler,this.checkboxIndex,this.checkboxDefault || "");
 			}
 			if(value === this.checkboxChecked) {
 				return true;
@@ -80,14 +85,15 @@ CheckboxWidget.prototype.getValue = function() {
 			if(value === this.checkboxUnchecked) {
 				return false;
 			}
-		}
-		if(this.checkboxIndex) {
-			var value = this.wiki.extractTiddlerDataItem(tiddler,this.checkboxIndex,this.checkboxDefault || "");
-			if(value === this.checkboxChecked) {
-				return true;
+			// Neither value found: were both specified?
+			if(this.checkboxChecked && !this.checkboxUnchecked) {
+				return false; // Absence of checked value
 			}
-			if(value === this.checkboxUnchecked) {
-				return false;
+			if(this.checkboxUnchecked && !this.checkboxChecked) {
+				return true; // Absence of unchecked value
+			}
+			if(this.checkboxChecked && this.checkboxUnchecked) {
+				return undefined; // Will be rendered as indeterminate
 			}
 		}
 		if(this.checkboxListField || this.checkboxFilter) {

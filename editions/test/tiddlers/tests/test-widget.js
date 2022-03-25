@@ -839,7 +839,6 @@ describe("Widget module", function() {
 			startsOutChecked: true,
 			expectedChange: { "TiddlerOne": { expand: undefined } }
 		},
-		// Fails because checkbox logic can't handle this case. Will fix.
 		{
 			testName: "field mode unchecked",
 			widgetText: "<$checkbox tiddler='TiddlerTwo' field='expand' unchecked='no' />",
