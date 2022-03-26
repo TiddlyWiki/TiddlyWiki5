@@ -1,25 +1,39 @@
 caption: Forum
 created: 20140721121924384
 fr-title: Forum
-modified: 20150614155153966
+modified: 20220217174719926
 tags: Community
 title: Forums
 type: text/vnd.tiddlywiki
 
-! Utilisateurs
+! Forum en français
 
-Les groupes de discussion ~TiddlyWiki sont des listes de publipostage pour discuter de ~TiddlyWiki<<:>> demandes d'aide, annonces de nouvelles version et plugins, échanges sur les nouvelles fonctionnalités, ou simples partages d'expériences. Vous pouvez participer via le site web associé, ou souscrire par email.
+La communauté francophone sur <<tw>> a son forum, venez contribuer<<!>>
 
-* Le groupe principal de ~TiddlyWiki<<:>> http://groups.google.com/group/TiddlyWiki
-*> Notez qu'il n'est nul besoin d'avoir un compte Google pour vous joindre aux groupes de discussion. Souscrire par l'envoi d'un email à mailto:tiddlywiki+subscribe@googlegroups.com ou mailto:tiddlywikidev+subscribe@googlegroups.com.
-* Visualiser les enregistrements de nos réguliers [[TiddlyWiki Hangouts]]
-* Suivre [[@TiddlyWiki sur Twitter|http://twitter.com/TiddlyWiki]] pour les dernières nouvelles.
+https://forum.tiddlywiki.fr/
 
-! Développeurs
+! Forums officiels
 
-* Le groupe TiddlyWikiDev pour les dévelopeurs<<:>> http://groups.google.com/group/TiddlyWikiDev
-*> Notez qu'il n'est nul besoin d'avoir un compte Google pour vous joindre aux groupes de discussion. Souscrire par l'envoi d'un email à mailto:tiddlywiki+subscribe@googlegroups.com ou mailto:tiddlywikidev+subscribe@googlegroups.com.
-* Suivre [[@TiddlyWiki sur Twitter|http://twitter.com/TiddlyWiki]] pour les dernières nouvelles.
-* Impliquez-vous dans le [[développement sur GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+Le nouveau forum officiel pour discuter de <<tw>><<:>> demandes d'aide, annonces de nouvelles version et plugins, échanges sur les nouvelles fonctionnalités, ou simples partages d'expériences. Vous pouvez participer via le site web associé, ou souscrire par email.
 
-Les nouvelles versions de TiddlyWiki, TiddlyDesktop et TiddlyFox sont annoncés par les groupes de discussion et [[Twitter|https://twitter.com/TiddlyWiki]] (vous pouvez aussi souscrire au flux Atom/RSS des [[versions de TiddlyWiki sur GitHub|https://github.com/jermolene/tiddlywiki5/releases.atom]])
+https://talk.tiddlywiki.org/
+
+Notez que talk.tiddlywiki.org est un service communautaire que nous hébergeons et maintenons nous-mêmes. Les modestes frais de mise à disposition du site sont couverts par les contributions de la communauté.
+
+Pour le confort de la communauté, l'ancien groupe <<tw>>, hébergé sur Google Groups depuis 2005, reste fonctionnel.
+
+https://groups.google.com/group/TiddlyWiki
+
+! Forums des développeurs
+
+{{Developers}}
+
+! Autres forums
+
+* [[TiddlyWiki Subreddit|https://www.reddit.com/r/TiddlyWiki5/]]
+* Tchatchez avec Gitter sur https://gitter.im/TiddlyWiki/public<<!>>
+* Tchatchez avec Discord sur https://discord.gg/HFFZVQ8
+
+!! Documentation
+
+Il existe un groupe de discussion spécialement dédié aux initiatives d'amélioration de la documentation<<:>> https://groups.google.com/group/tiddlywikidocs

@@ -639,14 +639,25 @@ Lookup a given tiddler and return a list of all the tiddlers that include it in 
 */
 exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 	fieldName = fieldName || "list";
-	var titles = [];
-	this.each(function(tiddler,title) {
-		var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
-		if(list && list.indexOf(targetTitle) !== -1) {
-			titles.push(title);
-		}
+	var wiki = this;
+	var listings = this.getGlobalCache("listings-" + fieldName,function() {
+		var listings = Object.create(null);
+		wiki.each(function(tiddler,title) {
+			var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
+			if(list) {
+				for(var i = 0; i < list.length; i++) {
+					var listItem = list[i],
+						listing = listings[listItem] || [];
+					if (listing.indexOf(title) === -1) {
+						listing.push(title);
+					}
+					listings[listItem] = listing;
+				}
+			}
+		});
+		return listings;
 	});
-	return titles;
+	return listings[targetTitle] || [];
 };
 
 /*
@@ -822,12 +833,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 		switch(tiddler.fields.type) {
 			case "application/json":
 				// JSON tiddler
-				try {
-					data = JSON.parse(tiddler.fields.text);
-				} catch(ex) {
-					return defaultData;
-				}
-				return data;
+				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
 			case "application/x-tiddler-dictionary":
 				return $tw.utils.parseFields(tiddler.fields.text);
 		}
@@ -1201,23 +1207,28 @@ Return an array of tiddler titles that match a search string
 	text: The text string to search for
 	options: see below
 Options available:
-	source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
+	source: an iterator function for the source tiddlers, called source(iterator),
+		where iterator is called as iterator(tiddler,title)
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
 	field: If specified, restricts the search to the specified field, or an array of field names
 	anchored: If true, forces all but regexp searches to be anchored to the start of text
 	excludeField: If true, the field options are inverted to specify the fields that are not to be searched
+
 	The search mode is determined by the first of these boolean flags to be true
 		literal: searches for literal string
 		whitespace: same as literal except runs of whitespace are treated as a single space
 		regexp: treats the search term as a regular expression
-		words: (default) treats search string as a list of tokens, and matches if all tokens are found, regardless of adjacency or ordering
+		words: (default) treats search string as a list of tokens, and matches if all tokens are found, 
+			regardless of adjacency or ordering
+		some: treats search string as a list of tokens, and matches if at least ONE token is found
 */
 exports.search = function(text,options) {
 	options = options || {};
 	var self = this,
 		t,
+		regExpStr="",
 		invert = !!options.invert;
 	// Convert the search string into a regexp for each term
 	var terms, searchTermsRegExps,
@@ -1244,7 +1255,18 @@ exports.search = function(text,options) {
 			searchTermsRegExps = null;
 			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
 		}
-	} else {
+	} else if(options.some) {
+		terms = text.trim().split(/ +/);
+		if(terms.length === 1 && terms[0] === "") {
+			searchTermsRegExps = null;
+		} else {
+			searchTermsRegExps = [];
+			for(t=0; t<terms.length; t++) {
+				regExpStr += (t===0) ? anchor + $tw.utils.escapeRegExp(terms[t]) : "|" + anchor + $tw.utils.escapeRegExp(terms[t]);
+			}
+			searchTermsRegExps.push(new RegExp("(" + regExpStr + ")",flags));
+		}
+	} else { // default: words
 		terms = text.split(/ +/);
 		if(terms.length === 1 && terms[0] === "") {
 			searchTermsRegExps = null;
@@ -1255,7 +1277,7 @@ exports.search = function(text,options) {
 			}
 		}
 	}
-	// Accumulate the array of fields to be searched or excluded from the search
+// Accumulate the array of fields to be searched or excluded from the search
 	var fields = [];
 	if(options.field) {
 		if($tw.utils.isArray(options.field)) {

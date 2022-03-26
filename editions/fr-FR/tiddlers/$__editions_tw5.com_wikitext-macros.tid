@@ -1,5 +1,5 @@
 created: 20150531155638729
-modified: 20150601094935758
+modified: 20220304175111424
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
@@ -15,7 +15,7 @@ Affichera ceci&nbsp;:
 
 $src$
 
-... Génération du HTML&nbsp;:
+Code HTML correspondant&nbsp;:
 
 $$$text/vnd.tiddlywiki>text/html
 $src$

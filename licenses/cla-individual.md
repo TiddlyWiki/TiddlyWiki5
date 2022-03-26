@@ -368,7 +368,7 @@ Mark Kerrigan, @markkerrigan, 2019/08/24
 
 Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
 
-Nils-Hero Lindemann, @heronils, 2019/08/26
+Nils Lindemann, @nilslindemann, 2022/01/10
 
 Marica Odagaki, @ento, 2019/08/30
 
@@ -464,6 +464,8 @@ J. Song, @8d1h, 2021/08/05
 
 Soren Bjornstad, @sobjornstad, 2021/08/18
 
+Boris Mann, @bmann, 2021/09/28
+ 
 Maurycy Zarzycki, @evidentlycube, 2021-10-01
 
 Brian Theado, @btheado, 2021-10-10
@@ -471,3 +473,17 @@ Brian Theado, @btheado, 2021-10-10
 @Telumire, 2021-10-18
 
 @eiro10, 2021-11-14
+
+Fred, @tw-FRed, 2021/12/04
+
+Joseph Cosentino, @jc-ose, 2021-12-14
+
+@davout1806, 2021/12/17
+
+@pmario, @TiddlyVee, 2022/02/26
+
+@FSpark, 2022/03/08
+
+Guang Li, @oflg, 2022/03/12
+
+Dam S., @damscal, 2022/03/24

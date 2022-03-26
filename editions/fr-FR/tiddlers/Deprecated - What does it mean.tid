@@ -1,0 +1,17 @@
+created: 20170126142116898
+fr-title: Obsolète - définition
+modified: 20220303002330037
+title: Deprecated - What does it mean
+type: text/vnd.tiddlywiki
+
+Avant tout<<:>> ''Restez calme<<!>>''
+
+{{$:/deprecated}}
+
+Pour <<tw>>, cela signifie que vous ne devriez plus utiliser ce mécanisme pour du nouveau contenu, ''et que vous devriez mettre à jour votre contenu existant''<<!>>
+
+Les fonctionnalités obsolètes sont identifiées avec un style particulier. Voir<<:>> <<fr  "How to apply custom styles by tag">>
+
+''Tiddlers étiquetés `$:/deprecated`'' :
+
+><<list-links "[tag[$:/deprecated]else[(aucun)]]">>

@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20150620212025034
+modified: 20220304140636794
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -30,14 +30,14 @@ type: text/vnd.tiddlywiki
 \define .attr(_) <code class="doc-attr">$_$</code>
 \define .param(_) <code class="doc-param">$_$</code>
 
-\define .mtitle(_) $_$ Macro
-\define .otitle(_) $_$ Operator
-\define .vtitle(_) $_$ Variable
+\define .mtitle(_) Macro $_$
+\define .otitle(_) Opérateur $_$
+\define .vtitle(_) Variable $_$
 
 \define .link(_,to) <$link to="$to$">$_$</$link>
 \define .clink(_,to) <span class="doc-clink"><<.link """$_$""" "$to$">></span>
 \define .dlink(_,to) <$macrocall $name=".link" _=<<.def "$_$">> to="$to$">/>
-\define .dlink-ex(_,to) <a href="$to$" class="tc-tiddlylink-external" target="_blank"><<.def "$_$">></a>
+\define .dlink-ex(_,to) <a href="$to$" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><<.def "$_$">></a>
 \define .flink(to) <$macrocall $name=".link" _=<<.field {{$to$!!caption}}>> to="$to$"/>
 \define .mlink(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to=<<.mtitle "$_$">>/>
 \define .mlink2(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to="$to$"/>
@@ -63,6 +63,8 @@ type: text/vnd.tiddlywiki
 
 \define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
 
+\define .icon(_) <span class="doc-icon">{{$_$}}</span>
+
 \define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
 \define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
 
@@ -81,10 +83,12 @@ C'est un exemple de tiddler. Voir [[Macros Table des matières (Exemples)|Table-
 \define .example(n,eg,egvar:NO-SUCH-VAR)
 <div class="doc-example">
 <$reveal default="$egvar$" type="match" text="NO-SUCH-VAR">
+	<$macrocall $name="copy-to-clipboard-above-right" src="""$eg$"""/>
 	<$codeblock code="""$eg$"""/>
 </$reveal>
 <$reveal default="$egvar$" type="nomatch" text="NO-SUCH-VAR">
 	<!-- allow an example to contain """ -->
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<$egvar$>>/>
 	<$codeblock code=<<$egvar$>>/>
 </$reveal>
 <$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$n$]]" variable=".state">
@@ -108,3 +112,63 @@ C'est un exemple de tiddler. Voir [[Macros Table des matières (Exemples)|Table-
 </$reveal>
 </$list>
 \end
+
+\define .bad-example(eg)
+<table class="doc-bad-example">
+<tbody>
+<tr class="evenRow">
+<td><span class="tc-inline-style" style="font-size:1.5em;">&#9888;</span> Attention&nbsp;:<br> Ne faites pas comme ça !</td>
+<td>
+
+$eg$
+</td>
+</tr>
+</tbody>
+</table>
+\end
+
+\define .link-badge(text,link,colour)
+<a href=<<__link__>> class="doc-link-badge" style="background-color:$colour$;" target="_blank" rel="noopener noreferrer"><$text text=<<__text__>>/></a>
+\end
+
+
+\define .link-badge-added(link,colour:#ffe246) <<.link-badge "ajouté" """$link$""" """$colour$""">>
+\define .link-badge-addendum(link,colour:#fcc84a) <<.link-badge "addendum" """$link$""" """$colour$""">>
+\define .link-badge-extended(link,colour:#f9a344) <<.link-badge "étendu" """$link$""" """$colour$""">>
+\define .link-badge-fixed(link,colour:#ffa86d) <<.link-badge "corrigé" """$link$""" """$colour$""">>
+\define .link-badge-here(link,colour:#d88e63) <<.link-badge "ici" """$link$""" """$colour$""">>
+\define .link-badge-hide(link,colour:#9d959f) <<.link-badge "cacher" """$link$""" """$colour$""">>
+\define .link-badge-improved(link,colour:#7593c7) <<.link-badge "amélioré" """$link$""" """$colour$""">>
+\define .link-badge-modified(link,colour:#7f99c9) <<.link-badge "modifié" """$link$""" """$colour$""">>
+\define .link-badge-removed(link,colour:#a9aabc) <<.link-badge "retiré" """$link$""" """$colour$""">>
+\define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renommé" """$link$""" """$colour$""">>
+\define .link-badge-updated(link,colour:#91ba66) <<.link-badge "mis à jour" """$link$""" """$colour$""">>
+
+\define .tiddler-fields(tiddler)
+<$tiddler tiddler=<<__tiddler__>>>
+<div class="doc-tiddler-fields">
+<h2>
+<$link>
+<span class="tc-tiddler-title-icon">{{||$:/core/ui/TiddlerIcon}}</span><$text text=<<currentTiddler>>/>
+</$link>
+</h2>
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -title" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>
+</div>
+</$tiddler>
+\end
+
+\define .banner-credits(credit,url)
+<img src=<<__url__>> width="140" style="float:left;margin-right:0.5em;"/>
+
+$credit$
+
+<div style="clear:both;">
+
+</div>
+\end
+
+<pre><$view field="text"/></pre>

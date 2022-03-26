@@ -1,9 +1,9 @@
+caption: transclude
 created: 20130824142500000
-modified: 20140717175900970
+modified: 20220122190609396
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
-caption: transclude
 
 ! Introduction
 
@@ -22,12 +22,12 @@ The TranscludeWidget treats any contained content as a fallback if the target of
 
 ! Parsing modes
 
-TiddlyWiki parses text in two modes:
+TiddlyWiki [[parses text in two modes|WikiText Parser Modes]]:
 
-* ''inline'' mode recognises character formatting such as emphasis, links
-* ''block'' mode recognises all the ''inline'' formatting, and adds block formatting such as tables, headings and lists
+* [[inline mode|Inline Mode WikiText]] recognises character formatting such as emphasis, links
+* [[block mode|Block Mode WikiText]] recognises all the ''inline'' formatting, and adds block formatting such as tables, headings and lists
 
-Usually, the mode is determined by whether the transclude widget itself has been parsed in block or inline mode. This can be overridden with the `mode` attribute.
+Usually, the mode is determined by whether the transclude widget itself has been parsed in block or inline mode. This can be overridden with the <<.attr mode>> attribute.
 
 For example, consider tiddler "A" with this content:
 
@@ -57,6 +57,7 @@ This can be fixed by amending tiddler "A":
 #<$transclude tiddler="B" mode="block"/>
 # Item two
 ```
+See also these [[other examples|WikiText parser mode: transclusion examples]].
 
 ! ~SubTiddler Access
 

@@ -33,8 +33,8 @@ title: $:/core/ui/EditTemplate
 	newTagNameSelectionTiddler=<<qualify "$:/temp/NewTagName/selected-item">>
 	typeInputTiddler=<<qualify "$:/temp/Type/input">>
 	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
-<$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">>>
-<$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>>>
+<$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">> tag="div">
+<$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>> tag="div">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
 <$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>>/>

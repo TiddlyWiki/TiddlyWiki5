@@ -239,7 +239,7 @@ exports.parseFilterVariable = function(source) {
 };
 
 /*
-Look for an HTML attribute definition. Returns null if not found, otherwise returns {type: "attribute", name:, valueType: "string|indirect|macro", value:, start:, end:,}
+Look for an HTML attribute definition. Returns null if not found, otherwise returns {type: "attribute", name:, type: "filtered|string|indirect|macro", value|filter|textReference:, start:, end:,}
 */
 exports.parseAttribute = function(source,pos) {
 	var node = {
@@ -248,7 +248,7 @@ exports.parseAttribute = function(source,pos) {
 	// Define our regexps
 	var reAttributeName = /([^\/\s>"'=]+)/g,
 		reUnquotedAttribute = /([^\/\s<>"'=]+)/g,
-		reFilteredValue = /\{\{\{(.+?)\}\}\}/g,
+		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
 		reIndirectValue = /\{\{([^\}]+)\}\}/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);

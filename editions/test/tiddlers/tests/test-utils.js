@@ -169,6 +169,16 @@ describe("Utility tests", function() {
 		expect(cv("1.1.1","1.1.2")).toEqual(-1);
 	});
 
+	it("should insert strings into sorted arrays", function() {
+		expect($tw.utils.insertSortedArray([],"a").join(",")).toEqual("a");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"a").join(",")).toEqual("a,b,c,d");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"d").join(",")).toEqual("b,c,d");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"f").join(",")).toEqual("b,c,d,f");
+		expect($tw.utils.insertSortedArray(["b","c","d","e"],"f").join(",")).toEqual("b,c,d,e,f");
+		expect($tw.utils.insertSortedArray(["b","c","g"],"f").join(",")).toEqual("b,c,f,g");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"ccc").join(",")).toEqual("b,c,ccc,d");
+	});
+
 });
 
 })();

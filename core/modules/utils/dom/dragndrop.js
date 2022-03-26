@@ -16,21 +16,23 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 Options:
 
 domNode: dom node to make draggable
+selector: CSS selector to identify element within domNode to be used as drag handle (optional)
 dragImageType: "pill", "blank" or "dom" (the default)
 dragTiddlerFn: optional function to retrieve the title of tiddler to drag
 dragFilterFn: optional function to retreive the filter defining a list of tiddlers to drag
-widget: widget to use as the contect for the filter
+widget: widget to use as the context for the filter
 */
 exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
-		domNode = options.domNode;
+		domNode = options.domNode,
+		dragHandle = options.selector && domNode.querySelector(options.selector) || domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if((domNode.tagName || "").toLowerCase() !== "a") {
-		domNode.setAttribute("draggable","true");
+		dragHandle.setAttribute("draggable","true");
 	}
 	// Add event handlers
-	$tw.utils.addEventListeners(domNode,[
+	$tw.utils.addEventListeners(dragHandle,[
 		{name: "dragstart", handlerFunction: function(event) {
 			if(event.dataTransfer === undefined) {
 				return false;
@@ -45,7 +47,7 @@ exports.makeDraggable = function(options) {
 			}
 			var titleString = $tw.utils.stringifyList(titles);
 			// Check that we've something to drag
-			if(titles.length > 0 && event.target === domNode) {
+			if(titles.length > 0 && event.target === dragHandle) {
 				// Mark the drag in progress
 				$tw.dragInProgress = domNode;
 				// Set the dragging class on the element being dragged
@@ -198,7 +200,7 @@ var importDataTypes = [
 ];
 
 function parseJSONTiddlers(json,fallbackTitle) {
-	var data = JSON.parse(json);
+	var data = $tw.utils.parseJSONSafe(json);
 	if(!$tw.utils.isArray(data)) {
 		data = [data];
 	}
