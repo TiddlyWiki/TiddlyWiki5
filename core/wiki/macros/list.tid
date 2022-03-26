@@ -7,9 +7,9 @@ tags: $:/tags/Macro
 <$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
 <$subtype$>
 <$link to={{!!title}}>
-<$transclude field="caption">
+<$view field="caption">
 <$view field="title"/>
-</$transclude>
+</$view>
 </$link>
 </$subtype$>
 </$list>
@@ -31,9 +31,9 @@ tags: $:/tags/Macro
 <div>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
-<$transclude field="caption">
+<$view field="caption">
 <$view field="title"/>
-</$transclude>
+</$view>
 </$link>
 </$transclude>
 </div>
