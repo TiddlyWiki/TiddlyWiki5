@@ -2,42 +2,4 @@ title: expected-html-tabs-vertical
 type: text/html
 description: Vertical tabs test -- This is the expected HTML output from the test in test-wikitext-tabs-macro.js
 
-<p>
-
-<div class="tc-tab-set tc-vertical">
-<div class="tc-tab-buttons tc-vertical">
-<button class="">
-
-
-
-t 1
-
-</button><button class=" tc-tab-selected">
-
-
-
-t 2
-
-</button><button class="">
-
-
-
-t 3
-
-</button><button class="">
-
-
-
-
-TabFour
-
-
-</button>
-</div>
-<div class="tc-tab-divider tc-vertical"></div>
-<div class="tc-tab-content tc-vertical">
-<div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal"><p>Text tab 2</p></div><div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal" hidden="true"></div>
-</div>
-</div>
-
-</p>
+<p><div class="tc-tab-set tc-vertical"><div class="tc-tab-buttons tc-vertical"><button class="">t 1</button><button class=" tc-tab-selected">t 2</button><button class="">t 3</button><button class="">TabFour</button></div><div class="tc-tab-divider tc-vertical"></div><div class="tc-tab-content tc-vertical"><div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal"><p>Text tab 2</p></div><div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal" hidden="true"></div></div></div></p>
