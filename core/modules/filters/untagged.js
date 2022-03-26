@@ -19,7 +19,7 @@ exports.untagged = function(source,operator,options) {
 	var results = [],
 		expected = (operator.prefix === "!");
 	source(function(tiddler,title) {
-		if((tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0) === expected) {
+		if(((tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0) === expected) || (!tiddler && !expected)) {
 			results.push(title);
 		}
 	});

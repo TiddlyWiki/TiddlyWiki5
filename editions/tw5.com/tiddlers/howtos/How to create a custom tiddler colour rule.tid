@@ -1,0 +1,36 @@
+created: 20211206114114698
+modified: 20211206165150302
+tags: Learning Cascades [[Customise TiddlyWiki]]
+title: How to create a custom tiddler colour rule
+type: text/vnd.tiddlywiki
+
+Here we show how to add a rule to the [[Tiddler Colour Cascade]] that causes tiddlers with the tag <<tag "TableOfContents">> to be given a bright blue colour and tiddlers with the tag <<tag "Working with TiddlyWiki">> to be given a dark purple colour.
+
+<<.tip "[[How to create a custom tiddler icon rule]] describes how the same tiddlers have been given a custom icon">>
+
+First, we add a new step to the tiddler colour cascade. The new filter step is:
+
+```
+[tag[TableOfContents]then[#1e90ff]]
+[tag[Working with TiddlyWiki]then[darkorchid]]
+```
+
+It can be read as:
+
+```
+If the tiddler has the tag "TableOfContents" then return the colour #1e90ff
+Else if the tiddler has the tag "Working with TiddlyWiki" then return the colour darkorchid
+```
+
+The tiddler colour cascade is defined by the tag <<tag "$:/tags/TiddlerColourFilter">>, so we need to create a configuration tiddler with that tag.
+
+We also need to make sure that it is inserted at the correct point in the cascade:
+
+* The new rule must be after the "colour-field" rule to ensure that tiddlers with an explicit ''color'' field will respect the value of that field
+* The new rule must be before the "default" icon otherwise it will never be seen if the default colour is specified
+
+The control panel "Cascades" tab shows that this can be achieved by inserting the new step immediately before the default step using the `list-before` field.
+
+The full list of fields in the configuration tiddler is:
+
+<<.tiddler-fields "$:/_tw5.com/CustomTiddlerColourCascadeDemo">>

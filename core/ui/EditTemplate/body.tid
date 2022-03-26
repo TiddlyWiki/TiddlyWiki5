@@ -1,4 +1,4 @@
 title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
-<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/EditTemplateBodyFilter]get[text]] :and[!is[blank]else[$:/core/ui/EditTemplate/body/default]] }}} />
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/EditTemplateBodyFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/EditTemplate/body/default]] }}} />

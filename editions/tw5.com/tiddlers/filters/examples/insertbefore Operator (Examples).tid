@@ -1,0 +1,28 @@
+created: 20220223004441865
+modified: 20220223004441865
+tags: [[Operator Examples]] [[insertbefore Operator]]
+title: insertbefore Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define before-title() Friday
+\define missing-title() Yesterday
+\define display-variable(name)
+''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
+\end
+
+These examples use the following predefined variables:
+
+* <<display-variable before-title>>
+* <<display-variable missing-title>>
+
+<<.operator-example 1 """[list[Days of the Week]insertbefore[Today]]""">>
+
+<<.operator-example 2 """[list[Days of the Week]insertbefore[Today],[Tuesday]]""">>
+
+<<.operator-example 3 """[list[Days of the Week]insertbefore[Today],<before-title>]""">>
+
+<<.operator-example 4 """[list[Days of the Week]insertbefore:before-title[Today]]""">>
+
+<<.operator-example 5 """[list[Days of the Week]insertbefore[Today],<missing-title>]""">>
+
+<<.operator-example 6 """[list[Days of the Week]insertbefore:missing-title[Today]]""">>

@@ -1,6 +1,6 @@
 caption: Transclusion
 created: 20131205160146648
-modified: 20150220161347000
+modified: 20220122193352028
 tags: WikiText
 title: Transclusion in WikiText
 type: text/vnd.tiddlywiki
@@ -48,3 +48,4 @@ See also:
 * TemplateTiddlers
 * TranscludeWidget
 * [[Transclusion and Substitution]]
+* [[WikiText parser mode: transclusion examples]]

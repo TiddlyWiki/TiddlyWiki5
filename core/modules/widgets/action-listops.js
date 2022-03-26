@@ -71,8 +71,8 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 	}
 	if(this.subfilter) {
 		var inputList = this.wiki.getTiddlerList(this.target,field,index),
-			subfilter = $tw.utils.stringifyList(inputList) + " " + this.subfilter;
-		this.wiki.setText(this.target, field, index, $tw.utils.stringifyList(this.wiki.filterTiddlers(subfilter,this)));
+			subfilter = "[all[]] " + this.subfilter;
+		this.wiki.setText(this.target, field, index, $tw.utils.stringifyList(this.wiki.filterTiddlers(subfilter,this,this.wiki.makeTiddlerIterator(inputList))));
 	}
 	if(this.filtertags) {
 		var tiddler = this.wiki.getTiddler(this.target),

@@ -28,7 +28,7 @@ The content of the `<$edit-text>` widget is ignored.
 |autocomplete |<<.from-version 5.1.23>> An optional string to provide a hint to the browser how to handle autocomplete for this input |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
 |type |Overrides the generated HTML editing element `type` attribute |
-|size |The size of the input field (in characters) |
+|size |The size of the input field (in characters). This exact result depends on browser and font. Use the `class` attribute to style width for precise control |
 |autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |
 |minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
 |rows|Sets the rows attribute of a generated textarea |

@@ -3,6 +3,6 @@ tags: $:/tags/ViewTemplate
 
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 
-<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />
 
 </$reveal>

@@ -152,7 +152,7 @@ exports.startup = function() {
 				if(event.data.status.charAt(0) === "2") {
 					if(event.data.cookies) {
 						if(event.data.cookies.type === "save-info") {
-							var tiddlers = JSON.parse(event.data.body);
+							var tiddlers = $tw.utils.parseJSONSafe(event.data.body);
 							$tw.utils.each(tiddlers,function(tiddler) {
 								$tw.wiki.addTiddler(new $tw.Tiddler($tw.wiki.getCreationFields(),tiddler,{
 									title: event.data.cookies.infoTitlePrefix + event.data.cookies.url + "/" + tiddler.title,
@@ -170,7 +170,7 @@ exports.startup = function() {
 								},$tw.wiki.getModificationFields()));
 							});
 						} else if(event.data.cookies.type === "save-tiddler") {
-							var tiddler = JSON.parse(event.data.body);
+							var tiddler = $tw.utils.parseJSONSafe(event.data.body);
 							$tw.wiki.addTiddler(new $tw.Tiddler(tiddler));
 						}
 					}

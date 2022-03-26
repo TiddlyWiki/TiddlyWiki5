@@ -1,0 +1,10 @@
+created: 20211109165213041
+modified: 20220227211343988
+tags: [[Message Examples]]
+title: SampleWindowTemplate
+
+
+| ''Name:'' |<$edit field=name tag="input" />|
+|''Rank:'' |<$edit field=rank tag="input" />|
+
+''Variable 'something' contains:'' <<something>>

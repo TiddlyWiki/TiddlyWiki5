@@ -128,6 +128,21 @@ describe("HTML tag new parser tests", function() {
 		expect($tw.utils.parseAttribute("p=\"blah\"  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 8 }
 		);
+		expect($tw.utils.parseAttribute("p=\"bl\nah\"  ",0)).toEqual(
+			{ type : 'string', start : 0, name : 'p', value : 'bl\nah', end : 9 }
+		);
+		expect($tw.utils.parseAttribute("p={{{blah}}}  ",0)).toEqual(
+			{ type : 'filtered', start : 0, name : 'p', filter : 'blah', end : 12 }
+		);
+		expect($tw.utils.parseAttribute("p={{{bl\nah}}}  ",0)).toEqual(
+			{ type : 'filtered', start : 0, name : 'p', filter : 'bl\nah', end : 13 }
+		);
+		expect($tw.utils.parseAttribute("p={{{ [{$:/layout}] }}}  ",0)).toEqual(
+			{ type : 'filtered', start : 0, name : 'p', filter : ' [{$:/layout}] ', end : 23 }
+		);
+		expect($tw.utils.parseAttribute("p={{blah}}  ",0)).toEqual(
+			{ type : 'indirect', start : 0, name : 'p', textReference : 'blah', end : 10 }
+		);
 		expect($tw.utils.parseAttribute("p=blah  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 6 }
 		);
