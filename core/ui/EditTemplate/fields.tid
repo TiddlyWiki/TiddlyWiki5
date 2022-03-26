@@ -15,6 +15,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \end
 
 \define new-field-actions()
+\whitespace trim
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[<newFieldValueTiddler>get<currentTiddler>] }}}/>
 <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<storeTitle>] [<searchListState>]"/>
 <$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
@@ -23,20 +24,28 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \define delete-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<storeTitle>] [<searchListState>]"/>
 
 \define cancel-search-actions-inner()
-<$list filter="[<storeTitle>has[text]] [<newFieldNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<cancel-delete-tiddler-actions "cancel">>""">
+\whitespace trim
+<$list
+	filter="[<storeTitle>has[text]] [<newFieldNameTiddler>has[text]]"
+	variable="ignore"
+	emptyMessage="<<cancel-delete-tiddler-actions 'cancel'>>">
 <<delete-state-tiddlers>>
 </$list>
 \end
 
 \define cancel-search-actions()
+\whitespace trim
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
-<$list filter="[<newFieldNameTiddler>get[text]!match<userInput>]" emptyMessage="""<<cancel-search-actions-inner>>""">
+<$list
+	filter="[<newFieldNameTiddler>get[text]!match<userInput>]"
+	emptyMessage="<<cancel-search-actions-inner>>">
 <$action-setfield $tiddler=<<newFieldNameTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 </$set>
 \end
 
 \define new-field()
+\whitespace trim
 <$vars name={{{ [<newFieldNameTiddler>get[text]] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button tooltip=<<lingo Fields/Add/Button/Hint>>>
