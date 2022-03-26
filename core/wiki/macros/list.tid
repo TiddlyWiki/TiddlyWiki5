@@ -33,9 +33,11 @@ tags: $:/tags/Macro
 <div>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
+<$let tv-wikilinks="no">
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
+</$let>
 </$link>
 </$transclude>
 </div>
