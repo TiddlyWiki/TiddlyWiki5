@@ -7,9 +7,11 @@ tags: $:/tags/Macro
 <$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
 <$subtype$>
 <$link to={{!!title}}>
+<$let tv-wikilinks="no">
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
+</$let>
 </$link>
 </$subtype$>
 </$list>
