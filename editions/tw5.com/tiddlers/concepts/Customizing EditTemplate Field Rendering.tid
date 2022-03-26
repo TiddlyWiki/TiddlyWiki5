@@ -1,0 +1,31 @@
+created: 20220305183700000
+modified: 20220305183700000
+tags: Concepts
+title: Customizing EditTemplate field rendering
+type: text/vnd.tiddlywiki
+
+When editing a tiddler the [[EditTemplate|$:/core/ui/EditTemplate/fields]] normally renders fields as simple input boxes. To modify this behaviour, the [[cascade mechanism|Cascades]] can be used. Via the [[Field Editor Cascade|Field Editor Cascade]] the name of the tiddler used for rendering the field editor can be specified. The content of this tiddler is transcluded to represent the content of the field.
+
+To modify the appearance of all fields whose name ends with `-date` create a new tiddler and add the `$:/tags/FieldEditorFilter` tag to it. Add a `list-before` field and assign the value `$:/config/FieldEditorFilters/default`. Now you have to put the filter for the cascade into the tiddler's text field: `[regexp[-date$]then[$:/config/EditTemplateFields/Templates/dates]]`. This will transclude the tiddler named `$:/config/EditTemplateFields/Templates/dates` to render the input elements for all fields with names matching the regular expression.
+
+The variables `currentTiddler` and `currentField` are set to pass information about the tiddler and field that are edited to the transcluded tiddler.
+
+For example, a tiddler containing the following WikiText would render the field as an HTML input element of the type `date`. This will show a date picker for the fields on all modern browsers:
+
+```
+<$edit-text tiddler=<<currentTiddler>> field=<<currentField>> type="date" class="tc-edit-texteditor" placeholder="Set your date" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
+```
+
+The `tabindex` and `cancelPopups` attributes make sure the HTML input element behaves exactly the default elements provided by TiddlyWiki.
+
+Not only the `EditTextWidget` can be used. A tiddler containing the following WikiText will render the field as a drop-down-list that allows the user to select the name of a tiddler. The name of the selected tiddler will be stored in the field.
+
+```
+<$select tiddler=<<currentTiddler>> field=<<currentField>> class="tc-edit-texteditor" cancelPopups="yes">
+    <$list filter='[all[tiddlers]sort[title]]'>
+        <option value=<<currentTiddler>>><$view field='title'/></option>
+    </$list>
+</$select>
+```
+
+The class `tc-edit-texteditor` should be used to style the `input` and `select` elements to match the theme of the TiddlyWiki installation.

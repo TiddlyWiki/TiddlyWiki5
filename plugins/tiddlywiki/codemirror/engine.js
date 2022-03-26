@@ -130,6 +130,59 @@ function CodeMirrorEngine(options) {
 		if(!self.widget.isFileDropEnabled) {
 			event.stopPropagation(); // Otherwise TW's dropzone widget sees the drop event
 		}
+		// Detect if Chrome has added a pseudo File object to the dataTransfer
+		if(!$tw.utils.dragEventContainsFiles(event) && event.dataTransfer.files.length) {
+			//Make codemirror ignore the event as we will handle the drop ourselves
+			event.codemirrorIgnore = true;
+			event.preventDefault();
+
+			// from https://github.com/codemirror/CodeMirror/blob/master/src/measurement/position_measurement.js#L673
+			function posFromMouse(cm, e, liberal, forRect) {
+				let display = cm.display
+				if (!liberal && e_target(e).getAttribute("cm-not-content") == "true") return null
+
+				let x, y, space = display.lineSpace.getBoundingClientRect()
+				// Fails unpredictably on IE[67] when mouse is dragged around quickly.
+				try { x = e.clientX - space.left; y = e.clientY - space.top }
+				catch (e) { return null }
+				let coords = cm.coordsChar(cm, x, y), line
+				if (forRect && coords.xRel > 0 && (line = cm.getLine(cm.doc, coords.line).text).length == coords.ch) {
+					let colDiff = window.CodeMirror.countColumn(line, line.length, cm.options.tabSize) - line.length
+					coords = window.CodeMirror.Pos(coords.line, Math.max(0, Math.round((x - paddingH(cm.display).left) / charWidth(cm.display)) - colDiff))
+				}
+				return coords
+			}
+
+			var pos = posFromMouse(cm,event,true);
+			if(!pos || cm.isReadOnly()) {
+				return;
+			}
+			// Don't do a replace if the drop happened inside of the selected text.
+			if (cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
+				cm.state.draggingText(event);
+				// Ensure the editor is re-focused
+				setTimeout(() => cm.display.input.focus(), 20);
+				return;
+			}
+			try {
+				var text = event.dataTransfer.getData("Text");
+				if (text) {
+					var selected;
+					if (cm.state.draggingText && !cm.state.draggingText.copy) {
+						selected = cm.listSelections();
+					}
+					cm.setCursor(cm.coordsChar({left:event.pageX,top:event.pageY}));
+					if (selected) {
+					 	for (var i = 0; i < selected.length; ++i) {
+							replaceRange(cm.doc, "", selected[i].anchor, selected[i].head, "drag");
+						}
+					}
+					cm.replaceSelection(text, "around", "paste");
+					cm.display.input.focus();
+			  }
+			}
+			catch(e){}
+		}
 		return false;
 	});
 	this.cm.on("keydown",function(cm,event) {
@@ -252,6 +305,6 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 	return newText;
 };
 
-exports.CodeMirrorEngine = CodeMirrorEngine;
+exports.CodeMirrorEngine = $tw.browser ? CodeMirrorEngine : require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
 
 })();

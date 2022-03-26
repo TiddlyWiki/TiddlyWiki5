@@ -1,0 +1,27 @@
+created: 20211124151912931
+modified: 20211124160747921
+tags: [[Filter Syntax]] [[Reduce Filter Run Prefix]] [[Filter Run Prefix Examples]]
+title: Reduce Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+\define multiply-input() [multiply<accumulator>]
+
+The following examples use these data tiddlers:
+
+<ul>
+<$list filter="[tag[shopping]!has[draft.of]]">
+<li>
+''<$link><$text text=<<currentTiddler>>/></$link>'' quantity: <$text text={{!!quantity}}/>,  price: <$text text={{!!price}}/>
+</li>
+</$list>
+</ul>
+
+<<.operator-example 1 "[tag[shopping]] :reduce[get[quantity]add<accumulator>]">>
+<<.operator-example 2 "[tag[shopping]] :reduce[get[price]multiply{!!quantity}add<accumulator>]">>
+<<.operator-example 3 "[tag[shopping]] :reduce[<index>compare:number:gt[0]then<accumulator>addsuffix[, ]addsuffix<currentTiddler>else<currentTiddler>]" "Uses `<index>` to act differently on the first item than the rest. Just for demonstration. Better to use the [[join Operator]] to accomplish this task">>
+<<.operator-example 4 "[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>]" "Empty input produces empty output">>
+<<.operator-example 5 "[tag[non-existent]] :reduce[get[price]multiply{!!quantity}add<accumulator>] :else[[0]]" "Use `:else` to ensure output if input was empty">>
+
+<$macrocall $name=".tip" _="""Unlike the [[reduce Operator]], the `:reduce` prefix cannot specify an initial value for the accumulator, so its initial value will always be empty (which is treated as 0 by mathematical operators). So `=1 =2 =3 :reduce[multiply<accumulator>]` will produce 0, not 6. If you need to specify an initial accumulator value, use the [[reduce Operator]]."""/>
+<<.operator-example 6 "=1 =2 =3 :reduce[multiply<accumulator>]" "Empty initial value is treated as 0 by mathematical operators">>
+<<.operator-example 7 "=1 =2 =3 +[reduce<multiply-input>,[1]]" "Setting initial value is sometimes necessary for correct results">>

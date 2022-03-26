@@ -36,6 +36,8 @@ EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目�
 EditorTypes/Type/Caption: 类型
 EditTemplateBody/Caption: 编辑模板主体
 EditTemplateBody/Hint: 默认的编辑模板使用此规则级联，动态选择模板来编辑条目的主体。
+FieldEditor/Caption: 字段编辑器
+FieldEditor/Hint: 此规则级联用于根据名称，动态选择用于呈现一个条目字段的模板。其用于编辑模板中。
 Info/Caption: 信息
 Info/Hint: 有关此 TiddlyWiki 的信息
 KeyboardShortcuts/Add/Prompt: 在此输入快捷键

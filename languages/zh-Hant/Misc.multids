@@ -14,7 +14,7 @@ ConfirmAction: 是否要繼續？
 Count: 計數
 DefaultNewTiddlerTitle: 新條目
 Diffs/CountMessage: <<diff-count>> 個差異
-DropMessage: 拖放到此處 （或按 ESC 鍵取消）
+DropMessage: 現在放下（或按 ESC 鍵取消）
 Encryption/Cancel: 取消
 Encryption/ConfirmClearPassword: 您要清除密碼嗎？當儲存此維基時，這將刪除已套用的加密
 Encryption/Username: 使用者名稱

@@ -1,12 +1,17 @@
 created: 20150412191004348
 fr-title: Développeurs
-modified: 20150621192259510
+modified: 20220217174800697
 tags: Community
 title: Developers
 type: text/vnd.tiddlywiki
 
-Les développeurs disposent de plusieurs ressources pour discuter et contribuer au développement de TiddlyWiki.
+Plusieurs ressources permettent aux développeurs d'en apprendre plus sur <<tw>>, de collaborer et de discuter de son développement.
 
-* [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] la documentation officielle de développement 
-* [[TiddlyWikiDev group|http://groups.google.com/group/TiddlyWikiDev]] pour les discussions au sujet du développement de TiddlyWiki
-* https://github.com/Jermolene/TiddlyWiki5 pour le code source et l'activité de développement
+* [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] est la documentation officielle des développeurs
+* Vous pouvez vous impliquer dans le développement de <<tw>> sur [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+** Les [[discussions|https://github.com/Jermolene/TiddlyWiki5/discussions]] sont disponibles pour les questions ouvertes et les questions/réponses.
+** Les [[problèmes|https://github.com/Jermolene/TiddlyWiki5/issues]] permettent de signaler les bogues et de proposer de nouvelles idées spécifiques, réalistes et raisonnables
+* L'ancien groupe ~TiddlyWikiDev sur Google Group est maintenant fermé, et remplacé par les [[discussions GitHub|https://github.com/Jermolene/TiddlyWiki5/discussions]], mais une archive reste disponible<<:>> https://groups.google.com/group/TiddlyWikiDev
+** Une fonctionnalité de recherche étendue du groupe est disponible sur [[mail-archive.com|https://www.mail-archive.com/tiddlywikidev@googlegroups.com/]]
+* Pour les dernières nouvelles, suivez [[@TiddlyWiki sur Twitter|http://twitter.com/#!/TiddlyWiki]]
+* Tchatchez sur https://gitter.im/TiddlyWiki/public (une salle dédiée au développement arrive bientôt)

@@ -14,7 +14,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	importTitle=<<qualify $:/ImportImage>>
 	importState=<<qualify $:/state/ImportImage>> >
 <$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
-<$reveal stateTitle=<<edit-preview-state>> type="match" text="yes">
+<$reveal stateTitle=<<edit-preview-state>> type="match" text="yes" tag="div">
 <div class="tc-tiddler-preview">
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
@@ -32,7 +32,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 </div>
 </$reveal>
 
-<$reveal stateTitle=<<edit-preview-state>> type="nomatch" text="yes">
+<$reveal stateTitle=<<edit-preview-state>> type="nomatch" text="yes" tag="div">
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 

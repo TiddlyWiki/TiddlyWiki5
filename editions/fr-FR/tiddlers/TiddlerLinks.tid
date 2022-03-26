@@ -1,11 +1,11 @@
 created: 20130825202900000
 fr-title: Liens dans un Tiddler
-modified: 20150624092911695
+modified: 20220219170847313
 tags: Concepts
 title: TiddlerLinks
 type: text/vnd.tiddlywiki
 
-Les liens sont des éléments d'un tiddler où cliquer engendre la navigation vers un tiddler différent. Le comportement d'une navigation est déterminé par le StoryView (la vue) en cours&lt;&lt;;&gt;&gt; par défaut, la vue classique de TiddlyWiki montre son déroulé comme une suite linéaire de tiddlers.
+Les liens sont des éléments d'un tiddler où cliquer engendre la navigation vers un tiddler différent. Le comportement d'une navigation est déterminé par le StoryView (la vue) en cours<<:>> par défaut, la vue classique de TiddlyWiki montre son déroulé comme une suite linéaire de tiddlers.
 
 Presser la touche ''control'' ou ''command'' en cliquant sur le lien d'un link ouvre le tiddler cible sans s'y déplacer. Cela peut-être un moyen pratique de dresser une suite de tiddlers à lire plus tard.
 
@@ -13,12 +13,12 @@ Les liens sont utiles pour modéliser des relations organiques entre tiddlers, e
 
 Le [[panneau d'information|InfoPanel]] liste la provenance des liens vers un tiddler dans l'onglet ''References''.
 
-Les [[filtres|Filters]] peuvent inclure les opérateur de filtrage suivant qui fonctionnent avec les liens&lt;&lt;:&gt;&gt;
+Les [[filtres|Filters]] peuvent inclure les opérateur de filtrage suivant qui fonctionnent avec les liens<<:>>
 
 * `[links[]]` - renvoie les titres des tiddlers dont les liens proviennent de la sélection des tiddler(s) en cours
 * `[backlinks[]]` - renvoie les titres des tiddlers destination des liens des tiddler(s) en cours sélectionnés
 
-TiddlyWiki5 modifie l'apparence des liens des tiddlers pour donner plus d'informations sur la cible du lien&lt;&lt;:&gt;&gt;
+TiddlyWiki5 modifie l'apparence des liens des tiddlers pour donner plus d'informations sur la cible du lien<<:>>
 
 |!Description lien |!Affichage lien |
 |Vers tiddler existant |[[Ainsi|TiddlerLinks]] |
@@ -26,4 +26,4 @@ TiddlyWiki5 modifie l'apparence des liens des tiddlers pour donner plus d'inform
 |Vers tiddler shadow non remplacé |[[Ainsi|$:/core/copyright.txt]] |
 |Vers tiddler shadow remplacé par un tiddler ordinaire|[[Ainsi|$:/SiteTitle]] |
 
-Les liens externes sont affichés comme ceci&lt;&lt;:&gt;&gt; https://tiddlywiki.com/ ou [[comme ça|https://tiddlywiki.com/]].
+Les liens externes sont affichés comme ceci<<:>> https://tiddlywiki.com/ ou [[comme ça|https://tiddlywiki.com/]].

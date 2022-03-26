@@ -1,5 +1,5 @@
 created: 20140211171341271
-modified: 20200103092706002
+modified: 20220128112317724
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
@@ -13,8 +13,6 @@ Most macros are in fact just parameterised [[variables|Variables]].
 They are created using the `\define` [[pragma|Pragma]]. (Behind the scenes, this is transformed into a <<.wlink SetWidget>>, i.e. macros and variables are two sides of the same coin.)
 
 The snippet and its incoming parameter values are treated as simple strings of characters with no WikiText meaning, at least until the placeholders have been filled in and the macro call has returned. This means that a macro can assemble and return the complete syntax of a ~WikiText component, such as a [[link|Linking in WikiText]]. (See [[Transclusion and Substitution]] for further discussion of this.)
-
-The string returned by a macro call is parsed separately from any surrounding ~WikiText components. So a safe way to insert a special character sequence (such as `[[` or `<`) without triggering its normal ~WikiText meaning is to wrap it in a macro.
 
 Within a snippet itself, the only markup detected is `$name$` (a placeholder for a macro parameter) and `$(name)$` (a placeholder for a [[variable|Variables]]).
 

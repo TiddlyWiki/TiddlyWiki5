@@ -1,5 +1,5 @@
 created: 20131228164411884
-modified: 20150221225557000
+modified: 20211127033939415
 tags: Mechanisms
 title: StateMechanism
 type: text/vnd.tiddlywiki
@@ -17,7 +17,7 @@ The stack of templates that make up the TiddlyWiki display are complex but we'll
 Breaking down the attributes applied to the list widget:
 
 * ''filter'': selects the list of tiddlers in the `list` field of the tiddler [[$:/StoryList]]. If a tiddler is added or removed from that list then it is automatically reflected in the displayed list
-* ''history'': references the tiddler to be used to store the history stack (see the NavigationMechanism)
+* ''history'': references the tiddler to be used to store the history stack (see the HistoryMechanism)
 * ''template'': identifies a template tiddler to be used for rendering each tiddler in the list
 * ''editTemplate'': identifies a different template tiddler to be used for rendering tiddlers that are in [[draft mode|DraftMechanism]]
 * ''storyview'': specifies the story view to be used (eg classic, or zoomin)

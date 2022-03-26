@@ -392,10 +392,10 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		rootWidget.setVariable("larger-than-18","[get[text]length[]compare:integer:gteq[18]]");
 		rootWidget.setVariable("nr","18");
 		rootWidget.setVariable("larger-than-18-with-var","[get[text]length[]compare:integer:gteq<nr>]");
-		expect(wiki.filterTiddlers("[tag[textexample]] :filter[get[text]length[]compare:integer:gteq[18]]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
-		expect(wiki.filterTiddlers("[tag[textexample]]",anchorWidget).join(",")).toBe("Sparkling water,Red wine,Cheesecake,Chocolate Cake");
-		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18>]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
-		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18-with-var>]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
+		expect(wiki.filterTiddlers("[tag[textexample]] :filter[get[text]length[]compare:integer:gteq[18]]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
+		expect(wiki.filterTiddlers("[tag[textexample]]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine,Sparkling water");
+		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18>]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
+		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18-with-var>]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
 	});
 
 	it("should handle the :sort prefix", function() {
@@ -405,7 +405,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[textexample]] :sort:number:[get[text]length[]]").join(",")).toBe("Sparkling water,Chocolate Cake,Red wine,Cheesecake");
 		expect(wiki.filterTiddlers("[tag[textexample]] :sort:number:reverse[get[text]length[]]").join(",")).toBe("Cheesecake,Red wine,Chocolate Cake,Sparkling water");
 		expect(wiki.filterTiddlers("[tag[notatag]] :sort:number[get[price]]").join(",")).toBe("");
-		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string[{!!title}]").join(",")).toBe("Cheesecake,cheesecake,Chocolate Cake,chocolate cake,Persian love cake,Pound cake");
+		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string[{!!title}]").join(",")).toBe("cheesecake,Cheesecake,chocolate cake,Chocolate Cake,Persian love cake,Pound cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive[{!!title}]").join(",")).toBe("Cheesecake,Chocolate Cake,Persian love cake,Pound cake,cheesecake,chocolate cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive,reverse[{!!title}]").join(",")).toBe("chocolate cake,cheesecake,Pound cake,Persian love cake,Chocolate Cake,Cheesecake");
 	});
@@ -418,6 +418,22 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]] :map[tags[]]").join(",")).toBe("shopping,shopping,shopping,shopping");
 		// Prepend the position in the list using the index and length variables
 		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[title]addprefix[-]addprefix<length>addprefix[of]addprefix<index>]").join(",")).toBe("0of4-Brownies,1of4-Chick Peas,2of4-Milk,3of4-Rice Pudding");
+	});
+
+	it("should handle macro parameters for filter run prefixes",function() {
+		var widget = require("$:/core/modules/widgets/widget.js");
+		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
+										   { wiki:wiki, document:$tw.document});
+		rootWidget.makeChildWidgets();
+		var anchorWidget = rootWidget.children[0];
+		rootWidget.setVariable("greet","Hello $name$",[{name:"name"}],true);
+		rootWidget.setVariable("echo","$text$",[{name:"text"}],true);
+		// :map prefix
+		expect(wiki.filterTiddlers("1 :map[subfilter<greet Tom>join[ ]]",anchorWidget).join(",")).toBe("Hello Tom");
+		expect(wiki.filterTiddlers('[tag[shopping]] :map[<echo "$(index)$ $(currentTiddler)$">]',anchorWidget).join(",")).toBe("0 Brownies,1 Chick Peas,2 Milk,3 Rice Pudding");
+		// :reduce prefix
+		expect(wiki.filterTiddlers("1 :reduce[subfilter<greet Tom>join[ ]]",anchorWidget).join(",")).toBe("Hello Tom");
+		expect(wiki.filterTiddlers('[tag[shopping]] :reduce[<echo "$(accumulator)$ $(index)$ $(currentTiddler)$,">]',anchorWidget).join(",")).toBe(" 0 Brownies, 1 Chick Peas, 2 Milk, 3 Rice Pudding,");
 	});
 });
 

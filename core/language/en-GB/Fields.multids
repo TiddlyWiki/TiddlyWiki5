@@ -3,6 +3,7 @@ title: $:/language/Docs/Fields/
 _canonical_uri: The full URI of an external image tiddler
 bag: The name of the bag from which a tiddler came
 caption: The text to be displayed on a tab or button
+code-body: The view template will display the tiddler as code if set to ''yes''
 color: The CSS color value associated with a tiddler
 component: The name of the component responsible for an [[alert tiddler|AlertMechanism]]
 current-tiddler: Used to cache the top tiddler in a [[history list|HistoryMechanism]]
@@ -13,9 +14,9 @@ description: The descriptive text for a plugin, or a modal dialogue
 draft.of: For draft tiddlers, contains the title of the tiddler of which this is a draft
 draft.title: For draft tiddlers, contains the proposed new title of the tiddler
 footer: The footer text for a wizard
-hide-body: The view template will hide bodies of tiddlers if set to: ''yes''
+hide-body: The view template will hide bodies of tiddlers if set to ''yes''
 icon: The title of the tiddler containing the icon associated with a tiddler
-library: Indicates that a tiddler should be saved as a JavaScript library if set to: ''yes''
+library: Indicates that a tiddler should be saved as a JavaScript library if set to ''yes''
 list: An ordered list of tiddler titles associated with a tiddler
 list-before: If set, the title of a tiddler before which this tiddler should be added to the ordered list of tiddler titles, or at the start of the list if this field is present but empty
 list-after: If set, the title of the tiddler after which this tiddler should be added to the ordered list of tiddler titles, or at the end of the list if this field is present but empty
@@ -32,7 +33,7 @@ tags: A list of tags associated with a tiddler
 text: The body text of a tiddler
 throttle.refresh: If present, throttles refreshes of this tiddler
 title: The unique name of a tiddler
-toc-link: Suppresses the tiddler's link in a Table of Contents tree if set to: ''no'' 
+toc-link: Suppresses the tiddler's link in a Table of Contents tree if set to ''no'' 
 type: The content type of a tiddler
 version: Version information for a plugin
 _is_skinny: If present, indicates that the tiddler text field must be loaded from the server

@@ -1,6 +1,6 @@
 title: ImageWidget
 created: 20140416160234142
-modified: 20140820100234142
+modified: 20220101205921813
 tags: Widgets
 caption: image
 
@@ -21,6 +21,14 @@ Any content of the `<$image>` widget is ignored.
 |class |CSS classes to be assigned to the `<img>` element |
 
 The width and the height can be specified as pixel values (eg "23" or "23px") or percentages (eg "23%"). They are both optional; if not provided the browser will use CSS rules to size the image.
+
+! Image Status Classes
+
+<<from-version "5.2.2">> The following CSS classes are automatically added to the `<img>` element to indicate the status of the image. Note that only one of these classes will be added at the same time.
+
+|''tc-image-loading'' |When the image is being loaded |
+|''tc-image-loaded'' |The image has been loaded successfully |
+|''tc-image-error'' |The image could not be loaded |
 
 ! External Images and the ''_canonical_uri'' field
 

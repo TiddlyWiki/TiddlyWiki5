@@ -1,11 +1,11 @@
 caption: all
 created: 20140410103123179
-modified: 20161128185445034
+modified: 20211217135719266
 op-input: ignored, unless the parameter is empty
 op-output: the titles that belong to all the specified categories
 op-parameter: zero or more categories
 op-purpose: find all titles of a fundamental category
-tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]]
+tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]] [[Selection Constructors: Conditional]]
 title: all Operator
 type: text/vnd.tiddlywiki
 
