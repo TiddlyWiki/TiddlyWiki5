@@ -1126,7 +1126,7 @@ describe("Widget module", function() {
 	 * Checkbox widget tests using the test data above
 	 */
 	for (const data of checkboxTestData) {
-		fit('checkbox widget test: ' + data.testName, function() {
+		it('checkbox widget test: ' + data.testName, function() {
 			// Setup
 
 			var wiki = new $tw.Wiki();
