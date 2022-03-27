@@ -921,6 +921,33 @@ describe("Widget module", function() {
 			expectedChange: { "Colors": { colors: "orange yellow green" } }
 		},
 		{
+			testName: "list mode neither checked nor unchecked specified: field value remains unchanged",
+			tiddlers: [{title: "Colors", colors: "orange yellow red"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' />",
+			startsOutChecked: true,
+			finalValue: true,
+			expectedChange: { "Colors": { colors: "orange yellow red" } }
+		},
+		{
+			testName: "list mode neither checked nor unchecked specified, but actions specified to change field value",
+			tiddlers: [{title: "ExampleTiddler", someField: "yes"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='ExampleTiddler' $field='someField' $filter='yes'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='ExampleTiddler' $field='someField' $filter='-yes'/>\n" +
+						"<$checkbox tiddler='ExampleTiddler' listField='someField' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: true,
+			expectedChange: { "ExampleTiddler": { someField: "" } }
+		},
+		{
+			testName: "list mode neither checked nor unchecked specified, means field value is treated as empty=false, nonempty=true",
+			tiddlers: [{title: "ExampleTiddler", someField: "yes"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='ExampleTiddler' $field='someField' $filter='yes -no'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='ExampleTiddler' $field='someField' $filter='-yes no'/>\n" +
+						"<$checkbox tiddler='ExampleTiddler' listField='someField' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: true,
+			finalValue: true, // "no" is considered true when neither `checked` nor `unchecked` is specified
+			expectedChange: { "ExampleTiddler": { someField: "no" } }
+		},
+		{
 			testName: "list mode indeterminate -> true",
 			tiddlers: [{title: "Colors", colors: "orange"}],
 			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' checked='green' />",
@@ -1122,7 +1149,7 @@ describe("Widget module", function() {
 			widget.inputDomNode.checked = !widget.inputDomNode.checked;
 			widget.handleChangeEvent(null);
 
-			// Check state again: checkbox should be inverse of what it was
+			// Check state again: in most tests, checkbox should be inverse of what it was
 			const finalValue = data.hasOwnProperty('finalValue') ? data.finalValue : !data.startsOutChecked;
 			expect(widget.getValue()).toBe(finalValue);
 
