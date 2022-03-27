@@ -849,6 +849,7 @@ describe("Widget module", function() {
 			startsOutChecked: false,
 			expectedChange: { "TiddlerOne": { expand: "yes" } }
 		},
+
 		{
 			testName: "list mode add",
 			tiddlers: [{title: "Colors", colors: "orange yellow"}],
@@ -919,6 +920,15 @@ describe("Widget module", function() {
 			startsOutChecked: false,
 			expectedChange: { "Colors": { colors: "orange yellow green" } }
 		},
+		{
+			testName: "list mode indeterminate -> true",
+			tiddlers: [{title: "Colors", colors: "orange"}],
+			widgetText: "<$checkbox tiddler='Colors' listField='colors' unchecked='red' checked='green' />",
+			startsOutChecked: undefined,
+			expectedChange: { "Colors": { colors: "orange green" } }
+		},
+		// true -> indeterminate cannot happen in list mode
+
 		{
 			testName: "filter mode false -> true",
 			tiddlers: [{title: "Colors", colors: "red orange yellow"}],
@@ -1063,6 +1073,26 @@ describe("Widget module", function() {
 			startsOutChecked: true,
 			expectedChange: { "Colors": { colors: "" } }
 		},
+
+		{
+			testName: "filter mode indeterminate -> true",
+			tiddlers: [{title: "Colors", colors: "orange yellow"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' checked='green' unchecked='red' default='green' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: undefined,
+			expectedChange: { "Colors": { colors: "orange yellow green" } }
+		},
+		{
+			testName: "filter mode true -> indeterminate",
+			tiddlers: [{title: "Colors", colors: "green orange yellow"}],
+			widgetText: "\\define checkActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='green'/>\n" +
+						"\\define uncheckActions() <$action-listops $tiddler='Colors' $field='colors' $subfilter='-green'/>\n" +
+						"<$checkbox filter='[list[Colors!!colors]]' checked='green' unchecked='red' default='green' checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> />",
+			startsOutChecked: true,
+			finalValue: undefined,
+			expectedChange: { "Colors": { colors: "orange yellow" } }
+		},
 	];
 
 	/*
@@ -1093,7 +1123,8 @@ describe("Widget module", function() {
 			widget.handleChangeEvent(null);
 
 			// Check state again: checkbox should be inverse of what it was
-			expect(widget.getValue()).toBe(!data.startsOutChecked);
+			const finalValue = data.hasOwnProperty('finalValue') ? data.finalValue : !data.startsOutChecked;
+			expect(widget.getValue()).toBe(finalValue);
 
 			// Check that tiddler(s) has/have gone through expected change(s)
 			for (const key of Object.keys(data.expectedChange)) {
