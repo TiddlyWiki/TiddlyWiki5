@@ -37,8 +37,8 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |tag |The name of the tag to which the checkbox is bound |
 |invertTag |When set to ''yes'', flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
 |field |The name of the field to which the checkbox is bound |
-|listField |<<.from-version "5.2.2">> The name of the field that contains the list to which the checkbox is bound |
-|filter |<<.from-version "5.2.2">> A filter whose output determines the checked state of the checkbox |
+|listField |<<.from-version "5.2.3">> The name of the field that contains the list to which the checkbox is bound |
+|filter |<<.from-version "5.2.3">> A filter whose output determines the checked state of the checkbox |
 |index|<<.from-version "5.1.14">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the checkbox is bound<<.tip "be sure to set the //tiddler// correctly">>|
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
