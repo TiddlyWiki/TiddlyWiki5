@@ -99,7 +99,7 @@ CheckboxWidget.prototype.getValue = function() {
 			}
 			// Do *not* return `undefined` in field or index mode: no indeterminate checkboxes in these modes
 		}
-		if(this.checkboxListField || this.checkboxFilter) {
+		if(this.checkboxListField || this.checkboxListIndex || this.checkboxFilter) {
 			// Same logic applies to lists and filters
 			var list;
 			if(this.checkboxListField) {
@@ -108,6 +108,8 @@ CheckboxWidget.prototype.getValue = function() {
 				} else {
 					list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
 				}
+			} else if (this.checkboxListIndex) {
+				list = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(tiddler,this.checkboxListIndex,this.checkboxDefault || "")) || [];
 			} else {
 				list = this.wiki.filterTiddlers(this.checkboxFilter,this) || [];
 			}
@@ -189,17 +191,22 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 			hasChanged = true;
 		}
 	}
-	// Set the list field if specified
-	if(this.checkboxListField) {
-		var fieldContents = tiddler.getFieldList(this.checkboxListField);
-		var oldPos = notValue ? fieldContents.indexOf(notValue) : -1;
-		var newPos = value ? fieldContents.indexOf(value) : -1;
+	// Set the list field (or index) if specified
+	if(this.checkboxListField || this.checkboxListIndex) {
+		var listContents, oldPos, newPos;
+		if(this.checkboxListField) {
+			listContents = tiddler.getFieldList(this.checkboxListField);
+		} else {
+			listContents = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex) || "") || [];
+		}
+		oldPos = notValue ? listContents.indexOf(notValue) : -1;
+		newPos = value ? listContents.indexOf(value) : -1;
 		if(oldPos === -1 && newPos !== -1) {
 			// old value absent, new value present: no change needed
 		} else if(oldPos === -1) {
 			// neither one was present
 			if(value) {
-				fieldContents.push(value);
+				listContents.push(value);
 				hasChanged = true;
 			} else {
 				// value unspecified? then leave list unchanged
@@ -207,22 +214,28 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		} else if(newPos === -1) {
 			// old value present, new value absent
 			if(value) {
-				fieldContents[oldPos] = value;
+				listContents[oldPos] = value;
 				hasChanged = true;
 			} else {
-				fieldContents.splice(oldPos, 1)
+				listContents.splice(oldPos, 1)
 				hasChanged = true;
 			}
 		} else {
 			// both were present: just remove the old one, leave new alone
-			fieldContents.splice(oldPos, 1)
+			listContents.splice(oldPos, 1)
 			hasChanged = true;
 		}
-		newFields[this.checkboxListField] = $tw.utils.stringifyList(fieldContents);
+		if(this.checkboxListField) {
+			newFields[this.checkboxListField] = $tw.utils.stringifyList(listContents);
+		}
+		// The listIndex case will be handled in the if(hasChanged) block below
 	}
 	if(hasChanged) {
 		if(this.checkboxIndex) {
 			this.wiki.setText(this.checkboxTitle,"",this.checkboxIndex,value);
+		} else if(this.checkboxListIndex) {
+			var listIndexValue = (listContents && listContents.length) ? $tw.utils.stringifyList(listContents) : undefined;
+			this.wiki.setText(this.checkboxTitle,"",this.checkboxListIndex,listIndexValue);
 		} else {
 			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
 		}
@@ -252,6 +265,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxField = this.getAttribute("field");
 	this.checkboxIndex = this.getAttribute("index");
 	this.checkboxListField = this.getAttribute("listField");
+	this.checkboxListIndex = this.getAttribute("listIndex");
 	this.checkboxFilter = this.getAttribute("filter");
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");

@@ -412,7 +412,7 @@ Tests the checkbox widget thoroughly.
         const checkboxTestData = fieldModeTests.concat(
             indexModeTests,
             listModeTests,
-            // indexListModeTests,
+            indexListModeTests,
             filterModeTests,
         );
     
