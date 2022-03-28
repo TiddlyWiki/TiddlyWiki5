@@ -27,7 +27,6 @@ CheckboxWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 CheckboxWidget.prototype.render = function(parent,nextSibling) {
-	var value;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -39,12 +38,8 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.setAttribute("class",this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
-	value = this.getValue();
-	if(value) {
+	if(this.getValue()) {
 		this.inputDomNode.setAttribute("checked","true");
-	}
-	if(value === undefined) {
-		this.inputDomNode.indeterminate = true;
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -97,7 +92,6 @@ CheckboxWidget.prototype.getValue = function() {
 			if(this.checkboxUnchecked && !this.checkboxChecked) {
 				return true; // Absence of unchecked value
 			}
-			// Do *not* return `undefined` in field or index mode: no indeterminate checkboxes in these modes
 		}
 		if(this.checkboxListField || this.checkboxListIndex || this.checkboxFilter) {
 			// Same logic applies to lists and filters
@@ -125,9 +119,6 @@ CheckboxWidget.prototype.getValue = function() {
 			}
 			if(this.checkboxUnchecked && !this.checkboxChecked) {
 				return true; // Absence of unchecked value
-			}
-			if(this.checkboxChecked && this.checkboxUnchecked) {
-				return undefined; // Will be rendered as indeterminate
 			}
 			// Neither specified, so empty list is false, non-empty is true
 			return !!list.length;
@@ -286,13 +277,9 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		var refreshed = false, value;
+		var refreshed = false;
 		if(changedTiddlers[this.checkboxTitle]) {
-			value = this.getValue();
-			this.inputDomNode.checked = !!value;
-			if(value === undefined) {
-				this.inputDomNode.indeterminate = true;
-			}
+			this.inputDomNode.checked = this.getValue();
 			refreshed = true;
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;
