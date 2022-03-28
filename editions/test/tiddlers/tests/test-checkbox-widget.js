@@ -56,7 +56,7 @@ Tests the checkbox widget thoroughly.
          * Test data for checkbox widget tests
          */
     
-        const checkboxTestData = [
+        const fieldModeTests = [
             {
                 testName: "field mode checked",
                 tiddlers: [{title: "TiddlerOne", text: "Jolly Old World", expand: "yes"}],
@@ -78,7 +78,33 @@ Tests the checkbox widget thoroughly.
                 startsOutChecked: false,
                 expectedChange: { "TiddlerOne": { expand: "yes" } }
             },
-    
+        ];
+
+        const indexModeTests = fieldModeTests.map(data => {
+            const newData = {...data};
+            const newName = data.testName.replace('field mode', 'index mode');
+            const newTiddlers = data.tiddlers.map(tiddler => {
+                return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\nexpand: ${tiddler.expand}\ntwo: b`}
+            });
+            const newWidgetText = data.widgetText.replace("field='expand'", "index='expand'");
+            const newChange = {};
+            for (const key of Object.keys(data.expectedChange)) {
+                const oldChange = data.expectedChange[key];
+                if (oldChange.expand) {
+                    newChange[key] = { text: `one: a\nexpand: ${oldChange.expand}\ntwo: b` }
+                } else {
+                    // In index tiddlers, the "expand" field gets completely removed, not turned into "expand: (undefined)"
+                    newChange[key] = { text: `one: a\ntwo: b` }
+                }
+            }
+            newData.testName = newName;
+            newData.tiddlers = newTiddlers;
+            newData.widgetText = newWidgetText;
+            newData.expectedChange = newChange;
+            return newData;
+        });
+
+        const listModeTests = [
             {
                 testName: "list mode add",
                 tiddlers: [{title: "Colors", colors: "orange yellow"}],
@@ -184,7 +210,39 @@ Tests the checkbox widget thoroughly.
                 expectedChange: { "Colors": { colors: "orange green" } }
             },
             // true -> indeterminate cannot happen in list mode
-    
+        ];
+
+        const indexListModeTests = listModeTests.map(data => {
+            const newData = {...data};
+            const newName = data.testName.replace('list mode', 'index list mode');
+            const newTiddlers = data.tiddlers.map(tiddler => {
+                if (tiddler.hasOwnProperty('colors')) {
+                    return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\ncolors: ${tiddler.colors}\ntwo: b`}
+                } else if (tiddler.hasOwnProperty('someField')) {
+                    return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\nsomeField: ${tiddler.someField}\ntwo: b`}
+                }
+            });
+            const newWidgetText = data.widgetText.replace("listField='colors'", "listIndex='colors'").replace(/\$field/g, '$index').replace("listField='someField'", "listIndex='someField'");
+            const newChange = {};
+            for (const key of Object.keys(data.expectedChange)) {
+                const oldChange = data.expectedChange[key];
+                if (oldChange.colors) {
+                    newChange[key] = { text: `one: a\ncolors: ${oldChange.colors}\ntwo: b` }
+                } else if (oldChange.someField !== undefined) {
+                    newChange[key] = { text: `one: a\nsomeField: ${oldChange.someField}\ntwo: b` }
+                } else {
+                    // In index tiddlers, fields with value undefined get completely removed
+                    newChange[key] = { text: `one: a\ntwo: b` }
+                }
+            }
+            newData.testName = newName;
+            newData.tiddlers = newTiddlers;
+            newData.widgetText = newWidgetText;
+            newData.expectedChange = newChange;
+            return newData;
+        });
+
+        const filterModeTests = [
             {
                 testName: "filter mode false -> true",
                 tiddlers: [{title: "Colors", colors: "red orange yellow"}],
@@ -350,6 +408,13 @@ Tests the checkbox widget thoroughly.
                 expectedChange: { "Colors": { colors: "orange yellow" } }
             },
         ];
+
+        const checkboxTestData = fieldModeTests.concat(
+            indexModeTests,
+            listModeTests,
+            // indexListModeTests,
+            filterModeTests,
+        );
     
         /*
          * Checkbox widget tests using the test data above
