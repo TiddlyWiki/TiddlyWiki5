@@ -159,6 +159,8 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	// Create elements
 	this.outerDomNode = this.document.createElement("div");
 	$tw.utils.setStyle(this.outerDomNode,[
+		{overflowY: "auto"},
+		{overflowX: "auto"},
 		{webkitOverflowScrolling: "touch"}
 	]);
 	this.innerDomNode = this.document.createElement("div");
