@@ -1,6 +1,11 @@
 created: 20180222072026299
 list: [[Apple 6]] [[Apple 7]] [[Apple 8]] [[Apple 9]] [[Apple 10]] [[Apple 20]] [[Apple 30]] [[Apple 100]]
-modified: 20211115005421558
+modified: 20220227210835979
 tags: Demonstrations
 title: Apple
 
+<<.this-is-operator-example>>
+
+It has a <<.field list>> field containing the following items:
+
+<<list-links "[list[]]">>

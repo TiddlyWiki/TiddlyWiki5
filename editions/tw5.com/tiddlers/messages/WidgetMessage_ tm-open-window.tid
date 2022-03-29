@@ -18,7 +18,7 @@ The `tm-open-window` [[message|Messages]] opens a tiddler in a new //browser// w
 |windowID|<<.from-version "5.2.2">> Optional, unique string used to identify the widow. Can be used with [[WidgetMessage: tm-close-window]] to close the window. Defaults to the value of <<.param param>> |
 |//{any other params}// |Any other parameters are made available as variables within the new window |
 
-The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
+The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. The message is handled by the core itself.
 
 <<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
 <<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, <<.param height>>, <<.param left>> and <<.param top>> require the ActionSendMessageWidget.""">>
@@ -33,9 +33,9 @@ src="""
   $param="$:/temp/openme" 
   template="SampleWindowTemplate" 
   windowTitle="My Window Title"
-  width="100em"
-  height="50em"
-  something="I just in over in a variable, and boy is my Hashmap tired." />
+  width="640"
+  height="480"
+  something="This is my new window. There are many like it, but this one is mine." />
 </$button>
 """ />
 

@@ -1,7 +1,7 @@
 created: 20150117152607000
-modified: 20150228114306000
-title: $:/editions/tw5.com/operator-macros
+modified: 20220227210111054
 tags: $:/tags/Macro
+title: $:/editions/tw5.com/operator-macros
 
 \define .operator-examples(op,text:"Examples") <$link to="$op$ Operator (Examples)">$text$</$link>
 
@@ -48,3 +48,5 @@ tags: $:/tags/Macro
 <$macrocall $name=".note" _="This operator is <<.em not>> available when ~TiddlyWiki is running in a web browser."/>
 
 \end
+
+<pre><$view field="text"/></pre>

@@ -1,12 +1,37 @@
 caption: Blocs de code
 created: 20141016143834720
-modified: 20141116091520961
+fr-title: Blocs de code en WikiText
+modified: 20220226232420710
 tags: WikiText
 title: Code Blocks in WikiText
-fr-title: Blocs de code en WikiText
 type: text/vnd.tiddlywiki
 
-Un bloc de code est délimité par trois caractères "accents graves" <code>&#96;&#96;&#96;</code> (connus en anglais sous le nom de "backticks") :
+Un bloc de code (<<.icon $:/core/images/mono-block>>) est délimité par trois caractères <<gf "accent grave">> <code>&#96;&#96;&#96;</code> (connus en anglais sous le nom de <<gf "backticks">>)<<:>>
+
+<pre>
+&#96;&#96;&#96;
+Ce texte aura une chasse fixe et ne sera pas &#96;formaté&#96;.
+&#96;&#96;&#96;
+</pre>
+
+Donnera le résultat suivant<<:>>
+
+```
+Ce texte aura une chasse fixe et ne sera pas `formaté`.
+```
+
+Pour être interprétés correctement, les trois accents graves doivent être placés au début d'une ligne et immédiatement suivis d'un retour à la ligne.
+
+Souvenez-vous que le paragraphe précédent doit s'être terminé correctement, à l'aide de deux retours à la ligne. L'exemple suivant est donc ''faux''<<:>>
+
+<pre>
+Ceci est un paragraphe ordinaire.
+&#96;&#96;&#96;
+Ce texte aura une chasse fixe et ne sera pas &#96;formaté&#96;.
+&#96;&#96;&#96;
+</pre>
+
+La version correcte est<<:>>
 
 <pre>
 Ceci est un paragraphe ordinaire.
@@ -16,18 +41,4 @@ Ce texte aura une chasse fixe et ne sera pas &#96;formaté&#96;.
 &#96;&#96;&#96;
 </pre>
 
-<div class="tc-message-box">
-
-Ceci est un paragraphe ordinaire.
-
-```
-Ce texte aura une chasse fixe et ne sera pas `formaté`.
-```
-</div>
-
-; Remarques
-* Pour être interprétés correctements, les trois backticks doivent être :
-** précédés de deux retours à la ligne (pour terminer correctement le paragraphe précédent) ;
-** au début de la ligne ;
-** immédiatement suivis d'un retour à la ligne.
-* Certains claviers traitent le backtick comme une [[touche morte|http://fr.wikipedia.org/wiki/Touche_morte]], le rendant difficile à taper. L'astuce est de taper 3 <code>&#96;</code> suivis d'un espace. Une autre méthode consiste à taper 6 <code>&#96;</code> d'affilée, puis de bouger le curseur en arrière trois fois pour taper ou coller le contenu du bloc.
+Certains claviers traitent le backtick comme une [[touche morte|http://fr.wikipedia.org/wiki/Touche_morte]], le rendant difficile à taper. L'astuce est de taper 3 <code>&#96;</code> suivis d'un espace. Une autre méthode consiste à taper 6 <code>&#96;</code> d'affilée, puis de bouger le curseur en arrière trois fois pour taper ou coller le contenu du bloc.
