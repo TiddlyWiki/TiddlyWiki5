@@ -10,7 +10,7 @@ Visualisez la vidéo [[Introduction à TiddlyDesktop|Introducing TiddlyDesktop V
 
 ! Instructions
 
-# Installer la dernière version de TiddlyDesktop à partir de https://github.com/Jermolene/TiddlyDesktop/releases
+# Installer la dernière version de TiddlyDesktop à partir de https://github.com/TiddlyWiki/TiddlyDesktop/releases
 # Lancez TiddlyDesktop
 # Utilisez le bouton de l'explorateur de fichier pour ouvrir les fichiers TiddlyWiki
 # Sauvegardez les modifications de la façon habituelle dans TiddlyWiki 
@@ -18,6 +18,6 @@ Visualisez la vidéo [[Introduction à TiddlyDesktop|Introducing TiddlyDesktop V
 ! Source
 
 TiddlyDesktop est basé sur le projet OpenSource [[node-webkit]]. Les sources sont sur GitHub<<:>>
-https://github.com/Jermolene/TiddlyDesktop/
+https://github.com/TiddlyWiki/TiddlyDesktop/
 
 Voir les [[Versions de TiddlyDesktop|TiddlyDesktop Releases]]

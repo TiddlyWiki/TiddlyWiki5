@@ -62,7 +62,7 @@ Cascades provide a means to select one of multiple values based on flexible, ext
 For example, the core uses the template $:/core/ui/ViewTemplate to display tiddlers in view mode, and $:/core/ui/EditTemplate to display tiddlers in edit mode. A cascade is used to choose which template to use for a particular tiddler:
 
 # If the tiddler is a draft, then use $:/core/ui/EditTemplate
-# Otherwise, use $:/core/ui/EditTemplate
+# Otherwise, use $:/core/ui/ViewTemplate
 
 The list of conditions is defined via a special tag, making it possible to insert additional conditions anywhere in the list.
 
@@ -70,6 +70,6 @@ For example, a plugin might add a special template $:/plugins/example/map-templa
 
 # If the tiddler is a draft, then use $:/core/ui/EditTemplate
 # @@background: yellow; If the tiddler is tagged $:/tags/Map, then use $:/plugins/example/map-template@@
-# Otherwise, use $:/core/ui/EditTemplate
+# Otherwise, use $:/core/ui/ViewTemplate
 
 See [[Cascades]] for more details.
