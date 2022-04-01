@@ -92,7 +92,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes["class"] || changedAttributes.enabled) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}
