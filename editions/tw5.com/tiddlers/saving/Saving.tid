@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 \define checkactions(item:"Linux")
 <$action-listops $tiddler=<<stateTiddler>>  $subfilter="[[$item$]]"/>
 \end
-<$vars stateTiddler=<<qualify "$:/state/">> >
+<$vars stateTiddler=<<qualify "$:/state/gettingstarted">> >
 
 Available methods for saving changes with TiddlyWiki:
 
