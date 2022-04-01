@@ -3,6 +3,7 @@ title: $:/snippets/modules
 \define describeModuleType(type)
 {{$:/language/Docs/ModuleTypes/$type$}}
 \end
+\whitespace trim
 <$list filter="[moduletypes[]]">
 
 !! <$macrocall $name="currentTiddler" $type="text/plain" $output="text/plain"/>
