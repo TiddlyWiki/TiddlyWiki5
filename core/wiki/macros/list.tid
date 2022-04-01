@@ -57,6 +57,7 @@ tags: $:/tags/Macro
 \end
 
 \define list-tagged-draggable-drop-actions(tag)
+\whitespace trim
 <!-- Save the current ordering of the tiddlers with this tag -->
 <$set name="order" filter="[<__tag__>tagging[]]">
 <!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
