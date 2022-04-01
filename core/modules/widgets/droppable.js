@@ -67,6 +67,9 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	}
 	// If we're entering for the first time we need to apply highlighting
 	$tw.utils.addClass(this.domNodes[0],"tc-dragover");
+	if(this.dragEnterActions) {
+		this.invokeActionString(this.dragEnterActions,this,event);
+	}
 };
 
 DroppableWidget.prototype.leaveDrag = function(event) {
@@ -79,6 +82,9 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 		this.currentlyEntered = [];
 		if(this.domNodes[0]) {
 			$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+			if(this.dragLeaveActions) {
+				this.invokeActionString(this.dragLeaveActions,this,event);
+			}
 		}
 	}
 };
@@ -148,6 +154,8 @@ DroppableWidget.prototype.execute = function() {
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";
 	this.disabledClass = this.getAttribute("disabledClass","");
+	this.dragEnterActions = this.getAttribute("dragenteractions");
+	this.dragLeaveActions = this.getAttribute("dragleaveactions");
 	// Make child widgets
 	this.makeChildWidgets();
 };
