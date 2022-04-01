@@ -1,12 +1,12 @@
 caption: Titres de rubriques
 created: 20141017093039992
 fr-title: Titres de rubriques dans WikiText
-modified: 20150624093140963
+modified: 20220226234057628
 tags: WikiText
 title: Headings in WikiText
 type: text/vnd.tiddlywiki
 
-Un ou plusieurs caractères "point d'exclamation" `!` au début d'une ligne signalent un titre de rubrique&nbsp;:
+Un titre de rubrique est codé par un à 6 caractères <<gf "point d'exclamation">> `!` au début d'une ligne<<:>>
 
 <<wikitexte-exemple "! Titre de niveau 1
 !! Titre de niveau 2

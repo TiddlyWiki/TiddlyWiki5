@@ -1,7 +1,16 @@
 title: $:/snippets/themeswitcher
 
+\whitespace trim
 <$linkcatcher to="$:/theme">
-<div class="tc-chooser"><$list filter="[plugin-type[theme]sort[title]]"><$set name="cls" filter="[all[current]field:title{$:/theme}] [[$:/theme]!has[text]addsuffix[s/tiddlywiki/vanilla]field:title<currentTiddler>] +[limit[1]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>><$link to={{!!title}}>''<$view field="name" format="text"/>'' <$view field="description" format="text"/></$link></div>
+<div class="tc-chooser">
+<$list filter="[plugin-type[theme]sort[title]]">
+<$set name="cls" filter="[all[current]field:title{$:/theme}] [[$:/theme]!has[text]addsuffix[s/tiddlywiki/vanilla]field:title<currentTiddler>] +[limit[1]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
+<div class=<<cls>>><$link to={{!!title}}>
+''<$view field="name" format="text"/>''
+&#32;
+<$view field="description" format="text"/>
+</$link>
+</div>
 </$set>
 </$list>
 </div>

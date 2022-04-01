@@ -1,11 +1,13 @@
 created: 20130825213300000
 fr-title: Exemple de gestion de tâches
-modified: 20160523100238122
+modified: 20220226174224424
 tags: Learning
 title: TaskManagementExample
 type: text/vnd.tiddlywiki
 
 TiddlyWiki5 peut servir de système de gestion de tâches simple sans personnalisation supplémentaires. L'idée est que les tâches soient taguées avec `task`, celles étant terminées portant également le tag `done`. De cette manière, il est très simple de générer des listes de tâches.
+
+<<.tip """Il y a [[une version améliorée de cet exemple|TaskManagementExample (Draggable)]] qui ajoute la possibilité de réordonner les tâches par glisser-déposer.""">>
 
 ! Tâches à effectuer
 

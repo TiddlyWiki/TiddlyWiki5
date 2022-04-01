@@ -2,6 +2,7 @@ title: $:/core/macros/toc
 tags: $:/tags/Macro
 
 \define toc-caption()
+\whitespace trim
 <$set name="tv-wikilinks" value="no">
   <$transclude field="caption">
     <$view field="title"/>
@@ -10,9 +11,10 @@ tags: $:/tags/Macro
 \end
 
 \define toc-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <ol class="tc-toc">
   <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
-    <$vars item=<<currentTiddler>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+    <$let item=<<currentTiddler>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
       <$set name="excluded" filter="""[enlist<__exclude__>] [<__tag__>]""">
         <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
           <li class=<<toc-item-class>>>
@@ -23,7 +25,7 @@ tags: $:/tags/Macro
           </li>
         </$set>
       </$set>
-    </$vars>
+    </$let>
   </$list>
 </ol>
 \end
@@ -33,6 +35,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <!-- helper function -->
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
@@ -48,6 +51,7 @@ tags: $:/tags/Macro
           {{$:/core/images/down-arrow}}
         </$button>
       </$reveal>
+      &#32;
       <<toc-caption>>
     </$link>
     <$reveal type="match" stateTitle=<<toc-state>> text="open">
@@ -59,6 +63,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <!-- helper function -->
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
@@ -66,12 +71,14 @@ tags: $:/tags/Macro
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/right-arrow}}
+          &#32;
           <<toc-caption>>
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/down-arrow}}
+          &#32;
           <<toc-caption>>
         </$button>
       </$reveal>
@@ -88,7 +95,8 @@ tags: $:/tags/Macro
 \end
 
 \define toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
-<$vars tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+\whitespace trim
+<$let tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
   <$set name="excluded" filter="""[enlist<__exclude__>] [<__tag__>]""">
     <ol class="tc-toc toc-expandable">
       <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
@@ -98,10 +106,11 @@ tags: $:/tags/Macro
       </$list>
     </ol>
   </$set>
-</$vars>
+</$let>
 \end
 
 \define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item" >
     <li class=<<toc-item-class>>>
@@ -118,6 +127,7 @@ tags: $:/tags/Macro
             </$button>
           </$reveal>
         </$list>
+        &#32;
         <<toc-caption>>
       </$link>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
@@ -129,6 +139,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
@@ -136,12 +147,14 @@ tags: $:/tags/Macro
         <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/right-arrow}}
+            &#32;
             <<toc-caption>>
           </$button>
         </$reveal>
         <$reveal type="match" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/down-arrow}}
+            &#32;
             <<toc-caption>>
           </$button>
         </$reveal>
@@ -159,8 +172,9 @@ tags: $:/tags/Macro
 \end
 
 \define toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
-<$vars tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
-  <$set name="excluded" filter="""[enlist<__exclude__>] [<__tag__>]""">
+\whitespace trim
+<$let tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+  <$set name="excluded" filter="[enlist<__exclude__>] [<__tag__>]">
     <ol class="tc-toc toc-selective-expandable">
       <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
         <$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>> >
@@ -169,10 +183,11 @@ tags: $:/tags/Macro
       </$list>
     </ol>
   </$set>
-</$vars>
+</$let>
 \end
 
 \define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
+\whitespace trim
 <$tiddler tiddler={{{ [<__selectedTiddler__>get[text]] }}}>
   <div class="tc-tabbed-table-of-contents">
     <$linkcatcher to=<<__selectedTiddler__>>>
@@ -196,8 +211,8 @@ tags: $:/tags/Macro
 \end
 
 \define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
+\whitespace trim
 <$linkcatcher to=<<__selectedTiddler__>>>
   <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>>/>
 </$linkcatcher>
 \end
-

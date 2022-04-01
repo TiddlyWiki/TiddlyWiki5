@@ -27,10 +27,17 @@ Basics/Tiddlers/Prompt: Anzahl Tiddler
 Basics/Title/Prompt: Titel dieses ~TiddlyWikis
 Basics/Username/Prompt: Benutzersignatur zum Editieren
 Basics/Version/Prompt: ~TiddlyWiki Version
+Cascades/Caption: Kaskaden
+Cascades/Hint: Diese Regeln werden dynamisch auf verschiedene Templates angewendet. Das Ergebnis einer Filter-Kaskade wird von der Filter Sequenz bestimmt, die als Erste ein Resultat zurück gibt.
+Cascades/TagPrompt: Filter Tags: <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Editor Typen
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden soll.
 EditorTypes/Type/Caption: MIME-Type
+EditTemplateBody/Caption: Edit Template "Körper"
+EditTemplateBody/Hint: Diese Filter-Kaskade wird vom Standard "Edit Template" verwendet. Es wählt die Vorlage für den Textbereich aus.
+FieldEditor/Caption: Feld Editor
+FieldEditor/Hint: Diese Filter-Kaskade wird vom "Edit Template" zur Bestimmung der Vorlage für die "Feld Namen" verwendet.
 Info/Caption: Info
 Info/Hint: Informationen über dieses TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Tastenkürzel hier eingeben
@@ -191,6 +198,8 @@ Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
 Settings/MissingLinks/Caption: Wiki-Links
 Settings/MissingLinks/Hint: Aktiviere Links zu fehlenden Tiddlern. zB: FehlenderTiddler [[Einführung]]
 Settings/MissingLinks/Description: Aktiviere Links zu fehlenden Tiddlern.
+StoryTiddler/Caption: Story Tiddler
+StoryTiddler/Hint: Diese Filter-Kaskade wird verwendet, um die Vorlage für den Tiddler im "Story River" auszuwählen.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Stylesheets/Caption: Stylesheets
@@ -201,6 +210,10 @@ Theme/Caption: Theme
 Theme/Prompt: Ausgewähltes Theme:
 TiddlerFields/Caption: Tiddler Felder
 TiddlerFields/Hint: Hier finden Sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler.
+TiddlerColour/Caption: Tiddler Farbe
+TiddlerColour/Hint: Diese Filter-Kaskade wird verwendet, um die Farbe für das "Icon" und den "Tag" auszuwählen.
+TiddlerIcon/Caption: Tiddler Icon
+TiddlerIcon/Hint: Diese Filter-Kaskade wird verwendet, um die das Tiddler "Icon" auszuwählen.
 Toolbars/Caption: Toolbar
 Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
@@ -212,3 +225,7 @@ Toolbars/EditorToolbar/Hint: Auswählen, welche Editorbuttons angezeigt werden s
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden. Verwenden Sie "Drag and Drop", um die Reihenfolge zu ändern
 Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''
+ViewTemplateBody/Caption: View Template Text
+ViewTemplateBody/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um die Vorlage für den Tiddler Textbereich auszuwählen.
+ViewTemplateTitle/Caption: View Template Titel
+ViewTemplateTitle/Hint: Diese Filter-Kaskade wird vom "View Template" dazu verwendet, um die Vorlage für den Tiddler Titel auszuwählen.

@@ -1,6 +1,7 @@
 caption: 5.2.2
-created: 20220208152620527
-modified: 20220208152620527
+created: 20220325130817150
+modified: 20220325130817150
+released: 20220325130817150
 tags: ReleaseNotes
 title: Release 5.2.2
 type: text/vnd.tiddlywiki
@@ -9,9 +10,25 @@ type: text/vnd.tiddlywiki
 <a href="https://github.com/$username$" style="text-decoration:none;font-size:24px;" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src="https://github.com/$username$.png?size=32" width="32" height="32"/> @<$text text=<<__username__>>/></a>
 \end
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.1...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.1...v5.2.2]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[Elise Springer|https://www.wesleyan.edu/academics/faculty/espringer/profile.html]] for her winning design for the banner for this release (here is the [[competition thread|https://groups.google.com/d/msgid/tiddlywiki/ad868177-3432-4f8c-bec5-5f6639d1aeddn%40googlegroups.com]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/e26a4d8cb54fa60b8a47e3cef2c3a962535ca619/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
 
 ! Highlights
+
+!! <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6427">> [[Highlight Plugin]] to use highlight.js v11.4.0
+
+This is a major upgrade to the latest version of highlight.js. The new version has many improvements, including better support for Fortran.
+
+<<.warning """The new version of the [[Highlight Plugin]] requires a modern browser that fully supports JavaScript ES6 (released in 2015). The older version is still available as the ''highlight-legacy'' plugin for users who need to use an older browser.""">>
+
+!! <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6498">> support for secondary windows
+
+The [[WidgetMessage: tm-open-window]] now supports an optional `windowID` parameter so that opened windows can be closed with the new [[WidgetMessage: tm-close-window]] message. There is also a new [[WidgetMessage: tm-close-all-windows]] message which closes all secondary windows.
 
 !! <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6421">> support for line breaks within filtered transcluded attributes
 
@@ -37,16 +54,17 @@ For example, adding a new tiddler with a given tag previously caused the new tid
 
 The fix ensures that the enumeration order remains consistent.
 
-!! <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6427">> [[Highlight Plugin]] to use highlight.js v11.4.0
+!! <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6553">> some incorrectly nested `<span>` and `<div>` elements
 
-This is a major upgrade to the latest version of highlight.js. The new version has many improvements, including better support for Fortran.
+TiddlyWiki's core page layout has historically included several instances of inline `<span>` elements containing block `<div>` elements, something that is technically invalid HTML. In practice, browsers have always handled these cases leniently to make the page work but it has also been unhelpful for developers to encountering invalid HTML constructions in their first interactions with TiddlyWiki.
 
-<<.warning """The new version of the [[Highlight Plugin]] requires a modern browser that fully supports JavaScript ES6 (released in 2015). The older version is still available as the ''highlight-legacy'' plugin for users who need to use an older browser.""">>
+The immediate prompt for starting to fix these issue now is that Chrome v100 [[includes a change|https://chromium.googlesource.com/chromium/src/+/4a76c96d2a4021257e691058c1fe1fb60d9d8327]] that causes some of these misnested elements to be rendered correctly visually but to be unclickable in some situations. (The change is [[reverted|https://chromium.googlesource.com/chromium/src/+/abadd1181ca70cf3d1ac7e7878d46b1d3173a2e0]] in Chrome v102, but it still makes sense to fix it)
 
 ! Plugin Improvements
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6428">> issue with ~LaTeX content within Markdown tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6457">> incorrect handling of dropdown classes in the menu bar plugin
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6520">> the Dynannotate plugin to use the new [[View Template Body Cascade]] to avoid modifying the default view template.
 
 ! Translation improvements
 
@@ -82,12 +100,14 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 
 ! Hackability Improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6511">> [[Field Editor Cascade]] for customising how fields are displayed in the edit template
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6388">> support for directly specifying style properties on [[HTML elements|HTML in WikiText]] (for example, `<div style.color={{!!color}}>`)
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/54cfda76ee353190f1cf0210b9071894fb1a5690">> support for ''code-body'' field set to ''yes'' to trigger display of a tiddler in the code view
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6410">> support to [[WidgetMessage: tm-scroll]] for scrolling without animating
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/1d16206188ebd5ca7481a7f565bf5fc4c08239fd">> support for [[WidgetMessage: tm-relink-tiddler]]
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6470">> [[WidgetMessage: tm-open-window]] to support 'top' and 'left' parameters
- 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6523">> new ''matchSelector'' attribute to the EventCatcherWidget
+
 ! Developer Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6409">> support for ''renderEnd()'' method for storyviews
@@ -100,6 +120,7 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 ! Performance Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6327">> support for caching the [[listed Operator]]
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6537">> stylesheet handling to avoid unnecessary refreshes
 
 ! Bug Fixes
 
@@ -108,6 +129,8 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6395">> processing of $:/tags/RawMarkupWikified/TopHead tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6398">> issue whereby renaming tags could result in duplicate tags
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6440">> search results obscured on narrow screens
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6540">> ActionListopsWidget bug with input list items starting with `-`, `+`, `~`, `:` or other character with a special meaning in filters
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/28a91aafa74da04842dbff4b8d0eb7a8dad5dbaa">> (and [[here|https://github.com/Jermolene/TiddlyWiki5/pull/6531]]) refreshing of the ButtonWidget when the `default` attribute changes
 
 ! Acknowledgements
 
@@ -116,16 +139,21 @@ This is a major upgrade to the latest version of highlight.js. The new version h
 * <<contributor benwebber>>
 * <<contributor BramChen>>
 * <<contributor btheado>>
+* <<contributor CodaCodr>>
 * <<contributor cdruan>>
+* <<contributor damscal>>
 * <<contributor davout1806>>
 * <<contributor EvidentlyCube>>
+* <<contributor FlashSystems>>
 * <<contributor flibbles>>
+* <<contributor FSpark>>
 * <<contributor ibnishak>>
 * <<contributor jc-ose>>
 * <<contributor joshuafontany>>
 * <<contributor linonetwo>>
 * <<contributor Marxsal>>
 * <<contributor nilslindemann>>
+* <<contributor oflg>>
 * <<contributor pmario>>
 * <<contributor rryan>>
 * <<contributor saqimtiaz>>
