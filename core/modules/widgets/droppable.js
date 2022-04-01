@@ -171,7 +171,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass || changedAttributes.actions || changedAttributes.effect) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	} else if(changedAttributes["class"]) {
