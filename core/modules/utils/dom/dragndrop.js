@@ -54,7 +54,7 @@ exports.makeDraggable = function(options) {
 				$tw.utils.addClass(event.target,"tc-dragging");
 				// Invoke drag-start actions if given
 				if(startActions !== undefined) {
-					options.widget.invokeActionString(startActions,options.widget,event,{actionTiddler: titleString});
+					options.widget.invokeActionString(startActions,options.widget,event,{actionTiddler: titleString, "tv-selectednode-width": domNode.offsetWidth, "tv-selectednode-height": domNode.offsetHeight});
 				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
