@@ -2596,8 +2596,7 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 		for(t=0; t<remaining.length; t++) {
 			var task = remaining[t];
 			if(task.before && task.before.indexOf(name) !== -1) {
-				//check if the other task matches the platform and is not disabled
-				if($tw.boot.doesTaskMatchPlatform(task) || (task.name && $tw.boot.disabledStartupModules.indexOf(task.name) === -1)) {
+				if($tw.boot.doesTaskMatchPlatform(task) && (!task.name || $tw.boot.disabledStartupModules.indexOf(task.name) === -1)) {
 					return false;
 				}
 			}
