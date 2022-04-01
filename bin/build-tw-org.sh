@@ -84,11 +84,14 @@ rm $TWORG_BUILD_OUTPUT/build.tid || exit 1
 
 # Push output back to GitHub
 
-pushd $TWORG_BUILD_OUTPUT || exit 1
-git config --global user.email "actions@github.com" || exit 1
-git config --global user.name "GitHub Actions" || exit 1
-git add -A . || exit 1
-git diff --exit-code || git commit --message "GitHub build: $GITHUB_RUN_NUMBER of $TW5_BUILD_BRANCH ($(date +'%F %T %Z'))" || exit 1
-git remote add deploy "https://$GH_TOKEN@github.com/TiddlyWiki/tiddlywiki.org-gh-pages.git" &>/dev/null || exit 1
-git push deploy main &>/dev/null || exit 1
+# Exit script immediately if any command fails
+set -e
+
+pushd $TWORG_BUILD_OUTPUT
+git config --global user.email "actions@github.com"
+git config --global user.name "GitHub Actions"
+git add -A .
+git commit --message "GitHub build: $GITHUB_RUN_NUMBER of $TW5_BUILD_BRANCH ($(date +'%F %T %Z'))"
+git remote add deploy "https://$GH_TOKEN@github.com/TiddlyWiki/tiddlywiki.org-gh-pages.git" &>/dev/null
+git push deploy main &>/dev/null
 popd
