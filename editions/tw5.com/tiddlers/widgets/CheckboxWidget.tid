@@ -81,9 +81,9 @@ The example below creates three checkboxes that each control a different value i
 
 <$macrocall $name="wikitext-example-without-html" src="""
 <$set name=indexName filter="[<currentTiddler>addsuffix[ Colors]]" >
-<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="green" unchecked="red" default=""> Green or red?</$checkbox> <br/>
-<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="yellow" unchecked="blue" default=""> Yellow or blue?</$checkbox> <br/>
-<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="orange" unchecked="purple" default=""> Orange or purple?</$checkbox> <br />
+<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="green" unchecked="red" default="red"> Green or red?</$checkbox> <br/>
+<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="yellow" unchecked="blue" default="blue"> Yellow or blue?</$checkbox> <br/>
+<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="orange" unchecked="purple" default="purple"> Orange or purple?</$checkbox> <br />
 Colors list: {{{ [[ExampleData]getindex<indexName>] }}}
 </$set>
 """/>
