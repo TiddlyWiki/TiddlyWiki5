@@ -23,9 +23,9 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |invertTag |When set to ''yes'', flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
 |field |The name of the field to which the checkbox is bound |
 |listField |<<.from-version "5.2.3">> The name of the field that contains the list to which the checkbox is bound |
-|filter |<<.from-version "5.2.3">> A filter whose output determines the checked state of the checkbox |
 |index|<<.from-version "5.1.14">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the checkbox is bound<<.tip "be sure to set the //tiddler// correctly">>|
 |listIndex |<<.from-version "5.2.3">> Like <<.attr index>>, but treats the value as a list the same way that <<.attr listField>> does |
+|filter |<<.from-version "5.2.3">> A filter whose output determines the checked state of the checkbox |
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
@@ -63,19 +63,6 @@ This example creates a checkbox that is checked if the list field named ''colors
 
 Try editing the ''colors'' field of this tiddler to see how the example changes.
 
-!! Filter Mode
-
-Using the checkbox widget in filter mode requires the ''filter'' attribute to contain a filter whose output will determine the checked state of the checkbox. In filter mode, checking the checkbox will not automatically make changes to any field of any tiddler. Instead, you can use the ''actions'' attribute (or ''checkactions'' and ''uncheckactions'') to specify what should happen when the checkbox is toggled. It is your responsibility to make sure the actions cause changes to the tiddlers or fields that the filter results depend on, so that the checkbox becomes properly checked or unchecked after the actions have triggered.
-
-If the filter returns an empty result, the checkbox will be unchecked. Otherwise, if the filter result is non-empty, the checkbox will be checked. However, if either the ''checked'' or ''unchecked'' attributes (or both) are specified, then their values will be looked for in the filter result, instead of considering any non-empty value to mean "checked".
-
-This example creates the same checkbox as in the list mode example, selecting between ''red'' and ''green'' in the ''colors'' list field, but using filters and actions to make the change.
-
-<<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
-\define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
-<$checkbox filter="[list[!!colors]]" checked="green" unchecked="red" default="red" checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> > Is "green" in colors?</$checkbox><br />''colors:'' {{!!colors}}
-""">>
-
 !! Index Mode
 
 To use the checkbox widget in index mode set the ''index'' attribute to the index of a [[DataTiddler|DataTiddlers]]. The ''checked'' and ''unchecked'' attributes specify the values to be assigned to the index and correspond to its checked and unchecked states respectively. The ''default'' attribute is used as a fallback value if the index is undefined.
@@ -100,3 +87,16 @@ The example below creates three checkboxes that each control a different value i
 Colors list: {{{ [[ExampleData]getindex<indexName>] }}}
 </$set>
 """/>
+
+!! Filter Mode
+
+Using the checkbox widget in filter mode requires the ''filter'' attribute to contain a filter whose output will determine the checked state of the checkbox. In filter mode, checking the checkbox will not automatically make changes to any field of any tiddler. Instead, you can use the ''actions'' attribute (or ''checkactions'' and ''uncheckactions'') to specify what should happen when the checkbox is toggled. It is your responsibility to make sure the actions cause changes to the tiddlers or fields that the filter results depend on, so that the checkbox becomes properly checked or unchecked after the actions have triggered.
+
+If the filter returns an empty result, the checkbox will be unchecked. Otherwise, if the filter result is non-empty, the checkbox will be checked. However, if either the ''checked'' or ''unchecked'' attributes (or both) are specified, then their values will be looked for in the filter result, instead of considering any non-empty value to mean "checked".
+
+This example creates the same checkbox as in the list mode example, selecting between ''red'' and ''green'' in the ''colors'' list field, but using filters and actions to make the change.
+
+<<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
+\define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
+<$checkbox filter="[list[!!colors]]" checked="green" unchecked="red" default="red" checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> > Is "green" in colors?</$checkbox><br />''colors:'' {{!!colors}}
+""">>
