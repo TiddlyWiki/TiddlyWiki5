@@ -121,6 +121,9 @@ CheckboxWidget.prototype.getValue = function() {
 			if(this.checkboxUnchecked && !this.checkboxChecked) {
 				return true; // Absence of unchecked value
 			}
+			if(this.checkboxChecked && this.checkboxUnchecked) {
+				return false; // Both specified but neither found: default to false
+			}
 			// Neither specified, so empty list is false, non-empty is true
 			return !!list.length;
 		}
