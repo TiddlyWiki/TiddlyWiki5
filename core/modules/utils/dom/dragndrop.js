@@ -41,7 +41,9 @@ exports.makeDraggable = function(options) {
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
-			    	startActions = options.startActions;
+			    	startActions = options.startActions,
+			    	variables = {},
+			    	domNodeRect;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -54,7 +56,26 @@ exports.makeDraggable = function(options) {
 				$tw.utils.addClass(event.target,"tc-dragging");
 				// Invoke drag-start actions if given
 				if(startActions !== undefined) {
-					options.widget.invokeActionString(startActions,options.widget,event,{actionTiddler: titleString, "tv-selectednode-width": domNode.offsetWidth, "tv-selectednode-height": domNode.offsetHeight});
+					// Collect our variables
+					$tw.utils.each(domNode.attributes,function(attribute) {
+						variables["dom-" + attribute.name] = attribute.value.toString();
+					});
+					variables["actionTiddler"] = titleString;
+					variables["tv-selectednode-posx"] = domNode.offsetLeft.toString();
+					variables["tv-selectednode-posy"] = domNode.offsetTop.toString();
+					variables["tv-selectednode-width"] = domNode.offsetWidth.toString();
+					variables["tv-selectednode-height"] = domNode.offsetHeight.toString();
+					if(event.clientX && event.clientY) {
+						//Add variables for event X and Y position relative to selected node
+						domNodeRect = domNode.getBoundingClientRect();
+						variables["event-fromselected-posx"] = (event.clientX - domNodeRect.left).toString();
+						variables["event-fromselected-posy"] = (event.clientY - domNodeRect.top).toString();
+
+						//Add variables for event X and Y position relative to the viewport
+						variables["event-fromviewport-posx"] = event.clientX.toString();
+						variables["event-fromviewport-posy"] = event.clientY.toString();
+					}
+					options.widget.invokeActionString(startActions,options.widget,event,variables);
 				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
