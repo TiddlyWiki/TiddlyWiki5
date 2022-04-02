@@ -29,7 +29,7 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
-|class |The class that will be assigned to the label element <$macrocall $name=".tip" _="""<<.from-version "5.2.3">> By default, always set to `tc-checkbox`, as well as `tc-checkbox-checked` when checked"""/> |
+|class |The class that will be assigned to the label element <$macrocall $name=".tip" _="""<<.from-version "5.2.3">> `tc-checkbox` is always applied by default, as well as `tc-checkbox-checked` when checked"""/> |
 |actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the status of the checkbox changes (whether it is checked or unchecked) |
 |uncheckactions |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
 |checkactions |<<.from-version "5.1.20">> A string containing ActionWidgets to be triggered when the checkbox is checked |
