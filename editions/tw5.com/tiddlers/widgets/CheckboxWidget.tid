@@ -53,15 +53,15 @@ This example creates a checkbox that is checked if the field ''status'' is equal
 
 !! List Mode
 
-Using the checkbox widget in list mode requires the ''listField'' attribute to specify the name of a field containing a list. The ''checked'' attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If ''checked'' is absent (or empty) but ''unchecked'' is present, then the checkbox will be checked when the "unchecked" is missing from the list, and unchecked when the "unchecked" value is found in the list. Finally, if both ''checked'' and ''unchecked'' are present, the checkbox will work like a toggle, replacing the ''checked'' value with the ''unchecked'' value and vice-versa.
-
-If both ''checked'' and ''unchecked'' are specified but neither value are found in the list, the checkbox will be in an "indeterminate" state. The "indeterminate" state counts as unchecked or "false", but most browsers will display it differently.
+Using the checkbox widget in list mode requires the ''listField'' attribute to specify the name of a field containing a list. The ''checked'' attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If ''checked'' is absent (or empty) but ''unchecked'' is present, then the logic will be inverted: the checkbox will be checked when the "unchecked" value is missing from the list, and unchecked when the "unchecked" value is found in the list. If both ''checked'' and ''unchecked'' are present, the checkbox will work like a toggle, replacing the ''checked'' value with the ''unchecked'' value and vice-versa. Finally, if neither ''checked'' nor ''unchecked'' is specified, the checkbox will be checked if the field has anything in it, but unchecked if the field is missing or empty. (This is rarely useful; most of the time you'll want to specify ''checked'' or ''unchecked'' or both.)
 
 The ''default'' attribute is used as a fallback for the checkbox state if the field is not defined.
 
-This example creates a checkbox that is checked if the list field named ''colors'' contains ''red'' and unchecked if the field contains ''green''. If the field is undefined, or if neither ''red'' nor ''green'' appears in the field, then it defaults to ''green'', meaning that the checkbox will be unchecked.
+This example creates a checkbox that is checked if the list field named ''colors'' contains ''green'' and unchecked if the field contains ''red''. If the field is undefined, or if neither ''green'' nor ''red'' appears in the field, then it defaults to ''green'', meaning that the checkbox will be checked.
 
-<<wikitext-example-without-html """<$checkbox field="colors" fieldMode="list" checked="red" unchecked="green" default="green"> Is it red?</$checkbox><br />''colors:'' {{!!colors}}""">>
+<<wikitext-example-without-html """<$checkbox listField="colors" checked="green" unchecked="red" default="green"> Is it green?</$checkbox><br />''colors:'' {{!!colors}}""">>
+
+Try editing the ''colors'' field of this tiddler to see how the example changes.
 
 !! Filter Mode
 
@@ -69,23 +69,12 @@ Using the checkbox widget in filter mode requires the ''filter'' attribute to co
 
 If the filter returns an empty result, the checkbox will be unchecked. Otherwise, if the filter result is non-empty, the checkbox will be checked. However, if either the ''checked'' or ''unchecked'' attributes (or both) are specified, then their values will be looked for in the filter result, instead of considering any non-empty value to mean "checked".
 
-Note that if both ''checked'' and ''unchecked'' are specified, //and// neither value is present in the filter result, the checkbox will be in an "indeterminate" state. The "indeterminate" state counts as unchecked or "false", but most browsers will display it differently.
-
 This example creates the same checkbox as in the list mode example, selecting between ''red'' and ''green'' in the ''colors'' list field, but using filters and actions to make the change.
 
 <<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
 \define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
 <$checkbox filter="[list[!!colors]]" checked="green" unchecked="red" default="red" checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> > Is "green" in colors?</$checkbox><br />''colors:'' {{!!colors}}
 """>>
-
-In this example the ''default'' attribute is omitted so you can see what happens if the checkbox is in an indeterminate state.
-
-<<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
-\define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
-<$checkbox filter="[list[!!colors]]" checked="green" unchecked="red" checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> > Is "green" in colors?</$checkbox><br />''colors:'' {{!!colors}}
-""">>
-
-Try editing this tiddler and removing or modifying the ''checked'' and ''unchecked'' attributes to see what happens if one or both are absent.
 
 !! Index Mode
 
@@ -97,13 +86,11 @@ The example below creates a checkbox that is checked if the index by the name of
 
 !! Index List Mode
 
-Using the checkbox widget in index list mode requires the ''listIndex'' attribute to specify the the index of a [[DataTiddler|DataTiddlers]] containing a list. The ''checked'' attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If ''checked'' is absent (or empty) but ''unchecked'' is present, then the checkbox will be checked when the "unchecked" is missing from the list, and unchecked when the "unchecked" value is found in the list. Finally, if both ''checked'' and ''unchecked'' are present, the checkbox will work like a toggle, replacing the ''checked'' value with the ''unchecked'' value and vice-versa.
-
-If both ''checked'' and ''unchecked'' are specified but neither value are found in the list, the checkbox will be in an "indeterminate" state. The "indeterminate" state counts as unchecked or "false", but most browsers will display it differently.
+Using the checkbox widget in index list mode requires the ''listIndex'' attribute to specify the the index of a [[DataTiddler|DataTiddlers]] containing a list. The ''checked'' attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If ''checked'' is absent (or empty) but ''unchecked'' is present, then the logic will be inverted: the checkbox will be checked when the "unchecked" value is missing from the list, and unchecked when the "unchecked" value is found in the list. If both ''checked'' and ''unchecked'' are present, the checkbox will work like a toggle, replacing the ''checked'' value with the ''unchecked'' value and vice-versa. Finally, if neither ''checked'' nor ''unchecked'' is specified, the checkbox will be checked if the field has anything in it, but unchecked if the field is missing or empty. (This is rarely useful; most of the time you'll want to specify ''checked'' or ''unchecked'' or both.)
 
 The ''default'' attribute is used as a fallback for the checkbox state if the index is undefined.
 
-This example creates a checkbox that is checked if the list field named ''colors'' contains ''red'' and unchecked if the field contains ''green''. If the field is undefined, or if neither ''red'' nor ''green'' appears in the field, then it defaults to ''green'', meaning that the checkbox will be unchecked.
+The example below creates three checkboxes that each control a different value in an index field of the ExampleData tiddler.
 
 <$macrocall $name="wikitext-example-without-html" src="""
 <$set name=indexName filter="[<currentTiddler>addsuffix[ Colors]]" >
