@@ -1,0 +1,11 @@
+title: GettingStarted
+
+This server let's you test the plugin import mechanism. 
+
+!! Important
+
+''Content isn't saved back to the server. It's read only!''
+
+!! ~ControlPanel Plugin Tab
+
+{{$:/core/ui/ControlPanel/Plugins}}
