@@ -1,0 +1,9 @@
+title: Remove-all-plugin-modules
+
+This button can be used to remove all previously loaded plugins, to prepare the next test
+
+<$button>
+<$action-deletetiddler $filter="[prefix[$:/plugins/]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/internals]] -[[$:/plugins/tiddlywiki/pluginlibrary]] -[[$:/plugins/tiddlywiki/tiddlyweb]]"/>
+<$action-deletetiddler $filter="[prefix[$:/languages/]]"/>
+Delete all "plugin modules"
+</$button>

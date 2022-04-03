@@ -1,0 +1,35 @@
+{
+  "name": "pluginlibrary-test-server",
+  "version": "0.1.0",
+  "description": "tiddlywiki edition development helper",
+  "main": "",
+  "scripts": {
+    "start": "tiddlywiki . --listen",
+
+    "pretest": "npm run build:test:library",
+    "test": "npm run build && npm start",
+
+    "build:test:library": "tiddlywiki ../pluginlibrary --output ../pluginlibrary-server/files/local/library/latest --build library",
+    "build": "tiddlywiki ../pluginlibrary --build index",
+
+    "deploy": "echo # deploy is done with the TW build process!"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jermolene/TiddlyWiki5.git"
+  },
+  "keywords": [
+    "tiddlywiki",
+    "libraries"
+  ],
+  "author": "Mario Pietsch",
+  "license": "BSD 3 clause",
+  "bugs": {
+    "url": "https://github.com/Jermolene/TiddlyWiki5/issues"
+  },
+  "homepage": "",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
