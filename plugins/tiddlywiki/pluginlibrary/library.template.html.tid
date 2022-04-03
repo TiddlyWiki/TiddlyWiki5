@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/pluginlibrary/library.template.html
+code-body: yes
 
 \rules only filteredtranscludeinline transcludeinline
 <!doctype html>
@@ -7,7 +8,7 @@ title: $:/plugins/tiddlywiki/pluginlibrary/library.template.html
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki Plugin Library" />
 <meta name="application-version" content="v0.0.0" />
-<meta name="copyright" content="Copyright 2015 Jeremy Ruston" />
+<meta name="copyright" content="Copyright 2015-2022 Jeremy Ruston" />
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <title>Plugin Library</title>
 <script>
