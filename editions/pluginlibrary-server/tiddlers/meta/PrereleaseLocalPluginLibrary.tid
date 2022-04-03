@@ -1,0 +1,6 @@
+title: $:/config/LocalPluginLibrary
+tags: $:/tags/PluginLibrary
+url: http://127.0.0.1:8080/files/local/library/latest/index.html
+caption: TIDDLYWIKI Plugin Library (Local)
+
+A locally installed version of the plugin library //Requires a local web server to share the library//
