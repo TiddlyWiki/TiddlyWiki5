@@ -87,8 +87,7 @@ PutSaver.prototype.save = function(text,method,callback) {
 		data: text,
 		callback: function(err,data,xhr) {
 			if(err) {
-				// response is textual: "XMLHttpRequest error code: 412"
-				var status = Number(err.substring(err.indexOf(':') + 2, err.length)),
+				var status = xhr.status,
 					errorMsg = err;
 				if(status === 412) { // file changed on server
 					errorMsg = $tw.language.getString("Error/PutEditConflict");
