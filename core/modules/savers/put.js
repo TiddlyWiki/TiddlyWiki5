@@ -80,6 +80,7 @@ PutSaver.prototype.save = function(text,method,callback) {
 	if(this.etag) {
 		headers["If-Match"] = this.etag;
 	}
+	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	$tw.utils.httpRequest({
 		url: this.uri(),
 		type: "PUT",
