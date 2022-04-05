@@ -65,6 +65,14 @@ exports.toggleClass = function(el,className,status) {
 };
 
 /*
+Find the first ancestor element with a specific CSS selector
+*/
+exports.findAncestorWithClass = function(element,selector) {
+	while((element = element.parentElement) && !((element.matches || element.matchesSelector).call(element,selector)));
+	return element;
+};
+
+/*
 Get the first parent element that has scrollbars or use the body as fallback.
 */
 exports.getScrollContainer = function(el) {
