@@ -19,6 +19,7 @@ tags: $:/tags/TiddlerInfo/Advanced
 <$list filter="[all[current]shadowsource[]]">
 
 <$set name="pluginTiddler" value=<<currentTiddler>>>
+
 <<lingo Shadow/Source>>
 </$set>
 

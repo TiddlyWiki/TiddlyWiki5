@@ -1,6 +1,7 @@
 title: $:/core/ui/PageStylesheet
 
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\whitespace trim
 
 <$set name="currentTiddler" value={{$:/language}}>
 
