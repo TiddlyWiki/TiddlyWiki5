@@ -1,0 +1,31 @@
+caption: insertafter
+created: 20170406090122441
+modified: 20220223004441865
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input tiddler list with the new entry inserted
+op-parameter: the <<.op insertafter>> operator accepts 1 or 2 parameters, see below for details
+op-purpose: insert an item <<.place T>> into a list immediately after an item <<.place A>>
+op-suffix: (optional) the name of a variable containing the title of the tiddler after which this one should be inserted
+tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
+title: insertafter Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.3">>
+
+The <<.op insertafter>> operator requires at least one parameter which specifies the title to insert into the input list. A second parameter can be used to specify the title after which the new title should be inserted.
+
+```
+insertafter:<after-title-variable>[<title>],[<after-title>]
+```
+
+* ''title'' : a title <<.place T>> to insert in the input list.
+* ''after-title'' : (optional). Insert <<.place T>> after this title <<.place A>> in the input list.
+* ''after-title-variable'' : (optional). The name of a variable specifying <<.place A>> instead of the `after-title` parameter.
+
+If the item <<.place A>> isn't present in the input list then the new item is inserted at the end of the list. <<.from-version "5.2.3">> The suffixes ''start'' and ''end'' can be spedified to control where the new item is inserted when <<.place A>> is not found. The suffix ''end'' is the default, inserting the new item at the end of the list. The suffix ''start'' will cause the new item to be inserted at the start of the list when <<.place A>> is not found.
+
+<<.tip "Either [[parameter|Filter Parameter]] can be a string, a text reference or a variable">>
+
+<<.tip "If <<.place A>> is specified as both a suffix and a parameter, the parameter takes precedence">>
+
+<<.operator-examples "insertafter">>

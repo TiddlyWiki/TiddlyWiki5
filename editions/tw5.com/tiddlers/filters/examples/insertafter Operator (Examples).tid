@@ -1,0 +1,28 @@
+created: 20220223004441865
+modified: 20220223004441865
+tags: [[Operator Examples]] [[insertafter Operator]]
+title: insertafter Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define after-title() Friday
+\define missing-title() Yesterday
+\define display-variable(name)
+''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
+\end
+
+These examples use the following predefined variables:
+
+* <<display-variable after-title>>
+* <<display-variable missing-title>>
+
+<<.operator-example 1 """[list[Days of the Week]insertafter[Today]]""">>
+
+<<.operator-example 2 """[list[Days of the Week]insertafter[Today],[Tuesday]]""">>
+
+<<.operator-example 3 """[list[Days of the Week]insertafter[Today],<after-title>]""">>
+
+<<.operator-example 4 """[list[Days of the Week]insertafter:after-title[Today]]""">>
+
+<<.operator-example 5 """[list[Days of the Week]insertafter[Today],<missing-title>]""">>
+
+<<.operator-example 6 """[list[Days of the Week]insertafter:missing-title[Today]]""">>
