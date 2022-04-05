@@ -70,7 +70,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
 		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
 		srcWindow = element ? element.ownerDocument.defaultView : window,
-		ancestorWithScrollClass = $tw.utils.findAncestorWithClass("tc-scroll-container");
+		ancestorWithScrollClass = $tw.utils.findAncestorWithClass(element,".tc-scroll-container");
 	var scrollContainer = ancestorWithScrollClass ? ancestorWithScrollClass : srcWindow;
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
