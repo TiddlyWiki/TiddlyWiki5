@@ -112,23 +112,18 @@ This example shows indeterminate checkboxes being used for categories in a shopp
 
 <<wikitext-example-without-html """\define check-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[list[!!$field-name$]]" />
 \define uncheck-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[[]]" />
-<ul style="list-style: none">
-<li>
+
 <$checkbox filter="[list[!!selected-fruits]count[]]" checked={{{ [list[!!fruits]count[]] }}} unchecked="0" checkactions=<<check-all fruits>> uncheckactions=<<uncheck-all fruits>> indeterminate> fruits</$checkbox>
 <ul style="list-style: none">
 <$list variable="fruit" filter="[list[!!fruits]]">
 <li><$checkbox listField="selected-fruits" checked=<<fruit>>> <<fruit>></$checkbox></li>
 </$list>
 </ul>
-</li>
-<li>
 <$checkbox filter="[list[!!selected-vegetables]count[]]" checked={{{ [list[!!vegetables]count[]] }}} unchecked="0" checkactions=<<check-all vegetables>> uncheckactions=<<uncheck-all vegetables>> indeterminate> veggies</$checkbox>
 <ul style="list-style: none">
 <$list variable="veggie" filter="[list[!!vegetables]]">
 <li><$checkbox listField="selected-vegetables" checked=<<veggie>>> <<veggie>></$checkbox></li>
 </$list>
-</ul>
-</li>
 </ul>
 
 <p>Selected veggies: {{!!selected-vegetables}}<br/>
