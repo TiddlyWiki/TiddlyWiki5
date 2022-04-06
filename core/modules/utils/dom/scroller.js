@@ -53,6 +53,9 @@ PageScroller.prototype.handleEvent = function(event) {
 		if($tw.utils.hop(event.paramObject,"animationDuration")) {
 			options.animationDuration = event.paramObject.animationDuration;
 		}
+		if($tw.utils.hop(event.paramObject,"scrollContainerSelector")) {
+			options.scrollContainerSelector = event.paramObject.scrollContainerSelector;
+		}
 		if(event.paramObject && event.paramObject.selector) {
 			this.scrollSelectorIntoView(null,event.paramObject.selector,null,options);
 		} else {
@@ -69,7 +72,9 @@ Handle a scroll event hitting the page document
 PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	var self = this,
 		duration = $tw.utils.hop(options,"animationDuration") ? parseInt(options.animationDuration) : $tw.utils.getAnimationDuration(),
-		srcWindow = element ? element.ownerDocument.defaultView : window;
+		srcWindow = element ? element.ownerDocument.defaultView : window,
+	    	scrollContainer = $tw.utils.hop(options,"scrollContainerSelector") ? element.ownerDocument.querySelector(options.scrollContainerSelector) : 
+				(("scrollTop" in srcWindow.document.documentElement) ? srcWindow.document.documentElement : srcWindow.document.body);
 	// Now get ready to scroll the body
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
@@ -82,7 +87,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	// Get the client bounds of the element and adjust by the scroll position
 	var getBounds = function() {
 			var clientBounds = typeof callback === 'function' ? callback() : element.getBoundingClientRect(),
-				scrollPosition = $tw.utils.getScrollPosition(srcWindow);
+				scrollPosition = $tw.utils.getScrollPosition(scrollContainer);
 			return {
 				left: clientBounds.left + scrollPosition.x,
 				top: clientBounds.top + scrollPosition.y - offset,
@@ -114,11 +119,12 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 				t = 1;
 			}
 			t = $tw.utils.slowInSlowOut(t);
-			var scrollPosition = $tw.utils.getScrollPosition(srcWindow),
+			var scrollPosition = $tw.utils.getScrollPosition(scrollContainer),
 				bounds = getBounds(),
 				endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,srcWindow.innerWidth),
 				endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,srcWindow.innerHeight);
-			srcWindow.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
+			scrollContainer.scrollLeft = scrollPosition.x + (endX - scrollPosition.x) * t;
+			scrollContainer.scrollTop = scrollPosition.y + (endY - scrollPosition.y) * t;
 			if(t < 1) {
 				self.idRequestFrame = self.requestAnimationFrame.call(srcWindow,drawFrame);
 			}
