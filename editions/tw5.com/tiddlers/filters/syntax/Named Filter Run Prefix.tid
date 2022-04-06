@@ -7,4 +7,4 @@ title: Named Filter Run Prefix
 <$railroad text=<<prefixlist>>/>
 </$set>
 
-A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a single-character prefix (`+`, `-` and so on). To create a new filter run prefix, create a [[Javascript module|Modules]] with a [[module-type|ModuleType]] of `filerrunprefix`.
+A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a single-character prefix (`+`, `-` and so on). To create a new filter run prefix, create a [[Javascript module|Modules]] with a [[module-type|ModuleType]] of `filterrunprefix`.

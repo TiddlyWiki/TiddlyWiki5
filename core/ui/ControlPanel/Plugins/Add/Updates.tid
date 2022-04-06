@@ -2,6 +2,7 @@ title: $:/core/ui/ControlPanel/Plugins/Add/Updates
 caption: <$importvariables filter="$:/core/ui/ControlPanel/Plugins/Add/Updates">{{$:/language/ControlPanel/Plugins/Updates/Caption}} (<<update-count>>)</$importvariables>
 
 \define each-updateable-plugin(body)
+\whitespace trim
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}sort[title]]" variable="assetInfo">
 <$set name="libraryVersion" value={{{ [<assetInfo>get[version]] }}}>
 <$list filter="[<assetInfo>get[original-title]has[version]!version<libraryVersion>]" variable="ignore">
@@ -25,8 +26,11 @@ $body$
 <$wikify name="count-filter" text=<<each-updateable-plugin "&#91;&#91;<$text text=<<assetInfo>>/>]]">>><$count filter=<<count-filter>>/></$wikify>
 \end
 
+\whitespace trim
 <$button actions=<<update-all-actions>> class="tc-btn-invisible tc-install-plugin tc-reinstall-upgrade">
-{{$:/core/images/download-button}} {{||$:/language/ControlPanel/Plugins/Updates/UpdateAll/Caption}}
+{{$:/core/images/download-button}}
+&#32;
+{{||$:/language/ControlPanel/Plugins/Updates/UpdateAll/Caption}}
 </$button>
 
 <div class="tc-plugin-library-listing">

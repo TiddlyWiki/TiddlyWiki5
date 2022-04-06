@@ -36,6 +36,8 @@ EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目�
 EditorTypes/Type/Caption: 類型
 EditTemplateBody/Caption: 編輯範本主體
 EditTemplateBody/Hint: 預設的編輯範本使用此規則級聯，動態選擇範本來編輯條目的主體。
+FieldEditor/Caption: 欄位編輯器
+FieldEditor/Hint: 此規則級聯用於根據名稱，動態選擇用於呈現一個條目欄位的範本。其用於編輯範本中。
 Info/Caption: 資訊
 Info/Hint: 有關此 TiddlyWiki 的資訊
 KeyboardShortcuts/Add/Prompt: 在此輸入快捷鍵

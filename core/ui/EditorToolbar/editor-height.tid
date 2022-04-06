@@ -7,6 +7,7 @@ description: {{$:/language/Buttons/EditorHeight/Hint}}
 condition: [<targetTiddler>type[]] [<targetTiddler>get[type]prefix[text/]] [<targetTiddler>get[type]match[application/javascript]] [<targetTiddler>get[type]match[application/json]] [<targetTiddler>get[type]match[application/x-tiddler-dictionary]] [<targetTiddler>get[type]match[image/svg+xml]] +[first[]]
 dropdown: $:/core/ui/EditorToolbar/editor-height-dropdown
 
+\whitespace trim
 <$reveal tag="span" state="$:/config/TextEditor/EditorHeight/Mode" type="match" text="fixed">
 {{$:/core/images/fixed-height}}
 </$reveal>

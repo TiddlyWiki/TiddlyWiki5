@@ -1,0 +1,18 @@
+created: 20140908163900000
+fr-title: Partager vos tiddlers avec d'autres
+modified: 20220221004623008
+tags: Learning
+title: Sharing your tiddlers with others
+type: text/vnd.tiddlywiki
+
+Il existe plusieurs façons de partager des [[tiddlers|Tiddlers]] ou votre <<tw>> complet<<:>>
+
+*Vous pouvez joindre un <<tw>> à un courriel
+*Vous pouvez publier votre <<tw>> en ligne, et envoyer le lien dans un message<<:>>
+**un lien vers l'URL du fichier lui-même
+**un [[permalien|PermaLinks]] (<<.icon $:/core/images/permalink-button>>) vers un tiddler spécifique
+**Un lien [[permaview|PermaView]] (<<.icon $:/core/images/permaview-button>>) de tous les tiddlers ouverts
+* Vous pouvez [[partager un lien Dropbox vers votre TiddlyWiki|Sharing a TiddlyWiki on Dropbox]]
+* Vous pouvez [[exporter des tiddlers|How to export tiddlers]] (<<.icon $:/core/images/export-button>>) dans plusieurs formats de fichiers tels que texte (.TID), HTML statique, JSON et CSV (valeurs séparées par des virgules, compatibles avec les tableurs)
+* Vous pouvez aussi partager des tiddlers simplement  en rendant votre <<tw>> accessible aux autres, par exemple en le publiant en ligne, ce qui leur permettra [[d'importer des tiddlers|Importing Tiddlers]] qu'il contient
+* Il y a un [[plugin de partage|Share Plugin]] expérimental que vous pouvez utiliser pour partager des tiddlers grâce à une URL spécialement conçue à cet effet.
