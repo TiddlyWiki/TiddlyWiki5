@@ -86,12 +86,11 @@ Returns:
 		y: vertical scroll position in pixels
 	}
 */
-exports.getScrollPosition = function(srcWindow) {
-	var scrollWindow = srcWindow || window;
-	if("scrollX" in scrollWindow) {
-		return {x: scrollWindow.scrollX, y: scrollWindow.scrollY};
+exports.getScrollPosition = function(scrollContainer) {
+	if("scrollX" in scrollContainer) {
+		return {x: scrollContainer.scrollX, y: scrollContainer.scrollY};
 	} else {
-		return {x: scrollWindow.document.documentElement.scrollLeft, y: scrollWindow.document.documentElement.scrollTop};
+		return {x: scrollContainer.scrollLeft, y: scrollContainer.scrollTop};
 	}
 };
 
