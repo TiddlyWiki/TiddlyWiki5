@@ -25,17 +25,27 @@ exports.getAttributeValueFromParseTreeNode = function(node,name,defaultValue) {
 };
 
 exports.addClassToParseTreeNode = function(node,classString) {
-	var classes = [];
+	var classes = [],
+		attribute;
 	node.attributes = node.attributes || {};
-	node.attributes["class"] = node.attributes["class"] || {type: "string", value: ""};
-	if(node.attributes["class"].type === "string") {
-		if(node.attributes["class"].value !== "") {
-			classes = node.attributes["class"].value.split(" ");
+	attribute = node.attributes["class"];
+	if (!attribute) {
+		// If the class attribute does not exist, we must create it first.
+		attribute = {name: "class", type: "string", value: ""};
+		node.attributes["class"] = attribute;
+		if (node.orderedAttributes) {
+			// If there are orderedAttributes, we've got to add them there too.
+			node.orderedAttributes.push(attribute);
+		}
+	}
+	if(attribute.type === "string") {
+		if(attribute.value !== "") {
+			classes = attribute.value.split(" ");
 		}
 		if(classString !== "") {
 			$tw.utils.pushTop(classes,classString.split(" "));
 		}
-		node.attributes["class"].value = classes.join(" ");
+		attribute.value = classes.join(" ");
 	}
 };
 
