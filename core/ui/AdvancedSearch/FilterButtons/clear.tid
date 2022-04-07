@@ -1,6 +1,7 @@
 title: $:/core/ui/AdvancedSearch/Filter/FilterButtons/clear
 tags: $:/tags/AdvancedSearch/FilterButton
 
+\whitespace trim
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <<cancel-search-actions>>
