@@ -82,7 +82,7 @@ DraggableWidget.prototype.execute = function() {
 	this.endActions = this.getAttribute("endactions");
 	this.dragImageType = this.getAttribute("dragimagetype");
 	this.dragHandleSelector = this.getAttribute("selector");
-	this.dragEnable = (this.getAttribute("enable") || "yes") === "yes";
+	this.dragEnable = this.getAttribute("enable","yes") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
