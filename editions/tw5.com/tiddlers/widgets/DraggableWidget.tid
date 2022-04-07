@@ -34,3 +34,17 @@ The [[actionTiddler Variable]] is accessible in both //startactions// and //enda
 
 
 The LinkWidget incorporates the functionality of the DraggableWidget via the ''draggable'' attribute.
+
+<<.from-version 5.2.3>> The following variables are accessible in the //startactions//:
+
+|!Variables |!Description |
+|`dom-*` |All DOM attributes of the node being dragged are made available as variables, with the prefix `dom-` |
+|`tv-popup-coords` |A co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node that's being dragged where the event originated |
+|`tv-selectednode-posx` |`x` offset position of the dragged DOM node |
+|`tv-selectednode-posy` |`y` offset position of the dragged DOM node  |
+|`tv-selectednode-width` |`offsetWidth` of the dragged DOM node |
+|`tv-selectednode-height` |`offsetHeight` of the dragged DOM node |
+|`event-fromselected-posx` |`x` position of the event relative to the dragged DOM node |
+|`event-fromselected-posy` |`y` position of the event relative to the dragged DOM node |
+|`event-fromviewport-posx` |`x` position of the event relative to the viewport |
+|`event-fromviewport-posy` |`y` position of the event relative to the viewport |
