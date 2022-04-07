@@ -40,15 +40,25 @@ exports.startup = function() {
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
 		var selector = event.param || "",
+		    	delay = event.paramObject.delay,
 			element,
 		    	doc = event.event && event.event.target ? event.event.target.ownerDocument : document;
-		try {
-			element = doc.querySelector(selector);
-		} catch(e) {
-			console.log("Error in selector: ",selector)
-		}
-		if(element && element.focus) {
-			element.focus(event.paramObject);
+		var focusSelector = function(selector) {
+			try {
+				element = doc.querySelector(selector);
+			} catch(e) {
+				console.log("Error in selector: ",selector)
+			}
+			if(element && element.focus) {
+				element.focus(event.paramObject);
+			}
+		};
+		if(delay) {
+			setTimeout(function() {
+				focusSelector(selector);
+			},delay);
+		} else {
+			focusSelector(selector);
 		}
 	});
 	// Install the tm-rename-tiddler and tm-relink-tiddler messages
