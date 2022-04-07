@@ -61,6 +61,7 @@ exports.makeDraggable = function(options) {
 						variables["dom-" + attribute.name] = attribute.value.toString();
 					});
 					variables["actionTiddler"] = titleString;
+					variables["tv-popup-coords"] = "(" + domNode.offsetLeft + "," + domNode.offsetTop +"," + domNode.offsetWidth + "," + domNode.offsetHeight + ")";
 					variables["tv-selectednode-posx"] = domNode.offsetLeft.toString();
 					variables["tv-selectednode-posy"] = domNode.offsetTop.toString();
 					variables["tv-selectednode-width"] = domNode.offsetWidth.toString();
