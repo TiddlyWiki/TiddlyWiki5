@@ -48,7 +48,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	if(this.draggableClasses) {
 		classes.push(this.draggableClasses);
 	}
-	if(!this.dragHandleSelector && this.dragEnabled) {
+	if(!this.dragHandleSelector && this.dragEnable) {
 		classes.push("tc-draggable");
 	}
 	domNode.setAttribute("class",classes.join(" "));
@@ -56,7 +56,7 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	// Add event handlers
-	if(this.dragEnabled) {
+	if(this.dragEnable) {
 		$tw.utils.makeDraggable({
 			domNode: domNode,
 			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
@@ -82,7 +82,7 @@ DraggableWidget.prototype.execute = function() {
 	this.endActions = this.getAttribute("endactions");
 	this.dragImageType = this.getAttribute("dragimagetype");
 	this.dragHandleSelector = this.getAttribute("selector");
-	this.dragEnabled = this.getAttribute("enabled") !== "no";
+	this.dragEnable = (this.getAttribute("enable") || "yes") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
