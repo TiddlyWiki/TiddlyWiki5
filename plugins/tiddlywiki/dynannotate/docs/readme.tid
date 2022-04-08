@@ -104,7 +104,7 @@ Both selection trackers are enabled by default.
 
 !!! Main Selection Tracker
 
-The selection tracker triggers an action string whenever the browser text selection changes.
+The selection tracker triggers an action string whenever the browser text selection changes. The actions are delayed until the selection has not changed for 500ms (this means that the selection tracker is only triggered when the user pauses after completing a selection, and is not continuously invoked as the user drags the selection).
 
 The selection tracker works within DOM subtrees that have the following structure:
 
