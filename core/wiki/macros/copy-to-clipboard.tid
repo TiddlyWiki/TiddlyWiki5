@@ -2,16 +2,19 @@ title: $:/core/macros/copy-to-clipboard
 tags: $:/tags/Macro
 
 \define copy-to-clipboard(src,class:"tc-btn-invisible",style)
+\whitespace trim
 <$button class=<<__class__>> style=<<__style__>> message="tm-copy-to-clipboard" param=<<__src__>> tooltip={{$:/language/Buttons/CopyToClipboard/Hint}}>
-{{$:/core/images/copy-clipboard}} <$text text={{$:/language/Buttons/CopyToClipboard/Caption}}/>
+{{$:/core/images/copy-clipboard}}
+&#32;
+<$text text={{$:/language/Buttons/CopyToClipboard/Caption}}/>
 </$button>
 \end
 
 \define copy-to-clipboard-above-right(src,class:"tc-btn-invisible",style)
+\whitespace trim
 <div style="position: relative;">
 <div style="position: absolute; bottom: 0; right: 0;">
 <$macrocall $name="copy-to-clipboard" src=<<__src__>> class=<<__class__>> style=<<__style__>>/>
 </div>
 </div>
 \end
-
