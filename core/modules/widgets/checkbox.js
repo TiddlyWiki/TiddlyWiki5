@@ -304,11 +304,7 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedTiddlers[this.checkboxTitle]) {
 			var isChecked = this.getValue();
 			this.inputDomNode.checked = !!isChecked;
-			if(isChecked === undefined) {
-				this.inputDomNode.indeterminate = true;
-			} else {
-				this.inputDomNode.indeterminate = false;
-			}
+			this.inputDomNode.indeterminate = (isChecked === undefined);
 			refreshed = true;
 			if(isChecked) {
 				$tw.utils.addClass(this.labelDomNode,"tc-checkbox-checked");
