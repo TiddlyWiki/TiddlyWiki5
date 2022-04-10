@@ -57,6 +57,7 @@ exports.makeDraggable = function(options) {
 				// Invoke drag-start actions if given
 				if(startActions !== undefined) {
 					// Collect our variables
+					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 					$tw.utils.each(domNode.attributes,function(attribute) {
 						variables["dom-" + attribute.name] = attribute.value.toString();
 					});
