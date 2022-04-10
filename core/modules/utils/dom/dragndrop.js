@@ -145,7 +145,8 @@ exports.makeDraggable = function(options) {
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
 				if(endActions !== undefined) {
-					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString});
+					var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString, modifier: modifierKey});
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
