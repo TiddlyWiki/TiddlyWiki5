@@ -65,6 +65,17 @@ function hookBootTiddlersLoaded() {
 						}
 					}
 				}
+			} else {
+				// Empty value means the tiddler is marked as deleted
+				var title = parts.slice(2).join("#"),
+					existingTiddler = $tw.wiki.getTiddler(title);
+				if(existingTiddler) {
+					// The tiddler still exists in the wiki. Delete it so it won't be visible.
+					$tw.wiki.deleteTiddler(title);
+				} else {
+					// The tiddler is already missing from the wiki, so delete the blank local storage entry
+					keysToDelete.push(key);
+				}
 			}
 		}
 	}
