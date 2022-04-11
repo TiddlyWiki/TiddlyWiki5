@@ -1,0 +1,36 @@
+caption: Tiddloid et Tiddloid Lite
+color: #ff8a65
+community-author: donmor
+created: 20130825161400000
+delivery: App
+description: Applis Android pour enregistrer dans la mémoire de l'appareil
+fr-title: Enregistrer sur Android
+method: save
+modified: 20220402105820520
+tags: Saving Android
+title: Saving on Android
+type: text/vnd.tiddlywiki
+url: https://github.com/donmor/Tiddloid
+
+Les applications Tiddloid et Tiddloid Lite sont des applis Android qui permettent d'éditer des wikis et d'enregistrer les changements au format HTML de <<tw>>.
+
+* Pour plus d'informations<<:>> [[Tiddloid|https://github.com/donmor/Tiddloid]] [[Tiddloid Lite|https://github.com/donmor/TiddloidLite]].
+* Téléchargement des APK<<:>> [[Tiddloid|https://github.com/donmor/Tiddloid/releases]], [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]]
+
+
+!!! Fonctionnalités
+
+* Créez des nouveaux wikis à partir de la dernière version de <<tw>> publiée sur internet
+* Importez des <<tw>> existants stockés sur la mémoire interne de l'appareil. ([[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]] permet aussi le stockage sur carte SD externe)
+* Copiez et personnalisez des <<tw>> intéressants à partir d'internet (fonctionne avec TW5 uniquement)
+* Détection de <<tw>>
+* Les <<tw>> stockés localement sont mis à jour en même temps que l'enregistrement des modifications dans les <<tw>> importés dans l'appli.
+* Système de sauvegarde compatible avec celui de TiddlyDesktop
+* Raccourcis vers vos wikis sur la page d'accueil d'Android
+* [[TiddloidLite|https://github.com/donmor/TiddloidLite/releases]] est compatible avec le stockage en nuage comme GDrive ou ~OneDrive.
+
+!!! Notes
+
+* Tiddloid Lite fonctionne mieux sur les appareils munis d'Android Q ou ultérieur. Il permet aussi le stockage en nuage dans GDrive ou ~OneDrive, alors que Tiddloid conserve la compatibilité avec //~TiddlyWiki Classic//. Pour en apprendre plus sur les différences entre Tiddloid et Tiddloid Lite, consultez [[la page d'accueil de Tiddloid|https://github.com/donmor/Tiddloid]].
+* Pour que l'importation fonctionne correctement, conservez l'extension `.html` ou `.htm` de vos fichiers <<tw>>.
+

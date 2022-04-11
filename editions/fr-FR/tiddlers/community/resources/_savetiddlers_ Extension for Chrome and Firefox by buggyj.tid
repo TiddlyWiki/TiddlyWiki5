@@ -1,0 +1,17 @@
+caption: savetiddlers
+color: #4DB6AC
+community-author: Buggyj
+created: 20171109171935039
+delivery: Browser Extension
+description: Extension pour les navigateurs Chrome et Firefox
+fr-title: 
+method: save
+modified: 20220402105820520
+tags: Chrome Firefox Saving [[Other Resources]] plugins
+title: "savetiddlers" Extension for Chrome and Firefox by buggyj
+type: text/vnd.tiddlywiki
+url: https://github.com/buggyj/savetiddlers
+
+Une extension pour Google Chrome et Mozilla Firefox qui fluidifie l'utilisation de [[l'enregistreur HTML5 par défaut|Saving with the HTML5 fallback saver]] de <<tw>>, et le rend presque aussi convivial que ~TiddlyFox une fois configurée.
+
+https://github.com/buggyj/savetiddlers

@@ -1,0 +1,17 @@
+caption: Astuce HTA
+color: #F06292
+created: 20131212223146250
+delivery: DIY
+description: Méthode manuelle pour laisser Internet Explorer enregistrer les modifications directement
+fr-title: Astuce Windows HTA
+method: save
+modified: 20220402105820520
+tags: Saving Windows
+title: Windows HTA Hack
+type: text/vnd.tiddlywiki
+
+Sous Windows il est possible de convertir <<tw>> en une vraie application locale en renommant le fichier HTML pour lui donner l'extension `*.hta`. Le module ''fsosaver'' peut alors utiliser l'~ActiveX ~FileSystemObject pour enregistrer les modifications.
+
+Notez qu'un inconvénient de cette méthode est que le fichier <<tw>> est enregistré avec l'encodage de caractères UTF-16, ce qui double quasiment sa taille par rapport au format UTF-8 habituel. Toutefois, ouvrir puis enregistrer le fichier avec une autre méthode le ré-encodera en UTF-8.
+
+Voir Wikipedia pour plus de détails<<:>> https://fr.wikipedia.org/wiki/HTML_Application

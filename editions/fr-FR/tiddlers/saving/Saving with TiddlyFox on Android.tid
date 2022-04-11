@@ -1,7 +1,7 @@
 created: 20140103134551508
 fr-title: Sauvegarder avec TiddlyFox sur Android
-modified: 20160602060542809
-tags: Saving
+modified: 20220402105820520
+tags: [[Saving with TiddlyFox]]
 title: Saving with TiddlyFox on Android
 type: text/vnd.tiddlywiki
 
@@ -19,7 +19,7 @@ type: text/vnd.tiddlywiki
 # Une fois le fichier téléchargé, cliquez dessus depuis la zone de notification ou l'application de gestion des téléchargements
 # Choisissez d'ouvrir le fichier avec Firefox (et non l'application par défaut proposée par Android)
 # Cliquez ''OK'' en réponse à la demande de TiddlyFox qui vous demande s'il faut activer l'enregistrement pour ce fichier
-# Essayez de créer un nouveau tiddler à l'aide du bouton ''nouveau tiddler'' {{$:/core/images/new-button}} de la barre latérale. Entrez du contenu dans le tiddler, puis cliquez sur le bouton ''terminé'' {{$:/core/images/done-button}}
-# Sauvegardez vos modifications en cliquant sur le bouton ''enregistrer les modifications'' {{$:/core/images/save-button}} de la barre latérale
+# Essayez de créer un nouveau tiddler à l'aide du bouton <<.icon $:/core/images/new-button>> ''nouveau tiddler'' de la barre latérale. Ajouter du contenu dans le tiddler, et cliquez sur le bouton <<.icon $:/core/images/done-button>> ''terminé''
+# Enregistrez vos modifications en cliquant sur le bouton <<.icon $:/core/images/save-button>> ''enregistrer les modifications'' de la barre latérale
 #* Attendez l'indication jaune ''Wiki enregistré'' en haut à droite de la fenêtre
 # Rafraîchissez la fenêtre du navigateur pour vérifier que vos modifications ont été correctement enregistrées
