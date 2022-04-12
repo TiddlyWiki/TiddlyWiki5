@@ -38,6 +38,7 @@ The LinkWidget incorporates the functionality of the DraggableWidget via the ''d
 <<.from-version 5.2.3>> The following variables are accessible in the //startactions//:
 
 |!Variables |!Description |
+|`modifier` |The [[modifier Variable]] contains the Modifier Key held while dragging |
 |`dom-*` |All DOM attributes of the node being dragged are made available as variables, with the prefix `dom-` |
 |`tv-popup-coords` |A co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node that's being dragged where the event originated |
 |`tv-selectednode-posx` |`x` offset position of the dragged DOM node |
@@ -48,3 +49,9 @@ The LinkWidget incorporates the functionality of the DraggableWidget via the ''d
 |`event-fromselected-posy` |`y` position of the event relative to the dragged DOM node |
 |`event-fromviewport-posx` |`x` position of the event relative to the viewport |
 |`event-fromviewport-posy` |`y` position of the event relative to the viewport |
+
+<<.from-version 5.2.3>> The following variables are accessible in the //endactions//:
+
+|!Variables |!Description |
+|`modifier` |The [[modifier Variable]] contains the Modifier Key held while dragging |
+
