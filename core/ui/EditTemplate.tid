@@ -1,18 +1,21 @@
 title: $:/core/ui/EditTemplate
 
-\define delete-edittemplate-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<newFieldNameInputTiddler>] [<newFieldNameSelectionTiddler>] [<newTagNameTiddler>] [<newTagNameInputTiddler>] [<newTagNameSelectionTiddler>] [<typeInputTiddler>] [<typeSelectionTiddler>]"/>
+\define delete-edittemplate-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix<newFieldValueTiddlerPrefix>] [<newFieldNameInputTiddler>] [<newFieldNameSelectionTiddler>] [<newTagNameTiddler>] [<newTagNameInputTiddler>] [<newTagNameSelectionTiddler>] [<typeInputTiddler>] [<typeSelectionTiddler>]"/>
+
+\define get-field-value-tiddler-filter() [subfilter<get-field-editor-filter>sha256[16]addprefix[/]addprefix<newFieldValueTiddlerPrefix>]
+\define get-field-editor-filter() [<newFieldNameTiddler>get[text]else[]] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}]
 
 \define save-tiddler-actions()
 \whitespace trim
 <$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
-<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[<newFieldValueTiddler>get<currentTiddler>] }}}/>
+<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 <<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
 
 \define cancel-delete-tiddler-actions(message)
 \whitespace trim
-<<delete-edittemplate-state-tiddlers>> 
+<<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-$message$-tiddler"/>
 \end
 
@@ -26,7 +29,7 @@ title: $:/core/ui/EditTemplate
 	storyTiddler=<<currentTiddler>>
 	newTagNameTiddler=<<qualify "$:/temp/NewTagName">>
 	newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">>
-	newFieldValueTiddler=<<qualify "$:/temp/NewFieldValue">>
+	newFieldValueTiddlerPrefix=<<qualify "$:/temp/NewFieldValue">>
 	newFieldNameInputTiddler=<<qualify "$:/temp/NewFieldName/input">>
 	newFieldNameSelectionTiddler=<<qualify "$:/temp/NewFieldName/selected-item">>
 	newTagNameInputTiddler=<<qualify "$:/temp/NewTagName/input">>

@@ -16,8 +16,8 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 
 \define new-field-actions()
 \whitespace trim
-<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[<newFieldValueTiddler>get<currentTiddler>] }}}/>
-<$action-deletetiddler $filter="[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<storeTitle>] [<searchListState>]"/>
+<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
+<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix<newFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
 <$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
 \end
 
@@ -51,8 +51,8 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$button tooltip=<<lingo Fields/Add/Button/Hint>>>
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
-$value={{{ [<newFieldValueTiddler>get<name>] }}}/>
-<$action-deletetiddler $filter="[<newFieldNameTiddler>] [<newFieldValueTiddler>] [<storeTitle>] [<searchListState>]"/>
+$value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
+<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix<newFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
@@ -135,13 +135,11 @@ $value={{{ [<newFieldValueTiddler>get<name>] }}}/>
 </div>
 </$reveal>
 </div>
-<$let currentTiddler=<<newFieldValueTiddler>> currentField={{{ [<newFieldNameTiddler>get[text]] }}}>
+<$let currentTiddlerCSSescaped={{{ [<currentTiddler>escapecss[]] }}} currentTiddler={{{ [subfilter<get-field-value-tiddler-filter>] }}} currentField="text" currentFieldName={{{ [<newFieldNameTiddler>get[text]] }}}>
 <span class="tc-edit-field-add-value tc-small-gap-right">
-<$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
 <$keyboard key="((add-field))" actions=<<new-field-actions>>>
-<$transclude tiddler={{{ [<currentField>] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}] }}} />
+<$transclude tiddler={{{ [subfilter<get-field-editor-filter>] }}} />
 </$keyboard>
-</$set>
 </span>
 <span class="tc-edit-field-add-button">
 <$macrocall $name="new-field"/>
