@@ -1,5 +1,5 @@
 created: 20220413104641645
-modified: 20220413105228845
+modified: 20220413110843650
 myField: test
 tags: 
 title: test-6284-jeremy
@@ -12,8 +12,9 @@ Value of myField is -> ''{{!!myField}}''
 """{{{ [all[current]get[myField]addprefix<charcode 93>] }}}
 """>>
 
+----
 
-last example from Jeremy `[<currentTiddler>addsuffix<charcode [[>]` can't be done, since "charcode" would convert the input into something completely different. 
+The last example from Jeremy `[<currentTiddler>addsuffix<charcode [[>]` can't be done, since "charcode" would convert the input into something completely different. 
 
 So ''jsstrting'' was created:
 
@@ -21,6 +22,23 @@ So ''jsstrting'' was created:
 """{{{ [<currentTiddler>addsuffix<jsstring "[[">] }}}
 """>>
 
+---
 
+Jeremy raises a concern [[at gitHub|https://github.com/Jermolene/TiddlyWiki5/issues/6284]]
+
+<<<
+* a single typed character (this feature would not work properly characters that could be misinterpreted as a quotation symbol like `"`, `'`)
+<<<
+
+
+Can be solved with
+
+<<wikitext-example-without-html 
+"""{{{ [<currentTiddler>addsuffix<jsstring '"'>] }}}
+""">>
+
+<<wikitext-example-without-html 
+"""{{{ [<currentTiddler>addsuffix<jsstring "'">] }}}
+""">>
 
 
