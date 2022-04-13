@@ -1,5 +1,3 @@
-created: 20211126104006194
-list: [[Page and tiddler layout customisation]] [[Creating new buttons for the ViewToolbar and page controls]] [[Structuring TiddlyWiki]] Tagging [[Introduction to Lists]] [[Icon Gallery]] [[How to widen tiddlers (aka storyriver)]] [[How to turn off camel case linking]] [[How to put the last modification date in a banner]] [[How to hide the author's and other fields with CSS]] [[How to export tiddlers]] [[How to Customize TiddlyDesktop]] [[Editing Tiddlers with Vim]] [[Concatenating text and variables using macro substitution]] [[Demonstration: keyboard-driven-input Macro]] HelloThere GettingStarted Community
-modified: 20211126111221917
+list: test-jsstring-with-linebreaks test-join-with-charcode-macro test-jsstring-charcode-side-by-side test-jsstring
 title: $:/StoryList
 type: text/vnd.tiddlywiki

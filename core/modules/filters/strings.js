@@ -175,10 +175,12 @@ exports.pad = function(source,operator,options) {
 }
 
 exports.charcode = function(source,operator,options) {
-	var chars = [];
+	var lookup = $tw.config.lookup,
+		chars = [];
 	$tw.utils.each(operator.operands,function(operand) {
-		if(operand !== "") {
-			chars.push(String.fromCharCode($tw.utils.parseInt(operand)));
+		var code = lookup[operand.toLowerCase()] || operand;
+		if(code !== "") {
+			chars.push(String.fromCharCode($tw.utils.parseInt(code)));
 		}
 	});
 	return [chars.join("")];

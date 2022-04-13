@@ -1,0 +1,9 @@
+created: 20220412134115557
+modified: 20220412134315319
+tags: 
+title: test-jsstring-with-linebreaks
+type: text/vnd.tiddlywiki
+
+<<wikitext-example-without-html 
+"""<<jsstring "<pre>asdf\n\tasdf</pre>">>
+""">>
