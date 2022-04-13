@@ -37,9 +37,12 @@ DiffTextWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	// Get valid text to compare
+	var src = this.getAttribute("source") || "diff: no source attribute",
+		dst = this.getAttribute("dest") || "diff: no dest attribute";
 	// Create the diff
 	var dmpObject = new dmp.diff_match_patch(),
-		diffs = dmpObject.diff_main(this.getAttribute("source"),this.getAttribute("dest"));
+		diffs = dmpObject.diff_main(src,dst);
 	// Apply required cleanup
 	switch(this.getAttribute("cleanup","semantic")) {
 		case "none":
