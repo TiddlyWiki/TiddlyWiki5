@@ -42,7 +42,7 @@ exports.makeDraggable = function(options) {
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
 			    	startActions = options.startActions,
-			    	variables = {},
+			    	variables,
 			    	domNodeRect;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
@@ -119,7 +119,8 @@ exports.makeDraggable = function(options) {
 				var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 					dragFilter = options.dragFilterFn && options.dragFilterFn(),
 					titles = dragTiddler ? [dragTiddler] : [],
-			    		endActions = options.endActions;
+			    		endActions = options.endActions,
+				    	variables;
 				if(dragFilter) {
 					titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 				}
@@ -127,7 +128,8 @@ exports.makeDraggable = function(options) {
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
 				if(endActions !== undefined) {
-					var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+					variables = $tw.utils.collectDOMVariables(domNode,null,event);
+					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString, modifier: modifierKey});
 				}
 				// Remove the dragging class on the element being dragged
