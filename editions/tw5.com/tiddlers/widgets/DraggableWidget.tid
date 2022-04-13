@@ -35,7 +35,7 @@ The [[actionTiddler Variable]] is accessible in both //startactions// and //enda
 
 The LinkWidget incorporates the functionality of the DraggableWidget via the ''draggable'' attribute.
 
-<<.from-version 5.2.3>> The following variables are accessible in the //startactions//:
+<<.from-version 5.2.3>> The following variables are accessible in the //startactions// and the //endactions//:
 
 |!Variables |!Description |
 |`modifier` |The [[modifier Variable]] contains the Modifier Key held while dragging |
@@ -49,9 +49,3 @@ The LinkWidget incorporates the functionality of the DraggableWidget via the ''d
 |`event-fromselected-posy` |`y` position of the event relative to the dragged DOM node |
 |`event-fromviewport-posx` |`x` position of the event relative to the viewport |
 |`event-fromviewport-posy` |`y` position of the event relative to the viewport |
-
-<<.from-version 5.2.3>> The following variables are accessible in the //endactions//:
-
-|!Variables |!Description |
-|`modifier` |The [[modifier Variable]] contains the Modifier Key held while dragging |
-
