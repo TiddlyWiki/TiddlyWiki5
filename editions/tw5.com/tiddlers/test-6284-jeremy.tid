@@ -1,0 +1,26 @@
+created: 20220413104641645
+modified: 20220413105228845
+myField: test
+tags: 
+title: test-6284-jeremy
+type: text/vnd.tiddlywiki
+
+
+Value of myField is -> ''{{!!myField}}''
+
+<<wikitext-example-without-html 
+"""{{{ [all[current]get[myField]addprefix<charcode 93>] }}}
+""">>
+
+
+last example from Jeremy `[<currentTiddler>addsuffix<charcode [[>]` can't be done, since "charcode" would convert the input into something completely different. 
+
+So ''jsstrting'' was created:
+
+<<wikitext-example-without-html 
+"""{{{ [<currentTiddler>addsuffix<jsstring "[[">] }}}
+""">>
+
+
+
+

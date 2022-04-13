@@ -1,8 +1,10 @@
 created: 20211201182207801
-modified: 20220412124326177
+modified: 20220413105523838
 tags: 
 title: test-jsstring-charcode-side-by-side
 type: text/vnd.tiddlywiki
+
+TODO The following elements will need to be explained in more detail.
 
 The lookup for the "placeholders" looks like this atm
 
@@ -30,7 +32,7 @@ exports.lookup = {
 ]then[matches]else[doesn't match]] }}}  """>>
 
 
-There are 2 possibilities atm `\n  and lf`
+There are 2 possibilities `\n and lf`
 
 <<wikitext-example-without-html """{{{ [<charcode "\n">match[
 ]then[matches]else[doesn't match]] }}}  """>>
