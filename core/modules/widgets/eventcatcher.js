@@ -52,7 +52,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				selectedNode = event.target,
 				selectedNodeRect,
 				catcherNodeRect,
-				variables = {};
+				variables;
 			// Firefox can fire dragover and dragenter events on text nodes instead of their parents
 			if(selectedNode.nodeType === 3) {
 				selectedNode = selectedNode.parentNode;
@@ -72,33 +72,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				}
 				// Only set up variables if we have actions to invoke
 				if(actions) {
-					$tw.utils.each(selectedNode.attributes,function(attribute) {
-						variables["dom-" + attribute.name] = attribute.value.toString();
-					});
-					//Add a variable with a popup coordinate string for the selected node
-					variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
-
-					//Add variables for offset of selected node
-					variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
-					variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
-					variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
-					variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
-					
-					if(event.clientX && event.clientY) {
-						//Add variables for event X and Y position relative to selected node
-						selectedNodeRect = selectedNode.getBoundingClientRect();
-						variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
-						variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
-
-						//Add variables for event X and Y position relative to event catcher node
-						catcherNodeRect = self.domNode.getBoundingClientRect();
-						variables["event-fromcatcher-posx"] = (event.clientX - catcherNodeRect.left).toString();
-						variables["event-fromcatcher-posy"] = (event.clientY - catcherNodeRect.top).toString();
-
-						//Add variables for event X and Y position relative to the viewport
-						variables["event-fromviewport-posx"] = event.clientX.toString();
-						variables["event-fromviewport-posy"] = event.clientY.toString();
-					}
+					variables = $tw.utils.collectDOMVariables(selectedNode,self.domNode,event);
 				}
 			}
 			// Execute our actions with the variables
