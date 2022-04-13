@@ -1,24 +1,30 @@
 created: 20220305183700000
-modified: 20220305183700000
+modified: 20220413165500000
 tags: Concepts
 title: Customizing EditTemplate field rendering
 type: text/vnd.tiddlywiki
 
 When editing a tiddler the [[EditTemplate|$:/core/ui/EditTemplate/fields]] normally renders fields as simple input boxes. To modify this behaviour, the [[cascade mechanism|Cascades]] can be used. Via the [[Field Editor Cascade|Field Editor Cascade]] the name of the tiddler used for rendering the field editor can be specified. The content of this tiddler is transcluded to represent the content of the field.
 
-To modify the appearance of all fields whose name ends with `-date` create a new tiddler and add the `$:/tags/FieldEditorFilter` tag to it. Add a `list-before` field and assign the value `$:/config/FieldEditorFilters/default`. Now you have to put the filter for the cascade into the tiddler's text field: `[regexp[-date$]then[$:/config/EditTemplateFields/Templates/dates]]`. This will transclude the tiddler named `$:/config/EditTemplateFields/Templates/dates` to render the input elements for all fields with names matching the regular expression.
+To modify the appearance of all fields whose name ends with `-date` create a new tiddler and add the `$:/tags/FieldEditorFilter` tag to it. Add a `list-before` field and assign the value `$:/config/FieldEditorFilters/default`. Now you have to put the filter for the cascade into the tiddler's text field: `[suffix[-date]then[$:/config/EditTemplateFields/Templates/dates]]`. This will transclude the tiddler named `$:/config/EditTemplateFields/Templates/dates` to render the input elements for all fields with names matching the regular expression.
 
-The variables `currentTiddler` and `currentField` are set to pass information about the tiddler and field that are edited to the transcluded tiddler.
+The variables `currentTiddler`, `currentField` and `currentFieldName` are set to pass information about the tiddler and field that are edited to the transcluded tiddler.
+
+|`currentTiddler`|The tiddler that must be used to store the field value.|
+|`currentField`|The field within the `currentTiddler` that must be used to store the field name. This is an opaque value hat may contain any field name (even `text`), use `currentFieldName` to make decisions based on the actual name of the currently edited field.|
+|`currentFieldName`|The name of the currently edited field.|
 
 For example, a tiddler containing the following WikiText would render the field as an HTML input element of the type `date`. This will show a date picker for the fields on all modern browsers:
 
 ```
-<$edit-text tiddler=<<currentTiddler>> field=<<currentField>> type="date" class="tc-edit-texteditor tc-edit-fieldeditor" placeholder="Set your date" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
+<$edit-text tiddler=<<currentTiddler>> field=<<currentField>> tag="input" type="date" class="tc-edit-texteditor tc-edit-fieldeditor" placeholder="Set your date" tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
 ```
+
+<<.warning "The `currentField` variable will be set to `text` for new fields. Make sure that your editor will handle this correctly. For example, by setting the `tag` attribute on the EditTextWidget. If you want to know the name of the currently edited/added field, use the `currentFieldName` variable.">>
 
 The `tabindex` and `cancelPopups` attributes make sure the HTML input element behaves exactly the default elements provided by TiddlyWiki.
 
-Not only the `EditTextWidget` can be used. A tiddler containing the following WikiText will render the field as a drop-down-list that allows the user to select the name of a tiddler. The name of the selected tiddler will be stored in the field.
+Not only the EditTextWidget can be used. A tiddler containing the following WikiText will render the field as a drop-down-list that allows the user to select the name of a tiddler. The name of the selected tiddler will be stored in the field.
 
 ```
 <$select tiddler=<<currentTiddler>> field=<<currentField>> class="tc-edit-texteditor tc-edit-fieldeditor" cancelPopups="yes">
@@ -29,3 +35,13 @@ Not only the `EditTextWidget` can be used. A tiddler containing the following Wi
 ```
 
 The classes `tc-edit-texteditor` and `tc-edit-fieldeditor` should be used to style the `input` and `select` elements to match the theme of the TiddlyWiki installation.
+
+! Persistence of values when creating fields
+
+When using multiple field editors for creating fields within the [[EditTemplate|$:/core/ui/EditTemplate/fields]], every field editor tiddler returned by the [[Field Editor Cascade|Field Editor Cascade]] gets its own storage tiddler. This is done to prevent problems with incompatible values when the user is switching between fields governed by different field editors.
+
+!! Example
+
+There is a cascade that returns a special field editor for all fields starting with the string "my-". All other fields use the default field editor.
+If you type a new value into the "field value" input box and select any field not starting with "my-", the value will be kept.
+If you switch to a field, that starts with "my-", the "field value" input field will be empty again because a new type of field editor is used. If you now type a value and switch to another field starting with "my-" the value will be kept. If you switch to a field that does not start with "my-" the previously typed value (that was stored for the default editor) will reappear.
