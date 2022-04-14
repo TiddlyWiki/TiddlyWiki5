@@ -292,10 +292,10 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-		//Add a variable with a popup coordinate string for the selected node
+		// Add a variable with a popup coordinate string for the selected node
 		variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
 
-		//Add variables for offset of selected node
+		// Add variables for offset of selected node
 		variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
 		variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
 		variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
@@ -304,20 +304,20 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 
 	if(event && event.clientX && event.clientY) {
 		if(selectedNode) {
-			//Add variables for event X and Y position relative to selected node
+			// Add variables for event X and Y position relative to selected node
 			selectedNodeRect = selectedNode.getBoundingClientRect();
 			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
 			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
 		}
 		
 		if(domNode) {
-			//Add variables for event X and Y position relative to event catcher node
+			// Add variables for event X and Y position relative to event catcher node
 			domNodeRect = domNode.getBoundingClientRect();
 			variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
 			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
 		}
 
-		//Add variables for event X and Y position relative to the viewport
+		// Add variables for event X and Y position relative to the viewport
 		variables["event-fromviewport-posx"] = event.clientX.toString();
 		variables["event-fromviewport-posy"] = event.clientY.toString();
 	}
