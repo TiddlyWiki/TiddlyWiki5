@@ -48,7 +48,8 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 			{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
 			{name: "dragover", handlerObject: this, handlerMethod: "handleDragOverEvent"},
 			{name: "dragleave", handlerObject: this, handlerMethod: "handleDragLeaveEvent"},
-			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"}
+			{name: "drop", handlerObject: this, handlerMethod: "handleDropEvent"},
+			{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
 		]);
 	} else {
 		$tw.utils.addClass(this.domNode,this.disabledClass);
@@ -61,12 +62,45 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	this.currentlyEntered = [];
 };
 
+// Handler for transient event listeners added when the droppable zone has an active drag in progress
+DroppableWidget.prototype.handleEvent = function(event) {
+	if(event.type === "dragenter") {
+		if(event.target && event.target !== this.domNode && !$tw.utils.domContains(this.domNode,event.target)) {
+			this.resetState();
+		}
+	} else if(event.type === "dragleave") {
+		// Check if drag left the window
+		if(event.relatedTarget === null || (event.relatedTarget && event.relatedTarget.nodeName === "HTML")) {
+			this.resetState();
+		}
+	}
+};
+
+DroppableWidget.prototype.resetState = function(options) {
+	options = options || {};
+	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+	this.currentlyEntered = [];
+	this.document.body.removeEventListener("dragenter",this,true);
+	this.document.body.removeEventListener("dragleave",this,true);
+	if(options.performDragLeaveActions && this.dragLeaveActions) {
+		this.invokeActionString(this.dragLeaveActions,this,event);
+	}
+	if(options.performDragEndActions && this.dragEndActions) {
+		this.invokeActionString(this.dragEndActions,this,event);
+	}
+};
+
 DroppableWidget.prototype.enterDrag = function(event) {
 	if(this.currentlyEntered.indexOf(event.target) === -1) {
 		this.currentlyEntered.push(event.target);
 	}
 	// If we're entering for the first time we need to apply highlighting
 	$tw.utils.addClass(this.domNodes[0],"tc-dragover");
+	this.document.body.addEventListener("dragenter",this,true);
+	this.document.body.addEventListener("dragleave",this,true);
+	if(this.dragEnterActions) {
+		this.invokeActionString(this.dragEnterActions,this,event);
+	}
 };
 
 DroppableWidget.prototype.leaveDrag = function(event) {
@@ -75,11 +109,8 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 		this.currentlyEntered.splice(pos,1);
 	}
 	// Remove highlighting if we're leaving externally. The hacky second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
-	if(this.currentlyEntered.length === 0 || (this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress)) {
-		this.currentlyEntered = [];
-		if(this.domNodes[0]) {
-			$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
-		}
+	if(this.currentlyEntered.length === 0) {
+		this.resetState({performDragLeaveActions: true});
 	}
 };
 
@@ -109,6 +140,10 @@ DroppableWidget.prototype.handleDragLeaveEvent  = function(event) {
 	return false;
 };
 
+DroppableWidget.prototype.handleDragEndEvent = function(event) {
+	this.resetState({performDragEndActions: true});
+};
+
 DroppableWidget.prototype.handleDropEvent  = function(event) {
 	var self = this;
 	this.leaveDrag(event);
@@ -118,7 +153,7 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 	}
 	var dataTransfer = event.dataTransfer;
 	// Remove highlighting
-	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+	this.resetState();
 	// Try to import the various data types we understand
 	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
 		fieldsArray.forEach(function(fields) {
@@ -148,6 +183,9 @@ DroppableWidget.prototype.execute = function() {
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";
 	this.disabledClass = this.getAttribute("disabledClass","");
+	this.dragEnterActions = this.getAttribute("dragenteractions");
+	this.dragLeaveActions = this.getAttribute("dragleaveactions");
+	this.dragEndActions = this.getAttribute("dragendactions");
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -163,7 +201,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass || changedAttributes.actions || changedAttributes.effect) {
+	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass || changedAttributes.actions || changedAttributes.effect || changedAttributes.dragenteractions || changedAttributes.dragleaveactions || changedAttributes.dragendactions) {
 		this.refreshSelf();
 		return true;
 	} else if(changedAttributes["class"]) {
