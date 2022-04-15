@@ -59,6 +59,7 @@ exports.makeDraggable = function(options) {
 					// Collect our variables
 					variables = $tw.utils.collectDOMVariables(domNode,null,event);
 					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+					variables["actionTiddler"] = titleString;
 					options.widget.invokeActionString(startActions,options.widget,event,variables);
 				}
 				// Create the drag image elements
@@ -130,7 +131,8 @@ exports.makeDraggable = function(options) {
 				if(endActions !== undefined) {
 					variables = $tw.utils.collectDOMVariables(domNode,null,event);
 					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
-					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString, modifier: modifierKey});
+					variables["actionTiddler"] = titleString;
+					options.widget.invokeActionString(endActions,options.widget,event,variables);
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
