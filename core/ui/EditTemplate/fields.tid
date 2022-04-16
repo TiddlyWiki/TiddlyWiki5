@@ -137,7 +137,7 @@ $value={{{ [<newFieldValueTiddler>get<name>] }}}/>
 </div>
 <$let currentTiddler=<<newFieldValueTiddler>> currentField={{{ [<newFieldNameTiddler>get[text]] }}}>
 <span class="tc-edit-field-add-value tc-small-gap-right">
-<$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}>
+<$set name="currentTiddlerCSSescaped" value={{{ [<storyTiddler>escapecss[]] }}}>
 <$keyboard key="((add-field))" actions=<<new-field-actions>>>
 <$transclude tiddler={{{ [<currentField>] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}] }}} />
 </$keyboard>
