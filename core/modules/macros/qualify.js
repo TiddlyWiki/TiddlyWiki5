@@ -19,14 +19,19 @@ Information about this macro
 exports.name = "qualify";
 
 exports.params = [
-	{name: "title"}
+	{name: "title"},
+	{name: "footprint"}
 ];
 
 /*
 Run the macro
 */
-exports.run = function(title) {
-	return title + "-" + this.getStateQualifier();
+exports.run = function(title,footprint) {
+	if(footprint) {
+		return title + "-" + this.getStateQualifier() + "_" + this.getRenderTreeFootprint();
+	} else {
+		return title + "-" + this.getStateQualifier();
+	}
 };
 
 })();
