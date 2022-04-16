@@ -45,7 +45,7 @@ QualifyWidget.prototype.execute = function() {
 	if(this.qualifyName && !this.qualifyFootprint) {
 		this.setVariable(this.qualifyName,this.qualifyTitle + "-" + this.getStateQualifier());
 	} else if(this.qualifyName) {
-		this.setVariable(this.qualifyName,this.qualifyTitle + "-" + this.getStateQualifier() + "_" + this.getRenderTreeFootprint());
+		this.setVariable(this.qualifyName,this.qualifyTitle + "-" + this.getStateQualifier() + "_" + this.generateRenderTreeFootprint());
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
