@@ -4,26 +4,68 @@ caption: {{$:/language/Search/System/Caption}}
 first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]
 
 \define lingo-base() $:/language/Search/
-\define set-next-input-tab(beforeafter:"after",stateTitle,tag,defaultState,currentTabTiddler) <$macrocall $name="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="""<$action-setfield $tiddler="$:/state/advancedsearch/currentTab" text=<<nextTab>>/>"""/>
+\define set-next-input-tab(beforeafter:"after",stateTitle,tag,defaultState,currentTabTiddler)
+<$macrocall $name="change-input-tab"
+	stateTitle="$:/state/tab--1498284803"
+	tag="$:/tags/AdvancedSearch"
+	beforeafter="$beforeafter$"
+	defaultState="$:/core/ui/AdvancedSearch/System"
+	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
+\end
 
-\define cancel-search-actions() <$list filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />"""><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/></$list><$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input"""/>
+\define cancel-search-actions()
+\whitespace trim
+<$list
+	filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]"
+	emptyMessage="<$action-deletetiddler $filter='[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]' />">
+	<$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/>
+	<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
+</$list>
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
+\end
 
-\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+\define input-accept-actions()
+\whitespace trim
+<$list
+	filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]"
+	emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>">
+	<$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
+</$list>
+\end
 
-\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
+\define input-accept-variant-actions()
+\whitespace trim
+<$list
+	filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]"
+	emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'><$list filter='[<__tiddler__>get[text]minlength[1]]'><$action-sendmessage $message='tm-edit-tiddler' $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>">
+	<$list filter="[<__tiddler__>get[text]minlength[1]]">
+		<$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
+</$list></$list>
+\end
+
+\whitespace trim
 
 <<lingo System/Hint>>
 
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch"
-		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item"
-		type="search" tag="input" focus={{$:/config/Search/AutoFocus}} configTiddlerFilter="[[$:/core/ui/AdvancedSearch/System]]"
-		inputCancelActions=<<cancel-search-actions>> inputAcceptActions=<<input-accept-actions>> 
-		inputAcceptVariantActions=<<input-accept-variant-actions>> filterMinLength={{$:/config/Search/MinLength}}/>
+<$macrocall $name="keyboard-driven-input"
+	tiddler="$:/temp/advancedsearch/input"
+	storeTitle="$:/temp/advancedsearch"
+	refreshTitle="$:/temp/advancedsearch/refresh"
+	selectionStateTitle="$:/temp/advancedsearch/selected-item"
+	type="search"
+	tag="input"
+	focus={{$:/config/Search/AutoFocus}}
+	configTiddlerFilter="[[$:/core/ui/AdvancedSearch/System]]"
+	inputCancelActions=<<cancel-search-actions>>
+	inputAcceptActions=<<input-accept-actions>>
+	inputAcceptVariantActions=<<input-accept-variant-actions>>
+	filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard>
 </$keyboard>
+&#32;
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <<cancel-search-actions>>
@@ -34,9 +76,9 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
-<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem">
 
-<$set name="resultCount" value="""<$count filter="[is[system]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]"/>""">
+<$set name="resultCount" value="<$count filter='[is[system]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]'/>">
 
 <div class="tc-search-results">
 
