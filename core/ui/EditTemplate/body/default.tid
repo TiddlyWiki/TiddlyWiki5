@@ -10,7 +10,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 \whitespace trim
 <$let
-	edit-preview-state={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualify "$:/state/showeditpreview">] }}}
+	edit-preview-state={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualify "$:/state/showeditpreview" "yes">] }}}
 	importTitle=<<qualify $:/ImportImage>>
 	importState=<<qualify $:/state/ImportImage>> >
 <$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
