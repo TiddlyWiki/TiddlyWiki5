@@ -37,12 +37,12 @@ $actions$
 
 \define tag-picker-inner(actions,tagField:"tags")
 \whitespace trim
+<$qualify title="$:/state/popup/tags-auto-complete" name="tagsAutocompletePopup" footprint="yes">
 <$vars newTagNameInputTiddlerQualified=<<qualify "$:/temp/NewTagName/input">> newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">> fallbackTarget={{$(palette)$##tag-background}} colourA={{$(palette)$##foreground}} colourB={{$(palette)$##background}}>
 <$vars storeTitle={{{ [<newTagNameInputTiddler>!match[]] ~[<newTagNameInputTiddlerQualified>] }}} tagSelectionState={{{ [<newTagNameSelectionTiddler>!match[]] ~[<newTagNameSelectionTiddlerQualified>] }}}>
 <$vars refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]" systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
 <div>
-<$qualify title="$:/state/popup/tags-auto-complete" name="tagsAutocompletePopup" footprint="yes">
 <span class="tc-add-tag-name tc-small-gap-right">
 <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
 		selectionStateTitle=<<tagSelectionState>> inputAcceptActions="<$macrocall $name='add-tag-actions' actions=<<__actions__>> tagField=<<__tagField__>>/>"
@@ -83,12 +83,12 @@ $actions$
 </$set>
 </div>
 </$reveal>
+</div>
+</div>
+</$vars>
+</$vars>
+</$vars>
 </$qualify>
-</div>
-</div>
-</$vars>
-</$vars>
-</$vars>
 \end
 \define tag-picker(actions,tagField:"tags")
 \whitespace trim
