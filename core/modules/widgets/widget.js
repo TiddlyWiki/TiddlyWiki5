@@ -289,10 +289,17 @@ Widget.prototype.computeAttribute = function(attribute) {
 };
 
 /*
-Check for the presence of an attribute
+Check for the presence of an evaluated attribute on the widget. Note that attributes set to a missing variable (ie attr=<<missing>>) will be treated as missing
 */
 Widget.prototype.hasAttribute = function(name) {
 	return $tw.utils.hop(this.attributes,name);
+};
+
+/*
+Check for the presence of a raw attribute on the widget parse tree node. Note that attributes set to a missing variable (ie attr=<<missing>>) will NOT be treated as missing
+*/
+Widget.prototype.hasParseTreeNodeAttribute = function(name) {
+	return $tw.utils.hop(this.parseTreeNode.attributes,name);
 };
 
 /*
