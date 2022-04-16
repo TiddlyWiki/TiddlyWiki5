@@ -2,14 +2,7 @@ title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
 \define colour(name)
-\whitespace trim
-<$transclude tiddler={{$:/palette}} index=<<__name__>>>
-<$transclude tiddler="$:/palettes/Vanilla" index=<<__name__>>>
-<$transclude tiddler={{{ [[$:/config/DefaultColourPaletteMappings/]addsuffix<__palette__>addsuffix[/]addsuffix<__name__>] }}}/>
-<$transclude tiddler={{{ [[$:/config/DefaultColourMappings/]addsuffix<__name__>] }}}/>
-</$transclude>
-</$transclude>
-</$transclude>
+<$transclude tiddler={{$:/palette}} index="$name$"><$transclude tiddler="$:/palettes/Vanilla" index="$name$"><$transclude tiddler="$:/config/DefaultColourMappings/$name$"/></$transclude></$transclude>
 \end
 
 \define color(name)
