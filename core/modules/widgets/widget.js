@@ -262,8 +262,7 @@ Widget.prototype.getStateQualifier = function(name) {
 Generate the "transclusion-footprint" of the current widget in the widget-tree up to the root widget
 */
 Widget.prototype.generateRenderTreeFootprint = function() {
-	var parentTransclusionWidget = this.findParentTransclusionWidget(),
-		node = this,
+	var node = this,
 		footprint = node.parentWidget.children.indexOf(node);
 	while(node) {
 		node = node.parentWidget;
