@@ -42,14 +42,15 @@ $actions$
 <$vars refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]" systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]">
 <div class="tc-edit-add-tag">
 <div>
+<$qualify title="$:/state/popup/tags-auto-complete" name="tagsAutocompletePopup" footprint="yes">
 <span class="tc-add-tag-name tc-small-gap-right">
 <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
 		selectionStateTitle=<<tagSelectionState>> inputAcceptActions="<$macrocall $name='add-tag-actions' actions=<<__actions__>> tagField=<<__tagField__>>/>"
 		inputCancelActions=<<clear-tags-actions>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
-		focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> 
+		focusPopup=<<tagsAutocompletePopup>> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> 
 		focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} filterMinLength={{$:/config/Tags/MinLength}} 
 		cancelPopups=<<cancelPopups>> configTiddlerFilter="[[$:/core/macros/tag-picker]]"/>
-</span><$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button><$reveal state=<<storeTitle>> type="nomatch" text=""><$button class="tc-btn-invisible tc-small-gap tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}} aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}>{{$:/core/images/close-button}}<<delete-tag-state-tiddlers>></$button></$reveal><span class="tc-add-tag-button tc-small-gap-left">
+</span><$button popup=<<tagsAutocompletePopup>> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button><$reveal state=<<storeTitle>> type="nomatch" text=""><$button class="tc-btn-invisible tc-small-gap tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}} aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}>{{$:/core/images/close-button}}<<delete-tag-state-tiddlers>></$button></$reveal><span class="tc-add-tag-button tc-small-gap-left">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
 <$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>]"/>
@@ -63,7 +64,7 @@ $actions$
 </span>
 </div>
 <div class="tc-block-dropdown-wrapper">
-<$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
+<$reveal state=<<tagsAutocompletePopup>> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-block-tags-dropdown">
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
 <$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem">
@@ -82,6 +83,7 @@ $actions$
 </$set>
 </div>
 </$reveal>
+</$qualify>
 </div>
 </div>
 </$vars>
