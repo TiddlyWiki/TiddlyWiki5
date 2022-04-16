@@ -33,6 +33,7 @@ first-search-filter: [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]sort[d
 </$reveal>
 </$set>
 </div>
+</$qualify>
 </div>
 </div>
 </$set>
