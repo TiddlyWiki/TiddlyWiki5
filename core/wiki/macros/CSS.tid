@@ -5,7 +5,7 @@ tags: $:/tags/Macro
 \whitespace trim
 <$transclude tiddler={{$:/palette}} index=<<__name__>>>
 <$transclude tiddler="$:/palettes/Vanilla" index=<<__name__>>>
-<$transclude tiddler={{{ [[$:/config/DefaultColourPaletteMappings/]addsuffix<__palette__>addsuffix[/]addsuffix<__name__>] }}}/>
+<$transclude tiddler={{{ [[$:/config/DefaultColourPaletteMappings/]addsuffix<__palette__>addsuffix[/]addsuffix<__name__>] }}}>
 <$transclude tiddler={{{ [[$:/config/DefaultColourMappings/]addsuffix<__name__>] }}}/>
 </$transclude>
 </$transclude>
