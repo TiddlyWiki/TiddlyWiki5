@@ -1,6 +1,6 @@
 caption: draggable
 created: 20170406081938627
-modified: 20220223145136863
+modified: 20220416052952189
 tags: Widgets TriggeringWidgets
 title: DraggableWidget
 type: text/vnd.tiddlywiki
@@ -19,6 +19,7 @@ See DragAndDropMechanism for an overview.
 |tag |Optional tag to override the default "div" element created by the widget|
 |selector|<<.from-version 5.2.2>> Optional CSS Selector to identify a DOM element within the widget that will be used as the drag handle |
 |class |Optional CSS classes to assign to the DOM element created by the widget. The class `tc-draggable` is added to the drag handle, which is the same as the DOM element created by the widget unless the <<.param selector>> attribute is used. The class `tc-dragging` is applied to the drag handle while the element is being dragged |
+|enable |<<.from-version 5.2.3>> Optional value "no" to disable the draggable functionality (defaults to "yes") |
 
 |startactions |Optional action string that gets invoked when dragging ''starts'' |
 |endactions |Optional action string that gets invoked when dragging ''ends'' |
