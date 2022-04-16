@@ -27,7 +27,7 @@ exports.params = [
 Run the macro
 */
 exports.run = function(title,footprint) {
-	if(footprint) {
+	if(footprint === "yes") {
 		return title + "-" + this.getStateQualifier() + "_" + this.generateRenderTreeFootprint();
 	} else {
 		return title + "-" + this.getStateQualifier();
