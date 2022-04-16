@@ -78,6 +78,7 @@ describe("Utility tests", function() {
 		expect(fds(d,"ddd hh mm ssss")).toBe("Sun 17 41 2828");
 		expect(fds(d,"MM0DD")).toBe("1109");
 		expect(fds(d,"MM0\\D\\D")).toBe("110DD");
+		expect(fds(d,"[UTC]YYYY0MM0DD0hh0mm0ssXXX")).toBe("20141109174128542");
 
 		// test some edge cases found at: https://en.wikipedia.org/wiki/ISO_week_date
 		// 2016-11-13 is Week 45 and it's a Sunday (month nr: 10)
