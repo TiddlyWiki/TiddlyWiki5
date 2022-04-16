@@ -28,7 +28,7 @@ Run the macro
 */
 exports.run = function(title,footprint) {
 	if(footprint) {
-		return title + "-" + this.getStateQualifier() + "_" + this.getRenderTreeFootprint();
+		return title + "-" + this.getStateQualifier() + "_" + this.generateRenderTreeFootprint();
 	} else {
 		return title + "-" + this.getStateQualifier();
 	}
