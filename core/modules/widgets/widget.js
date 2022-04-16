@@ -259,7 +259,7 @@ Widget.prototype.getStateQualifier = function(name) {
 };
 
 /*
-Generate the "transclusion-footprint" of the current widget in the widget-tree up to the next widget that changes the transclusion variable
+Generate the "transclusion-footprint" of the current widget in the widget-tree up to the root widget
 */
 Widget.prototype.generateRenderTreeFootprint = function() {
 	var parentTransclusionWidget = this.findParentTransclusionWidget(),
