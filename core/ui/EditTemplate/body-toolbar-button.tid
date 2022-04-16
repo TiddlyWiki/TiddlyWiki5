@@ -56,10 +56,11 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
   filter="[all[current]has[dropdown]]"
   variable="dropdown"
 
-><$set
+><$qualify
 
   name="dropdown-state"
-  value=<<qualify "$:/state/EditorToolbarDropdown">>
+  title="$:/state/EditorToolbarDropdown"
+  footprint="yes"
 
 ><$set name=disabled filter={{!!condition-disabled}}><$button
 
@@ -96,7 +97,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
   tiddler={{!!dropdown}}
   mode="block"
 
-/></div></$reveal></$set></$list></$wikify></$list>
+/></div></$reveal></$qualify></$list></$wikify></$list>
 \end
 
 \define toolbar-button-outer()
