@@ -7,7 +7,8 @@ description: {{$:/language/Buttons/More/Hint}}
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
-<$button popup=<<qualify "$:/state/popup/more">> tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<$qualify title="$:/state/popup/more" name="moreTiddlerActionsState" footprint="yes">
+<$button popup=<<moreTiddlerActionsState>> tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/down-arrow}}
 </$list>
@@ -17,7 +18,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </span>
 </$list>
 </$button>
-<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="belowleft" animate="yes">
+<$reveal state=<<moreTiddlerActionsState>> type="popup" position="belowleft" animate="yes">
 
 <div class="tc-drop-down">
 
@@ -50,3 +51,5 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </div>
 
 </$reveal>
+
+</$qualify>
