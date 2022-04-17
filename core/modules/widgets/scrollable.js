@@ -34,6 +34,10 @@ ScrollableWidget.prototype.cancelScroll = function() {
 Handle a scroll event
 */
 ScrollableWidget.prototype.handleScrollEvent = function(event) {
+	// Pass the scroll event through if explicitly wanted
+	if(event.paramObject && event.paramObject.passThrough === "yes") {
+		return true;
+	}
 	// Pass the scroll event through if our offsetsize is larger than our scrollsize
 	if(this.outerDomNode.scrollWidth <= this.outerDomNode.offsetWidth && this.outerDomNode.scrollHeight <= this.outerDomNode.offsetHeight && this.fallthrough === "yes") {
 		return true;
