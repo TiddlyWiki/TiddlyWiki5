@@ -34,6 +34,9 @@ ScrollableWidget.prototype.cancelScroll = function() {
 Handle a scroll event
 */
 ScrollableWidget.prototype.handleScrollEvent = function(event) {
+	if(event.paramObject && event.paramObject.selector) {
+		return true;
+	}
 	// Pass the scroll event through if our offsetsize is larger than our scrollsize
 	if(this.outerDomNode.scrollWidth <= this.outerDomNode.offsetWidth && this.outerDomNode.scrollHeight <= this.outerDomNode.offsetHeight && this.fallthrough === "yes") {
 		return true;
@@ -42,11 +45,7 @@ ScrollableWidget.prototype.handleScrollEvent = function(event) {
 	if($tw.utils.hop(event.paramObject,"animationDuration")) {
 		options.animationDuration = event.paramObject.animationDuration;
 	}
-	if(event.paramObject && event.paramObject.selector) {
-		this.scrollSelectorIntoView(null,event.paramObject.selector,null,options);
-	} else {
-		this.scrollIntoView(event.target,null,options);
-	}
+	this.scrollIntoView(event.target,null,options);
 	return false; // Handled event
 };
 
@@ -115,14 +114,6 @@ ScrollableWidget.prototype.scrollIntoView = function(element,callback,options) {
 			}
 		};
 		drawFrame();
-	}
-};
-
-ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selector,callback,options) {
-	baseElement = baseElement || document.body;
-	var element = baseElement.querySelector(selector);
-	if(element) {
-		this.scrollIntoView(element,callback,options);
 	}
 };
 
