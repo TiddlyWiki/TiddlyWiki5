@@ -1,5 +1,5 @@
 created: 20141217193625476
-modified: 20220304170551125
+modified: 20220402105820520
 title: Glossaire en-GB -> fr-FR
 type: text/vnd.tiddlywiki
 
@@ -30,6 +30,7 @@ type: text/vnd.tiddlywiki
 |sequence|suite /série||
 |a set|un ensemble||
 |shadow|shadow|(ombre, *latent*, fantôme ?)|
+|single file wiki|wiki mono-fichier||
 |snippet|portion||
 |step|étape||
 |story river|déroulé||

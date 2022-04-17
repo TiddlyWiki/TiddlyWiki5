@@ -1,9 +1,20 @@
+caption: ~TiddlySpot
+color: #29b6f6
+community-author: Simon Baird & Daniel Baird
 created: 20130825213500000
-fr-title: Sauvegarder sur Tiddlyspot
-modified: 20150603145933656
-tags: Saving
+delivery: Service
+description: Hébergement TiddlyWiki en ligne. (Remplacé par TiddlyHost)
+fr-title: Enregistrer sur Tiddlyspot
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
+
+----
+<<.warning "''Attention<<!>> ~TiddlySpot est passé en mode maintenance et ne permet plus de créer de nouveau site. Vous pouvez maintenant utiliser [[TiddlyHost|Saving on TiddlyHost]] à la place, un nouveau service proposé par le créateur de ~TiddlySpot.''">>
+----
+[img[https://raw.githubusercontent.com/simonbaird/tiddlyhost/main/rails/app/assets/images/tiddlyspot-banner-logo.png]]
 
 //~TiddlySpot// est un service d'hébergement gratuit pour les documents TiddlyWiki, mis à disposition par Simon et Daniel Baird. Le plus simple pour commencer est de créer un nouveau wiki sur http://tiddlyspot.com -- par défaut, vous obtiendrez la dernière version de [[TiddlyWiki Classic|TiddlyWikiClassic]].
 
