@@ -21,7 +21,7 @@ list-before:
 <ol>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlyWikiSites]]">
 <li>
-<$list filter="[{!!url}!prefix{$:/info/url/full}]" emptyMessage=<<current-link-body>> variable="ignore">
+<$list filter="[{!!url}!match{$:/info/url/full}]" emptyMessage=<<current-link-body>> variable="ignore">
 <a class="tc-tiddlylink-external" href={{!!url}} rel="noopener noreferrer" target="_blank">
 <<link-body>>
 </a>
