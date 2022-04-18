@@ -44,7 +44,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 		this.inputDomNode.setAttribute("checked","true");
 		$tw.utils.addClass(this.labelDomNode,"tc-checkbox-checked");
 	}
-	if(isChecked === undefined && this.checkboxIndeterminate) {
+	if(isChecked === undefined && this.checkboxIndeterminate === "yes") {
 		this.inputDomNode.indeterminate = true;
 	}
 	if(this.isDisabled === "yes") {
@@ -100,7 +100,7 @@ CheckboxWidget.prototype.getValue = function() {
 			}
 			if(this.checkboxChecked && this.checkboxUnchecked) {
 				// Both specified but neither found: indeterminate or false, depending
-				if(this.checkboxIndeterminate) {
+				if(this.checkboxIndeterminate === "yes") {
 					return undefined;
 				} else {
 					return false;
@@ -136,7 +136,7 @@ CheckboxWidget.prototype.getValue = function() {
 			}
 			if(this.checkboxChecked && this.checkboxUnchecked) {
 				// Both specified but neither found: indeterminate or false, depending
-				if(this.checkboxIndeterminate) {
+				if(this.checkboxIndeterminate === "yes") {
 					return undefined;
 				} else {
 					return false;
@@ -283,7 +283,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
-	this.checkboxIndeterminate = this.getAttribute("indeterminate");
+	this.checkboxIndeterminate = this.getAttribute("indeterminate","no");
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
