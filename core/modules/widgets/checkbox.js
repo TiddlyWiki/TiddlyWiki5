@@ -27,6 +27,7 @@ CheckboxWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 CheckboxWidget.prototype.render = function(parent,nextSibling) {
+	var isChecked;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -38,9 +39,13 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.setAttribute("class","tc-checkbox " + this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
-	if(this.getValue()) {
+	isChecked = this.getValue();
+	if(isChecked) {
 		this.inputDomNode.setAttribute("checked","true");
 		$tw.utils.addClass(this.labelDomNode,"tc-checkbox-checked");
+	}
+	if(isChecked === undefined && this.checkboxIndeterminate === "yes") {
+		this.inputDomNode.indeterminate = true;
 	}
 	if(this.isDisabled === "yes") {
 		this.inputDomNode.setAttribute("disabled",true);
@@ -62,7 +67,7 @@ CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler || this.checkboxFilter) {
 		if(this.checkboxTag) {
-			if(this.checkboxInvertTag) {
+			if(this.checkboxInvertTag === "yes") {
 				return !tiddler.hasTag(this.checkboxTag);
 			} else {
 				return tiddler.hasTag(this.checkboxTag);
@@ -93,6 +98,14 @@ CheckboxWidget.prototype.getValue = function() {
 			if(this.checkboxUnchecked && !this.checkboxChecked) {
 				return true; // Absence of unchecked value
 			}
+			if(this.checkboxChecked && this.checkboxUnchecked) {
+				// Both specified but neither found: indeterminate or false, depending
+				if(this.checkboxIndeterminate === "yes") {
+					return undefined;
+				} else {
+					return false;
+				}
+			}
 		}
 		if(this.checkboxListField || this.checkboxListIndex || this.checkboxFilter) {
 			// Same logic applies to lists and filters
@@ -122,7 +135,12 @@ CheckboxWidget.prototype.getValue = function() {
 				return true; // Absence of unchecked value
 			}
 			if(this.checkboxChecked && this.checkboxUnchecked) {
-				return false; // Both specified but neither found: default to false
+				// Both specified but neither found: indeterminate or false, depending
+				if(this.checkboxIndeterminate === "yes") {
+					return undefined;
+				} else {
+					return false;
+				}
 			}
 			// Neither specified, so empty list is false, non-empty is true
 			return !!list.length;
@@ -265,6 +283,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
+	this.checkboxIndeterminate = this.getAttribute("indeterminate","no");
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
@@ -277,14 +296,15 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.disabled) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.index || changedAttributes.listField || changedAttributes.listIndex || changedAttributes.filter || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes.indeterminate || changedAttributes["class"] || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else {
 		var refreshed = false;
 		if(changedTiddlers[this.checkboxTitle]) {
 			var isChecked = this.getValue();
-			this.inputDomNode.checked = isChecked;
+			this.inputDomNode.checked = !!isChecked;
+			this.inputDomNode.indeterminate = (isChecked === undefined);
 			refreshed = true;
 			if(isChecked) {
 				$tw.utils.addClass(this.labelDomNode,"tc-checkbox-checked");
