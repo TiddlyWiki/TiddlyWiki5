@@ -67,7 +67,7 @@ CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler || this.checkboxFilter) {
 		if(this.checkboxTag) {
-			if(this.checkboxInvertTag) {
+			if(this.checkboxInvertTag === "yes") {
 				return !tiddler.hasTag(this.checkboxTag);
 			} else {
 				return tiddler.hasTag(this.checkboxTag);
