@@ -2,7 +2,7 @@ title: $:/_tw_shared/sites
 tags: $:/tags/MenuBar
 caption: [img class=tc-sites-icon [Motovun Jack.svg]] Sites
 is-dropdown: yes
-list-before:
+list-after: $:/plugins/tiddlywiki/menubar/items/hamburger
 
 \define link-body()
 \whitespace trim
