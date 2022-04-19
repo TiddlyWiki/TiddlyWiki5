@@ -1,5 +1,6 @@
 created: 20220318104000046
-modified: 20220319080838250
+modified: 20220419081406359
+tags: [[Table of Contents]]
 title: HelloThere
 type: text/vnd.tiddlywiki
 
@@ -10,5 +11,5 @@ Other official TiddlyWiki sites include:
 * [[tiddlywiki.com|https://tiddlywiki.com]] – user documentation
 * [[talk.tiddlywiki.org|https://talk.tiddlywiki.org]] – user discussion forum
 * [[links.tiddlywiki.org|https://links.tiddlywiki.org]] – collection of links collaboratively curated by the community
-* [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] – internal JavaScript documentation
+* [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] – internal ~JavaScript documentation
 
