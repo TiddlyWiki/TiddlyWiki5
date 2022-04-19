@@ -1,9 +1,8 @@
 title: $:/_tw_shared/sites
-tags: $:/tags/MenuBar
+tags: $:/tags/MenuBar TiddlyWikiSitesMenu
 caption: [img class=tc-sites-icon [Motovun Jack.svg]] Sites
 is-dropdown: yes
 list-after: $:/plugins/tiddlywiki/menubar/items/hamburger
-tags: TiddlyWikiSitesMenu
 
 \define link-body()
 \whitespace trim

@@ -1,7 +1,6 @@
 title: $:/_tw_shared/styles
-tags: $:/tags/Stylesheet
+tags: $:/tags/Stylesheet TiddlyWikiSitesMenu
 code-body: yes
-tags: TiddlyWikiSitesMenu
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
@@ -41,4 +40,5 @@ tags: TiddlyWikiSitesMenu
 
 .tc-sites-menu-icon {
 	margin-right: 0.5em;
+	width: 1em;
 }
