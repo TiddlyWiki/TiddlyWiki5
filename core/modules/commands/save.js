@@ -46,12 +46,12 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 						fileInfo: {}
 					});
 					if(self.commander.verbose) {
-						console.log("Saving \"" + title + "\" to \"" + filepath + "\"");
+						console.log("Saving \"" + title + "\" to \"" + fileInfo.filepath + "\"");
 					}
 					try {
 						$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
 					} catch (err) {
-						result = "Error saving file '" + fileInfo.filepath + "', tiddler: '" + tiddler.fields.title;
+						result = "Error saving tiddler \"" + title + "\", to file: \"" + fileInfo.filepath + "\"";
 					}
 				} else {
 					result = "Tiddler '" + title + "' not found";
