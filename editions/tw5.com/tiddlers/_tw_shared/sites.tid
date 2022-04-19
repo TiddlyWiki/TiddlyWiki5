@@ -3,6 +3,7 @@ tags: $:/tags/MenuBar
 caption: [img class=tc-sites-icon [Motovun Jack.svg]] Sites
 is-dropdown: yes
 list-after: $:/plugins/tiddlywiki/menubar/items/hamburger
+tags: TiddlyWikiSitesMenu
 
 \define link-body()
 \whitespace trim
