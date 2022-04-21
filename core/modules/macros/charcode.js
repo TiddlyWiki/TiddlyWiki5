@@ -3,8 +3,9 @@ title: $:/core/modules/macros/charcode.js
 type: application/javascript
 module-type: macro
 
-Macro to return characters using the character-codes as input.
-If the code isn't found the character is returned.
+Macro to return characters using the character-names as input.
+If the name isn't found the character-code is used to return a character.
+Only integer based codes are allowed
 
 \*/
 (function(){
@@ -20,15 +21,12 @@ exports.params = [
 ];
 
 exports.run = function(codes) {
-	var lookup = $tw.config.lookup,
-		tokens = codes.trim().split(/\s+/),
+	var tokens = codes.trim().split(/\s+/), // Character tokens are a whitespace separated list
 		results = [];
-	tokens.map(function(name) {
-		var code = lookup[name.toLowerCase()];
-		if (code) {
-			results.push(String.fromCharCode(code));
-		} else {
-			results.push(String.fromCharCode($tw.utils.parseInt(name)));
+	$tw.utils.each(tokens,function(name) {
+		var code = $tw.config.charNameLookup[name.toLowerCase()] || $tw.config.escapeStringLookup[name.toLowerCase()] || name;
+		if (code !== "") {
+			results.push(String.fromCharCode($tw.utils.parseInt(code)));
 		}
 	})
 	return results.join("");

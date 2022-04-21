@@ -175,10 +175,9 @@ exports.pad = function(source,operator,options) {
 }
 
 exports.charcode = function(source,operator,options) {
-	var lookup = $tw.config.lookup,
-		chars = [];
+	var chars = [];
 	$tw.utils.each(operator.operands,function(operand) {
-		var code = lookup[operand.toLowerCase()] || operand;
+		var code = $tw.config.charNameLookup[operand.toLowerCase()] || $tw.config.escapeStringLookup[operand.toLowerCase()] || operand;
 		if(code !== "") {
 			chars.push(String.fromCharCode($tw.utils.parseInt(code)));
 		}

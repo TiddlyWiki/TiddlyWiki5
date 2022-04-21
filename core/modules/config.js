@@ -38,18 +38,34 @@ exports.htmlBlockElements = "address,article,aside,audio,blockquote,canvas,dd,de
 
 exports.htmlUnsafeElements = "script".split(",");
 
-// Character code lookups used in charcode operator and macro
-exports.lookup = {
+// Character name lookups used in charcode operator and macro
+exports.charNameLookup = {
+	"null": 0,
+	"backspace": 8,
 	"tab": 9,
-	"\\t": 9,
 	"lf": 10,
-	"\\n": 10,
+	"vtab": 11,
 	"ff": 12,
-	"\\f": 12,
 	"cr": 13,
+	"space": 32,
+	"doublequote": 34,
+	"singlequote": 39,
+	"backslash": 92
+};
+
+// Escape string lookups used in jscode macro
+exports.escapeStringLookup = {
+	"\\0": 0,
+	"\\b": 8,
+	"\\t": 9,
+	"\\n": 10,
+	"\\v": 11,
+	"\\f": 12,
 	"\\r": 13,
-	"\\_": 32,
-	"space": 32
+// no escape for space
+	'\\"': 34,
+	"\\'": 39,
+	"\\\\" : 92
 }
 
 })();

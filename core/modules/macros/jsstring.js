@@ -21,8 +21,14 @@ exports.params = [
 
 // TODO .. may be it should also use the config.js lookup table
 
-exports.run = function(text, mode) {
-		return text.replace(/\\n/g,"\n").replace(/\\r/g,"\r").replace(/\\t/g,"\t");
+exports.run = function(text) {
+	$tw.utils.each($tw.config.escapeStringLookup,function(code, key) {
+		var str = String.fromCharCode($tw.utils.parseInt(code));
+		var s = $tw.utils.escapeRegExp(key);
+		var x = new RegExp(s,"g");
+		text = text.replace(x,str);
+	});
+	return text;
 }
 
 })();
