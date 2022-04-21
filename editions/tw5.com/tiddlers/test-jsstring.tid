@@ -1,9 +1,9 @@
 created: 20211201153854223
-modified: 20220412124323242
+modified: 20220419191957490
 tags: 
 title: test-jsstring
 type: text/vnd.tiddlywiki
 
-<<wikitext-example-without-html """<<jsstring "<pre>a\nb</pre>">> """ >>
+<<wikitext-example-without-html """<<jsstring "<pre>a\n\tb</pre>">> """ >>
  
  

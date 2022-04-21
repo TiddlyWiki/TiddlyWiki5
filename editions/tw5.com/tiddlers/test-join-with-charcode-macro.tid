@@ -1,5 +1,5 @@
 created: 20211201181012026
-modified: 20220412133425631
+modified: 20220419115058132
 tags: 
 title: test-join-with-charcode-macro
 type: text/vnd.tiddlywiki
@@ -19,7 +19,7 @@ click to write new text to tiddler "a"
 """>>
 
 <<wikitext-example-without-html """<$button>
-<$action-setfield $tiddler=a text={{{[[go to edit mode to see the linebreaks]split[ ]join<charcode "10 \n">]}}} />
+<$action-setfield $tiddler=b text={{{[[go to edit mode to see the linebreaks]split[ ]join<charcode "10 \n">]}}} />
 <$action-sendmessage $message="tm-edit-tiddler" $param="b"/>
 click to write new text to tiddler "b"
 </$button>
@@ -27,14 +27,14 @@ click to write new text to tiddler "b"
 
 
 <<wikitext-example-without-html """<$button>
-<$action-setfield $tiddler=a text={{{[[convert to links]split[ ]addprefix<jsstring "[[">addsuffix<jsstring "]]">join[ ]]}}} />
+<$action-setfield $tiddler=c text={{{[[convert to links]split[ ]addprefix<jsstring "[[">addsuffix<jsstring "]]">join[ ]]}}} />
 <$action-sendmessage $message="tm-edit-tiddler" $param="c"/>
 click to write new text to tiddler "c"
 </$button>
 """>>
 
 <<wikitext-example-without-html """<$button>
-<$action-setfield $tiddler=a text={{{[[convert to links]split[ ]addprefix<jsstring "[[">addsuffix<jsstring "]]\n">join<charcode lf>]}}} />
+<$action-setfield $tiddler=d text={{{[[convert to links]split[ ]addprefix<jsstring "[[">addsuffix<jsstring "]]\n">join<charcode lf>]}}} />
 <$action-sendmessage $message="tm-edit-tiddler" $param="d"/>
 click to write new text to tiddler "d"
 </$button>

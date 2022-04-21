@@ -1,5 +1,5 @@
 created: 20220413104641645
-modified: 20220413110843650
+modified: 20220419121327690
 myField: test
 tags: 
 title: test-6284-jeremy
@@ -34,11 +34,11 @@ Jeremy raises a concern [[at gitHub|https://github.com/Jermolene/TiddlyWiki5/iss
 Can be solved with
 
 <<wikitext-example-without-html 
-"""{{{ [<currentTiddler>addsuffix<jsstring '"'>] }}}
+"""{{{ [<currentTiddler>addsuffix<jsstring '\''>] }}}
 """>>
 
 <<wikitext-example-without-html 
-"""{{{ [<currentTiddler>addsuffix<jsstring "'">] }}}
+"""{{{ [<currentTiddler>addsuffix<jsstring "\"">] }}}
 """>>
 
 
