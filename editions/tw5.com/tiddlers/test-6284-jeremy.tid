@@ -1,5 +1,5 @@
 created: 20220413104641645
-modified: 20220419121327690
+modified: 20220421161127917
 myField: test
 tags: 
 title: test-6284-jeremy
@@ -21,24 +21,4 @@ So ''jsstrting'' was created:
 <<wikitext-example-without-html 
 """{{{ [<currentTiddler>addsuffix<jsstring "[[">] }}}
 """>>
-
----
-
-Jeremy raises a concern [[at gitHub|https://github.com/Jermolene/TiddlyWiki5/issues/6284]]
-
-<<<
-* a single typed character (this feature would not work properly characters that could be misinterpreted as a quotation symbol like `"`, `'`)
-<<<
-
-
-Can be solved with
-
-<<wikitext-example-without-html 
-"""{{{ [<currentTiddler>addsuffix<jsstring '\''>] }}}
-""">>
-
-<<wikitext-example-without-html 
-"""{{{ [<currentTiddler>addsuffix<jsstring "\"">] }}}
-""">>
-
 

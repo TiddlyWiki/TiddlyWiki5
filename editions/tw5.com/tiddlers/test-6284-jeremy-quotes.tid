@@ -1,0 +1,26 @@
+created: 20220421161059682
+modified: 20220421161120342
+tags: 
+title: test-6284-jeremy-quotes
+type: text/vnd.tiddlywiki
+
+Jeremy raises a concern [[at gitHub|https://github.com/Jermolene/TiddlyWiki5/issues/6284]]
+
+<<<
+* a single typed character (this feature would not work properly characters that could be misinterpreted as a quotation symbol like `"`, `'`)
+<<<
+
+
+The macro code can handle escaped quotation symbols, but the current core macro parameter handling can NOT
+
+<<wikitext-example-without-html 
+"""{{{ [<currentTiddler>addsuffix<jsstring "\'">] }}}
+""">>
+
+<<wikitext-example-without-html 
+"""{{{ [<currentTiddler>addsuffix<jsstring '\"'>] }}}
+""">>
+
+<<wikitext-example-without-html 
+"""{{{ [<currentTiddler>addsuffix<jsstring "\\">] }}}
+""">>
