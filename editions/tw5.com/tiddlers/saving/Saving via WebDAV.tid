@@ -4,12 +4,12 @@ created: 20160216191710789
 delivery: Protocol
 description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20220222190056634
+modified: 20220423193922258
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki
 
-If hosted on a [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]-enabled server, TiddlyWiki will automatically save changes via HTTP for TiddlyWiki's created after 2016. If you created your wiki before Feb 16 2016  you'll need to [[Upgrade|Upgrading]] to enable ~WebDAV.
+If hosted on a [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]-enabled server, TiddlyWiki will automatically save changes via HTTP for TiddlyWiki's created after 2016. If you created your wiki before Feb 16 2016  you'll need to [[Upgrade|Upgrading/Updating]] to enable ~WebDAV.
 
 
 

@@ -1,5 +1,5 @@
 created: 20180905075846391
-modified: 20210611055708739
+modified: 20220423193922258
 tags: [[WebServer Guides]]
 title: Using the external JavaScript template
 type: text/vnd.tiddlywiki
@@ -89,7 +89,7 @@ tiddlywiki YOUR_WIKI_FOLDER --build tiddlywikicore
 
 Before you proceed, backup your wiki first! Follow the steps below to upgrade a single-file wiki with the external JavaScript template:
 
-# Proceed with the [[Upgrade Process for Standalone TiddlyWikis|Upgrading]]. Your wiki will be converted to a full standalone HTML.
+# Proceed with the [[Upgrade Process for Standalone TiddlyWikis|Upgrading/Updating]]. Your wiki will be converted to a full standalone HTML.
 
 # Open your upgraded wiki in the browser. If you'd like to revert to using the regular template, restore the original shadow tiddler `$:/config/SaveWikiButton/Template` by deleting any custom copy. Save your wiki and you are done. 
 
