@@ -1,0 +1,31 @@
+title: Ubertransclude/CustomWidget/VariableAttribute
+description: Custom widget definition using an attribute called $variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+</$ubertransclude>
+_
+title: TiddlerOne
+
+\whitespace trim
+<!-- Redefine the <$mywidget> widget by defining a transcludable variable with that name -->
+<$set name="<$mywidget>" value="""\whitespace trim
+	<$parameters $variable='Jaguar'>
+		<$text text=<<$variable>>/>
+		<$slot $name="body">
+			Whale
+		</$slot>
+	</$parameters>"""
+>
+	<$mywidget $variable="Dingo">
+		Crocodile
+	</$mywidget>
+</$set>
+_
+title: ExpectedResult
+
+<p>DingoCrocodile</p>

@@ -1,0 +1,31 @@
+title: Ubertransclude/CustomWidget/Simple
+description: Custom widget definition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+</$ubertransclude>
+_
+title: TiddlerOne
+
+\whitespace trim
+<!-- Define the <$mywidget> widget by defining a transcludable variable with that name -->
+<$set name="<$mywidget>" value="""\whitespace trim
+	<$parameters one='Jaguar'>
+		<$text text=<<one>>/>
+		<$slot $name="body">
+			Whale
+		</$slot>
+	</$parameters>"""
+>
+	<$mywidget one="Dingo">
+		Crocodile
+	</$mywidget>
+</$set>
+_
+title: ExpectedResult
+
+<p>DingoCrocodile</p>

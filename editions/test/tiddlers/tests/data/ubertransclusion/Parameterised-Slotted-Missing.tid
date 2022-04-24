@@ -1,0 +1,24 @@
+title: Ubertransclude/Parameterised/Slotted/Missing
+description: Parameterised transclusion with slotted missing values
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+</$ubertransclude>
+_
+title: TiddlerOne
+
+\whitespace trim
+<$parameters one='Jaguar'>
+	<$text text=<<one>>/>
+	<$slot $name="content">
+		Whale
+	</$slot>
+</$parameters>
+_
+title: ExpectedResult
+
+<p>FerretWhale</p>

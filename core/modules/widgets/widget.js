@@ -387,7 +387,44 @@ options include:
 	variables: optional hashmap of variables to wrap around the widget
 */
 Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
+	var self = this;
 	options = options || {};
+	// Check whether this node type is defined by a custom macro definition
+	var variableDefinitionName = "<$" + parseTreeNode.type + ">";
+	if(parseTreeNode.type !== "ubertransclude" && this.variables[variableDefinitionName] && this.variables[variableDefinitionName].value) {
+		var newParseTreeNode = {
+			type: "ubertransclude",
+			tag: "$ubertransclude",
+			attributes: {
+				"$variable": {name: "$variable", type: "string", value: variableDefinitionName}
+			},
+			children: [
+				{
+					type: "value",
+					tag: "$value",
+					attributes: {
+						"$name": {name: "$name", type: "string", value: "body"}
+					},
+					children: parseTreeNode.children
+				}
+			]
+		};
+		newParseTreeNode.orderedAttributes = [newParseTreeNode.attributes["$variable"]];
+		newParseTreeNode.children[0].orderedAttributes = [newParseTreeNode.children[0].attributes["$name"]];
+		$tw.utils.each(parseTreeNode.orderedAttributes,function(attr) {
+			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of ubertransclude
+			var name = attr.name.charAt(0) === "$" ? "$" + attr.name : attr.name,
+				newAttr = {
+					name: name,
+					type: attr.type,
+					value: attr.value
+				};
+			newParseTreeNode.attributes[name] = newAttr;
+			newParseTreeNode.orderedAttributes.push(newAttr);
+		});
+		parseTreeNode = newParseTreeNode;
+	}
+	// Get the widget class for this node type
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
