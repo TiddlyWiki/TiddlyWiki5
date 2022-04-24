@@ -34,8 +34,10 @@ function FramedEngine(options) {
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)
+	var paletteTitle = this.widget.getTiddlerText("$:/palette");
+	var colorScheme = paletteTitle.fields["color-scheme"];
 	this.iframeDoc.open();
-	this.iframeDoc.write("");
+	this.iframeDoc.write("<meta name='color-scheme' content='" + colorScheme ? colorScheme : "light" + "'>'");
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
