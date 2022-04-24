@@ -78,7 +78,9 @@ DroppableWidget.prototype.handleEvent = function(event) {
 
 DroppableWidget.prototype.resetState = function(options) {
 	options = options || {};
-	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+	if(this.domNodes[0]) {
+		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+	}
 	this.currentlyEntered = [];
 	this.document.body.removeEventListener("dragenter",this,true);
 	this.document.body.removeEventListener("dragleave",this,true);
