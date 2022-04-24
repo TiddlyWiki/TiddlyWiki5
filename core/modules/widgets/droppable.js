@@ -76,7 +76,7 @@ DroppableWidget.prototype.handleEvent = function(event) {
 	}
 };
 
-DroppableWidget.prototype.resetState = function(options) {
+DroppableWidget.prototype.resetState = function(options,event) {
 	options = options || {};
 	if(this.domNodes[0]) {
 		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
@@ -85,10 +85,12 @@ DroppableWidget.prototype.resetState = function(options) {
 	this.document.body.removeEventListener("dragenter",this,true);
 	this.document.body.removeEventListener("dragleave",this,true);
 	if(options.performDragLeaveActions && this.dragLeaveActions) {
-		this.invokeActionString(this.dragLeaveActions,this,event);
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.dragLeaveActions,this,event,{modifier: modifierKey});
 	}
 	if(options.performDragEndActions && this.dragEndActions) {
-		this.invokeActionString(this.dragEndActions,this,event);
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.dragEndActions,this,event,{modifier: modifierKey});
 	}
 };
 
@@ -101,7 +103,8 @@ DroppableWidget.prototype.enterDrag = function(event) {
 	this.document.body.addEventListener("dragenter",this,true);
 	this.document.body.addEventListener("dragleave",this,true);
 	if(this.dragEnterActions) {
-		this.invokeActionString(this.dragEnterActions,this,event);
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.dragEnterActions,this,event,{modifier: modifierKey});
 	}
 };
 
@@ -112,7 +115,7 @@ DroppableWidget.prototype.leaveDrag = function(event) {
 	}
 	// Remove highlighting if we're leaving externally. The hacky second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone
 	if(this.currentlyEntered.length === 0) {
-		this.resetState({performDragLeaveActions: true});
+		this.resetState({performDragLeaveActions: true},event);
 	}
 };
 
@@ -143,7 +146,7 @@ DroppableWidget.prototype.handleDragLeaveEvent  = function(event) {
 };
 
 DroppableWidget.prototype.handleDragEndEvent = function(event) {
-	this.resetState({performDragEndActions: true});
+	this.resetState({performDragEndActions: true},event);
 };
 
 DroppableWidget.prototype.handleDropEvent  = function(event) {
