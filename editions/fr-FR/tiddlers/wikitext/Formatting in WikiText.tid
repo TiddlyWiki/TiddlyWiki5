@@ -1,12 +1,12 @@
 caption: Formatage
 created: 20141016142259705
-fr-title: Mise en forme avec WikiText
-modified: 20220226233811803
+fr-title: Mise en forme en WikiTexte
+modified: 20220420234926288
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
 
-Voici les formatages de caractères disponibles en [[WikiTexte|WikiText]]<<:>>
+Voici les formats de caractères disponibles en <<fr WikiText>><<:>>
 
 |Format |Résultat |Icône |h
 |<code>&#96;code&#96;</code><br><code>&#96;&#96;code contenant du &#96;code&#96; &#96;&#96;</code> |`code`<br>``code contenant du `code` `` |<<.icon $:/core/images/mono-line>> |
@@ -17,7 +17,6 @@ Voici les formatages de caractères disponibles en [[WikiTexte|WikiText]]<<:>>
 |`^^exposant^^` |texte en ^^exposant^^ |<<.icon $:/core/images/superscript>> |
 |`,,indice,,` |texte en ,,indice,, |<<.icon $:/core/images/subscript>> |
 
-Voir aussi<<:>> [[WikiTexte : blocs de code|Code Blocks in WikiText]]
+Voir aussi<<:>> <<fr "Code Blocks in WikiText">>
 
-; Remarque
-: Si le code inclus est à la fin du code contenant, l'espace entre le <code>&#96;</code> et les <code>&#96;&#96;</code> est nécessaire.
+<<.tip """Dans l'exemple de <code>&#96;&#96;code contenant du &#96;code&#96; &#96;&#96;</code>, notez qu'à la fin, l'espace entre le <code>&#96;</code> et les <code>&#96;&#96;</code> est obligatoire.""">>

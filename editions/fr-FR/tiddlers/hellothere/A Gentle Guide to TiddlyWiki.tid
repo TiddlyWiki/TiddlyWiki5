@@ -1,0 +1,25 @@
+caption: Un mini-guide de TiddlyWiki
+created: 20150325170720682
+fr-title: Un mini-guide de TiddlyWiki
+modified: 20220417204641215
+tags: HelloThere
+title: A Gentle Guide to TiddlyWiki
+type: text/vnd.tiddlywiki
+
+<<tw>> est un outil incroyablement souple et polyvalent, conçu et mis au point d'une façon très différente de la plupart des logiciels. Cela peut paraître très difficile à comprendre, jusqu'à ce qu'en un claquement de doigts, il devienne une extension directe de votre cerveau.
+
+Pour commencer par les bases, <<tw>> est une application web dédiée à la prise de notes, que vous pouvez obtenir gratuitement,  stocker n'importe où, et personnaliser selon vos souhaits. Elle vous servira à conserver, organiser, et partager vos notes de manière inédite en comparaison des traitements de texte et autres outils habituels de prise de notes.
+
+<<tw>> privilégie la non-linéarité<<:>> le contenu se structure à l'aide de déroulés, de tags, d'hyperliens, et d'autres fonctionnalités spécifiques. Vous pouvez organiser vos notes et y accéder selon votre manière de penser, sans vous sentir contraint par une structure d'organisation prédéfinie.
+
+Vous pouvez utiliser <<tw>> sous forme de fichier autonome, affichable et éditable depuis n'importe quel navigateur web, que vous soyez connecté ou déconnecté. Vous pouvez aussi vous en servir comme une [[application Node.js|TiddlyWiki on Node.js]], à même de synchroniser chacune de vos notes dans un fichier séparé.
+
+Comment faire fonctionner <<tw>> chez vous ? Notre conseil est de commencer par lire les textes de présentation ci-dessous, puis de naviguer dans la <<fr TableOfContents>> présente dans l'onglet //{{TableOfContents!!caption}}// de la barre latérale. Ou si vous préférez, vous pouvez suivre [[nos instructions de démarrage|GettingStarted]] et vous jeter à l'eau !
+
+<<list-links "[tag[HelloThere]]">>
+
+Voir aussi<<:>>
+
+* <<fr '"Grok TiddlyWiki" by Soren Bjornstad'>>
+* <<fr "TiddlyWiki Video Tutorials by Francis Meetze">>
+* [ext[Developer Documentation|https://tiddlywiki.com/dev/index.html]] (en anglais)
