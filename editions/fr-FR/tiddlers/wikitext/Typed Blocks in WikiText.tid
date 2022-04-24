@@ -1,12 +1,12 @@
 caption: Blocs typés
 created: 20131205161051792
-fr-title: Les blocs typés avec WikiText
-modified: 20150601071506502
+fr-title: Blocs typés en WikiTexte
+modified: 20220422133134883
 tags: WikiText
 title: Typed Blocks in WikiText
 type: text/vnd.tiddlywiki
 
-WikiText peut inclure des blocs de textes qui seront renvoyés avec un contenu lié à leur &nbsp;ContentType, comme cela&nbsp;:
+Le <<fr WikiText>> peut inclure des blocs de texte qui seront interprétés selon le type de leur contenu, aussi appelé <<gf "type MIME">>. Ces blocs sont déclarés ainsi<<:>>
 
 ```
 $$$image/svg+xml
@@ -15,8 +15,7 @@ $$$image/svg+xml
 </svg>
 $$$
 ```
-
-Ce qui affichera&nbsp;::
+affichera ceci<<:>>
 
 $$$image/svg+xml
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
@@ -24,7 +23,8 @@ $$$image/svg+xml
 </svg>
 $$$
 
-Il est aussi possible d'abréger la déclaration du ContentType par son extension. Exemple&nbsp;:
+
+Il est aussi possible de remplacer la déclaration du type de contenu par l'extension de fichier correspondante. Exemple<<:>>
 
 ```
 $$$.svg
@@ -34,7 +34,7 @@ $$$.svg
 $$$
 ```
 
-Ce qui affichera&nbsp;:
+affichera ceci<<:>>
 
 $$$.svg
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
@@ -42,7 +42,7 @@ $$$.svg
 </svg>
 $$$
 
-Les types inconnus s'afficheront comme du texte brut&nbsp;:
+Les types inconnus s'afficheront comme du texte brut<<:>>
 
 ```
 $$$text/unknown
@@ -50,29 +50,34 @@ Du texte brut, qui ne sera pas //mis en forme//.
 $$$
 ```
 
-Ce qui affichera&nbsp;:
+affichera ceci<<:>>
 
 $$$text/unknown
 Du texte brut, qui ne sera pas //mis en forme//.
 $$$
 
-Un rendu spécifique peut-être indiqué, déterminant l'affichage d'un rendu de texte particulier. Par exemple&nbsp;:
+Un format de rendu peut être indiqué en complément, qui sélectionnera un format différent pour le résultat. Par exemple<<:>>
 
 ```
 $$$text/vnd.tiddlywiki>text/html
 Ceci est un ''peu'' de wikitext
 $$$
+```
+et
 
+```
 $$$text/vnd.tiddlywiki>text/plain
 Ceci est un ''peu'' de wikitext
 $$$
 ```
 
-Afficheront respectivement&nbsp;:
+afficheront respectivement<<:>>
 
 $$$text/vnd.tiddlywiki>text/html
 Ceci est un ''peu'' de wikitext
 $$$
+
+et<<:>>
 
 $$$text/vnd.tiddlywiki>text/plain
 Ceci est un ''peu'' de wikitext

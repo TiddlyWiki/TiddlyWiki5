@@ -1,0 +1,69 @@
+caption: Tableaux
+created: 20130914132100000
+fr-title: Tableaux en WikiTexte
+modified: 20220422134839855
+tags: WikiText
+title: Tables in WikiText
+type: text/vnd.tiddlywiki
+
+! Concepts de base
+
+TiddlyWiki5 forme les tableaux au moyen du signe barre verticale `|`, de cette façon<<:>>
+
+```
+|!Cell1 |!Cell2 |
+|Cell3 |Cell4 |
+```
+
+Le point d'exclamation marque les cellules d'entête<<:>>
+
+|!Cell1 |!Cell2 |
+|Cell3 |Cell4 |
+
+! L'alignement horizontal
+
+L’alignement horizontal des cellules du tableau est contrôlé par l'insertion d'un espace avant/après le contenu de la cellule. Par exemple:
+
+<<wikitext-example-without-html 
+"""|Contenu aligné à gauche |
+| Contenu aligné à droite|
+| Contenu centré |
+|+++ Une très grande cellule pour vous montrer l'alignement dans la colonne +++|""">>
+
+! L'alignement vertical
+
+L’alignement vertical des cellules du tableau est contrôlé par l'insertion, comme premier caractère de la cellule, soit d'un `^` pour un alignement en haut ou un `,` pour un alignement en bas. La combinaison avec l'alignement horizontal reste valable.
+
+Exemple<<:>>
+
+<<wikitext-example-without-html 
+"""| ::<br>:: |^haut gauche |^ haut centré |^ haut droit|
+| ::<br>::<br>:: |milieu gauche | milieu centré | milieu droit|
+| ::<br>::|,bas gauche |, bas centré |, bas droit|""">>
+
+Si vous voulez afficher un `^`ou un `,` comme premier caractère d'une cellule alignée à gauche, vous devez utiliser la technique de l'<<gf "échappement html">>. Voir, à ce sujet<<:>> <<fr "Formatting in WikiText">>.
+
+| `^` | &amp;#94; |
+| `,` | &amp;#44; |
+
+! La fusion des cellules
+
+Pour fusionner le contenu de la cellule située au dessus utiliser `~`. Pour fusionner avec celle de gauche `<` et `>` pour celle de droite. Par exemple<<:>>
+
+<<wikitext-example-without-html 
+"""|Cell1 |Cell2 |Cell3 |Cell4 |
+|Cell5 |Cell6 |Cell7 |<|
+|Cell5 |~|Cell7 |Cell8 |
+|>|Cell9 |Cell10 |Cell11 |""">>
+
+! Classes de tableau, légendes, en-têtes et pieds de tableau
+
+Des classes CSS, des légendes, des en-têtes et pieds de tableau peuvent être spécifiés comme pseudo-lignes spéciales<<:>>
+
+<<wikitext-example-without-html 
+"""|maclasse autreClass|k
+|Ceci est une légende |c
+|Cell1 |Cell2 |
+|Cell3 |Cell4 |
+|Entête|Entête|h
+|Pied|Pied|f""">>
