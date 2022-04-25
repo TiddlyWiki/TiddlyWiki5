@@ -334,6 +334,10 @@ table tfoot tr td {
 	height: 600px;
 }
 
+:root {
+	color-scheme: {{{ [{$:/palette}get[color-scheme]] ~light }}};
+}
+
 /*
 ** Links
 */
