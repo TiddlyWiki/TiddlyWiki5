@@ -11,7 +11,7 @@ alert-highlight: #FFD60A
 alert-muted-foreground: <<colour muted-foreground>>
 background: #282828
 blockquote-bar: <<colour page-background>>
-button-foreground: <<colour background>>
+button-foreground: <<colour foreground>>
 code-background: <<colour pre-background>>
 code-border: <<colour pre-border>>
 code-foreground: rgba(255, 255, 255, 0.54)
@@ -52,7 +52,7 @@ pre-border: transparent
 primary: #0A84FF
 select-tag-background: <<colour background>>
 select-tag-foreground: <<colour foreground>>
-sidebar-button-foreground: <<colour background>>
+sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #FF9F0A
 sidebar-controls-foreground: #8E8E93
 sidebar-foreground-shadow: transparent
