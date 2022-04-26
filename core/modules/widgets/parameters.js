@@ -49,8 +49,9 @@ ParametersWidget.prototype.execute = function() {
 	}
 	// Process each parameter
 	if(transclusionWidget) {
-		$tw.utils.each(this.attributes,function(value,name) {
-			self.setVariable(name,transclusionWidget.getTransclusionParameter(name,value));
+		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
+			var name = attr.name;
+			self.setVariable(name,transclusionWidget.getTransclusionParameter(name,transclusionWidget.getTransclusionParameterByPosition(index,self.getAttribute(name))));
 		});	
 	}
 	// Construct the child widgets

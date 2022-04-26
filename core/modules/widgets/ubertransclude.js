@@ -47,7 +47,25 @@ UberTranscludeWidget.prototype.execute = function() {
 	this.transcludeIndex = this.getAttribute("$index");
 	this.transcludeMode = this.getAttribute("$mode");
 	this.recursionMarker = this.getAttribute("$recursionMarker","yes");
-	// Find the value widgets in our child parse tree
+	// Collect the string parameters
+	this.stringParametersByName = Object.create(null);
+	this.stringParametersByPosition = [];
+	var stringParameterIndex = 0;
+	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attr) {
+		var name = attr.name, value = self.getAttribute(name);
+		if(name.charAt(0) === "$") {
+			if(name.charAt(1) === "$") {
+				// Attributes starting $$ represent parameters starting with a single $
+				name = name.slice(1);
+			} else {
+				// Attributes starting with a single $ are reserved for the widget
+				return;
+			}
+		}
+		self.stringParametersByName[name] = value;
+		self.stringParametersByPosition[stringParameterIndex++] = value;
+	});
+	// Collect the value widgets in our child parse tree
 	this.slotValueParseTrees = Object.create(null);
 	var noValueWidgetsFound = true,
 		searchParseTreeNodes = function(nodes) {
@@ -120,10 +138,23 @@ UberTranscludeWidget.prototype.execute = function() {
 Fetch the value of a parameter
 */
 UberTranscludeWidget.prototype.getTransclusionParameter = function(name,defaultValue) {
-	if(name.charAt(0) === "$") {
-		name = "$" + name;
+	if(name in this.stringParametersByName) {
+		return this.stringParametersByName[name];
+	} else {
+		return defaultValue;
 	}
-	return this.getAttribute(name,defaultValue);
+};
+
+
+/*
+Fetch the value of a parameter identified by its position
+*/
+UberTranscludeWidget.prototype.getTransclusionParameterByPosition = function(index,defaultValue) {
+	if(index in this.stringParametersByPosition) {
+		return this.stringParametersByPosition[index];
+	} else {
+		return defaultValue;
+	}
 };
 
 /*

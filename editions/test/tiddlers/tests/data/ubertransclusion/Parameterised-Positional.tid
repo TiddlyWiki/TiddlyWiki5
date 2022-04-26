@@ -1,0 +1,26 @@
+title: Ubertransclude/Parameterised/Positional
+description: Positional parameterised transclusion
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$ubertransclude $tiddler='TiddlerOne' zero='Ferret'/>
+<$ubertransclude zero='Ferret' $tiddler='TiddlerOne'/>
+<$ubertransclude $tiddler='TiddlerOne' 0='Pigeon'/>
+<$ubertransclude 0='Pigeon' $tiddler='TiddlerOne'/>
+<$ubertransclude $tiddler='TiddlerOne' zero='Ferret' 0='Pigeon'/>
+<$ubertransclude zero='Ferret' 0='Pigeon' $tiddler='TiddlerOne'/>
+<$ubertransclude $tiddler='TiddlerOne'/>
+_
+title: TiddlerOne
+
+\whitespace trim
+<$parameters zero='Jaguar'>
+	<$text text=<<zero>>/>
+</$parameters>
+_
+title: ExpectedResult
+
+<p>FerretFerretPigeonPigeonFerretFerretJaguar</p>

@@ -48,14 +48,14 @@ exports.parse = function() {
 		tiddlerNode = {
 			type: "tiddler",
 			attributes: {
-				tiddler: {type: "string", value: targetTitle}
+				tiddler: {name: "tiddler", type: "string", value: targetTitle}
 			},
 			isBlock: true,
 			children: [transcludeNode]
 		};
 	}
 	if(template) {
-		transcludeNode.attributes["$tiddler"] = {type: "string", value: template};
+		transcludeNode.attributes["$tiddler"] = {name: "$tiddler", type: "string", value: template};
 		if(textRef) {
 			return [tiddlerNode];
 		} else {
@@ -63,12 +63,12 @@ exports.parse = function() {
 		}
 	} else {
 		if(textRef) {
-			transcludeNode.attributes["$tiddler"] = {type: "string", value: targetTitle};
+			transcludeNode.attributes["$tiddler"] = {name: "$tiddler", type: "string", value: targetTitle};
 			if(targetField) {
-				transcludeNode.attributes["$field"] = {type: "string", value: targetField};
+				transcludeNode.attributes["$field"] = {name: "$field", type: "string", value: targetField};
 			}
 			if(targetIndex) {
-				transcludeNode.attributes["$index"] = {type: "string", value: targetIndex};
+				transcludeNode.attributes["$index"] = {name: "$index", type: "string", value: targetIndex};
 			}
 			return [tiddlerNode];
 		} else {
