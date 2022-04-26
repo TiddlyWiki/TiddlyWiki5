@@ -13,7 +13,7 @@ title: Output
 	</$parameters>
 </$ubertransclude>
 <$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
-	<$value $name="missing">
+	<$value $name="ts-missing">
 		<$parameters one='Ferret'>
 			Badger
 			<$text text=<<one>>/>
@@ -27,7 +27,7 @@ title: Output
 	</$parameters>
 </$ubertransclude>
 <$ubertransclude $tiddler='MissingTiddler' one='Ferret'>
-	<$value $name="missing">
+	<$value $name="ts-missing">
 		<$parameters one='Ferret'>
 			Badger
 			<$text text=<<one>>/>

@@ -16,7 +16,7 @@ title: TiddlerOne
 <$set name="<$text>" value="""\whitespace trim
 	<$parameters text='Jaguar'>
 		<$text text=<<text>>/>
-		<$slot $name="body">
+		<$slot $name="ts-body">
 			Whale
 		</$slot>
 	</$parameters>"""

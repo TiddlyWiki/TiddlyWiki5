@@ -403,7 +403,7 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 					type: "value",
 					tag: "$value",
 					attributes: {
-						"$name": {name: "$name", type: "string", value: "body"}
+						"$name": {name: "$name", type: "string", value: "ts-body"}
 					},
 					children: parseTreeNode.children
 				},
@@ -411,7 +411,7 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 					type: "value",
 					tag: "$value",
 					attributes: {
-						"$name": {name: "$name", type: "string", value: "wrapper"}
+						"$name": {name: "$name", type: "string", value: "ts-wrapper"}
 					},
 					children: [
 						{
@@ -426,7 +426,7 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 									type: "slot",
 									tag: "$slot",
 									attributes: {
-										"$name": {name: "$name", type: "string", value: "wrapped"}
+										"$name": {name: "$name", type: "string", value: "ts-wrapped"}
 									}
 								}
 							]

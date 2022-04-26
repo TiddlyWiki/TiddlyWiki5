@@ -65,7 +65,7 @@ UberTranscludeWidget.prototype.execute = function() {
 	};
 	searchParseTreeNodes(this.parseTreeNode.children);
 	if(noValueWidgetsFound) {
-		this.slotValueParseTrees["missing"] = this.parseTreeNode.children;
+		this.slotValueParseTrees["ts-missing"] = this.parseTreeNode.children;
 	}
 	// Parse the text reference
 	var parseAsInline = !this.parseTreeNode.isBlock;
@@ -87,13 +87,13 @@ UberTranscludeWidget.prototype.execute = function() {
 				subTiddler: this.transcludeSubTiddler
 			});
 	}
-	var parseTreeNodes = parser ? parser.tree : (this.slotValueParseTrees["missing"] || []);
+	var parseTreeNodes = parser ? parser.tree : (this.slotValueParseTrees["ts-missing"] || []);
 	this.sourceText = parser ? parser.source : undefined;
 	this.parserType = parser? parser.type : undefined;
 	// Wrap the transcluded content if required
-	if(this.slotValueParseTrees["wrapper"]) {
-		this.slotValueParseTrees["wrapped"] = parseTreeNodes;
-		parseTreeNodes = this.slotValueParseTrees["wrapper"];
+	if(this.slotValueParseTrees["ts-wrapper"]) {
+		this.slotValueParseTrees["ts-wrapped"] = parseTreeNodes;
+		parseTreeNodes = this.slotValueParseTrees["ts-wrapper"];
 		this.sourceTest = undefined;
 		this.sourceType = undefined;
 	}
