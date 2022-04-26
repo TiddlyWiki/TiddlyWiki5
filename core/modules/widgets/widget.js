@@ -409,9 +409,7 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 				}
 			]
 		};
-		newParseTreeNode.orderedAttributes = [newParseTreeNode.attributes["$variable"]];
-		newParseTreeNode.children[0].orderedAttributes = [newParseTreeNode.children[0].attributes["$name"]];
-		$tw.utils.each(parseTreeNode.orderedAttributes,function(attr) {
+		$tw.utils.each(parseTreeNode.attributes,function(attr) {
 			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of ubertransclude
 			var name = attr.name.charAt(0) === "$" ? "$" + attr.name : attr.name,
 				newAttr = {
@@ -420,7 +418,6 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 					value: attr.value
 				};
 			newParseTreeNode.attributes[name] = newAttr;
-			newParseTreeNode.orderedAttributes.push(newAttr);
 		});
 		parseTreeNode = newParseTreeNode;
 	}
