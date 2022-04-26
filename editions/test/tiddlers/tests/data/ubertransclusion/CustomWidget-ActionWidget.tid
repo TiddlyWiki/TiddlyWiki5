@@ -1,0 +1,28 @@
+title: Ubertransclude/CustomWidget/ActionWidget
+description: Custom widget definition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$ubertransclude $tiddler='Result'>
+</$ubertransclude>
+_
+title: Actions
+
+\whitespace trim
+<!-- Define the <$action-mywidget> widget by defining a transcludable variable with that name -->
+<$set name="<$action-mywidget>" value="""\whitespace trim
+	<$parameters one='Jaguar'>
+		<$action-setfield $tiddler="Result" $field="text" $value=<<one>>/>
+	</$parameters>"""
+>
+	<$action-mywidget one="Dingo">
+		Crocodile
+	</$action-mywidget>
+</$set>
+_
+title: ExpectedResult
+
+<p>Dingo</p>

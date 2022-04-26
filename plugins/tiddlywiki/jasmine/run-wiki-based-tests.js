@@ -38,6 +38,11 @@ describe("Wiki-based tests", function() {
 			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 			// Render the widget node to the DOM
 			var wrapper = renderWidgetNode(widgetNode);
+			// Run the actions if provided
+			if(wiki.tiddlerExists("Actions")) {
+				widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
+				refreshWidgetNode(widgetNode,wrapper);
+			}
 			// Test the rendering
 			expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 		});
@@ -80,14 +85,8 @@ describe("Wiki-based tests", function() {
 		return wrapper;
 	}
 
-	function refreshWidgetNode(widgetNode,wrapper,changes) {
-		var changedTiddlers = {};
-		if(changes) {
-			$tw.utils.each(changes,function(title) {
-				changedTiddlers[title] = true;
-			});
-		}
-		widgetNode.refresh(changedTiddlers,wrapper,null);
+	function refreshWidgetNode(widgetNode,wrapper) {
+		widgetNode.refresh(widgetNode.wiki.changedTiddlers,wrapper);
 // console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
 
