@@ -134,17 +134,15 @@ UberTranscludeWidget.prototype.getTransclusionSlotValue = function(name,defaultP
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
 */
 UberTranscludeWidget.prototype.makeRecursionMarker = function() {
+	var attributes = Object.create(null);
+	$tw.utils.each(this.attributes,function(value,name) {
+		attributes[name] = value;
+	});
 	var output = [];
 	output.push("{");
 	output.push(this.getVariable("currentTiddler",{defaultValue: ""}));
 	output.push("|");
-	output.push(this.transcludeTitle || "");
-	output.push("|");
-	output.push(this.transcludeField || "");
-	output.push("|");
-	output.push(this.transcludeIndex || "");
-	output.push("|");
-	output.push(this.transcludeSubTiddler || "");
+	output.push(JSON.stringify(attributes));
 	output.push("}");
 	return output.join("");
 };

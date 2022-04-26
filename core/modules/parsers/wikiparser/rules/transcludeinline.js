@@ -34,7 +34,7 @@ exports.parse = function() {
 		textRef = $tw.utils.trim(this.match[1]);
 	// Prepare the transclude widget
 	var transcludeNode = {
-			type: "transclude",
+			type: "ubertransclude",
 			attributes: {}
 		};
 	// Prepare the tiddler widget
@@ -53,7 +53,7 @@ exports.parse = function() {
 		};
 	}
 	if(template) {
-		transcludeNode.attributes.tiddler = {type: "string", value: template};
+		transcludeNode.attributes["$tiddler"] = {type: "string", value: template};
 		if(textRef) {
 			return [tiddlerNode];
 		} else {
@@ -61,12 +61,12 @@ exports.parse = function() {
 		}
 	} else {
 		if(textRef) {
-			transcludeNode.attributes.tiddler = {type: "string", value: targetTitle};
+			transcludeNode.attributes["$tiddler"] = {type: "string", value: targetTitle};
 			if(targetField) {
-				transcludeNode.attributes.field = {type: "string", value: targetField};
+				transcludeNode.attributes["$field"] = {type: "string", value: targetField};
 			}
 			if(targetIndex) {
-				transcludeNode.attributes.index = {type: "string", value: targetIndex};
+				transcludeNode.attributes["$index"] = {type: "string", value: targetIndex};
 			}
 			return [tiddlerNode];
 		} else {
