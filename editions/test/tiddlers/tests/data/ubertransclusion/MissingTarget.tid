@@ -1,0 +1,48 @@
+title: Ubertransclude/MissingTarget
+description: Transcluding a missing target
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+	<$parameters one='Ferret'>
+		Badger
+		<$text text=<<one>>/>
+	</$parameters>
+</$ubertransclude>
+<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+	<$value $name="missing">
+		<$parameters one='Ferret'>
+			Badger
+			<$text text=<<one>>/>
+		</$parameters>
+	</$value>
+</$ubertransclude>
+<$ubertransclude $tiddler='MissingTiddler' one='Ferret'>
+	<$parameters one='Ferret'>
+		Badger
+		<$text text=<<one>>/>
+	</$parameters>
+</$ubertransclude>
+<$ubertransclude $tiddler='MissingTiddler' one='Ferret'>
+	<$value $name="missing">
+		<$parameters one='Ferret'>
+			Badger
+			<$text text=<<one>>/>
+		</$parameters>
+	</$value>
+</$ubertransclude>
+_
+title: TiddlerOne
+
+\whitespace trim
+<$parameters one='Kangaroo'>
+	Piranha
+	<$text text=<<one>>/>
+</$parameters>
+_
+title: ExpectedResult
+
+<p>PiranhaFerretPiranhaFerretBadgerFerretBadgerFerret</p>

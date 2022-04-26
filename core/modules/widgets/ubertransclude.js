@@ -47,22 +47,26 @@ UberTranscludeWidget.prototype.execute = function() {
 	this.transcludeIndex = this.getAttribute("$index");
 	this.transcludeMode = this.getAttribute("$mode");
 	this.recursionMarker = this.getAttribute("$recursionMarker","yes");
-	// Find the value widgets in our parse tree
+	// Find the value widgets in our child parse tree
 	this.slotValueParseTrees = Object.create(null);
-	this.slotValueParseTrees.missing = this.parseTreeNode.children;
-	var searchParseTreeNodes = function(nodes) {
+	var noValueWidgetsFound = true,
+		searchParseTreeNodes = function(nodes) {
 		$tw.utils.each(nodes,function(node) {
 			if(node.type === "value" && node.tag === "$value") {
 				if(node.attributes["$name"] && node.attributes["$name"].type === "string") {
 					var slotValueName = node.attributes["$name"].value;
 					self.slotValueParseTrees[slotValueName] = node.children;
 				}
+				noValueWidgetsFound = false;
 			} else {
 				searchParseTreeNodes(node.children);
 			}
 		});
 	};
 	searchParseTreeNodes(this.parseTreeNode.children);
+	if(noValueWidgetsFound) {
+		this.slotValueParseTrees["missing"] = this.parseTreeNode.children;
+	}
 	// Parse the text reference
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
@@ -83,7 +87,7 @@ UberTranscludeWidget.prototype.execute = function() {
 				subTiddler: this.transcludeSubTiddler
 			});
 	}
-	var parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
+	var parseTreeNodes = parser ? parser.tree : (this.slotValueParseTrees["missing"] || []);
 	this.sourceText = parser ? parser.source : null;
 	this.parserType = parser? parser.type : null;
 	// Set context variables for recursion detection
