@@ -406,6 +406,32 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 						"$name": {name: "$name", type: "string", value: "body"}
 					},
 					children: parseTreeNode.children
+				},
+				{
+					type: "value",
+					tag: "$value",
+					attributes: {
+						"$name": {name: "$name", type: "string", value: "wrapper"}
+					},
+					children: [
+						{
+							type: "setvariable",
+							tag: "$setvariable",
+							attributes: {
+								"name": {name: "name", type: "string", value: variableDefinitionName},
+								"value": {name: "value", type: "string", value: ""}
+							},
+							children: [
+								{
+									type: "slot",
+									tag: "$slot",
+									attributes: {
+										"$name": {name: "$name", type: "string", value: "wrapped"}
+									}
+								}
+							]
+						}
+					]
 				}
 			]
 		};

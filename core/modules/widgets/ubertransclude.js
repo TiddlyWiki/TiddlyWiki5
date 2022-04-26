@@ -88,8 +88,15 @@ UberTranscludeWidget.prototype.execute = function() {
 			});
 	}
 	var parseTreeNodes = parser ? parser.tree : (this.slotValueParseTrees["missing"] || []);
-	this.sourceText = parser ? parser.source : null;
-	this.parserType = parser? parser.type : null;
+	this.sourceText = parser ? parser.source : undefined;
+	this.parserType = parser? parser.type : undefined;
+	// Wrap the transcluded content if required
+	if(this.slotValueParseTrees["wrapper"]) {
+		this.slotValueParseTrees["wrapped"] = parseTreeNodes;
+		parseTreeNodes = this.slotValueParseTrees["wrapper"];
+		this.sourceTest = undefined;
+		this.sourceType = undefined;
+	}
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();
 	if(this.recursionMarker === "yes") {

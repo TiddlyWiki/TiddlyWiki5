@@ -15,12 +15,10 @@ title: TiddlerOne
 <!-- Redefine the <$text> widget by defining a transcludable variable with that name -->
 <$set name="<$text>" value="""\whitespace trim
 	<$parameters text='Jaguar'>
-		<$set name="<$text>" value="">
-			<$text text=<<text>>/>
-			<$slot $name="body">
-				Whale
-			</$slot>
-		</$set>
+		<$text text=<<text>>/>
+		<$slot $name="body">
+			Whale
+		</$slot>
 	</$parameters>"""
 >
 	<$text text="Dingo">
