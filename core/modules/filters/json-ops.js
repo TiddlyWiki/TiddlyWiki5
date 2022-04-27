@@ -12,7 +12,7 @@ Filter operators for JSON operations
 /*global $tw: false */
 "use strict";
 
-exports["getjson"] = function(source,operator,options) {
+exports["jsonget"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
 		var data = options.wiki.getTiddlerDataCached(title);
@@ -26,7 +26,7 @@ exports["getjson"] = function(source,operator,options) {
 	return results;
 };
 
-exports["indexesjson"] = function(source,operator,options) {
+exports["jsonindexes"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
 		var data = options.wiki.getTiddlerDataCached(title);
@@ -40,7 +40,7 @@ exports["indexesjson"] = function(source,operator,options) {
 	return results;
 };
 
-exports["typejson"] = function(source,operator,options) {
+exports["jsontype"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
 		var data = options.wiki.getTiddlerDataCached(title);
