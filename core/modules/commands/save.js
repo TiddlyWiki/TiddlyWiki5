@@ -39,14 +39,20 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 			if(!result) {
 				var tiddler = self.commander.wiki.getTiddler(title);
 				if(tiddler) {
-					var type = tiddler.fields.type || "text/vnd.tiddlywiki",
-						contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"},
-						filepath = path.resolve(self.commander.outputPath,wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0]);
+					var fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
+						directory: path.resolve(self.commander.outputPath),
+						pathFilters: [filenameFilter],
+						wiki: wiki,
+						fileInfo: {}
+					});
 					if(self.commander.verbose) {
-						console.log("Saving \"" + title + "\" to \"" + filepath + "\"");
+						console.log("Saving \"" + title + "\" to \"" + fileInfo.filepath + "\"");
 					}
-					$tw.utils.createFileDirectories(filepath);
-					fs.writeFileSync(filepath,tiddler.fields.text,contentTypeInfo.encoding);
+					try {
+						$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
+					} catch (err) {
+						result = "Error saving tiddler \"" + title + "\", to file: \"" + fileInfo.filepath + "\"";
+					}
 				} else {
 					result = "Tiddler '" + title + "' not found";
 				}

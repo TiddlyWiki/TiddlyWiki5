@@ -21,6 +21,20 @@ exports.addAttributeToParseTreeNode = function(node,name,value) {
 	}
 };
 
+exports.getOrderedAttributesFromParseTreeNode = function(node) {
+	if(node.orderedAttributes) {
+		return node.orderedAttributes;
+	} else {
+		var attributes = [];
+		$tw.utils.each(node.attributes,function(attribute) {
+			attributes.push(attribute);
+		});
+		return attributes.sort(function(a,b) {
+			return a.name < b.name ? -1 : (a.name > b.name ? 1 : 0);
+		});
+	}
+};
+
 exports.getAttributeValueFromParseTreeNode = function(node,name,defaultValue) {
 	if(node.attributes && node.attributes[name] && node.attributes[name].value !== undefined) {
 		return node.attributes[name].value;

@@ -1,6 +1,6 @@
 caption: draggable
 created: 20170406081938627
-modified: 20220223145136863
+modified: 20220416052952189
 tags: Widgets TriggeringWidgets
 title: DraggableWidget
 type: text/vnd.tiddlywiki
@@ -19,6 +19,7 @@ See DragAndDropMechanism for an overview.
 |tag |Optional tag to override the default "div" element created by the widget|
 |selector|<<.from-version 5.2.2>> Optional CSS Selector to identify a DOM element within the widget that will be used as the drag handle |
 |class |Optional CSS classes to assign to the DOM element created by the widget. The class `tc-draggable` is added to the drag handle, which is the same as the DOM element created by the widget unless the <<.param selector>> attribute is used. The class `tc-dragging` is applied to the drag handle while the element is being dragged |
+|enable |<<.from-version 5.2.3>> Optional value "no" to disable the draggable functionality (defaults to "yes") |
 
 |startactions |Optional action string that gets invoked when dragging ''starts'' |
 |endactions |Optional action string that gets invoked when dragging ''ends'' |
@@ -34,3 +35,18 @@ The [[actionTiddler Variable]] is accessible in both //startactions// and //enda
 
 
 The LinkWidget incorporates the functionality of the DraggableWidget via the ''draggable'' attribute.
+
+<<.from-version 5.2.3>> The following variables are accessible in the //startactions// and the //endactions//:
+
+|!Variables |!Description |
+|`modifier` |The [[modifier Variable]] contains the Modifier Key held while dragging |
+|`dom-*` |All DOM attributes of the node being dragged are made available as variables, with the prefix `dom-` |
+|`tv-popup-coords` |A co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node that's being dragged where the event originated |
+|`tv-selectednode-posx` |`x` offset position of the dragged DOM node |
+|`tv-selectednode-posy` |`y` offset position of the dragged DOM node  |
+|`tv-selectednode-width` |`offsetWidth` of the dragged DOM node |
+|`tv-selectednode-height` |`offsetHeight` of the dragged DOM node |
+|`event-fromselected-posx` |`x` position of the event relative to the dragged DOM node |
+|`event-fromselected-posy` |`y` position of the event relative to the dragged DOM node |
+|`event-fromviewport-posx` |`x` position of the event relative to the viewport |
+|`event-fromviewport-posy` |`y` position of the event relative to the viewport |

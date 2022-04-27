@@ -3,6 +3,8 @@ created: 20131024141900000
 modified: 20220402023600000
 tags: Widgets TriggeringWidgets
 colors: red orange yellow blue
+fruits: bananas oranges grapes
+vegetables: carrots potatoes
 title: CheckboxWidget
 type: text/vnd.tiddlywiki
 
@@ -29,6 +31,7 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |checked |The value of the field corresponding to the checkbox being checked |
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
+|indeterminate |Whether ambiguous values can produce indeterminate checkboxes (see below) |
 |class |The class that will be assigned to the label element <$macrocall $name=".tip" _="""<<.from-version "5.2.3">> `tc-checkbox` is always applied by default, as well as `tc-checkbox-checked` when checked"""/> |
 |actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the status of the checkbox changes (whether it is checked or unchecked) |
 |uncheckactions |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
@@ -100,3 +103,28 @@ This example creates the same checkbox as in the list mode example, selecting be
 \define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
 <$checkbox filter="[list[!!colors]]" checked="green" unchecked="red" default="red" checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> > Is "green" in colors?</$checkbox><br />''colors:'' {{!!colors}}
 """>>
+
+!! Indeterminate checkboxes
+
+If both the ''checked'' and ''unchecked'' attributes are specified, but neither one is found in the specified field (or index), the result can be ambiguous. Should the checkbox be checked or unchecked? Normally in such cases the checkbox will be unchecked, but if the ''indeterminate'' attribute is set to "yes" (default is "no"), the checkbox will instead be in an "indeterminate" state. An indeterminate checkbox counts as false for most purposes &mdash; if you click it, the checkbox will become checked and the ''checkactions'', if any, will be triggered &mdash; but indeterminate checkboxes are displayed differently in the browser.
+
+This example shows indeterminate checkboxes being used for categories in a shopping list (which could also be sub-tasks in a todo list, or many other things). If only some items in a category are selected, the category checkbox is indeterminate. You can click on the category checkboxes to see how indeterminate states are treated the same as the unchecked state, and clicking the box checks it and applies its check actions (in this case, checking all the boxes in that category). Try editing the <<.field fruits>> and <<.field vegetables>> fields on this tiddler and see what happens to the example when you do.
+
+<<wikitext-example-without-html """\define check-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[list[!!$field-name$]]" />
+\define uncheck-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[[]]" />
+
+<$checkbox filter="[list[!!selected-fruits]count[]]" checked={{{ [list[!!fruits]count[]] }}} unchecked="0" checkactions=<<check-all fruits>> uncheckactions=<<uncheck-all fruits>> indeterminate="yes"> fruits</$checkbox>
+<ul style="list-style: none">
+<$list variable="fruit" filter="[list[!!fruits]]">
+<li><$checkbox listField="selected-fruits" checked=<<fruit>>> <<fruit>></$checkbox></li>
+</$list>
+</ul>
+<$checkbox filter="[list[!!selected-vegetables]count[]]" checked={{{ [list[!!vegetables]count[]] }}} unchecked="0" checkactions=<<check-all vegetables>> uncheckactions=<<uncheck-all vegetables>> indeterminate="yes"> veggies</$checkbox>
+<ul style="list-style: none">
+<$list variable="veggie" filter="[list[!!vegetables]]">
+<li><$checkbox listField="selected-vegetables" checked=<<veggie>>> <<veggie>></$checkbox></li>
+</$list>
+</ul>
+
+<p>Selected veggies: {{!!selected-vegetables}}<br/>
+Selected fruits: {{!!selected-fruits}}</p>""">>

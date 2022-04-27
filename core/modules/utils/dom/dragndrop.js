@@ -41,7 +41,9 @@ exports.makeDraggable = function(options) {
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
-			    	startActions = options.startActions;
+			    	startActions = options.startActions,
+			    	variables,
+			    	domNodeRect;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
@@ -54,7 +56,11 @@ exports.makeDraggable = function(options) {
 				$tw.utils.addClass(event.target,"tc-dragging");
 				// Invoke drag-start actions if given
 				if(startActions !== undefined) {
-					options.widget.invokeActionString(startActions,options.widget,event,{actionTiddler: titleString});
+					// Collect our variables
+					variables = $tw.utils.collectDOMVariables(domNode,null,event);
+					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+					variables["actionTiddler"] = titleString;
+					options.widget.invokeActionString(startActions,options.widget,event,variables);
 				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
@@ -114,7 +120,8 @@ exports.makeDraggable = function(options) {
 				var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 					dragFilter = options.dragFilterFn && options.dragFilterFn(),
 					titles = dragTiddler ? [dragTiddler] : [],
-			    		endActions = options.endActions;
+			    		endActions = options.endActions,
+				    	variables;
 				if(dragFilter) {
 					titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 				}
@@ -122,7 +129,10 @@ exports.makeDraggable = function(options) {
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
 				if(endActions !== undefined) {
-					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString});
+					variables = $tw.utils.collectDOMVariables(domNode,null,event);
+					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+					variables["actionTiddler"] = titleString;
+					options.widget.invokeActionString(endActions,options.widget,event,variables);
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
