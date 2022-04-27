@@ -8,7 +8,7 @@ By default, TiddlyWiki displays a blank screen while it is loading. You can add 
 
 Larger TiddlyWiki files and those loaded over a slow network connection may take a little time to load. Once fully loaded, performance improves, because everything is now running entirely within the browser. Using a splash screen ensures people know the loading process is taking place, reducing the chance they will leave the page.
 
-In order for the splash screen to be displayed before TiddlyWiki is initialised it is embedded as static HTML/CSS within the TiddlyWiki HTML file. This is done with the [[SystemTag: $:/tags/RawMarkupWikified/TopBody]].
+In order for the splash screen to be displayed before TiddlyWiki is initialised or [[decrypted|Encryption]], it is embedded as static HTML/CSS within the TiddlyWiki HTML file. This is done with the [[SystemTag: $:/tags/RawMarkupWikified/TopBody]], or any of the other system tags beginning with $:/tags/RawMarkup. 
 
 In order to remove the splash screen when the wiki has finished loading, the HTML should be wrapped in a container with the special class `tc-remove-when-wiki-loaded`. Any DOM elements with this class are automatically deleted by the core once the wiki has loaded.
 
