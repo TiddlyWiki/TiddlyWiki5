@@ -8,6 +8,12 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.21...v5.1.22]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[Thomas Elmiger|https://github.com/telmiger]] for his winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/rYrja18_SfQ/m/IX-jFS4cBQAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/1ed36adab62c117849ee29d9535136eac70d3bc7/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
 ! Major Improvements
 
 !!  Dynamic Plugin Loading

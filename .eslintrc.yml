@@ -64,7 +64,23 @@ rules:
   init-declarations: 'off'
   jsx-quotes: error
   key-spacing: 'off'
-  keyword-spacing: 'off'
+  keyword-spacing:
+    - error
+    - before: true
+      after: false
+      overrides:
+        'case':
+          after: true
+        'do':
+          'after': true
+        'else':
+          after: true
+        'return':
+          after: true
+        'throw':
+          after: true
+        'try':
+          after: true
   line-comment-position: 'off'
   linebreak-style: 'off'
   lines-around-comment: 'off'

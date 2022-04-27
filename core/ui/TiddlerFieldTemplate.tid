@@ -1,5 +1,6 @@
 title: $:/core/ui/TiddlerFieldTemplate
 
+\whitespace trim
 <tr class="tc-view-field">
 <td class="tc-view-field-name">
 <$text text=<<listItem>>/>

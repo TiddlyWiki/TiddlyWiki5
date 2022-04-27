@@ -20,7 +20,7 @@ In order to avoid denial of service attacks with malformed filters in the defaul
 To enable a particular filter, create a tiddler with the title "$:/config/Server/ExternalFilters/" concatenated with the filter text, and the text field set to "yes". For example, the TiddlyWeb plugin includes the following shadow tiddler to enable the filter that it requires:
 
 ```
-title: $:/config/Server/ExternalFilters/[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]]
+title: $:/config/Server/ExternalFilters/[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]]
 text: yes
 ```
 

@@ -1,0 +1,11 @@
+title: $:/language/Help/output
+description: Ustaw folder wyjściowy dla kolejnych komend
+
+Ustawia folder wyjściowy (gdzie będą zapisywane pliki) dla kolejnych komend. Domyślny folder to podfolder `output` w obecnej lokalizacji
+
+```
+--output <pathname>
+```
+
+Jeżeli podana ścieżka jest względna, to użyje obecnie wybranego folderu jako bazy. Na przykład `--output .` ustawi folder wyhściowy na obecny folder.
+

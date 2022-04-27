@@ -7,9 +7,11 @@ tags: $:/tags/Macro
 <$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
 <$subtype$>
 <$link to={{!!title}}>
+<$let tv-wikilinks="no">
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
+</$let>
 </$link>
 </$subtype$>
 </$list>
@@ -17,7 +19,7 @@ tags: $:/tags/Macro
 \end
 
 \define list-links-draggable-drop-actions()
-<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<targetTiddler>> $field=<<targetField>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
 \define list-links-draggable(tiddler,field:"list",type:"ul",subtype:"li",class:"",itemTemplate)
@@ -31,9 +33,11 @@ tags: $:/tags/Macro
 <div>
 <$transclude tiddler="""$itemTemplate$""">
 <$link to={{!!title}}>
+<$let tv-wikilinks="no">
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
+</$let>
 </$link>
 </$transclude>
 </div>
@@ -53,6 +57,7 @@ tags: $:/tags/Macro
 \end
 
 \define list-tagged-draggable-drop-actions(tag)
+\whitespace trim
 <!-- Save the current ordering of the tiddlers with this tag -->
 <$set name="order" filter="[<__tag__>tagging[]]">
 <!-- Remove any list-after or list-before fields from the tiddlers with this tag -->
@@ -61,7 +66,7 @@ tags: $:/tags/Macro
 <$action-deletefield $field="list-after"/>
 </$list>
 <!-- Save the new order to the Tag Tiddler -->
-<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<__tag__>> $field="list" $filter="+[enlist<order>] +[insertbefore<actionTiddler>,<currentTiddler>]"/>
 <!-- Make sure the newly added item has the right tag -->
 <!-- Removing this line makes dragging tags within the dropdown work as intended -->
 <!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->

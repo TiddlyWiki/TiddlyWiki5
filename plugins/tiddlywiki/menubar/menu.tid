@@ -55,7 +55,7 @@ tags: $:/tags/PageTemplate
 <$list filter="[<currentTiddler>addprefix[$:/config/plugins/menubar/MenuItems/Visibility/]get[text]] ~show +[match[show]]" variable="ignore">
 <$set name="dropdown-state" value=<<qualify "$:/state/popup/topmenu/dropdown/">>>
 <$set name="dropdown-state" value={{{ [<dropdown-state>addsuffix<currentTiddler>] }}}>
-<$reveal type="popup" state=<<dropdown-state>> position={{{ [<currentTiddler>get[dropdown-position]else[below]] }}} class={{{ [<currentTiddler>get[dropdown]get[class]] }}} tag="div">
+<$reveal type="popup" state=<<dropdown-state>> position={{{ [<currentTiddler>get[dropdown-position]else[below]] }}} class={{{ [<currentTiddler>get[class]] }}} tag="div">
 <div class="tc-drop-down">
 <$transclude/>
 </div>

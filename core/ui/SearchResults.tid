@@ -2,13 +2,15 @@ title: $:/core/ui/SearchResults
 
 <div class="tc-search-results">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]" emptyMessage="""
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]">
-<$transclude mode="block"/>
-</$list>
-""">
+<$list
+	filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]"
+	emptyMessage="<$list filter='[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]'><$transclude mode='block'/></$list>">
 
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]" default={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<currentTab>>/>""" explicitState="$:/state/tab/search-results/sidebar"/>
+<$macrocall $name="tabs"
+	tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"
+	default={{$:/config/SearchResults/Default}}
+	actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<currentTab>>/>"
+	explicitState="$:/state/tab/search-results/sidebar"/>
 
 </$list>
 

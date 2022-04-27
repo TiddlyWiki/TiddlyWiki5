@@ -1,0 +1,9 @@
+created: 20170126143833588
+fr-title: obsolète
+modified: 20220303000909524
+title: $:/deprecated
+type: text/vnd.tiddlywiki
+
+<<<
+L'obsolescence est, dans le domaine du développement logiciel, la situation où une ancienne fonctionnalité est considérée comme dépassée au regard d'un nouveau standard, et où, bien qu'elle soit conservée dans les versions plus récentes (par souci de rétro-compatibilité, et pour donner aux développeurs le temps de mettre leur code source en conformité), elle pourrait disparaître à l'avenir, si bien qu'il est recommandé d'en abandonner l'usage.
+<<< [[wikipedia|https://fr.wikipedia.org/wiki/Obsolescence_(informatique)]]

@@ -1,7 +1,6 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
 		"tiddlywiki/stacked-view",
@@ -14,7 +13,6 @@
 		"tiddlywiki/dynaview",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/codemirror",
-		"tiddlywiki/comments",
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip"
 	],

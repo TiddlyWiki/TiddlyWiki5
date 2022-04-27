@@ -122,7 +122,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		});
 		// Only substitute variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
-			value = this.substituteVariableReferences(value);
+			value = this.substituteVariableReferences(value,options);
 		}
 		return {
 			text: value,
@@ -175,10 +175,10 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 	return results;
 };
 
-Widget.prototype.substituteVariableReferences = function(text) {
+Widget.prototype.substituteVariableReferences = function(text,options) {
 	var self = this;
 	return (text || "").replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
-		return self.getVariable(p1,{defaultValue: ""});
+		return options.variables && options.variables[p1] || (self.getVariable(p1,{defaultValue: ""}));
 	});
 };
 
@@ -263,19 +263,9 @@ Compute the current values of the attributes of the widget. Returns a hashmap of
 */
 Widget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
-		self = this,
-		value;
+		self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "filtered") {
-			value = self.wiki.filterTiddlers(attribute.filter,self)[0] || "";
-		} else if(attribute.type === "indirect") {
-			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
-		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
-		} else { // String attribute
-			value = attribute.value;
-		}
-		// Check whether the attribute has changed
+		var value = self.computeAttribute(attribute);
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
 			changedAttributes[name] = true;
@@ -284,11 +274,32 @@ Widget.prototype.computeAttributes = function() {
 	return changedAttributes;
 };
 
+Widget.prototype.computeAttribute = function(attribute) {
+	var value;
+	if(attribute.type === "filtered") {
+		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
+	} else if(attribute.type === "indirect") {
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+	} else if(attribute.type === "macro") {
+		value = this.getVariable(attribute.value.name,{params: attribute.value.params});
+	} else { // String attribute
+		value = attribute.value;
+	}
+	return value;
+};
+
 /*
-Check for the presence of an attribute
+Check for the presence of an evaluated attribute on the widget. Note that attributes set to a missing variable (ie attr=<<missing>>) will be treated as missing
 */
 Widget.prototype.hasAttribute = function(name) {
 	return $tw.utils.hop(this.attributes,name);
+};
+
+/*
+Check for the presence of a raw attribute on the widget parse tree node. Note that attributes set to a missing variable (ie attr=<<missing>>) will NOT be treated as missing
+*/
+Widget.prototype.hasParseTreeNodeAttribute = function(name) {
+	return $tw.utils.hop(this.parseTreeNode.attributes,name);
 };
 
 /*
@@ -310,24 +321,40 @@ excludeEventAttributes: ignores attributes whose name begins with "on"
 Widget.prototype.assignAttributes = function(domNode,options) {
 	options = options || {};
 	var self = this;
-	$tw.utils.each(this.attributes,function(v,a) {
-		// Check exclusions
-		if(options.excludeEventAttributes && a.substr(0,2) === "on") {
-			v = undefined;
+	var assignAttribute = function(name,value) {
+		// Check for excluded attribute names
+		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
+			value = undefined;
 		}
-		if(v !== undefined) {
-			var b = a.split(":");
-			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
-			try {
-				if (b.length == 2 && b[0] == "xlink"){
-					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
-				} else {
-					domNode.setAttributeNS(null,a,v);
+		if(value !== undefined) {
+			// Handle the xlink: namespace
+			var namespace = null;
+			if(name.substr(0,6) === "xlink:" && name.length > 6) {
+				namespace = "http://www.w3.org/1999/xlink";
+				name = name.substr(6);
+			}
+			// Handle styles
+			if(name.substr(0,6) === "style." && name.length > 6) {
+				domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+			} else {
+				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+				try {
+					domNode.setAttributeNS(namespace,name,value);
+				} catch(e) {
 				}
-			} catch(e) {
 			}
 		}
-	});
+	}
+	// Not all parse tree nodes have the orderedAttributes property
+	if(this.parseTreeNode.orderedAttributes) {
+		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
+			assignAttribute(attribute.name,self.attributes[attribute.name]);
+		});	
+	} else {
+		$tw.utils.each(Object.keys(self.attributes).sort(),function(name) {
+			assignAttribute(name,self.attributes[name]);
+		});	
+	}
 };
 
 /*
@@ -570,7 +597,7 @@ Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	for(var t=0; t<this.children.length; t++) {
 		var child = this.children[t],
 			childIsActionWidget = !!child.invokeAction,
-			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy");
+			actionRefreshPolicy = child.getVariable("tv-action-refresh-policy"); // Default is "once"
 		// Refresh the child if required
 		if(childIsActionWidget || actionRefreshPolicy === "always") {
 			child.refreshSelf();

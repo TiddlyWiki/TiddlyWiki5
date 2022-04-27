@@ -165,6 +165,35 @@ exports["standard-deviation"] = makeNumericReducingOperator(
 	}
 );
 
+//trigonometry
+exports.cos = makeNumericBinaryOperator(
+	function(a) {return Math.cos(a)}
+);
+
+exports.sin = makeNumericBinaryOperator(
+	function(a) {return Math.sin(a)}
+);
+
+exports.tan = makeNumericBinaryOperator(
+	function(a) {return Math.tan(a)}
+);
+
+exports.acos = makeNumericBinaryOperator(
+	function(a) {return Math.acos(a)}
+);
+
+exports.asin = makeNumericBinaryOperator(
+	function(a) {return Math.asin(a)}
+);
+
+exports.atan = makeNumericBinaryOperator(
+	function(a) {return Math.atan(a)}
+);
+
+exports.atan2 = makeNumericBinaryOperator(
+	function(a,b) {return Math.atan2(a,b)}
+);
+
 //Calculate the variance of a population of numbers in an array given its mean
 function getVarianceFromArray(values,mean) {
 	var deviationTotal = values.reduce(function(accumulator,value) {

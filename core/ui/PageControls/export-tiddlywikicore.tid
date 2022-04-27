@@ -1,9 +1,5 @@
-title: $:/core/ui/Buttons/export-tiddlywikicore
-tags: $:/tags/PageControls
-caption: {{$:/core/images/star-filled}} {{$:/language/Buttons/ExportTiddlyWikiCore/Caption}}
-description: {{$:/language/Buttons/ExportTiddlyWikiCore/Hint}}
+title: $:/core/ui/ExportTiddlyWikiCore
 
-\whitespace trim
 \define jsFileName() tiddlywikicore-$(version)$.js
 \define noExportMsg()
 It appears that you have a wiki with an external ~TiddlyWiki core. The export action cannot be performed.
@@ -11,15 +7,16 @@ It appears that you have a wiki with an external ~TiddlyWiki core. The export ac
 element, and right-click its `src` URI. Save the link as ''$(jsFileName)$''</p>
 \end
 
-<$button tooltip={{$:/language/Buttons/ExportTiddlyWikiCore/Hint}} aria-label={{$:/language/Buttons/ExportTiddlyWikiCore/Caption}} class=<<tv-config-toolbar-class>>>
+''For advanced users''
+
+Export the ~TiddlyWiki core ~JavaScript code for running with external ~JavaScript:
+
+<$button tooltip="Export the ~TiddlyWiki core code for running with external ~JavaScript" aria-label="export TiddlyWiki core" class="tc-btn-big-green">
 <$list filter="[[$:/boot/boot.js]is[missing]]" variable="ignore" emptyMessage="""<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/tiddlywiki5.js" filename=<<jsFileName>>/>""" >
 <$action-setfield $tiddler=<<qualify "$:/temp/alert">> text=<<noExportMsg>> subtitle="Export ~TiddllyWiki Core"/>
 <$action-sendmessage $message="tm-modal" $param=<<qualify "$:/temp/alert">>/>
 </$list>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
-{{$:/core/images/star-filled}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/ExportTiddlyWikiCore/Caption}}/></span>
-</$list>
+{{$:/core/images/download-button}} Download ~TiddlyWiki core
 </$button>
+
+[[Further information|https://tiddlywiki.com/#Using%20the%20external%20JavaScript%20template]]

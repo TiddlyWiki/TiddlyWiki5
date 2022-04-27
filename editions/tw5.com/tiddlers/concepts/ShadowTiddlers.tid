@@ -1,3 +1,6 @@
+title: ShadowTiddlers
+tags: Concepts
+
 \define actions()
 <$action-setfield $tiddler="$:/state/tab/moresidebar-1850697562" $field="text" $value="$:/core/ui/MoreSideBar/Shadows"/>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" $field="text" $value="$:/core/ui/SideBar/More"/>

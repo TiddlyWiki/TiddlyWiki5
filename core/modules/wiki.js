@@ -81,7 +81,7 @@ exports.setText = function(title,field,index,value,options) {
 		} else {
 			delete data[index];
 		}
-		this.setTiddlerData(title,data,modificationFields);
+		this.setTiddlerData(title,data,{},{suppressTimestamp: options.suppressTimestamp});
 	} else {
 		var tiddler = this.getTiddler(title),
 			fields = {title: title};
@@ -365,47 +365,108 @@ Sort an array of tiddler titles by a specified field
 */
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric,isAlphaNumeric) {
 	var self = this;
-	titles.sort(function(a,b) {
-		var x,y,
-			compareNumbers = function(x,y) {
-				var result = 
-					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
-					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-											(isDescending ? y - x :  x - y);
-				return result;
-			};
-		if(sortField !== "title") {
-			var tiddlerA = self.getTiddler(a),
-				tiddlerB = self.getTiddler(b);
-			if(tiddlerA) {
-				a = tiddlerA.getFieldString(sortField) || "";
+	if(sortField === "title") {
+		if(!isNumeric && !isAlphaNumeric) {
+			if(isCaseSensitive) {
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.localeCompare(a);
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.localeCompare(b);
+					});
+				}	
 			} else {
-				a = "";
+				if(isDescending) {
+					titles.sort(function(a,b) {
+						return b.toLowerCase().localeCompare(a.toLowerCase());
+					});
+				} else {
+					titles.sort(function(a,b) {
+						return a.toLowerCase().localeCompare(b.toLowerCase());
+					});
+				}	
 			}
-			if(tiddlerB) {
-				b = tiddlerB.getFieldString(sortField) || "";
-			} else {
-				b = "";
-			}
-		}
-		x = Number(a);
-		y = Number(b);
-		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
-			return compareNumbers(x,y);
-		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
-			return isDescending ? b - a : a - b;
-		} else if(isAlphaNumeric) {
-			return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
 		} else {
+			titles.sort(function(a,b) {
+				var x,y;
+				if(isNumeric) {
+					x = Number(a);
+					y = Number(b);
+					if(isNaN(x)) {
+						if(isNaN(y)) {
+							// If neither value is a number then fall through to a textual comparison
+						} else {
+							return isDescending ? -1 : 1;
+						}
+					} else {
+						if(isNaN(y)) {
+							return isDescending ? 1 : -1;
+						} else {
+							return isDescending ? y - x :  x - y;
+						}
+					}
+				}
+				if(isAlphaNumeric) {
+					return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+				}
+				if(!isCaseSensitive) {
+					a = a.toLowerCase();
+					b = b.toLowerCase();
+				}
+				return isDescending ? b.localeCompare(a) : a.localeCompare(b);
+			});
+		}
+	} else {
+		titles.sort(function(a,b) {
+			var x,y;
+			if(sortField !== "title") {
+				var tiddlerA = self.getTiddler(a),
+					tiddlerB = self.getTiddler(b);
+				if(tiddlerA) {
+					a = tiddlerA.fields[sortField] || "";
+				} else {
+					a = "";
+				}
+				if(tiddlerB) {
+					b = tiddlerB.fields[sortField] || "";
+				} else {
+					b = "";
+				}
+			}
+			if(isNumeric) {
+				x = Number(a);
+				y = Number(b);
+				if(isNaN(x)) {
+					if(isNaN(y)) {
+						// If neither value is a number then fall through to a textual comparison
+					} else {
+						return isDescending ? -1 : 1;
+					}
+				} else {
+					if(isNaN(y)) {
+						return isDescending ? 1 : -1;
+					} else {
+						return isDescending ? y - x :  x - y;
+					}
+				}
+			}
+			if(Object.prototype.toString.call(a) === "[object Date]" && Object.prototype.toString.call(b) === "[object Date]") {
+				return isDescending ? b - a : a - b;
+			}
 			a = String(a);
 			b = String(b);
+			if(isAlphaNumeric) {
+				return isDescending ? b.localeCompare(a,undefined,{numeric: true,sensitivity: "base"}) : a.localeCompare(b,undefined,{numeric: true,sensitivity: "base"});
+			}
 			if(!isCaseSensitive) {
 				a = a.toLowerCase();
 				b = b.toLowerCase();
 			}
 			return isDescending ? b.localeCompare(a) : a.localeCompare(b);
-		}
-	});
+		});
+	}
 };
 
 /*
@@ -578,14 +639,25 @@ Lookup a given tiddler and return a list of all the tiddlers that include it in 
 */
 exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 	fieldName = fieldName || "list";
-	var titles = [];
-	this.each(function(tiddler,title) {
-		var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
-		if(list && list.indexOf(targetTitle) !== -1) {
-			titles.push(title);
-		}
+	var wiki = this;
+	var listings = this.getGlobalCache("listings-" + fieldName,function() {
+		var listings = Object.create(null);
+		wiki.each(function(tiddler,title) {
+			var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
+			if(list) {
+				for(var i = 0; i < list.length; i++) {
+					var listItem = list[i],
+						listing = listings[listItem] || [];
+					if (listing.indexOf(title) === -1) {
+						listing.push(title);
+					}
+					listings[listItem] = listing;
+				}
+			}
+		});
+		return listings;
 	});
-	return titles;
+	return listings[targetTitle] || [];
 };
 
 /*
@@ -761,12 +833,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 		switch(tiddler.fields.type) {
 			case "application/json":
 				// JSON tiddler
-				try {
-					data = JSON.parse(tiddler.fields.text);
-				} catch(ex) {
-					return defaultData;
-				}
-				return data;
+				return $tw.utils.parseJSONSafe(tiddler.fields.text,defaultData);
 			case "application/x-tiddler-dictionary":
 				return $tw.utils.parseFields(tiddler.fields.text);
 		}
@@ -795,19 +862,24 @@ Set a tiddlers content to a JavaScript object. Currently this is done by setting
 title: title of tiddler
 data: object that can be serialised to JSON
 fields: optional hashmap of additional tiddler fields to be set
+options: optional hashmap of options including:
+	suppressTimestamp: if true, don't set the creation/modification timestamps
 */
-exports.setTiddlerData = function(title,data,fields) {
+exports.setTiddlerData = function(title,data,fields,options) {
+	options = options || {};
 	var existingTiddler = this.getTiddler(title),
+		creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
+		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields(),
 		newFields = {
 			title: title
-	};
+		};
 	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
 		newFields.text = $tw.utils.makeTiddlerDictionary(data);
 	} else {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
-	this.addTiddler(new $tw.Tiddler(this.getCreationFields(),existingTiddler,fields,newFields,this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(creationFields,existingTiddler,fields,newFields,modificationFields));
 };
 
 /*
@@ -844,7 +916,7 @@ exports.clearGlobalCache = function() {
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	this.caches = this.caches || Object.create(null);
 	var caches = this.caches[title];
-	if(caches && caches[cacheName]) {
+	if(caches && caches[cacheName] !== undefined) {
 		return caches[cacheName];
 	} else {
 		if(!caches) {
@@ -1135,23 +1207,28 @@ Return an array of tiddler titles that match a search string
 	text: The text string to search for
 	options: see below
 Options available:
-	source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
+	source: an iterator function for the source tiddlers, called source(iterator),
+		where iterator is called as iterator(tiddler,title)
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
 	field: If specified, restricts the search to the specified field, or an array of field names
 	anchored: If true, forces all but regexp searches to be anchored to the start of text
 	excludeField: If true, the field options are inverted to specify the fields that are not to be searched
+
 	The search mode is determined by the first of these boolean flags to be true
 		literal: searches for literal string
 		whitespace: same as literal except runs of whitespace are treated as a single space
 		regexp: treats the search term as a regular expression
-		words: (default) treats search string as a list of tokens, and matches if all tokens are found, regardless of adjacency or ordering
+		words: (default) treats search string as a list of tokens, and matches if all tokens are found, 
+			regardless of adjacency or ordering
+		some: treats search string as a list of tokens, and matches if at least ONE token is found
 */
 exports.search = function(text,options) {
 	options = options || {};
 	var self = this,
 		t,
+		regExpStr="",
 		invert = !!options.invert;
 	// Convert the search string into a regexp for each term
 	var terms, searchTermsRegExps,
@@ -1178,7 +1255,18 @@ exports.search = function(text,options) {
 			searchTermsRegExps = null;
 			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
 		}
-	} else {
+	} else if(options.some) {
+		terms = text.trim().split(/ +/);
+		if(terms.length === 1 && terms[0] === "") {
+			searchTermsRegExps = null;
+		} else {
+			searchTermsRegExps = [];
+			for(t=0; t<terms.length; t++) {
+				regExpStr += (t===0) ? anchor + $tw.utils.escapeRegExp(terms[t]) : "|" + anchor + $tw.utils.escapeRegExp(terms[t]);
+			}
+			searchTermsRegExps.push(new RegExp("(" + regExpStr + ")",flags));
+		}
+	} else { // default: words
 		terms = text.split(/ +/);
 		if(terms.length === 1 && terms[0] === "") {
 			searchTermsRegExps = null;
@@ -1189,7 +1277,7 @@ exports.search = function(text,options) {
 			}
 		}
 	}
-	// Accumulate the array of fields to be searched or excluded from the search
+// Accumulate the array of fields to be searched or excluded from the search
 	var fields = [];
 	if(options.field) {
 		if($tw.utils.isArray(options.field)) {

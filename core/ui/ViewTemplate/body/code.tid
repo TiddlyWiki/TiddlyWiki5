@@ -1,0 +1,3 @@
+title: $:/core/ui/ViewTemplate/body/code
+
+<$codeblock code={{{ [<currentTiddler>get[text]] }}} language={{{ [<currentTiddler>get[type]else[text/vnd.tiddlywiki]] }}}/>

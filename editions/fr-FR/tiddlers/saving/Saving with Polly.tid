@@ -1,0 +1,30 @@
+caption: Polly
+color: #29B6F6
+community-author: TiddlyTweeter
+created: 20220223153410510
+delivery: Service
+description: Script pour enregistrer les fichiers TiddlyWiki téléchargés.
+fr-title: Enregistrer avec Polly
+method: save
+modified: 20220402105820520
+tags: Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge
+title: Saving with Polly
+type: text/vnd.tiddlywiki
+
+[[Polly|https://github.com/Marxsal/polly]] est un script Windows écrit en //~PowerShell// utilisé pour restaurer le chemin de fichiers <<tw>> sélectionnés, depuis le dossier des téléchargements vers leur emplacement d'origine. 
+
+Concrètement, ça devient une nouvelle façon d'enregistrer vos fichiers, mais avec des fonctionnalités supplémentaires<<:>>
+
+* Pas d'exécutable binaire
+* Script lisible par un humain
+* Pas de plugin particulier dans votre fichier <<tw>>
+* Pas besoin d'un navigateur en particulier
+* Pas besoin d'extension pour le navigateur
+* Pas besoin de faire tourner nodejs en tâche de fond
+* Taille totale du script décompressé<<:>> environ 100 ko
+* Sauvegarde vers des dossiers paramétrables, en tant que fichiers standards ou archives ZIP
+* Capacité de <<gf cloner>> des copies supplémentaires vers des dossiers cibles (p.ex. un dossier Dropbox)
+
+Fonctionne partout où //~PowerShell// est disponible, en particulier Windows, Linux et Mac.
+
+https://github.com/Marxsal/polly

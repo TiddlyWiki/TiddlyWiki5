@@ -117,7 +117,7 @@ Displays as:
 </$list>
 <<<
 
-Note that using the `counter` attribute degrades the performance of the list widget because it prevents the optimisation of refreshes by moving list items around instead of rerendering them.
+Note that using the `counter` attribute can degrade the performance of the list widget in certain circumstances. In particular, it prevents an optimisation that normally occurs when dynamically adding or removing entries.
 
 !! Edit mode
 

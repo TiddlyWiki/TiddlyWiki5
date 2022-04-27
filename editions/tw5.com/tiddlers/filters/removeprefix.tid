@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150203190709000
+modified: 20220218023400000
 tags: [[Filter Operators]] [[String Operators]]
 title: removeprefix Operator
 type: text/vnd.tiddlywiki
@@ -9,9 +9,24 @@ op-input: a [[selection of titles|Title Selection]]
 op-parameter: a string of characters
 op-parameter-name: S
 op-output: those input titles that start with <<.place S>>, but with those characters discarded
-
-<<.s-matching-is-case-sensitive>>
+op-suffix: the <<.op removeprefix>> operator uses a rich suffix, see below for details
 
 <<.tip " This filters out input titles that do not start with S. For removing S without filtering out input titles that don't start with S, see [[trim|trim Operator]].">>
+
+<<.from-version "5.2.2">>
+
+The <<.op removeprefix>> operator uses an extended syntax that permits multiple flags to be passed:
+
+```
+[removeprefix:<flag list>[<operand>]]
+```
+
+* ''flag list'': a comma delimited list of flags
+* ''operand'': filter operand
+
+The available flags are:
+
+* ''casesensitive'': (default), this flag forces a case-sensitive match, where upper and lower case letters are considered different
+* ''caseinsensitive'': overrides the default so that upper and lower case letters are considered identical for matching purposes
 
 <<.operator-examples "removeprefix">>

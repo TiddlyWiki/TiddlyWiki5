@@ -1,22 +1,11 @@
 created: 20140809113603449
-modified: 20150520161451179
+modified: 20211022195248529
 tags: Learning
 title: ImageGallery Example
 type: text/vnd.tiddlywiki
 
-Here is an example of using the ListWidget and the TranscludeWidget to show a grid of all system images (ie, tiddlers tagged [[$:/tags/Image]]).
+<<.warning "The [[ImageGallery Example]] has been replaced with the new [[Icon Gallery]] which is transcluded below">>
 
-<style>
-.my-gallery svg {
-width: 6em;
-height: 6em;
-margin: 1em;
-}
-</style>
-<div class="my-gallery">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/Image]]">
-<span title=<<currentTiddler>>>
-<$transclude/>
-</span>
-</$list>
-</div>
+---
+
+{{Icon Gallery}}

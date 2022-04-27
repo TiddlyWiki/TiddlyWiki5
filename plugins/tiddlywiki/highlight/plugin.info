@@ -3,5 +3,5 @@
 	"name": "Highlight",
 	"description": "Highlight.js syntax highlighting",
 	"author": "Joao Bolila",
-	"list": "readme usage howto license"
+	"list": "readme usage license"
 }

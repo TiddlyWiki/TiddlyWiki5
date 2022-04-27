@@ -1,9 +1,9 @@
+caption: Macro Calls
 created: 20150220182252000
-modified: 20150221221340000
+modified: 20220122193853161
 tags: WikiText
 title: Macro Calls in WikiText
 type: text/vnd.tiddlywiki
-caption: Macro Calls
 
 To call a [[macro|Macros]], place `<<`double angle brackets`>>` around the name and any parameter values.
 
@@ -19,7 +19,7 @@ The syntax is actually a shorthand for a <<.wlink MacroCallWidget>> widget. The 
 
 As macros are simply parameterised [[variables|Variables]], a variable's value can be inserted using the same techniques.
 
-[[Examples|Macro Calls in WikiText (Examples)]]
+[[Examples|Macro Calls in WikiText (Examples)]] and [[more examples|WikiText parser mode: macro examples]]
 
 !! Named vs.unnamed parameters
 
