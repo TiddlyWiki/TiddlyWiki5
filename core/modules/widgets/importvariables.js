@@ -49,38 +49,40 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 		var parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline:true});
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
-			while(parseTreeNode && parseTreeNode.type === "set") {
-				var node = {
-					type: "set",
-					attributes: parseTreeNode.attributes,
-					params: parseTreeNode.params,
-					isMacroDefinition: parseTreeNode.isMacroDefinition
-				};
-				if (parseTreeNode.isMacroDefinition) {
-					// Macro definitions can be folded into
-					// current widget instead of adding
-					// another link to the chain.
-					var widget = widgetPointer.makeChildWidget(node);
-					widget.computeAttributes();
-					widget.execute();
-					// We SHALLOW copy over all variables
-					// in widget. We can't use
-					// $tw.utils.assign, because that copies
-					// up the prototype chain, which we
-					// don't want.
-					$tw.utils.each(Object.keys(widget.variables), function(key) {
-						widgetPointer.variables[key] = widget.variables[key];
-					});
-				} else {
-					widgetPointer.children = [widgetPointer.makeChildWidget(node)];
-					// No more regenerating children for
-					// this widget. If it needs to refresh,
-					// it'll do so along with the the whole
-					// importvariable tree.
-					if (widgetPointer != this) {
-						widgetPointer.makeChildWidgets = function(){};
+			while(parseTreeNode && ["set","parameters"].indexOf(parseTreeNode.type) !== -1) {
+				if(parseTreeNode.type === "set") {
+					var node = {
+						type: "set",
+						attributes: parseTreeNode.attributes,
+						params: parseTreeNode.params,
+						isMacroDefinition: parseTreeNode.isMacroDefinition
+					};
+					if (parseTreeNode.isMacroDefinition) {
+						// Macro definitions can be folded into
+						// current widget instead of adding
+						// another link to the chain.
+						var widget = widgetPointer.makeChildWidget(node);
+						widget.computeAttributes();
+						widget.execute();
+						// We SHALLOW copy over all variables
+						// in widget. We can't use
+						// $tw.utils.assign, because that copies
+						// up the prototype chain, which we
+						// don't want.
+						$tw.utils.each(Object.keys(widget.variables), function(key) {
+							widgetPointer.variables[key] = widget.variables[key];
+						});
+					} else {
+						widgetPointer.children = [widgetPointer.makeChildWidget(node)];
+						// No more regenerating children for
+						// this widget. If it needs to refresh,
+						// it'll do so along with the the whole
+						// importvariable tree.
+						if (widgetPointer != this) {
+							widgetPointer.makeChildWidgets = function(){};
+						}
+						widgetPointer = widgetPointer.children[0];
 					}
-					widgetPointer = widgetPointer.children[0];
 				}
 				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
 			}
