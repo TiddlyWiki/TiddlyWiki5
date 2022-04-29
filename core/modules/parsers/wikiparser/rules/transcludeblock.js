@@ -23,7 +23,7 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{([^\{\}\|]*)(?:\|\|([^\|\{\}]+))?\}\}(?:\r?\n|$)/mg;
+	this.matchRegExp = /\{\{([^\{\}\|]*)(?:\|\|([^\|\{\}]+))?(?:\|([^\{\}]+))?\}\}(?:\r?\n|$)/mg;
 };
 
 exports.parse = function() {
@@ -31,13 +31,22 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Get the match details
 	var template = $tw.utils.trim(this.match[2]),
-		textRef = $tw.utils.trim(this.match[1]);
+		textRef = $tw.utils.trim(this.match[1]),
+		params = this.match[3] ? this.match[3].split("|") : [];
 	// Prepare the transclude widget
 	var transcludeNode = {
 			type: "ubertransclude",
 			attributes: {},
 			isBlock: true
 		};
+	$tw.utils.each(params,function(paramValue,index) {
+		var name = "" + index;
+		transcludeNode.attributes["" + index] = {
+			name: name,
+			type: "string",
+			value: paramValue
+		}
+	});
 	// Prepare the tiddler widget
 	var tr, targetTitle, targetField, targetIndex, tiddlerNode;
 	if(textRef) {
