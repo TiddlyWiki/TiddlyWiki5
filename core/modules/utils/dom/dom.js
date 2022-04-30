@@ -293,7 +293,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
 		
-		if(selectedNode.offsetLeft && selectedNode.offsetTop && selectedNode.offsetWidth && selectedNode.offsetHeight) {
+		if(selectedNode.offsetLeft) {
 			// Add a variable with a popup coordinate string for the selected node
 			variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
 
