@@ -52,7 +52,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 				selectedNode = event.target,
 				selectedNodeRect,
 				catcherNodeRect,
-				variables;
+				variables = {};
 			// Firefox can fire dragover and dragenter events on text nodes instead of their parents
 			if(selectedNode.nodeType === 3) {
 				selectedNode = selectedNode.parentNode;
@@ -77,9 +77,6 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 			}
 			// Execute our actions with the variables
 			if(actions) {
-				if(variables === undefined) {
-					variables = $tw.utils.collectDOMVariables(selectedNode,self.domNode,event);
-				}
 				// Add a variable for the modifier key
 				variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 				// Add a variable for the mouse button
