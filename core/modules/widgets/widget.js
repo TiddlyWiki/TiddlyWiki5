@@ -88,9 +88,19 @@ name: name of the variable
 value: value of the variable
 params: array of {name:, default:} for each parameter
 isMacroDefinition: true if the variable is set via a \define macro pragma (and hence should have variable substitution performed)
+options includes:
+	isFunctionDefinition: true if the variable is set via a \function pragma (and hence should not have variable substitution performed)
+	variableParams: array of {name:, default:} for each function parameter
 */
-Widget.prototype.setVariable = function(name,value,params,isMacroDefinition) {
-	this.variables[name] = {value: value, params: params, isMacroDefinition: !!isMacroDefinition};
+Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,options) {
+	options = options || {};
+	this.variables[name] = {
+		value: value,
+		params: params,
+		isMacroDefinition: !!isMacroDefinition,
+		isFunctionDefinition: !!options.isFunctionDefinition,
+		variableParams: options.variableParams
+	};
 };
 
 /*

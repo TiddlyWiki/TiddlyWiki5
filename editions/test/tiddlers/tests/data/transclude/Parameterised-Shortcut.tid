@@ -1,0 +1,18 @@
+title: Transclude/Parameterised/Shortcut
+description: Simple parameterised transclusion
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function test(one:'Jaguar')
+{<$text text=<<one>>/>}
+\end
+
+<$transclude $variable='test' one='Ferret'/>
+<$transclude $variable='test'/>
+_
+title: ExpectedResult
+
+<p>{Ferret}{Jaguar}</p>

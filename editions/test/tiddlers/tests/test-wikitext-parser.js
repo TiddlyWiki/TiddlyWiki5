@@ -119,10 +119,26 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
+	it("should parse function definitions", function() {
+		expect(parse("\\function myMacro(one,two,three,four:elephant)\nnothing\n\\end\n")).toEqual(
+
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], variableParams : [ { name: 'one' }, { name: 'two' }, { name: 'three' }, { name: 'four', default: 'elephant' } ], isFunctionDefinition : true } ]
+
+		);
+	});
+
+	it("should parse function definitions", function() {
+		expect(parse("\\function myMacro(one:'Jaguar')\n<$text text=<<one>>/>\n\\end\n\n")).toEqual(
+
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : '<$text text=<<one>>/>' } }, children : [  ], variableParams : [ { name: 'one', "default": 'Jaguar' } ], isFunctionDefinition : true } ]
+
+		);
+	});
+
 	it("should parse comment in pragma area. Comment will be invisible", function() {
 		expect(parse("<!-- comment in pragma area -->\n\\define aMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'aMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'aMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [ ], isMacroDefinition : true } ]
 
 		);
 	});

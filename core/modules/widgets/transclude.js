@@ -1,3 +1,5 @@
+const { parse } = require("../parsers/wikiparser/rules/transcludeinline");
+
 /*\
 title: $:/core/modules/widgets/transclude.js
 type: application/javascript
@@ -169,7 +171,26 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	}
 	var parser;
 	if(this.transcludeVariable) {
-		parser = this.wiki.parseText(this.transcludeType,this.getVariable(this.transcludeVariable,""),{parseAsInline: !this.parseTreeNode.isBlock});
+		var variableInfo = this.getVariableInfo(this.transcludeVariable).srcVariable;
+		parser = this.wiki.parseText(this.transcludeType,variableInfo.value || "",{parseAsInline: !this.parseTreeNode.isBlock});
+		if(parser && variableInfo.isFunctionDefinition) {
+			parser = {
+				tree: [
+					{
+						type: "parameters",
+						name: "$parameters",
+						children: parser.tree,
+						attributes: {},
+						orderedAttributes: []
+					}
+				]
+			}
+			$tw.utils.each(variableInfo.variableParams,function(param,index) {
+				var attr = {name: param.name, type: "string", value: param["default"]};
+				parser.tree[0].attributes[param.name] = attr;
+				parser.tree[0].orderedAttributes.push(attr);
+			});
+		}
 	} else {
 		parser = this.wiki.parseTextReference(
 						this.transcludeTitle,
