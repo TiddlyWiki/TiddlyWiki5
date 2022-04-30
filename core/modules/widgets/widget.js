@@ -391,10 +391,10 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	options = options || {};
 	// Check whether this node type is defined by a custom macro definition
 	var variableDefinitionName = "<$" + parseTreeNode.type + ">";
-	if(parseTreeNode.type !== "ubertransclude" && this.variables[variableDefinitionName] && this.variables[variableDefinitionName].value) {
+	if(parseTreeNode.type !== "transclude" && this.variables[variableDefinitionName] && this.variables[variableDefinitionName].value) {
 		var newParseTreeNode = {
-			type: "ubertransclude",
-			tag: "$ubertransclude",
+			type: "transclude",
+			tag: "$transclude",
 			attributes: {
 				"$variable": {name: "$variable", type: "string", value: variableDefinitionName}
 			},
@@ -436,7 +436,7 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 			]
 		};
 		$tw.utils.each(parseTreeNode.attributes,function(attr) {
-			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of ubertransclude
+			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of transclude
 			var name = attr.name.charAt(0) === "$" ? "$" + attr.name : attr.name,
 				newAttr = {
 					name: name,

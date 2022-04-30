@@ -1,4 +1,4 @@
-title: Ubertransclude/CustomWidget/Simple
+title: Transclude/CustomWidget/Simple
 description: Custom widget definition
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
@@ -6,8 +6,8 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
-</$ubertransclude>
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+</$transclude>
 _
 title: TiddlerOne
 

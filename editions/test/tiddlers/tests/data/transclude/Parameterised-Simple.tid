@@ -1,4 +1,4 @@
-title: Ubertransclude/Parameterised/Simple
+title: Transclude/Parameterised/Simple
 description: Simple parameterised transclusion
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
@@ -6,8 +6,8 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$ubertransclude $tiddler='TiddlerOne' one='Ferret'/>
-<$ubertransclude $tiddler='TiddlerOne'/>
+<$transclude $tiddler='TiddlerOne' one='Ferret'/>
+<$transclude $tiddler='TiddlerOne'/>
 _
 title: TiddlerOne
 

@@ -13,7 +13,7 @@ Widget for definition of transclusion parameters
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	UberTranscludeWidget = require("$:/core/modules/widgets/ubertransclude.js").ubertransclude;
+	TranscludeWidget = require("$:/core/modules/widgets/transclude.js").transclude;
 
 var ParametersWidget = function(parseTreeNode,options) {
 	// Initialise
@@ -44,7 +44,7 @@ ParametersWidget.prototype.execute = function() {
 	var self = this;
 	// Find the parent transclusion
 	var transclusionWidget = this.parentWidget;
-	while(transclusionWidget && !(transclusionWidget instanceof UberTranscludeWidget)) {
+	while(transclusionWidget && !(transclusionWidget instanceof TranscludeWidget)) {
 		transclusionWidget = transclusionWidget.parentWidget;
 	}
 	// Process each parameter

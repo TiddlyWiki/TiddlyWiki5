@@ -1,4 +1,4 @@
-title: Ubertransclude/Parameterised/Positional/Shortcut
+title: Transclude/Parameterised/Positional/Shortcut
 description: Positional parameterised transclusion using shortcut syntax
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
@@ -21,7 +21,7 @@ title: TiddlerTwo
 
 \whitespace trim
 <$parameters zero='Mouse' one='Horse' two='Owl'>
-(<$ubertransclude zero=<<zero>> one=<<one>> two=<<two>>/>)
+(<$transclude $tiddler=<<currentTiddler>> zero=<<zero>> one=<<one>> two=<<two>>/>)
 </$parameters>
 _
 title: ExpectedResult

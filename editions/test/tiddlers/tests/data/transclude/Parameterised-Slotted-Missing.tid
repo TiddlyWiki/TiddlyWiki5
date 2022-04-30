@@ -1,4 +1,4 @@
-title: Ubertransclude/Parameterised/Slotted/Missing
+title: Transclude/Parameterised/Slotted/Missing
 description: Parameterised transclusion with slotted missing values
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
@@ -6,8 +6,8 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
-</$ubertransclude>
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+</$transclude>
 _
 title: TiddlerOne
 

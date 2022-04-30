@@ -1,4 +1,4 @@
-title: Ubertransclude/CustomWidget/ActionWidget
+title: Transclude/CustomWidget/ActionWidget
 description: Custom widget definition
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
@@ -6,8 +6,8 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$ubertransclude $tiddler='Result'>
-</$ubertransclude>
+<$transclude $tiddler='Result'>
+</$transclude>
 _
 title: Actions
 

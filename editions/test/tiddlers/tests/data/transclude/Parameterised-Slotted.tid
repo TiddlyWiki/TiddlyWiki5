@@ -1,4 +1,4 @@
-title: Ubertransclude/Parameterised/Slotted
+title: Transclude/Parameterised/Slotted
 description: Parameterised transclusion with slotted values
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
@@ -6,11 +6,11 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
 	<$value $name="content">
 		Hippopotamus
 	</$value>
-</$ubertransclude>
+</$transclude>
 _
 title: TiddlerOne
 

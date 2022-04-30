@@ -13,7 +13,7 @@ Widget for definition of slots within transcluded content. The values provided b
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget,
-	UberTranscludeWidget = require("$:/core/modules/widgets/ubertransclude.js").ubertransclude;
+	TranscludeWidget = require("$:/core/modules/widgets/transclude.js").transclude;
 
 var SlotWidget = function(parseTreeNode,options) {
 	// Initialise
@@ -45,7 +45,7 @@ SlotWidget.prototype.execute = function() {
 	this.slotName = this.getAttribute("$name");
 	// Find the parent transclusion
 	var transclusionWidget = this.parentWidget;
-	while(transclusionWidget && !(transclusionWidget instanceof UberTranscludeWidget)) {
+	while(transclusionWidget && !(transclusionWidget instanceof TranscludeWidget)) {
 		transclusionWidget = transclusionWidget.parentWidget;
 	}
 	// Get the parse tree nodes comprising the slot contents

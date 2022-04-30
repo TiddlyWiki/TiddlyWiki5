@@ -1,4 +1,4 @@
-title: Ubertransclude/MissingTarget
+title: Transclude/MissingTarget
 description: Transcluding a missing target
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
@@ -6,34 +6,34 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
 	<$parameters one='Ferret'>
 		Badger
 		<$text text=<<one>>/>
 	</$parameters>
-</$ubertransclude>
-<$ubertransclude $tiddler='TiddlerOne' one='Ferret'>
+</$transclude>
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
 	<$value $name="ts-missing">
 		<$parameters one='Ferret'>
 			Badger
 			<$text text=<<one>>/>
 		</$parameters>
 	</$value>
-</$ubertransclude>
-<$ubertransclude $tiddler='MissingTiddler' one='Ferret'>
+</$transclude>
+<$transclude $tiddler='MissingTiddler' one='Ferret'>
 	<$parameters one='Ferret'>
 		Badger
 		<$text text=<<one>>/>
 	</$parameters>
-</$ubertransclude>
-<$ubertransclude $tiddler='MissingTiddler' one='Ferret'>
+</$transclude>
+<$transclude $tiddler='MissingTiddler' one='Ferret'>
 	<$value $name="ts-missing">
 		<$parameters one='Ferret'>
 			Badger
 			<$text text=<<one>>/>
 		</$parameters>
 	</$value>
-</$ubertransclude>
+</$transclude>
 _
 title: TiddlerOne
 

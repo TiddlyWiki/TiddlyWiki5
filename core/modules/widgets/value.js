@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/value.js
 type: application/javascript
 module-type: widget
 
-Sub-widget used by the ubertransclude widget for specifying values for slots within transcluded content. It doesn't do anything by itself because the ubertransclude widget only ever deals with the parse tree nodes, and doesn't instantiate the widget itself
+Sub-widget used by the transclude widget for specifying values for slots within transcluded content. It doesn't do anything by itself because the transclude widget only ever deals with the parse tree nodes, and doesn't instantiate the widget itself
 
 \*/
 (function(){

@@ -21,7 +21,7 @@ var BinaryParser = function(type,text,options) {
 		type: "element",
 		tag: "p",
 		children: [{
-			type: "ubertransclude",
+			type: "transclude",
 			attributes: {
 				"$tiddler": {type: "string", value: BINARY_WARNING_MESSAGE}
 			}
@@ -36,7 +36,7 @@ var BinaryParser = function(type,text,options) {
 			download: {type: "indirect", textReference: "!!title"}
 		},
 		children: [{
-			type: "ubertransclude",
+			type: "transclude",
 			attributes: {
 				"$tiddler": {type: "string", value: EXPORT_BUTTON_IMAGE}
 			}

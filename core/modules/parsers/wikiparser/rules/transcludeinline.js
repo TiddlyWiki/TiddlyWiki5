@@ -35,7 +35,7 @@ exports.parse = function() {
 		params = this.match[3] ? this.match[3].split("|") : [];
 	// Prepare the transclude widget
 	var transcludeNode = {
-			type: "ubertransclude",
+			type: "transclude",
 			attributes: {}
 		};
 	$tw.utils.each(params,function(paramValue,index) {
