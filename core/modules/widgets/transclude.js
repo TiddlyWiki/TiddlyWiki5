@@ -37,13 +37,22 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 TranscludeWidget.prototype.execute = function() {
-	// Get our attributes into properties of the widget object
+	// Get our attributes, string parameters, and slot values into properties of the widget object
 	this.collectAttributes();
+	this.collectStringParameters();
+	this.collectSlotValueParameters();
 	// Get the parse tree nodes that we are transcluding
 	var target = this.getTransclusionTarget(),
 		parseTreeNodes = target.parseTreeNodes;
 	this.sourceText = target.source;
 	this.sourceType = target.type;
+	// Wrap the transcluded content if required
+	if(this.slotValueParseTrees["ts-wrapper"]) {
+		this.slotValueParseTrees["ts-wrapped"] = parseTreeNodes;
+		parseTreeNodes = this.slotValueParseTrees["ts-wrapper"];
+		this.sourceTest = undefined;
+		this.sourceType = undefined;
+	}
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();
 	if(this.recursionMarker === "yes") {
@@ -67,12 +76,84 @@ TranscludeWidget.prototype.execute = function() {
 Collect the attributes we need, in the process determining whether we're being used in legacy mode
 */
 TranscludeWidget.prototype.collectAttributes = function() {
-	this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
-	this.transcludeSubTiddler = this.getAttribute("subtiddler");
-	this.transcludeField = this.getAttribute("field");
-	this.transcludeIndex = this.getAttribute("index");
-	this.transcludeMode = this.getAttribute("mode");
-	this.recursionMarker = this.getAttribute("recursionMarker","yes");
+	var self = this;
+	// Detect legacy mode
+	this.legacyMode = true;
+	$tw.utils.each(this.attributes,function(value,name) {
+		if(name.charAt(0) === "$") {
+			self.legacyMode = false;
+		}
+	});
+	// Get the attributes for the appropriate mode
+	if(this.legacyMode) {
+		this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+		this.transcludeSubTiddler = this.getAttribute("subtiddler");
+		this.transcludeField = this.getAttribute("field");
+		this.transcludeIndex = this.getAttribute("index");
+		this.transcludeMode = this.getAttribute("mode");
+		this.recursionMarker = this.getAttribute("recursionMarker","yes");
+	} else {
+		this.transcludeVariable = this.getAttribute("$variable");
+		this.transcludeType = this.getAttribute("$type");
+		this.transcludeTitle = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
+		this.transcludeSubTiddler = this.getAttribute("$subtiddler");
+		this.transcludeField = this.getAttribute("$field");
+		this.transcludeIndex = this.getAttribute("$index");
+		this.transcludeMode = this.getAttribute("$mode");
+		this.recursionMarker = this.getAttribute("$recursionMarker","yes");
+	}
+};
+
+/*
+Collect string parameters
+*/
+TranscludeWidget.prototype.collectStringParameters = function() {
+	var self = this;
+	this.stringParametersByName = Object.create(null);
+	if(!this.legacyMode) {
+		$tw.utils.each(this.attributes,function(value,name) {
+			if(name.charAt(0) === "$") {
+				if(name.charAt(1) === "$") {
+					// Attributes starting $$ represent parameters starting with a single $
+					name = name.slice(1);
+				} else {
+					// Attributes starting with a single $ are reserved for the widget
+					return;
+				}
+			}
+			self.stringParametersByName[name] = value;
+		});
+	}
+};
+
+/*
+Collect slot value parameters
+*/
+TranscludeWidget.prototype.collectSlotValueParameters = function() {
+	var self = this;
+	this.slotValueParseTrees = Object.create(null);
+	if(this.legacyMode) {
+		this.slotValueParseTrees["ts-missing"] = this.parseTreeNode.children;
+	} else {
+		var noValueWidgetsFound = true,
+			searchParseTreeNodes = function(nodes) {
+				$tw.utils.each(nodes,function(node) {
+					if(node.type === "value" && node.tag === "$value") {
+						if(node.attributes["$name"] && node.attributes["$name"].type === "string") {
+							var slotValueName = node.attributes["$name"].value;
+							self.slotValueParseTrees[slotValueName] = node.children;
+						}
+						noValueWidgetsFound = false;
+					} else {
+						searchParseTreeNodes(node.children);
+					}
+				});
+			};
+		searchParseTreeNodes(this.parseTreeNode.children);
+		if(noValueWidgetsFound) {
+			this.slotValueParseTrees["ts-missing"] = this.parseTreeNode.children;
+		}
+	}
 };
 
 /*
@@ -86,7 +167,11 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	} else if(this.transcludeMode === "block") {
 		parseAsInline = false;
 	}
-	var parser = this.wiki.parseTextReference(
+	var parser;
+	if(this.transcludeVariable) {
+		parser = this.wiki.parseText(this.transcludeType,this.getVariable(this.transcludeVariable,""),{parseAsInline: !this.parseTreeNode.isBlock});
+	} else {
+		parser = this.wiki.parseTextReference(
 						this.transcludeTitle,
 						this.transcludeField,
 						this.transcludeIndex,
@@ -94,6 +179,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							parseAsInline: parseAsInline,
 							subTiddler: this.transcludeSubTiddler
 						});
+	}
 	if(parser) {
 		return {
 			parser: parser,
@@ -104,7 +190,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	} else {
 		return {
 			parser: null,
-			parseTreeNodes: this.parseTreeNode.children,
+			parseTreeNodes: (this.slotValueParseTrees["ts-missing"] || []),
 			text: null,
 			type: null
 		};
@@ -112,20 +198,56 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 };
 
 /*
+Fetch the value of a parameter
+*/
+TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
+	if(name in this.stringParametersByName) {
+		return this.stringParametersByName[name];
+	} else {
+		var name = "" + index;
+		if(name in this.stringParametersByName) {
+			return this.stringParametersByName[name];
+		}
+	}
+	return defaultValue;
+};
+
+
+/*
+Fetch the value of a parameter identified by its position
+*/
+TranscludeWidget.prototype.getTransclusionParameterByPosition = function(index,defaultValue) {
+	if(index in this.stringParametersByPosition) {
+		return this.stringParametersByPosition[index];
+	} else {
+		return defaultValue;
+	}
+};
+
+/*
+Fetch the value of a slot
+*/
+TranscludeWidget.prototype.getTransclusionSlotValue = function(name,defaultParseTreeNodes) {
+	if(name && this.slotValueParseTrees[name]) {
+		return this.slotValueParseTrees[name];
+	} else {
+		return defaultParseTreeNodes || [];
+	}
+};
+
+/*
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
 */
 TranscludeWidget.prototype.makeRecursionMarker = function() {
+	var attributes = Object.create(null);
+	$tw.utils.each(this.attributes,function(value,name) {
+		attributes[name] = value;
+	});
 	var output = [];
 	output.push("{");
 	output.push(this.getVariable("currentTiddler",{defaultValue: ""}));
 	output.push("|");
-	output.push(this.transcludeTitle || "");
-	output.push("|");
-	output.push(this.transcludeField || "");
-	output.push("|");
-	output.push(this.transcludeIndex || "");
-	output.push("|");
-	output.push(this.transcludeSubTiddler || "");
+	output.push(JSON.stringify(attributes));
 	output.push("}");
 	return output.join("");
 };
