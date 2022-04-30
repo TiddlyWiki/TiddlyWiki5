@@ -37,13 +37,48 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 TranscludeWidget.prototype.execute = function() {
-	// Get our parameters
+	// Get our attributes into properties of the widget object
+	this.collectAttributes();
+	// Get the parse tree nodes that we are transcluding
+	var target = this.getTransclusionTarget(),
+		parseTreeNodes = target.parseTreeNodes;
+	this.sourceText = target.source;
+	this.sourceType = target.type;
+	// Set context variables for recursion detection
+	var recursionMarker = this.makeRecursionMarker();
+	if(this.recursionMarker === "yes") {
+		this.setVariable("transclusion",recursionMarker);
+	}
+	// Check for recursion
+	if(target.parser) {
+		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
+			parseTreeNodes = [{type: "element", tag: "span", attributes: {
+				"class": {type: "string", value: "tc-error"}
+			}, children: [
+				{type: "text", text: $tw.language.getString("Error/RecursiveTransclusion")}
+			]}];
+		}
+	}
+	// Construct the child widgets
+	this.makeChildWidgets(parseTreeNodes);
+};
+
+/*
+Collect the attributes we need, in the process determining whether we're being used in legacy mode
+*/
+TranscludeWidget.prototype.collectAttributes = function() {
 	this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.transcludeSubTiddler = this.getAttribute("subtiddler");
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	this.transcludeMode = this.getAttribute("mode");
 	this.recursionMarker = this.getAttribute("recursionMarker","yes");
+};
+
+/*
+Get transcluded parse tree nodes as an object {parser:,text:,type:}
+*/
+TranscludeWidget.prototype.getTransclusionTarget = function() {
 	// Parse the text reference
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
@@ -58,27 +93,22 @@ TranscludeWidget.prototype.execute = function() {
 						{
 							parseAsInline: parseAsInline,
 							subTiddler: this.transcludeSubTiddler
-						}),
-		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
-	this.sourceText = parser ? parser.source : null;
-	this.parserType = parser? parser.type : null;
-	// Set context variables for recursion detection
-	var recursionMarker = this.makeRecursionMarker();
-	if(this.recursionMarker === "yes") {
-		this.setVariable("transclusion",recursionMarker);
-	}
-	// Check for recursion
+						});
 	if(parser) {
-		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
-			parseTreeNodes = [{type: "element", tag: "span", attributes: {
-				"class": {type: "string", value: "tc-error"}
-			}, children: [
-				{type: "text", text: $tw.language.getString("Error/RecursiveTransclusion")}
-			]}];
-		}
+		return {
+			parser: parser,
+			parseTreeNodes: parser.tree,
+			text: parser.source,
+			type: parser.type
+		};
+	} else {
+		return {
+			parser: null,
+			parseTreeNodes: this.parseTreeNode.children,
+			text: null,
+			type: null
+		};
 	}
-	// Construct the child widgets
-	this.makeChildWidgets(parseTreeNodes);
 };
 
 /*
