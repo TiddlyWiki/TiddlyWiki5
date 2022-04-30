@@ -77,6 +77,9 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 			}
 			// Execute our actions with the variables
 			if(actions) {
+				if(variables === undefined) {
+					variables = $tw.utils.collectDOMVariables(selectedNode,self.domNode,event);
+				}
 				// Add a variable for the modifier key
 				variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
 				// Add a variable for the mouse button
