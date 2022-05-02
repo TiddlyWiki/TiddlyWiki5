@@ -7,7 +7,7 @@ title: $:/plugins/tiddlywiki/katex/usage
 
 !! Syntax
 
-The usual way to include ~LaTeX is to use `$$`. For example:
+The usual way to include ~LaTeX is to use `$$` (when copying code examples from the references above, you will need to change from `$` to `$$`). For example:
 
 ```
 $$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
@@ -18,10 +18,10 @@ $$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
 chemical:
 
 ```
-$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$
+$$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
 ```
 
-$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$
+$$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$
 
 Single line equations will render in inline mode. If there are newlines between the `$$` delimiters, the equations will be rendered in display mode.
 
