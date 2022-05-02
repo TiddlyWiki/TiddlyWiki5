@@ -49,10 +49,16 @@ ParametersWidget.prototype.execute = function() {
 	}
 	// Process each parameter
 	if(transclusionWidget) {
+		var paramNames = [], paramValues = [];
 		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
-			var name = attr.name;
-			self.setVariable(name,transclusionWidget.getTransclusionParameter(name,index,self.getAttribute(name)));
+			var name = attr.name,
+				value = transclusionWidget.getTransclusionParameter(name,index,self.getAttribute(name));
+			self.setVariable(name,value);
+			paramNames.push(name);
+			paramValues.push(value);
 		});	
+		self.setVariable("paramNames",$tw.utils.stringifyList(paramNames));
+		self.setVariable("paramValues",$tw.utils.stringifyList(paramValues));
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
