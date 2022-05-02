@@ -39,7 +39,7 @@ exports.parse = function() {
 	var paramString = this.match[1],
 		attributes = Object.create(null),
 		orderedAttributes = [],
-		reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|([^"'\s]+)))?/mg,
+		reParam = /\s*([^:)\s]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|([^"'\s]+)))?/mg,
 		paramMatch = reParam.exec(paramString);
 	while(paramMatch) {
 		// Save the parameter details
