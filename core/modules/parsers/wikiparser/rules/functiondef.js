@@ -40,7 +40,7 @@ exports.parse = function() {
 	var paramString = this.match[3],
 		params = [];
 	if(this.match[2]) {
-		var reParam = /\s*([^:)\s]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|([^"'\s]+)))?/mg,
+		var reParam = /\s*([^:),\s]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|([^"'\s]+)))?/mg,
 			paramMatch = reParam.exec(paramString);
 		while(paramMatch) {
 			// Save the parameter details
