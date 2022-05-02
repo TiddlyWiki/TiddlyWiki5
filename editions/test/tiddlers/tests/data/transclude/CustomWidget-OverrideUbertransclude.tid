@@ -17,18 +17,16 @@ title: TiddlerOne
 
 \whitespace trim
 <!-- Redefine the <$transclude> widget by defining a transcludable variable with that name -->
-<$set name="<$transclude>" value="""\whitespace trim
-	<$parameters one='Jaguar'>
-		<$text text=<<one>>/>
-		<$slot $name="body">
-			Whale
-		</$slot>
-	</$parameters>"""
->
-	<$transclude $tiddler="TiddlerZero">
-		Crocodile
-	</$transclude>
-</$set>
+\function <$transclude>(one:'Jaguar')
+\whitespace trim
+	<$text text=<<one>>/>
+	<$slot $name="body">
+		Whale
+	</$slot>
+\end
+<$transclude $tiddler="TiddlerZero">
+	Crocodile
+</$transclude>
 _
 title: ExpectedResult
 

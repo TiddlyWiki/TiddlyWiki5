@@ -13,18 +13,16 @@ title: TiddlerOne
 
 \whitespace trim
 <!-- Redefine the <$mywidget> widget by defining a transcludable variable with that name -->
-<$set name="<$mywidget>" value="""\whitespace trim
-	<$parameters $variable='Jaguar'>
-		<$text text=<<$variable>>/>
-		<$slot $name="ts-body">
-			Whale
-		</$slot>
-	</$parameters>"""
->
-	<$mywidget $variable="Dingo">
-		Crocodile
-	</$mywidget>
-</$set>
+\function <$mywidget>($variable:'Jaguar')
+\whitespace trim
+<$text text=<<$variable>>/>
+<$slot $name="ts-body">
+	Whale
+</$slot>
+\end
+<$mywidget $variable="Dingo">
+	Crocodile
+</$mywidget>
 _
 title: ExpectedResult
 
