@@ -15,13 +15,13 @@ _
 title: TiddlerOne
 
 \whitespace trim
-\parameters(zero:'Jaguar',one:'Lizard',two:'Mole')
+\parameters(zero:Jaguar,one:'Lizard',two:'Mole')
 [{<$text text=<<zero>>/>}{<$text text=<<one>>/>}{<$text text=<<two>>/>}]
 _
 title: TiddlerTwo
 
 \whitespace trim
-\parameters(zero:'Mouse',one:'Horse',two:'Owl')
+\parameters(zero:'Mouse',one:Horse,two:'Owl')
 (<$transclude $tiddler=<<currentTiddler>> zero=<<zero>> one=<<one>> two=<<two>>/>)
 _
 title: ExpectedResult
