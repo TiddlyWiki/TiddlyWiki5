@@ -130,7 +130,7 @@
   border-color: currentColor;
 }
 .katex .katex-version::after {
-  content: "0.13.18";
+  content: "0.15.3";
 }
 .katex .katex-mathml {
   /* Accessibility hack to only show to screen readers
@@ -993,7 +993,7 @@
   text-align: center;
 }
 .katex .boxpad {
-  padding: 0 0.3em 0 0.3em;
+  padding: 0 0.3em;
 }
 .katex .fbox,
 .katex .fcolorbox {
@@ -1001,7 +1001,7 @@
   border: 0.04em solid;
 }
 .katex .cancel-pad {
-  padding: 0 0.2em 0 0.2em;
+  padding: 0 0.2em;
 }
 .katex .cancel-lap {
   margin-left: -0.2em;
@@ -1018,7 +1018,7 @@
   margin-right: 0.03889em;
 }
 .katex .anglpad {
-  padding: 0 0.03889em 0 0.03889em;
+  padding: 0 0.03889em;
 }
 .katex .eqn-num::before {
   counter-increment: katexEqnNo;
