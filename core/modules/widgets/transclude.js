@@ -172,23 +172,25 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	var parser;
 	if(this.transcludeVariable) {
 		var variableInfo = this.getVariableInfo(this.transcludeVariable).srcVariable;
-		parser = this.wiki.parseText(this.transcludeType,variableInfo.value || "",{parseAsInline: !this.parseTreeNode.isBlock});
-		if(parser && variableInfo.isFunctionDefinition) {
-			parser = {
-				tree: [
-					{
-						type: "parameters",
-						children: parser.tree,
-						attributes: {},
-						orderedAttributes: []
-					}
-				]
+		if(variableInfo) {
+			parser = this.wiki.parseText(this.transcludeType,variableInfo.value || "",{parseAsInline: !this.parseTreeNode.isBlock});
+			if(parser && variableInfo.isFunctionDefinition) {
+				parser = {
+					tree: [
+						{
+							type: "parameters",
+							children: parser.tree,
+							attributes: {},
+							orderedAttributes: []
+						}
+					]
+				}
+				$tw.utils.each(variableInfo.variableParams,function(param,index) {
+					var attr = {name: param.name, type: "string", value: param["default"]};
+					parser.tree[0].attributes[param.name] = attr;
+					parser.tree[0].orderedAttributes.push(attr);
+				});
 			}
-			$tw.utils.each(variableInfo.variableParams,function(param,index) {
-				var attr = {name: param.name, type: "string", value: param["default"]};
-				parser.tree[0].attributes[param.name] = attr;
-				parser.tree[0].orderedAttributes.push(attr);
-			});
 		}
 	} else {
 		parser = this.wiki.parseTextReference(
