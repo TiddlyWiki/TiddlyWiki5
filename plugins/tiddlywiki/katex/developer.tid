@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/katex/developer
+
+!! How to upgrade
+
+# Download latest release zip file from [[Github release|https://github.com/KaTeX/KaTeX/releases]]
+# backup the old `plugins/tiddlywiki/katex/files/tiddlywiki.files` file
+# rename extracted folder to "files" and copy it to `plugins/tiddlywiki/katex/files` (maybe delete the old folder first, to make a full overwrite).
+# create `plugins/tiddlywiki/katex/files/tiddlywiki.files` (or use the old one) and register all files in it.
