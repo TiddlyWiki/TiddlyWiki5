@@ -140,7 +140,7 @@ TranscludeWidget.prototype.collectSlotValueParameters = function() {
 		var noValueWidgetsFound = true,
 			searchParseTreeNodes = function(nodes) {
 				$tw.utils.each(nodes,function(node) {
-					if(node.type === "value" && node.tag === "$value") {
+					if(node.type === "value") {
 						if(node.attributes["$name"] && node.attributes["$name"].type === "string") {
 							var slotValueName = node.attributes["$name"].value;
 							self.slotValueParseTrees[slotValueName] = node.children;
@@ -178,7 +178,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 				tree: [
 					{
 						type: "parameters",
-						name: "$parameters",
 						children: parser.tree,
 						attributes: {},
 						orderedAttributes: []

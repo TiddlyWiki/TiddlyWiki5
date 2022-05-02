@@ -404,14 +404,12 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	if(parseTreeNode.type !== "transclude" && this.variables[variableDefinitionName] && this.variables[variableDefinitionName].value) {
 		var newParseTreeNode = {
 			type: "transclude",
-			tag: "$transclude",
 			attributes: {
 				"$variable": {name: "$variable", type: "string", value: variableDefinitionName}
 			},
 			children: [
 				{
 					type: "value",
-					tag: "$value",
 					attributes: {
 						"$name": {name: "$name", type: "string", value: "ts-body"}
 					},
@@ -419,14 +417,12 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 				},
 				{
 					type: "value",
-					tag: "$value",
 					attributes: {
 						"$name": {name: "$name", type: "string", value: "ts-wrapper"}
 					},
 					children: [
 						{
 							type: "setvariable",
-							tag: "$setvariable",
 							attributes: {
 								"name": {name: "name", type: "string", value: variableDefinitionName},
 								"value": {name: "value", type: "string", value: ""}
@@ -434,7 +430,6 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 							children: [
 								{
 									type: "slot",
-									tag: "$slot",
 									attributes: {
 										"$name": {name: "$name", type: "string", value: "ts-wrapped"}
 									}
