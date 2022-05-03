@@ -1,5 +1,6 @@
 title: LetWidget
-created: 20211028115900000
+created: 20220502144738010
+modified: 20220502144738010
 tags: Widgets
 caption: let
 
@@ -12,7 +13,9 @@ caption: let
 The content of the <<.wid let>> widget is the scope for the value assigned to the variable.
 
 |!Attribute |!Description |
-|//{attributes not starting with $}// |Each attribute name specifies a variable name. The attribute value is assigned to the variable |
+|//{any attributes}// |Each attribute name specifies a variable name. The attribute value is assigned to the variable |
+
+<<.from-version "5.2.3">> Previously, variable names were restricted to not start with a dollar sign. That restriction is no longer applied.
 
 Attributes are evaluated in the order they are written. Attributes with the same name are allowed. Each time a duplicate attribute is encountered, it will replace the existing value set by the earlier duplicate.
 
