@@ -11,7 +11,7 @@ title: Output
 		Hippopotamus
 	</$value>
 </$transclude>
-_
++
 title: TiddlerOne
 
 \whitespace trim
@@ -21,7 +21,7 @@ title: TiddlerOne
 		Whale
 	</$slot>
 </$parameters>
-_
++
 title: ExpectedResult
 
 <p>FerretHippopotamus</p>

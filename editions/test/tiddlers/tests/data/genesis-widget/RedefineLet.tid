@@ -21,11 +21,11 @@ title: Output
 (<$text text=<<$two>>/>)
 (<$text text=<<$$three>>/>)
 </$let>
-_
++
 title: Definition
 
 \whitespace trim
-_
++
 title: ExpectedResult
 
 <p>(--Elephant--)

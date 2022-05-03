@@ -13,14 +13,14 @@ title: Output
 <$transclude $tiddler='TiddlerOne' zero='Ferret' 0='Pigeon'/>
 <$transclude zero='Ferret' 0='Pigeon' $tiddler='TiddlerOne'/>
 <$transclude $tiddler='TiddlerOne'/>
-_
++
 title: TiddlerOne
 
 \whitespace trim
 <$parameters zero='Jaguar'>
 	<$text text=<<zero>>/>
 </$parameters>
-_
++
 title: ExpectedResult
 
 <p>FerretFerretPigeonPigeonFerretFerretJaguar</p>

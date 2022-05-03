@@ -11,7 +11,7 @@ title: Output
 {{TiddlerOne|Butterfly|Moth}}
 {{TiddlerOne|Beetle|Scorpion|Snake}}
 {{TiddlerOne||TiddlerTwo|Beetle|Scorpion|Snake}}
-_
++
 title: TiddlerOne
 
 \whitespace trim
@@ -19,13 +19,13 @@ title: TiddlerOne
 <$list filter="[enlist<paramNames>]" counter="counter">
 {<$text text={{{ [enlist<paramNames>nth<counter>] }}}/>:<$text text={{{ [enlist<paramValues>nth<counter>] }}}/>}
 </$list>
-_
++
 title: TiddlerTwo
 
 \whitespace trim
 \parameters(zero:'Mouse',one:'Horse',two:'Owl')
 (<$transclude $tiddler=<<currentTiddler>> zero=<<zero>> one=<<one>> two=<<two>>/>)
-_
++
 title: ExpectedResult
 
 <p></p><p>{0:Ferret}</p><p>{0:Butterfly}{1:Moth}</p><p>{0:Beetle}{1:Scorpion}{2:Snake}</p><p>({zero:Beetle}{one:Scorpion}{two:Snake})</p>

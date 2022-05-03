@@ -49,7 +49,7 @@ describe("Wiki-based tests", function() {
 	});
 
 	function readMultipleTiddlersTiddler(title) {
-		var rawTiddlers = $tw.wiki.getTiddlerText(title).split("\n_\n");
+		var rawTiddlers = $tw.wiki.getTiddlerText(title).split("\n+\n");
 		var tiddlers = [];
 		$tw.utils.each(rawTiddlers,function(rawTiddler) {
 			var fields = Object.create(null),

@@ -34,7 +34,7 @@ title: Output
 		</$parameters>
 	</$value>
 </$transclude>
-_
++
 title: TiddlerOne
 
 \whitespace trim
@@ -42,7 +42,7 @@ title: TiddlerOne
 	Piranha
 	<$text text=<<one>>/>
 </$parameters>
-_
++
 title: ExpectedResult
 
 <p>PiranhaFerretPiranhaFerretBadgerFerretBadgerFerret</p>

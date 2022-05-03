@@ -8,7 +8,7 @@ title: Output
 \whitespace trim
 <$genesis $type="let" $names="myvar other" $values="Kitten Donkey" myvar="Shark">(<$text text=<<myvar>>/>|<$text text=<<other>>/>)</$genesis>
 <$genesis $type="let" $names="$myvar $other" $values="Kitten Donkey" $$myvar="Shark">(<$text text=<<$myvar>>/>|<$text text=<<$other>>/>)</$genesis>
-_
++
 title: ExpectedResult
 
 <p>(Shark|Donkey)(Shark|Donkey)</p>

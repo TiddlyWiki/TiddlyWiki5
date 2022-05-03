@@ -8,7 +8,7 @@ title: Output
 \whitespace trim
 <$transclude $tiddler='TiddlerOne' one='Ferret'>
 </$transclude>
-_
++
 title: TiddlerOne
 
 \whitespace trim
@@ -23,7 +23,7 @@ title: TiddlerOne
 <$mywidget $variable="Dingo">
 	Crocodile
 </$mywidget>
-_
++
 title: ExpectedResult
 
 <p>DingoCrocodile</p>

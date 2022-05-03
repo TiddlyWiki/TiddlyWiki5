@@ -8,13 +8,13 @@ title: Output
 \whitespace trim
 <$transclude $tiddler='TiddlerOne' one='Ferret'/>
 <$transclude $tiddler='TiddlerOne'/>
-_
++
 title: TiddlerOne
 
 \whitespace trim
 \parameters(one:'Jaguar')
 <$text text=<<one>>/>
-_
++
 title: ExpectedResult
 
 <p>FerretJaguar</p>

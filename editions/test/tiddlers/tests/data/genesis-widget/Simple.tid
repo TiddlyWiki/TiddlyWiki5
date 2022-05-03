@@ -8,7 +8,7 @@ title: Output
 \whitespace trim
 <$genesis $tag="div">Mouse</$genesis>
 <$genesis $tag="div" class="tc-thing" label="Squeak">Mouse</$genesis>
-_
++
 title: ExpectedResult
 
 <p><div>Mouse</div><div class="tc-thing" label="Squeak">Mouse</div></p>

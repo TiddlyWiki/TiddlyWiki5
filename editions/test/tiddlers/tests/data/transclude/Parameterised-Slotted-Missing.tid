@@ -8,7 +8,7 @@ title: Output
 \whitespace trim
 <$transclude $tiddler='TiddlerOne' one='Ferret'>
 </$transclude>
-_
++
 title: TiddlerOne
 
 \whitespace trim
@@ -18,7 +18,7 @@ title: TiddlerOne
 		Whale
 	</$slot>
 </$parameters>
-_
++
 title: ExpectedResult
 
 <p>FerretWhale</p>

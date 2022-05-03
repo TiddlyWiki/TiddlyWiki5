@@ -12,18 +12,18 @@ title: Output
 <$let test="Tiger">
 <$codeblock code=<<test>>/>
 </$let>
-_
++
 title: Definition
 
 \whitespace trim
 \function <$codeblock>(code)
 <$codeblock code={{{ [<code>addprefix[£]addsuffix[@]] }}}/>
 \end
-_
++
 title: Subject
 
 Python
-_
++
 title: ExpectedResult
 
 <p><pre><code>£Kangaroo@</code></pre><pre><code>£Python@</code></pre><pre><code>£Tiger@</code></pre></p>
