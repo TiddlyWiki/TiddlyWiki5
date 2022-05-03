@@ -19,6 +19,7 @@ Make a new logger
 */
 function Logger(componentName,options) {
 	options = options || {};
+	this.alert = "alert" in options ? options.alert : true;
 	this.componentName = componentName || "";
 	this.colour = options.colour || "white";
 	this.enable = "enable" in options ? options.enable : true;
