@@ -19,7 +19,6 @@ Make a new logger
 */
 function Logger(componentName,options) {
 	options = options || {};
-	this.alert = "alert" in options ? options.alert : true;
 	this.componentName = componentName || "";
 	this.colour = options.colour || "white";
 	this.enable = "enable" in options ? options.enable : true;
@@ -75,8 +74,8 @@ Logger.prototype.alert = function(/* args */) {
 	if(this.enable) {
 		// Prepare the text of the alert
 		var text = Array.prototype.join.call(arguments," ");
-		// Create alert tiddlers in the browser
-		if($tw.browser) {
+		// Create alert tiddlers if this.save or in the browser
+		if(this.save||$tw.browser) {
 			// Check if there is an existing alert with the same text and the same component
 			var existingAlerts = $tw.wiki.getTiddlersWithTag(ALERT_TAG),
 				alertFields,
