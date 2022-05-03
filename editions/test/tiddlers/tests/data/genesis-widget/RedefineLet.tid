@@ -1,0 +1,33 @@
+title: Genesis/RedefineLet
+description: Using the genesis widget to override the let widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function <$let>
+\whitespace trim
+<$setmultiplevariables $names="[enlist<paramNames>]" $values="[enlist<paramValues>addprefix[--]addsuffix[--]]">
+<$slot $name="ts-body"/>
+</$setmultiplevariables>
+\end
+<$let
+	one="Elephant"
+	$two="Kangaroo"
+	$$three="Giraffe"
+>
+(<$text text=<<one>>/>)
+(<$text text=<<$two>>/>)
+(<$text text=<<$$three>>/>)
+</$let>
+_
+title: Definition
+
+\whitespace trim
+_
+title: ExpectedResult
+
+<p>(--Elephant--)
+(--Kangaroo--)
+(--Giraffe--)</p>
