@@ -20,9 +20,9 @@ function FileSystemAdaptor(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.logger = new $tw.utils.Logger("filesystem-server",{colour: "blue"});
-	// Create the <wiki>/tiddlers folder if it doesn't exist
-	$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+	this.logger = new $tw.utils.Logger("filesystem-server",{colour: "blue", save: true});
+	this.hasAccess = false;
+	this.hasStatus = false;
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
@@ -34,52 +34,34 @@ FileSystemAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
 };
 
 /*
-Show a filesystem errorlog alert
+Saves and logs a filesystem error alert when the error is not passed back to the Syncer
 */
 FileSystemAdaptor.prototype.displayError = function(msg,err) {
-	// Check if there is an existing alert with the same title
-	var self = this,
-		alertTitle = "_filesytem/errors/alert",
-		logTitle = "_filesytem/errors/log",
-		alertTid = this.wiki.getTiddler(alertTitle),
-		alertFields = alertTid? $tw.utils.extend({},alertTid.fields): null,
-		existingCount,
-		text = "&#9888; " + msg + "; " + err.toString();
-	// Print an orange message to the console
-	console.error("\x1b[1;33m" + $tw.language.getString("Error/WhileSaving") + ": see the '" + logTitle + "' tiddler for details." + "\x1b[0m");
-	this.logger.log(Array.prototype.join.call([$tw.language.getString("Error/WhileSaving") + ":",msg + ":",err.toString()]," "));
-	if(alertFields) {
-		alertFields.text = Array.prototype.join.call([alertFields.text,text],"\n\n")
-		existingCount = alertFields.count || 1;
-	} else {
-		alertFields = {
-			title: alertTitle,
-			text: Array.prototype.join.call([ "!! {{$:/core/images/warning}} " + $tw.language.getString("Error/WhileSaving") + ":",text],"\n\n"),
-			tags: ["$:/tags/Alert"],
-			component: this.logger.componentName
-		};
-		existingCount = 0;
-	}
-	alertFields.modified = new Date();
-	if(++existingCount > 1) {
-		alertFields.count = existingCount;
-	} else {
-		alertFields.count = undefined;
-	}
-	this.wiki.addTiddler(new $tw.Tiddler(alertFields));
+	// Save the alert tiddler
+	this.logger.alert($tw.language.getString("Error/WhileSaving")+":",msg+":",err);
 	// Alerts are deleted when dismissed, save a copy as a log
 	this.wiki.addTiddler(new $tw.Tiddler({
-		title: logTitle,
+		title: "$:/server/log/filesystem",
 		type: "text/plain",
-		text: $tw.utils.getSystemInfo() + "\n\nLog:\n" + self.logger.getBuffer(),
+		text: $tw.utils.getSystemInfo() + "\n\nLog:\n" + this.logger.getBuffer(),
 		component: this.logger.componentName,
 		modified: new Date()
 	}));
 };
 
 FileSystemAdaptor.prototype.isReady = function() {
-	// The file system adaptor is always ready
-	return true;
+	// The file system adaptor is always ready once it has access to the root tiddler directory
+	if(!this.hasStatus) {
+		// Create the <wiki>/tiddlers folder if it doesn't exist
+		var err = $tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+		if (err) {
+			this.displayError("Create directory failed for the wiki tiddlers path \'"+this.boot.wikiTiddlersPath+"\'",err);
+		} else {
+			this.hasAccess = true;
+		}
+		this.hasStatus = true;
+	}
+	return this.hasAccess;
 };
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
@@ -132,7 +114,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
-				var message = "Save file failed for [["+tiddler.fields.title+"]]";
+				var message = "Save file failed for \'"+tiddler.fields.title+"\'";
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
@@ -154,7 +136,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
 				if(err) {
 					// Error deleting the previous file on disk, should fail gracefully
-					self.displayError("Clean up of previous file failed for [["+options.title+"]]",err);
+					self.displayError("Clean up of previous file failed for \'"+options.title+"\'",err);
 				}
 				return callback(null,fileInfo);
 			});
@@ -165,7 +147,10 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 
-We don't need to implement loading for the file system adaptor, because all the tiddler files will have been loaded during the boot process.
+We don't need to implement loading for the file system adaptor, 
+because all the tiddler files will have been loaded during the boot process.
+
+Due to possible race conditions, tiddlers should be updated from the webserver APIs.
 */
 FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 	callback(null,null);
@@ -182,13 +167,13 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err) {
 			if(err) {
 				// Error deleting the file on disk, should fail gracefully
-				self.logger.log("Delete file failed for \'" + title + "\'");
+				self.displayError("Delete file failed for \'" + title + "\'",err);
 			} else {
 				self.logger.log("Deleted \'"+fileInfo.filepath+"\'");
 			}
 			// Remove the tiddler from self.boot.files & return null adaptorInfo
 			delete self.boot.files[title];
-			return callback(err,null);
+			return callback(null,null);
 		});
 	} else {
 		callback(null,null);
