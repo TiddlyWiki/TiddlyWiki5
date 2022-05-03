@@ -1,5 +1,3 @@
-const { parse } = require("../parsers/wikiparser/rules/transcludeinline");
-
 /*\
 title: $:/core/modules/widgets/transclude.js
 type: application/javascript
