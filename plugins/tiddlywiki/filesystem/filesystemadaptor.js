@@ -20,7 +20,7 @@ function FileSystemAdaptor(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
+	this.logger = new $tw.utils.Logger("filesystem-server",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
 	$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
 }
@@ -182,13 +182,13 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err) {
 			if(err) {
 				// Error deleting the file on disk, should fail gracefully
-				self.displayError("Delete file failed for [[" + title + "]]",err);
+				self.logger.log("Delete file failed for \'" + title + "\'");
 			} else {
 				self.logger.log("Deleted \'"+fileInfo.filepath+"\'");
 			}
 			// Remove the tiddler from self.boot.files & return null adaptorInfo
 			delete self.boot.files[title];
-			return callback(null,null);
+			return callback(err,null);
 		});
 	} else {
 		callback(null,null);

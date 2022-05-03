@@ -91,7 +91,7 @@ Logger.prototype.alert = function(/* args */) {
 				existingCount = alertFields.count || 1;
 			} else {
 				alertFields = {
-					title: $tw.wiki.generateNewTitle("$:/temp/alerts/alert",{prefix: ""}),
+					title: $tw.wiki.generateNewTitle($tw.node? "$:/server/alerts/alert": "$:/temp/alerts/alert",{prefix: ""}),
 					text: text,
 					tags: [ALERT_TAG],
 					component: this.componentName

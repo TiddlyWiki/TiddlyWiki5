@@ -503,7 +503,8 @@ Syncer.prototype.processTaskQueue = function() {
 			task.run(function(err) {
 				self.numTasksInProgress -= 1;
 				if(err) {
-					self.displayError("Sync error while processing " + task.type + " of '" + task.title + "'",err);
+					// errors on node should fail gracefully after self.displayError
+					self.displayError("Sync error while processing " + task.type + " of \'" + task.title + "\'",err);
 					self.updateDirtyStatus();
 					self.triggerTimeout(self.errorRetryInterval);
 				} else {
