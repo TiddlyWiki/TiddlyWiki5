@@ -41,7 +41,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	this.logger.alert($tw.language.getString("Error/WhileSaving")+":",msg+":",err);
 	// Alerts are deleted when dismissed, save a copy as a log
 	this.wiki.addTiddler(new $tw.Tiddler({
-		title: "$:/server/log/filesystem",
+		title: "$:/server/logs/filesystem",
 		type: "text/plain",
 		text: $tw.utils.getSystemInfo() + "\n\nLog:\n" + this.logger.getBuffer(),
 		component: this.logger.componentName,
