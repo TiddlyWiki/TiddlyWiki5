@@ -53,14 +53,12 @@ function Syncer(options) {
 	this.logging = "logging" in options ? options.logging : true;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : ""),{
-		alert: this.logging,
 		colour: "cyan",
 		enable: this.logging,
 		saveHistory: true
 	});
 	// Make another logger for connection errors
 	this.loggerConnection = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : "")  + (this.syncadaptor.name ? ("-" + this.syncadaptor.name) : "") + "-connection",{
-		alert: this.logging,
 		colour: "cyan",
 		enable: this.logging
 	});
