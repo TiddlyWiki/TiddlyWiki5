@@ -15,9 +15,18 @@ Parse tree utility functions.
 exports.addAttributeToParseTreeNode = function(node,name,value) {
 	var attribute = {name: name, type: "string", value: value};
 	node.attributes = node.attributes || {};
+	node.orderedAttributes = node.orderedAttributes || [];
 	node.attributes[name] = attribute;
-	if(node.orderedAttributes) {
+	var foundIndex = -1;
+	$tw.utils.each(node.orderedAttributes,function(attr,index) {
+		if(attr.name === name) {
+			foundIndex = index;
+		}
+	});
+	if(foundIndex === -1) {
 		node.orderedAttributes.push(attribute);
+	} else {
+		node.orderedAttributes[foundIndex] = attribute;
 	}
 };
 
