@@ -440,15 +440,10 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 				}
 			]
 		};
-		$tw.utils.each(parseTreeNode.attributes,function(attr) {
+		$tw.utils.each(parseTreeNode.attributes,function(attr,name) {
 			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of transclude
-			var name = attr.name.charAt(0) === "$" ? "$" + attr.name : attr.name,
-				newAttr = {
-					name: name,
-					type: attr.type,
-					value: attr.value
-				};
-			newParseTreeNode.attributes[name] = newAttr;
+			name = name.charAt(0) === "$" ? "$" + name : name;
+			newParseTreeNode.attributes[name] = attr;
 		});
 		parseTreeNode = newParseTreeNode;
 	}
