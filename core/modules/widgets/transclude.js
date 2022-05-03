@@ -171,7 +171,13 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	if(this.transcludeVariable) {
 		var variableInfo = this.getVariableInfo(this.transcludeVariable).srcVariable;
 		if(variableInfo) {
-			parser = this.wiki.parseText(this.transcludeType,variableInfo.value || "",{parseAsInline: !this.parseTreeNode.isBlock});
+			var mode = this.parseTreeNode.isBlock ? "blockParser" : "inlineParser";
+			if(variableInfo[mode]) {
+				parser = variableInfo[mode];
+			} else {
+				parser = this.wiki.parseText(this.transcludeType,variableInfo.value || "",{parseAsInline: !this.parseTreeNode.isBlock});
+				variableInfo[mode] = parser;
+			}
 			if(parser && variableInfo.isFunctionDefinition) {
 				parser = {
 					tree: [

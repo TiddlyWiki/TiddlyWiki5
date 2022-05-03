@@ -23,7 +23,10 @@ title: TiddlerOne
 <$mywidget one="Dingo">
 	Crocodile
 </$mywidget>
+<$mywidget one="BumbleBee">
+	Squirrel
+</$mywidget>
 +
 title: ExpectedResult
 
-<p>DingoCrocodile</p>
+<p>DingoCrocodileBumbleBeeSquirrel</p>
