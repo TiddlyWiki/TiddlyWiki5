@@ -3,6 +3,7 @@ title: $:/snippets/languageswitcher
 \define flag-title()
 $(languagePluginTitle)$/icon
 \end
+\whitespace trim
 
 <$linkcatcher to="$:/language">
 <div class="tc-chooser tc-language-chooser">
@@ -18,6 +19,7 @@ $(languagePluginTitle)$/icon
 </$transclude>
 </$set>
 </span>
+&#32;
 <$view field="description">
 <$view field="name">
 <$view field="title"/>

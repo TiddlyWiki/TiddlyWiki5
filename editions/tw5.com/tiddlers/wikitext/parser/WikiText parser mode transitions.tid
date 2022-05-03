@@ -1,0 +1,59 @@
+created: 20220110235808139
+modified: 20220122184232928
+tags: [[WikiText Parser Modes]]
+title: WikiText parser mode transitions
+type: text/vnd.tiddlywiki
+
+This is a <<.em rough>> diagram whose lines mostly correspond to the parser mode transitions described below:
+<$railroad text="""
+{<"pragma mode">
+{(
+  {<"inline mode"> +} |
+  ({<"block mode">
+    +("<<<" | "@@" | "$$")
+  }
+  "other block mode start punct")
+  {<"inline mode"> +}
+  )
+  +(
+    "block mode close punctuation" |
+    ("blank line" "html open tag")
+  )}
+  +("transclude widget" | "macrocall")
+}
+"""/>
+
+!! Start mode
+
+By default the parser starts in [[block mode|Block Mode WikiText]]. However, a tiddler can instead be transcluded with [[inline mode|Inline Mode WikiText]] in which case [[block mode WikiText|Block Mode WikiText]] will not be recognised.
+
+At the start of text only, the parser will also recognise any [[pragma mode WikiText|Pragma]].
+
+!! Transitions from pragma mode
+
+At the start of text, the parser will recognise any [[pragma|Pragma]]. If none are found then it will move to [[inline|Inline Mode WikiText]] or [[block|Block Mode WikiText]] mode depending on the transclusion mode. If any [[pragma|Pragma]] are found then it will continue looking for [[pragma|Pragma]] until it finds one or more blank lines not followed by the start of a new pragma.
+
+!! Transitions from block mode
+
+When the parser encounters most [[block mode|Block Mode WikiText]] start punctuation it transitions to [[inline mode|Inline Mode WikiText]]. This means
+he text enclosed by most [[block mode|Block Mode WikiText]] constructs will be parsed using [[inline mode|Inline Mode WikiText]].
+
+<<.tip """The start "punctuation" for a paragraph is "invisible". Even for paragraphs the parser moves to [[inline mode|Inline Mode WikiText]]""">>
+
+However, there are a few constructs whose enclosed text is parsed using [[block mode|Block Mode WikiText]]:
+
+* [[Multi-line block quotes|Block Quotes in WikiText]]
+* [[Multi-line style blocks|Styles and Classes in WikiText]]
+* [[Typed blocks|Typed Blocks in WikiText]]
+
+When the start punctuation for these are encountered, the enclosed text will continue to be parsed in [[block mode|Block Mode WikiText]].
+
+[[Horizontal rules|Horizontal Rules in WikiText]] are another special case. They do not enclose any text, so there is no opportunity for the parser to transition to [[inline mode|Inline Mode WikiText]].
+
+Opening [[widget|Widgets in WikiText]] or [[HTML|HTML in WikiText]] tags provide another way the parser can transition. When such a tag is <<.em not>> followed by a blank line, then the contents enclosed by the tag will be parsed in [[inline mode|Inline Mode WikiText]]. See the [[HTML examples|WikiText parser mode: HTML examples]].
+
+!! Transitions from inline mode
+
+* The parser will move back to [[block mode|Block Mode WikiText]] after the end of a line which terminates [[block mode|Block Mode WikiText]] ~WikiText. In other words, when the block mode close punctuation is encountered.
+* When the opening [[widget|Widgets in WikiText]] or [[HTML|HTML in WikiText]] tag is followed by a blank line, then the contents enclosed by the tag will be parsed in [[block mode|Block Mode WikiText]]. See the [[HTML examples|WikiText parser mode: HTML examples]].
+* Transcluded text and text pulled in via a macro call can transition the parser away from [[inline mode|Inline Mode WikiText]]. See [[transclusion examples|WikiText parser mode: transclusion examples]] and [[macro examples|WikiText parser mode: macro examples]] for more details.

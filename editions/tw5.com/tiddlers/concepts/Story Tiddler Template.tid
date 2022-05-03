@@ -1,0 +1,13 @@
+created: 20211204122044198
+modified: 20211206133756716
+tags: Concepts
+title: Story Tiddler Template
+type: text/vnd.tiddlywiki
+
+"Story tiddler template" refers to the template used to display a tiddler within the story river.
+
+The [[Story Tiddler Template Cascade]] is used to choose the template to be used for a particular tiddler. By default, the edit template is used for tiddlers in draft mode, and the view template used otherwise.
+
+See also:
+
+<<list-links "[tag[Story Tiddler Template]]">>

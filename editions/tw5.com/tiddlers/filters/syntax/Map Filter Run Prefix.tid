@@ -1,5 +1,5 @@
 created: 20210618133745003
-modified: 20210618134747652
+modified: 20211029025541750
 tags: [[Filter Syntax]] [[Filter Run Prefix]]
 title: Map Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -13,6 +13,14 @@ type: text/vnd.tiddlywiki
 Each input title from previous runs is passed to this run in turn. The filter run transforms the input titles and the output of this run replaces the input title. For example, the filter run `[get[caption]else{!!title}]` replaces each input title with its caption field, unless the field does not exist in which case the title is preserved.
 
 Note that within the filter run, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits filter runs like `:map[{!!price}multiply{!!cost}]` to be used for computation. The value of currentTiddler outside the run is available in the variable "..currentTiddler".
+
+The following variables are available within the filter run:
+
+* ''currentTiddler'' - the input title
+* ''..currentTiddler'' - the value of the variable `currentTiddler` outside the filter run.
+* ''index'' - <<.from-version "5.2.1">> the numeric index of the current list item (with zero being the first item in the list).
+* ''revIndex'' - <<.from-version "5.2.1">> the reverse numeric index of the current list item (with zero being the last item in the list).
+* ''length'' - <<.from-version "5.2.1">> the total length of the input list.
 
 Filter runs used with the `:map` prefix should return the same number of items that they are passed. Any missing entries will be treated as an empty string. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `[get[myfield]else[default-value]...`.
 

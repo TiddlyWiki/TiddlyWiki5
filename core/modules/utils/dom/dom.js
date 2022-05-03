@@ -281,5 +281,48 @@ exports.getLocationPath = function() {
 	return window.location.toString().split("#")[0];
 };
 
+/*
+Collect DOM variables
+*/
+exports.collectDOMVariables = function(selectedNode,domNode,event) {
+	var variables = {},
+	    selectedNodeRect,
+	    domNodeRect;
+	if(selectedNode) {
+		$tw.utils.each(selectedNode.attributes,function(attribute) {
+			variables["dom-" + attribute.name] = attribute.value.toString();
+		});
+		// Add a variable with a popup coordinate string for the selected node
+		variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
+
+		// Add variables for offset of selected node
+		variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
+		variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
+		variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
+		variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+	}
+
+	if(event && event.clientX && event.clientY) {
+		if(selectedNode) {
+			// Add variables for event X and Y position relative to selected node
+			selectedNodeRect = selectedNode.getBoundingClientRect();
+			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
+			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
+		}
+		
+		if(domNode) {
+			// Add variables for event X and Y position relative to event catcher node
+			domNodeRect = domNode.getBoundingClientRect();
+			variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
+			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
+		}
+
+		// Add variables for event X and Y position relative to the viewport
+		variables["event-fromviewport-posx"] = event.clientX.toString();
+		variables["event-fromviewport-posy"] = event.clientY.toString();
+	}
+	return variables;
+};
+
 
 })();

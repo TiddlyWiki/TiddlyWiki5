@@ -1,5 +1,3 @@
 title: $:/core/ui/ListItemTemplate
 
-<div class="tc-menu-list-item">
-<$link />
-</div>
+<div class="tc-menu-list-item"><$link /></div>

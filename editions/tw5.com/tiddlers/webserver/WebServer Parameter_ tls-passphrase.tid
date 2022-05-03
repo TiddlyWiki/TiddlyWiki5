@@ -1,0 +1,10 @@
+caption: tls-passphrase
+created: 20211111004416873
+modified: 20211111022120158
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: tls-passphrase
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.2">> The optional [[web server configuration parameter|WebServer Parameters]] ''tls-passphrase'' contains the "certificate passphrase", a string used to decrypt the certificate file used when running the web server under HTTPS.
+
+See [[Using HTTPS]] for details.

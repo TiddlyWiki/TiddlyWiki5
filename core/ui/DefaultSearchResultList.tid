@@ -5,6 +5,7 @@ first-search-filter: [!is[system]search:title<userInput>sort[title]limit[250]]
 second-search-filter: [!is[system]search<userInput>sort[title]limit[250]]
 
 \define searchResultList()
+\whitespace trim
 //<small>{{$:/language/Search/Matches/Title}}</small>//
 
 <$list filter="[<userInput>minlength[1]]" variable="ignore">

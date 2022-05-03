@@ -5,6 +5,7 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 \define lingo-base() $:/language/ControlPanel/Basics/
 
 \define show-filter-count(filter)
+\whitespace trim
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" $value="""$filter$"""/>
 <$action-setfield $tiddler="$:/temp/advancedsearch/input" $value="""$filter$"""/>
@@ -13,9 +14,11 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 <$action-navigate $to="$:/AdvancedSearch"/>
 <$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
 ''<$count filter="""$filter$"""/>''
+&#32;
 {{$:/core/images/advanced-search-button}}
 </$button>
 \end
+\whitespace trim
 
 |<<lingo Version/Prompt>> |''<<version>>'' |
 |<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |

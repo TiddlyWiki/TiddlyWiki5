@@ -1,0 +1,30 @@
+caption: Quine
+color: #FF8A65
+community-author: Chris Hunt
+created: 20131129101027725
+delivery: App
+description: Appli iPad/iPhone pour travailler avec TiddlyWiki
+fr-title: Enregistrer sur iPad/iPhone
+method: save
+modified: 20220402105820520
+tags: Saving iOS
+title: Saving on iPad/iPhone
+type: text/vnd.tiddlywiki
+
+L'application ''Quine 2'' pour iPad/iPhone permet d'éditer et d'enregistrer les modifications de wikis TiddlyWiki5 sur iOS. Vous pouvez la [[télécharger ici|https://apps.apple.com/us/app/quine-2/id1450128957]].
+
+Instructions d'utilisation<<:>>
+
+# Ouvrez Quine 2
+# Tapez sur le bouton + de la barre d'outils pour créer et ouvrir un nouveau <<tw>>
+# Dans la liste des fichiers tapez sur un fichier <<tw>> existant pour l'ouvrir
+# Éditez le <<tw>> comme d'habitude, et enregistrez-le normalement avec Autosave ou le <<.icon $:/core/images/save-button>> bouton enregistrer
+# Utilisez le bouton de barre d'outil ''Documents'' à gauche pour fermer un <<tw>> ouvert
+
+* Quine 2 fonctionne nativement sous iOS avec des fichiers locaux ou stockés dans iCloud
+* Quine 2 permet aussi d'ouvrir, modifier et enregistrer des fichiers <<tw>> stockés chez d'autres fournisseurs de service Cloud
+* Quine 2 permet de suivre des liens Wikitexte embarqués ou des liens canoniques externes vers des fichiers accessibles comme sur le Cloud via des services compatibles avec le ''//folder level sharing//''
+** Parmi les applications compatibles, citons ''Secure Shellfish'' et ''Working Copy''. La plupart des services ne permet toutefois pas aux applis comme Quine 2 d'utiliser ce type de liens
+** Si vous voulez activer cette fonctionnalité pour les services <<gf collaboratifs>>, basculez le commutateur ''Autoriser la sélection de dossiers pour les liens hors bac-à-sable'' dans les paramètres iOS de Quine 2
+
+//Notez que Quine 2 est publié indépendamment de <<tw>>//

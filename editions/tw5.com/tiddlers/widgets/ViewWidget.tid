@@ -1,6 +1,6 @@
 caption: view
 created: 20131024141900000
-modified: 20210402093330113
+modified: 20211219213444235
 tags: Widgets
 title: ViewWidget
 type: text/vnd.tiddlywiki
@@ -27,18 +27,18 @@ The content of the `<$view>` widget is displayed if the field or property is mis
 The following formats can be specified in the `format` attribute:
 
 |!Format |!Description |
-|''text'' |Plain text (default) |
-|''htmlencoded'' |The field is displayed with HTML encoding |
+|''text'' |Plain text (default) <<.tip "See also the TextWidget. `<$view format=text tiddler=MyTiddler/>` renders the same as `<$text text={{MyTiddler}}/>`">>|
+|''htmlencoded'' |The field is displayed with HTML encoding. <<.tip "Rendered value is the same as the output from the [[encodehtml|encodehtml Operator]] filter operator">>  |
 |''htmltextencoded'' |<<.from-version "5.2.0">> The field is displayed with HTML encoding, only double quotes (") are not escaped. This creates a more compact htmlencoding appropriate for html text content, but //not// for attributes. |
-|''urlencoded'' |The field is displayed with URL encoding |
-|''doubleurlencoded'' |The field is displayed with double URL encoding |
+|''urlencoded'' |The field is displayed with URL encoding <<.tip "Rendered value is the same as the output from the [[encodeuri|encodeuri Operator]] filter operator">> |
+|''doubleurlencoded'' |The field is displayed with double URL encoding <<.tip "Rendered value is the same as the output from calling the [[encodeuri|encodeuri Operator]] filter operator twice">> |
 |''htmlwikified'' |The field is wikified according to the mode attribute and the resulting HTML returned as plain text (ie HTML elements will appear in plain text) |
 |''plainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as plain text (ie HTML elements will be removed) |
 |''htmlencodedplainwikified'' |The field is wikified according to the mode attribute and the text content of the resulting HTML returned as HTML encoded plain text (ie HTML elements will be removed) |
-|''date'' |The field is interpreted as a UTC date and displayed according to the DateFormat specified in the `template` attribute |
-|''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant |
+|''date'' |The field is interpreted as a UTC date and displayed according to the DateFormat specified in the `template` attribute <<.tip "Rendered value is the same as the output from the [[format:date|format Operator]] filter operator">> |
+|''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant <<.tip "Rendered value is the same as the output from the [[format:relativedate|format Operator]] filter operator">> |
 |''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
-|''jsencoded'' |The field is displayed as a JavaScript encoded string |
+|''jsencoded'' |The field is displayed as a JavaScript encoded string <<.tip "Rendered value is the same as the output from the [[stringify|stringify Operator]] filter operator">> |
 
 !! "WikiText format"
 
@@ -54,3 +54,21 @@ The following example will view the core version of the tiddler [[$:/DefaultTidd
 <$view tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/>
 
 '>>
+
+! Examples
+
+Given this [[Saturday]] example tiddler:
+
+|!tiddler|!raw content|!rendered content|
+|[[Saturday]]|<$text text={{Saturday}}/>|{{Saturday}}|
+
+Here is how `<$view tiddler=Saturday format=<<format>>/>` renders for each format:
+<table>
+<tr><th>format</th><th>renders as</th></tr>
+<$list filter="text htmlencoded htmltextencoded urlencoded doubleurlencoded htmlwikified plainwikified htmlencodedplainwikified stripcomments jsencoded" variable=format>
+<tr>
+<td>''<<format>>''</td>
+<td><$view tiddler="Saturday" format=<<format>>/></td>
+</tr>
+</$list>
+</table>

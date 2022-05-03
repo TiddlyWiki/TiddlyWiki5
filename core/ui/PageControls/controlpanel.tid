@@ -16,6 +16,6 @@ description: {{$:/language/Buttons/ControlPanel/Hint}}
 </$button>
 \end
 
-<$list filter="[list[$:/StoryList]] +[field:title[$:/ControlPanel]]" emptyMessage=<<control-panel-button>>>
+<$list filter="[list<tv-story-list>] +[field:title[$:/ControlPanel]]" emptyMessage=<<control-panel-button>>>
 <<control-panel-button "tc-selected">>
 </$list>

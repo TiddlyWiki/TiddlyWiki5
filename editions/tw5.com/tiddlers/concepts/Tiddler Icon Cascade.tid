@@ -1,0 +1,16 @@
+created: 20211206154017669
+modified: 20211206160003647
+tags: Cascades
+title: Tiddler Icon Cascade
+type: text/vnd.tiddlywiki
+
+The tiddler icon cascade is a [[cascade|Cascades]] used to choose which icon should be used for a particular tiddler.
+
+The default tiddler icon cascade consists of:
+
+# If the tiddler has an ''icon'' field, use the value as the title of the icon tiddler
+# If the tiddler $:/config/DefaultTiddlerIcon exists, use the value as the title of the icon tiddler 
+
+You can see the current settings for the tiddler icon cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades''  -> ''Tiddler Icon'' tab.
+
+<<list-links "[tag[Tiddler Icon Cascade]]">>

@@ -1,0 +1,44 @@
+title: $:/_tw_shared/styles
+tags: $:/tags/Stylesheet TiddlyWikiSitesMenu
+code-body: yes
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-sites-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.tc-sites-menu {
+	font-size: 1.2em;
+}
+
+.tc-sites-menu ol {
+	margin: 0;
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.tc-sites-menu ol li a {
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+
+.tc-sites-menu ol li .tc-sites-menu-disabled {
+	padding: 0.25em 14px 0.25em 14px;
+}
+
+.tc-sites-menu-this-site {
+	color: <<colour background>>;
+	background: <<colour muted-foreground>>;
+	font-size: 0.6em;
+	border-radius: 1em;
+	padding: 2px 6px;
+	margin-left: 1em;
+	vertical-align: top;
+}
+
+.tc-sites-menu-icon {
+	margin-right: 0.5em;
+	width: 1em;
+}

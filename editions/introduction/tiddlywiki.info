@@ -16,10 +16,12 @@
 		"tiddlywiki/readonly"
 	],
 	"languages": [
+		"ar-PS",
 		"ca-ES",
 		"cs-CZ",
 		"da-DK",
 		"de-AT",
+		"de-CH",
 		"de-DE",
 		"el-GR",
 		"en-GB",
@@ -27,6 +29,7 @@
 		"es-ES",
 		"fa-IR",
 		"fr-FR",
+		"he-IL",
 		"hi-IN",
 		"ia-IA",
 		"it-IT",
@@ -34,12 +37,16 @@
 		"ko-KR",
 		"nl-NL",
 		"pa-IN",
+		"pt-BR",
 		"pt-PT",
 		"ru-RU",
 		"sk-SK",
 		"sv-SE",
+		"zh-CN",
 		"zh-Hans",
-		"zh-Hant"
+		"zh-Hant",
+		"zh-HK",
+		"zh-TW"
 	],
 	"build": {
 		"index": [

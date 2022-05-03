@@ -34,8 +34,10 @@ function FramedEngine(options) {
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)
+	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
+	var colorScheme = this.widget.wiki.getTiddler(paletteTitle).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
-	this.iframeDoc.write("");
+	this.iframeDoc.write("<meta name='color-scheme' content='" + colorScheme + "'>");
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
@@ -205,7 +207,7 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	if(this.widget.editInputActions) {
-		this.widget.invokeActionString(this.widget.editInputActions);
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
 	}
 	return true;
 };
