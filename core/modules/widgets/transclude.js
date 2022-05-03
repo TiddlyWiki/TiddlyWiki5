@@ -177,16 +177,12 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 					tree: [
 						{
 							type: "parameters",
-							children: parser.tree,
-							attributes: {},
-							orderedAttributes: []
+							children: parser.tree
 						}
 					]
 				}
-				$tw.utils.each(variableInfo.variableParams,function(param,index) {
-					var attr = {name: param.name, type: "string", value: param["default"]};
-					parser.tree[0].attributes[param.name] = attr;
-					parser.tree[0].orderedAttributes.push(attr);
+				$tw.utils.each(variableInfo.variableParams,function(param) {
+					$tw.utils.addAttributeToParseTreeNode(parser.tree[0],param.name,param["default"])
 				});
 			}
 		}
@@ -232,16 +228,23 @@ TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaul
 	return defaultValue;
 };
 
+/*
+Get an array of the names of all the provided transclusion parameters
+*/
+TranscludeWidget.prototype.getTransclusionParameterNames = function() {
+	return Object.keys(this.stringParametersByName);
+};
 
 /*
-Fetch the value of a parameter identified by its position
+Get an array of the values of all the provided transclusion parameters
 */
-TranscludeWidget.prototype.getTransclusionParameterByPosition = function(index,defaultValue) {
-	if(index in this.stringParametersByPosition) {
-		return this.stringParametersByPosition[index];
-	} else {
-		return defaultValue;
-	}
+TranscludeWidget.prototype.getTransclusionParameterValues = function() {
+	var self = this,
+		values = [];
+	$tw.utils.each(Object.keys(this.stringParametersByName),function(name) {
+		values.push(self.stringParametersByName[name]);
+	});
+	return values;
 };
 
 /*

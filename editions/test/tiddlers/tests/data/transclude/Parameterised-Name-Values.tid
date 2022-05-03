@@ -28,4 +28,4 @@ title: TiddlerTwo
 _
 title: ExpectedResult
 
-<p>{zero:Jaguar}{one:Lizard}{two:Mole}</p><p>{zero:Ferret}{one:Lizard}{two:Mole}</p><p>{zero:Butterfly}{one:Moth}{two:Mole}</p><p>{zero:Beetle}{one:Scorpion}{two:Snake}</p><p>({zero:Beetle}{one:Scorpion}{two:Snake})</p>
+<p></p><p>{0:Ferret}</p><p>{0:Butterfly}{1:Moth}</p><p>{0:Beetle}{1:Scorpion}{2:Snake}</p><p>({zero:Beetle}{one:Scorpion}{two:Snake})</p>
