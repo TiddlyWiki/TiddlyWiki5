@@ -1,45 +1,40 @@
 {
- "directories": [
-  {
-   "path": "./fonts/",
-   "filesRegExp": "^.*\\.woff$",
-   "isTiddlerFile": false,
-   "fields": {
-    "title": {
-     "source": "filename",
-     "prefix": "$:/plugins/tiddlywiki/katex/fonts/"
-    },
-    "type": "application/font-woff"
-   }
-  }
- ],
- "tiddlers": [
-  {
-   "file": "katex.without-font-face.min.css",
-   "fields": {
-    "type": "text/plain",
-    "title": "$:/plugins/tiddlywiki/katex/katex.min.css"
-   }
-  },
-  {
-   "file": "katex.min.js",
-   "fields": {
-    "type": "application/javascript",
-    "title": "$:/plugins/tiddlywiki/katex/katex.min.js",
-    "module-type": "library"
-   },
-   "prefix": "(function(document) {\n",
-   "suffix": "\n})(!$tw.browser ? $tw.fakeDocument : window.document)\n"
-  },
-  {
-   "file": "contrib/mhchem.min.js",
-   "fields": {
-    "type": "application/javascript",
-    "title": "$:/plugins/tiddlywiki/katex/mhchem.min.js",
-    "module-type": "library"
-   },
-   "prefix": "(function(realRequire) {var require = function(m) {if(m===\"katex\"){m = \"$:/plugins/tiddlywiki/katex/katex.min.js\"};return realRequire(m);};",
-   "suffix": "})(require);\n"
-  }
- ]
+	"directories": [
+		{
+			"path": "./fonts/",
+			"filesRegExp": "^.*\\.woff$",
+			"isTiddlerFile": false,
+			"fields": {
+				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/katex/fonts/"},
+				"type": "application/font-woff"
+			}
+		}
+	],
+	"tiddlers": [
+		{
+			"file": "katex.without-font-face.min.css",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/katex/katex.min.css"
+			}
+		},{
+			"file": "katex.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/katex/katex.min.js",
+				"module-type": "library"
+			},
+			"prefix": "(function(document) {\n",
+			"suffix": "\n})(!$tw.browser ? $tw.fakeDocument : window.document)\n"
+		},{
+			"file": "contrib/mhchem.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/katex/mhchem.min.js",
+				"module-type": "library"
+			},
+			"prefix": "(function(realRequire) {var require = function(m) {if(m===\"katex\"){m = \"$:/plugins/tiddlywiki/katex/katex.min.js\"};return realRequire(m);};",
+			"suffix": "})(require);\n"
+		}
+	]
 }
