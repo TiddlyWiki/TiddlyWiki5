@@ -15,7 +15,7 @@
   ],
   "tiddlers": [
     {
-      "file": "katex.min.css",
+      "file": "katex.without-font-face.min.css",
       "fields": {
         "type": "text/plain",
         "title": "$:/plugins/tiddlywiki/katex/katex.min.css"

@@ -3,6 +3,13 @@ title: $:/plugins/tiddlywiki/katex/developer
 !! How to upgrade
 
 # Download latest release zip file from [[Github release|https://github.com/KaTeX/KaTeX/releases]]
-# backup the old `plugins/tiddlywiki/katex/files/tiddlywiki.files` file
+# backup the old `plugins/tiddlywiki/katex/files/tiddlywiki.files` file and `katex.without-font-face.min.css` file
 # rename extracted folder to "files" and copy it to `plugins/tiddlywiki/katex/files` (maybe delete the old folder first, to make a full overwrite).
 # create `plugins/tiddlywiki/katex/files/tiddlywiki.files` (or use the old one) and register all files in it.
+# register `katex.without-font-face.min.css` as `$:/plugins/tiddlywiki/katex/katex.min.css`, so fonts are loaded properly in tw environment
+
+!! How to test
+
+# add `"tiddlywiki/katex",` to `TiddlyWiki5/editions/tw5.com/tiddlywiki.info`
+# run `TiddlyWiki5/bin/serve.sh` in the terminal
+# test features in [[http://127.0.0.1:8080]]
