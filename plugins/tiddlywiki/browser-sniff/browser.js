@@ -42,7 +42,8 @@ exports.getInfoTiddlerFields = function() {
 				["is/sailfish","sailfish"],
 				["is/android","android"],
 				["is/windowsphone","windowsphone"],
-				["is/firefoxos","firefoxos"]
+				["is/firefoxos","firefoxos"],
+				["is/mobile","mobile"]
 			];
 		$tw.utils.each(mappings,function(mapping) {
 			var value = bowser.browser[mapping[1]];
