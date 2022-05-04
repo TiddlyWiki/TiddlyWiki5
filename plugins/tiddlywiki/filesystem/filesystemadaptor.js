@@ -34,7 +34,7 @@ FileSystemAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
 	// Create the <wiki>'s tiddlers folder if it doesn't exist
 	var err = $tw.utils.createDirectory(this.boot.wikiTiddlersPath);
 	if (err) {
-		this.displayError("Create directory failed for the wiki tiddlers path \'"+this.boot.wikiTiddlersPath+"\'",err);
+		this.displayError("Create directory failed for the wiki tiddlers path \'"+this.boot.wikiTiddlersPath+"\'",err.toString());
 	} else {
 		this.hasAccess = true;
 	}
@@ -55,7 +55,7 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	this.wiki.addTiddler(new $tw.Tiddler({
 		title: "$:/server/logs/filesystem",
 		type: "text/plain",
-		text: $tw.utils.getSystemInfo() + "\n\nSyncer/Filesystem Log:\n" + this.logger.getBuffer(),
+		text: $tw.utils.getSystemInfo() + "\n\nSynceradapter-Filesystem Log:\n" + this.logger.getBuffer(),
 		component: this.logger.componentName,
 		modified: new Date()
 	}));
@@ -113,7 +113,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					var message = "Save file failed for \'"+tiddler.fields.title+"\' and will be retried with an encoded filepath";
-					self.displayError(message,err);
+					self.displayError(message,err.toString());
 					fileInfo.filepath = path.resolve(self.boot.wikiTiddlersPath,encodeURIComponent(fileInfo.filepath));
 					try {
 						$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
@@ -136,7 +136,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			$tw.utils.cleanupTiddlerFiles(options,function(err) {
 				if(err) {
 					// Error deleting the previous file on disk, should fail gracefully
-					self.displayError("Clean up of previous file failed for \'"+options.title+"\'",err);
+					self.displayError("Clean up of previous file failed for \'"+options.title+"\'",err.toString());
 				}
 				return callback(null,fileInfo);
 			});
@@ -167,7 +167,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err) {
 			if(err) {
 				// Error deleting the file on disk, should fail gracefully
-				self.displayError("Delete file failed for \'" + title + "\'",err);
+				self.displayError("Delete file failed for \'" + title + "\'",err.toString());
 			} else {
 				self.logger.log("Deleted \'"+fileInfo.filepath+"\'");
 			}
