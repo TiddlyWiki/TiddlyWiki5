@@ -396,8 +396,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	//	the resolved wikiPath directory, or the resolved 'originalpath' directory, 
 	// then encodeURIComponent() and resolve to the current options.directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
-		encode = ("fileInfo" in options && "writeError" in options.fileInfo && options.fileInfo.writeError == true) ||
-			!(
+		encode = !(
 				writePath.indexOf($tw.boot.wikiTiddlersPath) == 0 ||
 				writePath.indexOf(path.resolve(directory)) == 0 ||
 				writePath.indexOf(path.resolve($tw.boot.wikiPath)) == 0 ||

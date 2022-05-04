@@ -22,7 +22,6 @@ function FileSystemAdaptor(options) {
 	this.boot = options.boot || $tw.boot;
 	this.logger = new $tw.utils.Logger("filesystem-server",{colour: "blue", save: true});
 	this.hasAccess = false;
-	this.hasStatus = false;
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
@@ -30,7 +29,20 @@ FileSystemAdaptor.prototype.name = "filesystem";
 FileSystemAdaptor.prototype.supportsLazyLoading = false;
 
 FileSystemAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
+	// Once the main logger is set, test for access
 	this.logger.setSaveBuffer(loggerForSaving);
+	// Create the <wiki>'s tiddlers folder if it doesn't exist
+	var err = $tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+	if (err) {
+		this.displayError("Create directory failed for the wiki tiddlers path \'"+this.boot.wikiTiddlersPath+"\'",err);
+	} else {
+		this.hasAccess = true;
+	}
+};
+
+FileSystemAdaptor.prototype.isReady = function() {
+	// The file system adaptor is always ready once it has access to the root tiddler directory
+	return this.hasAccess;
 };
 
 /*
@@ -43,25 +55,10 @@ FileSystemAdaptor.prototype.displayError = function(msg,err) {
 	this.wiki.addTiddler(new $tw.Tiddler({
 		title: "$:/server/logs/filesystem",
 		type: "text/plain",
-		text: $tw.utils.getSystemInfo() + "\n\nLog:\n" + this.logger.getBuffer(),
+		text: $tw.utils.getSystemInfo() + "\n\nSyncer/Filesystem Log:\n" + this.logger.getBuffer(),
 		component: this.logger.componentName,
 		modified: new Date()
 	}));
-};
-
-FileSystemAdaptor.prototype.isReady = function() {
-	// The file system adaptor is always ready once it has access to the root tiddler directory
-	if(!this.hasStatus) {
-		// Create the <wiki>/tiddlers folder if it doesn't exist
-		var err = $tw.utils.createDirectory(this.boot.wikiTiddlersPath);
-		if (err) {
-			this.displayError("Create directory failed for the wiki tiddlers path \'"+this.boot.wikiTiddlersPath+"\'",err);
-		} else {
-			this.hasAccess = true;
-		}
-		this.hasStatus = true;
-	}
-	return this.hasAccess;
 };
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
