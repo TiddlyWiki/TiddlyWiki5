@@ -1,4 +1,7 @@
+created: 20220504124110967
+modified: 20220504124250020
 title: HelloThere
+type: text/vnd.tiddlywiki
 
 This is a TiddlyWiki plugin for mathematical and chemical typesetting based on KaTeX from Khan Academy.
 
@@ -6,7 +9,7 @@ It is completely self-contained, and doesn't need an Internet connection in orde
 
 ! Installation
 
-To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
+To add the plugin to your own wiki, just //drag the following link to your ~TiddlyWiki browser window//.
 
 [[$:/plugins/tiddlywiki/katex]]
 
