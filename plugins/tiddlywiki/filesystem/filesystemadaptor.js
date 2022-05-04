@@ -133,7 +133,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				bootInfo: fileInfo || {},
 				title: tiddler.fields.title
 			};
-			$tw.utils.cleanupTiddlerFiles(options,function(err,fileInfo) {
+			$tw.utils.cleanupTiddlerFiles(options,function(err) {
 				if(err) {
 					// Error deleting the previous file on disk, should fail gracefully
 					self.displayError("Clean up of previous file failed for \'"+options.title+"\'",err);
@@ -150,7 +150,7 @@ Load a tiddler and invoke the callback with (err,tiddlerFields)
 We don't need to implement loading for the file system adaptor, 
 because all the tiddler files will have been loaded during the boot process.
 
-Due to possible race conditions, tiddlers should be updated from the webserver APIs.
+Due to possible race conditions, tiddlers on disk should be updated from the webserver APIs.
 */
 FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 	callback(null,null);

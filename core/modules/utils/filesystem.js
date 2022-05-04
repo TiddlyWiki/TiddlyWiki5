@@ -519,14 +519,9 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 	bootInfo = options.bootInfo || {},
 	title = options.title || "undefined";
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
-		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err) {
-			if(err) {
-				return callback(err,bootInfo);
-			}
-			return callback(null,bootInfo);
-		});
+		$tw.utils.deleteTiddlerFile(adaptorInfo,callback);
 	} else {
-		return callback(null,bootInfo);
+		return callback(null);
 	}
 };
 
