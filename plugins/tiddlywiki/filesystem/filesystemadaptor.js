@@ -20,7 +20,7 @@ function FileSystemAdaptor(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.logger = new $tw.utils.Logger("filesystem-server",{colour: "blue", save: true});
+	this.logger = new $tw.utils.Logger("syncadapter-server-filesystem",{colour: "blue", save: true});
 	this.hasAccess = false;
 }
 
