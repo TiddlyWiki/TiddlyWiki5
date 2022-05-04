@@ -109,17 +109,20 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		if(err) {
 			return callback(err);
 		}
-		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
+		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
 			if(err) {
-				var message = "Save file failed for \'"+tiddler.fields.title+"\'";
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
-					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
-					fileInfo.writeError = true;
-					self.boot.files[tiddler.fields.title] = fileInfo;
-					message = message + " and will be retried with an encoded filepath";
+					var message = "Save file failed for \'"+tiddler.fields.title+"\' and will be retried with an encoded filepath";
+					self.displayError(message,err);
+					fileInfo.filepath = path.resolve(self.boot.wikiTiddlersPath,encodeURIComponent(fileInfo.filepath));
+					try {
+						$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
+					} catch (retryErr) {
+						return callback(retryErr)
+					}
+				} else {
+					return callback(err);
 				}
-				self.displayError(message,err);
-				return callback(err);
 			}
 			self.logger.log("Saved \'"+fileInfo.filepath+"\'");
 			// Store new boot info only after successful writes

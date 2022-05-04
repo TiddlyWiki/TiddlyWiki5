@@ -431,7 +431,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 				if(err) {
 					return callback(err);
 				}
-				return callback(null,fileInfo);
+				return callback(null);
 			});
 		});
 	} else {
@@ -446,7 +446,7 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 				if(err) {
 					return callback(err);
 				}
-				return callback(null,fileInfo);
+				return callback(null);
 			}
 		);
 	}
