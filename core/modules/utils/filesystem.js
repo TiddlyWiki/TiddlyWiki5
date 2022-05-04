@@ -391,7 +391,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 		}
 		count++;
 	} while(fs.existsSync(fullPath));
-	// If the last write failed with an error, or if path does not start with:
+	// If path does not start with:
 	//	the wikiTiddlersPath directory, the resolved options.directory, 
 	//	the resolved wikiPath directory, or the resolved 'originalpath' directory, 
 	// then encodeURIComponent() and resolve to the current options.directory.
