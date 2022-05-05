@@ -27,8 +27,4 @@ Note that attributes explicitly specified take precedence over attributes with t
 ! Examples
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$set name="myTiddler" value="HelloThere">
-  <$set name="myVariable" tiddler=<<myTiddler>> field={{$:/docs/anyField!!field}}>
-    <$text text=<<myVariable>>/>
-  </$set>
-</$set>'/>
+src='<$genesis $tag="div" class="tc-thing" label="Squeak">Mouse</$genesis>'/>
