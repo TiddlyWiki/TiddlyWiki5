@@ -401,49 +401,23 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	options = options || {};
 	// Check whether this node type is defined by a custom macro definition
 	var variableDefinitionName = "<$" + parseTreeNode.type + ">";
-	if(parseTreeNode.type !== "transclude" && this.variables[variableDefinitionName] && this.variables[variableDefinitionName].value) {
+	if(!parseTreeNode.isNotRemappable && this.variables[variableDefinitionName] && this.variables[variableDefinitionName].value) {
 		var newParseTreeNode = {
 			type: "transclude",
-			attributes: {
-				"$variable": {name: "$variable", type: "string", value: variableDefinitionName}
-			},
 			children: [
 				{
 					type: "value",
-					attributes: {
-						"$name": {name: "$name", type: "string", value: "ts-body"}
-					},
 					children: parseTreeNode.children
-				},
-				{
-					type: "value",
-					attributes: {
-						"$name": {name: "$name", type: "string", value: "ts-wrapper"}
-					},
-					children: [
-						{
-							type: "setvariable",
-							attributes: {
-								"name": {name: "name", type: "string", value: variableDefinitionName},
-								"value": {name: "value", type: "string", value: ""}
-							},
-							children: [
-								{
-									type: "slot",
-									attributes: {
-										"$name": {name: "$name", type: "string", value: "ts-wrapped"}
-									}
-								}
-							]
-						}
-					]
 				}
-			]
+			],
+			isBlock: parseTreeNode.isBlock
 		};
+		$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,"$variable",variableDefinitionName);
+		$tw.utils.addAttributeToParseTreeNode(newParseTreeNode.children[0],"$name","ts-body");
 		$tw.utils.each(parseTreeNode.attributes,function(attr,name) {
 			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of transclude
 			name = name.charAt(0) === "$" ? "$" + name : name;
-			newParseTreeNode.attributes[name] = attr;
+			$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,$tw.utils.extend({},attr,{name: name}));
 		});
 		parseTreeNode = newParseTreeNode;
 	}

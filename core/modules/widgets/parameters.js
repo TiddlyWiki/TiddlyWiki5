@@ -54,8 +54,9 @@ ParametersWidget.prototype.execute = function() {
 				value = transclusionWidget.getTransclusionParameter(name,index,self.getAttribute(name));
 			self.setVariable(name,value);
 		});
-		this.setVariable("paramNames",$tw.utils.stringifyList(transclusionWidget.getTransclusionParameterNames()));
-		this.setVariable("paramValues",$tw.utils.stringifyList(transclusionWidget.getTransclusionParameterValues()));
+		$tw.utils.each(transclusionWidget.getTransclusionMetaVariables(),function(value,name) {
+			self.setVariable(name,value);
+		});
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();

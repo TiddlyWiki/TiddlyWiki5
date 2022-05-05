@@ -17,7 +17,7 @@ title: Definition
 
 \whitespace trim
 \function <$codeblock>(code)
-<$codeblock code={{{ [<code>addprefix[£]addsuffix[@]] }}}/>
+<$genesis $type="codeblock" $remappable="no" code={{{ [<code>addprefix[£]addsuffix[@]] }}}/>
 \end
 +
 title: Subject

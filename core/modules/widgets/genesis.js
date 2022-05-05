@@ -41,6 +41,7 @@ GenesisWidget.prototype.execute = function() {
 	// Collect attributes
 	this.genesisType = this.getAttribute("$type","element");
 	this.genesisTag = this.getAttribute("$tag","div");
+	this.genesisRemappable = this.getAttribute("$remappable","yes") === "yes";
 	this.genesisNames = this.getAttribute("$names","");
 	this.genesisValues = this.getAttribute("$values","");
 	// Construct parse tree
@@ -49,7 +50,8 @@ GenesisWidget.prototype.execute = function() {
 		tag: this.genesisTag,
 		attributes: {},
 		orderedAttributes: [],
-		children: this.parseTreeNode.children || []
+		children: this.parseTreeNode.children || [],
+		isNotRemappable: !this.genesisRemappable
 	}];
 	// Apply attributes in $names/$values
 	this.attributeNames = [];

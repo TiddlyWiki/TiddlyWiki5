@@ -24,9 +24,9 @@ title: TiddlerOne
 		Whale
 	</$slot>
 \end
-<$transclude $tiddler="TiddlerZero">
+<$genesis $type="transclude" $remappable="no" $$tiddler="TiddlerZero">
 	Crocodile
-</$transclude>
+</$genesis>
 +
 title: ExpectedResult
 

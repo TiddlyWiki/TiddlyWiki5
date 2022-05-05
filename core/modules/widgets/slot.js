@@ -43,13 +43,24 @@ Compute the internal state of the widget
 SlotWidget.prototype.execute = function() {
 	var self = this;
 	this.slotName = this.getAttribute("$name");
-	// Find the parent transclusion
-	var transclusionWidget = this.parentWidget;
-	while(transclusionWidget && !(transclusionWidget instanceof TranscludeWidget)) {
-		transclusionWidget = transclusionWidget.parentWidget;
+	this.slotDepth = parseInt(this.getAttribute("$depth","1"),10) || 1;
+	// Find the parent transclusions
+	var pointer = this.parentWidget,
+		depth = this.slotDepth;
+	while(pointer) {
+		if(pointer instanceof TranscludeWidget) {
+			depth--;
+			if(depth === 0) {
+				break;
+			}
+		}
+		pointer = pointer.parentWidget;
 	}
-	// Get the parse tree nodes comprising the slot contents
-	var parseTreeNodes = transclusionWidget.getTransclusionSlotValue(this.slotName,this.parseTreeNode.children);
+	var parseTreeNodes = [{type: "text", attributes: {text: {type: "string", value: "Missing slot reference!"}}}];
+	if(pointer instanceof TranscludeWidget) {
+		// Get the parse tree nodes comprising the slot contents
+		parseTreeNodes = pointer.getTransclusionSlotValue(this.slotName,this.parseTreeNode.children);
+	}
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };
@@ -59,7 +70,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 SlotWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$name"]) {
+	if(changedAttributes["$name"] || changedAttributes["$depth"]) {
 		this.refreshSelf();
 		return true;
 	}
