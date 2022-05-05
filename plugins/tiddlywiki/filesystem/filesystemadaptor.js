@@ -124,7 +124,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 					return callback(err);
 				}
 			}
-			self.logger.log("Saved \'"+fileInfo.filepath+"\'");
+			self.logger.log("Saved \'"+fileInfo.filepath+"\'");debugger;
 			// Store new boot info only after successful writes
 			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
