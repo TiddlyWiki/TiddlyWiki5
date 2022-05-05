@@ -516,8 +516,7 @@ Cleanup old files on disk, by comparing the options values:
 */
 exports.cleanupTiddlerFiles = function(options,callback) {
 	var adaptorInfo = options.adaptorInfo || {},
-	bootInfo = options.bootInfo || {},
-	title = options.title || "undefined";
+	bootInfo = options.bootInfo || {};
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
 		$tw.utils.deleteTiddlerFile(adaptorInfo,callback);
 	} else {
