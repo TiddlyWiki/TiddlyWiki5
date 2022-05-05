@@ -112,8 +112,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
-					var message = "Save file failed for '"+tiddler.fields.title+"' and will be retried with an encoded filepath";
-					self.displayError(message,err.toString());
+					self.displayError("Save file failed for '"+tiddler.fields.title+"' and will be recovered with an encoded filepath",err.toString());
 					fileInfo.filepath = path.resolve(self.boot.wikiTiddlersPath,encodeURIComponent(fileInfo.filepath));
 					try {
 						$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
@@ -124,7 +123,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 					return callback(err);
 				}
 			}
-			self.logger.log("Saved '"+fileInfo.filepath+"'");debugger;
+			self.logger.log("Saved '"+fileInfo.filepath+"'");
 			// Store new boot info only after successful writes
 			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
