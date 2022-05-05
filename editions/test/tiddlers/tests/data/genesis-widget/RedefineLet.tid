@@ -8,7 +8,7 @@ title: Output
 \whitespace trim
 \function <$let>
 \whitespace trim
-<$setmultiplevariables $names="[enlist<paramNames>]" $values="[enlist<paramValues>addprefix[--]addsuffix[--]]">
+<$setmultiplevariables $names="[enlist:raw<paramNames>]" $values="[enlist:raw<paramValues>addprefix[--]addsuffix[--]]">
 <$slot $name="ts-body"/>
 </$setmultiplevariables>
 \end
