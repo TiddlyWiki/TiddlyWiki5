@@ -20,6 +20,7 @@ describe("Utility tests", function() {
 		expect(psa(" Tiddler8")).toEqual(["Tiddler8"]);
 		expect(psa("Tiddler8 ")).toEqual(["Tiddler8"]);
 		expect(psa("Tiddler8 two")).toEqual(["Tiddler8","two"]);
+		expect(psa("Tiddler8 two [[]]")).toEqual(["Tiddler8","two",""]);
 		expect(psa(" Tiddler8 two ")).toEqual(["Tiddler8","two"]);
 		expect(psa(" Tidd\u00a0ler8 two ")).toEqual(["Tidd\u00a0ler8","two"]);
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
@@ -51,6 +52,7 @@ describe("Utility tests", function() {
 	it("should handle stringifying a string array", function() {
 		var str = $tw.utils.stringifyList;
 		expect(str([])).toEqual("");
+		expect(str([""])).toEqual("[[]]");
 		expect(str(["Tiddler8"])).toEqual("Tiddler8");
 		expect(str(["Tiddler8  "])).toEqual("[[Tiddler8  ]]");
 		expect(str(["A+B", "A-B", "A=B"])).toEqual("A+B A-B A=B");
@@ -58,7 +60,7 @@ describe("Utility tests", function() {
 		// Starting special characters aren't treated specially,
 		// even though this makes a list incompatible with a filter parser.
 		expect(str(["+T", "-T", "~T", "=T", "$T"])).toEqual("+T -T ~T =T $T");
-		expect(str(["A", "", "B"])).toEqual("A  B");
+		expect(str(["A", "", "B"])).toEqual("A [[]] B");
 	});
 
 	it("stringifyList shouldn't interfere with setting variables to negative numbers", function() {

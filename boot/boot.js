@@ -375,7 +375,7 @@ $tw.utils.stringifyList = function(value) {
 		var result = new Array(value.length);
 		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
-			if(entry.indexOf(" ") !== -1) {
+			if(entry.indexOf(" ") !== -1 || entry === "") {
 				result[t] = "[[" + entry + "]]";
 			} else {
 				result[t] = entry;
@@ -396,7 +396,7 @@ $tw.utils.parseStringArray = function(value, allowDuplicate) {
 		do {
 			match = memberRegExp.exec(value);
 			if(match) {
-				var item = match[1] || match[2];
+				var item = match[1] !== undefined ? match[1] : match[2];
 				if(item !== undefined && (!$tw.utils.hop(names,item) || allowDuplicate)) {
 					results.push(item);
 					names[item] = true;
