@@ -1,0 +1,9 @@
+caption: $:/tags/Macro/View/Body
+created: 20200103092530990
+description: marks global macros only active in View template body
+modified: 20220505082912548
+tags: SystemTags
+title: SystemTag: $:/tags/Macro/View/Body
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/Macro/View/Body` marks macros that are only made available within the main view template bodies and the preview panel.
