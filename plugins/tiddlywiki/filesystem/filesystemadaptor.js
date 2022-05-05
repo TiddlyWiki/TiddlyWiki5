@@ -34,7 +34,7 @@ FileSystemAdaptor.prototype.setLoggerSaveBuffer = function(loggerForSaving) {
 	// Create the <wiki>'s tiddlers folder if it doesn't exist
 	var err = $tw.utils.createDirectory(this.boot.wikiTiddlersPath);
 	if (err) {
-		this.displayError("Create directory failed for the wiki tiddlers path \'"+this.boot.wikiTiddlersPath+"\'",err.toString());
+		this.displayError("Create directory failed for the wiki tiddlers path '"+this.boot.wikiTiddlersPath+"'",err.toString());
 	} else {
 		this.hasAccess = true;
 	}
@@ -112,7 +112,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err) {
 			if(err) {
 				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
-					var message = "Save file failed for \'"+tiddler.fields.title+"\' and will be retried with an encoded filepath";
+					var message = "Save file failed for '"+tiddler.fields.title+"' and will be retried with an encoded filepath";
 					self.displayError(message,err.toString());
 					fileInfo.filepath = path.resolve(self.boot.wikiTiddlersPath,encodeURIComponent(fileInfo.filepath));
 					try {
@@ -124,7 +124,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 					return callback(err);
 				}
 			}
-			self.logger.log("Saved \'"+fileInfo.filepath+"\'");debugger;
+			self.logger.log("Saved '"+fileInfo.filepath+"'");debugger;
 			// Store new boot info only after successful writes
 			self.boot.files[tiddler.fields.title] = fileInfo;
 			// Cleanup duplicates if the file moved or changed extensions
@@ -136,7 +136,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			$tw.utils.cleanupTiddlerFiles(options,function(err) {
 				if(err) {
 					// Error deleting the previous file on disk, should fail gracefully
-					self.displayError("Clean up of previous file failed for \'"+options.title+"\'",err.toString());
+					self.displayError("Clean up of previous file failed for '"+options.title+"'",err.toString());
 				}
 				return callback(null,fileInfo);
 			});
@@ -167,9 +167,9 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err) {
 			if(err) {
 				// Error deleting the file on disk, should fail gracefully
-				self.displayError("Delete file failed for \'" + title + "\'",err.toString());
+				self.displayError("Delete failed for '" + title + "'",err.toString());
 			} else {
-				self.logger.log("Deleted \'"+fileInfo.filepath+"\'");
+				self.logger.log("Deleted '"+fileInfo.filepath+"'");
 			}
 			// Remove the tiddler from self.boot.files & return null adaptorInfo
 			delete self.boot.files[title];
