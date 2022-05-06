@@ -292,14 +292,17 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-		// Add a variable with a popup coordinate string for the selected node
-		variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
+		
+		if(selectedNode.offsetLeft) {
+			// Add a variable with a popup coordinate string for the selected node
+			variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
 
-		// Add variables for offset of selected node
-		variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
-		variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
-		variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
-		variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+			// Add variables for offset of selected node
+			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
+			variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
+			variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
+			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+		}
 	}
 
 	if(event && event.clientX && event.clientY) {
