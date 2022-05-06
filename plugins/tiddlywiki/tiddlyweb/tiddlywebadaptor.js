@@ -12,8 +12,10 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 /*global $tw: false */
 "use strict";
 
-var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
-	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
+TiddlyWebAdaptor.prototype.CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host";
+TiddlyWebAdaptor.prototype.DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
+TiddlyWebAdaptor.prototype.titleSyncServerFilter = "$:/config/SyncFilter";
+TiddlyWebAdaptor.prototype.titleSyncClientFilter = "$:/config/SyncClientFilter";
 
 function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
@@ -23,6 +25,8 @@ function TiddlyWebAdaptor(options) {
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
+	this.skinnyTiddlerFilter = this.wiki.getTiddlerText(this.titleSyncServerFilter);
+	this.wiki.setText("$:/config/Server/ExternalFilters/" + this.titleSyncServerFilter, null, null, "yes");
 }
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
@@ -38,7 +42,7 @@ TiddlyWebAdaptor.prototype.isReady = function() {
 };
 
 TiddlyWebAdaptor.prototype.getHost = function() {
-	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
+	var text = this.wiki.getTiddlerText(this.CONFIG_HOST_TIDDLER,this.DEFAULT_HOST_TIDDLER),
 		substitutions = [
 			{name: "protocol", value: document.location.protocol},
 			{name: "host", value: document.location.host}
@@ -167,7 +171,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		data: {
-			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]]"
+			filter: this.skinnyTiddlerFilter
 		},
 		callback: function(err,data) {
 			// Check for errors
