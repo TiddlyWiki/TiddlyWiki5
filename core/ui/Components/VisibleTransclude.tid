@@ -1,0 +1,45 @@
+title: $:/core/ui/VisibleTransclude
+
+<!--
+Import this component to make all the child transclusions visible.
+
+Block transclusions are shown in red, and inline transclusions are shown in green.
+-->
+\function <$transclude>(tiddler,$tiddler,mode,$mode)
+<!-- Replicate the logic of the transclude widget to determine the output mode, and hence the tag and colour to use for output -->
+<$let
+	mode={{{ [[$mode]is[variable]then<$mode>!is[blank]] :else[[mode]is[variable]then<mode>!is[blank]] :else[<parseAsInline>match[yes]then[inline]else[block]] }}}
+	outputTag={{{ [<mode>match[inline]then[span]else[div]] }}}
+	outputColour={{{ [<mode>match[inline]then[green]else[red]] }}}
+>
+	<!-- Use divs or spans according to the mode -->
+	<$genesis $type="element" $tag=<<outputTag>> style="color:white;padding:4px;" style.background=<<outputColour>>>
+		<$genesis $type="element" $tag=<<outputTag>> style="display: inline-block;">
+			<div style="background:white;color:black;font-size: 12px;line-height:1.2;text-align:left;font-weight:normal;padding:4px;margin:4px;">
+				<!-- Render the parameters to the transclusion -->
+				<$list filter="[enlist:raw<paramNames>]" counter="counter" emptyMessage="(none)">
+					<div>
+						<$text text=<<currentTiddler>>/><$text text=": "/><$text text={{{ [enlist:raw<paramValues>nth<counter>] }}}/>
+					</div>
+				</$list>
+			</div>
+		</$genesis>
+		<$genesis $type="element" $tag=<<outputTag>> style="background:white;color:black;padding:4px;">
+			<!-- Look for a parameter starting with $ to determine if we are in legacy mode -->
+			<$list filter="[enlist:raw<paramNames>] :filter[<currentTiddler>prefix[$]] +[limit[1]]" variable="ignore" emptyMessage="""
+				<!-- Legacy mode: we render the transclusion without a dollar sign for recursionMarker and mode -->
+				<$genesis $type="transclude" $remappable="no" $names="[enlist:raw<paramNames>]" $values="[enlist:raw<paramValues>]" recursionMarker="no" mode=<<mode>>>
+					<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
+					<$slot $name="ts-raw" $depth="2"/>
+				</$genesis>
+			""">
+				<!-- Non-legacy mode: we use dollar signs for the recursionMarker and mode -->
+				<$genesis $type="transclude" $remappable="no" $names="[enlist:raw<paramNames>]" $values="[enlist:raw<paramValues>]" $$recursionMarker="no" $$mode=<<mode>>>
+					<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
+					<$slot $name="ts-raw" $depth="2"/>
+				</$genesis>
+			</$list>
+		</$genesis>
+	</$genesis>
+<$let>
+\end

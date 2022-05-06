@@ -1,0 +1,11 @@
+title: Visible Transclusions
+tags: Learning
+
+!! Visible Transclusions
+
+Block transclusions are shown in red, and inline transclusions are shown in green.
+
+<$button>
+<$action-setfield $tiddler="$:/temp/VisibleTransclusions" tags="$:/tags/Macro/View/Body" text={{$:/core/ui/VisibleTransclude}}/>
+Click here to make transclusions visible within story river tiddlers
+</$button>
