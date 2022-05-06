@@ -48,13 +48,15 @@ TranscludeWidget.prototype.execute = function() {
 	this.sourceType = target.type;
 	this.parseAsInline = target.parseAsInline;
 	// Set context variables for recursion detection
-	var recursionMarker = this.makeRecursionMarker();
+	var recursionMarker = this.makeLegacyRecursionMarker(),
+		newRecursionMarker = this.makeRecursionMarker();
 	if(this.recursionMarker === "yes") {
 		this.setVariable("transclusion",recursionMarker);
+		this.setVariable("$transclusion",newRecursionMarker);
 	}
 	// Check for recursion
 	if(target.parser) {
-		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
+		if(this.parentWidget && this.parentWidget.hasVariable("$transclusion",newRecursionMarker)) {
 			parseTreeNodes = [{type: "element", tag: "span", attributes: {
 				"class": {type: "string", value: "tc-error"}
 			}, children: [
@@ -273,18 +275,39 @@ TranscludeWidget.prototype.getTransclusionSlotValue = function(name,defaultParse
 };
 
 /*
-Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
+Compose a string comprising the attributes and variables to identify this transclusion for recursion detection
 */
 TranscludeWidget.prototype.makeRecursionMarker = function() {
-	var attributes = Object.create(null);
+	var marker = {
+		attributes: {},
+		variables: {}
+	}
 	$tw.utils.each(this.attributes,function(value,name) {
-		attributes[name] = value;
+		marker.attributes[name] = value;
 	});
+	for(var name in this.variables) {
+		if(name !== "$transclusion") {
+			marker.variables[name] = this.getVariable(name);
+		}
+	};
+	return JSON.stringify(marker);
+};
+
+/*
+Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
+*/
+TranscludeWidget.prototype.makeLegacyRecursionMarker = function() {
 	var output = [];
 	output.push("{");
 	output.push(this.getVariable("currentTiddler",{defaultValue: ""}));
 	output.push("|");
-	output.push(JSON.stringify(attributes));
+	output.push(this.transcludeTitle || "");
+	output.push("|");
+	output.push(this.transcludeField || "");
+	output.push("|");
+	output.push(this.transcludeIndex || "");
+	output.push("|");
+	output.push(this.transcludeSubTiddler || "");
 	output.push("}");
 	return output.join("");
 };

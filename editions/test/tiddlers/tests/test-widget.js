@@ -157,7 +157,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>\n");
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>\n\n");
 	});
 
 	it("should deal with SVG elements", function() {
