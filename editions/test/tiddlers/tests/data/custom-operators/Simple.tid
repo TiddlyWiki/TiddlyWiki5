@@ -1,0 +1,16 @@
+title: CustomOperators/Simple
+description: Simple custom operator usage
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\function [multiplybytwo[]]()
+[multiply[2]]
+\end
+
+<$text text={{{ [[123]multiplybytwo[]] }}}/>
++
+title: ExpectedResult
+
+<p>246</p>

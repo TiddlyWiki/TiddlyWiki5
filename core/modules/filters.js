@@ -244,13 +244,15 @@ exports.compileFilter = function(filterString) {
 				var operands = [],
 					operatorFunction;
 				if(!operator.operator) {
+					// Use the "title" operator if no operator is specified
 					operatorFunction = filterOperators.title;
 				} else if(!filterOperators[operator.operator]) {
-					operatorFunction = filterOperators.field;
+					// Unknown operators treated as "unknown" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
+					operatorFunction = filterOperators.unknown;
 				} else {
+					// Use the operator function
 					operatorFunction = filterOperators[operator.operator];
 				}
-
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
