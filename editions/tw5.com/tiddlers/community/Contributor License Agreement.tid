@@ -1,10 +1,10 @@
 created: 20150630205511173
-modified: 20150630205632460
+modified: 20220226175543038
 tags: 
 title: Contributor License Agreement
 type: text/vnd.tiddlywiki
 
 Like other OpenSource projects, TiddlyWiki5 needs a signed contributor license agreement from individual contributors. This is a legal agreement that allows contributors to assert that they own the copyright of their contribution, and that they agree to license it to the UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
 
-* For individuals use: [[licenses/CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
-* For entities use: [[licenses/CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
+* For individuals use: [[licenses/CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/tiddlywiki-com/licenses/cla-individual.md]]
+* For entities use: [[licenses/CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/tiddlywiki-com/licenses/cla-entity.md]]

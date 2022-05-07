@@ -3,6 +3,7 @@ title: $:/snippets/viewswitcher
 \define icon()
 $:/core/images/storyview-$(storyview)$
 \end
+\whitespace trim
 <$linkcatcher to="$:/view">
 <div class="tc-chooser tc-viewswitcher">
 <$list filter="[storyviews[]]" variable="storyview">

@@ -4,6 +4,7 @@
 		"tiddlywiki/highlight",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
+		"tiddlywiki/menubar",
 		"tiddlywiki/internals"
 	],
 	"themes": [
@@ -22,7 +23,6 @@
 		"de-AT",
 		"de-DE",
 		"el-GR",
-		"en-GB",
 		"en-US",
 		"es-ES",
 		"fa-IR",

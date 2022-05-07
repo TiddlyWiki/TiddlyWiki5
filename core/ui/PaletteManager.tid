@@ -8,6 +8,7 @@ title: $:/PaletteManager
  edit $(colourName)$
 \end
 \define colour-tooltip(showhide) $showhide$ editor for $(newColourName)$ 
+
 \define resolve-colour(macrocall)
 \import $:/core/macros/utils
 \whitespace trim
@@ -15,6 +16,7 @@ title: $:/PaletteManager
 <<name>>
 </$wikify>
 \end
+
 \define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
 \define palette-manager-colour-row-segment()
 \whitespace trim
@@ -41,6 +43,7 @@ title: $:/PaletteManager
 </$set>
 </$list>
 \end
+
 \define palette-manager-colour-row()
 \whitespace trim
 <tr>
@@ -57,28 +60,30 @@ title: $:/PaletteManager
 </td>
 </tr>
 \end
+
 \define palette-manager-table()
 \whitespace trim
 <table>
 <tbody>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]indexes[]]" variable="colourName">
-<$list filter="[<currentTiddler>indexes[]removeprefix<colourName>suffix[]]" variable="ignore" emptyMessage="""
-<$list filter="[{$:/state/palettemanager/showexternal}removeprefix[yes]suffix[]]" variable="ignore">
-<<palette-manager-colour-row>>
-</$list>
-""">
+<$list
+	filter="[<currentTiddler>indexes[]removeprefix<colourName>suffix[]]"
+	variable="ignore"
+	emptyMessage="<$list filter='[{$:/state/palettemanager/showexternal}removeprefix[yes]suffix[]]' variable='ignore'><<palette-manager-colour-row>></$list>">
 <<palette-manager-colour-row>>
 </$list>
 </$list>
 </tbody>
 </table>
 \end
+\whitespace trim
 <$set name="currentTiddler" value={{$:/palette}}>
 
-<<lingo Prompt>> <$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
+<<lingo Prompt>>&#32;<$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
 
 <$list filter="[all[current]is[shadow]is[tiddler]]" variable="listItem">
 <<lingo Prompt/Modified>>
+&#32;
 <$button message="tm-delete-tiddler" param={{$:/palette}}><<lingo Reset/Caption>></$button>
 </$list>
 

@@ -1,6 +1,6 @@
 caption: Widgets
 created: 20131205160840915
-modified: 20161020210726813
+modified: 20220122193129241
 tags: WikiText
 title: Widgets in WikiText
 type: text/vnd.tiddlywiki
@@ -20,8 +20,8 @@ Note that widgets inherit all the features of [[HTML in WikiText]]:
 ** Macro invocations (eg `attr=<<myMacro>>`)
 ** Transclusions (eg, `attr={{MyTiddler!!field}}`)
 ** Filtered transclusions (eg, `attr={{{ [filter[op]] }}}`)
-* The content of a widget is parsed in inline mode unless the opening tag is followed by two linebreaks, which forces block mode
-** 'Inline mode' means that 'block mode' parse rules like headings, tables and lists are not recognised
+* The content of a widget is [[parsed|WikiText Parser Modes]] in [[inline mode|Inline Mode WikiText]] unless the opening tag is followed by two linebreaks, which forces [[block mode|Block Mode WikiText]]
+** [[inline mode|Inline Mode WikiText]] means that [[block mode|Block Mode WikiText]] parse rules like headings, tables and lists are not recognised
 
 See [[HTML in WikiText]] for more details.
 

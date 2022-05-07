@@ -2,6 +2,7 @@ title: $:/core/ui/ViewTemplate/classic
 tags: $:/tags/ViewTemplate $:/tags/EditTemplate
 
 \define lingo-base() $:/language/ClassicWarning/
+\whitespace trim
 <$list filter="[all[current]type[text/x-tiddlywiki]]">
 <div class="tc-message-box">
 

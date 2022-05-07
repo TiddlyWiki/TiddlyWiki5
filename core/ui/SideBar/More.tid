@@ -2,6 +2,7 @@ title: $:/core/ui/SideBar/More
 tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/More/Caption}}
 
+\whitespace trim
 <div class="tc-more-sidebar">
 <$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/MoreSideBar]!has[draft.of]]" default={{$:/config/DefaultMoreSidebarTab}} state="$:/state/tab/moresidebar" class="tc-vertical tc-sidebar-tabs-more" explicitState="$:/state/tab/moresidebar-1850697562"/>
 </div>

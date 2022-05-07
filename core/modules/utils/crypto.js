@@ -33,7 +33,7 @@ Attempt to extract the tiddlers from an encrypted store area using the current p
 exports.decryptStoreArea = function(encryptedStoreArea,password) {
 	var decryptedText = $tw.crypto.decrypt(encryptedStoreArea,password);
 	if(decryptedText) {
-		var json = JSON.parse(decryptedText),
+		var json = $tw.utils.parseJSONSafe(decryptedText),
 			tiddlers = [];
 		for(var title in json) {
 			if(title !== "$:/isEncrypted") {

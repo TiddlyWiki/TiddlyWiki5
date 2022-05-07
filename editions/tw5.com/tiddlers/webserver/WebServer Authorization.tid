@@ -1,17 +1,23 @@
 created: 20180630194006239
-modified: 20180904174030250
+modified: 20211122004159427
 tags: WebServer
 title: WebServer Authorization
 type: text/vnd.tiddlywiki
 
-''Authorization'' is the process of determining which resources may be accessed by a particular user. It occurs after [[authentication|WebServer Authentication]] has determined the identity of the user. TiddlyWiki's WebServer implements a simple authorization scheme which permits independent control of who has read and write access to a wiki.
+''Authorization'' is the process of determining which resources may be accessed by a particular user. It occurs after [[authentication|WebServer Authentication]] has determined the identity of the user. TiddlyWiki's WebServer implements a simple authorization scheme which permits independent control of who has administrator access to the server, and read and write access to a wiki.
 
-The WebServer parameters [[readers|WebServer Parameter: readers]] and [[writers|WebServer Parameter: writers]] each contain a comma separated list of //principals// (which is to say, either usernames or certain special tokens) which should have read or write access respectively.
+The WebServer parameters [[admin|WebServer Parameter: admin]], [[readers|WebServer Parameter: readers]] and [[writers|WebServer Parameter: writers]] each contain a comma separated list of //principals// (which is to say, either usernames or certain special tokens) which should have read or write access respectively. 
 
 The available special tokens are:
 
 * ''(anon)'' - indicates all anonymous users
 * ''(authenticated)'' - indicates all authenticated users
+
+!! Admin Functions
+
+<<.tip"""The ''(anon)'' token is not valid for the [[admin|WebServer Parameter: admin]] parameter.""">>
+
+At this time, no server functions are restricted to ''admin'' authorized users in the unmodified [[Tiddlywiki server|WebServer]]. Third party plugins can leverage this to restrict routes or commands to a subset of authorized users.
 
 !! Read-only Mode
 
@@ -38,4 +44,10 @@ In the following example, read access is granted to all authenticated users, but
 
 ```
 tiddlywiki mywikifolder --listen credentials=myusers.csv "readers=(authenticated)" writers=mary
+```
+
+In the following example, read and write access is granted to all authenticated users, but only "mary" is granted admin access:
+
+```
+tiddlywiki mywikifolder --listen credentials=myusers.csv "readers=(authenticated)" "writers=(authenticated)" admin=mary
 ```

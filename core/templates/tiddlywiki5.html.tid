@@ -6,7 +6,7 @@ title: $:/core/templates/tiddlywiki5.html
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <!--~~ Raw markup for the top of the head section ~~-->
-`{{{ [<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkupWikified/TopHead]] ||$:/core/templates/raw-static-tiddler}}}`
+`{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkupWikified/TopHead]] ||$:/core/templates/raw-static-tiddler}}}`
 <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />

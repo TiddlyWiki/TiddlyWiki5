@@ -16,21 +16,23 @@ Browser data transfer utilities, used with the clipboard and drag and drop
 Options:
 
 domNode: dom node to make draggable
+selector: CSS selector to identify element within domNode to be used as drag handle (optional)
 dragImageType: "pill", "blank" or "dom" (the default)
 dragTiddlerFn: optional function to retrieve the title of tiddler to drag
 dragFilterFn: optional function to retreive the filter defining a list of tiddlers to drag
-widget: widget to use as the contect for the filter
+widget: widget to use as the context for the filter
 */
 exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
-		domNode = options.domNode;
+		domNode = options.domNode,
+		dragHandle = options.selector && domNode.querySelector(options.selector) || domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if((domNode.tagName || "").toLowerCase() !== "a") {
-		domNode.setAttribute("draggable","true");
+		dragHandle.setAttribute("draggable","true");
 	}
 	// Add event handlers
-	$tw.utils.addEventListeners(domNode,[
+	$tw.utils.addEventListeners(dragHandle,[
 		{name: "dragstart", handlerFunction: function(event) {
 			if(event.dataTransfer === undefined) {
 				return false;
@@ -39,20 +41,26 @@ exports.makeDraggable = function(options) {
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
-			    	startActions = options.startActions;
+			    	startActions = options.startActions,
+			    	variables,
+			    	domNodeRect;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
 			var titleString = $tw.utils.stringifyList(titles);
 			// Check that we've something to drag
-			if(titles.length > 0 && event.target === domNode) {
+			if(titles.length > 0 && event.target === dragHandle) {
 				// Mark the drag in progress
 				$tw.dragInProgress = domNode;
 				// Set the dragging class on the element being dragged
 				$tw.utils.addClass(event.target,"tc-dragging");
 				// Invoke drag-start actions if given
 				if(startActions !== undefined) {
-					options.widget.invokeActionString(startActions,options.widget,event,{actionTiddler: titleString});
+					// Collect our variables
+					variables = $tw.utils.collectDOMVariables(domNode,null,event);
+					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+					variables["actionTiddler"] = titleString;
+					options.widget.invokeActionString(startActions,options.widget,event,variables);
 				}
 				// Create the drag image elements
 				dragImage = options.widget.document.createElement("div");
@@ -112,7 +120,8 @@ exports.makeDraggable = function(options) {
 				var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 					dragFilter = options.dragFilterFn && options.dragFilterFn(),
 					titles = dragTiddler ? [dragTiddler] : [],
-			    		endActions = options.endActions;
+			    		endActions = options.endActions,
+				    	variables;
 				if(dragFilter) {
 					titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 				}
@@ -120,7 +129,10 @@ exports.makeDraggable = function(options) {
 				$tw.dragInProgress = null;
 				// Invoke drag-end actions if given
 				if(endActions !== undefined) {
-					options.widget.invokeActionString(endActions,options.widget,event,{actionTiddler: titleString});
+					variables = $tw.utils.collectDOMVariables(domNode,null,event);
+					variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+					variables["actionTiddler"] = titleString;
+					options.widget.invokeActionString(endActions,options.widget,event,variables);
 				}
 				// Remove the dragging class on the element being dragged
 				$tw.utils.removeClass(event.target,"tc-dragging");
@@ -198,7 +210,7 @@ var importDataTypes = [
 ];
 
 function parseJSONTiddlers(json,fallbackTitle) {
-	var data = JSON.parse(json);
+	var data = $tw.utils.parseJSONSafe(json);
 	if(!$tw.utils.isArray(data)) {
 		data = [data];
 	}

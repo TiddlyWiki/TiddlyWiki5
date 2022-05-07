@@ -392,10 +392,10 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		rootWidget.setVariable("larger-than-18","[get[text]length[]compare:integer:gteq[18]]");
 		rootWidget.setVariable("nr","18");
 		rootWidget.setVariable("larger-than-18-with-var","[get[text]length[]compare:integer:gteq<nr>]");
-		expect(wiki.filterTiddlers("[tag[textexample]] :filter[get[text]length[]compare:integer:gteq[18]]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
-		expect(wiki.filterTiddlers("[tag[textexample]]",anchorWidget).join(",")).toBe("Sparkling water,Red wine,Cheesecake,Chocolate Cake");
-		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18>]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
-		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18-with-var>]",anchorWidget).join(",")).toBe("Red wine,Cheesecake,Chocolate Cake");
+		expect(wiki.filterTiddlers("[tag[textexample]] :filter[get[text]length[]compare:integer:gteq[18]]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
+		expect(wiki.filterTiddlers("[tag[textexample]]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine,Sparkling water");
+		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18>]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
+		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18-with-var>]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
 	});
 
 	it("should handle the :sort prefix", function() {
@@ -405,7 +405,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[textexample]] :sort:number:[get[text]length[]]").join(",")).toBe("Sparkling water,Chocolate Cake,Red wine,Cheesecake");
 		expect(wiki.filterTiddlers("[tag[textexample]] :sort:number:reverse[get[text]length[]]").join(",")).toBe("Cheesecake,Red wine,Chocolate Cake,Sparkling water");
 		expect(wiki.filterTiddlers("[tag[notatag]] :sort:number[get[price]]").join(",")).toBe("");
-		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string[{!!title}]").join(",")).toBe("Cheesecake,cheesecake,Chocolate Cake,chocolate cake,Persian love cake,Pound cake");
+		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string[{!!title}]").join(",")).toBe("cheesecake,Cheesecake,chocolate cake,Chocolate Cake,Persian love cake,Pound cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive[{!!title}]").join(",")).toBe("Cheesecake,Chocolate Cake,Persian love cake,Pound cake,cheesecake,chocolate cake");
 		expect(wiki.filterTiddlers("[tag[cakes]] :sort:string:casesensitive,reverse[{!!title}]").join(",")).toBe("chocolate cake,cheesecake,Pound cake,Persian love cake,Chocolate Cake,Cheesecake");
 	});

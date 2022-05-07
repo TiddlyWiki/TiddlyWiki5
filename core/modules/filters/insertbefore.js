@@ -20,7 +20,7 @@ exports.insertbefore = function(source,operator,options) {
 	source(function(tiddler,title) {
 		results.push(title);
 	});
-	var target = options.widget && options.widget.getVariable(operator.suffix || "currentTiddler");
+	var target = operator.operands[1] || (options.widget && options.widget.getVariable(operator.suffix || "currentTiddler"));
 	if(target !== operator.operand) {
 		// Remove the entry from the list if it is present
 		var pos = results.indexOf(operator.operand);

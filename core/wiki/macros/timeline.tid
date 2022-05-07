@@ -12,6 +12,7 @@ title: $:/core/macros/timeline
 <$view field="title"/>
 \end
 \define timeline(limit:"100",format:"DDth MMM YYYY",subfilter:"",dateField:"modified")
+\whitespace trim
 <div class="tc-timeline">
 <$list filter="[!is[system]$subfilter$has[$dateField$]!sort[$dateField$]limit[$limit$]eachday[$dateField$]]">
 <div class="tc-menu-list-item">

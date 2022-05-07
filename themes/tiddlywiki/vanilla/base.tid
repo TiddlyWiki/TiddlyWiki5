@@ -1,5 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
+code-body: yes
 
 \define custom-background-datauri()
 <$set name="background" value={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}>
@@ -331,6 +332,10 @@ table tfoot tr td {
 .tc-tiddler-body > iframe {
 	width: 100%;
 	height: 600px;
+}
+
+:root {
+	color-scheme: {{{ [{$:/palette}get[color-scheme]] ~light }}};
 }
 
 /*
@@ -1196,21 +1201,35 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame input.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor,
-.tc-tiddler-frame iframe.tc-edit-texteditor {
+.tc-tiddler-frame iframe.tc-edit-texteditor,
+.tc-tiddler-frame select.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.3em;
-	-webkit-appearance: none;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor,
+.tc-tiddler-frame iframe.tc-edit-texteditor {
+	-webkit-appearance: none;
+}
+
+.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame select.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor {
 	background-color: <<colour tiddler-editor-background>>;
 }
 
 .tc-tiddler-frame iframe.tc-edit-texteditor {
 	background-color: <<colour tiddler-background>>;
+}
+
+.tc-tiddler-frame .tc-edit-fields input.tc-edit-fieldeditor,
+.tc-tiddler-frame .tc-edit-fields select.tc-edit-fieldeditor,
+.tc-tiddler-frame .tc-edit-fields textarea.tc-edit-fieldeditor {
+	margin: 0;
+	padding: 2px 3px;
 }
 
 .tc-tiddler-frame .tc-binary-warning {
@@ -2338,7 +2357,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	border: 1px solid <<colour background>>;
-	border-bottom-none;
+	border-bottom: none;
 	background: <<colour dirty-indicator>>;
 	color: <<colour background>>;
 	fill: <<colour background>>;

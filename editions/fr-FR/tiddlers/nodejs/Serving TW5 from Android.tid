@@ -1,0 +1,47 @@
+caption: Node.js sur Termux
+color: #F06292
+created: 20200501120322327
+delivery: App with DIY steps
+description: Utiliser Node.js pour partager/créer des wikis
+fr-title: Partager TW5 depuis Android
+method: sync
+modified: 20220402105820520
+tags: Saving [[TiddlyWiki on Node.js]] Android
+title: Serving TW5 from Android
+type: text/vnd.tiddlywiki
+
+[[Termux|https://termux.com/]] est une application Android open source qui fournit un environnement Unix suffisant pour installer [[Node.js]] et des modules npm sur Android. Les utilisateurs peuvent installer et exécuter <<fr "TiddlyWiki on Node.js">> grâce à [[Termux|https://termux.com/]].
+
+!! Instructions 
+
+* Téléchargez et installez Termux sur le [Google Play Store|https://play.google.com/store/apps/details?id=com.termux]] ou sur [[Fdroid|https://f-droid.org/en/packages/com.termux/]]
+* Ouvrez Termux et exécutez les commandes suivantes une par une<<:>>
+
+  ```bash
+apt update
+apt upgrade
+apt install nodejs
+npm install -g tiddlywiki
+```
+
+* Si vous avez besoin de créer/partager ''~TiddlyWiki sur Node.js'' à partir de la mémoire interne, vous devez accorder à Termux les autorisations d'accès au stockage en exécutant la commande suivante dans Termux<<:>>
+
+```
+termux-setup-storage
+```
+* Vous pouvez maintenant créer et partager ''~TiddlyWiki sur Node.js'' à partir de la mémoire interne. Dans les exemples ci-dessous, l'utilisateur crée un nouveau wiki nommé ''monnouveauwiki'' dans son dossier interne<<:>>
+
+```
+cd storage/shared
+tiddlywiki monnouveauwiki --init server
+tiddlywiki monnouveauwiki --listen
+```
+* Naviguez vers http://127.0.0.1:8080/ avec votre navigateur web
+* A partir de là, tant que Termux fonctionne vous pouvez accéder à votre wiki à votre convenance depuis votre navigateur favori en le faisant pointer vers l'adresse et le port attendus.
+
+---
+
+* Pour plus d'informations sur ~TiddlyWiki sur Node.js, consultez <<fr "Installing TiddlyWiki on Node.js">>
+* Pour plus d'informations et d'astuces sur Termux, consultez [[le wiki Termux|https://wiki.termux.com/wiki/Main_Page]]
+
+<<.tip "Dans //Termux//, vous pouvez aussi installer //git//, //emacs// ou //vi//, afin d'éditer et maintenir les fichiers des tiddlers individuels. Vous aurez probablement besoin d'un meilleur clavier pour votre appareil, comme l'application [[Hacker's Keyboard|https://github.com/klausw/hackerskeyboard/]] ou un périphérique externe Bluetooth.">>

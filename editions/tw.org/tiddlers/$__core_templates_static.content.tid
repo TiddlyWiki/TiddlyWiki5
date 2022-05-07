@@ -1,0 +1,18 @@
+title: $:/core/templates/static.content
+
+\define tv-wikilink-template() https://tiddlywiki.org/static/$uri_doubleencoded$.html
+
+<!-- For Google, and people without JavaScript-->
+
+<$reveal default="yes" text=<<savingEmpty>> type="nomatch">
+
+It looks like this browser doesn't run JavaScript. You can use one of these static HTML versions to browse the same content:
+
+* https://tiddlywiki.org/static.html - browse individual tiddlers as separate pages
+* https://tiddlywiki.org/alltiddlers.html#HelloThere - single file containing all tiddlers
+
+---
+
+{{HelloThere}}
+
+</$reveal>

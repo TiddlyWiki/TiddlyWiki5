@@ -1,0 +1,33 @@
+caption: image
+created: 20140416160234142
+fr-title: Widget Image
+modified: 20220303235644269
+tags: Widgets
+title: ImageWidget
+
+! Introduction
+
+Le widget image affiche des images qui peuvent être désignées par une URL distante ou le titre d'un tiddler local qui contient l'image.
+
+! Contenu et attributs
+
+Le contenu du widget `<$image>` est ignoré.
+
+|!Attribut |!Description |
+|source |L'URL de l'image, ou le titre d'un tiddler image |
+|width |La largeur de l'image |
+|height |La hauteur de l'image |
+|tooltip |L'info-bulle à afficher au survol de l'image |
+|alt |Le texte alternatif associé à l'image |
+|class |Les classes CSS à assigner à l'élément `<img>` |
+
+La valeur de la largeur et de la hauteur peut être attribuée en pixels (c-à-d "23" ou "23px") ou en pourcentages (c-à-d "23%"). Ces deux attributs sont optionnels et s'ils sont absents le navigateur utilisera des règles CSS pour retailler l'image.
+
+! Images externes et champ ''_canonical_uri''
+
+Lorsqu'il est utilisé pour afficher des images contenues dans des tiddlers, le widget opère dans deux modes distincts<<:>>
+
+* Si le champ ''_canonical_uri'' est présent, il est utilisé en tant qu'attribut ''src'' de la balise `<img>` générée et le champ ''text'' est ignoré.
+* En l'absence du champ ''_canonical_uri'', le widget image génère une balise `<img>` qui encode les données de l'image directement dans une URI de type `data:`. 
+
+Plus de détails ici<<:>> <<fr ExternalImages>>.

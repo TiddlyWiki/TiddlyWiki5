@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 TiddlyDesktop ist ein Programm für Windows, Mac OS X und Linux, mit dem Sie TiddlyWiki Dateien bearbeiten können.
 
-# Installieren Sie die aktuelle ~TiddlyDesktop Version von: https://github.com/Jermolene/TiddlyDesktop/releases
+# Installieren Sie die aktuelle ~TiddlyDesktop Version von: https://github.com/TiddlyWiki/TiddlyDesktop/releases
 # Starten Sie TiddlyDesktop
 # Verwenden Sie den "browse button" um TiddlyWiki Dateien zu öffnen.
 # Speichern der Änderungen funktioniert wie gewohnt. 

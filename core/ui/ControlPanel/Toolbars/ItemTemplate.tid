@@ -3,7 +3,17 @@ title: $:/core/ui/ControlPanel/Toolbars/ItemTemplate
 \define config-title()
 $(config-base)$$(currentTiddler)$
 \end
+\whitespace trim
 
 <$draggable tiddler=<<currentTiddler>>>
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/> <span class="tc-icon-wrapper"> <$transclude field="caption"/> <i class="tc-muted">-- <$transclude field="description"/></i></span>
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/>
+&#32;
+<span class="tc-icon-wrapper">
+&#32;
+<$transclude field="caption"/>
+&#32;
+<i class="tc-muted">
+--&#32;
+<$transclude field="description"/>
+</i></span>
 </$draggable>

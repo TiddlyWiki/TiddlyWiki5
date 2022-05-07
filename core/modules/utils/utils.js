@@ -448,7 +448,7 @@ exports.formatDateString = function(date,template) {
 	// 'return raw UTC (tiddlywiki style) date string.'
 	if(t.indexOf("[UTC]") == 0 ) {
 		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
-			return $tw.utils.stringifyDate(new Date());
+			return $tw.utils.stringifyDate(date || new Date());
 		var offset = date.getTimezoneOffset() ; // in minutes
 		date = new Date(date.getTime()+offset*60*1000) ;
 		t = t.substr(5) ;

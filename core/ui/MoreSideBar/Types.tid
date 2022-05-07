@@ -2,6 +2,7 @@ title: $:/core/ui/MoreSideBar/Types
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Types/Caption}}
 
+\whitespace trim
 <$list filter={{$:/core/Filters/TypedTiddlers!!filter}}>
 <div class="tc-menu-list-item">
 <$view field="type"/>
