@@ -269,12 +269,20 @@ Widget.prototype.getStateQualifier = function(name) {
 };
 
 /*
-Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed
+Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed.
+Options include:
+filterFn: only include attributes where filterFn(name) returns true
 */
-Widget.prototype.computeAttributes = function() {
+Widget.prototype.computeAttributes = function(options) {
+	options = options || {};
 	var changedAttributes = {},
 		self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
+		if(options.filterFn) {
+			if(!options.filterFn(name)) {
+				return;
+			}
+		}
 		var value = self.computeAttribute(attribute);
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
