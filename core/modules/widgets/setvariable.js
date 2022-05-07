@@ -51,7 +51,7 @@ SetWidget.prototype.execute = function() {
 	if(this.parseTreeNode.isMacroDefinition) {
 		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,!!this.parseTreeNode.isMacroDefinition);
 	} else if(this.parseTreeNode.isFunctionDefinition) {
-		this.setVariable(this.setName,this.getValue(),undefined,undefined,{isFunctionDefinition: this.parseTreeNode.isFunctionDefinition,variableParams: this.parseTreeNode.variableParams});
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: this.parseTreeNode.isFunctionDefinition});
 	} else {
 		this.setVariable(this.setName,this.getValue());
 	}

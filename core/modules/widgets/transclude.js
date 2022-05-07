@@ -184,7 +184,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						}
 					]
 				}
-				$tw.utils.each(variableInfo.variableParams,function(param) {
+				$tw.utils.each(variableInfo.params,function(param) {
 					$tw.utils.addAttributeToParseTreeNode(parser.tree[0],param.name,param["default"])
 				});
 			}

@@ -22,7 +22,7 @@ exports.unknown = function(source,operator,options) {
 		customDefinition = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(customDefinitionTitle);
 	if(customDefinition && customDefinition.srcVariable) {
 		var variables = Object.create(null);
-		$tw.utils.each(customDefinition.srcVariable.variableParams,function(param,index) {
+		$tw.utils.each(customDefinition.srcVariable.params,function(param,index) {
 			var value = operator.operands[index];
 			if(value === undefined) {
 				value = param["default"] || "";

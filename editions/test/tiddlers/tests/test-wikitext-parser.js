@@ -122,7 +122,7 @@ describe("WikiText parser tests", function() {
 	it("should parse function definitions with no parameters", function() {
 		expect(parse("\\function myMacro\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], variableParams : [  ], isFunctionDefinition : true } ]
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isFunctionDefinition : true } ]
 
 		);
 	});
@@ -130,7 +130,7 @@ describe("WikiText parser tests", function() {
 	it("should parse single line function definitions with no parameters", function() {
 		expect(parse("\\function myMacro nothing\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], variableParams : [  ], isFunctionDefinition : true } ]
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isFunctionDefinition : true } ]
 
 		);
 	});
@@ -138,7 +138,7 @@ describe("WikiText parser tests", function() {
 	it("should parse function definitions with parameters", function() {
 		expect(parse("\\function myMacro(one,two,three,four:elephant)\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], variableParams : [ { name: 'one' }, { name: 'two' }, { name: 'three' }, { name: 'four', default: 'elephant' } ], isFunctionDefinition : true } ]
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [ { name: 'one' }, { name: 'two' }, { name: 'three' }, { name: 'four', default: 'elephant' } ], isFunctionDefinition : true } ]
 
 		);
 	});
@@ -146,7 +146,7 @@ describe("WikiText parser tests", function() {
 	it("should parse function definitions", function() {
 		expect(parse("\\function myMacro(one:'Jaguar')\n<$text text=<<one>>/>\n\\end\n\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : '<$text text=<<one>>/>' } }, children : [  ], variableParams : [ { name: 'one', "default": 'Jaguar' } ], isFunctionDefinition : true } ]
+			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : '<$text text=<<one>>/>' } }, children : [  ], params : [ { name: 'one', "default": 'Jaguar' } ], isFunctionDefinition : true } ]
 
 		);
 	});

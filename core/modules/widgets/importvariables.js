@@ -55,7 +55,6 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 						type: "set",
 						attributes: parseTreeNode.attributes,
 						params: parseTreeNode.params,
-						variableParams: parseTreeNode.variableParams,
 						isMacroDefinition: parseTreeNode.isMacroDefinition,
 						isFunctionDefinition: parseTreeNode.isFunctionDefinition
 					};

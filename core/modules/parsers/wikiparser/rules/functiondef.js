@@ -84,7 +84,7 @@ exports.parse = function() {
 			value: {type: "string", value: text}
 		},
 		children: [],
-		variableParams: params,
+		params: params,
 		isFunctionDefinition: true
 	}];
 };
