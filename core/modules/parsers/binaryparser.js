@@ -64,6 +64,8 @@ var BinaryParser = function(type,text,options) {
 		children: [warn, link]
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["application/octet-stream"] = BinaryParser;

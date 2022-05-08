@@ -74,7 +74,7 @@ describe("Tabs-macro HTML tests", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-horizontal")).toBe(expected.fields.text.replace(/\n/g,""));
 	});
 
-	it("should render 'horizontal' tabs from v5.2.2 and up with whitespace trim", function() {
+	it("should render all 'horizontal' tabs from v5.2.2 and up with whitespace trim", function() {
 		expect(wiki.renderTiddler("text/html","test-tabs-macro-horizontal-all")).toBe(expectedAll.fields.text.replace(/\n/g,""));
 	});
 

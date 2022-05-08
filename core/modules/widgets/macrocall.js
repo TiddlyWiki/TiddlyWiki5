@@ -37,7 +37,7 @@ MacroCallWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 MacroCallWidget.prototype.execute = function() {
-	// Get the parse type if specified
+	this.macroName = this.parseTreeNode.name || this.getAttribute("$name"),
 	this.parseType = this.getAttribute("$type","text/vnd.tiddlywiki");
 	this.renderOutput = this.getAttribute("$output","text/html");
 	// Merge together the parameters specified in the parse tree with the specified attributes
@@ -47,49 +47,26 @@ MacroCallWidget.prototype.execute = function() {
 			params.push({name: name, value: attribute});
 		}
 	});
-	// Get the macro value
-	var macroName = this.parseTreeNode.name || this.getAttribute("$name"),
-		variableInfo = this.getVariableInfo(macroName,{params: params}),
-		text = variableInfo.text,
-		parseTreeNodes;
-	// Are we rendering to HTML?
-	if(this.renderOutput === "text/html") {
-		// If so we'll return the parsed macro
-		// Check if we've already cached parsing this macro
-		var mode = this.parseTreeNode.isBlock ? "blockParser" : "inlineParser",
-			parser;
-		if(variableInfo.srcVariable && variableInfo.srcVariable[mode]) {
-			parser = variableInfo.srcVariable[mode];
-		} else {
-			parser = this.wiki.parseText(this.parseType,text,
-								{parseAsInline: !this.parseTreeNode.isBlock});
-			if(variableInfo.isCacheable && variableInfo.srcVariable) {
-				variableInfo.srcVariable[mode] = parser;
-			}
-		}
-		var parseTreeNodes = parser ? parser.tree : [];
-		// Wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
-		var attributes = {};
-		$tw.utils.each(variableInfo.params,function(param) {
-			var name = "__" + param.name + "__";
-			attributes[name] = {
-				name: name,
-				type: "string",
-				value: param.value
-			};
-		});
+	// Make a transclude widget
+	var positionalName = 0,
 		parseTreeNodes = [{
-			type: "vars",
-			attributes: attributes,
-			children: parseTreeNodes
+			type: "transclude",
+			isBlock: this.parseTreeNode.isBlock
 		}];
-	} else if(this.renderOutput === "text/raw") {
-		parseTreeNodes = [{type: "text", text: text}];
-	} else {
-		// Otherwise, we'll render the text
-		var plainText = this.wiki.renderText("text/plain",this.parseType,text,{parentWidget: this});
-		parseTreeNodes = [{type: "text", text: plainText}];
-	}
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$variable",this.macroName);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$type",this.parseType);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$output",this.renderOutput);
+	$tw.utils.each(params,function(param) {
+		var name = param.name;
+		if(name) {
+			if(name.charAt(0) === "$") {
+				name = "$" + name;
+			}
+			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],name,param.value);
+		} else {
+			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],(positionalName++) + "",param.value);
+		}
+	});
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };

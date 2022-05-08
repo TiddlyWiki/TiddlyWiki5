@@ -25,6 +25,8 @@ var ImageParser = function(type,text,options) {
 		element.attributes.src = {type: "string", value: "data:application/pdf;base64," + text};
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["application/pdf"] = ImageParser;

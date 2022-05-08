@@ -124,7 +124,7 @@ describe("Wiki.parseTextReference tests", function() {
 		// Non-existent subtiddler of a plugin
 		expect(parseAndGetSource("$:/ShadowPlugin","text",null,"MyMissingTiddler")).toEqual(null);
 		// Plain text tiddler
-		expect(parseAndGetSource("TiddlerNine")).toEqual(undefined);
+		expect(parseAndGetSource("TiddlerNine")).toEqual("this is plain text");
 	});
 
 });

@@ -20,6 +20,8 @@ var TextParser = function(type,text,options) {
 			language: {type: "string", value: type}
 		}
 	}];
+	this.source = text;
+	this.type = type;
 };
 
 exports["text/plain"] = TextParser;

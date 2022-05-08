@@ -44,9 +44,24 @@ TranscludeWidget.prototype.execute = function() {
 	// Get the parse tree nodes that we are transcluding
 	var target = this.getTransclusionTarget(),
 		parseTreeNodes = target.parseTreeNodes;
-	this.sourceText = target.source;
+	this.sourceText = target.text;
 	this.sourceType = target.type;
 	this.parseAsInline = target.parseAsInline;
+	// Process the transclusion according to the output type
+	switch(this.transcludeOutput || "text/html") {
+		case "text/html":
+			// No further processing required
+			break;
+		case "text/raw":
+			// Just return the raw text
+			parseTreeNodes = [{type: "text", text: this.sourceText}];
+			break;
+		default:
+			// text/plain
+			var plainText = this.wiki.renderText("text/plain",this.sourceType,this.sourceText,{parentWidget: this});
+			parseTreeNodes = [{type: "text", text: plainText}];
+			break;
+	}
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeLegacyRecursionMarker(),
 		newRecursionMarker = this.makeRecursionMarker();
@@ -91,6 +106,7 @@ TranscludeWidget.prototype.collectAttributes = function() {
 	} else {
 		this.transcludeVariable = this.getAttribute("$variable");
 		this.transcludeType = this.getAttribute("$type");
+		this.transcludeOutput = this.getAttribute("$output","text/html");
 		this.transcludeTitle = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
 		this.transcludeSubTiddler = this.getAttribute("$subtiddler");
 		this.transcludeField = this.getAttribute("$field");
@@ -157,7 +173,7 @@ TranscludeWidget.prototype.collectSlotValueParameters = function() {
 Get transcluded parse tree nodes as an object {parser:,text:,type:}
 */
 TranscludeWidget.prototype.getTransclusionTarget = function() {
-	// Parse the text reference
+	// Determine whether we're being used in inline or block mode
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
 		parseAsInline = true;
@@ -165,9 +181,11 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 		parseAsInline = false;
 	}
 	var parser;
+	// Get the parse tree
 	if(this.transcludeVariable) {
+		// Transcluding a variable
 		var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()}),
-			srcVariable = variableInfo.srcVariable;
+			srcVariable = variableInfo && variableInfo.srcVariable;
 		if(srcVariable) {
 			var mode = parseAsInline ? "inlineParser" : "blockParser";
 			if(srcVariable.isCacheable && srcVariable[mode]) {
@@ -179,6 +197,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 				}
 			}
 			if(parser) {
+				// Add parameters widget for functions
 				if(srcVariable.isFunctionDefinition) {
 					parser = {
 						tree: [
@@ -186,20 +205,24 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 								type: "parameters",
 								children: parser.tree
 							}
-						]
+						],
+						source: parser.source,
+						type: parser.type
 					}
 					$tw.utils.each(srcVariable.params,function(param) {
 						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],param.name,param["default"])
 					});
 				} else if(srcVariable.isMacroDefinition) {
-					// Wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
+					// For macros, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 					parser = {
 						tree: [
 							{
 								type: "vars",
 								children: parser.tree
 							}
-						]
+						],
+						source: parser.source,
+						type: parser.type
 					}
 					$tw.utils.each(variableInfo.params,function(param) {
 						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value)
@@ -208,6 +231,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 			}
 		}
 	} else {
+		// Transcluding a text reference
 		parser = this.wiki.parseTextReference(
 						this.transcludeTitle,
 						this.transcludeField,
@@ -217,6 +241,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							subTiddler: this.transcludeSubTiddler
 						});
 	}
+	// Return the parse tree
 	if(parser) {
 		return {
 			parser: parser,
@@ -226,6 +251,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 			type: parser.type
 		};
 	} else {
+		// If there's no parse tree then return the missing slot value
 		return {
 			parser: null,
 			parseTreeNodes: (this.slotValueParseTrees["ts-missing"] || []),
@@ -364,7 +390,7 @@ TranscludeWidget.prototype.makeLegacyRecursionMarker = function() {
 };
 
 TranscludeWidget.prototype.parserNeedsRefresh = function() {
-	// TODO: Doesn't consider transcluded variables
+	// Doesn't need to consider transcluded variables because a parent variable can't change once a widget has been created
 	var parserInfo = this.wiki.getTextReferenceParserInfo(this.transcludeTitle,this.transcludeField,this.transcludeIndex,{subTiddler:this.transcludeSubTiddler});
 	return (this.sourceText === undefined || parserInfo.sourceText !== this.sourceText || parserInfo.parserType !== this.parserType)
 };
