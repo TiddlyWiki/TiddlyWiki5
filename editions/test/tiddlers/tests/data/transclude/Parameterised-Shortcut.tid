@@ -12,7 +12,10 @@ title: Output
 
 <$transclude $variable='test' one='Ferret'/>
 <$transclude $variable='test'/>
+<<test "Rat">>
+<<test one:"Mouse">>
+
 +
 title: ExpectedResult
 
-<p>{Ferret}{Jaguar}</p>
+<p>{Ferret}{Jaguar}{Rat}{Mouse}</p>
