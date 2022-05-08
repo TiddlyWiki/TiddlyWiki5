@@ -166,27 +166,45 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	}
 	var parser;
 	if(this.transcludeVariable) {
-		var variableInfo = this.getVariableInfo(this.transcludeVariable).srcVariable;
-		if(variableInfo) {
+		var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()}),
+			srcVariable = variableInfo.srcVariable;
+		if(srcVariable) {
 			var mode = parseAsInline ? "inlineParser" : "blockParser";
-			if(variableInfo[mode]) {
-				parser = variableInfo[mode];
+			if(srcVariable.isCacheable && srcVariable[mode]) {
+				parser = srcVariable[mode];
 			} else {
-				parser = this.wiki.parseText(this.transcludeType,variableInfo.value || "",{parseAsInline: parseAsInline});
-				variableInfo[mode] = parser;
-			}
-			if(parser && variableInfo.isFunctionDefinition) {
-				parser = {
-					tree: [
-						{
-							type: "parameters",
-							children: parser.tree
-						}
-					]
+				parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline});
+				if(srcVariable.isCacheable) {
+					srcVariable[mode] = parser;
 				}
-				$tw.utils.each(variableInfo.params,function(param) {
-					$tw.utils.addAttributeToParseTreeNode(parser.tree[0],param.name,param["default"])
-				});
+			}
+			if(parser) {
+				if(srcVariable.isFunctionDefinition) {
+					parser = {
+						tree: [
+							{
+								type: "parameters",
+								children: parser.tree
+							}
+						]
+					}
+					$tw.utils.each(srcVariable.params,function(param) {
+						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],param.name,param["default"])
+					});
+				} else if(srcVariable.isMacroDefinition) {
+					// Wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
+					parser = {
+						tree: [
+							{
+								type: "vars",
+								children: parser.tree
+							}
+						]
+					}
+					$tw.utils.each(variableInfo.params,function(param) {
+						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value)
+					});
+				}
 			}
 		}
 	} else {
@@ -216,6 +234,39 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 			type: null
 		};
 	}
+};
+
+/*
+Fetch all the string parameters as an ordered array of {name:, value:} where the name is optional
+*/
+TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
+	var result = [];
+	// Collect the parameters
+	for(var name in this.stringParametersByName) {
+		var value = this.stringParametersByName[name];
+		result.push({name: name, value: value});
+	}
+	// Sort numerical parameter names first
+	result.sort(function(a,b) {
+		var aIsNumeric = !isNaN(a.name),
+			bIsNumeric = !isNaN(b.name);
+		if(aIsNumeric && bIsNumeric) {
+			return a.name - b.name;
+		} else if(aIsNumeric) {
+			return -1;
+		} else if(bIsNumeric) {
+			return 1;
+		} else {
+			return a.name === b.name ? 0 : (a.name < b.name ? -1 : 1);
+		}
+	});
+	// Remove names from numerical parameters
+	$tw.utils.each(result,function(param,index) {
+		if(!isNaN(param.name)) {
+			delete param.name;
+		}
+	});
+	return result;
 };
 
 /*

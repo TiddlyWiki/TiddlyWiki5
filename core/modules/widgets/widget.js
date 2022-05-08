@@ -122,14 +122,14 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	if(parentWidget && name in parentWidget.variables) {
 		var variable = parentWidget.variables[name],
 			originalValue = variable.value,
-			value = originalValue,
-			params = this.resolveVariableParameters(variable.params,actualParams);
-		// Substitute any parameters specified in the definition
-		$tw.utils.each(params,function(param) {
-			value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
-		});
-		// Only substitute variable references if this variable was defined with the \define pragma
+			value = originalValue;
+		// Only substitute parameter and variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
+			var params = this.resolveVariableParameters(variable.params,actualParams);
+			// Substitute any parameters specified in the definition
+			$tw.utils.each(params,function(param) {
+				value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
+			});
 			value = this.substituteVariableReferences(value,options);
 		}
 		return {

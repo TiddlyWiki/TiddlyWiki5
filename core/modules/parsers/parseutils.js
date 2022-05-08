@@ -175,7 +175,36 @@ exports.parseMacroParameter = function(source,pos) {
 };
 
 /*
-Look for a macro invocation. Returns null if not found, or {type: "macrocall", name:, parameters:, start:, end:}
+Look for a macro invocation. Returns null if not found, or {type: "transclude", attributes:, start:, end:}
+*/
+exports.parseMacroInvocationAsTransclusion = function(source,pos) {
+	var node = $tw.utils.parseMacroInvocation(source,pos);
+	if(node) {
+		var positionalName = 0,
+			transclusion = {
+				type: "transclude",
+				start: node.start,
+				end: node.end
+			};
+		$tw.utils.addAttributeToParseTreeNode(transclusion,"$variable",node.name);
+		$tw.utils.each(node.params,function(param) {
+			var name = param.name;
+			if(name) {
+				if(name.charAt(0) === "$") {
+					name = "$" + name;
+				}
+				$tw.utils.addAttributeToParseTreeNode(transclusion,{name: name,type: "string", value: param.value, start: param.start, end: param.end});
+			} else {
+				$tw.utils.addAttributeToParseTreeNode(transclusion,{name: (positionalName++) + "",type: "string", value: param.value, start: param.start, end: param.end});
+			}
+		});
+		return transclusion;
+	}
+	return node;
+};
+
+/*
+Look for a macro invocation. Returns null if not found, or {type: "macrocall", name:, params:, start:, end:}
 */
 exports.parseMacroInvocation = function(source,pos) {
 	var node = {

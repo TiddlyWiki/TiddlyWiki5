@@ -1,0 +1,26 @@
+title: Transclude/Macro/Simple
+description: Transcluding a macro
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\define mamacro(one:"red",two:"green")
+It is $one$ and $two$ or <<__one__>> and <<__two__>>.
+\end
+
+<$macrocall $name="mamacro"/>
+
+<$transclude $variable="mamacro"/>
+
+<$transclude $variable="mamacro" one="orange"/>
+
+<$transclude $variable="mamacro" 0="pink"/>
+
+<$transclude $variable="mamacro" one="purple" 1="pink"/>
+
++
+title: ExpectedResult
+
+<p>It is red and green or red and green.</p><p>It is red and green or red and green.</p><p>It is orange and green or orange and green.</p><p>It is pink and green or pink and green.</p><p>It is purple and pink or purple and pink.</p>
