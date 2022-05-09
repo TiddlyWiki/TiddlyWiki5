@@ -13,7 +13,7 @@ title: Actions
 
 \whitespace trim
 <!-- Define the <$action-mywidget> widget by defining a transcludable variable with that name -->
-\function <$action-mywidget>(one:'Jaguar')
+\procedure <$action-mywidget>(one:'Jaguar')
 \whitespace trim
 <$action-setfield $tiddler="Result" $field="text" $value=<<one>>/>
 \end

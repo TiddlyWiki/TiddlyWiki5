@@ -6,7 +6,7 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\function test(one:'Jaguar')
+\procedure test(one:'Jaguar')
 {<$text text=<<one>>/>}
 \end
 

@@ -16,7 +16,7 @@ title: Output
 title: Definition
 
 \whitespace trim
-\function <$codeblock>(code)
+\procedure <$codeblock>(code)
 <$genesis $type="codeblock" $remappable="no" code={{{ [<code>addprefix[£]addsuffix[@]] }}}/>
 \end
 +

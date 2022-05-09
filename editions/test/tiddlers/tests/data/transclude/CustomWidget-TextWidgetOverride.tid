@@ -13,7 +13,7 @@ title: TiddlerOne
 
 \whitespace trim
 <!-- Redefine the <$text> widget by defining a transcludable variable with that name -->
-\function <$text>(text:'Jaguar')
+\procedure <$text>(text:'Jaguar')
 \whitespace trim
 <$genesis $type="text" $remappable="no" text=<<text>>/>
 <$set name="<$text>" value="">

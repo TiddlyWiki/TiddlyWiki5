@@ -20,7 +20,7 @@ Export our filter function
 exports.unknown = function(source,operator,options) {
 	var customDefinitionTitle = "[" + operator.operator + "[]]",
 		customDefinition = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(customDefinitionTitle);
-	if(customDefinition && customDefinition.srcVariable) {
+	if(customDefinition && customDefinition.srcVariable && customDefinition.srcVariable.isFunctionDefinition) {
 		var variables = Object.create(null);
 		$tw.utils.each(customDefinition.srcVariable.params,function(param,index) {
 			var value = operator.operands[index];
@@ -37,7 +37,13 @@ exports.unknown = function(source,operator,options) {
 			};
 		};
 		var getVariableInfo = function(name,opts) {
-			return options.widget.getVariableInfo(name,opts);
+			if(name in variables) {
+				return {
+					text: variables[name]
+				};
+			} else {
+				return options.widget.getVariableInfo(name,opts);
+			};
 		}
 		var list = options.wiki.filterTiddlers(customDefinition.srcVariable.value,{getVariable: getVariable,getVariableInfo: getVariableInfo},source);
 		if(operator.prefix === "!") {

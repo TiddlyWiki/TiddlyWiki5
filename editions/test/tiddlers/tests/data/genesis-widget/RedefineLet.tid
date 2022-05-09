@@ -6,7 +6,7 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\function <$let>
+\procedure <$let>
 \whitespace trim
 <$setmultiplevariables $names="[enlist:raw<paramNames>]" $values="[enlist:raw<paramValues>addprefix[--]addsuffix[--]]">
 <$slot $name="ts-body"/>

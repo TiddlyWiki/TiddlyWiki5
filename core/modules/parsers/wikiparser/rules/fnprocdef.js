@@ -1,12 +1,16 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/functiondef.js
+title: $:/core/modules/parsers/wikiparser/rules/fnprocdef.js
 type: application/javascript
 module-type: wikirule
 
-Wiki pragma rule for function definitions
+Wiki pragma rule for function and procedure definitions
 
 ```
 \function name(param:defaultvalue,param2:defaultvalue)
+definition text
+\end
+
+\procedure name(param:defaultvalue,param2:defaultvalue)
 definition text
 \end
 ```
@@ -18,7 +22,7 @@ definition text
 /*global $tw: false */
 "use strict";
 
-exports.name = "functiondef";
+exports.name = "fnprocdef";
 exports.types = {pragma: true};
 
 /*
@@ -27,7 +31,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\function\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
+	this.matchRegExp = /^\\(function|procedure)\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
 };
 
 /*
@@ -37,9 +41,9 @@ exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
-	var paramString = this.match[3],
+	var paramString = this.match[4],
 		params = [];
-	if(this.match[2]) {
+	if(this.match[3]) {
 		var reParam = /\s*([^:),\s]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|([^,"'\s]+)))?/mg,
 			paramMatch = reParam.exec(paramString);
 		while(paramMatch) {
@@ -56,7 +60,7 @@ exports.parse = function() {
 	}
 	// Is this a multiline definition?
 	var reEnd;
-	if(this.match[4]) {
+	if(this.match[5]) {
 		// If so, the end of the body is marked with \end
 		reEnd = /(\r?\n\\end[^\S\n\r]*(?:$|\r?\n))/mg;
 	} else {
@@ -77,16 +81,21 @@ exports.parse = function() {
 		text = "";
 	}
 	// Save the macro definition
-	return [{
+	var parseTreeNodes = [{
 		type: "set",
 		attributes: {
-			name: {type: "string", value: this.match[1]},
+			name: {type: "string", value: this.match[2]},
 			value: {type: "string", value: text}
 		},
 		children: [],
-		params: params,
-		isFunctionDefinition: true
+		params: params
 	}];
+	if(this.match[1] === "function") {
+		parseTreeNodes[0].isFunctionDefinition = true;
+	} else if(this.match[1] === "procedure") {
+		parseTreeNodes[0].isProcedureDefinition = true;
+	}
+	return parseTreeNodes;
 };
 
 })();

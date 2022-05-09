@@ -89,6 +89,7 @@ value: value of the variable
 params: array of {name:, default:} for each parameter
 isMacroDefinition: true if the variable is set via a \define macro pragma (and hence should have variable substitution performed)
 options includes:
+	isProcedureDefinition: true if the variable is set via a \procedure pragma (and hence should not have variable substitution performed)
 	isFunctionDefinition: true if the variable is set via a \function pragma (and hence should not have variable substitution performed)
 */
 Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,options) {
@@ -97,7 +98,8 @@ Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,opti
 		value: value,
 		params: params,
 		isMacroDefinition: !!isMacroDefinition,
-		isFunctionDefinition: !!options.isFunctionDefinition
+		isFunctionDefinition: !!options.isFunctionDefinition,
+		isProcedureDefinition: !!options.isProcedureDefinition
 	};
 };
 
