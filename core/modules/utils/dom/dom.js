@@ -304,6 +304,11 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
 		}
 	}
+	
+	if(domNode && domNode.offsetWidth) {
+		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
+		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
+	}
 
 	if(event && event.clientX && event.clientY) {
 		if(selectedNode) {
