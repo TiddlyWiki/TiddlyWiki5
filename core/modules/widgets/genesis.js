@@ -70,18 +70,6 @@ GenesisWidget.prototype.execute = function() {
 		}
 		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],$tw.utils.extend({},attribute,{name: name}));
 	});
-	$tw.utils.each(this.attributes,function(value,name) {
-		if(name.charAt(0) === "$") {
-			if(name.charAt(1) === "$") {
-				// Double $$ is changed to a single $
-				name = name.substr(1);
-			} else {
-				// Single dollar is ignored
-				return;
-			}
-		}
-		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],name,value);
-	});
 	// Apply attributes in $names/$values
 	this.attributeNames = [];
 	this.attributeValues = [];
