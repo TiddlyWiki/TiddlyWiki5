@@ -45,17 +45,6 @@ body:
         - Version [e.g. v5.1.24]
         - Saving mechanism [e.g. Node.js, TiddlyDesktop, TiddlyHost etc]
         - Plugins installed [e.g. Freelinks, TiddlyMap]
-    validations:
-      required: true
-  - type: textarea
-    id: Configuration
-    attributes:
-      label: TiddlyWiki Configuration
-      description: please complete the following information
-      value: |
-        - Version [e.g. v5.1.24]
-        - Saving mechanism [e.g. Node.js, TiddlyDesktop, TiddlyHost etc]
-        - Plugins installed [e.g. Freelinks, TiddlyMap]
 
         ### Desktop (please complete the following information):
 
