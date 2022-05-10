@@ -46,7 +46,7 @@ exports.getInfoTiddlerFields = function() {
 				["is/mobile","mobile"]
 			];
 		$tw.browser = $tw.utils.extend($tw.browser, {
-			mobile: bowser.browser.mobile,
+			is: bowser.browser,
 		});
 		$tw.utils.each(mappings,function(mapping) {
 			var value = bowser.browser[mapping[1]];
