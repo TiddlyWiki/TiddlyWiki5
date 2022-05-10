@@ -63,15 +63,18 @@ TranscludeWidget.prototype.execute = function() {
 			break;
 	}
 	// Set context variables for recursion detection
-	var recursionMarker = this.makeLegacyRecursionMarker(),
-		newRecursionMarker = this.makeRecursionMarker();
+	var recursionMarker = this.makeRecursionMarker();
 	if(this.recursionMarker === "yes") {
-		this.setVariable("transclusion",recursionMarker);
-		this.setVariable("$transclusion",newRecursionMarker);
+		this.setVariable("$transclusion",recursionMarker);
+	}
+	// Set the legacy transclusion context variables only if we're not transcluding a variable
+	if(!this.transcludeVariable) {
+		var legacyRecursionMarker = this.makeLegacyRecursionMarker();
+		this.setVariable("transclusion",legacyRecursionMarker);	
 	}
 	// Check for recursion
 	if(target.parser) {
-		if(this.parentWidget && this.parentWidget.hasVariable("$transclusion",newRecursionMarker)) {
+		if(this.parentWidget && this.parentWidget.hasVariable("$transclusion",recursionMarker)) {
 			parseTreeNodes = [{type: "element", tag: "span", attributes: {
 				"class": {type: "string", value: "tc-error"}
 			}, children: [
