@@ -375,7 +375,7 @@ $tw.utils.stringifyList = function(value) {
 		var result = new Array(value.length);
 		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
-			if(entry.indexOf(" ") !== -1 || entry === "") {
+			if(entry === "" || /[^\S\xA0]/.test(entry)) {
 				result[t] = "[[" + entry + "]]";
 			} else {
 				result[t] = entry;
@@ -390,7 +390,7 @@ $tw.utils.stringifyList = function(value) {
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
 $tw.utils.parseStringArray = function(value, allowDuplicate) {
 	if(typeof value === "string") {
-		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[(.*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
+		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[([\s\S]*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
 			results = [], names = {},
 			match;
 		do {

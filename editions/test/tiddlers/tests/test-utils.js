@@ -22,6 +22,7 @@ describe("Utility tests", function() {
 		expect(psa("Tiddler8 two")).toEqual(["Tiddler8","two"]);
 		expect(psa("Tiddler8 two [[]]")).toEqual(["Tiddler8","two",""]);
 		expect(psa(" Tiddler8 two ")).toEqual(["Tiddler8","two"]);
+		expect(psa(" [[Tidd\tler8]] [[spl\nit]]")).toEqual(["Tidd\tler8","spl\nit"]);
 		expect(psa(" Tidd\u00a0ler8 two ")).toEqual(["Tidd\u00a0ler8","two"]);
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
@@ -56,6 +57,7 @@ describe("Utility tests", function() {
 		expect(str(["Tiddler8"])).toEqual("Tiddler8");
 		expect(str(["Tiddler8  "])).toEqual("[[Tiddler8  ]]");
 		expect(str(["A+B", "A-B", "A=B"])).toEqual("A+B A-B A=B");
+		expect(str(["A\nB", "A\tB"])).toEqual("[[A\nB]] [[A\tB]]");
 		expect(str(["A B"])).toEqual("[[A B]]");
 		// Starting special characters aren't treated specially,
 		// even though this makes a list incompatible with a filter parser.
