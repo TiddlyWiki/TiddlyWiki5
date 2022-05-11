@@ -17,24 +17,24 @@ Block transclusions are shown in red, and inline transclusions are shown in gree
 		<$genesis $type="element" $tag=<<outputTag>> style="display: inline-block;">
 			<div style="background:white;color:black;font-size: 12px;line-height:1.2;text-align:left;font-weight:normal;padding:4px;margin:4px;">
 				<!-- Render the parameters to the transclusion -->
-				<$list filter="[enlist:raw<paramNames>]" counter="counter" emptyMessage="(none)">
+				<$list filter="[<@params>jsonindexes[]]" emptyMessage="(none)">
 					<div>
-						<$text text=<<currentTiddler>>/><$text text=": "/><$text text={{{ [enlist:raw<paramValues>nth<counter>] }}}/>
+						<$text text=<<currentTiddler>>/><$text text=": "/><$text text={{{ [<@params>jsonget<currentTiddler>] }}}/>
 					</div>
 				</$list>
 			</div>
 		</$genesis>
 		<$genesis $type="element" $tag=<<outputTag>> style="background:white;color:black;padding:4px;">
 			<!-- Look for a parameter starting with $ to determine if we are in legacy mode -->
-			<$list filter="[enlist:raw<paramNames>] :filter[<currentTiddler>prefix[$]] +[limit[1]]" variable="ignore" emptyMessage="""
+			<$list filter="[<@params>jsonindexes[]] :filter[<currentTiddler>prefix[$]] +[limit[1]]" variable="ignore" emptyMessage="""
 				<!-- Legacy mode: we render the transclusion without a dollar sign for recursionMarker and mode -->
-				<$genesis $type="transclude" $remappable="no" $names="[enlist:raw<paramNames>]" $values="[enlist:raw<paramValues>]" recursionMarker="no" mode=<<mode>>>
+				<$genesis $type="transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" recursionMarker="no" mode=<<mode>>>
 					<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
 					<$slot $name="ts-raw" $depth="2"/>
 				</$genesis>
 			""">
 				<!-- Non-legacy mode: we use dollar signs for the recursionMarker and mode -->
-				<$genesis $type="transclude" $remappable="no" $names="[enlist:raw<paramNames>]" $values="[enlist:raw<paramValues>]" $$recursionMarker="no" $$mode=<<mode>>>
+				<$genesis $type="transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" $$recursionMarker="no" $$mode=<<mode>>>
 					<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
 					<$slot $name="ts-raw" $depth="2"/>
 				</$genesis>

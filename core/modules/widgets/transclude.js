@@ -317,30 +317,11 @@ TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaul
 Get a hashmap of the special variables to be provided by the parameters widget
 */
 TranscludeWidget.prototype.getTransclusionMetaVariables = function() {
-	return {
-		paramNames: $tw.utils.stringifyList(this.getTransclusionParameterNames()),
-		paramValues: $tw.utils.stringifyList(this.getTransclusionParameterValues()),
-		parseAsInline: this.parseAsInline ? "yes" : "no"
-	}
-};
-
-/*
-Get an array of the names of all the provided transclusion parameters
-*/
-TranscludeWidget.prototype.getTransclusionParameterNames = function() {
-	return Object.keys(this.stringParametersByName);
-};
-
-/*
-Get an array of the values of all the provided transclusion parameters
-*/
-TranscludeWidget.prototype.getTransclusionParameterValues = function() {
-	var self = this,
-		values = [];
-	$tw.utils.each(Object.keys(this.stringParametersByName),function(name) {
-		values.push(self.stringParametersByName[name] || "");
-	});
-	return values;
+	var variables = {
+			"@parseAsInline": this.parseAsInline ? "yes" : "no",
+			"@params": JSON.stringify(this.stringParametersByName)
+		};
+	return variables;
 };
 
 /*

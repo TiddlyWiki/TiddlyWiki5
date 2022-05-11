@@ -18,8 +18,8 @@ title: TiddlerOne
 
 \whitespace trim
 \parameters(zero:'Jaguar',one:'Lizard',two:'Mole')
-<$list filter="[enlist<paramNames>]" counter="counter">
-{<$text text={{{ [enlist:raw<paramNames>nth<counter>] }}}/>:<$text text={{{ [enlist:raw<paramValues>nth<counter>] }}}/>}
+<$list filter="[<@params>jsonindexes[]]">
+{<$text text=<<currentTiddler>>/>: <$text text={{{ [<@params>jsonget<currentTiddler>] }}}/>}
 </$list>
 +
 title: TiddlerTwo
@@ -30,4 +30,4 @@ title: TiddlerTwo
 +
 title: ExpectedResult
 
-<p>{0:}{1:}{2:}</p><p></p><p>{0:Ferret}</p><p>{0:Butterfly}{1:Moth}</p><p>{0:Beetle}{1:Scorpion}{2:Snake}</p><p>({zero:Beetle}{one:Scorpion}{two:Snake})</p>
+<p>{0:}{1:}{2:}</p><p></p><p>{0:Ferret}</p><p>{0:Butterfly}{1:Moth}</p><p>{0:Beetle}{1:Scorpion}{2:Snake}</p><p>({one:Scorpion}{two:Snake}{zero:Beetle})</p>

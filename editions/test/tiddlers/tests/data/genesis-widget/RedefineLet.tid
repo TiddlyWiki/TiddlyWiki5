@@ -8,7 +8,7 @@ title: Output
 \whitespace trim
 \procedure <$let>
 \whitespace trim
-<$setmultiplevariables $names="[enlist:raw<paramNames>]" $values="[enlist:raw<paramValues>addprefix[--]addsuffix[--]]">
+<$setmultiplevariables $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>addprefix[--]addsuffix[--]]">
 <$slot $name="ts-body"/>
 </$setmultiplevariables>
 \end
