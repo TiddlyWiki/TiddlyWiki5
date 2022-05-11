@@ -247,8 +247,8 @@ exports.compileFilter = function(filterString) {
 					// Use the "title" operator if no operator is specified
 					operatorFunction = filterOperators.title;
 				} else if(!filterOperators[operator.operator]) {
-					// Unknown operators treated as "unknown" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
-					operatorFunction = filterOperators.unknown;
+					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
+					operatorFunction = filterOperators["[unknown]"];
 				} else {
 					// Use the operator function
 					operatorFunction = filterOperators[operator.operator];

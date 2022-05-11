@@ -3,7 +3,9 @@ title: $:/core/modules/filters/unknown.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator for handling unknown filter operators
+Filter operator for handling unknown filter operators.
+
+Not intended to be used directly by end users, hence the square brackets around the name.
 
 \*/
 (function(){
@@ -17,7 +19,7 @@ var fieldFilterOperatorFn = require("$:/core/modules/filters/field.js").field;
 /*
 Export our filter function
 */
-exports.unknown = function(source,operator,options) {
+exports["[unknown]"] = function(source,operator,options) {
 	var customDefinitionTitle = "[" + operator.operator + "[]]",
 		customDefinition = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(customDefinitionTitle);
 	if(customDefinition && customDefinition.srcVariable && customDefinition.srcVariable.isFunctionDefinition) {
