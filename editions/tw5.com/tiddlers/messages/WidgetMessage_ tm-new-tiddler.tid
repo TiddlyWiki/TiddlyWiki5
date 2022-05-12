@@ -36,3 +36,12 @@ To create a new tiddler with given attributes rather than from a template:
 New Tiddler
 </$button>
 ```
+
+To create a new tiddler from a template with additional attributes:
+
+```
+<$button>
+<$action-sendmessage $message="tm-new-tiddler" $param=<<currentTiddler>> fieldname="field value" />
+New Tiddler
+</$button>
+```
