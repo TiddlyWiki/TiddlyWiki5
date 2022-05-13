@@ -443,7 +443,7 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 			type: "transclude",
 			children: [
 				{
-					type: "value",
+					type: "fill",
 					children: parseTreeNode.children
 				}
 			],

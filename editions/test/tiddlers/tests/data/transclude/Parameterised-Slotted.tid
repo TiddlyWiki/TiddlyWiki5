@@ -7,9 +7,9 @@ title: Output
 
 \whitespace trim
 <$transclude $tiddler='TiddlerOne' one='Ferret'>
-	<$value $name="content">
+	<$fill $name="content">
 		Hippopotamus
-	</$value>
+	</$fill>
 </$transclude>
 +
 title: TiddlerOne

@@ -40,7 +40,7 @@ TranscludeWidget.prototype.execute = function() {
 	// Get our attributes, string parameters, and slot values into properties of the widget object
 	this.collectAttributes();
 	this.collectStringParameters();
-	this.collectSlotValueParameters();
+	this.collectSlotFillParameters();
 	// Get the parse tree nodes that we are transcluding
 	var target = this.getTransclusionTarget(),
 		parseTreeNodes = target.parseTreeNodes;
@@ -129,30 +129,30 @@ TranscludeWidget.prototype.collectStringParameters = function() {
 /*
 Collect slot value parameters
 */
-TranscludeWidget.prototype.collectSlotValueParameters = function() {
+TranscludeWidget.prototype.collectSlotFillParameters = function() {
 	var self = this;
-	this.slotValueParseTrees = Object.create(null);
+	this.slotFillParseTrees = Object.create(null);
 	if(this.legacyMode) {
-		this.slotValueParseTrees["ts-missing"] = this.parseTreeNode.children;
+		this.slotFillParseTrees["ts-missing"] = this.parseTreeNode.children;
 	} else {
-		this.slotValueParseTrees["ts-raw"] = this.parseTreeNode.children;
-		var noValueWidgetsFound = true,
+		this.slotFillParseTrees["ts-raw"] = this.parseTreeNode.children;
+		var noFillWidgetsFound = true,
 			searchParseTreeNodes = function(nodes) {
 				$tw.utils.each(nodes,function(node) {
-					if(node.type === "value") {
+					if(node.type === "fill") {
 						if(node.attributes["$name"] && node.attributes["$name"].type === "string") {
 							var slotValueName = node.attributes["$name"].value;
-							self.slotValueParseTrees[slotValueName] = node.children;
+							self.slotFillParseTrees[slotValueName] = node.children;
 						}
-						noValueWidgetsFound = false;
+						noFillWidgetsFound = false;
 					} else {
 						searchParseTreeNodes(node.children);
 					}
 				});
 			};
 		searchParseTreeNodes(this.parseTreeNode.children);
-		if(noValueWidgetsFound) {
-			this.slotValueParseTrees["ts-missing"] = this.parseTreeNode.children;
+		if(noFillWidgetsFound) {
+			this.slotFillParseTrees["ts-missing"] = this.parseTreeNode.children;
 		}
 	}
 };
@@ -242,7 +242,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 		// If there's no parse tree then return the missing slot value
 		return {
 			parser: null,
-			parseTreeNodes: (this.slotValueParseTrees["ts-missing"] || []),
+			parseTreeNodes: (this.slotFillParseTrees["ts-missing"] || []),
 			parseAsInline: parseAsInline,
 			text: null,
 			type: null
@@ -312,9 +312,9 @@ TranscludeWidget.prototype.getTransclusionMetaVariables = function() {
 /*
 Fetch the value of a slot
 */
-TranscludeWidget.prototype.getTransclusionSlotValue = function(name,defaultParseTreeNodes) {
-	if(name && this.slotValueParseTrees[name]) {
-		return this.slotValueParseTrees[name];
+TranscludeWidget.prototype.getTransclusionSlotFill = function(name,defaultParseTreeNodes) {
+	if(name && this.slotFillParseTrees[name]) {
+		return this.slotFillParseTrees[name];
 	} else {
 		return defaultParseTreeNodes || [];
 	}

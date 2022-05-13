@@ -14,7 +14,7 @@ Sub-widget used by the transclude widget for specifying values for slots within 
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var ValueWidget = function(parseTreeNode,options) {
+var FillWidget = function(parseTreeNode,options) {
 	// Initialise
 	this.initialise(parseTreeNode,options);
 };
@@ -22,12 +22,12 @@ var ValueWidget = function(parseTreeNode,options) {
 /*
 Inherit from the base widget class
 */
-ValueWidget.prototype = Object.create(Widget.prototype);
+FillWidget.prototype = Object.create(Widget.prototype);
 
 /*
 Render this widget into the DOM
 */
-ValueWidget.prototype.render = function(parent,nextSibling) {
+FillWidget.prototype.render = function(parent,nextSibling) {
 	// Call the constructor
 	Widget.call(this);
 	this.parentDomNode = parent;
@@ -39,7 +39,7 @@ ValueWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-ValueWidget.prototype.execute = function() {
+FillWidget.prototype.execute = function() {
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -47,11 +47,11 @@ ValueWidget.prototype.execute = function() {
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-ValueWidget.prototype.refresh = function(changedTiddlers) {
+FillWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
-exports.value = ValueWidget;
+exports.fill = FillWidget;
 
 })();
 	

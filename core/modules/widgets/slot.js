@@ -59,7 +59,7 @@ SlotWidget.prototype.execute = function() {
 	var parseTreeNodes = [{type: "text", attributes: {text: {type: "string", value: "Missing slot reference!"}}}];
 	if(pointer instanceof TranscludeWidget) {
 		// Get the parse tree nodes comprising the slot contents
-		parseTreeNodes = pointer.getTransclusionSlotValue(this.slotName,this.parseTreeNode.children);
+		parseTreeNodes = pointer.getTransclusionSlotFill(this.slotName,this.parseTreeNode.children);
 	}
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);

@@ -13,12 +13,12 @@ title: Output
 	</$parameters>
 </$transclude>
 <$transclude $tiddler='TiddlerOne' one='Ferret'>
-	<$value $name="ts-missing">
+	<$fill $name="ts-missing">
 		<$parameters one='Ferret'>
 			Badger
 			<$text text=<<one>>/>
 		</$parameters>
-	</$value>
+	</$fill>
 </$transclude>
 <$transclude $tiddler='MissingTiddler' one='Ferret'>
 	<$parameters one='Ferret'>
@@ -27,12 +27,12 @@ title: Output
 	</$parameters>
 </$transclude>
 <$transclude $tiddler='MissingTiddler' one='Ferret'>
-	<$value $name="ts-missing">
+	<$fill $name="ts-missing">
 		<$parameters one='Ferret'>
 			Badger
 			<$text text=<<one>>/>
 		</$parameters>
-	</$value>
+	</$fill>
 </$transclude>
 +
 title: TiddlerOne

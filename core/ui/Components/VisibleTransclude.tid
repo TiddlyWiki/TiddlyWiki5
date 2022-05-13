@@ -5,7 +5,7 @@ Import this component to make all the child transclusions visible.
 
 Block transclusions are shown in red, and inline transclusions are shown in green.
 -->
-\procedure <$transclude>(tiddler,$tiddler,mode,$mode)
+\widget $transclude(tiddler,$tiddler,mode,$mode)
 <!-- Replicate the logic of the transclude widget to determine the output mode, and hence the tag and colour to use for output -->
 <$let
 	mode={{{ [[$mode]is[variable]then<$mode>!is[blank]] :else[[mode]is[variable]then<mode>!is[blank]] :else[<parseAsInline>match[yes]then[inline]else[block]] }}}
@@ -35,7 +35,7 @@ Block transclusions are shown in red, and inline transclusions are shown in gree
 			""">
 				<!-- Non-legacy mode: we use dollar signs for the recursionMarker and mode -->
 				<$genesis $type="transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" $$recursionMarker="no" $$mode=<<mode>>>
-					<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
+					<!-- Reach back up to the grandparent transclusion to get the correct slot fill value -->
 					<$slot $name="ts-raw" $depth="2"/>
 				</$genesis>
 			</$list>
