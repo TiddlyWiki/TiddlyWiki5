@@ -17,7 +17,7 @@ title: TiddlerOne
 
 \whitespace trim
 <!-- Redefine the <$transclude> widget by defining a transcludable variable with that name -->
-\procedure <$transclude>(one:'Jaguar')
+\widget $transclude(one:'Jaguar')
 \whitespace trim
 	<$text text=<<one>>/>
 	<$slot $name="body">

@@ -185,8 +185,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 				}
 			}
 			if(parser) {
-				// Add parameters widget for procedures
-				if(srcVariable.isProcedureDefinition) {
+				// Add parameters widget for procedures and custom widgets
+				if(srcVariable.isProcedureDefinition || srcVariable.isWidgetDefinition) {
 					parser = {
 						tree: [
 							{

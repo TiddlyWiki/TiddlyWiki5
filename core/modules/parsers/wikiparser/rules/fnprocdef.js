@@ -3,7 +3,7 @@ title: $:/core/modules/parsers/wikiparser/rules/fnprocdef.js
 type: application/javascript
 module-type: wikirule
 
-Wiki pragma rule for function and procedure definitions
+Wiki pragma rule for function, procedure and widget definitions
 
 ```
 \function name(param:defaultvalue,param2:defaultvalue)
@@ -11,6 +11,10 @@ definition text
 \end
 
 \procedure name(param:defaultvalue,param2:defaultvalue)
+definition text
+\end
+
+\widget $mywidget(param:defaultvalue,param2:defaultvalue)
 definition text
 \end
 ```
@@ -31,7 +35,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\(function|procedure)\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
+	this.matchRegExp = /^\\(function|procedure|widget)\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
 };
 
 /*
@@ -94,6 +98,8 @@ exports.parse = function() {
 		parseTreeNodes[0].isFunctionDefinition = true;
 	} else if(this.match[1] === "procedure") {
 		parseTreeNodes[0].isProcedureDefinition = true;
+	} else if(this.match[1] === "widget") {
+		parseTreeNodes[0].isWidgetDefinition = true;
 	}
 	return parseTreeNodes;
 };

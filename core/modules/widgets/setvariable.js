@@ -54,6 +54,8 @@ SetWidget.prototype.execute = function() {
 		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: true});
 	} else if(this.parseTreeNode.isProcedureDefinition) {
 		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true});
+	} else if(this.parseTreeNode.isWidgetDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true});
 	} else {
 		this.setVariable(this.setName,this.getValue());
 	}

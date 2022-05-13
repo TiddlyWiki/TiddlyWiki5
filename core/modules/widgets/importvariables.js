@@ -57,7 +57,8 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 						params: parseTreeNode.params,
 						isMacroDefinition: parseTreeNode.isMacroDefinition,
 						isFunctionDefinition: parseTreeNode.isFunctionDefinition,
-						isProcedureDefinition: parseTreeNode.isProcedureDefinition
+						isProcedureDefinition: parseTreeNode.isProcedureDefinition,
+						isWidgetDefinition: parseTreeNode.isWidgetDefinition
 					};
 					if (parseTreeNode.isMacroDefinition || parseTreeNode.isProcedureDefinition) {
 						// Macro definitions can be folded into

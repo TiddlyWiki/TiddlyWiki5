@@ -94,6 +94,7 @@ isMacroDefinition: true if the variable is set via a \define macro pragma (and h
 options includes:
 	isProcedureDefinition: true if the variable is set via a \procedure pragma (and hence should not have variable substitution performed)
 	isFunctionDefinition: true if the variable is set via a \function pragma (and hence should not have variable substitution performed)
+	isWidgetDefinition: true if the variable is set via a \widget pragma (and hence should not have variable substitution performed)
 */
 Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,options) {
 	options = options || {};
@@ -102,7 +103,8 @@ Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,opti
 		params: params,
 		isMacroDefinition: !!isMacroDefinition,
 		isFunctionDefinition: !!options.isFunctionDefinition,
-		isProcedureDefinition: !!options.isProcedureDefinition
+		isProcedureDefinition: !!options.isProcedureDefinition,
+		isWidgetDefinition: !!options.isWidgetDefinition
 	};
 };
 
@@ -434,8 +436,9 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var self = this;
 	options = options || {};
 	// Check whether this node type is defined by a custom macro definition
-	var variableDefinitionName = "<$" + parseTreeNode.type + ">";
-	if(!parseTreeNode.isNotRemappable && this.variables[variableDefinitionName] && this.variables[variableDefinitionName].value) {
+	var variableDefinitionName = "$" + parseTreeNode.type,
+		variableInfo = this.variables[variableDefinitionName];
+	if(!parseTreeNode.isNotRemappable && variableInfo && variableInfo.value && variableInfo.isWidgetDefinition) {
 		var newParseTreeNode = {
 			type: "transclude",
 			children: [

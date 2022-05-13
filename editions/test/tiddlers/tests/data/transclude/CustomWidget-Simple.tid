@@ -13,7 +13,7 @@ title: TiddlerOne
 
 \whitespace trim
 <!-- Define the <$mywidget> widget by defining a transcludable variable with that name -->
-\procedure <$mywidget>(one:'Jaguar')
+\widget $mywidget(one:'Jaguar')
 \whitespace trim
 <$text text=<<one>>/>
 <$slot $name="ts-body">

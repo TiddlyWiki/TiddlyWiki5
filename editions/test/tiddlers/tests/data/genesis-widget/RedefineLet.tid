@@ -6,7 +6,7 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\procedure <$let>
+\widget $let
 \whitespace trim
 <$setmultiplevariables $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>addprefix[--]addsuffix[--]]">
 <$slot $name="ts-body"/>

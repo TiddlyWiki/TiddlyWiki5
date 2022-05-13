@@ -13,10 +13,10 @@ title: TiddlerOne
 
 \whitespace trim
 <!-- Redefine the <$text> widget by defining a transcludable variable with that name -->
-\procedure <$text>(text:'Jaguar')
+\widget $text(text:'Jaguar')
 \whitespace trim
 <$genesis $type="text" $remappable="no" text=<<text>>/>
-<$set name="<$text>" value="">
+<$set name="$text" value="">
 	<$slot $name="ts-body">
 		Whale
 	</$slot>
