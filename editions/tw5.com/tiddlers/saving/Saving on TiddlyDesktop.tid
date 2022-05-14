@@ -6,7 +6,7 @@ delivery: App
 description: Custom desktop application for working with TiddlyWiki
 method: save
 modified: 20200507104332791
-tags: Saving Mac Windows Linux
+tags: Saving Mac Windows Linux [[Standalone App]]
 title: Saving on TiddlyDesktop
 type: text/vnd.tiddlywiki
 url: https://github.com/TiddlyWiki/TiddlyDesktop/releases

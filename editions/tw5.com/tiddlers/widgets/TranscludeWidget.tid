@@ -1,6 +1,6 @@
 caption: transclude
 created: 20130824142500000
-modified: 20220122190609396
+modified: 20220513114759336
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
@@ -65,7 +65,4 @@ The transclude widget allows access to the individual tiddlers stored within a [
 
 The following example will transclude the core version of the tiddler [[$:/DefaultTiddlers]] even if it has been overridden:
 
-<<wikitext-example-without-html '
-<$transclude tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/>
-
-'>>
+<<wikitext-example-without-html """<$transclude tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/>""">>
