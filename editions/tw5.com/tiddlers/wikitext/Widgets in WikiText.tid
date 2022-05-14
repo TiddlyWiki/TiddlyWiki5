@@ -1,15 +1,15 @@
 caption: Widgets
 created: 20131205160840915
-modified: 20220122193129241
+modified: 20220513113347606
 tags: WikiText
 title: Widgets in WikiText
 type: text/vnd.tiddlywiki
 
 Widgets provide rich functionality within WikiText. They have the same syntax as [[HTML elements|HTML in WikiText]], but the tag name always starts with `$`. For example:
 
-```
-<$button message="tm-close-tiddler">Close Me!</$button>
-```
+<$macrocall $name=".example" n="1"
+eg="""<$button message="tm-navigate" to="HelloThere">Open ~HelloThere</$button>
+"""/>
 
 Note that widgets inherit all the features of [[HTML in WikiText]]:
 
