@@ -6,7 +6,7 @@ delivery: App
 description: iPad/iPhone app for working with TiddlyWiki
 method: save
 modified: 20201007205336209
-tags: Saving iOS
+tags: Saving iOS [[Standalone App]]
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
 
