@@ -4,19 +4,20 @@ title: $:/plugins/tiddlywiki/katex/developer
 
 # Download latest release zip file from [[Github release|https://github.com/KaTeX/KaTeX/releases]]
 # Backup existing files
-#*`plugins/tiddlywiki/katex/files/tiddlywiki.files` file and 
-#*`katex.without-font-face.min.css` file
+#* `plugins/tiddlywiki/katex/files/tiddlywiki.files` file and 
+#* `katex.without-font-face.min.css` file
 #* Learn more at: $:/plugins/tiddlywiki/katex/ImplementationNotes
 # Rename extracted folder to "files" and 
-#*copy it to `plugins/tiddlywiki/katex/files`
-#*(maybe delete the old folder first, to make a full overwrite)
+#* copy it to `plugins/tiddlywiki/katex/files`
+#* (maybe delete the old folder first, to make a full overwrite)
+#* delete unused files in it, like `*.mjs` files
 # Create `plugins/tiddlywiki/katex/files/tiddlywiki.files`
-#*(or use the old one) and 
-#*register all needed files
-# Register 
-#*`katex.without-font-face.min.css` ''as'' 
-#*`$:/plugins/tiddlywiki/katex/katex.min.css`
-#*so fonts are loaded properly in tw environment
+#* (or use the old one) and 
+#* register all needed files
+# Register in `files/tiddlywiki.files`
+#* `katex.without-font-face.min.css` ''as'' 
+#* `$:/plugins/tiddlywiki/katex/katex.min.css`
+#* so fonts are loaded properly in tw environment
 
 
 !! How to test
@@ -26,6 +27,12 @@ To create a new "test edition" type the following command in a console window:
 <<<
 ```
 tiddlywiki test-katex --init katexdemo
+```
+
+or add `node` to execute `tiddlywiki.js`:
+
+```
+node tiddlywiki test-katex --init katexdemo
 ```
 <<<
 
@@ -39,7 +46,7 @@ Type:
 
 <<<
 ```
-tiddlywiki +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb .\test-katex\ --listen
+node tiddlywiki test-katex --listen
 ```
 <<<
 
