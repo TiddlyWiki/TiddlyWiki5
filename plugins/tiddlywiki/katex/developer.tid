@@ -10,7 +10,7 @@ title: $:/plugins/tiddlywiki/katex/developer
 # Rename extracted folder to "files" and 
 #* copy it to `plugins/tiddlywiki/katex/files`
 #* (maybe delete the old folder first, to make a full overwrite)
-#* delete unused files in it, like `*.mjs` files
+#* delete unused files in it, like `*.mjs` files and `*.md` files
 # Create `plugins/tiddlywiki/katex/files/tiddlywiki.files`
 #* (or use the old one) and 
 #* register all needed files
@@ -25,12 +25,6 @@ title: $:/plugins/tiddlywiki/katex/developer
 To create a new "test edition" type the following command in a console window:
 
 <<<
-```
-tiddlywiki test-katex --init katexdemo
-```
-
-or add `node` to execute `tiddlywiki.js`:
-
 ```
 node tiddlywiki test-katex --init katexdemo
 ```
@@ -60,3 +54,5 @@ Serving on http://127.0.0.1:8080
 <<<
 
 Test the new version in the browser at: [[http://127.0.0.1:8080]]
+
+Make sure all equations of math and chemistry are rendered properly.
