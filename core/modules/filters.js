@@ -229,6 +229,7 @@ exports.compileFilter = function(filterString) {
 	try {
 		filterParseTree = this.parseFilter(filterString);
 	} catch(e) {
+		// We do not cache this result, so it adjusts along with localization changes
 		return function(source,widget) {
 			return [$tw.language.getString("Error/Filter") + ": " + e];
 		};
@@ -340,13 +341,10 @@ exports.compileFilter = function(filterString) {
 		});
 		return results.toArray();
 	});
-	if(this.filterCacheCount >= 5000) {
-		// I doubt anyone will come close to 5000 cached filters (~7 Mb)
-		// but if we do, it's because something is dynamically creating
-		// filters, in which case, letting the cache grow indefinitely
-		// is a memory leak. The simplest solution is to just clear it
-		// if it gets too large. This'll result in a recaching every
-		// minute or so, which is fine.
+	if(this.filterCacheCount >= 2000) {
+		// To prevent memory leak, we maintain an upper limit for cache size.
+		// Reset if exceeded. This should give us 95% of the benefit
+		// that no cache limit would give us.
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
