@@ -599,19 +599,21 @@ Widget.prototype.findFirstDomNode = function() {
 /*
 Remove any DOM nodes created by this widget or its children
 */
-Widget.prototype.removeChildDomNodes = function() {
+Widget.prototype.removeChildDomNodes = function(parentRemoved) {
 	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
-	if(this.domNodes.length > 0) {
+	// If parent has already detatch its dom node from the document, we don't need to do it again.
+	if(this.domNodes.length > 0 && !parentRemoved) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
 		});
 		this.domNodes = [];
-	} else {
-		// Otherwise, ask the child widgets to delete their DOM nodes
-		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes();
-		});
+		// inform child widget to do some custom cleanup in a overrided sub-class method, and tell child widget that parent has already done the update, so children don't need to do anything.
+		parentRemoved = true;
 	}
+	// If parentRemoved is unset or false, will ask the child widgets to delete their DOM nodes
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.removeChildDomNodes(parentRemoved);
+	});
 };
 
 /*
