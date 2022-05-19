@@ -606,12 +606,24 @@ Widget.prototype.removeChildDomNodes = function() {
 			domNode.parentNode.removeChild(domNode);
 		});
 		this.domNodes = [];
+		this.destroy();
 	} else {
 		// Otherwise, ask the child widgets to delete their DOM nodes
 		$tw.utils.each(this.children,function(childWidget) {
 			childWidget.removeChildDomNodes();
 		});
 	}
+};
+
+/*
+Inform widget that extends this widget and children widgets that widget tree is about to destroy, and dom nodes are being unmounted from the document.
+*/
+Widget.prototype.destroy = function() {
+	// nothing need to do, as dom is already removed in the removeChildDomNodes
+	// we just need to inform the children
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.destroy();
+	});
 };
 
 /*
