@@ -607,7 +607,7 @@ Widget.prototype.removeChildDomNodes = function(parentRemoved) {
 			domNode.parentNode.removeChild(domNode);
 		});
 		this.domNodes = [];
-		// inform child widget to do some custom cleanup in a overrided sub-class method, and tell child widget that parent has already done the update, so children don't need to do anything.
+		// inform child widget to do some custom cleanup in a override sub-class method, and tell child widget that parent has already done the update, so children don't need to do anything.
 		parentRemoved = true;
 	}
 	// If parentRemoved is unset or false, will ask the child widgets to delete their DOM nodes
