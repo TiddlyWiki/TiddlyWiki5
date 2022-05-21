@@ -615,7 +615,8 @@ Widget.prototype.removeChildDomNodes = function() {
 Inform widget that extends this widget and children widgets that widget tree is about to destroy, and dom nodes are being unmounted from the document.
 */
 Widget.prototype.destroy = function(options) {
-	var removeDom = options && options.removeDom
+	// removeDom by default
+	var removeDom = (options && options.removeDom) || true;
 	if (removeDom) {
 		// prepare options for children, if we have removed the dom, child don't need to remove their dom
 		removeDom = !this.removeChildDomNodes();

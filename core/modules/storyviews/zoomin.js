@@ -144,7 +144,7 @@ ZoominListView.prototype.remove = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration(),
 		removeElement = function() {
-			widget.removeChildDomNodes();
+			widget.destroy();
 		};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
