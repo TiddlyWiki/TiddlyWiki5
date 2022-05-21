@@ -435,10 +435,14 @@ options include:
 Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var self = this;
 	options = options || {};
-	// Check whether this node type is defined by a custom macro definition
+	// Check whether this node type is defined by a custom widget definition
 	var variableDefinitionName = "$" + parseTreeNode.type,
-		variableInfo = this.variables[variableDefinitionName];
-	if(!parseTreeNode.isNotRemappable && variableInfo && variableInfo.value && variableInfo.isWidgetDefinition) {
+		variableInfo = this.variables[variableDefinitionName],
+		isOverrideable = function() {
+			// Widget is overrideable if it has a double dollar user defined name, or if it is an existing JS widget
+			return parseTreeNode.type.charAt(0) === "$" || !!self.widgetClasses[parseTreeNode.type];
+		};
+	if(!parseTreeNode.isNotRemappable && isOverrideable() && variableInfo && variableInfo.value && variableInfo.isWidgetDefinition) {
 		var newParseTreeNode = {
 			type: "transclude",
 			children: [

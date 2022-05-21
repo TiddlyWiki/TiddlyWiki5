@@ -93,9 +93,6 @@ exports.parseTag = function(source,pos,options) {
 		return null;
 	}
 	node.tag = token.match[1];
-	if(node.tag.slice(1).indexOf("$") !== -1) {
-		return null;
-	}
 	if(node.tag.charAt(0) === "$") {
 		node.type = node.tag.substr(1);
 	}
