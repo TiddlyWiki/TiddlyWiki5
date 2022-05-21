@@ -148,7 +148,8 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
 	return {
-		text: this.evaluateMacroModule(name,actualParams,options.defaultValue)
+		text: this.evaluateMacroModule(name,actualParams,options.defaultValue),
+		srcVariable: {}
 	};
 };
 

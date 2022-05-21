@@ -200,8 +200,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 					$tw.utils.each(srcVariable.params,function(param) {
 						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],param.name,param["default"])
 					});
-				} else if(srcVariable.isMacroDefinition) {
-					// For macros, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
+				} else {
+					// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 					parser = {
 						tree: [
 							{
