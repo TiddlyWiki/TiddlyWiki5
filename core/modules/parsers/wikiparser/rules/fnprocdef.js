@@ -101,6 +101,9 @@ exports.parse = function() {
 	} else if(this.match[1] === "widget") {
 		parseTreeNodes[0].isWidgetDefinition = true;
 	}
+	if(this.parser.configTrimWhiteSpace) {
+		parseTreeNodes[0].configTrimWhiteSpace = true;
+	}
 	return parseTreeNodes;
 };
 

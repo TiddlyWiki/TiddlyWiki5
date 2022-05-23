@@ -988,7 +988,8 @@ exports.parseText = function(type,text,options) {
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
 		wiki: this,
-		_canonical_uri: options._canonical_uri
+		_canonical_uri: options._canonical_uri,
+		configTrimWhiteSpace: options.configTrimWhiteSpace
 	});
 };
 

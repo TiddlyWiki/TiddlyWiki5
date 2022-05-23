@@ -53,9 +53,9 @@ SetWidget.prototype.execute = function() {
 	} else if(this.parseTreeNode.isFunctionDefinition) {
 		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: true});
 	} else if(this.parseTreeNode.isProcedureDefinition) {
-		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true});
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
 	} else if(this.parseTreeNode.isWidgetDefinition) {
-		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true});
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
 	} else {
 		this.setVariable(this.setName,this.getValue());
 	}

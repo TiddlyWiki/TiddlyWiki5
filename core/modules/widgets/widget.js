@@ -104,7 +104,8 @@ Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,opti
 		isMacroDefinition: !!isMacroDefinition,
 		isFunctionDefinition: !!options.isFunctionDefinition,
 		isProcedureDefinition: !!options.isProcedureDefinition,
-		isWidgetDefinition: !!options.isWidgetDefinition
+		isWidgetDefinition: !!options.isWidgetDefinition,
+		configTrimWhiteSpace: !!options.configTrimWhiteSpace
 	};
 };
 

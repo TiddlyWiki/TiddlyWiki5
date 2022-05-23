@@ -179,7 +179,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 			if(srcVariable.isCacheable && srcVariable[mode]) {
 				parser = srcVariable[mode];
 			} else {
-				parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline});
+				parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
 				if(srcVariable.isCacheable) {
 					srcVariable[mode] = parser;
 				}
