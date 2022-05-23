@@ -3,13 +3,120 @@ tags: $:/tags/EditPreview
 list-after: $:/core/ui/EditTemplate/body/preview/output
 caption: parse tree
 
-\define preview(mode)
-<$wikify name="preview-text" text={{!!text}} type={{!!type}} mode="$mode$" output="parsetree">
-<pre>
-<code>
-<$text text=<<preview-text>>/>
-</code>
-</pre>
+\procedure preview-node-properties(node)
+<$let excludeProperties="text type tag children attributes orderedAttributes">
+<$list filter="[<node>jsonindexes[]] -[subfilter<excludeProperties>] +[limit[1]]" variable="ignore">
+<table>
+<tbody>
+<$list filter="[<node>jsonindexes[]] -[subfilter<excludeProperties>] +[sort[]]" variable="index">
+<tr>
+<td>
+<$text text=<<index>>/>
+</td>
+<td>
+<$text text={{{ [<node>jsonget<index>] }}}/>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>
+</$list>
+</$let>
+\end
+
+\procedure preview-node-attribute-string(attribute)
+<$text text={{{ [<attribute>jsonget[value]] }}}/>
+\end
+
+\procedure preview-node-attribute-indirect(attribute)
+{{<$text text={{{ [<attribute>jsonget[textReference]] }}}/>}}
+\end
+
+\procedure preview-node-attribute-macro(attribute)
+\whitespace trim
+&lt;&lt;
+<$text text={{{ [<attribute>jsonget[value],[name]] }}}/>
+<$list filter="[<attribute>jsonindexes[value],[params]]" variable="index">
+&nbsp;
+<$list filter="[<attribute>jsonget[value],[params],<index>,[name]]" variable="ignore">
+<$text text={{{ [<attribute>jsonget[value],[params],<index>,[name]] }}}/>
+:
+</$list>
+<$text text={{{ [<attribute>jsonget[value],[params],<index>,[value]] }}}/>
+</$list>
+>>
+\end
+
+\procedure preview-node-attributes(node)
+<$list filter="[<node>jsonindexes[attributes]limit[1]]" variable="ignore">
+<table>
+<tbody>
+<$list filter="[<node>jsonindexes[attributes]sort[]]" variable="index">
+<tr>
+<td>
+<$text text=<<index>>/>
+</td>
+<td>
+<$let type={{{ [<node>jsonget[attributes],<index>,[type]] }}}>
+<$transclude $variable={{{ [<type>match[string]then[preview-node-attribute-string]] :else[<type>match[indirect]then[preview-node-attribute-indirect]] :else[<type>match[macro]then[preview-node-attribute-macro]] }}} attribute={{{ [<node>jsonextract[attributes],<index>] }}}/>
+</$let>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>
+</$list>
+\end
+
+\procedure preview-node-children(node)
+<div style="padding:4px 4px 0 4px;">
+<$transclude $variable="preview-node-properties" node=<<node>>/>
+<$transclude $variable="preview-node-attributes" node=<<node>>/>
+<$transclude $variable="preview-node-list" nodeList={{{ [<node>jsonextract[children]] }}}/>
+</div>
+\end
+
+\procedure preview-node-title-widget(node)
+<div style="border:2px solid red;margin:4px;">
+<div style="background:red;color:white;padding:4px;">
+<$<$text text={{{ [<node>jsonget[type]] }}}/>>
+</div>
+<$transclude $variable="preview-node-children" node=<<node>>/>
+</div>
+\end
+
+\procedure preview-node-title-element(node)
+<div style="border:2px solid purple;margin:4px;">
+<div style="background:purple;color:white;padding:4px;">
+&lt;<$text text={{{ [<node>jsonget[tag]] }}}/>>
+</div>
+<$transclude $variable="preview-node-children" node=<<node>>/>
+</div>
+\end
+
+\procedure preview-node-title-text(node)
+<div style="border:2px solid green;margin:4px;">
+<div style="background:green;color:white;padding:4px;">
+<span style="color:#ff0;font-weight:bold;">"</span><span style="white-space:pre-wrap;"><$text text={{{ [<node>jsonget[text]] }}}/></span><span style="color:#ff0;font-weight:bold;">"</span>
+</div>
+</div>
+\end
+
+\procedure preview-node(node)
+<$let type={{{ [<node>jsonget[type]] }}}>
+<$transclude $variable={{{ [<type>match[element]then[preview-node-title-element]] :else[<type>match[text]then[preview-node-title-text]] :else[[preview-node-title-widget]] }}} node=<<node>>/>
+</$let>
+\end
+
+\procedure preview-node-list(nodeList)
+<$list filter="[<nodeList>jsonindexes[]]" variable="index">
+<$transclude $variable="preview-node" node={{{ [<nodeList>jsonextract<index>] }}}/>
+</$list>
+\end
+
+\procedure preview(mode)
+<$wikify name="preview-json" text={{!!text}} type={{!!type}} mode=<<mode>> output="parsetree">
+<$transclude $variable="preview-node-list" nodeList=<<preview-json>>/>
 </$wikify>
 \end
 
