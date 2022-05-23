@@ -96,6 +96,20 @@ exports.repeat = function(str,count) {
 };
 
 /*
+Check if a string starts with another string
+*/
+exports.startsWith = function(str,search) {
+	return str.substring(0, search.length) === search;
+};
+
+/*
+Check if a string ends with another string
+*/
+exports.endsWith = function(str,search) {
+	return str.substring(str.length - search.length) === search;
+};
+
+/*
 Trim whitespace from the start and end of a string
 Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
 */

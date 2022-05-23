@@ -1,0 +1,28 @@
+caption: mode d'analyse en ligne
+created: 20220111000108618
+fr-title: WikiTexte en mode « en ligne »
+modified: 20220421231003677
+tags: [[WikiText Parser Modes]]
+title: Inline Mode WikiText
+type: text/vnd.tiddlywiki
+
+Une partie du <<fr WikiText>> n'est reconnue que quand l'interpréteur est en mode <<gf "en ligne">>.
+
+Ces expressions en <<fr WikiText>> n'ont pas besoin d'occuper toute une ligne de texte. Elles n'ont pas besoin non plus de tenir en entier sur une seule ligne, mais <<.em peuvent>> couvrir une ligne complète. De ce fait, plusieurs de ces expressions peuvent apparaître au sein de la même ligne. En d'autres termes, les fins de lignes ne sont pas prises en compte quand l'interpréteur cherche à trouver le début et la fin de ces expressions <<fr WikiText>>. Quand l'interpréteur est en mode <<gf "en ligne">>, il reconnaît les syntaxes des expressions <<fr WikiText>> suivantes<<:>>
+
+* <<fr "Dashes in WikiText">>
+* <<fr "Formatting in WikiText">>
+* <<fr "HTML in WikiText">>
+* <<fr "Images in WikiText">>
+* <<fr "Linking in WikiText">>
+* <<fr "Macro Calls in WikiText">>
+* <<fr "Styles and Classes in WikiText">> (version mono-ligne seulement)
+* <<fr "Transclusion in WikiText">>
+* <<fr "Variables in WikiText">>
+* <<fr "Widgets in WikiText">>
+
+<<.tip """Un [[appel de macro|Macro Calls in WikiText]] ou une  [[transclusion en WikiTexte|Transclusion in WikiText]] sont reconnus en ''mode bloc'' si l'appel de macro ou la transclusion occupent une ligne complète.""">>
+
+<<.tip """Techniquement, les autres expressions <<fr WikiText>> en ''mode en ligne'' ne sont reconnues <<.em que>> quand l'interpréteur est en ''mode en ligne''. Toutefois, leurs balises d'ouverture vont déclencher le début d'un [[paragraphe|Paragraphs in WikiText]], ce qui va automatiquement faire basculer l'interpréteur en ''mode en ligne''. De ce fait, en pratique il est aussi simple de considérer que ces expressions sont reconnues par l'interpréteur aussi bien en ''mode bloc'' qu'en ''mode en ligne''.""">>
+
+Pendant le traitement du texte //inclus// dans certaines de ces expressions <<fr WikiText>>, l'interpréteur [[ignorera les syntaxes WikiTexte|Places where the parser ignores WikiText]]. Mais pour le reste de ces expressions <<fr WikiText>>, l'interpréteur continuera l'analyse en ''mode en ligne'' du texte //inclus//, ce qui peut l'amener à rencontrer un contenu qui le fait [[basculer en mode bloc|WikiText parser mode transitions]].

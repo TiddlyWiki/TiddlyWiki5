@@ -1,0 +1,14 @@
+caption: mode d'analyse ignoré
+created: 20220111000929700
+fr-title: Endroits où le WikiTexte est ignoré
+modified: 20220421200127071
+tags: [[WikiText Parser Modes]]
+title: Places where the parser ignores WikiText
+type: text/vnd.tiddlywiki
+
+Le texte contenu dans les constructions suivantes est survolé par l'interpréteur sans analyse du <<fr WikiText>><<:>>
+
+|<<fr "Code Blocks in WikiText">>|L'une des fonctions principales des blocs de code est de supprimer l'analyse du <<fr WikiText>>. Dès que le bloc de code commence l'interpréteur arrête l'analyse du <<fr WikiText>> jusqu'à la fin du bloc.|
+|<<fr "Images in WikiText">>|`[[img|texte littéral de lien image]]` - le texte inclus entre crochets est ignoré, ce qui signifie par exemple que ni les [[transclusions|Transclusion in WikiText]] ni les [[appels de macros|Macro Calls in WikiText]] ne peuvent être utilisés pour construire le lien dynamiquement.|
+|<<fr "Linking in WikiText">>|`[[cible littérale du lien|intitulé littéral du lien]]` - le texte inclus entre crochets est ignoré, ce qui signifie par exemple que ni les [[transclusions|Transclusion in WikiText]] ni les [[appels de macros|Macro Calls in WikiText]] ne peuvent être utilisés pour construire la cible ou l'intitulé du lien dynamiquement.|
+|<<fr "Macro Calls in WikiText">>|`<<maMacro ''pas-en-gras'' "texte littéral" "<<expansion-de-macro-ignorée>>" {{transclusion-ignorée}}>>` - pour traiter le texte inclus dans un appel de macro, l'interpréteur suit des règles particulières de détection des arguments de macros. Ces règles ne permettent pas d'analyser le <<fr WikiText>>, mais après la substitution des arguments dans la définition de la macro, le résultat est analysé à l'aide des [[règles normales|WikiText Parser Modes]]. Le <<fr WikiText>> sera donc interprété ultérieurement dans le résultat.|

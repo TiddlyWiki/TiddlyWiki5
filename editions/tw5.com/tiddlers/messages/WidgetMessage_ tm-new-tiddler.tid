@@ -1,6 +1,6 @@
 caption: tm-new-tiddler
 created: 20140226194405353
-modified: 20141107132122081
+modified: 20220521143507491
 tags: Messages navigator-message
 title: WidgetMessage: tm-new-tiddler
 type: text/vnd.tiddlywiki
@@ -28,7 +28,7 @@ To make a button that creates new tiddlers tagged "task", create a tiddler calle
 <$button message="tm-new-tiddler" param="TaskTemplate">New Task</$button>
 ```
 
-To create a new tiddler with given attributes rather than from a template:
+To create a new tiddler with explicit parameters rather than by cloning a template tiddler:
 
 ```
 <$button>
@@ -36,3 +36,12 @@ To create a new tiddler with given attributes rather than from a template:
 New Tiddler
 </$button>
 ```
+
+ To create a new tiddler from a template with additional parameters:
+
+```
+ <$button>
+ <$action-sendmessage $message="tm-new-tiddler" $param=<<currentTiddler>> fieldname="field value"/>
+ New Tiddler
+ </$button>
+ ```

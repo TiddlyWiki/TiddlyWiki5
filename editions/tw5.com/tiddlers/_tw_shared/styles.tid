@@ -20,8 +20,13 @@ code-body: yes
 }
 
 .tc-sites-menu ol li a {
-	padding-top: 0.25em;
-	padding-bottom: 0.25em;
+	display: block;
+	padding: 0.25em 14px 0.25em 14px;
+	width: 100%;
+	text-align: left;
+	color: #333333;
+	line-height: 1.4;
+	text-decoration: none;
 }
 
 .tc-sites-menu ol li .tc-sites-menu-disabled {

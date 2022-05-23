@@ -1,0 +1,61 @@
+created: 20141018090608643
+fr-title: Transclusion et substitution
+modified: 20220419002739469
+tags: WikiText
+title: Transclusion and Substitution
+type: text/vnd.tiddlywiki
+
+La puissance du <<fr WikiText>> vient de sa capacité à utiliser le contenu d'un tiddler dans un autre. Cette capacité prend plusieurs formes qu'on peut facilement confondre.
+
+La principale différence réside entre la transclusion et la substitution de texte<<:>>
+
+* Une transclusion est remplacée dynamiquement avec l'une ou l'autre de ces valeurs<<:>>
+** un champ de tiddler
+** une variable
+* Une substitution de texte est réalisée dans le texte de la définition de la macro avant son utilisation.
+
+! Transclusion de champ de tiddler
+
+<<fr "Transclusion in WikiText">> décrit les bases de la transclusion. Par exemple<<:>>
+
+```
+{{MonTiddler}}
+```
+
+Comme décrit dans <<fr "HTML in WikiText">>, vous pouvez aussi transclure des valeurs de champs de tiddlers dans des attributs de balises HTML et de widgets. Par exemple<<:>>
+
+```
+<$text text={{MonTiddler}}/>
+```
+
+Comme décrit dans <<fr "Introduction to filter notation">>, vous pouvez aussi transclure des valeurs de champs de tiddlers dans des opérandes de filtres. Par exemple<<:>>
+
+```
+{{{ [tag{TiddlerContenantMonTag}] }}}
+```
+
+! Transclusion de variable/macro
+
+Les définitions de variables qui comportent des paramètres ou des substitutions sont nommées des <<gf macros>>. Vous pouvez transclure la valeur d'une variable/macro grâce à la syntaxe<<:>>
+
+```
+<<maMacro param:"Valeur d'attribut">>
+```
+
+Comme décrit dans <<fr "HTML in WikiText">>, vous pouvez aussi transclure des valeurs de variables dans des attributs de balises HTML et de widgets. Par exemple<<:>>
+
+```
+<$text text=<<myMacro>>/>
+```
+
+Comme décrit dans <<fr "Introduction to filter notation">>, vous pouvez aussi transclure des valeurs de variables dans des opérandes de filtres. Par exemple<<:>>
+
+```
+{{{ [tag<maMacro>] }}}
+```
+
+! Substitution de texte
+
+La substitution de texte a lieu quand la valeur d'une macro/variable est utilisée. Ce mécanisme est décrit dans <<fr "Macros in WikiText">>.
+
+La différence principale entre la substitution et la transclusion est que la substitution a lieu ''avant'' l'analyse du <<fr WikiText>>, ce qui signifie que vous pouvez utiliser la substitution pour construire des assemblages de <<fr WikiText>>. Au contraire, les transclusions sont traitées indépendamment et ne peuvent pas être combinées avec du texte adjacent pour construire des assemblages de <<fr WikiText>>.
