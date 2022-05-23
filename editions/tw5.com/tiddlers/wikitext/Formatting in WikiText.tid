@@ -1,6 +1,6 @@
 caption: Formatting
 created: 20131205155959399
-modified: 20160606135946509
+modified: 20220513120211686
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
@@ -8,12 +8,12 @@ type: text/vnd.tiddlywiki
 Available character formatting includes:
 
 * <code>&#96;backticks&#96;</code> for `code` (<<.icon $:/core/images/mono-line>>)
-** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>
-* `''bold''` for ''bold text'' (<<.icon $:/core/images/bold>>)
-* `//italic//` for //italic text// (<<.icon $:/core/images/italic>>)
-* `__underscore__` for __underscored text__ (<<.icon $:/core/images/underline>>)
-* `^^superscript^^` for ^^superscripted^^ text (<<.icon $:/core/images/superscript>>)
-* `,,subscript,,` for ,,subscripted,, text (<<.icon $:/core/images/subscript>>)
+** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code><br><br>
+* `''bold''` for ''bold text'' (<<.icon $:/core/images/bold>>)<br><br>
+* `//italic//` for //italic text// (<<.icon $:/core/images/italic>>)<br><br>
+* `__underscore__` for __underscored text__ (<<.icon $:/core/images/underline>>)<br><br>
+* `^^superscript^^` for ^^superscripted^^ text (<<.icon $:/core/images/superscript>>)<br><br>
+* `,,subscript,,` for ,,subscripted,, text (<<.icon $:/core/images/subscript>>)<br><br>
 * `~~strikethrough~~` for ~~strikethrough~~ text (<<.icon $:/core/images/strikethrough>>)
 
 See also: [[Code Blocks in WikiText]]

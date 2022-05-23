@@ -65,14 +65,10 @@ title: $:/PaletteManager
 \whitespace trim
 <table>
 <tbody>
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]indexes[]]" variable="colourName">
-<$list
-	filter="[<currentTiddler>indexes[]removeprefix<colourName>suffix[]]"
-	variable="ignore"
-	emptyMessage="<$list filter='[{$:/state/palettemanager/showexternal}removeprefix[yes]suffix[]]' variable='ignore'><<palette-manager-colour-row>></$list>">
-<<palette-manager-colour-row>>
-</$list>
-</$list>
+<$set name="colorList" filter="[{$:/state/palettemanager/showexternal}match[yes]]"
+   value="[all[shadows+tiddlers]tag[$:/tags/Palette]indexes[]]" emptyValue="[<currentTiddler>indexes[]]">
+<$list filter=<<colorList>> variable="colourName"> <<palette-manager-colour-row>> </$list>
+</$set>
 </tbody>
 </table>
 \end

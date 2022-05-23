@@ -1,0 +1,63 @@
+caption: Par Gabarits
+created: 20141129210304238
+fr-title: Transclusion par gabarits
+modified: 20220417224336239
+tags: [[Transclusion in WikiText]]
+title: Transclusion with Templates
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Dans [[Transclusion, utilisation basique|Transclusion Basic Usage]] nous avons découvert comment inclure le contenu d'un tiddler A dans un tiddler B. Alors, supposons que le tiddler A contienne<<:>>
+
+```
+
+@@background-color:yellow;
+Salut, mon titre est {{!!title}}
+@@
+```
+
+Ceci fait afficher au tiddler A son titre sur fond jaune (voir [[Les styles et les classes avec WikiText|Styles and Classes in WikiText]] pour les styles CSS). Imaginez que vous vouliez afficher le titre du tiddler B de la même façon. Mais que vous ne souhaitiez pas copier/coller les instructions de style, car vous désirez changer la couleur du fond plus tard et que vous vioulez maintenir une cohérence entre les tiddlers. Cela ressemble à un cas typique de transclusion, aussi essayons de transclure le tiddler A en tiddler B par la voie classique par ``{{A}}``. Vous verriez alors le contenu suivant dans le tiddler B<<:>>
+
+<<<
+@@background-color:yellow;
+Salut, mon fr-titre est {{!!fr-title}}
+@@
+<<<
+
+Le stype est appliqué comme attendu, mais le titre est faux<<:>> nous voulons que ``{{!!title}}`` se réfère au tiddler B, cible, et pas au tiddler A, source.
+
+La solution est dans l'utilisation d'un //gabarit//. Dans ce cas, le tiddler A, source, est appelé le [[Tiddler Gabarit|TemplateTiddlers]], et est //appliqué// au tiddler B par l'utilisation de la notation ``{{||A}}``. La différence est que toute [[Référence texte|TextReference]] qui ne se réfère pas explicitement à  un tiddler spécifique est affectée au [[tiddler courant|Current Tiddler]], qui est, le tiddler cible. En conséquence, le tiddler B a maintenant l'aspect attendu<<:>>
+
+<<<
+@@background-color:yellow;
+Salut, mon titre est B
+@@
+<<<
+
+! Utilisation
+
+La Transclusion par gabarit est comparable à un masque<<:>> en supposant que le tiddler source contienne les références génériques (comme les trous des yeux dans un masque), celles-ci seront remplacées par les valeurs des tiddlers cible (comme les yeux d'une personne qui porte le masque).
+
+Un gabarit peut être appliqué à tout tiddler, pas seulement au tiddler en cours,  en utilisant la notation complète ``{{<cible>||<gabarit>}}``. La ``<cible>`` par défaut est le [[tiddler courant|Current Tiddler]] (qui a été utilisé dans l'exemple supra).
+
+! Exemples
+
+!! Un gabarit prédéfini pour un bel affichage des tags
+
+Vous pouvez appliquer le gabarit système ``$:/core/ui/TagTemplate`` à un tag pour lui donner le style d'une pilule avec menu déroulant<<:>>
+
+```
+{{Transclusion||$:/core/ui/TagTemplate}}
+```
+
+a pour rendu<<:>> {{Transclusion||$:/core/ui/TagTemplate}}
+
+Voir aussi<<:>>
+
+* [[Transclusion grâce à WikiText|Transclusion in WikiText]]
+* [[Transclusion, Utilisation basique|Transclusion Basic Usage]]
+* [[Référence textuelle|TextReference]]
+* [[Tiddlers Gabarit|TemplateTiddlers]]
+* [[Widget Transclude|TranscludeWidget]]
+* [[Tiddler Courant|Current Tiddler]]

@@ -4,9 +4,9 @@ community-author: Jeremy Ruston
 created: 20131221085742684
 delivery: Browser Extension
 description: Extension pour les anciennes versions de Firefox
-fr-title: Sauvegarder avec TiddlyFox
+fr-title: Enregistrer avec TiddlyFox
 method: save
-modified: 20220402105820520
+modified: 20220417143943429
 tags: Saving Firefox
 title: Saving with TiddlyFox
 type: text/vnd.tiddlywiki

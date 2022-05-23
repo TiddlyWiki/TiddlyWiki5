@@ -1,5 +1,5 @@
 created: 20140211171341271
-modified: 20220128112317724
+modified: 20220505082754270
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
@@ -18,7 +18,11 @@ Within a snippet itself, the only markup detected is `$name$` (a placeholder for
 
 The <<.mlink dumpvariables>> macro lists all variables (including macros) that are available at that position in the widget tree.
 
-An <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions to another branch of the [[widget tree|Widgets]]. ~TiddlyWiki uses this technique internally to implement global macros -- namely any macros defined in tiddlers with the <<.tag $:/tags/Macro>> tag. (The tag <<.tag $:/tags/Macro/View>> is used to define macros that should only be available within the main view template and the preview panel).
+An <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions to another branch of the [[widget tree|Widgets]]. ~TiddlyWiki uses this technique internally to implement global macros -- namely any macros defined in tiddlers with the <<.tag $:/tags/Macro>> tag.
+
+The tag <<.tag $:/tags/Macro/View>> is used to define macros that should only be available within the main view template and the preview panel.
+
+The tag <<.tag $:/tags/Macro/View/Body>> is used to define macros that should only be available within the main view template body and the preview panel.
 
 For maximum flexibility, macros can also be <<.js-macro-link "written as JavaScript modules">>.
 

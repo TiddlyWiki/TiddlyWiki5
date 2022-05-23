@@ -115,13 +115,15 @@ function saveTiddlerToLocalStorage(title,options) {
 function clearLocalStorage() {
 	var url = window.location.pathname,
 		log = [];
-	// Step through each browsder storage item
-	for(var index=window.localStorage.length - 1; index>=0; index--) {
-		var key = window.localStorage.key(index),
-			parts = key.split("#");
-		// Delete it if it's ours
-		if(parts[0] === "tw5" && parts[1] === url) {
-			window.localStorage.removeItem(key);
+	// Step through each browser storage item
+	if(window.localStorage) {
+		for(var index=window.localStorage.length - 1; index>=0; index--) {
+			var key = window.localStorage.key(index),
+				parts = key.split("#");
+			// Delete it if it is ours
+			if(parts[0] === "tw5" && parts[1] === url) {
+				window.localStorage.removeItem(key);
+			}
 		}
 	}
 }

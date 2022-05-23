@@ -1,0 +1,56 @@
+created: 20220122144742419
+fr-title: Modes d'analyse du WikiTexte : exemples de macros
+modified: 20220419224009995
+tags: [[WikiText parser mode transitions]]
+title: WikiText parser mode: macro examples
+type: text/vnd.tiddlywiki
+
+\define tablebanale()
+|cellule une|cellule deux|
+|cellule trois|cellule quatre|
+\end
+En utilisant la macro `tablebanale` définie ainsi<<:>>
+<$codeblock code=<<tablebanale>>/>
+dans une transclusion, alors<<:>>
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "* <<tablebanale>>">>
+<<wikitext-example-table-row 2 """* <div>
+
+<<tablebanale>>
+</div>
+""">>
+<<wikitext-example-table-row 3 "* <$macrocall $name=tablebanale/>">>
+<<wikitext-example-table-row 4 "* <$macrocall $name=tablebanale></$macrocall>">>
+<<wikitext-example-table-row 5 """* <$macrocall $name=tablebanale>
+
+</$macrocall>""">>
+</tbody></table>
+
+Dans le code ci-dessus, la syntaxe de liste à puce est reconnue en [[mode bloc|Block Mode WikiText]], puis son contenu est interprété en [[mode en ligne|Inline Mode WikiText]]. Quand l'interpréteur rencontre un [[appel de macro en WikiTexte|Macro Calls in WikiText]] il utilise le mode courant pour analyser le contenu de la macro. La macro d'exemple contient une définition de table qui n'est reconnue qu'en [[mode bloc|Block Mode WikiText]].
+
+De ce fait, dans la ligne n°1 ci-dessus, la syntaxe de table n'est pas reconnue. Dans la ligne n°2, la ligne vide après la balise `<div>` bascule l'interpréteur en [[mode bloc|Block Mode WikiText]] et le contenu de la macro en hérite, donc la table est reconnue.
+
+En utilisant le <<fr MacroCallWidget>>, le mode d'analyse reste le mode en ligne (exemples des lignes n°3 et 4 ci-dessus) jusqu'à ce que la balise ouvrante soit suivie d'une ligne vide (exemple n°5 ci-dessus).
+
+<<.tip """Voir aussi <<fr "WikiText parser mode: transclusion examples">> pour d'autres exemples similaires.""">>
+
+---
+
+Dans les exemples suivants, les appels de macros sont directs, au lieu d'être inclus dans des listes à puces<<:>>
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "<<tablebanale>>">>
+<<wikitext-example-table-row 2 """<div>
+
+<<tablebanale>>
+</div>
+""">>
+<<wikitext-example-table-row 3 "<$macrocall $name=tablebanale/>">>
+<<wikitext-example-table-row 4 "<$macrocall $name=tablebanale></$macrocall>">>
+<<wikitext-example-table-row 5 """<$macrocall $name=tablebanale>
+
+</$macrocall>""">>
+</tbody></table>
+
+Parmi ces exemples, seuls les deux widgets <<.wlink MacroCallWidget>> dont la balise d'ouverture n'est pas suivie d'une ligne vide (lignes n°3 et 4) sont analysés en [[mode en ligne|Inline Mode WikiText]].
+
+<<.tip """Voir aussi <<fr "WikiText parser mode: transclusion examples">> pour d'autres exemples similaires.""">>

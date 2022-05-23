@@ -1,0 +1,25 @@
+created: 20220427174702859
+modified: 20220427171449102
+tags: [[JSON in TiddlyWiki]] Learning
+title: Reading data from JSON tiddlers
+type: text/vnd.tiddlywiki
+
+See [[JSON in TiddlyWiki]] for an overview of using JSON in TiddlyWiki.
+
+!! Text References for Accessing JSON Data
+
+[[Text references|TextReference]] are a simple shortcut syntax to look up the value of a named property. For example, if a [[DictionaryTiddler|DictionaryTiddlers]] called `MonthDays` contains:
+
+```
+oct:31
+nov:30
+dec:31
+```
+
+... then `{{MonthDays##nov}}` will resolve to the value `30`.
+
+The same is true if `MonthDays` is a [[JSONTiddler|JSONTiddlers]] with the following content:
+
+```
+{"oct":31,"nov":30,"dec":31}
+```
