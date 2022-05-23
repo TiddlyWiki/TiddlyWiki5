@@ -6,6 +6,33 @@ type: text/vnd.tiddlywiki
 
 See [[JSON in TiddlyWiki]] for an overview of using JSON in TiddlyWiki.
 
+!! Introduction
+
+The following examples assume the following JSON data structure is stored in a data tiddler called "foobar" with the type `application/json`:
+
+```json
+{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+```
+
 !! Text References for Accessing JSON Data
 
 [[Text references|TextReference]] are a simple shortcut syntax to look up the value of a named property. For example, if a [[DictionaryTiddler|DictionaryTiddlers]] called `MonthDays` contains:
@@ -22,4 +49,75 @@ The same is true if `MonthDays` is a [[JSONTiddler|JSONTiddlers]] with the follo
 
 ```
 {"oct":31,"nov":30,"dec":31}
+```
+
+!! Operators for Reading JSON Data
+
+Values are identified by a sequence of indexes. For example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
+
+The new operators use multiple operands to specify the indexes:
+
+```
+[[foobar]jsonget[a]] --> "one"
+[[foobar]jsonget[d],[e]] --> "four"
+[[foobar]jsonget[d],[f],[0]] --> "five"
+```
+
+Indexes can be dynamically composed from variables and transclusions:
+
+```
+[[foobar]jsonget<variable>,{!!field},[0]]
+```
+
+Boolean values and null are returned as normal strings. The [[jsontype Operator]] returns a string identifying the original type. Thus:
+
+```
+[[foobar]jsontype[a]] --> "string"
+[[foobar]jsontype[d]] --> "object"
+[[foobar]jsontype[d],[f]] --> "array"
+[[foobar]jsontype[d],[f],[2]] --> "boolean"
+```
+
+Using the [[jsonget Operator]] to retrieve an object or an array returns a list of all the values. For example:
+
+```
+[[foobar]jsonget[d],[f]] --> "five","six","true","false","null"
+[[foobar]jsonget[d],[g]] --> "max", "may", "maize"
+```
+
+The [[jsonindexes Operator]] retrieves the corresponding indexes:
+
+```
+[[foobar]jsonindexes[d],[f]] --> "0", "1", "2", "3", "4"
+[[foobar]jsonindexes[d],[g]] --> "x", "y", "z"
+```
+
+The behaviour when retrieving an object or array that contains values that are themselves objects or arrays may be confusing: the object is read recursively as a list of values. For example:
+
+```
+[[foobar]jsonget[d]] --> "four", "five", "six", "true", "false", "null", "max", "may", "maize"
+```
+
+A further subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+
+```
+[[foobar]jsonindexes[]] --> "a", "b", "c", "d"
+```
+
+An example of using a list widget to iterate through the properties of an array within a JSON object:
+
+```
+<$list filter="[[foobar]jsonindexes[d][f]]">
+    <div>
+        <$text text=<<currentTiddler>>/>: <$text text={{{ [[foobar]jsonget[d][f]<currentTiddler>]  }}}/>
+    </div>
+</$list>
+
+Prints:
+
+0: five
+1: six
+2: true
+3: false
+4: null
 ```
