@@ -1,0 +1,24 @@
+title: Functions/FunctionAttributes
+description: Attributes specified as function invocations
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function .dividebysomething(factor:0.5)
+[divide<factor>]
+\end
+
+\function multiplebysomething(first:ignored,factor:2)
+[<factor>multiply[2].dividebysomething[0.25]]
+\end
+
+<$text text=<<multiplebysomething>>/>
+|
+<$text text=<<multiplebysomething "nothing" "4">>/>
+
++
+title: ExpectedResult
+
+<p>16|32</p>

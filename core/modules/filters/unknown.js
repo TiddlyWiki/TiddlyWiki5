@@ -24,30 +24,15 @@ exports["[unknown]"] = function(source,operator,options) {
 		var customDefinition = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator);
 		if(customDefinition && customDefinition.srcVariable && customDefinition.srcVariable.isFunctionDefinition) {
 			var variables = Object.create(null);
+			// Go through each of the defined parameters, and make a variable with the value of the corresponding operand
 			$tw.utils.each(customDefinition.srcVariable.params,function(param,index) {
-				var value = operator.operands[index];
+				var value = operator.operands["" + index];
 				if(value === undefined) {
 					value = param["default"] || "";
 				}
 				variables[param.name] = value;
 			});
-			var getVariable = function(name,opts) {
-				if(name in variables) {
-					return variables[name];
-				} else {
-					return options.widget.getVariable(name,opts);
-				};
-			};
-			var getVariableInfo = function(name,opts) {
-				if(name in variables) {
-					return {
-						text: variables[name]
-					};
-				} else {
-					return options.widget.getVariableInfo(name,opts);
-				};
-			}
-			var list = options.wiki.filterTiddlers(customDefinition.srcVariable.value,{getVariable: getVariable,getVariableInfo: getVariableInfo},source);
+			var list = options.wiki.filterTiddlers(customDefinition.srcVariable.value,options.widget.makeFakeWidgetWithVariables(variables),source);
 			if(operator.prefix === "!") {
 				var results = [];
 				source(function(tiddler,title) {

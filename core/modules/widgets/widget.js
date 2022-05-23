@@ -276,6 +276,32 @@ Widget.prototype.getStateQualifier = function(name) {
 };
 
 /*
+Make a fake widget with specified variables, suitable for variable lookup in filters
+*/
+Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
+	var self = this;
+	return {
+		getVariable: function(name,opts) {
+			if(name in variables) {
+				return variables[name];
+			} else {
+				return self.getVariable(name,opts);
+			};
+		},
+		getVariableInfo: function(name,opts) {
+			if(name in variables) {
+				return {
+					text: variables[name]
+				};
+			} else {
+				return self.getVariableInfo(name,opts);
+			};
+		},
+		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables
+	};
+};
+
+/*
 Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed.
 Options include:
 filterFn: only include attributes where filterFn(name) returns true
@@ -300,13 +326,27 @@ Widget.prototype.computeAttributes = function(options) {
 };
 
 Widget.prototype.computeAttribute = function(attribute) {
-	var value;
+	var self = this,
+		value;
 	if(attribute.type === "filtered") {
 		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
 	} else if(attribute.type === "indirect") {
 		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
 	} else if(attribute.type === "macro") {
-		value = this.getVariable(attribute.value.name,{params: attribute.value.params});
+		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
+		if(variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
+			// It's a function definition
+			var variables = Object.create(null);
+			// Go through each of the defined parameters, and make a variable with the value of the corresponding provided parameter
+			var params = this.resolveVariableParameters(variableInfo.srcVariable.params,attribute.value.params);
+			$tw.utils.each(params,function(param,index) {
+				variables[param.name] = param.value;
+			});
+			var list = self.wiki.filterTiddlers(variableInfo.text,this.makeFakeWidgetWithVariables(variables));
+			value = list[0] || "";
+		} else {
+			value = variableInfo.text;
+		}
 	} else { // String attribute
 		value = attribute.value;
 	}
