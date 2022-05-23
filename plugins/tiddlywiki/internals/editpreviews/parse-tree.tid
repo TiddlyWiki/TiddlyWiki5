@@ -3,6 +3,8 @@ tags: $:/tags/EditPreview
 list-after: $:/core/ui/EditTemplate/body/preview/output
 caption: parse tree
 
+\whitespace trim
+
 \procedure preview-node-properties(node)
 <$let excludeProperties="text type tag children attributes orderedAttributes">
 <$list filter="[<node>jsonindexes[]] -[subfilter<excludeProperties>] +[limit[1]]" variable="ignore">
@@ -33,7 +35,6 @@ caption: parse tree
 \end
 
 \procedure preview-node-attribute-macro(attribute)
-\whitespace trim
 &lt;&lt;
 <$text text={{{ [<attribute>jsonget[value],[name]] }}}/>
 <$list filter="[<attribute>jsonindexes[value],[params]]" variable="index">
