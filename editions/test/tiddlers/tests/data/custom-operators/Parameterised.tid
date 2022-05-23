@@ -6,13 +6,13 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\function [multiplybysomething[]](first:ignored,factor:2)
+\function .multiplybysomething(first:ignored,factor:2)
 [multiply[2]multiply<factor>]
 \end
 
-<$text text={{{ [[123]multiplybysomething[]] }}}/>
+<$text text={{{ [[123].multiplybysomething[]] }}}/>
 -
-<$text text={{{ [[123]multiplybysomething[x],[4]] }}}/>
+<$text text={{{ [[123].multiplybysomething[x],[4]] }}}/>
 
 +
 title: ExpectedResult

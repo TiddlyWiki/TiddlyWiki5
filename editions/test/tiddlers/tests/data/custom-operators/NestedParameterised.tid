@@ -6,17 +6,17 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\function [dividebysomething[]](first:ignored,factor:0.5)
+\function .dividebysomething(first:ignored,factor:0.5)
 [divide[2]multiply<factor>]
 \end
 
-\function [multiplebysomething[]](first:ignored,factor:2)
-[multiply[2]dividebysomething[],<factor>]
+\function .multiplebysomething(first:ignored,factor:2)
+[multiply[2].dividebysomething[],<factor>]
 \end
 
-<$text text={{{ [[123]multiplebysomething[]] }}}/>
+<$text text={{{ [[123].multiplebysomething[]] }}}/>
 -
-<$text text={{{ [[123]multiplebysomething[x],[4]] }}}/>
+<$text text={{{ [[123].multiplebysomething[x],[4]] }}}/>
 
 +
 title: ExpectedResult
