@@ -81,7 +81,8 @@ describe("Utility tests", function() {
 		const day = d.getUTCDate();
 		const dayStr = ("" + day).padStart(2, '0');
 		const hours = d.getUTCHours();
-		const expectedUtcStr = `201411${dayStr}${hours}4128542`;
+		const hoursStr = ("" + hours).padStart(2, '0');
+		const expectedUtcStr = `201411${dayStr}${hoursStr}4128542`;
 		expect(fds(d,"[UTC]YYYY0MM0DD0hh0mm0ssXXX")).toBe(expectedUtcStr);
 
 		// test some edge cases found at: https://en.wikipedia.org/wiki/ISO_week_date
