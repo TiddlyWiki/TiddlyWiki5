@@ -1,9 +1,9 @@
 /*\
 title: $:/plugins/tiddlywiki/dynannotate/selection-tracker.js
 type: application/javascript
-module-type: startup
+module-type: library
 
-Dyannotate background daemon to track the selection
+Background daemon to track the selection
 
 \*/
 (function(){
@@ -12,105 +12,160 @@ Dyannotate background daemon to track the selection
 /*global $tw: false */
 "use strict";
 
-// Export name and synchronous status
-exports.name = "dyannotate-startup";
-exports.platforms = ["browser"];
-exports.after = ["render"];
-exports.synchronous = true;
-
-var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
-
-exports.startup = function() {
-	$tw.dynannotate = {
-		selectionTracker: new SelectionTracker($tw.wiki,{
-			allowBlankSelectionPopup: true
-		})
-	};
-};
-
 function SelectionTracker(wiki,options) {
 	options = options || {};
 	var self = this;
 	this.wiki = wiki;
-	this.allowBlankSelectionPopup = options.allowBlankSelectionPopup;
-	this.selectionPopupTitle = null;
+	var timerId = null;
 	document.addEventListener("selectionchange",function(event) {
-		var selection = document.getSelection();
-		if(selection && (selection.type === "Range" || (self.allowBlankSelectionPopup && !self.selectionPopupTitle))) {
-			// Look for the selection containers for each of the two ends of the selection
-			var anchorContainer = self.findSelectionContainer(selection.anchorNode),
-				focusContainer = self.findSelectionContainer(selection.focusNode);
-			// If either end of the selection then we ignore it
-			if(!!anchorContainer || !!focusContainer) {
-				var selectionRange = selection.getRangeAt(0);
-				// Check for the selection spilling outside the starting container
-				if((anchorContainer !== focusContainer) || (selectionRange.startContainer.nodeType !== Node.TEXT_NODE && selectionRange.endContainer.nodeType !== Node.TEXT_NODE)) {
-					if(self.selectionPopupTitle) {
-						self.wiki.deleteTiddler(self.selectionPopupTitle);
-						self.selectionPopupTitle = null;
-					}
-				} else {
-					self.selectionSaveTitle = anchorContainer.getAttribute("data-annotation-selection-save");
-					self.selectionPrefixSaveTitle = anchorContainer.getAttribute("data-annotation-selection-prefix-save");
-					self.selectionSuffixSaveTitle = anchorContainer.getAttribute("data-annotation-selection-suffix-save");
-					self.selectionPopupTitle = anchorContainer.getAttribute("data-annotation-selection-popup");
-					// The selection is a range so we trigger the popup
-					if(self.selectionPopupTitle) {
-						var selectionRectangle = selectionRange.getBoundingClientRect(),
-							trackingRectangle = anchorContainer.getBoundingClientRect();
-						$tw.popup.triggerPopup({
-							domNode: null,
-							domNodeRect: {
-								left: selectionRectangle.left - trackingRectangle.left,
-								top: selectionRectangle.top - trackingRectangle.top,
-								width: selectionRectangle.width,
-								height: selectionRectangle.height
-							},
-							force: true,
-							floating: true,
-							title: self.selectionPopupTitle,
-							wiki: self.wiki
-						});						
-					}
-					// Write the selection text to the specified tiddler
-					if(self.selectionSaveTitle) {
-						// Note that selection.toString() normalizes whitespace but selection.getRangeAt(0).toString() does not
-						var text = selectionRange.toString();
-						self.wiki.addTiddler(new $tw.Tiddler({title: self.selectionSaveTitle, text: text}));
-						// Build a textmap of the container so that we can find the prefix and suffix
-						var textMap = new TextMap(anchorContainer);
-						// Find the selection start in the text map and hence extract the prefix and suffix
-						var context = textMap.extractContext(selectionRange.startContainer,selectionRange.startOffset,text);
-						// Save the prefix and suffix
-						if(context) {
-							if(self.selectionPrefixSaveTitle) {
-								self.wiki.addTiddler(new $tw.Tiddler({title: self.selectionPrefixSaveTitle, text: context.prefix}));
-							}
-							if(self.selectionSuffixSaveTitle) {
-								self.wiki.addTiddler(new $tw.Tiddler({title: self.selectionSuffixSaveTitle, text: context.suffix}));
-							}
-						}
-					}
-				}
-			}
-		} else {
-			// If the selection is a caret we clear any active popup
-			if(self.selectionPopupTitle) {
-				self.wiki.deleteTiddler(self.selectionPopupTitle);
-				self.selectionPopupTitle = null;
-			}
+		if(timerId) {
+			clearTimeout(timerId);
 		}
+		timerId = setTimeout(function() {
+			timerId = null;
+			self.handleSelectionChange();
+		},500);
 	});
 }
 
-SelectionTracker.prototype.findSelectionContainer = function findSelectionContainer(domNode) {
-	if(domNode && domNode.nodeType === Node.ELEMENT_NODE && domNode.classList.contains("tc-dynannotation-selection-container")) {
-		return domNode;
+SelectionTracker.prototype.handleSelectionChange = function() {
+	var selection = document.getSelection();
+	if(selection && selection.type === "Range") {
+		// Helper to get the tiddler title corresponding to a chunk container
+		var getIdOfContainer = function(domNode) {
+			return domNode.id;
+		}
+		// Get information about the selection anchor and focus
+		var getSelectionInfo = function(targetDomNode,targetOffset) {
+			// Find the chunk container node
+			var domNode = targetDomNode;
+			if(domNode.nodeType === Node.TEXT_NODE) {
+				domNode = domNode.parentNode;
+			}
+			var container = domNode.closest(".dynannotate-chunk");
+			if(!container) {
+				return null;
+			}
+			// Find the index of the container within the child nodes of its parent
+			var childNodeIndex = Array.prototype.indexOf.call(container.parentNode.childNodes,container);
+			// Walk through the chunk collecting the text before and after the specified domNode and offset
+			var beforeText = null, afterText = [];
+			var splitTextResult = function() {
+					beforeText = afterText;
+					afterText = [];
+				},
+				processNode = function(domNode) {
+					// Check for a text node
+					if(domNode.nodeType === Node.TEXT_NODE) {
+						// If this is the target node then perform the split
+						if(domNode === targetDomNode) {
+							afterText.push(domNode.textContent.substring(0,targetOffset));
+							splitTextResult();
+							afterText.push(domNode.textContent.substring(targetOffset));
+						} else {
+							afterText.push(domNode.textContent);
+						}
+					} else {
+						// Process the child nodes
+						$tw.utils.each(domNode.childNodes,function(childNode,childNodeIndex) {
+							// Check whether we need to split on this child node
+							if(domNode === targetDomNode && childNodeIndex === targetOffset) {
+								splitTextResult();
+							}
+							processNode(childNode);
+						});
+					}
+				};
+			processNode(container);
+			if(beforeText === null) {
+				splitTextResult();
+			}
+			// Return results
+			return {
+				container: container,
+				childNodeIndex: childNodeIndex,
+				beforeText: beforeText.join(""),
+				afterText: afterText.join("")
+			}
+
+		}
+		var anchor = getSelectionInfo(selection.anchorNode,selection.anchorOffset),
+			focus = getSelectionInfo(selection.focusNode,selection.focusOffset);
+		// Check that the containers share a parent
+		if(anchor && focus && anchor.container.parentNode === focus.container.parentNode) {
+			// Make sure that the anchor is before the focus
+			if((anchor.childNodeIndex > focus.childNodeIndex) || (anchor.container === focus.container && anchor.beforeText.length > focus.beforeText.length)) {
+				var temp = anchor; 
+				anchor = focus; 
+				focus = temp;
+			}
+			var chunks = [];
+			// Check for the selection being all in one chunk
+			if(anchor.container === focus.container) {
+				chunks.push({
+					id: getIdOfContainer(anchor.container),
+					prefix: anchor.beforeText,
+					text: anchor.afterText.substring(0,anchor.afterText.length - focus.afterText.length),
+					suffix: focus.afterText
+				});
+			} else {
+				// We span two or more chunks
+				chunks.push({
+					id: getIdOfContainer(anchor.container),
+					prefix: anchor.beforeText,
+					text: anchor.afterText
+				});
+				// Get the titles and text of the intervening tiddlers
+				var domNode;
+				if(anchor.container !== focus.container) {
+					domNode = anchor.container.nextElementSibling;
+					while(domNode && domNode !== focus.container) {
+						chunks.push({
+							id: getIdOfContainer(domNode),
+							text: domNode.textContent
+						});
+						domNode = domNode.nextElementSibling;
+					}					
+				}
+				chunks.push({
+					id: getIdOfContainer(focus.container),
+					text: focus.beforeText,
+					suffix: focus.afterText
+				});
+			}
+			// Get the title of the tiddler containing the actions to be executed
+			var actionsTiddler = anchor.container.parentNode.getAttribute("data-selection-actions-title");
+			// Assemble the variables to be passed to the action
+			var variables = {};
+			// Get the bounds of the container and the selection
+			var selectionRectangle = selection.getRangeAt(0).getBoundingClientRect(),
+				trackingRectangle = anchor.container.parentNode.getBoundingClientRect();
+			variables["tv-selection-posx"] = (selectionRectangle.left).toString();
+			variables["tv-selection-posy"] = (selectionRectangle.top).toString();
+			variables["tv-selection-width"] = (selectionRectangle.width).toString();
+			variables["tv-selection-height"] = (selectionRectangle.height).toString();
+			variables["tv-selection-coords"] = "(" + variables["tv-selection-posx"] + "," + variables["tv-selection-posy"] + "," + variables["tv-selection-width"] + "," + variables["tv-selection-height"] + ")";
+			// Collect the attributes from the container
+			$tw.utils.each(anchor.container.parentNode.attributes,function(attribute) {
+				variables["dom-" + attribute.name] = attribute.value.toString();
+			});
+			// Action the selection
+			this.performSelectionActions(chunks,variables,actionsTiddler);
+		}
 	}
-	if(domNode && domNode.parentNode) {
-		return findSelectionContainer(domNode.parentNode);
-	}
-	return null;
 };
+
+SelectionTracker.prototype.performSelectionActions = function(chunks,variables,actionsTiddler) {
+	// Invoke the actions, passing the extract tiddler title as a variable
+	if(actionsTiddler) {
+		var actions = $tw.wiki.getTiddlerText(actionsTiddler)
+		if(actions) {
+			var selection = JSON.stringify({chunks: chunks,variables: variables});
+			$tw.rootWidget.invokeActionString(actions,undefined,undefined,$tw.utils.extend({},variables,{selection: selection}));
+		}
+	}
+};
+
+exports.SelectionTracker = SelectionTracker;
 
 })();
