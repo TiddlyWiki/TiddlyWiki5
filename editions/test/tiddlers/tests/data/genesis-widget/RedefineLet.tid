@@ -22,10 +22,6 @@ title: Output
 (<$text text=<<$$three>>/>)
 </$let>
 +
-title: Definition
-
-\whitespace trim
-+
 title: ExpectedResult
 
 <p>(--Elephant--)
