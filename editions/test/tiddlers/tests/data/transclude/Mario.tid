@@ -1,0 +1,28 @@
+title: UnwantedParagraphs
+description: Unwanted paragraph elements when using slot/fill
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\procedure hello
+\whitespace trim
+<div class="frame">
+<$slot $name="greeting"/>
+</div>
+\end
+
+<div class="tc-outer">
+<$transclude $variable="hello" mode="inline">
+<$fill $name="greeting">
+<h1>A heading</h1>
+<p>A paragraph</p>
+</$fill>
+</$transclude>
+</div>
+
++
+title: ExpectedResult
+
+<p><div class="tc-outer"><div class="frame"><h1>A heading</h1><p>A paragraph</p></div></div></p>
