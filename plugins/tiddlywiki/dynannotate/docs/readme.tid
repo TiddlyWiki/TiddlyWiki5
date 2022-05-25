@@ -1,12 +1,10 @@
 title: $:/plugins/tiddlywiki/dynannotate/readme
 
-The ''Dynannotate'' plugin allows annotations on textual content to be created and displayed. It has three components:
+The ''Dynannotate'' plugin allows annotations on textual content to be created and displayed. It has several components:
 
-* The dynannotate widget overlays clickable textual annotations, search highlights and search snippets on the content that it contains
-* The selection tracker displays a popup that tracks the selection, and keeps track of the selected text. It also tracks a prefix and suffix that can be used to disambiguate the selected text within the container
-* The `<$action-popup>` widget is used for some specialised popup switching in the demo
-
-''Note that the TiddlyWiki core plugin __Dynaview__ is required for correct operation of __Dynannotate__''
+* The dynannotate widget draws clickable textual annotations, search highlights and search snippets as overlays over the top of the content that it contains
+* The selection tracker keeps track of changes to the selected text in the main browser window. It triggers an action string when the selection changes, passing it the details of the selection. It can be used to display a popup menu
+** The original legacy selection tracker is also provided for backwards compatibility. It is much more limited, and not recommended for new projects
 
 !! Dynannotate Widget
 
@@ -32,6 +30,10 @@ The `<$dynannotate>` widget uses the selection tracker to support a popup that d
 |searchCaseSensitive |"no" (default) for a case insensitive search, or "yes" for a case sensitive search |
 |searchClass |Optional CSS class to be added to search overlays |
 |snippetContextLength |Optional length of search result contextual prefix/suffix |
+
+The following attributes are only used with the legacy selection tracker:
+
+|!Attribute |!Description |
 |selection |Tiddler to which the currently selected text should be dynamically saved |
 |selectionPrefix |Tiddler to which up to 50 characters preceding the currently selected text should be dynamically saved |
 |selectionSuffix |Tiddler to which up to 50 characters succeeding the currently selected text should be dynamically saved |
@@ -91,9 +93,71 @@ An annotation tiddler is a tiddler describing an annotation to be overlaid over 
 
 Note that using the `annotate-tiddler` field to associate an annotation with the annotated tiddler is a lightweight convention employed by the examples; it isn't actually required by any of the JavaScript code. Thus authors can experiment with other techniques for recording the association.
 
-!! Selection Tracker
+!! Selection Trackers
 
-The selection tracker is incorporated within the `<$dynannotate>` widget, but it can be used independently for specialised applications.
+The following configuration tiddlers can be used to control whether the selection trackers are enabled when the following configuration tiddlers are set to ''yes'' (the default).
+
+* $:/config/Dynannotate/SelectionTracker/Enable for the main selection tracker
+* $:/config/Dynannotate/LegacySelectionTracker/Enable for the legacy selection tracker
+
+Both selection trackers are enabled by default.
+
+!!! Main Selection Tracker
+
+The selection tracker triggers an action string whenever the browser text selection changes. The actions are delayed until the selection has not changed for 500ms (this means that the selection tracker is only triggered when the user pauses after completing a selection, and is not continuously invoked as the user drags the selection).
+
+The selection tracker works within DOM subtrees that have the following structure:
+
+* The outer wrapper element has the attribute `data-selection-action-title` containing the title of the tiddler containing the action string to be invoked when the selection changes
+* Each child element of the outer element must have a unique `id` attribute to identify it
+
+```
+<div data-selection-action-title="{tiddler title}">
+	<div id="{title}">
+		Content text
+	</div>
+	...
+</div>
+```
+
+The action string is invoked with the following variables:
+
+|!Variable |!Description |
+|`selection` |A JSON object representing the selection (see below) |
+|`dom-*` |All DOM attributes of the outer wrapper node are made available as variables, with the prefix `dom-` |
+|`tv-selection-posx` |X position of the selection in pixels |
+|`tv-selection-posy` |Y position of the selection in pixels |
+|`tv-selection-width` |Width of the selection in pixels |
+|`tv-selection-height` |Height of the selection in pixels |
+|`tv-selection-coords` |A co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the selection |
+
+The JSON representation of the selection is as follows:
+
+```
+{
+	"chunks": [
+		{
+			"id": "id-of-first-chunk-of-selection",
+			"text": "text-of-first-chunk-of-selection",
+			"prefix": "optional-prefix-before-first-chunk-of-selection",
+			"suffix": "optional-suffix-after-last-chunk-of-selection"
+		}
+		...
+	],
+	"variables": {
+		<variables listed above>
+	}
+}
+```
+
+Notes:
+
+* Only the first chunk of the selection may have a "prefix" field which will contain any text at the start of the chunk preceding the selection
+* Only the last chunk of the selection may have a "suffix" field which will contain any text at the end of the chunk following the selection
+
+!!! Legacy Selection Tracker
+
+The selection tracker is incorporated within the `<$dynannotate>` widget via the ''selection'', ''selectionPrefix'' ''selectionSuffix'' and ''selectionPopup'' attributes. It can be used independently for specialised applications.
 
 Each selection container is marked with the class `tc-dynannotate-selection-container`, and should contain the following attributes:
 
