@@ -65,16 +65,12 @@ describe("Wiki-based tests", function() {
 		return tiddlers;
 	}
 
-	function createWidgetNode(parseTreeNode,wiki) {
-		return new widget.widget(parseTreeNode,{
-				wiki: wiki,
-				document: $tw.fakeDocument
-			});
+	function createWidgetNode(parser,wiki) {
+		return wiki.makeWidget(parser);
 	}
 
 	function parseText(text,wiki,options) {
-		var parser = wiki.parseText("text/vnd.tiddlywiki",text,options);
-		return parser ? {type: "widget", children: parser.tree} : undefined;
+		return wiki.parseText("text/vnd.tiddlywiki",text,options);
 	}
 
 	function renderWidgetNode(widgetNode) {

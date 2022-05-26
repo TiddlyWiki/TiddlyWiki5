@@ -1,0 +1,19 @@
+title: Globals/Simple
+description: Global procedures
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<<this-is-one>>
++
+title: One
+tags: $:/tags/Global
+
+\procedure this-is-one() ONE
++
+title: ExpectedResult
+
+<p>ONE</p>
