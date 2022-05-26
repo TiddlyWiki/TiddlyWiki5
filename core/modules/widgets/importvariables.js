@@ -49,19 +49,19 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 		var parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline:true});
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
-			while(parseTreeNode && ["set","parameters"].indexOf(parseTreeNode.type) !== -1) {
-				if(parseTreeNode.type === "set") {
-					var node = {
-						type: "set",
-						attributes: parseTreeNode.attributes,
-						params: parseTreeNode.params,
-						isMacroDefinition: parseTreeNode.isMacroDefinition,
-						isFunctionDefinition: parseTreeNode.isFunctionDefinition,
-						isProcedureDefinition: parseTreeNode.isProcedureDefinition,
-						isWidgetDefinition: parseTreeNode.isWidgetDefinition,
-						configTrimWhiteSpace: parseTreeNode.configTrimWhiteSpace
-					};
-					if (parseTreeNode.isMacroDefinition || parseTreeNode.isProcedureDefinition) {
+			while(parseTreeNode && ["setvariable","set","parameters"].indexOf(parseTreeNode.type) !== -1) {
+				var node = {
+					type: "set",
+					attributes: parseTreeNode.attributes,
+					params: parseTreeNode.params,
+					isMacroDefinition: parseTreeNode.isMacroDefinition,
+					isFunctionDefinition: parseTreeNode.isFunctionDefinition,
+					isProcedureDefinition: parseTreeNode.isProcedureDefinition,
+					isWidgetDefinition: parseTreeNode.isWidgetDefinition,
+					configTrimWhiteSpace: parseTreeNode.configTrimWhiteSpace
+				};
+				if(parseTreeNode.type === "set" || parseTreeNode.type === "setvariable") {
+					if(parseTreeNode.isMacroDefinition || parseTreeNode.isProcedureDefinition || parseTreeNode.isWidgetDefinition || parseTreeNode.isFunctionDefinition) {
 						// Macro definitions can be folded into
 						// current widget instead of adding
 						// another link to the chain.
