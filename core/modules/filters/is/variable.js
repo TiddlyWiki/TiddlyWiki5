@@ -19,13 +19,13 @@ exports.variable = function(source,prefix,options) {
 	var results = [];
 	if(prefix === "!") {
 		source(function(tiddler,title) {
-			if(!(title in options.widget.variables)) {
+			if(options.widget.getVariable(title) === undefined) {
 				results.push(title);
 			}
 		});
 	} else {
 		source(function(tiddler,title) {
-			if(title in options.widget.variables) {
+			if(options.widget.getVariable(title) !== undefined) {
 				results.push(title);
 			}
 		});

@@ -16,9 +16,15 @@ Filter operator for returning the names of the active variables
 Export our filter function
 */
 exports.variables = function(source,operator,options) {
-	var names = [];
-	for(var variable in options.widget.variables) {
-		names.push(variable);
+	var names = [],
+		widget = options.widget;
+	while(widget && !widget.hasOwnProperty("variables")) {
+		widget = widget.parentWidget;
+	}
+	if(widget && widget.variables) {
+		for(var variable in widget.variables) {
+			names.push(variable);
+		}
 	}
 	return names.sort();
 };
