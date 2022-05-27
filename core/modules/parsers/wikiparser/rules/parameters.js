@@ -36,20 +36,14 @@ exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
-	var paramString = this.match[1],
-		attributes = Object.create(null),
-		orderedAttributes = [],
-		reParam = /\s*([^:),\s]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|([^,"'\s]+)))?/mg,
-		paramMatch = reParam.exec(paramString);
-	while(paramMatch) {
-		// Save the parameter details
-		var name = paramMatch[1],
-			attribute = {name: name, type: "string", value: paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5]};
-		attributes[name] = attribute;
+	var params = $tw.utils.parseParameterDefinition(this.match[1]);
+	var attributes = Object.create(null),
+		orderedAttributes = [];
+	$tw.utils.each(params,function(param) {
+		var attribute = {name: param.name, type: "string", value: param["default"] || ""};
+		attributes[param.name] = attribute;
 		orderedAttributes.push(attribute);
-		// Look for the next parameter
-		paramMatch = reParam.exec(paramString);
-	}
+	});
 	// Save the macro definition
 	return [{
 		type: "parameters",

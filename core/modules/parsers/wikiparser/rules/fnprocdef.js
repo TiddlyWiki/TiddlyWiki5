@@ -45,22 +45,9 @@ exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
-	var paramString = this.match[4],
-		params = [];
+	var params = [];
 	if(this.match[3]) {
-		var reParam = /\s*([^:),\s]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|([^,"'\s]+)))?/mg,
-			paramMatch = reParam.exec(paramString);
-		while(paramMatch) {
-			// Save the parameter details
-			var paramInfo = {name: paramMatch[1]},
-				defaultValue = paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5];
-			if(defaultValue !== undefined) {
-				paramInfo["default"] = defaultValue;
-			}
-			params.push(paramInfo);
-			// Look for the next parameter
-			paramMatch = reParam.exec(paramString);
-		}
+		params = $tw.utils.parseParameterDefinition(this.match[4]);
 	}
 	// Is this a multiline definition?
 	var reEnd;
