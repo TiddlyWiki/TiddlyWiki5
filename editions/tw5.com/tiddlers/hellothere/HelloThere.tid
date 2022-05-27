@@ -5,10 +5,6 @@ tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-<div a="foo" b={{foo}} c=<<bar x:"one" y:"two" z>>>
-This
-</div>
-
 ''Have you ever had the feeling that your head is not quite big enough to hold everything you need to remember?''
 
 Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information.
