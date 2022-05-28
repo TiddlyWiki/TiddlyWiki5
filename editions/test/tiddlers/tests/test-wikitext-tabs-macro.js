@@ -1,7 +1,7 @@
 /*\
 title: test-wikitext-tabs-macro.js
 type: application/javascript
-tags: [[$:/tags/test-spec]]
+tags: [[$:/tags/test-spec-disabled]]
 
 Tests the core tabs macro by comparing the HTML output with a stored template.
 Intended to permit future readability improvements.
