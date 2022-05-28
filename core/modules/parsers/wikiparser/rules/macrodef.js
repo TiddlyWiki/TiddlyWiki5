@@ -79,10 +79,7 @@ exports.parse = function() {
 	// Save the macro definition
 	var parseTreeNodes = [{
 		type: "set",
-		attributes: {
-			name: {type: "string", value: this.match[2]},
-			value: {type: "string", value: text}
-		},
+		attributes: {},
 		children: [],
 		params: params,
 		isMacroDefinition: true

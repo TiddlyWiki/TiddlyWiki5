@@ -74,13 +74,12 @@ exports.parse = function() {
 	// Save the macro definition
 	var parseTreeNodes = [{
 		type: "set",
-		attributes: {
-			name: {type: "string", value: this.match[3]},
-			value: {type: "string", value: text}
-		},
+		attributes: {},
 		children: [],
 		params: params
 	}];
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[3]);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);
 	if(this.match[2] === "function") {
 		parseTreeNodes[0].isFunctionDefinition = true;
 	} else if(this.match[2] === "procedure") {

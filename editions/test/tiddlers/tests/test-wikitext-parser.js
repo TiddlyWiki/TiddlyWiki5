@@ -19,7 +19,8 @@ describe("WikiText parser tests", function() {
 
 	// Define a parsing shortcut
 	var parse = function(text) {
-		return wiki.parseText("text/vnd.tiddlywiki",text).tree;
+		var tree = wiki.parseText("text/vnd.tiddlywiki",text).tree;
+		return tree;
 	};
 
 	it("should parse tags", function() {
@@ -122,7 +123,7 @@ describe("WikiText parser tests", function() {
 	it("should parse procedure definitions with no parameters", function() {
 		expect(parse("\\procedure myMacro\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isProcedureDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
 
 		);
 	});
@@ -130,7 +131,7 @@ describe("WikiText parser tests", function() {
 	it("should parse single line procedure definitions with no parameters", function() {
 		expect(parse("\\procedure myMacro nothing\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isProcedureDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
 
 		);
 	});
@@ -138,7 +139,7 @@ describe("WikiText parser tests", function() {
 	it("should parse procedure definitions with parameters", function() {
 		expect(parse("\\procedure myMacro(one,two,three,four:elephant)\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [ { name: 'one' }, { name: 'two' }, { name: 'three' }, { name: 'four', default: 'elephant' } ], isProcedureDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[{"name":"one"},{"name":"two"},{"name":"three"},{"name":"four","default":"elephant"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
 
 		);
 	});
@@ -146,14 +147,14 @@ describe("WikiText parser tests", function() {
 	it("should parse procedure definitions", function() {
 		expect(parse("\\procedure myMacro(one:'Jaguar')\n<$text text=<<one>>/>\n\\end\n\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : '<$text text=<<one>>/>' } }, children : [  ], params : [ { name: 'one', "default": 'Jaguar' } ], isProcedureDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"<$text text=<<one>>/>"}},"children":[],"params":[{"name":"one","default":"Jaguar"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"<$text text=<<one>>/>"}],"isProcedureDefinition":true}]
 
 		);
 
 	});	it("should parse function definitions with no parameters", function() {
 		expect(parse("\\function myMacro\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isFunctionDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
 
 		);
 	});
@@ -161,7 +162,7 @@ describe("WikiText parser tests", function() {
 	it("should parse single line function definitions with no parameters", function() {
 		expect(parse("\\function myMacro nothing\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isFunctionDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
 
 		);
 	});
@@ -169,7 +170,7 @@ describe("WikiText parser tests", function() {
 	it("should parse function definitions with parameters", function() {
 		expect(parse("\\function myMacro(one,two,three,four:elephant)\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [ { name: 'one' }, { name: 'two' }, { name: 'three' }, { name: 'four', default: 'elephant' } ], isFunctionDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[{"name":"one"},{"name":"two"},{"name":"three"},{"name":"four","default":"elephant"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
 
 		);
 	});
@@ -177,7 +178,7 @@ describe("WikiText parser tests", function() {
 	it("should parse function definitions", function() {
 		expect(parse("\\function myMacro(one:'Jaguar')\n<$text text=<<one>>/>\n\\end\n\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : '<$text text=<<one>>/>' } }, children : [  ], params : [ { name: 'one', "default": 'Jaguar' } ], isFunctionDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"<$text text=<<one>>/>"}},"children":[],"params":[{"name":"one","default":"Jaguar"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"<$text text=<<one>>/>"}],"isFunctionDefinition":true}]
 
 		);
 	});
