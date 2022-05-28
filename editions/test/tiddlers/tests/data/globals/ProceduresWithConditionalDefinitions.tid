@@ -1,0 +1,26 @@
+title: Globals/ProceduresWithConditionalDefinitions
+description: Global procedures with conditional definitions to allow overriding
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<<this-is-one>>|<<this-is-one blah>>~
+<$let example="TWO"><<this-is-one>>|<<this-is-one blah>></$let>
++
+title: $:/global/this-is-one
+
+\whitespace trim
+
+\+procedure example()
+ONE
+\end
+
+\parameters (foo:"nothing")
+<<example>>-<$text text=<<foo>>/>
++
+title: ExpectedResult
+
+<p>ONE-nothing|ONE-blah~TWO-nothing|TWO-blah</p>

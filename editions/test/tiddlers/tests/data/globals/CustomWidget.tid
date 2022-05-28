@@ -1,0 +1,22 @@
+title: Globals/CustomWidget
+description: Global shadow variable defining a custom widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<$$mywidget foo="Mahogany">
+Sycamore!
+</$$mywidget>
++
+title: $:/global/$$mywidget
+is-widget: yes
+parameters: (foo:"bar")
+
+Koala! <$text text=<<foo>>/>, <$slot $name="ts-body"/>
++
+title: ExpectedResult
+
+<p>Koala! Mahogany, Sycamore!</p>

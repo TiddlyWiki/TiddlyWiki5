@@ -114,7 +114,7 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}]}]
 
 		);
 	});
@@ -185,7 +185,7 @@ describe("WikiText parser tests", function() {
 	it("should parse comment in pragma area. Comment will be invisible", function() {
 		expect(parse("<!-- comment in pragma area -->\n\\define aMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'aMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [ ], isMacroDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"aMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"aMacro"},{"name":"value","type":"string","value":"nothing"}]}]
 
 		);
 	});

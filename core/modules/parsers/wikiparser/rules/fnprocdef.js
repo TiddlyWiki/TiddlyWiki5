@@ -35,7 +35,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\(function|procedure|widget)\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
+	this.matchRegExp = /^\\(\+?)(function|procedure|widget)\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
 };
 
 /*
@@ -46,12 +46,12 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
 	var params = [];
-	if(this.match[3]) {
-		params = $tw.utils.parseParameterDefinition(this.match[4]);
+	if(this.match[4]) {
+		params = $tw.utils.parseParameterDefinition(this.match[5]);
 	}
 	// Is this a multiline definition?
 	var reEnd;
-	if(this.match[5]) {
+	if(this.match[6]) {
 		// If so, the end of the body is marked with \end
 		reEnd = /(\r?\n\\end[^\S\n\r]*(?:$|\r?\n))/mg;
 	} else {
@@ -75,21 +75,24 @@ exports.parse = function() {
 	var parseTreeNodes = [{
 		type: "set",
 		attributes: {
-			name: {type: "string", value: this.match[2]},
+			name: {type: "string", value: this.match[3]},
 			value: {type: "string", value: text}
 		},
 		children: [],
 		params: params
 	}];
-	if(this.match[1] === "function") {
+	if(this.match[2] === "function") {
 		parseTreeNodes[0].isFunctionDefinition = true;
-	} else if(this.match[1] === "procedure") {
+	} else if(this.match[2] === "procedure") {
 		parseTreeNodes[0].isProcedureDefinition = true;
-	} else if(this.match[1] === "widget") {
+	} else if(this.match[2] === "widget") {
 		parseTreeNodes[0].isWidgetDefinition = true;
 	}
 	if(this.parser.configTrimWhiteSpace) {
 		parseTreeNodes[0].configTrimWhiteSpace = true;
+	}
+	if(this.match[1] === "+") {
+		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"conditional","yes");
 	}
 	return parseTreeNodes;
 };

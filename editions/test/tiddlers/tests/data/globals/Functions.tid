@@ -1,0 +1,22 @@
+title: Globals/Functions
+description: Global functions in shadow variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<$text text=<<this-is-one>>/>
+|
+<$text text=<<this-is-one 7>>/>
++
+title: $:/global/this-is-one
+is-function: yes
+parameters: (foo:"2")
+
+[<foo>multiply[2.5]]
++
+title: ExpectedResult
+
+<p>5|17.5</p>

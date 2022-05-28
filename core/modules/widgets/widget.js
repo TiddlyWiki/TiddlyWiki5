@@ -116,6 +116,7 @@ options: see below
 Options include
 params: array of {name:, value:} for each parameter
 defaultValue: default value if the variable is not defined
+allowSelfAssigned: if true, includes the current widget in the context chain instead of just the parent
 
 Returns an object with the following fields:
 
@@ -124,32 +125,54 @@ text: text of variable, with parameters properly substituted
 */
 Widget.prototype.getVariableInfo = function(name,options) {
 	options = options || {};
-	var actualParams = options.params || [],
-		parentWidget = this.parentWidget;
-	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
-	if(parentWidget && name in parentWidget.variables) {
-		var variable = parentWidget.variables[name],
-			originalValue = variable.value,
-			value = originalValue;
-		// Only substitute parameter and variable references if this variable was defined with the \define pragma
-		if(variable.isMacroDefinition) {
-			var params = this.resolveVariableParameters(variable.params,actualParams);
-			// Substitute any parameters specified in the definition
-			$tw.utils.each(params,function(param) {
-				value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
-			});
-			value = this.substituteVariableReferences(value,options);
-		}
-		return {
-			text: value,
-			params: params,
-			srcVariable: variable,
-			isCacheable: originalValue === value
+	var self = this,
+		actualParams = options.params || [],
+		currWidget = options.allowSelfAssigned ? this : this.parentWidget,
+		processVariable = function(variable) {
+			var originalValue = variable.value,
+				value = originalValue,
+				params = [];
+			// Only substitute parameter and variable references if this variable was defined with the \define pragma
+			if(variable.isMacroDefinition) {
+				params = self.resolveVariableParameters(variable.params,actualParams);
+				// Substitute any parameters specified in the definition
+				$tw.utils.each(params,function(param) {
+					value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
+				});
+				value = self.substituteVariableReferences(value,options);
+			}
+			return {
+				text: value,
+				params: params,
+				srcVariable: variable,
+				isCacheable: originalValue === value
+			};
 		};
+	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
+	if(currWidget && name in currWidget.variables) {
+		return processVariable(currWidget.variables[name]);
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
+	var text = this.evaluateMacroModule(name,actualParams);
+	if(text === undefined) {
+		// Check for a shadow variable tiddler
+		var tiddler = this.wiki.getTiddler("$:/global/" + name);
+		if(tiddler) {
+			return processVariable({
+				value: tiddler.getFieldString("text"),
+				params: $tw.utils.parseParameterDefinition(tiddler.getFieldString("parameters"),{requireParenthesis: true}),
+				isMacroDefinition: tiddler.getFieldString("is-macro") === "yes",
+				isWidgetDefinition: tiddler.getFieldString("is-widget") === "yes",
+				isProcedureDefinition: tiddler.getFieldString("is-procedure") === "yes",
+				isFunctionDefinition: tiddler.getFieldString("is-function") === "yes"
+			});
+		}
+	}
+	if(text === undefined) {
+		text = options.defaultValue;
+	}
 	return {
-		text: this.evaluateMacroModule(name,actualParams,options.defaultValue),
+		text: text,
 		srcVariable: {}
 	};
 };
@@ -479,12 +502,12 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	options = options || {};
 	// Check whether this node type is defined by a custom widget definition
 	var variableDefinitionName = "$" + parseTreeNode.type,
-		variableInfo = this.variables[variableDefinitionName],
+		variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true}),
 		isOverrideable = function() {
 			// Widget is overrideable if it has a double dollar user defined name, or if it is an existing JS widget
 			return parseTreeNode.type.charAt(0) === "$" || !!self.widgetClasses[parseTreeNode.type];
 		};
-	if(!parseTreeNode.isNotRemappable && isOverrideable() && variableInfo && variableInfo.value && variableInfo.isWidgetDefinition) {
+	if(!parseTreeNode.isNotRemappable && isOverrideable() && variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
 		var newParseTreeNode = {
 			type: "transclude",
 			children: [

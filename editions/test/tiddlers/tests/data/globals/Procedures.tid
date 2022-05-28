@@ -1,0 +1,27 @@
+title: Globals/Procedures
+description: Global procedures in shadow variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<<this-is-one>>
+|
+<<this-is-one blah>>
++
+title: $:/global/this-is-one
+
+\whitespace trim
+
+\procedure example()
+ONE
+\end
+
+\parameters (foo:"nothing")
+<<example>>-<$text text=<<foo>>/>
++
+title: ExpectedResult
+
+<p>ONE-nothing</p><p>|ONE-blah</p>
