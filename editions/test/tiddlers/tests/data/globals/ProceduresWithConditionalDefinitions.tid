@@ -14,7 +14,7 @@ title: $:/global/this-is-one
 
 \whitespace trim
 
-\+procedure example()
+\?procedure example()
 ONE
 \end
 

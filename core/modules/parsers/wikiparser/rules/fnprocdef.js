@@ -35,7 +35,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\(\+?)(function|procedure|widget)\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
+	this.matchRegExp = /^\\(\??)(function|procedure|widget)\s+([^(\s]+)(\(\s*([^)]*)\))?(\s*\r?\n)?/mg;
 };
 
 /*
@@ -91,7 +91,7 @@ exports.parse = function() {
 	if(this.parser.configTrimWhiteSpace) {
 		parseTreeNodes[0].configTrimWhiteSpace = true;
 	}
-	if(this.match[1] === "+") {
+	if(this.match[1] === "?") {
 		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"conditional","yes");
 	}
 	return parseTreeNodes;

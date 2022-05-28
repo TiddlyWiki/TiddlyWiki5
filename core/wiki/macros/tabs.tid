@@ -3,7 +3,7 @@ code_body: yes
 parameters: (tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
 is-macro: yes
 
-\+define tabs-button()
+\?define tabs-button()
 \whitespace trim
 <$button set=<<tabsState>> setTo=<<currentTab>> default=<<__default__>> selectedClass="tc-tab-selected" tooltip={{!!tooltip}}>
 	<$tiddler tiddler=<<save-currentTiddler>>>
@@ -19,7 +19,7 @@ is-macro: yes
 </$button>
 \end
 
-\+define tabs-tab()
+\?define tabs-tab()
 \whitespace trim
 <$set name="save-currentTiddler" value=<<currentTiddler>>>
 	<$tiddler tiddler=<<currentTab>>>
@@ -28,14 +28,14 @@ is-macro: yes
 </$set>
 \end
 
-\+define tabs-tab-list()
+\?define tabs-tab-list()
 \whitespace trim
 <$list filter=<<__tabsList__>> variable="currentTab" storyview="pop">
 	<<tabs-tab>>
 </$list>
 \end
 
-\+define tabs-tab-body()
+\?define tabs-tab-body()
 \whitespace trim
 <$list filter=<<__tabsList__>> variable="currentTab">
 	<$reveal type="match" state=<<tabsState>> text=<<currentTab>> default=<<__default__>> retain=<<__retain__>> tag="div">
