@@ -534,7 +534,7 @@ Rebuild a previously rendered widget
 */
 Widget.prototype.refreshSelf = function() {
 	var nextSibling = this.findNextSiblingDomNode();
-	this.destroy();
+	this.removeChildDomNodes({ recursive: true });
 	this.render(this.parentDomNode,nextSibling);
 };
 
@@ -599,7 +599,8 @@ Widget.prototype.findFirstDomNode = function() {
 /*
 Remove any DOM nodes created by this widget or its children
 */
-Widget.prototype.removeChildDomNodes = function() {
+Widget.prototype.removeChildDomNodes = function(options) {
+	const recursive = options && options.recursive;
 	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
@@ -607,6 +608,11 @@ Widget.prototype.removeChildDomNodes = function() {
 		});
 		this.domNodes = [];
 		return true;
+	} else if(recursive) {
+		// Otherwise, ask the child widgets to delete their DOM nodes
+		$tw.utils.each(this.children,function(childWidget) {
+			childWidget.removeChildDomNodes(options);
+		});
 	}
 	return false
 };
