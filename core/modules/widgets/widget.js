@@ -468,7 +468,6 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	var self = this;
 	// Check for too much recursion
 	if(this.getAncestorCount() > MAX_WIDGET_TREE_DEPTH) {
-		// Error message needs special permission not to cause a recursive error loop
 		this.children.push(this.makeChildWidget({type: "error", attributes: {
 			"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
 		}}));

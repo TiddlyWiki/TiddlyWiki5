@@ -46,16 +46,6 @@ is-macro: yes
 </$list>
 \end
 
-\?define __tabsList__()
-\?define __default__()
-\?define __state__()
-\?define __class__()
-\?define __template__()
-\?define __buttonTemplate__()
-\?define __retain__()
-\?define __actions__()
-\?define __explicitState__()
-
 \whitespace trim
 <$qualify title=<<__state__>> name="qualifiedState">
 	<$set name="tabsState" filter={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>

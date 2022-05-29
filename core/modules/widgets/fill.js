@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/value.js
+title: $:/core/modules/widgets/fill.js
 type: application/javascript
 module-type: widget
 
