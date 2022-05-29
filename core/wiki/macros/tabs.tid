@@ -1,5 +1,5 @@
 title: $:/global/tabs
-code_body: yes
+code-body: yes
 parameters: (tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
 is-macro: yes
 
