@@ -1,6 +1,6 @@
 title: $:/core/macros/tabs
 tags: $:/tags/Macro
-code_body: yes
+code-body: yes
 
 \define tabs-button()
 \whitespace trim
