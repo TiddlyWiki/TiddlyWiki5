@@ -13,8 +13,12 @@ title: Output
 <$text text={{{ [[123].multiplybysomething[]] }}}/>
 -
 <$text text={{{ [[123].multiplybysomething[x],[4]] }}}/>
+|
+<$text text={{{ [[123]function[.multiplybysomething]] }}}/>
+-
+<$text text={{{ [[123]function[.multiplybysomething],[x],[4]] }}}/>
 
 +
 title: ExpectedResult
 
-<p>492-984</p>
+<p>492-984|492-984</p>

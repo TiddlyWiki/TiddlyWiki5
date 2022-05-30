@@ -5,12 +5,17 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
+\whitespace trim
+
 \function .multiplybytwo()
 [multiply[2]]
 \end
 
 <$text text={{{ [[123].multiplybytwo[]] }}}/>
+|
+<$text text={{{ [[123]function[.multiplybytwo]] }}}/>
+
 +
 title: ExpectedResult
 
-<p>246</p>
+<p>246|246</p>
