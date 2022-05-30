@@ -160,11 +160,11 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		if(tiddler) {
 			return processVariable({
 				value: tiddler.getFieldString("text"),
-				params: $tw.utils.parseParameterDefinition(tiddler.getFieldString("parameters"),{requireParenthesis: true}),
-				isMacroDefinition: tiddler.getFieldString("is-macro") === "yes",
-				isWidgetDefinition: tiddler.getFieldString("is-widget") === "yes",
-				isProcedureDefinition: tiddler.getFieldString("is-procedure") === "yes",
-				isFunctionDefinition: tiddler.getFieldString("is-function") === "yes"
+				params: $tw.utils.parseParameterDefinition(tiddler.getFieldString("_parameters"),{requireParenthesis: true}),
+				isMacroDefinition: tiddler.getFieldString("_is_macro") === "yes",
+				isWidgetDefinition: tiddler.getFieldString("_is_widget") === "yes",
+				isProcedureDefinition: tiddler.getFieldString("_is_procedure") === "yes",
+				isFunctionDefinition: tiddler.getFieldString("_is_function") === "yes"
 			});
 		}
 	}

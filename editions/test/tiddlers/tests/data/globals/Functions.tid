@@ -12,8 +12,8 @@ title: Output
 <$text text=<<this-is-one 7>>/>
 +
 title: $:/global/this-is-one
-is-function: yes
-parameters: (foo:"2")
+_is_function: yes
+_parameters: (foo:"2")
 
 [<foo>multiply[2.5]]
 +

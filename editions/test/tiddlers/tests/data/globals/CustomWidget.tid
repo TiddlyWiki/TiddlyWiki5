@@ -12,8 +12,8 @@ Sycamore!
 </$$mywidget>
 +
 title: $:/global/$$mywidget
-is-widget: yes
-parameters: (foo:"bar")
+_is_widget: yes
+_parameters: (foo:"bar")
 
 Koala! <$text text=<<foo>>/>, <$slot $name="ts-body"/>
 +
