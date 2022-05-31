@@ -1,0 +1,31 @@
+title: Globals/Refresh
+description: Refreshing global procedures in shadow variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<<this-is-one>>
+|
+<<this-is-one blah>>
++
+title: $:/global/this-is-one
+
+\whitespace trim
+
+\procedure example()
+ONE
+\end
+
+\parameters (foo:"nothing")
+<<example>>-<$text text=<<foo>>/>
++
+title: Actions
+
+<$action-setfield $tiddler="$:/global/this-is-one" $value="Jackdaw"/>
++
+title: ExpectedResult
+
+<p>Jackdaw</p><p>|Jackdaw</p>

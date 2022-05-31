@@ -38,6 +38,8 @@ describe("Wiki-based tests", function() {
 			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 			// Render the widget node to the DOM
 			var wrapper = renderWidgetNode(widgetNode);
+			// Clear changes queue
+			wiki.clearTiddlerEventQueue();
 			// Run the actions if provided
 			if(wiki.tiddlerExists("Actions")) {
 				widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));

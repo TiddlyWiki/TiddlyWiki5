@@ -360,7 +360,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(($tw.utils.count(changedAttributes) > 0) || (changedTiddlers[this.transcludeTitle] && this.parserNeedsRefresh())) {
+	if(($tw.utils.count(changedAttributes) > 0) || (this.transcludeTitle && changedTiddlers[this.transcludeTitle] && this.parserNeedsRefresh()) || (this.transcludeVariable && changedTiddlers["$:/global/" + this.transcludeVariable])) {
 		this.refreshSelf();
 		return true;
 	} else {
