@@ -198,7 +198,12 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						type: parser.type
 					}
 					$tw.utils.each(srcVariable.params,function(param) {
-						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],param.name,param["default"])
+						var name = param.name;
+						// Parameter names starting with dollar must be escaped to double dollars
+						if(name.charAt(0) === "$") {
+							name = "$" + name;
+						}
+						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
 					});
 				} else {
 					// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
@@ -299,14 +304,19 @@ TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaul
 };
 
 /*
-Get a hashmap of the special variables to be provided by the parameters widget
+Get one of the special parameters to be provided by the parameters widget
 */
-TranscludeWidget.prototype.getTransclusionMetaVariables = function() {
-	var variables = {
-			"@parseAsInline": this.parseAsInline ? "yes" : "no",
-			"@params": JSON.stringify(this.stringParametersByName)
-		};
-	return variables;
+TranscludeWidget.prototype.getTransclusionMetaParameter = function(name) {
+	switch(name) {
+		case "parseAsInline":
+			return this.parseAsInline ? "yes" : "no";
+		case "parseTreeNodes":
+			return JSON.stringify(this.parseTreeNode);
+		case "params":
+			return JSON.stringify(this.stringParametersByName);
+		default:
+			return "";
+	}
 };
 
 /*

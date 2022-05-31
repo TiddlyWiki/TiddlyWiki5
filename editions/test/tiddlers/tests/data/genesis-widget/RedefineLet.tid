@@ -8,9 +8,11 @@ title: Output
 \whitespace trim
 \widget $let
 \whitespace trim
+<$parameters $params="@params">
 <$setmultiplevariables $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>addprefix[--]addsuffix[--]]">
 <$slot $name="ts-body"/>
 </$setmultiplevariables>
+</$parameters>
 \end
 <$let
 	one="Elephant"

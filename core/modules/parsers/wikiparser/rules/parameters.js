@@ -40,8 +40,13 @@ exports.parse = function() {
 	var attributes = Object.create(null),
 		orderedAttributes = [];
 	$tw.utils.each(params,function(param) {
-		var attribute = {name: param.name, type: "string", value: param["default"] || ""};
-		attributes[param.name] = attribute;
+		var name = param.name;
+		// Parameter names starting with dollar must be escaped to double dollars for the parameters widget
+		if(name.charAt(0) === "$") {
+			name = "$" + name;
+		}
+		var attribute = {name: name, type: "string", value: param["default"] || ""};
+		attributes[name] = attribute;
 		orderedAttributes.push(attribute);
 	});
 	// Save the macro definition
