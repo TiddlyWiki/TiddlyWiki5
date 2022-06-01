@@ -1090,7 +1090,7 @@ exports.makeWidget = function(parser,options) {
 			$tw.utils.addAttributeToParseTreeNode(letVariableWidget,name,"" + value);
 		});
 		currWidgetNode.children = [letVariableWidget];
-		currWidgetNode = letVariableWidget.children[0];
+		currWidgetNode = letVariableWidget;
 	}
 	// Add in the supplied parse tree nodes
 	currWidgetNode.children = parser ? parser.tree : [];
