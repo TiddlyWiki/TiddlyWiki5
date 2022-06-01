@@ -1075,20 +1075,9 @@ exports.makeWidget = function(parser,options) {
 	options = options || {};
 	var widgetNode = {
 			type: "widget",
-			children: [{
-				type: "importvariables",
-				attributes: {
-					filter: {
-						name: "filter",
-						type: "string",
-						value: "[all[shadows+tiddlers]tag[$:/tags/Global]!is[draft]]"
-					}
-				},
-				isBlock: false,
-				children: []
-			}]
+			children: []
 		},
-		currWidgetNode = widgetNode.children[0];
+		currWidgetNode = widgetNode;
 	// Create let variable widget for variables
 	if($tw.utils.count(options.variables) > 0) {
 		var letVariableWidget = {
@@ -1098,14 +1087,10 @@ exports.makeWidget = function(parser,options) {
 			children: []
 		};
 		$tw.utils.each(options.variables,function(value,name) {
-			letVariableWidget.attributes[name] = {
-				name: name,
-				type: "string",
-				value: "" + value
-			}
+			$tw.utils.addAttributeToParseTreeNode(letVariableWidget,name,"" + value);
 		});
 		currWidgetNode.children = [letVariableWidget];
-		currWidgetNode = letVariableWidget;
+		currWidgetNode = letVariableWidget.children[0];
 	}
 	// Add in the supplied parse tree nodes
 	currWidgetNode.children = parser ? parser.tree : [];
