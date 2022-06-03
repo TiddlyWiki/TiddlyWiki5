@@ -68,15 +68,12 @@ ParametersWidget.prototype.execute = function() {
 			self.setVariable(name,value);
 		});
 		// Assign any metaparameters
-		var assignMetaParameter = function(name) {
+		$tw.utils.each(pointer.getTransclusionMetaParameters(),function(getValue,name) {
 			var variableName = self.getAttribute("$" + name);
 			if(variableName !== undefined) {
-				self.setVariable(variableName,pointer.getTransclusionMetaParameter(name));
+				self.setVariable(variableName,getValue(name));
 			}
-		};
-		assignMetaParameter("parseAsInline");
-		assignMetaParameter("parseTreeNodes");
-		assignMetaParameter("params");
+		});
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();

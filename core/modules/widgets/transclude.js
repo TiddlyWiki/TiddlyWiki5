@@ -306,19 +306,22 @@ TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaul
 /*
 Get one of the special parameters to be provided by the parameters widget
 */
-TranscludeWidget.prototype.getTransclusionMetaParameter = function(name) {
-	switch(name) {
-		case "parseAsInline":
-			return this.parseAsInline ? "yes" : "no";
-		case "parseTreeNodes":
-			return JSON.stringify(this.parseTreeNode);
-		case "slotFillParseTrees":
-			return JSON.stringify(this.slotFillParseTrees);
-		case "params":
-			return JSON.stringify(this.stringParametersByName);
-		default:
-			return "";
-	}
+TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
+	var self = this;
+	return {
+		"parseAsInline": function() {
+			return self.parseAsInline ? "yes" : "no";
+		},
+		"parseTreeNodes": function() {
+			return JSON.stringify(self.parseTreeNode);
+		},
+		"slotFillParseTrees": function() {
+			return JSON.stringify(self.slotFillParseTrees);
+		},
+		"params": function() {
+			 JSON.stringify(self.stringParametersByName);
+		}
+	};
 };
 
 /*
