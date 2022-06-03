@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.2.3">> The genesis widget allows the dynamic construction of widgets, where the name and attributes of the widget can be dynamically determined, and do not need to be known in advance.
+<<.from-version "5.3.0">> The genesis widget allows the dynamic construction of widgets, where the name and attributes of the widget can be dynamically determined, and do not need to be known in advance.
 
 ! Content and Attributes
 
