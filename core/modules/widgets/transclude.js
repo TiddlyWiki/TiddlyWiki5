@@ -312,6 +312,8 @@ TranscludeWidget.prototype.getTransclusionMetaParameter = function(name) {
 			return this.parseAsInline ? "yes" : "no";
 		case "parseTreeNodes":
 			return JSON.stringify(this.parseTreeNode);
+		case "slotFillParseTrees":
+			return JSON.stringify(this.slotFillParseTrees);
 		case "params":
 			return JSON.stringify(this.stringParametersByName);
 		default:
