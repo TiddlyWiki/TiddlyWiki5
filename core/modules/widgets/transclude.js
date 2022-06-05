@@ -319,7 +319,7 @@ TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
 			return JSON.stringify(self.slotFillParseTrees);
 		},
 		"params": function() {
-			 JSON.stringify(self.stringParametersByName);
+			return JSON.stringify(self.stringParametersByName);
 		}
 	};
 };
