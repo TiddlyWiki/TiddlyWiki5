@@ -315,7 +315,7 @@ TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
 		"parseTreeNodes": function() {
 			return JSON.stringify(self.parseTreeNode);
 		},
-		"slotFillParseTrees": function() {
+		"slotFillParseTreeNodes": function() {
 			return JSON.stringify(self.slotFillParseTrees);
 		},
 		"params": function() {
