@@ -17,7 +17,7 @@ title: TiddlerOne
 \whitespace trim
 <$genesis $type="text" $remappable="no" text=<<text>>/>
 <$set name="$text" value="">
-	<$slot $name="ts-body">
+	<$slot $name="ts-raw">
 		Whale
 	</$slot>
 </$set>

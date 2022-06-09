@@ -10,7 +10,7 @@ title: Output
 \whitespace trim
 <$parameters $params="@params">
 <$setmultiplevariables $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>addprefix[--]addsuffix[--]]">
-<$slot $name="ts-body"/>
+<$slot $name="ts-raw"/>
 </$setmultiplevariables>
 </$parameters>
 \end

@@ -509,16 +509,10 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	if(!parseTreeNode.isNotRemappable && isOverrideable() && variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
 		var newParseTreeNode = {
 			type: "transclude",
-			children: [
-				{
-					type: "fill",
-					children: parseTreeNode.children
-				}
-			],
+			children: parseTreeNode.children,
 			isBlock: parseTreeNode.isBlock
 		};
 		$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,"$variable",variableDefinitionName);
-		$tw.utils.addAttributeToParseTreeNode(newParseTreeNode.children[0],"$name","ts-body");
 		$tw.utils.each(parseTreeNode.attributes,function(attr,name) {
 			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of transclude
 			name = name.charAt(0) === "$" ? "$" + name : name;

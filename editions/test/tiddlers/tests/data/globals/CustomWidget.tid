@@ -15,7 +15,7 @@ title: $:/global/$$mywidget
 _is_widget: yes
 _parameters: (foo:"bar")
 
-Koala! <$text text=<<foo>>/>, <$slot $name="ts-body"/>
+Koala! <$text text=<<foo>>/>, <$slot $name="ts-raw"/>
 +
 title: ExpectedResult
 

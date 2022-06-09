@@ -10,7 +10,7 @@ title: Output
 \widget $non-existent-widget(one:'Jaguar')
 \whitespace trim
 <$text text=<<one>>/>
-<$slot $name="ts-body">
+<$slot $name="ts-raw">
 	Whale
 </$slot>
 \end

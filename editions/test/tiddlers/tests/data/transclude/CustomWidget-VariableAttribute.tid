@@ -16,7 +16,7 @@ title: TiddlerOne
 \widget $$mywidget($variable:'Jaguar')
 \whitespace trim
 <$text text=<<$variable>>/>
-<$slot $name="ts-body">
+<$slot $name="ts-raw">
 	Whale
 </$slot>
 \end
