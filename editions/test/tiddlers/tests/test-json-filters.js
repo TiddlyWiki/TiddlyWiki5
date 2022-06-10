@@ -3,7 +3,7 @@ title: test-json-filters.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
-Tests the JSON filters.
+Tests the JSON filters and the format:json operator
 
 \*/
 (function(){
@@ -90,6 +90,12 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[{First}jsontype[d],[f],[2]]")).toEqual(["boolean"]);
 		expect(wiki.filterTiddlers("[{First}jsontype[d],[f],[3]]")).toEqual(["boolean"]);
 		expect(wiki.filterTiddlers("[{First}jsontype[d],[f],[4]]")).toEqual(["null"]);
+	});
+
+	it("should support the jsontype operator", function() {
+		expect(wiki.filterTiddlers("[{First}format:json[]]")).toEqual(["{\"a\":\"one\",\"b\":\"\",\"c\":1.618,\"d\":{\"e\":\"four\",\"f\":[\"five\",\"six\",true,false,null]}}"]);
+		expect(wiki.filterTiddlers("[{First}format:json[4]]")).toEqual(["{\n    \"a\": \"one\",\n    \"b\": \"\",\n    \"c\": 1.618,\n    \"d\": {\n        \"e\": \"four\",\n        \"f\": [\n            \"five\",\n            \"six\",\n            true,\n            false,\n            null\n        ]\n    }\n}"]);
+		expect(wiki.filterTiddlers("[{First}format:json[  ]]")).toEqual(["{\n  \"a\": \"one\",\n  \"b\": \"\",\n  \"c\": 1.618,\n  \"d\": {\n    \"e\": \"four\",\n    \"f\": [\n      \"five\",\n      \"six\",\n      true,\n      false,\n      null\n    ]\n  }\n}"]);
 	});
 
 });
