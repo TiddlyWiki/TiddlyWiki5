@@ -20,7 +20,14 @@ exports.json = function(source,operand,options) {
 	}
 	source(function(tiddler,title) {
 		var data = $tw.utils.parseJSONSafe(title);
-		results.push(JSON.stringify(data,null,spaces));
+		try {
+			data = JSON.parse(title);
+		} catch(e) {
+			data = undefined;
+		}
+		if(data !== undefined) {
+			results.push(JSON.stringify(data,null,spaces));
+		}
 	});
 	return results;
 };
