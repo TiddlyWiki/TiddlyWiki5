@@ -7,16 +7,16 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.3.0">> The genesis widget allows the dynamic construction of widgets, where the name and attributes of the widget can be dynamically determined, and do not need to be known in advance.
+<<.from-version "5.3.0">> The genesis widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
 
 ! Content and Attributes
 
 The content of the `<$genesis>` widget is used as the content of the dynamically created widget.
 
 |!Attribute |!Description |
-|$type |The type of widget to create |
+|$type |The type of widget to create (note that the first `$` must not be included, so the `<$text>` widget would be created by passing `text`) |
 |$tag |The HTML tag to be used for "element" widgets |
-|$names |An optional filter evaluating to the names of a list of variables to be applied to the widget |
+|$names |An optional filter evaluating to the names of a list of attributes to be applied to the widget |
 |$values |An optional filter evaluating to the values corresponding to the list of names specified in `$names` |
 |//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
 |//{attributes starting with $$}// |Attributes starting with two dollar signs are appplied as attributes to the output widget, but with the attribute name changed to use a single dollar sign |
