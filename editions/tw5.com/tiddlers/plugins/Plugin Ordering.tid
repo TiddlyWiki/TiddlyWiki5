@@ -1,0 +1,51 @@
+created: 20220613115453346
+modified: 20220613171815188
+tags: PluginMechanism
+title: Plugin Ordering
+
+Using the Node.js client-server configuration, plugins are activated in the following order:
+
+# Plugins found using the OS environment variables
+#* And: [[PluginFolders]]
+#* See: [[Environment Variables on Node.js]]
+
+# Plugins stored in the wiki `/plugin` path
+#* See: [[PluginFolders]]
+
+# Plugins specified in the command line
+#* See: [[Using TiddlyWiki on Node.js]] ... the notes about <<.from-version "5.1.20">>
+
+# Plugins imported by drag & drop as wiki content
+#* See: [[Installing a plugin from the plugin library]] or [[Manually installing a plugin]]
+
+''Important:''
+
+<<<
+''Elements lower in the list take precedence''.
+
+Including a plugin as an ordinary tiddler by ''drag & drop''  into the browser, will result in the plugin only being active in the browser. It will not be available under Node.js!
+<<<
+
+Option 1:
+
+<<<
+Using a client-server configuration option 1 is the most common one. It lowers maintenence, since all plugins can be updated in one go. 
+<<<
+
+Option 2:
+
+<<<
+Option 2 is used, if you want to work with a fixed configuration. Updates have to be performed independently.
+<<<
+
+Option 3:
+
+<<<
+This option allows you ''add'' and start an edition, without the need to overwrite an existing `tiddlywiki.info` file. It allows you to start any edition as a client-server edition, even if the tiddlywiki.info file didn't specify it.
+<<<
+
+Option 4:
+
+<<<
+Is the exact same mechanism used for a single-file wiki. This mechanism ''should only be used'' in a Node.js configuration for ''testing and debugging'' purposes, since the plugins are stored in the `tiddlers/` directory. 
+<<<
