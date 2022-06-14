@@ -621,6 +621,8 @@ Tests the filtering mechanism.
 		});
 	
 		it("should handle indirect operands", function() {
+			expect(wiki.filterTiddlers("[{!!missing}]").join(",")).toBe("");
+			expect(wiki.filterTiddlers("[{!!title}]").join(",")).toBe("");
 			expect(wiki.filterTiddlers("[prefix{Tiddler8}] +[sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[modifier{Tiddler8!!test-field}] +[sort[title]]").join(",")).toBe("TiddlerOne");
 			var fakeWidget = {wiki: wiki, getVariable: function() {return "Tiddler Three";}};
