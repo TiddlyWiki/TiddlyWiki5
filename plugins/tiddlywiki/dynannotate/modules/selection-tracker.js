@@ -139,9 +139,9 @@ SelectionTracker.prototype.handleSelectionChange = function() {
 			var variables = {};
 			// Get the bounds of the container and the selection
 			var selectionRectangle = selection.getRangeAt(0).getBoundingClientRect(),
-				trackingRectangle = anchor.container.parentNode.getBoundingClientRect();
-			variables["tv-selection-posx"] = (selectionRectangle.left).toString();
-			variables["tv-selection-posy"] = (selectionRectangle.top).toString();
+				offsetParentRectangle = anchor.container.offsetParent.getBoundingClientRect();
+			variables["tv-selection-posx"] = (selectionRectangle.left - offsetParentRectangle.left).toString();
+			variables["tv-selection-posy"] = (selectionRectangle.top - offsetParentRectangle.top).toString();
 			variables["tv-selection-width"] = (selectionRectangle.width).toString();
 			variables["tv-selection-height"] = (selectionRectangle.height).toString();
 			variables["tv-selection-coords"] = "(" + variables["tv-selection-posx"] + "," + variables["tv-selection-posy"] + "," + variables["tv-selection-width"] + "," + variables["tv-selection-height"] + ")";
