@@ -51,12 +51,14 @@ tags: $:/tags/SideBarSegment
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$keyboard key="((advanced-search-sidebar))" actions=<<advanced-search-actions>>>
+<form class="tc-form-inline">
 <$macrocall $name="keyboard-driven-input" tiddler=<<editTiddler>> storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
 		class="tc-popup-handle" filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" 
 		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
+</form>
 </$keyboard>
 </$keyboard>
 </$keyboard>

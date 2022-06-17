@@ -279,6 +279,10 @@ kbd {
 	color: <<colour selection-foreground>>;
 }
 
+form.tc-form-inline {
+	display: inline;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
