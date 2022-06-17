@@ -1,9 +1,10 @@
 created: 20220611125113040
-modified: 20220612091251059
+modified: 20220617133704286
 tags: [[TiddlyWiki on Node.js]] PluginsCS
-title: Uninstalling a plugin - client server
+title: Uninstalling a plugin with Node.js
+type: text/vnd.tiddlywiki
 
-Follow these instructions when using TiddlyWiki under client-server (Node.js) configuration:
+Follow these instructions when using TiddlyWiki with client-server Node.js configuration:
 
 # Quit the server if it is running
 
@@ -27,4 +28,4 @@ Follow these instructions when using TiddlyWiki under client-server (Node.js) co
 }
 ```
 
-<$macrocall $name=".note" _="An overview, how to handle plugins can be found at: [[Plugins]]"/>
+<$macrocall $name=".note" _="An overview of working with plugins can be found at [[Plugins]]"/>

@@ -1,13 +1,12 @@
 created: 20160107222352710
-modified: 20220612090957397
+modified: 20220617122143911
 tags: Plugins
 title: Installing a plugin from the plugin library
 type: text/vnd.tiddlywiki
 
 \rules except wikilink
-\import Plugins
 
-If you want to follow the steps //side by side// you can <<cp-plugin-window>>. 
+If you want to follow the steps //side by side// you can <<open-tiddler-in-window>>. 
 
 Follow these instructions when using TiddlyWiki as a standalone, single file wiki.
 
@@ -15,7 +14,7 @@ Follow these instructions when using TiddlyWiki as a standalone, single file wik
 
 # Create a backup of your current wiki file ([[just in case|The First Rule of Using TiddlyWiki]])
 
-# Open the <<cp-plugin-link>>
+# Open the <<controlPanel-plugin-link>>
 
 #* Click on the ''Plugins'' tab and then the 
 #*<<.icon $:/core/images/download-button>> ''Get more plugins'' button
@@ -36,4 +35,4 @@ Follow these instructions when using TiddlyWiki as a standalone, single file wik
 
 # The plugin should now be available for use
 
-<$macrocall $name=".note" _="""If you use TiddlyWiki with ''node.js'' have a closer look at: [[Installing a plugin - client server]]<br>An overview can be found at: [[Plugins]]"""/> 
+<$macrocall $name=".note" _="""If you use TiddlyWiki with ''Node.js'' have a closer look at [[Installing official plugins on Node.js]]<br>An overview can be found at [[Plugins]]"""/> 

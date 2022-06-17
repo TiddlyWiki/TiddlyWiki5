@@ -1,20 +1,19 @@
 created: 20160107222504269
-modified: 20220612082234916
+modified: 20220617132957241
 tags: Plugins
 title: Uninstalling a plugin
 type: text/vnd.tiddlywiki
 
 \rules except wikilink
-\import Plugins
 
-If you want to follow the steps //side by side// you can <<cp-plugin-window>>.
+If you want to follow the steps //side by side// you can <<open-tiddler-in-window>>.
 
 
 Follow these instructions when using TiddlyWiki as a standalone, single file wiki.
 
 # Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
 
-# Open the <<cp-plugin-link>> and go to the ''Plugins'' tab
+# Open the <<controlPanel-plugin-link>> and go to the ''Plugins'' tab
 
 # Click on the plugin you want to delete to open it as a standalone tiddler
 
@@ -28,4 +27,4 @@ Follow these instructions when using TiddlyWiki as a standalone, single file wik
 
 # The plugin should no longer be active or available
 
-<$macrocall $name=".note" _="""If you use TiddlyWiki with node.js have a closer look at: [[Uninstalling a plugin - client server]]<br>An overview can be found at: [[Plugins]]"""/> 
+<$macrocall $name=".note" _="""If you use TiddlyWiki with node.js have a closer look at [[Uninstalling a plugin with Node.js]]<br>An overview of working with plugins can be found at [[Plugins]]"""/> 

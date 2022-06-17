@@ -1,51 +1,15 @@
 created: 20140910215514237
 list: [[Installing a plugin from the plugin library]] [[Uninstalling a plugin]] [[Manually installing a plugin]] OfficialPlugins
-modified: 20220613170138685
+modified: 20220617133819755
 tags: Concepts TableOfContents
 title: Plugins
 type: text/vnd.tiddlywiki
-
-\define activatePluginTab()
-<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Plugins"/>
-<$action-navigate $to="$:/ControlPanel"/>
-\end
-
-\define activateTiddlerWindow()
-<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Plugins"/>
-<$action-sendmessage $message="tm-open-window"
-  $param=<<currentTiddler>> windowTitle="Side by Side View"
-  width="800" height="600" />
-\end
-
-\define cp-plugin-link()
-<$button actions=<<activatePluginTab>> class="tc-btn-invisible tc-tiddlylink">
-{{$:/core/images/options-button}} ~ControlPanel
-</$button>
-\end
-
-\define cp-plugin-window()
-<$button actions=<<activateTiddlerWindow>> class="tc-btn-invisible tc-tiddlylink">
-open ''this'' tiddler in a new window
-</$button>
-\end
-
-\define activateEditionWindow(url)
-<$action-sendmessage $message="tm-open-external-window"
-  $param="""$url$""" windowName="_edition"
-  windowFeatures="width=800 height=600" />
-\end
-
-\define open-edition-window(url)
-<$button actions=<<activateEditionWindow """$url$""">> class="tc-btn-invisible tc-tiddlylink">
-open the ''example edition'' new window
-</$button>
-\end
 
 ! Introduction
 
 Plugins in TiddlyWiki5 can be used to distribute optional components that customise and extend wiki. You can install them from the official plugin library or from community sites.
 
-Internally, plugins are a bundle of tiddlers packaged together as a single tiddler that can be installed, copied or uninstalled / deleted as a unit. The individual tiddlers within a plugin appear as ~ShadowTiddlers. 
+Internally, plugins are a bundle of tiddlers packaged together as a single tiddler that can be installed, copied, disabled or deleted as a unit. The individual tiddlers within a plugin appear as shadow tiddlers. 
 
 Plugins can contain ~JavaScript modules, style sheets, and templates. Plugins can also be used to distribute ordinary text, images or any other content.
 
@@ -61,6 +25,6 @@ Plugins can contain ~JavaScript modules, style sheets, and templates. Plugins ca
 
 The PluginMechanism tiddler contains more details about how plugins are implemented internally. 
 
-You can open the plugin details in the <<cp-plugin-link>> on the <<.controlpanel-tab Plugins>> sub-tab.
+You can open the plugin details in the <<controlPanel-plugin-link>> on the <<.controlpanel-tab Plugins>> sub-tab.
 
-There is a plugin called $:/core that contains the main core code of TiddlyWiki. It is always present, and it is the source of default [[Shadow tiddlers|ShadowTiddlers]].
+There is a plugin called $:/core that contains the main core code of TiddlyWiki. It is always present, and it is the source of default ShadowTiddlers.
