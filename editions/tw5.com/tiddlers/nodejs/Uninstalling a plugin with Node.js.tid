@@ -1,0 +1,31 @@
+created: 20220611125113040
+modified: 20220617133704286
+tags: [[TiddlyWiki on Node.js]] PluginsCS
+title: Uninstalling a plugin with Node.js
+type: text/vnd.tiddlywiki
+
+Follow these instructions when using TiddlyWiki with client-server Node.js configuration:
+
+# Quit the server if it is running
+
+# Edit the `tiddlywiki.info` file (it is in JSON format) and locate the `plugins` and `themes` section (see below)
+
+# Remove the entries corresponding to the plugins you wish to remove
+#* Take care to retain ''commas'' to separate items
+#* Do ''not'' terminate the last item in a list with a comma
+
+# Restart the server
+
+```
+{
+	"plugins": [
+		"tiddlywiki/codemirror"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+}
+```
+
+<$macrocall $name=".note" _="An overview of working with plugins can be found at [[Plugins]]"/>
