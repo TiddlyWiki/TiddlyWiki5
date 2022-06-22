@@ -198,7 +198,6 @@ Each entry in the events array is an object with these properties:
 handlerFunction: optional event handler function
 handlerObject: optional event handler object
 handlerMethod: optionally specifies object handler method name (defaults to `handleEvent`)
-capture: optionally specifies the listener should use capture (defaults to `false`)
 */
 exports.addEventListeners = function(domNode,events) {
 	$tw.utils.each(events,function(eventInfo) {
@@ -214,7 +213,7 @@ exports.addEventListeners = function(domNode,events) {
 				handler = eventInfo.handlerObject;
 			}
 		}
-		domNode.addEventListener(eventInfo.name,handler,!!eventInfo.capture);
+		domNode.addEventListener(eventInfo.name,handler,false);
 	});
 };
 

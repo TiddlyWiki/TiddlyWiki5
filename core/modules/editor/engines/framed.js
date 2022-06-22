@@ -84,9 +84,6 @@ function FramedEngine(options) {
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners
-	$tw.utils.addEventListeners(this.iframeDoc, [
-		{name: "keydown",handlerObject: $tw.keyboardManager,handlerMethod: "handleKeydownEvent", capture: true},
-	]);
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
