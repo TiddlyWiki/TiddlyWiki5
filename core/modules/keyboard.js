@@ -322,8 +322,21 @@ KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 };
 
 KeyboardManager.prototype.handleKeydownEvent = function(event) {
+	return this.handleKeydownEventInternal(event, false);
+}
+
+KeyboardManager.prototype.handlePrimaryKeydownEvent = function(event) {
+	return this.handleKeydownEventInternal(event, true);
+}
+
+KeyboardManager.prototype.handleKeydownEventInternal = function(event, onlyPrimary) {
 	var key, action;
 	for(var i=0; i<this.shortcutTiddlers.length; i++) {
+		var tiddler = $tw.wiki.getTiddler(this.shortcutTiddlers[i]);
+		if (onlyPrimary && !tiddler.fields.primary) {
+			continue;
+		}
+		
 		if(this.shortcutParsedList[i] !== undefined && this.checkKeyDescriptors(event,this.shortcutParsedList[i])) {
 			key = this.shortcutParsedList[i];
 			action = this.shortcutActionList[i];
