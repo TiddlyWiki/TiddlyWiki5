@@ -2157,6 +2157,10 @@ html body.tc-body.tc-single-tiddler-window {
 	margin: 0.5em 0;
 }
 
+.tc-manager-control select {
+	max-width: 100%;
+}
+
 .tc-manager-list {
 	width: 100%;
 	border-top: 1px solid <<colour muted-foreground>>;
