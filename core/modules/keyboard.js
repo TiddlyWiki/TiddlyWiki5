@@ -323,10 +323,16 @@ KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 	}
 };
 
-KeyboardManager.prototype.handleKeydownEvent = function(event, onlyPriority) {
+/*
+event: the keyboard event object
+options:
+	onlyPriority: true if only priority global shortcuts should be invoked
+*/
+KeyboardManager.prototype.handleKeydownEvent = function(event, options) {
+	options = options || {};
 	var key, action;
 	for(var i=0; i<this.shortcutTiddlers.length; i++) {
-		if(onlyPriority && this.shortcutPriorityList[i] !== true) {
+		if(options.onlyPriority && this.shortcutPriorityList[i] !== true) {
 			continue;
 		}
 
