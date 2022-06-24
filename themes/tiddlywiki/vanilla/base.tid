@@ -738,7 +738,7 @@ button.tc-tag-label, span.tc-tag-label {
 	font-weight: normal;
 	line-height: 1.2em;
 	color: <<colour tag-foreground>>;
-	white-space: nowrap;
+	white-space: break-spaces;
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
 	border-radius: 1em;
@@ -775,7 +775,6 @@ button.tc-untagged-label {
 }
 
 .tc-tag-manager-table .tc-tag-label {
-	white-space: normal;
 }
 
 .tc-tag-manager-tag {
