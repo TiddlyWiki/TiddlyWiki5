@@ -53,10 +53,10 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if ($tw.keyboardManager.handlePrimaryKeydownEvent(event)) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, true)) {
 		return true;
 	}
-	
+
 	var keyInfo = $tw.keyboardManager.getMatchingKeyDescriptor(event,this.keyInfoArray);
 	if(keyInfo) {
 		var handled = this.invokeActions(this,event);
