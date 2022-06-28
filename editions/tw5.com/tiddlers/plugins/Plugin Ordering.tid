@@ -1,5 +1,5 @@
 created: 20220613115453346
-modified: 20220617133125115
+modified: 20220628160136158
 tags: PluginMechanism
 title: Plugin Ordering
 type: text/vnd.tiddlywiki
@@ -10,7 +10,7 @@ Using the Node.js client-server configuration plugins are activated in the follo
 #* See: [[PluginFolders]]
 #* and: [[Environment Variables on Node.js]]
 
-# Plugins stored in the wiki `/plugin` path
+# Plugins stored in the wiki `/plugins` path
 #* See: [[PluginFolders]]
 
 # Plugins specified in the command line
