@@ -36,8 +36,9 @@ Notifier.prototype.display = function(title,options) {
 	if(!tiddler) {
 		return;
 	}
-	// Add classes
+	// Add classes and roles
 	$tw.utils.addClass(notification,"tc-notification");
+	notification.setAttribute("role","alert");
 	// Create the variables
 	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Render the body of the notification
