@@ -40,6 +40,7 @@ Command.prototype.execute = function() {
 	$tw.utils.createFileDirectories(filename);
 	if(template) {
 		variables.currentTiddler = title;
+		variables.storyTiddler = title;
 		title = template;
 	}
 	if(name && value) {
