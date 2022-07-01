@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20211124164948726
+modified: 20211230150725145
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -131,6 +131,10 @@ td svg {
 .doc-example-result ol {
 	margin-left: 0;
 	padding-left: 20px;
+}
+
+.doc-bad-example code, .doc-bad-example pre, table.doc-bad-example {
+  background-color:#ffff80;
 }
 
 .doc-table th, .doc-table tr {

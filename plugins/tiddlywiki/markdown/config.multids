@@ -1,0 +1,5 @@
+title: $:/config/
+
+ShortcutInfo/new-markdown-tiddler: {{$:/language/Buttons/NewMarkdown/Hint}}
+shortcuts-mac/new-markdown-tiddler: ctrl-M
+shortcuts-not-mac/new-markdown-tiddler: alt-M

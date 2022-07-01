@@ -46,26 +46,31 @@ function relinkTiddler(fromTitle,toTitle,options) {
 			if(!tiddler.fields["plugin-type"] && type !== "application/javascript") {
 				var tags = tiddler.fields.tags ? tiddler.fields.tags.slice(0) : undefined,
 					list = tiddler.fields.list ? tiddler.fields.list.slice(0) : undefined,
-					isModified = false;
+					isModified = false,
+					processList = function(listField) {
+						if(listField && listField.indexOf(fromTitle) !== -1) {
+							// Remove any existing instances of the toTitle
+							var p = listField.indexOf(toTitle);
+							while(p !== -1) {
+								listField.splice(p,1);
+								p = listField.indexOf(toTitle);
+							}
+							// Replace the fromTitle with toTitle
+							$tw.utils.each(listField,function (title,index) {
+								if(title === fromTitle) {
+									listField[index] = toTitle;
+									isModified = true;
+								}
+							});
+						}
+					};
 				if(!options.dontRenameInTags) {
 					// Rename tags
-					$tw.utils.each(tags,function (title,index) {
-						if(title === fromTitle) {
-console.log("Renaming tag '" + tags[index] + "' to '" + toTitle + "' of tiddler '" + tiddler.fields.title + "'");
-							tags[index] = toTitle;
-							isModified = true;
-						}
-					});
+					processList(tags);
 				}
 				if(!options.dontRenameInLists) {
 					// Rename lists
-					$tw.utils.each(list,function (title,index) {
-						if(title === fromTitle) {
-console.log("Renaming list item '" + list[index] + "' to '" + toTitle + "' of tiddler '" + tiddler.fields.title + "'");
-							list[index] = toTitle;
-							isModified = true;
-						}
-					});
+					processList(list);
 				}
 				if(isModified) {
 					var newTiddler = new $tw.Tiddler(tiddler,{tags: tags, list: list},self.getModificationFields())

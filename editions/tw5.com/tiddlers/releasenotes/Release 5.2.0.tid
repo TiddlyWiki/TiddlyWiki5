@@ -12,6 +12,12 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.23...v5.2.0]]//
 
+<<.banner-credits
+	credit:"""Congratulations to Frank. B for his winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/eccIEHZoxsI/m/_MWs3EooBAAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/32b36fb2aff6bbe4f9281ee56d5bf6b8bbe5454b/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
 ! Highlights
 
 !! Unrestricted Fieldnames and the New JSON Store Area

@@ -35,7 +35,7 @@ SetFieldWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 SetFieldWidget.prototype.execute = function() {
-	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
+	this.actionTiddler = this.getAttribute("$tiddler") || (!this.hasParseTreeNodeAttribute("$tiddler") && this.getVariable("currentTiddler"));
 	this.actionField = this.getAttribute("$field");
 	this.actionIndex = this.getAttribute("$index");
 	this.actionValue = this.getAttribute("$value");
@@ -46,11 +46,7 @@ SetFieldWidget.prototype.execute = function() {
 Refresh the widget by ensuring our attributes are up to date
 */
 SetFieldWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$tiddler"] || changedAttributes["$field"] || changedAttributes["$index"] || changedAttributes["$value"]) {
-		this.refreshSelf();
-		return true;
-	}
+	// Nothing to refresh
 	return this.refreshChildren(changedTiddlers);
 };
 
@@ -60,15 +56,17 @@ Invoke the action associated with this widget
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
 		options = {};
-	options.suppressTimestamp = !this.actionTimestamp;
-	if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
-		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
-	}
-	$tw.utils.each(this.attributes,function(attribute,name) {
-		if(name.charAt(0) !== "$") {
-			self.wiki.setText(self.actionTiddler,name,undefined,attribute,options);
+	if(this.actionTiddler) {
+		options.suppressTimestamp = !this.actionTimestamp;
+		if((typeof this.actionField == "string") || (typeof this.actionIndex == "string")  || (typeof this.actionValue == "string")) {
+			this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);
 		}
-	});
+		$tw.utils.each(this.attributes,function(attribute,name) {
+			if(name.charAt(0) !== "$") {
+				self.wiki.setText(self.actionTiddler,name,undefined,attribute,options);
+			}
+		});
+	}
 	return true; // Action was invoked
 };
 

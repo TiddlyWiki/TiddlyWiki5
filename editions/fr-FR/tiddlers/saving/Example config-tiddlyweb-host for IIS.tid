@@ -1,0 +1,9 @@
+created: 20180328145039530
+fr-title: Exemple de config-tiddlyweb-host pour IIS
+modified: 20220402105820520
+tags: Saving
+title: Example config-tiddlyweb-host for IIS
+type: text/plain
+
+title: $:/config/tiddlyweb/host
+text: $protocol$//$host$/MonAppli/

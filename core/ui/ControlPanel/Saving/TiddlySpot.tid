@@ -8,13 +8,14 @@ caption: {{$:/language/ControlPanel/Saving/TiddlySpot/Caption}}
 http://$(userName)$.tiddlyspot.com/$path$/
 \end
 \define siteLink(path)
+\whitespace trim
 <$reveal type="nomatch" state="$:/UploadName" text="">
 <$set name="userName" value={{$:/UploadName}}>
 <$reveal type="match" state="$:/UploadURL" text="">
 <<siteURL $path$>>
 </$reveal>
 <$reveal type="nomatch" state="$:/UploadURL" text="">
-<$macrocall $name=resolvePath source={{$:/UploadBackupDir}} root={{$:/UploadURL}}>>
+<$macrocall $name=resolvePath source={{$:/UploadBackupDir}} root={{$:/UploadURL}}/>
 </$reveal>
 </$set>
 </$reveal>

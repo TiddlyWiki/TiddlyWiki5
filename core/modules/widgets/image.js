@@ -111,6 +111,16 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.imageAlt) {
 		domNode.setAttribute("alt",this.imageAlt);
 	}
+	// Add classes when the image loads or fails
+	$tw.utils.addClass(domNode,"tc-image-loading");
+	domNode.addEventListener("load",function() {
+		$tw.utils.removeClass(domNode,"tc-image-loading");
+		$tw.utils.addClass(domNode,"tc-image-loaded");
+	},false);
+	domNode.addEventListener("error",function() {
+		$tw.utils.removeClass(domNode,"tc-image-loading");
+		$tw.utils.addClass(domNode,"tc-image-error");
+	},false);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);

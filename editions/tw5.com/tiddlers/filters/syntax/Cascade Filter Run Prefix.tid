@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 |''input'' |all titles from previous filter runs |
 |''output''|the input titles as modified by the filters returned by this filter run |
 
-The filter expression for this filter run is evaluated to return a list of filters. Each input title is then evaluated against each of the filters in turn, and the input title is replaced with the first result of the first filter that returns a non-empty list. If none of the filters return a result for an input title, it is replaced with an empty string.
+The [[filter expression|Filter Expression]] for this [[filter run|Filter Run]] is evaluated to return a list of filters. Each input title is then evaluated against each of the filters in turn, and the input title is replaced with the first result of the first filter that returns a non-empty list. If none of the filters return a result for an input title, it is replaced with an empty string.
 
 The following variables are available within the filter run:
 

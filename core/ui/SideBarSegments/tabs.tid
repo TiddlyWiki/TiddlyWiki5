@@ -1,7 +1,7 @@
 title: $:/core/ui/SideBarSegments/tabs
 tags: $:/tags/SideBarSegment
 
-<div class="tc-sidebar-lists tc-sidebar-tabs">
+<div class="tc-sidebar-lists tc-sidebar-tabs" role="region" aria-label={{$:/language/SideBar/Caption}}>
 
 <$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" class="tc-sidebar-tabs-main" explicitState="$:/state/tab/sidebar--595412856"/>
 

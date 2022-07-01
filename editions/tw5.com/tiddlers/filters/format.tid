@@ -1,6 +1,6 @@
 caption: format
 created: 20201020100834443
-modified: 20210524090002126
+modified: 20220523075550449
 op-input: a [[selection of titles|Title Selection]]
 op-output: input strings formatted according to the specified suffix <<.place B>>
 op-parameter: optional format string for the formats
@@ -20,5 +20,7 @@ The suffix <<.place B>> is one of the following supported string formats:
 |^`date` |The input string is interpreted as a UTC date and displayed according to the DateFormat specified in the optional operator parameter. (Defaults to "YYYY MM DD 0hh:0mm") |
 |^`relativedate` |The input string is interpreted as a UTC date and displayed as the interval from the present instant. Any operator parameters are ignored. |
 |^`titlelist` |<<.from-version "5.2.0">>The input string wrapped in double square brackets if it contains a space. Appropriate for use in a [[title list|Title List]]. |
+
+<<.warning """The [[Title List]] format cannot reliably represent items that contain certain specific character sequences such as `]] `. Thus it should not be used where there is a possibility of such sequences occurring.""">>
 
 <<.operator-examples "format">>

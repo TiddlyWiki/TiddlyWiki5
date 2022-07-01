@@ -1,0 +1,45 @@
+caption: Serveur PHP
+created: 20140111091844267
+fr-title: Enregistrer sur serveur PHP
+modified: 20220417143800691
+tags: Saving PHP
+title: Saving on a PHP Server
+type: text/vnd.tiddlywiki
+
+L'enregistreur intégré TiddlySpot peut aussi être utilisé pour enregistrer vos modifications vers un simple script PHP que vous pouvez exécuter sur la plupart des hébergeurs PHP.
+
+//Ce code n'a pas été mis à jour depuis de nombreuses années. Si vous rencontrez des difficultés, considérez l'utilisation de [[TW Receiver|Saving with TW Receiver]] à la place//
+
+# Téléchargez une copie de `TiddlyHome_0.1.2.zip`' sur https://code.google.com/archive/p/bidix/downloads
+# Décompressez l'archive ZIP
+# Extrayez une copie de  `store.php` du sous-répertoire `_th\lib`
+# Éditez votre copie de ''store.php'' pour ajouter vos nom d'utilisateur et mot de passe. Trouvez la ligne `$USERS = array( 'UserName1'=>'Password1', etc)` et remplacez `Username1` et `Password1` par vos propres nom d'utilisateur et mot de passe.
+#* Assurez vous de laisser intacts le code et la ponctuation, comme les simple cotes (`'`)
+# Enregistrez le fichier
+# A l'aide de FTP ou de votre interface web, téléversez le fichier ''store.php'' sur votre serveur. Assurez-vous que le nom de fichier est correct.
+#* Si tout est conforme vous devriez pouvoir accéder au fichier dans votre navigateur (p.ex. `http://example.com/store.php`)
+# Dans <<tw>>, affichez l'onglet ''Sauvegarde'' du <<.icon $:/core/images/options-button>> ''panneau de contrôle'' et saisissez les informations suivantes<<:>>
+#* Votre nom d'utilisateur en tant que nom de wiki
+#* Votre mot de passe
+#* l'URL du fichier ''store.php'' (//''pas'' l'URL du wiki, mais l'URL complète d'accès au fichier ''store.php''//)
+
+L'onglet ''Sauvegarde'' du panneau de contrôle inclut les paramètres suivants<<:>>
+
+|!Nom |!Description |
+|URL du serveur |URL complète du fichier ''store.php'' sur votre serveur |
+|Nom du fichier téléversé |Le nom de fichier utilisé pour enregistrer le <<tw>> (''index.html'' par défaut) |
+|Dossier de téléversement |Le chemin relatif entre ''store.php'' et le dossier d'enregistrement du fichier |
+|Dossier de sauvegarde |Le chemin relatif entre ''store.php'' et le dossier de sauvegarde |
+
+!!! Note sur la taille maximale
+
+Quand la taille de votre fichier TW augmentera, vous devrez modifier le fichier `.htaccess` (ou `htaccess` selon le système) pour augmenter la taille maximale de téléversement et/ou de POST. Vérifiez avec votre hébergeur les réglages possibles. Assurez-vous de disposer de sauvegardes avant d'expérimenter avec les réglages. Exemple de réglages<<:>>
+
+```
+php_value upload_max_filesize 4M
+php_value post_max_size 6M
+```
+!!! Note sur les messages d'erreur possibles
+
+Si vous rencontrez un message d'erreur concernant `split()`, vous pourriez avoir à remplacer les appels à `split()` dans ''store.php'' par la fonction `explode`.
+

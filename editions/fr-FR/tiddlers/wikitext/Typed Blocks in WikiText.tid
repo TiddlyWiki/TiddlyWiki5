@@ -1,0 +1,84 @@
+caption: Blocs typés
+created: 20131205161051792
+fr-title: Blocs typés en WikiTexte
+modified: 20220422133134883
+tags: WikiText
+title: Typed Blocks in WikiText
+type: text/vnd.tiddlywiki
+
+Le <<fr WikiText>> peut inclure des blocs de texte qui seront interprétés selon le type de leur contenu, aussi appelé <<gf "type MIME">>. Ces blocs sont déclarés ainsi<<:>>
+
+```
+$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+</svg>
+$$$
+```
+affichera ceci<<:>>
+
+$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+</svg>
+$$$
+
+
+Il est aussi possible de remplacer la déclaration du type de contenu par l'extension de fichier correspondante. Exemple<<:>>
+
+```
+$$$.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+$$$
+```
+
+affichera ceci<<:>>
+
+$$$.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+$$$
+
+Les types inconnus s'afficheront comme du texte brut<<:>>
+
+```
+$$$text/unknown
+Du texte brut, qui ne sera pas //mis en forme//.
+$$$
+```
+
+affichera ceci<<:>>
+
+$$$text/unknown
+Du texte brut, qui ne sera pas //mis en forme//.
+$$$
+
+Un format de rendu peut être indiqué en complément, qui sélectionnera un format différent pour le résultat. Par exemple<<:>>
+
+```
+$$$text/vnd.tiddlywiki>text/html
+Ceci est un ''peu'' de wikitext
+$$$
+```
+et
+
+```
+$$$text/vnd.tiddlywiki>text/plain
+Ceci est un ''peu'' de wikitext
+$$$
+```
+
+afficheront respectivement<<:>>
+
+$$$text/vnd.tiddlywiki>text/html
+Ceci est un ''peu'' de wikitext
+$$$
+
+et<<:>>
+
+$$$text/vnd.tiddlywiki>text/plain
+Ceci est un ''peu'' de wikitext
+$$$

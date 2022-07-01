@@ -1,0 +1,29 @@
+caption: Polly
+color: #29B6F6
+community-author: TiddlyTweeter
+created: 20220223153410510
+delivery: Service
+description: Batch script for saving downloaded TiddlyWiki files.
+method: save
+modified: 20220223160414274
+tags: Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge
+title: Saving with Polly
+type: text/vnd.tiddlywiki
+
+[[Polly|https://github.com/Marxsal/polly]] is a batch file system using Windows //~PowerShell// to restore ~TiddlyWiki files from a specified download directory to their original home directory.
+
+Effectively, this becomes a new way to save your files, but with these features:
+
+* No binary executables
+* Human-readable batch script.
+* No special plugins in your ~TiddlyWiki file
+* No special browser required
+* No browser extension required.
+* No need for node.exe running in background
+* Total size expanded package only 100k
+* Backups as regular file and/or zip to specified directories
+* The ability to "parrot" extra copies to target directories (e.g. a Dropbox folder)
+
+It should be able to run anywhere that //~PowerShell// runs, including Windows, Linux, and Mac.
+
+https://github.com/Marxsal/polly

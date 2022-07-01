@@ -1,0 +1,30 @@
+caption: Widgets
+created: 20131205160840915
+fr-title: Widgets en WikiTexte
+modified: 20220422141848039
+tags: WikiText
+title: Widgets in WikiText
+type: text/vnd.tiddlywiki
+
+Les widgets enrichissent les fonctionnalités du <<fr WikiText>>. Ils ont la même syntaxe que les [[éléments HTML|HTML in WikiText]], mais leur nom de balise commence toujours par `$`. Par exemple<<:>>
+
+```
+<$button message="tm-close-tiddler">Fermez Moi !</$button>
+```
+
+Notez que les widgets héritent de toutes les caractéristiques du <<fr "HTML in WikiText">><<:>>
+
+* Les attributs des widgets peuvent être spécifiés via<<:>>
+** Des chaînes non-cotées (si elles ne contiennent pas d'espace)
+** Des chaînes cotées par simple `'` ou double `"` cotes
+** Des chaînes cotées par des doubles cotés triplées `"""`
+** Des appels de Macro (c-à-d `attr=<<maMacro>>`)
+** Des transclusions (eg, `attr={{MonTiddler!!champ}}`)
+* Le contenu d'un widget est [[analysé|WikiText Parser Modes]] en [[mode en ligne|Inline Mode WikiText]] sauf si la balise d'ouverture est suivie par deux sauts de ligne, ce qui force le [[mode bloc|Block Mode WikiText]].
+** Le [[mode en ligne|Inline Mode WikiText]] signifie que les règles d'analyse en [[mode bloc|Block Mode WikiText]] comme les rubriques, les tables, les listes, ... ne sont pas reconnues.
+
+Voir <<fr "HTML in WikiText">> pour plus de détails.
+
+Les widgets disponibles incluent<<:>>
+
+<<list-links "[tag[Widgets]]">>

@@ -87,7 +87,8 @@ exports.butlast = function(source,operator,options) {
 	source(function(tiddler,title) {
 		results.push(title);
 	});
-	return results.slice(0,-count);
+	var index = count === 0 ? results.length : -count;
+	return results.slice(0,index);
 };
 exports.bl = exports.butlast;
 

@@ -12,6 +12,12 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.22...v5.1.23]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[Atronoush|https://github.com/atronoush]] for his winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/cTgPWl8b_9c/m/RghSSNKXAQAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/3c003364d2408eb27912187f57f023333cc4f4dd/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
 ! Performance Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/5206">> filter execution to use a more efficient linked list structure for intermediate results

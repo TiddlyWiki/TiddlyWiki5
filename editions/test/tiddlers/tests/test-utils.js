@@ -78,6 +78,12 @@ describe("Utility tests", function() {
 		expect(fds(d,"ddd hh mm ssss")).toBe("Sun 17 41 2828");
 		expect(fds(d,"MM0DD")).toBe("1109");
 		expect(fds(d,"MM0\\D\\D")).toBe("110DD");
+		const day = d.getUTCDate();
+		const dayStr = ("" + day).padStart(2, '0');
+		const hours = d.getUTCHours();
+		const hoursStr = ("" + hours).padStart(2, '0');
+		const expectedUtcStr = `201411${dayStr}${hoursStr}4128542`;
+		expect(fds(d,"[UTC]YYYY0MM0DD0hh0mm0ssXXX")).toBe(expectedUtcStr);
 
 		// test some edge cases found at: https://en.wikipedia.org/wiki/ISO_week_date
 		// 2016-11-13 is Week 45 and it's a Sunday (month nr: 10)
@@ -167,6 +173,16 @@ describe("Utility tests", function() {
 		expect(cv("v1.1.0","v1.1.1")).toEqual(-1);
 		expect(cv("v1.1.1","v1.1.2")).toEqual(-1);
 		expect(cv("1.1.1","1.1.2")).toEqual(-1);
+	});
+
+	it("should insert strings into sorted arrays", function() {
+		expect($tw.utils.insertSortedArray([],"a").join(",")).toEqual("a");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"a").join(",")).toEqual("a,b,c,d");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"d").join(",")).toEqual("b,c,d");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"f").join(",")).toEqual("b,c,d,f");
+		expect($tw.utils.insertSortedArray(["b","c","d","e"],"f").join(",")).toEqual("b,c,d,e,f");
+		expect($tw.utils.insertSortedArray(["b","c","g"],"f").join(",")).toEqual("b,c,f,g");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"ccc").join(",")).toEqual("b,c,ccc,d");
 	});
 
 });

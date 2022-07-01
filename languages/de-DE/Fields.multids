@@ -2,26 +2,27 @@ title: $:/language/Docs/Fields/
 
 _canonical_uri: Die komplette URI eines externen Foto Tiddlers. URI = Uniform Resource Identifier, Identifikator für Ressourcen im Internet.
 bag: Der Name eines ~TiddlyWeb "bags" von dem der Tiddler kam.
+code-body: Das "View Template" wird den Tiddler Text als "Code" anzeigen, wenn dieses Feld auf: ''"yes"'' gesetzt wird.
 caption: Der Text, der auf "Tab-Buttons" angezeigt wird.
-color: Der CSS Farbwert, der mit einem Tiddler assoziiert wird. 
+color: Der CSS Farbwert, der mit einem Tiddler assoziiert wird.
 component: Der Name einer Komponente, die für eine [[Alarm Anzeige|AlertMechanism]] verantwortlich ist.
-current-tiddler: Wird verwendet um den "obersten" Tiddler in der [[Tiddler Historie|HistoryMechanism]] zwischen zu speichern. 
+current-tiddler: Wird verwendet um den "obersten" Tiddler in der [[Tiddler Historie|HistoryMechanism]] zwischen zu speichern.
 created: Datum an dem der Tiddler erstellt wurde.
 creator: Name des Erstellers dieses Tiddlers.
 dependents: Listet die Abhängigkeiten bei "plugins" auf.
 description: Die Beschreibung für ein "plugin" oder einen "modalen" Dialog.
 draft.of: Entwurf von - enthält den Titel des Tiddlers, zu dem dieser Entwurf-Tiddler gehört.
-draft.title: Entwurf Titel - enthält den neuen Titel, wenn der Entwurf-Tiddler gespeichert wird. 
+draft.title: Entwurf Titel - enthält den neuen Titel, wenn der Entwurf-Tiddler gespeichert wird.
 footer: Der Fußnoten Text bei einem "~Wizard-Dialog"
 hide-body: Der Textbereich eines Tiddlers wird verborgen, wenn dieses Feld auf ''"yes"'' gesetzt wird
 icon: Der Titel eines ~Icon-Tiddlers, der mit diesem Tiddler verbunden ist.
 library: Wenn dieses Feld="yes" ist, dann soll der Tiddler als JavaScript Bibliothek gespeichert werden.
 list: Eine geordnete Tiddler Liste, die mit diesem Tiddler verbunden ist.
 list-before: Dient zum Einfügen von Tiddler Titeln in das "list" Feld. Wenn gesetzt, wird der neue Tiddler ''vor'' dem hier definierten Tiddler in die Liste eingefügt. Wenn vorhanden, aber leer, dann wird der neue Tiddler an den Anfang der Liste gesetzt.
-list-after: Dient zum Einfügen von Tiddler Titeln in das "list" Feld. Wenn gesetzt, wird der neue Tiddler ''nach'' dem hier definierten Tiddler in die Liste eingefügt. 
+list-after: Dient zum Einfügen von Tiddler Titeln in das "list" Feld. Wenn gesetzt, wird der neue Tiddler ''nach'' dem hier definierten Tiddler in die Liste eingefügt.
 modified: Datum, an dem der Tiddler zuletzt verändert wurde.
 modifier: Name der Person, die den Tiddler zuletzt verändert hat.
-name: Ein Menschen lesbarer Name für einen "plugin" Tiddler. 
+name: Ein Menschen lesbarer Name für einen "plugin" Tiddler.
 plugin-priority: Ein numerischer Wert, der die Priorität eines "plugins" festlegt.
 plugin-type: Der Typ eines "plugins".
 revision: Die Revisionsnummer eines Tiddlers. Wird von einem Server vergeben.

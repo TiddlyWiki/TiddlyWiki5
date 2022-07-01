@@ -5,6 +5,7 @@ caption: {{$:/language/ControlPanel/Parsing/Caption}}
 \define lingo-base() $:/language/ControlPanel/Parsing/
 
 \define toggle(Type)
+\whitespace trim
 <$checkbox
 tiddler="""$:/config/WikiParserRules/$Type$/$(rule)$"""
 field="text"
@@ -16,10 +17,12 @@ default="enable">
 \end
 
 \define rules(type,Type)
+\whitespace trim
 <$list filter="[wikiparserrules[$type$]]" variable="rule">
 <dd><<toggle $Type$>></dd>
 </$list>
 \end
+\whitespace trim
 
 <<lingo Hint>>
 

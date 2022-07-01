@@ -48,7 +48,7 @@ LetWidget.prototype.computeAttributes = function() {
 	var changedAttributes = {},
 		self = this;
 	this.currentValueFor = Object.create(null);
-	$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
+	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
 		var value = self.computeAttribute(attribute),
 			name = attribute.name;
 		if(name.charAt(0) !== "$") {

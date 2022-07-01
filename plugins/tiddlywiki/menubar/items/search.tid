@@ -23,11 +23,13 @@ tags: $:/tags/MenuBar
 <span style="margin: 0 0.5em;">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<form class="tc-form-inline">
 <$macrocall $name="keyboard-driven-input" tiddler="$:/temp/menubarsearch" storeTitle=<<searchTiddler>> selectionStateTitle=<<searchListState>> 
 		refreshTitle="$:/temp/menubarsearch/refresh" tag="input" type="search" focusPopup="$:/state/popup/menubar-search-dropdown" 
 		class="tc-popup-handle tc-menu-show-when-wide" placeholder="Search..." default="" cancelPopups="yes" 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> inputCancelActions=<<cancel-search-actions>> 
 		filterMinLength={{$:/config/Search/MinLength}} configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]" />
+</form>
 </$keyboard>
 </$keyboard>
 </span>

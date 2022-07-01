@@ -1,6 +1,7 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
+\whitespace trim
 <$edit-text field="draft.title" class="tc-titlebar tc-edit-texteditor" focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}} tabindex={{$:/config/EditTabIndex}} cancelPopups="yes"/>
 
 <$vars pattern="""[\|\[\]{}]""" bad-chars="""`| [ ] { }`""">
@@ -9,7 +10,7 @@ tags: $:/tags/EditTemplate
 
 <div class="tc-message-box">
 
-{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/BadCharacterWarning}}
+{{$:/core/images/warning}}&#32;{{$:/language/EditTemplate/Title/BadCharacterWarning}}
 
 </div>
 
@@ -23,7 +24,7 @@ tags: $:/tags/EditTemplate
 
 <div class="tc-message-box">
 
-{{$:/core/images/warning}} {{$:/language/EditTemplate/Title/Exists/Prompt}}: <$link to={{!!draft.title}} />
+{{$:/core/images/warning}}&#32;{{$:/language/EditTemplate/Title/Exists/Prompt}}:&#32;<$link to={{!!draft.title}} />
 
 </div>
 
@@ -33,18 +34,22 @@ tags: $:/tags/EditTemplate
 
 <$vars fromTitle={{!!draft.of}} toTitle={{!!draft.title}}>
 
-<$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no"> {{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
+<$checkbox tiddler="$:/config/RelinkOnRename" field="text" checked="yes" unchecked="no" default="no">&#32;{{$:/language/EditTemplate/Title/Relink/Prompt}}</$checkbox>
 
 <$list filter="[title<fromTitle>backlinks[]limit[1]]" variable="listItem">
 
 <$vars stateTiddler=<<qualify "$:/state/edit/references">> >
 
 <$reveal type="nomatch" state=<<stateTiddler>> text="show">
-<$button set=<<stateTiddler>> setTo="show" class="tc-btn-invisible">{{$:/core/images/right-arrow}} 
+<$button set=<<stateTiddler>> setTo="show" class="tc-btn-invisible">
+{{$:/core/images/right-arrow}}
+&#32;
 <<lingo EditTemplate/Title/References/Prompt>></$button>
 </$reveal>
 <$reveal type="match" state=<<stateTiddler>> text="show">
-<$button set=<<stateTiddler>> setTo="hide" class="tc-btn-invisible">{{$:/core/images/down-arrow}} 
+<$button set=<<stateTiddler>> setTo="hide" class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+&#32;
 <<lingo EditTemplate/Title/References/Prompt>></$button>
 </$reveal>
 

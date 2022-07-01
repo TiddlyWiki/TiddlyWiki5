@@ -1,4 +1,5 @@
 title: $:/_tw5.com/CustomStoryTiddlerTemplateDemo/Template
+code-body: yes
 
 \define list-item-styles()
 transform: translate($(left)$%,$(top)$%) scale(0.3) rotate($(angle)$deg);

@@ -3,6 +3,7 @@ tags: $:/tags/ControlPanel/Settings
 title: $:/core/ui/ControlPanel/Settings/DefaultMoreSidebarTab
 
 \define lingo-base() $:/language/ControlPanel/Settings/DefaultMoreSidebarTab/
+\whitespace trim
 
 <$link to="$:/config/DefaultMoreSidebarTab"><<lingo Hint>></$link>
 

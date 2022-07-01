@@ -1,5 +1,6 @@
 title: $:/core/ui/ViewTemplate/body/plugin
 
+\whitespace trim
 <div class="tc-tiddler-plugin-info">
 <$let plugin-type={{!!plugin-type}}
 	default-popup-state="yes"

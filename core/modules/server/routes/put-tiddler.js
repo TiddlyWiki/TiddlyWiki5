@@ -18,7 +18,7 @@ exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
-	fields = JSON.parse(state.data);
+	fields = $tw.utils.parseJSONSafe(state.data);
 	// Pull up any subfields in the `fields` object
 	if(fields.fields) {
 		$tw.utils.each(fields.fields,function(field,name) {

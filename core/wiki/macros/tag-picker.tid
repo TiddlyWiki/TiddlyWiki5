@@ -8,10 +8,9 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 \define delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 
 \define add-tag-actions(actions,tagField:"tags")
+\whitespace trim
 <$set name="tag" value={{{ [<__tiddler__>get[text]] }}}>
-<$list filter="[<saveTiddler>!contains:$tagField$<tag>!match[]]" variable="ignore" emptyMessage="""
-<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="-[<tag>]"/>
-""">
+<$list filter="[<saveTiddler>!contains:$tagField$<tag>!match[]]" variable="ignore" emptyMessage="<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter='-[<tag>]'/>">
 <$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>]"/>
 $actions$
 </$list>
@@ -21,14 +20,16 @@ $actions$
 \end
 
 \define clear-tags-actions-inner()
-<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="""<<cancel-delete-tiddler-actions "cancel">>""">
+\whitespace trim
+<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="<<cancel-delete-tiddler-actions 'cancel'>>">
 <<delete-tag-state-tiddlers>>
 </$list>
 \end
 
 \define clear-tags-actions()
+\whitespace trim
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
-<$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" emptyMessage="""<<clear-tags-actions-inner>>""">
+<$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" emptyMessage="<<clear-tags-actions-inner>>">
 <$action-setfield $tiddler=<<newTagNameTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 </$set>
@@ -43,7 +44,7 @@ $actions$
 <div>
 <span class="tc-add-tag-name tc-small-gap-right">
 <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
-		selectionStateTitle=<<tagSelectionState>> inputAcceptActions="""<$macrocall $name="add-tag-actions" actions=<<__actions__>> tagField=<<__tagField__>>/>"""
+		selectionStateTitle=<<tagSelectionState>> inputAcceptActions="<$macrocall $name='add-tag-actions' actions=<<__actions__>> tagField=<<__tagField__>>/>"
 		inputCancelActions=<<clear-tags-actions>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
 		focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> 
 		focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} filterMinLength={{$:/config/Tags/MinLength}} 
@@ -65,16 +66,16 @@ $actions$
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown tc-block-tags-dropdown">
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
-<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem">
 <$list filter=<<nonSystemTagsFilter>> variable="tag">
-<$list filter="[<tag>addsuffix[-primaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$vars button-classes="tc-btn-invisible tc-tag-button-selected" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>""">
+<$list filter="[<tag>addsuffix[-primaryList]] -[<tagSelectionState>get[text]]" emptyMessage="<$vars button-classes='tc-btn-invisible tc-tag-button-selected' actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>">
 <$vars button-classes="tc-btn-invisible" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>
 </$list>
 </$list></$list>
 <hr>
-<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
+<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]" emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem">
 <$list filter=<<systemTagsFilter>> variable="tag">
-<$list filter="[<tag>addsuffix[-secondaryList]] -[<tagSelectionState>get[text]]" emptyMessage="""<$vars button-classes="tc-btn-invisible tc-tag-button-selected" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>""">
+<$list filter="[<tag>addsuffix[-secondaryList]] -[<tagSelectionState>get[text]]" emptyMessage="<$vars button-classes='tc-btn-invisible tc-tag-button-selected' actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>">
 <$vars button-classes="tc-btn-invisible" actions=<<__actions__>> tagField=<<__tagField__>> currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$vars>
 </$list>
 </$list></$list>
@@ -90,7 +91,7 @@ $actions$
 \define tag-picker(actions,tagField:"tags")
 \whitespace trim
 <$vars saveTiddler=<<currentTiddler>> palette={{$:/palette}}>
-<$list filter="[<newTagNameTiddler>match[]]" emptyMessage="""<$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>""">
+<$list filter="[<newTagNameTiddler>match[]]" emptyMessage="<$macrocall $name='tag-picker-inner' actions=<<__actions__>> tagField=<<__tagField__>>/>">
 <$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
 <$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>
 </$set>

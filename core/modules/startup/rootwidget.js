@@ -51,6 +51,20 @@ exports.startup = function() {
 			element.focus(event.paramObject);
 		}
 	});
+	// Install the tm-rename-tiddler and tm-relink-tiddler messages
+	var makeRenameHandler = function(method) {
+		return function(event) {
+			var options = {},
+				paramObject = event.paramObject || {},
+				from = paramObject.from || event.tiddlerTitle,
+				to = paramObject.to;
+			options.dontRenameInTags = (paramObject.renameInTags === "false" || paramObject.renameInTags === "no") ? true : false;
+			options.dontRenameInLists = (paramObject.renameInLists === "false" || paramObject.renameInLists === "no") ? true : false;
+			$tw.wiki[method](from,to,options);
+		};
+	};
+	$tw.rootWidget.addEventListener("tm-rename-tiddler",makeRenameHandler("renameTiddler"));
+	$tw.rootWidget.addEventListener("tm-relink-tiddler",makeRenameHandler("relinkTiddler"));
 	// Install the scroller
 	$tw.pageScroller = new $tw.utils.PageScroller();
 	$tw.rootWidget.addEventListener("tm-scroll",function(event) {

@@ -1,8 +1,12 @@
+caption: Dashes
 created: 20131205160641986
-modified: 20131205160653909
+modified: 20220513111920644
+revision: 0
 tags: WikiText
 title: Dashes in WikiText
 type: text/vnd.tiddlywiki
-caption: Dashes
 
-You can create an n-dash with a double hyphen `--` and an m-dash with a triple hyphen `---`. For example -- this is an example --- and so is this
+You can create an n-dash with a double hyphen -- and an m-dash with a triple hyphen `---`.
+
+<<wikitext-example src:"""* -- n-dash example 
+* --- m-dash example --- have fun!""">>

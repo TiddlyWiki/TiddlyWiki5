@@ -19,13 +19,13 @@ exports.draft = function(source,prefix,options) {
 	var results = [];
 	if(prefix === "!") {
 		source(function(tiddler,title) {
-			if(!tiddler || !$tw.utils.hop(tiddler.fields,"draft.of")) {
+			if(!tiddler || !tiddler.isDraft()) {
 				results.push(title);
 			}
 		});
 	} else {
 		source(function(tiddler,title) {
-			if(tiddler && $tw.utils.hop(tiddler.fields,"draft.of") && (tiddler.fields["draft.of"].length !== 0)) {
+			if(tiddler && tiddler.isDraft()) {
 				results.push(title);
 			}
 		});

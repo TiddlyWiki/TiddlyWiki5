@@ -1,0 +1,55 @@
+created: 20220122144742419
+modified: 20220122180929683
+tags: [[WikiText parser mode transitions]]
+title: WikiText parser mode: macro examples
+type: text/vnd.tiddlywiki
+
+\define boringtable()
+|cell one|cell two|
+|cell three|cell four|
+\end
+With the macro `boringtable` defined as:
+<$codeblock code=<<boringtable>>/>
+then
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "* <<boringtable>>">>
+<<wikitext-example-table-row 2 """* <div>
+
+<<boringtable>>
+</div>
+""">>
+<<wikitext-example-table-row 3 "* <$macrocall $name=boringtable/>">>
+<<wikitext-example-table-row 4 "* <$macrocall $name=boringtable></$macrocall>">>
+<<wikitext-example-table-row 5 """* <$macrocall $name=boringtable>
+
+</$macrocall>""">>
+</tbody></table>
+
+The list syntax is recognised in [[block mode|Block Mode WikiText]] and the enclosed contents are parsed using [[inline mode|Inline Mode WikiText]]. When the parser encounters a [[wikitext macro call|Macro Calls in WikiText]] it will use the current parse mode to parse the contents of the macro. The contents of the macro contains table syntax which is only recognised in [[block mode|Block Mode WikiText]]. 
+
+Therefore, in #1 above the table syntax is not recognised. In #2 above, the blank line after the open `div` tag moves the parser back into [[block mode|Block Mode WikiText]], the macro call inherits it and the table is recognised.
+
+When calling macros using the [[widget|MacroCallWidget]], the parse mode will be inline (#3 and #4 above) unless it is written as an open tag with a following blank line (#5 above).
+
+<<.tip "See also [[WikiText parser mode: transclusion examples]] for similar examples">>
+
+---
+
+These examples have slightly different behavior. In the previous section, the macro calls were enclosed within list items.  In these examples, the macro calls are at the top level:
+<table><<wikitext-example-table-header>><tbody>
+<<wikitext-example-table-row 1 "<<boringtable>>">>
+<<wikitext-example-table-row 2 """<div>
+
+<<boringtable>>
+</div>
+""">>
+<<wikitext-example-table-row 3 "<$macrocall $name=boringtable/>">>
+<<wikitext-example-table-row 4 "<$macrocall $name=boringtable></$macrocall>">>
+<<wikitext-example-table-row 5 """<$macrocall $name=boringtable>
+
+</$macrocall>""">>
+</tbody></table>
+
+Of these examples, only the two <<.wlink MacroCallWidget>> tags which are not followed by a blank line are parsed using [[inline mode|Inline Mode WikiText]].
+
+<<.tip "See also [[WikiText parser mode: transclusion examples]] for similar examples">>

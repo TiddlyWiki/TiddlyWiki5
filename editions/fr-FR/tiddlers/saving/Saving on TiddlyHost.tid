@@ -1,0 +1,18 @@
+caption: ~TiddlyHost
+color: #29B6F6
+community-author: Simon Baird
+created: 20210422191232572
+delivery: Service
+description: Service en ligne pour créer et héberger des TiddlyWikis
+fr-title: Enregistrer sur TiddlyHost
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: Saving on TiddlyHost
+type: text/vnd.tiddlywiki
+
+[img width=140 [https://github.com/simonbaird/tiddlyhost/raw/main/rails/app/assets/images/logo-800.png]]
+
+[[TiddlyHost.com|https://tiddlyhost.com/]] est un service d'hébergement pour <<tw>> créé par Simon Baird. Après vous être inscrit et avoir confirmé votre courriel vous pourrez créer des <<gf sites>> (c-à-d des <<tw>>), que vous pourrez enregistrer en ligne. Les sites peuvent être privés ou publics, et vous pouvez éventuellement les référencer, les taguer et rechercher sur le [[Hub TiddlyHost|https://tiddlyhost.com/hub]] où ils seront accessibles aux autres.
+
+Contrairement à [[TiddlySpot|Saving on TiddlySpot]], [[TiddlyHost|https://tiddlyhost.com]] est sécurisé, open source, et compatible avec TiddlyWiki5. Il permet aussi de téléverser des fichier <<tw>> existants, est compatible avec TiddlyWikiClassic, et vous permet de revendiquer la propriété de vos sites ~TiddlySpot . Pour plus d'informations lisez la [[FAQ|https://github.com/simonbaird/tiddlyhost/wiki/FAQ]] et la page  [[A propos|https://tiddlyhost.com/about]].
