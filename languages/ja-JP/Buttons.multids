@@ -55,7 +55,7 @@ NewTiddler/Hint: 新しいtiddlerを作ります
 Permalink/Caption: パーマリンク
 Permalink/Hint: このtiddlerへ直接リンクするアドレスを、ブラウザのアドレスバーに表示します
 Permaview/Caption: パーマビュー
-Permaview/Hint: 表示している全てのtiddlerへのリンクをブラウザのアドレスバーに表示視します
+Permaview/Hint: 表示している全てのtiddlerへのリンクをブラウザのアドレスバーに表示します
 Refresh/Caption: 再読み込み
 Refresh/Hint: ファイルを再読み込みします
 Save/Caption: 確定
