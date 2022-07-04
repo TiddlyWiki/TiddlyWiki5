@@ -4,7 +4,7 @@ created: 20160216191710789
 delivery: Protocol
 description: Standard web protocol available on products such as Sharepoint
 method: save
-modified: 20220222190056634
+modified: 20220615155048712
 tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving via WebDAV
 type: text/vnd.tiddlywiki
@@ -56,10 +56,12 @@ Several ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) don't s
 
 !!! Koofr
 
-//''Koofr''// is a cloud service that emphasizes privacy. To use their webdav services, sign up for an account at `koofr.eu` . Then go to `preferences` on their web app. Then `password` from the menu on the left. Scroll down to `App Passwords`. Use some name like 'tiddlywiki' and generate a password. Despite what it says, save the password somewhere. Upload your file on some path, preferably without spaces to their site. Then in the browser link to the site with an address like:
+//''Koofr''// is a cloud service that emphasizes privacy. To use their webdav services, sign up for an account at `koofr.eu` . Then go to `preferences` on their web app. Then `password` from the menu on the left. Scroll down to `App Passwords`. Use some name like 'tiddlywiki' and generate a password. Despite what it says, save the password somewhere. 
+
+You will probably need to rename your file extension to `.aspx`. Then upload your file on some path, preferably without spaces to their site. Then in the browser link to the site with an address like:
 
 ```
-https://app.koofr.net/dav/Koofr/myfile.html
+https://app.koofr.net/dav/Koofr/myfile.aspx
 
 ```
 When you do, an authentication dialog will come up. Use your email address that you used to sign up and the password you just generated to login.

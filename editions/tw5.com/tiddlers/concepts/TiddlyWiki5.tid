@@ -1,7 +1,9 @@
-created: 201308252136
-modified: 201308252136
+created: 20130825213600000
+modified: 20220613145033713
 tags: Concepts
 title: TiddlyWiki5
 type: text/vnd.tiddlywiki
 
 ~TiddlyWiki5 is a reboot of TiddlyWiki for the next 25 years. It is a complete interactive wiki in JavaScript that can be run in the browser or on the server under [[Node.js]].
+
+The ~TiddlyWiki repository can be found at GitHub.

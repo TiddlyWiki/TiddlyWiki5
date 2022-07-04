@@ -1,8 +1,34 @@
 created: 20161015113519246
-modified: 20190927172743140
+modified: 20220613123551803
 tags: PluginMechanism
 title: PluginFolders
 type: text/vnd.tiddlywiki
+
+! Working with Plugin Folders
+
+* Arrange the [[PluginFolders]] containing the plugins in a convenient shared location
+
+* Use [[environment variables|Environment Variables on Node.js]] to tell TiddlyWiki to search those folders. 
+
+*The plugins can be referenced in `tiddlywiki.info` by their name (e.g. `tiddlytools/magic`)
+
+* Place the PluginFolders containing the plugins in a `plugins` folder within the [[wiki folder|TiddlyWikiFolders]]. TiddlyWiki will attempt to include every subfolder as a plugin. Do not add the plugin names to `tiddlywiki.info`. Do not add the PluginFolders under a specific namespace:
+
+```
+├── plugins/
+│   ├── relink/
+│   │   ├── js/
+│   │   ├── tiddlers/
+│   │   └── plugin.info
+│   └── relink-markdown/
+│       ├── js/
+│       ├── plugin.info
+│       └── readme.tid
+├── tiddlers/
+└── tiddlywiki.info
+```
+
+! Plugin.info File
 
 On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.info` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
 

@@ -23,7 +23,9 @@ title: $:/core/ui/EditTemplate
 <div
 	data-tiddler-title=<<currentTiddler>>
 	data-tags={{!!tags}}
-	class={{{ tc-tiddler-frame tc-tiddler-edit-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}>
+	class={{{ tc-tiddler-frame tc-tiddler-edit-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}
+	role="region"
+	aria-label={{$:/language/EditTemplate/Caption}}>
 <$fieldmangler>
 <$vars
 	storyTiddler=<<currentTiddler>>
