@@ -1,5 +1,6 @@
+code-body: yes
 created: 20150117152612000
-modified: 20211230150725145
+modified: 20220617125128201
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -177,10 +178,10 @@ tr.doc-table-subheading {
 	fill: <<colour alert-highlight>>;
 }
 
-.doc-from-version {
+a.doc-from-version.tc-tiddlylink {
     display: inline-block;
     border-radius: 1em;
-	background: <<colour tiddler-controls-foreground>>;
+	background: <<colour muted-foreground>>;
 	color: <<colour background>>;
 	fill: <<colour background>>;
     padding: 0 0.4em;
@@ -191,7 +192,7 @@ tr.doc-table-subheading {
     vertical-align: text-bottom;
 }
 
-.doc-deprecated-version {
+a.doc-deprecated-version.tc-tiddlylink {
     display: inline-block;
     border-radius: 1em;
 	background: red;

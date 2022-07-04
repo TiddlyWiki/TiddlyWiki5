@@ -1,18 +1,18 @@
 created: 20131219100520659
-modified: 20200523092939199
+modified: 20220613172345723
 tags: [[TiddlyWiki on Node.js]]
 title: Using TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 includes a set of [[Commands]] for use on the command line to perform an extensive set of operations based on TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles.
+~TiddlyWiki5 includes a set of commands for use on the command line to perform an extensive set of operations based on TiddlyWikiFolders, TiddlerFiles.
 
-For example, the following command loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in static HTML:
+For example, the following command loads the tiddlers from a ~TiddlyWiki HTML file and then saves one of them in static HTML:
 
 ```
 tiddlywiki --verbose --load mywiki.html --rendertiddler ReadMe ./readme.html
 ```
 
-Running `tiddlywiki` from the command line boots the TiddlyWiki kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces.
+Running `tiddlywiki` from the command line boots the ~TiddlyWiki kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces.
 
 <<.from-version "5.1.20">> First, there can be zero or more plugin references identified by the prefix `+` for plugin names or `++` for a path to a plugin folder. These plugins are loaded in addition to any specified in the  [[TiddlyWikiFolder|TiddlyWikiFolders]].
 

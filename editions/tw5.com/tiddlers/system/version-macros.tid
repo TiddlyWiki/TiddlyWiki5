@@ -1,15 +1,15 @@
 created: 20161008085627406
-modified: 201804111739
+modified: 20220704174221300
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/version-macros
 type: text/vnd.tiddlywiki
 
 \define .from-version(version)
-<span class="doc-from-version">{{$:/core/images/warning}} New in: $version$</span>
+<$link to={{{ [<__version__>addprefix[Release ]] }}} class="doc-from-version">{{$:/core/images/warning}} New in: <$text text=<<__version__>>/></$link>
 \end
 
 \define .deprecated-since(version, superseded:"TODO-Link")
-<$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: $version$ </$button>. Use [[$superseded$]] instead
+<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: <$text text=<<__version__>>/></$link>. Use <$link to=<<__superseded__>>><$text text=<<__superseded__>>/></$link> instead
 \end
 
 <pre><$view field="text"/></pre>
