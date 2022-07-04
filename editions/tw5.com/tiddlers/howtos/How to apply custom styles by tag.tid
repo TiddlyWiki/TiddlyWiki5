@@ -1,11 +1,11 @@
 caption: {{!!title}} - ^^deprecated^^
 created: 20141001132300000
-modified: 201804111739
+modified: 20220704174221300
 tags: [[How to apply custom styles]] $:/deprecated
 title: How to apply custom styles by tag
 type: text/vnd.tiddlywiki
 
-<<.deprecated-since "5.1.16 <- click" "Custom styles by data-tags">>. Also see: [[How to apply custom styles]]
+<<.deprecated-since "5.1.16" "Custom styles by data-tags">>. Also see: [[How to apply custom styles]]
 
 ----
 

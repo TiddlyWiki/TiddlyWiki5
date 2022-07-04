@@ -1,8 +1,8 @@
 created: 20170126143833588
-modified: 201804111739
+modified: 20220704174221300
 title: $:/deprecated
 type: text/vnd.tiddlywiki
 
-<<<
-In several fields, deprecation is the discouragement of use of some feature, design or practice; typically because it has been superseded or is no longer considered safe – but without completely removing it or prohibiting its use.
-<<< [[wikipedia|https://en.wikipedia.org/wiki/Deprecation]]
+Deprecated features of TiddlyWiki are those that have been superseded by newer, improved ways of doing the same thing.
+
+Deprecated features will still work, but are not recommended for new content.

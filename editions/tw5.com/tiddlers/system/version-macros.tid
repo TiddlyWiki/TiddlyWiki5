@@ -1,5 +1,5 @@
 created: 20161008085627406
-modified: 201804111739
+modified: 20220704174221300
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/version-macros
 type: text/vnd.tiddlywiki
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define .deprecated-since(version, superseded:"TODO-Link")
-<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: <$text text=<<__version__>>/></$link>. Use <$link to=<<__superseded__>>><$text text=<<__version__>>/></$link> instead
+<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: <$text text=<<__version__>>/></$link>. Use <$link to=<<__superseded__>>><$text text=<<__superseded__>>/></$link> instead
 \end
 
 <pre><$view field="text"/></pre>
