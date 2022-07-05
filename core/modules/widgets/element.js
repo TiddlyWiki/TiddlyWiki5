@@ -42,8 +42,8 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		this.tag = "h" + headingLevel;
 	}
 	// Select the namespace for the tag
-	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
-	var tagNamespaces = {
+	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
+		tagNamespaces = {
 			svg: "http://www.w3.org/2000/svg",
 			math: "http://www.w3.org/1998/Math/MathML",
 			body: XHTML_NAMESPACE
@@ -52,7 +52,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	if(this.namespace) {
 		this.setVariable("namespace",this.namespace);
 	} else {
-		if (this.hasAttribute("xmlns")) {
+		if(this.hasAttribute("xmlns")) {
 			this.namespace = this.getAttribute("xmlns");
 			this.setVariable("namespace",this.namespace);
 		} else {
