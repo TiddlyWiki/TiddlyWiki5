@@ -172,6 +172,20 @@ describe("Widget module", function() {
 		expect(wrapper.firstChild.namespaceURI).toBe("http://www.w3.org/2000/svg");
 	});
 
+	it("should deal with foreignObject in SVG elements", function() {
+		var wiki = new $tw.Wiki();
+		// Construct the widget node
+		var text = '<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="lightblue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><div xmlns="http://www.w3.org/1999/xhtml">Here is some text that requires a word wrap, and includes a [[link to a tiddler|HelloThere]].</div></foreignObject></svg>\n';
+		var widgetNode = createWidgetNode(parseText(text,wiki,{parseAsInline:true}),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe('<svg height="260px" width="260px"><circle cx="150" cy="150" fill="lightblue" r="100" stoke="red"></circle><foreignObject height="180" width="150" x="70" y="110"><div xmlns="http://www.w3.org/1999/xhtml">Here is some text that requires a word wrap, and includes a <a class="tc-tiddlylink tc-tiddlylink-missing" href="#HelloThere">link to a tiddler</a>.</div></foreignObject></svg>\n');
+		expect(wrapper.firstChild.namespaceURI).toBe("http://www.w3.org/2000/svg");
+		// first DIV in foreignObject needs to be HTML NS
+		expect(wrapper.firstChild.children[1].firstChild.namespaceURI).toBe("http://www.w3.org/1999/xhtml");
+	});
+
 	it("should parse and render transclusions", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
