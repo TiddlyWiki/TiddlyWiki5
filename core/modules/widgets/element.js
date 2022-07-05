@@ -42,20 +42,21 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		this.tag = "h" + headingLevel;
 	}
 	// Select the namespace for the tag
+	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 	var tagNamespaces = {
 			svg: "http://www.w3.org/2000/svg",
 			math: "http://www.w3.org/1998/Math/MathML",
-			body: "http://www.w3.org/1999/xhtml"
+			body: XHTML_NAMESPACE
 		};
 	this.namespace = tagNamespaces[this.tag];
 	if(this.namespace) {
 		this.setVariable("namespace",this.namespace);
 	} else {
-		if (this.attributes.xmlns) {
-			this.namespace = this.attributes.xmlns;
+		if (this.hasAttribute("xmlns")) {
+			this.namespace = this.getAttribute("xmlns");
 			this.setVariable("namespace",this.namespace);
 		} else {
-			this.namespace = this.getVariable("namespace",{defaultValue: tagNamespaces.body});
+			this.namespace = this.getVariable("namespace",{defaultValue: XHTML_NAMESPACE});
 		}
 	}
 	// Invoke the th-rendering-element hook
