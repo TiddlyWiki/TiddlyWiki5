@@ -55,7 +55,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 			this.namespace = this.attributes.xmlns;
 			this.setVariable("namespace",this.namespace);
 		} else {
-			this.namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"});
+			this.namespace = this.getVariable("namespace",{defaultValue: tagNamespaces.body});
 		}
 	}
 	// Invoke the th-rendering-element hook
