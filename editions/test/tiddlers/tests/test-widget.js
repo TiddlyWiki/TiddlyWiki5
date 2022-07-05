@@ -175,12 +175,12 @@ describe("Widget module", function() {
 	it("should deal with foreignObject in SVG elements defined in elements.js", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node
-		var text = '<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="lightblue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><div xmlns="http://www.w3.org/1999/xhtml">Here is some text that requires a word wrap, and includes a [[link to a tiddler|HelloThere]].</div></foreignObject></svg>\n';
+		var text = '<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="lightblue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><div xmlns="http://www.w3.org/1999/xhtml">Here is some text that requires a word wrap, and includes a [[link to a tiddler|HelloThere]].</div></foreignObject><circle cx="250" cy="150" r="10" fill="blue" stoke="red"/></svg>\n';
 		var widgetNode = createWidgetNode(parseText(text,wiki,{parseAsInline:true}),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe('<svg height="260px" width="260px"><circle cx="150" cy="150" fill="lightblue" r="100" stoke="red"></circle><foreignObject height="180" width="150" x="70" y="110"><div xmlns="http://www.w3.org/1999/xhtml">Here is some text that requires a word wrap, and includes a <a class="tc-tiddlylink tc-tiddlylink-missing" href="#HelloThere">link to a tiddler</a>.</div></foreignObject></svg>\n');
+		expect(wrapper.innerHTML).toBe('<svg height="260px" width="260px"><circle cx="150" cy="150" fill="lightblue" r="100" stoke="red"></circle><foreignObject height="180" width="150" x="70" y="110"><div xmlns="http://www.w3.org/1999/xhtml">Here is some text that requires a word wrap, and includes a <a class="tc-tiddlylink tc-tiddlylink-missing" href="#HelloThere">link to a tiddler</a>.</div></foreignObject><circle cx="250" cy="150" fill="blue" r="10" stoke="red"></circle></svg>\n');
 
 		var SVG_NAMESPACE = "http://www.w3.org/2000/svg";
 		var HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
@@ -198,10 +198,16 @@ describe("Widget module", function() {
 		expect(wrapper.firstChild.children[1].tag).toBe("foreignObject");
 		expect(wrapper.firstChild.children[1].namespaceURI).toBe(SVG_NAMESPACE);
 		
-		// first DIV in foreignObject needs to be HTML NS because of its XMLNS attribute
-		// fixed in v5.2.3
-		expect(wrapper.firstChild.children[1].firstChild.tag).toBe("div");
-		expect(wrapper.firstChild.children[1].firstChild.namespaceURI).toBe(HTML_NAMESPACE);
+			// first DIV in foreignObject needs to be HTML NS because of its XMLNS attribute
+			// fixed in v5.2.3
+			expect(wrapper.firstChild.children[1].firstChild.tag).toBe("div");
+			expect(wrapper.firstChild.children[1].firstChild.namespaceURI).toBe(HTML_NAMESPACE);
+
+		// child 2 should be second "circle" and it should inherit namespaceURI from SVG parent
+		// Just to be sure, that no namespace variables leak
+		expect(wrapper.firstChild.children[2].tag).toBe("circle");
+		expect(wrapper.firstChild.children[2].namespaceURI).toBe(SVG_NAMESPACE);
+
 	});
 
 	it("should parse and render transclusions", function() {
