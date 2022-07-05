@@ -51,7 +51,12 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	if(this.namespace) {
 		this.setVariable("namespace",this.namespace);
 	} else {
-		this.namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"});
+		if (this.attributes.xmlns) {
+			this.namespace = this.attributes.xmlns;
+			this.setVariable("namespace",this.namespace);
+		} else {
+			this.namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"});
+		}
 	}
 	// Invoke the th-rendering-element hook
 	var parseTreeNodes = $tw.hooks.invokeHook("th-rendering-element",null,this);
