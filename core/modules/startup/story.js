@@ -54,7 +54,9 @@ exports.startup = function() {
 			var hash = $tw.utils.getLocationHash();
 			if(hash !== $tw.locationHash) {
 				$tw.locationHash = hash;
-				openStartupTiddlers({defaultToCurrentStory: true});
+				if(hash !== "#") {
+					openStartupTiddlers({defaultToCurrentStory: true});
+				}
 			}
 		},false);
 		// Listen for the tm-browser-refresh message
