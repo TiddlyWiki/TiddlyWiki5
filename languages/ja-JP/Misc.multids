@@ -18,4 +18,5 @@ TagManager/Colour/Heading: 色
 TagManager/Icon/Heading: アイコン
 TagManager/Info/Heading: 情報
 TagManager/Tag/Heading: タグ
+Tiddler/DateFormat: YYYY年MM月DD日(ddd) 0hh:0mm
 UnsavedChangesWarning: 保存していない編集内容があります。
