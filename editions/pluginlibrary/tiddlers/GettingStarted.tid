@@ -1,10 +1,10 @@
 title: GettingStarted
 
-This server let's you test the plugin import mechanism. 
+This edition contains the components needed to set up a local plugin library for testing or development.
 
 !! Important
 
-''Content isn't saved back to the server. It's read only!''
+''The default setup is read-only. Nothing is saved back to the server.''
 
 !! ~ControlPanel Plugin Tab
 

@@ -11,7 +11,7 @@
 	],
 	"build": {
 		"test-server": [
-			"--output", "./files/local/library/test",
+			"--output", "./tmp/local/library/test",
 			"--build", "library",
 			"--listen"
 		],
