@@ -11,7 +11,7 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 \whitespace trim
 <$set name="tag" value={{{ [<__tiddler__>get[text]] }}}>
 <$list filter="[<saveTiddler>!contains:$tagField$<tag>!match[]]" variable="ignore" emptyMessage="<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter='-[<tag>]'/>">
-<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>]"/>
+<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
 $actions$
 </$list>
 </$set>
@@ -52,7 +52,7 @@ $actions$
 </span><$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button><$reveal state=<<storeTitle>> type="nomatch" text=""><$button class="tc-btn-invisible tc-small-gap tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}} aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}>{{$:/core/images/close-button}}<<delete-tag-state-tiddlers>></$button></$reveal><span class="tc-add-tag-button tc-small-gap-left">
 <$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 <$button set=<<newTagNameTiddler>> setTo="" class="">
-<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>]"/>
+<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
 $actions$
 <$set name="currentTiddlerCSSEscaped" value={{{ [<saveTiddler>escapecss[]] }}}>
 <<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
