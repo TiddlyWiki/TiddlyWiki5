@@ -1,4 +1,8 @@
 title: $:/plugins/tiddlywiki/katex/snippets/logo
 tags: $:/tags/KaTeX/Snippet
+caption: KaTeX Logo
+description: Display a Logo of KaTeX
+preview: $$\KaTeX$$
+icon: $:/plugins/tiddlywiki/katex/katex-logo
 
 $$\KaTeX$$
