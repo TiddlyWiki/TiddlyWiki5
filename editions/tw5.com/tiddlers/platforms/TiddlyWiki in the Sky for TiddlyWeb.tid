@@ -3,5 +3,6 @@ modified: 20211124214855770
 tags: $:/deprecated
 title: TiddlyWiki in the Sky for TiddlyWeb
 type: text/vnd.tiddlywiki
+caption: {{!!title}} - ^^deprecated^^
 
 The term "TiddlyWiki in the Sky for TiddlyWeb" was used to refer to the ability for content to be synchronised between TiddlyWiki running in the browser and a TiddlyWeb server. This configuration should still work but is no longer commonly used.
