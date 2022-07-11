@@ -775,10 +775,16 @@ Tests the filtering mechanism.
 			// No position title.
 			expect(wiki.filterTiddlers("a b c [[with space]] +[insertafter[b]]").join(",")).toBe("a,c,with space,b");
 
-			// Position title does not exist.
+			// Position title does not exist, and no suffix given.
 			expect(wiki.filterTiddlers("a b c d e +[insertafter:foo[b]]").join(",")).toBe("a,c,d,e,b");
 			expect(wiki.filterTiddlers("a b c d e +[insertafter[b],[foo]]").join(",")).toBe("a,c,d,e,b");
 			expect(wiki.filterTiddlers("a b c d e +[insertafter[b],<foo>]").join(",")).toBe("a,c,d,e,b");
+
+			// Position title does not exist, but "start" or "end" given as suffix
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:start[b],[foo]]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:start[b],<foo>]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:end[b],[foo]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:end[b],<foo>]").join(",")).toBe("a,c,d,e,b");
 		});
 
 		it("should handle the insertbefore operator", function() {
@@ -808,10 +814,16 @@ Tests the filtering mechanism.
 			// No position title.
 			expect(wiki.filterTiddlers("a b c [[with space]] +[insertbefore[b]]").join(",")).toBe("a,c,with space,b");
 
-			// Position title does not exist.
+			// Position title does not exist, and no suffix given.
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore:foo[b]]").join(",")).toBe("a,c,d,e,b");
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore[b],[foo]]").join(",")).toBe("a,c,d,e,b");
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore[b],<foo>]").join(",")).toBe("a,c,d,e,b");
+
+			// Position title does not exist, but "start" or "end" given as suffix
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:start[b],[foo]]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:start[b],<foo>]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:end[b],[foo]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:end[b],<foo>]").join(",")).toBe("a,c,d,e,b");
 		});
 	
 		it("should handle the move operator", function() {
