@@ -1,0 +1,10 @@
+title: $:/core/ui/ViewTemplate/body/rendered-plain-text
+
+\whitespace trim
+<$wikify name="text" text={{!!text}} type={{!!type}}>
+<pre>
+<code>
+<$text text=<<text>>/>
+</code>
+</pre>
+</$wikify>
