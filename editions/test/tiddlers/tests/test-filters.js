@@ -747,7 +747,46 @@ Tests the filtering mechanism.
 			
 			expect(wiki.filterTiddlers("a [[b c]] +[append{TiddlerSix!!filter}]").join(",")).toBe("a,b c,one,a a,[subfilter{hasList!!list}]");
 		});
-	
+
+		it("should handle the insertafter operator", function() {
+			var widget = require("$:/core/modules/widgets/widget.js");
+			var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
+											   { wiki:wiki, document:$tw.document});
+			rootWidget.makeChildWidgets();
+			var anchorWidget = rootWidget.children[0];
+			rootWidget.setVariable("myVar","c");
+			rootWidget.setVariable("tidTitle","e");
+			rootWidget.setVariable("tidList","one tid with spaces");
+
+			// Position title specified as suffix.
+			expect(wiki.filterTiddlers("a b c d e f +[insertafter:myVar[f]]",anchorWidget).join(",")).toBe("a,b,c,f,d,e");
+			expect(wiki.filterTiddlers("a b c d e f +[insertafter:myVar<tidTitle>]",anchorWidget).join(",")).toBe("a,b,c,e,d,f");
+			expect(wiki.filterTiddlers("a b c d e f +[insertafter:myVar[gg gg]]",anchorWidget).join(",")).toBe("a,b,c,gg gg,d,e,f");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:myVar<tidList>]",anchorWidget).join(",")).toBe("a,b,c,one tid with spaces,d,e");
+			expect(wiki.filterTiddlers("a b c d e f +[insertafter:tidTitle{TiddlerOne!!tags}]",anchorWidget).join(",")).toBe("a,b,c,d,e,one,f");
+
+			// Position title specified as parameter.
+			expect(wiki.filterTiddlers("a b c d e +[insertafter[f],[a]]",anchorWidget).join(",")).toBe("a,f,b,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter[f],<myVar>]",anchorWidget).join(",")).toBe("a,b,c,f,d,e");
+
+			// Parameter takes precedence over suffix.
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:myVar[f],[a]]",anchorWidget).join(",")).toBe("a,f,b,c,d,e");
+
+			// No position title.
+			expect(wiki.filterTiddlers("a b c [[with space]] +[insertafter[b]]").join(",")).toBe("a,c,with space,b");
+
+			// Position title does not exist, and no suffix given.
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:foo[b]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter[b],[foo]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter[b],<foo>]").join(",")).toBe("a,c,d,e,b");
+
+			// Position title does not exist, but "start" or "end" given as suffix
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:start[b],[foo]]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:start[b],<foo>]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:end[b],[foo]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertafter:end[b],<foo>]").join(",")).toBe("a,c,d,e,b");
+		});
+
 		it("should handle the insertbefore operator", function() {
 			var widget = require("$:/core/modules/widgets/widget.js");
 			var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },
@@ -775,10 +814,16 @@ Tests the filtering mechanism.
 			// No position title.
 			expect(wiki.filterTiddlers("a b c [[with space]] +[insertbefore[b]]").join(",")).toBe("a,c,with space,b");
 
-			// Position title does not exist.
+			// Position title does not exist, and no suffix given.
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore:foo[b]]").join(",")).toBe("a,c,d,e,b");
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore[b],[foo]]").join(",")).toBe("a,c,d,e,b");
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore[b],<foo>]").join(",")).toBe("a,c,d,e,b");
+
+			// Position title does not exist, but "start" or "end" given as suffix
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:start[b],[foo]]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:start[b],<foo>]").join(",")).toBe("b,a,c,d,e");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:end[b],[foo]]").join(",")).toBe("a,c,d,e,b");
+			expect(wiki.filterTiddlers("a b c d e +[insertbefore:end[b],<foo>]").join(",")).toBe("a,c,d,e,b");
 		});
 	
 		it("should handle the move operator", function() {
