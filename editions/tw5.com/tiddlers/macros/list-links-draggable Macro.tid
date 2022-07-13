@@ -13,6 +13,8 @@ The <<.def list-links-draggable>> [[macro|Macros]] renders the ListField of a ti
 : The title of the tiddler containing the list
 ;field
 : The name of the field containing the list (defaults to `list`)
+;emptyMessage
+: Optional wikitext to display if there is no output (tiddler is not existed, field is not existed or empty)
 ;type
 : The element tag to use for the list wrapper (defaults to `ul`)
 ;subtype
