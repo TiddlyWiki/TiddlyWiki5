@@ -5,6 +5,7 @@ title: $:/plugins/tiddlywiki/browser-sniff/usage
 The following informational tiddlers are created at startup:
 
 |!Title |!Description |
+|[[$:/info/browser/is/mobile]] |Running on mobile device? ("yes" or "no")  |
 |[[$:/info/browser/is/android]] |Running on Android? ("yes" or "no")  |
 |[[$:/info/browser/is/bada]] |Running on Bada? ("yes" or "no")  |
 |[[$:/info/browser/is/blackberry]] |Running on ~BlackBerry? ("yes" or "no")  |
