@@ -4,7 +4,11 @@ tags: $:/tags/ViewTemplate
 \whitespace trim
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
 <div class="tc-subtitle">
-<$link to={{!!modifier}} />
-<$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate/Subtitle]!has[draft.of]]" variable="subtitleTiddler" counter="indexSubtitleTiddler">
+<$list filter="[<indexSubtitleTiddler-first>match[no]]" variable="ignore">
+&nbsp;
+</$list>
+<$transclude tiddler=<<subtitleTiddler>> mode="inline"/>
+</$list>
 </div>
 </$reveal>
