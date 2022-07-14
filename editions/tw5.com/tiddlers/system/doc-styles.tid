@@ -252,3 +252,19 @@ a.doc-deprecated-version.tc-tiddlylink {
 		<<box-shadow "1px 1px 6px rgba(0, 0, 0, 0.6)">>
 	}
 }
+
+.doc-github-contributors {
+	list-style: none;
+}
+
+.doc-github-contributors a {
+	text-decoration: none;
+	font-size: 14px;
+	line-height: 18px;
+	vertical-align: baseline;
+}
+
+.doc-github-contributors a img,
+.doc-github-contributors a .doc-github-contributor-username {
+	vertical-align: middle;
+}
