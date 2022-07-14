@@ -1,6 +1,5 @@
 title: $:/plugins/tiddlywiki/katex/styles
 tags: [[$:/tags/Stylesheet]]
-code-body: yes
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
