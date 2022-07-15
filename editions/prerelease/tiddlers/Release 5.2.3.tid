@@ -65,7 +65,6 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6578">> whitespace and indentation of [[tabs Macro]] to improve readability
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6659">> ''color-scheme'' CSS property to the root of the Vanilla base theme
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6681">> EventCatcherWidget to support `tv-widgetnode-width` and `tv-widgetnode-height`
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6705">> framed editor to support global keyboard shortcuts
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6776">> [[list-links-draggable Macro]] to support an message to be displayed if the list is empty
 
 ! Bug Fixes
