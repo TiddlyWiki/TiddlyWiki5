@@ -48,6 +48,8 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6561">> CheckboxWidget to support for the ''listField'' and ''filter'' attributes
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6581">> DraggableWidget to support an ''enabled'' attribute
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6582">> DraggableWidget to pass additional context variables to the ''dragstartactions'' action string
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6787">> refreshing of DraggableWidget
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6786">> brittle selector implementation for the DraggableWidget
 
 ! Filter improvements
 
@@ -57,6 +59,7 @@ type: text/vnd.tiddlywiki
 
 ! Hackability Improvements
 
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6779">> tiddler subtitle rendering to allow individual elements to be controlled via the [[SystemTag: $:/tags/ViewTemplate/Subtitle]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/f3bf5b6e850691b6bff430b0575387a09f6aaf97">> support for [[SystemTag: $:/tags/Macro/View/Body]]
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6624">> [[colour Macro]] to allow for palette-specific fallback colours to be specified
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6578">> whitespace and indentation of [[tabs Macro]] to improve readability
@@ -129,5 +132,6 @@ saqimtiaz
 simonbaird
 Telumire
 tobibeer
+twMat
 tw-FRed
 """>>
