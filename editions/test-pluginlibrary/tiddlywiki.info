@@ -11,9 +11,9 @@
 	],
 	"build": {
 		"test-server": [
-			"--output", "./tmp/local/library/test",
+			"--output", "./files/local/library/tmp",
 			"--build", "library",
-			"--listen"
+			"--listen", "port=8888"
 		],
 		"library": [
 			"--makelibrary","$:/UpgradeLibrary",
