@@ -1,0 +1,4 @@
+title: $:/core/ui/ViewTemplate/subtitle/modifier
+tags: $:/tags/ViewTemplate/Subtitle
+
+<$link to={{!!modifier}}/>

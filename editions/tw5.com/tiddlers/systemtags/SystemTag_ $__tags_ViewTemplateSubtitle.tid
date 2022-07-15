@@ -1,0 +1,9 @@
+caption: $:/tags/ViewTemplate/Subtitle
+created: 20220714093251204
+description: identifies the individual segments that are displayed as the tiddler subtitle
+modified: 20220714093251204
+tags: SystemTags
+title: SystemTag: $:/tags/ViewTemplate/Subtitle
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/ViewTemplate/Subtitle` identifies the individual segments that are displayed as the tiddler subtitle
