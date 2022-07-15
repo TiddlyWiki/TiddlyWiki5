@@ -1,6 +1,6 @@
 caption: draggable
 created: 20170406081938627
-modified: 20220416052952189
+modified: 20220715120213777
 tags: Widgets TriggeringWidgets
 title: DraggableWidget
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ See DragAndDropMechanism for an overview.
 |filter |Optional filter defining the payload tiddlers for the drag |
 |tag |Optional tag to override the default "div" element created by the widget|
 |selector|<<.from-version 5.2.2>> Optional CSS Selector to identify a DOM element within the widget that will be used as the drag handle |
-|class |Optional CSS classes to assign to the DOM element created by the widget. The class `tc-draggable` is added to the drag handle, which is the same as the DOM element created by the widget unless the <<.param selector>> attribute is used. The class `tc-dragging` is applied to the drag handle while the element is being dragged |
+|class |Optional CSS classes to assign to the DOM element created by the widget. The class `tc-draggable` is added to the the DOM element created by the widget unless the <<.param selector>> attribute is used. The class `tc-dragging` is applied to the DOM element created by the widget while the element is being dragged |
 |enable |<<.from-version 5.2.3>> Optional value "no" to disable the draggable functionality (defaults to "yes") |
 
 |startactions |Optional action string that gets invoked when dragging ''starts'' |
@@ -31,7 +31,7 @@ The [[actionTiddler Variable]] is accessible in both //startactions// and //enda
 
 <<.tip """Note that the [[actionTiddler Variable]] holds a [[Title List]] quoted with double square brackets. This is unlike the DroppableWidget which uses the same variable to pass a single unquoted title.""">>
 
-<<.tip """When specifying a DOM node to use as the drag handle with the <<.param selector>> attribute, give it the class `tc-draggable` in order for it to have the appropriate cursor.""">>
+<<.tip """When specifying a DOM node to use as the drag handle with the <<.param selector>> attribute, give it the class `tc-draggable` in order for it to have the appropriate cursor and the attribute `draggable` with the value `true` to make it draggable.""">>
 
 
 The LinkWidget incorporates the functionality of the DraggableWidget via the ''draggable'' attribute.
