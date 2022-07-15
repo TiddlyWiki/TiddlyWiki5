@@ -1,0 +1,23 @@
+created: 20211203095229264
+modified: 20211203140145340
+tags: 
+title: test-morph-string
+type: text/vnd.tiddlywiki
+
+!! Mappings
+
+Mappings can be found using this site: https://www.branah.com/unicode-table
+
+
+!! Examples
+
+<<wikitext-example-without-html """<<morph "ABCD" A 𝐀  >> """>>
+
+<<wikitext-example-without-html """<<morph "test string" from:"a" to:"𝐚">>""">>
+
+<<wikitext-example-without-html """<<morph "UPPER CASE" from:"A" to:"𝐀">>""">>
+
+<<wikitext-example-without-html """<<morph "01234" from:"0" to:"𝟎">>""">>
+
+
+
