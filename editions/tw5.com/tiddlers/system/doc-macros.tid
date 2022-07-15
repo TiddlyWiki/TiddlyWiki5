@@ -172,13 +172,11 @@ $credit$
 \end
 
 \define .contributors(usernames)
-<ol class="doc-github-contributors">
+<section class="doc-github-contributors">
 <$list filter="[enlist<__usernames__>sort[]]" variable="username">
-<li>
-<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=24]] }}} width="24" height="24"/><span class="doc-github-contributor-username"> @<$text text=<<username>>/></span></a>
-</li>
+<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/><span class="doc-github-contributor-username">@<$text text=<<username>>/></span></a>
 </$list>
-</ol>
+</section>
 \end
 
 <pre><$view field="text"/></pre>
