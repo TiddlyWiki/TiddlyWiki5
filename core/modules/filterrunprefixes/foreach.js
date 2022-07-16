@@ -13,7 +13,7 @@ module-type: filterrunprefix
 Export our filter prefix function
 */
 exports.foreach = function(operationSubFunction,options) {
-	var	filterRunPrefixes = options.wiki.getFilterRunPrefixes();
+	var filterRunPrefixes = options.wiki.getFilterRunPrefixes();
 	options.switches.includeAll = true;
 	return (filterRunPrefixes["map"]).call(this,operationSubFunction,options);
 };
