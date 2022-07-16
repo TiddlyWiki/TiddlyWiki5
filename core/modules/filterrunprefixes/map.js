@@ -36,7 +36,17 @@ exports.map = function(operationSubFunction,options) {
 						}
 					}
 				});
-				results.push(filtered[0] || "");
+				if(options.switches.includeAll) {
+					if(filtered.length) {
+						$tw.utils.each(filtered,function(value,index) {
+							results.push(value);
+						})
+					} else {
+						results.push("");
+					}
+				} else {
+					results.push(filtered[0] || "");
+				}
 				++index;
 			});
 		}
