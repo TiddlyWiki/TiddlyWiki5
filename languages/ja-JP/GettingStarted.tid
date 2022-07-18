@@ -1,19 +1,19 @@
 title: GettingStarted
 
 \define lingo-base() $:/language/ControlPanel/Basics/
-~TiddlyWikiにようこそ。これは個人で使えるWeb ノートです。
+~TiddlyWiki にようこそ。これは個人で使える Web  ノートです。
 
 作業を開始する前に保存機能が正しく使えるかどうかをご確認ください。 - 詳細は https://tiddlywiki.com/ の説明をご覧ください。
 
 それでは始めましょう:
 
-* サイドバーにある「＋」ボタンで新しいtiddlerを作成します。
-* サイドバーにある「歯車」ボタンで コントロールパネル を開いて、このWikiに対する設定ができます。
-** 「基本」タブのデフォルトtiddlerを変更することで、Wikiを開くたびにこのメッセージが表示されないようにできます。
+* サイドバーにある「＋」ボタンで新しい Tiddler を作成します。
+* サイドバーにある「歯車」ボタンで コントロールパネル を開いて、この Wiki に対する設定ができます。
+** 「基本」タブのデフォルト Tiddler を変更することで、Wiki を開くたびにこのメッセージが表示されないようにできます。
 * 変更を保存するにはサイドバーの「ダウンロード」ボタンを押してください。
 * 書式に関する詳細は WikiText を参照してください。
 
-!! この~TiddlyWikiを設定
+!! この ~TiddlyWiki を設定
 
 <div class="tc-control-panel">
 
@@ -22,4 +22,4 @@ title: GettingStarted
 |<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 </div>
 
-See the [[control panel|$:/ControlPanel]] for more options.
+より多くのオプションは [[control panel|$:/ControlPanel]] を参照してください。

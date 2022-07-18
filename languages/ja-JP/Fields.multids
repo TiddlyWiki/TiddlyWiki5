@@ -1,34 +1,39 @@
 title: $:/language/Docs/Fields/
 
-_canonical_uri: 外部画像tiddlerのURI
-bag: tiddlerの由来となったbagの名前
+_canonical_uri: 外部画像 Tiddler の URI
+_is_skinny: 存在する場合 Tiddler テキストフィールドがサーバーから読み込まれなければなりません
+bag: Tiddler の由来となった bag の名前
 caption: タブやボタンに表示されるテキスト
-color: tiddler に使用される CSS カラーの値
-component: [[アラート tiddler|AlertMechanism]] の原因となったコンポーネントの名前
-created: tiddler が作成された日付
-creator: tiddler の作成者名
-current-tiddler: [[history list|HistoryMechanism]] のトップにある tiddler をキャッシュするために使用される
+code-body: ''はい'' に設定すると、表示テンプレートは、コードとして Tiddler を表示します
+color: Tiddler に使用される CSS カラーの値
+component: [[アラート Tiddler|AlertMechanism]] の原因となったコンポーネントの名前
+created: Tiddler が作成された日付
+creator: Tiddler の作成者名
+current-tiddler: [[履歴一覧|HistoryMechanism]] のトップにある Tiddler をキャッシュするために使用されます
 dependents: プラグインが依存する他のプラグインのリスト
 description: プラグインなどの説明文
-draft.of: それがドラフト tiddler であるときのタイトル
-draft.title: ドラフト tiddler が正式版になったときに使用される予定のタイトル
+draft.of: それがドラフト Tiddler であるときのタイトル
+draft.title: ドラフト Tiddler が正式版になったときに使用される予定のタイトル
 footer: ウィザードのフッタ部テキスト
-icon: 紐付けられているアイコン tiddler のタイトル
-library: "yes" となっている場合、その tiddler は JavaScript ライブラリとして保存されなければならない
-list: そのtiddlerに紐付くtiddler名の順序付きリスト
-list-after: このフィールドが設定されたtiddlerは、順序付きリストでこのフィールドに記載の名前のtiddlerの後ろに並ぶ。
-list-before: このフィールドが設定されたtiddlerは、順序付きリストでこのフィールドに記載の名前のtiddlerの前に並ぶ。ただし空文字列が指定されていた場合は順序付きリストの先頭になる。
-modified: その tiddler の最終更新日時
-modifier: その tiddler を最後に更新したユーザ名
-name: 人が読める形のプラグイン tiddler 名
+hide-body: ''はい'' に設定すると表示テンプレートは、Tiddler の本文を非表示にします
+icon: 紐付けられているアイコン Tiddler のタイトル
+library: "はい" の場合、その Tiddler は JavaScript ライブラリとして保存する必要があります
+list: その Tiddler に紐付く Tiddler 名の順序付きリスト
+list-after: この項目が設定された Tiddler は、順序付きリストでこのフィールドに記載の名前の Tiddler の後ろに並びます
+list-before: この項目が設定された Tiddler は、順序付きリストでこのフィールドに記載の名前の Tiddler の前に並びます。ただし空文字列が指定されていた場合は順序付きリストの先頭になります
+modified: その Tiddler の最終更新日時
+modifier: その Tiddler を最後に更新したユーザー名
+name: 人が読める形のプラグイン Tiddler 名
 plugin-priority: プラグインの優先度を示す数値
 plugin-type: プラグインの種別
 released: TiddlyWiki のリリース日付
-revision: サーバー上の tiddler のリビジョン
-source: その tiddler のソース URL
+revision: サーバー上の Tiddler のリビジョン
+source: その Tiddler のソース URL
 subtitle: ウィザードのサブタイトル
-tags: その tiddler に付けられたタグのリスト
-text: tiddler の本文
-title: tiddler の一意となる名称
-type: その tiddler の種別
+tags: その Tiddler に付けられたタグのリスト
+text: Tiddler の本文
+throttle.refresh: 存在する場合、この Tiddler の更新を抑制します
+title: Tiddler の一意となる名称
+toc-link: 目次一覧で ''いいえ'' に設定されている場合、Tiddler のリンクを抑制します
+type: その Tiddler の種別
 version: プラグインのバージョン情報
