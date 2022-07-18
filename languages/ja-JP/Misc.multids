@@ -1,22 +1,108 @@
 title: $:/language/
 
-BinaryWarning/Prompt: このtiddlerにはバイナリデータが含まれています。
-ClassicWarning/Hint: この tiddler はクラシックスタイルのTiddlyWikiフォーマットで書かれています。このフォーマットはTiddlyWiki5との完全な互換性はありません。詳しくは https://tiddlywiki.com/static/Upgrading.html を参照してください。
+NewJournal/Tags: Journal
+NewJournal/Text: 
+NewJournal/Title: YYYY年MM月DD日(ddd)
+AboveStory/ClassicPlugin/Warning: It looks like you are trying to load a plugin designed for ~TiddlyWiki Classic. Please note that [[these plugins do not work with TiddlyWiki version 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic]]. ~TiddlyWiki Classic plugins detected:
+BinaryWarning/Prompt: この Tiddler にはバイナリデータが含まれています
+ClassicWarning/Hint: この Tiddler はクラシックスタイルの TiddlyWiki フォーマットで書かれています。このフォーマットは TiddlyWiki5 との完全な互換性はありません。詳しくは https://tiddlywiki.com/static/Upgrading.html を参照してください。
 ClassicWarning/Upgrade/Caption: アップグレード
 CloseAll/Button: すべて閉じる
-ConfirmCancelTiddler: 本当にこのtiddler "<$text text=<<title>>/>" の編集内容を取り消しますか？
-ConfirmDeleteTiddler: 本当にこのtiddler "<$text text=<<title>>/>" を削除しますか?
-ConfirmEditShadowTiddler: 隠しtiddlerを編集します。将来のアップグレードで互換性がとれなくなるかもしれません。本当にこのtiddler "<$text text=<<title>>/>" を編集しますか？
-ConfirmOverwriteTiddler: 本当にこの tiddler "<$text text=<<title>>/>" を上書きしますか?
-DropMessage: ドロップしてください。（止めるには、キャンセルをクリックしてください。）
+ColourPicker/Recent: Recent:
+ConfirmAction: Do you wish to proceed?
+ConfirmCancelTiddler: 本当にこの Tiddler "<$text text=<<title>>/>" の編集内容を取り消しますか？
+ConfirmDeleteTiddler: 本当にこの Tiddler "<$text text=<<title>>/>" を削除しますか？
+ConfirmEditShadowTiddler: 隠し Tiddler を編集します。将来のアップグレードで互換性がとれなくなるかもしれません。本当にこの Tiddler "<$text text=<<title>>/>" を編集しますか？
+ConfirmOverwriteTiddler: 本当にこの Tiddler "<$text text=<<title>>/>" を上書きしますか?
+Count: count
+DefaultNewTiddlerTitle: 新しい Tiddler
+Diffs/CountMessage: <<diff-count>> differences
+DropMessage: ドロップしてください。（止めるには、キャンセルをクリックしてください）
+Encryption/Cancel: キャンセル
 Encryption/ConfirmClearPassword: パスワードを削除すると暗号化も解除されますが、本当にパスワードを削除しますか？
-Encryption/PromptSetPassword: パスワードを入力してください。
-MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{||$:/core/ui/Buttons/edit}} して作成
-RecentChanges/DateFormat: YYYY-MM-DD
-SystemTiddler/Tooltip: これはシステム tiddler です
+Encryption/Password: パスワード
+Encryption/PasswordNoMatch: パスワードが一致しません
+Encryption/PromptSetPassword: 新しいパスワードを入力してください
+Encryption/RepeatPassword: パスワードの繰り返し
+Encryption/SetPassword: パスワードを設定
+Encryption/Username: ユーザー名
+Error/Caption: エラー
+Error/Filter: フィルターエラー
+Error/FilterRunPrefix: Filter Error: Unknown prefix for filter run
+Error/FilterSyntax: Syntax error in filter expression
+Error/FormatFilterOperator:Filter Error: Unknown suffix for the 'format' filter operator
+Error/IsFilterOperator: Filter Error: Unknown operand for the 'is' filter operator
+Error/LoadingPluginLibrary: Error loading plugin library
+Error/NetworkErrorAlert: `<h2>''Network Error''</h2>It looks like the connection to the server has been lost. This may indicate a problem with your network connection. Please attempt to restore network connectivity before continuing.<br><br>''Any unsaved changes will be automatically synchronised when connectivity is restored''.`
+Error/PutEditConflict: File changed on server
+Error/PutForbidden: Permission denied
+Error/PutUnauthorized: Authentication required
+Error/RecursiveTransclusion: Recursive transclusion error in transclude widget
+Error/RetrievingSkinny: Error retrieving skinny tiddler list
+Error/SavingToTWEdit: Error saving to TWEdit
+Error/WhileSaving: Error while saving
+Error/XMLHttpRequest: XMLHttpRequest error code
+Exporters/CsvFile: CSV ファイル
+Exporters/JsonFile: JSON ファイル
+Exporters/StaticRiver: 静的 HTML ファイルとして構成される一連の Tiddler
+Exporters/TidFile: ".tid" ファイル
+InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
+InternalJavaScriptError/Title: Internal JavaScript Error
+LayoutSwitcher/Description: レイアウト切り替えを開きます
+LazyLoadingWarning: <p>Trying to load external content from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear, either the tiddler content type doesn't match the type of the external content, or you may be using a browser that doesn't support external content for wikis loaded as standalone files. See https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: TiddlySpace へログイン
+Manager/Controls/FilterByTag/None: (なし)
+Manager/Controls/FilterByTag/Prompt: タグでフィルター:
+Manager/Controls/Order/Prompt: 逆順
+Manager/Controls/Search/Placeholder: 検索
+Manager/Controls/Search/Prompt: 検索:
+Manager/Controls/Show/Option/Tags: タグ
+Manager/Controls/Show/Option/Tiddlers: Tiddler
+Manager/Controls/Show/Prompt: 表示:
+Manager/Controls/Sort/Prompt: 表示順:
+Manager/Item/Colour: 色
+Manager/Item/Fields: 項目
+Manager/Item/Icon: アイコン
+Manager/Item/Icon/None: (なし)
+Manager/Item/RawText: Raw テキスト
+Manager/Item/Tags: タグ
+Manager/Item/Tools: ツール
+Manager/Item/WikifiedText: Wikified テキスト
+MissingTiddler/Hint: 未作成の Tiddler "<$text text=<<currentTiddler>>/>" - クリック {{||$:/core/ui/Buttons/edit}} して作成
+No: いいえ
+Notifications/CopiedToClipboard/Failed: クリップボードのコピーに失敗しました
+Notifications/CopiedToClipboard/Succeeded: クリップボードへコピーしました
+Notifications/Save/Done: Wiki を保存しました
+Notifications/Save/Starting: Wiki を保存します
+OfficialPluginLibrary: 公式 ~TiddlyWiki プラグインライブラリ
+OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
+PageTemplate/Description: 標準 ~TiddlyWiki レイアウト
+PageTemplate/Name: 標準 ~PageTemplate
+PluginReloadWarning: ~JavaScript プラグインの変更を有効にするため、 {{$:/core/ui/Buttons/save-wiki}} 保存して {{$:/core/ui/Buttons/refresh}} 再読み込みしてください
+RecentChanges/DateFormat: YYYY-0MM-0DD
+Shortcuts/Input/Accept/Hint: 選択項目を許可します
+Shortcuts/Input/AcceptVariant/Hint: 選択項目を許可します (variant)
+Shortcuts/Input/AdvancedSearch/Hint: サイドバーの検索フィールドの中から、~AdvancedSearch パネルを開きます
+Shortcuts/Input/Cancel/Hint: 入力項目をクリアします
+Shortcuts/Input/Down/Hint: 次の項目を選択します
+Shortcuts/Input/Tab-Left/Hint: 前のタグを選択します
+Shortcuts/Input/Tab-Right/Hint: 次のタグを選択します
+Shortcuts/Input/Up/Hint: 前の項目を選択します
+Shortcuts/SidebarLayout/Hint: サイドバーレイアウトを変更します
+Switcher/Subtitle/language: 言語の切り替え
+Switcher/Subtitle/layout: レイアウトの切り替え
+Switcher/Subtitle/palette: パレットの切り替え
+Switcher/Subtitle/theme: テーマの切り替え
+SystemTiddler/Tooltip: これはシステム Tiddler です
+SystemTiddlers/Include/Prompt: システム Tiddler を含める
 TagManager/Colour/Heading: 色
+TagManager/Count/Heading: カウント
 TagManager/Icon/Heading: アイコン
+TagManager/Icons/None: なし
 TagManager/Info/Heading: 情報
 TagManager/Tag/Heading: タグ
 Tiddler/DateFormat: YYYY年MM月DD日(ddd) 0hh:0mm
 UnsavedChangesWarning: 保存していない編集内容があります。
+Yes: はい
+$:/SiteSubtitle: 非線形パーソナルウェブノートブック
+$:/SiteTitle: 私の ~TiddlyWiki
