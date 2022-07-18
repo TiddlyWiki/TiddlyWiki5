@@ -1029,10 +1029,11 @@ exports.parseTextReference = function(title,field,index,options) {
 };
 
 exports.getTextReferenceParserInfo = function(title,field,index,options) {
-	var tiddler,
+	var defaultType = options.defaultType || "text/vnd.tiddlywiki",
+		tiddler,
 		parserInfo = {
 			sourceText : null,
-			parserType : "text/vnd.tiddlywiki"
+			parserType : defaultType
 		};
 	if(options.subTiddler) {
 		tiddler = this.getSubTiddler(title,options.subTiddler);

@@ -65,7 +65,7 @@ TranscludeWidget.prototype.execute = function() {
 	// Set the legacy transclusion context variables only if we're not transcluding a variable
 	if(!this.transcludeVariable) {
 		var recursionMarker = this.makeRecursionMarker();
-		this.setVariable("transclusion",recursionMarker);	
+		this.setVariable("transclusion",recursionMarker);
 	}
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
@@ -231,7 +231,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						this.transcludeIndex,
 						{
 							parseAsInline: parseAsInline,
-							subTiddler: this.transcludeSubTiddler
+							subTiddler: this.transcludeSubTiddler,
+							defaultType: this.transcludeType
 						});
 	}
 	// Return the parse tree
