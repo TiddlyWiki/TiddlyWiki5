@@ -24,33 +24,6 @@ Inherit from the base widget class
 */
 FillWidget.prototype = Object.create(Widget.prototype);
 
-/*
-Render this widget into the DOM
-*/
-FillWidget.prototype.render = function(parent,nextSibling) {
-	// Call the constructor
-	Widget.call(this);
-	this.parentDomNode = parent;
-	this.computeAttributes();
-	this.execute();
-	this.renderChildren(parent,nextSibling);
-};
-
-/*
-Compute the internal state of the widget
-*/
-FillWidget.prototype.execute = function() {
-	// Construct the child widgets
-	this.makeChildWidgets();
-};
-
-/*
-Refresh the widget by ensuring our attributes are up to date
-*/
-FillWidget.prototype.refresh = function(changedTiddlers) {
-	return this.refreshChildren(changedTiddlers);
-};
-
 exports.fill = FillWidget;
 
 })();
