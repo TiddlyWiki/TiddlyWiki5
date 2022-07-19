@@ -50,7 +50,7 @@ SlotWidget.prototype.execute = function() {
 	while(pointer) {
 		if(pointer instanceof TranscludeWidget) {
 			depth--;
-			if(depth === 0) {
+			if(depth <= 0) {
 				break;
 			}
 		}
