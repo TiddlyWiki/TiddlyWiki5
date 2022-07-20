@@ -14,13 +14,17 @@ type: text/vnd.tiddlywiki
 
 The <<.op insertafter>> operator requires at least one parameter which specifies the title to insert into the input list. A second parameter can be used to specify the title after which the new title should be inserted.
 
+A suffix can also be used to specify <<.place A>>, the title after which the new title should be inserted, but this form is deprecated. Instead, the two-parameter form is recommended. If the two-parameter form is used, the suffixes ''start'' and ''end'' can be used to specify where the item should be inserted if <<.place B>> is not found.
+
 ```
-insertafter:<after-title-variable>[<title>],[<after-title>]
+insertafter:<after-title-variable>[<title>]
+insertafter:<missing-location>[<title>],[<after-title>]
 ```
 
 * ''title'' : a title <<.place T>> to insert in the input list.
 * ''after-title'' : (optional). Insert <<.place T>> after this title <<.place A>> in the input list.
 * ''after-title-variable'' : (optional). The name of a variable specifying <<.place A>> instead of the `after-title` parameter.
+* ''missing-location'' : (optional). Either `start` or `end`: where to insert <<.place T>> if <<.place A>> is not found in the list.
 
 If the item <<.place A>> isn't present in the input list then the new item is inserted at the end of the list. <<.from-version "5.2.3">> The suffixes ''start'' and ''end'' can be spedified to control where the new item is inserted when <<.place A>> is not found. The suffix ''end'' is the default, inserting the new item at the end of the list. The suffix ''start'' will cause the new item to be inserted at the start of the list when <<.place A>> is not found.
 
