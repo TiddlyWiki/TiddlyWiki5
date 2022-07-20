@@ -45,7 +45,7 @@ type: text/vnd.tiddlywiki
 ! Widget Improvements
 
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/issues/6593">> CheckboxWidget to support the indeterminate state
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6561">> CheckboxWidget to support for the ''listField'' and ''filter'' attributes
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6561">> CheckboxWidget to support the ''listField'' and ''filter'' attributes
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6581">> DraggableWidget to support an ''enabled'' attribute
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6582">> DraggableWidget to pass additional context variables to the ''dragstartactions'' action string
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6787">> refreshing of DraggableWidget
