@@ -1,16 +1,20 @@
 created: 20200507002521489
-modified: 20200515012732244
-tags: 
+modified: 20220719134613555
 title: $:/_tw5.com-card-template
 type: text/vnd.tiddlywiki
 
 \define tw-card-template(bordercolor:"")
+\whitespace trim
 <div class="tc-card" style="border-top: 5px solid $bordercolor$;">
-<$link>
-        <div class="tc-card-title"><$transclude field="caption"><$view field="title"/></$transclude></div>
-       <div class="tc-card-author"> <$list filter="[is[current]has[community-author]]">by {{!!community-author}}</$list></div>
-        <p><$view field="description"/></p>
- </$link>
+	<$link>
+		<$let tv-wikilinks=no>
+			<div class="tc-card-title"><$transclude field="caption"><$view field="title"/></$transclude></div>
+			<div class="tc-card-author">
+				<$list filter="[is[current]has[community-author]]">by&nbsp;{{!!community-author}}</$list>
+			</div>
+			<p><$view field="description"/></p>
+		</$let>
+	</$link>
 </div>
 \end
 
