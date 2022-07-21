@@ -330,7 +330,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	var compiled = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -345,6 +345,17 @@ exports.compileFilter = function(filterString) {
 		});
 		return results.toArray();
 	});
+	var fnGuarded = function(source,widget) {
+		var results;
+		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
+		if(self.filterRecursionCount < 300) {
+			results = fnMeasured(source,widget);
+		} else {
+			results = ["/**-- Excessive filter recursion --**/"];
+		}
+		self.filterRecursionCount = self.filterRecursionCount - 1;
+		return results;
+	};
 	if(this.filterCacheCount >= 2000) {
 		// To prevent memory leak, we maintain an upper limit for cache size.
 		// Reset if exceeded. This should give us 95% of the benefit
@@ -352,9 +363,9 @@ exports.compileFilter = function(filterString) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	this.filterCache[filterString] = compiled;
+	this.filterCache[filterString] = fnGuarded;
 	this.filterCacheCount++;
-	return compiled;
+	return fnGuarded;
 };
 
 })();
