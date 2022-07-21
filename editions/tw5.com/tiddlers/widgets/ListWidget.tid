@@ -1,6 +1,6 @@
 caption: list
 created: 20131024141900000
-modified: 20210416175333981
+modified: 20220718120325494
 tags: Widgets Lists
 title: ListWidget
 type: text/vnd.tiddlywiki
@@ -117,7 +117,7 @@ Displays as:
 </$list>
 <<<
 
-Note that using the `counter` attribute can degrade the performance of the list widget in certain circumstances. In particular, it prevents an optimisation that normally occurs when dynamically adding or removing entries.
+Note that using the `counter` attribute can can reduce performance when working with list items that dynamically reorder or update themselves. The best advice is only to use it when it is really necessary: to obtain a numeric index, or to detect the first or last entries in the list.
 
 !! Edit mode
 

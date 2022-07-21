@@ -1,5 +1,5 @@
 created: 20200507002727378
-modified: 20200515024640489
+modified: 20220719132112414
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -151,7 +151,8 @@ type: text/vnd.tiddlywiki
 }
 
 .tc-card-author {
-	text-align: right;
+	text-align: center;
+	font-style: italic;
 }
 
 .tc-card p {
