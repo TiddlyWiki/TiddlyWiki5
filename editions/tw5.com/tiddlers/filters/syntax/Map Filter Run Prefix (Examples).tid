@@ -1,5 +1,5 @@
 created: 20210618134753828
-modified: 20211125152755859
+modified: 20220720191457421
 tags: [[Filter Syntax]] [[Filter Run Prefix Examples]] [[Map Filter Run Prefix]]
 title: Map Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
@@ -14,6 +14,11 @@ Replace the input titles with the caption field if it exists, otherwise preserve
 For each title in a shopping list, calculate the total cost of purchasing each item:
 
 <<.operator-example 2 "[tag[shopping]] :map[get[quantity]else[0]multiply{!!price}]">>
+
+Get the tags of all tiddlers tagged `Widget:`
+
+<<.operator-example 3 "[tag[Widgets]] :map:flat[tagging[]] :and[!is[blank]unique[]]">>
+<<.tip "Without the `flat` suffix the `:map` filter run only returns the first result for each input title">>
 
 !! Comparison between `:map` and `:and`/`+` filter run prefixes
 
