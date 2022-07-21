@@ -38,18 +38,18 @@ Date/Long/Day/3: 水曜
 Date/Long/Day/4: 木曜
 Date/Long/Day/5: 金曜
 Date/Long/Day/6: 土曜
-Date/Long/Month/1: 睦月
-Date/Long/Month/10: 神無月
-Date/Long/Month/11: 霜月
-Date/Long/Month/12: 師走
-Date/Long/Month/2: 如月
-Date/Long/Month/3: 弥生
-Date/Long/Month/4: 卯月
-Date/Long/Month/5: 皐月
-Date/Long/Month/6: 水無月
-Date/Long/Month/7: 文月
-Date/Long/Month/8: 葉月
-Date/Long/Month/9: 長月
+Date/Long/Month/1: 1 月
+Date/Long/Month/10: 10 月
+Date/Long/Month/11: 11 月
+Date/Long/Month/12: 12 月
+Date/Long/Month/2: 2 月
+Date/Long/Month/3: 3 月
+Date/Long/Month/4: 4 月
+Date/Long/Month/5: 5 月
+Date/Long/Month/6: 6 月
+Date/Long/Month/7: 7 月
+Date/Long/Month/8: 8 月
+Date/Long/Month/9: 9 月
 Date/Period/am: 午前
 Date/Period/pm: 午後
 Date/Short/Day/0: 日
@@ -59,18 +59,18 @@ Date/Short/Day/3: 水
 Date/Short/Day/4: 木
 Date/Short/Day/5: 金
 Date/Short/Day/6: 土
-Date/Short/Month/1: １月
-Date/Short/Month/10: １０月
-Date/Short/Month/11: １１月
-Date/Short/Month/12: １２月
-Date/Short/Month/2: ２月
-Date/Short/Month/3: ３月
-Date/Short/Month/4: ４月
-Date/Short/Month/5: ５月
-Date/Short/Month/6: ６月
-Date/Short/Month/7: ７月
-Date/Short/Month/8: ８月
-Date/Short/Month/9: ９月
+Date/Short/Month/1: 1 月
+Date/Short/Month/10: 10 月
+Date/Short/Month/11: 11 月
+Date/Short/Month/12: 12 月
+Date/Short/Month/2: 2 月
+Date/Short/Month/3: 3 月
+Date/Short/Month/4: 4 月
+Date/Short/Month/5: 5 月
+Date/Short/Month/6: 6 月
+Date/Short/Month/7: 7 月
+Date/Short/Month/8: 8 月
+Date/Short/Month/9: 9 月
 RelativeDate/Future/Days: <<period>> 日後
 RelativeDate/Future/Hours: <<period>> 時間後
 RelativeDate/Future/Minutes: <<period>> 分後

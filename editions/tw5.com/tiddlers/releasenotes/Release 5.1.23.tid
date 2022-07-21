@@ -6,10 +6,6 @@ tags: ReleaseNotes
 title: Release 5.1.23
 type: text/vnd.tiddlywiki
 
-\define contributor(username)
-<a href="https://github.com/$username$" style="text-decoration:none;font-size:24px;" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src="https://github.com/$username$.png?size=32" width="32" height="32"/> @<$text text=<<__username__>>/></a>
-\end
-
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.22...v5.1.23]]//
 
 <<.banner-credits
@@ -267,33 +263,35 @@ Please note that using this plugin does not guarantee compliance with any partic
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-* <<contributor adithya-badidey>>
-* <<contributor Arlen22>>
-* <<contributor bimlas>>
-* <<contributor BramChen>>
-* <<contributor BurningTreeC>>
-* <<contributor danielo515>>
-* <<contributor default-kramer>>
-* <<contributor ento>>
-* <<contributor favadi>>
-* <<contributor fkohrt>>
-* <<contributor flibbles>>
-* <<contributor gera2ld>>
-* <<contributor ibnishak>>
-* <<contributor idotobi>>
-* <<contributor jdangerx>>
-* <<contributor jjduhamel>>
-* <<contributor joshuafontany>>
-* <<contributor kookma>>
-* <<contributor Kamal-Habash>>
-* <<contributor Marxsal>>
-* <<contributor mocsa>>
-* <<contributor NicolasPetton>>
-* <<contributor OmbraDiFenice>>
-* <<contributor passuf>>
-* <<contributor pmario>>
-* <<contributor rmunn>>
-* <<contributor SmilyOrg>>
-* <<contributor saqimtiaz>>
-* <<contributor twMat>>
-* <<contributor xcazin>>
+<<.contributors """
+adithya-badidey
+Arlen22
+bimlas
+BramChen
+BurningTreeC
+danielo515
+default-kramer
+ento
+favadi
+fkohrt
+flibbles
+gera2ld
+ibnishak
+idotobi
+jdangerx
+jjduhamel
+joshuafontany
+kookma
+Kamal-Habash
+Marxsal
+mocsa
+NicolasPetton
+OmbraDiFenice
+passuf
+pmario
+rmunn
+SmilyOrg
+saqimtiaz
+twMat
+xcazin
+""">>

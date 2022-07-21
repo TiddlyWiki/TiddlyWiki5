@@ -1,16 +1,18 @@
 title: $:/language/SideBar/
 
-All/Caption: 全て
+All/Caption: すべて
+Caption: サイドバー
 Contents/Caption: 目次
-Drafts/Caption: ドラフト
+Drafts/Caption: 下書き
+Explorer/Caption: Explorer
 Missing/Caption: 未作成
 More/Caption: 詳しく
 Open/Caption: 表示中
-Orphans/Caption: 被参照無し
+Orphans/Caption: 被参照なし
 Recent/Caption: 最近の更新
 Shadows/Caption: 隠し
 System/Caption: システム
 Tags/Caption: タグ別
-Tags/Untagged/Caption: タグ無し
+Tags/Untagged/Caption: タグなし
 Tools/Caption: ツール
 Types/Caption: 種類別

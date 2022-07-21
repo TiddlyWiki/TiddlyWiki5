@@ -87,12 +87,32 @@ DraggableWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
+
+DraggableWidget.prototype.updateDomNodeClasses = function() {
+	var domNodeClasses = this.domNodes[0].className.split(" "),
+		oldClasses = this.draggableClasses.split(" ");
+	this.draggableClasses = this.getAttribute("class");
+	//Remove classes assigned from the old value of class attribute
+	$tw.utils.each(oldClasses,function(oldClass){
+		var i = domNodeClasses.indexOf(oldClass);
+		if(i !== -1) {
+			domNodeClasses.splice(i,1);
+		}
+	});
+	//Add new classes from updated class attribute.
+	$tw.utils.pushTop(domNodeClasses,this.draggableClasses);
+	this.domNodes[0].setAttribute("class",domNodeClasses.join(" "))
+}
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {
+	var changedAttributes = this.computeAttributes(),
+		changedAttributesCount = $tw.utils.count(changedAttributes);
+	if(changedAttributesCount === 1 && changedAttributes["class"]) {
+		this.updateDomNodeClasses();
+	} else if(changedAttributesCount > 0) {
 		this.refreshSelf();
 		return true;
 	}

@@ -42,16 +42,22 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 		this.tag = "h" + headingLevel;
 	}
 	// Select the namespace for the tag
-	var tagNamespaces = {
+	var XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml",
+		tagNamespaces = {
 			svg: "http://www.w3.org/2000/svg",
 			math: "http://www.w3.org/1998/Math/MathML",
-			body: "http://www.w3.org/1999/xhtml"
+			body: XHTML_NAMESPACE
 		};
 	this.namespace = tagNamespaces[this.tag];
 	if(this.namespace) {
 		this.setVariable("namespace",this.namespace);
 	} else {
-		this.namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"});
+		if(this.hasAttribute("xmlns")) {
+			this.namespace = this.getAttribute("xmlns");
+			this.setVariable("namespace",this.namespace);
+		} else {
+			this.namespace = this.getVariable("namespace",{defaultValue: XHTML_NAMESPACE});
+		}
 	}
 	// Invoke the th-rendering-element hook
 	var parseTreeNodes = $tw.hooks.invokeHook("th-rendering-element",null,this);

@@ -1,8 +1,8 @@
-title: ImplementationNotes
+title: $:/plugins/tiddlywiki/katex/ImplementationNotes
 
 ! CSS Handling
 
-The [[original CSS from KaTeX|https://github.com/Khan/KaTeX/blob/master/static%2Ffonts.css]] includes a number of font definitions in this format:
+The ''original CSS from KaTeX'' includes a number of font definitions in this format:
 
 ```
 @font-face {
@@ -16,7 +16,7 @@ The [[original CSS from KaTeX|https://github.com/Khan/KaTeX/blob/master/static%2
 }
 ```
 
-These definitions are currently removed manually from [[$:/plugins/tiddlywiki/katex/katex.min.css]] so that they can be redefined as data URIs using TiddlyWiki's macro notation:
+These definitions are currently ''removed manually'' from [[$:/plugins/tiddlywiki/katex/katex.min.css]] so that they can be redefined as data URIs using TiddlyWiki's macro notation in $:/plugins/tiddlywiki/katex/styles
 
 ```
 @font-face {
