@@ -4,9 +4,14 @@ tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-Click here to download an empty copy of TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
+!!!1. Download an empty copy of TiddlyWiki
 
-The next step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
+<div style="display: flex; justify-content: center;">{{$:/editions/tw5.com/snippets/download-empty-button}}</div>
+
+...alternatively, for a free online service, try out [[Tiddlyhost|Saving on TiddlyHost]]
+
+!!!2. Select a saving method
+If you use a downloaded copy, choose one of the methods here below for saving changes.
 
 <<.warning "Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)">><br/><br/>
 
