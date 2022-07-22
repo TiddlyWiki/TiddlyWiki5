@@ -29,7 +29,7 @@ Tags/Dropdown/Hint: タグ一覧を表示
 Title/BadCharacterWarning: 警告: Tiddler のタイトルに <<bad-chars>> という文字の使用は避けてください
 Title/Exists/Prompt: 対象の Tiddler がすでに存在します
 Title/References/Prompt: この Tiddler の次のリファレンスは、自動的には更新されません:
-Title/Relink/Prompt: 他 Tiddler の //tags// と //list// 項目にある ''<$text text=<fromTitle>/>'' を ''<$text text=<toTitle>/>'' に更新します
+Title/Relink/Prompt: 他 Tiddler の //tags// と //list// 項目にある ''<$text text=<<fromTitle>>/>'' を ''<$text text=<<toTitle>>/>'' に更新します
 Type/Delete/Caption: コンテンツタイプを削除
 Type/Delete/Hint: コンテンツタイプを削除
 Type/Dropdown/Caption: コンテンツタイプ一覧
