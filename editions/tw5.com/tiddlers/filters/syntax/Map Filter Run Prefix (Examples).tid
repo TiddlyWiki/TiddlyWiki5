@@ -1,5 +1,5 @@
 created: 20210618134753828
-modified: 20220723142748506
+modified: 20220723173623786
 tags: [[Filter Syntax]] [[Filter Run Prefix Examples]] [[Map Filter Run Prefix]]
 title: Map Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
@@ -20,11 +20,16 @@ Get the tags of all tiddlers tagged `Widget:`
 <<.operator-example 3 "[tag[Widgets]] :map:flat[tagging[]] :and[!is[blank]unique[]]">>
 <<.tip "Without the `flat` suffix the `:map` filter run only returns the first result for each input title">>
 
-!! Comparison between `:map` and `:map:flat` filter run prefixes
+!! Comparison between `:map` with and without the `flat` suffix
 
-The `:map` filter run prefix provides a subset of the `:map:flat` functionality. The `:map` filter run behaves as if a call to the [[first operator|first Operator]] is automatically added to the end of a `:map:flat` filter run. The `:map` run will always have the same number of outputs as inputs. Within the run the number of items can increase, but only the first item will be returned as output. The `:map:flat` run will always return at least as many outputs as inputs. However, since it does not have the implicit call to [[first|first Operator]] it can increase the number of outputs compared to the number of inputs.
+The default `:map` filter run prefix behavior is a subset of the functionality provided when the `flat` suffix is used. In both cases at least as many outputs as given in the input will be returned. If the run transforms the input into something blank, that blank item will still be preserved in the output.
+
+Without the suffix, `:map` filter behaves as if a call to the [[first operator|first Operator]] is automatically added to the end. Within the run the number of items might increase, but only the first item will be returned in the output.
+
+With the suffix, `:map:flat` does not have the implicit call to the [[first operator|first Operator]]. When the number of items within the run increase, that increase will be preserved in the output.
 
 | `:map:flat` | `:map` |
+|^<<.operator-example m0.1 "[range[4]] :map:flat[match[this matches nothing]]">>|^<<.operator-example m0.2 "[range[4]] :map[match[this matches nothing]]">>|
 |^<<.operator-example m1.1 "[range[4]] :map:flat[range<currentTiddler>]">>|^<<.operator-example m1.2 "[range[4]] :map[range<currentTiddler>]">>|
 |^<<.operator-example m2.1 "[range[4]] :map:flat[range<currentTiddler>first[]]">>|^<<.operator-example m2.2 "[range[4]] :map[range<currentTiddler>]">>|
 |^<<.operator-example m3.1 "[range[4]] :map:flat[range<currentTiddler>sum[]]">>|^<<.operator-example m3.2 "[range[4]] :map[range<currentTiddler>sum[]]">>|
