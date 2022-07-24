@@ -94,6 +94,13 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 		left = Math.max(0,left);
 		top = Math.max(0,top);
 	}
+	if (this.popup.absolute) {
+		// Traverse the offsetParent chain and correct the offset to make it relative to the parent node.
+		for (var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
+			left -= offsetParentDomNode.offsetLeft;
+			top -= offsetParentDomNode.offsetTop;
+		}
+	}
 	domNode.style.left = left + "px";
 	domNode.style.top = top + "px";
 };
@@ -183,7 +190,7 @@ RevealWidget.prototype.compareStateText = function(state) {
 };
 
 RevealWidget.prototype.readPopupState = function(state) {
-	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
+	var popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
 		match = popupLocationRegExp.exec(state);
 	// Check if the state matches the location regexp
 	if(match) {
@@ -191,10 +198,11 @@ RevealWidget.prototype.readPopupState = function(state) {
 		this.isOpen = true;
 		// Get the location
 		this.popup = {
-			left: parseFloat(match[1]),
-			top: parseFloat(match[2]),
-			width: parseFloat(match[3]),
-			height: parseFloat(match[4])
+			absolute: (match[1] === "@"),
+			left: parseFloat(match[2]),
+			top: parseFloat(match[3]),
+			width: parseFloat(match[4]),
+			height: parseFloat(match[5])
 		};
 	} else {
 		// If not, we're closed

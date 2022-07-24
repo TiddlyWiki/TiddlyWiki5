@@ -136,7 +136,17 @@ Popup.prototype.show = function(options) {
 			height: options.domNode.offsetHeight
 		};
 	}
-	var popupRect = "(" + rect.left + "," + rect.top + "," + 
+	if(options.absolute && options.domNode) {
+		// Walk the offsetParent chain and add the position of the offsetParents to make
+		// the position absolute to the root node of the page.
+		var currentNode = options.domNode.offsetParent;
+		while(currentNode) {
+			rect.left += currentNode.offsetLeft;
+			rect.top += currentNode.offsetTop;
+			currentNode = currentNode.offsetParent;
+		}
+	}
+	var popupRect = (options.absolute ? "@(" : "(") + rect.left + "," + rect.top + "," +
 				rect.width + "," + rect.height + ")";
 	if(options.noStateReference) {
 		options.wiki.setText(options.title,"text",undefined,popupRect);
@@ -175,7 +185,7 @@ Popup.prototype.cancel = function(level) {
 Returns true if the specified title and text identifies an active popup
 */
 Popup.prototype.readPopupState = function(text) {
-	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
+	var popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 	return popupLocationRegExp.test(text);
 };
 
