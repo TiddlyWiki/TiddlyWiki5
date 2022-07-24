@@ -317,14 +317,23 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 Assign the computed attributes of the widget to a domNode
 options include:
 excludeEventAttributes: ignores attributes whose name begins with "on"
+requirePrefix: specifies a prefix that attributes to be assigned must match
 */
 Widget.prototype.assignAttributes = function(domNode,options) {
 	options = options || {};
-	var self = this;
+	var self = this,
+		prefix = options.requirePrefix;
 	var assignAttribute = function(name,value) {
 		// Check for excluded attribute names
 		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
 			value = undefined;
+		}
+		if(prefix) {
+			if(!$tw.utils.startsWith(name,prefix)) {
+				value = undefined;			
+			} else {
+				name = name.substr(prefix.length);
+			}
 		}
 		if(value !== undefined) {
 			// Handle the xlink: namespace

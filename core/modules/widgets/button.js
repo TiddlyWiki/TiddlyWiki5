@@ -40,6 +40,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		tag = this.buttonTag;
 	}
 	domNode = this.document.createElement(tag);
+	this.assignAttributes(domNode,{requirePrefix: "dom-"});
 	this.domNode = domNode;
 	// Assign classes
 	var classes = this["class"].split(" ") || [],
