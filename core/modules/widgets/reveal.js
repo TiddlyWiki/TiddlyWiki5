@@ -190,20 +190,11 @@ RevealWidget.prototype.compareStateText = function(state) {
 };
 
 RevealWidget.prototype.readPopupState = function(state) {
-	var popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
-		match = popupLocationRegExp.exec(state);
+	this.popup = $tw.popup.parseCoordinates(state);
 	// Check if the state matches the location regexp
-	if(match) {
+	if(this.popup) {
 		// If so, we're open
 		this.isOpen = true;
-		// Get the location
-		this.popup = {
-			absolute: (match[1] === "@"),
-			left: parseFloat(match[2]),
-			top: parseFloat(match[3]),
-			width: parseFloat(match[4]),
-			height: parseFloat(match[5])
-		};
 	} else {
 		// If not, we're closed
 		this.isOpen = false;

@@ -23,6 +23,12 @@ var Popup = function(options) {
 };
 
 /*
+Global regular expression for parsing the location of a popup.
+This is also used by the Reveal widget.
+*/
+Popup.popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/
+
+/*
 Trigger a popup open or closed. Parameters are in a hashmap:
 	title: title of the tiddler where the popup details are stored
 	domNode: dom node to which the popup will be positioned (one of domNode or domNodeRect is required)
@@ -185,9 +191,31 @@ Popup.prototype.cancel = function(level) {
 Returns true if the specified title and text identifies an active popup
 */
 Popup.prototype.readPopupState = function(text) {
-	var popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
-	return popupLocationRegExp.test(text);
+	return Popup.popupLocationRegExp.test(text);
 };
+
+/*
+Parses a coordinate string in the format `(x,y,w,h)` or `@(x,y,z,h)` and returns
+an object containing the position, width and height. The absolute-Mark is boolean
+value that indicates the coordinate system of the coordinates. If they start with
+an `@`, `absolute` is set and the coordinates are relative to the root element. If
+the initial `@` is missing, they are relative to the offset parent element and
+`absoute` is false.
+*/
+Popup.prototype.parseCoordinates = function(coordinates) {
+	var match = Popup.popupLocationRegExp.exec(coordinates);
+	if(match) {
+		return {
+			absolute: (match[1] === "@"),
+			left: parseFloat(match[2]),
+			top: parseFloat(match[3]),
+			width: parseFloat(match[4]),
+			height: parseFloat(match[5])
+		};
+	} else {
+		return false;
+	}
+}
 
 exports.Popup = Popup;
 
