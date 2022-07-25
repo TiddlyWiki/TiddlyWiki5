@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 
 The <<.op insertafter>> operator requires at least one parameter which specifies the title to insert into the input list. A second parameter can be used to specify the title after which the new title should be inserted.
 
-A suffix can also be used to specify <<.place A>>, the title after which the new title should be inserted, but this form is deprecated. Instead, the two-parameter form is recommended. If the two-parameter form is used, the suffixes ''start'' and ''end'' can be used to specify where the item should be inserted if <<.place B>> is not found.
+A suffix can also be used to specify <<.place A>>, the title after which the new title should be inserted, but this form is deprecated. Instead, the two-parameter form is recommended. If the two-parameter form is used, the suffixes ''start'' and ''end'' can be used to specify where the item should be inserted if <<.place A>> is not found.
 
 ```
 insertafter:<after-title-variable>[<title>]
