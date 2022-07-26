@@ -177,8 +177,9 @@ exports.pad = function(source,operator,options) {
 exports.charcode = function(source,operator,options) {
 	var chars = [];
 	$tw.utils.each(operator.operands,function(operand) {
-		if(operand !== "") {
-			chars.push(String.fromCharCode($tw.utils.parseInt(operand)));
+		var code = $tw.config.charNameLookup[operand.toLowerCase()] || $tw.config.escapeStringLookup[operand.toLowerCase()] || operand;
+		if(code !== "") {
+			chars.push(String.fromCharCode($tw.utils.parseInt(code)));
 		}
 	});
 	return [chars.join("")];
