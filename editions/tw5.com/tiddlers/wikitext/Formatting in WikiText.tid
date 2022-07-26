@@ -1,19 +1,34 @@
 caption: Formatting
 created: 20131205155959399
-modified: 20220513120211686
+modified: 20220726132504220
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
 
+<style>
+.no-code-border > code {
+  border: initial;
+  background-color: initial;
+}
+</style>
 Available character formatting includes:
 
-* <code>&#96;backticks&#96;</code> for `code` (<<.icon $:/core/images/mono-line>>)
-** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code><br><br>
-* `''bold''` for ''bold text'' (<<.icon $:/core/images/bold>>)<br><br>
-* `//italic//` for //italic text// (<<.icon $:/core/images/italic>>)<br><br>
-* `__underscore__` for __underscored text__ (<<.icon $:/core/images/underline>>)<br><br>
-* `^^superscript^^` for ^^superscripted^^ text (<<.icon $:/core/images/superscript>>)<br><br>
-* `,,subscript,,` for ,,subscripted,, text (<<.icon $:/core/images/subscript>>)<br><br>
-* `~~strikethrough~~` for ~~strikethrough~~ text (<<.icon $:/core/images/strikethrough>>)
+<div class="no-code-border">
+
+|Wikitext | Editor Button |HTML |Rendered Output |h
+|```backticks` ``are used for  for code | (<<.icon $:/core/images/mono-line>>) |`<code>backticks</code>` are used for code|`backticks` are used for  for code |
+|2 single hyphens are used for `''bold text''`| (<<.icon $:/core/images/bold>>) |2 single hyphens are used for `<strong>bold text</strong>` |2 single hyphens are used for ''bold text''|
+|2 slashes are used for `//italic text//`| (<<.icon $:/core/images/italic>>) |2 slashes are used for `<em>italic text</em>` |2 slashes are used for //italic text//|
+|2 underscores are used for `__underscored text__`| (<<.icon $:/core/images/underline>>) |2 underscores are used for `<u>underscored text<u>` |2 underscores are used for __underscored text__|
+|2 circumflex accents are used for `^^superscripted^^` text | (<<.icon $:/core/images/superscript>>) |2 circumflex accents are used for `<sup>superscripted</sup>` text |2 circumflex accents are used for ^^superscripted^^ text |
+|2 commas are used for `,,subscripted,,` text | (<<.icon $:/core/images/subscript>>) |2 commas are used for `<sub>subscripted</sub>` text |2 commas are used for ,,subscripted,, text |
+|2 tilde signs are used for `~~strikethrough~~` text | (<<.icon $:/core/images/strikethrough>>) |2 tilde signs are used for `<strike>strikethrough</strike>` text |2 tilde signs are used for ~~strikethrough~~ text |
+
+''Special case to show embedded backticks''
+
+|Wikitext |HTML |Rendered Output|h
+|<code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>|``<code>double backticks allows `embedded` backticks</code>`` |``double backticks allows `embedded` backticks``|
+
+</div>
 
 See also: [[Code Blocks in WikiText]]

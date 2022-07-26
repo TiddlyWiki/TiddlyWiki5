@@ -1,0 +1,13 @@
+code-body: yes
+created: 20220726132935807
+list-after: $:/core/ui/ViewTemplate/body
+modified: 20220726134215137
+tags: $:/tags/ViewTemplate
+title: $:/editions/tw5.com/wikitext-template
+
+<$list filter="[all[current]tag[WikiText]]" variable="listItem">
+
+---
+
+[[All options to format wikitext can be found at WikiText|WikiText]]
+</$list>

@@ -1,15 +1,23 @@
 created: 20131205155227468
-modified: 20140919191220377
+list: [[Headings in WikiText]] [[Paragraphs in WikiText]] [[Hard Linebreaks in WikiText]] [[Formatting in WikiText]] [[Dashes in WikiText]] [[Block Quotes in WikiText]] [[Lists in WikiText]] [[Definitions in WikiText]] [[Tables in WikiText]] [[Code Blocks in WikiText]] [[Typed Blocks in WikiText]] [[Images in WikiText]] [[Horizontal Rules in WikiText]] [[Linking in WikiText]] [[Variables in WikiText]] [[Macro Definitions in WikiText]] [[Macro Calls in WikiText]] [[Macros in WikiText]] [[Transclusion in WikiText]] [[Transclusion and Substitution]] [[Styles and Classes in WikiText]] [[HTML in WikiText]] [[Widgets in WikiText]] [[WikiText Parser Modes]]
+modified: 20220726132727329
 tags: Concepts Reference
 title: WikiText
 type: text/vnd.tiddlywiki
+
+\define openAll()
+<$set name=wList filter="[[WikiText]] [enlist{WikiText!!list}]">
+<$action-setfield $tiddler="$:/StoryList" list=<<wList>>/>
+\end
 
 ~WikiText is a concise, expressive way of typing a wide range of text formatting, hypertext and interactive features. It allows you to focus on writing without a complex user interface getting in the way. It is designed to be familiar for users of [[MarkDown|http://daringfireball.net/projects/markdown/]], but with more of a focus on linking and the interactive features.
 
 ~WikiText can also be inserted to the text field using the [[Editor toolbar]].
 
-See [[Formatting text in TiddlyWiki]] for an introduction to WikiText.
+The following elements of WikiText syntax are built into the core. 
 
-The following elements of WikiText syntax are built into the core:
+<$button actions=<<openAll>> >Open all tiddlers from the list below</$button>
 
 <<list-links "[tag[WikiText]]">>
+
+Also see [[Formatting text in TiddlyWiki]] for an introduction to WikiText.
