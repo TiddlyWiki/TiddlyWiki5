@@ -1,19 +1,39 @@
 caption: Formatting
-created: 20131205155959399
-modified: 20220513120211686
+created: 20220727060921261
+modified: 20220727085119016
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
 
 Available character formatting includes:
 
-* <code>&#96;backticks&#96;</code> for `code` (<<.icon $:/core/images/mono-line>>)
-** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code><br><br>
-* `''bold''` for ''bold text'' (<<.icon $:/core/images/bold>>)<br><br>
-* `//italic//` for //italic text// (<<.icon $:/core/images/italic>>)<br><br>
-* `__underscore__` for __underscored text__ (<<.icon $:/core/images/underline>>)<br><br>
-* `^^superscript^^` for ^^superscripted^^ text (<<.icon $:/core/images/superscript>>)<br><br>
-* `,,subscript,,` for ,,subscripted,, text (<<.icon $:/core/images/subscript>>)<br><br>
-* `~~strikethrough~~` for ~~strikethrough~~ text (<<.icon $:/core/images/strikethrough>>)
+<div class="no-code-border">
+
+|Wikitext | Button |Win Shortcut | Mac |Rendered Output |h
+|2 single hyphens are used for `''bold text''`| (<<.icon $:/core/images/bold>>) | <kbd>ctrl-B</kbd> |<kbd>win-B</kbd> |2 single hyphens are used for ''bold text''|
+|2 slashes are used for `//italic text//`| (<<.icon $:/core/images/italic>>) | <kbd>ctrl-I</kbd> |<kbd>win-I</kbd> |2 slashes are used for //italic text//|
+|2 underscores are used for `__underscored text__`| (<<.icon $:/core/images/underline>>) | <kbd>ctrl-U</kbd> |<kbd>win-U</kbd> |2 underscores are used for __underscored text__ |
+|2 circumflex accents are used for `^^superscripted^^` text | (<<.icon $:/core/images/superscript>>) | <kbd>ctrl-shift-P</kbd> |<|2 circumflex accents are used for ^^superscripted^^ text |
+|2 commas are used for `,,subscripted,,` text | (<<.icon $:/core/images/subscript>>) | <kbd>ctrl-shift-B</kbd> |<|2 commas are used for ,,subscripted,, text |
+|2 tilde signs are used for `~~strikethrough~~` text | (<<.icon $:/core/images/strikethrough>>) | <kbd>ctrl-T</kbd> |<|2 tilde signs are used for ~~strikethrough~~ text |
+|1 backtick is used for ```code` `` | (<<.icon $:/core/images/mono-line>>) | <kbd>ctrl-M</kbd> |<|1 backtick is used for `code` |
+
+''Special case to show embedded backticks''
+
+|Wikitext |Rendered Output|h
+|<code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>|``double backticks allows `embedded` backticks``|
+
+''For those who are interested''
+
+|Wikitext | Resulting HTML Code  |h
+|2 single hyphens are used for `''bold text''`|2 single hyphens are used for `<strong>bold text</strong>` |
+|2 slashes are used for `//italic text//`|2 slashes are used for `<em>italic text</em>` |
+|2 underscores are used for `__underscored text__`|2 underscores are used for `<u>underscored text<u>` |
+|2 circumflex accents are used for `^^superscripted^^` text |2 circumflex accents are used for `<sup>superscripted</sup>` text |
+|2 commas are used for `,,subscripted,,` text |2 commas are used for `<sub>subscripted</sub>` text |
+|2 tilde signs are used for `~~strikethrough~~` text |2 tilde signs are used for `<strike>strikethrough</strike>` text |
+|1 backtick is used for ```code` `` |1 backtick is used for `<code>code</code>` |
+
+</div>
 
 See also: [[Code Blocks in WikiText]]

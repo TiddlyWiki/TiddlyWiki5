@@ -1,6 +1,6 @@
 caption: Widgets
 created: 20131205160840915
-modified: 20220513113347606
+modified: 20220727101323465
 tags: WikiText
 title: Widgets in WikiText
 type: text/vnd.tiddlywiki
@@ -25,6 +25,4 @@ Note that widgets inherit all the features of [[HTML in WikiText]]:
 
 See [[HTML in WikiText]] for more details.
 
-The available widgets include:
-
-<<list-links "[tag[Widgets]]">>
+The available widgets can be found at: [[Widgets]]

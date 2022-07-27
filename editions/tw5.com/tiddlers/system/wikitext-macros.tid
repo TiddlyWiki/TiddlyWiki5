@@ -1,6 +1,6 @@
 code-body: yes
 created: 20150117184156000
-modified: 20220617122915793
+modified: 20220727095354935
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
@@ -100,4 +100,10 @@ $$$
 [[$tiddler$]]:
 
 <<tw-code $tiddler$>>
+\end
+
+\define wikitext-open-custom-list()
+<$set name="wList" filter="[all[current]] [enlist{!!custom-list}]">
+<$action-setfield $tiddler="$:/StoryList" list=<<wList>>/>
+</$set>
 \end
