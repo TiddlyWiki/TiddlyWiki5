@@ -3,11 +3,13 @@ tags: $:/tags/Macro
 
 \define toc-caption()
 \whitespace trim
+<span class="tc-toc-caption tc-tiny-gap-left">
 <$set name="tv-wikilinks" value="no">
   <$transclude field="caption">
     <$view field="title"/>
   </$transclude>
 </$set>
+</span>
 \end
 
 \define toc-body(tag,sort:"",itemClassFilter,exclude,path)
@@ -51,7 +53,6 @@ tags: $:/tags/Macro
           {{$:/core/images/down-arrow}}
         </$button>
       </$reveal>
-      &#32;
       <<toc-caption>>
     </$link>
     <$reveal type="match" stateTitle=<<toc-state>> text="open">
@@ -71,14 +72,12 @@ tags: $:/tags/Macro
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/right-arrow}}
-          &#32;
           <<toc-caption>>
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
           {{$:/core/images/down-arrow}}
-          &#32;
           <<toc-caption>>
         </$button>
       </$reveal>
@@ -127,7 +126,6 @@ tags: $:/tags/Macro
             </$button>
           </$reveal>
         </$list>
-        &#32;
         <<toc-caption>>
       </$link>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
@@ -147,14 +145,12 @@ tags: $:/tags/Macro
         <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/right-arrow}}
-            &#32;
             <<toc-caption>>
           </$button>
         </$reveal>
         <$reveal type="match" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
             {{$:/core/images/down-arrow}}
-            &#32;
             <<toc-caption>>
           </$button>
         </$reveal>
