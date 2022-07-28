@@ -36,6 +36,49 @@ function setupWiki(wikiOptions) {
 	};
 }
 
+it("should handle the action-setfield widget", function() {
+	var info = setupWiki();
+	var invokeActions = function(actions) {
+		info.widgetNode.invokeActionString(actions,info.widgetNode,null,{});
+	};
+	var resetTiddlers = function() {
+		info.wiki.addTiddlers([
+			{
+				title: "Output",
+				text: "Elephants!"
+			},{
+				title: "Root",
+				text: "Eagles!"
+			}
+		]);
+	};
+	// Start with a reset
+	resetTiddlers();
+	// Check it
+	expect(info.wiki.getTiddlerText("Output")).toBe("Elephants!");
+	expect(info.wiki.getTiddlerText("Root")).toBe("Eagles!");
+	// Missing $tiddler attribute
+	resetTiddlers();
+	invokeActions("<$tiddler tiddler='Root'><$action-setfield $field='text' $value='Hippos!'/></$tiddler>");
+	expect(info.wiki.getTiddlerText("Output")).toBe("Elephants!");
+	expect(info.wiki.getTiddlerText("Root")).toBe("Hippos!");
+	// Blank $tiddler attribute
+	resetTiddlers();
+	invokeActions("<$tiddler tiddler='Root'><$action-setfield $tiddler='' $field='text' $value='Koalas!'/></$tiddler>");
+	expect(info.wiki.getTiddlerText("Output")).toBe("Elephants!");
+	expect(info.wiki.getTiddlerText("Root")).toBe("Eagles!");
+	// Empty $tiddler attribute
+	resetTiddlers();
+	invokeActions("<$tiddler tiddler='Root'><$action-setfield $tiddler={{{}}} $field='text' $value='Sharks!'/></$tiddler>");
+	expect(info.wiki.getTiddlerText("Output")).toBe("Elephants!");
+	expect(info.wiki.getTiddlerText("Root")).toBe("Eagles!");
+	// Missing variable attribute
+	resetTiddlers();
+	invokeActions("<$tiddler tiddler='Root'><$action-setfield $tiddler=<<missing>> $field='text' $value='Tigers!'/></$tiddler>");
+	expect(info.wiki.getTiddlerText("Output")).toBe("Elephants!");
+	expect(info.wiki.getTiddlerText("Root")).toBe("Eagles!");
+});
+
 it("should handle the action-listops widget", function() {
 	var info = setupWiki();
 	var invokeActions = function(actions) {

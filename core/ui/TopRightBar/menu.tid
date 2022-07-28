@@ -1,6 +1,7 @@
 title: $:/core/ui/TopBar/menu
 tags: $:/tags/TopRightBar
 
+\whitespace trim
 <$list filter="[[$:/state/sidebar]get[text]] +[else[yes]!match[no]]" variable="ignore">
 <$button set="$:/state/sidebar" setTo="no" tooltip={{$:/language/Buttons/HideSideBar/Hint}} aria-label={{$:/language/Buttons/HideSideBar/Caption}} class="tc-btn-invisible tc-hide-sidebar-btn">{{$:/core/images/chevron-right}}</$button>
 </$list>

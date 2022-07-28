@@ -1,5 +1,6 @@
 title: $:/language/EditTemplate/
 
+Caption: Editor
 Body/External/Hint: This tiddler shows content stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
 Body/Placeholder: Type the text for this tiddler
 Body/Preview/Type/Output: output

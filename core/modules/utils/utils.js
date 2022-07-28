@@ -96,6 +96,20 @@ exports.repeat = function(str,count) {
 };
 
 /*
+Check if a string starts with another string
+*/
+exports.startsWith = function(str,search) {
+	return str.substring(0, search.length) === search;
+};
+
+/*
+Check if a string ends with another string
+*/
+exports.endsWith = function(str,search) {
+	return str.substring(str.length - search.length) === search;
+};
+
+/*
 Trim whitespace from the start and end of a string
 Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
 */
@@ -448,7 +462,7 @@ exports.formatDateString = function(date,template) {
 	// 'return raw UTC (tiddlywiki style) date string.'
 	if(t.indexOf("[UTC]") == 0 ) {
 		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
-			return $tw.utils.stringifyDate(new Date());
+			return $tw.utils.stringifyDate(date || new Date());
 		var offset = date.getTimezoneOffset() ; // in minutes
 		date = new Date(date.getTime()+offset*60*1000) ;
 		t = t.substr(5) ;

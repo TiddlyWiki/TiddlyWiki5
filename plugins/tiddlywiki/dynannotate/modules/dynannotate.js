@@ -183,7 +183,16 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 	// We'll dynamically build the click event handler so that we can reuse it
 	var clickHandlerFn = function(title) {
 		return function(event,domOverlay,modifierKey) {
-			self.invokeActionString(self.getAttribute("actions"),self,event,{annotationTiddler: title, modifier: modifierKey});
+			var bounds = domOverlay.getBoundingClientRect();
+			self.invokeActionString(self.getAttribute("actions"),self,event,{
+				annotationTiddler: title,
+				modifier: modifierKey,
+				"tv-selection-posx": (bounds.left).toString(),
+				"tv-selection-posy": (bounds.top).toString(),
+				"tv-selection-width": (bounds.width).toString(),
+				"tv-selection-height": (bounds.height).toString(),
+				"tv-selection-coords": "(" + bounds.left + "," + bounds.top + "," + bounds.width + "," + bounds.height + ")"
+			});
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
 					domNode: domOverlay,

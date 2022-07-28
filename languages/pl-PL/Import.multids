@@ -29,7 +29,7 @@ Upgrader/System/Suppressed: Zablokowano systemowego tiddlera.
 Upgrader/System/Warning: Tiddler z głównym modułem.
 Upgrader/System/Alert: Ta operacja zaimportuje tiddlera, który nadpisze jeden z gównych modułuch. Nie jest to zalecane, gdyż może spowodować niestabilne działanie systemu.
 Upgrader/ThemeTweaks/Created: Zmigrowano dostosowanie motywu z <$text text=<<from>>/>.
-Upgrader/Tiddler/Disabled: Wyłaczono tiddlera.
-Upgrader/Tiddler/Selected: Zaznaczono tiddlera.
-Upgrader/Tiddler/Unselected: Odznaczono tiddlera.
+Upgrader/Tiddler/Disabled: Wyłaczony tiddlera.
+Upgrader/Tiddler/Selected: Zaznaczony tiddlera.
+Upgrader/Tiddler/Unselected: Odznaczony tiddlera.
 

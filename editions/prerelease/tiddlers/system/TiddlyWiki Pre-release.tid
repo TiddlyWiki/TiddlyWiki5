@@ -4,6 +4,9 @@ modified: 20150428204930183
 This is a pre-release build of TiddlyWiki, [[also available in empty form|https://tiddlywiki.com/prerelease/empty.html]]. It is provided for testing purposes. ''Please don't try to use it for anything important'' -- you should use the latest official release from https://tiddlywiki.com.
 
 <$list filter="[tag[ReleaseNotes]!has[released]!sort[created]]">
-<h1><$text text=<<currentTiddler>>/></h1>
+<div class="tc-titlebar">
+<h2 class="tc-title"><$text text=<<currentTiddler>>/></h2>
+</div>
+<div class="tc-subtitle">Updated: <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/></div>
 <$transclude mode="block"/>
 </$list>

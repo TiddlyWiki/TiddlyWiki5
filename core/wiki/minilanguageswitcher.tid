@@ -1,5 +1,6 @@
 title: $:/snippets/minilanguageswitcher
 
+\whitespace trim
 <$select tiddler="$:/language">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]]">
 <option value=<<currentTiddler>>><$view field="description"><$view field="name"><$view field="title"/></$view></$view></option>

@@ -1,5 +1,6 @@
 title: $:/core/ui/TiddlerInfo
 
+\whitespace trim
 <div style="position:relative;">
 <div class="tc-tiddler-controls" style="position:absolute;right:0;">
 <$reveal state="$:/config/TiddlerInfo/Mode" type="match" text="sticky">

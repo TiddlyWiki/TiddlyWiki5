@@ -5,6 +5,7 @@ caption: {{$:/language/ControlPanel/Plugins/Caption}}
 \define lingo-base() $:/language/ControlPanel/Plugins/
 
 \define plugin-table(type)
+\whitespace trim
 <$set name="plugin-type" value="""$type$""">
 <$set name="qualified-state" value=<<qualify "$:/state/plugin-info">>>
 <$list filter="[!has[draft.of]plugin-type[$type$]sort[name]]" emptyMessage=<<lingo "Empty/Hint">> template="$:/core/ui/Components/plugin-info"/>

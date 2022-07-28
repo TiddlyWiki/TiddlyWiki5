@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/mono-block
+list-after: $:/core/ui/EditorToolbar/mono-block
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/mono-block
+caption: {{$:/language/Buttons/MonoBlock/Caption}} (Markdown)
+description: {{$:/language/Buttons/MonoBlock/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+button-classes: tc-text-editor-toolbar-item-start-group
+shortcuts: ((mono-block))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-lines"
+	prefix="
+```"
+	suffix="```"
+/>

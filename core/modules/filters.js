@@ -220,10 +220,18 @@ source: an iterator function for the source tiddlers, called source(iterator), w
 widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
+	if(!this.filterCache) {
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	if(this.filterCache[filterString] !== undefined) {
+		return this.filterCache[filterString];
+	}
 	var filterParseTree;
 	try {
 		filterParseTree = this.parseFilter(filterString);
 	} catch(e) {
+		// We do not cache this result, so it adjusts along with localization changes
 		return function(source,widget) {
 			return [$tw.language.getString("Error/Filter") + ": " + e];
 		};
@@ -320,7 +328,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	return $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+	var compiled = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -335,6 +343,16 @@ exports.compileFilter = function(filterString) {
 		});
 		return results.toArray();
 	});
+	if(this.filterCacheCount >= 2000) {
+		// To prevent memory leak, we maintain an upper limit for cache size.
+		// Reset if exceeded. This should give us 95% of the benefit
+		// that no cache limit would give us.
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	this.filterCache[filterString] = compiled;
+	this.filterCacheCount++;
+	return compiled;
 };
 
 })();

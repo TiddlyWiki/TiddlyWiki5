@@ -3,6 +3,7 @@ title: $:/language/Docs/Fields/
 _canonical_uri: Pełny adres URL do zewnętrznego obrazu
 bag: Nazwa worka, z ktorego pochodzi tiddler
 caption: Tekst wyświetlany na zakładce lub przycisku
+code-body: Ustawienie wartości na ''tak'' spowoduje wyświetlanie tiddlera jako kod
 color: Wartość koloru CSS powiążanego z tym tiddlerem
 component: Nazwa komponentu odpowiedzialnego za [[alert|AlertMechanism]]
 current-tiddler: Używane by zapamiętać ostatniego tiddlera w [[liście historii|HistoryMechanism]]
@@ -13,9 +14,9 @@ description: Opis wtyczki lub okna modalnego
 draft.of: Dla szkicy, zawiera nazwę tiddlera którego jest szkicem
 draft.title: Dla szkicy, zawiera proponowaną nową nazwę
 footer: Teskt stópki okna modalnego
-hide-body: Ustawienie wartości na ''yes'' ukryje treść tiddlera
+hide-body: Ustawienie wartości na ''tak'' ukryje treść tiddlera
 icon: Nazwa tiddlera zawierającego ikonę, która ma być powiązana z tym tiddlerem
-library: Ustawienie wartości na ''yes'' oznacza, że tiddler ma być zapisany jako biblioteka JavaScriptu
+library: Ustawienie wartości na ''tak'' oznacza, że tiddler ma być zapisany jako biblioteka JavaScriptu
 list: Posortowana lista nazw tiddlerów powiązanych z tym tiddlerem
 list-before: Jeżeli ustawione, nazwa tiddlera przed którym ten tiddler będzie dodany w sortowanej liście nazw tiddlerów; lub na początku listy jeżeli pole jest obecne ale puste
 list-after: Jeżeli ustawione, nazwa tiddlera po którym ten tiddler będzie dodany w sortowanej liście nazw tiddlerów; lub na końcu listy jeżeli pole jest obecne ale puste
@@ -36,4 +37,3 @@ toc-link: Powoduje, że spisie treści ten tiddler nie będzie podlinkowany (ale
 type: Typ treści tiddlera
 version: Informacja o wersji wtyczki
 _is_skinny: Jeżeli obecne, oznacza, że treść tego tiddlera musi być wczytana z serwera
-

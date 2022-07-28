@@ -36,6 +36,8 @@ EditorTypes/Hint: Te tiddlery określają który edytor jest używany do edycji 
 EditorTypes/Type/Caption: Typ
 EditTemplateBody/Caption: Treść Edytora Tiddlera
 EditTemplateBody/Hint: Ta kaskada określa szablon do edycji treści tiddlera, używany podczas edycji tiddlera.
+FieldEditor/Caption: Edytor Pól
+FieldEditor/Hint: Ta kaskada określa szablon do edycji pól tiddlera, zależnie od nazwy pola. Używany podczas edycji treści tiddlera.
 Info/Caption: Info
 Info/Hint: Informacje o tej TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Wpisz tu skrót
