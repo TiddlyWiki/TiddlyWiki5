@@ -7,6 +7,12 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.2...master]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[feedthegood|https://talk.tiddlywiki.org/u/feedthegood]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-v5-2-3]] and the [[voting thread|https://talk.tiddlywiki.org/t/banner-competition-voting-for-v5-2-3]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/daf4eec702f2e52afe300fbea32d217f7abad4c4/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
 ! Plugin Improvements
 
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/2f817e42935a3ab15cad697a7b8200dd8152eb9f">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/bbae2ab6da6c6cd1facab37fb7b9fd42e1d73169">>) [[KaTeX Plugin]] to ~KaTeX v0.16
@@ -36,7 +42,7 @@ type: text/vnd.tiddlywiki
 ! Usability Improvements
 
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/5916">> ActionSetFieldWidget to avoid inadvertent changes to the current tiddler
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6589">> "put" and "upload" savers (as used by TiddlyHost) to display error responses from the server
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6589">> "put" and "upload" savers (as used by [[TiddlyHost|Saving on TiddlyHost]] to display error responses from the server
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6655">> (and <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6661">>) various palettes to work with ''color-scheme: dark''
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6698">> the monospaced blocks and block quotes editor buttons so that they can be undone by clicking the button again
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6740">> field and tag editors to trim whitespace
@@ -54,7 +60,8 @@ type: text/vnd.tiddlywiki
 
 ! Filter improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/35b0833e0cafc477e402309c006a163eb59a94ca">> handling of `{!!title}` in a filter with no currentTiddler variable set
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6806">> new "flat" option to the [[Map Filter Run Prefix]] enabling multiple items to be returned from each invocation of the filter run
 
@@ -89,6 +96,10 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6755">> embedded SVG [[foreignObject|https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject]] namespace
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6757">> anchor links not working when address bar is updated with a permalink, and animation duration is set to zero
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/issues/6767">> positioning of server page control dropdown
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6832">> "save changes" button in the menu bar not turning red when the wiki is dirty
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6825">> hardcoded spaces in [[Table-of-Contents Macros]]
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6840">> state handling in [[tabs Macro]]
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/34b1b8128f4832e111a5d71af36d5ca2e2a1e0d4">> fixed formatting of IPv6 URLs by ListenCommand and ServerCommand
 
 ! Developer Improvements
 
