@@ -61,7 +61,6 @@ type: text/vnd.tiddlywiki
 ! Filter improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/35b0833e0cafc477e402309c006a163eb59a94ca">> handling of `{!!title}` in a filter with no currentTiddler variable set
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6806">> new "flat" option to the [[Map Filter Run Prefix]] enabling multiple items to be returned from each invocation of the filter run
 
