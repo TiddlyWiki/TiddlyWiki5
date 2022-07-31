@@ -7,7 +7,7 @@ Appearance/Hint: Dostosowywanie wyglądu tej TiddlyWiki
 Basics/AnimDuration/Prompt: Długość animacji
 Basics/AutoFocus/Prompt: Domyślne pole z fokusem dla nowych tiddlerów
 Basics/Caption: Podstawowe
-Basics/DefaultTiddlers/BottomHint: Używaj &#91;&#91;podwójnych nawiasów kwadratowych&#93;&#93; dla nazw ze spacjami. Możesz też <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">przywrócić ostatnią sesję</$button>
+Basics/DefaultTiddlers/BottomHint: Używaj &#91;&#91;podwójnych nawiasów kwadratowych&#93;&#93; dla nazw ze spacjami. Możesz też {{przywrócić ostatnią sesję||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Domyślnie otwarte tiddlery
 Basics/DefaultTiddlers/TopHint: Wybierz które tiddlery mają być widoczne przy uruchomieniu
 Basics/Language/Prompt: Cześć! Wybrany język to:

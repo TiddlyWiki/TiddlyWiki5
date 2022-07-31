@@ -6,7 +6,7 @@ Appearance/Caption: Aspetto
 Appearance/Hint: Personalizza l'aspetto del tuo ~TiddlyWiki
 Basics/AnimDuration/Prompt: Durata animazione:
 Basics/Caption: Impostazioni base
-Basics/DefaultTiddlers/BottomHint: Utilizza &#91;&#91;le doppie parentesi quadre&#93;&#93; per titoli di frammenti con spazi. In alternativa scegli di visualizzare i frammenti secondo la <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">cronologia</$button>
+Basics/DefaultTiddlers/BottomHint: Utilizza &#91;&#91;le doppie parentesi quadre&#93;&#93; per titoli di frammenti con spazi. In alternativa scegli di visualizzare i frammenti secondo la {{cronologia||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Frammenti di default:
 Basics/DefaultTiddlers/TopHint: Scegli quali frammenti vuoi visualizzare all'avvio:
 Basics/Language/Prompt: Ciao! Scegli la lingua:
