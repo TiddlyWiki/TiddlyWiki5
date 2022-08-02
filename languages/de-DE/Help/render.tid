@@ -33,5 +33,6 @@ Wichtig:
 
 Beispiel:
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` ... Übersetzt alle Nicht-System Tiddler und schreibt sie in ein Unterverzeichnis `tiddlers/` mit URL-kodiertem Titel und der Erweiterung `.html`
+* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` ... Übersetzt alle Nicht-System Tiddler und schreibt sie in ein Unterverzeichnis `tiddlers/` mit URL-kodiertem Titel und der Erweiterung `.html`
 
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- Übersetzt all Tiddler mit dem Tag: "HelloThere" in eine JSON Datei mit dem namen "tiddlers.json"

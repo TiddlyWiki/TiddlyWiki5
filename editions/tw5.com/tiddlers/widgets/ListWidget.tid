@@ -117,7 +117,7 @@ Displays as:
 </$list>
 <<<
 
-Note that using the `counter` attribute can can reduce performance when working with list items that dynamically reorder or update themselves. The best advice is only to use it when it is really necessary: to obtain a numeric index, or to detect the first or last entries in the list.
+Note that using the `counter` attribute can reduce performance when working with list items that dynamically reorder or update themselves. The best advice is only to use it when it is really necessary: to obtain a numeric index, or to detect the first or last entries in the list.
 
 !! Edit mode
 
