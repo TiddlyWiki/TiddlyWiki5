@@ -181,11 +181,9 @@ div.content {
 }
 
 .tc-btn-download {
-	width: 250px;
-	padding: 10px;
+	padding: 10px 30px;
 	border-radius: 5px;
 	background: #1462ff;
-	border-radius: 5px;
         border: none;
 	box-shadow: 0 2px 2px 0 #4a74c9;
 	overflow: hidden;
