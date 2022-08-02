@@ -1,6 +1,6 @@
 caption: 5.2.3
-created: 20220722161314008
-modified: 20220722161314008
+created: 20220802100223019
+modified: 20220802100223019
 tags: ReleaseNotes
 title: Release 5.2.3
 type: text/vnd.tiddlywiki
@@ -30,6 +30,7 @@ type: text/vnd.tiddlywiki
 
 * Chinese
 * French
+* German
 * Japanese
 * Polish
 
@@ -99,6 +100,7 @@ type: text/vnd.tiddlywiki
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6825">> hardcoded spaces in [[Table-of-Contents Macros]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6840">> state handling in [[tabs Macro]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/34b1b8128f4832e111a5d71af36d5ca2e2a1e0d4">> fixed formatting of IPv6 URLs by ListenCommand and ServerCommand
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/667da96c970283cbf0fc2b3672fba3812886be65">> crash when closing multiple plugin libraries
 
 ! Developer Improvements
 
@@ -145,4 +147,5 @@ Telumire
 tobibeer
 twMat
 tw-FRed
+xcazin
 """>>
