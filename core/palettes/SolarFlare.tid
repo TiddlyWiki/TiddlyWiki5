@@ -140,6 +140,8 @@ sidebar-muted-foreground-hover:
 sidebar-tab-background: #ded8c5
 sidebar-tiddler-link-foreground-hover:
 static-alert-foreground: #aaaaaa
+styled-inline-background: #ffff00
+styled-inline-foreground: #000000
 tab-border: #cccccc
     modal-footer-border: <<colour tab-border>>
     modal-header-border: <<colour tab-border>>

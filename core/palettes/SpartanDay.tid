@@ -70,6 +70,8 @@ sidebar-tiddler-link-foreground-hover: rgba(0, 0, 0, 0.87)
 sidebar-tiddler-link-foreground: rgba(0, 0, 0, 0.54)
 site-title-foreground: rgba(0, 0, 0, 0.87)
 static-alert-foreground: #aaaaaa
+styled-inline-background: #ffff00
+styled-inline-foreground: #000000
 tab-background-selected: <<colour background>>
 tab-background: transparent
 tab-border-selected: <<colour table-border>>

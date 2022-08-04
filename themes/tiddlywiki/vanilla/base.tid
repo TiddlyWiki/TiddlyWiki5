@@ -279,6 +279,11 @@ kbd {
 	color: <<colour selection-foreground>>;
 }
 
+.tc-inline-style {
+	background: <<colour styled-inline-background>>;
+	color: <<colour styled-inline-foreground>>;
+}
+
 form.tc-form-inline {
 	display: inline;
 }

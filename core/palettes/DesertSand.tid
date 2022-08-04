@@ -80,6 +80,8 @@ sidebar-tiddler-link-foreground-hover: #433F35
 sidebar-tiddler-link-foreground: #706A58
 site-title-foreground: <<colour tiddler-title-foreground>>
 static-alert-foreground: #A6A193
+styled-inline-background: #ffff00
+styled-inline-foreground: #000000
 tab-background-selected: #E9E0C7
 tab-background: #A6A193
 tab-border-selected: #C3BAA1
