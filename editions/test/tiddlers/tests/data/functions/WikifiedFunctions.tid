@@ -1,0 +1,30 @@
+title: Functions/WikifiedFunctions
+description: Wikified functions
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function fn-buffalo(p)
+[<p>addsuffix[ with a buffalo]]
+\end
+
+\procedure proc-buffalo(p)
+<$text text={{{ [<p>addsuffix[ with a buffalo]] }}}/>
+\end
+
+\define macro-buffalo(p)
+$p$ with a buffalo
+\end
+
+<<fn-buffalo "Going to lunch">>
+
+<<proc-buffalo "Going to lunch">>
+
+<<macro-buffalo "Going to lunch">>
+
++
+title: ExpectedResult
+
+<p>Going to lunch with a buffalo</p><p>Going to lunch with a buffalo</p><p>Going to lunch with a buffalo</p>

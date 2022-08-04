@@ -161,6 +161,7 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 Get transcluded parse tree nodes as an object {parser:,text:,type:}
 */
 TranscludeWidget.prototype.getTransclusionTarget = function() {
+	var self = this;
 	// Determine whether we're being used in inline or block mode
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
@@ -205,6 +206,25 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						}
 						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
 					});
+				} else if(srcVariable.isFunctionDefinition) {
+					var actualParams = this.getOrderedTransclusionParameters(),
+						variables = {};
+					$tw.utils.each(srcVariable.params,function(param,index) {
+						var name = param.name;
+						// Parameter names starting with dollar must be escaped to double dollars
+						if(name.charAt(0) === "$") {
+							name = "$" + name;
+						}
+						if(self.hasAttribute(name)) {
+							variables[name] = self.getAttribute(name);
+						} else if(self.hasAttribute(index + "")) {
+							variables[name] = self.getAttribute(index + "");
+						} else {
+							variables[name] = param["default"];
+						}
+					});
+					var result = this.wiki.filterTiddlers(srcVariable.value,this.makeFakeWidgetWithVariables(variables),this.wiki.makeTiddlerIterator([])).join("");
+					parser = this.wiki.parseText(this.transcludeType,result || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
 				} else {
 					// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 					parser = {
