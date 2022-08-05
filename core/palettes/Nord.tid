@@ -41,6 +41,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #5E81AC
 external-link-foreground: #8FBCBB
 foreground: #d8dee9
+highlight-background: #ffff78
+highlight-foreground: #000000
 menubar-background: #2E3440
 menubar-foreground: #d8dee9
 message-background: #2E3440
@@ -81,8 +83,6 @@ sidebar-tiddler-link-foreground-hover: #A3BE8C
 sidebar-tiddler-link-foreground: #81A1C1
 site-title-foreground: <<colour tiddler-title-foreground>>
 static-alert-foreground: #B48EAD
-styled-inline-background: #ffff78
-styled-inline-foreground: #000000
 tab-background-selected: #ECEFF4
 tab-background: #4C566A
 tab-border-selected: #4C566A

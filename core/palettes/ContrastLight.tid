@@ -34,6 +34,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #00a
 external-link-foreground: #00e
 foreground: #fff
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-background: <<colour foreground>>
 message-border: <<colour background>>
 message-foreground: <<colour background>>
@@ -70,8 +72,6 @@ sidebar-tiddler-link-foreground-hover: <<colour foreground>>
 sidebar-tiddler-link-foreground: <<colour primary>>
 site-title-foreground: <<colour tiddler-title-foreground>>
 static-alert-foreground: #aaaaaa
-styled-inline-background: #ffff00
-styled-inline-foreground: #000000
 tab-background-selected: <<colour background>>
 tab-background: <<colour foreground>>
 tab-border-selected: <<colour foreground>>

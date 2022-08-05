@@ -280,8 +280,8 @@ kbd {
 }
 
 .tc-inline-style {
-	background: <<colour styled-inline-background>>;
-	color: <<colour styled-inline-foreground>>;
+	background: <<colour highlight-background>>;
+	color: <<colour highlight-foreground>>;
 }
 
 form.tc-form-inline {

@@ -43,6 +43,8 @@ external-link-foreground: rgb(179, 179, 255)
 external-link-foreground-hover: inherit
 external-link-foreground-visited: rgb(153, 153, 255)
 foreground: rgb(179, 179, 179)
+highlight-background: #ffff78
+highlight-foreground: #000000
 message-background: <<colour tag-foreground>>
 message-border: #96ccff
 message-foreground: <<colour tag-background>>
@@ -79,8 +81,6 @@ sidebar-tiddler-link-foreground: rgb(179, 179, 179)
 sidebar-tiddler-link-foreground-hover: rgb(115, 115, 115)
 site-title-foreground: rgb(255, 201, 102)
 static-alert-foreground: rgba(0,0,0,.3)
-styled-inline-background: #ffff78
-styled-inline-foreground: #000000
 tab-background: rgba(0,0,0,0.125)
 tab-background-selected: rgb(38, 38, 38)
 tab-border: rgb(255, 201, 102)
