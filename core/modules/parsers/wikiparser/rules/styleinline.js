@@ -41,14 +41,14 @@ exports.parse = function() {
 	var node = {
 		type: "element",
 		tag: "span",
-		attributes: {
-			"class": {type: "string", value: "tc-inline-style"}
-		},
 		children: tree
 	};
 	if(classString) {
 		$tw.utils.addClassToParseTreeNode(node,classString);
+	} else {
+		$tw.utils.addClassToParseTreeNode(node,"tc-inline-style");
 	}
+
 	if(stylesString) {
 		$tw.utils.addAttributeToParseTreeNode(node,"style",stylesString);
 	}
