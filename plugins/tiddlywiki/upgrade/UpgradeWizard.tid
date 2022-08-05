@@ -6,9 +6,9 @@ tags: $:/tags/AboveStory
 
 <div class="tc-upgrade-wizard">
 
-! ~TiddlyWiki Upgrade Wizard
+! ~TiddlyWiki version <<version>>
 
-!! version <<version>>
+!! Upgrade Wizard
 
 <$list filter="[[$:/Import]is[missing]]">
 
