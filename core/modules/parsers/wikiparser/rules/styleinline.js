@@ -49,7 +49,7 @@ exports.parse = function() {
 	if(stylesString) {
 		$tw.utils.addAttributeToParseTreeNode(node,"style",stylesString);
 	}
-	if (!classString && !stylesString) {
+	if(!classString && !stylesString) {
 		$tw.utils.addClassToParseTreeNode(node,"tc-inline-style");
 	}
 	return [node];
