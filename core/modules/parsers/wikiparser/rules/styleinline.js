@@ -45,12 +45,12 @@ exports.parse = function() {
 	};
 	if(classString) {
 		$tw.utils.addClassToParseTreeNode(node,classString);
-	} else {
-		$tw.utils.addClassToParseTreeNode(node,"tc-inline-style");
 	}
-
 	if(stylesString) {
 		$tw.utils.addAttributeToParseTreeNode(node,"style",stylesString);
+	}
+	if (!classString && !stylesString) {
+		$tw.utils.addClassToParseTreeNode(node,"tc-inline-style");
 	}
 	return [node];
 };
