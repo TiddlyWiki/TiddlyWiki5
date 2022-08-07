@@ -67,6 +67,8 @@ describe("WikiText tests", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
 			"some @@highlighted@@ text")).toBe('<p>some <span class="tc-inline-style">highlighted</span> text</p>');
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@color:green;.tc-inline-style 1 style and 1 class@@ text")).toBe('<p>some <span class=" tc-inline-style " style="color:green;">1 style and 1 class</span> text</p>');
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
 			"some @@background-color:red;red@@ text")).toBe('<p>some <span style="background-color:red;">red</span> text</p>');
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
 			"some @@.myClass class@@ text")).toBe('<p>some <span class=" myClass ">class</span> text</p>');
