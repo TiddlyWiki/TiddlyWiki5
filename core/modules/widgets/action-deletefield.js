@@ -59,7 +59,7 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		tiddler = this.wiki.getTiddler(self.actionTiddler),
 		removeFields = {},
 		hasChanged = false;
-	if((this.actionField != null) && tiddler) {
+	if((this.actionField !== null) && tiddler) {
 		removeFields[this.actionField] = undefined;
 		if(this.actionField in tiddler.fields) {
 			hasChanged = true;
