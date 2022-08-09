@@ -329,9 +329,9 @@ Table utility classes
 */
 
 /* Remove borders from table as used in eg: GettingStarted*/
-.tc-table-no-grid,
-.tc-table-no-grid th,
-.tc-table-no-grid td {
+.tc-table-no-border,
+.tc-table-no-border th,
+.tc-table-no-border td {
 	border: initial;
 }
 
