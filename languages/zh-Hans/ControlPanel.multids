@@ -24,7 +24,7 @@ Basics/Subtitle/Prompt: 副标题
 Basics/SystemTiddlers/Prompt: 系统条目数量
 Basics/Tags/Prompt: 标签数量
 Basics/Tiddlers/Prompt: 一般条目数量
-Basics/Title/Prompt: 标题
+Basics/Title/Prompt: 此 ~TiddlyWiki 的标题
 Basics/Username/Prompt: 编辑者署名
 Basics/Version/Prompt: ~TiddlyWiki 版本
 Cascades/Caption: 级联
