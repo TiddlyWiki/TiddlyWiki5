@@ -69,7 +69,7 @@ Interleave two or more lists one item at a time
 			current = (current+1) % listCount;
 		}
 
-		return results.toArray();
+		return results.makeTiddlerIterator(options.wiki);
 	};
 
 })();
