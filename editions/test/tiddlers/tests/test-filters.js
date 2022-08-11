@@ -825,6 +825,41 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore:end[b],[foo]]").join(",")).toBe("a,c,d,e,b");
 			expect(wiki.filterTiddlers("a b c d e +[insertbefore:end[b],<foo>]").join(",")).toBe("a,c,d,e,b");
 		});
+
+		it("should handle the interleave operator", function() {
+			expect(wiki.filterTiddlers("").join(",")).toBe("");
+			// Interleaving two same-length lists
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3]]").join(",")).toBe("a,1,b,2,c,3");
+			// Two lists of length 1 should also work
+			expect(wiki.filterTiddlers("a +[interleave[1]]").join(",")).toBe("a,1");
+			// Two lists of length 0 should produce an empty list
+			// Note the + so we don't get [all[tiddlers]] as input
+			expect(wiki.filterTiddlers("+[interleave[]]").join(",")).toBe("");
+			// Two lists of different lengths should interleave until one list is exhausted, then take rest of other list
+			expect(wiki.filterTiddlers("a b c d +[interleave[1 2 3]]").join(",")).toBe("a,1,b,2,c,3,d");
+			expect(wiki.filterTiddlers("a b c d e +[interleave[1 2 3]]").join(",")).toBe("a,1,b,2,c,3,d,e");
+			expect(wiki.filterTiddlers("a b c d e f +[interleave[1 2 3]]").join(",")).toBe("a,1,b,2,c,3,d,e,f");
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3 4]]").join(",")).toBe("a,1,b,2,c,3,4");
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3 4 5]]").join(",")).toBe("a,1,b,2,c,3,4,5");
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3 4 5 6]]").join(",")).toBe("a,1,b,2,c,3,4,5,6");
+			// Interleaving with an empty list produces the original list unchanged
+			expect(wiki.filterTiddlers("a b c +[interleave[]]").join(",")).toBe("a,b,c");
+			expect(wiki.filterTiddlers("+[interleave[a b c]]").join(",")).toBe("a,b,c");
+			// Three or more lists can be interleaved using multiple parameters
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3],[red green blue]]").join(",")).toBe("a,1,red,b,2,green,c,3,blue");
+			// If any list runs out of items, rest continue interleaving
+			expect(wiki.filterTiddlers("a b c d e f g h +[interleave[red green blue],[1 2 3 4 5]]").join(",")).toBe("a,red,1,b,green,2,c,blue,3,d,4,e,5,f,g,h");
+			// An empty list in the middle of the parameters won't cause issues
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3],[],[red green blue]]").join(",")).toBe("a,1,red,b,2,green,c,3,blue");
+			// Can interleave as many lists we we want; we'll test four and five lists
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3],[red green blue],[10 20 30]]").join(",")).toBe("a,1,red,10,b,2,green,20,c,3,blue,30");
+			expect(wiki.filterTiddlers("a b c +[interleave[1 2 3],[red green blue],[x y z],[10 20 30]]").join(",")).toBe("a,1,red,x,10,b,2,green,y,20,c,3,blue,z,30");
+			// De-duplicates output by default
+			expect(wiki.filterTiddlers("a b c d +[interleave[1 2 3 2]]").join(",")).toBe("a,1,b,c,3,d,2");
+			// Use suffix "raw" to skip de-duplicating
+			expect(wiki.filterTiddlers("a b c d +[interleave:raw[1 2 3 2]]").join(",")).toBe("a,1,b,2,c,3,d,2");
+
+		});
 	
 		it("should handle the move operator", function() {
 			expect(wiki.filterTiddlers("a b c d e +[move[c]]").join(",")).toBe("a,b,d,c,e");
