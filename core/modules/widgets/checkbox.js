@@ -212,6 +212,10 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		} else {
 			listContents = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex) || "") || [];
 		}
+		if(Object.isFrozen(listContents)) {
+			// Can happen if using, say, the built-in "list" field which is frozen against modifications
+			listContents = listContents.slice(0);
+		}
 		oldPos = notValue ? listContents.indexOf(notValue) : -1;
 		newPos = value ? listContents.indexOf(value) : -1;
 		if(oldPos === -1 && newPos !== -1) {
