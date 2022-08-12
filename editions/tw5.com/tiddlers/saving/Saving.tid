@@ -1,5 +1,5 @@
 created: 20140912140651119
-modified: 20220401151525812
+modified: 20220812144516626
 saving-browser: Firefox Chrome Edge [[Internet Explorer]] Safari Opera [[Standalone App]]
 saving-os: Windows Mac Linux Android iOS
 tags: [[Working with TiddlyWiki]]
@@ -34,7 +34,7 @@ type: text/vnd.tiddlywiki
 \end
 <$vars stateTiddler=<<qualify "$:/state/gettingstarted">> >
 
-Available methods for saving changes with TiddlyWiki:
+Available methods for saving changes with ~TiddlyWiki:
 
 <div class="tc-wrapper-flex">
 <div class="tc-saving-sidebar">
