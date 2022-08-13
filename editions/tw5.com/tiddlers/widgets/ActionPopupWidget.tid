@@ -1,6 +1,6 @@
 caption: action-popup
 created: 20200303114556528
-modified: 20210501203451387
+modified: 20220815205132124
 tags: Widgets ActionWidgets
 title: ActionPopupWidget
 type: text/vnd.tiddlywiki
@@ -15,10 +15,11 @@ The ''action-popup'' widget is invisible. Any content within it is ignored.
 
 |!Attribute |!Description |
 |$state |The title of the state tiddler for the popup |
-|$coords |Optional coordinates for the handle to which popup is positioned (in the format `(x,y,w,h)`) |
+|$coords |Optional coordinates for the handle to which popup is positioned (see [[Coordinate Systems]] for the supported formats) |
 |$floating |<<.from-version "5.2.0">> Optional. Defaults to `no`. Set to `yes` to create a popup that must be closed explicitly. |
 
-<<.from-version "5.1.23">> If the ''$coords'' attribute is missing or empty then all popups are cancelled.
+<<.from-version "5.1.23">> If the ''$coords'' attribute is missing or empty then all popups are cancelled.<br/>
+<<.from-version "5.2.4">> The ''$coords'' attribute supports absolute and relative coordinates. See [[Coordinate Systems]] for more information.
 
 <<.tip "Delete the state tiddler for a floating popup to close it.">>
 
