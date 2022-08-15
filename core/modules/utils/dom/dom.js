@@ -295,7 +295,12 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		
 		if(selectedNode.offsetLeft) {
 			// Add a variable with a popup coordinate string for the selected node
-			variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
+			variables["tv-popup-coords"] = $tw.popup.buildCoordinates($tw.popup.coordinatePrefix.csOffsetParent,{
+				left: selectedNode.offsetLeft,
+				top: selectedNode.offsetTop,
+				width: selectedNode.offsetWidth,
+				height:selectedNode.offsetHeight
+			});
 
 			// Add variables for offset of selected node
 			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();

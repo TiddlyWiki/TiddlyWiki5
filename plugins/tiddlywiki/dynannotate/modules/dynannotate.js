@@ -191,7 +191,7 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 				"tv-selection-posy": (bounds.top).toString(),
 				"tv-selection-width": (bounds.width).toString(),
 				"tv-selection-height": (bounds.height).toString(),
-				"tv-selection-coords": "(" + bounds.left + "," + bounds.top + "," + bounds.width + "," + bounds.height + ")"
+				"tv-selection-coords": $tw.popup.buildCoordinates($tw.popup.coordinatePrefix.csOffsetParent,bounds)
 			});
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
