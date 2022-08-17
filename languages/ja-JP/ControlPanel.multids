@@ -107,7 +107,7 @@ Plugins/Updates/Caption: 更新
 Plugins/Updates/Hint: インストールされているプラグインの更新が可能です
 Plugins/Updates/UpdateAll/Caption: <<update-count>> プラグインの更新
 Saving/Caption: 保存
-Saving/DownloadSaver/AutoSave/Description: ダウンロードセーバーの自動保存を許可します
+Saving/DownloadSaver/AutoSave/Description: ダウンロードセーバーの自動保存を許可
 Saving/DownloadSaver/AutoSave/Hint: ダウンロードセーバーの自動保存を有効にします
 Saving/DownloadSaver/Caption: ダウンロードセーバー
 Saving/DownloadSaver/Hint: この設定は HTML5 対応ダウンロードセーバーに適用されます
@@ -148,7 +148,7 @@ Settings/AutoSave/Disabled/Description: 自動的に保存しない
 Settings/AutoSave/Enabled/Description: 自動的に保存する
 Settings/AutoSave/Hint: 自動的に保存するかどうかを設定します
 Settings/CamelCase/Caption: Camel Case Wiki リンク
-Settings/CamelCase/Description: 自動で ~CamelCase リンクを有効にします
+Settings/CamelCase/Description: 自動で ~CamelCase リンクを有効にする
 Settings/CamelCase/Hint: ~CamelCase フレーズの自動リンクをグローバルに無効にすることができます。有効にするには再読み込みが必要です
 Settings/Caption: 設定
 Settings/DefaultMoreSidebarTab/Caption: デフォルトのサイドバー 詳しく タブ
@@ -156,13 +156,13 @@ Settings/DefaultMoreSidebarTab/Hint: デフォルトで表示されるサイド�
 Settings/DefaultSidebarTab/Caption: 標準サイドバータブ
 Settings/DefaultSidebarTab/Hint: 標準で表示されるサイドバータブを指定します
 Settings/EditorToolbar/Caption: エディターツールバー
-Settings/EditorToolbar/Description: エディターツールバーを表示します
+Settings/EditorToolbar/Description: エディターツールバーを表示
 Settings/EditorToolbar/Hint: エディターツールバーの有効・無効を切り替えます:
 Settings/Hint: TiddlyWiki の動作を設定します
 Settings/InfoPanelMode/Caption: Tiddler 情報パネルモード
 Settings/InfoPanelMode/Hint: Tiddler 情報パネルが閉じる時間:
-Settings/InfoPanelMode/Popup/Description: Tiddler 情報パネルが自動的に閉じるタイミングを制御します
-Settings/InfoPanelMode/Sticky/Description: Tiddler 情報パネルは、明示的に閉じるまで開いたままになります
+Settings/InfoPanelMode/Popup/Description: Tiddler 情報パネルが自動的に閉じるタイミングを制御する
+Settings/InfoPanelMode/Sticky/Description: Tiddler 情報パネルを明示的に閉じるまで開いたままにする
 Settings/LinkToBehaviour/Caption: Tiddler を開く動作
 Settings/LinkToBehaviour/InsideRiver/Hint: Tiddler 表示部 //内// の動作
 Settings/LinkToBehaviour/OpenAbove: 現在の Tiddler 上に開く
@@ -171,13 +171,13 @@ Settings/LinkToBehaviour/OpenAtTop: Tiddler 表示部の上に開く
 Settings/LinkToBehaviour/OpenBelow: 現在の Tiddler 下に開く
 Settings/LinkToBehaviour/OutsideRiver/Hint: Tiddler 表示部 //外// の動作
 Settings/MissingLinks/Caption: Wiki リンク
-Settings/MissingLinks/Description: 欠落している Tiddler へのリンクを有効にします
+Settings/MissingLinks/Description: 欠落 Tiddler へのリンクを有効にする
 Settings/MissingLinks/Hint: まだ存在しない Tiddler にリンクするかどうかを選択します
 Settings/NavigationAddressBar/Caption: ナビゲーションアドレスバー
 Settings/NavigationAddressBar/Hint: ナビゲーションアドレスバーの動作:
 Settings/NavigationAddressBar/No/Description: アドレスバーを変更しない
 Settings/NavigationAddressBar/Permalink/Description: Tiddler をアドレスに含める
-Settings/NavigationAddressBar/Permaview/Description: 開く Tiddler と現在開いている Tiddler をアドレスに含めます
+Settings/NavigationAddressBar/Permaview/Description: 開く Tiddler と現在開いている Tiddler をアドレスに含める
 Settings/NavigationHistory/Caption: 操作履歴
 Settings/NavigationHistory/Hint: Tiddler を操作したときのブラウザの履歴の設定:
 Settings/NavigationHistory/No/Description: 履歴を残さない
@@ -215,7 +215,7 @@ Theme/Prompt: 現在のテーマ:
 TiddlerColour/Caption: Tiddler の色
 TiddlerColour/Hint: このルールカスケードは、Tiddler の色（アイコンと関連するタグピルに使用される）を動的に選択するために使用されます。
 TiddlerFields/Caption: Tiddler 項目
-TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての Tiddler 項目の一覧です（システム Tiddler も含みますが、隠し Tiddler は含んでいません）。
+TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての Tiddler 項目の一覧です（システム Tiddler も含みますが、隠し Tiddler は含んでいません）
 TiddlerIcon/Caption: Tiddler アイコン
 TiddlerIcon/Hint: このルールカスケードは Tiddler のアイコンを動的に選択するために使用されます。
 Toolbars/Caption: ツールバー
