@@ -76,16 +76,17 @@ $else$
 	-webkit-box-sizing: border-box;
 }
 
-input[type="search"] {
-	outline-offset: initial;
-}
-
+/*
+** Button default styles. Makes them look consistent for all browsers
+*/
 html button {
 	line-height: 1.2;
 	color: <<colour button-foreground>>;
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
-	border-color: <<colour button-border>>;
+	border: 1px solid <<colour button-border>>;
+	border-radius: 3px;
+	padding: 2px 5px;
 }
 
 button:disabled svg {
@@ -221,8 +222,19 @@ dl dt {
 	margin-top: 6px;
 }
 
-button, textarea, input, select {
-	outline-color: <<colour primary>>;
+/*
+** Definition for text input elements so they look consistent for all browsers
+*/
+
+textarea, input, select {
+	border: 2px solid <<colour tiddler-editor-border>>;
+	background-color: <<colour tiddler-editor-background>>;
+}
+
+/* Input elements accessibility -- overwrite the reset */
+:focus-visible {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;    /* same as in reset.css [type='search'] but for more elements */
 }
 
 textarea,
@@ -231,7 +243,6 @@ input[type=search],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
-	background: <<colour background>>;
 }
 
 input[type="checkbox"] {
@@ -1174,6 +1185,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame .tc-tiddler-controls {
 	float: right;
+	padding: 3px; /* make space for outline */
 }
 
 .tc-tiddler-controls .tc-drop-down {
