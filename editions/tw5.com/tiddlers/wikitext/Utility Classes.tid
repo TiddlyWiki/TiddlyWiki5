@@ -1,5 +1,5 @@
 created: 20220818093624828
-modified: 20220819102004347
+modified: 20220819122952220
 tags: WikiText
 title: Utility Classes
 type: text/vnd.tiddlywiki
@@ -18,4 +18,4 @@ type: text/vnd.tiddlywiki
 !! Table Utility Classes
 
 |`tc-table-no-border` |Removes the borders of a table |
-|`tc-first-col-min-width` |The first column of a table will consume the minimal size. It adapts to the content |
+|`tc-first-col-min-width` |The first column of a table will take up minimal possible width. It adapts to the content |

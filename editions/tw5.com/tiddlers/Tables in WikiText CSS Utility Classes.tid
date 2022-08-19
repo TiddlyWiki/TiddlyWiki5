@@ -1,5 +1,5 @@
 created: 20220817153236691
-modified: 20220819103351008
+modified: 20220819122843290
 tags: [[Tables in WikiText]]
 title: Tables in WikiText CSS Utility Classes
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 {{Table Classes, Captions, Headers and Footers}}
 
-As seen above, the resulting table that is left aligned and grows to fit the content. This is the browser default layout behaviour for tables. To get another behaviour, various CSS classes can be added into the "`k` row".
+As seen above, the resulting table is left aligned and grows to fit the content. This is the browser default layout behaviour for tables. To get another behaviour, various CSS classes can be added into the "`k` row".
 
 
 
@@ -62,7 +62,7 @@ As seen above, the resulting table that is left aligned and grows to fit the con
 
 ! Examples
 
-The following examples apply the style classes WikiText tables but the General Utility Classes can as well be used on a DIV or other [[HTML block elements|HTML Block Elements]]
+The following examples apply the style classes to tables but the "General Utility Classes" can as well be used on DIVs or other [[HTML block elements|HTML Block Elements]]
 
 !! Centred Table
 

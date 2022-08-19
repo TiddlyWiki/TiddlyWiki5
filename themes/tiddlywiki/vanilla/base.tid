@@ -321,7 +321,7 @@ table {
 }
 
 table th, table td {
-	padding: 0 7px 0 7px;
+	padding: 4px 6px 4px 6px;	/* TODO check all table related paddings, that shouldn't be needed anymore */
 	border-top: 1px solid <<colour table-border>>;
 	border-left: 1px solid <<colour table-border>>;
 }
@@ -344,12 +344,6 @@ Table utility classes
 .tc-table-no-border th,
 .tc-table-no-border td {
 	border: initial;
-}
-
-/* If text input elements are in a table we need top and bottom padding */
-.tc-max-width td,
-.tc-edit-max-width td {
-	padding: 4px;
 }
 
 /* First column in table width will fit to text.*/
