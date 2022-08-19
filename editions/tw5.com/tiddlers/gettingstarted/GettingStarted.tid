@@ -1,16 +1,12 @@
 created: 20131129090249275
-modified: 20200507203622933
+modified: 20220819041016415
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-The easiest way to use TiddlyWiki is to sign up for a free account with [[Tiddlyhost]], an independently run community service:
+The easiest way to use ~TiddlyWiki is to sign up for a free account with [[Tiddlyhost|https://tiddlyhost.com/]], an independently run community service. If you find Tiddlyhost useful, please consider [[donation or sponsorship|https://tiddlyhost.com/donate]].
 
-https://tiddlyhost.com/
-
-If you find Tiddlyhost useful, please consider [[donation or sponsorship|https://tiddlyhost.com/donate]].
-
-Click here to download an empty copy of TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
+Click here to download an empty copy of ~TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
 
 The next step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
 
