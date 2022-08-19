@@ -1,27 +1,21 @@
 created: 20220818093624828
-modified: 20220818101429955
+modified: 20220819102004347
 tags: WikiText
 title: Utility Classes
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.2.4">> There are some new utility classes, that should make working with [[wikitext tables|Tables in WikiText Utility Classes]] and other [[HTML block-elements|HTML Block Elements]] easier.
+<<.from-version "5.2.4">> The following outlines a few predefined CSS classes intended to make it simpler to style [[HTML block-elements|HTML Block Elements]] and [[wikitext tables|Tables in WikiText Utility Classes]].
 
-!! Generic Utility Classes
+!! General Utility Classes
 
-* `tc-center` ... will center a block-element to the middle of the container
 
-* `tc-max-width` ... will allow a block-element to use the maximum width of the container
+|`tc-center` |Centres a block-element to the middle of the container |
+|`tc-max-width `|Expands a block-element to use the maximum width of the container |
+|`tc-max-width-80`|Sets the width of a block-element to use 80% of the maximum container width. This setting is useful with the `tc-center` class |
+|`tc-edit-max-width `|Expands [[TextWidget]]s to use the maximum available width. See [[ControlPanel -> Info -> Basics|$:/core/ui/ControlPanel/Basics]]|
+|`tc-first-link-nowrap` |Ensures that any links in the first table column will never wrap to the next line |
 
-* `tc-max-width-80` ... will allow a block-element to use the maximum width of 80% of the container. This setting makes sense with a `tc-center` class
+!! Table Utility Classes
 
-* `tc-edit-max-width` ... will allow `input and textarea` widgets to use the maximum available width. See [[ControlPanel -> Info -> Basics|$:/core/ui/ControlPanel/Basics]]
-
-* `tc-first-link-nowrap` ... The first link will not be wrapped. So it is used as if it would be 1 word without spaces
-
-!! Table Utility Class
-
-* `tc-table-no-border` ... removes the border of a table
-
-* `tc-first-col-min-width` ... The first column of a table will consume the minimal size. It adapts to the content
-
-Examples how to use generic and table specific utility classes can be found at [[Tables in WikiText Utility Classes]].
+|`tc-table-no-border` |Removes the borders of a table |
+|`tc-first-col-min-width` |The first column of a table will consume the minimal size. It adapts to the content |
