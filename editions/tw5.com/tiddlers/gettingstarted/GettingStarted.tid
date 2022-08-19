@@ -1,14 +1,10 @@
 created: 20131129090249275
-modified: 20220812144420645
+modified: 20220819041016415
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-The easiest way to use ~TiddlyWiki is to sign up for a free account with [[Tiddlyhost|https://tiddlyhost.com/]], an independently run community service:
-
-https://tiddlyhost.com/
-
-If you find Tiddlyhost useful, please consider [[donation or sponsorship|https://tiddlyhost.com/donate]].
+The easiest way to use ~TiddlyWiki is to sign up for a free account with [[Tiddlyhost|https://tiddlyhost.com/]], an independently run community service. If you find Tiddlyhost useful, please consider [[donation or sponsorship|https://tiddlyhost.com/donate]].
 
 Click here to download an empty copy of ~TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
 
