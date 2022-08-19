@@ -1,5 +1,5 @@
 created: 20220721200137586
-modified: 20220721200137586
+modified: 20220819200137586
 tags: [[Table of Contents]]
 title: Code of Conduct
 type: text/vnd.tiddlywiki
@@ -17,6 +17,7 @@ These principles guide technical and non-technical decisions, and help contribut
 * We recognise that the motivation for sharing and helping is usually for appreciation, and not financial gain, and so we take care to acknowledge and ''thank the people who enrich the community by sharing what they have created''
 * While we are united in our interest in TiddlyWiki, we differ in every other conceivable way. We choose to focus on what unites us, and ''avoid unnecessarily mixing contentious topics like religion and politics''
 * We treat each other with respect, and start with the assumption that ''others are acting in good faith''
+* We avoid discriminatory language
 * We try to use our strength as a community to help others
 * We avoid responding when angry or upset because we try to de-escalate conflict
 * We make sure we critique ideas, not people
@@ -26,5 +27,7 @@ These principles guide technical and non-technical decisions, and help contribut
 * We have fun
 
 Our discussions are in English. It is not the first language of many people in the community, nor do we all share the same cultural background and reference points. So we take care to use language that is clear and unambigous, and avoid cultural references or jokes that will not be widely understood.
+
+It is not acceptable to make jokes or other comments that discriminate by race, gender, sexuality, or other protected characteristic.
 
 As an inclusive community, we are committed to making sure that TiddlyWiki is an accessible tool that understands the needs of people with disabilities.
