@@ -313,11 +313,6 @@ table {
 	border-spacing: 0;
 }
 
-.tc-table-in-table {
-	margin-top: .4em;
-	margin-bottom: .4em;
-}
-
 table th, table td {
 	padding: 0 7px 0 7px;
 	border-top: 1px solid <<colour table-border>>;
