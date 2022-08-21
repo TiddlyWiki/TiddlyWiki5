@@ -313,6 +313,11 @@ table {
 	border-spacing: 0;
 }
 
+.tc-table-in-table {
+	margin-top: .4em;
+	margin-bottom: .4em;
+}
+
 table th, table td {
 	padding: 0 7px 0 7px;
 	border-top: 1px solid <<colour table-border>>;
@@ -818,9 +823,6 @@ button.tc-tag-label, span.tc-tag-label {
 }
 
 .tc-untagged-separator {
-	width: 10em;
-	left: 0;
-	margin-left: 0;
 	border: 0;
 	height: 1px;
 	background: <<colour tab-divider>>;
@@ -916,6 +918,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-weight: normal;
 }
 
+/** Deprecate next rule since v5.2.4-prerelease. There should be P tags in tc-sidebar-lists **/
 .tc-sidebar-header .tc-sidebar-lists p {
 	margin-top: 3px;
 	margin-bottom: 3px;
@@ -3174,6 +3177,10 @@ select {
 
 .tc-tiny-gap-right {
 	margin-right: .25em;
+}
+
+.tc-tiny-v-gap-bottom {
+  margin-bottom: 3px;
 }
 
 .tc-small-gap {
