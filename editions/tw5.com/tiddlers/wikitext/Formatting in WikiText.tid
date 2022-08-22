@@ -1,6 +1,6 @@
 caption: Formatting
 created: 20220727060921261
-modified: 20220728190659472
+modified: 20220821183525017
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
@@ -10,13 +10,13 @@ Available character formatting in WikiText includes:
 <div class="no-code-border">
 
 |Wikitext | Button |Win Shortcut | Mac |Rendered Output |h
-|2 single hyphens are used for `''bold text''`| (<<.icon $:/core/images/bold>>) | <kbd>ctrl-B</kbd> |<kbd>win-B</kbd> |2 single hyphens are used for ''bold text''|
-|2 slashes are used for `//italic text//`| (<<.icon $:/core/images/italic>>) | <kbd>ctrl-I</kbd> |<kbd>win-I</kbd> |2 slashes are used for //italic text//|
-|2 underscores are used for `__underscored text__`| (<<.icon $:/core/images/underline>>) | <kbd>ctrl-U</kbd> |<kbd>win-U</kbd> |2 underscores are used for __underscored text__ |
-|2 circumflex accents are used for `^^superscripted^^` text | (<<.icon $:/core/images/superscript>>) | <kbd>ctrl-shift-P</kbd> |<|2 circumflex accents are used for ^^superscripted^^ text |
-|2 commas are used for `,,subscripted,,` text | (<<.icon $:/core/images/subscript>>) | <kbd>ctrl-shift-B</kbd> |<|2 commas are used for ,,subscripted,, text |
-|2 tilde signs are used for `~~strikethrough~~` text | (<<.icon $:/core/images/strikethrough>>) | <kbd>ctrl-T</kbd> |<|2 tilde signs are used for ~~strikethrough~~ text |
-|1 backtick is used for ```code` `` | (<<.icon $:/core/images/mono-line>>) | <kbd>ctrl-M</kbd> |<|1 backtick is used for `code` |
+|2 single hyphens are used for `''bold text''`| <kbd><<.icon $:/core/images/bold>></kbd> | <kbd>ctrl-B</kbd> |<kbd>win-B</kbd> |2 single hyphens are used for ''bold text''|
+|2 slashes are used for `//italic text//`| <kbd><<.icon $:/core/images/italic>></kbd> | <kbd>ctrl-I</kbd> |<kbd>win-I</kbd> |2 slashes are used for //italic text//|
+|2 underscores are used for `__underscored text__`| <kbd><<.icon $:/core/images/underline>></kbd> | <kbd>ctrl-U</kbd> |<kbd>win-U</kbd> |2 underscores are used for __underscored text__ |
+|2 circumflex accents are used for `^^superscripted^^` text | <kbd><<.icon $:/core/images/superscript>></kbd> | <kbd>ctrl-shift-P</kbd> |<|2 circumflex accents are used for ^^superscripted^^ text |
+|2 commas are used for `,,subscripted,,` text | <kbd><<.icon $:/core/images/subscript>></kbd> | <kbd>ctrl-shift-B</kbd> |<|2 commas are used for ,,subscripted,, text |
+|2 tilde signs are used for `~~strikethrough~~` text | <kbd><<.icon $:/core/images/strikethrough>></kbd> | <kbd>ctrl-T</kbd> |<|2 tilde signs are used for ~~strikethrough~~ text |
+|1 backtick is used for ```code` `` | <kbd><<.icon $:/core/images/mono-line>></kbd> | <kbd>ctrl-M</kbd> |<|1 backtick is used for `code` |
 
 ''Special case to show embedded backticks''
 
