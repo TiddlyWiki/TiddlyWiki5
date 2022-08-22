@@ -1,0 +1,18 @@
+created: 20220822134140546
+modified: 20220822143631418
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet Transclusion
+type: text/vnd.tiddlywiki
+
+You can incorporate the content of one tiddler within another using the Transclusion notation:
+
+* `{{MyTiddler}}` transcludes the content of a single tiddler
+* `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified ~TemplateTiddler
+* `{{||TemplateTitle}}` displays the specified template tiddler without altering the currentTiddler variable
+
+You can also use a ~TextReference instead of a tiddler title:
+
+* `{{MyTiddler!!field}}` transcludes a specified field of a tiddler
+* `{{!!field}}` transcludes a specified field of the current tiddler
+* `{{MyTiddler##index}}` transcludes a specified indexed property of a ~DataTiddlers
+* `{{##index}}` transcludes a specified indexed property of the current ~DataTiddlers

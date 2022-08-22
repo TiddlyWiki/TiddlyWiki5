@@ -1,0 +1,16 @@
+code-body: yes
+created: 20220822124422967
+modified: 20220822143642513
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet MDefinition
+type: text/vnd.tiddlywiki
+
+<!-- Can be defined in 1 line for short macros -->
+\define sayhi(name:"Bugs Bunny") Hi, I'm <$text text=<<__name__>>/> 
+
+<!-- Can be defined in several lines for longer macros -->
+\define sayhi(name:"Bugs Bunny") 
+Hi, I'm <$text text=<<__name__>>/> 
+\end
+
+macro definitions are invisible

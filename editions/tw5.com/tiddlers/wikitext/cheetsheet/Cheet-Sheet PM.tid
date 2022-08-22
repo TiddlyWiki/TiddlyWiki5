@@ -1,0 +1,13 @@
+created: 20220822141712911
+modified: 20220822143610636
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet PM
+type: text/vnd.tiddlywiki
+
+In order to display Tiddlers (usually the text field), the ~WikiText parser reads and interprets the content and applies ~WikiText rules. The parser has three modes:
+
+* ''pragma mode'' - the parser will recognise only "pragma mode" ~WikiText punctuation. eg `\import`
+
+* ''block mode'' - the parser will recognise only "block mode" ~WikiText punctuation. eg `! heading`
+
+*''inline mode'' - the parser will recognise only "inline mode" ~WikiText. eg: `''bold''`

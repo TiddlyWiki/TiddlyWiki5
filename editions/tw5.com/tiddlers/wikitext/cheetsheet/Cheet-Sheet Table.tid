@@ -1,0 +1,12 @@
+created: 20220821215553807
+modified: 20220822120343078
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet Table
+type: text/vnd.tiddlywiki
+
+|utilityClass anotherClass|k
+|This is a caption |c
+|Header|Header|h
+|Cell1 |Cell2 |
+|Cell3 |Cell3 |
+|Footer|Footer|f

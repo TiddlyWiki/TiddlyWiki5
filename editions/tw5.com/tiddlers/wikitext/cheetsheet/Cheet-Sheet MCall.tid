@@ -1,0 +1,13 @@
+code-body: yes
+created: 20220822124925667
+modified: 20220822143636020
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet MCall
+type: text/vnd.tiddlywiki
+
+<!-- Macros can be imported, using the \import pragma -->
+\import [[Cheet-Sheet MDefinition]]
+
+<<sayhi>>
+
+<<sayhi Mario>>

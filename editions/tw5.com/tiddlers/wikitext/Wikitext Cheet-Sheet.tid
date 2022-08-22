@@ -1,0 +1,140 @@
+created: 20220821184022101
+modified: 20220822171531709
+tags: WikiText
+title: Wikitext Cheet-Sheet
+type: text/vnd.tiddlywiki
+
+<!-- Helper macros. The "old" wikitext style is intentional. The code should be compatible with TW v5.1.0 -->
+\define extLink(text tid) [ext[$text$|https://tiddlywiki.com/#$tid$]]
+\define link(text tid) [[$text$|$tid$]]
+
+<!-- Export Me Button macro -->
+\define exportFilter()
+[[$(me)$]] [tag[$(me)$]]
+\end
+
+\define exportMeButton(btnText:"Export Me & Tagged")
+\whitespace trim
+<$set name="me" value=<<currentTiddler>> >
+  <$tiddler tiddler="$:/core/templates/exporters/JsonFile">
+    <$button class="tc-btn-download">
+      <$action-sendmessage $message="tm-download-file" $param=<<currentTiddler>> exportFilter=<<exportFilter>> filename={{{ [<me>addsuffix{!!extension}] }}}/>
+      <$text text="""$btnText$"""/>
+    </$button>
+  </$tiddler>
+</$set>
+\end
+
+<!-- This macro returns a local link, if the tiddler exists   -->
+<!-- or it returns a link to the main docs at tiddlywiki.com  -->
+\define .xL(text tid)
+\whitespace trim
+<$set name="link" value={{{ [[$tid$]is[tiddler]then<link """$text$""" """$tid$""">else<extLink """$text$""" """$tid$""">] }}}>
+<<link>>
+</$set>
+\end
+
+\define .t(tid) <$transclude tiddler="""$tid$""" mode=block/>
+\define .cb(title) <$codeblock code={{$title$}}/>
+
+!! Overview
+
+The following table contains the basic ~TiddlyWiki wikitext features. The "Cheet-Sheet" and all dependencies can be exported using the button below.
+
+<<exportMeButton "Export Cheet-Sheet">>
+
+!! Cheet Sheet
+
+| Example                        | Example Markup                 |h
+| how the example markup renders | what to enter as tiddler text  |
+|>| ! <<.xL "Basic Text Formatting" "Formatting in WikiText">>    |
+|''bold''                        |`''bold''` (tow single hyphens) |
+|//italics//                     |`//italics//`          |
+|''//bold italics//''            |`''//bold italics//''` |
+|__underscore__                  |`__underscore__`    |
+|~~strikethrough~~               |`~~strikethrough~~` |
+|super^^script^^                 |`super^^script^^`   |
+|sub,,script,,                   |`sub,,script,,` |
+|@@highlight@@                   |`@@highlight@@` |
+|n--dash                         |`n--dash`       |
+|m---dash                        |`m---dash`      |
+|>|                 ! <<.xL "Headings" "Headings in WikiText">> |
+|<h1>Heading 1</h1>              |`! Heading 1` |
+|<h2>Heading 2</h2>              |`! Heading 2` |
+|<h3>Heading 3</h3>              |`! Heading 3` |
+|<h4>Heading 4</h4>              |`! Heading 4` |
+|<h5>Heading 5</h5>              |`! Heading 5` |
+|<h6>Heading 6</h6>              |`! Heading 6` |
+|>| ! <<.xL "Lists" "Lists in WikiText">>                  |
+|>|   <<.xL "Ordered Lists" "Lists in WikiText">>          |
+|<<.t "Cheet-Sheet OL">>         |<<.cb "Cheet-Sheet OL">> |
+|>|   <<.xL "Unordered Lists" "Lists in WikiText">>        |
+|<<.t "Cheet-Sheet UL">>         |<<.cb "Cheet-Sheet UL">> |
+|>|   <<.xL "Definition Lists" "Definitions in WikiText">> |
+|<<.t "Cheet-Sheet DL">>         |<<.cb "Cheet-Sheet DL">> |
+|>|   <<.xL "Mixed Lists" "Lists in WikiText">>            |
+|<<.t "Cheet-Sheet ML">>         |<<.cb "Cheet-Sheet ML">> |
+|>| ! <<.xL "Blockquotes" "Block Quotes in WikiText">>     |
+|>|   <<.xL "Nested Blockquotes" "Block Quotes in WikiText">>    |
+|<<.t "Cheet-Sheet Quotes">>     |<<.cb "Cheet-Sheet Quotes">>   |
+|>|   <<.xL "Muli-line Blockquotes" "Block Quotes in WikiText">> |
+|<<.t "Cheet-Sheet QuotesML">>   |<<.cb "Cheet-Sheet QuotesML">> |
+|>|   <<.xL "Mixed Blockquotes" "Block Quotes in WikiText">>     |
+|<<.t "Cheet-Sheet QuotesMIX">>  |<<.cb "Cheet-Sheet QuotesMIX">>|
+|>| ! <<.xL "Code / Monospaced Text" "Code Blocks in WikiText">> |
+|>|   <<.xL "Inline Code" "Code Blocks in WikiText">>            |
+|`monospaced text`               |<$codeblock code="`monospaced text`" />      |
+|`` `show backticks` ``          |<$codeblock code="`` `show backticks` ``" /> |
+|>|   <<.xL "Code Block" "Code Blocks in WikiText">>            |
+|<<.t "Cheet-Sheet CodeML">>     |<<.cb "Cheet-Sheet CodeML">>  |
+|>| ! <<.xL "Links" "Linking in WikiText">>                     |
+|>|   <<.xL "Internal Links" "Linking in WikiText">>            |
+|<<.xL "CamelCase" "CamelCase">> |`CamelCase`                   |
+|[[Tiddler Title]]               |`[[Tiddler Title]]`           |
+|[[Pretty Link|Tiddler Title]] |`[[Pretty Link|Tiddler Title]]` |
+|>|   <<.xL "Avoid Wikification" "Linking in WikiText">>        |
+|~WikiText                       |`~WikiText` -- a leading tilde ~ prevents automatic links |
+|>|   <<.xL "External Links" "Linking in WikiText">>          |
+|>| A valid URL is automatically rendered as an external link |
+|https://tiddlywiki.com                                |`https://tiddlywiki.com` |
+|[[Pretty External Link|https://tiddlywiki.com]]       |`[[Pretty External Link|https://tiddlywiki.com]]` |
+|[[Talk TiddlyWiki Forum|https://talk.tiddlywiki.org]] |`[[Talk TiddlyWiki Forum|https://talk.tiddlywiki.org]]` |
+|>|   <<.xL "Filesystem Links" "Linking in WikiText">> |
+|>| You can, of course, use file system links both as plain or pretty links |
+|''Windows Network Path''      |`[[file://///server/share]]` |
+|''Windows Local''             |`[[file:///c:/folder/file]]` |
+|''Linux/Unix Local''          |`[[file:///folder/file]]`    |
+|''Relative Path (Subfolder)'' |`[[folder/file]]` |
+|>| ! <<.xL "Images" "Images in WikiText">>       |
+|>| In general, image files should be external to a ~TiddlyWiki. |
+|[img[https://tiddlywiki.com/favicon.ico]] |`[img[https://tiddlywiki.com/favicon.ico]]` |
+|[img[An explanatory tooltip|https://tiddlywiki.com/favicon.ico]] |`[img[An explanatory tooltip|https://tiddlywiki.com/favicon.ico]]` |
+|>| ! <<.xL "Tables" "Tables in WikiText">> |
+|<<.t "Cheet-Sheet Table">>        |<<.cb "Cheet-Sheet Table">>|
+|>| ! <<.xL "Custom Styles" "Styles and Classes in WikiText">> |
+|<<.t "Cheet-Sheet CS">>           |<<.cb "Cheet-Sheet CS">>   |
+|>| ! <<.xL "Hard Linebreaks" "Hard Linebreaks in WikiText">>  |
+|<<.t "Cheet-Sheet HL">>           |<<.cb "Cheet-Sheet HL">>   |
+|>| ! <<.xL "Horizontal Rule" "Horizontal Rules in WikiText">> |
+|<<.t "Cheet-Sheet HR">>           |<<.cb "Cheet-Sheet HR">>   |
+|>| ! <<.xL "Comments" "HTML in WikiText">> |
+|<<.t "Cheet-Sheet Comment">>      |<<.cb "Cheet-Sheet Comment">>|
+|>| ! <<.xL "Typed Blocks" "Typed Blocks in WikiText">>        |
+|<<.t "Cheet-Sheet TB">>           |<<.cb "Cheet-Sheet TB">>   |
+|>| ! <<.xL "Embedded HTML" "HTML in WikiText">>               |
+|<<.t "Cheet-Sheet HTML">>         |<<.cb "Cheet-Sheet HTML">> |
+|>| ! <<.xL "HTML Entities" "HTML Entities">> |
+|&trade; &pound; or &euro;         |`&trade; &pound; or &euro;`  |
+|>| ! <<.xL "Macros" "Macros in WikiText">> |
+|>|   <<.xL "Macro Definition" "Macro Definitions in WikiText">> |
+|<<.t "Cheet-Sheet MDefinition">>  |<<.cb "Cheet-Sheet MDefinition">>|
+|>|   <<.xL "Macro Calls" "Macro Calls in WikiText">>           |
+|<<.t "Cheet-Sheet MCall">>        |<<.cb "Cheet-Sheet MCall">> |
+|>| ! <<.xL "Transclusions" "Transclusion in WikiText">>        |
+|<<.t "Cheet-Sheet Transclusion">> |The [[Cheet-Sheet Transclusion]] tiddler on the left side is transcluded into the table using the <<.xL "transclusion-widget" "TranscludeWidget">><br><br>`<<.t "Cheet-Sheet Transclusion">>` |
+|>| ! <<.xL "Widgets" "Widgets in WikiText">>                      |
+|<<.t "Cheet-Sheet Widget">>       |<<.cb "Cheet-Sheet Widget">>   |
+|>| ! <<.xL "Variables" "Variables in WikiText">>                  |
+|<<.t "Cheet-Sheet Variable">>     |<<.cb "Cheet-Sheet Variable">> |
+|>| ! <<.xL "Parser Modes" "WikiText Parser Modes">>               |
+|>|<<.t "Cheet-Sheet PM">> |

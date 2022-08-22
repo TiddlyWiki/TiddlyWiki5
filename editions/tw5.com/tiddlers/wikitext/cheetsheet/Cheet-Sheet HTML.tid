@@ -1,0 +1,17 @@
+created: 20220821220043774
+modified: 20220822121544489
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet HTML
+type: text/vnd.tiddlywiki
+
+<h2>A h2 heading</h2>
+<p>
+Some text in a paragraph
+<p>
+<ul>
+  <li>List level 1</li>
+  <ol>
+    <li>Ordered list level 2</li>
+  </ol>
+  <li>List level 1 element 2</li>
+</ul>

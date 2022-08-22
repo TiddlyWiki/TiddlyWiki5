@@ -1,0 +1,10 @@
+code-body: yes
+created: 20220822135537754
+modified: 20220822143620866
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet Widget
+type: text/vnd.tiddlywiki
+
+Widgets provide rich functionality within WikiText. They have the same syntax as HTML elements, but the tag name always starts with `$`. For example:
+
+<$button message="tm-navigate" to="Cheet-Sheet Widget">Open tiddler: Cheet-Sheet Widget</$button>

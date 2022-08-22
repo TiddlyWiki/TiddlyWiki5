@@ -1,0 +1,16 @@
+code-body: yes
+created: 20220822140007979
+modified: 20220822143616011
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet Variable
+type: text/vnd.tiddlywiki
+
+Variables can be defined with [[macro definitions|Cheet-Sheet MDefinition]], or the widgets `<$set ...>`, `<$vars ...>` or `<$let ...>`. For ''new code'' use the ''let-widget'', because it is the latest. 
+
+This example uses the set-widget so the cheet-sheet can also be used with old wikis.
+
+For example:
+
+<$set name="targetTiddler" value="Cheet-Sheet Variable">
+  <$button message="tm-navigate" to=<<targetTiddler>> >Open tiddler: <<targetTiddler>></$button>
+</$set>

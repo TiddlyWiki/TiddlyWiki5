@@ -1,0 +1,15 @@
+created: 20220821210008513
+modified: 20220821210302635
+tags: [[Wikitext Cheet-Sheet]]
+title: Cheet-Sheet QuotesMIX
+type: text/vnd.tiddlywiki
+
+<<<
+paragraph 1
+
+> inner quote, level 1
+
+>> inner quote, level 2
+
+some more text
+<<< ref: [[https://tiddlywiki.com/#Block Quotes in WikiText]]
