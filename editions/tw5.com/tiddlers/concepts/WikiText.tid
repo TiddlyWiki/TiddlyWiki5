@@ -1,18 +1,19 @@
 created: 20131205155227468
-modified: 20220728185721771
+modified: 20220822103159821
 tags: Concepts Reference
 title: WikiText
 type: text/vnd.tiddlywiki
-user-story: [[Headings in WikiText]] [[Paragraphs in WikiText]] [[Hard Linebreaks in WikiText]] [[Formatting in WikiText]] [[Dashes in WikiText]] [[Block Quotes in WikiText]] [[Lists in WikiText]] [[Definitions in WikiText]] [[Horizontal Rules in WikiText]] [[Tables in WikiText]] [[Code Blocks in WikiText]] [[Typed Blocks in WikiText]] [[Images in WikiText]] [[Linking in WikiText]] [[Variables in WikiText]] [[Macro Definitions in WikiText]] [[Macro Calls in WikiText]] [[Macros in WikiText]] [[Transclusion in WikiText]] [[Transclusion and Substitution]] [[Styles and Classes in WikiText]] [[HTML in WikiText]] [[Widgets in WikiText]] [[WikiText Parser Modes]]
 
 ~WikiText is a concise, expressive way of typing a wide range of text formatting, hypertext and interactive features. It allows you to focus on writing without a complex user interface getting in the way. It is designed to be familiar for users of [[Markdown]] but with more of a focus on linking and the interactive features.
 
+!! Elements
+
 ~WikiText can also be inserted to the text field using the [[Editor toolbar]].
 
-The following list of syntax rules starts with the simpler ones and moves on to the more complex ones.
-
 @@.multi-columns
-<<list-links-draggable tiddler:"WikiText" field:"user-story">>
+<<list-links filter:"[tag[WikiText]]">>
 @@
 
-Also see [[Formatting text in TiddlyWiki]] for an introduction to WikiText.
+!! Cheet Sheet
+
+* The [[Wikitext Cheet-Sheet]] will give you a overview about all the ~TiddlyWiki markup.
