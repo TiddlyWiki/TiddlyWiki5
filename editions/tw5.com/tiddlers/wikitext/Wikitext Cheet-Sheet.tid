@@ -4,11 +4,9 @@ tags: WikiText
 title: Wikitext Cheet-Sheet
 type: text/vnd.tiddlywiki
 
-<!-- Helper macros. The "old" wikitext style is intentional. The code should be compatible with TW v5.1.0 -->
 \define extLink(text tid) [ext[$text$|https://tiddlywiki.com/#$tid$]]
 \define link(text tid) [[$text$|$tid$]]
 
-<!-- Export Me Button macro -->
 \define exportFilter()
 [[$(me)$]] [tag[$(me)$]]
 \end
@@ -25,8 +23,6 @@ type: text/vnd.tiddlywiki
 </$set>
 \end
 
-<!-- This macro returns a local link, if the tiddler exists   -->
-<!-- or it returns a link to the main docs at tiddlywiki.com  -->
 \define .xL(text tid)
 \whitespace trim
 <$set name="link" value={{{ [[$tid$]is[tiddler]then<link """$text$""" """$tid$""">else<extLink """$text$""" """$tid$""">] }}}>
@@ -36,6 +32,13 @@ type: text/vnd.tiddlywiki
 
 \define .t(tid) <$transclude tiddler="""$tid$""" mode=block/>
 \define .cb(title) <$codeblock code={{$title$}}/>
+
+<!-- Helper macros. The "old" wikitext style is intentional. The code should be compatible with TW v5.1.15 -->
+<!-- extLink() and link() create the external and internal links for the .xL macro -->
+<!-- exportFilter() defined the filter for the tids to be exported -->
+<!-- exportMeButton() saves this tiddler and all it's dependencies into a JSON export file -->
+<!-- .xL ... creates an internal link, if tiddler exists otherwise it creates a link to tiddlywiki.com -->
+<!-- .t, .cb are macros that that transclude and show code blocks from example tiddlers -->
 
 !! Overview
 
