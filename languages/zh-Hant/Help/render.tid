@@ -31,3 +31,4 @@ description: 呈現個別條目到檔案
 範例：
 
 * `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- 呈現所有非系統條目為 "tiddlers" 子資料夾中的檔案，檔名為 URL 編碼的條目名稱和副檔名 HTML
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- 將標籤為 "HelloThere" 的條目渲染到名為 "tiddlers.json" 的 JSON 檔案

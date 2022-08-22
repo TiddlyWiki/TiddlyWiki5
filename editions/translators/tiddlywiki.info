@@ -4,10 +4,12 @@
 		"tiddlywiki/translators"
 	],
 	"languages": [
+		"ar-PS",
 		"ca-ES",
 		"cs-CZ",
 		"da-DK",
 		"de-AT",
+		"de-CH",
 		"de-DE",
 		"el-GR",
 		"en-GB",
@@ -23,14 +25,18 @@
 		"ko-KR",
 		"nl-NL",
 		"pa-IN",
+		"pl-PL",
 		"pt-BR",
 		"pt-PT",
 		"ru-RU",
 		"sk-SK",
 		"sl-SI",
 		"sv-SE",
+		"zh-CN",
 		"zh-Hans",
-		"zh-Hant"
+		"zh-Hant",
+		"zh-HK",
+		"zh-TW"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

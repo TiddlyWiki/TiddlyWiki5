@@ -1,5 +1,6 @@
 title: $:/language/EditTemplate/
 
+Caption: Editor
 Body/External/Hint: Dieser Tiddler zeigt den Inhalt einer Datei, die nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Type/Output: Anzeige

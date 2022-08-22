@@ -25,8 +25,8 @@ exports["prefix-lines"] = function(event,operation) {
 	$tw.utils.each(lines,function(line,index) {
 		// Remove and count any existing prefix characters
 		var count = 0;
-		while(line.charAt(0) === event.paramObject.character) {
-			line = line.substring(1);
+		while($tw.utils.startsWith(line,event.paramObject.character)) {
+			line = line.substring(event.paramObject.character.length);
 			count++;
 		}
 		// Remove any whitespace

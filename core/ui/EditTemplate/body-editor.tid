@@ -1,5 +1,7 @@
 title: $:/core/ui/EditTemplate/body/editor
 
+\whitespace trim
+
 <$edit
 
   field="text"

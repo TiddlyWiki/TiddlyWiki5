@@ -1,5 +1,6 @@
 title: $:/snippets/DebugStylesheets
 
+\whitespace trim
 <style>[test]{list-style:'❌'}</style>
 <ul>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]has[modified]]" counter="n">

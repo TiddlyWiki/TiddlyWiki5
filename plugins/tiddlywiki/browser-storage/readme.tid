@@ -15,5 +15,4 @@ Please use this plugin with caution. There are a number of unresolved issues and
 
 * Innerwikis read the local storage of their parent wikis
 * This plugin does not interfere with the existing saver mechanism, so you'll still get warnings when refreshing the page, even if your changes are safely committed to local storage
-* Deleted tiddlers will be restored when the wiki is refreshed
 * There is a possibility that tiddlers might be transferred between different wikis if they are accessed via the same URL. This is particularly likely when running in local client server configuration under Node.js

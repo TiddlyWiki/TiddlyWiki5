@@ -1,0 +1,59 @@
+caption: 5.2.4
+created: 20220802100223020
+modified: 20220802100223020
+tags: ReleaseNotes
+title: Release 5.2.4
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.3...master]]//
+
+! Plugin Improvements
+
+* 
+
+! Translation improvements
+
+* 
+
+! Accessibility Improvements
+
+* 
+
+! Usability Improvements
+
+* 
+
+! Widget Improvements
+
+* 
+
+! Filter improvements
+
+* 
+
+! Hackability Improvements
+
+* 
+
+! Bug Fixes
+
+* 
+
+! Developer Improvements
+
+* 
+
+! Node.js Improvements
+
+* 
+
+! Performance Improvements
+
+* 
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+<<.contributors """
+""">>

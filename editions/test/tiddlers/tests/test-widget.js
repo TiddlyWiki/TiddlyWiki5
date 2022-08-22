@@ -143,7 +143,8 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
-			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerOne'/>\n"}
+			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/>\n"},
+			{title: "TiddlerTwo", text: "<$transclude tiddler='TiddlerOne'/>"}
 		]);
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [

@@ -12,7 +12,7 @@ alert-highlight: #B48EAD
 alert-muted-foreground: #4C566A
 background: #3b4252
 blockquote-bar: <<colour muted-foreground>>
-button-foreground: <<colour page-background>>
+button-foreground: <<colour foreground>>
 code-background: #2E3440
 code-border: #2E3440
 code-foreground: #BF616A
@@ -63,7 +63,7 @@ select-tag-background: #3b4252
 select-tag-foreground: <<colour foreground>>
 selection-background: #5E81AC
 selection-foreground: <<colour foreground>>
-sidebar-button-foreground: <<colour page-background>>
+sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #D8DEE9
 sidebar-controls-foreground: #4C566A
 sidebar-foreground-shadow: transparent

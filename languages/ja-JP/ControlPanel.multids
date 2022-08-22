@@ -1,100 +1,238 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: 詳細設定
-Advanced/Hint: このWikiのシステム情報です。
-Appearance/Caption: 表示
-Appearance/Hint: このWikiの表示方法の設定をします。
+Advanced/Hint: この TiddlyWiki に関する内部情報
+Appearance/Caption: 外観
+Appearance/Hint: TiddlyWiki 外観のカスタマイズ方法
 Basics/AnimDuration/Prompt: アニメーション時間:
+Basics/AutoFocus/Prompt: 新しい Tiddler の標準フォーカスフィールド
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは &#91;&#91;二重の角カッコ&#93;&#93; を使用してください。そのほか <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保存時の表示を維持</$button> することもできます。
-Basics/DefaultTiddlers/Prompt: デフォルト tiddler:
-Basics/DefaultTiddlers/TopHint: このファイルを開いたときに初期表示される tiddler を設定してください:
+Basics/DefaultTiddlers/Prompt: デフォルト Tiddler:
+Basics/DefaultTiddlers/TopHint: このファイルを開いたときに初期表示される Tiddler を設定してください:
 Basics/Language/Prompt: 現在の言語:
-Basics/NewJournal/Tags/Prompt: 日誌（journal tiddler）のタグ
-Basics/NewJournal/Title/Prompt: 日誌（journal tiddlers）のデフォルトのタイトル
-Basics/OverriddenShadowTiddlers/Prompt: 上書きされている隠し tiddler 数:
-Basics/ShadowTiddlers/Prompt: 隠し tiddler 数:
+Basics/NewJournal/Tags/Prompt: 日誌（Journal Tiddler）のタグ
+Basics/NewJournal/Text/Prompt: 日誌（Journal Tiddler）のテキスト
+Basics/NewJournal/Title/Prompt: 日誌（Journal Tiddlers）のデフォルトのタイトル
+Basics/NewTiddler/Tags/Prompt: 新しい Tiddler のタグ
+Basics/NewTiddler/Title/Prompt: 新しい Tiddler のタイトル
+Basics/OverriddenShadowTiddlers/Prompt: 上書きされている隠し Tiddler 数:
+Basics/RemoveTags: 現在の形式を更新
+Basics/RemoveTags/Hint: タグの設定を最新の形式に更新します
+Basics/ShadowTiddlers/Prompt: 隠し Tiddler 数:
 Basics/Subtitle/Prompt: サブタイトル:
-Basics/SystemTiddlers/Prompt: システム tiddler 数:
+Basics/SystemTiddlers/Prompt: システム Tiddler 数:
 Basics/Tags/Prompt: タグ数:
-Basics/Tiddlers/Prompt: tiddler 数:
+Basics/Tiddlers/Prompt: Tiddler 数:
 Basics/Title/Prompt: この ~TiddlyWiki のタイトル:
 Basics/Username/Prompt: 編集者として表示するユーザ名:
 Basics/Version/Prompt: ~TiddlyWiki バージョン:
+Cascades/Caption: カスケード
+Cascades/Hint: これらのグローバルルールは、特定のテンプレートを動的に選択するために使用されます。 この結果は，一連のフィルタの中で最初に結果を返したフィルタの結果です
+Cascades/TagPrompt: タグ <$macrocall $name="tag" tag=<<currentTiddler>>/> のフィルタ
 EditorTypes/Caption: エディタ
 EditorTypes/Editor/Caption: エディタ
-EditorTypes/Hint: tiddlerの種類と、それを編集するエディタの関係です。
-EditorTypes/Type/Caption: tiddlerの種類
+EditorTypes/Hint: Tiddler の種類と編集するエディタの関係を設定します。
+EditorTypes/Type/Caption: Tiddler の種類
+EditTemplateBody/Caption: テンプレート本体の編集
+EditTemplateBody/Hint: このルールカスケードは、デフォルトの編集テンプレートが、Tiddlerのボディを編集するためのテンプレートを動的に選択するために使用されます。
+FieldEditor/Caption: 項目エディタ
+FieldEditor/Hint: このルールカスケードは、Tiddler　フィールドをレンダリングするためのテンプレートを、その名前に基づいて動的に選択するために使用されます。編集するテンプレートの中で使用されます。
 Info/Caption: 情報
-Info/Hint: このWikiについて
+Info/Hint: この TiddlyWiki について
+KeyboardShortcuts/Add/Caption: ショートカットの追加
+KeyboardShortcuts/Add/Prompt: ショートカットをここに入力
+KeyboardShortcuts/Caption: キーボードショートカット
+KeyboardShortcuts/Hint: キーボードショートカットの割り当てを管理します。
+KeyboardShortcuts/NoShortcuts/Caption: キーボードショートカットの割り当てはありません
+KeyboardShortcuts/Platform/All: 全プラットフォーム
+KeyboardShortcuts/Platform/Linux: Linux プラットフォームのみ
+KeyboardShortcuts/Platform/Mac: Macintosh プラットフォームのみ
+KeyboardShortcuts/Platform/NonLinux: 非 Linux プラットフォームのみ
+KeyboardShortcuts/Platform/NonMac: 非 Macintosh プラットフォームのみ
+KeyboardShortcuts/Platform/NonWindows: 非 Windows プラットフォームのみ
+KeyboardShortcuts/Platform/Windows: Windows プラットフォームのみ
+KeyboardShortcuts/Remove/Hint: キーボードショートカットの削除
+LayoutSwitcher/Caption: レイアウト
 LoadedModules/Caption: ロード済みモジュール
-LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
+LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの Tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
 Palette/Caption: パレット
 Palette/Editor/Clone/Caption: 複製
 Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前に複製を作成することをお勧めします。
+Palette/Editor/Delete/Hint: 現在のパレットからこの項目を削除
+Palette/Editor/Names/External/Show: 現在パレットの一部ではない色の名前を表示します
 Palette/Editor/Prompt: 編集中
 Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました。
 Palette/Editor/Reset/Caption: リセット
 Palette/HideEditor/Caption: エディタを隠す
 Palette/Prompt: 現在のパレット:
 Palette/ShowEditor/Caption: エディタを表示
+Parsing/Block/Caption: ブロック貼り付けのルール
+Parsing/Caption: 解析
+Parsing/Hint: ここでは、Wiki 解析ルールをグローバルに有効・無効化することができます。変更を有効にするには、Wiki を保存して再読み込みしてください。特定の解析ルールを無効にすると、<$text text="TiddlyWiki"/> が正しく機能しなくなることがあります。 [[safe mode|https://tiddlywiki.com/#SafeMode]] を使用して、正常な動作に復旧できます。
+Parsing/Inline/Caption: インライン解析ルール
+Parsing/Pragma/Caption: プラグマ解析ルール
+Plugins/Add/Caption: 他のプラグインを取得
+Plugins/Add/Hint: 公式ライブラリからプラグインをインストールします
+Plugins/AlreadyInstalled/Hint: このプラグインは、すでにバージョン <$text text=<<installedVersion>>/> になっています
+Plugins/AlsoRequires: 関連必要:
 Plugins/Caption: プラグイン
+Plugins/ClosePluginLibrary: プラグインライブラリを閉じる
 Plugins/Disable/Caption: 無効
 Plugins/Disable/Hint: ページを再読込したときにプラグインを無効にする。
 Plugins/Disabled/Status: (無効)
-Plugins/Empty/Hint: 無し
+Plugins/Downgrade/Caption: ダウングレード
+Plugins/Empty/Hint: なし
 Plugins/Enable/Caption: 有効
 Plugins/Enable/Hint: ページを再読込したときにプラグインを有効にする。
+Plugins/Install/Caption: インストール
+Plugins/Installed/Hint: 現在インストールされているプラグイン:
 Plugins/Language/Prompt: 言語
+Plugins/Languages/Caption: 言語
+Plugins/Languages/Hint: 言語パックプラグイン
+Plugins/NoInfoFound/Hint: ''"<$text text=<<currentTab>>/>"'' は見つかりません
+Plugins/NotInstalled/Hint: このプラグインは現在インストールされていません
+Plugins/OpenPluginLibrary: プラグインライブラリを開く
 Plugins/Plugin/Prompt: プラグイン
+Plugins/Plugins/Caption: プラグイン
+Plugins/Plugins/Hint: プラグイン
+Plugins/PluginWillRequireReload: (再読み込みが必要)
+Plugins/Reinstall/Caption: 再インストール
+Plugins/SubPluginPrompt: <<count>> 件サブプラグインが利用可能です
 Plugins/Theme/Prompt: テーマ
+Plugins/Themes/Caption: テーマ
+Plugins/Themes/Hint: テーマプラグイン
+Plugins/Update/Caption: 更新
+Plugins/Updates/Caption: 更新
+Plugins/Updates/Hint: インストールされているプラグインの更新が可能です
+Plugins/Updates/UpdateAll/Caption: <<update-count>> プラグインの更新
 Saving/Caption: 保存
+Saving/DownloadSaver/AutoSave/Description: ダウンロードセーバーの自動保存を許可します
+Saving/DownloadSaver/AutoSave/Hint: ダウンロードセーバーの自動保存を有効にします
+Saving/DownloadSaver/Caption: ダウンロードセーバー
+Saving/DownloadSaver/Hint: この設定は HTML5 対応ダウンロードセーバーに適用されます
+Saving/General/Caption: 基本
+Saving/General/Hint: これらの設定は、読み込まれたすべてのセーバーに適用されます
+Saving/GitService/Branch: 保存対象ブランチ
+Saving/GitService/CommitMessage: TiddlyWiki によって保存しました
+Saving/GitService/Description: これらの設定は <<service-name>> に保存するときのみ使用されます
+Saving/GitService/Filename: 対象ファイルのファイル名 (例 `index.html`)
+Saving/GitService/Gitea/Caption: Gitea セーバー
+Saving/GitService/Gitea/Password: API のパーソナルアクセストークン (Gitea の Web インターフェイス: `Settings | Applications | Generate New Token`)
+Saving/GitService/GitHub/Caption: ~GitHub セーバー
+Saving/GitService/GitHub/Password: パスワード、OAUTH トークン、パーソナルアクセストークンのいずれか (詳細は [[GitHub ヘルプページ|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] を参照)
+Saving/GitService/GitLab/Caption: ~GitLab セーバー
+Saving/GitService/GitLab/Password: API のパーソナルアクセストークン (詳細は [[GitLab ヘルプページ|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] を参照)
+Saving/GitService/Path: 対象ファイルのパス (例 `/wiki/`)
+Saving/GitService/Repo: 対象リポジトリ (例 `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: サーバ API URL
+Saving/GitService/UserName: ユーザー名
 Saving/Heading: 保存
+Saving/Hint: セーバーモジュールで TiddlyWiki 全体を 1 ファイルとして保存する際に使用する設定です
 Saving/TiddlySpot/Advanced/Heading: 詳細設定
 Saving/TiddlySpot/BackupDir: バックアップディレクトリ
 Saving/TiddlySpot/Backups: バックアップ
+Saving/TiddlySpot/Caption: ~TiddlySpot セーバー
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot コントロールパネル
 Saving/TiddlySpot/Description: この設定は、 http://tiddlyspot.com または互換性のあるリモートサーバーへ保存する場合に使います。
 Saving/TiddlySpot/Filename: アップロードファイル名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //サーバーのURLには `http://<wikiname>.tiddlyspot.com/store.cgi` がデフォルトで使用されます。ほかのサーバーのアドレスを指定することもできます。//
 Saving/TiddlySpot/Password: パスワード
-Saving/TiddlySpot/ServerURL: サーバーURL
+Saving/TiddlySpot/ReadOnly: [[TiddlySpot|http://tiddlyspot.com]] では、新しいサイトの作成ができなくなりました。 ~TiddlySpot に代わる新しいホスティングサービスである [[TiddlyHost|https://tiddlyhost.com]] 新しいサイトを制作できます。
+Saving/TiddlySpot/ServerURL: サーバー URL
 Saving/TiddlySpot/UploadDir: アップロードディレクトリ
 Saving/TiddlySpot/UserName: Wiki 名
 Settings/AutoSave/Caption: 自動保存:
-Settings/AutoSave/Disabled/Description: 自動的に保存しない。
-Settings/AutoSave/Enabled/Description: 自動的に保存する。
-Settings/AutoSave/Hint: 自動的に保存するかどうかの設定
+Settings/AutoSave/Disabled/Description: 自動的に保存しない
+Settings/AutoSave/Enabled/Description: 自動的に保存する
+Settings/AutoSave/Hint: 自動的に保存するかどうかを設定します
+Settings/CamelCase/Caption: Camel Case Wiki リンク
+Settings/CamelCase/Description: 自動で ~CamelCase リンクを有効にします
+Settings/CamelCase/Hint: ~CamelCase フレーズの自動リンクをグローバルに無効にすることができます。有効にするには再読み込みが必要です
 Settings/Caption: 設定
-Settings/Hint: TiddlyWikiの動作を設定します。
+Settings/DefaultMoreSidebarTab/Caption: デフォルトのサイドバー 詳しく タブ
+Settings/DefaultMoreSidebarTab/Hint: デフォルトで表示されるサイドバー 詳しく タブを指定します
+Settings/DefaultSidebarTab/Caption: 標準サイドバータブ
+Settings/DefaultSidebarTab/Hint: 標準で表示されるサイドバータブを指定します
+Settings/EditorToolbar/Caption: エディターツールバー
+Settings/EditorToolbar/Description: エディターツールバーを表示します
+Settings/EditorToolbar/Hint: エディターツールバーの有効・無効を切り替えます:
+Settings/Hint: TiddlyWiki の動作を設定します
+Settings/InfoPanelMode/Caption: Tiddler 情報パネルモード
+Settings/InfoPanelMode/Hint: Tiddler 情報パネルが閉じる時間:
+Settings/InfoPanelMode/Popup/Description: Tiddler 情報パネルが自動的に閉じるタイミングを制御します
+Settings/InfoPanelMode/Sticky/Description: Tiddler 情報パネルは、明示的に閉じるまで開いたままになります
+Settings/LinkToBehaviour/Caption: Tiddler を開く動作
+Settings/LinkToBehaviour/InsideRiver/Hint: Tiddler 表示部 //内// の動作
+Settings/LinkToBehaviour/OpenAbove: 現在の Tiddler 上に開く
+Settings/LinkToBehaviour/OpenAtBottom: Tiddler 表示部の下に開く
+Settings/LinkToBehaviour/OpenAtTop: Tiddler 表示部の上に開く
+Settings/LinkToBehaviour/OpenBelow: 現在の Tiddler 下に開く
+Settings/LinkToBehaviour/OutsideRiver/Hint: Tiddler 表示部 //外// の動作
+Settings/MissingLinks/Caption: Wiki リンク
+Settings/MissingLinks/Description: 欠落している Tiddler へのリンクを有効にします
+Settings/MissingLinks/Hint: まだ存在しない Tiddler にリンクするかどうかを選択します
 Settings/NavigationAddressBar/Caption: ナビゲーションアドレスバー
 Settings/NavigationAddressBar/Hint: ナビゲーションアドレスバーの動作:
-Settings/NavigationAddressBar/No/Description: アドレスバーを変更しない。
-Settings/NavigationAddressBar/Permalink/Description: tiddlerをアドレスに含める。
-Settings/NavigationAddressBar/Permaview/Description: 開くtiddlerと、現在開いているtiddlerをアドレスに含める。
+Settings/NavigationAddressBar/No/Description: アドレスバーを変更しない
+Settings/NavigationAddressBar/Permalink/Description: Tiddler をアドレスに含める
+Settings/NavigationAddressBar/Permaview/Description: 開く Tiddler と現在開いている Tiddler をアドレスに含めます
 Settings/NavigationHistory/Caption: 操作履歴
-Settings/NavigationHistory/Hint: tiddlerを操作したときのブラウザの履歴の設定:
-Settings/NavigationHistory/No/Description: 履歴を残さない。
-Settings/NavigationHistory/Yes/Description: 履歴を残す。
+Settings/NavigationHistory/Hint: Tiddler を操作したときのブラウザの履歴の設定:
+Settings/NavigationHistory/No/Description: 履歴を残さない
+Settings/NavigationHistory/Yes/Description: 履歴を残す
+Settings/NavigationPermalinkviewMode/Caption: パーマリンク・パーマビューモード
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: パーマリンク・パーマビューの URL をクリップボードにコピーする
+Settings/NavigationPermalinkviewMode/Hint: パーマリンク・パーマビューの処理方法を選択します:
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: アドレスバーのパーマリンク・パーマビューの URL を更新する
+Settings/PerformanceInstrumentation/Caption: パフォーマンス統計情報
+Settings/PerformanceInstrumentation/Description: パフォーマンス統計情報の有効
+Settings/PerformanceInstrumentation/Hint: ブラウザの開発者コンソールにパフォーマンスの統計情報を表示します。有効にするには再読み込みが必要です
+Settings/TitleLinks/Caption: Tiddler タイトル
+Settings/TitleLinks/Hint: オプションで Tiddler のタイトルをリンクとして表示することができます
+Settings/TitleLinks/No/Description: Tiddler のタイトルをリンクとして表示しない
+Settings/TitleLinks/Yes/Description: Tiddler のタイトルをリンクとして表示する
 Settings/ToolbarButtons/Caption: ボタンの表示
 Settings/ToolbarButtons/Hint: ツールバーのボタンの表示の設定:
-Settings/ToolbarButtons/Icons/Description: アイコンを表示する。
-Settings/ToolbarButtons/Text/Description: テキストを表示する。
+Settings/ToolbarButtons/Icons/Description: アイコンを表示する
+Settings/ToolbarButtons/Text/Description: テキストを表示する
+Settings/ToolbarButtonStyle/Caption: ツールバーバタンのスタイル
+Settings/ToolbarButtonStyle/Hint: ツールバーのボタンのスタイルを選択します:
+Settings/ToolbarButtonStyle/Styles/Borderless: 枠なし
+Settings/ToolbarButtonStyle/Styles/Boxed: 四角
+Settings/ToolbarButtonStyle/Styles/Rounded: 角丸
+StoryTiddler/Caption: Tiddler 表示部
+StoryTiddler/Hint: このルールカスケードは、Tiddler 表示部にに Tiddler を表示するためのテンプレートを動的に選択するために使用されます。
 StoryView/Caption: 表示スタイル
 StoryView/Prompt: 現在の表示スタイル:
+Stylesheets/Caption: スタイルシート
+Stylesheets/Expand/Caption: すべて展開
+Stylesheets/Hint: <<tag "$:/tags/Stylesheet">> でタグ付けされた現在のスタイルシートの Tiddler でレンダリングされた CSS です
+Stylesheets/Restore/Caption: 復旧
 Theme/Caption: テーマ
 Theme/Prompt: 現在のテーマ:
-TiddlerFields/Caption: Tiddlerフィールド
-TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、隠し tiddler は含んでいません）。
+TiddlerColour/Caption: Tiddler の色
+TiddlerColour/Hint: このルールカスケードは、Tiddler の色（アイコンと関連するタグピルに使用される）を動的に選択するために使用されます。
+TiddlerFields/Caption: Tiddler 項目
+TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての Tiddler 項目の一覧です（システム Tiddler も含みますが、隠し Tiddler は含んでいません）。
+TiddlerIcon/Caption: Tiddler アイコン
+TiddlerIcon/Hint: このルールカスケードは Tiddler のアイコンを動的に選択するために使用されます。
 Toolbars/Caption: ツールバー
+Toolbars/EditorToolbar/Caption: エディターツールバー
+Toolbars/EditorToolbar/Hint: エディタツールバーに表示されるボタンを選択します。一部のボタンは、特定のタイプの Tiddler を編集するときにのみ表示されることに注意してください。ドラッグ＆ドロップで並び順を変更します。
 Toolbars/EditToolbar/Caption: 編集画面
-Toolbars/EditToolbar/Hint: 編集画面で表示するボタンを選んでください。
-Toolbars/Hint: ツールバーに表示するボタンを選んでください。
+Toolbars/EditToolbar/Hint: 編集画面で表示するボタンを選んでください
+Toolbars/Hint: ツールバーに表示するボタンを選んでください
 Toolbars/PageControls/Caption: サイドバー
-Toolbars/PageControls/Hint: サイドバーに表示するボタンを選んでください。
+Toolbars/PageControls/Hint: サイドバーに表示するボタンを選んでください
 Toolbars/ViewToolbar/Caption: 閲覧画面
-Toolbars/ViewToolbar/Hint: 閲覧画面に表示するボタンを選んでください。
+Toolbars/ViewToolbar/Hint: 閲覧画面に表示するボタンを選んでください
 Tools/Caption: ツール
-Tools/Download/Full/Caption: 全てウィキをダウンロードする
-Tools/Export/AllAsStaticHTML/Caption: すべての tiddler を含む閲覧用 HTML としてダウンロードする
+Tools/Download/Full/Caption: すべての Wiki をダウンロードする
+Tools/Export/AllAsStaticHTML/Caption: すべての Tiddler を含む閲覧用 HTML としてダウンロードする
 Tools/Export/Heading: エクスポート
+ViewTemplateBody/Caption: 表示テンプレートの本体
+ViewTemplateBody/Hint: このルールカスケードは、デフォルトのビューテンプレートが Tiddler の本体を表示するためのテンプレートを動的に選択するために使用されます。
+ViewTemplateTitle/Caption: 表示テンプレートのタイトル
+ViewTemplateTitle/Hint: このルールカスケードは、デフォルトのビューテンプレートが Tiddler のタイトルを表示するためのテンプレートを動的に選択するために使用されます。

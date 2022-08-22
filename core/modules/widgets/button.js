@@ -46,7 +46,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
 		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
-			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+			$tw.utils.pushTop(classes, this.selectedClass.split(" "));
+			domNode.setAttribute("aria-checked", "true");
 		}
 		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
@@ -65,6 +66,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
+	}
+	if (this.role) {
+		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {
 		domNode.setAttribute("aria-expanded",isPoppedUp ? "true" : "false");
@@ -206,6 +210,7 @@ ButtonWidget.prototype.execute = function() {
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
 	this["aria-label"] = this.getAttribute("aria-label");
+	this.role = this.getAttribute("role");
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
 	this["class"] = this.getAttribute("class","");

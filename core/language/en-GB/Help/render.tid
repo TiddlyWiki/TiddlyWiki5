@@ -31,5 +31,5 @@ Notes:
 
 Examples:
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- renders all non-system tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles and the extension HTML
-
+* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` -- renders all non-system tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles and the extension HTML
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- renders the tiddlers tagged "HelloThere" to a JSON file named "tiddlers.json"

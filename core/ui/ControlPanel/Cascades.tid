@@ -2,6 +2,7 @@ title: $:/core/ui/ControlPanel/Cascades
 tags: $:/tags/ControlPanel/Advanced
 caption: {{$:/language/ControlPanel/Cascades/Caption}}
 
+\whitespace trim
 {{$:/language/ControlPanel/Cascades/Hint}}
 
 <div class="tc-control-panel">

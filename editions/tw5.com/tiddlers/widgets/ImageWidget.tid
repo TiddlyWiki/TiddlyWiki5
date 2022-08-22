@@ -1,8 +1,9 @@
-title: ImageWidget
-created: 20140416160234142
-modified: 20220101205921813
-tags: Widgets
 caption: image
+created: 20140416160234142
+modified: 20220721102303815
+tags: Widgets
+title: ImageWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -19,6 +20,7 @@ Any content of the `<$image>` widget is ignored.
 |tooltip |The tooltip to be displayed over the image |
 |alt |The alternative text to be associated with the image |
 |class |CSS classes to be assigned to the `<img>` element |
+|loading|<<.from-version "5.2.3">>Optional. Set to `lazy` to enable lazy loading of images loaded from an external URI |
 
 The width and the height can be specified as pixel values (eg "23" or "23px") or percentages (eg "23%"). They are both optional; if not provided the browser will use CSS rules to size the image.
 

@@ -1,10 +1,10 @@
 created: 20201123120203415
-modified: 20201123120211360
+modified: 20220414162815231
 tags: Variables [[Core Variables]]
 title: modifier Variable
 type: text/vnd.tiddlywiki
 
-Within the ''action'' string of the DroppableWidget, the ''action'' string of the ButtonWidget and the ''action'' string of the LinkCatcherWidget and the EventCatcherWidget, the <<.def modifier>> [[variable|Variables]] contains the modifier key(s) held during the drag-process.
+Within the ''action'' string of the DroppableWidget, the ''startactions'' and ''endactions'' of the DraggableWidget, the ''action'' string of the ButtonWidget and the ''action'' string of the LinkCatcherWidget and the EventCatcherWidget, the <<.def modifier>> [[variable|Variables]] contains the modifier key(s) held during the drag, click or other event.
 Possible key combinations are listed in the table below.
 
 The variable contains a string that identifies the keys:

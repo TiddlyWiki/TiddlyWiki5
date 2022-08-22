@@ -8,6 +8,7 @@ condition: [<targetTiddler>]
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((preview))
 
+\whitespace trim
 <$reveal state=<<edit-preview-state>> type="match" text="yes" tag="span">
 {{$:/core/images/preview-open}}
 <$action-setfield $tiddler=<<edit-preview-state>> $value="no"/>

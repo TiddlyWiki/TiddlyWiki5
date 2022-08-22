@@ -50,7 +50,7 @@ Render individual tiddlers and save the results to the specified files
 				console.log("Rendering \"" + title + "\" to \"" + filepath + "\"");
 			}
 			var parser = wiki.parseTiddler(template || title),
-				widgetNode = wiki.makeWidget(parser,{variables: $tw.utils.extend({},variables,{currentTiddler: title})}),
+				widgetNode = wiki.makeWidget(parser,{variables: $tw.utils.extend({},variables,{currentTiddler: title,storyTiddler: title})}),
 				container = $tw.fakeDocument.createElement("div");
 			widgetNode.render(container,null);
 			var text = type === "text/html" ? container.innerHTML : container.textContent;

@@ -9,6 +9,7 @@ dropdown: $:/core/ui/EditorToolbar/paint-dropdown
 \define toolbar-paint()
 <div style="display: inline-block; vertical-align: middle; background-color: $(colour-picker-value)$; width: 1em; height: 1em; border-radius: 50%;"/>
 \end
+\whitespace trim
 <$set name="colour-picker-value" value={{$:/config/BitmapEditor/Colour}}>
 <<toolbar-paint>>
 </$set>

@@ -14,7 +14,7 @@ ConfirmAction: Souhaitez-vous poursuivre ?
 Count: total 
 DefaultNewTiddlerTitle: Nouveau tiddler
 Diffs/CountMessage: <<diff-count>> différences
-DropMessage: Déposer ici (ou appuyer sur « escape » pour annuler)
+DropMessage: Déposer ici (ou taper sur la touche « Escape » pour annuler)
 Encryption/Cancel: Annuler
 Encryption/ConfirmClearPassword: Souhaitez-vous supprimer ce mot de passe ? Si oui, ce wiki ne sera plus chiffré lors de la sauvegarde
 Encryption/PromptSetPassword: Choisir un nouveau mot de passe pour ce TiddlyWiki

@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20220311154749139
+modified: 20220507184043398
 tags: Widgets TriggeringWidgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -48,6 +48,8 @@ The following variables are made available to the actions:
 |`event-type` |The type property of the JavaScript event |
 |`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-` |
 |`tv-popup-coords` |A co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated |
+|`tv-widgetnode-width` |<<.from-version "5.2.3">> `offsetWidth` of the DOM node created by the eventcatcher widget |
+|`tv-widgetnode-height` |<<.from-version "5.2.3">> `offsetHeight` of the DOM node created by the eventcatcher widget |
 |`tv-selectednode-posx` |`x` offset position of the selected DOM node |
 |`tv-selectednode-posy` |`y` offset position of the selected DOM node  |
 |`tv-selectednode-width` |`offsetWidth` of the selected DOM node |
