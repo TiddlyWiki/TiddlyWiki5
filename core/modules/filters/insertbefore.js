@@ -32,7 +32,12 @@ exports.insertbefore = function(source,operator,options) {
 		if(pos !== -1) {
 			results.splice(pos,0,operator.operand);
 		} else {
-			results.push(operator.operand);
+			var suffix = operator.operands.length > 1 ? operator.suffix : "";
+			if(suffix == "start") {
+				results.splice(0,0,operator.operand);
+			} else {
+				results.push(operator.operand);
+			}
 		}
 	}
 	return results;

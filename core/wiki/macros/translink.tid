@@ -2,6 +2,7 @@ title: $:/core/macros/translink
 tags: $:/tags/Macro
 
 \define translink(title,mode:"block")
+\whitespace trim
 <div style="border:1px solid #ccc; padding: 0.5em; background: black; foreground; white;">
 <$link to="""$title$""">
 <$text text="""$title$"""/>

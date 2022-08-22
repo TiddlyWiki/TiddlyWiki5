@@ -50,7 +50,7 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	if(tr.field) {
 		var tiddler = this.getTiddler(title);
 		if(tr.field === "title") { // Special case so we can return the title of a non-existent tiddler
-			return title;
+			return title || defaultText;
 		} else if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
 			return tiddler.getFieldString(tr.field);
 		} else {

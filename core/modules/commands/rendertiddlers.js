@@ -46,7 +46,7 @@ Command.prototype.execute = function() {
 	}
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
-			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}}),
+			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title, storyTiddler: title}}),
 			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		var text = type === "text/html" ? container.innerHTML : container.textContent,

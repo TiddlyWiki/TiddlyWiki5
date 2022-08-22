@@ -6,28 +6,31 @@ tags: $:/tags/Macro
 \end
 
 \define leaf-node(prefix,chunk)
+\whitespace trim
 <li>
 <$list filter="[<__prefix__>addsuffix<__chunk__>is[shadow]] [<__prefix__>addsuffix<__chunk__>is[tiddler]]" variable="full-title">
 <$list filter="[<full-title>removeprefix<__prefix__>]" variable="chunk">
-<span>{{$:/core/images/file}}</span> <$macrocall $name="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
+<span>{{$:/core/images/file}}</span>&#32;<$macrocall $name="leaf-link" full-title=<<full-title>> chunk=<<chunk>>/>
 </$list>
 </$list>
 </li>
 \end
 
 \define branch-node(prefix,chunk,separator: "/")
+\whitespace trim
 <li>
 <$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<__prefix__>addsuffix<__chunk__>] }}}>
 <$reveal type="nomatch" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="show" class="tc-btn-invisible">
-{{$:/core/images/folder}} <$text text=<<__chunk__>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
 </$button>
 </$reveal>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
 <$button setTitle=<<reveal-state>> setTo="hide" class="tc-btn-invisible">
-{{$:/core/images/folder}} <$text text=<<__chunk__>>/>
+{{$:/core/images/folder}}&#32;<$text text=<<__chunk__>>/>
 </$button>
 </$reveal>
+&#32;
 <span>(<$count filter="[all[shadows+tiddlers]removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
 <$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>>/>
@@ -37,6 +40,7 @@ tags: $:/tags/Macro
 \end
 
 \define tree-node(prefix,separator: "/")
+\whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]!suffix<__separator__>]" variable="chunk">
 <$macrocall $name="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>>/>
@@ -48,6 +52,7 @@ tags: $:/tags/Macro
 \end
 
 \define tree(prefix: "$:/",separator: "/")
+\whitespace trim
 <div class="tc-tree">
 <span><$text text=<<__prefix__>>/></span>
 <div>

@@ -13,6 +13,7 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 \define replacement-text-file() [[$title$]]
 
 \define postImportActions()
+\whitespace trim
 <$list filter="[<importTitle>links[]] :reduce[get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<currentTiddler>addprefix<accumulator>]" variable="imageTitle">
 <$action-sendmessage
 	$message="tm-edit-text-operation"
@@ -24,10 +25,13 @@ condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]
 \end
 
 \define buttons()
+\whitespace trim
 <$button class="tc-btn-invisible" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
+&#32;
 <$button class="tc-btn-invisible" message="tm-perform-import" param=<<importTitle>> actions=<<postImportActions>> ><<lingo Listing/Import/Caption>></$button>
 \end
 
+\whitespace trim
 <$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">
 <div class="tc-editor-import">
 <$list filter="[<importTitle>field:plugin-type[import]]">

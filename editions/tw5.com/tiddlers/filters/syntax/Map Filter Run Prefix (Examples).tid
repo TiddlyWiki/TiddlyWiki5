@@ -1,5 +1,5 @@
 created: 20210618134753828
-modified: 20211125152755859
+modified: 20220724162340642
 tags: [[Filter Syntax]] [[Filter Run Prefix Examples]] [[Map Filter Run Prefix]]
 title: Map Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
@@ -15,12 +15,30 @@ For each title in a shopping list, calculate the total cost of purchasing each i
 
 <<.operator-example 2 "[tag[shopping]] :map[get[quantity]else[0]multiply{!!price}]">>
 
+Get the tags of all tiddlers tagged `Widget:`
+
+<<.operator-example 3 "[tag[Widgets]] :map:flat[tagging[]] :and[!is[blank]unique[]]">>
+<<.tip "Without the `flat` suffix the `:map` filter run only returns the first result for each input title">>
+
+!! Comparison between `:map` with and without the `flat` suffix
+
+The `:map` filter run will return at least as many outputs as given in the input.  By default one input item will result in exactly one output item. When the filter run transforms an input item into an empty result, the output for that item will be an empty string. When the filter run transforms an input item into multiple items, only the first item will appear in the output. This behavior can be overridden by providing the `flat` suffix. The `flat` suffix will cause all the items to appear in the output.
+
+| `:map` | `:map:flat` |
+|^<<.operator-example m0.1 "[range[4]] :map[match[this matches nothing]]">>|^<<.operator-example m0.2 "[range[4]] :map:flat[match[this matches nothing]]">>|
+|^<<.operator-example m1.1 "[range[4]] :map[range<currentTiddler>]">>|^<<.operator-example m1.2 "[range[4]] :map:flat[range<currentTiddler>]">>|
+|^<<.operator-example m2.1 "[range[4]] :map[range<currentTiddler>]">>|^<<.operator-example m2.2 "[range[4]] :map:flat[range<currentTiddler>first[]]">>|
+|^<<.operator-example m3.1 "[range[4]] :map[range<currentTiddler>sum[]]">>|^<<.operator-example m3.2 "[range[4]] :map:flat[range<currentTiddler>sum[]]">>|
+|^<<.operator-example m4.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example m4.2 "[[1,2,3]] [[4,5]] :map:flat[split[,]]">>|
+|^<<.operator-example m5.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example m5.2 "[[1,2,3]] [[4,5]] :map:flat[split[,]first[]]">>|
+
+
 !! Comparison between `:map` and `:and`/`+` filter run prefixes
 
 The functionality of the `:map` filter run prefix has some overlap with the `:and` prefix (alias `+`). They will sometimes return the same results as each other. In at least these cases, the results will be different:
 
 # The `:and` filter run can modify the number of items (either increase or decrease). The `:map` run will never alter the number of items.
-# The number of items in the `:and` filter run will also decrease due to de-duplication. The `:map` run will not de-duplicate.
+# The number of items in the `:and` filter run will also decrease due to [[de-duplication|Dominant Append]]. The `:map` run will not [[de-duplicate|Dominant Append]].
 # Explicit references to the "currentTiddler" variable will behave differently
 # Implicit references to the "currentTiddler" using TextReference will behave differently.
 

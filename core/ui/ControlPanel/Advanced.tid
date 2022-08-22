@@ -2,6 +2,7 @@ title: $:/core/ui/ControlPanel/Advanced
 tags: $:/tags/ControlPanel/Info
 caption: {{$:/language/ControlPanel/Advanced/Caption}}
 
+\whitespace trim
 {{$:/language/ControlPanel/Advanced/Hint}}
 
 <div class="tc-control-panel">

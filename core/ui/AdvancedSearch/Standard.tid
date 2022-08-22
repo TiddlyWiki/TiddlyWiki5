@@ -3,15 +3,17 @@ tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/Standard/Caption}}
 
 \define lingo-base() $:/language/Search/
-\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="""<$action-setfield $tiddler="$:/state/advancedsearch/currentTab" text=<<nextTab>>/>"""/>
+\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
 
-\define next-search-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/advancedsearch" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/advancedsearch/standard/currentTab" text=<<nextTab>>/>"""/>
+\define next-search-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/advancedsearch" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/advancedsearch/standard/currentTab' text=<<nextTab>>/>"/>
 
-\define cancel-search-actions() <$list filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]" />"""><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/></$list><$action-sendmessage $message="tm-focus-selector" $param=""".tc-advanced-search input"""/>
+\define cancel-search-actions() <$list filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]" emptyMessage="<$action-deletetiddler $filter='[[$:/temp/advancedsearch]] [[$:/temp/advancedsearch/input]] [[$:/temp/advancedsearch/selected-item]]' />"><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/advancedsearch}}/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/></$list><$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
 
-\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
 
-\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
+\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'><$list filter='[<__tiddler__>get[text]minlength[1]]'><$action-sendmessage $message='tm-edit-tiddler' $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
+
+\whitespace trim
 
 <<lingo Standard/Hint>>
 
@@ -20,12 +22,19 @@ caption: {{$:/language/Search/Standard/Caption}}
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
 <$keyboard key="shift-alt-Right" actions=<<next-search-tab>>>
 <$keyboard key="shift-alt-Left" actions=<<next-search-tab "before">>>
-<$macrocall $name="keyboard-driven-input" tiddler="$:/temp/advancedsearch/input" storeTitle="$:/temp/advancedsearch"
-		refreshTitle="$:/temp/advancedsearch/refresh" selectionStateTitle="$:/temp/advancedsearch/selected-item" type="search"
-		tag="input" focus={{$:/config/Search/AutoFocus}} inputCancelActions=<<cancel-search-actions>> 
-		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> 
-		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"
-		filterMinLength={{$:/config/Search/MinLength}}/>
+<$macrocall $name="keyboard-driven-input"
+	tiddler="$:/temp/advancedsearch/input"
+	storeTitle="$:/temp/advancedsearch"
+	refreshTitle="$:/temp/advancedsearch/refresh"
+	selectionStateTitle="$:/temp/advancedsearch/selected-item"
+	type="search"
+	tag="input"
+	focus={{$:/config/Search/AutoFocus}}
+	inputCancelActions=<<cancel-search-actions>>
+	inputAcceptActions=<<input-accept-actions>>
+	inputAcceptVariantActions=<<input-accept-variant-actions>>
+	configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"
+	filterMinLength={{$:/config/Search/MinLength}}/>
 </$keyboard>
 </$keyboard>
 </$keyboard>
@@ -39,14 +48,22 @@ caption: {{$:/language/Search/Standard/Caption}}
 </div>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
-<$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-<$vars userInput={{{ [[$:/temp/advancedsearch]get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} searchListState="$:/temp/advancedsearch/selected-item">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]" emptyMessage="""
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]">
-<$transclude/>
-</$list>
-""">
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]" default={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/advancedsearch/standard/currentTab" text=<<currentTab>>/>""" explicitState="$:/state/tab/search-results/advancedsearch" />
+<$list
+	filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]"
+	emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>"
+	variable="listItem">
+<$vars
+	userInput={{{ [[$:/temp/advancedsearch]get[text]] }}}
+	configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}
+	searchListState="$:/temp/advancedsearch/selected-item">
+<$list
+	filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]"
+	emptyMessage="<$list filter='[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]'><$transclude/></$list>">
+<$macrocall $name="tabs"
+	tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"
+	default={{$:/config/SearchResults/Default}}
+	actions="<$action-setfield $tiddler='$:/state/advancedsearch/standard/currentTab' text=<<currentTab>>/>"
+	explicitState="$:/state/tab/search-results/advancedsearch" />
 </$list>
 </$vars>
 </$list>

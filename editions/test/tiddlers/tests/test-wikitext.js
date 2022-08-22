@@ -55,7 +55,14 @@ describe("WikiText tests", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No -WikiLink here").indexOf("<a") !== -1).toBe(false);
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No _WikiLink here").indexOf("<a") !== -1).toBe(false);
 	});
-
+	it("handles style wikitext notation", function() {
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@.myclass\n!header\n@@")).toBe("<h1 class=\"myclass\">header</h1>");
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@.myclass\n<div>\n\nContent</div>\n@@")).toBe("<div class=\"myclass\"><p>Content</p></div>");
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@.myclass\n---\n@@")).toBe("<hr class=\"myclass\">");
+		// Test styles can be added too
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@color:red;\n<div>\n\nContent</div>\n@@")).toBe("<div style=\"color:red;\"><p>Content</p></div>");
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@color:red;\n---\n@@")).toBe("<hr style=\"color:red;\">");
+	});
 });
 
 })();

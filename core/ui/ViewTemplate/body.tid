@@ -1,6 +1,8 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!has[draft.of]]
+
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 
 <$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />

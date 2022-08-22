@@ -1,5 +1,5 @@
 created: 20150124125646000
-modified: 20211127140005352
+modified: 20220729141540007
 tags: Tagging
 title: Order of Tagged Tiddlers
 type: text/vnd.tiddlywiki
@@ -12,6 +12,8 @@ When ~TiddlyWiki generates a list of the tiddlers that have a particular tag (e.
 #* As a special case, if the field exists but its value is empty, place <<.place T>> at the very start of the list.
 
 # In each remaining tiddler <<.place T>>, look for a <<.field list-after>> field. If this has a tiddler title as its value, place tiddler <<.place T>> just <<.em after>> that one.
+
+#* As a special case, if the field exists but its value is empty, place <<.place T>> at the very end of the list.
 
 # If any tiddlers still remain, place them at the end of the list in ascending alphabetical order of title. The difference between capital and lowercase letters is ignored.
 

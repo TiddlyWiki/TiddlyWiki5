@@ -100,9 +100,12 @@ function saveTiddlerToLocalStorage(title,options) {
 			}
 		}
 	} else {
-		console.log("browser-storage: Deleting",title);
+		// In local storage, use the special value of empty string to mark the tiddler as deleted
+		// On future page loads, if the tiddler is already gone from startup then the blank entry
+		// will be removed from localstorage. Otherwise, the tiddler will be deleted.
+		console.log("browser-storage: Blanking",title);
 		try {
-			window.localStorage.removeItem(options.prefix + title);
+			window.localStorage.setItem(options.prefix + title, "");
 		} catch(e) {
 			console.log("Browser-storage error:",e);
 		}
@@ -112,13 +115,15 @@ function saveTiddlerToLocalStorage(title,options) {
 function clearLocalStorage() {
 	var url = window.location.pathname,
 		log = [];
-	// Step through each browsder storage item
-	for(var index=window.localStorage.length - 1; index>=0; index--) {
-		var key = window.localStorage.key(index),
-			parts = key.split("#");
-		// Delete it if it's ours
-		if(parts[0] === "tw5" && parts[1] === url) {
-			window.localStorage.removeItem(key);
+	// Step through each browser storage item
+	if(window.localStorage) {
+		for(var index=window.localStorage.length - 1; index>=0; index--) {
+			var key = window.localStorage.key(index),
+				parts = key.split("#");
+			// Delete it if it is ours
+			if(parts[0] === "tw5" && parts[1] === url) {
+				window.localStorage.removeItem(key);
+			}
 		}
 	}
 }

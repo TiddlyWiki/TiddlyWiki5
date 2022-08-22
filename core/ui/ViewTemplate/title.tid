@@ -12,11 +12,13 @@ fill:$(foregroundColor)$;
 </span>
 <$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 <$link>
+<$list filter="[<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] +[!is[blank]]" variable="ignore">
 <$let foregroundColor={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}>
 <span class="tc-tiddler-title-icon" style=<<title-styles>>>
 {{||$:/core/ui/TiddlerIcon}}
 </span>
 </$let>
+</$list>
 <$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateTitleFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/title/default]] }}} />
 </$link>
 </$set>
