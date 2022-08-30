@@ -992,4 +992,53 @@ exports.makeCompareFunction = function(type,options) {
 	return (types[type] || types[options.defaultType] || types.number);
 };
 
+exports.filterItemToString = function(value) {
+	switch(typeof value) {
+		case "undefined":
+			return "undefined"
+		case "object":
+			return JSON.stringify(value);
+		case "boolean":
+			return value ? "true" : "false";
+		case "number":
+			return value.toString();
+		case "bigint":
+			return value.toString();
+		case "string":
+			return value;
+		case "symbol":
+			throw "Filter operators cannot return Symbols";
+		case "function":
+			throw "Filter operators cannot return Functions";
+	}
+};
+
+exports.filterItemToObject = function(value,options) {
+	options = options || {};
+	var defaultValue = options.defaultValue || {};
+	switch(typeof value) {
+		case "undefined":
+			return defaultValue;
+		case "object":
+			console.log("Got an object!")
+			return value;
+		case "boolean":
+			return value;
+		case "number":
+			return value;
+		case "bigint":
+			return value;
+		case "string":
+			if(options.parseStringsAsJson) {
+				return $tw.utils.parseJSONSafe(value,defaultValue);
+			} else {
+				return value;
+			}
+		case "symbol":
+			throw "Filter operators cannot return Symbols";
+		case "function":
+			throw "Filter operators cannot return Functions";
+	}
+};
+
 })();

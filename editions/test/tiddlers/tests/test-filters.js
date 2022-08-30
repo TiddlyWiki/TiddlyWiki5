@@ -707,6 +707,10 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("1 2 3 4 +[min[2]]").join(",")).toBe("1,2,2,2");
 		});
 	
+		it("should handle type conversions", function() {
+			expect(wiki.filterTiddlers("[[2]add[2]addprefix[donkey]]").join(",")).toBe("donkey4");
+		});
+	
 	/* listops filters */
 		
 		it("should handle the allafter operator", function() {

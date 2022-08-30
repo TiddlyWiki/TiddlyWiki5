@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/filters/math.js
 type: application/javascript
-module-type: filteroperator
+module-type: newfilteroperator
 
 Filter operators for math. Unary/binary operators work on each item in turn, and return a new item list.
 
@@ -207,7 +207,10 @@ function makeNumericBinaryOperator(fnCalc) {
 		var result = [],
 			numOperand = $tw.utils.parseNumber(operator.operand);
 		source(function(tiddler,title) {
-			result.push($tw.utils.stringifyNumber(fnCalc($tw.utils.parseNumber(title),numOperand)));
+			if(typeof title !== "string") {
+				console.log("YES!")
+			}
+			result.push(fnCalc($tw.utils.parseNumber(title),numOperand));
 		});
 		return result;
 	};
@@ -226,7 +229,7 @@ function makeNumericReducingOperator(fnCalc,initialValue,fnFinal) {
 		if(fnFinal) {
 			value = fnFinal(value,result.length,result);
 		}
-		return [$tw.utils.stringifyNumber(value)];
+		return [value];
 	};
 };
 
@@ -238,7 +241,7 @@ function makeNumericArrayOperator(fnCalc) {
 		});
 		results = fnCalc(results);
 		$tw.utils.each(results,function(value,index) {
-			results[index] = $tw.utils.stringifyNumber(value);
+			results[index] = value;
 		});
 		return results;
 	};
