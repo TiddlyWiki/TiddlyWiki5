@@ -3,7 +3,7 @@ tags: $:/tags/AdvancedSearch/FilterButton
 
 \whitespace trim
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
-<$button popup=<<qualify "$:/state/filterDeleteDropdown">> class="tc-btn-invisible">
+<$button tooltip={{$:/language/Buttons/DeleteTiddlers/Hint}} popup=<<qualify "$:/state/filterDeleteDropdown">> class="tc-btn-invisible">
 {{$:/core/images/delete-button}}
 </$button>
 </$reveal>
@@ -13,13 +13,13 @@ tags: $:/tags/AdvancedSearch/FilterButton
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <div class="tc-dropdown-item-plain">
 <$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
-Are you sure you wish to delete <<resultCount>> tiddler(s)?
+{{$:/language/ConfirmDeleteTiddlers}}
 </$set>
 </div>
 <div class="tc-dropdown-item-plain">
 <$button class="tc-btn">
 <$action-deletetiddler $filter={{$:/temp/advancedsearch}}/>
-Delete these tiddlers
+{{$:/language/Buttons/DeleteTiddlers/Hint}}
 </$button>
 </div>
 </div>
