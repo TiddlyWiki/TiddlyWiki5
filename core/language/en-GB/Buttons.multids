@@ -18,6 +18,8 @@ CopyToClipboard/Caption: copy to clipboard
 CopyToClipboard/Hint: Copy this text to the clipboard
 Delete/Caption: delete
 Delete/Hint: Delete this tiddler
+DeleteTiddlers/Caption: delete tiddlers
+DeleteTiddlers/Hint: Delete tiddlers
 Edit/Caption: edit
 Edit/Hint: Edit this tiddler
 Encryption/Caption: encryption
