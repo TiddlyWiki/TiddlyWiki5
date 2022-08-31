@@ -207,9 +207,6 @@ function makeNumericBinaryOperator(fnCalc) {
 		var result = [],
 			numOperand = $tw.utils.parseNumber(operator.operand);
 		source(function(tiddler,title) {
-			if(typeof title !== "string") {
-				console.log("YES!")
-			}
 			result.push(fnCalc($tw.utils.parseNumber(title),numOperand));
 		});
 		return result;

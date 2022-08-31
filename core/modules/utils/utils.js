@@ -1020,7 +1020,6 @@ exports.filterItemToObject = function(value,options) {
 		case "undefined":
 			return defaultValue;
 		case "object":
-			console.log("Got an object!")
 			return value;
 		case "boolean":
 			return value;
