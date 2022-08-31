@@ -18,6 +18,8 @@ CopyToClipboard/Caption: copier dans le presse-papier
 CopyToClipboard/Hint: Copie ce texte dans le presse-papier
 Delete/Caption: supprimer
 Delete/Hint: Supprime ce tiddler
+DeleteTiddlers/Caption: supprimer les tiddlers
+DeleteTiddlers/Hint: Supprime ces tiddlers
 Edit/Caption: éditer
 Edit/Hint: Édite ce tiddler
 Encryption/Caption: chiffrement
