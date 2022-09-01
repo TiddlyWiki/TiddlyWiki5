@@ -7,8 +7,9 @@ ClassicWarning/Upgrade/Caption: mettre à jour
 CloseAll/Button: tout fermer
 ColourPicker/Recent: Récent :
 ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tiddler « <$text text=<<title>>/> » ?
-ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
-ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
+ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
+ConfirmDeleteTiddlers: Êtes-vous sûr•e de vouloir supprimer <<resultCount>> tiddler(s) ?
+ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
 ConfirmAction: Souhaitez-vous poursuivre ?
 Count: total 
