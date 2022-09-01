@@ -25,6 +25,10 @@ describe("json filter tests", function() {
 		title: "Second",
 		text: '["une","deux","trois"]',
 		type: "application/json"
+	},{
+		title: "Third",
+		text: "This is not JSON",
+		type: "text/vnd.tiddlywiki"
 	}];
 	wiki.addTiddlers(tiddlers);
 
@@ -33,6 +37,7 @@ describe("json filter tests", function() {
 	});
 
 	it("should support the jsonget operator", function() {
+		expect(wiki.filterTiddlers("[{Third}jsonget[]]")).toEqual(["This is not JSON"]);
 		expect(wiki.filterTiddlers("[{First}jsonget[]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
 		expect(wiki.filterTiddlers("[{First}jsonget[a]]")).toEqual(["one"]);
 		expect(wiki.filterTiddlers("[{First}jsonget[b]]")).toEqual([""]);
@@ -64,6 +69,7 @@ describe("json filter tests", function() {
 	});
 
 	it("should support the jsontype operator", function() {
+		expect(wiki.filterTiddlers("[{Third}jsontype[]]")).toEqual(["string"]);
 		expect(wiki.filterTiddlers("[{First}jsontype[]]")).toEqual(["object"]);
 		expect(wiki.filterTiddlers("[{First}jsontype[a]]")).toEqual(["string"]);
 		expect(wiki.filterTiddlers("[{First}jsontype[b]]")).toEqual(["string"]);
