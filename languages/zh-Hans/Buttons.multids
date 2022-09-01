@@ -18,6 +18,8 @@ CopyToClipboard/Caption: 复制到剪贴板
 CopyToClipboard/Hint: 将此文本复制到剪贴板
 Delete/Caption: 删除
 Delete/Hint: 删除此条目
+DeleteTiddlers/Caption: 删除条目
+DeleteTiddlers/Hint: 删除条目
 Edit/Caption: 编辑
 Edit/Hint: 编辑此条目
 Encryption/Caption: 加密
