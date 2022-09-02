@@ -1,5 +1,5 @@
 created: 20201020102735123
-modified: 20210524044020645
+modified: 20220611104737314
 tags: [[Operator Examples]] [[format Operator]]
 title: format Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -18,8 +18,11 @@ Modified date shown as a relative date:
 A tiddler title with spaces formatted as a title list:
 <<.operator-example 4 """[[Hello There]format:titlelist[]]""">>
 
-All tiddler titles tagged with <<tag TableOfContents>> formatted as a title list :
+All tiddler titles tagged with <<tag TableOfContents>> formatted as a title list:
 <<.operator-example 5 """[tag[TableOfContents]format:titlelist[]]""">>
+
+A JSON string formatted as JSON – note how the JSON string is normalised to remove the duplicated properties:
+<<.operator-example 6 """[[{"one":"first","one":"another","two":"second"}]format:json[]]""">>
 
 <<.tip "To create a string to save a [[title list|Title List]] into a list field, use `format:titlelist[]` with the [[join operator|join Operator]]">>
 <<.operator-example 6 """[tag[TableOfContents]format:titlelist[]join[ ]]""">>
