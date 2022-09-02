@@ -8,7 +8,7 @@ op-input: a selection of JSON strings
 op-parameter: one or more indexes of the property whose type is to be retrieved
 op-output: the types of each of the retrieved properties
 
-<<.from-version "5.3.0">> See [[JSON in TiddlyWiki]] for background.
+<<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
 
 The <<.op jsontype>> operator is used to retrieve the type of a property in JSON data. See also the following related operators:
 

@@ -8,7 +8,7 @@ op-input: a selection of JSON strings
 op-parameter: one or more indexes of the property to retrieve
 op-output: the values of each of the retrieved properties
 
-<<.from-version "5.3.0">> See [[JSON in TiddlyWiki]] for background.
+<<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
 
 The <<.op jsonget>> operator is used to retrieve values from JSON data. See also the following related operators:
 
