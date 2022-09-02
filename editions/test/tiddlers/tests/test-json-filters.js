@@ -84,23 +84,7 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[{First}jsontype[d],[f],[4]]")).toEqual(["null"]);
 	});
 
-	it("should support the jsontypecheck operator", function() {
-		expect(wiki.filterTiddlers("[{First}jsontypecheck[string]]")).toEqual(['{"a":"one","b":"","c":1.618,"d": {"e": "four","f": ["five","six",true,false,null]}}']);
-		expect(wiki.filterTiddlers("[{First}jsonget[]jsontypecheck[object]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
-		expect(wiki.filterTiddlers("[{First}jsonget[a]jsontypecheck[string]]")).toEqual(["one"]);
-		expect(wiki.filterTiddlers("[{First}jsonget[b]jsontypecheck[string]]")).toEqual([""]);
-		expect(wiki.filterTiddlers("[{First}jsonget[c]jsontypecheck[number]]")).toEqual(["1.618"]);
-		expect(wiki.filterTiddlers("[{First}jsonget[d]jsontypecheck[object]]")).toEqual(['{"e":"four","f":["five","six",true,false,null]}']);
-		expect(wiki.filterTiddlers("[{First}jsonget[d],[e]jsontypecheck[string]]")).toEqual(["four"]);
-		expect(wiki.filterTiddlers("[{First}jsonget[d],[f]jsontypecheck[array]]")).toEqual(['["five","six",true,false,null]']);
-		expect(wiki.filterTiddlers("[{First}jsonget[d],[f],[0]jsontypecheck[string]]")).toEqual(["five"]);
-		expect(wiki.filterTiddlers("[{First}jsonget[d],[f],[1]jsontypecheck[string]]")).toEqual(["six"]);
-		expect(wiki.filterTiddlers("[{First}jsonget[d],[f],[2]jsontypecheck[boolean]]")).toEqual(["true"]);
-		expect(wiki.filterTiddlers("[{First}jsonget[d],[f],[3]jsontypecheck[boolean]]")).toEqual(["false"]);
-		expect(wiki.filterTiddlers("[{First}jsonget[d],[f],[4]jsontypecheck[null]]")).toEqual(["null"]);
-	});
-
-	it("should support the jsontype operator", function() {
+	it("should support the format:json operator", function() {
 		expect(wiki.filterTiddlers("[{First}format:json[]]")).toEqual(["{\"a\":\"one\",\"b\":\"\",\"c\":1.618,\"d\":{\"e\":\"four\",\"f\":[\"five\",\"six\",true,false,null]}}"]);
 		expect(wiki.filterTiddlers("[{First}format:json[4]]")).toEqual(["{\n    \"a\": \"one\",\n    \"b\": \"\",\n    \"c\": 1.618,\n    \"d\": {\n        \"e\": \"four\",\n        \"f\": [\n            \"five\",\n            \"six\",\n            true,\n            false,\n            null\n        ]\n    }\n}"]);
 		expect(wiki.filterTiddlers("[{First}format:json[  ]]")).toEqual(["{\n  \"a\": \"one\",\n  \"b\": \"\",\n  \"c\": 1.618,\n  \"d\": {\n    \"e\": \"four\",\n    \"f\": [\n      \"five\",\n      \"six\",\n      true,\n      false,\n      null\n    ]\n  }\n}"]);

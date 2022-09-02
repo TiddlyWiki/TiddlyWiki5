@@ -8,6 +8,7 @@ CloseAll/Button: 全部關閉
 ColourPicker/Recent: 最近︰
 ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的更改？
 ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
+ConfirmDeleteTiddlers: 您確定要刪除 <<resultCount>> 個條目？
 ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即將要編輯預設條目，任何更改將會覆蓋預設的系統，使未來的升級不尋常。您確定要編輯 "<$text text=<<title>>/>"?
 ConfirmAction: 是否要繼續？
