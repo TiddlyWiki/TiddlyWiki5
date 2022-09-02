@@ -13,7 +13,6 @@ op-output: the values of each of the retrieved properties
 The <<.op jsonindexes>> operator is used to retrieve the property names of JSON objects or the index names of JSON arrays. See also the following related operators:
 
 * <<.olink jsonget>> to retrieve the values of a property in JSON data
-* <<.olink jsonextract>> to extract a subtree of JSON data
 * <<.olink jsontype>> to retrieve the type of a JSON value
 
 Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.

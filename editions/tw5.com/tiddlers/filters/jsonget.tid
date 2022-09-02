@@ -12,7 +12,6 @@ op-output: the values of each of the retrieved properties
 
 The <<.op jsonget>> operator is used to retrieve values from JSON data. See also the following related operators:
 
-* <<.olink jsonextract>> to extract a subtree of JSON data
 * <<.olink jsontype>> to retrieve the type of a JSON value
 * <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
 
@@ -66,11 +65,11 @@ Boolean values and null are returned as normal strings. The <<.olink jsontype>> 
 [<jsondata>jsontype[d],[f],[2]] --> "boolean"
 ```
 
-Using the <<.op jsonget>> operator to retrieve an object or an array returns a list of all the values. For example:
+Using the <<.op jsonget>> operator to retrieve an object or an array returns a JSON string of the values. For example:
 
 ```
-[<jsondata>jsonget[d],[f]] --> "five","six","true","false","null"
-[<jsondata>jsonget[d],[g]] --> "max", "may", "maize"
+[<jsondata>jsonget[d],[f]] --> `["five","six",true,false,null]`
+[<jsondata>jsonget[d],[g]] --> `{"x": "max","y": "may","z": "maize"}`
 ```
 
 The <<.olink jsonindexes>> operator retrieves the corresponding indexes:
@@ -78,12 +77,6 @@ The <<.olink jsonindexes>> operator retrieves the corresponding indexes:
 ```
 [<jsondata>jsonindexes[d],[f]] --> "0", "1", "2", "3", "4"
 [<jsondata>jsonindexes[d],[g]] --> "x", "y", "z"
-```
-
-The behaviour when retrieving an object or array that contains values that are themselves objects or arrays is to recursively retrieve all the values:
-
-```
-[<jsondata>jsonget[d]] --> "four", "five", "six", "true", "false", "null", "max", "may", "maize"
 ```
 
 A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:

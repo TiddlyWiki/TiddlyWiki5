@@ -59,7 +59,7 @@ caption: parse tree
 </td>
 <td>
 <$let type={{{ [<node>jsonget[attributes],<index>,[type]] }}}>
-<$transclude $variable={{{ [<type>match[string]then[preview-node-attribute-string]] :else[<type>match[indirect]then[preview-node-attribute-indirect]] :else[<type>match[macro]then[preview-node-attribute-macro]] }}} attribute={{{ [<node>jsonextract[attributes],<index>] }}}/>
+<$transclude $variable={{{ [<type>match[string]then[preview-node-attribute-string]] :else[<type>match[indirect]then[preview-node-attribute-indirect]] :else[<type>match[macro]then[preview-node-attribute-macro]] }}} attribute={{{ [<node>jsonget[attributes],<index>] }}}/>
 </$let>
 </td>
 </tr>
@@ -73,7 +73,7 @@ caption: parse tree
 <div style="padding:4px 4px 0 4px;">
 <$transclude $variable="preview-node-properties" node=<<node>>/>
 <$transclude $variable="preview-node-attributes" node=<<node>>/>
-<$transclude $variable="preview-node-list" nodeList={{{ [<node>jsonextract[children]] }}}/>
+<$transclude $variable="preview-node-list" nodeList={{{ [<node>jsonget[children]] }}}/>
 </div>
 \end
 
@@ -111,7 +111,7 @@ caption: parse tree
 
 \procedure preview-node-list(nodeList)
 <$list filter="[<nodeList>jsonindexes[]]" variable="index">
-<$transclude $variable="preview-node" node={{{ [<nodeList>jsonextract<index>] }}}/>
+<$transclude $variable="preview-node" node={{{ [<nodeList>jsonget<index>] }}}/>
 </$list>
 \end
 

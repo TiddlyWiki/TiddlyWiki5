@@ -15,25 +15,11 @@ Filter operators for JSON operations
 exports["jsonget"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,{});
+		var data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
-			var item = getDataItemValueAsStrings(data,operator.operands);
+			var item = getDataItemValueAsString(data,operator.operands);
 			if(item !== undefined) {
-				results.push.apply(results,item);
-			}
-		}
-	});
-	return results;
-};
-
-exports["jsonextract"] = function(source,operator,options) {
-	var results = [];
-	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,{});
-		if(data) {
-			var item = getDataItem(data,operator.operands);
-			if(item !== undefined) {
-				results.push(JSON.stringify(item));
+				results.push(item);
 			}
 		}
 	});
@@ -43,7 +29,7 @@ exports["jsonextract"] = function(source,operator,options) {
 exports["jsonindexes"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,{});
+		var data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
 			var item = getDataItemKeysAsStrings(data,operator.operands);
 			if(item !== undefined) {
@@ -57,7 +43,7 @@ exports["jsonindexes"] = function(source,operator,options) {
 exports["jsontype"] = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		var data = $tw.utils.parseJSONSafe(title,{});
+		var data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
 			var item = getDataItemType(data,operator.operands);
 			if(item !== undefined) {
@@ -71,11 +57,11 @@ exports["jsontype"] = function(source,operator,options) {
 /*
 Given a JSON data structure and an array of index strings, return an array of the string representation of the values at the end of the index chain, or "undefined" if any of the index strings are invalid
 */
-function getDataItemValueAsStrings(data,indexes) {
+function getDataItemValueAsString(data,indexes) {
 	// Get the item
 	var item = getDataItem(data,indexes);
 	// Return the item as a string
-	return convertDataItemValueToStrings(item);
+	return convertDataItemValueToString(item);
 }
 
 /*
@@ -91,29 +77,15 @@ function getDataItemKeysAsStrings(data,indexes) {
 /*
 Return an array of the string representation of the values of a data item, or "undefined" if the item is undefined
 */
-function convertDataItemValueToStrings(item) {
+function convertDataItemValueToString(item) {
 	// Return the item as a string
 	if(item === undefined) {
 		return item;
 	}
 	if(typeof item === "object") {
-		if(item === null) {
-			return ["null"];
-		}
-		var results = [];
-		if($tw.utils.isArray(item)) {
-			$tw.utils.each(item,function(value) {
-				results.push.apply(results,convertDataItemValueToStrings(value));
-			});
-			return results;
-		} else {
-			$tw.utils.each(Object.keys(item).sort(),function(key) {
-				results.push.apply(results,convertDataItemValueToStrings(item[key]));
-			});
-			return results;
-		}
+		return JSON.stringify(item);
 	}
-	return [item.toString()];
+	return item.toString();
 }
 
 /*
