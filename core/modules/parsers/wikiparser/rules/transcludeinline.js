@@ -40,7 +40,7 @@ exports.parse = function() {
 		};
 	$tw.utils.each(params,function(paramValue,index) {
 		var name = "" + index;
-		transcludeNode.attributes["" + index] = {
+		transcludeNode.attributes[name] = {
 			name: name,
 			type: "string",
 			value: paramValue
