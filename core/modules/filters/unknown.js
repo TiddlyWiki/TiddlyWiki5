@@ -20,6 +20,7 @@ var fieldFilterOperatorFn = require("$:/core/modules/filters/field.js").field;
 Export our filter function
 */
 exports["[unknown]"] = function(source,operator,options) {
+	// Check for a user defined filter operator
 	if(operator.operator.charAt(0) === ".") {
 		var customDefinition = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator);
 		if(customDefinition && customDefinition.srcVariable && customDefinition.srcVariable.isFunctionDefinition) {
@@ -43,6 +44,7 @@ exports["[unknown]"] = function(source,operator,options) {
 			}
 		}
 	}
+	// Otherwise, use the "field" operator
 	return fieldFilterOperatorFn(source,operator,options);
 };
 
