@@ -176,13 +176,13 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 		var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()}),
 			srcVariable = variableInfo && variableInfo.srcVariable;
 		if(srcVariable) {
-			var mode = parseAsInline ? "inlineParser" : "blockParser";
-			if(srcVariable.isCacheable && srcVariable[mode]) {
-				parser = srcVariable[mode];
+			var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
+			if(variableInfo.isCacheable && srcVariable[cacheKey]) {
+				parser = srcVariable[cacheKey];
 			} else {
 				parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
-				if(srcVariable.isCacheable) {
-					srcVariable[mode] = parser;
+				if(variableInfo.isCacheable) {
+					srcVariable[cacheKey] = parser;
 				}
 			}
 			if(parser) {
