@@ -346,7 +346,7 @@ exports.compileFilter = function(filterString) {
 				operationFunction(results,source,widget);
 			});
 		} else {
-			results = ["/**-- Excessive filter recursion --**/"];
+			results.push("/**-- Excessive filter recursion --**/");
 		}
 		self.filterRecursionCount = self.filterRecursionCount - 1;
 		return results.toArray();
