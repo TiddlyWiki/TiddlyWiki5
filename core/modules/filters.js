@@ -340,22 +340,17 @@ exports.compileFilter = function(filterString) {
 			widget = $tw.rootWidget;
 		}
 		var results = new $tw.utils.LinkedList();
-		$tw.utils.each(operationFunctions,function(operationFunction) {
-			operationFunction(results,source,widget);
-		});
-		return results.toArray();
-	});
-	var fnGuarded = function(source,widget) {
-		var results;
 		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
 		if(self.filterRecursionCount < 300) {
-			results = fnMeasured(source,widget);
+			$tw.utils.each(operationFunctions,function(operationFunction) {
+				operationFunction(results,source,widget);
+			});
 		} else {
 			results = ["/**-- Excessive filter recursion --**/"];
 		}
 		self.filterRecursionCount = self.filterRecursionCount - 1;
-		return results;
-	};
+		return results.toArray();
+	});
 	if(this.filterCacheCount >= 2000) {
 		// To prevent memory leak, we maintain an upper limit for cache size.
 		// Reset if exceeded. This should give us 95% of the benefit
@@ -363,9 +358,9 @@ exports.compileFilter = function(filterString) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	this.filterCache[filterString] = fnGuarded;
+	this.filterCache[filterString] = fnMeasured;
 	this.filterCacheCount++;
-	return fnGuarded;
+	return fnMeasured;
 };
 
 })();
