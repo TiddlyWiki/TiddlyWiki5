@@ -76,16 +76,17 @@ $else$
 	-webkit-box-sizing: border-box;
 }
 
-input[type="search"] {
-	outline-offset: initial;
-}
-
+/*
+** Button default styles. Makes them look consistent for all browsers
+*/
 html button {
 	line-height: 1.2;
 	color: <<colour button-foreground>>;
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
-	border-color: <<colour button-border>>;
+	border: 1px solid <<colour button-border>>;
+	border-radius: 3px;
+	padding: 2px 5px;
 }
 
 button:disabled svg {
@@ -221,8 +222,19 @@ dl dt {
 	margin-top: 6px;
 }
 
-button, textarea, input, select {
-	outline-color: <<colour primary>>;
+/*
+** Definition for text input elements so they look consistent for all browsers
+*/
+
+textarea, input, select {
+	border: 2px solid <<colour tiddler-editor-border>>;
+	background-color: <<colour tiddler-editor-background>>;
+}
+
+/* Input elements accessibility -- overwrite the reset */
+:focus-visible {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;    /* same as in reset.css [type='search'] but for more elements */
 }
 
 textarea,
@@ -231,7 +243,6 @@ input[type=search],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
-	background: <<colour background>>;
 }
 
 input[type="checkbox"] {
@@ -293,6 +304,10 @@ pre > code {
 	color: inherit;
 }
 
+/*
+Table defaults
+*/
+
 table {
 	border: 1px solid <<colour table-border>>;
 	width: auto;
@@ -320,9 +335,39 @@ table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
 }
 
+/*
+Table utility classes
+*/
+
+/* Remove borders from table as used in eg: GettingStarted*/
+.tc-table-no-border,
+.tc-table-no-border th,
+.tc-table-no-border td {
+	border: initial;
+}
+
+/* First column in table width will fit to text.*/
+/* This rule makes most sense with tc-first-link-nowrap*/
+.tc-first-col-min-width td:nth-child(1) {
+	width: 1%;
+}
+
+/* First link A element will not wrap */
+.tc-first-link-nowrap:first-of-type a {
+	white-space: nowrap;
+}
+
+/*
+CSV parser plugin
+*/
+
 .tc-csv-table {
 	white-space: nowrap;
 }
+
+/*
+Tiddler frame in story river
+*/
 
 .tc-tiddler-frame img,
 .tc-tiddler-frame svg,
@@ -352,6 +397,7 @@ a.tc-tiddlylink {
 	font-weight: 500;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
+	-webkit-touch-callout: none; /* Prevents long presses from bringing up a link preview */
 }
 
 .tc-sidebar-lists a.tc-tiddlylink {
@@ -738,7 +784,7 @@ button.tc-tag-label, span.tc-tag-label {
 	font-weight: normal;
 	line-height: 1.2em;
 	color: <<colour tag-foreground>>;
-	white-space: nowrap;
+	white-space: break-spaces;
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
 	border-radius: 1em;
@@ -775,7 +821,6 @@ button.tc-untagged-label {
 }
 
 .tc-tag-manager-table .tc-tag-label {
-	white-space: normal;
 }
 
 .tc-tag-manager-tag {
@@ -1149,6 +1194,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame .tc-tiddler-controls {
 	float: right;
+	padding: 3px; /* make space for outline */
 }
 
 .tc-tiddler-controls .tc-drop-down {
@@ -2166,6 +2212,10 @@ html body.tc-body.tc-single-tiddler-window {
 	margin: 0.5em 0;
 }
 
+.tc-manager-control select {
+	max-width: 100%;
+}
+
 .tc-manager-list {
 	width: 100%;
 	border-top: 1px solid <<colour muted-foreground>>;
@@ -2813,7 +2863,7 @@ input.tc-palette-manager-colour-input {
 ** Dirty indicator
 */
 
-body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg {
+html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
 	color: <<colour dirty-indicator>>;
 }

@@ -16,7 +16,7 @@ color:$(foregroundColor)$;
 	$element-attributes$
 	class="tc-tag-label tc-btn-invisible"
 	style=<<tag-pill-styles>>
->$actions$<$transclude tiddler="""$icon$"""/><$view tiddler=<<__tag__>> field="title" format="text" />
+>$actions$<$transclude tiddler="""$icon$"""/><$view tiddler=<<__tag__>> field="title" format="text" /></$element-tag$>
 \end
 
 \define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)

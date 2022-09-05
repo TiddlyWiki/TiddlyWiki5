@@ -23,11 +23,7 @@ title: $:/snippets/peek-stylesheets
 <$reveal type="match" state=<<state>> text="yes" tag="div">
 <$set name="source" tiddler=<<currentTiddler>>>
 <$wikify name="styles" text=<<source>>>
-<pre>
-<code>
-<$text text=<<styles>>/>
-</code>
-</pre>
+<$codeblock code=<<styles>> language="css"/>
 </$wikify>
 </$set>
 </$reveal>

@@ -1,14 +1,29 @@
 created: 20160107222430613
-modified: 20190927205631648
+modified: 20220617115930635
 tags: Plugins
 title: Manually installing a plugin
 type: text/vnd.tiddlywiki
 
+\rules except wikilink
+
+If you want to follow the steps //side by side// you can <<open-external-window "https://tiddlywiki.com/plugins/tiddlywiki/katex">>. 
+
 # Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
+
 # Open your TiddlyWiki in a browser
-# In another browser window, find a link to the plugin, e.g. [[$:/plugins/tiddlywiki/example]]. You will typically find these links on the home page of the plugin (for example, https://tiddlywiki.com/plugins/tiddlywiki/katex/)
-# Drag the link [[$:/plugins/tiddlywiki/example]] to the browser window containing your TiddlyWiki
+
+# In another browser window, find a link to the plugin, e.g. https://tiddlywiki.com/plugins/tiddlywiki/katex. You will typically find these links on the home page of the plugin
+
+# Drag the link similar to `$:/plugins/tiddlywiki/example` to the browser window containing your TiddlyWiki
+
+# Import the new plugin shown in the $:/Import tiddler
+
 # Save your TiddlyWiki (<<.icon $:/core/images/save-button>>)
+
 # If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completes installation of the plugin <<.icon $:/core/images/refresh-button>>
+
 #* <<.from-version "5.1.22">> It is no longer necessary to refresh TiddlyWiki when deleting plugins that support dynamic loading. See PluginMechanism for more details
+
 # The plugin should now be available for use
+
+<$macrocall $name=".note" _="More information about installing a plugin form the official plugin library, can be found at [[Installing a plugin from the plugin library]]<br>An overview can be found at [[Plugins]]"/>

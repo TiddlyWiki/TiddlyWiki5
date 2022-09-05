@@ -1,0 +1,86 @@
+created: 20220611104737314
+modified: 20220611104737314
+tags: [[Filter Operators]] [[JSON Operators]]
+title: jsonget Operator
+caption: jsonget
+op-purpose: retrieve the value of a property from JSON strings
+op-input: a selection of JSON strings
+op-parameter: one or more indexes of the property to retrieve
+op-output: the values of each of the retrieved properties
+
+<<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
+
+The <<.op jsonget>> operator is used to retrieve values from JSON data. See also the following related operators:
+
+* <<.olink jsontype>> to retrieve the type of a JSON value
+* <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+
+Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
+
+```
+{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+```
+
+The following examples assume that this JSON data is contained in a variable called `jsondata`.
+
+The <<.op jsonget>> operator uses multiple operands to specify the indexes of the property to retrieve:
+
+```
+[<jsondata>jsonget[a]] --> "one"
+[<jsondata>jsonget[d],[e]] --> "four"
+[<jsondata>jsonget[d],[f],[0]] --> "five"
+```
+
+Indexes can be dynamically composed from variables and transclusions:
+
+```
+[<jsondata>jsonget<variable>,{!!field},[0]]
+```
+
+Boolean values and null are returned as normal strings. The <<.olink jsontype>> operator can be used to retrieve a string identifying the original type. Thus:
+
+```
+[<jsondata>jsontype[a]] --> "string"
+[<jsondata>jsontype[d]] --> "object"
+[<jsondata>jsontype[d],[f]] --> "array"
+[<jsondata>jsontype[d],[f],[2]] --> "boolean"
+```
+
+Using the <<.op jsonget>> operator to retrieve an object or an array returns a JSON string of the values. For example:
+
+```
+[<jsondata>jsonget[d],[f]] --> `["five","six",true,false,null]`
+[<jsondata>jsonget[d],[g]] --> `{"x": "max","y": "may","z": "maize"}`
+```
+
+The <<.olink jsonindexes>> operator retrieves the corresponding indexes:
+
+```
+[<jsondata>jsonindexes[d],[f]] --> "0", "1", "2", "3", "4"
+[<jsondata>jsonindexes[d],[g]] --> "x", "y", "z"
+```
+
+A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+
+```
+[<jsondata>jsonindexes[]] --> "a", "b", "c", "d"
+```

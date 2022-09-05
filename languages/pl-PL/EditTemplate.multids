@@ -1,5 +1,6 @@
 title: $:/language/EditTemplate/
 
+Caption: Edytor
 Body/External/Hint: Ten tiddler zawiera treść trzymaną poza głównym plikiem TiddlyWIki. Możesz edytować tagi i pola, ale nie możesz bezpośrednio edytować jego treści.
 Body/Placeholder: Wpisz treść tiddlera
 Body/Preview/Type/Output: rezultat

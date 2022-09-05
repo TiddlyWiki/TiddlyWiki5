@@ -1,8 +1,45 @@
+code-body: yes
 created: 20150117184156000
-modified: 20220227210152153
+modified: 20220617122915793
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
+
+\define activatePluginTab()
+<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Plugins"/>
+<$action-navigate $to="$:/ControlPanel"/>
+\end
+
+\define activateTiddlerWindow()
+<$action-sendmessage $message="tm-open-window"
+  $param=<<currentTiddler>> windowTitle="Side by Side View"
+  width="800" height="600" />
+\end
+
+\define controlPanel-plugin-link()
+<$button actions=<<activatePluginTab>> class="tc-btn-invisible tc-tiddlylink">
+{{$:/core/images/options-button}} ~ControlPanel
+</$button>
+\end
+
+\define open-tiddler-in-window()
+<$button actions=<<activateTiddlerWindow>> class="tc-btn-invisible tc-tiddlylink">
+open ''this'' tiddler in a new window
+</$button>
+\end
+
+\define activateEditionWindow(url)
+<$action-sendmessage $message="tm-open-external-window"
+  $param="""$url$""" windowName="_edition"
+  windowFeatures="width=800 height=600" />
+\end
+
+\define open-external-window(url)
+<$button actions=<<activateEditionWindow """$url$""">> class="tc-btn-invisible tc-tiddlylink">
+open the ''example edition'' in a new window
+</$button>
+\end
+
 
 \define wikitext-example(src)
 <div class="doc-example">
@@ -64,5 +101,3 @@ $$$
 
 <<tw-code $tiddler$>>
 \end
-
-<pre><$view field="text"/></pre>

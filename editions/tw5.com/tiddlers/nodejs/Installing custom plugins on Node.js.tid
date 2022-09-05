@@ -1,27 +1,19 @@
 created: 20191022095653896
-modified: 20191102131824766
-tags: [[TiddlyWiki on Node.js]]
+modified: 20220617130125173
+tags: [[TiddlyWiki on Node.js]] PluginsCS
 title: Installing custom plugins on Node.js
 type: text/vnd.tiddlywiki
 
-There are several ways in which custom plugins that are not part of TiddlyWiki's plugin library can be installed when using TiddlyWiki under Node.js. (See [[Installing a plugin from the plugin library]] for instructions on installing plugins from the library).
+\rules except wikilink
 
-* Arrange the PluginFolders containing the plugins in a convenient shared location and then use [[environment variables|Environment Variables on Node.js]] to tell TiddlyWiki to search those folders. The plugins can be referenced in `tiddlywiki.info` by their name (e.g. `tiddlytools/magic`)
-* Place the PluginFolders containing the plugins in a `plugins` folder within the [[wiki folder|TiddlyWikiFolders]]. TiddlyWiki will attempt to include every subfolder as a plugin. Do not add the plugin names to `tiddlywiki.info`. Do not add the PluginFolders under a specific namespace:<br><pre>.
-├── plugins
-│   ├── relink
-│   │   ├── js
-│   │   ├── plugin.info
-│   │   └── tiddlers
-│   └── relink-markdown
-│       ├── js
-│       ├── plugin.info
-│       └── readme.tid
-├── tiddlers
-└── tiddlywiki.info
-</pre>
-* Depending on how TiddlyWiki itself has been installed, plugins can also be installed by copying the plugin folders into the `plugins` folder of the repository. This is only recommended if working with a forked copy of the repo. It is not recommended if TiddlyWiki has been installed with npm because npm is liable to overwrite the installation when performing an update
+! Introduction
 
-Note that including a plugin as an ordinary tiddler (e.g. by dragging and dropping a plugin into the browser) will result in the plugin only being active in the browser, and not available under Node.js.
+There are several ways in which official plugins and custom plugins can be installed when using TiddlyWiki with a Node.js client-server configuration.
 
+<$macrocall $name=".note" _="""For instructions on installing plugins from libraries to ''single-file'' wikis learn more at [[Plugins]].
+"""/> 
+
+!! Plugin Load Order
+
+{{Plugin Ordering}}
 

@@ -115,7 +115,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 				// Otherwise, we need to construct a default value for the editor
 				switch(this.editField) {
 					case "text":
-						value = "Type the text for the tiddler '" + this.editTitle + "'";
+						value = "";
 						type = "text/vnd.tiddlywiki";
 						break;
 					case "title":
