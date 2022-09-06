@@ -206,15 +206,18 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Set the list field (or index) if specified
 	if(this.checkboxListField || this.checkboxListIndex) {
-		var listContents, oldPos, newPos;
+		var fieldContents, listContents, oldPos, newPos;
 		if(this.checkboxListField) {
-			listContents = tiddler ? (tiddler.getFieldList(this.checkboxListField) || []) : [];
+			fieldContents = tiddler ? tiddler.fields[this.checkboxListField] : undefined;
 		} else {
-			listContents = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex) || "") || [];
+			fieldContents = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex);
 		}
-		if(Object.isFrozen(listContents)) {
-			// Can happen if using, say, the built-in "list" field which is frozen against modifications
-			listContents = listContents.slice(0);
+		if($tw.utils.isArray(fieldContents)) {
+			// Make a copy so we can modify it without changing original that's refrenced elsewhere
+			listContents = fieldContents.slice(0);
+		} else {
+			listContents = $tw.utils.parseStringArray(fieldContents) || [];
+			// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
 		}
 		oldPos = notValue ? listContents.indexOf(notValue) : -1;
 		newPos = value ? listContents.indexOf(value) : -1;
