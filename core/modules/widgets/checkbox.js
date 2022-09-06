@@ -66,14 +66,14 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler || this.checkboxFilter) {
-		if(this.checkboxTag) {
+		if(tiddler && this.checkboxTag) {
 			if(this.checkboxInvertTag === "yes") {
 				return !tiddler.hasTag(this.checkboxTag);
 			} else {
 				return tiddler.hasTag(this.checkboxTag);
 			}
 		}
-		if(this.checkboxField || this.checkboxIndex) {
+		if(tiddler && (this.checkboxField || this.checkboxIndex)) {
 			// Same logic applies to fields and indexes
 			var value;
 			if(this.checkboxField) {
@@ -208,7 +208,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	if(this.checkboxListField || this.checkboxListIndex) {
 		var listContents, oldPos, newPos;
 		if(this.checkboxListField) {
-			listContents = tiddler.getFieldList(this.checkboxListField);
+			listContents = tiddler ? (tiddler.getFieldList(this.checkboxListField) || []) : [];
 		} else {
 			listContents = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex) || "") || [];
 		}
