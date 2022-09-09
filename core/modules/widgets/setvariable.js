@@ -48,8 +48,9 @@ SetWidget.prototype.execute = function() {
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	this.setConditional = this.getAttribute("conditional","no") === "yes";
-	// Set context variable, checking for a conditional assignment
+	// Ignore if this is a conditional assignment and the variable already has a value
 	if(!this.setConditional || this.getVariableInfo(this.setName).text === undefined) {
+		// Set context variable
 		if(this.parseTreeNode.isMacroDefinition) {
 			this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,true);
 		} else if(this.parseTreeNode.isFunctionDefinition) {
