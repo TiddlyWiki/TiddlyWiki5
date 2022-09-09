@@ -1,6 +1,6 @@
 caption: genesis
-created: 20220502144738010
-modified: 20220502144738010
+created: 20220909102917736
+modified: 20220909102917736
 tags: Widgets
 title: GenesisWidget
 type: text/vnd.tiddlywiki
@@ -14,8 +14,7 @@ type: text/vnd.tiddlywiki
 The content of the `<$genesis>` widget is used as the content of the dynamically created widget.
 
 |!Attribute |!Description |
-|$type |The type of widget to create (note that the first `$` must not be included, so the `<$text>` widget would be created by passing `text`) |
-|$tag |The HTML tag to be used for "element" widgets |
+|$type |The type of widget or element to create (an initial `$` indicates a widget, otherwise an HTML element will be created) |
 |$names |An optional filter evaluating to the names of a list of attributes to be applied to the widget |
 |$values |An optional filter evaluating to the values corresponding to the list of names specified in `$names` |
 |//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
@@ -27,4 +26,4 @@ Note that attributes explicitly specified take precedence over attributes with t
 ! Examples
 
 <$macrocall $name='wikitext-example-without-html' 
-src='<$genesis $tag="div" class="tc-thing" label="Squeak">Mouse</$genesis>'/>
+src='<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>'/>

@@ -6,8 +6,8 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$genesis $tag="div">Mouse</$genesis>
-<$genesis $tag="div" class="tc-thing" label="Squeak">Mouse</$genesis>
+<$genesis $type="div">Mouse</$genesis>
+<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>
 +
 title: ExpectedResult
 

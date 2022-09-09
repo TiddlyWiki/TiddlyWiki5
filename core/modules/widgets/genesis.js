@@ -43,14 +43,16 @@ GenesisWidget.prototype.execute = function() {
 	var self = this;
 	// Collect attributes
 	this.genesisType = this.getAttribute("$type","element");
-	this.genesisTag = this.getAttribute("$tag","div");
 	this.genesisRemappable = this.getAttribute("$remappable","yes") === "yes";
 	this.genesisNames = this.getAttribute("$names","");
 	this.genesisValues = this.getAttribute("$values","");
 	// Construct parse tree
+	var isElementWidget = this.genesisType.charAt(0) !== "$",
+		nodeType = isElementWidget ? "element" : this.genesisType.substr(1),
+		nodeTag = isElementWidget ? this.genesisType : undefined;
 	var parseTreeNodes = [{
-		type: this.genesisType,
-		tag: this.genesisTag,
+		type: nodeType,
+		tag: nodeTag,
 		attributes: {},
 		orderedAttributes: [],
 		children: this.parseTreeNode.children || [],
