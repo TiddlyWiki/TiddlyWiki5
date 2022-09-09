@@ -7,11 +7,11 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.3.0">> The genesis widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
+<<.from-version "5.3.0">> The <<.wlink GenesisWidget>> widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
 
 ! Content and Attributes
 
-The content of the `<$genesis>` widget is used as the content of the dynamically created widget.
+The content of the <<.wlink GenesisWidget>> widget is used as the content of the dynamically created widget.
 
 |!Attribute |!Description |
 |$type |The type of widget or element to create (an initial `$` indicates a widget, otherwise an HTML element will be created) |
