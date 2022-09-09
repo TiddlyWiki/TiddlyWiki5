@@ -223,7 +223,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							variables[name] = param["default"];
 						}
 					});
-					var result = this.wiki.filterTiddlers(srcVariable.value,this.makeFakeWidgetWithVariables(variables)).join("");
+					var result = this.wiki.filterTiddlers(srcVariable.value,this.makeFakeWidgetWithVariables(variables),this.wiki.makeTiddlerIterator([]))[0] || "";
 					parser = this.wiki.parseText(this.transcludeType,result || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
 				} else {
 					// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
