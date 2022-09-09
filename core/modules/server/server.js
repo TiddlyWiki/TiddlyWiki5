@@ -243,6 +243,16 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
+Server.prototype.isOriginApproved = function(origin) {
+	// Check if any of the originFilters applies
+	var approved = this.wiki.filterTiddlers("[[" + origin + "]] :cascade[all[shadows+tiddlers]tag[$:/tags/CorsFilter]get[text]] +[!is[blank]]");
+	// Optionally output debug info
+	if(this.get("debug-level") !== "none" && (this.boot.origin !== origin)) {
+		$tw.utils.log('CORS request: boot.origin=' + this.boot.origin + ' request.origin=' + origin + ' ' + ((this.boot.origin === origin) || approved.length > 0?'approved':'denied'))
+	}
+	return (this.boot.origin === origin) || approved.length > 0;
+}
+
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
 	// Compose the state object
@@ -257,6 +267,15 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.sendResponse = sendResponse.bind(self,request,response);
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
+	// Check for the CORS header
+	if(request.headers["origin"] && this.isOriginApproved(request.headers["origin"])) {
+		// add the corsHeader to the response
+		response.setHeader('Access-Control-Allow-Origin',request.headers["origin"])
+	} else if (request.headers["origin"]) {
+		response.writeHead(403,"'Origin' header not approved from '" + request.headers["origin"] + "'");
+		response.end();
+		return;
+	}
 	// Check for the CSRF header if this is a write
 	if(!this.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
