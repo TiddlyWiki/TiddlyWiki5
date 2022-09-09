@@ -42,7 +42,7 @@ Compute the internal state of the widget
 */
 ParametersWidget.prototype.execute = function() {
 	var self = this;
-	this.parametersDepth = parseInt(this.getAttribute("$depth","1"),10) || 1;
+	this.parametersDepth = Math.max(parseInt(this.getAttribute("$depth","1"),10) || 1,1);
 	// Find the parent transclusions
 	var pointer = this.parentWidget,
 		depth = this.parametersDepth;
