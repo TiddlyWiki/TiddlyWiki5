@@ -40,6 +40,10 @@ Error/RetrievingSkinny: Error retrieving skinny tiddler list
 Error/SavingToTWEdit: Error saving to TWEdit
 Error/WhileSaving: Error while saving
 Error/XMLHttpRequest: XMLHttpRequest error code
+Globals/Caption: Global <<type>>: ''<<name>>''
+Globals/ListItem: ''<<name>>'' (<<type>>)
+Globals/Parameters/Caption: Parameters:
+Globals/Text/Caption: Text:
 InternalJavaScriptError/Title: Internal JavaScript Error
 InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
 LayoutSwitcher/Description: Open the layout switcher

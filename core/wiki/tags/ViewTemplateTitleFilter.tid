@@ -1,3 +1,3 @@
 title: $:/tags/ViewTemplateTitleFilter
-list: $:/config/ViewTemplateTitleFilters/system $:/config/ViewTemplateTitleFilters/default
+list: $:/config/ViewTemplateTitleFilters/global $:/config/ViewTemplateTitleFilters/system $:/config/ViewTemplateTitleFilters/default
 

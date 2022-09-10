@@ -1,0 +1,16 @@
+title: $:/core/ui/MoreSideBar/Globals
+tags: $:/tags/MoreSideBar
+caption: {{$:/language/SideBar/Globals/Caption}}
+
+<$list filter="[all[tiddlers+shadows]prefix[$:/global/]sort[]]">
+<div class="tc-menu-list-item">
+<$link>
+<$let
+	name={{{ [<currentTiddler>removeprefix[$:/global/]] }}}	
+	type={{{ [{!!_is_macro}match[yes]then[macro]] :else[{!!_is_function}match[yes]then[function]] :else[{!!_is_procedure}match[yes]then[procedure]] :else[{!!_is_widget}match[yes]then[widget]] :else[[variable]] }}}
+>
+{{$:/language/Globals/ListItem}}
+</$let>
+</$link>
+</div>
+</$list>
