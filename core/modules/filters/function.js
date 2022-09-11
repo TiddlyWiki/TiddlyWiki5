@@ -25,18 +25,7 @@ exports.function = function(source,operator,options) {
 			var value = operator.operands[1 + index]; // Skip over the first operand that gives the function name
 			variables[param.name] = value === undefined ? param["default"] || "" : value;
 		});
-		var list = options.wiki.filterTiddlers(customDefinition.srcVariable.value,options.widget.makeFakeWidgetWithVariables(variables),source);
-		if(operator.prefix === "!") {
-			var results = [];
-			source(function(tiddler,title) {
-				if(list.indexOf(title) === -1) {
-					results.push(title);
-				}
-			});
-			return results;
-		} else {
-			return list;
-		}
+		return options.wiki.filterTiddlers(customDefinition.srcVariable.value,options.widget.makeFakeWidgetWithVariables(variables),source);
 	}
 	// Return the input list if the function wasn't found
 	var results = [];
