@@ -18,4 +18,4 @@ The mapping between the parameters is //positional//, with each consecutive para
 
 <<.tip "Compare with the similar [[filter|filter Operator]] and [[subfilter|subfilter Operator]] operators which take a filter strings as their parameter instead of a named function, and does not permit parameters to be passed">>
 
-<<.operator-examples "filter">>
+<<.operator-examples "function">>

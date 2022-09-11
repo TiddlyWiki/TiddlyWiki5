@@ -17,3 +17,5 @@ The content of the <<.wlink FillWidget>> widget is used as the content to be pas
 
 |!Attribute |!Description |
 |$name |The name of the slot to be filled |
+
+<<.warning """The $name attribute must be specified as a literal string""">>
