@@ -38,8 +38,12 @@ exports.function = function(source,operator,options) {
 			return list;
 		}
 	}
-	// Return an empty list if the function wasn't found
-	return [];
+	// Return the input list if the function wasn't found
+	var results = [];
+	source(function(tiddler,title) {
+		results.push(title);
+	});
+	return results;
 };
 
 })();
