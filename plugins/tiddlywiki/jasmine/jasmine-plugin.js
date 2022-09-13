@@ -14,14 +14,6 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 
 var TEST_TIDDLER_FILTER = "[type[application/javascript]tag[$:/tags/test-spec]]";
 
-// Ensure this startup module is executed in the right order.
-// In Node.js, Jasmine calls `process.exit()` with a non-zero exit code if there's
-// any failed tests. Because of that, we want to make sure all critical
-// startup modules are run before this one.
-// * The "commands" module handles the --rendertiddler command-line flag,
-//   which is typically given in order to export an HTML file that can be opened with
-//   a browser to run tests.
-
 /*
 function for running tests
 
@@ -122,6 +114,8 @@ exports.runTests = function(callback) {
 			path: "$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core"
 		};
 		// 'jasmine/jasmine.js' references `process.exit`, among other properties
+		// It will call 'exit' after it's done, which gives us an
+		// opportunity to resynchronize and finish any following commands.
 		context.process = Object.create(process);
 		context.process.exit = function(code) {
 			// If jasmine's exit code is non-zero, tests failed. Abort any

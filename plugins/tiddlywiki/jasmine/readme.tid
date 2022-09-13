@@ -3,3 +3,32 @@ title: $:/plugins/tiddlywiki/jasmine/readme
 This plugin provides a framework for running tests in the browser and under Node.js. It is based on [[Jasmine|https://jasmine.github.io/]] test framework.
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/jasmine]]
+
+!!! Usage on Node.js
+
+Jasmine is run through the `--jasmine` command. On the commandline, type `tiddlywiki --jasmine`.
+
+Alternatively, you can set up a build task for jasmine by including the following in your tiddlywiki.info file:
+
+```
+{
+	...
+	"build": {
+		...
+		"test": ["--jasmine"]
+	}
+}
+```
+
+You could then run tests by typing `tiddlywiki --build test` or just `tiddlywiki --build`. The advantage to this is it allows you to include other commands, such as one that constructs a Tiddlywiki file that can run your tests on a browser environment. A command like that might look like this:
+
+```
+		"test": [
+			"--jasmine",
+			"--rendertiddler","$:/core/save/all","test.html","text/plain"]
+```
+This will run the tests and produce a test file in your output directory.
+
+!!! Usage on a browser
+
+Once you've constructed a Tiddlywiki file using a command like the one above, you can run the tests simply by opening it. Tests run automatically, and the results will be at the bottom of the window.
