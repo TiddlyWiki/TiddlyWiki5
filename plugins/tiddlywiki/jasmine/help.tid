@@ -1,0 +1,16 @@
+title: $:/language/Help/test
+description: Run the jasmine test suite
+
+This runs all of the tests in tiddlers tagged with `$:/tags/test-spec`.  
+
+```
+--test
+```
+
+If any tests fail or are skipped, all following commands are ignored. If you have any commands which must be executed regardless of test results, execute them first.
+
+A common usage is to run the tests on the console after creating a Tiddlywiki file which will run the tests on the browser.
+
+```
+tiddlywiki --rendertiddler $:/core/save/all test.html text/plain --test
+```

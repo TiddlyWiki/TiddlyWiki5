@@ -14,7 +14,7 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 var jasmine = require("./jasmine-plugin.js");
 
 exports.info = {
-	name: "jasmine",
+	name: "test",
 	synchronous: false,
 };
 
