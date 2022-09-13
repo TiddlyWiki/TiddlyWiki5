@@ -1,23 +1,25 @@
 title: $:/core/ui/ViewTemplate/body/global
 
+\whitespace trim
+
 \procedure display-global()
 <div class="tc-global-tiddler-body">
-<div class="tc-global-tiddler-body-heading">
-<h2 class="tc-global-tiddler-body-type">
-<$let
-	name={{{ [<currentTiddler>removeprefix[$:/global/]] }}}	
-	type={{{ [{!!_is_macro}match[yes]then[macro]] :else[{!!_is_function}match[yes]then[function]] :else[{!!_is_procedure}match[yes]then[procedure]] :else[{!!_is_widget}match[yes]then[widget]] :else[[variable]] }}}
->
-{{$:/language/Globals/Caption}}
-</$let>
-</h2>
-<$list filter="[<currentTiddler>has[_parameters]]" variable="ignore">
-{{$:/language/Globals/Parameters/Caption}}
-<pre class="tc-global-tiddler-body-details"><code><$text text={{!!_parameters}}/></code></pre>
-</$list>
-</div>
-{{$:/language/Globals/Text/Caption}}
-<$transclude tiddler="$:/core/ui/ViewTemplate/body/code"/>
+	<div class="tc-global-tiddler-body-heading">
+		<h2 class="tc-global-tiddler-body-type">
+			<$let
+				name={{{ [<currentTiddler>removeprefix[$:/global/]] }}}	
+				type={{{ [{!!_is_macro}match[yes]then[macro]] :else[{!!_is_function}match[yes]then[function]] :else[{!!_is_procedure}match[yes]then[procedure]] :else[{!!_is_widget}match[yes]then[widget]] :else[[variable]] }}}
+			>
+				{{$:/language/Globals/Caption}}
+			</$let>
+		</h2>
+		<$list filter="[<currentTiddler>has[_parameters]]" variable="ignore">
+			{{$:/language/Globals/Parameters/Caption}}
+			<pre class="tc-global-tiddler-body-details"><code><$text text={{!!_parameters}}/></code></pre>
+		</$list>
+	</div>
+	{{$:/language/Globals/Text/Caption}}
+	<$transclude tiddler="$:/core/ui/ViewTemplate/body/code"/>
 </div>
 \end
 
