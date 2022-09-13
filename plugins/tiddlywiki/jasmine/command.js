@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/jasmine/command.js
 type: application/javascript
 module-type: command
 
-The main module of the Jasmine test plugin for TiddlyWiki5
+The command which executes jasmine on the command line for TiddlyWiki5
 
 \*/
 
@@ -25,7 +25,8 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
-	jasmine.runTests(this.callback);
+	var specFilter = this.params[0];
+	jasmine.runTests(this.callback,specFilter);
 };
 
 exports.Command = Command;

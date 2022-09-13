@@ -25,7 +25,7 @@ repository is https://github.com/jasmine/jasmine-npm.
 They're all locally checked into the `./files` directory.
 */
 
-exports.runTests = function(callback) {
+exports.runTests = function(callback,specFilter) {
 	// Set up a shared context object.
 	var context = {
 		console: console,
@@ -138,7 +138,7 @@ exports.runTests = function(callback) {
 	// In a browser environment, jasmine-core/boot.js calls `execute()` for us.
 	// In Node.js, we call it manually.
 	if(!$tw.browser) {
-		nodeJasmineWrapper.execute();
+		nodeJasmineWrapper.execute(null,specFilter);
 	}
 };
 
