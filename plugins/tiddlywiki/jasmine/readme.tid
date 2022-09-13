@@ -20,14 +20,14 @@ Alternatively, you can set up a build task for jasmine by including the followin
 }
 ```
 
-You could then run tests by typing `tiddlywiki --build test` or just `tiddlywiki --build`. The advantage to this is it allows you to include other commands, such as one that constructs a Tiddlywiki file that can run your tests on a browser environment. A command like that might look like this:
+You could then run tests by typing `tiddlywiki --build test` or just `tiddlywiki --build`. The advantage to this is it allows you to include other commands to run as well. See `tiddlywiki --help test` for more information.
 
+This will run the tests and produce a test file in your output directory.
 ```
 		"test": [
 			"--test",
 			"--rendertiddler","$:/core/save/all","test.html","text/plain"]
 ```
-This will run the tests and produce a test file in your output directory.
 
 !! Usage on a browser
 
