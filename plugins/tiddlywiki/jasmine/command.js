@@ -16,6 +16,7 @@ var jasmine = require("./jasmine-plugin.js");
 exports.info = {
 	name: "jasmine",
 	synchronous: false,
+	namedParameterMode: true
 };
 
 var Command = function(params,commander,callback) {
@@ -25,7 +26,7 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
-	var specFilter = this.params[0];
+	var specFilter = this.params.spec;
 	jasmine.runTests(this.callback,specFilter);
 };
 
