@@ -6,7 +6,7 @@ This plugin provides a framework for running tests in the browser and under Node
 
 !! Usage on Node.js
 
-On the command line, type `tiddlywiki --test`.
+On the command line, type `tiddlywiki --jasmine`.
 
 Alternatively, you can set up a build task for jasmine by including the following in your tiddlywiki.info file:
 
@@ -15,7 +15,7 @@ Alternatively, you can set up a build task for jasmine by including the followin
 	...
 	"build": {
 		...
-		"test": ["--test"]
+		"test": ["--jasmine"]
 	}
 }
 ```
@@ -26,7 +26,7 @@ This will run the tests and produce a test file in your output directory.
 
 ```
 		"test": [
-			"--test",
+			"--jasmine",
 			"--rendertiddler","$:/core/save/all","test.html","text/plain"]
 ```
 

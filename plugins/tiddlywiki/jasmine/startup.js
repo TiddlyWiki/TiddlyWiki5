@@ -27,7 +27,7 @@ if($tw.browser) {
 	// Sept 2022. If it's been four years, this notice can probably come out.
 	exports.startup = function() {
 		if(!jasmine.testsWereRun()) {
-			process.stdout.write("Jasmine: no \"--test\" command given, so skipping tests\n");
+			process.stdout.write("Jasmine: no \"--jasmine\" command given, so skipping tests\n");
 		}
 	}
 	// We make this check after the commands are run.

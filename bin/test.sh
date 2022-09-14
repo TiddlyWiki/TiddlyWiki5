@@ -9,7 +9,7 @@ node ./tiddlywiki.js \
 	--verbose \
 	--version \
 	--rendertiddler $:/core/save/all test.html text/plain \
-	--test \
+	--jasmine \
 	|| exit 1
 
 echo To run the tests in a browser, open "editions/test/output/test.html"

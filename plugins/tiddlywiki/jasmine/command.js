@@ -14,7 +14,7 @@ The command which executes jasmine on the command line for TiddlyWiki5
 var jasmine = require("./jasmine-plugin.js");
 
 exports.info = {
-	name: "test",
+	name: "jasmine",
 	synchronous: false,
 };
 

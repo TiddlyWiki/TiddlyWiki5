@@ -1,10 +1,10 @@
-title: $:/language/Help/test
+title: $:/language/Help/jasmine
 description: Run the jasmine test suite
 
 This runs all of the tests in tiddlers tagged with `$:/tags/test-spec`.
 
 ```
---test [<specFilter>]
+--jasmine [<specFilter>]
 ```
 
 The "specFilter" is an optional argument to run only specific suites or tests. It's a regular expression which will be matched against the full name of every test to see whether to run it. The full name of a test is its assigned name prepended with the names of all containing suites. For instance, to run only the following test:
@@ -20,5 +20,5 @@ If any tests fail or are skipped, all following commands are ignored. If you hav
 A common usage is to run the tests on the console after creating a Tiddlywiki file which will run the tests on the browser.
 
 ```
-tiddlywiki --rendertiddler $:/core/save/all test.html text/plain --test
+tiddlywiki --rendertiddler $:/core/save/all test.html text/plain --jasmine
 ```
