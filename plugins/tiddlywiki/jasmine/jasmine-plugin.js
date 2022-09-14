@@ -13,6 +13,11 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 "use strict";
 
 var TEST_TIDDLER_FILTER = "[type[application/javascript]tag[$:/tags/test-spec]]";
+var TESTS_DONE = false;
+
+exports.testsWereRun = function() {
+	return TESTS_DONE;
+};
 
 /*
 function for running tests
@@ -53,6 +58,10 @@ exports.runTests = function(callback,specFilter) {
 	//    Further more, we don't have access to the `global` object when this code
 	//    is executed, so we use the `context` object instead.
 	context.global = $tw.browser ? window : context;
+
+	// We set this early rather than at the end for simplicity. The browser
+	// and node.js environments don't end the same way.
+	TESTS_DONE = true;
 
 	function evalInContext(title) {
 		var code = $tw.wiki.getTiddlerText(title,"");
