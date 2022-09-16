@@ -1,5 +1,5 @@
 created: 20141002133113496
-modified: 20150221215644000
+modified: 20220909111836951
 tags: Concepts Reference
 title: Variables
 type: text/vnd.tiddlywiki
@@ -9,6 +9,8 @@ A <<.def variable>> is a snippet of text that can be accessed by name within a p
 A new variable is defined using a <<.wlink SetWidget>> widget, and is then available to any of the children of that widget, including transcluded content. A <<.wid set>> widget can reuse an existing name, thus binding a different snippet to that name for the duration of the widget's children.
 
 The <<.wlink ListWidget>> widget also sets a particular variable (<<.var currentTiddler>> by default) to each listed title in turn.
+
+Variables can also be defined as [[Global Definitions]].
 
 For an overview of how to use variables, see [[Variables in WikiText]].
 

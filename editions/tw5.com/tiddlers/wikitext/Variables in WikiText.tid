@@ -1,13 +1,13 @@
 caption: Variables
 created: 20141002141231992
-modified: 20150221221850000
+modified: 20220909111836951
 tags: WikiText
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
 
 See also the [[introduction to the concept of variables|Variables]].
 
-To transclude the value of a variable, use the [[macro call syntax|Macro Calls in WikiText]] with no parameters. You can also use a <<.wlink MacroCallWidget>> widget.
+To transclude the value of a variable, use the [[macro call syntax|Macro Calls in WikiText]] or the <<.wlink TranscludeWidget>> widget with the `$variable` attribute.
 
 A [[macro|Macros]] snippet can contain `$(name)$` as a [[placeholder|Macro Definitions in WikiText]] for which the value of the variable of that name will be substituted.
 
