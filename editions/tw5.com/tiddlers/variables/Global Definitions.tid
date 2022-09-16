@@ -9,11 +9,7 @@ tags: Concepts Reference Variables
 
 !! Defining Globals
 
-Previously, definitions of procedures, widgets, functions and macros were made available globally by tagging them with `$:/tags/Macro`. While this mechanism is still supported, it suffers from several disadvantages and so is not recommended for new applications:
-
-* Performance is poor because 
-
-THe new way to define global procedures, widgets, functions and macros is to place them in tiddlers titled with the name of the global prefixed with `$:/global/`.
+Previously, definitions of procedures, widgets, functions and macros were made available globally by tagging them with `$:/tags/Macro`. While this mechanism is still supported, it suffers from several disadvantages and so is not recommended for new applications. The new way to define global procedures, widgets, functions and macros is to place them in tiddlers titled with the name of the global prefixed with `$:/global/`.
 
 For example, the global variable `foo` would be defined in a tiddler called `$:/global/foo`. Accessing the variable `<<foo>>` then acts as a shortcut for accessing the underlying global variable tiddler.
 
