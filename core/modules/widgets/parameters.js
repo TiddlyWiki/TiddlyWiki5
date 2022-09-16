@@ -70,7 +70,7 @@ ParametersWidget.prototype.execute = function() {
 		// Assign any metaparameters
 		$tw.utils.each(pointer.getTransclusionMetaParameters(),function(getValue,name) {
 			var variableName = self.getAttribute("$" + name);
-			if(variableName !== undefined) {
+			if(variableName) {
 				self.setVariable(variableName,getValue(name));
 			}
 		});

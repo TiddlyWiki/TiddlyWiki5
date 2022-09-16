@@ -330,11 +330,11 @@ Get one of the special parameters to be provided by the parameters widget
 TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
 	var self = this;
 	return {
-		"parseAsInline": function() {
-			return self.parseAsInline ? "yes" : "no";
+		"parseMode": function() {
+			return self.parseAsInline ? "inline" : "block";
 		},
 		"parseTreeNodes": function() {
-			return JSON.stringify(self.parseTreeNode);
+			return JSON.stringify(self.parseTreeNode.children || []);
 		},
 		"slotFillParseTreeNodes": function() {
 			return JSON.stringify(self.slotFillParseTrees);
