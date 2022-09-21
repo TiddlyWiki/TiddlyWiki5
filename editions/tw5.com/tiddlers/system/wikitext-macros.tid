@@ -46,15 +46,11 @@ open the ''example edition'' in a new window
 
 <$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
 
-```
-$src$
-```
+<$codeblock code=<<__src__>>/>
 
 That renders as:
 
-$$$text/vnd.tiddlywiki
-$src$
-$$$
+<$macrocall $name="__src__"/>
 
 ... and the underlying HTML is:
 
@@ -69,15 +65,11 @@ $$$
 
 <$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
 
-```
-$src$
-```
+<$codeblock code=<<__src__>>/>
 
 That renders as:
 
-$$$text/vnd.tiddlywiki
-$src$
-$$$
+<$macrocall $name="__src__"/>
 </div>
 \end
 
