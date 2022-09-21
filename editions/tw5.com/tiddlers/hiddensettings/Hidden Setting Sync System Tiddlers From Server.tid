@@ -1,0 +1,13 @@
+created: 20220909094340097
+modified: 20220909094340097
+title: Hidden Setting: Sync System Tiddlers From Server
+tags: [[Hidden Settings]]
+
+<<.from-version "5.1.23">> Determines whether system tiddlers are synced from the server under Node.js. (Note that this is a one-way setting; system tiddlers are always synced //to// the server).
+
+* `no` -- system tiddlers are not synced from the server (default)
+* `yes` -- system tiddlers are synced from the server
+
+Engaging sync of system tiddlers means that tiddlers such as $:/StoryList and $:/HistoryList get synced, which can lead to unexpected outcomes when multiple users are connected to the same server at the same time (it means that the story sequence is synced between all the users).
+
+$:/config/SyncSystemTiddlersFromServer
