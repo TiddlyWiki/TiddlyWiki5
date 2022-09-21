@@ -1,5 +1,5 @@
 created: 20220728145925343
-modified: 20220728150440771
+modified: 20220917073942912
 tags: Definitions
 title: Brackets
 type: text/vnd.tiddlywiki
@@ -10,5 +10,5 @@ WikiText syntax uses a number of different types of brackets. Their names are sh
 |`()` |Round brackets |Parenthesis |Not used in WikiText |
 |`[]` |Square brackets |Brackets |[[Links|Linking in WikiText]], [[Filters|Filters]] |
 |`{}` |Curly brackets |Braces |[[Text references|TextReference]], [[Filtered attributes|HTML in WikiText]] |
-|`<>` |Angle brackets |Chevrons |[[HTML elements and widgets|HTML in WikiText]], [[Macros|Macros in WikiText]] |
+|`<>` |Angle brackets |Chevrons |[[HTML elements and widgets|HTML in WikiText]], [[Macros]] |
 

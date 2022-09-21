@@ -1,13 +1,13 @@
 caption: Variables
 created: 20141002141231992
-modified: 20220909111836951
+modified: 20220917075007507
 tags: WikiText
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
 
 See also the [[introduction to the concept of variables|Variables]].
 
-To transclude the value of a variable, use the [[macro call syntax|Macro Calls in WikiText]] or the <<.wlink TranscludeWidget>> widget with the `$variable` attribute.
+To transclude the value of a variable, use the [[macro call syntax|Macro Calls]] or the <<.wlink TranscludeWidget>> widget with the `$variable` attribute.
 
 A [[macro|Macros]] snippet can contain `$(name)$` as a [[placeholder|Macro Definitions in WikiText]] for which the value of the variable of that name will be substituted.
 
@@ -22,7 +22,7 @@ eg="""<$set name=animal value=zebra>
 
 !! Example: defining a macro
 
-The `\define` pragma below [[defines a macro|Macros in WikiText]] called <<.var tags-of-current-tiddler>>. The macro returns the value of the tiddler's <<.field tags>> field, and can be accessed from anywhere else in the same tiddler (or in any tiddler that [[imports|ImportVariablesWidget]] it).
+The `\define` pragma below [[defines a macro|Macro Definitions]] called <<.var tags-of-current-tiddler>>. The macro returns the value of the tiddler's <<.field tags>> field, and can be accessed from anywhere else in the same tiddler (or in any tiddler that [[imports|ImportVariablesWidget]] it).
 
 <$importvariables filter="$:/editions/tw5.com/macro-examples/tags-of-current-tiddler">
 <$codeblock code={{$:/editions/tw5.com/macro-examples/tags-of-current-tiddler}}/>

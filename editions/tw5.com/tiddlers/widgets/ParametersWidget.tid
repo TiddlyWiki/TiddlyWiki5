@@ -1,6 +1,6 @@
 caption: parameters
 created: 20220909111836951
-modified: 20220909111836951
+modified: 20220917113745884
 tags: Widgets
 title: ParametersWidget
 type: text/vnd.tiddlywiki
@@ -9,9 +9,9 @@ type: text/vnd.tiddlywiki
 
 There are shortcuts for common scenarios that can often make it unnecessary to use the <<.wlink ParametersWidget>> widget directly:
 
-* the `\parameters` [[pragma|Pragma]]
-* the `\procedure` [[pragma|Pragma]] for declaring procedure
-* the `\widgets` [[pragma|Pragma]] for declaring custom widgets
+* the [[Pragma: \parameters]]
+* the [[Pragma: \procedure]] for declaring procedure
+* the [[Pragma: \widget]] for declaring custom widgets
 * the `_parameters` field of tiddlers containing [[Global Definitions]]
 
 The <<.wlink ParametersWidget>> widget must be used directly in the following situations:

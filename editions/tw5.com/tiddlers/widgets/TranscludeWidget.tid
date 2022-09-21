@@ -1,6 +1,6 @@
 caption: transclude
 created: 20130824142500000
-modified: 20220909111836951
+modified: 20220917113915710
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
@@ -85,10 +85,10 @@ To pass parameters whose names start with a dollar sign `$`, prefix them with an
 There are several different ways to declare parameters within a transclusion:
 
 * the <<.wlink ParametersWidget>> widget
-* the `\parameters` [[pragma|Pragma]]
-* the `\procedure` [[pragma|Pragma]] for declaring procedure
-* the `\widgets` [[pragma|Pragma]] for declaring custom widgets
-* the `\define` [[pragma|Pragma]] for declaring macros
+* the [[Pragma: \parameters]]
+* the [[Pragma: \procedure]] for declaring procedure
+* the [[Pragma: \widgets]] for declaring custom widgets
+* the [[Pragma: \define]] for declaring macros
 
 An example of declaring parameters with the <<.wlink ParametersWidget>> widget:
 
@@ -98,7 +98,7 @@ An example of declaring parameters with the <<.wlink ParametersWidget>> widget:
 </$parameters>
 ```
 
-The `\parameters` [[pragma|Pragma]] can be used as a shortcut syntax for declaring parameters. For example:
+The `\parameters` [[Pragma: \parameters]] can be used as a shortcut syntax for declaring parameters. For example:
 
 ```
 \parameters (firstParameter:"default",secondParameter:"another default")

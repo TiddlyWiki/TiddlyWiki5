@@ -1,0 +1,52 @@
+caption: Macro Definitions
+created: 20150220181617000
+modified: 20220918115917656
+tags: WikiText Macros
+title: Macro Definitions
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+This tiddler describes the different ways in which [[macros|Macros]] can be defined.
+
+!! Macro Definition Pragma
+
+Macros are created using the [[Pragma: \define]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
+
+```
+\define mymacro(param)
+This is the macro text (param=$param$)
+\end
+```
+
+!! Macro Definition with Set Widget
+
+Macros are implemented as a special type of [[variable|Variables]] and so internally are actually defined with a <<.wlink SetWidget>> widget.
+
+```
+<$set name="mymacro" value="This is the macro text">
+...
+</$set>
+```
+
+<<.note """that it is not currently possible to specify parameters when defining a macro with the  <<.wlink SetWidget>> widget.""">>
+
+!! Importing Macro Definitions
+
+The [[Pragma: \import]] or <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions from another tiddler.
+
+!! Global Macro Definitions
+
+Macros can be made available globally by placing them in a tiddler titled with the name of the global prefixed with `$:/global/`. See [[Global Definitions]] for details.
+
+!! `$:/tags/Macro` Tag
+
+For backwards compatibility, global macros can also be defined using the [[SystemTag: $:/tags/Macro]]. The new [[Global Definitions]] mechanism is [[preferred|Macro Pitfalls]] for new applications.
+
+The tag [[SystemTag: $:/tags/Macro/View]] is used to define macros that should only be available within the main view template and the preview panel.
+
+The tag [[SystemTag: $:/tags/Macro/View/Body]] is used to define macros that should only be available within the main view template body and the preview panel.
+
+!! JavaScript Macros
+
+Macros can also be <<.js-macro-link "written as JavaScript modules">>.

@@ -1,0 +1,7 @@
+created: 20220917112931273
+modified: 20220917113254747
+tags: Pragmas
+title: Pragma: \rules
+type: text/vnd.tiddlywiki
+
+The ''\rules'' [[pragma|Pragmas]] adjusts the set of rules used to parse the remaining text.
