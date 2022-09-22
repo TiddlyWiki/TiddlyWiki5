@@ -54,9 +54,9 @@ That renders as:
 
 ... and the underlying HTML is:
 
-$$$text/vnd.tiddlywiki>text/html
-$src$
-$$$
+<$wikify name="html" text=<<__src__>> output="html">
+<$codeblock code=<<html>>/>
+</$wikify>
 </div>
 \end
 
