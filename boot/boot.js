@@ -2416,7 +2416,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
 	// Create the wiki store for the app
-	$tw.wiki = new $tw.Wiki();
+	$tw.wiki = new $tw.Wiki($tw.safeMode && {enableIndexers: []});
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules
