@@ -1230,13 +1230,16 @@ $tw.Wiki = function(options) {
 	this.getTiddler = function(title) {
 		if(title) {
 			var t = tiddlers[title];
-			if(t instanceof $tw.Tiddler) {
+			if(t !== undefined) {
 				return t;
-			} else if(title !== undefined && shadowTiddlers[title]) {
-				return shadowTiddlers[title].tiddler;
+			} else {
+				var s = shadowTiddlers[title];
+				if(s !== undefined) {
+					return s.tiddler;
+				}
 			}
-			return undefined;
 		}
+		return undefined;
 	};
 
 	// Get an array of all tiddler titles
