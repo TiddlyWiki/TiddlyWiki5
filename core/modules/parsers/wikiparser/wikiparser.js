@@ -116,7 +116,7 @@ WikiParser.prototype.loadRemoteTiddler = function(url) {
 */
 WikiParser.prototype.setupRules = function(proto,configPrefix) {
 	var self = this;
-	if(!$tw.safemode) {
+	if(!$tw.safeMode) {
 		$tw.utils.each(proto,function(object,name) {
 			if(self.wiki.getTiddlerText(configPrefix + name,"enable") !== "enable") {
 				delete proto[name];
