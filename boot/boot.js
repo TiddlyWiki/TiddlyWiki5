@@ -1230,13 +1230,16 @@ $tw.Wiki = function(options) {
 	this.getTiddler = function(title) {
 		if(title) {
 			var t = tiddlers[title];
-			if(t instanceof $tw.Tiddler) {
+			if(t !== undefined) {
 				return t;
-			} else if(title !== undefined && shadowTiddlers[title]) {
-				return shadowTiddlers[title].tiddler;
+			} else {
+				var s = shadowTiddlers[title];
+				if(s !== undefined) {
+					return s.tiddler;
+				}
 			}
-			return undefined;
 		}
+		return undefined;
 	};
 
 	// Get an array of all tiddler titles
@@ -2416,7 +2419,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
 	// Create the wiki store for the app
-	$tw.wiki = new $tw.Wiki();
+	$tw.wiki = new $tw.Wiki($tw.safeMode && {enableIndexers: []});
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules

@@ -39,7 +39,10 @@ Compute the internal state of the widget
 ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	var widgetPointer = this;
 	// Got to flush all the accumulated variables
-	this.variables = new this.variablesConstructor();
+	this.variables = Object.create(null);
+	if(this.parentWidget) {
+		Object.setPrototypeOf(this.variables,this.parentWidget.variables);
+	}
 	// Get our parameters
 	this.filter = this.getAttribute("filter");
 	// Compute the filter

@@ -70,6 +70,7 @@ That renders as:
 That renders as:
 
 <$macrocall $name="__src__"/>
+
 </div>
 \end
 
