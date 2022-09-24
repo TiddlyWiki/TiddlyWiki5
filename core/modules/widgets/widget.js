@@ -38,9 +38,10 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.parseTreeNode = parseTreeNode;
 	this.wiki = options.wiki;
 	this.parentWidget = options.parentWidget;
-	this.variablesConstructor = function() {};
-	this.variablesConstructor.prototype = this.parentWidget ? this.parentWidget.variables : {};
-	this.variables = new this.variablesConstructor();
+	this.variables = Object.create(null);
+	if(this.parentWidget) {
+		Object.setPrototypeOf(this.variables,this.parentWidget.variables);
+	}
 	this.document = options.document;
 	this.attributes = {};
 	this.children = [];
