@@ -109,7 +109,7 @@ Parameters are available here as the variables <<firstParameter>> and <<secondPa
 
 Transcluded content can define special named locations called slots. At the point of transclusion, blocks of wikitext can be passed to the <<.wlink TranscludeWidget>> widget to fill those slots.
 
-Slots work very similarly to parameters except that they can contain structured wikitext, and not just plain text.
+Slots work very similarly to parameters except that they can contain structured wikitext, and not just plain text. The primary advantage of slots over parameters is that the contents do not need to be wrapped in quotation symbols, making it much simpler to pass complex structures.
 
 For example, here we transclude the tiddler "Example" while using the <<.wlink FillWidget>> widget to pass wikitext blocks to fill the slots called "positive" and "negative":
 
