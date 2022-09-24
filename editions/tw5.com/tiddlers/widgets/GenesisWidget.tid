@@ -1,0 +1,29 @@
+caption: genesis
+created: 20220924140702430
+modified: 20220924140702430
+tags: Widgets
+title: GenesisWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.2.4">> The <<.wlink GenesisWidget>> widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
+
+! Content and Attributes
+
+The content of the <<.wlink GenesisWidget>> widget is used as the content of the dynamically created widget.
+
+|!Attribute |!Description |
+|$type |The type of widget or element to create (an initial `$` indicates a widget, otherwise an HTML element will be created) |
+|$names |An optional filter evaluating to the names of a list of attributes to be applied to the widget |
+|$values |An optional filter evaluating to the values corresponding to the list of names specified in `$names` |
+|//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
+|//{attributes starting with $$}// |Attributes starting with two dollar signs are appplied as attributes to the output widget, but with the attribute name changed to use a single dollar sign |
+|//{attributes not starting with $}// |Any other attributes that do not start with a dollar are applied as attributes to the output widget |
+
+Note that attributes explicitly specified take precedence over attributes with the same name specified in the `$names` filter.
+
+! Examples
+
+<$macrocall $name='wikitext-example-without-html' 
+src='<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>'/>
