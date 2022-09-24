@@ -10,8 +10,6 @@ A new variable is defined using a <<.wlink SetWidget>> widget, and is then avail
 
 The <<.wlink ListWidget>> widget also sets a particular variable (<<.var currentTiddler>> by default) to each listed title in turn.
 
-Variables can also be defined as [[Global Definitions]].
-
 For an overview of how to use variables, see [[Variables in WikiText]].
 
 Despite the term <<.word variable>>, each snippet is a constant string. The apparent variability is actually the result of the presence of multiple variables with the same name in different parts of the widget tree.

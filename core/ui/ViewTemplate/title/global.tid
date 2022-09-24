@@ -1,6 +1,0 @@
-title: $:/core/ui/ViewTemplate/title/global
-
-\whitespace trim
-<h2 class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
-<span class="tc-system-title-prefix">$:/global/</span><$text text={{{ [<currentTiddler>removeprefix[$:/global/]] }}}/>
-</h2>

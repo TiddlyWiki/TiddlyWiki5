@@ -1,6 +1,5 @@
 title: $:/config/ViewTemplateTitleFilters/
 tags: $:/tags/ViewTemplateTitleFilter
 
-global: [prefix[$:/global/]then[$:/core/ui/ViewTemplate/title/global]]
 system: [prefix[$:/]then[$:/core/ui/ViewTemplate/title/system]]
 default: [[$:/core/ui/ViewTemplate/title/default]]

@@ -156,20 +156,6 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	// If the variable doesn't exist in the parent widget then look for a macro module
 	var text = this.evaluateMacroModule(name,actualParams);
 	if(text === undefined) {
-		// Check for a shadow variable tiddler
-		var tiddler = this.wiki.getTiddler("$:/global/" + name);
-		if(tiddler) {
-			return processVariable({
-				value: tiddler.getFieldString("text"),
-				params: $tw.utils.parseParameterDefinition(tiddler.getFieldString("_parameters"),{requireParenthesis: true}),
-				isMacroDefinition: tiddler.getFieldString("_is_macro") === "yes",
-				isWidgetDefinition: tiddler.getFieldString("_is_widget") === "yes",
-				isProcedureDefinition: tiddler.getFieldString("_is_procedure") === "yes",
-				isFunctionDefinition: tiddler.getFieldString("_is_function") === "yes"
-			});
-		}
-	}
-	if(text === undefined) {
 		text = options.defaultValue;
 	}
 	return {

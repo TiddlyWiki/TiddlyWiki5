@@ -12,7 +12,6 @@ There are shortcuts for common scenarios that can often make it unnecessary to u
 * the [[Pragma: \parameters]]
 * the [[Pragma: \procedure]] for declaring procedure
 * the [[Pragma: \widget]] for declaring custom widgets
-* the `_parameters` field of tiddlers containing [[Global Definitions]]
 
 The <<.wlink ParametersWidget>> widget must be used directly in the following situations:
 

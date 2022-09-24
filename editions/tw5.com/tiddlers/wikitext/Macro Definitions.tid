@@ -35,13 +35,9 @@ Macros are implemented as a special type of [[variable|Variables]] and so intern
 
 The [[Pragma: \import]] or <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions from another tiddler.
 
-!! Global Macro Definitions
-
-Macros can be made available globally by placing them in a tiddler titled with the name of the global prefixed with `$:/global/`. See [[Global Definitions]] for details.
-
 !! `$:/tags/Macro` Tag
 
-For backwards compatibility, global macros can also be defined using the [[SystemTag: $:/tags/Macro]]. The new [[Global Definitions]] mechanism is [[preferred|Macro Pitfalls]] for new applications.
+Global macros can be defined using the [[SystemTag: $:/tags/Macro]].
 
 The tag [[SystemTag: $:/tags/Macro/View]] is used to define macros that should only be available within the main view template and the preview panel.
 
