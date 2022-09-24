@@ -1,6 +1,6 @@
 caption: Macro Definitions
 created: 20220917154902906
-modified: 20220921093842230
+modified: 20220922073434674
 tags: WikiText Macros
 title: Macro Parameter Handling
 type: text/vnd.tiddlywiki
@@ -42,6 +42,8 @@ Hi, I'm $(name)$ and I live in $(address)$.
 <<say-hi-using-variables>>
 </$let>
 """/>
+
+<<.warning """It is important to note that if the text being inserted contains any substitution tokens then they will in turn be processed. This can lead to unexpected results.""">>
 
 !! Accessing Parameters as Variables
 
