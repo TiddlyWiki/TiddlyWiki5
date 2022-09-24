@@ -501,25 +501,29 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var self = this;
 	options = options || {};
 	// Check whether this node type is defined by a custom widget definition
-	var variableDefinitionName = "$" + parseTreeNode.type,
-		variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true}),
-		isOverrideable = function() {
-			// Widget is overrideable if it has a double dollar user defined name, or if it is an existing JS widget and we're not in safe mode
-			return parseTreeNode.type.charAt(0) === "$" || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
-		};
-	if(!parseTreeNode.isNotRemappable && isOverrideable() && variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
-		var newParseTreeNode = {
-			type: "transclude",
-			children: parseTreeNode.children,
-			isBlock: parseTreeNode.isBlock
-		};
-		$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,"$variable",variableDefinitionName);
-		$tw.utils.each(parseTreeNode.attributes,function(attr,name) {
-			// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of transclude
-			name = name.charAt(0) === "$" ? "$" + name : name;
-			$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,$tw.utils.extend({},attr,{name: name}));
-		});
-		parseTreeNode = newParseTreeNode;
+	var variableDefinitionName = "$" + parseTreeNode.type;
+	if(this.variables[variableDefinitionName]) {
+		var isOverrideable = function() {
+				// Widget is overrideable if it has a double dollar user defined name, or if it is an existing JS widget and we're not in safe mode
+				return parseTreeNode.type.charAt(0) === "$" || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
+			};
+		if(!parseTreeNode.isNotRemappable && isOverrideable()) { 
+			var variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true});
+			if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
+				var newParseTreeNode = {
+					type: "transclude",
+					children: parseTreeNode.children,
+					isBlock: parseTreeNode.isBlock
+				};
+				$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,"$variable",variableDefinitionName);
+				$tw.utils.each(parseTreeNode.attributes,function(attr,name) {
+					// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of transclude
+					name = name.charAt(0) === "$" ? "$" + name : name;
+					$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,$tw.utils.extend({},attr,{name: name}));
+				});
+				parseTreeNode = newParseTreeNode;
+			}
+		}
 	}
 	// Get the widget class for this node type
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
