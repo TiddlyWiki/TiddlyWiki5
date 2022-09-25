@@ -14,7 +14,8 @@ Here are some webpages with tips and tutorials related to ~TiddlyWiki.
 
 ! <$link><$view field="title"/></$link>
 
-<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">
+Posted <$view field="modified" format="relativedate"/></div>
 
 <$transclude/>
 

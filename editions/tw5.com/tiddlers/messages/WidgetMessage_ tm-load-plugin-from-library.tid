@@ -16,7 +16,7 @@ The `tm-load-plugin-from-library` message load the specified tiddler or plugin f
 The following snippet will install the CodeMirror plugin from the official plugin library:
 
 ```
-<$button>
+<$button>\
 <$action-sendmessage $message="tm-load-plugin-from-library" title="$:/plugins/tiddlywiki/codemirror" url="https://tiddlywiki.com/library/v5.1.11/index.html"/>
 Install CodeMirror
 </$button>

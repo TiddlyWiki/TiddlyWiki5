@@ -5,7 +5,8 @@ title: $:/plugins/tiddlywiki/railroad/example
 
 Notation:
 
-<pre><code><$text text={{$:/plugins/tiddlywiki/railroad/example-source}}/></code></pre>
+<pre>
+<code><$text text={{$:/plugins/tiddlywiki/railroad/example-source}}/></code></pre>
 
 Diagram:
 

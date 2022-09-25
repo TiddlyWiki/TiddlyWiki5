@@ -3,7 +3,8 @@ tags: $:/tags/Macro
 
 <!-- This macro does not use \whitespace trim because it could affect the caption -->
 \define thumbnail(link,icon,color,background-color,image,caption,width:"280",height:"157")
-<$link to="""$link$"""><div class="tc-thumbnail-wrapper"
+<$link to="""$link$""">
+<div class="tc-thumbnail-wrapper"
 ><div
 	class="tc-thumbnail-image"
 	style="width:$width$px;height:$height$px;"><$reveal
@@ -26,7 +27,8 @@ tags: $:/tags/Macro
 \end
 
 \define thumbnail-right(link,icon,color,background-color,image,caption,width:"280",height:"157")
-<div class="tc-thumbnail-right-wrapper"><<thumbnail """$link$""" """$icon$""" """$color$""" """$background-color$""" """$image$""" """$caption$""" """$width$""" """$height$""">></div>
+<div class="tc-thumbnail-right-wrapper">
+<<thumbnail """$link$""" """$icon$""" """$color$""" """$background-color$""" """$image$""" """$caption$""" """$width$""" """$height$""">></div>
 \end
 
 \define list-thumbnails(filter,width:"280",height:"157")

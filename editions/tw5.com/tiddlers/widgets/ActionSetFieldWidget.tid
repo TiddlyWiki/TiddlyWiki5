@@ -26,13 +26,13 @@ The ''action-setfield'' widget is invisible. Any content within it is ignored.
 Here is an example of a pair of buttons that open the control panel directly to specified tabs. They work by using ''action-setfield'' to set the state tiddler for the control panel tabs.
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Appearance"/>
 <$action-navigate $to="$:/ControlPanel"/>
 Go to Control Panel "Appearance" tab
 </$button>
 
-<$button>
+<$button>\
 <$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Settings"/>
 <$action-navigate $to="$:/ControlPanel"/>
 Go to Control Panel "Settings" tab
@@ -41,7 +41,7 @@ Go to Control Panel "Settings" tab
 Here is an example of a button that assigns tags and fields to the tiddler HelloThere, and then navigates to it and opens the tiddler info panel on the "Fields" tab:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-setfield $tiddler="HelloThere" tags="NewTag [[Another New Tag]]" color="red"/>
 <$action-setfield $tiddler="$:/state/popup/tiddler-info--1779055697" text="(568,1443,33,39)"/>
 <$action-setfield $tiddler="$:/state/tab--1890574033" text="$:/core/ui/TiddlerInfo/Fields"/>
@@ -52,7 +52,7 @@ Modify ~HelloThere
 Here is an example of a button that assigns tags and fields to the tiddler HelloThere, and then initiates editing it:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-setfield $tiddler="HelloThere" tags="MoreTag [[Further More Tags]]" color="green"/>
 <$action-sendmessage $message="tm-edit-tiddler" $param="HelloThere"/>
 Edit ~HelloThere
@@ -61,7 +61,7 @@ Edit ~HelloThere
 Here is an example of a button that opens the control panel directly to the "Appearance" tabs:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-setfield $tiddler="$:/state/tab-1749438307" $field="text" $value="$:/core/ui/ControlPanel/Appearance"/>
 <$action-navigate $to="$:/ControlPanel"/>
 Go to Control Panel "Appearance" tab

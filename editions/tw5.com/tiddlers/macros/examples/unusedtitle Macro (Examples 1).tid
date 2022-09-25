@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki
 <<unusedtitle template:"$count:2$-new">>
 ```
 
-<$button actions=<<testCreate>> >
+<$button actions=<<testCreate>> >\
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
 Create Tiddler
 </$button>
@@ -29,7 +29,7 @@ Create Tiddler
 <<unusedtitle baseName:"new" template:"$count:2$-$basename$">>
 ```
 
-<$button actions=<<testNew>>>
+<$button actions=<<testNew>>>\
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
 New Tiddler
 </$button>
@@ -38,7 +38,7 @@ New Tiddler
 <<unusedtitle baseName:"new" separator:"-" template:"$count:2$$separator$$basename$">>
 ```
 
-<$button actions=<<testCreate1>>>
+<$button actions=<<testCreate1>>>\
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
 Create Tiddler
 </$button>

@@ -27,7 +27,7 @@ src='Your name: <$edit-text tiddler="$:/temp/yourName" tag="input" default="Your
 Your message:
 <$edit-text tiddler="$:/temp/yourMessage" default="Your message"/>
 
-<$button>
+<$button>\
 <$action-sendmessage $message="tm-modal" $param="SampleModal" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}}/>
 Click me!
 </$button>'/>

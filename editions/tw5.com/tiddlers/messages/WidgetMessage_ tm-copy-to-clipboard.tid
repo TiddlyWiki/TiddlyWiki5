@@ -19,7 +19,7 @@ This message is usually generated with the ButtonWidget. It is handled by the Ti
 This example copies the current time to the clipboard:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button message="tm-copy-to-clipboard" param=<<now>>>
+src='<$button message="tm-copy-to-clipboard" param=<<now>>>\
 Copy date to clipboard
 </$button>'/>
 

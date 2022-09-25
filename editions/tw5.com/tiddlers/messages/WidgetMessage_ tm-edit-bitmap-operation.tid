@@ -53,7 +53,7 @@ At this point the following bitmap operations have been implemented:
 An example can be seen in [[$:/core/ui/EditorToolbar/size-dropdown]]:
 
 ```
-<$button>
+<$button>\
 <$action-sendmessage
 	$message="tm-edit-bitmap-operation"
 	$param="resize"

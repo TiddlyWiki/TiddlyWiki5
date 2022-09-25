@@ -24,16 +24,16 @@ The `tm-open-external-window` message is usually generated with the ButtonWidget
 ''Examples''
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-sendmessage $message="tm-open-external-window" $param="https://tiddlywiki.com" windowName="_tiddlywiki" windowFeatures="height=500, width=900"/>
 Open ~TiddlyWiki - Action
 </$button>
 
-<$button>
+<$button>\
 <$action-sendmessage $message="tm-open-external-window" $param="https://developer.mozilla.org/en-US/docs/Web/API/Window/open" windowName="_tiddlywiki" windowFeatures="height=400, width=600"/>
 Open Mozilla Help - Action
 </$button>
 
-<$button message="tm-open-external-window" param="https://tiddlywiki.com" >
+<$button message="tm-open-external-window" param="https://tiddlywiki.com" >\
 Open ~TiddlyWiki - Button
 </$button>'/>

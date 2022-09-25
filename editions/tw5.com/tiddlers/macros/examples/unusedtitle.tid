@@ -6,6 +6,7 @@ type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1" eg="""<<unusedtitle>>"""/>
 ''The following example works best if there is an open tiddler in draft mode, or there is a tiddler named "New Tiddler".'' So you can see the automatic numbering.
+
 <$macrocall $name=".example" n="2" eg="""<<unusedtitle separator:"-">>"""/>
 <$macrocall $name=".example" n="3" eg="""<<unusedtitle baseName:"anotherBase">>"""/>
 <$macrocall $name=".example" n="4" eg="""<<unusedtitle baseName:"About" separator:"-">>"""/>

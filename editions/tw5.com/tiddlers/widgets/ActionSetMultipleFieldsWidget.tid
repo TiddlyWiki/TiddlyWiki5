@@ -25,7 +25,7 @@ The ''action-setmultiplefields'' widget is invisible. Any content within it is i
 Here is an example of button that uses the data in [[Days of the Week]] to assign fields `day-Monday`, `day-Tuesday` etc. to the tiddler "HelloThere":
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-setmultiplefields $tiddler="HelloThere" $fields="[list[Days of the Week]addprefix[day-]]" $values="[list[Days of the Week]]"/>
 Click me!
 </$button>'/>

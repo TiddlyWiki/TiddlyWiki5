@@ -18,9 +18,11 @@ type: text/vnd.tiddlywiki
 \end
 
 You can use the [[search-replace Operator]] in combination with the [[sortsub Operator]] to ignore stop words like "A" and "The" at the beginning of titles when sorting. (Note for example that "A Tale of Two Cities" sorts under "T" rather than "A")
+
 <<.operator-example 6 "[enlist<book-list>sortsub<compare-without-stopwords>]">>
 
 You can also customise the listing so that "A Tale of Two Cities" is listed as "Tale of Two Cities, A" but still links to the correct tiddler.
+
 <<wikitext-example-without-html """<ul>
 <$list filter="[enlist<book-list>sortsub<compare-without-stopwords>]">
 <li><$link><$text text={{{[<currentTiddler>search-replace:i:regexp[(^The |A )(.*)],[$2, $1]]}}}/></$link></li>

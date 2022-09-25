@@ -98,6 +98,6 @@ And this is some text
 
 Here is a simple example how to use text references with field content to control the  RevealWidget. If the field ``jeremy`` is populated with text ``tiddlywiki``, a message will be displayed.
 
-<<wikitext-example-without-html '<$reveal type="match" state="!!jeremy" text="tiddlywiki">
+<<wikitext-example-without-html '<$reveal type="match" state="!!jeremy" text="tiddlywiki">\
 ~TiddlyWiki!
 </$reveal>'>>

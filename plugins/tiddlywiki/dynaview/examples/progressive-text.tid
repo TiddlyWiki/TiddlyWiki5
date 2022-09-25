@@ -6,7 +6,8 @@ caption: Progressive Text
 
 ''N.B. This example only works in Safari at the moment''
 
-<pre><div class="tc-dynaview-zoom-visible-1-and-above" style="font-size: 0.7em;line-height:1.5;">
+<pre>
+<div class="tc-dynaview-zoom-visible-1-and-above" style="font-size: 0.7em;line-height:1.5;">
          'Fury said to a
          mouse, That he
         met in the

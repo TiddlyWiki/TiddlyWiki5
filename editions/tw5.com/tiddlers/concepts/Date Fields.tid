@@ -26,4 +26,4 @@ As an example, the <<.field created>> field of this tiddler has the value <<.val
 Dates can be [[converted to other formats|DateFormat]] for display:
 
 <$macrocall $name="wikitext-example-without-html"
-src="""<$view field="created" format="date" template="DDD DDth MMM YYYY"/>""">
+src="""<$view field="created" format="date" template="DDD DDth MMM YYYY"></$view>"""/>

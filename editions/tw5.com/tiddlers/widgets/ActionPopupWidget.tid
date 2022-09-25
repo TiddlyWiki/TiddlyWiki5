@@ -27,7 +27,7 @@ The ''action-popup'' widget is invisible. Any content within it is ignored.
 Here is an example of button that triggers the "more" button in the sidebar "Tools" tab. You may need to scroll to see the popup
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" $value="$:/core/ui/SideBar/Tools"/>
 <$action-popup $state="$:/state/popup/more-2053862905" $coords="(0,20,0,0)"/>
 Click me!

@@ -27,7 +27,7 @@ The ''action-sendmessage'' widget is invisible. Any content within it is ignored
 Here is an example of button that displays both a notification and a wizard, and creates a new tiddler with tags and text:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-sendmessage $message="tm-modal" $param="SampleWizard"/>
 <$action-sendmessage $message="tm-notify" $param="SampleNotification"/>
 <$action-sendmessage $message="tm-new-tiddler" title="This is newly created tiddler" tags="OneTag [[Another Tag]]" text=<<now "Today is DDth, MMM YYYY">>/>

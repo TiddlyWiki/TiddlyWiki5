@@ -16,7 +16,7 @@ The value doesn't update automatically, like a ticking clock. It updates wheneve
 
 ''Note'': The format string `[UTC]YYYY0MM0DD0hh0mm0ssXXX` will return a date string representing the UTC time-stamp as it is used in the ~TiddlyWiki `created` and `modified` time-stamp fields.
 
-<<.from-version 5.2.0>><<.tip "You can now pass literal parameters to the `now` macro in filters. For example, this filter will return all tiddlers created today: `[all[tiddlers]] :filter[get[created]format:date[YYYY0MM0DD]match<now YYYY0MM0DD>]`">>
-
+<<.from-version 5.2.0>>
+<<.tip "You can now pass literal parameters to the `now` macro in filters. For example, this filter will return all tiddlers created today: `[all[tiddlers]] :filter[get[created]format:date[YYYY0MM0DD]match<now YYYY0MM0DD>]`">>
 
 <<.macro-examples "now">>

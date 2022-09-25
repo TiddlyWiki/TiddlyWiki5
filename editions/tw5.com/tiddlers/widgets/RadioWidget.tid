@@ -36,7 +36,7 @@ Using the radio widget in index mode requires the //index// attribute to specify
 
 This example sets the `Tree Frog` index in the tiddler AnimalColours:
 
-<$macrocall $name="wikitext-example-without-html" src="""<$tiddler tiddler="AnimalColours">
+<$macrocall $name="wikitext-example-without-html" src="""<$tiddler tiddler="AnimalColours">\
 <$radio index="Tree Frog" value="green"> green</$radio>
 <$radio index="Tree Frog" value="brown"> brown</$radio>
 </$tiddler>"""/>

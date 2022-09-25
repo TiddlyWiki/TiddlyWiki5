@@ -12,4 +12,5 @@ type: text/vnd.tiddlywiki
 <$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: <$text text=<<__version__>>/></$link>. Use <$link to=<<__superseded__>>><$text text=<<__superseded__>>/></$link> instead
 \end
 
-<pre><$view field="text"/></pre>
+<pre>
+<$view field="text"/></pre>

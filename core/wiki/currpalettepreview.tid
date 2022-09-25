@@ -41,7 +41,8 @@ background-color: $(swatchColour)$;
 </$set>
 \end
 \whitespace trim
-<div class="tc-swatches-horiz"><$list filter="
+<div class="tc-swatches-horiz">
+<$list filter="
 foreground
 background
 muted-foreground

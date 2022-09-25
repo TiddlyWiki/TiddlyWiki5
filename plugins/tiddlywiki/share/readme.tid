@@ -1,6 +1,7 @@
 title: $:/plugins/tiddlywiki/share/readme
 
-<div class="tc-message-box">Do not install this plugin unless you understand exactly what it does</div>
+<div class="tc-message-box">
+Do not install this plugin unless you understand exactly what it does</div>
 
 This experimental plugin provides tools to share tiddlers via URLs, comprising:
 

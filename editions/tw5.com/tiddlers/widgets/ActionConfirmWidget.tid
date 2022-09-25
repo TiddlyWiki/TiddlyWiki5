@@ -22,7 +22,7 @@ The ''action-confirm'' widget is invisible. Any content within it is only proces
 Here is an example of a button that asks the user for confirmation, before deleting the caption and tags fields of the current tiddler:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-confirm $message="Do you wish to delete the caption and tags?">
 <$action-deletefield caption tags/>
 Delete "caption" and "tags"
@@ -32,7 +32,7 @@ Delete "caption" and "tags"
 Here is an example of a button that uses the optional `$prompt` attribute to control whether to prompt the user before deleting the text field of the tiddler HelloThere:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button>
+src='<$button>\
 <$action-confirm $message="Do you wish to delete the text field?" $prompt={{$:/state/promptUser}}>
 <$action-deletefield $tiddler="HelloThere" $field="text"/>
 </$action-confirm>

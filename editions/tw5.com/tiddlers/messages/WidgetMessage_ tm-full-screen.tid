@@ -14,15 +14,15 @@ The fullscreen message is handled by the TiddlyWiki core.
 
 
 <$macrocall $name='wikitext-example-without-html'
-src='<$button message="tm-full-screen">
+src='<$button message="tm-full-screen">\
 Full screen toggle
 </$button>
 
-<$button message="tm-full-screen" param="enter">
+<$button message="tm-full-screen" param="enter">\
 Full screen enter
 </$button>
 
-<$button message="tm-full-screen" param="exit">
+<$button message="tm-full-screen" param="exit">\
 Full screen exit
 </$button>'/>
 

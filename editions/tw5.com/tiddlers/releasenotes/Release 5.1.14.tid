@@ -32,7 +32,7 @@ There are several improvements to [[Drag and Drop]]:
 
 A new theme called "Heavier" thickens TiddlyWiki's default lightweight fonts. A variant "Tight-Heavier" combines the "Heavier" theme with the existing "Tight" theme:
 
-<$button>
+<$button>\
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/heavier"/>
 Try out the "Heavier" theme
 </$button> <$button>
