@@ -41,10 +41,7 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.parseTreeNode = parseTreeNode;
 	this.wiki = options.wiki;
 	this.parentWidget = options.parentWidget;
-	this.variables = Object.create(null);
-	if(this.parentWidget) {
-		Object.setPrototypeOf(this.variables,this.parentWidget.variables);
-	}
+	this.variables = Object.create(this.parentWidget ? this.parentWidget.variables : null);
 	this.document = options.document;
 	this.attributes = {};
 	this.children = [];
@@ -128,30 +125,32 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	options = options || {};
 	var self = this,
 		actualParams = options.params || [],
-		currWidget = options.allowSelfAssigned ? this : this.parentWidget,
-		processVariable = function(variable) {
-			var originalValue = variable.value,
-				value = originalValue,
-				params = [];
-			// Only substitute parameter and variable references if this variable was defined with the \define pragma
-			if(variable.isMacroDefinition) {
-				params = self.resolveVariableParameters(variable.params,actualParams);
-				// Substitute any parameters specified in the definition
-				$tw.utils.each(params,function(param) {
-					value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
-				});
-				value = self.substituteVariableReferences(value,options);
-			}
-			return {
-				text: value,
-				params: params,
-				srcVariable: variable,
-				isCacheable: originalValue === value
-			};
-		};
+		variable;
+	if(options.allowSelfAssigned) {
+		variable = this.variables[name];
+	} else {
+		variable = this.parentWidget && this.parentWidget.variables[name];
+	}
 	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
-	if(currWidget && name in currWidget.variables) {
-		return processVariable(currWidget.variables[name]);
+	if(variable) {
+		var originalValue = variable.value,
+			value = originalValue,
+			params = [];
+		// Only substitute parameter and variable references if this variable was defined with the \define pragma
+		if(variable.isMacroDefinition) {
+			params = self.resolveVariableParameters(variable.params,actualParams);
+			// Substitute any parameters specified in the definition
+			$tw.utils.each(params,function(param) {
+				value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
+			});
+			value = self.substituteVariableReferences(value,options);
+		}
+		return {
+			text: value,
+			params: params,
+			srcVariable: variable,
+			isCacheable: originalValue === value
+		};
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
 	var text = this.evaluateMacroModule(name,actualParams);
