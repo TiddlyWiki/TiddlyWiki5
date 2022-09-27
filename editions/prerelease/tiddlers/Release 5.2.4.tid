@@ -1,6 +1,6 @@
 caption: 5.2.4
-created: 20220802100223020
-modified: 20220902201505817
+created: 20220924141149286
+modified: 20220924141149286
 tags: ReleaseNotes
 title: Release 5.2.4
 type: text/vnd.tiddlywiki
@@ -31,9 +31,11 @@ Improvements to the translation features of TiddlyWiki:
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d62a16ee464fb9984b766b48504829a1a3eb143b">> problem with long presses on tiddler links triggering a preview on iOS/iPadOS
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6910">> consistency of button and input elements across browsers
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d825f1c875f5e46158c9c41c8c66471138c162d1">> edit preview to use the [[View Template Body Cascade]]
 
 ! Widget Improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6961">> new GenesisWidget that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/127f660c91020dcbb43897d954066b31af729e74">> EditTextWidget to remove the default text "Type the text for the tiddler 'foo'"
 
 ! Filter improvements
@@ -43,6 +45,10 @@ Improvements to the translation features of TiddlyWiki:
 ! Hackability Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]] and [[format Operator]]
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/c5d3d4c26e8fe27f272dda004aec27d6b66c4f60">> safe mode to disable wiki store indexers
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/166a1565843878083fb1eba47c73b8e67b78400d">> safe mode to prevent globally disabling parser rules
+
+
 
 ! Bug Fixes
 
@@ -54,21 +60,29 @@ Improvements to the translation features of TiddlyWiki:
 
 ! Node.js Improvements
 
-* 
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6947">> console logging to avoid spaces and `<empty string>` message
 
 ! Performance Improvements
 
-* 
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/53d229592df76c6dd607e40be5bea4d5e063c48e">> performance of `wiki.getTiddler()`
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/81ac9874846b3ead275f67010fcfdb49f3d2f43c">> performance of variable prototype chain handling
+
 
 ! Acknowledgements
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+bestony
 BramChen
+flibbles
 fu-sen
+Marxsal
 oflg
 pmario
+rmunn
+roma0104
+tw-FRed
 twMat
 xcazin
 """>>
