@@ -72,7 +72,7 @@ TranscludeWidget.prototype.execute = function() {
 		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
 			parseTreeNodes = [{type: "error", attributes: {
 				"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
-			}];
+			}}];
 		}
 	}
 	// Construct the child widgets
