@@ -12,6 +12,9 @@ Widget base class
 /*global $tw: false */
 "use strict";
 
+/* Maximum permitted depth of the widget tree for recursion detection */
+var MAX_WIDGET_TREE_DEPTH = 1000;
+
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -359,27 +362,49 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 };
 
 /*
+Get the number of ancestor widgets for this widget
+*/
+Widget.prototype.getAncestorCount = function() {
+	if(this.ancestorCount === undefined) {
+		if(this.parentWidget) {
+			this.ancestorCount = this.parentWidget.getAncestorCount() + 1;
+		} else {
+			this.ancestorCount = 0;
+		}
+	}
+	return this.ancestorCount;
+};
+
+/*
 Make child widgets correspondng to specified parseTreeNodes
 */
 Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	options = options || {};
 	this.children = [];
 	var self = this;
-	// Create set variable widgets for each variable
-	$tw.utils.each(options.variables,function(value,name) {
-		var setVariableWidget = {
-			type: "set",
-			attributes: {
-				name: {type: "string", value: name},
-				value: {type: "string", value: value}
-			},
-			children: parseTreeNodes
-		};
-		parseTreeNodes = [setVariableWidget];
-	});
-	$tw.utils.each(parseTreeNodes || (this.parseTreeNode && this.parseTreeNode.children),function(childNode) {
-		self.children.push(self.makeChildWidget(childNode));
-	});
+	// Check for too much recursion
+	if(this.getAncestorCount() > MAX_WIDGET_TREE_DEPTH) {
+		this.children.push(this.makeChildWidget({type: "error", attributes: {
+			"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
+		}}));
+	} else {
+		// Create set variable widgets for each variable
+		$tw.utils.each(options.variables,function(value,name) {
+			var setVariableWidget = {
+				type: "set",
+				attributes: {
+					name: {type: "string", value: name},
+					value: {type: "string", value: value}
+				},
+				children: parseTreeNodes
+			};
+			parseTreeNodes = [setVariableWidget];
+		});
+		// Create the child widgets
+		$tw.utils.each(parseTreeNodes || (this.parseTreeNode && this.parseTreeNode.children),function(childNode) {
+			self.children.push(self.makeChildWidget(childNode));
+		});
+	}
 };
 
 /*
