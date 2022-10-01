@@ -6,11 +6,7 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\procedure recurse(a:0)
-<$transclude $variable="recurse" a={{{ [<a>add[1]] }}}/>
-\end
-
-<<recurse>>
+<$transclude $tiddler="Output"/>
 +
 title: ExpectedResult
 
