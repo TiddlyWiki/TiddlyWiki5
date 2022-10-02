@@ -8,13 +8,14 @@ CloseAll/Button: Cerrar todo
 ColourPicker/Recent: Recientes:
 ConfirmCancelTiddler: ¿Deseas descartar los cambios efectuados en "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: ¿Deseas borrar "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: ¿Deseas borrar <<resultCount>> tiddler(s)?
 ConfirmOverwriteTiddler: ¿Deseas sobrescribir "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Estás a punto de editar un tiddler oculto<br> Todo cambio en él afectará al sistema por defecto y pondrá en riesgo futuras actualizaciones del sistema<br> ¿Estás seguro de querer editar "<$text text=<<title>>/>"?
 ConfirmAction: ¿Desea continuar?
 Count: Número
 DefaultNewTiddlerTitle: Nuevo Tiddler
 Diffs/CountMessage: <<diff-count>> diferencias
-DropMessage: Suéltalo aquí o pulsa ''ESC'' para cancelar
+DropMessage: Suéltalo ahora o pulsa ''ESC'' para cancelar
 Encryption/Cancel: Cancelar
 Encryption/ConfirmClearPassword: ¿Deseas borrar la contraseña? <br> Revocarás el cifrado que se aplica para guardar este wiki
 Encryption/PromptSetPassword: Especifica nueva contraseña para este TiddlyWiki
