@@ -27,7 +27,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\(\??)define\s+([^(\s]+)\(\s*([^)]*)\)(\s*\r?\n)?/mg;
+	this.matchRegExp = /^\\define\s+([^(\s]+)\(\s*([^)]*)\)(\s*\r?\n)?/mg;
 };
 
 /*
@@ -37,7 +37,7 @@ exports.parse = function() {
 	// Move past the macro name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
-	var paramString = this.match[3],
+	var paramString = this.match[2],
 		params = [];
 	if(paramString !== "") {
 		var reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))?/mg,
@@ -56,7 +56,7 @@ exports.parse = function() {
 	}
 	// Is this a multiline definition?
 	var reEnd;
-	if(this.match[4]) {
+	if(this.match[3]) {
 		// If so, the end of the body is marked with \end
 		reEnd = /(\r?\n\\end[^\S\n\r]*(?:$|\r?\n))/mg;
 	} else {
@@ -84,11 +84,8 @@ exports.parse = function() {
 		params: params,
 		isMacroDefinition: true
 	}];
-	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[2]);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[1]);
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);
-	if(this.match[1] === "?") {
-		$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"conditional","yes");
-	}
 	return parseTreeNodes;
 };
 

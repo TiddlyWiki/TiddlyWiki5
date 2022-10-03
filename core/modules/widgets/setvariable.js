@@ -47,21 +47,17 @@ SetWidget.prototype.execute = function() {
 	this.setIndex = this.getAttribute("index");
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
-	this.setConditional = this.getAttribute("conditional","no") === "yes";
-	// Ignore if this is a conditional assignment and the variable already has a value
-	if(!this.setConditional || this.getVariableInfo(this.setName).text === undefined) {
-		// Set context variable
-		if(this.parseTreeNode.isMacroDefinition) {
-			this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,true);
-		} else if(this.parseTreeNode.isFunctionDefinition) {
-			this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: true});
-		} else if(this.parseTreeNode.isProcedureDefinition) {
-			this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
-		} else if(this.parseTreeNode.isWidgetDefinition) {
-			this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
-		} else {
-			this.setVariable(this.setName,this.getValue());
-		}
+	// Set context variable
+	if(this.parseTreeNode.isMacroDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,true);
+	} else if(this.parseTreeNode.isFunctionDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: true});
+	} else if(this.parseTreeNode.isProcedureDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+	} else if(this.parseTreeNode.isWidgetDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+	} else {
+		this.setVariable(this.setName,this.getValue());
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
@@ -115,7 +111,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 SetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.name || changedAttributes.filter || changedAttributes.select || changedAttributes.tiddler || (this.setTiddler && changedTiddlers[this.setTiddler]) || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes.emptyValue || changedAttributes.conditional ||
+	if(changedAttributes.name || changedAttributes.filter || changedAttributes.select || changedAttributes.tiddler || (this.setTiddler && changedTiddlers[this.setTiddler]) || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes.emptyValue ||
 	   (this.setFilter && this.getValue() != this.variables[this.setName].value)) {
 		this.refreshSelf();
 		return true;
