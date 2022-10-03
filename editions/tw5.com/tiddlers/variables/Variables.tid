@@ -1,5 +1,5 @@
 created: 20141002133113496
-modified: 20220909111836951
+modified: 20220930195819232
 tags: Concepts Reference
 title: Variables
 type: text/vnd.tiddlywiki
@@ -21,3 +21,4 @@ By themselves, the snippets are <<.em not>> parsed as WikiText. However, a varia
 The <<.mlink dumpvariables>> macro lists all variables (including macros) that are available at that position in the widget tree.
 
 ~TiddlyWiki's core has [[several variables|Core Variables]] built in.
+

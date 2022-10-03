@@ -1,6 +1,6 @@
 caption: Variables
 created: 20141002141231992
-modified: 20220917075007507
+modified: 20220930195709700
 tags: WikiText
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
@@ -34,3 +34,4 @@ The `\define` pragma below [[defines a macro|Macro Definitions]] called <<.var t
 This example uses the <<.olink backlinks>> [[operator|Filter Operators]] to list all tiddlers that link to this one.
 
 <$macrocall $name=".example" n="3" eg="""<<list-links filter:"[<currentTiddler>backlinks[]]">>"""/>
+

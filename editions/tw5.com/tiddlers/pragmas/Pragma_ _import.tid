@@ -1,8 +1,17 @@
 created: 20220917113054582
-modified: 20220917113329624
+modified: 20221003120802195
 tags: Pragmas
 title: Pragma: \import
 type: text/vnd.tiddlywiki
 
-The ''\import'' [[pragma|Pragmas]] 
+The ''\import'' [[pragma|Pragmas]] is used to import definitions from other tiddlers that are identified with a filter. It is a shortcut syntax for the ImportVariablesWidget.
 
+```
+\import <filter>
+```
+
+For example:
+
+```
+\import [all[shadows+tiddlers]tag[$:/tags/Macro]]
+```
