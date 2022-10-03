@@ -13,7 +13,7 @@ dependents: 插件的相依插件列表
 description: 插件的說明、描述
 draft.of: 草稿條目，包含條目的標題、標籤、欄位 ...
 draft.title: 草稿條目的標題
-footer: wizard 的註腳
+footer: 互動視窗的註腳
 hide-body: 若設定為 ''yes''，檢視範本將隱藏條目的主體
 icon: 條目的標題含有與條目關聯的圖示
 library: 若設定為 ''yes''，表示條目應該被儲存為一個 JavaScript 程式庫
@@ -28,7 +28,7 @@ plugin-type: 套件條目的類型
 released: TiddlyWiki 的釋出日期
 revision: 條目存放於伺服器中的修訂版本
 source: 條目的網址
-subtitle: 一個 wizard 的副標題
+subtitle: 互動視窗的副標題
 tags: 條目的標籤清單
 text: 條目的內文
 throttle.refresh: 如果存在，則限制此條目的刷新
