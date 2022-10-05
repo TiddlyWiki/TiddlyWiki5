@@ -18,6 +18,8 @@ CopyToClipboard/Caption: skopiuj do schowka
 CopyToClipboard/Hint: Skopiuj ten tekst do schowka
 Delete/Caption: usuń
 Delete/Hint: Usuń tiddlera
+DeleteTiddlers/Caption: usuń tiddlery
+DeleteTiddlers/Hint: Usuwa tiddlery
 Edit/Caption: edytuj
 Edit/Hint: Edytuj tego tiddlera
 Encryption/Caption: szyfrowanie
