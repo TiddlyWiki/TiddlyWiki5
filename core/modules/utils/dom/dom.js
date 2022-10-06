@@ -213,7 +213,7 @@ exports.addEventListeners = function(domNode,events) {
 				handler = eventInfo.handlerObject;
 			}
 		}
-		domNode.addEventListener(eventInfo.name,handler,!!eventInfo.capture);
+		domNode.addEventListener(eventInfo.name,handler,false);
 	});
 };
 
