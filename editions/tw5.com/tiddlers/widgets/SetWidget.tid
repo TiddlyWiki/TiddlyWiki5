@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20220909111836951
+modified: 20220523075522407
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -51,6 +51,19 @@ src='<$set name=anotherVariable value="myVariable">
     <$text text=<<myVariable>>/>
   </$set>
 </$set>' />
+
+<<<
+
+!! Conditional Variable Assignment
+
+This form of the set variable widget chooses one of two specified values according to whether a filter evaluates to an empty list. Here's an example that sets a variable according to whether the current tiddler is called "myMagicTitle":
+
+<<<
+
+<$macrocall $name='wikitext-example-without-html' 
+src="""<$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" value="It's magic" emptyValue="It's not magic">
+<$text text=<<myVariable>>/>
+</$set>""" />
 
 <<<
 
