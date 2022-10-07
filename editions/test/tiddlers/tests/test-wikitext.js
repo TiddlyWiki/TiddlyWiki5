@@ -63,6 +63,22 @@ describe("WikiText tests", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@color:red;\n<div>\n\nContent</div>\n@@")).toBe("<div style=\"color:red;\"><p>Content</p></div>");
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@color:red;\n---\n@@")).toBe("<hr style=\"color:red;\">");
 	});
+	it("handles inline style wikitext notation", function() {
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@highlighted@@ text")).toBe('<p>some <span class="tc-inline-style">highlighted</span> text</p>');
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@color:green;.tc-inline-style 1 style and 1 class@@ text")).toBe('<p>some <span class=" tc-inline-style " style="color:green;">1 style and 1 class</span> text</p>');
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@background-color:red;red@@ text")).toBe('<p>some <span style="background-color:red;">red</span> text</p>');
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@.myClass class@@ text")).toBe('<p>some <span class=" myClass ">class</span> text</p>');
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@.myClass.secondClass 2 classes@@ text")).toBe('<p>some <span class=" myClass secondClass ">2 classes</span> text</p>');
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@background:red;.myClass style and class@@ text")).toBe('<p>some <span class=" myClass " style="background:red;">style and class</span> text</p>');
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
+			"some @@background:red;color:white;.myClass 2 style and 1 class@@ text")).toBe('<p>some <span class=" myClass " style="background:red;color:white;">2 style and 1 class</span> text</p>');
+	});
 });
 
 })();
