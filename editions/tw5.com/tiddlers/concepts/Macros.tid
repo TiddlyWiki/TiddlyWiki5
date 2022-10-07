@@ -1,12 +1,12 @@
 created: 20140211171341271
-modified: 20220917154956636
+modified: 20221007144757675
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
 
 !! Introduction
 
-A <<.def macro>> is a named snippet of text. It is typically defined with the [[Pragma: \define]]:
+A <<.def macro>> is a named snippet of text. They are typically defined with the [[Pragma: \define]]:
 
 ```
 \define my-macro(parameter:"Default value")
@@ -26,11 +26,11 @@ The parameters that are specified in the macro call are substituted for special 
 *  `$parameter-name$` is replaced with the value of the named parameter
 * `$(variable-name)$` is replaced with the value of the named [[variable|Variables]]).
 
-<<.from-version "5.3.0">> Macros have been superseded by [[Procedures]], [[Custom Widgets]] and [[Functions]] which together provide more robust and flexible ways to encapsulate and re-use code. It is now recommended to only use macros when textual substitution is specifically required.
+<<.from-version "5.3.0">> Macros have been [[superseded|Macro Pitfalls]] by [[Procedures]], [[Custom Widgets]] and [[Functions]] which together provide more robust and flexible ways to encapsulate and re-use code. It is now recommended to only use macros when textual substitution is specifically required.
 
 !! How Macros Work
 
-Macros are implemented as a special type of [[variable|Variables]]. The only thing that distinguishes them from ordinary variables is the way that the parameters are handled.
+Macros are implemented as a special kind of [[variable|Variables]]. The only thing that distinguishes them from ordinary variables is the way that the parameters are handled.
 
 !! Using Macros
 

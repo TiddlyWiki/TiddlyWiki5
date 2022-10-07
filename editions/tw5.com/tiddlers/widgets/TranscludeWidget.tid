@@ -1,6 +1,6 @@
 caption: transclude
 created: 20130824142500000
-modified: 20220917113915710
+modified: 20221007123821494
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
@@ -87,7 +87,7 @@ There are several different ways to declare parameters within a transclusion:
 * the <<.wlink ParametersWidget>> widget
 * the [[Pragma: \parameters]]
 * the [[Pragma: \procedure]] for declaring procedure
-* the [[Pragma: \widgets]] for declaring custom widgets
+* the [[Pragma: \widget]] for declaring custom widgets
 * the [[Pragma: \define]] for declaring macros
 
 An example of declaring parameters with the <<.wlink ParametersWidget>> widget:

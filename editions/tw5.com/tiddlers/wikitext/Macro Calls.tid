@@ -1,6 +1,6 @@
 caption: Macro Calls
 created: 20150220182252000
-modified: 20220918115347941
+modified: 20221007132734417
 tags: WikiText Macros
 title: Macro Calls
 type: text/vnd.tiddlywiki
@@ -25,7 +25,7 @@ Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`
 
 A more formal [[presentation|Macro Call Syntax]] of this syntax is also available.
 
-See some [[examples|Macro Calls in WikiText (Examples)]] and discussion about [[parser modes|WikiText parser mode: macro examples]]
+See some [[examples|Macro Calls in WikiText (Examples)]] and discussion about [[parser modes|WikiText parser mode: macro examples]].
 
 !! Macro Calls with <<.wlink TranscludeWidget>> Widget
 

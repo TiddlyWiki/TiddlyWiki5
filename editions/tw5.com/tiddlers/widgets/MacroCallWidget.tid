@@ -1,11 +1,13 @@
 caption: macrocall
 created: 20131024141900000
-modified: 20220909111836951
-tags: Widgets
+modified: 20221007121724264
+tags: Widgets $:/deprecated
 title: MacroCallWidget
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.0">> The <<.wlink MacroCallWidget>> widget is now deprecated. While it will continue to work, users are advised to use the <<.wlink TranscludeWidget>> widget, converting the `$name` attribute to `$variable`.
+<<.deprecated-since "5.3.0" "TranscludeWidget">>
+
+The <<.wlink MacroCallWidget>> widget is deprecated. While it will continue to work, users are now advised to use the <<.wlink TranscludeWidget>> widget, converting the `$name` attribute to `$variable`.
 
 For example,
 
