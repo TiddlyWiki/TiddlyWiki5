@@ -2,11 +2,5 @@ title: $:/core/ui/Actions/new-image
 tags: $:/tags/Actions
 description: create a new image tiddler
 
-\define get-type()
-image/$(imageType)$
-\end
-\define get-tags() $(textFieldTags)$ $(tagsFieldTags)$
 \whitespace trim
-<$vars imageType={{$:/config/NewImageType}} textFieldTags={{$:/config/NewJournal/Tags}} tagsFieldTags={{$:/config/NewJournal/Tags!!tags}}>
-<$action-sendmessage $message="tm-new-tiddler" type=<<get-type>> tags=<<get-tags>>/>
-</$vars>
+<$action-sendmessage $message="tm-new-tiddler" type={{{ [{$:/config/NewImageType}addprefix[image/]] }}}/>

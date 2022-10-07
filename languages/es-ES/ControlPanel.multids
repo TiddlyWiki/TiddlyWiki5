@@ -27,10 +27,17 @@ Basics/Tiddlers/Prompt: Número de tiddlers
 Basics/Title/Prompt: Título de este ~TiddlyWiki:
 Basics/Username/Prompt: Nombre de usuario
 Basics/Version/Prompt: Versión de ~TiddlyWiki
+Cascades/Caption: Cascadas
+Cascades/Hint: Estas reglas globales se utilizan para elegir dinámicamente ciertas plantillas. El resultado de la cascada es el resultado del primer filtro en la secuencia que devuelve un resultado
+Cascades/TagPrompt: Filtros etiquetados <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Tipos de editor
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Editores usados para ciertos tipos específicos de tiddler
 EditorTypes/Type/Caption: Tipo
+EditTemplateBody/Caption: Editar Cuerpo de Plantilla
+EditTemplateBody/Hint: La plantilla de edición predeterminada utiliza esta cascada de reglas para elegir dinámicamente la plantilla para editar el cuerpo de un tiddler.
+FieldEditor/Caption: Editor de Campos
+FieldEditor/Hint: Esta cascada de reglas se usa para elegir dinámicamente la plantilla para representar un campo en función de su nombre. Se utiliza dentro de la plantilla de edición.
 Info/Caption: Información
 Info/Hint: Información acerca de este TiddlyWiki
 KeyboardShortcuts/Add/Caption: Añadir atajo
@@ -191,6 +198,8 @@ Settings/TitleLinks/Yes/Description: Mostrar como enlaces
 Settings/MissingLinks/Caption: Enlaces Wiki
 Settings/MissingLinks/Hint: Elige si quieres vincular a tiddlers que aún no existen
 Settings/MissingLinks/Description: Habilitar enlaces a tiddlers inexistentes
+StoryTiddler/Caption: Tiddler de Historia
+StoryTiddler/Hint: Esta cascada de reglas se usa para elegir dinámicamente la plantilla para mostrar un tiddler en el río de la historia.
 StoryView/Caption: Vista
 StoryView/Prompt: Vista actual
 Stylesheets/Caption: Hojas de estilo
@@ -201,6 +210,10 @@ Theme/Caption: Tema
 Theme/Prompt: Tema actual
 TiddlerFields/Caption: Campos de tiddler
 TiddlerFields/Hint: Esta es la colección completa de campos de tiddler (TiddlerFields) actualmente en uso en este wiki, que incluye los tiddlers de sistema, pero no los ocultos
+TiddlerColour/Caption: Color del Tiddler
+TiddlerColour/Hint: Esta cascada de reglas se utiliza para elegir dinámicamente el color de un tiddler (utilizado para el icono y la etiqueta asociada).
+TiddlerIcon/Caption: Icono del Tiddler
+TiddlerIcon/Hint: Esta cascada de reglas se utiliza para elegir dinámicamente el icono de un tiddler.
 Toolbars/Caption: Barras de herramientas
 Toolbars/EditToolbar/Caption: Barra de edición
 Toolbars/EditToolbar/Hint: Selecciona qué botones mostrar en modo de edición
@@ -212,3 +225,7 @@ Toolbars/EditorToolbar/Hint: Elige qué botones se muestran en la barra de herra
 Toolbars/ViewToolbar/Caption: Barra de visualización
 Toolbars/ViewToolbar/Hint: Selecciona qué botones mostrar en modo de visualización
 Tools/Download/Full/Caption: Descargar el wiki completo
+ViewTemplateBody/Caption: Ver el Cuerpo de la Plantilla
+ViewTemplateBody/Hint: La plantilla de vista predeterminada utiliza esta cascada de reglas para elegir dinámicamente la plantilla para mostrar el cuerpo de un tiddler.
+ViewTemplateTitle/Caption: Ver el Título de la Plantilla
+ViewTemplateTitle/Hint: La plantilla de vista predeterminada utiliza esta cascada de reglas para elegir dinámicamente la plantilla para mostrar el título de un tiddler.

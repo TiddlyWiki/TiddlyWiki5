@@ -5,7 +5,7 @@ tags: Widgets
 title: ErrorWidget
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.0">> The <<.wlink ErrorWidget>> widget is used by the core to display error messages such as the recursion errors reported by the <<.wlink TranscludeWidget>> widget.
+<<.from-version "5.2.4">> The <<.wlink ErrorWidget>> widget is used by the core to display error messages such as the recursion errors reported by the <<.wlink TranscludeWidget>> widget.
 
 The <<.wlink ErrorWidget>> does not provide any useful functionality to end users. It is only required by the core for technical reasons.
 

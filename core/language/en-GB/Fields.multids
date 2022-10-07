@@ -13,7 +13,7 @@ dependents: For a plugin, lists the dependent plugin titles
 description: The descriptive text for a plugin, or a modal dialogue
 draft.of: For draft tiddlers, contains the title of the tiddler of which this is a draft
 draft.title: For draft tiddlers, contains the proposed new title of the tiddler
-footer: The footer text for a wizard
+footer: The footer text for a modal
 hide-body: The view template will hide bodies of tiddlers if set to ''yes''
 icon: The title of the tiddler containing the icon associated with a tiddler
 library: Indicates that a tiddler should be saved as a JavaScript library if set to ''yes''
@@ -28,7 +28,7 @@ plugin-type: The type of plugin in a plugin tiddler
 revision: The revision of the tiddler held at the server
 released: Date of a TiddlyWiki release
 source: The source URL associated with a tiddler
-subtitle: The subtitle text for a wizard
+subtitle: The subtitle text for a modal
 tags: A list of tags associated with a tiddler
 text: The body text of a tiddler
 throttle.refresh: If present, throttles refreshes of this tiddler

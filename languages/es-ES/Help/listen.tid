@@ -22,7 +22,6 @@ Todos los parámetros son opcionales con valores predeterminados seguros y se pu
 * ''readers'' - lista separada por comas de los usuarios autorizados a leer de este wiki
 * ''writers'' - lista separada por comas de los usuarios autorizados a escribir en este wiki
 * ''csrf-disable'' - establecer a "yes" para deshabilitar las comprobaciones CSRF (el valor predeterminado es "no")
-* ''sse-enabled'' - establecer a "yes" para habilitar los eventos enviados por el servidor (el valor predeterminado es "no")
 * ''root-tiddler'' - el tiddler para servir en la raíz (por defecto es "$:/core/save/all")
 * ''root-render-type'' - el tipo de contenido del tiddler raíz (por defecto es "text/plain")
 * ''root-serve-type'' - el tipo de contenido con el que se debe servir el tiddler raíz (el valor predeterminado es "text/html")

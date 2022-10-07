@@ -1,5 +1,6 @@
 .DS_Store
 .c9/
+.vscode/
 tmp/
 output/
 node_modules/
