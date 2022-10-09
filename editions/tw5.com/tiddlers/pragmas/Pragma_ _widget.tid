@@ -1,10 +1,10 @@
 created: 20221009121950630
-modified: 20221009122447180
+modified: 20221009163229920
 tags: Pragmas
 title: Pragma: \widget
 type: text/vnd.tiddlywiki
 
-The ''\widget'' [[pragma|Pragmas]] is used to [[define custom widgets|Custom Widgets]]. It is a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget.
+<<.from-version "5.3.0">> The ''\widget'' [[pragma|Pragmas]] is used to [[define custom widgets|Custom Widgets]]. It is a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget.
 
 The usual form allows custom widgets to span multiple lines:
 

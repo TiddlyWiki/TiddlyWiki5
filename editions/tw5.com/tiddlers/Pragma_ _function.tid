@@ -1,0 +1,25 @@
+created: 20221009162634214
+modified: 20221009163238956
+tags: Pragmas
+title: Pragma: \function
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">> The ''\function'' [[pragma|Pragmas]] is used to [[define custom functions|Functions]]. It is a shortcut syntax for the SetVariableWidget.
+
+The usual form allows custom functions to span multiple lines:
+
+```
+\function <function-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...)
+<multiple-line-definition-text>
+\end
+```
+
+There is also a single line form for shorter functions:
+
+```
+\function <function-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...) <single-line-definition-text>
+```
+
+The first line of the definition specifies the function name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the function. The lines that follow contain the text of the function (i.e. the snippet represented by the function name), until `\end` appears on a line by itself:
+
+See [[Functions]] for more details.

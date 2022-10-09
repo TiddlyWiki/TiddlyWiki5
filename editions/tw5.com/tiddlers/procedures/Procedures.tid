@@ -1,12 +1,12 @@
 created: 20221007124007426
-modified: 20221007144806995
+modified: 20221009163145607
 tags: Concepts Reference
 title: Procedures
 type: text/vnd.tiddlywiki
 
 !! Introduction
 
-A <<.def procedure>> is a named snippet of text. They are typically defined with the [[Pragma: \procedure]]:
+<<.from-version "5.3.0">> A <<.def procedure>> is a named snippet of text. They are typically defined with the [[Pragma: \procedure]]:
 
 ```
 \procedure my-procedure(parameter:"Default value")
