@@ -1,0 +1,25 @@
+created: 20221009121950630
+modified: 20221009122447180
+tags: Pragmas
+title: Pragma: \widget
+type: text/vnd.tiddlywiki
+
+The ''\widget'' [[pragma|Pragmas]] is used to [[define custom widgets|Custom Widgets]]. It is a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget.
+
+The usual form allows custom widgets to span multiple lines:
+
+```
+\widget <widget-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...)
+<multiple-line-definition-text>
+\end
+```
+
+There is also a single line form for shorter widgets:
+
+```
+\widget <widget-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...) <single-line-definition-text>
+```
+
+The first line of the definition specifies the widget name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the widget. The lines that follow contain the text of the widget text (i.e. the snippet represented by the widget name), until `\end` appears on a line by itself:
+
+See [[Custom Widgets]] for more details.

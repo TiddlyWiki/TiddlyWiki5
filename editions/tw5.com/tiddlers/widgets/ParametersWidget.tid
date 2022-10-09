@@ -38,12 +38,13 @@ The content of the <<.wlink ParametersWidget>> widget is the scope within which 
 
 By default, the <<.wlink ParametersWidget>> widget retrieves parameters from the immediate parent transclusion. The `$depth` attribute permits access to the parameters of parent transclusions by specifying an index to the parent to be inspected ("1" is the immediate parent, "2" is the parent of that parent, etc.). This is useful in some situations where an intervening transclusion prevents immediate access to desired parameters.
 
-!! `$parseMode`, `$slotFillParseTreeNodes` and `$params` Attributes
+!! `$parseMode`, `$parseTreeNodes`, `$slotFillParseTreeNodes` and `$params` Attributes
 
 These attributes provide low level access to the contents of the transcluding widget:
 
 * The `$params` attribute provides access to the raw parameters provided to the transcluding widget. Represented in JSON as an object with keys of the parameter names and values of the corresponding parameter values
-* The `$parseMode` attribute provides access to the raw parse tree nodes that represent the contents of the transcluding widget. Represented in JSON as an array of parse tree nodes
+* The `$parseMode` attribute contains `block` or `inline` to indicate whether the contents was parsed in block or inline mode
+* The `$parseTreeNodes` attribute provides access to the raw parse tree nodes that represent the contents of the transcluding widget. Represented in JSON as an array of parse tree nodes
 * The `$slotFillParseTreeNodes` attribute provides access to the raw parse tree nodes corresponding to the filled slots within the contents of the transcluding widget. Represented in JSON as an object with keys of the slot name and values being an array of parse tree nodes
 
 ! Examples

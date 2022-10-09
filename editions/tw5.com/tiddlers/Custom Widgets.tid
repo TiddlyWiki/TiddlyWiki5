@@ -1,5 +1,5 @@
 created: 20221007144237585
-modified: 20221007145934733
+modified: 20221009121901496
 tags: Concepts Reference
 title: Custom Widgets
 type: text/vnd.tiddlywiki
@@ -27,26 +27,58 @@ The name of the widget must start with one or two dollar signs:
 * ''Double dollar signs'' are used to define a custom widget
 ** for example, `$$mywidget` or `$$acme-logger`
 
-
- The <<.wlink "GenesisWidget">> widget  For example:
-
-
-
-
 !! Using Custom Widgets
 
-The name wrapped in double angled [[brackets|Brackets]] is used a shorthand way of [[transcluding|Transclusion]] the snippet. Each of these <<.def "procedure calls">> can supply a different set of parameters:
+Custom widgets are called in the same way as ordinary built-in widgets:
 
 ```
-<<my-procedure>>
-<<my-procedure "The parameter">>
+<$my-widget/>
+
+<$my-widget attribute="The parameter"/>
 ```
 
-The parameters that are specified in the procedure call are made available as variables.
+The attributes that are specified in the widget call are made available as parameter variables.
+
+!! Accessing Content of Custom Widgets
+
+Within the definition of a custom widget the content of the calling widget is available via the `<$slot $name="ts-raw"/>` widget. The contents of the <<.wlink SlotWidget>> widget is used as the default content if the widget was called without any content.
+
+For example:
+
+<<wikitext-example-without-html """\widget $$mywidget(one:'Jaguar')
+<$text text=<<one>>/>
+<$slot $name="ts-raw">
+	Whale
+</$slot>
+\end
+
+<$$mywidget one="Dingo">
+	Crocodile
+</$$mywidget>
+
+<$$mywidget/>""">>
 
 !! How Custom Widgets Work
 
 Custom widgets are implemented as a special kind of [[variable|Variables]]. The only thing that distinguishes them from ordinary variables is the way that they can be called as a custom widget with attributes mapped to parameters.
 
-!! Using Custom Widgets
+!! Overriding Core ~JavaScript Widgets
 
+Custom widgets can use the <<.wlink "GenesisWidget">> widget to invoke the original widget, bypassing the override. For example, here we override the <<.wlink CodeBlockWidget>> widget to add `≤≥` symbols around each string of text.
+
+
+<<wikitext-example-without-html """\widget $codeblock(code)
+<$genesis $type="$codeblock" $remappable="no" code={{{ [<code>addprefix[≤]addsuffix[≥]] }}}/>
+\end
+
+<$codeblock code="Kangaroo"/>
+
+<$codeblock code={{$:/SiteTitle}}/>
+
+```
+Python
+```
+
+<$let test="Tiger">
+<$codeblock code=<<test>>/>
+</$let>""">>

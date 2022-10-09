@@ -1,5 +1,5 @@
 created: 20141002133113496
-modified: 20221006124708656
+modified: 20221009122532111
 tags: Concepts Reference WikiText
 title: Variables
 type: text/vnd.tiddlywiki
@@ -20,7 +20,7 @@ There are several special kinds of variable that extend their basic capabilities
 
 * [[Procedures]] are snippets of text that can be passed parameters when wikified
 * [[Functions]] are snippets of text containing [[filters|Filters]] with optional named parameters
-* [[User Defined Widgets]] are snippets of text containing definitions of custom [[widget|Widgets]]
+* [[Custom Widgets]] are snippets of text containing definitions of custom [[widget|Widgets]]
 * [[Macros]] are snippets of text that can contain placeholders that are filled in with parameters whenever the macro is used
 
 Note that these special kinds of variable can only be created with the associated shortcut definition syntax.
@@ -31,7 +31,7 @@ The following core widgets are commonly used to define variables:
 
 * <<.wlink LetWidget>> widget -- the easiest way to define multiple variables
 * <<.wlink SetWidget>> widget -- the most flexible way to define a single variable
-* <<.wlink ParametersWidget>> widget -- used to declare parameter variables within [[procedures|Procedures]] and [[user defined widgets|User Defined Widgets]]
+* <<.wlink ParametersWidget>> widget -- used to declare parameter variables within [[procedures|Procedures]] and [[custom widgets|Custom Widgets]]
 * <<.wlink ListWidget>> widget -- defines a loop variable and optional counter variable
 * <<.wlink SetMultipleVariablesWidget>> widget -- allows creation of multiple variables at once where the names and values are not known in advance
 
