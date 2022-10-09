@@ -155,7 +155,7 @@ For example:
 
 ```
 <$transclude $tiddler="MissingTiddler">
-<$fill $name="ts-body">
+<$fill $name="ts-missing">
 This content is displayed if `MissingTiddler` is missing.
 </$fill>
 <$fill $name="other">
