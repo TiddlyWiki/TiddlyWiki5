@@ -1,7 +1,7 @@
 created: 20220822134140546
 modified: 20220822143631418
-tags: [[Wikitext Cheet-Sheet]]
-title: Cheet-Sheet Transclusion
+tags: [[Wikitext Cheat-Sheet]]
+title: Cheat-Sheet Transclusion
 type: text/vnd.tiddlywiki
 
 You can incorporate the content of one tiddler within another using the Transclusion notation:

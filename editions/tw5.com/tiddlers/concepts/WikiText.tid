@@ -14,6 +14,6 @@ type: text/vnd.tiddlywiki
 <<list-links filter:"[tag[WikiText]]">>
 @@
 
-!! Cheet Sheet
+!! Cheat Sheet
 
-* The [[Wikitext Cheet-Sheet]] will give you a overview about all the ~TiddlyWiki markup.
+* The [[Wikitext Cheat-Sheet]] will give you a overview about all the ~TiddlyWiki markup.

@@ -203,19 +203,19 @@ div.content {
 
 .multi-columns,
 .fourcolumns {
-  display: block;
-  column-count: 4;
-  column-gap: 1em;
+	display: block;
+	column-count: 4;
+	column-gap: 1em;
 }
 
-/* make `code` elements less distracting */
+/* Tone down `code` elements */
 .no-code-border code {
-  border: initial;
-  background-color: initial;
+	border: initial;
+	background-color: initial;
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-  .multi-columns{
-    column-count: 2;
-  }
+	.multi-columns{
+		column-count: 2;
+	}
 }

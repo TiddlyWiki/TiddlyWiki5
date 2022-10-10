@@ -1,7 +1,7 @@
 created: 20220822141712911
 modified: 20220822143610636
-tags: [[Wikitext Cheet-Sheet]]
-title: Cheet-Sheet PM
+tags: [[Wikitext Cheat-Sheet]]
+title: Cheat-Sheet PM
 type: text/vnd.tiddlywiki
 
 In order to display Tiddlers (usually the text field), the ~WikiText parser reads and interprets the content and applies ~WikiText rules. The parser has three modes:
