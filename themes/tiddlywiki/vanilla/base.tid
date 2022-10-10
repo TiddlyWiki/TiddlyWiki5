@@ -321,7 +321,7 @@ table {
 }
 
 table th, table td {
-	padding: 4px 6px 4px 6px;	/* TODO check all table related paddings, that shouldn't be needed anymore */
+	padding: 4px 6px 4px 6px;
 	border-top: 1px solid <<colour table-border>>;
 	border-left: 1px solid <<colour table-border>>;
 }
