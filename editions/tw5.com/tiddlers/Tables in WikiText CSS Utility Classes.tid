@@ -1,5 +1,5 @@
 created: 20220817153236691
-modified: 20220819122843290
+modified: 20221010074314452
 tags: [[Tables in WikiText]]
 title: Tables in WikiText CSS Utility Classes
 type: text/vnd.tiddlywiki
@@ -10,55 +10,9 @@ type: text/vnd.tiddlywiki
 
 As seen above, the resulting table is left aligned and grows to fit the content. This is the browser default layout behaviour for tables. To get another behaviour, various CSS classes can be added into the "`k` row".
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ! Utility Classes
 
 {{Utility Classes}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ! Examples
 
@@ -76,19 +30,6 @@ To center a table horizontally, use `tc-center`:
 |Footer|Footer|f
 """>>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 !! Centred Table, 80% Width
 
 To add empty left and right margins to a table that is otherwise full-tiddler-width, you can use `tc-max-width-80`
@@ -100,39 +41,6 @@ To add empty left and right margins to a table that is otherwise full-tiddler-wi
 |Header|Header|h
 """>>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 !! Table with Maximum Width
 
 To expand a table to full tiddler width, use `tc-max-width`
@@ -142,16 +50,6 @@ To expand a table to full tiddler width, use `tc-max-width`
 |Cell1 |Cell2 |
 |Cell3 |Cell4 |
 """>>
-
-
-
-
-
-
-
-
-
-
 
 !! Table with First Column Minimum Width
 
@@ -163,22 +61,6 @@ The following example shows a simple "form" where the first columns width is adj
 |Cell3 |<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
 """>>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 !! Table with Maximum Width ~TextWidgets
 
 Here, the previous "form" is styled further to give the [[TextWidget]]s full width by adding the class `tc-edit-max-width`
@@ -188,24 +70,6 @@ Here, the previous "form" is styled further to give the [[TextWidget]]s full wid
 |Cell1 |<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
 |Cell3 |<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
 """>>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 !! Table with No Borders
 

@@ -1,13 +1,12 @@
 created: 20220818093624828
-modified: 20220819122952220
+modified: 20221010074235929
 tags: WikiText
 title: Utility Classes
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.2.4">> The following outlines a few predefined CSS classes intended to make it simpler to style [[HTML block-elements|HTML Block Elements]] and [[wikitext tables|Tables in WikiText Utility Classes]].
+<<.from-version "5.2.4">> The following outlines a few predefined CSS classes intended to make it simpler to style [[HTML block-elements|HTML Block Elements]] and [[wikitext tables|Tables in WikiText CSS Utility Classes]].
 
 !! General Utility Classes
-
 
 |`tc-center` |Centres a block-element to the middle of the container |
 |`tc-max-width `|Expands a block-element to use the maximum width of the container |
