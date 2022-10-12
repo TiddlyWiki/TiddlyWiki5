@@ -220,7 +220,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						} else if(self.hasAttribute(index + "")) {
 							variables[name] = self.getAttribute(index + "");
 						} else {
-							variables[name] = param["default"];
+							variables[name] = param["default"] || "";
 						}
 					});
 					var result = this.wiki.filterTiddlers(srcVariable.value,this.makeFakeWidgetWithVariables(variables),this.wiki.makeTiddlerIterator([]))[0] || "";
