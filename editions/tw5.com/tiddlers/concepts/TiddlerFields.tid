@@ -24,7 +24,7 @@ The standard fields are:
 Other fields used by the core are:
 
 |!Field Name |!Description |
-|`class` |<<lingo class>> |
+|`class` |<<.from-version "5.1.16">> <<lingo class>> |
 |`code-body` |<<.from-version "5.2.1">> <<lingo code-body>> |
 |`color` |<<lingo color>> |
 |`description` |<<lingo description>> |
