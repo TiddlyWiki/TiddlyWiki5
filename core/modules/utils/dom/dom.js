@@ -294,13 +294,21 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		});
 		
 		if(selectedNode.offsetLeft) {
-			// Add a variable with a popup coordinate string for the selected node
-			variables["tv-popup-coords"] = $tw.popup.buildCoordinates($tw.popup.coordinatePrefix.csOffsetParent,{
+			// Add variables with a (relative and absolute) popup coordinate string for the selected node
+			var nodeRect = {
 				left: selectedNode.offsetLeft,
 				top: selectedNode.offsetTop,
 				width: selectedNode.offsetWidth,
-				height:selectedNode.offsetHeight
-			});
+				height: selectedNode.offsetHeight
+			};
+			variables["tv-popup-coords"] = $tw.popup.buildCoordinates($tw.popup.coordinatePrefix.csOffsetParent,nodeRect);
+
+			var absRect = $tw.utils.extend({}, nodeRect);
+			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+				absRect.left += currentNode.offsetLeft;
+				absRect.top += currentNode.offsetTop;
+			}
+			variables["tv-popup-abs-coords"] = $tw.popup.buildCoordinates($tw.popup.coordinatePrefix.csAbsolute,absRect);
 
 			// Add variables for offset of selected node
 			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
