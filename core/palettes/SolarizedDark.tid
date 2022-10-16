@@ -35,6 +35,8 @@ external-link-foreground: #268bd2
 external-link-foreground-hover:
 external-link-foreground-visited: #268bd2
 foreground: #839496
+highlight-background: #ffff78
+highlight-foreground: #000000
 message-background: #002b36
 message-border: #586e75
 message-foreground: #839496
