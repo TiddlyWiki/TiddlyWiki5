@@ -4,4 +4,6 @@ created: 20140609121606089
 modified: 20140609121606089
 caption: savetiddlers
 
+<<.deprecated-since "5.1.15" "SaveCommand">>.
+
 {{$:/language/Help/savetiddlers}}
