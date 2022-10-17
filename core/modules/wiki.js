@@ -22,7 +22,8 @@ Adds the following properties to the wiki object:
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/widgets/widget.js");
+var widget = require("$:/core/modules/widgets/widget.js"),
+	LinkWidget = require("$:/core/modules/widgets/link.js").link;
 
 var USER_NAME_TITLE = "$:/status/UserName",
 	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
@@ -514,6 +515,29 @@ exports.extractLinks = function(parseTreeRoot) {
 };
 
 /*
+Return an array of tiddelr titles that are linked within the given widget tree
+ */
+exports.extractLinksFromWidgetTree = function(widget) {
+	// Count up the links
+	var links = [],
+		checkWidget = function(widget) {
+			if(widget instanceof LinkWidget) {
+				var value = widget.to;
+				if(links.indexOf(value) === -1) {
+					links.push(value);
+				}
+			}
+			if(widget.children) {
+				$tw.utils.each(widget.children,function(widget) {
+					checkWidget(widget);
+				});
+			}
+		};
+	checkWidget(widget);
+	return links;
+};
+
+/*
 Return an array of tiddler titles that are directly linked from the specified tiddler
 */
 exports.getTiddlerLinks = function(title) {
@@ -521,11 +545,10 @@ exports.getTiddlerLinks = function(title) {
 	// We'll cache the links so they only get computed if the tiddler changes
 	return this.getCacheForTiddler(title,"links",function() {
 		// Parse the tiddler
-		var parser = self.parseTiddler(title);
-		if(parser) {
-			return self.extractLinks(parser.tree);
-		}
-		return [];
+		var container = $tw.fakeDocument.createElement("div");
+		var widget = self.makeTranscludeWidget(title,{document: $tw.fakeDocument, parseAsInline: false,variables: {currentTiddler: title},importPageMacros: true});
+		widget.render(container,null);
+		return self.extractLinksFromWidgetTree(widget);
 	});
 };
 
