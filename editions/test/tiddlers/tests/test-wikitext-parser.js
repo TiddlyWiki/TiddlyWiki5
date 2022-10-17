@@ -121,7 +121,7 @@ describe("WikiText parser tests", function() {
 	});
 
 	it("should parse procedure definitions with no parameters", function() {
-		expect(parse("\\procedure myMacro\nnothing\n\\end\n")).toEqual(
+		expect(parse("\\procedure myMacro()\nnothing\n\\end\n")).toEqual(
 
 			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
 
@@ -129,7 +129,7 @@ describe("WikiText parser tests", function() {
 	});
 
 	it("should parse single line procedure definitions with no parameters", function() {
-		expect(parse("\\procedure myMacro nothing\n")).toEqual(
+		expect(parse("\\procedure myMacro() nothing\n")).toEqual(
 
 			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
 
@@ -152,7 +152,7 @@ describe("WikiText parser tests", function() {
 		);
 
 	});	it("should parse function definitions with no parameters", function() {
-		expect(parse("\\function myMacro\nnothing\n\\end\n")).toEqual(
+		expect(parse("\\function myMacro()\nnothing\n\\end\n")).toEqual(
 
 			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
 
@@ -160,7 +160,7 @@ describe("WikiText parser tests", function() {
 	});
 
 	it("should parse single line function definitions with no parameters", function() {
-		expect(parse("\\function myMacro nothing\n")).toEqual(
+		expect(parse("\\function myMacro() nothing\n")).toEqual(
 
 			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
 
