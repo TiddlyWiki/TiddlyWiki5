@@ -65,10 +65,8 @@ exports.addClassToParseTreeNode = function(node,classString) {
 		// If the class attribute does not exist, we must create it first.
 		attribute = {name: "class", type: "string", value: ""};
 		node.attributes["class"] = attribute;
-		if(node.orderedAttributes) {
-			// If there are orderedAttributes, we've got to add them there too.
-			node.orderedAttributes.push(attribute);
-		}
+		node.orderedAttributes = node.orderedAttributes || [];
+		node.orderedAttributes.push(attribute);
 	}
 	if(attribute.type === "string") {
 		if(attribute.value !== "") {
@@ -88,10 +86,8 @@ exports.addStyleToParseTreeNode = function(node,name,value) {
 	if(!attribute) {
 		attribute = {name: "style", type: "string", value: ""};
 		node.attributes.style = attribute;
-		if(node.orderedAttributes) {
-			// If there are orderedAttributes, we've got to add them there too.
-			node.orderedAttributes.push(attribute);
-		}
+		node.orderedAttributes = node.orderedAttributes || [];
+		node.orderedAttributes.push(attribute);
 	}
 	if(attribute.type === "string") {
 		attribute.value += name + ":" + value + ";";
