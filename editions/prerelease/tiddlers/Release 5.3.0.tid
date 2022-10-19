@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-This PR introduces a number of improvements and new features related to some of TiddlyWiki's most fundamental components: macros, widgets, operators and transclusion.
+This release introduces a number of improvements and new features related to some of TiddlyWiki's most fundamental components: macros, widgets, operators and transclusion.
 
 The motivation is to fix one of TiddlyWiki 5's early design flaws: the reliance on macros using textual substitution as the primary way to modularise and reuse wikitext and filters.
 
