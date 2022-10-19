@@ -1,6 +1,6 @@
 caption: function
 created: 20220909111836951
-modified: 20220909111836951
+modified: 20221019081352266
 op-input: a [[selection of titles|Title Selection]] passed as input to the function <<.place F>>
 op-output: the [[selection of titles|Title Selection]] returned from the function <<.place F>>
 op-parameter: first parameter is the [[function name|Functions]], subsequent parameters are passed to the function by position
