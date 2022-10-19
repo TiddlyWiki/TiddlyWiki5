@@ -11,6 +11,8 @@ type: text/vnd.tiddlywiki
 
 This release introduces a number of improvements and new features related to some of TiddlyWiki's most fundamental components: macros, widgets, operators and transclusion.
 
+The GitHub Pull Request containing these changes can be found at: https://github.com/Jermolene/TiddlyWiki5/pull/6666
+
 The motivation is to fix one of TiddlyWiki 5's early design flaws: the reliance on macros using textual substitution as the primary way to modularise and reuse wikitext and filters.
 
 Experience has shown that while macros are a good match for a small number of tasks, they are brittle and error prone for many common operations. Over the years we have introduced mitigations for the worst problems but these have come at a cost of increased complexity.
