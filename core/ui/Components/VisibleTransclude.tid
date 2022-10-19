@@ -5,7 +5,7 @@ Import this component to make all the child transclusions visible.
 
 Block transclusions are shown in red, and inline transclusions are shown in green.
 -->
-\widget $transclude
+\widget $transclude()
 <!-- Use a parameters widget so that we can access the `$params` data -->
 <$parameters tiddler="" $$tiddler="" mode="" $$mode="" $parseMode="@parseMode" $params="@params">
 	<!-- Replicate the logic of the transclude widget to determine the output mode, and hence the tag and colour to use for output -->
