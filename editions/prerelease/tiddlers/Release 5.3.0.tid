@@ -7,61 +7,30 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/master...parameterised-transclusions]]//
 
-! Introduction
+! About v5.3.0
 
-This release introduces a number of improvements and new features related to some of TiddlyWiki's most fundamental components: macros, widgets, operators and transclusion.
+<div style="background: yellow; border: 1px solid #880; padding: 0.5em; border-radius: 3px;">This is a preview of a [[pull request|https://github.com/Jermolene/TiddlyWiki5/pull/6666]] which has not yet been merged. At this point, all the changes here are provisional, and may be subject to further changes as a result of feedback from users.</div>
 
-The GitHub Pull Request containing these changes can be found at: https://github.com/Jermolene/TiddlyWiki5/pull/6666
+This pre-release introduces a number of significant improvements and new features related to some of TiddlyWiki's most fundamental components: macros, widgets, operators and transclusion.
 
-The motivation is to fix one of TiddlyWiki 5's early design flaws: the reliance on macros using textual substitution as the primary way to modularise and reuse wikitext and filters.
+! Introduction to v5.3.0
 
-Experience has shown that while macros are a good match for a small number of tasks, they are brittle and error prone for many common operations. Over the years we have introduced mitigations for the worst problems but these have come at a cost of increased complexity.
+The motivation of these changes is to fix one of ~TiddlyWiki 5's early design flaws: the reliance on macros using textual substitution as the primary way to modularise and reuse wikitext and filters.
+
+Experience has shown that while macros are a good match for a small number of tasks, they are brittle and error prone for many common operations. See [[Macro Pitfalls]] for a discussion of the problems that accompany this approach. Over the years we have introduced mitigations for the worst problems but these have come at a cost of increased complexity.
 
 The changes in this release provide powerful new ways to achieve common tasks, and unlock completely new capabilities that were previously impossible in wikitext.
 
-* ''Procedures'', which are essentially what macros should have been; they work in exactly the same way except that parameters are exposed as simple variables (without the double underscores) and no textual substitution takes place
-* ''Custom widgets'', allowing the creation of widgets in wikitext, and the redefinition of built-in widgets
-* ''Functions'', a new way to encapsulate filter expressions with named parameters
-* ''Custom Filter Operators'', allowing functions to be used as custom filter operators
-* ''Parameterised transclusions'', allowing strings and wikitext trees to be passed to transclusions
+* [[Procedures]], which are essentially what macros should have been; they work in exactly the same way except that parameters are exposed as simple variables (without the double underscores) and no textual substitution takes place
+* [[Custom Widgets]], allowing the creation of widgets in wikitext, and the redefinition of built-in widgets
+* [[Functions]], a new way to encapsulate filter expressions with named parameters, including the ability to make custom filter operators
+* Parameterised [[Transclusions|Transclusion]], allowing strings and wikitext trees to be passed to transclusions
 
-All of these changes are intended to be backwards compatible, and should not affect existing functionality. While they represent a new field of opportunities for wikitext authors, equally it is entirely possible for authors to ignore all these new features and continue to use TiddlyWiki 5 in the way that they have always done.
+The approach taken by this release is to add new functionality by extending and augmenting the system without disturbing existing functionality. All of these changes are thus intended to be backwards compatible. While they represent a new field of opportunities for wikitext authors, it is possible for authors to ignore all these new features and continue to use ~TiddlyWiki 5 in the way that they have always done.
 
-! Background
-
-TiddlyWiki 5 macros were originally based on the technique we call "textual substitution": the string values of the parameters provided when calling a macro would be plugged into the macro definition before it was wikified in the usual way.
-
-A typical example of the approach in early versions of TiddlyWiki 5:
-
-```
-\define mymacro(title)
-<$codeblock code={{$title$}}/>
-\end
-```
-
-The technique worked well enough to get the basics of the TiddlyWiki 5 user interface up and running, but it was clear from the start that it was annoyingly brittle. For example, the macro above would fail with tiddler titles containing double closing curly braces. Trying to use it with the title `foo}}bar` would lead to the macro being expanded to the following invalid syntax:
-
-```
-<$codeblock code={{foo}}bar}}/>
-```
-
-As a result, for a long time, the TiddlyWiki 5 user interface failed if a variety of combinations of special characters were found in tiddler titles. Long time users will remember a warning that popped up in the edit template whenever a potentially troublesome character was detected.
-
-Over the years we've mitigated almost all of these issues, particularly by providing access to the macro parameters as variables. For backwards compatibility, this was done without affecting the existing syntax, which required us to adopt the clumsy protocol of wrapping the parameter name in double underscores to get the name of the corresponding variable.
-
-This has all worked well enough for us to fix the UI issues with special characters in tiddler titles, but is very inconsistent and complex, requiring users to grasp multiple mutually exclusive conceptual models for what is going on.
-
-! New Features and Improvements
-
-The approach taken by this release is to add new functionality by extending and augmenting the system without disturbing existing functionality.
-
-This lays the groundwork for macros and related features to be deprecated, which is the point at which users are advised not to use old features, and instead given clear pointers to the equivalent modern functionality.
+These changes lay the groundwork for macros and related features to be deprecated (which is the point at which users are advised not to use old features, and instead given clear pointers to the equivalent modern functionality).
 
 The new transclusion architecture is not by itself sufficient to enable us to fully deprecate macros yet. To handle the remaining use cases we propose a new backtick quoted attribute format that allows for the substitution of variable values. See https://github.com/Jermolene/TiddlyWiki5/issues/6663 for details.
-
-* [[Procedures]]
-* [[Functions]]
-* [[Custom Widgets]]
 
 ! Plugin Improvements
 
