@@ -1,13 +1,11 @@
 caption: Formatting
 created: 20220727060921261
-modified: 20220821183525017
+modified: 20221020133850112
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
 
 Available character formatting in WikiText includes:
-
-<div class="no-code-border">
 
 |Wikitext | Button |Win Shortcut | Mac |Rendered Output |h
 |2 single hyphens are used for `''bold text''`| <kbd><<.icon $:/core/images/bold>></kbd> | <kbd>ctrl-B</kbd> |<kbd>win-B</kbd> |2 single hyphens are used for ''bold text''|
@@ -33,6 +31,3 @@ Available character formatting in WikiText includes:
 |2 commas are used for `,,subscripted,,` text |2 commas are used for `<sub>subscripted</sub>` text |
 |2 tilde signs are used for `~~strikethrough~~` text |2 tilde signs are used for `<strike>strikethrough</strike>` text |
 |1 backtick is used for ```code` `` |1 backtick is used for `<code>code</code>` |
-
-</div>
-
