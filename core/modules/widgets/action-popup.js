@@ -57,20 +57,20 @@ Invoke the action associated with this widget
 */
 ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Trigger the popup
-	var coordinates = $tw.popup.parseCoordinates(this.actionCoords || "");
-	if(coordinates) {
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
+		match = popupLocationRegExp.exec(this.actionCoords || "");
+	if(match) {
 		$tw.popup.triggerPopup({
 			domNode: null,
 			domNodeRect: {
-				left: coordinates.left,
-				top: coordinates.top,
-				width: coordinates.width,
-				height: coordinates.height
+				left: parseFloat(match[1]),
+				top: parseFloat(match[2]),
+				width: parseFloat(match[3]),
+				height: parseFloat(match[4])
 			},
 			title: this.actionState,
 			wiki: this.wiki,
-			floating: this.floating,
-			absolute: coordinates.absolute
+			floating: this.floating
 		});
 	} else {
 		$tw.popup.cancel(0);

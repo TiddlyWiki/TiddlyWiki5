@@ -23,19 +23,6 @@ var Popup = function(options) {
 };
 
 /*
-Global regular expression for parsing the location of a popup.
-This is also used by the Reveal widget.
-*/
-Popup.popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/
-
-/*
-Objekt containing the available prefixes for coordinates build with the `buildCoordinates` function:
- - csOffsetParent: Uses a coordinate system based on the offset parent (no prefix).
- - csAbsolute: Use an absolute coordinate system (prefix "@").
-*/
-Popup.prototype.coordinatePrefix = { csOffsetParent: "", csAbsolute: "@" }
-
-/*
 Trigger a popup open or closed. Parameters are in a hashmap:
 	title: title of the tiddler where the popup details are stored
 	domNode: dom node to which the popup will be positioned (one of domNode or domNodeRect is required)
@@ -149,17 +136,8 @@ Popup.prototype.show = function(options) {
 			height: options.domNode.offsetHeight
 		};
 	}
-	if(options.absolute && options.domNode) {
-		// Walk the offsetParent chain and add the position of the offsetParents to make
-		// the position absolute to the root node of the page.
-		var currentNode = options.domNode.offsetParent;
-		while(currentNode) {
-			rect.left += currentNode.offsetLeft;
-			rect.top += currentNode.offsetTop;
-			currentNode = currentNode.offsetParent;
-		}
-	}
-	var popupRect = $tw.popup.buildCoordinates(options.absolute?$tw.popup.coordinatePrefix.csAbsolute:$tw.popup.coordinatePrefix.csOffsetParent,rect);
+	var popupRect = "(" + rect.left + "," + rect.top + "," + 
+				rect.width + "," + rect.height + ")";
 	if(options.noStateReference) {
 		options.wiki.setText(options.title,"text",undefined,popupRect);
 	} else {
@@ -197,48 +175,9 @@ Popup.prototype.cancel = function(level) {
 Returns true if the specified title and text identifies an active popup
 */
 Popup.prototype.readPopupState = function(text) {
-	return Popup.popupLocationRegExp.test(text);
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
+	return popupLocationRegExp.test(text);
 };
-
-/*
-Parses a coordinate string in the format `(x,y,w,h)` or `@(x,y,z,h)` and returns
-an object containing the position, width and height. The absolute-Mark is boolean
-value that indicates the coordinate system of the coordinates. If they start with
-an `@`, `absolute` is set and the coordinates are relative to the root element. If
-the initial `@` is missing, they are relative to the offset parent element and
-`absoute` is false.
-*/
-Popup.prototype.parseCoordinates = function(coordinates) {
-	var match = Popup.popupLocationRegExp.exec(coordinates);
-	if(match) {
-		return {
-			absolute: (match[1] === "@"),
-			left: parseFloat(match[2]),
-			top: parseFloat(match[3]),
-			width: parseFloat(match[4]),
-			height: parseFloat(match[5])
-		};
-	} else {
-		return false;
-	}
-}
-
-/*
-Builds a coordinate string from a coordinate system identifier and an object
-containing the left, top, width and height values.
-Use constants defined in the coordinatePrefix property to specify a coordinate
-system.
-If one of the parameters is invalid for building a coordinate string `(0,0,0,0)`
-will be returned.
-*/
-Popup.prototype.buildCoordinates = function(prefix,position) {
-	var coord = prefix + "(" + position.left + "," + position.top + "," + position.width + "," + position.height + ")";
-	if (Popup.popupLocationRegExp.test(coord)) {
-		return coord;
-	} else {
-		return "(0,0,0,0)";
-	}
-}
 
 exports.Popup = Popup;
 
