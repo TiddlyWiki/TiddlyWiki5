@@ -1,5 +1,5 @@
 created: 20201123113532200
-modified: 20220507184043398
+modified: 20221012194222875
 tags: Widgets TriggeringWidgets
 title: EventCatcherWidget
 type: text/vnd.tiddlywiki
@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 //This is an advanced widget intended for use by those familiar with HTML, CSS and JavaScript handling of DOM events.//
 
-The event catcher widget traps DOM-initiated Javascript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to those events. 
+The event catcher widget traps DOM-initiated Javascript events dispatched within its child content, and allows invoking a series of ActionWidgets in response to those events.
 
 In order for the events to be trapped:
 
@@ -47,7 +47,8 @@ The following variables are made available to the actions:
 |`event-mousebutton` |The mouse button (if any) used to trigger the event (can be "left", "right" or "middle"). Note that not all event types support the mousebutton property |
 |`event-type` |The type property of the JavaScript event |
 |`event-detail-*` |Any properties in the detail attribute of the event are made available with the prefix `event-detail-` |
-|`tv-popup-coords` |A co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated |
+|`tv-popup-coords` |A relative co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated (see [[Coordinate Systems]] for more information) |
+|`tv-popup-abs-coords` |<<.from-version "5.2.4">> An absolute co-ordinate string that can be used with the ActionPopupWidget to trigger a popup at the DOM node matching the selector where the event originated (see [[Coordinate Systems]] for more information) |
 |`tv-widgetnode-width` |<<.from-version "5.2.3">> `offsetWidth` of the DOM node created by the eventcatcher widget |
 |`tv-widgetnode-height` |<<.from-version "5.2.3">> `offsetHeight` of the DOM node created by the eventcatcher widget |
 |`tv-selectednode-posx` |`x` offset position of the selected DOM node |
