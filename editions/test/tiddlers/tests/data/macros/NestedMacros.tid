@@ -10,23 +10,23 @@ title: Output
 \define outer()
 \whitespace trim
 
-\\define middle()
+\define middle()
 \whitespace trim
 
-\\\\define inner()
+\define inner()
 \whitespace trim
 
 Jaguar
 
-\\\\end
+\end inner
 
 <<inner>>
 
-\\end
+\end middle
 
 <<middle>>
 
-\end
+\end outer
 
 <<outer>>
 

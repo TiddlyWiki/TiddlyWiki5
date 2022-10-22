@@ -119,22 +119,6 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should parse macro definitions with two backslashes", function() {
-		expect(parse("\\\\define myMacro()\nnothing\n\\\\end\n")).toEqual(
-
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
-
-		);
-	});
-
-	it("should parse macro definitions with four backslashes", function() {
-		expect(parse("\\\\\\\\define myMacro()\nnothing\n\\\\\\\\end\n")).toEqual(
-
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
-
-		);
-	});
-
 	it("should parse comment in pragma area. Comment will be invisible", function() {
 		expect(parse("<!-- comment in pragma area -->\n\\define aMacro()\nnothing\n\\end\n")).toEqual(
 
