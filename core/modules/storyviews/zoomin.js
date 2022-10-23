@@ -17,6 +17,9 @@ var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/
 var ZoominListView = function(listWidget) {
 	var self = this;
 	this.listWidget = listWidget;
+	this.textNodeLogger = new $tw.utils.Logger("zoomin story river view", {
+		enable: true
+	});
 	// Get the index of the tiddler that is at the top of the history
 	var history = this.listWidget.wiki.getTiddlerDataCached(this.listWidget.historyTitle,[]),
 		targetTiddler;
@@ -48,7 +51,10 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
+	if(!targetElement) {
+		return;
+	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+		this.alertTextNodeRoot(targetElement);
 		return;
 	}
 	// Make the new tiddler be position absolute and visible so that we can measure it
@@ -130,7 +136,10 @@ function findTitleDomNode(widget,targetClass) {
 ZoominListView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
+	if(!targetElement) {
+		return;
+	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+		this.alertTextNodeRoot(targetElement);
 		return;
 	}
 	// Make the newly inserted node position absolute and hidden
@@ -173,16 +182,21 @@ ZoominListView.prototype.remove = function(widget) {
 	var toWidgetDomNode = toWidget && toWidget.findFirstDomNode();
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
-		$tw.utils.addClass(toWidgetDomNode,"tc-storyview-zoomin-tiddler");
-		$tw.utils.setStyle(toWidgetDomNode,[
-			{display: "block"},
-			{transformOrigin: "50% 50%"},
-			{transform: "translateX(0px) translateY(0px) scale(10)"},
-			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
-			{opacity: "0"},
-			{zIndex: "500"}
-		]);
-		this.currentTiddlerDomNode = toWidgetDomNode;
+		if (toWidgetDomNode.nodeType === Node.TEXT_NODE) {
+			this.alertTextNodeRoot(toWidgetDomNode);
+			toWidgetDomNode = null;
+		} else {
+			$tw.utils.addClass(toWidgetDomNode,"tc-storyview-zoomin-tiddler");
+			$tw.utils.setStyle(toWidgetDomNode,[
+				{display: "block"},
+				{transformOrigin: "50% 50%"},
+				{transform: "translateX(0px) translateY(0px) scale(10)"},
+				{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
+				{opacity: "0"},
+				{zIndex: "500"}
+			]);
+			this.currentTiddlerDomNode = toWidgetDomNode;
+		}
 	}
 	// Animate them both
 	// Force layout
@@ -204,6 +218,10 @@ ZoominListView.prototype.remove = function(widget) {
 		]);
 	}
 	return true; // Indicate that we'll delete the DOM node
+};
+
+ZoominListView.prototype.alertTextNodeRoot = function(node) {
+	this.textNodeLogger.alert($tw.language.getString("Error/ZoominTextNode") + " " + node.textContent);
 };
 
 exports.zoomin = ZoominListView;
