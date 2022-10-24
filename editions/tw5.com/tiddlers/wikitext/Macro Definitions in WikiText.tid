@@ -1,13 +1,15 @@
 caption: Macro Definitions
 created: 20150220181617000
-modified: 20180820165115455
+modified: 20221022135909352
 tags: WikiText
 title: Macro Definitions in WikiText
 type: text/vnd.tiddlywiki
 
 A [[macro|Macros]] is defined using a `\define` [[pragma|Pragma]]. Like any pragma, this can only appear at the start of a tiddler.
 
-The first line of the definition specifies the macro name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the macro. The lines that follow contain the text of the macro text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
+The first line of the definition specifies the macro name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the macro.
+
+The lines that follow contain the text of the macro text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
 
 <$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}}/>
 
@@ -16,6 +18,20 @@ Alternatively, the entire definition can be presented on a single line without a
 ```
 \define sayhi(name:"Bugs Bunny") Hi, I'm $name$.
 ```
+
+Macro definitions can be nested by specifying the name of the macro in the `\end` marker. For example:
+
+<<wikitext-example-without-html src:"""\define special-button(caption:"Click me")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
 
 A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
 
