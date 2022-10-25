@@ -1154,6 +1154,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		word-wrap: anywhere;
 	}
 
+	pre {
+		word-break: break-word; /* needed for Chrome and Safari on mobile */
+	}
+
 	table blockquote {
 		margin-left: 12.5px;
 		margin-right: 12.5px; 
