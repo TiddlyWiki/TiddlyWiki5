@@ -14,6 +14,8 @@ Action widget to trigger a popup.
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 var ActionPopupWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -57,7 +59,7 @@ Invoke the action associated with this widget
 */
 ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	// Trigger the popup
-	var coordinates = $tw.popup.parseCoordinates(this.actionCoords || "");
+	var coordinates = Popup.parseCoordinates(this.actionCoords || "");
 	if(coordinates) {
 		$tw.popup.triggerPopup({
 			domNode: null,

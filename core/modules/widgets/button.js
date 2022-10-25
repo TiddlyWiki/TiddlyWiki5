@@ -14,6 +14,8 @@ Button widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -147,7 +149,7 @@ ButtonWidget.prototype.isSelected = function() {
 
 ButtonWidget.prototype.isPoppedUp = function() {
 	var tiddler = this.popupTitle ? this.wiki.getTiddler(this.popupTitle) : this.wiki.getTiddler(this.popup);
-	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(tiddler.fields.text) : false;
+	var result = tiddler && tiddler.fields.text ? Popup.readPopupState(tiddler.fields.text) : false;
 	return result;
 };
 

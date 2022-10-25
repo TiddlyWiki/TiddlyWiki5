@@ -15,9 +15,7 @@ Tests some utility function of the Popup prototype.
 describe("Popup tests", function() {
 
 	it("parseCoordinates should parse valid coordinates", function() {
-		var popup = new $tw.utils.Popup({
-			rootElement: $tw.fakeDocument.createElement("div")
-		});
+		var popup = require("$:/core/modules/utils/dom/popup.js");
 
 		expect(popup.parseCoordinates("(1,2,3,4)")).toEqual({absolute: false, left: 1, top: 2, width: 3, height: 4});
 		expect(popup.parseCoordinates("(1.5,2.6,3.7,4.8)")).toEqual({absolute: false, left: 1.5, top: 2.6, width: 3.7, height: 4.8});
@@ -26,9 +24,7 @@ describe("Popup tests", function() {
 	});
 
 	it("parseCoordinates should not parse invalid coordinates", function() {
-		var popup = new $tw.utils.Popup({
-			rootElement: $tw.fakeDocument.createElement("div")
-		});
+		var popup = require("$:/core/modules/utils/dom/popup.js");
 
 		expect(popup.parseCoordinates("#(1,2,3,4)")).toEqual(false);
 		expect(popup.parseCoordinates("(1,2,3,4")).toEqual(false);
@@ -36,9 +32,7 @@ describe("Popup tests", function() {
 	});
 
 	it("buildCoordinates should create valid coordinates", function() {
-		var popup = new $tw.utils.Popup({
-			rootElement: $tw.fakeDocument.createElement("div")
-		});
+		var popup = require("$:/core/modules/utils/dom/popup.js");
 
 		var coordinates = {
 			left: 1.5,
@@ -52,9 +46,7 @@ describe("Popup tests", function() {
 	});
 
 	it("buildCoordinates should detect invalid input", function() {
-		var popup = new $tw.utils.Popup({
-			rootElement: $tw.fakeDocument.createElement("div")
-		});
+		var popup = require("$:/core/modules/utils/dom/popup.js");
 
 		var coordinates = {
 			left: "invalid",

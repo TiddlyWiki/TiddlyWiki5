@@ -26,14 +26,14 @@ var Popup = function(options) {
 Global regular expression for parsing the location of a popup.
 This is also used by the Reveal widget.
 */
-Popup.popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/
+exports.popupLocationRegExp = /^(@?)\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/
 
 /*
 Objekt containing the available prefixes for coordinates build with the `buildCoordinates` function:
  - csOffsetParent: Uses a coordinate system based on the offset parent (no prefix).
  - csAbsolute: Use an absolute coordinate system (prefix "@").
 */
-Popup.prototype.coordinatePrefix = { csOffsetParent: "", csAbsolute: "@" }
+exports.coordinatePrefix = { csOffsetParent: "", csAbsolute: "@" }
 
 /*
 Trigger a popup open or closed. Parameters are in a hashmap:
@@ -159,7 +159,7 @@ Popup.prototype.show = function(options) {
 			currentNode = currentNode.offsetParent;
 		}
 	}
-	var popupRect = $tw.popup.buildCoordinates(options.absolute?$tw.popup.coordinatePrefix.csAbsolute:$tw.popup.coordinatePrefix.csOffsetParent,rect);
+	var popupRect = exports.buildCoordinates(options.absolute?exports.coordinatePrefix.csAbsolute:exports.coordinatePrefix.csOffsetParent,rect);
 	if(options.noStateReference) {
 		options.wiki.setText(options.title,"text",undefined,popupRect);
 	} else {
@@ -194,22 +194,24 @@ Popup.prototype.cancel = function(level) {
 };
 
 /*
-Returns true if the specified title and text identifies an active popup
+Returns true if the specified title and text identifies an active popup.
+This function is safe to call, even if the popup class was not initialized.
 */
-Popup.prototype.readPopupState = function(text) {
-	return Popup.popupLocationRegExp.test(text);
+exports.readPopupState = function(text) {
+	return exports.popupLocationRegExp.test(text);
 };
 
 /*
 Parses a coordinate string in the format `(x,y,w,h)` or `@(x,y,z,h)` and returns
 an object containing the position, width and height. The absolute-Mark is boolean
 value that indicates the coordinate system of the coordinates. If they start with
-an `@`, `absolute` is set and the coordinates are relative to the root element. If
-the initial `@` is missing, they are relative to the offset parent element and
-`absoute` is false.
+an `@`, `absolute` is set to true and the coordinates are relative to the root
+element. If the initial `@` is missing, they are relative to the offset parent
+element and `absoute` is false.
+This function is safe to call, even if the popup class was not initialized.
 */
-Popup.prototype.parseCoordinates = function(coordinates) {
-	var match = Popup.popupLocationRegExp.exec(coordinates);
+exports.parseCoordinates = function(coordinates) {
+	var match = exports.popupLocationRegExp.exec(coordinates);
 	if(match) {
 		return {
 			absolute: (match[1] === "@"),
@@ -226,14 +228,14 @@ Popup.prototype.parseCoordinates = function(coordinates) {
 /*
 Builds a coordinate string from a coordinate system identifier and an object
 containing the left, top, width and height values.
-Use constants defined in the coordinatePrefix property to specify a coordinate
-system.
+Use constants defined in coordinatePrefix to specify a coordinate system.
 If one of the parameters is invalid for building a coordinate string `(0,0,0,0)`
 will be returned.
+This function is safe to call, even if the popup class was not initialized.
 */
-Popup.prototype.buildCoordinates = function(prefix,position) {
+exports.buildCoordinates = function(prefix,position) {
 	var coord = prefix + "(" + position.left + "," + position.top + "," + position.width + "," + position.height + ")";
-	if (Popup.popupLocationRegExp.test(coord)) {
+	if (exports.popupLocationRegExp.test(coord)) {
 		return coord;
 	} else {
 		return "(0,0,0,0)";

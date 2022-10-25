@@ -14,6 +14,8 @@ Reveal widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 var RevealWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -190,7 +192,7 @@ RevealWidget.prototype.compareStateText = function(state) {
 };
 
 RevealWidget.prototype.readPopupState = function(state) {
-	this.popup = $tw.popup.parseCoordinates(state);
+	this.popup = Popup.parseCoordinates(state);
 	// Check if the state matches the location regexp
 	if(this.popup) {
 		// If so, we're open
