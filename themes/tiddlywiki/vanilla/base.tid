@@ -30,6 +30,10 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
 
+\define tiddler-width()
+	<$text text={{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}/>
+\end
+
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -1140,6 +1144,28 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 	.tc-tiddler-info {
 		margin: 0 -42px 0 -42px;
+	}
+}
+
+
+/* prevent overflow for table content for small screens*/
+@media (max-width: <<tiddler-width>>) {
+	tr {
+		word-wrap: anywhere;
+	}
+
+	table blockquote {
+		margin-left: 12.5px;
+		margin-right: 12.5px; 
+	}
+
+	table dd {
+		margin-left: 12.5px;
+	}
+
+	table ol,
+	table ul {
+		padding-left: 20px;
 	}
 }
 
