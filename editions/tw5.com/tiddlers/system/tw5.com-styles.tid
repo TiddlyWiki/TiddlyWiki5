@@ -208,12 +208,6 @@ div.content {
 	column-gap: 1em;
 }
 
-/* Tone down `code` elements */
-.no-code-border code {
-	border: initial;
-	background-color: initial;
-}
-
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 	.multi-columns{
 		column-count: 2;
