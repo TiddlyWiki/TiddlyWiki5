@@ -1155,7 +1155,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 
 	pre {
-		word-break: break-word; /* needed for Chrome and Safari on mobile */
+		word-break: break-word;
 	}
 
 	table blockquote {
