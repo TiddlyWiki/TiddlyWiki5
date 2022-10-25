@@ -1,5 +1,5 @@
 created: 20220821184022101
-modified: 20221010130927409
+modified: 20221025131544471
 tags: WikiText
 title: Wikitext Cheat-Sheet
 type: text/vnd.tiddlywiki
@@ -51,7 +51,7 @@ The following table contains the basic ~TiddlyWiki wikitext features. The "Cheat
 | Example                        | Example Markup                 |h
 | how the example markup renders | what to enter as tiddler text  |
 |>| ! <<.xL "Basic Text Formatting" "Formatting in WikiText">>    |
-|''bold''                        |`''bold''` (tow single hyphens) |
+|''bold''                        |`''bold''` (two single hyphens) |
 |//italics//                     |`//italics//`          |
 |''//bold italics//''            |`''//bold italics//''` |
 |__underscore__                  |`__underscore__`    |

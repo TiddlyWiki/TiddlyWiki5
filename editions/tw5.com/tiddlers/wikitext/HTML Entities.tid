@@ -1,12 +1,12 @@
 created: 20130204165019000
-modified: 20220822133445149
+modified: 20221025124615415
 tags: WikiText
 title: HTML Entities
 type: text/vnd.tiddlywiki
 
 !! Summary
 
-Use HTML entities to enter characters that cannot easily be typed on an ordinary keyboard. They take the form of an ampersand (`&`), an identifying string, and a terminating semi-colon (`;`), e.g. `&amp;`.
+Use HTML entities to enter characters that cannot easily be typed on an ordinary keyboard. They take the form of an ampersand (`&`), an identifying string, and a terminating semi-colon (`;`), e.g. `&amp;` for the ''&'' character.
 
 !! Markup
 
@@ -47,7 +47,12 @@ Comprehensive lists of html entities can be found at...
 
 !! Accented Characters
 
-The table below shows how accented characters can be built up by subsituting the underscore (_) into the corresponding character:
+The table below shows how accented characters can be built up by //subsituting// the 
+underscore (_) in the second table into the corresponding character. eg:
+
+|Code |Character |Example |Result |h
+|`&Auml;` |Ä | `&Auml;pfel` |&Auml;pfel |
+
 
 |>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>| ! Accented Characters |
 | grave accent | &amp;_grave; | &Agrave; | &agrave; | &Egrave; | &egrave; | &Igrave; | &igrave; | &Ograve; | &ograve; | &Ugrave; | &ugrave; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
