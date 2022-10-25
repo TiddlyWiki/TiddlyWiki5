@@ -291,18 +291,22 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 	var self = this;
 	return {
 		getVariable: function(name,opts) {
-			if(name in variables) {
+			if($tw.utils.hop(variables,name)) {
 				return variables[name];
 			} else {
+				opts = opts || {};
+				opts.variables = variables;
 				return self.getVariable(name,opts);
 			};
 		},
 		getVariableInfo: function(name,opts) {
-			if(name in variables) {
+			if($tw.utils.hop(variables,name)) {
 				return {
 					text: variables[name]
 				};
 			} else {
+				opts = opts || {};
+				opts.variables = variables;
 				return self.getVariableInfo(name,opts);
 			};
 		},
