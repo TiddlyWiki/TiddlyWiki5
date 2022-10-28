@@ -1,0 +1,9 @@
+caption: $:/tags/ClassFilters/TiddlerTemplate
+created: 20221020035738692
+description: marks filters evaluated to dynamically add classes to the page template.
+modified: 20221020035933363
+tags: SystemTags
+title: SystemTag: $:/tags/ClassFilters/TiddlerTemplate
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/ClassFilters/TiddlerTemplate` marks filters marks filters evaluated to dynamically add their output as CSS classes to the tiddler template.
