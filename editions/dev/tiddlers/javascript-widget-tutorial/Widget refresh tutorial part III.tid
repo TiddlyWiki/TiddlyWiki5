@@ -1,5 +1,5 @@
 created: 20190202034841184
-modified: 20190204015100563
+modified: 20221029201023638
 tags: 
 title: Widget refresh tutorial part III
 type: text/vnd.tiddlywiki
@@ -22,5 +22,5 @@ In the following example (see [[Widget refresh demo III]] for the code), two ins
 {{Widget refresh demo III}}
 
 * ''Modify a different tiddler'' - every time this button is clicked, both counters increment, indicating the `refresh` method is being called
-* ''Modify this tiddler'' - clicking this button modifies the tiddler itself and that causes both widgets to be recreated from scratch and the counters are thereby reset to zero.
+* ''Modify this tiddler'' - clicking this button modifies the tiddler itself. In earlier ~TiddlyWiki versions that caused both widgets to be recreated from scratch and the counters are thereby reset to zero. Since [[version 5.2.0|https://tiddlywiki.com/#Release%205.2.0]] modifying another field in this tiddler does not cause the widgets to be recreated and the counters are not reset.
 *  ''Text field of tiddler='test''' - typing text into the input box causes the counter in the standalone `refreshcount` widget to be incremented. But the other instance of the widget is embedded inside a list widget whose filter output depends on the value of the tiddler field which is being modified. This causes it to recreate its children from scratch and the counter is reset every time. So with every keystroke, the counter on the left is incremented, but the counter on the right goes to/stays at zero.

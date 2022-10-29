@@ -1,5 +1,5 @@
 created: 20190201232847949
-modified: 20190216191049850
+modified: 20221029203553291
 tags: 
 title: Widget refresh tutorial part I
 type: text/vnd.tiddlywiki
@@ -28,18 +28,20 @@ Notice if you change the text in the input box, the output from the `tiddlerfiel
 
 What's going on here? The render method of the widget code is only called by tiddlywiki core when the widget is first created. After that, it isn't called again unless the widget is completely destroyed and then created again. 
 
-The code for that refresh button looks like this:
-
-```
-<$button set="!!test" setTo="hello">Refresh</$button>
-```
-
-When that button is clicked the field `test` in the containing tiddler is modified and it causes the display of that tiddler to be recreated from scratch.
-
-This recreation takes place because the tiddlywiki ~ViewWidget which is displaying the tiddler is properly written to handle automatic refreshes.
-
-Our widget does not support automatic refresh and it won't until a `refresh` method is implemented.
-
-The `view` widget stays in sync with the input box because it has a properly implemented `refresh` method.
+The tiddlywiki ~ViewWidget has a properly written `refresh` method so typing in the input box will cause its content to update. However, the `tiddlerfield` widget does not have a `refresh` method at all. It has no way of being notified that the `test` tiddler content has changed. Its output will not change until the ''Force refresh'' button is clicked.
 
 See the next example for an implementation of the `refresh` method for the `tiddlerfield` widget.
+
+The code for the refresh button looks like this:
+
+```
+<$button set="!!refresh" setTo={{test}}>Force refresh</$button>
+```
+
+and the widgets are enclosed in a list widget like this:
+
+```
+<$list filter="[{!!refresh}]">...</$list>
+```
+
+When the button is clicked the field `refresh` in the containing tiddler is modified and it causes the children of the list widget to be created from scratch. The render method is called and the output of the `tiddlerfield` widget updates.

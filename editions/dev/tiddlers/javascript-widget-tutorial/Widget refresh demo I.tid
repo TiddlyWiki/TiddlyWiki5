@@ -1,5 +1,5 @@
 created: 20190201233806976
-modified: 20190216190046578
+modified: 20221029194854112
 tags: 
 title: Widget refresh demo I
 type: text/vnd.tiddlywiki
@@ -12,7 +12,8 @@ type: text/vnd.tiddlywiki
 	<$data $tiddler=tiddlerfield-norefresh.js/>
 	<$data title="tiddler field widget" text="""
 <$edit-text focus=yes tiddler=test tag=input/>
-<$button set="!!test" setTo="hello">Force refresh</$button>
+<$button set="!!refresh" setTo={{test}}>Force refresh</$button>
+<$list filter="[{!!refresh}]">
 
 <div>
 <div style="display:inline-block;width: 49%;vertical-align: text-top;word-wrap: break-word;}">
@@ -35,6 +36,8 @@ Renders as:
 
 <$view tiddler="test"/>
 </div>
+</div>
+</$list>
 """/>
 
 </$innerwiki>
