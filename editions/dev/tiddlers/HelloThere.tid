@@ -1,5 +1,5 @@
 created: 20190115173333457
-modified: 20190115173723915
+modified: 20221029175754753
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
@@ -15,6 +15,7 @@ Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/).
 ** [[Using ES2016 for Writing Plugins]]
 ** [[Adding Babel Polyfill to TiddlyWiki]]
 ** [[TiddlyWiki Drag and Drop Interoperability]]
+** [[Javascript Widget Tutorial]]
 * The original developer documentation from https://tiddlywiki.com:
 ** [[TiddlyWiki for Developers]]
 ** [[TiddlyWiki Coding Style Guidelines]]
