@@ -98,7 +98,7 @@ An example of declaring parameters with the <<.wlink ParametersWidget>> widget:
 </$parameters>
 ```
 
-The `\parameters` [[Pragma: \parameters]] can be used as a shortcut syntax for declaring parameters. For example:
+The [[Pragma: \parameters]] can be used as a shortcut syntax for declaring parameters. For example:
 
 ```
 \parameters (firstParameter:"default",secondParameter:"another default")
