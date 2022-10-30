@@ -1,0 +1,37 @@
+created: 20190202035524804
+modified: 20221029161501848
+tags: 
+title: Javascript Widget Tutorial
+type: text/vnd.tiddlywiki
+
+! Introduction
+This tutorial provides step-by-step, interactive examples of how to write code for tiddlywiki widgets. The demo javascript code can be modified without having to reload the entire wiki.
+
+Intended audience:
+
+# Those who know tiddlywiki well and know programming and javascript and want to write their own widget. I don't make any effort to explain javascript here. For that you will need other resources.
+# Those who know tiddlywiki well and don't know javascript, but want to understand more about how tiddlywiki works. You should be able to skim through and interact with the demos and learn something.
+
+!The tutorial
+*[[Undefined widget tutorial]]
+*[[Do nothing widget tutorial]]
+*[[Hello World widget tutorial]]
+*[[Widget refresh tutorial part I]]
+*[[Widget refresh tutorial part II]]
+*[[Widget refresh tutorial part III]]
+*[[Widget attributes tutorial part I]]
+*[[Widget attributes tutorial part II]]
+*[[Child widgets tutorial]]
+
+! Notes
+
+tiddlywiki doesn't support dynamically reloading javascript. If you change a javascript tiddler, then you need to save and reload  the wiki before the changes will take affect.
+
+To avoid the need for such reloads, the excellent [[innerwiki plugin|https://tiddlywiki.com/prerelease/plugins/tiddlywiki/innerwiki/]] is used. This allows an inner wiki to be created from a subset of tiddlers in the outer wiki. Each time the inner wiki is refreshed, its entire wiki is reloaded and the javascript changes in the inner wiki will take affect.
+
+Without the need for reloads, a tiddlywiki instance with the [[innerwiki plugin|https://tiddlywiki.com/prerelease/plugins/tiddlywiki/innerwiki/]] installed works great as a playground for interacting with tiddlywiki javascript.
+
+! Other documentation on writing TW widgets
+
+*WidgetModules
+*[[Widgets]]
