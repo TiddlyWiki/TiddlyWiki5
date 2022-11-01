@@ -34,8 +34,8 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d62a16ee464fb9984b766b48504829a1a3eb143b">> problem with long presses on tiddler links triggering a preview on iOS/iPadOS
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6910">> consistency of button and input elements across browsers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d825f1c875f5e46158c9c41c8c66471138c162d1">> edit preview to use the [[View Template Body Cascade]]
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6970">> detection of infinite recursion errors in widgets and filters
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/36896c3db8c9678c0385a561996248a6f00a45ff">> opening a tiddler in a new window to use the [[View Template Body Cascade]]
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6970">> detection of infinite recursion errors in widgets and filters
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6877">> default styles for [[styled runs|Styles and Classes in WikiText]]
 
 ! Widget Improvements
