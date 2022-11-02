@@ -1,6 +1,6 @@
 caption: genesis
-created: 20220924140702430
-modified: 20220924140702430
+created: 20221101100729587
+modified: 20221101100729587
 tags: Widgets
 title: GenesisWidget
 type: text/vnd.tiddlywiki
@@ -27,3 +27,15 @@ Note that attributes explicitly specified take precedence over attributes with t
 
 <$macrocall $name='wikitext-example-without-html' 
 src='<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>'/>
+
+<$macrocall $name='wikitext-example-without-html' 
+src="""\define my-banner(mode:"inline",caption)
+<$genesis $type={{{ [<__mode__>match[inline]then[span]else[div]] }}} class="tc-mybanner">
+<<__caption__>>
+</$genesis>
+\end
+
+<<my-banner caption:"I'm in a SPAN">>
+
+<<my-banner mode:"block" caption:"I'm in a DIV">>
+"""/>
