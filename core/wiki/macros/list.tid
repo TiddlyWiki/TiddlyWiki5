@@ -4,7 +4,7 @@ tags: $:/tags/Macro
 \define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,field:"caption")
 \whitespace trim
 <$genesis $type=<<__type__>> class=<<__class__>>>
-<$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
+<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
 <$genesis $type=<<__subtype__>>>
 <$link to={{!!title}}>
 <$let tv-wikilinks="no">
