@@ -14,37 +14,38 @@ The binary parser parses a binary tiddler into a warning message and download li
   var BINARY_WARNING_MESSAGE = "$:/core/ui/BinaryWarning";
   var EXPORT_BUTTON_IMAGE = "$:/core/images/export-button";
 
-  var BinaryParser = function (type, text, options) {
-    // Transclude the binary data tiddler warning message
-    var warn = {
-      type: "element",
-      tag: "p",
-      children: [
-        {
-          type: "transclude",
-          attributes: {
-            tiddler: { type: "string", value: BINARY_WARNING_MESSAGE },
-          },
+  // Transclude the binary data tiddler warning message
+  var warn = {
+    type: "element",
+    tag: "p",
+    children: [
+      {
+        type: "transclude",
+        attributes: {
+          tiddler: { type: "string", value: BINARY_WARNING_MESSAGE },
         },
-      ],
-    };
-    // Create download link based on binary tiddler title
-    var link = {
-      type: "element",
-      tag: "a",
-      attributes: {
-        title: { type: "indirect", textReference: "!!title" },
-        download: { type: "indirect", textReference: "!!title" },
       },
-      children: [
-        {
-          type: "transclude",
-          attributes: {
-            tiddler: { type: "string", value: EXPORT_BUTTON_IMAGE },
-          },
+    ],
+  };
+  // Create download link based on binary tiddler title
+  var link = {
+    type: "element",
+    tag: "a",
+    attributes: {
+      title: { type: "indirect", textReference: "!!title" },
+      download: { type: "indirect", textReference: "!!title" },
+    },
+    children: [
+      {
+        type: "transclude",
+        attributes: {
+          tiddler: { type: "string", value: EXPORT_BUTTON_IMAGE },
         },
-      ],
-    };
+      },
+    ],
+  };
+
+  var BinaryParser = function (type, text, options) {
     // Set the link href to external or internal data URI
     if (options._canonical_uri) {
       link.attributes.href = {
@@ -69,5 +70,7 @@ The binary parser parses a binary tiddler into a warning message and download li
     this.tree = [element];
   };
 
+  exports.BinaryParserWarn = warn;
+  exports.BinaryParserLink = link;
   exports["application/octet-stream"] = BinaryParser;
 })();
