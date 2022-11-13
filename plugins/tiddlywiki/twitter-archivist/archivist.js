@@ -117,7 +117,7 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 		});
 		// Apply the modifications in reverse order
 		var rawText = tweet.tweet.full_text,
-			posText = rawText.length - 1,
+			posText = rawText.length,
 			chunks = [];
 		for(var modificationIndex=modifications.length-1; modificationIndex>=0; modificationIndex--) {
 			var modification = modifications[modificationIndex];
