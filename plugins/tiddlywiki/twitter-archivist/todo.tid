@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/twitter-archivist/todo
+
+!! Done
+
+* Fixed display of tweet account information
+* Data model documentation
+
+!! To Do
+
+* Expand t.co URLs
+* Import direct messages
+* Control over which media types are imported
+* `_canonical_uri` support for media
+* Handle editable tweets

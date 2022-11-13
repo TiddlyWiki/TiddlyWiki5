@@ -29,6 +29,8 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 		user_id = manifestData.userInfo.accountId;
 	wiki.addTiddler({
 		title: "Twitter Archive for @" + username,
+		icon: "$:/core/images/twitter",
+		color: "#1D9CF0",
 		tags: "$:/tags/TwitterArchive",
 		user_id: user_id,
 		username: username,

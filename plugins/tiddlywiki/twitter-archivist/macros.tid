@@ -45,13 +45,22 @@ tags: $:/tags/Macro
 
 \define list-archives()
 \whitespace trim
-<ul>
-<$list filter="[tag[$:/tags/TwitterArchive]sort[displayname]]">
-	<li>
-		<$link><$text text=<<currentTiddler>>/></$link>
-	</li>
+<$list filter="[tag[$:/tags/TwitterArchive]limit[1]]" emptyMessage=<<list-archives-empty>> variable="ignore">
+	<ul>
+		<$list filter="[tag[$:/tags/TwitterArchive]sort[displayname]]">
+			<li>
+				<$link><$text text=<<currentTiddler>>/></$link>
+			</li>
+		</$list>
+	</ul>
 </$list>
-</ul>
+\end
+
+\define list-archives-empty()
+<p style="background:#ff3;color:#333;padding:8px;font-weight:bold;">
+No Twitter Archives are currently loaded
+</p>
+<$transclude tiddler="$:/plugins/tiddlywiki/twitter-archivist/usage" mode="block"/>
 \end
 
 \define show-archive()
@@ -122,24 +131,24 @@ tags: $:/tags/Macro
 \define show-tweet()
 <div class="tc-twitter-tweet">
 	<div class="tc-twitter-tweet-header">
-		<$let user_id={{{ [<__archive__>get[user_id]] }}}>
-			<$list filter="[{!user_id}match<user_id>]" variable="ignore">
+		<$list filter="[<currentTiddler>has[user_id]]" variable="ignore">
+			<$let archive={{{ [tag[$:/tags/TwitterArchive]field:user_id{!!user_id}] }}}>
 				<span class="tc-twitter-tweet-header-displayname">
-					<$text text={{{ [<__archive__>get[displayname]] }}}/>
+					<$text text={{{ [<archive>get[displayname]] }}}/>
 				</span>
 				<span class="tc-twitter-tweet-header-username">
-					@<$text text={{{ [<__archive__>get[username]] }}}/>
+					@<$text text={{{ [<archive>get[username]] }}}/>
 				</span>
 				•
-			</$list>
-		</$let>
+			</$let>
+		</$list>
 		<$link to=<<currentTiddler>>>
 			<span class="tc-twitter-tweet-header-date">
 				<$view field="created" format="date" template="DDth mmm YYYY 0hh:0mm:0ss"/>
 			</span>
 		</$link>
 	</div>
-	<$list filter="[<__title__>get[in_reply_to_status_id]addprefix[Tweet - ]is[tiddler]]" variable="replyTo">
+	<$list filter="[<currentTiddler>get[in_reply_to_status_id]addprefix[Tweet - ]is[tiddler]]" variable="replyTo">
 		<div class="tc-twitter-tweet-reply-to">
 			Reply to <$link to=<<replyTo>>><$text text=<<replyTo>>/></$link>
 		</div>
@@ -148,11 +157,9 @@ tags: $:/tags/Macro
 		<$transclude field="text"/>
 	</div>
 	<div class="tc-twitter-tweet-media">
-		<$let status_id={{!!status_id}}>
-			<$list filter="[tag[$:/tags/TweetMedia]field:status_id<status_id>]" variable="mediaItem">
-				<$transclude tiddler=<<mediaItem>>/>
-			</$list>
-		</$let>
+		<$list filter="[tag[$:/tags/TweetMedia]field:status_id{!!status_id}]" variable="mediaItem">
+			<$transclude tiddler=<<mediaItem>>/>
+		</$list>
 	</div>
 	<div class="tc-twitter-tweet-footer">
 		<$list filter="[<currentTiddler>has[retweet_count]]" variable="ignore">
