@@ -28,6 +28,7 @@ The Twitter Archivist imports the following tiddlers:
 |!Field |!Description |
 |''created'' |Tweet creation date (in TiddlyWiki format) |
 |''favorite_count'' |Number of favourites received by this tweet |
+|''mention_user_ids'' |Optional list of user IDs mentioned in the tweet |
 |''modified'' |Tweet creation date (in TiddlyWiki format) |
 |''retweet_count'' |Number of retweets received by this tweet |
 |''status_id'' |Unique numeric identifier for tweet |
