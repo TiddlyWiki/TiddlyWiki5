@@ -7,7 +7,7 @@ Appearance/Hint: Personaliza la apariencia de TiddlyWiki
 Basics/AnimDuration/Prompt: Duración de la animación
 Basics/AutoFocus/Prompt: Campo de enfoque predeterminado para nuevos tiddlers
 Basics/Caption: Básico
-Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puedes mostrarlos ordenados <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">de más reciente a más antiguo</$button>
+Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puedes mostrarlos ordenados {{de más reciente a más antiguo||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers por defecto
 Basics/DefaultTiddlers/TopHint: Escoge qué tiddlers se muestran al inicio
 Basics/Language/Prompt: ¡Hola! Selecciona idioma actual

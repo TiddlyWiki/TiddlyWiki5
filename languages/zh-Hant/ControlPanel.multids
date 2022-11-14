@@ -7,7 +7,7 @@ Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
 Basics/AnimDuration/Prompt: 動畫持續時間
 Basics/AutoFocus/Prompt: 編輯條目時的預設自動停留欄位
 Basics/Caption: 基本
-Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
+Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 {{保留開啟中的條目順序||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: 首頁
 Basics/DefaultTiddlers/TopHint: 預設開啟的條目
 Basics/Language/Prompt: 您好！當前的語言：
