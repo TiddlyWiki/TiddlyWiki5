@@ -76,7 +76,7 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 		var tags = ["$:/tags/Tweet"];
 		// Accumulate the replacements/insertions to the text as an array of {startPos:,endPos:,fnTransform:}
 		var modifications = [];
-		// Mentions
+		// Modifications for mentions
 		var mentions = [];
 		$tw.utils.each(tweet.tweet.entities.user_mentions,function(mention) {
 			var title = "Tweeter - " + mention.id_str;
@@ -90,24 +90,43 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 				name: mention.name
 			});
 			modifications.push({
-				startPos: mention.indices[0],
-				endPos: mention.indices[1],
+				startPos: parseInt(mention.indices[0],10),
+				endPos: parseInt(mention.indices[1],10),
 				fnTransform: function(text) {
 					return "<$link to=\"" + title + "\">" +
 						$tw.utils.htmlEncode(text.substring(mention.indices[0],mention.indices[1])) +
-						"</$link>";	
+						"</$link>";
 				}
 			});
 		});
-		// URLs
+		// Modifications for URLs
 		$tw.utils.each(tweet.tweet.entities.urls,function(urlInfo) {
 			modifications.push({
-				startPos: urlInfo.indices[0],
-				endPos: urlInfo.indices[1],
+				startPos: parseInt(urlInfo.indices[0],10),
+				endPos: parseInt(urlInfo.indices[1],10),
 				fnTransform: function(text) {
-					return "<a href=\"" + $tw.utils.htmlEncode(urlInfo.expanded_url) + "\" rel=\"noopener noreferrer\" target=\"_blank\">" +
+					return "<a href=\"" + urlInfo.expanded_url + "\" rel=\"noopener noreferrer\" target=\"_blank\">" +
 						$tw.utils.htmlEncode(urlInfo.display_url) +
-						"</a>";	
+						"</a>";
+				}
+			});
+		});
+		// Modifications for hashtags
+		$tw.utils.each(tweet.tweet.entities.hashtags,function(hashtag) {
+			var title = "#" + hashtag.text;
+			tags.push(title);
+			wiki.addTiddler({
+				title: title,
+				hashtag: hashtag.text,
+				tags: "$:/tags/Hashtag"
+			});
+			modifications.push({
+				startPos: parseInt(hashtag.indices[0],10),
+				endPos: parseInt(hashtag.indices[1],10),
+				fnTransform: function(text) {
+					return "<$link to=\"" + title + "\">" +
+						"#" + $tw.utils.htmlEncode(hashtag.text) +
+						"</$link>";	
 				}
 			});
 		});
@@ -117,25 +136,24 @@ TwitterArchivist.prototype.loadArchive = async function(options) {
 		});
 		// Apply the modifications in reverse order
 		var rawText = tweet.tweet.full_text,
-			posText = rawText.length,
+			posText = 0,
 			chunks = [];
-		for(var modificationIndex=modifications.length-1; modificationIndex>=0; modificationIndex--) {
-			var modification = modifications[modificationIndex];
-			// Process any text after the modification
-			if(posText > modification.endPos) {
-				chunks.push($tw.utils.htmlEncode(rawText.substring(modification.endPos,posText)));
+		$tw.utils.each(modifications,function(modification) {
+			// Process any text before the modification
+			if(modification.startPos > posText) {
+				chunks.push($tw.utils.htmlEncode(rawText.substring(posText,modification.startPos)));
 			}
 			// Process the modification
 			chunks.push(modification.fnTransform(rawText));
 			// Adjust the position
-			posText = modification.startPos;
-		}
+			posText = modification.endPos;
+		});
 		// Process any remaining text
-		if(posText > 0) {
-			chunks.push($tw.utils.htmlEncode(rawText.substring(0,posText)));
+		if(posText < rawText.length) {
+			chunks.push($tw.utils.htmlEncode(rawText.substring(posText)));
 		}
 		// Concatenate the chunks and replace newlines with <br>
-		var text = chunks.reverse().join("").replace("\n","<br>");
+		var text = chunks.join("").replace("\n","<br>");
 		// Create the tweet tiddler
 		var tiddler = {
 			title: "Tweet - " + tweet.tweet.id_str,

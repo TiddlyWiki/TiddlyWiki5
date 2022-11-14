@@ -206,6 +206,17 @@ No Twitter Archives are currently loaded
 
 \define show-tweeter-mentions()
 <$list filter="[tag[$:/tags/Tweet]tag<currentTiddler>]">
-	<$macrocall $name="show-tweet" archive=<<currentTiddler>> title=<<currentTiddler>>/>
+	<$macrocall $name="show-tweet" title=<<currentTiddler>>/>
+</$list>
+\end
+
+\define show-hashtag()
+<a href={{{ [{!!user_id}addprefix[https://twitter.com/intent/user?user_id=]] }}} rel="noopener noreferrer" target="_blank">View on Twitter</a>
+<$macrocall $name="skinny-tabs" tabNames="show-hashtag-tweets" tabCaptions="Tweets" defaultTab="show-hashtag-tweets" state=<<qualify "$:/state/skinny-tabs/hashtag-tweets">>/>
+\end
+
+\define show-hashtag-tweets()
+<$list filter="[tag[$:/tags/Tweet]tag<currentTiddler>]">
+	<$macrocall $name="show-tweet" title=<<currentTiddler>>/>
 </$list>
 \end
