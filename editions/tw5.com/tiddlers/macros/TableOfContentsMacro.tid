@@ -66,7 +66,7 @@ These two parameters are combined into a single [[filter expression|Filter Expre
 
 <<.from-version "5.2.4">>
 
-It is possible to define the `toc-open-icon` and `toc-closed-icon` macros or variables, to change the icons used by the toc macros. This setting works for all toc-macro variants.
+To change the icons used by the Table-of-Contents macros, redefine the macros `toc-open-icon` and `toc-closed-icon`. This setting works for all toc-macro variants.
 
 !!! Default Settings
 
@@ -76,7 +76,7 @@ It is possible to define the `toc-open-icon` and `toc-closed-icon` macros or var
 
 !!! Custom Definitions
 
-The default settings can be overwritten in your code using the define-pragma or the let-widget. The let-widget can be used, if you have multiple toc-macros in one tiddler, that need different icons. 
+The default settings can be overwritten in your code using the define-pragma or the let-widget. The <<.wlink LetWidget>> widget can be used, if you have multiple table of contents macros in one tiddler, that need different icons. 
 
 ''Define new icons using a pragma''
 

@@ -6,7 +6,7 @@ tags: table-of-contents-example
 title: Example Table of Contents: Selectively Expandable (custom icons)
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.2.4">> it's possible to define the `toc-open-icon` and `toc-closed-icon` variable, to change the icons used by the toc macros. This setting works for all toc-macro variants
+<<.from-version "5.2.4">> It is possible to define the `toc-open-icon` and `toc-closed-icon` variable, to change the icons used by the toc macros. This setting works for all toc-macro variants
 
 <$macrocall $name=".example" n="1"
 eg="""<$let toc-open-icon="$:/core/images/fold-button" toc-closed-icon="$:/core/images/folder">
