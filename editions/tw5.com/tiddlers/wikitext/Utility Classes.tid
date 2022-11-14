@@ -1,0 +1,20 @@
+created: 20220818093624828
+modified: 20221010074235929
+tags: WikiText
+title: Utility Classes
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.4">> The following outlines a few predefined CSS classes intended to make it simpler to style [[HTML block-elements|HTML Block Elements]] and [[wikitext tables|Tables in WikiText CSS Utility Classes]].
+
+!! General Utility Classes
+
+|`tc-center` |Centres a block-element to the middle of the container |
+|`tc-max-width `|Expands a block-element to use the maximum width of the container |
+|`tc-max-width-80`|Sets the width of a block-element to use 80% of the maximum container width. This setting is useful with the `tc-center` class |
+|`tc-edit-max-width `|Expands [[TextWidget]]s to use the maximum available width. See [[ControlPanel -> Info -> Basics|$:/core/ui/ControlPanel/Basics]]|
+|`tc-first-link-nowrap` |Ensures that any links in the first table column will never wrap to the next line |
+
+!! Table Utility Classes
+
+|`tc-table-no-border` |Removes the borders of a table |
+|`tc-first-col-min-width` |The first column of a table will take up minimal possible width. It adapts to the content |

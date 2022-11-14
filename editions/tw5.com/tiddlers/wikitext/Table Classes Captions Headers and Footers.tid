@@ -1,0 +1,20 @@
+created: 20220819100636227
+modified: 20220819101309072
+tags: [[Tables in WikiText]]
+title: Table Classes, Captions, Headers and Footers
+type: text/vnd.tiddlywiki
+
+Table CSS classes, captions, headers and footers can be specified as special pseudo-rows. The following example:
+
+* `|myclass anotherClass|k` assigns the CSS classes "myclass" and "anotherClass" to the table
+* `|This is a caption |c` gives the table the caption "This is a caption"
+* `|Header|Header|h` adds a header row of cells with the text "Header"
+* `|Footer|Footer|f` adds a footer row of cells with the text "Footer"
+
+<<wikitext-example-without-html src:"""|myclass anotherClass|k
+|This is a caption |c
+|Cell1 |Cell2 |
+|Cell3 |Cell3 |
+|Header|Header|h
+|Footer|Footer|f
+""">>

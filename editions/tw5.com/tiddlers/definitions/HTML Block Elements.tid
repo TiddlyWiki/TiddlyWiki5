@@ -1,0 +1,9 @@
+created: 20220818091959523
+modified: 20220818092101307
+tags: Definitions
+title: HTML Block Elements
+type: text/vnd.tiddlywiki
+
+<<<
+HTML (Hypertext Markup Language) elements historically were categorized as either "block-level" elements or "inline-level" elements. Since this is a presentational characteristic it is nowadays specified by CSS in the Flow Layout. A Block-level element occupies the entire horizontal space of its parent element (container), and vertical space equal to the height of its contents, thereby creating a "block".
+<<< https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements
