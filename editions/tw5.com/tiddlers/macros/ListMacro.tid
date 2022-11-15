@@ -1,6 +1,6 @@
 caption: list-links
 created: 20140917083515996
-modified: 20190206000000000
+modified: 20221105090835041
 tags: Macros [[Core Macros]]
 title: list-links Macro
 type: text/vnd.tiddlywiki
@@ -15,6 +15,8 @@ Note: Each first [[step|Filter Step]] of a [[filter run|Filter Run]] not given a
 
 ;filter
 : A [[filter|Filters]] selecting which tiddlers to include
+;caption
+: The name of the field to transclude for each list item, defaultingt to `caption`
 ;type
 : An HTML element to use for the overall list element, defaulting to `ul`
 ;subtype

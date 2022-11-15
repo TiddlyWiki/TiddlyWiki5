@@ -1,0 +1,4 @@
+title: Hidden Setting: Retain Story ordering
+tags: [[Hidden Settings]]
+
+<<.from-version "5.2.4">> The tiddler $:/config/ControlPanel/Basics/DefaultTiddlers/RetainStory contains the value that is assigned to $:/DefaultTiddlers when clicking the "retain story ordering" button in $:/ControlPanel under the ''Info'' -> ''Basics'' tab.

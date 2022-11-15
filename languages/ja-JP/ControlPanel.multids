@@ -7,7 +7,7 @@ Appearance/Hint: TiddlyWiki 外観のカスタマイズ方法
 Basics/AnimDuration/Prompt: アニメーション時間:
 Basics/AutoFocus/Prompt: 新しい Tiddler の標準フォーカスフィールド
 Basics/Caption: 基本
-Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは &#91;&#91;二重の角カッコ&#93;&#93; を使用してください。そのほか <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保存時の表示を維持</$button> することもできます。
+Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは &#91;&#91;二重の角カッコ&#93;&#93; を使用してください。そのほか {{保存時の表示を維持||$:/snippets/retain-story-ordering-button}} することもできます。
 Basics/DefaultTiddlers/Prompt: デフォルト Tiddler:
 Basics/DefaultTiddlers/TopHint: このファイルを開いたときに初期表示される Tiddler を設定してください:
 Basics/Language/Prompt: 現在の言語:

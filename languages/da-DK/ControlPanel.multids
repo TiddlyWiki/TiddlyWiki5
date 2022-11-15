@@ -6,7 +6,7 @@ Appearance/Caption: Design
 Appearance/Hint: Måder at tilpasse udseendet af din TiddlyWiki.
 Basics/AnimDuration/Prompt: Animationsvarighed
 Basics/Caption: Basis
-Basics/DefaultTiddlers/BottomHint: Brug &#91;&#91;dobbelt  firkantede parenteser&#93;&#93; for titler med mellemrum. Eller du kan vælge at <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">gemme de aktuelt åbne tiddlere</$button>
+Basics/DefaultTiddlers/BottomHint: Brug &#91;&#91;dobbelt  firkantede parenteser&#93;&#93; for titler med mellemrum. Eller du kan vælge at {{gemme de aktuelt åbne tiddlere||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Standardtiddlere:
 Basics/DefaultTiddlers/TopHint: Vælg hvilke tiddlere der vises ved opstart:
 Basics/Language/Prompt: Hallo! Aktuelt sprog:

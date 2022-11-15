@@ -7,7 +7,7 @@ Appearance/Hint: Formes de personalitzar l'aparença del vostre TiddlyWiki.
 Basics/AnimDuration/Prompt: Duració de l'animació:
 Basics/AutoFocus/Prompt: Focus dels nous tiddlers
 Basics/Caption: Bàsic
-Basics/DefaultTiddlers/BottomHint: Useu &#91;&#91;claudàtors dobles&#93;&#93; per als títols amb espais. O trieu <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">restaura la sessió anterior en arrencar</$button>
+Basics/DefaultTiddlers/BottomHint: Useu &#91;&#91;claudàtors dobles&#93;&#93; per als títols amb espais. O trieu {{restaura la sessió anterior en arrencar||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers per omissió:
 Basics/DefaultTiddlers/TopHint: Trieu quins tiddlers s'han de mostrar a l'inici:
 Basics/Language/Prompt: Bon dia! Trieu l'idioma:

@@ -233,6 +233,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build index \
 	|| exit 1
 
+# /editions/twitter-archivist/index.html	Twitter Archivist edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/twitter-archivist \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/editions/twitter-archivist/ \
+	--build index \
+	|| exit 1
+
 ######################################################
 #
 # Plugin demos
