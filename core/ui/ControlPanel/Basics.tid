@@ -20,15 +20,16 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 \end
 \whitespace trim
 
+|tc-max-width tc-edit-max-width|k
 |<<lingo Version/Prompt>> |''<<version>>'' |
 |<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
 |<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
 |<$link to="$:/status/UserName"><<lingo Username/Prompt>></$link> |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
 |<$link to="$:/config/AnimationDuration"><<lingo AnimDuration/Prompt>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
-|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit tag="textarea" tiddler="$:/DefaultTiddlers" class="tc-edit-texteditor"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit class="tc-edit-texteditor" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 |<$link to="$:/language/DefaultNewTiddlerTitle"><<lingo NewTiddler/Title/Prompt>></$link> |<$edit-text tiddler="$:/language/DefaultNewTiddlerTitle" default="" tag="input"/> |
 |<$link to="$:/config/NewJournal/Title"><<lingo NewJournal/Title/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Title" default="" tag="input"/> |
-|<$link to="$:/config/NewJournal/Text"><<lingo NewJournal/Text/Prompt>></$link> |<$edit tiddler="$:/config/NewJournal/Text" tag="textarea" class="tc-edit-texteditor" default=""/> |
+|<$link to="$:/config/NewJournal/Text"><<lingo NewJournal/Text/Prompt>></$link> |<$edit tiddler="$:/config/NewJournal/Text" class="tc-edit-texteditor" default=""/> |
 |<$link to="$:/config/NewTiddler/Tags"><<lingo NewTiddler/Tags/Prompt>></$link> |<$vars currentTiddler="$:/config/NewTiddler/Tags" tagField="text">{{||$:/core/ui/EditTemplate/tags}}<$list filter="[<currentTiddler>tags[]] +[limit[1]]" variable="ignore"><$button tooltip={{$:/language/ControlPanel/Basics/RemoveTags/Hint}}><<lingo RemoveTags>><$action-listops $tiddler=<<currentTiddler>> $field="text" $subfilter={{{ [<currentTiddler>get[tags]] }}}/><$action-setfield $tiddler=<<currentTiddler>> tags=""/></$button></$list></$vars> |
 |<$link to="$:/config/NewJournal/Tags"><<lingo NewJournal/Tags/Prompt>></$link> |<$vars currentTiddler="$:/config/NewJournal/Tags" tagField="text">{{||$:/core/ui/EditTemplate/tags}}<$list filter="[<currentTiddler>tags[]] +[limit[1]]" variable="ignore"><$button tooltip={{$:/language/ControlPanel/Basics/RemoveTags/Hint}}><<lingo RemoveTags>><$action-listops $tiddler=<<currentTiddler>> $field="text" $subfilter={{{ [<currentTiddler>get[tags]] }}}/><$action-setfield $tiddler=<<currentTiddler>> tags=""/></$button></$list></$vars> |
 |<$link to="$:/config/AutoFocus"><<lingo AutoFocus/Prompt>></$link> |{{$:/snippets/minifocusswitcher}} |
