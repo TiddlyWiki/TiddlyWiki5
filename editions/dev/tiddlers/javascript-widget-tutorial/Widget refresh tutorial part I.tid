@@ -1,0 +1,47 @@
+created: 20190201232847949
+modified: 20221029203553291
+tags: 
+title: Widget refresh tutorial part I
+type: text/vnd.tiddlywiki
+
+But what if we want to display dynamic content? How can we display information and keep it up to date as it changes? Let's display the content of a tiddler field.
+
+The [[tiddlerfield-norefresh.js]] which defines the `tiddlerfield` widget is almost the same as [[hello.js]] except for this part:
+
+```javascript
+MyWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
+	var text = this.wiki.getTiddlerText("test", "<empty>")
+	var textNode = this.document.createTextNode(text);
+	parent.insertBefore(textNode,nextSibling);
+	this.domNodes.push(textNode);
+};
+```
+
+Instead of creating the text dom node from a static string, the text field of the `test` tiddler is used. This is similar to using the view widget like this:  `<$view tiddler="test"/>`
+
+Here's how it looks (see [[Widget refresh demo I]] to look at the code):
+
+{{Widget refresh demo I}}
+
+Notice if you change the text in the input box, the output from the `tiddlerfield` widget doesn't change, but the output of the `view` widget does. Only after the ''Force refresh'' button is clicked does the output of `tiddlerfield` update to match the input box contents.
+
+What's going on here? The render method of the widget code is only called by tiddlywiki core when the widget is first created. After that, it isn't called again unless the widget is completely destroyed and then created again. 
+
+The tiddlywiki ~ViewWidget has a properly written `refresh` method so typing in the input box will cause its content to update. However, the `tiddlerfield` widget does not have a `refresh` method at all. It has no way of being notified that the `test` tiddler content has changed. Its output will not change until the ''Force refresh'' button is clicked.
+
+See the next example for an implementation of the `refresh` method for the `tiddlerfield` widget.
+
+The code for the refresh button looks like this:
+
+```
+<$button set="!!refresh" setTo={{test}}>Force refresh</$button>
+```
+
+and the widgets are enclosed in a list widget like this:
+
+```
+<$list filter="[{!!refresh}]">...</$list>
+```
+
+When the button is clicked the field `refresh` in the containing tiddler is modified and it causes the children of the list widget to be created from scratch. The render method is called and the output of the `tiddlerfield` widget updates.

@@ -13,3 +13,8 @@ tags: $:/tags/Stylesheet
 .tc-translators-string-table .tc-drop-down {
 	min-width: 500px;
 }
+
+.tc-tiddler-frame textarea.tc-edit-texteditor,
+.tc-tiddler-frame input.tc-edit-texteditor {
+  background-color: #feffef;
+}

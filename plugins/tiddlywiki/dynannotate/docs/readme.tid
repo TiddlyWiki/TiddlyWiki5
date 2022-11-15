@@ -108,11 +108,11 @@ The selection tracker triggers an action string whenever the browser text select
 
 The selection tracker works within DOM subtrees that have the following structure:
 
-* The outer wrapper element has the attribute `data-selection-action-title` containing the title of the tiddler containing the action string to be invoked when the selection changes
+* The outer wrapper element has the attribute `data-selection-actions-title` containing the title of the tiddler containing the action string to be invoked when the selection changes
 * Each child element of the outer element must have a unique `id` attribute to identify it
 
 ```
-<div data-selection-action-title="{tiddler title}">
+<div data-selection-actions-title="{tiddler title}">
 	<div id="{title}">
 		Content text
 	</div>

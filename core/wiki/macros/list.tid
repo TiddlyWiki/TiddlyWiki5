@@ -1,21 +1,21 @@
 title: $:/core/macros/list
 tags: $:/tags/Macro
 
-\define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage)
+\define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,field:"caption")
 \whitespace trim
-<$type$ class="$class$">
-<$list filter="$filter$" emptyMessage=<<__emptyMessage__>>>
-<$subtype$>
+<$genesis $type=<<__type__>> class=<<__class__>>>
+<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
+<$genesis $type=<<__subtype__>>>
 <$link to={{!!title}}>
 <$let tv-wikilinks="no">
-<$transclude field="caption">
+<$transclude field=<<__field__>>>
 <$view field="title"/>
 </$transclude>
 </$let>
 </$link>
-</$subtype$>
+</$genesis>
 </$list>
-</$type$>
+</$genesis>
 \end
 
 \define list-links-draggable-drop-actions()

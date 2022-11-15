@@ -18,7 +18,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
-<$transclude mode="block"/>
+<$transclude tiddler="$:/core/ui/ViewTemplate/body" mode="block"/>
 
 </$navigator>
 

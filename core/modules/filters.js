@@ -12,6 +12,9 @@ Adds tiddler filtering methods to the $tw.Wiki object.
 /*global $tw: false */
 "use strict";
 
+/* Maximum permitted filter recursion depth */
+var MAX_FILTER_DEPTH = 300;
+
 /*
 Parses an operation (i.e. a run) within a filter string
 	operators: Array of array of operator nodes into which results should be inserted
@@ -328,7 +331,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	var compiled = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -338,9 +341,15 @@ exports.compileFilter = function(filterString) {
 			widget = $tw.rootWidget;
 		}
 		var results = new $tw.utils.LinkedList();
-		$tw.utils.each(operationFunctions,function(operationFunction) {
-			operationFunction(results,source,widget);
-		});
+		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
+		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
+			$tw.utils.each(operationFunctions,function(operationFunction) {
+				operationFunction(results,source,widget);
+			});
+		} else {
+			results.push("/**-- Excessive filter recursion --**/");
+		}
+		self.filterRecursionCount = self.filterRecursionCount - 1;
 		return results.toArray();
 	});
 	if(this.filterCacheCount >= 2000) {
@@ -350,9 +359,9 @@ exports.compileFilter = function(filterString) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
 	}
-	this.filterCache[filterString] = compiled;
+	this.filterCache[filterString] = fnMeasured;
 	this.filterCacheCount++;
-	return compiled;
+	return fnMeasured;
 };
 
 })();

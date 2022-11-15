@@ -7,7 +7,7 @@ Appearance/Hint: Personnalisation de l'apparence de votre ~TiddlyWiki.
 Basics/AnimDuration/Prompt: Durée de l'animation
 Basics/AutoFocus/Prompt: Champ qui recevra le focus par défaut pour les nouveaux tiddlers
 Basics/Caption: Fondamentaux
-Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
+Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de {{Conserver le déroulé actuel||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
 Basics/DefaultTiddlers/TopHint: Liste les tiddlers qui seront affichés au démarrage :
 Basics/Language/Prompt: Bonjour ! Langue active :
@@ -36,7 +36,7 @@ EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer 
 EditorTypes/Type/Caption: Type
 EditTemplateBody/Caption: Édition du corps
 EditTemplateBody/Hint: Cette cascade de règles est utilisée par le template d'édition par défaut pour choisir dynamiquement le template à appliquer pour éditer le corps d'un tiddler.
-FieldEditor/Caption: Éditeur de champ
+FieldEditor/Caption: Édition des champs
 FieldEditor/Hint: Cette cascade de règles sert à choisir dynamiquement le template de rendu d'un champ de tiddler en fonction de son nom. Il est utilisé dans le template d'édition.
 Info/Caption: Info
 Info/Hint: Information sur ce TiddlyWiki
@@ -198,7 +198,7 @@ Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des 
 Settings/MissingLinks/Caption: Liens wiki
 Settings/MissingLinks/Hint: Peut-on pointer vers des tiddlers qui n'existent pas encore ?
 Settings/MissingLinks/Description: Active les liens vers les tiddlers inexistants
-StoryTiddler/Caption: Tiddler dans le déroulé
+StoryTiddler/Caption: Tiddlers du déroulé
 StoryTiddler/Hint: Cette cascade de règles sert à choisir dynamiquement le template d'affichage d'un tiddler dans le déroulé.
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
@@ -227,5 +227,5 @@ Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mo
 Tools/Download/Full/Caption: Télécharger le wiki complet
 ViewTemplateBody/Caption: Visualisation du corps
 ViewTemplateBody/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du corps d'un tiddler.
-ViewTemplateTitle/Caption: Template de visualisation du titre
+ViewTemplateTitle/Caption: Visualisation du titre
 ViewTemplateTitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du titre d'un tiddler.

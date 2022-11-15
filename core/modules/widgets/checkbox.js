@@ -66,14 +66,14 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler || this.checkboxFilter) {
-		if(this.checkboxTag) {
+		if(tiddler && this.checkboxTag) {
 			if(this.checkboxInvertTag === "yes") {
 				return !tiddler.hasTag(this.checkboxTag);
 			} else {
 				return tiddler.hasTag(this.checkboxTag);
 			}
 		}
-		if(this.checkboxField || this.checkboxIndex) {
+		if(tiddler && (this.checkboxField || this.checkboxIndex)) {
 			// Same logic applies to fields and indexes
 			var value;
 			if(this.checkboxField) {
@@ -206,11 +206,18 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Set the list field (or index) if specified
 	if(this.checkboxListField || this.checkboxListIndex) {
-		var listContents, oldPos, newPos;
+		var fieldContents, listContents, oldPos, newPos;
 		if(this.checkboxListField) {
-			listContents = tiddler.getFieldList(this.checkboxListField);
+			fieldContents = tiddler ? tiddler.fields[this.checkboxListField] : undefined;
 		} else {
-			listContents = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex) || "") || [];
+			fieldContents = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex);
+		}
+		if($tw.utils.isArray(fieldContents)) {
+			// Make a copy so we can modify it without changing original that's refrenced elsewhere
+			listContents = fieldContents.slice(0);
+		} else {
+			listContents = $tw.utils.parseStringArray(fieldContents) || [];
+			// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
 		}
 		oldPos = notValue ? listContents.indexOf(notValue) : -1;
 		newPos = value ? listContents.indexOf(value) : -1;

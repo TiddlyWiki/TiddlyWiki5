@@ -46,21 +46,17 @@ open the ''example edition'' in a new window
 
 <$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
 
-```
-$src$
-```
+<$codeblock code=<<__src__>>/>
 
 That renders as:
 
-$$$text/vnd.tiddlywiki
-$src$
-$$$
+<$macrocall $name="__src__"/>
 
 ... and the underlying HTML is:
 
-$$$text/vnd.tiddlywiki>text/html
-$src$
-$$$
+<$wikify name="html" text=<<__src__>> output="html">
+<$codeblock code=<<html>>/>
+</$wikify>
 </div>
 \end
 
@@ -69,15 +65,12 @@ $$$
 
 <$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
 
-```
-$src$
-```
+<$codeblock code=<<__src__>>/>
 
 That renders as:
 
-$$$text/vnd.tiddlywiki
-$src$
-$$$
+<$macrocall $name="__src__"/>
+
 </div>
 \end
 

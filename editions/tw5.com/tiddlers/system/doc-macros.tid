@@ -117,7 +117,7 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 <table class="doc-bad-example">
 <tbody>
 <tr class="evenRow">
-<td><span class="tc-inline-style" style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
+<td><span style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
 <td>
 
 $eg$

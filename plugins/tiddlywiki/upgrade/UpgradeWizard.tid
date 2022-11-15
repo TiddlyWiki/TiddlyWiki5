@@ -6,7 +6,9 @@ tags: $:/tags/AboveStory
 
 <div class="tc-upgrade-wizard">
 
-! ~TiddlyWiki Upgrade Wizard
+! Upgrade Wizard
+
+!! ~TiddlyWiki version <<version>>
 
 <$list filter="[[$:/Import]is[missing]]">
 
@@ -47,8 +49,6 @@ For help and support, visit [[the TiddlyWiki discussion forum|http://groups.goog
 </$reveal>
 
 </div>
-
-version <<version>>
 
 //Your data will not leave your browser. <a href="#" download="upgrade.html">Download</a> this upgrader to use it offline//
 

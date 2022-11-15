@@ -1,0 +1,27 @@
+title: Filters/FakeVariables
+description: Test for https://github.com/Jermolene/TiddlyWiki5/issues/6303
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$list variable="var" filter="[[existing variable should have output]] :filter[[..currentTiddler]is[variable]]">
+<p><<var>></p>
+</$list>
+
+<$list variable="var" filter="[[non-existing variable should not have output]] :filter[[nonExistingVariable]is[variable]]">
+<p><<var>></p>
+</$list>
+
+<$list variable="var" filter="[[existing variable negated should not have output]] :filter[[..currentTiddler]!is[variable]]">
+<p><<var>></p>
+</$list>
+
+<$list variable="var" filter="[[non-existing variable negated should have output]] :filter[[nonExistingVariable]!is[variable]]">
+<p><<var>></p>
+</$list>
++
+title: ExpectedResult
+
+<p><p>existing variable should have output</p></p><p></p><p></p><p><p>non-existing variable negated should have output</p></p>

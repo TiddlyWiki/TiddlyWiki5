@@ -1230,13 +1230,16 @@ $tw.Wiki = function(options) {
 	this.getTiddler = function(title) {
 		if(title) {
 			var t = tiddlers[title];
-			if(t instanceof $tw.Tiddler) {
+			if(t !== undefined) {
 				return t;
-			} else if(title !== undefined && shadowTiddlers[title]) {
-				return shadowTiddlers[title].tiddler;
+			} else {
+				var s = shadowTiddlers[title];
+				if(s !== undefined) {
+					return s.tiddler;
+				}
 			}
-			return undefined;
 		}
+		return undefined;
 	};
 
 	// Get an array of all tiddler titles
@@ -2400,11 +2403,11 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
 	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
+	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
 	$tw.utils.registerFileType("video/ogg","base64",[".ogm",".ogv",".ogg"]);
 	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
-	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
 	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
@@ -2416,7 +2419,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
 	// Create the wiki store for the app
-	$tw.wiki = new $tw.Wiki();
+	$tw.wiki = new $tw.Wiki($tw.safeMode && {enableIndexers: []});
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules

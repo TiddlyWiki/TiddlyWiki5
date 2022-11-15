@@ -234,6 +234,38 @@ Tests the checkbox widget thoroughly.
             },
         ];
 
+        // https://github.com/Jermolene/TiddlyWiki5/issues/6871
+        const listModeTestsWithListField = (
+            listModeTests
+            .filter(data => data.widgetText.includes("listField='colors'"))
+            .map(data => {
+                const newData = {
+                    ...data,
+                    tiddlers: data.tiddlers.map(tiddler => ({...tiddler, list: tiddler.colors, colors: undefined})),
+                    widgetText: data.widgetText.replace("listField='colors'", "listField='list'"),
+                    expectedChange: {
+                        "Colors": { list: data.expectedChange.Colors.colors.split(' ') }
+                    },
+                }
+                return newData;
+            })
+        );
+        const listModeTestsWithTagsField = (
+            listModeTests
+            .filter(data => data.widgetText.includes("listField='colors'"))
+            .map(data => {
+                const newData = {
+                    ...data,
+                    tiddlers: data.tiddlers.map(tiddler => ({...tiddler, tags: tiddler.colors, colors: undefined})),
+                    widgetText: data.widgetText.replace("listField='colors'", "listField='tags'"),
+                    expectedChange: {
+                        "Colors": { tags: data.expectedChange.Colors.colors.split(' ') }
+                    },
+                }
+                return newData;
+            })
+        );
+
         const indexListModeTests = listModeTests.map(data => {
             const newData = {...data};
             const newName = data.testName.replace('list mode', 'index list mode');
@@ -453,6 +485,8 @@ Tests the checkbox widget thoroughly.
         const checkboxTestData = fieldModeTests.concat(
             indexModeTests,
             listModeTests,
+            listModeTestsWithListField,
+            listModeTestsWithTagsField,
             indexListModeTests,
             filterModeTests,
         );
@@ -495,7 +529,7 @@ Tests the checkbox widget thoroughly.
                     for (const fieldName of Object.keys(change)) {
                         const expectedValue = change[fieldName];
                         const fieldValue = tiddler.fields[fieldName];
-                        expect(fieldValue).toBe(expectedValue);
+                        expect(fieldValue).toEqual(expectedValue);
                     }
                 }
             })

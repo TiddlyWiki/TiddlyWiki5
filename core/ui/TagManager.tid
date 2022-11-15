@@ -3,89 +3,101 @@ icon: $:/core/images/tag-button
 color: #bbb
 
 \define lingo-base() $:/language/TagManager/
+
 \define iconEditorTab(type)
 \whitespace trim
 <$link to=""><<lingo Icons/None>></$link>
 <$list filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[sort[title]] +[$type$is[system]]">
-<$link to={{!!title}}>
-<$transclude/> <$view field="title"/>
-</$link>
+	<$link to={{!!title}}>
+		<$transclude/> <$view field="title"/>
+	</$link>
 </$list>
 \end
+
 \define iconEditor(title)
 \whitespace trim
 <div class="tc-drop-down-wrapper">
-<$button popupTitle={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}} class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
-<$reveal stateTitle={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}} type="popup" position="belowleft" text="" default="">
-<div class="tc-drop-down">
-<$linkcatcher actions="""<$action-setfield $tiddler=<<__title__>> icon=<<navigateTo>>/>""">
-<<iconEditorTab type:"!">>
-<hr/>
-<<iconEditorTab type:"">>
-</$linkcatcher>
-</div>
-</$reveal>
+	<$button popupTitle={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}} class="tc-btn-invisible tc-btn-dropdown">
+		{{$:/core/images/down-arrow}}
+	</$button>
+	<$reveal stateTitle={{{ [[$:/state/popup/icon/]addsuffix<__title__>] }}} type="popup" position="belowleft" text="" default="">
+		<div class="tc-drop-down">
+			<$linkcatcher actions="""<$action-setfield $tiddler=<<__title__>> icon=<<navigateTo>>/>""">
+				<<iconEditorTab type:"!">>
+				<hr/>
+				<<iconEditorTab type:"">>
+			</$linkcatcher>
+		</div>
+	</$reveal>
 </div>
 \end
+
 \define toggleButton(state)
 \whitespace trim
 <$reveal stateTitle=<<__state__>> type="match" text="closed" default="closed">
-<$button setTitle=<<__state__>> setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
-{{$:/core/images/info-button}}
-</$button>
+	<$button setTitle=<<__state__>> setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+		{{$:/core/images/info-button}}
+	</$button>
 </$reveal>
 <$reveal stateTitle=<<__state__>> type="match" text="open" default="closed">
-<$button setTitle=<<__state__>> setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
-{{$:/core/images/info-button}}
-</$button>
+	<$button setTitle=<<__state__>> setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+		{{$:/core/images/info-button}}
+	</$button>
 </$reveal>
 \end
+
 \whitespace trim
 <table class="tc-tag-manager-table">
 <tbody>
-<tr>
-<th><<lingo Colour/Heading>></th>
-<th class="tc-tag-manager-tag"><<lingo Tag/Heading>></th>
-<th><<lingo Count/Heading>></th>
-<th><<lingo Icon/Heading>></th>
-<th><<lingo Info/Heading>></th>
-</tr>
-<$list filter="[tags[]!is[system]sort[title]]">
-<tr>
-<td><$edit-text field="color" tag="input" type="color"/></td>
-<td>{{||$:/core/ui/TagTemplate}}</td>
-<td><$count filter="[all[current]tagging[]]"/></td>
-<td>
-<$macrocall $name="iconEditor" title={{!!title}}/>
-</td>
-<td>
-<$macrocall $name="toggleButton" state={{{ [[$:/state/tag-manager/]addsuffix<currentTiddler>] }}} /> 
-</td>
-</tr>
-<tr>
-<td></td>
-<td colspan="4">
-<$reveal stateTitle={{{ [[$:/state/tag-manager/]addsuffix<currentTiddler>] }}} type="match" text="open" default="">
-<table>
-<tbody>
-<tr><td><<lingo Colour/Heading>></td><td><$edit-text field="color" tag="input" type="text" size="9"/></td></tr>
-<tr><td><<lingo Icon/Heading>></td><td><$edit-text field="icon" tag="input" size="45"/></td></tr>
-</tbody>
-</table>
-</$reveal>
-</td>
-</tr>
-</$list>
-<tr>
-<td></td>
-<td style="position:relative;">
-{{$:/core/ui/UntaggedTemplate}}
-</td>
-<td>
-<small class="tc-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>
-</td>
-<td></td>
-<td></td>
-</tr>
+	<tr>
+		<th><<lingo Colour/Heading>></th>
+		<th class="tc-tag-manager-tag"><<lingo Tag/Heading>></th>
+		<th><<lingo Count/Heading>></th>
+		<th><<lingo Icon/Heading>></th>
+		<th><<lingo Info/Heading>></th>
+	</tr>
+	<$list filter="[tags[]!is[system]sort[title]]">
+		<tr>
+			<td><$edit-text field="color" tag="input" type="color"/></td>
+			<td>{{||$:/core/ui/TagTemplate}}</td>
+			<td><$count filter="[all[current]tagging[]]"/></td>
+			<td>
+				<$macrocall $name="iconEditor" title={{!!title}}/>
+			</td>
+			<td>
+				<$macrocall $name="toggleButton" state={{{ [[$:/state/tag-manager/]addsuffix<currentTiddler>] }}} />
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td colspan="4">
+				<$reveal stateTitle={{{ [[$:/state/tag-manager/]addsuffix<currentTiddler>] }}} type="match" text="open" default="">
+					<table>
+						<tbody>
+							<tr>
+								<td><<lingo Colour/Heading>></td>
+								<td><$edit-text field="color" tag="input" type="text" size="9"/></td>
+							</tr>
+							<tr>
+								<td><<lingo Icon/Heading>></td>
+								<td><$edit-text field="icon" tag="input" size="45"/></td>
+							</tr>
+						</tbody>
+					</table>
+				</$reveal>
+			</td>
+		</tr>
+	</$list>
+	<tr>
+		<td></td>
+		<td style="position:relative;">
+			{{$:/core/ui/UntaggedTemplate}}
+		</td>
+		<td>
+			<small class="tc-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>
+		</td>
+		<td></td>
+		<td></td>
+	</tr>
 </tbody>
 </table>

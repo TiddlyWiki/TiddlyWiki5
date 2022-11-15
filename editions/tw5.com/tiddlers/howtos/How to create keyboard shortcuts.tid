@@ -66,6 +66,8 @@ In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the 
 
 !! Using global Keyboard Shortcuts
 
+> See [[Keyboard Shortcut Tiddler]] for detailed information about creating new global keyboard shortcuts.
+
 > The actions for ''global'' keyboard shortcuts are stored in the ''text'' field of tiddlers tagged with <<tag $:/tags/KeyboardShortcut>>
 
 > The ''key field'' connects an action-tiddler with the corresponding shortcut through the `((my-shortcut))` syntax, called [[Keyboard Shortcut Descriptor]]

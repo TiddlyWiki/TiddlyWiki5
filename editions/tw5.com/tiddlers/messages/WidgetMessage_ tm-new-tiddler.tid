@@ -22,7 +22,7 @@ The new tiddler message is usually generated with the ButtonWidget or ActionSend
 
 ! Examples
 
-To make a button that creates new tiddlers tagged "task", create a tiddler called "TaskTemplate" with that tag, and then make your button like this:
+To make a button that creates new tiddlers tagged "task", create a tiddler called "~TaskTemplate" with that tag, and then make your button like this:
 
 ```
 <$button message="tm-new-tiddler" param="TaskTemplate">New Task</$button>
