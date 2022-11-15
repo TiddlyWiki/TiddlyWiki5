@@ -913,7 +913,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	font-weight: normal;
 }
 
-/** Deprecate next rule since v5.2.4-prerelease. There should be P tags in tc-sidebar-lists **/
 .tc-sidebar-header .tc-sidebar-lists p {
 	margin-top: 3px;
 	margin-bottom: 3px;
