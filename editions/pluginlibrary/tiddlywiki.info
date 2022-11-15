@@ -4,10 +4,17 @@
 		"tiddlywiki/pluginlibrary"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
 	],
 	"includeWikis": [
 	],
 	"build": {
+		"test-server": [
+			"--output", "./files/local/library/tmp",
+			"--build", "library",
+			"--listen", "port=8888"
+		],
 		"library": [
 			"--makelibrary","$:/UpgradeLibrary",
    			"--savelibrarytiddlers","$:/UpgradeLibrary","[prefix[$:/]] -[[$:/plugins/tiddlywiki/upgrade]] -[[$:/plugins/tiddlywiki/translators]] -[[$:/plugins/tiddlywiki/pluginlibrary]] -[[$:/plugins/tiddlywiki/jasmine]]","recipes/library/tiddlers/","$:/UpgradeLibrary/List",
