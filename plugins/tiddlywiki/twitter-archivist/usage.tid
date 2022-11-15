@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/twitter-archivist/usage
 
 ! In the Browser
 
-To import a Twitter archive in the browser, click the button below and navigate to the root of the archive:
+To import a Twitter archive in the browser (currently Chrome only), click the button below and navigate to the root of the archive:
 
 <$button>
 <$action-sendmessage $message="tm-load-twitter-archive"/>
