@@ -5,10 +5,10 @@ title: $:/plugins/tiddlywiki/twitter-archivist/todo
 * Fixed display of tweet account information
 * Data model documentation
 * Expand t.co URLs
+* Wikify hashtags
 
 !! To Do
 
-* Wikify hashtags
 * Import direct messages
 * Control over which media types are imported
 * `_canonical_uri` support for media
