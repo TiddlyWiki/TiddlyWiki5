@@ -24,26 +24,28 @@ var CsvParser = function(type,text,options) {
 		}]
 	}];
 	// Split the text into lines
-	var lines = text.split(/\r?\n/mg),
+	var lines = $tw.utils.parseCsvString(text, options),
 		tag = "th";
+	var maxColumns = 0;
+	$tw.utils.each(lines, function(columns) {
+		maxColumns = Math.max(columns.length, maxColumns);
+	});
+	
 	for(var line=0; line<lines.length; line++) {
-		var lineText = lines[line];
-		if(lineText) {
-			var row = {
-					"type": "element", "tag": "tr", "children": []
-				};
-			var columns = lineText.split(",");
-			for(var column=0; column<columns.length; column++) {
-				row.children.push({
-						"type": "element", "tag": tag, "children": [{
-							"type": "text",
-							"text": columns[column]
-						}]
-					});
-			}
-			tag = "td";
-			this.tree[0].children[0].children[0].children.push(row);
+		var columns = lines[line];
+		var row = {
+			"type": "element", "tag": "tr", "children": []
+		};
+		for(var column=0; column<maxColumns; column++) {
+			row.children.push({
+				"type": "element", "tag": tag, "children": [{
+					"type": "text",
+					"text": columns[column] || ''
+				}]
+			});
 		}
+		tag = "td";
+		this.tree[0].children[0].children[0].children.push(row);
 	}
 };
 
