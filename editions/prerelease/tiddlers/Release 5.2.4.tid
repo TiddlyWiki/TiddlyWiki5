@@ -1,6 +1,6 @@
 caption: 5.2.4
-created: 20221101094408196
-modified: 20221101094408196
+created: 20221116172656216
+modified: 20221116172656216
 tags: ReleaseNotes
 title: Release 5.2.4
 type: text/vnd.tiddlywiki
@@ -9,13 +9,14 @@ type: text/vnd.tiddlywiki
 
 ! Plugin Improvements
 
-* 
+* New [[Twitter Archivist|./editions/twitter-archivist]] plugin to imports the tweets and associated media from a Twitter Archive as individual tiddlers
 
 ! Translation improvement
 
 Improvements to the following translations:
 
 * Chinese
+* French
 * Polish
 * Spanish
 * Japanese
@@ -37,6 +38,7 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/36896c3db8c9678c0385a561996248a6f00a45ff">> opening a tiddler in a new window to use the [[View Template Body Cascade]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6970">> detection of infinite recursion errors in widgets and filters
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6877">> default styles for [[styled runs|Styles and Classes in WikiText]]
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6881">> upgrade wizard to make the version number more prominent
 
 ! Widget Improvements
 
@@ -55,7 +57,10 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/166a1565843878083fb1eba47c73b8e67b78400d">> safe mode to prevent globally disabling parser rules
 * <<.link-badge-removed "https://github.com/Jermolene/TiddlyWiki5/commit/1df4c29d73073788ba3859668112e8bb46171a6c">> restriction of the LetWidget being unable to create variables whose names begin with a dollar sign
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6735">> keyboard shortcut handling to allow to global shortcuts to override all other shortcuts
-
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/965bd090a905f5756e79124b698c894f7f72ad5b">> [[list-links Macro]] to allow the rendered field to be overriden
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6913">> [[Table-of-Contents Macros]] to allow the default icons to be overridden
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6939">> ''data-tags-*'' and ''data-tiddler-title'' attributes to the edit preview area
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5947">> [[timeline Macro]] to override the link template
 
 ! Bug Fixes
 
@@ -71,6 +76,9 @@ Improvements to the translation features of TiddlyWiki:
 ! Node.js Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6947">> console logging to avoid spaces and `<empty string>` message
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certian circumstances
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/344110e2890caf711ab8f3c4f4deaa7d86771231">> handling of ".mp4" file extension so that it defaults to video not audio
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6588">> test server to the plugin library edition
 
 ! Performance Improvements
 
@@ -83,6 +91,7 @@ Improvements to the translation features of TiddlyWiki:
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+AnthonyMuscio
 bestony
 btheado
 BramChen
