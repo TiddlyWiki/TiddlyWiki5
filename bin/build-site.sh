@@ -459,7 +459,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
-	--build \
+	--build library\
 	|| exit 1
 
 # Delete the temporary build tiddler
