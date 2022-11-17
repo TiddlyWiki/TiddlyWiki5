@@ -46,6 +46,10 @@ var getCellInfo = function(text, start, length, SEPARATOR) {
 }
 	
 exports.parseCsvString = function(text, options) {
+	if (!text) {
+		return [];
+	}
+	
 	options = options || {};
 	var SEPARATOR = options.separator || ",",
 		length = text.length,
