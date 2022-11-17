@@ -78,6 +78,7 @@ describe("Utility tests", function() {
 		expect(fds(d,"ddd hh mm ssss")).toBe("Sun 17 41 2828");
 		expect(fds(d,"MM0DD")).toBe("1109");
 		expect(fds(d,"MM0\\D\\D")).toBe("110DD");
+		expect(fds(d,"TIMESTAMP")).toBe(d.getTime().toString());
 		const day = d.getUTCDate();
 		const dayStr = ("" + day).padStart(2, '0');
 		const hours = d.getUTCHours();

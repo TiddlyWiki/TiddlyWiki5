@@ -46,6 +46,7 @@ The date string is processed with the following substitutions:
 |`am` or `pm` |Lower case AM/PM indicator |
 |`AM` or `PM` |Upper case AM/PM indicator |
 |`TZD` |Timezone offset |
+|`TIMESTAMP` |Number of milliseconds since the ECMAScript epoch |
 |`\x` |Used to escape a character that would otherwise have special meaning |
 |`[UTC]`|Time-shift the represented date to UTC. Must be at very start of format string|
 
