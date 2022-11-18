@@ -81,7 +81,7 @@ Palette/Caption: paleta
 Palette/Hint: Wybierz paletę kolorów
 Permalink/Caption: bezpośredni link
 Permalink/Hint: Ustaw adres w przeglądarce na bezpośredni link do tego tiddlera
-Permaview/Caption: permanenty widok
+Permaview/Caption: link do obecnego widoku
 Permaview/Hint: Ustaw adres w przeglądarce na bezpośredni link do obecnego Story River
 Print/Caption: wydrukuj stronę
 Print/Hint: Drukuje aktualną stronę
@@ -97,7 +97,7 @@ HideSideBar/Caption: ukryj menu boczne
 HideSideBar/Hint: Ukryj menu boczne
 ShowSideBar/Caption: pokaż menu boczne
 ShowSideBar/Hint: Pokaż menu boczne
-TagManager/Caption: Menedżer tagów
+TagManager/Caption: menedżer tagów
 TagManager/Hint: Otwórz menedżer tagów
 Timestamp/Caption: aktualizacje czasu
 Timestamp/Hint: Wybierz czy zmiany mają aktualizować czas
@@ -124,7 +124,7 @@ Excise/Caption/Replace/Macro: makro
 Excise/Caption/Replace/Link: link
 Excise/Caption/Replace/Transclusion: transkluzja
 Excise/Caption/Tag: Otaguj nowego tiddlera nazwą tego
-Excise/Caption/TiddlerExists: Uwaga: Tiddler już istnieje
+Excise/Caption/TiddlerExists: Uwaga: tiddler już istnieje
 Excise/Hint: Wytnij zaznaczony tekst i wstaw go do nowego tidlera
 Heading1/Caption: nagłówek 1
 Heading1/Hint: Zmień zaznaczony tekst na nagłówek 1. stopnia
