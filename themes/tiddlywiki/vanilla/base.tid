@@ -395,6 +395,11 @@ CSV parser plugin
 	white-space: nowrap;
 }
 
+.tc-csv-table th,
+.tc-csv-table td {
+	white-space: pre-line;
+}
+
 /*
 Tiddler frame in story river
 */
