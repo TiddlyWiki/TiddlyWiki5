@@ -1,0 +1,81 @@
+created: 20220817153236691
+modified: 20221010074314452
+tags: [[Tables in WikiText]]
+title: Tables in WikiText CSS Utility Classes
+type: text/vnd.tiddlywiki
+
+~WikiText tables can be styled by applying CSS classes. For basic information on wiktext tables and how to style them, see [[Tables in WikiText]].
+
+{{Table Classes, Captions, Headers and Footers}}
+
+As seen above, the resulting table is left aligned and grows to fit the content. This is the browser default layout behaviour for tables. To get another behaviour, various CSS classes can be added into the "`k` row".
+
+! Utility Classes
+
+{{Utility Classes}}
+
+! Examples
+
+The following examples apply the style classes to tables but the "General Utility Classes" can as well be used on DIVs or other [[HTML block elements|HTML Block Elements]]
+
+!! Centred Table
+
+To center a table horizontally, use `tc-center`:
+
+<<wikitext-example-without-html src:"""|tc-center|k
+|This is a caption |c
+|Cell1 |Cell2 |
+|Cell3 |Cell4 |
+|Header|Header|h
+|Footer|Footer|f
+""">>
+
+!! Centred Table, 80% Width
+
+To add empty left and right margins to a table that is otherwise full-tiddler-width, you can use `tc-max-width-80`
+
+<<wikitext-example-without-html src:"""|tc-center tc-max-width-80|k
+|This is a caption |c
+|Cell1 |<<.lorem>> |
+|<<.lorem>> |Cell4 |
+|Header|Header|h
+""">>
+
+!! Table with Maximum Width
+
+To expand a table to full tiddler width, use `tc-max-width`
+
+<<wikitext-example-without-html src:"""|tc-max-width|k
+|Header|Header|h
+|Cell1 |Cell2 |
+|Cell3 |Cell4 |
+""">>
+
+!! Table with First Column Minimum Width
+
+The following example shows a simple "form" where the first columns width is adjusted to its content by means of `tc-first-col-min-width`
+
+<<wikitext-example-without-html src:"""|tc-max-width tc-first-col-min-width|k
+|Header|Header|h
+|Cell1 |<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
+|Cell3 |<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
+""">>
+
+!! Table with Maximum Width ~TextWidgets
+
+Here, the previous "form" is styled further to give the [[TextWidget]]s full width by adding the class `tc-edit-max-width`
+
+<<wikitext-example-without-html src:"""|tc-max-width tc-first-col-min-width tc-edit-max-width|k
+|Header|Header|h
+|Cell1 |<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
+|Cell3 |<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
+""">>
+
+!! Table with No Borders
+
+The following is a table with maximum width. It contains [[TextWidget]]s with maximum width. The first column is set to be minimum width. Further, all links in the first column are set to __not__ line break (wrap) regardless of window resize.
+
+<<wikitext-example-without-html src:"""|tc-max-width tc-first-col-min-width tc-edit-max-width tc-table-no-border tc-first-link-nowrap|k
+| Cell1|<$edit-text tiddler="$:/temp/test-table-input" tag="input" field="test"/> |
+|^ [[Link to a tiddler]]<br>some more text|<$edit-text tiddler="$:/temp/test-table-input" field="text"/>  |
+""">>
