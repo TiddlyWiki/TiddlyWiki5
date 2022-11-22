@@ -600,8 +600,11 @@ Widget.prototype.findFirstDomNode = function() {
 Remove any DOM nodes created by this widget or its children
 */
 Widget.prototype.removeChildDomNodes = function(options) {
-	const recursive = options && options.recursive;
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
+	var recursive = options && options.recursive;
+	/**
+	 * If this widget has directly created DOM nodes, delete them and exit.
+	 * This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
+	 */
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
