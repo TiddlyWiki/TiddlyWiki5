@@ -354,6 +354,9 @@ exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
 		matches = [
+			[/^TIMESTAMP/, function() {
+				return date.getTime();
+			}],
 			[/^0hh12/, function() {
 				return $tw.utils.pad($tw.utils.getHours12(date));
 			}],

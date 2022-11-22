@@ -326,7 +326,7 @@ table {
 }
 
 table th, table td {
-	padding: 0 7px 0 7px;
+	padding: 4px 6px 4px 6px;
 	border-top: 1px solid <<colour table-border>>;
 	border-left: 1px solid <<colour table-border>>;
 }
@@ -357,9 +357,34 @@ Table utility classes
 	width: 1%;
 }
 
+/*
+** Utility classes work well with tables but also for other containers
+*/
+
 /* First link A element will not wrap */
 .tc-first-link-nowrap:first-of-type a {
 	white-space: nowrap;
+}
+
+/* Move the table to the center of the container */
+.tc-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tc-max-width {
+	width: 100%;
+}
+
+.tc-max-width-80 {
+	max-width: 80%;
+}
+
+/* Allow input and textarea to look like the ControlPanel inputs */
+.tc-edit-max-width input,
+.tc-edit-max-width textarea {
+	width: 100%;
+	padding: 3px;
 }
 
 /*
@@ -368,6 +393,11 @@ CSV parser plugin
 
 .tc-csv-table {
 	white-space: nowrap;
+}
+
+.tc-csv-table th,
+.tc-csv-table td {
+	white-space: pre-line;
 }
 
 /*
