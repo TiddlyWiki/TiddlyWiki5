@@ -1,0 +1,9 @@
+created: 20221123153241635
+modified: 20221123153307890
+tags: 
+title: RadioWidget-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+third example -- vertical spacing problem

@@ -1,0 +1,15 @@
+created: 20221123155812501
+modified: 20221123155958564
+tags: 
+title: Block Quotes in WikiText-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+copy to clipbaord button has more vertical distance as the old version
+
+[img[copy-to-clipboard-old.png]]
+
+--
+
+[img[copy-to-clipboard-new.png]]

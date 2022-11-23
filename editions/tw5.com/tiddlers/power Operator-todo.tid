@@ -1,0 +1,11 @@
+created: 20221123151255885
+modified: 20221123151420696
+tags: 
+title: power Operator-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+text and links .. all text is widget created ... Investigate in more detail. vertical spacing
+
+''have a closer look at the DOM structure''

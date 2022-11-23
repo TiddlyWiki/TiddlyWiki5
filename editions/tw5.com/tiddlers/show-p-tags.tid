@@ -1,0 +1,9 @@
+created: 20221123120123910
+modified: 20221123142125955
+tags: 
+title: show-p-tags
+type: text/vnd.tiddlywiki
+
+p {
+  outline: 1px solid red;
+}

@@ -1,0 +1,9 @@
+created: 20221123151432434
+modified: 20221123151507426
+tags: 
+title: standard-deviation Operator-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+`<.tip ` macro vertical space with Examples link below it.

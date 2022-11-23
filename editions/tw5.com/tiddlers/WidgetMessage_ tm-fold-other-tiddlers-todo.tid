@@ -1,0 +1,15 @@
+created: 20221123144949371
+modified: 20221123145120672
+tags: 
+title: WidgetMessage: tm-fold-other-tiddlers-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+`<.warning` macro has a problem too
+
+[img[dot-warning-macro-old.png]]
+
+---
+
+[img[dot-warning-macro-new.png]]

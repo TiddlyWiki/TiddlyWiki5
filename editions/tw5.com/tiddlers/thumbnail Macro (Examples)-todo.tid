@@ -1,0 +1,11 @@
+created: 20221123155254602
+modified: 20221123155407720
+tags: 
+title: thumbnail Macro (Examples)-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+Both version have the same problem -- The video thumbnail goes "out of bounds" from the tiddler-frame
+
+[img[thumbnail-macor-example-old-and-new.png]]

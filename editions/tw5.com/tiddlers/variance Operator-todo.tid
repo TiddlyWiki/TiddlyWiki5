@@ -1,0 +1,9 @@
+created: 20221123151619713
+modified: 20221123151632268
+tags: 
+title: variance Operator-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+tip, text, links -- vertical spacing

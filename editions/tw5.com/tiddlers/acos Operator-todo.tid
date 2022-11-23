@@ -1,0 +1,9 @@
+created: 20221123151031589
+modified: 20221123151052241
+tags: 
+title: acos Operator-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+probelme with `<.tip ` macro vertical spacing

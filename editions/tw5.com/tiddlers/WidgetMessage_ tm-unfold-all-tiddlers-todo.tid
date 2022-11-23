@@ -1,0 +1,9 @@
+created: 20221123145649188
+modified: 20221123145734651
+tags: 
+title: WidgetMessage: tm-unfold-all-tiddlers-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+Problem with `<.tip ` and `<.warning ` macros vertical margin / gap

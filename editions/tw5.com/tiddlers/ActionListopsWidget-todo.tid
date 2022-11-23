@@ -1,0 +1,9 @@
+created: 20221123152001085
+modified: 20221123152026864
+tags: 
+title: ActionListopsWidget-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+Last example vertical spacing between buttons and link text bolow

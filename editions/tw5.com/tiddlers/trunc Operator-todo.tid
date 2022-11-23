@@ -1,0 +1,9 @@
+created: 20221123151524270
+modified: 20221123151547322
+tags: 
+title: trunc Operator-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+text, tip-macro, links -- vertical spacing

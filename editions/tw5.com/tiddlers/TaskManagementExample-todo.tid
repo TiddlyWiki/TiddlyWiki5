@@ -1,0 +1,9 @@
+created: 20221123162513124
+modified: 20221123162538778
+tags: 
+title: TaskManagementExample-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+task items have a vertical alignment problem

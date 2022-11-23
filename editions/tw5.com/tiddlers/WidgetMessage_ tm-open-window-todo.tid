@@ -1,0 +1,10 @@
+created: 20221123145512933
+modified: 20221123145548570
+tags: 
+title: WidgetMessage: tm-open-window-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+same problem as [[WidgetMessage: tm-close-window-todo]]
+with `<.tip ` macro

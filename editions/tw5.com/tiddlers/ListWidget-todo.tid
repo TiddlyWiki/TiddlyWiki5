@@ -1,0 +1,17 @@
+created: 20221123152845155
+modified: 20221123153125612
+tags: 
+title: ListWidget-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+displays as: first example vertical spacing is different. ''It is bigger in new version''
+
+Same thing with second list ... May be some CSS settings don't match anymore since P-tag is not there anymore. 
+
+[img[list-widget-old.png]]
+
+----
+
+[img[list-widget-new.png]]

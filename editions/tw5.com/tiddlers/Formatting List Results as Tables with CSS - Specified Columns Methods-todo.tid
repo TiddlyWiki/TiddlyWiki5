@@ -1,0 +1,17 @@
+created: 20221123162854638
+modified: 20221123163048951
+tags: 
+title: Formatting List Results as Tables with CSS - Specified Columns Methods-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+There seems to be major problem with `@@` styled blocks. 
+
+[img[styled-block-old.png]]
+
+---
+
+The DOM looks completely wrong. -- Check the parser and the widget output
+
+[img[styled-block-new.png]]

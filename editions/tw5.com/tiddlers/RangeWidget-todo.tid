@@ -1,0 +1,9 @@
+created: 20221123153332788
+modified: 20221123153355269
+tags: 
+title: RangeWidget-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+3rd example vertical spacing is different

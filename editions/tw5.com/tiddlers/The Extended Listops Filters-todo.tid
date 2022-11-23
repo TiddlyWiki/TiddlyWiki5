@@ -1,0 +1,16 @@
+created: 20221123145934503
+modified: 20221123150104510
+tags: 
+title: The Extended Listops Filters-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+Very last "renders as" example has all 4 buttons instear of 2 rows with 2 buttons 
+
+should be. 
+
+[img[2buttons-in-2rows-old.png]]
+
+
+New see: [[The Extended Listops Filters]]

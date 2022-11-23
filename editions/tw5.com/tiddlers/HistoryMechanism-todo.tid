@@ -1,0 +1,15 @@
+created: 20221123142902352
+modified: 20221123143426021
+tags: 
+title: HistoryMechanism-todo
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+create a proper list template. The existing one is broken anyway. 
+
+[img[HistoryMechanism.png]]
+
+New list see at [[HistoryMechanism]]
+
+[img[HistoryMechanism-new-list.png]]
