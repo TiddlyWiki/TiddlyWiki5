@@ -117,15 +117,15 @@ title: $:/core/ui/ImportListing
 		</div>
 	</td>
 </$reveal>
-<tr>
+<$reveal type="match" text="yes" state=<<previewPopupState>> tag="tr">
 <td colspan="3">
-<$reveal type="match" text="yes" state=<<previewPopupState>> tag="div">
 <$list filter="[{$:/state/importpreviewtype}has[text]]" variable="listItem" emptyMessage={{$:/core/ui/ImportPreviews/Text}}>
-<$transclude tiddler={{$:/state/importpreviewtype}}/>
+	<div>
+		<$transclude tiddler={{$:/state/importpreviewtype}}/>
+	</div>
 </$list>
-</$reveal>
 </td>
-</tr>
+</$reveal>
 </$list>
 </tbody>
 </table>
