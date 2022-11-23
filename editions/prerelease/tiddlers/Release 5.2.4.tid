@@ -7,6 +7,12 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.3...master]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[dmikh|https://talk.tiddlywiki.org/u/dmikh]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-v5-2-4/4982]] and the [[voting thread|https://talk.tiddlywiki.org/t/vote-for-the-v5-2-4-new-release-banner/5140/2]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/0dc30086e933cf2272cddb076a9fcbedad252735/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
 ! Plugin Improvements
 
 * New [[Twitter Archivist|./editions/twitter-archivist]] plugin to imports the tweets and associated media from a Twitter Archive as individual tiddlers
