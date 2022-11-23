@@ -11,8 +11,10 @@ The usual form allows procedures to span multiple lines:
 ```
 \procedure <procedure-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...)
 <multiple-line-definition-text>
-\end
+\end [<procedure-name>]
 ```
+
+Note that the `\end` marker can optionally specify the name of the procedure to which it relates which allows procedure definitions to be nested.
 
 There is also a single line form for shorter procedures:
 
@@ -37,3 +39,17 @@ Alternatively, the entire definition can be presented on a single line without a
 ```
 \procedure sayhi(name:"Bugs Bunny") Hi, I'm $name$.
 ```
+
+Procedure definitions can be nested by specifying the name of the procedure in the `\end` marker. For example:
+
+<<wikitext-example-without-html src:"""\procedure special-button(caption:"Click me")
+\procedure actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>

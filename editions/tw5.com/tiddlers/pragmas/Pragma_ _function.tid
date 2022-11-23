@@ -11,8 +11,10 @@ The usual form allows custom functions to span multiple lines:
 ```
 \function <function-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...)
 <multiple-line-definition-text>
-\end
+\end [<function-name>]
 ```
+
+Note that the `\end` marker can optionally specify the name of the function to which it relates, enabling function definitions to be nested inside procedures, macros or widget definitions.
 
 There is also a single line form for shorter functions:
 
