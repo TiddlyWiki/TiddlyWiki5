@@ -1,0 +1,36 @@
+created: 20221125103243276
+modified: 20221125105220639
+tags: 
+title: toolbar-buttons-create-wikitext-link-todo
+type: text/vnd.tiddlywiki
+
+Check all edit-mode toolbar buttons dropdowns
+
+!! As it is
+
+[img[create-wikitext-link-old.png]]
+
+------
+
+[img[create-wikitext-link-search-old.png]]
+
+----------
+
+!! Issue
+
+[img[create-wikitext-link-new]]
+
+------------
+
+[img[create-wikitext-link-dropdown-search-new.png]]
+
+
+!! Ptags visible OLD
+
+[img[create-wikitext-link-ptags-visisble-old.png]]
+
+
+!! Ptags visible NEW
+
+
+[img[create-wikitext-link-ptags-visisble-new.png]]
