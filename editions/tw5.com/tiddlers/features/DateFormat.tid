@@ -8,7 +8,7 @@ The default representation of dates is a compact string such as `202110021538020
 
 The display format for this string can be controlled with a template. For example, transcluding the `modified` field automatically applies a template to display the date as `Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)`. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
 
-`<$view field=modified format=date template=“DDth mmm YYYY 0hh:0mm:0ss” />`
+`<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
 
 The date string is processed with the following substitutions:
 
