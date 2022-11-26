@@ -183,17 +183,17 @@ div.content {
 .tc-btn-download {
 	padding: 10px 30px;
 	border-radius: 5px;
-	background: #1462ff;
-        border: none;
-	box-shadow: 0 2px 2px 0 #4a74c9;
+	background: <<colour "download-background">>;
+	border: none;
+	box-shadow: 1px 2px 2px 0 <<colour muted-foreground>>;
 	overflow: hidden;
 	cursor: pointer;
-        font-size: 1.2em;
-        line-height: 1.4em;
-        color: #fff;
-        fill: #fff;
+	font-size: 1.2em;
+	line-height: 1.4em;
+	color: #fff;
+	fill: #fff;
 }
 
 .tc-btn-download:active {
-	background: #1475ff;
+	box-shadow: none;
 }
