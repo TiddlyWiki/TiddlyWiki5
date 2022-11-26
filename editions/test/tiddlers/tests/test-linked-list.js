@@ -137,6 +137,21 @@ describe("LinkedList class tests", function() {
 		compare(pushTop(newPair(["C", "X", "A", "A"]), "X")); // CAAX
 	});
 
+	it("can remove all instances of a multi-instance value #7059", function() {
+		// Remove duplicate items when one or more items between the duplicates
+		// are not removed and the first of those duplicates is not the first item.
+		// These tests used to fail prior to the fix to #7059
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["A", "C", "A", "A"])); // B
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["C", "A", "A", "A"])); // B
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["A", "A", "A"])); // CB
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["A", "A", "A", "C"])); // B
+		compare(remove(newPair(["A", "A", "B", "A"]), ["A", "A", "A"])); // B
+		compare(remove(newPair(["A", "A", "B", "A"]), ["A", "A", "A", "B"])); //
+		compare(remove(newPair(["C", "A", "B", "A"]), ["C", "A", "A"])); // B
+		compare(remove(newPair(["C", "A", "B", "A", "C"]), ["C", "A", "A", "C"])); // B
+		compare(remove(newPair(["B", "A", "B", "A"]), ["B", "A", "A"])); // B
+	});
+
 	it("can handle particularly nasty pushTop pitfall", function() {
 		var pair = newPair(["A", "B", "A", "C"]);
 		pushTop(pair, "A"); // BACA
