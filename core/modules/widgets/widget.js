@@ -621,7 +621,7 @@ Widget.prototype.removeChildDomNodes = function(options) {
 };
 
 /*
-Inform widget that extends this widget and children widgets that widget tree is about to destroy, and dom nodes are being unmounted from the document.
+Inform widget subclass that extends this widget and children widgets of this widget. Let them know this widget tree is about to destroy, and dom nodes are being unmounted from the document.
 */
 Widget.prototype.destroy = function(options) {
 	// removeDom by default
