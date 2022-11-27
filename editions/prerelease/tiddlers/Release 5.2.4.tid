@@ -1,6 +1,6 @@
 caption: 5.2.4
-created: 20221116172656216
-modified: 20221116172656216
+created: 20221127133944178
+modified: 20221127133944178
 tags: ReleaseNotes
 title: Release 5.2.4
 type: text/vnd.tiddlywiki
@@ -45,6 +45,7 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6970">> detection of infinite recursion errors in widgets and filters
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6877">> default styles for [[styled runs|Styles and Classes in WikiText]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6881">> upgrade wizard to make the version number more prominent
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7042">> parsing of tiddlers containing CSV data for greater compatibility
 
 ! Widget Improvements
 
@@ -53,10 +54,12 @@ Improvements to the translation features of TiddlyWiki:
 
 ! Filter improvements
 
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6303">> issue with availability of variables within filter runs
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7065">> issue with removing multiple items from a linked list during filter processing
 
 ! Hackability Improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7004">> support for nested [[macro definitions|Macro Definitions in WikiText]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6976">> support for [[SystemTag: $:/tags/ClassFilters/TiddlerTemplate]] and [[SystemTag: $:/tags/ClassFilters/PageTemplate]] to assign dynamic CSS classes to both tiddler frames and the page template
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]] and [[format Operator]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/c5d3d4c26e8fe27f272dda004aec27d6b66c4f60">> safe mode to disable wiki store indexers
@@ -67,13 +70,16 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6913">> [[Table-of-Contents Macros]] to allow the default icons to be overridden
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6939">> ''data-tags-*'' and ''data-tiddler-title'' attributes to the edit preview area
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5947">> [[timeline Macro]] to override the link template
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7043">> support for Unix epoch timestamps in [[date format strings|DateFormat]]
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7064">> the "big green download button" to use the defined palette colour
 
 ! Bug Fixes
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/fb34df84ed41882c1c2a6ff54f0e908b43ef95a3">> "new image" keyboard shortcut not to assign journal tags
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6987">> SelectWidget class to update if it uses a filter
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6303">> issue with availability of variables within filter runs
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7017">> issue with wikification within the advanced search filter dropdown
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7057">> the table in $:/Import to avoid creating hidden empty rows
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7008">> advanced search keyboard shortcut not navigating correctly
 
 ! Developer Improvements
 
@@ -85,6 +91,8 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certian circumstances
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/344110e2890caf711ab8f3c4f4deaa7d86771231">> handling of ".mp4" file extension so that it defaults to video not audio
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6588">> test server to the plugin library edition
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7049">> [[Hidden Setting: Sync Logging]] to control logging of sync-related messages
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6944">> Jasmine plugin to require the explicit use of the `--test` command in order to cause the tests to be run
 
 ! Performance Improvements
 
@@ -113,6 +121,7 @@ pmario
 rmunn
 roma0104
 saqimtiaz
+talha131
 tw-FRed
 twMat
 xcazin
