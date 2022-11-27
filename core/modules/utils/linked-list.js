@@ -136,13 +136,9 @@ function _removeOne(list,value) {
 	// we need to know if the FIRST value is the last in the list, not the last.
 	if(next !== undefined) {
 		if(typeof list.prev[next] === "object") {
-			if(prev === undefined) {
-				// Must have been first, and 'i' would be 0.
-				list.prev[next].shift();
-			} else {
-				var i = list.prev[next].indexOf(value);
-				list.prev[next][i] = prev;
-			}
+			// Nothing special needed for first since list.prev[next][0] will be 'undefined'
+			var i = list.prev[next].indexOf(value);
+			list.prev[next][i] = prev;
 		} else {
 			list.prev[next] = prev;
 		}

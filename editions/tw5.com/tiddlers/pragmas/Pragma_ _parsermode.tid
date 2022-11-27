@@ -1,0 +1,17 @@
+created: 20221123223127425
+modified: 20221123223127425
+tags: Pragmas
+title: Pragma: \parsermode
+type: text/vnd.tiddlywiki
+
+The ''\parsermode'' [[pragma|Pragmas]] adjusts whether the remaining text is parsed in block mode or inline mode. See [[WikiText Parser Modes]] for details of parser modes.
+
+```
+\parsermode block|inline
+```
+
+For example:
+
+```
+\parsermode inline
+```

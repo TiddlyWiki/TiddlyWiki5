@@ -48,6 +48,8 @@ var WikiParser = function(type,text,options) {
 	this.sourceLength = this.source.length;
 	// Flag for ignoring whitespace
 	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
+	// Parser mode
+	this.parseAsInline = options.parseAsInline;
 	// Set current parse position
 	this.pos = 0;
 	// Start with empty output
@@ -84,7 +86,7 @@ var WikiParser = function(type,text,options) {
 	// Parse any pragmas
 	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
-	if(options.parseAsInline) {
+	if(this.parseAsInline) {
 		topBranch.push.apply(topBranch,this.parseInlineRun());
 	} else {
 		topBranch.push.apply(topBranch,this.parseBlocks());
