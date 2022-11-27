@@ -59,10 +59,35 @@ describe("LinkedList class tests", function() {
 		return pair;
 	};
 
+	// This returns an array in reverse using a LinkList's prev member. Thus
+	// testing that prev is not corrupt. It doesn't exist in the LinkList module
+	// itself to avoid full support for it. Maybe that will change later.
+	function toReverseArray(list) {
+		var visits = Object.create(null),
+			value = list.prev.get(null),
+			array = [];
+		while(value !== null) {
+			array.push(value);
+			var prev = list.prev.get(value);
+			if(Array.isArray(prev)) {
+				var i = (visits[value] || prev.length) - 1;
+				visits[value] = i;
+				value = prev[i];
+			} else {
+				value = prev;
+			}
+		}
+		return array;
+	};
+
 	// compares an array and a linked list to make sure they match up
 	function compare(pair) {
-		expect(pair.list.toArray()).toEqual(pair.array);
+		var forward = pair.list.toArray();
+		expect(forward).toEqual(pair.array);
 		expect(pair.list.length).toBe(pair.array.length);
+		// Now we reverse the linked list and test it back to front, thus
+		// confirming that the list.prev isn't corrupt.
+		expect(toReverseArray(pair.list)).toEqual(forward.reverse());
 		return pair;
 	};
 
