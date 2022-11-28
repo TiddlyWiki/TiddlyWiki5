@@ -1,11 +1,11 @@
 title: $:/language/Buttons/
 
-AdvancedSearch/Caption: 高级查找
-AdvancedSearch/Hint: 高级查找
+AdvancedSearch/Caption: 高级搜索
+AdvancedSearch/Hint: 高级搜索
 Cancel/Caption: 取消
-Cancel/Hint: 放弃对此条目的更改
-Clone/Caption: 克隆
-Clone/Hint: 克隆此条目
+Cancel/Hint: 取消对此条目的修改
+Clone/Caption: 复制
+Clone/Hint: 复制此条目
 Close/Caption: 关闭
 Close/Hint: 关闭此条目
 CloseAll/Caption: 全部关闭
@@ -34,21 +34,21 @@ ExportTiddler/Caption: 导出此条目
 ExportTiddler/Hint: 导出此条目
 ExportTiddlers/Caption: 导出条目
 ExportTiddlers/Hint: 导出条目
-SidebarSearch/Hint: 选择侧边栏的查找字段
-Fold/Caption: 收合条目
-Fold/Hint: 收合此条目的内容
+SidebarSearch/Hint: 选择侧边栏的搜索字段
+Fold/Caption: 折叠条目
+Fold/Hint: 折叠此条目的内容
 Unfold/Caption: 展开条目
 Unfold/Hint: 展开此条目的内容
-FoldOthers/Caption: 收合其他条目
-FoldOthers/Hint: 收合其他已开启条目的内容
-FoldAll/Caption: 收合所有条目
-FoldAll/Hint: 收合所有已开启条目的内容
-Fold/FoldBar/Caption: 收合栏
-Fold/FoldBar/Hint: 可选的收合与展开条目的长条按钮
+FoldOthers/Caption: 折叠其他条目
+FoldOthers/Hint: 折叠其他已开启条目的内容
+FoldAll/Caption: 折叠所有条目
+FoldAll/Hint: 折叠所有已开启条目的内容
+Fold/FoldBar/Caption: 折叠栏
+Fold/FoldBar/Hint: 可选的折叠与展开条目的长条按钮
 UnfoldAll/Caption: 展开所有条目
 UnfoldAll/Hint: 展开所有已开启条目的内容
-FullScreen/Caption: 全屏幕
-FullScreen/Hint: 进入或离开全屏模式
+FullScreen/Caption: 全屏
+FullScreen/Hint: 进入或退出全屏模式
 Help/Caption: 帮助
 Help/Hint: 显示帮助面板
 Home/Caption: 首页
@@ -58,11 +58,11 @@ Import/Hint: 导入许多类型的文件包括文本、图像、~TiddlyWiki 或 
 Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 Language/Caption: 语言
-Language/Hint: 选择用户介面语言
+Language/Hint: 选择用户界面语言
 Manager/Caption: 条目管理器
 Manager/Hint: 开启条目管理器
 More/Caption: 更多
-More/Hint: 更多动作
+More/Hint: 更多操作
 NewHere/Caption: 添加子条目
 NewHere/Hint: 创建一个标签为此条目名称的新条目
 NewJournal/Caption: 添加日志
@@ -91,7 +91,7 @@ Save/Caption: 确定
 Save/Hint: 确定对此条目的更改
 SaveWiki/Caption: 保存变更
 SaveWiki/Hint: 保存变更
-StoryView/Caption: 查看模式
+StoryView/Caption: 视图模式
 StoryView/Hint: 选择查看条目的视觉效果
 HideSideBar/Caption: 隐藏侧边栏
 HideSideBar/Hint: 隐藏侧边栏
@@ -99,20 +99,20 @@ ShowSideBar/Caption: 显示侧边栏
 ShowSideBar/Hint: 显示侧边栏
 TagManager/Caption: 标签管理
 TagManager/Hint: 标签管理
-Timestamp/Caption: 时间戳记
-Timestamp/Hint: 选择修改是否更新时间戳记
-Timestamp/On/Caption: 时间戳记开启
-Timestamp/On/Hint: 条目被修改时，更新时间戳记
-Timestamp/Off/Caption: 时间戳记关闭
-Timestamp/Off/Hint: 条目被修改时，不更新时间戳记
-Theme/Caption: 布景主题
-Theme/Hint: 选择布景主题
+Timestamp/Caption: 时间戳
+Timestamp/Hint: 选择修改是否更新时间戳
+Timestamp/On/Caption: 时间戳开启
+Timestamp/On/Hint: 条目被修改时，更新时间戳
+Timestamp/Off/Caption: 时间戳关闭
+Timestamp/Off/Hint: 条目被修改时，不更新时间戳
+Theme/Caption: 布局主题
+Theme/Hint: 选择布局主题
 Bold/Caption: 粗体
 Bold/Hint: 套用粗体格式于所选文本
 Clear/Caption: 清除
 Clear/Hint: 清除图像为纯色
 EditorHeight/Caption: 编辑器高度
-EditorHeight/Caption/Auto: 自动调整高度以适合内容
+EditorHeight/Caption/Auto: 自动调整高度以适应内容
 EditorHeight/Caption/Fixed: 固定高度︰
 EditorHeight/Hint: 选择文本编辑器的高度
 Excise/Caption: 剪切
@@ -124,7 +124,7 @@ Excise/Caption/Replace/Macro: 宏
 Excise/Caption/Replace/Link: 链接
 Excise/Caption/Replace/Transclusion: 嵌入
 Excise/Caption/Tag: 将新条目的标签设为此条目的名称
-Excise/Caption/TiddlerExists: 警示：条目已经存在
+Excise/Caption/TiddlerExists: 提醒：条目已经存在
 Excise/Hint: 剪切所选文本到一个新条目
 Heading1/Caption: 标题 1
 Heading1/Hint: 套用标题级别 1 的格式于包含所选文本的列
@@ -164,8 +164,8 @@ Preview/Caption: 预览
 Preview/Hint: 显示预览窗格
 PreviewType/Caption: 预览类型
 PreviewType/Hint: 选择预览类型
-Quote/Caption: 引言
-Quote/Hint: 套用引言文本格式于包含所选文本的列
+Quote/Caption: 引用
+Quote/Hint: 套用引用文本格式于包含所选文本的列
 RotateLeft/Caption: 向左旋转
 RotateLeft/Hint: 图像向左旋转 90 度
 Size/Caption: 图像大小
@@ -177,7 +177,7 @@ Stamp/Caption: 印记
 Stamp/Caption/New: 添加您自己的
 Stamp/Hint: 插入一个预配置的文本片段
 Stamp/New/Title: 在选单中显示的标题
-Stamp/New/Text: 片段的文本。（记得在 `caption` 栏位中添加一个说明性的标题）。
+Stamp/New/Text: 片段的文本。（记得在 `caption` 字段中添加一个说明性的标题）。
 Strikethrough/Caption: 删除线
 Strikethrough/Hint: 套用删除线格式于所选文本
 Subscript/Caption: 下标

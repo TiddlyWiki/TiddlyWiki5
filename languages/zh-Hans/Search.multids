@@ -2,19 +2,19 @@ title: $:/language/Search/
 
 DefaultResults/Caption: 列表
 Filter/Caption: 筛选
-Filter/Hint: 以[[筛选表达式|https://tiddlywiki.com/static/Filters.html]]查找
+Filter/Hint: 以[[筛选表达式|https://tiddlywiki.com/static/Filters.html]]搜索
 Filter/Matches: //<small><<resultCount>> 个条目符合条件</small>//
 Matches: //<small><<resultCount>> 个条目符合条件</small>//
 Matches/All: 所有匹配：
 Matches/Title: 条目名称匹配：
-Search: 查找
-Search/TooShort: 查找文本太短
+Search: 搜索
+Search/TooShort: 搜索文本太短
 Shadows/Caption: 默认
-Shadows/Hint: 查找默认条目
+Shadows/Hint: 搜索默认条目
 Shadows/Matches: //<small><<resultCount>> 个条目符合条件</small>//
 Standard/Caption: 标准
-Standard/Hint: 查找一般条目
+Standard/Hint: 搜索一般条目
 Standard/Matches: //<small><<resultCount>> 个条目符合条件</small>//
 System/Caption: 系统
-System/Hint: 查找系统条目
+System/Hint: 搜索系统条目
 System/Matches: //<small><<resultCount>> 个条目符合条件</small>//
