@@ -180,10 +180,6 @@ Settings/ToolbarButtons/Caption: Toolbar Buttons
 Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
-Settings/MoreSidebarTabsVertical/Caption: "Mehr Sidebar Tabs" Ausrichtung
-Settings/MoreSidebarTabsVertical/Hint: Definiere: "Mehr Sidebar Tabs" "horizontale" oder "verticale" Ausrichtung
-Settings/MoreSidebarTabsVertical/Yes/Description: Mehr Sidebar Tabs: horizontal
-Settings/MoreSidebarTabsVertical/No/Description: Mehr Sidebar Tabs: vertical
 Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Definition, welcher "Sidebar Tab" standardmäßig aktiv ist.
 Settings/DefaultMoreSidebarTab/Caption: Standard "Mehr Sidebar Tab"
