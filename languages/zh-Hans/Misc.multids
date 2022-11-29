@@ -1,16 +1,16 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: 您貌似要加载为 ~TiddlyWiki 经典版设计的插件。请注意，[[这些插件无法运行于 TiddlyWiki 5.x.x 版|https://tiddlywiki.com/#TiddlyWikiClassic]]。检测到 ~TiddlyWiki 经典版插件：
+AboveStory/ClassicPlugin/Warning: 您似乎要加载为 ~TiddlyWiki 经典版设计的插件。请注意，[[这些插件无法运行于 TiddlyWiki 5.x.x 版|https://tiddlywiki.com/#TiddlyWikiClassic]]。检测到 ~TiddlyWiki 经典版插件：
 BinaryWarning/Prompt: 此条目包含二进制数据
 ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全兼容新版 TiddlyWiki 的格式，详细信息请参阅：https://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升级
 CloseAll/Button: 全部关闭
 ColourPicker/Recent: 最近︰
-ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的更改？
+ConfirmCancelTiddler: 您确定要取消对条目 "<$text text=<<title>>/>" 的更改？
 ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>"？
 ConfirmDeleteTiddlers: 您确定要删除 <<resultCount>> 个条目？
-ConfirmOverwriteTiddler: 您确定要复写条目 "<$text text=<<title>>/>"？
-ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会复盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: 您确定要覆盖条目 "<$text text=<<title>>/>"？
+ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会覆盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
 ConfirmAction: 是否要继续？
 Count: 计数
 DefaultNewTiddlerTitle: 新条目
@@ -35,8 +35,8 @@ Error/NetworkErrorAlert: `<h2>''网络错误''</h2>与服务器的连缐似乎�
 Error/PutEditConflict: 服务器上的文件已更改
 Error/PutForbidden: 没有权限
 Error/PutUnauthorized: 需要身分验证
-Error/RecursiveTransclusion: 于 transclude 小部件中的递回嵌入错误
-Error/RetrievingSkinny: 简要条目清单撷取错误
+Error/RecursiveTransclusion: 于 transclude 小部件中的递归嵌入错误
+Error/RetrievingSkinny: 简要条目清单提取错误
 Error/SavingToTWEdit: 保存到 TWEdit 时，发生错误
 Error/WhileSaving: 保存时，发生错误
 Error/XMLHttpRequest: XMLHttpRequest 错误代码
@@ -46,10 +46,10 @@ LayoutSwitcher/Description: 打开布局切换器
 LazyLoadingWarning: <p>正在从 ''<$text text={{!!_canonical_uri}}/>'' 加载外部内容 ...</p><p>如果此信息未消失，可能是条目内容类型与外部内容的类型不匹配，或是您可能正在使用的浏览器，不支援单文件式维基的外部内容。请参阅 https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: 登录 TiddlySpace
 Manager/Controls/FilterByTag/None: (无)
-Manager/Controls/FilterByTag/Prompt: 依标签筛选︰
+Manager/Controls/FilterByTag/Prompt: 按标签筛选︰
 Manager/Controls/Order/Prompt: 反向顺序
-Manager/Controls/Search/Placeholder: 搜寻
-Manager/Controls/Search/Prompt: 搜寻︰
+Manager/Controls/Search/Placeholder: 搜索
+Manager/Controls/Search/Prompt: 搜索︰
 Manager/Controls/Show/Option/Tags: 标签
 Manager/Controls/Show/Option/Tiddlers: 条目
 Manager/Controls/Show/Prompt: 显示︰
@@ -72,14 +72,14 @@ PluginReloadWarning: 请保存 {{$:/core/ui/Buttons/save-wiki}} 并刷新页面 
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 Shortcuts/Input/Accept/Hint: 接受选取的项目
 Shortcuts/Input/AcceptVariant/Hint: 接受选取项目 (变种)
-Shortcuts/Input/AdvancedSearch/Hint: 从侧边栏搜寻字段内打开[[进阶搜寻|$:/AdvancedSearch]]面板
+Shortcuts/Input/AdvancedSearch/Hint: 从侧边栏搜索字段内打开[[进阶搜索|$:/AdvancedSearch]]面板
 Shortcuts/Input/Cancel/Hint: 清除输入字段
 Shortcuts/Input/Down/Hint: 选择下一个项目
 Shortcuts/Input/Tab-Left/Hint: 选择上一个页签
 Shortcuts/Input/Tab-Right/Hint: 选择下一个页签
 Shortcuts/Input/Up/Hint: 选择前一个项目
 Shortcuts/SidebarLayout/Hint: 更改侧边栏布局
-Switcher/Subtitle/theme: 切换布景主题
+Switcher/Subtitle/theme: 切换布局主题
 Switcher/Subtitle/layout: 切换布局
 Switcher/Subtitle/language: 切换语言
 Switcher/Subtitle/palette: 切换调色板
