@@ -116,7 +116,7 @@ Modal.prototype.display = function(title,options) {
 			attributes: {
 				text: {
 					type: "string",
-					value: title
+					value: tiddler.fields && tiddler.fields.caption || title
 		}}}],
 		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
