@@ -212,8 +212,8 @@ Modal.prototype.display = function(title,options) {
 	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	// Whether to close the modal dialog when the mask (area outside the modal) is clicked
-	if(variables.maskClosable === 'yes') {
-		modalBackdrop.addEventListener('click', closeHandler, false);
+	if(variables.maskClosable === "yes" || variables.maskClosable === "true") {
+		modalBackdrop.addEventListener("click", closeHandler, false);
 	}
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
