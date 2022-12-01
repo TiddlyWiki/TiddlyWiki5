@@ -32,7 +32,7 @@ Your message:
 <$edit-text tiddler="$:/temp/yourMessage" default="Your message"/>
 
 <$button>
-<$action-sendmessage $message="tm-modal" $param="SampleModal" maskClosable=yes yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}}/>
+<$action-sendmessage $message="tm-modal" $param="SampleModal" maskClosable="yes" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}}/>
 Click me!
 </$button>'/>
 
