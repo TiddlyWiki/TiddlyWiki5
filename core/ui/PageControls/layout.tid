@@ -1,6 +1,6 @@
 title: $:/core/ui/Buttons/layout
 tags: $:/tags/PageControls
-caption: {{$:/core/images/layout-button}} {{$:/language/LayoutSwitcher/Caption}}
+caption: {{$:/core/images/layout-button}} {{$:/language/Buttons/LayoutSwitcher/Caption}}
 description: {{$:/language/LayoutSwitcher/Description}}
 
 \whitespace trim
