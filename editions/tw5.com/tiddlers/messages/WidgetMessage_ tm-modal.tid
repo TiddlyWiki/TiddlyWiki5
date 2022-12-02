@@ -18,8 +18,6 @@ The modal message is usually generated with the ButtonWidget. The modal message 
 
 The "currentTiddler" variable is set to the title of the modal tiddler, but can be overridden by specifying a different value in `paramObject`.
 
-Set `maskClosable` to ''yes'' or ''true'' to allow close the modal dialog when the mask (area outside the modal) is clicked
-
 ! Example
 
 Here is an example of displaying a modal and passing parameters to it:
