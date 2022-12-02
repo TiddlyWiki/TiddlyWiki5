@@ -6,7 +6,8 @@ description: {{$:/language/LayoutSwitcher/Description}}
 \whitespace trim
 \define control-panel-button(class)
 \whitespace trim
-<$button message="tm-show-switcher" switch="layout" tooltip={{$:/language/Buttons/LayoutSwitcher/Hint}} aria-label={{$:/language/Buttons/LayoutSwitcher/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
+<$button tooltip={{$:/language/Buttons/LayoutSwitcher/Hint}} aria-label={{$:/language/Buttons/LayoutSwitcher/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
+{{$:/core/ui/KeyboardShortcuts/switcher}}
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/layout-button}}
 </$list>
