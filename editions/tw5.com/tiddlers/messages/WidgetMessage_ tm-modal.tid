@@ -42,5 +42,3 @@ Click me!
 <<.tip """<$macrocall $name=".from-version" version="5.1.23"/> Links to tiddlers within a modal will open in the same story as the widget that sent the `tm-modal` message. You can override this by specifying values for the variables `tv-story-list` and `tv-history-list` when sending the `tm-modal` message.
 
 """>>
-
-<<.tip """<$macrocall $name=".from-version" version="5.2.4"/> allow using "mask-closable" field on the modal tiddlers.""">>
