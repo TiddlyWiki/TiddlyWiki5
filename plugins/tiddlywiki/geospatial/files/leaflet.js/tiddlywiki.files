@@ -1,0 +1,31 @@
+{
+	"tiddlers": [
+		{
+			"file": "leaflet.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "leaflet.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.js/LICENSE"
+			}
+		}
+	]
+}

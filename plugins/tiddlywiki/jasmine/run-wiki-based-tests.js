@@ -12,7 +12,7 @@ Tests the wiki based tests
 /*global $tw: false */
 "use strict";
 
-var TEST_WIKI_TIDDLER_FILTER = "[type[text/vnd.tiddlywiki-multiple]tag[$:/tags/wiki-test-spec]]";
+var TEST_WIKI_TIDDLER_FILTER = "[all[tiddlers+shadows]type[text/vnd.tiddlywiki-multiple]tag[$:/tags/wiki-test-spec]]";
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
