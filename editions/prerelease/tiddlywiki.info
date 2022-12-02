@@ -14,7 +14,8 @@
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/codemirror",
 		"tiddlywiki/menubar",
-		"tiddlywiki/jszip"
+		"tiddlywiki/jszip",
+		"tiddlywiki/geospatial"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/geospatial/readme
+
+! Examples
+
+!! Simple Map
+
+<$geomap/>
+
+!! Map with Markers
+
+<$geomap markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"/>
