@@ -1,0 +1,21 @@
+title: $:/core/ui/Buttons/layout
+tags: $:/tags/PageControls
+caption: {{$:/core/images/layout-button}} {{$:/language/LayoutSwitcher/Caption}}
+description: {{$:/language/LayoutSwitcher/Description}}
+
+\whitespace trim
+\define control-panel-button(class)
+\whitespace trim
+<$button message="tm-show-switcher" switch="layout" tooltip={{$:/language/Buttons/LayoutSwitcher/Hint}} aria-label={{$:/language/Buttons/LayoutSwitcher/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/layout-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/LayoutSwitcher/Caption}}/></span>
+</$list>
+</$button>
+\end
+
+<$list filter="[list<tv-story-list>] +[field:title[$:/LayoutSwitcher]]" emptyMessage=<<control-panel-button>>>
+<<control-panel-button "tc-selected">>
+</$list>
