@@ -1148,7 +1148,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 
-/* prevent overflow for table content for small screens*/
+/* prevent overflow for table content for small screens */
 @media (max-width: <<tiddler-width>>) {
 	tr {
 		word-wrap: anywhere;
