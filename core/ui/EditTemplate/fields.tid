@@ -17,7 +17,9 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \define new-field-actions()
 \whitespace trim
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
-<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix<newFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+<$set name="safeNewFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
+	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+</$set>
 <$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
 \end
 
@@ -52,7 +54,9 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
 $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
-<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix<newFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+<$set name="safeNewFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
+	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+</$set>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
