@@ -1,0 +1,18 @@
+title: $:/language/Help/commands
+description: 运行从筛选器传回的命令
+
+按顺序运行从筛选器传回的命令符记
+
+```
+--commands <filter>
+```
+
+示例
+
+```
+--commands "[enlist{$:/build-commands-as-text}]"
+```
+
+```
+--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"
+```
