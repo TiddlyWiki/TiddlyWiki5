@@ -4,7 +4,7 @@ caption: {{$:/core/images/layout-button}} {{$:/language/Buttons/LayoutSwitcher/C
 description: {{$:/language/LayoutSwitcher/Description}}
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/LayoutSwitcher/Hint}} aria-label={{$:/language/Buttons/LayoutSwitcher/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
+<$button tooltip={{$:/language/Buttons/LayoutSwitcher/Hint}} aria-label={{$:/language/Buttons/LayoutSwitcher/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-show-switcher" switch="layout"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/layout-button}}
