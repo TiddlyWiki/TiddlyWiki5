@@ -1,34 +1,38 @@
 created: 20130822170200000
 list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
-modified: 20220802122551819
+modified: 20221204165636777
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-''Have you ever had the feeling that your head is not quite big enough to hold everything you need to remember?''
-
-Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information.
+!! ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-<div style="font-size:0.7em;text-align:center;margin-top:2em;margin-bottom:2em;">
-<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
-</div>
-
 Unlike conventional online services, TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
 
-<div style="font-size:0.7em;text-align:center;margin:3em auto;">
+!! ''Find Out More''
+
+<div class="tc-cards">
+<$list filter="[tag[HelloThumbnail]]">
+<$macrocall $name="flex-card" captionField="caption" descriptionField="text"/>
+</$list>
+</div>
+
+!! ''~TiddlyWiki Hubs''
+
+<div class="tc-cards" style="font-size:0.7em;text-align:center;margin:3em auto;">
 <a href="https://talk.tiddlywiki.org/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/help}} ~TalkTW
 </a>
 <a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="border-radius:4px;background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/video}} ~YouTube
 </a>
-<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#5E9FCA;" target="_blank" rel="noopener noreferrer">
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#1DA1F2;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/twitter}} Twitter
 </a>
 <a rel="me" href="https://fosstodon.org/@TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#2b90d9;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/mastodon}} Mastodon
+{{$:/core/images/globe}} Mastodon
 </a>
 <a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/github}} ~GitHub
@@ -38,16 +42,10 @@ Unlike conventional online services, TiddlyWiki lets you choose where to keep yo
 </a>
 </div>
 
-<<<.tc-big-quote
-''The ~TiddlyWiki is the best software I've ever found for organising my ideas.''
+!! ''Testimonials & Reviews''
 
-It's well worth spending an hour or so playing with it to see how it can help you. This will be time well-spent and will change how you think and how you organise your ideas.
-<<< [[Joe Armstrong, Co-inventor of Erlang|https://joearms.github.io/]]
-
-<<<.tc-big-quote
-''~TiddlyWiki gets a Gearhead rating of 6 out of 5 (it's that good).''
-
-Finding code that works flawlessly after just two or three years is magical enough but after seven years?!
-<<< [[Mark Gibbs, Network World|http://www.networkworld.com/article/3028098/open-source-tools/tiddlywiki-a-free-open-source-wiki-revisited.html]]
-
-<div style="font-size:0.7em;text-align:center;margin:3em auto;">{{Product Hunt Link}}</div>
+<div class="tc-cards">
+<$list filter="[tag[Testimonial]]">
+<$macrocall $name="flex-card" class="tc-card-quote" captionField="caption" descriptionField="text"/>
+</$list>
+</div>
