@@ -1,6 +1,8 @@
 title: HelloThumbnail - Latest Version
 tags: HelloThumbnail
-caption: What's New in <<version>>
+caption: What's New in v<<version>>
 link: Releases
 image: New Release Banner
 color: #fff
+
+The latest version v<<version>> of ~TiddlyWiki (released on <$view field="released" tiddler={{{ [<version>addprefix[Release ]] }}} format="date" template="DDth MMM YYYY"/>)
