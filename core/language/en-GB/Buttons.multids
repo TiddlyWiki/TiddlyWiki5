@@ -59,6 +59,8 @@ Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
+LayoutSwitcher/Hint: Open layout switcher
+LayoutSwitcher/Caption: layout
 Manager/Caption: tiddler manager
 Manager/Hint: Open tiddler manager
 More/Caption: more
