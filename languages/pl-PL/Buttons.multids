@@ -59,6 +59,8 @@ Home/Caption: strona główna
 Home/Hint: Otwórz domyślne tiddlery
 Language/Caption: języki
 Language/Hint: Zmień jezyk interfejsu
+LayoutSwitcher/Hint: Otwórz przełacznik układu
+LayoutSwitcher/Caption: układ
 Manager/Caption: menedżer tiddlerów
 Manager/Hint: Otwórz menedżer tiddlerów
 More/Caption: więcej
