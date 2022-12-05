@@ -16,6 +16,8 @@ var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 var DynannotateWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -191,7 +193,7 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 				"tv-selection-posy": (bounds.top).toString(),
 				"tv-selection-width": (bounds.width).toString(),
 				"tv-selection-height": (bounds.height).toString(),
-				"tv-selection-coords": "(" + bounds.left + "," + bounds.top + "," + bounds.width + "," + bounds.height + ")"
+				"tv-selection-coords": Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,bounds)
 			});
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({

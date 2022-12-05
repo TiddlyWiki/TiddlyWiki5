@@ -9,7 +9,7 @@ Drafts: 草稿条目
 Orphans: 孤立条目
 SystemTiddlers: 系统条目
 ShadowTiddlers: 默认条目
-OverriddenShadowTiddlers: 被覆写的默认条目
+OverriddenShadowTiddlers: 被覆盖的默认条目
 SessionTiddlers: 自维基加载后修改的条目
 SystemTags: 系统标签
 StoryList: 故事河中的条目，不含 ~$:/AdvancedSearch

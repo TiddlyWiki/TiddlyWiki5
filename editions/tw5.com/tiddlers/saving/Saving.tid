@@ -54,7 +54,7 @@ Available methods for saving changes with ~TiddlyWiki:
 </div>
 
 <!-- Page content -->
-<div class="content">
+<div class="tc-cards">
 <$wikify text=<<alltagsfilter>> name="alltagsfilterwikified">
 <$list filter=<<alltagsfilterwikified>>>
 {{||$:/_tw5.com-card-template}}

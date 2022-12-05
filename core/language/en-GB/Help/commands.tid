@@ -1,0 +1,18 @@
+title: $:/language/Help/commands
+description: Run commands returned from a filter
+
+Sequentially run the command tokens returned from a filter
+
+```
+--commands <filter>
+```
+
+Examples
+
+```
+--commands "[enlist{$:/build-commands-as-text}]"
+```
+
+```
+--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"
+```

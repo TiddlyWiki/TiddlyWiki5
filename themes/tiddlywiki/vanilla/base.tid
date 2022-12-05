@@ -1525,6 +1525,10 @@ html body.tc-body.tc-single-tiddler-window {
 	fill: <<colour toolbar-done-button>>;
 }
 
+.tc-page-controls svg.tc-image-layout-button {
+	fill: <<colour toolbar-options-button>>;
+}
+
 /*
 ** Tiddler edit mode
 */

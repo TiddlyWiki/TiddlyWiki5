@@ -3,19 +3,4 @@ modified: 20220719134613555
 title: $:/_tw5.com-card-template
 type: text/vnd.tiddlywiki
 
-\define tw-card-template(bordercolor:"")
-\whitespace trim
-<div class="tc-card" style="border-top: 5px solid $bordercolor$;">
-	<$link>
-		<$let tv-wikilinks=no>
-			<div class="tc-card-title"><$transclude field="caption"><$view field="title"/></$transclude></div>
-			<div class="tc-card-author">
-				<$list filter="[is[current]has[community-author]]">by&nbsp;{{!!community-author}}</$list>
-			</div>
-			<p><$view field="description"/></p>
-		</$let>
-	</$link>
-</div>
-\end
-
-<$macrocall $name="tw-card-template" bordercolor={{!!color}}/>
+<$macrocall $name="flex-card" bordercolor={{!!color}} captionField="caption" subtitle={{{ [{!!community-author}!is[blank]addprefix[by ]] }}}/>

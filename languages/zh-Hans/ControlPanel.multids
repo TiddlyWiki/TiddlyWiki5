@@ -2,11 +2,11 @@ title: $:/language/ControlPanel/
 
 Advanced/Caption: 高级
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
-Appearance/Caption: 视觉外观
+Appearance/Caption: 外观
 Appearance/Hint: 定制您的 TiddlyWiki 外观。
 Basics/AnimDuration/Prompt: 动画持续时间
-Basics/AutoFocus/Prompt: 编辑条目时的默认自动停留栏位
-Basics/Caption: 基本
+Basics/AutoFocus/Prompt: 编辑条目时的默认自动停留字段
+Basics/Caption: 基础
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 {{保留开启中的条目顺序||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: 首页
 Basics/DefaultTiddlers/TopHint: 默认开启的条目
@@ -92,8 +92,8 @@ Plugins/PluginWillRequireReload: （需要重新加载）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装
-Plugins/Themes/Caption: 布景主题
-Plugins/Themes/Hint: 布景主题插件
+Plugins/Themes/Caption: 布局主题
+Plugins/Themes/Hint: 布局主题插件
 Plugins/Update/Caption: 更新
 Plugins/Updates/Caption: 更新
 Plugins/Updates/Hint: 已安装插件的可用更新
@@ -165,18 +165,18 @@ Settings/LinkToBehaviour/InsideRiver/Hint: 从故事河//中//导航
 Settings/LinkToBehaviour/OutsideRiver/Hint: 从故事河//外//导航
 Settings/LinkToBehaviour/OpenAbove: 开启于当前条目之上
 Settings/LinkToBehaviour/OpenBelow: 开启于当前条目之下
-Settings/LinkToBehaviour/OpenAtTop: 开启于故事河的顶端
+Settings/LinkToBehaviour/OpenAtTop: 开启于故事河的顶部
 Settings/LinkToBehaviour/OpenAtBottom: 开启于故事河的底部
 Settings/MissingLinks/Caption: 维基链接
 Settings/MissingLinks/Hint: 选择是否要链接到尚未存在的条目
 Settings/MissingLinks/Description: 启用链接到佚失条目
-Settings/NavigationAddressBar/Caption: 网址栏导览
-Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：
+Settings/NavigationAddressBar/Caption: 网址栏导航
+Settings/NavigationAddressBar/Hint: 在浏览器网址栏导航到条目时的行为：
 Settings/NavigationAddressBar/No/Description: 不更新网址栏
 Settings/NavigationAddressBar/Permalink/Description: 包含目标条目
 Settings/NavigationAddressBar/Permaview/Description: 包括目标条目和当前已开启的条目序列
-Settings/NavigationHistory/Caption: 历史记录导览
-Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
+Settings/NavigationHistory/Caption: 历史记录导航
+Settings/NavigationHistory/Hint: 当导航到条目时，更新浏览器历史记录：
 Settings/NavigationHistory/No/Description: 不更新历史记录
 Settings/NavigationHistory/Yes/Description: 更新历史记录
 Settings/NavigationPermalinkviewMode/Caption: 引用链接/固定链接 模式
@@ -201,18 +201,18 @@ Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
 StoryTiddler/Caption: 故事条目
 StoryTiddler/Hint: 此规则级联用于动态选择模板，以便在故事河中显示条目。
-StoryView/Caption: 查看模式
-StoryView/Prompt: 当前的查看模式：
+StoryView/Caption: 视图模式
+StoryView/Prompt: 当前的视图模式：
 Stylesheets/Caption: 样式表
 Stylesheets/Expand/Caption: 全部展开
 Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式表条目呈现的 CSS
 Stylesheets/Restore/Caption: 复原
-Theme/Caption: 布景主题
-Theme/Prompt: 当前的布景主题：
+Theme/Caption: 布局主题
+Theme/Prompt: 当前的布局主题：
 TiddlerColour/Caption: 条目颜色
 TiddlerColour/Hint: 此规则级联用于动态地为条目选择颜色 (用于图示和关联的标签丸)。
-TiddlerFields/Caption: 条目栏位
-TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
+TiddlerFields/Caption: 条目字段
+TiddlerFields/Hint: 这是本维基使用中的所有条目字段（含系统条目的字段，但默认条目的字段除外）。
 TiddlerIcon/Caption: 条目图示
 TiddlerIcon/Hint: 此规则级联用于动态地为条目选择图示。
 Toolbars/Caption: 工具栏
@@ -224,7 +224,7 @@ Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏�
 Toolbars/EditorToolbar/Caption: 编辑器工具栏
 Toolbars/EditorToolbar/Hint: 选择将显示哪些按钮于编辑器工具栏。请注意，某些按钮只会出现在编辑某一类型的条目时。拖放可改变顺序。
 Toolbars/ViewToolbar/Caption: 查看工具栏
-Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏。拖放可改变顺序。
+Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的视图模式工具栏。拖放可改变顺序。
 Tools/Download/Full/Caption: 下载完整副本
 ViewTemplateBody/Caption: 查看模板主体
 ViewTemplateBody/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的主体。
