@@ -17,7 +17,9 @@ ControlPanel/Hint: Öffne das Control-Panel
 CopyToClipboard/Caption: Kopiere in die Zwischenablage
 CopyToClipboard/Hint: Kopiere diesen Text in die Zwischenablage
 Delete/Caption: Löschen
-Delete/Hint: Lösche diesen Tiddler
+Delete/Hint: Lösche den Tiddler
+DeleteTiddlers/Caption: Lösche Tiddler
+DeleteTiddlers/Hint: Lösche diese Tiddler
 Edit/Caption: Bearbeiten
 Edit/Hint: Bearbeite diesen Tiddler
 Encryption/Caption: Verschlüsselung
@@ -57,6 +59,8 @@ Home/Caption: Home
 Home/Hint: Öffnen der Standard-Tiddler
 Language/Caption: Sprache
 Language/Hint: Auswahldialog für die Systemsprache
+LayoutSwitcher/Hint: Öffne den Layout Selektor
+LayoutSwitcher/Caption: Layout
 Manager/Caption: Tiddler Manager
 Manager/Hint: Öffne den Tiddler Manager
 More/Caption: mehr
