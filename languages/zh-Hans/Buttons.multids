@@ -59,6 +59,8 @@ Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 Language/Caption: 语言
 Language/Hint: 选择用户界面语言
+LayoutSwitcher/Hint: 开启布局切换器
+LayoutSwitcher/Caption: 布局
 Manager/Caption: 条目管理器
 Manager/Hint: 开启条目管理器
 More/Caption: 更多
