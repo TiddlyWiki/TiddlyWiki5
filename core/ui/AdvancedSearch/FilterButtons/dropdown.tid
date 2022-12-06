@@ -14,7 +14,7 @@ tags: $:/tags/AdvancedSearch/FilterButton
 <$linkcatcher actions="<$action-setfield $tiddler='$:/temp/advancedsearch' text=<<navigateTo>>/><$action-setfield $tiddler='$:/temp/advancedsearch/input' text=<<navigateTo>>/><$action-setfield $tiddler='$:/temp/advancedsearch/refresh' text='yes'/><$action-sendmessage $message='tm-focus-selector' $param='.tc-advanced-search input' />">
 <div class="tc-block-dropdown-wrapper">
 <div class="tc-block-dropdown tc-edit-type-dropdown">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Filter]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Filter]!is[draft]]">
 <$link to={{!!filter}}><$let tv-wikilinks="no"><$transclude field="description"/></$let></$link>
 </$list>
 </div>

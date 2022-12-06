@@ -42,6 +42,9 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	this.renderChildren(parent,nextSibling);
 	this.setSelectValue();
+	if(this.selectFocus == "yes") {
+		this.getSelectDomNode().focus();
+	}
 	$tw.utils.addEventListeners(this.getSelectDomNode(),[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
 	]);
@@ -143,6 +146,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectMultiple = this.getAttribute("multiple", false);
 	this.selectSize = this.getAttribute("size");
 	this.selectTooltip = this.getAttribute("tooltip");
+	this.selectFocus = this.getAttribute("focus");
 	// Make the child widgets
 	var selectNode = {
 		type: "element",

@@ -8,6 +8,7 @@ CloseAll/Button: alle schließen
 ColourPicker/Recent: Kürzlich:
 ConfirmCancelTiddler: Wollen Sie die Änderungen im Tiddler: "<$text text=<<title>>/>" verwerfen?
 ConfirmDeleteTiddler: Wollen Sie den Tiddler: "<$text text=<<title>>/>" löschen?
+ConfirmDeleteTiddlers: Wollen Sie <<resultCount>> Tiddler löschen?
 ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK überschreibt den tiddler!
 ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können Ihre Änderungen rückgängig machen, indem Sie diesen Tiddler wieder löschen. Wollen Sie den Tiddler: "<$text text=<<title>>/>" ändern?
 ConfirmAction: Möchten Sie weitermachen? 

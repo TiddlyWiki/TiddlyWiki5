@@ -13,9 +13,12 @@ The tiddler to be displayed can contain the following optional fields that are u
 |subtitle|The subtitle text for a modal, displayed in a `h3` html tag|
 |class|An additional class to apply to the modal wrapper|
 |help|An optional external link that will be displayed at the left of the footer with the text "Help"|
+|mask-closable|When set to ''yes'' or ''true'', will close the modal dialog when the mask (area outside the modal) is clicked|
 
 Note that the footer and subtitle fields are not limited to plain text, and wiki text features such as widgets and transclusions can be used as well.
 
 Modals are displayed with the [[WidgetMessage: tm-modal]].
 
 <$button message="tm-modal" param="SampleWizard">Open demo modal</$button>
+
+<<.tip """<$macrocall $name=".from-version" version="5.2.4"/> allow using "mask-closable" field""">>

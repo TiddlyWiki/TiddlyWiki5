@@ -59,6 +59,8 @@ Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
 Language/Hint: 選擇使用者介面語言
+LayoutSwitcher/Hint: 開啟版面切換器
+LayoutSwitcher/Caption: 版面
 Manager/Caption: 條目管理器
 Manager/Hint: 開啟條目管理器
 More/Caption: 更多

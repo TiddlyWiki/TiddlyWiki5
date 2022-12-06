@@ -13,9 +13,13 @@ type: text/vnd.tiddlywiki
 	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/0dc30086e933cf2272cddb076a9fcbedad252735/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
 >>
 
-! Plugin Improvements
+! Major Improvements
 
-* New [[Twitter Archivist|./editions/twitter-archivist]] plugin to imports the tweets and associated media from a Twitter Archive as individual tiddlers
+New [ext[Twitter Archivist|./editions/twitter-archivist]] plugin to import the tweets and associated media from a Twitter Archive as individual tiddlers.
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6961">> new GenesisWidget that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]] and [[format Operator]]
 
 ! Translation improvement
 
@@ -32,10 +36,6 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6882">> the [[Translators Edition|Translate TiddlyWiki into your language]] to add an option to display the original English text underneath the text area
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6933">> "delete" button text in $:/AdvancedSearch so that it is translatable
 
-! Accessibility Improvements
-
-* 
-
 ! Usability Improvements
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d62a16ee464fb9984b766b48504829a1a3eb143b">> problem with long presses on tiddler links triggering a preview on iOS/iPadOS
@@ -46,11 +46,15 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6877">> default styles for [[styled runs|Styles and Classes in WikiText]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6881">> upgrade wizard to make the version number more prominent
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7042">> parsing of tiddlers containing CSV data for greater compatibility
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7076">> new page control button to summon the layout switcher
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7084">> folded tiddlers to ensure that the unfold button is always visible
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7072">> handling of [[Modals]] to optionally allow them to be dismissed by clicking on the background
 
 ! Widget Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6961">> new GenesisWidget that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/127f660c91020dcbb43897d954066b31af729e74">> EditTextWidget to remove the default text "Type the text for the tiddler 'foo'"
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7081">> ''focus'' attribute to SelectWidget
+* <<.link-badge-removed "https://github.com/Jermolene/TiddlyWiki5/commit/1df4c29d73073788ba3859668112e8bb46171a6c">> restriction of the LetWidget being unable to create variables whose names begin with a dollar sign
 
 ! Filter improvements
 
@@ -61,10 +65,8 @@ Improvements to the translation features of TiddlyWiki:
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7004">> support for nested [[macro definitions|Macro Definitions in WikiText]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6976">> support for [[SystemTag: $:/tags/ClassFilters/TiddlerTemplate]] and [[SystemTag: $:/tags/ClassFilters/PageTemplate]] to assign dynamic CSS classes to both tiddler frames and the page template
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]] and [[format Operator]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/c5d3d4c26e8fe27f272dda004aec27d6b66c4f60">> safe mode to disable wiki store indexers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/166a1565843878083fb1eba47c73b8e67b78400d">> safe mode to prevent globally disabling parser rules
-* <<.link-badge-removed "https://github.com/Jermolene/TiddlyWiki5/commit/1df4c29d73073788ba3859668112e8bb46171a6c">> restriction of the LetWidget being unable to create variables whose names begin with a dollar sign
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6735">> keyboard shortcut handling to allow to global shortcuts to override all other shortcuts
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/965bd090a905f5756e79124b698c894f7f72ad5b">> [[list-links Macro]] to allow the rendered field to be overriden
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6913">> [[Table-of-Contents Macros]] to allow the default icons to be overridden
@@ -72,6 +74,8 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/5947">> [[timeline Macro]] to override the link template
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7043">> support for Unix epoch timestamps in [[date format strings|DateFormat]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7064">> the "big green download button" to use the defined palette colour
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7063">> new hidden setting [[to use horizontal tabs for the "more" sidebar tab|Hidden Setting: More Tabs Horizontal]]
+
 
 ! Bug Fixes
 
@@ -80,13 +84,11 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7017">> issue with wikification within the advanced search filter dropdown
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7057">> the table in $:/Import to avoid creating hidden empty rows
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7008">> advanced search keyboard shortcut not navigating correctly
-
-! Developer Improvements
-
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7083">> erroneous display of drafts within the advanced search filter dropdown
 
 ! Node.js Improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7073">> new CommandsCommand to enable command tokens to be dynamically generated from a filter
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6947">> console logging to avoid spaces and `<empty string>` message
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certian circumstances
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/344110e2890caf711ab8f3c4f4deaa7d86771231">> handling of ".mp4" file extension so that it defaults to video not audio
@@ -98,7 +100,7 @@ Improvements to the translation features of TiddlyWiki:
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/53d229592df76c6dd607e40be5bea4d5e063c48e">> performance of `wiki.getTiddler()`
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/81ac9874846b3ead275f67010fcfdb49f3d2f43c">> performance of variable prototype chain handling
-
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6056">> performance of list handling during filter processing
 
 ! Acknowledgements
 
@@ -109,12 +111,15 @@ AnthonyMuscio
 bestony
 btheado
 BramChen
+carlo-columbo
 EvidentlyCube
 FlashSystems
 flibbles
 fu-sen
 joebordes
 hoelzro
+kookma
+linonetwo
 Marxsal
 oflg
 pmario

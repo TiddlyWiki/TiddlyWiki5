@@ -40,6 +40,7 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 |multiple |If present, switches to multiple selection mode |
 |size |The number of rows to display in multiple selection mode |
 |actions |A string containing ActionWidgets to be triggered when the key combination is detected |
+|focus |<<.from-version "5.2.4">> Optional. Set to "yes" to automatically focus the HTML select element after creation |
 
 ! Examples
 

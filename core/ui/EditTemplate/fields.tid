@@ -10,6 +10,10 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 [[hide]] -[title{$(config-title)$}]
 \end
 
+<!-- Beware this is duplicated from EditTemplate.tid. For details see bug #7054 -->
+\define get-field-value-tiddler-filter() [subfilter<get-field-editor-filter>sha256[16]addprefix[/]addprefix<newFieldValueTiddlerPrefix>]
+\define get-field-editor-filter() [<newFieldNameTiddler>get[text]else[]] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}]
+
 \define current-tiddler-new-field-selector()
 [data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name-wrapper input
 \end
@@ -17,7 +21,9 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \define new-field-actions()
 \whitespace trim
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
-<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix<newFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+<$set name="safeNewFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
+	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+</$set>
 <$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
 \end
 
@@ -52,7 +58,9 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
 $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
-<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix<newFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+<$set name="safeNewFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
+	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
+</$set>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
@@ -65,6 +73,7 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 \end
 \whitespace trim
 
+<$set name="newFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
 <div class="tc-edit-fields">
 <table class={{{ [all[current]fields[]] :filter[lookup[$:/config/EditTemplateFields/Visibility/]!match[hide]] +[count[]!match[0]] +[then[tc-edit-fields]] ~[[tc-edit-fields tc-edit-fields-small]] }}}>
 <tbody>
@@ -148,3 +157,4 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 </$vars>
 </div>
 </$fieldmangler>
+</$set>
