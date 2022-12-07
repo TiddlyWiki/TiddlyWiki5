@@ -18,6 +18,7 @@ exports.after = ["load-modules"];
 exports.synchronous = true;
 
 exports.startup = function() {
+	// var openlocationcode = require("$:/plugins/tiddlywiki/geospatial/openlocationcode.js");
 	// var turf = require("$:/plugins/tiddlywiki/geospatial/turf.js");
 	// var leaflet = require("$:/plugins/tiddlywiki/geospatial/leaflet.js");
 };
