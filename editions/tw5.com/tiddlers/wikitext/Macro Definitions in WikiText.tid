@@ -1,6 +1,6 @@
 caption: Macro Definitions
 created: 20150220181617000
-modified: 20221022135909352
+modified: 20221207094236472
 tags: WikiText
 title: Macro Definitions in WikiText
 type: text/vnd.tiddlywiki
@@ -18,22 +18,6 @@ Alternatively, the entire definition can be presented on a single line without a
 ```
 \define sayhi(name:"Bugs Bunny") Hi, I'm $name$.
 ```
-
-Macro definitions can be nested by specifying the name of the macro in the `\end` marker. For example:
-
-<<wikitext-example-without-html src:"""\define special-button(caption:"Click me")
-\define actions()
-<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
-\end actions
-<$button actions=<<actions>>>
-$caption$
-</$button>
-\end special-button
-
-<<special-button>>
-""">>
-
-A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
 
 !! Accessing variables and parameters
 
@@ -93,3 +77,26 @@ To make a macro available to all tiddlers, define it in a tiddler that has the t
 It is also possible to write a macro as a [[JavaScript module|https://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]. ~JavaScript macros are available to all tiddlers, and offer the maximum flexibility.
 
 A tiddler can manually import macro definitions from a [[selection|Title Selection]] of other tiddlers by using the <<.wlink ImportVariablesWidget>> widget.
+
+!! Nested Macro Definitions
+
+Macro definitions can be nested to any number of required levels by specifying the name of the macro in the `\end` marker. Nested macro definitions must appear at the start of the definition that contains them. For example:
+
+<<wikitext-example-without-html src:"""\define special-button(caption:"Click me")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
+
+Note that the textual substitution of macro parameters that occurs when the outer macro is rendered will apply to the nested definitions as well. That generally means that textual substitution of macro parameters should not be used within nested macros.
+
+Parameters of nested macros can also be accessed via the `<<__variablename__>>` syntax. As ordinary variables, these parameters are available within nested child macros (and grandchildren etc).
+
+A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
+
