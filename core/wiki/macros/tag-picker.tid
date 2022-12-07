@@ -9,144 +9,109 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 
 \define add-tag-actions(actions,tagField:"tags")
 \whitespace trim
-<$let tag={{{ [<__tiddler__>get[text]] }}}>
-<$list filter="[<saveTiddler>!contains:$tagField$<tag>!match[]]" variable="ignore" emptyMessage="<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter='-[<tag>]'/>">
-<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
-$actions$
-</$list>
-</$let>
-<<delete-tag-state-tiddlers>>
-<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+    <$let tag={{{ [<__tiddler__>get[text]] }}}>
+        <$list filter="[<saveTiddler>!contains:$tagField$<tag>!match[]]" variable="ignore" emptyMessage="<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter='-[<tag>]'/>">
+            <$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
+            $actions$
+        </$list>
+    </$let>
+    <<delete-tag-state-tiddlers>>
+    <$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 \end
 
 \define clear-tags-actions-inner()
 \whitespace trim
-<$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="<<cancel-delete-tiddler-actions 'cancel'>>">
-<<delete-tag-state-tiddlers>>
-</$list>
+    <$list filter="[<storeTitle>has[text]] [<newTagNameTiddler>has[text]]" variable="ignore" emptyMessage="<<cancel-delete-tiddler-actions 'cancel'>>">
+      <<delete-tag-state-tiddlers>>
+    </$list>
 \end
 
 \define clear-tags-actions()
 \whitespace trim
 <$let userInput={{{ [<storeTitle>get[text]] }}}>
-<$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" emptyMessage="<<clear-tags-actions-inner>>">
-<$action-setfield $tiddler=<<newTagNameTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
-</$list>
+    <$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" emptyMessage="<<clear-tags-actions-inner>>">
+        <$action-setfield $tiddler=<<newTagNameTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+    </$list>
 </$let>
-\end
-
-\define tag-button(classes) <$let button-classes='tc-btn-invisible $classes$' currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$let>
-
-\define tagsAutoComplete()
-<$list filter=<<tagsAutoCompleteFilter>> emptyMessage=<<tagsAutoCompleteEmptyMessage>> variable="listItem">
-<$list filter=<<tagsFilter>> variable="tag">
-<$list filter="[<tag>addsuffix<suffix>] -[<tagSelectionState>get[text]]" emptyMessage=<<tag-button 'tc-tag-button-selected'>> variable="ignore">
-<<tag-button>>
-</$list>
-</$list>
-</$list>
 \end
 
 \define tag-picker-inner(actions,tagField:"tags")
 \whitespace trim
+
+\define tag-button(classes)
+    <$let button-classes='tc-btn-invisible $classes$' currentTiddler=<<tag>>>{{||$:/core/ui/TagPickerTagTemplate}}</$let>
+\end tag-button
+
+\define tagsAutoComplete()
+<$list filter=<<tagsAutoCompleteFilter>> emptyMessage=<<tagsAutoCompleteEmptyMessage>> variable="listItem">
+    <$list filter=<<tagsFilter>> variable="tag">
+        <$list filter="[<tag>addsuffix<suffix>] -[<tagSelectionState>get[text]]" emptyMessage=<<tag-button 'tc-tag-button-selected'>> variable="ignore">
+        <<tag-button>>
+        </$list>
+    </$list>
+</$list>
+\end tagsAutoComplete
+
 <$let 
-newTagNameInputTiddlerQualified=<<qualify "$:/temp/NewTagName/input">> 
-newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">> 
-fallbackTarget={{$(palette)$##tag-background}}
-colourA={{$(palette)$##foreground}}
-colourB={{$(palette)$##background}}
-storeTitle={{{ [<newTagNameInputTiddler>!match[]] ~[<newTagNameInputTiddlerQualified>] }}} 
-tagSelectionState={{{ [<newTagNameSelectionTiddler>!match[]] ~[<newTagNameSelectionTiddlerQualified>] }}}
-refreshTitle=<<qualify "$:/temp/NewTagName/refresh">>
-nonSystemTagsFilter="[tags[]] $(first-search-filter)$ +[!is[system]] -[<storyTiddler>tags[]] :filter[search:title<userInput>]+[sort[]]"
-systemTagsFilter="[tags[]] $(second-search-filter)$ +[is[system]] -[<storyTiddler>tags[]] :filter[search:title<userInput>]+[sort[]]"
-displayTagsPopup="[all[tiddlers]subfilter<systemTagsFilter>][all[tiddlers]subfilter<nonSystemTagsFilter>] +[limit[1]]"
+    newTagNameInputTiddlerQualified=<<qualify "$:/temp/NewTagName/input">> 
+    newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">> 
+    fallbackTarget={{$(palette)$##tag-background}}
+    colourA={{$(palette)$##foreground}}
+    colourB={{$(palette)$##background}}
+    storeTitle={{{ [<newTagNameInputTiddler>!match[]] ~[<newTagNameInputTiddlerQualified>] }}} 
+    tagSelectionState={{{ [<newTagNameSelectionTiddler>!match[]] ~[<newTagNameSelectionTiddlerQualified>] }}}
+    refreshTitle=<<qualify "$:/temp/NewTagName/refresh">>
+    nonSystemTagsFilter="[tags[]] $(first-search-filter)$ +[!is[system]] -[<storyTiddler>tags[]] :filter[search:title<userInput>]+[sort[]]"
+    systemTagsFilter="[tags[]] $(second-search-filter)$ +[is[system]] -[<storyTiddler>tags[]] :filter[search:title<userInput>]+[sort[]]"
+    displayTagsPopup="[all[tiddlers]subfilter<systemTagsFilter>][all[tiddlers]subfilter<nonSystemTagsFilter>] +[limit[1]]"
 >
-<div class="tc-edit-add-tag">
-<div>
-<span class="tc-add-tag-name tc-small-gap-right">
-<$macrocall $name="keyboard-driven-input"
-tiddler=<<newTagNameTiddler>>
-storeTitle=<<storeTitle>>
-refreshTitle=<<refreshTitle>>
-selectionStateTitle=<<tagSelectionState>>
-inputAcceptActions="<$macrocall $name='add-tag-actions'
-actions=<<__actions__>>
-tagField=<<__tagField__>>/>"
-inputCancelActions=<<clear-tags-actions>>
-tag="input"
-placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
-focusPopup=<<qualify "$:/state/popup/tags-auto-complete">>
-class="tc-edit-texteditor tc-popup-handle"
-tabindex=<<tabIndex>> 
-focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}
-filterMinLength={{$:/config/Tags/MinLength}} 
-cancelPopups=<<cancelPopups>>
-configTiddlerFilter="[[$:/core/macros/tag-picker]]"
-/>
-</span>
-<$button
-popup=<<qualify "$:/state/popup/tags-auto-complete">>
-class="tc-btn-invisible tc-btn-dropdown"
-tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}}
-aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}
->
-{{$:/core/images/down-arrow}}
-</$button>
-<$reveal state=<<storeTitle>> type="nomatch" text="">
-<$button
-class="tc-btn-invisible tc-small-gap tc-btn-dropdown"
-tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}}
-aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}
-actions=<<delete-tag-state-tiddlers>>
->
-{{$:/core/images/close-button}}
-</$button>
-</$reveal>
-<span class="tc-add-tag-button tc-small-gap-left">
-<$let tag={{{ [<newTagNameTiddler>get[text]] }}} currentTiddlerCSSEscaped={{{ [<saveTiddler>escapecss[]] }}}>
-<$button set=<<newTagNameTiddler>> setTo="">
-<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
-$actions$
-<<delete-tag-state-tiddlers>>
-<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
-{{$:/language/EditTemplate/Tags/Add/Button}}
-</$button>
-</$let>
-</span>
-</div>
-<$reveal
-class="tc-block-dropdown tc-block-tags-dropdown tc-block-dropdown-wrapper"
-default={{{ [subfilter<displayTagsPopup>then[]else[hide]] }}}
-state=<<qualify "$:/state/popup/tags-auto-complete">>
-tag={{{ [subfilter<displayTagsPopup>then[div]else[template]] }}}
-text=""
-type="nomatch"
->
-<$let
-actions=<<__actions__>> 
-currentTiddler=<<tag>>
-tagField=<<__tagField__>>
-userInput={{{ [<storeTitle>get[text]] }}}
-tagsAutoCompleteFilter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]"
-tagsAutoCompleteEmptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>"
->
-<$let tagsFilter=<<nonSystemTagsFilter>> suffix="-primaryList"><<tagsAutoComplete>></$let>
-<hr>
-<$let tagsFilter=<<systemTagsFilter>> suffix="-secondaryList"><<tagsAutoComplete>></$let>
-</$let>
-</$reveal>
-</div>
+    <div class="tc-edit-add-tag">
+        <span class="tc-add-tag-name tc-small-gap-right">
+            <$macrocall $name="keyboard-driven-input" tiddler=<<newTagNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>> selectionStateTitle=<<tagSelectionState>> inputAcceptActions="<$macrocall $name='add-tag-actions' actions=<<__actions__>> tagField=<<__tagField__>>/>" inputCancelActions=<<clear-tags-actions>> tag="input" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor tc-popup-handle" tabindex=<<tabIndex>> focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}} filterMinLength={{$:/config/Tags/MinLength}} cancelPopups=<<cancelPopups>> configTiddlerFilter="[[$:/core/macros/tag-picker]]"/>
+        </span>
+        <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}}
+        aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}>
+            {{$:/core/images/down-arrow}}
+        </$button>
+        <$reveal state=<<storeTitle>> type="nomatch" text="">
+            <$button class="tc-btn-invisible tc-small-gap tc-btn-dropdown" tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}} aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}} actions=<<delete-tag-state-tiddlers>>>
+                {{$:/core/images/close-button}}
+            </$button>
+        </$reveal>
+        <span class="tc-add-tag-button tc-small-gap-left">
+            <$let tag={{{ [<newTagNameTiddler>get[text]] }}} currentTiddlerCSSEscaped={{{ [<saveTiddler>escapecss[]] }}}>
+                <$button set=<<newTagNameTiddler>> setTo="">
+                <$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
+                $actions$
+                <<delete-tag-state-tiddlers>>
+                <$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
+                {{$:/language/EditTemplate/Tags/Add/Button}}
+                </$button>
+            </$let>
+        </span>
+        <$let
+        actions=<<__actions__>> 
+        currentTiddler=<<tag>>
+        tagField=<<__tagField__>>
+        userInput={{{ [<storeTitle>get[text]] }}}
+        tagsAutoCompleteFilter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]"
+        tagsAutoCompleteEmptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>"
+        >
+            <$reveal class="tc-block-dropdown tc-block-tags-dropdown tc-block-dropdown-wrapper" default={{{ [subfilter<displayTagsPopup>then[]else[hide]] }}} state=<<qualify "$:/state/popup/tags-auto-complete">> tag={{{ [subfilter<displayTagsPopup>then[div]else[template]] }}} text="" type="nomatch">
+                <$let tagsFilter=<<nonSystemTagsFilter>> suffix="-primaryList"><<tagsAutoComplete>></$let>
+                <hr>
+                <$let tagsFilter=<<systemTagsFilter>> suffix="-secondaryList"><<tagsAutoComplete>></$let>
+            </$reveal>
+        </$let>
+    </div>
 </$let>
 \end
 
 \define tag-picker(actions,tagField:"tags")
 \whitespace trim
-<$let saveTiddler=<<currentTiddler>> palette={{$:/palette}}>
-<$list filter="[<newTagNameTiddler>match[]]" emptyMessage="<$macrocall $name='tag-picker-inner' actions=<<__actions__>> tagField=<<__tagField__>>/>">
-<$let newTagNameTiddler=<<qualify "$:/temp/NewTagName">>>
-<$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>
-</$let>
-</$list>
+<$let saveTiddler=<<currentTiddler>> palette={{$:/palette}} newTagNameTiddler=<<qualify "$:/temp/NewTagName">>>
+    <$list filter="[<newTagNameTiddler>match[]]" emptyMessage="<$macrocall $name='tag-picker-inner' actions=<<__actions__>> tagField=<<__tagField__>>/>">
+        <$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>
+    </$list>
 </$let>
 \end
