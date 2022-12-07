@@ -166,6 +166,7 @@ code {
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+	word-break: break-word;
 }
 
 blockquote {
