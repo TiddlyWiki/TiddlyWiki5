@@ -1,0 +1,3 @@
+title: $:/core/save/offline-external-js/core-url
+
+tiddlywikicore-<$macrocall $name="version"/>.js
