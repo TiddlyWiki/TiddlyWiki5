@@ -192,6 +192,7 @@ type: text/vnd.tiddlywiki
 	right: 0;
 	overflow: hidden;
 	top: 0;
+	z-index: 849;
 	pointer-events: none;
 }
 
