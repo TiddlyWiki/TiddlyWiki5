@@ -19,6 +19,26 @@ This is the macro text (param=$param$)
 \end
 ```
 
+!! Nested Macro Definitions
+
+Macro definitions can be nested to any number of required levels by specifying the name of the macro in the `\end` marker. Nested macro definitions must appear at the start of the definition that contains them. For example:
+
+<<wikitext-example-without-html src:"""\define special-button(caption:"Click me")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
+
+Note that the textual substitution of macro parameters that occurs when the outer macro is rendered will apply to the nested definitions as well. That generally means that textual substitution of macro parameters should not be used within nested macros.
+
+Parameters of nested macros can also be accessed via the `<<__variablename__>>` syntax. As ordinary variables, these parameters are available within nested child macros (and grandchildren etc).
+
 !! Macro Definition with Set Widget
 
 Macros are implemented as a special type of [[variable|Variables]] and so internally are actually defined with a <<.wlink SetWidget>> widget.
