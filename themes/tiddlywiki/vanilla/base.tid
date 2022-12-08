@@ -1999,6 +1999,15 @@ html body.tc-body.tc-single-tiddler-window {
 	margin: auto;
 }
 
+/* Make search dropdown visible on small screens. issue #7003 */
+@media (max-width: <<sidebarbreakpoint>>) {
+
+	.tc-sidebar-search .tc-block-dropdown-wrapper {
+		position: initial;
+	}
+
+}
+
 /*
 ** Modals
 */
