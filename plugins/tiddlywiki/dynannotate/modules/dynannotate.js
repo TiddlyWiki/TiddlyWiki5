@@ -332,7 +332,7 @@ DynannotateWidget.prototype.applySnippets = function() {
 			// Output the match
 			container.appendChild($tw.utils.domMaker("span",{
 				text: textMap.string.slice(match.startPos,match.endPos),
-				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass")
+				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass","")
 			}));
 			// Does the context of this match merge into the next?
 			merged = index < matches.length - 1 && matches[index + 1].startPos - match.endPos <= 2 * contextLength;
