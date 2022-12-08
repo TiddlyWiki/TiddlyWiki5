@@ -186,6 +186,10 @@ function CodeMirrorEngine(options) {
 		return false;
 	});
 	this.cm.on("keydown",function(cm,event) {
+		if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+			return true;
+		}
+	
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
 	this.cm.on("focus",function(cm,event) {

@@ -87,7 +87,7 @@ function FramedEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
-		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
+		{name: "keydown",handlerObject: this,handlerMethod: "handleKeydownEvent"},
 		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
 	// Add drag and drop event listeners if fileDrop is enabled
@@ -190,6 +190,17 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
 		$tw.popup.cancel(0);
 	}
+};
+
+/*
+Handle a keydown event
+ */
+FramedEngine.prototype.handleKeydownEvent = function(event) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+		return true;
+	}
+
+	return this.widget.handleKeydownEvent(event);
 };
 
 /*

@@ -44,8 +44,8 @@ muted-foreground: Primario general silenciado
 notification-background: Fondo Notificación
 notification-border: Borde Notificación
 page-background: Fondo Página
-pre-background: Preformatted code background
-pre-border: Preformatted code border
+pre-background: Fondo de código preformateado
+pre-border: Borde de código preformateado
 primary: Primario general
 select-tag-background: Fondo `<select>`
 select-tag-foreground: Primario `<select>`

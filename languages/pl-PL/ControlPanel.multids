@@ -5,17 +5,19 @@ Advanced/Hint: Wewnętrzne informacje na temat TiddlyWiki
 Appearance/Caption: Wyświetlanie
 Appearance/Hint: Dostosowywanie wyglądu tej TiddlyWiki
 Basics/AnimDuration/Prompt: Długość animacji
-Basics/AutoFocus/Prompt: Domyślne pole z fokusem dla nowych tiddlerów
+Basics/AutoFocus/Prompt: Domyślne wybrane pole do edycji przy tworzeniu nowego tiddlera
 Basics/Caption: Podstawowe
-Basics/DefaultTiddlers/BottomHint: Używaj &#91;&#91;podwójnych nawiasów kwadratowych&#93;&#93; dla nazw ze spacjami. Możesz też <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">przywrócić ostatnią sesję</$button>
+Basics/DefaultTiddlers/BottomHint: Tiddlery, które mają spację w nazie otocz &#91;&#91;podwójnymi nawiasami kwadratowymi&#93;&#93;. Możesz też ustawić, by zawsze widzieć {{ostatnio otwarte tiddlery||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to {{retain story ordering||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Domyślnie otwarte tiddlery
 Basics/DefaultTiddlers/TopHint: Wybierz które tiddlery mają być widoczne przy uruchomieniu
 Basics/Language/Prompt: Cześć! Wybrany język to:
-Basics/NewJournal/Title/Prompt: Tytuł nowych dzienników
-Basics/NewJournal/Text/Prompt: Treść nowych dzienników
-Basics/NewJournal/Tags/Prompt: Tagi nowych dzienników
-Basics/NewTiddler/Title/Prompt: Tytuł nowych tiddlerów
-Basics/NewTiddler/Tags/Prompt: Tagi nowych tiddlerów
+Basics/NewJournal/Title/Prompt: Domyślny tytuł nowych dzienników
+Basics/NewJournal/Text/Prompt: Domyślna treść nowych dzienników
+Basics/NewJournal/Tags/Prompt: Domyślne tagi nowych dzienników
+Basics/NewTiddler/Title/Prompt: Domyślny tytuł nowych tiddlerów
+Basics/NewTiddler/Tags/Prompt: Domyślne tagi nowych tiddlerów
 Basics/OverriddenShadowTiddlers/Prompt: Liczba nadpisanych tiddlerów-cieni
 Basics/RemoveTags: Zaktualizuj do obecnego formatu
 Basics/RemoveTags/Hint: Zaktualizuj konfigurację tagów do najnowszego formatu
@@ -58,7 +60,7 @@ LoadedModules/Caption: Wczytane Moduły
 LoadedModules/Hint: To są wszystie wczytane moduły podlinkowane do swoich tiddlerów źródłowych. Te zapisane kursywą nie posiadają źródłowych tiddlerów, zwykle dlatego, że były skonfigorwane podczas procesu uruchomienia.
 Palette/Caption: Paleta
 Palette/Editor/Clone/Caption: kopiuj
-Palette/Editor/Clone/Prompt: Zalecane jest skopiowanie taj ukrytej palety przed edycją
+Palette/Editor/Clone/Prompt: Zalecamy skopiowanie tej palety przed zmianą kolorów
 Palette/Editor/Delete/Hint: usuń tą konfigurację z obecnej palety
 Palette/Editor/Names/External/Show: Pokaż nazwy kolorów, które nie są częścią wybranej palety
 Palette/Editor/Prompt/Modified: Ukryta paleta została zmieniona
@@ -144,7 +146,7 @@ Settings/AutoSave/Disabled/Description: Nie zapisuj zmian automatycznie
 Settings/AutoSave/Enabled/Description: Zapisuj zmiany automatycznie
 Settings/AutoSave/Hint: Próbuj automatycznie zapisać zmiany podczas edycji, gdy używasz wspierającego to modułu zapisującego
 Settings/CamelCase/Caption: Camel Case WikiLinki
-Settings/CamelCase/Hint: Możesz wyłączyć automatyczne linkowanie fraz w ~CamelCase. Wymaga ponownego uruchomienia.
+Settings/CamelCase/Hint: Możesz wyłączyć automatyczne linkowanie fraz w ~CamelCase; wymaga ponownego uruchomienia
 Settings/CamelCase/Description: Włącz automatyczne linkowanie ~CamelCase
 Settings/Caption: Ustawienia
 Settings/EditorToolbar/Caption: Pasek Narzędzi Edytora
@@ -165,11 +167,11 @@ Settings/NavigationHistory/Hint: Aktualizuj historię nawigacji przeglądarki pr
 Settings/NavigationHistory/No/Description: Nie aktualizuj historii
 Settings/NavigationHistory/Yes/Description: Aktualizuj historię
 Settings/NavigationPermalinkviewMode/Caption: Tryb linków bezpośrednich/widoku
-Settings/NavigationPermalinkviewMode/Hint: Ustal jak linki bezośrednie/widok się zachowują:
+Settings/NavigationPermalinkviewMode/Hint: Ustal jak linki bezpośrednie/widok się zachowują:
 Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Skopiuj URL do linku bezpośredniego/widoku do schowka
 Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Zaktualizuj pasek adresu o URL do linku bezpośredniego/widoku
-Settings/PerformanceInstrumentation/Caption: Logowanie w Konsoli
-Settings/PerformanceInstrumentation/Hint: Uruchamia lokowanie w konsoli deweloperskiej przeglądarki. Wymagane ponowne uruchmoenie
+Settings/PerformanceInstrumentation/Caption: Logowanie wydajności w Konsoli
+Settings/PerformanceInstrumentation/Hint: Uruchamia logowanie wydajności w konsoli deweloperskiej przeglądarki; wymaga ponownego uruchomienia
 Settings/PerformanceInstrumentation/Description: Włącz logowanie
 Settings/ToolbarButtonStyle/Caption: Styl Przycisków Paska Narzędzi
 Settings/ToolbarButtonStyle/Hint: Wybierz styl przycisków w pasku narzędzi
@@ -208,22 +210,22 @@ Stylesheets/Hint: To jest wyrenderowany CSS obecnych tiddlerów otagowanych jako
 Stylesheets/Restore/Caption: Przywróć
 Theme/Caption: Motyw
 Theme/Prompt: Obecny motyw:
-TiddlerFields/Caption: Pola Tiddlerów
+TiddlerFields/Caption: Pola tiddlerów
 TiddlerFields/Hint: To jest pełna lista wszystich pól użytych w tej wiki (wliczając systemowe tiddlery ale nie tiddlery-cienie)
-TiddlerColour/Caption: Kolor Tiddlera
+TiddlerColour/Caption: Kolor tiddlera
 TiddlerColour/Hint: Ta kaskada określa kolor używany do wyswietlania tiddlera (kolor ikony oraz taga).
-TiddlerIcon/Caption: Ikona Tiddlera
-TiddlerIcon/Hint: Ta kaskada określa ikonę używaną przez Tiddlera.
+TiddlerIcon/Caption: Ikona tiddlera
+TiddlerIcon/Hint: Ta kaskada określa ikonę używaną przez tiddlera.
 Toolbars/Caption: Paski Narzędzi
-Toolbars/EditToolbar/Caption: Edytuj Pasek Narzędzi
-Toolbars/EditToolbar/Hint: Wybierz, które przyciski mają być widoczne podczas edycji tiddlera. Przeciągaj by zmieniać kolejność.
+Toolbars/EditToolbar/Caption: Pasek narzędzi przy edycji tiddlera
+Toolbars/EditToolbar/Hint: Wybierz, które przyciski mają być widoczne na górze okna edycji tiddlera. Możesz zmienić ich kolejnośc przeciągając wiersze.
 Toolbars/Hint: Wybierz, które przyciski mają być widoczne.
-Toolbars/PageControls/Caption: Pasek Narzędzi Strony
-Toolbars/PageControls/Hint: Wybierz, które przyciski mają być widoczne w głónym pasku narzędzi. Przeciągaj by zmieniać kolejność.
-Toolbars/EditorToolbar/Caption: Pasek Narzędzi edytora
-Toolbars/EditorToolbar/Hint: Wybierz które przyciski mają być widoczne w pasku narzędzi edytora. Pamiętaj, że tylko niektóre z nich są wyświetlane przy róznych typach tiddlerów. Przeciągaj by zmieniać kolejność
-Toolbars/ViewToolbar/Caption: Pasek Narzędzi Oglądania
-Toolbars/ViewToolbar/Hint: Wybierz które przyciski są widoczne podczas oglądania tiddlera. Przeciągaj by zmieniać kolejność.
+Toolbars/PageControls/Caption: Pasek narzędzi strony
+Toolbars/PageControls/Hint: Wybierz, które przyciski mają być widoczne w głównym pasku narzędzi w menu bocznym. Możesz zmienić ich kolejnośc przeciągając wiersze.
+Toolbars/EditorToolbar/Caption: Pasek narzędzi edytora treści
+Toolbars/EditorToolbar/Hint: Wybierz które przyciski mają być widoczne w pasku narzędzi edytora treści tiddlera. Zależnie od typu edytowanego Tiddlera niektóre z nich mogą być niedostępne. Możesz zmienić ich kolejnośc przeciągając wiersze.
+Toolbars/ViewToolbar/Caption: Pasek narzędzi wyświetlania
+Toolbars/ViewToolbar/Hint: Wybierz które przyciski są widoczne obok tytułu podczas wyświetlania tiddlera. Możesz zmienić ich kolejnośc przeciągając wiersze.
 Tools/Download/Full/Caption: Pobierz całą wiki.
 ViewTemplateBody/Caption: Treść Wyświetlanego Tiddlera
 ViewTemplateBody/Hint: Ta kaskada określa szablon wyświetlania treści tiddlera (czyli jego tekstu, w przeciwieństwie do kaskady 'Widok Tiddlera').

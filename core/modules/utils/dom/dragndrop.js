@@ -25,14 +25,13 @@ widget: widget to use as the context for the filter
 exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
-		domNode = options.domNode,
-		dragHandle = options.selector && domNode.querySelector(options.selector) || domNode;
+		domNode = options.domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
-	if((domNode.tagName || "").toLowerCase() !== "a") {
-		dragHandle.setAttribute("draggable","true");
+	if(!options.selector && ((domNode.tagName || "").toLowerCase() !== "a")) {
+		domNode.setAttribute("draggable","true");
 	}
 	// Add event handlers
-	$tw.utils.addEventListeners(dragHandle,[
+	$tw.utils.addEventListeners(domNode,[
 		{name: "dragstart", handlerFunction: function(event) {
 			if(event.dataTransfer === undefined) {
 				return false;
@@ -41,19 +40,19 @@ exports.makeDraggable = function(options) {
 			var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 				dragFilter = options.dragFilterFn && options.dragFilterFn(),
 				titles = dragTiddler ? [dragTiddler] : [],
-			    	startActions = options.startActions,
-			    	variables,
-			    	domNodeRect;
+				startActions = options.startActions,
+				variables,
+				domNodeRect;
 			if(dragFilter) {
 				titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 			}
 			var titleString = $tw.utils.stringifyList(titles);
 			// Check that we've something to drag
-			if(titles.length > 0 && event.target === dragHandle) {
+			if(titles.length > 0 && (options.selector && $tw.utils.domMatchesSelector(event.target,options.selector) || event.target === domNode)) {
 				// Mark the drag in progress
 				$tw.dragInProgress = domNode;
 				// Set the dragging class on the element being dragged
-				$tw.utils.addClass(event.target,"tc-dragging");
+				$tw.utils.addClass(domNode,"tc-dragging");
 				// Invoke drag-start actions if given
 				if(startActions !== undefined) {
 					// Collect our variables
@@ -107,21 +106,22 @@ exports.makeDraggable = function(options) {
 					dataTransfer.setData("text/vnd.tiddler",jsonData);
 					dataTransfer.setData("text/plain",titleString);
 					dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
+				} else {
+					dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				}
-				dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				dataTransfer.setData("Text",titleString);
 				event.stopPropagation();
 			}
 			return false;
 		}},
 		{name: "dragend", handlerFunction: function(event) {
-			if(event.target === domNode) {
+			if((options.selector && $tw.utils.domMatchesSelector(event.target,options.selector)) || event.target === domNode) {
 				// Collect the tiddlers being dragged
 				var dragTiddler = options.dragTiddlerFn && options.dragTiddlerFn(),
 					dragFilter = options.dragFilterFn && options.dragFilterFn(),
 					titles = dragTiddler ? [dragTiddler] : [],
-			    		endActions = options.endActions,
-				    	variables;
+					endActions = options.endActions,
+					variables;
 				if(dragFilter) {
 					titles.push.apply(titles,options.widget.wiki.filterTiddlers(dragFilter,options.widget));
 				}
@@ -135,7 +135,7 @@ exports.makeDraggable = function(options) {
 					options.widget.invokeActionString(endActions,options.widget,event,variables);
 				}
 				// Remove the dragging class on the element being dragged
-				$tw.utils.removeClass(event.target,"tc-dragging");
+				$tw.utils.removeClass(domNode,"tc-dragging");
 				// Delete the drag image element
 				if(dragImage) {
 					dragImage.parentNode.removeChild(dragImage);

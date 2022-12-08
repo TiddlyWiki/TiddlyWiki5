@@ -1,0 +1,64 @@
+created: 20220611104737314
+modified: 20220611104737314
+tags: [[Filter Operators]] [[JSON Operators]]
+title: jsonindexes Operator
+caption: jsonindexes
+op-purpose: retrieve the value of a property from JSON strings
+op-input: a selection of JSON strings
+op-parameter: one or more indexes of the property to retrieve
+op-output: the values of each of the retrieved properties
+
+<<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
+
+The <<.op jsonindexes>> operator is used to retrieve the property names of JSON objects or the index names of JSON arrays. See also the following related operators:
+
+* <<.olink jsonget>> to retrieve the values of a property in JSON data
+* <<.olink jsontype>> to retrieve the type of a JSON value
+
+Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
+
+```
+{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+```
+
+The following examples assume that this JSON data is contained in a variable called `jsondata`.
+
+The <<.op jsonindexes>> operator uses multiple operands to specify the indexes of the property to retrieve:
+
+```
+[<jsondata>jsonindexes[d],[f]] --> "0", "1", "2", "3", "4"
+[<jsondata>jsonindexes[d],[g]] --> "x", "y", "z"
+```
+
+Indexes can be dynamically composed from variables and transclusions:
+
+```
+[<jsondata>jsonindexes<variable>,{!!field}]
+```
+
+Retrieving the indexes of JSON properties that are not objects or arrays will return nothing.
+
+A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+
+```
+[<jsondata>jsonindexes[]] --> "a", "b", "c", "d"
+```

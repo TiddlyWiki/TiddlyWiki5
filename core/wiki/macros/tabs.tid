@@ -48,7 +48,7 @@ code-body: yes
 \define tabs(tabsList,default,state:"$:/state/tab",class,template,buttonTemplate,retain,actions,explicitState)
 \whitespace trim
 <$qualify title=<<__state__>> name="qualifiedState">
-	<$set name="tabsState" filter={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
+	<$let tabsState={{{ [<__explicitState__>minlength[1]] ~[<qualifiedState>] }}}>
 		<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
 			<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
 				<<tabs-tab-list>>
@@ -58,6 +58,6 @@ code-body: yes
 				<<tabs-tab-body>>
 			</div>
 		</div>
-	</$set>
+	</$let>
 </$qualify>
 \end

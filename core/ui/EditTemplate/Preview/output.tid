@@ -5,6 +5,6 @@ caption: {{$:/language/EditTemplate/Body/Preview/Type/Output}}
 \import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]] [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!has[draft.of]]
 <$set name="tv-tiddler-preview" value="yes">
 
-<$transclude />
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateBodyFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/body/default]] }}} />
 
 </$set>

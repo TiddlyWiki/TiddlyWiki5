@@ -4,6 +4,6 @@ key: ((advanced-search))
 
 \whitespace trim
 <$navigator story="$:/StoryList" history="$:/HistoryList">
-<$action-navigate $to="$:/AdvancedSearch"/>
+<$action-navigate $to="$:/AdvancedSearch" $scroll="yes"/>
 <$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/>
 </$navigator>

@@ -31,5 +31,5 @@ Notatki:
 
 Przykłady:
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- renderuje wszystkie niesystemowe tiddlery jako pliki w podfolderze "tiddlers", kodując znaki URI w nazwie i dodając rozszerzenie .html
-
+* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` -- renderuje wszystkie niesystemowe tiddlery jako pliki w podfolderze "tiddlers", kodując znaki URI w nazwie i dodając rozszerzenie .html
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- renderuje wszystkie tiddlery z tagiem "HelloThere" do pliku JSON o nazwie "tiddlers.json"

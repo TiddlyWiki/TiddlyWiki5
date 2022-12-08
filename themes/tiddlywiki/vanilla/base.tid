@@ -30,6 +30,10 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
 
+\define tiddler-width()
+	<$text text={{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}/>
+\end
+
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -76,16 +80,17 @@ $else$
 	-webkit-box-sizing: border-box;
 }
 
-input[type="search"] {
-	outline-offset: initial;
-}
-
+/*
+** Button default styles. Makes them look consistent for all browsers
+*/
 html button {
 	line-height: 1.2;
 	color: <<colour button-foreground>>;
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
-	border-color: <<colour button-border>>;
+	border: 1px solid <<colour button-border>>;
+	border-radius: 3px;
+	padding: 2px 5px;
 }
 
 button:disabled svg {
@@ -143,7 +148,7 @@ pre {
 	display: block;
 	margin-top: 1em;
 	margin-bottom: 1em;
-	word-break: normal;
+	word-break: break-word;
 	word-wrap: break-word;
 	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: <<colour pre-background>>;
@@ -221,8 +226,19 @@ dl dt {
 	margin-top: 6px;
 }
 
-button, textarea, input, select {
-	outline-color: <<colour primary>>;
+/*
+** Definition for text input elements so they look consistent for all browsers
+*/
+
+textarea, input, select {
+	border: 2px solid <<colour tiddler-editor-border>>;
+	background-color: <<colour tiddler-editor-background>>;
+}
+
+/* Input elements accessibility -- overwrite the reset */
+:focus-visible {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;    /* same as in reset.css [type='search'] but for more elements */
 }
 
 textarea,
@@ -231,7 +247,6 @@ input[type=search],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
-	background: <<colour background>>;
 }
 
 input[type="checkbox"] {
@@ -279,6 +294,11 @@ kbd {
 	color: <<colour selection-foreground>>;
 }
 
+.tc-inline-style {
+	background: <<colour highlight-background>>;
+	color: <<colour highlight-foreground>>;
+}
+
 form.tc-form-inline {
 	display: inline;
 }
@@ -293,6 +313,10 @@ pre > code {
 	color: inherit;
 }
 
+/*
+Table defaults
+*/
+
 table {
 	border: 1px solid <<colour table-border>>;
 	width: auto;
@@ -306,7 +330,7 @@ table {
 }
 
 table th, table td {
-	padding: 0 7px 0 7px;
+	padding: 4px 6px 4px 6px;
 	border-top: 1px solid <<colour table-border>>;
 	border-left: 1px solid <<colour table-border>>;
 }
@@ -320,9 +344,69 @@ table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
 }
 
+/*
+Table utility classes
+*/
+
+/* Remove borders from table as used in eg: GettingStarted*/
+.tc-table-no-border,
+.tc-table-no-border th,
+.tc-table-no-border td {
+	border: initial;
+}
+
+/* First column in table width will fit to text.*/
+/* This rule makes most sense with tc-first-link-nowrap*/
+.tc-first-col-min-width td:nth-child(1) {
+	width: 1%;
+}
+
+/*
+** Utility classes work well with tables but also for other containers
+*/
+
+/* First link A element will not wrap */
+.tc-first-link-nowrap:first-of-type a {
+	white-space: nowrap;
+}
+
+/* Move the table to the center of the container */
+.tc-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tc-max-width {
+	width: 100%;
+}
+
+.tc-max-width-80 {
+	max-width: 80%;
+}
+
+/* Allow input and textarea to look like the ControlPanel inputs */
+.tc-edit-max-width input,
+.tc-edit-max-width textarea {
+	width: 100%;
+	padding: 3px;
+}
+
+/*
+CSV parser plugin
+*/
+
 .tc-csv-table {
 	white-space: nowrap;
 }
+
+.tc-csv-table th,
+.tc-csv-table td {
+	white-space: pre-line;
+}
+
+/*
+Tiddler frame in story river
+*/
 
 .tc-tiddler-frame img,
 .tc-tiddler-frame svg,
@@ -352,6 +436,7 @@ a.tc-tiddlylink {
 	font-weight: 500;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
+	-webkit-touch-callout: none; /* Prevents long presses from bringing up a link preview */
 }
 
 .tc-sidebar-lists a.tc-tiddlylink {
@@ -1092,6 +1177,28 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
+
+/* prevent overflow for table content for small screens*/
+@media (max-width: <<sidebarbreakpoint>>) {
+	.tc-tiddler-frame tr {
+		word-wrap: anywhere;
+	}
+
+	.tc-tiddler-frame table blockquote {
+		margin-left: 12.5px;
+		margin-right: 12.5px; 
+	}
+
+	.tc-tiddler-frame table dd {
+		margin-left: 12.5px;
+	}
+
+	.tc-tiddler-frame table ol,
+	.tc-tiddler-frame table ul {
+		padding-left: 20px;
+	}
+}
+
 .tc-site-title,
 .tc-titlebar {
 	font-weight: normal;
@@ -1140,6 +1247,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame .tc-tiddler-controls {
 	float: right;
+	padding: 3px; /* make space for outline */
 }
 
 .tc-tiddler-controls .tc-drop-down {
@@ -1441,6 +1549,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-controls button svg.tc-image-done-button {
 	fill: <<colour toolbar-done-button>>;
+}
+
+.tc-page-controls svg.tc-image-layout-button {
+	fill: <<colour toolbar-options-button>>;
 }
 
 /*
@@ -1885,6 +1997,15 @@ html body.tc-body.tc-single-tiddler-window {
 	left: 0;
 	right: 0;
 	margin: auto;
+}
+
+/* Make search dropdown visible on small screens. issue #7003 */
+@media (max-width: <<sidebarbreakpoint>>) {
+
+	.tc-sidebar-search .tc-block-dropdown-wrapper {
+		position: initial;
+	}
+
 }
 
 /*
@@ -2808,7 +2929,7 @@ input.tc-palette-manager-colour-input {
 ** Dirty indicator
 */
 
-body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg {
+html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
 	color: <<colour dirty-indicator>>;
 }

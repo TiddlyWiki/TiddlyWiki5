@@ -8,6 +8,7 @@ CloseAll/Button: close all
 ColourPicker/Recent: Recent:
 ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Are you sure you wish to delete <<resultCount>> tiddler(s)?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
 ConfirmAction: Do you wish to proceed?

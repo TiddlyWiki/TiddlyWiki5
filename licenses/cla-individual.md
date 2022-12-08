@@ -493,3 +493,11 @@ Dam S., @damscal, 2022/03/24
 Max Schillinger, @MaxGyver83, 2022/05/11
 
 Nolan Darilek, @NDarilek,  2022/06/21
+
+Keiichi Shiga (🎈 BALLOON | FU-SEN), @fu-sen. 2022/07/07
+
+Nathaniel Knight, @nathanielknight, 2022/07/26
+
+HuanCheng Bai, @bestony, 2022/09/17
+
+Carlo Colombo, @carlo-colombo, 2022/11/30

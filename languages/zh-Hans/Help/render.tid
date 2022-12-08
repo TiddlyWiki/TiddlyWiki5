@@ -31,3 +31,4 @@ description: 呈现个别条目到文件
 例子：
 
 * `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- 呈现所有非系统条目为 "tiddlers" 子文件夹中的文件，文件名为 URL 编码的条目名称和扩展名 HTML
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- 将标签为 "HelloThere" 的条目渲染到名为 "tiddlers.json" 的 JSON 文件

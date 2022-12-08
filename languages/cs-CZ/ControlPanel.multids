@@ -6,7 +6,7 @@ Appearance/Caption: Vzhled
 Appearance/Hint: Možnosti přizpůsobení vzhledu vaší TiddlyWiki.
 Basics/AnimDuration/Prompt: Délka animace:
 Basics/Caption: Základní
-Basics/DefaultTiddlers/BottomHint: Použijte &#91;&#91;dvojité hranaté závorky&#93;&#93; pro názvy s mezerami. Nebo můžete zvolit <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">zachování toku</$button>
+Basics/DefaultTiddlers/BottomHint: Použijte &#91;&#91;dvojité hranaté závorky&#93;&#93; pro názvy s mezerami. Nebo můžete zvolit {{zachování toku||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Výchozí tiddlery:
 Basics/DefaultTiddlers/TopHint: Vyberte které tiddlery budou zobrazeny po spuštění:
 Basics/Language/Prompt: Ahoj! Aktuální jazyk:

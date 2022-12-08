@@ -1,14 +1,14 @@
 created: 20140418142957325
-modified: 20210912115121622
+modified: 20221121131150032
 tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-The default representation of dates is a compact string such as `20211002153802059`. For example, the `created` and `modified` fields are stored like this. 
+The default representation of dates is a compact string such as `20211002153802059`. For example, the `created` and `modified` fields are stored like this.
 
 The display format for this string can be controlled with a template. For example, transcluding the `modified` field automatically applies a template to display the date as `Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)`. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
 
-`<$view field=modified format=date template=“DDth mmm YYYY 0hh:0mm:0ss” />`
+`<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
 
 The date string is processed with the following substitutions:
 
@@ -46,6 +46,7 @@ The date string is processed with the following substitutions:
 |`am` or `pm` |Lower case AM/PM indicator |
 |`AM` or `PM` |Upper case AM/PM indicator |
 |`TZD` |Timezone offset |
+|`TIMESTAMP` |<<.from-version "5.2.4">> Number of milliseconds since the [[ECMAScript epoch|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_ecmascript_epoch_and_timestamps]], 1 January 1970. |
 |`\x` |Used to escape a character that would otherwise have special meaning |
 |`[UTC]`|Time-shift the represented date to UTC. Must be at very start of format string|
 
@@ -59,3 +60,26 @@ The `{era:BCE||CE}` notation can specify different strings for years that are ne
 |`DDth MMM YYYY` |16th February 2011 |
 |`DDth MMM \M\M\M YYYY` |16th February MMM 2011 |
 |`DDth mmm YYYY 0hh:0mm:0ss` |16th Feb 2011 11:38:42 |
+
+!! Using `TIMESTAMP` to calculate time difference
+
+You can calculate the difference between two dates by doing the following:
+
+# Convert both dates to timestamps
+# Subtract the later date from the earlier one -- if you don't know which one is earlier use the <<.olink "abs">> operator to get an absolute value after subtraction
+# Divide the resulting number by the number of milliseconds in your chosen interval
+
+Here is an example of calculating the number of days that passed between creation and last modification of current tiddler:
+
+* Fields `modified` and `created` contain their respective datetimes in the format `[UTC]YYYY0MM0DD0hh0mm0ssXXX` so convert them to timestamps
+* `86400000` is the number of milliseconds in a day (1000 * 60 * 60 * 24)
+
+<$macrocall $name=".example" n="0" eg="""<$let
+	timestamp-modified={{{ [{!!modified}format:date[TIMESTAMP]] }}}
+	timestamp-created={{{ [{!!created}format:date[TIMESTAMP]] }}}
+	difference-days={{{ [<timestamp-modified>subtract<timestamp-created>divide[86400000]floor[]] }}}>
+
+* ''Modified date:'' <$text text={{{ [{!!modified}format:date[YYYY-0MM-0DD]] }}}/>
+* ''Created date:'' <$text text={{{ [{!!created}format:date[YYYY-0MM-0DD]] }}}/>
+* ''Difference in days:'' <<difference-days>> days
+</$let>"""/>

@@ -1,0 +1,7 @@
+title: $:/core/ui/ViewTemplate/body/rendered-plain-text
+code-body: yes
+
+\whitespace trim
+<$wikify name="text" text={{!!text}} type={{!!type}}>
+<$codeblock code=<<text>> language="css"/>
+</$wikify>

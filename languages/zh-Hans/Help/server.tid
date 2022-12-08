@@ -1,9 +1,9 @@
 title: $:/language/Help/server
-description: 提供一个 HTTP 服务器介面到 TiddlyWiki (已弃用，支持新的 listen 命令)
+description: 提供一个 HTTP 服务器界面到 TiddlyWiki (已弃用，支持新的 listen 命令)
 
 在服务器中内置 TiddlyWiki5 是非常简单。虽与 TiddlyWeb 兼容，但不支持许多健全互联网面向的使用方式所需的功能。
 
-提供呈现一个指定条目，也可将个别条目编码成 JSON，且支持基本的 HTTP 操作 `GET`、`PUT` 及 `DELETE`.
+提供呈现一个指定条目，也可将个别条目编码成 JSON，且支持基础的 HTTP 操作 `GET`、`PUT` 及 `DELETE`.
 
 ```
 --server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
@@ -12,11 +12,11 @@ description: 提供一个 HTTP 服务器介面到 TiddlyWiki (已弃用，支持
 参数说明：
 
 * ''port'' - 要侦听的埠号；非数值会被解译为一个系统环境变数，从其中提取埠号 (默认为 "8080")
-* ''root-tiddler'' - 服务的基本条目 (默认为 "$:/core/save/all")
-* ''root-render-type'' - 呈现的基本条目的内容类型 (默认为 "text/plain")
-* ''root-serve-type'' - 服务的基本条目的内容类型 (默认为 "text/html")
+* ''root-tiddler'' - 服务的基础条目 (默认为 "$:/core/save/all")
+* ''root-render-type'' - 呈现的基础条目的内容类型 (默认为 "text/plain")
+* ''root-serve-type'' - 服务的基础条目的内容类型 (默认为 "text/html")
 * ''username'' - 默认的编辑者署名
-* ''password'' - 可选的基本验证密码
+* ''password'' - 可选的基础验证密码
 * ''host'' - 可选的主机名称， (默认为 "127.0.0.1" 或名为 "localhost")
 * ''path-prefix'' - 可选的路径前缀
 * ''debug-level'' - 可选的调试级别；设置为 "debug" 来查看请求的详细信息；(默认为 "none")

@@ -12,6 +12,8 @@ Various static DOM-related utility functions.
 /*global $tw: false */
 "use strict";
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 /*
 Determines whether element 'a' contains element 'b'
 Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
@@ -294,8 +296,21 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		});
 		
 		if(selectedNode.offsetLeft) {
-			// Add a variable with a popup coordinate string for the selected node
-			variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
+			// Add variables with a (relative and absolute) popup coordinate string for the selected node
+			var nodeRect = {
+				left: selectedNode.offsetLeft,
+				top: selectedNode.offsetTop,
+				width: selectedNode.offsetWidth,
+				height: selectedNode.offsetHeight
+			};
+			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
+
+			var absRect = $tw.utils.extend({}, nodeRect);
+			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+				absRect.left += currentNode.offsetLeft;
+				absRect.top += currentNode.offsetTop;
+			}
+			variables["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,absRect);
 
 			// Add variables for offset of selected node
 			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();

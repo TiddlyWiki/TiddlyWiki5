@@ -51,11 +51,9 @@ LetWidget.prototype.computeAttributes = function() {
 	$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(this.parseTreeNode),function(attribute) {
 		var value = self.computeAttribute(attribute),
 			name = attribute.name;
-		if(name.charAt(0) !== "$") {
-			// Now that it's prepped, we're allowed to look this variable up
-			// when defining later variables
-			self.currentValueFor[name] = value;
-		}
+		// Now that it's prepped, we're allowed to look this variable up
+		// when defining later variables
+		self.currentValueFor[name] = value;
 	});
 	// Run through again, setting variables and looking for differences
 	$tw.utils.each(this.currentValueFor,function(value,name) {

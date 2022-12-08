@@ -3,6 +3,7 @@ title: $:/language/Docs/Fields/
 _canonical_uri: Dirección (URI) completa -absoluta o relativa- de un tiddler externo de imagen
 bag: Nombre de la bolsa de la que procede un tiddler
 caption: Texto que se muestra en una pestaña o botón, con independencia del título del tiddler que lo define
+code-body: La plantilla de vista mostrará el tiddler como código si se establece en ''yes''
 color: Valor CSS del color de fondo asociado a un tiddler
 component: Nombre del componente responsable de un [[tiddler de alerta|AlertMechanism]]
 current-tiddler: Usado para incluir el tiddler superior en una [[historia|HistoryMechanism]]
@@ -13,9 +14,9 @@ description: Descripción de un complemento, extensión, o diálogo modal
 draft.of: Título del tiddler del que el actual es borrador
 draft.title: Nuevo título propuesto para el presente borrador
 footer: Texto al pie que figurará en un asistente
-hide-body: La plantilla de vista ocultará los cuerpos de los tiddlers si se establece en: ''yes''
+hide-body: La plantilla de vista ocultará los cuerpos de los tiddlers si se establece en ''yes''
 icon: Nombre del tiddler que contiene el icono que se quiere asociar al presente tiddler
-library: Si su valor es "Sí", indica que el tiddler debe guardarse como librería de JavaScript
+library: Si su valor es ''yes'', indica que el tiddler debe guardarse como librería de JavaScript
 list: Lista ordenada de tiddlers asociados al presente tiddler
 list-before: Título del tiddler antes del que el presente será añadido a una lista<br> Si el campo existe pero está vacío, el tiddler se añadirá al principio de la lista
 list-after: Título del tiddler tras el que el presente será añadido a una lista de tiddlers.
@@ -32,7 +33,7 @@ tags: Lista de etiquetas asignadas al tiddler
 text: Texto principal de un tiddler
 throttle.refresh: Si está presente, regula las actualizaciones de este tiddler
 title: Nombre único de un tiddler
-toc-link: Suprime el enlace del tiddler en la tabla de contenido si se establece en: ''no'' 
+toc-link: Suprime el enlace del tiddler en la tabla de contenido si se establece en ''no'' 
 type: Tipo de contenido en un tiddler
 version: Versión de un complemento o extensión
 _is_skinny: Si está presente, indica que el campo de texto tiddler debe cargarse desde el servidor

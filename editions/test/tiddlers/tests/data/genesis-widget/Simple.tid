@@ -1,0 +1,14 @@
+title: Genesis/Simple
+description: Simple usage of genesis widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$genesis $type="div">Mouse</$genesis>
+<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>
++
+title: ExpectedResult
+
+<p><div>Mouse</div><div class="tc-thing" label="Squeak">Mouse</div></p>
