@@ -10,10 +10,11 @@ op-output: the values of each of the retrieved properties
 
 <<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
 
-The <<.op jsonget>> operator is used to retrieve values from JSON data. See also the following related operators:
+The <<.op jsonget>> operator is used to retrieve values from JSON data as strings. See also the following related operators:
 
 * <<.olink jsontype>> to retrieve the type of a JSON value
 * <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+* <<.olink jsonextract>> to retrieve a JSON value as a string of JSON
 
 Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
 
@@ -65,11 +66,11 @@ Boolean values and null are returned as normal strings. The <<.olink jsontype>> 
 [<jsondata>jsontype[d],[f],[2]] --> "boolean"
 ```
 
-Using the <<.op jsonget>> operator to retrieve an object or an array returns a JSON string of the values. For example:
+Using the <<.op jsonget>> operator to retrieve an object or an array returns a list of the values. For example:
 
 ```
-[<jsondata>jsonget[d],[f]] --> `["five","six",true,false,null]`
-[<jsondata>jsonget[d],[g]] --> `{"x": "max","y": "may","z": "maize"}`
+[<jsondata>jsonget[d],[f]] --> "five","six","true","false","null"
+[<jsondata>jsonget[d],[g]] --> "max","may","maize"
 ```
 
 The <<.olink jsonindexes>> operator retrieves the corresponding indexes:
@@ -77,6 +78,12 @@ The <<.olink jsonindexes>> operator retrieves the corresponding indexes:
 ```
 [<jsondata>jsonindexes[d],[f]] --> "0", "1", "2", "3", "4"
 [<jsondata>jsonindexes[d],[g]] --> "x", "y", "z"
+```
+
+If the object or array contains nested child objects or arrays then the values are retrieved recursively and returned flattened into a list. For example:
+
+```
+[<jsondata>jsonget[d]] --> "four","five","six","true","false","null","max","may","maize"
 ```
 
 A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:

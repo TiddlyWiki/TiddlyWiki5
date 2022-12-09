@@ -19,7 +19,7 @@ New [ext[Twitter Archivist|./editions/twitter-archivist]] plugin to import the t
 
 <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6961">> new GenesisWidget that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]] and [[format Operator]]
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]], [[jsonextract Operator]] and [[format Operator]]
 
 ! Translation improvement
 
