@@ -50,6 +50,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	var L = require("$:/plugins/tiddlywiki/geospatial/leaflet.js");
 	// Create and position the map
 	const map = L.map(domNode).setView([51.505, -0.09], 13);
+	map.fitWorld();
 	// Setup the tile layer
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
