@@ -119,6 +119,8 @@ exports.startup = function() {
 			$tw.syncadaptor = new module.adaptorClass({wiki: $tw.wiki});
 		}
 	});
+	// Kick off the library manager
+	$tw.library = new $tw.Library();
 	// Set up the syncer object if we've got a syncadaptor
 	if($tw.syncadaptor) {
 		$tw.syncer = new $tw.Syncer({
