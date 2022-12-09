@@ -17,9 +17,23 @@ exports["jsonget"] = function(source,operator,options) {
 	source(function(tiddler,title) {
 		var data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
-			var item = getDataItemValueAsString(data,operator.operands);
+			var items = getDataItemValueAsStrings(data,operator.operands);
+			if(items !== undefined) {
+				results.push.apply(results,items);
+			}
+		}
+	});
+	return results;
+};
+
+exports["jsonextract"] = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		var data = $tw.utils.parseJSONSafe(title,title);
+		if(data) {
+			var item = getDataItem(data,operator.operands);
 			if(item !== undefined) {
-				results.push(item);
+				results.push(JSON.stringify(item));
 			}
 		}
 	});
@@ -31,9 +45,9 @@ exports["jsonindexes"] = function(source,operator,options) {
 	source(function(tiddler,title) {
 		var data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
-			var item = getDataItemKeysAsStrings(data,operator.operands);
-			if(item !== undefined) {
-				results.push.apply(results,item);
+			var items = getDataItemKeysAsStrings(data,operator.operands);
+			if(items !== undefined) {
+				results.push.apply(results,items);
 			}
 		}
 	});
@@ -57,11 +71,11 @@ exports["jsontype"] = function(source,operator,options) {
 /*
 Given a JSON data structure and an array of index strings, return an array of the string representation of the values at the end of the index chain, or "undefined" if any of the index strings are invalid
 */
-function getDataItemValueAsString(data,indexes) {
+function getDataItemValueAsStrings(data,indexes) {
 	// Get the item
 	var item = getDataItem(data,indexes);
-	// Return the item as a string
-	return convertDataItemValueToString(item);
+	// Return the item as a string list
+	return convertDataItemValueToStrings(item);
 }
 
 /*
@@ -77,15 +91,34 @@ function getDataItemKeysAsStrings(data,indexes) {
 /*
 Return an array of the string representation of the values of a data item, or "undefined" if the item is undefined
 */
-function convertDataItemValueToString(item) {
+function convertDataItemValueToStrings(item) {
 	// Return the item as a string
 	if(item === undefined) {
-		return item;
+		return undefined;
+	} else if(item === null) {
+		return ["null"]
+	} else if(typeof item === "object") {
+		var results = [],i,t;
+		if($tw.utils.isArray(item)) {
+			// Return all the items in arrays recursively
+			for(i=0; i<item.length; i++) {
+				t = convertDataItemValueToStrings(item[i])
+				if(t !== undefined) {
+					results.push.apply(results,t);
+				}
+			}
+		} else {
+			// Return all the values in objects recursively
+			$tw.utils.each(Object.keys(item).sort(),function(key) {
+				t = convertDataItemValueToStrings(item[key]);
+				if(t !== undefined) {
+					results.push.apply(results,t);
+				}
+			});
+		}
+		return results;
 	}
-	if(typeof item === "object") {
-		return JSON.stringify(item);
-	}
-	return item.toString();
+	return [item.toString()];
 }
 
 /*
