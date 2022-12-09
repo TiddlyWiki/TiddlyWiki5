@@ -56,12 +56,13 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 	// Create default icon
+	const iconProportions = 365/560,
+		iconHeight = 50;
 	const myIcon = new L.Icon({
 		iconUrl: $tw.utils.makeDataUri(this.wiki.getTiddlerText("$:/plugins/tiddlywiki/geospatial/images/markers/pin"),"image/svg+xml"),
-		iconSize:     [38, 95],
-		shadowSize:   [50, 64],
-		iconAnchor:   [22, 94],
-		popupAnchor:  [-3, -76]
+		iconSize:     [iconHeight * iconProportions, iconHeight], // Side of the icon
+		iconAnchor:   [(iconHeight * iconProportions) / 2, iconHeight], // Position of the anchor within the icon
+		popupAnchor:  [0, -iconHeight] // Position of the popup anchor relative to the icon anchor
 	});
 	// Add scale
 	L.control.scale().addTo(map);
