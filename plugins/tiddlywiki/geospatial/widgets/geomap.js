@@ -79,7 +79,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 					long = $tw.utils.parseNumber(tiddler.fields.long || "0"),
 					alt = $tw.utils.parseNumber(tiddler.fields.alt || "0"),
 					caption = tiddler.fields.caption || title;
-				var m = L.marker([lat,long,alt],{icon: myIcon}).bindPopup(caption).addTo(map);
+				var m = L.marker([lat,long,alt],{icon: myIcon,draggable: false}).bindPopup(caption).addTo(map);
 			}
 		});
 	}
