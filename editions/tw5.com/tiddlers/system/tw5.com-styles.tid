@@ -122,6 +122,15 @@ type: text/vnd.tiddlywiki
 	margin-left: 10px;
 }
 
+.tc-saving-introduction {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	padding: 4em;
+	font-style: italic;
+}
+
 .tc-cards {
 	display: flex;
 	flex-wrap: wrap;
