@@ -5,6 +5,6 @@ tags: GettingStarted
 title: GettingStarted - Chrome
 type: text/vnd.tiddlywiki
 
-TiddlyWiki on Google Chrome can only save changes using the HTML5-compatible fallback saver module.
+TiddlyWiki on Google Chrome can only save changes using the HTML5-compatible saver module.
 
-{{Saving with the HTML5 fallback saver}}
+{{Saving with the HTML5 saver}}
