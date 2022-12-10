@@ -3,7 +3,7 @@ title: $:/core/modules/server/routes/get-library-html.js
 type: application/javascript
 module-type: route
 
-GET /library/
+GET /library/{:title}
 
 \*/
 (function() {
