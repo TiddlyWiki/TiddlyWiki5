@@ -32,9 +32,16 @@ type: text/vnd.tiddlywiki
 \define checkactions(item:"Linux")
 <$action-listops $tiddler=<<stateTiddler>>  $subfilter="[[$item$]]"/>
 \end
-<$vars stateTiddler=<<qualify "$:/state/gettingstarted">> >
 
-Available methods for saving changes with ~TiddlyWiki:
+\define introduction-message()
+<div class="tc-saving-introduction">
+<div>
+Use the checkboxes to explore the methods of saving that work with your platform(s)
+</div>
+</div>
+\end
+
+<$vars stateTiddler=<<qualify "$:/state/gettingstarted">> >
 
 <div class="tc-wrapper-flex">
 <div class="tc-saving-sidebar">
@@ -56,7 +63,7 @@ Available methods for saving changes with ~TiddlyWiki:
 <!-- Page content -->
 <div class="tc-cards">
 <$wikify text=<<alltagsfilter>> name="alltagsfilterwikified">
-<$list filter=<<alltagsfilterwikified>>>
+<$list filter=<<alltagsfilterwikified>> emptyMessage=<<introduction-message>>>
 {{||$:/_tw5.com-card-template}}
 </$list>
 </$wikify>

@@ -1,22 +1,22 @@
 created: 20180905075846391
-modified: 20210611055708739
+modified: 20221207112242775
 tags: [[WebServer Guides]]
 title: Using the external JavaScript template
 type: text/vnd.tiddlywiki
 
-You can use a special template to externalise TiddlyWiki's core code into a separate file. This configuration allows the browser to cache the core for improved efficiency. 
+You can use a special template to externalise ~TiddlyWiki's core code into a separate file. This configuration allows the browser to cache the core for improved efficiency. 
 
 ! Background
 
-TiddlyWiki in the single file configuration ordinarily packs everything into a single file: your data, and the ~JavaScript, CSS and HTML comprising TiddlyWiki itself. This lack of dependencies is usually very convenient: it means that it is impossible for the parts of a TiddlyWiki to become separated, and enormously improves the chances of it still functioning in the future.
+~TiddlyWiki in the single file configuration ordinarily packs everything into a single file: your data, and the ~JavaScript, CSS and HTML comprising ~TiddlyWiki itself. This lack of dependencies is usually very convenient: it means that it is impossible for the parts of a ~TiddlyWiki to become separated, and enormously improves the chances of it still functioning in the future.
 
 However, there is some inefficiency in this arrangement because the core code is repeatedly loaded and saved every time the content of the wiki is saved. This inefficiency is partially ameliorated when working in the client server configuration because once the wiki is loaded by the browser the synchronisation process only transmits individual tiddlers back and forth to the server.
 
-The remaining inefficiency when working in the client server configuration is that the single page wiki that is initially loaded will contain a copy of the entire core code of TiddlyWiki, making it impossible for the browser to cache it.
+The remaining inefficiency when working in the client server configuration is that the single page wiki that is initially loaded will contain a copy of the entire core code of ~TiddlyWiki, making it impossible for the browser to cache it.
 
-! Using the external JavaScript template with the client-server configuration
+! Using the external ~JavaScript template with the client-server configuration
 
-The mechanism is activated by setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/core/save/all-external-js`. This template externalises TiddlyWiki's core JavaScript into a separate file. For example, the following command will start your server with caching enabled. It will transfer the wiki with two GET requests, and the core can be cached by the browser.
+The mechanism is activated by setting the [[root-tiddler|WebServer Parameter: root-tiddler]] parameter to `$:/core/save/all-external-js`. This template externalises ~TiddlyWiki's core ~JavaScript into a separate file. For example, the following command will start your server with caching enabled. It will transfer the wiki with two GET requests, and the core can be cached by the browser.
 
 ```
 tiddlywiki YOUR_WIKI_FOLDER --listen 'root-tiddler=$:/core/save/all-external-js' use-browser-cache=yes
@@ -38,11 +38,11 @@ tiddlywiki ./myNewWiki --build listen
 The above commands perform the following:
 
 * Create a new wiki with external JavaScript customization included.
-* Start the server with external JavaScript enabled. The server listens on port 8080. Visit http://localhost:8080 in your browser.
+* Start the server with external ~JavaScript enabled. The server listens on port 8080. Visit http://localhost:8080 in your browser.
 
 To customize your `--build listen` command, see [[tiddlywiki.info Files]] and [[ListenCommand]].
 
-! Using the external JavaScript template with the single file configuration
+! Using the external ~JavaScript template with the single file configuration
 
 You can use the "external-js" template with your single file wiki, but this requires that you have ~TiddlyWiki's core ~JavaScript saved alongside your HTML file. You may prefer this configuration, for example, if you have several wikis on a ~WebDav server. (See: [[Saving via WebDAV]])
 
@@ -64,7 +64,7 @@ The files `index.html` and `tiddlywikicore-5.x.x.js` will be saved in your wiki 
 
 !! Obtaining the ~TiddlyWiki core in the browser
 
-To download a copy of the TiddlyWiki core JavaScript file from any existing TiddlyWiki, visit the system tiddler $:/core/ui/ExportTiddlyWikiCore and click the download button. (You can search for ''~ExportTiddlyWikiCore'' in the ''Shadows'' tab of $:/AdvancedSearch).
+{{$:/core/ui/ExportTiddlyWikiCore}}
 
 !! Obtaining the ~TiddlyWiki core with Node.js
 
@@ -87,7 +87,7 @@ tiddlywiki YOUR_WIKI_FOLDER --build tiddlywikicore
 
 <<.warning "This procedure is experimental, please take care to backup your data">>
 
-Before you proceed, backup your wiki first! Follow the steps below to upgrade a single-file wiki with the external JavaScript template:
+Before you proceed, backup your wiki first! Follow the steps below to upgrade a single-file wiki with the external ~JavaScript template:
 
 # Proceed with the [[Upgrade Process for Standalone TiddlyWikis|Upgrading]]. Your wiki will be converted to a full standalone HTML.
 
