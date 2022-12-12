@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/geospatial/demo/maps
+caption: Maps
+tags: $:/tags/GeospatialDemo
+
+! Map with Layers and Markers
+
+<$geomap
+	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
+	layers="[all[tiddlers+shadows]tag[$:/tags/GeoLayer]]"
+/>
+

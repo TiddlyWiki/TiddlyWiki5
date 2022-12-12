@@ -56,6 +56,8 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
+	// Disable Leaflet attribution
+	map.attributionControl.setPrefix("");
 	// Create default icon
 	const iconProportions = 365/560,
 		iconHeight = 50;
@@ -67,12 +69,18 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	});
 	// Add scale
 	L.control.scale().addTo(map);
-	// Add US states overlay
-	const layer = L.geoJSON($tw.utils.parseJSONSafe(self.wiki.getTiddlerText("$:/plugins/geospatial/demo/features/us-states"),[])).addTo(map);
-	// Create markers
+	// Add overlays
+	if(this.geomapLayerFilter) {
+		$tw.utils.each(this.wiki.filterTiddlers(this.geomapLayerFilter),function(title) {
+			var tiddler = self.wiki.getTiddler(title);
+			if(tiddler) {
+				var layer = L.geoJSON($tw.utils.parseJSONSafe(tiddler.fields.text || "[]",[])).addTo(map);
+			}
+		});
+	}
+	// Add markers
 	if(this.geomapMarkerFilter) {
-		var titles = this.wiki.filterTiddlers(this.geomapMarkerFilter);
-		$tw.utils.each(titles,function(title) {
+		$tw.utils.each(this.wiki.filterTiddlers(this.geomapMarkerFilter),function(title) {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler) {
 				var lat = $tw.utils.parseNumber(tiddler.fields.lat || "0"),
@@ -89,6 +97,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 Compute the internal state of the widget
 */
 GeomapWidget.prototype.execute = function() {
+	this.geomapLayerFilter = this.getAttribute("layers");
 	this.geomapMarkerFilter = this.getAttribute("markers");
 };
 

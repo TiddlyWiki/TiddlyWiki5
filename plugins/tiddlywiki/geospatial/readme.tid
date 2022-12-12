@@ -1,11 +1,5 @@
 title: $:/plugins/tiddlywiki/geospatial/readme
 
-! Examples
+! Demos
 
-!! Simple Map
-
-<$geomap/>
-
-!! Map with Markers
-
-<$geomap markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"/>
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/traveltime">>

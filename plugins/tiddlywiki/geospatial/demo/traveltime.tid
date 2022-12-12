@@ -1,0 +1,92 @@
+title: $:/plugins/tiddlywiki/geospatial/demo/traveltime
+caption: Traveltime
+tags: $:/tags/GeospatialDemo
+
+\define completion-actions()
+<$action-log/>
+<$action-setfield $tiddler="$:/temp/_StatusCode" text=<<status>>/>
+<$action-setfield $tiddler="$:/temp/_StatusText" text=<<statusText>>/>
+<$action-setfield $tiddler="$:/temp/_Error" text=<<error>>/>
+<$action-setfield $tiddler="$:/temp/_Result" text=<<data>>/>
+<$action-setfield $tiddler="$:/temp/_Headers" text=<<headers>>/>
+<$list filter="[<status>match[200]]" variable="ignore">
+<$action-setfield $tiddler="$:/temp/_IsochroneLayer" text={{{ [<data>] }}} tags="$:/tags/GeoLayer"/>
+</$list>
+\end
+
+\define progress-actions()
+<$action-log message="In progress-actions"/>
+<$action-log/>
+\end
+
+\define payload-source()
+\rules only transcludeinline transcludeblock filteredtranscludeinline filteredtranscludeblock
+{
+  "departure_searches": [
+    {
+      "id": "My first isochrone",
+      "coords": {
+        "lat": 51.507609,
+        "lng": -0.128315
+      },
+      "departure_time": "2021-09-27T08:00:00Z",
+      "travel_time": 3600,
+      "transportation": {
+        "type": "driving"
+      }
+    }
+  ]
+}
+\end
+
+\define get-traveltime-actions()
+<$wikify name="payload" text=<<payload-source>>>
+	<$action-log $message="Making payload"/>
+	<$action-log/>
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://api.traveltimeapp.com/v4/time-map"
+		method="POST"
+		header-accept="application/geo+json"
+		header-Content-Type="application/json"
+		password-header-X-Api-Key="traveltime-secret-key"
+		password-header-X-Application-Id="traveltime-application-id"
+		body=<<payload>>
+		var-context="Context string"
+		bind-status="$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status"
+		bind-progress="$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress"
+		oncompletion=<<completion-actions>>
+		onprogress=<<progress-actions>>
+	/>
+</$wikify>
+\end
+
+
+
+<$button actions=<<get-traveltime-actions>>>
+Call ~TravelTime
+</$button>
+
+Status:
+<pre><code><$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status}}/></code></pre>
+
+Progress:
+<pre><code><$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress}}/></code></pre>
+
+Response
+
+~StatusCode:
+<pre><code><$text text={{$:/temp/_StatusCode}}/></code></pre>
+
+~StatusText:
+<pre><code><$text text={{$:/temp/_StatusText}}/></code></pre>
+
+Error:
+<pre><code><$text text={{$:/temp/_Error}}/></code></pre>
+
+Headers:
+<pre><code><$text text={{$:/temp/_Headers}}/></code></pre>
+
+Result:
+<pre><code><$text text={{$:/temp/_Result}}/></code></pre>
+
