@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/geospatial/settings
+tags: $:/tags/ControlPanel
+caption: Geospatial Plugin
+
+<div class="tc-control-panel">
+
+! Geospatial Plugin Settings
+
+Register for a free account at https://traveltime.com/ and copy and paste the secrets below:
+
+~TravelTime Application ID: <$password name="traveltime-application-id"/>
+
+~TravelTime Secret Key: <$password name="traveltime-secret-key"/>
+
+</div>
