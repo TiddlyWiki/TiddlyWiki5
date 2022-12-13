@@ -1,11 +1,12 @@
 caption: 5.2.4
-created: 20221127133944178
-modified: 20221127133944178
+created: 20221213163110439
+modified: 20221213163110439
+released: 20221213163110439
 tags: ReleaseNotes
 title: Release 5.2.4
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.3...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.3...v5.2.4]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[dmikh|https://talk.tiddlywiki.org/u/dmikh]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-v5-2-4/4982]] and the [[voting thread|https://talk.tiddlywiki.org/t/vote-for-the-v5-2-4-new-release-banner/5140/2]]).
@@ -19,9 +20,9 @@ New [ext[Twitter Archivist|./editions/twitter-archivist]] plugin to import the t
 
 <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6961">> new GenesisWidget that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]], [[jsonextract Operator]] and [[format Operator]]
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/pull/7105">>) new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]], [[jsonextract Operator]] and [[format Operator]]
 
-! Translation improvement
+! Translation Improvements
 
 Improvements to the following translations:
 
@@ -32,7 +33,7 @@ Improvements to the following translations:
 * Spanish
 * Japanese
 
-Improvements to the translation features of TiddlyWiki:
+Improvements to the translation features of TiddlyWiki itself:
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6882">> the [[Translators Edition|Translate TiddlyWiki into your language]] to add an option to display the original English text underneath the text area
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6933">> "delete" button text in $:/AdvancedSearch so that it is translatable
@@ -76,7 +77,7 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7043">> support for Unix epoch timestamps in [[date format strings|DateFormat]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7064">> the "big green download button" to use the defined palette colour
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7063">> new hidden setting [[to use horizontal tabs for the "more" sidebar tab|Hidden Setting: More Tabs Horizontal]]
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/bef11fe6a25fb849dee40c4aa4337d6a30daf0b4">> the [[external JavaScript templates|]] to allow the URL of the external script file to be configured
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/bef11fe6a25fb849dee40c4aa4337d6a30daf0b4">> the [[external JavaScript templates|Using the external JavaScript template]] to allow the URL of the external script file to be configured
 
 ! Bug Fixes
 
@@ -94,7 +95,7 @@ Improvements to the translation features of TiddlyWiki:
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7073">> new CommandsCommand to enable command tokens to be dynamically generated from a filter
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6947">> console logging to avoid spaces and `<empty string>` message
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certian circumstances
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certain circumstances
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/344110e2890caf711ab8f3c4f4deaa7d86771231">> handling of ".mp4" file extension so that it defaults to video not audio
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6588">> test server to the plugin library edition
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7049">> [[Hidden Setting: Sync Logging]] to control logging of sync-related messages
@@ -130,6 +131,7 @@ pmario
 rmunn
 roma0104
 saqimtiaz
+simonbaird
 talha131
 Telumire
 tw-FRed
