@@ -95,7 +95,7 @@ Improvements to the translation features of TiddlyWiki itself:
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7073">> new CommandsCommand to enable command tokens to be dynamically generated from a filter
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6947">> console logging to avoid spaces and `<empty string>` message
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certian circumstances
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certain circumstances
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/344110e2890caf711ab8f3c4f4deaa7d86771231">> handling of ".mp4" file extension so that it defaults to video not audio
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6588">> test server to the plugin library edition
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7049">> [[Hidden Setting: Sync Logging]] to control logging of sync-related messages
