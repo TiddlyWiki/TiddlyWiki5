@@ -1,11 +1,12 @@
 caption: 5.2.4
-created: 20221127133944178
-modified: 20221127133944178
+created: 20221213163110439
+modified: 20221213163110439
+released: 20221213163110439
 tags: ReleaseNotes
 title: Release 5.2.4
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.3...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.3...v5.2.4]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[dmikh|https://talk.tiddlywiki.org/u/dmikh]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-v5-2-4/4982]] and the [[voting thread|https://talk.tiddlywiki.org/t/vote-for-the-v5-2-4-new-release-banner/5140/2]]).
@@ -19,19 +20,20 @@ New [ext[Twitter Archivist|./editions/twitter-archivist]] plugin to import the t
 
 <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6961">> new GenesisWidget that allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]] and [[format Operator]]
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6936">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/pull/7105">>) new operators for reading and formatting JSON data: [[jsonget Operator]], [[jsonindexes Operator]], [[jsontype Operator]], [[jsonextract Operator]] and [[format Operator]]
 
-! Translation improvement
+! Translation Improvements
 
 Improvements to the following translations:
 
 * Chinese
 * French
+* German
 * Polish
 * Spanish
 * Japanese
 
-Improvements to the translation features of TiddlyWiki:
+Improvements to the translation features of TiddlyWiki itself:
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6882">> the [[Translators Edition|Translate TiddlyWiki into your language]] to add an option to display the original English text underneath the text area
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6933">> "delete" button text in $:/AdvancedSearch so that it is translatable
@@ -75,22 +77,25 @@ Improvements to the translation features of TiddlyWiki:
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7043">> support for Unix epoch timestamps in [[date format strings|DateFormat]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7064">> the "big green download button" to use the defined palette colour
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7063">> new hidden setting [[to use horizontal tabs for the "more" sidebar tab|Hidden Setting: More Tabs Horizontal]]
-
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/commit/bef11fe6a25fb849dee40c4aa4337d6a30daf0b4">> the [[external JavaScript templates|Using the external JavaScript template]] to allow the URL of the external script file to be configured
 
 ! Bug Fixes
 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7099">> truncated search results on small screens
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7010">> table contents overflow on small screens
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/fb34df84ed41882c1c2a6ff54f0e908b43ef95a3">> "new image" keyboard shortcut not to assign journal tags
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6987">> SelectWidget class to update if it uses a filter
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7017">> issue with wikification within the advanced search filter dropdown
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7057">> the table in $:/Import to avoid creating hidden empty rows
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7008">> advanced search keyboard shortcut not navigating correctly
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7083">> erroneous display of drafts within the advanced search filter dropdown
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7092">> backwards compatibility of new field editor cascade introduced in v5.2.3
 
 ! Node.js Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7073">> new CommandsCommand to enable command tokens to be dynamically generated from a filter
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6947">> console logging to avoid spaces and `<empty string>` message
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certian circumstances
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7014">> problem  with lazy loading deleting tiddler bodies under certain circumstances
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/344110e2890caf711ab8f3c4f4deaa7d86771231">> handling of ".mp4" file extension so that it defaults to video not audio
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6588">> test server to the plugin library edition
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7049">> [[Hidden Setting: Sync Logging]] to control logging of sync-related messages
@@ -111,7 +116,7 @@ AnthonyMuscio
 bestony
 btheado
 BramChen
-carlo-columbo
+carlo-colombo
 EvidentlyCube
 FlashSystems
 flibbles
@@ -126,7 +131,9 @@ pmario
 rmunn
 roma0104
 saqimtiaz
+simonbaird
 talha131
+Telumire
 tw-FRed
 twMat
 xcazin

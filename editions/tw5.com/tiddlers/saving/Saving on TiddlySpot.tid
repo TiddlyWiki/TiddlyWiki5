@@ -6,7 +6,6 @@ delivery: Service
 description: Online TiddlyWiki hosting. (Deprecated in favour of TiddlyHost)
 method: save
 modified: 20210423004027196
-tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
 
