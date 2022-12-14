@@ -114,6 +114,7 @@ function SaverHandler(options) {
 SaverHandler.prototype.titleSyncFilter = "$:/config/SaverFilter";
 SaverHandler.prototype.titleAutoSave = "$:/config/AutoSave";
 SaverHandler.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
+SaverHandler.prototype.saveState = "$:/state/saving/timestamp";
 
 /*
 Select the appropriate saver modules and set them up
@@ -158,9 +159,14 @@ SaverHandler.prototype.saveWiki = function(options) {
 	}
 	var	variables = options.variables || {},
 		template = (options.template || 
-		           this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
-		downloadType = options.downloadType || "text/plain",
-		text = this.wiki.renderTiddler(downloadType,template,options),
+					this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
+		downloadType = options.downloadType || "text/plain";
+
+	if (options.recordSaveTime || true) {
+		this.wiki.addTiddler(new $tw.Tiddler({title: this.saveState, text: "" + Date.now()}, this.wiki.getModificationFields()));
+	}
+
+	var text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
 			if(err) {
 				alert($tw.language.getString("Error/WhileSaving") + ":\n\n" + err);
