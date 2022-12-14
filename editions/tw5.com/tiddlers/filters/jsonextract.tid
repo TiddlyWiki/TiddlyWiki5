@@ -1,0 +1,66 @@
+created: 20220611104737314
+modified: 20220611104737314
+tags: [[Filter Operators]] [[JSON Operators]]
+title: jsonextract Operator
+caption: jsonextract
+op-purpose: retrieve the JSON string of a property from JSON strings
+op-input: a selection of JSON strings
+op-parameter: one or more indexes of the property to retrieve
+op-output: the JSON string values of each of the retrieved properties
+
+<<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
+
+The <<.op jsonextract>> operator is used to retrieve values from JSON data as JSON substrings. See also the following related operators:
+
+* <<.olink jsonget>> to retrieve the values of a property in JSON data
+* <<.olink jsontype>> to retrieve the type of a JSON value
+* <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+
+Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
+
+```
+{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+```
+
+The following examples assume that this JSON data is contained in a variable called `jsondata`.
+
+The <<.op jsonextract>> operator uses multiple operands to specify the indexes of the property to retrieve. Values are returned as literal JSON strings:
+
+```
+[<jsondata>jsonextract[a]] --> "one"
+[<jsondata>jsonextract[d],[e]] --> "four"
+[<jsondata>jsonextract[d],[f],[0]] --> "five"
+[<jsondata>jsonextract[d],[f]] --> ["five","six",true,false,null]
+[<jsondata>jsonextract[d],[g]] --> {"x":"max","y":"may","z":"maize"}
+```
+
+Indexes can be dynamically composed from variables and transclusions:
+
+```
+[<jsondata>jsonextract<variable>,{!!field},[0]]
+```
+
+A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+
+```
+[<jsondata>jsonextract[]] --> {"a":"one","b":"","c":"three","d":{"e":"four","f":["five","six",true,false,null],"g":{"x":"max","y":"may","z":"maize"}}}
+```

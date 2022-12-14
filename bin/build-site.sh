@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.2.3
+    TW5_BUILD_VERSION=v5.2.5
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -459,7 +459,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
-	--build \
+	--build library\
 	|| exit 1
 
 # Delete the temporary build tiddler

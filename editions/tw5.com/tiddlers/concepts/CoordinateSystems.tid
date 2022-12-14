@@ -1,0 +1,42 @@
+created: 20220810201659784
+modified: 20220810201659784
+tags: Concepts
+title: Coordinate Systems
+type: text/vnd.tiddlywiki
+
+TiddlyWiki (primarily the RevealWidget) supports two coordinate systems for positioning popups (see PopupMechanism to learn more about popups).
+
+<<.from-version "5.2.4">> We introduced absolute coordinates that may not work with all extensions and plugins. For maximum backwards compatibility, use absolute coordinates only where necessary.
+
+!! Relative coordinate system
+
+The default coordinate system is relative to the nearest positioned ancestor element. This is either:
+
+* an element with a non-static position, or
+* a ''td'', ''th'', ''table'' in case the element itself is static positioned.
+
+For tiddlers the nearest positioned ancestor element mostly is the body of the tiddler. Read the next chapter to learn about the exceptions.
+
+Relative coordinates are expressed in the form ''(x,y,w,h)''. Where ''x'' and ''y'' represent the position and ''w'' and ''h'' the width and height of the element.
+
+!! Absolute coordinate system
+
+The relative coordinate system works flawless most of the time. Problems occure if the target element (for example, a popup) and the source element (the triggering button) do not share the same positioned ancherstor element. This is often the case if the popup is declared outside a table and the triggering button is declared within a table cell. In this case the coordiante systems have different origins and the popup will be displayed in the wrong location.
+
+Absolute coordinates can fix this problem by using the root element of the page (the upper-left corner of the page) as the origin of the coordinate system. Absolute coordinates are expressed in the form ''@(x,y,w,h)''. Where ''x'' and ''y'' represent the position and ''w'' and ''h'' the width and height of the element. The leading ''@''-symbol marks these coordinates as absolute.
+
+The ButtonWidget has an option (''popupAbsCoords'') to put absolute coordinates into the state tiddler. The DraggableWidget and the EventCatcherWidget provide the absolute coordinate of an event within the attribute `tv-popup-abs-coords`.
+
+
+!! Example
+
+The following example shows a popup that is triggerd from within a table cell. The table cell is the nearest positioned ancestor element. The popup was defined outside the table cell. The button using relative coordinates will open the popup in the wrong location because the button and the popup do not agree on the same coordinate system. Using absolute coordinates fixes this problem.
+
+<<wikitext-example-without-html '<$reveal type="popup" state="$:/state/CoordinateSampleReveal">
+<div class="tc-drop-down">
+Popup
+</div>
+</$reveal>
+
+| Table Row 1 |<$button popup="$:/state/CoordinateSampleReveal">Relative coordinates</$button>|
+| Table Row 2 |<$button popup="$:/state/CoordinateSampleReveal" popupAbsCoords="yes">Absolute coordinates</$button>|'>>

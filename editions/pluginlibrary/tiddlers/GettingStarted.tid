@@ -1,0 +1,45 @@
+title: GettingStarted
+
+This edition contains the components needed to set up a local server for ~TiddlyWiki plugin library testing or development.
+
+!! Import Configuration
+
+Import the configuration tiddler: $:/config/LocalPluginLibrary to your "test wiki".
+
+!! Important
+
+''This server is read-only. Nothing is saved back to the filesystem''
+
+!! Start the Library Server
+
+The following commands will create the library files and start a test server at http://localhost:8888
+
+```
+cd /your/path/to/TiddlyWiki5/editions/pluginlibrary
+tiddlywiki --build test-server
+```
+
+!! Test the Library with a Single File Wiki
+
+* Open a single file wiki and import the configuration tiddler form http://localhost:8888/#%24%3A%2Fconfig%2FLocalPluginLibrary
+* Open the ''$:/ControlPanel : Plugins : "Get More Plugins"'' modal
+
+!! Test the Library with a Node.js Wiki
+
+* Create a new wiki with eg:
+
+<<<
+```
+cd /temp/
+tiddlywiki my-wiki --init server
+tiddlywiki my-wiki --listen
+```
+<<<
+	
+* Open my-wiki from http://localhost:8080
+* Import the http://localhost:8888/#%24%3A%2Fconfig%2FLocalPluginLibrary tiddler into "my-wiki"
+* Open the ''~$:/ControlPanel : Plugins : "Get More Plugins"'' modal
+
+!! ~ControlPanel Plugin Tab
+
+{{$:/core/ui/ControlPanel/Plugins}}

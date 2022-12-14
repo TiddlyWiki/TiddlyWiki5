@@ -16,6 +16,8 @@ var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 var DynannotateWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -191,7 +193,7 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 				"tv-selection-posy": (bounds.top).toString(),
 				"tv-selection-width": (bounds.width).toString(),
 				"tv-selection-height": (bounds.height).toString(),
-				"tv-selection-coords": "(" + bounds.left + "," + bounds.top + "," + bounds.width + "," + bounds.height + ")"
+				"tv-selection-coords": Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,bounds)
 			});
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
@@ -330,7 +332,7 @@ DynannotateWidget.prototype.applySnippets = function() {
 			// Output the match
 			container.appendChild($tw.utils.domMaker("span",{
 				text: textMap.string.slice(match.startPos,match.endPos),
-				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass")
+				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass","")
 			}));
 			// Does the context of this match merge into the next?
 			merged = index < matches.length - 1 && matches[index + 1].startPos - match.endPos <= 2 * contextLength;

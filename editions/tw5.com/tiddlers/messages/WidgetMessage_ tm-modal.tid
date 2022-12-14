@@ -10,11 +10,13 @@ type: text/vnd.tiddlywiki
 |paramObject |Hashmap of variables to be provided to the modal, contains all extra parameters passed to the widget sending the message. |
 |rootwindow |<<.from-version 5.1.18>> ''yes'' or ''true'' will always display a modal in the wiki-root-window |
 
-The "currentTiddler" variable is set to the title of the modal tiddler, but can be overridden by specifying a different value in `paramObject`.
-
 The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.
 
 [[Fields within the tiddler|Modals]] being displayed in the modal can be used to customize its appearance.
+
+!! paramObject
+
+The "currentTiddler" variable is set to the title of the modal tiddler, but can be overridden by specifying a different value in `paramObject`.
 
 ! Example
 

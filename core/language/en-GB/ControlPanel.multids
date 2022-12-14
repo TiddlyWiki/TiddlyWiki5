@@ -90,8 +90,8 @@ Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
 Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
 Plugins/NotInstalled/Hint: This plugin is not currently installed
-Plugins/OpenPluginLibrary: open plugin library
-Plugins/ClosePluginLibrary: close plugin library
+Plugins/OpenPluginLibrary: Open plugin library
+Plugins/ClosePluginLibrary: Close plugin library
 Plugins/PluginWillRequireReload: (requires reload)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins

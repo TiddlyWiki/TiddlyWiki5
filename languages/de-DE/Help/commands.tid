@@ -1,0 +1,14 @@
+title: $:/language/Help/commands
+description: Ausführen von Befehlen aus einem Tiddler
+
+Sequentielle Abarbeitung von Befehlen aus einem Tiddler. 
+
+```
+--commands <filter>
+```
+
+Beispiele
+
+`--commands "[enlist{$:/build-commands-as-text}]"`
+
+`--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"`

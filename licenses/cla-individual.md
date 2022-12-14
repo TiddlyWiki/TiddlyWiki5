@@ -499,3 +499,5 @@ Keiichi Shiga (🎈 BALLOON | FU-SEN), @fu-sen. 2022/07/07
 Nathaniel Knight, @nathanielknight, 2022/07/26
 
 HuanCheng Bai, @bestony, 2022/09/17
+
+Carlo Colombo, @carlo-colombo, 2022/11/30
