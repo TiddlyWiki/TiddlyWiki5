@@ -74,8 +74,10 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	try {
 		var domNode = this.document.createElementNS(this.namespace,this.tag);
 	} catch (error) {
+		$tw.utils.log("HTML element rendering error: " + error)
 		this.makeChildWidgets([{type: "error", attributes: {
 			"$message": {type: "string", value: 'Parameter value is missing: "' + this.tag + '"' }
+			// $tw.language.getString("Error/RecursiveTransclusion") <- new translation string needed TODO
 		}}]);
 		this.renderChildren(this.parentDomNode,null);
 		return;
