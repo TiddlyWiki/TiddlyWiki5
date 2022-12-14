@@ -16,7 +16,6 @@ tags: $:/tags/Macro
 </span>
 \end
 
-\define toc(tag,sort:"",itemClassFilter:"")
 \define toc-body(tag,sort:"",itemClassFilter,exclude,path)
 \whitespace trim
 <ol class="tc-toc">
@@ -35,7 +34,9 @@ tags: $:/tags/Macro
 		</$let>
 	</$list>
 </ol>
-\end toc-body
+\end
+
+\define toc(tag,sort:"",itemClassFilter:"")
 <$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> />
 \end
 
