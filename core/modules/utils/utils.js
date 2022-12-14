@@ -810,6 +810,15 @@ exports.hashString = function(str) {
 };
 
 /*
+Same cryptographic hash function as used by sha256 filter operator
+options.lenghth .. number of characters returned defaults to 64
+*/
+exports.sha256 = function(str, options) {
+	options = options || {}
+	return sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
+}
+
+/*
 Decode a base64 string
 */
 exports.base64Decode = function(string64) {
