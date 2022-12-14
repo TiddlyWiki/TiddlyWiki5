@@ -71,7 +71,15 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	// Make the child widgets
 	this.makeChildWidgets();
 	// Create the DOM node and render children
-	var domNode = this.document.createElementNS(this.namespace,this.tag);
+	try {
+		var domNode = this.document.createElementNS(this.namespace,this.tag);
+	} catch (error) {
+		this.makeChildWidgets([{type: "error", attributes: {
+			"$message": {type: "string", value: 'Parameter value is missing: "' + this.tag + '"' }
+		}}]);
+		this.renderChildren(this.parentDomNode,null);
+		return;
+	}
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
