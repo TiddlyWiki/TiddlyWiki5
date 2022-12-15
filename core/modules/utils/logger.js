@@ -52,7 +52,19 @@ Logger.prototype.log = function(/* args */) {
 			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
 			return Function.apply.call(console.log, console, logMessage);
 		}
-	} 
+	}
+};
+
+/*
+Log an error message to console.error so it also gets a red colour in browsers
+*/
+Logger.prototype.error = function(/* args */) {
+	var self = this;
+	if(console !== undefined && console.error !== undefined) {
+		var logMessage = [$tw.utils.terminalColour(this.colour) + this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0));
+		logMessage[logMessage.length-1] += $tw.utils.terminalColour();
+		return Function.apply.call(console.error, console, logMessage);
+	}
 };
 
 /*
