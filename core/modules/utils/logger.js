@@ -76,8 +76,8 @@ Logger.prototype.alert = function(/* args */) {
 	if(this.enable) {
 		// Prepare the text of the alert
 		var text = Array.prototype.join.call(arguments," ");
-		// Create alert tiddlers in the browser
-		if($tw.browser) {
+		// Create alert tiddlers if this.save or in the browser
+		if(this.save||$tw.browser) {
 			// Check if there is an existing alert with the same text and the same component
 			var existingAlerts = $tw.wiki.getTiddlersWithTag(ALERT_TAG),
 				alertFields,
@@ -93,7 +93,7 @@ Logger.prototype.alert = function(/* args */) {
 				existingCount = alertFields.count || 1;
 			} else {
 				alertFields = {
-					title: $tw.wiki.generateNewTitle("$:/temp/alerts/alert",{prefix: ""}),
+					title: $tw.wiki.generateNewTitle($tw.node? "$:/server/alerts/alert": "$:/temp/alerts/alert",{prefix: ""}),
 					text: text,
 					tags: [ALERT_TAG],
 					component: this.componentName
