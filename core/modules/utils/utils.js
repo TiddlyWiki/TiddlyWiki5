@@ -811,7 +811,7 @@ exports.hashString = function(str) {
 
 /*
 Same cryptographic hash function as used by sha256 filter operator
-options.lenghth .. number of characters returned defaults to 64
+options.length .. number of characters returned defaults to 64
 */
 exports.sha256 = function(str, options) {
 	options = options || {}
