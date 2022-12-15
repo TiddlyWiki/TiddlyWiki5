@@ -63,6 +63,7 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		} else {
 			self.wiki.readFiles(event.target.files,{
 				callback: function(tiddlerFieldsArray) {
+					tiddlerFieldsArray = $tw.hooks.invokeHook("th-readFileCallback",tiddlerFieldsArray,self,event);
 					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 				},
 				deserializer: self.deserializer
