@@ -1,7 +1,11 @@
 title: TiddlyWiki Pre-release
 modified: 20150428204930183
 
-This is a pre-release build of TiddlyWiki, [[also available in empty form|https://tiddlywiki.com/prerelease/empty.html]]. It is provided for testing purposes. ''Please don't try to use it for anything important'' -- you should use the latest official release from https://tiddlywiki.com.
+This is a pre-release build of TiddlyWiki provided for testing and review purposes. ''Please don't try to depend on the pre-release for anything important'' -- you should use the latest official release from https://tiddlywiki.com.
+
+All of the changes in this pre-release are provisional until it is released and they become frozen by our backwards compatibility policies. This is the perfect time to raise questions or make suggestions. Please [[open a ticket at GitHub|https://github.com/Jermolene/TiddlyWiki5/issues/new/choose]] or make a post at https://talk.tiddlywiki.org/.
+
+The pre-release is also available as an [[empty wiki|https://tiddlywiki.com/prerelease/empty.html]] ready for reuse.
 
 <$list filter="[tag[ReleaseNotes]!has[released]!sort[created]]">
 <div class="tc-titlebar">

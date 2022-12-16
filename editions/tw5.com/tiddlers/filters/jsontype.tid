@@ -14,6 +14,7 @@ The <<.op jsontype>> operator is used to retrieve the type of a property in JSON
 
 * <<.olink jsonget>> to retrieve the values of a property in JSON data
 * <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+* <<.olink jsonextract>> to retrieve a JSON value as a string of JSON
 
 JSON supports the following data types:
 
