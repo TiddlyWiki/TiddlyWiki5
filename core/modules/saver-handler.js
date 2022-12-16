@@ -114,7 +114,6 @@ function SaverHandler(options) {
 SaverHandler.prototype.titleSyncFilter = "$:/config/SaverFilter";
 SaverHandler.prototype.titleAutoSave = "$:/config/AutoSave";
 SaverHandler.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
-SaverHandler.prototype.saveState = "$:/state/saving/timestamp";
 
 /*
 Select the appropriate saver modules and set them up
@@ -148,26 +147,26 @@ Save the wiki contents. Options are:
 	method: "save", "autosave" or "download"
 	template: the tiddler containing the template to save
 	downloadType: the content type for the saved file
-	invokePreSaveActions: A state tiddler with a save timestamp is created. defaults to true
+	invokePreSaveActions: invoke actions tagged: "$:/tags/PreSaveAction". defaults to yes
 */
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
 	var self = this,
-		method = options.method || "save";
-	// Ignore autosave if disabled
-	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
+	method = options.method || "save";
+	// Ignore autosave if disabled ... return early
+	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
 		return false;
 	}
-	var	variables = options.variables || {},
+	var	invokePreSaveActions = options.invokePreSaveActions || "yes",
+		variables = options.variables || {},
 		template = (options.template || 
 					this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain";
 
 	// Execute any pre save actions defaults to yes
-	if (options.invokePreSaveActions || true) {
+	if(invokePreSaveActions === "yes") {
 		$tw.rootWidget.invokeActionsByTag("$:/tags/PreSaveAction");
 	}
-
 	var text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
 			if(err) {
