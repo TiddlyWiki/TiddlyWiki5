@@ -148,7 +148,7 @@ Save the wiki contents. Options are:
 	method: "save", "autosave" or "download"
 	template: the tiddler containing the template to save
 	downloadType: the content type for the saved file
-	recordSaveTime: A state tiddler with a save timestamp is created. defaults to true
+	invokePreSaveActions: A state tiddler with a save timestamp is created. defaults to true
 */
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
@@ -163,18 +163,9 @@ SaverHandler.prototype.saveWiki = function(options) {
 					this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain";
 
-	// It saves a save timestamp to a state tiddler
-	// It also concatenates the last modified tiddler title with its "modified" TW string
-	if (options.recordSaveTime || true) {
-		var lastChanged = this.wiki.getTiddler( this.wiki.filterTiddlers("[!is[system]!sort[modified]limit[1]]"));
-		if (lastChanged) {
-			this.wiki.addTiddler(
-				new $tw.Tiddler({title:this.saveState,
-					text:"timestamp: " + Date.now() +
-						"\nlastModifiedSha: " + $tw.utils.sha256(lastChanged.fields.title + lastChanged.getFieldString("modified")),
-					type:"application/x-tiddler-dictionary"},
-					this.wiki.getModificationFields()));
-		}
+	// Execute any pre save actions defaults to yes
+	if (options.invokePreSaveActions || true) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/PreSaveAction");
 	}
 
 	var text = this.wiki.renderTiddler(downloadType,template,options),
