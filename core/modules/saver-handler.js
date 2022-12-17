@@ -154,7 +154,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 	var self = this,
 	method = options.method || "save";
 	// Ignore autosave if disabled ... return early
-	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
+	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
 		return false;
 	}
 	var	invokePreSaveActions = options.invokePreSaveActions || "yes",
@@ -165,7 +165,8 @@ SaverHandler.prototype.saveWiki = function(options) {
 
 	// Execute any pre save actions defaults to yes
 	if(invokePreSaveActions === "yes") {
-		$tw.rootWidget.invokeActionsByTag("$:/tags/PreSaveAction");
+		// $tw.rootWidget.invokeActionsByTag(tag, event, variables);
+		$tw.rootWidget.invokeActionsByTag("$:/tags/PreSaveAction", undefined, options);
 	}
 	var text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
