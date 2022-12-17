@@ -152,15 +152,14 @@ Save the wiki contents. Options are:
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
 	var self = this,
-	method = options.method || "save";
+		method = options.method || "save";
 	// Ignore autosave if disabled ... return early
 	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
 		return false;
 	}
 	var	invokePreSaveActions = options.invokePreSaveActions || "yes",
 		variables = options.variables || {},
-		template = (options.template || 
-					this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
+		template = (options.template || this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain";
 
 	// Execute any pre save actions defaults to yes
