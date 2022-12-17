@@ -1,0 +1,1 @@
+<$action-setfield $tiddler="$:/state/saving/lastModifiedSha" text={{{ [!is[system]!sort[modified]limit[1]] :map[get[modified]addsuffix<currentTiddler>sha256[64]] }}} />
