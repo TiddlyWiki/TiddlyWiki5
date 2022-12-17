@@ -7,7 +7,7 @@ Appearance/Hint: Personaliza la apariencia de TiddlyWiki
 Basics/AnimDuration/Prompt: Duración de la animación
 Basics/AutoFocus/Prompt: Campo de enfoque predeterminado para nuevos tiddlers
 Basics/Caption: Básico
-Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puedes mostrarlos ordenados {{de más reciente a más antiguo||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puedes {{mantener el orden actual||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers por defecto
 Basics/DefaultTiddlers/TopHint: Escoge qué tiddlers se muestran al inicio
 Basics/Language/Prompt: ¡Hola! Selecciona idioma actual
@@ -91,7 +91,7 @@ Plugins/Languages/Hint: Extensiones de idioma
 Plugins/NoInfoFound/Hint: No se ha encontrado ''"<$text text=<<currentTab>>/>"''
 Plugins/NotInstalled/Hint: Este complemento no está instalado actualmente
 Plugins/OpenPluginLibrary: Abrir biblioteca de complementos y extensiones
-Plugins/ClosePluginLibrary: cerrar biblioteca de complementos y extensiones
+Plugins/ClosePluginLibrary: Cerrar biblioteca de complementos y extensiones
 Plugins/PluginWillRequireReload: (requiere recarga)
 Plugins/Plugins/Caption: Complementos
 Plugins/Plugins/Hint: Complementos y extensiones
