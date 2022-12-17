@@ -1,0 +1,54 @@
+created: 20221216145421576
+modified: 20221216204955053
+tags: Features
+title: PreSaveActions
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.5">> TiddlyWiki executes any ActionWidgets found in tiddlers with the following system tag right prior to a file save action. This allows you to create some status tiddlers right before a file-saver is activated. 
+
+* <<tag "$:/tags/PreSaveAction">> is executed on all platforms
+
+!! Core Default Actions
+
+The core default actions are:
+
+<<list-links "[all[shadows+tiddlers]!has[draft.of]tag[$:/tags/PreSaveAction]]">>
+
+
+''~$:/config/presave/action/timestamp''
+
+See: <$transclude tiddler="$:/config/presave/action/timestamp" mode="block" />
+
+Creates a tiddler named: <<.tid $:/state/saving/timestamp>>
+
+* It contains the date [[TIMESTAMP|http://local.lan:8080/#DateFormat]] when the wiki has been saved. 
+* This value can be easily compared to find out which wiki has been saved first, if opened in more than 1 browser tabs.
+
+''~$:/config/presave/action/lastModifiedSha''
+
+See: <$transclude tiddler="$:/config/presave/action/lastModifiedSha" mode="block" />
+
+This action creates a tiddler named: <<.tid $:/state/saving/lastModifiedSha>>
+
+* The filter searches for the latest non-system tiddler, that has been saved.
+* It takes the <<.field modified>> timestamp.
+* It concatenates the name of that tiddler with the timestamp.
+* It creates a sha256, that can be compared with a sha from a second wiki. 
+** Using a sha256 prevents information leaks if a tiddlywiki is encrypted. 
+** The tiddler title is part of the sha but isn't leaked if information is broadcasted from 1 browser tab to any other browser tabs.
+
+!! Important
+
+* Pre-save actions are only active for TW ''file-savers''.
+* They are not active for server backends, since every action is saved by default.
+** Pre-save actions should only use tiddlers ''prefixed `$:/state/`'', since those tiddlers are not saved back to the server.
+* ''Pre-save actions must be well tested!''
+
+!! Testing ~PreSave Actions
+
+The following code allows you to test if your actions are executed in the right way, without a save or download is triggered. It's important that your actions work. ''If your causes a fatal error, it may be possible that the wiki is _not_ saved!''
+
+<<.example 1 """<$wikify name="test-actions" text="{{{ [all[shadows+tiddlers]!has[draft.of]tag[$:/tags/PreSaveAction]get[text]] }}}" mode=block>
+  <$button actions=<<test-actions>> >Invoke Pre Save Actions</$button>
+</$wikify>
+""">>
