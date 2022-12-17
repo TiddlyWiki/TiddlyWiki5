@@ -59,6 +59,8 @@ Home/Caption: Inicio
 Home/Hint: Cierra todos los tiddlers abiertos y abre los que se muestran por defecto al inicio
 Language/Caption: Idioma
 Language/Hint: Selecciona idioma de la interfaz de usuario
+LayoutSwitcher/Hint: Abrir cambiador de disposición
+LayoutSwitcher/Caption: disposición
 Manager/Caption: Administrador tiddler
 Manager/Hint: Abre el administrador del tiddler
 More/Caption: Más
