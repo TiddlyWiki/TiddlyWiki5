@@ -330,9 +330,16 @@ table {
 }
 
 table th, table td {
-	padding: 4px 6px 4px 6px;
 	border-top: 1px solid <<colour table-border>>;
 	border-left: 1px solid <<colour table-border>>;
+}
+
+table th {
+	padding: {{$:/themes/tiddlywiki/vanilla/metrics/thpadding}};
+}
+
+table td {
+	padding: {{$:/themes/tiddlywiki/vanilla/metrics/tdpadding}};
 }
 
 table thead tr td, table th {

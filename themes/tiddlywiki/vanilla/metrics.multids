@@ -11,3 +11,5 @@ storywidth: 770px
 tiddlerwidth: 686px
 sidebarbreakpoint: 960px
 sidebarwidth: 350px
+thpadding: 0px 7px 0px 7px
+tdpadding: 0px 7px 0px 7px

@@ -40,3 +40,8 @@ Metrics/SidebarBreakpoint: Sidebar breakpoint
 Metrics/SidebarBreakpoint/Hint: the minimum page width at which the story<br>river and sidebar will appear side by side
 Metrics/SidebarWidth: Sidebar width
 Metrics/SidebarWidth/Hint: the width of the sidebar in fluid-fixed layout
+Table: Table
+Table/Padding/Data: Table padding data cells
+Table/Padding/Data/Hint: default distance between the table border and content (top right bottom left)
+Table/Padding/Heading: Table padding heading cells
+Table/Padding/Heading/Hint: default distance between the table border and content (top right bottom left)
