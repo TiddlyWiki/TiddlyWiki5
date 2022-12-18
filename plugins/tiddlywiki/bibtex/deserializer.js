@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/bibtex/deserializer.js
 type: application/javascript
 module-type: tiddlerdeserializer
 
-XLSX file deserializer
+BibTeX file deserializer
 
 \*/
 (function(){
@@ -15,7 +15,7 @@ XLSX file deserializer
 var bibtexParse = require("$:/plugins/tiddlywiki/bibtex/bibtexParse.js");
 
 /*
-Parse an XLSX file into tiddlers
+Parse an BibTeX file into tiddlers
 */
 exports["application/x-bibtex"] = function(text,fields) {
 	var data,
