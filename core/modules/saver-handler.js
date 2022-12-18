@@ -147,7 +147,6 @@ Save the wiki contents. Options are:
 	method: "save", "autosave" or "download"
 	template: the tiddler containing the template to save
 	downloadType: the content type for the saved file
-	invokePreSaveActions: invoke actions tagged: "$:/tags/PreSaveAction". defaults to yes
 */
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
@@ -157,7 +156,8 @@ SaverHandler.prototype.saveWiki = function(options) {
 	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
 		return false;
 	}
-	var	invokePreSaveActions = options.invokePreSaveActions || "yes",
+
+	var	invokePreSaveActions = this.wiki.getTiddlerText("$:/config/InvokePreSaveActions","yes").trim(),
 		variables = options.variables || {},
 		template = (options.template || this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain";

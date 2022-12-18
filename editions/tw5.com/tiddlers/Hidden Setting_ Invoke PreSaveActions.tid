@@ -1,0 +1,7 @@
+created: 20221218171854577
+modified: 20221218172318279
+tags: [[Hidden Settings]]
+title: Hidden Setting: Invoke PreSaveActions
+type: text/vnd.tiddlywiki
+
+The PreSaveActions are active by default. If the actions should be disabled the tiddler $:/config/InvokePreSaveActions has to be set to ''no''. 

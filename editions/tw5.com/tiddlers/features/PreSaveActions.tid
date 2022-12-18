@@ -1,5 +1,5 @@
 created: 20221216145421576
-modified: 20221216204955053
+modified: 20221218172215043
 tags: Features
 title: PreSaveActions
 type: text/vnd.tiddlywiki
@@ -52,3 +52,18 @@ The following code allows you to test if your actions are executed in the right 
   <$button actions=<<test-actions>> >Invoke Pre Save Actions</$button>
 </$wikify>
 """>>
+
+!! Logging Variables
+
+If you want to see the variables, that are available for the actions you need to add the following line to the ~PreSave action tiddler. 
+
+Important: The variables are only active if you invoke a real save action. So the "test" button from the example above will ''not'' work. See [[ActionLogWidget]]
+
+```
+<$action-log $$message="pre-save timestamp" $$all=yes />
+```
+
+!! How to Deactivate the ~PreSaveActions
+
+{{Hidden Setting: Invoke PreSaveActions}}
+
