@@ -1,11 +1,12 @@
 caption: 5.2.5
-created: 20221219172444961
-modified: 20221219172444961
+created: 20221219184500440
+modified: 20221219184500440
+released: 20221219184500440
 tags: ReleaseNotes
 title: Release 5.2.5
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.4...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.4...v5.2.5]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[dmikh|https://talk.tiddlywiki.org/u/dmikh]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-v5-2-4/4982]] and the [[voting thread|https://talk.tiddlywiki.org/t/vote-for-the-v5-2-4-new-release-banner/5140/2]]).
