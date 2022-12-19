@@ -501,3 +501,5 @@ Nathaniel Knight, @nathanielknight, 2022/07/26
 HuanCheng Bai, @bestony, 2022/09/17
 
 Carlo Colombo, @carlo-colombo, 2022/11/30
+
+Wincent Balin, @wincentbalin, 2022/12/18
