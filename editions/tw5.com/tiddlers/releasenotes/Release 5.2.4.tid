@@ -14,6 +14,10 @@ type: text/vnd.tiddlywiki
 	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/0dc30086e933cf2272cddb076a9fcbedad252735/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
 >>
 
+! Important Update
+
+After the release of v5.2.5, we found some backwards compatibility issues with the stylesheet changes in [[#7039|https://github.com/Jermolene/TiddlyWiki5/pull/7039]] and [[#6910|https://github.com/Jermolene/TiddlyWiki5/pull/6910]]. We have therefore decided to make a rapid bug fix [[Release 5.2.5]] to resolve these issues, and all users should upgrade to the new version.
+
 ! Major Improvements
 
 New [ext[Twitter Archivist|./editions/twitter-archivist]] plugin to import the tweets and associated media from a Twitter Archive as individual tiddlers.
