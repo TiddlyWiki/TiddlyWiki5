@@ -30,7 +30,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	// Neuter blacklisted elements
-	this.tag = this.parseTreeNode.tag;
+	this.tag = this.parseTreeNode.tag || "span";
 	if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
 		this.tag = "safe-" + this.tag;
 	}
