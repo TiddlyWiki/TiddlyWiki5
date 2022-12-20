@@ -4,7 +4,7 @@ tags: [[Filter Operators]] [[Special Operators]]
 title: getvariable Operator
 caption: getvariable
 op-purpose: select all values of variables named in the input titles
-op-input: a selection of varible names
+op-input: a selection of variable names
 op-parameter: ignored
 op-output: the values of each of the variables named in the input titles (or blank if the variable is not defined)
 

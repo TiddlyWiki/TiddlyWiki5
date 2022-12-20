@@ -48,5 +48,5 @@ In contrast, here is the same example using the <<.wid set>> widget:
 It should be noted that this widget differs from the <<.wid set>> widget in the following ways:
 
 * A fallback (also known as "emptyValue") cannot be specified
-* Filters cannot be used to produce a conditional variable assignement
+* Filters cannot be used to produce a conditional variable assignment
 * Variable names must be literal strings
