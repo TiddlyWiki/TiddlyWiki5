@@ -65,7 +65,7 @@ There are also several examples of `tiddlywiki.files` files in the main [[Tiddly
 
 !! Importing a folder of PDFs
 
-This example retrieves all the files with the extension `.pdf` from a folder specified by a relative path. This path starts with "../../../" indicating 3 directory levels above the folder holdng this confog fole. Each tiddler is set up for LazyLoading with the following fields:
+This example retrieves all the files with the extension `.pdf` from a folder specified by a relative path. This path starts with "../../../" indicating 3 directory levels above the folder holding this config file. Each tiddler is set up for LazyLoading with the following fields:
 
 * ''title'' - set to the URI decoded base filename of the PDF file. [[URI decoding|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent]] allows characters like "/" to be included in titles by URI encoding them as "%2F"
 * ''created'' - set to the creation date/time of the PDF file
