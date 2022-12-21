@@ -13,7 +13,7 @@ dependents: En un complemento o extensión, lista de sus dependencias
 description: Descripción de un complemento, extensión, o diálogo modal
 draft.of: Título del tiddler del que el actual es borrador
 draft.title: Nuevo título propuesto para el presente borrador
-footer: Texto al pie que figurará en un asistente
+footer: Texto al pie en ventanas modales
 hide-body: La plantilla de vista ocultará los cuerpos de los tiddlers si se establece en ''yes''
 icon: Nombre del tiddler que contiene el icono que se quiere asociar al presente tiddler
 library: Si su valor es ''yes'', indica que el tiddler debe guardarse como librería de JavaScript
@@ -28,7 +28,7 @@ plugin-type: Tipo de complemento o extensión
 revision: Revisión del tiddler existente en el servidor
 released: Fecha de la edición de TiddlyWiki
 source: Dirección de la fuente asociada a un tiddler
-subtitle: Subtítulo que figurará en un asistente
+subtitle: Subtítulo en ventanas modales
 tags: Lista de etiquetas asignadas al tiddler
 text: Texto principal de un tiddler
 throttle.refresh: Si está presente, regula las actualizaciones de este tiddler

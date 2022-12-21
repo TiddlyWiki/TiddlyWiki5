@@ -11,7 +11,7 @@ title: "file-backups" Extension for Firefox by pmario
 type: text/vnd.tiddlywiki
 url: https://github.com/pmario/file-backups
 
-An extension for Mozilla Firefox that smoothes out some of the friction from ~TiddlyWiki's built-in [[HTML5 fallback saver|Saving with the HTML5 fallback saver]], making it almost as easy to use as ~TiddlyFox. The workflow is intended to work out of the box, without configuration.
+An extension for Mozilla Firefox that smoothes out some of the friction from ~TiddlyWiki's built-in [[HTML5 saver|Saving with the HTML5 saver]], making it almost as easy to use as ~TiddlyFox. The workflow is intended to work out of the box, without configuration.
 
 https://github.com/pmario/file-backups which contains links to the documentation and introduction video(s).
 

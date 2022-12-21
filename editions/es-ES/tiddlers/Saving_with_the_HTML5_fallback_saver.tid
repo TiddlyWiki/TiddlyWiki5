@@ -6,30 +6,4 @@ tags: Saving
 title: Saving with the HTML5 fallback saver
 type: text/vnd.tiddlywiki
 
-Este método para guardar cambios es un poco rudimentario porque requiere intervención manual para cada acción de guardado. Tiene, sin embargo, la ventaja de que funciona en casi todos los navegadores de escritorio y en muchos navegadores móviles.
-
-# Descarga un TiddlyWiki en blanco pulsando este botón
-
-#> {{$:/editions/es-ES/snippets/download-empty-button}}
-
-#>Si el botón no funciona, guarda este enlace: https://tiddlywiki.com/languages/es-ES/empty.html
-
-#> Seguramente el navegador te pida que confirmes la descarga
-
-#Localiza el archivo que acabas de descargar
-
-#*Puedes cambiarle el nombre, siempre que mantengas la extensión `.html` o `.htm`
-
-#Abre el archivo en el navegador
-
-# Crea un nuevo tiddler usando el botón ''Nuevo tiddler'' {{$:/core/images/new-button}} de la barra lateral. Escribe algo en él y haz clic en el botón ''OK'' {{$:/core/images/done-button}}
-
-# Guarda los cambios con el botón ''Guardar cambios'' {{$:/core/images/save-button}} de la barra lateral
-
-# El navegador descargará una copia del wiki que incluye tus cambios.
-
-# Localiza el archivo nuevo y ábrelo en el navegador
-
-# Comprueba que los cambios se han guardado correctamente
-
-''Consejo'': la mayoría de navegadores permiten la opción de especificar la localización de cada descarga, en lugar de descargar a la carpeta por defecto. Esta opción te permite "planchar" tu archivo con la nueva versión.
+[[Saving with the HTML5 saver]]
