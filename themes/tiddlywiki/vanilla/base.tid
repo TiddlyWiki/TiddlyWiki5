@@ -88,9 +88,7 @@ html button {
 	color: <<colour button-foreground>>;
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
-	border: 1px solid <<colour button-border>>;
-	border-radius: 3px;
-	padding: 2px 5px;
+	border-color: <<colour button-border>>;
 }
 
 button:disabled svg {
@@ -226,27 +224,13 @@ dl dt {
 	margin-top: 6px;
 }
 
-/*
-** Definition for text input elements so they look consistent for all browsers
-*/
-
-textarea, input, select {
-	border: 2px solid <<colour tiddler-editor-border>>;
-	background-color: <<colour tiddler-editor-background>>;
-}
-
-/* Input elements accessibility -- overwrite the reset */
-:focus-visible {
-	outline: 2px solid <<colour primary>>;
-	outline-offset: -2px;    /* same as in reset.css [type='search'] but for more elements */
-}
-
 textarea,
 input[type=text],
 input[type=search],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
+	background: <<colour background>>;
 }
 
 input[type="checkbox"] {
@@ -330,7 +314,7 @@ table {
 }
 
 table th, table td {
-	padding: 4px 6px 4px 6px;
+	padding: 0 7px 0 7px;
 	border-top: 1px solid <<colour table-border>>;
 	border-left: 1px solid <<colour table-border>>;
 }
