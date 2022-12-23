@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/mono-line
+list-after: $:/core/ui/EditorToolbar/mono-line
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/mono-line
+caption: {{$:/language/Buttons/MonoLine/Caption}} (Markdown)
+description: {{$:/language/Buttons/MonoLine/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((mono-line))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="`"
+	suffix="`"
+/>

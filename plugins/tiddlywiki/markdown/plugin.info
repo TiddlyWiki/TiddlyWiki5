@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/markdown",
+	"name": "Markdown",
+	"description": "Markdown parser based on markdown-it",
+	"list": "readme config syntax license"
+}

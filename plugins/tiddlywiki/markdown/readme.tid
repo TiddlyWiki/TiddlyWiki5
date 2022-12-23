@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/readme
+
+This plugin provides Markdown support via the [[markdown-it|https://github.com/markdown-it/markdown-it]] parser and its associated plugins:
+
+* markdown-it-deflist
+* markdown-it-footnote
+* markdown-it-ins
+* markdown-it-mark
+* markdown-it-sub
+* markdown-it-sup
+
+!! Compatibility Notes
+
+* A tab character in Markdown has a size of four spaces. Configure the tab size of your code editor accordingly. For example, if you use <$text text="CodeMirror"/>, it is recommended that you set $:/config/codemirror/indentUnit and $:/config/codemirror/tabSize to `4` to avoid inconsistent indentations.
+* You must terminate a table with a blank line or another block-level structure.

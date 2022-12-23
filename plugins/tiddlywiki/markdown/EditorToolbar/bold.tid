@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/bold
+list-after: $:/core/ui/EditorToolbar/bold
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/bold
+caption: {{$:/language/Buttons/Bold/Caption}} (Markdown)
+description: {{$:/language/Buttons/Bold/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((bold))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="**"
+	suffix="**"
+/>
