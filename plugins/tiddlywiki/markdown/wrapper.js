@@ -154,7 +154,7 @@ function processWikiTree(tree,hasWikiLinkRule) {
 }
 
 var MarkdownParser = function(type,text,options) {
-	var pragma = pluginOpts.renderWikiText ? pluginOpts.renderWikiTextPragma : "\\rules only html entity commentinline commentblock";
+	var pragma = pluginOpts.renderWikiText ? "\\rules except latex-parser\n" + pluginOpts.renderWikiTextPragma : "\\rules only html entity commentinline commentblock";
 	var env = {}
 	var mdTree = md.parse(text,env);
 	var textToParse = pragma + '\n<div class="markdown">\n\n' + md.renderer.render(mdTree,md.options,env) + '</div>';
