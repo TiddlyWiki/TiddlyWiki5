@@ -34,7 +34,7 @@ function escapeTWMarks(s) {
 
 // escape anything that could be interpreted as transclusion or syslink
 function render_code_inline(tokens,idx,options,env,slf) {
-	tokens[idx].attrJoin("class","codified");
+	tokens[idx].attrJoin("class","_codified_");
 	return  '<code' + slf.renderAttrs(tokens[idx]) + '>' +
 			escapeTWMarks(md.utils.escapeHtml(tokens[idx].content)) +
 			'</code>';
@@ -189,7 +189,7 @@ function wikify(state) {
 						replaceTag = "$link";
 						href = $tw.utils.decodeURIComponentSafe(href.substring(1));
 						title = token.attrGet("title");
-						token.attrs = [["to", href]];
+						token.attrs = [["to", href], ["class", "_codified_"]];
 						if(title) {
 							token.attrSet("tooltip",title);
 						}
@@ -198,6 +198,7 @@ function wikify(state) {
 						replaceTag = undefined;
 						token.attrSet("target","_blank");
 						token.attrJoin("class","tc-tiddlylink-external");
+						token.attrJoin("class","_codified_");
 						token.attrSet("rel","noopener noreferrer");
 					}
 					break;

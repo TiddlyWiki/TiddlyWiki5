@@ -83,23 +83,9 @@ function deactivateLinks(tree) {
 	});
 }
 
-// true if <code> span came from backtick expr
-function isCodifiedCode(node) {
-	return node.type === "element"
-		&& node.tag === "code"
-		&& node.attributes && node.attributes.class && node.attributes.class.value.split(' ').includes("codified");
-}
-
-// When a backticked code span is fed into TW, TW can interpret any
-// CamcelCase text as wikilinks. Need to remove any links within the code span.
-function unWikiLinkCode(tree) {
-	$tw.utils.each(tree,function(node) {
-		if(isCodifiedCode(node)) {
-			deactivateLinks(node.children);
-		} else {
-			unWikiLinkCode(node.children);
-		}
-	});
+// true if the node contains "_codified_" class attribute
+function isCodified(node) {
+	return node.attributes && node.attributes.class && node.attributes.class.value.split(' ').includes("_codified_");
 }
 
 function decodeEntities(s) {
@@ -143,7 +129,7 @@ function processWikiTree(tree,hasWikiLinkRule) {
 			while(node.children && node.children.length === 1 && mergeable(node.children[0])) {
 				node.children = node.children[0].children;
 			}
-		} else if(hasWikiLinkRule && isCodifiedCode(node)) {
+		} else if(hasWikiLinkRule && isCodified(node)) {
 			deactivateLinks(node.children);
 			continue;
 		}
