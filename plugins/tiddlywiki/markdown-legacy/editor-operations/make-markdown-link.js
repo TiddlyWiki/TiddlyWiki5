@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/markdown/editor-operations/make-markdown-link.js
+title: $:/plugins/tiddlywiki/markdown-legacy/editor-operations/make-markdown-link.js
 type: application/javascript
 module-type: texteditoroperation
 

@@ -1,10 +1,10 @@
-title: $:/plugins/tiddlywiki/markdown/EditorToolbar/heading-6
+title: $:/plugins/tiddlywiki/markdown-legacy/EditorToolbar/heading-6
 list-after: $:/core/ui/EditorToolbar/heading-6
 tags: $:/tags/EditorToolbar
 icon: $:/core/images/heading-6
 caption: {{$:/language/Buttons/Heading6/Caption}} (Markdown)
 description: {{$:/language/Buttons/Heading6/Hint}}
-condition: [<targetTiddler>type[text/x-markdown]]
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 shortcuts: ((heading-6))
 
 <$action-sendmessage

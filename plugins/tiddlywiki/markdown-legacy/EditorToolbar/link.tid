@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/markdown/EditorToolbar/link
+title: $:/plugins/tiddlywiki/markdown-legacy/EditorToolbar/link
 list-after: $:/core/ui/EditorToolbar/link
 tags: $:/tags/EditorToolbar
 icon: $:/core/images/link
@@ -7,5 +7,5 @@ description: {{$:/language/Buttons/Link/Hint}}
 condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((link))
-dropdown: $:/plugins/tiddlywiki/markdown/EditorToolbar/link-dropdown
+dropdown: $:/plugins/tiddlywiki/markdown-legacy/EditorToolbar/link-dropdown
 

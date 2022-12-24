@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/markdown/EditorToolbar/link-dropdown
+title: $:/plugins/tiddlywiki/markdown-legacy/EditorToolbar/link-dropdown
 
 \define lingo-base() $:/language/Buttons/Link/
 

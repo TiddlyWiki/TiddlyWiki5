@@ -4,7 +4,7 @@
 			"file": "remarkable.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable.js",
+				"title": "$:/plugins/tiddlywiki/markdown-legacy/remarkable.js",
 				"module-type": "library"
 			}
 		},
@@ -12,14 +12,14 @@
 			"file": "remarkable-license.txt",
 			"fields": {
 				"type": "text/plain",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable-license"
+				"title": "$:/plugins/tiddlywiki/markdown-legacy/remarkable-license"
 			}
 		},
 		{
 			"file": "remarkable-katex.min.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable-katex.js",
+				"title": "$:/plugins/tiddlywiki/markdown-legacy/remarkable-katex.js",
 				"module-type": "library"
 			},
 			"prefix": "(function(realRequire) {var require = function(m) {if(m===\"katex\"){m = \"$:/plugins/tiddlywiki/katex/katex.min.js\"};return realRequire(m);};",
@@ -29,7 +29,7 @@
 			"file": "remarkable-katex-license.txt",
 			"fields": {
 				"type": "text/plain",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable-katex-license"
+				"title": "$:/plugins/tiddlywiki/markdown-legacy/remarkable-katex-license"
 			}
 		}
 	]

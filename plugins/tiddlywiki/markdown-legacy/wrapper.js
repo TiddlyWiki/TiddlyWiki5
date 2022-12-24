@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/markdown/wrapper.js
+title: $:/plugins/tiddlywiki/markdown-legacy/wrapper.js
 type: application/javascript
 module-type: parser
 
@@ -12,7 +12,7 @@ Wraps up the remarkable parser for use as a Parser in TiddlyWiki
 /*global $tw: false */
 "use strict";
 
-var r = require("$:/plugins/tiddlywiki/markdown/remarkable.js");
+var r = require("$:/plugins/tiddlywiki/markdown-legacy/remarkable.js");
 
 var Remarkable = r.Remarkable,
 	linkify = r.linkify,
@@ -45,7 +45,7 @@ var md = new Remarkable(remarkableOpts);
 
 // If tiddlywiki/katex plugin is present, use remarkable-katex to enable katex support.
 if($tw.modules.titles["$:/plugins/tiddlywiki/katex/katex.min.js"]) {
-	var rk = require("$:/plugins/tiddlywiki/markdown/remarkable-katex.js");
+	var rk = require("$:/plugins/tiddlywiki/markdown-legacy/remarkable-katex.js");
 	md = md.use(rk);
 }
 
@@ -336,5 +336,6 @@ var MarkdownParser = function(type, text, options) {
 };
 
 exports["text/x-markdown"] = MarkdownParser;
+exports["text/markdown"] = MarkdownParser;
 
 })();

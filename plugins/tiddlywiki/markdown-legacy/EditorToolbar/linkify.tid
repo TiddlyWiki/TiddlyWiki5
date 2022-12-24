@@ -1,10 +1,10 @@
 caption: {{$:/language/Buttons/Linkify/Caption}} (Markdown)
 condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 description: {{$:/language/Buttons/Linkify/Hint}}
-icon: $:/plugins/tiddlywiki/markdown/images/markdown-linkify
+icon: $:/plugins/tiddlywiki/markdown-legacy/images/markdown-linkify
 list-after: $:/core/ui/EditorToolbar/linkify
 shortcuts: ((linkify))
-title: $:/plugins/tiddlywiki/markdown/EditorToolbar/linkify
+title: $:/plugins/tiddlywiki/markdown-legacy/EditorToolbar/linkify
 tags: $:/tags/EditorToolbar
 
 <$action-sendmessage
