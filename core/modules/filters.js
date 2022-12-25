@@ -331,7 +331,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+	var fnMeasured = $tw.perf.measureFn("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
