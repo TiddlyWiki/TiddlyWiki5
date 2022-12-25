@@ -76,14 +76,14 @@ Performance.prototype.log = function() {
 /*
 Wrap performance measurements around a subfunction
 */
-Performance.prototype.measureFn = function(name,fn) {
+Performance.prototype.measureFn = function(name, description,fn) {
 	var self = this;
 	if(this.enabled) {
 		return function measureCallback() {
 			var startTime = $tw.utils.timer(),
 				result = fn.apply(this,arguments);
 			if(!(name in self.measures)) {
-				self.measures[name] = {time: 0, invocations: 0};
+				self.measures[name] = {time: 0, invocations: 0, desc: description || ""};
 			}
 			self.measures[name].time += $tw.utils.timer(startTime);
 			self.measures[name].invocations++;
@@ -102,7 +102,7 @@ Performance.prototype.timerStart = function(name, description) {
 	if(this.enabled) {
 			var measureStart = $tw.utils.timer();
 			if(!(name in this.measures)) {
-				this.measures[name] = {time: 0, invocations: 0, desc: description};
+				this.measures[name] = {time: 0, invocations: 0, desc: description || ""};
 			}
 			this.measures[name].measureStart = measureStart;
 	}
@@ -126,6 +126,15 @@ Performance.prototype.timerEnd = function(name) {
 	}
 };
 
+Performance.prototype.timer = function(name, description) {
+	if(this.enabled) {
+		if (!this.measures[name]) return this.timerStart(name, description);
+		var measureStart = this.measures[name].measureStart;
+		if (measureStart) return this.timerEnd(name);
+		return this.timerStart(name, description);
+	}
+};
+
 /** Generate header that can be used as server-timing */
 Performance.prototype.generateHeader = function() {
 	var header = "";
@@ -133,13 +142,8 @@ Performance.prototype.generateHeader = function() {
 	Object.keys(this.measures).forEach(name => {
 		// if that timer is not ended, omit it.
 		if (this.measures[name].measureStart) return;
-		header +=
-			name +
-			"; dur=" +
-			this.measures[name].time +
-			'; desc="' +
-			this.measures[name].desc +
-			'",';
+		var desc = this.measures[name].desc + "(" + this.measures[name].invocations + "times)";
+		header += name + "; dur=" + this.measures[name].time + '; desc="' + desc + '",';
 	});
 
 	// remove trailing comma and return header string

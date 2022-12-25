@@ -17,13 +17,17 @@ exports.method = "GET";
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
+	$tw.perf.reset();
+	$tw.perf.timer("parse-tiddler-content", "Decode and getTiddler");
 	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		tiddler = state.wiki.getTiddler(title),
 		tiddlerFields = {},
 		knownFields = [
 			"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
 		];
+	$tw.perf.timer("parse-tiddler-content");
 	if(tiddler) {
+		$tw.perf.timer("prepare-tiddler", "Prepare fields of tiddler");
 		$tw.utils.each(tiddler.fields,function(field,name) {
 			var value = tiddler.getFieldString(name);
 			if(knownFields.indexOf(name) !== -1) {
@@ -36,7 +40,14 @@ exports.handler = function(request,response,state) {
 		tiddlerFields.revision = state.wiki.getChangeCount(title);
 		tiddlerFields.bag = "default";
 		tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
+		$tw.perf.timer("prepare-tiddler", "Prepare fields of tiddler");
+		state.sendResponse(200, {
+				"Content-Type": "application/json",
+				"Server-Timing": $tw.perf.generateHeader()
+			},
+			JSON.stringify(tiddlerFields),
+			"utf8"
+		);
 	} else {
 		response.writeHead(404);
 		response.end();

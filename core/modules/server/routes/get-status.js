@@ -17,6 +17,8 @@ exports.method = "GET";
 exports.path = /^\/status$/;
 
 exports.handler = function(request,response,state) {
+	$tw.perf.reset();
+	$tw.perf.timer("stringify", "JSON.stringify");
 	var text = JSON.stringify({
 		username: state.authenticatedUsername || state.server.get("anon-username") || "",
 		anonymous: !state.authenticatedUsername,
@@ -27,7 +29,8 @@ exports.handler = function(request,response,state) {
 		},
 		tiddlywiki_version: $tw.version
 	});
-	state.sendResponse(200,{"Content-Type": "application/json"},text,"utf8");
+	$tw.perf.timer("stringify");
+	state.sendResponse(200,{"Content-Type": "application/json", "Server-Timing": $tw.perf.generateHeader()},text,"utf8");
 };
 
 }());
