@@ -147,7 +147,9 @@ Performance.prototype.generateHeader = function() {
 	});
 
 	// remove trailing comma and return header string
-	return header.replace(/,\s*$/, "");
+	header = header.replace(/,\s*$/, "");
+	this.reset();
+	return header;
 };
 
 exports.Performance = Performance;
