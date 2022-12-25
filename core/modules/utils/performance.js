@@ -137,13 +137,19 @@ Performance.prototype.timer = function(name, description) {
 
 /** Generate header that can be used as server-timing */
 Performance.prototype.generateHeader = function() {
+	if(!this.enabled) return;
 	var header = "";
 	// loop the metrics
 	Object.keys(this.measures).forEach(name => {
 		// if that timer is not ended, omit it.
 		if (this.measures[name].measureStart) return;
+		/**
+		 * Delimiters are chosen from the set of US-ASCII visual characters not allowed in a token (DQUOTE and "(),/:;<=>?@[\]{}").
+		 * https://httpwg.org/specs/rfc7230.html#rfc.section.3.2.6
+		*/
+		var validName = name.replace(/[\s(),\/:;<=>?@\\[\]\{\}]/g, '_');
 		var desc = this.measures[name].desc + "(" + this.measures[name].invocations + "times)";
-		header += name + "; dur=" + this.measures[name].time + '; desc="' + desc + '",';
+		header += validName + "; dur=" + this.measures[name].time + '; desc="' + desc + '",';
 	});
 
 	// remove trailing comma and return header string
