@@ -147,8 +147,8 @@ Performance.prototype.generateHeader = function() {
 		 * Delimiters are chosen from the set of US-ASCII visual characters not allowed in a token (DQUOTE and "(),/:;<=>?@[\]{}").
 		 * https://httpwg.org/specs/rfc7230.html#rfc.section.3.2.6
 		*/
-		var validName = name.replace(/[\s(),\/:;<=>?@\\[\]\{\}]/g, '_');
-		var desc = this.measures[name].desc + "(" + this.measures[name].invocations + "times)";
+		var validName = name.replace(/[^a-zA-Z-]/g, '-');
+		var desc = this.measures[name].desc.replace(/[^a-zA-Z-\[\]!.()<>$\/ ~0-9:]/g, '-') + "(" + this.measures[name].invocations + "times)";
 		header += validName + "; dur=" + this.measures[name].time + '; desc="' + desc + '",';
 	});
 
