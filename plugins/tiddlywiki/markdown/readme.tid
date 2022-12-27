@@ -11,5 +11,22 @@ This plugin provides Markdown support via the [[markdown-it|https://github.com/m
 
 !! Compatibility Notes
 
-* A tab character in Markdown has a size of four spaces. Configure the tab size of your code editor accordingly. For example, if you use <$text text="CodeMirror"/>, it is recommended that you set $:/config/codemirror/indentUnit and $:/config/codemirror/tabSize to `4` to avoid inconsistent indentations.
-* You must terminate a table with a blank line or another block-level structure.
+* <p>A tab character in Markdown has a size of four spaces. Configure the tab size of your code editor accordingly. For example, if you use <$text text="CodeMirror"/>, it is recommended that you set $:/config/codemirror/indentUnit and $:/config/codemirror/tabSize to `4` to avoid inconsistent indentations.</p>
+* <p>HTML blocks are ultimately parsed by the <$text text=WikiText/> parser: //an opening tag followed by a blank line will activate block-level parsing for its content//. When working with tags designed to contain literal content, such as `<pre>` and `<style>` tags, refrain from adding blank lines after the opening tags.</p>
+* <p>You must terminate a table with either a blank line or another block-level structure.</p>
+* <p>`latex-parser` in $:/config/markdown/renderWikiTextPragma is no longer required and will be ignored.</p>
+* <p>Config option `linkNewWindow` is removed.</p>
+
+!! Extending the Parser
+
+You can extend the parser by loading additional markdown-it plugins this way:
+
+```js
+var plugin1 = require(...);
+var plugin2 = require(...);
+
+var md = $tw.Wiki.parsers["text/markdown"].prototype.md;
+
+md.use(plugin1)
+  .use(plugin2, opts, ...);
+```

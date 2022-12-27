@@ -5,21 +5,17 @@ To review standard Markdown syntax, see: [ext[CommonMark quick reference|https:/
 
 ! Linking to Tiddlers
 
-Prepend `#` to tiddler titles to form link addresses. If a tiddler title contains spaces or other special characters, you must either URI-encode the link, or surround the #title with `<>`, backslash-escaping any `<` or `>` in the title.
+Prepend `#` to tiddler titles to form link addresses. If a tiddler title contains spaces or other special characters, you must either (1) URI-encode the title, or (2) surround the #title with `<` `>` and backslash-escape any `<` or `>` in the title.
 
 !! Links
 
-<style>
-.emph { color: <<colour dirty-indicator>>; }
-</style>
+<pre><code>[link text](<strong>#</strong><$text text="TiddlerTitle"/> "optional tooltip")
 
-<pre><code>[link text](<strong class="emph">#</strong><$text text="TiddlerTitle"/> "optional tooltip")
+[link text](<strong>#</strong>New<strong>%20</strong>Tiddler)
 
-[link text](<strong class="emph">#</strong>New<strong class="emph">%20</strong>Tiddler)
+[link text](<strong>&lt;#</strong>New Tiddler<strong>&gt;</strong>)
 
-[link text](<strong class="emph">&lt;#</strong>New Tiddler<strong class="emph">&gt;</strong>)
-
-[](<strong class="emph"><#</strong>How to use <strong class="emph">\</strong>&lt;$list<strong class="emph">\</strong>&gt; widget?<strong class="emph">&gt;</strong>)
+[](<strong>&lt;#</strong>How to use <strong>\</strong>&lt;$list<strong>\</strong>&gt; widget?<strong>&gt;</strong>)
 </code></pre>
 
 You can also use the `<$link>` widget to generate links to tiddlers:
@@ -51,11 +47,49 @@ You can also use the `<$link>` widget to generate links to tiddlers:
 
 Markdown allows you to escape ASCII punctuation characters with `\`.
 
+! HTML Blocks
+
+An [[HTML block|https://spec.commonmark.org/0.30/#html-blocks]] is a group of lines that starts with an HTML tag and is treated as raw HTML. Block-level tags such as `<div>` and `<p>` can interrupt a paragraph. Inline elements such as `<strong>` and `<em>` can start an HTML block if the //complete// tag begins on a new paragraph by itself. In most cases, an HTML block continues until a blank line is reached.
+
+A widget tag that begins on a new paragraph will also be treated as an HTML block. Markdown elements are not recognized inside the HTML block. For example:
+
+```
+see
+
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
+```
+
+rendered as:
+
+```
+<p>see</p>
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
+```
+
+A widget tag not preceded by a blank line is an inline element.
+
+```
+see
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
+```
+
+rendered as:
+
+```
+<p>see <$link to="New Tiddler"><em>New</em> Tiddler</$link></p>
+```
+
 ! Syntax Extensions
 
-!! <$text text=KaTex/>
+!! <$text text=KaTeX/>
 
-You need to install the <$text text=KaTex/> plugin to activate this syntax extension.
+You need to install the <$text text=KaTeX/> plugin to activate this syntax extension.
 
 Surround your math expression with `$` for inline rendering. Whitespace characters cannot immediately follow the opening `$` or precede the closing `$`, and the closing delimiter must not immediately precede a digit. Furthermore, `$` followed by `:/` will not be recognized as a valid opening or closing delimiter either.
 
@@ -97,7 +131,7 @@ H<sub>2</sub>O
 ~~striked through text~~
 ```
 
-<del>strike through text</del>
+<s>striked through text</s>
 
 !! Inserted Text
 
