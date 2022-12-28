@@ -34,7 +34,7 @@ exports.sortsub = function(source,operator,options) {
 					case "..currentTiddler":
 						return options.widget.getVariable("currentTiddler");
 					default:
-						return options.widget.getVariable(name, opts);
+						return options.widget.getVariable(name,opts);
 				}
 			}
 		});
