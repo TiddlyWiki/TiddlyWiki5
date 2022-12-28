@@ -984,6 +984,8 @@ Tests the filtering mechanism.
 			rootWidget.setVariable("sort3","[{!!value}divide{!!cost}]");
 			rootWidget.setVariable("sort4","[{!!title}]");
 			rootWidget.setVariable("undefined-variable","[<doesnotexist>]");
+			rootWidget.setVariable("echo","$text$",[{name:"text"}],true);
+			rootWidget.setVariable("sort4-macro-param","[subfilter<echo '[{!!title}]'>]");
 			expect(wiki.filterTiddlers("[sortsub:number<sort1>]",anchorWidget).join(",")).toBe("one,hasList,has filter,TiddlerOne,$:/TiddlerTwo,Tiddler Three,$:/ShadowPlugin,a fourth tiddler,filter regexp test");
 			expect(wiki.filterTiddlers("[!sortsub:number<sort1>]",anchorWidget).join(",")).toBe("filter regexp test,a fourth tiddler,$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,has filter,TiddlerOne,hasList,one");
 			expect(wiki.filterTiddlers("[sortsub:string<sort1>]",anchorWidget).join(",")).toBe("has filter,TiddlerOne,$:/TiddlerTwo,Tiddler Three,$:/ShadowPlugin,a fourth tiddler,filter regexp test,one,hasList");
@@ -996,6 +998,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("a1 a10 a2 a3 b10 b3 b1 c9 c11 c1 +[sortsub:alphanumeric<sort4>]",anchorWidget).join(",")).toBe("a1,a2,a3,a10,b1,b3,b10,c1,c9,c11");
 			// #7155. The order of the output is the same as the input when an undefined variable is used in the subfitler
 			expect(wiki.filterTiddlers("a2 a10 a1 +[sortsub:alphanumeric<undefined-variable>]",anchorWidget).join(",")).toBe("a2,a10,a1");
+			expect(wiki.filterTiddlers("a1 a10 a2 a3 b10 b3 b1 c9 c11 c1 +[sortsub:alphanumeric<sort4-macro-param>]",anchorWidget).join(",")).toBe("a1,a2,a3,a10,b1,b3,b10,c1,c9,c11");
 		});
 		
 		it("should handle the toggle operator", function() {
