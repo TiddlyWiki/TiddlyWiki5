@@ -75,7 +75,7 @@ EditWidget.prototype.getEditorType = function() {
 	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
 	if(!editorType) {
 		var typeInfo = $tw.config.contentTypeInfo[type];
-		if(typeInfo && typeInfo.encoding === "base64") {
+		if(!typeInfo || (typeInfo && typeInfo.encoding === "base64")) {
 			editorType = "binary";
 		} else {
 			editorType = "text";

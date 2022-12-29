@@ -239,7 +239,7 @@ exports.isBinaryTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
-		return !!contentTypeInfo && contentTypeInfo.encoding === "base64";
+		return (!!contentTypeInfo && contentTypeInfo.encoding === "base64") || !contentTypeInfo;
 	} else {
 		return null;
 	}
@@ -978,6 +978,10 @@ exports.parseText = function(type,text,options) {
 	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
 		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
 	}
+	if(!Parser && !!type) { // has type and unknown type, set to binary
+		var typeInfo = $tw.config.contentTypeInfo[type];
+		Parser = (typeInfo && typeInfo.encoding !== "base64") ? $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"] : $tw.Wiki.parsers["application/octet-stream"];
+	}
 	if(!Parser) {
 		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
 	}
@@ -1460,9 +1464,9 @@ exports.readFile = function(file,options) {
 			}
 		}
 	}
-	// Figure out if we're reading a binary file
+	// Figure out if we're reading a binary file, default to binary if the type is unknown
 	var contentTypeInfo = $tw.config.contentTypeInfo[type],
-		isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
+		isBinary = (contentTypeInfo && contentTypeInfo.encoding === "base64") || !contentTypeInfo;
 	// Log some debugging information
 	if($tw.log.IMPORT) {
 		console.log("Importing file '" + file.name + "', type: '" + type + "', isBinary: " + isBinary);

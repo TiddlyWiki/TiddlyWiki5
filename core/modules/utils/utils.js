@@ -858,8 +858,8 @@ Convert text and content type to a data URI
 */
 exports.makeDataUri = function(text,type,_canonical_uri) {
 	type = type || "text/vnd.tiddlywiki";
-	var typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"],
-		isBase64 = typeInfo.encoding === "base64",
+	var typeInfo = $tw.config.contentTypeInfo[type],
+		isBase64 = (!!typeInfo && typeInfo.encoding === "base64") || !typeInfo,
 		parts = [];
 	if(_canonical_uri) {
 		parts.push(_canonical_uri);
