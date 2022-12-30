@@ -176,7 +176,11 @@ function getDataItem(data,indexes) {
 	var item = data;
 	for(var i=0; i<indexes.length; i++) {
 		if(item !== undefined) {
-			item = item[indexes[i]];
+			if(item !== null && ["number","string","boolean"].indexOf(typeof item) === -1) {
+				item = item[indexes[i]];
+			} else {
+				item = undefined;
+			}
 		}
 	}
 	return item;
