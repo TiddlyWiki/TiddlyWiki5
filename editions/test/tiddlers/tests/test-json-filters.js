@@ -41,7 +41,9 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[{Second}jsonget[]]")).toEqual(["une","deux","trois","quatre","cinq"]);
 		expect(wiki.filterTiddlers("[{First}jsonget[]]")).toEqual(["one","","1.618","four","five","six","true","false","null"]);
 		expect(wiki.filterTiddlers("[{First}jsonget[a]]")).toEqual(["one"]);
+		expect(wiki.filterTiddlers("[{First}jsonget[a],[fixed]]")).toEqual([]);
 		expect(wiki.filterTiddlers("[{First}jsonget[b]]")).toEqual([""]);
+		expect(wiki.filterTiddlers("[{First}jsonget[c]]")).toEqual(["1.618"]);
 		expect(wiki.filterTiddlers("[{First}jsonget[missing-property]]")).toEqual([]);
 		expect(wiki.filterTiddlers("[{First}jsonget[d]]")).toEqual(["four","five","six","true","false","null"]);
 		expect(wiki.filterTiddlers("[{First}jsonget[d],[e]]")).toEqual(["four"]);

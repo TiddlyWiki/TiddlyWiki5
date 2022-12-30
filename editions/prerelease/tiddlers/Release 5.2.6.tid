@@ -6,6 +6,7 @@ title: Release 5.2.6
 type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.5...master]]//
+
 ! Major Improvements
 
 New [ext[Twitter Archivist|./editions/twitter-archivist]] plugin to import the tweets and associated media from a Twitter Archive as individual tiddlers.
