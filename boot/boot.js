@@ -2408,6 +2408,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
+	$tw.utils.registerFileType("audio/mpeg","base64");
 	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
