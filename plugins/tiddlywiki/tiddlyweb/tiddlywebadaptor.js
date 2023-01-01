@@ -76,6 +76,14 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			if(err) {
 				return callback(err);
 			}
+
+			//If Browser-Storage plugin is present, add pre-loaded tiddlers to the event queue to sync to the server 
+			if($tw.wiki.getTiddlerText("$:/config/BrowserStorage/Enabled") === "yes" && $tw.boot.preloadDirty != null) {
+				$tw.boot.preloadDirty.forEach(function(item){
+					$tw.wiki.enqueueTiddlerEvent(item, false);
+				});
+			}
+
 			// Decode the status JSON
 			var json = null;
 			try {
@@ -211,6 +219,12 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			if(err) {
 				return callback(err);
 			}
+
+			//If Browser-Storage plugin is present, remove tiddler from local storage after successful sync to the server
+			if($tw.wiki.getTiddlerText("$:/config/BrowserStorage/Enabled") === "yes") {
+				window.localStorage.removeItem("tw5#" + window.location.pathname + "#" + tiddler.fields.title);
+			}
+
 			// Save the details of the new revision of the tiddler
 			var etag = request.getResponseHeader("Etag");
 			if(!etag) {
