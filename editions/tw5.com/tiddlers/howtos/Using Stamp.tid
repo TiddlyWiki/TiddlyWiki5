@@ -47,7 +47,7 @@ By default, the stamp button ''replaces ''text you have selected in the editor (
 
 If instead of //replacing// selected text, you wish the stamp button to //add// [[wikitext  |WikiText]] before and/or after the selection:
 
-# Create a snippet tiddler (tagged <<tag-pill $:/tags/TextEditor/Snippet>>, with `caption` field set to desired stamp menu item text) using either of the two methods above
+# Create a snippet tiddler (tagged <<tag $:/tags/TextEditor/Snippet>>, with `caption` field set to desired stamp menu item text) using either of the two methods above
 # Create a new tiddler with either `/prefix` or `/suffix` appended to the end of the snippet tiddler's title, according to whether you wish the stamp to insert the snippet content //before //(`/prefix`) or //after //(`/suffix`) the text selected in the editor. 
 #* Do not tag the tiddler <<tag-pill $:/tags/TextEditor/Snippet>>; the caption field is ignored
 #* Set the tiddler text to the text you wish to be inserted before or after your selection
