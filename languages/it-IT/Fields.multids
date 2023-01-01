@@ -1,34 +1,39 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: L'URI completo di un frammento immagine esterno
+_is_skinny: Se presente, indica che il campo di testo del frammento deve essere caricato dal server
 bag: Il nome del contenitore da cui proviene un frammento
 caption: Il testo che &egrave; visualizzato in un tab o in un pulsante
+code-body: Il modello di visualizzazione visualizzerà il frammento come codice se impostato su ''sì''
 color: Il codice CSS del colore associato ad un frammento
-component: Il nome del componente responsabile per un [[alerttiddler|AlertMechanism]]
+component: Il nome del componente responsabile per un [[frammento di avviso|AlertMechanism]]
 created: La data in cui il frammento &egrave; stato creato
 creator: Il nome della persona che ha creato il frammento
-current-tiddler: Utilizzato per memorizzare nella cache il frammento top nella [[history list|HistoryMechanism]]
-dependents: Per un plugin, elenca i plugin dipendenti
+current-tiddler: Utilizzato per memorizzare nella cache il frammento in alto nella [[cronologia|HistoryMechanism]]
+dependents: Per un plugin, elenca i titoli dei plugin dipendenti
 description: Il testo descrittivo per un plugin o per una modalit&agrave; a dialogo
 draft.of: Per i frammenti bozza, contiene il titolo del frammento di cui questo &egrave; una bozza
 draft.title: Per i frammenti bozza, contiene la proposta di nuovo titolo per il frammento
 footer: Il testo del footer per un wizard
+hide-body: Il modello di visualizzazione nasconderà i corpi dei frammenti se impostato su ''sì''
 icon: Il titolo del frammento che contiene l'icona associata con il frammento
-library: Se impostato su "yes" indica che il frammento deve essere salvato come una libreria ~JavaScript
+library: Indica che il frammento deve essere salvato come una libreria JavaScript se impostato su ''sì''
 list: Una lista ordinata di titoli di frammenti associati con un frammento
-list-after: Se impostato, il titolo del frammento dopo il quale questo frammento deve essere aggiunto all'elenco ordinato dei titoli dei frammenti
+list-after: Se impostato, il titolo del frammento dopo il quale questo frammento deve essere aggiunto all'elenco ordinato dei titoli dei frammenti, o alla fine dell'elenco se questo campo è presente ma vuoto
 list-before: Se impostato, il titolo del frammento prima del quale questo frammento deve essere aggiunto all'elenco ordinato dei titoli dei frammenti, o all'inizio della lista se questo campo &egrave; presente ma vuoto
 modified: La data e l'ora in cui un frammento &egrave; stato modificato l'ultima volta
 modifier: Il titolo del frammento associato con la persona che ha modificato un frammento l'ultima volta
 name: Il nome leggibile associato con un frammento plugin
 plugin-priority: Un valore numerico che indica la priorit&agrave; di un frammento plugin
 plugin-type: Il tipo di plugin di un frammento plugin
-released: La data di rilascio di un ~TiddlyWiki
+released: La data di rilascio di un TiddlyWiki
 revision: La revisione del frammento mantenuta sul server
 source: L'indirizzo URL sorgente associato con un frammento
 subtitle: Il testo del sottotitolo per un wizard
-tags: Una lista di categorie associate con un frammento
+tags: Una lista di etichette associate con un frammento
 text: Il corpo del testo di un frammento
+throttle.refresh: Se presente, rallenta gli aggiornamenti di questo tiddler
 title: Il nome univoco di un frammento
+toc-link: Sopprime il link al frammento nel sommario se impostato su ''no''
 type: Il tipo di contenuto di un frammento
 version: Informazioni di versione per un plugin

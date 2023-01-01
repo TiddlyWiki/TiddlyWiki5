@@ -5,6 +5,7 @@ alert-border: Bordo allarme
 alert-highlight: Evidenziazione allarme
 alert-muted-foreground: Primo piano allarme disattivato
 background: Sfondo generale
+blockquote-bar: Barra blocco citazione
 button-background: Default sfondo pulsante
 button-border: Default bordo pulsante
 button-foreground: Default primo piano pulsante
@@ -14,34 +15,93 @@ code-foreground: Codice in primo piano
 dirty-indicator: Indicatore modifiche non salvate
 download-background: Sfondo pulsante download
 download-foreground: Primo piano pulsante download
+dragger-background: Sfondo trascinatore
+dragger-foreground: Primo piano trascinatore
+dropdown-background: Sfondo casella a discesa
+dropdown-border: Bordo casella a discesa
+dropdown-tab-background: Sfondo tab casella a discesa
+dropdown-tab-background-selected: Primo piano tab casella a discesa per i tab selezionati
+dropzone-background: Sfondo zona di rilascio
 external-link-background: Sfondo link esterno
+external-link-background-hover: Sfondo link esterno hover
 external-link-background-visited: Sfondo link esterno visitato
 external-link-foreground: Primo piano link esterno
+external-link-foreground-hover: Primo piano link esterno hover
 external-link-foreground-visited: Primo piano link esterno visitato
 foreground: Primo piano generale
+menubar-background: Sfondo barra dei menu
+menubar-foreground: Primo piano barra dei menu
 message-background: Sfondo casella messaggio
 message-border: Bordo casella messaggio
 message-foreground: Primo piano casella messaggio
+modal-backdrop: Backdrop wizard
+modal-background: Sfondo wizard
+modal-border: Bordo wizard
+modal-footer-background: Sfondo piè di pagina wizard
+modal-footer-border: Bordo piè di pagina wizard
+modal-header-border: Bordo intestazione wizard
+muted-foreground: Primo piano generale muto
 notification-background: Sfondo notifica
 notification-border: Bordo notifica
 page-background: Sfondo pagina
 pre-background: Sfondo codice preformattato
 pre-border: Bordo codice preformattato
-sidebar-button-foreground: Sfondo pulsante sidebar
-sidebar-foreground: Sfondo sidebar
+primary: Generale primario
+select-tag-background: Sfondo elemento `<select>`
+select-tag-foreground: Testo elemento `<select>`
+sidebar-button-foreground: Primo piano pulsante barra laterale
+sidebar-controls-foreground: Primo piano controlli barra laterale
+sidebar-controls-foreground-hover: Primo piano controlli barra laterale hover
+sidebar-foreground: Primo piano barra laterale
+sidebar-foreground-shadow: Primo piano barra laterale ombra
+sidebar-muted-foreground: Primo piano barra laterale muto
+sidebar-muted-foreground-hover: Primo piano barra laterale muto hover
+sidebar-tab-background: Sfondo tab barra laterale
+sidebar-tab-background-selected: Sfondo tab barra laterale per tab selezionati
+sidebar-tab-border: Bordo tab barra laterale
+sidebar-tab-border-selected: Bordo tab barra laterale per tab selezionati
+sidebar-tab-divider: Separatore tab barra laterale
+sidebar-tab-foreground: Primo piano tab barra laterale
+sidebar-tab-foreground-selected: Primo piano tab barra laterale per tab selezionati
+sidebar-tiddler-link-foreground: Primo piano collegamento frammento barra laterale
+sidebar-tiddler-link-foreground-hover: Primo piano collegamento frammento barra laterale hover
 site-title-foreground: Sfondo titolo sito
 static-alert-foreground: Primo piano alert statico
 tab-background: Sfondo tab
 tab-background-selected: Sfondo tab per tab selezionati
 tab-border: Bordo tab
 tab-border-selected: Bordo tab per tab selezionati
+tab-divider: Separatore tab
+tab-foreground: Primo piano tab
+tab-foreground-selected: Primo piano tab per tab selezionati
 table-border: Bordo tabella
-table-footer-background: Sfondo footer tabella
-table-header-background: Sfondo testata tabella
+table-footer-background: Sfondo piè di pagina tabella
+table-header-background: Sfondo intestazione tabella
 tag-background: Sfondo etichetta
+tag-foreground: Primo piano etichetta
 tiddler-background: Sfondo frammento
 tiddler-border: Bordo frammento
+tiddler-controls-foreground: Primo piano controlli frammenti
+tiddler-controls-foreground-hover: Primo piano controlli frammenti hover
+tiddler-controls-foreground-selected: Primo piano controlli frammenti per controlli selezionati
 tiddler-editor-background: Sfondo editor frammenti
 tiddler-editor-border: Bordo editor frammenti
+tiddler-editor-border-image: Immagine bordo editor frammenti
+tiddler-editor-fields-even: Sfondo editor frammenti per campi pari
+tiddler-editor-fields-odd: Sfondo editor frammenti per campi dispari
 tiddler-info-background: Sfondo pannello informazioni frammenti
 tiddler-info-border: Bordo pannello informazioni frammenti
+tiddler-info-tab-background: Sfondo tab pannello informazioni frammenti
+tiddler-link-background: Sfondo collegamenti frammenti
+tiddler-link-foreground: Primo piano collegamenti frammenti
+tiddler-subtitle-foreground: Primo piano sottotitolo frammenti
+tiddler-title-foreground: Primo piano titolo frammenti
+toolbar-cancel-button: Primo piano pulsante 'annulla' barra strumenti
+toolbar-close-button: Primo piano pulsante 'chiudi' barra strumenti
+toolbar-delete-button: Primo piano pulsante 'elimina' barra strumenti
+toolbar-done-button: Primo piano pulsante 'fatto' barra strumenti
+toolbar-edit-button: Primo piano pulsante 'modifica' barra strumenti
+toolbar-info-button: Primo piano pulsante 'info' barra strumenti
+toolbar-new-button: Primo piano pulsante 'nuovo frammento' barra strumenti
+toolbar-options-button: Primo piano pulsante 'impostazioni' barra strumenti
+toolbar-save-button: Primo piano pulsante 'salva' barra strumenti

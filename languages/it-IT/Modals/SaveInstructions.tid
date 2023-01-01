@@ -8,7 +8,7 @@ Le modifiche a questo wiki devono essere salvate come un file ~TiddlyWiki HTML.
 
 !!! Browser su desktop
 
-# Seleziona ''Save As'' dal menu ''File''
+# Seleziona ''Salva con nome'' dal menu ''File''
 # Scegli la posizione ed un nome file
 #* Alcuni browser richiedono che sia indicato esplicitamente che il file deve essere salvato con il formato ''Webpage, solo HTML'' o qualcosa di simile
 # Chiudi questo tab
@@ -19,4 +19,4 @@ Le modifiche a questo wiki devono essere salvate come un file ~TiddlyWiki HTML.
 #* Se hai attivato iCloud o Google Sync allora il bookmark sar&agrave; automaticamente sincronizzato con il tuo desktop dove potrai aprire il link e salvare il wiki come sopra
 # Chiudi questo tab
 
-//Se apri ancora il bookmark con Mobile Safari vedrai ancora questo messaggio. Se desideri andare avanti ed utilizzare il file, clicca semplicemente il bottone ''close'' sotto//
+//Se riapri il bookmark con Mobile Safari vedrai ancora questo messaggio. Se desideri proseguire ed utilizzare il file, clicca semplicemente il pulsante ''chiudi'' qui sotto//

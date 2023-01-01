@@ -1,6 +1,7 @@
 title: $:/language/SideBar/
 
 All/Caption: Tutti
+Caption: Barra laterale
 Contents/Caption: Indice
 Drafts/Caption: Bozze
 Missing/Caption: Mancanti
@@ -11,6 +12,6 @@ Recent/Caption: Recenti
 Shadows/Caption: Nascosti
 System/Caption: Sistema
 Tags/Caption: Etichette
-Tags/Untagged/Caption: Non categorizzati
+Tags/Untagged/Caption: Non etichettati
 Tools/Caption: Strumenti
 Types/Caption: Tipi
