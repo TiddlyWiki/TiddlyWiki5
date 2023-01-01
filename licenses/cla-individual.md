@@ -509,3 +509,5 @@ Jeffrey Zhang, @jeffrey4l, 2022/12/24
 cs84285, @cs8425, 2022/12/30
 
 Nick Bell, @newmedicine, 2023/01/01
+
+Frank Kmiec, @fkmiec, 2023-01-01
