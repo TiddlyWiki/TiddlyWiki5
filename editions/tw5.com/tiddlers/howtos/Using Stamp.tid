@@ -41,7 +41,7 @@ Your new snippet will appear at the bottom of the stamp menu by default. To adju
 # Drag items up and down the menu of snippets
 
 
-! <span style="font-size:1rem;"><<.from-version "5.1.20">></span>&nbsp;Adding a prefix and/or suffix to a selection 
+! Adding a prefix and/or suffix to a selection <span style="font-size:1rem;"><<.from-version "5.1.20">></span>
 
 By default, the stamp button ''replaces ''text you have selected in the editor (let's say `selectedText`)with your snippet (let's say `$:/my/snippet`).
 
