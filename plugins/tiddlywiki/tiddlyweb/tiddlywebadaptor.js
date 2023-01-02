@@ -82,8 +82,10 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 
 			//If Browser-Storage plugin is present, add pre-loaded tiddlers to the event queue to sync to the server 
 			if($tw.wiki.getTiddlerText("$:/config/BrowserStorage/Enabled") === "yes" && $tw.boot.preloadDirty != null) {
-				$tw.boot.preloadDirty.forEach(function(item){
-					browser_storage_tiddlers.push($tw.wiki.getTiddler(item));
+				$tw.utils.each($tw.boot.preloadDirty, function(item){
+					var tiddler = $tw.wiki.getTiddler(item);
+					console.log("Browser Storage Sync: Caching browser storage tiddler: " + tiddler.fields.title);
+					browser_storage_tiddlers.push(tiddler);
 					//$tw.wiki.enqueueTiddlerEvent(item, false);
 				});
 			}
@@ -202,8 +204,10 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			callback(null,tiddlers);
 			// If Browswer Storage tiddlers were pulled on reloading the wiki, add them after syncFromServer completes in the above callback. 
 			if(browser_storage_tiddlers.length > 0) {
-				browser_storage_tiddlers.forEach(function(item){
+				$tw.utils.each(browser_storage_tiddlers, function(item){
+					console.log("Browser Storage Sync: Adding tiddler: " + item.fields.title);
 					$tw.wiki.addTiddler(item);
+					//$tw.wiki.enqueueTiddlerEvent(item, false); //Not necessary? 
 				});
 				browser_storage_tiddlers.length = 0;
 			}
