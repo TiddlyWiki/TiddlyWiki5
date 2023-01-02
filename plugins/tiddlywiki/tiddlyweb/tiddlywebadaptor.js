@@ -205,6 +205,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 				browser_storage_tiddlers.forEach(function(item){
 					$tw.wiki.addTiddler(item);
 				});
+				browser_storage_tiddlers.length = 0;
 			}
 		}
 	});
