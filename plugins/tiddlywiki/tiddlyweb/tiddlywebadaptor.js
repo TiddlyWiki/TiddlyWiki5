@@ -15,6 +15,9 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
 	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
 
+//If Browser Storage is present and enabled, hold them locally and add them at the end of getSkinnyTiddlers
+var browser_storage_tiddlers = []
+
 function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
@@ -80,7 +83,8 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			//If Browser-Storage plugin is present, add pre-loaded tiddlers to the event queue to sync to the server 
 			if($tw.wiki.getTiddlerText("$:/config/BrowserStorage/Enabled") === "yes" && $tw.boot.preloadDirty != null) {
 				$tw.boot.preloadDirty.forEach(function(item){
-					$tw.wiki.enqueueTiddlerEvent(item, false);
+					browser_storage_tiddlers.push($tw.wiki.getTiddler(item));
+					//$tw.wiki.enqueueTiddlerEvent(item, false);
 				});
 			}
 
@@ -196,6 +200,12 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			}
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
+			// If Browswer Storage tiddlers were pulled on reloading the wiki, add them after syncFromServer completes in the above callback. 
+			if(browser_storage_tiddlers.length > 0) {
+				browser_storage_tiddlers.forEach(function(item){
+					$tw.wiki.addTiddler(item);
+				});
+			}
 		}
 	});
 };
