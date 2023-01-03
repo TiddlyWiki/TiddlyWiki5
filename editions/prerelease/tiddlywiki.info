@@ -13,7 +13,6 @@
 		"tiddlywiki/dynaview",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/codemirror",
-		"tiddlywiki/menubar",
 		"tiddlywiki/jszip"
 	],
 	"themes": [

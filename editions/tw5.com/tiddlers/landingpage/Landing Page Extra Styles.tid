@@ -1,0 +1,31 @@
+title: Landing Page Extra Styles
+tags: $:/tags/Stylesheet
+
+\define if-story-river-not-empty(rules)
+<$list filter="[list[$:/StoryList]count[]!match[0]]" variable="ignore">
+$rules$ 
+</$list>
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.story-backdrop {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	transform-origin: 50% 0;
+	perspective: 1000px;
+	transition: transform 0.5s ease-in-out,
+				opacity 0.5s ease-in-out;
+	opacity: 100%;
+}
+
+<<if-story-river-not-empty """
+
+.story-backdrop {
+	transform: scale(0.5) rotateX(10deg);
+	opacity: 50%;
+}
+
+""">>
