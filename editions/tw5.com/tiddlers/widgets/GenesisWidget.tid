@@ -1,6 +1,7 @@
+bad-example: <$genesis $type="my-element" $names="one two" $values="1 2">Test Genesis Widget</$genesis>
 caption: genesis
 created: 20221101100729587
-modified: 20221101100729587
+modified: 20230103152008291
 tags: Widgets
 title: GenesisWidget
 type: text/vnd.tiddlywiki
@@ -25,10 +26,10 @@ Note that attributes explicitly specified take precedence over attributes with t
 
 ! Examples
 
-<$macrocall $name='wikitext-example-without-html' 
+<$macrocall $name='wikitext-example' 
 src='<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>'/>
 
-<$macrocall $name='wikitext-example-without-html' 
+<$macrocall $name='wikitext-example' 
 src="""\define my-banner(mode:"inline",caption)
 <$genesis $type={{{ [<__mode__>match[inline]then[span]else[div]] }}} class="tc-mybanner">
 <<__caption__>>
@@ -39,3 +40,12 @@ src="""\define my-banner(mode:"inline",caption)
 
 <<my-banner mode:"block" caption:"I'm in a DIV">>
 """/>
+
+! Important
+<<.warning """In the following example the parameter `one` is absent from the HTML output, since HTML parameters with the prefix `on` are ''removed for security reasons''. It's needed to remove eg: `onClick=` from "copy / pasted" HTML content. At the moment, every parameter prefixed `on` is removed. 
+
+<pre><code><$view field="bad-example" format="text" /></code></pre>
+
+... and the underlying HTML is:
+<pre><code><$view field="bad-example" format="htmlwikified" /></code></pre>
+""">>
