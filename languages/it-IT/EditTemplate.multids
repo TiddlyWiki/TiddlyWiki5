@@ -4,10 +4,12 @@ Body/External/Hint: Questo &egrave; un frammento esterno memorizzato al di fuori
 Body/Placeholder: Digita il testo di questo frammento
 Body/Preview/Type/DiffCurrent: Differenze rispetto all'attuale
 Body/Preview/Type/DiffShadow: Differenze rispetto al nascosto (se presenti)
+Body/Preview/Type/Output: Output
+Caption: Editor
 Field/Dropdown/Caption: Lista di campi
 Field/Dropdown/Hint: Mostra la lista di campi
 Field/Remove/Caption: Rimuovi campo
-Field/Remove/Hint: Rimuovi campo
+Field/Remove/Hint: Rimuovi il campo
 Fields/Add/Button: Aggiungi
 Fields/Add/Button/Hint: Aggiungi il nuovo campo al frammento
 Fields/Add/Dropdown/System: Campi di sistema
