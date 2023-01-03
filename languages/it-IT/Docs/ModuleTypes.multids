@@ -1,15 +1,15 @@
 title: $:/language/Docs/ModuleTypes/
 
-allfilteroperator: Un sottooperatore per l'operatore di filtro ''tutti''.
+allfilteroperator: Un sottooperatore per l'operatore di filtro ''all''.
 animation: Animazioni che possono essere utilizzate con RevealWidget.
 authenticator: Definisce il modo in cui le richieste vengono autenticate dal server HTTP integrato.
 bitmapeditoroperation: Un'operazione della barra degli strumenti dell'editor bitmap.
 command: Comandi che possono essere eseguiti sotto Node.js.
-config: Data da inserire nel `$tw.config`.
+config: Dati da inserire in `$tw.config`.
 filteroperator: I singoli metodi degli operatori di filtro.
-global: Data globale da inserire in `$tw`.
+global: Dati globali da inserire in `$tw`.
 info: Pubblica informazioni di sistema tramite lo pseudo-plugin [[$:/temp/info-plugin]].
-isfilteroperator: Operandi per l'operatore di filtro ''è''.
+isfilteroperator: Operandi per l'operatore di filtro ''is''.
 library: Tipo di modulo generico per moduli JavaScript generici.
 macro: Definizioni macro JavaScript.
 parser: Parser per differenti tipi di contenuto.
