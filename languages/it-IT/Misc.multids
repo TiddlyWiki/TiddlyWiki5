@@ -8,19 +8,19 @@ CloseAll/Button: Chiudi tutto
 ColourPicker/Recent: Recenti:
 ConfirmAction: Vuoi procedere?
 ConfirmCancelTiddler: Vuoi annullare le modifiche al frammento "<$text text=<<title>>/>"?
-ConfirmDeleteTiddler: Vuoi cancellare il frammento "<$text text=<<title>>/>"?
-ConfirmDeleteTiddlers: Sei sicuro di voler eliminare <<resultCount>> tiddler(s)?
+ConfirmDeleteTiddler: Vuoi eliminare il frammento "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Sei sicuro di voler eliminare <<resultCount>> frammento/i?
 ConfirmEditShadowTiddler: Stai per editare un frammento nascosto. Ogni modifica dei default di sistema render&agrave; i futuri aggiornamenti non semplici. Sei sicuro di voler editare "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Vuoi sovrascrivere il frammento "<$text text=<<title>>/>"?
 Count: Conteggio
 DefaultNewTiddlerTitle: Nuovo frammento
 Diffs/CountMessage: <<diff-count>> differenze
-DropMessage: Rilascia qui (o usa il tasto 'Escape' per annullare)
+DropMessage: Rilascia ora (o usa il tasto 'Escape' per annullare)
 Encryption/Cancel: Annulla
 Encryption/ConfirmClearPassword: Vuoi cancellare la password? Questa operazione rimuover&agrave; la crittografia applicata quando salverai questo wiki
 Encryption/Password: Password
 Encryption/PasswordNoMatch: Le password non corrispondono
-Encryption/PromptSetPassword: Imposta una nuova pasword per questo TiddlyWiki
+Encryption/PromptSetPassword: Imposta una nuova password per questo TiddlyWiki
 Encryption/RepeatPassword: Ripeti password
 Encryption/SetPassword: Imposta password
 Encryption/Username: Nome utente
@@ -28,8 +28,8 @@ Error/Caption: Errore
 Error/Filter: Errore filtro
 Error/FilterRunPrefix: Errore filtro: prefisso sconosciuto per l'esecuzione del filtro
 Error/FilterSyntax: Errore di sintassi nell'espressione del filtro
-Error/FormatFilterOperator: Errore filtro: suffisso sconosciuto per l'operatore di filtro 'formato'.
-Error/IsFilterOperator: Errore filtro: operando sconosciuto per l'operatore di filtro 'è'.
+Error/FormatFilterOperator: Errore filtro: suffisso sconosciuto per l'operatore di filtro 'format'.
+Error/IsFilterOperator: Errore filtro: operando sconosciuto per l'operatore di filtro 'is'.
 Error/LoadingPluginLibrary: Errore durante il caricamento della libreria dei plug-in
 Error/NetworkErrorAlert: `<h2>''Errore di rete''</h2>Sembra che la connessione al server sia stata persa. Ciò potrebbe indicare un problema con la connessione di rete. Prova a ripristinare la connettività di rete prima di continuare.<br><br>''Tutte le modifiche non salvate verranno sincronizzate automaticamente al ripristino della connettività''.`
 Error/PutEditConflict: File modificato sul server
@@ -45,8 +45,8 @@ InternalJavaScriptError/Title: Errore JavaScript interno
 LayoutSwitcher/Description: Apri il pannello di selezione del layout
 LazyLoadingWarning: <p>Tentativo di caricare contenuto esterno da ''<$text text={{!!_canonical_uri}}/>''</p><p>Se questo messaggio non scompare, il tipo di contenuto del frammento non corrisponde al tipo di contenuto esterno oppure potresti utilizzare un browser che non supporta il contenuto esterno per i wiki caricati come file autonomi. Vedi https://tiddlywiki.com/#ExternalText</p>
 LoginToTiddlySpace: Login su TiddlySpace
-Manager/Controls/FilterByTag/None: (nessuno)
-Manager/Controls/FilterByTag/Prompt: Filtro per etichetta:
+Manager/Controls/FilterByTag/None: (nessuna)
+Manager/Controls/FilterByTag/Prompt: Filtra per etichetta:
 Manager/Controls/Order/Prompt: Ordine inverso
 Manager/Controls/Search/Placeholder: Cerca
 Manager/Controls/Search/Prompt: Cerca:
@@ -60,8 +60,10 @@ Manager/Item/Icon: Icone
 Manager/Item/Icon/None: (nessuno)
 Manager/Item/RawText: Testo non formattato
 Manager/Item/Tags: Etichette
+Manager/Item/Tools: Strumenti
 Manager/Item/WikifiedText: Testo wikificato
 MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" -- clicca {{||$:/core/ui/Buttons/edit}} per crearlo
+No: No
 OfficialPluginLibrary: Libreria ufficiale plugin ~TiddlyWiki
 OfficialPluginLibrary/Hint: La libreria ufficiale di plugin ~TiddlyWiki su tiddlywiki.com. Plugin, temi e language pack sono mantenuti dal core team.
 PageTemplate/Description: il layout predefinito di ~TiddlyWiki
@@ -86,7 +88,7 @@ SystemTiddlers/Include/Prompt: Includi i frammenti di sistema
 TagManager/Colour/Heading: Colore
 TagManager/Count/Heading: Conteggio
 TagManager/Icon/Heading: Icona
-TagManager/Icons/None: Nessuno
+TagManager/Icons/None: Nessuna
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Etichetta
 Tiddler/DateFormat: DD MMM YYYY alle hh12:0mmam
