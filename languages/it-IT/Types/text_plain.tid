@@ -1,4 +1,5 @@
 title: $:/language/Docs/Types/text/plain
-description: Text normale
+description: Testo normale
 name: text/plain
 group: Testo
+group-sort: 0
