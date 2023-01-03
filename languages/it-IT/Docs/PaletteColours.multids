@@ -3,7 +3,7 @@ title: $:/language/Docs/PaletteColours/
 alert-background: Sfondo allarme
 alert-border: Bordo allarme
 alert-highlight: Evidenziazione allarme
-alert-muted-foreground: Primo piano allarme disattivato
+alert-muted-foreground: Primo piano allarme attenuato
 background: Sfondo generale
 blockquote-bar: Barra blocco citazione
 button-background: Default sfondo pulsante
@@ -34,13 +34,13 @@ menubar-foreground: Primo piano barra dei menu
 message-background: Sfondo casella messaggio
 message-border: Bordo casella messaggio
 message-foreground: Primo piano casella messaggio
-modal-backdrop: Backdrop wizard
-modal-background: Sfondo wizard
-modal-border: Bordo wizard
-modal-footer-background: Sfondo piè di pagina wizard
-modal-footer-border: Bordo piè di pagina wizard
-modal-header-border: Bordo intestazione wizard
-muted-foreground: Primo piano generale muto
+modal-backdrop: Backdrop finestra modale
+modal-background: Sfondo finestra modale
+modal-border: Bordo finestra modale
+modal-footer-background: Sfondo piè di pagina finestra modale
+modal-footer-border: Bordo piè di pagina finestra modale
+modal-header-border: Bordo intestazione finestra modale
+muted-foreground: Primo piano generale attenuato
 notification-background: Sfondo notifica
 notification-border: Bordo notifica
 page-background: Sfondo pagina
@@ -54,8 +54,8 @@ sidebar-controls-foreground: Primo piano controlli barra laterale
 sidebar-controls-foreground-hover: Primo piano controlli barra laterale hover
 sidebar-foreground: Primo piano barra laterale
 sidebar-foreground-shadow: Primo piano barra laterale ombra
-sidebar-muted-foreground: Primo piano barra laterale muto
-sidebar-muted-foreground-hover: Primo piano barra laterale muto hover
+sidebar-muted-foreground: Primo piano barra laterale attenuato
+sidebar-muted-foreground-hover: Primo piano barra laterale attenuato hover
 sidebar-tab-background: Sfondo tab barra laterale
 sidebar-tab-background-selected: Sfondo tab barra laterale per tab selezionati
 sidebar-tab-border: Bordo tab barra laterale
@@ -63,8 +63,8 @@ sidebar-tab-border-selected: Bordo tab barra laterale per tab selezionati
 sidebar-tab-divider: Separatore tab barra laterale
 sidebar-tab-foreground: Primo piano tab barra laterale
 sidebar-tab-foreground-selected: Primo piano tab barra laterale per tab selezionati
-sidebar-tiddler-link-foreground: Primo piano collegamento frammento barra laterale
-sidebar-tiddler-link-foreground-hover: Primo piano collegamento frammento barra laterale hover
+sidebar-tiddler-link-foreground: Primo piano link frammento barra laterale
+sidebar-tiddler-link-foreground-hover: Primo piano link frammento barra laterale hover
 site-title-foreground: Sfondo titolo sito
 static-alert-foreground: Primo piano alert statico
 tab-background: Sfondo tab
@@ -92,8 +92,8 @@ tiddler-editor-fields-odd: Sfondo editor frammenti per campi dispari
 tiddler-info-background: Sfondo pannello informazioni frammenti
 tiddler-info-border: Bordo pannello informazioni frammenti
 tiddler-info-tab-background: Sfondo tab pannello informazioni frammenti
-tiddler-link-background: Sfondo collegamenti frammenti
-tiddler-link-foreground: Primo piano collegamenti frammenti
+tiddler-link-background: Sfondo link frammenti
+tiddler-link-foreground: Primo piano link frammenti
 tiddler-subtitle-foreground: Primo piano sottotitolo frammenti
 tiddler-title-foreground: Primo piano titolo frammenti
 toolbar-cancel-button: Primo piano pulsante 'annulla' barra strumenti
@@ -105,3 +105,5 @@ toolbar-info-button: Primo piano pulsante 'info' barra strumenti
 toolbar-new-button: Primo piano pulsante 'nuovo frammento' barra strumenti
 toolbar-options-button: Primo piano pulsante 'impostazioni' barra strumenti
 toolbar-save-button: Primo piano pulsante 'salva' barra strumenti
+untagged-background: Sfondo pillola non etichettato
+very-muted-foreground: Primo piano molto attenuato

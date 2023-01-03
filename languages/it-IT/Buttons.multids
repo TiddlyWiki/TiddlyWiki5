@@ -5,7 +5,7 @@ AdvancedSearch/Hint: Ricerca avanzata
 Bold/Caption: Grassetto
 Bold/Hint: Formatta in grassetto la selezione
 Cancel/Caption: Annulla
-Cancel/Hint: Annulla i cambiamenti a questo frammento
+Cancel/Hint: Annulla le modifiche di questo frammento
 Clear/Caption: Cancella
 Clear/Hint: Sostituisci l'immagine con una tinta unita
 Clone/Caption: Clona
@@ -89,9 +89,10 @@ Italic/Caption: Corsivo
 Italic/Hint: Formatta in corsivo la selezione
 Language/Caption: Lingua
 Language/Hint: Scegli la lingua dell'interfaccia
+LayoutSwitcher/Caption: Layout
 LayoutSwitcher/Hint: Apri il pannello di selezione layout
 LineWidth/Caption: Spessore linea
-LineWidth/Hint: Imposta lo spessore linea per il disegno
+LineWidth/Hint: Imposta lo spessore linea di disegno
 Link/Caption: Link
 Link/Hint: Crea link wikitext
 Linkify/Caption: Wikilink
@@ -133,7 +134,7 @@ Permalink/Hint: Imposta la barra degli indirizzi del browser a un link diretto a
 Permaview/Caption: Permaview
 Permaview/Hint: Imposta la barra degli indirizzi del browser a un link diretto a tutti i frammenti in questa storia
 Picture/Caption: Immagine
-Picture/Hint: Inserisci immagine
+Picture/Hint: Inserisci un'immagine
 Preview/Caption: Anteprima
 Preview/Hint: Mostra il pannello di anteprima
 PreviewType/Caption: Tipo di anteprima
@@ -147,7 +148,7 @@ Refresh/Hint: Ricarica completamente il wiki
 RotateLeft/Caption: Ruota a sinistra
 RotateLeft/Hint: Ruota l'immagine di 90 gradi a sinistra
 Save/Caption: Ok
-Save/Hint: Conferma i cambiamenti a questo frammento
+Save/Hint: Conferma le modifiche di questo frammento
 SaveWiki/Caption: Salva le modifiche
 SaveWiki/Hint: Salva le modifiche
 ShowSideBar/Caption: Mostra la barra laterale
@@ -166,7 +167,7 @@ Stamp/New/Title: Nome come mostrato nel menu
 StoryView/Caption: Visualizzazione "storia"
 StoryView/Hint: Scegli la visualizzazione "storia"
 Strikethrough/Caption: barrato
-Strikethrough/Hint: Formatta come barrata la selezione
+Strikethrough/Hint: Barra la selezione
 Subscript/Caption: pedice
 Subscript/Hint: Formatta come pedice la selezione
 Superscript/Caption: apice
@@ -175,12 +176,12 @@ TagManager/Caption: Gestore delle etichette
 TagManager/Hint: Apri il gestore delle etichette
 Theme/Caption: Tema
 Theme/Hint: Scegli il tema grafico
-Timestamp/Caption: Timestamps
-Timestamp/Hint: Scegli se le modifiche aggiornano i  timestamps
-Timestamp/Off/Caption: I timestamps sono disattivati
-Timestamp/Off/Hint: Non aggiornare i timestamps alla modifica dei frammenti
-Timestamp/On/Caption: I timestamps sono attivati
-Timestamp/On/Hint: Aggiornare i timestamps alla modifica dei frammenti
+Timestamp/Caption: Timestamp
+Timestamp/Hint: Scegli se le modifiche aggiornano i  timestamp
+Timestamp/Off/Caption: I timestamp sono disattivati
+Timestamp/Off/Hint: Non aggiornare i timestamp alla modifica dei frammenti
+Timestamp/On/Caption: I timestamp sono attivati
+Timestamp/On/Hint: Aggiornare i timestamp alla modifica dei frammenti
 ToggleSidebar/Hint: Attiva o disattiva la visibilità della barra laterale
 Transcludify/Caption: Trasclusione
 Transcludify/Hint: Racchiudi la selezione tra parentesi graffe

@@ -1,6 +1,5 @@
 title: $:/language/Search/
 
-Advanced/Matches: //<small><<resultCount>> corrispondenze</small>//
 DefaultResults/Caption: Lista
 Filter/Caption: Filtro
 Filter/Hint: Cerca attraverso un [[filtro|https://tiddlywiki.com/static/Filters.html]]

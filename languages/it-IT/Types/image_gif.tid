@@ -2,3 +2,4 @@ title: $:/language/Docs/Types/image/gif
 description: Immagine GIF
 name: image/gif
 group: Immagine
+group-sort: 1

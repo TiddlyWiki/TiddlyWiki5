@@ -1,5 +1,4 @@
 title: $:/language/Modals/SaveInstructions
-type: text/vnd.tiddlywiki
 subtitle: Save your work
 footer: <$button message="tm-close-tiddler">Chiudi</$button>
 help: https://tiddlywiki.com/static/SavingChanges.html

@@ -14,7 +14,7 @@ dependents: Per un plugin, elenca i titoli dei plugin dipendenti
 description: Il testo descrittivo per un plugin o per una modalit&agrave; a dialogo
 draft.of: Per i frammenti bozza, contiene il titolo del frammento di cui questo &egrave; una bozza
 draft.title: Per i frammenti bozza, contiene la proposta di nuovo titolo per il frammento
-footer: Il testo del footer per un wizard
+footer: Il testo del footer per una finestra modale
 hide-body: Il modello di visualizzazione nasconderà i corpi dei frammenti se impostato su ''sì''
 icon: Il titolo del frammento che contiene l'icona associata con il frammento
 library: Indica che il frammento deve essere salvato come una libreria JavaScript se impostato su ''sì''
@@ -29,7 +29,7 @@ plugin-type: Il tipo di plugin di un frammento plugin
 released: La data di rilascio di un TiddlyWiki
 revision: La revisione del frammento mantenuta sul server
 source: L'indirizzo URL sorgente associato con un frammento
-subtitle: Il testo del sottotitolo per un wizard
+subtitle: Il testo del sottotitolo per una finestra modale
 tags: Una lista di etichette associate con un frammento
 text: Il corpo del testo di un frammento
 throttle.refresh: Se presente, rallenta gli aggiornamenti di questo tiddler
