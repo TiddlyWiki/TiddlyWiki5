@@ -7,10 +7,11 @@ Listing/Cancel/Warning: Vuoi annullare l'importazione?
 Listing/Hint: Questi frammenti sono pronti per essere importati:
 Listing/Import/Caption: Importa
 Listing/Preview: Anteprima:
+Listing/Preview/Diff: Diff
 Listing/Preview/DiffFields: Diff (Campi)
 Listing/Preview/Fields: Campi
 Listing/Preview/Text: Testo
-Listing/Preview/TextRaw: testo (non formattato)
+Listing/Preview/TextRaw: Testo (non formattato)
 Listing/Rename/CancelRename: Annulla
 Listing/Rename/ConfirmRename: Rinomina frammento
 Listing/Rename/OverwriteWarning: Un frammento con questo nome esiste già.
