@@ -511,3 +511,5 @@ cs84285, @cs8425, 2022/12/30
 Nick Bell, @newmedicine, 2023/01/01
 
 Frank Kmiec, @fkmiec, 2023-01-01
+
+Pippo Peppo, @pippep, 2023-01-03
