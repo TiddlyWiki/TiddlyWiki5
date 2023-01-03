@@ -143,7 +143,7 @@ var MarkdownParser = function(type,text,options) {
 	var pragma = pluginOpts.renderWikiText ? "\\rules except latex-parser\n" + pluginOpts.renderWikiTextPragma : "\\rules only html entity commentinline commentblock";
 	var env = {}
 	var mdTree = md.parse(text,env);
-	var textToParse = pragma + '\n<div class="markdown">\n\n' + md.renderer.render(mdTree,md.options,env) + '</div>';
+	var textToParse = pragma + '\n<div class="markdown">\n' + md.renderer.render(mdTree,md.options,env) + '</div>';
 
 	//console.log(JSON.stringify(mdTree,null,2));
 	//console.log((pluginOpts.renderWikiText ? "RenderWiki ON:" : "RenderWki OFF:") + "\n----------------\n" + textToParse);
@@ -154,7 +154,7 @@ var MarkdownParser = function(type,text,options) {
 	$tw.utils.parseStringLiteral = parseStringLiteralExt;
 
 	try {
-		wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki",textToParse,{parseAsInline: false, wiki: options.wiki});
+		wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki",textToParse,{parseAsInline: true, wiki: options.wiki});
 	}
 	catch (err) {
 		wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki",

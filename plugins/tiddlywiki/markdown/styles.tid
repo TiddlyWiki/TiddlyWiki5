@@ -33,7 +33,7 @@ code-body: yes
 	color: <<colour tiddler-link-foreground>>;
 	font-size: 0.8em;
 	text-decoration: none;
-	vertical-align: middle;
+	margin-left: 0.25em;
 }
 .markdown a.footnote-ref:target, .markdown .footnote-item:target {
 	background-color: <<colour message-background>>;
