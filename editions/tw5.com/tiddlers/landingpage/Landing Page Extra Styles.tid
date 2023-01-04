@@ -15,7 +15,6 @@ $rules$
 	left: 0;
 	right: 0;
 	transform-origin: 50% 0;
-	perspective: 1000px;
 	transition: transform 0.5s ease-in-out,
 				opacity 0.5s ease-in-out;
 	opacity: 100%;
@@ -24,7 +23,8 @@ $rules$
 <<if-story-river-not-empty """
 
 .story-backdrop {
-	transform: scale(0.5) rotateX(10deg);
+	z-index: -1;
+	transform: perspective(1000px) scale(0.5) rotateX(-20deg);
 	opacity: 50%;
 }
 
