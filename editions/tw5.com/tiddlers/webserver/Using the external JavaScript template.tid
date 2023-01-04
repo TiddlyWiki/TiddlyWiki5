@@ -26,7 +26,7 @@ tiddlywiki YOUR_WIKI_FOLDER --listen 'root-tiddler=$:/core/save/all-external-js'
 
 <<.tip """On Windows, Command Prompt (CMD) users need to replace single quotes `'` with double quotation marks `"`.""">>
 
-!! Initializing a new wiki
+!! Initialising a new wiki
 
 The provided edition `server-external-js` contains all the configuration necessary to use the external ~JavaScript template. Here is an example:
 
@@ -37,10 +37,10 @@ tiddlywiki ./myNewWiki --build listen
 
 The above commands perform the following:
 
-* Create a new wiki with external JavaScript customization included.
+* Create a new wiki with external JavaScript customisation included.
 * Start the server with external ~JavaScript enabled. The server listens on port 8080. Visit http://localhost:8080 in your browser.
 
-To customize your `--build listen` command, see [[tiddlywiki.info Files]] and [[ListenCommand]].
+To customise your `--build listen` command, see [[tiddlywiki.info Files]] and [[ListenCommand]].
 
 ! Using the external ~JavaScript template with the single file configuration
 
@@ -52,7 +52,7 @@ You can use the "external-js" template with your single file wiki, but this requ
 
 If you start your ~TiddlyWiki server in the "external-js" configuration, snapshots you save from the wiki will also have the external-js configuration.
 
-You can click on the "cloud" button and choose <<.icon $:/core/images/download-button>>  ''Save snapshot for offline use''. The html wiki you saved will have a reduced file size compared to a regular snapshot because the ~TiddlyWiki core code has been externalized. However, to be able to use this wiki, you ''must'' also have a copy of ~TiddlyWiki's core ~JavaScript in the same directory; see below for instructions for obtaining it
+You can click on the "cloud" button and choose <<.icon $:/core/images/download-button>>  ''Save snapshot for offline use''. The html wiki you saved will have a reduced file size compared to a regular snapshot because the ~TiddlyWiki core code has been externalised. However, to be able to use this wiki, you ''must'' also have a copy of ~TiddlyWiki's core ~JavaScript in the same directory; see below for instructions for obtaining it
 
 The "server-external-js" edition lets you save the snapshot from the command line:
 
