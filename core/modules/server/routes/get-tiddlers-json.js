@@ -52,7 +52,7 @@ exports.handler = function(request,response,state) {
 	$tw.perf.timer("stringify-tiddlers", "JSON.stringify");
 	var text = JSON.stringify(tiddlers);
 	$tw.perf.timer("stringify-tiddlers");
-	state.sendResponse(200,{"Content-Type": "application/json", "Server-Timing": $tw.perf.generateHeader()},text,"utf8");
+	state.sendResponse(200,{"Content-Type": "application/json", "Server-Timing": $tw.perf.generateHeader() || ""},text,"utf8");
 };
 
 }());

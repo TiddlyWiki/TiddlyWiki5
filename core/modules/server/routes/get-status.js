@@ -30,7 +30,7 @@ exports.handler = function(request,response,state) {
 		tiddlywiki_version: $tw.version
 	});
 	$tw.perf.timer("stringify");
-	state.sendResponse(200,{"Content-Type": "application/json", "Server-Timing": $tw.perf.generateHeader()},text,"utf8");
+	state.sendResponse(200,{"Content-Type": "application/json", "Server-Timing": $tw.perf.generateHeader() || ""},text,"utf8");
 };
 
 }());

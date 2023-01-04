@@ -54,7 +54,7 @@ exports.handler = function(request,response,state) {
 	response.writeHead(204, "OK",{
 		Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\"",
 		"Content-Type": "text/plain",
-		"Server-Timing": $tw.perf.generateHeader()
+		"Server-Timing": $tw.perf.generateHeader() || ""
 	});
 	response.end();
 };

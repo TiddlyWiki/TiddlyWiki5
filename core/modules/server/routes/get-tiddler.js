@@ -43,7 +43,7 @@ exports.handler = function(request,response,state) {
 		$tw.perf.timer("prepare-tiddler", "Prepare fields of tiddler");
 		state.sendResponse(200, {
 				"Content-Type": "application/json",
-				"Server-Timing": $tw.perf.generateHeader()
+				"Server-Timing": $tw.perf.generateHeader() || ""
 			},
 			JSON.stringify(tiddlerFields),
 			"utf8"
