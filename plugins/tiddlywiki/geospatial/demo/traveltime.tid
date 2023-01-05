@@ -9,7 +9,7 @@ tags: $:/tags/GeospatialDemo
 <$action-setfield $tiddler="$:/temp/_Error" text=<<error>>/>
 <$action-setfield $tiddler="$:/temp/_Result" text=<<data>>/>
 <$action-setfield $tiddler="$:/temp/_Headers" text=<<headers>>/>
-<$list filter="[<status>match[200]]" variable="ignore">
+<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
 <$action-setfield $tiddler="$:/temp/_IsochroneLayer" text={{{ [<data>] }}} tags="$:/tags/GeoLayer"/>
 </$list>
 \end
