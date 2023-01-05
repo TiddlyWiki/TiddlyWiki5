@@ -66,9 +66,9 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 			callback: function(err,data,xhr) {
 				var headers = {};
 				$tw.utils.each(xhr.getAllResponseHeaders().split("\r\n"),function(line) {
-					var parts = line.split(":");
-					if(parts.length === 2) {
-						headers[parts[0].toLowerCase()] = parts[1].trim();
+					var pos = line.indexOf(":");
+					if(pos !== -1) {
+						headers[line.substr(0,pos)] = line.substr(pos + 1).trim();
 					}
 				});
 				setBinding(bindStatus,xhr.status === 200 ? "complete" : "error");
