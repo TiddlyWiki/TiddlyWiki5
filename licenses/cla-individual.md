@@ -513,3 +513,5 @@ Nick Bell, @newmedicine, 2023/01/01
 Frank Kmiec, @fkmiec, 2023-01-01
 
 Pippo Peppo, @pippep, 2023-01-03
+
+Scott Sauye, @CrossEye, 2023-01-04
