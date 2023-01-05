@@ -1,0 +1,20 @@
+title: ThisTiddler/Simple
+description: Simple usage of thisTiddler variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\define print-this-tiddler()
+<$text text={{{ [<thisTiddler>!is[blank]else[**MISSING**]] }}}/>
+\end
+
+(<$text text={{{ [<thisTiddler>!is[blank]else[**MISSING**]] }}}/>)
+
+(<<print-this-tiddler>>)
+
++
+title: ExpectedResult
+
+<p>(Output)</p><p>(**MISSING**)</p>

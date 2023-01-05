@@ -32,6 +32,7 @@ options: see below:
 	parseAsInline: true to parse text as inline instead of block
 	wiki: reference to wiki to use
 	_canonical_uri: optional URI of content if text is missing or empty
+	title: optional tiddler title to be available within this parse tree via the variable "thisTiddler"
 */
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
@@ -51,8 +52,9 @@ var WikiParser = function(type,text,options) {
 	this.parseAsInline = options.parseAsInline;
 	// Set current parse position
 	this.pos = 0;
-	// Start with empty output
+	// Start with empty output and initialise insertion point
 	this.tree = [];
+	var topBranch = this.tree;
 	// Assemble the rule classes we're going to use
 	var pragmaRuleClasses, blockRuleClasses, inlineRuleClasses;
 	if(options.rules) {
@@ -82,8 +84,19 @@ var WikiParser = function(type,text,options) {
 	// Instantiate the parser block and inline rules
 	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(inlineRuleClasses,"inline",0);
+	// Set the "thisTiddler" variable
+	var thisTiddlerAssignment = {
+		type: "set",
+		attributes: {
+			name: {type: "string", value: "thisTiddler"},
+			value: {type: "string", value: options.title || ""}
+		},
+		children: []
+	};
+	topBranch.push(thisTiddlerAssignment);
+	topBranch = thisTiddlerAssignment.children;
 	// Parse any pragmas
-	var topBranch = this.parsePragmas();
+	topBranch = this.parsePragmas(topBranch);
 	// Parse the text into inline runs or blocks
 	if(this.parseAsInline) {
 		topBranch.push.apply(topBranch,this.parseInlineRun());
@@ -190,8 +203,8 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 /*
 Parse any pragmas at the beginning of a block of parse text
 */
-WikiParser.prototype.parsePragmas = function() {
-	var currentTreeBranch = this.tree;
+WikiParser.prototype.parsePragmas = function(targetParseTreeNodes) {
+	var currentTreeBranch = targetParseTreeNodes || this.tree;
 	while(true) {
 		// Skip whitespace
 		this.skipWhitespace();

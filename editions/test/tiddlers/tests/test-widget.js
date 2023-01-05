@@ -772,7 +772,7 @@ describe("Widget module", function() {
 		var parseTreeNode = parseText(text,wiki);
 		// Test the resulting parse tree node, since there is no
 		// rendering which may expose a problem.
-		expect(parseTreeNode.children[0].attributes.filter.value).toBe('[prefix[XXX]]');
+		expect(parseTreeNode.children[0].children[0].attributes.filter.value).toBe('[prefix[XXX]]');
 	});
 
 	/** This test reproduces issue #4504.
