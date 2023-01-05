@@ -6,15 +6,24 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
+\import Macro
 \define print-this-tiddler()
-<$text text={{{ [<thisTiddler>!is[blank]else[**MISSING**]] }}}/>
+<$text text=<<thisTiddler>>/>
 \end
 
-(<$text text={{{ [<thisTiddler>!is[blank]else[**MISSING**]] }}}/>)
+(<$text text=<<thisTiddler>>/>)
 
 (<<print-this-tiddler>>)
 
+(<<imported-print-this-tiddler>>)
+
++
+title: Macro
+
+\define imported-print-this-tiddler()
+<$text text=<<thisTiddler>>/>
+\end
 +
 title: ExpectedResult
 
-<p>(Output)</p><p>(**MISSING**)</p>
+<p>(Output)</p><p>(Output)</p><p>(Output)</p>

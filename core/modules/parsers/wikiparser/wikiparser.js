@@ -85,16 +85,19 @@ var WikiParser = function(type,text,options) {
 	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(inlineRuleClasses,"inline",0);
 	// Set the "thisTiddler" variable
-	var thisTiddlerAssignment = {
-		type: "set",
-		attributes: {
-			name: {type: "string", value: "thisTiddler"},
-			value: {type: "string", value: options.title || ""}
-		},
-		children: []
-	};
-	topBranch.push(thisTiddlerAssignment);
-	topBranch = thisTiddlerAssignment.children;
+	if(options.title) {
+		var thisTiddlerAssignment = {
+			type: "set",
+			attributes: {
+				name: {type: "string", value: "thisTiddler"},
+				value: {type: "string", value: options.title}
+			},
+			children: [],
+			doNotImport: true
+		};
+		topBranch.push(thisTiddlerAssignment);
+		topBranch = thisTiddlerAssignment.children;	
+	}
 	// Parse any pragmas
 	topBranch = this.parsePragmas(topBranch);
 	// Parse the text into inline runs or blocks

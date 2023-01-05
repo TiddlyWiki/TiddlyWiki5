@@ -1013,6 +1013,9 @@ exports.parseTiddler = function(title,options) {
 };
 
 exports.parseTextReference = function(title,field,index,options) {
+	options = $tw.utils.extend({
+		title: title
+	},options);
 	var tiddler,
 		text,
 		parserInfo;
@@ -1114,6 +1117,7 @@ options.recursionMarker : optional flag to set a recursion marker, defaults to "
 options.children: optional array of children for the transclude widget
 options.importVariables: optional importvariables filter string for macros to be included
 options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
+options.title: optional tiddler title to be available within this parse tree via the variable "thisTiddler"
 */
 exports.makeTranscludeWidget = function(title,options) {
 	options = options || {};
@@ -1178,6 +1182,7 @@ Parse text in a specified format and render it into another format
 Options include:
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
+title: optional tiddler title to be available within this parse tree via the variable "thisTiddler"
 */
 exports.renderText = function(outputType,textType,text,options) {
 	options = options || {};
