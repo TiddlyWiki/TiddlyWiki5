@@ -71,7 +71,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	L.control.scale().addTo(map);
 	// Add overlays
 	if(this.geomapLayerFilter) {
-		$tw.utils.each(this.wiki.filterTiddlers(this.geomapLayerFilter),function(title) {
+		$tw.utils.each(this.wiki.filterTiddlers(this.geomapLayerFilter,this),function(title) {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler) {
 				var layer = L.geoJSON($tw.utils.parseJSONSafe(tiddler.fields.text || "[]",[])).addTo(map);
@@ -80,7 +80,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	}
 	// Add markers
 	if(this.geomapMarkerFilter) {
-		$tw.utils.each(this.wiki.filterTiddlers(this.geomapMarkerFilter),function(title) {
+		$tw.utils.each(this.wiki.filterTiddlers(this.geomapMarkerFilter,this),function(title) {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler) {
 				var lat = $tw.utils.parseNumber(tiddler.fields.lat || "0"),
