@@ -74,7 +74,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 					$tw.utils.each(Object.keys(widget.variables), function(key) {
 						widgetPointer.variables[key] = widget.variables[key];
 					});
-				} else if(!parseTreeNode.doNotImport) {
+				} else {
 					widgetPointer.children = [widgetPointer.makeChildWidget(node)];
 					// No more regenerating children for
 					// this widget. If it needs to refresh,

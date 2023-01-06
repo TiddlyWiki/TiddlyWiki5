@@ -969,7 +969,6 @@ Parse a block of text of a specified MIME type
 Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 	_canonical_uri: optional string of the canonical URI of this content
-	title: optional tiddler title to be available within this parse tree via the variable "thisTiddler"
 */
 exports.parseText = function(type,text,options) {
 	text = text || "";
@@ -989,8 +988,7 @@ exports.parseText = function(type,text,options) {
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
 		wiki: this,
-		_canonical_uri: options._canonical_uri,
-		title: options.title
+		_canonical_uri: options._canonical_uri
 	});
 };
 
@@ -998,9 +996,7 @@ exports.parseText = function(type,text,options) {
 Parse a tiddler according to its MIME type
 */
 exports.parseTiddler = function(title,options) {
-	options = $tw.utils.extend({
-		title: title
-	},options);
+	options = $tw.utils.extend({},options);
 	var cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
@@ -1013,9 +1009,6 @@ exports.parseTiddler = function(title,options) {
 };
 
 exports.parseTextReference = function(title,field,index,options) {
-	options = $tw.utils.extend({
-		title: title
-	},options);
 	var tiddler,
 		text,
 		parserInfo;
@@ -1117,7 +1110,6 @@ options.recursionMarker : optional flag to set a recursion marker, defaults to "
 options.children: optional array of children for the transclude widget
 options.importVariables: optional importvariables filter string for macros to be included
 options.importPageMacros: optional boolean; if true, equivalent to passing "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]" to options.importVariables
-options.title: optional tiddler title to be available within this parse tree via the variable "thisTiddler"
 */
 exports.makeTranscludeWidget = function(title,options) {
 	options = options || {};
@@ -1182,7 +1174,6 @@ Parse text in a specified format and render it into another format
 Options include:
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
-title: optional tiddler title to be available within this parse tree via the variable "thisTiddler"
 */
 exports.renderText = function(outputType,textType,text,options) {
 	options = options || {};
