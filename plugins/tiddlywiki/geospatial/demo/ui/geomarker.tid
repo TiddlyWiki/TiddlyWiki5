@@ -1,5 +1,7 @@
 title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 
+\define default-traveltime-time() 5400
+
 \define completion-actions()
 <$action-log/>
 <$action-setfield $tiddler="$:/temp/_StatusCode" text=<<status>>/>
@@ -28,7 +30,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
         "lng": {{!!long}}
       },
       "departure_time": "2021-09-27T08:00:00Z",
-      "travel_time": 5400,
+      "travel_time": {{{ [[$:/config/plugins/geospatial/traveltime/time]get[text]else<default-traveltime-time>] }}},
       "transportation": {
         "type": "driving"
       }
@@ -90,6 +92,8 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 <$button actions=<<get-traveltime-actions>>>
 Call ~TravelTime
 </$button>
+
+Maximum time: <$edit-text tiddler="$:/config/plugins/geospatial/traveltime/time" default=<<default-traveltime-time>> tag="input"/> seconds
 
 |Status |<$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status}}/> |
 |Progress |<$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress}}/> |
