@@ -1,6 +1,4 @@
-title: $:/plugins/tiddlywiki/geospatial/demo/traveltime
-caption: Traveltime
-tags: $:/tags/GeospatialDemo
+title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 
 \define completion-actions()
 <$action-log/>
@@ -26,11 +24,11 @@ tags: $:/tags/GeospatialDemo
     {
       "id": "My first isochrone",
       "coords": {
-        "lat": 51.507609,
-        "lng": -0.128315
+        "lat": {{!!lat}},
+        "lng": {{!!long}}
       },
       "departure_time": "2021-09-27T08:00:00Z",
-      "travel_time": 3600,
+      "travel_time": 5400,
       "transportation": {
         "type": "driving"
       }
@@ -52,7 +50,7 @@ tags: $:/tags/GeospatialDemo
 		password-header-X-Api-Key="traveltime-secret-key"
 		password-header-X-Application-Id="traveltime-application-id"
 		body=<<payload>>
-		var-context="Context string"
+		var-currentTiddler=<<currentTiddler>>
 		bind-status="$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status"
 		bind-progress="$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress"
 		oncompletion=<<completion-actions>>
@@ -61,32 +59,40 @@ tags: $:/tags/GeospatialDemo
 </$wikify>
 \end
 
+!! Mapped
 
+<$geomap
+	markers="[<currentTiddler>]"
+/>
+
+!! Distance to other markers
+
+<$let
+	thisLocation={{{ [geopoint{!!lat},{!!long}] }}}
+>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]] -[<currentTiddler>]">
+<li>
+<$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
+--
+<$let
+	otherLocation={{{ [geopoint{!!lat},{!!long}] }}}
+>
+<$text text={{{ [geodistance<thisLocation>,<otherLocation>,[miles]fixed[0]] }}}/> miles
+</$let>
+</li>
+</$list>
+</ul>
+</$let>
+
+!! Travel Time
 
 <$button actions=<<get-traveltime-actions>>>
 Call ~TravelTime
 </$button>
 
-Status:
-<pre><code><$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status}}/></code></pre>
-
-Progress:
-<pre><code><$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress}}/></code></pre>
-
-Response
-
-~StatusCode:
-<pre><code><$text text={{$:/temp/_StatusCode}}/></code></pre>
-
-~StatusText:
-<pre><code><$text text={{$:/temp/_StatusText}}/></code></pre>
-
-Error:
-<pre><code><$text text={{$:/temp/_Error}}/></code></pre>
-
-Headers:
-<pre><code><$text text={{$:/temp/_Headers}}/></code></pre>
-
-Result:
-<pre><code><$text text={{$:/temp/_Result}}/></code></pre>
-
+|Status |<$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status}}/> |
+|Progress |<$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress}}/> |
+|Status Code |<$text text={{$:/temp/_StatusCode}}/> |
+|Status Text |<$text text={{$:/temp/_StatusText}}/> |
+|Error |<$text text={{$:/temp/_Error}}/> |

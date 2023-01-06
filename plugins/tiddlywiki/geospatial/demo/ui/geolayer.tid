@@ -1,0 +1,37 @@
+title: $:/plugins/tiddlywiki/geospatial/demo/ui/geolayer
+
+\define create-intersection()
+<$let
+	intersectLayer={{{ =[<currentTiddler>get[text]] =[<otherLayer>get[text]] +[geointersect[]] }}}
+>
+	<$action-createtiddler $basetitle="$:/temp/_IsochroneLayer" text={{{ [<intersectLayer>] }}} tags="$:/tags/GeoLayer" caption={{{ [<captionThisLayer>addsuffix[ intersected with ]addsuffix<captionOtherLayer>] }}}/>
+</$let>
+\end
+
+!! Mapped
+
+
+<$geomap
+	layers="[<currentTiddler>]"
+/>
+
+!! Intersect with other layers
+
+<$let 
+	captionThisLayer={{!!caption}}
+>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoLayer]sort[caption]] -[<currentTiddler>]" variable="otherLayer">
+<$let
+	captionOtherLayer={{{ [<otherLayer>get[caption]else<otherLayer>] }}}
+>
+<li>
+<$link to=<<otherLayer>>><$transclude tiddler=<<otherLayer>> field="caption"><$view tiddler=<<otherLayer>> field="title"/></$transclude></$link>
+<$button actions=<<create-intersection>>>
+Create intersection
+</$button>
+</li>
+</$let>
+</$list>
+</ul>
+</$let>

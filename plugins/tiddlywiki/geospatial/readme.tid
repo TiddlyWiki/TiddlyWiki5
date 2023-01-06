@@ -2,4 +2,4 @@ title: $:/plugins/tiddlywiki/geospatial/readme
 
 ! Demos
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/traveltime">>
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/data">>
