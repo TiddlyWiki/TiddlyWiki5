@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/geospatial/demo/data
+caption: Demo Data
+tags: $:/tags/GeospatialDemo
+
+! Geo Markers
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]]">
+<li>
+<$link>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</$link>
+</li>
+</$list>
+</ul>
+
+! Geo Layers
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoLayer]sort[caption]]">
+<li>
+<$link>
+<$transclude field="caption"><$view field="title"/></$transclude>
+</$link>
+</li>
+</$list>
+</ul>
