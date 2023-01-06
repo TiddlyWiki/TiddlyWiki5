@@ -18,7 +18,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geolayer
 !! Intersect with other layers
 
 <$let 
-	captionThisLayer={{!!caption}}
+	captionThisLayer={{{ [<currentTiddler>get[caption]else<currentTiddler>] }}}
 >
 <ul>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoLayer]sort[caption]] -[<currentTiddler>]" variable="otherLayer">
