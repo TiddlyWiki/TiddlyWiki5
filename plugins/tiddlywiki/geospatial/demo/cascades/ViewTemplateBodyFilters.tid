@@ -1,0 +1,6 @@
+title: $:/plugins/geospatial/demo/ViewTemplateBodyFilters
+tags: $:/tags/ViewTemplateBodyFilter
+list-before: $:/config/ViewTemplateBodyFilters/stylesheet
+
+[tag[$:/tags/GeoLayer]then[$:/plugins/tiddlywiki/geospatial/demo/ui/geolayer]]
+[tag[$:/tags/GeoMarker]then[$:/plugins/tiddlywiki/geospatial/demo/ui/geomarker]]
