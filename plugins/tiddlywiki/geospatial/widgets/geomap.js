@@ -74,7 +74,13 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		$tw.utils.each(this.wiki.filterTiddlers(this.geomapLayerFilter,this),function(title) {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler) {
-				var layer = L.geoJSON($tw.utils.parseJSONSafe(tiddler.fields.text || "[]",[])).addTo(map);
+				var layer = L.geoJSON($tw.utils.parseJSONSafe(tiddler.fields.text || "[]",[]),{
+					style: function(geoJsonFeature) {
+						return {
+							color: tiddler.getFieldString("color") || "yellow"
+						}
+					}
+				}).addTo(map);
 			}
 		});
 	}
