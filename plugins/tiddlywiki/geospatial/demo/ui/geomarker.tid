@@ -29,7 +29,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
         "lat": {{!!lat}},
         "lng": {{!!long}}
       },
-      "departure_time": "2021-09-27T08:00:00Z",
+      "departure_time": "2023-02-27T08:00:00Z",
       "travel_time": {{{ [[$:/config/plugins/geospatial/traveltime/time]get[text]else<default-traveltime-time>] }}},
       "transportation": {
         "type": "driving"
