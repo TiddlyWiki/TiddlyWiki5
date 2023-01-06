@@ -8,7 +8,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 <$action-setfield $tiddler="$:/temp/_Result" text=<<data>>/>
 <$action-setfield $tiddler="$:/temp/_Headers" text=<<headers>>/>
 <$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
-<$action-setfield $tiddler="$:/temp/_IsochroneLayer" text={{{ [<data>] }}} tags="$:/tags/GeoLayer"/>
+<$action-createtiddler $basetitle="$:/temp/_IsochroneLayer" text={{{ [<data>] }}} tags="$:/tags/GeoLayer" caption={{{ [<currentTiddler>get[caption]else<currentTiddler>addprefix[Travel time from ]] }}}/>
 </$list>
 \end
 
