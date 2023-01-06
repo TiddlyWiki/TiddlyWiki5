@@ -67,6 +67,8 @@ TranscludeWidget.prototype.execute = function() {
 	if(this.recursionMarker === "yes") {
 		this.setVariable("transclusion",recursionMarker);
 	}
+	// Set 'thisTiddler'
+	this.setVariable("thisTiddler",this.transcludeTitle);
 	// Check for recursion
 	if(parser) {
 		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
