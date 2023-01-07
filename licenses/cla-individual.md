@@ -515,3 +515,5 @@ Frank Kmiec, @fkmiec, 2023-01-01
 Pippo Peppo, @pippep, 2023-01-03
 
 Scott Sauye, @CrossEye, 2023-01-04
+
+Marcus Winter, @yaisog, 2023-01-07
