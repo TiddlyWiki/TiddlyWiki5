@@ -1,5 +1,5 @@
 created: 20150219175930000
-modified: 20220122182842041
+modified: 20230107165037493
 tags: Concepts [[WikiText Parser Modes]]
 title: Pragma
 type: text/vnd.tiddlywiki
@@ -7,6 +7,8 @@ type: text/vnd.tiddlywiki
 A <<.def pragma>> is a special component of WikiText that provides control over the way the remaining text is parsed.
 
 Pragmas occupy lines that start with `\`. They can only appear at the start of the text, but blank lines are allowed between them. If a pragma line appears in the main body of the text, it is treated as if it was ordinary text.
+<<.from-version "5.2.6">> Pragmas can have preceding optional whitespace characters.
+
 
 The following pragmas are available:
 
