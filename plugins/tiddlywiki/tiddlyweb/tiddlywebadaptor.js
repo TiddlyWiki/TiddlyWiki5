@@ -23,6 +23,7 @@ function TiddlyWebAdaptor(options) {
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
+	this.logoutIsAvailable = true;
 }
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
@@ -91,6 +92,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				self.isLoggedIn = json.username !== "GUEST";
 				self.isReadOnly = !!json["read_only"];
 				self.isAnonymous = !!json.anonymous;
+				self.logoutIsAvailable = "logout_is_available" in json ? !!json["logout_is_available"] : true;
 			}
 			// Invoke the callback if present
 			if(callback) {
@@ -127,23 +129,28 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 /*
 */
 TiddlyWebAdaptor.prototype.logout = function(callback) {
-	var options = {
-		url: this.host + "logout",
-		type: "POST",
-		data: {
-			csrf_token: this.getCsrfToken(),
-			tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
-		},
-		callback: function(err,data) {
-			callback(err);
-		},
-		headers: {
-			"accept": "application/json",
-			"X-Requested-With": "TiddlyWiki"
-		}
-	};
-	this.logger.log("Logging out:",options);
-	$tw.utils.httpRequest(options);
+	if(this.logoutIsAvailable) {
+		var options = {
+			url: this.host + "logout",
+			type: "POST",
+			data: {
+				csrf_token: this.getCsrfToken(),
+				tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
+			},
+			callback: function(err,data,xhr) {
+				callback(err);
+			},
+			headers: {
+				"accept": "application/json",
+				"X-Requested-With": "TiddlyWiki"
+			}
+		};
+		this.logger.log("Logging out:",options);
+		$tw.utils.httpRequest(options);
+	} else {
+		alert("This server does not support logging out. If you are using basic authentication the only way to logout is close all browser windows");
+		callback(null);
+	}
 };
 
 /*
@@ -191,7 +198,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null,options.tiddlerInfo.adaptorInfo);
+		return callback(null);
 	}
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
@@ -213,7 +220,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				// Invoke the callback
 				callback(null,{
 					bag: etagInfo.bag
-				},etagInfo.revision);				
+				},etagInfo.revision);
 			}
 		}
 	});
@@ -244,7 +251,7 @@ tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null,options.tiddlerInfo.adaptorInfo);
+		return callback(null);
 	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;

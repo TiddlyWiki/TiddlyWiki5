@@ -25,6 +25,7 @@ The JSON data returned comprises the following properties:
 * ''username'' - the username of the currently authenticated user. If undefined, the [[WebServer Parameter: anon-username]] is returned instead
 * ''anonymous'' - true if the current user is anonymous
 * ''read_only'' - true if the current user is restricted to read only access to the server
+* ''logout_is_available'' - true if the server supports logging out (optional, defaults to true)
 * ''space'' - always contains the object `{recipe: "default"}`
 * ''tiddlywiki_version''  - the current TiddlyWiki version
 

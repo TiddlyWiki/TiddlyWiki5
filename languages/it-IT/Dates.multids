@@ -50,6 +50,8 @@ Date/Long/Month/6: Giugno
 Date/Long/Month/7: Luglio
 Date/Long/Month/8: Agosto
 Date/Long/Month/9: Settembre
+Date/Period/am: am
+Date/Period/pm: pm
 Date/Short/Day/0: Do
 Date/Short/Day/1: Lu
 Date/Short/Day/2: Ma
@@ -59,18 +61,16 @@ Date/Short/Day/5: Ve
 Date/Short/Day/6: Sa
 Date/Short/Month/1: Gen
 Date/Short/Month/10: Ott
+Date/Short/Month/11: Nov
 Date/Short/Month/12: Dic
+Date/Short/Month/2: Feb
+Date/Short/Month/3: Mar
+Date/Short/Month/4: Apr
 Date/Short/Month/5: Mag
 Date/Short/Month/6: Giu
 Date/Short/Month/7: Lug
 Date/Short/Month/8: Ago
 Date/Short/Month/9: Set
-Date/Period/am: am
-Date/Period/pm: pm
-Date/Short/Month/11: Nov
-Date/Short/Month/2: Feb
-Date/Short/Month/3: Mar
-Date/Short/Month/4: Apr
 RelativeDate/Future/Days: tra <<period>> giorni
 RelativeDate/Future/Hours: tra <<period>> ore
 RelativeDate/Future/Minutes: tra <<period>> minuti
