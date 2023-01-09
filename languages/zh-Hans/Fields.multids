@@ -1,11 +1,13 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: 外部图像条目的完整的 URI
+author: 一个插件作者的姓名
 bag: 条目的来源集的名称
 caption: 显示于页签或按钮上的标题文字
 code-body: 若设置为 ''yes''，视图模板将以程式码形式显示条目
 color: 条目的 CSS 颜色值
 component: 负责[[提醒条目|AlertMechanism]]的组件名称
+core-version: 对于一个插件，表示与其兼容的 TiddlyWiki 版本
 created: 条目的创建日期
 creator: 条目的创建者
 current-tiddler: 用于缓存[[浏览历史列表|HistoryMechanism]]的最上层条目
@@ -22,7 +24,9 @@ list-before:当前条目名称将被添加到条目排序清单中的设置条�
 list-after: 当前条目名称将被添加到条目排序清单的设置条目名称之后，或若此字段存在但是空的，则被添加于清单的尾端
 modified: 条目的最近修改日期与时间
 modifier: 条目的最近修改者
+module-type: 对于 javascript 条目，指定其为何种模组
 name: 具可读性的插件条目的名称
+parent-plugin: 对于一个插件，指定其为哪个插件的子插件
 plugin-priority: 插件条目的优先级数值
 plugin-type: 插件条目的类型
 released: TiddlyWiki 的发布日期
