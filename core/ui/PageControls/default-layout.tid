@@ -1,13 +1,13 @@
 title: $:/core/ui/Buttons/default-layout
 tags: $:/tags/PageControls $:/tags/LayoutSwitcherButton
-caption: {{$:/core/images/storyview-classic}} {{$:/language/Buttons/DefaultStoryViewLayout/Caption}}
+caption: {{$:/core/images/default-layout-button}} {{$:/language/Buttons/DefaultStoryViewLayout/Caption}}
 description: {{$:/language/Buttons/DefaultStoryViewLayout/Hint}}
 
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/DefaultStoryViewLayout/Hint}} aria-label={{$:/language/Buttons/DefaultStoryViewLayout/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-setfield $tiddler="$:/layout" text=""/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/storyview-classic}}
+{{$:/core/images/default-layout-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/DefaultStoryViewLayout/Caption}}/></span>
