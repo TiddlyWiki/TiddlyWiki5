@@ -1,5 +1,5 @@
 title: $:/core/ui/Buttons/layout
-tags: $:/tags/PageControls
+tags: $:/tags/PageControls $:/tags/LayoutSwitcherButton
 caption: {{$:/core/images/storyview-classic}} {{$:/language/Buttons/DefaultStoryViewLayout/Caption}}
 description: {{$:/language/Buttons/DefaultStoryViewLayout/Hint}}
 
