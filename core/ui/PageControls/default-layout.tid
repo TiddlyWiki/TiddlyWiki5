@@ -5,7 +5,7 @@ description: {{$:/language/Buttons/DefaultStoryViewLayout/Hint}}
 
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/DefaultStoryViewLayout/Hint}} aria-label={{$:/language/Buttons/DefaultStoryViewLayout/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-show-switcher" switch="layout"/>
+<$action-setfield $tiddler="$:/layout" text=""/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/storyview-classic}}
 </$list>
