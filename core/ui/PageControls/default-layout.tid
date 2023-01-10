@@ -1,0 +1,15 @@
+title: $:/core/ui/Buttons/layout
+tags: $:/tags/PageControls
+caption: {{$:/core/images/storyview-classic}} {{$:/language/Buttons/DefaultStoryViewLayout/Caption}}
+description: {{$:/language/Buttons/DefaultStoryViewLayout/Hint}}
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/DefaultStoryViewLayout/Hint}} aria-label={{$:/language/Buttons/DefaultStoryViewLayout/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-show-switcher" switch="layout"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/storyview-classic}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/DefaultStoryViewLayout/Caption}}/></span>
+</$list>
+</$button>
