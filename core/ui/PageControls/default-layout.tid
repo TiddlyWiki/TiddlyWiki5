@@ -1,4 +1,4 @@
-title: $:/core/ui/Buttons/layout
+title: $:/core/ui/Buttons/default-layout
 tags: $:/tags/PageControls $:/tags/LayoutSwitcherButton
 caption: {{$:/core/images/storyview-classic}} {{$:/language/Buttons/DefaultStoryViewLayout/Caption}}
 description: {{$:/language/Buttons/DefaultStoryViewLayout/Hint}}
