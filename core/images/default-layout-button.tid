@@ -1,4 +1,4 @@
-title: $:/core/images/default-layout-button
+title: $:/core/images/reset-layout-button
 tags: $:/tags/Image
 
-<svg class="tc-image-default-layout-button tc-image-button" width="22pt" height="22pt" viewBox="0 0 38 38"><path d="M0 0v38h38V0H0zm35 35H3V3h32v32zM33 5H21v28h12V5zM19 17h-8.667L14 12h-4l-5 7 5 7h4l-3.667-5H19v-4z"/></svg>
+<svg class="tc-image-reset-layout-button tc-image-button" width="22pt" height="22pt" viewBox="0 0 38 38"><path d="M0 0v38h38V0H0zm35 35H3V3h32v32zM33 5H21v28h12V5zM19 17h-8.667L14 12h-4l-5 7 5 7h4l-3.667-5H19v-4z"/></svg>

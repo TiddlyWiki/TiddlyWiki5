@@ -1,0 +1,15 @@
+title: $:/core/ui/Buttons/reset-layout
+tags: $:/tags/PageControls $:/tags/LayoutSwitcherButton
+caption: {{$:/core/images/reset-layout-button}} {{$:/language/Buttons/ResetLayout/Caption}}
+description: {{$:/language/Buttons/ResetLayout/Hint}}
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/ResetLayout/Hint}} aria-label={{$:/language/Buttons/ResetLayout/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-setfield $tiddler="$:/layout" text=""/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/core/images/reset-layout-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/ResetLayout/Caption}}/></span>
+</$list>
+</$button>

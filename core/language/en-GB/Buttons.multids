@@ -16,8 +16,8 @@ ControlPanel/Caption: control panel
 ControlPanel/Hint: Open control panel
 CopyToClipboard/Caption: copy to clipboard
 CopyToClipboard/Hint: Copy this text to the clipboard
-DefaultStoryViewLayout/Caption: Default layout
-DefaultStoryViewLayout/Hint: Switch to the default story view layout
+ResetLayout/Caption: Reset layout
+ResetLayout/Hint: Reset layout to default
 Delete/Caption: delete
 Delete/Hint: Delete this tiddler
 DeleteTiddlers/Caption: delete tiddlers
