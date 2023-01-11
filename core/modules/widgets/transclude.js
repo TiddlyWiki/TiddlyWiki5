@@ -142,7 +142,7 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 					if(node.type === "fill") {
 						if(node.attributes["$name"] && node.attributes["$name"].type === "string") {
 							var slotValueName = node.attributes["$name"].value;
-							self.slotFillParseTrees[slotValueName] = node.children;
+							self.slotFillParseTrees[slotValueName] = node.children || [];
 						}
 						noFillWidgetsFound = false;
 					} else {
@@ -349,7 +349,7 @@ TranscludeWidget.prototype.getTransclusionMetaParameters = function() {
 Fetch the value of a slot
 */
 TranscludeWidget.prototype.getTransclusionSlotFill = function(name,defaultParseTreeNodes) {
-	if(name && this.slotFillParseTrees[name]) {
+	if(name && this.slotFillParseTrees[name] && this.slotFillParseTrees[name].length > 0) {
 		return this.slotFillParseTrees[name];
 	} else {
 		return defaultParseTreeNodes || [];
