@@ -1,0 +1,13 @@
+caption: debug-log
+created: 20230111163645018
+modified: 20230111163645018
+op-input: a [[selection of titles|Title Selection]]
+op-output: the original input titles
+op-parameter: name of a variable
+op-parameter-name: V
+op-purpose: prints a table of the input titles to the console; if optional parameter <<.place V>> is specified, also prints the value of the variable with that name
+tags: [[Conditional Operators]] [[Filter Operators]]
+title: debug-log Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.6">>
