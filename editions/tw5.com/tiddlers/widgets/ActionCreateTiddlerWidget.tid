@@ -1,13 +1,15 @@
 caption: action-createtiddler
 created: 20161020152745942
-modified: 20210601092956998
+modified: 20230111224058974
 tags: Widgets ActionWidgets
 title: ActionCreateTiddlerWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-createtiddler'' widget is an [[action widget|ActionWidgets]] that creates new tiddlers. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+
+The <<.widget "action-createtiddler">> widget is an [[action widget|ActionWidgets]] that creates new tiddlers. ActionWidgets are used within triggering widgets such as the ButtonWidget.
 
 There are several differences from the [[tm-new-tiddler message|WidgetMessage: tm-new-tiddler]]:
 
@@ -18,7 +20,7 @@ There are several differences from the [[tm-new-tiddler message|WidgetMessage: t
 
 The ''action-createtiddler'' widget is invisible.
 
-<<.from-version "5.2.0">> The action widgets contained within the ''action-createtiddler'' widget are executed after the new tiddler has been created with the title of the tiddler in the variable `createTiddler-title` and `createTiddler-draftTitle`.
+<<.from-version "5.2.0">> The action widgets contained in the widget-body of the ''action-createtiddler'' widget are executed after the new tiddler has been created with the title of the tiddler in the variable `createTiddler-title` and `createTiddler-draftTitle`. See the last example.
 
 |!Attribute |!Description |
 |$basetitle |The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique|
@@ -61,4 +63,9 @@ The ''action-createtiddler'' widget is invisible.
 {{ActionCreateTiddlerWidget Example 4}}
 <<<
 
+---
+
+<<<
+{{ActionCreateTiddlerWidget Example 5}}
+<<<
 
