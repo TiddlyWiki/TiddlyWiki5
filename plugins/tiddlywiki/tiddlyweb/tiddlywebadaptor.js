@@ -198,7 +198,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null,options.tiddlerInfo.adaptorInfo);
+		return callback(null);
 	}
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
@@ -220,7 +220,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				// Invoke the callback
 				callback(null,{
 					bag: etagInfo.bag
-				},etagInfo.revision);				
+				},etagInfo.revision);
 			}
 		}
 	});
@@ -251,7 +251,7 @@ tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null,options.tiddlerInfo.adaptorInfo);
+		return callback(null);
 	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
