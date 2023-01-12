@@ -14,7 +14,7 @@ Text editor operation to make a markdown link
 
 exports["make-markdown-link"] = function(event,operation) {
 	if(operation.selection) {
-		if(event.paramObject.text.includes("://")) {
+		if(event.paramObject.text.indexOf("://") !== -1) {
 			operation.replacement = "[" + operation.selection + "](" + event.paramObject.text + ")";
 		} else {
 			operation.replacement = "[" + operation.selection + "](#" + event.paramObject.text.replaceAll(" ", "%20") + ")";
@@ -22,7 +22,7 @@ exports["make-markdown-link"] = function(event,operation) {
 		operation.cutStart = operation.selStart;
 		operation.cutEnd = operation.selEnd;
 	} else {
-		if(event.paramObject.text.includes("://")) {
+		if(event.paramObject.text.indexOf("://") !== -1) {
 			operation.replacement = "<" + event.paramObject.text + ">";
 		} else {
 			operation.replacement = "[](#" + event.paramObject.text.replaceAll(" ", "%20") + ")";

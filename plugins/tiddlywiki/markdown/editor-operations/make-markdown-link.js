@@ -18,7 +18,7 @@ exports["make-markdown-link"] = function(event,operation) {
 	if(operation.selection) {
 		var desc = operation.selection.replace(/[\[\]\\]/g, rs);
 
-		if(event.paramObject.text.includes("://")) {
+		if(event.paramObject.text.indexOf("://") !== -1) {
 			operation.replacement = "[" + desc + "](" + event.paramObject.text.replace(rx, rs) + ")";
 		} else {
 			operation.replacement = "[" + desc + "](#" + encodeURIComponent(event.paramObject.text).replace(rx, rs) + ")";
@@ -26,7 +26,7 @@ exports["make-markdown-link"] = function(event,operation) {
 		operation.cutStart = operation.selStart;
 		operation.cutEnd = operation.selEnd;
 	} else {
-		if(event.paramObject.text.includes("://")) {
+		if(event.paramObject.text.indexOf("://") !== -1) {
 			operation.replacement = "<" + event.paramObject.text.replace(/[<>]/g, function(m, offset, str) {
 				return encodeURI(m);
 			}) + ">";
