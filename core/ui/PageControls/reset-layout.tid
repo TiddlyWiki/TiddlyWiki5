@@ -1,5 +1,5 @@
 title: $:/core/ui/Buttons/reset-layout
-tags: $:/tags/PageControls $:/tags/LayoutSwitcherButton
+tags: $:/tags/PageControls
 caption: {{$:/core/images/reset-layout-button}} {{$:/language/Buttons/ResetLayout/Caption}}
 description: {{$:/language/Buttons/ResetLayout/Hint}}
 

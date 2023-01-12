@@ -1,9 +1,0 @@
-caption: $:/tags/LayoutSwitcherButton
-created: 20201123191935978
-description: marks alternative page layouts
-modified: 20201123192158739
-tags: SystemTags
-title: SystemTag: $:/tags/LayoutSwitcherButton
-type: text/vnd.tiddlywiki
-
-The [[system tag|SystemTags]] `$:/tags/LayoutSwitcherButton` marks buttons that on clicked can switch to an [[alternative page layout|Alternative page layouts]] or the default story view layout.
