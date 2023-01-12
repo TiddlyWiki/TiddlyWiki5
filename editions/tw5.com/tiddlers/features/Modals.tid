@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 Modals (or "wizards") fade the main TiddlyWiki window to display an isolated tiddler that must be explicitly dismissed by the user.
 
-The tiddler to be displayed can contain the following optional fields that are used to customize the modal:
+The tiddler to be displayed can contain the following optional fields that are used to customise the modal:
 
 |!Field |!Description |
 |footer|The footer text for the modal|
