@@ -54,6 +54,7 @@ function SimpleEngine(options) {
 	}
 	if(this.widget.editDir) {
 		this.domNode.setAttribute("dir",this.widget.editDir);
+	}
 	if(this.widget.editAutoComplete) {
 		this.domNode.setAttribute("autocomplete",this.widget.editAutoComplete);
 	}
