@@ -10,6 +10,7 @@ title: Output
 <$let lf={{{ [charcode[10],[13]]}}}>
 
 <$text text={{{
+	[[$$$]setquerystring[habitat],[desert]]
 	[<url>setquerystring[]]
 	[<url>setquerystring[animal],[elephant]]
 	[<url>setquerystring[animal],[elephant]setquerystring[animal],[ostrich]]
@@ -21,6 +22,7 @@ title: Output
 +
 title: ExpectedResult
 
+$$$
 https://tiddlywiki.com/
 https://tiddlywiki.com/?animal=elephant
 https://tiddlywiki.com/?animal=ostrich
