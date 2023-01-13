@@ -1,0 +1,81 @@
+title: WidgetMessage: tm-http-request Example - Flickr
+tags: $:/tags/Macro
+
+\define flickr-get-album-items()
+
+\define completion()
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+	<$action-log msg="In completion"/>
+	<$action-log/>
+	<!-- Success -->
+	<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+		<$list filter="[<data>jsonindexes[photoset],[photo]]" variable="photoIndex">
+			<$let
+				photoData={{{ [<data>jsonextract[photoset],[photo],<photoIndex>] }}}
+				photoFarm={{{ [<photoData>jsonget[farm]] }}}
+				photoServer={{{ [<photoData>jsonget[server]] }}}
+				photoID={{{ [<photoData>jsonget[id]] }}}
+				photoSecret={{{ [<photoData>jsonget[secret]] }}}
+			>
+				<$action-setfield
+					$tiddler={{{ [<photoID>addprefix[Flickr Photo ]] }}}
+					tags="$:/tags/GeoMarker $:/tags/FlickrPhoto"
+					caption={{{ [<photoData>jsonget[title]] }}}
+					lat={{{ [<photoData>jsonget[latitude]] }}}
+					long={{{ [<photoData>jsonget[longitude]] }}}
+					alt="0"
+					photo-url={{{ [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_b.jpg]] }}}
+					icon-url={{{ [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_s.jpg]] }}}
+				/>
+			</$let>
+		</$list>
+	</$list>
+\end completion
+
+\define progress()
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+	<$action-log message="In progress-actions"/>
+\end progress
+
+\define request-url()
+https://api.flickr.com/services/rest/
+\end request-url
+
+<$action-sendmessage
+	$message="tm-http-request"
+	url=<<request-url>>
+	method="GET"
+	query-method="flickr.photosets.getPhotos"
+	query-extras="geo"
+	query-format="json"
+	query-nojsoncallback="1"
+	query-photoset_id={{$:/config/flickr-album}}
+	header-accept="application/json"
+	password-query-api_key="flickr-api-key"
+	bind-status="$:/temp/flickr/status"
+	bind-progress="$:/temp/flickr/progress"
+	oncompletion=<<completion>>
+	onprogress=<<progress>>
+	var-start=<<__start__>>
+	var-limit=<<__limit__>>
+/>
+\end
+
+\define flickr-actions()
+<$macrocall $name="flickr-get-album-items"/>
+\end
+
+! Map of Flickr Photos
+
+Flickr API Key: <$password name="flickr-api-key"/>
+
+Flickr album ID: <$edit-text tiddler="$:/config/flickr-album" tag="input"/>
+
+<$button actions=<<flickr-actions>>>
+Call Flickr
+</$button>
+
+<$geomap
+	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]tag[$:/tags/FlickrPhoto]]"
+
+/>
