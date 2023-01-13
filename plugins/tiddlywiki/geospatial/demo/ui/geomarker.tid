@@ -100,3 +100,11 @@ Maximum time: <$edit-text tiddler="$:/config/plugins/geospatial/traveltime/time"
 |Status Code |<$text text={{$:/temp/_StatusCode}}/> |
 |Status Text |<$text text={{$:/temp/_StatusText}}/> |
 |Error |<$text text={{$:/temp/_Error}}/> |
+
+<$list filter="[<currentTiddler>has[photo-url]]" variable="ignore">
+
+!! Photo
+
+<img src={{!!photo-url}}/>
+
+</$list>
