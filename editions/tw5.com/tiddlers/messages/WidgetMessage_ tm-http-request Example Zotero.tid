@@ -1,6 +1,16 @@
 title: WidgetMessage: tm-http-request Example - Zotero
 tags: $:/tags/Macro
 
+\define select-zotero-group()
+Specify the Zotero group ID to import
+<$edit-text tiddler="$:/config/zotero-group" tag="input"/> or 
+<$select tiddler="$:/config/zotero-group">
+<option value="4813312">com216</option>
+<option value="4913310">pos252</option>
+<option value="4747244">idt575</option>
+</$select>
+\end
+
 \define zotero-save-item(item)
 <$action-createtiddler
 	$basetitle={{{ =[[_zotero_import ]] =[<item>jsonget[key]] =[[ ]] =[<item>jsonget[title]] +[join[]] }}}
@@ -8,6 +18,9 @@ tags: $:/tags/Macro
 	tags="$:/tags/ZoteroImport"
 >
 	<$action-setmultiplefields $tiddler=<<createTiddler-title>> $fields="[<item>jsonindexes[]addprefix[zotero-]]" $values="[<item>jsonindexes[]] :map[<item>jsonget<currentTiddler>else[.XXXXX.]]"/>
+	<$list filter="[<item>jsonindexes[creators]]" variable="creatorIndex">
+		<$action-setmultiplefields $tiddler=<<createTiddler-title>> $fields="[<item>jsonget[creators],<creatorIndex>,[creatorType]addprefix[zotero-]]" $values="[<item>jsonget[creators],<creatorIndex>,[lastName]] [<item>jsonget[creators],<creatorIndex>,[firstName]] +[join[, ]] :else[<item>jsonget[creators],<creatorIndex>,[name]] "/>
+	</$list>
 </$action-createtiddler>
 \end zotero-save-item
 
@@ -40,32 +53,53 @@ tags: $:/tags/Macro
 \end progress
 
 \define request-url()
-https://api.zotero.org/groups/27508/items/?format=json&sort=title
+\rules only transcludeinline transcludeblock filteredtranscludeinline filteredtranscludeblock
+https://api.zotero.org/groups/{{$:/config/zotero-group}}/items/
 \end request-url
 
-<$action-sendmessage
-	$message="tm-http-request"
-	url={{{ [<request-url>setquerystring[start],<__start__>setquerystring[limit],<__limit__>] }}}
-	method="GET"
-	header-accept="application/json"
-	bind-status="$:/temp/zotero/status"
-	bind-progress="$:/temp/zotero/progress"
-	oncompletion=<<completion>>
-	onprogress=<<progress>>
-	var-start=<<__start__>>
-	var-limit=<<__limit__>>
-/>
+<$wikify name="url" text=<<request-url>>>
+	<$action-sendmessage
+		$message="tm-http-request"
+		url=<<url>>
+		method="GET"
+		query-format="json"
+		query-sort="title"
+		query-start=<<__start__>>
+		query-limit=<<__limit__>>
+		header-accept="application/json"
+		bind-status="$:/temp/zotero/status"
+		bind-progress="$:/temp/zotero/progress"
+		oncompletion=<<completion>>
+		onprogress=<<progress>>
+		var-start=<<__start__>>
+		var-limit=<<__limit__>>
+	/>
+</$wikify>
 \end
 
 \define zotero-actions()
-<$macrocall $name="zotero-get-items" start="0" limit="5"/>
+<$macrocall $name="zotero-get-items" start="0" limit="50"/>
 \end
 
+
+<<select-zotero-group>>
+
 <$button actions=<<zotero-actions>>>
-Call Zotero
+Start import from Zotero group
 </$button>
 
-Tiddlers:
+<$list filter="[tag[$:/tags/ZoteroImport]limit[1]]" variable="ignore">
+
+!! Imported Tiddlers
+
+<$button>
+<$action-deletetiddler $filter="[tag[$:/tags/ZoteroImport]]"/>
+Delete these tiddlers
+</$button>
+
+Export: <$macrocall $name="exportButton" exportFilter="[tag[$:/tags/ZoteroImport]]" lingoBase="$:/language/Buttons/ExportTiddlers/"/>
+
+</$list>
 
 <ol>
 <$list filter="[tag[$:/tags/ZoteroImport]]">
