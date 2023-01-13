@@ -18,8 +18,10 @@ The following parameters are used:
 |!Name |!Description |
 |method |HTTP method (eg "GET", "POST") |
 |body |String data to be sent with the request |
-|header-* |Headers with string values|
+|query-* |Query string parameters with string values |
+|header-* |Headers with string values |
 |password-header-* |Headers with values taken from the password store |
+|password-query-* |Query string parameters with values taken from the password store |
 |var-* |Variables to be passed to the completion and progress handlers (without the "var-" prefix) |
 |bind-status |Title of tiddler to which the status of the request ("pending", "complete", "error") should be bound |
 |bind-progress |Title of tiddler to which the progress of the request (0 to 100) should be bound |

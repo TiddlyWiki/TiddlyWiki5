@@ -32,7 +32,9 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 		bindProgress = paramObject["bind-progress"],
 		method = paramObject.method || "GET",
 		HEADER_PARAMETER_PREFIX = "header-",
+		QUERY_PARAMETER_PREFIX = "query-",
 		PASSWORD_HEADER_PARAMETER_PREFIX = "password-header-",
+		PASSWORD_QUERY_PARAMETER_PREFIX = "password-query-",
 		CONTEXT_VARIABLE_PARAMETER_PREFIX = "var-",
 		requestHeaders = {},
 		contextVariables = {},
@@ -45,11 +47,19 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 		setBinding(bindStatus,"pending");
 		setBinding(bindProgress,"0");
 		$tw.utils.each(paramObject,function(value,name) {
+			// Look for query- parameters
+			if(name.substr(0,QUERY_PARAMETER_PREFIX.length) === QUERY_PARAMETER_PREFIX) {
+				url = $tw.utils.setQueryStringParameter(url,name.substr(QUERY_PARAMETER_PREFIX.length),value);
+			}
 			// Look for header- parameters
 			if(name.substr(0,HEADER_PARAMETER_PREFIX.length) === HEADER_PARAMETER_PREFIX) {
 				requestHeaders[name.substr(HEADER_PARAMETER_PREFIX.length)] = value;
 			}
 			// Look for password-header- parameters
+			if(name.substr(0,PASSWORD_QUERY_PARAMETER_PREFIX.length) === PASSWORD_QUERY_PARAMETER_PREFIX) {
+				url = $tw.utils.setQueryStringParameter(url,name.substr(PASSWORD_QUERY_PARAMETER_PREFIX.length),$tw.utils.getPassword(value) || "");
+			}
+			// Look for password-query- parameters
 			if(name.substr(0,PASSWORD_HEADER_PARAMETER_PREFIX.length) === PASSWORD_HEADER_PARAMETER_PREFIX) {
 				requestHeaders[name.substr(PASSWORD_HEADER_PARAMETER_PREFIX.length)] = $tw.utils.getPassword(value) || "";
 			}
@@ -199,6 +209,21 @@ exports.httpRequest = function(options) {
 		options.callback(e,null,this);
 	}
 	return request;
+};
+
+exports.setQueryStringParameter = function(url,paramName,paramValue) {
+	var URL = $tw.browser ? window.URL : require("url").URL,
+		newUrl;
+	try {
+		newUrl = new URL(url);
+	} catch(e) {
+	}
+	if(newUrl && paramName) {
+		newUrl.searchParams.set(paramName,paramValue || "");
+		return newUrl.toString();
+	} else {
+		return url;
+	}
 };
 
 })();
