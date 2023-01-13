@@ -63,7 +63,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		iconHeight = 50;
 	const myIcon = new L.Icon({
 		iconUrl: $tw.utils.makeDataUri(this.wiki.getTiddlerText("$:/plugins/tiddlywiki/geospatial/images/markers/pin"),"image/svg+xml"),
-		iconSize:     [iconHeight * iconProportions, iconHeight], // Side of the icon
+		iconSize:     [iconHeight * iconProportions, iconHeight], // Size of the icon
 		iconAnchor:   [(iconHeight * iconProportions) / 2, iconHeight], // Position of the anchor within the icon
 		popupAnchor:  [0, -iconHeight] // Position of the popup anchor relative to the icon anchor
 	});
@@ -92,8 +92,17 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 				var lat = $tw.utils.parseNumber(tiddler.fields.lat || "0"),
 					long = $tw.utils.parseNumber(tiddler.fields.long || "0"),
 					alt = $tw.utils.parseNumber(tiddler.fields.alt || "0"),
-					caption = tiddler.fields.caption || title;
-				var m = L.marker([lat,long,alt],{icon: myIcon,draggable: false}).bindPopup(caption).addTo(map);
+					caption = tiddler.fields.caption || title,
+					icon = myIcon;
+				if(tiddler.fields["icon-url"]) {
+					icon = new L.Icon({
+						iconUrl: tiddler.fields["icon-url"],
+						iconSize:     [32, 32], // Size of the icon
+						iconAnchor:   [16, 32], // Position of the anchor within the icon
+						popupAnchor:  [16, -32] // Position of the popup anchor relative to the icon anchor
+					});
+				}
+				var m = L.marker([lat,long,alt],{icon: icon,draggable: false}).bindPopup(caption).addTo(map);
 			}
 		});
 	}
