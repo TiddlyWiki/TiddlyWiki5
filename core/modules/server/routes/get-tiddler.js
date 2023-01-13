@@ -17,7 +17,7 @@ exports.method = "GET";
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
-	var title = decodeURIComponent(state.params[0]),
+	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		tiddler = state.wiki.getTiddler(title),
 		tiddlerFields = {},
 		knownFields = [
@@ -36,8 +36,7 @@ exports.handler = function(request,response,state) {
 		tiddlerFields.revision = state.wiki.getChangeCount(title);
 		tiddlerFields.bag = "default";
 		tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-		response.writeHead(200, {"Content-Type": "application/json"});
-		response.end(JSON.stringify(tiddlerFields),"utf8");
+		state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 	} else {
 		response.writeHead(404);
 		response.end();

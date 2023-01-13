@@ -4,7 +4,7 @@ tags: [[Hidden Settings]]
 title: Hidden Setting: Typing Refresh Delay
 type: text/vnd.tiddlywiki
 
-TiddlyWiki defers processing changes to draft tiddlers until a timeout has elapsed (this is called throttling). The mechanism can be extended to other tiddlers by adding a `throttle.refresh` field. See RefreshThrottling for details.
+TiddlyWiki defers processing changes to draft tiddlers and tiddlers with the prefix `$:/temp/volatile/` until a timeout has elapsed (this is called throttling). The mechanism can be extended to other tiddlers by adding a `throttle.refresh` field. See RefreshThrottling for details.
 
 The default value of 400ms gives a good balance of responsiveness in most cases but isn't always optimal on lower powered mobile devices.
 

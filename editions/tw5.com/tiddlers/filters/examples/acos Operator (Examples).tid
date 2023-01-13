@@ -1,0 +1,7 @@
+created: 20211020142658214
+modified: 20211020142724786
+tags: [[acos Operator]] [[Operator Examples]]
+title: acos Operator (Examples)
+
+<<.operator-example 1 "[[2]acos[]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[acos[]]">>

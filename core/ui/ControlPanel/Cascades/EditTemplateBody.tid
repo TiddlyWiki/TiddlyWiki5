@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/EditTemplateBody
+tags: $:/tags/ControlPanel/Cascades
+caption: {{$:/language/ControlPanel/EditTemplateBody/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/EditTemplateBody/
+
+<<lingo Hint>>
+
+{{$:/tags/EditTemplateBodyFilter||$:/snippets/ListTaggedCascade}}

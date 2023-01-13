@@ -31,10 +31,10 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 		headers = {
 			"Accept": "application/json",
 			"Content-Type": "application/json;charset=UTF-8",
-			"Authorization": "Basic " + window.btoa(username + ":" + password)
+			"Authorization": "token " + password
 		};
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
+	if(!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash
@@ -61,7 +61,7 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 			}
 			var use_put = true;
 			if(xhr.status !== 404) {
-				getResponseData = JSON.parse(getResponseDataJson);
+				getResponseData = $tw.utils.parseJSONSafe(getResponseDataJson);
 				$tw.utils.each(getResponseData,function(details) {
 					if(details.name === filename) {
 						sha = details.sha;
@@ -72,7 +72,7 @@ GiteaSaver.prototype.save = function(text,method,callback) {
 				}
 			}
 			var data = {
-				message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				message: $tw.language.getString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: $tw.utils.base64Encode(text),
 				sha: sha
 			};
@@ -104,7 +104,7 @@ GiteaSaver.prototype.upload = function(uri,method,headers,data,callback) {
 			if(err) {
 				return callback(err);
 			}
-			var putResponseData = JSON.parse(putResponseDataJson);
+			var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 			callback(null);
 		}
 	});

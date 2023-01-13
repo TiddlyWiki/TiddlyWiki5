@@ -8,6 +8,12 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.20...v5.1.21]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[Sylvain Comte|https://github.com/sycom]] for his winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/l47ZZzWdDb8/m/a1dnyKG0AQAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/42060acb43b329036b7436ee154bf605e90efa8e/editions/tw5.com/tiddlers/images/New%20Release%20Banner.jpg"
+>>
+
 This is a bug fix release that resolves issues introduced in the recent [[Release 5.1.20]].
 
 !! Bug Fixes

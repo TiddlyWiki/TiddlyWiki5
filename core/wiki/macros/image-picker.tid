@@ -5,22 +5,23 @@ title: $:/core/macros/image-picker
 type: text/vnd.tiddlywiki
 
 \define image-picker-thumbnail(actions)
-<$button tag="a" tooltip="""$(imageTitle)$""">
-$actions$
-<$transclude tiddler=<<imageTitle>>/>
-</$button>
+<$button tag="a" tooltip="""$(imageTitle)$""">$actions$<$transclude tiddler=<<imageTitle>>/></$button>
 \end
 
 \define image-picker-list(filter,actions)
+\whitespace trim
 <$list filter="""$filter$""" variable="imageTitle">
 <$macrocall $name="image-picker-thumbnail" actions="""$actions$"""/>
+&#32;
 </$list>
 \end
 
 \define image-picker(actions,filter:"[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[!has[draft.of]$subfilter$sort[title]]",subfilter:"")
+\whitespace trim
 <div class="tc-image-chooser">
 <$vars state-system=<<qualify "$:/state/image-picker/system">>>
 <$checkbox tiddler=<<state-system>> field="text" checked="show" unchecked="hide" default="hide">
+&#32;
 {{$:/language/SystemTiddlers/Include/Prompt}}
 </$checkbox>
 <$reveal state=<<state-system>> type="match" text="hide" default="hide" tag="div">

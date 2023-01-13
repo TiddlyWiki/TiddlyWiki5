@@ -94,7 +94,7 @@ function makePathRelative(sourcepath,rootpath,options) {
 		return sourcepath;
 	}
 	// Move up a directory for each directory left in the root
-	for(p = c; p < rootParts.length; p++) {
+	for(p = c; p < rootParts.length - 1; p++) {
 		outputParts.push("..");
 	}		
 	// Add on the remaining parts of the source path
@@ -106,19 +106,22 @@ function makePathRelative(sourcepath,rootpath,options) {
 
 function test_makePathRelative() {
 	var test = function(sourcepath,rootpath,result,options) {
-		if(makePathRelative(sourcepath,rootpath,options) !== result) {
-			throw "makePathRelative test failed: makePathRelative(" + sourcepath + "," + rootpath + "," + JSON.stringify(options) + ") is not equal to " + result;			
+		var actualResult = makePathRelative(sourcepath,rootpath,options);
+		if(actualResult !== result) {
+			console.log("makePathRelative test failed: makePathRelative(" + sourcepath + "," + rootpath + "," + JSON.stringify(options) + ") is " + actualResult + " and not equal to " + result);			
 		}
 	};
-	test("/Users/me/something/file.png","/Users/you/something","../../me/something/file.png");
-	test("/Users/me/something/file.png","/Users/you/something","/Users/me/something/file.png",{useAbsoluteForNonDescendents: true});
-	test("/Users/me/something/else/file.png","/Users/me/something","else/file.png");
-	test("/Users/me/something/file.png","/Users/me/something/new","../file.png");
-	test("/Users/me/something/file.png","/Users/me/something/new","/Users/me/something/file.png",{useAbsoluteForNonDescendents: true});
-	test("/Users/me/something/file.png","/Users/me/something","file.png");
-	test("C:\\Users\\me\\something\\file.png","/C:/Users/me/something","file.png",{isWindows: true});
-	test("\\\\SHARE\\Users\\me\\something\\file.png","/SHARE/Users/me/somethingelse","../something/file.png",{isWindows: true});
-	test("\\\\SHARE\\Users\\me\\something\\file.png","/C:/Users/me/something","/SHARE/Users/me/something/file.png",{isWindows: true});
+	test("/Users/me/something/file.png","/Users/you/something/index.html","../../me/something/file.png");
+	test("/Users/me/something/file.png","/Users/you/something/index.html","/Users/me/something/file.png",{useAbsoluteForNonDescendents: true});
+	test("/Users/me/something/else/file.png","/Users/me/something/index.html","else/file.png");
+	test("/Users/me/something/file.png","/Users/me/something/new/index.html","../file.png");
+	test("/Users/me/something/file.png","/Users/me/something/new/index.html","/Users/me/something/file.png",{useAbsoluteForNonDescendents: true});
+	test("/Users/me/something/file.png","/Users/me/something/index.html","file.png");
+	test("/Users/jeremyruston/Downloads/Screenshot 2020-10-18 at 15.33.40.png","/Users/jeremyruston/git/Jermolene/TiddlyWiki5/editions/prerelease/output/index.html","../../../../../../Downloads/Screenshot%202020-10-18%20at%2015.33.40.png");
+	test("/Users/me/nothing/image.png","/Users/me/something/a/b/c/d/e/index.html","../../../../../../nothing/image.png");
+	test("C:\\Users\\me\\something\\file.png","/C:/Users/me/something/index.html","file.png",{isWindows: true});
+	test("\\\\SHARE\\Users\\me\\something\\file.png","/SHARE/Users/me/somethingelse/index.html","../something/file.png",{isWindows: true});
+	test("\\\\SHARE\\Users\\me\\something\\file.png","/C:/Users/me/something/index.html","/SHARE/Users/me/something/file.png",{isWindows: true});
 }
 
 

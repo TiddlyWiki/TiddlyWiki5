@@ -18,9 +18,10 @@ var XLSX = require("$:/plugins/tiddlywiki/xlsx-utils/xlsx.js"),
 	JSZip = require("$:/plugins/tiddlywiki/jszip/jszip.js");
 
 var XLSXImporter = function(options) {
+	this.wiki = options.wiki;
 	this.filename = options.filename;
 	this.text = options.text;
-	this.importSpec = options.importSpec || $tw.wiki.getTiddlerText(DEFAULT_IMPORT_SPEC_TITLE);
+	this.importSpec = options.importSpec || this.wiki.getTiddlerText(DEFAULT_IMPORT_SPEC_TITLE);
 	this.logger = new $tw.utils.Logger("xlsx-utils");
 	this.results = [];
 	if(JSZip) {
@@ -40,7 +41,7 @@ XLSXImporter.prototype.processWorkbook = function() {
 		this.workbook = XLSX.read(this.text,{type:"base64"});
 	}
 	// Read the root import specification
-	this.rootImportSpec = $tw.wiki.getTiddler(this.importSpec);
+	this.rootImportSpec = this.wiki.getTiddler(this.importSpec);
 	if(this.rootImportSpec) {
 		// Iterate through the sheets specified in the list field
 		$tw.utils.each(this.rootImportSpec.fields.list || [],this.processSheet.bind(this));
@@ -49,7 +50,7 @@ XLSXImporter.prototype.processWorkbook = function() {
 
 XLSXImporter.prototype.processSheet = function(sheetImportSpecTitle) {
 	// Get the sheet import specifier
-	this.sheetImportSpec = $tw.wiki.getTiddler(sheetImportSpecTitle);
+	this.sheetImportSpec = this.wiki.getTiddler(sheetImportSpecTitle);
 	if(this.sheetImportSpec) {
 		this.sheetName = this.sheetImportSpec.fields["import-sheet-name"];
 		this.sheet = this.workbook.Sheets[this.sheetName];
@@ -70,7 +71,7 @@ XLSXImporter.prototype.processSheet = function(sheetImportSpecTitle) {
 };
 
 XLSXImporter.prototype.processRow = function(rowImportSpecTitle) {
-	this.rowImportSpec = $tw.wiki.getTiddler(rowImportSpecTitle);
+	this.rowImportSpec = this.wiki.getTiddler(rowImportSpecTitle);
 	if(this.rowImportSpec) {
 		this.tiddlerFields = {};
 		this.skipTiddler = false;
@@ -116,7 +117,7 @@ XLSXImporter.prototype.processRowByField = function() {
 };
 
 XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
-	var fieldImportSpec = $tw.wiki.getTiddler(fieldImportSpecTitle);
+	var fieldImportSpec = this.wiki.getTiddler(fieldImportSpecTitle);
 	if(fieldImportSpec) {
 		var fieldName = fieldImportSpec.fields["import-field-name"],
 			value;

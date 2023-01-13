@@ -1,0 +1,26 @@
+created: 20140122085818089
+fr-title: Partager un TiddlyWiki avec Dropbox
+modified: 20220222195202852
+tags: Learning
+title: Sharing a TiddlyWiki on Dropbox
+type: text/vnd.tiddlywiki
+
+Vous pouvez travailler sur un fichier TiddlyWiki dans Dropbox et publier un lien que chacun pourra visualiser en lecture seule.
+
+# Mettez votre fichier TiddlyWiki dans un répertoire Dropbox
+# Choisir l'option "Partager lien" de Dropbox pour avoir un lien d'accès publique au fichier
+#* Dans l'interface web de Dropbox, c'est possible en cliquant sur l'icone du lien qui apparait au survol du fichier. Dropbox ajoute aussi un élément "Lien Partagé" au menu contextuel du Finder sur OS X et de l'Explorateur Windows
+# L'URL générée par Dropbox aura cette forme<<:>>
+#> `https://www.dropbox.com/s/<gobbledegook>/mywiki.html`
+# Modifier l'URL ainsi, en préservant soigneusement le //gobbledegook//<<:>>
+#> `https://dl.dropboxusercontent.com/s/<gobbledegook>/mywiki.html`
+
+Le résultat est une URL "secrète" que vous pouvez envoyer à d'autres personnes qui auront alors la capacité de découvrir le wiki.
+
+----
+
+Entrez une URL générée par Dropbox ci-dessous et vous pourrez copier-coller l'URL secrète correspondante, ou l'ouvrir en cliquant sur <<gf open>><<:>>
+
+<$edit-text tiddler="$:/temp/dropboxurl" default="https://www.dropbox.com/s/<gobbledegook>/mywiki.html" tag="input" type="text" size="60"/>
+
+<$macrocall $name="dropbox-url" url={{$:/temp/dropboxurl}}/>

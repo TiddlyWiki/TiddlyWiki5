@@ -1,9 +1,10 @@
 created: 20150123223129000
-modified: 20150123223321000
+modified: 20220218023400000
 tags: [[prefix Operator]] [[Operator Examples]]
 title: prefix Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[tag[task]!prefix[Go]]">>
-<<.operator-example 2 "[prefix[$:/languages/]]">>
-<<.operator-example 3 "[prefix[$:/]]" "same as `[is[system]]`">>
+<<.operator-example 2 "[tag[task]!prefix:caseinsensitive[go]]">>
+<<.operator-example 3 "[prefix[$:/languages/]]">>
+<<.operator-example 4 "[prefix[$:/]]" "same as `[is[system]]`">>

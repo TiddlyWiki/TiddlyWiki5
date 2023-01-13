@@ -26,6 +26,12 @@ The breakpoint position between narrow and wide screens. Should include CSS unit
 
 <$edit-text tiddler="$:/config/plugins/menubar/breakpoint" default="" tag="input"/>
 
+!! Contents Tag
+
+The tag for the ~TableOfContents used in the Contents dropdown
+
+<$edit-text tiddler="$:/config/plugins/menubar/TableOfContents/Tag" default="" tag="input"/>
+
 !! Menu Bar Colours
 
 To change the colour of the menu bar, define the colours `menubar-foreground` and `menubar-background` in the currently selected palette

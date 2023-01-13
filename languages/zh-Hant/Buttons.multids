@@ -18,6 +18,8 @@ CopyToClipboard/Caption: 複製到剪貼簿
 CopyToClipboard/Hint: 將此文字複製到剪貼簿
 Delete/Caption: 刪除
 Delete/Hint: 刪除此條目
+DeleteTiddlers/Caption: 刪除條目
+DeleteTiddlers/Hint: 刪除條目
 Edit/Caption: 編輯
 Edit/Hint: 編輯此條目
 Encryption/Caption: 加密
@@ -52,11 +54,13 @@ Help/Hint: 顯示說明中心
 Home/Caption: 首頁
 Home/Hint: 開啟首頁條目
 Import/Caption: 導入
-Import/Hint: 導入許多類型的檔案包括文字、圖像、TiddlyWiki 或 JSON
+Import/Hint: 導入許多類型的檔案包括文字、圖像、~TiddlyWiki 或 JSON
 Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
 Language/Hint: 選擇使用者介面語言
+LayoutSwitcher/Hint: 開啟版面切換器
+LayoutSwitcher/Caption: 版面
 Manager/Caption: 條目管理器
 Manager/Hint: 開啟條目管理器
 More/Caption: 更多

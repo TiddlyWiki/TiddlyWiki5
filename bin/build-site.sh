@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.1.21
+    TW5_BUILD_VERSION=v5.2.6
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -107,7 +107,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /empty.html			Empty
 # /empty.hta			For Internet Explorer
 node $TW5_BUILD_TIDDLYWIKI \
-	./editions/empty \
+	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--build empty \
@@ -230,6 +230,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/editions/tw5.com-docs/ \
+	--build index \
+	|| exit 1
+
+# /editions/twitter-archivist/index.html	Twitter Archivist edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/twitter-archivist \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/editions/twitter-archivist/ \
 	--build index \
 	|| exit 1
 
@@ -450,7 +459,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
-	--build \
+	--build library\
 	|| exit 1
 
 # Delete the temporary build tiddler

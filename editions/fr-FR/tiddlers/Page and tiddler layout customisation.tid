@@ -25,7 +25,7 @@ Imaginons que vous ayez un tiddler squelette appelé 'Modèle Recette', et que v
 
 # Pour illustrer votre bouton, si aucune des images du noyau (tiddlers shadow préfixés par $:/core/images/ ) n'est à votre convenance, vous devrez la créer ou en obtenir une au format SVG (par exemple, une de celles de http://flaticon.com), glissez-la dans votre fichier pour la transformer en tiddler, modifiez le tiddler et ajustez sa hauteur et sa largeur à 22px
 #Passons au tiddler contenant votre tiddler. Créez-le, titrez-le et ajoutez le code du bouton (voir le code ci-dessous par exemple, en l'adaptant à vos besoins si nécessaire) Étiquetez-le par [[$:/tags/ViewToolbar]]
-#Contrôlons la visibilité de votre tiddler dans la barre d'outil par la création d'un tiddler à titrer [[$:/config/ViewToolbarButtons/Visibility/Recette]]. Saisissez `reveal`dans la zone texte et sauvegardez.
+#Contrôlons la visibilité de votre tiddler dans la barre d'outil par la création d'un tiddler à titrer [[$:/config/ViewToolbarButtons/Visibility/Recette]]. Saisissez `show`dans la zone texte et sauvegardez.
 #Enfin, positionnons le bouton proprement. Ouvrez le tiddler $:/tags/ViewToolbar et insérez le titre de votre tiddler bouton (cf. titre étape précédente) dans le champ field au bon endroit.
 
 ```

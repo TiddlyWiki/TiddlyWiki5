@@ -1,0 +1,16 @@
+created: 20140920124011558
+modified: 20210106151027644
+tags: [[Community Plugins]]
+title: Tinka by Andreas Hahn
+type: text/vnd.tiddlywiki
+url: https://tinkaplugin.github.io/
+
+The Tinka plugin provides the ability to create and modify plugins in the browser, without requiring the use of Node.js.
+
+See https://github.com/TinkaPlugin/Tinka for the GitHub repo.
+
+{{!!url}}
+
+<<<
+This is a Control Panel extension that aims to simplify the plugin creation and editing process. After installing, you will find a new tab in your control panel that makes creating and modifying plugins a little bit easier.
+<<<

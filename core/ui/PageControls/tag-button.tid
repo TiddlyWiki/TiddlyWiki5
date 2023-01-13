@@ -5,12 +5,15 @@ description: {{$:/language/Buttons/TagManager/Hint}}
 
 \whitespace trim
 \define control-panel-button(class)
+\whitespace trim
 <$button to="$:/TagManager" tooltip={{$:/language/Buttons/TagManager/Hint}} aria-label={{$:/language/Buttons/TagManager/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/tag-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/TagManager/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/TagManager/Caption}}/>
+</span>
 </$list>
 </$button>
 \end

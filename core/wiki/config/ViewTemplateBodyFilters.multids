@@ -1,0 +1,10 @@
+title: $:/config/ViewTemplateBodyFilters/
+tags: $:/tags/ViewTemplateBodyFilter
+
+stylesheet: [tag[$:/tags/Stylesheet]then[$:/core/ui/ViewTemplate/body/rendered-plain-text]]
+system: [prefix[$:/boot/]] [prefix[$:/config/]] [prefix[$:/core/macros]] [prefix[$:/core/save/]] [prefix[$:/core/templates/]] [prefix[$:/core/ui/]split[/]count[]compare:number:eq[4]] [prefix[$:/info/]] [prefix[$:/language/]] [prefix[$:/languages/]] [prefix[$:/snippets/]] [prefix[$:/state/]] [prefix[$:/status/]] [prefix[$:/info/]] [prefix[$:/temp/]] +[!is[image]limit[1]then[$:/core/ui/ViewTemplate/body/code]]
+code-body: [field:code-body[yes]then[$:/core/ui/ViewTemplate/body/code]]
+import: [field:plugin-type[import]then[$:/core/ui/ViewTemplate/body/import]]
+plugin: [has[plugin-type]then[$:/core/ui/ViewTemplate/body/plugin]]
+hide-body: [field:hide-body[yes]then[$:/core/ui/ViewTemplate/body/blank]]
+default: [[$:/core/ui/ViewTemplate/body/default]]

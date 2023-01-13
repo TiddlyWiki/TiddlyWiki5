@@ -59,7 +59,7 @@ Save raw tiddlers matching a filter to an S3 bucket.
 * ''filter'': filter identifying tiddlers to render
 * ''region'': AWS region
 * ''bucket'': name of the bucket to save the files
-* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
+* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[aws-encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
 * ''savetypefilter'': optional; a filter that is passed the title of the tiddler being saved and should yield the MIME type for the saved file (defaults to a filter that yields the value of the ''type'' field)
 
 ! "s3-rendertiddler" subcommand
@@ -91,6 +91,6 @@ Save the results of rendering tiddlers identified by a filter to files in an S3 
 * ''template'': template for rendering each tiddler
 * ''region'': AWS region
 * ''bucket'': name of the bucket to save the rendered file
-* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
+* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[aws-encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
 * ''type'': optional render type (defaults to "text/html")
 * ''savetypefilter'': optional; a filter that is passed the title of the tiddler being rendered and should yield the MIME type for the saved file (defaults to the value of the ''type'' field via `[is[tiddler]get[type]]`)

@@ -30,11 +30,7 @@ exports.getEditionInfo = function() {
 				var entry = entries[entryIndex];
 				// Check if directories have a valid tiddlywiki.info
 				if(!editionInfo[entry] && $tw.utils.isDirectory(path.resolve(editionPath,entry))) {
-					var info;
-					try {
-						info = JSON.parse(fs.readFileSync(path.resolve(editionPath,entry,"tiddlywiki.info"),"utf8"));
-					} catch(ex) {
-					}
+					var info = $tw.utils.parseJSONSafe(fs.readFileSync(path.resolve(editionPath,entry,"tiddlywiki.info"),"utf8"),null);
 					if(info) {
 						editionInfo[entry] = info;
 					}

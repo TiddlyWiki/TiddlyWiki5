@@ -1,7 +1,8 @@
 {
 	"description": "Innerwiki Plugin Demo",
 	"plugins": [
-		"tiddlywiki/innerwiki"
+		"tiddlywiki/innerwiki",
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

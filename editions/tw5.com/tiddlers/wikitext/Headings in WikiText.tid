@@ -1,9 +1,9 @@
+caption: Headings
 created: 20131205161234909
-modified: 20190412000000000
+modified: 20220513110830487
 tags: WikiText
 title: Headings in WikiText
 type: text/vnd.tiddlywiki
-caption: Headings
 
 Headings are specified with one up to six leading `!` characters:
 
@@ -17,4 +17,4 @@ Headings are specified with one up to six leading `!` characters:
 
 CSS classes can be assigned to individual headings like this:
 
-<<wikitext-example src:"" "!!.myStyle This heading has the class `myStyle`">>
+<<wikitext-example src:"""!!.myStyle This heading has the class `myStyle`""">>

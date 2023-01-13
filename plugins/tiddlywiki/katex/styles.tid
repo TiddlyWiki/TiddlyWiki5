@@ -13,10 +13,16 @@ tags: [[$:/tags/Stylesheet]]
     text-rendering: auto;
 }
 
+/* Reset Automatic Numbering on a per tiddler basis */
+
+.tc-tiddler-frame {
+	counter-reset: katexEqnNo;
+}
+
 /* Avoid TW5's max-width: 100% */
 
 .katex svg {
-  max-width: initial;
+	max-width: initial;
 }
 
 /* Override font URLs */
@@ -82,6 +88,13 @@ tags: [[$:/tags/Stylesheet]]
 	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Regular.woff'>>) format('woff');
 	font-weight: 400;
 	font-style: normal;
+}
+
+@font-face {
+	font-family: KaTeX_Math;
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-BoldItalic.woff'>>) format('woff');
+	font-weight: 700;
+	font-style: italic;
 }
 
 @font-face {

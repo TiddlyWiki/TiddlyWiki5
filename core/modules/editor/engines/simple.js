@@ -54,6 +54,11 @@ function SimpleEngine(options) {
 	}
 	if(this.widget.editDir) {
 		this.domNode.setAttribute("dir",this.widget.editDir);
+	if(this.widget.editAutoComplete) {
+		this.domNode.setAttribute("autocomplete",this.widget.editAutoComplete);
+	}
+	if(this.widget.isDisabled === "yes") {
+		this.domNode.setAttribute("disabled",true);
 	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
@@ -71,10 +76,21 @@ Set the text of the engine if it doesn't currently have focus
 SimpleEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode || text === "") {
-			this.domNode.value = text;
+			this.updateDomNodeText(text);
 		}
 		// Fix the height if needed
 		this.fixHeight();
+	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+SimpleEngine.prototype.updateDomNodeText = function(text) {
+	try {
+		this.domNode.value = text;
+	} catch(e) {
+		// Ignore
 	}
 };
 
@@ -118,6 +134,9 @@ Handle a dom "input" event which occurs when the text has changed
 SimpleEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
+	if(this.widget.editInputActions) {
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
+	}
 	return true;
 };
 
@@ -125,6 +144,9 @@ SimpleEngine.prototype.handleInputEvent = function(event) {
 Handle a dom "focus" event
 */
 SimpleEngine.prototype.handleFocusEvent = function(event) {
+	if(this.widget.editCancelPopups) {
+		$tw.popup.cancel(0);
+	}
 	if(this.widget.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNode,

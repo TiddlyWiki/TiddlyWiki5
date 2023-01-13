@@ -1,0 +1,88 @@
+title: $:/language/
+
+Date/DaySuffix/1: .
+Date/DaySuffix/2: .
+Date/DaySuffix/3: .
+Date/DaySuffix/4: .
+Date/DaySuffix/5: .
+Date/DaySuffix/6: .
+Date/DaySuffix/7: .
+Date/DaySuffix/8: .
+Date/DaySuffix/9: .
+Date/DaySuffix/10: .
+Date/DaySuffix/11: .
+Date/DaySuffix/12: .
+Date/DaySuffix/13: .
+Date/DaySuffix/14: .
+Date/DaySuffix/15: .
+Date/DaySuffix/16: .
+Date/DaySuffix/17: .
+Date/DaySuffix/18: .
+Date/DaySuffix/19: .
+Date/DaySuffix/20: .
+Date/DaySuffix/21: .
+Date/DaySuffix/22: .
+Date/DaySuffix/23: .
+Date/DaySuffix/24: .
+Date/DaySuffix/25: .
+Date/DaySuffix/26: .
+Date/DaySuffix/27: .
+Date/DaySuffix/28: .
+Date/DaySuffix/29: .
+Date/DaySuffix/30: .
+Date/DaySuffix/31: .
+Date/Long/Day/0: Niedziela
+Date/Long/Day/1: Poniedziałek
+Date/Long/Day/2: Wtorek
+Date/Long/Day/3: Środa
+Date/Long/Day/4: Czwartek
+Date/Long/Day/5: Piątek
+Date/Long/Day/6: Sobota
+Date/Long/Month/1: Styczeń
+Date/Long/Month/2: Luty
+Date/Long/Month/3: Marzec
+Date/Long/Month/4: Kwiecień
+Date/Long/Month/5: Maj
+Date/Long/Month/6: Czerwiec
+Date/Long/Month/7: Lipiec
+Date/Long/Month/8: Sierpień
+Date/Long/Month/9: Wrzesień
+Date/Long/Month/10: Październik
+Date/Long/Month/11: Listopad
+Date/Long/Month/12: Grudzień
+Date/Period/am: AM
+Date/Period/pm: PM
+Date/Short/Day/0: nd
+Date/Short/Day/1: pn
+Date/Short/Day/2: wt
+Date/Short/Day/3: śr
+Date/Short/Day/4: cz
+Date/Short/Day/5: pt
+Date/Short/Day/6: sb
+Date/Short/Month/1: st
+Date/Short/Month/2: lut
+Date/Short/Month/3: mrz
+Date/Short/Month/4: kw
+Date/Short/Month/5: maj
+Date/Short/Month/6: cz
+Date/Short/Month/7: lip
+Date/Short/Month/8: sier
+Date/Short/Month/9: wrz
+Date/Short/Month/10: paź
+Date/Short/Month/11: lis
+Date/Short/Month/12: gr
+RelativeDate/Future/Days: <<period>> dni od teraz
+RelativeDate/Future/Hours: <<period>> godzin od teraz
+RelativeDate/Future/Minutes: <<period>> minut od teraz
+RelativeDate/Future/Months: <<period>> miesięcy od teraz
+RelativeDate/Future/Second: 1 sekunda od teraz
+RelativeDate/Future/Seconds: <<period>> sekund od teraz
+RelativeDate/Future/Years: <<period>> lat od teraz
+RelativeDate/Past/Days: <<period>> dni temu
+RelativeDate/Past/Hours: <<period>> godizn temu
+RelativeDate/Past/Minutes: <<period>> minut temu
+RelativeDate/Past/Months: <<period>> miesięcy temu
+RelativeDate/Past/Second: 1 sekundę temu
+RelativeDate/Past/Seconds: <<period>> sekund temu
+RelativeDate/Past/Years: <<period>> lat temu
+

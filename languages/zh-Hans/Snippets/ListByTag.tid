@@ -1,5 +1,5 @@
 title: $:/language/Snippets/ListByTag
 tags: $:/tags/TextEditor/Snippet
-caption: 依标签筛选的条目列表
+caption: 按标签筛选的条目列表
 
 <<list-links "[tag[task]sort[title]]">>

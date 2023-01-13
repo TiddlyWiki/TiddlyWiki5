@@ -1,0 +1,33 @@
+created: 20210428074912172
+modified: 20210428085746041
+tags: [[Filter Syntax]] [[Sort Filter Run Prefix]] [[Filter Run Prefix Examples]]
+title: Sort Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+Sort by title length:
+
+<<.operator-example 1 "[all[tiddlers]] :sort:number[length[]] +[limit[10]]">>
+
+Sort by title length reversed:
+
+<<.operator-example 2 "[all[tiddlers]] :sort:number:reverse[length[]] +[limit[10]]">>
+
+Sort by text length:
+
+<<.operator-example 3 "[all[tiddlers]] :sort:number[get[text]length[]] +[limit[10]]">>
+
+Sort by newest of modified dates:
+
+<<.operator-example 4 "[tag[Field Operators]] :sort:date[get[modified]else[19700101]] +[limit[10]]">>
+
+Sort by title:
+<<.operator-example 5 "[tag[Field Operators]] :sort:string:casesensitive[get[caption]] +[limit[10]]">>
+
+Sort by title in reverse order:
+<<.operator-example 6 "[tag[Field Operators]] :sort:string:casesensitive,reverse[get[caption]] +[limit[10]]">>
+
+Sort as text with case sensitivity:
+<<.operator-example 7 "Apple Banana Orange Grapefruit guava DragonFruit Kiwi apple orange  :sort:string:casesensitive[{!!title}]">>
+
+Sort as text ignoring case:
+<<.operator-example 8 "Apple Banana Orange Grapefruit guava DragonFruit Kiwi apple orange :sort:string:caseinsensitive[{!!title}]">>

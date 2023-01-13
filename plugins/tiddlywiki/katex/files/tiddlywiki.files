@@ -27,12 +27,14 @@
 			"prefix": "(function(document) {\n",
 			"suffix": "\n})(!$tw.browser ? $tw.fakeDocument : window.document)\n"
 		},{
-			"file": "mhchem.min.js",
+			"file": "contrib/mhchem.min.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/katex/mhchem.min.js",
 				"module-type": "library"
-			}
+			},
+			"prefix": "(function(realRequire) {var require = function(m) {if(m===\"katex\"){m = \"$:/plugins/tiddlywiki/katex/katex.min.js\"};return realRequire(m);};",
+			"suffix": "})(require);\n"
 		}
 	]
 }

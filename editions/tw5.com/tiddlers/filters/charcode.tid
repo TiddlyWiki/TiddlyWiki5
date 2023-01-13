@@ -1,0 +1,17 @@
+caption: charcode
+created: 20210622214425635
+modified: 20210622214425635
+op-input: ignored
+op-output: a string formed from concatenating the characters specified by the numeric codes given in the operand(s)
+op-parameter: numeric character code
+op-parameter-name: C
+op-purpose: generates string characters from their numeric character codes
+tags: [[Filter Operators]]
+title: charcode Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.0">>
+
+This operator returns a string formed from concatenating the characters specified by the numeric codes given in one or more operands. It is useful for generating special characters such as tab (`charcode[9]`) or new line (`charcode[13],[10]`).
+
+<<.operator-examples "charcode">>

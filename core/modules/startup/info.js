@@ -21,29 +21,37 @@ exports.synchronous = true;
 var TITLE_INFO_PLUGIN = "$:/temp/info-plugin";
 
 exports.startup = function() {
+	// Function to bake the info plugin with new tiddlers
+	var updateInfoPlugin = function(tiddlerFieldsArray) {
+		// Get the existing tiddlers
+		var json = $tw.wiki.getTiddlerData(TITLE_INFO_PLUGIN,{tiddlers: {}});
+		// Add the new ones
+		$tw.utils.each(tiddlerFieldsArray,function(fields) {
+			if(fields && fields.title) {
+				json.tiddlers[fields.title] = fields;
+			}
+		});
+		// Bake the info tiddlers into a plugin. We use the non-standard plugin-type "info" because ordinary plugins are only registered asynchronously after being loaded dynamically
+		var fields = {
+			title: TITLE_INFO_PLUGIN,
+			type: "application/json",
+			"plugin-type": "info",
+			text: JSON.stringify(json,null,$tw.config.preferences.jsonSpaces)
+		};
+		$tw.wiki.addTiddler(new $tw.Tiddler(fields));
+
+	};
 	// Collect up the info tiddlers
-	var infoTiddlerFields = {};
-	// Give each info module a chance to fill in as many info tiddlers as they want
+	var tiddlerFieldsArray = [];
+	// Give each info module a chance to provide as many info tiddlers as they want as an array, and give them a callback for dynamically updating them
 	$tw.modules.forEachModuleOfType("info",function(title,moduleExports) {
 		if(moduleExports && moduleExports.getInfoTiddlerFields) {
-			var tiddlerFieldsArray = moduleExports.getInfoTiddlerFields(infoTiddlerFields);
-			$tw.utils.each(tiddlerFieldsArray,function(fields) {
-				if(fields) {
-					infoTiddlerFields[fields.title] = fields;
-				}
-			});
+			Array.prototype.push.apply(tiddlerFieldsArray,moduleExports.getInfoTiddlerFields(updateInfoPlugin));
 		}
 	});
-	// Bake the info tiddlers into a plugin. We use the non-standard plugin-type "info" because ordinary plugins are only registered asynchronously after being loaded dynamically
-	var fields = {
-		title: TITLE_INFO_PLUGIN,
-		type: "application/json",
-		"plugin-type": "info",
-		text: JSON.stringify({tiddlers: infoTiddlerFields},null,$tw.config.preferences.jsonSpaces)
-	};
-	$tw.wiki.addTiddler(new $tw.Tiddler(fields));
-	$tw.wiki.readPluginInfo([TITLE_INFO_PLUGIN]);
-	$tw.wiki.registerPluginTiddlers("info");
+	updateInfoPlugin(tiddlerFieldsArray);
+	var changes = $tw.wiki.readPluginInfo([TITLE_INFO_PLUGIN]);
+	$tw.wiki.registerPluginTiddlers("info",[TITLE_INFO_PLUGIN]);
 	$tw.wiki.unpackPluginTiddlers();
 };
 

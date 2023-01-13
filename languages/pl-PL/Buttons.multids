@@ -1,0 +1,193 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: zaawansowane wyszukiwanie
+AdvancedSearch/Hint: Zaawansowane wyszukiwanie
+Cancel/Caption: anuluj
+Cancel/Hint: Odrzuć zmiany dokonane w tym tiddlerze
+Clone/Caption: skopiuj
+Clone/Hint: Skopiuj tego tiddlera
+Close/Caption: zamknij
+Close/Hint: Zamknij tego tiddlera
+CloseAll/Caption: zamknij wszystkie
+CloseAll/Hint: Zamknij wszystkie tiddlery
+CloseOthers/Caption: zamknij pozostale
+CloseOthers/Hint: Zamknij pozostałe tiddlery
+ControlPanel/Caption: panel kontrolny
+ControlPanel/Hint: Otwórz panel kontrolny
+CopyToClipboard/Caption: skopiuj do schowka
+CopyToClipboard/Hint: Skopiuj ten tekst do schowka
+Delete/Caption: usuń
+Delete/Hint: Usuń tiddlera
+DeleteTiddlers/Caption: usuń tiddlery
+DeleteTiddlers/Hint: Usuwa tiddlery
+Edit/Caption: edytuj
+Edit/Hint: Edytuj tego tiddlera
+Encryption/Caption: szyfrowanie
+Encryption/Hint: Ustaw lub usuń hasło wymagane do edycji tej wiki
+Encryption/ClearPassword/Caption: usuń hasło
+Encryption/ClearPassword/Hint: Usuń hasło i zapisz wiki bez szyfrowania
+Encryption/SetPassword/Caption: ustaw hasło
+Encryption/SetPassword/Hint: Ustaw hasło by zapisać tą wiki z szyfrowaniem
+ExportPage/Caption: eksportuj wszystko
+ExportPage/Hint: Eksportuj wszystkie tiddlery
+ExportTiddler/Caption: eksportuj tiddlera
+ExportTiddler/Hint: Eksportuj tego tiddlera
+ExportTiddlers/Caption: eksportuj tiddlery
+ExportTiddlers/Hint: Eksportuj tiddlery
+SidebarSearch/Hint: Wybierz pole wyszukiwania w menu bocznym
+Fold/Caption: zwiń tiddlera
+Fold/Hint: Zwiń treść tego tiddlera
+Fold/FoldBar/Caption: pasek odwijania
+Fold/FoldBar/Hint: Opcjonaly pasek to zwijania i odwijania tiddlerów (zwijanie jest po lewej stronie, rozwijanie na dole tiddlera)
+Unfold/Caption: rozwiń tiddlera
+Unfold/Hint: Rozwiń treść tego tiddlera
+FoldOthers/Caption: zwiń pozostałe tiddlery
+FoldOthers/Hint: Zwiń treść pozostałych tiddlerów
+FoldAll/Caption: zwiń wszystkie tiddlery
+FoldAll/Hint: Zwiń treść wszystkich tiddlerów
+UnfoldAll/Caption: rozwiń wszystkie tiddlery
+UnfoldAll/Hint: Rozwiń treść wszystkich otwartych tiddlerów
+FullScreen/Caption: pełny ekran
+FullScreen/Hint: Wejdź lub opuść tryb pełnego ekranu
+Help/Caption: pomoc
+Help/Hint: Pokaż panel pomocy
+Import/Caption: import
+Import/Hint: Importuj rózne typy plików, takie jak tekst, obrazki, JSON, tiddlery
+Info/Caption: info
+Info/Hint: Wyświetl informacje o tym tiddlerze
+Home/Caption: strona główna
+Home/Hint: Otwórz domyślne tiddlery
+Language/Caption: języki
+Language/Hint: Zmień jezyk interfejsu
+LayoutSwitcher/Hint: Otwórz przełacznik układu
+LayoutSwitcher/Caption: układ
+Manager/Caption: menedżer tiddlerów
+Manager/Hint: Otwórz menedżer tiddlerów
+More/Caption: więcej
+More/Hint: Więcej akcji
+NewHere/Caption: nowy tiddler tu
+NewHere/Hint: Stwórz nowego tiddlera otagowanego tym tiddlerem
+NewJournal/Caption: nowy dziennik
+NewJournal/Hint: Tworzy nowego tiddlera o typie dziennika
+NewJournalHere/Caption: nowy dziennik tu
+NewJournalHere/Hint: Tworzy nowego tiddlera o typie dziennika otagowanego tym tiddlerem
+NewImage/Caption: nowy obraz
+NewImage/Hint: Stwórz nowego tiddlera o typie obrazu
+NewMarkdown/Caption: nowy Markdown tiddler
+NewMarkdown/Hint: Stwórz nowego tiddlera o typie Markdown
+NewTiddler/Caption: nowy tiddler
+NewTiddler/Hint: Stwórz nowego tiddlera
+OpenWindow/Caption: otwórz w nowym oknie
+OpenWindow/Hint: Otwórz tego tiddlera w nowym oknie
+Palette/Caption: paleta
+Palette/Hint: Wybierz paletę kolorów
+Permalink/Caption: bezpośredni link
+Permalink/Hint: Ustaw adres w przeglądarce na bezpośredni link do tego tiddlera
+Permaview/Caption: link do obecnego widoku
+Permaview/Hint: Ustaw adres w przeglądarce na bezpośredni link do obecnego Story River
+Print/Caption: wydrukuj stronę
+Print/Hint: Drukuje aktualną stronę
+Refresh/Caption: odśwież
+Refresh/Hint: Wykonuje pełne odświeżenie wiki
+Save/Caption: zapisz
+Save/Hint: Zapisz zmiany w tiddlerze
+SaveWiki/Caption: zapisz zmiany
+SaveWiki/Hint: Zapisz zmiany w całej wiki
+StoryView/Caption: widok Story River
+StoryView/Hint: Ustal sposób w jaki tiddlery są wyświetlane w Story River (widoku otwartych tiddlerów)
+HideSideBar/Caption: ukryj menu boczne
+HideSideBar/Hint: Ukryj menu boczne
+ShowSideBar/Caption: pokaż menu boczne
+ShowSideBar/Hint: Pokaż menu boczne
+TagManager/Caption: menedżer tagów
+TagManager/Hint: Otwórz menedżer tagów
+Timestamp/Caption: aktualizacje czasu
+Timestamp/Hint: Wybierz czy zmiany mają aktualizować czas
+Timestamp/On/Caption: zmiany czasu są włączone
+Timestamp/On/Hint: Aktualizuj czas edycji po zapisaniu zmian w tiddlerze
+Timestamp/Off/Caption: zmiany czasu są wyłączone
+Timestamp/Off/Hint: Nie aktualizuj czasu po zapisaniu zmian w tiddlerze
+Theme/Caption: motyw
+Theme/Hint: Wybierz szatę graficzną wiki
+Bold/Caption: pogrubienie
+Bold/Hint: Pogrub zaznaczony tekst
+Clear/Caption: wyczyść
+Clear/Hint: Zapełnij obrazek pojedynczym kolorem
+EditorHeight/Caption: wysokość edytora
+EditorHeight/Caption/Auto: Automatycznie zmieniaj wysokość edytora by zmieścić treść
+EditorHeight/Caption/Fixed: Stała wysokość:
+EditorHeight/Hint: Wybierz wysokość edytora
+Excise/Caption:wytnij
+Excise/Caption/Excise: Wykonaj wycięcie
+Excise/Caption/MacroName: Nazwa makra
+Excise/Caption/NewTitle: Tytuł nowego tiddlera:
+Excise/Caption/Replace: Zastąp wycięty tekst:
+Excise/Caption/Replace/Macro: makro
+Excise/Caption/Replace/Link: link
+Excise/Caption/Replace/Transclusion: transkluzja
+Excise/Caption/Tag: Otaguj nowego tiddlera nazwą tego
+Excise/Caption/TiddlerExists: Uwaga: tiddler już istnieje
+Excise/Hint: Wytnij zaznaczony tekst i wstaw go do nowego tidlera
+Heading1/Caption: nagłówek 1
+Heading1/Hint: Zmień zaznaczony tekst na nagłówek 1. stopnia
+Heading2/Caption: nagłówek 2
+Heading2/Hint: Zmień zaznaczony tekst na nagłówek 2. stopnia
+Heading3/Caption: nagłówek 3
+Heading3/Hint: Zmień zaznaczony tekst na nagłówek 3. stopnia
+Heading4/Caption: nagłówek 4
+Heading4/Hint: Zmień zaznaczony tekst na nagłówek 4. stopnia
+Heading5/Caption: nagłówek 5
+Heading5/Hint: Zmień zaznaczony tekst na nagłówek 5. stopnia
+Heading6/Caption: nagłówek 6
+Heading6/Hint: Zmień zaznaczony tekst na nagłówek 1. stopnia
+Italic/Caption: kursywa
+Italic/Hint: Sformatuj zaznaczony tekst kursywą
+LineWidth/Caption: szerokość linii
+LineWidth/Hint: Ustaw szerokość rysowanej linii
+Link/Caption: link
+Link/Hint: Stwórz wikilink
+Linkify/Caption: wikilink
+Linkify/Hint: Zamknij zaznaczony tekst w nawiasach kwadratowych
+ListBullet/Caption: lista punktowana
+ListBullet/Hint: Zamień zaznaczony tekst na listę punktowana
+ListNumber/Caption: lista numerowana
+ListNumber/Hint: Zamień zaznaczony tekst na listę numerowaną
+MonoBlock/Caption: blok o stałej czcionce
+MonoBlock/Hint: Zmień zaznaczony tekst na blok z czcionką o stałej szerokości
+MonoLine/Caption: stała czcionka
+MonoLine/Hint: Zmień czcionkę zaznaczonego tekstu na taką o stałej szerokości
+Opacity/Caption: przeźroczystość
+Opacity/Hint: Ustaw przeźroczystość rysowania
+Paint/Caption: kolor rysowania
+Paint/Hint: Ustaw kolor rysowania
+Picture/Caption: obraz
+Picture/Hint: Dodaj obraz
+Preview/Caption: podgląd
+Preview/Hint: Pokaż panel podglądu
+PreviewType/Caption: rodzaj podglądu
+PreviewType/Hint: Wybierz rodzaj podglądu
+Quote/Caption: cytat
+Quote/Hint: Zamień zaznaczony tekst na cytat
+RotateLeft/Caption: obróć w lewo
+RotateLeft/Hint: Obróc obraz w lewo o 90 stopni
+Size/Caption: rozmiar obrazu
+Size/Caption/Height: Wysokość:
+Size/Caption/Resize: Przeskaluj obraz
+Size/Caption/Width: Szerokość:
+Size/Hint: Ustaw rozmiar obrazu
+Stamp/Caption: pieczątka
+Stamp/Caption/New: Dodaj własną
+Stamp/Hint: Dodaj prekonfigurowany fragment tekstu
+Stamp/New/Title: Nazwa wyświetlana w menu
+Stamp/New/Text:  Tekst fragmetu. Pamiętaj by dodać opis w polu nagłówku.
+Strikethrough/Caption: przekreślenie
+Strikethrough/Hint: Przekreśl zaznaczony tekst
+Subscript/Caption: indeks dolny
+Subscript/Hint: Zamień zaznaczony tekst na indeks dolny
+Superscript/Caption: indeks górny
+Superscript/Hint: Zamień zaznaczony tekst na indeks górny
+ToggleSidebar/Hint: Zmień widzialność menu bocznego
+Transcludify/Caption: transkluzja
+Transcludify/Hint: Zamknij zaznaczony tekst w klamrach
+Underline/Caption: podkreślenie
+Underline/Hint: Podkreśl zaznaczony tekst

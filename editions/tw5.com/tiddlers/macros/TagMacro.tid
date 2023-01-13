@@ -5,7 +5,7 @@ tags: Macros [[Core Macros]]
 title: tag Macro
 type: text/vnd.tiddlywiki
 
-The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag.
+The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag. Clicking the tag pill opens a dropdown. This can be compared to the [[tag-pill Macro]] which also features other parameters.
 
 !! Parameters
 

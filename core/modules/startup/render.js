@@ -21,7 +21,7 @@ exports.synchronous = true;
 // Default story and history lists
 var PAGE_TITLE_TITLE = "$:/core/wiki/title";
 var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
-var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageTemplate";
+var PAGE_TEMPLATE_TITLE = "$:/core/ui/RootTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
 var DRAFT_TIDDLER_TIMEOUT_TITLE = "$:/config/Drafts/TypingTimeout";
@@ -42,17 +42,22 @@ exports.startup = function() {
 	$tw.styleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_STYLESHEET_TITLE,{document: $tw.fakeDocument});
 	$tw.styleContainer = $tw.fakeDocument.createElement("style");
 	$tw.styleWidgetNode.render($tw.styleContainer,null);
+	$tw.styleWidgetNode.assignedStyles = $tw.styleContainer.textContent;
 	$tw.styleElement = document.createElement("style");
-	$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 	document.head.insertBefore($tw.styleElement,document.head.firstChild);
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
 		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
-			$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+			var newStyles = $tw.styleContainer.textContent;
+			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
+				$tw.styleWidgetNode.assignedStyles = newStyles;
+				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
+			}
 		}
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
-		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget});
+		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget, recursionMarker: "no"});
 		$tw.pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.pageContainer,"tc-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
@@ -82,7 +87,7 @@ exports.startup = function() {
 		var onlyThrottledTiddlersHaveChanged = true;
 		for(var title in changes) {
 			var tiddler = $tw.wiki.getTiddler(title);
-			if(!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh"))) {
+			if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh")))) {
 				onlyThrottledTiddlersHaveChanged = false;
 			}
 		}
@@ -106,6 +111,8 @@ exports.startup = function() {
 	// Fix up the link between the root widget and the page container
 	$tw.rootWidget.domNodes = [$tw.pageContainer];
 	$tw.rootWidget.children = [$tw.pageWidgetNode];
+	// Run any post-render startup actions
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
 
 })();

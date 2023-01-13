@@ -21,7 +21,7 @@ list-before: $:/core/ui/ViewTemplate/body
 <p>
 This tiddler is a comment on
 <$list filter="[list<currentTiddler>sort[title]]">
-<<find-original-comment>>&nbsp;
+<span class="tc-small-gap-right"><<find-original-comment>></span>
 </$list>
 </p>
 <$list filter="[list<currentTiddler>role[comment]sort[title]limit[1]]" variable="ignore">

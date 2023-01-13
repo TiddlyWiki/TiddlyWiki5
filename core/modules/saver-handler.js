@@ -153,11 +153,12 @@ SaverHandler.prototype.saveWiki = function(options) {
 	var self = this,
 		method = options.method || "save";
 	// Ignore autosave if disabled
-	if(method === "autosave" && this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
+	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
 		return false;
 	}
 	var	variables = options.variables || {},
-		template = options.template || "$:/core/save/all",
+		template = (options.template || 
+		           this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
@@ -197,8 +198,12 @@ SaverHandler.prototype.isDirty = function() {
 Update the document body with the class "tc-dirty" if the wiki has unsaved/unsynced changes
 */
 SaverHandler.prototype.updateDirtyStatus = function() {
+	var self = this;
 	if($tw.browser) {
 		$tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
+		$tw.utils.each($tw.windows,function(win) {
+			$tw.utils.toggleClass(win.document.body,"tc-dirty",self.isDirty());
+		});
 	}
 };
 

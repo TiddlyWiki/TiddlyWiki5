@@ -1,12 +1,14 @@
+caption: modules
 created: 20140410103123179
-modified: 20150203185838000
+modified: 20210919201148915
+op-input: a [[selection|Title Selection]] of module types
+op-output: the title of each module with any of the input types
+op-parameter: none
+op-purpose: select the names of all modules of the input module types
 tags: [[Filter Operators]] [[Special Operators]]
 title: modules Operator
 type: text/vnd.tiddlywiki
-caption: modules
-op-purpose: select the names of all modules of the input module types
-op-input: a [[selection|Title Selection]] of module types
-op-parameter: none
-op-output: the title of each module with any of the input types
+
+<<.from-version "5.2.0">>The <<.op modules>> filter allows two optional operands. When both are specified, it returns the modules with the module property specified in the first operand which has the value in the second operand.
 
 <<.operator-examples "modules">>

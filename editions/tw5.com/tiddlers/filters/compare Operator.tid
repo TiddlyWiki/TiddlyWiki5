@@ -1,0 +1,51 @@
+created: 20200412181551706
+modified: 20200412181551706
+tags: [[Filter Operators]] [[Mathematics Operators]] [[String Operators]] [[Negatable Operators]]
+title: compare Operator
+type: text/vnd.tiddlywiki
+caption: compare
+op-purpose: filter the input by comparing each item against the operand
+op-input: a [[selection of titles|Title Selection]]
+op-suffix: the <<.op compare>> operator uses a rich suffix, see below for details
+op-parameter: the value to compare
+op-output: those input titles matching the specified comparison
+op-neg-output: those input titles <<.em not>> matching the specified comparison
+
+<<.from-version "5.1.22">>The <<.op compare>> filter allows numerical, string and date comparisons to be performed.
+
+The <<.op compare>> operator uses an extended syntax to specify all the options:
+
+```
+[compare:<type>:<mode>[<operand>]]
+```
+
+The ''type'' can be:
+
+* "number" - invalid numbers are interpreted as zero
+* "integer" - invalid integers are interpreted as zero
+* "string"
+* "date" - invalid dates are interpreted as 1st January 1970
+* "version" - invalid versions are interpreted as "v0.0.0"
+
+The ''mode'' can be:
+
+* "eq" - equal to
+* "ne" - not equal to
+* "gteq" - greater than or equal to
+* "gt" - greater than
+* "lteq" - less than or equal to
+* "lt" - less than
+
+The operator compares each item in the selection against the value of the parameter, retaining only those items that pass the specified condition.
+
+For example:
+
+```
+[[2]compare:number:eq[3]] returns nothing
+[[2]compare:number:lt[3]] returns "2"
+[[2]compare:number:eq[2]] returns "2"
+```
+
+Note that several of the variants of the <<.op compare>> operator are synonyms for existing operators, and are provided in the interests of consistency. For example, `compare:string:eq[x]` is a synonym for `match[x]`.
+
+<<.operator-examples "compare">>

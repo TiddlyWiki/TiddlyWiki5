@@ -20,15 +20,27 @@
       for (i; i < string.length; i++) {
         charCode = string.charCodeAt(i);
 
-        if (charCode < 128)
+        if (charCode < 128) {
           output += String.fromCharCode(charCode);
-        else if ((charCode > 127) && (charCode < 2048))
-          output += String.fromCharCode((charCode >> 6) | 192),
+        } else if ((charCode > 127) && (charCode < 2048)) {
+          output += String.fromCharCode((charCode >> 6) | 192);
           output += String.fromCharCode((charCode & 63) | 128);
-        else
-          output += String.fromCharCode((charCode >> 12) | 224),
-          output += String.fromCharCode(((charCode >> 6) & 63) | 128),
+        } else if ((charCode > 55295) && (charCode < 57344) && string.length > i+1) {
+          // Surrogate pair
+          var hiSurrogate = charCode;
+          var loSurrogate = string.charCodeAt(i+1);
+          i++;  // Skip the low surrogate on the next loop pass
+          var codePoint = (((hiSurrogate - 55296) << 10) | (loSurrogate - 56320)) + 65536;
+          output += String.fromCharCode((codePoint >> 18) | 240);
+          output += String.fromCharCode(((codePoint >> 12) & 63) | 128);
+          output += String.fromCharCode(((codePoint >> 6) & 63) | 128);
+          output += String.fromCharCode((codePoint & 63) | 128);
+        } else {
+          // Not a surrogate pair, or a dangling surrogate without its partner that we'll just encode as-is
+          output += String.fromCharCode((charCode >> 12) | 224);
+          output += String.fromCharCode(((charCode >> 6) & 63) | 128);
           output += String.fromCharCode((charCode & 63) | 128);
+        }
       }
 
       return output;
@@ -41,15 +53,21 @@
       while (i < string.length) {
         charCode = string.charCodeAt(i);
 
-        if (charCode < 128)
+        if (charCode < 128) {
           output += String.fromCharCode(charCode),
           i++;
-        else if ((charCode > 191) && (charCode < 224))
-          output += String.fromCharCode(((charCode & 31) << 6) | (string.charCodeAt(i + 1) & 63)),
+        } else if ((charCode > 191) && (charCode < 224)) {
+          output += String.fromCharCode(((charCode & 31) << 6) | (string.charCodeAt(i + 1) & 63));
           i += 2;
-        else
-          output += String.fromCharCode(((charCode & 15) << 12) | ((string.charCodeAt(i + 1) & 63) << 6) | (string.charCodeAt(i + 2) & 63)),
+        } else if ((charCode > 223) && (charCode < 240)) {
+          output += String.fromCharCode(((charCode & 15) << 12) | ((string.charCodeAt(i + 1) & 63) << 6) | (string.charCodeAt(i + 2) & 63));
           i += 3;
+        } else {
+          var codePoint = ((charCode & 7) << 18) | ((string.charCodeAt(i + 1) & 63) << 12) | ((string.charCodeAt(i + 2) & 63) << 6) | (string.charCodeAt(i + 3) & 63);
+          // output += String.fromCodePoint(codePoint);  // Can't do this because Internet Explorer doesn't have String.fromCodePoint
+          output += String.fromCharCode(((codePoint - 65536) >> 10) + 55296) + String.fromCharCode(((codePoint - 65536) & 1023) + 56320);  // So we do this instead
+          i += 4;
+        }
       }
 
       return output;

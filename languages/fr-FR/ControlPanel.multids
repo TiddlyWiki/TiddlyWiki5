@@ -7,7 +7,7 @@ Appearance/Hint: Personnalisation de l'apparence de votre ~TiddlyWiki.
 Basics/AnimDuration/Prompt: Durée de l'animation
 Basics/AutoFocus/Prompt: Champ qui recevra le focus par défaut pour les nouveaux tiddlers
 Basics/Caption: Fondamentaux
-Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
+Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de {{Conserver le déroulé actuel||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
 Basics/DefaultTiddlers/TopHint: Liste les tiddlers qui seront affichés au démarrage :
 Basics/Language/Prompt: Bonjour ! Langue active :
@@ -15,7 +15,10 @@ Basics/NewJournal/Title/Prompt: Modèle pour les titres des tiddlers journaux
 Basics/NewJournal/Text/Prompt: Texte pour les nouveaux tiddlers journaux
 Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/NewTiddler/Title/Prompt: Modèle pour les titres des nouveaux tiddlers
+Basics/NewTiddler/Tags/Prompt: Tags pour les nouveaux tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// modifiés
+Basics/RemoveTags: Mettre à jour vers le format courant
+Basics/RemoveTags/Hint: Met à jour la configuration des tags vers le format le plus récent
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
 Basics/SystemTiddlers/Prompt: Nombre de tiddlers système :
@@ -24,10 +27,17 @@ Basics/Tiddlers/Prompt: Nombre de tiddlers :
 Basics/Title/Prompt: Titre de ce ~TiddlyWiki :
 Basics/Username/Prompt: Signer les modifications avec ce nom d'utilisateur :
 Basics/Version/Prompt: Version de ~TiddlyWiki :
+Cascades/Caption: Cascades
+Cascades/Hint: Ces règles globales servent à choisir dynamiquement certains templates. Le résultat de la cascade est le résultat du premier filtre de la séquence qui retourne un résultat.
+Cascades/TagPrompt: Filtres tagués <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Types d'éditeur
 EditorTypes/Editor/Caption: Éditeur
 EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer tel ou tel type de tiddler.
 EditorTypes/Type/Caption: Type
+EditTemplateBody/Caption: Édition du corps
+EditTemplateBody/Hint: Cette cascade de règles est utilisée par le template d'édition par défaut pour choisir dynamiquement le template à appliquer pour éditer le corps d'un tiddler.
+FieldEditor/Caption: Édition des champs
+FieldEditor/Hint: Cette cascade de règles sert à choisir dynamiquement le template de rendu d'un champ de tiddler en fonction de son nom. Il est utilisé dans le template d'édition.
 Info/Caption: Info
 Info/Hint: Information sur ce TiddlyWiki
 KeyboardShortcuts/Add/Prompt: Entrez le raccourci ici
@@ -43,6 +53,7 @@ KeyboardShortcuts/Platform/Linux: Plate-forme Linux seulement
 KeyboardShortcuts/Platform/NonLinux: Plate-formes non-Linux seulement
 KeyboardShortcuts/Platform/Windows: Plate-forme Windows seulement
 KeyboardShortcuts/Platform/NonWindows: Plates-formes non-Windows seulement
+LayoutSwitcher/Caption: Mise en page
 LoadedModules/Caption: Modules chargés
 LoadedModules/Hint: Liste des modules chargés, liés à leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Palette/Caption: Palette
@@ -69,6 +80,7 @@ Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
 Plugins/Disabled/Status: (désactivé)
+Plugins/Downgrade/Caption: version antérieure
 Plugins/Empty/Hint: Aucun
 Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
@@ -86,6 +98,11 @@ Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
+Plugins/Update/Caption: mise à jour
+Plugins/Updates/Caption: Mises à jour
+Plugins/Updates/Hint: Mises à jour disponibles pour les plugins installés
+Plugins/Updates/UpdateAll/Caption: Mettre à jour <<update-count>> plugins
+Plugins/SubPluginPrompt: Avec <<count>> sous-plugins disponibles
 Saving/Caption: Sauvegarde
 Saving/DownloadSaver/AutoSave/Description: Permet l'enregistrement automatique pour l'enregistreur de téléchargement
 Saving/DownloadSaver/AutoSave/Hint: Active l'auto-enregistrement pour l'enregistreur de téléchargement
@@ -112,11 +129,13 @@ Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
 Saving/TiddlySpot/Caption: Enregistreur ~TiddlySpot
-Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers http://tiddlyspot.com ou vers un serveur distant compatible
+Saving/TiddlySpot/ControlPanel: Panneau de contrôle ~TiddlySpot
+Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]] ou vers un serveur distant compatible. Voir [[ici|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] pour plus d'informations sur la configuration de la sauvegarde sur ~TiddlySpot et ~TiddlyHost.
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<nom du wiki>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée, comme `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Mot de passe
+Saving/TiddlySpot/ReadOnly: Notez que [[TiddlySpot|http://tiddlyspot.com]] n'autorise plus la création de nouveaux sites. Pour les nouveaux sites vous pouvez utiliser [[TiddlyHost|https://tiddlyhost.com]], un nouveau service d'hébergement qui remplace ~TiddlySpot.
 Saving/TiddlySpot/ServerURL: URL du serveur
 Saving/TiddlySpot/UploadDir: Dossier des dépôts
 Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
@@ -179,6 +198,8 @@ Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des 
 Settings/MissingLinks/Caption: Liens wiki
 Settings/MissingLinks/Hint: Peut-on pointer vers des tiddlers qui n'existent pas encore ?
 Settings/MissingLinks/Description: Active les liens vers les tiddlers inexistants
+StoryTiddler/Caption: Tiddlers du déroulé
+StoryTiddler/Hint: Cette cascade de règles sert à choisir dynamiquement le template d'affichage d'un tiddler dans le déroulé.
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Stylesheets/Caption: Feuilles de style
@@ -189,6 +210,10 @@ Theme/Caption: Thème
 Theme/Prompt: Thème courant :
 TiddlerFields/Caption: Champs des tiddlers
 TiddlerFields/Hint: Il s'agit de la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
+TiddlerColour/Caption: Couleur du tiddler
+TiddlerColour/Hint: Cette cascade de règle sert à choisir dynamiquement la couleur d'un tiddler (utilisée pour l'icone et la pastille du tag associé).
+TiddlerIcon/Caption: Icone du tiddler
+TiddlerIcon/Hint: Cette cascade de règles sert à déterminer dynamiquement l'icone d'un tiddler.
 Toolbars/Caption: Barres d'outils
 Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
 Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en cours d'édition
@@ -200,3 +225,7 @@ Toolbars/EditorToolbar/Hint: Choix des boutons à afficher dans la barre d'outil
 Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
 Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
 Tools/Download/Full/Caption: Télécharger le wiki complet
+ViewTemplateBody/Caption: Visualisation du corps
+ViewTemplateBody/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du corps d'un tiddler.
+ViewTemplateTitle/Caption: Visualisation du titre
+ViewTemplateTitle/Hint: Cette cascade de règles est utilisée par le template de visualisation par défaut pour choisir dynamiquement le template d'affichage du titre d'un tiddler.

@@ -78,7 +78,7 @@ exports.TextMap.prototype.findText = function(targetString,targetPrefix,targetSu
 	if(startPos !== -1) {
 		startPos += targetPrefix.length;
 		var startMetadata = this.locateMetadata(startPos),
-			endMetadata = this.locateMetadata(startPos + targetString.length);
+			endMetadata = this.locateMetadata(startPos + targetString.length - 1);
 		if(startMetadata && endMetadata) {
 			return {
 				startNode: startMetadata.domNode,

@@ -1,0 +1,4 @@
+title: $:/config/Editor/ImportContentTypesFilter
+type: text/vnd.tiddlywiki
+
+[prefix[image/]]

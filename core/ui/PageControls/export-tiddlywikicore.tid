@@ -1,0 +1,22 @@
+title: $:/core/ui/ExportTiddlyWikiCore
+
+\define jsFileName() tiddlywikicore-$(version)$.js
+\define noExportMsg()
+It appears that you have a wiki with an external ~TiddlyWiki core. The export action cannot be performed.
+<p>You will need to view the page source in your browser. Then go to the very bottom the the source, find the last `<script>` 
+element, and right-click its `src` URI. Save the link as ''$(jsFileName)$''</p>
+\end
+
+''For advanced users''
+
+Export the ~TiddlyWiki core ~JavaScript code for running with external ~JavaScript:
+
+<$button tooltip="Export the ~TiddlyWiki core code for running with external ~JavaScript" aria-label="export TiddlyWiki core" class="tc-btn-big-green">
+<$list filter="[[$:/boot/boot.js]is[missing]]" variable="ignore" emptyMessage="""<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/tiddlywiki5.js" filename=<<jsFileName>>/>""" >
+<$action-setfield $tiddler=<<qualify "$:/temp/alert">> text=<<noExportMsg>> subtitle="Export ~TiddllyWiki Core"/>
+<$action-sendmessage $message="tm-modal" $param=<<qualify "$:/temp/alert">>/>
+</$list>
+{{$:/core/images/download-button}} Download ~TiddlyWiki core
+</$button>
+
+[[Further information|https://tiddlywiki.com/#Using%20the%20external%20JavaScript%20template]]

@@ -4,7 +4,7 @@ tags: Definitions
 title: HyperText Markup Language
 type: text/vnd.tiddlywiki
 
-<<.dlink-ex HTML "http://en.wikipedia.org/wiki/HTML">> is a standard plain-text format used for defining the content of a web page.
+<<.dlink-ex HTML "https://en.wikipedia.org/wiki/HTML">> is a standard plain-text format used for defining the content of a web page.
 
 It consists of a tree of elements expressed using a system of special <<.def tags>> enclosed in angle brackets.
 

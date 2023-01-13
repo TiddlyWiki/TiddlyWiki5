@@ -1,0 +1,26 @@
+{
+	"description": "Client-server edition with external tiddlywiki.js",
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem",
+		"tiddlywiki/highlight"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"listen": [
+			"--listen","root-tiddler=$:/core/save/all-external-js","use-browser-cache=yes"],
+		"index": [
+			"--render","$:/core/save/offline-external-js","index.html","text/plain",
+			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"],
+		"static": [
+			"--render","$:/core/templates/static.template.html","static.html","text/plain",
+			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain",			
+			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"],
+		"tiddlywikicore": [
+			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"]
+	}
+}

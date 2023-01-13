@@ -1,0 +1,16 @@
+created: 20211206160703815
+modified: 20211206161115837
+tags: Cascades
+title: View Template Title Cascade
+type: text/vnd.tiddlywiki
+
+The view template title cascade is a [[cascade|Cascades]] used by the default view template to choose the template for displaying the tiddler title.
+
+The default view template title cascade consists of:
+
+#  If the tiddler title starts with `$:/` then use the template $:/core/ui/ViewTemplate/title/system which causes the `$:/` prefix to be displayed in pale text
+# Otherwise, use the template $:/core/ui/ViewTemplate/title/default which displays the title in plain text
+
+You can see the current settings for the view template title cascade in $:/ControlPanel under the ''Info'' -> ''Advanced'' -> ''Cascades''  -> ''View Template Title'' tab.
+
+<<list-links "[tag[View Template Title Cascade]]">>

@@ -3,11 +3,14 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/home-button}} {{$:/language/Buttons/Home/Caption}}
 description: {{$:/language/Buttons/Home/Hint}}
 
+\whitespace trim
 <$button message="tm-home" tooltip={{$:/language/Buttons/Home/Hint}} aria-label={{$:/language/Buttons/Home/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/home-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Home/Caption}}/></span>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Home/Caption}}/>
+</span>
 </$list>
 </$button>

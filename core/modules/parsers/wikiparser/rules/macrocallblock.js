@@ -21,40 +21,36 @@ exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
-	// Regexp to match
-	this.matchRegExp = /<<([^>\s]+)(?:\s*)((?:[^>]|(?:>(?!>)))*?)>>(?:\r?\n|$)/mg;
+};
+
+exports.findNextMatch = function(startPos) {
+	var nextStart = startPos;
+	// Try parsing at all possible macrocall openers until we match
+	while((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
+		var nextCall = $tw.utils.parseMacroInvocation(this.parser.source,nextStart);
+		if(nextCall) {
+			var c = this.parser.source.charAt(nextCall.end);
+			// Ensure EOL after parsed macro
+			// If we didn't need to support IE, we'd just use /(?:\r?\n|$)/ym
+			if ((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
+				this.nextCall = nextCall;
+				return nextStart;
+			}
+		}
+		nextStart += 2;
+	}
+	return undefined;
 };
 
 /*
 Parse the most recent match
 */
 exports.parse = function() {
-	// Get all the details of the match
-	var macroName = this.match[1],
-		paramString = this.match[2];
-	// Move past the macro call
-	this.parser.pos = this.matchRegExp.lastIndex;
-	var params = [],
-		reParam = /\s*(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))/mg,
-		paramMatch = reParam.exec(paramString);
-	while(paramMatch) {
-		// Process this parameter
-		var paramInfo = {
-			value: paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5] || paramMatch[6]
-		};
-		if(paramMatch[1]) {
-			paramInfo.name = paramMatch[1];
-		}
-		params.push(paramInfo);
-		// Find the next match
-		paramMatch = reParam.exec(paramString);
-	}
-	return [{
-		type: "macrocall",
-		name: macroName,
-		params: params,
-		isBlock: true
-	}];
+	var call = this.nextCall;
+	call.isBlock = true;
+	this.nextCall = null;
+	this.parser.pos = call.end;
+	return [call];
 };
 
 })();

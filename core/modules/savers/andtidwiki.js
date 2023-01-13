@@ -42,7 +42,7 @@ AndTidWiki.prototype.save = function(text,method,callback,options) {
 		window.twi.saveWiki(text);
 	} else {
 		// Get the pathname of this document
-		var pathname = decodeURIComponent(document.location.toString().split("#")[0]);
+		var pathname = $tw.utils.decodeURIComponentSafe(document.location.toString().split("#")[0]);
 		// Strip the file://
 		if(pathname.indexOf("file://") === 0) {
 			pathname = pathname.substr(7);

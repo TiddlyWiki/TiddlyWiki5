@@ -37,5 +37,5 @@ So-called global macros are implemented within the main page template ([[$:/core
 <<.from-version "5.1.18">> The `\import` [[pragma|Pragma]] is an alternative syntax for using the ImportVariablesWidget. For example, the previous example could be expressed as:
 
 ```
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 ```

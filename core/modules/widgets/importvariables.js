@@ -38,13 +38,18 @@ Compute the internal state of the widget
 */
 ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	var widgetPointer = this;
+	// Got to flush all the accumulated variables
+	this.variables = Object.create(null);
+	if(this.parentWidget) {
+		Object.setPrototypeOf(this.variables,this.parentWidget.variables);
+	}
 	// Get our parameters
 	this.filter = this.getAttribute("filter");
 	// Compute the filter
 	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
 	// Accumulate the <$set> widgets from each tiddler
 	$tw.utils.each(this.tiddlerList,function(title) {
-		var parser = widgetPointer.wiki.parseTiddler(title);
+		var parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline:true});
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
 			while(parseTreeNode && parseTreeNode.type === "set") {
@@ -70,7 +75,14 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 						widgetPointer.variables[key] = widget.variables[key];
 					});
 				} else {
-					widgetPointer.makeChildWidgets([node]);
+					widgetPointer.children = [widgetPointer.makeChildWidget(node)];
+					// No more regenerating children for
+					// this widget. If it needs to refresh,
+					// it'll do so along with the the whole
+					// importvariable tree.
+					if (widgetPointer != this) {
+						widgetPointer.makeChildWidgets = function(){};
+					}
 					widgetPointer = widgetPointer.children[0];
 				}
 				parseTreeNode = parseTreeNode.children && parseTreeNode.children[0];
@@ -109,7 +121,7 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 		this.renderChildren(this.parentDomNode,this.findNextSiblingDomNode());
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 

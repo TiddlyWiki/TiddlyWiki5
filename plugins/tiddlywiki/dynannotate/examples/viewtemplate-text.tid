@@ -1,0 +1,98 @@
+title: $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text
+
+\define click-annotation-actions()
+<$action-setfield $tiddler="$:/temp/dynannotate/demo/annotation-title" $value=<<annotationTiddler>>/>
+\end
+
+\define create-annotation-actions()
+<$action-createtiddler
+	$basetitle="$:/plugins/tiddlywiki/dynannotate/demo-annotation"
+	$savetitle={{{ [<currentTiddler>addprefix[$:/state/dynannotate/temp-save-title/]] }}}
+	annotate-tiddler=<<currentTiddler>>
+	annotate-text=<<text>>
+	annotate-prefix=<<prefix>>
+	annotate-suffix=<<suffix>>
+	annotate-colour=<<colour>>
+/>
+<$set name="popup-coords" value={{{ [<currentTiddler>addprefix[$:/state/dynannotate/popup-selection/]get[text]] }}}>
+<$action-deletetiddler $tiddler={{{ [<currentTiddler>addprefix[$:/state/dynannotate/popup-selection/]] }}}/>
+<$action-setfield $tiddler="$:/temp/dynannotate/demo/annotation-title" $value={{{ [<currentTiddler>addprefix[$:/state/dynannotate/temp-save-title/]get[text]] }}}/>
+<$action-popup $state={{{ [<currentTiddler>addprefix[$:/state/dynannotate/popup-annotation/]] }}} $coords=<<popup-coords>>/>
+</$set>
+\end
+
+<$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
+<$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
+<div style="position:relative;"><!-- Needed for the popups to work -->
+<$dynannotate
+	filter="[all[shadows+tiddlers]!has[draft.of]annotate-tiddler<currentTiddler>]"
+	actions=<<click-annotation-actions>>
+	popup={{{ [<currentTiddler>addprefix[$:/state/dynannotate/popup-annotation/]] }}}
+	selection={{{ [<currentTiddler>addprefix[$:/state/dynannotate/selection/]] }}}
+	selectionPrefix={{{ [<currentTiddler>addprefix[$:/state/dynannotate/selection-prefix/]] }}}
+	selectionSuffix={{{ [<currentTiddler>addprefix[$:/state/dynannotate/selection-suffix/]] }}}
+	selectionPopup={{{ [<currentTiddler>addprefix[$:/state/dynannotate/popup-selection/]] }}}
+	search={{$:/temp/search}}
+	searchClass="tc-dynannotation-search-overlay-blurred"
+	searchMinLength={{$:/config/Search/MinLength}}
+>
+<$transclude mode="block">
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
+</$transclude>
+</$dynannotate>
+<$reveal type="popup" state={{{ [<currentTiddler>addprefix[$:/state/dynannotate/popup-annotation/]] }}} position="belowright" animate="yes" retain="yes" style="overflow-y:hidden;">
+<div class="tc-drop-down-wrapper">
+<div class="tc-drop-down tc-popup-keep" style="max-width:550px;white-space: normal;overflow-y:hidden;">
+<$tiddler tiddler={{$:/temp/dynannotate/demo/annotation-title}}>
+<p>
+<h2>
+This is an annotation
+</h2>
+</p>
+<p>
+The annotation is stored in the tiddler:
+</p>
+<p>
+<$link><$view field="title"/></$link>
+</p>
+<p>
+The annotated text is ''<$view field="annotate-text"/>''.
+</p>
+<p>
+Annotation Colour:
+<$macrocall $name='colour-picker' actions="""
+<$action-setfield $field="annotate-colour" $value=<<colour-picker-value>>/>
+"""/>
+</p>
+</$tiddler>
+</div>
+</div>
+</$reveal>
+<$reveal type="popup" state={{{ [<currentTiddler>addprefix[$:/state/dynannotate/popup-selection/]] }}} position="belowright" animate="yes" retain="yes" style="overflow-y:hidden;">
+<div class="tc-drop-down-wrapper">
+<div class="tc-drop-down tc-popup-keep" style="max-width:550px;white-space:normal;">
+<$vars
+	text={{{ [<currentTiddler>addprefix[$:/state/dynannotate/selection/]get[text]] }}}
+	prefix={{{ [<currentTiddler>addprefix[$:/state/dynannotate/selection-prefix/]get[text]] }}}
+	suffix={{{ [<currentTiddler>addprefix[$:/state/dynannotate/selection-suffix/]get[text]] }}}
+	colour={{{ [<currentTiddler>addprefix[$:/state/dynannotate/annotation-colour/]get[text]] }}}
+>
+<$button actions=<<create-annotation-actions>>>
+Create annotation
+</$button>
+<p>
+Text: <$text text=<<text>>/>
+</p>
+<p>
+Prefix: <$text text=<<prefix>>/>
+</p>
+<p>
+Suffix: <$text text=<<suffix>>/>
+</p>
+</$vars>
+</div>
+</div>
+</$reveal>
+</div>
+</$list>
+</$reveal>

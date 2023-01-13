@@ -14,7 +14,6 @@ $:/core/images/storyview-$(storyview)$
 <$transclude tiddler=<<icon>>/>
 </$set>
 </$list>
-<$text text=" "/>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/StoryView/Caption}}/></span>
 </$list>

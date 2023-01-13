@@ -1,0 +1,20 @@
+created: 20160501131111865
+modified: 20210106151027149
+tags: [[Community Plugins]]
+title: "Mal's Sandbox" by Mal
+type: text/vnd.tiddlywiki
+url: http://malsandbox.tiddlyspot.com
+
+A collection of extensions by [[@malgam|https://github.com/malgam]]
+
+{{!!url}}
+
+<<<
+The "loadnew" plugin provides the JavaScript module $:/plugins/malgam/loadnew/loadnew.js that implements an incremental load command for Tiddlywiki 5.
+
+The javascript code is based on the built-in module $:/core/modules/commands/load.js that loads tiddlers from a Tiddlywiki file into a node.js Tiddlywiki instance. This command loads all non-system tiddlers, irrespective of whether they have been modified since last loaded. As a result, all tiddlers in the node.js tiddlers folder will end up with a new modification date.
+
+In contrast, the loadnew command only loads tiddlers that either don't already exist in the tiddlers folder, or have a newer modified date than the existing tiddler.
+
+With a backup strategy that uses a file system snapshot process to preserve historical versions of tiddlers, the loadnew command minimises the sizes of the resulting snapshots.
+<<<

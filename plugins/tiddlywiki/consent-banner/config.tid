@@ -1,0 +1,48 @@
+title: $:/plugins/tiddlywiki/consent-banner/config
+
+! [[Greeting Message|$:/config/plugins/tiddlywiki/consent-banner/greeting-message]]
+
+<div style="">
+
+<div style="display:inline-block;vertical-align:top;width:45%;">
+
+<$edit-text tiddler="$:/config/plugins/tiddlywiki/consent-banner/greeting-message" tag="textarea" class="tc-edit-texteditor"/>
+
+</div>
+
+<div style="display:inline-block;vertical-align:top;width:45%;margin:0.5em;border:1px solid black;padding:0.5em;" class="tc-consent-banner">
+
+<$transclude tiddler="$:/config/plugins/tiddlywiki/consent-banner/greeting-message" mode="block"/>
+
+</div>
+
+</div>
+
+! Buttons
+
+|[[Accept caption|$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/caption]] |<$edit-text tiddler="$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/caption" tag="input"/> |
+|[[Accept hint|$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/hint]] |<$edit-text tiddler="$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/hint" tag="input"/> |
+|[[Decline caption|$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/caption]] |<$edit-text tiddler="$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/caption" tag="input"/> |
+|[[Decline hint|$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/hint]] |<$edit-text tiddler="$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/hint" tag="input"/> |
+
+! [[Consent Accepted Status|$:/state/consent-banner/accepted]]
+
+Current status: {{$:/state/consent-banner/accepted}} (blank indicates that consent has not yet been granted or declined)
+
+<$button message="tm-consent-accept" tooltip={{$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/hint}}>
+{{$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/caption}}
+</$button>
+
+<$button message="tm-consent-decline" tooltip={{$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/hint}}>
+{{$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/caption}}
+</$button>
+
+<$button message="tm-consent-clear" tooltip={{$:/config/plugins/tiddlywiki/consent-banner/buttons/clear/hint}}>
+{{$:/config/plugins/tiddlywiki/consent-banner/buttons/clear/caption}}
+</$button>
+
+! Embedded Content Blocking
+
+//Requires page reload//
+
+<$checkbox tiddler="$:/config/plugins/tiddlywiki/consent-banner/block-embedded-content" field="text" checked="yes" unchecked="no" default="no"> Block all embedded content such as &lt;iframe>, &lt;embed> and &lt;object> unless consent has been granted</$checkbox>

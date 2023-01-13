@@ -17,9 +17,8 @@ exports.method = "GET";
 exports.path = /^\/favicon.ico$/;
 
 exports.handler = function(request,response,state) {
-	response.writeHead(200, {"Content-Type": "image/x-icon"});
 	var buffer = state.wiki.getTiddlerText("$:/favicon.ico","");
-	response.end(buffer,"base64");
+	state.sendResponse(200,{"Content-Type": "image/x-icon"},buffer,"base64");
 };
 
 }());

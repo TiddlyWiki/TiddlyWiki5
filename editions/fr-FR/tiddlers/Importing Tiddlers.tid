@@ -1,0 +1,26 @@
+created: 20130825162000000
+fr-title: Importer des tiddlers
+modified: 20220222173231214
+tags: Features
+title: Importing Tiddlers
+type: text/vnd.tiddlywiki
+
+Vous  pouvez importer des tiddlers dans un <<tw>> à partir de fichiers externes ou directement depuis un autre <<tw>>.
+
+!! Importer du contenu de fichiers externes
+
+Il existe plusieurs méthodes pour importer du contenu (tel que du texte, des images, des documents pdf, etc.) à partir de fichiers externes<<:>>
+
+* Utiliser le bouton <<.icon $:/core/images/import-button>> ''Importer'' (dans l'onglet ''Outils'' de la barre latérale) pour choisir un fichier<<;>>
+* Gisser-déposer des fichiers depuis l'Explorateur Windows, ou le Finder MacOS, etc. directement dans la fenêtre de navigateur de <<tw>><<;>>
+* Copier-coller du contenu directement depuis le presse-papiers en utilisant le menu ou le raccourci clavier (<kbd>ctrl-V</kbd> ou <kbd>cmd-V</kbd>)
+** Actuellement disponible avec Chrome, Firefox et Edge (mais pas Internet Explorer)
+
+Pour la plupart, les fichiers sont importés en tant que tiddlers individuels. Les exceptions sont<<:>>
+
+* les fichiers ''.html'' qui sont reconnus comme des fichiers <<tw>> sont interprétés pour en extraire les tiddlers qu'ils contiennent<<;>>
+* les fichiers ''.json'' sont interprétés pour en extraire les tiddlers qu'ils contiennent. Ils peuvent être créés en les [[exportant|How to export tiddlers]] d'un autre <<tw>>. <<tw>> reconnaît les fichiers JSON qui contiennent un unique tiddler, ou un tableau de tiddlers.
+
+!! Importer du contenu depuis des <<tw>> dans d'autres fenêtres
+
+Les tiddlers peuvent être importés depuis des <<tw>> affichés dans d'autres fenêtres de navigateurs grâce au [[glisser-déposer|Drag and Drop]]. Faites glisser un lien interne <<tw>> ou un tag d'un <<tw>> à un autre, entre fenêtres de navigateurs. Faire glisser un lien interne importera un tiddler unique, alors que faire glisser une pilule de tag importera tous les tiddlers qui portent ce [[tag|Tagging]].

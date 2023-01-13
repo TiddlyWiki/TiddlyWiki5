@@ -17,7 +17,7 @@ Export our filter function
 */
 exports.field = function(source,operator,options) {
 	var results = [],indexedResults,
-		fieldname = (operator.suffix || operator.operator || "title").toLowerCase();
+		fieldname = operator.suffix || operator.operator || "title";
 	if(operator.prefix === "!") {
 		if(operator.regexp) {
 			source(function(tiddler,title) {

@@ -127,7 +127,7 @@ var insertMacroCall = function(w,output,macroName,paramString) {
 
 
 var isLinkExternal = function(to) {
-	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s'"]+(?:\/|\b)/i;
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s'"]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 var rules = [

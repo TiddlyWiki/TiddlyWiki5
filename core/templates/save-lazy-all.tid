@@ -1,9 +1,9 @@
 title: $:/core/save/lazy-all
 
 \define saveTiddlerFilter()
-[is[system]] -[prefix[$:/state/popup/]] -[[$:/HistoryList]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]] 
+[is[system]] -[prefix[$:/state/popup/]] -[[$:/HistoryList]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] [is[tiddler]type[application/javascript]] +[sort[title]]
 \end
 \define skinnySaveTiddlerFilter()
-[!is[system]]
+[!is[system]] -[type[application/javascript]]
 \end
 {{$:/core/templates/tiddlywiki5.html}}

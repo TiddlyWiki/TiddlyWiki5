@@ -1,0 +1,13 @@
+title: Transclude/Recursion
+description: Transclusion recursion detection
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler="Output"/>
++
+title: ExpectedResult
+
+<p><span class="tc-error">Recursive transclusion error in transclude widget</span></p>

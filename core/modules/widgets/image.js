@@ -86,7 +86,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 					default:
 						src = _canonical_uri;
 						break;
-				}	
+				}
 			} else {
 				// Just trigger loading of the tiddler
 				this.wiki.getTiddlerText(this.imageSource);
@@ -97,7 +97,7 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement(tag);
 	domNode.setAttribute("src",src);
 	if(this.imageClass) {
-		domNode.setAttribute("class",this.imageClass);		
+		domNode.setAttribute("class",this.imageClass);
 	}
 	if(this.imageWidth) {
 		domNode.setAttribute("width",this.imageWidth);
@@ -106,11 +106,24 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("height",this.imageHeight);
 	}
 	if(this.imageTooltip) {
-		domNode.setAttribute("title",this.imageTooltip);		
+		domNode.setAttribute("title",this.imageTooltip);
 	}
 	if(this.imageAlt) {
-		domNode.setAttribute("alt",this.imageAlt);		
+		domNode.setAttribute("alt",this.imageAlt);
 	}
+	if(this.lazyLoading && tag === "img") {
+		domNode.setAttribute("loading",this.lazyLoading);
+	}
+	// Add classes when the image loads or fails
+	$tw.utils.addClass(domNode,"tc-image-loading");
+	domNode.addEventListener("load",function() {
+		$tw.utils.removeClass(domNode,"tc-image-loading");
+		$tw.utils.addClass(domNode,"tc-image-loaded");
+	},false);
+	domNode.addEventListener("error",function() {
+		$tw.utils.removeClass(domNode,"tc-image-loading");
+		$tw.utils.addClass(domNode,"tc-image-error");
+	},false);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
@@ -127,6 +140,7 @@ ImageWidget.prototype.execute = function() {
 	this.imageClass = this.getAttribute("class");
 	this.imageTooltip = this.getAttribute("tooltip");
 	this.imageAlt = this.getAttribute("alt");
+	this.lazyLoading = this.getAttribute("loading");
 };
 
 /*
@@ -138,7 +152,7 @@ ImageWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;		
+		return false;
 	}
 };
 

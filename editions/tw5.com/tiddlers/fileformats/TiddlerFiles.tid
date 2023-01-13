@@ -1,5 +1,5 @@
 created: 20130825150000000
-modified: 20190609154450433
+modified: 20210714130751701
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlerFiles
 type: text/vnd.tiddlywiki
@@ -78,11 +78,22 @@ The ContentType `application/json` is used internally for these files.
 
 Note that JSON files that do not conform to the tiddler structure will instead be imported as a single tiddler containing the JSON data.
 
-!! TiddlyWiki HTML files
+!! New JSON-based format for TiddlyWiki HTML files
 
-TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
+The new format for TiddlyWiki HTML files embeds the tiddlers in JSON format within a script tag:
 
-For TiddlyWiki to import an unencrypted HTML file, it requires a `<div id="storeArea">` containing tiddler DIVs as explained above. For example:
+```json
+<script class="tiddlywiki-tiddler-store" type="application/json">[
+{"title": "A","text": "One"},
+{"title": "B","text": "Two"}
+]</script>
+```
+
+!! Old DIV-based format for TiddlyWiki HTML files
+
+TiddlyWiki Classic and TiddlyWiki 5 prior to version v5.2.0 stored tiddlers encoded in `<DIV>` format.
+
+For TiddlyWiki to import an unencrypted DIV-based HTML file, it requires a `<div id="storeArea">` containing tiddler DIVs as explained above. For example:
 
 ```
 <div id="storeArea">

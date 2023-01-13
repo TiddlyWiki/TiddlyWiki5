@@ -34,7 +34,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			"Private-Token": password
 		};
 	// Bail if we don't have everything we need
-	if(!username || !password || !repo || !path || !filename) {
+	if(!username || !password || !repo || !filename) {
 		return false;
 	}
 	// Make sure the path start and ends with a slash
@@ -58,7 +58,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 			}
 			var requestType = "POST";
 			if(xhr.status !== 404) {
-				getResponseData = JSON.parse(getResponseDataJson);
+				getResponseData = $tw.utils.parseJSONSafe(getResponseDataJson);
 				$tw.utils.each(getResponseData,function(details) {
 					if(details.name === filename) {
 						requestType = "PUT";
@@ -67,7 +67,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 				});
 			}
 			var data = {
-				commit_message: $tw.language.getRawString("ControlPanel/Saving/GitService/CommitMessage"),
+				commit_message: $tw.language.getString("ControlPanel/Saving/GitService/CommitMessage"),
 				content: text,
 				branch: branch,
 				sha: sha
@@ -82,7 +82,7 @@ GitLabSaver.prototype.save = function(text,method,callback) {
 					if(err) {
 						return callback(err);
 					}
-					var putResponseData = JSON.parse(putResponseDataJson);
+					var putResponseData = $tw.utils.parseJSONSafe(putResponseDataJson);
 					callback(null);
 				}
 			});

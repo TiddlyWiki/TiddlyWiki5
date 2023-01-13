@@ -1,5 +1,6 @@
 title: $:/palettes/SolarFlare
 name: Solar Flare
+color-scheme: light
 description: Warm, relaxing earth colours
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
@@ -130,6 +131,8 @@ external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
 external-link-foreground-hover: inherit
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-border: #cfd6e6
 modal-border: #999999
 select-tag-background:

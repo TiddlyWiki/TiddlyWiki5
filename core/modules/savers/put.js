@@ -80,6 +80,7 @@ PutSaver.prototype.save = function(text,method,callback) {
 	if(this.etag) {
 		headers["If-Match"] = this.etag;
 	}
+	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	$tw.utils.httpRequest({
 		url: this.uri(),
 		type: "PUT",
@@ -87,14 +88,20 @@ PutSaver.prototype.save = function(text,method,callback) {
 		data: text,
 		callback: function(err,data,xhr) {
 			if(err) {
-				// response is textual: "XMLHttpRequest error code: 412"
-				var status = Number(err.substring(err.indexOf(':') + 2, err.length))
-				if(status === 412) { // edit conflict
-					var message = $tw.language.getString("Error/EditConflict");
-					callback(message);
-				} else {
-					callback(err); // fail
+				var status = xhr.status,
+					errorMsg = err;
+				if(status === 412) { // file changed on server
+					errorMsg = $tw.language.getString("Error/PutEditConflict");
+				} else if(status === 401) { // authentication required
+					errorMsg = $tw.language.getString("Error/PutUnauthorized");
+				} else if(status === 403) { // permission denied
+					errorMsg = $tw.language.getString("Error/PutForbidden");
 				}
+				if (xhr.responseText) {
+					// treat any server response like a plain text error explanation
+					errorMsg = errorMsg + "\n\n" + xhr.responseText;
+				}
+				callback(errorMsg); // fail
 			} else {
 				self.etag = xhr.getResponseHeader("ETag");
 				if(self.etag == null) {

@@ -1,0 +1,35 @@
+caption: Beaker Browser
+color: #FF8A65
+created: 20161229121316912
+delivery: App
+description: Nouveau navigateur puissant pour Mac, Windows et Linux
+fr-title: Enregistrer avec Beaker Browser
+method: save
+modified: 20220402105820520
+tags: Saving Windows Linux Mac
+title: Saving on Beaker Browser
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.14">> <<tw>> intègre un module qui lui permet d'enregistrer les modifications directement avec [[Beaker Browser]], un navigateur internet en peer-to-peer expérimental.
+
+! Instructions
+
+# Téléchargez et installez Beaker Browser depuis https://beakerbrowser.com/
+# Lancez Beaker et si nécessaire ouvrez un onglet vers l'adresse `beaker:start`
+# Cliquez sur le bouton <<gf "New site">> en haut à gauche de la page
+# Saisissez les détails sur votre site
+# Cliquez sur le lien <<gf "Add files">> et sélectionnez le fichier `index.html` de votre <<tw>>
+# Naviguez sur votre site en cliquant sur le lien vers `index.html`<<;>> il devrait s'ouvrir dans un nouvel onglet
+# Essayez de créer des tiddlers et d'enregistrer les modifications
+
+Jusque là, le wiki est entièrement privé et les autres utilisateurs ne peuvent pas en voir le contenu, même en connaissant l'URL. Pour le partager avec d'autres utilisateurs<<:>>
+
+# Publiez vos modifications
+## Visitez la page <<gf Library>> à l'aide du menu <<gf System>> de Beaker Browser
+## Sélectionnez votre site dans la liste
+## Recherchez un encart <<gf "Unpublished changes">>. S'il n'est pas présent, passez au point suivant
+## Cliquez sur le bouton <<gf "Review changes">>
+## Cliquez sur le bouton <<gf "Publish">>
+# Partagez l'URL `dat:`
+## Copiez l'URL de votre site à partir de la barre d'adresse et partagez-la avec d'autres utilisateurs
+## Les autres utilisateurs devraient pouvoir accéder à votre site mais ils ne pourront pas le modifier avant d'en avoir fait leur propre clone

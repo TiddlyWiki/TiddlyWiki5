@@ -1,5 +1,5 @@
 created: 20190115173333457
-modified: 20190115173723915
+modified: 20221029175754753
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
@@ -8,11 +8,14 @@ Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/).
 
 * An assignment by Christian Jurke and Christian Heigele, two students working on their Master's degree in Information Technology at the Gießen University of Applied Sciences (Technische Hochschule Mittelhessen). Their work can be seen in the [[Introduction]] and the tiddlers that link from it.
 * New developer documentation
+** [[Data Storage in Single File TiddlyWiki]]
 ** [[Continuous Deployment]]
 ** [[GitHub Branches]]
 ** HookMechanism
 ** [[Using ES2016 for Writing Plugins]]
 ** [[Adding Babel Polyfill to TiddlyWiki]]
+** [[TiddlyWiki Drag and Drop Interoperability]]
+** [[Javascript Widget Tutorial]]
 * The original developer documentation from https://tiddlywiki.com:
 ** [[TiddlyWiki for Developers]]
 ** [[TiddlyWiki Coding Style Guidelines]]

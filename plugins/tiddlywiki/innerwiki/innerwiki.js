@@ -287,14 +287,15 @@ InnerWikiWidget.prototype.readTiddlerDataWidget = function(dataWidget) {
 		titles = this.wiki.filterTiddlers(dataWidget.getAttribute("$filter"));
 	}
 	if(titles) {
+		var self = this;
 		var results = [];
 		$tw.utils.each(titles,function(title,index) {
-			var tiddler = $tw.wiki.getTiddler(title),
+			var tiddler = self.wiki.getTiddler(title),
 				fields;
 			if(tiddler) {
 				fields = tiddler.getFieldStrings();
 			}
-			results.push($tw.utils.extend({},item,fields));
+			results.push($tw.utils.extend({},fields,item));
 		})
 		return results;
 	} else {

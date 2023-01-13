@@ -141,6 +141,7 @@ function KeyboardManager(options) {
 	this.shortcutKeysList = [], // Stores the shortcut-key descriptors
 	this.shortcutActionList = [], // Stores the corresponding action strings
 	this.shortcutParsedList = []; // Stores the parsed key descriptors
+	this.shortcutPriorityList = []; // Stores the parsed shortcut priority
 	this.lookupNames = ["shortcuts"];
 	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac")
 	this.lookupNames.push($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
@@ -179,7 +180,7 @@ Key descriptors have the following format:
 	ctrl+enter
 	ctrl+shift+alt+A
 */
-KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor) {
+KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor,options) {
 	var components = keyDescriptor.split(/\+|\-/),
 		info = {
 			keyCode: 0,
@@ -205,6 +206,9 @@ KeyboardManager.prototype.parseKeyDescriptor = function(keyDescriptor) {
 		if(this.namedKeys[s]) {
 			info.keyCode = this.namedKeys[s];
 		}
+	}
+	if(options.keyDescriptor) {
+		info.keyDescriptor = options.keyDescriptor;
 	}
 	if(info.keyCode) {
 		return info;
@@ -237,6 +241,7 @@ KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options)
 					lookupName = function(configName) {
 						var keyDescriptors = wiki.getTiddlerText("$:/config/" + configName + "/" + name);
 						if(keyDescriptors) {
+							options.keyDescriptor = keyDescriptor;
 							result.push.apply(result,self.parseKeyDescriptors(keyDescriptors,options));
 						}
 					};
@@ -245,7 +250,7 @@ KeyboardManager.prototype.parseKeyDescriptors = function(keyDescriptors,options)
 				});
 			}
 		} else {
-			result.push(self.parseKeyDescriptor(keyDescriptor));
+			result.push(self.parseKeyDescriptor(keyDescriptor,options));
 		}
 	});
 	return result;
@@ -276,12 +281,30 @@ KeyboardManager.prototype.checkKeyDescriptor = function(event,keyInfo) {
 };
 
 KeyboardManager.prototype.checkKeyDescriptors = function(event,keyInfoArray) {
+	return (this.getMatchingKeyDescriptor(event,keyInfoArray) !== null);
+};
+
+KeyboardManager.prototype.getMatchingKeyDescriptor = function(event,keyInfoArray) {
 	for(var t=0; t<keyInfoArray.length; t++) {
 		if(this.checkKeyDescriptor(event,keyInfoArray[t])) {
-			return true;
+			return keyInfoArray[t];
 		}
 	}
-	return false;
+	return null;
+};
+
+KeyboardManager.prototype.getEventModifierKeyDescriptor = function(event) {
+	return event.ctrlKey && !event.shiftKey	&& !event.altKey && !event.metaKey ? "ctrl" : 
+		event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey ? "shift" : 
+		event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey ? "ctrl-shift" : 
+		event.altKey && !event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt" : 
+		event.altKey && event.shiftKey && !event.ctrlKey && !event.metaKey ? "alt-shift" : 
+		event.altKey && event.ctrlKey && !event.shiftKey && !event.metaKey ? "ctrl-alt" : 
+		event.altKey && event.shiftKey && event.ctrlKey && !event.metaKey ? "ctrl-alt-shift" : 
+		event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey ? "meta" : 
+		event.metaKey && event.ctrlKey && !event.shiftKey && !event.altKey ? "meta-ctrl" :
+		event.metaKey && event.ctrlKey && event.shiftKey && !event.altKey ? "meta-ctrl-shift" :
+		event.metaKey && event.ctrlKey && event.shiftKey && event.altKey ? "meta-ctrl-alt-shift" : "normal";
 };
 
 KeyboardManager.prototype.getShortcutTiddlerList = function() {
@@ -296,12 +319,23 @@ KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 		this.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
 		this.shortcutActionList[i] = tiddlerFields.text;
 		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ? this.parseKeyDescriptors(this.shortcutKeysList[i]) : undefined;
+		this.shortcutPriorityList[i] = tiddlerFields.priority === "yes" ? true : false;
 	}
 };
 
-KeyboardManager.prototype.handleKeydownEvent = function(event) {
+/*
+event: the keyboard event object
+options:
+	onlyPriority: true if only priority global shortcuts should be invoked
+*/
+KeyboardManager.prototype.handleKeydownEvent = function(event, options) {
+	options = options || {};
 	var key, action;
 	for(var i=0; i<this.shortcutTiddlers.length; i++) {
+		if(options.onlyPriority && this.shortcutPriorityList[i] !== true) {
+			continue;
+		}
+
 		if(this.shortcutParsedList[i] !== undefined && this.checkKeyDescriptors(event,this.shortcutParsedList[i])) {
 			key = this.shortcutParsedList[i];
 			action = this.shortcutActionList[i];
@@ -310,7 +344,7 @@ KeyboardManager.prototype.handleKeydownEvent = function(event) {
 	if(key !== undefined) {
 		event.preventDefault();
 		event.stopPropagation();
-		$tw.rootWidget.invokeActionString(action,$tw.rootWidget);
+		$tw.rootWidget.invokeActionString(action,$tw.rootWidget,event);
 		return true;
 	}
 	return false;

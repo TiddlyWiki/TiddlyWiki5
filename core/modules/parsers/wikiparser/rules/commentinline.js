@@ -31,7 +31,7 @@ exports.findNextMatch = function(startPos) {
 	this.matchRegExp.lastIndex = startPos;
 	this.match = this.matchRegExp.exec(this.parser.source);
 	if(this.match) {
-		this.endMatchRegExp.lastIndex = startPos + this.match[0].length;
+		this.endMatchRegExp.lastIndex = this.match.index + this.match[0].length;
 		this.endMatch = this.endMatchRegExp.exec(this.parser.source);
 		if(this.endMatch) {
 			return this.match.index;

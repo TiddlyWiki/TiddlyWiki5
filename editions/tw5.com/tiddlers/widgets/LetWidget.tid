@@ -1,0 +1,60 @@
+title: LetWidget
+created: 20211028115900000
+modified: 20221001094658854
+tags: Widgets
+caption: let
+
+! Introduction
+
+<<.from-version "5.2.1">> The <<.wid let>> widget allows multiple variables to be set in one operation. In some situations it can result in simpler code than using the more flexible <<.wlink SetWidget>> widget. It differs from the <<.wlink VarsWidget>> widget in that variables you're defining may depend on earlier variables defined within the same <<.wid let>>.
+
+! Content and Attributes
+
+The content of the <<.wid let>> widget is the scope for the value assigned to the variable.
+
+|!Attribute |!Description |
+|//{attributes}// |Each attribute name specifies a variable name. The attribute value is assigned to the variable |
+
+Attributes are evaluated in the order they are written. Attributes with the same name are allowed. Each time a duplicate attribute is encountered, it will replace the existing value set by the earlier duplicate.
+
+<<.note """<<.from-version "5.2.4">> There is no longer any restriction on using variable names that start with the $ character.""">>
+
+! Examples
+
+Consider a case where you need to set multiple variables, where some depend on the evaluation of others.
+
+Using the <<.wid let>> widget, this situation may be handled in the following way:
+
+```
+\define helloworld() Hello world!
+
+<$let target="MyTiddler" currentTiddler={{{ [<target>prefix[$:/settings/for/]] }}} settings={{!!text}} currentTiddler=<<target>> >
+  The settings for <<currentTiddler>> are: <<settings>>
+</$let>
+```
+
+In contrast, here is the same example using the <<.wid set>> widget:
+
+```
+<$set name="target" value="MyTiddler" >
+<$set name="currentTiddler" value={{{ [<target>prefix[$:/settings/for/]] }}} >
+<$set name="settings" value={{!!text}} >
+<$set name="currentTiddler" value=<<target>> >
+  The settings for <<currentTiddler>> are: <<settings>>
+</$set>
+</$set>
+</$set>
+</$set>
+```
+
+! Remarks
+
+This widget differs from <<.wid vars>> in the following way:
+
+* Each variable's definition will be immediately available to all proceeding variables in the same let widget. This differs from vars, in which definitions which depend on some variable will always look to the widget's outer scope for a value.
+
+This widget differs from <<.wid set>> in the following ways:
+
+* A fallback (also known as "emptyValue") cannot be specified
+* Filters cannot be used to produce a conditional variable assignment
+* Variable names must be literal strings

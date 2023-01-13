@@ -117,3 +117,4 @@ if(typeof(exports) === "undefined") {
 	// Export functionality as a module
 	exports.bootprefix = _bootprefix;
 }
+//# sourceURL=$:/boot/bootprefix.js

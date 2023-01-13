@@ -1,48 +1,6 @@
 title: $:/core/ui/EditorToolbar/stamp-dropdown
 
-\define toolbar-button-stamp-inner()
-<$button tag="a">
-
-<$list filter="[[$(snippetTitle)$]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]]">
-
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="replace-selection"
-	text={{$(snippetTitle)$}}
-/>
-
-</$list>
-
-
-<$list filter="[[$(snippetTitle)$]addsuffix[/prefix]is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]] [[$(snippetTitle)$]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]is[missing]] [[$(snippetTitle)$]addsuffix[/prefix]!is[missing]removesuffix[/prefix]addsuffix[/suffix]!is[missing]]">
-
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="wrap-selection"
-	prefix={{{ [[$(snippetTitle)$]addsuffix[/prefix]get[text]] }}}
-suffix={{{ [[$(snippetTitle)$]addsuffix[/suffix]get[text]] }}}
-/>
-
-</$list>
-
-<$action-deletetiddler
-	$tiddler=<<dropdown-state>>
-/>
-
-<$transclude tiddler=<<snippetTitle>> field="caption" mode="inline">
-
-<$view tiddler=<<snippetTitle>> field="title" />
-
-</$transclude>
-
-</$button>
-\end
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TextEditor/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
-
-<<toolbar-button-stamp-inner>>
-
-</$list>
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/TextEditor/Snippet" subFilter="!is[draft]" itemTemplate="$:/core/ui/EditorToolbar/StampDropdown/ItemTemplate"/>
 
 ----
 

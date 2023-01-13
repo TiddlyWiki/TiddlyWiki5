@@ -1,0 +1,15 @@
+title: $:/snippets/ListTaggedCascade
+
+\whitespace trim
+{{||$:/language/ControlPanel/Cascades/TagPrompt}}
+
+<ol>
+<$list filter="[all[shadows+tiddlers]tag<currentTiddler>]">
+<li>
+<div>
+<$link><$text text=<<currentTiddler>>/></$link>
+</div>
+<$codeblock code={{!!text}}/>
+</li>
+</$list>
+</ol>

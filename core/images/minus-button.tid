@@ -1,0 +1,4 @@
+title: $:/core/images/minus-button
+tags: $:/tags/Image
+
+<svg width="22pt" height="22pt" class="tc-image-minus-button tc-image-button" viewBox="0 0 128 128"><path d="M64 0c35.346 0 64 28.654 64 64 0 35.346-28.654 64-64 64-35.346 0-64-28.654-64-64C0 28.654 28.654 0 64 0zm.332 16c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"/><rect width="80" height="16" x="24" y="56" rx="8"/></svg>

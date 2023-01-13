@@ -12,7 +12,7 @@ TiddlyWiki5 can be used as a simple task management system without further custo
 
 <$list filter="[!has[draft.of]tag[task]!tag[done]sort[created]]">
 
-<$checkbox tag="done"> <$link to={{!!title}}><$view field="title"/></$link></$checkbox>
+<$checkbox tag="done"> <$link/></$checkbox>
 
 </$list>
 
@@ -20,6 +20,6 @@ TiddlyWiki5 can be used as a simple task management system without further custo
 
 <$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
 
-<$checkbox tag="done"> ~~<$link to={{!!title}}><$view field="title"/></$link>~~</$checkbox>
+<$checkbox tag="done"> ~~<$link/>~~</$checkbox>
 
 </$list>

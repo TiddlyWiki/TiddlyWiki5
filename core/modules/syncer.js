@@ -113,8 +113,16 @@ function Syncer(options) {
 			return confirmationMessage;
 		});
 		// Listen out for login/logout/refresh events in the browser
-		$tw.rootWidget.addEventListener("tm-login",function() {
-			self.handleLoginEvent();
+		$tw.rootWidget.addEventListener("tm-login",function(event) {
+			var username = event && event.paramObject && event.paramObject.username,
+				password = event && event.paramObject && event.paramObject.password;
+			if(username && password) {
+				// Login with username and password
+				self.login(username,password,function() {});
+			} else {
+				// No username and password, so we display a prompt
+				self.handleLoginEvent();				
+			}
 		});
 		$tw.rootWidget.addEventListener("tm-logout",function() {
 			self.handleLogoutEvent();
@@ -127,7 +135,7 @@ function Syncer(options) {
 		});
 	}
 	// Listen out for lazyLoad events
-	if(!this.disableUI && $tw.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
+	if(!this.disableUI && this.wiki.getTiddlerText(this.titleSyncDisableLazyLoading) !== "yes") {
 		this.wiki.addEventListener("lazyLoad",function(title) {
 			self.handleLazyLoadEvent(title);
 		});		
@@ -180,12 +188,14 @@ Syncer.prototype.readTiddlerInfo = function() {
 	var self = this,
 		tiddlers = this.getSyncedTiddlers();
 	$tw.utils.each(tiddlers,function(title) {
-		var tiddler = self.wiki.tiddlerExists(title) && self.wiki.getTiddler(title);
-		self.tiddlerInfo[title] = {
-			revision: self.getTiddlerRevision(title),
-			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
-			changeCount: self.wiki.getChangeCount(title)
-		};
+		var tiddler = self.wiki.getTiddler(title);
+		if(tiddler) {
+			self.tiddlerInfo[title] = {
+				revision: self.getTiddlerRevision(title),
+				adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
+				changeCount: self.wiki.getChangeCount(title)
+			};
+		}
 	});
 };
 
@@ -202,7 +212,7 @@ Syncer.prototype.isDirty = function() {
 		if(this.wiki.tiddlerExists(title)) {
 			if(tiddlerInfo) {
 				// If the tiddler is known on the server and has been modified locally then it needs to be saved to the server
-				if($tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
+				if(this.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
 					return true;
 				}
 			} else {
@@ -259,7 +269,7 @@ Syncer.prototype.getStatus = function(callback) {
 		// Get login status
 		this.syncadaptor.getStatus(function(err,isLoggedIn,username,isReadOnly,isAnonymous) {
 			if(err) {
-				self.logger.alert(err);
+				self.displayError("Get Status Error",err);
 			} else {
 				// Set the various status tiddlers
 				self.wiki.addTiddler({title: self.titleIsReadOnly,text: isReadOnly ? "yes" : "no"});
@@ -295,7 +305,8 @@ Syncer.prototype.syncFromServer = function() {
 				self.pollTimerId = null;
 				self.syncFromServer.call(self);
 			},self.pollTimerInterval);
-		};
+		},
+		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
 	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
 		this.logger.log("Retrieving updated tiddler list");
 		cancelNextSync();
@@ -310,9 +321,11 @@ Syncer.prototype.syncFromServer = function() {
 					self.titlesToBeLoaded[title] = true;
 				});
 				$tw.utils.each(updates.deletions,function(title) {
-					delete self.tiddlerInfo[title];
-					self.logger.log("Deleting tiddler missing from server:",title);
-					self.wiki.deleteTiddler(title);
+					if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
+						delete self.tiddlerInfo[title];
+						self.logger.log("Deleting tiddler missing from server:",title);
+						self.wiki.deleteTiddler(title);
+					}
 				});
 				if(updates.modifications.length > 0 || updates.deletions.length > 0) {
 					self.processTaskQueue();
@@ -355,9 +368,11 @@ Syncer.prototype.syncFromServer = function() {
 			}
 			// Delete any tiddlers that were previously reported but missing this time
 			$tw.utils.each(previousTitles,function(title) {
-				delete self.tiddlerInfo[title];
-				self.logger.log("Deleting tiddler missing from server:",title);
-				self.wiki.deleteTiddler(title);
+				if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
+					delete self.tiddlerInfo[title];
+					self.logger.log("Deleting tiddler missing from server:",title);
+					self.wiki.deleteTiddler(title);
+				}
 			});
 			self.processTaskQueue();
 		});
@@ -387,6 +402,7 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 			// Mark the tiddler as needing loading, and having already been lazily loaded
 			this.titlesToBeLoaded[title] = true;
 			this.titlesHaveBeenLazyLoaded[title] = true;
+			this.processTaskQueue();
 		}
 	}
 };
@@ -398,15 +414,27 @@ Syncer.prototype.handleLoginEvent = function() {
 	var self = this;
 	this.getStatus(function(err,isLoggedIn,username) {
 		if(!err && !isLoggedIn) {
-			$tw.passwordPrompt.createPrompt({
-				serviceName: $tw.language.getString("LoginToTiddlySpace"),
-				callback: function(data) {
-					self.login(data.username,data.password,function(err,isLoggedIn) {
-						self.syncFromServer();
-					});
-					return true; // Get rid of the password prompt
-				}
+			if(self.syncadaptor && self.syncadaptor.displayLoginPrompt) {
+				self.syncadaptor.displayLoginPrompt(self);
+			} else {
+				self.displayLoginPrompt();
+			}
+		}
+	});
+};
+
+/*
+Dispay a password prompt
+*/
+Syncer.prototype.displayLoginPrompt = function() {
+	var self = this;
+	var promptInfo = $tw.passwordPrompt.createPrompt({
+		serviceName: $tw.language.getString("LoginToTiddlySpace"),
+		callback: function(data) {
+			self.login(data.username,data.password,function(err,isLoggedIn) {
+				self.syncFromServer();
 			});
+			return true; // Get rid of the password prompt
 		}
 	});
 };
@@ -445,7 +473,7 @@ Syncer.prototype.handleLogoutEvent = function() {
 	if(this.syncadaptor.logout) {
 		this.syncadaptor.logout(function(err) {
 			if(err) {
-				self.logger.alert(err);
+				self.displayError("Logout Error",err);
 			} else {
 				self.getStatus();
 			}
@@ -524,7 +552,7 @@ Syncer.prototype.chooseNextTask = function() {
 			tiddlerInfo = this.tiddlerInfo[title];
 		if(tiddler) {
 			// If the tiddler is not known on the server, or has been modified locally no more recently than the threshold then it needs to be saved to the server
-			var hasChanged = !tiddlerInfo || $tw.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
+			var hasChanged = !tiddlerInfo || this.wiki.getChangeCount(title) > tiddlerInfo.changeCount,
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {
@@ -581,6 +609,8 @@ SaveTiddlerTask.prototype.run = function(callback) {
 			};
 			// Invoke the callback
 			callback(null);
+		},{
+			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
 		this.syncer.logger.log(" Not Dispatching 'save' task:",this.title,"tiddler does not exist");

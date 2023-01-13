@@ -10,6 +10,12 @@ Listing/Preview/DiffFields: Verschil (Velden)
 Listing/Preview/Fields: Velden
 Listing/Preview/Text: Tekst
 Listing/Preview/TextRaw: Tekst (Ruw)
+Listing/Rename/CancelRename: Annuleer
+Listing/Rename/ConfirmRename: Hernoem tiddler
+Listing/Rename/OverwriteWarning: Een tiddler met deze naam bestaat al
+
+Listing/Rename/Prompt: Hernoem tot:
+Listing/Rename/Tooltip: Hernoem tiddler voor import
 Listing/Select/Caption: Selecteer
 Listing/Status/Caption: Status
 Listing/Title/Caption: Titel

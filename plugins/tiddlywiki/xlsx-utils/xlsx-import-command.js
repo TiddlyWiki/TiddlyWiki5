@@ -34,9 +34,10 @@ Command.prototype.execute = function() {
 		XLSXImporter = require("$:/plugins/tiddlywiki/xlsx-utils/importer.js").XLSXImporter,
 		importer = new XLSXImporter({
 			filename: filename,
-			importSpec: importSpec
+			importSpec: importSpec,
+			wiki: wiki
 		});
-	$tw.wiki.addTiddlers(importer.getResults());
+	wiki.addTiddlers(importer.getResults());
 	return null;
 };
 

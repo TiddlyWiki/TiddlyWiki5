@@ -5,9 +5,11 @@ module-type: command
 
 Command to save the subtiddlers of a bundle tiddler as a series of JSON files
 
---savelibrarytiddlers <tiddler> <pathname> <skinnylisting>
+--savelibrarytiddlers <tiddler> <tiddler-filter> <pathname> <skinnylisting>
 
 The tiddler identifies the bundle tiddler that contains the subtiddlers.
+
+The tiddler filter specifies the plugins to be included.
 
 The pathname specifies the pathname to the folder in which the JSON files should be saved. The filename is the URL encoded title of the subtiddler.
 
@@ -67,9 +69,9 @@ Command.prototype.execute = function() {
 		$tw.utils.createFileDirectories(pathname);
 		fs.writeFileSync(pathname,JSON.stringify(tiddler),"utf8");
 		// Collect the skinny list data
-		var pluginTiddlers = JSON.parse(tiddler.text),
+		var pluginTiddlers = $tw.utils.parseJSONSafe(tiddler.text),
 			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
-			doesRequireReload = !!$tw.wiki.doesPluginInfoRequireReload(pluginTiddlers),
+			doesRequireReload = !!self.commander.wiki.doesPluginInfoRequireReload(pluginTiddlers),
 			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
 			iconType = iconTiddler.type,
 			iconText = iconTiddler.text,

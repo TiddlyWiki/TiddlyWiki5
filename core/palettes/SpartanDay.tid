@@ -3,6 +3,7 @@ tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 description: Cold, spartan day colors
 name: Spartan Day
+color-scheme: light
 
 alert-background: <<colour background>>
 alert-border: <<colour very-muted-foreground>>
@@ -33,6 +34,8 @@ external-link-foreground-hover:
 external-link-foreground-visited: 
 external-link-foreground: 
 foreground: rgba(0, 0, 0, 0.87)
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-background: <<colour background>>
 message-border: <<colour very-muted-foreground>>
 message-foreground: rgba(0, 0, 0, 0.54)

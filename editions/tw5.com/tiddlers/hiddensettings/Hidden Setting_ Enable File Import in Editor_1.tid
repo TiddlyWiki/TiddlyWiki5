@@ -1,0 +1,12 @@
+created: 20210519155447339
+modified: 20210519160010708
+tags: [[Hidden Settings]]
+title: Hidden Setting: Enable File Import in Editor
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.0">>
+
+$:/config/Editor/EnableImportFilter
+
+This filter determines whether dragging and dropping files in the editor works for a given tiddler or not. A non-empty result enables drag and drop in the editor for that tiddler.
+This filter is used in such a manner that it respects the global drag and drop setting.

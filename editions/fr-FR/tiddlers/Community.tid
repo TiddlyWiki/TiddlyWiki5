@@ -1,10 +1,12 @@
-fr-title: Communauté
 created: 20130909151600000
-modified: 20141019103047540
+fr-title: Communauté
+modified: 20220217155910582
 tags: TableOfContents
 title: Community
 type: text/vnd.tiddlywiki
 
-C'est ici que nous rassemblons les dernières productions les plus utiles en provenance de la communauté <<tw>>.
+<<.tip "Les liens les plus utiles et les plus récents sont maintenant regroupés dans [[l’Agrégateur de liens communautaire|Community Links Aggregator]].">>
 
-<<tabs "Forums Latest Tutorials Resources Examples Articles Meetups" "Latest">>
+Lorsque tous les liens pertinents auront été transférés, ces entrées seront retirées du site tiddlywiki.com.
+
+<<tabs "Forums Latest Tutorials [[Community Editions]] [[Community Plugins]] [[Community Themes]] [[Community Palettes]] [[Other Resources]] Examples Articles Meetups" "Latest">>

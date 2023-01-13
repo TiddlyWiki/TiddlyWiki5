@@ -1,51 +1,38 @@
 created: 20160107222352710
-modified: 20191022095637710
-tags: [[TiddlyWiki on Node.js]] Plugins
+modified: 20220617122143911
+tags: Plugins
 title: Installing a plugin from the plugin library
 type: text/vnd.tiddlywiki
 
-! Standalone Configuration
+\rules except wikilink
 
-Follow these instructions when using TiddlyWiki as a standalone HTML file:
+If you want to follow the steps //side by side// you can <<open-tiddler-in-window>>. 
 
-# Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
+Follow these instructions when using TiddlyWiki as a standalone, single file wiki.
+
 # Open your TiddlyWiki in a browser
-# Open the [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>>, click on the ''Plugins'' tab and then the <<.icon $:/core/images/download-button>> ''Get more plugins'' button
+
+# Create a backup of your current wiki file ([[just in case|The First Rule of Using TiddlyWiki]])
+
+# Open the <<controlPanel-plugin-link>>
+
+#* Click on the ''Plugins'' tab and then the 
+#*<<.icon $:/core/images/download-button>> ''Get more plugins'' button
+
 # Click <<.icon $:/core/images/chevron-right>> ''open plugin library'' to open the official plugin library
+
 # When the library listing is loaded:
 ## Use the tab to select between ''plugins'', ''themes'' and ''languages''
 ## Use the ''search'' box to search the plugin details
+
 # Click the ''install'' button to install a plugin
+
 # Save your TiddlyWiki <<.icon $:/core/images/save-button>>
+
 # If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completes installation of the plugin <<.icon $:/core/images/refresh-button>>
-#* <<.from-version "5.1.22">> It is no longer necessary to refresh TiddlyWiki when deleting plugins that support dynamic loading. See PluginMechanism for more details
+
+#* <<.from-version "5.1.22">> It is no longer necessary to refresh TiddlyWiki when deleting plugins that support dynamic loading. See the [[PluginMechanism]] for more details
+
 # The plugin should now be available for use
 
-! Client-Server Configuration
-
-Follow these instructions when using TiddlyWiki under Node.js:
-
-# Identify the plugins you want to install using the ''Plugins'' tab of [[control panel|$:/ControlPanel]] (''don't'' install the plugins from here, though). Plugins are identified by their type (ie language, theme or plugin) and their publisher and title. For example, the plugin `$:/plugins/tiddlywiki/internals` is referred to as ''tiddlywiki/internals''
-# Quit the server if it is running
-# Edit the `tiddlywiki.info` file (it is in JSON format) and locate the `plugins`, `themes` or `languages` section (see below)
-# Add entries corresponding to the plugins you wish to add. Take care to retain commas to separate items, but do not terminate the last item in a list with a comma
-# Restart the server
-
-```
-{
-	"plugins": [
-		"tiddlywiki/codemirror"
-	],
-	"themes": [
-		"tiddlywiki/vanilla",
-		"tiddlywiki/snowwhite"
-	],
-    "languages": [
-        "es-ES",
-        "fr-FR",
-        "en-EN"
-    ]
-}
-```
-
-See also [[Installing custom plugins on Node.js]].
+<$macrocall $name=".note" _="""If you use TiddlyWiki with ''Node.js'' have a closer look at [[Installing official plugins on Node.js]]<br>An overview can be found at [[Plugins]]"""/> 

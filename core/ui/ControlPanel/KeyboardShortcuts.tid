@@ -5,8 +5,11 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 \define lingo-base() $:/language/ControlPanel/KeyboardShortcuts/
 
 \define new-shortcut(title)
+\whitespace trim
 <div class="tc-dropdown-item-plain">
-<$edit-shortcut tiddler="$title$" placeholder={{$:/language/ControlPanel/KeyboardShortcuts/Add/Prompt}} focus="true" style="width:auto;"/> <$button>
+<$edit-shortcut tiddler="$title$" placeholder={{$:/language/ControlPanel/KeyboardShortcuts/Add/Prompt}} focus="true" style="width:auto;"/>
+&#32;
+<$button>
 <<lingo Add/Caption>>
 <$action-listops
 	$tiddler="$(shortcutTitle)$"
@@ -21,6 +24,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 \end
 
 \define shortcut-list-item(caption)
+\whitespace trim
 <td>
 </td>
 <td style="text-align:right;font-size:0.7em;">
@@ -31,16 +35,16 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 <$button popup=<<qualify "$:/state/dropdown/$(shortcutTitle)$">> class="tc-btn-invisible">
 {{$:/core/images/edit-button}}
 </$button>
+&#32;
 <$macrocall $name="displayshortcuts" $output="text/html" shortcuts={{$(shortcutTitle)$}} prefix="<kbd>" separator="</kbd> <kbd>" suffix="</kbd>"/>
 
 <$reveal state=<<qualify "$:/state/dropdown/$(shortcutTitle)$">> type="popup" position="below" animate="yes">
 <div class="tc-block-dropdown-wrapper">
 <div class="tc-block-dropdown tc-edit-type-dropdown tc-popup-keep">
-<$list filter="[list[$(shortcutTitle)$!!text]sort[title]]" variable="shortcut" emptyMessage="""
-<div class="tc-dropdown-item-plain">
-//<<lingo NoShortcuts/Caption>>//
-</div>
-""">
+<$list
+	filter="[list[$(shortcutTitle)$!!text]sort[title]]"
+	variable="shortcut"
+	emptyMessage="<div class='tc-dropdown-item-plain'>//<<lingo NoShortcuts/Caption>>//</div>">
 <div class="tc-dropdown-item-plain">
 <$button class="tc-btn-invisible" tooltip={{$:/language/ControlPanel/KeyboardShortcuts/Remove/Hint}}>
 <$action-listops
@@ -50,6 +54,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 />
 <small>{{$:/core/images/close-button}}</small>
 </$button>
+&#32;
 <kbd>
 <$macrocall $name="displayshortcuts" $output="text/html" shortcuts=<<shortcut>>/>
 </kbd>
@@ -65,6 +70,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 \end
 
 \define shortcut-list(caption,prefix)
+\whitespace trim
 <tr>
 <$list filter="[[$prefix$$(shortcutName)$]]" variable="shortcutTitle">
 <<shortcut-list-item "$caption$">>
@@ -73,7 +79,8 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 \end
 
 \define shortcut-editor()
-<<shortcut-list "All" "$:/config/shortcuts/">>
+\whitespace trim
+<<shortcut-list "All" "$:/config/shortcuts/">> 
 <<shortcut-list "Mac" "$:/config/shortcuts-mac/">>
 <<shortcut-list "NonMac" "$:/config/shortcuts-not-mac/">>
 <<shortcut-list "Linux" "$:/config/shortcuts-linux/">>
@@ -87,6 +94,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 \end
 
 \define shortcut-item-inner()
+\whitespace trim
 <tr>
 <td>
 <$reveal type="nomatch" state=<<dropdownStateTitle>> text="open">
@@ -107,6 +115,7 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 {{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
+&#32;
 ''<$text text=<<shortcutName>>/>''
 </td>
 <td>
@@ -126,10 +135,12 @@ caption: {{$:/language/ControlPanel/KeyboardShortcuts/Caption}}
 \end
 
 \define shortcut-item()
+\whitespace trim
 <$set name="dropdownStateTitle" value=<<qualify "$:/state/dropdown/keyboardshortcut/$(shortcutName)$">>>
 <<shortcut-item-inner>>
 </$set>
 \end
+\whitespace trim
 
 <table>
 <tbody>

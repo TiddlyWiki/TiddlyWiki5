@@ -1,0 +1,35 @@
+title: $:/language/Import/
+
+Editor/Import/Heading: Importuj obrazy i dodaj je do edytora
+Imported/Hint: Poniższe tiddlery zostały zaimportowane:
+Listing/Cancel/Caption: Anuluj
+Listing/Cancel/Warning: Czy chcesz anulować importowanie?
+Listing/Hint: Poniższe tiddlery są gotowe do zaimportowania
+Listing/Import/Caption: Importuj
+Listing/Select/Caption: Wybierz
+Listing/Status/Caption: Status
+Listing/Title/Caption: Tytuł
+Listing/Preview: Podgląd
+Listing/Preview/Text: Tekst
+Listing/Preview/TextRaw: Tekst (oryginalny)
+Listing/Preview/Fields: Pola
+Listing/Preview/Diff: Różnica
+Listing/Preview/DiffFields: Róznica (Pola)
+Listing/Rename/Tooltip: Zmień nazwę tiddlera przed importem
+Listing/Rename/Prompt: Zmień nazwę na:
+Listing/Rename/ConfirmRename: Zmień nazwę tiddlera
+Listing/Rename/CancelRename: Anuluj
+Listing/Rename/OverwriteWarning: Tiddler o tej nazwie już istnieje.
+Upgrader/Plugins/Suppressed/Incompatible: Zablokowano niekompatybilne lub przestarzałe wtyczki.
+Upgrader/Plugins/Suppressed/Version: Zablokowano wtyczkę (ze względu na wersję: <<incoming>> nie jest nowsza niż istniejąca już <<existing>>)
+Upgrader/Plugins/Upgraded: Zaktualizowano wtyczkę z <<incoming>> na <<upgrade>>.
+Upgrader/State/Suppressed: Zablokowano tiddler tymczasowego stanu.
+Upgrader/System/Disabled: Wyłączony systemowego tiddlera.
+Upgrader/System/Suppressed: Zablokowano systemowego tiddlera.
+Upgrader/System/Warning: Tiddler z głównym modułem.
+Upgrader/System/Alert: Ta operacja zaimportuje tiddlera, który nadpisze jeden z gównych modułuch. Nie jest to zalecane, gdyż może spowodować niestabilne działanie systemu.
+Upgrader/ThemeTweaks/Created: Zmigrowano dostosowanie motywu z <$text text=<<from>>/>.
+Upgrader/Tiddler/Disabled: Wyłaczony tiddlera.
+Upgrader/Tiddler/Selected: Zaznaczony tiddlera.
+Upgrader/Tiddler/Unselected: Odznaczony tiddlera.
+

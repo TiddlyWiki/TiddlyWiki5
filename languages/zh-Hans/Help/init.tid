@@ -19,5 +19,5 @@ tiddlywiki ./MyWikiFolder --init empty
 * 其中 "edition" 默认为 ''empty''
 * 若 wiki 文件夹不是空的，则初始化命令将失败
 * 初始化命令会删除 'tiddlywiki.info' 文件内所有 'includeWikis' 的定义。
-* 当指定多个版本时，这些版本于初始化后，将覆写早期版本共用的所有文件 (故此最终的 `tiddlywiki.info` 文件将是从最近的版本复制而得)
+* 当指定多个版本时，这些版本于初始化后，将覆盖早期版本共用的所有文件 (故此最终的 `tiddlywiki.info` 文件将是从最近的版本复制而得)
 * `--editions` 传回所有可用版本的清单。

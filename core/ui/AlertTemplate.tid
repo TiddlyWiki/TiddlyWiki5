@@ -1,12 +1,21 @@
 title: $:/core/ui/AlertTemplate
 
+\whitespace trim
 <div class="tc-alert">
 <div class="tc-alert-toolbar">
 <$button class="tc-btn-invisible"><$action-deletetiddler $tiddler=<<currentTiddler>>/>{{$:/core/images/cancel-button}}</$button>
 </div>
 <div class="tc-alert-subtitle">
 <$wikify name="format" text=<<lingo Tiddler/DateFormat>>>
-<$view field="component"/> - <$view field="modified" format="date" template=<<format>>/> <$reveal type="nomatch" state="!!count" text=""><span class="tc-alert-highlight">({{$:/language/Count}}: <$view field="count"/>)</span></$reveal>
+<$view field="component"/>
+&#32;-&#32;
+<$view field="modified" format="date" template=<<format>>/>
+&#32;
+<$reveal type="nomatch" state="!!count" text="">
+<span class="tc-alert-highlight">
+({{$:/language/Count}}:&#32;<$view field="count"/>)
+</span>
+</$reveal>
 </$wikify>
 </div>
 <div class="tc-alert-body">

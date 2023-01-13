@@ -1,0 +1,185 @@
+caption: 5.1.22
+created: 20200415160825341
+modified: 20200415160825341
+released: 20200415160825341
+tags: ReleaseNotes
+title: Release 5.1.22
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.21...v5.1.22]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[Thomas Elmiger|https://github.com/telmiger]] for his winning design for the banner for this release (here are the [[other entries|https://groups.google.com/g/tiddlywiki/c/rYrja18_SfQ/m/IX-jFS4cBQAJ]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/1ed36adab62c117849ee29d9535136eac70d3bc7/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
+! Major Improvements
+
+!!  Dynamic Plugin Loading
+
+Plugins [[can now|https://github.com/Jermolene/TiddlyWiki5/pull/4259]] be loaded or deleted dynamically, without requiring a reload -- as long as they don't contain any ~JavaScript modules. Plugins that require a reload are indicated in the plugin chooser in [[$:/ControlPanel]].
+
+The [[plugin listing|$:/core/ui/ControlPanel/Plugins]] and the [[plugin chooser|$:/core/ui/ControlPanel/Modals/AddPlugins]] in the control panel feature several improvements:
+
+* A new ''"Updates" tab'' listing all upgrades available from a plugin library, and a button to update all of them with one click
+* Tabs are now used to display plugin libraries within the plugin chooser
+* The plugin chooser now displays plugins that provide add-on functionality to another plugin as nested ''"sub-plugins"'', making the main listing easier to navigate
+* Plugins may now declare dependencies that are ''automatically installed'' without user intervention
+* All plugins are now displayed more consistently, including a concise, informal name (in addition to the description and title)
+
+!! Client-Server Improvements
+
+This release sees several improvements to the client-server configuration:
+
+* Improved resilience to connection errors. Errors encountered by the browser are automatically retried, and when they succeed the associated error messages are automatically removed
+* Changes to system tiddlers are now synchronised from the server to the browser
+* Deletions of tiddlers on the server are now synchronised to the browser
+* New "cloud" page control button with a dropdown menu showing status and additional actions:
+** "Refresh from server" to force an immediate check for changes from the server
+** "Logout"
+** "Save snapshot for offline use" to save a copy of the wiki without the client-server components
+** "Copy syncer logs to clipboard" to make it easier to ask end users for debugging information 
+* Added "filter" and "exclude" parameters to the [[GET /recipes/default/tiddlers.json|WebServer API: Get All Tiddlers]] endpoint to allow the returned tiddlers and fields to be filtered
+* Enhanced LazyLoading to include skinny versions of tiddlers in the HTML file, and to avoid unnecessary loads from the server
+* The official plugin library is now disabled when the tiddlyweb adaptor is active
+* Internal file system details are no longer exposed to browsers when a file request fails (see https://github.com/Jermolene/TiddlyWiki5/issues/3724)
+
+See the [[pull request on GitHub for more details|https://github.com/Jermolene/TiddlyWiki5/pull/4373]]. 
+
+!! New [[compare Operator]]
+
+[[Added|https://github.com/Jermolene/TiddlyWiki5/issues/4554]] a new filter operator for comparing numbers, strings, dates and version numbers. For example:
+
+:`[[2]compare:number:eq[3]]`
+;returns nothing
+:`[[2]compare:number:lt[3]]`
+; returns "2"
+:`[[2]compare:number:eq[2]]`
+; returns "2"
+:`=1.2 =1.8 =2.3 =3.4 =7.2 +[compare:number:gt[1.5]compare:number:lt[2.5]]`
+; returns "1.8" "2.3"
+:`[[1]compare:number:gt[2]then[yes]else[no]]`
+; returns "no"
+
+!! New Plugins
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ad2d4503e584ce9f931dbd1e98f95738b2841e51]] new ''menubar'' plugin that creates a menu bar that is responsive on mobile devices, and supports search, dropdowns and links
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/447cd56da9db2ee169607f32923081ac47e78354]] new ''freelinks'' plugin to automatically create links from any tiddler title, without having to type double square brackets or use CamelCase.
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9b48a1c82955d1050c426fef559f42f4b8ec56e7]] new ''dynannotate'' plugin containing primitives for overlaying annotations or highlights over other content
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/005c584d85505b9477169ef822752eed39dde66a]] new ''share'' plugin for sharing tiddlers via the URL location hash
+* [[Switched|https://github.com/Jermolene/TiddlyWiki5/pull/3876]] the ''markdown'' plugin to the newer and improved [[remarkable|https://github.com/jonschlinkert/remarkable]] library
+
+! Translation Improvements
+
+* Improved Chinese translation
+* Improved Dutch translation
+* Improved French translation
+* Improved German translations
+* Improved Portuguese translation
+
+! Performance Improvements
+
+* [[Optimised|https://github.com/Jermolene/TiddlyWiki5/pull/4108]] ImportVariablesWidget to improve performance of global macros
+* [[Optimised|https://github.com/Jermolene/TiddlyWiki5/commit/18f5333e01eb62ece65a86c457bf8a398f156930]] core SVG images to save approximately 100KB from the core plugin
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4421]] indexer for backlinks
+* [[Optimised|https://github.com/Jermolene/TiddlyWiki5/pull/4397]] [[sort Operator]]
+
+! Usability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/96eca32b1105416c317101aa91dd284f835a8ba8]] download button for binary tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4293]] ([[and here|https://github.com/Jermolene/TiddlyWiki5/pull/4296]]) spacing for page control buttons
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/9395d7567179c436d0e8ac26fc976d717eae7f50]] display of icons in documentation
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4238]] support in control panel for specifying the field that should receive focus when editing or creating a tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4314]] support in control panel for specifying the tags for new tiddlers and journals
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/05a3e1ad36c2fb383dd4975a578f95e8a6c3f325]] language attribute to HTML document to improve accessibility
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3943]] scaling of embedded videos
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4361]] "none" option in icon dropdown in $:/TagManager
+* Fixed a number of layout issues relating to the edit template and tag picker (see [[18151cc1|https://github.com/Jermolene/TiddlyWiki5/commit/18151cc193e8c0d613663d3ecf6437c63e540c2d]], [[793d84bc|https://github.com/Jermolene/TiddlyWiki5/commit/793d84bcb1bc52ee77c49090268dd242017cdaa9]], [[1cf2d079|https://github.com/Jermolene/TiddlyWiki5/commit/1cf2d0799d7027d58f4bdca857bc342dd778a330]], [[3c365a25|https://github.com/Jermolene/TiddlyWiki5/commit/3c365a2567ebfe12d78b0aed77a40969cd38563e]], [[45def4de|https://github.com/Jermolene/TiddlyWiki5/commit/45def4def441554a06c3e17742adc29a17d2a13c]], [[89728d8a|https://github.com/Jermolene/TiddlyWiki5/commit/89728d8a9a9fd9b888deb78f420dd5758ee63909]], [[4cf96e73|https://github.com/Jermolene/TiddlyWiki5/commit/4cf96e7339b3b7d8e84a5b73d9871cdad50c5a84]], [[bfa3ddd0|https://github.com/Jermolene/TiddlyWiki5/commit/bfa3ddd077404ad4627b9161bcadf3d5a539c1dc]] and [[74172b35|https://github.com/Jermolene/TiddlyWiki5/commit/74172b35ceae84f254e20d6d7ec4dff2cca692b1]])
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4494]] new ''Gruvbox Dark'' palette
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/4515]] (and [[https://github.com/Jermolene/TiddlyWiki5/pull/4517|here]])) Vanilla and Nord palettes
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/152125f53b9979bfd5511973038b4358d1ef48c4]] Railroad plugin to use standard palette colours
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/16c1cbee292604b2b8be36a15d5828893d132b20]] Comment plugin to add a link on each comment to the original post 
+
+! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4491]] new saver for https://gitea.io/
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/24d2804799b09278c4bb83918d8b75dfa49dbed4]] new ActionPopupWidget for triggering popups
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4442]] ''tabindex'' attribute to the ButtonWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bfbd886a8bbf2f6ce147ea526eec2098357d3ae7]] ''index'' attribute to the RangeWidget enabling it to be used with DataTiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6089c4de2921df0f76f605f1830fb2c04548f73c]] support for RefreshThrottling via the `throttle.refresh` field
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1150c87edb7478af6cc943eb0ef52fdf3051c121]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/8c894612914e21cf941a1daa953538c28ce91d8e]]) new `[is[binary]]` operand for the [[is Operator]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/68163684a2e57108e160295e445c194268b873c5]] usage of `publishFilter` in save templates -- see SavingMechanism
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/89716bb81d68b9c68d3c0fd2f2de96afad1b086a]] CSS class identifying the tiddler body editor
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e9211b0eee8e0b081f9f1597bde6673bf4c55d5c]] CSS classes to identify sidebar tabsets
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4208]] normalize.css from v3.0.0 to v8.0.1
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4502]] Highlight plugin to use highlight.js v9.18.1
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/pull/4226]] Jasmine to v3
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/7b66df688ae745537929a25799ef4a72d4437fcd]] AndTidWiki saver
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5a5c967a3943beb6a4fa513cb34d231e46304452]] new [[SystemTag: $:/tags/Macro/View]] for creating macros that are only available within the view template
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4404]] support for embedding `.webm` and `.ogg` video files
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c7d8492842844d7de12b7a327f978ff114708d84]] support for embedding `.woff2` font files
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3df1f9c9d0cc92b596262c0220ecf529c7fbb858]] ''spaces'' parameter to [[jsontiddlers Macro]] for controlling the formatting of the output
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/4afde5a722afc91c826305800ba536c5fe8ef2e5]] the [[colour Macro]] to add support for specifying a fallback for colours not in the current colour palette
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6091b013864af3d9918df69894f4aa05d1b8ffeb]] new [[Hidden Setting: Default Tiddler Icon]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bc687e57834efa312cca126af222613ef241c585]] new [[Hidden Setting: Disable Drag and Drop]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ae9ce4f01c6048aeb5604a93b57c2f3e4f959162]] new ''tc-tiddler-overridden-shadow'' class to tiddler frames for tiddlers that override a shadow tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4490]] support for a custom class to modal wrapper
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/091bcfce7d1a9c09140992e649f41ae17d27f307]] [[datauri Macro]] to work with tiddlers with a ''_canonical_uri'' field
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4332]] invaldi HTML produced in ">" in blockquote lists
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/4540]] new "index" option to the [[has Operator]] for detecting the presence of data tiddler items
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4433]] the FieldsWidget with an "include" attribute and more sorting options, and the [[fields Operator]] with new "include" and "exclude" suffixes
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/4436]] ActionCreateTiddlerWidget with attributes for specifying a template and for controlling overwriting existing tiddlers
+
+! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4291]] bug with deletes failing when lazy loading used under Node.js
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4243]] problem with the [[GitLab saver|Saving to a Git service]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4237]] bug with permaview button when placed above the search box
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a054d100e73db95071299e92c4321c2aa8e42382]] usage of ''count'' parameter of [[WidgetMessage: tm-edit-text-operation]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/4284]] bug with toc-selective-expandable macro still showing disclosure arrow despite excluding tiddlers
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/81f1e6af4e5920c6ff41e7f08171bfddc1b26dfc]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/46c90af308015242fa0314d85f1524727e2aa7e5]]) erroneous word break setting for vertical tabs
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d30eacc6520971c95bdabf24f4c4122534d9414a]] problem with programmatically deselecting entries from the SelectWidget in multiple selection mode
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4333]] usage of spans in colour picker
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e84c422e5091c02f55db4027faa9ba840e2aee6c]] refreshing of RangeWidget when underlying value changes
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e4eaae14faa1bf867c0f8168e221cf30ac6e2e0d]] problem with splash screen being shown when JavaScript is disabled
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8f3da69f818940eb5f517da850fb3766b72c7d7d]] problem with millisecond 0XXX DateFormat
+* [[Improve|https://github.com/Jermolene/TiddlyWiki5/commit/174a36cda63127d19230bcfbe9a5fdde46e5b0ea]] compatibility of single tiddler window vs. main window
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/015306dfc9099f4d5d9415b64266d328a154b119]] problems with some core icons in Internet Explorer
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3eacdc19fdb4ed7ce864a04dd87a5e1c6492daac]] GitHub and GitLab savers to use default path of `/` if none specified
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4432]] support for embedding ZIP files in some environments
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/665b63ec38b75dfe62009d2f5514682de60e953f]] lack of refresh when ButtonWidget ''actions'' attribute changes
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4534]] the RangeWidget to work in Internet Explorer 10/11
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/bdc5ac592f17b5ed3bb5ae782e56ced62406d653]] CountWidget to display "0" for an empty filter, instead of "undefined"
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4559]] MakeLibraryCommand to respect environment variables
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4396]] not to return "null" for an empty list
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4551]] z-index for CodeMirror autocomplete dropdowns
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/4552]] unwanted whitespace within sidebar links
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@activescott|https://github.com/activescott]]
+* [[@Arlen22|https://github.com/Arlen22]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@donmor|https://github.com/donmor]]
+* [[@ento|https://github.com/ento]]
+* [[@flibbles|https://github.com/flibbles]]
+* [[@gernert|https://github.com/gernert]]
+* [[@heronils|https://github.com/heronils]]
+* [[@hoelzro|https://github.com/hoelzro]]
+* [[@Janno|https://github.com/Janno]]
+* [[@joshuafontany|https://github.com/joshuafontany]]
+* [[@inmysocks|https://github.com/inmysocks]]
+* [[@kookma|https://github.com/kookma]]
+* [[@linonetwo|https://github.com/linonetwo]]
+* [[@m42e|https://github.com/m42e]]
+* [[@MidnightLightning|https://github.com/MidnightLightning]]
+* [[@mklauber|https://github.com/mklauber]]
+* [[@pmario|https://github.com/pmario]]
+* [[@s-l-lee|https://github.com/s-l-lee]]
+* [[@s-light|https://github.com/s-light]]
+* [[@saqimtiaz|https://github.com/saqimtiaz]]
+* [[@xcazin|https://github.com/xcazin]]

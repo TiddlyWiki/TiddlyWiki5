@@ -22,16 +22,14 @@ This widget allows multiple variables to be set in one go:
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var VarsWidget = function(parseTreeNode,options) {
-	// Call the constructor
-	Widget.call(this);
-	// Initialise	
+	// Initialise
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-VarsWidget.prototype = Object.create(Widget.prototype);
+VarsWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
@@ -63,7 +61,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 VarsWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(Object.keys(changedAttributes).length) {
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}

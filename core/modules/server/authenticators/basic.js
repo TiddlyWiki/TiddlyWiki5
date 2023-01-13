@@ -31,7 +31,7 @@ BasicAuthenticator.prototype.init = function() {
 	// Read the credentials data
 	this.credentialsFilepath = this.server.get("credentials");
 	if(this.credentialsFilepath) {
-		var resolveCredentialsFilepath = path.resolve($tw.boot.wikiPath,this.credentialsFilepath);
+		var resolveCredentialsFilepath = path.resolve(this.server.boot.wikiPath,this.credentialsFilepath);
 		if(fs.existsSync(resolveCredentialsFilepath) && !fs.statSync(resolveCredentialsFilepath).isDirectory()) {
 			var credentialsText = fs.readFileSync(resolveCredentialsFilepath,"utf8"),
 				credentialsData = $tw.utils.parseCsvStringWithHeader(credentialsText);

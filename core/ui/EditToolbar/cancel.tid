@@ -3,7 +3,8 @@ tags: $:/tags/EditToolbar
 caption: {{$:/core/images/cancel-button}} {{$:/language/Buttons/Cancel/Caption}}
 description: {{$:/language/Buttons/Cancel/Hint}}
 
-<$button message="tm-cancel-tiddler" tooltip={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class=<<tv-config-toolbar-class>>>
+\whitespace trim
+<$button actions=<<cancel-delete-tiddler-actions "cancel">> tooltip={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/cancel-button}}
 </$list>

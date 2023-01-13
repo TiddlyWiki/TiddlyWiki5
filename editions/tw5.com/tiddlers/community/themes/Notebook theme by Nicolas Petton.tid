@@ -1,0 +1,19 @@
+created: 20210101154635213
+modified: 20210110210929321
+tags: [[Community Themes]]
+title: "Notebook theme" by Nicolas Petton
+type: text/vnd.tiddlywiki
+url: https://nicolas.petton.fr/tw/notebook.html
+
+Notebook is a clean, uncluttered theme for ~TiddlyWiki.
+
+{{!!url}}
+
+<<<
+Notebook is a clean, uncluttered theme for TiddlyWiki.
+
+* The theme is responsive and comes with mobile support through the included notebook-mobile plugin.
+* Notebook comes with 3 default colour palettes, a grey, beige and dark one. To switch between colour palettes, click the color palette switch button in the top bar.
+* Notebook uses a custom left sidebar, with another sticky bar at the top of the page (or at the bottom on mobile).
+
+<<<

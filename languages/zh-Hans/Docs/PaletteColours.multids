@@ -1,11 +1,11 @@
 title: $:/language/Docs/PaletteColours/
 
-alert-background: 警示背景
-alert-border: 警示边框
-alert-highlight: 警示高亮度
-alert-muted-foreground: 警示的低调前景
+alert-background: 提醒背景
+alert-border: 提醒边框
+alert-highlight: 提醒高亮度
+alert-muted-foreground: 提醒的低调前景
 background: 一般背景
-blockquote-bar: 引言条
+blockquote-bar: 引用条
 button-background: 默认按钮背景
 button-border: 默认按钮边框
 button-foreground: 默认按钮前景
@@ -66,7 +66,7 @@ sidebar-tab-foreground: 侧边栏页签前景
 sidebar-tiddler-link-foreground-hover: 侧边栏悬停条目链结前景
 sidebar-tiddler-link-foreground: 侧边栏条目链结前景
 site-title-foreground: 网站标题前景
-static-alert-foreground: 静态警示前景
+static-alert-foreground: 静态提醒前景
 tab-background-selected: 选定的页签背景
 tab-background: 页签背景
 tab-border-selected: 选定的页签边框
@@ -87,8 +87,8 @@ tiddler-controls-foreground: 条目控制项前景
 tiddler-editor-background: 条目编辑器背景
 tiddler-editor-border-image: 条目编辑器边框图片
 tiddler-editor-border: 条目编辑器边框
-tiddler-editor-fields-even: 条目编辑器中偶数栏位背景
-tiddler-editor-fields-odd: 条目编辑器中奇数栏位背景
+tiddler-editor-fields-even: 条目编辑器中偶数字段背景
+tiddler-editor-fields-odd: 条目编辑器中奇数字段背景
 tiddler-info-background: 条目信息面板背景
 tiddler-info-border: 条目信息面板边框
 tiddler-info-tab-background: 条目信息面板页签背景

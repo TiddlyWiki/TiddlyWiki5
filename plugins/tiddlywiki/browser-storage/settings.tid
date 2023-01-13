@@ -14,7 +14,11 @@ Click this button to clear browser storage and disable its use:
 
 ! Save Filter
 
-This filter determines which tiddlers will be saved to local storage. By default, it contains `[prefix[$:/state/]] -[prefix[$:/state/popup/]]` to just save state tiddlers except popup state tiddlers, thus preserving selected tabs, and the open/closed status of table of contents entries. Other useful values include `[all[]]` meaning that it will attempt to save all tiddlers.
+This filter determines which tiddlers will be saved to local storage.
+
+* `[prefix[$:/state/]] -[prefix[$:/state/popup/]]` - the default value. Save state tiddlers except popup state tiddlers, thus preserving selected tabs and the open/closed status of table of contents entries. Any other tiddlers created or changed will be lost after reloading the page.
+* `[all[]]` - attempt to save all changed tiddlers. This means even popup state tiddlers and temporary tiddlers will be saved. In addition, when a plugin is installed, all the shadow tiddlers are individually "exploded" into local storage. Deleting the plugin requires deleting all the tiddlers individually. Not recommended unless these issues are unimportant.
+* `[all[]] -[is[shadow]!is[tiddler]] -[prefix[$:/state/popup/]] -[prefix[$:/temp/]] -[prefix[$:/HistoryList]]` - save all tiddlers except unmodified shadow tiddlers, popup state tiddlers, temp tiddlers and the history list. Solves the aforementioned issues with `[all[]]`. Recommended.
 
 <$link to="$:/config/BrowserStorage/SaveFilter">Browser Storage Save Filter</$link>: <$edit-text tiddler="$:/config/BrowserStorage/SaveFilter" default="" tag="input" size="50"/>
 

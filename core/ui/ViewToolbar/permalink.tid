@@ -10,7 +10,6 @@ description: {{$:/language/Buttons/Permalink/Hint}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">
-<$text text=" "/>
 <$text text={{$:/language/Buttons/Permalink/Caption}}/>
 </span>
 </$list>

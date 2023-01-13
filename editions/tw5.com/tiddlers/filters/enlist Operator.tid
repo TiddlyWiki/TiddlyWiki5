@@ -1,6 +1,6 @@
 caption: enlist
 created: 20170221144241063
-modified: 20190610165246154
+modified: 20210505100241872
 op-input: ignored
 op-neg-input: a [[selection of titles|Title Selection]]
 op-neg-output: those input titles that are <<.em not>> listed in <<.place L>>
@@ -14,13 +14,12 @@ tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Nega
 title: enlist Operator
 type: text/vnd.tiddlywiki
 
-<<.tip " Literal filter operands cannot contain square brackets but you can work around the issue by using a variable:">>
+<<.tip """Literal filter operands cannot contain square brackets but you can work around the issue by using a variable. ''Learn more at:'' [[SetWidget]] documentation under the heading "Filtered List Variable Assignment" """>>
 
 ```
 <$set name="myList" value="first [[second with a space]] third">
 <$list filter="[enlist<myList>]">
 ...
 ```
-
 
 <<.operator-examples "enlist">>

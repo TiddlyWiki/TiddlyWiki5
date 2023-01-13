@@ -1,0 +1,21 @@
+title: $:/language/Modals/SaveInstructions
+subtitle: Zapisz swoje zmiany
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+Twoje zmieny muszą być zapisane jako plike HTML ~TiddlyWiki.
+
+!!! Przeglądarki na komputerach stacjonarnych
+
+# Wybierz ``Zapisz Jako`` z menu ``Plik``
+# Wybierz nazwię i miejsce
+#* Niektóre przeglądarki wymagają ręcznego ustawienia formatu pliku na ''Strona internetowa, HTML'' lub podobne
+# Zamknij zakładkę
+
+!!! Przeglądarki na smarfonach
+
+# Dodaj stronę do zakładek
+# Jeżeli używasz iCloud lub synchronizacji Google, zakładka zostanie automatycznie zsynchronizowania z komputerem stacjonarnym, gdzie możesz zapisać wiki używając kroków powyżej.
+# Zamknij zakładkę
+
+//Jeżeli otworzysz zakładkę ponownie na Mobilnej Safari zobaczysz ponownie tą wiadomość. Jeżeli chcesz używać tego pliku, po prostu kliknij przycisk ''zamknij'' poniżej//

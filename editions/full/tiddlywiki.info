@@ -30,13 +30,13 @@
 		"tiddlywiki/xmldom"
 	],
 	"languages": [
+		"ar-PS",
 		"ca-ES",
 		"cs-CZ",
 		"da-DK",
 		"de-AT",
 		"de-DE",
 		"el-GR",
-		"en-GB",
 		"en-US",
 		"es-ES",
 		"fa-IR",

@@ -23,7 +23,6 @@ var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrument
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
-	var modules,n,m,f;
 	// Minimal browser detection
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
@@ -64,17 +63,12 @@ exports.startup = function() {
 		document: $tw.browser ? document : $tw.fakeDocument
 	});
 	// Execute any startup actions
-	var executeStartupTiddlers = function(tag) {
-		$tw.utils.each($tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[" + tag + "]!has[draft.of]]"),function(title) {
-			$tw.rootWidget.invokeActionString($tw.wiki.getTiddlerText(title),$tw.rootWidget);
-		});
-	};
-	executeStartupTiddlers("$:/tags/StartupAction");
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
 	if($tw.browser) {
-		executeStartupTiddlers("$:/tags/StartupAction/Browser");		
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
 	}
 	if($tw.node) {
-		executeStartupTiddlers("$:/tags/StartupAction/Node");		
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
 	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
@@ -127,7 +121,11 @@ exports.startup = function() {
 	});
 	// Set up the syncer object if we've got a syncadaptor
 	if($tw.syncadaptor) {
-		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
+		$tw.syncer = new $tw.Syncer({
+			wiki: $tw.wiki,
+			syncadaptor: $tw.syncadaptor,
+			logging: $tw.wiki.getTiddlerText('$:/config/SyncLogging', "yes") === "yes"
+		});
 	}
 	// Setup the saver handler
 	$tw.saverHandler = new $tw.SaverHandler({

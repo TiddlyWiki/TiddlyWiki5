@@ -1,0 +1,9 @@
+{
+    "title": "$:/languages/ar-PS",
+    "name": "ar-PS",
+    "plugin-type": "language",
+    "description": "Arabic (Palestine)",
+    "author": "Kamal-Habash",
+    "core-version": ">=5.1.23",
+	"text-direction": "rtl"
+}
