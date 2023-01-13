@@ -75,7 +75,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 <ul>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]] -[<currentTiddler>]">
 <li>
-<$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
+<$link><$view field="caption"><$view field="title"/></$view></$link>
 --
 <$let
 	otherLocation={{{ [geopoint{!!lat},{!!long}] }}}

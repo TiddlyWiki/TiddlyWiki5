@@ -8,7 +8,7 @@ tags: $:/tags/GeospatialDemo
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]]">
 <li>
 <$link>
-<$transclude field="caption"><$view field="title"/></$transclude>
+<$view field="caption"><$view field="title"/></$view>
 </$link>
 </li>
 </$list>
@@ -20,7 +20,7 @@ tags: $:/tags/GeospatialDemo
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoLayer]sort[caption]]">
 <li>
 <$link>
-<$transclude field="caption"><$view field="title"/></$transclude>
+<$view field="caption"><$view field="title"/></$view>
 </$link>
 </li>
 </$list>
