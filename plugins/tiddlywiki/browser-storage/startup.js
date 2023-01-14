@@ -26,9 +26,10 @@ var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js"
 exports.startup = function() {
 	var self = this;
 	
-	// Add ENABLED tiddler with default value "yes"
-	$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
-
+        // If not exists, add ENABLED tiddler with default value "yes"
+        if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
+                $tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
+        }
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger
