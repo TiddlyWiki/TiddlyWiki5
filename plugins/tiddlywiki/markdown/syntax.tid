@@ -1,0 +1,224 @@
+
+title: $:/plugins/tiddlywiki/markdown/syntax
+
+To review standard Markdown syntax, see: [ext[CommonMark quick reference|https://commonmark.org/help/]]. For formal specification, consult the [ext[CommonMark Spec|https://spec.commonmark.org/current/]].
+
+! Linking to Tiddlers
+
+Prepend `#` to tiddler titles to form link addresses. If a tiddler title contains spaces or other special characters, you must either (1) URI-encode the title, or (2) surround the #title with `<` `>` and backslash-escape any `<` or `>` in the title.
+
+!! Links
+
+<pre><code>[link text](<strong>#</strong><$text text="TiddlerTitle"/> "optional tooltip")
+
+[link text](<strong>#</strong>New<strong>%20</strong>Tiddler)
+
+[link text](<strong>&lt;#</strong>New Tiddler<strong>&gt;</strong>)
+
+[](<strong>&lt;#</strong>How to use <strong>\</strong>&lt;$list<strong>\</strong>&gt; widget?<strong>&gt;</strong>)
+</code></pre>
+
+You can also use the `<$link>` widget to generate links to tiddlers:
+
+```
+<$link to="Tiddler Title">Displayed Link Title</$link>
+```
+
+!! Reference Style Links
+
+```
+[link text][1]
+[link text][2]
+
+[1]: #New%20Tiddler "optional tooltip"
+
+[2]: <#Another Tiddler>
+```
+
+!! Images
+
+```
+![alt text](#Motovun%20Jack.jpg "optional tooltip")
+
+![alt text](<#Motovun Jack.jpg>)
+```
+
+! Escaping Special Characters
+
+Markdown allows you to escape ASCII punctuation characters with `\`.
+
+! HTML Blocks
+
+An [[HTML block|https://spec.commonmark.org/0.30/#html-blocks]] is a group of lines that starts with an HTML tag and is treated as raw HTML. Block-level tags such as `<div>` and `<p>` can interrupt a paragraph. Inline elements such as `<strong>` and `<em>` can start an HTML block if the //complete// tag begins on a new paragraph by itself. In most cases, an HTML block continues until a blank line is reached.
+
+A widget tag that begins on a new paragraph will also be treated as an HTML block. Markdown elements are not recognized inside the HTML block. For example:
+
+```
+see
+
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
+```
+
+rendered as:
+
+```
+<p>see</p>
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
+```
+
+A widget tag not preceded by a blank line is an inline element.
+
+```
+see
+<$link to="New Tiddler">
+_New_ Tiddler
+</$link>
+```
+
+rendered as:
+
+```
+<p>see <$link to="New Tiddler"><em>New</em> Tiddler</$link></p>
+```
+
+! Syntax Extensions
+
+!! <$text text=KaTeX/>
+
+You need to install the <$text text=KaTeX/> plugin to activate this syntax extension.
+
+Surround your math expression with `$` for inline rendering. Whitespace characters cannot immediately follow the opening `$` or precede the closing `$`, and the closing delimiter must not immediately precede a digit. Furthermore, `$` followed by `:/` will not be recognized as a valid opening or closing delimiter either.
+
+Here's an example of an inline math expression:
+
+```
+$c = \pm\sqrt{a^2 + b^2}$
+```
+
+Use `$$` to center the math in display mode:
+
+```
+$$c = \pm\sqrt{a^2 + b^2}$$
+```
+
+!! Superscript and Subscript
+
+```
+X^2^
+```
+x<sup>2</sup>
+
+```
+H~2~O
+```
+H<sub>2</sub>O
+
+!! Marked Text
+
+```
+==marked text==
+```
+
+<mark>marked text</mark>
+
+!! Strikethrough
+
+```
+~~striked through text~~
+```
+
+<s>striked through text</s>
+
+!! Inserted Text
+
+```
+++inserted text++
+```
+
+<ins>inserted text</ins>
+
+!! Tables
+
+markdown-it supports <$text text="GitHub Flavored Markdown"/> (GFM) [ext[table syntax|https://github.github.com/gfm/#tables-extension-]].
+
+```
+|Left Aligned |Centered   |Right Aligned |
+|:---         |   :---:   |          ---:|
+|apple        |bat        |candle        |
+```
+
+<table>
+<thead>
+<tr><th style="text-align:left">Left Aligned</th><th style="text-align:center">Centered</th><th style="text-align:right">Right Aligned</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">apple</td><td style="text-align:center">bat</td><td style="text-align:right">candle</td></tr>
+</tbody>
+</table>
+
+!! Definition Lists
+
+```
+Term One
+: Definition with
+lazy continuation.
+
+Term Two
+: Here is the first defintion.
+
+: Here is the second definition.
+
+  As you can see. A definition can have
+  more than one paragrpah. It can also have
+
+      And indended code block...
+```
+
+<dl>
+<dt>Term One</dt>
+<dd><p>Definition with
+lazy continuation.
+</p></dd>
+<dt>Term Two</dt>
+<dd><p>Here is the first defintion.
+</p></dd>
+<dd><p>Here is the second definition.</p><p>As you can see. A definition can have
+more than one paragrpah. It can also have
+<pre><code>And indended code block...
+</code></pre>
+</p></dd>
+</dl>
+
+!! Footnotes
+
+For detailed explanation, see [[Creating Footnotes|https://www.markdownguide.org/extended-syntax/#footnotes]].
+
+```
+Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+
+[^1]: This is the first footnote.
+
+[^bignote]: Here's one with multiple paragraphs and code.
+
+    Indent paragraphs to include them in the footnote.
+
+    `{ my code }`
+
+    Add as many paragraphs as you like.
+```
+
+<div class="markdown"><p>Here’s a simple footnote,<a class="footnote-ref" href="##fn1--doc639182" id="#fnref1--doc639182">[1]</a> and here’s a longer one.<a class="footnote-ref" href="##fn2--doc639182" id="#fnref2--doc639182">[2]</a>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="#fn1--doc639182" class="footnote-item"><p>This is the first footnote. <a href="##fnref1--doc639182" class="footnote-backref">↥︎</a>
+</p></li>
+<li id="#fn2--doc639182" class="footnote-item"><p>Here’s one with multiple paragraphs and code.</p><p>Indent paragraphs to include them in the footnote.</p><p><code class="codified">{ my code }</code></p><p>Add as many paragraphs as you like. <a href="##fnref2--doc639182" class="footnote-backref">↥︎</a>
+</p></li>
+</ol>
+</section>
+</p></div>
