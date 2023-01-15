@@ -1,6 +1,6 @@
 code-body: yes
 created: 20200507002727378
-modified: 20220727090146826
+modified: 20230115214037338
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -206,6 +206,10 @@ div.content {
 	display: block;
 	column-count: 4;
 	column-gap: 1em;
+	-moz-column-count: 4;
+	-moz-column-gap: 1em;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 1em;
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {

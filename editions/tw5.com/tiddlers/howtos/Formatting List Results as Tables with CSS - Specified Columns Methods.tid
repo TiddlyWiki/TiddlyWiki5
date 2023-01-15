@@ -1,5 +1,5 @@
 created: 20161209172820513
-modified: 20220727085428594
+modified: 20230115214118115
 tags: Learning
 title: Formatting List Results as Tables with CSS - Specified Columns Methods
 type: text/vnd.tiddlywiki
@@ -17,9 +17,13 @@ For other table-making techniques see also:
 ```
 /* FOUR COLUMN MODE */
 .fourcolumns {
-   display: block;
-   column-count: 4;
-   column-gap: 1em;
+    display:block;
+    column-count:4;
+    column-gap:1em;
+   -moz-column-count:4;
+   -moz-column-gap:1em;
+   -webkit-column-count: 4;
+   -webkit-column-gap:1em;
 }
 ```
 
