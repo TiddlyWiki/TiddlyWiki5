@@ -1,7 +1,7 @@
 created: 20220822142452539
-modified: 20220822143659080
-tags: [[Wikitext Cheat-Sheet]]
-title: Cheat-Sheet TB
+modified: 20230115185834405
+tags: [[Wikitext Cheatsheet]]
+title: Cheatsheet TB
 type: text/vnd.tiddlywiki
 
 ~WikiText can include blocks of text that are rendered with an explicit ~ContentType like this:

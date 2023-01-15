@@ -1,7 +1,7 @@
 created: 20220821184022101
-modified: 20221025131544471
+modified: 20230115185847149
 tags: WikiText
-title: Wikitext Cheat-Sheet
+title: Wikitext Cheatsheet
 type: text/vnd.tiddlywiki
 
 \define extLink(text tid) [ext[$text$|https://tiddlywiki.com/#$tid$]]
@@ -42,9 +42,9 @@ type: text/vnd.tiddlywiki
 
 !! Overview
 
-The following table contains the basic ~TiddlyWiki wikitext features. The "Cheat-Sheet" and all dependencies can be exported using the button below.
+The following table contains the basic ~TiddlyWiki wikitext features. The "Cheatsheet" and all dependencies can be exported using the button below.
 
-<<exportMeButton "Export Cheat-Sheet">>
+<<exportMeButton "Export Cheatsheet">>
 
 !! Cheat Sheet
 
@@ -70,26 +70,26 @@ The following table contains the basic ~TiddlyWiki wikitext features. The "Cheat
 |<h6>Heading 6</h6>              |`! Heading 6` |
 |>| ! <<.xL "Lists" "Lists in WikiText">>                  |
 |>|   <<.xL "Ordered Lists" "Lists in WikiText">>          |
-|<<.t "Cheat-Sheet OL">>         |<<.cb "Cheat-Sheet OL">> |
+|<<.t "Cheatsheet OL">>         |<<.cb "Cheatsheet OL">> |
 |>|   <<.xL "Unordered Lists" "Lists in WikiText">>        |
-|<<.t "Cheat-Sheet UL">>         |<<.cb "Cheat-Sheet UL">> |
+|<<.t "Cheatsheet UL">>         |<<.cb "Cheatsheet UL">> |
 |>|   <<.xL "Definition Lists" "Definitions in WikiText">> |
-|<<.t "Cheat-Sheet DL">>         |<<.cb "Cheat-Sheet DL">> |
+|<<.t "Cheatsheet DL">>         |<<.cb "Cheatsheet DL">> |
 |>|   <<.xL "Mixed Lists" "Lists in WikiText">>            |
-|<<.t "Cheat-Sheet ML">>         |<<.cb "Cheat-Sheet ML">> |
+|<<.t "Cheatsheet ML">>         |<<.cb "Cheatsheet ML">> |
 |>| ! <<.xL "Blockquotes" "Block Quotes in WikiText">>     |
 |>|   <<.xL "Nested Blockquotes" "Block Quotes in WikiText">>    |
-|<<.t "Cheat-Sheet Quotes">>     |<<.cb "Cheat-Sheet Quotes">>   |
+|<<.t "Cheatsheet Quotes">>     |<<.cb "Cheatsheet Quotes">>   |
 |>|   <<.xL "Muli-line Blockquotes" "Block Quotes in WikiText">> |
-|<<.t "Cheat-Sheet QuotesML">>   |<<.cb "Cheat-Sheet QuotesML">> |
+|<<.t "Cheatsheet QuotesML">>   |<<.cb "Cheatsheet QuotesML">> |
 |>|   <<.xL "Mixed Blockquotes" "Block Quotes in WikiText">>     |
-|<<.t "Cheat-Sheet QuotesMIX">>  |<<.cb "Cheat-Sheet QuotesMIX">>|
+|<<.t "Cheatsheet QuotesMIX">>  |<<.cb "Cheatsheet QuotesMIX">>|
 |>| ! <<.xL "Code / Monospaced Text" "Code Blocks in WikiText">> |
 |>|   <<.xL "Inline Code" "Code Blocks in WikiText">>            |
 |`monospaced text`               |<$codeblock code="`monospaced text`" />      |
 |`` `show backticks` ``          |<$codeblock code="`` `show backticks` ``" /> |
 |>|   <<.xL "Code Block" "Code Blocks in WikiText">>            |
-|<<.t "Cheat-Sheet CodeML">>     |<<.cb "Cheat-Sheet CodeML">>  |
+|<<.t "Cheatsheet CodeML">>     |<<.cb "Cheatsheet CodeML">>  |
 |>| ! <<.xL "Links" "Linking in WikiText">>                     |
 |>|   <<.xL "Internal Links" "Linking in WikiText">>            |
 |<<.xL "CamelCase" "CamelCase">> |`CamelCase`                   |
@@ -113,32 +113,32 @@ The following table contains the basic ~TiddlyWiki wikitext features. The "Cheat
 |[img[https://tiddlywiki.com/favicon.ico]] |`[img[https://tiddlywiki.com/favicon.ico]]` |
 |[img[An explanatory tooltip|https://tiddlywiki.com/favicon.ico]] |`[img[An explanatory tooltip|https://tiddlywiki.com/favicon.ico]]` |
 |>| ! <<.xL "Tables" "Tables in WikiText">> |
-|<<.t "Cheat-Sheet Table">>        |<<.cb "Cheat-Sheet Table">>|
+|<<.t "Cheatsheet Table">>        |<<.cb "Cheatsheet Table">>|
 |>| ! <<.xL "Custom Styles" "Styles and Classes in WikiText">> |
-|<<.t "Cheat-Sheet CS">>           |<<.cb "Cheat-Sheet CS">>   |
+|<<.t "Cheatsheet CS">>           |<<.cb "Cheatsheet CS">>   |
 |>| ! <<.xL "Hard Linebreaks" "Hard Linebreaks in WikiText">>  |
-|<<.t "Cheat-Sheet HL">>           |<<.cb "Cheat-Sheet HL">>   |
+|<<.t "Cheatsheet HL">>           |<<.cb "Cheatsheet HL">>   |
 |>| ! <<.xL "Horizontal Rule" "Horizontal Rules in WikiText">> |
-|<<.t "Cheat-Sheet HR">>           |<<.cb "Cheat-Sheet HR">>   |
+|<<.t "Cheatsheet HR">>           |<<.cb "Cheatsheet HR">>   |
 |>| ! <<.xL "Comments" "HTML in WikiText">> |
-|<<.t "Cheat-Sheet Comment">>      |<<.cb "Cheat-Sheet Comment">>|
+|<<.t "Cheatsheet Comment">>      |<<.cb "Cheatsheet Comment">>|
 |>| ! <<.xL "Typed Blocks" "Typed Blocks in WikiText">>        |
-|<<.t "Cheat-Sheet TB">>           |<<.cb "Cheat-Sheet TB">>   |
+|<<.t "Cheatsheet TB">>           |<<.cb "Cheatsheet TB">>   |
 |>| ! <<.xL "Embedded HTML" "HTML in WikiText">>               |
-|<<.t "Cheat-Sheet HTML">>         |<<.cb "Cheat-Sheet HTML">> |
+|<<.t "Cheatsheet HTML">>         |<<.cb "Cheatsheet HTML">> |
 |>| ! <<.xL "HTML Entities" "HTML Entities">> |
 |&trade; &pound; or &euro;         |`&trade; &pound; or &euro;`  |
 |>| ! <<.xL "Macros" "Macros in WikiText">> |
 |>|   <<.xL "Macro Definition" "Macro Definitions in WikiText">> |
-|<<.t "Cheat-Sheet MDefinition">>  |<<.cb "Cheat-Sheet MDefinition">>|
+|<<.t "Cheatsheet MDefinition">>  |<<.cb "Cheatsheet MDefinition">>|
 |>|   <<.xL "Macro Calls" "Macro Calls in WikiText">>           |
-|<<.t "Cheat-Sheet MCall">>        |<<.cb "Cheat-Sheet MCall">> |
+|<<.t "Cheatsheet MCall">>        |<<.cb "Cheatsheet MCall">> |
 |>| ! <<.xL "Transclusions" "Transclusion in WikiText">>        |
-|<<.t "Cheat-Sheet Transclusion">> |The [[Cheat-Sheet Transclusion]] tiddler on the left side is transcluded into the table using the <<.xL "transclusion-widget" "TranscludeWidget">><br><br>`<<.t "Cheat-Sheet Transclusion">>` |
+|<<.t "Cheatsheet Transclusion">> |The [[Cheatsheet Transclusion]] tiddler on the left side is transcluded into the table using the <<.xL "transclusion-widget" "TranscludeWidget">><br><br>`<<.t "Cheatsheet Transclusion">>` |
 |>| ! <<.xL "Widgets" "Widgets in WikiText">>                      |
-|<<.t "Cheat-Sheet Widget">>       |<<.cb "Cheat-Sheet Widget">>   |
+|<<.t "Cheatsheet Widget">>       |<<.cb "Cheatsheet Widget">>   |
 |>| ! <<.xL "Variables" "Variables in WikiText">>                  |
-|<<.t "Cheat-Sheet Variable">>     |<<.cb "Cheat-Sheet Variable">> |
+|<<.t "Cheatsheet Variable">>     |<<.cb "Cheatsheet Variable">> |
 |>| ! <<.xL "Parser Modes" "WikiText Parser Modes">>               |
-|>|<<.t "Cheat-Sheet PM">> |
+|>|<<.t "Cheatsheet PM">> |
 

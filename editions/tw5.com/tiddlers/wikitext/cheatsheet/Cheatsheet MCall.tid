@@ -1,12 +1,12 @@
 code-body: yes
 created: 20220822124925667
-modified: 20220822143636020
-tags: [[Wikitext Cheat-Sheet]]
-title: Cheat-Sheet MCall
+modified: 20230115190043040
+tags: [[Wikitext Cheatsheet]]
+title: Cheatsheet MCall
 type: text/vnd.tiddlywiki
 
 <!-- Macros can be imported, using the \import pragma -->
-\import [[Cheat-Sheet MDefinition]]
+\import [[Cheatsheet MDefinition]]
 
 <<sayhi>>
 

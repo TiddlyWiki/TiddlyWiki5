@@ -1,0 +1,16 @@
+code-body: yes
+created: 20220822140007979
+modified: 20230115190043040
+tags: [[Wikitext Cheatsheet]]
+title: Cheatsheet Variable
+type: text/vnd.tiddlywiki
+
+Variables can be defined with [[macro definitions|Cheatsheet MDefinition]], or the widgets `<$set ...>`, `<$vars ...>` or `<$let ...>`. For ''new code'' use the ''let-widget'', because it is the latest. 
+
+This example uses the set-widget so the cheat sheet can also be used with old wikis.
+
+For example:
+
+<$set name="targetTiddler" value="Cheatsheet Variable">
+  <$button message="tm-navigate" to=<<targetTiddler>> >Open tiddler: <<targetTiddler>></$button>
+</$set>
