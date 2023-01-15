@@ -10,8 +10,9 @@ To download the standard single-file version of your wiki:
 <$button tooltip="Download fully standalone wiki" aria-label="download full wiki" class="tc-btn-big-green">
 <$action-sendmessage $message="tm-download-file" $param="$:/core/save/all" publishFilter=<<publishFilter>> filename=<<site-title>>/>
 {{$:/core/images/download-button}}
-&#32;
+<span class="tc-tiny-gap-left">
 Download full wiki
+</span>
 </$button>
 </$let>
 </$wikify>
