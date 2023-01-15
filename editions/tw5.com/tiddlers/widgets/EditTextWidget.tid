@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The edit text widget provides a user interface in the browser for editing text tiddler fields. The editing element is dynamically bound to the underlying tiddler value: changes to the tiddler are instantly reflected, and any edits are instantly propogated.
+The edit text widget provides a user interface in the browser for editing text tiddler fields. The editing element is dynamically bound to the underlying tiddler value: changes to the tiddler are instantly reflected, and any edits are instantly propagated.
 
 By default, applying the EditTextWidget to the `text` field of a tiddler will generates an HTML `<textarea>` element, i.e. a multi-line editor. Applying the EditTextWidget to any other field generates an HTML `<input type="text">` element, a single-line editor. This behaviour can be overridden with the `tag` and `type` attributes.
 

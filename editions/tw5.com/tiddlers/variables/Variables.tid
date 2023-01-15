@@ -1,18 +1,18 @@
 created: 20141002133113496
-modified: 20150221215644000
+modified: 20221221175615776
 tags: Concepts Reference
 title: Variables
 type: text/vnd.tiddlywiki
 
 A <<.def variable>> is a snippet of text that can be accessed by name within a particular branch of the [[widget tree|Widgets]]. The snippet is known as the variable's <<.def value>>.
 
-A new variable is defined using a <<.wlink SetWidget>> widget, and is then available to any of the children of that widget, including transcluded content. A <<.wid set>> widget can reuse an existing name, thus binding a different snippet to that name for the duration of the widget's children.
+A new variable is defined using a <<.wlink SetWidget>> or <<.wlink LetWidget>> widget, and is then available to any of the children of that widget, including transcluded content. A <<.wid set>> widget can reuse an existing name, thus binding a different snippet to that name for the duration of the widget's children.
 
-The <<.wlink ListWidget>> widget also sets a particular variable (<<.var currentTiddler>> by default) to each listed title in turn.
+The <<.wlink ListWidget>> widget by default sets a particular variable <<.var currentTiddler>> to each listed title in turn.
 
 For an overview of how to use variables, see [[Variables in WikiText]].
 
-Despite the term <<.word variable>>, each snippet is a constant string. The apparent variability is actually the result of the presence of multiple variables with the same name in different parts of the widget tree.
+Despite the term <<.word variable>>, ''each snippet is a constant string''. The apparent variability is actually the result of the presence of multiple variables with the same name in different parts of the widget tree.
 
 [[Macros]] are a special form of variable whose value can contain placeholders that get filled in with parameters whenever the macro is used.
 

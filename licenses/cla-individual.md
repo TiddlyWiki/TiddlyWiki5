@@ -503,3 +503,17 @@ HuanCheng Bai, @bestony, 2022/09/17
 Carlo Colombo, @carlo-colombo, 2022/11/30
 
 Wincent Balin, @wincentbalin, 2022/12/18
+
+Jeffrey Zhang, @jeffrey4l, 2022/12/24
+
+cs84285, @cs8425, 2022/12/30
+
+Nick Bell, @newmedicine, 2023/01/01
+
+Frank Kmiec, @fkmiec, 2023-01-01
+
+Pippo Peppo, @pippep, 2023-01-03
+
+Scott Sauye, @CrossEye, 2023-01-04
+
+Marcus Winter, @yaisog, 2023-01-07
