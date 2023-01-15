@@ -1,28 +1,27 @@
-bad-example: <$genesis $type="my-element" $names="one two" $values="1 2">Test Genesis Widget</$genesis>
 caption: genesis
 created: 20221101100729587
-modified: 20230103152008291
+modified: 20230115095816093
 tags: Widgets
 title: GenesisWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.2.4">> The <<.wlink GenesisWidget>> widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
+<<.from-version "5.2.4">> The <<.wid genesis>> widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
 
 ! Content and Attributes
 
-The content of the <<.wlink GenesisWidget>> widget is used as the content of the dynamically created widget.
+The content of the <<.wid genesis>> widget is used as the content of the dynamically created widget.
 
 |!Attribute |!Description |
 |$type |The type of widget or element to create (an initial `$` indicates a widget, otherwise an HTML element will be created) |
 |$names |An optional filter evaluating to the names of a list of attributes to be applied to the widget |
-|$values |An optional filter evaluating to the values corresponding to the list of names specified in `$names` |
+|$values |An optional filter evaluating to the values corresponding to the list of names specified in <<.param $names>> |
 |//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
 |//{attributes starting with $$}// |Attributes starting with two dollar signs are applied as attributes to the output widget, but with the attribute name changed to use a single dollar sign |
 |//{attributes not starting with $}// |Any other attributes that do not start with a dollar are applied as attributes to the output widget |
 
-Note that attributes explicitly specified take precedence over attributes with the same name specified in the `$names` filter.
+Note that attributes explicitly specified take precedence over attributes with the same name specified in the <<.param $names>> filter.
 
 ! Examples
 
@@ -42,10 +41,9 @@ src="""\define my-banner(mode:"inline",caption)
 """/>
 
 ! Important
-<<.warning """In the following example the parameter `one` is absent from the HTML output, since HTML parameters with the prefix `on` are ''removed for security reasons''. It's needed to remove eg: `onClick=` from "copy / pasted" HTML content. At the moment, every parameter prefixed `on` is removed. 
 
-<pre><code><$view field="bad-example" format="text" /></code></pre>
+<$macrocall $name=".warning" _="""
+In the following example the widget parameter named `one` is absent from the HTML output, since HTML attributes with the prefix `on` are removed for security reasons. See [[HTML in WikiText]] "Security" for more details.
 
-... and the underlying HTML is:
-<pre><code><$view field="bad-example" format="htmlwikified" /></code></pre>
-""">>
+<<wikitext-example '<$genesis $type="my-element" $names="one two" $values="1 2">Test Genesis Widget</$genesis>'>>
+"""/>
