@@ -44,7 +44,7 @@ exports.startup = function() {
 		options.disableForReducedMotion = paramObject.disableForReducedMotion && paramObject.disableForReducedMotion === "yes";
 		confetti(options);
 	});
-	$tw.rootWidget.addEventListener("tm-confetti-launch",function(event) {
+	$tw.rootWidget.addEventListener("tm-confetti-reset",function(event) {
 		confetti.reset();
 	});
 };
