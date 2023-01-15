@@ -1,44 +1,43 @@
 created: 20220821184022101
-modified: 20230115185847149
+modified: 20230115210033999
 tags: WikiText
 title: Wikitext Cheatsheet
 type: text/vnd.tiddlywiki
 
-\define extLink(text tid) [ext[$text$|https://tiddlywiki.com/#$tid$]]
-\define link(text tid) [[$text$|$tid$]]
+<!-- This URL is used to create external links if the tiddler is missing in the wiki -->
+\define baseURL() https://tiddlywiki.com/#
 
-\define exportFilter()
-[[$(me)$]] [tag[$(me)$]]
-\end
-
+<!-- exportMeButton() saves this tiddler and all it's dependencies into a JSON export file -->
 \define exportMeButton(btnText:"Export Me & Tagged")
 \whitespace trim
-<$set name="me" value=<<currentTiddler>> >
-  <$tiddler tiddler="$:/core/templates/exporters/JsonFile">
-    <$button class="tc-btn-download">
-      <$action-sendmessage $message="tm-download-file" $param=<<currentTiddler>> exportFilter=<<exportFilter>> filename={{{ [<me>addsuffix{!!extension}] }}}/>
-      <$text text="""$btnText$"""/>
-    </$button>
-  </$tiddler>
-</$set>
+<$let me=<<currentTiddler>> >
+	<$set name=exportFilter filter="[tag<me>] [<me>]">
+		<$tiddler tiddler="$:/core/templates/exporters/JsonFile">
+			<$button class="tc-btn-download" >
+				<$action-sendmessage $message="tm-download-file" $param=<<currentTiddler>> exportFilter=<<exportFilter>> filename={{{ [<me>addsuffix{!!extension}] }}}/>
+				<$text text=<<__btnText__>>/>
+			</$button>
+		</$tiddler>
+	</$set>
+</$let>
 \end
 
+<!-- extLink() and link() create the external and internal links for the .xL macro -->
+\define link(text tid) <$link to={{{ [<__tid__>] }}} ><<__text__>></$link>
+\define extLink(text tid) <a class="tc-tiddlylink-external" href={{{ [<baseURL>] [<__tid__>] +[join[]] }}} rel="noopener noreferrer" target="_blank"><<__text__>></a>
+
+<!-- .xL ... creates an internal link, if tiddler exists otherwise it creates a link to tiddlywiki.com -->
 \define .xL(text tid)
 \whitespace trim
-<$set name="link" value={{{ [[$tid$]is[tiddler]then<link """$text$""" """$tid$""">else<extLink """$text$""" """$tid$""">] }}}>
-<<link>>
-</$set>
+<$let macro={{{ [<__tid__>is[tiddler]then[link]else[extLink]] }}}>
+	<$macrocall $name=<<macro>> text=<<__text__>> tid=<<__tid__>> />
+</$let>
 \end
 
-\define .t(tid) <$transclude tiddler="""$tid$""" mode=block/>
-\define .cb(title) <$codeblock code={{$title$}}/>
-
-<!-- Helper macros. The "old" wikitext style is intentional. The code should be compatible with TW v5.1.15 -->
-<!-- extLink() and link() create the external and internal links for the .xL macro -->
-<!-- exportFilter() defined the filter for the tids to be exported -->
-<!-- exportMeButton() saves this tiddler and all it's dependencies into a JSON export file -->
-<!-- .xL ... creates an internal link, if tiddler exists otherwise it creates a link to tiddlywiki.com -->
 <!-- .t, .cb are macros that that transclude and show code blocks from example tiddlers -->
+\define .t(tid) <$transclude tiddler=<<__tid__>> mode=block/>
+\define .cb(title) <$codeblock code={{{ [<__title__>get[text]] }}}/>
+
 
 !! Overview
 
