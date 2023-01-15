@@ -232,11 +232,11 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
-	var self = this,
-		readFileCallback = function(tiddlerFieldsArray) {
+	var self = this;
+	var	readFileCallback = function(tiddlerFieldsArray) {
 			self.readFileCallback(tiddlerFieldsArray);
-		},
-		getItem = function(type) {
+		};
+	var getItem = function(type) {
 			type = type || "text/plain";
 			return function(str) {
 				// Use the deserializer specified if any
@@ -257,7 +257,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 					readFileCallback([tiddlerFields]);
 				}
 			}
-		}
+		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable) {
 		var self = this,
