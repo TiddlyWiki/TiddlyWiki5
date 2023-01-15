@@ -30,10 +30,6 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
 
-\define tiddler-width()
-	<$text text={{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}/>
-\end
-
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -146,7 +142,7 @@ pre {
 	display: block;
 	margin-top: 1em;
 	margin-bottom: 1em;
-	word-break: break-word;
+	word-break: normal;
 	word-wrap: break-word;
 	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: <<colour pre-background>>;
@@ -1158,28 +1154,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 	.tc-tiddler-info {
 		margin: 0 -42px 0 -42px;
-	}
-}
-
-
-/* prevent overflow for table content for small screens*/
-@media (max-width: <<sidebarbreakpoint>>) {
-	.tc-tiddler-frame tr {
-		word-wrap: anywhere;
-	}
-
-	.tc-tiddler-frame table blockquote {
-		margin-left: 12.5px;
-		margin-right: 12.5px; 
-	}
-
-	.tc-tiddler-frame table dd {
-		margin-left: 12.5px;
-	}
-
-	.tc-tiddler-frame table ol,
-	.tc-tiddler-frame table ul {
-		padding-left: 20px;
 	}
 }
 
