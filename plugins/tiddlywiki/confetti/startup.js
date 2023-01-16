@@ -12,8 +12,6 @@ Setup the root widget event handlers
 /*global $tw: false */
 "use strict";
 
-var confetti = require("$:/plugins/tiddlywiki/confetti/confetti.js");
-
 // Export name and synchronous status
 exports.name = "confetti";
 exports.platforms = ["browser"];
@@ -22,7 +20,7 @@ exports.synchronous = true;
 
 // Install the root widget event handlers
 exports.startup = function() {
-	var manager = new ConfettiManager();
+	$tw.confettiManager = new $tw.ConfettiManager();
 	$tw.rootWidget.addEventListener("tm-confetti-launch",function(event) {
 		var paramObject = event.paramObject || {},
 			options = {},
@@ -47,42 +45,11 @@ exports.startup = function() {
 		};
 		extractBooleanParameter("disableForReducedMotion");
 		var delay = paramObject.delay ? $tw.utils.parseNumber(paramObject.delay) : 0;
-		manager.launch(delay,options);
+		$tw.confettiManager.launch(delay,options);
 	});
 	$tw.rootWidget.addEventListener("tm-confetti-reset",function(event) {
-		manager.reset();
+		$tw.confettiManager.reset();
 	});
-};
-
-function ConfettiManager() {
-	this.outstandingTimers = [];
-}
-
-ConfettiManager.prototype.launch = function (delay,options) {
-	var self = this;
-	if(delay > 0) {
-		var id = setTimeout(function() {
-			var p = self.outstandingTimers.indexOf(id);
-			if(p !== -1) {
-				self.outstandingTimers.splice(p,1);
-			} else {
-				console.log("Confetti Manager Error: Cannot find previously stored timer ID");
-				debugger;
-			}
-			confetti(options);
-		},delay);
-		this.outstandingTimers.push(id);
-	} else {
-		confetti(options);
-	}
-};
-
-ConfettiManager.prototype.reset = function () {
-	$tw.utils.each(this.outstandingTimers,function(id) {
-		clearTimeout(id);
-	});
-	this.outstandingTimers = [];
-	confetti.reset();
 };
 
 })();

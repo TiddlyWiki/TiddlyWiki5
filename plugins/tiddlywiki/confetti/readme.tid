@@ -1,16 +1,50 @@
 title: $:/plugins/tiddlywiki/confetti/readme
 
+\define show-example(name)
+<$let title={{{ [[$:/plugins/tiddlywiki/confetti/examples/]addsuffix<__name__>] }}}>
+
+For example:
+
+<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
+
+<$codeblock code={{{ [<title>get[text]] }}}/>
+
+Renders as:
+
+<$transclude tiddler=<<title>> mode="block"/>
+
+</$let>
+\end
+
 ! Introduction
 
 This plugin adds a programmable confetti cannon to your TiddlyWiki. It is based on https://www.kirilv.com/canvas-confetti/ by Kiril Vatev.
 
 ! Usage
 
-The confetti cannon is controlled using messages.
+The confetti cannon can be controlled using messages or via the `<$confetti>` widget. Use the message approach when triggering confetti in response to an action (such as clicking a button). Use the widget approach when confetti is to be triggered by a condition (such as a target number of words being reached).
 
-!! Message: tm-confetti-launch
+!! Messages: tm-confetti-launch and tm-confetti-reset
 
-The `tm-confetti-launch` message launches the confetti cannon. The following options are supported:
+The `tm-confetti-launch` message launches the confetti cannon. See below for the available parameters.
+
+The `tm-confetti-reset` message cancels any confetti that is in progress.
+
+<<show-example staggered>>
+
+!! Widget: `<$confetti>`
+
+The `<$confetti>` widget launches the confetti cannon when it is first rendered. See below for the available attributes.
+
+Typically it is used in conjunction with a `<$list>` or `<$reveal>` widget that shows the widget when the conditions required to trigger the confetti are satisfied.
+
+In this example, the confetti will be launched when the word "launch" in typed into the box.
+
+<<show-example typing-trigger>>
+
+!! Confetti Launch parameters
+
+The following options are supported:
 
 |!Name |!Description |!Default |
 |''delay'' |Number of milliseconds to delay the launch |0 |
@@ -29,14 +63,3 @@ The `tm-confetti-launch` message launches the confetti cannon. The following opt
 |''scalar'' |Scale factor for each confetti particle. Use decimals to make the confetti smaller |1 |
 |''zIndex'' |Z-index of confetti. Increase the value if the confetti is appearing behind other on-screen elements|100 |
 |''disableForReducedMotion'' |Set to `yes` to entirely disable confetti for users that [[prefer reduced motion|https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion]] |`no` |
-
-<$button>
-<$action-sendmessage $message="tm-confetti-launch"/>
-<$action-sendmessage $message="tm-confetti-launch" originY=0.6 spread=70 delay=300/>
-<$action-sendmessage $message="tm-confetti-launch" originY=0.55 spread=30 delay=600/>
-Launch
-</$button>
-
-!! Message: tm-confetti-reset
-
-The `tm-confetti-reset` message stops any active confetti.
