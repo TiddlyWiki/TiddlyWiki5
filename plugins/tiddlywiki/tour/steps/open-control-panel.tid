@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/tour/steps/open-control-panel
+tags: $:/tags/TourStep
+
+! Welcome to ~TiddlyWiki
+
+This tour will guide you through the process of learning to use TiddlyWiki.
+
+Your first task is to open the control panel.
+
+<$list filter="[[$:/StoryList]contains[$:/ControlPanel]limit[1]]" variable="ignore">
+
+<$confetti/>
+
+Congratulations, you may proceed
+
+<<tour-previous-step-button>> <<tour-next-step-button>>
+
+</$list>

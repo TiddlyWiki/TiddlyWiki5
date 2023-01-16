@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/tour/steps/create-tiddler
+tags: $:/tags/TourStep
+
+! Creating Tiddlers
+
+Your task is to create and open a tiddler titled "Congratulations"
+
+<$list filter="[list[$:/StoryList]match[Congratulations]]" variable="ignore">
+
+<$confetti/>
+
+Congratulations, you may proceed
+
+<<tour-previous-step-button>> <<tour-next-step-button>>
+
+</$list>

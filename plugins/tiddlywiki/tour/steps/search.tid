@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/tour/steps/search
+tags: $:/tags/TourStep
+
+! Searching
+
+Your task is to search for the phrase "help".
+
+<$list filter="[{$:/temp/search}match[help]]" variable="ignore">
+
+<$confetti/>
+
+Congratulations! You may now proceed
+
+<<tour-previous-step-button>> <<tour-next-step-button>>
+
+</$list>

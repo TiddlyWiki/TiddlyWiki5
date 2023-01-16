@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/tour/steps/recent
+tags: $:/tags/TourStep
+
+! Searching
+
+Your task is to use the "Recent" tab of the sidebar to open the most recently editted tiddler.
+
+<$let recentTiddler={{{ [all[tiddlers]!is[system]!sort[modified]] }}}>
+
+<$list filter="[list[$:/StoryList]match<recentTiddler>]" variable="ignore">
+
+<$confetti/>
+
+Congratulations! You may now proceed
+
+<<tour-previous-step-button>> <<tour-next-step-button>>
+
+</$list>
+
+</$let>

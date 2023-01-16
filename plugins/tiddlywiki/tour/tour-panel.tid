@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/tour/panel
+tags: $:/tags/PageTemplate
+
+\define tour-previous-step-button()
+<$button>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}] }}}/>
+back
+</$button>
+\end
+
+\define tour-next-step-button()
+<$button>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/steps/finished]] }}}/>
+next
+</$button>
+\end
+
+<$list filter="[{$:/config/ShowTour}!is[blank]else[show]match[show]]" variable="ignore">
+<div class="tc-tour-panel">
+<div class="tc-tiddler-controls">
+<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> ''Tour''
+</div>
+<$transclude tiddler={{$:/state/tour/step}} mode="block"/>
+</div>
+</$list>

@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/tour/steps/close-control-panel
+tags: $:/tags/TourStep
+
+! Close the control panel
+
+Your task now is to close the control panel.
+
+<$list filter="[[$:/StoryList]!contains[$:/ControlPanel]limit[1]]" variable="ignore">
+
+<$confetti/>
+
+Congratulations, you may proceed
+
+<<tour-previous-step-button>> <<tour-next-step-button>>
+
+</$list>

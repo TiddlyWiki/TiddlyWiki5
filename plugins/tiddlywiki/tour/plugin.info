@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/tour",
+	"name": "Tour",
+	"description": "A tour of TiddlyWiki",
+	"list": "readme"
+}
