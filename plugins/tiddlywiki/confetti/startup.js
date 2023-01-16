@@ -22,31 +22,67 @@ exports.synchronous = true;
 
 // Install the root widget event handlers
 exports.startup = function() {
+	var manager = new ConfettiManager();
 	$tw.rootWidget.addEventListener("tm-confetti-launch",function(event) {
 		var paramObject = event.paramObject || {},
-			options = {};
-		options.particleCount = paramObject.particleCount && $tw.utils.parseNumber(paramObject.particleCount);
-		options.angle = paramObject.angle && $tw.utils.parseNumber(paramObject.angle);
-		options.spread = paramObject.spread && $tw.utils.parseNumber(paramObject.spread);
-		options.startVelocity = paramObject.startVelocity && $tw.utils.parseNumber(paramObject.startVelocity);
-		options.decay = paramObject.decay && $tw.utils.parseNumber(paramObject.decay);
-		options.gravity = paramObject.gravity && $tw.utils.parseNumber(paramObject.gravity);
-		options.drift = paramObject.drift && $tw.utils.parseNumber(paramObject.drift);
-		options.ticks = paramObject.ticks && $tw.utils.parseNumber(paramObject.ticks);
+			options = {},
+			extractNumericParameter = function(name) {
+				options[name] = paramObject[name] && $tw.utils.parseNumber(paramObject[name]);
+			},
+			extractListParameter = function(name) {
+				options[name] = paramObject[name] && $tw.utils.parseStringArray(paramObject[name]);
+			},
+			extractBooleanParameter = function(name) {
+				options[name] = paramObject[name] && paramObject[name] === "yes";
+			};
+		$tw.utils.each("particleCount angle spread startVelocity decay gravity drift ticks scalar zIndex".split(" "),function(name) {
+			extractNumericParameter(name);
+		});
+		$tw.utils.each("colors shapes".split(" "),function(name) {
+			extractListParameter(name);
+		});
 		options.origin = {
 			x: paramObject.originX && $tw.utils.parseNumber(paramObject.originX),
 			y: paramObject.originY && $tw.utils.parseNumber(paramObject.originY)
 		};
-		options.colors = paramObject.colors && $tw.utils.parseStringArray(paramObject.colors);
-		options.shapes = paramObject.shapes && $tw.utils.parseStringArray(paramObject.shapes);
-		options.scalar = paramObject.scalar && $tw.utils.parseNumber(paramObject.scalar);
-		options.zIndex = paramObject.zIndex && $tw.utils.parseNumber(paramObject.zIndex);
-		options.disableForReducedMotion = paramObject.disableForReducedMotion && paramObject.disableForReducedMotion === "yes";
-		confetti(options);
+		extractBooleanParameter("disableForReducedMotion");
+		var delay = paramObject.delay ? $tw.utils.parseNumber(paramObject.delay) : 0;
+		manager.launch(delay,options);
 	});
 	$tw.rootWidget.addEventListener("tm-confetti-reset",function(event) {
-		confetti.reset();
+		manager.reset();
 	});
+};
+
+function ConfettiManager() {
+	this.outstandingTimers = [];
+}
+
+ConfettiManager.prototype.launch = function (delay,options) {
+	var self = this;
+	if(delay > 0) {
+		var id = setTimeout(function() {
+			var p = self.outstandingTimers.indexOf(id);
+			if(p !== -1) {
+				self.outstandingTimers.splice(p,1);
+			} else {
+				console.log("Confetti Manager Error: Cannot find previously stored timer ID");
+				debugger;
+			}
+			confetti(options);
+		},delay);
+		this.outstandingTimers.push(id);
+	} else {
+		confetti(options);
+	}
+};
+
+ConfettiManager.prototype.reset = function () {
+	$tw.utils.each(this.outstandingTimers,function(id) {
+		clearTimeout(id);
+	});
+	this.outstandingTimers = [];
+	confetti.reset();
 };
 
 })();

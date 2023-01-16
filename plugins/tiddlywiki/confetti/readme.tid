@@ -13,6 +13,7 @@ The confetti cannon is controlled using messages.
 The `tm-confetti-launch` message launches the confetti cannon. The following options are supported:
 
 |!Name |!Description |!Default |
+|''delay'' |Number of milliseconds to delay the launch |0 |
 |''particleCount'' |The number of confetti to launch |50 |
 |''angle'' |The angle in which to launch the confetti, in degrees (90 is straight up) |90 |
 |''spread'' |How far off center the confetti can go, in degrees. 45 means the confetti will launch at the defined `angle` plus or minus 22.5 degrees |45 |
@@ -31,6 +32,8 @@ The `tm-confetti-launch` message launches the confetti cannon. The following opt
 
 <$button>
 <$action-sendmessage $message="tm-confetti-launch"/>
+<$action-sendmessage $message="tm-confetti-launch" originY=0.6 spread=70 delay=300/>
+<$action-sendmessage $message="tm-confetti-launch" originY=0.55 spread=30 delay=600/>
 Launch
 </$button>
 
