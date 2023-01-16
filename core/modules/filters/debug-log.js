@@ -25,7 +25,7 @@ exports["debug-log"] = function(source,operator,options) {
 		results.push(title);
 	});
 
-	console.group("filter-debug");
+	console.group("debug-log");
 	$tw.utils.logTable(results);
 	if (operator.operand) $tw.utils.logTable(data);
 	console.groupEnd();
