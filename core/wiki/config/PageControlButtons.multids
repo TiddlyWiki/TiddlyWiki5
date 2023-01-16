@@ -2,7 +2,6 @@ title: $:/config/PageControlButtons/Visibility/$:/
 
 core/ui/Buttons/advanced-search: hide
 core/ui/Buttons/close-all: hide
-core/ui/Buttons/reset-layout: hide
 core/ui/Buttons/encryption: hide
 core/ui/Buttons/export-page: hide
 core/ui/Buttons/fold-all: hide
