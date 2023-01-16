@@ -1,6 +1,8 @@
 title: $:/core/ui/PageTemplate
 name: {{$:/language/PageTemplate/Name}}
 description: {{$:/language/PageTemplate/Description}}
+tags: $:/tags/Layout
+icon: $:/core/images/reset-layout-button
 
 \whitespace trim
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]

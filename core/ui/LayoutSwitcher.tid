@@ -5,7 +5,7 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 \whitespace trim
 <$linkcatcher to="$:/layout">
 <div class="tc-chooser">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] [[$:/core/ui/PageTemplate]] +[!is[draft]sort[name]]">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] +[!is[draft]sort[name]]">
 <$list
 	filter="[{$:/layout}!has[text]]"
 	variable="ignore"
@@ -19,7 +19,8 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 <$set name="cls" filter="[all[current]field:title[$:/core/ui/PageTemplate]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 <div class=<<cls>>>
 <$link to={{!!title}}>
-''<$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
+	<span class="tc-icon-wrapper"><$transclude tiddler={{!!icon}}/></span>
+	''<$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
 </$link>
 </div>
 </$set>
