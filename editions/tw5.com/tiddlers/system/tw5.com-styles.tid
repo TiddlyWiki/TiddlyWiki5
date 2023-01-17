@@ -213,7 +213,7 @@ div.content {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	.multi-columns{
+	.multi-columns {
 		column-count: 2;
 	}
 }
