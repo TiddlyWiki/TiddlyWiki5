@@ -159,7 +159,7 @@ exports.importDataTransfer = function(dataTransfer,fallbackTitle,callback) {
 		if(!$tw.browser.isIE || importDataTypes[t].IECompatible) {
 			// Get the data
 			var dataType = importDataTypes[t];
-				var data = dataTransfer.getData(dataType.type);
+			var data = dataTransfer.getData(dataType.type);
 			// Import the tiddlers in the data
 			if(data !== "" && data !== null) {
 				if($tw.log.IMPORT) {
@@ -172,6 +172,34 @@ exports.importDataTransfer = function(dataTransfer,fallbackTitle,callback) {
 		}
 	}
 };
+
+exports.importPaste = function(item,fallbackTitle,callback) {
+	// Try each provided data type in turn
+	for(var t=0; t<importDataTypes.length; t++) {
+		if(item.type === importDataTypes[t].type) {
+			// Get the data
+			var dataType = importDataTypes[t];
+
+			item.getAsString(function(data){
+				if($tw.log.IMPORT) {
+					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
+				}
+				var tiddlerFields = dataType.toTiddlerFieldsArray(data,fallbackTitle);
+				callback(tiddlerFields);
+			});
+			return;
+		}
+	}
+};
+
+exports.itemHasValidDataType = function(item) {
+	for(var t=0; t<importDataTypes.length; t++) {
+		if(!$tw.browser.isIE || importDataTypes[t].IECompatible) {
+			return true;
+		}
+	}
+	return false;
+}
 
 var importDataTypes = [
 	{type: "text/vnd.tiddler", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
@@ -205,7 +233,13 @@ var importDataTypes = [
 		return [{title: fallbackTitle, text: data}];
 	}},
 	{type: "text/uri-list", IECompatible: false, toTiddlerFieldsArray: function(data,fallbackTitle) {
-		return [{title: fallbackTitle, text: data}];
+		// Check for tiddler data URI
+		var match = $tw.utils.decodeURIComponentSafe(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		if(match) {
+			return parseJSONTiddlers(match[1],fallbackTitle);
+		} else {
+			return [{title: fallbackTitle, text: data}]; // As URL string
+		}
 	}}
 ];
 

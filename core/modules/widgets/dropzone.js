@@ -271,6 +271,20 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 					callback: readFileCallback,
 					deserializer: this.dropzoneDeserializer
 				});
+			} else if(item.kind === "string" && !["text/html", "text/plain", "Text"].includes(item.type) && $tw.utils.itemHasValidDataType(item)) {
+				// Try to import the various data types we understand
+				var fallbackTitle = self.wiki.generateNewTitle("Untitled");
+				//Use the deserializer specified if any
+				if(this.dropzoneDeserializer) {
+					item.getAsString(function(str){
+						var tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: fallbackTitle},{deserializer:self.dropzoneDeserializer});
+						if(tiddlerFields && tiddlerFields.length) {
+							readFileCallback(tiddlerFields);
+						}
+					});
+				} else {
+					$tw.utils.importPaste(item,fallbackTitle,readFileCallback);
+				}
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
 				var tiddlerFields;
