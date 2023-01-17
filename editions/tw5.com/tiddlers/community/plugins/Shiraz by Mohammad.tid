@@ -9,7 +9,7 @@ Shiraz plugin is a very small in size and framework to create stylish contents i
 
 {{!!url}}
 
-Shiraz plugin contains extended markups, macros, styles, and many customization to empty Tiddlywiki and can be used as a ''starter kit''. 
+Shiraz plugin contains extended markups, macros, styles, and many customisation to empty Tiddlywiki and can be used as a ''starter kit''.
 
 Some of Shiraz features are:
 
@@ -18,7 +18,7 @@ Some of Shiraz features are:
 * Sortable tables
 * Display on demand, slider, and details
 * Images, basic image macros, slidein, and overlay images, polaroid and pretty images
-* Table customization tools
+* Table customisation tools
 * Sticky footer
 * Multi columns tiddler
 * Multi column story river

@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 
 The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.
 
-[[Fields within the tiddler|Modals]] being displayed in the modal can be used to customize its appearance.
+[[Fields within the tiddler|Modals]] being displayed in the modal can be used to customise its appearance.
 
 !! paramObject
 

@@ -32,7 +32,7 @@ Unlike conventional online services, TiddlyWiki lets you choose where to keep yo
 {{$:/core/images/twitter}} Twitter
 </a>
 <a rel="me" href="https://fosstodon.org/@TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#2b90d9;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/globe}} Mastodon
+{{$:/core/images/mastodon}} Mastodon
 </a>
 <a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/github}} ~GitHub
