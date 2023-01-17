@@ -33,7 +33,7 @@ some text <!-- inline comment -->
 
 !! Security 
 
-<<.warning """Every HTML attribute prefixed with `on` is removed from rendered HTML content for security reasons. eg: `onclick="some evil code"` would be executed, if no sanitation is active. In ~TiddlyWiki It's important to remove every attribute prefixed with `on` so future extensions to the HTML spec will be secure by default. This can lead to some inconvenience since custom attributes like eg: `one` are removed too. """>> 
+<<.warning """Note that any HTML attributes prefixed with `on` are removed from the rendered HTML content. This is done to prevent event handlers (such as "onclick") being used as a clandestine way to execute untrusted JavaScript. A design goal of TiddlyWiki is to ensure that executable JavaScript can only enter the system through explicit JavaScript module tiddlers or raw markup tiddlers. This makes it possible to filter unsafe content in multiuser environments, and also makes it safer to copy untrusted wikitext examples.""">> 
 
 !! Widgets
 
