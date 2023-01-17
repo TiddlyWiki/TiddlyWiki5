@@ -313,7 +313,7 @@ $tw.utils.getLocationHash = function() {
 	var idx = href.indexOf('#');
 	if(idx === -1) {
 		return "#";
-	} else if(idx < href.length-1 && href[idx+1] === '#') {
+	} else if(href.substr(idx + 1,1) === "#" ||  href.substr(idx + 1,3) === "%23") {
 		// Special case: ignore location hash if it itself starts with a #
 		return "#";
 	} else {
