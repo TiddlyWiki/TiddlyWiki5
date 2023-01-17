@@ -195,7 +195,10 @@ exports.importPaste = function(item,fallbackTitle,callback) {
 exports.itemHasValidDataType = function(item) {
 	for(var t=0; t<importDataTypes.length; t++) {
 		if(!$tw.browser.isIE || importDataTypes[t].IECompatible) {
-			return true;
+			if(item.type === importDataTypes[t].type)
+			{
+				return true;
+			}
 		}
 	}
 	return false;
