@@ -27,10 +27,10 @@ On a different level, a tiddler is also the basic unit of work for the wiki user
 This makes sense for multiple reasons:
 Because the UI of TiddlyWiki is build from tiddlers, the wiki user is able to edit the interface of his own TiddlyWiki just by editing a wiki page.
 For example to add a list of tiddler links to the sidebar, the user just needs to create a new tiddler, put the links into this tiddler and tag this tiddler with ``$:/tags/SideBar``.
-This way the user can customize his work environment just by using mechanisms he already uses to manage his wiki pages.
+This way the user can customise his work environment just by using mechanisms he already uses to manage his wiki pages.
 Tiddlers consist of fields. When using a tiddler as wiki page, the user can use these fields to store meta information, like tags.
 
-Because fields for metadata and especially tags are an easy way for the user to organize his wiki pages, TiddlyWiki provides a special filter mechanism to choose tiddlers using their metadata.
+Because fields for metadata and especially tags are an easy way for the user to organise his wiki pages, TiddlyWiki provides a special filter mechanism to choose tiddlers using their metadata.
 A filter string like ``[tag[learncard]topic[math]!tag[successful]]`` would filter all tiddlers tagged with "learncard", with the value "math" in the topic-field and are not tagged with "successful".
 A user could use this filter together with the ``<$list>`` widget to display a list of all math learncards which are not yet answered successfully in a wiki page.
 

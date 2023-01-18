@@ -3,3 +3,9 @@ title: $:/config/
 ShortcutInfo/new-markdown-tiddler: {{$:/language/Buttons/NewMarkdown/Hint}}
 shortcuts-mac/new-markdown-tiddler: ctrl-M
 shortcuts-not-mac/new-markdown-tiddler: alt-M
+markdown/breaks: false
+markdown/linkify: false
+markdown/quotes: “”‘’
+markdown/renderWikiText: true
+markdown/renderWikiTextPragma: \rules only html entity syslink wikilink commentblock commentinline macrocallblock macrocallinline transcludeblock transcludeinline filteredtranscludeblock filteredtranscludeinline
+markdown/typographer: false

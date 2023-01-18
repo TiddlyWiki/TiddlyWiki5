@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/markdown/usage
+title: $:/plugins/tiddlywiki/markdown-legacy/usage
 
 ! Plugin Configuration
 
@@ -8,7 +8,7 @@ title: $:/plugins/tiddlywiki/markdown/usage
 | <code>[[linkNewWindow|$:/config/markdown/linkNewWindow]]</code>| ``true``|For external links, should clicking on them open a new window/tab automatically? |
 | <code>[[quotes|$:/config/markdown/quotes]]</code>| ``“”‘’``|Remarkable library config: Double + single quotes replacement pairs, when ``typographer`` enabled |
 | <code>[[renderWikiText|$:/config/markdown/renderWikiText]]</code>| ``true``|After Markdown is parsed, should any text elements be handed off to the ~WikiText parser for further processing? |
-| <code>[[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]]</code>| ``\rules only html image macrocallinline syslink transcludeinline wikilink filteredtranscludeblock macrocallblock transcludeblock``|When handing off to the ~WikiText parser, what pragma rules should it follow? |
+| <code>[[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]]</code>|<code><$view tiddler="$:/plugins/tiddlywiki/markdown-legacy" subtiddler="$:/config/markdown/renderWikiTextPragma" mode="inline"/></code>|When handing off to the ~WikiText parser, what pragma rules should it follow? |
 | <code>[[typographer|$:/config/markdown/typographer]]</code>| ``false``|Remarkable library config: Enable some language-neutral replacement + quotes beautification |
 
 ! Creating ~WikiLinks

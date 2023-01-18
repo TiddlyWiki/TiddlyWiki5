@@ -16,7 +16,7 @@ Note: Each first [[step|Filter Step]] of a [[filter run|Filter Run]] not given a
 ;filter
 : A [[filter|Filters]] selecting which tiddlers to include
 ;caption
-: The name of the field to transclude for each list item, defaultingt to `caption`
+: The name of the field to transclude for each list item, defaulting to `caption`
 ;type
 : An HTML element to use for the overall list element, defaulting to `ul`
 ;subtype
