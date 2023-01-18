@@ -19,19 +19,29 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 var ENABLED_TITLE = "$:/config/BrowserStorage/Enabled",
-	SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter",
-	QUOTA_EXCEEDED_ALERT_TITLE = "$:/config/BrowserStorage/QuotaExceededAlert",
-	DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX = "Quota exceeded attempting to store `",
-	DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX = "` in browser local storage";
+	SAVE_FILTER_TITLE = "$:/config/BrowserStorage/SaveFilter";
+
+var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js").BrowserStorageUtil;
 
 exports.startup = function() {
 	var self = this;
+	
+        // If not exists, add ENABLED tiddler with default value "yes"
+        if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
+                $tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
+        }
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger
 	var logger = new $tw.utils.Logger("browser-storage",{
 			colour: "cyan"
 		});
+	// Add browserStorage object to $tw
+	$tw.browserStorage = new BrowserStorageUtil($tw.wiki,{
+		enabledTitle: ENABLED_TITLE,
+		prefix: prefix,
+		logger: logger
+	});
 	// Function to compile the filter
 	var filterFn,
 		compileFilter = function() {
@@ -41,7 +51,7 @@ exports.startup = function() {
 	// Listen for tm-clear-browser-storage messages
 	$tw.rootWidget.addEventListener("tm-clear-browser-storage",function(event) {
 		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
-		clearLocalStorage();
+		$tw.browserStorage.clearLocalStorage();
 	});
 	// Track tiddler changes
 	$tw.wiki.addEventListener("change",function(changes) {
@@ -67,65 +77,9 @@ exports.startup = function() {
 				return;
 			}
 			// Save the tiddler
-			saveTiddlerToLocalStorage(title,{
-				logger: logger,
-				prefix: prefix
-			});
+			$tw.browserStorage.saveTiddlerToLocalStorage(title);
 		});
 	});
 };
-
-function saveTiddlerToLocalStorage(title,options) {
-	options = options || {};
-	// Get the tiddler
-	var tiddler = $tw.wiki.getTiddler(title);
-	if(tiddler) {
-		console.log("browser-storage: Saving",title);
-		// Get the JSON of the tiddler				
-		var json = JSON.stringify(tiddler.getFieldStrings());
-		// Try to save it to local storage
-		try {
-			window.localStorage.setItem(options.prefix + title,json);
-		} catch(e) {
-			if(e.name === "QuotaExceededError") {
-				// Complain if we failed
-				var msg = $tw.wiki.getTiddlerText(QUOTA_EXCEEDED_ALERT_TITLE,DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
-				if(options.logger) {
-					options.logger.alert(msg);
-				}
-				// No point in keeping old values around for this tiddler
-				window.localStorage.removeItem(options.prefix + title);
-			} else {
-				console.log("Browser-storage error:",e);
-			}
-		}
-	} else {
-		// In local storage, use the special value of empty string to mark the tiddler as deleted
-		// On future page loads, if the tiddler is already gone from startup then the blank entry
-		// will be removed from localstorage. Otherwise, the tiddler will be deleted.
-		console.log("browser-storage: Blanking",title);
-		try {
-			window.localStorage.setItem(options.prefix + title, "");
-		} catch(e) {
-			console.log("Browser-storage error:",e);
-		}
-	}
-}
-
-function clearLocalStorage() {
-	var url = window.location.pathname,
-		log = [];
-	// Step through each browser storage item
-	if(window.localStorage) {
-		for(var index=window.localStorage.length - 1; index>=0; index--) {
-			var key = window.localStorage.key(index),
-				parts = key.split("#");
-			// Delete it if it is ours
-			if(parts[0] === "tw5" && parts[1] === url) {
-				window.localStorage.removeItem(key);
-			}
-		}
-	}
-}
 
 })();
