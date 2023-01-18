@@ -1,7 +1,7 @@
 title: WidgetMessage: tm-http-request Example - Zotero
 tags: $:/tags/Macro
 
-\define select-zotero-group()
+\procedure select-zotero-group()
 Specify the Zotero group ID to import
 <$edit-text tiddler="$:/config/zotero-group" tag="input"/> or 
 <$select tiddler="$:/config/zotero-group">
@@ -11,7 +11,7 @@ Specify the Zotero group ID to import
 </$select>
 \end
 
-\define zotero-save-item(item)
+\procedure zotero-save-item(item)
 <$action-createtiddler
 	$basetitle={{{ =[[_zotero_import ]] =[<item>jsonget[key]] =[[ ]] =[<item>jsonget[title]] +[join[]] }}}
 	text={{{ [<item>jsonget[title]] }}}
@@ -24,15 +24,15 @@ Specify the Zotero group ID to import
 </$action-createtiddler>
 \end zotero-save-item
 
-\define zotero-save-items(data)
+\procedure zotero-save-items(data)
 <$list filter="[<data>jsonindexes[]] :map[<data>jsonextract<currentTiddler>,[data]]" variable="item">
 	<$macrocall $name="zotero-save-item" item=<<item>>/>
 </$list>
 \end zotero-save-items
 
-\define zotero-get-items(start:"0",limit:"25")
+\procedure zotero-get-items(start:"0",limit:"25")
 
-\define completion()
+\procedure completion()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 	<$action-log msg="In completion"/>
 	<$action-log/>
@@ -47,12 +47,12 @@ Specify the Zotero group ID to import
 	</$list>
 \end completion
 
-\define progress()
+\procedure progress()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 	<$action-log message="In progress-actions"/>
 \end progress
 
-\define request-url()
+\procedure request-url()
 \rules only transcludeinline transcludeblock filteredtranscludeinline filteredtranscludeblock
 https://api.zotero.org/groups/{{$:/config/zotero-group}}/items/
 \end request-url
@@ -64,20 +64,20 @@ https://api.zotero.org/groups/{{$:/config/zotero-group}}/items/
 		method="GET"
 		query-format="json"
 		query-sort="title"
-		query-start=<<__start__>>
-		query-limit=<<__limit__>>
+		query-start=<<start>>
+		query-limit=<<limit>>
 		header-accept="application/json"
 		bind-status="$:/temp/zotero/status"
 		bind-progress="$:/temp/zotero/progress"
 		oncompletion=<<completion>>
 		onprogress=<<progress>>
-		var-start=<<__start__>>
-		var-limit=<<__limit__>>
+		var-start=<<start>>
+		var-limit=<<limit>>
 	/>
 </$wikify>
 \end
 
-\define zotero-actions()
+\procedure zotero-actions()
 <$macrocall $name="zotero-get-items" start="0" limit="50"/>
 \end
 

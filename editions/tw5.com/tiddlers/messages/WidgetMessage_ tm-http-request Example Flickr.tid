@@ -4,9 +4,9 @@ tags: $:/tags/Macro
 <!--
 Get items from a Flickr album/interestingness/collection etc.
 -->
-\define flickr-get-items(method:"flickr.photosets.getPhotos",resultPhotoRoot:"photoset")
+\procedure flickr-get-items(method:"flickr.photosets.getPhotos",resultPhotoRoot:"photoset")
 
-\define completion()
+\procedure completion()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 	<$action-log msg="In completion"/>
 	<$action-log/>
@@ -35,12 +35,12 @@ Get items from a Flickr album/interestingness/collection etc.
 	</$list>
 \end completion
 
-\define progress()
+\procedure progress()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 	<$action-log message="In progress-actions"/>
 \end progress
 
-\define request-url()
+\procedure request-url()
 https://api.flickr.com/services/rest/
 \end request-url
 
@@ -48,7 +48,7 @@ https://api.flickr.com/services/rest/
 	$message="tm-http-request"
 	url=<<request-url>>
 	method="GET"
-	query-method=<<__method__>>
+	query-method=<<method>>
 	query-extras="geo"
 	query-format="json"
 	query-nojsoncallback="1"
@@ -59,21 +59,21 @@ https://api.flickr.com/services/rest/
 	bind-progress="$:/temp/flickr/progress"
 	oncompletion=<<completion>>
 	onprogress=<<progress>>
-	var-start=<<__start__>>
-	var-limit=<<__limit__>>
-	var-resultPhotoRoot=<<__resultPhotoRoot__>>
+	var-start=<<start>>
+	var-limit=<<limit>>
+	var-resultPhotoRoot=<<resultPhotoRoot>>
 />
 \end
 
-\define flickr-get-album-items()
+\procedure flickr-get-album-items()
 <$macrocall $name="flickr-get-items" method="flickr.photosets.getPhotos" resultPhotoRoot="photoset"/>
 \end
 
-\define flickr-get-interesting-items()
+\procedure flickr-get-interesting-items()
 <$macrocall $name="flickr-get-items" method="flickr.interestingness.getList" resultPhotoRoot="photos"/>
 \end
 
-\define flickr-actions()
+\procedure flickr-actions()
 <$macrocall $name="flickr-get-album-items"/>
 \end
 
