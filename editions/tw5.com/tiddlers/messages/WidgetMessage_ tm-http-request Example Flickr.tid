@@ -1,7 +1,10 @@
 title: WidgetMessage: tm-http-request Example - Flickr
 tags: $:/tags/Macro
 
-\define flickr-get-album-items()
+<!--
+Get items from a Flickr album/interestingness/collection etc.
+-->
+\define flickr-get-items(method:"flickr.photosets.getPhotos",resultPhotoRoot:"photoset")
 
 \define completion()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
@@ -9,9 +12,9 @@ tags: $:/tags/Macro
 	<$action-log/>
 	<!-- Success -->
 	<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
-		<$list filter="[<data>jsonindexes[photoset],[photo]]" variable="photoIndex">
+		<$list filter="[<data>jsonindexes<resultPhotoRoot>,[photo]]" variable="photoIndex">
 			<$let
-				photoData={{{ [<data>jsonextract[photoset],[photo],<photoIndex>] }}}
+				photoData={{{ [<data>jsonextract<resultPhotoRoot>,[photo],<photoIndex>] }}}
 				photoFarm={{{ [<photoData>jsonget[farm]] }}}
 				photoServer={{{ [<photoData>jsonget[server]] }}}
 				photoID={{{ [<photoData>jsonget[id]] }}}
@@ -45,7 +48,7 @@ https://api.flickr.com/services/rest/
 	$message="tm-http-request"
 	url=<<request-url>>
 	method="GET"
-	query-method="flickr.photosets.getPhotos"
+	query-method=<<__method__>>
 	query-extras="geo"
 	query-format="json"
 	query-nojsoncallback="1"
@@ -58,7 +61,16 @@ https://api.flickr.com/services/rest/
 	onprogress=<<progress>>
 	var-start=<<__start__>>
 	var-limit=<<__limit__>>
+	var-resultPhotoRoot=<<__resultPhotoRoot__>>
 />
+\end
+
+\define flickr-get-album-items()
+<$macrocall $name="flickr-get-items" method="flickr.photosets.getPhotos" resultPhotoRoot="photoset"/>
+\end
+
+\define flickr-get-interesting-items()
+<$macrocall $name="flickr-get-items" method="flickr.interestingness.getList" resultPhotoRoot="photos"/>
 \end
 
 \define flickr-actions()
@@ -71,8 +83,14 @@ Flickr API Key: <$password name="flickr-api-key"/>
 
 Flickr album ID: <$edit-text tiddler="$:/config/flickr-album" tag="input"/>
 
-<$button actions=<<flickr-actions>>>
-Call Flickr
+<$button>
+<$macrocall $name="flickr-get-album-items"/>
+Get Flickr album
+</$button>
+
+<$button>
+<$macrocall $name="flickr-get-interesting-items"/>
+Get Flickr interesting items
 </$button>
 
 <$geomap
