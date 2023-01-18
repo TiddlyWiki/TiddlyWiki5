@@ -4,7 +4,7 @@ tags: $:/tags/Macro
 <!--
 Get items from a Flickr album/interestingness/collection etc.
 -->
-\procedure flickr-get-items(method:"flickr.photosets.getPhotos",resultPhotoRoot:"photoset")
+\procedure flickr-get-items(per_page:"100",page_number:"1",method:"flickr.photosets.getPhotos",resultPhotoRoot:"photoset")
 
 \procedure completion()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
@@ -32,6 +32,13 @@ Get items from a Flickr album/interestingness/collection etc.
 				/>
 			</$let>
 		</$list>
+		<$let
+			pages={{{ [<data>jsonget[photos],[pages]] }}}
+		>
+			<$list filter="[<page_number>compare:number:lt<pages>]" variable="ignore">
+				<$macrocall $name="flickr-get-items" page_page=<<per_page>> page_number={{{ [<page_number>add[1]] }}} method=<<method>> resultPhotoRoot=<<resultPhotoRoot>>/>
+			</$list>
+		</$let>
 	</$list>
 \end completion
 
@@ -50,6 +57,8 @@ https://api.flickr.com/services/rest/
 	method="GET"
 	query-method=<<method>>
 	query-extras="geo"
+	query-per_page=<<per_page>>
+	query-page=<<page_number>>
 	query-format="json"
 	query-nojsoncallback="1"
 	query-photoset_id={{$:/config/flickr-album}}
@@ -59,8 +68,9 @@ https://api.flickr.com/services/rest/
 	bind-progress="$:/temp/flickr/progress"
 	oncompletion=<<completion>>
 	onprogress=<<progress>>
-	var-start=<<start>>
-	var-limit=<<limit>>
+	var-method=<<method>>
+	var-per_page=<<per_page>>
+	var-page_number=<<page_number>>
 	var-resultPhotoRoot=<<resultPhotoRoot>>
 />
 \end
