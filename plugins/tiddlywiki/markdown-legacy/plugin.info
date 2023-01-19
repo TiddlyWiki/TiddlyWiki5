@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/markdown-legacy",
+	"name": "Markdown (Legacy)",
+	"description": "Markdown parser based on remarkable by Jon Schlinkert and remarkable-katex by Brad Howes",
+	"list": "readme usage remarkable-license remarkable-katex-license"
+}

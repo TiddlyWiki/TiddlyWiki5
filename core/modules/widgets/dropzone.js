@@ -232,9 +232,31 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
-	var self = this,
-		readFileCallback = function(tiddlerFieldsArray) {
+	var self = this;
+	var	readFileCallback = function(tiddlerFieldsArray) {
 			self.readFileCallback(tiddlerFieldsArray);
+		};
+	var getItem = function(type) {
+			type = type || "text/plain";
+			return function(str) {
+				// Use the deserializer specified if any
+				if(self.dropzoneDeserializer) {
+					tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled " + type)},{deserializer:self.dropzoneDeserializer});
+					if(tiddlerFields && tiddlerFields.length) {
+						readFileCallback(tiddlerFields);
+					}
+				} else {
+					tiddlerFields = {
+						title: self.wiki.generateNewTitle("Untitled " + type),
+						text: str,
+						type: type
+					};
+					if($tw.log.IMPORT) {
+						console.log("Importing string '" + str + "', type: '" + type + "'");
+					}
+					readFileCallback([tiddlerFields]);
+				}
+			}
 		};
 	// Let the browser handle it if we're in a textarea or input box
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable) {
@@ -251,27 +273,10 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 				});
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
-				var tiddlerFields,
-					type = item.type;
-				item.getAsString(function(str) {
-					// Use the deserializer specified if any
-					if(self.dropzoneDeserializer) {
-						tiddlerFields = self.wiki.deserializeTiddlers(null,str,{title: self.wiki.generateNewTitle("Untitled")},{deserializer:self.dropzoneDeserializer});
-						if(tiddlerFields && tiddlerFields.length) {
-							readFileCallback(tiddlerFields);
-						}
-					} else {
-						tiddlerFields = {
-							title: self.wiki.generateNewTitle("Untitled"),
-							text: str,
-							type: type
-						};
-						if($tw.log.IMPORT) {
-							console.log("Importing string '" + str + "', type: '" + type + "'");
-						}
-						readFileCallback([tiddlerFields]);
-					}
-				});
+				var tiddlerFields;
+				// It's important to give getAsString a closure with the right type
+				// So it can be added to the import queue
+				item.getAsString(getItem(item.type));
 			}
 		}
 		// Tell the browser that we've handled the paste

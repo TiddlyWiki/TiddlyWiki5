@@ -24,35 +24,35 @@
 	"build": {
 		"index": [
 			"--savetiddlers","[tag[external-image]]","images",
-			"--rendertiddlers","[tag[external-text]]","$:/core/templates/tid-tiddler","text","text/plain",".tid",
+			"--render","[tag[external-text]]","[encodeuricomponent[]addprefix[text/]addsuffix[.tid]]","text/plain","$:/core/templates/tid-tiddler",
 			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
 			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
 			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
-			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+			"--render","$:/core/save/all","index.html","text/plain"],
 		"empty": [
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.html","text/plain",
-			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
+			"--render","$:/editions/tw5.com/download-empty","empty.html","text/plain",
+			"--render","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
 		"encrypted": [
 			"--password", "password",
-			"--rendertiddler", "$:/core/save/all", "encrypted.html", "text/plain",
+			"--render", "$:/core/save/all", "encrypted.html", "text/plain",
 			"--clearpassword"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico",
 			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"],
 		"readmes": [
-			"--rendertiddler","ReadMe","readme.md","text/html",
-			"--rendertiddler","ReadMeBinFolder","bin/readme.md","text/html",
-			"--rendertiddler","ContributingTemplate","contributing.md","text/html",
-			"--rendertiddler","$:/core/copyright.txt","license","text/plain"],
+			"--render","ReadMe","readme.md","text/html",
+			"--render","ReadMeBinFolder","bin/readme.md","text/html",
+			"--render","ContributingTemplate","contributing.md","text/html",
+			"--render","$:/core/copyright.txt","license","text/plain"],
 		"tw2": [
-			"--rendertiddler","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
+			"--render","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
 		"static": [
-			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
-			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
-			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
-			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"],
+			"--render","$:/core/templates/static.template.html","static.html","text/plain",
+			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",			
+			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"],
 		"external-js": [
-			"--rendertiddler","$:/core/save/offline-external-js","index.html","text/plain",
+			"--render","$:/core/save/offline-external-js","index.html","text/plain",
 			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"]
 	},
 	"config": {

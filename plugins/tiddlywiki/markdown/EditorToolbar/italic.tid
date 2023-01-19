@@ -4,7 +4,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/italic
 caption: {{$:/language/Buttons/Italic/Caption}} (Markdown)
 description: {{$:/language/Buttons/Italic/Hint}}
-condition: [<targetTiddler>type[text/x-markdown]]
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 shortcuts: ((italic))
 
 <$action-sendmessage

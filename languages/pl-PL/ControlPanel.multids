@@ -8,8 +8,6 @@ Basics/AnimDuration/Prompt: Długość animacji
 Basics/AutoFocus/Prompt: Domyślne wybrane pole do edycji przy tworzeniu nowego tiddlera
 Basics/Caption: Podstawowe
 Basics/DefaultTiddlers/BottomHint: Tiddlery, które mają spację w nazie otocz &#91;&#91;podwójnymi nawiasami kwadratowymi&#93;&#93;. Możesz też ustawić, by zawsze widzieć {{ostatnio otwarte tiddlery||$:/snippets/retain-story-ordering-button}}
-Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
-Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to {{retain story ordering||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Domyślnie otwarte tiddlery
 Basics/DefaultTiddlers/TopHint: Wybierz które tiddlery mają być widoczne przy uruchomieniu
 Basics/Language/Prompt: Cześć! Wybrany język to:

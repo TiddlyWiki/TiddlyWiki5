@@ -268,7 +268,7 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>Happy Result</p>");
 
 		// This is important. $Let needs to be aware enough not to let its
-		// own variables interfere with its ability to recognize no change.
+		// own variables interfere with its ability to recognise no change.
 		// Doesn't matter that nothing has changed, we just need to make sure
 		// it recognizes that that its outward facing variables are unchanged
 		// EVEN IF some intermediate variables did change, there's no need to

@@ -42,10 +42,15 @@ Compute the internal state of the widget
 GenesisWidget.prototype.execute = function() {
 	var self = this;
 	// Collect attributes
-	this.genesisType = this.getAttribute("$type","element");
+	this.genesisType = this.getAttribute("$type");
 	this.genesisRemappable = this.getAttribute("$remappable","yes") === "yes";
 	this.genesisNames = this.getAttribute("$names","");
 	this.genesisValues = this.getAttribute("$values","");
+	// Do not create a child widget if the $type attribute is missing or blank
+	if(!this.genesisType) {
+		this.makeChildWidgets(this.parseTreeNode.children);
+		return;
+	}
 	// Construct parse tree
 	var isElementWidget = this.genesisType.charAt(0) !== "$",
 		nodeType = isElementWidget ? "element" : this.genesisType.substr(1),

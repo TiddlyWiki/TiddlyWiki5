@@ -98,5 +98,17 @@ Note that the textual substitution of macro parameters that occurs when the oute
 
 Parameters of nested macros can also be accessed via the `<<__variablename__>>` syntax. As ordinary variables, these parameters are available within nested child macros (and grandchildren etc).
 
+For the one-liner macro definition, the `\end` remains unnecessary for the inner macro. For example
+
+<<wikitext-example-without-html src:"""\define special-button(caption:"Click me")
+\define actions() <$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
+
 A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
 

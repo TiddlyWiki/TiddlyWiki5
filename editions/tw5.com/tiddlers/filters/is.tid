@@ -33,6 +33,8 @@ If <<.place C>> is anything else an error message is returned. <<.from-version "
 
 When <<.op is[missing]>> is the first operator in a [[run|Filter Run]], its output is always empty. And when <<.op is[shadow]>> comes first, it outputs only those shadow tiddlers that have been overridden. This is because the [[initial input to a run|Filter Expression]] contains only <<.em non>>-shadow tiddlers.
 
-The <<.olink all>> operator is similar, but its scope is the whole wiki.
+<<.tip "Use `has[title]` to match any tiddler title that is either a tiddler //or// a shadow tiddler.">>
+
+The <<.olink all>> operator is similar to <<.olink is>>, but its scope is the whole wiki.
 
 <<.operator-examples "is">>
