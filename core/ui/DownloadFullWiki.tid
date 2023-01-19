@@ -1,0 +1,18 @@
+title: $:/core/ui/DownloadFullWiki
+
+\whitespace trim
+\rules except wikilink
+
+To download the standard single-file version of your wiki:
+
+<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
+<$let publishFilter="""-[[$:/config/SaveWikiButton/Template]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]]""">
+<$button tooltip="Download fully standalone wiki" aria-label="download full wiki" class="tc-btn-big-green">
+<$action-sendmessage $message="tm-download-file" $param="$:/core/save/all" publishFilter=<<publishFilter>> filename=<<site-title>>/>
+{{$:/core/images/download-button}}
+<span class="tc-tiny-gap-left">
+Download full wiki
+</span>
+</$button>
+</$let>
+</$wikify>
