@@ -686,7 +686,8 @@ exports.escapeRegExp = function(s) {
 };
 
 /*
-Extended version of encodeURIComponent that encodes additional characters 
+Extended version of encodeURIComponent that encodes additional characters including
+those that are illegal within filepaths on various platforms including Windows
 */
 exports.encodeURIComponentExtended = function(s) {
 	return encodeURIComponent(s).replace(/[!'()*]/g,function(c) {
