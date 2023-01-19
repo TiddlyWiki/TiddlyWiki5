@@ -18,6 +18,6 @@ The <<.op debug-log>> operator can be used to output debugging information to th
 
 <<.op debug-log>> also logs empty tiddler titles in its input list.
 
-The suffix <<.place T>> is used as the title for the console logging group. This can be useful to distinguish the output of multiple <<.op debug-log>> operators within a [[Filter Expression]].
+The suffix <<.place T>> is used as the title for the console logging group. This can be useful to distinguish the output of multiple <<.op debug-log>> operators within a [[Filter Expression]]. The title <<.place T>> cannot contain whitespace.
 
 At the end of debugging, all <<.op debug-log>> operators should be removed from the filter expression, in order not to flood the console window with unneeded data.
