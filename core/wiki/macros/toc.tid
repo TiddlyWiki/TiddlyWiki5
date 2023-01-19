@@ -7,7 +7,7 @@ tags: $:/tags/Macro
 
 \define toc-caption()
 \whitespace trim
-<span class="tc-toc-caption tc-tiny-gap-left">
+<span class="tc-toc-caption">
 <$set name="tv-wikilinks" value="no">
   <$transclude field="caption">
     <$view field="title"/>
