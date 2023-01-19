@@ -1,11 +1,13 @@
 caption: debug-log
 created: 20230111163645018
-modified: 20230111163645018
+modified: 20230119153836533
 op-input: a [[selection of titles|Title Selection]]
 op-output: the original input titles
 op-parameter: name of a variable
 op-parameter-name: V
 op-purpose: prints a table of the input titles to the console; if optional parameter <<.place V>> is specified, also prints the value of the variable with that name
+op-suffix: (optional) the title for the console logging group
+op-suffix-name: T
 tags: [[Conditional Operators]] [[Filter Operators]]
 title: debug-log Operator
 type: text/vnd.tiddlywiki
@@ -15,5 +17,7 @@ type: text/vnd.tiddlywiki
 The <<.op debug-log>> operator can be used to output debugging information to the JavaScript console supported by most browsers. This can be useful because otherwise it is difficult to observe what is going on inside a filter run. The operator logs its input at the current position within the filter expression and therefore can be sensible to use in multiple places, e.g. to compare the input and output of another operator.
 
 <<.op debug-log>> also logs empty tiddler titles in its input list.
+
+The suffix <<.place T>> is used as the title for the console logging group. This can be useful to distinguish the output of multiple <<.op debug-log>> operators within a [[Filter Expression]].
 
 At the end of debugging, all <<.op debug-log>> operators should be removed from the filter expression, in order not to flood the console window with unneeded data.
