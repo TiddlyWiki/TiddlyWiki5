@@ -2774,6 +2774,11 @@ input.tc-palette-manager-colour-input {
 	color: <<colour sidebar-foreground>>;
 }
 
+button + .tc-toc-caption,
+button > .tc-toc-caption{
+	margin-left: .25em;
+}
+
 .tc-table-of-contents svg {
 	width: 0.7em;
 	height: 0.7em;
