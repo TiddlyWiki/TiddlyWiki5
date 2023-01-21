@@ -45,7 +45,6 @@ src="""\define my-banner(mode:"inline",caption)
 ! Important
 
 <$macrocall $name=".warning" _="""
-In the following example the widget attribute named `one` is absent from the HTML output, since HTML attributes with the prefix `on` are removed for security reasons. See [[HTML in WikiText]] "Security" for more details.
+In the following example the widget attribute named `one` is not present in the HTML output. This is because HTML attributes starting with the prefix `on` are removed for security reasons. See [[HTML in WikiText]] "Security" for more details. This restriction only affects generated HTML elements, and does not prevent the use of attributes prefixed `on` with other widgets"""/>
 
 <<wikitext-example '<$genesis $type="my-element" $names="one two" $values="1 2">Test Genesis Widget</$genesis>'>>
-"""/>

@@ -1107,6 +1107,10 @@ Tests the filtering mechanism.
 			{ name: '', params: [] }
 		  );
 		});
+		
+		it("should handle the encodeuricomponent and decodeuricomponent operators", function() {
+			expect(wiki.filterTiddlers("[[<>:\"/\\|?*]encodeuricomponent[]]").join(",")).toBe("%3C%3E%3A%22%2F%5C%7C%3F%2A");
+		});
 	
 	}
 	

@@ -228,7 +228,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			hasUnsafeFields = hasUnsafeFields || /[\x00-\x1F]/mg.test(value);
 			hasUnsafeFields = hasUnsafeFields || ($tw.utils.trim(value) !== value);
 		}
-		hasUnsafeFields = hasUnsafeFields || /:/mg.test(fieldName);
+		hasUnsafeFields = hasUnsafeFields || /:|#/mg.test(fieldName);
 	});
 	// Check for field values 
 	if(hasUnsafeFields) {
@@ -393,7 +393,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	} while(fs.existsSync(fullPath));
 	// If the last write failed with an error, or if path does not start with:
 	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory, 
-	//	or the 'originalpath' directory, then encodeURIComponent() and resolve to tiddler directory.
+	//	or the 'originalpath' directory, then $tw.utils.encodeURIComponentExtended() and resolve to tiddler directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode) {
@@ -403,7 +403,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 			writePath.indexOf(path.resolve($tw.boot.wikiTiddlersPath,originalpath)) == 0 );
 		}
 	if(encode) {
-		writePath = path.resolve(directory,encodeURIComponent(fullPath));
+		writePath = path.resolve(directory,$tw.utils.encodeURIComponentExtended(fullPath));
 	}
 	// Return the full path to the file
 	return writePath;
