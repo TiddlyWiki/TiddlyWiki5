@@ -7,8 +7,6 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.5...master]]//
 
-! Major Improvements
-
 ! Translation Improvements
 
 Improvements to the following translations:
@@ -74,4 +72,26 @@ Improvements to the following translations:
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+AnthonyMuscio
+BramChen
+btheado
+cdruan
+CrossEye
+cs8425
+fkmiec
+flibbles
+GameDungeon
+jeffrey4l
+joebordes
+kookma
+m42e
+Marxsal
+newmedicine
+pippep
+pmario
+saqimtiaz
+Telumire
+twMat
+wincentbalin
+yaisog
 """>>
