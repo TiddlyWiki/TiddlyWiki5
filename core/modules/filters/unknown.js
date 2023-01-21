@@ -22,15 +22,9 @@ Export our filter function
 exports["[unknown]"] = function(source,operator,options) {
 	// Check for a user defined filter operator
 	if(operator.operator.charAt(0) === ".") {
-		var customDefinition = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator);
-		if(customDefinition && customDefinition.srcVariable && customDefinition.srcVariable.isFunctionDefinition) {
-			var variables = Object.create(null);
-			// Go through each of the defined parameters, and make a variable with the value of the corresponding operand
-			$tw.utils.each(customDefinition.srcVariable.params,function(param,index) {
-				var value = operator.operands[index];
-				variables[param.name] = value === undefined ? param["default"] || "" : value;
-			});
-			var list = options.wiki.filterTiddlers(customDefinition.srcVariable.value,options.widget.makeFakeWidgetWithVariables(variables),source);
+		var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator);
+		if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
+			var list = options.widget.evaluateVariable(operator.operator,{params: operator.operands, source: source});
 			if(operator.prefix === "!") {
 				var results = [];
 				source(function(tiddler,title) {

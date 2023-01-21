@@ -269,7 +269,7 @@ exports.compileFilter = function(filterString) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widget.getVariable(varTree.name,{params:varTree.params,defaultValue: ""});
+						operand.value = widget.evaluateVariable(varTree.name,{params: varTree.params, source: source})[0] || "";
 					} else {
 						operand.value = operand.text;
 					}

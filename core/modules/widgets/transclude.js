@@ -176,13 +176,56 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 		var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()}),
 			srcVariable = variableInfo && variableInfo.srcVariable;
 		if(srcVariable) {
-			var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
-			if(variableInfo.isCacheable && srcVariable[cacheKey]) {
-				parser = srcVariable[cacheKey];
+			if(srcVariable.isFunctionDefinition) {
+				// Function to return parameters by name or position
+				var fnGetParam = function(name,index) {
+						// Parameter names starting with dollar must be escaped to double dollars
+						if(name.charAt(0) === "$") {
+							name = "$" + name;
+						}
+						// Look for the parameter by name
+						if(self.hasAttribute(name)) {
+							return self.getAttribute(name);
+						// Look for the parameter by index
+						} else if(self.hasAttribute(index + "")) {
+							return self.getAttribute(index + "");
+						} else {
+							return undefined;
+						}
+					},
+					result = this.evaluateVariable(this.transcludeVariable,{params: fnGetParam})[0] || "";
+				parser = {
+					tree: [{
+						type: "text",
+						text: result
+					}],
+					source: result,
+					type: "text/vnd.tiddlywiki"
+				};
+				if(parseAsInline) {
+					parser.tree[0] = {
+						type: "text",
+						text: result
+					};
+				} else {
+					parser.tree[0] = {
+						type: "element",
+						tag: "p",
+						children: [{
+							type: "text",
+							text: result
+						}]
+					}
+				}
 			} else {
-				parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
-				if(variableInfo.isCacheable) {
-					srcVariable[cacheKey] = parser;
+				var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
+				if(variableInfo.isCacheable && srcVariable[cacheKey]) {
+					parser = srcVariable[cacheKey];
+				} else {
+					parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
+					if(variableInfo.isCacheable) {
+						srcVariable[cacheKey] = parser;
+					}
 				}
 			}
 			if(parser) {
@@ -206,25 +249,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 						}
 						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
 					});
-				} else if(srcVariable.isFunctionDefinition) {
-					var actualParams = this.getOrderedTransclusionParameters(),
-						variables = {};
-					$tw.utils.each(srcVariable.params,function(param,index) {
-						var name = param.name;
-						// Parameter names starting with dollar must be escaped to double dollars
-						if(name.charAt(0) === "$") {
-							name = "$" + name;
-						}
-						if(self.hasAttribute(name)) {
-							variables[name] = self.getAttribute(name);
-						} else if(self.hasAttribute(index + "")) {
-							variables[name] = self.getAttribute(index + "");
-						} else {
-							variables[name] = param["default"] || "";
-						}
-					});
-					var result = this.wiki.filterTiddlers(srcVariable.value,this.makeFakeWidgetWithVariables(variables),this.wiki.makeTiddlerIterator([]))[0] || "";
-					parser = this.wiki.parseText(this.transcludeType,result || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
 				} else {
 					// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 					parser = {
