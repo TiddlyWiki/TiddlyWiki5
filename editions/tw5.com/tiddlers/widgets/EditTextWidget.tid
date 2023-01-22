@@ -1,6 +1,6 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20211104200554064
+modified: 20230122210049893
 tags: Widgets
 title: EditTextWidget
 type: text/vnd.tiddlywiki
@@ -24,6 +24,7 @@ The content of the `<$edit-text>` widget is ignored.
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation |
+|focusSelect |<<.from-version 5.2.26>> If `focus` attribute is enabled, determines how the text is selected: "start" places the cursor at the start of the text, "end" or "no" places the cursor at the end of the text and "yes" (the default) selects the entire text |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
 |autocomplete |<<.from-version 5.1.23>> An optional string to provide a hint to the browser how to handle autocomplete for this input |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |

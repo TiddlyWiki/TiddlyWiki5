@@ -180,6 +180,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
+		this.editFocusSelect = this.getAttribute("focusSelect","yes");
 		this.editTabIndex = this.getAttribute("tabindex");
 		this.editCancelPopups = this.getAttribute("cancelPopups","") === "yes";
 		this.editInputActions = this.getAttribute("inputActions");
