@@ -1,23 +1,31 @@
 caption: 5.2.6
-created: 20221219172444961
-modified: 20221219172444961
+created: 20230119221001957
+modified: 20230119221001957
 tags: ReleaseNotes
 title: Release 5.2.6
 type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.5...master]]//
 
-! Major Improvements
-
 ! Translation Improvements
 
 Improvements to the following translations:
 
-* 
+* Chinese
+* Italian
+
+! Plugin Improvements
+
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6528">> the [[Markdown Plugin]] to use the newer and better maintained [[markdown-it|https://github.com/markdown-it/markdown-it]] library. The previous Markdown plugin remains available as "markdown-legacy"
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7176">> [[Innerwiki Plugin]] to allow the `<$data>` widget to override existing tiddler fields
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7207">>, <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/c39ef398bffae12c0ed7324d9b6d9d29f0f2f9ff">> and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/8f7441f296351a4dd0852c3c782f8874d398e052">> problem preventing [[Share Plugin]] from working properly
+
 
 ! Usability Improvements
 
-* 
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7217">> consistency of tiddler deletion by allowing missing tiddlers to be 'deleted', which just results in them being closed
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/34643a42790777f1b235f57b5093bb29bd0b3a14">> layout switcher to include an optional icon for each layout
+* <<.link-badge-removed "https://github.com/Jermolene/TiddlyWiki5/commit/c0615e20ecf7d5d5e66d8a2acd28b80e8d59688d">> [[improvements to table layout|https://github.com/Jermolene/TiddlyWiki5/pull/7010]] from v5.2.5 that have proved to not be backwards compatible
 
 ! Widget Improvements
 
@@ -25,19 +33,35 @@ Improvements to the following translations:
 
 ! Filter improvements
 
-* 
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7121">> [[encodeuricomponent Operator]] to encode characters such as `*` that are illegal in Windows filenames
 
 ! Hackability Improvements
 
-* 
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7185">> the [[pragma|Pragma]] syntax to allow them to be indented with whitespace
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7118">> readability of [[tag-picker Macro]] and [[keyboard-driven-input Macro]]
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7129">> reliability of [[list-links-draggable Macro]] and [[list-tagged-draggable Macro]] by using the new GenesisWidget instead of textual substitution
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7210">> [[external JavaScript core support|Using the external JavaScript template]] to make it possible to save an external JS wiki as a standard single file wiki
 
 ! Bug Fixes
 
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6622">> bug with the DropzoneWidget that prevented all the available formats being pasted
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/7102">> PDF rendering to use an `<iframe>` instead of the older `<embed>`
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8ef6d78beffb6496fe5daa2c81a529a79046ba3c">> issue with `.tid` files with fieldnames containing hash characters by saving such tiddlers in `.json` format
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7121">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/pull/7219">>) overriding `toc-caption` macro for [[Table-of-Contents Macros]]
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7212">> rendering of $:/core/ui/MoreSideBar/Tags when viewed within the story river
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7156">> undefined variable crash in [[reduce Operator]], [[filter Operator]] and [[sortsub Operator]]
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7153">> GenesisWidget not to create anything if the `$type` attribute is blank or missing
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7160">> crash using [[jsonget Operator]] with "fixed" as key name
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/0b39e47ce88c7620b7a66c1553a71efaff06edb9">> importing of MP3 files to match current browser implementations
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7122">> crash when attempting to create an element with a blank tag name
 
 ! Node.js Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7169">> integration between the [[BrowserStorage Plugin]] and the client-server configuration to allow changes to be made while offline and then later resynchronised with the server
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7130">> duplicate fields in internal templates used in client-server configuration
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7138">> lazy loading not triggering a sync from the server
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/bf8e1ca5b0587787bf80692b0213bb7b038c7868">> crash on creating a new tiddler if anonymous users manage to create syncable tiddlers in a read only wiki
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/95e61688397ff1bc9be04193bc4ce2e3c8c48dce">> handling of logout in the client-server configuration to avoid 404 errors
 
 ! Performance Improvements
 
@@ -48,4 +72,26 @@ Improvements to the following translations:
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+AnthonyMuscio
+BramChen
+btheado
+cdruan
+CrossEye
+cs8425
+fkmiec
+flibbles
+GameDungeon
+jeffrey4l
+joebordes
+kookma
+m42e
+Marxsal
+newmedicine
+pippep
+pmario
+saqimtiaz
+Telumire
+twMat
+wincentbalin
+yaisog
 """>>

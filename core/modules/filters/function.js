@@ -17,15 +17,9 @@ Export our filter function
 */
 exports.function = function(source,operator,options) {
 	var functionName = operator.operands[0],
-		customDefinition = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(functionName);
-	if(customDefinition && customDefinition.srcVariable && customDefinition.srcVariable.isFunctionDefinition) {
-		var variables = Object.create(null);
-		// Go through each of the defined parameters, and make a variable with the value of the corresponding operand
-		$tw.utils.each(customDefinition.srcVariable.params,function(param,index) {
-			var value = operator.operands[1 + index]; // Skip over the first operand that gives the function name
-			variables[param.name] = value === undefined ? param["default"] || "" : value;
-		});
-		return options.wiki.filterTiddlers(customDefinition.srcVariable.value,options.widget.makeFakeWidgetWithVariables(variables),source);
+		variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(functionName);
+	if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
+		return options.widget.evaluateVariable(functionName,{params: operator.operands.slice(1), source: source});
 	}
 	// Return the input list if the function wasn't found
 	var results = [];

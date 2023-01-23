@@ -170,6 +170,11 @@ Widget.prototype.getVariable = function(name,options) {
 	return this.getVariableInfo(name,options).text;
 };
 
+/*
+Maps actual parameters onto formal parameters, returning an array of {name:,value:} objects
+formalParams - Array of {name:,default:} (default value is optional)
+actualParams - Array of string values or {name:,value:} (name is optional)
+*/
 Widget.prototype.resolveVariableParameters = function(formalParams,actualParams) {
 	formalParams = formalParams || [];
 	actualParams = actualParams || [];
@@ -182,7 +187,7 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 		paramInfo = formalParams[p];
 		paramValue = undefined;
 		for(var m=0; m<actualParams.length; m++) {
-			if(actualParams[m].name === paramInfo.name) {
+			if(typeof actualParams[m] !== "string" && actualParams[m].name === paramInfo.name) {
 				paramValue = actualParams[m].value;
 			}
 		}
@@ -191,7 +196,8 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 			nextAnonParameter++;
 		}
 		if(paramValue === undefined && nextAnonParameter < actualParams.length) {
-			paramValue = actualParams[nextAnonParameter++].value;
+			var param = actualParams[nextAnonParameter++];
+			paramValue = typeof param === "string" ? param : param.value;
 		}
 		// If we've still not got a value, use the default, if any
 		paramValue = paramValue || paramInfo["default"] || "";
@@ -310,8 +316,61 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				return self.getVariableInfo(name,opts);
 			};
 		},
-		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables
+		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
+		evaluateVariable: self.evaluateVariable,
+		resolveVariableParameters: self.resolveVariableParameters,
+		wiki: self.wiki
 	};
+};
+
+/*
+Evaluate a variable and associated actual parameters and result the resulting array.
+The way that the variable is evaluated depends upon its type:
+* Functions are evaluated as parameterised filter strings
+* Macros are returned as plain text with substitution of parameters
+* Procedures and widgets are returned as plain text
+
+Options are:
+params - the actual parameters – may be one of:
+	* an array of values that may be an anonymous string value, or a {name:, value:} pair
+	* a hashmap of {name: value} pairs
+	* a function invoked with parameters (name,index) that returns a parameter value by name or position
+source - iterator for source tiddlers
+*/
+Widget.prototype.evaluateVariable = function(name,options) {
+	options = options || {};
+	var params = options.params || [];
+	// Get the details of the variable (includes processing text substitution for macros
+	var variableInfo = this.getVariableInfo(name,{params: params,defaultValue: ""});
+	// Process function parameters
+	var variables = Object.create(null);
+	if(variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
+		// Apply default parameter values
+		$tw.utils.each(variableInfo.srcVariable.params,function(param,index) {
+			if(param["default"]) {
+				variables[param.name] = param["default"];
+			}
+		});
+		if($tw.utils.isArray(params)) {
+			// Parameters are an array of values or {name:, value:} pairs
+			$tw.utils.each(this.resolveVariableParameters(variableInfo.srcVariable.params,params),function(param) {
+				variables[param.name] = param.value;
+			});
+		} else if(typeof params === "function") {
+			// Parameters are passed via a function
+			$tw.utils.each(variableInfo.srcVariable.params,function(param,index) {
+				variables[param.name] = params(param.name,index) || param["default"] || "";
+			});
+		} else {
+			// Parameters are a hashmap
+			$tw.utils.each(params,function(value,name) {
+				variables[name] = value;
+			});
+		}
+		return this.wiki.filterTiddlers(variableInfo.text,this.makeFakeWidgetWithVariables(variables),options.source);
+	} else {
+		return [variableInfo.text];
+	}
 };
 
 /*
@@ -348,15 +407,9 @@ Widget.prototype.computeAttribute = function(attribute) {
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
 		if(variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
-			// It's a function definition
-			var variables = Object.create(null);
-			// Go through each of the defined parameters, and make a variable with the value of the corresponding provided parameter
-			var params = this.resolveVariableParameters(variableInfo.srcVariable.params,attribute.value.params);
-			$tw.utils.each(params,function(param,index) {
-				variables[param.name] = param.value;
-			});
-			var list = self.wiki.filterTiddlers(variableInfo.text,this.makeFakeWidgetWithVariables(variables));
-			value = list[0] || "";
+			// It is a function definition. Go through each of the defined parameters, and make a variable with the value of the corresponding provided parameter
+			var paramArray = this.resolveVariableParameters(variableInfo.srcVariable.params,attribute.value.params);
+			value = this.evaluateVariable(attribute.value.name,{params: paramArray})[0] || "";
 		} else {
 			value = variableInfo.text;
 		}

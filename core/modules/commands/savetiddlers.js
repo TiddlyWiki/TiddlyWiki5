@@ -45,7 +45,7 @@ Command.prototype.execute = function() {
 		var tiddler = self.commander.wiki.getTiddler(title),
 			type = tiddler.fields.type || "text/vnd.tiddlywiki",
 			contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"},
-			filename = path.resolve(pathname,encodeURIComponent(title));
+			filename = path.resolve(pathname,$tw.utils.encodeURIComponentExtended(title));
 		fs.writeFileSync(filename,tiddler.fields.text,contentTypeInfo.encoding);
 	});
 	return null;
