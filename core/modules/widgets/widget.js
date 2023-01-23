@@ -172,8 +172,8 @@ Widget.prototype.getVariable = function(name,options) {
 
 /*
 Maps actual parameters onto formal parameters, returning an array of {name:,value:} objects
-formalParams - {name:,default:} (default value is optional)
-actualParams - {name:,value:} (name is optional)
+formalParams - Array of {name:,default:} (default value is optional)
+actualParams - Array of string values or {name:,value:} (name is optional)
 */
 Widget.prototype.resolveVariableParameters = function(formalParams,actualParams) {
 	formalParams = formalParams || [];
@@ -187,7 +187,7 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 		paramInfo = formalParams[p];
 		paramValue = undefined;
 		for(var m=0; m<actualParams.length; m++) {
-			if(actualParams[m].name === paramInfo.name) {
+			if(typeof actualParams[m] !== "string" && actualParams[m].name === paramInfo.name) {
 				paramValue = actualParams[m].value;
 			}
 		}
@@ -196,7 +196,8 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 			nextAnonParameter++;
 		}
 		if(paramValue === undefined && nextAnonParameter < actualParams.length) {
-			paramValue = actualParams[nextAnonParameter++].value;
+			var param = actualParams[nextAnonParameter++];
+			paramValue = typeof param === "string" ? param : param.value;
 		}
 		// If we've still not got a value, use the default, if any
 		paramValue = paramValue || paramInfo["default"] || "";
@@ -317,6 +318,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 		},
 		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
 		evaluateVariable: self.evaluateVariable,
+		resolveVariableParameters: self.resolveVariableParameters,
 		wiki: self.wiki
 	};
 };
@@ -351,15 +353,8 @@ Widget.prototype.evaluateVariable = function(name,options) {
 		});
 		if($tw.utils.isArray(params)) {
 			// Parameters are an array of values or {name:, value:} pairs
-			$tw.utils.each(params,function(param,index) {
-				if(typeof param === "string") {
-					var paramInfo = variableInfo.srcVariable.params[index];
-					if(paramInfo) {
-						variables[paramInfo.name] = param;
-					}
-				} else {
-					variables[param.name] = param.value;
-				}
+			$tw.utils.each(this.resolveVariableParameters(variableInfo.srcVariable.params,params),function(param) {
+				variables[param.name] = param.value;
 			});
 		} else if(typeof params === "function") {
 			// Parameters are passed via a function
