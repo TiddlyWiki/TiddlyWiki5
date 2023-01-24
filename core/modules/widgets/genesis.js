@@ -60,6 +60,7 @@ GenesisWidget.prototype.execute = function() {
 		tag: nodeTag,
 		attributes: {},
 		orderedAttributes: [],
+		isBlock: this.parseTreeNode.isBlock,
 		children: this.parseTreeNode.children || [],
 		isNotRemappable: !this.genesisRemappable
 	}];

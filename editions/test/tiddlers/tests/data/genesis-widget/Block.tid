@@ -1,0 +1,18 @@
+title: Genesis/Block
+description: genesis widget distinguishes between block and inline
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$genesis $type="$reveal" type=nomatch>
+
+Block
+</$genesis>
+
+<$genesis $type=$reveal type=nomatch>Inline</$genesis>
++
+title: ExpectedResult
+
+<div class=" tc-reveal"><p>Block</p></div><p><span class=" tc-reveal">Inline</span></p>
