@@ -2889,6 +2889,22 @@ button > .tc-toc-caption{
 ** Dirty indicator
 */
 
+html body svg.tc-image-save-button .tc-image-save-button-clean {
+	visibility: visible;
+}
+
+html body svg.tc-image-save-button .tc-image-save-button-dirty {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button .tc-image-save-button-clean {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button .tc-image-save-button-dirty {
+	visibility: visible;
+}
+
 html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
 	color: <<colour dirty-indicator>>;
