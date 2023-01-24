@@ -596,6 +596,24 @@ Widget.prototype.findFirstDomNode = function() {
 	return null;
 };
 
+
+
+/*
+Depth first destroy
+*/
+Widget.prototype.desendDestroy = function() {
+	this.waitDestroy = true; //for blocking repeat calls to this method from removeChildDomNodes
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.desendDestroy();
+	});
+	
+	if (this.destroy) {
+		this.destroy();
+	}
+	this.waitDestroy = false;
+};
+
+Widget.prototype.waitDestroy = false;
 /*
 Remove any DOM nodes created by this widget or its children
 */
@@ -612,6 +630,7 @@ Widget.prototype.removeChildDomNodes = function() {
 			childWidget.removeChildDomNodes();
 		});
 	}
+	if (!this.waitDestroy) this.desendDestroy();
 };
 
 /*
