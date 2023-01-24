@@ -814,9 +814,6 @@ button.tc-tag-label, span.tc-tag-label {
 }
 
 .tc-untagged-separator {
-	width: 10em;
-	left: 0;
-	margin-left: 0;
 	border: 0;
 	height: 1px;
 	background: <<colour tab-divider>>;
@@ -2777,6 +2774,11 @@ input.tc-palette-manager-colour-input {
 	color: <<colour sidebar-foreground>>;
 }
 
+button + .tc-toc-caption,
+button > .tc-toc-caption{
+	margin-left: .25em;
+}
+
 .tc-table-of-contents svg {
 	width: 0.7em;
 	height: 0.7em;
@@ -3137,6 +3139,8 @@ select {
 ** Other utility classes
 */
 
+/* Horizontal gaps */
+
 .tc-tiny-gap {
 	margin-left: .25em;
 	margin-right: .25em;
@@ -3178,4 +3182,10 @@ select {
 
 .tc-word-break {
 	word-break: break-all;
+}
+
+/* Vertical gaps */
+
+.tc-tiny-v-gap-bottom {
+	margin-bottom: 3px;
 }

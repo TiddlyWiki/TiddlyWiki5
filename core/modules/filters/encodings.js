@@ -27,7 +27,7 @@ exports.decodeuricomponent = function(source,operator,options) {
 exports.encodeuricomponent = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		results.push(encodeURIComponent(title));
+		results.push($tw.utils.encodeURIComponentExtended(title));
 	});
 	return results;
 };

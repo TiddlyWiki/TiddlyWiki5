@@ -359,14 +359,14 @@ node $TW5_BUILD_TIDDLYWIKI \
 
 # Delete any existing static content
 
-rm $TW5_BUILD_OUTPUT/languages/de-AT/static/*
-rm $TW5_BUILD_OUTPUT/languages/de-DE/static/*
-rm $TW5_BUILD_OUTPUT/languages/es-ES/static/*
-rm $TW5_BUILD_OUTPUT/languages/fr-FR/static/*
-rm $TW5_BUILD_OUTPUT/languages/ja-JP/static/*
-rm $TW5_BUILD_OUTPUT/languages/ko-KR/static/*
-rm $TW5_BUILD_OUTPUT/languages/zh-Hans/static/*
-rm $TW5_BUILD_OUTPUT/languages/zh-Hant/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/de-AT/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/de-DE/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/es-ES/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/fr-FR/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/ja-JP/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/ko-KR/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/zh-Hans/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/zh-Hant/static/*
 
 # /languages/de-AT/index.html		Demo wiki with de-AT language
 # /languages/de-AT/empty.html		Empty wiki with de-AT language

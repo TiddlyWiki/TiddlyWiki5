@@ -4,4 +4,4 @@ title: $:/core/templates/javascript-tiddler
 
 This template is used for saving JavaScript tiddlers as a script tag with data attributes representing the tiddler fields. This version includes the tiddler changecount as the field `revision`.
 
--->`<script`<$fields template=' data-tiddler-$name$="$encoded_value$"'></$fields>` data-tiddler-revision="`<<changecount>>`" data-tiddler-bag="default" type="text/javascript">`<$view field="text" format="text" />`</script>`
+-->`<script`<$fields exclude='text revision bag' template=' data-tiddler-$name$="$encoded_value$"'></$fields>` data-tiddler-revision="`<<changecount>>`" data-tiddler-bag="default" type="text/javascript">`<$view field="text" format="text" />`</script>`

@@ -1,22 +1,22 @@
 caption: genesis
 created: 20221101100729587
-modified: 20221230213912929
+modified: 20230115101800345
 tags: Widgets
 title: GenesisWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-<<.from-version "5.2.4">> The <<.wlink GenesisWidget>> widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
+<<.from-version "5.2.4">> The <<.wid genesis>> widget allows the dynamic construction of another widget, where the name and attributes of the new widget can be dynamically determined, without needing to be known in advance.
 
 ! Content and Attributes
 
-The content of the <<.wlink GenesisWidget>> widget is used as the content of the dynamically created widget.
+The content of the <<.wid genesis>> widget is used as the content of the dynamically created widget.
 
 |!Attribute |!Description |
 |$type |The type of widget or element to create (an initial `$` indicates a widget, otherwise an HTML element will be created) |
 |$names |An optional filter evaluating to the names of a list of attributes to be applied to the widget |
-|$values |An optional filter evaluating to the values corresponding to the list of names specified in `$names` |
+|$values |An optional filter evaluating to the values corresponding to the list of names specified in <<.attr $names>> |
 |//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
 |//{attributes starting with $$}// |Attributes starting with two dollar signs are applied as attributes to the output widget, but with the attribute name changed to use a single dollar sign |
 |//{attributes not starting with $}// |Any other attributes that do not start with a dollar are applied as attributes to the output widget |
@@ -27,10 +27,10 @@ Note that attributes explicitly specified take precedence over attributes with t
 
 ! Examples
 
-<$macrocall $name='wikitext-example-without-html' 
-src='<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>'/>
+<$macrocall $name="wikitext-example"
+src="""<$genesis $type="div" class="tc-thing" label="Squeak">Mouse</$genesis>"""/>
 
-<$macrocall $name='wikitext-example-without-html' 
+<$macrocall $name="wikitext-example"
 src="""\define my-banner(mode:"inline",caption)
 <$genesis $type={{{ [<__mode__>match[inline]then[span]else[div]] }}} class="tc-mybanner">
 <<__caption__>>
@@ -41,3 +41,10 @@ src="""\define my-banner(mode:"inline",caption)
 
 <<my-banner mode:"block" caption:"I'm in a DIV">>
 """/>
+
+! Important
+
+<$macrocall $name=".warning" _="""
+In the following example the widget attribute named `one` is not present in the HTML output. This is because HTML attributes starting with the prefix `on` are removed for security reasons. See [[HTML in WikiText]] "Security" for more details. This restriction only affects generated HTML elements, and does not prevent the use of attributes prefixed `on` with other widgets"""/>
+
+<<wikitext-example '<$genesis $type="my-element" $names="one two" $values="1 2">Test Genesis Widget</$genesis>'>>
