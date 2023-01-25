@@ -617,7 +617,7 @@ Widget.prototype.waitDestroy = false;
 /*
 Remove any DOM nodes created by this widget or its children
 */
-Widget.prototype.removeChildDomNodes = function() {
+Widget.prototype.removeChildDomNodes = function(noDestroy) {
 	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
@@ -627,10 +627,10 @@ Widget.prototype.removeChildDomNodes = function() {
 	} else {
 		// Otherwise, ask the child widgets to delete their DOM nodes
 		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes();
+			childWidget.removeChildDomNodes(true); 
 		});
 	}
-	if (!this.waitDestroy) this.desendDestroy();
+	if (!noDestroy && !this.waitDestroy) this.desendDestroy();
 };
 
 /*
