@@ -1,6 +1,6 @@
 caption: checkbox
 created: 20131024141900000
-modified: 20220402023600000
+modified: 20230125173507654
 tags: Widgets TriggeringWidgets
 colors: red orange yellow blue
 fruits: bananas oranges grapes
@@ -14,6 +14,8 @@ The checkbox widget displays an HTML `<input type="checkbox">` element that is d
 
 * the presence or absence of a specified tag on a specified tiddler
 * the value of a specified field of a specified tiddler
+* the value of a specified index of a specified data-tiddler
+* advanced bindings use list-fields, and filters
 
 ! Content and Attributes
 
@@ -32,7 +34,8 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |unchecked |The value of the field corresponding to the checkbox being unchecked |
 |default |The default value to use if the field is not defined |
 |indeterminate |Whether ambiguous values can produce indeterminate checkboxes (see below) |
-|class |The class that will be assigned to the label element <$macrocall $name=".tip" _="""<<.from-version "5.2.3">> `tc-checkbox` is always applied by default, as well as `tc-checkbox-checked` when checked"""/> |
+|class |The class that will be assigned to the label element<br><<.from-version "5.2.3">> `tc-checkbox` is always applied by default, as well as `tc-checkbox-checked` when checked |
+|innerClass |<<.from-version "5.2.6">> This class attribute will be assigned to the "inner span" element, that wraps the label text eg: `tc-small-gap-left`. This class will be important if a checkbox widget is used with a pragma `\whitespace trim` |
 |actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the status of the checkbox changes (whether it is checked or unchecked) |
 |uncheckactions |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
 |checkactions |<<.from-version "5.1.20">> A string containing ActionWidgets to be triggered when the checkbox is checked |
@@ -46,6 +49,12 @@ This example creates a checkbox that flips the ''done'' tag on the current tiddl
 
 <<wikitext-example-without-html """<$checkbox tag="done"> Is it done?</$checkbox>""">>
 
+The following example uses `innerClass` with `\whitespace trim`
+
+<<wikitext-example-without-html """\whitespace trim
+<$checkbox tag="done" innerClass="tc-small-gap-left">              Is it done?</$checkbox>
+""">>
+
 !! Field Mode
 
 Using the checkbox widget in field mode requires the ''field'' attribute to specify the name of the field. The ''checked'' and ''unchecked'' attributes specify the values to be assigned to the field to correspond to its checked and unchecked states respectively. The ''default'' attribute is used as a fallback value if the field is not defined.
@@ -53,6 +62,7 @@ Using the checkbox widget in field mode requires the ''field'' attribute to spec
 This example creates a checkbox that is checked if the field ''status'' is equal to ''open'' and unchecked if the field is equal to ''closed''. If the field is undefined then it defaults to ''closed'', meaning that the checkbox will be unchecked if the ''status'' field is missing.
 
 <<wikitext-example-without-html """<$checkbox field="status" checked="open" unchecked="closed" default="closed"> Is it open?</$checkbox><br />''status:'' {{!!status}}""">>
+
 
 !! List Mode
 

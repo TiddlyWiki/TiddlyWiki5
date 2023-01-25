@@ -806,6 +806,31 @@ describe("Widget module", function() {
 		// the <<qualify>> widget to spit out something different.
 		expect(withA).toBe(withoutA);
 	});
+
+	/**
+	 * Checkbox widget basic tests
+	 */
+
+	it("should deal with a simple checkbox-widget", function() {
+		var wiki = new $tw.Wiki();
+		var text = '<$checkbox tag="done"> Is it done?</$checkbox>';
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe('<p><label class="tc-checkbox "><input type="checkbox"><span> Is it done?</span></label></p>');
+	});
+
+	it("should deal with checkbox-widget and class and innerClass", function() {
+		var wiki = new $tw.Wiki();
+		var text = '\\whitespace trim' + `\n\n` +
+		'<$checkbox tag="done" class="test-label" innerClass="tc-small-gap-left">              Is it done?</$checkbox>';
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe('<p><label class="tc-checkbox test-label"><input type="checkbox"><span class="tc-small-gap-left">Is it done?</span></label></p>');
+	});
 });
 
 })();

@@ -52,6 +52,9 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
+	if(this.checkboxInnerClass !== "") {	// do not add an empty class attribute to the DOM
+		this.spanDomNode.setAttribute("class","" + this.checkboxInnerClass);
+	}
 	this.labelDomNode.appendChild(this.spanDomNode);
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
@@ -292,6 +295,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxDefault = this.getAttribute("default");
 	this.checkboxIndeterminate = this.getAttribute("indeterminate","no");
 	this.checkboxClass = this.getAttribute("class","");
+	this.checkboxInnerClass = this.getAttribute("innerClass","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	this.isDisabled = this.getAttribute("disabled","no");
 	// Make the child widgets
