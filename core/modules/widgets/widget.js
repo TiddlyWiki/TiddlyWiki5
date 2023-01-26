@@ -615,10 +615,11 @@ Widget.prototype.desendDestroy = function() {
 
 Widget.prototype.waitDestroy = false;
 /*
-Remove any DOM nodes created by this widget or its children
+Remove any DOM nodes created by this widget or its children, and start destroy procedure
 */
-Widget.prototype.removeChildDomNodes = function(noDestroy) {
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
+Widget.prototype.removeChildDomNodes = function(destroy) {
+     var destroy = (destroy !== undefined ? destroy : true);
+	// If this widget has directly created DOM nodes, delete them. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
@@ -627,10 +628,10 @@ Widget.prototype.removeChildDomNodes = function(noDestroy) {
 	} else {
 		// Otherwise, ask the child widgets to delete their DOM nodes
 		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes(true); 
+			childWidget.removeChildDomNodes(false); 
 		});
-	}
-	if (!noDestroy && !this.waitDestroy) this.desendDestroy();
+	} 
+	if (destroy && !this.waitDestroy) this.desendDestroy();
 };
 
 /*
