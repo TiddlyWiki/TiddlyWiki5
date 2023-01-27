@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/geospatial/demos
+
+! Demos
+
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/data">>

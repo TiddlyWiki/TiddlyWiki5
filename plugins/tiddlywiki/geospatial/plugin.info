@@ -2,5 +2,5 @@
 	"title": "$:/plugins/tiddlywiki/geospatial",
 	"name": "Geospatial Utilities",
 	"description": "Geospatial utilities",
-	"list": "readme settings license"
+	"list": "readme demos settings license"
 }

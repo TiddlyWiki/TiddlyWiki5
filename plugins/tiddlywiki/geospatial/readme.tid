@@ -1,5 +1,19 @@
 title: $:/plugins/tiddlywiki/geospatial/readme
 
-! Demos
+! Introduction
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/data">>
+This is an early alpha build of the new Geospatial Plugin for TiddlyWiki. The goal is to develop new primitives for the TiddlyWiki platform that enable non-developers to build sophisticated interactive geospatial applications.
+
+At this point, the Geospatial Plugin is largely a technical proof of concept of foundational capabilities:
+
+* Integrating the open source [[Leaflet.js|https://leafletjs.com/]] library to display interactive maps
+* Integrating the open source [[Turf.js|https://turfjs.org/]] library to perform geospatial calculations with [[GeoJSON|https://en.wikipedia.org/wiki/GeoJSON]] objects
+* Integrating the commercial API [[TravelTime|https://traveltime.com/]] for [[geocoding|https://traveltime.com/features/geocoding]], [[routing|https://traveltime.com/features/multi-modal-routing]] and [[isochrones|https://traveltime.com/features/isochrones]]
+* Integrating the free API from [[Flickr|https://www.flickr.com/services/api/]] for retrieving geotagged photographs
+* Integrating Google's open source [[OpenLocationCode|https://github.com/google/open-location-code]] library for converting to and from Open Location Codes (also known as [[PlusCodes|https://maps.google.com/pluscodes/]])
+
+!! Limitations
+
+The API keys needed to access external services must be manually configured by the end user. The keys are stored in the browser and so only need to be set up once.
+
+! Getting Started
