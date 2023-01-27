@@ -1,0 +1,27 @@
+title: TWPub
+tags: Federatial
+
+! Introduction
+
+The TWPub format slices publications into independent chunks with metadata. These chunks are then packed into a special type of TiddlyWiki plugin for ease of distribution. The benefit of the chunking is to be able to reference and remix material, and support active reading.
+
+A command line tool is provided that can convert existing EPUB format publications into the new TWPub format. The demo also provides a library of the top 100 public domain books from [[Project Gutenberg|https://www.gutenberg.org/]] preconverted into the TWPub format.
+
+TWPubs can be imported into any TiddlyWiki to enjoy basic functionality. The optional TWPub viewer plugin provides helpful additional features:
+
+* Colour coded annotations/bookmarks
+* Multicolumn display permitting TWPubs to be displayed side-by-side with ordinary TiddlyWiki content
+
+! Demo and Documentation
+
+The TWPub site contains documentation and a demonstration library with over a hundred public domain publications:
+
+https://twpub-tools.org/
+
+The open source code is available on ~GitHub:
+
+https://github.com/TWPUB/TWPUB-Tools
+
+! History
+
+The work on TWPub has been performed by [[Federatial]] and funded by [[immatériel·fr|http://www.immateriel.fr]], a leading independent e-book distributor in France who distribute catalogues for more than 700 publishers and partner with the major global e-book resellers.
