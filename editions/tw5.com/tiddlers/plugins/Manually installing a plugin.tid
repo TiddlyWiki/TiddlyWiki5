@@ -18,7 +18,7 @@ If you want to follow the steps //side by side// you can <<open-external-window 
 
 # Import the new plugin shown in the $:/Import tiddler
 
-# Save your TiddlyWiki (<<.icon $:/core/images/save-button>>)
+# Save your TiddlyWiki (<<.icon $:/core/images/save-button-dynamic>>)
 
 # If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completes installation of the plugin <<.icon $:/core/images/refresh-button>>
 
