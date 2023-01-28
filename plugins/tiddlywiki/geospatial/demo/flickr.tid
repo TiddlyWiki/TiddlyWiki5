@@ -1,5 +1,6 @@
-title: WidgetMessage: tm-http-request Example - Flickr
-tags: $:/tags/Macro
+title: $:/plugins/tiddlywiki/geospatial/demo/flickr
+caption: Flickr
+tags: $:/tags/Macro $:/tags/GeospatialDemo
 
 <!--
 Get items from a Flickr album/interestingness/collection etc.
@@ -87,7 +88,7 @@ https://api.flickr.com/services/rest/
 <$macrocall $name="flickr-get-album-items"/>
 \end
 
-! Map of Flickr Photos
+! Retrieve Geotagged Flickr Photos
 
 Flickr API Key: <$password name="flickr-api-key"/>
 
@@ -102,8 +103,3 @@ Get Flickr album
 <$macrocall $name="flickr-get-interesting-items"/>
 Get Flickr interesting items
 </$button>
-
-<$geomap
-	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]tag[$:/tags/FlickrPhoto]]"
-
-/>
