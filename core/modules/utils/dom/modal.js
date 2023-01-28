@@ -180,6 +180,7 @@ Modal.prototype.display = function(title,options) {
 		headerWidgetNode.refresh(changes,modalHeader,null);
 		bodyWidgetNode.refresh(changes,modalBody,null);
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
+		$tw.hooks.invokeHook("th-modal-refreshed");
 	};
 	this.wiki.addEventListener("change",refreshHandler);
 	// Add the close event handler
