@@ -177,6 +177,7 @@ Modal.prototype.display = function(title,options) {
 	footerWidgetNode.render(modalFooterButtons,null);
 	// Set up the refresh handler
 	refreshHandler = function(changes) {
+		$tw.hooks.invokeHook("th-modal-refreshing");
 		headerWidgetNode.refresh(changes,modalHeader,null);
 		bodyWidgetNode.refresh(changes,modalBody,null);
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
