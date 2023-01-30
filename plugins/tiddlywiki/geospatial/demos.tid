@@ -2,4 +2,9 @@ title: $:/plugins/tiddlywiki/geospatial/demos
 
 ! Demos
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/data">>
+* Visit the ~GeoLayers and ~GeoMarkers tabs to see the data loaded into this wiki
+* Click on a link to a layer or marker to open the corresponding tiddler that includes a map
+* Use the Flickr tab to retrieve geotagged photographs from Flickr
+* Visit a ~GeoMarker tiddler and use the "Call ~TravelTime" button to calculate an isochrone from that location using the ~TravelTime API
+
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/map">>

@@ -90,14 +90,10 @@ https://api.flickr.com/services/rest/
 
 ! Retrieve Geotagged Flickr Photos
 
-Flickr API Key: <$password name="flickr-api-key"/>
-
-Flickr album ID: <$edit-text tiddler="$:/config/flickr-album" tag="input"/>
-
 <$button>
 <$macrocall $name="flickr-get-album-items"/>
 Get Flickr album
-</$button>
+</$button> album ID: <$edit-text tiddler="$:/config/flickr-album" tag="input"/>
 
 <$button>
 <$macrocall $name="flickr-get-interesting-items"/>
