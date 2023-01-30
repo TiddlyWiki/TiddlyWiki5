@@ -15,7 +15,8 @@
 		"tiddlywiki/codemirror",
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
-		"tiddlywiki/geospatial"
+		"tiddlywiki/geospatial",
+		"tiddlywiki/xlsx-utils"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

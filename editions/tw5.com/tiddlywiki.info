@@ -7,7 +7,9 @@
 		"tiddlywiki/evernote",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
-		"tiddlywiki/geospatial"
+		"tiddlywiki/jszip",
+		"tiddlywiki/geospatial",
+		"tiddlywiki/xlsx-utils"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

@@ -1,0 +1,7 @@
+import-field-column: Longitude
+import-field-name: longitude
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/longitude
+type: text/vnd.tiddlywiki
+
