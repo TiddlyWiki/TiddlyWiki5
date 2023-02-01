@@ -8,6 +8,7 @@
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",
+		"tiddlywiki/dynannotate",
 		"tiddlywiki/tour"
 	],
 	"themes": [

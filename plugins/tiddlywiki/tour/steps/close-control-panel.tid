@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/tour/steps/close-control-panel
 tags: $:/tags/TourStep
+selector: .tc-story-river div[data-tiddler-title='$:/ControlPanel'] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclose
 
 ! Close the control panel
 
@@ -11,6 +12,6 @@ Your task now is to close the control panel.
 
 Congratulations, you may proceed
 
-<<tour-previous-step-button>> <<tour-next-step-button>>
+<<tour-buttons>>
 
 </$list>

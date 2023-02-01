@@ -11,6 +11,6 @@ Your task is to create and open a tiddler titled "Congratulations"
 
 Congratulations, you may proceed
 
-<<tour-previous-step-button>> <<tour-next-step-button>>
+<<tour-buttons>>
 
 </$list>

@@ -1,14 +1,11 @@
 title: $:/plugins/tiddlywiki/tour/panel
 tags: $:/tags/PageTemplate
 
-\define tour-previous-step-button()
+\define tour-buttons()
 <$button>
 <$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}] }}}/>
 back
 </$button>
-\end
-
-\define tour-next-step-button()
 <$button>
 <$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/steps/finished]] }}}/>
 next
@@ -21,5 +18,9 @@ next
 <$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> ''Tour''
 </div>
 <$transclude tiddler={{$:/state/tour/step}} mode="block"/>
+<$button>
+<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
+show hint
+</$button>
 </div>
 </$list>

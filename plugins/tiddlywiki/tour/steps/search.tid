@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/tour/steps/search
 tags: $:/tags/TourStep
+selector: .tc-sidebar-search .tc-popup-handle
 
 ! Searching
 
@@ -11,6 +12,6 @@ Your task is to search for the phrase "help".
 
 Congratulations! You may now proceed
 
-<<tour-previous-step-button>> <<tour-next-step-button>>
+<<tour-buttons>>
 
 </$list>

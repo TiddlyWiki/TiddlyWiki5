@@ -1,5 +1,7 @@
 title: $:/plugins/tiddlywiki/tour/steps/recent
 tags: $:/tags/TourStep
+selector: .tc-sidebar-tabs-main .tc-timeline > .tc-menu-list-item:nth-child(1) .tc-menu-list-subitem:nth-child(1) .tc-tiddlylink
+selector-fallback-1: .tc-sidebar-tabs-main button:nth-child(3)
 
 ! Searching
 
@@ -13,7 +15,7 @@ Your task is to use the "Recent" tab of the sidebar to open the most recently ed
 
 Congratulations! You may now proceed
 
-<<tour-previous-step-button>> <<tour-next-step-button>>
+<<tour-buttons>>
 
 </$list>
 

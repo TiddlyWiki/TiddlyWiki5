@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/tour/steps/open-control-panel
 tags: $:/tags/TourStep
+selector: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fcontrol-panel
 
 ! Welcome to ~TiddlyWiki
 
@@ -13,6 +14,6 @@ Your first task is to open the control panel.
 
 Congratulations, you may proceed
 
-<<tour-previous-step-button>> <<tour-next-step-button>>
+<<tour-buttons>>
 
 </$list>
