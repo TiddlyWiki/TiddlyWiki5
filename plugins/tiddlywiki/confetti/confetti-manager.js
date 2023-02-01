@@ -19,7 +19,12 @@ function ConfettiManager() {
 }
 
 ConfettiManager.prototype.launch = function (delay,options) {
-	var self = this;
+	var self = this,
+		defaultOptions = {
+			scalar: 1.2,
+			particleCount: 400
+		};
+	options = $tw.utils.extend(defaultOptions,options);
 	if(delay > 0) {
 		var id = setTimeout(function() {
 			var p = self.outstandingTimers.indexOf(id);
