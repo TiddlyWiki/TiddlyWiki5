@@ -132,6 +132,9 @@ XLSXImporter.prototype.processField = function(fieldImportSpecTitle) {
 								value = $tw.utils.stringifyDate(new Date((cell.v - (25567 + 2)) * 86400 * 1000));
 							}
 							break;
+						case "number":
+							value = cell.v.toString();
+							break;
 						case "string":
 							// Intentional fall-through
 						default:
