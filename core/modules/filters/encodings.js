@@ -16,6 +16,22 @@ Filter operator for applying decodeURIComponent() to each item.
 Export our filter functions
 */
 
+exports.decodebase64 = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		results.push($tw.utils.base64Decode(title));
+	});
+	return results;
+};
+
+exports.encodebase64 = function(source,operator,options) {
+	var results = [];
+	source(function(tiddler,title) {
+		results.push($tw.utils.base64Encode(title));
+	});
+	return results;
+};
+
 exports.decodeuricomponent = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
