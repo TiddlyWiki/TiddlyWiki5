@@ -35,7 +35,6 @@ var ZoominListView = function(listWidget) {
 		} else {
 			self.currentTiddlerDomNode = domNode;
 		}
-		$tw.utils.addClass(domNode,"tc-storyview-zoomin-tiddler");
 	});
 };
 
@@ -52,7 +51,6 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		return;
 	}
 	// Make the new tiddler be position absolute and visible so that we can measure it
-	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
 		{display: "block"},
 		{transformOrigin: "0 0"},
@@ -134,7 +132,6 @@ ZoominListView.prototype.insert = function(widget) {
 		return;
 	}
 	// Make the newly inserted node position absolute and hidden
-	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
 		{display: "none"}
 	]);
@@ -157,7 +154,6 @@ ZoominListView.prototype.remove = function(widget) {
 		return;
 	}
 	// Set up the tiddler that is being closed
-	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
 		{display: "block"},
 		{transformOrigin: "50% 50%"},
@@ -173,7 +169,6 @@ ZoominListView.prototype.remove = function(widget) {
 	var toWidgetDomNode = toWidget && toWidget.findFirstDomNode();
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
-		$tw.utils.addClass(toWidgetDomNode,"tc-storyview-zoomin-tiddler");
 		$tw.utils.setStyle(toWidgetDomNode,[
 			{display: "block"},
 			{transformOrigin: "50% 50%"},
