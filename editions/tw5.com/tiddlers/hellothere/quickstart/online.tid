@@ -1,0 +1,8 @@
+title: Quick Start: Online
+tags: [[Quick Start]]
+caption: ONLINE {{$:/core/images/globe}}
+background-color: #c3d3ff
+background: linear-gradient(90deg,#c3d3ff, #ffffff)
+link: Tiddlyhost
+
+Create an account with Tiddlyhost for online wikis that can be private or public

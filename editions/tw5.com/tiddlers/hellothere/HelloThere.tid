@@ -5,11 +5,19 @@ tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-!! ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
+!!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
 Unlike conventional online services, TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
+
+!! ''Quick Start''
+
+<div class="tc-cards tc-cards-vertical">
+<$list filter="[tag[Quick Start]]">
+<$macrocall $name="flex-card" bordercolor={{!!color}} textcolor={{!!text-color}}  backgroundcolor={{!!background-color}} captionField="caption" descriptionField="text"/>
+</$list>
+</div>
 
 !! ''Find Out More''
 

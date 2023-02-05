@@ -1,0 +1,11 @@
+title: Xememex
+tags: Definitions
+
+
+Xememex is a multi-user implementation of TiddlyWiki from Federatial.
+
+Xememex is highly scalable. The largest current implementation supports hundreds of online wikis with thousands of users.
+
+Xememex is cost effective. Xememex runs as a serverless application on Amazon Web Services. Federatial deploy and manage custom instances of Xememex using the clients own AWS account, giving clients full visibility of usage and operating costs.
+
+Xememex is currently only available under commercial terms from Federatial. Contact jeremy@federatial.com for more details.
