@@ -1,0 +1,13 @@
+caption: ~Tiddlyhost
+color: #29B6F6
+community-author: Simon Baird
+delivery: Service
+description: Online service for creating and hosting ~TiddlyWikis
+method: save
+title: Saving on TiddlyHost
+type: text/vnd.tiddlywiki
+
+<!-- This tiddler was originally wrongly titled in camel case. There is now a new version with the correct capitalisation, and this is a stub, retained for compatibility with existing links -->
+
+{{Tiddlyhost}}
+
