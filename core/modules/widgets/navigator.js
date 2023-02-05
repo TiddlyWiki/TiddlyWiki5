@@ -540,7 +540,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Save the $:/Import tiddler
 	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
-	// Update the story and history details.
+	// Update the story and history details
 	var autoOpenOnImport = event.autoOpenOnImport || paramObject.autoOpenOnImport || this.getVariable("tv-auto-open-on-import");
 	if(autoOpenOnImport !== "no") {
 		var storyList = this.getStoryList(),
