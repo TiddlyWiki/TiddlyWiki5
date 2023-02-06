@@ -143,6 +143,7 @@ type: text/vnd.tiddlywiki
 
 .tc-cards.tc-cards-vertical {
 	flex-direction: column;
+	gap: 0.5em;
 }
 
 .tc-tiddlylink.tc-card {
@@ -193,7 +194,7 @@ type: text/vnd.tiddlywiki
 
 .tc-cards.tc-cards-vertical .tc-card-accent {
 	flex-direction: row;
-	align-items: baseline;
+	align-items: center;
 }
 
 .tc-tiddlylink.tc-card:hover {
