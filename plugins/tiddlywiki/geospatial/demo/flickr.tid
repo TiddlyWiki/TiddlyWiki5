@@ -5,7 +5,7 @@ tags: $:/tags/Macro $:/tags/GeospatialDemo
 <!--
 Get items from a Flickr album/interestingness/collection etc.
 -->
-\procedure flickr-get-items(per_page:"100",page_number:"1",method:"flickr.photosets.getPhotos",resultPhotoRoot:"photoset")
+\procedure flickr-get-items(per_page:"100",page_number:"1",method:"flickr.photosets.getPhotos",paramName:"group_id",resultPhotoRoot:"photoset")
 
 \procedure completion()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
@@ -62,7 +62,8 @@ https://api.flickr.com/services/rest/
 	query-page=<<page_number>>
 	query-format="json"
 	query-nojsoncallback="1"
-	query-photoset_id={{$:/config/flickr-album}}
+	$names="[<paramName>addprefix[query-]]"
+	$values={{$:/config/flickr-param}}
 	header-accept="application/json"
 	password-query-api_key="flickr-api-key"
 	bind-status="$:/temp/flickr/status"
@@ -76,26 +77,42 @@ https://api.flickr.com/services/rest/
 />
 \end
 
+\procedure flickr-get-photos-of-user-items()
+<$macrocall $name="flickr-get-items" method="flickr.people.getPhotosOf" paramName="user_id" resultPhotoRoot="photos"/>
+\end
+
+\procedure flickr-get-group-items()
+<$macrocall $name="flickr-get-items" method="flickr.groups.pools.getPhotos" paramName="group_id" resultPhotoRoot="photos"/>
+\end
+
 \procedure flickr-get-album-items()
-<$macrocall $name="flickr-get-items" method="flickr.photosets.getPhotos" resultPhotoRoot="photoset"/>
+<$macrocall $name="flickr-get-items" method="flickr.photosets.getPhotos" paramName="photoset_id" resultPhotoRoot="photoset"/>
 \end
 
 \procedure flickr-get-interesting-items()
 <$macrocall $name="flickr-get-items" method="flickr.interestingness.getList" resultPhotoRoot="photos"/>
 \end
 
-\procedure flickr-actions()
-<$macrocall $name="flickr-get-album-items"/>
-\end
-
 ! Retrieve Geotagged Flickr Photos
+
+Parameter for Flickr retrievals: <$edit-text tiddler="$:/config/flickr-param" tag="input"/>
 
 <$button>
 <$macrocall $name="flickr-get-album-items"/>
 Get Flickr album
-</$button> album ID: <$edit-text tiddler="$:/config/flickr-album" tag="input"/>
+</$button> (parameter shuld be an album ID, e.g. 72157630297432522)
 
 <$button>
 <$macrocall $name="flickr-get-interesting-items"/>
 Get Flickr interesting items
-</$button>
+</$button> (no parameter needed)
+
+<$button>
+<$macrocall $name="flickr-get-photos-of-user-items"/>
+Get Flickr photos of user
+</$button> (parameter shuld be a user ID, e.g. 35468148136@N01)
+
+<$button>
+<$macrocall $name="flickr-get-group-items"/>
+Get Flickr group
+</$button> (parameter shuld be an album ID, e.g. 22075379@N00)
