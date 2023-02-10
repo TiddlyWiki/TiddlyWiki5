@@ -17,6 +17,7 @@ The content of the <<.wid genesis>> widget is used as the content of the dynamic
 |$type |The type of widget or element to create (an initial `$` indicates a widget, otherwise an HTML element will be created) |
 |$names |An optional filter evaluating to the names of a list of attributes to be applied to the widget |
 |$values |An optional filter evaluating to the values corresponding to the list of names specified in <<.attr $names>> |
+|$mode |An optional override of the parsing mode. May be "inline" or "block" |
 |//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
 |//{attributes starting with $$}// |Attributes starting with two dollar signs are applied as attributes to the output widget, but with the attribute name changed to use a single dollar sign |
 |//{attributes not starting with $}// |Any other attributes that do not start with a dollar are applied as attributes to the output widget |
