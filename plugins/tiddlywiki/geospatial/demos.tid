@@ -7,4 +7,11 @@ title: $:/plugins/tiddlywiki/geospatial/demos
 * Use the Flickr tab to retrieve geotagged photographs from Flickr
 * Visit a ~GeoMarker tiddler and use the "Call ~TravelTime" button to calculate an isochrone from that location using the ~TravelTime API
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/map">>
+! Map Showing All Layers and Markers
+
+<$geomap
+	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
+	layers="[all[tiddlers+shadows]tag[$:/tags/GeoLayer]]"
+/>
+
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/markers">>

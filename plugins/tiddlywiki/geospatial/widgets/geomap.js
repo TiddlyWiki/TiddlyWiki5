@@ -69,43 +69,51 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	});
 	// Add scale
 	L.control.scale().addTo(map);
-	// Add overlays
-	if(this.geomapLayerFilter) {
-		$tw.utils.each(this.wiki.filterTiddlers(this.geomapLayerFilter,this),function(title) {
-			var tiddler = self.wiki.getTiddler(title);
-			if(tiddler) {
-				var layer = L.geoJSON($tw.utils.parseJSONSafe(tiddler.fields.text || "[]",[]),{
+	// Track the geolayers filter
+	this.trackerGeoLayersFilter = new FilterTracker({
+		wiki: this.wiki,
+		widget: this,
+		filter: this.geomapLayerFilter,
+		enter: function(title,tiddler) {
+			var text = (tiddler && tiddler.fields.text) || "[]",
+				layer = L.geoJSON($tw.utils.parseJSONSafe(text,[]),{
 					style: function(geoJsonFeature) {
 						return {
-							color: tiddler.getFieldString("color") || "yellow"
+							color: (tiddler && tiddler.getFieldString("color")) || "yellow"
 						}
 					}
 				}).addTo(map);
+			return layer;
+		},
+		leave: function(title,tiddler,data) {
+			data.remove();
+		}
+	});
+	// Track the geomarkers filter
+	this.trackerGeoMarkersFilter = new FilterTracker({
+		wiki: this.wiki,
+		widget: this,
+		filter: this.geomapMarkerFilter,
+		enter: function(title,tiddler) {
+			var lat = $tw.utils.parseNumber((tiddler && tiddler.fields.lat) || "0"),
+				long = $tw.utils.parseNumber((tiddler && tiddler.fields.long) || "0"),
+				alt = $tw.utils.parseNumber((tiddler && tiddler.fields.alt) || "0"),
+				caption = (tiddler && tiddler.fields.caption) || title,
+				icon = myIcon;
+			if(tiddler && tiddler.fields["icon-url"]) {
+				icon = new L.Icon({
+					iconUrl: tiddler && tiddler.fields["icon-url"],
+					iconSize:     [32, 32], // Size of the icon
+					iconAnchor:   [16, 32], // Position of the anchor within the icon
+					popupAnchor:  [16, -32] // Position of the popup anchor relative to the icon anchor
+				});
 			}
-		});
-	}
-	// Add markers
-	if(this.geomapMarkerFilter) {
-		$tw.utils.each(this.wiki.filterTiddlers(this.geomapMarkerFilter,this),function(title) {
-			var tiddler = self.wiki.getTiddler(title);
-			if(tiddler) {
-				var lat = $tw.utils.parseNumber(tiddler.fields.lat || "0"),
-					long = $tw.utils.parseNumber(tiddler.fields.long || "0"),
-					alt = $tw.utils.parseNumber(tiddler.fields.alt || "0"),
-					caption = tiddler.fields.caption || title,
-					icon = myIcon;
-				if(tiddler.fields["icon-url"]) {
-					icon = new L.Icon({
-						iconUrl: tiddler.fields["icon-url"],
-						iconSize:     [32, 32], // Size of the icon
-						iconAnchor:   [16, 32], // Position of the anchor within the icon
-						popupAnchor:  [16, -32] // Position of the popup anchor relative to the icon anchor
-					});
-				}
-				var m = L.marker([lat,long,alt],{icon: icon,draggable: false}).bindPopup(caption).addTo(map);
-			}
-		});
-	}
+			return L.marker([lat,long,alt],{icon: icon,draggable: false}).bindPopup(caption).addTo(map);
+		},
+		leave: function(title,tiddler,data) {
+			data.remove();
+		}
+	});
 };
 
 /*
@@ -121,15 +129,68 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {
+	// Refresh entire widget if layers or marker filter changes
+	if(changedAttributes.layers || changedAttributes.markers) {
 		this.refreshSelf();
 		return true;
-	} else {
-		return false;	
 	}
+	// Check whether the layers or markers need updating
+	this.trackerGeoLayersFilter.refresh(changedTiddlers);
+	this.trackerGeoMarkersFilter.refresh(changedTiddlers);
+	// No children to refresh
+	return false;	
 };
 
 exports.geomap = GeomapWidget;
+
+function FilterTracker(options) {
+	var self = this;
+	// Save parameters
+	this.filter = options.filter;
+	this.wiki = options.wiki;
+	this.widget = options.widget;
+	this.enter = options.enter;
+	this.leave = options.leave;
+	this.update = options.update;
+	// Calculate initial result set and call enter for each entry
+	this.items = Object.create(null);
+	$tw.utils.each(this.wiki.filterTiddlers(this.filter,this.widget),function(title) {
+		self.items[title] = self.enter(title,self.wiki.getTiddler(title));
+	});
+}
+
+FilterTracker.prototype.refresh = function(changedTiddlers) {
+	var self = this;
+	var newItems = this.wiki.filterTiddlers(this.filter,this.widget);
+	// Go through the new items and call update or enter as appropriate
+	$tw.utils.each(newItems,function(title) {
+		// Check if this item is already known
+		if(title in self.items) {
+			// Issue an update if the underlying tiddler has changed
+			if(changedTiddlers[title]) {
+				// Use the update method if provided
+				if(self.update) {
+					self.update(title,self.wiki.getTiddler(title),self.items[title]);
+				} else {
+					// Otherwise leave and enter is equivalent to update
+					self.leave(title,self.wiki.getTiddler(title),self.items[title]);
+					self.items[title] = self.enter(title,self.wiki.getTiddler(title));
+				}
+			}
+		} else {
+			// It's a new item, so we need to enter it
+			self.items[title] = self.enter(title,self.wiki.getTiddler(title));
+		}
+	});
+	// Call leave for any items that are no longer in the list
+	$tw.utils.each(Object.keys(this.items),function(title) {
+		if(newItems.indexOf(title) === -1) {
+			// Remove this item
+			self.leave(title,self.wiki.getTiddler(title),self.items[title]);
+			delete self.items[title];
+		}
+	});
+};
 
 })();
 
