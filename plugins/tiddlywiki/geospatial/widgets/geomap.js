@@ -46,13 +46,11 @@ GeomapWidget.prototype.render = function(parent,nextSibling) {
 
 GeomapWidget.prototype.renderMap = function(domNode) {
 	var self = this;
-	// Get Leaflet
-	var L = require("$:/plugins/tiddlywiki/geospatial/leaflet.js");
 	// Create and position the map
-	const map = L.map(domNode).setView([51.505, -0.09], 13);
+	const map = $tw.Leaflet.map(domNode).setView([51.505, -0.09], 13);
 	map.fitWorld();
 	// Setup the tile layer
-	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	const tiles = $tw.Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
@@ -61,14 +59,14 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	// Create default icon
 	const iconProportions = 365/560,
 		iconHeight = 50;
-	const myIcon = new L.Icon({
+	const myIcon = new $tw.Leaflet.Icon({
 		iconUrl: $tw.utils.makeDataUri(this.wiki.getTiddlerText("$:/plugins/tiddlywiki/geospatial/images/markers/pin"),"image/svg+xml"),
 		iconSize:     [iconHeight * iconProportions, iconHeight], // Size of the icon
 		iconAnchor:   [(iconHeight * iconProportions) / 2, iconHeight], // Position of the anchor within the icon
 		popupAnchor:  [0, -iconHeight] // Position of the popup anchor relative to the icon anchor
 	});
 	// Add scale
-	L.control.scale().addTo(map);
+	$tw.Leaflet.control.scale().addTo(map);
 	// Track the geolayers filter
 	this.trackerGeoLayersFilter = new FilterTracker({
 		wiki: this.wiki,
@@ -76,7 +74,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		filter: this.geomapLayerFilter,
 		enter: function(title,tiddler) {
 			var text = (tiddler && tiddler.fields.text) || "[]",
-				layer = L.geoJSON($tw.utils.parseJSONSafe(text,[]),{
+				layer = $tw.Leaflet.geoJSON($tw.utils.parseJSONSafe(text,[]),{
 					style: function(geoJsonFeature) {
 						return {
 							color: (tiddler && tiddler.getFieldString("color")) || "yellow"
@@ -90,6 +88,8 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		}
 	});
 	// Track the geomarkers filter
+	var markers = $tw.Leaflet.markerClusterGroup();
+	map.addLayer(markers);
 	this.trackerGeoMarkersFilter = new FilterTracker({
 		wiki: this.wiki,
 		widget: this,
@@ -101,14 +101,14 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 				caption = (tiddler && tiddler.fields.caption) || title,
 				icon = myIcon;
 			if(tiddler && tiddler.fields["icon-url"]) {
-				icon = new L.Icon({
+				icon = new $tw.Leaflet.Icon({
 					iconUrl: tiddler && tiddler.fields["icon-url"],
 					iconSize:     [32, 32], // Size of the icon
 					iconAnchor:   [16, 32], // Position of the anchor within the icon
 					popupAnchor:  [16, -32] // Position of the popup anchor relative to the icon anchor
 				});
 			}
-			return L.marker([lat,long,alt],{icon: icon,draggable: false}).bindPopup(caption).addTo(map);
+			return $tw.Leaflet.marker([lat,long,alt],{icon: icon,draggable: false}).bindPopup(caption).addTo(markers);
 		},
 		leave: function(title,tiddler,data) {
 			data.remove();
