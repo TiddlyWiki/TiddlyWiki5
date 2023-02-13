@@ -88,7 +88,9 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		}
 	});
 	// Track the geomarkers filter
-	var markers = $tw.Leaflet.markerClusterGroup();
+	var markers = $tw.Leaflet.markerClusterGroup({
+		maxClusterRadius: 40
+	});
 	map.addLayer(markers);
 	this.trackerGeoMarkersFilter = new FilterTracker({
 		wiki: this.wiki,
