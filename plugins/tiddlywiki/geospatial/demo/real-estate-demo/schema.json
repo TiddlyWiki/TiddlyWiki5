@@ -1,0 +1,14 @@
+{
+	"fields": [
+		{"name": "address", "caption": "Address", "type": "string"},
+		{"name": "broker", "caption": "Broker", "type": "string"},
+		{"name": "city", "caption": "City", "type": "string"},
+		{"name": "lat", "caption": "Latitude", "type": "number"},
+		{"name": "long", "caption": "Longitude", "type": "number"},
+		{"name": "price", "caption": "Price", "type": "number"},
+		{"name": "salesagent", "caption": "Sales Agent", "type": "string"},
+		{"name": "state", "caption": "State", "type": "string"},
+		{"name": "title", "caption": "Title", "type": "string"},
+		{"name": "zipcode", "caption": "Zip Code", "type": "string"}
+	]
+}
