@@ -19,6 +19,9 @@ icon: $:/core/images/layout-button
 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
+<!-- see https://github.com/Jermolene/TiddlyWiki5/issues/7262 -->
+<$genesis $type="$messagecatcher" $names="[tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[message]addprefix[$]]" $values="[tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[text]]">
+
 <$dropzone enable=<<tv-enable-drag-and-drop>>>
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
@@ -29,8 +32,12 @@ icon: $:/core/images/layout-button
 
 </$dropzone>
 
+</$genesis>
+
 </$navigator>
 
 </div>
+
+</$vars>
 
 </$vars>
