@@ -7,13 +7,13 @@ type: text/vnd.tiddlywiki
 
 Available character formatting includes:
 
-* <code>&#96;backticks&#96;</code> for `code` (<<.icon $:/core/images/mono-line>>)
-** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code><br><br>
-* `''bold''` for ''bold text'' (<<.icon $:/core/images/bold>>)<br><br>
-* `//italic//` for //italic text// (<<.icon $:/core/images/italic>>)<br><br>
-* `__underscore__` for __underscored text__ (<<.icon $:/core/images/underline>>)<br><br>
+* <code>&#96;code&#96;</code> for `code` (<<.icon $:/core/images/mono-line>>), alternatively <code>&#96;&#96;double backticks allow &#96;embedded&#96; single backticks&#96;&#96;</code><br><br>
+* `''bold''` for ''bold'' text (<<.icon $:/core/images/bold>>)<br><br>
+* `//italic//` for //italic// text (<<.icon $:/core/images/italic>>)<br><br>
+* `__underscore__` for __underscored__ text (<<.icon $:/core/images/underline>>)<br><br>
 * `^^superscript^^` for ^^superscripted^^ text (<<.icon $:/core/images/superscript>>)<br><br>
 * `,,subscript,,` for ,,subscripted,, text (<<.icon $:/core/images/subscript>>)<br><br>
-* `~~strikethrough~~` for ~~strikethrough~~ text (<<.icon $:/core/images/strikethrough>>)
+* `~~strikethrough~~` for ~~strikethrough~~ text (<<.icon $:/core/images/strikethrough>>)<br><br>
+* `@@highlight@@` for @@highlighted@@ text (no editor toolbar button), see [[Styles and Classes in WikiText]] for more formatting options
 
 See also: [[Code Blocks in WikiText]]
