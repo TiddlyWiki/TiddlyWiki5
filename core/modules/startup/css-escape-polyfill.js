@@ -19,7 +19,7 @@ exports.synchronous = true;
 
 /*! https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
 // https://github.com/umdjs/umd/blob/master/returnExports.js
-exports.startup = function(){ factory(root); };
+exports.startup = factory(root);
 }(typeof global != 'undefined' ? global : this, function(root) {
 
 	if (root.CSS && root.CSS.escape) {
