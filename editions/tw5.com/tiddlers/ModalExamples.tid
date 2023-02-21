@@ -1,0 +1,35 @@
+created: 20230220151616690
+modified: 20230220161318191
+tags: 
+title: ModalExamples
+
+* `tm-modal` examples work exactly as before
+
+Your name: <$edit-text tiddler="$:/temp/yourName" tag="input" placeholder="Your name"/> Your message: <$edit-text tiddler="$:/temp/yourMessage" tag="input" placeholder="Your message"/>
+
+||`$action-modal` |`tm-wikimodal` ||`tm-modal` |
+| !Footer / mask-closable | <$button actions="""<$action-modal $tiddler="SampleModal with Footer" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> | <$button actions="""<$action-sendmessage $message="tm-wikimodal" $param="SampleModal with Footer" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> || <$button actions="""<$action-sendmessage $message="tm-modal" $param="SampleModal with Footer" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |
+| !Subtitle | <$button actions="""<$action-modal $tiddler="SampleModal with Subtitle" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> | <$button actions="""<$action-sendmessage $message="tm-wikimodal" $param="SampleModal with Subtitle" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> || <$button actions="""<$action-sendmessage $message="tm-modal" $param="SampleModal with Subtitle" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |
+| !Help | <$button actions="""<$action-modal $tiddler="SampleModal with Help" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> | <$button actions="""<$action-sendmessage $message="tm-wikimodal" $param="SampleModal with Help" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> || <$button actions="""<$action-sendmessage $message="tm-modal" $param="SampleModal with Help" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |
+| !Class | <$button actions="""<$action-modal $tiddler="SampleModal with Class" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> | <$button actions="""<$action-sendmessage $message="tm-wikimodal" $param="SampleModal with Class" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> || <$button actions="""<$action-sendmessage $message="tm-modal" $param="SampleModal with Class" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |
+| !No Fields | <$button actions="""<$action-modal $tiddler="SampleModal without Fields" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> | <$button actions="""<$action-sendmessage $message="tm-wikimodal" $param="SampleModal without Fields" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |New implementation uses the default template. | <$button actions="""<$action-sendmessage $message="tm-modal" $param="SampleModal without Fields" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |
+| !$template | <$button actions="""<$action-modal $tiddler="SampleModal without Fields" $template="$:/core/ui/ModalTemplate/legacy" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> | <$button actions="""<$action-sendmessage $message="tm-wikimodal" $param="SampleModal without Fields" template="$:/core/ui/ModalTemplate/legacy" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |Legacy template forced via `$template` attribute / `template` variable. | – |
+| !$debug | <$button actions="""<$action-modal $tiddler="SampleModal without Fields" $debug="yes" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> | <$button actions="""<$action-sendmessage $message="tm-wikimodal" $param="SampleModal without Fields" debug="yes" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}} />""">Show</$button> |Debug mode removes the dimmed backdrop and allows interaction with the underlying wiki. | – |
+
+!!! Stacked Modals
+* click the //new// or //legacy// buttons in the modals
+<$button message="tm-modal" param="SampleWizard">Open (legacy)</$button> <$button actions="""<$action-modal $tiddler="SampleWizard" />""">Open (new)</$button>
+
+!!! Code
+* [[$:/core/modules/widgets/action-modal.js]]
+* [[$:/core/ui/PageTemplate/modals]]
+* [[$:/core/ui/PageTemplate]]
+** [[$:/core/ui/PageTemplate/MessageHandler/tm-wikimodal]]
+* [[$:/tags/ModalTemplateFilter]]
+* [[$:/core/ui/ModalTemplate]]
+* [[$:/core/ui/ModalTemplate/legacy]]
+* [[$:/core/ui/ModalTemplate/toolbar]]
+
+!!! Original Documentation
+* [[Modals]]
+* [[WidgetMessage: tm-modal]]

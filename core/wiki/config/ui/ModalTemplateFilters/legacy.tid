@@ -1,0 +1,4 @@
+tags: $:/tags/ModalTemplateFilter
+title: $:/config/ui/ModalTemplateFilters/legacy
+
+[<legacyModal>match[yes]then[$:/core/ui/ModalTemplate/legacy]]

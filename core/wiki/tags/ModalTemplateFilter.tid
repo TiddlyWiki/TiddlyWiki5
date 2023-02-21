@@ -1,0 +1,2 @@
+list: $:/config/ui/ModalTemplateFilters/param $:/config/ui/ModalTemplateFilters/legacy $:/config/ui/ModalTemplateFilters/default
+title: $:/tags/ModalTemplateFilter

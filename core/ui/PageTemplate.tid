@@ -1,7 +1,7 @@
-title: $:/core/ui/PageTemplate
-name: {{$:/language/PageTemplate/Name}}
 description: {{$:/language/PageTemplate/Description}}
 icon: $:/core/images/layout-button
+name: {{$:/language/PageTemplate/Name}}
+title: $:/core/ui/PageTemplate
 
 \whitespace trim
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
@@ -20,9 +20,7 @@ icon: $:/core/images/layout-button
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
 <!-- see https://github.com/Jermolene/TiddlyWiki5/issues/7262 -->
-<$genesis $type="$messagecatcher"
-          $names="[all[shadows+tiddlers]tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[message]addprefix[$]]"
-	  $values="[all[shadows+tiddlers]tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[text]]">
+<$genesis $type="$messagecatcher" $names="[all[shadows+tiddlers]tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[message]addprefix[$]]" $values="[all[shadows+tiddlers]tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[text]]">
 
 <$dropzone enable=<<tv-enable-drag-and-drop>>>
 

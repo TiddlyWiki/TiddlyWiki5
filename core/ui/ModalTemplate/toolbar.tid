@@ -1,0 +1,14 @@
+created: 20230220124303840
+modified: 20230220130343590
+tags: $:/tags/ModalTemplate
+title: $:/core/ui/ModalTemplate/toolbar
+
+\whitespace trim
+\define title-styles()
+fill:$(foregroundColor)$;
+\end
+<span class="tc-tiddler-controls">
+	<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
+		<$transclude tiddler="$:/core/ui/Buttons/close"/>
+	</$set>
+</span>

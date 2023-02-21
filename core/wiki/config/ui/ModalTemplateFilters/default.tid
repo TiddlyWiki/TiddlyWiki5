@@ -1,0 +1,4 @@
+tags: $:/tags/ModalTemplateFilter
+title: $:/config/ui/ModalTemplateFilters/default
+
+[[$:/core/ui/ModalTemplate]]

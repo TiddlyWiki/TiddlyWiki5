@@ -1,0 +1,12 @@
+created: 20230220152405168
+modified: 20230220152447630
+subtitle: This is a subtle subtitle.
+tags: [[Message Examples]]
+title: SampleModal with Subtitle
+type: text/vnd.tiddlywiki
+
+! Hello, <<yourName>>
+
+This is an example modal containing the following message:
+
+<<yourMessage>>

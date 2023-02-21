@@ -1,0 +1,26 @@
+tags: 
+title: $:/core/ui/ModalTemplate/legacy
+
+<div class={{{ [[tc-modal]] [<currentTiddler>get[class]!is[blank]] +[join[ ]] }}}>
+	<$list filter="[<currentTiddler>get[subtitle]!is[blank]]" variable="subtitle">
+		<div class="tc-modal-header">
+			<h3><<subtitle>></h3>
+		</div>
+	</$list>
+	<div class="tc-modal-body">
+		<$transclude tiddler=<<currentTiddler>> mode="block"/>
+	</div>
+	<div class="tc-modal-footer">
+		<$list filter="[<currentTiddler>get[help]!is[blank]]" variable="help">
+			<span>
+				<a href=<<help>> target="_blank" rel="noopener noreferrer">Help</a>
+			</span>
+		</$list>
+		<span>
+			<$transclude tiddler=<<currentTiddler>> field="footer">
+				<$button actions=<<close-current-modal>> ><$text text={{$:/language/Buttons/Close/Caption}}/></$button>
+			</$transclude>
+		</span> 
+	</div>
+</div>
+	

@@ -1,0 +1,13 @@
+created: 20230220153921709
+modified: 20230220154144113
+tags: [[Message Examples]]
+title: SampleModal without Fields
+type: text/vnd.tiddlywiki
+
+! Hello, <<yourName>>
+
+This is an example modal containing the following message:
+
+<<yourMessage>>
+
+Modals without fields use the new template. Notice the close button in the upper right corner. Also, click on the dimmed background to close.

@@ -1,0 +1,13 @@
+created: 20230220151512114
+footer: This is a footer message without Close button – better use it with `mask-closable` set to `yes`. Click on the dimmed background to close.
+mask-closable: yes
+modified: 20230220152350607
+tags: [[Message Examples]]
+title: SampleModal with Footer
+type: text/vnd.tiddlywiki
+
+! Hello, <<yourName>>
+
+This is an example modal containing the following message:
+
+<<yourMessage>>

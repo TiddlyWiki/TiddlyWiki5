@@ -1,0 +1,14 @@
+class: tc-center
+created: 20230220152721992
+modified: 20230220153803291
+tags: [[Message Examples]]
+title: SampleModal with Class
+type: text/vnd.tiddlywiki
+
+! Hello, <<yourName>>
+
+This is an example modal containing the following message:
+
+<<yourMessage>>
+
+This modal has the class field set to `tc-center` (does nothing, can be seen in Inspector).

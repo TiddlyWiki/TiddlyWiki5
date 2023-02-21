@@ -1,10 +1,9 @@
-title: $:/yaisog/ui/PageTemplate/MessageHandler/tm-modal
+message: tm-wikimodal
 tags: $:/tags/PageTemplateMessageHandler
-message: tm-modal
-created: 20230213120445617
-modified: 20230215182631901
+title: $:/core/ui/PageTemplate/MessageHandler/tm-wikimodal
 
 \import [[$:/core/ui/PageTemplate/modals]]
+
 <!-- the message is not intercepted when using global keyboard shortcuts to open a modal -->
 
-<<tm-modal-handler>>
+<<tm-wikimodal-handler>>
