@@ -24,7 +24,8 @@ The content of the `<$edit-text>` widget is ignored.
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation |
-|focusSelect |<<.from-version 5.2.26>> If `focus` attribute is enabled, determines how the text is selected: "start" places the cursor at the start of the text, "end" or "no" places the cursor at the end of the text and "yes" (the default) selects the entire text |
+|focusSelectFromStart |<<.from-version 5.2.26>> If the `focus` attribute is enabled, determines the position of the start of the selection: 0 (the default) places the start of the selection at the beginning of the text, 1 places the start of the selection after the first character etc  |
+|focusSelectFromEnd |<<.from-version 5.2.26>> If the `focus` attribute is enabled, determines the position of the end of the selection: 0 (the default) places the end of the selection at the end of the text, 1 places the start of the selection before the final character etc  |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
 |autocomplete |<<.from-version 5.1.23>> An optional string to provide a hint to the browser how to handle autocomplete for this input |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
@@ -38,7 +39,6 @@ The content of the `<$edit-text>` widget is ignored.
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 |disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
 |fileDrop|<<.from-version "5.2.0">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. Defaults to "no"|
-
 
 ! Example
 

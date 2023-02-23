@@ -124,7 +124,7 @@ SimpleEngine.prototype.focus = function() {
 		this.domNode.focus();
 	}
 	if(this.domNode.select) {
-		$tw.utils.setSelectionByKeyword(this.domNode,this.widget.editFocusSelect);
+		$tw.utils.setSelectionByKeyword(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
 	}
 };
 

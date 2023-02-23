@@ -40,19 +40,10 @@ exports.setSelectionRangeSafe = function(node,start,end,direction) {
 };
 
 /*
-Select the text in an input or textarea by keyword:
-start - place cursor at start of text
-end|no - place cursor at end of text
-yes - select entire text
+Select the text in an input or textarea by position
 */
-exports.setSelectionByKeyword = function(node,selectType) {
-	if(selectType === "start") {
-		$tw.utils.setSelectionRangeSafe(node,0,0);
-	} else if(selectType === "end" || selectType === "no") {
-		$tw.utils.setSelectionRangeSafe(node,node.value.length,node.value.length);
-	} else {
-		node.select();
-	}
+exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
+	$tw.utils.setSelectionRangeSafe(node,selectFromStart,node.value.length - selectFromEnd);
 };
 
 exports.removeChildren = function(node) {
