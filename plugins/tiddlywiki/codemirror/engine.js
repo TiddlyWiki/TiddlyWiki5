@@ -220,9 +220,15 @@ function CodeMirrorEngine(options) {
 			}
 		});
 		this.cm.on("paste",function(cm,event) {
+			event["twEditor"] = true;
 			self.widget.handlePasteEvent.call(self.widget,event);
 		});
+	} else {
+		this.cm.on("paste",function(cm,event){
+			event["twEditor"] = true;
+		});
 	}
+;
 }
 
 /*
