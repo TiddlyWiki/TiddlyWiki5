@@ -27,7 +27,7 @@ Follow these instructions when using TiddlyWiki as a standalone, single file wik
 
 # Click the ''install'' button to install a plugin
 
-# Save your TiddlyWiki <<.icon $:/core/images/save-button>>
+# Save your TiddlyWiki <<.icon $:/core/images/save-button-dynamic>>
 
 # If a yellow warning bar appears at the top of the window,  refresh the window so that TiddlyWiki completes installation of the plugin <<.icon $:/core/images/refresh-button>>
 
