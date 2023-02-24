@@ -521,3 +521,5 @@ Marcus Winter, @yaisog, 2023-01-07
 Ethan Weller, @gamedungeon, 2023-01-17
 
 Mateusz Wilczek, @mateuszwilczek, 2023/02/16
+
+Andrea Octo, @andrigamerita, 2023/02/24
