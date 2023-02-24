@@ -46,7 +46,7 @@ exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var self = this;
 	var options = {};
-	var hasLineBreak;
+	var hasLineBreak=false;
 	var tag = this.nextTag;
 	this.nextTag = null;
 	// Advance the parser position to past the tag
