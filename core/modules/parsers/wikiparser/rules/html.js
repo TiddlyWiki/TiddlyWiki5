@@ -28,6 +28,7 @@ exports.types = {inline: true, block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
+	this.matchInfo = {match:{}};
 };
 
 exports.findNextMatch = function(startPos) {
@@ -43,12 +44,27 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
+	var self = this;
+	var options = {};
+	var hasLineBreak;
 	var tag = this.nextTag;
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
-	// Check for an immediately following double linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
+
+	// Crecate a callback, to have access to node.match.index
+	options.cb = function(node) {
+		self.matchInfo = node;
+	}
+
+	// Check for an immediately following double linebreak if we don't know if it is a block
+	// BP: this.parser.source.match("<!-- xxxxxx -->")[0] === "<!-- xxxxxx -->"
+	var doubleLinebreakAt = (this.matchInfo.match && this.matchInfo.match.index)? this.matchInfo.match.index : 0; // for easy debugging
+	if (this.parser.pos >= doubleLinebreakAt) {
+		// TODO if we could guarantee, that our source code does not have \r we could make this detection 25% faster
+		var node = $tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g,options);
+		hasLineBreak = !tag.isSelfClosing && !!node;
+	}
 	// Set whether we're in block mode
 	tag.isBlock = this.is.block || hasLineBreak;
 	// Parse the body if we need to

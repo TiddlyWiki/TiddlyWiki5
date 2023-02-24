@@ -86,13 +86,15 @@ exports.parseTokenString = function(source,pos,token) {
 /*
 Look for a token matching a regex. Returns null if not found, otherwise returns {type: "regexp", match:, start:, end:,}
 */
-exports.parseTokenRegExp = function(source,pos,reToken) {
+exports.parseTokenRegExp = function(source,pos,reToken,options) {
+	options = options || {};
 	var node = {
 		type: "regexp",
 		start: pos
 	};
 	reToken.lastIndex = pos;
 	node.match = reToken.exec(source);
+	(options.cb) ? options.cb(node) : null;
 	if(node.match && node.match.index === pos) {
 		node.end = pos + node.match[0].length;
 		return node;
