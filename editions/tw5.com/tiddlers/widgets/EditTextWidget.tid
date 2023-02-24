@@ -24,8 +24,8 @@ The content of the `<$edit-text>` widget is ignored.
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation |
-|focusSelectFromStart |<<.from-version 5.2.26>> If the `focus` attribute is enabled, determines the position of the start of the selection: 0 (the default) places the start of the selection at the beginning of the text, 1 places the start of the selection after the first character etc  |
-|focusSelectFromEnd |<<.from-version 5.2.26>> If the `focus` attribute is enabled, determines the position of the end of the selection: 0 (the default) places the end of the selection at the end of the text, 1 places the start of the selection before the final character etc  |
+|focusSelectFromStart |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the start of the selection: 0 (the default) places the start of the selection at the beginning of the text, 1 places the start of the selection after the first character etc  |
+|focusSelectFromEnd |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the end of the selection: 0 (the default) places the end of the selection at the end of the text, 1 places the start of the selection before the final character etc  |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
 |autocomplete |<<.from-version 5.1.23>> An optional string to provide a hint to the browser how to handle autocomplete for this input |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
