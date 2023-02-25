@@ -74,6 +74,32 @@ exports.join = makeStringReducingOperator(
 	},null
 );
 
+var dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
+
+exports.levenshtein = makeStringBinaryOperator(
+	function(a,b) {
+		var dmpObject = new dmp.diff_match_patch(),
+			diffs = dmpObject.diff_main(a,b);
+		return [dmpObject.diff_levenshtein(diffs) + ""];
+	}
+);
+
+exports.makepatches = makeStringBinaryOperator(
+	function(a,b) {
+		var dmpObject = new dmp.diff_match_patch(),
+			patches = dmpObject.patch_make(a,b);
+		return [dmpObject.patch_toText(patches)];
+	}
+);
+
+exports.applypatches = makeStringBinaryOperator(
+	function(a,b) {
+		var dmpObject = new dmp.diff_match_patch(),
+			patches = dmpObject.patch_fromText(b);
+		return [dmpObject.patch_apply(patches,a)[0]];
+	}
+);
+
 function makeStringBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [];
