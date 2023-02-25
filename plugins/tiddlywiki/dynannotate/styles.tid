@@ -40,6 +40,10 @@ tags: [[$:/tags/Stylesheet]]
     padding: 1em;
 }
 
+.tc-control-panel table.tc-dynannotate-search-parameters, .tc-control-panel table.tc-dynannotate-search-parameters input {
+    width: initial;
+}
+
 .tc-dynannotate-snippet-highlight {
 	background: #efef53;
 }
