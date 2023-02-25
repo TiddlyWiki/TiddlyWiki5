@@ -35,10 +35,6 @@ Click here to use the custom view template
 Click here to revert to the core view template
 </$button>
 
-<div class="tc-dynannotate-example-frame">
-
-{{$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki}}
-</div>
 <p/>
 
 <div class="tc-dynannotation-example-info">
@@ -57,10 +53,10 @@ This example uses a transcluded tiddler, but Dynannotate could be added to the v
 <p/>
 <$let dynannotateText={{$:/state/dynannotate/examples/viewtemplate}}>
     <$genesis $type={{{ [<dynannotateText>!is[blank]then[$dynannotate]] }}}
-		          search=<<dynannotateText>>
-							searchDisplay="overlay"
-							searchClass="tc-dynannotation-search-overlay-animated"
-							searchCaseSensitive="no">
+              search=<<dynannotateText>>
+              searchDisplay="overlay"
+              searchClass="tc-dynannotation-search-overlay-animated"
+              searchCaseSensitive="no">
 				<div class="tc-dynannotate-example-frame">
 							
         	{{$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki}}
