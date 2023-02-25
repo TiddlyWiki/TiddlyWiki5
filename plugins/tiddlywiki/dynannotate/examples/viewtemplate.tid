@@ -35,7 +35,7 @@ Click here to use the custom view template
 Click here to revert to the core view template
 </$button>
 
-<div style="border: 1px solid black; border-radius: 20px; padding: 1em;">
+<div class="tc-dynannotate-example-frame">
 
 {{$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki}}
 </div>
@@ -61,7 +61,7 @@ This example uses a transcluded tiddler, but Dynannotate could be added to the v
 							searchDisplay="overlay"
 							searchClass="tc-dynannotation-search-overlay-animated"
 							searchCaseSensitive="no">
-				<div style="border: 1px solid black; border-radius: 20px; padding: 1em;">
+				<div class="tc-dynannotate-example-frame">
 							
         	{{$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki}}
 				</div>
