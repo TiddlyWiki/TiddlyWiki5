@@ -55,7 +55,7 @@ We can style the highlights with the `searchClass` attribute, which has some pre
 
 </div>
 
-|tc-table-no-border|k
+|tc-table-no-border tc-dynannotate-search-parameters|k
 |search term |<$edit-text tiddler="$:/temp/dynannotate-example/search" field="text" tag="input" default="The human mind" />|
 |search mode |<$select tiddler="$:/temp/dynannotate-example/searchMode" field="text" default="literal"><option value="literal">literal</option><option value="normal">normal</option><option value="regexp">regexp</option><option value="whitespace">whitespace</option><option value="some">some</option><option value="words">words</option></$select> |
 |case sensitive |<$checkbox tiddler="$:/temp/dynannotate-example/searchCaseSensitive" field="text" checked="yes" unchecked="no" default="no"> <$text text={{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[no]] }}} /></$checkbox> |
