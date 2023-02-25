@@ -98,8 +98,8 @@ Note that using the `annotate-tiddler` field to associate an annotation with the
 
 The selection trackers are enabled when the following configuration tiddlers are set to ''yes''.
 
-* `$:/config/Dynannotate/SelectionTracker/Enable` for the main selection tracker
-* `$:/config/Dynannotate/LegacySelectionTracker/Enable` for the legacy selection tracker
+* $:/config/Dynannotate/SelectionTracker/Enable for the main selection tracker
+* $:/config/Dynannotate/LegacySelectionTracker/Enable for the legacy selection tracker
 
 Both selection trackers are enabled by default.
 
