@@ -57,10 +57,10 @@ This example uses a transcluded tiddler, but Dynannotate could be added to the v
               searchDisplay="overlay"
               searchClass="tc-dynannotation-search-overlay-animated"
               searchCaseSensitive="no">
-				<div class="tc-dynannotate-example-frame">
+        <div class="tc-dynannotate-example-frame">
 							
-        	{{$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki}}
-				</div>
+            {{$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki}}
+        </div>
     </$genesis>
 </$let>
 """>>
