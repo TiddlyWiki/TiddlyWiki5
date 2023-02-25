@@ -47,8 +47,10 @@ We use the `target*` attributes to specify a target string for the annotation an
 
 !! Highlights with `search`
 
-We use the `search` attribute to specify a search string for highlighting.<br>
-The search type can be set with the `searchMode` and `searchCaseSensitive` attributes.<br>
+We use the `search` attribute to specify a search string for highlighting.
+
+The search type can be set with the `searchMode` and `searchCaseSensitive` attributes.
+
 We can style the highlights with the `searchClass` attribute, which has some predefined values.
 
 </div>
