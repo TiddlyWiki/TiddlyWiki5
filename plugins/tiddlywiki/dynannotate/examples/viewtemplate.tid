@@ -41,14 +41,14 @@ Click here to revert to the core view template
 
 !! Using Dynannotate to highlight text on a per-tiddler basis
 
-Using state tiddlers containing the text which is to be highlighted, Dynannotate highlights can be applied on a per-tiddler basis when used in the body view template. This can also be combined with the [[GenesisWidget]] to insert the DynannotateWidget into the DOM only when a highlight is configured.
+Using state tiddlers containing the text which is to be highlighted, Dynannotate highlights can be applied on a per-tiddler basis when used in the body view template. This can also be combined with the [[GenesisWidget]] to insert the Dynannotate widget into the DOM only when such a highlight is configured.
 
-This example uses a transcluded tiddler, but Dynannotate could be added to the view template (to show highlights in all parts of a tiddler) or to the body view template (to show highlights only in the tiddler body) in the same way.
+This example uses a transcluded tiddler, but Dynannotate could be added to the view template (to show highlights in all parts of a tiddler) or to the body view template (to show highlights only in the tiddler body) in the same way. Note how in this example, Dynannotate only affects the transcluded content.
 
 </div>
 
-<<show-example """<$button set="$:/state/dynannotate/examples/viewtemplate" setTo="search">Highlight "search"</$button>
-<$button set="$:/state/dynannotate/examples/viewtemplate" setTo="limit">Highlight "limit"</$button>
+<<show-example """<$button set="$:/state/dynannotate/examples/viewtemplate" setTo="tiddler">Highlight "tiddler"</$button>
+<$button set="$:/state/dynannotate/examples/viewtemplate" setTo="created">Highlight "created"</$button>
 <$button set="$:/state/dynannotate/examples/viewtemplate" setTo="">Clear highlights</$button>
 <p/>
 <$let dynannotateText={{$:/state/dynannotate/examples/viewtemplate}}>
@@ -58,8 +58,9 @@ This example uses a transcluded tiddler, but Dynannotate could be added to the v
               searchClass="tc-dynannotation-search-overlay-animated"
               searchCaseSensitive="no">
         <div class="tc-dynannotate-example-frame">
-							
-            {{$:/plugins/tiddlywiki/dynannotate/searching-in-tiddlywiki}}
+
+            !! `$:/core/ui/ControlPanel/TiddlerFields`:
+            <$transclude tiddler="$:/core/ui/ControlPanel/TiddlerFields" mode="block" />
         </div>
     </$genesis>
 </$let>
