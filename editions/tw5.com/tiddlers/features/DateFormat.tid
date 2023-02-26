@@ -1,10 +1,10 @@
 created: 20140418142957325
-modified: 20221121131150032
+modified: 20230226144359284
 tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-The default representation of dates is a compact string such as `20211002153802059`. For example, the `created` and `modified` fields are stored like this.
+The default representation of dates is a compact string such as `20211002153802059`. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the `created` and `modified` fields are stored like this.
 
 The display format for this string can be controlled with a template. For example, transcluding the `modified` field automatically applies a template to display the date as `Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)`. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
 
@@ -71,8 +71,9 @@ You can calculate the difference between two dates by doing the following:
 
 Here is an example of calculating the number of days that passed between creation and last modification of current tiddler:
 
-* Fields `modified` and `created` contain their respective datetimes in the format `[UTC]YYYY0MM0DD0hh0mm0ssXXX` so convert them to timestamps
-* `86400000` is the number of milliseconds in a day (1000 * 60 * 60 * 24)
+* Convert the `modified` and `created` fields to timestamps
+* Divide their difference by `86400000` which is the number of milliseconds in a day
+** 1000 milliseconds per second × 60 seconds per minute × 60 minutes per hour × 24 hours per day = 86,400,000 milliseconds per day
 
 <$macrocall $name=".example" n="0" eg="""<$let
 	timestamp-modified={{{ [{!!modified}format:date[TIMESTAMP]] }}}
