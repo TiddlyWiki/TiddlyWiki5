@@ -16,7 +16,7 @@ Modified date shown as a relative date:
 <<.operator-example 3 "[[HelloThere]get[modified]format:relativedate[]]">>
 
 Get the date and time exactly 24 hours (86,400,000 milliseconds) from now:
-<<.operator-example 4 "[<now>format:date[TIMESTAMP]add[86400000]format:timestamp[]]">>
+<<.operator-example 4 "[<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>format:date[TIMESTAMP]add[86400000]format:timestamp[DDth mmm YYYY 0hh:0mm:0ss]]">>
 
 A tiddler title with spaces formatted as a title list:
 <<.operator-example 5 """[[Hello There]format:titlelist[]]""">>
