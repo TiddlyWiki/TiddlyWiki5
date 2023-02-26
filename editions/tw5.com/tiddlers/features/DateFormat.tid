@@ -4,9 +4,9 @@ tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-The default representation of dates is a compact string such as `20211002153802059`. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the `created` and `modified` fields are stored like this.
+The default representation of dates is a compact string such as `20211002153802059`. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the <<.field created>> and <<.field modified>> fields are stored like this.
 
-The display format for this string can be controlled with a template. For example, transcluding the `modified` field automatically applies a template to display the date as `Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)`. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
+The display format for this string can be controlled with a template. For example, transcluding the <<.field modified>> field automatically applies a template to display the date as `Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)`. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
 
 `<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
 
@@ -71,7 +71,7 @@ You can calculate the difference between two dates by doing the following:
 
 Here is an example of calculating the number of days that passed between creation and last modification of current tiddler:
 
-* Convert the `modified` and `created` fields to timestamps
+* Convert the <<.field created>> and <<.field modified>> fields to timestamps
 * Divide their difference by `86400000` which is the number of milliseconds in a day
 ** 1000 milliseconds per second × 60 seconds per minute × 60 minutes per hour × 24 hours per day = 86,400,000 milliseconds per day
 
