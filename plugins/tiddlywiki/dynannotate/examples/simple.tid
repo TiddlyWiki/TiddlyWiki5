@@ -18,9 +18,9 @@ The tabs and linebreaks within the parameters to addprefix, though maybe confusi
 -->
 \rules only filteredtranscludeinline
 <$dynannotate
-	search="{{{ [{$:/temp/dynannotate-example/search}!is[blank]else[The human mind]] }}}"	{{{ [{$:/temp/dynannotate-example/searchMode}!search::some[literal normal]addprefix[
+	search="{{{ [{$:/temp/dynannotate-example/search}!is[blank]else[The human mind]] }}}"{{{ [{$:/temp/dynannotate-example/searchMode}!search::some[literal normal]addprefix[
 	searchMode="]addsuffix["]] }}}
-	searchCaseSensitive="{{{ [{$:/temp/dynannotate-example/searchCaseSensitive}] }}}"	{{{ [{$:/temp/dynannotate-example/searchClass}!is[blank]addprefix[
+	searchCaseSensitive="{{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[yes]] }}}"{{{ [{$:/temp/dynannotate-example/searchClass}!is[blank]addprefix[
 	searchClass="]addsuffix["]] }}}
 >
 <$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
@@ -32,7 +32,7 @@ The tabs and linebreaks within the parameters to addprefix, though maybe confusi
 
 !! Annotations with `target`
 
-We use the `target*` attributes to specify a target string for the annotation and optionally a prefix and suffix for disambiguating multiple occurances.
+We use the `target*` attributes to specify a target string for the annotation and optionally a prefix and suffix for disambiguating multiple occurences.
 
 </div>
 
@@ -44,9 +44,6 @@ We use the `target*` attributes to specify a target string for the annotation an
 <$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
 </$dynannotate>
 """>>
-
-
-
 
 <div class="tc-dynannotation-example-info">
 
@@ -63,13 +60,13 @@ We can style the highlights with the `searchClass` attribute, which has some pre
 |tc-table-no-border tc-dynannotate-search-parameters|k
 |search term |<$edit-text tiddler="$:/temp/dynannotate-example/search" field="text" tag="input" default="The human mind" />|
 |search mode |<$select tiddler="$:/temp/dynannotate-example/searchMode" field="text" default="literal"><option value="literal">literal</option><option value="normal">normal</option><option value="regexp">regexp</option><option value="whitespace">whitespace</option><option value="some">some</option><option value="words">words</option></$select> |
-|case sensitive |<$checkbox tiddler="$:/temp/dynannotate-example/searchCaseSensitive" field="text" checked="yes" unchecked="no" default="no"> <$text text={{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[no]] }}} /></$checkbox> |
+|case sensitive |<$checkbox tiddler="$:/temp/dynannotate-example/searchCaseSensitive" field="text" checked="yes" unchecked="no" default="yes"> <$text text={{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[yes]] }}} /></$checkbox> |
 |search class |<$select tiddler="$:/temp/dynannotate-example/searchClass" field="text" default=""><option value="">(none)</option><option value="tc-dynannotation-search-overlay-animated">tc-dynannotation-search-overlay-animated</option><option value="tc-dynannotation-search-overlay-blurred">tc-dynannotation-search-overlay-blurred</option></$select> |
 
 <$dynannotate
 	search={{{ [{$:/temp/dynannotate-example/search}!is[blank]else[The human mind]] }}}
 	searchMode={{{ [{$:/temp/dynannotate-example/searchMode}] }}}
-	searchCaseSensitive={{{ [{$:/temp/dynannotate-example/searchCaseSensitive}] }}}
+	searchCaseSensitive={{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[yes]] }}}
 	searchClass={{{ [{$:/temp/dynannotate-example/searchClass}] }}}
 >
 <$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
