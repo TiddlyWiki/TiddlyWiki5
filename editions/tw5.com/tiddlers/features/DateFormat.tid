@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 The default representation of dates is a compact string such as <<.value 20211002153802059>>. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the <<.field created>> and <<.field modified>> fields are stored like this.
 
-The display format for this string can be controlled with a template. For example, transcluding the <<.field modified>> field automatically applies a template to display the date as <<.value Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)>>. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
+The display format for this string can be controlled with a template. For example, transcluding the <<.field modified>> field automatically applies a template to display the date as <<.value "Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)">>. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
 
 `<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
 
