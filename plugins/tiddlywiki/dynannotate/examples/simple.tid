@@ -12,8 +12,8 @@ $example$
 
 \define search-example-code()
 <!-- 
-The rules pragma is used here to evaluate only the inline filters depending on the chosen configuration, but leave everything else untouched to be displayed within the example codeblock.
-This way the displayed codeblock updates to reflect the choices the user has made in the UI.
+The inline filters update the displayed codeblock to reflect the choices the user has made in the UI.
+The rules pragma is used here to evaluate only these filters, but leave everything else untouched.
 The tabs and linebreaks within the parameters to addprefix, though maybe confusing, help with the readability of the codeblock output.
 -->
 \rules only filteredtranscludeinline
