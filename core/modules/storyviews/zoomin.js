@@ -18,7 +18,8 @@ var ZoominListView = function(listWidget) {
 	var self = this;
 	this.listWidget = listWidget;
 	this.textNodeLogger = new $tw.utils.Logger("zoomin story river view", {
-		enable: true
+		enable: true,
+		colour: 'red'
 	});
 	// Get the index of the tiddler that is at the top of the history
 	var history = this.listWidget.wiki.getTiddlerDataCached(this.listWidget.historyTitle,[]),
@@ -54,7 +55,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	if(!targetElement) {
 		return;
 	} else if (targetElement.nodeType === Node.TEXT_NODE) {
-		this.alertTextNodeRoot(targetElement);
+		this.logTextNodeRoot(targetElement);
 		return;
 	}
 	// Make the new tiddler be position absolute and visible so that we can measure it
@@ -139,7 +140,7 @@ ZoominListView.prototype.insert = function(widget) {
 	if(!targetElement) {
 		return;
 	} else if (targetElement.nodeType === Node.TEXT_NODE) {
-		this.alertTextNodeRoot(targetElement);
+		this.logTextNodeRoot(targetElement);
 		return;
 	}
 	// Make the newly inserted node position absolute and hidden
@@ -183,7 +184,7 @@ ZoominListView.prototype.remove = function(widget) {
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
 		if (toWidgetDomNode.nodeType === Node.TEXT_NODE) {
-			this.alertTextNodeRoot(toWidgetDomNode);
+			this.logTextNodeRoot(toWidgetDomNode);
 			toWidgetDomNode = null;
 		} else {
 			$tw.utils.addClass(toWidgetDomNode,"tc-storyview-zoomin-tiddler");
@@ -220,8 +221,8 @@ ZoominListView.prototype.remove = function(widget) {
 	return true; // Indicate that we'll delete the DOM node
 };
 
-ZoominListView.prototype.alertTextNodeRoot = function(node) {
-	this.textNodeLogger.alert($tw.language.getString("Error/ZoominTextNode") + " " + node.textContent);
+ZoominListView.prototype.logTextNodeRoot = function(node) {
+	this.textNodeLogger.log($tw.language.getString("Error/ZoominTextNode") + " " + node.textContent);
 };
 
 exports.zoomin = ZoominListView;
