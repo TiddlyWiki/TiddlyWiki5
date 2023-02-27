@@ -1,7 +1,7 @@
 caption: action-listops
 created: 20141025120850184
 list: efg hlm pqr
-modified: 20211115091121133
+modified: 20230227170803513
 myfield: 
 revision: 0
 tags: ActionWidgets Widgets
@@ -36,7 +36,7 @@ The ''action-listops'' widget is invisible. Any content within it is ignored.
 |$subfilter |An optional subfilter expression, which takes the list being manipulated as input, and saves the modified list back to the field/index being manipulated |
 |$tags |An optional subfilter expression, which takes the 'tags' field of the target tiddler as input, and saves the modified list of tags back to the 'tags' field |
 
-! $filter vs. $subfilter
+!! Using $filter or $subfilter
 
 Standalone use of the `$subfilter` attribute can be replaced by using a (more complicated) `$filter` attribute value.
 
@@ -54,7 +54,7 @@ The same can be achieved using the `$filter` attribute and prepending the [[Filt
 
 The short form is more convenient, but the long form is useful for live-debugging complicated `$subfilter` values using the filter tab of [[$:/AdvancedSearch]]. By using [[$:/AdvancedSearch]], the [[Filter Expression]] can be tested before using ''action-listops'' to modify actual tiddler fields. For this use case, the `all[current]` portion of the expression needs to be changed to select the proper test tiddler.
 
-! $tags vs. $field + $subfilter
+!! Using $tags or $subfilter
 
 [[Tagging]] is implemented using a tiddler's 'tags' field, so appending the tags "abc" and "123" using the `$tags` attribute like this:
 
@@ -68,9 +68,9 @@ is mostly equivalent to using `$subfilter` along with "tags" for the value of `$
 <$action-listops $field="tags" $subfilter="abc 123"/>
 ```
 
-! $action-listops widget vs. $action-setfield widget
+!! Comparison to [[ActionSetFieldWidget]]
 
-The ActionSetFieldWidget replaces a field's value using `$field`/`$value` attributes. A single ActionSetFieldWidget can be used to set any number of fields by using attributes not starting with $.
+The [[ActionSetFieldWidget]] replaces a field's value using `$field`/`$value` attributes. A single ActionSetFieldWidget can be used to set any number of fields by using attributes not starting with $.
 
 The ActionListopsWidget replaces or modifies a single field's value. The new value is generated using filters.
 
@@ -86,7 +86,7 @@ The following two examples are functionally equivalent:
 
 In general, ActionSetFieldWidget is better for setting multiple fields at once and for replacing a field's value. The ActionListopsWidget is better for modifying a field based on the field's existing value and for using a [[Filter Expression]] to derive the value.
 
-! Extended Filter Operators
+!! Extended Filter Operators
 
 A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
 
@@ -95,7 +95,7 @@ A number of [[extended filter operators|The Extended Listops Filters]] are neces
 <tr>
 <th align="left">Operator</th>
 <th align="left">Purpose</th>
-<th></th>
+<th>✓</th>
 </tr>
 <<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
 </table>
