@@ -58,25 +58,24 @@ is mostly equivalent to using `$subfilter` along with "tags" for the value of `$
 
 !! Comparison to [[ActionSetFieldWidget]]
 
-The [[ActionSetFieldWidget]] replaces a field's value using `$field`/`$value` attributes. A single ActionSetFieldWidget can be used to set any number of fields by using attributes not starting with $.
+In general, [[ActionSetFieldWidget]] is better for setting multiple fields at once and for replacing the value of a field, which can also be a list. The ActionListopsWidget is better for modifying a list field based on the existing list and for using a [[Filter Expression]] to derive the value of the field.
 
-The ActionListopsWidget replaces or modifies a single field's value. The new value is generated using filters.
+The ActionSetFieldWidget sets the value of a field using `$field` and `$value` attribute pairs or attributes that do not start with a `$`. A single ActionSetFieldWidget can be used to set any number of fields of a single tiddler.
 
-The following two examples are functionally equivalent:
+The ActionListopsWidget replaces or modifies a single field's value using filter expressions.
+
+The following widgets are functionally equivalent:
 
 ```
 <$action-setfield $field="myfield" $value="abc 123"/>
-```
-
-```
+<$action-setfield myfield="abc 123"/>
 <$action-listops $field="myfield" $filter="abc 123"/>
 ```
-
-In general, ActionSetFieldWidget is better for setting multiple fields at once and for replacing a field's value. The ActionListopsWidget is better for modifying a field based on the field's existing value and for using a [[Filter Expression]] to derive the value.
+Note that <<.value "abc 123">> in the first two cases is a literal string that is assigned to the field <<.field myfield>>, but in the third case a filter expression which evaluates to the same string.
 
 !! Extended Filter Operators
 
-A number of [[Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
+A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
 
 ! Examples
 
