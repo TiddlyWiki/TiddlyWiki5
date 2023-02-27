@@ -58,11 +58,11 @@ is mostly equivalent to using `$subfilter` along with "tags" for the value of `$
 
 !! Comparison to [[ActionSetFieldWidget]]
 
-In general, [[ActionSetFieldWidget]] is better for setting multiple fields at once and for replacing the value of a field, which can also be a list. The ActionListopsWidget is better for modifying a list field based on the existing list and for using a [[Filter Expression]] to derive the value of the field.
+In general, ActionSetFieldWidget is better for setting multiple fields at once and for replacing the value of a field, which can also be a list. The ActionListopsWidget is better for modifying a list field based on the existing list and for using a [[Filter Expression]] to derive the value of the field.
 
-The ActionSetFieldWidget sets the value of a field using `$field` and `$value` attribute pairs or attributes that do not start with a `$`. A single ActionSetFieldWidget can be used to set any number of fields of a single tiddler.
+The ~ActionSetFieldWidget sets the value of a field using `$field` and `$value` attribute pairs or attributes that do not start with a `$`. A single ~ActionSetFieldWidget can be used to set any number of fields of a single tiddler.
 
-The ActionListopsWidget replaces or modifies a single field's value using filter expressions.
+The ~ActionListopsWidget replaces or modifies a single field's value using filter expressions.
 
 The following widgets are functionally equivalent:
 
