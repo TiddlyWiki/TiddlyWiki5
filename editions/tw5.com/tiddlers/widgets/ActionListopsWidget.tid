@@ -75,7 +75,7 @@ Note that <<.value "abc 123">> in the first two cases is a literal string that i
 
 !! Extended Filter Operators
 
-A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
+A number of [[Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
 
 !! Notes on de-duplication
 
