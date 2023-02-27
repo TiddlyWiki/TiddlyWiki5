@@ -8,18 +8,6 @@ tags: ActionWidgets Widgets
 title: ActionListopsWidget
 type: text/vnd.tiddlywiki
 
-\define .operator-rows(filter)
-<$list filter="$filter$"><tr>
-<td><$link>{{!!caption}}</$link></td>
-<td>{{!!op-purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
-<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
-</tr></$list>
-\end
-
-\define .group-heading(_)
-<tr class="doc-table-subheading"><th colspan="3" align="center">$_$</th></tr>
-\end
-
 ! Introduction
 
 The ''action-listops'' widget is an [[action widget|ActionWidgets]] that manipulates user lists in any field or data index. ActionWidgets are used within triggering widgets such as the ButtonWidget.
@@ -88,17 +76,7 @@ In general, ActionSetFieldWidget is better for setting multiple fields at once a
 
 !! Extended Filter Operators
 
-A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
-
-<table>
-<<.group-heading "Listops Operators">>
-<tr>
-<th align="left">Operator</th>
-<th align="left">Purpose</th>
-<th>✓</th>
-</tr>
-<<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
-</table>
+A number of [[Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
 
 ! Examples
 

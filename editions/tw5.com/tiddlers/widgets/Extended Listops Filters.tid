@@ -6,19 +6,43 @@ item2: seven
 item3: eight
 list: Yesterday Today Tomorrow
 marker: Thursday
-modified: 20211114011103356
+modified: 20230227175501965
 myfield: Monday Tuesday [[Middle of the Week]] Thursday Friday Saturday Sunday
 numbers: 1 2 3 4 five 6 7 8 9
 tags: Filters
-title: The Extended Listops Filters
+title: Extended Listops Filters
+
+\define .operator-rows(filter)
+<$list filter="$filter$"><tr>
+<td><$link>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}}</td>
+<td align="center"><$list filter="[all[current]tag[Common Operators]]">✓</$list></td>
+<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
+</tr></$list>
+\end
+
+\define .group-heading(_)
+<tr class="doc-table-subheading"><th colspan="4" align="center">$_$</th></tr>
+\end
 
 ! Introduction
 
-A number of extended filters are necessary to manipulate lists. 
+A number of filters are used to manipulate lists. 
 
-The first set of filters are designed to move items from the tail of the list and insert them at specified locations in the list. Items are often appended to the list before using these filters. In general, these filters accept a suffix specifying the number of items to move (default to 1.) 
+Some filters are designed to move items from the tail of the list and insert them at specified locations in the list, e.g. [[putafter|putafter Operator]] or [[putbefore|putbefore Operator]]. Items are often appended to the list before using these filters. In general, these filters accept a suffix specifying the number of items to move (default to 1.) 
 
-A second set of filters are designed to either add or remove from the list, a selected range of items from an array. These filters are best used with a reference to an array, stored in a field or data index elsewhere in the wiki (they may be used with a simple list of items, provided the items do not include white space.) In general, these filters accept a suffix specifying the number of items to move (default to All.)
+Some filters are designed to either add or remove from the list, a selected range of items from an array, e.g. [[append|append Operator]] or [[remove|remove Operator]]. These filters are best used with a reference to an array, stored in a field or data index elsewhere in the wiki (they may be used with a simple list of items, provided the items do not include white space.) In general, these filters accept a suffix specifying the number of items to move (default to All.)
+
+<table>
+<<.group-heading "Listops Operators">>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Purpose</th>
+<th>✓</th>
+<th>`!`</th>
+</tr>
+<<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+</table>
 
 ! Examples
 
