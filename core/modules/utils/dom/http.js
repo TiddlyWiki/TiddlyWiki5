@@ -74,14 +74,15 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 			headers: requestHeaders,
 			data: paramObject.body,
 			callback: function(err,data,xhr) {
-				var headers = {};
+				var success = (xhr.status >= 200 || xhr.status < 300) ? "complete" : "error",
+					headers = {};
 				$tw.utils.each(xhr.getAllResponseHeaders().split("\r\n"),function(line) {
 					var pos = line.indexOf(":");
 					if(pos !== -1) {
 						headers[line.substr(0,pos)] = line.substr(pos + 1).trim();
 					}
 				});
-				setBinding(bindStatus,xhr.status === 200 ? "complete" : "error");
+				setBinding(bindStatus,success);
 				setBinding(bindProgress,"100");
 				var results = {
 					status: xhr.status.toString(),
