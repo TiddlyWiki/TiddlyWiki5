@@ -2357,6 +2357,24 @@ html body.tc-body.tc-single-tiddler-window {
 	background: <<colour diff-delete-background>>50;
 }
 
+.tc-import-table .tc-import-comparison {
+	min-width: 80%;
+	max-width: 100%;
+	box-sizing: content-box;
+	padding: 0 1em;
+}
+
+.tc-import-table .tc-import-comparison th {
+	width: 50%;
+	padding: 0 1em;
+	background: none;
+}
+
+.tc-import-older table.tc-import-comparison {
+	border: 2px solid red;
+}
+
+
 /*
 ** Alerts
 */
