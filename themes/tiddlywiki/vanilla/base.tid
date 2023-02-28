@@ -1445,7 +1445,7 @@ html body.tc-body.tc-single-tiddler-window {
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 42px);
 	}
@@ -1457,7 +1457,7 @@ html body.tc-body.tc-single-tiddler-window {
 		margin-right: 0;
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 84px);
 	}
@@ -1716,7 +1716,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-right: .3em;
 }
 
-.tc-storyview-zoomin-tiddler {
+.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 	position: absolute;
 	display: block;
 	width: 100%;
@@ -1724,7 +1724,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 @media (min-width: <<sidebarbreakpoint>>) {
 
-	.tc-storyview-zoomin-tiddler {
+	.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: calc(100% - 84px);
 	}
 

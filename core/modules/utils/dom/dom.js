@@ -28,6 +28,24 @@ exports.domMatchesSelector = function(node,selector) {
 	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
 };
 
+/*
+Select text in a an input or textarea (setSelectionRange crashes on certain input types)
+*/
+exports.setSelectionRangeSafe = function(node,start,end,direction) {
+	try {
+		node.setSelectionRange(start,end,direction);
+	} catch(e) {
+		node.select();
+	}
+};
+
+/*
+Select the text in an input or textarea by position
+*/
+exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
+	$tw.utils.setSelectionRangeSafe(node,selectFromStart,node.value.length - selectFromEnd);
+};
+
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);

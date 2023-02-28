@@ -1,0 +1,35 @@
+title: Message/tm-import-tiddlers/CustomTitle
+description: tm-import-tiddlers message can import to a tiddler with a custom title 
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+text: <$text text={{MyCustomTitle}}/>
+plugin-type: <$text text={{MyCustomTitle!!plugin-type}}/>
+~$:/StoryList: <$text text={{$:/StoryList!!list}}/>
++
+title: Actions
+
+<$navigator story="$:/StoryList">
+<$action-sendmessage
+  $message="tm-import-tiddlers"
+  $param='[{"title": "Elephants"}, {"title": "Eagles"}]'
+  importTitle=MyCustomTitle/>
+</$navigator>
+
++
+title: ExpectedResult
+
+<p>text: {
+    "tiddlers": {
+        "Elephants": {
+            "title": "Elephants"
+        },
+        "Eagles": {
+            "title": "Eagles"
+        }
+    }
+}
+plugin-type: import
+$:/StoryList: MyCustomTitle</p>

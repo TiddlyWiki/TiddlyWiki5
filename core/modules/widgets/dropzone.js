@@ -259,7 +259,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 			}
 		};
 	// Let the browser handle it if we're in a textarea or input box
-	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable) {
+	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1 && !event.target.isContentEditable && !event.twEditor) {
 		var self = this,
 			items = event.clipboardData.items;
 		// Enumerate the clipboard items
