@@ -7,13 +7,6 @@ title: $:/core/ui/ImportListing
 \define payloadTitleFilter() [<currentTiddler>get<renameField>minlength[1]else<payloadTiddler>]
 
 \define overWriteWarning()
-\whitespace trim
-<$list filter="[<currentTiddler>!has<suppressedField>]">
-<$text text={{{[subfilter<payloadTitleFilter>!is[tiddler]then[]] ~[<lingo-base>addsuffix[Listing/Rename/OverwriteWarning]get[text]]}}}/>
-</$list>
-\end
-
-\define overWriteWarning()
 \define date-format() YYYY-0MM-0DD 0hh:0mm:0ss
 <$list filter="[<currentTiddler>!has<suppressedField>]">
 <$list filter="[subfilter<payloadTitleFilter>is[tiddler]]" variable="void">
