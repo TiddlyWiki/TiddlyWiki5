@@ -499,7 +499,8 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Get the tiddlers
 	var tiddlers = $tw.utils.parseJSONSafe(event.param,[]);
 	// Get the current $:/Import tiddler
-	var importTitle = event.importTitle ? event.importTitle : IMPORT_TITLE,
+	var paramObject = event.paramObject || {},
+		importTitle = event.importTitle || paramObject.importTitle || IMPORT_TITLE,
 		importTiddler = this.wiki.getTiddler(importTitle),
 		importData = this.wiki.getTiddlerData(importTitle,{}),
 		newFields = new Object({
@@ -540,7 +541,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
 	// Update the story and history details
-	var autoOpenOnImport = event.autoOpenOnImport ? event.autoOpenOnImport : this.getVariable("tv-auto-open-on-import");  
+	var autoOpenOnImport = event.autoOpenOnImport || paramObject.autoOpenOnImport || this.getVariable("tv-auto-open-on-import");
 	if(autoOpenOnImport !== "no") {
 		var storyList = this.getStoryList(),
 			history = [];

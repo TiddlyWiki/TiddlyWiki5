@@ -32,18 +32,18 @@ FieldIndexer.prototype.setMaxIndexedValueLength = function(length) {
 
 FieldIndexer.prototype.addIndexMethods = function() {
 	var self = this;
+	// get all tiddlers, including those overwrite shadow tiddlers
 	this.wiki.each.byField = function(name,value) {
-		var titles = self.wiki.allTitles(),
-			lookup = self.lookup(name,value);
+		var lookup = self.lookup(name,value);
 		return lookup && lookup.filter(function(title) {
-			return titles.indexOf(title) !== -1;
+			return self.wiki.tiddlerExists(title)
 		});
 	};
+	// get shadow tiddlers, including shadow tiddlers that is overwritten
 	this.wiki.eachShadow.byField = function(name,value) {
-		var titles = self.wiki.allShadowTitles(),
-			lookup = self.lookup(name,value);
+		var lookup = self.lookup(name,value);
 		return lookup && lookup.filter(function(title) {
-			return titles.indexOf(title) !== -1;
+			return self.wiki.isShadowTiddler(title)
 		});
 	};
 	this.wiki.eachTiddlerPlusShadows.byField = function(name,value) {
