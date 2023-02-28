@@ -13,6 +13,34 @@ title: $:/core/ui/ImportListing
 </$list>
 \end
 
+\define overWriteWarning()
+\define date-format() YYYY-0MM-0DD 0hh:0mm:0ss
+<$list filter="[<currentTiddler>!has<suppressedField>]">
+<$list filter="[subfilter<payloadTitleFilter>is[tiddler]]" variable="void">
+<$text text={{{ [<lingo-base>addsuffix[Listing/Rename/OverwriteWarning]get[text]] }}}/>
+<$set name="incomingDate" tiddler=<<currentTiddler>> subtiddler=<<payloadTiddler>> field="modified">
+<$set name="incomingText" tiddler=<<currentTiddler>> subtiddler=<<payloadTiddler>> field="text">
+<$let incomingLines={{{ [<incomingText>splitregexp[\n]count[]] }}}
+			currentLines={{{ [<payloadTiddler>get[text]splitregexp[\n]count[]] }}}
+			currentDate={{{ [<payloadTiddler>get[modified]] }}}
+			incomingDescription={{{ [<incomingDate>compare:date:gt<currentDate>then[newer]] [<incomingLines>compare:number:gt<currentLines>then[larger]] +[!is[blank]join[, ]addprefix[(]addsuffix[)]] }}}
+			currentDescription={{{ [<incomingDate>compare:date:lt<currentDate>then[newer]] [<incomingLines>compare:number:lt<currentLines>then[larger]] +[!is[blank]join[, ]addprefix[(]addsuffix[)]] }}}
+			>
+
+<div class={{{ [<incomingDate>compare:date:lt<currentDate>then[tc-import-older]] }}}>
+
+|tc-center tc-import-comparison |k
+|!existing <$text text=<<currentDescription>> />|!incoming <$text text=<<incomingDescription>> />|
+| <$text text={{{ [<currentDate>format:date<date-format>] }}}/> | <$text text={{{ [<incomingDate>format:date<date-format>] }}}/> |
+| <$text text=<<currentLines>> /> lines | <$text text=<<incomingLines>> /> lines |
+</div>
+</$let>
+</$set>
+</$set>
+</$list>
+</$list>
+\end
+
 \define selectionInfo()
 \whitespace trim
 <$set name="escUnselected" value={{{[{$:/language/Import/Upgrader/Tiddler/Unselected}escaperegexp[]addprefix[(?g)]]}}}>
