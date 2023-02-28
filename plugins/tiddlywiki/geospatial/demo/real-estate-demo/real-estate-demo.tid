@@ -7,31 +7,56 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 <$let
 	schema={{$:/plugins/tiddlywiki/geospatial/demo/real-estate-demo/schema}}
 >
+	<div>
+		<$list filter="[<schema>jsonindexes[fields]]" variable="index">
+			<$let
+				config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/]] }}}
+			>
+				<div>
+					<$checkbox tiddler=<<config>> field="visible" checked="yes" unchecked="no" default="yes">
+						<$text text={{{ [<schema>jsonget[fields],<index>,[caption]] }}}/>
+					</$checkbox>
+				</div>
+			</$let>
+		</$list>
+	</div>
 	<table>
-	<thead>
-	<tr>
-	<$list filter="[<schema>jsonindexes[fields]]" variable="index">
-	<th>
-		<$text text={{{ [<schema>jsonget[fields],<index>,[caption]] }}}/>
-	</th>
-	</$list>
-	</tr>
-	</thead>
-	<tbody>
-	<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]]">
-	<tr>
-	<$list filter="[<schema>jsonindexes[fields]]" variable="index">
-	<td>
-		<$let
-			fieldname={{{ [<schema>jsonget[fields],<index>,[name]] }}}
-		>
-			<$text text={{{ [<currentTiddler>get<fieldname>] }}}/>
-		</$let>
-	</td>
-	</$list>
-	</tr>
-	</$list>
-	</tbody>
+		<thead>
+			<tr>
+				<$list filter="[<schema>jsonindexes[fields]]" variable="index">
+					<$let
+						config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/]] }}}
+					>
+						<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
+							<th>
+								<$text text={{{ [<schema>jsonget[fields],<index>,[caption]] }}}/>
+							</th>
+						</$list>
+					</$let>
+				</$list>
+			</tr>
+		</thead>
+		<tbody>
+			<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]]">
+				<tr>
+					<$list filter="[<schema>jsonindexes[fields]]" variable="index">
+						<$let
+							config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/]] }}}
+						>
+							<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
+								<td>
+									<$let
+										fieldname={{{ [<schema>jsonget[fields],<index>,[name]] }}}
+									>
+										<$text text={{{ [<currentTiddler>get<fieldname>] }}}/>
+									</$let>
+								</td>
+							</$list>
+						</$let>
+					</$list>
+				</tr>
+			</$list>
+		</tbody>
 	</table>
 </$let>
 
