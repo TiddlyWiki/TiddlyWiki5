@@ -10,7 +10,10 @@ title: $:/core/ui/ImportListing
 \whitespace trim
 <$list filter="[<currentTiddler>!has<suppressedField>]">
 	<$list filter="[subfilter<payloadTitleFilter>is[tiddler]]" variable="ignore">
-		<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOverwrite]]" variable="overwrite">
+		<$list filter="[all[shadows+tiddlers]!is[draft]tag[$:/tags/ImportOverwrite]]" 
+			variable="overwrite"
+			emptyMessage={{$:/core/ui/ImportListing/overwrite/default-text}}
+		>
 			<$transclude tiddler=<<overwrite>> mode="block"/>
 		</$list>
 	</$list>

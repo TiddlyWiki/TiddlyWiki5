@@ -1,4 +1,3 @@
 title: $:/core/ui/ImportListing/overwrite/default-text
-tags: $:/tags/ImportOverwrite
 
 <$text text={{{ [<lingo-base>addsuffix[Listing/Rename/OverwriteWarning]get[text]] }}}/>
