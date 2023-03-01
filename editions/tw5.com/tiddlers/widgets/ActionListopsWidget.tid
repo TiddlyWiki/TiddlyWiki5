@@ -1,9 +1,7 @@
 caption: action-listops
 created: 20141025120850184
-list: efg hlm pqr
-modified: 20230227170803513
+modified: 20230301183438774
 myfield: 
-revision: 0
 tags: ActionWidgets Widgets
 title: ActionListopsWidget
 type: text/vnd.tiddlywiki
@@ -105,78 +103,4 @@ Add 'abc' to 'myfield'
 The [[enlist Operator]] with `raw` suffix will enlist the list saved in <<.field myfield>> of the current tiddler without de-duplication, while e.g. the [[list Operator]] will always de-duplicate. The widget then adds the item <<.value abc>> -- whether or not it is already included in the list -- and replaces the original list in <<.field myfield>>.
 
 
-! Examples
-
-In this example we shall populate and then clear a list in an ordinary field (myfield) of this tiddler (the default.)
-
-<$macrocall $name='wikitext-example-without-html'
-src="""<$button>
-<$action-listops $field="myfield" $filter="efg hlm pqr"/>
-Populate 'myfield'
-</$button>
-<$button>
-<$action-listops $field="myfield" $subfilter="abc xyz"/>
-Append More Items
-</$button>
-<$button>
-<$action-listops $field="myfield" $subfilter="-abc -hlm"/>
-Remove Items
-</$button>
-<$button>
-<$action-listops $field="myfield" $filter="[[]]"/>
-Clear 'myfield'
-</$button>
-
-<$list filter="[list[!!myfield]]">
-
-</$list>"""/>
-
----
-In this example we shall append and remove items from a list in an ordinary field (myfield) of this tiddler (the default) and sort the resultant list. We shall then remove some of the appended items and sort the resulting list in reverse order.
-
-<$macrocall $name='wikitext-example-without-html'
-src="""<$button>
-<$action-listops $field="myfield" $subfilter="-efg ijk xyz [[this is a title]] +[sort[]]"/>
-Mangle List
-</$button>
-<$button>
-<$action-listops $field="myfield" $subfilter="-xyz -[[this is a title]] +[!sort[]]"/>
-Unmangle List
-</$button>
-
-<$list filter="[list[!!myfield]]">
-
-</$list>"""/>
-
----
-In this example we shall append a few tags to the 'tags' field of this tiddler (the default.) We shall then remove some of the appended tags. 
-
-<$macrocall $name='wikitext-example-without-html'
-src="""<$button>
-<$action-listops $tags="+[append{Days of the Week!!short}] $:/tag1 $:/tag2 $:/tag3"/>
-Populate 'tags'
-</$button>
-<$button>
-<$action-listops $tags="+[!remove:2{!!tags}]"/>
-Remove Last Two Tags
-</$button>
-<$button>
-<$action-listops $tags="+[!prefix[$:/]]"/>
-Remove System Tags
-</$button>
-<$button>
-<$action-listops $tags="-Mon -Tue"/>
-Remove Mon and Tue
-</$button>
-<$button>
-<$action-listops $tags="+[prefix[$:/]] ActionWidgets Widgets"/>
-Remove User Tags
-</$button>
-<$button>
-<$action-listops $tags="+[[]] ActionWidgets Widgets"/>
-Clear Tags
-</$button>
-
-<$list filter="[list[!!tags]]">
-
-</$list>"""/>
+! [[Examples|ActionListopsWidget (Examples)]]
