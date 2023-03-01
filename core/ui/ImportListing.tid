@@ -9,7 +9,11 @@ title: $:/core/ui/ImportListing
 \define overWriteWarning()
 \whitespace trim
 <$list filter="[<currentTiddler>!has<suppressedField>]">
-<$text text={{{[subfilter<payloadTitleFilter>!is[tiddler]then[]] ~[<lingo-base>addsuffix[Listing/Rename/OverwriteWarning]get[text]]}}}/>
+	<$list filter="[subfilter<payloadTitleFilter>is[tiddler]]" variable="ignore">
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/ImportOverwrite]]" variable="overwrite">
+			<$transclude tiddler=<<overwrite>> mode="block"/>
+		</$list>
+	</$list>
 </$list>
 \end
 
