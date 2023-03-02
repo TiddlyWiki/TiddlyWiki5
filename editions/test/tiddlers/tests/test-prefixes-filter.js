@@ -343,6 +343,9 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		rootWidget.setVariable("add-price","[get[price]multiply{!!quantity}add<accumulator>]");
 		rootWidget.setVariable("num-items","[get[quantity]add<accumulator>]");
 		rootWidget.setVariable("join-with-commas","[<index>compare:number:gt[0]then<accumulator>addsuffix[, ]addsuffix<currentTiddler>else<currentTiddler>]");
+		rootWidget.setVariable("undefined-variable","[<doesnotexist>]");
+		rootWidget.setVariable("echo","$text$",[{name:"text"}],true);
+		rootWidget.setVariable("num-items-macro-param","[subfilter<echo '[get[quantity]]'>add<accumulator>]");
 
 		expect(wiki.filterTiddlers("[tag[shopping]reduce<num-items>]",anchorWidget).join(",")).toBe("22");
 		expect(wiki.filterTiddlers("[tag[shopping]reduce<add-price>]",anchorWidget).join(",")).toBe("27.75");
@@ -351,6 +354,9 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[non-existent]reduce<add-price>,[0]]",anchorWidget).join(",")).not.toBe("0");
 		expect(wiki.filterTiddlers("[tag[non-existent]reduce<add-price>,[0]]",anchorWidget).length).toBe(0);
 		expect(wiki.filterTiddlers("[tag[non-existent]reduce<add-price>else[0]]",anchorWidget).join(",")).toBe("0");
+		// #7155
+		expect(wiki.filterTiddlers("a +[reduce<undefined-variable>]",anchorWidget).join(",")).toBe("");
+		expect(wiki.filterTiddlers("[tag[shopping]reduce<num-items-macro-param>]",anchorWidget).join(",")).toBe("22");
 	});
 
 	it("should handle the average operator", function() {
@@ -392,10 +398,16 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		rootWidget.setVariable("larger-than-18","[get[text]length[]compare:integer:gteq[18]]");
 		rootWidget.setVariable("nr","18");
 		rootWidget.setVariable("larger-than-18-with-var","[get[text]length[]compare:integer:gteq<nr>]");
+		rootWidget.setVariable("undefined-variable","[<doesnotexist>]");
+		rootWidget.setVariable("echo","$text$",[{name:"text"}],true);
+		rootWidget.setVariable("larger-than-18-macro-param","[subfilter<echo '[get[text]length[]compare:integer:gteq[18]]'>]");
 		expect(wiki.filterTiddlers("[tag[textexample]] :filter[get[text]length[]compare:integer:gteq[18]]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
 		expect(wiki.filterTiddlers("[tag[textexample]]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine,Sparkling water");
 		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18>]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
 		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18-with-var>]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
+		// #7155
+		expect(wiki.filterTiddlers("a +[filter<undefined-variable>]",anchorWidget).join(",")).toBe("a");
+		expect(wiki.filterTiddlers("[tag[textexample]filter<larger-than-18-macro-param>]",anchorWidget).join(",")).toBe("Cheesecake,Chocolate Cake,Red wine");
 	});
 
 	it("should handle the :sort prefix", function() {

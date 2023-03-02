@@ -1,0 +1,16 @@
+caption: encodebase64
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with base 64 encoding applied
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply base 64 encoding to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: encodebase64 Operator
+type: text/vnd.tiddlywiki
+from-version: 5.2.6
+
+See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. TiddlyWiki uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
+
+The input strings are interpreted as binary data. The output strings are base64 encoded.
+
+<<.operator-examples "encodebase64">>

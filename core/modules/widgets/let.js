@@ -74,7 +74,9 @@ LetWidget.prototype.getVariableInfo = function(name,options) {
 			text: this.currentValueFor[name]
 		};
 	}
-	return Widget.prototype.getVariableInfo.call(this,name,options);
+	return Widget.prototype.getVariableInfo.call(this,name,$tw.utils.extend(Object.create(null),options,{
+		defaultValue: ""
+	}));
 };
 
 /*

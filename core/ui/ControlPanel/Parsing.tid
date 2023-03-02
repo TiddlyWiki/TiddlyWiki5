@@ -12,7 +12,7 @@ field="text"
 checked="enable"
 unchecked="disable"
 default="enable">
-<<rule>>
+<span class="tc-small-gap-left"><<rule>></span>
 </$checkbox>
 \end
 
