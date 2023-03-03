@@ -325,3 +325,22 @@ type: text/vnd.tiddlywiki
 .tc-btn-download:active {
 	box-shadow: none;
 }
+
+/* WikiText rules */
+
+.multi-columns,
+.fourcolumns {
+	display: block;
+	column-count: 4;
+	column-gap: 1em;
+	-moz-column-count: 4;
+	-moz-column-gap: 1em;
+	-webkit-column-count: 4;
+	-webkit-column-gap: 1em;
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	.multi-columns {
+		column-count: 2;
+	}
+}
