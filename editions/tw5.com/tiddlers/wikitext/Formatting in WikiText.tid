@@ -1,6 +1,6 @@
 caption: Formatting
 created: 20131205155959399
-modified: 20221025135601649
+modified: 20230303210038241
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
@@ -10,14 +10,14 @@ type: text/vnd.tiddlywiki
 Available character formatting in WikiText includes:
 
 |Wikitext | Button | Shortcut |Rendered Output |h
-|2 single hyphens are used for `''bold text''`| <kbd><<.icon $:/core/images/bold>></kbd> | <kbd><<displayshortcuts "((bold))">></kbd> |2 single hyphens are used for ''bold text'' |
-|2 slashes are used for `//italic text//`| <kbd><<.icon $:/core/images/italic>></kbd> | <kbd><<displayshortcuts "((italic))">></kbd> |2 slashes are used for //italic text//|
-|2 underscores are used for `__underscored text__`| <kbd><<.icon $:/core/images/underline>></kbd> | <kbd><<displayshortcuts "((underline))">></kbd>  |2 underscores are used for __underscored text__ |
-|2 circumflex accents are used for `^^superscripted^^` text | <kbd><<.icon $:/core/images/superscript>></kbd> | <kbd><<displayshortcuts "((superscript))">></kbd> |2 circumflex accents are used for ^^superscripted^^ text |
-|2 commas are used for `,,subscripted,,` text | <kbd><<.icon $:/core/images/subscript>></kbd> | <kbd><<displayshortcuts "((subscript))">></kbd> |2 commas are used for ,,subscripted,, text |
-|2 tilde signs are used for `~~strikethrough~~` text | <kbd><<.icon $:/core/images/strikethrough>></kbd> | <kbd><<displayshortcuts "((strikethrough))">></kbd> |2 tilde signs are used for ~~strikethrough~~ text |
-|1 backtick is used for ```code` `` | <kbd><<.icon $:/core/images/mono-line>></kbd> | <kbd><<displayshortcuts "((mono-line))">></kbd> |1 backtick is used for `code` |
-|2 @ characters are used to create a `@@highlight@@` | - | - |2 @ characters are used to create a @@highlight@@ |
+|Double single quotes are used for `''bold text''`| <kbd><<.icon $:/core/images/bold>></kbd> | <kbd><<displayshortcuts "((bold))">></kbd> |Double single quotes are used for ''bold text'' |
+|Double slashes are used for `//italic text//`| <kbd><<.icon $:/core/images/italic>></kbd> | <kbd><<displayshortcuts "((italic))">></kbd> |Double slashes are used for //italic text//|
+|Double underlines are used for `__underlined text__`| <kbd><<.icon $:/core/images/underline>></kbd> | <kbd><<displayshortcuts "((underline))">></kbd>  |Double underlines are used for __underlined text__ |
+|Double circumflex accents are used for `^^superscripted^^` text | <kbd><<.icon $:/core/images/superscript>></kbd> | <kbd><<displayshortcuts "((superscript))">></kbd> |Double circumflex accents are used for ^^superscripted^^ text |
+|Double commas are used for `,,subscripted,,` text | <kbd><<.icon $:/core/images/subscript>></kbd> | <kbd><<displayshortcuts "((subscript))">></kbd> |Double commas are used for ,,subscripted,, text |
+|Double  tilde signs are used for `~~strikethrough~~` text | <kbd><<.icon $:/core/images/strikethrough>></kbd> | <kbd><<displayshortcuts "((strikethrough))">></kbd> |Double   tilde signs are used for ~~strikethrough~~ text |
+|Single backtick is used for ```code` `` | <kbd><<.icon $:/core/images/mono-line>></kbd> | <kbd><<displayshortcuts "((mono-line))">></kbd> |Single backtick is used for `code` |
+|Double @ characters are used to create a `@@highlight@@` | - | - |Double @ characters are used to create a @@highlight@@ |
 
 See [[Styles and Classes in WikiText]] for more formatting options
 
@@ -26,18 +26,10 @@ See [[Styles and Classes in WikiText]] for more formatting options
 |Wikitext |Rendered Output|h
 |<code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>|``double backticks allows `embedded` backticks``|
 
-!! Further Information
-
-|Wikitext | Resulting HTML Code  |h
-|2 single hyphens are used for `''bold text''`|2 single hyphens are used for `<strong>bold text</strong>` |
-|2 slashes are used for `//italic text//`|2 slashes are used for `<em>italic text</em>` |
-|2 underscores are used for `__underscored text__`|2 underscores are used for `<u>underscored text<u>` |
-|2 circumflex accents are used for `^^superscripted^^` text |2 circumflex accents are used for `<sup>superscripted</sup>` text |
-|2 commas are used for `,,subscripted,,` text |2 commas are used for `<sub>subscripted</sub>` text |
-|2 tilde signs are used for `~~strikethrough~~` text |2 tilde signs are used for `<strike>strikethrough</strike>` text |
-|1 backtick is used for ```code` `` |1 backtick is used for `<code>code</code>` |
-|2 @ characters are used to create a `@@highlight@@` | 2 @ characters are used to create a `<span class="tc-inline-style">highlighted</span>` |
-
 !! Keyboard Shortcuts
 
 The full list of KeyboardShortcuts can be found in the $:/ControlPanel -> ''Keyboard Shortcuts'' tab. 
+
+!! Formatting Semantics
+
+See [[Formatting in Wikitext Semantics]]

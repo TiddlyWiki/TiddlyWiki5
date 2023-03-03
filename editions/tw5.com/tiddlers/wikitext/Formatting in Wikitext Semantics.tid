@@ -1,0 +1,37 @@
+created: 20230303205650613
+modified: 20230303211541555
+tags: [[Formatting in WikiText]]
+title: Formatting in Wikitext Semantics
+type: text/vnd.tiddlywiki
+
+!! Semantic Information
+
+Related to [[Formatting in WikiText]]
+
+|Wikitext | Resulting HTML Code  |h
+|Double single quotes are used for `''bold text''`|Double single quotes are used for `<strong>bold text</strong>` |
+|Double slashes are used for `//italic text//`|Double slashes are used for `<em>italic text</em>` |
+|Double underlines are used for `__underlined text__`|Double underlines are used for `<u>underlined text<u>` |
+|Double circumflex accents are used for `^^superscripted^^` text |Double circumflex accents are used for `<sup>superscripted</sup>` text |
+|Double commas are used for `,,subscripted,,` text |Double commas are used for `<sub>subscripted</sub>` text |
+|Double tilde signs are used for `~~strikethrough~~` text |Double tilde signs are used for `<strike>strikethrough</strike>` text |
+|Single backtick is used for ```code` `` |Single backtick is used for `<code>code</code>` |
+|Double @ characters are used to create a `@@highlight@@` |Double @ characters are used to create a `<span class="tc-inline-style">highlighted</span>` |
+
+!! Bold vs Strong
+
+In TW we use the term "bold" instead of "strong" because most users are used to it. ... The rendering process converts our "bold text" into the STRONG HTML element. 
+
+>The `<strong>` element is for content that is of greater importance, while the `<b>` element is used to draw attention to text without indicating that it's more important.
+>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong#b_vs._strong
+
+
+!! Underline vs. Underscore
+
+>Use underline to describe text formatting that puts a line under the characters. Use underscore to refer to the underscore character ( _ ).
+>https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/u/underline-vs-underscore
+
+!! Emphasis vs Italics
+
+>The `<em>` element represents stress emphasis of its contents, while the `<i>` element represents text that is set off from the normal prose, such as a foreign word, fictional character thoughts, or when the text refers to the definition of a word instead of representing its semantic meaning. (The title of a work, such as the name of a book or movie, should use `<cite>`.)
+>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em#i_vs._em
