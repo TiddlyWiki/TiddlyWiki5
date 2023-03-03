@@ -10,7 +10,7 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 	<div>
 		<$list filter="[<schema>jsonindexes[fields]]" variable="index">
 			<$let
-				config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/]] }}}
+				config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/fields/]] }}}
 			>
 				<div>
 					<$checkbox tiddler=<<config>> field="visible" checked="yes" unchecked="no" default="yes">
@@ -20,12 +20,25 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 			</$let>
 		</$list>
 	</div>
+	<div>
+		Sorting by
+		<$select tiddler="$:/config/geospatial/demo/real-estate-demo/sort-field" default="title">
+			<$list filter="[<schema>jsonindexes[fields]]" variable="index">
+				<option value={{{ [<schema>jsonget[fields],<index>,[name]] }}}>
+					<$text text={{{ [<schema>jsonget[fields],<index>,[caption]] }}}/>
+				</option>
+			</$list>
+		</$select>
+		<$checkbox tiddler="$:/config/geospatial/demo/real-estate-demo/sort-order" field="text" checked="reverse" unchecked="normal" default="normal">
+			Reverse sort order
+		</$checkbox>
+	</div>
 	<table>
 		<thead>
 			<tr>
 				<$list filter="[<schema>jsonindexes[fields]]" variable="index">
 					<$let
-						config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/]] }}}
+						config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/fields/]] }}}
 					>
 						<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
 							<th>
@@ -37,25 +50,30 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 			</tr>
 		</thead>
 		<tbody>
-			<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]]">
-				<tr>
-					<$list filter="[<schema>jsonindexes[fields]]" variable="index">
-						<$let
-							config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/]] }}}
-						>
-							<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
-								<td>
-									<$let
-										fieldname={{{ [<schema>jsonget[fields],<index>,[name]] }}}
-									>
-										<$text text={{{ [<currentTiddler>get<fieldname>] }}}/>
-									</$let>
-								</td>
-							</$list>
-						</$let>
-					</$list>
-				</tr>
-			</$list>
+			<$let
+				sortField={{{ [[$:/config/geospatial/demo/real-estate-demo/sort-field]get[text]else[title]] }}}
+				sortOrder={{{ [[$:/config/geospatial/demo/real-estate-demo/sort-order]get[text]else[normal]] }}}
+			>
+				<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort<sortField>order<sortOrder>]">
+					<tr>
+						<$list filter="[<schema>jsonindexes[fields]]" variable="index">
+							<$let
+								config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/fields/]] }}}
+							>
+								<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
+									<td>
+										<$let
+											fieldname={{{ [<schema>jsonget[fields],<index>,[name]] }}}
+										>
+											<$text text={{{ [<currentTiddler>get<fieldname>] }}}/>
+										</$let>
+									</td>
+								</$list>
+							</$let>
+						</$list>
+					</tr>
+				</$list>
+			</$let>
 		</tbody>
 	</table>
 </$let>
