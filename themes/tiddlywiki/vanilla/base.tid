@@ -86,7 +86,6 @@ button, textarea, input, select {
 
 :-moz-focusring {
 	outline: 2px solid <<colour primary>>;
-	outline-offset: -2px;
 }
 
 /*
