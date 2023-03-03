@@ -33,6 +33,12 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 			Reverse sort order
 		</$checkbox>
 	</div>
+	<div>
+	Search: <$edit-text tiddler="$:/config/geospatial/demo/real-estate-demo/search" tag="input"/>
+	</div>
+	<div>
+	Limit: <$edit-text tiddler="$:/config/geospatial/demo/real-estate-demo/limit" tag="input"/>
+	</div>
 	<table>
 		<thead>
 			<tr>
@@ -53,8 +59,9 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 			<$let
 				sortField={{{ [[$:/config/geospatial/demo/real-estate-demo/sort-field]get[text]else[title]] }}}
 				sortOrder={{{ [[$:/config/geospatial/demo/real-estate-demo/sort-order]get[text]else[normal]] }}}
+				limit={{{ [[$:/config/geospatial/demo/real-estate-demo/limit]get[text]else[100]] }}}
 			>
-				<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort<sortField>order<sortOrder>]">
+				<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]search:*{$:/config/geospatial/demo/real-estate-demo/search}nsort<sortField>order<sortOrder>limit<limit>]">
 					<tr>
 						<$list filter="[<schema>jsonindexes[fields]]" variable="index">
 							<$let
@@ -77,14 +84,3 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 		</tbody>
 	</table>
 </$let>
-
-<ul>
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]]">
-<li>
-<$link>
-<$view field="caption"><$view field="title"/></$view>
-</$link>
-</li>
-</$list>
-</ul>
-
