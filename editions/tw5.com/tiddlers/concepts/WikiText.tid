@@ -1,15 +1,15 @@
 created: 20131205155227468
-modified: 20140919191220377
+modified: 20230303214711802
 tags: Concepts Reference
 title: WikiText
 type: text/vnd.tiddlywiki
 
-~WikiText is a concise, expressive way of typing a wide range of text formatting, hypertext and interactive features. It allows you to focus on writing without a complex user interface getting in the way. It is designed to be familiar for users of [[MarkDown|http://daringfireball.net/projects/markdown/]], but with more of a focus on linking and the interactive features.
+~WikiText is a concise, expressive way of typing a wide range of text formatting, hypertext and interactive features. It allows you to focus on writing without a complex user interface getting in the way. It is designed to be familiar for users of [[Markdown]] but with more of a focus on linking and the interactive features.
 
-~WikiText can also be inserted to the text field using the [[Editor toolbar]].
+~WikiText can also be inserted to the text field using the [[Editor toolbar]] buttons.
 
-See [[Formatting text in TiddlyWiki]] for an introduction to WikiText.
+See [[Formatting in WikiText]] and [[Formatting text in TiddlyWiki]] for an introduction to ~WikiText.
 
-The following elements of WikiText syntax are built into the core:
+The following elements of ~WikiText syntax are built into the core:
 
-<<list-links "[tag[WikiText]]">>
+<<list-links filter:"[tag[WikiText]]" class:"multi-columns">>
