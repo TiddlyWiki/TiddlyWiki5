@@ -1,6 +1,6 @@
 caption: Formatting
 created: 20131205155959399
-modified: 20230303213223249
+modified: 20230303215447403
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ Available character formatting in WikiText includes:
 |Double circumflex accents are used for `^^superscripted^^` text | <kbd><<.icon $:/core/images/superscript>></kbd> | <kbd><<displayshortcuts "((superscript))">></kbd> |Double circumflex accents are used for ^^superscripted^^ text |
 |Double commas are used for `,,subscripted,,` text | <kbd><<.icon $:/core/images/subscript>></kbd> | <kbd><<displayshortcuts "((subscript))">></kbd> |Double commas are used for ,,subscripted,, text |
 |Double  tilde signs are used for `~~strikethrough~~` text | <kbd><<.icon $:/core/images/strikethrough>></kbd> | <kbd><<displayshortcuts "((strikethrough))">></kbd> |Double   tilde signs are used for ~~strikethrough~~ text |
-|Single backtick is used for ```code` `` | <kbd><<.icon $:/core/images/mono-line>></kbd> | <kbd><<displayshortcuts "((mono-line))">></kbd> |Single backtick is used for `code` |
+|Single backticks are used for ```code` `` | <kbd><<.icon $:/core/images/mono-line>></kbd> | <kbd><<displayshortcuts "((mono-line))">></kbd> |Single backticks are used for `code` |
 |Double @ characters are used to create a `@@highlight@@` | - | - |Double @ characters are used to create a @@highlight@@ |
 
 See [[Styles and Classes in WikiText]] for more formatting options
@@ -39,7 +39,7 @@ The full list of KeyboardShortcuts can be found in the $:/ControlPanel -> ''Keyb
 |Double circumflex accents are used for `^^superscripted^^` text |Double circumflex accents are used for `<sup>superscripted</sup>` text |
 |Double commas are used for `,,subscripted,,` text |Double commas are used for `<sub>subscripted</sub>` text |
 |Double tilde signs are used for `~~strikethrough~~` text |Double tilde signs are used for `<strike>strikethrough</strike>` text |
-|Single backtick is used for ```code` `` |Single backtick is used for `<code>code</code>` |
+|Single backticks are used for ```code` `` |Single backticks are used for `<code>code</code>` |
 |Double @ characters are used to create a `@@highlight@@` |Double @ characters are used to create a `<span class="tc-inline-style">highlighted</span>` |
 
 !! Bold vs Strong
