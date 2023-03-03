@@ -95,8 +95,16 @@ exports.makepatches = makeStringBinaryOperator(
 exports.applypatches = makeStringBinaryOperator(
 	function(a,b) {
 		var dmpObject = new dmp.diff_match_patch(),
+			patches;
+		try {
 			patches = dmpObject.patch_fromText(b);
-		return [dmpObject.patch_apply(patches,a)[0]];
+		} catch(e) {
+		}
+		if(patches) {
+			return [dmpObject.patch_apply(patches,a)[0]];
+		} else {
+			return [a];
+		}
 	}
 );
 
