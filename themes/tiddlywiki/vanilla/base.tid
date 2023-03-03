@@ -76,10 +76,17 @@ $else$
 	-webkit-box-sizing: border-box;
 }
 
-* :focus-visible {
-	outline:2px solid <<colour primary>>;
-	outline-offset:-2px;
-	border-radius:0.25em;
+input[type="search"] {
+	outline-offset: initial;
+}
+
+button, textarea, input, select {
+	outline-color: <<colour primary>>;
+}
+
+:-moz-focusring {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
 }
 
 /*
