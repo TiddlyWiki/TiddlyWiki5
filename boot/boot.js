@@ -1107,7 +1107,7 @@ Wiki constructor. State is stored in private members that only a small number of
 options include:
 enableIndexers - Array of indexer names to enable, or null to use all available indexers
 */
-$tw.Wiki = function(options) {
+$tw.Wiki = $tw.Wiki || function(options) {
 	options = options || {};
 	var self = this,
 		tiddlers = Object.create(null), // Hashmap of tiddlers
@@ -1466,10 +1466,10 @@ $tw.Wiki = function(options) {
 // Dummy methods that will be filled in after boot
 $tw.Wiki.prototype.clearCache =
 $tw.Wiki.prototype.clearGlobalCache =
-$tw.Wiki.prototype.enqueueTiddlerEvent = function() {};
+$tw.Wiki.prototype.enqueueTiddlerEvent = $tw.Wiki.prototype.enqueueTiddlerEvent || function() {};
 
 // Add an array of tiddlers
-$tw.Wiki.prototype.addTiddlers = function(tiddlers) {
+$tw.Wiki.prototype.addTiddlers = $tw.Wiki.prototype.addTiddlers || function(tiddlers) {
 	for(var t=0; t<tiddlers.length; t++) {
 		this.addTiddler(tiddlers[t]);
 	}
@@ -1478,7 +1478,7 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 /*
 Define all modules stored in ordinary tiddlers
 */
-$tw.Wiki.prototype.defineTiddlerModules = function() {
+$tw.Wiki.prototype.defineTiddlerModules = $tw.Wiki.prototype.defineTiddlerModules || function() {
 	this.each(function(tiddler,title) {
 		if(tiddler.hasField("module-type")) {
 			switch (tiddler.fields.type) {
@@ -1502,7 +1502,7 @@ $tw.Wiki.prototype.defineTiddlerModules = function() {
 /*
 Register all the module tiddlers that have a module type
 */
-$tw.Wiki.prototype.defineShadowModules = function() {
+$tw.Wiki.prototype.defineShadowModules = $tw.Wiki.prototype.defineShadowModules || function() {
 	var self = this;
 	this.eachShadow(function(tiddler,title) {
 		// Don't define the module if it is overidden by an ordinary tiddler
@@ -1516,7 +1516,7 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 /*
 Enable safe mode by deleting any tiddlers that override a shadow tiddler
 */
-$tw.Wiki.prototype.processSafeMode = function() {
+$tw.Wiki.prototype.processSafeMode = $tw.Wiki.prototype.processSafeMode || function() {
 	var self = this,
 		overrides = [];
 	// Find the overriding tiddlers
@@ -1547,7 +1547,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 /*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
-$tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
+$tw.Wiki.prototype.deserializeTiddlers = $tw.Wiki.prototype.deserializeTiddlers || function(type,text,srcFields,options) {
 	srcFields = srcFields || Object.create(null);
 	options = options || {};
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[options.deserializer],
