@@ -1,5 +1,5 @@
 created: 20150117190213631
-modified: 20201201154211507
+modified: 20230226144641763
 tags: Concepts
 title: Date Fields
 type: text/vnd.tiddlywiki
@@ -20,6 +20,8 @@ Values of date fields are 17 or 18-character strings:
 * 3 digits for the millisecond
 
 To avoid problems arising from differences of time zone, TiddlyWiki always uses [[UTC|https://en.wikipedia.org/wiki/Coordinated_Universal_Time]].
+
+The [[DateFormat]] template for storage of dates in these fields is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`.
 
 As an example, the <<.field created>> field of this tiddler has the value <<.value """<$view field="created"/>""">>.
 

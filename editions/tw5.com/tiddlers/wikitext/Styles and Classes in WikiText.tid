@@ -5,26 +5,36 @@ title: Styles and Classes in WikiText
 type: text/vnd.tiddlywiki
 caption: Styles and Classes
 
-You can use this construction to cause the wrapped content to be assigned specified CSS classes or styles:
+Content can be wrapped in `@@`double at signs`@@`  to apply specified CSS styles or classes to it. There are multiple ways to use this syntax, as presented below.
 
-<<wikitext-example src:"@@.myStyle
-* List One
-* List Two
+Inline content wrapped in `@@`double at signs`@@` without specifying style or class will be assigned the `.tc-inline-style` and displayed as highlighted text. The foreground and background colours of the highlighted text are defined as `highlight-background` and `highlight-foreground` in the current palette.
+
+<<wikitext-example src:"@@some highlighted text@@">>
+
+Style attributes, e.g. `color`, each followed by `;` semicolon can be introduced immediately after the opening `@@`.
+
+<<wikitext-example src:"@@color:steelblue;background-color:lightcyan;some styled text@@">>
+
+Similarly a style can be applied to a multiline content:
+
+<<wikitext-example src:"@@background-color:lightcyan;
+* Item one
+* Item two
 @@
 ">>
 
-Similar syntax is used to assign styles. For example:
+A class may be applied to a multiline content only:
 
-<<wikitext-example src:"@@background-color:red;
-* List One
-* List Two
-@@
-">>
+<<wikitext-example src:"@@.tc-double-spaced-list
+* Item one
+* Item two
+@@">>
 
-Multiple styles and classes can be mixed. For example:
+Multiple classes and styles can be used together:
 
-<<wikitext-example src:"@@.tc-tiddler-frame
-@@width:400px;
-Some text
+<<wikitext-example src:"@@.tc-double-spaced-list
+@@width:400px;background-color:lightcyan;
+* Item one
+* Item two
 @@
 ">>

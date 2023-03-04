@@ -1,0 +1,81 @@
+created: 20230301174431218
+list: efg hlm pqr
+modified: 20230301174431218
+myfield: 
+revision: 0
+title: ActionListopsWidget (Examples)
+type: text/vnd.tiddlywiki
+
+In this example we shall populate and then clear a list in an ordinary field (myfield) of this tiddler (the default).
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $field="myfield" $filter="efg hlm pqr"/>
+Populate 'myfield'
+</$button>
+<$button>
+<$action-listops $field="myfield" $subfilter="abc xyz"/>
+Append More Items
+</$button>
+<$button>
+<$action-listops $field="myfield" $subfilter="-abc -hlm"/>
+Remove Items
+</$button>
+<$button>
+<$action-listops $field="myfield" $filter="[[]]"/>
+Clear 'myfield'
+</$button>
+
+<$list filter="[list[!!myfield]]">
+
+</$list>"""/>
+
+---
+In this example we shall append and remove items from a list in an ordinary field (myfield) of this tiddler (the default) and sort the resultant list. We shall then remove some of the appended items and sort the resulting list in reverse order.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $field="myfield" $subfilter="-efg ijk xyz [[this is a title]] +[sort[]]"/>
+Mangle List
+</$button>
+<$button>
+<$action-listops $field="myfield" $subfilter="-xyz -[[this is a title]] +[!sort[]]"/>
+Unmangle List
+</$button>
+
+<$list filter="[list[!!myfield]]">
+
+</$list>"""/>
+
+---
+In this example we shall append a few tags to the 'tags' field of this tiddler (the default). We shall then remove some of the appended tags. 
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $tags="+[append{Days of the Week!!short}] $:/tag1 $:/tag2 $:/tag3"/>
+Populate 'tags'
+</$button>
+<$button>
+<$action-listops $tags="+[!remove:2{!!tags}]"/>
+Remove Last Two Tags
+</$button>
+<$button>
+<$action-listops $tags="+[!prefix[$:/]]"/>
+Remove System Tags
+</$button>
+<$button>
+<$action-listops $tags="-Mon -Tue"/>
+Remove Mon and Tue
+</$button>
+<$button>
+<$action-listops $tags="+[prefix[$:/]] ActionWidgets Widgets"/>
+Remove User Tags
+</$button>
+<$button>
+<$action-listops $tags="+[[]] ActionWidgets Widgets"/>
+Clear Tags
+</$button>
+
+<$list filter="[list[!!tags]]">
+
+</$list>"""/>
