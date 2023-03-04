@@ -112,7 +112,7 @@ function diffPartsToChars(text1,text2,mode) {
 	        if(mode === "words") {
                 regexpResult = searchRegexp.exec(text);
                 lineEnd = searchRegexp.lastIndex;
-                if(lineEnd === null) {
+                if(regexpResult === null) {
                 lineEnd = text.length;
                 }
                 lineEnd = --lineEnd;
