@@ -14,10 +14,10 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.2.6">>
 
-The difference algorithm operates in character mode by default. This produces the most detailed diff possible. In `words` mode, each word in the input text is transformed into a meta-character, upon which the algorithm then operates. In the default character mode, the filter would find two patches between "ActionWidget" and "Action-Widgets" (the hyphen and the plural s), while in `words` mode, the whole word is found to be changed. In `lines` mode, the meta-character is formed from the whole line, and a whole line, delimited by newline characters, is found to be changed independent of the number of changes within the line.
+The difference algorithm operates in character mode by default. This produces the most detailed diff possible. In `words` mode, each word in the input text is transformed into a meta-character, upon which the algorithm then operates. In the default character mode, the filter would find two patches between "ActionWidget" and "Action-Widgets" (the hyphen and the plural s), while in `words` mode, the whole word is found to be changed. In `lines` mode, the meta-character is formed from the whole line, delimited by newline characters, and is found to be changed independent of the number of changes within the line.
 
-The different mode influence the result when the patches are applied to texts other than the original, as well as the runtime.
+The different modes influence the result when the patches are applied to texts other than the original, as well as the runtime.
 
-<<.tip "The calculation in `words` mode is roughly 10 times as fast as the default character mode, while `lines` mode can be more than 100 times faster than the default.">>
+<<.tip "The calculation in `words` mode is roughly 10 times faster than the default character mode, while `lines` mode can be more than 100 times faster than the default.">>
 
 <<.operator-examples "makepatches and applypatches">>
