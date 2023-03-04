@@ -133,6 +133,10 @@ td svg {
 	padding-left: 20px;
 }
 
+.doc-examples-hard-breaks .doc-example-result li {
+    white-space: pre-wrap;
+}
+
 .doc-bad-example code, .doc-bad-example pre, table.doc-bad-example {
   background-color:#ffff80;
 }

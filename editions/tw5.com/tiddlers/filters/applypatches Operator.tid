@@ -1,0 +1,15 @@
+caption: applypatches
+created: 20230304154824762
+modified: 20230304154826621
+op-purpose: applies a set of patches to transform the input
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string containing patches from the [[makepatches Operator]]
+op-parameter-name: P
+op-output: the transformed input to which the patches <<.place P>> have been applied
+tags: [[Filter Operators]] [[String Operators]]
+title: applypatches Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.6">>
+
+<<.operator-examples "makepatches and applypatches">>
