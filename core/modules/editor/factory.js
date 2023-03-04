@@ -180,6 +180,8 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 		this.editFocusPopup = this.getAttribute("focusPopup");
 		this.editFocus = this.getAttribute("focus");
+		this.editFocusSelectFromStart = $tw.utils.parseNumber(this.getAttribute("focusSelectFromStart","0"));
+		this.editFocusSelectFromEnd = $tw.utils.parseNumber(this.getAttribute("focusSelectFromEnd","0"));
 		this.editTabIndex = this.getAttribute("tabindex");
 		this.editCancelPopups = this.getAttribute("cancelPopups","") === "yes";
 		this.editInputActions = this.getAttribute("inputActions");
@@ -218,7 +220,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		var changedAttributes = this.computeAttributes();
 		// Completely rerender if any of our attributes have changed
-		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedAttributes.disabled || changedAttributes.fileDrop) {
+		if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup ||  changedAttributes.rows || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || changedTiddlers[HEIGHT_MODE_TITLE] || changedTiddlers[ENABLE_TOOLBAR_TITLE] || changedTiddlers["$:/palette"] || changedAttributes.disabled || changedAttributes.fileDrop) {
 			this.refreshSelf();
 			return true;
 		} else if (changedTiddlers[this.editRefreshTitle]) {

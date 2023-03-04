@@ -32,7 +32,7 @@ type: text/vnd.tiddlywiki
 ## Visit http://127.0.0.1:8080/ in your browser
 ## Try editing and creating tiddlers
 # Optionally, make an offline copy:
-#* click the <<.icon $:/core/images/save-button>> ''save changes'' button in the sidebar, ''OR''
+#* click the <<.icon $:/core/images/save-button-dynamic>> ''save changes'' button in the sidebar, ''OR''
 #* `tiddlywiki mynewwiki --build index`
 
 The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.

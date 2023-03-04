@@ -7,7 +7,7 @@ tags: $:/tags/Macro
 
 \define toc-caption()
 \whitespace trim
-<span class="tc-toc-caption tc-tiny-gap-left">
+<span class="tc-toc-caption">
 <$set name="tv-wikilinks" value="no">
   <$transclude field="caption">
     <$view field="title"/>
@@ -24,7 +24,7 @@ tags: $:/tags/Macro
       <$set name="excluded" filter="""[enlist<__exclude__>] [<__tag__>]""">
         <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
           <li class=<<toc-item-class>>>
-            <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}><$view field='caption'><$view field='title'/></$view></$link>">
+            <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}><<toc-caption>></$link>">
               <<toc-caption>>
             </$list>
             <$macrocall $name="toc-body" tag=<<item>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>>/>

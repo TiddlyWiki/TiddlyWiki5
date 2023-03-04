@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20220123174919252
+modified: 20230115100934146
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -31,7 +31,14 @@ some text <!-- inline comment -->
 
 ! Important
 
-<<.tip """[[Widgets share the same syntax as HTML tags|Widgets in WikiText]], and so the following information applies to them, too.""">>
+!! Security 
+
+<<.warning """Note that any HTML attributes prefixed with `on` are removed from the rendered HTML content. This is done to prevent event handlers (such as "onclick") being used as a clandestine way to execute untrusted JavaScript. A design goal of TiddlyWiki is to ensure that executable JavaScript can only enter the system through explicit JavaScript module tiddlers or raw markup tiddlers. This makes it possible to filter unsafe content in multiuser environments, and also makes it safer to copy untrusted wikitext examples.""">> 
+
+!! Widgets
+
+<<.tip """[[Widgets share the same syntax as HTML tags|Widgets in WikiText]]<br>and so the following information applies to them, too.""">>
+
 
 ! Block mode versus Inline mode
 
@@ -47,7 +54,7 @@ The following tags are treated as 'void'. This means that `<tag>` is treated as 
 
 * `<area>`, `<base>`, `<br>`, `<col>`, `<command>`, `<embed>`, `<hr>`, `<img>`, `<input>`, `<keygen>`, `<link>`, `<meta>`, `<param>`, `<source>`, `<track>`, `<wbr>`
 
-If you don’t close any other tag then it will behave as if the missing closing tag were at the end of the tiddler.
+If you do not close any other tag then it will behave as if the missing closing tag were at the end of the tiddler.
 
 ! Attributes
 
@@ -114,7 +121,7 @@ attr={{tiddler}}
 attr={{!!field}}
 attr={{tiddler!!field}}
 ```
-<<.warning "The attribute's value will be the exact text retrieved from the TextReference. Any wiki syntax in that text will be left as-is.">>
+<<.warning "The value of the attribute value will be the exact text retrieved from the TextReference. Any wiki syntax in that text will be left as-is.">>
 
 !! Variable Attribute Values
 
@@ -125,7 +132,7 @@ Variable attribute values are indicated with double angle brackets around a [[ma
 ...
 </div>
 ```
-<<.warning "The text from the macro's definition will be retrieved and text substitution will be performed (i.e. <<.param $param$>> and <<.param &#36;(...)&#36;>> syntax). The attribute's value will be the resulting text. Any wiki syntax in that text (including further macro calls and variable references) will be left as-is.">>
+<<.warning "The text from the definition of the macro will be retrieved and text substitution will be performed (i.e. <<.param $param$>> and <<.param &#36;(...)&#36;>> syntax). The value of the attribute value will be the resulting text. Any wiki syntax in that text (including further macro calls and variable references) will be left as-is.">>
 
 !! Filtered Attribute Values
 
@@ -138,4 +145,4 @@ This example shows how to add a prefix to a value:
 ```
 <$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
 ```
-<<.warning "The attribute's value will be the exact text from the first item in the resulting list. Any wiki syntax in that text will be left as-is.">>
+<<.warning "The value of the attribute will be the exact text from the first item in the resulting list. Any wiki syntax in that text will be left as-is.">>

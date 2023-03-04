@@ -27,7 +27,7 @@ The `<$dynannotate>` widget uses the selection tracker to support a popup that d
 |searchDisplay |"overlay" or "snippet" (see below) |
 |searchMode |"normal" (default), "regexp" or "whitespace" (see below) |
 |searchMinLength |Optional minimum length of search string |
-|searchCaseSensitive |"no" (default) for a case insensitive search, or "yes" for a case sensitive search |
+|searchCaseSensitive |"yes" (the default) for a case sensitive search, or "no" for a case insensitive search|
 |searchClass |Optional CSS class to be added to search overlays |
 |snippetContextLength |Optional length of search result contextual prefix/suffix |
 
