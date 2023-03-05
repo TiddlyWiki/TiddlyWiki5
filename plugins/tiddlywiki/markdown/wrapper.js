@@ -6,17 +6,13 @@ module-type: parser
 Wraps up the markdown-it parser for use as a Parser in TiddlyWiki
 
 \*/
-(function(realRequire){
+(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
 
-var require = function(m) {
-	return realRequire("$:/plugins/tiddlywiki/markdown/" + m + ".js");
-};
-
-var MarkdownIt = require("markdown-it");
+var MarkdownIt = require("./markdown-it");
 
 function parseAsBoolean(tiddlerName) {
 	return $tw.wiki.getTiddlerText(tiddlerName,"false").trim().toLowerCase() === "true";
@@ -61,8 +57,10 @@ function setupWikiRules(pluginOptions) {
 		return rulesInfo;
 	}
 
+	var WikiParser = require("$:/core/modules/parsers/wikiparser/wikiparser.js")["text/vnd.tiddlywiki"];
+
 	// first pass: get all rule classes
-	var wikiParser = new $tw.Wiki.parsers["text/vnd.tiddlywiki"](null, '', {parseAsInline: true, wiki: $tw.wiki});
+	var wikiParser = new WikiParser(null, '', {parseAsInline: true, wiki: $tw.wiki});
 
 	// restore all possible rules from each rule class
 	wikiParser.pragmaRules = collectAllRules(wikiParser.pragmaRuleClasses,'pragma');
@@ -100,12 +98,12 @@ function setupWikiRules(pluginOptions) {
 // Creates markdown-it parser
 function createMarkdownEngine(markdownItOptions, pluginOptions) {
 	var md = new MarkdownIt(markdownItOptions)
-				.use(require("markdown-it-sub"))
-				.use(require("markdown-it-sup"))
-				.use(require("markdown-it-ins"))
-				.use(require("markdown-it-mark"))
-				.use(require("markdown-it-footnote"))
-				.use(require("markdown-it-deflist"));
+				.use(require("./markdown-it-sub"))
+				.use(require("./markdown-it-sup"))
+				.use(require("./markdown-it-ins"))
+				.use(require("./markdown-it-mark"))
+				.use(require("./markdown-it-footnote"))
+				.use(require("./markdown-it-deflist"));
 
 	var results = setupWikiRules(pluginOptions);
 
@@ -116,10 +114,10 @@ function createMarkdownEngine(markdownItOptions, pluginOptions) {
 	MarkdownParser.prototype.inlineRules = results.inlineRules;
 
 	if(pluginOptions.renderWikiText && $tw.modules.titles["$:/plugins/tiddlywiki/katex/katex.min.js"]) {
-		md.use(require("markdown-it-katex"));
+		md.use(require("./markdown-it-katex"));
 	}
 
-	md.use(require("markdown-it-tiddlywiki"),{
+	md.use(require("./markdown-it-tiddlywiki"),{
 			renderWikiText: pluginOptions.renderWikiText,
 			blockRules: results.blockRules,
 			inlineRules: results.inlineRules
@@ -263,4 +261,4 @@ function MarkdownParser(type,text,options) {
 
 exports["text/markdown"] = MarkdownParser;
 exports["text/x-markdown"] = MarkdownParser;
-})(require);
+})();
