@@ -16,3 +16,7 @@ This filter expression can be used to return the value, even if it is an empty s
 There are 5 palettes which define the index <<.value diff-equal-background>>, but none defines a value:
 <<.operator-example 5 "[all[shadows+tiddlers]tag[$:/tags/Palette]] :filter[has:index[diff-equal-background]] :map[getindex[diff-equal-background]else[]]">>
 In the above example, the [[Map Filter Run Prefix]] is used instead of `:and` as it does not de-duplicate its results.
+
+Another way to check if an index has an empty value is to [[count|count Operator]] the results from the [[getindex Operator]]:
+<<.operator-example 6 "[[$:/palettes/Vanilla]indexes[]] :filter[[$:/palettes/Vanilla]getindex<currentTiddler>count[]compare:number:eq[0]]">>
+Here, the input to `:filter` is the [[list of indexes|indexes Operator]] which are contained in [[$:/palettes/Vanilla]].
