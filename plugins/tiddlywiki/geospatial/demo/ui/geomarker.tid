@@ -70,7 +70,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 !! Distance to other markers
 
 <$let
-	thisLocation={{{ [geopoint{!!lat},{!!long}] }}}
+	thisLocation={{{ [geopoint{!!long},{!!lat}] }}}
 >
 <ul>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]] -[<currentTiddler>]">
@@ -78,7 +78,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 <$link><$view field="caption"><$view field="title"/></$view></$link>
 --
 <$let
-	otherLocation={{{ [geopoint{!!lat},{!!long}] }}}
+	otherLocation={{{ [geopoint{!!long},{!!lat}] }}}
 >
 <$text text={{{ [geodistance<thisLocation>,<otherLocation>,[miles]fixed[0]] }}}/> miles
 </$let>
