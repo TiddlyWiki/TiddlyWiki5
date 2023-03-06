@@ -14,7 +14,7 @@ Geospatial initialisation
 
 // Export name and synchronous status
 exports.name = "geospatial";
-exports.after = ["load-modules"];
+exports.before = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
