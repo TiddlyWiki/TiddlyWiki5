@@ -1,8 +1,18 @@
 created: 20150203140000000
-modified: 20170608150301791
+modified: 20230306140231272
 tags: [[getindex Operator]] [[Operator Examples]]
 title: getindex Operator (Examples)
 type: text/vnd.tiddlywiki
 
-<<.operator-example 1 "[[$:/palettes/Vanilla]getindex[background]]" "returns the value at index ''background'' of the [[DataTiddler|DataTiddlers]] [[$:/palettes/Vanilla]]">>
+<<.operator-example 1 "[[$:/palettes/Vanilla]getindex[background]]" "returns the value at index <<.value background>> of the [[DataTiddler|DataTiddlers]] [[$:/palettes/Vanilla]]">>
 <<.operator-example 2 "[all[shadows+tiddlers]tag[$:/tags/Palette]getindex[background]]" "returns all background colors defined in any of the ColourPalettes">>
+
+[[ListopsData]] contains an empty index <<.value ~DataIndex>> which is not returned by the filter operator:
+<<.operator-example 3 "[[ListopsData]getindex[DataIndex]]">>
+
+This filter expression can be used to return the value, even if it is an empty string:
+<<.operator-example 4 "[[ListopsData]] :filter[has:index[DataIndex]] :and[getindex[DataIndex]else[]]">>
+
+There are 5 palettes which define the index <<.value diff-equal-background>>, but none defines a value:
+<<.operator-example 5 "[all[shadows+tiddlers]tag[$:/tags/Palette]] :filter[has:index[diff-equal-background]] :map[getindex[diff-equal-background]else[]]">>
+In the above example, the [[Map Filter Run Prefix]] is used instead of `:and` as it does not de-duplicate its results.
