@@ -87,6 +87,21 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 </ul>
 </$let>
 
+!! GeoLayer Lookups
+
+<$let
+	thisLocation={{{ [geopoint{!!long},{!!lat}] }}}
+>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoLayer]sort[caption]]">
+<li>
+<$text text={{{ [<currentTiddler>get[caption]] :else[<currentTiddler>] }}}/> --
+<$text text={{{ [<thisLocation>geolookup{!!text}] }}}/>
+</li>
+</$list>
+</ul>
+</$let>
+
 !! Travel Time
 
 <$button actions=<<get-traveltime-actions>>>
