@@ -1,11 +1,17 @@
 caption: 5.2.6
-created: 20230119221001957
-modified: 20230119221001957
+created: 20230304213950684
+modified: 20230304213950684
 tags: ReleaseNotes
 title: Release 5.2.6
 type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.5...master]]//
+
+! Major Improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7290">> three new operators exposing previously hidden features of the [[Diff-Match-Patch|https://neil.fraser.name/software/diff_match_patch]] library that is integrated with TiddlyWiki:
+** new [[levenshtein Operator]] to calculate the similarity of two strings as the number of characters that need to be inserted, deleted or modified in order to turn one into the other
+** new [[makepatches Operator]] and [[applypatches Operator]] that can be used to make and apply patches that represent the difference between two different texts. See the [[examples|makepatches and applypatches Operator (Examples)]]
 
 ! Translation Improvements
 
@@ -13,27 +19,37 @@ Improvements to the following translations:
 
 * Chinese
 * Italian
+* Polish
 
 ! Plugin Improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7169">> integration between the [[BrowserStorage Plugin]] and the client-server configuration to allow changes to be made while offline and then later resynchronised with the server
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6528">> the [[Markdown Plugin]] to use the newer and better maintained [[markdown-it|https://github.com/markdown-it/markdown-it]] library. The previous Markdown plugin remains available as "markdown-legacy"
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7176">> [[Innerwiki Plugin]] to allow the `<$data>` widget to override existing tiddler fields
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7207">>, <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/c39ef398bffae12c0ed7324d9b6d9d29f0f2f9ff">> and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/8f7441f296351a4dd0852c3c782f8874d398e052">> problem preventing [[Share Plugin]] from working properly
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/524cee1489f260375cac8cfe878fdc5942a4596e">> [[XLSX Plugin|XLSX Utilities Edition]] to handle importing numeric fields
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/81f514116657d0d567be7a4c45762a85beaa8bc0">> Dynannotate plugin crash when using the fake DOM used for static rendering
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7281">> bug where pasting text into the CodeMirror editor also opened an `$:/Import` tiddler
 
+! Accessibility Improvements
+
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7232">> appearance of save wiki button so that it is accessible to users without colour vision
 
 ! Usability Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7217">> consistency of tiddler deletion by allowing missing tiddlers to be 'deleted', which just results in them being closed
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/34643a42790777f1b235f57b5093bb29bd0b3a14">> layout switcher to include an optional icon for each layout
 * <<.link-badge-removed "https://github.com/Jermolene/TiddlyWiki5/commit/c0615e20ecf7d5d5e66d8a2acd28b80e8d59688d">> [[improvements to table layout|https://github.com/Jermolene/TiddlyWiki5/pull/7010]] from v5.2.5 that have proved to not be backwards compatible
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7323">> support for `&dollar;` HTML entity
 
 ! Widget Improvements
 
-* 
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7222">> EditTextWidget to support `focusSelectFromStart` and `focusSelectFromEnd` attributes to give better control over text selection
 
 ! Filter improvements
 
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7121">> [[encodeuricomponent Operator]] to encode characters such as `*` that are illegal in Windows filenames
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/89fd8871b6217634c9896b9402069757ca5ea189">> [[encodebase64 Operator]] and [[decodebase64 Operator]]
 
 ! Hackability Improvements
 
@@ -41,6 +57,7 @@ Improvements to the following translations:
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7118">> readability of [[tag-picker Macro]] and [[keyboard-driven-input Macro]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7129">> reliability of [[list-links-draggable Macro]] and [[list-tagged-draggable Macro]] by using the new GenesisWidget instead of textual substitution
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7210">> [[external JavaScript core support|Using the external JavaScript template]] to make it possible to save an external JS wiki as a standard single file wiki
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7007">> a warning message in the browser console when the Zoomin storyview fails due to the tiddler view template lacking a single containing element
 
 ! Bug Fixes
 
@@ -50,42 +67,58 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7121">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/pull/7219">>) overriding `toc-caption` macro for [[Table-of-Contents Macros]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7212">> rendering of $:/core/ui/MoreSideBar/Tags when viewed within the story river
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7156">> undefined variable crash in [[reduce Operator]], [[filter Operator]] and [[sortsub Operator]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7153">> GenesisWidget not to create anything if the `$type` attribute is blank or missing
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/issues/7153">> GenesisWidget not to create anything if the `$type` attribute is blank or missing
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7230">> GenesisWidget to pass `isBlock` flag to the generated widget
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7160">> crash using [[jsonget Operator]] with "fixed" as key name
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/0b39e47ce88c7620b7a66c1553a71efaff06edb9">> importing of MP3 files to match current browser implementations
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7122">> crash when attempting to create an element with a blank tag name
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7224">> layout issue with "save tiddler" button
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/3d0ec5b1bdc157f87d65b8c9b76e681c14337eb4">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/4e5c957e975459350cd7df3038e5fb3c7aea859f">>) handling of whitespace in lists to cover all Unicode whitespace characters
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7228">> test spacing of parser rule checkboxes in control panel
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/f249b79e81e51d48364ea8147fe27850df9f577f">> CSS classes assigned to edit toolbar buttons
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7247">> usage of broken CSS class `tc-storyview-zoomin-tiddler` in Zoomin story view
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7243">> usage of `importTitle` and `autoOpenOnImport` options for [[WidgetMessage: tm-import-tiddlers]]
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7276">> fixed text editor refresh when the palette is changed
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7270">> crash with LetWidget when referencing a variable that exists but has an undefined value
 
 ! Node.js Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7169">> integration between the [[BrowserStorage Plugin]] and the client-server configuration to allow changes to be made while offline and then later resynchronised with the server
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7130">> duplicate fields in internal templates used in client-server configuration
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7138">> lazy loading not triggering a sync from the server
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/bf8e1ca5b0587787bf80692b0213bb7b038c7868">> crash on creating a new tiddler if anonymous users manage to create syncable tiddlers in a read only wiki
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/95e61688397ff1bc9be04193bc4ce2e3c8c48dce">> handling of logout in the client-server configuration to avoid 404 errors
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7238">> problem with saving tiddlers with `_canonical_uri` field as `.tid` files
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6953">> missing meta viewport to static river template
 
 ! Performance Improvements
 
-* 
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7297">> wikitext parsing to use "sticky" flag for improved performance
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7299">> field indexer to more efficiently process lookups
 
 ! Acknowledgements
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+andrigamerita
 AnthonyMuscio
 BramChen
 btheado
 cdruan
 CrossEye
 cs8425
+EvidentlyCube
 fkmiec
 flibbles
 GameDungeon
+hffqyd
 jeffrey4l
 joebordes
 kookma
+linonetwo
 m42e
 Marxsal
+mateuszwilczek
 newmedicine
 pippep
 pmario
