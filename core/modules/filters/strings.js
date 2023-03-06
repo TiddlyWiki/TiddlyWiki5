@@ -74,6 +74,113 @@ exports.join = makeStringReducingOperator(
 	},null
 );
 
+var dmp = require("$:/core/modules/utils/diff-match-patch/diff_match_patch.js");
+
+exports.levenshtein = makeStringBinaryOperator(
+	function(a,b) {
+		var dmpObject = new dmp.diff_match_patch(),
+			diffs = dmpObject.diff_main(a,b);
+		return [dmpObject.diff_levenshtein(diffs) + ""];
+	}
+);
+
+// these two functions are adapted from https://github.com/google/diff-match-patch/wiki/Line-or-Word-Diffs
+function diffLineWordMode(text1,text2,mode) {
+	var dmpObject = new dmp.diff_match_patch();
+	var a = diffPartsToChars(text1,text2,mode);
+	var lineText1 = a.chars1;
+	var lineText2 = a.chars2;
+	var lineArray = a.lineArray;
+	var diffs = dmpObject.diff_main(lineText1,lineText2,false);
+	dmpObject.diff_charsToLines_(diffs,lineArray);
+	return diffs;
+}
+
+function diffPartsToChars(text1,text2,mode) {
+	var lineArray = [];
+	var lineHash = {};
+	lineArray[0] = '';
+
+    function diff_linesToPartsMunge_(text,mode) {
+        var chars = '';
+        var lineStart = 0;
+        var lineEnd = -1;
+        var lineArrayLength = lineArray.length,
+            regexpResult;
+        const searchRegexp = /\W+/g;
+        while(lineEnd < text.length - 1) {
+	        if(mode === "words") {
+                regexpResult = searchRegexp.exec(text);
+                lineEnd = searchRegexp.lastIndex;
+                if(regexpResult === null) {
+                lineEnd = text.length;
+                }
+                lineEnd = --lineEnd;
+            } else {
+                lineEnd = text.indexOf('\n', lineStart);
+                if(lineEnd == -1) {
+                    lineEnd = text.length - 1;
+                }
+            }
+            var line = text.substring(lineStart, lineEnd + 1);
+
+            if(lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : (lineHash[line] !== undefined)) {
+				chars += String.fromCharCode(lineHash[line]);
+            } else {
+                if (lineArrayLength == maxLines) {
+                  line = text.substring(lineStart);
+                  lineEnd = text.length;
+                }
+                chars += String.fromCharCode(lineArrayLength);
+                lineHash[line] = lineArrayLength;
+                lineArray[lineArrayLength++] = line;
+            }
+            lineStart = lineEnd + 1;
+        }
+        return chars;
+    }
+    var maxLines = 40000;
+    var chars1 = diff_linesToPartsMunge_(text1,mode);
+    maxLines = 65535;
+    var chars2 = diff_linesToPartsMunge_(text2,mode);
+    return {chars1: chars1, chars2: chars2, lineArray: lineArray};
+};
+
+exports.makepatches = function(source,operator,options) {
+	var dmpObject = new dmp.diff_match_patch(),
+		suffix = operator.suffix || "",
+		result = [];
+		
+		source(function(tiddler,title) {
+			var diffs, patches;
+			if(suffix === "lines" || suffix === "words") {
+				diffs = diffLineWordMode(title,operator.operand,suffix);
+				patches = dmpObject.patch_make(title,diffs);
+			} else {
+				patches = dmpObject.patch_make(title,operator.operand);
+			}
+			Array.prototype.push.apply(result,[dmpObject.patch_toText(patches)]);
+		});
+
+	return result;
+};
+
+exports.applypatches = makeStringBinaryOperator(
+	function(a,b) {
+		var dmpObject = new dmp.diff_match_patch(),
+			patches;
+		try {
+			patches = dmpObject.patch_fromText(b);
+		} catch(e) {
+		}
+		if(patches) {
+			return [dmpObject.patch_apply(patches,a)[0]];
+		} else {
+			return [a];
+		}
+	}
+);
+
 function makeStringBinaryOperator(fnCalc) {
 	return function(source,operator,options) {
 		var result = [];

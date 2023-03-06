@@ -40,6 +40,7 @@ Error/RetrievingSkinny: 简要条目清单提取错误
 Error/SavingToTWEdit: 保存到 TWEdit 时，发生错误
 Error/WhileSaving: 保存时，发生错误
 Error/XMLHttpRequest: XMLHttpRequest 错误代码
+Error/ZoominTextNode: 故事视图错误：您似乎尝试与显示在自定义容器中的条目进行交互。这很可能是由于将 `$:/tags/StoryTiddlerTemplateFilter` 与开头包含文本或空格的模板一起使用引起的。请使用编译指示 `\whitespace trim`，并确保条目的全部内容都包含在单个 HTML 元素中。导致此问题的文本：
 InternalJavaScriptError/Title: 内部的 JavaScript 错误
 InternalJavaScriptError/Hint: 喔，真是令人尴尬。建议刷新您的浏览器，重新启动 TiddlyWiki
 LayoutSwitcher/Description: 打开布局切换器

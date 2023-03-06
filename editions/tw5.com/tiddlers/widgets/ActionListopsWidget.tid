@@ -1,24 +1,10 @@
 caption: action-listops
 created: 20141025120850184
-list: efg hlm pqr
-modified: 20211115091121133
+modified: 20230301183438774
 myfield: 
-revision: 0
 tags: ActionWidgets Widgets
 title: ActionListopsWidget
 type: text/vnd.tiddlywiki
-
-\define .operator-rows(filter)
-<$list filter="$filter$"><tr>
-<td><$link>{{!!caption}}</$link></td>
-<td>{{!!op-purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
-<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
-</tr></$list>
-\end
-
-\define .group-heading(_)
-<tr class="doc-table-subheading"><th colspan="3" align="center">$_$</th></tr>
-\end
 
 ! Introduction
 
@@ -34,9 +20,9 @@ The ''action-listops'' widget is invisible. Any content within it is ignored.
 |$index |Optional index of a property in a [[data tiddler|DataTiddlers]] index to be manipulated as a list |
 |$filter |An optional filter expression, the output of which will be saved to the field/index being manipulated |
 |$subfilter |An optional subfilter expression, which takes the list being manipulated as input, and saves the modified list back to the field/index being manipulated |
-|$tags |An optional subfilter expression, which takes the 'tags' field of the target tiddler as input, and saves the modified list of tags back to the 'tags' field |
+|$tags |An optional subfilter expression, which takes the <<.field tags>> field of the target tiddler as input, and saves the modified list of tags back to the <<.field tags>> field |
 
-! $filter vs. $subfilter
+!! Using $filter or $subfilter
 
 Standalone use of the `$subfilter` attribute can be replaced by using a (more complicated) `$filter` attribute value.
 
@@ -49,12 +35,12 @@ For example, the items "abc" and "123" can be appended to the field `myfield` us
 The same can be achieved using the `$filter` attribute and prepending the [[Filter Run]] `[all[current]get[myfield]enlist-input[]]` to the [[Filter Expression]]:
 
 ```
-<$action-listops $field="myfield" $filter="[all[current]get[myfield]enlist-input[]] abc 123"/>
+<$action-listops $field="myfield" $filter="[enlist{!!myfield}] abc 123"/>
 ```
 
 The short form is more convenient, but the long form is useful for live-debugging complicated `$subfilter` values using the filter tab of [[$:/AdvancedSearch]]. By using [[$:/AdvancedSearch]], the [[Filter Expression]] can be tested before using ''action-listops'' to modify actual tiddler fields. For this use case, the `all[current]` portion of the expression needs to be changed to select the proper test tiddler.
 
-! $tags vs. $field + $subfilter
+!! Using $tags or $subfilter
 
 [[Tagging]] is implemented using a tiddler's 'tags' field, so appending the tags "abc" and "123" using the `$tags` attribute like this:
 
@@ -68,110 +54,53 @@ is mostly equivalent to using `$subfilter` along with "tags" for the value of `$
 <$action-listops $field="tags" $subfilter="abc 123"/>
 ```
 
-! $action-listops widget vs. $action-setfield widget
+!! Comparison to [[ActionSetFieldWidget]]
 
-The ActionSetFieldWidget replaces a field's value using `$field`/`$value` attributes. A single ActionSetFieldWidget can be used to set any number of fields by using attributes not starting with $.
+In general, ActionSetFieldWidget is better for setting multiple fields at once and for replacing the value of a field, which can also be a list. The ActionListopsWidget is better for modifying a list field based on the existing list and for using a [[Filter Expression]] to derive the value of the field.
 
-The ActionListopsWidget replaces or modifies a single field's value. The new value is generated using filters.
+The ~ActionSetFieldWidget sets the value of a field using `$field` and `$value` attribute pairs or attributes that do not start with a `$`. A single ~ActionSetFieldWidget can be used to set any number of fields of a single tiddler.
 
-The following two examples are functionally equivalent:
+The ~ActionListopsWidget replaces or modifies a single field's value using filter expressions.
+
+The following widgets are functionally equivalent:
 
 ```
 <$action-setfield $field="myfield" $value="abc 123"/>
-```
-
-```
+<$action-setfield myfield="abc 123"/>
 <$action-listops $field="myfield" $filter="abc 123"/>
 ```
+Note that <<.value "abc 123">> in the first two cases is a literal string that is assigned to the field <<.field myfield>>, but in the third case a filter expression which evaluates to the same string.
 
-In general, ActionSetFieldWidget is better for setting multiple fields at once and for replacing a field's value. The ActionListopsWidget is better for modifying a field based on the field's existing value and for using a [[Filter Expression]] to derive the value.
+!! Extended Filter Operators
 
-! Extended Filter Operators
+A number of [[Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
 
-A number of [[extended filter operators|The Extended Listops Filters]] are necessary for the manipulation of lists. These operators have been designed primarily for use in subfilter expressions whereby the modified current list is returned in place of the current list.
+!! Notes on de-duplication
 
-<table>
-<<.group-heading "Listops Operators">>
-<tr>
-<th align="left">Operator</th>
-<th align="left">Purpose</th>
-<th></th>
-</tr>
-<<.operator-rows "[tag[Filter Operators]tag[Listops Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
-</table>
+In some cases, there may occur unexpected de-duplication of lists.
 
-! Examples
+!!! Assignments to the <<.field list>> field
 
-In this example we shall populate and then clear a list in an ordinary field (myfield) of this tiddler (the default.)
+When assigning filter results to the <<.field list>> field (default), the generated list is automatically de-duplicated, so
 
-<$macrocall $name='wikitext-example-without-html'
-src="""<$button>
-<$action-listops $field="myfield" $subfilter="efg hlm pqr"/>
-Populate 'myfield'
-</$button>
-<$button>
-<$action-listops $field="myfield" $subfilter="abc xyz"/>
-Append More Items
-</$button>
-<$button>
-<$action-listops $field="myfield" $subfilter="-abc -hlm"/>
-Remove Items
-</$button>
-<$button>
-<$action-listops $field="myfield" $filter="[[]]"/>
-Clear 'myfield'
-</$button>
+```
+<$action-listops $filter="[[1]] :and[[1]]"/>
+```
+will result in the <<.field list>> field of the current tiddler containing the string <<.value 1>>, but not <<.value "1 1">>.
 
-<$list filter="[list[!!myfield]]">
+!!! Input to the subfilter expression
 
-</$list>"""/>
-
----
-In this example we shall append and remove items from a list in an ordinary field (myfield) of this tiddler (the default) and sort the resultant list. We shall then remove some of the appended items and sort the resulting list in reverse order.
+The input to the subfilter expression in the `$subfilter` attribute is also de-duplicated. If you rely on lists containing duplicates, consider using this alternative using the `$filter` attribute:
 
 <$macrocall $name='wikitext-example-without-html'
 src="""<$button>
-<$action-listops $field="myfield" $subfilter="-efg ijk xyz [[this is a title]] +[sort[]]"/>
-Mangle List
-</$button>
-<$button>
-<$action-listops $field="myfield" $subfilter="-xyz -[[this is a title]] +[!sort[]]"/>
-Unmangle List
+<$action-listops $field="myfield" $filter="[enlist:raw{!!myfield}] :all[[abc]]" />
+Add 'abc' to 'myfield'
 </$button>
 
-<$list filter="[list[!!myfield]]">
+<$list filter="[enlist:raw{!!myfield}]" template="$:/core/ui/ListItemTemplate" />
+"""/>
+The [[enlist Operator]] with `raw` suffix will enlist the list saved in <<.field myfield>> of the current tiddler without de-duplication, while e.g. the [[list Operator]] will always de-duplicate. The widget then adds the item <<.value abc>> -- whether or not it is already included in the list -- and replaces the original list in <<.field myfield>>.
 
-</$list>"""/>
 
----
-In this example we shall append a few tags to the 'tags' field of this tiddler (the default.) We shall then remove some of the appended tags. 
-
-<$macrocall $name='wikitext-example-without-html'
-src="""<$button>
-<$action-listops $tags="+[append{Days of the Week!!short}] $:/tag1 $:/tag2 $:/tag3"/>
-Populate 'tags'
-</$button>
-<$button>
-<$action-listops $tags="+[!remove:2{!!tags}]"/>
-Remove Last Two Tags
-</$button>
-<$button>
-<$action-listops $tags="+[!prefix[$:/]]"/>
-Remove System Tags
-</$button>
-<$button>
-<$action-listops $tags="-Mon -Tue"/>
-Remove Mon and Tue
-</$button>
-<$button>
-<$action-listops $tags="+[prefix[$:/]] ActionWidgets Widgets"/>
-Remove User Tags
-</$button>
-<$button>
-<$action-listops $tags="+[[]] ActionWidgets Widgets"/>
-Clear Tags
-</$button>
-
-<$list filter="[list[!!tags]]">
-
-</$list>"""/>
+! [[Examples|ActionListopsWidget (Examples)]]

@@ -1,12 +1,12 @@
 created: 20140418142957325
-modified: 20221121131150032
+modified: 20230226144359284
 tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
 
-The default representation of dates is a compact string such as `20211002153802059`. For example, the `created` and `modified` fields are stored like this.
+The default representation of dates is a compact string such as <<.value 20211002153802059>>. The associated template is `[UTC]YYYY0MM0DD0hh0mm0ss0XXX`. For example, the <<.field created>> and <<.field modified>> fields are stored like this.
 
-The display format for this string can be controlled with a template. For example, transcluding the `modified` field automatically applies a template to display the date as `Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)`. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
+The display format for this string can be controlled with a template. For example, transcluding the <<.field modified>> field automatically applies a template to display the date as <<.value "Sat Oct 02 2021 17:40:50 GMT+0200 (Central European Summer Time)">>. A few widgets and filter operators allow you to manually specify a template, for example the ViewWidget:
 
 `<$view field=modified format=date template="DDth mmm YYYY 0hh:0mm:0ss" />`
 
@@ -52,7 +52,7 @@ The date string is processed with the following substitutions:
 
 Note that other text is passed through unchanged, allowing commas, colons or other separators to be used.
 
-The `{era:BCE||CE}` notation can specify different strings for years that are negative, zero or positive. For example `{era:BC|Z|AD}` would display `BC` for negative years, `AD` for positive years, and `Z` for year zero.
+The `{era:BCE||CE}` notation can specify different strings for years that are negative, zero or positive. For example `{era:BC|Z|AD}` would display <<.value BC>> for negative years, <<.value AD>> for positive years, and <<.value Z>> for year zero.
 
 ! Examples
 
@@ -61,7 +61,7 @@ The `{era:BCE||CE}` notation can specify different strings for years that are ne
 |`DDth MMM \M\M\M YYYY` |16th February MMM 2011 |
 |`DDth mmm YYYY 0hh:0mm:0ss` |16th Feb 2011 11:38:42 |
 
-!! Using `TIMESTAMP` to calculate time difference
+!! Using <<.value TIMESTAMP>> to calculate time difference
 
 You can calculate the difference between two dates by doing the following:
 
@@ -71,8 +71,9 @@ You can calculate the difference between two dates by doing the following:
 
 Here is an example of calculating the number of days that passed between creation and last modification of current tiddler:
 
-* Fields `modified` and `created` contain their respective datetimes in the format `[UTC]YYYY0MM0DD0hh0mm0ssXXX` so convert them to timestamps
-* `86400000` is the number of milliseconds in a day (1000 * 60 * 60 * 24)
+* Convert the <<.field created>> and <<.field modified>> fields to timestamps
+* Divide their difference by <<.value 86400000>> which is the number of milliseconds in a day
+** 1000 milliseconds per second × 60 seconds per minute × 60 minutes per hour × 24 hours per day = 86,400,000 milliseconds per day
 
 <$macrocall $name=".example" n="0" eg="""<$let
 	timestamp-modified={{{ [{!!modified}format:date[TIMESTAMP]] }}}
