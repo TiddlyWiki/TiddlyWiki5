@@ -1,5 +1,5 @@
 {
-	"fields": [
+	"columns": [
 		{"name": "address", "caption": "Address", "type": "string"},
 		{"name": "broker", "caption": "Broker", "type": "string"},
 		{"name": "city", "caption": "City", "type": "string"},
@@ -9,6 +9,12 @@
 		{"name": "salesagent", "caption": "Sales Agent", "type": "string"},
 		{"name": "state", "caption": "State", "type": "string"},
 		{"name": "title", "caption": "Title", "type": "string"},
-		{"name": "zipcode", "caption": "Zip Code", "type": "string"}
-	]
+		{"name": "zipcode", "caption": "Zip Code", "type": "string"},
+		{"name": "census-province", "caption": "Census Province", "type": "string", "display": "[<census-data>jsonget[0],[prov_name_en],[0]]"},
+		{"name": "census-division", "caption": "Census Division", "type": "string", "display": "[<census-data>jsonget[0],[cd_name_en],[0]]"},
+		{"name": "census-subdivision", "caption": "Census Subdivision", "type": "string", "display": "[<census-data>jsonget[0],[csd_name_en],[0]]"}
+	],
+	"variables": {
+		"census-data": "[<rowTiddler>] :map[geopoint{!!long},{!!lat}geolookup{$:/plugins/geospatial/demo/features/canada-census-subdivision-millesime}]"
+	}
 }

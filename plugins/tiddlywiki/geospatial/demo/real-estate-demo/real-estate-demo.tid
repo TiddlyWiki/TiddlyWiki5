@@ -2,19 +2,22 @@ title: $:/plugins/tiddlywiki/geospatial/demo/real-estate-demo
 caption: Real Estate Demo
 tags: $:/tags/GeospatialDemo
 
+\define default-display-filter() [<currentTiddler>get<fieldname>]
+\define default-limit() 10
+
 This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (identified by the tag <<tag "$:/tags/GeoMarker">>) viewed as both a map and a table.
 
 <$let
 	schema={{$:/plugins/tiddlywiki/geospatial/demo/real-estate-demo/schema}}
 >
 	<div>
-		<$list filter="[<schema>jsonindexes[fields]]" variable="index">
+		<$list filter="[<schema>jsonindexes[columns]]" variable="index">
 			<$let
-				config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/fields/]] }}}
+				config={{{ [<schema>jsonget[columns],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/columns/]] }}}
 			>
 				<div>
 					<$checkbox tiddler=<<config>> field="visible" checked="yes" unchecked="no" default="yes">
-						<$text text={{{ [<schema>jsonget[fields],<index>,[caption]] }}}/>
+						<$text text={{{ [<schema>jsonget[columns],<index>,[caption]] }}}/>
 					</$checkbox>
 				</div>
 			</$let>
@@ -23,9 +26,9 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 	<div>
 		Sorting by
 		<$select tiddler="$:/config/geospatial/demo/real-estate-demo/sort-field" default="title">
-			<$list filter="[<schema>jsonindexes[fields]]" variable="index">
-				<option value={{{ [<schema>jsonget[fields],<index>,[name]] }}}>
-					<$text text={{{ [<schema>jsonget[fields],<index>,[caption]] }}}/>
+			<$list filter="[<schema>jsonindexes[columns]]" variable="index">
+				<option value={{{ [<schema>jsonget[columns],<index>,[name]] }}}>
+					<$text text={{{ [<schema>jsonget[columns],<index>,[caption]] }}}/>
 				</option>
 			</$list>
 		</$select>
@@ -42,13 +45,13 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 	<table>
 		<thead>
 			<tr>
-				<$list filter="[<schema>jsonindexes[fields]]" variable="index">
+				<$list filter="[<schema>jsonindexes[columns]]" variable="index">
 					<$let
-						config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/fields/]] }}}
+						config={{{ [<schema>jsonget[columns],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/columns/]] }}}
 					>
 						<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
 							<th>
-								<$text text={{{ [<schema>jsonget[fields],<index>,[caption]] }}}/>
+								<$text text={{{ [<schema>jsonget[columns],<index>,[caption]] }}}/>
 							</th>
 						</$list>
 					</$let>
@@ -59,26 +62,36 @@ This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (ide
 			<$let
 				sortField={{{ [[$:/config/geospatial/demo/real-estate-demo/sort-field]get[text]else[title]] }}}
 				sortOrder={{{ [[$:/config/geospatial/demo/real-estate-demo/sort-order]get[text]else[normal]] }}}
-				limit={{{ [[$:/config/geospatial/demo/real-estate-demo/limit]get[text]else[100]] }}}
+				limit={{{ [[$:/config/geospatial/demo/real-estate-demo/limit]get[text]] :else[<default-limit>] }}}
 			>
 				<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]search:*{$:/config/geospatial/demo/real-estate-demo/search}nsort<sortField>order<sortOrder>limit<limit>]">
-					<tr>
-						<$list filter="[<schema>jsonindexes[fields]]" variable="index">
-							<$let
-								config={{{ [<schema>jsonget[fields],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/fields/]] }}}
-							>
-								<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
-									<td>
-										<$let
-											fieldname={{{ [<schema>jsonget[fields],<index>,[name]] }}}
-										>
-											<$text text={{{ [<currentTiddler>get<fieldname>] }}}/>
-										</$let>
-									</td>
+					<$let
+						rowTiddler=<<currentTiddler>>
+					>
+						<$setmultiplevariables
+							$names="[<schema>jsonindexes[variables]sort[]]"
+							$values="[<schema>jsonindexes[variables]sort[]] :map[<schema>jsonget[variables],<currentTiddler>] :map[subfilter<currentTiddler>]"
+						>
+							<tr>
+								<$list filter="[<schema>jsonindexes[columns]]" variable="index">
+									<$let
+										config={{{ [<schema>jsonget[columns],<index>,[name]addprefix[$:/config/geospatial/demo/real-estate-demo/columns/]] }}}
+									>
+										<$list filter="[<config>get[visible]else[yes]match[yes]]" variable="ignore">
+											<td>
+												<$let
+													fieldname={{{ [<schema>jsonget[columns],<index>,[name]] }}}
+													displayFilter={{{ [<schema>jsonget[columns],<index>,[display]] :else[<default-display-filter>] }}}
+												>
+													<$text text={{{ [subfilter<displayFilter>] }}}/>
+												</$let>
+											</td>
+										</$list>
+									</$let>
 								</$list>
-							</$let>
-						</$list>
-					</tr>
+							</tr>
+						</$setmultiplevariables>
+					</$let>
 				</$list>
 			</$let>
 		</tbody>
