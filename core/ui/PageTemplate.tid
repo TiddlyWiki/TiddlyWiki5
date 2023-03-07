@@ -19,6 +19,10 @@ icon: $:/core/images/layout-button
 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
+<$genesis $type="$messagecatcher" 
+          $names="[all[shadows+tiddlers]tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[message]addprefix[$]]"
+          $values="[all[shadows+tiddlers]tag[$:/tags/PageTemplateMessageHandler]!is[draft]has[message]get[text]]">
+
 <$dropzone enable=<<tv-enable-drag-and-drop>>>
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
@@ -28,6 +32,8 @@ icon: $:/core/images/layout-button
 </$list>
 
 </$dropzone>
+
+</$genesis>
 
 </$navigator>
 

@@ -1,0 +1,7 @@
+message: tm-delete-tiddler
+tags: $:/tags/PageTemplateMessageHandler
+title: $:/core/ui/PageTemplate/MessageHandler/tm-delete-tiddler
+
+\import [[$:/core/ui/PageTemplate/MessageHandler/tm-close-tiddler]]
+
+<<navigate-and-forward>>
