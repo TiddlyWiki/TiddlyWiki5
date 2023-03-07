@@ -1,7 +1,7 @@
 caption: Bilder
 created: 20131205160221762
 creator: pmario
-modified: 20140921170652909
+modified: 20230307081713229
 modifier: pmario
 tags: WikiText
 title: Bilder in WikiText
@@ -25,7 +25,7 @@ oder
 
 Wenn die Bildquelle der Titel eines existierenden Tiddlers ist, dann wird dieser direkt angezeigt. Ansonsten wird die Quelle als URL angesehen und ein HTML `<img>` Element wird erzeugt. Das `src` Attribut wird auf die [[URL]] gesetzt. 
 
-Ein [[Tooltip]] kann ebenfalls angegeben werden:
+Ein Tooltip kann ebenfalls angegeben werden:
 
 ```
 [img[Ich bin der Tooltip text|Motovun Jack.jpg]]
@@ -33,7 +33,7 @@ Ein [[Tooltip]] kann ebenfalls angegeben werden:
 
 [img width=100 [Ich bin der Tooltip text|Motovun Jack.jpg]]
 
-Attribute wie zB: CSS Klassen oder die Höhe und Breite können ebenfalls angegeben werden. 
+Attribute wie z.B: CSS Klassen oder die Höhe und Breite können ebenfalls angegeben werden. 
 
 ```
 [img width=64 [Motovun Jack.jpg]]
