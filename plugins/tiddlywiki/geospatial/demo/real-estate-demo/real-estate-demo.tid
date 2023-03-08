@@ -3,7 +3,7 @@ caption: Real Estate Demo
 tags: $:/tags/GeospatialDemo
 
 \define default-display-filter() [<currentTiddler>get<fieldname>]
-\define default-limit() 10
+\define default-limit() 100
 
 This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (identified by the tag <<tag "$:/tags/GeoMarker">>) viewed as both a map and a table.
 
