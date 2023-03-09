@@ -1941,6 +1941,9 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				} else {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
+						case "subdirectories":
+							value = path.relative(rootPath, filename).split('/').slice(0, -1);
+							break;
 						case "filepath":
 							value = path.relative(rootPath, filename);
 							break;
