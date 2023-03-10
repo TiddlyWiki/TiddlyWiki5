@@ -107,7 +107,7 @@ function diffPartsToChars(text1,text2,mode) {
         var lineEnd = -1;
         var lineArrayLength = lineArray.length,
             regexpResult;
-        const searchRegexp = /\W+/g;
+        var searchRegexp = /\W+/g;
         while(lineEnd < text.length - 1) {
 	        if(mode === "words") {
                 regexpResult = searchRegexp.exec(text);
