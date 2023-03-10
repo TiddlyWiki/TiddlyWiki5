@@ -68,6 +68,19 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 				contextVariables[name.substr(CONTEXT_VARIABLE_PARAMETER_PREFIX.length)] = value;
 			}
 		});
+		// Set the request tracker tiddler
+		var requestTrackerTitle = this.wiki.generateNewTitle("$:/temp/HttpRequest");
+		this.wiki.addTiddler({
+			title: requestTrackerTitle,
+			tags: "$:/tags/HttpRequest",
+			text: JSON.stringify({
+				url: url,
+				type: method,
+				status: "inprogress",
+				headers: requestHeaders,
+				data: paramObject.body
+			})
+		});
 		$tw.utils.httpRequest({
 			url: url,
 			type: method,
@@ -91,6 +104,10 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 					data: (data || "").toString(),
 					headers: JSON.stringify(headers)
 				};
+				// Update the request tracker tiddler
+				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
+					status: success,
+				}));
 				$tw.rootWidget.invokeActionString(completionActions,undefined,undefined,$tw.utils.extend({},contextVariables,results));
 				// console.log("Back!",err,data,xhr);
 			},
