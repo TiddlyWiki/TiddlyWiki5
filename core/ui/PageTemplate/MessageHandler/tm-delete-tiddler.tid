@@ -2,6 +2,21 @@ message: tm-delete-tiddler
 tags: $:/tags/PageTemplateMessageHandler
 title: $:/core/ui/PageTemplate/MessageHandler/tm-delete-tiddler
 
-\import [[$:/core/ui/PageTemplate/MessageHandler/tm-close-tiddler]]
+\define navigate-and-forward()
+\define tv-action-refresh-policy() always
+<$let targetTiddler={{{ [<event-param>!is[blank]else<event-tiddlerTitle>] }}} history={{{ [<tv-history-list>get[text]] }}}>
+    <!-- forward the original message -->
+    <$action-sendmessage $message=<<event-type>> $param=<<targetTiddler>> />
+    <!-- only go back to previous tiddler if delete was not canceled -->
+    <$list filter="[<targetTiddler>!is[tiddler]]" variable="void">
+        <$list filter="[<tv-history-list>get[current-tiddler]match<targetTiddler>]" variable="void">
+            <!-- go the the last tiddler in history which is also currently open, and if none are found then to the previous / next tiddler in the story -->
+            <$let previousItem={{{ [<history>jsonindexes[]] :map[<history>jsonget<currentTiddler>,[title]] :intersection[list<tv-story-list>] +[!match<targetTiddler>reverse[]first[]] :else[list<tv-story-list>before<targetTiddler>] :else[list<tv-story-list>after<targetTiddler>] }}}>
+                <$action-navigate $to=<<previousItem>> />
+            </$let>
+        </$list>
+	  </$list>
+</$let>
+\end
 
 <<navigate-and-forward>>
