@@ -46,16 +46,20 @@ GeomapWidget.prototype.render = function(parent,nextSibling) {
 
 GeomapWidget.prototype.renderMap = function(domNode) {
 	var self = this;
-	// Create and position the map
-	const map = $tw.Leaflet.map(domNode).setView([51.505, -0.09], 13);
-	map.fitWorld();
+	// Create the map
+	this.map = $tw.Leaflet.map(domNode);
+	// Set the position
+	if(!this.setMapView()) {
+		// Default to showing the whole world
+		this.map.fitWorld();
+	}
 	// Setup the tile layer
 	const tiles = $tw.Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	}).addTo(map);
+	}).addTo(this.map);
 	// Disable Leaflet attribution
-	map.attributionControl.setPrefix("");
+	this.map.attributionControl.setPrefix("");
 	// Create default icon
 	const iconProportions = 365/560,
 		iconHeight = 50;
@@ -66,7 +70,25 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		popupAnchor:  [0, -iconHeight] // Position of the popup anchor relative to the icon anchor
 	});
 	// Add scale
-	$tw.Leaflet.control.scale().addTo(map);
+	$tw.Leaflet.control.scale().addTo(this.map);
+	// Listen for pan and zoom events
+	this.map.on("moveend zoomend",function(event) {
+		if(self.geomapStateTitle) {
+			var c = self.map.getCenter(),
+				lat = "" + c.lat,
+				long = "" + c.lng,
+				zoom = "" + self.map.getZoom(),
+				tiddler = self.wiki.getTiddler(self.geomapStateTitle);
+			if(!tiddler || tiddler.fields.lat !== lat || tiddler.fields.long !== long || tiddler.fields.zoom !== zoom) {
+				self.wiki.addTiddler(new $tw.Tiddler({
+					title: self.geomapStateTitle,
+					lat: lat,
+					long: long,
+					zoom: zoom
+				}));
+			}
+		}
+	});
 	// Track the geolayers filter
 	this.trackerGeoLayersFilter = new FilterTracker({
 		wiki: this.wiki,
@@ -80,7 +102,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 							color: (tiddler && tiddler.getFieldString("color")) || "yellow"
 						}
 					}
-				}).addTo(map);
+				}).addTo(self.map);
 			return layer;
 		},
 		leave: function(title,tiddler,data) {
@@ -91,7 +113,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	var markers = $tw.Leaflet.markerClusterGroup({
 		maxClusterRadius: 40
 	});
-	map.addLayer(markers);
+	this.map.addLayer(markers);
 	this.trackerGeoMarkersFilter = new FilterTracker({
 		wiki: this.wiki,
 		widget: this,
@@ -119,9 +141,22 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 };
 
 /*
+Set the map center and zoom level from the values in the state tiddler. Returns true if the map view was successfully set
+*/
+GeomapWidget.prototype.setMapView = function() {
+	var stateTiddler = this.geomapStateTitle && this.wiki.getTiddler(this.geomapStateTitle);
+	if(stateTiddler) {
+		this.map.setView([$tw.utils.parseNumber(stateTiddler.fields.lat,0),$tw.utils.parseNumber(stateTiddler.fields.long,0)], $tw.utils.parseNumber(stateTiddler.fields.zoom,0));
+		return true;
+	}
+	return false;
+};
+
+/*
 Compute the internal state of the widget
 */
 GeomapWidget.prototype.execute = function() {
+	this.geomapStateTitle = this.getAttribute("state");
 	this.geomapLayerFilter = this.getAttribute("layers");
 	this.geomapMarkerFilter = this.getAttribute("markers");
 };
@@ -135,6 +170,13 @@ GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.layers || changedAttributes.markers) {
 		this.refreshSelf();
 		return true;
+	}
+	// Set zoom and position if the state tiddler has changed
+	if(changedAttributes.state) {
+		this.geomapStateTitle = this.getAttribute("state");
+	}
+	if(changedAttributes.state || changedTiddlers[this.geomapStateTitle]) {
+		this.setMapView();
 	}
 	// Check whether the layers or markers need updating
 	this.trackerGeoLayersFilter.refresh(changedTiddlers);

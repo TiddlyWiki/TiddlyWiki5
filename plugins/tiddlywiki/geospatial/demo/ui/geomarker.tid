@@ -65,6 +65,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
 
 <$geomap
 	markers="[<currentTiddler>]"
+	state=<<qualify "$:/state/demo-map">>
 />
 
 !! Distance to other markers

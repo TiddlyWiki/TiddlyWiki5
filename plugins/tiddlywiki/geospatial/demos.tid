@@ -12,6 +12,7 @@ title: $:/plugins/tiddlywiki/geospatial/demos
 <$geomap
 	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
 	layers="[all[tiddlers+shadows]tag[$:/tags/GeoLayer]]"
+	state=<<qualify "$:/state/demo-map">>
 />
 
 <<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/markers">>

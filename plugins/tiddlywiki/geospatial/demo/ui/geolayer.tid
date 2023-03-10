@@ -13,6 +13,7 @@ title: $:/plugins/tiddlywiki/geospatial/demo/ui/geolayer
 
 <$geomap
 	layers="[<currentTiddler>]"
+	state=<<qualify "$:/state/demo-map">>
 />
 
 !! Intersect with other layers
