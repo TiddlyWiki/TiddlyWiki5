@@ -2,6 +2,7 @@ created: 20150103184022184
 modified: 20150119220342000
 title: $:/plugins/tiddlywiki/railroad/syntax
 
+
 The railroad widget uses a special notation to construct the components defined below.
 
 `x` and `y` here stand for any component.
@@ -12,8 +13,27 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 
 ; sequence
 : <$railroad text=""" ["<-"] {x} ["->"] """/>
+
 * A sequence of components
 * The `<-` and `->` delimiters allow you to force a single component to be treated as a sequence. This is occasionally useful for spacing a diagram out
+
+examples
+
+<<<
+
+```
+x y z			sequence
+```
+<$railroad text=""" x y z """/>
+
+```
+<-x y z->		explicit sequence
+```
+
+<$railroad text=""" <- x y z -> """/>
+
+<<<
+
 
 ---
 
@@ -22,6 +42,24 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 * A component that can be omitted
 * The colon makes `x` appear straight ahead
 
+examples
+
+<<<
+
+```
+[:x]			optional, normally included
+```
+<$railroad text=""" [:x] """/>
+
+```
+[x]				optional, normally omitted
+```
+
+<$railroad text=""" [x] """/>
+
+<<<
+
+
 ---
 
 ; repeated
@@ -29,11 +67,61 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 * A list of one or more `x`
 * The `+` suffix adds `y` as a separator between each `x` and the next
 
+examples
+
+<<<
+
+```
+{x}				one or more
+```
+<$railroad text=""" {x} """/>
+
+```
+{x +","}		one or more, comma-separated
+```
+
+<$railroad text=""" {x +","} """/>
+
+<<<
+
+
 ---
 
 ; optional repeated
 : <$railroad text=""" "[{" [":"] x [:"+" y] "}]" """/>
 * An optional list of `x`, i.e. a list of zero or more `x`
+
+examples
+
+<<<
+
+```
+[{:x}]			zero or more, normally included
+```
+
+<$railroad text=""" [{:x}] """/>
+
+```
+[{:x +","}]		zero or more, comma-separated, normally included
+```
+
+<$railroad text=""" [{:x +","}] """/>
+
+```
+[{x}]			zero or more, normally omitted
+```
+
+<$railroad text=""" [{x}] """/>
+
+```
+[{x +","}]		zero or more, comma-separated, normally omitted
+```
+
+<$railroad text=""" [{x +","}] """/>
+
+<<<
+
+
 
 ---
 
@@ -42,6 +130,25 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 * A set of alternatives
 * The colon indicates which branch appears straight ahead. By default, it's the first branch
 
+examples
+
+<<<
+
+```
+(x|y|z)			alternatives
+```
+
+<$railroad text=""" (x|y|z) """/>
+
+```
+(x|:y|z)		alternatives, normally y
+```
+
+<$railroad text=""" (x|:y|z) """/>
+
+<<<
+
+
 ---
 
 ; string / terminal
@@ -49,11 +156,37 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 * A literal or terminal component
 * This follows the normal ~TiddlyWiki rules for quoted strings
 
+examples
+
+<<<
+
+```
+"x"				terminal
+```
+
+<$railroad text=""" "x" """/>
+
+<<<
+
+
 ---
 
 ; nonterminal
 : <$railroad text=""" (name | "<" string ">") """/>
 * A nonterminal component, i.e. the name of another diagram
+
+examples
+
+<<<
+
+```
+<"x">			nonterminal
+```
+
+<$railroad text=""" <"x"> """/>
+
+<<<
+
 
 ---
 
@@ -61,11 +194,37 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 : <$railroad text=""" "/" string "/" """/>
 * A comment
 
+examples
+
+<<<
+
+```
+/ "comment" /		comment
+```
+
+<$railroad text=""" / "comment" / """/>
+
+<<<
+
+
 ---
 
 ; dummy
 : <$railroad text=""" "-" """/>
 * The absence of a component
+
+examples
+
+<<<
+
+```
+-		dummy
+```
+
+<$railroad text=""" - """/>
+
+<<<
+
 
 ---
 
@@ -73,11 +232,40 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 : <$railroad text=""" "[[" x "|" (name|string) "]]" """/>
 * A link to the tiddler title or URI given by the string or name
 
+examples
+
+<<<
+
+```
+[[x|"tiddler"]]		link
+```
+
+<$railroad text=""" [[x|"tiddler"]] """/>
+
+<<<
+
+
 ---
 
 ; transclusion
 : <$railroad text=""" "{{" (name|string) "}}" """/>
 * Treats the content of another tiddler as diagram syntax and transcludes it into the current diagram
+
+examples
+
+<<<
+
+```
+{{"$:/plugins/tiddlywiki/railroad/example-transclusion"}}		transclusion
+
+// "railroad transclusion example" text		<- text in the tidlder
+
+```
+
+<$railroad text=""" {{ "$:/plugins/tiddlywiki/railroad/example-transclusion" }} """/>
+
+<<<
+
 
 ---
 
@@ -86,14 +274,76 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 * Controls whether repeat paths have an arrow on them
 * Can be toggled on and off in mid-diagram, if desired
 
+examples
+
+<<<
+```
+<$railroad text="""
+\arrow yes
+[{:x}]
+"""/>
+
+```
+
+<$railroad text="""\arrow yes [{:x}] """/>
+
+```
+<$railroad text="""
+\arrow no
+[{:x}]
+"""/>
+```
+
+<$railroad text="""\arrow no [{:x}] """/>
+
+<<<
+
+
 ---
 
 ; debug pragma
 : <$railroad text=""" "\debug" """/>
 * Causes the diagram to display its parse tree
 
+examples
+
+<<<
+
+```
+\debug
+x
+```
+
+<$railroad text="""\debug x """/>
+
+<<<
+
+
 ---
 
 ; start/end pragma
 : <$railroad text=""" ("\start" |: "\end") ("none" |: "single" | "double") """/>
 * Controls the style of the diagram's startpoint or endpoint
+examples
+
+<<<
+
+```
+\start none x
+```
+
+<$railroad text=""" \start none x """/>
+
+```
+\start double 
+\end double
+ x
+```
+
+<$railroad text=""" \start double 
+\end double
+x
+"""/>
+
+<<<
+

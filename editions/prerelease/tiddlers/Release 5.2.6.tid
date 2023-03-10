@@ -9,6 +9,16 @@ type: text/vnd.tiddlywiki
 
 ! Major Improvements
 
+!! Improved Markdown Plugin
+
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6528">> the [[Markdown Plugin]] to use the newer and better maintained [[markdown-it|https://github.com/markdown-it/markdown-it]] library. The previous Markdown plugin remains available as "markdown-legacy"
+
+!! Better Handling of Loss of Network Connectivity with Client Server Configuration
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7169">> integration between the [[BrowserStorage Plugin]] and the client-server configuration to allow changes to be made while offline and then later resynchronised with the server
+
+!! New Diff-Match-Patch Primitives
+
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7290">> three new operators exposing previously hidden features of the [[Diff-Match-Patch|https://neil.fraser.name/software/diff_match_patch]] library that is integrated with TiddlyWiki:
 ** new [[levenshtein Operator]] to calculate the similarity of two strings as the number of characters that need to be inserted, deleted or modified in order to turn one into the other
 ** new [[makepatches Operator]] and [[applypatches Operator]] that can be used to make and apply patches that represent the difference between two different texts. See the [[examples|makepatches and applypatches Operator (Examples)]]
@@ -23,8 +33,6 @@ Improvements to the following translations:
 
 ! Plugin Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7169">> integration between the [[BrowserStorage Plugin]] and the client-server configuration to allow changes to be made while offline and then later resynchronised with the server
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6528">> the [[Markdown Plugin]] to use the newer and better maintained [[markdown-it|https://github.com/markdown-it/markdown-it]] library. The previous Markdown plugin remains available as "markdown-legacy"
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7176">> [[Innerwiki Plugin]] to allow the `<$data>` widget to override existing tiddler fields
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7207">>, <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/c39ef398bffae12c0ed7324d9b6d9d29f0f2f9ff">> and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/8f7441f296351a4dd0852c3c782f8874d398e052">> problem preventing [[Share Plugin]] from working properly
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/524cee1489f260375cac8cfe878fdc5942a4596e">> [[XLSX Plugin|XLSX Utilities Edition]] to handle importing numeric fields

@@ -1,7 +1,7 @@
 caption: Makros
 created: 20131205160746466
 creator: pmario
-modified: 20140922124415476
+modified: 20230307080132949
 modifier: ChrisK
 tags: WikiText
 title: Makros in WikiText
@@ -15,7 +15,7 @@ Hallo, Ich bin $name$ und lebe in $adresse$
 Hallo, Ich bin $name$ und würde gerne mal wieder nach $adresse$ fahren:)
 \end
 
-!! Makros Definieren
+!! Makros definieren
 
 !!! Für die Ungeduldigen
 
@@ -76,7 +76,7 @@ Für einzeilige Makros kann die `\end` Markierung entfallen!
 
 * Makros können mit dem ImportVariablesWidget importiert werden. (Für geübte Anwender)
 
-!! Makros Verwenden
+!! Makros verwenden
 
 ```
 <<meinErstesMakro>>
