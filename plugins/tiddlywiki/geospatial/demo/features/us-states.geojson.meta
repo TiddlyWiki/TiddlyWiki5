@@ -1,0 +1,5 @@
+title: $:/plugins/geospatial/demo/features/us-states
+caption: US State Boundaries
+type: application/json
+tags: $:/tags/GeoLayer
+color: #88f
