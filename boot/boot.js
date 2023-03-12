@@ -1542,6 +1542,8 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	this.addTiddler(new $tw.Tiddler({title: titleReportTiddler, text: report.join("\n\n")}));
 	// Set $:/DefaultTiddlers to point to our report
 	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
+	// Switch to the safe mode layout
+	this.addTiddler({title: "$:/layout", text: "$:/core/ui/SafeLayout"});
 };
 
 /*

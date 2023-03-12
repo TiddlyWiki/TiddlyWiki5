@@ -214,7 +214,7 @@ function updateLocationHash(options) {
 			break;
 	}
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
-	if($tw.utils.getLocationHash() !== $tw.locationHash) {
+	if($tw.utils.getLocationHash() !== $tw.locationHash && !$tw.safeMode) {
 		if(options.updateHistory === "yes") {
 			// Assign the location hash so that history is updated
 			window.location.hash = $tw.locationHash;
