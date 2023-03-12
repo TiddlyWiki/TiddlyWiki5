@@ -13,3 +13,8 @@ caption: {{$:/language/Manager/Item/Tools}}
 {{$:/core/images/edit-button}}&#32;edit
 </$button>
 </p>
+<p>
+<$button message="tm-delete-tiddler" param=<<currentTiddler>>>
+{{$:/core/images/delete-button}}&#32;delete
+</$button>
+</p>
