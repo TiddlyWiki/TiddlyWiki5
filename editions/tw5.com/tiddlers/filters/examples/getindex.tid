@@ -1,8 +1,19 @@
 created: 20150203140000000
-modified: 20170608150301791
+modified: 20230309180501044
 tags: [[getindex Operator]] [[Operator Examples]]
 title: getindex Operator (Examples)
 type: text/vnd.tiddlywiki
 
-<<.operator-example 1 "[[$:/palettes/Vanilla]getindex[background]]" "returns the value at index ''background'' of the [[DataTiddler|DataTiddlers]] [[$:/palettes/Vanilla]]">>
-<<.operator-example 2 "[all[shadows+tiddlers]tag[$:/tags/Palette]getindex[background]]" "returns all background colors defined in any of the ColourPalettes">>
+<<.operator-example 1 "[[$:/palettes/Vanilla]getindex[background]]" "returns the value of property <<.value background>> of the [[DataTiddler|DataTiddlers]] [[$:/palettes/Vanilla]]">>
+
+<<.operator-example 2 "[all[shadows+tiddlers]tag[$:/tags/Palette]getindex[background]]" "returns all background colors defined in any of the ColourPalettes (notice the duplicates in the resulting list)">>
+
+<<.tip """If a data tiddler contains a property with an empty value, the empty string is not appended to the results.""">>
+
+<<.operator-example 3 "[[ListopsData]getindex[DataIndex]]" "the empty value of the property <<.field ~DataIndex>> in [[ListopsData]] is not returned by the <<.olink getindex>> operator">>
+
+<<.operator-example 4 "[[ListopsData]] :filter[has:index[DataIndex]] :map[getindex[DataIndex]]" "also returns the empty string">>
+The above example works by first using the [[Filter Filter Run Prefix]] to only select titles that have the property <<.field ~DataIndex>> and then using the [[Map Filter Run Prefix]] to replace those titles with their value of that property.  The [[Map Filter Run Prefix]] outputs an empty string when its filter run returns an empty [[selection|Title Selection]].
+
+<<.operator-example 5 "[[$:/palettes/Vanilla]indexes[]] :filter[[$:/palettes/Vanilla]getindex<currentTiddler>count[]compare:number:eq[0]]" "returns those colors in [[$:/palettes/Vanilla]] which are defined, but have no value assigned">>
+In the above example, <<.olink count>> is used to check if <<.olink getindex>> returns a result (i.e. the corresponding property has a value) or not.

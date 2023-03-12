@@ -1,9 +1,9 @@
 caption: has
 created: 20140410103123179
-modified: 20190518145446047
+modified: 20230306143207920
 op-input: a [[selection of titles|Title Selection]]
-op-neg-output: ''without suffix''<br>&raquo; those input tiddlers in which field <<.place F>> does <<.em not>> exist or has an empty value<br>''suffix `field`''<br>&raquo; those input tiddlers in which field <<.place F>> does <<.em not>> exist<br>''suffix `index`''<br>&raquo; those input tiddlers in which index <<.place F>> does <<.em not>> exist
-op-output: ''without suffix''<br>&raquo; those input tiddlers in which field <<.place F>> has a non-empty value<br>''suffix `field`''<br>&raquo; those input tiddlers in which field <<.place F>> exists
+op-neg-output: ''without suffix''<br>&raquo; those input tiddlers in which field <<.place F>> does <<.em not>> exist or has an empty value<br>''suffix `field`''<br>&raquo; those input tiddlers in which field <<.place F>> does <<.em not>> exist<br>''suffix `index`''<br>&raquo; those input data tiddlers in which index <<.place F>> does <<.em not>> exist
+op-output: ''without suffix''<br>&raquo; those input tiddlers in which field <<.place F>> has a non-empty value<br>''suffix `field`''<br>&raquo; those input tiddlers in which field <<.place F>> exists<br>''suffix `index`''<br>&raquo; those input data tiddlers in which index <<.place F>> exists
 op-parameter: the name of a [[field|TiddlerFields]]<br>''suffix `index`''<br>&raquo; those input tiddlers in which index <<.place F>> exists
 op-parameter: the name of a [[field|TiddlerFields]] or, optionally an [[index|TextReference]]
 op-parameter-name: F

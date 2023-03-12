@@ -32,7 +32,7 @@ For example, the items "abc" and "123" can be appended to the field `myfield` us
 <$action-listops $field="myfield" $subfilter="abc 123"/>
 ```
 
-The same can be achieved using the `$filter` attribute and prepending the [[Filter Run]] `[all[current]get[myfield]enlist-input[]]` to the [[Filter Expression]]:
+The same can be achieved using the `$filter` attribute and prepending the [[Filter Run]] `[enlist{!!myfield}]` to the [[Filter Expression]]:
 
 ```
 <$action-listops $field="myfield" $filter="[enlist{!!myfield}] abc 123"/>
