@@ -1,0 +1,5 @@
+title: $:/Manager/ItemMain/Editor
+tags: $:/tags/Manager/ItemMain
+caption: {{$:/language/Manager/Item/Editor}}
+
+<$edit-text tag="textarea" class="tc-edit-texteditor tc-edit-texteditor-body tc-max-width"/>

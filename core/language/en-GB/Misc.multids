@@ -56,6 +56,7 @@ Manager/Controls/Show/Option/Tiddlers: tiddlers
 Manager/Controls/Show/Prompt: Show:
 Manager/Controls/Sort/Prompt: Sort by:
 Manager/Item/Colour: Colour
+Manager/Item/Editor: Editor
 Manager/Item/Fields: Fields
 Manager/Item/Icon/None: (none)
 Manager/Item/Icon: Icon
