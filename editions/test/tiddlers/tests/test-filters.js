@@ -1062,7 +1062,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[title[HelloThere]] +[format:titlelist[]]").join(" ")).toBe("HelloThere");		
 			expect(wiki.filterTiddlers("0 +[format:timestamp[]]").join(",")).toBe("19700101000000000");
 			expect(wiki.filterTiddlers("1603188514443 +[format:timestamp[]]").join(",")).toBe("20201020100834443");
-			expect(wiki.filterTiddlers("void +[format:timestamp[]]").join(",")).toBe("void");
+			expect(wiki.filterTiddlers("void +[format:timestamp[]]").join(",")).toBe("");
 		});
 	
 		it("should handle the deserializers operator", function() {
