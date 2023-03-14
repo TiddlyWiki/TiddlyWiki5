@@ -4,6 +4,10 @@ tags: [[WebServer Guides]]
 title: Using the external JavaScript template
 type: text/vnd.tiddlywiki
 
+<!--
+This tiddler is also included in the "server-external-js" edition. Take care before editing or moving it.
+-->
+
 You can use a special template to externalise ~TiddlyWiki's core code into a separate file. This configuration allows the browser to cache the core for improved efficiency. 
 
 ! Background
