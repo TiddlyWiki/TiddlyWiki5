@@ -60,7 +60,7 @@ The "server-external-js" edition lets you save the snapshot from the command lin
 tiddlywiki YOUR_WIKI_FOLDER --build index
 ```
 
-The files `index.html` and `tiddlywikicore-5.x.x.js` will be saved in your wiki folder's `output` directory.
+The files `external-5-x-x.html` and `tiddlywikicore-5.x.x.js` will be saved in your wiki folder's `output` directory.
 
 !! Obtaining the ~TiddlyWiki core in the browser
 
