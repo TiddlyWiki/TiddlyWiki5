@@ -1,10 +1,10 @@
-caption: ''field'' Mode
+caption: field
 created: 20230314171223911
-modified: 20230314200046885
+modified: 20230315175557717
 tags: CheckboxWidget
 title: CheckboxWidget (field Mode)
 
-!! <<.attr field>> Mode
+!!<<.link "<<.attr field>> Mode" "CheckboxWidget (field Mode)">>
 
 Using the checkbox widget in field mode requires the <<.attr field>> attribute to specify the name of the field. The <<.attr checked>> and <<.attr unchecked>> attributes specify the values to be assigned to the field to correspond to its checked and unchecked states respectively. The <<.attr default>> attribute is used as a fallback value if the field is missing or contains a value that does not correspond to the value of the <<.attr checked>> or <<.attr unchecked>> attributes.
 

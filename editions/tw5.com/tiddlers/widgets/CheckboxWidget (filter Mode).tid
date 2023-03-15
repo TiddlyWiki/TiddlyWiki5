@@ -1,10 +1,10 @@
-caption: ''filter'' Mode
+caption: filter
 created: 20230314174505003
-modified: 20230314195819839
+modified: 20230315175806363
 tags: CheckboxWidget
 title: CheckboxWidget (filter Mode)
 
-!! <<..attr filter>> Mode
+!!<<.link "<<.attr filter>> Mode" "CheckboxWidget (filter Mode)">>
 
 Using the checkbox widget in filter mode requires the <<.attr filter>> attribute to contain a filter whose output will determine the checked state of the checkbox. In filter mode, checking the checkbox will not automatically make changes to any field of any tiddler. Instead, you can use the <<.attr actions>> attribute (or the <<.attr checkactions>> and <<.attr uncheckactions>> attributes) to specify what should happen when the checkbox is toggled. It is your responsibility to make sure the actions cause changes to the tiddlers or fields that the filter results depend on, so that the checkbox becomes properly checked or unchecked after the actions have triggered and the filter has updated.
 

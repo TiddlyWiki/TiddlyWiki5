@@ -1,10 +1,10 @@
-caption: ''tag'' Mode
+caption: tag
 created: 20230314171205017
-modified: 20230314200104199
+modified: 20230315175514764
 tags: CheckboxWidget
 title: CheckboxWidget (tag Mode)
 
-!! <<.attr tag>> Mode
+!!<<.link "<<.attr tag>> Mode" "CheckboxWidget (tag Mode)">>
 
 Using the checkbox widget in tag mode requires the <<.attr tag>> attribute to specify the name of the tag. The checkbox will be checked if the tiddler specified in the <<.attr tiddler>> attribute has the specified tag and unchecked if it does not.
 

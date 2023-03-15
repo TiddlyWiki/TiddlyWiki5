@@ -1,12 +1,14 @@
-caption: ''index'' Mode
+caption: index
 created: 20230314171351122
-modified: 20230314195837258
+modified: 20230315180320892
 tags: CheckboxWidget
 title: CheckboxWidget (index Mode)
 
-!! <<.attr index>> Mode
+!!<<.link "<<.attr index>> Mode" "CheckboxWidget (index Mode)">>
 
 To use the checkbox widget in index mode set the <<.attr index>> attribute to a property of a [[DataTiddler|DataTiddlers]]. The <<.attr checked>> and <<.attr unchecked>> attributes specify the values to be assigned to the property and correspond to its checked and unchecked states respectively. The <<.attr default>> attribute is used as a fallback value if the property is undefined.
+
+<<.warning "Make sure to set <<.attr tiddler>> correctly, because non-[[DataTiddlers]] will be overwritten without warning">>
 
 The example below creates a checkbox that is checked if the property in the tiddler [[ExampleData]] by the name of the current tiddler is equal to <<.value selected>> and unchecked if the property is an empty string. If the property is undefined then it defaults to an empty string, meaning the checkbox will be unchecked if the property is missing.
 

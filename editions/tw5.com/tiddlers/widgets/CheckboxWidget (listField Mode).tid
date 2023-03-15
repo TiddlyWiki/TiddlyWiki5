@@ -1,10 +1,10 @@
-caption: ''listField'' Mode
+caption: listField
 created: 20230314171331190
-modified: 20230314201028095
+modified: 20230315175625912
 tags: CheckboxWidget
 title: CheckboxWidget (listField Mode)
 
-!! <<.attr listField>> Mode
+!!<<.link "<<.attr listField>> Mode" "CheckboxWidget (listField Mode)">>
 
 Using the checkbox widget in list mode requires the <<.attr listField>> attribute to specify the name of a field containing a list. The <<.attr checked>> attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If <<.attr checked>> is absent (or empty) but <<.attr unchecked>> is present, then the logic will be inverted: the checkbox will be checked when the <<.attr unchecked>> value is missing from the list, and unchecked when the <<.attr unchecked>> value is found in the list. If both <<.attr checked>> and <<.attr unchecked>> are present, the checkbox will work like a toggle, replacing the <<.attr checked>> value with the <<.attr unchecked>> value and vice-versa. Finally, if neither <<.attr checked>> nor <<.attr unchecked>> is specified, the checkbox will be checked if the field has anything in it, but unchecked if the field is missing or empty. (This is rarely useful. Most of the time you want to specify <<.attr checked>> or <<.attr unchecked>> or both.)
 
