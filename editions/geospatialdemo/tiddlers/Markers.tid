@@ -1,5 +1,4 @@
-title: $:/plugins/tiddlywiki/geospatial/demo/markers
-caption: ~GeoMarkers
+title: GeoMarkers
 tags: $:/tags/GeospatialDemo
 
 This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (identified by the tag <<tag "$:/tags/GeoMarker">>). A ~GeoJSON marker identifies a location via latitude and longitude (and optional elevation) and may also contain associated metadata in JSON format.

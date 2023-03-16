@@ -1,0 +1,16 @@
+{
+	"description": "Demo of the geospatial plugin for TiddlyWiki",
+	"plugins": [
+		"tiddlywiki/geospatial"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+	],
+	"build": {
+		"index": [
+			"--render","$:/core/save/all","geospatialdemo.html","text/plain"]
+	}
+}

@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/geospatial/demos
+title: HelloThere
 
 ! Demos
 
@@ -15,4 +15,4 @@ title: $:/plugins/tiddlywiki/geospatial/demos
 	state=<<qualify "$:/state/demo-map">>
 />
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"$:/plugins/tiddlywiki/geospatial/demo/markers">>
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"markers">>

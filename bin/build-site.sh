@@ -11,9 +11,10 @@ fi
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
 
 # Default to using tw5.com as the main edition for /index.html
+# >>> TEMPORARILY SET TO THE GEOSPATIAL PLUGIN; TO BE REVERTED BEFORE MERGING <<<
 
 if [  -z "$TW5_BUILD_MAIN_EDITION" ]; then
-    TW5_BUILD_MAIN_EDITION=./editions/tw5.com
+    TW5_BUILD_MAIN_EDITION=./editions/geospatial
 fi
 
 echo "Using TW5_BUILD_MAIN_EDITION as [$TW5_BUILD_MAIN_EDITION]"
@@ -349,6 +350,17 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/highlight/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/highlight/empty.html text/plain \
+	|| exit 1
+
+# /plugins/tiddlywiki/geospatial/index.html		Demo wiki with geospatial plugin
+# /plugins/tiddlywiki/geospatial/empty.html		Empty wiki with geospatial plugin
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/geospatialdemo \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all plugins/tiddlywiki/geospatial/index.html text/plain \
+	--rendertiddler $:/core/save/empty plugins/tiddlywiki/geospatial/empty.html text/plain \
 	|| exit 1
 
 ######################################################

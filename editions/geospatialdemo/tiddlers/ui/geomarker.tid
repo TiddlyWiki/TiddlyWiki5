@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/geospatial/demo/ui/geomarker
+title: ui/geomarker
 
 \define default-traveltime-time() 5400
 

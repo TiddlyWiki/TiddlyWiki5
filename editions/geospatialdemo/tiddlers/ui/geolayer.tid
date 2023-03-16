@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/geospatial/demo/ui/geolayer
+title: ui/geolayer
 
 \define create-intersection()
 <$let
