@@ -11,6 +11,8 @@
 	],
 	"build": {
 		"index": [
-			"--render","$:/core/save/all","geospatialdemo.html","text/plain"]
+			"--render","$:/core/save/all","geospatialdemo.html","text/plain"],
+		"favicon": [],
+		"static": []
 	}
 }
