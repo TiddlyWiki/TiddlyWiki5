@@ -1,6 +1,6 @@
 caption: filter
 created: 20230314174505003
-modified: 20230315175806363
+modified: 20230316192210983
 tags: CheckboxWidget
 title: CheckboxWidget (filter Mode)
 
@@ -12,7 +12,7 @@ If the filter returns an empty result, the checkbox will be unchecked. Otherwise
 
 However, if either the <<.attr checked>> or <<.attr unchecked>> attributes (or both) are specified, then their values will be looked for in the filter result, instead of considering any non-empty value to mean <<.value checked>>.
 
-This example creates the same checkbox as in the <$button class="tc-btn-invisible tc-tiddlylink" set="$:/state/tab/CheckboxWidget" setTo="CheckboxWidget (listField Mode)">list mode example</$button>, selecting between <<.value red>> and <<.value green>> in the <<.field colors>> list field, but using filters and actions to make the change.
+This example creates the same checkbox as in the <<.widget-tab-link "list mode example" "CheckboxWidget (listField Mode)">>, selecting between <<.value red>> and <<.value green>> in the <<.field colors>> list field, but using filters and actions to make the change.
 
 <<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
 \define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
