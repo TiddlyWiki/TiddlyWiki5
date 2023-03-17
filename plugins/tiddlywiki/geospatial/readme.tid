@@ -1,7 +1,5 @@
 title: $:/plugins/tiddlywiki/geospatial/readme
 
-! Introduction
-
 This is an early alpha build of the new Geospatial Plugin for TiddlyWiki.
 
 The goal is to develop new primitives for the TiddlyWiki platform that enable non-developers to build sophisticated interactive geospatial applications.
@@ -13,14 +11,3 @@ At this point, the Geospatial Plugin is largely a proof of concept of foundation
 * Integrating the commercial API [[TravelTime|https://traveltime.com/]] for [[geocoding|https://traveltime.com/features/geocoding]], [[routing|https://traveltime.com/features/multi-modal-routing]] and [[isochrones|https://traveltime.com/features/isochrones]]
 * Integrating the free API from [[Flickr|https://www.flickr.com/services/api/]] for retrieving geotagged photographs
 * Integrating Google's open source [[OpenLocationCode|https://github.com/google/open-location-code]] library for converting to and from Open Location Codes (also known as [[PlusCodes|https://maps.google.com/pluscodes/]])
-
-! Getting Started
-
-!! Prerequisites
-
-This demo requires that the API keys needed to access external services be obtained by the end user and manually configured. These keys are stored in the browser and so only need to be set up once. See the ''Settings'' tab for details.
-
-!! Demos
-
-Visit the ''Demos'' tab above to explore the demos.
-
