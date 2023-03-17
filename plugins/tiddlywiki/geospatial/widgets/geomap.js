@@ -101,6 +101,11 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 						return {
 							color: (tiddler && tiddler.getFieldString("color")) || "yellow"
 						}
+					},
+					onEachFeature: function(feature,layer) {
+						if(feature.properties) {
+							layer.bindPopup(JSON.stringify(feature.properties,null,4));
+						}
 					}
 				}).addTo(self.map);
 			return layer;
