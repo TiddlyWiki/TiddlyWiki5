@@ -15,4 +15,4 @@ title: HelloThere
 	state=<<qualify "$:/state/demo-map">>
 />
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"markers">>
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoMarkers">>
