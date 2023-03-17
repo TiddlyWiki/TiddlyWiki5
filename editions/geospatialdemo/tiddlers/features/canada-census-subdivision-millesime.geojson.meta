@@ -1,4 +1,4 @@
-title: $:/plugins/geospatial/demo/features/canada-census-subdivision-millesime
+title: $:/geospatialdemo/features/canada-census-subdivision-millesime
 caption: Canada Census Subdivisions Millesime
 type: application/json
 tags: $:/tags/GeoLayer
