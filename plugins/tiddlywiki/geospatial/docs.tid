@@ -1,0 +1,76 @@
+title: $:/plugins/tiddlywiki/geospatial/docs
+
+! Macros
+
+!! `show-geojson` macro
+
+The `show-geojson` operator displays a GeoJSON object in a human-readable form.
+
+|!Parameter |!Description |
+|geojson |Text of GeoJSON object to display |
+
+```
+<$macrocall $name="show-geojson" geojson={{$:/geospatialdemo/features/us-states}}/>
+```
+
+! Filter Operators
+
+!! `geopoint` operator
+
+The `geopoint` operator converts separate latitude, longitude and (optionally) altitude numbers into a [[GeoJSON Point Feature]] that can be used with other geospatial primitives.
+
+The coordinates are specified as two or three operands:
+
+```
+[geopoint<latitude>,<longitude>,<attitude>]
+```
+
+Any operands that cannot be interpreted as a valid number will be interpreted as the value zero.
+
+For example:
+
+```
+<$text text={{{ [geopoint[51.751944],[-1.257778]] }}}/>
+```
+
+Returns:
+
+```
+{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,0]}}
+```
+
+!! `geodistance` operator
+
+
+
+!! `geounion` operator
+
+The `geounion` operator calculates the union between two or more [[GeoJSON Polygon Features|GeoJSON Polygon Feature]].
+
+Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] containing polygons. Any item that 
+
+```
+[geounion[]]
+```
+etc for geointersect and geodifference
+
+!! `geolookup` operator
+
+!! `olc-decode` operator
+
+The `olc-decode` operator converts an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut into the [[GeoJSON Point Feature]] at its centre or the [[GeoJSON Polygon Feature]] representing the bounds of the area identified by the input code.
+
+```
+[olc-decode:bounds[9C3WQP2R+QV]]
+[olc-decode:point[9C3WQP2R+QVH]]
+```
+
+!! `olc-encode` operator
+
+The `old-encode` operator converts separate latitude, longitude and (optionally) altitude numbers into an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut code with a specified length.
+
+```
+[olc-encode[51.751944],[-1.257778]]
+[olc-encode[51.751944],[-1.257778],[11]]
+```
+
