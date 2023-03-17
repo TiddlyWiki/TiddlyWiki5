@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20230315183929037
+modified: 20230317160103851
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -284,4 +284,11 @@ ol.doc-github-contributors li {
 .doc-tabs.tc-tab-buttons button {
   font-size: 1rem;
   padding: 0.5em;
+}
+.doc-tabs button .doc-attr {
+  background-color: unset;
+  color: #666;
+}
+table .doc-tab-link .doc-attr {
+  color: #666;
 }

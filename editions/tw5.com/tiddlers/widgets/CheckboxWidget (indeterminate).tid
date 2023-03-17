@@ -1,6 +1,7 @@
-caption: indeterminate
+caption: <<.attr indeterminate>>
 created: 20230315173145042
-modified: 20230315175844943
+description: tab
+modified: 20230317160908743
 tags: CheckboxWidget
 title: CheckboxWidget (indeterminate)
 

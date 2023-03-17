@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20230316192841864
+modified: 20230317161300817
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -61,9 +61,27 @@ type: text/vnd.tiddlywiki
 \define .toc-tab() <<.tab "TableOfContents">>
 \define .example-tab(_) <span class="doc-tab">$_$</span>
 
-\define .widget-tabs() <$macrocall $name="tabs" tabsList="[tag<currentTiddler>]" default={{{ [tag<currentTiddler>first[]] }}} explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}} class="doc-tabs" />
-\define .widget-tab-link(text, target, tooltip) <$button class="tc-btn-invisible tc-tiddlylink" set={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}} setTo=<<__target__>> tooltip=<<__tooltip__>>><<__text__>></$button>
-\define .widget-attr-link(text, target) <$macrocall $name=".widget-tab-link" text={{{ [[<code class="doc-attr">]] [<__text__>] [[</code>]] +[join[]] }}} target=<<__target__>> tooltip={{{ [[Show more information about the ']] [<__text__>] [[' attribute]] +[join[]] }}} />
+\define .widget-tabs()
+<$macrocall $name="tabs"
+      tabsList="[tag<currentTiddler>description[tab]]"
+      default={{{ [tag<currentTiddler>first[]] }}}
+      explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
+      class="doc-tabs" />
+\end
+\define .widget-tab-link(text, target, tooltip, class)
+<$button class={{{ [[tc-btn-invisible]] [<__class__>] +[join[ ]] }}}
+      set={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
+      setTo=<<__target__>>
+      tooltip=<<__tooltip__>>><<__text__>>
+</$button>
+\end
+\define .widget-attr-link(text, target)
+<$macrocall $name=".widget-tab-link" 
+      text={{{ [[<code class="doc-attr">]] [<__text__>] [[</code>]] +[join[]] }}}
+      class="doc-tab-link"
+      target=<<__target__>>
+      tooltip={{{ [[Show more information about the ']] [<__text__>] [[' attribute]] +[join[]] }}} />
+\end
 
 \define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
 

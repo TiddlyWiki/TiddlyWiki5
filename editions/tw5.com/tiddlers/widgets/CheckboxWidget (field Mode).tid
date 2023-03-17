@@ -1,6 +1,7 @@
-caption: field
+caption: <<.attr field>>
 created: 20230314171223911
-modified: 20230315175557717
+description: tab
+modified: 20230317161110431
 tags: CheckboxWidget
 title: CheckboxWidget (field Mode)
 

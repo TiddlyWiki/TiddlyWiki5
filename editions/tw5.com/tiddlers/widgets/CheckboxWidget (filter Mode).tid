@@ -1,6 +1,7 @@
-caption: filter
+caption: <<.attr filter>>
 created: 20230314174505003
-modified: 20230316192210983
+description: tab
+modified: 20230317160919061
 tags: CheckboxWidget
 title: CheckboxWidget (filter Mode)
 

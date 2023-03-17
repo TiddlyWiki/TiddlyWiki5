@@ -1,6 +1,7 @@
-caption: index
+caption: <<.attr index>>
 created: 20230314171351122
-modified: 20230315180320892
+description: tab
+modified: 20230317160939333
 tags: CheckboxWidget
 title: CheckboxWidget (index Mode)
 

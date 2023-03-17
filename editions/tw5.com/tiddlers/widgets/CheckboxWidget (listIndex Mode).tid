@@ -1,6 +1,7 @@
-caption: listIndex
+caption: <<.attr listIndex>>
 created: 20230314174442174
-modified: 20230315180447217
+description: tab
+modified: 20230317160929003
 tags: CheckboxWidget
 title: CheckboxWidget (listIndex Mode)
 
