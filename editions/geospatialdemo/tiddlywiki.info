@@ -1,7 +1,9 @@
 {
 	"description": "Demo of the geospatial plugin for TiddlyWiki",
 	"plugins": [
-		"tiddlywiki/geospatial"
+		"tiddlywiki/geospatial",
+		"tiddlywiki/jszip",
+		"tiddlywiki/xlsx-utils"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
