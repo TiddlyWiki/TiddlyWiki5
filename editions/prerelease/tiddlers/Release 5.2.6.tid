@@ -100,7 +100,6 @@ Improvements to the following translations:
 
 ! Performance Improvements
 
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7297">> wikitext parsing to use "sticky" flag for improved performance
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7299">> field indexer to more efficiently process lookups
 
 ! Acknowledgements
