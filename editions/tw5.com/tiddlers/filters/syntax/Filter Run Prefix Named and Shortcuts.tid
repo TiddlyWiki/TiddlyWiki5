@@ -1,8 +1,10 @@
 created: 20230316151518640
-modified: 20230319150725216
+modified: 20230319182938190
 tags: [[Filter Run Prefix]]
-title: Filter Run Prefix Legacy vs Named
+title: Filter Run Prefix Named and Shortcuts
 type: text/vnd.tiddlywiki
+
+!! Interchangeable Filter Run Prefixes
 
 In technical / logical terms:
 
@@ -12,11 +14,8 @@ In technical / logical terms:
 |`-run` |`:except[run]` |difference of sets |... AND NOT run |
 |`~run` |`:else[run]` |else |... ELSE run |
 |`=run` |`:all[run]` |union of sets without de-duplication |... OR run |
-||`:intersection[run]`|intersection of sets||
 
-For the difference between `+` and `:intersection`, see [[Intersection Filter Run Prefix (Examples)]].
-
-The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order). But the `+` prefix can change this:
+The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order).<br>But the `+` prefix can change this:
 
 |Prefix|Input|h
 |`-`, `~`, `=`, `:intersection` or none| <$link to="all Operator">`[all[]]`</$link> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]|
@@ -35,6 +34,10 @@ In order to remove `$:/baz` in any case, existing or not, simply use the `+` pre
 
 * <$link to="is Operator">`foo bar $:/baz +[!is[system]]`</$link>
 * <$link to="prefix Operator">`foo bar $:/baz +[!prefix[$:/]]`</$link>
+
+!! Difference between + and intersection
+
+For the difference between `+` and `:intersection`, see [[Intersection Filter Run Prefix (Examples)]].
 
 !! For Developers
 

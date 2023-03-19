@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20230319153143483
+modified: 20230319180452082
 tags: Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -25,13 +25,12 @@ A <<.def "filter operator">> is a predefined keyword attached to an individual s
 
 ''Table legend:''
 
-* ✓ .. Used to mark the most common ones
+|tc-table-no-border tc-first-col-min-width|k
+|^ ✓|^... |,Used to mark the most common ones |
+|^ `!`|^... |,The column indicates whether an operator allows ''negation'' using the <$link to="Filter Step"><code>!</code> prefix</$link>.<br>For specifics as to each operator's negated output please refer to its documentation |
+|^ `C`|^... |,Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few [[construct an entirely new selection|Selection Constructors]] instead, as indicated by the last column.<br>A `C?` indicates it might construct a new selection, depending on usage. For specifics as to each operator's selection creation please refer to its documentation |
 
-* `!` .. The column indicates whether an operator allows ''negation'' using the <$link to="Filter Step"><code>!</code> prefix</$link>. For specifics as to each operator's negated output please refer to its documentation
-
-* `C` .. Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few [[construct an entirely new selection|Selection Constructors]] instead, as indicated by the last column.<br> A `C?` indicates it might construct a new selection, depending on usage. For specifics as to each operator's selection creation please refer to its documentation
-
-The following table lists all core operators
+The following table lists all core operators:
 
 <table>
 <tr>

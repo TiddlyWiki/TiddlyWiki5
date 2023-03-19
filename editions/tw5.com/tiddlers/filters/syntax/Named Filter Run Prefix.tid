@@ -1,5 +1,5 @@
 created: 20201214044413473
-modified: 20230319152329904
+modified: 20230319182233796
 tags: [[Filter Run Prefix]]
 title: Named Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop
 
 The first named prefixes for filter runs are available since: <<.from-version "5.1.23">> The exact version can be seen at the detailed description of each prefix.
 
-A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a [[legacy run prefix|Legacy Filter Run Prefix]] eg: `+`, `-` and so on. 
+A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a [[shortcut run prefix|Shortcut Filter Run Prefix]] eg: `+`, `-` and so on. 
 
 <$railroad text="""
 \start none
@@ -32,5 +32,3 @@ A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expre
 <<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to used to flatten a list of items down to a single item by repeatedly applying a subfilter.">> 
 
 <<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the "currentTiddler" variable is set to the title of the tiddler being processed. The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler".<<.from-version "5.2.0">>""" >>
-
-Also see: [[Legacy]]

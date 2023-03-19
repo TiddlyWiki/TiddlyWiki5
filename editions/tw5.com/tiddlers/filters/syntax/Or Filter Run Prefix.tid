@@ -14,4 +14,4 @@ type: text/vnd.tiddlywiki
 [[run|"Filter Run Prefix"]]
 """/>
 
-The :or prefix is the default, if no prefix is used at all. See `run` at [[Legacy Filter Run Prefix]]
+The :or prefix is the default, if no prefix is used at all. See `run` at [[Shortcut Filter Run Prefix]]

@@ -14,4 +14,4 @@ type: text/vnd.tiddlywiki
 [[run|"Filter Run"]]
 """/>
 
-This prefix has a [[Legacy Filter Run Prefix]] symbol `~run`
+This prefix has a [[Shortcut Filter Run Prefix]] symbol `~run`
