@@ -1,6 +1,6 @@
 created: 20230316150731234
 from-version: 5.1.23
-modified: 20230319154219866
+modified: 20230319170500368
 rp-input: all titles from previous filter runs
 rp-output: output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">>
 rp-purpose: union of sets without de-duplication
@@ -10,10 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$railroad text="""
 \start none
-(
-  [[<":all">|"All Filter Run Prefix"]] |
-  -
-)
+( ":all" | - )
 [[run|"Filter Run"]]
 """/>
 

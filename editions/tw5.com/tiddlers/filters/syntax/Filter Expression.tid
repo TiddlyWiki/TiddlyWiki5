@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20230319153325313
+modified: 20230319170325475
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -21,4 +21,4 @@ The first run usually has //no// filter run prefix
 }
 """/>
 
-<<.tip "If the diagram has an open start, as shown above, it means that you should also have a closer look at the level above, otherwise you may miss something">>
+<<.tip "If the diagram has an open start or end, as shown above, it means that you should also have a closer look at the level above, otherwise you may miss something">>

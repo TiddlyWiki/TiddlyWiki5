@@ -1,12 +1,18 @@
 created: 20211129022455873
 from-version: 5.1.23
-modified: 20230316145934822
+modified: 20230319171102887
 rp-input: all titles from previous filter runs
 rp-output: the input titles for which the filter run is not empty
 rp-purpose: remove every input title for which the filter run output is an empty list
 tags: [[Named Filter Run Prefix]]
 title: Filter Filter Run Prefix
 type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+( ":filter" | - )
+[[run|"Filter Run"]]
+"""/>
 
 It receives the filter output so far as its input. The next run is evaluated for each title of the input, removing every input title for which the output is an empty list.
 

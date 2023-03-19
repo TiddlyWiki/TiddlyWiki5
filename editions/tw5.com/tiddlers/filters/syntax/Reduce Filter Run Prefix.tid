@@ -1,12 +1,20 @@
 created: 20211124151912931
 from-version: 5.1.23
-modified: 20230318143724339
+modified: 20230319170908270
 rp-input: all titles from previous filter runs
 rp-output: the accumulated single item
 rp-purpose: replaces all filter output so far with a single item by repeatedly applying a filter run to each input title
 tags: [[Named Filter Run Prefix]]
 title: Reduce Filter Run Prefix
 type: text/vnd.tiddlywiki
+
+
+<$railroad text="""
+\start none
+( ":reduce" | - )
+[[run|"Filter Run"]]
+"""/>
+
 
 Each input title from previous runs is passed to this run in turn. The result of each previous call to this run is made available in the next call via the variable named <<.var accumulator>>. The result of the last call to this run is returned as the output.  A typical use is to add up the values in a given field of each input title.
 

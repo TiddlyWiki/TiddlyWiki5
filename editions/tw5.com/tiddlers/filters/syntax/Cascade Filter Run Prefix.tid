@@ -1,12 +1,18 @@
 created: 20211130114043280
 from-version: 5.2.1
-modified: 20230316145802754
+modified: 20230319171123489
 rp-input: all titles from previous filter runs
 rp-output: the input titles as modified by the filters returned by this filter run
 rp-purpose: modify input titles by evaluating in turn a list of filters - as returned by the filter expression for this run - for each input title.
 tags: [[Named Filter Run Prefix]]
 title: Cascade Filter Run Prefix
 type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+( ":cascade" | - )
+[[run|"Filter Run"]]
+"""/>
 
 The [[filter expression|Filter Expression]] for this [[filter run|Filter Run]] is evaluated to return a list of filters. Each input title is then evaluated against each of the filters in turn, and the input title is replaced with the first result of the first filter that returns a non-empty list. If none of the filters return a result for an input title, it is replaced with an empty string.
 

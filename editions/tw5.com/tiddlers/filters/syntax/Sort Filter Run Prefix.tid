@@ -1,6 +1,6 @@
 created: 20210428083929749
 from-version: 5.2.0
-modified: 20230318143931483
+modified: 20230319172719297
 rp-input: all titles from previous filter runs
 rp-output: the sorted result of previous filter runs
 rp-purpose: sort the input titles by the result of evaluating this filter run for each item
@@ -8,6 +8,14 @@ rp-suffix: the `:sort` filter run prefix uses a rich suffix, see below for detai
 tags: [[Named Filter Run Prefix]]
 title: Sort Filter Run Prefix
 type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+( ":sort" )
+( : ":string" | ":alphanumeric" | ":number" | ":integer" | ":version" | ":date" )
+( : ":casesensitive" /"required for string and alphanumeric"/ | ":caseinsensitive" /"required for string and alphanumeric"/  | ":reverse" /"optional"/ | - ) 
+[[run|"Filter Run"]]
+"""/>
 
 Each input title from previous runs is passed to this run in turn. The filter run transforms the input titles into the form needed for sorting. For example, the filter run `[length[]]` transforms each input title in to the number representing its length, and thus sorts the input titles according to their length.
 

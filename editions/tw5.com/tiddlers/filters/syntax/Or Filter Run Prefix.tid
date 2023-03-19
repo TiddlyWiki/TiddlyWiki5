@@ -1,6 +1,6 @@
 created: 20230318135743766
 from-version: 5.1.23
-modified: 20230318141728067
+modified: 20230319170531478
 rp-input: all titles from previous filter runs
 rp-output: its output titles are [[dominantly appended|Dominant Append]] to the filter's output
 rp-purpose: de-duplicated union of sets
@@ -10,10 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$railroad text="""
 \start none
-(
-  [[<":or">|"Or Filter Run Prefix"]] |
-  -
-)
+( ":or" | - )
 [[run|"Filter Run Prefix"]]
 """/>
 

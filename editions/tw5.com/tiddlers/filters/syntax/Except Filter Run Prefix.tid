@@ -1,6 +1,6 @@
 created: 20230318142056008
 from-version: 5.1.23
-modified: 20230318142328255
+modified: 20230319170629406
 rp-input: all titles from previous filter runs
 rp-output: output titles are removed from the filter's output (if such tiddlers exist)
 rp-purpose: difference of sets
@@ -10,10 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$railroad text="""
 \start none
-(
-  [[<":except">|"Except Filter Run Prefix"]] |
-  -
-)
+( ":except" | - )
 [[run|"Filter Run"]]
 """/>
 
