@@ -1,10 +1,10 @@
 created: 20190802113703788
-modified: 20190802132727925
+modified: 20230319144059319
 tags: Filters
 title: Conditional Operators
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.20">>The conditional filter operators allow ''if-then-else'' logic to be expressed within filters.
+<<.from-version "5.1.20">> The conditional filter operators allow ''if-then-else'' logic to be expressed within filters.
 
 The foundation is the convention that an empty list can be used to represent the boolean value ''false'' and a list with at one (or more) entries to represent ''true''.
 
@@ -25,4 +25,3 @@ The [[else Operator]] can be used to apply a defaults for missing values. In thi
 
 <<.inline-operator-example "[[HelloThere]get[custom-field]else[default-value]]">>
 
-<<list-links "[tag[Conditional Operators]]">>

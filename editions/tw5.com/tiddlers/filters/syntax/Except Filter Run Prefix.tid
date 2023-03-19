@@ -1,0 +1,20 @@
+created: 20230318142056008
+from-version: 5.1.23
+modified: 20230318142328255
+rp-input: all titles from previous filter runs
+rp-output: output titles are removed from the filter's output (if such tiddlers exist)
+rp-purpose: difference of sets
+tags: [[Named Filter Run Prefix]]
+title: Except Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+\start none
+(
+  [[<":except">|"Except Filter Run Prefix"]] |
+  -
+)
+[[run|"Filter Run"]]
+"""/>
+
+This prefix has a [[Legacy Filter Run Prefix]] symbol `-run`

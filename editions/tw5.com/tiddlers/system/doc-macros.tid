@@ -1,5 +1,6 @@
+code-body: yes
 created: 20150117152607000
-modified: 20220714133424023
+modified: 20230315170404074
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -181,4 +182,13 @@ $credit$
 </ol>
 \end
 
-<pre><$view field="text"/></pre>
+\define .recursiveParentTag(current, stop)
+<$list filter="[<__stop__>is[tiddler]]" emptyMessage="@@color:red; .recursiveParentTag macro ERROR! -- stop tiddler does not exist@@" variable="ignore">
+<$let x={{{ [<__current__>tags[]limit[1]] }}}>
+<$list filter="[<x>!match<__stop__>]" emptyMessage="""<$link to=<<x>> ><<x>></$link>""" >
+<$link /> ->
+<$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop=<<__stop__>> />
+</$list>
+</$let>
+</$list>
+\end

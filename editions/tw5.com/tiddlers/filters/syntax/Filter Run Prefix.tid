@@ -1,0 +1,21 @@
+created: 20230305130600148
+modified: 20230319153404550
+tags: [[Filter Expression]]
+title: Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop="Filters"/>
+
+There are 2 types of filter run prefixes that are interchangeable. Named prefixes and Legacy prefixes. 
+
+<$railroad text="""
+\start none
+(  
+   - |
+:  [[<":named prefix"> /"starting with v5.1.23"/ |"Named Filter Run Prefix"]] | 
+   [[<"legacy prefix"> /"prior to v5.1.23"/ |"Legacy Filter Run Prefix"]]
+)
+[[run|"Filter Run"]]
+"""/>
+
+Also see [[Legacy]] definition
