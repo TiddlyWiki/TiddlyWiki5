@@ -2,7 +2,7 @@ created: 20230318142752854
 from-version: 5.1.23
 modified: 20230319170440057
 op-purpose: accumulation of filter steps
-rp-input: all titles from previous filter runs
+rp-input: the filter output of all previous runs so far
 rp-output: output titles replace the output of previous filter runs
 tags: [[Named Filter Run Prefix]]
 title: And Filter Run Prefix
