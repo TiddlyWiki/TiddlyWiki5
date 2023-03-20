@@ -2,8 +2,8 @@ created: 20230318142408662
 from-version: 5.1.23
 modified: 20230319170556112
 rp-input: all titles from previous filter runs
-rp-output: if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output.<br>if the filter output so far is not an empty list then the run is ignored. <<.from-version "5.1.18">>
-rp-purpose: else
+rp-output: if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output.<br>if the filter output so far is not an empty list then the run is ignored.
+rp-purpose: the filter run is only evaluated if the filter output of all previous runs so far is an empty list
 tags: [[Named Filter Run Prefix]]
 title: Else Filter Run Prefix
 type: text/vnd.tiddlywiki

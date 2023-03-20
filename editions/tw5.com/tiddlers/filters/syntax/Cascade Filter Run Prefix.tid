@@ -1,7 +1,7 @@
 created: 20211130114043280
 from-version: 5.2.1
 modified: 20230319171123489
-rp-input: all titles from previous filter runs
+rp-input: the filter output of all previous runs so far
 rp-output: the input titles as modified by the filters returned by this filter run
 rp-purpose: modify input titles by successively evaluating a list of filters and applying the first result
 tags: [[Named Filter Run Prefix]]

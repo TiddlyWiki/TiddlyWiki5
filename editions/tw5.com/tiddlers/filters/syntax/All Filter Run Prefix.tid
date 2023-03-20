@@ -2,7 +2,7 @@ created: 20230316150731234
 from-version: 5.1.23
 modified: 20230319170500368
 rp-input: all titles from previous filter runs
-rp-output: output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">>
+rp-output: output titles are appended to the output of previous filter runs without de-duplication. <<.from-version "5.1.20">>
 rp-purpose: union of sets without de-duplication
 tags: [[Named Filter Run Prefix]]
 title: All Filter Run Prefix
