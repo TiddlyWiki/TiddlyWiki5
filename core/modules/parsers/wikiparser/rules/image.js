@@ -116,7 +116,7 @@ exports.parseImage = function(source,pos) {
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Get the source up to the terminating `]]`
-	token = $tw.utils.parseTokenRegExp(source,pos,/(?:([^|\]]*?)\|)?([^\]]+?)\]\]/y);
+	token = $tw.utils.parseTokenRegExp(source,pos,/(?:([^|\]]*?)\|)?([^\]]+?)\]\]/g);
 	if(!token) {
 		return null;
 	}

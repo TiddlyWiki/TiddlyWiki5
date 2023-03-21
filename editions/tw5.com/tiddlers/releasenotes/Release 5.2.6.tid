@@ -1,11 +1,18 @@
 caption: 5.2.6
-created: 20230304213950684
-modified: 20230304213950684
+created: 20230320184352916
+modified: 20230320184352916
+released: 20230320184352916
 tags: ReleaseNotes
 title: Release 5.2.6
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.5...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.5...v5.2.6]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[StS|https://talk.tiddlywiki.org/u/StS]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-tiddlywiki-v5-2-6/6403/3]] and the [[voting thread|https://talk.tiddlywiki.org/t/vote-for-the-tiddlywiki-banner-v5-2-6/6469]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/3a2831870b4418b8b01d155b057db5b7485562c1/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
 
 ! Major Improvements
 
@@ -28,6 +35,7 @@ type: text/vnd.tiddlywiki
 Improvements to the following translations:
 
 * Chinese
+* German
 * Italian
 * Polish
 
@@ -38,6 +46,7 @@ Improvements to the following translations:
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/524cee1489f260375cac8cfe878fdc5942a4596e">> [[XLSX Plugin|XLSX Utilities Edition]] to handle importing numeric fields
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/81f514116657d0d567be7a4c45762a85beaa8bc0">> Dynannotate plugin crash when using the fake DOM used for static rendering
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7281">> bug where pasting text into the CodeMirror editor also opened an `$:/Import` tiddler
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7334">> documentation for the [[Railroad Plugin]]
 
 ! Accessibility Improvements
 
@@ -88,6 +97,7 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7243">> usage of `importTitle` and `autoOpenOnImport` options for [[WidgetMessage: tm-import-tiddlers]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7276">> fixed text editor refresh when the palette is changed
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7270">> crash with LetWidget when referencing a variable that exists but has an undefined value
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7354">> unwanted double braces around tags specified in $:/config/NewTiddler/Tags when using "new here" button
 
 ! Node.js Improvements
 
@@ -100,7 +110,6 @@ Improvements to the following translations:
 
 ! Performance Improvements
 
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7297">> wikitext parsing to use "sticky" flag for improved performance
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7299">> field indexer to more efficiently process lookups
 
 ! Acknowledgements
@@ -128,6 +137,7 @@ m42e
 Marxsal
 mateuszwilczek
 newmedicine
+michsa
 pippep
 pmario
 saqimtiaz
