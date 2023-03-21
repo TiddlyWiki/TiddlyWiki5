@@ -55,6 +55,6 @@ The following table lists all core operators:
 <<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]tag[Special Operators]sort[]]">>
 </table>
 
-A typical step is written as `[operator[operand]]`, although not all of the operators need an [[operand|Filter Operand]]. 
+A typical step is written as `[operator[parameter]]`, although not all of the operators need an [[parameter|Filter Parameter]].
 
 For the exact rules, see [[Filter Syntax]].

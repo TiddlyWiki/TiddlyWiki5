@@ -17,13 +17,12 @@ op-suffix: the <<.op suffix>> operator uses a rich suffix, see below for details
 The <<.op suffix>> operator uses an extended syntax that permits multiple flags to be passed:
 
 ```
-[suffix:<flag list>[<operand>]]
+[suffix:<flag list>[<parameter>]]
 ```
 
 * ''flag list'': a comma delimited list of flags
-* ''operand'': filter operand
 
-The available flags are:
+The available ''flags'' are:
 
 * ''casesensitive'': (default), this flag forces a case-sensitive match, where upper and lower case letters are considered different
 * ''caseinsensitive'': overrides the default so that upper and lower case letters are considered identical for matching purposes

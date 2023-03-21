@@ -5,7 +5,7 @@ op-input: a [[selection of titles|Title Selection]]
 op-output: the input as numbers, with any that are greater than <<.place N>> being replaced by <<.place N>>
 op-parameter: a number
 op-parameter-name: N
-op-purpose: treating each input title as a number, take the minimum of its value and the numeric value of the operand
+op-purpose: treating each input title as a number, take the minimum of its value and the numeric value of the parameter
 tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]]
 title: min Operator
 type: text/vnd.tiddlywiki
