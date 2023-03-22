@@ -53,6 +53,24 @@ exports.startup = function() {
 		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
 		$tw.browserStorage.clearLocalStorage();
 	});
+	// Request the browser to never evict the localstorage. Some browsers such as firefox
+	// will prompt the user. To make the decision easier for the user only prompt them
+	// when they click the save button on a tiddler which will be stored to localstorage.
+	var persistPermissionRequested = false;
+	$tw.hooks.addHook("th-saving-tiddler", function(tiddler) {
+		if (navigator.storage && navigator.storage.persist && !persistPermissionRequested) {
+			var filteredChanges = filterFn.call($tw.wiki, function(iterator) {
+				iterator(tiddler,tiddler.getFieldString("title"));
+			});
+			if (filteredChanges.length > 0) {
+				navigator.storage.persist().then(function(persisted) {
+					console.log("Request for persisted storage " + (persisted ? "granted" : "denied"));
+				});
+				persistPermissionRequested = true;
+			}
+		}
+		return tiddler;
+	});
 	// Track tiddler changes
 	$tw.wiki.addEventListener("change",function(changes) {
 		// Bail if browser storage is disabled
