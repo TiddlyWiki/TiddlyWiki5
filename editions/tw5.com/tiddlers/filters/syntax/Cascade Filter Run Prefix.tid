@@ -1,6 +1,6 @@
 created: 20211130114043280
 from-version: 5.2.1
-modified: 20230319171123489
+modified: 20230322140633256
 rp-input: the filter output of all previous runs so far
 rp-output: the input titles as modified by the filters returned by this filter run
 rp-purpose: modify input titles by successively evaluating a list of filters and applying the first result
@@ -10,6 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$railroad text="""
 \start none
+\end none
 ( ":cascade" | - )
 [[run|"Filter Run"]]
 """/>

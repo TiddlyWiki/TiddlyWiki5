@@ -29,7 +29,7 @@ The parameter specifies zero or more fundamental categories using the following 
 
 If the parameter specifies more than one category, they are processed from left to right. The overall output is initially empty, and each category's output is [[dominantly appended|Dominant Append]] to it in turn. Unrecognised categories contribute nothing to the output.
 
-As a special case, if the parameter is empty, the output is simply a copy of the input. This can be useful when the parameter is [[soft parameter|Filter Parameter]].
+As a special case, if the parameter is empty, the output is simply a copy of the input. This can be useful when the parameter is a [[soft parameter|Filter Parameter]].
 
 The <<.olink is>> operator is similar, but its scope is restricted to its input.
 

@@ -1,6 +1,6 @@
 created: 20211129022455873
 from-version: 5.1.23
-modified: 20230319171102887
+modified: 20230322140650041
 rp-input: the filter output of all previous runs so far
 rp-output: the input titles for which the filter run is not empty
 rp-purpose: remove every input title for which the filter run output is an empty list
@@ -10,6 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$railroad text="""
 \start none
+\end none
 ( ":filter" | - )
 [[run|"Filter Run"]]
 """/>

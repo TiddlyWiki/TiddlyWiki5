@@ -1,5 +1,5 @@
 created: 20150124182421000
-modified: 20230319170325475
+modified: 20230322140413010
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
@@ -7,15 +7,17 @@ type: text/vnd.tiddlywiki
 Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop="Filters"/>
 
 A <<.def "filter expression">> is the outermost level of the [[filter syntax|Filter Syntax]]. It consists of [[filter runs|Filter Run]] with optional [[filter run prefixes|Filter Run Prefix]]. Multiple filter runs are separated by [[whitespace|Filter Whitespace]].
+
 <$railroad text="""
-\start none
-{  (
-     - |
-     : [[<"prefix">|"Filter Run Prefix"]]
-   )
-   [[run|"Filter Run"]]  
-   +  [[whitespace|"Filter Whitespace"]]
+{ (
+    - |
+    : [[<"prefix">|"Filter Run Prefix"]]
+  )
+  [[run|"Filter Run"]]
+  +  [[whitespace|"Filter Whitespace"]]
 }
 """/>
 
-<<.tip """If the diagram has an open start or end, as shown above, it means there is more info in the linked level above. The breadcrumbs can be used to navigate""">>
+<<.tip """If the diagram has a single start and end line, as shown above, it means there is more info in the linked level above. The breadcrumbs can be used to navigate""">>
+
+<<.tip """If the diagram has no start and no end, as used in lower levels, it means that higher level syntax elements have been removed, to increase readability and simplicity. The breadcrumbs can be used to navigate""">>

@@ -1,5 +1,5 @@
 created: 20230305131705188
-modified: 20230319182200995
+modified: 20230322140538114
 tags: [[Filter Run Prefix]]
 title: Shortcut Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -10,6 +10,7 @@ Shortcut prefixes are commonly used by advanced users because they are fast to t
 
 <$railroad text="""
 \start none
+\end none
 (-|:"+"|"-"|"~"|"=")
 [[run|"Filter Run"]]
 """/>
@@ -27,4 +28,4 @@ If a run has:
 * the prefix `=`, output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">> 
 
 
-{{Filter Run Prefix Named and Shortcuts}}
+{{Interchangeable Filter Run Prefixs}}

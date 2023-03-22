@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.2.2">>
 
-The <<.op prefix>> parameter uses an extended syntax that permits multiple flags to be passed:
+The <<.op prefix>> operator uses an extended syntax that permits multiple flags to be passed:
 
 ```
 [prefix:<flag list>[<parameter>]

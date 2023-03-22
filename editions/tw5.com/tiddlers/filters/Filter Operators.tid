@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20230319180452082
+modified: 20230322143506125
 tags: Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -17,6 +17,8 @@ type: text/vnd.tiddlywiki
 \define .group-heading(_)
 <tr class="doc-table-subheading"><th colspan="5" align="center">$_$</th></tr>
 \end
+
+Parent: [[Filter Step]]
 
 A <<.def "filter operator">> is a predefined keyword attached to an individual step of a [[filter|Filters]]. It defines the particular action of that step.
 
@@ -55,6 +57,6 @@ The following table lists all core operators:
 <<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]tag[Special Operators]sort[]]">>
 </table>
 
-A typical step is written as `[operator[parameter]]`, although not all of the operators need an [[parameter|Filter Parameter]].
+A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameter]].
 
 For the exact rules, see [[Filter Syntax]].

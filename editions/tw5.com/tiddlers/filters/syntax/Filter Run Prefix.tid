@@ -1,5 +1,5 @@
 created: 20230305130600148
-modified: 20230319182311917
+modified: 20230322140332043
 tags: [[Filter Expression]]
 title: Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -10,7 +10,8 @@ There are 2 types of filter run prefixes that are interchangeable. Named prefixe
 
 <$railroad text="""
 \start none
-(  
+\end none
+(
    - |
 :  [[<":named prefix"> /"starting with v5.1.23"/ |"Named Filter Run Prefix"]] | 
    [[<"shortcut prefix"> /"prior to v5.1.23"/ |"Shortcut Filter Run Prefix"]]

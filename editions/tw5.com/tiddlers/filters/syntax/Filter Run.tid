@@ -1,5 +1,5 @@
 created: 20150124182117000
-modified: 20230315205551548
+modified: 20230322140104978
 tags: [[Filter Expression]]
 title: Filter Run
 type: text/vnd.tiddlywiki
@@ -8,6 +8,7 @@ Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop
 
 <$railroad text="""
 \start none
+\end none
 ( "[" { [[<"Filter Step">|"Filter Step"]] } "]"
   |
   [:{/"anything but [ ] or whitespace"/}]

@@ -1,19 +1,21 @@
 created: 20230316151518640
-modified: 20230319182938190
+modified: 20230322131823624
 tags: [[Filter Run Prefix]]
-title: Filter Run Prefix Named and Shortcuts
+title: Interchangeable Filter Run Prefixs
 type: text/vnd.tiddlywiki
+
+Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop="Filters"/>
 
 !! Interchangeable Filter Run Prefixes
 
 In technical / logical terms:
 
 |!Run |!Equivalent named prefix |!Interpretation |!Output |
-|`run` |`:or[run]` |de-duplicated union of sets |... OR run |
-|`+run` |`:and[run]` |accumulation of filter steps |... AND run |
-|`-run` |`:except[run]` |difference of sets |... AND NOT run |
-|`~run` |`:else[run]` |else |... ELSE run |
-|`=run` |`:all[run]` |union of sets without de-duplication |... OR run |
+|`[run]` |`:or[run]` |de-duplicated union of sets |... OR run |
+|`+[run]` |`:and[run]` |accumulation of filter steps |... AND run |
+|`-[run]` |`:except[run]` |difference of sets |... AND NOT run |
+|`~[run]` |`:else[run]` |else |... ELSE run |
+|`=[run]` |`:all[run]` |union of sets without de-duplication |... OR run |
 
 The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order).<br>But the `+` prefix can change this:
 

@@ -1,5 +1,5 @@
 created: 20150124182127000
-modified: 20230321130333361
+modified: 20230322141322537
 tags: [[Filter Run]]
 title: Filter Step
 type: text/vnd.tiddlywiki
@@ -15,7 +15,7 @@ In programming terms, it is akin to a function call to which the step's input is
 \end none
 [:"!"]
 ( / "if omitted, defaults to: title" /|:
-( /"if omitted use: all[tiddlers]"/ | :[[operator|"Filter Operators"]] )
+( - | :[[operator|"Filter Operators"]] )
 { [:":" [[suffix|"Filter Operators"]] ] } )
 { [[parameter|"Filter Parameter"]] + "," }
 """/>
@@ -28,10 +28,10 @@ The <<.def suffix>> is additional text, often the name of a [[field|TiddlerField
 
 If a step's <<.def operator>> and <<.def suffix>> are //omitted// altogether, it defaults to the [[title|title Operator]] operator.
 
-If a step's <<.def operator>> is //omitted// it defaults to the [[all[tiddlers]|all Operator]] operator.
+<<.from-version "5.1.23">> Some steps accept multiple <<.def parameter>>s which are separated by a `,` character.
 
-<<.from-version "5.1.23">> Some steps accept multiple <<.def parameter>>s which are separated by a ` , ` character.
+Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. 
 
-Filter operators can be extended by plugins. Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. 
+Filter operators can be extended by plugins.
 
 {{Selection Constructors}}

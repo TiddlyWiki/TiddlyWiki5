@@ -1,6 +1,6 @@
 created: 20211128212902292
 from-version: 5.1.23
-modified: 20230319171039291
+modified: 20230322140656814
 rp-input: all titles from previous filter runs
 rp-output: the titles that are present in both the result of this filter run and the output from previous runs
 rp-purpose: find the intersection of titles from previous runs with titles in this filter
@@ -10,6 +10,7 @@ type: text/vnd.tiddlywiki
 
 <$railroad text="""
 \start none
+\end none
 ( ":intersection" | - )
 [[run|"Filter Run"]]
 """/>

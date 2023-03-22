@@ -1,6 +1,6 @@
 created: 20210428083929749
 from-version: 5.2.0
-modified: 20230319172719297
+modified: 20230322140722470
 rp-input: the filter output of all previous runs so far
 rp-output: output titles replace the output of previous filter runs
 rp-purpose: sort the input titles by the result of evaluating this filter run for each item
@@ -11,6 +11,7 @@ type: text/vnd.tiddlywiki
 
 <$railroad text="""
 \start none
+\end none
 ( ":sort" )
 ( : ":string" | ":alphanumeric" | ":number" | ":integer" | ":version" | ":date" )
 ( : ":casesensitive" /"required for string and alphanumeric"/ | ":caseinsensitive" /"required for string and alphanumeric"/  | ":reverse" /"optional"/ | - ) 

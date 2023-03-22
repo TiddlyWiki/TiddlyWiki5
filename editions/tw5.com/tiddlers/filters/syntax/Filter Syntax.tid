@@ -1,6 +1,6 @@
 created: 20140210141217955
 list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
-modified: 20230319153519162
+modified: 20230322135211255
 tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
@@ -13,11 +13,13 @@ Filters are ''expressions'' constructed from smaller building blocks, called ''r
 
 A filter starts with an empty output. Its runs are processed from left to right, progressively modifying the output.
 
-Everything starts with:
+The "Filter Syntax" description starts with:
 
 
 <$railroad text="""
+\start double
+\end double
 [[<"Filter Expression">|"Filter Expression"]]
 """/>
 
-<<.tip "The railroad boxes as the one above can be used to navigate!">>
+<<.tip "The railroad boxes as the one above can be used to navigate">>
