@@ -1,5 +1,5 @@
 created: 20141018090608643
-modified: 20230321134656956
+modified: 20230322144832478
 tags: WikiText
 title: Transclusion and Substitution
 type: text/vnd.tiddlywiki
@@ -47,7 +47,7 @@ As described in [[HTML in WikiText]], you can also transclude a variable as the 
 <$text text=<<myMacro>>/>
 ```
 
-As described in [[Introduction to filter notation]], you can also transclude a variable as the value using the [[filter syntax|Filter Syntax]]. For example:
+As described in [[Introduction to filter notation]], you can also transclude a variable as the value of a filter parameter using the [[filter syntax|Filter Syntax]]. For example:
 
 ```
 {{{ [tag<myMacro>] }}}
