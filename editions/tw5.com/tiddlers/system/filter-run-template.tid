@@ -25,9 +25,6 @@ type: text/vnd.tiddlywiki
 <$list filter="[all[current]tag[Named Filter Run Prefix]]">
 	<p>Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop="Filters"/></p>
 	<$let op-head="" op-body="" op-name="">
-		<$list filter="[all[current]has[from-version]]" variable="listItem">
-			<$macrocall $name=".from-version" version={{!!from-version}}/>
-		</$list>
 		<table class="doc-table">
 			<!-- purpose -->
 			<$let op-head="purpose" op-body={{!!rp-purpose}}>
@@ -46,5 +43,8 @@ type: text/vnd.tiddlywiki
 				<<.op-row>>
 			</$let>
 		</table>
+		<$list filter="[all[current]has[from-version]]" variable="listItem">
+			<$macrocall $name=".from-version" version={{!!from-version}}/>
+		</$list>
 	</$let>
 </$list>
