@@ -70,11 +70,16 @@ $else$
 
 {{$:/themes/tiddlywiki/vanilla/reset}}
 
-*, input[type="search"] {
+/*	The following code box-sizing code is part of the reset.
+	So if reset is changed make sure this is enabled again.
+*/
+/*
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
 }
+*/
 
 input[type="search"] {
 	outline-offset: initial;
