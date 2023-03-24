@@ -1,10 +1,10 @@
 title: $:/plugins/tiddlywiki/geospatial/readme
 
-This is an early alpha build of the new Geospatial Plugin for TiddlyWiki.
+This is an early version of the new Geospatial Plugin for TiddlyWiki.
 
-The goal is to develop new primitives for the TiddlyWiki platform that enable non-developers to build sophisticated interactive geospatial applications.
+The goal is to add new primitives to the TiddlyWiki platform that enable non-developers to build sophisticated interactive geospatial applications.
 
-At this point, the Geospatial Plugin is largely a proof of concept of foundational capabilities:
+The Geospatial Plugin incorporates a number of third party libraries and online services:
 
 * Integrating the open source [[Leaflet.js|https://leafletjs.com/]] library to display interactive maps
 * Integrating the open source [[Turf.js|https://turfjs.org/]] library to perform geospatial calculations with [[GeoJSON|https://en.wikipedia.org/wiki/GeoJSON]] objects

@@ -1,18 +1,5 @@
 title: $:/plugins/tiddlywiki/geospatial/docs
 
-! Macros
-
-!! `show-geojson` macro
-
-The `show-geojson` operator displays a GeoJSON object in a human-readable form.
-
-|!Parameter |!Description |
-|geojson |Text of GeoJSON object to display |
-
-```
-<$macrocall $name="show-geojson" geojson={{$:/geospatialdemo/features/us-states}}/>
-```
-
 ! Filter Operators
 
 !! `geopoint` operator
