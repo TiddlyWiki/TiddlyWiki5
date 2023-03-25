@@ -290,5 +290,5 @@ ol.doc-github-contributors li {
   color: #666;
 }
 table .doc-tab-link .doc-attr {
-  color: #666;
+  color: unset;
 }

@@ -61,24 +61,26 @@ type: text/vnd.tiddlywiki
 \define .toc-tab() <<.tab "TableOfContents">>
 \define .example-tab(_) <span class="doc-tab">$_$</span>
 
-\define .widget-tabs()
+\define .doc-tabs()
 <$macrocall $name="tabs"
       tabsList="[tag<currentTiddler>description[tab]]"
       default={{{ [tag<currentTiddler>first[]] }}}
       explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
-      class="doc-tabs" />
+      class={{{ [[doc-tabs]] [<currentTiddler>encodeuricomponent[]addprefix[doc-tabs-]] +[join[ ]] }}} />
 \end
-\define .widget-tab-link(text, target, tooltip, class)
+\define .doc-tab-link(text, target, tooltip, class)
 <$button class={{{ [[tc-btn-invisible]] [<__class__>] +[join[ ]] }}}
       set={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
       setTo=<<__target__>>
-      tooltip=<<__tooltip__>>><<__text__>>
+      tooltip=<<__tooltip__>>>
+    <<__text__>>
+    <$action-sendmessage $message="tm-scroll" selector={{{ [<currentTiddler>encodeuricomponent[]addprefix[.doc-tabs-]] }}} />
 </$button>
 \end
 \define .widget-attr-link(text, target)
-<$macrocall $name=".widget-tab-link" 
+<$macrocall $name=".doc-tab-link" 
       text={{{ [[<code class="doc-attr">]] [<__text__>] [[</code>]] +[join[]] }}}
-      class="doc-tab-link"
+      class="doc-tab-link tc-tiddlylink"
       target=<<__target__>>
       tooltip={{{ [[Show more information about the ']] [<__text__>] [[' attribute]] +[join[]] }}} />
 \end
