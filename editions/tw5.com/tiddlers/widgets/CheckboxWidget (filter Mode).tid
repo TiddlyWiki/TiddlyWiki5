@@ -1,7 +1,7 @@
 caption: <<.attr filter>>
 created: 20230314174505003
 description: tab
-modified: 20230317160919061
+modified: 20230325101447667
 tags: CheckboxWidget
 title: CheckboxWidget (filter Mode)
 
@@ -13,7 +13,7 @@ If the filter returns an empty result, the checkbox will be unchecked. Otherwise
 
 However, if either the <<.attr checked>> or <<.attr unchecked>> attributes (or both) are specified, then their values will be looked for in the filter result, instead of considering any non-empty value to mean <<.value checked>>.
 
-This example creates the same checkbox as in the <<.widget-tab-link "list mode example" "CheckboxWidget (listField Mode)">>, selecting between <<.value red>> and <<.value green>> in the <<.field colors>> list field, but using filters and actions to make the change.
+This example creates the same checkbox as in the <<.doc-tab-link "listField mode example" "CheckboxWidget (listField Mode)">>, selecting between <<.value red>> and <<.value green>> in the <<.field colors>> list field, but using filters and actions to make the change.
 
 <<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
 \define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>

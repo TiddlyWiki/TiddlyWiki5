@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20230317161300817
+modified: 20230325101302633
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -66,21 +66,21 @@ type: text/vnd.tiddlywiki
       tabsList="[tag<currentTiddler>description[tab]]"
       default={{{ [tag<currentTiddler>first[]] }}}
       explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
-      class={{{ [[doc-tabs]] [<currentTiddler>encodeuricomponent[]addprefix[doc-tabs-]] +[join[ ]] }}} />
+      class={{{ [[doc-tabs]] [<currentTiddler>encodeuricomponent[]escapecss[]addprefix[doc-tabs-]] +[join[ ]] }}} />
 \end
-\define .doc-tab-link(text, target, tooltip, class)
-<$button class={{{ [[tc-btn-invisible]] [<__class__>] +[join[ ]] }}}
+\define .doc-tab-link(text, target, tooltip:"", class:"")
+<$button class={{{ [[tc-btn-invisible tc-tiddlylink]] [<__class__>] +[join[ ]] }}}
       set={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
       setTo=<<__target__>>
       tooltip=<<__tooltip__>>>
     <<__text__>>
-    <$action-sendmessage $message="tm-scroll" selector={{{ [<currentTiddler>encodeuricomponent[]addprefix[.doc-tabs-]] }}} />
+    <$action-sendmessage $message="tm-scroll" selector={{{ [<currentTiddler>encodeuricomponent[]escapecss[]addprefix[.doc-tabs-]] }}} />
 </$button>
 \end
 \define .widget-attr-link(text, target)
 <$macrocall $name=".doc-tab-link" 
       text={{{ [[<code class="doc-attr">]] [<__text__>] [[</code>]] +[join[]] }}}
-      class="doc-tab-link tc-tiddlylink"
+      class="doc-tab-link"
       target=<<__target__>>
       tooltip={{{ [[Show more information about the ']] [<__text__>] [[' attribute]] +[join[]] }}} />
 \end
