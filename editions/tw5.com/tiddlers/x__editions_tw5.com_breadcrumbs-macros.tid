@@ -1,0 +1,68 @@
+code-body: yes
+created: 20230324160845531
+modified: 20230325141736431
+tags: $:/tags/Macro
+title: x:/editions/tw5.com/breadcrumbs-macros
+type: text/vnd.tiddlywiki
+
+<!-- This BC macro uses the list-field as the source. current is used as the first element -->
+
+\define .breadcrumbsList(current, title, field:"list")
+\whitespace trim
+<div class="tc-breadcrumbs">
+	<<__title__>>
+	<span class="tc-crumb-first"><<__current__>></span>
+	<$list filter="[<__current__>get<__field__>enlist-input[]]">
+		 <$link class="tc-small-gap-left tc-crumb" />
+	</$list>
+</div>
+\end
+
+<!-- This BC macro uses the list-field as the start of the hierarchy -->
+
+\define .bcFieldRecursion(current, stop, exclude, field)
+\whitespace trim
+<$list filter="[<__stop__>is[tiddler]]" emptyMessage="""@@color:red; .recursiveParentTag ERROR! -- stop-tiddler: "<<__stop__>>" does not exist@@""" variable="ignore">
+	<$let tag={{{ [<__current__>get<__field__>enlist-input[]] -[enlist<__exclude__>] +[limit[1]] :else[<__stop__>] }}} >
+		<$set name="excluded" filter="[enlist<__exclude__>] :or[<tag>]">
+			<$list filter="[<tag>!match<__stop__>]" emptyMessage="""<$link to=<<tag>> class="tc-small-gap-left tc-crumb-first"><<tag>></$link>""" >
+				<$macrocall $name=".bcFieldRecursion" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>>/>
+				 <$link class="tc-small-gap-left tc-crumb"/>
+			</$list>
+		</$set>
+	</$let>
+</$list>
+\end
+
+\define .breadcrumbsField(current, stop, title, field:"list")
+\whitespace trim
+<div class="tc-breadcrumbs">
+	<<__title__>>
+	<$macrocall $name=".bcFieldRecursion" current=<<__current__>> stop=<<__stop__>> exclude=<<__current__>> field=<<__field__>>/><span class="tc-crumb"><<__current__>></span>
+</div>
+\end
+
+<!-- This BC macro uses tags to define the hierarchy -->
+
+\define .bcTagRecursion(current, stop, exclude)
+\whitespace trim
+<$list filter="[<__stop__>is[tiddler]]" emptyMessage="""@@color:red; .recursiveParentTag ERROR! -- stop-tiddler: "<<__stop__>>" does not exist@@""" variable="ignore">
+	<$let tag={{{ [<__current__>tags[]] -[enlist<__exclude__>] +[sort[]limit[1]] :else[<__stop__>] }}} >
+		<$set name="excluded" filter="[enlist<__exclude__>] :or[<tag>]">
+			<$list filter="[<tag>!match<__stop__>]" emptyMessage="""<$link to=<<tag>> class="tc-small-gap-left tc-crumb-first"><<tag>></$link>""" >
+				<$macrocall $name=".bcTagRecursion" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>>/>
+				 <$link class="tc-small-gap-left tc-crumb"/>
+			</$list>
+		</$set>
+	</$let>
+</$list>
+\end
+
+\define .breadcrumbsTag(current, stop, title)
+\whitespace trim
+<div class="tc-breadcrumbs">
+	<<__title__>>
+	<$macrocall $name=".bcTagRecursion" current=<<__current__>> stop=<<__stop__>> exclude=<<__current__>>/><span class="tc-crumb"><<__current__>></span>
+</div>
+\end
+

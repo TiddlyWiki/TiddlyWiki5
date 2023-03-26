@@ -1,0 +1,46 @@
+code-body: yes
+created: 20230324213922632
+modified: 20230324225326117
+tags: $:/tags/Stylesheet
+title: breadcrumb-arrows-css
+type: text/vnd.tiddlywiki
+
+.tc-breadcrumbs .tc-crumb-first::after,
+.tc-breadcrumbs .tc-crumb::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  right: -9.4px;
+  width: 19.8px;
+  height: 19.8px;
+  transform: rotate(45deg);
+  border-top: 10px solid <<colour message-background>>;
+  border-right: 10px solid <<colour message-background>>;
+}
+
+.tc-breadcrumbs .tc-crumb::before {
+  content: "";
+  position: absolute;
+  left: -9.4px;
+  bottom: 4px;
+  width: 19.8px;
+  height: 19.8px;
+  transform: rotate(45deg);
+  border-top: 10px solid <<colour background>>;
+  border-right: 10px solid <<colour background>>;
+}
+
+.tc-breadcrumbs .tc-crumb-first,
+.tc-breadcrumbs .tc-crumb {
+  position: relative;
+  display: inline-block;
+  padding: 3px 10px 3px 19.8px;
+  margin-left: 14px;
+  height: 28px;
+  background: <<colour message-background>>;
+}
+
+.tc-breadcrumbs .tc-crumb-first {
+  padding-left: 14px;
+  margin-left: 0;
+}
