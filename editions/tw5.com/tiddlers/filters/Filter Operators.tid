@@ -1,5 +1,6 @@
+breadcrumbs: [[Filter Step]]
 created: 20140410103123179
-modified: 20230322143506125
+modified: 20230327132745845
 tags: Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -18,7 +19,7 @@ type: text/vnd.tiddlywiki
 <tr class="doc-table-subheading"><th colspan="5" align="center">$_$</th></tr>
 \end
 
-Parent: [[Filter Step]]
+<$macrocall $name=".breadcrumbsField" field="breadcrumbs"/>
 
 A <<.def "filter operator">> is a predefined keyword attached to an individual step of a [[filter|Filters]]. It defines the particular action of that step.
 

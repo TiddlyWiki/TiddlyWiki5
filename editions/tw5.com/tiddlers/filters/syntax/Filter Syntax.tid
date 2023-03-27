@@ -1,6 +1,6 @@
 created: 20140210141217955
 list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
-modified: 20230322135211255
+modified: 20230327130450931
 tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
@@ -15,6 +15,7 @@ A filter starts with an empty output. Its runs are processed from left to right,
 
 The "Filter Syntax" description starts with:
 
+<$macrocall $name=".breadcrumbs" stop="Filters"/>
 
 <$railroad text="""
 \start double

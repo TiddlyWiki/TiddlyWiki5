@@ -1,10 +1,10 @@
 created: 20150124182127000
-modified: 20230322141322537
+modified: 20230327125737628
 tags: [[Filter Run]]
 title: Filter Step
 type: text/vnd.tiddlywiki
 
-Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop="Filters"/>
+<$macrocall $name=".breadcrumbs" stop="Filters"/>
 
 A <<.def "filter step">> represents a single operation within a <<.def "filter run">>.
 

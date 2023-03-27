@@ -1,7 +1,7 @@
 code-body: yes
 created: 20230316112235083
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20230318144728713
+modified: 20230326145802667
 tags: $:/tags/ViewTemplate
 title: $:/editions/tw5.com/filter-run-template
 type: text/vnd.tiddlywiki
@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 
 <$list filter="[all[current]tag[Named Filter Run Prefix]]">
-	<p>Parents: <$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop="Filters"/></p>
+	<$macrocall $name=".breadcrumbs" stop="Filters"/>
 	<$let op-head="" op-body="" op-name="">
 		<table class="doc-table">
 			<!-- purpose -->
