@@ -74,7 +74,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 	this.cancelScroll(srcWindow);
 	this.startTime = Date.now();
 	// Get the height of any position:fixed toolbars
-	var toolbar = $tw.utils.querySelectorSafe(".tc-adjust-top-of-scroll",srcWindow.document),
+	var toolbar = srcWindow.document.querySelector(".tc-adjust-top-of-scroll"),
 		offset = 0;
 	if(toolbar) {
 		offset = toolbar.offsetHeight;

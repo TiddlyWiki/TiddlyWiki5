@@ -268,7 +268,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 	EditTextWidget.prototype.handleKeydownEvent = function(event) {
 		// Check for a keyboard shortcut
 		if(this.toolbarNode) {
-			var shortcutElements = $tw.utils.querySelectorAllSafe("[data-tw-keyboard-shortcut]",this.toolbarNode);
+			var shortcutElements = this.toolbarNode.querySelectorAll("[data-tw-keyboard-shortcut]");
 			for(var index=0; index<shortcutElements.length; index++) {
 				var el = shortcutElements[index],
 					shortcutData = el.getAttribute("data-tw-keyboard-shortcut"),

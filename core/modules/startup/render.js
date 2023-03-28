@@ -65,7 +65,7 @@ exports.startup = function() {
    		$tw.hooks.invokeHook("th-page-refreshed");
 	})();
 	// Remove any splash screen elements
-	var removeList = $tw.utils.querySelectorAllSafe(".tc-remove-when-wiki-loaded",document);
+	var removeList = document.querySelectorAll(".tc-remove-when-wiki-loaded");
 	$tw.utils.each(removeList,function(removeItem) {
 		if(removeItem.parentNode) {
 			removeItem.parentNode.removeChild(removeItem);
