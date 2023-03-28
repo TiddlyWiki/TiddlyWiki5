@@ -1005,24 +1005,4 @@ exports.makeCompareFunction = function(type,options) {
 	return (types[type] || types[options.defaultType] || types.number);
 };
 
-
-/*
-Make sure the CSS selector is not invalid
-*/
-exports.querySelectorSafe = function(selector,baseElement) {
-	try {
-		return baseElement.querySelector(selector);
-	} catch(e) {
-		console.log("Invalid selector: ",selector);
-	}
-};
-
-exports.querySelectorAllSafe = function(selector,baseElement) {
-	try {
-		return baseElement.querySelectorAll(selector);
-	} catch(e) {
-		console.log("Invalid selector: ",selector);
-	}
-};
-
 })();
