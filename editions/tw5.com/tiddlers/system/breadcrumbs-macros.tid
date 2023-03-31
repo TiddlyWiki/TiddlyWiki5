@@ -6,6 +6,9 @@ title: $:/editions/tw5.com/breadcrumbs-macros
 type: text/vnd.tiddlywiki
 
 
+<!-- This ".breadcrumbs" macro uses a list-like field (default: tags) as the start of the hierarchy -->
+<!-- mode defaults to "story" ... "simple" will open breadcrumb links according to the global settings -->
+
 \define .breadcrumbs(start, stop, exclude, label, field, sort, mode:"story")
 \whitespace trim
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} >
@@ -17,8 +20,8 @@ type: text/vnd.tiddlywiki
 </$let>
 \end
 
-
-<!-- This "breadcrumbs" macro uses a list-like field (default: tags) as the start of the hierarchy -->
+<!-- This ".breadcrumbsSimple" macro uses a list-like field (default: tags) as the start of the hierarchy -->
+<!-- Links will be opened according to global settings -->
 
 \define .bcRecursion(current, stop, exclude, field:"tags", sort:"yes")
 \whitespace trim
@@ -51,7 +54,8 @@ type: text/vnd.tiddlywiki
 </$let>
 \end
 
-<!-- This breadcrumbs macro will retain the order in story river -->
+<!-- This ".breadcrumbsStory" macro uses a list-like field (default: tags) and --> 
+<!-- it will retain the hierarchical order in the story river -->
 
 \define .openInStoryActions()
 <$set name=visited filter="[enlist<excluded>order[reverse]]" >
@@ -70,8 +74,6 @@ type: text/vnd.tiddlywiki
 	<$link to=<<__target__>> class=<<__class__>> ><<__target__>></$link>
 </$linkcatcher>
 \end
-
-<!-- This "breadcrumbs" macro uses a list-like field (default: tags) as the start of the hierarchy -->
 
 \define .bcFirstCrumb()
 <$macrocall $name=".openInStory" target=<<next>> source=<<__current__>> class="tc-small-gap-left tc-crumb-first"/>
@@ -109,7 +111,7 @@ type: text/vnd.tiddlywiki
 \end
 
 
-<!-- This macro uses a field (defaults to "list") as the breadcrumbs source.
+<!-- This macro ".breadcrumbsField" uses a field (defaults to "list") as the breadcrumbs source.
 	start is a tiddler title (defaults to "currentTiddler")
 -->
 
