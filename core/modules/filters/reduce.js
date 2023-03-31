@@ -27,7 +27,8 @@ exports.reduce = function(source,operator,options) {
 	for(var index=0; index<results.length; index++) {
 		var title = results[index],
 			list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),{
-				getVariable: function(name) {
+				getVariable: function(name,opts) {
+					opts = opts || {};
 					switch(name) {
 						case "currentTiddler":
 							return "" + title;
@@ -42,7 +43,7 @@ exports.reduce = function(source,operator,options) {
 						case "length":
 							return "" + results.length;
 						default:
-							return options.widget.getVariable(name);
+							return options.widget.getVariable(name,opts);
 					}
 				}
 			});

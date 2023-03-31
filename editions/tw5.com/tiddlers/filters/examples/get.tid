@@ -1,5 +1,5 @@
 created: 20150118134611000
-modified: 20230310154010278
+modified: 20230325163424379
 myfield: 
 tags: [[get Operator]] [[Operator Examples]]
 title: get Operator (Examples)
@@ -15,8 +15,8 @@ type: text/vnd.tiddlywiki
 
 <<.operator-example 4 "[all[current]get[myfield]]" "the empty value of field <<.field myfield>> is not returned by the <<.olink get>> operator">>
 
-<<.operator-example 5 "[all[current]] :filter[has:field[myfield]] :map[get[myfield]]" "also returns the empty string">>
-The above example works by first using the [[Filter Filter Run Prefix]] to only select titles that have the field <<.field myfield>> and then using the [[Map Filter Run Prefix]] to replace those titles with their value of that field.  The [[Map Filter Run Prefix]] outputs an empty string when its filter run returns an empty [[selection|Title Selection]].
+<<.operator-example 5 "[all[current]has:field[myfield]] :map[get[myfield]]" "also returns the empty string">>
+The above example works by first checking if the input title has the field <<.field myfield>> and then using the [[Map Filter Run Prefix]] to replace the title with their value of that field. If the input tiddler does not have the field, an empty <<.em selection>> is returned. The subsequent [[Map Filter Run Prefix]] outputs an empty <<.em string>> when its run returns an empty [[selection|Title Selection]] (because the field is empty).
 
 <<.operator-example 6 "[all[tiddlers]] :filter[get[created]compare:date:lt{HelloThere!!created}]" "return all tiddlers that are older than [[HelloThere]]">>
 The above example demonstrates two different ways of accessing field values in filters: Use <<.olink get>> when the title is not known in advance as with the [[Filter Filter Run Prefix]] where <<.var currentTiddler>> is set to the current input title. Use a [[TextReference]] as an indirect [[Filter Parameter]] when the title is known.

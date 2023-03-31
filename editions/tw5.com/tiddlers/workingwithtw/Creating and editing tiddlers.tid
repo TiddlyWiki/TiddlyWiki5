@@ -30,6 +30,6 @@ When you create a new tiddler or edit an existing one, the tiddler will go into 
 
 When you have finished editing, click a button at the top right of the tiddler:
 
-*The ''ok'' button (<<.icon $:/core/images/done-button>>) stores your changes to this one tiddler and leaves draft mode. If your wiki is configured to [[AutoSave]], your changes will be permanently saved. Otherwise they will only be stored temporarily in your web browser, and you will lose them if you close your ~TiddlyWiki page without first clicking the master ''save changes'' button (<<.icon $:/core/images/save-button>>) in the sidebar.
+*The ''ok'' button (<<.icon $:/core/images/done-button>>) stores your changes to this one tiddler and leaves draft mode. If your wiki is configured to [[AutoSave]], your changes will be permanently saved. Otherwise they will only be stored temporarily in your web browser, and you will lose them if you close your ~TiddlyWiki page without first clicking the master ''save changes'' button (<<.icon $:/core/images/save-button-dynamic>>) in the sidebar.
 *The ''cancel'' button (<<.icon $:/core/images/cancel-button>>) discards your changes (after asking you to confirm) and leaves draft mode.
 *The ''delete'' button (<<.icon $:/core/images/delete-button>>) deletes the entire tiddler (after asking you to confirm).

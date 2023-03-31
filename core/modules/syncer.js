@@ -402,6 +402,7 @@ Syncer.prototype.handleLazyLoadEvent = function(title) {
 			// Mark the tiddler as needing loading, and having already been lazily loaded
 			this.titlesToBeLoaded[title] = true;
 			this.titlesHaveBeenLazyLoaded[title] = true;
+			this.processTaskQueue();
 		}
 	}
 };

@@ -177,9 +177,11 @@ FramedEngine.prototype.fixHeight = function() {
 Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
-	if(this.domNode.focus && this.domNode.select) {
+	if(this.domNode.focus) {
 		this.domNode.focus();
-		this.domNode.select();
+	}
+	if(this.domNode.select) {
+		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
 	}
 };
 

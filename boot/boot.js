@@ -313,7 +313,7 @@ $tw.utils.getLocationHash = function() {
 	var idx = href.indexOf('#');
 	if(idx === -1) {
 		return "#";
-	} else if(idx < href.length-1 && href[idx+1] === '#') {
+	} else if(href.substr(idx + 1,1) === "#" ||  href.substr(idx + 1,3) === "%23") {
 		// Special case: ignore location hash if it itself starts with a #
 		return "#";
 	} else {
@@ -375,7 +375,7 @@ $tw.utils.stringifyList = function(value) {
 		var result = new Array(value.length);
 		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
-			if(entry.indexOf(" ") !== -1) {
+			if(entry.match(/[^\S\xA0]/mg)) {
 				result[t] = "[[" + entry + "]]";
 			} else {
 				result[t] = entry;
@@ -1881,7 +1881,7 @@ A default set of files for TiddlyWiki to ignore during load.
 This matches what NPM ignores, and adds "*.meta" to ignore tiddler
 metadata files.
 */
-$tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
+$tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.github$|^\.vscode$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
 
 /*
 Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}. Note that no file information is returned for externally loaded tiddlers, just the `tiddlers` property.
@@ -2408,6 +2408,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
+	$tw.utils.registerFileType("audio/mpeg","base64");
 	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");

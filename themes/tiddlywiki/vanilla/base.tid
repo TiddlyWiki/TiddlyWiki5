@@ -30,10 +30,6 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
 
-\define tiddler-width()
-	<$text text={{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}/>
-\end
-
 \define if-fluid-fixed(text,hiddenSidebarText)
 <$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
 $text$
@@ -146,7 +142,7 @@ pre {
 	display: block;
 	margin-top: 1em;
 	margin-bottom: 1em;
-	word-break: break-word;
+	word-break: normal;
 	word-wrap: break-word;
 	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: <<colour pre-background>>;
@@ -818,9 +814,6 @@ button.tc-tag-label, span.tc-tag-label {
 }
 
 .tc-untagged-separator {
-	width: 10em;
-	left: 0;
-	margin-left: 0;
 	border: 0;
 	height: 1px;
 	background: <<colour tab-divider>>;
@@ -1161,28 +1154,6 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
-
-/* prevent overflow for table content for small screens*/
-@media (max-width: <<sidebarbreakpoint>>) {
-	.tc-tiddler-frame tr {
-		word-wrap: anywhere;
-	}
-
-	.tc-tiddler-frame table blockquote {
-		margin-left: 12.5px;
-		margin-right: 12.5px; 
-	}
-
-	.tc-tiddler-frame table dd {
-		margin-left: 12.5px;
-	}
-
-	.tc-tiddler-frame table ol,
-	.tc-tiddler-frame table ul {
-		padding-left: 20px;
-	}
-}
-
 .tc-site-title,
 .tc-titlebar {
 	font-weight: normal;
@@ -1474,7 +1445,7 @@ html body.tc-body.tc-single-tiddler-window {
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 42px);
 	}
@@ -1486,7 +1457,7 @@ html body.tc-body.tc-single-tiddler-window {
 		margin-right: 0;
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 84px);
 	}
@@ -1745,7 +1716,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-right: .3em;
 }
 
-.tc-storyview-zoomin-tiddler {
+.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 	position: absolute;
 	display: block;
 	width: 100%;
@@ -1753,7 +1724,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 @media (min-width: <<sidebarbreakpoint>>) {
 
-	.tc-storyview-zoomin-tiddler {
+	.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: calc(100% - 84px);
 	}
 
@@ -2803,6 +2774,11 @@ input.tc-palette-manager-colour-input {
 	color: <<colour sidebar-foreground>>;
 }
 
+button + .tc-toc-caption,
+button > .tc-toc-caption{
+	margin-left: .25em;
+}
+
 .tc-table-of-contents svg {
 	width: 0.7em;
 	height: 0.7em;
@@ -2912,6 +2888,22 @@ input.tc-palette-manager-colour-input {
 /*
 ** Dirty indicator
 */
+
+html body svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-clean {
+	visibility: visible;
+}
+
+html body svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-dirty {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-clean {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-dirty {
+	visibility: visible;
+}
 
 html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
@@ -3163,6 +3155,8 @@ select {
 ** Other utility classes
 */
 
+/* Horizontal gaps */
+
 .tc-tiny-gap {
 	margin-left: .25em;
 	margin-right: .25em;
@@ -3204,4 +3198,10 @@ select {
 
 .tc-word-break {
 	word-break: break-all;
+}
+
+/* Vertical gaps */
+
+.tc-tiny-v-gap-bottom {
+	margin-bottom: 3px;
 }

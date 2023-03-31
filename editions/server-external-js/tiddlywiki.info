@@ -13,13 +13,13 @@
 		"listen": [
 			"--listen","root-tiddler=$:/core/save/all-external-js","use-browser-cache=yes"],
 		"index": [
-			"--rendertiddler","$:/core/save/offline-external-js","index.html","text/plain",
+			"--render","$:/core/save/offline-external-js","index.html","text/plain",
 			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"],
 		"static": [
-			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
-			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
-			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
-			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"],
+			"--render","$:/core/templates/static.template.html","static.html","text/plain",
+			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain",			
+			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"],
 		"tiddlywikicore": [
 			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"]
 	}

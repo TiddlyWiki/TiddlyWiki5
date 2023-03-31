@@ -1,0 +1,11 @@
+created: 20230304161453213
+modified: 20230304162156826
+tags: [[Operator Examples]]
+title: Hamlet
+type: application/json
+
+{
+    "Shakespeare-old": "Hamlet: Do you see yonder cloud that's almost in shape of a camel?\nPolonius: By the mass, and 'tis like a camel, indeed.\nHamlet: Methinks it is like a weasel.\nPolonius: It is backed like a weasel.\nHamlet: Or like a whale?\nPolonius: Very like a whale.\n-- Shakespeare",
+    "Shakespeare-new": "Hamlet: Do you see the cloud over there that's almost the shape of a camel?\nPolonius: By golly, it is like a camel, indeed.\nHamlet: I think it looks like a weasel.\nPolonius: It is shaped like a weasel.\nHamlet: Or like a whale?\nPolonius: It's totally like a whale.\n-- Shakespeare",
+    "Trekkie-old": "Kirk: Do you see yonder cloud that's almost in shape of a Klingon?\nSpock: By the mass, and 'tis like a Klingon, indeed.\nKirk: Methinks it is like a Vulcan.\nSpock: It is backed like a Vulcan.\nKirk: Or like a Romulan?\nSpock: Very like a Romulan.\n-- Trekkie"
+}

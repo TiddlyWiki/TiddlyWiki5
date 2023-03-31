@@ -97,8 +97,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
-		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",encodeURIComponent(this.to));
-		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",$tw.utils.encodeURIComponentExtended(this.to));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",$tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.to)));
 	}
 	// Override with the value of tv-get-export-link if defined
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});

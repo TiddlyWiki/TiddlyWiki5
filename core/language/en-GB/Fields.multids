@@ -1,11 +1,13 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: The full URI of an external image tiddler
+author: Name of the author of a plugin
 bag: The name of the bag from which a tiddler came
 caption: The text to be displayed on a tab or button
 code-body: The view template will display the tiddler as code if set to ''yes''
 color: The CSS color value associated with a tiddler
 component: The name of the component responsible for an [[alert tiddler|AlertMechanism]]
+core-version: For a plugin, indicates what version of TiddlyWiki with which it is compatible
 current-tiddler: Used to cache the top tiddler in a [[history list|HistoryMechanism]]
 created: The date a tiddler was created
 creator: The name of the person who created a tiddler
@@ -22,7 +24,9 @@ list-before: If set, the title of a tiddler before which this tiddler should be 
 list-after: If set, the title of the tiddler after which this tiddler should be added to the ordered list of tiddler titles, or at the end of the list if this field is present but empty
 modified: The date and time at which a tiddler was last modified
 modifier: The tiddler title associated with the person who last modified a tiddler
+module-type: For javascript tiddlers, specifies what kind of module it is
 name: The human readable name associated with a plugin tiddler
+parent-plugin: For a plugin, specifies which plugin of which it is a sub-plugin
 plugin-priority: A numerical value indicating the priority of a plugin tiddler
 plugin-type: The type of plugin in a plugin tiddler
 revision: The revision of the tiddler held at the server

@@ -983,6 +983,9 @@ Tests the filtering mechanism.
 			rootWidget.setVariable("sort2","[get[text]else[]length[]]");
 			rootWidget.setVariable("sort3","[{!!value}divide{!!cost}]");
 			rootWidget.setVariable("sort4","[{!!title}]");
+			rootWidget.setVariable("undefined-variable","[<doesnotexist>]");
+			rootWidget.setVariable("echo","$text$",[{name:"text"}],true);
+			rootWidget.setVariable("sort4-macro-param","[subfilter<echo '[{!!title}]'>]");
 			expect(wiki.filterTiddlers("[sortsub:number<sort1>]",anchorWidget).join(",")).toBe("one,hasList,has filter,TiddlerOne,$:/TiddlerTwo,Tiddler Three,$:/ShadowPlugin,a fourth tiddler,filter regexp test");
 			expect(wiki.filterTiddlers("[!sortsub:number<sort1>]",anchorWidget).join(",")).toBe("filter regexp test,a fourth tiddler,$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,has filter,TiddlerOne,hasList,one");
 			expect(wiki.filterTiddlers("[sortsub:string<sort1>]",anchorWidget).join(",")).toBe("has filter,TiddlerOne,$:/TiddlerTwo,Tiddler Three,$:/ShadowPlugin,a fourth tiddler,filter regexp test,one,hasList");
@@ -993,6 +996,9 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[!sortsub:string<sort2>]",anchorWidget).join(",")).toBe("filter regexp test,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,$:/ShadowPlugin,has filter,hasList,TiddlerOne,one");
 			expect(wiki.filterTiddlers("[[TiddlerOne]] [[$:/TiddlerTwo]] [[Tiddler Three]] [[a fourth tiddler]] +[!sortsub:number<sort3>]",anchorWidget).join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne,a fourth tiddler");
 			expect(wiki.filterTiddlers("a1 a10 a2 a3 b10 b3 b1 c9 c11 c1 +[sortsub:alphanumeric<sort4>]",anchorWidget).join(",")).toBe("a1,a2,a3,a10,b1,b3,b10,c1,c9,c11");
+			// #7155. The order of the output is the same as the input when an undefined variable is used in the subfitler
+			expect(wiki.filterTiddlers("a2 a10 a1 +[sortsub:alphanumeric<undefined-variable>]",anchorWidget).join(",")).toBe("a2,a10,a1");
+			expect(wiki.filterTiddlers("a1 a10 a2 a3 b10 b3 b1 c9 c11 c1 +[sortsub:alphanumeric<sort4-macro-param>]",anchorWidget).join(",")).toBe("a1,a2,a3,a10,b1,b3,b10,c1,c9,c11");
 		});
 		
 		it("should handle the toggle operator", function() {
@@ -1065,6 +1071,20 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[charcode[9],[10]]").join(" ")).toBe(String.fromCharCode(9) + String.fromCharCode(10));
 			expect(wiki.filterTiddlers("[charcode[]]").join(" ")).toBe("");
 		});
+		
+		it("should handle the levenshtein operator", function() {
+			expect(wiki.filterTiddlers("[[apple]levenshtein[apple]]").join(" ")).toBe("0");
+			expect(wiki.filterTiddlers("[[apple]levenshtein[banana]]").join(" ")).toBe("9");
+			expect(wiki.filterTiddlers("[[representation]levenshtein[misreprehensionisation]]").join(" ")).toBe("10");
+			expect(wiki.filterTiddlers("[[the cat sat on the mat]levenshtein[the hat saw in every category]]").join(" ")).toBe("13");
+		});
+		
+		it("should handle the makepatches operator", function() {
+			expect(wiki.filterTiddlers("[[apple]makepatches[apple]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[apple]makepatches[banana]]").join(" ")).toBe("@@ -1,5 +1,6 @@\n-apple\n+banana\n");
+			expect(wiki.filterTiddlers("[[representation]makepatches[misreprehensionisation]]").join(" ")).toBe("@@ -1,13 +1,21 @@\n+mis\n repre\n-sent\n+hensionis\n atio\n");
+			expect(wiki.filterTiddlers("[[the cat sat on the mat]makepatches[the hat saw in every category]]").join(" ")).toBe("@@ -1,22 +1,29 @@\n the \n-c\n+h\n at sa\n-t on the mat\n+w in every category\n");
+		});
 	
 		it("should parse filter variable parameters", function(){
 		  expect($tw.utils.parseFilterVariable("currentTiddler")).toEqual(
@@ -1100,6 +1120,10 @@ Tests the filtering mechanism.
 		  expect($tw.utils.parseFilterVariable("")).toEqual(
 			{ name: '', params: [] }
 		  );
+		});
+		
+		it("should handle the encodeuricomponent and decodeuricomponent operators", function() {
+			expect(wiki.filterTiddlers("[[<>:\"/\\|?*]encodeuricomponent[]]").join(",")).toBe("%3C%3E%3A%22%2F%5C%7C%3F%2A");
 		});
 	
 	}

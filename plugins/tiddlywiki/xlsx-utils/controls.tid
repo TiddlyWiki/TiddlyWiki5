@@ -115,6 +115,7 @@ the
 <$select tiddler=<<field>> field="import-field-type" default="string">
 <option value="date">date</option>
 <option value="string">string</option>
+<option value="number">number</option>
 </$select>
 <$select tiddler=<<field>> field="import-field-source" default="column">
 <option value="column">from column</option>

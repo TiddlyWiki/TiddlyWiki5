@@ -15,7 +15,7 @@ The PDF parser embeds a PDF viewer
 var ImageParser = function(type,text,options) {
 	var element = {
 			type: "element",
-			tag: "embed",
+			tag: "iframe",
 			attributes: {}
 		},
 		src;
