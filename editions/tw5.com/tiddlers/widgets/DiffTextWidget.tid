@@ -1,6 +1,6 @@
 caption: diff-text
 created: 20180316162725329
-modified: 20180316162725329
+modified: 20230401114522914
 tags: Widgets
 title: DiffTextWidget
 type: text/vnd.tiddlywiki
@@ -59,3 +59,10 @@ src="""<$edit-text tiddler="SampleTiddlerFirst"/>
 <$edit-text tiddler="SampleTiddlerSecond"/>
 
 <$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}}/>"""/>
+
+!! Modes
+<$button set="!!myfield" setTo="chars">Chars</$button>
+<$button set="!!myfield" setTo="words">Words</$button>
+<$button set="!!myfield" setTo="lines">Lines</$button>
+
+<$diff-text source={{Hamlet##Shakespeare-old}} dest={{Hamlet##Shakespeare-new}} mode={{!!myfield}} />
