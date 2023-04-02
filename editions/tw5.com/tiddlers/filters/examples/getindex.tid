@@ -1,5 +1,5 @@
 created: 20150203140000000
-modified: 20230309180501044
+modified: 20230325163543621
 tags: [[getindex Operator]] [[Operator Examples]]
 title: getindex Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -12,8 +12,8 @@ type: text/vnd.tiddlywiki
 
 <<.operator-example 3 "[[ListopsData]getindex[DataIndex]]" "the empty value of the property <<.field ~DataIndex>> in [[ListopsData]] is not returned by the <<.olink getindex>> operator">>
 
-<<.operator-example 4 "[[ListopsData]] :filter[has:index[DataIndex]] :map[getindex[DataIndex]]" "also returns the empty string">>
-The above example works by first using the [[Filter Filter Run Prefix]] to only select titles that have the property <<.field ~DataIndex>> and then using the [[Map Filter Run Prefix]] to replace those titles with their value of that property.  The [[Map Filter Run Prefix]] outputs an empty string when its filter run returns an empty [[selection|Title Selection]].
+<<.operator-example 4 "[[ListopsData]has:index[DataIndex]] :map[getindex[DataIndex]]" "also returns the empty string">>
+The above example works by first checking if the input title has the property <<.field ~DataIndex>> and then using the [[Map Filter Run Prefix]] to replace the title with their value of that property. If the input tiddler does not have the property, an empty <<.em selection>> is returned. The subsequent [[Map Filter Run Prefix]] outputs an empty <<.em string>> when its run returns an empty [[selection|Title Selection]] (because the property is empty).
 
 <<.operator-example 5 "[[$:/palettes/Vanilla]indexes[]] :filter[[$:/palettes/Vanilla]getindex<currentTiddler>count[]compare:number:eq[0]]" "returns those colors in [[$:/palettes/Vanilla]] which are defined, but have no value assigned">>
 In the above example, <<.olink count>> is used to check if <<.olink getindex>> returns a result (i.e. the corresponding property has a value) or not.
