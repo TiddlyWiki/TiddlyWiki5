@@ -28,20 +28,59 @@ Returns:
 
 !! `geodistance` operator
 
+The `geodistance` operator calculates the distance between two points in [[GeoJSON Point Feature]] format. The points are specified as two operands. An optional third operand specifies the units as `miles`, `kilometers`, `degrees` or `radians` (defaults to `miles`).
 
+```
+<$let
+	oxford={{{ [geopoint[51.751944],[-1.257778]] }}}
+	new-york={{{ [geopoint[40.730610],[-73.935242]] }}}
+>
+<$text text={{{ [geodistance<oxford>,<new-york>] }}}/>,
+<$text text={{{ [geodistance<oxford>,<new-york>,[miles]] }}}/>,
+</$let>
+```
 
 !! `geounion` operator
 
 The `geounion` operator calculates the union between two or more [[GeoJSON Polygon Features|GeoJSON Polygon Feature]].
 
-Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] containing polygons. Any item that 
+Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] containing polygons.
 
 ```
 [geounion[]]
 ```
-etc for geointersect and geodifference
+
+!! `geointersect` operator
+
+The `geointersect` operator calculates the intersection between two or more [[GeoJSON Polygon Features|GeoJSON Polygon Feature]].
+
+Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] containing polygons.
+
+```
+[geointersect[]]
+```
+
+!! `geodifference` operator
+
+The `geodifference` operator calculates the difference between two or more [[GeoJSON Polygon Features|GeoJSON Polygon Feature]].
+
+Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] containing polygons.
+
+```
+[geodifference[]]
+```
 
 !! `geolookup` operator
+
+The `geolookup` operator identifies the polygon(s) within a [[GeoJSON Polygon Feature]] that correspond to a particular point, and returns the JSON properties of that polygon.
+
+Each input list item is interpreted as a [[GeoJSON Point Feature]] and the operand is interpreted as a [[GeoJSON Polygon Feature Collection]].
+
+For example, here we lookup the point 100.5,0.5 in the [[GeoJSON Polygon Feature Collection]] stored in the tiddler `TestData` and then extracts the indexes `0` and `animal` from the resulting JSON:
+
+```
+<$text text={{{ [geopoint[100.5],[0.5]geolookup{TestData}jsonget[0],[animal]] }}}/>
+```
 
 !! `olc-decode` operator
 
@@ -54,7 +93,7 @@ The `olc-decode` operator converts an [[OpenLocationCode|https://github.com/goog
 
 !! `olc-encode` operator
 
-The `old-encode` operator converts separate latitude, longitude and (optionally) altitude numbers into an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut code with a specified length.
+The `old-encode` operator converts separate latitude and longitude numbers into an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut code with a specified length (defaults to 11 characters).
 
 ```
 [olc-encode[51.751944],[-1.257778]]
