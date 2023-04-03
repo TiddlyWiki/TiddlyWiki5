@@ -1,0 +1,16 @@
+caption: TiddlyStow (experimental)
+color: #FF8A65
+created: 20230403170650008
+delivery: Saver
+description: Save changes using new versions of Chromium based browsers
+method: save
+modified: 20230403183020357
+tags: Chrome Edge Opera Saving Linux Mac Windows
+title: Saving on Browser with TiddlyStow
+type: text/vnd.tiddlywiki
+url: https://github.com/btheado/tiddlystow
+
+''Link:'' {{!!url}}
+
+Tiddlystow saves TiddlyWiki files locally using the browser file system API (Chrome-based browsers currently). 
+This is a simple web page for loading a local TiddlyWiki file and storing it back to the same local file requiring no plugins or extensions.
