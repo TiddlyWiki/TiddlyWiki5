@@ -172,7 +172,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Refresh entire widget if layers or marker filter changes
-	if(changedAttributes.layers || changedAttributes.markers) {
+	if(changedAttributes.layers || changedAttributes.markers || changedAttributes.state) {
 		this.refreshSelf();
 		return true;
 	}
