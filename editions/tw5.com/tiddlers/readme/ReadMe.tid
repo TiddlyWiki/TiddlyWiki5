@@ -32,6 +32,10 @@ Developer documentation is in progress at https://tiddlywiki.com/dev/
 
 {{Upgrading TiddlyWiki on Node.js}}
 
+! Using TiddlyWiki with Docker
+
+{{Using TiddlyWiki with Docker}}
+
 ! Also see
 
 <<list-links "[tag[TiddlyWiki on Node.js]] -[[Installing TiddlyWiki on Node.js]] -[[Using TiddlyWiki on Node.js]] -[[Upgrading TiddlyWiki on Node.js]]">>
