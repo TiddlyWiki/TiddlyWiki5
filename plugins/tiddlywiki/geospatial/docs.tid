@@ -1,5 +1,18 @@
 title: $:/plugins/tiddlywiki/geospatial/docs
 
+! Widgets
+
+!! `<$geomap>` widget
+
+The `<$geomap>` widget displays an interactive map using [[Leaflet.js|https://leafletjs.com/]].
+
+The following attributes are supported:
+
+|!Attribute |!Description |
+|''state'' |The title of a state tiddler used to track the state of the map in the `zoom`, `long` and `lat` fields |
+|''layers'' |A filter identifying the GeoJSON layer tiddlers to be displayed on the map |
+|''markers'' |A filter identifying the GeoJSON marker tiddlers to be displayed on the map |
+
 ! Filter Operators
 
 !! `geopoint` operator
