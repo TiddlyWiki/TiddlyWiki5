@@ -28,4 +28,20 @@ exports.geodistance = function(source,operator,options) {
 	return [JSON.stringify(turf.distance(from,to,{units: units}))];
 };
 
+exports.geonearestpoint = function(source,operator,options) {
+	var target = geotools.parsePoint(operator.operands[0]),
+		points = [];
+	source(function(tiddler,title) {
+		var point = geotools.parsePoint(title);
+		if(point) {
+			points.push(point)
+		}
+	});
+	if(points.length > 0) {
+		return [JSON.stringify(turf.nearestPoint(target,turf.featureCollection(points)))];
+	} else {
+		return [];
+	}
+};
+
 })();

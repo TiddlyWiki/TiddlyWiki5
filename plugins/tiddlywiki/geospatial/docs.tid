@@ -53,6 +53,24 @@ The `geodistance` operator calculates the distance between two points in [[GeoJS
 </$let>
 ```
 
+!! `geonearestpoint` operator
+
+The `geonearestpoint` operator determines the point in a list that is nearest to a target point. Each input list item is interpreted as a [[GeoJSON Point Feature]] comprising the candidate points. The target point is specified as the first operand in [[GeoJSON Point Feature]] format.
+
+```
+<$let
+	oxford={{{ [geopoint[51.751944],[-1.257778]jsonset[id],[Oxford]] }}}
+	winchester={{{ [geopoint[51.0632],[-1.308]jsonset[id],[Winchester]] }}}
+	new-york={{{ [geopoint[40.730610],[-73.935242]jsonset[id],[New York]] }}}
+>
+
+<$text text={{{ =[<oxford>] =[<winchester>] +[geonearestpoint<new-york>jsonget[id]] }}}/>,
+<$text text={{{ =[<oxford>] =[[Not a point]] +[geonearestpoint<new-york>jsonget[id]] }}}/>,
+<$text text={{{ =[[Not a point]] +[geonearestpoint<new-york>jsonget[id]] }}}/>
+
+</$let>
+```
+
 !! `geounion` operator
 
 The `geounion` operator calculates the union between two or more [[GeoJSON Polygon Features|GeoJSON Polygon Feature]].
