@@ -68,6 +68,20 @@ exports["jsontype"] = function(source,operator,options) {
 	return results;
 };
 
+exports["jsonset"] = function(source,operator,options) {
+	var indexes = operator.operands.slice(0,-1),
+		value = operator.operands[operator.operands.length - 1] || "",
+		results = [];
+	source(function(tiddler,title) {
+		var data = $tw.utils.parseJSONSafe(title,title);
+		if(data) {
+			data = setDataItem(data,indexes,value);
+			results.push(JSON.stringify(data));
+		}
+	});
+	return results;
+};
+
 /*
 Given a JSON data structure and an array of index strings, return an array of the string representation of the values at the end of the index chain, or "undefined" if any of the index strings are invalid
 */
@@ -184,6 +198,31 @@ function getDataItem(data,indexes) {
 		}
 	}
 	return item;
+}
+
+/*
+Given a JSON data structure, an array of index strings and a value, return the data structure with the value added at the end of the index chain. If any of the index strings are invalid then the JSON data structure is returned unmodified. If the root item is targetted then a different data object will be returned
+*/
+function setDataItem(data,indexes,value) {
+	// Check for the root item
+	if(indexes.length === 0 || (indexes.length === 1 && indexes[0] === "")) {
+		return value;
+	}
+	// Traverse the JSON data structure using the index chain
+	var current = data;
+	for(var i = 0; i < indexes.length - 1; i++) {
+		var index = indexes[i];
+		if($tw.utils.hop(current,index)) {
+			current = current[index];
+		} else {
+			// Return the original JSON data structure if any of the index strings are invalid
+			return data;
+		}
+	}
+	// Add the value to the end of the index chain
+	var lastIndex = indexes[indexes.length - 1];
+	current[lastIndex] = value;
+	return data;
 }
 
 })();
