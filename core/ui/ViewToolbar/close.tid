@@ -5,10 +5,10 @@ description: {{$:/language/Buttons/Close/Hint}}
 
 \whitespace trim
 <$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/close-button}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Close/Caption}}/>
 </span>

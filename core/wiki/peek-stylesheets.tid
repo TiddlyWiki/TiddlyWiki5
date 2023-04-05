@@ -1,9 +1,10 @@
 title: $:/snippets/peek-stylesheets
 
 \define expandable-stylesheets-list()
+\whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
-<$vars state=<<qualify "$:/config/peek-stylesheets/open/">>>
+<$vars state=<<qualify "$:/state/peek-stylesheets/open/">>>
 <$set name="state" value={{{ [<state>addsuffix<currentTiddler>] }}}>
 <li>
 <$reveal type="match" state=<<state>> text="yes" tag="span">
@@ -22,11 +23,7 @@ title: $:/snippets/peek-stylesheets
 <$reveal type="match" state=<<state>> text="yes" tag="div">
 <$set name="source" tiddler=<<currentTiddler>>>
 <$wikify name="styles" text=<<source>>>
-<pre>
-<code>
-<$text text=<<styles>>/>
-</code>
-</pre>
+<$codeblock code=<<styles>> language="css"/>
 </$wikify>
 </$set>
 </$reveal>
@@ -38,6 +35,7 @@ title: $:/snippets/peek-stylesheets
 \end
 
 \define stylesheets-list()
+\whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
 <li>
@@ -57,8 +55,9 @@ title: $:/snippets/peek-stylesheets
 </$list>
 </ol>
 \end
+\whitespace trim
 
-<$vars modeState=<<qualify "$:/config/peek-stylesheets/mode/">>>
+<$vars modeState=<<qualify "$:/state/peek-stylesheets/mode/">>>
 
 <$reveal type="nomatch" state=<<modeState>> text="expanded" tag="div">
 <$button set=<<modeState>> setTo="expanded" class="tc-btn-invisible">{{$:/core/images/chevron-right}} {{$:/language/ControlPanel/Stylesheets/Expand/Caption}}</$button>

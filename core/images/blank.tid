@@ -1,4 +1,4 @@
 title: $:/core/images/blank
 tags: $:/tags/Image
 
-<svg class="tc-image-blank tc-image-button" viewBox="0 0 128 128" width="22pt" height="22pt"></svg>
+<svg width="22pt" height="22pt" class="tc-image-blank tc-image-button" viewBox="0 0 128 128"/>

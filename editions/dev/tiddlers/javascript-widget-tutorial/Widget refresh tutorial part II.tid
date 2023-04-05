@@ -1,0 +1,37 @@
+created: 20190201232910076
+modified: 20190217014335419
+tags: 
+title: Widget refresh tutorial part II
+type: text/vnd.tiddlywiki
+
+This example is like [[Widget refresh tutorial part I]] except the widget output will be automatically refreshed when the tiddler field changes.
+
+[[tiddlerfield.js]] is the same as [[tiddlerfield-norefresh.js]], except this `refresh` method is added:
+
+```javascript
+/*
+A widget with optimized performance will selectively refresh, but here we refresh always
+*/
+MyWidget.prototype.refresh = function(changedTiddlers) {
+	// Regenerate and rerender the widget and
+	// replace the existing DOM node
+	this.refreshSelf();
+	return true;
+};
+```
+
+The `refreshSelf` method called above is implemented by the core widget class and it takes care of cleaning the old dom node and calling the render function.
+
+Here is the result ([[Widget refresh demo II]]):
+
+{{Widget refresh demo II}}
+
+And now any typing into the input box will cause both the `tiddlerfield` and the `view` widget output to refresh immediately.
+
+Note this is a naive version of `refresh`. It unconditionally refreshes itself. This is far from optimal since the `refresh` method for all visible widgets is called every time the tiddler store changes. But the way we've defined our widget, the output ONLY depends on the tiddler titled `text`.
+
+In tiddlywiki the tiddler store is used for everything and almost any interaction will result in an update to the store. This means almost any interaction will cause the refresh method to be called. If you type into the search box, for example, the `tiddlerfield` widget will be refreshed with every keystroke.
+
+Adding and removing dom elements is a relatively expensive operation, so if someone has used the list widget to create a few hundred instances of this widget, then such tiddlywiki interactions might gain a noticable lag. Therefore, it usually makes sense to avoid modifying the dom when possible by writing a smarter `refresh` method. 
+
+''Exercise'' - change the refresh method above to only call `refreshSelf` when the `changedTiddlers` input array contains `test` as one of its entries (Hint: see the refresh method in $:/core/modules/widgets/view.js for an example).

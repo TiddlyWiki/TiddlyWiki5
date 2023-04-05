@@ -1,5 +1,6 @@
 created: 20150105133800000
-modified: 20150124181306000
+modified: 20211117212441252
+tags: Concepts
 title: Railroad Diagrams
 
 <<.def "Railroad diagrams">>, sometimes called <<.def "syntax diagrams">>, are a visual way of explaining the syntax rules of a computer language. Reading one is like reading a public transport map.

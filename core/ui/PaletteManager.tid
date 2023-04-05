@@ -1,0 +1,94 @@
+title: $:/PaletteManager
+
+\define lingo-base() $:/language/ControlPanel/Palette/Editor/
+\define describePaletteColour(colour)
+<$transclude tiddler="$:/language/Docs/PaletteColours/$colour$"><$text text="$colour$"/></$transclude>
+\end
+\define edit-colour-placeholder()
+ edit $(colourName)$
+\end
+\define colour-tooltip(showhide) $showhide$ editor for $(newColourName)$ 
+
+\define resolve-colour(macrocall)
+\import $:/core/macros/utils
+\whitespace trim
+<$wikify name="name" text="""$macrocall$""">
+<<name>>
+</$wikify>
+\end
+
+\define delete-colour-index-actions() <$action-setfield $index=<<colourName>>/>
+\define palette-manager-colour-row-segment()
+\whitespace trim
+<$edit-text index=<<colourName>> tag="input" placeholder=<<edit-colour-placeholder>> default=""/>
+<br>
+<$edit-text index=<<colourName>> type="color" tag="input" class="tc-palette-manager-colour-input"/>
+<$list filter="[<currentTiddler>getindex<colourName>removeprefix[<<]removesuffix[>>]] [<currentTiddler>getindex<colourName>removeprefix[<$]removesuffix[/>]]" variable="ignore">
+<$set name="state" value={{{ [[$:/state/palettemanager/]addsuffix<currentTiddler>addsuffix[/]addsuffix<colourName>] }}}>
+<$wikify name="newColourName" text="""<$macrocall $name="resolve-colour" macrocall={{{ [<currentTiddler>getindex<colourName>] }}}/>""">
+<$reveal state=<<state>> type="nomatch" text="show">
+<$button tooltip=<<colour-tooltip show>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" set=<<state>> setTo="show">{{$:/core/images/down-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
+</$reveal>
+<$reveal state=<<state>> type="match" text="show">
+<$button tooltip=<<colour-tooltip hide>> aria-label=<<colour-tooltip show>> class="tc-btn-invisible" actions="""<$action-deletetiddler $tiddler=<<state>>/>""">{{$:/core/images/up-arrow}}<$text text=<<newColourName>> class="tc-small-gap-left"/></$button><br>
+</$reveal>
+<$reveal state=<<state>> type="match" text="show">
+<$set name="colourName" value=<<newColourName>>>
+<br>
+<<palette-manager-colour-row-segment>>
+<br><br>
+</$set>
+</$reveal>
+</$wikify>
+</$set>
+</$list>
+\end
+
+\define palette-manager-colour-row()
+\whitespace trim
+<tr>
+<td>
+<span style="float:right;">
+<$button tooltip={{$:/language/ControlPanel/Palette/Editor/Delete/Hint}} aria-label={{$:/language/ControlPanel/Palette/Editor/Delete/Hint}} class="tc-btn-invisible" actions=<<delete-colour-index-actions>>>
+{{$:/core/images/delete-button}}</$button>
+</span>
+''<$macrocall $name="describePaletteColour" colour=<<colourName>>/>''<br/>
+<$macrocall $name="colourName" $output="text/plain"/>
+</td>
+<td>
+<<palette-manager-colour-row-segment>>
+</td>
+</tr>
+\end
+
+\define palette-manager-table()
+\whitespace trim
+<table>
+<tbody>
+<$set name="colorList" filter="[{$:/state/palettemanager/showexternal}match[yes]]"
+   value="[all[shadows+tiddlers]tag[$:/tags/Palette]indexes[]]" emptyValue="[<currentTiddler>indexes[]]">
+<$list filter=<<colorList>> variable="colourName"> <<palette-manager-colour-row>> </$list>
+</$set>
+</tbody>
+</table>
+\end
+\whitespace trim
+<$set name="currentTiddler" value={{$:/palette}}>
+
+<<lingo Prompt>>&#32;<$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
+
+<$list filter="[all[current]is[shadow]is[tiddler]]" variable="listItem">
+<<lingo Prompt/Modified>>
+&#32;
+<$button message="tm-delete-tiddler" param={{$:/palette}}><<lingo Reset/Caption>></$button>
+</$list>
+
+<$list filter="[all[current]is[shadow]!is[tiddler]]" variable="listItem">
+<<lingo Clone/Prompt>>
+</$list>
+
+<$button message="tm-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
+
+<$checkbox tiddler="$:/state/palettemanager/showexternal" field="text" checked="yes" unchecked="no"><span class="tc-small-gap-left"><<lingo Names/External/Show>></span></$checkbox>
+
+<<palette-manager-table>>

@@ -1,0 +1,17 @@
+caption: ~TiddlyHost
+color: #29B6F6
+community-author: Simon Baird
+created: 20210422191232572
+delivery: Service
+description: Online service for creating and hosting ~TiddlyWikis
+method: save
+modified: 20210423003921468
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: Saving on TiddlyHost
+type: text/vnd.tiddlywiki
+
+[img width=140 [https://github.com/simonbaird/tiddlyhost/raw/main/rails/app/assets/images/logo-800.png]]
+
+[[TiddlyHost.com|https://tiddlyhost.com/]] is a hosting service for TiddlyWiki created by Simon Baird. Once you sign up and confirm your email you can create "sites", (i.e. ~TiddlyWikis), with support for online saving. Sites can be private or public, and you can optionally list them on the taggable and searchable [[TiddlyHost Hub|https://tiddlyhost.com/hub]] where they'll be discoverable by others.
+
+Unlike [[TiddlySpot|Saving on TiddlySpot]], [[TiddlyHost|https://tiddlyhost.com]] is secure, open source, and has proper support for TiddlyWiki5. It also allows uploading existing ~TiddlyWiki files, supports TiddlyWikiClassic, and lets you claim ownership of your ~TiddlySpot sites. For more information see the [[FAQ|https://github.com/simonbaird/tiddlyhost/wiki/FAQ]] and the [[About|https://tiddlyhost.com/about]] page.

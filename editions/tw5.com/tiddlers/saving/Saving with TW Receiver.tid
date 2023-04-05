@@ -1,0 +1,15 @@
+caption: TW Receiver
+created: 20200612233356021
+delivery: DIY
+description: DIY script you can install on your own server
+method: save
+modified: 20200612234312631
+tags: Saving PHP
+title: Saving with TW Receiver
+type: text/vnd.tiddlywiki
+
+TW Receiver is a ~TiddlyWiki plugin and PHP script used for saving to a PHP based server.
+
+It's features include simple automated backups,  stale Instance Overwrite Protection,  challenge digest authentication (enhanced security), and data integrity signing (enhanced security).
+
+* Visit [[TW-Receiver|https://github.com/sendwheel/tw-receiver]] for more information, plugin, and code.

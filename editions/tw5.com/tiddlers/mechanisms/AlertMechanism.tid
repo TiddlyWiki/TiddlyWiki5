@@ -4,7 +4,7 @@ tags: Mechanisms Features
 title: AlertMechanism
 type: text/vnd.tiddlywiki
 
-Alerts are displayed as yellow boxes overlaying the main TiddlyWiki window. Each one corresponds to a tiddler with the tag [[$:/tags/Alert]]. Clicking the {{$:/core/images/delete-button}} delete icon on an alert deletes the corresponding tiddler.
+Alerts are displayed as yellow boxes overlaying the main TiddlyWiki window. Each one corresponds to a tiddler with the tag [[$:/tags/Alert]]. Clicking the <<.icon $:/core/images/delete-button>> delete icon on an alert deletes the corresponding tiddler.
 
 Here's a demo <$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tm-add-tag" param="$:/tags/Alert">alert</$button></$set></$fieldmangler>.
 

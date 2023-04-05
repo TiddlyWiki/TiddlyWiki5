@@ -1,0 +1,16 @@
+title: $:/core/ui/ControlPanel/Saving/GitHub
+tags: $:/tags/ControlPanel/Saving
+caption: {{$:/language/ControlPanel/Saving/GitService/GitHub/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Saving/GitService/
+\define service-name() ~GitHub
+
+<<lingo Description>>
+
+|<<lingo UserName>> |<$edit-text tiddler="$:/GitHub/Username" default="" tag="input"/> |
+|<<lingo GitHub/Password>> |<$password name="github"/> |
+|<<lingo Repo>> |<$edit-text tiddler="$:/GitHub/Repo" default="" tag="input"/> |
+|<<lingo Branch>> |<$edit-text tiddler="$:/GitHub/Branch" default="main" tag="input"/> |
+|<<lingo Path>> |<$edit-text tiddler="$:/GitHub/Path" default="" tag="input"/> |
+|<<lingo Filename>> |<$edit-text tiddler="$:/GitHub/Filename" default="" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/GitHub/ServerURL" default="https://api.github.com" tag="input"/> |

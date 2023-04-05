@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150203192735000
+modified: 20220218023400000
 tags: [[Filter Operators]] [[String Operators]] [[Negatable Operators]]
 title: prefix Operator
 type: text/vnd.tiddlywiki
@@ -10,7 +10,22 @@ op-parameter: a string of characters
 op-parameter-name: S
 op-output: those input titles that start with <<.place S>>
 op-neg-output: those input tiddlers that do <<.em not>> start with <<.place S>>
+op-suffix: the <<.op prefix>> operator uses a rich suffix, see below for details
 
-<<.s-matching-is-case-sensitive>>
+<<.from-version "5.2.2">>
+
+The <<.op prefix>> operator uses an extended syntax that permits multiple flags to be passed:
+
+```
+[prefix:<flag list>[<operand>]]
+```
+
+* ''flag list'': a comma delimited list of flags
+* ''operand'': filter operand
+
+The available flags are:
+
+* ''casesensitive'': (default), this flag forces a case-sensitive match, where upper and lower case letters are considered different
+* ''caseinsensitive'': overrides the default so that upper and lower case letters are considered identical for matching purposes
 
 <<.operator-examples "prefix">>

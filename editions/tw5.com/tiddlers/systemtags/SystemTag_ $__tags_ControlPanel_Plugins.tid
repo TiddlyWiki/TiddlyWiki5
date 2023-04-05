@@ -1,0 +1,9 @@
+caption: $:/tags/ControlPanel/Plugins
+created: 20210807123106257
+description: marks elements to be placed under "Plugins" tab in Control Panel
+modified: 20210807123621182
+tags: SystemTags
+title: SystemTag: $:/tags/ControlPanel/Plugins
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/ControlPanel/Plugins` marks elements to be placed under "Plugins" tab in [[$:/ControlPanel]]

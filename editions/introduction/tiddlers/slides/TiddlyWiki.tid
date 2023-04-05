@@ -7,7 +7,7 @@ title: TiddlyWiki
 <$scrollable class="tc-cecily-demo">
 <div class="tc-cecily-demo-inner">
 <$linkcatcher>
-<$list filter="[list[$:/StoryList]] -[[TiddlyWiki]]" template="$:/core/ui/ViewTemplate" storyview="cecily" cecily-width="550px" cecily-map="CecilyMap"/>
+<$list filter="[{$:/DefaultTiddlers}enlist-input[]] -[[ ]] -[[TiddlyWiki]]" template="$:/core/ui/ViewTemplate" storyview="cecily" cecily-width="550px" cecily-map="CecilyMap"/>
 </$linkcatcher>
 </div>
 </$scrollable>

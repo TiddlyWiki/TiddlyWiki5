@@ -14,11 +14,12 @@ draft.of: Para tiddlers rascunho, contém o título do tiddler do qual este é r
 draft.title: Para tiddlers rascunho, contém o título proposto para o novo tiddler
 footer: O texto de rodapé para um assistente
 hack-to-give-us-something-to-compare-against: Um campo temporário utilizado em [[$:/core/templates/static.content]]
+hide-body: O modelo de visualização esconderá o corpo dos tiddlers se definido como: ''yes''
 icon: O título do tiddler que contém o ícone associado com determinado tiddler
 library: Se definido como "yes" indica que o tiddler deve ser gravado como uma biblioteca JavaScript
 list: Uma lista ordenada de títulos de tiddlers associados com um determinado tiddler
 list-after: Se definido, o título do tiddler a seguir ao qual este tiddler deve ser adicionado numa lista ordenada de títulos de tiddlers
-list-before: Se definido, o título do tiddler a antes do qual este tiddler deve ser adicionado numa lista ordenada de títulos de tiddlers, ou no início da lista se este campo estiver presente mas vazio
+list-before: Se definido, o título do tiddler antes do qual este tiddler deve ser adicionado numa lista ordenada de títulos de tiddlers, ou no início da lista se este campo estiver presente mas vazio
 modified: A data e hora da última modificação de um tiddler
 modifier: Título do tiddler associado à última pessoa que modificou o tiddler
 name: O nome humanamente legível associado a um tiddler extensão
@@ -31,5 +32,6 @@ subtitle: O texto do subtítulo de um assistente
 tags: Lista de etiquetas associadas a um tiddler
 text: O texto do corpo de um tiddler
 title: O nome único de um tiddler
+toc-link: Suprime a ligação do tiddler numa árvore de Tabela de Conteúdos se definido como: ''no''
 type: O tipo de conteúdo de um tiddler
 version: Informação de versão de uma extensão

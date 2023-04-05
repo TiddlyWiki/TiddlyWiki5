@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/menubar/items/sidebar
+caption: Sidebar
+description: Sidebar
+is-dropdown: yes
+tags: $:/tags/MenuBar
+
+<$scrollable fallthrough="none" class="tc-popup-keep tc-menubar-dropdown-sidebar">
+
+<$transclude tiddler="$:/core/ui/SideBarSegments/tabs" mode="inline"/>
+
+</$scrollable>

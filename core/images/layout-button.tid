@@ -1,0 +1,4 @@
+title: $:/core/images/layout-button
+tags: $:/tags/Image
+
+<svg width="22pt" height="22pt" class="tc-image-layout-button tc-image-button" viewBox="0 0 24 24" stroke-width="1" stroke="none"><path d="M0 0h24v24H0z" fill="none"/><rect x="2" y="2" width="7" height="7" rx="2"/><rect x="2" y="13" width="7" height="9" rx="2"/><rect x="12" y="2" width="10" height="20" rx="2"/></svg>

@@ -1,0 +1,38 @@
+created: 20201004154413968
+modified: 20201204131137081
+tags: [[Operator Examples]] [[reduce Operator]]
+title: reduce Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define add-price() [get[price]multiply{!!quantity}add<accumulator>]
+\define num-items() [get[quantity]add<accumulator>]
+\define join-with-commas() [<index>compare:number:gt[0]then<accumulator>addsuffix[, ]addsuffix<currentTiddler>else<currentTiddler>]
+\define multiply-input() [multiply<accumulator>]
+\define display-variable(name)
+''<$text text=<<__name__>>/>'': <code><$text text={{{ [<__name__>getvariable[]] }}}/></code>
+\end
+
+These examples use the following predefined variables:
+
+* <<display-variable add-price>>
+* <<display-variable num-items>>
+* <<display-variable join-with-commas>>
+* <<display-variable multiply-input>>
+
+They also use the following data tiddlers:
+
+<ul>
+<$list filter="[tag[shopping]!has[draft.of]]">
+<li>
+''<$link><$text text=<<currentTiddler>>/></$link>'' quantity: <$text text={{!!quantity}}/>,  price: <$text text={{!!price}}/>
+</li>
+</$list>
+</ul>
+
+<<.operator-example 1 "[tag[shopping]reduce<num-items>]">>
+<<.operator-example 2 "[tag[shopping]reduce<add-price>]">>
+<<.operator-example 3 "[tag[shopping]reduce<join-with-commas>]" "Uses `<index>` to act differently on the first item than the rest">>
+<<.operator-example 4 "[tag[non-existent]reduce<add-price>]" "Empty input produces empty output">>
+<<.operator-example 5 "[tag[non-existent]reduce<add-price>else[0]]" "Use `else` to ensure output if input was empty">>
+<<.operator-example 6 "=1 =2 =3 +[reduce<multiply-input>]" "Empty initial value is treated as 0 by mathematical operators">>
+<<.operator-example 7 "=1 =2 =3 +[reduce<multiply-input>,[1]]" "Setting initial value is sometimes necessary for correct results">>

@@ -1,0 +1,3 @@
+title: $:/dev/save/dragndropinterop
+
+<$view tiddler="DragAndDropInterop" field="text"/>

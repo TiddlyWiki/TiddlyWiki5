@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 # Import your image as a tiddler (see [[Images in WikiText]])
 #* You can also use an [[external image|ExternalImages]]
-# Open the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} and switch to the ''Appearance''/''Theme Tweaks'' tab
+# Open the [[control panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>> and switch to the ''Appearance''/''Theme Tweaks'' tab
 # Select your image from the dropdown labelled "Page background image"
 # Set "Page background image attachment" to "Fixed to window" to have the background stay stationary and the content to scroll over the top of it, or "Scroll with tiddlers" to have it move (note that the iPhone/iPad [[doesn't support the fixed setting|http://stackoverflow.com/a/20444219]] for performance reasons)
 # Set "Page background image size" as follows:

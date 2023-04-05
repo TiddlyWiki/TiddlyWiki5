@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/markdown",
-	"description": "Markdown parser",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"list": "readme usage"
+	"name": "Markdown",
+	"description": "Markdown parser based on markdown-it",
+	"list": "readme config syntax license"
 }

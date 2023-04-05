@@ -1,6 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-keymap-vim",
-	"description": "CodeMirror Keymap: Vim",
-	"author": "JeremyRuston",
+	"name": "CodeMirror Keymap Vim",
+	"description": "Keymap compatible with Vim for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"dependents": ["$:/plugins/tiddlywiki/codemirror-search-replace","$:/plugins/tiddlywiki/codemirror-closebrackets"],
 	"list": "readme"
 }

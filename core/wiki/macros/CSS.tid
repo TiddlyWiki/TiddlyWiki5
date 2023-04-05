@@ -2,7 +2,7 @@ title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
 \define colour(name)
-<$transclude tiddler={{$:/palette}} index="$name$"><$transclude tiddler="$:/palettes/Vanilla" index="$name$"/></$transclude>
+<$transclude tiddler={{$:/palette}} index="$name$"><$transclude tiddler="$:/palettes/Vanilla" index="$name$"><$transclude tiddler="$:/config/DefaultColourMappings/$name$"/></$transclude></$transclude>
 \end
 
 \define color(name)
@@ -60,7 +60,7 @@ column-count: $columns$;
 \end
 
 \define datauri(title)
-<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
+<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}} _canonical_uri={{$title$!!_canonical_uri}}/>
 \end
 
 \define if-sidebar(text)

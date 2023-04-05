@@ -9,6 +9,8 @@ The `tm-import-tiddlers` message inserts a list of tiddlers into the pending imp
 
 |!Name |!Description |
 |param |JSON text of the array of tiddlers to be imported |
+|autoOpenOnImport |<<.from-version "5.1.23">> Optional value "no" or "yes" that can override tv-auto-open-on-import |
+|importTitle|<<.from-version "5.1.23">> optional tiddler title to use for import process instead of ~$:/Import |
 
 The import tiddlers message is usually generated with the DropzoneWidget or the BrowseWidget, and is handled by the NavigatorWidget.
 

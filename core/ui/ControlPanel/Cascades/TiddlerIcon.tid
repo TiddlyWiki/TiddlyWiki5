@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/TiddlerIcon
+tags: $:/tags/ControlPanel/Cascades
+caption: {{$:/language/ControlPanel/TiddlerIcon/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/TiddlerIcon/
+
+<<lingo Hint>>
+
+{{$:/tags/TiddlerIconFilter||$:/snippets/ListTaggedCascade}}

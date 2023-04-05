@@ -34,8 +34,10 @@ function FramedEngine(options) {
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)
+	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
+	var colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
-	this.iframeDoc.write("");
+	this.iframeDoc.write("<meta name='color-scheme' content='" + colorScheme + "'>");
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
@@ -73,14 +75,33 @@ function FramedEngine(options) {
 	if(this.widget.editTabIndex) {
 		this.iframeNode.setAttribute("tabindex",this.widget.editTabIndex);
 	}
+	if(this.widget.editAutoComplete) {
+		this.domNode.setAttribute("autocomplete",this.widget.editAutoComplete);
+	}
+	if(this.widget.isDisabled === "yes") {
+		this.domNode.setAttribute("disabled",true);
+	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
-		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"}
+		{name: "keydown",handlerObject: this,handlerMethod: "handleKeydownEvent"},
+		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
+	// Add drag and drop event listeners if fileDrop is enabled
+	if(this.widget.isFileDropEnabled) {
+		$tw.utils.addEventListeners(this.domNode,[
+			{name: "dragenter",handlerObject: this.widget,handlerMethod: "handleDragEnterEvent"},
+			{name: "dragover",handlerObject: this.widget,handlerMethod: "handleDragOverEvent"},
+			{name: "dragleave",handlerObject: this.widget,handlerMethod: "handleDragLeaveEvent"},
+			{name: "dragend",handlerObject: this.widget,handlerMethod: "handleDragEndEvent"},
+			{name: "drop", handlerObject: this.widget,handlerMethod: "handleDropEvent"},
+			{name: "paste", handlerObject: this.widget,handlerMethod: "handlePasteEvent"},
+			{name: "click",handlerObject: this.widget,handlerMethod: "handleClickEvent"}
+		]);
+	}
 	// Insert the element into the DOM
 	this.iframeDoc.body.appendChild(this.domNode);
 }
@@ -105,10 +126,21 @@ Set the text of the engine if it doesn't currently have focus
 FramedEngine.prototype.setText = function(text,type) {
 	if(!this.domNode.isTiddlyWikiFakeDom) {
 		if(this.domNode.ownerDocument.activeElement !== this.domNode) {
-			this.domNode.value = text;
+			this.updateDomNodeText(text);
 		}
 		// Fix the height if needed
 		this.fixHeight();
+	}
+};
+
+/*
+Update the DomNode with the new text
+*/
+FramedEngine.prototype.updateDomNodeText = function(text) {
+	try {
+		this.domNode.value = text;
+	} catch(e) {
+		// Ignore
 	}
 };
 
@@ -145,10 +177,32 @@ FramedEngine.prototype.fixHeight = function() {
 Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
-	if(this.domNode.focus && this.domNode.select) {
+	if(this.domNode.focus) {
 		this.domNode.focus();
-		this.domNode.select();
 	}
+	if(this.domNode.select) {
+		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
+	}
+};
+
+/*
+Handle a focus event
+*/
+FramedEngine.prototype.handleFocusEvent = function(event) {
+	if(this.widget.editCancelPopups) {
+		$tw.popup.cancel(0);
+	}
+};
+
+/*
+Handle a keydown event
+ */
+FramedEngine.prototype.handleKeydownEvent = function(event) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+		return true;
+	}
+
+	return this.widget.handleKeydownEvent(event);
 };
 
 /*
@@ -165,6 +219,9 @@ Handle a dom "input" event which occurs when the text has changed
 FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
+	if(this.widget.editInputActions) {
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
+	}
 	return true;
 };
 

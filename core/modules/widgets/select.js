@@ -42,6 +42,9 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	this.renderChildren(parent,nextSibling);
 	this.setSelectValue();
+	if(this.selectFocus == "yes") {
+		this.getSelectDomNode().focus();
+	}
 	$tw.utils.addEventListeners(this.getSelectDomNode(),[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
 	]);
@@ -96,11 +99,8 @@ SelectWidget.prototype.setSelectValue = function() {
 		var select = this.getSelectDomNode();
 		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
-			if(values.indexOf(select.children[i].value) != -1) {
-				select.children[i].selected = true;
-			}
+			select.children[i].selected = values.indexOf(select.children[i].value) !== -1
 		}
-		
 	} else {
 		var domNode = this.getSelectDomNode();
 		if(domNode.value !== value) {
@@ -145,6 +145,8 @@ SelectWidget.prototype.execute = function() {
 	this.selectDefault = this.getAttribute("default");
 	this.selectMultiple = this.getAttribute("multiple", false);
 	this.selectSize = this.getAttribute("size");
+	this.selectTooltip = this.getAttribute("tooltip");
+	this.selectFocus = this.getAttribute("focus");
 	// Make the child widgets
 	var selectNode = {
 		type: "element",
@@ -160,6 +162,9 @@ SelectWidget.prototype.execute = function() {
 	if(this.selectSize) {
 		$tw.utils.addAttributeToParseTreeNode(selectNode,"size",this.selectSize);
 	}
+	if(this.selectTooltip) {
+		$tw.utils.addAttributeToParseTreeNode(selectNode,"title",this.selectTooltip);
+	}
 	this.makeChildWidgets([selectNode]);
 };
 
@@ -169,11 +174,16 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.selectTitle || changedAttributes.selectField || changedAttributes.selectIndex) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
 	// If the target tiddler value has changed, just update setting and refresh the children
 	} else {
+		if(changedAttributes.class) {
+			this.selectClass = this.getAttribute("class");
+			this.getSelectDomNode().setAttribute("class",this.selectClass); 
+		}
+		
 		var childrenRefreshed = this.refreshChildren(changedTiddlers);
 		if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
 			this.setSelectValue();

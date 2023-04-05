@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror",
-	"description": "CodeMirror _Editor",
-	"author": "JeremyRuston",
+	"name": "CodeMirror",
+	"description": "CodeMirror editor",
 	"list": "readme usage keyboard license"
 }

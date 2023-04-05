@@ -3,12 +3,4 @@ modified: 20140710081051087
 tags: doc
 title: Data-Storage
 
-TW has two approaches to save the user data. These approaches depends on way you use TW. either you use node.js as a server for TW its saves the tiddlers as plain text in different files or you use TW as standalone in a browser it persists the data within the HTML-File in two Div-Areas depending on whether the encryption of the TiddlyWiki is activated or not. If the TiddlyWiki is not encrypted the data is stored in the Div-Area called "~StoreArea". Every created Tiddler is stored in a own Div-area with a few custom values. An example of a saved Tiddler is shown below (\prettyref{lst:data-div}). 
-
-```html
-<div created="20140611153703343" modified="20140611153734589" tags="testTag" testfield="testvalue" title="TestTiddler" type="text/plain">
-	<pre>testText</pre>
-</div>
-```
-The Div-Area has the same attributes like the standard tillder fields, listed in  [[TiddlerFields|https://tiddlywiki.com/#TiddlerFields]], all attributes which are not in this list are parsed as a custom field. The only required attribute is the name attribute, all other attributes are optional.\\
-With a activated encryption the data is stored in a special Div-Area called "encryptedStoreArea". TiddlyWiki uses the Standford [[JavaScript Crypto Libary|http://bitwiseshiftleft.github.io/sjcl/]]. The encrypted Tiddlers are saved in a JSON string within this Div-Area.
+{{Data Storage}}

@@ -1,0 +1,17 @@
+title: $:/language/Import/
+
+Imported/Hint: تم إستيراد التدلرز التالية:
+Listing/Cancel/Caption: إلغاء
+Listing/Hint: هؤلاء التدلرز جاهزون للإستيراد:
+
+Listing/Import/Caption: إستيراد
+Listing/Preview: معاينة:
+Listing/Preview/Fields: حقول
+Listing/Preview/Text: Text
+Listing/Select/Caption: إختيار
+Listing/Status/Caption: الحالة
+Listing/Title/Caption: العنوان
+Upgrader/Plugins/Suppressed/Incompatible: تم حظر مكون إضافي غير متوافق أو قديم
+Upgrader/System/Alert: أنت على وشك إدخال تدلر سيستبدال وحدة تدلر أساسية. لا يُنصح بذلك لأنه قد يجعل النظام غير مستقر
+Upgrader/System/Suppressed: Blocked system tiddler
+Upgrader/System/Warning: وحدة تدلر أساسية 

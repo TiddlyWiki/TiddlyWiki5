@@ -1,0 +1,18 @@
+created: 20210101161529206
+modified: 20230110220010665
+tags: [[Community Editions]]
+title: "Drift - Collect, Organise, Grow." by Tony K
+type: text/vnd.tiddlywiki
+url: https://github.com/bmann/drift-tiddlywiki-template/tree/master/drift
+
+A adaptation of TiddlyWiki perfect for using as a Notebook sysetem.
+
+{{!!url}}
+
+<<<
+Drift is an adaptation of TiddlyWiki with the goal of helping you Collect. Organise. and Grow. your ideas while keeping tab on how they interconnect together and fluidly Drift from one to another.
+
+The 2 main components of Drift are TWCrosslinks and DailyNotes so you never miss an idea
+
+Drift was inspired by TiddlyBlink / Stroll and adapted to fit my needs.
+<<<

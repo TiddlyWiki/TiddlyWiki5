@@ -1,0 +1,17 @@
+caption: precision
+created: 20190611150935800
+modified: 20190611151434569
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers with <<.place N>> significant digits
+op-parameter: a number
+op-parameter-name: N
+op-purpose: convert each number to a string with <<.place N>> significant digits
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]]
+title: precision Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+The ''precision'' operator returns a string representation of the input number that has exactly the specified number of significant digits, using whichever is shorter of [[exponential|exponential Operator]] or [[fixed|fixed Operator]] notation.
+
+<<.operator-examples "precision">>

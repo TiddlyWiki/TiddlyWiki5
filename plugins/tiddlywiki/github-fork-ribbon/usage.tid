@@ -1,5 +1,7 @@
 title: $:/plugins/tiddlywiki/github-fork-ribbon/usage
 
+Copy appropriate chunks on a new tiddler and tag it `$:/tags/PageControls`. Name of the new tiddler does not matter. Only the tag matters.
+
 ```
 <!-- TOP RIGHT RIBBON: START COPYING HERE -->
 <div class="github-fork-ribbon-wrapper right"><div class="github-fork-ribbon"><a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on ~GitHub</a></div>

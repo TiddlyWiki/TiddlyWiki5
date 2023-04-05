@@ -1,0 +1,21 @@
+created: 20220719120233104
+list-after: $:/core/ui/ViewTemplate/body
+modified: 20220719120319922
+tags: $:/tags/ViewTemplate
+title: $:/editions/tw5.com/systemtag-template
+
+<$list filter='[all[current]prefix[SystemTag: ]]'>
+<$let tag={{{ [all[current]removeprefix[SystemTag: ]] }}} >
+
+<$list filter='[all[tiddlers+shadows]tag<tag>limit[1]]' emptyMessage='(No tiddlers are currently tagged with <<tag>> )'>
+
+The following tiddlers are tagged with <<tag>>
+
+<table>
+<tr><th></th><th>caption</th></tr>
+<$list filter='[all[tiddlers+shadows]tag<tag>sort[]]'>
+<tr>
+<td><$link/></td>
+<td><$transclude field="caption"><$transclude field="description"><$view field="title"/></$transclude></$transclude></td>
+</tr>
+</$list></table></$list></$let></$list>

@@ -1,0 +1,161 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: بحث متقدم
+AdvancedSearch/Hint: بحث متقدم
+Bold/Caption: غامق
+Bold/Hint: غامق
+Cancel/Caption: الغاء
+Cancel/Hint: الغاء
+Clear/Caption: مسح
+Clone/Caption: إستنسخ
+Clone/Hint: إستنسخ هذا التدلر
+Close/Caption: إغلاق
+Close/Hint: إغلاق
+CloseAll/Caption: إغلاق الجميع
+CloseAll/Hint:  إغلاق جميع التدلرز
+CloseOthers/Caption: أغلق الأخريات
+CloseOthers/Hint: أغلاق التلرز الأخرى
+ControlPanel/Caption: لوحة التحكم
+ControlPanel/Hint: فتح لوحة التحكم
+CopyToClipboard/Caption: انسخ على لوحة الحفظ
+CopyToClipboard/Hint: انسخ هذا النص على لوحة الحفظ
+Delete/Caption: إحذف
+Delete/Hint: إحذف هذا التدلر
+Edit/Caption: تحرير
+Edit/Hint: تحرير هذا التدلر
+EditorHeight/Caption: ارتفاع المحرر
+EditorHeight/Caption/Auto: اضبط الارتفاع تلقائيًا ليلائم المحتوى
+Encryption/Caption: التشفير
+Encryption/ClearPassword/Caption: مسح كلمة السر
+Encryption/ClearPassword/Hint: امسح كلمة المرور واحفظ هذا الويكي بدون تشفير
+Encryption/Hint: ضع أو إمسح كلمة مرور لحفظ هذا الويكي
+Encryption/SetPassword/Caption: ضع كلمة السر
+Encryption/SetPassword/Hint: ضع كلمة مرور لحفظ هذا الويكي باستخدام التشفير
+Excise/Caption/NewTitle: عنوان التدلر الجديد
+Excise/Caption/Replace/Link: رابط
+ExportPage/Caption: تصدير الكل
+ExportPage/Hint:  تصدير كل التدلرز
+ExportTiddler/Caption: تصدير تدلر
+ExportTiddler/Hint: تصدير تدلر
+ExportTiddlers/Caption: تصدير تدلرز
+ExportTiddlers/Hint: تصدير تدلرز
+Fold/Caption: طوي تدلر
+Fold/Hint: إطوِ نص هذا التدلر
+FoldAll/Caption: إطوِ جميع التدلرز
+FoldAll/Hint: إطوِ نصوص جميع التدلرز المفتوحة
+FoldOthers/Caption: إطوِ جميع التدلرز
+FoldOthers/Hint:  إطوِ نصوص التدلرز المفتوحة الأخرى
+FullScreen/Caption: ملء الشاشة
+FullScreen/Hint: ادخل أو غادر وضعية ملء الشاشة
+Help/Caption: مساعدة
+Help/Hint: إظهار لوحة المساعدة
+HideSideBar/Caption: اخفاء الشريط الجانبي
+HideSideBar/Hint: اخفاء الشريط الجانبي
+Home/Caption: الصفحة الرئيسية
+Home/Hint: افتح التدلرز المفترضة
+Import/Caption: إستيراد
+Import/Hint: استيراد العديد من أنواع الملفات بما في ذلك النص أو الصورة أو TiddlyWiki أو JSON
+Info/Caption: معلومات
+Info/Hint: عرض معلومات هذا التدلر
+Italic/Caption: مائل
+Italic/Hint: تطبيق التنسيق المائل على التحديد
+Language/Caption: لغة
+Language/Hint: اختر لغة واجهة المستخدم
+LineWidth/Caption: عرض الخط
+Link/Caption: رابط
+Link/Hint: إنشاء رابط ويكي
+Linkify/Caption: رابط ويكي
+Linkify/Hint: غلف التحديد بأقواس مربعة
+ListBullet/Caption: قائمة نقطية
+ListNumber/Caption: قائمة مرقمة
+Manager/Caption: مدير التدلرز
+Manager/Hint: إفتح مدير التدلرز
+MonoBlock/Caption: كتلة أحادية المسافة
+MonoLine/Caption: أحادي المسافة
+More/Caption: المزيد
+More/Hint: المزيد من الإجراءات
+NewHere/Caption: أنشاء جديد هنا
+NewHere/Hint: إنشاء تدلر جديد موسوم بهذا
+NewImage/Caption: رسم جديد
+NewImage/Hint: قم بإنشاء تدلر رسام
+NewJournal/Caption: دفتر اليومية جديد
+NewJournal/Hint: قم بإنشاء دفتر يوميات جديد
+NewJournalHere/Caption: أنشئ دفتر يوميات جديد هنا
+NewJournalHere/Hint: قم بإنشاء دفتر يوميات جديد موسوم بهذا
+NewMarkdown/Caption: تدلر ماركداون جديد
+NewMarkdown/Hint: قم بإنشاء تدلر ماركداون جديد
+NewTiddler/Caption: تدلر جديد
+NewTiddler/Hint: قم بإنشاء تدلر جديد
+Opacity/Caption: تعتيم
+OpenWindow/Caption: افتح في نافذة جديدة
+OpenWindow/Hint: افتح التدلر في نافذة جديدة
+Paint/Caption: لون الطلاء
+Palette/Caption: نظام الألوان
+Palette/Hint: اختر نظام الألوان
+Permalink/Caption: الرابط المباشر
+Permalink/Hint: اضبط شريط عنوان المتصفح على رابط مباشر لهذا التدلر
+
+Permaview/Caption: العرض المباشر
+Permaview/Hint: اضبط شريط عنوان المتصفح على رابط مباشر لجميع التدلرز في هذه القصة
+
+Picture/Caption: صورة
+Picture/Hint: إدراج صورة
+Preview/Caption: معاينة
+Preview/Hint: إظهار شاشة المعاينة
+
+PreviewType/Caption: نوع المعاينة
+PreviewType/Hint: اختر نوع المعاينة
+Print/Caption: طباعة الصفحة
+Print/Hint: اطبع الصفحة الحالية
+Quote/Caption: quote
+Refresh/Caption: تحديث
+Refresh/Hint: قم بإجراء تحديث كامل للويكي
+RotateLeft/Caption: تدوير لليسار
+RotateLeft/Hint: تدوير الصورة لليسار بزاوية 90 درجة
+Save/Caption: تمام
+Save/Hint: تأكيد التغييرات على هذا التدلر
+SaveWiki/Caption: حفظ التغييرات
+SaveWiki/Hint: حفظ التغييرات
+ShowSideBar/Caption: إظهار الشريط الجانبي
+ShowSideBar/Hint: إظهار الشريط الجانبي
+Size/Caption: حجم الصورة
+Size/Caption/Height: ارتفاع:
+Size/Caption/Resize: تغيير حجم الصورة
+Size/Caption/Width: عرض:
+Size/Hint: ضبط حجم الصورة
+Stamp/Caption: ختم
+Stamp/Caption/New: اضف اشياءك الخاصة
+Stamp/Hint: أدخل نصا مقتطفًا تم تكوينه مسبقًا
+Stamp/New/Text: نص المقتطف. (تذكر إضافة عنوان وصفي في حقل الشرح).
+Stamp/New/Title: الاسم كما هو ظاهر في القائمة
+StoryView/Caption: عرض القصة
+StoryView/Hint: اختر تصور القصة
+Strikethrough/Caption: يتوسطه خط
+Strikethrough/Hint: تطبيق تنسيق "يتوسطه خط"على التحديد
+Subscript/Caption: نص منخفض
+Subscript/Hint: تطبيق تنسيق منخفض على التحديد
+
+Superscript/Caption: نص مرتفع
+Superscript/Hint: تطبيق تنسيق مرتفع على التحديد
+TagManager/Caption: ادارة الوسوم
+TagManager/Hint: افتح ادارة الوسوم
+Theme/Caption: ثيم
+Theme/Hint: إختر ثيم العرض
+Timestamp/Caption: الطوابع الزمنية
+Timestamp/Hint: اختر ما إذا قامت التعديلات بتحديث الطوابع الزمنية
+
+Timestamp/Off/Caption: الطوابع الزمنية متوقفة
+Timestamp/Off/Hint: لا تقم بتحديث الطوابع الزمنية عندما يتم تعديل التدلرز
+Timestamp/On/Caption: الطوابع الزمنية مفعّلة
+Timestamp/On/Hint: حَدث الطوابع الزمنية عندما يتم تعديل التدلرز
+
+ToggleSidebar/Hint: تبديل رؤية الشريط الجانبي
+Transcludify/Caption: ترانسكلوجن
+Transcludify/Hint: غلف التحديد بأقواس مجعدة
+Underline/Caption: تسطير
+Underline/Hint: تطبيق تنسيق التسطير على التحديد
+
+Unfold/Caption: بسط التدلر
+Unfold/Hint: إبسط نص هذا التدلر
+UnfoldAll/Caption: إبسط جميع التدلرز
+UnfoldAll/Hint: إبسط نصوص جميع التدلرز المفتوحة

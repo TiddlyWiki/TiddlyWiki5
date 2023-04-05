@@ -1,4 +1,5 @@
 title: $:/editions/tw5.com/download-empty
+code-body: yes
 
 \define saveTiddlerFilter()
 [[$:/core]] [[$:/isEncrypted]] [[$:/themes/tiddlywiki/snowwhite]] [[$:/themes/tiddlywiki/vanilla]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]]

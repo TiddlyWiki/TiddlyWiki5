@@ -3,6 +3,7 @@ tags: $:/tags/ControlPanel/Advanced
 caption: {{$:/language/ControlPanel/EditorTypes/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/EditorTypes/
+\whitespace trim
 
 <<lingo Hint>>
 

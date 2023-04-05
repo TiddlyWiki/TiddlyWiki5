@@ -1,0 +1,231 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Zaawansowane
+Advanced/Hint: Wewnętrzne informacje na temat TiddlyWiki
+Appearance/Caption: Wyświetlanie
+Appearance/Hint: Dostosowywanie wyglądu tej TiddlyWiki
+Basics/AnimDuration/Prompt: Długość animacji
+Basics/AutoFocus/Prompt: Domyślne wybrane pole do edycji przy tworzeniu nowego tiddlera
+Basics/Caption: Podstawowe
+Basics/DefaultTiddlers/BottomHint: Tiddlery, które mają spację w nazie otocz &#91;&#91;podwójnymi nawiasami kwadratowymi&#93;&#93;. Możesz też ustawić, by zawsze widzieć {{ostatnio otwarte tiddlery||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Domyślnie otwarte tiddlery
+Basics/DefaultTiddlers/TopHint: Wybierz które tiddlery mają być widoczne przy uruchomieniu
+Basics/Language/Prompt: Cześć! Wybrany język to:
+Basics/NewJournal/Title/Prompt: Domyślny tytuł nowych dzienników
+Basics/NewJournal/Text/Prompt: Domyślna treść nowych dzienników
+Basics/NewJournal/Tags/Prompt: Domyślne tagi nowych dzienników
+Basics/NewTiddler/Title/Prompt: Domyślny tytuł nowych tiddlerów
+Basics/NewTiddler/Tags/Prompt: Domyślne tagi nowych tiddlerów
+Basics/OverriddenShadowTiddlers/Prompt: Liczba nadpisanych tiddlerów-cieni
+Basics/RemoveTags: Zaktualizuj do obecnego formatu
+Basics/RemoveTags/Hint: Zaktualizuj konfigurację tagów do najnowszego formatu
+Basics/ShadowTiddlers/Prompt: Liczba tiddlerów-cieni
+Basics/Subtitle/Prompt: Podtytuł
+Basics/SystemTiddlers/Prompt: Liczba systemowych tiddlerów
+Basics/Tags/Prompt: Liczba tagów
+Basics/Tiddlers/Prompt: Liczba tiddlerów
+Basics/Title/Prompt: Tytuł tej ~TiddlyWiki
+Basics/Username/Prompt: Nazwa użytkownika do podpisywania zmian
+Basics/Version/Prompt: Wersja ~TiddlyWiki
+Cascades/Caption: Kaskada
+Cascades/Hint: Kaskady pozwalaja dynamicznie zmieniać sposób wyświetlania tiddlera zależnie od jej wyniku. Pierwszy niepusty wynik filtra poniżej będzie użyty jako szablon. Rózne kaskady zmieniają rózne elementy szablonu.
+Cascades/TagPrompt: Filtry z tagiem <$macrocall $name="tag" tag=<<currentTiddler>>/>
+EditorTypes/Caption: Typy edytorów
+EditorTypes/Editor/Caption: Edytor
+EditorTypes/Hint: Te tiddlery określają który edytor jest używany do edycji tiddlerów danych typów.
+EditorTypes/Type/Caption: Typ
+EditTemplateBody/Caption: Treść Edytora Tiddlera
+EditTemplateBody/Hint: Ta kaskada określa szablon do edycji treści tiddlera, używany podczas edycji tiddlera.
+FieldEditor/Caption: Edytor Pól
+FieldEditor/Hint: Ta kaskada określa szablon do edycji pól tiddlera, zależnie od nazwy pola. Używany podczas edycji treści tiddlera.
+Info/Caption: Info
+Info/Hint: Informacje o tej TiddlyWiki
+KeyboardShortcuts/Add/Prompt: Wpisz tu skrót
+KeyboardShortcuts/Add/Caption: dodaj skrót
+KeyboardShortcuts/Caption: Skróty Klawiszowe
+KeyboardShortcuts/Hint: Zarządzaj skrótami klawiszowymi
+KeyboardShortcuts/NoShortcuts/Caption: Brak skrótów klawiszowych
+KeyboardShortcuts/Remove/Hint: usuń skrót klawiszowy
+KeyboardShortcuts/Platform/All: Wszystkie platformy
+KeyboardShortcuts/Platform/Mac: Tylko na Macach
+KeyboardShortcuts/Platform/NonMac: Tylko na nie-Macach
+KeyboardShortcuts/Platform/Linux: Tylko na Linuxie
+KeyboardShortcuts/Platform/NonLinux: Tylko na nie-Linuxach
+KeyboardShortcuts/Platform/Windows: Tylko na Windowsie
+KeyboardShortcuts/Platform/NonWindows: Tylko na nie-Windowsach
+LayoutSwitcher/Caption: Układ
+LoadedModules/Caption: Wczytane Moduły
+LoadedModules/Hint: To są wszystie wczytane moduły podlinkowane do swoich tiddlerów źródłowych. Te zapisane kursywą nie posiadają źródłowych tiddlerów, zwykle dlatego, że były skonfigorwane podczas procesu uruchomienia.
+Palette/Caption: Paleta
+Palette/Editor/Clone/Caption: kopiuj
+Palette/Editor/Clone/Prompt: Zalecamy skopiowanie tej palety przed zmianą kolorów
+Palette/Editor/Delete/Hint: usuń tą konfigurację z obecnej palety
+Palette/Editor/Names/External/Show: Pokaż nazwy kolorów, które nie są częścią wybranej palety
+Palette/Editor/Prompt/Modified: Ukryta paleta została zmieniona
+Palette/Editor/Prompt: Edytowanie
+Palette/Editor/Reset/Caption: resetuj
+Palette/HideEditor/Caption: ukryj edytor
+Palette/Prompt: Aktualna paleta:
+Palette/ShowEditor/Caption: pokaż edytor
+Parsing/Caption: Parsowanie
+Parsing/Hint: Tu możesz globalnie włączyć/wyłączyć zasady parsowania. Żeby zmiany zaczęły działać, zapisz i przeładuj wiki. Wyłączenie niektórych zasad może spowodować nieprawidłowe działanie <$text text="TiddlyWiki"/>. Użyj [[trybu bezpiecznego|https://tiddlywiki.com/#SafeMode]] by przywrócić normalne funkcjonowanie.
+Parsing/Block/Caption: Zasady Parsowania Blokowego
+Parsing/Inline/Caption: Zasady Parsowania Liniowego
+Parsing/Pragma/Caption: Zasady Parsowania Pragmy
+Plugins/Add/Caption: Pobierz więcej wtyczek
+Plugins/Add/Hint: Zainstaluj wtyczki z oficjalnej biblioteki
+Plugins/AlreadyInstalled/Hint: Ta wtyczka jest już zainstalowana w wersji <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Również wymaga:
+Plugins/Caption: Wtyczki
+Plugins/Disable/Caption: wyłącz
+Plugins/Disable/Hint: Wyłacz tą wtyczkę przy kolejnym uruchomieniu
+Plugins/Disabled/Status: (wyłączony)
+Plugins/Downgrade/Caption: cofnij wersję
+Plugins/Empty/Hint: Brak
+Plugins/Enable/Caption: włącz
+Plugins/Enable/Hint: Włącz tą wtyczkę przy kolejnym uruchomieniu
+Plugins/Install/Caption: instaluj
+Plugins/Installed/Hint: Obecnie zainstalowane wtyczki
+Plugins/Languages/Caption: Języki
+Plugins/Languages/Hint: Wtyczki z paczkami językowymi
+Plugins/NoInfoFound/Hint: Nie znaleziono ''"<$text text=<<currentTab>>/>"''
+Plugins/NotInstalled/Hint: Ta wtyczka nie jest obecnie zainstalowana
+Plugins/OpenPluginLibrary: otwórz bibliotekę wtyczek
+Plugins/ClosePluginLibrary: zamknij bibliotekę wtyczek
+Plugins/PluginWillRequireReload: (wymaga przeładowania)
+Plugins/Plugins/Caption: Wtyczki
+Plugins/Plugins/Hint: Wtyczki
+Plugins/Reinstall/Caption: zainstaluj ponownie
+Plugins/Themes/Caption: Motywy
+Plugins/Themes/Hint: Wtyczki z motywami
+Plugins/Update/Caption: aktualizuj
+Plugins/Updates/Caption: Aktualizacje
+Plugins/Updates/Hint: Dostępne aktualizacje zainstalowanych wtyczek
+Plugins/Updates/UpdateAll/Caption: Zaktualizuj wtyczki: <<update-count>>
+Plugins/SubPluginPrompt: Dostępna liczba podwtyczek: <<count>>
+Saving/Caption: Zapisywanie
+Saving/DownloadSaver/AutoSave/Description: Zezwól serwerowi pobierania na automatyczne zapisywanie
+Saving/DownloadSaver/AutoSave/Hint: Zezwól automatyczne zapisywanie przy zapisywaniu na dysk
+Saving/DownloadSaver/Caption: Zapisywanie na Dysk
+Saving/DownloadSaver/Hint: Te ustawienia są dla zapisywania kompatybilnego z HTML5
+Saving/General/Caption: Ogólne
+Saving/General/Hint: Te ustawienia zmienają działanie wszystkich systemów zapisywania
+Saving/Hint: Ustawienia zapisywania całej TiddlyWiki jako jeden plik poprzez moduł zapisywania
+Saving/GitService/Branch: Docelowa gałąź do zapisu
+Saving/GitService/CommitMessage: Zapisane przez TiddlyWiki
+Saving/GitService/Description: Te ustawiena działają tylko gdy zapisujesz przy pomocy <<service-name>>
+Saving/GitService/Filename: Nazwa docelowego pliku (np. `index.html`)
+Saving/GitService/Path: Ścieżka docelowa do pliku (np. `/wiki/`)
+Saving/GitService/Repo: Docelowe repozytorium (np. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: URL do serwera API
+Saving/GitService/UserName: Nazwa użytkownika
+Saving/GitService/GitHub/Caption: Zapisywacz GitHub
+Saving/GitService/GitHub/Password: Hasło, token OAUTH lub osobisty token dospu ((sprawdź [[pomoc Githuba|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] by uzyskać więcej szczegółów)
+Saving/GitService/GitLab/Caption: Zapisywacz GitLab
+Saving/GitService/GitLab/Password: Osobisty token do API ((sprawdź [[pomoc GitLaba|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] by uzyskać więcej szczegółów)
+Saving/GitService/Gitea/Caption: Zapisywacz Gitea
+Saving/GitService/Gitea/Password: Osobisty token do API (przez interfejs webowy Gitea: `Settings | Applications | Generate New Token`)
+Saving/TiddlySpot/Advanced/Heading: Zaawansowane Ustawienia
+Saving/TiddlySpot/BackupDir: Folder z kopią zapasową
+Saving/TiddlySpot/ControlPanel: Panel Sterowania ~TiddlySpot
+Saving/TiddlySpot/Backups: Kopie zapasowe
+Saving/TiddlySpot/Caption: Zapisywacz ~TiddlySpot
+Saving/TiddlySpot/Description: Te ustawienia działają tylko gdy zapisujesz do [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], lub do kompatyblinego serwra. Sprawdź [[tutaj|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] by uzyskać więcej informacji na temat konfiguracji zapisywania do ~TiddlySpot lub ~TiddlyHost.
+Saving/TiddlySpot/Filename: Nazwa Pliku
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //URL serwera to domyślnie `http://<wikiname>.tiddlyspot.com/store.cgi` ale może być zmienione by użyć własnego, np. `http://example.com/store.php`.//
+Saving/TiddlySpot/Password: Hasło
+Saving/TiddlySpot/ReadOnly: Uwaga: [[TiddlySpot|http://tiddlyspot.com]] obecnie nie pozwala tworzyć nowych stron. Sprawdź [[TiddlyHost|https://tiddlyhost.com]], nową usługę hostingową kompatybilną z ~TiddlySpot.
+Saving/TiddlySpot/ServerURL: URL serwera
+Saving/TiddlySpot/UploadDir: Folder Docelowy
+Saving/TiddlySpot/UserName: Nazwa Wiki
+Settings/AutoSave/Caption: Autozapis
+Settings/AutoSave/Disabled/Description: Nie zapisuj zmian automatycznie
+Settings/AutoSave/Enabled/Description: Zapisuj zmiany automatycznie
+Settings/AutoSave/Hint: Próbuj automatycznie zapisać zmiany podczas edycji, gdy używasz wspierającego to modułu zapisującego
+Settings/CamelCase/Caption: Camel Case WikiLinki
+Settings/CamelCase/Hint: Możesz wyłączyć automatyczne linkowanie fraz w ~CamelCase; wymaga ponownego uruchomienia
+Settings/CamelCase/Description: Włącz automatyczne linkowanie ~CamelCase
+Settings/Caption: Ustawienia
+Settings/EditorToolbar/Caption: Pasek Narzędzi Edytora
+Settings/EditorToolbar/Hint: Włącz lub wyłącz pasek narzędzi edytora:
+Settings/EditorToolbar/Description: Pokaż pasek narzędzi edytora
+Settings/InfoPanelMode/Caption: Tryb Panelu Info Tiddlerów
+Settings/InfoPanelMode/Hint: Ustaw kiedy panel info tiddlera zostanie zamknięty:
+Settings/InfoPanelMode/Popup/Description: Panel info wyłacza się automatycznie
+Settings/InfoPanelMode/Sticky/Description: Panel info pozostaje otwarty aż zostanie ręcznie zamknięty
+Settings/Hint: Te ustawienia pozwalają dostosować zachowanie TiddlyWiki
+Settings/NavigationAddressBar/Caption: Pasek adresu
+Settings/NavigationAddressBar/Hint: Zachowanie paska adresu w przeglądarce przy otworzeniu tiddlera:
+Settings/NavigationAddressBar/No/Description: Nie aktualizuj paska adresu
+Settings/NavigationAddressBar/Permalink/Description: Pokaż docelowego tiddlera
+Settings/NavigationAddressBar/Permaview/Description: Pokaż docelowego tiddlera i obecny Story River
+Settings/NavigationHistory/Caption: Historia Nawigacji
+Settings/NavigationHistory/Hint: Aktualizuj historię nawigacji przeglądarki przy zmianie tiddlera:
+Settings/NavigationHistory/No/Description: Nie aktualizuj historii
+Settings/NavigationHistory/Yes/Description: Aktualizuj historię
+Settings/NavigationPermalinkviewMode/Caption: Tryb linków bezpośrednich/widoku
+Settings/NavigationPermalinkviewMode/Hint: Ustal jak linki bezpośrednie/widok się zachowują:
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Skopiuj URL do linku bezpośredniego/widoku do schowka
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Zaktualizuj pasek adresu o URL do linku bezpośredniego/widoku
+Settings/PerformanceInstrumentation/Caption: Logowanie wydajności w Konsoli
+Settings/PerformanceInstrumentation/Hint: Uruchamia logowanie wydajności w konsoli deweloperskiej przeglądarki; wymaga ponownego uruchomienia
+Settings/PerformanceInstrumentation/Description: Włącz logowanie
+Settings/ToolbarButtonStyle/Caption: Styl Przycisków Paska Narzędzi
+Settings/ToolbarButtonStyle/Hint: Wybierz styl przycisków w pasku narzędzi
+Settings/ToolbarButtonStyle/Styles/Borderless: Bez ramki
+Settings/ToolbarButtonStyle/Styles/Boxed: Pudelko
+Settings/ToolbarButtonStyle/Styles/Rounded: Zaokrąglone
+Settings/ToolbarButtons/Caption: Przyciski Menu Narzędzi
+Settings/ToolbarButtons/Hint: Domyślnie wyświetlane przyciski paska narzędzi:
+Settings/ToolbarButtons/Icons/Description: Pokaż ikonę
+Settings/ToolbarButtons/Text/Description: Pokaż tekst
+Settings/DefaultSidebarTab/Caption: Domyślna zakładka w menu bocznym
+Settings/DefaultSidebarTab/Hint: Wybierz która zakładka jest domyślnie otwarta w menu bocznym
+Settings/DefaultMoreSidebarTab/Caption: Domyślna zakładka w podmenu "Więcej"
+Settings/DefaultMoreSidebarTab/Hint: Wybierz która zakładka ma być domyślnie wybrana w podmenu "Więcej"
+Settings/LinkToBehaviour/Caption: Zachowania Otwierania Tiddlerów
+Settings/LinkToBehaviour/InsideRiver/Hint: Nawigacja //z wewnątrz// Story River
+Settings/LinkToBehaviour/OutsideRiver/Hint: Nawgiacja //spoza// Story River
+Settings/LinkToBehaviour/OpenAbove: Otwórz ponad obecnym tiddlerem
+Settings/LinkToBehaviour/OpenBelow: Otwórz pod obecnym tiddlerem
+Settings/LinkToBehaviour/OpenAtTop: Otwórz na szczycie Story River
+Settings/LinkToBehaviour/OpenAtBottom: Otwórz na dole Story River
+Settings/TitleLinks/Caption: Tytuły Tiddlerów
+Settings/TitleLinks/Hint: Opcjonanie wyświetlaj nazwy tiddlerów jako linki
+Settings/TitleLinks/No/Description: Nie wyświetlaj nazw jako linki
+Settings/TitleLinks/Yes/Description: Wyświetlaj nazwy jako linki
+Settings/MissingLinks/Caption: Wiki Linki
+Settings/MissingLinks/Hint: Wybierz czy linkować do nieistniejących jeszcze tiddlerów
+Settings/MissingLinks/Description: Włacz linowanie do nieistniejących tiddlerów
+StoryTiddler/Caption: Widok Tiddlera
+StoryTiddler/Hint: Ta kaskada określa szablon używany podczas wyświetlania tiddlera w Story River.
+StoryView/Caption: Widok Story River
+StoryView/Prompt: Obecny widok:
+Stylesheets/Caption: Style:
+Stylesheets/Expand/Caption: Rozwiń Wszystko
+Stylesheets/Hint: To jest wyrenderowany CSS obecnych tiddlerów otagowanych jako <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Przywróć
+Theme/Caption: Motyw
+Theme/Prompt: Obecny motyw:
+TiddlerFields/Caption: Pola tiddlerów
+TiddlerFields/Hint: To jest pełna lista wszystich pól użytych w tej wiki (wliczając systemowe tiddlery ale nie tiddlery-cienie)
+TiddlerColour/Caption: Kolor tiddlera
+TiddlerColour/Hint: Ta kaskada określa kolor używany do wyswietlania tiddlera (kolor ikony oraz taga).
+TiddlerIcon/Caption: Ikona tiddlera
+TiddlerIcon/Hint: Ta kaskada określa ikonę używaną przez tiddlera.
+Toolbars/Caption: Paski Narzędzi
+Toolbars/EditToolbar/Caption: Pasek narzędzi przy edycji tiddlera
+Toolbars/EditToolbar/Hint: Wybierz, które przyciski mają być widoczne na górze okna edycji tiddlera. Możesz zmienić ich kolejnośc przeciągając wiersze.
+Toolbars/Hint: Wybierz, które przyciski mają być widoczne.
+Toolbars/PageControls/Caption: Pasek narzędzi strony
+Toolbars/PageControls/Hint: Wybierz, które przyciski mają być widoczne w głównym pasku narzędzi w menu bocznym. Możesz zmienić ich kolejnośc przeciągając wiersze.
+Toolbars/EditorToolbar/Caption: Pasek narzędzi edytora treści
+Toolbars/EditorToolbar/Hint: Wybierz które przyciski mają być widoczne w pasku narzędzi edytora treści tiddlera. Zależnie od typu edytowanego Tiddlera niektóre z nich mogą być niedostępne. Możesz zmienić ich kolejnośc przeciągając wiersze.
+Toolbars/ViewToolbar/Caption: Pasek narzędzi wyświetlania
+Toolbars/ViewToolbar/Hint: Wybierz które przyciski są widoczne obok tytułu podczas wyświetlania tiddlera. Możesz zmienić ich kolejnośc przeciągając wiersze.
+Tools/Download/Full/Caption: Pobierz całą wiki.
+ViewTemplateBody/Caption: Treść Wyświetlanego Tiddlera
+ViewTemplateBody/Hint: Ta kaskada określa szablon wyświetlania treści tiddlera (czyli jego tekstu, w przeciwieństwie do kaskady 'Widok Tiddlera').
+ViewTemplateTitle/Caption: Tytuł Wyświetlanego Tiddlera
+ViewTemplateTitle/Hint: Ta kaskada określa szablon wyświetlania tytułu tiddlera.

@@ -1,0 +1,114 @@
+title: $:/palettes/SpartanDay
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+description: Cold, spartan day colors
+name: Spartan Day
+color-scheme: light
+
+alert-background: <<colour background>>
+alert-border: <<colour very-muted-foreground>>
+alert-highlight: <<colour very-muted-foreground>>
+alert-muted-foreground: <<colour muted-foreground>>
+background: #FAFAFA
+blockquote-bar: <<colour page-background>>
+button-background: transparent
+button-foreground: inherit
+button-border: <<colour tag-background>>
+code-background: #ececec
+code-border: #ececec
+code-foreground: 
+dirty-indicator: #c80000
+download-background: <<colour primary>>
+download-foreground: <<colour background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: #FFFFFF
+dropdown-border: <<colour dropdown-background>>
+dropdown-tab-background-selected: <<colour dropdown-background>>
+dropdown-tab-background: #F5F5F5
+dropzone-background: <<colour tag-background>>
+external-link-background-hover: transparent
+external-link-background-visited: transparent
+external-link-background: transparent
+external-link-foreground-hover: 
+external-link-foreground-visited: 
+external-link-foreground: 
+foreground: rgba(0, 0, 0, 0.87)
+highlight-background: #ffff00
+highlight-foreground: #000000
+message-background: <<colour background>>
+message-border: <<colour very-muted-foreground>>
+message-foreground: rgba(0, 0, 0, 0.54)
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: <<colour very-muted-foreground>>
+modal-footer-background: <<colour background>>
+modal-footer-border: <<colour very-muted-foreground>>
+modal-header-border: <<colour very-muted-foreground>>
+muted-foreground: rgba(0, 0, 0, 0.54)
+notification-background: <<colour dropdown-background>>
+notification-border: <<colour dropdown-background>>
+page-background: #f4f4f4
+pre-background: #ececec
+pre-border: #ececec
+primary: #3949ab
+select-tag-background: <<colour background>>
+select-tag-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #aeaeae
+sidebar-controls-foreground: #c6c6c6
+sidebar-foreground-shadow: transparent
+sidebar-foreground: rgba(0, 0, 0, 0.54)
+sidebar-muted-foreground-hover: rgba(0, 0, 0, 0.54)
+sidebar-muted-foreground: rgba(0, 0, 0, 0.38)
+sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: transparent
+sidebar-tab-border-selected: <<colour table-border>>
+sidebar-tab-border: transparent
+sidebar-tab-divider: <<colour table-border>>
+sidebar-tab-foreground-selected: rgba(0, 0, 0, 0.87)
+sidebar-tab-foreground: rgba(0, 0, 0, 0.54)
+sidebar-tiddler-link-foreground-hover: rgba(0, 0, 0, 0.87)
+sidebar-tiddler-link-foreground: rgba(0, 0, 0, 0.54)
+site-title-foreground: rgba(0, 0, 0, 0.87)
+static-alert-foreground: #aaaaaa
+tab-background-selected: <<colour background>>
+tab-background: transparent
+tab-border-selected: <<colour table-border>>
+tab-border: transparent
+tab-divider: <<colour table-border>>
+tab-foreground-selected: rgba(0, 0, 0, 0.87)
+tab-foreground: rgba(0, 0, 0, 0.54)
+table-border: #d8d8d8
+table-footer-background: <<colour tiddler-editor-fields-odd>>
+table-header-background: <<colour tiddler-editor-fields-even>>
+tag-background: #ec6
+tag-foreground: <<colour button-foreground>>
+tiddler-background: <<colour background>>
+tiddler-border: #f9f9f9
+tiddler-controls-foreground-hover: <<colour sidebar-controls-foreground-hover>>
+tiddler-controls-foreground-selected: <<colour sidebar-controls-foreground-hover>>
+tiddler-controls-foreground: <<colour sidebar-controls-foreground>>
+tiddler-editor-background: transparent
+tiddler-editor-border-image: 
+tiddler-editor-border: #e8e7e7
+tiddler-editor-fields-even: rgba(0, 0, 0, 0.1)
+tiddler-editor-fields-odd: rgba(0, 0, 0, 0.04)
+tiddler-info-background: #F5F5F5
+tiddler-info-border: #F5F5F5
+tiddler-info-tab-background: <<colour tiddler-editor-fields-odd>>
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: <<colour muted-foreground>>
+tiddler-title-foreground: #000000
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: <<colour very-muted-foreground>>
+very-muted-foreground: rgba(0, 0, 0, 0.12)

@@ -14,8 +14,8 @@ List/Caption: Liste
 List/Empty: Ce tiddler ne contient pas de champ //list//
 Listed/Caption: Listé
 Listed/Empty: Ce tiddler ne figure dans le champ //list// d'aucun autre tiddler
-References/Caption: Références
-References/Empty: Aucun tiddler ne comporte de lien vers celui-ci
+References/Caption: Pointeurs
+References/Empty: Aucun tiddler ne pointe vers celui-ci
 Tagging/Caption: Étiquetage
 Tagging/Empty: Le titre de ce tiddler ne sert de tag à aucun tiddler
 Tools/Caption: Outils

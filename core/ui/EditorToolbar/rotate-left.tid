@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/rotate-left
 caption: {{$:/language/Buttons/RotateLeft/Caption}}
 description: {{$:/language/Buttons/RotateLeft/Hint}}
-condition: [<targetTiddler>is[image]]
+condition: [<targetTiddler>is[image]] -[<targetTiddler>type[image/svg+xml]]
 
 <$action-sendmessage
 	$message="tm-edit-bitmap-operation"

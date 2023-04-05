@@ -1,6 +1,7 @@
 {
 	"description": "French (France) edition",
 	"plugins": [
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

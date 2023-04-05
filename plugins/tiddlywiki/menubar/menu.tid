@@ -1,0 +1,68 @@
+title: $:/plugins/tiddlywiki/menubar/menu
+tags: $:/tags/PageTemplate
+
+\define menubar-inner(size)
+<ul class="tc-menubar-list">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]]">
+<$list filter="[<currentTiddler>addprefix[$:/config/plugins/menubar/MenuItems/Visibility/]get[text]] ~show +[match[show]]" variable="ignore">
+<$list filter="[[$size$]match[wide]] ~[<currentTiddler>get[show-when]match[$size$]] ~[{$:/state/popup/menubar/hamburger}match[yes]]" variable="ignore">
+<li style={{!!custom-menu-styles-$size$}} class={{{ [<currentTiddler>get[show-when]addprefix[tc-menubar-]] tc-menubar-item +[join[ ]] }}}>
+<$list filter="[<currentTiddler>!is-dropdown[yes]]" variable="listItem" emptyMessage="""
+	<!-- Dropdown -->
+	<$set name="dropdown-state" value=<<qualify "$:/state/popup/topmenu/dropdown/">>>
+	<$set name="dropdown-state" value={{{ [<dropdown-state>addsuffix<currentTiddler>] }}}>
+	<$button popup=<<dropdown-state>> selectedClass="tc-selected">
+	<$set name="tv-wikilinks" value="no">
+	<$transclude field="caption" mode="inline"/>
+	<$text text=" "/>
+	<span class="tc-menubar-dropdown-arrow">
+	<$transclude tiddler="$:/core/images/down-arrow" mode="inline"/>
+	</span>
+	</$set>
+	</$button>
+	</$set>
+	</$set>
+""">
+<$list filter="[<currentTiddler>has[custom-menu-content]]" variable="listItem" emptyMessage="""
+	<!-- Link -->
+	<$link to={{!!target}}>
+	<$set name="tv-wikilinks" value="no">
+	<$transclude field="caption" mode="inline"/>
+	</$set>
+	</$link>
+""">
+<!-- Custom content -->
+<$transclude field="custom-menu-content" mode="inline"/>
+</$list>
+</$list>
+</li>
+</$list>
+</$list>
+</$list>
+</ul>
+\end
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]] -[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/topleftbar]] -[all[tiddlers+shadows]tag[$:/tags/TopRightBar]limit[1]then[]else[$:/plugins/tiddlywiki/menubar/items/toprightbar]] +[limit[1]]" variable="listItem">
+<nav class="tc-menubar tc-adjust-top-of-scroll">
+<div class="tc-menubar-narrow">
+<<menubar-inner narrow>>
+</div>
+<div class="tc-menubar-wide">
+<<menubar-inner wide>>
+</div>
+<div style="clear:both;"/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/MenuBar]!has[draft.of]is-dropdown[yes]]">
+<$list filter="[<currentTiddler>addprefix[$:/config/plugins/menubar/MenuItems/Visibility/]get[text]] ~show +[match[show]]" variable="ignore">
+<$set name="dropdown-state" value=<<qualify "$:/state/popup/topmenu/dropdown/">>>
+<$set name="dropdown-state" value={{{ [<dropdown-state>addsuffix<currentTiddler>] }}}>
+<$reveal type="popup" state=<<dropdown-state>> position={{{ [<currentTiddler>get[dropdown-position]else[below]] }}} class={{{ [<currentTiddler>get[class]] }}} tag="div">
+<div class="tc-drop-down">
+<$transclude/>
+</div>
+</$reveal>
+</$set>
+</$set>
+</$list>
+</$list>
+</nav>
+</$list>

@@ -29,6 +29,8 @@ external-link-foreground-hover: 懸停外部鏈結前景
 external-link-foreground-visited: 已造訪過的外部鏈結前景
 external-link-foreground: 外部鏈結前景
 foreground: 一般前景
+menubar-background: 選單列背景
+menubar-foreground: 選單列前景
 message-background: 訊息框背景
 message-border: 訊息邊框
 message-foreground: 訊息框前景

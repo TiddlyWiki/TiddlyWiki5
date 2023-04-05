@@ -19,7 +19,6 @@ Encryption/Password: Lösenord
 Encryption/RepeatPassword: Upprepa lösenordet
 Encryption/PasswordNoMatch: Lösenorden matchar inte
 Encryption/SetPassword: Ställ in lösenord
-InvalidFieldName: Ogiltigt tecken i namn-fältet "<$text text=<<fieldName>>/>". Fält kan bara innehålla gemena bokstäver, siffror och tecknen understreck (`_`), bindestreck (`-`) and punkt (`.`)
 MissingTiddler/Hint: Saknar tiddler "<$text text=<<currentTiddler>>/>" - klicka {{||$:/core/ui/Buttons/edit}} för att skapa
 OfficialPluginLibrary: Officiella ~TiddlyWiki Insticksprogramsbibliotek
 PluginReloadWarning: Spara {{$:/core/ui/Buttons/save-wiki}} och ladda om {{$:/core/ui/Buttons/refresh}} för att ändringarna för insticksprogrammen ska slå igenom

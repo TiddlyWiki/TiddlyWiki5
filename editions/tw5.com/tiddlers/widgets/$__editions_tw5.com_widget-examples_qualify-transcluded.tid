@@ -1,0 +1,14 @@
+created: 20220125161941555
+modified: 20220125162920771
+tags: [[Widget Examples]]
+title: $:/editions/tw5.com/widget-examples/qualify-transcluded
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<$qualify title="BaseTiddler" name="iamnotanumber">
+<ul>
+<li><code><<iamnotanumber>></code></li>
+<li><code><<transclusion>></code></li>
+</ul>
+</$qualify>
+"""/>

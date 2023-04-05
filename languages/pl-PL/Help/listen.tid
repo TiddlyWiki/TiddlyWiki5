@@ -1,0 +1,35 @@
+title: $:/language/Help/listen
+description: Tworzy serwer HTTP udostępniający TiddlyWiki
+
+Serwuje wiki po HTTP.
+
+Komenda ta przyjmuje argumenty jako pary `nazwa=wartość`:
+
+```
+--listen [<name>=<value>]...
+```
+
+Wszystkie argumenty są opcjonalne z bezpiecznymi wartościami domyślnimi i mogą być podane w jakiejkolwiek kolejności. Dostępne argumenty to:
+
+* ''host'' - opcjonalna nazwa hosta (domyślnie to "127.0.0.1", czyli "localhost")
+* ''path-prefix'' - opcjonalny przedrostek dodawany do ścieżek
+* ''port'' - port na którym nasłuchuje serwer; nie-numeryczne wartości sa interpretowane jakby to były zmienne środowiskowe z których należy pobrać numer portu (domyślnie to "8080")
+* ''credentials'' - ścieżka do pliku CSV z hasłami (relatywnie do folderu wiki)
+* ''anon-username'' - nazwa użytkownika do podispywania zmian dla anonimowych użytkowników
+* ''username'' - opcjonalna nazwa użytkownika do autoryzacji basic
+* ''password'' - opcjonalne hasło do autoryzacji basic
+* ''authenticated-user-header'' - opcjonalna nazwa nagłówka używanego do autentykacji
+* ''readers'' - lista po przecinku osób, które mogą odczytywać wiki
+* ''writers'' - lista po przecinku osób, które mogą edytować wiki
+* ''csrf-disable'' - ustaw na "yes" by wyłaczyć CSRF (domyślnie to "no")
+* ''root-tiddler'' - tiddler, który będzie stroną główną (domyślnie to "$:/core/save/all")
+* ''root-render-type'' - typ treści w którym główny tiddler bedzie wyświetlony (domyślnie to "text/plain")
+* ''root-serve-type'' - typ treści w którym główny tiddler ma być wysłany (domyślnie to "text/html")
+* ''tls-cert'' - ścieżka do certyfikatu TLS (relatywnie do folderu wiki)
+* ''tls-key'' - ścieżka do klucza TLS (relatywnie do folderu wiki)
+* ''debug-level'' - opcjonalny poziom logowania; ustaw na "debug" by wyświetlać zapytania (domyślnie to "none")
+* ''gzip'' - ustaw na "yes" by właczyć kompresję gzip dla niektórych zapytań http (domyślnie to "no")
+* ''use-browser-cache'' - ustaw na "yes" by pozwolić przeglądarce trzymać odpowiedzi serwera w historii, by zmniejszyć obciązenie (domyślnie to "no")
+
+By zdobyć informacje o tym jak udostępnić swoją lokalną wiki dla całej lokalnej sieci oraz wynikające z tego problemy bezpieczeństwa, przeczytaj sekcję WebServer tiddler na TiddlyWiki.com.
+

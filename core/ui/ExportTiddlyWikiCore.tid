@@ -1,0 +1,22 @@
+title: $:/core/ui/ExportTiddlyWikiCore
+
+\define jsFileName() tiddlywikicore-$(version)$.js
+\rules except wikilink
+\whitespace trim
+
+''For advanced users''
+
+Export the TiddlyWiki core JavaScript code for running with external JavaScript:
+
+<$button
+	tooltip="Export the TiddlyWiki core code for running with external JavaScript"
+	aria-label="export TiddlyWiki core"
+	class="tc-btn-big-green">
+<$action-sendmessage $message='tm-download-file' $param='$:/core/templates/tiddlywiki5.js' filename=<<jsFileName>>/>
+{{$:/core/images/download-button}}
+<span class="tc-tiny-gap-left">
+Download TiddlyWiki core
+</span>
+</$button>
+
+[[Further information|https://tiddlywiki.com/#Using%20the%20external%20JavaScript%20template]]

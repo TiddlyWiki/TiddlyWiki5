@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/bibtex/deserializer.js
 type: application/javascript
 module-type: tiddlerdeserializer
 
-XLSX file deserializer
+BibTeX file deserializer
 
 \*/
 (function(){
@@ -15,7 +15,7 @@ XLSX file deserializer
 var bibtexParse = require("$:/plugins/tiddlywiki/bibtex/bibtexParse.js");
 
 /*
-Parse an XLSX file into tiddlers
+Parse an BibTeX file into tiddlers
 */
 exports["application/x-bibtex"] = function(text,fields) {
 	var data,
@@ -28,7 +28,8 @@ exports["application/x-bibtex"] = function(text,fields) {
 	}
 	if(typeof data === "string") {
 		return [{
-			title: "BibTeX import error: " + data,
+			title: "BibTeX import error",
+			text: data
 		}];
 	}
 	// Convert each entry
@@ -38,7 +39,7 @@ exports["application/x-bibtex"] = function(text,fields) {
 			"bibtex-entry-type": entry.entryType
 		};
 		$tw.utils.each(entry.entryTags,function(value,name) {
-			fields["bibtex-" + name] = value;
+			fields["bibtex-" + name.toLowerCase()] = value;
 		});
 		results.push(fields);
 	});

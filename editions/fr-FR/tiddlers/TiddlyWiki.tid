@@ -1,12 +1,14 @@
 caption: TiddlyWiki
 created: 20130822170700000
-modified: 20150622113210434
+modified: 20220219162827424
 tags: Concepts
 title: TiddlyWiki
 type: text/vnd.tiddlywiki
 
-~TiddlyWiki est un outil riche et interactif, capable de manipuler des données structurées complexes. Il est assez éloigné des outils conventionnels comme les traitements de texte ou les feuilles de calcul.
+<<tw>> est un outil riche et interactif, capable de manipuler des données complexes dont la structure n'est pas adaptée aux outils conventionnels comme les traitements de texte ou les feuilles de calcul.
 
-~TiddlyWiki est conçu pour s'adapter à votre cerveau, en vous aidant à gérer ce qui s'adapte mal. L'[[idée fondamentale|Philosophy of Tiddlers]] est que les informations sont plus utiles et plus facilement réutilisables quand on les découpe en morceaux sémantiques aussi petits que possible -- [[les tiddlers|Tiddlers]] -- en leur donnant des titres à partir desquels le wiki pourra se [[structurer|Structuring TiddlyWiki]] à l'aide de [[liens|TiddlerLinks]], d'[[étiquettes|Tagging]], de [[listes|ListField]] et de [[macros|Macros]]. Les tiddlers utilisent une notation [[WikiTexte|WikiText]] qui permet de représenter de façon concise une grande panoplie de fonctions hypertexte et de formatage. Le but de ~TiddlyWiki est de fournir une interface de travail fluide, à même de faciliter l'agrégation des tiddlers et leur recomposition en textes plus long.
+<<tw>> est conçu pour s'adapter à votre cerveau, en vous aidant à gérer ce qui s'adapte mal. L'[[idée fondamentale|Philosophy of Tiddlers]] est que les informations sont plus utiles et plus facilement réutilisables quand on les découpe en morceaux sémantiques aussi petits que possible -- [[les tiddlers|Tiddlers]] -- en leur donnant des titres à partir desquels le wiki pourra se [[structurer|Structuring TiddlyWiki]] à l'aide de [[liens|TiddlerLinks]], d'[[étiquettes|Tagging]], de [[listes|ListField]] et de [[macros|Macros]]. Les tiddlers utilisent une notation [[WikiTexte|WikiText]] qui permet de représenter de façon concise une grande panoplie de fonctions hypertexte et de formatage. Le but de <<tw>> est de fournir une interface de travail fluide, à même de faciliter l'agrégation des tiddlers et leur recomposition en textes plus long.
 
-Les gens [[adorent utiliser|Raves]] ~TiddlyWiki. Parce qu'on peut l'utiliser en l'absence d'infrastructure de serveurs compliquée, et parce qu'il est [[open source|OpenSource]], il a apporté une liberté inédite à ceux qui veulent garder le contrôle de leurs précieuses informations. ~TiddlyWiki a été créé initialement par JeremyRuston et est maintenant devenu un projet //open source// qui s'épanouit grâce à une [[communauté|Community]] active de développeurs indépendants.
+Les gens adorent utiliser <<tw>>. Comme on peut l'utiliser en l'absence d'infrastructure de serveurs compliquée, et qu'il est [[open source|OpenSource]], il a apporté une liberté inédite à ceux qui veulent garder le contrôle de leurs précieuses informations.
+
+<<tw>> a été créé initialement par JeremyRuston et est maintenant devenu un projet //open source// qui s'épanouit grâce à une [[communauté|Community]] active de développeurs indépendants.

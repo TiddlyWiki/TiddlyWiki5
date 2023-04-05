@@ -13,7 +13,6 @@ description: O texto descritivo de uma extensão, ou diálogo modal
 draft.of: Para tiddlers rascunho, contém o título do tiddler do qual este é rascunho
 draft.title: Para tiddlers rascunho, contém o título proposto para o novo tiddler
 footer: O texto de rodapé para um assistente
-hack-to-give-us-something-to-compare-against: Um campo temporário utilizado em [[$:/core/templates/static.content]]
 icon: O título do tiddler que contém o ícone associado com determinado tiddler
 library: Se definido como "yes" indica que o tiddler deve ser gravado como uma biblioteca JavaScript
 list: Uma lista ordenada de títulos de tiddlers associados com um determinado tiddler

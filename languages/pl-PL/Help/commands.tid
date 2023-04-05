@@ -1,0 +1,18 @@
+title: $:/language/Help/commands
+description: Uruchom komendy zwrócone przez filtr
+
+Uruchamia komendy zwrócone przez filtr.
+
+```
+--commands <filter>
+```
+
+Dla przykładu:
+
+```
+--commands "[enlist{$:/build-commands-as-text}]"
+```
+
+```
+--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"
+```

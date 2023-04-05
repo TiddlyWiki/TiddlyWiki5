@@ -1,0 +1,141 @@
+title: $:/palettes/GruvboxDark
+name: Gruvbox Dark
+color-scheme: dark
+description: Retro groove color scheme
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+license: https://github.com/morhetz/gruvbox
+
+alert-background: #cc241d
+alert-border: #cc241d
+alert-highlight: #d79921
+alert-muted-foreground: #504945
+background: #3c3836
+blockquote-bar: <<colour muted-foreground>>
+button-foreground: <<colour foreground>>
+code-background: #504945
+code-border: #504945
+code-foreground: #fb4934
+diff-delete-background: #fb4934
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #b8bb26
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #fb4934
+download-background: #b8bb26
+download-foreground: <<colour background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: #665c54
+dropdown-border: <<colour background>>
+dropdown-tab-background-selected: #ebdbb2
+dropdown-tab-background: #665c54
+dropzone-background: #98971a
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #d3869b
+external-link-foreground: #8ec07c
+foreground: #fbf1c7
+highlight-background: #ffff79
+highlight-foreground: #000000
+menubar-background: #504945
+menubar-foreground: <<colour foreground>>
+message-background: #83a598
+message-border: #83a598
+message-foreground: #3c3836
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #504945
+modal-footer-background: #3c3836
+modal-footer-border: #3c3836
+modal-header-border: #3c3836
+muted-foreground: #d5c4a1
+notification-background: <<colour primary>>
+notification-border: <<colour primary>>
+page-background: #282828
+pre-background: #504945
+pre-border: #504945
+primary: #d79921
+select-tag-background: #665c54
+select-tag-foreground: <<colour foreground>>
+selection-background: #458588
+selection-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #7c6f64
+sidebar-controls-foreground: #504945
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #fbf1c7
+sidebar-muted-foreground-hover: #7c6f64
+sidebar-muted-foreground: #504945
+sidebar-tab-background-selected: #bdae93
+sidebar-tab-background: #3c3836
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: #bdae93
+sidebar-tab-divider: <<colour page-background>>
+sidebar-tab-foreground-selected: #282828
+sidebar-tab-foreground: <<colour tab-foreground>>
+sidebar-tiddler-link-foreground-hover: #458588
+sidebar-tiddler-link-foreground: #98971a
+site-title-foreground: <<colour tiddler-title-foreground>>
+static-alert-foreground: #B48EAD
+tab-background-selected: #ebdbb2
+tab-background: #665c54
+tab-border-selected: #665c54
+tab-border: #665c54
+tab-divider: #bdae93
+tab-foreground-selected: #282828
+tab-foreground: #ebdbb2
+table-border: #7c6f64
+table-footer-background: #665c54
+table-header-background: #504945
+tag-background: #d3869b
+tag-foreground: #282828
+tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
+tiddler-controls-foreground-hover: #7c6f64
+tiddler-controls-foreground-selected: <<colour primary>>
+tiddler-controls-foreground: #665c54
+tiddler-editor-background: #32302f
+tiddler-editor-border-image: #282828
+tiddler-editor-border: #282828
+tiddler-editor-fields-even: #504945
+tiddler-editor-fields-odd: #7c6f64
+tiddler-info-background: #32302f
+tiddler-info-border: #ebdbb2
+tiddler-info-tab-background: #ebdbb2
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #7c6f64
+tiddler-title-foreground: #a89984
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: #504945
+very-muted-foreground: #bdae93
+wikilist-background: <<colour page-background>>
+wikilist-button-background: #acacac
+wikilist-button-foreground: <<colour button-foreground>>
+wikilist-item: <<colour background>>
+wikilist-toolbar-background: <<colour background>>
+wikilist-toolbar-foreground: <<colour foreground>>
+wikilist-title: <<colour foreground>>
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: <<colour muted-foreground>>
+wikilist-button-open-hover: <<colour primary>>
+wikilist-button-open: <<colour dropzone-background>>
+wikilist-button-remove: <<colour dirty-indicator>>
+wikilist-button-remove-hover: <<colour alert-background>>
+wikilist-droplink-dragover: <<colour dropzone-background>>
+wikilist-button-reveal: <<colour sidebar-tiddler-link-foreground-hover>>
+wikilist-button-reveal-hover: <<colour message-background>>

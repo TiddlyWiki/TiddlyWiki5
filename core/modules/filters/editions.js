@@ -16,14 +16,16 @@ Filter operator for returning the names of the available editions in this wiki
 Export our filter function
 */
 exports.editions = function(source,operator,options) {
-	var results = [],
-		editionInfo = $tw.utils.getEditionInfo();
-	if(editionInfo) {
-		$tw.utils.each(editionInfo,function(info,name) {
-			results.push(name);
-		});
+	var results = [];
+	if($tw.node) {
+		var editionInfo = $tw.utils.getEditionInfo();
+		if(editionInfo) {
+			$tw.utils.each(editionInfo,function(info,name) {
+				results.push(name);
+			});
+		}
+		results.sort();
 	}
-	results.sort();
 	return results;
 };
 

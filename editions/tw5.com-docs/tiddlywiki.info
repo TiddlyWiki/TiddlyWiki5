@@ -1,7 +1,8 @@
 {
 	"description": "Documentation from tw5.com edition",
 	"plugins": [
-		"tiddlywiki/tw5.com-docs"
+		"tiddlywiki/tw5.com-docs",
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -9,6 +10,6 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+			"--render","$:/core/save/all","index.html","text/plain"]
 	}
 }

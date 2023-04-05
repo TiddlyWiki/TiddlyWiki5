@@ -3,7 +3,7 @@ modified: 20141130195444237
 tags: Concepts
 title: Transclusion
 
-[[Transclusion|http://en.wikipedia.org/wiki/Transclusion]] is the process of referencing one tiddler "A" from another tiddler "B" such that the content of "A" appears to be a part of "B".
+[[Transclusion|https://en.wikipedia.org/wiki/Transclusion]] is the process of referencing one tiddler "A" from another tiddler "B" such that the content of "A" appears to be a part of "B".
 
 Copying and pasting content creates multiple copies of the same content in several different places. With transclusion, there can be a single copy and a special instruction in "B" which indicates the point at which content should be inserted from tiddler "A".
 

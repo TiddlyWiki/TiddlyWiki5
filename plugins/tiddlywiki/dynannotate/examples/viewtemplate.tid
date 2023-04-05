@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate
+tags: $:/tags/dynannotateExamples
+caption: View Template
+
+<div class="tc-dynannotation-example-info">
+
+!! Using Dynannotate in the view template
+
+This example shows how to override the core view template with a custom template that includes dynannotate. It is disabled by default but can be enabled by clicking the button below. (Clicking the button below copies the custom view template from $:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text to $:/core/ui/ViewTemplate/body).
+
+Once enabled, this example demonstrates several features:
+
+* Highlighting of search results within tiddler bodies
+* Creating annotations on any tiddler by selecting text and then clicking a colour in the resulting dropdown
+
+</div>
+
+<$button>
+<$action-setfield $tiddler="$:/config/ViewTemplateTitleFilters/dynannotate" tags="$:/tags/ViewTemplateTitleFilter" text="[[$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text]]" list-before="$:/config/ViewTemplateBodyFilters/default"/>
+Click here to use the custom view template
+</$button>
+
+<$button>
+<$action-deletetiddler $tiddler="$:/config/ViewTemplateTitleFilters/dynannotate"/>
+Click here to revert to the core view template
+</$button>
+
+<$codeblock code={{$:/plugins/tiddlywiki/dynannotate/examples/viewtemplate/text}}/>

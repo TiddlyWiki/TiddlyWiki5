@@ -36,6 +36,7 @@ title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
 	$message="tm-new-tiddler"
 	tags="$:/tags/KaTeX/Snippet"
 	text="""$$snippet$$"""
+	caption="description shown in dropdown"
 />
 
 <$action-deletetiddler

@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/menubar/items/hamburger
+tags: $:/tags/MenuBar
+caption: Hamburger
+description: Show the full menu bar on a narrow screen
+custom-menu-content: {{$:/plugins/tiddlywiki/menubar/items/hamburger}}
+show-when: narrow
+
+<$list filter="[[$:/state/popup/menubar/hamburger]get[text]else[no]match[no]]">
+<$button set="$:/state/popup/menubar/hamburger" setTo="yes">
+{{$:/core/images/menu-button}}
+</$button>
+</$list>
+<$list filter="[[$:/state/popup/menubar/hamburger]get[text]else[no]match[yes]]">
+<$button set="$:/state/popup/menubar/hamburger" setTo="no">
+{{$:/core/images/close-button}}
+</$button>
+</$list>

@@ -1,0 +1,20 @@
+created: 20200907161522189
+modified: 20211113230558637
+tags: Resources [[Other Resources]]
+title: "Reveal.js" by Devin Weaver
+type: text/vnd.tiddlywiki
+url: https://sukima.github.io/tiddlywiki-reveal-js/
+
+Embed [[Reveal.js|https://revealjs.com]] presentations inside your [[TiddlyWiki]].
+
+{{!!url}}
+
+<<<
+reveal.js enables you to create beautiful interactive slide decks using HTML.
+
+With the power of TiddlyWiki and Reveal.js one can…
+
+* …make an interactive tiddler with fancy animations
+* …Make it go full screen for professional keynote
+* …Distribute the slideshow with examples and additional resources in one HTML file
+<<<

@@ -1,0 +1,34 @@
+created: 20201020102735123
+modified: 20220611104737314
+tags: [[Operator Examples]] [[format Operator]]
+title: format Operator (Examples)
+type: text/vnd.tiddlywiki
+
+These examples use the tiddler HelloThere.
+
+Created date with no format string specified:
+<<.operator-example 1 "[[HelloThere]get[created]format:date[]]">>
+
+Created date with a format string supplied as operator parameter:
+<<.operator-example 2 "[[HelloThere]get[created]format:date[DDth MMM YYYY]]">>
+
+Modified date shown as a relative date:
+<<.operator-example 3 "[[HelloThere]get[modified]format:relativedate[]]">>
+
+A tiddler title with spaces formatted as a title list:
+<<.operator-example 4 """[[Hello There]format:titlelist[]]""">>
+
+All tiddler titles tagged with <<tag TableOfContents>> formatted as a title list:
+<<.operator-example 5 """[tag[TableOfContents]format:titlelist[]]""">>
+
+A JSON string formatted as JSON – note how the JSON string is normalised to remove the duplicated properties:
+<<.operator-example 6 """[[{"one":"first","one":"another","two":"second"}]format:json[]]""">>
+
+<<.tip "To create a string to save a [[title list|Title List]] into a list field, use `format:titlelist[]` with the [[join operator|join Operator]]">>
+<<.operator-example 6 """[tag[TableOfContents]format:titlelist[]join[ ]]""">>
+For example, to save titles tagged `TableOfContents` to the titles field of the tiddler [[format titlelist test]]:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button> test
+<$action-setfield $tiddler="format titlelist test" titles={{{ [tag[TableOfContents]format:titlelist[]join[ ]] }}}/>
+</$button>'/>

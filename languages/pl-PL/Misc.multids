@@ -1,0 +1,96 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Wygląda na to, że próbujesz wczytać wtyczkę zaprojektowaną dla ~TiddlyWiki Classic. Zwróc uwagę, że [[te wtyczki nie działają z TiddlyWiki 5|https://tiddlywiki.com/#TiddlyWikiClassic]]. Wykryte wtyczki ~TiddlyWiki Classic:
+BinaryWarning/Prompt: Ten tiddler zawiera binarne dane
+ClassicWarning/Hint: Ten tiddler został napisany w formacie dla TiddlyWiki Classic, który nie jest w pełni kompatybilny z TiddlyWiki 5. Więcej informacji dostępnych pod adresem https://tiddlywiki.com/static/Upgrading.html.
+ClassicWarning/Upgrade/Caption: aktualizacja
+CloseAll/Button: zamknij wszystkie
+ColourPicker/Recent: Ostatnie:
+ConfirmCancelTiddler: Czy na pewno chcesz odrzucić zmiany w tiddlerze "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Czy na pewno chcesz usunąc tiddlera "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Na pewno chcesz usunąć <<resultCount>> tiddler/y/ów?
+ConfirmOverwriteTiddler: Czy na pewno chcesz nadpisać tiddlera "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Próbujesz utworzyć tiddler-cień. Zmiany te nadpiszą oryginalne, systemowe tiddlery co może utrudniać aktualizację wiki. Czy na pewno chcesz zmodyfikować"<$text text=<<title>>/>"?
+ConfirmAction: Na pewno chcesz kontynuować?
+Count: Ilość
+DefaultNewTiddlerTitle: Nowy Tiddler
+Diffs/CountMessage: Zmiany: <<diff-count>>
+DropMessage: Upuść tutaj (lub wciśnij 'Escape' by anulować)
+Encryption/Cancel: Anuluj
+Encryption/ConfirmClearPassword: Czy na pewno chcesz usunąć hasło? W ten sposób wyłaczysz szyfrowanie przy zapisywaniu wiki
+Encryption/PromptSetPassword: Ustaw nowe hasło dla TiddlyWiki
+Encryption/Username: Użytkownik
+Encryption/Password: Hasło
+Encryption/RepeatPassword: Powtórz hasło
+Encryption/PasswordNoMatch: Hasła się nie zgadzają
+Encryption/SetPassword: Ustaw hasło
+Error/Caption: Bład
+Error/Filter: Bład filtra
+Error/FilterSyntax: Bład składniowy filtra
+Error/FilterRunPrefix: Bład filtra: Nieznany prefiks dla filtra 'run'
+Error/IsFilterOperator: Bład filtra: Nieznany argument dla operatora 'is'
+Error/FormatFilterOperator: Bład filtra: nieznany suffix dla operatora 'format'
+Error/LoadingPluginLibrary: Błąd przy wczytywaniu biblioteki wtyczek
+Error/NetworkErrorAlert: `<h2>''Bład sieciowy''</h2>Połaczenie z serwerem zostało utracone. Możę to być wywołane problemem z internetem. Upewnij się, że masz podłaczenie do internetu przed kolejną próbą.<br><br>''Wszelkie niezapisane zmiany zostaną zsynchronizowane przy odzyskaniu łączności''.`
+Error/PutEditConflict: Pliki zostały zmienione na serwerze
+Error/PutForbidden: Brak uprawnień
+Error/PutUnauthorized: Wymagane uwierzytelnienie
+Error/RecursiveTransclusion: Rekursywna transkluzja wykryta w widżecie transkluzji
+Error/RetrievingSkinny: Bład przy pobieraniu listy tiddlerów
+Error/SavingToTWEdit: Bład przy zapisywaniu do TWEdit
+Error/WhileSaving: Bład przy zapisywaniu
+Error/XMLHttpRequest: Kod błedu XMLHttpRequest
+InternalJavaScriptError/Title: Wewnętrzny bład JavaScript
+InternalJavaScriptError/Hint: Ups, to się nie powinno zdarzyć. Zalecamy ponowne uruchomienie TiddlyWiki poprzez odświeżenie strony w przeglądarce.
+LayoutSwitcher/Description: Otwórzy wybór motywu
+LazyLoadingWarning: <p>Trwa pobieranie zewnętrznych treści z ''<$text text={{!!_canonical_uri}}/>''</p><p>Jeżeli ta wiadomość nie zniknie po chwili, to albo typ tiddlera nie pasuje do typu pobranej treści, lub używasz przeglądarki, która nie wspiera pobierania zewnętrznych treści dla wiki wczytanych jako pliki. Więcej informacji pod adresem https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Zaloguj się do TiddlySpace
+Manager/Controls/FilterByTag/None: (brak)
+Manager/Controls/FilterByTag/Prompt: Filtruj po tagu:
+Manager/Controls/Order/Prompt: Odwrotna kolejność
+Manager/Controls/Search/Placeholder: Szukaj
+Manager/Controls/Search/Prompt: Szukaj:
+Manager/Controls/Show/Option/Tags: tagi
+Manager/Controls/Show/Option/Tiddlers: tiddlery
+Manager/Controls/Show/Prompt: Pokaż:
+Manager/Controls/Sort/Prompt: Sortuj po:
+Manager/Item/Colour: Color
+Manager/Item/Fields: Pola
+Manager/Item/Icon/None: (brak)
+Manager/Item/Icon: Ikona
+Manager/Item/RawText: Czysty tekst
+Manager/Item/Tags: Tagi
+Manager/Item/Tools: Narzędzia
+Manager/Item/WikifiedText: Przetworzony tekst
+MissingTiddler/Hint: Nie znaleziono tiddlera "<$text text=<<currentTiddler>>/>" -- kliknij {{||$:/core/ui/Buttons/edit}} by go utworzyć
+No: Nie
+OfficialPluginLibrary: Oficjalna Biblioteka Wtyczek ~TiddlyWiki
+OfficialPluginLibrary/Hint: Oficjalna biblioteka wtyczek ~TiddlyWiki z tiddlywiki.com. Wtyczki, motywi i paczki językowe są utrzymywane przez główny zespół TiddlyWiki.
+PageTemplate/Description: domyślny motyw ~TiddlyWiki
+PageTemplate/Name: Domyślny szablon strony
+RecentChanges/DateFormat: 0DD-0MM-YYYY
+Shortcuts/Input/AdvancedSearch/Hint: Otwórzy panel zaawansowanego wyszukiwania z poziomu menu bocznego
+Shortcuts/Input/Accept/Hint: Zaakceptuj zaznaczenia
+Shortcuts/Input/AcceptVariant/Hint: Zaakceptuj zaznaczenia (warianty)
+Shortcuts/Input/Cancel/Hint: Wyczyść pole
+Shortcuts/Input/Down/Hint: Wybierz kolejną wartość
+Shortcuts/Input/Tab-Left/Hint: Przejdź do poprzedniej zakłądki
+Shortcuts/Input/Tab-Right/Hint: Przejdź do kolejnej zakłądki
+Shortcuts/Input/Up/Hint: Wybierz poprzednią wartość
+Shortcuts/SidebarLayout/Hint: Zmien układ menu bocznego
+Switcher/Subtitle/theme: Zmień Motyw
+Switcher/Subtitle/layout: Zmień Układ
+Switcher/Subtitle/language: Zmień Język
+Switcher/Subtitle/palette: Zmień Paletę
+SystemTiddler/Tooltip: To jest systemowy tiddler
+SystemTiddlers/Include/Prompt: Uwzględnij systemowe tiddlery
+TagManager/Colour/Heading: Kolor
+TagManager/Count/Heading: Ilośc
+TagManager/Icon/Heading: Ikona
+TagManager/Icons/None: Brak
+TagManager/Info/Heading: Info
+TagManager/Tag/Heading: Tag
+Tiddler/DateFormat: 0DD-0MM-YYYY o 0hh:0mm:0ss
+UnsavedChangesWarning: Masz niezapisane zmiany
+Yes: Tak
+

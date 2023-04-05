@@ -1,0 +1,35 @@
+caption: action-popup
+created: 20200303114556528
+modified: 20220815205132124
+tags: Widgets ActionWidgets
+title: ActionPopupWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-popup'' widget is an [[action widget|ActionWidgets]] that triggers the display of a popup defined via a state tiddler, or clears all displayed popups. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-popup'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$state |The title of the state tiddler for the popup |
+|$coords |Optional coordinates for the handle to which popup is positioned (see [[Coordinate Systems]] for the supported formats) |
+|$floating |<<.from-version "5.2.0">> Optional. Defaults to `no`. Set to `yes` to create a popup that must be closed explicitly. |
+
+<<.from-version "5.1.23">> If the ''$coords'' attribute is missing or empty then all popups are cancelled.<br/>
+<<.from-version "5.2.4">> The ''$coords'' attribute supports absolute and relative coordinates. See [[Coordinate Systems]] for more information.
+
+<<.tip "Delete the state tiddler for a floating popup to close it.">>
+
+! Examples
+
+Here is an example of button that triggers the "more" button in the sidebar "Tools" tab. You may need to scroll to see the popup
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" $value="$:/core/ui/SideBar/Tools"/>
+<$action-popup $state="$:/state/popup/more-2053862905" $coords="(0,20,0,0)"/>
+Click me!
+</$button>'/>

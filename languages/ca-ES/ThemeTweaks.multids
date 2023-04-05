@@ -1,0 +1,41 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Mides
+Metrics/BodyFontSize: Mida del tipus de lletra per al cos de tiddler
+Metrics/BodyLineHeight: Alçada de la línia per al cos de tiddler
+Metrics/FontSize: Mida del tipus de lletra
+Metrics/LineHeight: Alçada de la línia
+Metrics/SidebarBreakpoint: Punt de baixada de la cronologia
+Metrics/SidebarBreakpoint/Hint: l’amplada mínima de la pàgina en que la cronologia i la barra lateral es mostren una al costat de l'altre
+Metrics/SidebarWidth: Amplada de la barra lateral
+Metrics/SidebarWidth/Hint: l'amplada de la barra lateral amb una disposició fluida fixe
+Metrics/StoryLeft: Marge esquerra de la cronologia
+Metrics/StoryLeft/Hint: marge esquerre entre la cronologia<br>(zona dels tiddlers) i la vora esquerra de la pàgina
+Metrics/StoryRight: Marge dret de la cronologia
+Metrics/StoryRight/Hint: distància entre el marge esquerre entre la barra lateral<br>i la vora esquerra de la pàgina
+Metrics/StoryTop: Posició vertical de la cronologia
+Metrics/StoryTop/Hint: distància del marge superior de la cronologia<br>fins a la vora superior de la pàgina
+Metrics/StoryWidth: Amplada de la cronologia
+Metrics/StoryWidth/Hint: l'amplada global de la cronologia
+Metrics/TiddlerWidth: Amplada dels tiddlers
+Metrics/TiddlerWidth/Hint: a la cronologia
+Options: Opcions
+Options/CodeWrapping: Divideix les línies llargues dels blocs de codi
+Options/SidebarLayout: Disposició de la barra lateral
+Options/SidebarLayout/Fixed-Fluid: Cronologia fixa, barra lateral fluida
+Options/SidebarLayout/Fluid-Fixed: Cronologia fluida, barra lateral fixa
+Options/StickyTitles: Títols enganxosos
+Options/StickyTitles/Hint: Fa que els títols del tiddler "s'enganxin" a la part superior de la finestra del navegador
+Settings: Paràmetres
+Settings/BackgroundImage: Imatge de fons de la pàgina
+Settings/BackgroundImageAttachment: Adjunt de la imatge de fons de la pàgina
+Settings/BackgroundImageAttachment/Fixed: Fixa-ho a la finestra
+Settings/BackgroundImageAttachment/Scroll: Desplaça-ho amb els tiddlers
+Settings/BackgroundImageSize: Mida de la imatge de fons de la pàgina
+Settings/BackgroundImageSize/Contain: Omple
+Settings/BackgroundImageSize/Cover: Retalla
+Settings/CodeFontFamily: Família del tipus de lletra del codi
+Settings/EditorFontFamily: Família del tipus de lletra de l'editor
+Settings/FontFamily: Família del tipus de lletra
+ThemeTweaks: Personalitza el tema
+ThemeTweaks/Hint: Podeu modificar alguns aspectes del tema ''Vainilla''.

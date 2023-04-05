@@ -18,6 +18,8 @@ CopyToClipboard/Caption: copy to clipboard
 CopyToClipboard/Hint: Copy this text to the clipboard
 Delete/Caption: delete
 Delete/Hint: Delete this tiddler
+DeleteTiddlers/Caption: delete tiddlers
+DeleteTiddlers/Hint: Delete tiddlers
 Edit/Caption: edit
 Edit/Hint: Edit this tiddler
 Encryption/Caption: encryption
@@ -32,6 +34,7 @@ ExportTiddler/Caption: export tiddler
 ExportTiddler/Hint: Export tiddler
 ExportTiddlers/Caption: export tiddlers
 ExportTiddlers/Hint: Export tiddlers
+SidebarSearch/Hint: Select the sidebar search field
 Fold/Caption: fold tiddler
 Fold/Hint: Fold the body of this tiddler
 Fold/FoldBar/Caption: fold-bar
@@ -56,6 +59,8 @@ Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
+LayoutSwitcher/Hint: Open layout switcher
+LayoutSwitcher/Caption: layout
 Manager/Caption: tiddler manager
 Manager/Hint: Open tiddler manager
 More/Caption: more
@@ -181,6 +186,7 @@ Subscript/Caption: subscript
 Subscript/Hint: Apply subscript formatting to selection
 Superscript/Caption: superscript
 Superscript/Hint: Apply superscript formatting to selection
+ToggleSidebar/Hint: Toggle the sidebar visibility
 Transcludify/Caption: transclusion
 Transcludify/Hint: Wrap selection in curly brackets
 Underline/Caption: underline

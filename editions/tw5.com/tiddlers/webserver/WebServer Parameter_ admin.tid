@@ -1,0 +1,8 @@
+caption: admin
+created: 20211111015634164
+modified: 20211111023141767
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: admin
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.2">> The [[web server configuration parameter|WebServer Parameters]] ''admin'' is used to specify the security principals with administrator access to the [[WebServer]]. Does not accept the ''(anon)'' special token. See [[WebServer Authorization]] for more details.

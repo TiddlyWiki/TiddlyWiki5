@@ -10,6 +10,7 @@ Orphans: Waisen Tiddler
 SystemTiddlers: System-Tiddler
 ShadowTiddlers: Schatten-Tiddler
 OverriddenShadowTiddlers: Überschriebene Schatten-Tiddler
+SessionTiddlers: Tiddler, die seit dem letzten Laden verändert wurden
 SystemTags: System-Tags
 StoryList: Tiddler im "story river", außer <$text text="$:/AdvancedSearch"/>
 TypedTiddlers: Nicht "wiki-text" Tiddler

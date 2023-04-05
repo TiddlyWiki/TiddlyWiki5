@@ -1,5 +1,5 @@
 created: 20150630205653005
-modified: 20190115165616599
+modified: 20220226175503241
 tags: 
 title: Signing the Contributor License Agreement
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ Create a GitHub pull request to add your name to `cla-individual.md` or `cla-ent
 
 ''step by step''
 
-# Navigate to [[licenses/CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]] or [[licenses/CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]] according to whether you are signing as an individual or representative of an organisation
+# Navigate to [[licenses/CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/tiddlywiki-com/licenses/cla-individual.md]] or [[licenses/CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/tiddlywiki-com/licenses/cla-entity.md]] according to whether you are signing as an individual or representative of an organisation
 # Ensure that the "branch" dropdown at the top left is set to `tiddlywiki-com`
 # Click the "edit" button at the top-right corner (clicking this button will fork the project so you can edit the file)
 # Add your name at the bottom

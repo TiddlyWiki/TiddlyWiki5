@@ -1,0 +1,19 @@
+title: $:/language/Help/savewikifolder
+description: Enregistre un wiki dans un nouveau dossier wiki
+
+<<.from-version "5.1.20">> Enregistre le wiki courant sous la forme d'un dossier wiki, comprenant les tiddlers, les plugins et les informations de configuration&nbsp;:
+
+```
+--savewikifolder <chemindudossierwiki> [<filtre>]
+```
+
+* Le dossier wiki cible doit être vide ou inexistant
+* Le filtre spécifie les tiddlers à inclure. Il est optionnel et vaut par défaut `[all[tiddlers]]`
+* Les plugins appartenant à la bibliothèque officielle de plugins sont remplacés par des références à ces plugins dans le fichier `tiddlywiki.info`
+* Les plugins sur mesure sont déballés dans leur propre dossier
+
+On utilise typiquement cette commande avec la commande `--load` pour convertir un fichier TiddlyWiki HTML en un dossier wiki&nbsp;:
+
+```
+tiddlywiki --load ./monwiki.html --savewikifolder ./mondossierwiki
+```

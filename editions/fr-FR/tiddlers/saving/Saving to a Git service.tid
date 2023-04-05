@@ -1,0 +1,26 @@
+caption: Service Git en ligne
+color: #29B6F6
+created: 20190408173002622
+delivery: Service
+description: Enregistrez directement dans un dépôt Git en ligne (sur GitHub, GitLab)
+fr-title: Enregistrer avec un service Git
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: Saving to a Git service
+type: text/vnd.tiddlywiki
+
+<<tw>> peut enregistrer les modifications d'un wiki mono-fichier directement dans un dépôt GitHub.
+
+L'enregistrement vers un service Git  se configure dans le [[Panneau de contrôle|$:/ControlPanel]], dans l'onglet ''Enregistrement''. Selon le service cible souhaité, choisissez parmi les onglets ''Enregistreur ~GitHub'', ''Enregistreur ~GitLab'' ou ''Enregistreur ~Gitea''. Les paramètres suivants sont disponibles<<:>>
+
+* ''Nom d'utilisateur'' - (obligatoire) le nom d'utilisateur du compte à utiliser sur le service Git choisi
+* ''Mot de passe'' - (obligatoire) le mot de passe, le jeton OAUTH ou le //personal access token// (jeton d'accès personnel) associé. Notez que GitHub a déprécié l'authentification par mot de passe, les methodes d'authentification permises sont décrites dans la [[documentation de l'API|https://developer.github.com/v3/#authentication]].
+* ''Dépôt cible'' - (obligatoire) le nom du dépôt à utiliser. Il faut préciser le nom de l'utilisateur suivi du nom du dépôt, séparés par un `/`, par exemple `Jermolene/TiddlyWiki5`
+* ''Branche'' - (optionnel) le nom de la branche dans laquelle enregistrer le wiki. Valeur par défaut<<:>> `main` dans ~GitHub et `master` dans ~GitLab.
+* ''Chemin'' - (optionnel) le chemin pour atteindre le fichier cible. Valeur par défaut<<:>> `/`
+* ''Nom du fichier cible'' - (obligatoire) le nom de fichier de votre wiki
+
+Notes<<:>>
+
+* Le mot de passe ou le jeton d'accès sont enregistrés dans le stockage local du navigateur de façon persistante. Assurez-vous de nettoyer le mot de passe si vous utilisez une machine publique ou partagée. L'utilisation d'un jeton d'accès personnel pour l'authentification offre une couche de sécurité supplémentaire<<:>> si le jeton est compromis, il peut être révoqué sans réinitialiser le mot de passe principal du compte.

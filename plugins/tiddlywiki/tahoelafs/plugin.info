@@ -1,7 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/tahoelafs",
+	"name": "TahoeLAFS",
 	"description": "Tahoe-LAFS saver",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
 	"list": "readme"
 }

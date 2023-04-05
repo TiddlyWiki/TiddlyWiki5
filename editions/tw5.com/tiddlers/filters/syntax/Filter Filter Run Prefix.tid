@@ -1,0 +1,27 @@
+created: 20211129022455873
+modified: 20211129022550425
+tags: [[Filter Syntax]] [[Filter Run Prefix]]
+title: Filter Filter Run Prefix
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>
+
+|''purpose'' |remove every input title for which the filter run output is an empty list |
+|''input'' |all titles from previous filter runs |
+|''output''|the input titles for which the filter run is not empty |
+
+It receives the filter output so far as its input. The next run is evaluated for each title of the input, removing every input title for which the output is an empty list.
+
+Note that within the filter run, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits filter runs like `:filter[{!!price}multiply{!!cost}compare:integer:gteq[5]]` to be used for computation. The value of currentTiddler outside the run is available in the variable "..currentTiddler".
+
+The following variables are available within the filter run:
+
+* ''currentTiddler'' - the input title
+* ''..currentTiddler'' - the value of the variable `currentTiddler` outside the filter run.
+* ''index'' - <<.from-version "5.2.1">> the numeric index of the current list item (with zero being the first item in the list).
+* ''revIndex'' - <<.from-version "5.2.1">> the reverse numeric index of the current list item (with zero being the last item in the list).
+* ''length'' - <<.from-version "5.2.1">> the total length of the input list.
+
+<<.tip "Compare named filter run prefix `:filter` with [[filter Operator]] which applies a subfilter to every input title, removing the titles that return an empty result from the subfilter">>
+
+[[Examples|Filter Filter Run Prefix (Examples)]]

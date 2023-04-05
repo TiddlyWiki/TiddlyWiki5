@@ -1,0 +1,39 @@
+title: $:/language/EditTemplate/
+
+Caption: Edytor
+Body/External/Hint: Ten tiddler zawiera treść trzymaną poza głównym plikiem TiddlyWIki. Możesz edytować tagi i pola, ale nie możesz bezpośrednio edytować jego treści.
+Body/Placeholder: Wpisz treść tiddlera
+Body/Preview/Type/Output: rezultat
+Body/Preview/Type/DiffShadow: różnice z cieniem (jeżeli są)
+Body/Preview/Type/DiffCurrent: róznice z obecnym
+Field/Remove/Caption: usuń pole
+Field/Remove/Hint: Usuń pole
+Field/Dropdown/Caption: lista pól
+Field/Dropdown/Hint: Pokaż listę pól
+Fields/Add/Button: dodaj
+Fields/Add/Button/Hint: Dodaj nowe pole do tiddlera
+Fields/Add/Name/Placeholder: nazwa pola
+Fields/Add/Prompt: Dodaj nowe pole:
+Fields/Add/Value/Placeholder: wartość pola
+Fields/Add/Dropdown/System: Pola systemowe
+Fields/Add/Dropdown/User: Pola własne
+Shadow/Warning: To jest tiddler-cień. Wszelkie zmiany jakich tu dokonasz nadpiszą domyślną wersję z wtyczki <<pluginLink>>
+Shadow/OverriddenWarning: To jest zmodyfikowany tiddler-cień. Usuń go, by przywrócić oryginalną wersję z pluginu <<pluginLink>>
+Tags/Add/Button: dodaj
+Tags/Add/Button/Hint: dodaj tag
+Tags/Add/Placeholder: nazwa taga
+Tags/ClearInput/Caption: wyczyść
+Tags/ClearInput/Hint: Wyczyść tagi
+Tags/Dropdown/Caption: lista tagów
+Tags/Dropdown/Hint: Pokaż listę tagów
+Title/BadCharacterWarning: Uwaga: unikaj używania któregokolwiek z tych znaków w nazwach tiddlerów: <<bad-chars>>
+Title/Exists/Prompt: Docelowy tiddler już istnieje
+Title/Relink/Prompt: Zaktualizuj ''<$text text=<<fromTitle>>/>'' na ''<$text text=<<toTitle>>/>'' w //tagach// i //listach// pól innych tiddlerów
+Title/References/Prompt: Poniższe odniesienia do tego tiddlera nie zostały automatycznie zaktualizowane
+Type/Dropdown/Caption: lista typów treści
+Type/Dropdown/Hint: Wyswietla liste typów treści
+Type/Delete/Caption: usuń typ treści
+Type/Delete/Hint: Usuwa typ treści
+Type/Placeholder: typ treści
+Type/Prompt: Typ:
+

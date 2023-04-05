@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/twitter-archivist/usage
+
+! In the Browser
+
+To import a Twitter archive in the browser (currently Chrome only), click the button below and navigate to the root of the archive:
+
+<$button>
+<$action-sendmessage $message="tm-load-twitter-archive"/>
+Open Twitter archive
+</$button>
+
+! Under Node.js
+
+To import a Twitter archive under Node.js, use the `--loadtwitterarchive` command:
+
+```
+tiddlywiki editions/twitter-archivist/ --loadtwitterarchive '/path/to/archive' --build index
+```

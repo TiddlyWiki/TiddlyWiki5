@@ -1,0 +1,25 @@
+title: $:/language/Help/save
+description: Guarda tiddlers individuales sin procesar en archivos
+
+Guarda tiddlers individuales identificados por un filtro en su texto sin formato o formato binario en los archivos especificados.
+
+```
+--save <tiddler-filter> <filename-filter>
+```
+
+* ''tiddler-filter'': Un filtro que identifica a los tiddler que se guardarán.
+* ''filename-filter'': Filtro opcional que transforma los títulos de tiddler en nombres de ruta. Si se omite, el valor predeterminado es "[is[tiddler]]", que utiliza el título del tiddler sin cambios como nombre de archivo
+
+De forma predeterminada, el nombre del archivo se resuelve relativo al subdirectorio `output` del directorio de edición. El comando `--output` se puede usar para dirigir la salida a otro directorio diferente.
+
+Notas:
+
+* No se elimina ningún contenido del directorio de salida
+* Los directorios que faltan en la ruta al nombre del archivo se crean automáticamente.
+* Cuando se refiera a un tiddler con espacios en su título, ten cuidado de usar las comillas requeridas por la línea de comandos y también los corchetes dobles de TiddlyWiki: `--save "[[Motovun Jack.jpg]]"`
+* El filtro de nombre de archivo se evalúa con los elementos seleccionados que se establecen en el título del tiddler que se está procesando actualmente, lo que permite que el título se utilice como base para calcular el nombre de archivo. Por ejemplo, `[encodeuricomponent[]addprefix[static/]]` aplica codificación URI a cada título y luego añade el prefijo `static/`
+* El comando `--save` es un reemplazo más flexible para los comandos `--savetiddler` y `--savetiddlers`, que están en desuso
+
+Ejemplos:
+
+* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- guarda todos los tiddlers de imágenes que no son del sistema como archivos en el subdirectorio "tiddlers" con títulos codificados en URL

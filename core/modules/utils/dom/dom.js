@@ -12,6 +12,8 @@ Various static DOM-related utility functions.
 /*global $tw: false */
 "use strict";
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 /*
 Determines whether element 'a' contains element 'b'
 Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
@@ -22,6 +24,28 @@ exports.domContains = function(a,b) {
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
+exports.domMatchesSelector = function(node,selector) {
+	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
+};
+
+/*
+Select text in a an input or textarea (setSelectionRange crashes on certain input types)
+*/
+exports.setSelectionRangeSafe = function(node,start,end,direction) {
+	try {
+		node.setSelectionRange(start,end,direction);
+	} catch(e) {
+		node.select();
+	}
+};
+
+/*
+Select the text in an input or textarea by position
+*/
+exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
+	$tw.utils.setSelectionRangeSafe(node,selectFromStart,node.value.length - selectFromEnd);
+};
+
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);
@@ -29,23 +53,23 @@ exports.removeChildren = function(node) {
 };
 
 exports.hasClass = function(el,className) {
-	return el && el.className && el.className.toString().split(" ").indexOf(className) !== -1;
+	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
 };
 
 exports.addClass = function(el,className) {
-	var c = el.className.split(" ");
+	var c = (el.getAttribute("class") || "").split(" ");
 	if(c.indexOf(className) === -1) {
 		c.push(className);
+		el.setAttribute("class",c.join(" "));
 	}
-	el.className = c.join(" ");
 };
 
 exports.removeClass = function(el,className) {
-	var c = el.className.split(" "),
+	var c = (el.getAttribute("class") || "").split(" "),
 		p = c.indexOf(className);
 	if(p !== -1) {
 		c.splice(p,1);
-		el.className = c.join(" ");
+		el.setAttribute("class",c.join(" "));
 	}
 };
 
@@ -65,7 +89,7 @@ Get the first parent element that has scrollbars or use the body as fallback.
 */
 exports.getScrollContainer = function(el) {
 	var doc = el.ownerDocument;
-	while(el.parentNode) {	
+	while(el.parentNode) {
 		el = el.parentNode;
 		if(el.scrollTop) {
 			return el;
@@ -136,11 +160,15 @@ exports.getBoundingPageRect = function(element) {
 Saves a named password in the browser
 */
 exports.savePassword = function(name,password) {
+	var done = false;
 	try {
-		if(window.localStorage) {
-			localStorage.setItem("tw5-password-" + name,password);
-		}
+		window.localStorage.setItem("tw5-password-" + name,password);
+		done = true;
 	} catch(e) {
+	}
+	if(!done) {
+		$tw.savedPasswords = $tw.savedPasswords || Object.create(null);
+		$tw.savedPasswords[name] = password;
 	}
 };
 
@@ -148,10 +176,15 @@ exports.savePassword = function(name,password) {
 Retrieve a named password from the browser
 */
 exports.getPassword = function(name) {
+	var value;
 	try {
-		return window.localStorage ? localStorage.getItem("tw5-password-" + name) : "";
+		value = window.localStorage.getItem("tw5-password-" + name);
 	} catch(e) {
-		return "";
+	}
+	if(value !== undefined) {
+		return value;
+	} else {
+		return ($tw.savedPasswords || Object.create(null))[name] || "";
 	}
 };
 
@@ -195,7 +228,7 @@ exports.addEventListeners = function(domNode,events) {
 			if(eventInfo.handlerMethod) {
 				handler = function(event) {
 					eventInfo.handlerObject[eventInfo.handlerMethod].call(eventInfo.handlerObject,event);
-				};	
+				};
 			} else {
 				handler = eventInfo.handlerObject;
 			}
@@ -266,6 +299,70 @@ exports.copyToClipboard = function(text,options) {
 
 exports.getLocationPath = function() {
 	return window.location.toString().split("#")[0];
+};
+
+/*
+Collect DOM variables
+*/
+exports.collectDOMVariables = function(selectedNode,domNode,event) {
+	var variables = {},
+	    selectedNodeRect,
+	    domNodeRect;
+	if(selectedNode) {
+		$tw.utils.each(selectedNode.attributes,function(attribute) {
+			variables["dom-" + attribute.name] = attribute.value.toString();
+		});
+		
+		if(selectedNode.offsetLeft) {
+			// Add variables with a (relative and absolute) popup coordinate string for the selected node
+			var nodeRect = {
+				left: selectedNode.offsetLeft,
+				top: selectedNode.offsetTop,
+				width: selectedNode.offsetWidth,
+				height: selectedNode.offsetHeight
+			};
+			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
+
+			var absRect = $tw.utils.extend({}, nodeRect);
+			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+				absRect.left += currentNode.offsetLeft;
+				absRect.top += currentNode.offsetTop;
+			}
+			variables["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,absRect);
+
+			// Add variables for offset of selected node
+			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
+			variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
+			variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
+			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+		}
+	}
+	
+	if(domNode && domNode.offsetWidth) {
+		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
+		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
+	}
+
+	if(event && event.clientX && event.clientY) {
+		if(selectedNode) {
+			// Add variables for event X and Y position relative to selected node
+			selectedNodeRect = selectedNode.getBoundingClientRect();
+			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
+			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
+		}
+		
+		if(domNode) {
+			// Add variables for event X and Y position relative to event catcher node
+			domNodeRect = domNode.getBoundingClientRect();
+			variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
+			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
+		}
+
+		// Add variables for event X and Y position relative to the viewport
+		variables["event-fromviewport-posx"] = event.clientX.toString();
+		variables["event-fromviewport-posy"] = event.clientY.toString();
+	}
+	return variables;
 };
 
 

@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/consent-banner/youtube
+tags: $:/tags/Macro
+
+\define embed-video-with-consent(code)
+<$set name="tv-block-embedded-content" value="no">
+<$reveal state="$:/state/consent-banner/accepted" type="match" text="yes" tag="div">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/$code$" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</$reveal>
+<$reveal state="$:/state/consent-banner/accepted" type="nomatch" text="yes" tag="div">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/$code$" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</$reveal>
+</$set>
+\end
+
+! Macro source
+
+<$codeblock code={{$:/plugins/tiddlywiki/consent-banner/youtube}}/>
+
+! Example
+
+<<embed-video-with-consent KtCUr83XgyE>>

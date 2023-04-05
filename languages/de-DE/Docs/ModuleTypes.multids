@@ -23,6 +23,7 @@ tiddlerfield: Definiert das Verhalten, der unterschiedlichen Tiddler-Felder.
 tiddlermethod: Methoden werden dem `$tw.Tiddler` Prototypen hinzugefügt.
 upgrader: Führt spezifische Änderungen während des Upgrade- oder Import-prozesses durch.
 utils: Methoden werden `$tw.utils` hinzugefügt.
+utils-browser: Browser-spezifische Methoden werden zu `$tw.utils` hinzugefügt.
 utils-node: Erweitert `$tw.utils` mit Methoden aus node.js.
 widget: Widgets verarbeiten das Rendern und Aktualisieren der Anzeige in der DOM.
 wikimethod: Methoden werden zu `$tw.Wiki` hinzugefügt.

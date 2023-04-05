@@ -21,7 +21,7 @@ TWEditSaver.prototype.save = function(text,method,callback) {
 		return false;
 	}
 	// Get the pathname of this document
-	var pathname = decodeURIComponent(document.location.pathname);
+	var pathname = $tw.utils.decodeURIComponentSafe(document.location.pathname);
 	// Strip any query or location part
 	var p = pathname.indexOf("?");
 	if(p !== -1) {

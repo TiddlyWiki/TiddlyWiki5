@@ -1,0 +1,59 @@
+created: 20210618134753828
+modified: 20220724162340642
+tags: [[Filter Syntax]] [[Filter Run Prefix Examples]] [[Map Filter Run Prefix]]
+title: Map Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+Replace the input titles with the caption field if it exists, otherwise preserve the input title:
+
+<<.operator-example 1 "[tag[Widgets]] :map[get[caption]else{!!title}]">>
+
+<<.tip "The above example is equivalent to `[tag[Widgets]] :map[{!!caption}!is[blank]else{!!title}]`. Note that referencing a field as a text reference such as `{!!caption}` returns an empty string for a non-existent or empty caption field. Therefore a check for `is[blank]` is needed before the `else` operator">>
+
+
+For each title in a shopping list, calculate the total cost of purchasing each item:
+
+<<.operator-example 2 "[tag[shopping]] :map[get[quantity]else[0]multiply{!!price}]">>
+
+Get the tags of all tiddlers tagged `Widget:`
+
+<<.operator-example 3 "[tag[Widgets]] :map:flat[tagging[]] :and[!is[blank]unique[]]">>
+<<.tip "Without the `flat` suffix the `:map` filter run only returns the first result for each input title">>
+
+!! Comparison between `:map` with and without the `flat` suffix
+
+The `:map` filter run will return at least as many outputs as given in the input.  By default one input item will result in exactly one output item. When the filter run transforms an input item into an empty result, the output for that item will be an empty string. When the filter run transforms an input item into multiple items, only the first item will appear in the output. This behavior can be overridden by providing the `flat` suffix. The `flat` suffix will cause all the items to appear in the output.
+
+| `:map` | `:map:flat` |
+|^<<.operator-example m0.1 "[range[4]] :map[match[this matches nothing]]">>|^<<.operator-example m0.2 "[range[4]] :map:flat[match[this matches nothing]]">>|
+|^<<.operator-example m1.1 "[range[4]] :map[range<currentTiddler>]">>|^<<.operator-example m1.2 "[range[4]] :map:flat[range<currentTiddler>]">>|
+|^<<.operator-example m2.1 "[range[4]] :map[range<currentTiddler>]">>|^<<.operator-example m2.2 "[range[4]] :map:flat[range<currentTiddler>first[]]">>|
+|^<<.operator-example m3.1 "[range[4]] :map[range<currentTiddler>sum[]]">>|^<<.operator-example m3.2 "[range[4]] :map:flat[range<currentTiddler>sum[]]">>|
+|^<<.operator-example m4.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example m4.2 "[[1,2,3]] [[4,5]] :map:flat[split[,]]">>|
+|^<<.operator-example m5.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example m5.2 "[[1,2,3]] [[4,5]] :map:flat[split[,]first[]]">>|
+
+
+!! Comparison between `:map` and `:and`/`+` filter run prefixes
+
+The functionality of the `:map` filter run prefix has some overlap with the `:and` prefix (alias `+`). They will sometimes return the same results as each other. In at least these cases, the results will be different:
+
+# The `:and` filter run can modify the number of items (either increase or decrease). The `:map` run will never alter the number of items.
+# The number of items in the `:and` filter run will also decrease due to [[de-duplication|Dominant Append]]. The `:map` run will not [[de-duplicate|Dominant Append]].
+# Explicit references to the "currentTiddler" variable will behave differently
+# Implicit references to the "currentTiddler" using TextReference will behave differently.
+
+| `:map` | `:and` |
+|!results are the same|<|
+|^<<.operator-example 1.1 "[range[5]] :map[add[1]]">>|^<<.operator-example 1.2 "[range[5]] :and[add[1]]">>|
+|^<<.operator-example 2.1 "[range[5]] :map[addsuffix[ hello]]">>|^<<.operator-example 2.2 "[range[5]] :and[addsuffix[ hello]]">>|
+|^<<.operator-example 3.1 "[tag[shopping]] :map[get[quantity]]">>|^<<.operator-example 3.2 "[tag[shopping]] :and[get[quantity]]">>|
+|!decrease in the number of items|<|
+|^<<.operator-example 4.1 "[range[5]] :map[sum[]]">>|^<<.operator-example 4.2 "[range[5]] :and[sum[]]">>|
+|^<<.operator-example 5.1 "[range[5]] :map[join[,]]">>|^<<.operator-example 5.2 "[range[5]] :and[join[,]]">>|
+|!increase in the number of items|<|
+|^<<.operator-example 6.1 "[[1,2,3]] [[4,5]] :map[split[,]]">>|^<<.operator-example 6.2 "[[1,2,3]] [[4,5]] :and[split[,]]">>|
+|!de-duplication|<|
+|^<<.operator-example 7.1 "[range[5]] :map[[hello]]">>|^<<.operator-example 7.2 "[range[5]] :and[[hello]]">>|
+|!currentTiddler|<|
+|^<<.operator-example 8.1 "[tag[shopping]] :map[<currentTiddler>]">>|^<<.operator-example 8.2 "[tag[shopping]] :and[<currentTiddler>]">>|
+|^<<.operator-example 9.1 "[tag[shopping]] :map[{!!quantity}]">>|^<<.operator-example 9.2 "[tag[shopping]] :and[{!!quantity}]">>|

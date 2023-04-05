@@ -53,17 +53,12 @@ exports.parse = function() {
 	tag.isBlock = this.is.block || hasLineBreak;
 	// Parse the body if we need to
 	if(!tag.isSelfClosing && $tw.config.htmlVoidElements.indexOf(tag.tag) === -1) {
-			var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">",
-				reEnd = new RegExp("(" + reEndString + ")","mg");
+		var reEndString = "</" + $tw.utils.escapeRegExp(tag.tag) + ">";
 		if(hasLineBreak) {
 			tag.children = this.parser.parseBlocks(reEndString);
 		} else {
-			tag.children = this.parser.parseInlineRun(reEnd);
-		}
-		reEnd.lastIndex = this.parser.pos;
-		var endMatch = reEnd.exec(this.parser.source);
-		if(endMatch && endMatch.index === this.parser.pos) {
-			this.parser.pos = endMatch.index + endMatch[0].length;
+			var reEnd = new RegExp("(" + reEndString + ")","mg");
+			tag.children = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
 		}
 	}
 	// Return the tag
@@ -71,7 +66,7 @@ exports.parse = function() {
 };
 
 /*
-Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: [], isSelfClosing:, start:, end:,}
+Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: {}, orderedAttributes: [], isSelfClosing:, start:, end:,}
 */
 exports.parseTag = function(source,pos,options) {
 	options = options || {};
@@ -79,7 +74,8 @@ exports.parseTag = function(source,pos,options) {
 		node = {
 			type: "element",
 			start: pos,
-			attributes: {}
+			attributes: {},
+			orderedAttributes: []
 		};
 	// Define our regexps
 	var reTagName = /([a-zA-Z0-9\-\$]+)/g;
@@ -111,6 +107,7 @@ exports.parseTag = function(source,pos,options) {
 	// Process attributes
 	var attribute = $tw.utils.parseAttribute(source,pos);
 	while(attribute) {
+		node.orderedAttributes.push(attribute);
 		node.attributes[attribute.name] = attribute;
 		pos = attribute.end;
 		// Get the next attribute

@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/syncer-actions/login-status
+tags: $:/tags/SyncerDropdown
+
+<$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
+<div class="tc-drop-down-info">
+You are logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <strong><$text text={{$:/status/UserName}}/></strong></$reveal><$reveal state="$:/status/IsReadOnly" type="match" text="yes" default="no"> (read-only)</$reveal>
+</div>
+<hr/>
+</$reveal>

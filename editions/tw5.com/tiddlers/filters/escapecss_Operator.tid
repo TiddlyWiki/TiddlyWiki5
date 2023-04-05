@@ -1,0 +1,16 @@
+caption: escapecss
+created: 20190629072855199
+modified: 20190629072855199
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input with CSS escaping applied through the CSS.escape() method
+op-parameter: 
+op-parameter-name: 
+op-purpose: apply CSS escaping to a selection of titles through the CSS.escape() method / operation
+tags: [[Filter Operators]] [[String Operators]]
+title: escapecss Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.20
+
+See Mozilla Developer Network for details of the [[CSS.escape()|https://developer.mozilla.org/docs/Web/API/CSS/escape]] operation.
+
+<<.operator-examples "escapecss">>

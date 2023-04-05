@@ -6,8 +6,8 @@ type: text/vnd.tiddlywiki
 
 Keyboard shortcuts can either be used with the <<.wlink KeyboardWidget>> Widget or with [[Keyboard Shortcut Tiddlers|Keyboard Shortcut Tiddler]]
 
-<<.tip """The <$macrocall $name=".wlink" to="KeyboardWidget"/> Widget makes the shortcuts accessible within an `input` or `textarea` field
-
+<<.tip """The <$macrocall $name=".wlink" to="KeyboardWidget"/> Widget makes the shortcuts accessible within an `input` or `textarea` field.
+<br>
 A shortcut defined through a [[Keyboard Shortcut Tiddler]] makes the shortcut accessible globally""">>
 
 !!!See [[How to create keyboard shortcuts]] with a detailed explanation for creating your own shortcuts
@@ -20,11 +20,15 @@ Keyboard shortcuts are available for common editing operations within the Text E
 
 <<.from-version 5.1.18>> : New ''global'' Keyboard shortcuts:
 
-* Creating a new tiddler (defaults to <kbd>alt-N</kbd> )
-* Creating a new journal (defaults to <kbd>alt-J</kbd> )
-* Creating a new image (defaults to <kbd>alt-I</kbd> )
+|!Action |!Default Shortcut|
+|Creating a new tiddler |<kbd>alt-N</kbd> |
+|Creating a new journal |<kbd>alt-J</kbd> |
+|Creating a new image |<kbd>alt-I</kbd> |
+|Focusing sidebar search |<<.from-version 5.1.20>><kbd>ctrl-shift-F</kbd> |
+|Toggling the sidebar |<<.from-version 5.1.20>><kbd>shift-alt-S</kbd> |
+|Advanced search |<<.from-version 5.1.20>><kbd>ctrl-shift-A</kbd> |
 
-The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[Control Panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
+The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[Control Panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>>.
 
 !! Special Keys
 

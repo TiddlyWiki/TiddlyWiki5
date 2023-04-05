@@ -1,0 +1,14 @@
+caption: ignore parser mode
+created: 20220111000929700
+modified: 20220122182842038
+tags: [[WikiText Parser Modes]]
+title: Places where the parser ignores WikiText
+type: text/vnd.tiddlywiki
+
+Text enclosed by these constructs is skipped by the parser and WikiText punctuation will be ignored:
+
+|[[Code Blocks in WikiText]]|One of the main purposes of code blocks is to suppress wikitext expansion. Once the code block starts, the parser will ignore all WikiText punctuation until the code block ends.|
+|[[Images in WikiText]]|`[[img|literal image link text]]` - the text enclosed by square braces will be ignored. This means, for example, [[transclusions|Transclusion in WikiText]] and [[macro calls|Macro Calls in WikiText]] cannot be used to dynamically construct the link text|
+|[[Linking in WikiText]]|`[[literal link target|literal link text]]` - the text enclosed by square braces will be ignored. This means, for example, [[transclusions|Transclusion in WikiText]] and [[macro calls|Macro Calls in WikiText]] cannot be used to dynamically construct the link target or the link text|
+|[[Macro Calls in WikiText]]|`<<mymacro ''notbold'' "literal text" "<<macro_expansion_ignored>>" {{transclusion_ignored}}>>` - while processing the text enclosed by a macro call, the parser will follow special rules for detecting macro parameters. These rules do not include detection of WikiText. However, after the parameters are substituted into the macro definition, the result will be parsed using [[normal rules|Wiki Text Parser Modes]]. This will likely result in the detection of any WikiText.|
+

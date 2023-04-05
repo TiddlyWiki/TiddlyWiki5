@@ -1,0 +1,26 @@
+caption: Git Service Saver
+color: #29B6F6
+created: 20190408173002622
+delivery: Service
+description: Save changes directly to a Git repository (on GitHub, GitLab)
+method: save
+modified: 20200507203007684
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: Saving to a Git service
+type: text/vnd.tiddlywiki
+
+TiddlyWiki can save changes directly to a GitHub repository in the single file configuration.
+
+Saving to a Git service is configured in the [[$:/ControlPanel]] in the ''Git Service Saver'' tab under the ''Saving'' tab. The following settings are supported:
+
+* ''Type'' - (mandatory) the type of the service (e.g. GitHub, GitLab)
+* ''Username'' - (mandatory) the username for the Git service account used for saving changes
+* ''Password'' - (mandatory) the OAUTH token or personal access token for the specified account. Note that GitHub deprecated password authetication, permitted authentication methods are shown in the[[API documentation|https://developer.github.com/v3/#authentication]].
+* ''Repository'' - (mandatory) the name of the Git repository. Both the owner name and the repository name must be specified. For example `Jermolene/TiddlyWiki5`
+* ''Branch'' - (optional) the name of the branch to be used within the Git repository. Defaults to `main` (~GitHub) or `master` (~GitLab)"
+* ''Path'' - (optional) the path to the target file. Defaults to `/`
+* ''Filename'' - (mandatory) the filename of the target file
+
+Notes
+
+* The Git service token or password is stored persistently in browser local storage. Be sure to clear the password if using a shared machine. Using a personal access token for authentication offers an extra layer of security: if the access token is accidentally exposed it can be revoked without needing to reset the account password

@@ -48,7 +48,7 @@ caption: Zoomable Tooltips
 <span class="zoomable-tooltip-demo-item-image">
 <$transclude/>
 </span>
-<span class="zoomable-tooltip-demo-item-text tc-dynaview-zoom-visible-3-and-above">
+<span class="zoomable-tooltip-demo-item-text tc-dynaview-zoom-visible-2-and-above">
 <$text text=<<currentTiddler>>/>
 </span>
 </div>

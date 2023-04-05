@@ -24,13 +24,13 @@ exports.isDraft = function() {
 	return this.hasField("draft.of");
 };
 
-exports.getFieldString = function(field) {
+exports.getFieldString = function(field,defaultValue) {
 	var value = this.fields[field];
 	// Check for a missing field
 	if(value === undefined || value === null) {
-		return "";
+		return defaultValue || "";
 	}
-	// Parse the field with the associated module (if any)
+	// Stringify the field with the associated tiddler field module (if any)
 	var fieldModule = $tw.Tiddler.fieldModules[field];
 	if(fieldModule && fieldModule.stringify) {
 		return fieldModule.stringify.call(this,value);
@@ -75,16 +75,16 @@ Get all the fields as a name:value block. Options:
 */
 exports.getFieldStringBlock = function(options) {
 	options = options || {};
-	var exclude = options.exclude || [];
-	var fields = [];
-	for(var field in this.fields) {
-		if($tw.utils.hop(this.fields,field)) {
-			if(exclude.indexOf(field) === -1) {
-				fields.push(field + ": " + this.getFieldString(field));
-			}
+	var exclude = options.exclude || [],
+		fields = Object.keys(this.fields).sort(),
+		result = [];
+	for(var t=0; t<fields.length; t++) {
+		var field = fields[t];
+		if(exclude.indexOf(field) === -1) {
+			result.push(field + ": " + this.getFieldString(field));
 		}
 	}
-	return fields.join("\n");
+	return result.join("\n");
 };
 
 exports.getFieldDay = function(field) {

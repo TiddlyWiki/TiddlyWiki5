@@ -1,0 +1,49 @@
+caption: Node.js
+color: #f06292
+created: 20131219100608529
+delivery: DIY
+description: Hébergement flexible sur votre machine ou dans le cloud
+fr-title: Installer TiddlyWiki sur Node.js
+method: sync
+modified: 20220402105820520
+tags: [[TiddlyWiki on Node.js]] Linux Mac Saving Windows
+title: Installing TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+# Installez [[Node.js]]
+#* Linux
+#*> //Debian/Ubuntu//<<:>><br/>`apt install node.js`<br/>Et éventuellement<<:>><br/>`apt install npm`
+#*> //Arch Linux//<br/>`pacman -S tiddlywiki` <br/>(installe node et tiddlywiki)
+#* Mac
+#*> `brew install node`
+#* Android
+#*> [[Termux pour Android|Serving TW5 from Android]]
+#* Autres
+#*> Voir https://nodejs.org
+# Ouvrez un terminal de ligne de commande et saisissez<<:>>
+#> `npm install -g tiddlywiki`
+#> En cas d'erreur, il faudra peut-être relancer la commande en tant qu'administrateur<<:>>
+#> `sudo npm install -g tiddlywiki` (Mac/Linux)
+# Vérifiez que <<tw>> est bien installé en tapant<<dp>>
+#> `tiddlywiki --version`
+# En réponse, vous devriez voir <<tw>> renvoyer la version en cours (par exemple <<version>> ;  d'autres informations de débogage peuvent aussi apparaître).
+# Faites l'essai<<dp>>
+## `tiddlywiki monnouveauwiki --init server` pour créer un dossier pour un nouveau wiki qui inclura des composants orientés serveur
+## `tiddlywiki monnouveauwiki --listen` pour démarrer <<tw>>
+## Positionnez votre navigateur sur l'adresse http://127.0.0.1:8080/
+## Essayez d'éditer et de créer de nouveaux tiddlers
+# Eventuellement, créez une copie hors-ligne<<:>>
+#* Cliquez sur le bouton <<.icon $:/core/images/save-button>> ''Enregistrer les modifications'' de la barre latérale, ''OU''
+#* `tiddlywiki monnouveauwiki --build index`
+
+
+L'option `-g` demande à Node.js d'installer <<tw>> globalement. Sans elle, <<tw>> sera disponible seulement dans le répertoire où vous l'avez installé.
+
+Si vous utilisez Debian ou une distribution Linux dérivée de Debian et que vous recevez une erreur `node: command not found` alors que le paquet node.js est installé, vous devrez peut-être créer un lien symbolique entre `nodejs` et `node`. Consultez le manuel de votre distribution et de `whereis` pour créer un lien correctement. Voir le [[rapport d'erreur 1434|http://github.com/Jermolene/TiddlyWiki5/issues/1434]] sur github.
+
+Exemple pour Debian 8.0<<:>> `sudo ln -s /usr/bin/nodejs /usr/bin/node`
+
+Vous pouvez aussi installer d'anciennes versions de <<tw>> ainsi<<:>>
+
+> `npm install -g tiddlywiki@5.1.13`
+

@@ -6,14 +6,9 @@ $(languagePluginTitle)$/icon
 
 TiddlyWiki is currently available in <$count filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]] -[[$:/languages/de-AT]]"/> languages:
 
-<div class="tc-drop-down-language-chooser" style="font-size: 10px; line-height: 12px; -moz-columns:2; -webkit-columns:2; columns:2;">
+<div class="tc-drop-down-language-chooser" style="font-size: 7px; line-height: 8px; -moz-columns:6; -webkit-columns:6; columns:6;">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]] -[[$:/languages/de-AT]]">
 <div class="tc-language-list">
-<span class="tc-language-list-greeting">
-<$view subtiddler="$:/language/ControlPanel/Basics/Language/Prompt">
-<$view tiddler="$:/language/ControlPanel/Basics/Language/Prompt"/>
-</$view>
-</span>
 <span class="tc-language-list-name tc-image-button">
 <$set name="languagePluginTitle" value=<<currentTiddler>>>
 <$transclude subtiddler=<<flag-title>>>
@@ -26,6 +21,9 @@ TiddlyWiki is currently available in <$count filter="[[$:/languages/en-GB]] [plu
 <$view field="name">
 <$view field="title"/>
 </$view>
+</$view>
+<$view subtiddler="$:/language/ControlPanel/Basics/Language/Prompt">
+<$view tiddler="$:/language/ControlPanel/Basics/Language/Prompt"/>
 </$view>
 </span>
 </div>

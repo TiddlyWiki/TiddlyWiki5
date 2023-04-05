@@ -1,0 +1,17 @@
+created: 20191013095916159
+modified: 20211117232644028
+tags: RefreshMechanism Mechanisms
+title: RefreshThrottling
+type: text/vnd.tiddlywiki
+
+The RefreshMechanism allows the refresh cycle to be throttled (or deferred) when rapid changes occur to the same tiddler. It is used to maintain responsiveness while editing a draft tiddler, but can also be used on other tiddlers.
+
+The rules governing refresh throttling are:
+
+* When a change notification occurs, throttling will only take place if all of the modified tiddlers meet at least one of these criteria:
+** Has the field `draft.of`
+** Has the field `throttle.refresh`
+** Has a title prefixed with `$:/temp/volatile/`
+* If the refresh cycle is to be throttled, a timer is set for the internal specified in [[$:/config/Drafts/TypingTimeout|Hidden Setting: Typing Refresh Delay]] (cancelling any preciously set timer)
+** When the timer fires, the refresh cycle is triggered, passing the aggregated titles of all the deferred refresh cycles
+

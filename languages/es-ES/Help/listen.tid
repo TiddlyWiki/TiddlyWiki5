@@ -1,0 +1,34 @@
+title: $:/language/Help/listen
+description: Proporciona una interfaz de servidor HTTP a TiddlyWiki
+
+Sirve un wiki a través de HTTP.
+
+El comando listen usa parámetros con nombre:
+
+```
+--listen [<name>=<value>]...
+```
+
+Todos los parámetros son opcionales con valores predeterminados seguros y se pueden especificar en cualquier orden. Los parámetros reconocidos son:
+
+* ''host'' - nombre de host opcional desde el que servir (el valor predeterminado es "127.0.0.1" también conocido como "localhost")
+* ''path-prefix'' - prefijo opcional para rutas
+* ''port'' - número de puerto en el que escuchar; los valores no numéricos se interpretan como una variable de entorno del sistema de la que se extrae el número de puerto (el valor predeterminado es "8080")
+* ''credentials'' - nombre de ruta del archivo CSV de credenciales (relativo a la carpeta wiki)
+* ''anon-username'' - el nombre de usuario para firmar ediciones de usuarios anónimos
+* ''username'' - nombre de usuario opcional para autenticación básica
+* ''password'' - contraseña opcional para autenticación básica
+* ''authenticated-user-header'' - nombre opcional del encabezado que se utilizará para la autenticación de confianza
+* ''readers'' - lista separada por comas de los usuarios autorizados a leer de este wiki
+* ''writers'' - lista separada por comas de los usuarios autorizados a escribir en este wiki
+* ''csrf-disable'' - establecer a "yes" para deshabilitar las comprobaciones CSRF (el valor predeterminado es "no")
+* ''root-tiddler'' - el tiddler para servir en la raíz (por defecto es "$:/core/save/all")
+* ''root-render-type'' - el tipo de contenido del tiddler raíz (por defecto es "text/plain")
+* ''root-serve-type'' - el tipo de contenido con el que se debe servir el tiddler raíz (el valor predeterminado es "text/html")
+* ''tls-cert'' - nombre de ruta del archivo de certificado TLS (relativo a la carpeta wiki)
+* ''tls-key'' - nombre de ruta del archivo de clave TLS (relativo a la carpeta wiki)
+* ''debug-level'' - nivel de depuración opcional; establecer en "debug" para ver los detalles de las solicitudes (el valor predeterminado es "none")
+* ''gzip'' - establecer a "yes" para habilitar la compresión gzip para algunos puntos finales http (el valor predeterminado es "no")
+* ''use-browser-cache'' - establecer a "yes" para permitir que el navegador almacene en caché las respuestas para ahorrar ancho de banda (el valor predeterminado es "no")
+
+Para obtener información sobre cómo abrir tu instancia a toda la red local y posibles problemas de seguridad, consulta el tiddler de WebServer en TiddlyWiki.com.

@@ -14,8 +14,12 @@ CloseOthers/Caption: fermer les autres tiddlers
 CloseOthers/Hint: Ferme les autres tiddlers
 ControlPanel/Caption: panneau de contrôle
 ControlPanel/Hint: Ouvre le panneau de contrôle
+CopyToClipboard/Caption: copier dans le presse-papier
+CopyToClipboard/Hint: Copie ce texte dans le presse-papier
 Delete/Caption: supprimer
 Delete/Hint: Supprime ce tiddler
+DeleteTiddlers/Caption: supprimer les tiddlers
+DeleteTiddlers/Hint: Supprime ces tiddlers
 Edit/Caption: éditer
 Edit/Hint: Édite ce tiddler
 Encryption/Caption: chiffrement
@@ -30,6 +34,7 @@ ExportTiddler/Caption: exporter ce tiddler
 ExportTiddler/Hint: Exporte ce tiddler
 ExportTiddlers/Caption: exporter ces tiddlers
 ExportTiddlers/Hint: Exporte ces tiddlers
+SidebarSearch/Hint: Choisit le champ de recherche dans la barre latérale
 Fold/Caption: replier le tiddler
 Fold/Hint: Replie le corps du tiddler
 Fold/FoldBar/Caption: Barre de repli
@@ -38,8 +43,8 @@ Unfold/Caption: déplier le tiddler
 Unfold/Hint: Déplie le corps de ce tiddler
 FoldOthers/Caption: replier les autres tiddlers
 FoldOthers/Hint: Replie le corps des autres tiddlers ouverts
-FoldAll/Caption: replie tous les tiddlers
-FoldAll/Hint: Replier le corps de tous les tiddlers ouverts
+FoldAll/Caption: replier tous les tiddlers
+FoldAll/Hint: Replie le corps de tous les tiddlers ouverts
 UnfoldAll/Caption: déplier tous les tiddlers
 UnfoldAll/Hint: Déplie le corps de tous les tiddlers ouverts
 FullScreen/Caption: plein-écran
@@ -54,6 +59,8 @@ Home/Caption: accueil
 Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
+Manager/Caption: gestionnaire de tiddlers
+Manager/Hint: Ouvre le gestionnaire de tiddlers
 More/Caption: plus
 More/Hint: Actions supplémentaires
 NewHere/Caption: nouveau, à partir d'ici
@@ -177,6 +184,7 @@ Subscript/Caption: indice
 Subscript/Hint: Met en indice le texte sélectionné
 Superscript/Caption: exposant
 Superscript/Hint: Met en exposant le texte sélectionné
+ToggleSidebar/Hint: Bascule la visibilité de la barre latérale
 Transcludify/Caption: transclusion
 Transcludify/Hint: Encadre la sélection avec des accolades
 Underline/Caption: souligné

@@ -1,48 +1,52 @@
 title: $:/plugins/tiddlywiki/highlight/readme
 
-This plugin provides syntax highlighting of code blocks using v8.8.0 of [[highlight.js|https://github.com/highlightjs/highlight.js]] from Ivan Sagalaev and others.
+\define highlightVersion() 11.4.0
 
-! Usage
-
-When the plugin is installed it automatically applies highlighting to all codeblocks defined with triple backticks or with the CodeBlockWidget.
-
-The language can optionally be specified after the opening triple braces:
-
-<$codeblock code="""```css
- * { margin: 0; padding: 0; } /* micro reset */
-
-html { font-size: 62.5%; }
-body { font-size: 14px; font-size: 1.4rem; } /* =14px */
-h1   { font-size: 24px; font-size: 2.4rem; } /* =24px */
-```"""/>
-
-If no language is specified highlight.js will attempt to automatically detect the language.
+This plugin provides syntax highlighting of code blocks using version <<highlightVersion>> of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev. This plugin does not work on browsers that do not fully support ~JavaScript ES6 (2015). If you need highlight.js running on those legacy browsers, you would need to install the "Highlight (Legacy)" plugin instead. Here's a [[ES6 compatibility table|https://caniuse.com/?search=es6]].
 
 ! Built-in Language Brushes
 
-The plugin includes support for the following languages (referred to as "brushes" by highlight.js):
+The plugin includes support for the following common languages (referred to as "brushes" by highlight.js):
 
-* apache
 * bash
-* coffeescript
+* c
 * cpp
-* cs
+* csharp
 * css
 * diff
-* http
-* ini
+* go
+* html, xml
 * java
 * javascript
 * json
+* kotlin
+* less
+* lua
 * makefile
 * markdown
-* nginx
 * objectivec
 * perl
 * php
+* plaintext
 * python
+* R
 * ruby
+* rust
+* scss
 * sql
-* xml
+* shell session
+* swift
+* toml, ini
+* typescript
+* visual basic .net
+* yaml
 
-You can also specify the language as a MIME content type (eg `text/html` or `text/css`). The mapping is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.
+And these additional ones:
+
+* apache config
+* dockerfile
+* fortran
+* latex
+* nginx config
+
+The mapping between a MIME type and a highlight.js language specifier is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.

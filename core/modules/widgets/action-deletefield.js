@@ -36,7 +36,7 @@ Compute the internal state of the widget
 */
 DeleteFieldWidget.prototype.execute = function() {
 	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
-	this.actionField = this.getAttribute("$field");
+	this.actionField = this.getAttribute("$field",null);
 };
 
 /*
@@ -59,7 +59,7 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		tiddler = this.wiki.getTiddler(self.actionTiddler),
 		removeFields = {},
 		hasChanged = false;
-	if(this.actionField) {
+	if((this.actionField !== null) && tiddler) {
 		removeFields[this.actionField] = undefined;
 		if(this.actionField in tiddler.fields) {
 			hasChanged = true;
@@ -73,7 +73,7 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 			}
 		});
 		if(hasChanged) {
-			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));			
+			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));
 		}
 	}
 	return true; // Action was invoked

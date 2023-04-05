@@ -123,6 +123,19 @@ exports.parseStringLiteral = function(source,pos) {
 	}
 };
 
+exports.parseMacroParameters = function(node,source,pos) {
+	// Process parameters
+	var parameter = $tw.utils.parseMacroParameter(source,pos);
+	while(parameter) {
+		node.params.push(parameter);
+		pos = parameter.end;
+		// Get the next parameter
+		parameter = $tw.utils.parseMacroParameter(source,pos);
+	}
+	node.end = pos;
+	return node;
+}
+
 /*
 Look for a macro invocation parameter. Returns null if not found, or {type: "macro-parameter", name:, value:, start:, end:}
 */
@@ -132,7 +145,7 @@ exports.parseMacroParameter = function(source,pos) {
 		start: pos
 	};
 	// Define our regexp
-	var reMacroParameter = /(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^\s>"'=]+)))/g;
+	var reMacroParameter = /(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|((?:(?:>(?!>))|[^\s>"'])+)))/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for the parameter
@@ -187,14 +200,8 @@ exports.parseMacroInvocation = function(source,pos) {
 	}
 	node.name = name.match[1];
 	pos = name.end;
-	// Process parameters
-	var parameter = $tw.utils.parseMacroParameter(source,pos);
-	while(parameter) {
-		node.params.push(parameter);
-		pos = parameter.end;
-		// Get the next parameter
-		parameter = $tw.utils.parseMacroParameter(source,pos);
-	}
+	node = $tw.utils.parseMacroParameters(node,source,pos);
+	pos = node.end;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a double greater than sign
@@ -208,8 +215,31 @@ exports.parseMacroInvocation = function(source,pos) {
 	return node;
 };
 
+exports.parseFilterVariable = function(source) {
+	var node = {
+			name: "",
+			params: [],
+		},
+		pos = 0,
+		reName = /([^\s"']+)/g;
+	// If there is no whitespace or it is an empty string then there are no macro parameters
+	if(/^\S*$/.test(source)) {
+		node.name = source;
+		return node;
+	}
+	// Get the variable name
+	var nameMatch = $tw.utils.parseTokenRegExp(source,pos,reName);
+	if(nameMatch) {
+		node.name = nameMatch.match[1];
+		pos = nameMatch.end;
+		node = $tw.utils.parseMacroParameters(node,source,pos);
+		delete node.end;
+	}
+	return node;
+};
+
 /*
-Look for an HTML attribute definition. Returns null if not found, otherwise returns {type: "attribute", name:, valueType: "string|indirect|macro", value:, start:, end:,}
+Look for an HTML attribute definition. Returns null if not found, otherwise returns {type: "attribute", name:, type: "filtered|string|indirect|macro", value|filter|textReference:, start:, end:,}
 */
 exports.parseAttribute = function(source,pos) {
 	var node = {
@@ -218,7 +248,7 @@ exports.parseAttribute = function(source,pos) {
 	// Define our regexps
 	var reAttributeName = /([^\/\s>"'=]+)/g,
 		reUnquotedAttribute = /([^\/\s<>"'=]+)/g,
-		reFilteredValue = /\{\{\{(.+?)\}\}\}/g,
+		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
 		reIndirectValue = /\{\{([^\}]+)\}\}/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);

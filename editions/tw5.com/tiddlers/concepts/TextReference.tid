@@ -18,7 +18,7 @@ A TextReference consists of several parts:
 
 Most of the parts of a text reference can be optional:
 
-* `tiddlerTitle` - the text [[field|TiddlerFields]] of the specified tiddler
+* `tiddlerTitle` - the title [[field|TiddlerFields]] of the specified tiddler
 * `tiddlerTitle!!field` - a [[tiddler field|TiddlerFields]] (eg, `modified`, `modifier`, `type` etc)
 * `!!field` - a [[field|TiddlerFields]] of the current tiddler
 * `tiddlerTitle##propertyIndex` - extracts a named property from DataTiddlers

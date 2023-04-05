@@ -151,9 +151,14 @@ Save the wiki contents. Options are:
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
 	var self = this,
-		method = options.method || "save",
-		variables = options.variables || {},
-		template = options.template || "$:/core/save/all",
+		method = options.method || "save";
+	// Ignore autosave if disabled
+	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
+		return false;
+	}
+	var	variables = options.variables || {},
+		template = (options.template || 
+		           this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
@@ -171,10 +176,6 @@ SaverHandler.prototype.saveWiki = function(options) {
 				}
 			}
 		};
-	// Ignore autosave if disabled
-	if(method === "autosave" && this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
-		return false;
-	}
 	// Call the highest priority saver that supports this method
 	for(var t=this.savers.length-1; t>=0; t--) {
 		var saver = this.savers[t];
@@ -197,8 +198,12 @@ SaverHandler.prototype.isDirty = function() {
 Update the document body with the class "tc-dirty" if the wiki has unsaved/unsynced changes
 */
 SaverHandler.prototype.updateDirtyStatus = function() {
+	var self = this;
 	if($tw.browser) {
 		$tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
+		$tw.utils.each($tw.windows,function(win) {
+			$tw.utils.toggleClass(win.document.body,"tc-dirty",self.isDirty());
+		});
 	}
 };
 

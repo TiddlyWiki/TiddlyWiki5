@@ -1,0 +1,13 @@
+created: 20191012152414236
+modified: 20191014091753894
+tags: Mechanisms
+title: RefreshMechanism
+type: text/vnd.tiddlywiki
+
+The refresh mechanism is the part of the WikificationMechanism concerned with updating a rendering when there are changes in the tiddler store.
+
+The refresh mechanism is notified of changes to the tiddler store asynchronously. This is done so that multiple consecutive changes can be coalesced into a single change notification. Thus, a series of action widgets modifying several different tiddlers will only trigger a single refresh cycle.
+
+When changes occur, the rendering is updated by calling the "refresh" method of the root widget. The refresh  method determines whether the widget needs to be updated to reflect the incoming changes, and then recursively calls into the refresh methods of each child widget
+
+The refresh cycle is inherently fairly slow because it involves visiting every node in the render tree. To maintain performance there is a RefreshThrottling mechanism that enables refresh processing to be deferred when rapid changes occur to the same tiddler.

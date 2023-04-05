@@ -1,0 +1,100 @@
+title: $:/plugins/tiddlywiki/dynannotate/examples/simple
+tags: $:/tags/dynannotateExamples
+caption: Simple
+
+\define show-example(example)
+<$codeblock code=<<__example__>>/>
+
+//''Displays as:''//
+
+$example$
+\end
+
+<div class="tc-dynannotation-example-info">
+
+!! Simple annotation
+
+We use the `target*` attributes to specify a target string for the annotation and optionally a prefix and suffix for disambiguating multiple occurances.
+
+</div>
+
+<<show-example """
+<$dynannotate
+	target="the"
+	targetPrefix="Yet "
+	targetSuffix=" speed"
+>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+</$dynannotate>
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Plain text searching
+
+We use the `search` attribute to specify a search string for highlighting:
+
+</div>
+
+<<show-example """
+<$dynannotate
+	search="the"
+>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+</$dynannotate>
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Regular expression searching
+
+We use the `mode` attribute set to `regexp` to highlight matches of a regular expression:
+
+</div>
+
+<<show-example """
+<$dynannotate
+	search="the|an"
+	searchMode="regexp"
+	searchClass="tc-dynannotation-search-overlay-blurred"
+>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+</$dynannotate>
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Normalised whitespace searching
+
+We use the `mode` attribute set to `whitespace` to search for a string with whitespace normalised (ie runs of whitespace are collapsed to a single space for matching purposes):
+
+</div>
+
+<<show-example """
+<$dynannotate
+	search="does  not     work that way.     It operates"
+	searchMode="whitespace"
+	searchClass="tc-dynannotation-search-overlay-animated"
+>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+</$dynannotate>
+""">>
+
+<div class="tc-dynannotation-example-info">
+
+!! Using annotation tiddlers
+
+Annotation tiddlers can be used to describe annotations. This example references the following annotation tiddlers:
+
+</div>
+
+<<list-links "[all[shadows+tiddlers]annotate-tiddler[$:/plugins/tiddlywiki/dynannotate/example-text-1]]">>
+
+<<show-example """
+<$dynannotate
+	filter="[all[shadows+tiddlers]annotate-tiddler[$:/plugins/tiddlywiki/dynannotate/example-text-1]]"
+>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+</$dynannotate>
+""">>
+

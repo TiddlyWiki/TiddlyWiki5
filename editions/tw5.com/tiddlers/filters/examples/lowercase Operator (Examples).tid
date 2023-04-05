@@ -1,0 +1,8 @@
+created: 20190613153824151
+modified: 20190613153842330
+tags: [[lowercase Operator]] [[Operator Examples]]
+title: lowercase Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[Abc]lowercase[]]">>
+<<.operator-example 2 "[tag[HelloThere]lowercase[]]">>

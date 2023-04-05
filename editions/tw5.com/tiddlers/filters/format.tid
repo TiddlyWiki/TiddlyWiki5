@@ -1,0 +1,27 @@
+caption: format
+created: 20201020100834443
+modified: 20220611104737314
+op-input: a [[selection of titles|Title Selection]]
+op-output: input strings formatted according to the specified suffix <<.place B>>
+op-parameter: optional format string for the formats
+op-parameter-name: C
+op-purpose: format the input string according to one of supported formats
+op-suffix: one of supported formats
+op-suffix-name: B
+tags: [[Filter Operators]] [[String Operators]]
+title: format Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">>
+
+The suffix <<.place B>> is one of the following supported string formats:
+
+|!Format |!Description |
+|^`date` |The input string is interpreted as a UTC date and displayed according to the DateFormat specified in the optional operator operand. (Defaults to "YYYY MM DD 0hh:0mm") |
+|^`json` |<<.from-version "5.2.4">> The input string is interpreted as JSON and displayed with standard formatting. The optional operator operand specifies the number of spaces to use for indenting, or a string to use for indenting. Nothing is returned if the input string is not valid JSON |
+|^`relativedate` |The input string is interpreted as a UTC date and displayed as the interval from the present instant. Any operator parameters are ignored |
+|^`titlelist` |<<.from-version "5.2.0">> The input string wrapped in double square brackets if it contains a space. Appropriate for use in a [[title list|Title List]]. |
+
+<<.warning """The [[Title List]] format cannot reliably represent items that contain certain specific character sequences such as `]] `. Thus it should not be used where there is a possibility of such sequences occurring.""">>
+
+<<.operator-examples "format">>

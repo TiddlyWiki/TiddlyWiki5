@@ -1,0 +1,30 @@
+created: 20211129022707404
+modified: 20211204154839890
+tags: [[Filter Syntax]] [[Filter Run Prefix Examples]] [[Filter Filter Run Prefix]]
+title: Filter Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:gteq[1000]]">>
+<<.operator-example 2 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:lteq[2000]]">>
+<<.operator-example 3 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:gteq[1000]] :filter[get[text]length[]compare:integer:lteq[2000]]">>
+<<.operator-example 4 "[tag[Features]] :filter[links[]!is[shadow]is[missing]]">>
+
+<<.operator-example 5 "A B C D E F :filter[<index>remainder[2]compare:integer:eq[0]]" "Return every other element of the input list">>
+
+<<.operator-example 6 "[tag[shopping]] :filter[{!!quantity}compare:integer:gt[4]] :map[addprefix[ ]addprefix{!!quantity}]">>
+<<.operator-example 7 "[tag[shopping]] :filter[{!!quantity}compare:integer:lteq[4]] :map[addprefix[ ]addprefix{!!quantity}]">>
+
+!! Comparison between `:filter` and `:and`/`+` filter run prefixes
+
+The functionality of the <<.op :filter>> filter run prefix has some overlap with the <<.op :and>> prefix (alias <<.op +>>). Notice the filter expressions above all have the following two properties:
+
+# The start of the filter expression transforms the input titles (i.e. `get[text]length[]`, `links[]`, `<index>remainder[2]`, `{!!quantity}`.
+# The end of the filter expression only sends input items to the output if they meet some condition (i.e. `compare`, `is`).
+
+The purpose of the <<.op :filter>> prefix is to return the original input titles despite property #1 causing those input titles to be transformed. That way, the "meet some condition" check can be performed on something other than the original input. If some filter expression does not require property #1, then the <<.op :and>> prefix can be used instead.
+
+| <<.op :filter>> | <<.op :and>> |
+|^<<.operator-example c1.1 "[tag[HelloThere]] :filter[get[text]length[]compare:integer:gteq[1000]]">>|^<<.operator-example c1.2 "[tag[HelloThere]] :and[get[text]length[]compare:integer:gteq[1000]]">>|
+|^<<.operator-example c2.1 "[tag[Features]] :filter[links[]!is[shadow]is[missing]]">>|^<<.operator-example c2.2 "[tag[Features]] :and[links[]!is[shadow]is[missing]]">>|
+|!results are the same|<|
+|^<<.operator-example c3.1 "cat can bat bug :filter[suffix[at]minlength[3]]">>|^<<.operator-example c3.2 "cat can bat bug :and[suffix[at]minlength[3]]">>|

@@ -22,7 +22,7 @@ title: $:/core/templates/static.tiddler.html
 </head>
 <body class="tc-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
-<section class="tc-story-river">
+<section class="tc-story-river tc-static-story-river">
 `<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
 </section>
 </body>

@@ -1,9 +1,8 @@
 created: 20150118132851000
-modified: 20150123211000000
+modified: 20220218023400000
 tags: [[removesuffix Operator]] [[Operator Examples]]
 title: removesuffix Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "SIMPLEX Googolplex Complex +[removesuffix[plex]]">>
-
-
+<<.operator-example 2 "SIMPLEX Googolplex Complex +[removesuffix:caseinsensitive[plex]]">>
