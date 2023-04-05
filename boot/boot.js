@@ -2312,7 +2312,7 @@ $tw.loadTiddlersNode = function() {
 /*
 Startup TiddlyWiki
 */
-$tw.boot.startup = function(options) {
+$tw.boot.initStartup = function(options) {
 	var _temp_allowDuplicates;
 	options = options || {};
 	// Get the URL hash and check for safe mode
