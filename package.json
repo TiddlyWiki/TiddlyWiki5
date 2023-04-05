@@ -24,7 +24,8 @@
     "wiki"
   ],
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "eslint": "^8.37.0",
+    "prettier": "^2.8.7"
   },
   "bundleDependencies": [],
   "license": "BSD",
@@ -32,6 +33,10 @@
     "node": ">=0.8.2"
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+	"prettier-check": "npx prettier --check .",
+	"prettier-write": "npx prettier --write ."
+  },
+  "dependencies": {
   }
 }

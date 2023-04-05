@@ -2,6 +2,10 @@
 
 # test TiddlyWiki5 for tiddlywiki.com
 
+# Let Prettier check formatting
+
+npm run prettier-check || exit 1
+
 # Run the test edition to run the node.js tests and to generate test.html for tests in the browser
 
 node ./tiddlywiki.js \
