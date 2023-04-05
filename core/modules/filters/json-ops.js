@@ -69,9 +69,40 @@ exports["jsontype"] = function(source,operator,options) {
 };
 
 exports["jsonset"] = function(source,operator,options) {
-	var indexes = operator.operands.slice(0,-1),
-		value = operator.operands[operator.operands.length - 1] || "",
+	var suffixes = operator.suffixes || [],
+		type = suffixes[0] && suffixes[0][0],
+		indexes = operator.operands.slice(0,-1),
+		value = operator.operands[operator.operands.length - 1],
 		results = [];
+	if(operator.operands.length === 1 && operator.operands[0] === "") {
+		value = undefined;
+	}
+	switch(type) {
+		case "string":
+			// Use value unchanged
+			break;
+		case "boolean":
+			value = (value === "true" ? true : (value === "false" ? false : undefined));
+			break;
+		case "number":
+			value = $tw.utils.parseNumber(value);
+			break;
+		case "array":
+			indexes = operator.operands;
+			value = [];
+			break;
+		case "object":
+			indexes = operator.operands;
+			value = {};
+			break;
+		case "null":
+			indexes = operator.operands;
+			value = null;
+			break;
+		default:
+			// Use value unchanged
+			break;
+	}
 	source(function(tiddler,title) {
 		var data = $tw.utils.parseJSONSafe(title,title);
 		if(data) {
@@ -204,6 +235,10 @@ function getDataItem(data,indexes) {
 Given a JSON data structure, an array of index strings and a value, return the data structure with the value added at the end of the index chain. If any of the index strings are invalid then the JSON data structure is returned unmodified. If the root item is targetted then a different data object will be returned
 */
 function setDataItem(data,indexes,value) {
+	// Ignore attempts to assign undefined
+	if(value === undefined) {
+		return data;
+	}
 	// Check for the root item
 	if(indexes.length === 0 || (indexes.length === 1 && indexes[0] === "")) {
 		return value;
