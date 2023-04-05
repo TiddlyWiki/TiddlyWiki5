@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 
 .tc-breadcrumbs .tc-crumb-first::after,
 .tc-breadcrumbs .tc-crumb::after {
-	content: "/";
+	content: "❯";
 	position: absolute;
 	padding-left: .2em;
 	color: <<colour foreground>>;
@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 .tc-breadcrumbs .tc-crumb {
 	position: relative;
 	display: inline-block;
-	margin-right: {{{ [<bcHeight>divide[2]] }}}px;
+	margin-right: 1em;
 }
 
 .tc-breadcrumbs .tc-crumb {
