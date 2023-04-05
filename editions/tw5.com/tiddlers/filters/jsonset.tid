@@ -61,8 +61,9 @@ The data type of the value to be assigned to the property can be specified with 
 
 |!Suffix |!Description |
 |''string'' |The string is specified as the final operand |
-|''boolean'' |The boolean value is true if the final operand is the string "true" and false if the final operand is the string "false". Any other value for the final string results in the property not being assigned |
+|''boolean'' |The boolean value is true if the final operand is the string "true" and false if the final operand is the string "false". Any other value for the final string results prevents the property from being assigned |
 |''number'' |The numeric value is taken from the final operand. Invalid numbers are interpreted as zero |
+|''json'' |The JSON string value is taken from the final operand. Invalid JSON prevents the property from being assigned |
 |''object'' |An empty object is assigned to the property. The final operand is not used as a value |
 |''array'' |An empty array is assigned to the property. The final operand is not used as a value |
 |''null'' |The special value null is assigned to the property. The final operand is not used as a value |

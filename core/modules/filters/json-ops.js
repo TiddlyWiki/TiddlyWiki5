@@ -75,7 +75,7 @@ exports["jsonset"] = function(source,operator,options) {
 		value = operator.operands[operator.operands.length - 1],
 		results = [];
 	if(operator.operands.length === 1 && operator.operands[0] === "") {
-		value = undefined;
+		value = undefined; // Prevents the value from being assigned
 	}
 	switch(type) {
 		case "string":
@@ -98,6 +98,9 @@ exports["jsonset"] = function(source,operator,options) {
 		case "null":
 			indexes = operator.operands;
 			value = null;
+			break;
+		case "json":
+			value = $tw.utils.parseJSONSafe(value,function() {return undefined;});
 			break;
 		default:
 			// Use value unchanged
