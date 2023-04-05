@@ -1,5 +1,7 @@
 title: HelloThere
 
+//The latest build of the Geospatial Plugin can be found at:// https://tiddlywiki5-git-geospatial-plugin-jermolene.vercel.app
+
 !! Introduction
 
 {{$:/plugins/tiddlywiki/geospatial/readme}}
