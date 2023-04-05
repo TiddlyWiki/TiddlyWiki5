@@ -48,7 +48,7 @@ type: text/vnd.tiddlywiki
 <$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
 <nav class="tc-breadcrumbs">
 	<<__label__>>
-	<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span class="tc-crumb tc-crumb-current"><<__start__>></span>
+	<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
 </nav>
 </$set>
 </$let>
@@ -102,9 +102,9 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} selfTiddler=<<currentTiddler>> >
 	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
-		<nav class="tc-breadcrumbs">
+		<nav class="tc-breadcrumbs" aria-label="breadcrumbs">
 			<<__label__>>
-			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span class="tc-crumb tc-crumb-current"><<__start__>></span>
+			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
 		</nav>
 	</$set>
 </$let>
@@ -127,7 +127,7 @@ type: text/vnd.tiddlywiki
 			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>]">
 				<$link class="tc-small-gap-right tc-crumb" />
 			</$list>
-			<span class="tc-crumb tc-crumb-current"><<__start__>></span>
+			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
 		</nav>
 	</$set>
 </$let>

@@ -1,15 +1,16 @@
-code-body: yesx
 created: 20230403125904563
-modified: 20230403145429744
+modified: 20230405155836540
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/breadcrumbs-css
 type: text/vnd.tiddlywiki
 
 \import [[$:/themes/tiddlywiki/vanilla/base]]
 
-\define bcHeight() 22
-\define bcPaddingTop() 3
-\define bcPaddingBottom() 3
+<$let bcHeight={{{ [{$:/config/docs/breadcrumbs/height}trim[]] }}}
+	bcPaddingTop={{{ [{$:/config/docs/breadcrumbs/paddingTop}trim[]] }}}
+	bcPaddingBottom={{{ [{$:/config/docs/breadcrumbs/paddingBottom}trim[]] }}}
+	bcShowArrows={{{ [{$:/config/docs/breadcrumbs/showArrows}trim[]] }}}
+>
 
 .tc-breadcrumbs .tc-crumb-first::after,
 .tc-breadcrumbs .tc-crumb::after {
@@ -40,45 +41,46 @@ type: text/vnd.tiddlywiki
 	margin-left: 0;
 }
 
-.tc-breadcrumbs .tc-crumb-current::after {
+.tc-breadcrumbs [aria-current="location"]::after {
 	content: "";
 }
 
-@media (min-width: <<sidebarbreakpoint>>) {
+<!-- Get breadcrumbs visibility settings. Defaults to yes -->
+<$list filter="[<bcShowArrows>match[yes]]" value="ignore">
+	@media (min-width: <<sidebarbreakpoint>>) {
+		.tc-breadcrumbs .tc-crumb-first,
+		.tc-breadcrumbs .tc-crumb {
+			padding: <<bcPaddingTop>>px .5em <<bcPaddingBottom>>px 1em;
+			margin-right: {{{ [<bcHeight>divide[2]] }}}px;
+			line-height: <<bcHeight>>px;
+			position: relative;
+			background: <<colour message-background>>;
+		}
 
-	.tc-breadcrumbs .tc-crumb-first,
-	.tc-breadcrumbs .tc-crumb {
-		padding: {{{ [<bcPaddingTop>] }}}px .5em {{{ [<bcPaddingBottom>] }}}px 1em;
-		margin-right: {{{ [<bcHeight>divide[2]] }}}px;
-		line-height: {{{ [<bcHeight>] }}}px;
-		position: relative;
-		background: <<colour message-background>>;
+		.tc-breadcrumbs .tc-crumb-first {
+			padding-left: .5em;
+		}
+
+		.tc-breadcrumbs .tc-crumb::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			border-left: {{{ [<bcHeight>divide[2]] }}}px solid <<colour background>>;
+			border-top: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
+			border-bottom: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
+		}
+
+		.tc-breadcrumbs .tc-crumb-first::after,
+		.tc-breadcrumbs .tc-crumb::after {
+			content: "";
+			position: absolute;
+			right: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]multiply[-1]] }}}px;
+			bottom: 0;
+			border-left: {{{ [<bcHeight>divide[2]] }}}px solid <<colour message-background>>;
+			border-top: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
+			border-bottom: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
+		}
 	}
-
-	.tc-breadcrumbs .tc-crumb-first {
-		padding-left: .5em;
-	}
-
-	.tc-breadcrumbs .tc-crumb::before {
-		content: "";
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		border-left: {{{ [<bcHeight>divide[2]] }}}px solid <<colour background>>;
-		border-top: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
-		border-bottom: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
-	}
-
-	.tc-breadcrumbs .tc-crumb-first::after,
-	.tc-breadcrumbs .tc-crumb::after {
-		content: "";
-		position: absolute;
-		right: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]multiply[-1]] }}}px;
-		bottom: 0;
-		border-left: {{{ [<bcHeight>divide[2]] }}}px solid <<colour message-background>>;
-		border-top: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
-		border-bottom: {{{ [<bcHeight>add<bcPaddingTop>add<bcPaddingBottom>] +[divide[2]] }}}px solid transparent;
-	}
-
-}
-
+</$list>
+</$let>
