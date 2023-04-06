@@ -181,14 +181,3 @@ $credit$
 </$list>
 </ol>
 \end
-
-\define .recursiveParentTag(current, stop)
-<$list filter="[<__stop__>is[tiddler]]" emptyMessage="@@color:red; .recursiveParentTag macro ERROR! -- stop tiddler does not exist@@" variable="ignore">
-<$let tag={{{ [<__current__>tags[]limit[1]] }}}>
-<$list filter="[<tag>!match<__stop__>]" emptyMessage="""<$link to=<<tag>> ><<tag>></$link>""" >
-<$link /> ->
-<$macrocall $name=".recursiveParentTag" current=<<currentTiddler>> stop=<<__stop__>> />
-</$list>
-</$let>
-</$list>
-\end
