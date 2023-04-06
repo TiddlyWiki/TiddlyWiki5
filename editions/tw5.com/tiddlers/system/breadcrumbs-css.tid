@@ -14,7 +14,8 @@ type: text/vnd.tiddlywiki
 
 .tc-breadcrumbs .tc-crumb-first::after,
 .tc-breadcrumbs .tc-crumb::after {
-	content: "❯";
+	content: "❯";		<!-- needed for FireFox and screen-readers -->
+	content: "❯" / "";	<!-- needed for Chrome-like and screen-readers -->
 	position: absolute;
 	padding-left: .2em;
 	color: <<colour foreground>>;
