@@ -23,7 +23,7 @@ var SlotWidget = function(parseTreeNode,options) {
 /*
 Inherit from the base widget class
 */
-SlotWidget.prototype = Object.create(Widget.prototype);
+SlotWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM

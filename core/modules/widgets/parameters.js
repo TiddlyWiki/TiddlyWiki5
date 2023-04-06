@@ -23,7 +23,7 @@ var ParametersWidget = function(parseTreeNode,options) {
 /*
 Inherit from the base widget class
 */
-ParametersWidget.prototype = Object.create(Widget.prototype);
+ParametersWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM

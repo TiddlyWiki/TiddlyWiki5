@@ -22,7 +22,7 @@ var FillWidget = function(parseTreeNode,options) {
 /*
 Inherit from the base widget class
 */
-FillWidget.prototype = Object.create(Widget.prototype);
+FillWidget.prototype = new Widget();
 
 exports.fill = FillWidget;
 
