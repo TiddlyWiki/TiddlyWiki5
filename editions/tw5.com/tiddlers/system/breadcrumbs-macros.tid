@@ -1,0 +1,135 @@
+code-body: yes
+created: 20230324160845531
+modified: 20230326145119329
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/breadcrumbs-macros
+type: text/vnd.tiddlywiki
+
+
+<!-- This ".breadcrumbs" macro uses a list-like field (default: tags) as the start of the hierarchy -->
+<!-- mode defaults to "story" ... "simple" will open breadcrumb links according to the global settings -->
+
+\define .breadcrumbs(start, stop, exclude, label, field, sort, mode:"story")
+\whitespace trim
+<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} >
+	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
+		<$list filter="[<__mode__>match[story]then[.breadcrumbsStory]else[.breadcrumbsSimple]]" variable="macro-name">
+			<$macrocall $name=<<macro-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
+		</$list>
+	</$set>
+</$let>
+\end
+
+<!-- This ".breadcrumbsSimple" macro uses a list-like field (default: tags) as the start of the hierarchy -->
+<!-- Links will be opened according to global settings -->
+
+\define .bcRecursion(current, stop, exclude, field:"tags", sort:"yes")
+\whitespace trim
+<$list filter="[<__stop__>is[tiddler]]" emptyMessage="""<span style={{{ [{$:/palette}getindex[dirty-indicator]addprefix[color:]addsuffix[;]] }}}> .breadcrumbs ERROR! -- stop-tiddler: "<<__stop__>>" does not exist</span>""" variable="ignore">
+	<$let
+		limit="[limit[1]]"
+		sort="[sort[]limit[1]]"
+		sub={{{ [<__sort__>match[yes]then<sort>else<limit>] }}}
+		next={{{ [<__current__>get<__field__>enlist-input[]] -[enlist<__exclude__>] +[subfilter<sub>] :else[<__stop__>] }}}
+	>
+		<$set name="excluded" filter="[enlist<__exclude__>] :or[<next>]">
+			<$list filter="[<next>!match<__stop__>]" emptyMessage="""<$link to=<<next>> class="tc-small-gap-right tc-crumb-first"><<next>></$link>""">
+				<$macrocall $name=".bcRecursion" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> filter=<<__filter__>>/>
+				<$link class="tc-small-gap-right tc-crumb"/>
+			</$list>
+		</$set>
+	</$let>
+</$list>
+\end
+
+\define .breadcrumbsSimple(start, stop, exclude, label, field, sort)
+\whitespace trim
+<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} >
+<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
+<nav class="tc-breadcrumbs">
+	<<__label__>>
+	<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+</nav>
+</$set>
+</$let>
+\end
+
+<!-- ========================================================================= -->
+<!-- This ".breadcrumbsStory" macro uses a list-like field (default: tags) and -->
+<!-- it will retain the hierarchical order in the story river -->
+
+\define .openInStoryActions()
+<$set name=visited filter="[enlist<excluded>order[reverse]]" >
+<$let __source__={{{ [list[$:/StoryList]] :intersection[enlist<visited>] +[nth[1]] }}} >
+	<$set name="newList" filter="[list[$:/StoryList]insertbefore<__target__>,<__source__>]">
+		<$action-setfield $tiddler="$:/StoryList" $field="list" $value=<<newList>> />
+		<$action-navigate $to=<<__target__>> />
+	</$set>
+<$let>
+</$set>
+\end
+
+\define .openInStory(target, source, class)
+\whitespace trim
+<$linkcatcher actions=<<.openInStoryActions>> >
+	<$link to=<<__target__>> class=<<__class__>> ><<__target__>></$link>
+</$linkcatcher>
+\end
+
+\define .bcFirstCrumb()
+<$macrocall $name=".openInStory" target=<<next>> source=<<__current__>> class="tc-small-gap-right tc-crumb-first"/>
+\end
+
+\define .bcRecursionStory(current, stop, exclude, field:"tags", sort:"yes")
+\whitespace trim
+<$list filter="[<__stop__>is[tiddler]]" emptyMessage="""<span style={{{ [{$:/palette}getindex[dirty-indicator]addprefix[color:]addsuffix[;]] }}}> .breadcrumbs ERROR! -- stop-tiddler: "<<__stop__>>" does not exist</span>""" variable="ignore">
+	<$let
+		limit="[limit[1]]"
+		sort="[sort[]limit[1]]"
+		sub={{{ [<__sort__>match[yes]then<sort>else<limit>] }}}
+		next={{{ [<__current__>get<__field__>enlist-input[]] -[enlist<__exclude__>] +[subfilter<sub>] :else[<__stop__>] }}}
+	>
+		<$set name="excluded" filter="[enlist<__exclude__>] :or[<next>]">
+			<$list filter="[<next>!match<__stop__>]" emptyMessage=<<.bcFirstCrumb>> >
+				<$macrocall $name=".bcRecursionStory" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> filter=<<__filter__>>/>
+				<$macrocall $name=".openInStory" target=<<currentTiddler>> source=<<__current__>> class="tc-small-gap-right tc-crumb"/>
+			</$list>
+		</$set>
+	</$let>
+</$list>
+\end
+
+\define .breadcrumbsStory(start, stop, exclude, label, field, sort)
+\whitespace trim
+<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} selfTiddler=<<currentTiddler>> >
+	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
+		<nav class="tc-breadcrumbs" aria-label=<<__start__>> >
+			<<__label__>>
+			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+		</nav>
+	</$set>
+</$let>
+\end
+
+<!-- ========================================================================= -->
+<!-- This macro ".breadcrumbsField" uses a field (defaults to "list") as the breadcrumbs source.
+	start is a tiddler title (defaults to "currentTiddler")
+-->
+
+\define .breadcrumbsField(start, exclude, label, field:"list")
+\whitespace trim
+<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
+	first={{{ [<__start__>get<__field__>enlist-input[]] }}}
+>
+	<$set name="excluded" filter="[enlist<__exclude__>] :or[<first>]">
+		<nav class="tc-breadcrumbs">
+			<<__label__>>
+			<$link class="tc-crumb-first" to=<<first>>><$text text=<<first>> /></$link>
+			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>]">
+				<$link class="tc-small-gap-right tc-crumb" />
+			</$list>
+			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+		</nav>
+	</$set>
+</$let>
+\end
