@@ -1,0 +1,18 @@
+title: $:/core/ui/testcases/DefaultTemplate
+
+\whitespace trim
+<div class="tc-testcase-wrapper">
+<div class="tc-testcase-header">
+<h2><$testcase-transclude tiddler="Description" mode="inline"/></h2>
+</div>
+<div class="tc-testcase-panes">
+<div class="tc-testcase-source">
+<pre>
+<$testcase-view tiddler="Output"/>
+</pre>
+</div>
+<div class="tc-testcase-output">
+<$testcase-transclude tiddler="Output"/>
+</div>
+</div>
+</div>

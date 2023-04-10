@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/innerwiki/data.js
+title: $:/core/modules/widgets/data.js
 type: application/javascript
 module-type: widget
 
@@ -53,6 +53,5 @@ DataWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.data = DataWidget;
-exports.anchor = DataWidget;
 
 })();

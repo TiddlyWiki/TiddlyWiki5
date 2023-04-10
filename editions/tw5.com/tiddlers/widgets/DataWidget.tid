@@ -1,0 +1,43 @@
+caption: data
+created: 20230406161341763
+modified: 20230406161341763
+tags: Widgets
+title: DataWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The data widget is used with the <<.wlink TestCaseWidget>> widget and the [[Innerwiki Plugin]] to specify payload tiddlers that are to be included in the test case or innerwiki.
+
+! Content and Attributes
+
+The content of the data widget is rendered as if the data widget were not present. It supports the following attributes:
+
+|!Attribute |!Description |
+|<<.attr $tiddler>> |The title of a tiddler to be used as a payload tiddler (optional) |
+|<<.attr $filter>> |A filter string identifying tiddlers to be used as payload tiddlers (optional) |
+|//any attribute<br>not starting<br>with $// |Field values to be assigned to the payload tiddler(s) |
+
+The data widget can be used in three different ways:
+
+* Without the `$tiddler` or `$filter` attributes, the remaining attributes provide the fields for a single payload tiddler
+* With the `$tiddler` attribute present, the payload tiddler takes its fields from that tiddler with the remaining attributes overriding those fields
+* With the `$filter` attribute present, the payload is a copy of all of the tiddlers identified by the filter, with the remaining attributes overriding those fields of each one
+
+This example injects a tiddler with the title "Epsilon" and the text "Theta":
+
+```
+<$data title="Epsilon" text="Theta"/>
+```
+
+This example injects a copy of the "HelloThere" tiddler with the addition of the field "custom" set to "Alpha":
+
+```
+<$data $tiddler="HelloThere" custom="Alpha"/>
+```
+
+This example injects all image tiddlers with the addition of the field "custom" set to "Beta":
+
+```
+<$data $filter="[is[image]]" custom="Beta"/>
+```

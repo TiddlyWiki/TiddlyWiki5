@@ -26,3 +26,22 @@ This demo requires that the API keys needed to access external services be obtai
 />
 
 <<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoMarkers">>
+
+---
+
+! Test Cases
+
+<$testcase testcase-tiddler="Example Test Case">
+</$testcase>
+
+<$testcase>
+<$data title="Description" text="Testing the ways JavaScript macros can be invoked"/>
+<$data title="Output" text="""\whitespace trim
+
+<<makedatauri text:"Wildebeest" type:"text/plain">>
+
+<$macrocall $name="makedatauri" text="Wildebeest" type="text/plain"/>
+"""/>
+<$data title="ExpectedResult" text="""<p><a class="tc-tiddlylink-external" href="data:text/plain,Wildebeest" rel="noopener noreferrer" target="_blank">data:text/plain,Wildebeest</a></p><p><a class="tc-tiddlylink-external" href="data:text/plain,Wildebeest" rel="noopener noreferrer" target="_blank">data:text/plain,Wildebeest</a></p>
+"""/>
+</$testcase>

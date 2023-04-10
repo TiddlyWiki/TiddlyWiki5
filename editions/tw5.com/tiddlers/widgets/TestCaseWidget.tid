@@ -1,0 +1,30 @@
+caption: testcase
+created: 20230406161341763
+modified: 20230406161341763
+tags: Widgets
+title: TestCaseWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The testcase widget creates an independent subwiki loaded with specified tiddlers and then renders a template that can display and render tiddlers from within the subwiki. This makes it possible to run independent tests that also serve as documentation examples.
+
+! Content and Attributes
+
+The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define tiddlers to be included in the test case.
+
+|!Attribute |!Description |
+|<<.attr testcase-tiddler>> |Optional title of a tiddler containing a test case in `text/vnd.tiddlywiki-multiple` format (see below) |
+|<<.attr template>> |Optional title of the template used to display the testcase (defaults to $:/core/ui/testcases/DefaultTemplate) |
+
+! Example
+
+<$testcase>
+<$data $tiddler="$:/core"/>
+<$data title="Description" text="Simple example of a test case"/>
+<$data title="Output" text="""<$testcase>
+<$data title="Description" text="How to calculate 2 plus 2"/>
+<$data title="Output" text="<$text text={{{ =2 =[add[2]] }}}/>"/>
+</$testcase>
+"""/>
+</$testcase>
