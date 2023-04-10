@@ -4,7 +4,7 @@ caption: Tiddlyhost
 icon: $:/core/images/globe
 button-color: #00009a
 button-text: Create Account
-background: linear-gradient(90deg,#c3d3ff, #ffffff)
+background: linear-gradient(90deg,#dbdbf7, #ffffff)
 link: Tiddlyhost
 
 Create an account with Tiddlyhost for online wikis that can be private or public
