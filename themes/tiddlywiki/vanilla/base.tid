@@ -3163,7 +3163,7 @@ select {
 .tc-testcase-wrapper {
 	border: 1px solid <<colour foreground>>;
 	background-color: <<colour muted-foreground>>;
-	border-radius: 3px;
+	border-radius: 6px;
 }
 
 .tc-testcase-header {
@@ -3190,15 +3190,24 @@ select {
 }
 
 .tc-testcase-source {
-	border: 1px solid <<colour background>>;
-	flex: 1 0 50%;
+	flex: 1 0 49%;
 	min-width: 250px;
 }
 
+.tc-testcase-divider {
+	flex: 0 0 2%;
+}
+
+.tc-testcase-source .tc-tab-buttons {
+	padding-top: 0;
+}
+
 .tc-testcase-output {
-	border: 1px solid <<colour background>>;
-	flex: 1 0 50%;
+	border-radius: 3px;
+	border: 1px solid <<colour muted-foreground>>;
+	flex: 1 0 49%;
 	min-width: 250px;
+	padding: 0.25em;
 }
 
 

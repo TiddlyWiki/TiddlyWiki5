@@ -12,6 +12,8 @@ title: $:/core/ui/testcases/DefaultTemplate
 <div class="tc-testcase-source">
 <$macrocall $name="tabs" tabsList="[<testcaseInfo>jsonget[titles]] -Description -ExpectedResult -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
 </div>
+<div class="tc-testcase-divider">
+</div>
 <div class="tc-testcase-output">
 <$testcase-transclude tiddler="Output"/>
 </div>
