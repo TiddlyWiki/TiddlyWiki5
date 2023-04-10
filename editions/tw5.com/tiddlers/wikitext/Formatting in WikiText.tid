@@ -1,19 +1,60 @@
 caption: Formatting
 created: 20131205155959399
-modified: 20220513120211686
+modified: 20230303215447403
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
 
-Available character formatting includes:
+!! Overview
 
-* <code>&#96;backticks&#96;</code> for `code` (<<.icon $:/core/images/mono-line>>)
-** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code><br><br>
-* `''bold''` for ''bold text'' (<<.icon $:/core/images/bold>>)<br><br>
-* `//italic//` for //italic text// (<<.icon $:/core/images/italic>>)<br><br>
-* `__underscore__` for __underscored text__ (<<.icon $:/core/images/underline>>)<br><br>
-* `^^superscript^^` for ^^superscripted^^ text (<<.icon $:/core/images/superscript>>)<br><br>
-* `,,subscript,,` for ,,subscripted,, text (<<.icon $:/core/images/subscript>>)<br><br>
-* `~~strikethrough~~` for ~~strikethrough~~ text (<<.icon $:/core/images/strikethrough>>)
+Available character formatting in WikiText includes:
 
-See also: [[Code Blocks in WikiText]]
+|Wikitext | Button | Shortcut |Rendered Output |h
+|Double single quotes are used for `''bold text''`| <kbd><<.icon $:/core/images/bold>></kbd> | <kbd><<displayshortcuts "((bold))">></kbd> |Double single quotes are used for ''bold text'' |
+|Double slashes are used for `//italic text//`| <kbd><<.icon $:/core/images/italic>></kbd> | <kbd><<displayshortcuts "((italic))">></kbd> |Double slashes are used for //italic text//|
+|Double underscores are used for `__underlined text__`| <kbd><<.icon $:/core/images/underline>></kbd> | <kbd><<displayshortcuts "((underline))">></kbd>  |Double underscores are used for __underlined text__ |
+|Double circumflex accents are used for `^^superscripted^^` text | <kbd><<.icon $:/core/images/superscript>></kbd> | <kbd><<displayshortcuts "((superscript))">></kbd> |Double circumflex accents are used for ^^superscripted^^ text |
+|Double commas are used for `,,subscripted,,` text | <kbd><<.icon $:/core/images/subscript>></kbd> | <kbd><<displayshortcuts "((subscript))">></kbd> |Double commas are used for ,,subscripted,, text |
+|Double  tilde signs are used for `~~strikethrough~~` text | <kbd><<.icon $:/core/images/strikethrough>></kbd> | <kbd><<displayshortcuts "((strikethrough))">></kbd> |Double   tilde signs are used for ~~strikethrough~~ text |
+|Single backticks are used for ```code` `` | <kbd><<.icon $:/core/images/mono-line>></kbd> | <kbd><<displayshortcuts "((mono-line))">></kbd> |Single backticks are used for `code` |
+|Double @ characters are used to create a `@@highlight@@` | - | - |Double @ characters are used to create a @@highlight@@ |
+
+See [[Styles and Classes in WikiText]] for more formatting options
+
+!! Embedded Backticks
+
+|Wikitext |Rendered Output|h
+|<code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>|``double backticks allows `embedded` backticks``|
+
+!! Keyboard Shortcuts
+
+The full list of KeyboardShortcuts can be found in the $:/ControlPanel -> ''Keyboard Shortcuts'' tab. 
+
+!! Semantic Information
+
+|Wikitext | Resulting HTML Code  |h
+|Double single quotes are used for `''bold text''`|Double single quotes are used for `<strong>bold text</strong>` |
+|Double slashes are used for `//italic text//`|Double slashes are used for `<em>italic text</em>` |
+|Double underscores are used for `__underlined text__`|Double underscores are used for `<u>underlined text<u>` |
+|Double circumflex accents are used for `^^superscripted^^` text |Double circumflex accents are used for `<sup>superscripted</sup>` text |
+|Double commas are used for `,,subscripted,,` text |Double commas are used for `<sub>subscripted</sub>` text |
+|Double tilde signs are used for `~~strikethrough~~` text |Double tilde signs are used for `<strike>strikethrough</strike>` text |
+|Single backticks are used for ```code` `` |Single backticks are used for `<code>code</code>` |
+|Double @ characters are used to create a `@@highlight@@` |Double @ characters are used to create a `<span class="tc-inline-style">highlighted</span>` |
+
+!! Bold vs Strong
+
+In TW we use the term "bold" instead of "strong" because most users are used to it. ... The rendering process converts our "bold text" into the STRONG HTML element. 
+
+>The `<strong>` element is for content that is of greater importance, while the `<b>` element is used to draw attention to text without indicating that it's more important.
+>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong#b_vs._strong
+
+!! Underline vs. Underscore
+
+>Use underline to describe text formatting that puts a line under the characters. Use underscore to refer to the underscore character ( _ ).
+>https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/u/underline-vs-underscore
+
+!! Emphasis vs Italics
+
+>The `<em>` element represents stress emphasis of its contents, while the `<i>` element represents text that is set off from the normal prose, such as a foreign word, fictional character thoughts, or when the text refers to the definition of a word instead of representing its semantic meaning. (The title of a work, such as the name of a book or movie, should use `<cite>`.)
+>https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em#i_vs._em

@@ -27,7 +27,7 @@ This process will work on most desktop browsers. Note that none of your personal
 #* If the file is encrypted you will be prompted for the password
 # Review the list of tiddlers that will be upgraded
 # Click ''Upgrade''
-# Save changes to save the new version (<<.icon $:/core/images/save-button>>)
+# Save changes to save the new version (<<.icon $:/core/images/save-button-dynamic>>)
 
 This will download a file called ''upgrade.html'' to your computer. This file is the upgrade of your old file. You may need to open the location where ''upgrade.html'' was downloaded, rename ''upgrade.html'' with the name of the old file you are upgrading, and replace the old file by moving the new file in its place.
 

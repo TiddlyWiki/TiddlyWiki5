@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/markdown-legacy/readme
+
+This is a TiddlyWiki plugin for parsing Markdown text, using the [[Remarkable|https://github.com/jonschlinkert/remarkable]] library. If the KaTeX TiddlyWiki plugin is installed, KaTeX support is enabled using the [[remarkable-katex|https://github.com/bradhowes/remarkable-katex]] Remarkable plugin.
+
+It is completely self-contained, and doesn't need an Internet connection in order to work. It works both in the browser and under Node.js.
+
+[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/markdown-legacy]]

@@ -26,14 +26,15 @@ exports.sortsub = function(source,operator,options) {
 		var r = filterFn.call(options.wiki,function(iterator) {
 			iterator(options.wiki.getTiddler(title),title);
 		},{
-			getVariable: function(name) {
+			getVariable: function(name,opts) {
+				opts = opts || {};
 				switch(name) {
 					case "currentTiddler":
 						return "" + title;
 					case "..currentTiddler":
 						return options.widget.getVariable("currentTiddler");
 					default:
-						return options.widget.getVariable(name);
+						return options.widget.getVariable(name,opts);
 				}
 			}
 		});

@@ -295,7 +295,7 @@ InnerWikiWidget.prototype.readTiddlerDataWidget = function(dataWidget) {
 			if(tiddler) {
 				fields = tiddler.getFieldStrings();
 			}
-			results.push($tw.utils.extend({},item,fields));
+			results.push($tw.utils.extend({},fields,item));
 		})
 		return results;
 	} else {
