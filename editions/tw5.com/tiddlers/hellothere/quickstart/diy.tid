@@ -4,7 +4,7 @@ caption: DIY
 icon: $:/core/images/theme-button
 button-color: #ff4522
 button-text: Explore
-background: linear-gradient(90deg,#e5fbff, #ffffff)
+background: linear-gradient(90deg,#fff4f2, #ffffff)
 link: GettingStarted
 
 Get the full benefits of ~TiddlyWiki by finding the configuration that is right for you
