@@ -129,9 +129,7 @@ That renders as:
 		</div>
 		<$list filter="[all[current]has[button-text]]" variable="ignore">
 			<div class="tc-card-button" style.background-color={{!!button-color}} style.border-color={{!!button-color}}>
-				<$link to={{!!link}}>
-					<$text text={{!!button-text}}/>&#32;{{$:/core/images/chevron-right}}
-				</$link>
+				<$text text={{!!button-text}}/>&#32;{{$:/core/images/chevron-right}}
 			</div>
 		</$list>
 	</div>

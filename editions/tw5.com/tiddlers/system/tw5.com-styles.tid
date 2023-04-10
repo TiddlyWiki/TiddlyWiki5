@@ -155,32 +155,14 @@ type: text/vnd.tiddlywiki
 .tc-cards.tc-action-card .tc-card-button {
 	border: 1px solid <<colour foreground>>;
 	background: <<colour foreground>>;
-	color: <<colour background>>;
 	margin: 0.5em;
-	border-radius: 6px;
-}
-
-.tc-cards.tc-action-card .tc-card-button a {
 	border-radius: 6px;
 	padding: 0.5em;
 	color: <<colour background>>;
 	fill: <<colour background>>;
-	display: inline-block;
-	width:100%;
-	height:100%;
 }
 
-.tc-cards.tc-action-card .tc-card:hover .tc-card-button a {
-	background: <<colour background>>;
-	color: <<colour foreground>>;
-	fill: <<colour foreground>>;
-}
-
-.tc-cards.tc-action-card .tc-card-button a:hover {
-	text-decoration: none;
-}
-
-.tc-cards.tc-action-card .tc-card-button a svg {
+.tc-cards.tc-action-card .tc-card-button svg {
 	width: 0.65em;
 	height: 0.65em;
 	vertical-align: middle;
