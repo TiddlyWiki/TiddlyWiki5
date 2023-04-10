@@ -1,7 +1,9 @@
-title: Quick Start: Online
+title: Quick Start: Tiddlyhost
 tags: [[Quick Start]]
-caption: ONLINE {{$:/core/images/globe}}
-background-color: #c3d3ff
+caption: Tiddlyhost
+icon: $:/core/images/globe
+button-color: #00009a
+button-text: Create Account
 background: linear-gradient(90deg,#c3d3ff, #ffffff)
 link: Tiddlyhost
 

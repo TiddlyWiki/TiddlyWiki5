@@ -1,7 +1,9 @@
 title: Quick Start: DIY
 tags: [[Quick Start]]
-caption: DIY {{$:/core/images/theme-button}}
-background-color: #ecc2ba
+caption: DIY
+icon: $:/core/images/theme-button
+button-color: #ff4522
+button-text: Explore
 link: GettingStarted
 
 Get the full benefits of ~TiddlyWiki by finding the configuration that is right for you

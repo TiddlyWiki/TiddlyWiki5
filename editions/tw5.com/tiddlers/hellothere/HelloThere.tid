@@ -13,9 +13,9 @@ TiddlyWiki lets you choose where to keep your data, guaranteeing that in the dec
 
 !! ''Quick Start''
 
-<div class="tc-cards tc-cards-vertical">
+<div class="tc-cards tc-action-card">
 <$list filter="[tag[Quick Start]]">
-<$macrocall $name="flex-card" bordercolor={{!!color}} textcolor={{!!text-color}}  backgroundcolor={{!!background-color}} captionField="caption" descriptionField="text"/>
+<$macrocall $name="flex-card" bordercolor={{!!color}} textcolor={{!!text-color}} backgroundcolor={{!!background-color}} captionField="caption" descriptionField="text"/>
 </$list>
 </div>
 

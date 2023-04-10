@@ -82,6 +82,8 @@ type: text/vnd.tiddlywiki
 	height: 1em;
 }
 
+
+
 .tc-wrapper-flex {
 	display: flex;
 }
@@ -136,14 +138,52 @@ type: text/vnd.tiddlywiki
 .tc-cards {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space-evenly;
 	width: 100%;
+	padding: 0.5em;
+	background: <<colour background>>;
+	border-color: rgba(34,36,38,.15);
+	box-shadow: 0 2px 25px 0 rgb(34 36 38 / 5%) inset;
 	gap: 1em;
 }
 
-.tc-cards.tc-cards-vertical {
-	flex-direction: column;
-	gap: 0.5em;
+.tc-cards.tc-action-card {
+	text-align: center;
+	background: none;
+}
+
+.tc-cards.tc-action-card .tc-card-button {
+	border: 1px solid <<colour foreground>>;
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	margin: 0.5em;
+	border-radius: 6px;
+}
+
+.tc-cards.tc-action-card .tc-card-button a {
+	border-radius: 6px;
+	padding: 0.5em;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	display: inline-block;
+	width:100%;
+	height:100%;
+}
+
+.tc-cards.tc-action-card .tc-card:hover .tc-card-button a {
+	background: <<colour background>>;
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
+}
+
+.tc-cards.tc-action-card .tc-card-button a:hover {
+	text-decoration: none;
+}
+
+.tc-cards.tc-action-card .tc-card-button a svg {
+	width: 0.65em;
+	height: 0.65em;
+	vertical-align: middle;
 }
 
 .tc-tiddlylink.tc-card {
