@@ -5,8 +5,6 @@ module-type: library
 
 Parser for the source of a railroad diagram.
 
-x y z			sequence
-<-x y z->		explicit sequence
 [:x]			optional, normally included
 [x]				optional, normally omitted
 {x}				one or more
@@ -15,6 +13,8 @@ x y z			sequence
 [{:x +","}]		zero or more, comma-separated, normally included
 [{x}]			zero or more, normally omitted
 [{x +","}]		zero or more, comma-separated, normally omitted
+x y z			sequence
+<-x y z->		explicit sequence
 (x|y|z)			alternatives
 (x|:y|z)		alternatives, normally y
 "x"				terminal

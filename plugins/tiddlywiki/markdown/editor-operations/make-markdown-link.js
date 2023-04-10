@@ -13,25 +13,19 @@ Text editor operation to make a markdown link
 "use strict";
 
 exports["make-markdown-link"] = function(event,operation) {
-	var rx = /[()\\]/g, rs = '\\$&';
-
 	if(operation.selection) {
-		var desc = operation.selection.replace(/[\[\]\\]/g, rs);
-
-		if(event.paramObject.text.indexOf("://") !== -1) {
-			operation.replacement = "[" + desc + "](" + event.paramObject.text.replace(rx, rs) + ")";
+		if(event.paramObject.text.includes("://")) {
+			operation.replacement = "[" + operation.selection + "](" + event.paramObject.text + ")";
 		} else {
-			operation.replacement = "[" + desc + "](#" + encodeURIComponent(event.paramObject.text).replace(rx, rs) + ")";
+			operation.replacement = "[" + operation.selection + "](#" + event.paramObject.text.replaceAll(" ", "%20") + ")";
 		}
 		operation.cutStart = operation.selStart;
 		operation.cutEnd = operation.selEnd;
 	} else {
-		if(event.paramObject.text.indexOf("://") !== -1) {
-			operation.replacement = "<" + event.paramObject.text.replace(/[<>]/g, function(m, offset, str) {
-				return encodeURI(m);
-			}) + ">";
+		if(event.paramObject.text.includes("://")) {
+			operation.replacement = "<" + event.paramObject.text + ">";
 		} else {
-			operation.replacement = "[](#" + encodeURIComponent(event.paramObject.text).replace(rx, rs) + ")";
+			operation.replacement = "[](#" + event.paramObject.text.replaceAll(" ", "%20") + ")";
 		}
 		operation.cutStart = operation.selStart;
 		operation.cutEnd = operation.selEnd;

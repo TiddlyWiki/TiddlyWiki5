@@ -1,7 +1,4 @@
 title: $:/DefaultTiddlers
 
 [[HelloThere]]
-$:/plugins/tiddlywiki/markdown
-[[MarkdownTutorial]]
-[[QuickDemo]]
-[[QuickDemo Source]]
+[[MarkdownExample]]

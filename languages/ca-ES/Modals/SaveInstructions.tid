@@ -1,0 +1,7 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+Els vostres canvis a aquest wiki s'han de desar com un fitxer HTML ~TiddlyWiki.!!! Navegadors d'escriptori# Trieu ''Anomena i desa'' al menú ''Fitxer''# Trieu un nom i un lloc per al fitxer#* Per alguns navegadors també cal que el format del fitxer sigui 'Pàgina web, només HTML'' o similar# Tanqueu aquesta pestanya!!! Navegadors per mòbils# Deseu aquesta pàgina als Preferits#* Si teniu configurat iCloud o Google Sync llavors el preferits es sincronitzarà automaticament amb el vostre ordinador des d'on el podreu obrir i desar com s'indica més amunt# Tanqueu aquests pestanya//Si torneu a obrir el preferits a Safari Mobile tornareu a veure el missatge. Si voleu continuar i utilitzar el fitxer, només heu de clicat el botó 'tanca'' de sota//

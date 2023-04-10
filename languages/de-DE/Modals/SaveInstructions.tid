@@ -1,0 +1,23 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Aktuellen Stand speichern
+footer: <$button message="tm-close-tiddler">Schließen</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+Ihre Änderungen sollen als ~TiddlyWiki HTML Datei gespeichert werden. 
+
+!!! Desktop Browser
+
+# Verwenden Sie ''Speichern unter'' aus dem ''Datei'' Menü.
+# Wählen Sie den Dateinamen und das Verzeichnis. 
+
+#* Bei einigen Browsern müssen Sie das Format explizit angeben. Zb: ''Webseite, nur HTML'' oder ähnliches.
+# Den Browser-Tab schließen.
+
+!!! Smartphone Browser
+
+# Erstellen Sie ein "Lesezeichen"
+#* Wenn Sie "iCloud" oder "Google Sync" verwenden, dann werden Ihre Daten automatisch mit dem Desktop PC synchronisiert. Dort können Sie wie oben beschrieben fortfahren. 
+# Den Browser-Tab schließen.
+
+//Wenn Sie das Lesezeichen mit "Mobile Safari" öffnen, dann wird diese Meldung erneut angezeigt. Klicken Sie ''Schließen'' um fort zu fahren.//

@@ -140,22 +140,12 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 				}
 			}
 			// Remove the tiddler from self.boot.files & return null adaptorInfo
-			self.removeTiddlerFileInfo(title);
+			delete self.boot.files[title];
 			return callback(null,null);
 		});
 	} else {
 		callback(null,null);
 	}
-};
-
-/*
-Delete a tiddler in cache, without modifying file system.
-*/
-FileSystemAdaptor.prototype.removeTiddlerFileInfo = function(title) {
-	// Only delete the tiddler info if we have writable information for the file
-	if(this.boot.files[title]) {
-		delete this.boot.files[title];
-	};
 };
 
 if(fs) {

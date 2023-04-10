@@ -2,17 +2,26 @@ title: $:/core/ui/MoreSideBar/Tags
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Tags/Caption}}
 
-\whitespace trim
+<$set name="tv-config-toolbar-icons" value="yes">
 
-<$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="">
-	<div class="tc-tiny-v-gap-bottom">
-    	{{$:/core/ui/Buttons/tag-manager}}
-	</div>
-</$let>
+<$set name="tv-config-toolbar-text" value="yes">
+
+<$set name="tv-config-toolbar-class" value="">
+
+{{$:/core/ui/Buttons/tag-manager}}
+
+</$set>
+
+</$set>
+
+</$set>
+
 <$list filter={{$:/core/Filters/AllTags!!filter}}>
-	<div class="tc-tiny-v-gap-bottom">
-    	<$transclude tiddler="$:/core/ui/TagTemplate"/>
-	</div>
+
+<$transclude tiddler="$:/core/ui/TagTemplate"/>
+
 </$list>
+
 <hr class="tc-untagged-separator">
+
 {{$:/core/ui/UntaggedTemplate}}

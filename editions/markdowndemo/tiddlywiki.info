@@ -1,9 +1,7 @@
 {
 	"description": "Demo of the Markdown plugin",
 	"plugins": [
-		"tiddlywiki/markdown",
-		"tiddlywiki/highlight",
-		"tiddlywiki/katex"
+		"tiddlywiki/markdown"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

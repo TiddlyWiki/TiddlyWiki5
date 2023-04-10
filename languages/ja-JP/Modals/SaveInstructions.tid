@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: 作業内容を保存する
+footer: <$button message="tm-close-tiddler">閉じる</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+この wiki への変更内容を ~TiddlyWiki HTML ファイルとして保存する必要があります。
+
+!!! デスクトップブラウザの場合
+
+# ''ファイル'' メニューから ''名前を付けて保存'' を選択します
+# 保存場所とファイル名を指定します
+#* 一部のブラウザでは保存のときに ''Webページ HTMLのみ'' などといった形式を選択しなければいけない場合があります
+# タブを閉じます
+
+!!! スマートフォンブラウザの場合
+
+# このページをブックマークします
+#* すでに iCloud や Google Sync が設定済みならばブックマークは自動的にデスクトップ機に同期されます。デスクトップ機で改めてブックマークを開き、上記の手順で保存してください
+# タブを閉じます
+
+//モバイルサファリでそのブックマークを開くとこのメッセージが再度表示されます。下にある「閉じる」ボタンでその先に進めます。//

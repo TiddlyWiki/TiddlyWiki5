@@ -227,7 +227,10 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		originalTitle = tiddler ? tiddler.fields["draft.of"] : "",
 		originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined,
 		confirmationTitle,
-		win = event.event && event.event.view ? event.event.view : window;
+	    	win = event.event && event.event.view ? event.event.view : window;
+	if(!tiddler) {
+		return false;
+	}
 	// Check if the tiddler we're deleting is in draft mode
 	if(originalTitle) {
 		// If so, we'll prompt for confirmation referencing the original tiddler
@@ -237,7 +240,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if(((originalTitle && this.wiki.getTiddler(originalTitle)) || (tiddler && ((tiddler.fields.text || "") !== ""))) && !win.confirm($tw.language.getString(
+	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !win.confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
@@ -254,10 +257,8 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		this.removeTitleFromStory(storyList,originalTitle);
 	}
 	// Invoke the hook function and delete this tiddler
-	if(tiddler) {
-		$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
-		this.wiki.deleteTiddler(title);	
-	}
+	$tw.hooks.invokeHook("th-deleting-tiddler",tiddler);
+	this.wiki.deleteTiddler(title);
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
@@ -499,8 +500,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Get the tiddlers
 	var tiddlers = $tw.utils.parseJSONSafe(event.param,[]);
 	// Get the current $:/Import tiddler
-	var paramObject = event.paramObject || {},
-		importTitle = event.importTitle || paramObject.importTitle || IMPORT_TITLE,
+	var importTitle = event.importTitle ? event.importTitle : IMPORT_TITLE,
 		importTiddler = this.wiki.getTiddler(importTitle),
 		importData = this.wiki.getTiddlerData(importTitle,{}),
 		newFields = new Object({
@@ -541,7 +541,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
 	// Update the story and history details
-	var autoOpenOnImport = event.autoOpenOnImport || paramObject.autoOpenOnImport || this.getVariable("tv-auto-open-on-import");
+	var autoOpenOnImport = event.autoOpenOnImport ? event.autoOpenOnImport : this.getVariable("tv-auto-open-on-import");  
 	if(autoOpenOnImport !== "no") {
 		var storyList = this.getStoryList(),
 			history = [];

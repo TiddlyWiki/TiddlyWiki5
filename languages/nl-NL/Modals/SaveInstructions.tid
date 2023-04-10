@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+Je veranderingen aan deze wiki dienen als een ~TiddlyWiki HTML bestand opgeslagen te worden.
+
+!!! Desktop browsers
+
+# Kies ''Opslaan Als'' van het ''Bestand'' menu
+# Kies een bestandsnaam en locatie
+#* Bij sommige browsers moet het formaat expliciet opgegeven worden als  ''Webpage, alleen HTML'' o.i.d.
+# Sluit de browsertab
+
+!!! Smartphone browsers
+
+# Maak een favoriet naar deze pagina
+#* Bij gebruik van iCloud of Google Sync worden favorieten automatisch met de desktop-PC gesynchroniseerd en kan je  te werk gaan als boven beschreven
+# Sluit de browsertab
+
+//Wordt de favoriet in mobile Safari geopend dan zie je de melding weer. Klik ''sluit'' om verder te gaan//

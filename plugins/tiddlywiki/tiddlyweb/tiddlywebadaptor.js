@@ -23,7 +23,6 @@ function TiddlyWebAdaptor(options) {
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
-	this.logoutIsAvailable = true;
 }
 
 TiddlyWebAdaptor.prototype.name = "tiddlyweb";
@@ -76,10 +75,6 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			if(err) {
 				return callback(err);
 			}
-			//If Browser-Storage plugin is present, cache pre-loaded tiddlers and add back after sync from server completes 
-			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
-				$tw.browserStorage.cachePreloadTiddlers();
-			}
 			// Decode the status JSON
 			var json = null;
 			try {
@@ -96,7 +91,6 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 				self.isLoggedIn = json.username !== "GUEST";
 				self.isReadOnly = !!json["read_only"];
 				self.isAnonymous = !!json.anonymous;
-				self.logoutIsAvailable = "logout_is_available" in json ? !!json["logout_is_available"] : true;
 			}
 			// Invoke the callback if present
 			if(callback) {
@@ -133,28 +127,23 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 /*
 */
 TiddlyWebAdaptor.prototype.logout = function(callback) {
-	if(this.logoutIsAvailable) {
-		var options = {
-			url: this.host + "logout",
-			type: "POST",
-			data: {
-				csrf_token: this.getCsrfToken(),
-				tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
-			},
-			callback: function(err,data,xhr) {
-				callback(err);
-			},
-			headers: {
-				"accept": "application/json",
-				"X-Requested-With": "TiddlyWiki"
-			}
-		};
-		this.logger.log("Logging out:",options);
-		$tw.utils.httpRequest(options);
-	} else {
-		alert("This server does not support logging out. If you are using basic authentication the only way to logout is close all browser windows");
-		callback(null);
-	}
+	var options = {
+		url: this.host + "logout",
+		type: "POST",
+		data: {
+			csrf_token: this.getCsrfToken(),
+			tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
+		},
+		callback: function(err,data) {
+			callback(err);
+		},
+		headers: {
+			"accept": "application/json",
+			"X-Requested-With": "TiddlyWiki"
+		}
+	};
+	this.logger.log("Logging out:",options);
+	$tw.utils.httpRequest(options);
 };
 
 /*
@@ -192,10 +181,6 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			}
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
-			// If Browswer Storage tiddlers were cached on reloading the wiki, add them after sync from server completes in the above callback.
-			if($tw.browserStorage && $tw.browserStorage.isEnabled()) { 
-				$tw.browserStorage.addCachedTiddlers();
-			}
 		}
 	});
 };
@@ -206,7 +191,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
@@ -219,10 +204,6 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 			if(err) {
 				return callback(err);
 			}
-			//If Browser-Storage plugin is present, remove tiddler from local storage after successful sync to the server
-			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
-				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title)
-			}
 			// Save the details of the new revision of the tiddler
 			var etag = request.getResponseHeader("Etag");
 			if(!etag) {
@@ -232,7 +213,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 				// Invoke the callback
 				callback(null,{
 					bag: etagInfo.bag
-				},etagInfo.revision);
+				},etagInfo.revision);				
 			}
 		}
 	});
@@ -263,7 +244,7 @@ tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this;
 	if(this.isReadOnly) {
-		return callback(null);
+		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;

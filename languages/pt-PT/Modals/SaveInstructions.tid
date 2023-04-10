@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+As suas alterações a esta wiki necessitam de ser gravadas como um ficheiro HTML ~TiddlyWiki
+
+!!! Navegadores de computador pessoal
+
+# Seleccione ''Guardar como'' do menu ''Ficheiro''
+# Escolha um nome e uma localização para o seu ficheiro
+#* Alguns navegadores necessitam que se especifique explicitamente o formato de gravação como ''Página da Internet, apenas HTML'' ou algo similar
+# Fechar este separador
+
+!!! Navegadores em telemóveis ou dispositivos móveis
+
+# Crie um marcador ou favorito desta página
+#* Se tiver o iCloud ou Google Sync configurados o seu marcador irá ser automaticamente sincronizado com o seu computador pessoal onde poderá abrir e gravar conforme indicado acima
+# Fechar este separador
+
+//Se abrir o marcador outra vez no Mobile Safari verá esta mensagem outra vez. Se quiser prosseguir e utilizar o ficheiro, clique no botão ''fechar'' abaixo//

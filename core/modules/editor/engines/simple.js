@@ -119,12 +119,10 @@ SimpleEngine.prototype.fixHeight = function() {
 /*
 Focus the engine node
 */
-SimpleEngine.prototype.focus = function() {
-	if(this.domNode.focus) {
+SimpleEngine.prototype.focus  = function() {
+	if(this.domNode.focus && this.domNode.select) {
 		this.domNode.focus();
-	}
-	if(this.domNode.select) {
-		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
+		this.domNode.select();
 	}
 };
 

@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+Dine ændringer til denne wiki skal gemmes som en ~TiddlyWiki HTML file.
+
+!!! Computer browsere
+
+# Vælg ''Gem som'' fra ''Fil'' menuen
+# Vælg et filnavn og placering
+#* Nogle browsere kræver også, at du eksplicit angiver filens format som ''Webpage, HTML kun'' eller lignende
+# Luk denne fane
+
+!!! Smartphone browsere
+
+# Opret et bogmærke til denne side
+#* Hvis du har iCloud eller Google Sync sat op vil bogmærket automatisk synkroniseres til din desktop, hvor du kan åbne den og gemme den som ovenfor beskrevet
+# Luk denne fane
+
+//Hvis du åbner bogmærket igen i Mobile Safari vil du se denne besked igen. Hvis du ønsker at fortsætte og bruge filen, skal du blot klikke på ''luk'' knappen nedenfor//

@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+Tu cambios a iste wiki debe esser salvate como un file HTML ~TiddlyWiki.
+
+!!! Navigatores sur computatores stationari
+
+# Selige ''Salva como'' in le menu ''File''
+# Selige un nomine de file e location
+#* Alcun navigatores pote demandar que on specifica le formato de salvar como ''Pagina web, HTML solmente'' o simile
+# Claude iste scheda
+
+!!! Navitatores sur telephonos mobile
+
+# Crea un marcator a iste pagina
+#* Si tu ha iCloud o Google Sync activate, alora le marcator va automaticamente synchronisar con tu computator, ubi tu pote aperir lo e salvar lo como describite in alto
+# Claude iste scheda
+
+//Si on aperi le marcator de novo in Mobile Safari, on vide iste message de novo. Si on vole avantiar e usar le file, clicca sur le button ''claude'' in basso//

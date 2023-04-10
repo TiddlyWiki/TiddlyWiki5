@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">關閉</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+您對此 wiki 的變更需被儲存為 ~TiddlyWiki HTML 檔案。
+
+!!! 桌面版瀏覽器
+
+# 從''檔案''選單點選 ''另存新檔''
+# 選定檔名及儲存位置
+#* 某些瀏覽器依然需要明確指定檔案格式為 ''Webpage, HTML only'' 或類似的。
+# 關閉此頁籤
+
+!!! 智慧手機版瀏覽器
+
+# 為此頁建立書籤
+#* 若您已設定 iCloud 或 Google 同步，該書籤將自動與之前開啟及儲存於您電腦的書籤同步。
+# 關閉此頁籤
+
+//若您再次於 Mobile Safari 開啟該書籤，將會再看到此訊息。若要繼續使用該檔案，只需點擊下列 ''關閉'' 按鈕//

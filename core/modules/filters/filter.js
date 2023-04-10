@@ -21,15 +21,14 @@ exports.filter = function(source,operator,options) {
 		target = operator.prefix !== "!";
 	source(function(tiddler,title) {
 		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),{
-				getVariable: function(name,opts) {
-					opts = opts || {};
+				getVariable: function(name) {
 					switch(name) {
 						case "currentTiddler":
 							return "" + title;
 						case "..currentTiddler":
 							return options.widget.getVariable("currentTiddler");
 						default:
-							return options.widget.getVariable(name,opts);
+							return options.widget.getVariable(name);
 					}
 				}
 			});

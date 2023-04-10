@@ -87,6 +87,13 @@ exports.startup = function() {
 			}
 		});
 	}
+	// If we're being viewed on a data: URI then give instructions for how to save
+	if(document.location.protocol === "data:") {
+		$tw.rootWidget.dispatchEvent({
+			type: "tm-modal",
+			param: "$:/language/Modals/SaveInstructions"
+		});
+	}
 };
 
 })();

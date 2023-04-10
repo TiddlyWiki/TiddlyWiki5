@@ -1,0 +1,22 @@
+title: $:/language/Modals/SaveInstructions
+type: text/vnd.tiddlywiki
+subtitle: Save your work
+footer: <$button message="tm-close-tiddler">Close</$button>
+help: https://tiddlywiki.com/static/SavingChanges.html
+
+Vaše zmeny v tomto wiki treba uložiť ako ~TiddlyWiki HTML súbor.
+
+!!! PC browsery
+
+# Zvoľte si ''Uložiť ako'' z menu ''Súbor''
+# Zvoľte si meno súboru a miesto
+#* Pri niektorých browseroch sa vyžaduje presne definovať formát uloženia ako ''web stránka, len HTML'' alebo niečo podobné
+# Zatvorte túto záložku (tab)
+
+!!! Browsery v mobiloch
+
+# Vytvorte pre túto stránku bookmark 
+#* Ak používate iCloud alebo Google Sync, tak sa bookmark automaticky zosynchronizuje s vaším PC, kde wiki súbor môžete otvoriť a uložiť
+# Zatvorte túto záložku (tab)
+
+//Ak bookmar znovu otvoríte v Mobile Safari, uvidíte túto hlášku znovu. Ak chcete rovno pokračovať a pracovať so súborom, tak len stlačte tlačítko ''zatvoriť'' nižšie//

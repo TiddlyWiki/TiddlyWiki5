@@ -519,13 +519,3 @@ Scott Sauye, @CrossEye, 2023-01-04
 Marcus Winter, @yaisog, 2023-01-07
 
 Ethan Weller, @gamedungeon, 2023-01-17
-
-Mateusz Wilczek, @mateuszwilczek, 2023/02/16
-
-Andrea Octo, @andrigamerita, 2023/02/24
-
-HuanC Fu, @hffqyd, 2023/03/03
-
-Michelle Saad, @michsa, 2023-03-08
-
-Yukai Chou, @muzimuzhi, 2023-04-07

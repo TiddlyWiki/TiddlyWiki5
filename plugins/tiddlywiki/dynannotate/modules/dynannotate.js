@@ -38,28 +38,23 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 	// Create our DOM nodes
 	var isSnippetMode = this.isSnippetMode();
 	this.domContent = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-selection-container",
-		document: this.document
+		"class": "tc-dynannotation-selection-container"
 	});
 	if(isSnippetMode) {
-		this.domContent.setAttribute("hidden","hidden");
+		this.domContent.setAttribute("hidden","hidden");		
 	}
 	this.domAnnotations = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-annotation-wrapper",
-		document: this.document
+		"class": "tc-dynannotation-annotation-wrapper"
 	});
 	this.domSnippets = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-snippet-wrapper",
-		document: this.document
+		"class": "tc-dynannotation-snippet-wrapper"
 	});
 	this.domSearches = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-search-wrapper",
-		document: this.document
+		"class": "tc-dynannotation-search-wrapper"
 	});
 	this.domWrapper = $tw.utils.domMaker("div",{
 		"class": "tc-dynannotation-wrapper",
-		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches],
-		document: this.document
+		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches]
 	})
 	parent.insertBefore(this.domWrapper,nextSibling);
 	this.domNodes.push(this.domWrapper);
@@ -69,18 +64,16 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Render our child widgets
 	this.renderChildren(this.domContent,null);
-	if(!this.document.isTiddlyWikiFakeDom) {
-		if(isSnippetMode) {
-			// Apply search snippets
-			this.applySnippets();
-		} else {
-			// Get the list of annotation tiddlers
-			this.getAnnotationTiddlers();
-			// Apply annotations
-			this.applyAnnotations();
-			// Apply search overlays
-			this.applySearch();		
-		}
+	if(isSnippetMode) {
+		// Apply search snippets
+		this.applySnippets();
+	} else {
+		// Get the list of annotation tiddlers
+		this.getAnnotationTiddlers();
+		// Apply annotations
+		this.applyAnnotations();
+		// Apply search overlays
+		this.applySearch();		
 	}
 	// Save the width of the wrapper so that we can tell when it changes
 	this.wrapperWidth = this.domWrapper.offsetWidth;

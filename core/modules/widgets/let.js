@@ -53,9 +53,7 @@ LetWidget.prototype.computeAttributes = function() {
 			name = attribute.name;
 		// Now that it's prepped, we're allowed to look this variable up
 		// when defining later variables
-		if(value !== undefined) {
-			self.currentValueFor[name] = value;
-		}
+		self.currentValueFor[name] = value;
 	});
 	// Run through again, setting variables and looking for differences
 	$tw.utils.each(this.currentValueFor,function(value,name) {
