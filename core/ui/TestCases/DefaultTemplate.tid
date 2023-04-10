@@ -1,18 +1,20 @@
 title: $:/core/ui/testcases/DefaultTemplate
 
 \whitespace trim
+<$let
+	state={{{ [<qualify "$:/state/testcase">] }}}
+>
 <div class="tc-testcase-wrapper">
 <div class="tc-testcase-header">
 <h2><$testcase-transclude tiddler="Description" mode="inline"/></h2>
 </div>
 <div class="tc-testcase-panes">
 <div class="tc-testcase-source">
-<pre>
-<$testcase-view tiddler="Output"/>
-</pre>
+<$macrocall $name="tabs" tabsList="[<testcaseInfo>jsonget[titles]] -Description -ExpectedResult -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
 </div>
 <div class="tc-testcase-output">
 <$testcase-transclude tiddler="Output"/>
 </div>
 </div>
 </div>
+</$let>

@@ -63,6 +63,13 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.testcaseWiki.registerPluginTiddlers("plugin");
 	this.testcaseWiki.unpackPluginTiddlers();
 	this.testcaseWiki.addIndexersToWiki();
+	// Gemerate a `transclusion` variable that depends on the values of the payload tiddlers so that the template can easily make unique state tiddlers
+	this.setVariable("transclusion",$tw.utils.hashString(this.testcaseWiki.getTiddlersAsJson("[all[tiddlers]]")));
+	// Generate a `testcaseInfo` variable that contains information about the subwiki in JSON format
+	var testcaseInfoData = {
+		titles: this.testcaseWiki.allTitles()
+	};
+	this.setVariable("testcaseInfo",JSON.stringify(testcaseInfoData));
 	// Render children from the template
 	this.renderChildren(parent,nextSibling);
 };
