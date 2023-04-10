@@ -95,10 +95,10 @@ That renders as:
 <<tw-code $tiddler$>>
 \end
 
-\define flex-card(class,bordercolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")
+\define flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")
 \whitespace trim
 <$link class={{{ [<__class__>addprefix[tc-card ]] }}} to={{{ [<currentTiddler>get<__linkField__>else<currentTiddler>] }}}>
-	<div class="tc-card-accent" style.borderTop={{{ [<__bordercolor__>!is[blank]addprefix[5px solid ]] }}}>
+	<div class="tc-card-accent" style.borderTop={{{ [<__bordercolor__>!is[blank]addprefix[5px solid ]] }}} style.background={{!!background}} style.backgroundColor=<<__backgroundcolor__>> style.color=<<__textcolor__>> style.fill=<<__textcolor__>>>
 		<$list filter="[<currentTiddler>has[ribbon-text]]" variable="ignore">
 			<div class="tc-card-ribbon-wrapper">
 				<div class="tc-card-ribbon" style.backgroundColor={{{ [<currentTiddler>get[ribbon-color]else[red]] }}}>
@@ -119,6 +119,7 @@ That renders as:
 				<$text text=<<__subtitle__>>/>
 			</div>
 		</$list>
+		<div class="tc-card-icon"><$transclude tiddler={{!!icon}}/></div>
 		<div class="tc-card-body-wrapper">
 			<div class="tc-card-body">
 				<$transclude field=<<__descriptionField__>> mode="block"/>
@@ -126,6 +127,11 @@ That renders as:
 			<div class="tc-card-body-clear">
 			</div>
 		</div>
+		<$list filter="[all[current]has[button-text]]" variable="ignore">
+			<div class="tc-card-button" style.background-color={{!!button-color}} style.border-color={{!!button-color}}>
+				<$text text={{!!button-text}}/>&#32;{{$:/core/images/chevron-right}}
+			</div>
+		</$list>
 	</div>
 </$link>
 \end
