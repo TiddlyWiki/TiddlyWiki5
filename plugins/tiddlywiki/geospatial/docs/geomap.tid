@@ -33,7 +33,7 @@ The following attributes are supported:
 <$testcase>
 <$data
 	title="Description"
-	text="Map with geomarkers"
+	text="Map with geomarker"
 />
 <$data
 	title="Oxford"
@@ -46,6 +46,48 @@ The following attributes are supported:
 <$data title="Output" text="""<$geomap
 	state=<<qualify "$:/state/demo-map">>
 	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
+/>
+"""/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data
+	title="Description"
+	text="Map with geolayer"
+/>
+<$data
+	title="Layer"
+	tags="$:/tags/GeoLayer"
+	type="application/json"
+	color="red"
+	text="""{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "An example geolayer feature",
+			"properties": {
+				"custom": "A custom property of this feature"
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[
+						[-90,35],
+						[-90,30],
+						[-85,30],
+						[-85,35],
+						[-90,35]
+					]
+				]
+			}
+		}
+	]
+}"""/>
+<$data title="Output" text="""<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	layers="[all[tiddlers+shadows]tag[$:/tags/GeoLayer]]"
 />
 """/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
