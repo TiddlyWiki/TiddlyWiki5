@@ -3187,6 +3187,8 @@ select {
 	align-items: stretch;
 	flex-wrap: wrap;
 	padding: 0.5em;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 }
 
 .tc-testcase-source {
