@@ -1,3 +1,20 @@
 title: $:/core/ui/testcases/DefaultTemplate/Source
 
 <pre><$testcase-view tiddler=<<currentTab>>/></pre>
+<$list filter="[<testcaseInfo>jsonget[tiddlers],<currentTab>] -text -title +[limit[1]]" variable="ignore">
+	<table>
+		<tbody>
+			<tr><th>Field</th><th>Value</th></tr>
+			<$list filter="[<testcaseInfo>jsonget[tiddlers],<currentTab>] -text -title" variable="fieldName">
+				<tr>
+					<td>
+						<$text text=<<fieldName>>/>
+					</td>
+					<td>
+						<$testcase-view tiddler=<<currentTab>> field=<<fieldName>>/>
+					</td>
+				</tr>
+			</$list>
+		</tbody>
+	</table>
+</$list>

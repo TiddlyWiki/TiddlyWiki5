@@ -10,7 +10,7 @@ title: $:/core/ui/testcases/DefaultTemplate
 </div>
 <div class="tc-testcase-panes">
 <div class="tc-testcase-source">
-<$macrocall $name="tabs" tabsList="[<testcaseInfo>jsonget[titles]] -Description -ExpectedResult -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
+<$macrocall $name="tabs" tabsList="[<testcaseInfo>jsonindexes[tiddlers]] -Description -ExpectedResult -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
 </div>
 <div class="tc-testcase-divider">
 </div>
