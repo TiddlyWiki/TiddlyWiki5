@@ -38,7 +38,7 @@ TestCaseViewWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Render the transclusion
 	if(pointer && pointer.testcaseRawTiddler) {
-		pointer.testcaseRawTiddler(parent,nextSibling,this.testcaseViewTiddler)
+		pointer.testcaseRawTiddler(parent,nextSibling,this.testcaseViewTiddler,this.testcaseViewField)
 	}
 };
 
@@ -47,6 +47,7 @@ Compute the internal state of the widget
 */
 TestCaseViewWidget.prototype.execute = function() {
 	this.testcaseViewTiddler = this.getAttribute("tiddler");
+	this.testcaseViewField = this.getAttribute("field","text");
 };
 
 /*

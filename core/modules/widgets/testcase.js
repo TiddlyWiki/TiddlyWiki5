@@ -67,8 +67,11 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.setVariable("transclusion",$tw.utils.hashString(this.testcaseWiki.getTiddlersAsJson("[all[tiddlers]]")));
 	// Generate a `testcaseInfo` variable that contains information about the subwiki in JSON format
 	var testcaseInfoData = {
-		titles: this.testcaseWiki.allTitles()
+		tiddlers: {} // Hashmap of tiddler titles mapped to array of field names
 	};
+	this.testcaseWiki.each(function(tiddler,title) {
+		testcaseInfoData.tiddlers[title] = Object.keys(tiddler.fields);
+	});
 	this.setVariable("testcaseInfo",JSON.stringify(testcaseInfoData));
 	// Render children from the template
 	this.renderChildren(parent,nextSibling);
@@ -105,10 +108,14 @@ TestCaseWidget.prototype.testcaseRenderTiddler = function(parent,nextSibling,tit
 /*
 View a test case tiddler in plain text
 */
-TestCaseWidget.prototype.testcaseRawTiddler = function(parent,nextSibling,title) {
+TestCaseWidget.prototype.testcaseRawTiddler = function(parent,nextSibling,title,field) {
 	var self = this;
 	// Render a text widget with the text of a tiddler
-	var text = this.testcaseWiki.getTiddlerText(title);
+	var text="",
+		tiddler = this.testcaseWiki.getTiddler(title);
+	if(tiddler) {
+		text = tiddler.getFieldString(field,"");
+	}
 	parent.insertBefore(this.document.createTextNode(text),nextSibling);
 };
 

@@ -15,3 +15,4 @@ The content of the `<$testcase-view>` widget is not displayed.
 
 |!Attribute |!Description |
 |<<.attr tiddler>> |Title of the tiddler to be displayed |
+|<<.attr field>> |Optional field to be displayed (defaults to "text") |
