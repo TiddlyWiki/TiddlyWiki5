@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geopoint
+caption: geopoint operator
+tags: $:/tags/GeospatialDocs
+
+!! `geopoint` operator
+
+The `geopoint` operator converts separate latitude, longitude and (optionally) altitude numbers into a [[GeoJSON Point Feature]] that can be used with other geospatial primitives.
+
+The coordinates are specified as two or three operands:
+
+```
+[geopoint<latitude>,<longitude>,<attitude>]
+```
+
+Any operands that cannot be interpreted as a valid number will be interpreted as the value zero.
+
+For example:
+
+```
+<$text text={{{ [geopoint[51.751944],[-1.257778]] }}}/>
+```
+
+Returns:
+
+```
+{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,0]}}
+```
