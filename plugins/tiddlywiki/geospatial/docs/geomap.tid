@@ -13,3 +13,40 @@ The following attributes are supported:
 |''layers'' |A filter identifying the GeoJSON layer tiddlers to be displayed on the map |
 |''markers'' |A filter identifying the GeoJSON marker tiddlers to be displayed on the map |
 
+
+!! Examples
+
+<$testcase>
+<$data
+	title="Description"
+	text="Map with state preservation"
+/>
+<$data
+	title="Output"
+	text="""<$geomap
+	state=<<qualify "$:/state/demo-map">>
+/>
+"""/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data
+	title="Description"
+	text="Map with geomarkers"
+/>
+<$data
+	title="Oxford"
+	tags="$:/tags/GeoMarker"
+	caption="Oxford"
+	lat="51.751944"
+	long="-1.257778"
+	alt="0"
+	text="""This is Oxford!"""/>
+<$data title="Output" text="""<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
+/>
+"""/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
