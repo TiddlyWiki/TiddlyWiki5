@@ -1,0 +1,18 @@
+caption: testcase-transclude
+created: 20230406161341763
+modified: 20230406161341763
+tags: Widgets
+title: TestCaseTranscludeWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The testcase-transclude widget transcludes a tiddler from the subwiki established by an ancestor <<.wlink TestCaseWidget>> widget.
+
+! Content and Attributes
+
+The content of the `<$testcase-transcliude>` widget is not displayed.
+
+|!Attribute |!Description |
+|<<.attr tiddler>> |Title of the tiddler to be transcluded |
+|<<.attr mode>> |Optional parsing mode: "block" (the default) or "inline" |
