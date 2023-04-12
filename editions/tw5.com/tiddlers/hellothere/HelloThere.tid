@@ -13,6 +13,13 @@ It introduces a number of new primitives for working with geospatial data.
 
 A demo of the geospatial functionality is [ext[available here|./plugins/tiddlywiki/geospatial/index.html]].
 
+It also includes a number of new features that are intended for eventual inclusion in the core:
+
+* TestCaseWidget, TestCaseTranscludeWidget and TestCaseViewWidget
+* [[jsonset Operator]]
+* [[setquerystring Operator]]
+* [[WidgetMessage: tm-http-request]]
+
 </div>
 
 !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
