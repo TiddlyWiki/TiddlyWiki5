@@ -1071,6 +1071,20 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[charcode[9],[10]]").join(" ")).toBe(String.fromCharCode(9) + String.fromCharCode(10));
 			expect(wiki.filterTiddlers("[charcode[]]").join(" ")).toBe("");
 		});
+		
+		it("should handle the levenshtein operator", function() {
+			expect(wiki.filterTiddlers("[[apple]levenshtein[apple]]").join(" ")).toBe("0");
+			expect(wiki.filterTiddlers("[[apple]levenshtein[banana]]").join(" ")).toBe("9");
+			expect(wiki.filterTiddlers("[[representation]levenshtein[misreprehensionisation]]").join(" ")).toBe("10");
+			expect(wiki.filterTiddlers("[[the cat sat on the mat]levenshtein[the hat saw in every category]]").join(" ")).toBe("13");
+		});
+		
+		it("should handle the makepatches operator", function() {
+			expect(wiki.filterTiddlers("[[apple]makepatches[apple]]").join(" ")).toBe("");
+			expect(wiki.filterTiddlers("[[apple]makepatches[banana]]").join(" ")).toBe("@@ -1,5 +1,6 @@\n-apple\n+banana\n");
+			expect(wiki.filterTiddlers("[[representation]makepatches[misreprehensionisation]]").join(" ")).toBe("@@ -1,13 +1,21 @@\n+mis\n repre\n-sent\n+hensionis\n atio\n");
+			expect(wiki.filterTiddlers("[[the cat sat on the mat]makepatches[the hat saw in every category]]").join(" ")).toBe("@@ -1,22 +1,29 @@\n the \n-c\n+h\n at sa\n-t on the mat\n+w in every category\n");
+		});
 	
 		it("should parse filter variable parameters", function(){
 		  expect($tw.utils.parseFilterVariable("currentTiddler")).toEqual(

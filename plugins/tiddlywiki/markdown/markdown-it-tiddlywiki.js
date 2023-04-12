@@ -103,8 +103,9 @@ function render_tw_expr(tokens,idx) {
 	return tokens[idx].content;
 }
 
-// Overwrite default: render attribute strings in e"..." format instead,
-// so HTML entities can be decoded. See parseStringLiteralExt() below.
+// Overwrite default: attribute values can be either a string or {type;, value:}.
+// 1) string attr val: render in e"..." format so HTML entities can be decoded.
+// 2) object attr val: render value as is.
 function render_token_attrs(token) {
 	var i, l, result;
 
@@ -113,7 +114,11 @@ function render_token_attrs(token) {
 	result = '';
 
 	for(i=0, l=token.attrs.length; i<l; i++) {
-		result += ' ' + md.utils.escapeHtml(token.attrs[i][0]) + '=e"' + md.utils.escapeHtml(token.attrs[i][1]) + '"';
+		if(typeof token.attrs[i][1] === "object" && token.attrs[i][1] !== null) {
+			result += ' ' + md.utils.escapeHtml(token.attrs[i][0]) + '=' + token.attrs[i][1].value;
+		} else {
+			result += ' ' + md.utils.escapeHtml(token.attrs[i][0]) + '=e"' + md.utils.escapeHtml(token.attrs[i][1]) + '"';
+		}
 	}
 
 	return result;
@@ -264,7 +269,19 @@ function tw_image(state,silent) {
 		var twNode = ruleinfo.rule.parse()[0];
 		var token = state.push('$image','$image',0);
 		$tw.utils.each(twNode.attributes,function(attr,id) {
-			token.attrSet(id,attr.value);
+			switch(attr.type) {
+				case "filtered":
+					token.attrSet(id,{ type: "filtered", value: "{{{" + attr.filter + "}}}" });
+					break;
+				case "indirect":
+					token.attrSet(id,{ type: "indirect", value: "{{" + attr.textReference + "}}" });
+					break;
+				case "macro":
+					token.attrSet(id,{ type: "macro", value: ruleinfo.rule.parser.source.substring(attr.value.start,attr.value.end) });
+					break;
+				default:
+					token.attrSet(id,attr.value);
+			}
 		});
 		token.markup = 'tw_image';
 	}

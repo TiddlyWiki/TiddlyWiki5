@@ -1,6 +1,6 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20211104200554064
+modified: 20230122210049893
 tags: Widgets
 title: EditTextWidget
 type: text/vnd.tiddlywiki
@@ -24,6 +24,8 @@ The content of the `<$edit-text>` widget is ignored.
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation |
+|focusSelectFromStart |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the start of the selection: `0` (default) places the start of the selection at the beginning of the text, `1` places the start of the selection after the first character, etc.  |
+|focusSelectFromEnd |<<.from-version 5.2.6>> If the `focus` attribute is enabled, determines the position of the end of the selection: `0` (default) places the end of the selection at the end of the text, `1` places the start of the selection before the final character, etc.  |
 |tabindex |Sets the `tabindex` attribute of the input or textarea to the given value |
 |autocomplete |<<.from-version 5.1.23>> An optional string to provide a hint to the browser how to handle autocomplete for this input |
 |tag |Overrides the generated HTML editing element tag. For a multi-line editor use `tag=textarea`. For a single-line editor use `tag=input` |
@@ -38,8 +40,7 @@ The content of the `<$edit-text>` widget is ignored.
 |disabled|<<.from-version "5.1.23">> Optional, disables the text input if set to "yes". Defaults to "no"|
 |fileDrop|<<.from-version "5.2.0">> Optional. When set to "yes" allows dropping or pasting images into the editor to import them. Defaults to "no"|
 
-
-! Example
+! Examples
 
 If you wanted to change the field //myconfig// of the tiddler //AppSettings//, you could use an EditTextWidget to edit the field, and then show the result anywhere else by using `{{AppSettings!!myconfig}}`. Note that this will create tiddler AppSettings if it doesn't already exist.
 
@@ -48,3 +49,20 @@ eg="""<$edit-text tiddler="AppSettings" field="myconfig"/><p/>
 Value of ''myconfig'' : {{AppSettings!!myconfig}}
 """/>
 
+!! Text Selection
+
+If the edit field already contains text or a default value is provided, you can use the `focusSelectFromStart` and `focusSelectFromEnd` attributes to only select part of the text when using `focus="yes"`.
+
+Partial selection when editing this tiddler's //caption// field:
+
+<$macrocall $name=".example" n="2"
+eg="""<$edit-text tiddler=<<currentTiddler>> field="caption" focus="yes" focusSelectFromStart="5" />
+"""/>
+
+!!! {{!!heading}}
+
+Provide a dated heading for this example where only the placeholder (but not the date) is selected for easier text input:
+
+<$macrocall $name=".example" n="3"
+eg="""<$edit-text tiddler=<<currentTiddler>> field="heading" size="25" focus="yes" focusSelectFromEnd="13" default={{{ [[Heading Text (]] [<now YYYY-0MM-0DD>] [[)]] +[join[]] }}} />
+"""/>

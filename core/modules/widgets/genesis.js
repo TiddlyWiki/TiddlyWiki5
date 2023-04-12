@@ -46,6 +46,7 @@ GenesisWidget.prototype.execute = function() {
 	this.genesisRemappable = this.getAttribute("$remappable","yes") === "yes";
 	this.genesisNames = this.getAttribute("$names","");
 	this.genesisValues = this.getAttribute("$values","");
+	this.genesisIsBlock = this.getAttribute("$mode",this.parseTreeNode.isBlock && "block") === "block";
 	// Do not create a child widget if the $type attribute is missing or blank
 	if(!this.genesisType) {
 		this.makeChildWidgets(this.parseTreeNode.children);
@@ -60,6 +61,7 @@ GenesisWidget.prototype.execute = function() {
 		tag: nodeTag,
 		attributes: {},
 		orderedAttributes: [],
+		isBlock: this.genesisIsBlock,
 		children: this.parseTreeNode.children || [],
 		isNotRemappable: !this.genesisRemappable
 	}];
