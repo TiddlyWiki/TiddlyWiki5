@@ -11,7 +11,6 @@ fi
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
 
 # Default to using tw5.com as the main edition for /index.html
-# >>> TEMPORARILY SET TO THE GEOSPATIAL PLUGIN; TO BE REVERTED BEFORE MERGING <<<
 
 if [  -z "$TW5_BUILD_MAIN_EDITION" ]; then
     TW5_BUILD_MAIN_EDITION=./editions/tw5.com
