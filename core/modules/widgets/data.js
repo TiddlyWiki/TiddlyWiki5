@@ -43,6 +43,42 @@ DataWidget.prototype.execute = function() {
 };
 
 /*
+Read the tiddler value(s) from a data widget – must be called after the .render() method
+*/
+DataWidget.prototype.readDataTiddlerValues = function() {
+	var self = this;
+	// Start with a blank object
+	var item = Object.create(null);
+	// Read any attributes not prefixed with $
+	$tw.utils.each(this.attributes,function(value,name) {
+		if(name.charAt(0) !== "$") {
+			item[name] = value;			
+		}
+	});
+	// Deal with $tiddler or $filter attributes
+	var titles;
+	if(this.hasAttribute("$tiddler")) {
+		titles = [this.getAttribute("$tiddler")];
+	} else if(this.hasAttribute("$filter")) {
+		titles = this.wiki.filterTiddlers(this.getAttribute("$filter"));
+	}
+	if(titles) {
+		var results = [];
+		$tw.utils.each(titles,function(title,index) {
+			var tiddler = self.wiki.getTiddler(title),
+				fields;
+			if(tiddler) {
+				fields = tiddler.getFieldStrings();
+			}
+			results.push($tw.utils.extend({},fields,item));
+		})
+		return results;
+	} else {
+		return [item];
+	}
+};
+
+/*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DataWidget.prototype.refresh = function(changedTiddlers) {

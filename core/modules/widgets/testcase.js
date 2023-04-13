@@ -48,7 +48,10 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	// Create a wiki
 	this.testcaseWiki = new $tw.Wiki();
 	// Load tiddlers from child data widgets
-	var tiddlers = this.readTiddlerDataWidgets(this.contentRoot.children);
+	var tiddlers = [];
+	this.findChildrenDataWidgets(this.contentRoot.children,"data",function(widget) {
+		Array.prototype.push.apply(tiddlers,widget.readDataTiddlerValues());
+	});
 	this.testcaseWiki.addTiddlers(tiddlers);
 	// Load tiddlers from the optional testcaseTiddler
 	if(this.testcaseTiddler) {
@@ -117,70 +120,6 @@ TestCaseWidget.prototype.testcaseRawTiddler = function(parent,nextSibling,title,
 		text = tiddler.getFieldString(field,"");
 	}
 	parent.insertBefore(this.document.createTextNode(text),nextSibling);
-};
-
-/*
-Find child data widgets
-*/
-TestCaseWidget.prototype.findDataWidgets = function(children,tag,callback) {
-	var self = this;
-	$tw.utils.each(children,function(child) {
-		if(child.dataWidgetTag === tag) {
-			callback(child);
-		}
-		if(child.children) {
-			self.findDataWidgets(child.children,tag,callback);
-		}
-	});
-};
-
-/*
-Find the child data widgets
-*/
-TestCaseWidget.prototype.readTiddlerDataWidgets = function(children) {
-	var self = this,
-		results = [];
-	this.findDataWidgets(children,"data",function(widget) {
-		Array.prototype.push.apply(results,self.readTiddlerDataWidget(widget));
-	});
-	return results;
-};
-
-/*
-Read the value(s) from a data widget
-*/
-TestCaseWidget.prototype.readTiddlerDataWidget = function(dataWidget) {
-	var self = this;
-	// Start with a blank object
-	var item = Object.create(null);
-	// Read any attributes not prefixed with $
-	$tw.utils.each(dataWidget.attributes,function(value,name) {
-		if(name.charAt(0) !== "$") {
-			item[name] = value;			
-		}
-	});
-	// Deal with $tiddler or $filter attributes
-	var titles;
-	if(dataWidget.hasAttribute("$tiddler")) {
-		titles = [dataWidget.getAttribute("$tiddler")];
-	} else if(dataWidget.hasAttribute("$filter")) {
-		titles = this.wiki.filterTiddlers(dataWidget.getAttribute("$filter"));
-	}
-	if(titles) {
-		var self = this;
-		var results = [];
-		$tw.utils.each(titles,function(title,index) {
-			var tiddler = self.wiki.getTiddler(title),
-				fields;
-			if(tiddler) {
-				fields = tiddler.getFieldStrings();
-			}
-			results.push($tw.utils.extend({},fields,item));
-		})
-		return results;
-	} else {
-		return [item];
-	}
 };
 
 /*
