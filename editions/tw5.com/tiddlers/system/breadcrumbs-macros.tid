@@ -11,11 +11,11 @@ type: text/vnd.tiddlywiki
 
 \define .breadcrumbs(start, stop, exclude, label, field, sort, mode:"story")
 \whitespace trim
-<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} >
+<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
+	macro-name={{{ ".breadcrumbs" [<__mode__>titlecase[]] +[join[]] }}}
+>
 	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
-		<$list filter="[<__mode__>match[story]then[.breadcrumbsStory]else[.breadcrumbsSimple]]" variable="macro-name">
-			<$macrocall $name=<<macro-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
-		</$list>
+		<$macrocall $name=<<macro-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
 	</$set>
 </$let>
 \end
