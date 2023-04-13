@@ -6,8 +6,8 @@ tags: $:/tags/GeospatialDocs
 
 The `old-encode` operator converts separate latitude and longitude numbers into an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut code with a specified length (defaults to 11 characters).
 
-```
-[olc-encode[51.751944],[-1.257778]]
-[olc-encode[51.751944],[-1.257778],[11]]
-```
+!! Examples
 
+<$testcase testcase-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/olc-encode">
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

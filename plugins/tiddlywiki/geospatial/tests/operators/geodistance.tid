@@ -1,8 +1,12 @@
-title: $:/plugins/tiddlywiki/geospatial/tests/geodistance
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/geodistance
 description: geodistance operator
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
+title: Description
+
+geodistance operator
++
 title: Output
 
 \whitespace trim

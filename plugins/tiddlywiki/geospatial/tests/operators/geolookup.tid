@@ -1,8 +1,12 @@
-title: $:/plugins/tiddlywiki/geospatial/tests/geolookup
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/geolookup
 description: geolookup operator
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
+title: Description
+
+geolookup operator
++
 title: Output
 
 \whitespace trim

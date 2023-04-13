@@ -14,14 +14,8 @@ The coordinates are specified as two or three operands:
 
 Any operands that cannot be interpreted as a valid number will be interpreted as the value zero.
 
-For example:
+!! Examples
 
-```
-<$text text={{{ [geopoint[51.751944],[-1.257778]] }}}/>
-```
-
-Returns:
-
-```
-{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,0]}}
-```
+<$testcase testcase-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geopoint">
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

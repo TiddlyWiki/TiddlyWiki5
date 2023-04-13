@@ -3,6 +3,10 @@ description: geopoint operator
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
+title: Description
+
+geopoint operator
++
 title: Output
 
 <$text text={{{ [geopoint[51.751944],[-1.257778]] }}}/>
