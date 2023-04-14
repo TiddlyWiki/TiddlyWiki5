@@ -116,17 +116,36 @@ type: text/vnd.tiddlywiki
 	start is a tiddler title (defaults to "currentTiddler")
 -->
 
+\define .openFieldInStoryActions()
+<$set name=visited filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>] +[allafter<__target__>] :or[<__start__>]" >
+<$let __source__={{{ [list[$:/StoryList]] :intersection[enlist<visited>] +[nth[1]] }}} >
+	<$set name="newList" filter="[list[$:/StoryList]insertbefore<__target__>,<__source__>]">
+		<!-- $action-log visited=<<visited>> source=<<__source__>> newList=<<newList>>/ -->
+		<$action-setfield $tiddler="$:/StoryList" $field="list" $value=<<newList>> />
+		<$action-navigate $to=<<__target__>> />
+	</$set>
+<$let>
+</$set>
+\end
+
+\define .openFieldInStory(target, class)
+\whitespace trim
+<$linkcatcher actions=<<.openFieldInStoryActions>> >
+	<$link to=<<__target__>> class=<<__class__>> ><<__target__>></$link>
+</$linkcatcher>
+\end
+
 \define .breadcrumbsField(start, exclude, label, field:"list")
 \whitespace trim
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
 	first={{{ [<__start__>get<__field__>enlist-input[]] }}}
 >
-	<$set name="excluded" filter="[enlist<__exclude__>] :or[<first>]">
+	<$set name="excluded" filter="[enlist<__exclude__>]">
 		<nav class="tc-breadcrumbs">
 			<<__label__>>
-			<$link class="tc-crumb-first" to=<<first>>><$text text=<<first>> /></$link>
-			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>]">
-				<$link class="tc-small-gap-right tc-crumb" />
+			<$macrocall $name=".openFieldInStory" target=<<first>> class="tc-crumb-first"/>
+			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>] -[<first>]">
+				<$macrocall $name=".openFieldInStory" target=<<currentTiddler>> class="tc-small-gap-right tc-crumb"/>
 			</$list>
 			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
 		</nav>
