@@ -56,6 +56,7 @@ type: text/vnd.tiddlywiki
 			line-height: <<bcHeight>>px;
 			position: relative;
 			background: <<colour message-background>>;
+			border-right: 1px solid <<colour message-background>>;
 		}
 
 		.tc-breadcrumbs .tc-crumb-first {
