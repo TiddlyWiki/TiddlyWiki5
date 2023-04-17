@@ -3196,6 +3196,10 @@ select {
 	min-width: 250px;
 }
 
+.tc-testcase-source .tc-field-table {
+	width: 100%;
+}
+
 .tc-testcase-divider {
 	flex: 0 0 2%;
 }
