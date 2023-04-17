@@ -1,5 +1,5 @@
 created: 20230408131424728
-modified: 20230408144718576
+modified: 20230415122158457
 tags: 
 title: Breadcrumbs Macros
 type: text/vnd.tiddlywiki
@@ -10,33 +10,46 @@ type: text/vnd.tiddlywiki
 
 !!! Breadcrumbs Macros
  
-There are 4 documentation `.breadcrumbs` macros, which are designed for different usecasese.
+There are 4 documentation `.breadcrumbs`-related macros, which are designed for different usecaseses.
 
-|`.breadcrumbs` |A wrapper macro that calls "Story" (default) ore "Simple", depending on the <<.param mode>> parameter |
-|`.breadcrumbsStory` |Clicking on a link will open the new tiddler according to the position within the breadcrumbs hierarchy. So the hierarchy is reflected in the position in the story-river |
-|`.breadcrumbsSimple` |Clicking on a link will open the new tiddler according to the [[Navigation from within the story river|$:/config/Navigation/openLinkFromInsideRiver]] setting |
-|`.breadcrumbsField` |The hierarchy is defined using a list-like field. Defaults to <<.field list>> |
+|`.breadcrumbs` |A wrapper macro that calls "Story" (default) "Simple" or "Field", depending on the <<.param mode>> parameter |
+|`.breadcrumbsStory` |By default, this recursive macro uses the ''tags'' field to create the breadcrumbs structure. Opening the links tries to recreate this structure in the story-list|
+|`.breadcrumbsSimple` |This recursive macro also uses the ''tags'' field to define the breadcrumbs structure. Opening linked tiddlers uses the wiki default settings  |
+|`.breadcrumbsField` |By default this macro uses the ''list'' field to create the structure. This macro is ''not recursive''  |
 
 !! Parameters
 
-With the <<.param mode>> parameter, the `<<.breadcrumbs mode:"story">>` macro is used to switch between "story", "simple" and "field" mode
+With the <<.param mode>> parameter, the `<<.breadcrumbs mode:"story">>` macro is used to switch between "story", "simple" and "field" mode. The `.breadcrumbs` macro is a "wrapper", to select the more specialized macros. 
 
-|<<.param mode>> |(optional) defaults to "story". Allows <<.param story>> or <<.param simple>> |
+|<<.param mode>> |Defaults to "story". Allows <<.param story>>, <<.param simple>> or <<.param field>> |
+
+!!! Modes
+
+* <<.param story>> ... Clicking on a link will open the new tiddler according to the position within the breadcrumbs hierarchy. So the hierarchy is reflected in the position in the story-river
+
+* <<.param simple>> ... Clicking on a link will open the new tiddler according to the [[Navigation from within the story river|$:/config/Navigation/openLinkFromInsideRiver]] setting 
+
+* <<.param field>> ... Clicking on a link will try to recreate the breadcrumbs order in the story river. Also see: ".breadcrumbsField" below
 
 !!! Common Parameters
 
-The <<.param stop>> is the only parameter, that is required. All other parameters are optional. If the <<.param start>> parameter is omitted, the <<.var currentTiddler>> will be used.  
+* The ''stop'' parameter ''is required''
+* All other parameters are optional
+* If the <<.param start>> parameter is omitted, the <<.var currentTiddler>> will be used
 
-|<<.param stop>> |(required) tiddler title to stop … Needs to be an existing tiddler, otherwise there is an error message |
-|<<.param field>> |(optional) defaults to <<.param tags>>. The field used to create the breadcrumbs hierarchy |
-|<<.param start>> |(optional) tiddler title to start with. defaults to currentTiddler |
-|<<.param exclude>> |(optional) tiddler list of titles to be excluded. eg: `title [[title with spaces]]`. The <<.param exclude>> parameter can be used to modify the "path" the algorithm will take. also see: <<.param sort>> |
-|<<.param label>> |(optional) label to be shown in front of the breadcrumbs nav |
-|<<.param sort>> |(optional) defaults to yes. In TW tags are usually sorted |
+|<<.param stop>> (required)|Tiddler title to stop recursion -- Needs to be an existing tiddler, otherwise there is an error message |
+|<<.param field>> |Defaults to <<.param tags>>. The field used to create the breadcrumbs hierarchy |
+|<<.param start>> |Tiddler title to start with. defaults to <<.var currentTiddler>> |
+|<<.param exclude>> |Tiddler list of titles to be excluded. eg: `title [[title with spaces]]`. The <<.param exclude>> parameter can be used to modify the "path" the recursion will take. also see: <<.param sort>> |
+|<<.param label>> |Label to be shown in front of the breadcrumbs nav |
+|<<.param sort>> |Defaults to <<.value yes>> |
 
 !! .breadcrumbsField
 
-The “field” versions can be used to create “out of order” breadcrumbs as shown in Filter Operators
+The “field” mode can be used to create breadcrumbs defined in a "list-like" field. As used in the [[Filter Operators]] tiddler. 
+
+|<<.param start>> |The value of the <<.param start>> parameter is used to define the tiddler, where the list-values are read from. defaults to <<.var currentTiddler>> |
+
 
 !! Breadcrumbs CSS Options
 
@@ -47,3 +60,6 @@ If the user changes the global font-size an line-height in the theme to higher v
 * $:/config/docs/breadcrumbs/paddingTop ... can be used to change the top padding of the arrows
 * $:/config/docs/breadcrumbs/showArrows ... if set to "no" the plain text breadcrumbs are used independent of the screen size
 
+!! Global Mode Setting
+
+* $:/config/docs/breadcrumbs/filterMode ... defines the default "mode" the breadcrumbs macro uses for the "filter syntax" related documentation 

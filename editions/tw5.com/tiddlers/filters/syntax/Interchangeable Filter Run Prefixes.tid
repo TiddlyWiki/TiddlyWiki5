@@ -4,7 +4,7 @@ tags: [[Filter Run Prefix]]
 title: Interchangeable Filter Run Prefixs
 type: text/vnd.tiddlywiki
 
-<$macrocall $name=".breadcrumbs" stop="Filters"/>
+<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 
 !! Interchangeable Filter Run Prefixes
 

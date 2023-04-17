@@ -4,7 +4,7 @@ tags: [[Filter Run Prefix]]
 title: Named Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-<$macrocall $name=".breadcrumbs" stop="Filters"/>
+<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 
 In <<.from-version "5.1.23">> the named filter run prefixes where implemented. `:cascade`, `:map` and `:sort` have been added later as shown in the diagrams.
 

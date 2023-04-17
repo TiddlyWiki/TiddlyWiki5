@@ -4,7 +4,7 @@ tags: [[Filter Run Prefix]]
 title: Shortcut Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-<$macrocall $name=".breadcrumbs" stop="Filters"/>
+<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 
 Shortcut prefixes are commonly used by advanced users because they are fast to type but they are harder to read by less experienced users. That's why [[named prefixes|Named Filter Run Prefix]] have been created, which are more verbose. Shortcut and named filter run prefixes are interchangeable as shown in the table below.
 

@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 \whitespace trim
 
 <$list filter="[all[current]tag[Named Filter Run Prefix]]">
-	<$macrocall $name=".breadcrumbs" stop="Filters"/>
+	<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 	<$let op-head="" op-body="" op-name="">
 		<table class="doc-table">
 			<!-- purpose -->
