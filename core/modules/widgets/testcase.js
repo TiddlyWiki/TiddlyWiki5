@@ -53,20 +53,12 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		Array.prototype.push.apply(tiddlers,widget.readDataTiddlerValues());
 	});
 	this.testcaseWiki.addTiddlers(tiddlers);
-	// Load tiddlers from the optional testcaseTiddler
-	if(this.testcaseTiddler) {
-		var tiddler = this.wiki.getTiddler(this.testcaseTiddler);
-		if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple") {
-			var tiddlers = this.extractMultipleTiddlers(tiddler.fields.text);
-			this.testcaseWiki.addTiddlers(tiddlers);
-		}
-	}
 	// Unpack plugin tiddlers
 	this.testcaseWiki.readPluginInfo();
 	this.testcaseWiki.registerPluginTiddlers("plugin");
 	this.testcaseWiki.unpackPluginTiddlers();
 	this.testcaseWiki.addIndexersToWiki();
-	// Gemerate a `transclusion` variable that depends on the values of the payload tiddlers so that the template can easily make unique state tiddlers
+	// Generate a `transclusion` variable that depends on the values of the payload tiddlers so that the template can easily make unique state tiddlers
 	this.setVariable("transclusion",$tw.utils.hashString(this.testcaseWiki.getTiddlersAsJson("[all[tiddlers]]")));
 	// Generate a `testcaseInfo` variable that contains information about the subwiki in JSON format
 	var testcaseInfoData = {
@@ -78,24 +70,6 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.setVariable("testcaseInfo",JSON.stringify(testcaseInfoData));
 	// Render children from the template
 	this.renderChildren(parent,nextSibling);
-};
-
-TestCaseWidget.prototype.extractMultipleTiddlers = function(text) {
-	// Duplicates code found in $:/plugins/tiddlywiki/jasmine/run-wiki-based-tests.js
-	var rawTiddlers = text.split("\n+\n"),
-		tiddlers = [];
-	$tw.utils.each(rawTiddlers,function(rawTiddler) {
-		var fields = Object.create(null),
-			split = rawTiddler.split(/\r?\n\r?\n/mg);
-		if(split.length >= 1) {
-			fields = $tw.utils.parseFields(split[0],fields);
-		}
-		if(split.length >= 2) {
-			fields.text = split.slice(1).join("\n\n");
-		}
-		tiddlers.push(fields);
-	});
-	return tiddlers;
 };
 
 /*
@@ -126,7 +100,6 @@ TestCaseWidget.prototype.testcaseRawTiddler = function(parent,nextSibling,title,
 Compute the internal state of the widget
 */
 TestCaseWidget.prototype.execute = function() {
-	this.testcaseTiddler = this.getAttribute("testcase-tiddler");
 	this.testcaseTemplate = this.getAttribute("template","$:/core/ui/testcases/DefaultTemplate");
 	// Make child widgets
 	var parseTreeNodes = [{

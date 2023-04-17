@@ -16,6 +16,7 @@ Any operands that cannot be interpreted as a valid number will be interpreted as
 
 !! Examples
 
-<$testcase testcase-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geopoint">
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geopoint"/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>

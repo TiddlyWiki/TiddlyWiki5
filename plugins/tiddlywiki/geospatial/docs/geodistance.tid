@@ -8,6 +8,7 @@ The `geodistance` operator calculates the distance between two points in [[GeoJS
 
 !! Examples
 
-<$testcase testcase-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geodistance">
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geodistance"/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>

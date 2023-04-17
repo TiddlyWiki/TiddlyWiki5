@@ -14,38 +14,15 @@ The testcase widget creates an independent subwiki loaded with specified tiddler
 The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define the payload tiddlers to be included in the test case.
 
 |!Attribute |!Description |
-|<<.attr testcase-tiddler>> |Optional title of a tiddler containing a test case in `text/vnd.tiddlywiki-multiple` format (see below) |
 |<<.attr template>> |Optional title of the template used to display the testcase (defaults to $:/core/ui/testcases/DefaultTemplate) |
+
+! State Handling
+
+The `<$testcase>` widget sets the variable `transclusion` to a hash that reflects the names and values of all the payload tiddlers. This makes easier for test case templates to create unique state tiddler titles using the [[qualify Macro]] or QualifyWidget.
 
 ! Payload Tiddlers
 
-The payload tiddlers are the tiddler values that are loaded into the subwiki that is created to run the tests.
-
-The payload tiddlers can be created in two different ways:
-
-* Tiddlers values specfied via <<.wlink DataWidget>> widgets within the body of the `<$testcase>` widget
-* As multiple tiddlers embedded within a single tiddler of type `text/vnd.tiddlywiki-multiple` whose title is given in the <<.attr testcase-tiddler>> attribute
-
-The special tiddler type `text/vnd.tiddlywiki-multiple` is intended to simplify creating test cases that require several tiddlers. The text field consists of a series of tiddlers in the same format as `.tid` files, each separated by a line containing a single `+` character.
-
-For example:
-
-```
-title: First
-tags: one two
-
-This is the first tiddler
-+
-title: Second
-tags: three four
-
-This is the second tiddler
-+
-title: third
-tags: five six
-
-This is the third tiddler
-```
+The payload tiddlers are the tiddler values that are loaded into the subwiki that is created to run the tests. They are created via <<.wlink DataWidget>> widgets within the body of the `<$testcase>` widget.
 
 ! Test Case Templates
 
@@ -55,9 +32,11 @@ The default test case template $:/core/ui/testcases/DefaultTemplate displays a s
 
 The `<$testcase>` widget assigns a value to the `transclusion` variable that depends on the combined values of all the payload tiddlers. This means that using the `<<qualify>>` macro within a test case template will generate a unique value for each of multiple test cases within the same tiddler.
 
+! Test Case Variables
+
 The `<$testcase>` widget also assigns a block of information about the subwiki in JSON format to a the variable `testcaseInfo`. It contains the following properties:
 
-* ''titles'': an array of the titles of all the tiddlers in the subwiki (excluding shadow tiddlers)
+* ''tiddlers'': a hashmap by title of an array of all the field names of each tiddler in the subwiki (does not include shadow tiddlers unless they have been overridden)
 
 ! Test Case Conventions
 

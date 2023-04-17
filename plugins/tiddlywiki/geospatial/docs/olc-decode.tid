@@ -8,6 +8,7 @@ The `olc-decode` operator converts an [[OpenLocationCode|https://github.com/goog
 
 !! Examples
 
-<$testcase testcase-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/olc-decode">
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/olc-decode"/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>

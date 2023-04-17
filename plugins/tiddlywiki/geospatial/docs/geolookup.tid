@@ -10,6 +10,7 @@ Each input list item is interpreted as a [[GeoJSON Point Feature]] and the opera
 
 !! Examples
 
-<$testcase testcase-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geolookup">
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geolookup"/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>

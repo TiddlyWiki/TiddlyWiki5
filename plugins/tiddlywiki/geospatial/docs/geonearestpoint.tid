@@ -8,6 +8,7 @@ The `geonearestpoint` operator determines the point in a list that is nearest to
 
 !! Examples
 
-<$testcase testcase-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geonearestpoint">
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geonearestpoint"/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>

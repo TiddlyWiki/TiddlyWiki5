@@ -31,7 +31,12 @@ DataWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	var domNode = this.document.createTextNode("");
+	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(parent,nextSibling);
+	// Children must have been rendered before we can read the data values
+	domNode.textContent = JSON.stringify(this.readDataTiddlerValues());
+	this.domNodes.push(domNode);
 };
 
 /*
@@ -52,29 +57,75 @@ DataWidget.prototype.readDataTiddlerValues = function() {
 	// Read any attributes not prefixed with $
 	$tw.utils.each(this.attributes,function(value,name) {
 		if(name.charAt(0) !== "$") {
-			item[name] = value;			
+			item[name] = value;	
 		}
 	});
-	// Deal with $tiddler or $filter attributes
-	var titles;
+	item = new $tw.Tiddler(item);
+	// Deal with $tiddler, $filter or $compound-tiddler attributes
+	var tiddlers = [],title;
 	if(this.hasAttribute("$tiddler")) {
-		titles = [this.getAttribute("$tiddler")];
-	} else if(this.hasAttribute("$filter")) {
-		titles = this.wiki.filterTiddlers(this.getAttribute("$filter"));
+		title = this.getAttribute("$tiddler");
+		if(title) {
+			tiddlers.push(this.wiki.getTiddler(title));
+		}
 	}
-	if(titles) {
-		var results = [];
-		$tw.utils.each(titles,function(title,index) {
-			var tiddler = self.wiki.getTiddler(title),
-				fields;
-			if(tiddler) {
-				fields = tiddler.getFieldStrings();
-			}
-			results.push($tw.utils.extend({},fields,item));
-		})
-		return results;
+	if(this.hasAttribute("$filter")) {
+		var filter = this.getAttribute("$filter");
+		if(filter) {
+			var titles = this.wiki.filterTiddlers(filter);
+			$tw.utils.each(titles,function(title) {
+				var tiddler = self.wiki.getTiddler(title);
+				tiddlers.push(tiddler);
+			});
+		}
+	}
+	if(this.hasAttribute("$compound-tiddler")) {
+		title = this.getAttribute("$compound-tiddler");
+		if(title) {
+			tiddlers.push.apply(tiddlers,this.extractCompoundTiddler(title));
+		}
+	}
+	// Convert the literal item to field strings
+	item = item.getFieldStrings();
+	if(tiddlers.length === 0) {
+		if(Object.keys(item).length > 0 && !!item.title) {
+			return [item];
+		} else {
+			return [];
+		}
 	} else {
-		return [item];
+		var results = [];
+		$tw.utils.each(tiddlers,function(tiddler,index) {
+			var fields = tiddler.getFieldStrings();
+			results.push($tw.utils.extend({},fields,item));
+		});
+		return results;	
+	}
+};
+
+/*
+Helper to extract tiddlers from text/vnd.tiddlywiki-multiple tiddlers
+*/
+DataWidget.prototype.extractCompoundTiddler = function(title) {
+	var tiddler = this.wiki.getTiddler(title);
+	if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple") {
+		var text = tiddler.fields.text || "",
+			rawTiddlers = text.split("\n+\n"),
+			tiddlers = [];
+		$tw.utils.each(rawTiddlers,function(rawTiddler) {
+			var fields = Object.create(null),
+				split = rawTiddler.split(/\r?\n\r?\n/mg);
+			if(split.length >= 1) {
+				fields = $tw.utils.parseFields(split[0],fields);
+			}
+			if(split.length >= 2) {
+				fields.text = split.slice(1).join("\n\n");
+			}
+			tiddlers.push(new $tw.Tiddler(fields));
+		});
+		return tiddlers;
+	} else {
+		return [];
 	}
 };
 
