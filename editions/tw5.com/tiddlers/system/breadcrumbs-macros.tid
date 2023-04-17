@@ -5,6 +5,21 @@ tags: $:/tags/Macro
 title: $:/editions/tw5.com/breadcrumbs-macros
 type: text/vnd.tiddlywiki
 
+\define .bc-link(title, class)
+\whitespace trim
+<$link to=<<__title__>> class=<<__class__>> tooltip=<<__title__>> >
+	<$macrocall $name=".bc-caption" title=<<__title__>> />
+</$link>
+\end
+
+\define .bc-caption(title)
+\whitespace trim
+<$let name="tv-wikilinks" value="no">
+	<$view tiddler=<<__title__>> field="caption">
+		<$transclude tiddler=<<__title__>> field="title"/>
+	</$view>
+</$let>
+\end
 
 <!-- This ".breadcrumbs" macro uses a list-like field (default: tags) as the start of the hierarchy -->
 <!-- mode defaults to "story" ... "simple" will open breadcrumb links according to the global settings -->
@@ -33,9 +48,9 @@ type: text/vnd.tiddlywiki
 		next={{{ [<__current__>get<__field__>enlist-input[]] -[enlist<__exclude__>] +[subfilter<sub>] :else[<__stop__>] }}}
 	>
 		<$set name="excluded" filter="[enlist<__exclude__>] :or[<next>]">
-			<$list filter="[<next>!match<__stop__>]" emptyMessage="""<$link to=<<next>> class="tc-small-gap-right tc-crumb-first"><<next>></$link>""">
+			<$list filter="[<next>!match<__stop__>]" emptyMessage="""<$macrocall $name=".bc-link" title=<<next>> class="tc-small-gap-right tc-crumb-first"/>""">
 				<$macrocall $name=".bcRecursion" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> filter=<<__filter__>>/>
-				<$link class="tc-small-gap-right tc-crumb"/>
+				<$macrocall $name=".bc-link" title=<<currentTiddler>> class="tc-small-gap-right tc-crumb"/>
 			</$list>
 		</$set>
 	</$let>
@@ -48,7 +63,10 @@ type: text/vnd.tiddlywiki
 <$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
 <nav class="tc-breadcrumbs">
 	<<__label__>>
-	<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+	<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
+	<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb">
+		<$macrocall $name=".bc-caption" title=<<__start__>> />
+	</span>
 </nav>
 </$set>
 </$let>
@@ -72,7 +90,7 @@ type: text/vnd.tiddlywiki
 \define .openInStory(target, source, class)
 \whitespace trim
 <$linkcatcher actions=<<.openInStoryActions>> >
-	<$link to=<<__target__>> class=<<__class__>> ><<__target__>></$link>
+	<$macrocall $name=".bc-link" title=<<__target__>> class=<<__class__>>/>
 </$linkcatcher>
 \end
 
@@ -105,7 +123,10 @@ type: text/vnd.tiddlywiki
 	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
 		<nav class="tc-breadcrumbs" aria-label=<<__start__>> >
 			<<__label__>>
-			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
+			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb">
+				<$macrocall $name=".bc-caption" title=<<__start__>> />
+			</span>
 		</nav>
 	</$set>
 </$let>
@@ -131,7 +152,7 @@ type: text/vnd.tiddlywiki
 \define .openFieldInStory(target, class)
 \whitespace trim
 <$linkcatcher actions=<<.openFieldInStoryActions>> >
-	<$link to=<<__target__>> class=<<__class__>> ><<__target__>></$link>
+	<$macrocall $name=".bc-link" title=<<__target__>> class=<<__class__>>/>
 </$linkcatcher>
 \end
 
@@ -147,7 +168,9 @@ type: text/vnd.tiddlywiki
 			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>] -[<first>]">
 				<$macrocall $name=".openFieldInStory" target=<<currentTiddler>> class="tc-small-gap-right tc-crumb"/>
 			</$list>
-			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb">
+				<$macrocall $name=".bc-caption" title=<<__start__>> />
+			</span>
 		</nav>
 	</$set>
 </$let>
