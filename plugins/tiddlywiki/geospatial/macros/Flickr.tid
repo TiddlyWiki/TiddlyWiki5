@@ -1,0 +1,93 @@
+title: $:/plugins/tiddlywiki/geospatial/macros/Flickr
+tags: $:/tags/Macro
+
+<!--
+Get items from a Flickr album/interestingness/collection etc.
+-->
+\procedure flickr-get-items(per_page:"100",page_number:"1",method:"flickr.photosets.getPhotos",paramName:"group_id",paramValue:"",resultPhotoRoot:"photoset")
+
+\procedure completion()
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+	<$action-log msg="In completion"/>
+	<$action-log/>
+	<!-- Success -->
+	<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+		<$list filter="[<data>jsonindexes<resultPhotoRoot>,[photo]]" variable="photoIndex">
+			<$let
+				photoData={{{ [<data>jsonextract<resultPhotoRoot>,[photo],<photoIndex>] }}}
+				photoFarm={{{ [<photoData>jsonget[farm]] }}}
+				photoServer={{{ [<photoData>jsonget[server]] }}}
+				photoID={{{ [<photoData>jsonget[id]] }}}
+				photoSecret={{{ [<photoData>jsonget[secret]] }}}
+			>
+				<$action-setfield
+					$tiddler={{{ [<photoID>addprefix[Flickr Photo ]] }}}
+					tags="$:/tags/GeoMarker $:/tags/FlickrPhoto"
+					caption={{{ [<photoData>jsonget[title]] }}}
+					lat={{{ [<photoData>jsonget[latitude]] }}}
+					long={{{ [<photoData>jsonget[longitude]] }}}
+					alt="0"
+					photo-url={{{ [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_b.jpg]] }}}
+					icon-url={{{ [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_s.jpg]] }}}
+				/>
+			</$let>
+		</$list>
+		<$let
+			pages={{{ [<data>jsonget[photos],[pages]] }}}
+		>
+			<$list filter="[<page_number>compare:number:lt<pages>]" variable="ignore">
+				<$macrocall $name="flickr-get-items" page_page=<<per_page>> page_number={{{ [<page_number>add[1]] }}} method=<<method>> resultPhotoRoot=<<resultPhotoRoot>>/>
+			</$list>
+		</$let>
+	</$list>
+\end completion
+
+\procedure progress()
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+	<$action-log message="In progress-actions"/>
+\end progress
+
+\procedure request-url()
+https://api.flickr.com/services/rest/
+\end request-url
+
+<$action-sendmessage
+	$message="tm-http-request"
+	url=<<request-url>>
+	method="GET"
+	query-method=<<method>>
+	query-extras="geo"
+	query-per_page=<<per_page>>
+	query-page=<<page_number>>
+	query-format="json"
+	query-nojsoncallback="1"
+	$names="[<paramName>addprefix[query-]]"
+	$values=<<paramValue>>
+	header-accept="application/json"
+	password-query-api_key="flickr-api-key"
+	bind-status="$:/temp/flickr/status"
+	bind-progress="$:/temp/flickr/progress"
+	oncompletion=<<completion>>
+	onprogress=<<progress>>
+	var-method=<<method>>
+	var-per_page=<<per_page>>
+	var-page_number=<<page_number>>
+	var-resultPhotoRoot=<<resultPhotoRoot>>
+/>
+\end
+
+\procedure flickr-get-photos-of-user-items(userID)
+<$macrocall $name="flickr-get-items" method="flickr.people.getPhotosOf" paramName="user_id" paramValue=<<userID>> resultPhotoRoot="photos"/>
+\end
+
+\procedure flickr-get-group-items(groupID)
+<$macrocall $name="flickr-get-items" method="flickr.groups.pools.getPhotos" paramName="group_id" paramValue=<<groupID>> resultPhotoRoot="photos"/>
+\end
+
+\procedure flickr-get-album-items(albumID)
+<$macrocall $name="flickr-get-items" method="flickr.photosets.getPhotos" paramName="photoset_id" paramValue=<<albumID>> resultPhotoRoot="photoset"/>
+\end
+
+\procedure flickr-get-interesting-items()
+<$macrocall $name="flickr-get-items" method="flickr.interestingness.getList" resultPhotoRoot="photos"/>
+\end
