@@ -4,7 +4,7 @@ tags: $:/tags/Macro
 <!--
 Get items from a Flickr album/interestingness/collection etc.
 -->
-\procedure flickr-get-items(per_page:"100",page_number:"1",method:"flickr.photosets.getPhotos",paramName:"group_id",paramValue:"",resultPhotoRoot:"photoset")
+\procedure flickr-get-items(per_page:"100",page_number:"1",method:"flickr.photosets.getPhotos",paramName:"group_id",paramValue:"",resultPhotoRoot:"photoset",photoTiddlerTemplate:"$:/plugins/tiddlywiki/geospatial/macros/Flickr/DefaultPhotoTemplate")
 
 \procedure completion()
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
@@ -19,24 +19,30 @@ Get items from a Flickr album/interestingness/collection etc.
 				photoServer={{{ [<photoData>jsonget[server]] }}}
 				photoID={{{ [<photoData>jsonget[id]] }}}
 				photoSecret={{{ [<photoData>jsonget[secret]] }}}
+				photoTiddlerTitleFilter={{{ [<photoTiddlerTemplate>getindex[title]] }}}
+				photoTiddlerTitle={{{ [subfilter<photoTiddlerTitleFilter>] }}}
 			>
-				<$action-setfield
-					$tiddler={{{ [<photoID>addprefix[Flickr Photo ]] }}}
-					tags="$:/tags/GeoMarker $:/tags/FlickrPhoto"
-					caption={{{ [<photoData>jsonget[title]] }}}
-					lat={{{ [<photoData>jsonget[latitude]] }}}
-					long={{{ [<photoData>jsonget[longitude]] }}}
-					alt="0"
-					photo-url={{{ [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_b.jpg]] }}}
-					icon-url={{{ [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_s.jpg]] }}}
-				/>
+				<$list filter="[<photoTiddlerTemplate>indexes[]]" variable="fieldName">
+					<$let fieldValueFilter={{{ [<photoTiddlerTemplate>getindex<fieldName>] }}}>
+						<$action-log
+							$tiddler=<<photoTiddlerTitle>>
+							$field=<<fieldName>>
+							$value={{{ [subfilter<fieldValueFilter>] }}}
+						/>
+						<$action-setfield
+							$tiddler=<<photoTiddlerTitle>>
+							$field=<<fieldName>>
+							$value={{{ [subfilter<fieldValueFilter>] }}}
+						/>
+					</$let>
+				</$list>
 			</$let>
 		</$list>
 		<$let
 			pages={{{ [<data>jsonget[photos],[pages]] }}}
 		>
 			<$list filter="[<page_number>compare:number:lt<pages>]" variable="ignore">
-				<$macrocall $name="flickr-get-items" page_page=<<per_page>> page_number={{{ [<page_number>add[1]] }}} method=<<method>> resultPhotoRoot=<<resultPhotoRoot>>/>
+				<$macrocall $name="flickr-get-items" page_page=<<per_page>> page_number={{{ [<page_number>add[1]] }}} method=<<method>> resultPhotoRoot=<<resultPhotoRoot>> photoTiddlerTemplate=<<photoTiddlerTemplate>>/>
 			</$list>
 		</$let>
 	</$list>
@@ -73,6 +79,7 @@ https://api.flickr.com/services/rest/
 	var-per_page=<<per_page>>
 	var-page_number=<<page_number>>
 	var-resultPhotoRoot=<<resultPhotoRoot>>
+	var-photoTiddlerTemplate=<<photoTiddlerTemplate>>
 />
 \end
 
