@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 \define .bc-link(title, class)
 \whitespace trim
-<$link to=<<__title__>> class=<<__class__>> tooltip=<<__title__>> >
+<$link to=<<__title__>> class=<<__class__>> aria-label={{{ [<__title__>get[caption]else<__title__>] }}} >
 	<$macrocall $name=".bc-caption" title=<<__title__>> />
 </$link>
 \end
@@ -89,7 +89,7 @@ type: text/vnd.tiddlywiki
 		<nav class="tc-breadcrumbs" aria-label=<<__start__>> >
 			<<__label__>>
 			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
-			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb">
+			<span tabindex="0" aria-current="location" class="tc-crumb" aria-label={{{ [<__start__>get[caption]else<__start__>]}}} >
 				<$macrocall $name=".bc-caption" title=<<__start__>> />
 			</span>
 		</nav>
@@ -133,7 +133,7 @@ type: text/vnd.tiddlywiki
 			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>] -[<first>]">
 				<$macrocall $name=".openFieldInStory" target=<<currentTiddler>> class="tc-small-gap-right tc-crumb"/>
 			</$list>
-			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb">
+			<span tabindex="0" aria-current="location" class="tc-crumb" aria-label={{{ [<__start__>get[caption]else<__start__>]}}}>
 				<$macrocall $name=".bc-caption" title=<<__start__>> />
 			</span>
 		</nav>
@@ -171,7 +171,7 @@ type: text/vnd.tiddlywiki
 	<nav class="tc-breadcrumbs">
 		<<__label__>>
 		<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
-		<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb">
+		<span tabindex="0" aria-current="location" class="tc-crumb" aria-label={{{ [<__start__>get[caption]else<__start__>]}}}>
 			<$macrocall $name=".bc-caption" title=<<__start__>> />
 		</span>
 	</nav>
