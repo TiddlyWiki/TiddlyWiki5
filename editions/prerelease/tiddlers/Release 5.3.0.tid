@@ -1,6 +1,6 @@
 caption: 5.3.0
-created: 20221019081352303
-modified: 20221019081352303
+created: 20230419103154368
+modified: 20230419103154368
 tags: ReleaseNotes
 title: Release 5.3.0
 type: text/vnd.tiddlywiki
@@ -8,8 +8,6 @@ type: text/vnd.tiddlywiki
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/master...parameterised-transclusions]]//
 
 ! About v5.3.0
-
-<div style="background: yellow; border: 1px solid #880; padding: 0.5em; border-radius: 3px;">This is a preview of a [[pull request|https://github.com/Jermolene/TiddlyWiki5/pull/6666]] which has not yet been merged. At this point, all the changes here are provisional, and may be subject to further changes as a result of feedback from users.</div>
 
 This pre-release introduces a number of significant improvements and new features related to some of TiddlyWiki's most fundamental components: macros, widgets, operators and transclusion.
 
