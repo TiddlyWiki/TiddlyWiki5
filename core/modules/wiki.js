@@ -988,7 +988,8 @@ exports.parseText = function(type,text,options) {
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
 		wiki: this,
-		_canonical_uri: options._canonical_uri
+		_canonical_uri: options._canonical_uri,
+		configTrimWhiteSpace: options.configTrimWhiteSpace
 	});
 };
 
@@ -1028,10 +1029,11 @@ exports.parseTextReference = function(title,field,index,options) {
 };
 
 exports.getTextReferenceParserInfo = function(title,field,index,options) {
-	var tiddler,
+	var defaultType = options.defaultType || "text/vnd.tiddlywiki",
+		tiddler,
 		parserInfo = {
 			sourceText : null,
-			parserType : "text/vnd.tiddlywiki"
+			parserType : defaultType
 		};
 	if(options.subTiddler) {
 		tiddler = this.getSubTiddler(title,options.subTiddler);
@@ -1077,19 +1079,20 @@ exports.makeWidget = function(parser,options) {
 			children: []
 		},
 		currWidgetNode = widgetNode;
-	// Create set variable widgets for each variable
-	$tw.utils.each(options.variables,function(value,name) {
-		var setVariableWidget = {
-			type: "set",
+	// Create let variable widget for variables
+	if($tw.utils.count(options.variables) > 0) {
+		var letVariableWidget = {
+			type: "let",
 			attributes: {
-				name: {type: "string", value: name},
-				value: {type: "string", value: value}
 			},
 			children: []
 		};
-		currWidgetNode.children = [setVariableWidget];
-		currWidgetNode = setVariableWidget;
-	});
+		$tw.utils.each(options.variables,function(value,name) {
+			$tw.utils.addAttributeToParseTreeNode(letVariableWidget,name,"" + value);
+		});
+		currWidgetNode.children = [letVariableWidget];
+		currWidgetNode = letVariableWidget;
+	}
 	// Add in the supplied parse tree nodes
 	currWidgetNode.children = parser ? parser.tree : [];
 	// Create the widget

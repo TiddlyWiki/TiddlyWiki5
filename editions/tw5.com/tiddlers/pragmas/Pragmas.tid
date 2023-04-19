@@ -1,0 +1,13 @@
+created: 20220917112416666
+modified: 20230419103154329
+tags: Concepts [[WikiText Parser Modes]]
+title: Pragmas
+type: text/vnd.tiddlywiki
+
+A <<.def pragma>> is a special component of WikiText that provides control over the way the remaining text is parsed.
+
+Pragmas occupy lines that start with `\`. They can only appear at the start of the text of a tiddler, but blank lines and comments are allowed between them. If a pragma appears in the main body of the text, it is treated as if it was ordinary text.
+
+The following pragmas are available:
+
+<<list-links "[tag[Pragmas]]">>

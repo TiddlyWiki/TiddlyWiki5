@@ -1,0 +1,20 @@
+title: CustomWidget/Slotted/Empty
+description: Custom widget with empty slotted values
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\widget $$mywidget()
+<$slot $name=ts-raw>the body is empty</$slot>
+\end
+
+#<$$mywidget/>
+#<$$mywidget></$$mywidget>
+#<$$mywidget>the body is not empty</$$mywidget>
+
++
+title: ExpectedResult
+
+<ol><li>the body is empty</li><li>the body is empty</li><li>the body is not empty</li></ol>

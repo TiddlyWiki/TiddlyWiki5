@@ -143,7 +143,7 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
-			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/>\n"},
+			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/>"},
 			{title: "TiddlerTwo", text: "<$transclude tiddler='TiddlerOne'/>"}
 		]);
 		// Test parse tree
@@ -157,7 +157,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>\n");
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
 	});
 
 	it("should deal with SVG elements", function() {
@@ -683,7 +683,7 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>New value</p>");
 	});
 
-	it("should can mix setWidgets and macros when importing", function() {
+	it("should support mixed setWidgets and macros when importing", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
@@ -697,6 +697,20 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
+	});
+
+	it("should skip parameters widgets when importing", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "B", text: "<$parameters bee=nothing><$set name='B' value='Bval'>\n\ndummy text</$set></$parameters>"},
+		]);
+		var text = "\\import B\n<<B>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Bval</p>");
 	});
 
 	it("can have more than one macroDef variable imported", function() {

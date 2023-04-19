@@ -1,0 +1,28 @@
+created: 20221009124003601
+modified: 20230419103154328
+tags: Concepts Reference
+title: Functions
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+<<.from-version "5.3.0">> A <<.def function>> is a named snippet of text containing a [[Filter Expression]]. Functions can have named parameters which are available within the function as variables.
+
+Functions are usually defined with the [[Pragma: \function]]:
+
+```
+\function my-function(parameter:"2")
+[<parameter>multiply[1.5]]
+\end
+```
+
+Functions can be invoked in several ways:
+
+* Directly transclude functions with the syntax `<<myfn param:"value">>`
+* Assign functions to widget attributes with the syntax `<div class=<<myfn param:"value">>>`
+* Invoke functions via the [[function Operator]] with the syntax `[function[myfn],[value],...]`
+* Directly invoke functions whose names start with a period as custom filter operators with the syntax `[.myfn[value]]`
+
+!! How Functions Work
+
+Functions are implemented as a special kind of [[variable|Variables]]. The only thing that distinguishes them from ordinary variables is the way that the parameters are handled.

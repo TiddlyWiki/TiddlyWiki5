@@ -1,0 +1,18 @@
+created: 20220917113154900
+modified: 20230419103154329
+tags: Pragmas
+title: Pragma: \parameters
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">> The ''\parameters'' [[pragma|Pragmas]] is used within [[procedure|Procedure Definitions]] and [[widget|Widget Definitions]] definitions to declare the parameters that are expected, and their default values. It is a shortcut syntax for the ParametersWidget.
+
+```
+\parameters (<name>[:<default-value>],<name>[:<default-value>]...)
+```
+
+For example:
+
+```
+\parameters (firstname:"Joe",lastname:"Blogs")
+```
+
