@@ -1,0 +1,154 @@
+created: 20230421020225031
+modified: 20230422144812613
+tags: 
+title: Variable Usage
+type: text/vnd.tiddlywiki
+
+\define m1(a1) $a1$ - <<__a1__>> - <<a1>>
+\procedure p1(a1) $a1$ - <<__a1__>> - <<a1>>
+\function f1(a1) "$a1$" "-" [<__a1__>] ="-" [<a1>] :and[join[ ]]
+
+!Ways to define variables and parameters
+|! how declared|! how parameters are defined|! accessing parameter values in the body|
+|\define|`()`|`$param$, <<__param__>>`|
+|~|<<.wlink ParametersWidget>> or `\parameters`|`<<param>>`|
+|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>|<<.wlink ParametersWidget>> or `\parameters`|`<<param>>`|
+|\procedure, \widget|`()`, <<.wlink ParametersWidget>> or `\parameters`|`<<param>>`|
+|\function|`()`|`<param>`|
+|javascript macros|`exports.params` javascript property array|passed as normal javascript function parameter and so accessed as a normal javascript variable|
+
+!!Examples
+These examples are meant to provide insight into the various ways of defining and using parameters. In many cases they do not illustrate best practices.
+
+!!! \define
+
+<$let eg='\define mp1(a1)  $a1$ - <<__a1__>>
+
+\define mp2() <$parameters a1><<a1>></$parameters>
+
+\define mp3()
+\parameters(a1)
+<<a1>>
+\end
+
+|<<mp1 foo>>|<<mp2 foo>>|<<mp3 foo>>|
+'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+!!! $set, $let, $vars
+
+<$let eg='<$set name="sp1" value="<$parameters a1><<a1>></$parameters>">
+<$set name="sp2" value="""
+\parameters(a1)
+<$parameters a1><<a1>></$parameters>
+""">
+<$vars vp1="<$parameters a1><<a1>></$parameters>" vp2="""
+\parameters(a1)
+<$parameters a1><<a1>></$parameters>
+""">
+<$let lp1="<$parameters a1><<a1>></$parameters>" lp2="""
+\parameters(a1)
+<$parameters a1><<a1>></$parameters>
+""">
+
+|<<sp1 foo>>|<<sp2 foo>>|
+|<<vp1 foo>>|<<vp2 foo>>|
+|<<lp1 foo>>|<<lp2 foo>>|
+</$let>
+</$vars>
+</$set>
+</$set>
+'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+!!! \procedure, \widget
+
+<$let eg='\procedure pp1(a1)  <<a1>>
+
+\procedure pp2() <$parameters a1><<a1>></$parameters>
+
+\procedure pp3()
+\parameters(a1)
+<<a1>>
+\end
+
+\procedure wp1(a1)  <<a1>>
+
+\widget wp2() <$parameters a1><<a1>></$parameters>
+
+\widget wp3()
+\parameters(a1)
+<<a1>>
+\end
+
+|<<pp1 foo>>|<<pp2 foo>>|<<pp3 foo>>|
+|<<wp1 foo>>|<<wp2 foo>>|<<wp3 foo>>|
+'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+!!! \function
+<$let eg='\function fp1(a1)  [<a1>]
+|<<fp1 foo>>|'>
+<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+<$codeblock code=<<eg>>/>
+</$let>
+
+
+!Behavior of invoked variables depends on how the variable was declared
+
+|!how invoked|!how declared|!behavior|
+|`<$transclude $variable=macro/>` or `<<macro>>` in normal wikitext context|\define|All wikitext and variable substitution and textual substitution takes place|
+|~|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|All wikitext and variable substitution takes place|
+|~|\function|Invoking a function in this way (`<<macro>>`) is a synonym for `<$text text={{{[function[macro]]}}}/>`. As with any filtered transclusion (i.e. triple curly braces), all results except the first are discarded.|
+||||
+|widget attribute: `<div class=<<macro>>/>`|\define|Textual substitution of parameters is performed on the body text. No further processing takes place. The result after textual substitution is used as the attribute's value|
+|~|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|Body text is retrieved as-is and used as the attribute's value.|
+|~|\function|When a function is invoked as `<div class=<<macro>>/>`, it is a synonym for `<div class={{{[function[macro]]}}}/>`. As with any filtered transclusion (i.e. triple curly braces), all results except the first are discarded. That first result is used as the attribute's value. Note that functions are recursively processed even when invoked in this form. In other words a filter expression in a function can invoke another function and the processing will continue|
+||||
+|filter operator parameter: `[<macro>]`|\define|Textual substitution of parameters is performed on the body text. No further processing takes place. The result after textual substitution is used as the filter operator's parameter.|
+|~|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|Body text is retrieved as-is and used as the filter operator's parameter.|
+|~|\function|The body text of the function is treated as a filter expression and evaluated. The first result is passed to the operator as a parameter. The remaining results are discarded|
+||||
+|function call in a filter expression: `[function[macro]]`|\define, <<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|Every function is a variable, but only variables defined using \function are invokable using the <<.olink function>> filter operator. Attempts to use a non-function variable is the same as if the function doesn't exist. The behavior in this case is like the identity function. All filter input is passed unchanged to the output.|
+|~|\function|The body text of the function is treated as a filter expression and evaluated. This filter expression can itself contain a function call. Filter expressions can be factored out into functions arbitrarily deep.|
+
+!! Examples
+
+Below is an example macro, procedure and function definition.  All three forms of parameter substitution `$a1$`, `<<__a1__>>`, and `<<a1>>` are included in each definition. The output helps illustrate when each form of substitution will or will not have affect.
+
+```
+\define m1(a1) $a1$ - <<__a1__>> - <<a1>>
+\procedure p1(a1) $a1$ - <<__a1__>> - <<a1>>
+\function f1(a1) $a1$ "-" [<__a1__>] ="-" [<a1>] :and[join[ ]]
+```
+
+| !Variable transclusion|!output |
+| `<<m1 foo>>`|<<m1 foo>>|
+| `<<p1 foo>>`|<<p1 foo>>|
+| `<<f1 foo>>`|<<f1 foo>>|
+| !Widget attribute|!output |
+| `<$text text=<<m1 foo>>/>`|<$text text=<<m1 foo>>/>|
+| `<$text text=<<p1 foo>>/>`|<$text text=<<p1 foo>>/>|
+| `<$text text=<<f1 foo>>/>`|<$text text=<<f1 foo>>/>|
+| !Filter operator parameter|!output |
+| `[<m1 foo>]`|<$text text={{{[<m1 foo>]}}}/>|
+| `[<p1 foo>]`|<$text text={{{[<p1 foo>]}}}/>|
+| `[<f1 foo>]`|<$text text={{{[<f1 foo>]}}}/>|
+| !Function call in filter expression|!output |
+| `[function[m1],[foo]]`|<$text text={{{[function[m1],[foo]]}}}/>|
+| `[function[p1],[foo]]`|<$text text={{{[function[p1],[foo]]}}}/>|
+| `[function[f1],[foo]]`|<$text text={{{[function[f1],[foo]]}}}/>|
+
+!Namespaces
+
+*''tiddler titles'' - tiddlers are uniquely identified by their title. The namespace for tiddler titles and variable names are completely separate.
+*''variables'' - \define, <<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget, \function all create variables. If the same name is used, then later define will overwrite earlier defined
+ *''<<.op function>> filter operator parameter'' - only variables defined using \function can be called using the <<.olink function>> operator
+ *''filter operators'' - only the [[javascript defined filter operators|Filter Operators]] and variables defined using \function with name starting with a dot can be called
+ *''widgets'' - variables defined using \widget can be invoked using `<$widget/>` syntax ONLY if the name starts a dollar sign (to override existing javascript defined widgets) or double dollar sign (to define [[custom widgets|Custom Widgets]]). Without the dollar sign prefix, defining variables using \widget is no different than using \procedure.
