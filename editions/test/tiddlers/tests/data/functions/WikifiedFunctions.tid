@@ -1,0 +1,36 @@
+title: Functions/WikifiedFunctions
+description: Wikified functions
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function fn-buffalo(param)
+[<param>addsuffix[ with a ''buffalo'']]
+\end
+
+\procedure proc-buffalo(param)
+<<param>> with a ''buffalo''
+\end
+
+\define macro-buffalo(param)
+$param$ with a ''buffalo''
+\end
+
+<<fn-buffalo "Going to lunch">>
+
+<<proc-buffalo "Going to breakfast">>
+
+<<macro-buffalo "Going to dinner">>
+
+<$transclude $variable="fn-buffalo" param="Going to lunch" $output="text/plain"/>
+
+<$transclude $variable="proc-buffalo" param="Going to breakfast" $output="text/plain"/>
+
+<$transclude $variable="macro-buffalo" param="Going to dinner" $output="text/plain"/>
+
++
+title: ExpectedResult
+
+<p>Going to lunch with a ''buffalo''</p><p>Going to breakfastwith a<strong>buffalo</strong></p><p>Going to dinner with a <strong>buffalo</strong></p>Going to lunch with a buffalo with a buffaloGoing to dinner with a buffalo

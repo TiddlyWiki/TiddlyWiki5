@@ -1,24 +1,178 @@
 caption: transclude
 created: 20130824142500000
-modified: 20220513114759336
+modified: 20230419103154329
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The TranscludeWidget dynamically imports content from another tiddler.
+The <<.wlink TranscludeWidget>> widget dynamically includes the content from another tiddler or variable, rendering it as if the transclude widget were replaced by the target content.
+
+The <<.wlink TranscludeWidget>> widget can be used to render content of any type: wikitext, images, videos, etc.
+
+Transclusion is the underlying mechanism for many higher level wikitext features, such as procedures, custom widgets and macros.
+
+! Example
+
+Here is a complete example showing the important features of the <<.wlink TranscludeWidget>> widget:
+
+```
+\procedure mymacro(name,age)
+My name is <<name>> and my age is <<age>>.
+\end
+
+<$transclude $variable="mymacro" name="James" age="19"/>
+```
+
+* `\procedure` defines a variable as a procedure with two parameters, ''name'' and ''age''
+* The content of the procedure refers to the parameters as variables
+* The <<.wlink TranscludeWidget>> widget specifies the variable to transclude, and values for the parameters.
+
+! Legacy vs. Modern Mode
+
+The <<.wlink TranscludeWidget>> widget can be used in two modes:
+
+* <<.from-version "5.3.0">> ''Modern mode'' offers the full capabilities of the <<.wlink TranscludeWidget>> widget, and incorporates the functionality of the  <<.wlink MacroCallWidget>> widget. It is indicated by the presence of at least one attribute starting with a dollar sign `$`
+* ''Legacy mode'' offers a more limited set of capabilities. It is indicated by the absence of any attributes starting with a dollar sign `$`
+
+Modern mode is recommended for use in new applications.
 
 ! Attributes
 
-|!Attribute |!Description |
-|tiddler |The title of the tiddler to transclude (defaults to the current tiddler) |
-|field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
-|index |The index of a property in a [[DataTiddler|DataTiddlers]] |
-|subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
-|mode |Override the default parsing mode for the transcluded text to "block" or "inline" |
+| !Attribute |<| !Description |
+| !(modern) | !(legacy) |~|
+|$variable |- |Name of the variable to transclude |
+|$tiddler |tiddler |The title of the tiddler to transclude (defaults to the current tiddler) |
+|$field |field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
+|$index |index |The index of a property in a [[DataTiddler|DataTiddlers]] |
+|$subtiddler |subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
+|$mode |mode |Override the default parsing mode for the transcluded text to "block" or "inline" |
+|$type |– |Optional ContentType used when transcluding variables, indexes or fields other than the ''text'' field|
+|$output |- |ContentType for the output rendering (defaults to `text/html`, can also be `text/plain` or `text/raw`) |
+|$recursionMarker |recursionMarker |Set to ''no'' to prevent creation of [[Legacy Transclusion Recursion Marker]] (defaults to ''yes'') |
+|//{attributes not starting with $}// |– |Any other attributes that do not start with a dollar are used as parameters to the transclusion |
+|//{other attributes starting with $}// |– |Other attributes starting with a single dollar sign are reserved for future use |
+|//{attributes starting with $$}// |– |Attributes starting with two dollar signs are used as parameters to the transclusion, but with the name changed to use a single dollar sign |
 
-The TranscludeWidget treats any contained content as a fallback if the target of the transclusion is not defined (ie a missing tiddler or a missing field).
+! Basic Operation
+
+The basic operation of the <<.wlink TranscludeWidget>> widget is as follows:
+
+|`<$transclude/>` |Transcludes the text field of the current tiddler |
+|`<$transclude $variable="alpha"/>` |Transcludes the variable "alpha" (note that procedures, custom widgets and macros are all special types of variable) |
+|`<$transclude $tiddler="foo"/>` |Transcludes the text field of the tiddler "foo" |
+|`<$transclude $field="bar"/>` |Transcludes the field "bar" of the current tiddler |
+|`<$transclude $index="beta"/>` |Transcludes the index "beta" of the current tiddler |
+|`<$transclude $tiddler="foo" $index="beta"/>` |Transcludes the index "beta" of the tiddler "foo" |
+
+! Transclusion Parameters
+
+Named string parameters can be passed to the <<.wlink TranscludeWidget>> widget. They are made available as variables within the transcluded text. Parameters are only supported in modern mode.
+
+When invoking a transclusion, parameters are specified as additional attributes that do not start with a dollar sign `$`:
+
+```
+<$transclude $tiddler="MyTiddler" firstParameter="One" secondParameter="Two"/>
+```
+
+To pass parameters whose names start with a dollar sign `$`, prefix them with an extra `$`. For example, to pass a parameter called `$tiddler`:
+
+```
+<$transclude $tiddler="MyTiddler" $$tiddler="One"/>
+```
+
+There are several different ways to declare parameters within a transclusion:
+
+* the <<.wlink ParametersWidget>> widget
+* the [[Pragma: \parameters]]
+* the [[Pragma: \procedure]] for declaring procedure
+* the [[Pragma: \widget]] for declaring custom widgets
+* the [[Pragma: \define]] for declaring macros
+
+An example of declaring parameters with the <<.wlink ParametersWidget>> widget:
+
+```
+<$parameters firstParameter="default" secondParameter="another default">
+    Parameters are available here as the variables <<firstParameter>> and <<secondParameter>>.
+</$parameters>
+```
+
+The [[Pragma: \parameters]] can be used as a shortcut syntax for declaring parameters. For example:
+
+```
+\parameters (firstParameter:"default",secondParameter:"another default")
+Parameters are available here as the variables <<firstParameter>> and <<secondParameter>>.
+```
+
+! Transclusion Slots
+
+Transcluded content can define special named locations called slots. At the point of transclusion, blocks of wikitext can be passed to the <<.wlink TranscludeWidget>> widget to fill those slots.
+
+Slots work very similarly to parameters except that they can contain structured wikitext, and not just plain text. The primary advantage of slots over parameters is that the contents do not need to be wrapped in quotation symbols, making it much simpler to pass complex structures.
+
+For example, here we transclude the tiddler "Example" while using the <<.wlink FillWidget>> widget to pass wikitext blocks to fill the slots called "positive" and "negative":
+
+```
+<$transclude $tiddler="Example">
+  <$fill $name="positive">
+    <h1>This is positive</h1>
+  </$fill>
+  <$fill $name="negative">
+    <h3>This is negative</h3>
+  </$fill>
+</$transclude>
+```
+
+The tiddler "Example" uses the <<.wlink SlotWidget>> widget to specify the slots to be filled:
+
+```
+<ol>
+  <li><$slot $name="positive"/></li>
+  <li><$slot $name="negative"/></li>
+</ol>
+```
+
+The output will be equivalent to:
+
+```
+<ol>
+  <li>
+    <h1>This is positive</h1>
+  </li>
+  <li>
+    <h3>This is negative</h3>
+  </li>
+</ol>
+```
+
+
+! Missing Transclusion Targets
+
+The TranscludeWidget uses the special slot `ts-missing` to specify the content to be rendered if the transclusion target is not defined (i.e. a missing tiddler or a missing field).
+
+For example:
+
+```
+<$transclude $tiddler="MissingTiddler">
+<$fill $name="ts-missing">
+This content is displayed if `MissingTiddler` is missing.
+</$fill>
+<$fill $name="other">
+This content is passed to the transclusion as the slot value `other`
+</$fill>
+</$transclude>
+```
+
+If no slots values are specified within the <<.wlink TranscludeWidget>> widget then the entire content of the widget is used as the missing content.
+
+For example:
+
+```
+<$transclude $tiddler="MissingTiddler">
+This content is displayed if `MissingTiddler` is missing.
+</$transclude>
+```
 
 ! Parsing modes
 

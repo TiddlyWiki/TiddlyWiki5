@@ -168,13 +168,13 @@ FramedEngine.prototype.fixHeight = function() {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
-				this.iframeNode.style.height = (newHeight + 14) + "px"; // +14 for the border on the textarea
+				this.iframeNode.style.height = newHeight + "px";
 			}
 		} else {
 			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
 			this.domNode.style.height = fixedHeight + "px";
-			this.iframeNode.style.height = (fixedHeight + 14) + "px";
+			this.iframeNode.style.height = fixedHeight + "px";
 		}
 	}
 };
@@ -183,9 +183,11 @@ FramedEngine.prototype.fixHeight = function() {
 Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
-	if(this.domNode.focus && this.domNode.select) {
+	if(this.domNode.focus) {
 		this.domNode.focus();
-		this.domNode.select();
+	}
+	if(this.domNode.select) {
+		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
 	}
 };
 

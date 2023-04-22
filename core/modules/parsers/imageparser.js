@@ -28,6 +28,8 @@ var ImageParser = function(type,text,options) {
 		}
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["image/svg+xml"] = ImageParser;

@@ -1,5 +1,5 @@
 created: 20150110182600000
-modified: 20211206080809651
+modified: 20230325161424684
 tags: [[Improving TiddlyWiki Documentation]]
 title: Documentation Macros
 type: text/vnd.tiddlywiki
@@ -57,6 +57,13 @@ The following macros are used throughout ~TiddlyWiki's documentation. Their name
 |.vlink2 |a link to a variable, with specified target |<<.vlink2 foo "Examples of Variables">> |
 |.wlink |a link to a widget |<<.wlink ButtonWidget>> |
 |.wlink2 |a link to a widget, with specified text |<<.wlink2 foo ButtonWidget>> |
+
+!Tabs
+|!Macro |!Used for |!Example |
+|.doc-tabs |showing a tab set in a documentation tiddler | -- |
+|.doc-tab-link |button to activate a tab | -- |
+|.widget-attr-link |button with a widget attribute name to activate a tab | -- |
+
 
 !User interface
 

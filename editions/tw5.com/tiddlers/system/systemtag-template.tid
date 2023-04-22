@@ -16,6 +16,6 @@ The following tiddlers are tagged with <<tag>>
 <$list filter='[all[tiddlers+shadows]tag<tag>sort[]]'>
 <tr>
 <td><$link/></td>
-<td>{{!!caption}}</td>
+<td><$transclude field="caption"><$transclude field="description"><$view field="title"/></$transclude></$transclude></td>
 </tr>
 </$list></table></$list></$let></$list>

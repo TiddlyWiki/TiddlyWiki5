@@ -11,7 +11,7 @@ title: "Noteself" by Danielo Rodríguez
 type: text/vnd.tiddlywiki
 url: https://noteself.github.io/
 
-~NoteSelf is your personal, private, customizable, Evernote-like experience.
+~NoteSelf is your personal, private, customisable, Evernote-like experience.
 You want cloud? Fine! You don't? Fine too! It's all yours, It's your decision!
 Why not be a bit selfish?
 
@@ -26,9 +26,9 @@ You already know and love Evernote, we know it. It is comfortable, it syncs, has
 Wow, it's almost perfect, but what about:
 
 * Privacy - Everything is stored on the Evernote's servers!
-* Customization - If you don't like the interface of Evernote, there's nothing you can do
+* Customisation - If you don't like the interface of Evernote, there's nothing you can do
 
-~NoteSelf is built on top of ~TiddlyWiki, a powerful, free, highly customizable and open-source personal wiki.
-We took the best of it, it's powerful customization system, and mixed it with one of the best
-embedded databases available, [[PouchDb|http://www.pouchdb.com]], for bringing the synchronization capabilities you need.
+~NoteSelf is built on top of ~TiddlyWiki, a powerful, free, highly customisable and open-source personal wiki.
+We took the best of it, it's powerful customisation system, and mixed it with one of the best
+embedded databases available, [[PouchDb|http://www.pouchdb.com]], for bringing the synchronisation capabilities you need.
 <<<

@@ -1,0 +1,33 @@
+title: Transclude/CustomWidget/Simple
+description: Custom widget definition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<!-- Define the <$$mywidget> widget by defining a transcludable variable with that name -->
+\widget $$mywidget(one:'Jaguar')
+\whitespace trim
+<$text text=<<one>>/>
+<$slot $name="ts-raw">
+	Whale
+</$slot>
+\end
+<$$mywidget one="Dingo">
+	Crocodile
+</$$mywidget>
+<$$mywidget one="BumbleBee">
+	Squirrel
+</$$mywidget>
+<$$mywidget/>
++
+title: ExpectedResult
+
+<p>DingoCrocodileBumbleBeeSquirrelJaguarWhale</p>

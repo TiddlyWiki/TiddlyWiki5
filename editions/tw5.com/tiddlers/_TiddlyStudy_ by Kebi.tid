@@ -1,0 +1,26 @@
+created: 20210101162308245
+modified: 20230110220417543
+tags: [[Community Editions]]
+title: "TiddlyStudy" by Kebi
+type: text/vnd.tiddlywiki
+url: https://postkevone.github.io/tiddlystudy/
+
+A adaptation of TiddlyWiki perfect for using as a Notebook sysetem.
+
+{{!!url}}
+
+<<<
+Tiddly Research is a free and local note-taking environment based on TiddlyWiki
+
+Core Features:
+
+* Bidirectional note linking on multiple levels
+* Tags
+* Linked references
+* Unlinked references
+* Transclusions
+* Bullet point based hierarchical note taking structure
+* Integration with the spaced repetition flashcards tool Anki
+* TODOs
+* and more
+<<<

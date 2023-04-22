@@ -1,0 +1,39 @@
+created: 20220917091428117
+modified: 20230419103154328
+title: Macro Pitfalls
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+In the early days of TiddlyWiki, [[macros|Macros]] were the best way of encapsulating snippets for reuse, and so they were used extensively. However, they have always suffered from some significant disadvantages that can give rise to errors and poor performance.
+
+<<.from-version "5.3.0">> Macros have been joined by [[Procedures]], [[Custom Widgets]] and [[Functions]] which together provide more robust and flexible ways to encapsulate and re-use code. It is now recommended to only use macros when textual substitution is specifically required.
+
+! Shortcomings of Textual Substitution
+
+TiddlyWiki's handling of [[macro|Macros]] parameters is based on "textual substitution" which means that the string values of the parameters provided when calling a macro are plugged into the macro definition before it is wikified.
+
+Here's a typical example of the approach in early versions of TiddlyWiki 5. The intention is to provide a macro that takes a single parameter of the title of the tiddler to view:
+
+```
+\define mymacro(title)
+<$codeblock code={{$title$}}/>
+\end
+```
+
+That works for simple cases like `<<mymacro "HelloThere">>` but is subtly brittle.  For example, the macro above would fail with tiddler titles containing double closing curly braces. Trying to use it with the title `foo}}bar` would lead to the macro being expanded to the following invalid syntax:
+
+```
+<$codeblock code={{foo}}bar}}/>
+```
+
+As a result of this issue, for many years  the TiddlyWiki 5 user interface failed if a variety of combinations of special characters were encountered in tiddler titles.
+
+This issue has been mitigated over the years, particularly by providing access to the macro parameters as variables. However, for backwards compatibility, this was done without affecting the existing syntax, which required us to adopt the clumsy protocol of wrapping the parameter name in double underscores to get the name of the corresponding variable.
+
+! Performance of Global Macros
+
+Global [[Macro Definitions]] defined with the [[SystemTag: $:/tags/Macro]] suffer from poor performance because every macro has to be parsed regardless of whether it is actually used.
+
+Furthermore, the way that definitions are imported means that updating a tiddler tagged [[SystemTag: $:/tags/Macro]] will cause the entire page to be refreshed.
+

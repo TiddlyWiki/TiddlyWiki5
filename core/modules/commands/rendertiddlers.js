@@ -57,7 +57,7 @@ Command.prototype.execute = function() {
 				exportPath = path.resolve(outputPath,macroPath + extension);
 			}
 		}
-		var finalPath = exportPath || path.resolve(pathname,encodeURIComponent(title) + extension);
+		var finalPath = exportPath || path.resolve(pathname,$tw.utils.encodeURIComponentExtended(title) + extension);
 		$tw.utils.createFileDirectories(finalPath);
 		fs.writeFileSync(finalPath,text,"utf8");
 	});

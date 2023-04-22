@@ -1,0 +1,61 @@
+caption: parameters
+created: 20220909111836951
+modified: 20230419103154328
+tags: Widgets
+title: ParametersWidget
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">> The <<.wlink ParametersWidget>> widget is used within transcluded content to declare the parameters to be made available to the <<.wlink TranscludeWidget>> widget.
+
+There are shortcuts for common scenarios that can often make it unnecessary to use the <<.wlink ParametersWidget>> widget directly:
+
+* the [[Pragma: \parameters]]
+* the [[Pragma: \procedure]] for declaring procedure
+* the [[Pragma: \widget]] for declaring custom widgets
+
+The <<.wlink ParametersWidget>> widget must be used directly in the following situations:
+
+* When the default value of a parameter must be computed dynamically
+* When the `$depth` attribute is used to retrieve parameters from a parent transclusion (see below)
+
+! Content and Attributes
+
+The content of the <<.wlink ParametersWidget>> widget is the scope within which the values of the parameters can be accessed as ordinary variables.
+
+|!Attribute |!Description |
+|$depth |The index of the parent transclusion from which to obtain the parameters (defaults to 1). See below |
+|$parseMode |Optional name of a variable in which is made available the parse mode of the content of the parent transclusion (the parse mode can be "inline" or "block") |
+|$parseTreeNodes |Optional name of a variable in which is made available the JSON representation of the parse tree nodes contained within the parent transclusion |
+|$slotFillParseTreeNodes |Optional name of a variable in which is made available the JSON representation of the parse tree nodes corresponding to each fill widget contained within the parent transclusion (as an object where the keys are the slot names and the values are the parse tree nodes) |
+|$params |Optional name of a variable in which is made available the JSON representation of the parameters passed to the parent transclusion (as an object where the keys are the parameter names and the values are the coresponding values) |
+|//{attributes not starting with $}// |Any attributes that do not start with a dollar are used as parameters, with the value specifying the default to be used for missing parameters |
+|//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
+|//{attributes starting with $$}// |Attributes starting with two dollar signs are used as parameters to the transclusion, but with the name changed to use a single dollar sign. The value specifies the default to be used for missing parameters |
+
+<<.note "Note the special treatment required for parameters names that start with a `$`; this can be avoided by using one of the pragmas">>
+
+!! `$depth` Attribute
+
+By default, the <<.wlink ParametersWidget>> widget retrieves parameters from the immediate parent transclusion. The `$depth` attribute permits access to the parameters of parent transclusions by specifying an index to the parent to be inspected ("1" is the immediate parent, "2" is the parent of that parent, etc.). This is useful in some situations where an intervening transclusion prevents immediate access to desired parameters.
+
+!! `$parseMode`, `$parseTreeNodes`, `$slotFillParseTreeNodes` and `$params` Attributes
+
+These attributes provide low level access to the contents of the transcluding widget:
+
+* The `$params` attribute provides access to the raw parameters provided to the transcluding widget. Represented in JSON as an object with keys of the parameter names and values of the corresponding parameter values
+* The `$parseMode` attribute contains `block` or `inline` to indicate whether the contents was parsed in block or inline mode
+* The `$parseTreeNodes` attribute provides access to the raw parse tree nodes that represent the contents of the transcluding widget. Represented in JSON as an array of parse tree nodes
+* The `$slotFillParseTreeNodes` attribute provides access to the raw parse tree nodes corresponding to the filled slots within the contents of the transcluding widget. Represented in JSON as an object with keys of the slot name and values being an array of parse tree nodes
+
+! Examples
+
+Here the <<.wlink ParametersWidget>> widget is used to declare a parameter whose default value is transcluded from another tiddler.
+
+<$macrocall $name='wikitext-example-without-html' 
+src="""\procedure mymacro
+<$parameters name={{$:/SiteTitle}} age="21">
+My name is <<name>> and my age is <<age>>.
+</$parameters>
+\end
+
+<$transclude $variable="mymacro" age="19"/>"""/>

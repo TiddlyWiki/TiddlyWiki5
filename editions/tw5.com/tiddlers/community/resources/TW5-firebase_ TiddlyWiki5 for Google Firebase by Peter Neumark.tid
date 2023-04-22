@@ -20,7 +20,7 @@ I've been using TiddlyWiki5 with Google Firebase for over a year now. It's stabl
 
 Please consider this version a proof of concept rather than a polished product! My focus was on multi-device or small-team collaboration:
 
-* Basic authorization (bags have an access policy determining who can read / write them).
+* Basic authorisation (bags have an access policy determining who can read / write them).
 * Multiple wikis can be hosted under a single firebase account.
 * It uses Firebase's built-in social auth to log in users.
 * Tiddlers are written individually with locking, preventing users overwriting each others' updates.

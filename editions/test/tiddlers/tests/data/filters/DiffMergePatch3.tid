@@ -1,0 +1,22 @@
+title: Filters/DiffMergePatch3
+description: Tests for diff-merge-patch derived operators
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\define text1()
+the cat sat on the mat
+\end
+
+\define patches()
+**NOT A VALID PATCH**
+\end
+
+<$text text={{{ [<text1>applypatches<patches>] }}}/>
+
++
+title: ExpectedResult
+
+the cat sat on the mat
