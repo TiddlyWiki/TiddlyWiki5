@@ -6,8 +6,8 @@ type: text/vnd.tiddlywiki
 
 \import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 
-\define show-icon(title)
-<$wikify name="icon" text="{{$title$}}" output="html">
+\procedure show-icon(title)
+<$wikify name="icon" text={{{ [<title>addprefix[{{]addsuffix[}}]] }}} output="html">
 <$text text=<<icon>>/>
 </$wikify>
 \end
