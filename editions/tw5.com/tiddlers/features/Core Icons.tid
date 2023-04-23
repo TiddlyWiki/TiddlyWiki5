@@ -1,5 +1,8 @@
 title: Core Icons
 tags: Features
+modified: 20230423103154329
+created: 20230423103154329
+
 
 !! Introduction
 
@@ -16,6 +19,14 @@ The core icons are parameterised. The first parameter `size` specified the size 
 
 <<wikitext-example-without-html """{{$:/core/images/picture|64px}}
 <$transclude $tiddler="$:/core/images/picture" size="32px"/>
+""">>
+
+Here is an example of dynamically resizing icons:
+
+<<wikitext-example-without-html """<$list filter="[range[24,56,8]]" variable=iconSize>
+<$text text={{{ [<iconSize>addsuffix[px]] }}} />
+<$transclude $tiddler="$:/core/icon" size=<<iconSize>>/>
+</$list>
 """>>
 
 Some icons take further parameters to customise how they are rendered. For example, the $:/core/images/new-journal-button icon takes an additional parameter `day` that specifies the day of the month that should be shown on the calendar. It defaults to the current date if not specified
