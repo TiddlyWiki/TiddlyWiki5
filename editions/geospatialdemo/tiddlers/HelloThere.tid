@@ -12,16 +12,16 @@ This demo requires that the API keys needed to access external services be obtai
 
 !! Demos
 
-* Visit the ~GeoLayers and ~GeoMarkers tabs to see the data loaded into this wiki
+* Visit the ~GeoFeatures and ~GeoMarkers tabs to see the data loaded into this wiki
 * Click on a link to a layer or marker to open the corresponding tiddler that includes a map
 * Use the Flickr tab to retrieve geotagged photographs from Flickr
 * Visit a ~GeoMarker tiddler and use the "Call ~TravelTime" button to calculate an isochrone from that location using the ~TravelTime API
 
-! Map Showing All Layers and Markers
+! Map Showing All Features and Markers
 
 <$geomap
 	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
-	layers="[all[tiddlers+shadows]tag[$:/tags/GeoLayer]]"
+	features="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]"
 	state=<<qualify "$:/state/demo-map">>
 />
 

@@ -10,7 +10,7 @@ title: ui/geomarker
 <$action-setfield $tiddler="$:/temp/_Result" text=<<data>>/>
 <$action-setfield $tiddler="$:/temp/_Headers" text=<<headers>>/>
 <$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
-<$action-createtiddler $basetitle="$:/temp/_IsochroneLayer" text={{{ [<data>] }}} tags="$:/tags/GeoLayer" caption={{{ [<currentTiddler>get[caption]else<currentTiddler>addprefix[Travel time from ]] }}}/>
+<$action-createtiddler $basetitle="$:/temp/_IsochroneLayer" text={{{ [<data>] }}} tags="$:/tags/GeoFeature" caption={{{ [<currentTiddler>get[caption]else<currentTiddler>addprefix[Travel time from ]] }}}/>
 </$list>
 \end
 
@@ -88,13 +88,13 @@ title: ui/geomarker
 </ul>
 </$let>
 
-!! GeoLayer Lookups
+!! GeoFeature Lookups
 
 <$let
 	thisLocation={{{ [geopoint{!!long},{!!lat}] }}}
 >
 <ul>
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoLayer]sort[caption]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoFeature]sort[caption]]">
 <li>
 <$text text={{{ [<currentTiddler>get[caption]] :else[<currentTiddler>] }}}/> --
 <$text text={{{ [<thisLocation>geolookup{!!text}] }}}/>

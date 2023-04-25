@@ -71,7 +71,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	});
 	// Add scale
 	$tw.Leaflet.control.scale().addTo(this.map);
-	// Listen for pan and zoom events
+	// Listen for pan and zoom events and update the state tiddler
 	this.map.on("moveend zoomend",function(event) {
 		if(self.geomapStateTitle) {
 			var c = self.map.getCenter(),
@@ -79,6 +79,7 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 				long = "" + c.lng,
 				zoom = "" + self.map.getZoom(),
 				tiddler = self.wiki.getTiddler(self.geomapStateTitle);
+			// Only write the tiddler if the values have changed
 			if(!tiddler || tiddler.fields.lat !== lat || tiddler.fields.long !== long || tiddler.fields.zoom !== zoom) {
 				self.wiki.addTiddler(new $tw.Tiddler({
 					title: self.geomapStateTitle,
@@ -89,18 +90,24 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 			}
 		}
 	});
-	// Track the geolayers filter
-	this.trackerGeoLayersFilter = new FilterTracker({
+	// Track the geofeatures filter
+	this.trackerGeoFeaturesFilter = new FilterTracker({
 		wiki: this.wiki,
 		widget: this,
-		filter: this.geomapLayerFilter,
+		filter: this.geomapFeaturesFilter,
 		enter: function(title,tiddler) {
 			var text = (tiddler && tiddler.fields.text) || "[]",
-				layer = $tw.Leaflet.geoJSON($tw.utils.parseJSONSafe(text,[]),{
+				geoJson = $tw.utils.parseJSONSafe(text,[]),
+				layer = $tw.Leaflet.geoJSON(geoJson,{
 					style: function(geoJsonFeature) {
 						return {
 							color: (tiddler && tiddler.getFieldString("color")) || "yellow"
 						}
+					},
+					pointToLayer: function(geoJsonPoint,latlng) {
+						return L.circleMarker(latlng,{
+							radius: 8
+						});
 					},
 					onEachFeature: function(feature,layer) {
 						if(feature.properties) {
@@ -162,8 +169,8 @@ Compute the internal state of the widget
 */
 GeomapWidget.prototype.execute = function() {
 	this.geomapStateTitle = this.getAttribute("state");
-	this.geomapLayerFilter = this.getAttribute("layers");
 	this.geomapMarkerFilter = this.getAttribute("markers");
+	this.geomapFeaturesFilter = this.getAttribute("features");
 };
 
 /*
@@ -172,7 +179,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Refresh entire widget if layers or marker filter changes
-	if(changedAttributes.layers || changedAttributes.markers || changedAttributes.state) {
+	if(changedAttributes.features || changedAttributes.markers || changedAttributes.state) {
 		this.refreshSelf();
 		return true;
 	}
@@ -184,7 +191,7 @@ GeomapWidget.prototype.refresh = function(changedTiddlers) {
 		this.setMapView();
 	}
 	// Check whether the layers or markers need updating
-	this.trackerGeoLayersFilter.refresh(changedTiddlers);
+	this.trackerGeoFeaturesFilter.refresh(changedTiddlers);
 	this.trackerGeoMarkersFilter.refresh(changedTiddlers);
 	// No children to refresh
 	return false;	

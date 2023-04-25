@@ -54,11 +54,11 @@ The following attributes are supported:
 <$testcase>
 <$data
 	title="Description"
-	text="Map with geolayer"
+	text="Map with geofeature"
 />
 <$data
 	title="Layer"
-	tags="$:/tags/GeoLayer"
+	tags="$:/tags/GeoFeature"
 	type="application/json"
 	color="red"
 	text="""{
@@ -66,7 +66,7 @@ The following attributes are supported:
 	"features": [
 		{
 			"type": "Feature",
-			"id": "An example geolayer feature",
+			"id": "An example geofeature feature",
 			"properties": {
 				"custom": "A custom property of this feature"
 			},
@@ -87,7 +87,7 @@ The following attributes are supported:
 }"""/>
 <$data title="Output" text="""<$geomap
 	state=<<qualify "$:/state/demo-map">>
-	layers="[all[tiddlers+shadows]tag[$:/tags/GeoLayer]]"
+	features="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]"
 />
 """/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
