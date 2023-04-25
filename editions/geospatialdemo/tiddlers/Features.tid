@@ -7,7 +7,7 @@ This is a list of all the tiddlers containing ~GeoJSON feature collections in th
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoFeature]sort[caption]]">
 <li>
 <$link>
-<$view field="caption"><$view field="title"/></$view>
+<$transclude field="caption"><$view field="title"/></$view>
 </$link>
 </li>
 </$list>
