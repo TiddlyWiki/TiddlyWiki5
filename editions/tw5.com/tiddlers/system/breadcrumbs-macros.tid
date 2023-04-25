@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 \define .bc-link(title, class)
 \whitespace trim
-<$link to=<<__title__>> class=<<__class__>> aria-label={{{ [<__title__>get[caption]else<__title__>] }}} >
+<$link to=<<__title__>> class=<<__class__>> >
 	<$macrocall $name=".bc-caption" title=<<__title__>> />
 </$link>
 \end
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 \define .bc-caption(title)
 \whitespace trim
 <$let name="tv-wikilinks" value="no">
-	<$view tiddler=<<__title__>> field="caption">
+	<$view tiddler=<<__title__>> field="caption" format="plainwikified">
 		<$transclude tiddler=<<__title__>> field="title"/>
 	</$view>
 </$let>
