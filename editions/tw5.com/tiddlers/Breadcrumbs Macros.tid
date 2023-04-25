@@ -1,5 +1,5 @@
 created: 20230408131424728
-modified: 20230425081719116
+modified: 20230425084731246
 tags: 
 title: Breadcrumbs Macros
 type: text/vnd.tiddlywiki
@@ -40,7 +40,7 @@ All breadcrumbs macros have the following parameters in common:
 |<<.param start>> |Tiddler title to start with. defaults to <<.var currentTiddler>> |
 |<<.param exclude>> |Tiddler list of titles to be excluded. eg: `title [[title with spaces]]`. The <<.param exclude>> parameter can be used to modify the "path" the recursion will take. also see: <<.param sort>> |
 |<<.param label>> |Label to be shown in front of the breadcrumbs nav |
-|<<.param sort>> |Defaults to <<.value yes>>. The breadcrumbs list will be sorted  |
+|<<.param sort>> |Defaults to <<.value yes>>. The recursion function will sort the <<.param field>> values before evaluating which tiddler is the next parent. This keeps the "order" in line with the tiddler tags, if a tiddler has more than 1 tag. This makes the breadcrumb hierarchy path predictable. Use the <<.param exclude>> parameter, to change the breadcrumbs hierarchy path. This setting is for advanced users only. If set to <<.value no>> your breadcrumbs path may change if tiddlers are edited |
 
 !! Usecase .breadcrumbsField Macro
 
