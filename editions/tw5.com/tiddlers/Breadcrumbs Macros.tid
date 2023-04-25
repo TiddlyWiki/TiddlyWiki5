@@ -1,5 +1,5 @@
 created: 20230408131424728
-modified: 20230425084731246
+modified: 20230425085624276
 tags: 
 title: Breadcrumbs Macros
 type: text/vnd.tiddlywiki
@@ -57,7 +57,7 @@ If the user changes the global font-size and / or line-height in the theme to hi
 * $:/config/docs/breadcrumbs/height ... defines the line-height used for the breadcrumbs arrow elements
 * $:/config/docs/breadcrumbs/paddingBottom ... can be used to increase the bottom padding of the arrows
 * $:/config/docs/breadcrumbs/paddingTop ... can be used to change the top padding of the arrows
-* $:/config/docs/breadcrumbs/showArrows ... if set to "no" the plain text breadcrumbs are used independent of the screen size
+* $:/config/docs/breadcrumbs/showArrows ... if set to "yes" the breadcrumbs "arrows" are shown. Any other value shows the "plain text" version, independent of the screen width
 
 !! Global Mode Setting
 
