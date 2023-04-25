@@ -186,13 +186,13 @@ tags: $:/tags/Macro
 </$let>
 \end
 
-\define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
+\define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
 \whitespace trim
 <$tiddler tiddler={{{ [<__selectedTiddler__>get[text]] }}}>
   <div class="tc-tabbed-table-of-contents">
     <$linkcatcher to=<<__selectedTiddler__>>>
       <div class="tc-table-of-contents">
-        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="[all[current]] -[<__selectedTiddler__>get[text]]"/>
+        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="[all[current]] -[<__selectedTiddler__>get[text]]" exclude=<<__exclude__>>/>
       </div>
     </$linkcatcher>
     <div class="tc-tabbed-table-of-contents-content">
@@ -210,9 +210,9 @@ tags: $:/tags/Macro
 </$tiddler>
 \end
 
-\define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
+\define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
 \whitespace trim
 <$linkcatcher to=<<__selectedTiddler__>>>
-  <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>>/>
+  <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>> exclude=<<__exclude__>> />
 </$linkcatcher>
 \end
