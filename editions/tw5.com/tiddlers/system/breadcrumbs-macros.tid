@@ -133,3 +133,42 @@ type: text/vnd.tiddlywiki
 	</$set>
 </$let>
 \end
+
+<!-- ========================================================================= -->
+<!-- This ".breadcrumbsSimple" macro uses a list-like field (default: tags) as the start of the hierarchy -->
+<!-- Links will be opened according to wiki global "open link in story-river" setting -->
+
+\define .bcRecursion(current, stop, exclude, field:"tags", sort:"yes")
+\whitespace trim
+<$list filter="[<__stop__>is[tiddler]]" emptyMessage="""<span style={{{ [{$:/palette}getindex[dirty-indicator]addprefix[color:]addsuffix[;]] }}}> .breadcrumbs ERROR! -- stop-tiddler: "<<__stop__>>" does not exist</span>""" variable="ignore">
+	<$let
+		limit="[limit[1]]"
+		sort="[sort[]limit[1]]"
+		sub={{{ [<__sort__>match[yes]then<sort>else<limit>] }}}
+		next={{{ [<__current__>get<__field__>enlist-input[]] -[enlist<__exclude__>] +[subfilter<sub>] :else[<__stop__>] }}}
+	>
+		<$set name="excluded" filter="[subfilter<__exclude__>] :or[<next>]">
+			<$list filter="[<next>!match<__stop__>]" emptyMessage="""<$macrocall $name=".bc-link" title=<<next>> class="tc-small-gap-right tc-crumb-first"/>""">
+				<$macrocall $name=".bcRecursion" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> filter=<<__filter__>>/>
+				<$macrocall $name=".bc-link" title=<<currentTiddler>> class="tc-small-gap-right tc-crumb"/>
+			</$list>
+		</$set>
+	</$let>
+</$list>
+\end
+
+\define .breadcrumbsSimple(start, stop, exclude, label, field, sort)
+\whitespace trim
+<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} >
+	<$set name="excluded" filter="[subfilter<__exclude__>] :or[<__start__>]">
+	<nav class="tc-breadcrumbs">
+		<<__label__>>
+		<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
+		<span tabindex="0" aria-current="location" class="tc-crumb" aria-label={{{ [<__start__>get[caption]else<__start__>]}}}>
+			<$macrocall $name=".bc-caption" title=<<__start__>> />
+		</span>
+	</nav>
+	</$set>
+</$let>
+\end
+
