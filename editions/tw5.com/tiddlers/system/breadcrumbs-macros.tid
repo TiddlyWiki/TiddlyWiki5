@@ -31,7 +31,7 @@ type: text/vnd.tiddlywiki
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
 	macro-name={{{ ".breadcrumbs" [<__mode__>titlecase[]] +[join[]] }}}
 >
-	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
+	<$set name="excluded" filter="[subfilter<__exclude__>] :or[<__start__>]">
 		<$macrocall $name=<<macro-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
 	</$set>
 </$let>
@@ -72,7 +72,7 @@ type: text/vnd.tiddlywiki
 		sub={{{ [<__sort__>match[yes]then<sort>else<limit>] }}}
 		next={{{ [<__current__>get<__field__>enlist-input[]] -[enlist<__exclude__>] +[subfilter<sub>] :else[<__stop__>] }}}
 	>
-		<$set name="excluded" filter="[enlist<__exclude__>] :or[<next>]">
+		<$set name="excluded" filter="[subfilter<__exclude__>] :or[<next>]">
 			<$list filter="[<next>!match<__stop__>]" emptyMessage=<<.bcFirstCrumb>> >
 				<$macrocall $name=".bcRecursionStory" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> filter=<<__filter__>>/>
 				<$macrocall $name=".openInStory" target=<<currentTiddler>> source=<<__current__>> class="tc-small-gap-right tc-crumb"/>
@@ -85,7 +85,7 @@ type: text/vnd.tiddlywiki
 \define .breadcrumbsStory(start, stop, exclude, label, field, sort)
 \whitespace trim
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} selfTiddler=<<currentTiddler>> >
-	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
+	<$set name="excluded" filter="[subfilter<__exclude__>] :or[<__start__>]">
 		<nav class="tc-breadcrumbs" aria-label=<<__start__>> >
 			<<__label__>>
 			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
@@ -126,7 +126,7 @@ type: text/vnd.tiddlywiki
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
 	first={{{ [<__start__>get<__field__>enlist-input[]] }}}
 >
-	<$set name="excluded" filter="[enlist<__exclude__>]">
+	<$set name="excluded" filter="[subfilter<__exclude__>]">
 		<nav class="tc-breadcrumbs">
 			<<__label__>>
 			<$macrocall $name=".openFieldInStory" target=<<first>> class="tc-crumb-first"/>
@@ -154,7 +154,7 @@ type: text/vnd.tiddlywiki
 		sub={{{ [<__sort__>match[yes]then<sort>else<limit>] }}}
 		next={{{ [<__current__>get<__field__>enlist-input[]] -[enlist<__exclude__>] +[subfilter<sub>] :else[<__stop__>] }}}
 	>
-		<$set name="excluded" filter="[enlist<__exclude__>] :or[<next>]">
+		<$set name="excluded" filter="[subfilter<__exclude__>] :or[<next>]">
 			<$list filter="[<next>!match<__stop__>]" emptyMessage="""<$macrocall $name=".bc-link" title=<<next>> class="tc-small-gap-right tc-crumb-first"/>""">
 				<$macrocall $name=".bcRecursion" current=<<currentTiddler>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> filter=<<__filter__>>/>
 				<$macrocall $name=".bc-link" title=<<currentTiddler>> class="tc-small-gap-right tc-crumb"/>
@@ -167,7 +167,7 @@ type: text/vnd.tiddlywiki
 \define .breadcrumbsSimple(start, stop, exclude, label, field, sort)
 \whitespace trim
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} >
-	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
+	<$set name="excluded" filter="[subfilter<__exclude__>] :or[<__start__>]">
 	<nav class="tc-breadcrumbs">
 		<<__label__>>
 		<$macrocall $name=".bcRecursion" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
