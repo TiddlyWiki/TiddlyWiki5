@@ -5,17 +5,34 @@ tags: $:/tags/Macro
 title: $:/editions/tw5.com/breadcrumbs-macros
 type: text/vnd.tiddlywiki
 
+\define .bc-link(title, class)
+\whitespace trim
+<$link to=<<__title__>> class=<<__class__>> >
+	<$macrocall $name=".bc-caption" title=<<__title__>> />
+</$link>
+\end
 
-<!-- This ".breadcrumbs" macro uses a list-like field (default: tags) as the start of the hierarchy -->
-<!-- mode defaults to "story" ... "simple" will open breadcrumb links according to the global settings -->
+\define .bc-caption(title)
+\whitespace trim
+<$let name="tv-wikilinks" value="no">
+	<$view tiddler=<<__title__>> field="caption" format="plainwikified">
+		<$transclude tiddler=<<__title__>> field="title"/>
+	</$view>
+</$let>
+\end
+
+<!-- ================================================================ -->
+<!-- This ".breadcrumbs" macro is a wrapper for global mode switching -->
+<!-- "mode" defaults to "story", which will recreate the hierarchy also in the story river -->
+<!-- It uses a list-like field, which defaults to "tags" as the start of the hierarchy -->
 
 \define .breadcrumbs(start, stop, exclude, label, field, sort, mode:"story")
 \whitespace trim
-<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}} >
-	<$set name="excluded" filter="[enlist<__exclude__>] :or[<__start__>]">
-		<$list filter="[<__mode__>match[story]then[.breadcrumbsStory]else[.breadcrumbsSimple]]" variable="macro-name">
-			<$macrocall $name=<<macro-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
-		</$list>
+<$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
+	macro-name={{{ ".breadcrumbs" [<__mode__>titlecase[]] +[join[]] }}}
+>
+	<$set name="excluded" filter="[subfilter<__exclude__>] :or[<__start__>]">
+		<$macrocall $name=<<macro-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
 	</$set>
 </$let>
 \end
@@ -38,7 +55,7 @@ type: text/vnd.tiddlywiki
 \define .openInStory(target, source, class)
 \whitespace trim
 <$linkcatcher actions=<<.openInStoryActions>> >
-	<$link to=<<__target__>> class=<<__class__>> ><<__target__>></$link>
+	<$macrocall $name=".bc-link" title=<<__target__>> class=<<__class__>>/>
 </$linkcatcher>
 \end
 
@@ -71,7 +88,10 @@ type: text/vnd.tiddlywiki
 	<$set name="excluded" filter="[subfilter<__exclude__>] :or[<__start__>]">
 		<nav class="tc-breadcrumbs" aria-label=<<__start__>> >
 			<<__label__>>
-			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/><span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+			<$macrocall $name=".bcRecursionStory" current=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> field=<<__field__>> sort=<<__sort__>>/>
+			<span tabindex="0" aria-current="location" class="tc-crumb" aria-label={{{ [<__start__>get[caption]else<__start__>]}}} >
+				<$macrocall $name=".bc-caption" title=<<__start__>> />
+			</span>
 		</nav>
 	</$set>
 </$let>
@@ -82,6 +102,25 @@ type: text/vnd.tiddlywiki
 	start is a tiddler title (defaults to "currentTiddler")
 -->
 
+\define .openFieldInStoryActions()
+<$set name=visited filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>] +[allafter<__target__>] :or[<__start__>]" >
+<$let __source__={{{ [list[$:/StoryList]] :intersection[enlist<visited>] +[nth[1]] }}} >
+	<$set name="newList" filter="[list[$:/StoryList]insertbefore<__target__>,<__source__>]">
+		<!-- $action-log visited=<<visited>> source=<<__source__>> newList=<<newList>>/ -->
+		<$action-setfield $tiddler="$:/StoryList" $field="list" $value=<<newList>> />
+		<$action-navigate $to=<<__target__>> />
+	</$set>
+<$let>
+</$set>
+\end
+
+\define .openFieldInStory(target, class)
+\whitespace trim
+<$linkcatcher actions=<<.openFieldInStoryActions>> >
+	<$macrocall $name=".bc-link" title=<<__target__>> class=<<__class__>>/>
+</$linkcatcher>
+\end
+
 \define .breadcrumbsField(start, exclude, label, field:"list")
 \whitespace trim
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
@@ -90,11 +129,13 @@ type: text/vnd.tiddlywiki
 	<$set name="excluded" filter="[subfilter<__exclude__>]">
 		<nav class="tc-breadcrumbs">
 			<<__label__>>
-			<$link class="tc-crumb-first" to=<<first>>><$text text=<<first>> /></$link>
-			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>]">
-				<$link class="tc-small-gap-right tc-crumb" />
+			<$macrocall $name=".openFieldInStory" target=<<first>> class="tc-crumb-first"/>
+			<$list filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>] -[<first>]">
+				<$macrocall $name=".openFieldInStory" target=<<currentTiddler>> class="tc-small-gap-right tc-crumb"/>
 			</$list>
-			<span tabindex="0" aria-current="location" aria-label=<<__start__>> class="tc-crumb"><<__start__>></span>
+			<span tabindex="0" aria-current="location" class="tc-crumb" aria-label={{{ [<__start__>get[caption]else<__start__>]}}}>
+				<$macrocall $name=".bc-caption" title=<<__start__>> />
+			</span>
 		</nav>
 	</$set>
 </$let>
