@@ -18,12 +18,12 @@ wiki - the wiki object to use
 */
 function HttpClient(options) {
 	options = options || {};
-	this.wiki = options.wiki || $tw.wiki;
 }
 
 HttpClient.prototype.handleHttpRequest = function(event) {
 	console.log("Making an HTTP request",event)
 	var self = this,
+		wiki = event.widget.wiki,
 		paramObject = event.paramObject || {},
 		url = paramObject.url,
 		completionActions = paramObject.oncompletion || "",
@@ -40,7 +40,7 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 		contextVariables = {},
 		setBinding = function(title,text) {
 			if(title) {
-				self.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
+				wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
 			}
 		};
 	if(url) {
@@ -69,8 +69,8 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 			}
 		});
 		// Set the request tracker tiddler
-		var requestTrackerTitle = this.wiki.generateNewTitle("$:/temp/HttpRequest");
-		this.wiki.addTiddler({
+		var requestTrackerTitle = wiki.generateNewTitle("$:/temp/HttpRequest");
+		wiki.addTiddler({
 			title: requestTrackerTitle,
 			tags: "$:/tags/HttpRequest",
 			text: JSON.stringify({
@@ -105,17 +105,17 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 					headers: JSON.stringify(headers)
 				};
 				// Update the request tracker tiddler
-				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
+				wiki.addTiddler(new $tw.Tiddler(wiki.getTiddler(requestTrackerTitle),{
 					status: success,
 				}));
-				$tw.rootWidget.invokeActionString(completionActions,undefined,undefined,$tw.utils.extend({},contextVariables,results));
+				wiki.invokeActionString(completionActions,undefined,$tw.utils.extend({},contextVariables,results));
 				// console.log("Back!",err,data,xhr);
 			},
 			progress: function(lengthComputable,loaded,total) {
 				if(lengthComputable) {
 					setBinding(bindProgress,"" + Math.floor((loaded/total) * 100))
 				}
-				$tw.rootWidget.invokeActionString(progressActions,undefined,undefined,{
+				wiki.invokeActionString(progressActions,undefined,{
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
