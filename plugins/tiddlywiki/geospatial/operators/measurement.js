@@ -30,15 +30,22 @@ exports.geodistance = function(source,operator,options) {
 
 exports.geonearestpoint = function(source,operator,options) {
 	var target = geotools.parsePoint(operator.operands[0]),
-		points = [];
+		featureCollection = {
+			"type": "FeatureCollection",
+			"features": []
+		};
 	source(function(tiddler,title) {
-		var point = geotools.parsePoint(title);
-		if(point) {
-			points.push(point)
+		var fc = $tw.utils.parseJSONSafe(title);
+		if(fc) {
+			if(fc.type === "FeatureCollection" && $tw.utils.isArray(fc.features)) {
+				Array.prototype.push.apply(featureCollection.features,fc.features);
+			} else if(fc.type === "Feature") {
+				featureCollection.features.push(fc);
+			}
 		}
 	});
-	if(points.length > 0) {
-		return [JSON.stringify(turf.nearestPoint(target,turf.featureCollection(points)))];
+	if(featureCollection.features.length > 0) {
+		return [JSON.stringify(turf.nearestPoint(target,featureCollection))];
 	} else {
 		return [];
 	}
