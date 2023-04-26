@@ -47,6 +47,8 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.contentRoot.render(this.contentContainer,null);
 	// Create a wiki
 	this.testcaseWiki = new $tw.Wiki();
+	// Always load the core plugin
+	this.testcaseWiki.addTiddler(this.wiki.getTiddler("$:/core"));
 	// Load tiddlers from child data widgets
 	var tiddlers = [];
 	this.findChildrenDataWidgets(this.contentRoot.children,"data",function(widget) {
@@ -68,32 +70,13 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		testcaseInfoData.tiddlers[title] = Object.keys(tiddler.fields);
 	});
 	this.setVariable("testcaseInfo",JSON.stringify(testcaseInfoData));
-	// Render children from the template
-	this.renderChildren(parent,nextSibling);
-};
-
-/*
-Render a test case
-*/
-TestCaseWidget.prototype.testcaseRenderTiddler = function(parent,nextSibling,title,mode) {
-	var self = this;
-	// Parse and render a tiddler
-	var rootWidget = this.testcaseWiki.makeTranscludeWidget(title,{document: this.document, parseAsInline: mode === "inline", parentWidget: this});
+	// Render the page root template of the subwiki
+	var rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{document: this.document, parseAsInline: false, parentWidget: this});
 	rootWidget.render(parent,nextSibling);
-};
-
-/*
-View a test case tiddler in plain text
-*/
-TestCaseWidget.prototype.testcaseRawTiddler = function(parent,nextSibling,title,field) {
-	var self = this;
-	// Render a text widget with the text of a tiddler
-	var text="",
-		tiddler = this.testcaseWiki.getTiddler(title);
-	if(tiddler) {
-		text = tiddler.getFieldString(field,"");
-	}
-	parent.insertBefore(this.document.createTextNode(text),nextSibling);
+	// Trap changes in the wiki and refresh the rendering
+	this.testcaseWiki.addEventListener("change",function(changes) {
+		rootWidget.refresh(changes,parent,nextSibling);
+	});
 };
 
 /*
@@ -101,18 +84,6 @@ Compute the internal state of the widget
 */
 TestCaseWidget.prototype.execute = function() {
 	this.testcaseTemplate = this.getAttribute("template","$:/core/ui/testcases/DefaultTemplate");
-	// Make child widgets
-	var parseTreeNodes = [{
-		type: "transclude",
-		attributes: {
-			tiddler: {
-				name: "tiddler",
-				type: "string",
-				value: this.testcaseTemplate
-			}
-		},
-		isBlock: true}];
-	this.makeChildWidgets(parseTreeNodes);
 };
 
 /*
@@ -124,7 +95,7 @@ TestCaseWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);
+		return false;
 	}
 };
 

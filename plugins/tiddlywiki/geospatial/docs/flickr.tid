@@ -37,6 +37,24 @@ Retrieves photographs of a particular user, identified by their user ID.
 |userID |ID of the user of whom to retrieve photos (eg 35468148136@N01) |
 |photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
 
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get photographs from album"/>
+<$data title="Output" text="""<$button>
+<$macrocall $name="flickr-get-album-items" albumID="72157630297432522"/>
+Get photos from album
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
+/>
+"""/>
+
+</$testcase>
+
 !!! `flickr-get-group-items` macro
 
 Retrieves photographs from a group, identified by the group ID.
