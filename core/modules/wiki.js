@@ -1418,8 +1418,8 @@ exports.checkTiddlerText = function(title,targetText,options) {
 /*
 Execute an action string without an associated context widget
 */
-exports.invokeActionString = function(actions,event,variables) {
-	var widget = this.makeWidget(null,{});
+exports.invokeActionString = function(actions,event,variables,options) {
+	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
 	widget.invokeActionString(actions,null,event,variables);
 };
 

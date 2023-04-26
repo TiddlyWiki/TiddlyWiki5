@@ -108,7 +108,7 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 				wiki.addTiddler(new $tw.Tiddler(wiki.getTiddler(requestTrackerTitle),{
 					status: success,
 				}));
-				wiki.invokeActionString(completionActions,undefined,$tw.utils.extend({},contextVariables,results));
+				wiki.invokeActionString(completionActions,undefined,$tw.utils.extend({},contextVariables,results),{parentWidget: $tw.rootWidget});
 				// console.log("Back!",err,data,xhr);
 			},
 			progress: function(lengthComputable,loaded,total) {
@@ -119,7 +119,7 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
-				});
+				},{parentWidget: $tw.rootWidget});
 			}
 		});
 	}
