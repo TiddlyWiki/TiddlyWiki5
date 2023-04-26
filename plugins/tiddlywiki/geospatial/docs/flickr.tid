@@ -41,10 +41,10 @@ For example:
 
 <$testcase>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
-<$data title="Description" text="Get photographs from album"/>
+<$data title="Description" text="Get photographs of user"/>
 <$data title="Output" text="""<$button>
-<$macrocall $name="flickr-get-album-items" albumID="72157630297432522"/>
-Get photos from album
+<$macrocall $name="flickr-get-photos-of-user-items" userID="35468148136@N01"/>
+Click to get photos of user
 </$button>
 
 <$geomap
@@ -52,7 +52,6 @@ Get photos from album
 	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
 />
 """/>
-
 </$testcase>
 
 !!! `flickr-get-group-items` macro
@@ -63,6 +62,23 @@ Retrieves photographs from a group, identified by the group ID.
 |groupID |ID of the group from which to retrieve photos (eg 22075379@N00) |
 |photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
 
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get photographs from group"/>
+<$data title="Output" text="""<$button>
+<$macrocall $name="flickr-get-group-items" groupID="22075379@N00"/>
+Click to get photos from group
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
+/>
+"""/>
+</$testcase>
+
 !!! `flickr-get-album-items` macro
 
 Retrieves photographs from an album, identified by the album ID.
@@ -71,9 +87,43 @@ Retrieves photographs from an album, identified by the album ID.
 |albumID |ID of the album from which to retrieve photos (eg 72157630297432522) |
 |photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
 
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get photographs from album"/>
+<$data title="Output" text="""<$button>
+<$macrocall $name="flickr-get-album-items" albumID="72157630297432522"/>
+Click to get photos from album
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
+/>
+"""/>
+</$testcase>
+
 !!! `flickr-get-interesting-items` macro
 
 Retrieves Flickr's current list of the 500 most "interesting" photographs. 
 
 |!Parameter |!Description |
 |photoTiddlerTemplate |Optional title of tiddler specifying field values for the created photo tiddlers |
+
+For example:
+
+<$testcase>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+<$data title="Description" text="Get interesting photographs"/>
+<$data title="Output" text="""<$button>
+<$macrocall $name="flickr-get-interesting-items"/>
+Click to get interesting photos
+</$button>
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
+/>
+"""/>
+</$testcase>
