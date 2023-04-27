@@ -3,8 +3,7 @@ title: $:/core/ui/testcases/DefaultTemplate/Source
 <$list filter="[<currentTab>fields[]] -text +[limit[1]]" variable="ignore">
 	<table class="tc-field-table">
 		<tbody>
-			<tr><th>Field</th><th>Value</th></tr>
-			<$list filter="[<currentTab>fields[]sort[]] -text" variable="fieldName">
+			<$list filter="[<currentTab>fields[]sort[]] -text -title title +[putfirst[]]" variable="fieldName">
 				<tr>
 					<td>
 						<$text text=<<fieldName>>/>
