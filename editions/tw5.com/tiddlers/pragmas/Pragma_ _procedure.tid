@@ -28,7 +28,7 @@ For example:
 
 ```
 \procedure sayhi(name:"Bugs Bunny")
-Hi, I'm $name$.
+Hi, I'm <<name>>.
 \end
 
 <<sayhi "Jeremy">>
@@ -37,7 +37,7 @@ Hi, I'm $name$.
 Alternatively, the entire definition can be presented on a single line without an `\end` marker:
 
 ```
-\procedure sayhi(name:"Bugs Bunny") Hi, I'm $name$.
+\procedure sayhi(name:"Bugs Bunny") Hi, I'm <<name>>.
 ```
 
 Procedure definitions can be nested by specifying the name of the procedure in the `\end` marker. For example:
@@ -47,7 +47,7 @@ Procedure definitions can be nested by specifying the name of the procedure in t
 <$action-sendmessage $message="tm-notify" $param="HelloThere"/>
 \end actions
 <$button actions=<<actions>>>
-$caption$
+<<caption>>
 </$button>
 \end special-button
 
