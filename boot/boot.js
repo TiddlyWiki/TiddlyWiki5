@@ -23,12 +23,7 @@ $tw.utils = $tw.utils || Object.create(null);
 
 /////////////////////////// Standard node.js libraries
 
-/** @type {import{"fs"}} */
-var fs;
-/** @type {import{"path"}} */
-var path;
-/** @type {import{"vm"}} */
-var vm;
+var fs, path, vm;
 if($tw.node) {
 	fs = require("fs");
 	path = require("path");
