@@ -22,7 +22,7 @@ The payload tiddlers are the tiddler values that are loaded into the subwiki tha
 
 ! State Handling
 
-The `<$testcase>` widget sets the variable `transclusion` to a hash that reflects the names and values of all the payload tiddlers. This makes easier for test case templates to create unique state tiddler titles using the [[qualify Macro]] or QualifyWidget.
+The `<$testcase>` widget sets the variable `transclusion` to a hash that reflects the names and values of all the payload tiddlers. This makes it easier for test case templates to create unique state tiddler titles using the [[qualify Macro]] or QualifyWidget.
 
 ! Test Case Conventions
 
