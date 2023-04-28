@@ -27,6 +27,7 @@ TestCaseWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 TestCaseWidget.prototype.render = function(parent,nextSibling) {
+	var self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -48,7 +49,14 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	// Create a wiki
 	this.testcaseWiki = new $tw.Wiki();
 	// Always load the core plugin
-	this.testcaseWiki.addTiddler(this.wiki.getTiddler("$:/core"));
+	var loadTiddler = function(title) {
+		var tiddler = self.wiki.getTiddler(title);
+		if(tiddler) {
+			self.testcaseWiki.addTiddler(tiddler);
+		}
+	}
+	loadTiddler("$:/core");
+	loadTiddler("$:/plugins/tiddlywiki/codemirror");
 	// Load tiddlers from child data widgets
 	var tiddlers = [];
 	this.findChildrenDataWidgets(this.contentRoot.children,"data",function(widget) {

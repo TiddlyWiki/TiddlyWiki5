@@ -3,7 +3,8 @@
 	"plugins": [
 		"tiddlywiki/geospatial",
 		"tiddlywiki/jszip",
-		"tiddlywiki/xlsx-utils"
+		"tiddlywiki/xlsx-utils",
+		"tiddlywiki/codemirror"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

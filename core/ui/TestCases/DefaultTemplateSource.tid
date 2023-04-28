@@ -16,4 +16,4 @@ title: $:/core/ui/testcases/DefaultTemplate/Source
 		</tbody>
 	</table>
 </$list>
-<pre><$view tiddler=<<currentTab>>/></pre>
+<$edit class="tc-edit-texteditor" tiddler=<<currentTab>>/>
