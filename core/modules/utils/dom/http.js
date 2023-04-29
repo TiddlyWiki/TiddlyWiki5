@@ -3,7 +3,7 @@ title: $:/core/modules/utils/dom/http.js
 type: application/javascript
 module-type: utils
 
-Browser HTTP support
+HTTP support
 
 \*/
 (function(){
@@ -13,11 +13,127 @@ Browser HTTP support
 "use strict";
 
 /*
-A quick and dirty HTTP function; to be refactored later. Options are:
+Manage tm-http-request events. Options are:
+wiki - the wiki object to use
+*/
+function HttpClient(options) {
+	options = options || {};
+}
+
+HttpClient.prototype.handleHttpRequest = function(event) {
+	console.log("Initiating an HTTP request",event)
+	var self = this,
+		wiki = event.widget.wiki,
+		paramObject = event.paramObject || {},
+		url = paramObject.url,
+		completionActions = paramObject.oncompletion || "",
+		progressActions = paramObject.onprogress || "",
+		bindStatus = paramObject["bind-status"],
+		bindProgress = paramObject["bind-progress"],
+		method = paramObject.method || "GET",
+		HEADER_PARAMETER_PREFIX = "header-",
+		QUERY_PARAMETER_PREFIX = "query-",
+		PASSWORD_HEADER_PARAMETER_PREFIX = "password-header-",
+		PASSWORD_QUERY_PARAMETER_PREFIX = "password-query-",
+		CONTEXT_VARIABLE_PARAMETER_PREFIX = "var-",
+		requestHeaders = {},
+		contextVariables = {},
+		setBinding = function(title,text) {
+			if(title) {
+				wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
+			}
+		};
+	if(url) {
+		setBinding(bindStatus,"pending");
+		setBinding(bindProgress,"0");
+		$tw.utils.each(paramObject,function(value,name) {
+			// Look for query- parameters
+			if(name.substr(0,QUERY_PARAMETER_PREFIX.length) === QUERY_PARAMETER_PREFIX) {
+				url = $tw.utils.setQueryStringParameter(url,name.substr(QUERY_PARAMETER_PREFIX.length),value);
+			}
+			// Look for header- parameters
+			if(name.substr(0,HEADER_PARAMETER_PREFIX.length) === HEADER_PARAMETER_PREFIX) {
+				requestHeaders[name.substr(HEADER_PARAMETER_PREFIX.length)] = value;
+			}
+			// Look for password-header- parameters
+			if(name.substr(0,PASSWORD_QUERY_PARAMETER_PREFIX.length) === PASSWORD_QUERY_PARAMETER_PREFIX) {
+				url = $tw.utils.setQueryStringParameter(url,name.substr(PASSWORD_QUERY_PARAMETER_PREFIX.length),$tw.utils.getPassword(value) || "");
+			}
+			// Look for password-query- parameters
+			if(name.substr(0,PASSWORD_HEADER_PARAMETER_PREFIX.length) === PASSWORD_HEADER_PARAMETER_PREFIX) {
+				requestHeaders[name.substr(PASSWORD_HEADER_PARAMETER_PREFIX.length)] = $tw.utils.getPassword(value) || "";
+			}
+			// Look for var- parameters
+			if(name.substr(0,CONTEXT_VARIABLE_PARAMETER_PREFIX.length) === CONTEXT_VARIABLE_PARAMETER_PREFIX) {
+				contextVariables[name.substr(CONTEXT_VARIABLE_PARAMETER_PREFIX.length)] = value;
+			}
+		});
+		// Set the request tracker tiddler
+		var requestTrackerTitle = wiki.generateNewTitle("$:/temp/HttpRequest");
+		wiki.addTiddler({
+			title: requestTrackerTitle,
+			tags: "$:/tags/HttpRequest",
+			text: JSON.stringify({
+				url: url,
+				type: method,
+				status: "inprogress",
+				headers: requestHeaders,
+				data: paramObject.body
+			})
+		});
+		$tw.utils.httpRequest({
+			url: url,
+			type: method,
+			headers: requestHeaders,
+			data: paramObject.body,
+			callback: function(err,data,xhr) {
+				var success = (xhr.status >= 200 && xhr.status < 300) ? "complete" : "error",
+					headers = {};
+				$tw.utils.each(xhr.getAllResponseHeaders().split("\r\n"),function(line) {
+					var pos = line.indexOf(":");
+					if(pos !== -1) {
+						headers[line.substr(0,pos)] = line.substr(pos + 1).trim();
+					}
+				});
+				setBinding(bindStatus,success);
+				setBinding(bindProgress,"100");
+				var results = {
+					status: xhr.status.toString(),
+					statusText: xhr.statusText,
+					error: (err || "").toString(),
+					data: (data || "").toString(),
+					headers: JSON.stringify(headers)
+				};
+				// Update the request tracker tiddler
+				wiki.addTiddler(new $tw.Tiddler(wiki.getTiddler(requestTrackerTitle),{
+					status: success,
+				}));
+				wiki.invokeActionString(completionActions,undefined,$tw.utils.extend({},contextVariables,results),{parentWidget: $tw.rootWidget});
+				// console.log("Back!",err,data,xhr);
+			},
+			progress: function(lengthComputable,loaded,total) {
+				if(lengthComputable) {
+					setBinding(bindProgress,"" + Math.floor((loaded/total) * 100))
+				}
+				wiki.invokeActionString(progressActions,undefined,{
+					lengthComputable: lengthComputable ? "yes" : "no",
+					loaded: loaded,
+					total: total
+				},{parentWidget: $tw.rootWidget});
+			}
+		});
+	}
+};
+
+exports.HttpClient = HttpClient;
+
+/*
+Make an HTTP request. Options are:
 	url: URL to retrieve
 	headers: hashmap of headers to send
 	type: GET, PUT, POST etc
 	callback: function invoked with (err,data,xhr)
+	progress: optional function invoked with (lengthComputable,loaded,total)
 	returnProp: string name of the property to return as first argument of callback
 */
 exports.httpRequest = function(options) {
@@ -83,8 +199,16 @@ exports.httpRequest = function(options) {
 		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,null,this);
 		}
 	};
+	// Handle progress
+	if(options.progress) {
+		request.onprogress = function(event) {
+			console.log("Progress event",event)
+			options.progress(event.lengthComputable,event.loaded,event.total);
+		};
+	}
 	// Make the request
 	request.open(type,url,true);
+	// Headers
 	if(headers) {
 		$tw.utils.each(headers,function(header,headerTitle,object) {
 			request.setRequestHeader(headerTitle,header);
@@ -96,12 +220,28 @@ exports.httpRequest = function(options) {
 	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers)) {
 		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
+	// Send data
 	try {
 		request.send(data);
 	} catch(e) {
 		options.callback(e,null,this);
 	}
 	return request;
+};
+
+exports.setQueryStringParameter = function(url,paramName,paramValue) {
+	var URL = $tw.browser ? window.URL : require("url").URL,
+		newUrl;
+	try {
+		newUrl = new URL(url);
+	} catch(e) {
+	}
+	if(newUrl && paramName) {
+		newUrl.searchParams.set(paramName,paramValue || "");
+		return newUrl.toString();
+	} else {
+		return url;
+	}
 };
 
 })();

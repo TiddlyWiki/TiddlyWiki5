@@ -20,6 +20,11 @@ exports.before = ["story"];
 exports.synchronous = true;
 
 exports.startup = function() {
+	// Install the HTTP client event handler
+	$tw.httpClient = new $tw.utils.HttpClient();
+	$tw.rootWidget.addEventListener("tm-http-request",function(event) {
+		$tw.httpClient.handleHttpRequest(event);
+	});
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tm-modal",function(event) {
