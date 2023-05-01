@@ -6,7 +6,7 @@ rp-output: the output of this filter replaces the output of previous runs
 rp-purpose: compute a Boolean combination of the results of this and previous runs
 rp-suffix: Boolean operation to compute, can be <<.value and>> (the default), <<.value or>>, <<.value xor>>, <<.value nand>>, <<.value nor>> or <<.value xnor>>
 tags: [[Named Filter Run Prefix]]
-title: boolean Filter Run Prefix
+title: :boolean Filter Run Prefix
 type: text/vnd.tiddlywiki
 
 \define .op-row()
@@ -115,5 +115,5 @@ The filter run prefixes <<.op :boolean:or>> and <<.op :or>> are similar in their
 | !<<.op :boolean:or>> | !<<.op :or>> |
 |^<<.operator-example m2-1 "[tag[WikiText]] :boolean:or[tag[TableOfContents]]">> |^<<.operator-example m2-2 "[tag[WikiText]] :or[tag[TableOfContents]]">>The following filter expression is equivalent to <<.op :boolean:or>><<.operator-example m2-3 "[tag[WikiText]] :or[tag[TableOfContents]] :and[count[]compare:number:gt[0]then[true]]">>|
 
-! [[Examples|boolean Filter Run Prefix (Examples)]]
+! [[Examples|:boolean Filter Run Prefix (Examples)]]
 

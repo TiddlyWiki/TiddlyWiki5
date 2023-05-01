@@ -1,16 +1,16 @@
 created: 20230430151543614
 modified: 20230501072402940
-tags: [[boolean Filter Run Prefix]]
-title: boolean Filter Run Prefix (Examples)
+tags: [[:boolean Filter Run Prefix]]
+title: :boolean Filter Run Prefix (Examples)
 
 !! Basic binary operation
 
-In this example we check if both tiddlers [[Cascade Filter Run Prefix]] and [[Reduce Filter Run Prefix]] are currently //not// open in the story. The negated operations can be useful if <<.attr emptyMessage>> would otherwise be longer than the content.
+In this example we check if both tiddlers [[:cascade Filter Run Prefix]] and [[:reduce Filter Run Prefix]] are currently //not// open in the story. The negated operations can be useful if <<.attr emptyMessage>> would otherwise be longer than the content.
 
 <$macrocall $name='wikitext-example-without-html'
-src="""<$list filter="[list[$:/StoryList]match[Cascade Filter Run Prefix]] :boolean:nand[list[$:/StoryList]match[Reduce Filter Run Prefix]]"
+src="""<$list filter="[list[$:/StoryList]match[:cascade Filter Run Prefix]] :boolean:nand[list[$:/StoryList]match[:reduce Filter Run Prefix]]"
        emptyMessage="All my favorite filter run prefixes are here!">
-Go ahead, open [[Cascade Filter Run Prefix]] and [[Reduce Filter Run Prefix]].
+Go ahead, open [[:cascade Filter Run Prefix]] and [[:reduce Filter Run Prefix]].
 </$list>"""/>
 
 !! Unary operation
