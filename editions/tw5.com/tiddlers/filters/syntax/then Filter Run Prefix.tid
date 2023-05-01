@@ -1,8 +1,8 @@
 created: 20210618133745003
 from-version: 5.3.0
-modified: 20230501065241249
+modified: 20230501071859714
 rp-input: <<.olink all>> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]
-rp-output: the output of this filter run unless it is an empty list (see below)
+rp-output: the output of this filter run replaces the output of previous runs unless it is an empty list (see below)
 rp-purpose: replace any input to this filter run with its output
 tags: [[Named Filter Run Prefix]]
 title: then Filter Run Prefix
