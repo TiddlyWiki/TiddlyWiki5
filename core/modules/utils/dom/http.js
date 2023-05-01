@@ -17,7 +17,39 @@ Manage tm-http-request events
 */
 function HttpClient(options) {
 	options = options || {};
+	this.nextId = 1;
+	this.requests = []; // Array of {id: string,request: HttpClientRequest}
 }
+
+HttpClient.prototype.initiateHttpRequest = function(options) {
+	var id = this.nextId,
+		request = new HttpClientRequest(options);
+	this.nextId += 1;
+	this.requests.push({id: id, request: request});
+	request.send();
+	return id;
+};
+
+HttpClient.prototype.cancelAllHttpRequests = function() {
+	var self = this;
+	$tw.utils.each(this.requests,function(requestInfo,index) {
+		requestInfo.request.cancel();
+	});
+	this.requests = [];
+};
+
+HttpClient.prototype.cancelHttpRequest = function(targetId) {
+	var targetIndex = null;
+	$tw.utils.each(this.requests,function(requestInfo,index) {
+		if(requestInfo.id === targetId) {
+			targetIndex = index;
+		}
+	});
+	if(targetIndex !== null) {
+		this.requests[targetIndex].request.cancel();
+		this.requests.splice(targetIndex,1);
+	}
+};
 
 /*
 Initiate an HTTP request. Options:
@@ -35,55 +67,62 @@ passwordHeaders: hashmap of header name to password store name to be sent with t
 queryStrings: hashmap of query string parameter name to parameter value to be sent with the request
 passwordQueryStrings: hashmap of query string parameter name to password store name to be sent with the request
 */
-HttpClient.prototype.initiateHttpRequest = function(options) {
+function HttpClientRequest(options) {
+	var self = this;
 	console.log("Initiating an HTTP request",options)
+	this.wiki = options.wiki;
+	this.completionActions = options.oncompletion;
+	this.progressActions = options.onprogress;
+	this.bindStatus = options["bind-status"];
+	this.bindProgress = options["bind-progress"];
+	this.method = options.method || "GET";
+	this.body = options.body || "";
+	this.variables = options.variables;
+	var url = options.url;
+	$tw.utils.each(options.queryStrings,function(value,name) {
+		url = $tw.utils.setQueryStringParameter(url,name,value);
+	});
+	$tw.utils.each(options.passwordQueryStrings,function(value,name) {
+		url = $tw.utils.setQueryStringParameter(url,name,$tw.utils.getPassword(value) || "");
+	});
+	this.url = url;
+	this.requestHeaders = {};
+	$tw.utils.each(options.headers,function(value,name) {
+		self.requestHeaders[name] = value;
+	});
+	$tw.utils.each(options.passwordHeaders,function(value,name) {
+		self.requestHeaders[name] = $tw.utils.getPassword(value) || "";
+	});
+}
+
+HttpClientRequest.prototype.send = function() {
 	var self = this,
-		wiki = options.wiki,
-		url = options.url,
-		completionActions = options.oncompletion,
-		progressActions = options.onprogress,
-		bindStatus = options["bind-status"],
-		bindProgress = options["bind-progress"],
-		method = options.method || "GET",
-		requestHeaders = {},
 		setBinding = function(title,text) {
 			if(title) {
-				wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
+				this.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
 			}
 		};
-	if(url) {
-		setBinding(bindStatus,"pending");
-		setBinding(bindProgress,"0");
-		$tw.utils.each(options.queryStrings,function(value,name) {
-			url = $tw.utils.setQueryStringParameter(url,name,value);
-		});
-		$tw.utils.each(options.passwordQueryStrings,function(value,name) {
-			url = $tw.utils.setQueryStringParameter(url,name,$tw.utils.getPassword(value) || "");
-		});
-		$tw.utils.each(options.headers,function(value,name) {
-			requestHeaders[name] = value;
-		});
-		$tw.utils.each(options.passwordHeaders,function(value,name) {
-			requestHeaders[name] = $tw.utils.getPassword(value) || "";
-		});
+	if(this.url) {
+		setBinding(this.bindStatus,"pending");
+		setBinding(this.bindProgress,"0");
 		// Set the request tracker tiddler
-		var requestTrackerTitle = wiki.generateNewTitle("$:/temp/HttpRequest");
-		wiki.addTiddler({
+		var requestTrackerTitle = this.wiki.generateNewTitle("$:/temp/HttpRequest");
+		this.wiki.addTiddler({
 			title: requestTrackerTitle,
 			tags: "$:/tags/HttpRequest",
 			text: JSON.stringify({
-				url: url,
-				type: method,
+				url: this.url,
+				type: this.method,
 				status: "inprogress",
-				headers: requestHeaders,
-				data: options.body
+				headers: this.requestHeaders,
+				data: this.body
 			})
 		});
-		$tw.utils.httpRequest({
-			url: url,
-			type: method,
-			headers: requestHeaders,
-			data: options.body,
+		this.xhr = $tw.utils.httpRequest({
+			url: this.url,
+			type: this.method,
+			headers: this.requestHeaders,
+			data: this.body,
 			callback: function(err,data,xhr) {
 				var success = (xhr.status >= 200 && xhr.status < 300) ? "complete" : "error",
 					headers = {};
@@ -93,8 +132,8 @@ HttpClient.prototype.initiateHttpRequest = function(options) {
 						headers[line.substr(0,pos)] = line.substr(pos + 1).trim();
 					}
 				});
-				setBinding(bindStatus,success);
-				setBinding(bindProgress,"100");
+				setBinding(self.bindStatus,success);
+				setBinding(self.bindProgress,"100");
 				var resultVariables = {
 					status: xhr.status.toString(),
 					statusText: xhr.statusText,
@@ -103,23 +142,29 @@ HttpClient.prototype.initiateHttpRequest = function(options) {
 					headers: JSON.stringify(headers)
 				};
 				// Update the request tracker tiddler
-				wiki.addTiddler(new $tw.Tiddler(wiki.getTiddler(requestTrackerTitle),{
+				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
 					status: success,
 				}));
-				wiki.invokeActionString(completionActions,undefined,$tw.utils.extend({},options.variables,resultVariables),{parentWidget: $tw.rootWidget});
+				self.wiki.invokeActionString(self.completionActions,undefined,$tw.utils.extend({},self.variables,resultVariables),{parentWidget: $tw.rootWidget});
 				// console.log("Back!",err,data,xhr);
 			},
 			progress: function(lengthComputable,loaded,total) {
 				if(lengthComputable) {
 					setBinding(bindProgress,"" + Math.floor((loaded/total) * 100))
 				}
-				wiki.invokeActionString(progressActions,undefined,{
+				self.wiki.invokeActionString(self.progressActions,undefined,{
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
 				},{parentWidget: $tw.rootWidget});
 			}
 		});
+	}
+};
+
+HttpClientRequest.prototype.cancel = function() {
+	if(this.xhr) {
+		this.xhr.abort();
 	}
 };
 

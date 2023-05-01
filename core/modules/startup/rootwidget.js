@@ -48,6 +48,9 @@ exports.startup = function() {
 			passwordQueryStrings: getPropertiesWithPrefix(params,"password-query-")
 		});
 	});
+	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",function(event) {
+		$tw.httpClient.cancelAllHttpRequests();
+	});
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tm-modal",function(event) {

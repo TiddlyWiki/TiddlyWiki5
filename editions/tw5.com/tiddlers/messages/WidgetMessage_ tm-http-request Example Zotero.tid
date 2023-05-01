@@ -88,6 +88,10 @@ https://api.zotero.org/groups/{{$:/config/zotero-group}}/items/
 Start import from Zotero group
 </$button>
 
+<$button message="tm-http-cancel-all-requests">
+Cancel all HTTP requests
+</$button>
+
 <$list filter="[tag[$:/tags/ZoteroImport]limit[1]]" variable="ignore">
 
 !! Imported Tiddlers
