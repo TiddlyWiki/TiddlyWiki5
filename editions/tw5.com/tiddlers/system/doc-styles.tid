@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20220617125128201
+modified: 20230501175723775
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -286,3 +286,12 @@ ol.doc-github-contributors li {
 	text-overflow: ellipsis;
 }
 
+.doc-op-comparison {
+  table-layout: fixed;
+  width: 80%;
+}
+
+.doc-op-comparison th .doc-operator {
+  background-color: unset;
+  color: #666;
+}
