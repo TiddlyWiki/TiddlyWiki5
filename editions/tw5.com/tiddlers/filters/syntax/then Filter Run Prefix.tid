@@ -5,7 +5,7 @@ rp-input: <<.olink all>> tiddler titles, unless otherwise determined by the firs
 rp-output: the output of this filter run replaces the output of previous runs unless it is an empty list (see below)
 rp-purpose: replace any input to this filter run with its output
 tags: [[Named Filter Run Prefix]]
-title: then Filter Run Prefix
+title: :then Filter Run Prefix
 type: text/vnd.tiddlywiki
 
 \define .op-row()
