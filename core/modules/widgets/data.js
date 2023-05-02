@@ -110,7 +110,7 @@ DataWidget.prototype.extractCompoundTiddler = function(title) {
 	var tiddler = this.wiki.getTiddler(title);
 	if(tiddler && tiddler.fields.type === "text/vnd.tiddlywiki-multiple") {
 		var text = tiddler.fields.text || "",
-			rawTiddlers = text.split("\n+\n"),
+			rawTiddlers = text.split(/\r?\n\+\r?\n/),
 			tiddlers = [];
 		$tw.utils.each(rawTiddlers,function(rawTiddler) {
 			var fields = Object.create(null),
