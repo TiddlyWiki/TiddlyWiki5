@@ -181,7 +181,7 @@ HttpClientRequest.prototype.send = function(callback) {
 			},
 			progress: function(lengthComputable,loaded,total) {
 				if(lengthComputable) {
-					setBinding(bindProgress,"" + Math.floor((loaded/total) * 100))
+					setBinding(self.bindProgress,"" + Math.floor((loaded/total) * 100))
 				}
 				self.wiki.invokeActionString(self.progressActions,undefined,{
 					lengthComputable: lengthComputable ? "yes" : "no",
