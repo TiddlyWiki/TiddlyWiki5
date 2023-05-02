@@ -13,20 +13,53 @@ HTTP support
 "use strict";
 
 /*
-Manage tm-http-request events
+Manage tm-http-request events. Options include:
+wiki: Reference to the wiki to be used for state tiddler tracking
+stateTrackerTitle: Title of tiddler to be used for state tiddler tracking
 */
 function HttpClient(options) {
 	options = options || {};
 	this.nextId = 1;
+	this.wiki = options.wiki || $tw.wiki;
+	this.stateTrackerTitle = options.stateTrackerTitle || "$:/state/http-requests";
 	this.requests = []; // Array of {id: string,request: HttpClientRequest}
+	this.updateRequestTracker();
 }
 
+/*
+Return the index into this.requests[] corresponding to a given ID. Returns null if not found
+*/
+HttpClient.prototype.getRequestIndex = function(targetId) {
+	var targetIndex = null;
+	$tw.utils.each(this.requests,function(requestInfo,index) {
+		if(requestInfo.id === targetId) {
+			targetIndex = index;
+		}
+	});
+	return targetIndex;
+};
+
+/*
+Update the state tiddler that is tracking the outstanding requests
+*/
+HttpClient.prototype.updateRequestTracker = function() {
+	this.wiki.addTiddler({title: this.stateTrackerTitle, text: "" + this.requests.length});
+};
+
 HttpClient.prototype.initiateHttpRequest = function(options) {
-	var id = this.nextId,
+	var self = this,
+		id = this.nextId,
 		request = new HttpClientRequest(options);
 	this.nextId += 1;
 	this.requests.push({id: id, request: request});
-	request.send();
+	this.updateRequestTracker();
+	request.send(function(err) {
+		var targetIndex = self.getRequestIndex(id);
+		if(targetIndex !== null) {
+			self.requests.splice(targetIndex,1);
+			self.updateRequestTracker();
+		}
+	});
 	return id;
 };
 
@@ -36,18 +69,15 @@ HttpClient.prototype.cancelAllHttpRequests = function() {
 		requestInfo.request.cancel();
 	});
 	this.requests = [];
+	this.updateRequestTracker();
 };
 
 HttpClient.prototype.cancelHttpRequest = function(targetId) {
-	var targetIndex = null;
-	$tw.utils.each(this.requests,function(requestInfo,index) {
-		if(requestInfo.id === targetId) {
-			targetIndex = index;
-		}
-	});
+	var targetIndex = this.getRequestIndex(targetId);
 	if(targetIndex !== null) {
 		this.requests[targetIndex].request.cancel();
 		this.requests.splice(targetIndex,1);
+		this.updateRequestTracker();
 	}
 };
 
@@ -95,7 +125,7 @@ function HttpClientRequest(options) {
 	});
 }
 
-HttpClientRequest.prototype.send = function() {
+HttpClientRequest.prototype.send = function(callback) {
 	var self = this,
 		setBinding = function(title,text) {
 			if(title) {
@@ -124,7 +154,8 @@ HttpClientRequest.prototype.send = function() {
 			headers: this.requestHeaders,
 			data: this.body,
 			callback: function(err,data,xhr) {
-				var success = (xhr.status >= 200 && xhr.status < 300) ? "complete" : "error",
+				var hasSucceeded = xhr.status >= 200 && xhr.status < 300,
+					completionCode = hasSucceeded ? "complete" : "error",
 					headers = {};
 				$tw.utils.each(xhr.getAllResponseHeaders().split("\r\n"),function(line) {
 					var pos = line.indexOf(":");
@@ -132,7 +163,7 @@ HttpClientRequest.prototype.send = function() {
 						headers[line.substr(0,pos)] = line.substr(pos + 1).trim();
 					}
 				});
-				setBinding(self.bindStatus,success);
+				setBinding(self.bindStatus,completionCode);
 				setBinding(self.bindProgress,"100");
 				var resultVariables = {
 					status: xhr.status.toString(),
@@ -141,11 +172,11 @@ HttpClientRequest.prototype.send = function() {
 					data: (data || "").toString(),
 					headers: JSON.stringify(headers)
 				};
-				// Update the request tracker tiddler
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
-					status: success,
+					status: completionCode,
 				}));
 				self.wiki.invokeActionString(self.completionActions,undefined,$tw.utils.extend({},self.variables,resultVariables),{parentWidget: $tw.rootWidget});
+				callback(hasSucceeded ? null : xhr.statusText);
 				// console.log("Back!",err,data,xhr);
 			},
 			progress: function(lengthComputable,loaded,total) {
