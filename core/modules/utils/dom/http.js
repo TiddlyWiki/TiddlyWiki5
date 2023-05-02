@@ -13,81 +13,149 @@ HTTP support
 "use strict";
 
 /*
-Manage tm-http-request events. Options are:
-wiki - the wiki object to use
+Manage tm-http-request events. Options include:
+wiki: Reference to the wiki to be used for state tiddler tracking
+stateTrackerTitle: Title of tiddler to be used for state tiddler tracking
 */
 function HttpClient(options) {
 	options = options || {};
+	this.nextId = 1;
+	this.wiki = options.wiki || $tw.wiki;
+	this.stateTrackerTitle = options.stateTrackerTitle || "$:/state/http-requests";
+	this.requests = []; // Array of {id: string,request: HttpClientRequest}
+	this.updateRequestTracker();
 }
 
-HttpClient.prototype.handleHttpRequest = function(event) {
-	console.log("Making an HTTP request",event)
+/*
+Return the index into this.requests[] corresponding to a given ID. Returns null if not found
+*/
+HttpClient.prototype.getRequestIndex = function(targetId) {
+	var targetIndex = null;
+	$tw.utils.each(this.requests,function(requestInfo,index) {
+		if(requestInfo.id === targetId) {
+			targetIndex = index;
+		}
+	});
+	return targetIndex;
+};
+
+/*
+Update the state tiddler that is tracking the outstanding requests
+*/
+HttpClient.prototype.updateRequestTracker = function() {
+	this.wiki.addTiddler({title: this.stateTrackerTitle, text: "" + this.requests.length});
+};
+
+HttpClient.prototype.initiateHttpRequest = function(options) {
 	var self = this,
-		wiki = event.widget.wiki,
-		paramObject = event.paramObject || {},
-		url = paramObject.url,
-		completionActions = paramObject.oncompletion || "",
-		progressActions = paramObject.onprogress || "",
-		bindStatus = paramObject["bind-status"],
-		bindProgress = paramObject["bind-progress"],
-		method = paramObject.method || "GET",
-		HEADER_PARAMETER_PREFIX = "header-",
-		QUERY_PARAMETER_PREFIX = "query-",
-		PASSWORD_HEADER_PARAMETER_PREFIX = "password-header-",
-		PASSWORD_QUERY_PARAMETER_PREFIX = "password-query-",
-		CONTEXT_VARIABLE_PARAMETER_PREFIX = "var-",
-		requestHeaders = {},
-		contextVariables = {},
+		id = this.nextId,
+		request = new HttpClientRequest(options);
+	this.nextId += 1;
+	this.requests.push({id: id, request: request});
+	this.updateRequestTracker();
+	request.send(function(err) {
+		var targetIndex = self.getRequestIndex(id);
+		if(targetIndex !== null) {
+			self.requests.splice(targetIndex,1);
+			self.updateRequestTracker();
+		}
+	});
+	return id;
+};
+
+HttpClient.prototype.cancelAllHttpRequests = function() {
+	var self = this;
+	$tw.utils.each(this.requests,function(requestInfo,index) {
+		requestInfo.request.cancel();
+	});
+	this.requests = [];
+	this.updateRequestTracker();
+};
+
+HttpClient.prototype.cancelHttpRequest = function(targetId) {
+	var targetIndex = this.getRequestIndex(targetId);
+	if(targetIndex !== null) {
+		this.requests[targetIndex].request.cancel();
+		this.requests.splice(targetIndex,1);
+		this.updateRequestTracker();
+	}
+};
+
+/*
+Initiate an HTTP request. Options:
+wiki: wiki to be used for executing action strings
+url: URL for request
+method: method eg GET, POST
+body: text of request body
+oncompletion: action string to be invoked on completion
+onprogress: action string to be invoked on progress updates
+bindStatus: optional title of tiddler to which status ("pending", "complete", "error") should be written
+bindProgress: optional title of tiddler to which the progress of the request (0 to 100) should be bound
+variables: hashmap of variable name to string value passed to action strings
+headers: hashmap of header name to header value to be sent with the request
+passwordHeaders: hashmap of header name to password store name to be sent with the request
+queryStrings: hashmap of query string parameter name to parameter value to be sent with the request
+passwordQueryStrings: hashmap of query string parameter name to password store name to be sent with the request
+*/
+function HttpClientRequest(options) {
+	var self = this;
+	console.log("Initiating an HTTP request",options)
+	this.wiki = options.wiki;
+	this.completionActions = options.oncompletion;
+	this.progressActions = options.onprogress;
+	this.bindStatus = options["bind-status"];
+	this.bindProgress = options["bind-progress"];
+	this.method = options.method || "GET";
+	this.body = options.body || "";
+	this.variables = options.variables;
+	var url = options.url;
+	$tw.utils.each(options.queryStrings,function(value,name) {
+		url = $tw.utils.setQueryStringParameter(url,name,value);
+	});
+	$tw.utils.each(options.passwordQueryStrings,function(value,name) {
+		url = $tw.utils.setQueryStringParameter(url,name,$tw.utils.getPassword(value) || "");
+	});
+	this.url = url;
+	this.requestHeaders = {};
+	$tw.utils.each(options.headers,function(value,name) {
+		self.requestHeaders[name] = value;
+	});
+	$tw.utils.each(options.passwordHeaders,function(value,name) {
+		self.requestHeaders[name] = $tw.utils.getPassword(value) || "";
+	});
+}
+
+HttpClientRequest.prototype.send = function(callback) {
+	var self = this,
 		setBinding = function(title,text) {
 			if(title) {
-				wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
+				this.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
 			}
 		};
-	if(url) {
-		setBinding(bindStatus,"pending");
-		setBinding(bindProgress,"0");
-		$tw.utils.each(paramObject,function(value,name) {
-			// Look for query- parameters
-			if(name.substr(0,QUERY_PARAMETER_PREFIX.length) === QUERY_PARAMETER_PREFIX) {
-				url = $tw.utils.setQueryStringParameter(url,name.substr(QUERY_PARAMETER_PREFIX.length),value);
-			}
-			// Look for header- parameters
-			if(name.substr(0,HEADER_PARAMETER_PREFIX.length) === HEADER_PARAMETER_PREFIX) {
-				requestHeaders[name.substr(HEADER_PARAMETER_PREFIX.length)] = value;
-			}
-			// Look for password-header- parameters
-			if(name.substr(0,PASSWORD_QUERY_PARAMETER_PREFIX.length) === PASSWORD_QUERY_PARAMETER_PREFIX) {
-				url = $tw.utils.setQueryStringParameter(url,name.substr(PASSWORD_QUERY_PARAMETER_PREFIX.length),$tw.utils.getPassword(value) || "");
-			}
-			// Look for password-query- parameters
-			if(name.substr(0,PASSWORD_HEADER_PARAMETER_PREFIX.length) === PASSWORD_HEADER_PARAMETER_PREFIX) {
-				requestHeaders[name.substr(PASSWORD_HEADER_PARAMETER_PREFIX.length)] = $tw.utils.getPassword(value) || "";
-			}
-			// Look for var- parameters
-			if(name.substr(0,CONTEXT_VARIABLE_PARAMETER_PREFIX.length) === CONTEXT_VARIABLE_PARAMETER_PREFIX) {
-				contextVariables[name.substr(CONTEXT_VARIABLE_PARAMETER_PREFIX.length)] = value;
-			}
-		});
+	if(this.url) {
+		setBinding(this.bindStatus,"pending");
+		setBinding(this.bindProgress,"0");
 		// Set the request tracker tiddler
-		var requestTrackerTitle = wiki.generateNewTitle("$:/temp/HttpRequest");
-		wiki.addTiddler({
+		var requestTrackerTitle = this.wiki.generateNewTitle("$:/temp/HttpRequest");
+		this.wiki.addTiddler({
 			title: requestTrackerTitle,
 			tags: "$:/tags/HttpRequest",
 			text: JSON.stringify({
-				url: url,
-				type: method,
+				url: this.url,
+				type: this.method,
 				status: "inprogress",
-				headers: requestHeaders,
-				data: paramObject.body
+				headers: this.requestHeaders,
+				data: this.body
 			})
 		});
-		$tw.utils.httpRequest({
-			url: url,
-			type: method,
-			headers: requestHeaders,
-			data: paramObject.body,
+		this.xhr = $tw.utils.httpRequest({
+			url: this.url,
+			type: this.method,
+			headers: this.requestHeaders,
+			data: this.body,
 			callback: function(err,data,xhr) {
-				var success = (xhr.status >= 200 && xhr.status < 300) ? "complete" : "error",
+				var hasSucceeded = xhr.status >= 200 && xhr.status < 300,
+					completionCode = hasSucceeded ? "complete" : "error",
 					headers = {};
 				$tw.utils.each(xhr.getAllResponseHeaders().split("\r\n"),function(line) {
 					var pos = line.indexOf(":");
@@ -95,33 +163,39 @@ HttpClient.prototype.handleHttpRequest = function(event) {
 						headers[line.substr(0,pos)] = line.substr(pos + 1).trim();
 					}
 				});
-				setBinding(bindStatus,success);
-				setBinding(bindProgress,"100");
-				var results = {
+				setBinding(self.bindStatus,completionCode);
+				setBinding(self.bindProgress,"100");
+				var resultVariables = {
 					status: xhr.status.toString(),
 					statusText: xhr.statusText,
 					error: (err || "").toString(),
 					data: (data || "").toString(),
 					headers: JSON.stringify(headers)
 				};
-				// Update the request tracker tiddler
-				wiki.addTiddler(new $tw.Tiddler(wiki.getTiddler(requestTrackerTitle),{
-					status: success,
+				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
+					status: completionCode,
 				}));
-				wiki.invokeActionString(completionActions,undefined,$tw.utils.extend({},contextVariables,results),{parentWidget: $tw.rootWidget});
+				self.wiki.invokeActionString(self.completionActions,undefined,$tw.utils.extend({},self.variables,resultVariables),{parentWidget: $tw.rootWidget});
+				callback(hasSucceeded ? null : xhr.statusText);
 				// console.log("Back!",err,data,xhr);
 			},
 			progress: function(lengthComputable,loaded,total) {
 				if(lengthComputable) {
 					setBinding(bindProgress,"" + Math.floor((loaded/total) * 100))
 				}
-				wiki.invokeActionString(progressActions,undefined,{
+				self.wiki.invokeActionString(self.progressActions,undefined,{
 					lengthComputable: lengthComputable ? "yes" : "no",
 					loaded: loaded,
 					total: total
 				},{parentWidget: $tw.rootWidget});
 			}
 		});
+	}
+};
+
+HttpClientRequest.prototype.cancel = function() {
+	if(this.xhr) {
+		this.xhr.abort();
 	}
 };
 

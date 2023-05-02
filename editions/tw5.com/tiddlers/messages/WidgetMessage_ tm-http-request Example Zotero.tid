@@ -81,12 +81,15 @@ https://api.zotero.org/groups/{{$:/config/zotero-group}}/items/
 <$macrocall $name="zotero-get-items" start="0" limit="50"/>
 \end
 
-
 <<select-zotero-group>>
 
 <$button actions=<<zotero-actions>>>
 Start import from Zotero group
 </$button>
+
+<$button message="tm-http-cancel-all-requests">
+Cancel all HTTP requests
+</$button> Outstanding requests: {{$:/state/http-requests}}
 
 <$list filter="[tag[$:/tags/ZoteroImport]limit[1]]" variable="ignore">
 

@@ -3156,6 +3156,10 @@ select {
 	fill: <<colour background>>;
 }
 
+.tc-network-activity-background {
+	fill: <<colour network-activity-foreground>>;
+}
+
 /*
 ** Test Cases
 */

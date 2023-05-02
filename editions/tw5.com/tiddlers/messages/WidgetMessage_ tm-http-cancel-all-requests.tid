@@ -1,0 +1,12 @@
+caption: tm-http-cancel-all-requests
+created: 20230429161453032
+modified: 20230429161453032
+tags: Messages
+title: WidgetMessage: tm-http-cancel-all-requests
+type: text/vnd.tiddlywiki
+
+The ''tm-http-cancel-all-requests'' message is used to cancel all outstanding HTTP requests initiated with [[WidgetMessage: tm-http-request]].
+
+Note that the state tiddler $:/state/http-requests contains a number representing the number of outstanding HTTP requests in progress.
+
+It does not take any parameters.
