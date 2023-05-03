@@ -65,9 +65,11 @@ HttpClient.prototype.initiateHttpRequest = function(options) {
 
 HttpClient.prototype.cancelAllHttpRequests = function() {
 	var self = this;
-	for(var t=this.requests.length - 1; t--; t>=0) {
-		var requestInfo = this.requests[t];
-		requestInfo.request.cancel();
+	if(this.requests.length > 0) {
+		for(var t=this.requests.length - 1; t--; t>=0) {
+			var requestInfo = this.requests[t];
+			requestInfo.request.cancel();
+		}	
 	}
 	this.requests = [];
 	this.updateRequestTracker();
