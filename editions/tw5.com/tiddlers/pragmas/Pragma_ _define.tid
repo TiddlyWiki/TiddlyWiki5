@@ -1,0 +1,51 @@
+created: 20220917112233317
+modified: 20230419103154328
+tags: Pragmas
+title: Pragma: \define
+type: text/vnd.tiddlywiki
+
+The ''\define'' [[pragma|Pragmas]] is used to [[define macros|Macro Definitions]]. It is a shortcut syntax for the SetVariableWidget.
+
+The usual form allows macros to span multiple lines.
+
+```
+\define <macro-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...)
+<multiple-line-definition-text>
+\end [<macro-name>]
+```
+
+Note that the `\end` marker can optionally specify the name of the macro to which it relates which allows macro definitions to be nested.
+
+There is also a single line form for shorter macros:
+
+```
+\define <macro-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...) <single-line-definition-text>
+```
+
+The first line of the definition specifies the macro name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the macro.
+
+The lines that follow contain the text of the macro text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
+
+<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}}/>
+
+Alternatively, the entire definition can be presented on a single line without an `\end` marker:
+
+```
+\define sayhi(name:"Bugs Bunny") Hi, I'm $name$.
+```
+
+Macro definitions can be nested by specifying the name of the macro in the `\end` marker. For example:
+
+<<wikitext-example-without-html src:"""\define special-button(caption:"Click me")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
+
+A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.

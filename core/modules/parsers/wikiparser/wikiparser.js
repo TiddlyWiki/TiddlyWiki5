@@ -32,6 +32,7 @@ options: see below:
 	parseAsInline: true to parse text as inline instead of block
 	wiki: reference to wiki to use
 	_canonical_uri: optional URI of content if text is missing or empty
+	configTrimWhiteSpace: true to trim whitespace
 */
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
@@ -46,7 +47,7 @@ var WikiParser = function(type,text,options) {
 	this.source = text || "";
 	this.sourceLength = this.source.length;
 	// Flag for ignoring whitespace
-	this.configTrimWhiteSpace = false;
+	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
 	// Parser mode
 	this.parseAsInline = options.parseAsInline;
 	// Set current parse position

@@ -422,7 +422,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,Tiddler8,TiddlerOne,TiddlerSeventh");
 			expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne,TiddlerSeventh,Tiddler8");
 			expect(wiki.filterTiddlers("[[two]tagging[]sort[title]]").join(",")).toBe("$:/TiddlerFive,$:/TiddlerTwo,Tiddler Three");
-			var fakeWidget = {getVariable: function() {return "one";}};
+			var fakeWidget = {wiki: wiki, getVariable: function(name) {return name === "currentTiddler" ? "one": undefined;}};
 			expect(wiki.filterTiddlers("[all[current]tagging[]]",fakeWidget).join(",")).toBe("Tiddler Three,TiddlerOne,TiddlerSeventh,Tiddler8");
 		});
 	
@@ -625,7 +625,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[{!!title}]").join(",")).toBe("");
 			expect(wiki.filterTiddlers("[prefix{Tiddler8}] +[sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[modifier{Tiddler8!!test-field}] +[sort[title]]").join(",")).toBe("TiddlerOne");
-			var fakeWidget = {wiki: wiki, getVariable: function() {return "Tiddler Three";}};
+			var fakeWidget = {wiki: wiki, getVariable: function(name) {return name === "currentTiddler" ? "Tiddler Three": undefined;}};
 			expect(wiki.filterTiddlers("[modifier{!!modifier}] +[sort[title]]",fakeWidget).join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
 		});
 	

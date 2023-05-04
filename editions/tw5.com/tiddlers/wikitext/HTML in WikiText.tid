@@ -62,7 +62,7 @@ In an extension of conventional HTML syntax, attributes of elements/widgets can 
 
 * a literal string
 * a transclusion of a TextReference
-* a transclusion of a [[macro/variable|Macros in WikiText]]
+* a transclusion of a [[macro/variable|Macros]]
 * as the result of a [[Filter Expression]]
 
 !! Style Attributes
@@ -125,7 +125,7 @@ attr={{tiddler!!field}}
 
 !! Variable Attribute Values
 
-Variable attribute values are indicated with double angle brackets around a [[macro invocation|Macro Calls in WikiText]]. For example:
+Variable attribute values are indicated with double angle brackets around a [[macro invocation|Macro Calls]]. For example:
 
 ```
 <div title=<<MyMacro "Brian">>>

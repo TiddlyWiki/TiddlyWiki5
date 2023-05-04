@@ -26,27 +26,14 @@ exports.reduce = function(source,operator,options) {
 		accumulator = operator.operands[1] || "";
 	for(var index=0; index<results.length; index++) {
 		var title = results[index],
-			list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),{
-				getVariable: function(name,opts) {
-					opts = opts || {};
-					switch(name) {
-						case "currentTiddler":
-							return "" + title;
-						case "..currentTiddler":
-							return options.widget.getVariable("currentTiddler");
-						case "accumulator":
-							return "" + accumulator;
-						case "index":
-							return "" + index;
-						case "revIndex":
-							return "" + (results.length - 1 - index);
-						case "length":
-							return "" + results.length;
-						default:
-							return options.widget.getVariable(name,opts);
-					}
-				}
-			});
+			list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget.makeFakeWidgetWithVariables({
+				"currentTiddler": "" + title,
+				"..currentTiddler": options.widget.getVariable("currentTiddler"),
+				"accumulator": "" + accumulator,
+				"index": "" + index,
+				"revIndex": "" + (results.length - 1 - index),
+				"length": "" + results.length
+			}));
 		if(list.length > 0) {
 			accumulator = "" +  list[0];
 		}

@@ -1,0 +1,21 @@
+caption: fill
+created: 20220909111836951
+modified: 20230419103154328
+tags: Widgets
+title: FillWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.3.0">> The <<.wlink FillWidget>> widget is used within a <<.wlink TranscludeWidget>> widget to specify the content that should be copied to the named "slot". Slots are defined by the <<.wlink SlotWidget>> widget within the transcluded content.
+
+See the <<.wlink TranscludeWidget>> widget for details.
+
+! Attributes
+
+The content of the <<.wlink FillWidget>> widget is used as the content to be passed to the transclusion.
+
+|!Attribute |!Description |
+|$name |The name of the slot to be filled |
+
+<<.warning """The $name attribute must be specified as a literal string""">>

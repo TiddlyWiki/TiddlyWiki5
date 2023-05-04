@@ -1,31 +1,42 @@
 created: 20140211171341271
-modified: 20220505082754270
+modified: 20230419103154328
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
 
-A <<.def macro>> is a named snippet of text. WikiText can use the name as a shorthand way of [[transcluding|Transclusion]] the snippet. Such transclusions are known as <<.def "macro calls">>, and each call can supply a different set of parameters that get substituted for special placeholders within the snippet.
+!! Introduction
 
-For the syntax, see [[Macros in WikiText]].
+A <<.def macro>> is a named snippet of text. They are typically defined with the [[Pragma: \define]]:
 
-Most macros are in fact just parameterised [[variables|Variables]].
+```
+\define my-macro(parameter:"Default value")
+This is the macro, and the parameter is $parameter$.
+\end
+```
 
-They are created using the `\define` [[pragma|Pragma]]. (Behind the scenes, this is transformed into a <<.wlink SetWidget>>, i.e. macros and variables are two sides of the same coin.)
+The name wrapped in double angled [[brackets|Brackets]] is used a shorthand way of [[transcluding|Transclusion]] the snippet. Such transclusions are known as <<.def "macro calls">>, and each call can supply a different set of parameters:
 
-The snippet and its incoming parameter values are treated as simple strings of characters with no WikiText meaning, at least until the placeholders have been filled in and the macro call has returned. This means that a macro can assemble and return the complete syntax of a ~WikiText component, such as a [[link|Linking in WikiText]]. (See [[Transclusion and Substitution]] for further discussion of this.)
+```
+<<my-macro>>
+<<my-macro "The parameter">>
+```
 
-Within a snippet itself, the only markup detected is `$name$` (a placeholder for a macro parameter) and `$(name)$` (a placeholder for a [[variable|Variables]]).
+The parameters that are specified in the macro call are substituted for special placeholders within the snippet:
 
-The <<.mlink dumpvariables>> macro lists all variables (including macros) that are available at that position in the widget tree.
+*  `$parameter-name$` is replaced with the value of the named parameter
+* `$(variable-name)$` is replaced with the value of the named [[variable|Variables]]).
 
-An <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions to another branch of the [[widget tree|Widgets]]. ~TiddlyWiki uses this technique internally to implement global macros -- namely any macros defined in tiddlers with the <<.tag $:/tags/Macro>> tag.
+<<.from-version "5.3.0">> Macros have been [[superseded|Macro Pitfalls]] by [[Procedures]], [[Custom Widgets]] and [[Functions]] which together provide more robust and flexible ways to encapsulate and re-use code. It is now recommended to only use macros when textual substitution is specifically required.
 
-The tag <<.tag $:/tags/Macro/View>> is used to define macros that should only be available within the main view template and the preview panel.
+!! How Macros Work
 
-The tag <<.tag $:/tags/Macro/View/Body>> is used to define macros that should only be available within the main view template body and the preview panel.
+Macros are implemented as a special kind of [[variable|Variables]]. The only thing that distinguishes them from ordinary variables is the way that the parameters are handled.
 
-For maximum flexibility, macros can also be <<.js-macro-link "written as JavaScript modules">>.
+!! Using Macros
 
-A similar effect to a parameterised macro call can be produced by setting [[variables|Variables]] around a [[transclusion|Transclusion]].
+* [[Macro Definitions]] describes how to create macros
+* [[Macro Calls]] describes how to use macros
+* [[Macro Parameter Handling]] describes how macro parameters work
+* [[Macro Pitfalls]] describes some of the pitfalls of using macros
+* [[Core Macros]] lists the built-in core macros
 
-~TiddlyWiki's core has [[several macros|Core Macros]] built in.

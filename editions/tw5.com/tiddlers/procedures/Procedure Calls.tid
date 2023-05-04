@@ -1,0 +1,56 @@
+caption: Macro Calls
+created: 20221007130006705
+modified: 20230419103154329
+tags: WikiText Procedures
+title: Procedure Calls
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+This tiddler describes the different ways in which [[macros|Procedures]] can be called.
+
+!! Procedure Call Transclusion Shortcut
+
+To call a [[procedure|Procedures]], place `<<`double angle brackets`>>` around the name and any parameter values.
+
+```
+<<my-procedure param:"This is the parameter value">>
+```
+
+By default, parameters are listed in the same order as in the procedure definition. A parameter can be labelled with its name and a colon to allow them to be listed in a different order.
+
+If no value is specified for a parameter, the default value given for that parameter in the [[procedure definition|Procedure Definitions]] is used instead. (If no default value was defined, the parameter is blank).
+
+Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces or single or double quotes, it requires no delimiters.
+
+See the discussion about [[parser modes|WikiText parser mode: macro examples]]
+
+!! Procedure Calls with <<.wlink TranscludeWidget>> Widget
+
+The shortcut syntax expands to the <<.wlink TranscludeWidget>> widget with the `$variable` attribute specifying the name of the procedure to transclude.
+
+```
+<$transclude $variable="my-procedure" param="This is the parameter value"/>
+```
+
+The widget itself offers greater flexibility than the shortcut syntax, including the ability to specify dynamic parameter values.
+
+!! Assigning Procedure Calls to Attribute Values
+
+The text of a procedure can be directly assigned to an attribute of a widget or HTML element. The result of the procedure is not wikified, which means that [[parameter handling|Procedure Parameter Handling]] does not take place.
+
+```
+<div class=<<myclasses>>>
+...
+</div>
+```
+
+!! Using Procedure Calls in Filters
+
+Procedure calls can be used in filters. The text is not wikified which again means that the parameters will be ignored.
+
+```
+<$list filter="[<my-procedure>]">
+...
+</$list>
+```
