@@ -10,7 +10,7 @@ The following attributes are supported:
 
 |!Attribute |!Description |
 |''state'' |The title of a state tiddler used to track the state of the map in the `zoom`, `long` and `lat` fields |
-|''layers'' |A filter identifying the GeoJSON layer tiddlers to be displayed on the map |
+|''features'' |A filter identifying the GeoJSON feature tiddlers to be displayed on the map |
 |''markers'' |A filter identifying the GeoJSON marker tiddlers to be displayed on the map |
 
 
