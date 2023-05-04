@@ -5,7 +5,7 @@ modified: 20230410105035569
 
 <span style="float:right;">[img width=340 [Xememex Logo]]</span>
 
-Xememex is a multiuser TiddlyWiki from [[Federatial]]. It allows large groups of people to work together on intertwingled wikis that can share content.
+Xememex is a multiuser TiddlyWiki from [[Federatial]]. It allows large groups of people to work together on intertwingled wikis that can share content. It is implemented as a serverless application on Amazon Web Services.
 
 The largest customer implementation has hundreds of online wikis with thousands of users. See https://manuals.annafreud.org/
 
