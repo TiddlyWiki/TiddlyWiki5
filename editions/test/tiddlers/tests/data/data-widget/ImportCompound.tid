@@ -9,7 +9,9 @@ text: Importing a compound payload tiddler and adding custom fields
 title: Output
 
 \whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
 <$data $compound-tiddler="Compound" custom="Alpha"/>
+</$testcase>
 +
 title: Compound
 type: text/vnd.tiddlywiki-multiple
@@ -22,4 +24,4 @@ This is a payload tiddler from a compound tiddler
 +
 title: ExpectedResult
 
-<p>[{"title":"Payload Tiddler","tags":"Alpha Beta Gamma","text":"This is a payload tiddler from a compound tiddler","custom":"Alpha"}]</p>
+<p><div>[{"title":"Payload Tiddler","tags":"Alpha Beta Gamma","text":"This is a payload tiddler from a compound tiddler","custom":"Alpha"}]</div></p>

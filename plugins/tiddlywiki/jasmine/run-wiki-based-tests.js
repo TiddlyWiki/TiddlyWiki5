@@ -24,7 +24,11 @@ describe("Wiki-based tests", function() {
 		var tiddler = $tw.wiki.getTiddler(title);
 		it(tiddler.fields.title + ": " + tiddler.fields.description, function() {
 			// Add our tiddlers
-			var wiki = new $tw.Wiki();
+			var wiki = new $tw.Wiki(),
+				coreTiddler = $tw.wiki.getTiddler("$:/core");
+			if(coreTiddler) {
+				wiki.addTiddler(coreTiddler);
+			}
 			wiki.addTiddlers(readMultipleTiddlersTiddler(title));
 			// Complain if we don't have the ouput and expected results
 			if(!wiki.tiddlerExists("Output")) {

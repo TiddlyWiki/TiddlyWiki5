@@ -9,7 +9,9 @@ text: Importing a payload filter and adding custom fields
 title: Output
 
 \whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
 <$data $filter="[tag[Definitions]]" custom="Alpha"/>
+</$testcase>
 +
 title: HelloThere
 tags: Definitions
@@ -23,4 +25,4 @@ This is the tiddler AnotherDefinition
 +
 title: ExpectedResult
 
-<p>[{"title":"AnotherDefinition","tags":"Definitions","text":"This is the tiddler AnotherDefinition","custom":"Alpha"},{"title":"HelloThere","tags":"Definitions","text":"This is the tiddler HelloThere","custom":"Alpha"}]</p>
+<p><div>[{"title":"AnotherDefinition","tags":"Definitions","text":"This is the tiddler AnotherDefinition","custom":"Alpha"},{"title":"HelloThere","tags":"Definitions","text":"This is the tiddler HelloThere","custom":"Alpha"}]</div></p>

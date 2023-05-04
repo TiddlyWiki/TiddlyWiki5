@@ -31,12 +31,7 @@ DataWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createTextNode("");
-	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(parent,nextSibling);
-	// Children must have been rendered before we can read the data values
-	domNode.textContent = JSON.stringify(this.readDataTiddlerValues());
-	this.domNodes.push(domNode);
 };
 
 /*

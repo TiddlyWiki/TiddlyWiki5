@@ -57,11 +57,14 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	}
 	loadTiddler("$:/core");
 	loadTiddler("$:/plugins/tiddlywiki/codemirror");
+	// Load the test case template
+	// loadTiddler(this.testcaseTemplate);
 	// Load tiddlers from child data widgets
 	var tiddlers = [];
 	this.findChildrenDataWidgets(this.contentRoot.children,"data",function(widget) {
 		Array.prototype.push.apply(tiddlers,widget.readDataTiddlerValues());
 	});
+	var jsonPayload = JSON.stringify(tiddlers);
 	this.testcaseWiki.addTiddlers(tiddlers);
 	// Unpack plugin tiddlers
 	this.testcaseWiki.readPluginInfo();
@@ -69,15 +72,9 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.testcaseWiki.unpackPluginTiddlers();
 	this.testcaseWiki.addIndexersToWiki();
 	// Generate a `transclusion` variable that depends on the values of the payload tiddlers so that the template can easily make unique state tiddlers
-	this.setVariable("transclusion",$tw.utils.hashString(this.testcaseWiki.getTiddlersAsJson("[all[tiddlers]]")));
-	// Generate a `testcaseInfo` variable that contains information about the subwiki in JSON format
-	var testcaseInfoData = {
-		tiddlers: {} // Hashmap of tiddler titles mapped to array of field names
-	};
-	this.testcaseWiki.each(function(tiddler,title) {
-		testcaseInfoData.tiddlers[title] = Object.keys(tiddler.fields);
-	});
-	this.setVariable("testcaseInfo",JSON.stringify(testcaseInfoData));
+	this.setVariable("transclusion",$tw.utils.hashString(jsonPayload));
+	// Generate a `payloadTiddlers` variable that contains the payload in JSON format
+	this.setVariable("payloadTiddlers",jsonPayload);
 	// Render the page root template of the subwiki
 	var rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{document: this.document, parseAsInline: false, parentWidget: this});
 	rootWidget.render(parent,nextSibling);

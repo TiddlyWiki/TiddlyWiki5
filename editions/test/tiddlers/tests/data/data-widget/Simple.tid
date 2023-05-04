@@ -9,8 +9,10 @@ text: Standalone data widget to create individual tiddlers
 title: Output
 
 \whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
 <$data title="Epsilon" text="Theta"/>
+</$testcase>
 +
 title: ExpectedResult
 
-<p>[{"title":"Epsilon","text":"Theta"}]</p>
+<p><div>[{"title":"Epsilon","text":"Theta"}]</div></p>

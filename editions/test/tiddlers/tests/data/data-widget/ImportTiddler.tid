@@ -9,7 +9,9 @@ text: Importing a payload tiddler and adding custom fields
 title: Output
 
 \whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
 <$data $tiddler="HelloThere" custom="Alpha"/>
+</$testcase>
 +
 title: HelloThere
 tags: Definitions
@@ -18,4 +20,4 @@ This is the tiddler HelloThere
 +
 title: ExpectedResult
 
-<p>[{"title":"HelloThere","tags":"Definitions","text":"This is the tiddler HelloThere","custom":"Alpha"}]</p>
+<p><div>[{"title":"HelloThere","tags":"Definitions","text":"This is the tiddler HelloThere","custom":"Alpha"}]</div></p>
