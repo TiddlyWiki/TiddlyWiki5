@@ -3,7 +3,7 @@ tags: $:/tags/Macro
 
 \define translink(title,mode:"block")
 \whitespace trim
-<div class={{{ [[tc-translink]] [[$mode$]match[block]then[tc-translink-block]] [[$mode$]match[inline]then[tc-translink-inline]] +[join[ ]] }}}>
+<div class={{{ [[tc-translink]] [[$title$]is[missing]then[tc-translink-inline]] [[$mode$]match[block]then[tc-translink-block]] [[$mode$]match[inline]then[tc-translink-inline]] +[first[2]] +[join[ ]] }}}>
 <$link to="""$title$""">
 <h1 style="font-weight: bold; font-size: 1.2em;"><$text text="""$title$"""/></h1>
 </$link>
