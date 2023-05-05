@@ -3,14 +3,28 @@ tags: $:/tags/Macro
 
 \define translink(title,mode:"block")
 \whitespace trim
-<div style="border:1px solid #ccc; padding: 0.5em; background: black; foreground; white;">
+<div class={{{ [[tc-translink]] [[$mode$]match[block]then[tc-translink-block]] [[$mode$]match[inline]then[tc-translink-inline]] +[join[ ]] }}}>
 <$link to="""$title$""">
-<$text text="""$title$"""/>
+<h1><$text text="""$title$"""/></h1>
 </$link>
-<div style="border:1px solid #ccc; padding: 0.5em; background: white; foreground; black;">
 <$transclude tiddler="""$title$""" mode="$mode$">
 "<$text text="""$title$"""/>" is missing
 </$transclude>
 </div>
-</div>
+<style>
+.tc-translink {
+    border: 1px solid;
+    border-color: <<colour "pre-border">>;
+    border-radius: 2px;
+    background: <<colour "pre-background">>;
+	padding: <<verticalPadding>> 1em;
+}.tc-translink-block {
+	padding: 0em 1em;
+}.tc-translink-inline {
+	padding: 0em 1em 1em;
+}.tc-translink h1 {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+</style>
 \end
