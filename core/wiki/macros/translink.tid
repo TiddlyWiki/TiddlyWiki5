@@ -5,7 +5,7 @@ tags: $:/tags/Macro
 \whitespace trim
 <div class={{{ [[tc-translink]] [[$mode$]match[block]then[tc-translink-block]] [[$mode$]match[inline]then[tc-translink-inline]] +[join[ ]] }}}>
 <$link to="""$title$""">
-<h1><$text text="""$title$"""/></h1>
+<h1 style="font-weight: bold; font-size: 1.2em;"><$text text="""$title$"""/></h1>
 </$link>
 <$transclude tiddler="""$title$""" mode="$mode$">
 "<$text text="""$title$"""/>" is missing
@@ -22,9 +22,6 @@ tags: $:/tags/Macro
 	padding: 0em 1em;
 }.tc-translink-inline {
 	padding: 0em 1em 1em;
-}.tc-translink h1 {
-	font-weight: bold;
-	font-size: 1.2em;
 }
 </style>
 \end
