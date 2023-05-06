@@ -688,7 +688,7 @@ Rebuild a previously rendered widget
 */
 Widget.prototype.refreshSelf = function() {
 	var nextSibling = this.findNextSiblingDomNode();
-	this.removeChildDomNodes();
+	this.removeChildDomNodes({ recursive: true });
 	this.render(this.parentDomNode,nextSibling);
 };
 
@@ -753,19 +753,42 @@ Widget.prototype.findFirstDomNode = function() {
 /*
 Remove any DOM nodes created by this widget or its children
 */
-Widget.prototype.removeChildDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
+Widget.prototype.removeChildDomNodes = function(options) {
+	var recursive = options && options.recursive;
+	/**
+	 * If this widget has directly created DOM nodes, delete them and exit.
+	 * This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
+	 */
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
 		});
 		this.domNodes = [];
-	} else {
+		return true;
+	} else if(recursive) {
 		// Otherwise, ask the child widgets to delete their DOM nodes
 		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes();
+			childWidget.removeChildDomNodes(options);
 		});
 	}
+	return false
+};
+
+/*
+Inform widget subclass that extends this widget and children widgets of this widget. Let them know this widget tree is about to destroy, and dom nodes are being unmounted from the document.
+*/
+Widget.prototype.destroy = function(options) {
+	// removeDom by default
+	var removeDom = (options && options.removeDom) || true;
+	if (removeDom) {
+		// prepare options for children, if we have removed the dom, child don't need to remove their dom
+		removeDom = !this.removeChildDomNodes();
+	}
+	// nothing need to do, as dom is already removed in the removeChildDomNodes
+	// we just need to inform the children
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.destroy({ removeDom: removeDom });
+	});
 };
 
 /*

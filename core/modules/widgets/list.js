@@ -219,7 +219,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	} else {
 		// If the list was empty then we need to remove the empty message
 		if(prevList.length === 0) {
-			this.removeChildDomNodes();
+			this.destroy();
 			this.children = [];
 		}
 		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
@@ -312,7 +312,7 @@ ListWidget.prototype.removeListItem = function(index) {
 	if(this.storyview && this.storyview.remove) {
 		this.storyview.remove(widget);
 	} else {
-		widget.removeChildDomNodes();
+		widget.destroy();
 	}
 	// Remove the child widget
 	this.children.splice(index,1);

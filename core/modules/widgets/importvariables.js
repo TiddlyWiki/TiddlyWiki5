@@ -122,7 +122,7 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 	}
 	if(changedAttributes.filter || !$tw.utils.isArrayEqual(this.tiddlerList,tiddlerList) || haveListedTiddlersChanged()) {
 		// Compute the filter
-		this.removeChildDomNodes();
+		this.destroy();
 		this.execute(tiddlerList);
 		this.renderChildren(this.parentDomNode,this.findNextSiblingDomNode());
 		return true;
