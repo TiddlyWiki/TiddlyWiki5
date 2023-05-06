@@ -6,8 +6,7 @@
 		"tiddlywiki/railroad",
 		"tiddlywiki/evernote",
 		"tiddlywiki/internals",
-		"tiddlywiki/menubar",
-		"tiddlywiki/dynannotate"
+		"tiddlywiki/menubar"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
