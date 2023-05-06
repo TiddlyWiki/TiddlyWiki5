@@ -76,7 +76,7 @@ exports.runTests = function(callback,specFilter) {
 			}
 			return $tw.modules.execute(moduleTitle,title);
 		};
-		var contextExports = $tw.utils.evalSandboxed(code,context,title);
+		var contextExports = $tw.utils.evalSandboxed(code,context,title,true);
 		// jasmine/jasmine.js assigns directly to `module.exports`: check
 		// for it first.
 		return context.module.exports || contextExports;

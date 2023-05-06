@@ -569,10 +569,32 @@ $tw.utils.getTypeEncoding = function(ext) {
 	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
+var polyfill =[
+	"// this polyfills the globalThis variable",
+	"// using the this variable on a getter ",
+	"// inserted into the prototype of globalThis",
+	"(function() {",
+	"	if (typeof globalThis === 'object') return;",
+	"	// node.green says this is available since 0.10.48",
+	"	Object.prototype.__defineGetter__('__temp__', function() {",
+	"		return this;",
+	"	});",
+	"	__temp__.globalThis = __temp__;",
+	"	delete Object.prototype.__temp__;",
+	"}());"
+].join("\n");
+
+var globalCheck =[
+	"  if(Object.keys(globalThis).length){",
+	"    console.log(Object.keys(globalThis));",
+	"    throw \"Global assignment is not allowed within modules on node.\";",
+	"  }"
+].join('\n');
+
 /*
 Run code globally with specified context variables in scope
 */
-$tw.utils.evalGlobal = function(code,context,filename) {
+$tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
@@ -581,25 +603,39 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + "\n;})();\nreturn exports;\n})\n";
+	code = [
+		(!$tw.browser ? polyfill : ""),
+		"(function(" + contextNames.join(",") + ") {",
+		"  (function(){\n" + code + "\n;})();",
+		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
+		"  return exports;\n",
+		"})"
+	].join("\n");
+
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
-		fn = vm.runInThisContext(code,filename);
+		if(sandbox){
+			fn = vm.runInContext(code,sandbox,filename)
+		} else {
+			fn = vm.runInThisContext(code,filename);
+		}
 	}
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-
+$tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined; 
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
-$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	var sandbox = $tw.utils.extend(Object.create(null),context);
-	vm.runInNewContext(code,sandbox,filename);
-	return sandbox.exports;
+$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename,allowGlobals) {
+	return $tw.utils.evalGlobal(
+		code,context,filename,
+		allowGlobals ? vm.createContext({}) : $tw.utils.sandbox,
+		allowGlobals
+	);
 };
 
 /*
