@@ -287,11 +287,11 @@ ol.doc-github-contributors li {
 }
 
 .doc-op-comparison {
-  table-layout: fixed;
-  width: 80%;
+	table-layout: fixed;
+	width: 80%;
 }
 
 .doc-op-comparison th .doc-operator {
-  background-color: unset;
-  color: #666;
+	background-color: unset;
+	color: #666;
 }
