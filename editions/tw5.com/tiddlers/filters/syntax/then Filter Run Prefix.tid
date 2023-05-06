@@ -1,11 +1,12 @@
 created: 20210618133745003
 from-version: 5.3.0
-modified: 20230501071859714
+modified: 20230506172920710
 rp-input: <<.olink all>> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]
 rp-output: the output of this filter run replaces the output of previous runs unless it is an empty list (see below)
 rp-purpose: replace any input to this filter run with its output
-tags: [[Named Filter Run Prefix]]
-title: :then Filter Run Prefix
+search: 
+tags: [[Filter Run Prefix]] [[Filter Syntax]]
+title: Then Filter Run Prefix
 type: text/vnd.tiddlywiki
 
 \define .op-row()
@@ -15,43 +16,29 @@ type: text/vnd.tiddlywiki
 	else=""/>
 \end
 
-<style>
-.doc-op-comparison {
-  table-layout: fixed;
-  width: 80%;
-}
-.doc-op-comparison th .doc-operator {
-  background-color: unset;
-  color: #666;
-}
-</style>
-
-<$list filter="[all[current]tag[Named Filter Run Prefix]]">
-	<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
-	<$let op-head="" op-body="" op-name="">
-		<table class="doc-table">
-			<!-- purpose -->
-			<$let op-head="purpose" op-body={{!!rp-purpose}}>
-				<<.op-row>>
-			</$let>
-			<!-- input -->
-			<$let op-head="[[input|Filter Expression]]" op-body={{!!rp-input}}>
-				<<.op-row>>
-			</$let>
-			<!-- suffix -->
-			<$let op-head="suffix" op-body={{!!rp-suffix}} op-name={{!!rp-suffix-name}}>
-				<<.op-row>>
-			</$let>
-			<!-- output -->
-			<$let op-head="output" op-body={{!!rp-output}}>
-				<<.op-row>>
-			</$let>
-		</table>
-		<$list filter="[all[current]has[from-version]]" variable="listItem">
-			<$macrocall $name=".from-version" version={{!!from-version}}/>
-		</$list>
-	</$let>
+<$list filter="[all[current]has[from-version]]" variable="listItem">
+	<$macrocall $name=".from-version" version={{!!from-version}}/>
 </$list>
+<$let op-head="" op-body="" op-name="">
+	<table class="doc-table">
+		<!-- purpose -->
+		<$let op-head="purpose" op-body={{!!rp-purpose}}>
+			<<.op-row>>
+		</$let>
+		<!-- input -->
+		<$let op-head="[[input|Filter Expression]]" op-body={{!!rp-input}}>
+			<<.op-row>>
+		</$let>
+		<!-- suffix -->
+		<$let op-head="suffix" op-body={{!!rp-suffix}} op-name={{!!rp-suffix-name}}>
+			<<.op-row>>
+		</$let>
+		<!-- output -->
+		<$let op-head="output" op-body={{!!rp-output}}>
+			<<.op-row>>
+		</$let>
+	</table>
+</$let>
 
 <$railroad text="""
 \start none
@@ -82,6 +69,18 @@ The major difference between the <<.op then>> operator and a <<.op :then>> prefi
 
 ! Example
 
+!! Conditional Execution
+
+The <<.op :then>> filter run prefix can be used to avoid the need for nested [[ListWidget]]s or [[Macro Definitions in WikiText]].
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$edit-text field="search" placeholder="Search title"/>
+
+<$let searchTerm={{!!search}}>
+<$list filter="[<searchTerm>minlength[3]] :then[!is[system]search:title<searchTerm>]" template="$:/core/ui/ListItemTemplate"/>
+</$let>"""/>
+
+
 !! Conditional (Sub)Filters
 
 The <<.op :then>> filter run prefix can be combined with the <<.op :else>> prefix to create conditional filters. In this example, the fields used in <<.var searchSubfilter>> for searching depend on the value of [[$:/temp/searchFields]] and the sort order used by <<.var sortSubfilter>> depends on the value of [[$:/temp/searchSort]]. Checkboxes are used to set the values of these tiddlers.
@@ -111,11 +110,4 @@ src="""<$checkbox tiddler="$:/temp/searchSort"
     ... and <<currentTiddler>> more.
   </$list>
 </$let>"""/>
-
-
-
-
-
-
-
 
