@@ -20,7 +20,10 @@ The suffix <<.place B>> is one of the following supported string formats:
 |^`date` |The input string is interpreted as a UTC date and displayed according to the DateFormat specified in the optional operator operand. (Defaults to "YYYY MM DD 0hh:0mm") |
 |^`json` |<<.from-version "5.2.4">> The input string is interpreted as JSON and displayed with standard formatting. The optional operator operand specifies the number of spaces to use for indenting, or a string to use for indenting. Nothing is returned if the input string is not valid JSON |
 |^`relativedate` |The input string is interpreted as a UTC date and displayed as the interval from the present instant. Any operator parameters are ignored |
+|^`timestamp` |<<.from-version "5.3.0">> The input string is interpreted as number of milliseconds since the [[ECMAScript epoch|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#the_ecmascript_epoch_and_timestamps]], 1 January 1970, and displayed according to the DateFormat specified in the optional operator operand. (Defaults to "[UTC]YYYY0MM0DD0hh0mm0ss0XXX") |
 |^`titlelist` |<<.from-version "5.2.0">> The input string wrapped in double square brackets if it contains a space. Appropriate for use in a [[title list|Title List]]. |
+
+Invalid input strings are dropped by the <<.op format>> operator.
 
 <<.warning """The [[Title List]] format cannot reliably represent items that contain certain specific character sequences such as `]] `. Thus it should not be used where there is a possibility of such sequences occurring.""">>
 
