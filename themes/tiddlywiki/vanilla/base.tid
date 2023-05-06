@@ -3238,3 +3238,10 @@ select {
 .tc-tiny-v-gap-bottom {
 	margin-bottom: 3px;
 }
+
+/* Emphasis */
+
+.tc-big-bold {
+	font-size: 1.2em;
+    font-weight: bold;    
+}
