@@ -60,6 +60,7 @@ Improvements to the following translations:
 ! Hackability Improvements
 
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7413">> [[Core Icons]] to allow the size to be controlled with a parameter
+** <<.warning """This change can cause problems with non-standard usage of the core icons where the text is directly rendered instead of being transcluded""">>
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7182">> new [[thisTiddler Variable]] that refers to the tiddler currently being rendered
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7332">> [[Story Tiddler Template Cascade]] handling to fall back to the default template if the output of the cascade is not valid
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7378">> missing file extensions for "audio/mpeg" files
