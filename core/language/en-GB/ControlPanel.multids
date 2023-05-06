@@ -28,7 +28,7 @@ Basics/Title/Prompt: Title of this ~TiddlyWiki
 Basics/Username/Prompt: Username for signing edits
 Basics/Version/Prompt: ~TiddlyWiki version
 Cascades/Caption: Cascades
-Cascades/Hint: These global rules are used to dynamically choose certain templates. The result of the cascade is the result of the first filter in the sequence that returns a result. In case of problems with custom cascade filters, change their order in the corresponding tag dropdown or delete the changed cascade tiddlers to return to their original shadow versions.
+Cascades/Hint: These global rules are used to dynamically choose certain templates. The result of the cascade is the result of the first filter in the sequence that returns a result
 Cascades/TagPrompt: Filters tagged <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: Editor Types
 EditorTypes/Editor/Caption: Editor
