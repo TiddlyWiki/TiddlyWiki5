@@ -1,0 +1,12 @@
+caption: currentTiddler
+created: 20230304122810114
+modified: 20230304123557862
+tags: Variables [[Core Variables]]
+title: thisTiddler Variable
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">> The <<.def thisTiddler>> [[variable|Variables]] is set by the <<.wlink TranscludeWidget>> widget to contain the title of the tiddler that was transcluded. This means that within a tiddler <<.def thisTiddler>> will contain the title of that tiddler. It is not affected by macros, which means that within a macro <<.def thisTiddler>> will contain the title of the tiddler from which the macro was invoked. Intermediate, nested macro calls are ignored.
+
+Compare <<.vlink storyTiddler>> and <<.vlink currentTiddler>>.
+
+<<.variable-examples "thisTiddler">>

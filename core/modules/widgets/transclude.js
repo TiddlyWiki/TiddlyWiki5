@@ -279,6 +279,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							defaultType: this.transcludeType
 						});
 	}
+	// Set 'thisTiddler'
+	this.setVariable("thisTiddler",this.transcludeTitle);
 	// Return the parse tree
 	if(parser) {
 		return {
