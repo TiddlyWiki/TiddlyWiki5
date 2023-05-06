@@ -440,6 +440,7 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[[one]] [[two]] [[three]] :then[[four]]").join(",")).toBe("four");
 		expect(wiki.filterTiddlers("[[one]] :then[tag[nonexistent]]").join(",")).toBe("one");
 		expect(wiki.filterTiddlers(":then[[two]]").length).toBe(0);
+		expect(wiki.filterTiddlers("[[notatiddler]is[tiddler]] :then[[two]]").length).toBe(0);
 	});
 
 	it("should handle macro parameters for filter run prefixes",function() {
