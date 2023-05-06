@@ -1920,7 +1920,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	// Read the specification
 	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields,isEditableFile) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
@@ -1941,6 +1941,12 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				} else {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
+						case "subdirectories":
+							value = path.relative(rootPath, filename).split('/').slice(0, -1);
+							break;
+						case "filepath":
+							value = path.relative(rootPath, filename);
+							break;
 						case "filename":
 							value = path.basename(filename);
 							break;
@@ -2023,7 +2029,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var thisPath = path.relative(filepath, files[t]),
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
 					}
 				}
 			} else {
