@@ -3,7 +3,7 @@ tags: $:/tags/Macro
 
 \define translink(title,mode:"block")
 \whitespace trim
-<div class="pre-border" style="padding: 0 1em;">
+<div class="tc-pre-border" style="padding: 0 1em;">
 <$link to="""$title$""">
 <h1 class="tc-big-bold"><$text text="""$title$"""/></h1>
 </$link>
