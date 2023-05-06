@@ -112,7 +112,7 @@ Prompted by the [[General Data Protection Regulation (GDPR)|https://en.wikipedia
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3093]] problem with crash when dragging over TiddlyWiki on some browsers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3079]] issue with new journal button
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3164]] problem with ''filter'' and ''value'' attributes of SetWidget
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3190]] problem with numeric operands in the [[The Extended Listops Filters]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3190]] problem with numeric operands in the [[Extended Listops Filters]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/df1f7e9798b5f6c3d2c3fd82e438cbc9713ade04]] problem with "put" saver and 412 return codes
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3048]] problem with variable references in field values in the edit template
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/3219]] behaviour of list-after field so that the tiddler is placed at the end of the list if the list-after field is present but empty 

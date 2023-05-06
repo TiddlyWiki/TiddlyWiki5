@@ -1,0 +1,24 @@
+title: CustomOperators/Parameterised
+description: Parameterised custom operator usage
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function .multiplybysomething(first:ignored,factor:2)
+[multiply[2]multiply<factor>]
+\end
+
+<$text text={{{ [[123].multiplybysomething[]] }}}/>
+-
+<$text text={{{ [[123].multiplybysomething[x],[4]] }}}/>
+|
+<$text text={{{ [[123]function[.multiplybysomething]] }}}/>
+-
+<$text text={{{ [[123]function[.multiplybysomething],[x],[4]] }}}/>
+
++
+title: ExpectedResult
+
+<p>492-984|492-984</p>

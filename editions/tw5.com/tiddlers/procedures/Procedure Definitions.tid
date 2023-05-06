@@ -1,0 +1,43 @@
+created: 20221007125701001
+modified: 20230419103154329
+tags: WikiText Procedures
+title: Procedure Definitions
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+This tiddler describes the different ways in which [[macros|Procedures]] can be defined.
+
+!! Procedure Definition Pragma
+
+Macros are created using the [[Pragma: \procedure]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
+
+```
+\define my-procedure(param)
+This is the macro text (param=<<param>>)
+\end
+```
+
+!! Procedure Definition with Set Widget
+
+Procedures are implemented as a special kind of [[variable|Variables]] and so internally are actually defined with a <<.wlink SetWidget>> widget.
+
+```
+<$set name="my-procedure" value="This is the procedure text">
+...
+</$set>
+```
+
+<<.note """that it is not currently possible to specify parameters when defining a procedure with the  <<.wlink SetWidget>> widget.""">>
+
+!! Importing Procedure Definitions
+
+The [[Pragma: \import]] or <<.wlink ImportVariablesWidget>> widget can be used to copy procedure definitions from another tiddler.
+
+!! `$:/tags/Macro` Tag
+
+Global procedures can be defined using the [[SystemTag: $:/tags/Macro]].
+
+The tag [[SystemTag: $:/tags/Macro/View]] is used to define procedures that should only be available within the main view template and the preview panel.
+
+The tag [[SystemTag: $:/tags/Macro/View/Body]] is used to define procedures that should only be available within the main view template body and the preview panel.

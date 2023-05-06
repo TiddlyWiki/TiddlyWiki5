@@ -28,6 +28,8 @@ var VideoParser = function(type,text,options) {
 		element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["video/ogg"] = VideoParser;

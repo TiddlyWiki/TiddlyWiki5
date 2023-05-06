@@ -1,0 +1,27 @@
+title: Transclude/CustomWidget/ActionWidget
+description: Custom widget definition
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='Result'>
+</$transclude>
++
+title: Actions
+
+\whitespace trim
+<!-- Define the <$$action-mywidget> widget by defining a transcludable variable with that name -->
+\widget $$action-mywidget(one:'Jaguar')
+\whitespace trim
+<$action-setfield $tiddler="Result" $field="text" $value=<<one>>/>
+\end
+
+<$$action-mywidget one="Dingo">
+	Crocodile
+</$$action-mywidget>
++
+title: ExpectedResult
+
+<p>Dingo</p>

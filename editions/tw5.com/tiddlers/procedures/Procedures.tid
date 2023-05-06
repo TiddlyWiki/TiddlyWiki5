@@ -1,0 +1,35 @@
+created: 20221007124007426
+modified: 20230419103154329
+tags: Concepts Reference
+title: Procedures
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+<<.from-version "5.3.0">> A <<.def procedure>> is a named snippet of text. They are typically defined with the [[Pragma: \procedure]]:
+
+```
+\procedure my-procedure(parameter:"Default value")
+This is the procedure, and the parameter is <<parameter>>.
+\end
+```
+
+The name wrapped in double angled [[brackets|Brackets]] is used a shorthand way of [[transcluding|Transclusion]] the snippet. Each of these <<.def "procedure calls">> can supply a different set of parameters:
+
+```
+<<my-procedure>>
+<<my-procedure "The parameter">>
+```
+
+The parameters that are specified in the procedure call are made available as variables.
+
+!! How Procedures Work
+
+Procedures are implemented as a special kind of [[variable|Variables]]. The only thing that distinguishes them from ordinary variables is the way that the parameters are handled.
+
+!! Using Procedures
+
+* [[Procedure Definitions]] describes how to create procedures
+* [[Procedure Calls]] describes how to use procedures
+* [[Procedure Parameter Handling]] describes how procedure parameters work
+

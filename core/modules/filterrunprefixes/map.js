@@ -21,23 +21,13 @@ exports.map = function(operationSubFunction,options) {
 				flatten = (suffixes[0] && suffixes[0][0] === "flat") ? true : false;
 			results.clear();
 			$tw.utils.each(inputTitles,function(title) {
-				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name,opts) {
-						opts = opts || {};
-						opts.variables = {
-							"currentTiddler": "" + title,
-							"..currentTiddler": widget.getVariable("currentTiddler"),
-							"index": "" + index,
-							"revIndex": "" +  (inputTitles.length - 1 - index),
-							"length": "" + inputTitles.length
-						};
-						if(name in opts.variables) {
-							return opts.variables[name];
-						} else {
-							return widget.getVariable(name,opts);
-						}
-					}
-				});
+				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
+					"currentTiddler": "" + title,
+					"..currentTiddler": widget.getVariable("currentTiddler",""),
+					"index": "" + index,
+					"revIndex": "" +  (inputTitles.length - 1 - index),
+					"length": "" + inputTitles.length
+				}));
 				if(filtered.length && flatten) {
 					$tw.utils.each(filtered,function(value) {
 						results.push(value);
