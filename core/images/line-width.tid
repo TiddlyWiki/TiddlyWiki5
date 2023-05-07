@@ -1,4 +1,5 @@
 title: $:/core/images/line-width
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-line-width tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M16 18h96a2 2 0 000-4H16a2 2 0 100 4zm0 17h96a4 4 0 100-8H16a4 4 0 100 8zm0 21h96a6 6 0 000-12H16a6 6 0 100 12zm0 29h96c5.523 0 10-4.477 10-10s-4.477-10-10-10H16c-5.523 0-10 4.477-10 10s4.477 10 10 10zm0 43h96c8.837 0 16-7.163 16-16s-7.163-16-16-16H16c-8.837 0-16 7.163-16 16s7.163 16 16 16z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-line-width tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M16 18h96a2 2 0 000-4H16a2 2 0 100 4zm0 17h96a4 4 0 100-8H16a4 4 0 100 8zm0 21h96a6 6 0 000-12H16a6 6 0 100 12zm0 29h96c5.523 0 10-4.477 10-10s-4.477-10-10-10H16c-5.523 0-10 4.477-10 10s4.477 10 10 10zm0 43h96c8.837 0 16-7.163 16-16s-7.163-16-16-16H16c-8.837 0-16 7.163-16 16s7.163 16 16 16z"/></svg>
