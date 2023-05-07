@@ -10,9 +10,9 @@ The first example shows how <<.def thisTiddler>> works whithin transcluded templ
 
 The second example shows <<.def thisTiddler>> in the body of tiddler and inside a macro.
 
-<$macrocall $name=".example" n="1" eg="""<$text text=<<thisTiddler>>/>"""/>
+<$macrocall $name=".example" n="2" eg="""<$text text=<<thisTiddler>>/>"""/>
 
-<$macrocall $name=".example" n="2" eg="""\define example() <$text text=<<thisTiddler>>/>
+<$macrocall $name=".example" n="3" eg="""\define example() <$text text=<<thisTiddler>>/>
 <<example>>
 """/>
 
