@@ -8,7 +8,7 @@ tags: $:/tags/Macro
 <h1 class="tc-big-bold"><$text text="""$title$"""/></h1>
 </$link>
 <p><$transclude tiddler="""$title$""" mode="$mode$">
-"<$text text="""$title$"""/>" is missing
+<$set name="currentTiddler" value="""$title$"""><$transclude tiddler="$:/language/MissingTiddler/Hint"/></$set>
 </$transclude></p>
 </div>
 \end
