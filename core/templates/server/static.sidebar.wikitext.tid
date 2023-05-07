@@ -1,0 +1,30 @@
+title: $:/core/templates/server/static.sidebar.wikitext
+
+\whitespace trim
+<div class="tc-sidebar-scrollable" style="overflow: auto;" role="region" aria-label={{$:/language/SideBar/Caption}}>
+<div class="tc-sidebar-header">
+<h1 class="tc-site-title">
+<$transclude tiddler="$:/SiteTitle"/>
+</h1>
+<div class="tc-site-subtitle">
+<$transclude tiddler="$:/SiteSubtitle"/>
+</div>
+<h2>
+</h2>
+<div class="tc-sidebar-lists">
+<$list filter={{$:/DefaultTiddlers}}>
+<div class="tc-menu-list-subitem">
+<$link><$text text=<<currentTiddler>>/></$link>
+</div>
+</$list>
+</div>
+<!-- Currently disabled the recent list as it is unweildy when the responsive narrow view kicks in
+<h2>
+{{$:/language/SideBar/Recent/Caption}}
+</h2>
+<div class="tc-sidebar-lists">
+<$macrocall $name="timeline" format={{$:/language/RecentChanges/DateFormat}}/>
+</div>
+</div>
+</div>
+-->

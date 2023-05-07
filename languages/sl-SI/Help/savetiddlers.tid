@@ -1,0 +1,15 @@
+title: $:/language/Help/savetiddlers
+description: Saves a group of raw tiddlers to a directory
+
+Shrani skupino tiddlerjev v obliki besedila ali v binarni obliki v določen imenik.
+Saves a group of tiddlers in their raw text or binary format to the specified directory.
+
+```
+--savetiddlers <filter> <pathname> ["noclean"]
+```
+
+Privzeto je pot do izhodne datoteke relativna glede na podimenik `output` v imeniku izdaje. Ukaz `--output` lahko uporabite za usmerjanje izhoda v drug imenik.
+
+Ko uporabite ta ukaz se vse datoteke v izhodnem imeniku samodejno izbrišejo. Da bi to preprečili, lahko uporabite parameter ''noclean''.
+
+Vsi manjkajoči imeniki na poti do imena datoteke se samodejno ustvarijo.

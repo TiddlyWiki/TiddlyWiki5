@@ -1,0 +1,29 @@
+title: $:/language/Help/listen
+description: Geeft een HTTP server interface voor TiddlyWiki
+
+Levert een wiki over HTTP uit.
+
+Het 'listen' commando gebruikt NamedCommandParameters:
+
+```
+--listen [<name>=<value>]...
+```
+
+Alle parameters zijn optioneel met veilige standaardwaarden, en kunnen in willekeurige volgorde gespecificeerd worden. De mogelijke parameters zijn:
+
+* ''host'' - optionele 'hostname' om uit te leveren (standaard "127.0.0.1" oftewel "localhost")
+* ''path-prefix'' - optioneel voorvoegsel voor paden
+* ''port'' - poortnummer voor communicatie; niet-numerieke waarden worden geïnterpreteerd als een systeem 'environment variable' waaruit het poortnummer geëxtraheerd wordt (standaard "8080")
+* ''credentials'' - padnaam naar CSV-bestand met aanmeldgegevens (relatief t.o.v. wiki folder)
+* ''anon-username'' - de gebruikersnaam waarmee wijzigingen gesigneerd worden voor anonieme gebruikers
+* ''username'' - optionele gebruikersnaam voor simpele verificatie
+* ''password'' - optioneel wachtwoord voor simpele verificatie
+* ''authenticated-user-header'' - optionele naam van de 'header' die gebruikt wordt voor vertrouwde verificatie
+* ''readers'' - 'comma separated' lijst van 'principalen' die deze wiki mogen lezen
+* ''writers'' - 'comma separated' lijst van 'principalen' die naar deze wiki mogen schrijven
+* ''csrf-disable'' - zet op "yes" om CSRF checks uit te zetten (standaard "no")
+* ''root-tiddler'' - de root tiddler (standaard "$:/core/save/all")
+* ''root-render-type'' - het inhoudstype waarmee de basistiddler getoond wordt (standaard "text/plain")
+* ''root-serve-type'' - het inhoudstype waarmee de basistiddler uitgeleverd wordt (standaard "text/html")
+* ''tls-cert'' - padnaam naar bestand met 'key' (relatief t.o.v. wiki folder)
+* ''debug-level'' - optioneel debug level; zet op "debug" om details te tonen (standaard "none")

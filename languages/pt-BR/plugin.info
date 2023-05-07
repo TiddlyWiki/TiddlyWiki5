@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/pt-BR",
+	"name": "pt-BR",
+	"plugin-type": "language",
+	"description": "Português (Brasil)",
+	"author": "Mauricio Lucas",
+	"core-version": ">=5.1.14"
+}

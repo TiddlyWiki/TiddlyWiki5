@@ -1,0 +1,16 @@
+created: 20180222071947788
+modified: 20220227210921516
+tags: [[sortan Operator]] [[Operator Examples]]
+title: sortan Operator (Examples)
+type: text/vnd.tiddlywiki
+
+These examples make use of the [[Apple]] tiddler.
+
+----
+
+Try the following example with `sort` instead of `sortan`
+
+<<.operator-example 1 "[list[Apple]sortan[]]">>
+<<.operator-example 2 "[list[Apple]!sortan[]]">>
+<<.operator-example 3 "App-10-A App-9-B App-10-B App-9-A +[sortan[]]">>
+

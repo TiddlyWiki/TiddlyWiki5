@@ -1,0 +1,7 @@
+created: 20210622214849214
+modified: 20210622214849214
+tags: [[charcode Operator]] [[Operator Examples]]
+title: charcode Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[charcode[65]match[A]]">>

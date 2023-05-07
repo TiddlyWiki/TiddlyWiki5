@@ -1,0 +1,35 @@
+title: $:/language/Help/listen
+description: 为 TiddlyWiki 提供一个 HTTP 服务器接口
+
+通过 HTTP 提供一个维基服务。
+
+listen 命令使用[[命名的命令参数|NamedCommandParameters]]：
+
+```
+--listen [<name>=<value>]...
+```
+
+所有参数都是可选的, 具有安全的默认值, 可以按任意顺序指定。认可的参数有:
+
+* ''host'' - 可选的主机名称， (默认为 "127.0.0.1" 或名为 "localhost")
+* ''path-prefix'' - 可选的路径前缀
+* ''port'' - 侦听的埠号；非数值会被解译为一个系统环境变数，从其中提取埠号 (默认为 "8080")
+* ''credentials'' - 凭证 CSV 文件的路径名（相对于维基文件夹）
+* ''anon-username'' - 匿名用户的编辑署名
+* ''username'' - 可选的基础验证用户名称
+* ''password'' - 可选的基础验证密码
+* ''authenticated-user-header'' - 可选的标头名称，用于受信任身份验证
+* ''readers'' - 允许读取此维基，以逗号分隔的用户名称的清单
+* ''writers'' - 允许写入此维基，以逗号分隔的用户名称的清单
+* ''csrf-disable'' - 设置为 "yes" 以禁用 CSRF 检查 (默认为 "no")
+* ''sse-enabled'' - 设置为 "yes" 以启用服务器传送的事件 (默认为 "no")
+* ''root-tiddler'' - 服务的基础条目 (默认为 "$:/core/save/all")
+* ''root-render-type'' - 呈现的基础条目的内容类型 (默认为 "text/plain")
+* ''root-serve-type'' - 服务的基础条目的内容类型 (默认为 "text/html")
+* ''tls-cert'' - TLS 证书文件的路径名（相对于维基文件夹）
+* ''tls-key'' - TLS 密钥文件的路径名（相对于维基文件夹）
+* ''debug-level'' - 可选的调试级别；设置为 "debug" 来查看请求的详细信息；(默认为 "none")
+* ''gzip'' - 设为 "yes" 以启用某些 http 端点的 gzip 压缩 (默认为 "no")
+* ''use-browser-cache'' - 设置为 "yes" 允许浏览器缓存响应，以节省带宽（默认为 "no")
+
+有关向整个本地网络开启实例的信息，以及可能的安全问题，请参阅 TiddlyWiki.com 的 WebServer 条目。

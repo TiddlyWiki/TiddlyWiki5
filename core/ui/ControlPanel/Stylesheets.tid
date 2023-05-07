@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Stylesheets
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/Stylesheets/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/
+
+<<lingo Stylesheets/Hint>>
+
+{{$:/snippets/peek-stylesheets}}

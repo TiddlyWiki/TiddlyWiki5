@@ -56,14 +56,14 @@ Dargestellt als:
 Um zu externen Seiten zu verknüpfen muss die volle URL verwendet werden:
 
 ```
-* http://tiddlywiki.com/
-* [[TW5|http://tiddlywiki.com/]]
+* https://tiddlywiki.com/
+* [[TW5|https://tiddlywiki.com/]]
 ```
 
 Dargestellt als: 
 
-* http://tiddlywiki.com/
-* [[TW5|http://tiddlywiki.com/]]
+* https://tiddlywiki.com/
+* [[TW5|https://tiddlywiki.com/]]
 
 Die automatische Erkennung von externen Verknüpfungen hat einige Schwächen. Deshalb ist es möglich eine externe Verknüpfung zu definieren: 
 

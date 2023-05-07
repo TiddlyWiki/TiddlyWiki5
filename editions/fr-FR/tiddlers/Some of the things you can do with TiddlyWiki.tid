@@ -18,4 +18,4 @@ type: text/vnd.tiddlywiki
 * Créer un assistant modal (on parle aussi de //lightbox//) — voir [[Exemple d'assistant|SampleWizard]]<<;>>
 * Créer une présentation de type « transparents »<<;>>
 * Créer une base de connaissance complète en local ou en ligne, à partir d'un fichier <<tw>> central pointant vers d'autres fichiers <<tw>> (un exemple est visible à l'adresse http://recursos.giffmex.org)<<;>>
-* Créer une infographie en utilisant des tiddlers comme données (voir les infographies à l'adresse http://tiddlywiki.com/plugins/tiddlywiki/d3/).
+* Créer une infographie en utilisant des tiddlers comme données (voir les infographies à l'adresse https://tiddlywiki.com/plugins/tiddlywiki/d3/).

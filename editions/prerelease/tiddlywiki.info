@@ -1,21 +1,20 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/googleanalytics",
-		"tiddlywiki/nodewebkitsaver",
-		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
 		"tiddlywiki/stacked-view",
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
-		"tiddlywiki/markdown",
-		"tiddlywiki/qrcode",
 		"tiddlywiki/bibtex",
 		"tiddlywiki/savetrail",
-		"tiddlywiki/twitter",
-		"tiddlywiki/mobiledragdrop"
+		"tiddlywiki/external-attachments",
+		"tiddlywiki/dynaview",
+		"tiddlywiki/dynannotate",
+		"tiddlywiki/codemirror",
+		"tiddlywiki/menubar",
+		"tiddlywiki/jszip"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

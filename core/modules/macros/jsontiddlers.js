@@ -19,26 +19,15 @@ Information about this macro
 exports.name = "jsontiddlers";
 
 exports.params = [
-	{name: "filter"}
+	{name: "filter"},
+	{name: "spaces"}
 ];
 
 /*
 Run the macro
 */
-exports.run = function(filter) {
-	var tiddlers = this.wiki.filterTiddlers(filter),
-		data = [];
-	for(var t=0;t<tiddlers.length; t++) {
-		var tiddler = this.wiki.getTiddler(tiddlers[t]);
-		if(tiddler) {
-			var fields = new Object();
-			for(var field in tiddler.fields) {
-				fields[field] = tiddler.getFieldString(field);
-			}
-			data.push(fields);
-		}
-	}
-	return JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
+exports.run = function(filter,spaces) {
+	return this.wiki.getTiddlersAsJson(filter,$tw.utils.parseInt(spaces));
 };
 
 })();

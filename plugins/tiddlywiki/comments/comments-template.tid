@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/comments/comments-template
+
+<div class="tc-comments">
+<ol class="tc-comment-list">
+<$list filter="[all[tiddlers+shadows]role[comment]contains<currentTiddler>sort[created]!has[draft.of]]">
+<li>
+<div class="tc-comment-entry">
+<div class="tc-comment-entry-heading">
+<$link>{{!!creator}} at <$view field="modified" format="date" template="0hh:0mm:0ss DDD DDth MMM YYYY"/></$link>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/CommentToolbarButton]!has[draft.of]]" variable="listItem">
+<$transclude tiddler=<<listItem>> mode="inline"/>
+</$list>
+</div>
+<div class="tc-comment-entry-body">
+<$reveal type="match" state="!!edit-mode" text="yes">
+<$edit-text tiddler=<<currentTiddler>> tag="textarea" focus="true"/>
+</$reveal>
+<$reveal type="nomatch" state="!!edit-mode" text="yes">
+<$transclude tiddler=<<currentTiddler>> mode="block"/>
+<$transclude tiddler="$:/plugins/tiddlywiki/comments/add-comment-button" mode="inline"/>
+</$reveal>
+</div>
+</div>
+<$transclude tiddler="$:/plugins/tiddlywiki/comments/comments-template" mode="inline"/>
+</li>
+</$list>
+</ol>
+</div>

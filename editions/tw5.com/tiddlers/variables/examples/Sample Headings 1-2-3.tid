@@ -1,0 +1,23 @@
+created: 20180609112450207
+modified: 20211117024604173
+tags: [[Variable Examples]]
+title: Sample Headings 1,2,3
+
+! This is a Level 1 Heading
+
+This is a paragraph.
+
+<$vars tv-adjust-heading-level="-2">
+
+{{Sample Headings 3,4,5}}
+
+</$vars>
+
+!! This is a Level 2 heading
+
+<$vars tv-adjust-heading-level="-1">
+
+{{Sample Headings 4,5,6}}
+
+</$vars>
+

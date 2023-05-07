@@ -60,7 +60,7 @@ var listTypes = {
 	"#": {listTag: "ol", itemTag: "li"},
 	";": {listTag: "dl", itemTag: "dt"},
 	":": {listTag: "dl", itemTag: "dd"},
-	">": {listTag: "blockquote", itemTag: "p"}
+	">": {listTag: "blockquote", itemTag: "div"}
 };
 
 /*

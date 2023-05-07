@@ -1,0 +1,70 @@
+title: $:/plugins/tiddlywiki/comments/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tc-is-comment-header {
+	padding: 0.25em;
+	border: 2px solid #c1e1ea;
+	border-radius: 4px;
+	background: #f1fcff;
+}
+
+.tc-comments-segment {
+	border-top: 2px solid #d7eef4;
+}
+
+.tc-comment-button button {
+	width: 100%;
+	text-align: right;
+}
+
+.tc-sidebar-scrollable .tc-comment-button button {
+	width: auto;
+	text-align: right;
+}
+
+.tc-comment-button button svg {
+	fill: #26cb56;
+	height: 2em;
+	width: 2em;
+}
+
+.tc-comments {
+}
+
+.tc-comment-list {
+	list-style: none;
+     padding-left: 0;
+}
+
+.tc-comment-list .tc-comments {
+	padding-left: 1em;
+}
+
+.tc-comment-entry {
+	position: relative;
+	border: 2px solid #c1e1ea;
+	border-radius: 4px;
+	margin: 0.5em 0 0 0;
+	background: #f1fcff;
+}
+
+.tc-comment-entry-heading {
+	font-size: 0.7em;
+	font-weight: bold;
+	text-transform: uppercase;
+	background: #d7eef4;
+	color: #5B6D80;
+	padding: 0 0.5em;
+}
+
+.tc-comment-entry-body {
+	font-size: 0.8em;
+	padding: 0 0.5em;
+}
+
+.tc-comment-entry-body textarea {
+	font-size: 1.1em;
+	width: 100%
+}

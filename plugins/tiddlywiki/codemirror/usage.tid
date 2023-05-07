@@ -1,256 +1,76 @@
 title: $:/plugins/tiddlywiki/codemirror/usage
 
-! Setting ~CodeMirror Content Types
+! Configuration
 
-You can determine which tiddler content types are edited by the ~CodeMirror widget by creating or modifying special tiddlers whose prefix is comprised of the string `$:/config/EditorTypeMappings/` concatenated with the content type. The text of that tiddler gives the editor type to be used (eg, ''text'', ''bitmap'', ''codemirror'').
-
-The current editor type mappings are shown in [[$:/ControlPanel]] under the "Advanced" tab.
-
-! ~CodeMirror Configuration
-
-You can configure the ~CodeMirror plugin by creating a tiddler called [[$:/config/CodeMirror]] containing a JSON configuration object. The configuration tiddler must have its type field set to `application/json` to take effect.
-
-See http://codemirror.net/ for details of available configuration options.
-
-For example:
-
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-      "$:/plugins/tiddlywiki/codemirror/keymap/vim.js",
-      "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js"
-  ],
-  "configuration": {
-      "keyMap": "vim",
-      "matchBrackets":true,
-      "showCursorWhenSelecting": true
-  }
-}
-```
-
-!! Basic working configuration
-
-# Create a tiddler called `$:/config/CodeMirror`
-
-# The type of the tiddler has to be set to `application/json`
-
-# The text of the tiddler is the following: 
-
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js"
-  ],
-  "configuration": {
-      "matchBrackets":true,
-      "showCursorWhenSelecting": true
-  }
-}
-
-```
-
-# You should see line numbers when editing a tiddler
-# When editing a tiddler, no matter what the type of the tiddler is set to, you should see matching brackets being highlighted whenever the cursor is next to one of them
-# If you edit a tiddler with the type `application/javascript` or `application/json` you should see the code being syntax highlighted
-
-!! Add HTML syntax highlighting
-
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js`
-## Add a field `module-type` and set it to ''library''
-## Set the field `type` to ''application/javascript''
-## Set the text field of the tiddler with the javascript code from this link : [[https://raw.githubusercontent.com/codemirror/CodeMirror/master/mode/xml/xml.js]]
-# Set the text field of the tiddler `$:/config/CodeMirror` to:
-
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js"
-  ],
-  "configuration": {
-      "showCursorWhenSelecting": true,
-      "matchBrackets":true
-  }
-}
-```
-# Edit a tiddler with the type `text/html` and write some html code. You should see your code being coloured
-
-!! Add a non-existing language mode
-
-Here's an example of adding a new language mode - in this case, the language C.
+Configuration for the ~CodeMirror text-editor can be done from within the CodeMirror Settings Tab in the [[ControlPanel|$:/ControlPanel]] (Settings - ~CodeMirror)
 
 
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/mode/clike/clike.js`
-## Add a field `module-type` and set it to ''library''
-## Set the field `type` to ''application/javascript''
-## Set the text field of the tiddler with the javascript code from this link : [[https://raw.githubusercontent.com/codemirror/CodeMirror/master/mode/clike/clike.js]]
-# Set the text field of the tiddler `$:/config/CodeMirror` to:
+!!Setting a different Theme
 
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/mode/clike/clike.js"
-  ],
-  "configuration": {
-      "showCursorWhenSelecting": true
-  }
-}
-```
+~CodeMirror themes are available in the [ext[official GitHub repository|https://github.com/codemirror/CodeMirror/tree/master/theme]]
 
-# Add the correct ~EditorTypeMappings tiddler
-## Find the matching MIME type. If you go on the [[CodeMirror documentation for language modes|http://codemirror.net/mode/index.html]] you can see the [[documentation for the c-like mode|http://codemirror.net/mode/clike/index.html]]. In this documentation, at the end you will be told the MIME types defined. Here it's ''text/x-csrc''
-## Add the tiddler: `$:/config/EditorTypeMappings/text/x-csrc` and fill the text field with : ''codemirror''
+More themes can be found at https://github.com/FarhadG/code-mirror-themes/tree/master/themes and previewed [ext[here|http://farhadg.github.io/code-mirror-themes/]]
 
-If you edit a tiddler with the type `text/x-csrc` and write some code in C, you should see your text being coloured.
 
-!! Add matching tags
+To add a theme to your wiki, follow these four steps:
 
-# Add XML and HTML colouring
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/edit/matchtags.js`
-## Add a field `module-type` and set it to ''library''
-## Set the field `type` to ''application/javascript''
-## Set the text field of the tiddler with the javascript code from this link : [[http://codemirror.net/addon/edit/matchtags.js]]
-# Set the text field of the tiddler `$:/config/CodeMirror` to:
+* choose one of the CSS files and copy its content to a new tiddler
+* remove all comments from the top and tag the tiddler with <<tag-pill "$:/tags/Stylesheet">>
+* add a field "module-type" with the value "codemirror-theme". add a field "name" with the exact ''name'' of the theme as value
+* save the tiddler and go to the Settings tab in $:/ControlPanel - look for the "theme" dropdown to select your newly added theme
 
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchtags.js",
-      "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js"
-  ],
-  "configuration": {
-      "showCursorWhenSelecting": true,
-      "matchTags": {"bothTags": true},
-    "extraKeys": {"Ctrl-J": "toMatchingTag"}
-  }
-}
-```
 
-Edit a tiddler that has the type :`text/htm` and write this code:
+!!Line Numbers
 
-```
-<html>
-      <div id="click here and press CTRL+J">
-      <ul>
-        <li>
-        </li>
-      </ul>
-   </div>
-</html>
-```
+To show or hide the Line Numbers at the left, go to ~ControlPanel - Settings - ~CodeMirror and look for the "Line Numbers" checkbox
 
-If you click on a tag and press CTRL+J, your cursor will select the matching tag. Supposedly, it should highlight the pair when clicking a tag. However, that part doesn't work.
 
-!! Adding closing tags
+!!Line Wrapping
 
-# Add the xml mode (see "Add XML and HTML colouring")
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/edit/closetags.js`
-## Add a field `module-type` and set it to ''library''
-## Set the field `type` to ''application/javascript''
-## Set the text field of the tiddler with the javascript code from this link : [[http://codemirror.net/addon/edit/closetag.js]]
+Controls if long lines get visually wrapped to a new line if they're too long to fit the editor width or if the editor should scroll horizontally
 
-# Set the text field of the tiddler `$:/config/CodeMirror` to:
+To change the line-wrapping behaviour, go to  ~ControlPanel - Settings - ~CodeMirror and look for the "Line Wrapping" checkbox
 
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/closetags.js"
-  ],
-  "configuration": {
-      "showCursorWhenSelecting": true,
-      "autoCloseTags":true
-  }
-}
-```
 
-If you edit a tiddler with the type`text/html` and write:
+!!Show Cursor when selecting
 
-```
-<html>
-```
+Defines whether the Mouse cursor should be visually shown or hidden when making a text-selection
 
-Then the closing tag ''</html>'' should automatically appear.
+To change the show-cursor-when-selecting behaviour, go to  ~ControlPanel - Settings - ~CodeMirror and look for the "Show cursor when selecting" checkbox
 
-!! Add closing brackets
 
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js`
-## Add a field `module-type` and set it to ''library''
-## Set the field `type` to ''application/javascript''
-## Set the text field of the tiddler with the javascript code from this link : [[http://codemirror.net/addon/edit/closebrackets.js]]
-# Set the text field of the tiddler `$:/config/CodeMirror` to:
+!!~CodeMirror Font Family
 
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/edit/closebrackets.js"
-  ],
+The Font-Family used within the ~CodeMirror text-editor defaults to "monospace" which will choose your configured monospace system-font
 
-  "configuration": {
+That setting can be overridden entering one or more Font-Families in the "Font Family" input field at ~ControlPanel - Settings - ~CodeMirror
 
-      "showCursorWhenSelecting": true,
-      "matchBrackets":true,
-      "autoCloseBrackets":true
-  }
-}
-```
+* The entries must be separated by semicolons ','
+* Font-Family Names that contain spaces must be quoted like "My Font"
+* If a list of Font-Families is specified, the last Font-Family found on the user-system gets used, non-existing fonts get ignored
+* If none of the specified Font-Families is available, ~CodeMirror uses the default "monospace"
 
-# If you try to edit any tiddler and write `if(` you should see the bracket closing itself automatically (you will get "if()"). It works with (), [], and {}
-# If you try and edit a tiddler with the type `application/javascript`, it will auto-close `()`,`[]`,`{}`,`''` and `""`
 
-!! Adding folding tags
+!!"Hidden" Settings:
 
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/fold/foldcode.js`
-## Add a field `module-type` and set it to ''library''
-## Set the field `type` to ''application/javascript''
-## Set the text field of the tiddler with the javascript code from this link : [[http://codemirror.net/addon/fold/foldcode.js]]
-# Repeat the above process for the following tiddlers, but replace the code with the one from the given link:
-## Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js`, the code can be found here [[https://raw.githubusercontent.com/codemirror/CodeMirror/master/addon/fold/xml-fold.js]]
-## Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/fold/foldgutter.js`, the code can be found here [[http://codemirror.net/addon/fold/foldgutter.js]]
-# Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/fold/foldgutter.css`
-## Add the tag `$:/tags/Stylesheet`
-## Set the text field of the tiddler with the css code from this link : [[http://codemirror.net/addon/fold/foldgutter.css]]
-# Set the text field of the tiddler `$:/config/CodeMirror` to:
+!!!Cursor Blink Rate
 
-```
-{
-  "require": [
-      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
-      "$:/plugins/tiddlywiki/codemirror/mode/xml/xml.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/fold/foldcode.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/fold/foldgutter.js"
-  ],
-  "configuration": {
-      "showCursorWhenSelecting": true,
-      "matchTags": {"bothTags": true},
-      "foldGutter": true,
-      "gutters": ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
-  }
-}
-```
+The cursor blink-rate defines how fast (in milliseconds) the cursor blinks inside the textarea
 
-Now if you type the below code in a tiddler with the type `text/html`:
+You can change it by editing $:/config/codemirror/cursorBlinkRate
+"0" disables blinking
 
-```
-<html>
-   <div>
-      <ul>
+!!!Tabsize
 
-      </ul>
-   </div>
-</html>
-```
+The Tabsize defines the width of a tab character. Default is 4.
 
-You should see little arrows just next to the line numbers. Clicking on it will have the effect to fold the code (or unfold it).
+You can change it by editing $:/config/codemirror/tabSize
+
+!!!Indent Unit
+
+Not enabled for vnd.tiddlywiki and x-tiddlywiki
+
+Defines how many spaces a text-block should be indented. Defaults to 2.
+
+You can change it by editing $:/config/codemirror/indentUnit
+

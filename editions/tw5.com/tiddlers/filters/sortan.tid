@@ -1,0 +1,16 @@
+caption: sortan
+created: 20180222071605739
+modified: 20180223012553446
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: the input, likewise sorted into descending order
+op-output: the input, sorted into ascending order by field <<.field F>>, treating field values as alphanumerics
+op-parameter: the name of a [[field|TiddlerFields]], defaulting to <<.field title>>
+op-parameter-name: F
+op-purpose: sort the input by text field considering them as alphanumerics
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: sortan Operator
+type: text/vnd.tiddlywiki
+
+The difference between uppercase and lowercase letters is ignored.
+
+<<.operator-examples "sortan">>

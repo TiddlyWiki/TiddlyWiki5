@@ -1,8 +1,13 @@
+caption: {{!!title}} - ^^deprecated^^
 created: 20141001132300000
-modified: 20151005074702387
-tags: Learning
+modified: 20220704174221300
+tags: [[How to apply custom styles]] $:/deprecated
 title: How to apply custom styles by tag
 type: text/vnd.tiddlywiki
+
+<<.deprecated-since "5.1.16" "Custom styles by data-tags">>. Also see: [[How to apply custom styles]]
+
+----
 
 You can apply custom styles to tiddlers that have a particular tag by defining a CSS class with the name `tc-tagged-<Tag Name>`.
 

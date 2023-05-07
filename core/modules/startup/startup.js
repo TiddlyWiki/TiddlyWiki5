@@ -23,7 +23,6 @@ var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrument
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
-	var modules,n,m,f;
 	// Minimal browser detection
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
@@ -34,7 +33,7 @@ exports.startup = function() {
 	if($tw.browser) {
 		$tw.platform.isMac = /Mac/.test(navigator.platform);
 		$tw.platform.isWindows = /win/i.test(navigator.platform);
-		$tw.platform.isLinux = /Linux/i.test(navigator.appVersion);
+		$tw.platform.isLinux = /Linux/i.test(navigator.platform);
 	} else {
 		switch(require("os").platform()) {
 			case "darwin":
@@ -55,6 +54,22 @@ exports.startup = function() {
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Set up the performance framework
 	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
+	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+	$tw.rootWidget = new widget.widget({
+		type: "widget",
+		children: []
+	},{
+		wiki: $tw.wiki,
+		document: $tw.browser ? document : $tw.fakeDocument
+	});
+	// Execute any startup actions
+	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction");
+	if($tw.browser) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Browser");
+	}
+	if($tw.node) {
+		$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/Node");
+	}
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({
@@ -62,7 +77,7 @@ exports.startup = function() {
 		pluginType: "language",
 		controllerTitle: "$:/language",
 		defaultPlugins: [
-			"$:/languages/en-US"
+			"$:/languages/en-GB"
 		],
 		onSwitch: function(plugins) {
 			if($tw.browser) {
@@ -87,18 +102,16 @@ exports.startup = function() {
 	});
 	// Kick off the keyboard manager
 	$tw.keyboardManager = new $tw.KeyboardManager();
+	// Listen for shortcuts
+	if($tw.browser) {
+		$tw.utils.addEventListeners(document,[{
+			name: "keydown",
+			handlerObject: $tw.keyboardManager,
+			handlerMethod: "handleKeydownEvent"
+		}]);
+	}
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	if($tw.browser) {
-		$tw.rootWidget = new widget.widget({
-			type: "widget",
-			children: []
-		},{
-			wiki: $tw.wiki,
-			document: document
-		});
-	}
 	// Find a working syncadaptor
 	$tw.syncadaptor = undefined;
 	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
@@ -108,10 +121,18 @@ exports.startup = function() {
 	});
 	// Set up the syncer object if we've got a syncadaptor
 	if($tw.syncadaptor) {
-		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
-	} 
+		$tw.syncer = new $tw.Syncer({
+			wiki: $tw.wiki,
+			syncadaptor: $tw.syncadaptor,
+			logging: $tw.wiki.getTiddlerText('$:/config/SyncLogging', "yes") === "yes"
+		});
+	}
 	// Setup the saver handler
-	$tw.saverHandler = new $tw.SaverHandler({wiki: $tw.wiki, dirtyTracking: !$tw.syncadaptor});
+	$tw.saverHandler = new $tw.SaverHandler({
+		wiki: $tw.wiki,
+		dirtyTracking: !$tw.syncadaptor,
+		preloadDirty: $tw.boot.preloadDirty || []
+	});
 	// Host-specific startup
 	if($tw.browser) {
 		// Install the popup manager

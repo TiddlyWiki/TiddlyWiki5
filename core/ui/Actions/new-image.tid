@@ -1,0 +1,6 @@
+title: $:/core/ui/Actions/new-image
+tags: $:/tags/Actions
+description: create a new image tiddler
+
+\whitespace trim
+<$action-sendmessage $message="tm-new-tiddler" type={{{ [{$:/config/NewImageType}addprefix[image/]] }}}/>

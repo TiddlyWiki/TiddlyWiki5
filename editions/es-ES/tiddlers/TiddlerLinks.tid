@@ -28,4 +28,4 @@ TiddlyWiki5 modifica la apariencia de los enlaces para dar información adiciona
 |A un tiddler oculto que no ha sido anulado |[[TalCual|$:/core/copyright.txt]] |
 |A un tiddler oculto que ha sido anulado por un tiddler común  |[[TalCual|$:/SiteTitle]] |
 
-Los enlaces externos se muestran así: http://tiddlywiki.com/ o [[así|http://tiddlywiki.com/]].
+Los enlaces externos se muestran así: https://tiddlywiki.com/ o [[así|https://tiddlywiki.com/]].

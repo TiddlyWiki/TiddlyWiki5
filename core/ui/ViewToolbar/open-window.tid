@@ -3,11 +3,14 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/open-window}} {{$:/language/Buttons/OpenWindow/Caption}}
 description: {{$:/language/Buttons/OpenWindow/Hint}}
 
+\whitespace trim
 <$button message="tm-open-window" tooltip={{$:/language/Buttons/OpenWindow/Hint}} aria-label={{$:/language/Buttons/OpenWindow/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/open-window}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/OpenWindow/Caption}}/></span>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/OpenWindow/Caption}}/>
+</span>
 </$list>
 </$button>

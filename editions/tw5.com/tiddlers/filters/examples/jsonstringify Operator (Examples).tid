@@ -1,0 +1,9 @@
+created: 20171029155046637
+modified: 20171029155227382
+tags: [[Operator Examples]] [[stringify Operator]]
+title: jsonstringify Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 """[[Title with "double quotes" and single ' and \backslash]] +[jsonstringify[]]""">>
+<<.operator-example 2 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 without suffix]] +[jsonstringify[]]""">>
+<<.operator-example 3 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 with rawunicode suffix]] +[jsonstringify:rawunicode[]]""">>

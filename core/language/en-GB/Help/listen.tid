@@ -1,0 +1,35 @@
+title: $:/language/Help/listen
+description: Provides an HTTP server interface to TiddlyWiki
+
+Serves a wiki over HTTP.
+
+The listen command uses NamedCommandParameters:
+
+```
+--listen [<name>=<value>]...
+```
+
+All parameters are optional with safe defaults, and can be specified in any order. The recognised parameters are:
+
+* ''host'' - optional hostname to serve from (defaults to "127.0.0.1" aka "localhost")
+* ''path-prefix'' - optional prefix for paths
+* ''port'' - port number on which to listen; non-numeric values are interpreted as a system environment variable from which the port number is extracted (defaults to "8080")
+* ''credentials'' - pathname of credentials CSV file (relative to wiki folder)
+* ''anon-username'' - the username for signing edits for anonymous users
+* ''username'' - optional username for basic authentication
+* ''password'' - optional password for basic authentication
+* ''authenticated-user-header'' - optional name of header to be used for trusted authentication
+* ''readers'' - comma-separated list of principals allowed to read from this wiki
+* ''writers'' - comma-separated list of principals allowed to write to this wiki
+* ''csrf-disable'' - set to "yes" to disable CSRF checks (defaults to "no")
+* ''root-tiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all")
+* ''root-render-type'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
+* ''root-serve-type'' - the content type with which the root tiddler should be served (defaults to "text/html")
+* ''tls-cert'' - pathname of TLS certificate file (relative to wiki folder)
+* ''tls-key'' - pathname of TLS key file (relative to wiki folder)
+* ''debug-level'' - optional debug level; set to "debug" to view request details (defaults to "none")
+* ''gzip'' - set to "yes" to enable gzip compression for some http endpoints (defaults to "no")
+* ''use-browser-cache'' - set to "yes" to allow the browser to cache responses to save bandwidth (defaults to "no")
+
+For information on opening up your instance to the entire local network, and possible security concerns, see the WebServer tiddler at TiddlyWiki.com.
+

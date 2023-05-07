@@ -1,0 +1,24 @@
+{
+	"description": "Innerwiki Plugin Demo",
+	"plugins": [
+		"tiddlywiki/innerwiki",
+		"tiddlywiki/railroad"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler",
+			"$:/core/save/all",
+			"index.html",
+			"text/plain"
+		],
+		"save-screenshots": [
+			"--screenshot",
+			"[[$:/plugins/tiddlywiki/innerwiki/examples]]",
+			"4"
+		]
+	}
+}

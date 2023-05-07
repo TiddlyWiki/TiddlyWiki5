@@ -1,0 +1,9 @@
+title: $:/core/ui/Actions/new-tiddler
+tags: $:/tags/Actions
+description: create a new empty tiddler
+
+\define get-tags() $(textFieldTags)$ $(tagsFieldTags)$
+\whitespace trim
+<$vars textFieldTags={{$:/config/NewTiddler/Tags}} tagsFieldTags={{$:/config/NewTiddler/Tags!!tags}}>
+<$action-sendmessage $message="tm-new-tiddler" tags=<<get-tags>>/>
+</$vars>

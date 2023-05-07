@@ -1,0 +1,10 @@
+caption: tls-cert
+created: 20180630180449581
+modified: 20180703100612649
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: tls-cert
+type: text/vnd.tiddlywiki
+
+The optional [[web server configuration parameter|WebServer Parameters]] ''tls-cert'' contains the pathname to the certificate file required when running the web server under HTTPS. The pathname is taken relative to the wiki folder.
+
+See [[Using HTTPS]] for details.

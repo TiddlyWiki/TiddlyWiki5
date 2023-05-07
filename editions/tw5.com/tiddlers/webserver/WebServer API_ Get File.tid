@@ -1,0 +1,25 @@
+created: 20181002123907518
+modified: 20181002124345482
+tags: [[WebServer API]]
+title: WebServer API: Get File
+type: text/vnd.tiddlywiki
+
+Get the content of a static file. See
+[[using the integrated static file server|Using the integrated static file server]]
+
+```
+GET /files/<pathname>
+```
+
+Parameters:
+
+* ''pathname'' - URI encoded path to the file
+
+Response:
+
+* 200 OK
+*> `Content-Type: <content-type>` (determined from file extension)
+*> Body: data retrieved from file
+* 403 Forbidden
+* 404 Not Found
+

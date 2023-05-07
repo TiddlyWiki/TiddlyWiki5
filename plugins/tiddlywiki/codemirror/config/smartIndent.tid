@@ -1,0 +1,3 @@
+title: $:/config/codemirror/smartIndent
+type: bool
+text: true

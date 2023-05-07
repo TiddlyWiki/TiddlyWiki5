@@ -33,4 +33,4 @@ node ./tiddlywiki.js \
 
 The `test.html` file will be placed in the `output` folder within the wiki folder. Open it in the browser to see the test results. There is a prebuilt version of `test.html` at:
 
-http://tiddlywiki.com/test.html
+https://tiddlywiki.com/test.html

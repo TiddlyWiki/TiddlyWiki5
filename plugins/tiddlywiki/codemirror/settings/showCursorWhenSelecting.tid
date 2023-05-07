@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/showCursorWhenSelecting
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/showCursorWhenSelecting/hint}}
+
+\define lingo-base() $:/language/codemirror/showCursorWhenSelecting/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/showCursorWhenSelecting" field="text" checked="true" unchecked="false" default="true"> <$link to="$:/config/codemirror/showCursorWhenSelecting"><<lingo info>></$link> </$checkbox>
+

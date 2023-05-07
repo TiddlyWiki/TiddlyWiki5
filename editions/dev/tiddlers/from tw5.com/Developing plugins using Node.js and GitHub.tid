@@ -10,7 +10,7 @@ The most practical way to develop plugins is to use Node.js with the tiddlywiki5
 
 !! 1. Installation
 
-First read  http://tiddlywiki.com/static/PluginMechanism.html.
+First read https://tiddlywiki.com/static/PluginMechanism.html.
 
 Install Git from http://git-scm.com/downloads
 
@@ -81,11 +81,11 @@ Create the file plugin.info with content:
 
 !! 4. Create the files for your plugin
 
-For example files see the plugins in the ~TiddlyWiki5 repository i.e. those located at plugins/tiddlywiki/. See [[TiddlerFiles|http://tiddlywiki.com/#TiddlerFiles]] for details of the supported tiddler file formats.
+For example files see the plugins in the ~TiddlyWiki5 repository i.e. those located at plugins/tiddlywiki/. See [[TiddlerFiles|https://tiddlywiki.com/#TiddlerFiles]] for details of the supported tiddler file formats.
 
 !!5. Build your files into a ~TiddlyWiki
 
-Modify `editions/tw5.com/tiddlywiki.info` to include a reference to your plugin directory,  i.e. find `"plugins": [ ` and add `"yourname/pluginname"`.
+Modify `editions/tw5.com/tiddlywiki.info` to include a reference to your plugin directory, i.e. find `"plugins": [ ` and add `"yourname/pluginname"`.
 
 From the TW5 directory issue the command
 

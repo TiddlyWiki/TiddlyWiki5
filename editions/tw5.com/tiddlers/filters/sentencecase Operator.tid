@@ -1,0 +1,17 @@
+caption: sentencecase
+created: 20190619110607457
+modified: 20190619110736016
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles with each first letter capitalised
+op-purpose: returns each item in the list with the first letter capitalised
+tags: [[Filter Operators]]
+title: sentencecase Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+See also [[lowercase Operator]], [[uppercase Operator]], [[titlecase Operator]].
+
+<<.tip " This operator does not change anything except the first letter of each title, so `[[aBcD eFgH]]` would become `[[ABcD eFgH]]`. If you want `[[Abcd efgh]]`, then use a filter like `[lowercase[]sentencecase[]]`.">>
+
+<<.operator-examples "sentencecase">>

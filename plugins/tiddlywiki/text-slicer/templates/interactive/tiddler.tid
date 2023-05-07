@@ -1,45 +1,28 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler
 
-<$list filter="[<tv-show-toolbar>prefix[yes]]" variable="hasToolbar">
+\define if(condition,then,else)
+<$list filter="""$condition$ +[limit[1]]""" emptyMessage="""$else$""" variable="ignore">
+$then$
+</$list>
+\end
+
+\define include-component(type)
+<<if "[{!!toc-type}match[$type$]]" """
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/$type$" mode="block"/>
+""">>
+\end
+
+<$list filter="[<tv-show-toolbar>match[yes]]" variable="hasToolbar">
 {{||$:/plugins/tiddlywiki/text-slicer/ui/tiddler/toolbar}}
 </$list>
 
-<$reveal type="match" state="!!toc-type" text="document">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/document" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="heading">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/heading" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="paragraph">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/paragraph" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="note">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/note" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="list">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/list" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="item">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/item" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="image">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/image" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="def-list">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/def-list" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="term">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/term" mode="block"/>
-</$reveal>
-
-<$reveal type="match" state="!!toc-type" text="definition">
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/definition" mode="block"/>
-</$reveal>
+<<include-component "document">>
+<<include-component "heading">>
+<<include-component "paragraph">>
+<<include-component "note">>
+<<include-component "list">>
+<<include-component "item">>
+<<include-component "image">>
+<<include-component "def-list">>
+<<include-component "term">>
+<<include-component "definition">>

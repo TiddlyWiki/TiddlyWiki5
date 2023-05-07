@@ -3,16 +3,14 @@ tags: $:/tags/MakeQR
 caption: Wifi
 
 \define wifi-url()
-WIFI:wifi name;T:WPA;S:SSID;P:password;
+WIFI:T:WPA;S:SSID;P:password;;
 \end
 
 \define image(network,encryption,ssid,password)
-<img src=<<makeqr text:"""WIFI:$network$;T:$encryption$;S:$ssid$;P:$password$;""" size:"350">>/>
+<img src=<<makeqr text:"""WIFI:T:$encryption$;S:$ssid$;P:$password$;;""" size:"350">>/>
 \end
 
 ! Enter the details of your wifi network
-
-Name of wifi network: <$edit-text tiddler="$:/config/plugins/tiddlywiki/qrcode/wifi/network" tag="input" default=""/>
 
 Encryption: <$select tiddler="$:/config/plugins/tiddlywiki/qrcode/wifi/encryption" default="none">
 <option value="none">None</option>

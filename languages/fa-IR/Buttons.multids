@@ -1,0 +1,180 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: جستجوی پیشرفته
+AdvancedSearch/Hint: جستجوی پیشرفته
+Bold/Caption: درشت
+Bold/Hint: متن انتخاب شده رو درشت کن
+Cancel/Caption: لغو
+Cancel/Hint: تغییرات این تیدلر رو ذخیره نکن
+Clear/Caption: پاک کردن
+Clear/Hint: عکس رو به رنگ خالص تبدیل کن
+Clone/Caption: کلون
+Clone/Hint: این تیدلر رو کلون کن
+Close/Caption: بستن
+Close/Hint: این تیدلر رو ببند
+CloseAll/Caption: همه رو بستن
+CloseAll/Hint: همه‌ی تیدلرها رو ببند
+CloseOthers/Caption: بستن بقیه
+CloseOthers/Hint: بقیه‌ی تیدلرها رو ببند
+ControlPanel/Caption: کنترل پنل
+ControlPanel/Hint: کنترل پنل رو باز کن
+Delete/Caption: پاک کردن
+Delete/Hint: این تیدلر رو پاک کن
+Edit/Caption: ویرایش
+Edit/Hint: این تیدلر رو ویرایش کن
+EditorHeight/Caption: ارتفاع ویرایشگر
+EditorHeight/Caption/Auto: به صورت خودکار ارتفاع رو تنظیم کن تا متناسب با محتوا بشه.
+EditorHeight/Caption/Fixed: ارتفاع ثابت:
+EditorHeight/Hint: ارتفاع ویرایشگر متن رو انتخاب کن:
+Encryption/Caption: رمزگردانی
+Encryption/ClearPassword/Caption: پاک کردن کلمه‌ی عبور
+Encryption/ClearPassword/Hint: پاک کردن کلمه‌ی عبور و ذخیره‌ی این ویکی بدون رمزگردانی
+Encryption/Hint: حذف یا مشخص کردن رمزی برای این ویکی
+Encryption/SetPassword/Caption: مشخص کردن رمز
+Encryption/SetPassword/Hint: مشخص کردن رمزی برای رمزگردانی این ویکی
+Excise/Caption: شکافتن
+Excise/Caption/Excise: بشکاف
+Excise/Caption/MacroName: عنوان ماکرو:
+Excise/Caption/NewTitle: عنوان تیدلر جدید:
+Excise/Caption/Replace: متن شکافته شده رو با این جایگزین کن:
+Excise/Caption/Replace/Link: پیوند
+Excise/Caption/Replace/Macro: ماکرو
+Excise/Caption/Replace/Transclusion: پیوست:
+Excise/Caption/Tag: تیدلر جدید رو با عنوان این تیدلر برچسب بزن
+Excise/Caption/TiddlerExists: هشدار: تیدلر از قبل وجود دارد
+Excise/Hint: شکفتن متن انتخاب شده به تیدلر جدید
+ExportPage/Caption: خروجی از همه
+ExportPage/Hint: خروجی از همه تیدلرها
+ExportTiddler/Caption: خروجی از تیدلر
+ExportTiddler/Hint: خروجی از تیدلر
+ExportTiddlers/Caption: خروجی از تیدلرها
+ExportTiddlers/Hint: خروجی از تیدلرها
+Fold/Caption: تیدلر رو جمع کن
+Fold/FoldBar/Caption: نوارِ جمع‌کن
+Fold/FoldBar/Hint: نوارهای اختیاری جهت جمع و باز کردن تیدلرها
+Fold/Hint: بدنه‌ی این تیدلر رو جمع کن
+FoldAll/Caption: همه‌ی تیدلرها رو جمع کن
+FoldAll/Hint: بدنه‌ی همه‌ی تیدلر‌ها رو جمع کن
+FoldOthers/Caption: بقیه‌ی تیدلرها رو جمع کن
+FoldOthers/Hint: بدنه‌ی بقیه‌ی تیدلرهای باز رو جمع کن
+FullScreen/Caption: تما-صفحه
+FullScreen/Hint: داخل یا خارج شدن از حالت تمام-صفحه
+Heading1/Caption: عنوان ۱
+Heading1/Hint: فرمت عنوان مرحله‌ی ۱ رو بر روی خط‌هایی که شامل متن انتخاب شد‌اند، وارد کن.
+Heading2/Caption: عنوان ۲
+Heading2/Hint: فرمت عنوان مرحله‌ی ۲ رو بر روی خط‌هایی که شامل متن انتخاب شد‌اند، وارد کن.
+Heading3/Caption: عنوان ۳
+Heading3/Hint: فرمت عنوان مرحله‌ی ۳ رو بر روی خط‌هایی که شامل متن انتخاب شد‌اند، وارد کن.
+Heading4/Caption: عنوان ۴
+Heading4/Hint: فرمت عنوان مرحله‌ی ۴ رو بر روی خط‌هایی که شامل متن انتخاب شد‌اند، وارد کن.
+Heading5/Caption: عنوان ۵
+Heading5/Hint: فرمت عنوان مرحله‌ی ۵ رو بر روی خط‌هایی که شامل متن انتخاب شد‌اند، وارد کن.
+Heading6/Caption: عنوان ۶
+Heading6/Hint: فرمت عنوان مرحله‌ی ۶ رو بر روی خط‌هایی که شامل متن انتخاب شد‌اند، وارد کن.
+Help/Caption: راهنما
+Help/Hint: نمایش صفحه راهنما
+HideSideBar/Caption: مخفی‌کردن نوار کناری
+HideSideBar/Hint: مخفی‌کردن نوار کناری
+Home/Caption: خانه
+Home/Hint: باز کردن تیدلرهای پیشفرض
+Import/Caption: درون‌ریزی
+Import/Hint: Import many types of file including text, image, TiddlyWiki or JSON
+درونریزی انواع فایل شامل متن، عکس تیدلی ویکی یا json
+Info/Caption: اطلاعات
+Info/Hint: اطلاعات
+Italic/Caption: مایل‌نویس
+Italic/Hint: مایل‌نویس کردن بخش انتخاب شده
+Language/Caption: زبان
+Language/Hint: انتخاب زبان محیط کاربری
+LineWidth/Caption: عرض خط
+LineWidth/Hint: مشخص کردن عرض خط برای نقاشی
+Link/Caption: پیوند
+Link/Hint: ساخت پیوند ویکی‌تکست
+ListBullet/Caption: لیست گلوله‌ای
+ListBullet/Hint: لیست گلوله‌ای کردن خط‌های انتخاب شده
+ListNumber/Caption: لیست شماره‌دار
+ListNumber/Hint: لیست شماره‌دار کردن خط‌های انتخاب شده
+Manager/Caption: مدیریت تیدلرها
+Manager/Hint: بازکردن مدیریت تیدلرها
+MonoBlock/Caption: بلوک تک-فاصله
+MonoBlock/Hint: بلوک تک-فاصله‌ای کردن خط‌های انتخاب شده
+MonoLine/Caption: تک فاصله‌ای
+MonoLine/Hint: استفاده از حروف تک فاصله‌ای برای متن انتخاب شده
+More/Caption: بیشتر
+More/Hint: عمل‌های بیشتر
+NewHere/Caption: اینجا جدید
+NewHere/Hint: ساختن تیدلر جدید با این برچسب
+NewImage/Caption: تصویر جدید
+NewImage/Hint: ساختن تیدلر تصویری جدید
+NewJournal/Caption: ژورنال جدید
+NewJournal/Hint: ساختن تیدلر ژورنال جدید
+NewJournalHere/Caption: ژورنال جدید اینجا
+NewJournalHere/Hint: ساختن تیدلر ژورنال جدید با این برچسب
+NewMarkdown/Caption: تیدلر Markdown جدید
+NewMarkdown/Hint: ساختن تیدلر markdown جدید
+NewTiddler/Caption: تیدلر جدید
+NewTiddler/Hint: تیدلر جدید بساز
+Opacity/Caption: کدری
+Opacity/Hint: مشخص کردن میزان کدری نقاشی
+OpenWindow/Caption: باز کردن در پنجره جدید
+OpenWindow/Hint: بازکردن تیدلر در پنجره جدید
+Paint/Caption: رنگ نقاشی
+Paint/Hint: مشخص کردن رنگ نقاشی
+Palette/Caption: پالت
+Palette/Hint: انتخاب پالت رنگ نقاشی
+Permalink/Caption: لینک دائم
+Permalink/Hint: آدرس مرورگر رو تبدیل به پیوند مستقیم به این تیدلر کن
+Permaview/Caption: نمایش دائم
+Permaview/Hint: آدرس مرورگر رو تبدیل به پیوند مستقیم به همه تیدلر‌های این داستان کن
+Picture/Caption: تصویر
+Picture/Hint: قرار دادن تصویر
+Preview/Caption: پیش‌نمایش
+Preview/Hint: پنجره‌ی پیش‌نمایش رو نشون بده
+PreviewType/Caption: پیش‌نمایش نوع
+PreviewType/Hint: انتخاب پیش‌نمایش نوع
+Print/Caption: پرینت صفحه
+Print/Hint: صفحه‌ی حال حاضر رو پرینت کن
+Quote/Caption: نقل قول
+Quote/Hint: خط‌هایی که شامل متن انتخاب شده اند را تبدیل به نقل‌قول کن
+Refresh/Caption: تازه‌سازی
+Refresh/Hint: تازه‌سازی کامل کل ویکی
+Save/Caption: اوکی
+Save/Hint: تایید تغییرات بر روی این تیدلر
+SaveWiki/Caption: ذخیره تغییرات
+SaveWiki/Hint: ذخیره تغییرات
+ShowSideBar/Caption: نمایش نوار کناری
+ShowSideBar/Hint: نمایش نوار کناری
+Size/Caption: اندازه‌ی تصویر
+Size/Caption/Height: ارتفاع:
+Size/Caption/Resize: تغییر اندازه‌ی تصویر
+Size/Caption/Width: عرض:
+Size/Hint: مشخص کردن اندازه‌ی تصویر
+Stamp/Caption: مهر
+Stamp/Caption/New: اضافه کردن مال خودت
+Stamp/Hint: ردادن تکه‌ای متن پیش‌تنظیم‌شده
+Stamp/New/Text: متن قطعه‌ای ( به یادداشته باشید که عنوانی توصیف کننده در باکس عنوان قرار دهید)
+Stamp/New/Title: اسم همانطوری که در منو نمایش داده شده
+StoryView/Caption: نمای داستانی
+StoryView/Hint: انتخاب نوع نمایش داستان
+Strikethrough/Caption: خط‌خورده
+Strikethrough/Hint: خط‌خوردگی متن انتخاب شده
+Subscript/Caption: زیرنویس
+Subscript/Hint: تبدیل متن انتخابی به زیرنویس
+Superscript/Caption: ابرمتن
+Superscript/Hint: تبدیل متن انتخابی به ابرمتن
+TagManager/Caption: مدیریت برچسب
+TagManager/Hint: بازکردن مدیریت برچسب
+Theme/Caption: قالب
+Theme/Hint: انتخاب قالب نمایش
+Timestamp/Caption: انتخاب مهر زمانی
+Timestamp/Hint: انتخاب این که آیا تغییرات مهرزمانی را عوض کنند یا نه
+Timestamp/Off/Caption: مهرهای زمانی خاموش‌اند
+Timestamp/Off/Hint: مهرهای زمانی را زمانیکه تیدلرها تغییر می‌کنند، عوض نکن
+Timestamp/On/Caption: مهرهای زمانی روشن‌اند
+Timestamp/On/Hint: مهرهای زمانی را زمانیکه تیدلرها تغییر می‌کنند، عوض کن
+Underline/Caption: زیرخط
+Underline/Hint: زیر متن انتخاب شده خط بکش
+Unfold/Caption: باز کردن تیدلر
+Unfold/Hint: باز کردن بدنه‌ی این تیدلر
+UnfoldAll/Caption: باز کردن همه‌ی تیدلرها
+UnfoldAll/Hint: باز کردن بدنه‌ی همه‌ی تیدلرهای باز

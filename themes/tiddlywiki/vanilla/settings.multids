@@ -1,6 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/settings/
 
-fontfamily: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "DejaVu Sans", sans-serif
-codefontfamily: Monaco, Consolas, "Lucida Console", "DejaVu Sans Mono", monospace
+fontfamily: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+codefontfamily: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace
 backgroundimageattachment: fixed
 backgroundimagesize: auto

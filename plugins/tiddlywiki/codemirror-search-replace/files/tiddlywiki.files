@@ -1,0 +1,26 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/search/search.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/search.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/search/jump-to-line.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/jump-to-line.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/search/searchcursor.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

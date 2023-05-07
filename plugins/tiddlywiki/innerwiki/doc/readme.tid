@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/innerwiki/readme
+
+!! Introduction
+
+This plugin enables TiddlyWiki to embed a modified copy of itself (an "innerwiki") with overlaid graphics. The primary motivation is to be able to produce screenshot illustrations that are automatically up-to-date with the appearance of TiddlyWiki as it changes over time, or to produce the same screenshot in different languages.
+
+In the browser, innerwikis are displayed as an embedded iframe. Under Node.js [[Google's Puppeteer|https://pptr.dev/]] is used to load the innerwikis as off-screen web pages and then snapshot them as a PNG image.
+
+!! Warnings
+
+The `<$innerwiki>` widget is relatively slow and resource intensive: each time it is refreshed it will entirely rebuild the iframe containing the innerwiki.
+
+The `<$innerwiki>` widget does not automatically resize with its container (for example, try hiding the sidebar in this wiki).
+
+!! Prequisites
+
+In order to take screenshots under Node.js, Google Puppeteer must first be installed from [[npm|https://npmjs.org//]]. For most situations, it should be installed at the root of the TiddlyWiki 5 repo:
+
+```
+cd Jermolene/TiddlyWiki5
+npm install puppeteer
+```
+
+However, if you're working in a different repo that uses npm to install TiddlyWiki 5 then you should install Puppeteer into the same repo. The general rule is that the `node_modules` folder containing Puppeteer should be contained within an ancestor of the folder containing TiddlyWiki's `tiddlywiki.js` file.
+

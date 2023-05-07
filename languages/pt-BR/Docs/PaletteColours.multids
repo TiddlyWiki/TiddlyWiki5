@@ -1,0 +1,105 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Fundo de alertas
+alert-border: Margem de alertas
+alert-highlight: Realce de alertas
+alert-muted-foreground: Fundo de alertas silenciados
+background: Fundo geral
+blockquote-bar: Barra de citação
+button-background: Fundo de botão pré-definido
+button-border: Moldura de botão pré-definido
+button-foreground: Primeiro plano de botão pré-definido
+code-background: Fundo de código
+code-border: Margem de código
+code-foreground: Primeiro plano de código
+dirty-indicator: Indicador de alterações por salvar
+download-background: Fundo do botão de transferências
+download-foreground: Primeiro plano do botão de transferências
+dragger-background: Fundo da zona de arrasto
+dragger-foreground: Primeiro plano da zona de arrasto
+dropdown-background: Fundo de menu suspenso
+dropdown-border: Margem de  menu suspenso
+dropdown-tab-background: Fundo de separador suspenso
+dropdown-tab-background-selected: Fundo para separador suspenso selecionado
+dropzone-background: Fundo de zona de largada
+external-link-background: Fundo do link externa
+external-link-background-hover: Fundo do link externa sob o cursor
+external-link-background-visited: Fundo do link externa visitada
+external-link-foreground: Primeiro plano do link externa
+external-link-foreground-hover: Primeiro plano do link externa sob o cursor
+external-link-foreground-visited: Primeiro plano do link externa visitada
+foreground: Primeiro plano geral
+message-background: Fundo de caixa de mensagem
+message-border: Margem de caixa de mensagem
+message-foreground: Primeiro plano de caixa de mensagem
+modal-backdrop: Cenário de modal
+modal-background: Fundo de modal
+modal-border: Margem de modal
+modal-footer-background: Fundo do rodapé modal
+modal-footer-border: Margem do rodapé modal
+modal-header-border: Margem do cabeçalho modal
+muted-foreground: Primeiro plano silenciado geral
+notification-background: Fundo de notificação
+notification-border: Margem de notificação
+page-background: Fundo de página
+pre-background: Fundo de código pré formatado
+pre-border: Margem de código pré formatado
+primary: Primário geral
+sidebar-button-foreground: Fundo de botões da barra lateral
+sidebar-controls-foreground: Primeiro plano de controles da barra lateral
+sidebar-controls-foreground-hover: Primeiro plano de controles da barra lateral sob cursor
+sidebar-foreground: Primeiro plano da barra lateral
+sidebar-foreground-shadow: Sombra de primeiro plano da barra lateral
+sidebar-muted-foreground: Primeiro plano silenciado da barra lateral
+sidebar-muted-foreground-hover: Primeiro plano silenciado da barra lateral sob cursor
+sidebar-tab-background: Fundo de separador da barra lateral
+sidebar-tab-background-selected: Fundo de separador selecionado da barra lateral
+sidebar-tab-border: Margem de separador da barra lateral
+sidebar-tab-border-selected: Margem de separador selecionado da barra lateral
+sidebar-tab-divider: Divisão de separador da barra lateral
+sidebar-tab-foreground: Primeiro plano de separador da barra lateral
+sidebar-tab-foreground-selected: Primeiro plano de separador selecionado da barra lateral
+sidebar-tiddler-link-foreground: Primeiro plano do link para tiddler na barra lateral
+sidebar-tiddler-link-foreground-hover: Primeiro plano do link para tiddler na barra lateral sob o cursor
+site-title-foreground: Primeiro plano do site
+static-alert-foreground: Primeiro plano de alerta estático
+tab-background: Fundo de separador
+tab-background-selected: Fundo de separador selecionado
+tab-border: Margem de separador
+tab-border-selected: Margem de separador selecionado
+tab-divider: Divisão de separador
+tab-foreground: Primeiro plano de separador
+tab-foreground-selected: Primeiro plano de separadores selecionados
+table-border: Margem de tabela
+table-footer-background: Fundo de rodapé de tabela
+table-header-background: Fundo de cabeçalho de tabela
+tag-background: Cor de fundo do botão assunto
+tag-foreground: Primeiro plano de assunto
+tiddler-background: Cor de fundo doe Tiddler
+tiddler-border: Margem de Tiddler
+tiddler-controls-foreground: Primeiro plano de controles dos Tiddlers
+tiddler-controls-foreground-hover: Primeiro plano de controles dos Tiddlers sob o cursor
+tiddler-controls-foreground-selected: Primeiro plano de controles dos Tiddlers selecionados
+tiddler-editor-background: Fundo do editor de Tiddlers
+tiddler-editor-border: Margem do editor de Tiddlers
+tiddler-editor-border-image: Imagem de margem do editor de Tiddlers
+tiddler-editor-fields-even: Fundo de campos pares do editor de Tiddlers
+tiddler-editor-fields-odd: Fundo de campos ímpares do editor de Tiddlers
+tiddler-info-background: Fundo do painel de informação de Tiddlers
+tiddler-info-border: Margem do painel de informação de Tiddlers
+tiddler-info-tab-background: Fundo de separadores do painel de informação de Tiddlers
+tiddler-link-background: Fundo do link para Tiddlers
+tiddler-link-foreground: Primeiro plano do link para Tiddlers
+tiddler-subtitle-foreground: Primeiro plano de subtítulo de Tiddlers
+tiddler-title-foreground: Primeiro plano de título de Tiddlers
+toolbar-cancel-button: Botão 'cancelar' da barra de ferramentas
+toolbar-close-button: Botão 'fechar' da barra de ferramentas
+toolbar-delete-button: Botão 'apagar' da barra de ferramentas
+toolbar-done-button: Botão 'concluir' da barra de ferramentas
+toolbar-edit-button: Botão 'editar' da barra de ferramentas
+toolbar-info-button: Botão 'informação' da barra de ferramentas
+toolbar-new-button: Botão 'novo tiddler' da barra de ferramentas
+toolbar-options-button: Botão 'opções' da barra de ferramentas
+toolbar-save-button: Botão 'salvar' da barra de ferramentas
+untagged-background: Fundo de cápsula sem assunto
+very-muted-foreground: Fundo muito silenciado

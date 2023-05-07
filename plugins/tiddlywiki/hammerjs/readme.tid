@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/hammerjs/readme
+
+This plugin packages [[HammerJS|https://hammerjs.github.io]] for use by other plugins. It does not provide any end-user visible features.

@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 # Abre ~TiddlyWiki en el navegador
 
-# En otra ventana del navegador, busca un enlace al plugin que quieres instalar en la página que lo contiene, p. ej., el enlace <<.tid ~$:/plugins/tiddlywiki/katex>> en http://tiddlywiki.com/plugins/tiddlywiki/katex/)
+# En otra ventana del navegador, busca un enlace al plugin que quieres instalar en la página que lo contiene, p. ej., el enlace <<.tid ~$:/plugins/tiddlywiki/katex>> en https://tiddlywiki.com/plugins/tiddlywiki/katex/)
 
 # Arrastra el enlace hasta tu página. Aparecerá una banda de color verde en la parte superior de la pantalla. 
 

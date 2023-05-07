@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/codemirror-closetag/readme
+
+This plugin adds the ability to ''automatically close Tags''. It needs the latest [[CodeMirror plugin|$:/plugins/tiddlywiki/codemirror]] to be installed
+
+

@@ -1,0 +1,14 @@
+tags: HookMechanism
+title: Hook: th-make-tiddler-path
+type: text/vnd.tiddlywiki
+
+This hook lets a plugin inspect or modify the tiddler file path during the saving process.
+
+Hook function parameters:
+
+* ``currentPath``: The path the tiddler file will be saved to.
+* ``originalPath``: The original tiddler file path unmodified by any hooks.
+
+Return value:
+
+The path to use for saving the tiddler file.

@@ -7,19 +7,19 @@ De server kan specifieke tiddlers in het gegeven formaat tonen. Daarnaast kunnen
 De ondersteunde HTTP-functies zijn: `GET`, `PUT` en `DELETE`.
 
 ```
---server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+--server <poort> <roottiddler> <rendertype> <servetype> <gebruikersnaam> <wachtwoord> <host> <padprefix>
 ```
 
 De parameters zijn:
 
-* ''port'' - poortnummer voor communicatie (standaard "8080")
+* ''poort'' - poortnummer voor communicatie (standaard "8080")
 * ''roottiddler'' - de tiddler die als basistiddler gebruikt wordt (standaard "$:/core/save/all") 
 * ''rendertype'' - het inhoudstype waarmee de basistiddler getoond wordt (standaard "text/plain")
 * ''servetype'' - het inhoudstype waarmee de basistiddler uitgeleverd wordt (standaard "text/html")
-* ''username'' - de standaard gebruikersnaam waarmee wijzigingen gesigneerd worden
-* ''password'' - optioneel wachtwoord voor simpele verificatie
+* ''gebruikersnaam'' - de standaard gebruikersnaam waarmee wijzigingen gesigneerd worden
+* ''wachtwoord'' - optioneel wachtwoord voor simpele verificatie
 * ''host'' - optionele hostnaam waarmee uitgeleverd wordt (standaard "127.0.0.1" oftewel "localhost")
-* ''pathprefix'' - optioneel voorvoegsel voor paden
+* ''padprefix'' - optioneel voorvoegsel voor paden
 
 Als een wachtwoord gegeven wordt zal de browser om gebruikersnaam en wachtwoord vragen. N.B. het wachtwoord wordt als platte tekst verzonden en dit is dus niet geschikt voor algemeen internetgebruik.
 
@@ -29,7 +29,7 @@ B.v.:
 --server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
-De gebruikersnaam en het wachtwoord kunnen als lege "strings" ("") gespecificeerd worden als je "hostname" of "pathprefix" wil geven zonder wachtwoord:
+De gebruikersnaam en het wachtwoord kunnen als lege "strings" ("") gespecificeerd worden als je "hostnaam" of "padprefix" wil geven zonder wachtwoord:
 
 ```
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245

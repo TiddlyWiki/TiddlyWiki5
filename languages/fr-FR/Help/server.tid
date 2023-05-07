@@ -1,24 +1,23 @@
 title: $:/language/Help/server
-description: Fournit une interface serveur HTTP à TiddlyWiki
+description: Fournit une interface serveur HTTP à TiddlyWiki (déprécié en faveur de la nouvelle commande listen)
 
-Le serveur embarqué dans TiddlyWiki5 est très simple. Bien qu'il soit compatible avec TiddlyWeb, il n'a pas la robustesse requise pour une utilisation sur l'Internet.
-
-À la racine de l'url, il sert le tiddler spécifié avec le rendu indiqué. Au-delà, il sert des tiddlers encodés en JSON, et reconnaît les principales opérations HTTP pour `GET`, `PUT` et `DELETE`.
+Ancienne commande pour servir un wiki sur HTTP.
 
 ```
---server <port> <tiddler-racine> <type-du-rendu> <type-du-service> <nom-d-utilisateur> <mot-de-passe> <machine> <prefixe-des-chemins>
+--server <port> <tiddler-racine> <type-du-rendu> <type-du-service> <nom-d-utilisateur> <mot-de-passe> <machine> <préfixe-des-chemins> <niveau-débogage>
 ```
 
 Les arguments sont :
 
-* ''port'' - numéro de port sur lequel servir le contenu (défaut : "8080")
+* ''port'' - numéro de port sur lequel servir le contenu ; une valeur non-numérique sera interprétée comme un nom de variable d'environnement du système dont la valeur est le numéro de port (défaut : "8080")
 * ''tiddler-racine'' - le titre du tiddler à afficher à la racine de l'URL (défaut : "$:/core/save/all") 
 * ''type-du-rendu'' - le type avec lequel le contenu du tiddler racine doit être rendu (`text/plain` par défaut)
 * ''type-du-service'' - le type avec lequel le contenu du tiddler racine doit être servi (`text/html` par défaut)
 * ''nom-d-utilisateur'' - le nom d'utilisateur qui servira par défaut à signer les modifications
 * ''mot-de-passe'' - mot de passe optionnel permettant une authentification basique
 * ''machine'' - nom de machine optionnel d'où le contenu doit être servi ("127.0.0.1" par défaut, autrement dit "localhost")
-* ''prefixe-des-chemins'' - préfixe optionnel pour les chemins
+* ''préfixe-des-chemins'' - préfixe optionnel pour les chemins de fichiers
+* ''niveau-débogage'' - optional debug level; set to "debug" to view request details (defaults to "none")
 
 Si le mot de passe est spécifié en argument, le navigateur demandera à l'utilisateur d'entrer le nom d'utilisateur et le mot de passe. On notera que le mot de passe est transmis en clair, et que cette implémentation ne convient donc pas pour un usage général.
 
@@ -34,4 +33,8 @@ Le nom d'utilisateur et le mot de passe peuvent être spécifiés sous forme de 
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
-Si vous voulez faire tourner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner chacun un port différent.
+Si vous voulez faire tourner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner chacun un port différent. Il peut être utile d'utiliser une variable d'environnement pour passer le numéro de port au process Node.js. L'exemple suivant utilise une variable d'environnement appelée "MY_PORT_NUMBER" :
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MonNomUtilisateur m0tdepa55e
+```

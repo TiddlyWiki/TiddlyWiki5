@@ -1,0 +1,12 @@
+title: $:/SavingThumbnailsTemplate
+
+<div class="tc-saving-thumbnail-wrapper">
+<div class="tc-saving-thumbnail-caption">
+<$transclude tiddler=<<currentTab>> field="caption">
+<$view tiddler=<<currentTab>> field="title"/>
+</$transclude>
+</div>
+<div class="tc-saving-thumbnail-description">
+<$view tiddler=<<currentTab>> field="description"/>
+</div>
+</div>

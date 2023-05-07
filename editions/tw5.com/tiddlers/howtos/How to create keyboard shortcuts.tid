@@ -1,0 +1,106 @@
+tags: [[Customise TiddlyWiki]] Learning
+title: How to create keyboard shortcuts
+type: text/vnd.tiddlywiki
+
+<br>
+<<.tip """[[TiddlyWiki]] distinguishes two types of keyboard shortcuts. Those that are limited to work within <$macrocall $name=".tag" _="input"/> fields or <$macrocall $name=".tag" _="textareas"/> which are handled by the <$macrocall $name=".wlink" to="KeyboardWidget"/> widget and keyboard shortcuts that work globally - which means that only the page needs to have focus in order for them to be accessible. The latter are handled by a mechanism that starts to work when a wiki is loaded""">>
+
+
+!! The configuration mechanism is the same for both shortcut-types
+
+<$vars tv-show-missing-links="no">
+
+A tiddler with the <<.def prefix>> `$:/config/ShortcutInfo/` and a ''unique suffix'' appended, like `my-shortcut`, makes the new shortcut appear in the $:/ControlPanel within the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]]. An optional description can be added within its text field
+
+In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the ''key combination'' that should trigger the shortcut can be configured:
+
+> Look for the ''unique suffix'' defined for the new shortcut and click the <$button class="tc-btn-invisible"><<.icon $:/core/images/edit-button>><$action-sendmessage $message="tm-notify" $param="$:/core/images/edit-button"/></$button> button to open a popup that detects ''key combinations'' and shows the detected combination in its input field
+
+>The ''add shortcut'' assigns the key-combination to the shortcut
+
+!!! Depending on the chosen platform the configuration mechanism creates a tiddler with a specific nomenclature
+
+> $:/config/shortcuts/ + the ''shortcut suffix'' for shortcuts that will work on all platforms (operating systems)
+
+> $:/config/shortcuts-(mac/not-mac/windows/not-windows/linux/not-linux)/ + the ''shortcut suffix'' for shortcuts that will work on the chosen platform only or that will not work on the excluded platform
+
+!!! Examples
+
+* $:/config/shortcuts/`my-shortcut`
+* $:/config/shortcuts-mac/`my-shortcut`
+* $:/config/shortcuts-windows/`my-shortcut`
+* $:/config/shortcuts-linux/`my-shortcut`
+* $:/config/shortcuts-not-mac/`my-shortcut`
+* $:/config/shortcuts-not-windows/`my-shortcut`
+* $:/config/shortcuts-not-linux/`my-shortcut`
+
+<<.tip """Note that those platform-specific tiddlers don't have to be created manually if the ''ShortcutInfo'' tiddler as mentioned above is created first and the shortcut is configured in the ~ControlPanel""">>
+
+<br>
+
+!! At this point the shortcut is defined and its ''actions'' can be configured
+
+!! Using the [[Keyboard Widget|KeyboardWidget]]
+
+> A <<.wlink "KeyboardWidget">> widget detects the key combinations pressed within an <<.tag input>> or <<.tag textarea>> field within its scope. The <<.wlink "KeyboardWidget">> widget needs to "embrace" the <<.tag input>> or <<.tag textarea>> field and its <<.attr key>> attribute either points to a configuration tiddler using the [[Key Descriptor]] Syntax or explicitely contains the key
+
+```
+<$keyboard key="((my-shortcut))" actions='<$action-setfield $tiddler="my-tiddler" $field="my-field" $value="my-value"/>'>
+
+<$edit-text tag="input" tiddler="my-tiddler"/>
+
+</$keyboard>
+```
+
+```
+<$keyboard key="alt-shift-M" actions='<$action-setfield $tiddler="my-tiddler" $field="my-field" $value="my-value"/>'>
+
+<$edit-text tag="input" tiddler="my-tiddler"/>
+
+</$keyboard>
+```
+
+> If actions are defined , the <<.wlink KeyboardWidget>> widget will invoke the actions defined in its <<.attr actions>> attribute when it detects the key-combination defined in its <<.attr key>> attribute being pressed in any <<.tag input>> or <<.tag textarea>> field within its scope
+
+<br>
+
+!! Using global Keyboard Shortcuts
+
+> See [[Keyboard Shortcut Tiddler]] for detailed information about creating new global keyboard shortcuts.
+
+> The actions for ''global'' keyboard shortcuts are stored in the ''text'' field of tiddlers tagged with <<tag $:/tags/KeyboardShortcut>>
+
+> The ''key field'' connects an action-tiddler with the corresponding shortcut through the `((my-shortcut))` syntax, called [[Keyboard Shortcut Descriptor]]
+
+:<h3> Syntax: `((` + `a chosen suffix` + `))` </h3>
+
+> If the tiddler has the tag <<tag $:/tags/KeyboardShortcut>>, the field ''key'' with the [[Keyboard Shortcut Descriptor]] as its value and some actions in its text field, the actions will be triggered when the mechanism detects the configured key-combination
+
+<br>
+<$macrocall $name=".tip" _="""''Macros'' defined ''outside'' a global keyboard-shortcut (through a tiddler tagged `$:/tags/Macro`) need to be ''imported'' in order to be accessible.
+The [[import pragma|Pragma]] can be used for that"""/>
+
+<pre>
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+</pre>
+
+If the tiddler that contains the macro definition is known and - for example - titled `my-macro-tiddler`
+
+<pre>
+\import [[my-macro-tiddler]]
+</pre>
+
+<br>
+<$macrocall $name=".tip" _="""Some actions require to be wrapped within a <<.wlink NavigatorWidget>> widget. That is necessary for the following list of widgets and messages in order to work if used within global keyboard shortcuts"""/>
+
+!!! Widgets
+
+<<.wlink ActionNavigateWidget>> (ActionNavigateWidget)
+
+!!! Messages
+
+<$list filter="[tag[navigator-message]]">
+<$link/><br>
+</$list>
+
+</$vars>

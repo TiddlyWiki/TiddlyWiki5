@@ -2,7 +2,7 @@
 	"description": "Tools for slicing up long texts into individual tiddlers",
 	"plugins": [
 		"tiddlywiki/text-slicer",
-		"tiddlywiki/xmldom"
+		"tiddlywiki/sax"
 	],
 	"languages": [
 	],

@@ -1,0 +1,19 @@
+created: 20170127221457627
+modified: 20170127222646488
+title: License
+type: text/vnd.tiddlywiki
+tags: About
+
+TiddlyWiki is published under a [[permissive BSD 3-Clause License|https://opensource.org/licenses/BSD-3-Clause]] stored in the [[shadow tiddler|ShadowTiddlers]] [[$:/core/copyright.txt]]:
+
+<div style="font-size: 0.7em;line-height:1.4;">
+
+{{$:/core/copyright.txt}}
+
+</div>
+
+In layman's terms, the license says that you can take TiddlyWiki and do anything you want with it without any license fee payment or other legal obligation to the creators of ~TiddlyWiki or anyone else. The quid pro quo is that there is no warranty or guarantee with open source projects like ~TiddlyWiki. You can't sue the contributors to ~TiddlyWiki for any loss or damage due to the use of ~TiddlyWiki: even if your data is lost due to a tragic chain of circumstances that involves ~TiddlyWiki.
+
+You are respectfully requested that to make an attribution to the project, but there's no obligation to do so.
+
+For the avoidance of doubt, any information that you choose to store within your own copy of ~TiddlyWiki remains yours; using ~TiddlyWiki to publish content doesn't change whatever rights you may have to that content.

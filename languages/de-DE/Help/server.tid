@@ -1,24 +1,25 @@
 title: $:/language/Help/server
-description: Stellt einen HTTP server für TiddlyWiki zur Verfügung.
+description: Stellt einen HTTP server für TiddlyWiki zur Verfügung. (Dieser Befehl ist abgekündigt! - Neu ist: "listen")
 
-TiddlyWiki bringt einen sehr einfachen Web-Server mit. Dieser ist zwar kompatibel mit dem TiddlyWeb Protokoll, ist jedoch nicht ausgereift genug, um im produktiven Einsatz im Netz eingesetzt zu werden. 
+TiddlyWiki bringt einen einfachen Web-Server mit.
 
 Der Server kann spezifische Tiddler im angegebenen Format anzeigen (rendern). Zudem können einzelne, oder mehrere Tiddler im JSON Format übertragen werden. Die unterstützten HTTP Funktionen sind: `GET`, `PUT` und `DELETE`
 
 ```
---server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
+--server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
 ```
 
 Die Parameter sind: 
 
-* ''port'' - Port Nummer mit der kommuniziert werden soll (Standard: "8080").
-* ''roottiddler'' - Der Tiddler, der als ~Basis-Tiddler verwendet werden soll ( Standard: "$:/core/save/all").
-* ''rendertype'' -  MIME-Type, zu dem der ~Basis-Tiddler "gerendert" werden soll ( Standard: "text/plain").
-* ''servetype'' - MIME-Type, mit dem der Basis-Tiddler ausgeliefert werden soll ( Standard: "text/html").
+* ''port'' - Port Nummer mit der kommuniziert werden soll (Standard: "8080"). Ein "nicht-numerisher" Wert wird als System-Umgebungsvariable interpretiert, von der der Wert gelesen werden soll.
+* ''root-tiddler'' - Der Tiddler, der als ~Basis-Tiddler verwendet werden soll ( Standard: "$:/core/save/all").
+* ''root-render-type'' -  MIME-Type, zu dem der ~Basis-Tiddler "gerendert" werden soll ( Standard: "text/plain").
+* ''root-serve-type'' - MIME-Type, mit dem der Basis-Tiddler ausgeliefert werden soll ( Standard: "text/html").
 * ''username'' - Benutzer Name, mit dem veränderte Tiddler signiert werden.
 * ''password'' - Passwort mit dem eine sehr "simple" Zugangsbeschränkung aufgebaut werden kann.
 * ''host'' - ~Host-Name von dem ausgeliefert werden soll. Host ist optional ( Standard: "127.0.0.1" oder auch "localhost").
-* ''pathprefix'' - Optionales prefix für Pfade.
+* ''path-prefix'' - Optionales prefix für Pfade.
+* ''debug-level'' - "debug" bewikt eine detailierte Anzeige der HTTP Anfrage-Parameter. (Standard: "none")
 
 Wenn beim Serverstart ein Passwort angegeben wird, dann wird der Benutzer aufgefordert den Benutzernamen und das Passwort einzugeben, bevor ein Wiki angezeigt wird. ACHTUNG: Das Passwort wird im Klartext übertragen. Diese Vorgehensweise ist nicht für den Einsatz im Netz geeignet.
 
@@ -34,4 +35,11 @@ Der Name und das Passwort können als "leere" Zeichenketten definiert werden, we
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
 
-Es ist möglich mehrere TiddlyWiki Server gleichzeitig zu starten. Jeder Server muss jedoch mit einem eigenen Port gestartet werden.
+Wenn Sie eine Addresse wie oben verwenden, dann ist der Server für das lokale Netzwerk sichtbar. Weitere Sicherheitshinweise finden sie unter: WebServer auf tiddlywiki.com
+
+Es ist möglich mehrere TiddlyWiki Server gleichzeitig zu starten. Jeder Server muss jedoch mit einem eigenen Port gestartet werden. Es kann sinnvoll sein, den Prozess mit lokalen "Umgebungsvariable" zu starten. Hier wird "MEINE_PORT_NUMMER" als Beispiel verwendet.
+
+
+```
+--server MEINE_PORT_NUMMER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

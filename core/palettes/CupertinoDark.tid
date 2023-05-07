@@ -1,0 +1,132 @@
+title: $:/palettes/CupertinoDark
+tags: $:/tags/Palette
+color-scheme: dark
+name: Cupertino Dark
+description: A macOS inspired dark palette
+type: application/x-tiddler-dictionary
+
+alert-background: #FF453A
+alert-border: #FF453A
+alert-highlight: #FFD60A
+alert-muted-foreground: <<colour muted-foreground>>
+background: #282828
+blockquote-bar: <<colour page-background>>
+button-foreground: <<colour foreground>>
+code-background: <<colour pre-background>>
+code-border: <<colour pre-border>>
+code-foreground: rgba(255, 255, 255, 0.54)
+dirty-indicator: #FF453A
+download-background: <<colour primary>>
+download-foreground: <<colour foreground>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour tiddler-info-background>>
+dropdown-border: <<colour dropdown-background>>
+dropdown-tab-background-selected: #3F638B
+dropdown-tab-background: #323232
+dropzone-background: #30D158
+external-link-background-hover: transparent
+external-link-background-visited: transparent
+external-link-background: transparent
+external-link-foreground-hover: 
+external-link-foreground-visited: #BF5AF2
+external-link-foreground: #32D74B
+foreground: #FFFFFF
+highlight-background: #ffff78
+highlight-foreground: #000000
+menubar-background: #464646
+menubar-foreground: #ffffff
+message-background: <<colour background>>
+message-border: <<colour very-muted-foreground>>
+message-foreground: rgba(255, 255, 255, 0.54)
+modal-backdrop: <<colour page-background>>
+modal-background: <<colour background>>
+modal-border: <<colour very-muted-foreground>>
+modal-footer-background: <<colour background>>
+modal-footer-border: <<colour background>>
+modal-header-border: <<colour very-muted-foreground>>
+muted-foreground: #98989D
+notification-background: <<colour dropdown-background>>
+notification-border: <<colour dropdown-background>>
+page-background: #323232
+pre-background: #464646
+pre-border: transparent
+primary: #0A84FF
+select-tag-background: <<colour background>>
+select-tag-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #FF9F0A
+sidebar-controls-foreground: #8E8E93
+sidebar-foreground-shadow: transparent
+sidebar-foreground: rgba(255, 255, 255, 0.54)
+sidebar-muted-foreground-hover: rgba(255, 255, 255, 0.54)
+sidebar-muted-foreground: rgba(255, 255, 255, 0.38)
+sidebar-tab-background-selected: #3F638B
+sidebar-tab-background: <<colour background>>
+sidebar-tab-border-selected: <<colour background>>
+sidebar-tab-border: <<colour background>>
+sidebar-tab-divider: <<colour background>>
+sidebar-tab-foreground-selected: rgba(255, 255, 255, 0.87)
+sidebar-tab-foreground: rgba(255, 255, 255, 0.54)
+sidebar-tiddler-link-foreground-hover: rgba(255, 255, 255, 0.7)
+sidebar-tiddler-link-foreground: rgba(255, 255, 255, 0.54)
+site-title-foreground: #ffffff
+static-alert-foreground: #B4B4B4
+tab-background-selected: #3F638B
+tab-background: <<colour page-background>>
+tab-border-selected: <<colour page-background>>
+tab-border: <<colour page-background>>
+tab-divider: <<colour page-background>>
+tab-foreground-selected: rgba(255, 255, 255, 0.87)
+tab-foreground: rgba(255, 255, 255, 0.54)
+table-border: #464646
+table-footer-background: <<colour tiddler-editor-fields-odd>>
+table-header-background: <<colour tiddler-editor-fields-even>>
+tag-background: #48484A
+tag-foreground: #323232
+tiddler-background: <<colour background>>
+tiddler-border: transparent
+tiddler-controls-foreground-hover: <<colour sidebar-controls-foreground-hover>>
+tiddler-controls-foreground-selected: <<colour sidebar-controls-foreground-hover>>
+tiddler-controls-foreground: #48484A
+tiddler-editor-background: <<colour background>>
+tiddler-editor-border-image: 
+tiddler-editor-border: rgba(255, 255, 255, 0.08)
+tiddler-editor-fields-even: rgba(255, 255, 255, 0.1)
+tiddler-editor-fields-odd: rgba(255, 255, 255, 0.04)
+tiddler-info-background: #1E1E1E
+tiddler-info-border: #1E1E1E
+tiddler-info-tab-background: #3F638B
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: <<colour muted-foreground>>
+tiddler-title-foreground: #FFFFFF
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: <<colour very-muted-foreground>>
+very-muted-foreground: #464646
+selection-background: #3F638B
+selection-foreground: #ffffff
+wikilist-background: <<colour page-background>>
+wikilist-button-background: #3F638B
+wikilist-button-foreground: <<colour foreground>>
+wikilist-button-open: #32D74B
+wikilist-button-open-hover: #32D74B
+wikilist-button-reveal: #0A84FF
+wikilist-button-reveal-hover: #0A84FF
+wikilist-button-remove: #FF453A
+wikilist-button-remove-hover: #FF453A
+wikilist-droplink-dragover: #32D74B
+wikilist-item: <<colour background>>
+wikilist-toolbar-background: <<colour background>>
+wikilist-title: <<colour foreground>>
+wikilist-title-svg: <<colour foreground>>
+wikilist-toolbar-foreground: <<colour foreground>>
+wikilist-url: <<colour muted-foreground>>

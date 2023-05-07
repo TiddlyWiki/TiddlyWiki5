@@ -1,0 +1,55 @@
+caption: ~TiddlySpot
+color: #29b6f6
+community-author: Simon Baird & Daniel Baird
+created: 20130825213500000
+delivery: Service
+description: Hébergement TiddlyWiki en ligne. (Remplacé par TiddlyHost)
+fr-title: Enregistrer sur Tiddlyspot
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: Saving on TiddlySpot
+type: text/vnd.tiddlywiki
+
+----
+<<.warning "''Attention<<!>> ~TiddlySpot est passé en mode maintenance et ne permet plus de créer de nouveau site. Vous pouvez maintenant utiliser [[TiddlyHost|Saving on TiddlyHost]] à la place, un nouveau service proposé par le créateur de ~TiddlySpot.''">>
+----
+[img[https://raw.githubusercontent.com/simonbaird/tiddlyhost/main/rails/app/assets/images/tiddlyspot-banner-logo.png]]
+
+//~TiddlySpot// est un service d'hébergement gratuit pour les documents TiddlyWiki, mis à disposition par Simon et Daniel Baird. Le plus simple pour commencer est de créer un nouveau wiki sur http://tiddlyspot.com -- par défaut, vous obtiendrez la dernière version de [[TiddlyWiki Classic|TiddlyWikiClassic]].
+
+Vous pouvez publier un document TiddlyWiki depuis votre disque local vers ~TiddlySpot en suivant les étapes ci-dessous<<:>>
+
+# Demandez la création d'un nouveau wiki sur http://tiddlyspot.com/, et rappelez-vous son nom et son mot de passe
+# Ouvrez le fichier ~TiddlyWiki conservé localement dans votre navigateur
+# Remplissez le nom et le mot de passe ~TiddlySpot dans l'onglet //Sauvegarde// du panneau de contrôle
+# Cliquez sur le bouton <<gf "Enregistrer les modifications">> dans la barre latérale. Vous devriez voir un message de confirmation en haut à droite de la barre latérale indiquant ''Wiki enregistré''. Cela peut durer plusieurs secondes si vous avez une connexion lente ou si vous travaillez avec un wiki volumineux.
+# Ouvrez votre wiki ~TiddlySpot à l'URL `http://<nom-du-wiki>.tiddlyspot.com/`
+
+Notez que lorsque vous utilisez ~TiddlySpot, votre mot de passe est envoyé non-crypté. Extrait de http://faq.tiddlyspot.com/<<:>>
+
+<<<
+''Tiddlyspot est-il sûr ?''
+
+Non. Tiddlyspot n'utilise pas SSL/https. Votre mot de passe est envoyé en clair lorsque vous enregistrez votre wiki et au moment où vous vous authentifiez pour accéder à un site privé. Autrement dit, votre Tiddlyspot est ouvert aux renifleurs de paquets et votre mot de passe peut être découvert par un tiers malveillant. De même, vos données sont transmises non 
+-cryptées lorsque vous vous affichez votre site, même s'il s'agit d'un site privé. C'est pourquoi nous vous prions instamment de ne pas conserver d'informations sensibles comme des données bancaires dans votre Tiddlyspot et de ne pas utiliser un mot de passe que vous utilisez pour d'autres sites plus sensibles.
+<<<
+
+! Problèmes lors de la sauvegarde sur Tiddlyspot
+
+Si vous rencontrez l'erreur suivante au moment de déposer un nouveau TiddlyWiki (ou [[mis à niveau|Upgrading]]) vers Tiddlyspot à partir d'un fichier local<<:>>
+
+<<<
+Error while saving:
+
+Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
+<<<
+
+L'opération tombe sous le coup d'une restriction de sécurité propre à Firefox. En attendant que cela puisse être résolu, nous suggérons d'utiliser Chrome pour effectuer cette opération<<:>>
+
+*# Utilisez Chrome pour ouvrir le document TiddlyWiki local que vous voulez déposer sur TiddlySpot et suivez les étapes 1 à 5 ci-dessus
+*# Après avoir vérifié que le ~TiddlyWiki hébergé sur ~TiddlySpot se chargeait correctement dans Chrome, vous devriez à nouveau pouvoir y accéder, le modifier et [[l'enregistrer avec TiddlyFox|Saving with TiddlyFox]]
+* Lorsque vous aurez réussi à déposer une première fois votre document local, les modifications et enregistrements suivants de la version en ligne hébergée sur Tiddlyspot devraient fonctionner avec le navigateur récent de votre choix.
+** N'oubliez pas de remplir le nom du wiki ~TiddlySpot et son mot de passe dans l'onglet //Sauvegarde// de votre [[panneau de contrôle|$:/ControlPanel]] pour chaque nouveau navigateur que vous souhaitez utiliser pour enregistrer vos modifications.
+
+* //Voir aussi// : [[Mise à niveau|Upgrading]]

@@ -1,0 +1,8 @@
+created: 20180815124630157
+modified: 20180815124919662
+tags: [[contains Operator]] [[Operator Examples]]
+title: contains Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[contains:tags[HelloThere]]" "equivalent to [tag[HelloThere]]">>
+<<.operator-example 2 "[[$:/StoryList]contains[HelloThere]]" "checks whether the tiddler 'HelloThere' is currently displayed in the story river">>

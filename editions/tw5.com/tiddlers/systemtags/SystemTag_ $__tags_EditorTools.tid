@@ -1,0 +1,9 @@
+caption: $:/tags/EditorTools
+created: 20210519160245560
+description: marks the edit mode tiddler toolbar for non-button elements.
+modified: 20210519160509587
+tags: SystemTags
+title: SystemTag: $:/tags/EditorTools
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]]  `$:/tags/EditorTools` can be used to include non-button UI elements in the edit mode tiddler toolbar. For buttons see [[SystemTag: $:/tags/EditToolbar]].

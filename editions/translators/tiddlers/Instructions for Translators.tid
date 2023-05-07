@@ -20,8 +20,8 @@ Most translatable tiddlers consist of a single field. The "Types" and "Help" gro
 
 ! Step by Step
 
-# Make sure you know how to save changes with ~TiddlyWiki, as described on http://tiddlywiki.com/
-# Visit http://tiddlywiki.com/editions/translators/index.html
+# Make sure you know how to save changes with ~TiddlyWiki, as described on https://tiddlywiki.com/
+# Visit https://tiddlywiki.com/editions/translators/index.html
 # Click the ''Save changes'' button below to save a copy of the translators edition to your local hard drive. Name the copy `MyTranslation.html`
 #* You may want to save the file into your Dropbox folder (or equivalent) to benefit from automatic backups
 # Open the `MyTranslation.html` in your browser
@@ -37,7 +37,7 @@ Most translatable tiddlers consist of a single field. The "Types" and "Help" gro
 
 When your translation reaches the point that it's useful to be shared with others you can submit it for inclusion in the TiddlyWiki core.
 
-The easiest way to submit your translation is to publish the HTML file on Dropbox (as described on http://tiddlywiki.com/) and then post a link to the TiddlyWiki discussion group.
+The easiest way to submit your translation is to publish the HTML file on Dropbox (as described on https://tiddlywiki.com/) and then post a link to the TiddlyWiki discussion group.
 
 Alternatively, you can email the translation directly to Jeremy Ruston or Mario Pietsch.
 

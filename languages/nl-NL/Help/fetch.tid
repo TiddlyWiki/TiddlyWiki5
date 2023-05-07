@@ -20,8 +20,8 @@ Als het `--fetch` commando voorafgegaan wordt door `--verbose`, wordt voortgangs
 
 Merk op dat TiddlyWiki geen oudere versie van een reeds geladen plugin zal 'fetchen'.
 
-Het volgende voorbeeld haalt alle non-system tiddlers op van http://tiddlywiki.com en slaat die op als een JSON bestand:
+Het volgende voorbeeld haalt alle non-system tiddlers op van https://tiddlywiki.com en slaat die op als een JSON bestand:
 
 ```
-tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
 ```

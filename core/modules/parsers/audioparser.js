@@ -17,7 +17,8 @@ var AudioParser = function(type,text,options) {
 			type: "element",
 			tag: "audio",
 			attributes: {
-				controls: {type: "string", value: "controls"}
+				controls: {type: "string", value: "controls"},
+				style: {type: "string", value: "width: 100%; object-fit: contain"}
 			}
 		},
 		src;
@@ -27,6 +28,8 @@ var AudioParser = function(type,text,options) {
 		element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["audio/ogg"] = AudioParser;

@@ -1,0 +1,24 @@
+title: $:/language/Help/import
+description: Εισάγει tiddler από ένα αρχείο
+
+Εισάγει tiddler από 2.x.x TiddlyWiki αρχεία (`.html`), `.tiddler`, `.tid`, `.json` ή άλλα αρχεία. Σημειώστε πως η παράμετρος deserializer είναι υποχρεωτική, σε αντίθεση με την εντολή load όπου εκεί συνεπάγεται από την κατάληξη του ονόματος του αρχείου.
+
+```
+--import <filepath> <deserializer> [<τίτλος>] [<κωδικοποίηση>]
+```
+
+Οι διαθέσιμοι deserializers στον πυρήνα περιλαμβάνουν:
+
+* application/javascript
+* application/json
+* application/x-tiddler
+* application/x-tiddler-html-div
+* application/x-tiddlers
+* text/html
+* text/plain
+
+Ο τίτλος των εισαγόμενων tiddler έχει ως προκαθορισμένη τιμή το όνομα του αρχείου.
+
+Η κωδικοποίηση έχει ως προκαθορισμένη τιμή την "utf8", αλλά σε περίπτωση εισαγωγής δυαδικών αρχείων μπορεί να είναι "base64" .
+
+Σημειώστε ότι το TiddlyWiki δεν θα εισάγει παλαιότερη έκδοση πρόσθετου σε ένα πρόσθετο που έχει ήδη φορτωθεί.

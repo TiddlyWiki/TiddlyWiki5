@@ -1,0 +1,33 @@
+title: $:/language/Help/render
+description: Rendert individuele tiddlers naar bestanden
+
+
+Render (toon) gefilterde individuele tiddlers en sla de resultaten op in de gespecificeerde bestanden.
+
+Optioneel kan de titel van een template tiddler gespecificeerd worden. I.p.v. direct renderen van de tiddler wordt de template tiddler gerenderd met de "currentTiddler" variabele gezet als titel van de tiddler die wordt gerenderd.
+
+Een naam en waarde voor een additionele variabele kan optioneel gespecificeerd worden.
+
+```
+--render <tiddler-filter> [<bestandsnaam-filter>] [<render-type>] [<template>] [<naam>] [<waarde>]
+```
+
+* ''tiddler-filter'': Een filter dat bepaalt welke tiddler(s) getoond worden
+* ''bestandsnaam-filter'': Optioneel filter dat tiiddler titels omzet in padnamen. Standaard (geen optioneel filter) `[is[tiddler]addsuffix[.html]]`, hetgeen de onveranderde tiddler titel als bestandsnaam gebruikt
+* ''template'': Optionele template die gebruikt wordt om elke tiddler te renderen
+* ''render-type'': Optioneel render type: `text/html` (standaard) geeft de volledige HTML tekst en `text/plain` geeft de kale tekst (negeert HTML labels en ander niet te printen materiaal)
+* ''naam'': Naam van de optionele variabele
+* ''waarde'': Waarde van de optionele variabele
+
+Standaard is de bestandsnaam relatief t.o.v. de `output` subfolder van de editiefolder. Het `--output` commando kan gebruikt worden om output naar een andere folder te leiden.
+
+N.B.:
+* De output folder wordt niet leeg gemaakt
+* Elke ontbrekende folder in het pad naar de bestandsnaam wordt automatisch aangemaakt
+* In het geval van een tiddler met spaties in de titel, gebruik zowel de aanhalingstekens die vereist zijn voor de commando shell en ook TiddlyWiki's dubbele vierkante haken : `--render "[[Motovun Jack.jpg]]"`
+* Het bestandsnaam filter wordt geëvalueerd met de gekozen onderdelen, gezet voor de titel van de te renderen tiddler, waarbij de titel als basis dient om de bestandsnaam te bepalen. B.v. `[encodeuricomponent[]addprefix[static/]]` past URI encoding toe op elke titel, en voegt dan de prefix `static/` toe
+* Het `--render` commando is een uitgebreidere vervanging voor de verouderde `--rendertiddler` en `--rendertiddlers` commando's
+
+Voorbeelden:
+
+* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- rendert alle non-system tiddlers als bestanden in the subfolder "tiddlers" met URL-encoded titels en de extensie HTML

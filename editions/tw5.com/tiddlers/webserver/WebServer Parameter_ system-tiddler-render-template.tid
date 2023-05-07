@@ -1,0 +1,10 @@
+caption: system-tiddler-render-template
+created: 20180808094408813
+modified: 20180810053154669
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: system-tiddler-render-template
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''system-tiddler-render-template'' is used to specify the template for serving system tiddlers in the [[read-only single tiddler view|Using the read-only single tiddler view]]. The default value is `$:/core/templates/wikified-tiddler` which renders the tiddler raw, without any special viewing template.
+
+<<.tip "This setting may be overwritten by specifying the `_render_template` field of a tiddler.">>

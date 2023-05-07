@@ -1,0 +1,64 @@
+created: 20190206140446821
+modified: 20220330133748666
+tags: Filters
+title: Mathematics Operators
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>The mathematics filter operators allow numerical calculations to be performed within filters.
+
+! Using mathematics operators
+
+The mathematics operators interpret their arguments as numbers according to the following rules:
+
+* Any non-numeric characters after a valid number are ignored (e.g. `28px` is interpreted as the number 28)
+* If the argument cannot be interpreted as a number, the value 0 is used (e.g. `foo` is interpreted as the number 0)
+* The special values `Infinity` and `-Infinity` can be used to represent positive and negative infinity respectively
+
+<$macrocall $name=".warning" _="Some filter operators remove duplicate items which can cause unexpected results when using the mathematics operators. See [[Dominant Append]] for details."/>
+
+The mathematics operators take three different forms:
+
+* ''Unary operators'' apply an operation to each number in the input list (e.g. negate, truncate, sign)
+** <<.inline-operator-example "=1 =2 =3 =4 +[negate[]]">>
+** <<.inline-operator-example "=1.2 =2.4 =3.6 =4.8 +[trunc[]]">>
+** <<.inline-operator-example "=1.2 =2.4 =3.6 =4.8 +[round[]]">>
+* ''Binary operators'' apply an operation and operand to each number in the input list (e.g. add, multiply, remainder) 
+** <<.inline-operator-example "=1 =2 =3 =4 +[add[3]]">>
+** <<.inline-operator-example "=1 =2 =3 =4 +[multiply[8]]">>
+* ''Reducing operators'' apply an operation to all of the numbers in the input list, returning a single result (e.g. sum, product)
+** <<.inline-operator-example "=1 =2 =3 =4 +[sum[]]">>
+** <<.inline-operator-example "=1 =2 =3 =4 +[product[]]">>
+** <<.inline-operator-example "=1 =2 =3 =4 +[average[]]">>
+
+
+! Operations Combination
+
+Operations can be combined by concatenating them while merging the inner `][` characters.
+
+* <<.inline-operator-example "[[355]divide[113]fixed[5]]">>
+* <<.inline-operator-example "[range[100]sum[]divide[100]]">>
+* <<.inline-operator-example "[tag[HelloThere]get[text]length[]sum[]]">>
+
+Complex operations will sometimes need to be split up into separate filters. For example, to compute the average length of the text field of tiddlers tagged "~HelloThere":
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$set name="number-of-tiddlers" value={{{ [tag[HelloThere]count[]] }}}>
+Average length of <$text text=<<number-of-tiddlers>>/> tiddlers tagged <<tag "HelloThere">>: <$text text={{{ [tag[HelloThere]get[text]length[]sum[]divide<number-of-tiddlers>fixed[3]] }}}/>
+</$set>""" />
+
+! Mathematics Operators list
+
+<table>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Purpose</th>
+</tr>
+<$list filter="[tag[Mathematics Operators]sort[caption]]">
+<tr>
+<td><$link>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}}</td>
+</tr>
+</$list>
+</table>
+
+

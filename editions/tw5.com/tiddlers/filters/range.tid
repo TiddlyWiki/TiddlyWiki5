@@ -1,0 +1,64 @@
+created: 20171221184734665
+modified: 20210907170339891
+tags: [[Filter Operators]] [[Negatable Operators]] [[Selection Constructors]]
+title: range Operator
+type: text/vnd.tiddlywiki
+caption: range
+op-purpose: generate a range of numbers
+op-input: ignored
+op-parameter: a range specification, like `[1],[5]`
+op-parameter-name: N
+op-output: a series of evenly spaced numbers ranging from `<begin>` to `<end>`
+op-neg-output: a series of evenly spaced numbers ranging from `<begin>` to `<end>` in reverse order
+
+\define range_example(range)
+```
+[range[$range$]]
+```
+
+<$list variable=n filter="[range[$range$]]"><<n>> </$list>
+\end
+
+The `range` operator produces a list of numbers counting up or down.  It is useful for counting and numbering.
+
+<<.from-version "5.2.0">> The range operator has been updated to use multiple operands to specify its parameters. Prior to this version, the range operator only had one operand, with the three parts delimited by `,`, `;` or `:`.
+
+```
+[range[<begin>]]
+[range[<begin>],[<end>]]
+[range[<begin>],[<end>],[<step>]]
+```
+
+The behaviour depends on the number of operands:
+
+|Parameter |Output |h
+|`<end>` |Whole numbers up to `<end>` |
+|`<begin>,<end>` |Numbers from `<begin>` to `<end>`, spaced by whole numbers |
+|`<begin>,<end>,<step>` |Numbers from `<begin>` to `<end>` spaced out by `<step>` |
+
+Each part must be a number, and works as follows:
+
+* `<begin>`: start counting at this number.
+** Defaults to 1 if `<end>` is at least 1 (or -1 if `<end>` is at most -1).
+* `<end>`: stop counting at this number.
+** This number will appear in the list unless it falls between two steps.
+* `<step>`: count up (or down) by this amount.
+** Defaults to 1.
+** Cannot be zero.
+** We always count from `<begin>` toward `<end>`, whether `<step>` is positive or negative.
+
+The number of decimal points in the output is fixed, and based on the operand with the //most// decimal points.
+
+To prevent the browser from freezing, `range` is currently limited to 10,000 values.
+
+!!Examples
+
+<<range_example "7">>
+
+<<range_example "1],[10">>
+
+<<range_example "17],[13">>
+
+<<range_example "1.001],[5],[1">>
+
+<<range_example ".5],[1.4],[.004">>

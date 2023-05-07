@@ -1,0 +1,20 @@
+caption: ~TiddlyDesktop
+color: #FF8A65
+community-author: Jeremy Ruston
+created: 20171112085137764
+delivery: App
+description: Application personnalisée pour travailler avec TiddlyWiki
+fr-title: Enregistrer avec TiddlyDesktop
+method: save
+modified: 20220402105820520
+tags: Saving Mac Windows Linux
+title: Saving on TiddlyDesktop
+type: text/vnd.tiddlywiki
+url: https://github.com/TiddlyWiki/TiddlyDesktop/releases
+
+Regardez la <<fr "Introducing TiddlyDesktop Video">><<!>>
+
+# Installez la dernière version de TiddlyDesktop disponible sur https://github.com/TiddlyWiki/TiddlyDesktop/releases
+# Ouvrez TiddlyDesktop
+# Utilisez le bouton de navigation pour ouvrir des fichiers <<tw>>
+# Enregistrez les modifications dans <<tw>> comme d'habitude

@@ -1,6 +1,7 @@
 {
 	"description": "Japanese (Japan) edition",
 	"plugins": [
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

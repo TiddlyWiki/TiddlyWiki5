@@ -4,14 +4,14 @@ tags: howto
 title: How to create plugins in the browser
 type: text/vnd.tiddlywiki
 
-The recommended technique for building TiddlyWiki plugins involves running [[TiddlyWiki on Node.js|http://tiddlywiki.com/#TiddlyWiki%20on%20Node.js]], but there is now an experimental technique for creating plugins directly in the browser.
+The recommended technique for building TiddlyWiki plugins involves running [[TiddlyWiki on Node.js|https://tiddlywiki.com/#TiddlyWiki%20on%20Node.js]], but there is now an experimental technique for creating plugins directly in the browser.
 
 ! Overview
 
 Loading a plugin in the browser has several consequences:
 
 * The original plugin tiddler itself is unchanged
-* The payload tiddlers are set up as individual [[ShadowTiddlers|http://tiddlywiki.com/#ShadowTiddlers]]
+* The payload tiddlers are set up as individual [[ShadowTiddlers|https://tiddlywiki.com/#ShadowTiddlers]]
 
 To make a modified copy of a plugin, one edits the constituent shadow tiddlers (doing this actually overrides the shadow tiddler with a new non-shadow tiddler containing the modified content). The repacking process retrieves the current value of all the shadow tiddlers included in the plugin, and then bundles the new values back into the original plugin tiddler.
 
@@ -31,7 +31,7 @@ Click the link to the plugin tiddler to open it. Assuming it doesn't currently e
 |!Field |!Value |
 |''dependents'' |Space separated list of dependent plugins (use square brackets for titles containing spaces) |
 |''description'' |Plugin description |
-|''name'' |Plugin name (only needed for themes) |
+|''name'' |Plugin name |
 |''plugin-type'' |Either "plugin" for a regular plugin, "theme" for a theme, or "language" for a language pack |
 |''type'' |Set to "application/json" |
 |''version'' |Set to the version number of the plugin (eg "0.0.1") |

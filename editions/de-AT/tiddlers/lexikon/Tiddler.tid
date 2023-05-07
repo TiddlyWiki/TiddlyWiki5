@@ -18,4 +18,4 @@ Die Bezeichnung Tiddler mag etwas verwirrend sein, ist aber verwirrend ''unverke
 
 Intern ist ein tiddler ein Verzeichnis von unveränderbaren "name:value" Paaren, die als "fields" (Felder) bezeichnet werden. Das einzige Feld, das vorhanden sein ''muss'' ist das "text" Feld. 
 
-Weitere Informationen finden Sie unter: http://tiddlywiki.com/#TiddlerFields 
+Weitere Informationen finden Sie unter: https://tiddlywiki.com/#TiddlerFields 

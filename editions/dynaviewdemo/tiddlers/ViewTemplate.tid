@@ -1,0 +1,25 @@
+title: $:/core/ui/ViewTemplate
+
+\whitespace trim
+\define folded-state()
+$:/state/folded/$(currentTiddler)$
+\end
+\define cancel-delete-tiddler-actions(message) <$action-sendmessage $message="tm-$message$-tiddler"/>
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!has[draft.of]]
+<$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">>>
+<div data-tiddler-title=<<currentTiddler>> data-tags={{!!tags}} class={{{ tc-tiddler-frame tc-tiddler-view-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[shadow]is[tiddler]then[tc-tiddler-overridden-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}>
+<$set name="state" value={{{ [[$:/state/viewtemplate/visibility/]addsuffix<currentTiddler>] }}}>
+<$reveal stateTitle=<<state>> type="nomatch" text="" default="" tag="div">
+<div class="tc-dynaview-track-tiddler-when-visible" data-dynaview-track-tiddler=<<state>>>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate]!has[draft.of]]" variable="listItem">
+<$transclude tiddler=<<listItem>>/>
+</$list>
+</div>
+</$reveal>
+<$reveal stateTitle=<<state>> type="match" text="" default="" tag="div">
+<div class="tc-dynaview-track-tiddler-when-visible" style="min-height: 5em;" data-dynaview-track-tiddler=<<state>>>
+</div>
+</$reveal>
+</$set>
+</div>
+</$vars>

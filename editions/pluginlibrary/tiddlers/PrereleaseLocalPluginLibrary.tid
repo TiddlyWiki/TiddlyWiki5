@@ -1,0 +1,6 @@
+title: $:/config/LocalPluginLibrary
+tags: $:/tags/PluginLibrary
+url: http://localhost:8888/files/local/library/tmp/index.html
+caption: Local TiddlyWiki Plugin Library Test Server
+
+A locally installed version of the plugin library //Requires a local web server to share the library//

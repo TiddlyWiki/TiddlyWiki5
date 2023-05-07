@@ -17,7 +17,8 @@ var VideoParser = function(type,text,options) {
 			type: "element",
 			tag: "video",
 			attributes: {
-				controls: {type: "string", value: "controls"}
+				controls: {type: "string", value: "controls"},
+				style: {type: "string", value: "width: 100%; object-fit: contain"}
 			}
 		},
 		src;
@@ -27,10 +28,13 @@ var VideoParser = function(type,text,options) {
 		element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
+exports["video/ogg"] = VideoParser;
+exports["video/webm"] = VideoParser;
 exports["video/mp4"] = VideoParser;
 exports["video/quicktime"] = VideoParser;
 
 })();
-

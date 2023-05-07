@@ -1,0 +1,10 @@
+{
+	"title": "$:/languages/zh-HK",
+	"name": "zh-HK",
+	"plugin-type": "language",
+	"description": "Chinese (Hong Kong)",
+	"author": "BramChen",
+	"core-version": ">=5.0.8",
+	"dependents": ["$:/languages/zh-Hant"],
+	"plugin-priority": 110
+}

@@ -1,0 +1,18 @@
+{
+	"description": "Amazon Web Services edition",
+	"plugins": [
+		"tiddlywiki/async",
+		"tiddlywiki/jszip",
+		"tiddlywiki/aws"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"lambda": [
+			"--rendertiddler","$:/plugins/tiddlywiki/aws/lambdas/main","index.js","text/plain"]
+	}
+}

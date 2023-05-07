@@ -1,0 +1,16 @@
+created: 20190219094230499
+modified: 20210106151027488
+tags: [[Community Plugins]]
+title: Kin filter operator by bimlas
+type: text/vnd.tiddlywiki
+url: https://bimlas.gitlab.io/tw5-kin-filter/
+
+The purpose of the kin operator with examples:
+
+* Finds related tags, related tiddlers in any depth
+* Finds out where base tiddler originates and what other elements originate from it
+* Finds the ancestors and successors of a family member
+* Finds the "leaves" of the branch of the base tiddler in a tree-like structure (where the base tiddler is a leaf)
+* Finds the super- and subsets / groups of a mathematical set (where the base tiddler is a set)
+
+{{!!url}}

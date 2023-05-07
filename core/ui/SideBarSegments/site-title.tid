@@ -1,0 +1,8 @@
+title: $:/core/ui/SideBarSegments/site-title
+tags: $:/tags/SideBarSegment
+
+<h1 class="tc-site-title">
+
+<$transclude tiddler="$:/SiteTitle" mode="inline"/>
+
+</h1>

@@ -1,0 +1,16 @@
+created: 20190330100101453
+modified: 20190330100101453
+tags: [[Filter Operators]] [[Special Operators]] [[Selection Constructors]]
+title: variables Operator
+type: text/vnd.tiddlywiki
+caption: variables
+op-purpose: select the names of all the actively defined variables
+op-input: ignored
+op-parameter: none
+op-output: the names of all the actively defined variables
+
+<<.from-version "5.1.20">> The primary purpose of the `variables` operator is to implement the [[dumpvariables Macro]]:
+
+<$codeblock code={{$:/core/macros/dumpvariables}}/>
+
+<<.operator-examples "variables">>

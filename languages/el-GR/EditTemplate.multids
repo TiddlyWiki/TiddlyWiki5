@@ -1,14 +1,28 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Αυτό είναι ένα εξωτερικό tiddler αποθηκευμένο εκτός του κύριου TiddlyWiki αρχείου. Μπορείτε να τροποποιήσετε τις ετικέτες και τα πεδία αλλά δεν μπορείτε να τροποποιήσετε άμεσα το ίδιο το περιεχόμενο του
+Body/External/Hint: Αυτό το tiddler εμφανίζει περιεχόμενο που είναι αποθηκευμένο εκτός του TiddlyWiki αρχείου. Μπορείτε να τροποποιήσετε τις ετικέτες και τα πεδία αλλά δεν μπορείτε να τροποποιήσετε άμεσα το ίδιο το περιεχόμενο του
 Body/Placeholder: Πληκτρολογήστε το κείμενο για αυτό το tiddler
+Body/Preview/Type/Output: αποτέλεσμα
+Field/Remove/Caption: αφαίρεσε το πεδίο
+Field/Remove/Hint: Αφαιρεί το πεδίο
 Fields/Add/Button: προσθήκη
+Fields/Add/Dropdown/System: Πεδία του συστήματος
+Fields/Add/Dropdown/User: Πεδία του χρήστη
 Fields/Add/Name/Placeholder: όνομα πεδίου
 Fields/Add/Prompt: Πρόσθεσε ένα νέο πεδίο:
 Fields/Add/Value/Placeholder: τιμή πεδίου
-Shadow/Warning: Αυτό είναι ένα σκιώδες tiddler. Οποιεσδήποτε αλλαγές θα παρακάμψουν την τυπική έκδοση
-Shadow/OverriddenWarning: Αυτό είναι ένα τροποποιημένο σκιώδες tiddler. Μπορείτε να ανακαλέσετε την τυπική έκδοση του διαγράφοντας αυτό το tiddler
+Shadow/OverriddenWarning: Αυτό είναι ένα τροποποιημένο σκιώδες tiddler. Μπορείτε να ανακαλέσετε την προκαθορισμένη εκδοχή σε ένα πρόσθετο <<pluginLink>> διαγράφοντας αυτό το tiddler
+Shadow/Warning: Αυτό είναι ένα σκιώδες tiddler. Οποιεσδήποτε αλλαγές κάνετε θα παρακάμψουν την προκαθορισμένη εκδοχή του πρόσθετου <<pluginLink>>
 Tags/Add/Button: προσθήκη
 Tags/Add/Placeholder: όνομα ετικέτας
+Tags/Dropdown/Caption: λίστα ετικετών
+Tags/Dropdown/Hint: Εμφανίζει την λίστα ετικετών
+Title/BadCharacterWarning: Προειδοποίηση: αποφύγετε την χρήση των χαρακτήρων <<bad-chars>> στους τίτλους των tiddler
+Title/Exists/Prompt: Το tiddler προορισμού υπάρχει ήδη
+Title/Relink/Prompt: Ενημερώνει το ''<$text text=<<fromTitle>>/>'' σε ''<$text text=<<toTitle>>/>'' στα πεδία //tags// και //list// των υπολοίπων tiddler
+Type/Delete/Caption: Διέγραψε τον τύπο περιεχομένου
+Type/Delete/Hint: Διαγράφει το content type
+Type/Dropdown/Caption: λίστα τύπων περιεχομένου
+Type/Dropdown/Hint: Εμφανίζει λίστα με τύπους περιεχομένου
 Type/Placeholder: τύπος περιεχομένου
 Type/Prompt: Τύπος:

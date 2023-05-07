@@ -1,0 +1,36 @@
+title: Pragmas/Parsermode
+description: parsermode pragma
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+{{AlwaysInline}}
+
+{{AlwaysBlock}}
+
+{{AlwaysInline}}{{AlwaysBlock}}
+
++
+title: AlwaysInline
+
+\parsermode inline
+! Not Heading
+
+Text with ''bold''
++
+title: AlwaysBlock
+
+\parsermode block
+! Heading
+
+Text with ''bold''
++
+title: ExpectedResult
+
+! Not Heading
+
+Text with <strong>bold</strong><h1 class="">Heading</h1><p>Text with <strong>bold</strong></p><p>! Not Heading
+
+Text with <strong>bold</strong><h1 class="">Heading</h1><p>Text with <strong>bold</strong></p>
+</p>

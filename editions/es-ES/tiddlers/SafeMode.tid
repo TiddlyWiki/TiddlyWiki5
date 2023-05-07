@@ -14,7 +14,7 @@ El <<.def "modo seguro">> desactiva la mayoría de customizaciones en ~TiddlyWik
 
 Modo seguro se activa al arrancar ~TiddlyWiki con el hash `#:safe`. 
 
-http://tiddlywiki.com/#:safe
+https://tiddlywiki.com/#:safe
 
 ! Cómo trabaja el modo seguro
 

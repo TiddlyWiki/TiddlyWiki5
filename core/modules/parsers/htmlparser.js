@@ -23,10 +23,14 @@ var HtmlParser = function(type,text,options) {
 		type: "element",
 		tag: "iframe",
 		attributes: {
-			src: {type: "string", value: src},
-			sandbox: {type: "string", value: ""}
+			src: {type: "string", value: src}
 		}
 	}];
+	if($tw.wiki.getTiddlerText("$:/config/HtmlParser/DisableSandbox","no") !== "yes") {
+		this.tree[0].attributes.sandbox = {type: "string", value: $tw.wiki.getTiddlerText("$:/config/HtmlParser/SandboxTokens","")};
+	}
+	this.source = text;
+	this.type = type;
 };
 
 exports["text/html"] = HtmlParser;

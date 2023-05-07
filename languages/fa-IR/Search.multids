@@ -1,0 +1,20 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: لیست
+Filter/Caption: فیلتر
+Filter/Hint: سرچ از طریق [[filter expression|https://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>>همخوانی دارد  </small>//
+Matches: //<small><<resultCount>> همخوانی دارد</small>//
+Matches/All: همه همخوانی کند با:
+Matches/Title: عنوان همخوانی کند با:
+Search: جستجو
+Search/TooShort: متن جستجو خیلی کوتاه است
+Shadows/Caption: سایه‌ها
+Shadows/Hint: در تیدلرهای سایه‌ای جستجو کن
+Shadows/Matches: //<small><<resultCount>> همخوانی دارد </small>//
+Standard/Caption: استاندارد
+Standard/Hint: در تیدلرهای استاندارد جستجو کن
+Standard/Matches: //<small><<resultCount>> همخوانی دارد </small>//
+System/Caption: سیستم
+System/Hint: در تیدلرهای سیستمی جستجو کن
+System/Matches: //<small><<resultCount>> همخوانی دارد </small>//

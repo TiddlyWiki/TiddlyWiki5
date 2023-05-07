@@ -21,14 +21,32 @@ var bumpSequenceNumber = function(object) {
 	}
 };
 
+var TW_Node = function (){
+	throw TypeError("Illegal constructor");
+};
+
+Object.defineProperty(TW_Node.prototype, 'ELEMENT_NODE', {
+	get: function() {
+		return 1;
+	}
+});
+
+Object.defineProperty(TW_Node.prototype, 'TEXT_NODE', {
+	get: function() {
+		return 3;
+	}
+});
+
 var TW_TextNode = function(text) {
 	bumpSequenceNumber(this);
 	this.textContent = text + "";
 };
 
+Object.setPrototypeOf(TW_TextNode,TW_Node.prototype);
+
 Object.defineProperty(TW_TextNode.prototype, "nodeType", {
 	get: function() {
-		return 3;
+		return this.TEXT_NODE;
 	}
 });
 
@@ -45,13 +63,33 @@ var TW_Element = function(tag,namespace) {
 	this.attributes = {};
 	this.isRaw = false;
 	this.children = [];
-	this.style = {};
+	this._style = {};
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
+Object.setPrototypeOf(TW_Element,TW_Node.prototype);
+
+Object.defineProperty(TW_Element.prototype, "style", {
+	get: function() {
+		return this._style;
+	},
+	set: function(str) {
+		var self = this;
+		str = str || "";
+		$tw.utils.each(str.split(";"),function(declaration) {
+			var parts = declaration.split(":"),
+				name = $tw.utils.trim(parts[0]),
+				value = $tw.utils.trim(parts[1]);
+			if(name && value) {
+				self._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
+			}
+		});
+	}
+});
+
 Object.defineProperty(TW_Element.prototype, "nodeType", {
 	get: function() {
-		return 1;
+		return this.ELEMENT_NODE;
 	}
 });
 
@@ -169,13 +207,13 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 				}
 			}
 		}
-		if(this.style) {
+		if(this._style) {
 			var style = [];
-			for(var s in this.style) {
-				style.push(s + ":" + this.style[s] + ";");
+			for(var s in this._style) {
+				style.push($tw.utils.convertPropertyNameToStyleName(s) + ":" + this._style[s] + ";");
 			}
 			if(style.length > 0) {
-				output.push(" style=\"",style.join(""),"\"")
+				output.push(" style=\"",style.join(""),"\"");
 			}
 		}
 		output.push(">");
@@ -197,7 +235,7 @@ Object.defineProperty(TW_Element.prototype, "innerHTML", {
 				if(node instanceof TW_Element) {
 					b.push(node.outerHTML);
 				} else if(node instanceof TW_TextNode) {
-					b.push($tw.utils.htmlEncode(node.textContent));
+					b.push($tw.utils.htmlTextEncode(node.textContent));
 				}
 			});
 			return b.join("");
@@ -224,8 +262,7 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 	get: function() {
 		if(this.isRaw) {
 			if(this.rawTextContent === null) {
-				console.log(booboo)
-				throw "Cannot get textContent on a raw TW_Element";				
+				return "";
 			} else {
 				return this.rawTextContent;
 			}
@@ -245,7 +282,7 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 	get: function() {
 		if(this.isRaw) {
-			throw "Cannot get formattedTextContent on a raw TW_Element";
+			return "";
 		} else {
 			var b = [],
 				isBlock = $tw.config.htmlBlockElements.indexOf(this.tag) !== -1;

@@ -3,7 +3,7 @@ description: 准备用于外部条目
 
 //请注意此命令是试验性的，且可能会更改或在最终定稿前被替换//
 
-设置一群条目的指定栏位到 wikifying 范本条目的结果，其中的  `currentTiddler` 变数设置为各该条目。
+设置一群条目的指定字段到 wikifying 范本条目的结果，其中的  `currentTiddler` 变数设置为各该条目。
 
 ```
 --setfield <filter> <fieldname> <templatetitle> <rendertype>
@@ -12,6 +12,6 @@ description: 准备用于外部条目
 参数说明：
 
 * ''filter'' - 受影响的辨识条目的筛选条件
-* ''fieldname'' - 要修改的栏位（默认为 "text"）
-* ''templatetitle'' - 该条目 wikify 到指定栏位。若为空白或丢失，则删除指定的栏位
+* ''fieldname'' - 要修改的字段（默认为 "text"）
+* ''templatetitle'' - 该条目 wikify 到指定字段。若为空白或丢失，则删除指定的字段
 * ''rendertype'' - 要呈现的文本类型（默认为 "text/plain"; "text/html" 可以用于包含 HTML 标记)）

@@ -1,0 +1,9 @@
+created: 20190613084453154
+modified: 20190613084521199
+tags: [[floor Operator]] [[Operator Examples]]
+title: floor Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[1.6]floor[]]">>
+<<.operator-example 2 "[[-1.6]floor[]]">>
+<<.operator-example 3 "=-1.2 =-2.4 =3.6 =4.8 =5.1 +[floor[]]">>

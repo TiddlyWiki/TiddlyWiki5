@@ -1,0 +1,54 @@
+{
+	"tiddlers": [
+		{
+			"file": "addon/hint/anyword-hint.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/anyword-hint.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/hint/css-hint.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/css-hint.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/hint/html-hint.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/html-hint.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/hint/javascript-hint.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/javascript-hint.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/hint/show-hint.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addon/hint/show-hint.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/show-hint.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			}
+		},{
+			"file": "addon/hint/xml-hint.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/hint/xml-hint.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

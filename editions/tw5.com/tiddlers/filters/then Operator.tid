@@ -1,0 +1,15 @@
+caption: then
+created: 20190802112756430
+modified: 20190802113849579
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles with each one replaced by the string <<.place T>>
+op-parameter: a string
+op-parameter-name: T
+op-purpose: replace input titles by a constant string
+tags: [[Conditional Operators]] [[Filter Operators]]
+title: then Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Conditional Operators]] for an overview.
+
+<<.operator-examples "then">>

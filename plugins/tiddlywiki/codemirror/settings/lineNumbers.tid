@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/lineNumbers
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/lineNumbers/hint}}
+
+\define lingo-base() $:/language/codemirror/lineNumbers/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/lineNumbers" field="text" checked="true" unchecked="false" default="false"> <$link to="$:/config/codemirror/lineNumbers"><<lingo info>></$link> </$checkbox>
+

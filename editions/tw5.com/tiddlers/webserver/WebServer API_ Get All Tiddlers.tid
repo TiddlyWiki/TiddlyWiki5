@@ -1,0 +1,36 @@
+created: 20181002131215403
+modified: 20220909094340097
+tags: [[WebServer API]]
+title: WebServer API: Get All Tiddlers
+type: text/vnd.tiddlywiki
+
+Gets an array of all raw non-system tiddlers, excluding the ''text'' field.
+
+```
+GET /recipes/default/tiddlers.json
+```
+
+Parameters:
+
+* ''filter'' - filter identifying tiddlers to be returned (optional, defaults to "[all[tiddlers]!is[system]sort[title]]")
+* ''exclude'' - comma delimited list of fields to excluded from the returned tiddlers (optional, defaults to "text")
+
+In order to avoid denial of service attacks with malformed filters in the default configuration the only filter that is accepted is the default filter "[all[tiddlers]!is[system]sort[title]]"; attempts to use any other filter will result in an HTTP 403 error.
+
+<<.note "System tiddlers will not be returned by this API unless the [[Hidden Setting: Sync System Tiddlers From Server]] is explicitly switched on by setting $:/config/SyncSystemTiddlersFromServer to `yes`">>
+
+To enable a particular filter, create a tiddler with the title "$:/config/Server/ExternalFilters/" concatenated with the filter text, and the text field set to "yes". For example, the TiddlyWeb plugin includes the following shadow tiddler to enable the filter that it requires:
+
+```
+title: $:/config/Server/ExternalFilters/[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]]
+text: yes
+```
+
+It is also possible to configure the server to accept any filter by creating a tiddler titled $:/config/Server/AllowAllExternalFilters with the text "yes". This should not be done for public facing servers.
+
+Response:
+
+* 200 OK
+*> `Content-Type: application/json`
+*> Body: array of all non-system tiddlers in [[TiddlyWeb JSON tiddler format]] 
+* 403 Forbidden

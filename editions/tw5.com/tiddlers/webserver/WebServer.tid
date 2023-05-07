@@ -1,0 +1,66 @@
+created: 20180626150526207
+modified: 20181216181934282
+tags: ListenCommand ServerCommand Features
+title: WebServer
+type: text/vnd.tiddlywiki
+
+When [[running under Node.js|TiddlyWiki on Node.js]], TiddlyWiki includes a simple HTTP/HTTPS web server that allows you to use it from any browser running on the same machine or over a network.
+
+<<.tip """The web server includes a very simple mechanism allowing multiple users to log in with different credentials. The implementation is designed to be simple and easy to use, and would not generally be considered robust enough for use on the open internet. It is intended for use by individuals or small groups on a trusted network. It is recommended to use an external proxy before exposing it on the Internet.""">>
+
+! How It Works
+
+The web server listens for requests coming over the network, and performs the following actions in turn:
+
+* [[Authentication|WebServer Authentication]] is the process of identifying the current user. TiddlyWiki supports three types of authentication: [[Anonymous|WebServer Anonymous Access]], [[Basic|WebServer Basic Authentication]] and [[Header|WebServer Header Authentication]]
+* [[Authorization|WebServer Authorization]] is the process of determining which resources may be accessed by a particular user. TiddlyWiki implements a simple scheme whereby read and write access to the wiki can be independently controlled.
+* Routing is the process of dispatching the request to the [[API handler|WebServer API]], and returning any required data.
+
+! Usage
+
+!! Anonymous Access 
+
+The web server is started with the ListenCommand (which supersedes the older ServerCommand). All 
+the NamedCommandParameters are optional, so the simplest form is:
+
+```
+tiddlywiki mywikifolder --listen
+```
+
+Visit http://127.0.0.1:8080/ to access the wiki. Access is anonymous, so anyone can read or write to the wiki.
+
+This will typically be available only to users on the local machine. For information on how to open the instance to the local network see the Web Server [[host|WebServer Parameter: host]] parameter entry. 
+
+!! Authenticated Access
+
+Adding [[username|WebServer Parameter: username]] and [[password|WebServer Parameter: password]] parameters enforces basic authentication for both reading and writing:
+
+```
+tiddlywiki mywikifolder --listen username=test password=tset
+```
+
+Visiting the wiki will prompt for a username and password, and access is denied if they do not match the provided credentials.
+
+!! Anonymous Read, Authenticated Write
+
+This example adds the [[authorization|WebServer Authorization]] parameters [[readers|WebServer Parameter: readers]] and [[writers|WebServer Parameter: writers]] to grant read access to anonymous users, but require authentication as "joe" in order to gain write access.
+
+> Note that anonymous users can trigger a username/password prompt by visiting the route `\login-basic` (eg http://127.0.0.1:8080/login-basic).
+
+```
+tiddlywiki mywikifolder --listen "readers=(anon)" writers=joe username=joe password=bloggs
+```
+
+Note  the double quotes that are required for parameters containing special characters.
+
+! Arguments
+
+The full list of available optional parameters is:
+
+<<list-links filter:"[tag[WebServer Parameters]]">>
+
+! Guides
+
+Further information on usage of the integrated [[WebServer]]:
+
+<<list-links filter:"[tag[WebServer Guides]]">>

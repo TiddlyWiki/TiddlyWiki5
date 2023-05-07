@@ -7,7 +7,7 @@ caption: edit-bitmap
 
 ! Introduction
 
-The edit bitmap widget provides a user interface in the browser for editing bitmap tiddlers. It is currently a primitive proof-of-concept, supporting resizing and painting with a single color and line width.
+The edit bitmap widget provides a user interface in the browser for editing bitmap tiddlers.
 
 ! Content and Attributes
 

@@ -1,9 +1,7 @@
 title: $:/plugins/tiddlywiki/katex/readme
 
-This is a TiddlyWiki plugin for mathematical typesetting based on [[KaTeX from Khan Academy|http://khan.github.io/KaTeX/]].
+This is a TiddlyWiki plugin for mathematical and chemical typesetting based on [ext[KaTeX from Khan Academy|https://katex.org/]] (v0.16) and [ext[mhchem|https://github.com/mhchem/MathJax-mhchem]] through a [ext[Katex extension|https://github.com/KaTeX/KaTeX/tree/master/contrib/mhchem]].
 
 It is completely self-contained, and doesn't need an Internet connection in order to work. It works both in the browser and under Node.js.
-
-It is currently based on KaTeX version 0.6.0. See https://github.com/Khan/KaTeX/releases for details of releases.
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/katex]]

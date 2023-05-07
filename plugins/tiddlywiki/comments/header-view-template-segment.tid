@@ -1,0 +1,40 @@
+title: $:/plugins/tiddlywiki/comments/header-view-template-segment
+tags: $:/tags/ViewTemplate
+list-before: $:/core/ui/ViewTemplate/body
+
+\define display-original-comment()
+<$link><$text text=<<currentTiddler>>/></$link>
+\end
+
+\define find-original-comment(exclude)
+<$list filter="[<currentTiddler>role[comment]]" emptyMessage=<<display-original-comment>> variable="ignore">
+<$list filter="[list<currentTiddler>sort[title]] -[enlist<__exclude__>]">
+<$set name="newExclude" filter="[enlist<__exclude__>] [<currentTiddler>]">
+<$macrocall $name="find-original-comment" exclude=<<newExclude>>/>
+</$set>
+</$list>
+</$list>
+\end
+
+<$list filter="[all[current]role[comment]]" variable="ignore">
+<div class="tc-is-comment-header">
+<p>
+This tiddler is a comment on
+<$list filter="[list<currentTiddler>sort[title]]">
+<span class="tc-small-gap-right"><<find-original-comment>></span>
+</$list>
+</p>
+<$list filter="[list<currentTiddler>role[comment]sort[title]limit[1]]" variable="ignore">
+<p>
+Parent comments:
+</p>
+<ul>
+<$list filter="[list<currentTiddler>role[comment]sort[title]]">
+<li>
+<$link to=<<currentTiddler>>><$text text=<<currentTiddler>>/></$link>
+</li>
+</$list>
+</ul>
+</$list>
+</div>
+</$list>

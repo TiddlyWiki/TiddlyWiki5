@@ -1,0 +1,22 @@
+created: 20180626122427188
+modified: 20211117234223960
+tags: [[TiddlyWiki on Node.js]]
+title: NamedCommandParameters
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.18">> Most TiddlyWiki [[Commands]] use a position-based system for their parameters where each parameter must be listed in the precise order defined by the command. Some of the more complex commands offer an alternative scheme of named command parameters. For example, here we provide two parameters named "port" and "host":
+
+```
+--listen port=8090 host=0.0.0.0
+```
+
+Note that the order of the parameters does not matter.
+
+Using special characters within a parameter requires quoting. Unix, Linux and the Mac use single quotes, and Windows uses double quotes:
+
+```
+--listen port=8090 username=joe 'password=s3cret(!'
+--listen port=8090 username=joe "password=s3cret(!"
+```
+
+Note that the quotes are applied to the entire name=value pair, not just to the value part.

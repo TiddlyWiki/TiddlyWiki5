@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/comments",
+	"name": "Comments",
+	"description": "Threaded tiddler comments",
+	"list": "readme config"
+}

@@ -13,7 +13,6 @@ description: Den beskrivande texten för ett insticksprogram, eller en modal-dia
 draft.of: För utkast-tiddlers, innehåller rubriken av tiddlern som det är ett utkast för
 draft.title: For draft tiddlers, contains the proposed new title of the tiddler
 footer: Sidfotens text för en guide
-hack-to-give-us-something-to-compare-against: Ett temporärt lagringsfält som används i [[$:/core/templates/static.content]]
 icon: Tiddlerns rubrik innehållande ikonen som är associerad med en tiddler
 library: Om satt till "Ja" innebär att tiddlern ska sparas som ett Javaskriptbibliotek
 list: En ordnad lista över tiddler-rubriker som är associerade med en tiddler

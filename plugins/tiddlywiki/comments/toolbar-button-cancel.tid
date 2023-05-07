@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/comments/toolbar-button-cancel
+tags: $:/tags/CommentToolbarButton
+
+<$reveal state="$:/status/IsReadOnly" type="match" text="no" default="no" tag="span">
+<$reveal type="match" state="!!edit-mode" text="yes">
+<$button>
+<$action-setfield $tiddler=<<currentTiddler>> $field="edit-mode" $value="no"/>
+<$action-setfield $tiddler=<<currentTiddler>> $field="text" $value={{!!saved-text}}/>
+cancel
+</$button>
+</$reveal>
+</$reveal>

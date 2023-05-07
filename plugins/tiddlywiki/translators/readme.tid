@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/translators/readme
 
-This plugin exposes a new system tiddler [[$:/Translators]] that presents a user interface for creating and maintaining translations. It is used to build the special [[translators edition|http://tiddlywiki.com/editions/translators]].
+This plugin exposes a new system tiddler [[$:/Translators]] that presents a user interface for creating and maintaining translations. It is used to build the special [[translators edition|https://tiddlywiki.com/editions/translators]].
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/translators]]

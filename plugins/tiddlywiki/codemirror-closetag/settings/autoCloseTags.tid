@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/autoCloseTags
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/autoCloseTags/hint}}
+
+\define lingo-base() $:/language/codemirror/autoCloseTags/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/autoCloseTags" field="text" checked="true" unchecked="false" default="true"> <$link to="$:/config/codemirror/autoCloseTags"><<lingo info>></$link> </$checkbox>
+

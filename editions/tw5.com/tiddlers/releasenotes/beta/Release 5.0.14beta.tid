@@ -30,7 +30,7 @@ There are two components:
 *** The [[plugin upgrader|$:/core/modules/upgraders/plugins.js]] module handles version checking of plugins and upgrading them from a special UpgradeLibrary plugin tiddler
 *** The [[system upgrader|$:/core/modules/upgraders/system.js]] module is responsible for suppressing the importing of certain system tiddlers (currently [[$:/StoryList]] and [[$:/HistoryList]])
 *** The [[themetweak upgrader|$:/core/modules/upgraders/themetweaks.js]] module handles migrating theme tweaks from their pre-5.0.14-beta format (see below)
-* An UpgradePlugin and associated edition that provides a custom, single-purpose user interface for upgrading standalone TiddlyWiki files - see http://tiddlywiki.com/upgrade.html
+* An UpgradePlugin and associated edition that provides a custom, single-purpose user interface for upgrading standalone TiddlyWiki files - see https://tiddlywiki.com/upgrade.html
 
 !!! Improvements to CamelCase Recognition
 

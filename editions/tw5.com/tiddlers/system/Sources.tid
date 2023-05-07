@@ -3,7 +3,7 @@ tags: $:/tags/TiddlerInfo
 caption: Sources
 
 \define static-link-base()
-http://tiddlywiki.com/static/$(title)$.html
+https://tiddlywiki.com/static/$(title)$.html
 \end
 
 \define make-static-link()
@@ -13,7 +13,7 @@ http://tiddlywiki.com/static/$(title)$.html
 \end
 
 \define github-link-base()
-https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/tw5.com/tiddlers/$(title)$
+https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/editions/tw5.com/tiddlers/$(title)$
 \end
 
 \define make-github-link()

@@ -1,0 +1,15 @@
+created: 20190111150102847
+modified: 20190111150102847
+tags: HookMechanism
+title: Hook: th-page-refreshing
+type: text/vnd.tiddlywiki
+
+This hook notifies plugins that a page refresh is just about to occur. It is typically used to apply pre-rendering effects.
+
+Hook function parameters:
+
+* (none)
+
+Return value:
+
+* (none)

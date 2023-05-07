@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/comments/footer-view-template-segment
+tags: $:/tags/ViewTemplate
+list-after: $:/core/ui/ViewTemplate/body
+
+<$list filter={{$:/config/Comments/EnableFilter}} variable="ignore">
+<div class="tc-comments-segment">
+<$transclude tiddler="$:/plugins/tiddlywiki/comments/add-comment-button" mode="inline"/>
+<$transclude tiddler="$:/plugins/tiddlywiki/comments/comments-template" mode="inline"/>
+</div>
+</$list>

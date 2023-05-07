@@ -1,7 +1,7 @@
 title: $:/language/Help/version
-description: TiddlyWikiのバージョン番号を表示
+description: TiddlyWiki のバージョン番号を表示
 
-TiddlyWiki のバージョン番号を表示する
+TiddlyWiki のバージョン番号を表示します
 
 ```
 --version

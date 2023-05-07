@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/consent-banner/buttons/decline
+tags: $:/tags/ConsentBanner/Button
+
+<$button message="tm-consent-decline" class="tc-consent-button tc-btn-invisible" tooltip={{$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/hint}}>
+{{$:/config/plugins/tiddlywiki/consent-banner/buttons/decline/caption}}
+</$button>

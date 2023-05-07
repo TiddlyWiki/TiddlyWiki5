@@ -1,0 +1,11 @@
+caption: $:/tags/RawMarkupWikified/TopHead
+created: 20180926170345251
+description: marks tiddlers included as wikified text at the top of `<head>`
+modified: 20180928145753616
+tags: SystemTags
+title: SystemTag: $:/tags/RawMarkupWikified/TopHead
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.18">> The [[system tag|SystemTags]] `$:/tags/RawMarkupWikified/TopHead` marks wikified tiddlers to be included as raw markup at the top of the `<head>` section in the generated HTML file.
+
+Note that the wiki must be saved and reloaded in order for a raw markup tiddler to take effect. Also note that global macros are not available by default within raw markup tiddlers; you can use the ImportVariablesWidget to explicitly import them.

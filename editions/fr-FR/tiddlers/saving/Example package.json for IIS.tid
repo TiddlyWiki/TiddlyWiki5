@@ -1,0 +1,15 @@
+created: 20180328145039530
+fr-title: Exemple de package.json pour IIS
+modified: 20220402105820520
+tags: Saving
+title: Example package.json for IIS
+type: text/plain
+
+{
+    "name": "MesAffaires",
+    "description": "La description de ce wiki",
+    "dependencies": {
+        "sax": "1.2.4",
+        "tiddlywiki": "*"
+    }
+}

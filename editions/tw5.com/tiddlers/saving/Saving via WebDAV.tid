@@ -1,0 +1,89 @@
+caption: ~WebDAV
+color: #f48fb1
+created: 20160216191710789
+delivery: Protocol
+description: Standard web protocol available on products such as Sharepoint
+method: save
+modified: 20220615155048712
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: Saving via WebDAV
+type: text/vnd.tiddlywiki
+
+If hosted on a [[WebDAV|https://en.wikipedia.org/wiki/WebDAV]]-enabled server, TiddlyWiki will automatically save changes via HTTP for TiddlyWiki's created after 2016. If you created your wiki before Feb 16 2016  you'll need to [[Upgrade|Upgrading]] to enable ~WebDAV.
+
+
+
+!! Cross platform lightweight servers
+
+Lightweight, portable and easy to use solutions
+
+*   [[rclone|https://rclone.org/commands/rclone_serve_webdav/]]
+**  Running it can be as simple as: <br/>`rclone serve webdav some_directory_containing_tiddlywiki_files`
+*   [[micromata dave - the simple webdav server|https://github.com/micromata/dave]]
+* [[dav-server|https://github.com/edrex/dav-server]] is a quick way to serve up a folder of HTML ~TiddlyWikis.
+*   [[hacdias webdav server|https://github.com/hacdias/webdav/]]
+    **   Guide for using this ~WebDAV server by Mohammad [[Scripts in Tiddlywiki — codes, macros, and solutions in TW|https://kookma.github.io/TW-Scripts/#Easy%20Local%20Saving%20with%20WebDav]]
+
+
+!! Windows
+
+*   IIS
+    **   Video guide by [[pmario|https://talk.tiddlywiki.org/u/pmario]]: [[01 Intro - How to use TiddlyWiki with IIS and WebDAV - YouTube|https://www.youtube.com/watch?v=tpkQhKyqPzc&list=PLuiC_HFhI4OwoVDb-B-VK0ydj-mBPNn-1]]
+    **  Step-by-step ~HowTo video by ~MagoArcade on using a “real” IIS server + SSL + ~WindowsAuth with self-signed certificate: [[TiddlyWiki Install - Windows IIS WebDAV Method - YouTube|https://youtu.be/VMQ3Lfko8uQ]]
+
+*   ~SharePoint / ~OneDrive for Windows
+** Save your ~TiddlyWiki file with an `.aspx` extension
+** Copy it to a ~SharePoint/~OneDrive for Business sync'd library
+**   As long as ~WebDAV has not been disabled, renaming single-file wiki from .html to .aspx “just works” when stored in one of these folders
+** This //might// work with Mac also.
+
+!! OSX
+*   ~WebDavNav Server via the Mac App store.
+
+!! Android
+
+* RCX is an open source file manager for Android based on //rclone//. It is available on both //F-Droid// and //Google Play//. Thanks to its integrated WebDAV server, it lets you edit the wikis that you keep in your pocket. You can share them with other devices on the local network too.
+
+!! Servers
+
+Many [[NAS|https://en.wikipedia.org/wiki/NAS]] or [[Subversion|https://en.wikipedia.org/wiki/Apache_Subversion]] servers support ~WebDAV out of the box. Setting up your own server might take some effort though:
+
+
+
+!! Free Hosting
+
+Several ~WebDAV hosting services tested (~~box.com~~, ~~swissdisk.com~~) don't support accessing HTML files via a webbrowser, so they won't work with ~TiddlyWiki. However, The GMX mediacenter (www.gmx.net) has been reported as working with WebDAV with a free account.
+
+!!! Koofr
+
+//''Koofr''// is a cloud service that emphasizes privacy. To use their webdav services, sign up for an account at `koofr.eu` . Then go to `preferences` on their web app. Then `password` from the menu on the left. Scroll down to `App Passwords`. Use some name like 'tiddlywiki' and generate a password. Despite what it says, save the password somewhere. 
+
+You will probably need to rename your file extension to `.aspx`. Then upload your file on some path, preferably without spaces to their site. Then in the browser link to the site with an address like:
+
+```
+https://app.koofr.net/dav/Koofr/myfile.aspx
+
+```
+When you do, an authentication dialog will come up. Use your email address that you used to sign up and the password you just generated to login.
+
+You should be able to load the file and save changes back in place.
+
+!! Paid Hosting
+
+!!! pCloud
+
+//''pCloud''// is cloud service with servers in Europe and the United States. When you sign up, you need to select which server location is best for you. Then in your web browser, sign in to the service. Upload the file you wish to access via the browser interface. Then, in another tab, open either
+
+```
+https://webdav.pcloud.com
+```
+
+if your servers are in the U.S. or
+
+```
+https://ewebdav.pcloud.com
+```
+
+if your servers are in Europe.
+
+A file navigation page should come up. Navigate to your file and open in your browser. You should be able create and save changes.

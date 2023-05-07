@@ -1,0 +1,18 @@
+{
+	"tiddlers": [
+		{
+			"file": "lib/sax.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/sax/sax.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/sax/license"
+			}
+		}
+	]
+}

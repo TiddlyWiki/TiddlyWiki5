@@ -1,0 +1,24 @@
+title: $:/language/Help/import
+description: 从文件导入条目
+
+从 TiddlyWiki 文件 (`.html`)、`.tiddler`、`.tid`、`.json` 或其他本机文件导入条目。必须明确指定解串器，而不像 load 命令，从文件扩展名推断解串器。
+
+```
+--import <filepath> <deserializer> [<title>] [<encoding>]
+```
+
+核心的解串器包括：
+
+* application/javascript
+* application/json
+* application/x-tiddler
+* application/x-tiddler-html-div
+* application/x-tiddlers
+* text/html
+* text/plain
+
+导入的条目名称，默认为文件名。
+
+编码默认为 "utf8"，但用于导入二进制文件可以是 "base64"。
+
+请注意，TiddlyWiki 不会导入旧版本的已加载插件。

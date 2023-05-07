@@ -1,0 +1,19 @@
+title: $:/language/Help/savewikifolder
+description: 將維基儲存到一個新的維基資料夾
+
+<<.from-version "5.1.20">> 將當前維基儲存為一個維基資料夾，包含條目、插件和配置：
+
+```
+--savewikifolder <wikifolderpath> [<filter>]
+```
+
+* 目標維基資料夾必須為空或不存在
+* 篩選器指定應包括哪些條目。其為可選，預設為 `[all[tiddlers]]`
+* 官方插件庫中的插件，將替換為 `tiddlywiki.info` 檔案中引用到的插件
+* 自訂插件將解壓縮到自己的資料夾中
+
+常見的用法是將一個 TiddlyWiki HTML 檔案轉換成維基資料夾:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```

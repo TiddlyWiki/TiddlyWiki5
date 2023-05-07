@@ -1,0 +1,79 @@
+caption: Citations en bloc
+created: 20131206154636572
+fr-title: Citations en bloc en WikiTexte
+modified: 20220417214816463
+tags: WikiText
+title: Block Quotes in WikiText
+type: text/vnd.tiddlywiki
+
+Il existe deux manières de produire des éléments HTML de type citation en bloc avec <<tw>>, l'une pour du contenu qui pourra s'afficher sur plusieurs lignes, et l'autre pour du contenu qui ne devra s'afficher que sur une seule ligne.
+
+! Citation en bloc multi-lignes
+
+La syntaxe pour les blocs multi-lignes est<<:>>
+
+<<wikitext-example src:"<<<
+Ceci est un paragraphe de type citation en bloc
+écrit en français
+<<<
+">>
+
+!! Attribution
+
+Une attribution peut-être ajoutée au bloc comme ceci<<:>>
+
+<<wikitext-example src:"<<<
+Les ordinateurs sont des vélos pour nos neurones
+<<< Steve Jobs
+">>
+
+!! Classes CSS
+
+Les blocs peuvent hériter des propriétés de classes CSS<<:>>
+
+<<wikitext-example src:"<<<.myClass.another-class
+Les systèmes d'exploitation sont des murs pour notre esprit
+<<< Personne
+">>
+
+Le cœur de <<tw>> inclut la classe `tc-big-quote` qui représente les citations avec des guillemets géants<<:>>
+
+<<wikitext-example src:"<<<.tc-big-quote
+Une citation dramatique
+<<< Quelqu'un d'important
+">>
+
+! Bloc uniligne
+
+La syntaxe des citations uniligne est une extension de la syntaxe des [[listes avec WikiText|Lists in WikiText]]. Par exemple<<:>>
+
+<<wikitext-example src:"> Bloc de citation uniligne
+> Un autre bloc uniligne
+">>
+
+Vous pouvez imbriquer des blocs unilignes comme ceci<<:>>
+
+```
+> Un bloc de niveau 1
+>> Un bloc de niveau 2
+> Un autre bloc de niveau 1
+">>
+```
+
+Ce qui affichera<<:>>
+
+> Un bloc de niveau 1
+>> Un bloc de niveau 2
+> Un autre bloc de niveau 1
+
+Vous pouvez aussi mixer les citations en bloc avec d'autres types de listes. Par exemple<<:>>
+
+<<wikitext-example src:"* Liste une
+** Liste deux
+**> Un bloc uniligne
+**> Un autre bloc uniligne
+* Liste trois
+">>
+
+!! Pour aller plus loin
+* les [[blocs en HTML5|http://www.alsacreations.com/tuto/lire/530-La-structure-des-balises-bloc-et-en-ligne.html]]

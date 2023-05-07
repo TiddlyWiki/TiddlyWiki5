@@ -1,0 +1,5 @@
+title: $:/config/TiddlerIconFilters/
+tags: $:/tags/TiddlerIconFilter
+
+icon-field: [has[icon]then{!!icon}]
+default: [{$:/config/DefaultTiddlerIcon}has[text]]

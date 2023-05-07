@@ -1,0 +1,10 @@
+caption: tls-key
+created: 20180630180435405
+modified: 20180703100619863
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: tls-key
+type: text/vnd.tiddlywiki
+
+The optional [[web server configuration parameter|WebServer Parameters]] ''tls-key'' contains the pathname to the key file required when running the web server under HTTPS. The pathname is taken relative to the wiki folder.
+
+See [[Using HTTPS]] for details.

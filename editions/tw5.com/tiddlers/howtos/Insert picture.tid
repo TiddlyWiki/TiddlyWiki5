@@ -1,0 +1,9 @@
+created: 20160817100415079
+modified: 20160817110210268
+tags: [[Editor toolbar]]
+title: Insert picture
+
+This will give you a dialog to search for and pick existing image tiddlers in the wiki. When you pick a tiddler it will be inserted as a WikiText  image link where the cursor is in the text field.
+
+
+Pressing <<.icon $:/core/images/picture>> will give you `[img[$:/favicon.ico]]`

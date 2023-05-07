@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/text-slicer/docs/usage
+tags: $:/plugins/tiddlywiki/text-slicer/docs
+caption: Usage
+
+The tool can slice any tiddler that can be rendered as HTML, including both WikiText and HTML itself.
+
+Documents created with Microsoft Word will need to be first converted to HTML. The library [[mammoth.js|https://github.com/mwilliamson/mammoth.js]] is recommended for this purpose.
+
+!! Browser
+
+In the browser, you can slice a monolithic document tiddler using the slicer toolbar button.
+
+!! Node.js
+
+The `--slice` command allows a tiddler to be sliced under Node.js:
+
+```
+tiddlywiki mywiki --slice SourceDocument --build index
+```

@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+{
+			"file": "mode/css/css.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/css/css.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

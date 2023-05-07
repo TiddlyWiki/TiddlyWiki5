@@ -1,0 +1,59 @@
+created: 20220110235808139
+fr-title: Changements de mode d'analyse du WikiTexte
+modified: 20220421003504381
+tags: [[WikiText Parser Modes]]
+title: WikiText parser mode transitions
+type: text/vnd.tiddlywiki
+
+Voici un diagramme <<.em approximatif>> dont les lignes correspondent globalement aux transitions entre modes d'analyse de l'interpréteur décrites ci-dessous<<:>>
+<$railroad text="""
+{<"mode pragma" >
+{(
+  {<"mode en ligne"> +} |
+  ({<"mode bloc">
+    +("<<<" | "@@" | "$$")
+  }
+  "autre syntaxe de début de bloc")
+  {<"mode en ligne"> +}
+  )
+  +(
+    "syntaxe de fin de bloc" |
+    ("ligne vide" "balise ouvrante html")
+  )}
+  +("widget transclude" | "appel de macro")
+}
+"""/>
+
+!! Mode de démarrage
+
+Par défaut, l'interpréteur démarre en [[mode bloc|Block Mode WikiText]]. Néanmoins, un tiddler peut être transclus en [[mode en ligne|Inline Mode WikiText]] auquel cas le [[WikiTexte du mode bloc|Block Mode WikiText]] ne sera pas reconnu.
+
+Au début du texte seulement, l'interpréteur reconnaît aussi le [[WikiTexte du mode pragma|Pragma]].
+
+!! Transitions depuis le mode pragma
+
+Au début du texte, l'interpréteur cherche des [[pragmas|Pragma]]. S'il n'en trouve aucun il bascule en [[mode en ligne|Inline Mode WikiText]] ou en [[mode bloc|Block Mode WikiText]], en fonction du mode de transclusion. S'il a trouvé un [[pragma|Pragma]], il continue à en chercher d'autres jusqu'à ce qu'il rencontre une ligne vide non suivie par le début d'un nouveau pragma.
+
+!! Transitions depuis le mode bloc
+
+Quand l'interpréteur rencontre la plupart des syntaxes de début de [[mode bloc|Block Mode WikiText]], il bascule en [[mode en ligne|Inline Mode WikiText]], ce qui signifie que le texte compris entre des balises de début et de fin de [[bloc|Block Mode WikiText]] sera interprété en [[mode en ligne|Inline Mode WikiText]].
+
+<<.tip """La <<gf balise>> de début de paragraphe est <<gf invisible>>. Même au sein des paragraphes l'interpréteur bascule en [[mode en ligne|Inline Mode WikiText]].""">>
+
+Il y a toutefois quelques balises de blocs dont le contenu est interprété en [[mode bloc|Block Mode WikiText]]<<:>>
+
+* Les [[citations multi-lignes|Block Quotes in WikiText]]
+* Les [[styles multi-lignes|Styles and Classes in WikiText]]
+* Les [[blocs typés|Typed Blocks in WikiText]]
+
+Pour ces cas particuliers, lorsque la syntaxe de début de bloc est rencontrée, l'interpréteur continue à analyser le texte en [[mode bloc|Block Mode WikiText]].
+
+Les [[lignes horizontales|Horizontal Rules in WikiText]] sont un autre cas particulier<<:>> elles n'incluent pas de texte, donc l'interpréteur n'a pas l'opportunité de basculer en [[mode en ligne|Inline Mode WikiText]].
+
+Les balises d'ouverture de [[widgets|Widgets in WikiText]] ou de [[HTML|HTML in WikiText]] peuvent conduire l'interpréteur à changer de mode. Quand une de ces balises <<.em "n'est pas">> suivie d'une ligne vide, le texte compris entre les balises sera interprété en [[mode en ligne|Inline Mode WikiText]]. Voir les [[exemples HTML|WikiText parser mode: HTML examples]].
+
+!! Transitions depuis le mode en ligne
+
+* L'interpréteur retourne en [[mode bloc|Block Mode WikiText]] après la fin d'une ligne qui termine du [[WikiTexte de mode bloc|Block Mode WikiText]]. En d'autres termes, quand la balise de fin de bloc est rencontrée.
+* Quand une balise d'ouverture de [[widget|Widgets in WikiText]] ou de [[HTML|HTML in WikiText]] est suivie d'une ligne vide, le contenu est analysé en [[mode bloc|Block Mode WikiText]]. Voir les [[exemples HTML|WikiText parser mode: HTML examples]].
+* Le texte transclus et le texte substitué via un appel de macro peuvent faire quitter le [[mode en ligne|Inline Mode WikiText]] à l'interpréteur. Voir les [[exemples de transclusions|WikiText parser mode: transclusion examples]] et les  [[exemples de macros|WikiText parser mode: macro examples]] pour plus de détails.

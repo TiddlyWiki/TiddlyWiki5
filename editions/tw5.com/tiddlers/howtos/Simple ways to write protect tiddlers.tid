@@ -1,0 +1,30 @@
+created: 20180310002601813
+modified: 20211106021629911
+tags: Learning [[How to apply custom styles]]
+title: Simple ways to write protect tiddlers
+type: text/vnd.tiddlywiki
+
+Sometimes you want to protect individual tiddlers from accidental changes, either from yourself or guests to your ~TiddlyWiki file. Here's a couple simple approaches. Note that these do not provide hardened protection against a wilful attack.
+
+!! Using a stylesheet to lock tiddlers by tag name
+
+Create a tiddler with the following contents and tag it as `$:/tags/Stylesheet` :
+
+```css
+[data-tags*="Locked"] button[title="Edit this tiddler"]   {display: none;}
+```
+
+If your TW language isn't English, then you'll need to change the text in 'title="...."' to whatever the text is when you hover over the edit button.
+
+Now any tiddler you tag as "Locked" will have the edit button hidden. To get it back you will need to open the stylesheet tiddler and change "none" to "inline".
+
+!! Using transclusion to hide your tiddler in a system tiddler
+
+* Open your tiddler for editing.
+* Select the title and copy.
+* Select all the tiddler text.
+* Click on the excise tool.
+* In the title box, type `$:/` and then paste the original title.
+* Use the defaults to excise the text into a new tiddler and replace it with a transclusion
+
+Now you can view the contents of your original tiddler, but to edit them you will have to find the the tiddler with the `$:/` prefix.

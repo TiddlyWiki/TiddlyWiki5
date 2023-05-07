@@ -1,0 +1,35 @@
+caption: block parser mode
+created: 20220110234234616
+modified: 20220122182842032
+tags: [[WikiText Parser Modes]]
+title: Block Mode WikiText
+type: text/vnd.tiddlywiki
+
+Some WikiText is recognised only while the parser is in block mode.
+
+Common characteristics of such block mode WikiText:
+
+* At least one entire line is required to delimit the WikiText.
+* The closing punctuation must come at the end of the line (in some cases the end of the line //is// the closing punctuation.
+
+|!~WikiText|!Punctuation|
+|[[Block Quotes in WikiText]] |Multi-line block quotes are enclosed by lines containing only the text `<<<`; single line block quotes are also possible.|
+|[[Code Blocks in WikiText]]|Enclosed by lines containing only the text <code>&#96;&#96;&#96;</code>|
+|[[Definitions in WikiText]]|Each term is on its own line and each definition is on its own line.|
+|[[Hard Linebreaks in WikiText]]|Enclosed by lines containing only the text `"""`.|
+|[[Headings in WikiText]]|Entire line starting with `!`.|
+|[[Horizontal Rules in WikiText]]|A line containing only the text `---`.|
+|[[Lists in WikiText]]|Each list item is on its own line.|
+|[[Paragraphs in WikiText]]|Any text other than the start punctuation of one of the other block mode WikiText will start a paragraph. Even the start punctuation of inline mode WikiText will start a paragraph. The parser includes all following lines into the paragraph until it encounters a blank line.|
+|[[Styles and Classes in WikiText]]|Enclosed by lines starting with `@@`.|
+|[[Tables in WikiText]]|Each table row is a line starting and ending with `|`.|
+|[[Typed Blocks in WikiText]]|Enclosed by lines starting with `$$`.|
+
+The above WikiText types are only recognised in ''block mode''. However, the text <<.em enclosed>> by most of them will be parsed in ''inline mode'' ([[Block Quotes in WikiText]] and [[Styles and Classes in WikiText]] are the two exceptions in which the parser will continue in ''block mode''). While in ''inline mode'' the parser may encounter something which moves it to ''block mode'' (see [[WikiText parser mode transitions]]).
+
+At the end of the terminating line, the parser will return to ''block mode''. 
+<<.tip 'Note: [[Hard Linebreaks in WikiText]] require an extra blank line after the trailing `"""` before the parser will return to <b>block mode</b>'>>.
+
+If the punctuation for the above types of WikiText is encountered while the parser is in ''inline mode'', it will be //ignored// and output as-is.
+
+[[Examples|Block Mode WikiText (Examples)]]

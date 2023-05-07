@@ -13,7 +13,7 @@ Le Mode Sans Échec permet de désactiver la plupart des personnalisations de <<
 
 Le Mode Sans Échec est activé en faisant précéder le lien URL de <<tw>> dans le navigateur par la chaine `#:safe`. Par exemple&nbsp;:
 
-http://tiddlywiki.com/#:safe
+https://tiddlywiki.com/#:safe
 
 ! Comment fonctionne le Mode Sans Échec
 

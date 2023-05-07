@@ -12,6 +12,8 @@ Various static DOM-related utility functions.
 /*global $tw: false */
 "use strict";
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 /*
 Determines whether element 'a' contains element 'b'
 Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
@@ -22,6 +24,28 @@ exports.domContains = function(a,b) {
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
+exports.domMatchesSelector = function(node,selector) {
+	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
+};
+
+/*
+Select text in a an input or textarea (setSelectionRange crashes on certain input types)
+*/
+exports.setSelectionRangeSafe = function(node,start,end,direction) {
+	try {
+		node.setSelectionRange(start,end,direction);
+	} catch(e) {
+		node.select();
+	}
+};
+
+/*
+Select the text in an input or textarea by position
+*/
+exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
+	$tw.utils.setSelectionRangeSafe(node,selectFromStart,node.value.length - selectFromEnd);
+};
+
 exports.removeChildren = function(node) {
 	while(node.hasChildNodes()) {
 		node.removeChild(node.firstChild);
@@ -29,23 +53,23 @@ exports.removeChildren = function(node) {
 };
 
 exports.hasClass = function(el,className) {
-	return el && el.className && el.className.toString().split(" ").indexOf(className) !== -1;
+	return el && el.hasAttribute && el.hasAttribute("class") && el.getAttribute("class").split(" ").indexOf(className) !== -1;
 };
 
 exports.addClass = function(el,className) {
-	var c = el.className.split(" ");
+	var c = (el.getAttribute("class") || "").split(" ");
 	if(c.indexOf(className) === -1) {
 		c.push(className);
+		el.setAttribute("class",c.join(" "));
 	}
-	el.className = c.join(" ");
 };
 
 exports.removeClass = function(el,className) {
-	var c = el.className.split(" "),
+	var c = (el.getAttribute("class") || "").split(" "),
 		p = c.indexOf(className);
 	if(p !== -1) {
 		c.splice(p,1);
-		el.className = c.join(" ");
+		el.setAttribute("class",c.join(" "));
 	}
 };
 
@@ -65,7 +89,7 @@ Get the first parent element that has scrollbars or use the body as fallback.
 */
 exports.getScrollContainer = function(el) {
 	var doc = el.ownerDocument;
-	while(el.parentNode) {	
+	while(el.parentNode) {
 		el = el.parentNode;
 		if(el.scrollTop) {
 			return el;
@@ -82,11 +106,12 @@ Returns:
 		y: vertical scroll position in pixels
 	}
 */
-exports.getScrollPosition = function() {
-	if("scrollX" in window) {
-		return {x: window.scrollX, y: window.scrollY};
+exports.getScrollPosition = function(srcWindow) {
+	var scrollWindow = srcWindow || window;
+	if("scrollX" in scrollWindow) {
+		return {x: scrollWindow.scrollX, y: scrollWindow.scrollY};
 	} else {
-		return {x: document.documentElement.scrollLeft, y: document.documentElement.scrollTop};
+		return {x: scrollWindow.document.documentElement.scrollLeft, y: scrollWindow.document.documentElement.scrollTop};
 	}
 };
 
@@ -99,7 +124,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 		scrollTop = container.scrollTop;
     // Measure the specified minimum height
 	domNode.style.height = minHeight;
-	var measuredHeight = domNode.offsetHeight;
+	var measuredHeight = domNode.offsetHeight || parseInt(minHeight,10);
 	// Set its height to auto so that it snaps to the correct height
 	domNode.style.height = "auto";
 	// Calculate the revised height
@@ -119,7 +144,7 @@ exports.resizeTextAreaToFit = function(domNode,minHeight) {
 Gets the bounding rectangle of an element in absolute page coordinates
 */
 exports.getBoundingPageRect = function(element) {
-	var scrollPos = $tw.utils.getScrollPosition(),
+	var scrollPos = $tw.utils.getScrollPosition(element.ownerDocument.defaultView),
 		clientRect = element.getBoundingClientRect();
 	return {
 		left: clientRect.left + scrollPos.x,
@@ -135,11 +160,15 @@ exports.getBoundingPageRect = function(element) {
 Saves a named password in the browser
 */
 exports.savePassword = function(name,password) {
+	var done = false;
 	try {
-		if(window.localStorage) {
-			localStorage.setItem("tw5-password-" + name,password);
-		}
+		window.localStorage.setItem("tw5-password-" + name,password);
+		done = true;
 	} catch(e) {
+	}
+	if(!done) {
+		$tw.savedPasswords = $tw.savedPasswords || Object.create(null);
+		$tw.savedPasswords[name] = password;
 	}
 };
 
@@ -147,10 +176,15 @@ exports.savePassword = function(name,password) {
 Retrieve a named password from the browser
 */
 exports.getPassword = function(name) {
+	var value;
 	try {
-		return window.localStorage ? localStorage.getItem("tw5-password-" + name) : "";
+		value = window.localStorage.getItem("tw5-password-" + name);
 	} catch(e) {
-		return "";
+	}
+	if(value !== undefined) {
+		return value;
+	} else {
+		return ($tw.savedPasswords || Object.create(null))[name] || "";
 	}
 };
 
@@ -194,7 +228,7 @@ exports.addEventListeners = function(domNode,events) {
 			if(eventInfo.handlerMethod) {
 				handler = function(event) {
 					eventInfo.handlerObject[eventInfo.handlerMethod].call(eventInfo.handlerObject,event);
-				};	
+				};
 			} else {
 				handler = eventInfo.handlerObject;
 			}
@@ -229,6 +263,127 @@ Copy the computed styles from a source element to a destination element
 */
 exports.copyStyles = function(srcDomNode,dstDomNode) {
 	$tw.utils.setStyles(dstDomNode,$tw.utils.getComputedStyles(srcDomNode));
+};
+
+/*
+Copy plain text to the clipboard on browsers that support it
+*/
+exports.copyToClipboard = function(text,options) {
+	options = options || {};
+	var textArea = document.createElement("textarea");
+	textArea.style.position = "fixed";
+	textArea.style.top = 0;
+	textArea.style.left = 0;
+	textArea.style.fontSize = "12pt";
+	textArea.style.width = "2em";
+	textArea.style.height = "2em";
+	textArea.style.padding = 0;
+	textArea.style.border = "none";
+	textArea.style.outline = "none";
+	textArea.style.boxShadow = "none";
+	textArea.style.background = "transparent";
+	textArea.value = text;
+	document.body.appendChild(textArea);
+	textArea.select();
+	textArea.setSelectionRange(0,text.length);
+	var succeeded = false;
+	try {
+		succeeded = document.execCommand("copy");
+	} catch (err) {
+	}
+	if(!options.doNotNotify) {
+		$tw.notifier.display(succeeded ? "$:/language/Notifications/CopiedToClipboard/Succeeded" : "$:/language/Notifications/CopiedToClipboard/Failed");
+	}
+	document.body.removeChild(textArea);
+};
+
+exports.getLocationPath = function() {
+	return window.location.toString().split("#")[0];
+};
+
+/*
+Collect DOM variables
+*/
+exports.collectDOMVariables = function(selectedNode,domNode,event) {
+	var variables = {},
+	    selectedNodeRect,
+	    domNodeRect;
+	if(selectedNode) {
+		$tw.utils.each(selectedNode.attributes,function(attribute) {
+			variables["dom-" + attribute.name] = attribute.value.toString();
+		});
+		
+		if(selectedNode.offsetLeft) {
+			// Add variables with a (relative and absolute) popup coordinate string for the selected node
+			var nodeRect = {
+				left: selectedNode.offsetLeft,
+				top: selectedNode.offsetTop,
+				width: selectedNode.offsetWidth,
+				height: selectedNode.offsetHeight
+			};
+			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
+
+			var absRect = $tw.utils.extend({}, nodeRect);
+			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+				absRect.left += currentNode.offsetLeft;
+				absRect.top += currentNode.offsetTop;
+			}
+			variables["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,absRect);
+
+			// Add variables for offset of selected node
+			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
+			variables["tv-selectednode-posy"] = selectedNode.offsetTop.toString();
+			variables["tv-selectednode-width"] = selectedNode.offsetWidth.toString();
+			variables["tv-selectednode-height"] = selectedNode.offsetHeight.toString();
+		}
+	}
+	
+	if(domNode && domNode.offsetWidth) {
+		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
+		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
+	}
+
+	if(event && event.clientX && event.clientY) {
+		if(selectedNode) {
+			// Add variables for event X and Y position relative to selected node
+			selectedNodeRect = selectedNode.getBoundingClientRect();
+			variables["event-fromselected-posx"] = (event.clientX - selectedNodeRect.left).toString();
+			variables["event-fromselected-posy"] = (event.clientY - selectedNodeRect.top).toString();
+		}
+		
+		if(domNode) {
+			// Add variables for event X and Y position relative to event catcher node
+			domNodeRect = domNode.getBoundingClientRect();
+			variables["event-fromcatcher-posx"] = (event.clientX - domNodeRect.left).toString();
+			variables["event-fromcatcher-posy"] = (event.clientY - domNodeRect.top).toString();
+		}
+
+		// Add variables for event X and Y position relative to the viewport
+		variables["event-fromviewport-posx"] = event.clientX.toString();
+		variables["event-fromviewport-posy"] = event.clientY.toString();
+	}
+	return variables;
+};
+
+/*
+Make sure the CSS selector is not invalid
+*/
+exports.querySelectorSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelector(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
+};
+
+exports.querySelectorAllSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelectorAll(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
 };
 
 })();

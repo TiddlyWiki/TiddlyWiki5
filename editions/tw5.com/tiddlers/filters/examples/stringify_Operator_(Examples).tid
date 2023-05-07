@@ -1,7 +1,9 @@
 created: 20161017154944352
-modified: 20161017155350400
+modified: 20171029155233487
 tags: [[Operator Examples]] [[stringify Operator]]
 title: stringify Operator (Examples)
 type: text/vnd.tiddlywiki
 
-<<.operator-example 1 """[[Title with "double quotes" and \backslash]] +[stringify[]]""">>
+<<.operator-example 1 """[[Title with "double quotes" and single ' and \backslash]] +[stringify[]]""">>
+<<.operator-example 2 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 without suffix]] +[stringify[]]""">>
+<<.operator-example 3 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 with rawunicode suffix]] +[stringify:rawunicode[]]""">>

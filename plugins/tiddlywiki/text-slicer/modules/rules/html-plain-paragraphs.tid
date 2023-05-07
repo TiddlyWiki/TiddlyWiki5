@@ -1,0 +1,24 @@
+title: $:/plugins/tiddlywiki/text-slicer/slicer-rules/html-plain-paragraphs.json
+name: html-plain-paragraphs
+caption: Plain Paragraphs (HTML)
+description: One tiddler per paragraph, without formatting (HTML)
+type: application/json
+tags: $:/tags/text-slicer/slicer-rules
+
+[
+	{
+		"selector": "address,blockquote,center,dd,dt,h1,h2,h3,h4,h5,h6,li,p",
+		"actions": {
+			"startNewChunk": {
+				"toc-type": "paragraph"
+			},
+			"dontRenderTag": true
+		}
+	},
+	{
+		"selector": "*",
+		"actions": {
+			"dontRenderTag": true
+		}
+	}
+]

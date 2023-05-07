@@ -1,53 +1,6 @@
 title: $:/core/ui/SideBarLists
 
-<div class="tc-sidebar-lists">
+<$transclude tiddler="$:/core/ui/SideBarSegments/search"/>
 
-<$set name="searchTiddler" value="$:/temp/search">
-<div class="tc-search">
-<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> class="tc-popup-handle"/>
-<$reveal state="$:/temp/search" type="nomatch" text="">
-<$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
-<$action-setfield $tiddler="$:/temp/search" text=""/>
-<$action-navigate $to="$:/AdvancedSearch"/>
-{{$:/core/images/advanced-search-button}}
-</$button>
-<$button class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/search" text="" />
-{{$:/core/images/close-button}}
-</$button>
-<$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
-{{$:/core/images/down-arrow}}
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
-{{$:/language/Search/Matches}}
-</$set>
-</$list>
-</$button>
-</$reveal>
-<$reveal state="$:/temp/search" type="match" text="">
-<$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
-{{$:/core/images/advanced-search-button}}
-</$button>
-</$reveal>
-</div>
+<$transclude tiddler="$:/core/ui/SideBarSegments/tabs"/>
 
-<$reveal tag="div" class="tc-block-dropdown-wrapper" state="$:/temp/search" type="nomatch" text="">
-
-<$reveal tag="div" class="tc-block-dropdown tc-search-drop-down tc-popup-handle" state=<<qualify "$:/state/popup/search-dropdown">> type="nomatch" text="" default="">
-
-<$list filter="[{$:/temp/search}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
-
-{{$:/core/ui/SearchResults}}
-
-</$list>
-
-</$reveal>
-
-</$reveal>
-
-</$set>
-
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" default={{$:/config/DefaultSidebarTab}} state="$:/state/tab/sidebar" />
-
-</div>

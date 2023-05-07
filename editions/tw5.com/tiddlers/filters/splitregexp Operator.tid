@@ -1,0 +1,44 @@
+caption: splitregexp
+created: 20190613154722705
+modified: 20190613154924724
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles split into separate items according to the specified regular expression <<.place R>>
+op-parameter: The regular expression at which to split each title
+op-parameter-name: R
+op-purpose: returns each item in the list split into separate strings according to the specified regular expression <<.place R>>
+op-suffix: flags: ''m'' for multiline mode, ''i'' for case-insensitive mode
+tags: [[Filter Operators]]
+title: splitregexp Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+Note that in some circumstances the <<.op splitregexp>> operator will include blank items in the list of results. For example, 
+
+```
+[[the band thethe are the best the]splitregexp[the]]
+```
+
+The following results are returned:
+
+```
+["", " band ", "", " are ", " best ", ""]
+```
+
+Where it might be expected that the results would be:
+
+```
+[" band ", " are ", " best "]
+```
+
+The blank items mark the boundaries between matches. If they are not required they can be removed with the ''blank'' category of the [[is Operator]]: `[[the band thethe are the best the]splitregexp[the]!is[blank]]`.
+
+The reason that the blank items can be useful is that they allow search and replace operations to be constructed from a combination of the [[split Operator]] or [[splitregexp Operator]] and the [[join Operator]]. For example:
+
+<<.operator-example 1 "[[nobody, really; wants; to see -- all this \punctuation]splitregexp[,|;|-|\\]join[...]]">>
+
+Syntax errors in the regular expression will cause the filter to return an error message. For example:
+
+<<.operator-example 2 "[[the cat sat on the mat]splitregexp[\]]">>
+
+<<.operator-examples "splitregexp">>

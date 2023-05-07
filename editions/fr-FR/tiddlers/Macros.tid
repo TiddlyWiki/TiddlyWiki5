@@ -1,19 +1,28 @@
 caption: Macros
 created: 20140211171341271
-modified: 20150622110720298
+modified: 20220219192959452
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
 
-Les macros sont des bouts de texte qui peuvent être insérés à l'aide d'un raccourci concis<<dp>>
+Une <<.def macro>> est un //bout de texte// auquel on donne un nom. Le <<fr WikiText>> utilise ce nom comme raccourci pour [[transclure|Transclusion]] le //bout de texte//. Ces [[transclusions|Transclusion]] particulières s'appellent des <<.def "appels de macro">>, et chaque appel peut transmettre un ensemble différent d'arguments, qui se substituent à leur emplacement dans le //bout de texte//.
 
-```
-<<maMacro>>
-```
+Pour une description de la syntaxe, voir <<fr "Macros in WikiText">>.
 
-Vous pouvez écrire vos propres [[macros en WikiText|Macros in WikiText]] ou pour plus de souplesse, vous pouvez écrire des [[macros en Javascript|JavaScript Macros]].
+La plupart des macros sont en fait des [[variables|Variables]] paramétrées.
 
-Les macros suivantes sont fournies avec <<tw>><<dp>>
+Elles sont définies en utilisant le [[pragma|Pragma]] `\define`. (En coulisses, cette syntaxe est transformé en <<fr SetWidget>>, donc les macros et les variables sont bien les deux faces de la même pièce.)
 
-<<list-links "[tag[Macros]]">>
+Le //bout de texte// et ses arguments sont traités comme de simple chaînes de caractères, sans interprétation du <<fr WikiText>>, au moins jusqu'à ce que le dernier emplacement ait été rempli et que l'appel de macro soit terminé. Cela signifie qu'une macro peut assembler et renvoyer la syntaxe complète d'un composant <<fr WikiText>>, comme un [[lien|Linking in WikiText]] par exemple. (Voir <<fr "Transclusion and Substitution">> pour une discussion plus approfondie sur ce sujet.)
 
+A l'intérieur d'un //bout de texte// lui-même, le seul balisage détecté est `$nom$` (un emplacement pour le paramètre `nom` qui sera substitué par l'argument correspondant reçu au moment d'un appel de macro) et `$(nom)$` (un emplacement pour une [[variable|Variables]]).
+
+La macro <<.mlink dumpvariables>> liste toutes les variables (y-compris les macros) qui sont disponibles à cet endroit de l'arborescence des widgets.
+
+Un widget <<.wlink ImportVariablesWidget>> peut être utilisé pour copier une définition de macro vers une autre branche de [[l'arbre des widgets|Widgets]]. <<tw>> utilise cette technique en interne pour implémenter des macros globales -- c'est-à-dire des macros définies dans des tiddlers étiquetés <<.tag $:/tags/Macro>>. (Le tag <<.tag $:/tags/Macro/View>> est quant à lui utilisé pour définir des macros qui ne doivent être disponibles que dans le modèle de vue principal et le panneau de prévisualisation.)
+
+Pour un maximum de flexibilité, les macros peuvent aussi être <<.js-macro-link "écrites en tant que modules JavaScript">>.
+
+Un effet similaire à l'utilisation de macros paramétrées peut être obtenu en encadrant une [[transclusion|Transclusion]] par une définition de [[variables|Variables]].
+
+<<tw>> intègre [[plusieurs macros|Core Macros]] dans son cœur.

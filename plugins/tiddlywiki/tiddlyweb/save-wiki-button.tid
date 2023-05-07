@@ -1,0 +1,26 @@
+title: $:/core/ui/Buttons/save-wiki
+tags: $:/tags/PageControls
+caption: {{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}} Server status
+description: Status of synchronisation with server
+
+\whitespace trim
+\define config-title()
+$:/config/PageControlButtons/Visibility/$(listItem)$
+\end
+<$button popup=<<qualify "$:/state/popup/save-wiki">> tooltip="Status of synchronisation with server" aria-label="Server status" class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<span class="tc-dirty-indicator">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="Server status"/></span>
+</$list>
+</span>
+</$button>
+<$reveal state=<<qualify "$:/state/popup/save-wiki">> type="popup" position="belowleft" animate="yes">
+<div class="tc-drop-down">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SyncerDropdown]!has[draft.of]]" variable="listItem">
+<$transclude tiddler=<<listItem>>/>
+</$list>
+</div>
+</$reveal>

@@ -1,0 +1,96 @@
+title: $:/language/Help/aws
+description: Operations for working with Amazon Web Services
+
+! Commands
+
+Perform operation on Amazon Web Services
+
+```
+--aws <sub-command> [<parameter> ...]
+```
+
+! "profile" subcommand
+
+Sets the AWS credentials profile to be used for subsequent commands.
+
+```
+--aws profile <profile-name>
+```
+
+* ''profile-name'': AWS profile name
+
+! "s3-load" subcommand
+
+Load tiddlers from files in an S3 bucket.
+
+```
+--aws s3-load <region> <bucket> <filename>...
+```
+
+* ''region'': AWS region
+* ''bucket'': name of the bucket containing the files
+* ''filename'': one or more filenames of the files to load
+
+The content in the files is deserialized according to the content type reported by S3.
+
+! "s3-savetiddler" subcommand
+
+Save a raw tiddler to a file in an S3 bucket.
+
+```
+--aws s3-savetiddler <title> <region> <bucket> <filename> <zipfilename> <savetype>
+```
+
+* ''title'': title of the tiddler to save
+* ''region'': AWS region
+* ''bucket'': name of the bucket to save the saved file
+* ''filename'': filename of the saved file
+* ''zipfilename'': optional; the file will be packed into a ZIP file with the specified name
+* ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
+
+! "s3-savetiddlers" subcommand
+
+Save raw tiddlers matching a filter to an S3 bucket.
+
+```
+--aws s3-savetiddlers <filter> <region> <bucket> <filenamefilter> <savetypefilter>
+```
+
+* ''filter'': filter identifying tiddlers to render
+* ''region'': AWS region
+* ''bucket'': name of the bucket to save the files
+* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[aws-encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
+* ''savetypefilter'': optional; a filter that is passed the title of the tiddler being saved and should yield the MIME type for the saved file (defaults to a filter that yields the value of the ''type'' field)
+
+! "s3-rendertiddler" subcommand
+
+Save the results of rendering a tiddler to a file in an S3 bucket.
+
+```
+--aws s3-rendertiddler <title> <region> <bucket> <filename> <type> <template> <zipfilename> <savetype>
+```
+
+* ''title'': title of the tiddler to render
+* ''region'': AWS region
+* ''bucket'': name of the bucket to save the rendered file
+* ''filename'': filename of the rendered file
+* ''type'': optional render type (defaults to "text/html")
+* ''template'': optional template (defaults to directly rendering the tiddler without using a template)
+* ''zipfilename'': optional; the file will be packed into a ZIP file with the specified name
+* ''savetype'': optional; the MIME type for the saved file (defaults to ''type'' or "text/html")
+
+! "s3-rendertiddlers" subcommand
+
+Save the results of rendering tiddlers identified by a filter to files in an S3 bucket.
+
+```
+--aws s3-rendertiddlers <filter> <template> <region> <bucket> <filenamefilter> <type> <savetypefilter>
+```
+
+* ''filter'': filter identifying tiddlers to render
+* ''template'': template for rendering each tiddler
+* ''region'': AWS region
+* ''bucket'': name of the bucket to save the rendered file
+* ''filenamefilter'': filter for converting tiddler titles to filepaths (eg `[aws-encodeuricomponent[]addprefix[files/]addsuffix[.html]]`)
+* ''type'': optional render type (defaults to "text/html")
+* ''savetypefilter'': optional; a filter that is passed the title of the tiddler being rendered and should yield the MIME type for the saved file (defaults to the value of the ''type'' field via `[is[tiddler]get[type]]`)

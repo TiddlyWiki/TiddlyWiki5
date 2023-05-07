@@ -1,0 +1,111 @@
+title: $:/plugins/tiddlywiki/dynaview/examples/zoomable-diagram
+tags: $:/tags/dynaviewExamples
+caption: Zoomable Diagram
+
+\define lorem-ipsum()
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\end
+
+\define zoomable-diagram(tag,level:"1 2 3 4 5 6 7")
+<div class={{{ $level$ +[addprefix[zoomable-diagram-level-]addprefix[zoomable-diagram-list ]] }}}>
+	<$list filter="[all[shadows+tiddlers]tag[$tag$]]">
+		<div class="zoomable-diagram-item">
+			<div class="zoomable-diagram-title">
+				<$transclude field="caption" mode="inline"/>
+			</div>
+			<div class="zoomable-diagram-body">
+				<div class="zoomable-diagram-text">
+					<$transclude field="text" mode="block"/>
+				</div>
+				<div class="zoomable-diagram-children">
+					<$set name="new-level" filter=""" $level$ +[butfirst[]] """>
+						<$macrocall $name="zoomable-diagram" tag=<<currentTiddler>> level=<<new-level>>/>
+					</$set>
+				</div>
+			</div>
+		</div>
+	</$list>
+</div>
+\end
+
+//Zoom into the diagram below to find out more//
+
+''N.B. This example only works in Safari at the moment''
+
+<style>
+.zoomable-diagram-wrapper {
+	min-height: 300px;
+}
+
+.zoomable-diagram-list {
+	display: flex;
+	flex-direction: row;
+	line-height: 1.5;
+}
+
+.zoomable-diagram-level-1 {font-size: 1em;}
+.zoomable-diagram-level-2 {font-size: 0.8em;}
+.zoomable-diagram-level-3 {font-size: 0.6em;}
+.zoomable-diagram-level-4 {font-size: 0.4em;}
+
+.zoomable-diagram-level-1,
+.zoomable-diagram-level-2,
+.zoomable-diagram-level-3,
+.zoomable-diagram-level-4,
+.zoomable-diagram-text {
+	transition: opacity 150ms ease-in-out;
+}
+
+body.tc-dynaview.tc-dynaview-zoom-factor-1 .zoomable-diagram-level-1 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-1 .zoomable-diagram-level-2 {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-1 .zoomable-diagram-level-3 {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-1 .zoomable-diagram-level-4 {opacity: 0;}
+
+body.tc-dynaview.tc-dynaview-zoom-factor-2 .zoomable-diagram-level-1 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-2 .zoomable-diagram-level-1 > .zoomable-diagram-item > .zoomable-diagram-body > .zoomable-diagram-text {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-2 .zoomable-diagram-level-2 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-2 .zoomable-diagram-level-3 {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-2 .zoomable-diagram-level-4 {opacity: 0;}
+
+body.tc-dynaview.tc-dynaview-zoom-factor-3 .zoomable-diagram-level-1 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-3 .zoomable-diagram-level-1 > .zoomable-diagram-item > .zoomable-diagram-body > .zoomable-diagram-text {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-3 .zoomable-diagram-level-2 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-3 .zoomable-diagram-level-2 > .zoomable-diagram-item > .zoomable-diagram-body > .zoomable-diagram-text {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-3 .zoomable-diagram-level-3 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-3 .zoomable-diagram-level-4 {opacity: 0;}
+
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .zoomable-diagram-level-1 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .zoomable-diagram-level-1 > .zoomable-diagram-item > .zoomable-diagram-body > .zoomable-diagram-text {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .zoomable-diagram-level-2 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .zoomable-diagram-level-2 > .zoomable-diagram-item > .zoomable-diagram-body > .zoomable-diagram-text {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .zoomable-diagram-level-3 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .zoomable-diagram-level-3 > .zoomable-diagram-item > .zoomable-diagram-body > .zoomable-diagram-text {opacity: 0;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .zoomable-diagram-level-4 {opacity: 1;}
+
+.zoomable-diagram-item {
+	margin: 0.5em;
+	flex: 1 1 0;
+}
+
+.zoomable-diagram-title {
+	font-weight: bold;
+}
+
+.zoomable-diagram-body {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.zoomable-diagram-text {
+	position: absolute;
+}
+
+.zoomable-diagram-children {
+}
+
+</style>
+
+<div class="zoomable-diagram-wrapper">
+<<zoomable-diagram "$:/tags:/ZoomableDiagram">>
+</div>

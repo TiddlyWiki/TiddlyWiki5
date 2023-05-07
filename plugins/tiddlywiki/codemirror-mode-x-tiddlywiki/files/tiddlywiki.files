@@ -1,0 +1,19 @@
+{
+	"tiddlers": [
+		{
+			"file": "mode/tiddlywiki/tiddlywiki.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/tiddlywiki/tiddlywiki.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			}
+		},{
+			"file": "mode/tiddlywiki/tiddlywiki.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/tiddlywiki/tiddlywiki.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

@@ -1,18 +1,18 @@
 caption: all
 created: 20140410103123179
-modified: 20161128185445034
+modified: 20211217135719266
 op-input: ignored, unless the parameter is empty
 op-output: the titles that belong to all the specified categories
 op-parameter: zero or more categories
 op-purpose: find all titles of a fundamental category
-tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]]
+tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]] [[Selection Constructors: Conditional]]
 title: all Operator
 type: text/vnd.tiddlywiki
 
 The parameter specifies zero or more fundamental categories using the following syntax:
 
 <$railroad text="""
-[{: ("current" | "missing" |: "orphans" | "shadows" | "tiddlers" ) +"+" }]
+[{: ("current" | "missing" |: "orphans" | "shadows" | "tags" | "tiddlers" ) +"+" }]
 """/>
 
 |!Category |!Members |!Sorted |
@@ -20,8 +20,8 @@ The parameter specifies zero or more fundamental categories using the following 
 |^`missing` |all non-existent tiddlers to which there is at least one [[hard link|Hard and Soft Links]] |^no |
 |^`orphans` |all tiddlers to which there are <<.em no>> hard links |^by title |
 |^`shadows` |all the [[shadow tiddlers|ShadowTiddlers]] that exist, including any that have been overridden with non-shadow tiddlers |^no |
-|^`tiddlers` |all the non-shadow tiddlers that exist |no |
 |^`tags` |all the tags in use on non-shadow tiddlers |no |
+|^`tiddlers` |all the non-shadow tiddlers that exist |no |
 
 If the parameter specifies more than one category, they are processed from left to right. The overall output is initially empty, and each category's output is [[dominantly appended|Dominant Append]] to it in turn. Unrecognised categories contribute nothing to the output.
 

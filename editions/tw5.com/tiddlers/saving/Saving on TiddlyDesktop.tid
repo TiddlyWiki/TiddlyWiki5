@@ -1,0 +1,19 @@
+caption: ~TiddlyDesktop
+color: #FF8A65
+community-author: Jeremy Ruston
+created: 20171112085137764
+delivery: App
+description: Custom desktop application for working with TiddlyWiki
+method: save
+modified: 20200507104332791
+tags: Saving Mac Windows Linux [[Standalone App]]
+title: Saving on TiddlyDesktop
+type: text/vnd.tiddlywiki
+url: https://github.com/TiddlyWiki/TiddlyDesktop/releases
+
+See the [[Introducing TiddlyDesktop Video]]
+
+# Install the latest release of TiddlyDesktop from https://github.com/TiddlyWiki/TiddlyDesktop/releases
+# Run TiddlyDesktop
+# Use the browse button to open TiddlyWiki files
+# Save changes within TiddlyWiki in the usual way

@@ -1,0 +1,19 @@
+{
+	"tiddlers": [
+		{
+			"file": "keymap/sublime.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/keymap/sublime.js",
+				"module-type": "codemirror"
+			}
+		},{
+			"file": "addons/comment/comment.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addons/comment/comment.js",
+				"module-type": "codemirror"
+			}
+		}
+	]
+}

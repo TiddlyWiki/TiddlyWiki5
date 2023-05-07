@@ -1,0 +1,61 @@
+caption: diff-text
+created: 20180316162725329
+modified: 20180316162725329
+tags: Widgets
+title: DiffTextWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.1.16">> The diff text widget analyses the differences between a pair of source and destination text strings and displays the results as highlighted insertions and deletions (similar to the "track changes" function of a word processor). For example:
+
+<$diff-text source="Hey Jude, don't make it bad. Take a sad song and make it better. Remember to let her into your heart
+Then you can start to make it better." dest="Hey Jude, don't be afraid. You were made to go out and get her. The minute you let her under your skin. Then you begin to make it better."/>
+
+! Content and Attributes
+
+!! Content
+
+The content of the `<$diff-text>` widget is rendered immediately before the diffs. Within it, the variable `diff-count` is available, containing the number of differences found. If the widget has no content then it automatically transcludes the tiddler [[$:/language/Diffs/CountMessage]].
+
+<<<
+In other words, these three invocations are all equivalent:
+
+```
+<$diff-text source={{FirstTiddler}} dest={{SecondTiddler}}>
+{{$:/language/Diffs/CountMessage}}
+</$diff-text>
+
+<$diff-text source={{FirstTiddler}} dest={{SecondTiddler}}>
+</$diff-text>
+
+<$diff-text source={{FirstTiddler}} dest={{SecondTiddler}}/>
+
+```
+<<<
+
+!! Attributes
+
+|!Attribute |!Description |
+|source |The source text |
+|dest |The destination text |
+|cleanup |See below |
+
+The ''cleanup'' attribute determines which optional post-processing should be applied to the diffs:
+
+* ''none'': no cleanup is performed
+* ''semantic'' (default): rewrites the diffs for human readability
+* ''efficient'': rewrites the diffs to minimise the number of operations for subsequent processing 
+
+(Note that in many cases the results will be the same regardless of the cleanup option. See the [[docs|https://github.com/google/diff-match-patch/wiki/API]] of the underlying library for more details).
+
+! Examples
+
+In this example we compare two texts:
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$edit-text tiddler="SampleTiddlerFirst"/>
+
+<$edit-text tiddler="SampleTiddlerSecond"/>
+
+<$diff-text source={{SampleTiddlerFirst}} dest={{SampleTiddlerSecond}}/>"""/>

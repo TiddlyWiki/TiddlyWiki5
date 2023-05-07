@@ -13,7 +13,6 @@ Set a field or index at a given tiddler via radio buttons
 "use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-
 var RadioWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -33,13 +32,19 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
+	var isChecked = this.getValue() === this.radioValue;
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class",this.radioClass);
+	this.labelDomNode.setAttribute("class",
+		"tc-radio " + this.radioClass + (isChecked ? " tc-radio-selected" : "")
+	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
-	if(this.getValue() == this.radioValue) {
-		this.inputDomNode.setAttribute("checked","true");
+	if(isChecked) {
+		this.inputDomNode.checked = true;
+	}
+	if(this.isDisabled === "yes") {
+		this.inputDomNode.setAttribute("disabled",true);
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
@@ -57,10 +62,14 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 RadioWidget.prototype.getValue = function() {
 	var value,
 		tiddler = this.wiki.getTiddler(this.radioTitle);
-	if (this.radioIndex) {
-		value = this.wiki.extractTiddlerDataItem(this.radioTitle,this.radioIndex);
+	if(tiddler) {
+		if(this.radioIndex) {
+			value = this.wiki.extractTiddlerDataItem(this.radioTitle,this.radioIndex,this.radioDefault);
+		} else {
+			value = tiddler.getFieldString(this.radioField,this.radioDefault);
+		}
 	} else {
-		value = tiddler && tiddler.getFieldString(this.radioField);
+		value = this.radioDefault;
 	}
 	return value;
 };
@@ -80,6 +89,10 @@ RadioWidget.prototype.handleChangeEvent = function(event) {
 	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
+	// Trigger actions
+	if(this.radioActions) {
+		this.invokeActionString(this.radioActions,this,event,{"actionValue": this.radioValue});
+	}
 };
 
 /*
@@ -92,10 +105,9 @@ RadioWidget.prototype.execute = function() {
 	this.radioIndex = this.getAttribute("index");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
-	if(this.radioClass !== "") {
-		this.radioClass += " ";
-	}
-	this.radioClass += "tc-radio";
+	this.radioDefault = this.getAttribute("default");
+	this.isDisabled = this.getAttribute("disabled","no");
+	this.radioActions = this.getAttribute("actions","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -105,16 +117,15 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.value || changedAttributes["class"]) {
+	if(($tw.utils.count(changedAttributes) > 0)) {
 		this.refreshSelf();
 		return true;
+	} else if(changedTiddlers[this.radioTitle]) {
+		this.inputDomNode.checked = this.getValue() === this.radioValue;
+		$tw.utils.toggleClass(this.labelDomNode,"tc-radio-selected",this.inputDomNode.checked);
+		return this.refreshChildren(changedTiddlers);
 	} else {
-		var refreshed = false;
-		if(changedTiddlers[this.radioTitle]) {
-			this.inputDomNode.checked = this.getValue() === this.radioValue;
-			refreshed = true;
-		}
-		return this.refreshChildren(changedTiddlers) || refreshed;
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 

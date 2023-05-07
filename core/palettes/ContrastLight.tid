@@ -1,5 +1,6 @@
 title: $:/palettes/ContrastDark
 name: Contrast (Dark)
+color-scheme: dark
 description: High contrast and unambiguous (dark version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
@@ -33,6 +34,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #00a
 external-link-foreground: #00e
 foreground: #fff
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-background: <<colour foreground>>
 message-border: <<colour background>>
 message-foreground: <<colour background>>
@@ -49,6 +52,8 @@ page-background: <<colour background>>
 pre-background: <<colour background>>
 pre-border: <<colour foreground>>
 primary: #00f
+select-tag-background:
+select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: <<colour background>>
 sidebar-controls-foreground: <<colour foreground>>

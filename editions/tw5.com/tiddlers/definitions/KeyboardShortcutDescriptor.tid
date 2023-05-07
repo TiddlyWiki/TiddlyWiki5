@@ -1,0 +1,47 @@
+title: Keyboard Shortcut Descriptor
+tags: Definitions
+
+`Keyboard Shortcut Descriptors` are used by the [[KeyboardWidget]] and within Tiddlers tagged <<tag-pill $:/tags/KeyboardShortcut>> to link actions with a keyboard combination
+
+A `Keyboard Shortcut Descriptor` has the following format:
+
+```
+	ctrl+enter
+	ctrl+shift+alt+A
+	alt-shift-T
+	alt-Space
+```
+
+It can have multiple Key combinations:
+
+```
+ctrl+enter alt+shift+A ctrl+alt+9 alt-Space ctrl-Backspace
+```
+
+There are ''two ways'' Keyboard Shortcut Descriptors can be used:
+
+* directly
+** passing the attribute `key="ctrl-enter"` to the KeyboardWidget
+** setting `ctrl-enter` as the ''value'' of the `key` ''field'' in a Tiddler tagged <<tag-pill $:/tags/KeyboardShortcut>>
+* with a ''reference'' to a configuration Tiddler
+** A ''configuration Tiddler'' for Keyboard Shortcuts follows some naming rules:
+*** The title starts with `$:/config/`
+*** Followed by either the string `shortcuts` or one of the following ''platform descriptors'':
+**** <<.tid shortcuts-linux>>
+**** <<.tid shortcuts-not-linux>>
+**** <<.tid shortcuts-mac>>
+**** <<.tid shortcuts-not-mac>>
+**** <<.tid shortcuts-windows>>
+**** <<.tid shortcuts-not-windows>>
+*** The title ends with another `/` followed by a suffix that can be chosen freely
+**** This suffix is the ''identifier'' for the `Keyboard Shortcut Descriptor` (A)
+** The ''reference'' to the configuration Tiddler is made of `((` + the ''identifier'' (A) + `))`
+*** Example: `((my-shortcut))` is the ''reference'' to these configuration Tiddlers:
+**** <<.tid $:/config/shortcuts/my-shortcut>>
+**** <<.tid $:/config/shortcuts-linux/my-shortcut>>
+**** <<.tid $:/config/shortcuts-not-linux/my-shortcut>>
+**** <<.tid $:/config/shortcuts-mac/my-shortcut>>
+**** <<.tid $:/config/shortcuts-not-mac/my-shortcut>>
+**** <<.tid $:/config/shortcuts-windows/my-shortcut>>
+**** <<.tid $:/config/shortcuts-not-windows/my-shortcut>>
+** Finally, the referenced configuration Tiddler stores the Keyboard Shortcut Descriptor in its ''text'' field

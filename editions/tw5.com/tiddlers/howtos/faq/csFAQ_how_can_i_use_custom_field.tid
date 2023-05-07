@@ -1,0 +1,30 @@
+created: 201804111739
+modified: 201804111739
+title: Q: How can I use a custom field to style a tiddler?
+tags: [[Custom Styles FAQ]]
+
+
+''Consider the following usecase:'' <<.from-version "5.1.16">>
+
+There is a field named: `rank`, which can hold different values eg: `species`.
+
+''Answer:''
+
+The idea is now: We dynamically create the stylesheet. The style-sheet can look like this: 
+
+"""
+title: `myStyles`
+tags: `$:/tags/Stylesheet`
+"""
+
+```
+<$list filter="[rank[species]]"> 
+[data-tiddler-title^="<$view field=title/>"] .tc-tiddler-body {
+    column-count: 2;
+}
+</$list> 
+```
+
+This creates a CSS rule for every tiddler-title, that has a field `rank` and value `species`.
+
+[[Learn more about possible attributes!|Attribute Selectors]]

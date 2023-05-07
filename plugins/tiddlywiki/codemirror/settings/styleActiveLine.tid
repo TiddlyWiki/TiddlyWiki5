@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/styleActiveLine
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/styleActiveLine/hint}}
+
+\define lingo-base() $:/language/codemirror/styleActiveLine/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/styleActiveLine" field="text" checked="true" unchecked="false" default="false"> <$link to="$:/config/codemirror/styleActiveLine"><<lingo info>></$link> </$checkbox>
+

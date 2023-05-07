@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/powered-by-tiddlywiki/banner
 tags: $:/tags/PageTemplate
 
-<a href="http://tiddlywiki.com" target="_blank" rel="noopener noreferrer">
+<a href="https://tiddlywiki.com" target="_blank" rel="noopener noreferrer">
 [img width="160px" class="tc-powered-by-tiddlywiki-banner" [$:/plugins/tiddlywiki/powered-by-tiddlywiki/powered-by-tiddlywiki.svg]]
 </a>

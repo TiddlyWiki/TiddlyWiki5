@@ -3,12 +3,16 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/info-button}} {{$:/language/Buttons/Info/Caption}}
 description: {{$:/language/Buttons/Info/Hint}}
 
+\whitespace trim
 \define button-content()
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+\whitespace trim
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/info-button}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/Info/Caption}}/></span>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/Info/Caption}}/>
+</span>
 </$list>
 \end
 <$reveal state="$:/config/TiddlerInfo/Mode" type="match" text="popup">

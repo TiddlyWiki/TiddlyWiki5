@@ -1,0 +1,41 @@
+title: $:/language/ThemeTweaks/
+
+Metrics: Dimensões
+Metrics/BodyFontSize: Tamanho da fonte no corpo do tiddler
+Metrics/BodyLineHeight: Espaçamento entre linha no corpo do tiddler
+Metrics/FontSize: Tamanho de fonte
+Metrics/LineHeight: Altura de linha
+Metrics/SidebarBreakpoint: Ponto de quebra da barra de menu
+Metrics/SidebarBreakpoint/Hint: Largura mínima da página exibindo o frame de<br>tiddlers e a barra de menu lado-a-lado
+Metrics/SidebarWidth: Largura da barra de menu
+Metrics/SidebarWidth/Hint: Largura da barra de menu no esquema fluido-fixo
+Metrics/StoryLeft: Margem à esquerda do frame de tiddlers
+Metrics/StoryLeft/Hint: Distancia a que a margem esquerda do frame de tiddlers<br>(área dos tiddlers) está da esquerda da página
+Metrics/StoryRight: Rolo à direita
+Metrics/StoryRight/Hint: distancia da margem esquerda da barra<br>de menu esquerda da página
+Metrics/StoryTop: Posição vertical do rolo
+Metrics/StoryTop/Hint: distancia da margem superior do<br>frame ao topo da página
+Metrics/StoryWidth: Largura do rol
+Metrics/StoryWidth/Hint: largura total do frame de tiddlers
+Metrics/TiddlerWidth: Largura dos tiddlers
+Metrics/TiddlerWidth/Hint: largura do frame de tiddlers
+Options: Comportamento da página
+Options/CodeWrapping: Dividir linhas longas em blocos de código
+Options/SidebarLayout: Comportamento da Página e Menu
+Options/SidebarLayout/Fixed-Fluid: Página fixa, Menu fluido
+Options/SidebarLayout/Fluid-Fixed: Página fluida, Menu fixo
+Options/StickyTitles: Títulos persistentes
+Options/StickyTitles/Hint: Torna as barras de título dos tiddlers sempre visíveis, como se ficassem coladas no topo da janela do navegador. Atenção, não funciona de todo com o Chrome, e pode causar problemas de apresentação no Firefox
+Settings: Configurações de conteúdo
+Settings/BackgroundImage: Imagem do plano de fundo
+Settings/BackgroundImageAttachment: Comportamento do plano de fundo
+Settings/BackgroundImageAttachment/Fixed: Fixar em relação à janela
+Settings/BackgroundImageAttachment/Scroll: Rolar com tiddlers
+Settings/BackgroundImageSize: Tamanho da imagem de fundo
+Settings/BackgroundImageSize/Auto: Repetir
+Settings/BackgroundImageSize/Contain: Estender
+Settings/BackgroundImageSize/Cover: Completar
+Settings/CodeFontFamily: Família da fonte de código
+Settings/FontFamily: Família da fonte
+ThemeTweaks: Personalizar Estilo
+ThemeTweaks/Hint: Pode ajustar alguns parâmetros do tema ''Vanilla''.

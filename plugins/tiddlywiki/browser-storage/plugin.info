@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/browser-storage",
+	"name": "Browser Storage",
+	"description": "Local storage in the browser",
+	"list": "readme settings"
+}

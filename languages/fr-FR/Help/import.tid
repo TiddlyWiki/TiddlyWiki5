@@ -1,0 +1,24 @@
+title: $:/language/Help/import
+description: Importe des tiddlers depuis un fichier
+
+Importe des tiddlers depuis des fichiers locaux TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` ou autres. Le désérialiseur doit être spécifié explicitement, à la différence de la commande `load` qui déduit le désérialiseur à utiliser à partir de l'extension du fichier.
+
+```
+--import <chemin-du-fichier> <désérialiseur> [<titre>] [<encodage>]
+```
+
+Les principaux désérialiseurs présents par défaut sont :
+
+* application/javascript
+* application/json
+* application/x-tiddler
+* application/x-tiddler-html-div
+* application/x-tiddlers
+* text/html
+* text/plain
+
+S'il n'est pas spécifié, le titre du tiddler importé a pour valeur le nom du fichier.
+
+L'encodage par défaut est "utf8", mais peut valoir "base64" en cas d'importation des fichiers binaires.
+
+À noter que TiddlyWiki refusera d'importer pas une version plus ancienne d'un plugin déjà chargé.

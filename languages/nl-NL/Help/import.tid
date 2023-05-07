@@ -1,0 +1,24 @@
+title: $:/language/Help/import
+description: Importeer tiddlers van een bestand
+
+Importeer tiddlers van TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` of andere lokale bestanden. De 'deserializer' moet expliciet gespecificeerd worden, anderes dan bij het 'load' commando dat de deserializer afleidt uit de extensie.
+
+```
+--import <bestandspad> <deserializer> [<titel>] [<codering>]
+```
+
+De deserializers in de core begrijpen:
+
+* application/javascript
+* application/json
+* application/x-tiddler
+* application/x-tiddler-html-div
+* application/x-tiddlers
+* text/html
+* text/plain
+
+Standaard is de bestandsnaam de titel van de geïmporteerde tiddler.
+
+Standaard is de codering "utf8", maar dit kan "base64" zijn voor importeren van binaire bestanden.
+
+N.B. TiddlyWiki importeert geen oudere versie van een al geladen plugin.

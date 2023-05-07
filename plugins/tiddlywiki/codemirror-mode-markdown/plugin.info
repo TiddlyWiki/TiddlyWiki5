@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-mode-markdown",
+	"name": "CodeMirror Mode Markdown",
+	"description": "Markdown highlighting mode for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"dependents": ["$:/plugins/tiddlywiki/codemirror-mode-xml"],
+	"list": "readme"
+}

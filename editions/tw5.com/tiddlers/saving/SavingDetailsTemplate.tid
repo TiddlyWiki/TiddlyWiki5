@@ -1,0 +1,21 @@
+title: $:/SavingDetailsTemplate
+
+\define platforms()
+<$set name="platforms" tiddler=<<currentTab>> field="platforms">
+<$list filter="[<currentTab>tags[]sort[]] -Resources -Saving -plugins" variable="platform">
+<span class="tc-saving-details-platform">
+<$text text=<<platform>>/>
+</span>
+</$list>
+</$set>
+\end
+
+<h1><$link to=<<currentTab>>><$view tiddler=<<currentTab>> field="title"/></$link></h1>
+
+|!Method |<$view tiddler=<<currentTab>> field="method"/> |
+|!Delivery |<$view tiddler=<<currentTab>> field="delivery"/> |
+|!Platforms: |<<platforms>> |
+
+<$tiddler tiddler=<<currentTab>>>
+<$transclude tiddler=<<currentTab>> field="text" mode="block"/>
+</$tiddler>

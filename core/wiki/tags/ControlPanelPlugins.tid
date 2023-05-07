@@ -1,2 +1,2 @@
 title: $:/tags/ControlPanel/Plugins
-list: [[$:/core/ui/ControlPanel/Plugins/Installed]] [[$:/core/ui/ControlPanel/Plugins/Add]]
+list: $:/core/ui/ControlPanel/Plugins/Installed/Plugins $:/core/ui/ControlPanel/Plugins/Installed/Themes $:/core/ui/ControlPanel/Plugins/Installed/Languages

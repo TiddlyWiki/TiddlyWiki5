@@ -1,6 +1,7 @@
 {
 	"description": "Spanish (Spain) edition",
 	"plugins": [
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

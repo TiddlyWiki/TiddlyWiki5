@@ -1,0 +1,9 @@
+created: 20180701175127987
+modified: 20180702140238032
+tags: [[WebServer Authentication]]
+title: WebServer Header Authentication
+type: text/vnd.tiddlywiki
+
+Header authentication is a web integration technique enabling external entities to securely pass details of the authenticated user to an application. It is commonly used for "single sign on" in corporate environments.
+
+Header authentication is activated if is configured via the [[authenticated-user-header|WebServer Parameter: authenticated-user-header]]

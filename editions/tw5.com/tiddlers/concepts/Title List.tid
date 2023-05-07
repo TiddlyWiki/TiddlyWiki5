@@ -1,7 +1,8 @@
 created: 20150117152418000
-modified: 20150124205659000
+modified: 20220523075540462
 tags: Concepts
 title: Title List
+type: text/vnd.tiddlywiki
 
 A <<.def "title list">> is a line of text that presents one or more tiddler titles, strung together with a space between each one and the next.
 
@@ -12,3 +13,5 @@ If a title <<.em contains>> a space, it needs double square brackets around it:
 Title lists are used in various places, including PermaLinks and the ListField.
 
 They are in fact the simplest case of a [[filter|Filters]], and are thus a way of expressing a [[selection of titles|Title Selection]].
+
+<<.warning """The [[Title List]] format cannot reliably represent items that contain certain specific character sequences such as `]] `. Thus it should not be used where there is a possibility of such sequences occurring.""">>

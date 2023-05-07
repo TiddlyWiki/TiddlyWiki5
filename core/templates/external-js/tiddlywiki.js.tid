@@ -1,0 +1,48 @@
+
+title: $:/core/templates/tiddlywiki5.js
+
+\rules only filteredtranscludeinline transcludeinline codeinline
+
+`/*
+`{{ $:/core/copyright.txt ||$:/core/templates/plain-text-tiddler}}`
+*/
+
+$tw = (typeof $tw === 'undefined') ? Object.create(null) : $tw;
+
+$tw.preloadTiddlers = $tw.preloadTiddlers || [];
+
+_load = function(window,tiddler) {
+	"use strict";
+	var f;
+	$tw.preloadTiddlers.push(tiddler);
+	if(tiddler.library === "yes") {
+		var module = { exports:{} };
+		var moduleName = function moduleName(path) {
+			var word = path.split("/").pop();
+			word = word.substring(0,word.indexOf(".")) || word;
+			return word;
+		}
+		f = new Function("module",tiddler.text);
+		f(module);
+		window[moduleName(tiddler.title)] = module.exports;
+	} else {
+		f = new Function("window",tiddler.text);
+		f(window);
+	}
+}
+
+/* ~~ Library modules ~~ */
+
+`{{{ [is[system]type[application/javascript]library[yes]] ||$:/core/templates/tiddlywiki.js/load-tiddler}}}`
+
+/* ~~ Boot kernel prologue ~~ */
+
+`{{ $:/boot/bootprefix.js ||$:/core/templates/tiddlywiki.js/load-tiddler}}`
+
+/* ~~ Core tiddlers ~~ */
+
+`{{$:/core/templates/tiddlywiki5.js/tiddlers}}`
+
+/* ~~ Boot kernel ~~ */
+
+`{{ $:/boot/boot.js ||$:/core/templates/tiddlywiki.js/load-tiddler}}`

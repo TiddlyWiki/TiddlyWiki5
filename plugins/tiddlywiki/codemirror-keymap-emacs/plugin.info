@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-keymap-emacs",
+	"name": "CodeMirror Keymap Emacs",
+	"description": "Keymap compatible with Emacs for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"list": "readme"
+}

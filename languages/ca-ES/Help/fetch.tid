@@ -1,0 +1,37 @@
+title: $:/language/Help/fetch
+description: Obté tiddlers del wiki per URL
+
+Obté un o més fitxers per HTTP/HTTPS, i importa els tiddlers que compleixen un filtre, opcionalment transformant els títols entrants.
+
+```
+--fetch file <url> <filter-d-importacio> <filtre-de-transformacio>
+--fetch files <url-de-filter> <import-d-importacio> <filtre-de-transformacio>
+--fetch raw-file <url> <filtre-de-transformacio>
+--fetch raw-files <url-de-filter> <filtre-de-transformacio>
+```
+
+Les variants "fitxer" i "fitxers" obtenen els fitxers indicats i intenten importar els tiddlers dins d’ells (el mateix processament que si els fitxers s’arrosseguessin a la finestra del navegador). Les variants "text-en-cru" i "texts-en-cru" obtenen els fitxers especificats i després emmagatzemen les dades del fitxer com a text cru sense aplicar la lògica d'importació.
+
+Amb les variants "fitxer" i "texts-en-cru" només s'obté un sol fitxer i el primer paràmetre és l’URL del fitxer a llegir.
+
+Amb les variants "fitxers" i "texts-en-cru", s'obtenen diversos fitxers i el primer paràmetre és un filtre que proporciona una llista d’URL dels fitxers a llegir. Per exemple, donat un conjunt de tiddlers etiquetats com "servidor-remot" que tenen un camp "url", amb el filtre `[etiqueta[servidor-remot]get[url]]` recuperarà tots els URL disponibles.
+
+Per a les variants "fitxer" i "fitxers", el paràmetre `<import-filter> indica un filtre que determina quins tiddlers s’importen. Per omissió, és `[all[tiddlers]]` si no s'indica res.
+
+Per a totes les variants, el paràmetre `<transform-filter>` indica un filtre opcional que transforma els títols dels tiddlers importats. Per exemple, `[addprefix[$: /myimports /]]` afegiria el prefix `$: /myimports/` a cada títol.
+
+Precedint l’ordre `--fetch` amb` --verbose` s’obtindrà informació del progrés durant la importació.
+
+Tingueu en compte que TiddlyWiki no obtindrà una versió anterior d’un connector ja carregat.
+
+El següent exemple recupera tots els tiddlers que no siguin del sistema de https://tiddlywiki.com i els desa en un fitxer JSON:
+
+```
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" sortida.json text/plain "" exportFilter "[!is[system]]"
+```
+El següent exemple recupera el fitxer "favicon" de tiddlywiki.com i el desa en un fitxer anomenat "sortida.ico". Tingueu en compte que el tiddler intermedi "Icon Tiddler" està citat a l’ordre "--fetch" perquè s’utilitza com a filtre de transformació per substituir el títol per omisió, mentre que no hi ha cometes per a l’ordre "--savetiddler" perquè s’utilitza directament com a títol.
+
+```
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Tiddler d'icona]]" --savetiddler "Tiddler d'icona" sortida.ico
+```
+

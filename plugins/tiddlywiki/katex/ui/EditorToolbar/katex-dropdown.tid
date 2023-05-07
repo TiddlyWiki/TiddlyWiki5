@@ -1,0 +1,56 @@
+title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
+
+\define toolbar-button-stamp-inner()
+<$button tag="a">
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="replace-selection"
+	text={{$(snippetTitle)$}}
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<$view tiddler=<<snippetTitle>> field="caption" mode="inline">
+
+<$transclude tiddler=<<snippetTitle>> mode="inline"/>
+
+</$view>
+
+</$button>
+\end
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/KaTeX/Snippet]!has[draft.of]sort[caption]]" variable="snippetTitle">
+
+<<toolbar-button-stamp-inner>>
+
+</$list>
+
+----
+
+<$button tag="a">
+
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	tags="$:/tags/KaTeX/Snippet"
+	text="""$$snippet$$"""
+	caption="description shown in dropdown"
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+
+<em>
+
+<$text text={{$:/language/Buttons/Stamp/Caption/New}}/>
+
+</em>
+
+</$button>
+
+[ext[KaTeX functions catalogue|https://khan.github.io/KaTeX/function-support.html]]
+
+[ext[Chemical equations reference|https://mhchem.github.io/MathJax-mhchem/]]

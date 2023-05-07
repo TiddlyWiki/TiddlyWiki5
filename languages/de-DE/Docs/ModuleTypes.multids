@@ -2,6 +2,7 @@ title: $:/language/Docs/ModuleTypes/
 
 allfilteroperator: Ein Sub-Operator für den ''all'' Filter Operator.
 animation: Animationen, die vom RevealWidget verwendet werden.
+authenticator: Definiert, wie die Anfragen für den "HTTP Server" authentifiziert werden.
 bitmapeditoroperation: Eine "Bitmap-Editor" Toolbar Operation.
 command: Kommandozeilen-Parameter, die mit node.js ausgeführt werden können.
 config: Daten, die in `$tw.config` eingefügt werden.
@@ -12,6 +13,7 @@ isfilteroperator: Operanden für den Filter-Operator: ''is''
 library: Allgemeiner Modultyp, für JavaScript Module.
 macro: Globale Makro-Definitionen in JavaScript.
 parser: Parser für verschiedene Tiddler Typen.
+route: Definiert, wie die individuellen URL-Pfade vom HTTP Server verarbeitet werden.
 saver: "Savers" stellen verschiedene Methoden zum Speichern mit dem Browser zur Verfügung.
 startup: Funktionen zur Initialisierung.
 storyview: [[Story-View|Story]] ist für das Verhalten des "ListWidgets" zuständig, das die Tiddler "Hauptanzeige" verwaltet. Mit dem Toolbutton Story-Modus wird einer dieser Modi ausgewählt.
@@ -21,6 +23,7 @@ tiddlerfield: Definiert das Verhalten, der unterschiedlichen Tiddler-Felder.
 tiddlermethod: Methoden werden dem `$tw.Tiddler` Prototypen hinzugefügt.
 upgrader: Führt spezifische Änderungen während des Upgrade- oder Import-prozesses durch.
 utils: Methoden werden `$tw.utils` hinzugefügt.
+utils-browser: Browser-spezifische Methoden werden zu `$tw.utils` hinzugefügt.
 utils-node: Erweitert `$tw.utils` mit Methoden aus node.js.
 widget: Widgets verarbeiten das Rendern und Aktualisieren der Anzeige in der DOM.
 wikimethod: Methoden werden zu `$tw.Wiki` hinzugefügt.

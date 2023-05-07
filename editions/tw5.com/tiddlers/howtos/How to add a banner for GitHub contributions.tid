@@ -3,11 +3,11 @@ modified: 20141123094403948
 created: 20141123094403948
 tags: Learning
 
-When you edit a tiddler on http://tiddlywiki.com you will see a small ribbon inviting you to edit the source of the tiddler on GitHub.
+When you edit a tiddler on https://tiddlywiki.com you will see a small ribbon inviting you to edit the source of the tiddler on GitHub.
 
 If you are using Node.js, you can replicate this feature for your own TiddlyWiki-based site as follows:
 
-# Make sure the following setting is included in the `tiddlywiki.info` file in your WikiFolder:
+# Make sure the following setting is included in the <$link to="tiddlywiki.info Files">`tiddlywiki.info`</$link> file in your [[wiki folder|TiddlyWikiFolders]]:
 #> <pre><code>	"config": {
 		"retain-original-tiddler-path": true
 	}</code></pre>

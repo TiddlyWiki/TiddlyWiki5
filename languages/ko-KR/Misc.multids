@@ -1,8 +1,8 @@
 title: $:/language/
 
-AboveStory/ClassicPlugin/Warning: 티들리위키 클래식용으로 설계된 플러그인을 불러오려고 하는 것 같아 보입니다. [[이러한 플러그인은 티들리위키 버전 5.x.x에 동작하지 않음|http://tiddlywiki.com/#TiddlyWikiClassic]]을 참고하세요. 티들리위키 클래식 플러그인이 감지되었습니다:
+AboveStory/ClassicPlugin/Warning: 티들리위키 클래식용으로 설계된 플러그인을 불러오려고 하는 것 같아 보입니다. [[이러한 플러그인은 티들리위키 버전 5.x.x에 동작하지 않음|https://tiddlywiki.com/#TiddlyWikiClassic]]을 참고하세요. 티들리위키 클래식 플러그인이 감지되었습니다:
 BinaryWarning/Prompt: 이 티들러는 바이너리 데이터를 포함합니다
-ClassicWarning/Hint: 이 티들러는 티들리위키 클래식 위키 텍스트 형식으로 쓰여져 있으며, 티들리위키 버전 5와 완전히 호환되지 않습니다. 자세한 사항은 [[http://tiddlywiki.com/static/Upgrading.html]]을 보세요.
+ClassicWarning/Hint: 이 티들러는 티들리위키 클래식 위키 텍스트 형식으로 쓰여져 있으며, 티들리위키 버전 5와 완전히 호환되지 않습니다. 자세한 사항은 [[https://tiddlywiki.com/static/Upgrading.html]]을 보세요.
 ClassicWarning/Upgrade/Caption: 업그레이드
 CloseAll/Button: 모두 닫기
 ColourPicker/Recent: 최근:
@@ -33,10 +33,9 @@ Error/WhileSaving: 저장하는 동안 오류
 Error/XMLHttpRequest: XMLHttpRequest 오류 코드
 InternalJavaScriptError/Hint: 아이 창피해. 브라우저를 새로 고쳐 티들리위키를 다시 시작할 것을 권장합니다
 InternalJavaScriptError/Title: 내부 자바스크립트 오류
-InvalidFieldName: "<$text text=<<fieldName>>/>" 필드 이름에 잘못된 문자가 있습니다. 필드는 소문자, 숫자 및 밑줄 문자 (`_`), 하이픈 (`-`) 및 마침표 (`.`)만을 포함할 수 있습니다.
-LazyLoadingWarning: <p>''<$text text={{!!_canonical_uri}}/>''에서 바깥 텍스트를 불러오는 중입니다</p><p>이 메시지가 사라지지 않으면 이 구성에서 바깥 텍스트를 지원하지 않는 브라우저를 사용하고 있을 수 있습니다. [[http://tiddlywiki.com/#ExternalText]]를 보세요</p>
+LazyLoadingWarning: <p>''<$text text={{!!_canonical_uri}}/>''에서 바깥 텍스트를 불러오는 중입니다</p><p>이 메시지가 사라지지 않으면 이 구성에서 바깥 텍스트를 지원하지 않는 브라우저를 사용하고 있을 수 있습니다. [[https://tiddlywiki.com/#ExternalText]]를 보세요</p>
 LoginToTiddlySpace: TiddlySpace에 로그인
-MissingTiddler/Hint: "<$text text=<<currentTiddler>>/>" 티들러가 없습니다 - 만드려면 {{$:/core/images/edit-button}}을 클릭하세요
+MissingTiddler/Hint: "<$text text=<<currentTiddler>>/>" 티들러가 없습니다 - 만드려면 {{||$:/core/ui/Buttons/edit}}을 클릭하세요
 No: 아니오
 OfficialPluginLibrary: 공식 티들리위키 플러그인 라이브러리
 OfficialPluginLibrary/Hint: tiddlywiki.com에서의 공식 티들리위키 플러그인 라이브러리입니다. 플러그인, 테마 및 언어 팩은 코어 팀이 유지 관리하고 있습니다.

@@ -1,12 +1,15 @@
+created: 20220504124110967
+modified: 20220504124250020
 title: HelloThere
+type: text/vnd.tiddlywiki
 
-This is a TiddlyWiki plugin for mathematical typesetting based on KaTeX from Khan Academy.
+This is a TiddlyWiki plugin for mathematical and chemical typesetting based on KaTeX from Khan Academy.
 
 It is completely self-contained, and doesn't need an Internet connection in order to work. It works both in the browser and under Node.js.
 
 ! Installation
 
-To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
+To add the plugin to your own wiki, just //drag the following link to your ~TiddlyWiki browser window//.
 
 [[$:/plugins/tiddlywiki/katex]]
 
@@ -16,9 +19,9 @@ The usual way to include ~LaTeX is to use `$$`, as shown in the examples below.
 
 The underlying KaTeX widget is provided under the name `<$latex>` and is also available under the alias `<$katex>`. It's better to use the generic `<$latex>` name unless you are running multiple ~LaTeX plugins and wish to specifically target KaTeX.
 
-! Examples
+! Examples - mathematical typesetting
 
-These examples are taken from http://khan.github.io/KaTeX/
+These examples are taken from [ext[http://khan.github.io/KaTeX/]]
 
 !! Example 1
 
@@ -69,7 +72,7 @@ For more flexibility the KaTeX widget can also be used via the full widget synta
 
 <$latex text="f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi" displayMode="true"></$latex>
 
-! Error Handling
+! ''Error Handling''
 
 Any LaTeX syntax errors are flagged with the problematic syntax highlighted. For example:
 
@@ -79,3 +82,85 @@ $$ f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$
 
 $$ f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi $$
 
+<hr>
+
+! Examples - chemical typesetting
+
+These examples are taken from [ext[https://mhchem.github.io/MathJax-mhchem/]]
+
+!! Example 1
+
+```
+$$
+\ce{CO2 + C -> 2 CO}
+$$
+```
+
+$$
+\ce{CO2 + C -> 2 CO}
+$$
+
+
+!! Example 2
+
+```
+$$
+\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+$$
+```
+
+$$
+\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}
+$$
+
+
+!! Example 3
+
+```
+$$
+\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}
+$$
+```
+
+$$
+\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}
+$$
+
+
+!! Example 4
+
+```
+$$
+\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D}
+$$
+```
+
+$$
+\ce{A\bond{~--}B\bond{~=}C\bond{-~-}D}
+$$
+
+
+!! Example 5
+
+```
+$$
+\ce{Li^x_{Li,1-2x}Mg^._{Li,x}$V$'_{Li,x}Cl^x_{Cl}}
+$$
+```
+
+$$
+\ce{Li^x_{Li,1-2x}Mg^._{Li,x}$V$'_{Li,x}Cl^x_{Cl}}
+$$
+
+
+!! Example 6
+
+```
+$$
+\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
+$$
+```
+
+$$
+\ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteres Hydroxid}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{Hydroxozikat}}{\ce{[Zn(OH)4]^2-}}$}
+$$

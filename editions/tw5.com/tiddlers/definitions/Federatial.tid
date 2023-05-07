@@ -1,0 +1,21 @@
+created: 20130825154900000
+modified: 20170718160846820
+modified: 20221204165636777
+tags: Definitions
+title: Federatial
+type: text/vnd.tiddlywiki
+
+Federatial Limited helps organisations explore new user interaction concepts through rapid prototyping of sophisticated web-based tools. Services include:
+
+* Consultancy advice on TiddlyWiki adoption
+* Development of custom solutions based on TiddlyWiki
+* Multi-user TiddlyWiki hosting – no outages since 2016
+* Sponsorship of TiddlyWiki core development
+
+See https://federatial.com/ and https://twitter.com/federatial for more information.
+
+JeremyRuston founded Federatial Limited in 2011 to support his work on TiddlyWiki for the advertised 25 years. Since then, Federatial has been privileged to have worked with a wide range of fantastic clients in very different sectors, on some very diverse projects:
+
+* For a law firm in the Washington DC, developing a custom multi-user ~TiddlyWiki application. It replaced a Microsoft Word document hosted on ~SharePoint that had grown to 18,000 pages and 10 million words, and was increasingly unwieldy to manage. We converted the document to a non-linear TiddlyWiki structure. Startup, searching and browsing are an order of magnitude faster than using Word and ~SharePoint
+* For a publishing firm in Paris, devising a new TiddlyWiki-based format for interactive electronic publications (including conversion from the established EPUB format). See https://twpub-tools.org/
+* For a charity in London, maintaining a multiuser instance of TiddlyWiki running on Amazon's serverless infrastructure. It has more than 1,000 users, and over 15,000 tiddlers in 500 interlinked wikis. See https://manuals.annafreud.org/ambit

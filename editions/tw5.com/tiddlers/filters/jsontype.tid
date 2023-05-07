@@ -1,0 +1,74 @@
+created: 20220611104737314
+modified: 20220611104737314
+tags: [[Filter Operators]] [[JSON Operators]]
+title: jsontype Operator
+caption: jsontype
+op-purpose: retrieve the type of a property from JSON strings
+op-input: a selection of JSON strings
+op-parameter: one or more indexes of the property whose type is to be retrieved
+op-output: the types of each of the retrieved properties
+
+<<.from-version "5.2.4">> See [[JSON in TiddlyWiki]] for background.
+
+The <<.op jsontype>> operator is used to retrieve the type of a property in JSON data. See also the following related operators:
+
+* <<.olink jsonget>> to retrieve the values of a property in JSON data
+* <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+* <<.olink jsonextract>> to retrieve a JSON value as a string of JSON
+
+JSON supports the following data types:
+
+* ''string'' - a Unicode string
+* ''number'' - a floating point number
+* ''boolean'' - Boolean value (true or false)
+* ''array'' - an array of values
+* ''object'' - an object of name/value pairs
+* ''null'' - a special type representing a missing value
+
+Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
+
+```
+{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+```
+
+The following examples assume that this JSON data is contained in a variable called `jsondata`.
+
+The <<.op jsontype>> operator uses multiple operands to specify the indexes of the property whose type is to be retrieved:
+
+```
+[<jsondata>jsontype[a]] --> "string"
+[<jsondata>jsontype[d]] --> "object"
+[<jsondata>jsontype[d],[f]] --> "array"
+[<jsondata>jsontype[d],[f],[2]] --> "boolean"
+```
+
+Indexes can be dynamically composed from variables and transclusions:
+
+```
+[<jsondata>jsontype<variable>,{!!field},[0]]
+```
+
+A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+
+```
+[<jsondata>jsontype[]] --> "object"
+```

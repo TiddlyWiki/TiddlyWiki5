@@ -1,25 +1,35 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: 这是保存于主要的 TiddlyWiki 文件之外的外部条目。你可以编辑其标签和栏位，但不能直接编辑内容本身
+Caption: 编辑器
+Body/External/Hint: 此条目显示保存于主要的 TiddlyWiki 文件之外的内容。你可以编辑其标签和字段，但不能直接编辑内容本身
 Body/Placeholder: 输入此条目的内容
 Body/Preview/Type/Output: 输出
-Field/Remove/Caption: 删除栏位
-Field/Remove/Hint: 删除栏位
+Body/Preview/Type/DiffShadow: 与影子条目的差异（如果有）
+Body/Preview/Type/DiffCurrent: 与当前条目的差异
+Field/Remove/Caption: 删除字段
+Field/Remove/Hint: 删除字段
+Field/Dropdown/Caption: 字段列表
+Field/Dropdown/Hint: 显示字段列表
 Fields/Add/Button: 添加
-Fields/Add/Dropdown/System: 系统栏位
-Fields/Add/Dropdown/User: 使用者栏位
-Fields/Add/Name/Placeholder: 栏位名称
-Fields/Add/Prompt: 添加栏位：
-Fields/Add/Value/Placeholder: 栏位内容
+Fields/Add/Button/Hint: 添加字段至条目
+Fields/Add/Dropdown/System: 系统字段
+Fields/Add/Dropdown/User: 使用者字段
+Fields/Add/Name/Placeholder: 字段名称
+Fields/Add/Prompt: 添加字段：
+Fields/Add/Value/Placeholder: 字段内容
 Shadow/Warning: 这是一个默认条目。您做的任何更改将会覆盖来自 <<pluginLink>> 插件的默认版本。
 Shadow/OverriddenWarning: 这是一个修改过的默认条目。删除此条目可以还原为 <<pluginLink>> 插件中的默认版本。
 Tags/Add/Button: 添加
+Tags/Add/Button/Hint: 添加标签
 Tags/Add/Placeholder: 标签名称
+Tags/ClearInput/Caption: 清除输入
+Tags/ClearInput/Hint: 清除标签输入
 Tags/Dropdown/Caption: 标签清单
 Tags/Dropdown/Hint: 显示标签清单
 Title/BadCharacterWarning: 请注意，避免在条目名称中使用这些字符：<<bad-chars>>
 Title/Exists/Prompt: 目标条目已经存在
-Title/Relink/Prompt: 将在其他条目的 //tags// 和 //list// 栏位中的 ''<$text text=<<fromTitle>>/>'' 改为 ''<$text text=<<toTitle>>/>''
+Title/Relink/Prompt: 将在其他条目的 //tags// 和 //list// 字段中的 ''<$text text=<<fromTitle>>/>'' 改为 ''<$text text=<<toTitle>>/>''
+Title/References/Prompt: 下列对此条目的引用，不会自动更新：
 Type/Dropdown/Caption: 内容类型清单
 Type/Dropdown/Hint: 显示内容类型清单
 Type/Delete/Caption: 删除内容类型

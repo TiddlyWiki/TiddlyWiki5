@@ -10,11 +10,11 @@ Diese Methode ist etwas umständlich, da man Einstellungen immer wieder manuell 
 
 !! Speichern mit Chrome
 
-<<iframe-responsive src:"http://www.youtube.com/embed/LcoZ7hQCuFI">>
+<<iframe-responsive src:"https://www.youtube.com/embed/LcoZ7hQCuFI">>
 
 # Speichern Sie eine leere Datei der deutschen Version.
 #> {{$:/editions/de-AT-DE/snippets/download-empty-button}}
-#> Wenn der Button nicht funktioniert, dann klicken Sie den Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."  http://tiddlywiki.com/languages/de-AT/empty.html oder http://tiddlywiki.com/languages/de-DE/empty.html
+#> Wenn der Button nicht funktioniert, dann klicken Sie den Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."  https://tiddlywiki.com/languages/de-AT/empty.html oder https://tiddlywiki.com/languages/de-DE/empty.html
 #> Je nach Browser folgen Sie den Dialogen!
 # Suchen Sie die eben geladene Datei im Datei Manager.
 #* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` oder `.htm` ist.

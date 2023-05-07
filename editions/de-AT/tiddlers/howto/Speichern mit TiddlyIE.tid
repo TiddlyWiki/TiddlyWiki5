@@ -8,15 +8,15 @@ type: text/vnd.tiddlywiki
 
 !! Speichern mit TiddlyIE
 
-<<iframe-responsive src:"http://www.youtube.com/embed/OrWuvjs3Ly0">>
+<<iframe-responsive src:"https://www.youtube.com/embed/OrWuvjs3Ly0">>
 
 # Installieren Sie TiddlyIE AddOn von:
 #* https://github.com/davidjade/TiddlyIE/releases
 # Starten Sie Internet Explorer neu. IE wird beim Start einen Dialog anzeigen, mit dem Sie das AddOn freischalten können.
 #> Es ist möglich, dass Sie aufgefordert werden das //Microsoft Script Runtime// zu erlauben. Tun Sie das!
 #  Klicken Sie den folgenden Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."
-#> http://tiddlywiki.com/languages/de-AT/empty.html oder
-#> http://tiddlywiki.com/languages/de-DE/empty.html
+#> https://tiddlywiki.com/languages/de-AT/empty.html oder
+#> https://tiddlywiki.com/languages/de-DE/empty.html
 # Suchen Sie die eben geladene Datei im Datei Manager.
 #* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` ist.
 # Öffnen Sie die Datei mit dem Internet Explorer

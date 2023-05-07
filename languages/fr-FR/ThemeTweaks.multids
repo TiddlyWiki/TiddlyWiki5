@@ -12,6 +12,7 @@ Options/CodeWrapping: Enroule les lignes trop longues à l'intérieur des blocs 
 Settings: Réglages
 Settings/FontFamily: Famille de polices
 Settings/CodeFontFamily: Famille de polices pour le code
+Settings/EditorFontFamily: Famille de polices pour l'éditeur
 Settings/BackgroundImage: Image de fond de page
 Settings/BackgroundImageAttachment: Arrimage de l'image de fond de page
 Settings/BackgroundImageAttachment/Scroll: Défile avec les tiddlers

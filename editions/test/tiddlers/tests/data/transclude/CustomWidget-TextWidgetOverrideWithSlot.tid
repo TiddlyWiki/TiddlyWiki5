@@ -1,0 +1,31 @@
+title: Transclude/CustomWidget/TextWidgetOverrideWithSlot
+description: Custom widget definition redefining the text widget
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne'>
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<!-- Redefine the <$text> widget by defining a transcludable variable with that name -->
+\widget $text(text:'Jaguar')
+\whitespace trim
+<$genesis $type="$text" $remappable="no" text=<<text>>/>
+<$set name="$text" value="">
+	<$slot $name="ts-raw">
+		Whale
+	</$slot>
+</$set>
+\end
+<$text text="Dingo">
+	Crocodile
+</$text>
++
+title: ExpectedResult
+
+<p>DingoCrocodile</p>

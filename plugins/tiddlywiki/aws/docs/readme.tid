@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/aws/readme
+
+This plugin provides several tools for working with Amazon Web Services:
+
+* Templates for saving a TiddlyWiki as a single JavaScript file in a ZIP file that can be executed as an AWS Lambda function. In this form, TiddlyWiki is a self contained single file containing both code and data, just like the standalone HTML file configuration
+* Commands that can be used to interact with AWS services, under both the Node.js and Lambda configurations of TiddlyWiki
+* A new "aws-encodeuricomponent" filter that acts like the core "encodeuricomponent" filter except it additionally encodes the single quote character

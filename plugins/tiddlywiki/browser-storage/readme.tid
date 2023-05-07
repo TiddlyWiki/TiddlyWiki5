@@ -1,0 +1,32 @@
+title: $:/plugins/tiddlywiki/browser-storage/readme
+
+This plugin enables ~TiddlyWiki to save tiddlers in [[browser local storage|https://en.wikipedia.org/wiki/Web_storage#localStorage]]. This means that changes are stored within the browser, and automatically re-applied any time the base wiki is reloaded.
+
+At startup, the plugin reads tiddlers from local storage. Any tiddlers that are identical to those built into the file are deleted from local storage. Once the wiki is up and running, any tiddler changes are written straight to local storage.
+
+!! Optional use with ~TiddlyWeb plugin
+
+For wikis served from a ~TiddlyWeb compatible server, including the ~TiddlyWiki Node JS server, this plugin may be added to provide temporary local storage of tiddler changes when the [[tiddlyweb sync adapter|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/tiddlyweb]] is unable to successfully synchronise with the server, and to automatically synchronise tiddlers saved offline in browser storage once connection is re-established. The use of browser storage allows for tiddlers saved offline to be synchronised with the server even in the case where the browser is closed or the user (purposely, accidentally, or automatically in the case of a mobile browser periodically refreshing) navigates away from the wiki.
+
+Changes will be synchronised with the server the next time the wiki is loaded in the browser. Tiddlers are removed from browser-storage once synchronised to the server.
+
+By default only state tiddlers are saved by this plugin. On the settings tab, you can update the Save Filter to save all content and system tiddlers. The third example provided is a good choice. 
+
+!!! Limitations
+
+* ''Deleted tiddlers:'' Tiddler deletions while offline are not synchronised with the server due to technical limitations. The intent of using this plugin with a ~TiddlyWeb server is to prevent the loss of new or modified content while temporarily offline. 
+* ''Title changes:'' Tiddlers are saved by title, so a change to a tiddler title will be saved and synchronised to the server, but it will not overwrite the tiddler with the original title. 
+* ''Browser storage:'' While useful as a safety measure for //temporary// offline usage, as noted below, browser storage itself has limitations that could still result in losing data in some cases.   
+
+!!Browser local storage is not a panacea for TiddlyWiki:
+
+* Browsers limit the amount of local storage available to a page, typically to 5 or 10MB
+* Keeping personal data in browser local storage can lead to unexpected privacy violations
+* Browsers reserve the right to without warning delete data stored in local storage at any time
+* Browsers tie local storage to a URL which can lead to problems if you move a wiki to a URL previously occupied by a different wiki
+
+Please use this plugin with caution. There are a number of unresolved issues and open questions:
+
+* Innerwikis read the local storage of their parent wikis
+* This plugin does not interfere with the existing saver mechanism, so you'll still get warnings when refreshing the page, even if your changes are safely committed to local storage
+* There is a possibility that tiddlers might be transferred between different wikis if they are accessed via the same URL. This is particularly likely when running in local client server configuration under Node.js

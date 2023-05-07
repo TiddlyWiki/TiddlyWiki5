@@ -5,7 +5,7 @@ tags: Learning
 title: How to add a banner for GitHub contributions
 type: text/vnd.tiddlywiki
 
-Lorsque vous éditez un tiddler sur http://tiddlywiki.com, vous voyez un petit bandeau qui vous invite à éditer la source du tiddler sur ~GitHub.
+Lorsque vous éditez un tiddler sur https://tiddlywiki.com, vous voyez un petit bandeau qui vous invite à éditer la source du tiddler sur ~GitHub.
 
 Si vous utilisez Node.js, vous pouvez répliquer cette fonction pour votre propre site basé sur TiddlyWiki de la manière suivante<<dp>>
 

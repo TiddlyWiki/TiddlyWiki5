@@ -1,0 +1,11 @@
+created: 20180630193939007
+modified: 20180701184519624
+tags: WebServer
+title: WebServer Authentication
+type: text/vnd.tiddlywiki
+
+''Authentication'' is the process of identifying the current user. TiddlyWiki supports three types of authentication:
+
+* [[Anonymous Access|WebServer Anonymous Access]] allows any user to access resources without requiring authentication. Optionally, a username can still be specified for signing edits
+* [[Basic Authentication|WebServer Basic Authentication]] requires the user to enter a username and password combination which TiddlyWiki validates against an internal database of credentials
+* [[Header Authentication|WebServer Header Authentication]] requires an external proxy to place the username of the current user in a trusted header of the request. It is often used as the basis of "single sign-on" features

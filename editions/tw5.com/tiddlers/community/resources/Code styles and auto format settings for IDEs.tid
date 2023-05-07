@@ -1,0 +1,10 @@
+created: 20181108094230499
+modified: 20210106151027417
+tags: [[Other Resources]]
+title: Code styles and auto format settings for IDEs
+type: text/vnd.tiddlywiki
+url: https://gitlab.com/bimlas/tw5-code-style-auto-format
+
+Implementation of TiddlyWiki [[Coding Style Guidelines|https://tiddlywiki.com/dev/#TiddlyWiki%20Coding%20Style%20Guidelines]] for different IDEs.
+
+{{!!url}}

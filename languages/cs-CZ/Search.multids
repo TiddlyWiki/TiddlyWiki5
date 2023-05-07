@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Seznam
 Filter/Caption: Filtr
-Filter/Hint: Hledat pomocí [[filter expression|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Hledat pomocí [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small>nalezeno <<resultCount>></small>//
 Matches: //<small>nalezeno <<resultCount>></small>//
 Shadows/Caption: Stínové

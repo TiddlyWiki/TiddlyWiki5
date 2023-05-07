@@ -1,0 +1,17 @@
+caption: fixed
+created: 20190611150505495
+modified: 20190611150931872
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers converted to fixed point notation with <<.place N>> digits after the decimal point
+op-parameter: a number
+op-parameter-name: N
+op-purpose: convert each number to fixed point notation with <<.place N>> digits after the decimal point
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]]
+title: fixed Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+The ''fixed'' operator returns a string representation of the input number that does not use exponential notation and has exactly the specified number of digits after the decimal place. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length.
+
+<<.operator-examples "fixed">>

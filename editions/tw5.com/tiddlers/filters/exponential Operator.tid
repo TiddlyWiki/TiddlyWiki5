@@ -1,0 +1,17 @@
+caption: exponential
+created: 20190611154259136
+modified: 20190611154505880
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input as numbers converted to exponential notation with <<.place N>> digits
+op-parameter: a number
+op-parameter-name: N
+op-purpose: convert each number to exponential notation with <<.place N>> digits
+tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]]
+title: exponential Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+The ''exponential'' operator returns a string representation of the input number in exponential notation with the specified number of digits. If a number has more digits than requested, the number is rounded to the nearest number represented by the specified number of digits
+
+<<.operator-examples "exponential">>

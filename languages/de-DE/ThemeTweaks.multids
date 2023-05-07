@@ -4,14 +4,15 @@ ThemeTweaks: Theme Tweaks
 ThemeTweaks/Hint: Hier können sie verschiedene Elemente des ''Vanilla'' (Standard) Themas einstellen.
 Options: Optionen
 Options/SidebarLayout: Seitenleiste Darstellung
-Options/SidebarLayout/Fixed-Fluid: Fixe Story, variable Seitenleiste
-Options/SidebarLayout/Fluid-Fixed: Variable Story, fixe Seitenleiste
+Options/SidebarLayout/Fixed-Fluid: Fixe "Story", variable Seitenleiste
+Options/SidebarLayout/Fluid-Fixed: Variable "Story", fixe Seitenleiste
 Options/StickyTitles: "Klebender Titel"
 Options/StickyTitles/Hint: Tiddler-Titel bleiben beim "Scrollen" am oberen Bildschirmrand "kleben". Funktioniert möglicherweise nicht mit jedem Browser.
 Options/CodeWrapping: Lange Zeilen in "Code-Blöcken" umbrechen
 Settings: Einstellungen
 Settings/FontFamily: Schriftfamilie
 Settings/CodeFontFamily: "Code" Schriftfamilie
+Settings/EditorFontFamily: Editor Schriftfamilie
 Settings/BackgroundImage: Hintergrundbild für die Seite
 Settings/BackgroundImageAttachment: Hintergrundbild Anhang
 Settings/BackgroundImageAttachment/Scroll: Mit Inhalt "scrollen"

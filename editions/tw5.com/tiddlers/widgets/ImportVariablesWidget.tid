@@ -1,9 +1,9 @@
+caption: importvariables
 created: 20140612142500000
-modified: 20140612175900970
+modified: 20180928150043777
 tags: Widgets
 title: ImportVariablesWidget
 type: text/vnd.tiddlywiki
-caption: importvariables
 
 ! Introduction
 
@@ -30,4 +30,12 @@ So-called global macros are implemented within the main page template ([[$:/core
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 ...
 </$importvariables>
+```
+
+! `\import` Pragma
+
+<<.from-version "5.1.18">> The [[Pragma: \import]] is an alternative syntax for using the ImportVariablesWidget. For example, the previous example could be expressed as:
+
+```
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
 ```

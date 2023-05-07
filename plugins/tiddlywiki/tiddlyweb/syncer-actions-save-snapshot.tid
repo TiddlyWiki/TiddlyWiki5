@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/syncer-actions/save-snapshot
+tags: $:/tags/SyncerDropdown
+
+<$button class="tc-btn-invisible">
+<$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
+<$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
+</$wikify>
+{{$:/core/images/download-button}} Save snapshot for offline use
+</$button>

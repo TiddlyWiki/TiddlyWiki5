@@ -1,0 +1,23 @@
+created: 20180307153530187
+modified: 20180307153530187
+tags: Learning
+title: TaskManagementExample (Draggable)
+type: text/vnd.tiddlywiki
+
+This is a version of the TaskManagementExample enhanced with the ability to drag and drop the task list to re-order them.
+
+! Outstanding tasks
+
+//Drag the tasks to re-order them//
+
+<<list-tagged-draggable tag:"task" subFilter:"!has[draft.of]!tag[done]" itemTemplate:"TaskManagementExampleDraggableTemplate" emptyMessage:"You don't have any active tasks">>
+
+! Completed tasks
+
+//(Listed in reverse order of completion)//
+
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[modified]]">
+<div>
+<$checkbox tag="done"> ~~<$link/>~~</$checkbox>
+</div>
+</$list>

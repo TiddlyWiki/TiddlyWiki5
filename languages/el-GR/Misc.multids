@@ -1,22 +1,71 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: Φαίνεται πως προσπαθείτε να φορτώσετε ένα πρόσθετο που έχει σχεδιαστεί για την έκδοση  ~TiddlyWiki Classic. Παρακαλώ σημειώστε ότι [[αυτά τα πρόσθετα δεν λειτουργούν με την έκδοση 5.x.x του TiddlyWiki|https://tiddlywiki.com/#TiddlyWikiClassic]]. Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic:
 BinaryWarning/Prompt: Αυτό το tiddler περιέχει δυαδικά δεδομένα
-ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την TiddlyWiki κλασική μορφή κειμένου, που δεν είναι πλήρως συμβατή με αυτήν του TiddlyWiki 5ης έκδοσης. Δείτε στο  http://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες. 
+ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την TiddlyWiki κλασική μορφή κειμένου, που δεν είναι πλήρως συμβατή με αυτήν του TiddlyWiki 5ης έκδοσης. Δείτε στο  https://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες.
 ClassicWarning/Upgrade/Caption: αναβάθμιση
 CloseAll/Button: κλείστα όλα
+ColourPicker/Recent: Πρόσφατα:
 ConfirmCancelTiddler: Θέλετε να απορριφθούν οι όποιες τροποποιήσεις έχετε κάνει για το tiddler "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Θέλετε να διαγραφεί το tiddler "<$text text=<<title>>/>"?
-ConfirmOverwriteTiddler: Θέλετε να αντικαταστήσετε το tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Πρόκειται να τροποποιήσετε ένα Σκιώδη Tiddler. Οποιεσδήποτε τροποποιήσεις θα αντικαταστήσουν το τυπικό σύστημα και υπάρχει κίνδυνος να δυσκολευτείτε σε σε μελλοντική αναβάθμιση. Είστε σίγουροι ότι θέλετε να τροποποιήσετε το "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Θέλετε να αντικαταστήσετε το tiddler "<$text text=<<title>>/>"?
+Count: απαρίθμηση
 DefaultNewTiddlerTitle: Νέο tiddler
 DropMessage: Ρίχτε εδώ (ή πατήστε το πλήκτρο Esc για ακύρωση)
+Encryption/Cancel: Άκυρο
 Encryption/ConfirmClearPassword: Θέλετε να καθαρίσετε το συνθηματικό; Αυτό θα έχει ως συνέπεια να μην κρυπτογραφητε το wiki όταν κάνετε αποθήκευση
+Encryption/Password: Συνθηματικό
+Encryption/PasswordNoMatch: Τα συνθηματικά δεν ταιριάζουν
 Encryption/PromptSetPassword: Ορίστε το νέο συνθηματικό για αυτό το TiddlyWiki
-InvalidFieldName: Μη έγκυροι χαρακτήρες στο όνομα πεδίου "<$text text=<<fieldName>>/>". Τα ονόματα πεδίων μπορούν να περιέχουν μόνο πεζούς χαρακτήρες, ψηφία και τους χαρακτήρες κάτω παύλα (`_`), μείον (`-`) και τελεία (`.`)
-MissingTiddler/Hint: Ανύπαρκτο tiddler "<$text text=<<currentTiddler>>/>" - κάντε κλικ {{$:/core/images/edit-button}} για να δημιουργηθεί
+Encryption/RepeatPassword: Επαναλάβατε το συνθηματικό
+Encryption/SetPassword: Ορίστε το συνθηματικό
+Encryption/Username: Όνομα χρήστη
+Error/Caption: Σφάλμα
+Error/Filter: Σφάλμα φίλτρου
+Error/FilterSyntax: Συντακτικό σφάλμα στην έκφραση του φίλτρου
+Error/IsFilterOperator: Σφάλμα φίλτρου: Άγνωστος τελεστέος για τον τελεστή φίλτρου 'is'
+Error/LoadingPluginLibrary: Σφάλμα κατά την φόρτωση της βιβλιοθήκης του πρόσθετου
+Error/PutEditConflict: Το αρχείο στον εξυπηρετητή είναι διαφορετικό
+Error/RecursiveTransclusion: Σφάλμα αναδρομής σε transclusion στο transclude widget
+Error/RetrievingSkinny: Σφάλμα κατά την ανάκληση της skinny tiddler λίστας
+Error/SavingToTWEdit: Σφάλμα κατά την αποθήκευση στο TWEdit
+Error/WhileSaving: Σφάλμα κατά την αποθήκευση
+Error/XMLHttpRequest: XMLHttpRequest κωδικός σφάλματος
+InternalJavaScriptError/Hint: Λοιπόν, αυτό είναι αδιέξοδο. Συνιστάτε να επανεκκινήσετε το TiddlyWiki κάνοντας ανανέωση στον φυλλομετρητή σας
+InternalJavaScriptError/Title: Εσωτερικό σφάλμα σε JavaScript
+LazyLoadingWarning: <p>Γίνεται φόρτωση εξωτερικού κειμένου από ''<$text text={{!!_canonical_uri}}/>''</p><p>Αν αυτό το μήνυμα δεν εξαφανιστεί ίσως το πρόγραμμα περιήγησης που χρησιμοποιείται να μην υποστηρίζει εξωτερικό κείμενο στις τρέχουσες του ρυθμίσεις. Δείτε σχετικά στο  https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Είσοδος χρήστη στο TiddlySpace
+Manager/Controls/FilterByTag/None: (κανένα)
+Manager/Controls/FilterByTag/Prompt: Φιλτράρισμα με ετικέτα:
+Manager/Controls/Order/Prompt: Αντιστροφή σειράς
+Manager/Controls/Search/Placeholder: Αναζήτηση
+Manager/Controls/Search/Prompt: Αναζήτηση:
+Manager/Controls/Show/Option/Tags: ετικέτες
+Manager/Controls/Show/Prompt: Δείξε:
+Manager/Controls/Sort/Prompt: Ταξινόμηση βάσει:
+Manager/Item/Colour: Χρώμα
+Manager/Item/Fields: Πεδία
+Manager/Item/Icon: Εικονίδιο
+Manager/Item/Icon/None: (κανένα)
+Manager/Item/RawText: ακατέργαστο κείμενο
+Manager/Item/Tags: Ετικέτες
+Manager/Item/Tools: Εργαλεία
+Manager/Item/WikifiedText: Wikified κείμενο
+MissingTiddler/Hint: Ανύπαρκτο tiddler "<$text text=<<currentTiddler>>/>" - κάντε κλικ {{||$:/core/ui/Buttons/edit}} για να δημιουργηθεί
+No: Όχι
+OfficialPluginLibrary: Επίσημη ~TiddlyWiki βιβλιοθήκη πρόσθετων
+OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
+PluginReloadWarning: Παρακαλώ αποθηκεύστε {{$:/core/ui/Buttons/save-wiki}} και ξαναφορτώστε {{$:/core/ui/Buttons/refresh}} προκειμένου να ενεργοποιηθούν οι αλλαγές στα πρόσθετα
 RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: Αυτό είναι ένα tiddler συστήματος
+SystemTiddlers/Include/Prompt: Συμπεριέλαβε συστεμικά tiddlers
 TagManager/Colour/Heading: Χρώμα
+TagManager/Count/Heading: Μέτρα
 TagManager/Icon/Heading: Εικονίδιο
+TagManager/Info/Heading: Πληροφορίες
 TagManager/Tag/Heading: Ετικέτα
+Tiddler/DateFormat: DDth MMM YYYY στις hh12:0mmam
 UnsavedChangesWarning: Έχετε μη αποθηκευμένες αλλαγές στο TiddlyWiki
+Yes: Ναι
+Εντοπίστηκε πρόσθετο για την έκδοση ~TiddlyWiki Classic: 

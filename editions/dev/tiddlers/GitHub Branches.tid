@@ -1,0 +1,11 @@
+created: 20190115173458112
+modified: 20190115173645658
+title: GitHub Branches
+type: text/vnd.tiddlywiki
+
+Development of TiddlyWiki 5 in the GitHub repo at https://github.com/Jermolene/TiddlyWiki5  uses two branches:
+
+* `master` contains the latest version of the code, and is deployed to https://tiddlywiki.com/prerelease
+* `tiddlywiki-com` contains the latest version of the documentation, and is deployed to https://tiddlywiki.com/, built by the latest released version of TiddlyWiki
+
+When preparing pull requests it is important to target the correct branch.

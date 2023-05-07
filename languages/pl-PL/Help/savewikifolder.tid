@@ -1,0 +1,19 @@
+title: $:/language/Help/savewikifolder
+description: Zapisuje wiki do nowego folderu
+
+<<.from-version "5.1.20">> Zapisuje obecną wiki do nowego folderu wliczając tiddlery, wtyczki i konfigurację:
+
+```
+--savewikifolder <wikifolderpath> [<filter>]
+```
+
+* Docelowy folder musi być pusty lub nieistnieć
+* `filter` określa które tiddlery będą skopiowane, domyślnie to `[all[tiddlers]]`
+* Wtyczki z oficjalnej biblioteki wtyczek są zamieniane na odnośniki do tych wtyczek w pliku `tiddlywiki.info`
+* Własne wtyczki zostają wypakowane do osobnych folderów
+
+Typowe zastosowanie to konwersja pliku TiddlyWiki w formie pliku HTML do formatu folderu:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```

@@ -55,7 +55,7 @@ exports["application/enex+xml"] = function(text,fields) {
 			result[attrNode.tagName] = attrNode.textContent;
 		});
 		results.push(result);
-		$tw.utils.each(noteNode.querySelectorAll("resources"),function(resourceNode) {
+		$tw.utils.each(noteNode.querySelectorAll("resource"),function(resourceNode) {
 			results.push({
 				title: getTextContent(resourceNode,"resource-attributes>file-name"),
 				type: getTextContent(resourceNode,"mime"),

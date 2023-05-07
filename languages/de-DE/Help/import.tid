@@ -1,0 +1,32 @@
+title: $:/language/Help/import
+description: Importiert mehrere Tiddler aus einer Datei
+
+Dieser Befehl importiert / extrahiert Tiddler aus folgenden Dateien: 
+
+* ~TiddlyWiki `*.html`
+* `*.tiddler`
+* `*.tid`
+* `*.json`
+* oder andere lokale `text` Dateien
+
+Der `<deserializer>` Parameter muss angegeben werden. Anders als beim `--load` Befehl, der diese Information aus der Dateiendung ableiten kann.
+
+```
+--import <filepath> <deserializer> [<title>] [<encoding>]
+```
+
+TiddlyWiki enthält folgende `deserializer` Standard-Typen:
+
+* application/javascript
+* application/json
+* application/x-tiddler
+* application/x-tiddler-html-div
+* application/x-tiddlers
+* text/html
+* text/plain
+
+Der Tiddler-Titel entspricht nach dem Import, dem Dateinamen.
+
+Die Zeichenkodierung ist auf `utf8` eingestellt. Sie kann aber auf `base64` für binäre Daten geändert werden.
+
+Hinweis: ~TiddlyWiki importiert nur neuere Plugins, als jene, die bereits geladen sind.

@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/consent-banner/buttons/accept
+tags: $:/tags/ConsentBanner/Button
+
+<$button message="tm-consent-accept" class="tc-consent-button tc-consent-button-default tc-btn-invisible" tooltip={{$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/hint}}>
+{{$:/config/plugins/tiddlywiki/consent-banner/buttons/accept/caption}}
+</$button>

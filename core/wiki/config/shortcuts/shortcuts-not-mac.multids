@@ -3,3 +3,6 @@ title: $:/config/shortcuts-not-mac/
 bold: ctrl-B
 italic: ctrl-I
 underline: ctrl-U
+new-image: alt-I
+new-journal: alt-J
+new-tiddler: alt-N

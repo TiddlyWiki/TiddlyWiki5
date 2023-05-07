@@ -1,0 +1,20 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Seznam
+Filter/Caption: Filter
+Filter/Hint: Išči po [[izrazu filtra|http://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> zadetkov</small>//
+Matches: //<small><<resultCount>> zadetkov</small>//
+Matches/All: Vsi zadetki:
+Matches/Title: Zadetki v naslovih
+Search: Iskanje
+Search/TooShort: Iskalni niz je prekratek
+Shadows/Caption: Sence
+Shadows/Hint: Išči v senčnih tiddlerjih
+Shadows/Matches: //<small><<resultCount>> zadetkov</small>//
+Standard/Caption: Standard
+Standard/Hint: Išči v standardnih tiddlerjih
+Standard/Matches: //<small><<resultCount>> zadetkov</small>//
+System/Caption: Sistem
+System/Hint: Išči v sistemskih tiddlerjih
+System/Matches: //<small><<resultCount>> zadetkov</small>//

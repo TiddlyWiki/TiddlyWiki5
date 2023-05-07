@@ -1,0 +1,10 @@
+created: 20171107175718679
+modified: 20210106151027400
+tags: [[Other Resources]]
+title: "X3DOM for TiddlyWiki 5" by Jamal Wills
+type: text/vnd.tiddlywiki
+url: http://x3dom.tiddlyspot.com/
+
+An experiment to embed interactive 3D graphics within TiddlyWiki by [[Jamal Wills|http://zemox.tiddlyspot.com]]. It is based [[X3DOM|https://www.x3dom.org]], an open source JavaScript library.
+
+{{!!url}}

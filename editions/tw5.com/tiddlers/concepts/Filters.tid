@@ -1,23 +1,28 @@
 created: 20130827080000000
-modified: 20150221225414000
+list: [[Introduction to filter notation]] [[Filter Syntax]]
+modified: 20220316145511797
 tags: Reference Concepts
 title: Filters
 type: text/vnd.tiddlywiki
-list: [[Introduction to filter notation]] [[Filter Syntax]]
+
+\define openAdvancedSearch()
+<$action-setfield $tiddler="$:/state/tab--1498284803" text="$:/core/ui/AdvancedSearch/Filter"/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" text="[tag[Filters]]"/>
+<$action-setfield $tiddler="$:/temp/advancedsearch" text="[tag[Filters]]"/>
+\end
 
 You can think of TiddlyWiki as a database in which the records are tiddlers. A database typically provides a way of discovering which records match a given pattern, and in ~TiddlyWiki this is done with filters.
 
 A <<.def filter>> is a concise notation for selecting a particular [[set of tiddlers|Title Selection]], known as its <<.def "output">>. Whenever ~TiddlyWiki encounters a filter, it calculates the output. Further work can then be done with just those tiddlers, such as [[counting|CountWidget]] or [[listing|ListWidget]] them.
 
-The following example passes a filter to the <<.mlink list-links>> macro to display a list of all tiddlers whose titles start with the letter H:
+The following example passes a filter to the <<.mlink list-links>> macro to display a list of all tiddlers whose titles are <<.olink2 tagged tag>> with the word <<.word Filters>>:
 
-> `<<list-links "[prefix[H]]">>`
+<<wikitext-example-without-html """<<list-links "[tag[Filters]]">>""" >>
 
-A filter's output can change as tiddlers are added and deleted in the wiki. ~TiddlyWiki recalculates on the fly, automatically updating any filter-based counts or lists as well.
+A filter output can change as tiddlers are added and deleted in the wiki. ~TiddlyWiki recalculates on the fly, automatically updating any filter-based counts or lists as well.
 
-[[Advanced Search|$:/AdvancedSearch]] has a <<.advancedsearch-tab Filter>> tab that makes it easy to experiment with filters.
+''Find out more:''
 
-;Find out more:
-* [[Introduction to filter notation]] -- a step-by-step walkthrough
-* [[Filter Syntax]] -- the detailed technical rules
-* [[Filter Operators]] -- the available methods of filtering
+* <$linkcatcher message="tm-navigate" actions=<<openAdvancedSearch>> >[[Advanced Search|$:/AdvancedSearch]]</$linkcatcher> -- has a <<.advancedsearch-tab Filter>> tab that makes it easy to experiment with filters.
+
+* [[Filtered Transclusions|Transclusion in WikiText]] -- If you want to use filter results in your text

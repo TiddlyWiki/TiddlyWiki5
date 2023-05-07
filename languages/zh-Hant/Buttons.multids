@@ -14,8 +14,12 @@ CloseOthers/Caption: 關閉其他
 CloseOthers/Hint: 關閉其他條目
 ControlPanel/Caption: 控制台
 ControlPanel/Hint: 開啟控制台
+CopyToClipboard/Caption: 複製到剪貼簿
+CopyToClipboard/Hint: 將此文字複製到剪貼簿
 Delete/Caption: 刪除
 Delete/Hint: 刪除此條目
+DeleteTiddlers/Caption: 刪除條目
+DeleteTiddlers/Hint: 刪除條目
 Edit/Caption: 編輯
 Edit/Hint: 編輯此條目
 Encryption/Caption: 加密
@@ -30,6 +34,7 @@ ExportTiddler/Caption: 導出此條目
 ExportTiddler/Hint: 導出此條目
 ExportTiddlers/Caption: 導出條目
 ExportTiddlers/Hint: 導出條目
+SidebarSearch/Hint: 選擇側邊欄的搜尋欄位
 Fold/Caption: 收合條目
 Fold/Hint: 收合此條目的內容
 Fold/FoldBar/Caption: 收合條
@@ -49,11 +54,13 @@ Help/Hint: 顯示說明中心
 Home/Caption: 首頁
 Home/Hint: 開啟首頁條目
 Import/Caption: 導入
-Import/Hint: 導入許多類型的檔案包括文字、圖像、TiddlyWiki 或 JSON
+Import/Hint: 導入許多類型的檔案包括文字、圖像、~TiddlyWiki 或 JSON
 Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
 Language/Hint: 選擇使用者介面語言
+LayoutSwitcher/Hint: 開啟版面切換器
+LayoutSwitcher/Caption: 版面
 Manager/Caption: 條目管理器
 Manager/Hint: 開啟條目管理器
 More/Caption: 更多
@@ -139,6 +146,8 @@ LineWidth/Caption: 線寬
 LineWidth/Hint: 設定繪畫的線條寬度
 Link/Caption: 鏈接
 Link/Hint: 建立維基文字鏈接
+Linkify/Caption: 維基鏈接
+Linkify/Hint: 套用維基鏈接於所選文字
 ListBullet/Caption: 符號清單
 ListBullet/Hint: 套用符號清單格式於包含所選文字的列
 ListNumber/Caption: 數字清單
@@ -159,6 +168,8 @@ PreviewType/Caption: 預覽類型
 PreviewType/Hint: 選擇預覽類型
 Quote/Caption: 引言
 Quote/Hint: 套用引言文字格式於包含所選文字的列
+RotateLeft/Caption: 向左旋轉
+RotateLeft/Hint: 圖像向左旋轉 90 度
 Size/Caption: 圖像大小
 Size/Caption/Height: 高度︰
 Size/Caption/Resize: 調整圖像的大小
@@ -175,5 +186,8 @@ Subscript/Caption: 下標
 Subscript/Hint: 套用下標格式於所選文字
 Superscript/Caption: 上標
 Superscript/Hint: 套用上標格式於所選文字
+ToggleSidebar/Hint: 切換顯示或隱藏側邊欄
+Transcludify/Caption: 嵌入
+Transcludify/Hint: 套用嵌入於所選文字
 Underline/Caption: 底線
 Underline/Hint: 套用底線格式於所選文字

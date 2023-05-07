@@ -4,15 +4,33 @@ tags: Features [[Working with TiddlyWiki]]
 title: KeyboardShortcuts
 type: text/vnd.tiddlywiki
 
-Keyboard shortcuts are available for common editing operations:
+Keyboard shortcuts can either be used with the <<.wlink KeyboardWidget>> Widget or with [[Keyboard Shortcut Tiddlers|Keyboard Shortcut Tiddler]]
 
-* Confirming changes to the draft tiddler containing the keyboard focus (defaults to <kbd>ctrl-Enter</kbd>
+<<.tip """The <$macrocall $name=".wlink" to="KeyboardWidget"/> Widget makes the shortcuts accessible within an `input` or `textarea` field.
+<br>
+A shortcut defined through a [[Keyboard Shortcut Tiddler]] makes the shortcut accessible globally""">>
+
+!!!See [[How to create keyboard shortcuts]] with a detailed explanation for creating your own shortcuts
+
+Keyboard shortcuts are available for common editing operations within the Text Editor:
+
+* Confirming changes to the draft tiddler containing the keyboard focus (defaults to <kbd>ctrl-Enter</kbd>)
 * Abandoning changes to the draft tiddler containing the keyboard focus (defaults to <kbd>escape</kbd>)
 * Formatting operations from the tiddler editing toolbar (see the tooltips)
 
-The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}}.
+<<.from-version 5.1.18>> : New ''global'' Keyboard shortcuts:
+
+|!Action |!Default Shortcut|
+|Creating a new tiddler |<kbd>alt-N</kbd> |
+|Creating a new journal |<kbd>alt-J</kbd> |
+|Creating a new image |<kbd>alt-I</kbd> |
+|Focusing sidebar search |<<.from-version 5.1.20>><kbd>ctrl-shift-F</kbd> |
+|Toggling the sidebar |<<.from-version 5.1.20>><kbd>shift-alt-S</kbd> |
+|Advanced search |<<.from-version 5.1.20>><kbd>ctrl-shift-A</kbd> |
+
+The current shortcuts can be inspected and customised in the "Keyboard Shortcuts" tab of the [[Control Panel|$:/ControlPanel]] <<.icon $:/core/images/options-button>>.
 
 !! Special Keys
 
 ; adding tags in the editor
-: <<.from-version 5.1.14>>: if you hit <kbd>Enter</kbd> in the new tag input, the tag will be added
+: <<.from-version 5.1.14>> : if you hit <kbd>Enter</kbd> in the new tag input, the tag will be added

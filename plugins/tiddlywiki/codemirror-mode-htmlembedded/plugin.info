@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-mode-htmlembedded",
+	"name": "CodeMirror Mode HTML Embedded",
+	"description": "Embedded HTML highlighting mode for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"dependents": ["$:/plugins/tiddlywiki/codemirror-mode-htmlmixed","$:/plugins/tiddlywiki/codemirror-mode-javascript","$:/plugins/tiddlywiki/codemirror-mode-css","$:/plugins/tiddlywiki/codemirror-mode-xml"],
+	"list": "readme"
+}

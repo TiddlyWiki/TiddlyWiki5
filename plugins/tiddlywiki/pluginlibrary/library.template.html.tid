@@ -21,7 +21,7 @@ title: $:/plugins/tiddlywiki/pluginlibrary/library.template.html
 
 <p>This is the TiddlyWiki plugin library. It is not intended to be opened directly in the browser.</p>
 
-<p>See <a href="http://tiddlywiki.com/" target="_blank">http://tiddlywiki.com/</a> for details of how to install plugins.</p>
+<p>See <a href="https://tiddlywiki.com/" target="_blank">https://tiddlywiki.com/</a> for details of how to install plugins.</p>
 
 </body>
 </html>

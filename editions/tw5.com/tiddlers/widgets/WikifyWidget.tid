@@ -1,6 +1,6 @@
 caption: wikify
 created: 20160321144949700
-modified: 20161017122117062
+modified: 20220122191540121
 tags: Widgets
 title: WikifyWidget
 type: text/vnd.tiddlywiki
@@ -17,7 +17,7 @@ The content of the `<$wikify>` widget is the scope for the value assigned to the
 |name |The name of the variable to assign |
 |text |The text to parse and render |
 |type |The ContentType of the text (defaults to `text/vnd.tiddlywiki`) |
-|mode |The parse mode: `block` (the default) or `inline` |
+|mode |The parse mode: [[block|Block Mode WikiText]] (the default) or [[inline|Inline Mode WikiText]] |
 |output |Keyword indicating the desired output type, defaulting to `text` (see below) |
 
 The available output types are:

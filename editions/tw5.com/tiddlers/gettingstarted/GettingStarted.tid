@@ -1,35 +1,15 @@
 created: 20131129090249275
-modified: 20160622111349475
+modified: 20220819041016415
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-\define default-platform()
-GettingStarted - $(browser-name)$
-\end
-Brief instructions for getting started on the different platforms and configurations that TiddlyWiki supports. See the [[A Gentle Guide to TiddlyWiki]] for a more leisurely introduction.
+The easiest way to use ~TiddlyWiki is to sign up for a free account with [[Tiddlyhost|https://tiddlyhost.com/]], an independently run community service. If you find Tiddlyhost useful, please consider [[donation or sponsorship|https://tiddlyhost.com/donate]].
 
-<$set name="browser-name" value={{$:/info/browser/name}}>
-<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
-</$set>
+Click here to download an empty copy of ~TiddlyWiki: {{$:/editions/tw5.com/snippets/download-empty-button}}
 
-Troubleshooting:
+The next step is to choose a method for saving changes. There's a wide variety of methods available, with different features and limitations. Click on the badge for a method to see more information about it. You can also click on one of the platform filters to restrict the listing to methods that work with that platform.
 
-* Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)
+<<.warning "Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)">><br/><br/>
 
-See also:
-
-* [[Encryption]] explains how to use TiddlyWiki's built-in encryption to protect your content with a password
-* [[Saving on TiddlySpot]], a free service that lets you use TiddlyWiki online
-* Saving on TiddlyDesktop, a custom desktop application for working with TiddlyWiki
-* You can also download this full TiddlyWiki including all the documentation:
-
-<<<
-{{$:/snippets/download-wiki-button}}
-
-If the button doesn't work save this link:
-
-<a href="http://tiddlywiki.com/index.html" download="index.html" rel="noopener noreferrer">~http://tiddlywiki.com/index.html</a>
-
-Your browser may ask you to accept the download before it begins
-<<<
+{{Saving}}

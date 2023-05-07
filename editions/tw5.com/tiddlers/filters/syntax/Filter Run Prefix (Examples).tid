@@ -1,0 +1,21 @@
+created: 20201117073343969
+modified: 20211129032537195
+tags: [[Filter Syntax]] [[Filter Run Prefix Examples]]
+title: Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+!! `:filter` examples
+
+See [[Filter Filter Run Prefix (Examples)]]
+
+!! `:intersection` examples
+
+See [[Intersection Filter Run Prefix (Examples)]]
+
+!! `:reduce` examples
+
+See [[Reduce Filter Run Prefix (Examples)]]
+
+!! `:sort` examples
+
+See [[Sort Filter Run Prefix (Examples)]]

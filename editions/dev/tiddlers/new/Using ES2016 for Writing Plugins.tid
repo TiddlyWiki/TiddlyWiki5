@@ -114,7 +114,7 @@ export function startup() {
 }
 ```
 
-Or in the case of a [[Macro|http://tiddlywiki.com/dev/#JavaScript%20Macros]]:
+Or in the case of a [[Macro|https://tiddlywiki.com/dev/#JavaScript%20Macros]]:
 
 ```javascript
 export const name = 'my-macro';

@@ -1,7 +1,7 @@
 {
 	"tiddlers": [
 		{
-			"file": "jszip.min.v2.5.0.js",
+			"file": "jszip.min.v2.6.1.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/jszip/jszip.js",

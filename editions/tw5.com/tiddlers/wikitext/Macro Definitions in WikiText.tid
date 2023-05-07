@@ -1,46 +1,7 @@
 created: 20150220181617000
-modified: 20150221221642000
-tags: WikiText
+modified: 20180820165115455
+tags: 
 title: Macro Definitions in WikiText
 type: text/vnd.tiddlywiki
-caption: Macro Definitions
 
-A [[macro|Macros]] is defined using a `\define` [[pragma|Pragma]]. Like any pragma, this can only appear at the start of a tiddler.
-
-The first line of the definition specifies the macro name and any parameters. Each parameter has a name, and optionally a default value that is used if no value is supplied on a particular call to the macro. The lines that follow contain the macro's text (i.e. the snippet represented by the macro name), until `\end` appears on a line by itself:
-
-<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi}}/>
-
-Alternatively, the entire definition can be presented on a single line, without an `\end` marker:
-
-```
-\define sayhi(name:"Bugs Bunny") Hi, I'm $name$.
-```
-
-A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
-
-!! Placeholders
-
-The snippet can contain placeholders for parameters. These consist of a parameter name between dollar signs, like `$this$`.
-
-It can also contain placeholders for [[variables|Variables]]. These consist of a variable name (or macro name) between dollar signs and round brackets, like `$(this)$`.
-
-The actual value of the parameter or variable is substituted for the placeholder whenever the macro is called:
-
-<$importvariables filter="$:/editions/tw5.com/macro-examples/say-hi-using-variables">
-<$codeblock code={{$:/editions/tw5.com/macro-examples/say-hi-using-variables}}/>
-<$macrocall $name=".example" n="1"
-eg="""<$set name="address" value="Rabbit Hole Hill">
-<<say-hi-using-variables>>
-</$set>"""/>
-</$importvariables>
-
-!! Scope
-
-Macros are available to the tiddler that defines them, plus any tiddlers that it transcludes.
-
-To make a macro available to all tiddlers, define it in a tiddler that has the tag <<.tag $:/tags/Macro>>.
-
-It is also possible to write a macro as a [[JavaScript module|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]. ~JavaScript macros are available to all tiddlers, and offer the maximum flexibility.
-
-A tiddler can manually import macro definitions from a [[selection|Title Selection]] of other tiddlers by using the <<.wlink ImportVariablesWidget>> widget.
+See [[Macro Definitions]].

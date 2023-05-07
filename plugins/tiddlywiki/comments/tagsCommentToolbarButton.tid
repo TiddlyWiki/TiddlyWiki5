@@ -1,0 +1,2 @@
+title: $:/tags/CommentToolbarButton
+list: [[$:/plugins/tiddlywiki/comments/toolbar-button-cancel]] [[$:/plugins/tiddlywiki/comments/toolbar-button-delete]] [[$:/plugins/tiddlywiki/comments/toolbar-button-save]] [[$:/plugins/tiddlywiki/comments/toolbar-button-edit]] 

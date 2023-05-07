@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: .
+Date/DaySuffix/10: .
+Date/DaySuffix/11: .
+Date/DaySuffix/12: .
+Date/DaySuffix/13: .
+Date/DaySuffix/14: .
+Date/DaySuffix/15: .
+Date/DaySuffix/16: .
+Date/DaySuffix/17: .
+Date/DaySuffix/18: .
+Date/DaySuffix/19: .
+Date/DaySuffix/2: .
+Date/DaySuffix/20: .
+Date/DaySuffix/21: .
+Date/DaySuffix/22: .
+Date/DaySuffix/23: .
+Date/DaySuffix/24: .
+Date/DaySuffix/25: .
+Date/DaySuffix/26: .
+Date/DaySuffix/27: .
+Date/DaySuffix/28: .
+Date/DaySuffix/29: .
+Date/DaySuffix/3: .
+Date/DaySuffix/30: .
+Date/DaySuffix/31: .
+Date/DaySuffix/4: .
+Date/DaySuffix/5: .
+Date/DaySuffix/6: .
+Date/DaySuffix/7: .
+Date/DaySuffix/8: .
+Date/DaySuffix/9: .
+Date/Long/Day/0: nedelja
+Date/Long/Day/1: ponedeljek
+Date/Long/Day/2: torek
+Date/Long/Day/3: sreda
+Date/Long/Day/4: četrtek
+Date/Long/Day/5: petek
+Date/Long/Day/6: sobota
+Date/Long/Month/1: januar
+Date/Long/Month/10: oktober
+Date/Long/Month/11: november
+Date/Long/Month/12: december
+Date/Long/Month/2: februar
+Date/Long/Month/3: marec
+Date/Long/Month/4: april
+Date/Long/Month/5: maj
+Date/Long/Month/6: junij
+Date/Long/Month/7: julij
+Date/Long/Month/8: avgust
+Date/Long/Month/9: september
+Date/Period/am: dop
+Date/Period/pm: pop
+Date/Short/Day/0: ned
+Date/Short/Day/1: pon
+Date/Short/Day/2: tor
+Date/Short/Day/3: sre
+Date/Short/Day/4: čet
+Date/Short/Day/5: pet
+Date/Short/Day/6: sob
+Date/Short/Month/1: jan
+Date/Short/Month/10: okt
+Date/Short/Month/11: nov
+Date/Short/Month/12: dec
+Date/Short/Month/2: feb
+Date/Short/Month/3: mar
+Date/Short/Month/4: apr
+Date/Short/Month/5: maj
+Date/Short/Month/6: jun
+Date/Short/Month/7: jul
+Date/Short/Month/8: aug
+Date/Short/Month/9: sep
+RelativeDate/Future/Days: čez <<period>> dni
+RelativeDate/Future/Hours: čez <<period>> ur
+RelativeDate/Future/Minutes: čez <<period>> minut
+RelativeDate/Future/Months: čez <<period>> mesecev
+RelativeDate/Future/Second: čez eno sekundo
+RelativeDate/Future/Seconds: čez <<period>> sekund
+RelativeDate/Future/Years: čez <<period>> let
+RelativeDate/Past/Days: pred <<period>> dnevi
+RelativeDate/Past/Hours: pred <<period>> urami
+RelativeDate/Past/Minutes: pred <<period>> minutami
+RelativeDate/Past/Months: pred <<period>> meseci
+RelativeDate/Past/Second: pred eno sekundo
+RelativeDate/Past/Seconds: pred <<period>> sekundami
+RelativeDate/Past/Years: pred <<period>> leti

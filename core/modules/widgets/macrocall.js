@@ -37,30 +37,36 @@ MacroCallWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 MacroCallWidget.prototype.execute = function() {
-	// Get the parse type if specified
+	this.macroName = this.parseTreeNode.name || this.getAttribute("$name"),
 	this.parseType = this.getAttribute("$type","text/vnd.tiddlywiki");
 	this.renderOutput = this.getAttribute("$output","text/html");
 	// Merge together the parameters specified in the parse tree with the specified attributes
 	var params = this.parseTreeNode.params ? this.parseTreeNode.params.slice(0) : [];
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
-			params.push({name: name, value: attribute});			
+			params.push({name: name, value: attribute});
 		}
 	});
-	// Get the macro value
-	var text = this.getVariable(this.parseTreeNode.name || this.getAttribute("$name"),{params: params}),
-		parseTreeNodes;
-	// Are we rendering to HTML?
-	if(this.renderOutput === "text/html") {
-		// If so we'll return the parsed macro
-		var parser = this.wiki.parseText(this.parseType,text,
-							{parseAsInline: !this.parseTreeNode.isBlock});
-		parseTreeNodes = parser ? parser.tree : [];
-	} else {
-		// Otherwise, we'll render the text
-		var plainText = this.wiki.renderText("text/plain",this.parseType,text,{parentWidget: this});
-		parseTreeNodes = [{type: "text", text: plainText}];
-	}
+	// Make a transclude widget
+	var positionalName = 0,
+		parseTreeNodes = [{
+			type: "transclude",
+			isBlock: this.parseTreeNode.isBlock
+		}];
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$variable",this.macroName);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$type",this.parseType);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$output",this.renderOutput);
+	$tw.utils.each(params,function(param) {
+		var name = param.name;
+		if(name) {
+			if(name.charAt(0) === "$") {
+				name = "$" + name;
+			}
+			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],name,param.value);
+		} else {
+			$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],(positionalName++) + "",param.value);
+		}
+	});
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };

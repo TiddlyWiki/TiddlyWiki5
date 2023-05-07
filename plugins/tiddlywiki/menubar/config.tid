@@ -1,0 +1,37 @@
+title: $:/plugins/tiddlywiki/menubar/config
+tags: $:/tags/ControlPanel/Toolbars
+caption: Menu Bar
+
+\define config-base() $:/config/plugins/menubar/MenuItems/Visibility/
+
+! Menu Bar Configuration
+
+!! Menu Items
+
+Select which menu items will be shown. You can also drag items to reorder them.
+
+<$set name="tv-config-toolbar-icons" value="yes">
+
+<$set name="tv-config-toolbar-text" value="yes">
+
+<$macrocall $name="list-tagged-draggable" tag="$:/tags/MenuBar" itemTemplate="$:/core/ui/ControlPanel/Toolbars/ItemTemplate"/>
+
+</$set>
+
+</$set>
+
+!! Breakpoint Position
+
+The breakpoint position between narrow and wide screens. Should include CSS units (eg. `400px`).
+
+<$edit-text tiddler="$:/config/plugins/menubar/breakpoint" default="" tag="input"/>
+
+!! Contents Tag
+
+The tag for the ~TableOfContents used in the Contents dropdown
+
+<$edit-text tiddler="$:/config/plugins/menubar/TableOfContents/Tag" default="" tag="input"/>
+
+!! Menu Bar Colours
+
+To change the colour of the menu bar, define the colours `menubar-foreground` and `menubar-background` in the currently selected palette

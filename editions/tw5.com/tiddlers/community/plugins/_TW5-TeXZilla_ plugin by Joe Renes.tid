@@ -1,0 +1,16 @@
+created: 20150206170114934
+modified: 20210106151027364
+tags: [[Community Plugins]]
+title: "TW5-TeXZilla" plugin by Joe Renes
+type: text/vnd.tiddlywiki
+url: http://tw5-texzilla.tiddlyspot.com
+
+An alternative LaTeX plugin for TiddlyWiki5. It supports a wider set of LaTeX commands than [[KaTeX|KaTeX Plugin]], though not as extensive as MathJax
+
+{{!!url}}
+
+<<<
+This plugin provides LaTeX support in TiddlyWiki5, using the [[TeXZilla|https://github.com/fred-wang/TeXZilla]] latex parser to generate MathML.
+
+Only Firefox and Safari support MathML at the moment, so the plugin is only useful if you're using one of these browsers. It might be possible to combine this plugin with MathJax to convert MathML to something that other browsers can understand, e.g. HTML+CSS, but I haven't tried this.
+<<<

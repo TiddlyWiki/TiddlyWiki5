@@ -1,0 +1,42 @@
+created: 20210203150855206
+modified: 20210203150855206
+title: ParserSubclassingMechanism
+
+!! Introduction
+
+The wikitext parser subclassing mechanism makes it possible for custom parsers to use the wiki text parsing engine, but to customise the rules that are used.
+
+!! Example
+
+Here is an example of a subclass of the checkbox widget that adds logging to the event handler:
+
+```js
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+var WikiParser = require("$:/core/modules/parsers/wikiparser/wikiparser.js")["text/vnd.tiddlywiki"],
+	HtmlParser = $tw.modules.createClassFromModule(require("$:/core/modules/parsers/wikiparser/rules/html.js"),$tw.WikiRuleBase),
+	EntityParser = $tw.modules.createClassFromModule(require("$:/core/modules/parsers/wikiparser/rules/entity.js"),$tw.WikiRuleBase);
+
+var MyCustomWikiParser = function(type,text,options) {
+	var parser = new WikiParser(type,text,$tw.utils.extend({},options,{
+		// Force the parser to parse in inline mode
+		parseAsInline: true,
+		// Specify which rules will be used
+		rules: {
+			pragma: [],
+			block: [],
+			inline: [HtmlParser,EntityParser]
+		}
+	}));
+	this.tree = parser.tree;
+	this.prototype = parser.prototype;
+};
+
+exports["text/vnd.my-custom-type"] = MyCustomWikiParser;
+
+})();
+```

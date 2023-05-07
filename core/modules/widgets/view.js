@@ -51,18 +51,22 @@ ViewWidget.prototype.execute = function() {
 	this.viewIndex = this.getAttribute("index");
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
+	this.viewMode = this.getAttribute("mode","block");
 	switch(this.viewFormat) {
 		case "htmlwikified":
-			this.text = this.getValueAsHtmlWikified();
+			this.text = this.getValueAsHtmlWikified(this.viewMode);
 			break;
 		case "plainwikified":
-			this.text = this.getValueAsPlainWikified();
+			this.text = this.getValueAsPlainWikified(this.viewMode);
 			break;
 		case "htmlencodedplainwikified":
-			this.text = this.getValueAsHtmlEncodedPlainWikified();
+			this.text = this.getValueAsHtmlEncodedPlainWikified(this.viewMode);
 			break;
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
+			break;
+		case "htmltextencoded":
+			this.text = this.getValueAsHtmlTextEncoded();
 			break;
 		case "urlencoded":
 			this.text = this.getValueAsUrlEncoded();
@@ -104,7 +108,7 @@ ViewWidget.prototype.getValue = function(options) {
 	} else {
 		var tiddler;
 		if(this.viewSubtiddler) {
-			tiddler = this.wiki.getSubTiddler(this.viewTitle,this.viewSubtiddler);	
+			tiddler = this.wiki.getSubTiddler(this.viewTitle,this.viewSubtiddler);
 		} else {
 			tiddler = this.wiki.getTiddler(this.viewTitle);
 		}
@@ -117,7 +121,7 @@ ViewWidget.prototype.getValue = function(options) {
 					if(options.asString) {
 						value = tiddler.getFieldString(this.viewField);
 					} else {
-						value = tiddler.fields[this.viewField];				
+						value = tiddler.fields[this.viewField];
 					}
 				}
 			}
@@ -134,28 +138,41 @@ ViewWidget.prototype.getValueAsText = function() {
 	return this.getValue({asString: true});
 };
 
-ViewWidget.prototype.getValueAsHtmlWikified = function() {
-	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this});
+ViewWidget.prototype.getValueAsHtmlWikified = function(mode) {
+	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	});
 };
 
-ViewWidget.prototype.getValueAsPlainWikified = function() {
-	return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this});
+ViewWidget.prototype.getValueAsPlainWikified = function(mode) {
+	return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	});
 };
 
-ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function() {
-	return $tw.utils.htmlEncode(this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{parentWidget: this}));
+ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function(mode) {
+	return $tw.utils.htmlEncode(this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	}));
 };
 
 ViewWidget.prototype.getValueAsHtmlEncoded = function() {
 	return $tw.utils.htmlEncode(this.getValueAsText());
 };
 
+ViewWidget.prototype.getValueAsHtmlTextEncoded = function() {
+	return $tw.utils.htmlTextEncode(this.getValueAsText());
+};
+
 ViewWidget.prototype.getValueAsUrlEncoded = function() {
-	return encodeURIComponent(this.getValueAsText());
+	return $tw.utils.encodeURIComponentExtended(this.getValueAsText());
 };
 
 ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
-	return encodeURIComponent(encodeURIComponent(this.getValueAsText()));
+	return $tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.getValueAsText()));
 };
 
 ViewWidget.prototype.getValueAsDate = function(format) {
@@ -202,7 +219,7 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

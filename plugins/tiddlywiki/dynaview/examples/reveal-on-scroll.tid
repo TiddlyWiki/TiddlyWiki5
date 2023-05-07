@@ -1,0 +1,28 @@
+title: $:/plugins/tiddlywiki/dynaview/examples/reveal-on-scroll
+tags: $:/tags/dynaviewExamples
+caption: Reveal on Scroll
+
+\define indicator(index)
+<$reveal state="$:/state/unreveal-on-scroll/example$index$" type="nomatch" text="">
+$index$
+</$reveal>
+\end
+
+\define lorem-ipsum(index)
+<div class="tc-dynaview-track-tiddler-when-visible" style="min-height: 75px;" data-dynaview-track-tiddler="$:/state/unreveal-on-scroll/example$index$">
+<h1>Heading $index$</h1>
+<$reveal state="$:/state/unreveal-on-scroll/example$index$" type="nomatch" text="">
+(Rendered at <<now "[UTC]YYYY-0MM-0DD 0hh:0mm:0ss.XXX">>) Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</$reveal>
+</div>
+\end
+
+This example renders tiddlers as they are scrolled into view, and hides them when they scroll out of view again.
+
+Visible: <$list filter="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16">
+<$macrocall $name="indicator" index=<<currentTiddler>>/>
+</$list>
+
+<$list filter="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16">
+<$macrocall $name="lorem-ipsum" index=<<currentTiddler>>/>
+</$list>

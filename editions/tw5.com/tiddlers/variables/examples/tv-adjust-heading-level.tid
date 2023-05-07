@@ -1,0 +1,25 @@
+created: 20180609112450207
+modified: 20180609112450207
+tags: [[tv-adjust-heading-level Variable]] [[Variable Examples]]
+title: tv-adjust-heading-level Variable (Examples)
+type: text/vnd.tiddlywiki
+
+\define show-tiddler(title)
+!! $title$
+
+<$codeblock code={{$title$}}/>
+\end
+
+! Tiddlers
+
+<<show-tiddler "Sample Headings 1,2,3">>
+
+<<show-tiddler "Sample Headings 3,4,5">>
+
+<<show-tiddler "Sample Headings 4,5,6">>
+
+! Example
+
+<$macrocall $name=".example" n="1"
+eg="""<$transclude tiddler="Sample Headings 1,2,3" mode="block"/>"""/>
+

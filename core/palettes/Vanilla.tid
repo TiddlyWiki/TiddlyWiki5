@@ -3,6 +3,7 @@ name: Vanilla
 description: Pale and unobtrusive
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
+color-scheme: light
 
 alert-background: #ffe476
 alert-border: #b99e2f
@@ -16,6 +17,14 @@ button-border:
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
+diff-delete-background: #ffc9c9
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #aaefad
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
 dirty-indicator: #ff0000
 download-background: #34c734
 download-foreground: <<colour background>>
@@ -33,6 +42,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #0000aa
 external-link-foreground: #0000ee
 foreground: #333333
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-background: #ecf2ff
 message-border: #cfd6e6
 message-foreground: #547599
@@ -49,6 +60,10 @@ page-background: #f4f4f4
 pre-background: #f5f5f5
 pre-border: #cccccc
 primary: #5778d8
+selection-background:
+selection-foreground:
+select-tag-background:
+select-tag-foreground:
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #aaaaaa
@@ -107,3 +122,20 @@ toolbar-cancel-button:
 toolbar-done-button:
 untagged-background: #999999
 very-muted-foreground: #888888
+wikilist-background: #e5e5e5
+wikilist-item: #fff
+wikilist-info: #000
+wikilist-title: #666
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: #aaa
+wikilist-button-open: #4fb82b
+wikilist-button-open-hover: green
+wikilist-button-reveal: #5778d8
+wikilist-button-reveal-hover: blue
+wikilist-button-remove: #d85778
+wikilist-button-remove-hover: red
+wikilist-toolbar-background: #d3d3d3
+wikilist-toolbar-foreground: #888
+wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-button-background: #acacac
+wikilist-button-foreground: #000

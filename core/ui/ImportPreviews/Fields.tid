@@ -1,0 +1,19 @@
+title: $:/core/ui/ImportPreviews/Fields
+tags: $:/tags/ImportPreview
+caption: {{$:/language/Import/Listing/Preview/Fields}}
+
+\whitespace trim
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[<payloadTiddler>subtiddlerfields<currentTiddler>sort[]] -text" variable="fieldName">
+<tr class="tc-view-field">
+<td class="tc-view-field-name">
+<$text text=<<fieldName>>/>
+</td>
+<td class="tc-view-field-value">
+<$view field=<<fieldName>> tiddler=<<currentTiddler>> subtiddler=<<payloadTiddler>>/>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>

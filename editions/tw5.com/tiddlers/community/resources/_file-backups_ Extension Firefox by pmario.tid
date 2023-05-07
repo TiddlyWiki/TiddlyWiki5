@@ -1,0 +1,18 @@
+caption: file-backups
+color: #4DB6AC
+community-author: Mario Pietsch
+created: 20171116165500000
+delivery: Browser Extension
+description: Browser extension for Firefox
+method: save
+modified: 20210106151027036
+tags: Firefox Saving [[Other Resources]] plugins Windows Linux Mac
+title: "file-backups" Extension for Firefox by pmario
+type: text/vnd.tiddlywiki
+url: https://github.com/pmario/file-backups
+
+An extension for Mozilla Firefox that smoothes out some of the friction from ~TiddlyWiki's built-in [[HTML5 saver|Saving with the HTML5 saver]], making it almost as easy to use as ~TiddlyFox. The workflow is intended to work out of the box, without configuration.
+
+https://github.com/pmario/file-backups which contains links to the documentation and introduction video(s).
+
+A chrome version is planned!

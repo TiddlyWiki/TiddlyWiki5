@@ -1,0 +1,26 @@
+created: 20200131142401129
+modified: 20211113230406823
+tags: ActionCreateTiddlerWidget
+title: ActionCreateTiddlerWidget Example 1
+type: text/vnd.tiddlywiki
+
+\define testCreate()
+<$action-createtiddler />
+\end
+
+This example will create "New Tiddler", "New Tiddler 1", " New Tiddler 2" and so on
+
+```
+\define testCreate()
+<$action-createtiddler />
+\end
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button>
+```
+
+<$button actions=<<testCreate>> >
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+Create Tiddler
+</$button> - Clicking this button, will also open the Right sidebar: Recent tab

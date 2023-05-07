@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 //These are personal reflections on the history and development of TiddlyWiki from JeremyRuston.//
 
-//There is also a [[podcast|https://changelog.com/196/]] discussing TiddlyWiki's backstory.//
+//There is also a [[podcast from 2016|https://changelog.com/podcast/196]] discussing TiddlyWiki's backstory as well as a [[recording from 2021|https://twit.tv/shows/floss-weekly/episodes/620]].//
 
 ! Origins of TiddlyWiki
 
@@ -24,7 +24,7 @@ I started experimenting with HTML and JavaScript to explore the idea further. I'
 
 ! Launch of TiddlyWiki
 
-So, in September 2004 I released a primitive [[first version of TiddlyWiki|http://classic.tiddlywiki.com/firstversion.html]]. It was the smallest possible thing that demonstrated the idea: it was a simple, self-contained static 48KB HTML file.
+So, in September 2004 I released a primitive [[first version of TiddlyWiki|https://classic.tiddlywiki.com/firstversion.html]]. It was the smallest possible thing that demonstrated the idea: it was a simple, self-contained static 48KB HTML file.
 
 The downside of writing the first version of TiddlyWiki in this way was that it made it completely impractical to use for editing - when you click 'save changes' it just pops up a window showing the data that would be saved if it were possible for an HTML page to write to the file system.
 

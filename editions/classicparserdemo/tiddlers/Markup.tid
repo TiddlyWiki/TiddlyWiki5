@@ -55,8 +55,8 @@ TiddlyWiki markup is a dedicated markup syntax to <<tag Formatting "format your 
 |[[Pretty Link|Tiddler Name]]|{{{[[Pretty Link|Tiddler Name]]}}}|
 |>| [[External Links|External Link]] |
 |A valid URL is automatically rendered as an external link.|>|
-|http://www.tiddlywiki.com|{{{http://www.tiddlywiki.com}}}|
-|[[Pretty External Link|http://www.tiddlywiki.com]]|{{{[[Pretty External Link|http://www.tiddlywiki.com]]}}}|
+|https://www.tiddlywiki.com|{{{https://www.tiddlywiki.com}}}|
+|[[Pretty External Link|https://www.tiddlywiki.com]]|{{{[[Pretty External Link|https://www.tiddlywiki.com]]}}}|
 |>| ![[Filesystem Links|Links]] |
 |You can, of course, use file system links both as plain or pretty links.|>|
 |''Windows Network Path''|{{{[[file://///server/share]]}}}|
@@ -65,11 +65,11 @@ TiddlyWiki markup is a dedicated markup syntax to <<tag Formatting "format your 
 |''Relative Path (Subfolder)''|{{{[[folder/file]]}}}|
 |>| ![[Images]] |
 |In general, image files are external to a TiddlyWiki.|>|
-|[img[http://www.tiddlywiki.com/favicon.ico]]|{{{[img[path/image.jpg]]}}}|
-| aligned right&nbsp;&nbsp;[>img[http://www.tiddlywiki.com/favicon.ico]]|{{{[>img[path/image.jpg]]}}}|
-|[<img[http://www.tiddlywiki.com/favicon.ico]]&nbsp;&nbsp;aligned left|{{{[<img[path/image.jpg]]}}}|
-|w/ internal link [>img[http://www.tiddlywiki.com/favicon.ico][TiddlyWiki]]|{{{[img[path/image.jpg][TiddlerName]]}}}|
-|w/ external link [>img[http://www.tiddlywiki.com/favicon.ico][http://www.tiddlywiki.com]]|{{{[img[path/image.jpg][TiddlyWiki|http://www.tiddlywiki.com]]}}}|
+|[img[https://www.tiddlywiki.com/favicon.ico]]|{{{[img[path/image.jpg]]}}}|
+| aligned right&nbsp;&nbsp;[>img[https://www.tiddlywiki.com/favicon.ico]]|{{{[>img[path/image.jpg]]}}}|
+|[<img[https://www.tiddlywiki.com/favicon.ico]]&nbsp;&nbsp;aligned left|{{{[<img[path/image.jpg]]}}}|
+|w/ internal link [>img[https://www.tiddlywiki.com/favicon.ico][TiddlyWiki]]|{{{[img[path/image.jpg][TiddlerName]]}}}|
+|w/ external link [>img[https://www.tiddlywiki.com/favicon.ico][https://www.tiddlywiki.com]]|{{{[img[path/image.jpg][TiddlyWiki|https://www.tiddlywiki.com]]}}}|
 |>| ![[Gradients|gradient]] |
 |<<gradient horiz #faa #afa #aaf>>&nbsp;&nbsp;__vert__ical or __horiz__ontal<br>&nbsp;&nbsp;see [[gradient macro|http://tiddlywiki.org/#%5B%5Bgradient%20(macro)%5D%5D]]>>|{{{<<gradient horiz #faa #afa #aaf>>wiki text>>}}}|
 |>| ![[Tables]] |
@@ -84,7 +84,7 @@ TiddlyWiki markup is a dedicated markup syntax to <<tag Formatting "format your 
 |>| ![[Embedded HTML|HTML Formatting]] |
 |<html><span style="padding-right:30px;font-size:2em;">any</span><br /><b>valid</b> <em>xhtml</em></html>|<html><code style="font-weight:bold">&lt;html&gt;</code></html>{{{<span style="padding-right:30px;font-size:2em;">any</span><br /><b>valid</b> <em>xhtml</em>}}}<html><code style="font-weight:bold">&lt;/html&gt;</code></html>|
 |>| [[Embedded <iframe>|HTML Formatting]] |
-|<html><iframe height="200px" width="300px" src="http://www.youtube.com/embed/Cj6ho1-G6tw?vq=hd720" frameborder="0" allowfullscreen/></html>|<html><code style="font-weight:bold">&lt;html&gt;</code></html>{{{<iframe src="http://the.url"/>}}}<html><code style="font-weight:bold">&lt;/html&gt;</code></html>|
+|<html><iframe height="200px" width="300px" src="https://www.youtube.com/embed/Cj6ho1-G6tw?vq=hd720" frameborder="0" allowfullscreen/></html>|<html><code style="font-weight:bold">&lt;html&gt;</code></html>{{{<iframe src="http://the.url"/>}}}<html><code style="font-weight:bold">&lt;/html&gt;</code></html>|
 |>| ![[Line Break|Line Breaks]] |
 |handy for entering multi-line content into table cells or lists|>|
 |a<br>b|{{{a<br>b}}} or {{{a<br/>a}}} or {{{a<br />a}}}|

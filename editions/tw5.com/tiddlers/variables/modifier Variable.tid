@@ -1,0 +1,36 @@
+created: 20201123120203415
+modified: 20220414162815231
+tags: Variables [[Core Variables]]
+title: modifier Variable
+type: text/vnd.tiddlywiki
+
+Within the ''action'' string of the DroppableWidget, the ''startactions'' and ''endactions'' of the DraggableWidget, the ''action'' string of the ButtonWidget and the ''action'' string of the LinkCatcherWidget and the EventCatcherWidget, the <<.def modifier>> [[variable|Variables]] contains the modifier key(s) held during the drag, click or other event.
+Possible key combinations are listed in the table below.
+
+The variable contains a string that identifies the keys:
+
+|Modifier Key |Variable Content |h
+|meta |meta |
+|ctrl |ctrl |
+|alt |alt |
+|shift |shift |
+|meta+shift |meta-shift |
+|meta+ctrl |meta-ctrl |
+|meta+alt |meta-alt |
+|ctrl+shift |ctrl-shift |
+|alt+shift |alt-shift |
+|ctrl+alt |ctrl-alt |
+|meta+ctrl+shift |meta-ctrl-shift |
+|meta+ctrl+alt |meta-ctrl-alt |
+|meta+alt+shift |meta-alt-shift |
+|ctrl+alt+shift |ctrl-alt-shift |
+|meta+ctrl+alt+shift |meta-ctrl-alt-shift |
+|no modifier (normal click / drag) |normal |
+
+<<.tip """Some operating systems may intercept the ''meta'' key so it is never detected""">>
+
+<$button actions="""<$action-setfield $tiddler="$:/temp/test-modifier-keys" text=<<modifier>>/>""">Test modifier keys here</$button>
+
+!!! Modifier keys held while clicking the button above:
+
+{{$:/temp/test-modifier-keys}}

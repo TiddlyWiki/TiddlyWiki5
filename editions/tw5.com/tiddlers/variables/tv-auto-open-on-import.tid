@@ -9,4 +9,4 @@ The <<.def tv-auto-open-on-import>> [[variable|Variables]] controls whether the 
 
 By default, the tiddler is opened. But if this variable has the value <<.value no>>, it isn't.
 
-An example of setting this variable to <<.value no>> can be found in the upgrade plugin within the [[TiddlyWiki Upgrade Wizard|http://www.tiddlywiki.com/upgrade.html]]. People can drag their wiki files onto the wizard without triggering the normal import display.
+An example of setting this variable to <<.value no>> can be found in the upgrade plugin within the [[TiddlyWiki Upgrade Wizard|https://www.tiddlywiki.com/upgrade.html]]. People can drag their wiki files onto the wizard without triggering the normal import display.

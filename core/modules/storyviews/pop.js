@@ -24,7 +24,7 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Scroll the node into view
@@ -35,7 +35,7 @@ PopStoryView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Reset once the transition is over
@@ -44,7 +44,14 @@ PopStoryView.prototype.insert = function(widget) {
 			{transition: "none"},
 			{transform: "none"}
 		]);
+		$tw.utils.setStyle(widget.document.body,[
+			{"overflow-x": ""}
+		]);
 	},duration);
+	// Prevent the page from overscrolling due to the zoom factor
+	$tw.utils.setStyle(widget.document.body,[
+		{"overflow-x": "hidden"}
+	]);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
@@ -65,12 +72,12 @@ PopStoryView.prototype.remove = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration(),
 		removeElement = function() {
-			if(targetElement.parentNode) {
-				widget.removeChildDomNodes();
+			if(targetElement && targetElement.parentNode) {
+				widget.destroy();
 			}
 		};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!(targetElement instanceof Element)) {
+	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		removeElement();
 		return;
 	}

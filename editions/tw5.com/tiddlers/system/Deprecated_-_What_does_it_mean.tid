@@ -1,0 +1,12 @@
+created: 20170126142116898
+modified: 20220704174221300
+title: Deprecated - What does it mean
+type: text/vnd.tiddlywiki
+
+{{$:/deprecated}}
+
+Deprecated features are marked with a special warning button. See: [[How to apply custom styles by tag]] for an example.
+
+''Tiddlers tagged `$:/deprecated`''
+
+><<list-links "[tag[$:/deprecated]]">>

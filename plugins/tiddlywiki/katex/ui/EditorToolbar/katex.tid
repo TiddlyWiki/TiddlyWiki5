@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex
+tags: $:/tags/EditorToolbar
+icon: $:/plugins/tiddlywiki/katex/katex-logo
+caption: katex
+description: create and insert preconfigured KaTeX snippets
+condition: [<targetTiddler>!is[image]]
+dropdown: $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex-dropdown
+text:

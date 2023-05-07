@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/text-slicer/readme
+
+This plugin contains tools to help slice up long texts into individual tiddlers. It currently works directly with XHTML documents and with Microsoft Word compatible DOCX documents via conversion to HTML.
+
+It is an expression of the philosophy of TiddlyWiki: that text is easier to re-use and work with if it is sliced up into separate chunks that can be independently manipulated, and then woven back together to make up stories and narratives for publication.
+

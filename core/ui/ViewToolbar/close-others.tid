@@ -3,11 +3,14 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/close-others-button}} {{$:/language/Buttons/CloseOthers/Caption}}
 description: {{$:/language/Buttons/CloseOthers/Hint}}
 
+\whitespace trim
 <$button message="tm-close-other-tiddlers" param=<<currentTiddler>> tooltip={{$:/language/Buttons/CloseOthers/Hint}} aria-label={{$:/language/Buttons/CloseOthers/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/close-others-button}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<span class="tc-btn-text"><$text text={{$:/language/Buttons/CloseOthers/Caption}}/></span>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/CloseOthers/Caption}}/>
+</span>
 </$list>
 </$button>

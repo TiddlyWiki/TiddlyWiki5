@@ -1,22 +1,29 @@
-created: 20140917083515996
-modified: 20150221223214000
-title: list-links Macro
-tags: Macros [[Core Macros]]
 caption: list-links
+created: 20140917083515996
+modified: 20221105090835041
+tags: Macros [[Core Macros]]
+title: list-links Macro
+type: text/vnd.tiddlywiki
 
 The <<.def list-links>> [[macro|Macros]] returns a formatted list of links to a [[selection of tiddlers|Title Selection]].
 
-If a tiddler has a <<.field caption>> field, this is shown instead of the tiddler's title.
+If a tiddler has a <<.field caption>> field, this is shown instead of the tiddler's title. If the caption field is empty, a blank entry is shown.
+
+Note: Each first [[step|Filter Step]] of a [[filter run|Filter Run]] not given any input titles receives the output of <$link to="all Operator">[all[tiddlers]]</$link> as its input. This means all the existing non-[[shadow|ShadowTiddlers]] tiddlers.
 
 !! Parameters
 
 ;filter
 : A [[filter|Filters]] selecting which tiddlers to include
+;field
+: The name of the field to transclude for each list item, defaulting to `caption`
 ;type
 : An HTML element to use for the overall list element, defaulting to `ul`
 ;subtype
 : An HTML element to use for each item in the list, defaulting to `li`
 ;class
 : A [[CSS|Cascading Style Sheets]] class for the overall list element
+;emptyMessage
+: Optional wikitext to display if there are no tiddlers with the specified tag
 
 <<.macro-examples "list-links">>

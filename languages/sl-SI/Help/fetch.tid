@@ -1,0 +1,27 @@
+title: $:/language/Help/fetch
+description: Pridobi tiddlerje iz wikija na URL naslovu
+
+Pridobite eno ali več datotek prek HTTP / HTTPS in uvozite tiddlerje, ki se ujemajo s filtrom, po potrebi pa spremenite dohodne naslove.
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+```
+Če se uporablja parameter "file", se pridobi samo ena datoteka. Prvi parameter je URL, iz katerega je treba naložiti datoteko.
+
+Če je uporabljen parameter `files`, se prenašajo več datotek. V tem primeru je prvi parameter filter, ki vsebuje seznam URL-jev, iz katerih je treba brati datoteke. Na primer: več tiddlerjev je označenih z: "remote-server" in vsebujejo polje: "url". Vtem primeru bo filter `[tag[remote-server]get[url]]` bo pridobil vse razpoložljive URL-je.
+
+Parameter `<import-filter>` določa, katere tiddlers želite uvoziti. Privzeto je: `[all [tiddlers]]`, če nič ni podano.
+
+Parameter `<transform-filter>` določa neobvezni filter, ki spreminja naslove uvoženih tiddlerjev. Na primer, `[addprefix[$:/myimports/]]` v vsak naslov.
+
+Če se pred ukazom `--fetch` uporabi `--verbose`, se izpišejo razširjene diagnostične informacije.
+
+Upoštevajte, da TiddlyWiki ne bo uvozil starejše različice že naloženega vtičnika.
+
+Naslednji primer prikliče vse nesistemske tiddlerje iz http://tiddlywiki.com in jih shrani v datoteko JSON:
+
+```
+tiddlywiki --verbose --fetch file "http://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+

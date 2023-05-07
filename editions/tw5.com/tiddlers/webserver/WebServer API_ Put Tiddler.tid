@@ -1,0 +1,27 @@
+created: 20181002131341062
+modified: 20210418100750769
+tags: [[WebServer API]]
+title: WebServer API: Put Tiddler
+type: text/vnd.tiddlywiki
+
+Saves the raw fields of a tiddler
+
+```
+PUT /recipes/default/tiddlers/{title}
+```
+
+The body should be in [[TiddlyWeb JSON tiddler format]].
+
+Parameters:
+
+* ''title'' - URI encoded title of the tiddler to save
+
+Headers:
+
+* ''x-requested-with'' - must be set to `TiddlyWiki` in order for the request to succeed, unless [[WebServer Parameter: csrf-disable]] is set to `yes`
+
+Response:
+
+* 204 No Content
+*> `Content-Type: text/plain`
+*> `Etag: "default/<title>/<changecount>:"`

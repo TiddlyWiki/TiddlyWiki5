@@ -1,0 +1,36 @@
+title: $:/language/Help/render
+description: Exécute le contenu de tiddlers individuels vers des fichiers
+
+Exécute le contenu des tiddlers individuels identifiés par un filtre et enregistre le résultat vers les fichiers spécifiés.
+
+Optionellement, on peut spécifier le titre d'un tiddler modèle (template). Dans ce cas, au lieu d'exécuter directement le contenu de chaque tiddler, le modèle est exécuté après avoir donné pour valeur à la variable "currentTiddler" le titre du tiddler dont le contenu est en cours d'exécution.
+
+On peut spécifier le nom et la valeur d'une variable supplémentaire.
+
+```
+--render <filtre-sur-les-tiddlers> [<filtre-des-noms-de-fichier>] [<type-de-rendu>] [<modèle>] [ [<nom>] [<valeur>] ]*
+```
+
+* ''filtre-sur-les-tiddlers'': Un filtre qui indentifie les tiddlers dont le contenu doit être exécuté
+* ''filtre-des-noms-de-fichier'': filtre optionnel pour transformer les titres de tiddlers en chemin de fichiers. À défaut, le filtre utilisé est `[is[tiddler]addsuffix[.html]]`, qui utilise le titre inchangé du tiddler comme nom de fichier
+* ''modèle'': Modèle optionnel via lequel chaque tiddler doit être rendu
+* ''type-de-rendu'': Type de rendu optionnel : la valeur `text/html` (par défaut) retourne le text HTML complet et `text/plain` se contente de retourner le contenu sous forme texte (autrement dit ignore les balises HTML et autres caractères non imprimables)
+* ''nom'': Nom des variables optionnelles
+* ''valeur'': Valeur des variables optionnelles
+
+Par défaut, le nom de fichier est résolu relativement au sous-répertoire `output` du répertoire de l'édition. La commande `--output` peut servir à diriger les sorties vers un répertoire différent.
+
+Notes :
+
+* Les éventuels fichiers présents dans le répertoire de sortie ne sont pas supprimmés
+* Les répertoires absents dans le chemin de fichier sont créés automatiquement.
+* Lorsqu'un tiddler contient des espaces dans le titre, prendre garde à utiliser aussi bien les guillemets nécessaires au shell et les doubles crochets droits propres à TiddlyWiki : `--render "[[Motovun Jack.jpg]]"`
+* Le filtre des noms de fichier est évalué après avoir initialisé l'élément d'entrée avec le titre du tiddler en cours d'exécution, permettant ainsi d'utiliser le titre comme base de calcul pour le nom de fichier. Par exemple `[encodeuricomponent[]addprefix[static/]]` applique un encodage d'URI à chaque titre, puis ajoute le préfixe `static/`
+* Il est possible d'utiliser plusieurs paires ''nom''/''valeur'' pour passer plus d'une variable
+* La commande `--render` remplace de manière plus souple les deux commandes `--rendertiddler` et `--rendertiddlers`, qui sont du même coup obsolètes. 
+
+Exemples :
+
+* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- enregistre le rendu HTML de tous les tiddlers non-système vers des fichiers du sous-répertoire "tiddlers", nommés après encodage URL des titres et ajout d'une extension html.
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- enregistre le rendu JSON des tiddlers tagués "HelloThere" dans un fichier nommé "tiddlers.json"
+

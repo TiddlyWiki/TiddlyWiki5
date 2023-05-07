@@ -1,0 +1,8 @@
+caption: root-serve-type
+created: 20180630180233285
+modified: 20180702160557700
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: root-serve-type
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''root-serve-type'' determines the content type with which the root wiki tiddler is rendered. The default is `text/html`.

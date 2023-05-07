@@ -1,12 +1,7 @@
 title: $:/plugins/tiddlywiki/codemirror/readme
 
-This plugin provides an enhanced text editor component based on [[CodeMirror|http://codemirror.net]]. It provides several advantages over the default browser text editor:
-
-* Code colouring for many languages (see [[the official documentation here|http://codemirror.net/mode/index.html]])
-* Auto closing brackets and tags
-* Folding brackets, comments, and tags
-* Auto-completion
+This plugin provides an enhanced text editor component based on [[CodeMirror|http://codemirror.net]]. The basic configuration is designed to be as lightweight as possible and is just around 235kb of size. Additional features can be installed with ~CodeMirror ~AddOns from the plugin library.
 
 [[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/codemirror]]
 
-Based on ~CodeMirror version 5.13.2
+Based on ~CodeMirror version 5.58.3

@@ -3,7 +3,7 @@ modified: 20141012191051894
 title: ReadMe
 type: text/vnd.tiddlywiki
 
-\define tv-wikilink-template() http://tiddlywiki.com/static/$uri_doubleencoded$.html
+\define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 
@@ -11,7 +11,7 @@ Bienvenue sur <<tw>>, un carnet de notes personnel web et non-linéaire que tout
 
 <<tw>> est un wiki interactif en JavaScript. Il peut être utilisé dans le navigateur sous forme de fichier HTML autonome ou comme une puissante application Node.js. Il est extrêmement personnalisable : l'interface utilisateur dans son intégralité est elle-même implémentée en WikiText recomposable à volonté.
 
-Plus d'informations et démonstrations sur http://tiddlywiki.com
+Plus d'informations et démonstrations sur https://tiddlywiki.com
 
 ! Installation de <<tw>> sur Node.js
 

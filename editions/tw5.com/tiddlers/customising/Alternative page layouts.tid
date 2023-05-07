@@ -1,0 +1,15 @@
+created: 20201123172925848
+modified: 20211126120310891
+tags: [[Customise TiddlyWiki]]
+title: Alternative page layouts
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.23">> You can have multiple alternative page layouts and switch between them. To see a list of available layouts and switch between them, use the keyboard shortcut <kbd><<displayshortcuts ((layout-switcher))>></kbd>.
+
+! Creating an alternative page layout
+
+Creating an alternative layout goes beyond [[adding or removing features|Page and tiddler layout customisation]] from the default interface and allows you to create an entirely new layout from scratch.
+
+To create an alternative page layout and have the ability to switch to it, you need to create an alternative page template tiddler with the [[SystemTag: $:/tags/Layout]].
+
+This alternative page template can either be a tweaked and modified version of the [[default page template|$:/core/ui/PageTemplate]], or something entirely different. The layout switching mechanism requires that your page template tiddler has the fields `name` and `description`, which are used in the listing in the switching user interface.

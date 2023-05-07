@@ -1,0 +1,18 @@
+created: 20131129094353704
+fr-title: TiddlyWiki sur Node.js
+modified: 20220417143845088
+tags: Platforms
+title: TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+Exécuter <<tw>> avec [[Node.js]] comporte plusieurs avantages par rapport à la version s'exécutant dans un seul fichier<<dp>>
+
+* Vous pouvez éditer le contenu du wiki dans n'importe quel navigateur compatible HTML5, y compris s'il tourne sur des smartphones ou des tablettes
+* Les tiddlers sont stockés dans des fichiers séparés, que vous pouvez organiser comme vous le souhaitez
+* Vous avez la possibilité de construire plusieurs wikis différents à partir de contenu partagé entre eux ou spécifique à un seul wiki.
+
+<<.warning """Notez que <<tw>> sur Node.js ne permet pas de modifier directement les fichiers de tiddlers sur le disque en dehors de <<tw>> tant qu'il est en cours de fonctionnement. Toute modification ne sera prise en compte qu'après un redémarrage du serveur. La méthode recommandée pour interagir avec un wiki actif est à travers l'API HTTP ou JavaScript.""">>
+
+Pour plus d'informations, voir :
+
+<<list-links "[tag[TiddlyWiki on Node.js]]">>

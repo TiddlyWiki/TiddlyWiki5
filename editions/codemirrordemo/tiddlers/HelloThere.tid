@@ -1,11 +1,43 @@
 title: HelloThere
 
-This is a demo of TiddlyWiki5 incorporating a plugin for the [[CodeMirror|http://codemirror.net/]] text editor for the web.
+This is a demo of [[TiddlyWiki5|https://tiddlywiki.com]] incorporating a plugin for the [[CodeMirror|http://codemirror.net/]] text editor for the web.
 
-Try editing the tiddler LoremIpsum to try out the editor.
+The ~CodeMirror plugin can be extended with ~AddOns for more functionality:
 
-To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
+* Search and Replace
+* Text - Autocompletion
+* Syntax highlighting
+* Fullscreen editing
+* Keymaps in the style of Emacs, Sublime Text or Vim
+* Closing Brackets
+* Closing Tags
+
+NOTE: This demo has the ''Sublime Text'' keymap installed.
+
+!!!Try editing the tiddler [[Draft of 'LoremIpsum']] to try out the editor.
+
+Some commands and functions to try:
+
+* Ctrl+F : Search panel to search for expressions
+* Ctrl+H (sublime text shortcut, default is Ctrl+Shift+R) : Search and Replace
+* Ctrl+Space : Triggers Autocompletion
+* typing an opening bracket like `{` automatically creates the closing bracket `}`
+* tiddlers with type `application/javascript`, `application/json`, `text/css`, `text/html`, `text/xml`, `text/x-markdown` and `text/x-tiddlywiki` have Syntax Highlighting
+* tiddlers with type `text/html` automatically close tags like `<div>` when the closing `>` gets typed
+* Multiple cursors: holding Ctrl pressed while selecting words results in multiple cursors. If you type, all selections will update
+
+This demo uses the ''Sublime Text Keymap'' - See the Sidebar Tab ''Keymap'' or the [[Sublime Text Keymap Readme|$:/plugins/tiddlywiki/codemirror-keymap-sublime-text/readme]] for all available keyboard shortcuts
+
+To add the base plugin to your own ~TiddlyWiki5, just drag this link to the browser window:
 
 [[$:/plugins/tiddlywiki/codemirror]]
 
-{{$:/plugins/tiddlywiki/codemirror/readme}}
+[[CodeMirror plugin Readme|$:/plugins/tiddlywiki/codemirror/readme]]
+
+[[CodeMirror plugin Usage|$:/plugins/tiddlywiki/codemirror/usage]]
+
+To add ~AddOns to your ~CodeMirror plugin, go to ~ControlPanel - Plugins and drag the desired ~AddOn to your wiki browser window
+
+The configuration for ~AddOns is done automatically, configuration for sensible settings can be done in ~ControlPanel - Settings - ~CodeMirror
+
+

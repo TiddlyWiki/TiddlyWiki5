@@ -1,0 +1,30 @@
+caption: match
+created: 20190731080209404
+modified: 20190731081047732
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: each item in the input list that does not match the operand string
+op-output: each item in the input list that matches the operand string (potentially including duplicates)
+op-parameter: the string to be matched
+op-purpose: returns each item in the list that matches the operand string
+op-suffix: the <<.op match>> operator uses a rich suffix, see below for details
+tags: [[Filter Operators]]
+title: match Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">>
+
+The <<.op match>> operator uses an extended syntax that permits multiple flags to be passed:
+
+```
+[match:<flag list>[<operand>]]
+```
+
+* ''flag list'': a comma delimited list of flags
+* ''operand'': filter operand
+
+The available flags are:
+
+* ''casesensitive'': (default), this flag forces a case-sensitive match, where upper and lower case letters are considered different
+* ''caseinsensitive'': overrides the default so that upper and lower case letters are considered identical for matching purposes
+
+<<.operator-examples "match">>

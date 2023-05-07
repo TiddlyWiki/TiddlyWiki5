@@ -1,8 +1,7 @@
 title: $:/core/templates/static.content
-type: text/vnd.tiddlywiki
 
 <!-- For Google, and people without JavaScript-->
-This [[TiddlyWiki|http://tiddlywiki.com]] contains the following tiddlers:
+This [[TiddlyWiki|https://tiddlywiki.com]] contains the following tiddlers:
 
 <ul>
 <$list filter=<<saveTiddlerFilter>>>

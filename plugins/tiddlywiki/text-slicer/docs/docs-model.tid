@@ -1,0 +1,133 @@
+title: $:/plugins/tiddlywiki/text-slicer/docs/model
+tags: $:/plugins/tiddlywiki/text-slicer/docs
+caption: Document Model
+
+Individual tiddlers are created for each heading, paragraph and list item. They are linked together into a hierarchical outline using lists.
+
+For example, consider a tiddler titled ''Example'' containing this simple text:
+
+<<<
+! This is a heading
+
+This is a paragraph.
+
+* And the first list item
+* Second list item
+<<<
+
+It will be sliced up into:
+
+* a tiddler for the overall document
+** a tiddler for the heading
+*** a tiddler for the paragraph
+*** a tiddler for the list
+**** and a tiddler for each list item
+
+These tiddlers are bound together using lists: the parent tiddler has a ''list'' field that lists each child in the correct order.
+
+!! Slicing Process
+
+Slicing generates the following component tiddlers.
+
+Tiddler titles are generated automatically in most cases (but can subsequently be changed manually). The automatically generated title is made up of concatenating the following elements:
+
+* root text (e.g. ''para'')
+* a dash ''-''
+* the first few words of the text of the item (up to 40 characters), separated with dashes ''-''
+* if necessary, a dash ''-'' and a numerical index to make the title unique
+
+For example, ''para-how-to-use-pentagonal-tiles 23''.
+
+Any CSS classes used in the original document are assigned as tags to the associated tiddlers.
+
+!!! Document
+
+The document itself is represented by a tiddler with the following fields:
+
+* ''toc-type'': the text "document"
+* ''title'': the text ''"Sliced up "'' plus the title of the tiddler that was sliced
+* ''text'': Available for comments about the document
+* ''list'': ordered list of tiddlers making up the root level of this document
+
+!!! Headings
+
+Tiddlers representing headings have the following fields:
+
+* ''toc-type'': the text "heading"
+* ''toc-heading-level'': the heading level "h1", "h2", "h3" etc.
+* ''title'': an automatically generated unique title
+* ''text'': the text of the heading
+* ''list'': ordered list of tiddlers tagged with this heading (i.e. the child headings, paragraphs and lists displayed under this heading)
+** In addition, any CSS classes found in the HTML are converted into tags
+
+!!! Paragraphs
+
+Tiddlers representing paragraphs have the following fields:
+
+* ''toc-type'': the text "paragraph"
+* ''title'': an automatically generated unique title
+* ''text'': the text of the paragraph
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+!!! Lists
+
+Lists are represented by several tiddlers: one for the list itself, and one for each item in the list.
+
+The tiddler representing the list itself has the following fields:
+
+* ''toc-type'': the text "list"
+* ''toc-list-type'': the text "ul" or "ol"
+* ''toc-list-filter'': the default filter used to generate the titles of the list items
+* ''title'': an automatically generated unique title
+* ''list'': ordered list of titles of tiddlers representing the items in this list
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+The tiddlers representing items within the list have the following fields:
+
+* ''toc-type'': the text "item"
+* ''title'': an automatically generated unique title
+* ''text'': the text of the list item
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+!!! Definition lists
+
+Definition lists are represented by several tiddlers: one for the definition list itself, and one for each term and definition in the list.
+
+The tiddler representing the definition list itself has the following fields:
+
+* ''toc-type'': the text "def-list"
+* ''toc-list-filter'': the default filter used to generate the titles of the definition list items
+* ''title'': an automatically generated unique title
+* ''list'': ordered list of titles of tiddlers representing the items (terms and/or definition) in the definition list
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+The tiddlers representing terms within the definition list have the following fields:
+
+* ''toc-type'': the text "term"
+* ''title'': an automatically generated unique title
+* ''text'': the text of the definition list term
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+The tiddlers representing definitions within the definition list have the following fields:
+
+* ''toc-type'': the text "definition"
+* ''title'': an automatically generated unique title
+* ''text'' : the text of the definition list definition
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+!!! Images
+
+Tiddlers representing images have the following fields:
+
+* ''toc-type'': the text "image"
+* ''title'': an automatically generated unique title
+* ''type'': appropriate content type for the image (eg "image/jpeg")
+
+!!! Notes
+
+Notes are available during editing but hidden for static renderings. The slicing mechanism does not generate notes; they can only be subsequently added manually. Tiddlers representing notes have the following fields:
+
+* ''toc-type'': the text "note"
+* ''title'': an automatically generated unique title
+* ''text'': the text of the note
+* ''tags'': any CSS classes found in the HTML are converted into tags

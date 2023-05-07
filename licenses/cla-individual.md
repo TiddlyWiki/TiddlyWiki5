@@ -5,8 +5,7 @@ Thank you for your interest in contributing to TiddlyWiki5. TiddlyWiki is owned 
 
 This contributor agreement ("Agreement") documents the rights granted by contributors to Us. To make this document effective, please sign it and send it to Us by electronic submission, following the instructions in `contributing.md`, which is in the root directory of the project repository. This is a legally binding document, so please read it carefully before agreeing to it. The Agreement may cover more than one software project managed by Us.
 
-1. Definitions
----------------
+## 1. Definitions
 
 "You" means the individual who Submits a Contribution to Us.
 
@@ -26,8 +25,7 @@ This contributor agreement ("Agreement") documents the rights granted by contrib
 
 "Media" means any portion of a Contribution which is not software.
 
-2. Grant of Rights
-------------------
+## 2. Grant of Rights
 
 ### 2.1 Copyright License
 
@@ -61,8 +59,7 @@ Any rights not expressly licensed under this section are expressly reserved by Y
 
 We may use 3rd party libraries to create TiddlyWiki5 plugins. These libraries may have their own licenses. 3rd party software and licenses are not subject in this CLA, while TiddlyWiki5 plugins that use these libraries are. 3rd party libraries may be included everywhere, especially in the following directories and their subdirectories: `plugins/` and `editions/`.
 
-3. Agreement
-------------
+## 3. Agreement
 
 You confirm that:
 
@@ -74,18 +71,15 @@ You confirm that:
 
 (d) You have followed the instructions in `contributing.md`, if You do not own the Copyright in the entire work of authorship Submitted. The file can be found in the root directory of the project repository.
 
-4. Disclaimer
--------------
+## 4. Disclaimer
 
 EXCEPT FOR THE EXPRESS WARRANTIES IN SECTION 3, THE CONTRIBUTION IS PROVIDED "AS IS". MORE PARTICULARLY, ALL EXPRESS OR IMPLIED WARRANTIES INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE EXPRESSLY DISCLAIMED BY YOU TO US. TO THE EXTENT THAT ANY SUCH WARRANTIES CANNOT BE DISCLAIMED, SUCH WARRANTY IS LIMITED IN DURATION TO THE MINIMUM PERIOD PERMITTED BY LAW.
 
-5. Consequential Damage Waiver
-------------------------------
+## 5. Consequential Damage Waiver
 
 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABLE FOR ANY LOSS OF PROFITS, LOSS OF ANTICIPATED SAVINGS, LOSS OF DATA, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL AND EXEMPLARY DAMAGES ARISING OUT OF THIS AGREEMENT REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.
 
-6. Miscellaneous
-----------------
+## 6. Miscellaneous
 
 6.1 This Agreement will be governed by and construed in accordance with the laws of the State of California and the United States excluding its conflicts of law provisions. Under certain circumstances, the governing law in this section might be superseded by the United Nations Convention on Contracts for the International Sale of Goods ("UN Convention") and the parties intend to avoid the application of the UN Convention to this Agreement and, thus, exclude the application of the UN Convention in its entirety to this Agreement.
 
@@ -104,8 +98,7 @@ The below-signed are contributors to a code repository that is part of the proje
 
 eg: Jeremy Ruston, @Jermolene, 2011/11/22
 
-Contributors
-------------
+## Contributors
 
 Mario Pietsch, @pmario, 2013/09/21
 
@@ -141,7 +134,7 @@ Bram Chen, @BramChen, 2014/02/20
 
 Xavier Cazin, @xcazin, 2014/02/21
 
-Rustem Akbulatov, @nameanyone, 2014/03/04
+Rustem Akbulatov, @rubaboo, 2014/03/04
 
 Harald Albrecht, @TheDiveO, 2014/03/12
 
@@ -314,3 +307,225 @@ Matias Goldman, @twMat, 2017/01/22
 Andrew Webb, @tejjyid, 2017/03/06
 
 Richard Decal, @crypdick, 2017/04/04
+
+Adrian Morosanu, @morosanuae, 2017/06/02
+
+Rob Hoelz, @hoelzro, 2017/05/08
+
+Saq Imtiaz, @saqimtiaz, 2017/06/14
+
+Simon Huber, @BurningTreeC, 2017/12/22
+
+Brian McKee, @furicle, 2018/01/08
+
+Diego Mesa, @diego898, 2018/01/11
+
+Mete Balci, @metebalci, 2018/03/19
+
+Sebastian Silva, @icarito, 2018/04/03
+
+Luca Dorigo, @ldorigo, 2018/05/05
+
+Anthony Muscio, @AnthonyMuscio, 2018/05/21
+
+Muhammad Talha Mansoor, @talha131, 2018/07/16
+
+Bimba László, @bimlas, 2018/08/10
+
+Andres Carrera, @Lioric, 2018/10/11
+
+Yurii Rashkovskii, @yrashk, 2018/10/19
+
+Abraham Samma, @abesamma, 2018/10/31
+
+German Ramírez, @g0erman, 2018/11/14
+
+@00SS, 2018/12/10
+
+David Nebauer, @dnebauer, 2019/01/01
+
+Moritz Ulrich, @the-kenny, 2019/01/03
+
+Johannes Löthberg, @kyrias, 2019/01/07
+
+Ben Webber, @benwebber, 2019/01/09
+
+Jesse Weinstein, @JesseWeinstein, 2019/01/14
+
+Adam Sherwood, @admls, 2019/01/27
+
+Joshua Fontany, @joshuafontany, 2019/03/07
+
+Irene Castaños, @jdjdjdjdjdjd, 2019/03/11
+
+Dong Zhihong, @donmor, 2019/05/29
+
+Joshua Stubbs, @LordRatte, 2019/05/31
+
+Robin Munn, @rmunn, 2019/06/16
+
+Mark Kerrigan, @markkerrigan, 2019/08/24
+
+Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
+
+Nils Lindemann, @nilslindemann, 2022/01/10
+
+Marica Odagaki, @ento, 2019/08/30
+
+Mark Stegeman, @markstegeman, 2019/08/31
+
+Mohammad Rahmani, @kookma, 2019/09/03
+
+Jan-Oliver Kaiser, @janno, 2019/09/06
+
+Xavier Maysonnave, @xmaysonnave, 2019/11/08
+
+Will Atwood Mitchell, @wam, 2019/12/11
+
+Stefan Krüger, @s-light, 2020/01/04
+
+Lee Sheng Long, @s-l-lee, 2020/01/25
+
+Scott Willeke, @activescott, 2020/02/01
+
+@lucible, 2020/02/05
+
+Matthias Bilger, @m42e, 2020/03/11
+
+Mandar Vaze, @mandarvaze, 2020/04/08
+
+Lin Dongwu, @linonetwo, 2020/04/15
+
+Tobias Hermann, @idotobi, 2020/04/19 
+
+Nicolas Petton, @NicolasPetton, 2020/04/30
+
+Csaba Molnar, @mocsa, 2020/04/29
+
+Jonas Passerini, @passuf, 2020/05/14
+
+Dazhong Xia, @jdangerx, 2020/06/23
+
+Diep Pham, @favadi, 2020/07/30
+
+Adithya Badidey, @adithya-badidey, 2020/08/10
+
+Kamal Habash, @Kamal-Habash, 2020/08/28
+
+Florian Kohrt, @fkohrt, 2020/09/10
+
+Gerald Liu, @gera2ld, 2020/09/25
+
+Stefano Stoduto, @OmbraDiFenice, 2020/10/03
+
+Ryan Kramer, @default-kramer, 2020/10/24
+
+Miha Lunar, @SmilyOrg, 2020/11/04
+
+Maki Lam, @makiaea, 2020/12/27
+
+Chris Nicoll, @clutterstack, 2020/12/28
+
+Odin Jorna, @OdinJorna, 2020/12/31
+
+Joe Bordes, @joebordes, 2021/01/02
+
+Glenn Dixon, @dixonge, 2021/01/03
+
+Russ Thomas, @codacodr, 2021/01/03
+
+Peter Neumark, @neumark, 2021/01/15
+
+Daniel Goß, @FlashSystems, 2021/01/19
+
+@leehawk787, 2021/01/21
+
+Yoonchae Lee, @BlueGreenMagick, 2021/01/21
+
+Dyllon Gagnier, @slaymaker1907, 2021/01/24
+
+J. Wilhelm, @jeremyredhead, 2021/01/27
+
+Quentin Minster, @laomaiweng, 2021/03/10
+
+Cindy Ruan, @cdruan, 2021/03/18
+
+Urban Alič, @ualich, 2021/05/06
+
+Joe Bordes, @joebordes, 2021/05/30
+
+Frank Bruns-Ballhausen, @FBB-de, 2021/06/09
+
+Álvaro González Rincón, @Alzacon, 2021/06/10
+
+RJ Skerry-Ryan, @rryan, 2021/07/03
+
+J. Song, @8d1h, 2021/08/05
+
+Soren Bjornstad, @sobjornstad, 2021/08/18
+
+Boris Mann, @bmann, 2021/09/28
+ 
+Maurycy Zarzycki, @evidentlycube, 2021-10-01
+
+Brian Theado, @btheado, 2021-10-10
+
+@Telumire, 2021-10-18
+
+@eiro10, 2021-11-14
+
+Fred, @tw-FRed, 2021/12/04
+
+Joseph Cosentino, @jc-ose, 2021-12-14
+
+@davout1806, 2021/12/17
+
+@pmario, @TiddlyVee, 2022/02/26
+
+Eskha, @es-kha, 2022/03/04
+
+@FSpark, 2022/03/08
+
+Guang Li, @oflg, 2022/03/12
+
+Dam S., @damscal, 2022/03/24
+
+Max Schillinger, @MaxGyver83, 2022/05/11
+
+Nolan Darilek, @NDarilek,  2022/06/21
+
+Keiichi Shiga (🎈 BALLOON | FU-SEN), @fu-sen. 2022/07/07
+
+Nathaniel Knight, @nathanielknight, 2022/07/26
+
+HuanCheng Bai, @bestony, 2022/09/17
+
+Carlo Colombo, @carlo-colombo, 2022/11/30
+
+Wincent Balin, @wincentbalin, 2022/12/18
+
+Jeffrey Zhang, @jeffrey4l, 2022/12/24
+
+cs84285, @cs8425, 2022/12/30
+
+Nick Bell, @newmedicine, 2023/01/01
+
+Frank Kmiec, @fkmiec, 2023-01-01
+
+Pippo Peppo, @pippep, 2023-01-03
+
+Scott Sauye, @CrossEye, 2023-01-04
+
+Marcus Winter, @yaisog, 2023-01-07
+
+Ethan Weller, @gamedungeon, 2023-01-17
+
+Mateusz Wilczek, @mateuszwilczek, 2023/02/16
+
+Andrea Octo, @andrigamerita, 2023/02/24
+
+HuanC Fu, @hffqyd, 2023/03/03
+
+Michelle Saad, @michsa, 2023-03-08
+
+Yukai Chou, @muzimuzhi, 2023-04-07

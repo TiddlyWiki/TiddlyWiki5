@@ -8,7 +8,7 @@ De upgradebibliotheek is opgemaakt als een normale plugin tiddler van het plugin
 Dit commando is bedoeld voor intern gebruik; het is alleen relevant voor gebruikers die een eigen upgradeprocedure maken.
 
 ```
---makelibrary <title>
+--makelibrary <titel>
 ```
 
 Het titelargument is standaard `$:/UpgradeLibrary`.

@@ -1,5 +1,5 @@
 created: 20131228163141555
-modified: 20150221223416000
+modified: 20200330105334133
 tags: Macros [[Core Macros]]
 title: makedatauri Macro
 type: text/vnd.tiddlywiki
@@ -15,5 +15,7 @@ The <<.def makedatauri>> [[macro|Macros]] takes a piece of text and an associate
 : The text to be converted to a data URI
 ;type
 : The ContentType of the text
+;_canonical_uri
+: The optional ''_canonical_uri'' address of the content
 
 <<.macro-examples "makedatauri">>

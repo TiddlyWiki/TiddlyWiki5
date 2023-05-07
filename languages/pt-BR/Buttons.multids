@@ -1,0 +1,179 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: Pesquisa Avançada
+AdvancedSearch/Hint: Pesquisa Avançada
+Bold/Caption: Negrito
+Bold/Hint: Formatar a seleção como negrito
+Cancel/Caption: Cancelar
+Cancel/Hint: Cancelar a edição deste tiddler
+Clear/Caption: Limpar
+Clear/Hint: Preencher o quadro com cor
+Clone/Caption: Duplicar
+Clone/Hint: Duplicar este tiddler
+Close/Caption: Fechar
+Close/Hint: Fechar este Tiddler
+CloseAll/Caption: Fechar Todos
+CloseAll/Hint: Fechar Todos os Tiddlers
+CloseOthers/Caption: Fechar Outros
+CloseOthers/Hint: Fechar os Outros Tiddlers
+ControlPanel/Caption: Painel de Controle
+ControlPanel/Hint: Abrir o Painel de Controle
+Delete/Caption: Apagar
+Delete/Hint: Apagar este Tiddler
+Edit/Caption: Editar
+Edit/Hint: Editar este Tiddler
+EditorHeight/Caption: Altura do Editor
+EditorHeight/Caption/Auto: Ajustar automaticamente a altura ao tamanho do conteúdo
+EditorHeight/Caption/Fixed: Altura Fixa:
+EditorHeight/Hint: Escolha a altura do editor de texto
+Encryption/Caption: Criptografia
+Encryption/ClearPassword/Caption: Limpar Senha
+Encryption/ClearPassword/Hint: Limpar a senha e salvar esta wiki sem criptografia
+Encryption/Hint: Definir ou limpar a senha de gravação desta wiki
+Encryption/SetPassword/Caption: Definir Senha
+Encryption/SetPassword/Hint: Definir a senha para salvar esta wiki com criptografia
+Excise/Caption: Separar
+Excise/Caption/Excise: Executar separação
+Excise/Caption/MacroName: Nome da Macro:
+Excise/Caption/NewTitle: Título do novo tiddler:
+Excise/Caption/Replace: Substituir texto separado por:
+Excise/Caption/Replace/Link: Link
+Excise/Caption/Replace/Macro: Macro
+Excise/Caption/Replace/Transclusion: Inclusão
+Excise/Caption/Tag: Etiquetar novo tiddler com o título deste tiddler
+Excise/Caption/TiddlerExists: Atenção: Esse tiddler já existente
+Excise/Hint: Separar o texto selecionado para um novo tiddler
+ExportPage/Caption: Exportar Tudo
+ExportPage/Hint: Exportar Todos os Tiddlers
+ExportTiddler/Caption: Exportar Tiddler
+ExportTiddler/Hint: Exportar Tiddler
+ExportTiddlers/Caption: Exportar Tiddlers
+ExportTiddlers/Hint: Exportar Tiddlers
+Fold/Caption: Fechar Tiddler
+Fold/FoldBar/Caption: Menu-Lateral
+Fold/FoldBar/Hint: Barra de menu opcional para fechar e abrir tiddlers
+Fold/Hint: Fechar o conteúdo deste Tiddler
+FoldAll/Caption: Fechar todos os Tiddlers
+FoldAll/Hint: Fechar o conteúdo de todos os tiddlers abertos
+FoldOthers/Caption: Fechar outros Tiddlers
+FoldOthers/Hint: Fechar o conteúdo dos outros tiddlers abertos
+FullScreen/Caption: Tela Cheia
+FullScreen/Hint: Entrar ou sair do modo tela cheia
+Heading1/Caption: Cabeçalho 1
+Heading1/Hint: Formatar todas linhas selecionadas com o nível 1 de cabeçalho
+Heading2/Caption: Cabeçalho 2
+Heading2/Hint: Formatar todas linhas selecionadas com o nível 2 de cabeçalho
+Heading3/Caption: Cabeçalho 3
+Heading3/Hint: Formatar todas linhas selecionadas com o nível 3 de cabeçalho
+Heading4/Caption: Cabeçalho 4
+Heading4/Hint: Formatar todas linhas selecionadas com o nível 4 de cabeçalho
+Heading5/Caption: Cabeçalho 5
+Heading5/Hint: Formatar todas linhas selecionadas com o nível 5 de cabeçalho
+Heading6/Caption: Cabeçalho 6
+Heading6/Hint: Formatar todas linhas selecionadas com o nível 6 de cabeçalho
+Help/Caption: Ajuda
+Help/Hint: Mostrar Painel de Ajuda
+HideSideBar/Caption: Ocultar Barra de Menu
+HideSideBar/Hint: Ocultar a barra lateral
+Home/Caption: Início
+Home/Hint: Abrir os tiddlers padrão
+Import/Caption: Importar
+Import/Hint: Importar arquivos de vários formatos, incluindo texto, imagem, Tiddlywiki ou JSON
+Info/Caption: Informação
+Info/Hint: Mostrar informações sobre este tiddler
+Italic/Caption: Itálico
+Italic/Hint: Aplicar formatação itálico a seleção
+Language/Caption: Idioma
+Language/Hint: Escolher a idioma da interface do usuário
+LineWidth/Caption: espessura da linha
+LineWidth/Hint: Definir a espessura da linha d caneta
+Link/Caption: Link
+Link/Hint: Criar link em wikitext
+ListBullet/Caption: Lista com marcador circular)
+ListBullet/Hint: Formatar a seleção com marcadores circular
+ListNumber/Caption: Lista Numerada
+ListNumber/Hint: Gerenciador Tiddler
+Manager/Caption: Gerenciador Tiddler
+Manager/Hint: Abrir Gerenciador Tiddler
+MonoBlock/Caption: Justificado
+MonoBlock/Hint: Justificar bloco selecionado
+MonoLine/Caption: Espaçamento Uniforme
+MonoLine/Hint: Aplicar o espaçamento uniforme formatação da seleção
+More/Caption: Mais
+More/Hint: Mais Opções
+NewHere/Caption: Novo
+NewHere/Hint: Criar um novo tiddler no mesmo assunto
+NewImage/Caption: Nova Imagem
+NewImage/Hint: Criar novo tiddler de desenho
+NewJournal/Caption: Nova Edição
+NewJournal/Hint: Criar uma nova edição
+NewJournalHere/Caption: Nova edição aqui
+NewJournalHere/Hint: Criar uma nova edição do mesmo assunto
+NewMarkdown/Caption: Criar tiddler Marcado
+NewMarkdown/Hint: Criar um novo tiddler marcado
+NewTiddler/Caption: Novo Tiddler
+NewTiddler/Hint: Criar um novo tiddler
+Opacity/Caption: Opacidade
+Opacity/Hint: Definir opacidade de desenho
+OpenWindow/Caption: Abrir em nova janela
+OpenWindow/Hint: Abrir tiddler em nova janela
+Paint/Caption: Cor de desenho
+Paint/Hint: Definir a cor de desenho
+Palette/Caption: Cores
+Palette/Hint: Escolher a paleta de cores
+Permalink/Caption: Link Permanente
+Permalink/Hint: Configure um link direto na barra de endereços do navegador para todos os tiddlers neste assunto
+Permaview/Caption: Exibido agora
+Permaview/Hint: Definir na endereço do navegador uma URL que inclui todos os tiddlers visiveis agora
+Picture/Caption: Imagem
+Picture/Hint: Inserir imagem
+Preview/Caption: Pré-visualizar
+Preview/Hint: Mostrar pré-visualização
+PreviewType/Caption: pré-visualização por tipo de arquivo
+PreviewType/Hint: Escolher o tipo de pré-visualização
+Print/Caption: Imprimir página
+Print/Hint: Imprimir a página atual
+Quote/Caption: Citação
+Quote/Hint: Formatar as linhas selecionadas como citação
+Refresh/Caption: Atualizar
+Refresh/Hint: Recarregar totalmente a wiki atual
+Save/Caption: Salvar
+Save/Hint: Salvar este tiddler
+SaveWiki/Caption: Salvar alterações
+SaveWiki/Hint: Salvar as alterações
+ShowSideBar/Caption: Exibir barra lateral
+ShowSideBar/Hint: Exibir a barra lateral
+Size/Caption: Tamanho da imagem
+Size/Caption/Height: Altura:
+Size/Caption/Resize: Redimensionar imagem
+Size/Caption/Width: Largura:
+Size/Hint: Definir tamanho da imagem
+Stamp/Caption: Selo
+Stamp/Caption/New: Adicione o seu
+Stamp/Hint: Inserir um trecho de texto pré configurado
+Stamp/New/Text: Novo trecho de texto (Lembre-se de adicionar um título.
+Stamp/New/Title: Nome exibido no menu
+StoryView/Caption: Estilo de exibição
+StoryView/Hint: Escolher o estilo de exibição principal
+Strikethrough/Caption: Riscado
+Strikethrough/Hint: Formatar o texto selecionado com riscado
+Subscript/Caption: Subscrito
+Subscript/Hint: Formatar o texto selecionado com subscrito
+Superscript/Caption: Sobrescrito
+Superscript/Hint: Formatar o texto selecionado com sobrescrito
+TagManager/Caption: Gerenciador de Assuntos (Tags)
+TagManager/Hint: Abrir gerenciador de assuntos(Tags)
+Theme/Caption: Estilo
+Theme/Hint: Escolher o tema de exibição
+Timestamp/Caption: Data e hora
+Timestamp/Hint: Define atualização de Data/Hora
+Timestamp/Off/Caption: Data/Hora Desativado
+Timestamp/Off/Hint: Não atualizar data e hora quando os tiddlers forem modificados
+Timestamp/On/Caption: Data/Hora Ativado
+Timestamp/On/Hint: Atualizar data e hora quando os tiddlers forem modificados
+Underline/Caption: Sublinhado
+Underline/Hint: Formatar a seleção como texto sublinhado
+Unfold/Caption: Abrir tiddler
+Unfold/Hint: Abrir o conteúdo deste tiddler
+UnfoldAll/Caption: Abrir todos os  tiddlers
+UnfoldAll/Hint: Abrir o conteúdo de todos os tiddlers

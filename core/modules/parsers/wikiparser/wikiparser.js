@@ -25,6 +25,15 @@ Attributes are stored as hashmaps of the following objects:
 /*global $tw: false */
 "use strict";
 
+/*
+type: content type of text
+text: text to be parsed
+options: see below:
+	parseAsInline: true to parse text as inline instead of block
+	wiki: reference to wiki to use
+	_canonical_uri: optional URI of content if text is missing or empty
+	configTrimWhiteSpace: true to trim whitespace
+*/
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
 	var self = this;
@@ -33,35 +42,51 @@ var WikiParser = function(type,text,options) {
 		this.loadRemoteTiddler(options._canonical_uri);
 		text = $tw.language.getRawString("LazyLoadingWarning");
 	}
-	// Initialise the classes if we don't have them already
-	if(!this.pragmaRuleClasses) {
-		WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
-	}
-	if(!this.blockRuleClasses) {
-		WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
-	}
-	if(!this.inlineRuleClasses) {
-		WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
-		this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
-	}
 	// Save the parse text
 	this.type = type || "text/vnd.tiddlywiki";
 	this.source = text || "";
 	this.sourceLength = this.source.length;
+	// Flag for ignoring whitespace
+	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
+	// Parser mode
+	this.parseAsInline = options.parseAsInline;
 	// Set current parse position
 	this.pos = 0;
-	// Instantiate the pragma parse rules
-	this.pragmaRules = this.instantiateRules(this.pragmaRuleClasses,"pragma",0);
-	// Instantiate the parser block and inline rules
-	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
-	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
-	// Parse any pragmas
+	// Start with empty output
 	this.tree = [];
+	// Assemble the rule classes we're going to use
+	var pragmaRuleClasses, blockRuleClasses, inlineRuleClasses;
+	if(options.rules) {
+		pragmaRuleClasses = options.rules.pragma;
+		blockRuleClasses = options.rules.block;
+		inlineRuleClasses = options.rules.inline;
+	} else {
+		// Setup the rule classes if we don't have them already
+		if(!this.pragmaRuleClasses) {
+			WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
+		}
+		pragmaRuleClasses = this.pragmaRuleClasses;
+		if(!this.blockRuleClasses) {
+			WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
+		}
+		blockRuleClasses = this.blockRuleClasses;
+		if(!this.inlineRuleClasses) {
+			WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+			this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
+		}
+		inlineRuleClasses = this.inlineRuleClasses;
+	}
+	// Instantiate the pragma parse rules
+	this.pragmaRules = this.instantiateRules(pragmaRuleClasses,"pragma",0);
+	// Instantiate the parser block and inline rules
+	this.blockRules = this.instantiateRules(blockRuleClasses,"block",0);
+	this.inlineRules = this.instantiateRules(inlineRuleClasses,"inline",0);
+	// Parse any pragmas
 	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
-	if(options.parseAsInline) {
+	if(this.parseAsInline) {
 		topBranch.push.apply(topBranch,this.parseInlineRun());
 	} else {
 		topBranch.push.apply(topBranch,this.parseBlocks());
@@ -94,7 +119,7 @@ WikiParser.prototype.loadRemoteTiddler = function(url) {
 */
 WikiParser.prototype.setupRules = function(proto,configPrefix) {
 	var self = this;
-	if(!$tw.safemode) {
+	if(!$tw.safeMode) {
 		$tw.utils.each(proto,function(object,name) {
 			if(self.wiki.getTiddlerText(configPrefix + name,"enable") !== "enable") {
 				delete proto[name];
@@ -209,7 +234,10 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 		return nextMatch.rule.parse();
 	}
 	// Treat it as a paragraph if we didn't find a block rule
-	return [{type: "element", tag: "p", children: this.parseInlineRun(terminatorRegExp)}];
+	var start = this.pos;
+	var children = this.parseInlineRun(terminatorRegExp);
+	var end = this.pos;
+	return [{type: "element", tag: "p", children: children, start: start, end: end }];
 };
 
 /*
@@ -285,7 +313,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	while(this.pos < this.sourceLength && nextMatch) {
 		// Process the text preceding the run rule
 		if(nextMatch.matchIndex > this.pos) {
-			tree.push({type: "text", text: this.source.substring(this.pos,nextMatch.matchIndex)});
+			this.pushTextWidget(tree,this.source.substring(this.pos,nextMatch.matchIndex),this.pos,nextMatch.matchIndex);
 			this.pos = nextMatch.matchIndex;
 		}
 		// Process the run rule
@@ -295,7 +323,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		tree.push({type: "text", text: this.source.substr(this.pos)});
+		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
 	this.pos = this.sourceLength;
 	return tree;
@@ -315,7 +343,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(terminatorMatch) {
 			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
 				if(terminatorMatch.index > this.pos) {
-					tree.push({type: "text", text: this.source.substring(this.pos,terminatorMatch.index)});
+					this.pushTextWidget(tree,this.source.substring(this.pos,terminatorMatch.index),this.pos,terminatorMatch.index);
 				}
 				this.pos = terminatorMatch.index;
 				if(options.eatTerminator) {
@@ -328,7 +356,7 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		if(inlineRuleMatch) {
 			// Preceding text
 			if(inlineRuleMatch.matchIndex > this.pos) {
-				tree.push({type: "text", text: this.source.substring(this.pos,inlineRuleMatch.matchIndex)});
+				this.pushTextWidget(tree,this.source.substring(this.pos,inlineRuleMatch.matchIndex),this.pos,inlineRuleMatch.matchIndex);
 				this.pos = inlineRuleMatch.matchIndex;
 			}
 			// Process the inline rule
@@ -342,10 +370,22 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		tree.push({type: "text", text: this.source.substr(this.pos)});
+		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
 	this.pos = this.sourceLength;
 	return tree;
+};
+
+/*
+Push a text widget onto an array, respecting the configTrimWhiteSpace setting
+*/
+WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
+	if(this.configTrimWhiteSpace) {
+		text = $tw.utils.trim(text);
+	}
+	if(text) {
+		array.push({type: "text", text: text, start: start, end: end});		
+	}
 };
 
 /*
@@ -372,22 +412,18 @@ Amend the rules used by this instance of the parser
 WikiParser.prototype.amendRules = function(type,names) {
 	names = names || [];
 	// Define the filter function
-	var keepFilter;
+	var target;
 	if(type === "only") {
-		keepFilter = function(name) {
-			return names.indexOf(name) !== -1;
-		};
+		target = true;
 	} else if(type === "except") {
-		keepFilter = function(name) {
-			return names.indexOf(name) === -1;
-		};
+		target = false;
 	} else {
 		return;
 	}
 	// Define a function to process each of our rule arrays
 	var processRuleArray = function(ruleArray) {
 		for(var t=ruleArray.length-1; t>=0; t--) {
-			if(!keepFilter(ruleArray[t].rule.name)) {
+			if((names.indexOf(ruleArray[t].rule.name) === -1) === target) {
 				ruleArray.splice(t,1);
 			}
 		}

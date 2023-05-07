@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/comments/filter-all-comments
+tags: $:/tags/Filter
+filter: [role[comment]!sort[modified]]
+description: All comments
+

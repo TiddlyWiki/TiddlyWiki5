@@ -1,0 +1,21 @@
+created: 20181002123308575
+modified: 20181002124103586
+tags: [[WebServer API]]
+title: WebServer API: Get Favicon
+type: text/vnd.tiddlywiki
+
+Get the favicon for the wiki from the tiddler $:/favicon.ico
+
+```
+GET /favicon.ico
+```
+
+Parameters:
+
+* none
+
+Response:
+
+* 200 OK
+*> `Content-Type: image/x-icon`
+*> Body: image data from the tiddler $:/favicon.ico

@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Denna tiddler innehåller binär data
-ClassicWarning/Hint: Denna tiddler är skriven i TiddlyWiki klassisk wiki-textformat, vilket inte är fullständigt kompatibelt med TiddlyWiki version 5. Läs http://tiddlywiki.com/static/Upgrading.html för mer info. 
+ClassicWarning/Hint: Denna tiddler är skriven i TiddlyWiki klassisk wiki-textformat, vilket inte är fullständigt kompatibelt med TiddlyWiki version 5. Läs https://tiddlywiki.com/static/Upgrading.html för mer info. 
 ClassicWarning/Upgrade/Caption: uppgradera
 CloseAll/Button: stäng alla
 ConfirmCancelTiddler: Vill du ångra ändringar för denna tiddler "<$text text=<<title>>/>"?
@@ -19,8 +19,7 @@ Encryption/Password: Lösenord
 Encryption/RepeatPassword: Upprepa lösenordet
 Encryption/PasswordNoMatch: Lösenorden matchar inte
 Encryption/SetPassword: Ställ in lösenord
-InvalidFieldName: Ogiltigt tecken i namn-fältet "<$text text=<<fieldName>>/>". Fält kan bara innehålla gemena bokstäver, siffror och tecknen understreck (`_`), bindestreck (`-`) and punkt (`.`)
-MissingTiddler/Hint: Saknar tiddler "<$text text=<<currentTiddler>>/>" - klicka {{$:/core/images/edit-button}} för att skapa
+MissingTiddler/Hint: Saknar tiddler "<$text text=<<currentTiddler>>/>" - klicka {{||$:/core/ui/Buttons/edit}} för att skapa
 OfficialPluginLibrary: Officiella ~TiddlyWiki Insticksprogramsbibliotek
 PluginReloadWarning: Spara {{$:/core/ui/Buttons/save-wiki}} och ladda om {{$:/core/ui/Buttons/refresh}} för att ändringarna för insticksprogrammen ska slå igenom
 RecentChanges/DateFormat: DD MMM YYYY

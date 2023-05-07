@@ -2,29 +2,36 @@ title: $:/core/ui/SideBar/Open
 tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Open/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/CloseAll/
 
 \define drop-actions()
-<$action-listops $tiddler="$:/StoryList" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<tv-story-list>> $subfilter="+[insertbefore<actionTiddler>,<currentTiddler>]"/>
 \end
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
-<div style="position: relative;">
-<$droppable actions=<<drop-actions>>>
-<div class="tc-droppable-placeholder">
-&nbsp;
-</div>
+\define placeholder()
+<div class="tc-droppable-placeholder"/>
+\end
+
+\define droppable-item(button)
+\whitespace trim
+<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>> tag="div">
+<<placeholder>>
 <div>
-<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
+$button$
 </div>
 </$droppable>
+\end
+
+<div class="tc-sidebar-tab-open">
+<$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
+<div class="tc-sidebar-tab-open-item">
+<$macrocall $name="droppable-item" button="<$button message='tm-close-tiddler' tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class='tc-btn-invisible tc-btn-mini tc-small-gap-right'>{{$:/core/images/close-button}}</$button><$link to={{!!title}}><$view field='title'/></$link>"/>
 </div>
 </$list>
 <$tiddler tiddler="">
-<$droppable actions=<<drop-actions>>>
-<div class="tc-droppable-placeholder">
-&nbsp;
+<div>
+<$macrocall $name="droppable-item" button="<$button message='tm-close-all-tiddlers' class='tc-btn-invisible tc-btn-mini'><<lingo Button>></$button>"/>
 </div>
-<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
-</$droppable>
 </$tiddler>
+</div>

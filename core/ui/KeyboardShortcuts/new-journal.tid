@@ -1,0 +1,8 @@
+title: $:/core/ui/KeyboardShortcuts/new-journal
+tags: $:/tags/KeyboardShortcut
+key: ((new-journal))
+
+\whitespace trim
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+{{$:/core/ui/Actions/new-journal}}
+</$navigator>

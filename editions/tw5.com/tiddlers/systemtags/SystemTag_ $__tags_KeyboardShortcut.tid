@@ -1,0 +1,7 @@
+caption: $:/tags/KeyboardShortcut
+description: uses the text of tagged tiddler as keyboard shortcut actions
+tags: SystemTags
+title: SystemTag: $:/tags/KeyboardShortcut
+type: text/vnd.tiddlywiki
+
+The [[system tag|SystemTags]] `$:/tags/KeyboardShortcut` defines the tagged Tiddler as a [[Keyboard Shortcut Tiddler]], a ''container for actions'' that get triggered when its corresponding [[Keyboard Shortcut Descriptor]] in its `key` field matches a keyboard combination executed by the User

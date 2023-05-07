@@ -45,7 +45,7 @@ The goal is to make the TiddlyWiki repository easier to comprehend for newcomers
 
 !! Hackability Improvements
 
-* Moved developer documentation to http://tiddlywiki.com/dev
+* Moved developer documentation to https://tiddlywiki.com/dev
 * [[Improvements|https://github.com/Jermolene/TiddlyWiki5/commit/872e6fc2532012f0f9acfb29aa24a9cd5f340b9d]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/c8a131ffd4716f2b99ab508567422ff463f2849d]]) to `serve.sh`/`serve.cmd` scripts
 * [[Disable|https://github.com/Jermolene/TiddlyWiki5/commit/ac54fe33263cbe48bc294f9c14257ccc146be38e]] plugins when in SafeMode
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c1de85838f3d0d3e6a207152ecc9d61ff08a4b05]] new <<.mlink timeline>> macro

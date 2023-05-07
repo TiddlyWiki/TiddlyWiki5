@@ -1,0 +1,200 @@
+created: 20190311094603013
+modified: 20201130064330388
+tags: [[HTML in WikiText]]
+title: Anchor Links using HTML
+
+<a id=<<qualify "#Top">>></a>
+
+<h2 id="#Introduction:Anchor-Links-using-HTML">''HTML Anchor Links in Tiddlers''</h2>
+
+
+
+* <a href=<<qualify "##Introduction">>>What do they do?</a>
+* <a href=<<qualify "##How-do-I-make-them">>>How do I make them?</a>
+* <a href=<<qualify "##Anchor-link-limitations">>>Limitations and things to look out for</a>
+* <a href=<<qualify "##More_examples">>>More examples</a>
+* <a href=<<qualify "##Suggestions-for-elements">>>Suggestions for HTML elements to use</a>
+* <a href=<<qualify "##Suggestions-for-ids">>>Suggestions for target names to use</a>
+* <a href=<<qualify "##qualify-example">>>Avoiding duplicate IDs when transcluding</a>
+* <a href=<<qualify ##Style_Hints>>>Style Hints</a>
+
+<a id=<<qualify "#Introduction">>></a>
+
+!! What do they do?
+
+In TiddlyWiki anchor links can help us link to target points and distinct sections within rendered tiddlers. They can help the reader navigate longer tiddler content.
+
+For example this link, <a href=<<qualify "##Bottom_of_tiddler">>>Bottom</a>, should take you to the bottom of this tiddler. The "Back to the top" link below should return you back to the top of this tiddler.
+
+<a href=<<qualify "##Top">>>Back to the top</a>
+
+<a id=<<qualify "#How-do-I-make-them">>></a>
+
+!! How do I make them?
+
+There are only 2 steps to making anchor links.
+
+* First, create the target point (called an 'anchor') where you want it.
+* Second, add a link to it where the reader might need it.
+
+That's it. 
+
+
+''Step 1: Create an 'anchor' (link target)''
+
+```
+<a id="#Bottom_of_tiddler"></a>
+```
+
+*Add an <<.attr id>> attribute to any HTML5 tag and place a single `#` before the 'address' value. <a href="##Suggestions%0">Here are some suggestions of tags you can use.</a>
+* Place this code at the target location. E.g. at the bottom of the tiddler.
+
+''Step 2: Create a link to the target anchor''
+
+```
+<a href="##Bottom_of_tiddler">Bottom</a>
+```
+*Create an `<a href>` link using exactly the same 'address' value as the target but with double  `##` characters preceding it.
+*Place this code where it will most help the reader.
+
+The above example can be adapted to work for many situations in ~TiddlyWiki, such as the table of contents at the top of this tiddler.
+
+''Is it really that simple? ''
+
+Yes, it's that simple. BUT...  in ~TiddlyWiki there are some small differences from standard HTML5 anchor links and some specific ~TiddlyWiki limitations.
+
+<a href=<<qualify "##Top">>>Back to the top</a>
+
+<h2 id=<<qualify "#Anchor-link-limitations">>>Limitations and things to watch out for</h2>
+
+''Step 1:'' Creating the target anchor
+
+* Unlike standard HTML5, in ~TiddlyWiki you must put a single `#` character in front of the target address value that follows the <<.attr id>> attribute.  (Notice the single `#` character used in the #Bottom_of_tiddler in Example 1.)
+* Unlike standard HTML5, ~TiddlyWiki anchor links are case sensitive. In the example above #Bottom_of_tiddler works, but #bottom_of_Tiddler wouldn't.
+* Avoid using the % character in your link, as some browsers have a bug where navigation to anchors containing a % character can sometimes fail (see warning below).
+* <a id=<<qualify #note.1-return>>/>Avoid using any whitespace in your link (see <a href=<<qualify ##note.1>> title="click to go to note 1.">note 1</a> below).
+* Each link address should be unique in the TiddlyWiki.  If transclusions create multiple instances of the same <<.attr id>> attribute, navigation will take place to the first instance found that satisfies the above criteria. To avoid this, you can use the [[qualify macro|qualify Macro]] in both the <<.attr id>> and the <<.attr href>> attributes in a similar style to the example given below: <a href=<<qualify ##qualify-example>> >Avoiding duplicate IDs when transcluding</a>.
+
+''Step 2:'' Creating the link to the target
+
+* Remember that the <<.attr href>> value should start with ''two'' `#` characters, one more than the <<.attr id>> value of the target anchor.
+* Remember that ~TiddlyWiki anchor links are case sensitive
+
+''Step 3:'' Navigating to the target
+
+Normally you can click on the link and ~TiddlyWiki will scroll the window so the target anchor is at the top of the window, but there are several limitations:
+
+* Anchor links in ~TiddlyWiki do not work if the tiddler is not in the Story River, or is not displayed in the sidebar.
+* Anchor links in ~TiddlyWiki do not work if the tidlder is in the Story River or sidebar but anchor marked target point is not visible on the page (e.g., the tiddler is folded or the anchor is within a non-displaying $reveal widget). Ctrl+Click on such an anchor link will open a new browser window/tab loading the base web page and will not navigate to the expected tiddler.
+* Anchor links in Tiddlywiki do not work if Control Panel > Appearance > Story View is set to Zoomin (the single page view) and the tiddler is not at the top of the story river (i.e. not displayed).
+* When an anchor link is clicked the browser's navigation history will be updated with the link's href value appended to the web page's URL. This will happen even if the Control Panel > Settings > Navigation History value is set to "Do not update history".
+
+<$macrocall $name=.note _="""<span id=<<qualify #note.1>>><a href=<<qualify ##note.1-return>> title="click to return">1.</a></span> The [ext[HTML5 specification|https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id]] for the <<.attr id>> attribute  says that its value should not contain any whitespace. Currently ^^(Dec 2020)^^ an <<.attr id>> value with whitespace can sometimes work. However, it may not work in all browsers and is not guaranteed to work in the future."""  />
+
+<<.warning "Some browsers may fail to navigate to an anchor target whose ''id'' value includes a `%` character followed by 2 digits. This is a bug in the browser and nothing that ~TiddlyWiki can fix. To be safe, avoid using the `%` character.">>
+
+<a href=<<qualify "##Top">>>Back to the top</a>
+
+<h2 id=<<qualify "#More_examples">>>More examples</h2>
+In each case the target code is placed at the destination the reader navigates to, the link code is placed where it will help the reader navigate from.
+
+```
+<h2 id="#heading-01"> My Target Heading</h2>
+
+<a href="##heading-01">Link to My Target Heading</a>
+
+```
+
+This looks like:
+
+<hr>
+<h2 id="#heading-01">My Target Heading</h2>
+
+<a href="##heading-01">Link to My Target Heading</a>
+<hr>
+
+```
+<section id="#unique001">
+
+!! My Target section
+
+A `<section>` HTML tag is generally used to define sections in an HTML document, such as chapters, headers, footers, or any other sections of the document.
+</section>
+
+Clicking this anchor link goes to: <a href="##unique001">Link to My Target Section</a>
+```
+
+This looks like:
+
+<hr>
+<section id="#unique001">
+
+!! My Target section
+
+A `<section>` HTML tag is generally used to define sections in an HTML document, such as chapters, headers, footers, or any other sections of the document.
+</section>
+
+Clicking this anchor link goes to: <a href="##unique001">Link to My Target Section</a>
+<hr>
+
+<a href=<<qualify "##Top">>>Back to the top</a>
+
+<h2 id=<<qualify "#Suggestions-for-elements">>>''Suggestions for HTML elements to use''</h2>
+
+Some suggestions for the HTML element you choose for marking a position using the <<.attr id>> attribute:
+
+| ! Element | ! Sample code | ! Observations |
+|<<.def anchor>> |<$text text="""<a id="#part001-of-TiddlerName"></a>"""/> |Should work perfectly everywhere|
+|<<.def heading>> |<$text text="""<h2 id="#a-new-heading">A New Heading</h2>"""/>|Headings can have <<.attr id>> attributes as well|
+|<<.def section>> |<$text text="""<section id="#sect001-of-TiddlerName">This is a new section</section>"""/>|If you use the `section` element it should probably have an <<.attr id>> of its own|
+|<<.def span>> |<$text text="""<span id="#007">Marker 007 is here!</span>"""/>|`span` elements can be used to insert an <<.attr id>> mid-paragraph|
+
+<a href=<<qualify "##Top">>>Back to the top</a>
+
+<h2 id=<<qualify "#Suggestions-for-ids">>>Suggestions for target names to use</h2>
+
+| ! | ! Sample code | ! Observations |
+|<<.def Recommended>> |<$text text="""<a id="#part001-of-TiddlerName"></a>"""/> |Include the tiddler name for easy unique <<.attr id>>s|
+|<<.def "Avoid: whitespace">> |<$text text="""<h2 id="#0 0 1">A New Heading</h2>"""/>|Whitespace is not guaranteed to work in all browsers|
+|<<.def "Avoid: %">> |<$text text="""<section id="#sect001%20of%20TiddlerName">This is a new section</section>"""/>|URI encoding (turning space into %20 and so on) may not work in some browsers|
+|<<.def "Avoid: duplicate IDs">> |<$text text="""<span id="#007">Marker 007 is here!</span>"""/>|<<.attr id>> values should be unique within entire wiki|
+|<<.def "Avoid: duplicate IDs">> |<$text text="""<a id="#007"></a>"""/>A different marker 007|If <<.attr id>> values are duplicated, one will be ignored|
+
+<a href=<<qualify "##Top">>>Back to the top</a>
+
+<h2 id=<<qualify "#qualify-example">>> ''Avoiding duplicate IDs when transcluding''</h2>
+The <<.attr id>> and anchor link to this header has been made as follows:
+
+```
+<a href=<<qualify "##qualify-example">>>Avoiding duplicate IDs when transcluding</a>
+
+<h2 id=<<qualify "#qualify-example">>>Avoiding duplicate IDs when transcluding</h2>
+```
+;For this to work:
+
+* The <<.attr href>> and <<.attr id>> values use the [[macro invocation syntax for attributes|HTML in WikiText]], using the [[qualify Macro]] to create a unique <<.attr id>> value.
+* Both the <<.attr id>> and the anchor link must be in the same tiddler.
+* There must not be any quote characters between the `=` and the `<<`.
+* The double quotes around the target name are optional, but recommended.
+* There should be a total of three `>` characters after the target name, two `>>` to close the `<<qualify` macro, and one `>` to close the `<a` tag.
+
+<a href=<<qualify "##Top">>>Back to the top</a>
+
+<h2 id=<<qualify #Style_Hints>>>''Style Hints'' </h2>
+
+If you don't want the link to look like an external link, give the `<a>` element's <<.attr class>> attribute the value <<.def tc-tiddlylink>> and if you want the link to also be italic & bold, give the additional classes <<.def "tc-tiddlylink-missing tc-tiddlylink-shadow">> like below:
+
+```
+<a class="tc-tiddlylink" href="##Introduction:Anchor-Links-using-HTML">Back to the top</a> or just back to <a class="tc-tiddlylink tc-tiddlylink-missing tc-tiddlylink-shadow" href=<<qualify ##Hints>>>Hints</a>.
+```
+<a class="tc-tiddlylink" href="##Introduction:Anchor-Links-using-HTML">Back to the top</a> or just back to <a class="tc-tiddlylink tc-tiddlylink-missing tc-tiddlylink-shadow" href=<<qualify ##Style_Hints>>>Style Hints</a>.
+
+If you want to include an <<.attr id>> attribute to a link in your sidebar Table of Contents, you can include it in your listed tiddler's <<.field caption>> field similar to the way shown below:
+
+```
+<span id=#some-value>Your caption</span>
+```
+
+<a id=<<qualify "#Bottom_of_tiddler">>></a>
+
+<a href=<<qualify "##Top">>>Back to the top</a>

@@ -17,6 +17,8 @@ Tiddler manipulation via drag and drop is supported by the core user interface i
 
 All tiddler links are draggable by default. They can be dragged within a browser window for manipulating tiddlers, or dragged to a different browser window to initiate an [[import operation|Importing Tiddlers]]
 
+If you want to drag a link, first move it vertically, because horizontal movement is recognized by the browser as text selection.
+
 Tag pills are also draggable, and are equivalent to simultaneously dragging all of the individual tiddlers carrying the tag.
 
 Some common scenarios for drag and drop tiddler manipulation are available as reusable macros:

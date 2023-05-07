@@ -6,7 +6,7 @@ tags: Learning
 title: How to add a banner for GitHub contributions
 type: text/vnd.tiddlywiki
 
-Cuando editas un tiddler en http://tiddlywiki.com, aparece una pequeña banda de color rosa que te invita a editar la fuente del tiddler en GitHub. 
+Cuando editas un tiddler en https://tiddlywiki.com, aparece una pequeña banda de color rosa que te invita a editar la fuente del tiddler en GitHub. 
 
 Si usas Node.js, puedes reproducir este mismo efecto para tu propio ~TiddlyWiki, de la siguiente manera:
 

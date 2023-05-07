@@ -1,0 +1,16 @@
+title: $:/core/ui/Actions/new-journal
+tags: $:/tags/Actions
+description: create a new journal tiddler
+
+\define get-tags() $(textFieldTags)$ $(tagsFieldTags)$
+\whitespace trim
+<$vars journalTitleTemplate={{$:/config/NewJournal/Title}} textFieldTags={{$:/config/NewJournal/Tags}} tagsFieldTags={{$:/config/NewJournal/Tags!!tags}} journalText={{$:/config/NewJournal/Text}}>
+<$wikify name="journalTitle" text="<$macrocall $name='now' format=<<journalTitleTemplate>>/>">
+<$reveal type="nomatch" state=<<journalTitle>> text="">
+<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<get-tags>> text={{{ [<journalTitle>get[]] }}}/>
+</$reveal>
+<$reveal type="match" state=<<journalTitle>> text="">
+<$action-sendmessage $message="tm-new-tiddler" title=<<journalTitle>> tags=<<get-tags>> text=<<journalText>>/>
+</$reveal>
+</$wikify>
+</$vars>

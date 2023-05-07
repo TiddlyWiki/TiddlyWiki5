@@ -1,0 +1,17 @@
+created: 20200507002521489
+modified: 20220402105820520
+tags: 
+title: $:/_tw5.com-card-template
+type: text/vnd.tiddlywiki
+
+\define tw-card-template(bordercolor:"")
+<div class="tc-card" style="border-top: 5px solid $bordercolor$;">
+<$link>
+        <div class="tc-card-title"><$transclude field="caption"><$view field="title"/></$transclude></div>
+       <div class="tc-card-author"> <$list filter="[is[current]has[community-author]]">par {{!!community-author}}</$list></div>
+        <p><$view field="description"/></p>
+ </$link>
+</div>
+\end
+
+<$macrocall $name="tw-card-template" bordercolor={{!!color}}/>

@@ -1,0 +1,10 @@
+{
+"title": "$:/plugins/tiddlywiki/dynannotate/example-annotation-4",
+"annotate-tiddler": "$:/plugins/tiddlywiki/dynannotate/example-text-1",
+"annotate-text": "that",
+"annotate-prefix": "It has other characteristics, of course; trails ",
+"annotate-suffix": " are not frequently followed are prone to fade",
+"annotate-colour": "rgba(255,0,255,0.45)",
+"annotate-blend-mode": "difference",
+"text": "(This tiddler is in .json format so that we can have field values that start with a whitespace"
+}

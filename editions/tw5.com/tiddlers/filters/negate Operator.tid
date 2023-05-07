@@ -1,0 +1,13 @@
+caption: negate
+created: 20190611173918279
+modified: 20190611174037439
+op-input: a [[selection of titles|Title Selection]]
+op-output: the negation of the input numbers
+op-purpose: calculate the negation of a list of numbers
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: negate Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.operator-examples "negate">>

@@ -1,7 +1,33 @@
 title: $:/snippets/languageswitcher
 
-{{$:/language/ControlPanel/Basics/Language/Prompt}} <$select tiddler="$:/language">
+\define flag-title()
+$(languagePluginTitle)$/icon
+\end
+\whitespace trim
+
+<$linkcatcher to="$:/language">
+<div class="tc-chooser tc-language-chooser">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[description]]">
-<option value=<<currentTiddler>>><$view field="description"><$view field="name"><$view field="title"/></$view></$view></option>
+<$set name="cls" filter="[all[current]field:title{$:/language}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item"><div class=<<cls>>>
+<$link>
+<span class="tc-image-button">
+<$set name="languagePluginTitle" value=<<currentTiddler>>>
+<$transclude subtiddler=<<flag-title>>>
+<$list filter="[all[current]field:title[$:/languages/en-GB]]">
+<$transclude tiddler="$:/languages/en-GB/icon"/>
 </$list>
-</$select>
+</$transclude>
+</$set>
+</span>
+&#32;
+<$view field="description">
+<$view field="name">
+<$view field="title"/>
+</$view>
+</$view>
+</$link>
+</div>
+</$set>
+</$list>
+</div>
+</$linkcatcher>

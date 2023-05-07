@@ -1,0 +1,38 @@
+title: $:/language/Help/render
+description: Ausgabe individueller Tiddler in Dateien
+
+Individuelle Tiddler werden anhand von Filtern spezifiziert, gelesen und in Dateien umgesetzt.
+
+Optionell kann eine Template-Datei angegeben werden. In diesem Fall wird nicht der Inhalt des Tiddlers, sondern des Templates umgesetzt. Die `currentTiddler` Variable wird auf den Titel, des auszugebenden, Tiddlers gesetzt.
+
+Es können noch zusätzliche Variablen per Name und Wert gesetzt werden.
+
+```
+--render <tiddler-filter> [<filename-filter>] [<render-type>] [<template>] [ [<name>] [<value>] ]*
+```
+
+* ''tiddler-filter'': Ein Filter, der die Auszugebenden Tiddler eindeutig spezifiziert. 
+* ''filename-filter'': [Option] Filter, der aus Tiddler Titeln, Pfadnamen extrahiert. Wenn weggelassen, dann wird der Standard verwendet: `[is[tiddler]addsuffix[.html]]`, welcher den Titel als Dateiname verwendet.
+* ''render-type'': [Option] Ausgabe Type: `text/html` (Standard) generiert HTML Text und `text/plain` gibt den "reinen" Text Inhalt zurück. `text/plain` ignoriert HTML Marker und andere "nicht-druckbare" Zeichen.
+* ''template'': [Option] Template, das verwendet werden soll
+* ''name'': [Option] Name einer zusätzlichen Variablen.
+* ''value'': [Option] Wert dieser zusätzlichen Variablen.
+
+Standardmäßig sind die Dateinamen "relativ" zum `output` Verzeichnis, des `edition` Verzeichnisses.
+
+Mit dem `--output` Befehl kann die Ausgabe in jedes beliebige Verzeichnis umgeleitet werden.
+
+Wichtig:
+
+* Das `output` Verzeichnis wird nicht gelöscht, bevor neue Dateien geschrieben werden.
+* Verzeichnisse und Dateien werden automatisch angelegt, sollten sie nicht vorhanden sein.
+* Wenn eine Datei Leerzeichen enthält, dann muss dies ''doppelt'' angezeigt werden. Für TiddlyWiki mit eckigen Klammern `[[]]` und für die Kommandozeile mit Hochkomma "". Zum Beispiel: `--render "[[Motovun Jack.jpg]]"`
+* Dateinamens-Filter zeigen immer auf den Titel, des gerade umzusetzenden Tiddlers. Das erlaubt uns, diesen als Basis für den Dateinamen zu verwenden. zB: `[encodeuricomponent[]addprefix[static/]]` ... Verwendet eine URI-Enkodierung für jeden Dateinamen und stellt das Wort `static/` als Pfadname voran. 
+* Es können mehrere ''name/value'' Paare verwendet werden.
+* Der `--render` Befehl ist flexibler und ersetzt daher `--rendertiddler` und `--rendertiddlers`, welche mit V5.1.15 auslaufen!
+
+Beispiel:
+
+* `--render '[!is[system]]' '[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]'` ... Übersetzt alle Nicht-System Tiddler und schreibt sie in ein Unterverzeichnis `tiddlers/` mit URL-kodiertem Titel und der Erweiterung `.html`
+
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- Übersetzt all Tiddler mit dem Tag: "HelloThere" in eine JSON Datei mit dem namen "tiddlers.json"

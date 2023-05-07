@@ -1,0 +1,15 @@
+caption: trunc
+created: 20190613084703801
+modified: 20190613084829253
+op-input: a [[selection of titles|Title Selection]]
+op-output: truncates each of the input numbers to their integer part, removing any fractional part
+op-purpose: truncates a list of numbers to their integer part, removing any fractional part
+tags: [[Unary Mathematics Operators]] [[Filter Operators]] [[Mathematics Operators]]
+title: trunc Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.20">> See [[Mathematics Operators]] for an overview.
+
+<<.tip " The trunc operator rounds towards zero. To round away from zero, use [[untrunc|untrunc Operator]].">>
+
+<<.operator-examples "trunc">>

@@ -4,7 +4,7 @@ description: Slaat een groep ruwe tiddlers op in een folder.
 Slaat een groep tiddlers op in ruwe tekst of binair formaat in de gegeven folder.
 
 ```
---savetiddlers <filter> <pathname>
+--savetiddlers <filter> <padnaam>
 ```
 
 Standaard is de padnaam relatief t.o.v. de `output` subfolder van de editiefolder. Het `--output` commando kan worden gebruikt om de output naar een andere folder te sturen.

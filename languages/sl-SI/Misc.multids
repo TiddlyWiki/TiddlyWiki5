@@ -1,0 +1,71 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: Videti je, da poskušate naložiti vtičnik, oblikovan za ~TiddlyWiki Classic. Upoštevajte, da [[ti vtičniki ne delujejo s TiddlyWiki različico 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]. Zaznani ~TiddlyWiki Classic vtičniki:
+BinaryWarning/Prompt: Ta tiddler vsebuje binarne podatke
+ClassicWarning/Hint: Ta tiddler je napisan v besedilnem formatu TiddlyWiki Classic, ki ni v celoti združljiv z različico TiddlyWiki 5. Za več informacij obiščite http://tiddlywiki.com/static/Upgrading.html.
+ClassicWarning/Upgrade/Caption: nadgradnja
+CloseAll/Button: zapri vse
+ColourPicker/Recent: Nedavno:
+ConfirmCancelTiddler: Želite zavreči spremembe v tiddlerju: "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Želite izbrisati tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Spremenili boste senčni tiddler. Vse spremembe bodo prepisale privzeti sistem, zaradi česar bodo prihodnje nadgradnje ne-trivialne. Vaše spremembe lahko razveljavite tako, da izbrišete ta tiddler. Ali ste prepričani, da želite urediti "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Želite prepisati tiddler "<$text text=<<title>>/>"?
+Count: število
+DefaultNewTiddlerTitle: Nov tiddler
+DropMessage: Spustite tukaj (ali uporabite tipko »Escape« za preklic)
+Encryption/Cancel: Prekliči
+Encryption/ConfirmClearPassword: Ali želite izbrisati geslo? To bo odstranilo šifriranje, uporabljeno pri shranjevanju tega wikija
+Encryption/Password: geslo
+Encryption/PasswordNoMatch: geslo se ne ujema
+Encryption/PromptSetPassword: Nastavite novo geslo za ta TiddlyWiki
+Encryption/RepeatPassword: Ponovite geslo
+Encryption/SetPassword: Nastavite geslo
+Encryption/Username: Uporabniško ime
+Error/Caption: Napaka
+Error/Filter: Filter napaka
+Error/FilterSyntax: Sintaktična napaka v izrazu filtra
+Error/IsFilterOperator: Filter napaka: neznan operand za 'is' operator filtra
+Error/LoadingPluginLibrary: Napaka pri nalaganju knjižnice vtičnikov
+Error/PutEditConflict: Datoteka je spremenjena na strežniku
+Error/RecursiveTransclusion: Rekurzivna napaka transkluzije v "transclude widget"
+Error/RetrievingSkinny: Napaka pri pridobivanju "skinny" seznama tiddlerjev
+Error/SavingToTWEdit: Napaka pri shranjevanju v TWEdit
+Error/WhileSaving: Napaka med shranjevanjem
+Error/XMLHttpRequest: Koda napake XMLHttpRequest
+InternalJavaScriptError/Hint: No, to je neprijetno. Priporočamo, da znova zaženete TiddlyWiki tako, da osvežite brskalnik
+InternalJavaScriptError/Title: Notranja napaka JavaScript
+LazyLoadingWarning: <p>Nalaganje zunanjega besedila z ''<$text text={{!!_canonical_uri}}/>''</p><p>Če to sporočilo ne izgine, morda uporabljate brskalnik, ki ne podpira zunanjega besedila v tej konfiguraciji. Oglejte si  http://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Prijavite se v TiddlySpace
+Manager/Controls/FilterByTag/None: (nobena)
+Manager/Controls/FilterByTag/Prompt: Filtriraj po oznaki:
+Manager/Controls/Order/Prompt: Obratni vrstni red
+Manager/Controls/Search/Placeholder: Iskanje
+Manager/Controls/Search/Prompt: Iskanje:
+Manager/Controls/Show/Option/Tags: oznake
+Manager/Controls/Show/Option/Tiddlers: tiddlerji
+Manager/Controls/Show/Prompt: Prikaži:
+Manager/Controls/Sort/Prompt: Razvrsti po:
+Manager/Item/Colour: Barva
+Manager/Item/Fields: Polja
+Manager/Item/Icon: Ikona
+Manager/Item/Icon/None: (nobena)
+Manager/Item/RawText: Surovo besedilo
+Manager/Item/Tags: Oznake
+Manager/Item/Tools: Orodja
+Manager/Item/WikifiedText: Wikificirano besedilo
+MissingTiddler/Hint: Manjkajoč tiddler  "<$text text=<<currentTiddler>>/>" - kliknite {{$:/core/images/edit-button}}, da ga ustvarite
+No: Ne
+OfficialPluginLibrary: Uradna ~TiddlyWiki knjižnica vtičnikov
+OfficialPluginLibrary/Hint: Uradna knjižnica vtičnikov ~TiddlyWiki na naslovu tiddlywiki.com. Vtičnike, teme in jezikovne pakete vzdržuje osrednja ekipa.
+PluginReloadWarning: Prosimo, shranite  {{$:/core/ui/Buttons/save-wiki}} in znova naložite {{$:/core/ui/Buttons/refresh}}, da bodo spremembe v vtičnikih lahko začele veljati
+RecentChanges/DateFormat: DD. MMM YYYY
+SystemTiddler/Tooltip: To je sistemski tiddler
+SystemTiddlers/Include/Prompt: Vključi sistemske tiddlerje
+TagManager/Colour/Heading: Barva
+TagManager/Count/Heading: Število
+TagManager/Icon/Heading: ikona
+TagManager/Info/Heading: Info
+TagManager/Tag/Heading: Oznaka
+Tiddler/DateFormat: DD. MMM YYYY ob hh12:0mm am
+UnsavedChangesWarning: TiddlyWiki je bil spremenjen, vendar še ni shranjen!
+Yes: Da

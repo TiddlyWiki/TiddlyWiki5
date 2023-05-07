@@ -24,7 +24,7 @@ exports.order = function(source,operator,options) {
 	} else {
 		source(function(tiddler,title) {
 			results.push(title);
-		});		
+		});
 	}
 	return results;
 };
@@ -44,7 +44,7 @@ exports.reverse = function(source,operator,options) {
 First entry/entries in list
 */
 exports.first = function(source,operator,options) {
-	var count = parseInt(operator.operand) || 1,
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
@@ -56,7 +56,7 @@ exports.first = function(source,operator,options) {
 Last entry/entries in list
 */
 exports.last = function(source,operator,options) {
-	var count = parseInt(operator.operand) || 1,
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
@@ -68,7 +68,7 @@ exports.last = function(source,operator,options) {
 All but the first entry/entries of the list
 */
 exports.rest = function(source,operator,options) {
-	var count = parseInt(operator.operand) || 1,
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
@@ -82,12 +82,13 @@ exports.bf = exports.rest;
 All but the last entry/entries of the list
 */
 exports.butlast = function(source,operator,options) {
-	var count = parseInt(operator.operand) || 1,
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
 	});
-	return results.slice(0,-count);
+	var index = count === 0 ? results.length : -count;
+	return results.slice(0,index);
 };
 exports.bl = exports.butlast;
 
@@ -95,12 +96,24 @@ exports.bl = exports.butlast;
 The nth member of the list
 */
 exports.nth = function(source,operator,options) {
-	var count = parseInt(operator.operand) || 1,
+	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
 	source(function(tiddler,title) {
 		results.push(title);
 	});
 	return results.slice(count - 1,count);
+};
+
+/*
+The zero based nth member of the list
+*/
+exports.zth = function(source,operator,options) {
+	var count = $tw.utils.getInt(operator.operand,0),
+		results = [];
+	source(function(tiddler,title) {
+		results.push(title);
+	});
+	return results.slice(count,count + 1);
 };
 
 })();

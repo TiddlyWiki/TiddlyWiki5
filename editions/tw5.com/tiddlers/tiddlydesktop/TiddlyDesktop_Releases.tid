@@ -1,12 +1,8 @@
 caption: ~TiddlyDesktop
 created: 20150419144649101
-modified: 20160602043500852
+modified: 20180924082438784
 tags: Releases
 title: TiddlyDesktop Releases
 type: text/vnd.tiddlywiki
 
-Here are the details of recent releases of TiddlyDesktop
-
-<$list filter="[tag[TiddlyDesktopReleaseNotes]!sort[created]limit[1]]">
-  <$macrocall $name="tabs" tabsList="[tag[TiddlyDesktopReleaseNotes]!sort[created]]"default={{!!title}} class="tc-vertical" template="ReleaseTemplate" />
-</$list>
+The latest release of TiddlyDesktop can be found at https://github.com/TiddlyWiki/TiddlyDesktop/releases/latest, or you can see a [[list of all releases|https://github.com/TiddlyWiki/TiddlyDesktop/releases]].

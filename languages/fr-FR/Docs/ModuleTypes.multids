@@ -2,6 +2,7 @@ title: $:/language/Docs/ModuleTypes/
 
 allfilteroperator: Un sous-opérateur pour l'opérateur de filtre ''all''.
 animation: Animations pouvant être utilisées par le RevealWidget.
+authenticator: Définit comment les requêtes sont authentifiées par le serveur HTTP intégré.
 bitmapeditoroperation: Une opération intégrée à la barre d'outils de l'éditeur de bitmap.
 command: Commandes qui peuvent être exécutées en mode Node.js.
 config: Données à inclure dans `$tw.config`.
@@ -11,7 +12,8 @@ info: Publie des informations système via le pseudo-plugin [[$:/temp/info-plugi
 isfilteroperator: Opérandes pour l'opérateur de filtre ''is''.
 library: Module générique pour les modules ~JavaScript de portée générale.
 macro: Définitions de macros ~JavaScript.
-parser: Parseurs pour divers types de contenu. 
+parser: Parseurs pour divers types de contenu.
+route: Définit comment chaque motif d'URL est géré par le serveur HTTP intégré.
 saver: Les tiddlers d'enregistrement contiennent les différentes méthodes pour enregistrer des fichiers à partir du navigateur.
 startup: Fonctions de démarrage.
 storyview: Différents points de vue sur le déroulé, qui personnalisent l'animation et le comportement des widgets de liste.
@@ -21,7 +23,8 @@ tiddlerfield: Définit le comportement d'un champ de tiddler.
 tiddlermethod: Ajoute des méthodes au prototype `$tw.Tiddler`.
 upgrader: Applique une procédure de mise à jour aux tiddlers lors de l'opération de mise à jour/importation.
 utils: Ajoute des méthodes dans `$tw.utils`.
-utils-node: Ajoute des méthodes spécifiques à Node.js dans `$tw.utils`.
+utils-browser: Ajoute des méthodes spécifiques au mode browser dans `$tw.utils`.
+utils-node: Ajoute des méthodes spécifiques au mode Node.js dans `$tw.utils`.
 widget: Les widgets encapsulent les méthodes de rendu et de rafraichissement du DOM.
 wikimethod: Ajoute des méthodes à `$tw.Wiki`.
 wikirule: Règles d'analyse pour le parseur WikiText principal.

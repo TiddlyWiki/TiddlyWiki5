@@ -1,0 +1,45 @@
+title: $:/plugins/tiddlywiki/dynaview/styles
+tags: $:/tags/Stylesheet
+
+\define if-tiddler-is(title,value,text)
+<$reveal stateTitle=<<__title__>> text=<<__value__>> type="match">
+<$text text=<<__text__>>/>
+</$reveal>
+\end
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+<<if-tiddler-is title:"$:/config/DynaView/PreserveScrollPosition" value:"yes" text:"""
+body {
+	overflow-anchor: none; /* Turn off browser scroll anchoring */
+}
+""">>
+
+body.tc-dynaview .tc-dynaview-zoom-visible-1-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-1a-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-1b-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-1c-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-2-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-2a-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-3-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-4-and-above,
+body.tc-dynaview .tc-dynaview-zoom-visible-1,
+body.tc-dynaview .tc-dynaview-zoom-visible-2,
+body.tc-dynaview .tc-dynaview-zoom-visible-3,
+body.tc-dynaview .tc-dynaview-zoom-visible-4 {
+	transition: opacity 150ms ease-in-out;
+	opacity: 0;
+}
+
+body.tc-dynaview .tc-dynaview-zoom-visible-1-and-above {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-1a-and-above .tc-dynaview-zoom-visible-1a-and-above {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-1b-and-above .tc-dynaview-zoom-visible-1b-and-above {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-1c-and-above .tc-dynaview-zoom-visible-1c-and-above {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-2-and-above .tc-dynaview-zoom-visible-2-and-above {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-2a-and-above .tc-dynaview-zoom-visible-2a-and-above {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-3-and-above .tc-dynaview-zoom-visible-3-and-above {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4-and-above .tc-dynaview-zoom-visible-4-and-above {opacity: 1;}
+
+body.tc-dynaview.tc-dynaview-zoom-factor-1 .tc-dynaview-zoom-visible-1 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-2 .tc-dynaview-zoom-visible-2 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-3 .tc-dynaview-zoom-visible-3 {opacity: 1;}
+body.tc-dynaview.tc-dynaview-zoom-factor-4 .tc-dynaview-zoom-visible-4 {opacity: 1;}

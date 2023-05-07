@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/dynaview/config
+
+<$checkbox tiddler="$:/config/DynaView/ViewportDimensions" field="text" checked="yes" unchecked="no" default="no"> Enable dynamic saving of the viewport [[width|$:/state/DynaView/ViewportDimensions/Width]] and [[height|$:/state/DynaView/ViewportDimensions/Height]]</$checkbox>
+
+<$checkbox tiddler="$:/config/DynaView/UpdateAddressBar" field="text" checked="yes" unchecked="no" default="no"> Update address bar while scrolling</$checkbox>
+

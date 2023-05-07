@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/comments/readme
+
+This plugin provides a simple means for adding threaded comments to tiddlers.
+
+* Click the "add comment" button to make a new comment, and then click the "save" button to save it
+* You can comment on a tiddler itself, or add a comment to an existing comment
+* The sidebar tab ''Comments'' lists a timeline of all comments
+* Comments are attributed to the username stored in the system tiddler [[$:/status/UserName]]
+* By default, comments are available on all non-system tiddlers. The ''config'' tab lets you customise which tiddlers can accept comments by specifying a filter extension
+* The buttons for adding and editing comments are only available if the system tiddler [[$:/status/IsReadOnly]] is not set to `yes`
+* Use the "All comments" option in the $:/AdvancedSearch ''Filter'' tab to see or export all comments
+
+!! Data Model
+
+The data model employed by the comments plugin is very simple:
+
+* Comment tiddlers are identified by the `role` field being set to `comment`
+* The `list` field of comment tiddlers lists the tiddlers to which this comment applies
+** It is thus possible for a comment to be applied to multiple tiddlers at once
+** The links between comments can be preserved when renaming them by using the relink checkbox in the edit template
+* The `edit-mode` field of comment tiddlers is set to `yes` to display it in edit mode, or `no` to display it in view mode
+* The `saved-text` field is updated when switching to edit mode so that it can be restored if the user cancels
+

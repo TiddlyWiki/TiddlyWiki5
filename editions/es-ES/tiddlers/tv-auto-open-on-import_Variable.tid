@@ -10,4 +10,4 @@ La [[variable|Variables]] <<.def tv-auto-open-on-import>> controla si el mensaje
 
 Por defecto, el tiddler se abre, pero si la variable tiene valor <<.value no>>, no lo hace.
 
-Un ejemplo de ajuste de esta variable con valor <<.value no>> puede verse en el plugin de actualización en el [[asistente de actualización de TiddlyWiki|http://www.tiddlywiki.com/upgrade.html]], donde el usuario arrastra los archivos que quiera actualizar pero en pantalla no se muestra la importación del modo habitual.
+Un ejemplo de ajuste de esta variable con valor <<.value no>> puede verse en el plugin de actualización en el [[asistente de actualización de TiddlyWiki|https://www.tiddlywiki.com/upgrade.html]], donde el usuario arrastra los archivos que quiera actualizar pero en pantalla no se muestra la importación del modo habitual.

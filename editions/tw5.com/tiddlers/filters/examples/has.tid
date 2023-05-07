@@ -9,3 +9,5 @@ type: text/vnd.tiddlywiki
 <<.operator-example 2 "[tag[Concepts]!has[modified]]">>
 <<.operator-example 3 "[has:field[emptyfield]]">>
 <<.operator-example 4 "[all[current]!has:field[doesntexist]]">>
+<<.operator-example 5 "[all[tiddlers+shadows]has:index[foreground]]">>
+<<.operator-example 6 "[all[current]!has:index[doesntexist]]">>

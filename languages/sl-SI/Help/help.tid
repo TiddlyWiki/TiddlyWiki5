@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: Prikaže pomoč za ukaze TiddlyWiki
+
+Prikaže besedilo pomoči za ukaz:
+
+```
+--help [<command>]
+```
+
+Če je ime ukaza izpuščeno, se prikaže seznam razpoložljivih ukazov.

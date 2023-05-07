@@ -1,0 +1,8 @@
+title: $:/core/templates/canonical-uri-external-raw
+
+<!--
+
+This template is used to assign the ''_canonical_uri'' field to external raw files that are stored in the same directory
+
+-->
+<$view field="title" format="doubleurlencoded"/>

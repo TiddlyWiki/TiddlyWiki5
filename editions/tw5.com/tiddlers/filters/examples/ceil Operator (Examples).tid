@@ -1,0 +1,9 @@
+created: 20190611174446781
+modified: 20190611174554787
+tags: [[ceil Operator]] [[Operator Examples]]
+title: ceil Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[1.6]ceil[]]">>
+<<.operator-example 2 "[[-1.6]ceil[]]">>
+<<.operator-example 3 "=-1.2 =-2.4 =3.6 =4.8 =5.1 +[ceil[]]">>

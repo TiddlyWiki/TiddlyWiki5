@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Tento tiddler obsahuje binární data
-ClassicWarning/Hint: Tento tiddler používá formát textu z TiddlyWiki Classic, který není plně kompatibilní s TiddlyWiki verze 5. Na http://tiddlywiki.com/static/Upgrading.html zjistíte více. 
+ClassicWarning/Hint: Tento tiddler používá formát textu z TiddlyWiki Classic, který není plně kompatibilní s TiddlyWiki verze 5. Na https://tiddlywiki.com/static/Upgrading.html zjistíte více. 
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: zavřít vše
 ConfirmCancelTiddler: Chcete zrušit změny v tiddleru "<$text text=<<title>>/>"?
@@ -12,8 +12,7 @@ DefaultNewTiddlerTitle: Nový Tiddler
 DropMessage: Zde pusťte (nebo zmáčknutím Esc zrušte)
 Encryption/ConfirmClearPassword: Chcete ztušit heslo? Tím se zruší šifrování této wiki
 Encryption/PromptSetPassword: Nastavte nové heslo pro tuto TiddlyWiki
-InvalidFieldName: Neplatné znaky v názvu pole "<$text text=<<fieldName>>/>". Název může obsahovat pouze malá písmena, čísla, podtržítko (`_`), pomlčku (`-`) a tečku (`.`)
-MissingTiddler/Hint: Chybějící tiddler "<$text text=<<currentTiddler>>/>" - klikněte na {{$:/core/images/edit-button}} pro jeho vytvoření
+MissingTiddler/Hint: Chybějící tiddler "<$text text=<<currentTiddler>>/>" - klikněte na {{||$:/core/ui/Buttons/edit}} pro jeho vytvoření
 RecentChanges/DateFormat: DD. MM. YYYY
 SystemTiddler/Tooltip: Toto je systémový tiddler
 TagManager/Colour/Heading: Barva

@@ -1,0 +1,15 @@
+title: $:/language/Import/
+
+Imported/Hint: تیدلرهای ذیل وارد شدند:
+Listing/Cancel/Caption: کنسل
+Listing/Hint: این تیدلرها آماده‌ی وارد شدن هستند:
+Listing/Import/Caption: وارد کردن
+Listing/Select/Caption: انتخاب
+Listing/Status/Caption: وضعیت
+Listing/Title/Caption: عنوان
+Upgrader/Plugins/Suppressed/Incompatible: نامنطبق‌ها بلاک شدند یا افزونه قدیمی است
+Upgrader/Plugins/Suppressed/Version: افزونه‌ها بلاک شدن (بخاطر این که ورودی‌ها <<incoming>> قدیمی‌تر از موجود‌ها <<existing>> هستند)
+Upgrader/Plugins/Upgraded: افزونه‌ها از <<incoming>> به <<upgraded>> بروز شدند.
+Upgrader/State/Suppressed: تیدلرهای دارای وضعیت موقت بلاک شدند
+Upgrader/System/Suppressed: تیدلرهای سیستمی بلاک شدند
+Upgrader/ThemeTweaks/Created: تغییرات قالب از <$text text=<<from>>/>  دریافت شدند

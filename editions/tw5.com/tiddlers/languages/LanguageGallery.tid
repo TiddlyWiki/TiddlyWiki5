@@ -1,10 +1,10 @@
 created: 20151231083708980
-modified: 20151231084132703
-tags: 
-title: LanguageGallery
+modified: 20211117212723856
+tags: Languages
+title: LanguageGallery Example
 type: text/vnd.tiddlywiki
 
-Here is an example of using the ListWidget and the TranscludeWidget to show a grid of all language icons (ie, tiddlers tagged [[Language]] and [[Icon]]).
+Here is an example of using the ListWidget and the TranscludeWidget to show a grid of all of Language Icons which are tiddlers [[tagged|Tagging]] <<tag Language>>and <<tag Icon>>
 
 <style>
 .language-gallery img {

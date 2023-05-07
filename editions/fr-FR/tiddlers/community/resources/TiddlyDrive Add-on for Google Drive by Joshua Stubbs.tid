@@ -1,0 +1,24 @@
+caption: ~TiddlyDrive
+color: #FFEB3B
+community-author: Joshua Stubbs
+created: 20171109172705241
+delivery: Google Drive Add-on
+description: Extension Google Drive pour utiliser les fichiers TiddlyWiki
+fr-title: Extension TiddlyDrive pour Google Drive par Joshua Stubbs
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP [[Other Resources]] Safari Saving Windows iOS plugins Edge
+title: TiddlyDrive Add-on for Google Drive by Joshua Stubbs
+type: text/vnd.tiddlywiki
+url: https://github.com/tiddlydrive/tiddlydrive.github.io
+
+Une extension pour Google Drive qui permet d'ouvrir et d'enregistrer directement les fichiers <<tw>> qui y sont stockés. 
+
+Pour plus d'informations, consultez la page ~GitHub du projet<<:>>
+{{!!url}}
+
+<<<
+J'ai créé une appli qui permet d'éditer les fichiers <<tw>> stockés sur Google Drive et de les ré-enregistrer automagiquement. La page est ici<<:>> https://chrome.google.com/webstore/detail/tiddly-drive/oaphhjhbbabdjnpjpiliepphpmnioolo mais je crois que vous devez ajouter l'appli depuis l'interface web Google Drive.
+
+J'ai même intégré une option pour enregistrer avec le raccourci standard ctrl+s.
+<<< Traduction du [[message de lancement de Joshua|https://groups.google.com/d/topic/tiddlywiki/7pNJizR57e8/discussion]]

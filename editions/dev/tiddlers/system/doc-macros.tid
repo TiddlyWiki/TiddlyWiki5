@@ -1,0 +1,114 @@
+created: 20150117152607000
+modified: 201804111739
+tags: $:/tags/Macro
+title: $:/editions/dev/doc-macros
+type: text/vnd.tiddlywiki
+
+\define .concat(1,2,3,4,5) $1$$2$$3$$4$$5$
+
+\define .def(_) <dfn class="doc-def">$_$</dfn>
+\define .em(_) <em class="doc-em">$_$</em>
+\define .strong(_) <strong class="doc-strong">$_$</strong>
+\define .place(_) <code class="doc-place">$_$</code>
+\define .word(_) "$_$"
+
+\define .preamble(_) :.doc-preamble $_$
+\define .note(_)
+@@.doc-note
+;Note
+: $_$
+@@
+\end
+
+\define .tid(_) <code class="doc-tiddler">$_$</code>
+\define .tag(_) <code class="doc-tag">$_$</code>
+\define .field(_) <code class="doc-field">$_$</code>
+\define .value(_) <code class="doc-value">$_$</code>
+\define .op(_) <code class="doc-operator">$_$</code>
+\define .var(_) <code class="doc-var">$_$</code>
+\define .wid(_) <code class="doc-widget">$$_$</code>
+\define .attr(_) <code class="doc-attr">$_$</code>
+\define .param(_) <code class="doc-param">$_$</code>
+
+\define .mtitle(_) $_$ Macro
+\define .otitle(_) $_$ Operator
+\define .vtitle(_) $_$ Variable
+
+\define .link(_,to) <$link to="$to$">$_$</$link>
+\define .clink(_,to) <span class="doc-clink"><<.link """$_$""" "$to$">></span>
+\define .dlink(_,to) <$macrocall $name=".link" _=<<.def "$_$">> to="$to$">/>
+\define .dlink-ex(_,to) <a href="$to$" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><<.def "$_$">></a>
+\define .flink(to) <$macrocall $name=".link" _=<<.field {{$to$!!caption}}>> to="$to$"/>
+\define .mlink(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to=<<.mtitle "$_$">>/>
+\define .mlink2(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to="$to$"/>
+\define .olink(_) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$_$">>/>
+\define .olink2(_,to) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$to$">>/>
+\define .vlink(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to=<<.vtitle "$_$">>/>
+\define .vlink2(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to="$to$"/>
+\define .wlink(to) <$macrocall $name=".link" _=<<.wid {{$to$!!caption}}>> to="$to$"/>
+\define .wlink2(_,to) <$macrocall $name=".link" _="$_$" to="$to$"/>
+
+\define .key(_) <span class="doc-key">$_$</span>
+\define .combokey(_) <$macrocall $name=".if" cond="$_$" then=<<.key '$_$'>>/>
+\define .keycombo(1,2,3,4) <<.combokey "$1$">><<.if "$2$" +>><<.combokey "$2$">><<.if "$3$" +>><<.combokey "$3$">><<.if "$4$" +>><<.combokey "$4$">>
+
+\define .tab(_) <span class="doc-tab">{{$_$!!caption}}</span>
+\define .sidebar-tab(_) <<.tab "$:/core/ui/SideBar/$_$">>
+\define .more-tab(_) <<.tab "$:/core/ui/MoreSideBar/$_$">>
+\define .info-tab(_) <<.tab "$:/core/ui/TiddlerInfo/$_$">>
+\define .controlpanel-tab(_) <<.tab "$:/core/ui/ControlPanel/$_$">>
+\define .advancedsearch-tab(_) <<.tab "$:/core/ui/AdvancedSearch/$_$">>
+\define .toc-tab() <<.tab "TableOfContents">>
+\define .example-tab(_) <span class="doc-tab">$_$</span>
+
+\define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
+
+\define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
+\define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
+
+\define .state-prefix() $:/state/editions/tw5.com/
+
+\define .lorem()
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\end
+
+\define .toc-lorem()
+This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
+
+<<.lorem>>
+\end
+
+\define .example(n,eg,egvar:NO-SUCH-VAR)
+<div class="doc-example">
+<$reveal default="$egvar$" type="match" text="NO-SUCH-VAR">
+	<$macrocall $name="copy-to-clipboard-above-right" src="""$eg$"""/>
+	<$codeblock code="""$eg$"""/>
+</$reveal>
+<$reveal default="$egvar$" type="nomatch" text="NO-SUCH-VAR">
+	<!-- allow an example to contain """ -->
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<$egvar$>>/>
+	<$codeblock code=<<$egvar$>>/>
+</$reveal>
+<$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$n$]]" variable=".state">
+<$reveal state=<<.state>> type="nomatch" text="show">
+	<dl>
+	<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
+	</dl>
+</$reveal>
+<$reveal state=<<.state>> type="match" text="show">
+	<dl>
+	<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
+	</dl>
+	<blockquote class="doc-example-result">
+	<$reveal default="$egvar$" type="match" text="NO-SUCH-VAR">
+		$eg$
+	</$reveal>
+	<$reveal default="$egvar$" type="nomatch" text="NO-SUCH-VAR">
+		<<$egvar$>>
+	</$reveal>
+	</blockquote>
+</$reveal>
+</$list>
+\end
+
+<pre><$view field="text"/></pre>

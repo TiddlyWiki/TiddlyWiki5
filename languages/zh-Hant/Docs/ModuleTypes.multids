@@ -2,6 +2,7 @@ title: $:/language/Docs/ModuleTypes/
 
 allfilteroperator:  ''all'' 篩選器運算子的子運算子。
 animation: 動畫模組包含可用於 RevealWidget 的動畫。
+authenticator: 定義內建 HTTP 伺服器對請求的身份驗證方式。
 bitmapeditoroperation: 一個點陣圖編輯器工具列操作。
 command: 可於 Node.js 執行的指令。
 config: 加入 `$tw.config` 的資料。
@@ -12,6 +13,7 @@ isfilteroperator: ''is'' 篩選器運算元的運算子。
 library: 一般用途的 JavaScript 模組的通用的模組類型。
 macro: JavaScript ''巨集''定義。
 parser: 不同內容類型的解析器。
+route: 定義內建 HTTP 伺服器如何處理各個網址格式。
 saver: 於瀏覽器儲存檔案的不同的儲存處理方法。
 startup: 啟動時期的功能函數。
 storyview: 檢視模式用以自訂 list 小工具的動畫與行為。
@@ -21,7 +23,8 @@ tiddlerfield: 定義個別條目欄位的行為。
 tiddlermethod: 新增方法至 `$tw.Tiddler` 原型。
 upgrader: 於升級/導入過程中，套用升級處理至條目。
 utils: 新增方法至 `$tw.utils`。
-utils-node: 將特定於 Node.js 的方法新增到 '$tw.utils'。.
+utils-browser: 將特定於瀏覽器的方法新增到 `$tw.utils`。
+utils-node: 將特定於 Node.js 的方法新增到 `$tw.utils`。
 widget: 封裝 DOM 渲染和刷新的小工具。
 wikimethod: 新增方法至 `$tw.Wiki`。
 wikirule: WikiText 解析器的個別的語法規則。

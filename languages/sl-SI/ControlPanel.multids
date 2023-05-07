@@ -1,0 +1,173 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Napredno
+Advanced/Hint: Interne informacije o tem TiddlyWikiju
+Appearance/Caption: Videz
+Appearance/Hint: Načini prilagoditve videza vašega TiddlyWikija.
+Basics/AnimDuration/Prompt: Trajanje animacije:
+Basics/Caption: Osnove
+Basics/DefaultTiddlers/BottomHint: Za naslove s presledki uporabite &#91;&#91;double square brackets&#93;&#93;. Ali pa kliknite, {{da bi ob nalaganju obnovili odprte tiddlerje.||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: Privzeti tiddlerji:
+Basics/DefaultTiddlers/TopHint: Izberite, kateri tiddlerji so prikazani ob zagonu:
+Basics/Language/Prompt: Zdravo! Trenutni jezik:
+Basics/NewJournal/Tags/Prompt: Oznake za nove dnevniške tiddlerje
+Basics/NewJournal/Text/Prompt: Besedilo za nove dnevniške tiddlerje
+Basics/NewJournal/Title/Prompt: Naslov za nove dnevniške tiddlerje
+Basics/OverriddenShadowTiddlers/Prompt: Število prepisanih senčnih tiddlerjev:
+Basics/ShadowTiddlers/Prompt: Število senčnih tiddlerjev:
+Basics/Subtitle/Prompt: Podnaslov:
+Basics/SystemTiddlers/Prompt: Število sistemskih tiddlerjev:
+Basics/Tags/Prompt: Število oznak:
+Basics/Tiddlers/Prompt: Število tiddlerjev:
+Basics/Title/Prompt: Naslov tega ~TiddlyWikija:
+Basics/Username/Prompt: Uporabniško ime za podpisovanje sprememb:
+Basics/Version/Prompt: različica ~TiddlyWikija
+EditorTypes/Caption: Vrste urejevalnikov
+EditorTypes/Editor/Caption: Urejevalnik
+EditorTypes/Hint: Ti tiddlerji določajo, kateri urejevalnik se uporablja za urejanje določenih vrst tiddlerjev.
+EditorTypes/Type/Caption: vrsta MIME
+Info/Caption: Info
+Info/Hint: Informacije o tem TiddlyWikiju
+KeyboardShortcuts/Add/Caption: dodajte bližnjico
+KeyboardShortcuts/Add/Prompt: Tukaj vnesite bližnjico
+KeyboardShortcuts/Caption: Bližnjice na tipkovnici
+KeyboardShortcuts/Hint: Upravljanje dodelitev bližnjic na tipkovnici
+KeyboardShortcuts/NoShortcuts/Caption: Ni dodeljenih bližnjičnih tipk
+KeyboardShortcuts/Platform/All: Vse platforme
+KeyboardShortcuts/Platform/Linux: Samo Linux
+KeyboardShortcuts/Platform/Mac: Samo Macintosh
+KeyboardShortcuts/Platform/NonLinux: Vse platforme razen Linux
+KeyboardShortcuts/Platform/NonMac: Vse platforme razen Macintosh
+KeyboardShortcuts/Platform/NonWindows: Vse platforme razen Windows
+KeyboardShortcuts/Platform/Windows: Samo Windows
+KeyboardShortcuts/Remove/Hint: odstranite bližnjico na tipkovnici
+LoadedModules/Caption: Naloženi moduli
+LoadedModules/Hint: To so trenutno naloženi tiddler moduli, povezani z njihovimi izvornimi tiddlerji. Moduli zapisani kurzivno nimajo izvornega tiddlerja, običajno zato, ker so bili nastavljeni med zagonom.
+Palette/Caption: Paleta
+Palette/Editor/Clone/Caption: kloniraj
+Palette/Editor/Clone/Prompt: Priporočamo, da klonirate to senčno paleto, preden jo urejate.
+Palette/Editor/Prompt: Urejanje
+Palette/Editor/Prompt/Modified: Ta senčna paleta je bila spremenjena
+Palette/Editor/Reset/Caption: ponastaviti
+Palette/HideEditor/Caption: skrij urejevalnik
+Palette/Prompt: Trenutna paleta:
+Palette/ShowEditor/Caption: pokaži urejevalnik
+Parsing/Block/Caption: Pravila razčlenjevanja blokov
+Parsing/Caption: Razčlenjevanje
+Parsing/Hint: Tukaj lahko globalno onemogočite/omogočite pravila wiki razčlenjevalnika. Če želite da začnejo spremembe veljati, shranite in znova naložite svoj wiki. Če onemogočite določena pravila razčlenjevalnika, lahko preprečite da, <$ text text="TiddlyWiki"/> pravilno deluje. Uporabite [[varen način|http: //tiddlywiki.com/#SafeMode]] za obnovitev normalnega delovanja.
+Parsing/Inline/Caption: Znotrajvrstična pravila razčlenjevanja
+Parsing/Pragma/Caption: Pragma pravila razčlenjevanja
+Plugins/Add/Caption: Pridobite več vtičnikov
+Plugins/Add/Hint: Namestite vtičnike iz uradne knjižnice
+Plugins/AlreadyInstalled/Hint: Ta vtičnik je že nameščen. Različica: <$ text text=<< installedVersion>>/>
+Plugins/Caption: Vtičniki
+Plugins/ClosePluginLibrary: zapri knjižnico vtičnikov
+Plugins/Disable/Caption: onemogoči
+Plugins/Disable/Hint: Onemogoči ta vtičnik pri ponovnem nalaganju strani
+Plugins/Disabled/Status: (onemogočen)
+Plugins/Empty/Hint: Nič
+Plugins/Enable/Caption: omogoči
+Plugins/Enable/Hint: Omogočite ta vtičnik pri ponovnem nalaganju strani
+Plugins/Install/Caption: namesti
+Plugins/Installed/Hint: Trenutno nameščeni vtičniki:
+Plugins/Languages/Caption: Jeziki
+Plugins/Languages/Hint: Vtičniki jezikovnih paketov
+Plugins/NoInfoFound/Hint: Noben ''"<$text text=<<currentTab>>/>"'' ni bil najden
+Plugins/NoInformation/Hint: Ni podatkov
+Plugins/NotInstalled/Hint: Ta vtičnik trenutno ni nameščen
+Plugins/OpenPluginLibrary: odpri knjižnico vtičnikov
+Plugins/Plugins/Caption: Vtičniki
+Plugins/Plugins/Hint: Vtičniki
+Plugins/Reinstall/Caption: ponovno namestite
+Plugins/Themes/Caption: Teme
+Plugins/Themes/Hint: Vtičniki tem
+Saving/Caption: Shranjevanje
+Saving/DownloadSaver/AutoSave/Description: Dovolite samodejno shranjevanje za "download saver"
+Saving/DownloadSaver/AutoSave/Hint: Omogočite samodejno shranjevanje za "Download Saver"
+Saving/DownloadSaver/Caption: Download Saver
+Saving/DownloadSaver/Hint: Te nastavitve veljajo za "download saver", ki je združljiv z HTML5
+Saving/General/Caption: Splošno
+Saving/General/Hint: Te nastavitve veljajo za vse mehanizme shranjevanja
+Saving/Hint: Nastavitve, uporabljene za shranjevanje celotnega TiddlyWikija kot posamezne datoteke prek shranjevalnega modula
+Saving/TiddlySpot/Advanced/Heading: Napredne nastavitve
+Saving/TiddlySpot/BackupDir: Imenik za varnostno kopiranje
+Saving/TiddlySpot/Backups: Varnostne kopije
+Saving/TiddlySpot/Caption: Shrani v ~TiddlySpot
+Saving/TiddlySpot/Description: Te nastavitve se uporabljajo samo pri shranjevanju na http://tiddlyspot.com ali združljivem strežniku
+Saving/TiddlySpot/Filename: Ime datoteke za nalaganje
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //URL strežnika je privzeto nastavljen na `http://<wikiname>.tiddlyspot.com/store.cgi` in ga je mogoče spremeniti, če želite uporabiti naslov strežnika po meri, npr. `http://example.com/store.php`.//
+Saving/TiddlySpot/Password: Geslo
+Saving/TiddlySpot/ServerURL: URL strežnika
+Saving/TiddlySpot/UploadDir: Imenik za nalaganje
+Saving/TiddlySpot/UserName: Ime wikija
+Settings/AutoSave/Caption: Samodejno shrani
+Settings/AutoSave/Disabled/Description: Ne shrani sprememb samodejno
+Settings/AutoSave/Enabled/Description: Samodejno shrani spremembe
+Settings/AutoSave/Hint: Samodejno shrani spremembe med urejanjem, če shranjevalni modul to podpira
+Settings/CamelCase/Caption: Camel Case wiki povezave
+Settings/CamelCase/Description: Omogoči samodejno povezovanje ~CamelCase
+Settings/CamelCase/Hint: Globalno onemogočite samodejno povezovanje stavkov ~CamelCase. Ponovno naložite stran, da aktivirate nastavitev!
+Settings/Caption: Nastavitve
+Settings/DefaultSidebarTab/Caption: Privzeti zavihek v stranski vrstici
+Settings/DefaultSidebarTab/Hint: Določite, kateri zavihek stranske vrstice je privzeto prikazan
+Settings/EditorToolbar/Caption: Orodna vrstica urejevalnika
+Settings/EditorToolbar/Description: Pokaži orodno vrstico urejevalnika
+Settings/EditorToolbar/Hint: Omogočite ali onemogočite orodno vrstico urejevalnika:
+Settings/Hint: Te nastavitve vam omogočajo, da prilagodite vedenje TiddlyWikija.
+Settings/InfoPanelMode/Caption: Obnašanje informacijskega pulta tiddlerja
+Settings/InfoPanelMode/Hint: Nastavitev, kdaj se informacijski pult tiddlerja zapre
+Settings/InfoPanelMode/Popup/Description: Informacijski pult tiddlerja se zapre samodejno
+Settings/InfoPanelMode/Sticky/Description: Informacijski pult tiddlerja ostane odprt dokler ga ne zapremo
+Settings/LinkToBehaviour/Caption: Obnašanje tiddlerjev pri odpiranju
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigacija //znotraj// zgodbe (reke tiddlerjev)
+Settings/LinkToBehaviour/OpenAbove: Odpri nad trenutnim tiddlerjem
+Settings/LinkToBehaviour/OpenAtBottom: Odpri na dnu zgodbe (reke tiddlerjev)
+Settings/LinkToBehaviour/OpenAtTop: Odpri na vrhu zgodbe (reke tiddlerjev)
+Settings/LinkToBehaviour/OpenBelow: Odpri pod trenutnim tiddlerjem
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigacija //izven// zgodbe (reke tiddlerjev)
+Settings/MissingLinks/Caption: Wiki povezave
+Settings/MissingLinks/Description: Omogoči povezave do manjkajočih tiddlerjev
+Settings/MissingLinks/Hint: Izberite, ali se naj omogočijo povezave do tiddlerjev, ki še ne obstajajo
+Settings/NavigationAddressBar/Caption: Naslovna vrstica za navigacijo
+Settings/NavigationAddressBar/Hint: Obnašanje naslovne vrstice brskalnika pri krmarjenju do tiddlerja:
+Settings/NavigationAddressBar/No/Description: Ne posodobi naslovne vrstice
+Settings/NavigationAddressBar/Permalink/Description: Vključi trenutni tiddler
+Settings/NavigationAddressBar/Permaview/Description: Vključi vse odprte tiddlerje
+Settings/NavigationHistory/Caption: Zgodovina brskanja
+Settings/NavigationHistory/Hint: Posodobi zgodovino brskalnika pri krmarjenju do tiddlerja:
+Settings/NavigationHistory/No/Description: Ne posodobi zgodovine
+Settings/NavigationHistory/Yes/Description: Posodobi zgodovino
+Settings/PerformanceInstrumentation/Caption: Merjenje učinkovitosti
+Settings/PerformanceInstrumentation/Description: Omogoči merjenje učinkovitosti
+Settings/PerformanceInstrumentation/Hint: Prikaže statistiko učinkovitosti v konzoli za razvijalce brskalnika. Ponovno naložite stran, da aktivirate nastavitev!
+Settings/TitleLinks/Caption: Naslovi tiddlerjev
+Settings/TitleLinks/Hint: Prikaži naslove tiddlerjev kot povezave
+Settings/TitleLinks/No/Description: Ne prikaži naslove tiddlerjev kot povezave
+Settings/TitleLinks/Yes/Description: Prikaži naslove tiddlerjev kot povezave
+Settings/ToolbarButtons/Caption: Gumbi orodne vrstice
+Settings/ToolbarButtons/Hint: Privzeti izgled gumba orodne vrstice:
+Settings/ToolbarButtons/Icons/Description: Prikaži ikono
+Settings/ToolbarButtons/Text/Description: Prikaži besedilo
+Settings/ToolbarButtonStyle/Caption: Slog gumba orodne vrstice
+Settings/ToolbarButtonStyle/Hint: Izberite slog za gumbe orodne vrstice:
+Settings/ToolbarButtonStyle/Styles/Borderless: Brez roba
+Settings/ToolbarButtonStyle/Styles/Boxed: Uokvirjeno
+Settings/ToolbarButtonStyle/Styles/Rounded: Zaokroženo
+StoryView/Caption: Pogled
+StoryView/Prompt: Trenutni pogled:
+Theme/Caption: Tema
+Theme/Prompt: Trenutna tema:
+TiddlerFields/Caption: Polja tiddlerja
+TiddlerFields/Hint: To je celoten seznam [[polj tiddlerjev|TiddlerFields]], ki se uporabljajo v tem wikiju (vključno s sistemskimi tiddlerji, vendar brez senčnih tiddlerjev).
+Toolbars/Caption: Orodne vrstice
+Toolbars/EditorToolbar/Caption: Orodna vrstica urejevalnika
+Toolbars/EditorToolbar/Hint: Izberite, kateri gumbi so prikazani v orodni vrstici urejevalnika. Upoštevajte, da se nekateri gumbi prikažejo samo pri urejanju tiddlerjev določene vrste. Povlecite in spustite, da spremenite vrstni red.
+Toolbars/EditToolbar/Caption: Orodna vrstica načina urejanja
+Toolbars/EditToolbar/Hint: Izberite, kateri gumbi so prikazani za tiddlerje v načinu urejanja. Povlecite in spustite, da spremenite vrstni red.
+Toolbars/Hint: Izberite, kateri gumbi so prikazani
+Toolbars/PageControls/Caption: Orodna vrstica strani
+Toolbars/PageControls/Hint: Izberite, kateri gumbi so prikazani na orodni vrstici strani. Povlecite in spustite, da spremenite vrstni red.
+Toolbars/ViewToolbar/Caption: Orodna vrstica načina pogleda
+Toolbars/ViewToolbar/Hint: Izberite, kateri gumbi so prikazani za tiddlerje v načinu pogleda. Povlecite in spustite, da spremenite vrstni red.
+Tools/Download/Full/Caption: Prenesite celoten wiki

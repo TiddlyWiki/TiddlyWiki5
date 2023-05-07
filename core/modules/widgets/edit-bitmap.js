@@ -14,7 +14,8 @@ Edit-bitmap widget
 
 // Default image sizes
 var DEFAULT_IMAGE_WIDTH = 600,
-	DEFAULT_IMAGE_HEIGHT = 370;
+	DEFAULT_IMAGE_HEIGHT = 370,
+	DEFAULT_IMAGE_TYPE = "image/png";
 
 // Configuration tiddlers
 var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
@@ -24,11 +25,6 @@ var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
-	// Initialise the editor operations if they've not been done already
-	if(!this.editorOperations) {
-		EditBitmapWidget.prototype.editorOperations = {};
-		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
-	}
 	this.initialise(parseTreeNode,options);
 };
 
@@ -42,6 +38,11 @@ Render this widget into the DOM
 */
 EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	var self = this;
+	// Initialise the editor operations if they've not been done already
+	if(!this.editorOperations) {
+		EditBitmapWidget.prototype.editorOperations = {};
+		$tw.modules.applyMethods("bitmapeditoroperation",this.editorOperations);
+	}
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -154,7 +155,13 @@ EditBitmapWidget.prototype.loadCanvas = function() {
 		self.refreshToolbar();
 	};
 	// Get the current bitmap into an image object
-	currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
+	if(tiddler && tiddler.fields.type && tiddler.fields.text) {
+		currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
+	} else {
+		currImage.width = DEFAULT_IMAGE_WIDTH;
+		currImage.height = DEFAULT_IMAGE_HEIGHT;
+		currImage.onerror();
+	}
 };
 
 EditBitmapWidget.prototype.initCanvas = function(canvas,width,height,image) {
@@ -179,6 +186,35 @@ EditBitmapWidget.prototype.changeCanvasSize = function(newWidth,newHeight) {
 	// Copy the old image
 	var ctx = newCanvas.getContext("2d");
 	ctx.drawImage(this.currCanvas,0,0);
+	// Set the new canvas as the current one
+	this.currCanvas = newCanvas;
+	// Set the size of the onscreen canvas
+	this.canvasDomNode.width = newWidth;
+	this.canvasDomNode.height = newHeight;
+	// Paint the onscreen canvas with the offscreen canvas
+	ctx = this.canvasDomNode.getContext("2d");
+	ctx.drawImage(this.currCanvas,0,0);
+};
+
+/*
+** Rotate the canvas left by 90 degrees
+*/
+EditBitmapWidget.prototype.rotateCanvasLeft = function() {
+	// Get the current size of the image
+	var origWidth = this.currCanvas.width,
+		origHeight = this.currCanvas.height;
+	// Create and size a new canvas
+	var newCanvas = this.document.createElement("canvas"),
+		newWidth = origHeight,
+		newHeight = origWidth;
+	this.initCanvas(newCanvas,newWidth,newHeight);
+	// Copy the old image
+	var ctx = newCanvas.getContext("2d");
+	ctx.save();
+	ctx.translate(newWidth / 2,newHeight / 2);
+	ctx.rotate(-Math.PI / 2);
+	ctx.drawImage(this.currCanvas,-origWidth / 2,-origHeight / 2);
+	ctx.restore();
 	// Set the new canvas as the current one
 	this.currCanvas = newCanvas;
 	// Set the size of the onscreen canvas
@@ -290,18 +326,16 @@ EditBitmapWidget.prototype.strokeEnd = function() {
 };
 
 EditBitmapWidget.prototype.saveChanges = function() {
-	var tiddler = this.wiki.getTiddler(this.editTitle);
-	if(tiddler) {
-		// data URIs look like "data:<type>;base64,<text>"
-		var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type),
-			posColon = dataURL.indexOf(":"),
-			posSemiColon = dataURL.indexOf(";"),
-			posComma = dataURL.indexOf(","),
-			type = dataURL.substring(posColon+1,posSemiColon),
-			text = dataURL.substring(posComma+1);
-		var update = {type: type, text: text};
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
-	}
+	var tiddler = this.wiki.getTiddler(this.editTitle) || new $tw.Tiddler({title: this.editTitle,type: DEFAULT_IMAGE_TYPE});
+	// data URIs look like "data:<type>;base64,<text>"
+	var dataURL = this.canvasDomNode.toDataURL(tiddler.fields.type),
+		posColon = dataURL.indexOf(":"),
+		posSemiColon = dataURL.indexOf(";"),
+		posComma = dataURL.indexOf(","),
+		type = dataURL.substring(posColon+1,posSemiColon),
+		text = dataURL.substring(posComma+1);
+	var update = {type: type, text: text};
+	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
 };
 
 exports["edit-bitmap"] = EditBitmapWidget;

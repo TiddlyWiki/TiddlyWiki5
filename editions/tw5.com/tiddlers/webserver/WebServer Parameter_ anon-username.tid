@@ -1,0 +1,10 @@
+caption: anon-username
+created: 20180702124636124
+modified: 20180702124836655
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: anon-username
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''anon-username'' provides an optional username for signing edits from anonymous users.
+
+Without this parameter, anonymous users will be given a blank username.

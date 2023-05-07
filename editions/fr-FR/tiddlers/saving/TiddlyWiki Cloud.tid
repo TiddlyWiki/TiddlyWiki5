@@ -1,0 +1,17 @@
+caption: ~TiddlyWiki Cloud Connectors
+color: #29B6F6
+created: 20171113135053055
+delivery: Web Service
+description: Service en ligne pour éditer des documents TiddlyWiki dans Dropbox
+method: save
+modified: 20220402105820520
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: TiddlyWiki Cloud
+type: text/vnd.tiddlywiki
+url: https://twcloud.github.io/tw5-dropbox/
+
+Initialement conçu par Jeremy Ruston et depuis maintenu par Arlen Beiler, TiddlyWiki Cloud (précédemment appelé //TiddlyWiki in the Sky for Dropbox//) est un service en ligne qui vous permet d'éditer vos documents <<tw>> directement dans votre Dropbox en utilisant juste un navigateur.
+
+Il fonctionne avec <<tw>> //5//. En ce qui concerne <<tw>> //Classic//, le chargeur actuel ne fonctionne pas, mais un chargeur ultérieur pourrait fonctionner.
+
+https://twcloud.github.io/

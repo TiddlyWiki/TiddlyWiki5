@@ -1,0 +1,39 @@
+caption: tm-open-external-window
+created: 201701211823
+modified: 201701211825
+tags: Messages
+title: WidgetMessage: tm-open-external-window
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.1.14">>
+
+The `tm-open-external-window` message opens an external link eg: "https://tiddlywiki.com" in a new //browser// window. If no parameters are specified, it opens the help tiddler. Any additional parameters passed via the <<.param "paramObject">> are being provided as variables to the new window.
+
+|!Name |!Description |
+|param |URL of the tiddler to be opened in a new browser window, defaults to the [[TiddlyWiki help|https://tiddlywiki.com/#WidgetMessage%3A%20tm-open-external-window if empty]] |
+|paramObject |Optional: Hashmap of variables that will be provided to the window. see below |
+
+''parmObject''
+
+|!Name |!Description|!Important|
+|windowName|If a parameter is provided it can be used to open different links in the same window eg: `_tiddlywiki`. Default is empty, so every link opens a new window.|The behaviour is influenced by user settings in the browser and the browsers default behavior! |
+|windowFeatures|This parameter needs to be provided as a single string. eg: `"height=400, width=600"`. For detailed description about possible parameters see: [[Mozilla Help|https://developer.mozilla.org/en-US/docs/Web/API/Window/open#Window_features]] ||
+
+The `tm-open-external-window` message is usually generated with the ButtonWidget or ActionSendMessageWidget and is handled by the core itself.
+
+''Examples''
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-sendmessage $message="tm-open-external-window" $param="https://tiddlywiki.com" windowName="_tiddlywiki" windowFeatures="height=500, width=900"/>
+Open ~TiddlyWiki - Action
+</$button>
+
+<$button>
+<$action-sendmessage $message="tm-open-external-window" $param="https://developer.mozilla.org/en-US/docs/Web/API/Window/open" windowName="_tiddlywiki" windowFeatures="height=400, width=600"/>
+Open Mozilla Help - Action
+</$button>
+
+<$button message="tm-open-external-window" param="https://tiddlywiki.com" >
+Open ~TiddlyWiki - Button
+</$button>'/>

@@ -1,0 +1,45 @@
+created: 20171109170823847
+modified: 20211124214943222
+tags: TiddlyFox
+title: TiddlyFox Apocalypse
+type: text/vnd.tiddlywiki
+
+! Summary
+
+On 14th November 2017 Mozilla [[released Firefox 57|https://blog.mozilla.org/blog/2017/09/26/firefox-quantum-beta-developer-edition/]], a major new version with many improvements and security enhancements. However, in amongst those improvements are ''some fundamental changes to Firefox's security model with the unfortunate effect of making it impossible for ~TiddlyFox to function''.
+
+TiddlyFox will remain available for people who [[continue to use older versions of Firefox|https://groups.google.com/d/topic/tiddlywiki/OJQ0yRq4zog/discussion]], but anyone upgrading to the new version will need to choose a new way to handle saving changes with TiddlyWiki.
+
+Happily, several new ways of working with TiddlyWiki now exist so that users have many alternative choices -- see GettingStarted for details. The demise of TiddlyFox has provoked several of these recent developments and thus may well ultimately be good for the community.
+
+There is a [[discussion thread|https://groups.google.com/d/topic/tiddlywiki/LcldXzPlTK0/discussion]] on the TiddlyWiki forums about these developments.
+
+! Background
+
+Firefox was first released in November 2004, a few months after the first version of TiddlyWiki. It was in many ways the Millenium Falcon to Microsoft's Death Star (in the shape of Internet Explorer). IE had by then enjoyed more than 5 years as the dominant browser, leading many in the web community to be frustrated that Microsoft's self-serving extensions to HTML had become de facto standards at the expense of innovation that might benefit the web community as a whole.
+
+Firefox quickly became successful because it managed to render web pages with close enough compatibly with Internet Explorer while offering a superior user experience. A large part of the promise of that user experience was the ability for any user to customise every aspect of the browser. Two innovations were behind this:
+
+* The entire user interface of the browser was constructed in [[XUL|https://en.wikipedia.org/wiki/XUL]], effectively an extension of HTML that enabled it to render conventional user interfaces (at the time, HTML was largely restricted to simple document-oriented layouts). Tweaking a few lines of XUL code could make wholesale changes to the user interface of the browser
+* The Mozilla add-on architecture gave full privileges to add-ons, enabling them to observe and interact deeply with the browser engine itself, and the file system of the computer on which it was running
+
+These two conditions enabled a vibrant ecosystem of Firefox add-ons, many of them extremely popular. In many cases, innovations that were first seen in browser add-ons later became integrated into the browser itself, most notably the web debugger [[Firebug|https://en.wikipedia.org/wiki/Firebug_(software)]] which was eventually cloned by all the browser manufacturers.
+
+Firefox continued to be extremely popular until Google joined the development of the rival ~WebKit browser to make Chrome. Google took a very different approach to the trade offs of making a browser, focusing on improving security at the expense of almost all other considerations. They pioneered approaches such as isolating each tab in its own process that were quickly adopted by all other major browsers.
+
+Google's approach precluded them adopting Mozilla's free-for-all approach to add-ons. Instead of having access to the entire browser environment and filing system, add-ons in Chrome see only a restricted subset of what is going on within the browser, and enjoy little or no access to the resources of the host machine.
+
+It was inevitable that Mozilla would eventually adopt Google's approach to [[browser security vis-a-vis add-ons|https://support.mozilla.org/en-US/kb/firefox-add-technology-modernizing]]. There is a point at which it wouldn't be responsible for Mozilla to be releasing a browser that had knowingly worse security than the market leader.
+
+! Lessons
+
+Some of the fecundity of the TiddlyWiki ecosystem stems from the adoption of the above two principles from Firefox:
+
+* Making the application user interface out of the same primitives as the application content
+* Giving add-ons free rein to observe and interact with all of the internal logic of the application
+
+Those two characteristics present similar security challenges to TiddlyWiki as they did to Firefox. A TiddlyWiki that was primarily focused on security would need to curtail those abilities.
+
+! The Future
+
+Innovation on new browser-based user interfaces and capabilities has now shifted from browser extensions to a new generation of frameworks that simplify creation of a custom browser based on an off-the-shelf open source HTML rendering engine. TiddlyDesktop uses [[nwjs|https://nwjs.io]], while [[Beaker Browser]] uses an alternative called [[Electron|https://electron.atom.io/]].

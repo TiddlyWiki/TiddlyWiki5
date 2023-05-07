@@ -1,0 +1,20 @@
+created: 20220301162305764
+modified: 20220301180818011
+tags: Messages
+title: WidgetMessage: tm-close-all-windows
+type: text/vnd.tiddlywiki
+
+<<.from-version 5.2.2>>
+The `tm-close-all-windows` [[message|Messages]] closes all additional //browser// window that were opened with [[tm-open-window|WidgetMessage: tm-open-window]]. 
+
+The `tm-close-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. It is handled by the core itself.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""
+<$button>Close All Windows
+<$action-sendmessage 
+  $message="tm-close-all-windows" 
+/>
+</$button>
+""" />
+

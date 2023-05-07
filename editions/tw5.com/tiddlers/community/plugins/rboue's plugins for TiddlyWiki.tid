@@ -1,0 +1,19 @@
+created: 20150403104230499
+modified: 20210106151027533
+tags: [[Community Plugins]]
+title: rboue's plugins for TiddlyWiki
+type: text/vnd.tiddlywiki
+url: http://rboue.tiddlyspot.com
+
+Featuring plugins that integrate two interesting new capabilities:
+
+* [[SocialCalc|https://www.socialtext.net/open/socialcalc]] providing a powerful spreadsheet
+* [[Three.js|http://threejs.org/]] providing interactive 3D graphics
+
+{{!!url}}
+
+<<<
+I developed some plugins related to engineering tasks.
+
+After using them for personal projects I'm glad to share with TiddlyWiki community.
+<<<

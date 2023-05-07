@@ -1,0 +1,24 @@
+title: $:/config/codemirror/extraKeysTW
+extend: extraKeys
+type: json
+
+{
+	"Ctrl-M": "",
+	"Alt-M": "goToBracket",
+	"Ctrl-Enter": "",
+	"Shift-Enter": "insertLineAfter",
+	"Esc": "",
+	"Ctrl-Esc": "singleSelectionTop",
+	"Ctrl-L": "",
+	"Shift-Ctrl-L": "",
+	"Alt-L": "selectLine",
+	"Shift-Alt-L": "splitSelectionByLine",
+	"Ctrl-T": "",
+	"Alt-T": "transposeChars",
+	"Ctrl-K Ctrl-U": "",
+	"Ctrl-K Ctrl-L": "",
+	"Ctrl-K Ctrl-W": "",
+	"Ctrl-K Alt-U": "upcaseAtCursor",
+	"Ctrl-K Alt-L": "downcaseAtCursor",
+	"Ctrl-K Alt-D": "deleteToSublimeMark"
+}

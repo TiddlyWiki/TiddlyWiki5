@@ -1,6 +1,6 @@
 caption: Transclusion
 created: 20131205160146648
-modified: 20150220161347000
+modified: 20220122193352028
 tags: WikiText
 title: Transclusion in WikiText
 type: text/vnd.tiddlywiki
@@ -12,6 +12,8 @@ You can incorporate the content of one tiddler within another using the [[Transc
 * `{{MyTiddler}}` transcludes a single tiddler
 * `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TemplateTiddler|TemplateTiddlers]]
 * `{{||TemplateTitle}}` displays the specified template tiddler without altering the [[current tiddler|Current Tiddler]]
+* `{{MyTiddler|Parameter}}` transcludes a single tiddler with a single parameter
+* `{{MyTiddler||TemplateTitle|Parameter|SecondParameter}}` transcludes a single tiddler through a specified [[TemplateTiddler|TemplateTiddlers]] with two parameters
 
 !! Transcluding Text References
 
@@ -37,7 +39,7 @@ The WikiText transclusion syntax generates a TiddlerWidget wrapped around a Tran
 
 ```
 <$tiddler tiddler="MyTiddler">
-<$transclude tiddler="MyTemplate" field="myField"/>
+<$transclude $tiddler="MyTemplate" $field="myField"/>
 </$tiddler>
 ```
 
@@ -48,3 +50,4 @@ See also:
 * TemplateTiddlers
 * TranscludeWidget
 * [[Transclusion and Substitution]]
+* [[WikiText parser mode: transclusion examples]]

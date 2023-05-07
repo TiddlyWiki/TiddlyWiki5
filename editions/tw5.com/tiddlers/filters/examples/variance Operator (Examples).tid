@@ -1,0 +1,10 @@
+created: 20210426130620777
+modified: 20210426131553522
+tags: [[Operator Examples]] [[variance Operator]]
+title: variance Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "1 3 4 5 +[variance[]]">>
+
+Note that if there is no input the operator returns `NaN`
+<<.operator-example 2 "[title[NotATiddler]is[tiddler]get[price]] +[variance[]]">>

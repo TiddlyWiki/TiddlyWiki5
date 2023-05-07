@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/FieldEditor
+tags: $:/tags/ControlPanel/Cascades
+caption: {{$:/language/ControlPanel/FieldEditor/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/FieldEditor/
+
+<<lingo Hint>>
+
+{{$:/tags/FieldEditorFilter||$:/snippets/ListTaggedCascade}}

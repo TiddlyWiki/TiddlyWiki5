@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: Lista
 Filter/Caption: Filtro
-Filter/Hint: Cerca via un [[filter expression|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Cerca via un [[filter expression|https://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> resultatos</small>//
 Matches: //<small><<resultCount>> resultatos</small>//
 Shadows/Caption: Umbras

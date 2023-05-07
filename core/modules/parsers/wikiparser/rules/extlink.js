@@ -6,7 +6,7 @@ module-type: wikirule
 Wiki text inline rule for external links. For example:
 
 ```
-An external link: http://www.tiddlywiki.com/
+An external link: https://www.tiddlywiki.com/
 
 A suppressed external link: ~http://www.tiddlyspace.com/
 ```

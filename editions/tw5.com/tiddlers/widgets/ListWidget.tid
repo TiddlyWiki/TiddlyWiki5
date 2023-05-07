@@ -1,8 +1,9 @@
-created: 201310241419
-modified: 201502231037
-tags: Widgets
-title: ListWidget
 caption: list
+created: 20131024141900000
+modified: 20220718120325494
+tags: Widgets Lists
+title: ListWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -67,16 +68,56 @@ See GroupedLists for how to generate nested and grouped lists using the ListWidg
 
 ! Content and Attributes
 
-The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list. Alternatively, the template can be specified as a tiddler title in the ``template`` attribute. As a fallback, the default template just displays the tiddler title.
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list.
+
+The action of the list widget depends on the results of the filter combined with several options for specifying the template:
+
+* If the filter evaluates to an empty list, the text of the ''emptyMessage'' attribute is rendered, and all other templates are ignored
+* Otherwise, if the ''template'' attribute is specified then it is taken as the title of a tiddler to use as a template for rendering each item of the list
+* Otherwise, if the list widget content is not blank, it is used as a template for rendering each item of the list
+* Otherwise, a default template is used consisting of a `<span>` or `<div>` element wrapped around a link to the item
 
 |!Attribute |!Description |
 |filter |The [[tiddler filter|Filters]] to display |
 |template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
 |editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
 |variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |
+|counter |<<.from-version "5.2.0">> Optional name for a [[variable|Variables]] in which the 1-based numeric index of each listed tiddler is stored (see below) |
 |emptyMessage |Message to be displayed when the list is empty |
 |storyview |Optional name of module responsible for animating/processing the list |
 |history |The title of the tiddler containing the navigation history |
+
+!! `counter` attribute
+
+The optional `counter` attribute specifies the name of a variable to hold the 1-based numeric index of the current item in the list.
+
+Two additional variables are also set to indicate the first and last items in the list:
+
+* `<counter-variable-name>-first` is set to `yes` for the first entry in the list, `no` for the others
+* `<counter-variable-name>-last` is set to `yes` for the last entry in the list, `no` for the others
+
+For example:
+
+
+```
+<$list filter="[tag[About]sort[title]]" counter="counter">
+<div>
+<<counter>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
+</div>
+</$list>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[About]sort[title]]" counter="counter">
+<div>
+<<counter>>: ''<$text text=<<currentTiddler>>/>'' (is first: <<counter-first>>, is last: <<counter-last>>)
+</div>
+</$list>
+<<<
+
+Note that using the `counter` attribute can reduce performance when working with list items that dynamically reorder or update themselves. The best advice is only to use it when it is really necessary: to obtain a numeric index, or to detect the first or last entries in the list.
 
 !! Edit mode
 
@@ -95,3 +136,9 @@ In order for the storyviews to animate correctly each entry in the list should b
 !! History and navigation
 
 The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See HistoryMechanism for details.
+
+!! Additional Notes and Edge Cases
+
+* If the `filter` attribute is not present then a default of `[!is[system]sort[title]]` is used
+* If the list widget is completely empty (ie only whitespace between the opening and closing tags), then it behaves as if the content were a `DIV` or a `SPAN` containing a link to the current tiddler (it’s a `DIV` if the list widget is in block mode, or a SPAN if it is in inline mode)
+* If the `template` attribute is not present then the content of the list widget will be used as the template, unless the widget is completely empty in which case a default template is used

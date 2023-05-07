@@ -1,22 +1,8 @@
-created: 20150220182252000
-modified: 20150221221340000
-tags: WikiText
+caption: Macro Calls
+created: 20220917074831994
+modified: 20220917074844235
+tags: 
 title: Macro Calls in WikiText
 type: text/vnd.tiddlywiki
-caption: Macro Calls
 
-To call a [[macro|Macros]], place `<<`double angle brackets`>>` around the name and any parameter values.
-
-By default, parameters are listed in the same order as in the macro's definition. A parameter can be labelled with its name, either for clarity or to modify the order.
-
-If no value is specified for a parameter, the default value given for that parameter in the macro's definition is used instead. (If no default value was defined, the parameter is simply blank.)
-
-Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces or single or double quotes, it requires no delimiters.
-
-A more formal [[presentation|Macro Call Syntax]] of this syntax is also available.
-
-The syntax is actually a shorthand for a <<.wlink MacroCallWidget>> widget. The widget itself offers greater flexibility, including the ability to [[transclude|Transclusion]] parameter values or generate them via additional macros.
-
-As macros are simply parameterised [[variables|Variables]], a variable's value can be inserted using the same techniques.
-
-[[Examples|Macro Calls in WikiText (Examples)]]
+See [[Macro Calls]].

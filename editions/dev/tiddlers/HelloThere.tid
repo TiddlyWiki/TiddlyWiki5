@@ -1,11 +1,22 @@
-modified: 20141122200310516
+created: 20190115173333457
+modified: 20221029175754753
 tags: TableOfContents
 title: HelloThere
+type: text/vnd.tiddlywiki
 
-Welcome to the developer documentation for TiddlyWiki (http://tiddlywiki.com/). It is currently a work in progress as material from two different sources is adapted and merged in addition to original content being added:
+Welcome to the developer documentation for TiddlyWiki (https://tiddlywiki.com/). It is currently a work in progress as material from two different sources is adapted and merged in addition to original content being added:
 
 * An assignment by Christian Jurke and Christian Heigele, two students working on their Master's degree in Information Technology at the Gießen University of Applied Sciences (Technische Hochschule Mittelhessen). Their work can be seen in the [[Introduction]] and the tiddlers that link from it.
-* The original developer documentation from http://tiddlywiki.com:
+* New developer documentation
+** [[Data Storage in Single File TiddlyWiki]]
+** [[Continuous Deployment]]
+** [[GitHub Branches]]
+** HookMechanism
+** [[Using ES2016 for Writing Plugins]]
+** [[Adding Babel Polyfill to TiddlyWiki]]
+** [[TiddlyWiki Drag and Drop Interoperability]]
+** [[Javascript Widget Tutorial]]
+* The original developer documentation from https://tiddlywiki.com:
 ** [[TiddlyWiki for Developers]]
 ** [[TiddlyWiki Coding Style Guidelines]]
 ** [[TiddlyWiki Architecture]]
@@ -22,5 +33,3 @@ Welcome to the developer documentation for TiddlyWiki (http://tiddlywiki.com/). 
 ** SyncAdaptorModules
 ** WidgetModules
 ** WikiRuleModules
-*Original developer documentation
-** HookMechanism

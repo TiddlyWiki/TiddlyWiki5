@@ -1,0 +1,31 @@
+created: 20170126152839462
+modified: 201804111739
+tags: [[Custom data-styles]]
+title: Attribute Selectors
+type: text/vnd.tiddlywiki
+
+;[attr]
+:Represents an element with an attribute name of attr.
+
+;[attr="value"]
+:Represents an element with an attribute name of attr and whose value is exactly "value".
+
+;[attr~="value"]
+:Represents an element with an attribute name of attr whose value is a whitespace-separated list of words, one of which is exactly "value".
+
+;[attr|="value"]
+:Represents an element with an attribute name of attr. Its value can be exactly “value” or can begin with “value” immediately followed by “-” (U+002D). It can be used for language subcode matches.
+
+;[attr^="value"]
+:Represents an element with an attribute name of attr and whose first value is prefixed by "value".
+
+;[attr$="value"]
+:Represents an element with an attribute name of attr and whose last value is suffixed by "value".
+
+;[attr*="value"]
+:Represents an element with an attribute name of attr and whose value contains at least one occurrence of string "value" as substring.
+
+;[attr "operator value" i]
+:Adding an i (or I) before the closing bracket causes the value to be compared case-insensitively (for characters within the ASCII range). 
+
+Learn more at: [[Attribute selectors - CSS|https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors]] or [[CSS-Specification|https://www.w3.org/TR/CSS22/selector.html#attribute-selectors]]

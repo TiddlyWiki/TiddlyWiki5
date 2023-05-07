@@ -1,0 +1,42 @@
+title: $:/language/ThemeTweaks/
+
+ThemeTweaks: Ajustes del tema
+ThemeTweaks/Hint: Puedes modificar ciertos aspectos del tema ''Vanilla''.
+Options: Opciones
+Options/SidebarLayout: Diseño de la barra lateral
+Options/SidebarLayout/Fixed-Fluid: Visor fijado, Herramientas fluido
+Options/SidebarLayout/Fluid-Fixed: Visor fluido, Herramientas fijado
+Options/StickyTitles: Títulos fijos
+Options/StickyTitles/Hint: Hace que los títulos de tiddler se "peguen" en la parte superior de la ventana del navegador
+Options/CodeWrapping: Envuelve líneas largas en bloques de código
+Settings: Configuración
+Settings/FontFamily: Fuente de texto
+Settings/CodeFontFamily: Fuente de texto para código
+Settings/EditorFontFamily: Fuente de texto para editor
+Settings/BackgroundImage: Imagen de fondo de la página
+Settings/BackgroundImageAttachment: Archivo adjunto de imagen de fondo de página
+Settings/BackgroundImageAttachment/Scroll: Desplazamiento con tiddlers
+Settings/BackgroundImageAttachment/Fixed: Fijo en la ventana
+Settings/BackgroundImageSize: Tamaño de la imagen de fondo de la página
+Settings/BackgroundImageSize/Auto: Automático
+Settings/BackgroundImageSize/Cover: Rellenar
+Settings/BackgroundImageSize/Contain: Contenido
+Metrics: Tamaños
+Metrics/FontSize: Tamaño de fuente
+Metrics/LineHeight: Altura de línea
+Metrics/BodyFontSize: Tamaño de fuente para el cuerpo del tiddler
+Metrics/BodyLineHeight: Altura de la línea para el cuerpo del tiddler
+Metrics/StoryLeft: Posición izquierda del visor
+Metrics/StoryLeft/Hint: Distancia del visor del margen izquierdo de la página
+Metrics/StoryTop: Posición superior del visor
+Metrics/StoryTop/Hint: Distancia del visor del margen superior de la página
+Metrics/StoryRight: Visor derecha
+Metrics/StoryRight/Hint: Distancia de la barra lateral del margen izquierdo de la página
+Metrics/StoryWidth: Visor ancho
+Metrics/StoryWidth/Hint: Ancho total del visor
+Metrics/TiddlerWidth: Ancho de Tiddler
+Metrics/TiddlerWidth/Hint: dentro del visor
+Metrics/SidebarBreakpoint: Punto ruptura barra lateral
+Metrics/SidebarBreakpoint/Hint: el ancho mínimo de página en el que el visor y<br> la barra lateral aparecerán una al lado de la otra.
+Metrics/SidebarWidth: Ancho barra lateral
+Metrics/SidebarWidth/Hint: el ancho de la barra lateral en un diseño fluido-fijo

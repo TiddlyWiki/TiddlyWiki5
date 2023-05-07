@@ -1,5 +1,5 @@
 created: 20140908093600000
-modified: 20141010184816361
+modified: 20201129183020567
 tags: [[Working with TiddlyWiki]]
 title: Using links to navigate between tiddlers
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ You can use links (normally displayed as blue text) to navigate from one tiddler
 
 * The ''InfoPanel'' of each tiddler gives you access to four tabs containing additional lists of related tiddlers:
 
-** The ''References'' tab lists all the tiddlers that link //to// the current tiddler.
+** The ''Backlinks'' tab lists all the tiddlers that link //to// the current tiddler.
 
 ** The ''Tagging'' tab lists all the tiddlers that have been tagged with the current tiddler's title.
 
@@ -36,7 +36,7 @@ You can use links (normally displayed as blue text) to navigate from one tiddler
 
 *** ''Drafts'' lists any tiddlers that are currently in draft mode. ~TiddlyWiki considers a tiddler's draft to be a separate tiddler for as long as you are editing it, so while you're editing a tiddler entitled ''Australia'', there will be two tiddlers, ''Australia'' and ''Draft of 'Australia&apos;''. When you close the draft by saving your changes to it, those changes will be applied to the ''Australia'' tiddler. So treat the ''Drafts'' tab as a way of finding any unfinished drafts you started.
 
-*** ''Orphans'' lists all the tiddlers that are not connected to any other tiddler by links, tags or lists. This is a helpful aid to editing your file - it shows you which tiddlers need to be integrated more carefully with the others.
+*** ''Orphans'' lists all the tiddlers that are not directly linked from another tiddler. This is a helpful aid to editing your file - it shows you which tiddlers need to be integrated more carefully with the others.
 
 *** ''Types'' lists any tiddlers with special content, such as images or audio.
 

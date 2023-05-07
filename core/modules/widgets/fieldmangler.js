@@ -16,12 +16,6 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var FieldManglerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	this.addEventListeners([
-		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
-		{type: "tm-add-field", handler: "handleAddFieldEvent"},
-		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
-		{type: "tm-add-tag", handler: "handleAddTagEvent"}
-	]);
 };
 
 /*
@@ -33,6 +27,12 @@ FieldManglerWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 FieldManglerWidget.prototype.render = function(parent,nextSibling) {
+	this.addEventListeners([
+		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
+		{type: "tm-add-field", handler: "handleAddFieldEvent"},
+		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
+		{type: "tm-add-tag", handler: "handleAddTagEvent"}
+	]);
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -58,7 +58,7 @@ FieldManglerWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		return this.refreshChildren(changedTiddlers);
 	}
 };
 
@@ -67,32 +67,18 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 		deletion = {};
 	deletion[event.param] = undefined;
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,deletion));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 	var tiddler = this.wiki.getTiddler(this.mangleTitle),
 		addition = this.wiki.getModificationFields(),
-		hadInvalidFieldName = false,
 		addField = function(name,value) {
-			var trimmedName = name.toLowerCase().trim();
-			if(!$tw.utils.isValidFieldName(trimmedName)) {
-				if(!hadInvalidFieldName) {
-					alert($tw.language.getString(
-						"InvalidFieldName",
-						{variables:
-							{fieldName: trimmedName}
-						}
-					));
-					hadInvalidFieldName = true;
-					return;
-				}
-			} else {
-				if(!value && tiddler) {
-					value = tiddler.fields[trimmedName];
-				}
-				addition[trimmedName] = value || "";
+			var trimmedName = name.trim();
+			if(!value && tiddler) {
+				value = tiddler.fields[trimmedName];
 			}
+			addition[trimmedName] = value || "";
 			return;
 		};
 	addition.title = this.mangleTitle;
@@ -105,42 +91,42 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 		}
 	}
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle);
+	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+		modification = this.wiki.getModificationFields();
 	if(tiddler && tiddler.fields.tags) {
 		var p = tiddler.fields.tags.indexOf(event.param);
 		if(p !== -1) {
-			var modification = this.wiki.getModificationFields();
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			modification.tags.splice(p,1);
 			if(modification.tags.length === 0) {
 				modification.tags = undefined;
 			}
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	}
-	return true;
+	return false;
 };
 
 FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle);
+	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+		modification = this.wiki.getModificationFields();
 	if(tiddler && typeof event.param === "string") {
 		var tag = event.param.trim();
 		if(tag !== "") {
-			var modification = this.wiki.getModificationFields();
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			$tw.utils.pushTop(modification.tags,tag);
-			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));			
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	} else if(typeof event.param === "string" && event.param.trim() !== "" && this.mangleTitle.trim() !== "") {
 		var tag = [];
 		tag.push(event.param.trim());
-		this.wiki.addTiddler({title: this.mangleTitle, tags: tag});		
+		this.wiki.addTiddler(new $tw.Tiddler({title: this.mangleTitle, tags: tag},modification));
 	}
-	return true;
+	return false;
 };
 
 exports.fieldmangler = FieldManglerWidget;

@@ -1,0 +1,32 @@
+caption: 5.1.19
+created: 20181220163418974
+modified: 20181220163418974
+released: 20181220163418974
+tags: ReleaseNotes
+title: Release 5.1.19
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.18...v5.1.19]]//
+
+This release consists of fixes for bugs discovered in [[Release 5.1.18]].
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a8b8fb3b6f587ee8813cc0bafdc008bf12ecb7d1]] new [[hidden setting for the filename used when saving|Hidden Setting: Filename for Save Wiki Button]]
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3630]] incompatible change to the construction of filename used for saving
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3640]] problem with fonts for the [[KaTeX Plugin]]
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/3647]] problem with forcing basic authentication for the WebServer
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3650]] problem with the ButtonWidget not refreshing when the `popupTitle` attribute changes
+* [[Fixed|https://github.com/Jermolene/build.jermolene.github.io/issues/5]] problem with `empty.html` accidentally containing a splash screen
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/3641]] regression with search matches across multiple fields
+
+! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@BurningTreeC|https://github.com/BurningTreeC]]
+* [[@dlund4|https://github.com/dlund4]]
+* [[@hoelzro|https://github.com/hoelzro]]

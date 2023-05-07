@@ -4,8 +4,8 @@ description: Stelt de basis output folder voor volgende commando's in
 Stelt de basis output folder voor volgende commando's in. De standaard outputfolder is de `output` subfolder van de editiefolder.
 
 ```
---output <pathname>
+--output <bestandspad>
 ```
 
-Als de gespecificeerde padnaam relatief is zal die relatief zijn t.o.v. de werkfolder. B.v. `--output .` stelt de outputfolder in als huidige werkfolder.
+Als het gespecificeerde bestandspad relatief is zal dit relatief zijn t.o.v. de werkfolder. B.v. `--output .` stelt de outputfolder in als huidige werkfolder.
 

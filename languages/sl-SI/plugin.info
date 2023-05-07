@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/sl-SI",
+	"name": "sl-SI",
+	"plugin-type": "language",
+	"description": "Solvenian (Slovenia)",
+	"author": "Tomaž Ficko",
+	"core-version": ">=5.0.0"
+}

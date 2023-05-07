@@ -1,0 +1,69 @@
+title: $:/language/
+
+AboveStory/ClassicPlugin/Warning: به نظر می‌آید که قصد استفاده از افزونه‌ای را داری که برای ~TiddlyWiki Classic طراحی شده‌است. لطفن توجه کن که [[این افزونه‌ها با تیدلی‌ویکی ویرایش 5.x.x|https://tiddlywiki.com/#TiddlyWikiClassic کار نمی‌کند]]. افزونه‌های ~TiddlyWiki Classic شناسایی شده:
+BinaryWarning/Prompt: این تیدلر شامل اطلاعات بایناری است
+ClassicWarning/Hint: این تیدلر با فرمت تیدلی‌ویکی کلاسیک نوشته شده است, که با تیدلی‌ویکی ویرایش ۵ هماهنگ نیست. برای اطلاعات بیشتر  https://tiddlywiki.com/static/Upgrading.html را ببین.
+ClassicWarning/Upgrade/Caption: بروزرسانی
+CloseAll/Button: همه را ببند
+ColourPicker/Recent: تازه‌ها:
+ConfirmCancelTiddler: آیا تمایل دارید که تغییرات بر روی "<$text text=<<title>>/>" را فراموش کنید؟
+ConfirmDeleteTiddler: آیا قصد پاک کردند تیدلر "<$text text=<<title>>/>" را دارید؟
+ConfirmEditShadowTiddler: شما قصد ویرایش یک تیدلر سایه‌ای را دارید. هر تغییری سیستم‌ را از حالت پیشفرض در می‌آورد که هر گونه برروزرسانی را در آینده پیچیده می‌سازد.‌ آیا مطمئنید که قصد ویرایش "<$text text=<<title>>/>" را دارید؟
+ConfirmOverwriteTiddler: آیا قصد بازنویسی تیدلر"<$text text=<<title>>/>"را دارید؟
+Count: شمارش
+DefaultNewTiddlerTitle: تیدلر جدید
+DropMessage: اینجا بنداز ( یا دکمه‌ی escape رو بزن تا کنسل بشه)
+Encryption/Cancel: کنسل
+Encryption/ConfirmClearPassword: آیا قصد پاکسازی رمز را دارید؟ این رمزنگاریی که هنگام ساخت این ویکی بوده را حذف می‌کند
+Encryption/Password: رمز
+Encryption/PasswordNoMatch: رمزها با هم یکی نیستند
+Encryption/PromptSetPassword: رمز جدیدی برای این تیدلی‌ویکی بسازید
+Encryption/RepeatPassword: تکرار رمز
+Encryption/SetPassword: تعیین رمز
+Encryption/Username: نام کاربری
+Error/Caption: خطا
+Error/Filter: خطای فیلتر
+Error/FilterSyntax: در نحوه‌ی بیان فیلتر خطای نحوی وجود داشت
+Error/IsFilterOperator: خطای فیلتر: عملکرد ناشناخته‌ای برای عملگر 'is' مشخص شده
+Error/LoadingPluginLibrary: خطا در بارگزاری کتاب‌خانه افزونه
+Error/PutEditConflict: فایل در سرور عوض شد
+Error/RecursiveTransclusion: Recursive transclusion error in transclude widget
+Error/RetrievingSkinny: طا در دریافت لیست‌های تیدلر لاغر
+Error/SavingToTWEdit: خطا در ذخیره در TWEdit
+Error/WhileSaving: خطا  در حین ذخیره
+Error/XMLHttpRequest: XMLHttpRequest error code
+InternalJavaScriptError/Hint: اوه این خجالت آوره. پیشنهاد می‌کنیم که با ریفرش کردن مرورگرتون تیدلی‌ویکی رو دوباره باز کنین
+InternalJavaScriptError/Title: خطای  JavaScript داخلی
+LazyLoadingWarning: <p>Loading external text from ''<$text text={{!!_canonical_uri}}/>''</p><p>If this message doesn't disappear you may be using a browser that doesn't support external text in this configuration. See https://tiddlywiki.com/#ExternalText</p>
+LoginToTiddlySpace: Login to TiddlySpace
+Manager/Controls/FilterByTag/None: (هیچ)
+Manager/Controls/FilterByTag/Prompt: فیتلر با استفاده از برچسب‌ها:
+Manager/Controls/Order/Prompt: برعکس‌سازی ترتیب
+Manager/Controls/Search/Placeholder: جستجو
+Manager/Controls/Search/Prompt: جستجو:
+Manager/Controls/Show/Option/Tags: برچسب‌ها
+Manager/Controls/Show/Option/Tiddlers: تیدلرها
+Manager/Controls/Show/Prompt: نمایش:
+Manager/Controls/Sort/Prompt: مرتب کردن بر اساس:
+Manager/Item/Colour: رنگ
+Manager/Item/Fields: فضاهای خالی
+Manager/Item/Icon: آیکون
+Manager/Item/Icon/None: (هیچ)
+Manager/Item/RawText: متن خام
+Manager/Item/Tags: برچسب‌ها
+Manager/Item/Tools: ابزارها
+Manager/Item/WikifiedText: تکست ویکی‌سازی شده
+MissingTiddler/Hint: تیدلر گمشده"<$text text=<<currentTiddler>>/>" - بر روی {{$:/core/images/edit-button}} کلیک کن تا بسازی
+No: نه
+OfficialPluginLibrary: کتابخانه افزونه‌ی رسیمی ~TiddlyWiki
+RecentChanges/DateFormat: رر م‌م‌م س‌س‌س‌س
+SystemTiddler/Tooltip: این یک تیدلر سیستمی است
+SystemTiddlers/Include/Prompt: شامل تیدلرهای سیستمی شود
+TagManager/Colour/Heading: رنگ
+TagManager/Count/Heading: شمارش
+TagManager/Icon/Heading: آیکون
+TagManager/Info/Heading: اطلاعات
+TagManager/Tag/Heading: برچسب
+Tiddler/DateFormat: DDth MMM YYYY at hh12:0mmam
+UnsavedChangesWarning: شما تغییرات ذخیره نشده در تیدلی‌ویکی دارید
+Yes: آره

@@ -1,6 +1,11 @@
 title: $:/language/Help/rendertiddler
 description: Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format.
 
+''WICHTIG:''
+
+* Der `--rendertiddler` Befehl wird ab V5.1.15 durch `--render` ersetzt. 
+* `--rendertiddler` wird auslaufen und sollte daher nicht mehr verwendet werden!
+
 Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format (standard: `text/html`) und Dateinamen.
 
 Optional kann ein Template tiddler angegeben werden. Die "currentTiddler" Variable wird auf den Tiddler gesetzt, der zu rendern ist.

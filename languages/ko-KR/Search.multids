@@ -2,7 +2,7 @@ title: $:/language/Search/
 
 DefaultResults/Caption: 목록
 Filter/Caption: 필터
-Filter/Hint: [[필터 표현식|http://tiddlywiki.com/static/Filters.html]]을 통해 검색합니다
+Filter/Hint: [[필터 표현식|https://tiddlywiki.com/static/Filters.html]]을 통해 검색합니다
 Filter/Matches: //<small><<resultCount>>개 일치</small>//
 Matches: //<small><<resultCount>>개 일치</small>//
 Matches/All: 모든 일치:
