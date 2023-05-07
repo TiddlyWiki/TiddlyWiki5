@@ -3,13 +3,12 @@ tags: $:/tags/Macro
 
 \define translink(title,mode:"block")
 \whitespace trim
-<div class="tc-pre-border" style="padding: 0 1em;">
+<div class="pre-border" style="padding: 0 1em;">
 <$link to="""$title$""">
 <h1 class="tc-big-bold"><$text text="""$title$"""/></h1>
 </$link>
-<$transclude tiddler="""$title$""" mode="$mode$">
+<p><$transclude tiddler="""$title$""" mode="$mode$">
 "<$text text="""$title$"""/>" is missing
-</$transclude>
-<$list filter="[<__title__>is[missing]] ~[<__mode__>match[inline]]"><p></p></$list>
+</$transclude></p>
 </div>
 \end
