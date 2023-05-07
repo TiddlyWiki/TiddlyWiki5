@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20201017134038305
+modified: 20220819093733569
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -62,4 +62,38 @@ These two parameters are combined into a single [[filter expression|Filter Expre
 ;template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel
 
-[[Examples|Table-of-Contents Macros (Examples)]]
+!! Custom Icons
+
+<<.from-version "5.2.4">>
+
+To change the icons used by the Table-of-Contents macros, redefine the macros `toc-open-icon` and `toc-closed-icon`. This setting works for all toc-macro variants.
+
+!!! Default Settings
+
+* <<.var toc-open-icon>>: `\define toc-open-icon() $:/core/images/down-arrow`  
+
+* <<.var toc-closed-icon>>: `\define toc-closed-icon() $:/core/images/right-arrow` 
+
+!!! Custom Definitions
+
+The default settings can be overwritten in your code using the define-pragma or the let-widget. The <<.wlink LetWidget>> widget can be used, if you have multiple table of contents macros in one tiddler, that need different icons. 
+
+''Define new icons using a pragma''
+
+```
+\define toc-open-icon() $:/core/images/fold-button
+\define toc-closed-icon() $:/core/images/folder
+...
+```
+
+''Define new icons using the let-widget''
+
+```
+<$let toc-open-icon="$:/core/images/fold-button" toc-closed-icon="$:/core/images/folder">
+...
+</$let>
+```
+
+!! Examples
+
+Learn more at [[Examples|Table-of-Contents Macros (Examples)]]

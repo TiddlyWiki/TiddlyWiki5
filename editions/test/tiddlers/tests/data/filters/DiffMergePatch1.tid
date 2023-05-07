@@ -1,0 +1,28 @@
+title: Filters/DiffMergePatch1
+description: Tests for diff-merge-patch derived operators
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\define text1()
+the cat sat on the mat
+\end
+
+\define text2()
+the hat saw in every category
+\end
+
+<$text text={{{ [<text1>makepatches<text2>] }}}/>
++
+title: ExpectedResult
+
+<p>@@ -1,22 +1,29 @@
+ the 
+-c
++h
+ at sa
+-t on the mat
++w in every category
+</p>

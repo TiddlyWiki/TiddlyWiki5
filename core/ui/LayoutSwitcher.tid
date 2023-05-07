@@ -13,13 +13,13 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 		<$set name="cls" filter="[all[current]field:title{$:/layout}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 		<div class=<<cls>>>
 		<$link to={{!!title}}>
-		''<$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
+		''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
 		</$link></div></$set>
 """>
 <$set name="cls" filter="[all[current]field:title[$:/core/ui/PageTemplate]]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 <div class=<<cls>>>
 <$link to={{!!title}}>
-''<$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
+''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
 </$link>
 </div>
 </$set>

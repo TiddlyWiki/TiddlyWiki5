@@ -1,0 +1,24 @@
+created: 20221007130538285
+modified: 20230419103154329
+tags: WikiText Procedures
+title: Procedure Parameter Handling
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+[[Procedure|Procedures]] parameters are made available as variables when the procedure contents are wikified.
+
+!! Accessing Parameters as Variables
+
+When procedures are wikified, the parameters can be accessed as variables.
+
+For example:
+
+<$macrocall $name="wikitext-example-without-html" src="""\procedure say-hi(name,address)
+Hi, I'm <<name>> and I live in <<address>>.
+\end
+
+<<say-hi name:"Bugs" address:"Rabbit Hole Hill">>
+"""/>
+
+Accessing parameters as variables only works in procedures that are wikified and not, for example, when a procedure is used as an attribute value.

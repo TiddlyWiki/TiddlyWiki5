@@ -16,6 +16,8 @@ var TextMap = require("$:/plugins/tiddlywiki/dynannotate/textmap.js").TextMap;
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 var DynannotateWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -36,23 +38,28 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 	// Create our DOM nodes
 	var isSnippetMode = this.isSnippetMode();
 	this.domContent = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-selection-container"
+		"class": "tc-dynannotation-selection-container",
+		document: this.document
 	});
 	if(isSnippetMode) {
-		this.domContent.setAttribute("hidden","hidden");		
+		this.domContent.setAttribute("hidden","hidden");
 	}
 	this.domAnnotations = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-annotation-wrapper"
+		"class": "tc-dynannotation-annotation-wrapper",
+		document: this.document
 	});
 	this.domSnippets = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-snippet-wrapper"
+		"class": "tc-dynannotation-snippet-wrapper",
+		document: this.document
 	});
 	this.domSearches = $tw.utils.domMaker("div",{
-		"class": "tc-dynannotation-search-wrapper"
+		"class": "tc-dynannotation-search-wrapper",
+		document: this.document
 	});
 	this.domWrapper = $tw.utils.domMaker("div",{
 		"class": "tc-dynannotation-wrapper",
-		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches]
+		children: [this.domContent,this.domAnnotations,this.domSnippets,this.domSearches],
+		document: this.document
 	})
 	parent.insertBefore(this.domWrapper,nextSibling);
 	this.domNodes.push(this.domWrapper);
@@ -62,16 +69,18 @@ DynannotateWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Render our child widgets
 	this.renderChildren(this.domContent,null);
-	if(isSnippetMode) {
-		// Apply search snippets
-		this.applySnippets();
-	} else {
-		// Get the list of annotation tiddlers
-		this.getAnnotationTiddlers();
-		// Apply annotations
-		this.applyAnnotations();
-		// Apply search overlays
-		this.applySearch();		
+	if(!this.document.isTiddlyWikiFakeDom) {
+		if(isSnippetMode) {
+			// Apply search snippets
+			this.applySnippets();
+		} else {
+			// Get the list of annotation tiddlers
+			this.getAnnotationTiddlers();
+			// Apply annotations
+			this.applyAnnotations();
+			// Apply search overlays
+			this.applySearch();		
+		}
 	}
 	// Save the width of the wrapper so that we can tell when it changes
 	this.wrapperWidth = this.domWrapper.offsetWidth;
@@ -191,7 +200,7 @@ DynannotateWidget.prototype.applyAnnotations = function() {
 				"tv-selection-posy": (bounds.top).toString(),
 				"tv-selection-width": (bounds.width).toString(),
 				"tv-selection-height": (bounds.height).toString(),
-				"tv-selection-coords": "(" + bounds.left + "," + bounds.top + "," + bounds.width + "," + bounds.height + ")"
+				"tv-selection-coords": Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,bounds)
 			});
 			if(self.hasAttribute("popup")) {
 				$tw.popup.triggerPopup({
@@ -330,7 +339,7 @@ DynannotateWidget.prototype.applySnippets = function() {
 			// Output the match
 			container.appendChild($tw.utils.domMaker("span",{
 				text: textMap.string.slice(match.startPos,match.endPos),
-				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass")
+				"class": "tc-dynannotate-snippet-highlight " + self.getAttribute("searchClass","")
 			}));
 			// Does the context of this match merge into the next?
 			merged = index < matches.length - 1 && matches[index + 1].startPos - match.endPos <= 2 * contextLength;

@@ -76,10 +76,9 @@ $else$
 	-webkit-box-sizing: border-box;
 }
 
-input[type="search"] {
-	outline-offset: initial;
-}
-
+/*
+** Button default styles. Makes them look consistent for all browsers
+*/
 html button {
 	line-height: 1.2;
 	color: <<colour button-foreground>>;
@@ -221,10 +220,6 @@ dl dt {
 	margin-top: 6px;
 }
 
-button, textarea, input, select {
-	outline-color: <<colour primary>>;
-}
-
 textarea,
 input[type=text],
 input[type=search],
@@ -279,6 +274,11 @@ kbd {
 	color: <<colour selection-foreground>>;
 }
 
+.tc-inline-style {
+	background: <<colour highlight-background>>;
+	color: <<colour highlight-foreground>>;
+}
+
 form.tc-form-inline {
 	display: inline;
 }
@@ -292,6 +292,10 @@ pre > code {
 	background-color: inherit;
 	color: inherit;
 }
+
+/*
+Table defaults
+*/
 
 table {
 	border: 1px solid <<colour table-border>>;
@@ -320,9 +324,69 @@ table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
 }
 
+/*
+Table utility classes
+*/
+
+/* Remove borders from table as used in eg: GettingStarted*/
+.tc-table-no-border,
+.tc-table-no-border th,
+.tc-table-no-border td {
+	border: initial;
+}
+
+/* First column in table width will fit to text.*/
+/* This rule makes most sense with tc-first-link-nowrap*/
+.tc-first-col-min-width td:nth-child(1) {
+	width: 1%;
+}
+
+/*
+** Utility classes work well with tables but also for other containers
+*/
+
+/* First link A element will not wrap */
+.tc-first-link-nowrap:first-of-type a {
+	white-space: nowrap;
+}
+
+/* Move the table to the center of the container */
+.tc-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tc-max-width {
+	width: 100%;
+}
+
+.tc-max-width-80 {
+	max-width: 80%;
+}
+
+/* Allow input and textarea to look like the ControlPanel inputs */
+.tc-edit-max-width input,
+.tc-edit-max-width textarea {
+	width: 100%;
+	padding: 3px;
+}
+
+/*
+CSV parser plugin
+*/
+
 .tc-csv-table {
 	white-space: nowrap;
 }
+
+.tc-csv-table th,
+.tc-csv-table td {
+	white-space: pre-line;
+}
+
+/*
+Tiddler frame in story river
+*/
 
 .tc-tiddler-frame img,
 .tc-tiddler-frame svg,
@@ -352,6 +416,7 @@ a.tc-tiddlylink {
 	font-weight: 500;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
+	-webkit-touch-callout: none; /* Prevents long presses from bringing up a link preview */
 }
 
 .tc-sidebar-lists a.tc-tiddlylink {
@@ -749,9 +814,6 @@ button.tc-tag-label, span.tc-tag-label {
 }
 
 .tc-untagged-separator {
-	width: 10em;
-	left: 0;
-	margin-left: 0;
 	border: 0;
 	height: 1px;
 	background: <<colour tab-divider>>;
@@ -1140,6 +1202,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame .tc-tiddler-controls {
 	float: right;
+	padding: 3px; /* make space for outline */
 }
 
 .tc-tiddler-controls .tc-drop-down {
@@ -1382,7 +1445,7 @@ html body.tc-body.tc-single-tiddler-window {
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 42px);
 	}
@@ -1394,7 +1457,7 @@ html body.tc-body.tc-single-tiddler-window {
 		margin-right: 0;
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 84px);
 	}
@@ -1441,6 +1504,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-controls button svg.tc-image-done-button {
 	fill: <<colour toolbar-done-button>>;
+}
+
+.tc-page-controls svg.tc-image-layout-button {
+	fill: <<colour toolbar-options-button>>;
 }
 
 /*
@@ -1649,7 +1716,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-right: .3em;
 }
 
-.tc-storyview-zoomin-tiddler {
+.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 	position: absolute;
 	display: block;
 	width: 100%;
@@ -1657,7 +1724,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 @media (min-width: <<sidebarbreakpoint>>) {
 
-	.tc-storyview-zoomin-tiddler {
+	.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: calc(100% - 84px);
 	}
 
@@ -1885,6 +1952,15 @@ html body.tc-body.tc-single-tiddler-window {
 	left: 0;
 	right: 0;
 	margin: auto;
+}
+
+/* Make search dropdown visible on small screens. issue #7003 */
+@media (max-width: <<sidebarbreakpoint>>) {
+
+	.tc-sidebar-search .tc-block-dropdown-wrapper {
+		position: initial;
+	}
+
 }
 
 /*
@@ -2698,6 +2774,11 @@ input.tc-palette-manager-colour-input {
 	color: <<colour sidebar-foreground>>;
 }
 
+button + .tc-toc-caption,
+button > .tc-toc-caption{
+	margin-left: .25em;
+}
+
 .tc-table-of-contents svg {
 	width: 0.7em;
 	height: 0.7em;
@@ -2807,6 +2888,22 @@ input.tc-palette-manager-colour-input {
 /*
 ** Dirty indicator
 */
+
+html body svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-clean {
+	visibility: visible;
+}
+
+html body svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-dirty {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-clean {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-dirty {
+	visibility: visible;
+}
 
 html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
@@ -3022,6 +3119,36 @@ select {
 }
 
 /*
+** Classes for displaying globals
+*/
+
+.tc-global-tiddler-body {
+	padding: 0.25em;
+	border: 1px solid <<colour foreground>>;
+	background-color: <<colour muted-foreground>>;
+	border-radius: 3px;
+}
+
+.tc-global-tiddler-body-heading {
+	margin: 0 0 0.25em 0;
+	font-weight: normal;
+}
+
+.tc-global-tiddler-body-type {
+	margin: 0 0 0.25em 0;
+	border-bottom: 1px solid <<colour foreground>>;
+}
+
+.tc-global-tiddler-body-details {
+	background-color: <<colour background>>;
+}
+
+.tc-global-tiddler-body pre {
+	margin: 0;
+	border: 1px solid <<colour foreground>>;
+}
+
+/*
 ** Utility classes for SVG icons
 */
 
@@ -3057,6 +3184,8 @@ select {
 /*
 ** Other utility classes
 */
+
+/* Horizontal gaps */
 
 .tc-tiny-gap {
 	margin-left: .25em;
@@ -3099,4 +3228,10 @@ select {
 
 .tc-word-break {
 	word-break: break-all;
+}
+
+/* Vertical gaps */
+
+.tc-tiny-v-gap-bottom {
+	margin-bottom: 3px;
 }

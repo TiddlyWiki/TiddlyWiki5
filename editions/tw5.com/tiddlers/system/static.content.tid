@@ -2,6 +2,10 @@ title: $:/core/templates/static.content
 
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 
+<!-- Mastodon verification -->
+
+<a rel="me" href="https://fosstodon.org/@TiddlyWiki">Mastodon</a>
+
 <!-- For Google, and people without JavaScript-->
 
 <$reveal default="yes" text=<<savingEmpty>> type="nomatch">

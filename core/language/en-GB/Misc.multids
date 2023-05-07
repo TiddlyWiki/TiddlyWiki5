@@ -8,6 +8,7 @@ CloseAll/Button: close all
 ColourPicker/Recent: Recent:
 ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddlers: Are you sure you wish to delete <<resultCount>> tiddler(s)?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
 ConfirmAction: Do you wish to proceed?
@@ -39,6 +40,7 @@ Error/RetrievingSkinny: Error retrieving skinny tiddler list
 Error/SavingToTWEdit: Error saving to TWEdit
 Error/WhileSaving: Error while saving
 Error/XMLHttpRequest: XMLHttpRequest error code
+Error/ZoominTextNode: Story View Error: It appears you tried to interact with a tiddler that displays in a custom container. This is most likely caused by using `$:/tags/StoryTiddlerTemplateFilter` with a template that contains text or whitespace at the start. Please use the pragma `\whitespace trim` and ensure the whole contents of the tiddler is wrapped in a single HTML element. The text that caused this issue:
 InternalJavaScriptError/Title: Internal JavaScript Error
 InternalJavaScriptError/Hint: Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser
 LayoutSwitcher/Description: Open the layout switcher

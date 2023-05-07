@@ -1,6 +1,6 @@
 caption: encodeuricomponent
 created: 20161017152747386
-modified: 20161017152809900
+modified: 20230119174350062
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input with URI component encoding applied
 op-parameter: 
@@ -12,5 +12,7 @@ type: text/vnd.tiddlywiki
 from-version: 5.1.14
 
 See Mozilla Developer Network for details of the [[encodeURIComponent|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent]] operation.
+
+<<.from-version "5.2.6">> In addition to the characters mentioned in the article above, the following additional characters are also percent encoded: `!'()*`
 
 <<.operator-examples "encodeuricomponent">>

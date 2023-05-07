@@ -4,7 +4,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/heading-4
 caption: {{$:/language/Buttons/Heading4/Caption}} (Markdown)
 description: {{$:/language/Buttons/Heading4/Hint}}
-condition: [<targetTiddler>type[text/x-markdown]]
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 shortcuts: ((heading-4))
 
 <$action-sendmessage

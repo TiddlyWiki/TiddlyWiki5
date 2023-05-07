@@ -1,7 +1,7 @@
 {
 	"tiddlers": [
 		{
-			"file": "xlsx.js",
+			"file": "xlsx.full.min.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/xlsx-utils/xlsx.js",

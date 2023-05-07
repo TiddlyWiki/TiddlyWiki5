@@ -7,7 +7,7 @@ Appearance/Hint: Manieren om het uiterlijk van je TiddlyWiki aan te passen
 Basics/AnimDuration/Prompt: Duur van de animatie:
 Basics/AutoFocus/Prompt: Standaard 'focus' veld van een nieuwe tiddler
 Basics/Caption: Standaard
-Basics/DefaultTiddlers/BottomHint: Gebruik &#91;&#91;dubbele rechte haken&#93;&#93; voor titels met spaties. Of je kan <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]"> kiezen voor behoud van open tiddlers
+Basics/DefaultTiddlers/BottomHint: Gebruik &#91;&#91;dubbele rechte haken&#93;&#93; voor titels met spaties. Of je kan {{kiezen voor behoud van open tiddlers||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Standaard tiddlers:
 Basics/DefaultTiddlers/TopHint: Kies welke tiddlers bij opstarten getoond worden:
 Basics/Language/Prompt: Hallo! Huidige taal:

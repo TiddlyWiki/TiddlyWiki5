@@ -186,6 +186,10 @@ function CodeMirrorEngine(options) {
 		return false;
 	});
 	this.cm.on("keydown",function(cm,event) {
+		if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+			return true;
+		}
+	
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
 	this.cm.on("focus",function(cm,event) {
@@ -216,9 +220,15 @@ function CodeMirrorEngine(options) {
 			}
 		});
 		this.cm.on("paste",function(cm,event) {
+			event["twEditor"] = true;
 			self.widget.handlePasteEvent.call(self.widget,event);
 		});
+	} else {
+		this.cm.on("paste",function(cm,event){
+			event["twEditor"] = true;
+		});
 	}
+;
 }
 
 /*

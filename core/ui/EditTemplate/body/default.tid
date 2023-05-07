@@ -19,7 +19,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
-<div class="tc-tiddler-preview-preview">
+<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
 
 <$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
 

@@ -11,7 +11,7 @@ The browse widget displays an HTML file browser button that allows the user to c
 
 ! Content and Attributes
 
-The content of the `<$browse>` widget is ignored.
+The content of the <<.wid BrowseWidget>> widget is ignored.
 
 |!Attribute |!Description |
 |multiple |Set to "multiple" to select multiple file upload |
@@ -26,10 +26,10 @@ On iPhone/iPad choosing the multiple option will remove the ability to take phot
 ''e.g.''
 
 ```
-<$browse>
+<$browse/>
 ```
 
 renders as:
 
-<$browse>
+<$browse/>
 

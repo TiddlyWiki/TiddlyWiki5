@@ -12,12 +12,26 @@ Parse tree utility functions.
 /*global $tw: false */
 "use strict";
 
+/*
+Add attribute to parse tree node
+Can be invoked as (node,name,value) or (node,attr)
+*/
 exports.addAttributeToParseTreeNode = function(node,name,value) {
-	var attribute = {name: name, type: "string", value: value};
+	var attribute = typeof name === "object" ? name : {name: name, type: "string", value: value};
+	name = attribute.name;
 	node.attributes = node.attributes || {};
+	node.orderedAttributes = node.orderedAttributes || [];
 	node.attributes[name] = attribute;
-	if(node.orderedAttributes) {
+	var foundIndex = -1;
+	$tw.utils.each(node.orderedAttributes,function(attr,index) {
+		if(attr.name === name) {
+			foundIndex = index;
+		}
+	});
+	if(foundIndex === -1) {
 		node.orderedAttributes.push(attribute);
+	} else {
+		node.orderedAttributes[foundIndex] = attribute;
 	}
 };
 
@@ -51,10 +65,8 @@ exports.addClassToParseTreeNode = function(node,classString) {
 		// If the class attribute does not exist, we must create it first.
 		attribute = {name: "class", type: "string", value: ""};
 		node.attributes["class"] = attribute;
-		if(node.orderedAttributes) {
-			// If there are orderedAttributes, we've got to add them there too.
-			node.orderedAttributes.push(attribute);
-		}
+		node.orderedAttributes = node.orderedAttributes || [];
+		node.orderedAttributes.push(attribute);
 	}
 	if(attribute.type === "string") {
 		if(attribute.value !== "") {
@@ -74,10 +86,8 @@ exports.addStyleToParseTreeNode = function(node,name,value) {
 	if(!attribute) {
 		attribute = {name: "style", type: "string", value: ""};
 		node.attributes.style = attribute;
-		if(node.orderedAttributes) {
-			// If there are orderedAttributes, we've got to add them there too.
-			node.orderedAttributes.push(attribute);
-		}
+		node.orderedAttributes = node.orderedAttributes || [];
+		node.orderedAttributes.push(attribute);
 	}
 	if(attribute.type === "string") {
 		attribute.value += name + ":" + value + ";";
