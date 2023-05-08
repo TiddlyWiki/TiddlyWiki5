@@ -145,14 +145,14 @@ pre {
 	word-break: normal;
 	word-wrap: break-word;
 	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
-	padding: 0 3px 2px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
-pre, .tc-pre-border {
-	border: 1px solid <<colour pre-border>>;
-	border-radius: 3px;
-	background-color: <<colour pre-background>>;
+pre, .tc-pre-background {
+    border: 1px solid <<colour pre-border>>;
+    border-radius: 3px;
+    background-color: <<colour pre-background>>;
+    padding: 0 3px 2px;
 }
 
 code {
@@ -3239,9 +3239,14 @@ select {
 	margin-bottom: 3px;
 }
 
-/* Emphasis */
+.tc-big-v-gap {
+	margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* Font styles */
 
 .tc-big-bold {
 	font-size: 1.2em;
-    font-weight: bold;    
+    font-weight: bold;
 }
