@@ -3,12 +3,14 @@ tags: $:/tags/Macro
 
 \define translink(title,mode:"block")
 \whitespace trim
-<div class="pre-border" style="padding: 0 1em;">
+<div class="tc-pre-background">
+<div class="tc-big-v-gap tc-big-gap">
 <$link to="""$title$""">
 <h1 class="tc-big-bold"><$text text="""$title$"""/></h1>
 </$link>
-<p><$transclude tiddler="""$title$""" mode="$mode$">
+<$transclude tiddler="""$title$""" mode="$mode$">
 <$set name="currentTiddler" value="""$title$"""><$transclude tiddler="$:/language/MissingTiddler/Hint"/></$set>
-</$transclude></p>
+</$transclude>
+</div>
 </div>
 \end
