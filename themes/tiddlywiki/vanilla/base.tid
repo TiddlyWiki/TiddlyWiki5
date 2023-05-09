@@ -145,14 +145,11 @@ pre {
 	word-break: normal;
 	word-wrap: break-word;
 	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	background-color: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
+	padding: 0 3px 2px;
+	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
-}
-
-pre, .tc-pre-background {
-    border: 1px solid <<colour pre-border>>;
-    border-radius: 3px;
-    background-color: <<colour pre-background>>;
-    padding: 0 3px 2px;
 }
 
 code {
@@ -3122,6 +3119,26 @@ select {
 }
 
 /*
+** Translink macro
+*/
+
+.tc-translink {
+	background-color: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
+	padding: 0 3px 2px;
+	border-radius: 3px;
+}
+
+div.tc-translink > div {
+	margin: 1em;
+}
+
+div.tc-translink > div > a:first-child > h1 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+/*
 ** Classes for displaying globals
 */
 
@@ -3237,16 +3254,4 @@ select {
 
 .tc-tiny-v-gap-bottom {
 	margin-bottom: 3px;
-}
-
-.tc-big-v-gap {
-	margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-/* Font styles */
-
-.tc-big-bold {
-	font-size: 1.2em;
-    font-weight: bold;
 }
