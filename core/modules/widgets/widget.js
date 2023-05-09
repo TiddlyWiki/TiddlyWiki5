@@ -324,7 +324,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 };
 
 /*
-Evaluate a variable and associated actual parameters and result the resulting array.
+Evaluate a variable and associated actual parameters and return the resulting array.
 The way that the variable is evaluated depends upon its type:
 * Functions are evaluated as parameterised filter strings
 * Macros are returned as plain text with substitution of parameters
