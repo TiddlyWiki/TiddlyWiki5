@@ -4,15 +4,12 @@ tags: $:/tags/GeospatialDocs
 
 !! `<$geomap>` widget
 
-The `<$geomap>` widget displays an interactive map using [[Leaflet.js|https://leafletjs.com/]].
+The `<$geomap>` widget displays an interactive map using [[Leaflet.js|https://leafletjs.com/]]. `<$geolayer>` widgets inside the `<$geomap>` widget are used to indicate the layers and markers to display.
 
 The following attributes are supported:
 
 |!Attribute |!Description |
 |''state'' |The title of a state tiddler used to track the state of the map in the `zoom`, `long` and `lat` fields |
-|''features'' |A filter identifying the GeoJSON feature tiddlers to be displayed on the map |
-|''markers'' |A filter identifying the GeoJSON marker tiddlers to be displayed on the map |
-
 
 !! Examples
 
@@ -45,8 +42,11 @@ The following attributes are supported:
 	text="""This is Oxford!"""/>
 <$data title="Output" text="""<$geomap
 	state=<<qualify "$:/state/demo-map">>
-	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
-/>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
 """/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>
@@ -87,8 +87,19 @@ The following attributes are supported:
 }"""/>
 <$data title="Output" text="""<$geomap
 	state=<<qualify "$:/state/demo-map">>
-	features="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]"
-/>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]">
+		<$geolayer json={{!!text}} color={{!!color}}/>
+	</$list>
+</$geomap>
 """/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap"/>
+</$testcase>
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-refresh"/>
 </$testcase>

@@ -49,8 +49,11 @@ Click to get photos of user
 
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
-	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
-/>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
 """/>
 </$testcase>
 
@@ -74,8 +77,11 @@ Click to get photos from group
 
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
-	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
-/>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
 """/>
 </$testcase>
 
@@ -99,8 +105,11 @@ Click to get photos from album
 
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
-	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
-/>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
 """/>
 </$testcase>
 
@@ -123,7 +132,10 @@ Click to get interesting photos
 
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
-	markers="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]"
-/>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/FlickrPhoto]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
 """/>
 </$testcase>

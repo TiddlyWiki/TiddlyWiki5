@@ -100,7 +100,7 @@ TestCaseWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;
+		return this.contentRoot.refresh(changedTiddlers);
 	}
 };
 

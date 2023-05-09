@@ -10,11 +10,11 @@ title: ui/geofeature
 
 !! Mapped
 
-
 <$geomap
-	features="[<currentTiddler>]"
 	state=<<qualify "$:/state/demo-map">>
-/>
+>
+	<$geolayer json={{!!text}} color={{!!color}}/>
+</$geomap>
 
 !! Intersect with other features
 

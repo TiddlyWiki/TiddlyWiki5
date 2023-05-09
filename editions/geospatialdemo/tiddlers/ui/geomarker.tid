@@ -64,9 +64,10 @@ title: ui/geomarker
 !! Mapped
 
 <$geomap
-	markers="[<currentTiddler>]"
 	state=<<qualify "$:/state/demo-map">>
-/>
+>
+	<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+</$geomap>
 
 !! Distance to other markers
 

@@ -20,9 +20,14 @@ This demo requires that the API keys needed to access external services be obtai
 ! Map Showing All Features and Markers
 
 <$geomap
-	markers="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]"
-	features="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]"
 	state=<<qualify "$:/state/demo-map">>
-/>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]">
+		<$geolayer json={{!!text}} color={{!!color}}/>
+	</$list>
+</$geomap>
 
 <<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoMarkers">>

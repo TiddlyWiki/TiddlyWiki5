@@ -31,28 +31,40 @@ GeomapWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	// Render the children into a hidden DOM node
+	var parser = {
+		tree: [{
+			type: "widget",
+			attributes: {},
+			orderedAttributes: [],
+			children: this.parseTreeNode.children || []
+		}]
+	};
+	this.contentRoot = this.wiki.makeWidget(parser,{
+		document: $tw.fakeDocument,
+		parentWidget: this
+	});
+	this.contentContainer = $tw.fakeDocument.createElement("div");
+	this.contentRoot.render(this.contentContainer,null);
 	// Render a wrapper for the map
-	var domNode = this.document.createElement("div");
-	domNode.style.width = "100%";
-	domNode.style.height = "600px";
+	this.domNode = this.document.createElement("div");
+	this.domNode.style.width = "100%";
+	this.domNode.style.height = "600px";
 	// Insert it into the DOM
-	parent.insertBefore(domNode,nextSibling);
-	this.domNodes.push(domNode);
+	parent.insertBefore(this.domNode,nextSibling);
+	this.domNodes.push(this.domNode);
 	// Render the map
 	if($tw.browser) {
-		this.renderMap(domNode);
+		this.renderMap();
+		this.refreshMap();
 	}
 };
 
-GeomapWidget.prototype.renderMap = function(domNode) {
-	var self = this;
+GeomapWidget.prototype.renderMap = function() {
 	// Create the map
-	this.map = $tw.Leaflet.map(domNode);
-	// Set the position
-	if(!this.setMapView()) {
-		// Default to showing the whole world
-		this.map.fitWorld();
-	}
+	this.map = $tw.Leaflet.map(this.domNode);
+	// No layers rendered
+	this.renderedLayers = [];
 	// Setup the tile layer
 	const tiles = $tw.Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
@@ -60,6 +72,22 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 	}).addTo(this.map);
 	// Disable Leaflet attribution
 	this.map.attributionControl.setPrefix("");
+	// Add scale
+	$tw.Leaflet.control.scale().addTo(this.map);
+};
+
+GeomapWidget.prototype.refreshMap = function() {
+	var self = this;
+	// Remove any previously rendered layers
+	$tw.utils.each(this.renderedLayers,function(layer) {
+		self.map.removeLayer(layer);
+	});
+	this.renderedLayers = [];
+	// Set the position
+	if(!this.setMapView()) {
+		// Default to showing the whole world
+		this.map.fitWorld();
+	}
 	// Create default icon
 	const iconProportions = 365/560,
 		iconHeight = 50;
@@ -69,8 +97,6 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 		iconAnchor:   [(iconHeight * iconProportions) / 2, iconHeight], // Position of the anchor within the icon
 		popupAnchor:  [0, -iconHeight] // Position of the popup anchor relative to the icon anchor
 	});
-	// Add scale
-	$tw.Leaflet.control.scale().addTo(this.map);
 	// Listen for pan and zoom events and update the state tiddler
 	this.map.on("moveend zoomend",function(event) {
 		if(self.geomapStateTitle) {
@@ -90,65 +116,51 @@ GeomapWidget.prototype.renderMap = function(domNode) {
 			}
 		}
 	});
-	// Track the geofeatures filter
-	this.trackerGeoFeaturesFilter = new FilterTracker({
-		wiki: this.wiki,
-		widget: this,
-		filter: this.geomapFeaturesFilter,
-		enter: function(title,tiddler) {
-			var text = (tiddler && tiddler.fields.text) || "[]",
-				geoJson = $tw.utils.parseJSONSafe(text,[]),
-				layer = $tw.Leaflet.geoJSON(geoJson,{
-					style: function(geoJsonFeature) {
-						return {
-							color: (tiddler && tiddler.getFieldString("color")) || "yellow"
-						}
-					},
-					pointToLayer: function(geoJsonPoint,latlng) {
-						return L.circleMarker(latlng,{
-							radius: 8
-						});
-					},
-					onEachFeature: function(feature,layer) {
-						if(feature.properties) {
-							layer.bindPopup(JSON.stringify(feature.properties,null,4));
-						}
-					}
-				}).addTo(self.map);
-			return layer;
-		},
-		leave: function(title,tiddler,data) {
-			data.remove();
-		}
-	});
-	// Track the geomarkers filter
+	// Make a marker cluster
 	var markers = $tw.Leaflet.markerClusterGroup({
 		maxClusterRadius: 40
 	});
 	this.map.addLayer(markers);
-	this.trackerGeoMarkersFilter = new FilterTracker({
-		wiki: this.wiki,
-		widget: this,
-		filter: this.geomapMarkerFilter,
-		enter: function(title,tiddler) {
-			var lat = $tw.utils.parseNumber((tiddler && tiddler.fields.lat) || "0"),
-				long = $tw.utils.parseNumber((tiddler && tiddler.fields.long) || "0"),
-				alt = $tw.utils.parseNumber((tiddler && tiddler.fields.alt) || "0"),
-				caption = (tiddler && tiddler.fields.caption) || title,
-				icon = myIcon;
-			if(tiddler && tiddler.fields["icon-url"]) {
-				icon = new $tw.Leaflet.Icon({
-					iconUrl: tiddler && tiddler.fields["icon-url"],
-					iconSize:     [32, 32], // Size of the icon
-					iconAnchor:   [16, 32], // Position of the anchor within the icon
-					popupAnchor:  [16, -32] // Position of the popup anchor relative to the icon anchor
-				});
-			}
-			return $tw.Leaflet.marker([lat,long,alt],{icon: icon,draggable: false}).bindPopup(caption).addTo(markers);
-		},
-		leave: function(title,tiddler,data) {
-			data.remove();
+	// Process embedded geolayer widgets
+	this.findChildrenDataWidgets(this.contentRoot.children,"geolayer",function(widget) {
+		var jsonText = widget.getAttribute("json"),
+			geoJson = [];
+		if(jsonText) {
+			geoJson = $tw.utils.parseJSONSafe(jsonText,[]);
+		} else if(widget.hasAttribute("lat") && widget.hasAttribute("long")) {
+			var lat = $tw.utils.parseNumber(widget.getAttribute("lat","0")),
+				long = $tw.utils.parseNumber(widget.getAttribute("long","0")),
+				alt = $tw.utils.parseNumber(widget.getAttribute("alt","0"));
+			geoJson = {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"geometry": {
+							"type": "Point",
+							"coordinates": [long,lat,alt]
+						}
+					}
+				]
+			};
 		}
+		var layer = $tw.Leaflet.geoJSON(geoJson,{
+				style: function(geoJsonFeature) {
+					return {
+						color: widget.getAttribute("color","yellow")
+					}
+				},
+				pointToLayer: function(geoJsonPoint,latlng) {
+					$tw.Leaflet.marker(latlng,{icon: myIcon,draggable: false}).addTo(markers);
+					return markers;
+				},
+				onEachFeature: function(feature,layer) {
+					if(feature.properties) {
+						layer.bindPopup(JSON.stringify(feature.properties,null,4));
+					}
+				}
+			}).addTo(self.map);
+		self.renderedLayers.push(layer);
 	});
 };
 
@@ -169,8 +181,6 @@ Compute the internal state of the widget
 */
 GeomapWidget.prototype.execute = function() {
 	this.geomapStateTitle = this.getAttribute("state");
-	this.geomapMarkerFilter = this.getAttribute("markers");
-	this.geomapFeaturesFilter = this.getAttribute("features");
 };
 
 /*
@@ -178,11 +188,6 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	// Refresh entire widget if layers or marker filter changes
-	if(changedAttributes.features || changedAttributes.markers || changedAttributes.state) {
-		this.refreshSelf();
-		return true;
-	}
 	// Set zoom and position if the state tiddler has changed
 	if(changedAttributes.state) {
 		this.geomapStateTitle = this.getAttribute("state");
@@ -190,63 +195,15 @@ GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.state || changedTiddlers[this.geomapStateTitle]) {
 		this.setMapView();
 	}
-	// Check whether the layers or markers need updating
-	this.trackerGeoFeaturesFilter.refresh(changedTiddlers);
-	this.trackerGeoMarkersFilter.refresh(changedTiddlers);
-	// No children to refresh
-	return false;	
+	// Refresh child nodes, and rerender map if there have been any changes
+	var result = this.contentRoot.refresh(changedTiddlers);
+	if(result) {
+		this.refreshMap();
+	}
+	return result;
 };
 
 exports.geomap = GeomapWidget;
-
-function FilterTracker(options) {
-	var self = this;
-	// Save parameters
-	this.filter = options.filter;
-	this.wiki = options.wiki;
-	this.widget = options.widget;
-	this.enter = options.enter;
-	this.leave = options.leave;
-	this.update = options.update;
-	// Calculate initial result set and call enter for each entry
-	this.items = Object.create(null);
-	$tw.utils.each(this.wiki.filterTiddlers(this.filter,this.widget),function(title) {
-		self.items[title] = self.enter(title,self.wiki.getTiddler(title));
-	});
-}
-
-FilterTracker.prototype.refresh = function(changedTiddlers) {
-	var self = this;
-	var newItems = this.wiki.filterTiddlers(this.filter,this.widget);
-	// Go through the new items and call update or enter as appropriate
-	$tw.utils.each(newItems,function(title) {
-		// Check if this item is already known
-		if(title in self.items) {
-			// Issue an update if the underlying tiddler has changed
-			if(changedTiddlers[title]) {
-				// Use the update method if provided
-				if(self.update) {
-					self.update(title,self.wiki.getTiddler(title),self.items[title]);
-				} else {
-					// Otherwise leave and enter is equivalent to update
-					self.leave(title,self.wiki.getTiddler(title),self.items[title]);
-					self.items[title] = self.enter(title,self.wiki.getTiddler(title));
-				}
-			}
-		} else {
-			// It's a new item, so we need to enter it
-			self.items[title] = self.enter(title,self.wiki.getTiddler(title));
-		}
-	});
-	// Call leave for any items that are no longer in the list
-	$tw.utils.each(Object.keys(this.items),function(title) {
-		if(newItems.indexOf(title) === -1) {
-			// Remove this item
-			self.leave(title,self.wiki.getTiddler(title),self.items[title]);
-			delete self.items[title];
-		}
-	});
-};
 
 })();
 
