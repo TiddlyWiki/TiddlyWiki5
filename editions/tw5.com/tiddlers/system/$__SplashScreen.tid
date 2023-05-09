@@ -4,7 +4,7 @@ tags: $:/tags/RawMarkupWikified/TopBody
 title: $:/SplashScreen
 type: text/vnd.tiddlywiki
 
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 
 \procedure show-icon(title)
 <$wikify name="icon" text={{{ [<title>addprefix[{{]addsuffix[}}]] }}} output="html">
