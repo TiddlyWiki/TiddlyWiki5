@@ -3138,6 +3138,18 @@ div.tc-translink > div > a:first-child > h1 {
 	font-weight: bold;
 }
 
+span.tc-translink > a {
+	font-weight: bold;
+}
+
+span.tc-translink > span::before {
+	content: " (";
+}
+
+span.tc-translink > span::after {
+	content: ")";
+}
+
 /*
 ** Classes for displaying globals
 */
