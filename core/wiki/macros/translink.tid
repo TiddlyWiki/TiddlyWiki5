@@ -20,11 +20,9 @@ tags: $:/tags/Macro
 <$link to="""$title$""">
 <$text text="""$title$"""/>
 </$link>
-<span>
-<$transclude tiddler="""$title$""" mode="inline">
+&#32;(<$transclude tiddler="""$title$""" mode="inline">
 <$set name="currentTiddler" value="""$title$"""><$transclude tiddler="$:/language/MissingTiddler/Hint"/></$set>
-</$transclude>
-</span>
+</$transclude>)
 </span>
 </$list>
 \end
