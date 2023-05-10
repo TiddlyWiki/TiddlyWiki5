@@ -1,6 +1,6 @@
 caption: action-confirm
 created: 20201115150255011
-modified: 20201115160335288
+modified: 20230510113746463
 tags: Widgets ActionWidgets
 title: ActionConfirmWidget
 type: text/vnd.tiddlywiki
@@ -19,22 +19,26 @@ The ''action-confirm'' widget is invisible. Any content within it is only proces
 
 ! Examples
 
-Here is an example of a button that asks the user for confirmation, before deleting the caption and tags fields of the current tiddler:
+Here is an example of a button that asks the user for confirmation, before deleting the caption and tags fields of the current tiddler. 
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-confirm $message="Do you wish to delete the caption and tags?">
-<$action-deletefield caption tags/>
-Delete "caption" and "tags"
+<$macrocall $name="wikitext-example-without-html"
+src="""\define testActions()
+<$action-confirm $message="Do you wish to show a notification?">
+	<$action-sendmessage $message="tm-notify" $param="SampleNotification"/>
 </$action-confirm>
-</$button>'/>
+\end
 
-Here is an example of a button that uses the optional `$prompt` attribute to control whether to prompt the user before deleting the text field of the tiddler HelloThere:
+<$button actions=<<testActions>> >Show a Notification</$button>"""/>
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-confirm $message="Do you wish to delete the text field?" $prompt={{$:/state/promptUser}}>
-<$action-deletefield $tiddler="HelloThere" $field="text"/>
+Here is an example of a button that uses the optional `$prompt` attribute to control whether to prompt the user before executing the actions.
+
+<$macrocall $name="wikitext-example-without-html"
+src="""\define testActions()
+<$action-confirm $message="Do you wish to show a notification?" $prompt={{$:/state/promptUser}}>
+	<$action-sendmessage $message="tm-notify" $param="SampleNotification"/>
 </$action-confirm>
-Delete text from ~HelloThere
-</$button>'/>
+\end
+
+Show confirmation dialogue: <$edit-text tiddler="$:/state/promptUser" tag="input" default="yes" placeholder="yes / no" />
+
+<$button actions=<<testActions>> >Show a Notification</$button>"""/>

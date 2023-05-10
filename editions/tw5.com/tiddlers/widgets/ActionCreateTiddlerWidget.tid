@@ -1,6 +1,6 @@
 caption: action-createtiddler
 created: 20161020152745942
-modified: 20230115084716196
+modified: 20230510102501544
 tags: Widgets ActionWidgets
 title: ActionCreateTiddlerWidget
 type: text/vnd.tiddlywiki
@@ -20,8 +20,8 @@ The ''action-createtiddler'' widget is invisible.
 
 |!Attribute |!Description |
 |$basetitle |The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique|
-|$savetitle |<<.deprecated-since "5.1.20" "ActionCreateTiddlerWidget Example 5">> A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
-|$savedrafttitle |<<.deprecated-since "5.1.20" "ActionCreateTiddlerWidget Example 5">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
+|$savetitle |<<.deprecated-since "5.2.0" "Release 5.2.0">> A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
+|$savedrafttitle |<<.deprecated-since "5.2.0" "Release 5.2.0">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
 |$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
 |$template |<<.from-version "5.1.22">> The title of a template tiddler, that will be used to create a new tiddler |
 |$overwrite |<<.from-version "5.1.22">> If set to "yes", it will overwrite existing tiddlers. ''Be careful!'' |
@@ -32,42 +32,131 @@ The ''action-createtiddler'' widget is invisible.
 <<.from-version "5.2.0">> The content of the <<.wid "action-createtiddler">> widget is executed after the new tiddler has been created. The title of the newly created tiddler is stored in the variable <<.var "createTiddler-title">>.
 
 |!Variables |!Description |
-|`createTiddler-title` |The tittle of the tiddler that has been created. See [[ActionCreateTiddlerWidget Example 5]] |
+|`createTiddler-title` |The tittle of the tiddler that has been created. See the 5th example |
 |`createTiddler-draftTitle` |This variable only exists to have feature parity with the deprecated parameters. It contains the title of a "draft tiddler" |
 
 ! Examples
 
 <<<
-<$macrocall $name='wikitext-example-without-html' src={{ActionCreateTiddlerWidget Example}}/>
+1) This example will create a ''new tiddler'' every time the button is clicked.
+
+<$macrocall $name="wikitext-example-without-html" src="""\define testCreate()
+<$action-createtiddler />
+<!-- Open the Recent tab in the right sidebar -->
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+\end
+
+This example will create "New Tiddler", "New Tiddler 1", " New Tiddler 2" and so on
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button> - Clicking this button, will also open the Right sidebar: Recent tab
+"""/>
 <<<
 
 ---
 
+2) This example will create new tiddlers and ''overwrite the existing one'' if clicked several times.
+
 <<<
-<$transclude tiddler="ActionCreateTiddlerWidget Example 1" mode=block/>
+<$macrocall $name="wikitext-example-without-html" src="""\define testCreate()
+<$action-createtiddler $basetitle={{$:/language/DefaultNewTiddlerTitle}} $overwrite="yes"/>
+<!-- Open the Recent tab in the right sidebar -->
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+\end
+
+This example will use the base title defined in [[$:/language/DefaultNewTiddlerTitle]]. 
+
+It will overwrite the tiddler, if the button is clicked several times.
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button> - Clicking this button, will also open the Right sidebar: Recent tab
+"""/>
 <<<
 
 ---
 
+3) This example uses a ''template tiddler ''to create the new tiddler. Clicking the button several times will create several numbered tiddlers.
+
 <<<
-{{ActionCreateTiddlerWidget Example 2}}
+<$macrocall $name="wikitext-example-without-html" src="""\define testCreate()
+<$action-createtiddler $basetitle="base" $template="ActionCreateTiddlerWidget Template"/>
+<!-- Open the Recent tab in the right sidebar -->
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+\end
+
+This example will uses a base-title and a template: [[ActionCreateTiddlerWidget Template]]
+
+It will create: "base", "base 1", "base 2" and so on 
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button> - Clicking this button will also open the Right sidebar: Recent tab
+"""/>
 <<<
 
 ---
 
+4) This example uses the template and will also ''add new extra fields'' not part of the template. 
+
 <<<
-{{ActionCreateTiddlerWidget Example 3}}
+<$macrocall $name="wikitext-example-without-html" src="""\define testCreate()
+<$action-createtiddler $basetitle="base" $template="ActionCreateTiddlerWidget Template" aa="new field aa" bb="new field bb" />
+<!-- Open the Recent tab in the right sidebar -->
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+\end
+
+This example uses a base-title "base" and a template: [[ActionCreateTiddlerWidget Template]].
+
+There will be new fields "aa" and "bb" which are added to the new tiddlers.
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button> - Clicking this button will also open the Right sidebar: Recent tab
+"""/>
 <<<
 
 ---
 
+5) This example will create new tiddlers based on a template and it will ''open the new tiddlers in edit-mode''.
+
 <<<
-{{ActionCreateTiddlerWidget Example 4}}
+<$macrocall $name="wikitext-example-without-html" src="""\define testCreate()
+<$action-createtiddler  $basetitle="base" $template="ActionCreateTiddlerWidget Template">
+	<$action-sendmessage $message="tm-edit-tiddler" $param=<<createTiddler-title>>/>
+</$action-createtiddler>
+<!-- Open the Recent tab in the right sidebar -->
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+\end
+
+This example will use the base title defined in [[ActionCreateTiddlerWidget Template]].
+
+It will create: "base", "base 1", "base 2" and so on, and navigate to this tiddler in draft mode.
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button> - Clicking this button, will also open the Right sidebar: Recent tab
+"""/>
 <<<
 
 ---
 
-<<<
-{{ActionCreateTiddlerWidget Example 5}}
-<<<
+6) This example will create a non-functional ''page control button'' and open the tiddler.
 
+<<<
+<$macrocall $name="wikitext-example-without-html" src="""\define testCreate()
+<$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" 
+	text={{{ [{$:/state/new-button-caption}!is[blank]else[test]] }}}
+>
+	<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+\end
+
+Caption for new button: <$edit-text tiddler="$:/state/new-button-caption" tag="input" placeholder="test" />
+
+<$button actions=<<testCreate>> >
+Create a new non-functional page control button and open the tiddler
+</$button>
+"""/>
+<<<
