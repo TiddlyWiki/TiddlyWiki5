@@ -25,7 +25,7 @@ The `<$dynannotate>` widget uses the selection tracker to support a popup that d
 |popup |Popup state tiddler to be used to trigger a popup when an annotation is clicked |
 |search |Search text to be highlighted within the widget |
 |searchDisplay |"overlay" or "snippet" (see below) |
-|searchMode |"normal" (default), "regexp" or "whitespace" (see below) |
+|searchMode |"literal" (default), "regexp", "whitespace", "words" or "some" (see below) |
 |searchMinLength |Optional minimum length of search string |
 |searchCaseSensitive |"yes" (the default) for a case sensitive search, or "no" for a case insensitive search|
 |searchClass |Optional CSS class to be added to search overlays |
@@ -46,9 +46,10 @@ The values supported by the `searchDisplay` attribute are:
 
 The search modes supported by the `searchMode` attribute are:
 
-* `normal` - a literal string of plain text to match
+* `literal` or `normal` - a literal string of plain text to match (default).
 * `regexp` - a JavaScript-style regular expression (without the quoting backslashes and flags)
-* `whitespace` - a literal string to match while normalising runs of whitespace. This allows `a. b` to match `a.  b`
+* `whitespace` - a literal string to match while normalising runs of whitespace. Thus `A B` matches `A   B`.
+* `words` or `some` - treats the search string as a list of tokens separated by whitespace, and matches all tokens (regardless of ordering and whether there is other text in between)
 
 When the selection popup is triggered, the currently selected text can be found in the tiddler named in the `selection` attribute, with the disambiguating prefix and suffix in the tiddlers named in the `selectionPrefix` and `selectionPopup` tiddlers. Note that the selection text will be an empty string if the selection popup was triggered in response to a click (ie zero width selection).
 
@@ -95,7 +96,7 @@ Note that using the `annotate-tiddler` field to associate an annotation with the
 
 !! Selection Trackers
 
-The following configuration tiddlers can be used to control whether the selection trackers are enabled when the following configuration tiddlers are set to ''yes'' (the default).
+The selection trackers are enabled when the following configuration tiddlers are set to ''yes''.
 
 * $:/config/Dynannotate/SelectionTracker/Enable for the main selection tracker
 * $:/config/Dynannotate/LegacySelectionTracker/Enable for the legacy selection tracker

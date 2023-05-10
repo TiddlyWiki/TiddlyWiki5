@@ -1,0 +1,48 @@
+title: $:/core/ui/VisibleTransclude
+
+<!--
+Import this component to make all the child transclusions visible.
+
+Block transclusions are shown in red, and inline transclusions are shown in green.
+-->
+\widget $transclude()
+<!-- Use a parameters widget so that we can access the `$params` data -->
+<$parameters tiddler="" $$tiddler="" mode="" $$mode="" $parseMode="@parseMode" $params="@params">
+	<!-- Replicate the logic of the transclude widget to determine the output mode, and hence the tag and colour to use for output -->
+	<$let
+		mode={{{ [[$mode]is[variable]then<$mode>!is[blank]] :else[[mode]is[variable]then<mode>!is[blank]] :else[<@parseMode>] }}}
+		outputTag={{{ [<mode>match[inline]then[span]else[div]] }}}
+		outputColour={{{ [<mode>match[inline]then[green]else[red]] }}}
+	>
+		<!-- Use divs or spans according to the mode -->
+		<$genesis $type=<<outputTag>> style="color:white;padding:4px;" style.background=<<outputColour>>>
+			<$genesis $type=<<outputTag>> style="display: inline-block;">
+				<div style="background:white;color:black;font-size: 12px;line-height:1.2;text-align:left;font-weight:normal;padding:4px;margin:4px;">
+					<!-- Render the parameters to the transclusion -->
+					<$list filter="[<@params>jsonindexes[]]" emptyMessage="(none)">
+						<div>
+							<$text text=<<currentTiddler>>/><$text text=": "/><$text text={{{ [<@params>jsonget<currentTiddler>] }}}/>
+						</div>
+					</$list>
+				</div>
+			</$genesis>
+			<$genesis $type=<<outputTag>> style="background:white;color:black;padding:4px;">
+				<!-- Look for a parameter starting with $ to determine if we are in legacy mode -->
+				<$list filter="[<@params>jsonindexes[]] :filter[<currentTiddler>prefix[$]] +[limit[1]]" variable="ignore" emptyMessage="""
+					<!-- Legacy mode: we render the transclusion without a dollar sign for recursionMarker and mode -->
+					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" recursionMarker="no" mode=<<mode>>>
+						<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
+						<$slot $name="ts-raw" $depth="2"/>
+					</$genesis>
+				""">
+					<!-- Non-legacy mode: we use dollar signs for the recursionMarker and mode -->
+					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" $$recursionMarker="no" $$mode=<<mode>>>
+						<!-- Reach back up to the grandparent transclusion to get the correct slot fill value -->
+						<$slot $name="ts-raw" $depth="2"/>
+					</$genesis>
+				</$list>
+			</$genesis>
+		</$genesis>
+	</$let>
+</$parameters>
+\end

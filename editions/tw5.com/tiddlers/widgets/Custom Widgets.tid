@@ -1,0 +1,84 @@
+created: 20221007144237585
+modified: 20230419103154328
+tags: Concepts Reference
+title: Custom Widgets
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+<<.from-version "5.3.0">> A <<.def "custom widget">> is a special kind of [[procedure|Procedures]] that can be called using the same syntax as widgets.
+
+Custom widgets can also be used to override built-in JavaScript widgets to customise their behaviour. 
+
+!! Defining Custom Widgets
+
+Custom widgets are usually defined with the [[Pragma: \widget]]:
+
+```
+\widget $$my-widget(attribute:"Default value")
+This is the widget, and the attribute is <<attribute>>.
+\end
+```
+
+The name of the widget must start with one or two dollar signs:
+
+* A ''single dollar sign'' is used to override existing core widgets
+** for example, `$text` or `$codeblock`
+* ''Double dollar signs'' are used to define a custom widget
+** for example, `$$mywidget` or `$$acme-logger`
+
+!! Using Custom Widgets
+
+Custom widgets are called in the same way as ordinary built-in widgets:
+
+```
+<$my-widget/>
+
+<$my-widget attribute="The parameter"/>
+```
+
+The attributes that are specified in the widget call are made available as parameter variables.
+
+!! Accessing Content of Custom Widgets
+
+Within the definition of a custom widget the content of the calling widget is available via the `<$slot $name="ts-raw"/>` widget. The contents of the <<.wlink SlotWidget>> widget is used as the default content if the widget was called without any content.
+
+For example:
+
+<<wikitext-example-without-html """\widget $$mywidget(one:'Jaguar')
+<$text text=<<one>>/>
+<$slot $name="ts-raw">
+	Whale
+</$slot>
+\end
+
+<$$mywidget one="Dingo">
+	Crocodile
+</$$mywidget>
+
+<$$mywidget/>""">>
+
+!! How Custom Widgets Work
+
+Custom widgets are implemented as a special kind of [[variable|Variables]]. The only thing that distinguishes them from ordinary variables is the way that they can be called as a custom widget with attributes mapped to parameters.
+
+!! Overriding Core ~JavaScript Widgets
+
+Custom widgets can use the <<.wlink "GenesisWidget">> widget to invoke the original widget, bypassing the override. For example, here we override the <<.wlink CodeBlockWidget>> widget to add `≤≥` symbols around each string of text.
+
+
+<<wikitext-example-without-html """\widget $codeblock(code)
+<$genesis $type="$codeblock" $remappable="no" code={{{ [<code>addprefix[≤]addsuffix[≥]] }}}/>
+\end
+
+<$codeblock code="Kangaroo"/>
+
+<$codeblock code={{$:/SiteTitle}}/>
+
+```
+Python
+```
+
+<$let test="Tiger">
+<$codeblock code=<<test>>/>
+</$let>""">>

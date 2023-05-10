@@ -15,6 +15,10 @@
     <div id="draggable" draggable="true">
         Drag me to a TiddlyWiki window
     </div>
+    <button id="copy">
+        Click to copy two tiddlers to the clipboard
+    </button>
+
 </body>
 <script>
 
@@ -30,6 +34,18 @@
         event.stopPropagation();
         return false;
     });
-    
+
+    document.getElementById("copy").addEventListener("click",function(event) {
+
+    function listener(event) {
+        event.clipboardData.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(tiddlerData)));
+        event.preventDefault();
+    }
+
+    document.addEventListener("copy",listener);
+    document.execCommand("copy");
+    document.removeEventListener("copy",listener);
+
+    });
 </script>
 </html>

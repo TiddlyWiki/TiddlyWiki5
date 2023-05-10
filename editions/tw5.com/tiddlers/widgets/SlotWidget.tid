@@ -1,0 +1,19 @@
+caption: slot
+created: 20220909111836951
+modified: 20230419103154329
+tags: Widgets
+title: SlotWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.3.0">> The <<.wlink SlotWidget>> widget is used within transcluded content to mark "slots" that the transcluding widget can fill with the <<.wlink FillWidget>> widget.
+
+See the <<.wlink TranscludeWidget>> widget for details.
+
+! Attributes
+
+The content of the <<.wlink SlotWidget>> widget is used as a fallback for the slot content if the corresponding <<.wlink FillWidget>> widget is not found.
+
+|!Attribute |!Description |
+|$name |The name of the slot being defined |

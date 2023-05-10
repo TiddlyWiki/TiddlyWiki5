@@ -48,7 +48,7 @@ exports.parse = function() {
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
 	// Check for an immediately following double linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/y);
+	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
 	tag.isBlock = this.is.block || hasLineBreak;
 	// Parse the body if we need to
@@ -78,7 +78,7 @@ exports.parseTag = function(source,pos,options) {
 			orderedAttributes: []
 		};
 	// Define our regexps
-	var reTagName = /([a-zA-Z0-9\-\$]+)/y;
+	var reTagName = /([a-zA-Z0-9\-\$]+)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a less than sign
@@ -93,9 +93,6 @@ exports.parseTag = function(source,pos,options) {
 		return null;
 	}
 	node.tag = token.match[1];
-	if(node.tag.slice(1).indexOf("$") !== -1) {
-		return null;
-	}
 	if(node.tag.charAt(0) === "$") {
 		node.type = node.tag.substr(1);
 	}
@@ -129,7 +126,7 @@ exports.parseTag = function(source,pos,options) {
 	pos = token.end;
 	// Check for a required line break
 	if(options.requireLineBreak) {
-		token = $tw.utils.parseTokenRegExp(source,pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/y);
+		token = $tw.utils.parseTokenRegExp(source,pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 		if(!token) {
 			return null;
 		}

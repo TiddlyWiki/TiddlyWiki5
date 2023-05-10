@@ -1,0 +1,26 @@
+title: Transclude/Parameterised/Positional
+description: Positional parameterised transclusion
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' zero='Ferret'/>
+<$transclude zero='Ferret' $tiddler='TiddlerOne'/>
+<$transclude $tiddler='TiddlerOne' 0='Pigeon'/>
+<$transclude 0='Pigeon' $tiddler='TiddlerOne'/>
+<$transclude $tiddler='TiddlerOne' zero='Ferret' 0='Pigeon'/>
+<$transclude zero='Ferret' 0='Pigeon' $tiddler='TiddlerOne'/>
+<$transclude $tiddler='TiddlerOne'/>
++
+title: TiddlerOne
+
+\whitespace trim
+<$parameters zero='Jaguar'>
+	<$text text=<<zero>>/>
+</$parameters>
++
+title: ExpectedResult
+
+<p>FerretFerretPigeonPigeonFerretFerretJaguar</p>

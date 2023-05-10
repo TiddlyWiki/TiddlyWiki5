@@ -1,23 +1,142 @@
 created: 20141002133113496
-modified: 20221221175615776
-tags: Concepts Reference
+modified: 20230422150445336
+tags: Concepts Reference WikiText
 title: Variables
 type: text/vnd.tiddlywiki
 
-A <<.def variable>> is a snippet of text that can be accessed by name within a particular branch of the [[widget tree|Widgets]]. The snippet is known as the variable's <<.def value>>.
+!! Introduction
 
-A new variable is defined using a <<.wlink SetWidget>> or <<.wlink LetWidget>> widget, and is then available to any of the children of that widget, including transcluded content. A <<.wid set>> widget can reuse an existing name, thus binding a different snippet to that name for the duration of the widget's children.
+A <<.def variable>> is a snippet of text that can be accessed by name. The text is referred to as the variable's <<.def value>>.
 
-The <<.wlink ListWidget>> widget by default sets a particular variable <<.var currentTiddler>> to each listed title in turn.
+Variables are defined by [[widgets|Widgets]]. Several core widgets define variables, the most common being the <<.wlink SetWidget>>, <<.wlink LetWidget>> and <<.wlink ListWidget>> widgets.
 
-For an overview of how to use variables, see [[Variables in WikiText]].
+The values of variables are available to descendant widgets, including transcluded content. For example, within each tiddler in the main story river the variable "currentTiddler" is set to the title of the tiddler.
 
-Despite the term <<.word variable>>, ''each snippet is a constant string''. The apparent variability is actually the result of the presence of multiple variables with the same name in different parts of the widget tree.
+Variables can also be overwritten by descendent widgets defining variables of the same name, thus binding a different snippet to that name for the scope of the children of the widget.
 
-[[Macros]] are a special form of variable whose value can contain placeholders that get filled in with parameters whenever the macro is used.
+!! Special Kinds of Variables
 
-By themselves, the snippets are <<.em not>> parsed as WikiText. However, a variable reference will transclude a snippet into a context where ~WikiText parsing <<.em may>> be occurring. Within a snippet, the only markup detected is `$name$` for a macro parameter transclusion and `$(name)$` for a variable transclusion.
+There are several special kinds of variable that extend their basic capabilities:
 
-The <<.mlink dumpvariables>> macro lists all variables (including macros) that are available at that position in the widget tree.
+* [[Procedures]] are snippets of text that can be passed parameters when wikified
+* [[Functions]] are snippets of text containing [[filters|Filters]] with optional named parameters
+* [[Custom Widgets]] are snippets of text containing definitions of custom [[widget|Widgets]]
+* [[Macros]] are snippets of text that can contain placeholders that are filled in with parameters whenever the macro is used
 
-~TiddlyWiki's core has [[several variables|Core Variables]] built in.
+Note that these special kinds of variable can only be created with the associated shortcut definition syntax.
+
+For a more detailed comparison of these special kinds of variables, see [[Variable Usage]].
+
+!! Defining Variables
+
+The following core widgets are commonly used to define variables:
+
+* <<.wlink LetWidget>> widget -- the easiest way to define multiple variables
+* <<.wlink SetWidget>> widget -- the most flexible way to define a single variable
+* <<.wlink ParametersWidget>> widget -- used to declare parameter variables within [[procedures|Procedures]] and [[custom widgets|Custom Widgets]]
+* <<.wlink ListWidget>> widget -- defines a loop variable and optional counter variable
+* <<.wlink SetMultipleVariablesWidget>> widget -- allows creation of multiple variables at once where the names and values are not known in advance
+
+!! Using Variables
+
+Once a variable is defined there are several ways to access it.
+
+!!! Transcluding Variables
+
+Transcluding a variable renders the text contents of the variable as if it replaced the call. It is a shortcut syntax for the <<.wlink TranscludeWidget>> widget with the `$variable` attribute.
+
+```
+<<varname>>
+```
+
+Parameters can be passed to the transclusion as follows:
+
+```
+<<varname "This is a parameter">>
+<<varname param:"This is a parameter">>
+<<varname param:"This is a parameter" second:"Another parameter">>
+```
+
+The handling of these parameters depends on the kind of variable:
+
+* [[Procedures]] assign the parameters to variables that are available within the procedure
+* [[Macros]] replace the text of the special markers `$param$` with the values passed to the macro for those parameters (see [[Macro Parameter Handling]] for the details)
+
+The parameters are ignored for other kinds of variable.
+
+!!! Macro Variable Substitutions
+
+Before the text of a macro is used, the special markers `$(variable)$` are replaced with the values of the named variable.
+
+!!! Variable Attributes
+
+Variables can be used as the value of attributes of widgets or HTML elements:
+
+```
+<div class=<<varname>>>
+```
+
+Parameters can be passed:
+
+```
+<div class=<<varname "This is a parameter">>>
+...
+<div class=<<varname param:"This is a parameter">>>
+...
+<div class=<<varname param:"This is a parameter" second:"Another parameter">>>
+...
+```
+
+The handling of these parameters depends on the kind of variable:
+
+* [[Functions]] assign the parameters to variables that are available within the function
+* [[Macros]] replace the text of the special markers `$param$` with the values passed to the macro for those parameters (see [[Macro Parameter Handling]] for the details)
+
+The parameters are ignored for other kinds of variable.
+
+!!! Variables in Filters
+
+Variables can be accessed within [[Filters]] using angle brackets to quote the name:
+
+```
+[<varname>]
+```
+
+Parameters can be passed in the usual way:
+
+```
+[<varname "This is a parameter">]
+[<varname param:"This is a parameter">]
+[<varname param:"This is a parameter" second:"Another parameter">]
+...
+```
+
+!! See Also
+
+* The <<.mlink dumpvariables>> macro lists all variables that are available at that position in the widget tree
+* Complete listing of ~TiddlyWiki's built-in [[Core Variables]]
+
+!! Examples
+
+!!! Example of Defining a Variable
+
+<$macrocall $name=".example" n="1"
+eg="""<$set name=animal value=zebra>
+<<animal>>
+</$set>"""/>
+
+!!! Example of Defining a Macro
+
+The `\define` pragma below [[defines a macro|Macro Definitions]] called <<.var tags-of-current-tiddler>>. The macro returns the value of the tiddler's <<.field tags>> field, and can be accessed from anywhere else in the same tiddler (or in any tiddler that [[imports|ImportVariablesWidget]] it).
+
+<$importvariables filter="$:/editions/tw5.com/macro-examples/tags-of-current-tiddler">
+<$codeblock code={{$:/editions/tw5.com/macro-examples/tags-of-current-tiddler}}/>
+<$macrocall $name=".example" n="2" eg="""The tags are: <<tags-of-current-tiddler>>"""/>
+</$importvariables>
+
+!!! Example of Using a Variable as a Filter Parameter
+
+This example uses the <<.olink backlinks>> [[operator|Filter Operators]] to list all tiddlers that link to this one.
+
+<$macrocall $name=".example" n="3" eg="""<<list-links filter:"[<currentTiddler>backlinks[]]">>"""/>
+

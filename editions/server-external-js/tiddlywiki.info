@@ -2,8 +2,7 @@
 	"description": "Client-server edition with external tiddlywiki.js",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem",
-		"tiddlywiki/highlight"
+		"tiddlywiki/filesystem"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -13,7 +12,7 @@
 		"listen": [
 			"--listen","root-tiddler=$:/core/save/all-external-js","use-browser-cache=yes"],
 		"index": [
-			"--render","$:/core/save/offline-external-js","index.html","text/plain",
+			"--render","$:/core/save/offline-external-js","[[external-]addsuffix<version>addsuffix[.html]]","text/plain",
 			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"],
 		"static": [
 			"--render","$:/core/templates/static.template.html","static.html","text/plain",
