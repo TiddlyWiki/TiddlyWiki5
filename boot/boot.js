@@ -1502,7 +1502,7 @@ $tw.Wiki = $tw.Wiki || function(options) {
 // Dummy methods that will be filled in after boot
 $tw.Wiki.prototype.clearCache =
 $tw.Wiki.prototype.clearGlobalCache =
-$tw.Wiki.prototype.enqueueTiddlerEvent = $tw.Wiki.prototype.enqueueTiddlerEvent || function() {};
+$tw.Wiki.prototype.enqueueTiddlerEvent = function() {};
 
 // Add an array of tiddlers
 $tw.Wiki.prototype.addTiddlers = $tw.Wiki.prototype.addTiddlers || function(tiddlers) {
