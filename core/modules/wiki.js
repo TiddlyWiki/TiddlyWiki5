@@ -1149,7 +1149,7 @@ exports.makeTranscludeWidget = function(title,options) {
 		if(options.importVariables) {
 			parseTreeImportVariables.attributes.filter.value = options.importVariables;
 		} else if(options.importPageMacros) {
-			parseTreeImportVariables.attributes.filter.value = "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+			parseTreeImportVariables.attributes.filter.value = this.getTiddlerText("$:/core/config/GlobalImportFilter");
 		}
 		parseTreeDiv.tree[0].children.push(parseTreeImportVariables);
 		parseTreeImportVariables.children.push(parseTreeTransclude);

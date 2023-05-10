@@ -45,7 +45,7 @@ TranscludeWidget.prototype.execute = function() {
 	var target = this.getTransclusionTarget(),
 		parseTreeNodes = target.parseTreeNodes;
 	this.sourceText = target.text;
-	this.sourceType = target.type;
+	this.parserType = target.type;
 	this.parseAsInline = target.parseAsInline;
 	// Process the transclusion according to the output type
 	switch(this.transcludeOutput || "text/html") {
@@ -58,7 +58,7 @@ TranscludeWidget.prototype.execute = function() {
 			break;
 		default:
 			// text/plain
-			var plainText = this.wiki.renderText("text/plain",this.sourceType,this.sourceText,{parentWidget: this});
+			var plainText = this.wiki.renderText("text/plain",this.parserType,this.sourceText,{parentWidget: this});
 			parseTreeNodes = [{type: "text", text: plainText}];
 			break;
 	}
@@ -279,6 +279,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							defaultType: this.transcludeType
 						});
 	}
+	// Set 'thisTiddler'
+	this.setVariable("thisTiddler",this.transcludeTitle);
 	// Return the parse tree
 	if(parser) {
 		return {

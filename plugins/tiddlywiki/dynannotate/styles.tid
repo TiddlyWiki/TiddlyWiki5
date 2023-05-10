@@ -34,6 +34,16 @@ tags: [[$:/tags/Stylesheet]]
 	animation: ta-dynannotation-search-overlay-animated 12s linear infinite;
 }
 
+.tc-dynannotate-example-frame {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 1em;
+}
+
+.tc-control-panel table.tc-dynannotate-search-parameters, .tc-control-panel table.tc-dynannotate-search-parameters input {
+    width: initial;
+}
+
 .tc-dynannotate-snippet-highlight {
 	background: #efef53;
 }

@@ -1,4 +1,5 @@
 title: $:/core/images/size
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-size tc-image-button" viewBox="0 0 128 128"><path d="M92.343 26l-9.171 9.172a4 4 0 105.656 5.656l16-16a4 4 0 000-5.656l-16-16a4 4 0 10-5.656 5.656L92.343 18H22a4 4 0 00-4 4v70.343l-9.172-9.171a4 4 0 10-5.656 5.656l16 16a4 4 0 005.656 0l16-16a4 4 0 10-5.656-5.656L26 92.343V22l-4 4h70.343zM112 52v64l4-4H52a4 4 0 100 8h64a4 4 0 004-4V52a4 4 0 10-8 0z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-size tc-image-button" viewBox="0 0 128 128"><path d="M92.343 26l-9.171 9.172a4 4 0 105.656 5.656l16-16a4 4 0 000-5.656l-16-16a4 4 0 10-5.656 5.656L92.343 18H22a4 4 0 00-4 4v70.343l-9.172-9.171a4 4 0 10-5.656 5.656l16 16a4 4 0 005.656 0l16-16a4 4 0 10-5.656-5.656L26 92.343V22l-4 4h70.343zM112 52v64l4-4H52a4 4 0 100 8h64a4 4 0 004-4V52a4 4 0 10-8 0z"/></svg>

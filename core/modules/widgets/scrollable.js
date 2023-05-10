@@ -119,8 +119,8 @@ ScrollableWidget.prototype.scrollIntoView = function(element,callback,options) {
 };
 
 ScrollableWidget.prototype.scrollSelectorIntoView = function(baseElement,selector,callback,options) {
-	baseElement = baseElement || document.body;
-	var element = baseElement.querySelector(selector);
+	baseElement = baseElement || document;
+	var element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(element) {
 		this.scrollIntoView(element,callback,options);
 	}
