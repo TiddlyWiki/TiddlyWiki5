@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/confetti/examples/typing-trigger
 tags: $:/tags/ConfettiExample
 
-<$edit-text tiddler="$:/temp/confetti/launchstatus" tag="input" placeholder="Type here"/>
+Type the word "launch": <$edit-text tiddler="$:/temp/confetti/launchstatus" tag="input" placeholder="Type here"/>
 
 <$list filter="[{$:/temp/confetti/launchstatus}match:caseinsensitive[launch]]" variable="ignore">
 Launched!
