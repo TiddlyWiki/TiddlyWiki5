@@ -3125,7 +3125,7 @@ select {
 .tc-translink {
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
-	padding: 0 3px 2px;
+	padding: 0 3px;
 	border-radius: 3px;
 }
 
