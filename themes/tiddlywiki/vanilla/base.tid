@@ -3138,16 +3138,8 @@ div.tc-translink > div > a:first-child > h1 {
 	font-weight: bold;
 }
 
-span.tc-translink > a {
+span.tc-translink > a:first-child {
 	font-weight: bold;
-}
-
-span.tc-translink > span::before {
-	content: " (";
-}
-
-span.tc-translink > span::after {
-	content: ")";
 }
 
 /*
