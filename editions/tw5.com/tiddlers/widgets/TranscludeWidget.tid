@@ -1,6 +1,6 @@
 caption: transclude
 created: 20130824142500000
-modified: 20230419103154329
+modified: 20230511022612458
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
@@ -145,7 +145,7 @@ The output will be equivalent to:
   </li>
 </ol>
 ```
-
+See <<.wlink SlotWidget>> for more examples.
 
 ! Missing Transclusion Targets
 
