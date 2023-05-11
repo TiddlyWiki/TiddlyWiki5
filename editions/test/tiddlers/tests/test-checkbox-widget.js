@@ -119,6 +119,25 @@ Tests the checkbox widget thoroughly.
             return newData;
         });
 
+        const listModeTestsForDateFields = [
+            {
+                testName: "list mode created date field",
+                tiddlers: [{title: "Colors", created: "201304152222", modified: "202301022222"}],
+                widgetText: "<$checkbox tiddler='Colors' listField='created' checked='green' />",
+                startsOutChecked: false,
+                finalValue: false,
+                expectedChange: { "Colors": { created: new Date("2013-04-15T22:22:00Z")}} // created field should *not* be touched by a listField checkbox
+            },
+            {
+                testName: "list mode modified date field",
+                tiddlers: [{title: "Colors", created: "201304152222", modified: "202301022222"}],
+                widgetText: "<$checkbox tiddler='Colors' listField='modified' checked='green' />",
+                startsOutChecked: false,
+                finalValue: false,
+                expectedChange: { "Colors": { modified: new Date("2023-01-02T22:22:00Z")}} // modified field should *not* be touched by a listField checkbox
+            },
+        ]
+
         const listModeTests = [
             {
                 testName: "list mode add",
@@ -485,6 +504,7 @@ Tests the checkbox widget thoroughly.
         const checkboxTestData = fieldModeTests.concat(
             indexModeTests,
             listModeTests,
+            listModeTestsForDateFields,
             listModeTestsWithListField,
             listModeTestsWithTagsField,
             indexListModeTests,
