@@ -34,7 +34,7 @@ If a variable named <<.var bold_slot>> contains the following <<.wlink SlotWidge
 
 then the slot can be filled using this variable transclusion:
 
-<<wikitext-example-without-html '<$transclude $variable=bold_slot>
+<<wikitext-example-without-html src:'<$transclude $variable=bold_slot>
 <$fill $name=body>
 
 """
@@ -53,7 +53,7 @@ syntax
 |1|<$slot $name=slot1/>|<$slot $name=slot2/>|
 |2|<$slot $name=slot1 $depth=2>missing</$slot>|<$slot $name=slot2 $depth=2>missing</$slot>|
 "
-table_fill='<$transclude $variable=table_slot  $mode=block>
+table_fill="""<$transclude $variable=table_slot  $mode=block>
   <$fill $name=slot1>outer1</$fill>
   <$fill $name=slot2>outer2
     <$transclude $variable=table_slot $mode=block>
@@ -62,7 +62,7 @@ table_fill='<$transclude $variable=table_slot  $mode=block>
     </$transclude>
   </$fill>
 </$transclude>
-'>
+""">
 
 If a variable named <<.var table_slot>> contains the following <<.wlink SlotWidget>> definition:
 
