@@ -4,7 +4,7 @@ type: application/javascript
 module-type: filterrunprefix
 
 Determine boolean combination of previous and current filter runs
-A filter run is considered "true" if its output is at least one item, and false otherwise
+A filter run is considered "true" if its output contains at least one item, and false otherwise
 Accordingly, the output of this filter run is either the string "true" or nothing
 
 \*/
@@ -22,29 +22,27 @@ exports.boolean = function(operationSubFunction,options) {
     	var suffixes = options.suffixes,
         	boolOp = (suffixes[0] && suffixes[0][0]) || "and",
         	previousRunBoolean = (results.length !== 0),
-            thisRunResult = operationSubFunction(source,widget),
-            thisRunBoolean = (thisRunResult.length !== 0),
             opResult = false;
 
 		results.clear();
         switch(boolOp) {
         	case "and":
-            	opResult = (previousRunBoolean && thisRunBoolean);
+            	opResult = (previousRunBoolean && (operationSubFunction(source,widget).length !== 0));
             	break;
         	case "or":
-            	opResult = (previousRunBoolean || thisRunBoolean);
+            	opResult = (previousRunBoolean || (operationSubFunction(source,widget).length !== 0));
             	break;
         	case "xor":
-            	opResult = (previousRunBoolean !== thisRunBoolean);
+            	opResult = (previousRunBoolean !== (operationSubFunction(source,widget).length !== 0));
             	break;
         	case "nor":
-            	opResult = (!(previousRunBoolean || thisRunBoolean));
+            	opResult = (!(previousRunBoolean || (operationSubFunction(source,widget).length !== 0)));
             	break;
         	case "nxor":
-            	opResult = (!(previousRunBoolean !== thisRunBoolean));
+            	opResult = (!(previousRunBoolean !== (operationSubFunction(source,widget).length !== 0)));
             	break;
          	case "nand":
-            	opResult = (!(previousRunBoolean && thisRunBoolean));
+            	opResult = (!(previousRunBoolean && (operationSubFunction(source,widget).length !== 0)));
             	break;
             default:
             	console.log("Unknown boolean operation ",boolOp);
