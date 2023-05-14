@@ -388,7 +388,7 @@ TranscludeWidget.prototype.getTransclusionSlotFill = function(name,defaultParseT
 Return whether this transclusion should be visible to the slot widget
 */
 TranscludeWidget.prototype.hasVisibleSlots = function() {
-	return this.getAttribute("$slotignore","no") === "no";
+	return this.getAttribute("$fillignore","no") === "no";
 }
 
 /*
