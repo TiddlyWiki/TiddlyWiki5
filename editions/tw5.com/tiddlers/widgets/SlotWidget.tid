@@ -17,7 +17,7 @@ The content of the <<.wlink SlotWidget>> widget is used as a fallback for the sl
 
 |!Attribute |!Description |
 |$name |The name of the slot being defined |
-|$depth |Optional number indicating how deep the <<.wlink SlotWidget>> widget is compared to the matching <<.wlink FillWidget>> widget as measured by the number of nested transclude widgets (defaults to 1) |
+|$depth |Optional number indicating how deep the <<.wlink SlotWidget>> widget is compared to the matching <<.wlink FillWidget>> widget as measured by the number of nested transclude widgets (defaults to 1). Transclude widgets whose <<.attr $fillignore>> attribute is set to ''yes'' are ignored, and do not affect the depth count |
 
 ! Examples
 

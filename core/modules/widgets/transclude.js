@@ -385,6 +385,13 @@ TranscludeWidget.prototype.getTransclusionSlotFill = function(name,defaultParseT
 };
 
 /*
+Return whether this transclusion should be visible to the slot widget
+*/
+TranscludeWidget.prototype.hasVisibleSlots = function() {
+	return this.getAttribute("$fillignore","no") === "no";
+}
+
+/*
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
 */
 TranscludeWidget.prototype.makeRecursionMarker = function() {
