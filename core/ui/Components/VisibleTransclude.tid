@@ -32,13 +32,13 @@ Block transclusions are shown in red, and inline transclusions are shown in gree
 					<!-- Legacy mode: we render the transclusion without a dollar sign for recursionMarker and mode -->
 					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" recursionMarker="no" mode=<<mode>> $$slotignore="yes">
 						<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
-						<$slot $name="ts-raw" $depth="2"/>
+						<$slot $name="ts-raw"/>
 					</$genesis>
 				""">
 					<!-- Non-legacy mode: we use dollar signs for the recursionMarker and mode -->
 					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" $$recursionMarker="no" $$mode=<<mode>> $$slotignore="yes">
 						<!-- Reach back up to the grandparent transclusion to get the correct slot fill value -->
-						<$slot $name="ts-raw" $depth="2"/>
+						<$slot $name="ts-raw"/>
 					</$genesis>
 				</$list>
 			</$genesis>
