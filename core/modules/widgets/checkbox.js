@@ -112,7 +112,7 @@ CheckboxWidget.prototype.getValue = function() {
 			var list;
 			if(this.checkboxListField) {
 				if($tw.utils.hop(tiddler.fields,this.checkboxListField)) {
-					list = tiddler.getFieldList(this.checkboxListField);
+					list = tiddler.getFieldList(this.checkboxListField) || [];
 				} else {
 					list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
 				}
@@ -208,16 +208,20 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	if(this.checkboxListField || this.checkboxListIndex) {
 		var fieldContents, listContents, oldPos, newPos;
 		if(this.checkboxListField) {
-			fieldContents = tiddler ? tiddler.fields[this.checkboxListField] : undefined;
+			fieldContents = (tiddler ? tiddler.fields[this.checkboxListField] : undefined) || [];
 		} else {
 			fieldContents = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex);
 		}
 		if($tw.utils.isArray(fieldContents)) {
 			// Make a copy so we can modify it without changing original that's refrenced elsewhere
 			listContents = fieldContents.slice(0);
-		} else {
-			listContents = $tw.utils.parseStringArray(fieldContents) || [];
+		} else if(typeof fieldContents === "string") {
+			listContents = $tw.utils.parseStringArray(fieldContents);
 			// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
+		} else {
+			// Field was neither an array nor a string; it's probably something that shouldn't become
+			// an array (such as a date field), so bail out *without* triggering actions
+			return;
 		}
 		oldPos = notValue ? listContents.indexOf(notValue) : -1;
 		newPos = value ? listContents.indexOf(value) : -1;

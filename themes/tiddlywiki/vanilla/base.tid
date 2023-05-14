@@ -3119,6 +3119,30 @@ select {
 }
 
 /*
+** Translink macro
+*/
+
+.tc-translink {
+	background-color: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
+	padding: 0 3px;
+	border-radius: 3px;
+}
+
+div.tc-translink > div {
+	margin: 1em;
+}
+
+div.tc-translink > div > a:first-child > h1 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+span.tc-translink > a:first-child {
+	font-weight: bold;
+}
+
+/*
 ** Classes for displaying globals
 */
 

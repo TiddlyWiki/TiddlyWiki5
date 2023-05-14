@@ -1,6 +1,6 @@
 caption: transclude
 created: 20130824142500000
-modified: 20230419103154329
+modified: 20230511022612458
 tags: Widgets
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
@@ -51,6 +51,7 @@ Modern mode is recommended for use in new applications.
 |$type |– |Optional ContentType used when transcluding variables, indexes or fields other than the ''text'' field|
 |$output |- |ContentType for the output rendering (defaults to `text/html`, can also be `text/plain` or `text/raw`) |
 |$recursionMarker |recursionMarker |Set to ''no'' to prevent creation of [[Legacy Transclusion Recursion Marker]] (defaults to ''yes'') |
+|$fillignore |- |Set to ''yes'' to make this transclusion invisible to the <<.attr $depth>> attribute of the <<.wlink SlotWidget>> widget (defaults to ''no'') |
 |//{attributes not starting with $}// |– |Any other attributes that do not start with a dollar are used as parameters to the transclusion |
 |//{other attributes starting with $}// |– |Other attributes starting with a single dollar sign are reserved for future use |
 |//{attributes starting with $$}// |– |Attributes starting with two dollar signs are used as parameters to the transclusion, but with the name changed to use a single dollar sign |
@@ -145,7 +146,7 @@ The output will be equivalent to:
   </li>
 </ol>
 ```
-
+See <<.wlink SlotWidget>> for more examples.
 
 ! Missing Transclusion Targets
 

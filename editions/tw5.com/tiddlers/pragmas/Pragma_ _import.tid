@@ -13,5 +13,5 @@ The ''\import'' [[pragma|Pragmas]] is used to import definitions from other tidd
 For example:
 
 ```
-\import [all[shadows+tiddlers]tag[$:/tags/Macro]]
+\import [all[shadows+tiddlers]tag[$:/tags/Global]]
 ```
