@@ -6,11 +6,11 @@ type: text/vnd.tiddlywiki
 
 !! Introduction
 
-This tiddler describes the different ways in which [[macros|Procedures]] can be defined.
+This tiddler describes the different ways in which [[Procedures|Procedures]] can be defined.
 
 !! Procedure Definition Pragma
 
-Macros are created using the [[Pragma: \procedure]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
+Procedures are created using the [[Pragma: \procedure]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
 
 ```
 \define my-procedure(param)
