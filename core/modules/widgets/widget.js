@@ -403,7 +403,7 @@ Widget.prototype.computeAttribute = function(attribute) {
 	if(attribute.type === "filtered") {
 		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
 	} else if(attribute.type === "indirect") {
-		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler")) || "";
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
 		if(variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
