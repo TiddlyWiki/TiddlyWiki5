@@ -68,7 +68,7 @@ This is <<name>> demonstrates <<desc>>.
 """>>
 
 !! Caution in Using Positional Parameters
-As procedure is a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget, there doesn't seem to be a good reason to have multiple parameters widgets within a definition. In the below example when passing `x` to `myproc`, it will also be set to `a`:
+Procedures are a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget, so generally there is no reason to have multiple parameters widgets within a definition. In the below example when passing `x` to `myproc`, it will also be set to `a`:
 
 <<wikitext-example-without-html 
 src:"""\procedure myproc(x:10)
@@ -80,7 +80,7 @@ x=<<x>>, a=<<a>>, b=<<b>>
 <<myproc 50>>
 """>>
 
-The reason for such result is that, the above example is equivalent to
+The reason for that result is clearer if we consider an equivalent with explicit parameters widgets.
 
 <$macrocall $name=wikitext-example-without-html 
 src='<$let myprog="""
@@ -93,9 +93,9 @@ x=<<x>>, a=<<a>>, b=<<b>>
 </$let>'
 />
 
-This is because, those two parameters widgets are entirely independent. They are both processed as if the other parameter widget is not there.
+This is because those two parameters widgets are entirely independent. They are both processed as if the other parameter widget is not there.
 
-<<.tip "It is a good practice to use named parameters instead of positional parameters when ParametersWidget or [[Pragma: \parameters]] are used inside procedures.">>
+<<.tip "The positional parameters are only required when using the parameterised transclusion shortcut syntax, and that in other cases it is generally clearer to use named parameters.">>
 
 To prevent such situation of above example, pass parameters by name as below.
 

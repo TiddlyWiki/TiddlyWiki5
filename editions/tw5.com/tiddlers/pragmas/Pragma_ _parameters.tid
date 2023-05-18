@@ -16,7 +16,7 @@ For example:
 \parameters (firstname:"Joe",lastname:"Blogs")
 ```
 
-To ilusterate the use of ''\parameters'' pragma, see [[Core Icons]] which are parameterised. The first parameter `size` specified the size at which the icon should be rendered. For example see the text of [[$:/core/images/print-button]] tiddler. The first line defines the size parameter as `\parameters (size:"22pt")`
+To illustrate the use of ''\parameters'' pragma, see [[Core Icons]] which are parameterised. The first parameter `size` specified the size at which the icon should be rendered. For example see the text of [[$:/core/images/print-button]] tiddler. The first line defines the size parameter as `\parameters (size:"22pt")`
 
 <<wikitext-example-without-html """{{$:/core/images/print-button|16px}}
 <$transclude $tiddler="$:/core/images/print-button" size="32px"/>
