@@ -1,5 +1,5 @@
 created: 20221007132845007
-modified: 20230419103154329
+modified: 20230518152756112
 tags: Pragmas
 title: Pragma: \procedure
 type: text/vnd.tiddlywiki
@@ -52,4 +52,59 @@ Procedure definitions can be nested by specifying the name of the procedure in t
 \end special-button
 
 <<special-button>>
+""">>
+
+! Use of Parameters Inside Procedures
+The parameters can be declared inside procedures. The parameters widget is necessary in a procedure if you want to use computed default values. For example:
+
+<<wikitext-example-without-html 
+src:"""\procedure myproc()
+<$parameters name={{$:/SiteTitle}} desc={{$:/SiteSubtitle}}>
+This is <<name>> demonstrates <<desc>>.
+</$parameters>
+\end
+
+<<myproc>>
+""">>
+
+!! Caution in Using Positional Parameters
+As procedure is a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget, there doesn't seem to be a good reason to have multiple parameters widgets within a definition. In the below example when passing `x` to `myproc`, it will also be set to `a`:
+
+<<wikitext-example-without-html 
+src:"""\procedure myproc(x:10)
+\parameters (a:100, b:200)
+
+x=<<x>>, a=<<a>>, b=<<b>>
+\end
+
+<<myproc 50>>
+""">>
+
+The reason for such result is that, the above example is equivalent to
+
+<$macrocall $name=wikitext-example-without-html 
+src='<$let myprog="""
+\parameters (x:10)
+\parameters (a:100, b:200)
+
+x=<<x>>, a=<<a>>, b=<<b>>
+""">
+<<myprog 50>>
+</$let>'
+/>
+
+This is because, those two parameters widgets are entirely independent. They are both processed as if the other parameter widget is not there.
+
+<<.tip "It is a good practice to use named parameters instead of positional parameters when ParametersWidget or [[Pragma: \parameters]] are used inside procedures.">>
+
+To prevent such situation of above example, pass parameters by name as below.
+
+<<wikitext-example-without-html 
+src:"""\procedure myproc(x:10)
+\parameters (a:100, b:200)
+
+x=<<x>>, a=<<a>>, b=<<b>>
+\end
+
+<<myproc x:50>>
 """>>
