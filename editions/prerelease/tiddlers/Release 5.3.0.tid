@@ -75,7 +75,7 @@ Improvements to the following translations:
 
 ! Developer Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6699">> support for a `destroy()` method for widgets, giving them a chance to dispose of any resources
+* 
 
 ! Node.js Improvements
 
