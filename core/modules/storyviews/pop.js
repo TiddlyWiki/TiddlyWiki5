@@ -73,7 +73,7 @@ PopStoryView.prototype.remove = function(widget) {
 		duration = $tw.utils.getAnimationDuration(),
 		removeElement = function() {
 			if(targetElement && targetElement.parentNode) {
-				widget.destroy();
+				widget.removeChildDomNodes();
 			}
 		};
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
