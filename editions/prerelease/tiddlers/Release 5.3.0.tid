@@ -72,6 +72,7 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7380">> crashes when using an invalid CSS selector for [[WidgetMessage: tm-focus-selector]] and [[WidgetMessage: tm-scroll]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7401">> bug whereby scrolling occurs if the linkcatcher widget triggers an action-navigate and the $scroll attribute is set to "no"
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7409">> problem switching between LTR and RTL text
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7448">> bug when checkbox widget's listField attribute was given the name of a date field (like <<.field created>> or <<.field modified>>)
 
 ! Developer Improvements
 
@@ -101,6 +102,7 @@ Marxsal
 michsa
 muzimuzhi
 pmario
+rmunn
 saqimtiaz
 yaisog
 """>>
