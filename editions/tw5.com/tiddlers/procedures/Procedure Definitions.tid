@@ -14,7 +14,7 @@ Procedures are created using the [[Pragma: \procedure]] at the start of a tiddle
 
 ```
 \define my-procedure(param)
-This is the macro text (param=<<param>>)
+This is the procedure text (param=<<param>>)
 \end
 ```
 
