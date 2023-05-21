@@ -403,7 +403,7 @@ Widget.prototype.computeAttribute = function(attribute) {
 	if(attribute.type === "filtered") {
 		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
 	} else if(attribute.type === "indirect") {
-		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler")) || "";
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
 		if(variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
@@ -688,7 +688,7 @@ Rebuild a previously rendered widget
 */
 Widget.prototype.refreshSelf = function() {
 	var nextSibling = this.findNextSiblingDomNode();
-	this.removeChildDomNodes({ recursive: true });
+	this.removeChildDomNodes();
 	this.render(this.parentDomNode,nextSibling);
 };
 
@@ -753,42 +753,19 @@ Widget.prototype.findFirstDomNode = function() {
 /*
 Remove any DOM nodes created by this widget or its children
 */
-Widget.prototype.removeChildDomNodes = function(options) {
-	var recursive = options && options.recursive;
-	/**
-	 * If this widget has directly created DOM nodes, delete them and exit.
-	 * This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
-	 */
+Widget.prototype.removeChildDomNodes = function() {
+	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
 		});
 		this.domNodes = [];
-		return true;
-	} else if(recursive) {
+	} else {
 		// Otherwise, ask the child widgets to delete their DOM nodes
 		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes(options);
+			childWidget.removeChildDomNodes();
 		});
 	}
-	return false
-};
-
-/*
-Inform widget subclass that extends this widget and children widgets of this widget. Let them know this widget tree is about to destroy, and dom nodes are being unmounted from the document.
-*/
-Widget.prototype.destroy = function(options) {
-	// removeDom by default
-	var removeDom = (options && options.removeDom) || true;
-	if (removeDom) {
-		// prepare options for children, if we have removed the dom, child don't need to remove their dom
-		removeDom = !this.removeChildDomNodes();
-	}
-	// nothing need to do, as dom is already removed in the removeChildDomNodes
-	// we just need to inform the children
-	$tw.utils.each(this.children,function(childWidget) {
-		childWidget.destroy({ removeDom: removeDom });
-	});
 };
 
 /*
