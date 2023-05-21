@@ -16,3 +16,5 @@ The following attributes are supported:
 |''attribution'' |Optional attribution text for the base layer |
 
 The base layer will only work if all four of the required items ''name'', ''tiles-url'', ''max-zoom'' and ''attribution'' must be provided, either through the base layer tiddler specified in the title attribute, or explicitly via their own attributes.
+
+See https://leaflet-extras.github.io/leaflet-providers/preview/ for a collection of compatible base layers.
