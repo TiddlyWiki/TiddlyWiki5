@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/geospatial/baselayers/stamen-terrain
+caption: Stamen Terrain
+tags: $:/tags/GeoBaseLayer
+tiles-url: https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg
+max-zoom: 18
+
+&copy; Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.
