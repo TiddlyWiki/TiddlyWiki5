@@ -98,8 +98,10 @@ The following attributes are supported:
 
 <$testcase>
 <$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>
 
 <$testcase>
 <$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-refresh"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>

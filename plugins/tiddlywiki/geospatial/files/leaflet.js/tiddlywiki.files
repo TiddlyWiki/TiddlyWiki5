@@ -6,9 +6,7 @@
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.js",
 				"module-type": "library"
-			},
-			"prefix": "",
-			"suffix": ""
+			}
 		},
 		{
 			"file": "leaflet.css",
@@ -16,9 +14,14 @@
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.css",
 				"tags": "[[$:/tags/Stylesheet]]"
-			},
-			"prefix": "",
-			"suffix": ""
+			}
+		},
+		{
+			"file": "images/layers-2x.png",
+			"fields": {
+				"type": "image/png",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet/images/layers-2x.png"
+			}
 		},
 		{
 			"file": "LICENSE",

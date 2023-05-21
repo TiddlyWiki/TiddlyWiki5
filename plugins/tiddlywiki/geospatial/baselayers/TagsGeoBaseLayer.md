@@ -1,0 +1,2 @@
+title: $:/tags/GeoBaseLayer
+list: $:/plugins/tiddlywiki/geospatial/baselayers/openstreetmap $:/plugins/tiddlywiki/geospatial/baselayers/opentopomap $:/plugins/tiddlywiki/geospatial/baselayers/stamen-watercolor
