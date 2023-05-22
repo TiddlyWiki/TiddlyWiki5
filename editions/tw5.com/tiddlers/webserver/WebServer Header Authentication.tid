@@ -4,6 +4,10 @@ tags: [[WebServer Authentication]]
 title: WebServer Header Authentication
 type: text/vnd.tiddlywiki
 
-Header authentication is a web integration technique enabling external entities to securely pass details of the authenticated user to an application. It is commonly used for "single sign on" in corporate environments.
+Header authentication is a web integration technique enabling external entities to securely pass details of the authenticated user to an application.
 
 Header authentication is activated if is configured via the [[authenticated-user-header|WebServer Parameter: authenticated-user-header]]
+
+!! Usage in SSO
+
+It is commonly used for "single sign on" in corporate environments. When doing header authentication, the user is not prompted for a username and password on TiddlyWiki. Instead, user is required to login at a SSO proxy server. When the user authenticate themselves to a SSO proxy server, proxy server redirect user request to TiddlyWiki server with this additional header field. Then tiddlywiki server is able to use the value of this header field to identify the user.
