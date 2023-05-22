@@ -574,12 +574,13 @@ var polyfill =[
 	"// using the this variable on a getter ",
 	"// inserted into the prototype of globalThis",
 	"(function() {",
-	"	if (typeof globalThis === 'object') return;",
 	"	// node.green says this is available since 0.10.48",
 	"	Object.prototype.__defineGetter__('__temp__', function() {",
 	"		return this;",
 	"	});",
-	"	__temp__.globalThis = __temp__;",
+	"	if (typeof __temp__.globalThis !== 'object') {",
+	"		__temp__.globalThis = __temp__;",
+	"	}"
 	"	delete Object.prototype.__temp__;",
 	"}());"
 ].join("\n");
