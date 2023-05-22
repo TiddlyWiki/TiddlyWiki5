@@ -2,9 +2,14 @@
   "lineWidth": 120,
   "typescript": {
     "quoteProps": "asNeeded",
+    "parameters.spaceAround": false,
+    "ifStatement.spaceAfterIfKeyword": false,
+    "forStatement.spaceAfterForKeyword": false,
+    "whileStatement.spaceAfterWhileKeyword": false,
+    "spaceSurroundingProperties": false,
     "useTabs": true,
     "indentWidth": 1,
-    "quoteStyle": "preferSingle",
+    "quoteStyle": "preferDouble",
     "binaryExpression.operatorPosition": "sameLine"
   },
   "json": {},
