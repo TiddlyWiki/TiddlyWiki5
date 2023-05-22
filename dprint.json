@@ -2,6 +2,8 @@
   "lineWidth": 120,
   "typescript": {
     "quoteProps": "asNeeded",
+    "useTabs": true,
+    "indentWidth": 1,
     "quoteStyle": "preferSingle",
     "binaryExpression.operatorPosition": "sameLine"
   },

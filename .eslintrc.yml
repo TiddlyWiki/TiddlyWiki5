@@ -44,6 +44,12 @@ rules:
   default-case: 'off'
   default-case-last: error
   default-param-last: error
+  dprint-integration/dprint:
+    - warn
+    # Global Config (will pass to the dprint formatter directly): Available at https://dprint.dev/config/
+    - useDprintJson: true
+    # Plugin Specific Config (will pass to the dprint plugins): Available at https://dprint.dev/plugins/
+    - useDprintJson: true
   dot-location: 'off'
   dot-notation: 'off'
   eol-last: 'off'
