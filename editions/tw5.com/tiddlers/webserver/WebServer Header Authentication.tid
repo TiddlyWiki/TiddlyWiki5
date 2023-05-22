@@ -10,4 +10,4 @@ Header authentication is activated if is configured via the [[authenticated-user
 
 !! Usage in SSO
 
-It is commonly used for "single sign on" in corporate environments. When doing header authentication, the user is not prompted for a username and password on TiddlyWiki. Instead, user is required to login at a SSO proxy server. When the user authenticate themselves to a SSO proxy server, proxy server redirect user request to TiddlyWiki server with this additional header field. Then tiddlywiki server is able to use the value of this header field to identify the user.
+Header authentication is commonly used for "single sign on" in corporate environments. When doing header authentication, the user is not prompted for a username and password on TiddlyWiki. Instead, the user is required to login at a SSO proxy server. When the user authenticates themselves to the SSO proxy server, the proxy server redirects the user request to the TiddlyWiki server with this additional header field containing the username. Then TiddlyWiki server is able to use the value of this header field to identify the user.
