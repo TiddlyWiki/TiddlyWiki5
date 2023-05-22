@@ -580,7 +580,7 @@ var polyfill =[
 	"	});",
 	"	if (typeof __temp__.globalThis !== 'object') {",
 	"		__temp__.globalThis = __temp__;",
-	"	}"
+	"	}",
 	"	delete Object.prototype.__temp__;",
 	"}());"
 ].join("\n");
