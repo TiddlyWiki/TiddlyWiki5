@@ -3,11 +3,16 @@ env:
   commonjs: true
   es2021: true
   node: true
-extends: 'eslint:recommended'
+extends:
+  - 'eslint:recommended'
+  - 'plugin:dprint-integration/recommended'
+  - 'plugin:dprint-integration/disable-conflict'
 globals:
   "$tw": "writable" # temporary
 parserOptions:
   ecmaVersion: 5
+plugins:
+  - dprint-integration
 rules:
   array-bracket-newline: 'off'
   array-bracket-spacing: 'off'
