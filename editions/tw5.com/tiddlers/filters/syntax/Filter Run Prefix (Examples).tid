@@ -4,18 +4,9 @@ tags: [[Filter Syntax]] [[Filter Run Prefix Examples]]
 title: Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
 
-!! `:filter` examples
+<$list filter='[all[shadows]module-type[filterrunprefix]] :map[<currentTiddler>split[/]last[]removesuffix[.js]]' variable=pfx>
 
-See [[Filter Filter Run Prefix (Examples)]]
+!!<code><$text text={{{ [<pfx>addprefix[:]] }}}/></code> examples
 
-!! `:intersection` examples
-
-See [[Intersection Filter Run Prefix (Examples)]]
-
-!! `:reduce` examples
-
-See [[Reduce Filter Run Prefix (Examples)]]
-
-!! `:sort` examples
-
-See [[Sort Filter Run Prefix (Examples)]]
+See {{{ [<pfx>sentencecase[]addsuffix[ Filter Run Prefix (Examples)]] }}} 
+</$list>
