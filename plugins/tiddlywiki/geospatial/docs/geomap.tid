@@ -4,12 +4,20 @@ tags: $:/tags/GeospatialDocs
 
 !! `<$geomap>` widget
 
-The `<$geomap>` widget displays an interactive map using [[Leaflet.js|https://leafletjs.com/]]. `<$geolayer>` widgets inside the `<$geomap>` widget are used to indicate the layers and markers to display.
+The `<$geomap>` widget displays an interactive map using [[Leaflet.js|https://leafletjs.com/]]. `<$geolayer>` and `<$geobaselayer>` widgets inside the `<$geomap>` widget are used to indicate the overlay layers and markers to display, and the base map layer to be used.
 
 The following attributes are supported:
 
 |!Attribute |!Description |
 |''state'' |The title of a state tiddler used to track the state of the map in the `zoom`, `long` and `lat` fields |
+
+If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>` widget then all the available base layers will be loaded by the equivalent of the following code:
+
+```
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoBaseLayer]]">
+	<$geobaselayer title=<<currentTiddler>>/>
+</$list>
+```
 
 !! Examples
 
