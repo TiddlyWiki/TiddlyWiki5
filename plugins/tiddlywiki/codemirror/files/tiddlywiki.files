@@ -29,6 +29,13 @@
 				"module-type": "codemirror"
 			}
 		},{
+			"file": "addon/edit/trailingspace.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/trailingspace.js",
+				"module-type": "codemirror"
+			}
+		},{
 			"file": "addon/selection/activeline.js",
 			"fields": {
 				"type": "application/javascript",
