@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 The field editor cascade is a [[cascade|Cascades]] used to choose a template for rendering the field editor within the [[EditTemplate|$:/core/ui/EditTemplate/fields]].
 
-Core field editor cascades can be found in $:/core/ui/EditTemplate/fields and $:/core/ui/EditTemplate
+The core field editor cascade can be found in $:/core/ui/EditTemplate/fields
 
 The default field editor cascade only contains one element:
 
