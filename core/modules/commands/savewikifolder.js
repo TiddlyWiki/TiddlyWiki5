@@ -5,7 +5,7 @@ module-type: command
 
 Command to save the current wiki as a wiki folder
 
---savewikifolder <wikifolderpath> [<filter>]
+--savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 
 \*/
 (function(){
@@ -35,14 +35,31 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing wiki folder path";
 	}
-	var wikifoldermaker = new WikiFolderMaker(this.params[0],this.params[1],this.commander);
+	var regFilter = /^[a-zA-Z0-9\.\-_]+=/g,  // dynamic parameters
+		namedParames,
+		tiddlerFilter,
+		explodePlugins;
+	if (regFilter.test(this.params[1])) {  
+		// --savewikifolder <wikifolderpath> [ [<name>=<value>] ]*
+		namedParames = this.commander.extractNamedParameters(this.params.slice(1));
+		tiddlerFilter = namedParames.filter || "[all[tiddlers]]";
+	} else {
+		// --savewikifolder <wikifolderpath> <filter> [ [<name>=<value>] ]*
+		namedParames = this.commander.extractNamedParameters(this.params.slice(2));
+		tiddlerFilter = this.params[1];
+	}
+	// --savewikifolder <wikifolderpath> [<filter>] 
+	tiddlerFilter = tiddlerFilter || "[all[tiddlers]]";
+	explodePlugins = namedParames.explodePlugins || "yes";
+	var wikifoldermaker = new WikiFolderMaker(this.params[0],tiddlerFilter,this.commander,explodePlugins);
 	return wikifoldermaker.save();
 };
 
-function WikiFolderMaker(wikiFolderPath,wikiFilter,commander) {
+function WikiFolderMaker(wikiFolderPath,wikiFilter,commander,explodePlugins) {
 	this.wikiFolderPath = wikiFolderPath;
-	this.wikiFilter = wikiFilter || "[all[tiddlers]]";
+	this.wikiFilter = wikiFilter;
 	this.commander = commander;
+	this.explodePlugins = explodePlugins; // default: write plugins to the plugins folder
 	this.wiki = commander.wiki;
 	this.savedPaths = []; // So that we can detect filename clashes
 }
@@ -93,10 +110,13 @@ WikiFolderMaker.prototype.save = function() {
 						self.log("Adding built-in plugin: " + libraryDetails.name);
 						newWikiInfo[libraryDetails.type] = newWikiInfo[libraryDetails.type]  || [];
 						$tw.utils.pushTop(newWikiInfo[libraryDetails.type],libraryDetails.name);
-					} else {
+					} else if(self.explodePlugins == "yes") {
 						// A custom plugin
 						self.log("Processing custom plugin: " + title);
 						self.saveCustomPlugin(tiddler);
+					} else if(self.explodePlugins == "no") {
+						self.log("Processing custom plugin to tiddlders folder: " + title);
+						self.saveTiddler("tiddlers", tiddler);
 					}
 				} else {
 					// Ordinary tiddler

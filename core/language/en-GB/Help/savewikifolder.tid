@@ -4,7 +4,7 @@ description: Saves a wiki to a new wiki folder
 <<.from-version "5.1.20">> Saves the current wiki as a wiki folder, including tiddlers, plugins and configuration:
 
 ```
---savewikifolder <wikifolderpath> [<filter>]
+--savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 ```
 
 * The target wiki folder must be empty or non-existent
@@ -12,8 +12,19 @@ description: Saves a wiki to a new wiki folder
 * Plugins from the official plugin library are replaced with references to those plugins in the `tiddlywiki.info` file
 * Custom plugins are unpacked into their own folder
 
+The following options are supported:
+
+* ''filter'': a filter expression that defines the tiddlers to include in the output.
+* ''explodePlugins'': set to "no" to save plugins to the tiddlers directory of the target wiki folder, to suppress breaking plugins into their constituent shadow tiddlers (default is "yes").
+
 A common usage is to convert a TiddlyWiki HTML file into a wiki folder:
 
 ```
 tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```
+
+Save the plugin to the tiddlers directory of the target wiki folder:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder explodePlugins=no
 ```
