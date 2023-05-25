@@ -162,10 +162,18 @@ Extended filter operators to manipulate the current list.
 	/*
 	Returns all items from the current list sorted in the order of the items in the operand array
 	*/
-	exports.sortby = function (source, operator) {
+	exports.sortby = function (source, operator, options) {
 		var results = prepare_results(source);
 		if (!results || results.length < 2) {
 			return results;
+		}
+		var field = operator.suffix;
+		if (field && field !== "title") {
+			results = results.map(function (title) {
+				var tiddler = options.wiki.getTiddler(title);
+				if (!tiddler) return '';
+				return tiddler.fields[field] || '';
+			})
 		}
 		var lookup = $tw.utils.parseStringArray(operator.operand, "true");
 		results.sort(function (a, b) {
