@@ -1,5 +1,6 @@
 .DS_Store
 .c9/
+.vs/
 .vscode/
 tmp/
 output/
