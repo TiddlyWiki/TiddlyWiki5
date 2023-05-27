@@ -1,0 +1,11 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/showTrailingSpace
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/showTrailingSpace/hint}}
+
+\define lingo-base() $:/language/codemirror/showTrailingSpace/
+<<lingo hint>>
+
+<$checkbox tiddler="$:/config/codemirror/showTrailingSpace" field="text" checked="true" unchecked="false" default="true">
+  <$link to="$:/config/codemirror/showTrailingSpace"><<lingo info>></$link>
+</$checkbox>
+
