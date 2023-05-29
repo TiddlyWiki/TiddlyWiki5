@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/tour",
 	"name": "Tour",
 	"description": "A tour of TiddlyWiki",
-	"list": "readme"
+	"list": "readme",
+	"dependents": ["$:/plugins/tiddlywiki/confetti","$:/plugins/tiddlywiki/dynannotate"]
 }
