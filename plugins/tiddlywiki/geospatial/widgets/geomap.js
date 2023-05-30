@@ -149,7 +149,7 @@ GeomapWidget.prototype.refreshMap = function() {
 	// Create the default base map if none was specified
 	if(this.renderedBaseLayers.length === 0) {
 		// Render in reverse order so that the first tagged base layer will be rendered last, and hence take priority
-		var baseLayerTitles = this.wiki.getTiddlersWithTag("$:/tags/GeoBaseLayer").reverse();
+		var baseLayerTitles = this.wiki.filterTiddlers("[all[tiddlers+shadows]tag[$:/tags/GeoBaseLayer]]");
 		$tw.utils.each(baseLayerTitles,function(title) {
 			loadBaseLayer({title: title});
 		});
