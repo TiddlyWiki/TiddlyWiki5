@@ -21,6 +21,7 @@ This demo requires that the API keys needed to access external services be obtai
 
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
+	startPosition="bounds"
 >
 	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoBaseLayer]]">
 		<$geobaselayer title=<<currentTiddler>>/>

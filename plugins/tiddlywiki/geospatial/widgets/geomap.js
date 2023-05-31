@@ -99,12 +99,10 @@ GeomapWidget.prototype.refreshMap = function() {
 		self.map.removeLayer(layer.layer);
 	});
 	this.renderedLayers = []; // Array of {name:,layer:}
+	$tw.utils.each(this.renderedBaseLayers,function(baseLayer) {
+		self.map.removeLayer(baseLayer.layer);
+	});
 	this.renderedBaseLayers = []; // Array of {name:,layer:}
-	// Restore the saved map position and zoom level
-	if(!this.setMapView()) {
-		// If there was no saved position then default to showing the whole world
-		this.map.fitWorld();
-	}
 	// Create default icon
 	var iconProportions = 365/560,
 		iconHeight = 50;
@@ -219,8 +217,29 @@ GeomapWidget.prototype.refreshMap = function() {
 		overlayLayers[layer.name] = layer.layer;
 	});
 	this.layerControl = $tw.Leaflet.control.layers(baseLayers,overlayLayers,{
-		collapsed: true
+		collapsed: this.geomapLayersPanel !== "open"
 	}).addTo(this.map);
+	// Restore the saved map position and zoom level
+	if(!this.setMapView()) {
+		// If there was no saved position then look at the startPosition attribute
+		switch(this.geomapStartPosition) {
+			case "bounds":
+				var bounds = null;
+				$tw.utils.each(this.renderedLayers,function(layer) {
+					var featureBounds = layer.layer.getBounds();
+					if(bounds) {
+						bounds.extend(featureBounds);
+					} else {
+						bounds = featureBounds;
+					}
+				});
+				this.map.fitBounds(bounds);
+				break;
+			default:
+				this.map.fitWorld();
+				break;
+		}
+	}
 };
 
 /*
@@ -240,6 +259,8 @@ Compute the internal state of the widget
 */
 GeomapWidget.prototype.execute = function() {
 	this.geomapStateTitle = this.getAttribute("state");
+	this.geomapStartPosition = this.getAttribute("startPosition");
+	this.geomapLayersPanel = this.getAttribute("layersPanel");
 };
 
 /*
@@ -247,17 +268,16 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	// Set zoom and position if the state tiddler has changed
-	if(changedAttributes.state) {
-		this.geomapStateTitle = this.getAttribute("state");
-	}
-	if(changedAttributes.state || changedTiddlers[this.geomapStateTitle]) {
-		this.setMapView();
-	}
 	// Refresh child nodes, and rerender map if there have been any changes
 	var result = this.contentRoot.refresh(changedTiddlers);
 	if(result) {
 		this.refreshMap();
+	} else {
+		// If we're not doing a full refresh, reset the position if the state tiddler has changed
+		if(changedAttributes.state || changedTiddlers[this.geomapStateTitle]) {
+			this.geomapStateTitle = this.getAttribute("state");
+			this.setMapView();
+		}
 	}
 	return result;
 };
