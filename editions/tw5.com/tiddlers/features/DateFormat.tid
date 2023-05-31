@@ -1,5 +1,5 @@
 created: 20140418142957325
-modified: 20230226144359284
+modified: 20230531084305631
 tags: Features
 title: DateFormat
 type: text/vnd.tiddlywiki
@@ -75,12 +75,15 @@ Here is an example of calculating the number of days that passed between creatio
 * Divide their difference by <<.value 86400000>> which is the number of milliseconds in a day
 ** 1000 milliseconds per second × 60 seconds per minute × 60 minutes per hour × 24 hours per day = 86,400,000 milliseconds per day
 
-<$macrocall $name=".example" n="0" eg="""<$let
-	timestamp-modified={{{ [{!!modified}format:date[TIMESTAMP]] }}}
-	timestamp-created={{{ [{!!created}format:date[TIMESTAMP]] }}}
-	difference-days={{{ [<timestamp-modified>subtract<timestamp-created>divide[86400000]floor[]] }}}>
+<$macrocall $name=".example" n="0" eg="""<!-- Prepare a variable, that contains a formatted date -->
+\function modified-formatted() [{!!modified}format:date[YYYY-0MM-0DD]]
 
-* ''Modified date:'' <$text text={{{ [{!!modified}format:date[YYYY-0MM-0DD]] }}}/>
+<!-- Use ms for easier calculations -->
+\function timestamp-modified() [{!!modified}format:date[TIMESTAMP]]
+\function timestamp-created() [{!!created}format:date[TIMESTAMP]]
+\function difference-days() [<timestamp-modified>subtract<timestamp-created>divide[86400000]floor[]]
+
+* ''Modified date:'' <<modified-formatted>>
 * ''Created date:'' <$text text={{{ [{!!created}format:date[YYYY-0MM-0DD]] }}}/>
 * ''Difference in days:'' <<difference-days>> days
-</$let>"""/>
+"""/>
