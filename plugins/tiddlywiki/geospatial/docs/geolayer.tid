@@ -10,6 +10,8 @@ The following attributes are supported:
 
 |!Attribute |!Description |
 |''json'' |Optional GeoJSON Feature Collection to be rendered |
+|''name'' |Optional name to be displayed for this layer |
+|''color'' |Optional CSS colour for this layer |
 |''lat'' |Optional latitude of marker if json attribute missing |
 |''long'' |Optional longitude of marker if json attribute missing |
 |''alt'' |Optional altitude of marker if json attribute missing |
