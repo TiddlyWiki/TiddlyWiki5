@@ -11,3 +11,10 @@ Each input list item is interpreted as a [[GeoJSON Polygon Feature Collection]] 
 ```
 [geounion[]]
 ```
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geounion-interactive"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
