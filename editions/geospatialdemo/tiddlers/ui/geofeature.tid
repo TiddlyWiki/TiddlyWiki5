@@ -12,6 +12,7 @@ title: ui/geofeature
 
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
+	startPosition="bounds"
 >
 	<$geolayer json={{!!text}} color={{!!color}}/>
 </$geomap>

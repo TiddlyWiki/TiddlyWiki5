@@ -65,6 +65,7 @@ title: ui/geomarker
 
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
+	startPosition="bounds"
 >
 	<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
 </$geomap>
