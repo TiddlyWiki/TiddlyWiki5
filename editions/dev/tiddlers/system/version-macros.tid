@@ -1,0 +1,14 @@
+code-body: yes
+created: 20161008085627406
+modified: 20221007122259593
+tags: $:/tags/Macro
+title: $:/editions/tw5.com/version-macros
+type: text/vnd.tiddlywiki
+
+\define .from-version(version)
+<$link to={{{ [<__version__>addprefix[Release ]] }}} class="doc-from-version">{{$:/core/images/warning}} New in: <$text text=<<__version__>>/></$link>
+\end
+
+\define .deprecated-since(version, superseded:"TODO-Link")
+<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: <$text text=<<__version__>>/></$link> (see <$link to=<<__superseded__>>><$text text=<<__superseded__>>/></$link>)
+\end
