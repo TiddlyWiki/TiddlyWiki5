@@ -62,7 +62,7 @@ CecilyStoryView.prototype.remove = function(widget) {
 		duration = $tw.utils.getAnimationDuration();
 	// Remove the widget at the end of the transition
 	setTimeout(function() {
-		widget.destroy();
+		widget.removeChildDomNodes();
 	},duration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[

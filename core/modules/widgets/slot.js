@@ -48,7 +48,7 @@ SlotWidget.prototype.execute = function() {
 	var pointer = this.parentWidget,
 		depth = this.slotDepth;
 	while(pointer) {
-		if(pointer instanceof TranscludeWidget) {
+		if(pointer instanceof TranscludeWidget && pointer.hasVisibleSlots()) {
 			depth--;
 			if(depth <= 0) {
 				break;

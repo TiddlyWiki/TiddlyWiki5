@@ -1,6 +1,6 @@
 caption: slot
 created: 20220909111836951
-modified: 20230419103154329
+modified: 20230511123922283
 tags: Widgets
 title: SlotWidget
 type: text/vnd.tiddlywiki
@@ -17,3 +17,59 @@ The content of the <<.wlink SlotWidget>> widget is used as a fallback for the sl
 
 |!Attribute |!Description |
 |$name |The name of the slot being defined |
+|$depth |Optional number indicating how deep the <<.wlink SlotWidget>> widget is compared to the matching <<.wlink FillWidget>> widget as measured by the number of nested transclude widgets (defaults to 1). Transclude widgets whose <<.attr $fillignore>> attribute is set to ''yes'' are ignored, and do not affect the depth count |
+
+! Examples
+
+!! Quoted content
+When content contains quotes, passing it through attributes and parameters can be challenging. However, passing the content using the <<.wlink FillWidget>> widget content eliminates the need to wrap it in quotes, making the process easier.
+
+<$let bold_slot='<b>
+<$slot $name="body"/>
+</b>
+'>
+
+If a variable named <<.var bold_slot>> contains the following <<.wlink SlotWidget>> definition:
+<$codeblock code={{{[[bold_slot]getvariable[]]}}}/>
+
+then the slot can be filled using this variable transclusion:
+
+<<wikitext-example-without-html src:'<$transclude $variable=bold_slot>
+<$fill $name=body>
+
+"""
+some text
+using [[Hard Linebreaks in WikiText]]
+syntax
+"""
+</$fill>
+</$transclude>
+'>>
+</$let>
+
+!! Depth
+
+<$let table_slot="|!depth|!slot1|!slot2|
+|1|<$slot $name=slot1/>|<$slot $name=slot2/>|
+|2|<$slot $name=slot1 $depth=2>missing</$slot>|<$slot $name=slot2 $depth=2>missing</$slot>|
+"
+table_fill="""<$transclude $variable=table_slot  $mode=block>
+  <$fill $name=slot1>outer1</$fill>
+  <$fill $name=slot2>outer2
+    <$transclude $variable=table_slot $mode=block>
+      <$fill $name=slot1>inner1</$fill>
+      <$fill $name=slot2>inner2</$fill>
+    </$transclude>
+  </$fill>
+</$transclude>
+""">
+
+If a variable named <<.var table_slot>> contains the following <<.wlink SlotWidget>> definition:
+
+<$codeblock code={{{[[table_slot]getvariable[]]}}}/>
+
+then the slot values can be filled at different transclusion depths:
+
+<$transclude $variable="wikitext-example-without-html" src=<<table_fill>>/>
+
+The <<.var slot1>> slot is filled at both depths with a simple string (outer1 and outer2). For <<.var slot2>>, the outer instance is a simple string but the inner instance recursively transcludes the same <<.var table_slot>> variable again. The recursion ends at the third transclusion call since both "inner" slots are filled with simple strings.

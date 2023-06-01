@@ -80,7 +80,7 @@ StackedListView.prototype.insert = function(widget) {
 };
 
 StackedListView.prototype.remove = function(widget) {
-	widget.destroy();
+	widget.removeChildDomNodes();
 };
 
 exports.stacked = StackedListView;

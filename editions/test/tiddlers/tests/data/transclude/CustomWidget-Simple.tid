@@ -12,21 +12,21 @@ title: Output
 title: TiddlerOne
 
 \whitespace trim
-<!-- Define the <$$mywidget> widget by defining a transcludable variable with that name -->
-\widget $$mywidget(one:'Jaguar')
+<!-- Define the <$my.widget> widget by defining a transcludable variable with that name -->
+\widget $my.widget(one:'Jaguar')
 \whitespace trim
 <$text text=<<one>>/>
 <$slot $name="ts-raw">
 	Whale
 </$slot>
 \end
-<$$mywidget one="Dingo">
+<$my.widget one="Dingo">
 	Crocodile
-</$$mywidget>
-<$$mywidget one="BumbleBee">
+</$my.widget>
+<$my.widget one="BumbleBee">
 	Squirrel
-</$$mywidget>
-<$$mywidget/>
+</$my.widget>
+<$my.widget/>
 +
 title: ExpectedResult
 
