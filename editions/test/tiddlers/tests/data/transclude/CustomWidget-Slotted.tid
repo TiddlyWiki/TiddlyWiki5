@@ -6,21 +6,21 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\widget $$mywidget(one:'Jaguar')
+\widget $my.widget(one:'Jaguar')
 \whitespace trim
 <$text text=<<one>>/>
 <$slot $name="ts-stuff">
 	Whale
 </$slot>
 \end
-<$$mywidget one="Dingo">
+<$my.widget one="Dingo">
 	<$fill $name="ts-stuff">
 		Crocodile
 	</$fill>
-</$$mywidget>
-<$$mywidget one="BumbleBee">
+</$my.widget>
+<$my.widget one="BumbleBee">
 	Squirrel
-</$$mywidget>
+</$my.widget>
 +
 title: ExpectedResult
 

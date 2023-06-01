@@ -21,7 +21,7 @@ Export our filter function
 */
 exports["[unknown]"] = function(source,operator,options) {
 	// Check for a user defined filter operator
-	if(operator.operator.charAt(0) === ".") {
+	if(operator.operator.indexOf(".") !== -1) {
 		var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator);
 		if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
 			var list = options.widget.evaluateVariable(operator.operator,{params: operator.operands, source: source});

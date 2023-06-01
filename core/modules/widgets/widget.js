@@ -546,8 +546,8 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var variableDefinitionName = "$" + parseTreeNode.type;
 	if(this.variables[variableDefinitionName]) {
 		var isOverrideable = function() {
-				// Widget is overrideable if it has a double dollar user defined name, or if it is an existing JS widget and we're not in safe mode
-				return parseTreeNode.type.charAt(0) === "$" || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
+				// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
+				return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
 			};
 		if(!parseTreeNode.isNotRemappable && isOverrideable()) { 
 			var variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true});
