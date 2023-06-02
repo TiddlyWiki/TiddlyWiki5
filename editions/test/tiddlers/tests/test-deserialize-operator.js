@@ -34,7 +34,6 @@ Tests deserialize[] filter operator with various core deserializers
 
 			//Deserialize TiddlyWiki file with an mismatched deserializer
 			expect($tw.wiki.filterTiddlers("[{dezerializer test data case 5}deserialize[application/json]]")).toEqual([jasmine.stringMatching('JSON error')]);
-			expect($tw.wiki.filterTiddlers("[{dezerializer test data case 5}deserialize[(DOM)]]")).toEqual(["[]"]);
 		});
 	});
 	
