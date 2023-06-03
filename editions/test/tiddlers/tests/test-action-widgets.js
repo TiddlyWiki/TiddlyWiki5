@@ -26,13 +26,15 @@ function setupWiki(wikiOptions) {
 	}];
 	wiki.addTiddlers(tiddlers);
 	wiki.addIndexersToWiki();
-	var widgetNode = wiki.makeTranscludeWidget("Root",{document: $tw.fakeDocument, parseAsInline: true});
+	var widget = require("$:/core/modules/widgets/widget.js");
+	var widgetNode = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },{ wiki:wiki, document:$tw.fakeDocument});
+	widgetNode.makeChildWidgets();
 	var container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
 	return {
 		wiki: wiki,
 		widgetNode: widgetNode,
-		contaienr: container
+		container: container
 	};
 }
 
@@ -90,6 +92,39 @@ it("should handle the action-listops widget", function() {
 	expect(info.wiki.getTiddlerText("Output")).toBe("Elephants! -3");
 	invokeActions("<$action-listops  $tiddler='Output' $field='text' $subfilter='+[toggle[-3]]'/>");
 	expect(info.wiki.getTiddlerText("Output")).toBe("Elephants!");
+});
+
+it("should handle the action-addtiddlers widget", function() {
+	var info = setupWiki();
+	var anchorWidget = info.widgetNode.children[0];
+	var invokeActions = function(actions) {
+		anchorWidget.invokeActionString(actions,anchorWidget,null,{});
+	};
+	//valid JSON containing an array with tiddlers
+	var jsonData = `[{"title":"Test Me","text":"This is a test"},{"title":"Hello \\"There\\"","text":"Calculator"},{"title":"Hello \\"There\\"","text":"Protractor"}]`;
+	info.widgetNode.setVariable("jsonData",jsonData);
+	invokeActions("<$action-addtiddlers $json=<<jsonData>>/>");
+	expect(info.wiki.getTiddlerText("Test Me")).toBe("This is a test");
+	expect(info.wiki.getTiddlerText('Hello "There"')).toBe("Protractor");
+	expect(info.wiki.filterTiddlers(`[[Test Me]] [[Hello "There"]] :and[is[tiddler]]`).join(",")).toBe("Test Me,Hello \"There\"");
+
+	//valid JSON containing representation of a tiddler without an array
+	var jsonDataNoArray = `{"title":"TestNoArray","text":"no array"}`;
+	info.widgetNode.setVariable("jsonDataNoArray",jsonDataNoArray);
+	invokeActions("<$action-addtiddlers $json=<<jsonDataNoArray>>/>");
+	expect(info.wiki.getTiddlerText("TestNoArray")).toBe("no array");
+
+	//valid JSON empty array
+	var jsonDataEmptyArray = `[]`;
+	info.widgetNode.setVariable("jsonDataEmptyArray",jsonDataEmptyArray);
+	expect(function(){invokeActions("<$action-addtiddlers $json=<<jsonDataEmptyArray>>/>")}).not.toThrow();
+
+	//invalid JSON
+	var jsonDataInvalid = `"John says "Hello!""`;
+	info.widgetNode.setVariable("jsonDataInvalid",jsonDataInvalid);
+	expect(function(){invokeActions("<$action-addtiddlers $json=<<jsonDataInvalid>>/>")}).not.toThrow();
+	expect(info.wiki.filterTiddlers("[prefix[JSON error]count[]]").join(",")).toBe("1");
+
 });
 
 });
