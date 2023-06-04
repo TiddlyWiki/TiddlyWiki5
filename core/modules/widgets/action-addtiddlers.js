@@ -56,10 +56,8 @@ Invoke the action associated with this widget
 AddTiddlersWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var  self = this,
 		importData = $tw.utils.parseJSONSafe(this.JSONData,function(err) {
-			return [{
-				title: "JSON error: " + err,
-				text: ""
-			}];
+			console.log("JSON error: " + err);
+			return [];
 		});
 	if(!$tw.utils.isArray(importData)) {
 		importData = [importData];

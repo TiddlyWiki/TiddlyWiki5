@@ -123,8 +123,6 @@ it("should handle the action-addtiddlers widget", function() {
 	var jsonDataInvalid = `"John says "Hello!""`;
 	info.widgetNode.setVariable("jsonDataInvalid",jsonDataInvalid);
 	expect(function(){invokeActions("<$action-addtiddlers $json=<<jsonDataInvalid>>/>")}).not.toThrow();
-	expect(info.wiki.filterTiddlers("[prefix[JSON error]count[]]").join(",")).toBe("1");
-
 });
 
 });
