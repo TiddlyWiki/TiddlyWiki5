@@ -40,7 +40,7 @@ $tw.Wiki = function(options) {
     indexers = [],
     indexersByName = Object.create(null);
     //$tw.utils replacements
-    var each = function(object,callback) {
+    var eachObj = function(object,callback) {
         var next,f,length;
         if(object) {
             if(Object.prototype.toString.call(object) == "[object Array]") {
@@ -139,7 +139,7 @@ $tw.Wiki = function(options) {
 				// Update indexes
 				this.clearCache(title);
 				this.clearGlobalCache();
-				each(indexers,function(indexer) {
+				eachObj(indexers,function(indexer) {
 					indexer.update(updateDescriptor);
 				});
 				// Queue a change event
@@ -150,8 +150,8 @@ $tw.Wiki = function(options) {
 
 	// Delete a tiddler
 	this.deleteTiddler = function(title) {
-// Uncomment the following line for detailed logs of all tiddler deletions
-// console.log("Deleting",title)
+        // Uncomment the following line for detailed logs of all tiddler deletions
+        // console.log("Deleting",title)
 		if(hop(tiddlers,title)) {
 			// Record the old tiddler state
 			var updateDescriptor = {
@@ -179,7 +179,7 @@ $tw.Wiki = function(options) {
 			// Update indexes
 			this.clearCache(title);
 			this.clearGlobalCache();
-			each(indexers,function(indexer) {
+			eachObj(indexers,function(indexer) {
 				indexer.update(updateDescriptor);
 			});
 			// Queue a change event
@@ -296,7 +296,7 @@ $tw.Wiki = function(options) {
 	// Get an array of all the currently recognised plugin types
 	this.getPluginTypes = function() {
 		var types = [];
-		each(pluginTiddlers,function(pluginTiddler) {
+		eachObj(pluginTiddlers,function(pluginTiddler) {
 			var pluginType = pluginTiddler.fields["plugin-type"];
 			if(pluginType && types.indexOf(pluginType) === -1) {
 				types.push(pluginType);
@@ -311,7 +311,7 @@ $tw.Wiki = function(options) {
 			modifiedPlugins: [],
 			deletedPlugins: []
 		};
-		each(titles || getTiddlerTitles(),function(title) {
+		eachObj(titles || getTiddlerTitles(),function(title) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
@@ -348,7 +348,7 @@ $tw.Wiki = function(options) {
 				}
 			};
 		if(titles) {
-			each(titles,function(title) {
+			eachObj(titles,function(title) {
 				checkTiddler(self.getTiddler(title),title);
 			});
 		} else {
@@ -395,10 +395,10 @@ $tw.Wiki = function(options) {
 		});
 		// Now go through the plugins in ascending order and assign the shadows
 		shadowTiddlers = Object.create(null);
-		each(pluginTiddlers,function(tiddler) {
+		eachObj(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
 			if(hop(pluginInfo,tiddler.fields.title)) {
-				each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+				eachObj(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
 					// Save the tiddler object
 					if(constituentTitle) {
 						shadowTiddlers[constituentTitle] = {
@@ -412,7 +412,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null;
 		this.clearCache(null);
 		this.clearGlobalCache();
-		each(indexers,function(indexer) {
+		eachObj(indexers,function(indexer) {
 			indexer.rebuild();
 		});
 	};
