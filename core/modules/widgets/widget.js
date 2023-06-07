@@ -375,6 +375,7 @@ Widget.prototype.evaluateVariable = function(name,options) {
 
 
 Widget.prototype.getSubstitutedText = function(text,options) {
+	options = options || {};
 	var self = this,
 		widget = self.makeFakeWidgetWithVariables(options.variables),
 		output = text.replace(/(?:\$\{([\S\s]+?)\}\$)|(?:\$\((\w+)\)\$)/g, function(match,filter,varname) {
@@ -428,8 +429,7 @@ Widget.prototype.computeAttribute = function(attribute) {
 			value = variableInfo.text;
 		}
 	} else if(attribute.type === "substituted") {
-		//value = this.wiki.getSubstitutedString(attribute.rawValue,this);
-		value = this.wiki.filterTiddlers("[all[]substitute[]]",this,this.wiki.makeTiddlerIterator([attribute.rawValue]));
+		value = this.getSubstitutedText(attribute.rawValue);
 	} else { // String attribute
 		value = attribute.value;
 	}
