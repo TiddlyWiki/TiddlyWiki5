@@ -373,6 +373,20 @@ Widget.prototype.evaluateVariable = function(name,options) {
 	}
 };
 
+
+Widget.prototype.getSubstitutedText = function(text,options) {
+	var self = this,
+		widget = self.makeFakeWidgetWithVariables(options.variables),
+		output = text.replace(/(?:\$\{([\S\s]+?)\}\$)|(?:\$\((\w+)\)\$)/g, function(match,filter,varname) {
+		if(!!filter) {
+			return self.wiki.filterTiddlers(filter,this)[0] || "";
+		} else if(!!varname) {
+			return widget.getVariable(varname,{defaultValue: ""})
+		}
+	})
+	return output;	
+};
+
 /*
 Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed.
 Options include:
@@ -413,6 +427,9 @@ Widget.prototype.computeAttribute = function(attribute) {
 		} else {
 			value = variableInfo.text;
 		}
+	} else if(attribute.type === "substituted") {
+		//value = this.wiki.getSubstitutedString(attribute.rawValue,this);
+		value = this.wiki.filterTiddlers("[all[]substitute[]]",this,this.wiki.makeTiddlerIterator([attribute.rawValue]));
 	} else { // String attribute
 		value = attribute.value;
 	}

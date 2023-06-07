@@ -1,0 +1,38 @@
+/*\
+title: $:/core/modules/filters/substitute.js
+type: application/javascript
+module-type: filteroperator
+
+Filter operator for substituting variables and embedded filter expressions with their corresponding values
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+
+/*
+Export our filter function
+*/
+exports.substitute = function(source,operator,options) {
+	var results = [],
+		operands = Object.create(null);
+	$tw.utils.each(operator.operands,function(operand,index){
+		operands[(index + 1).toString()] = operand;
+	});
+	source(function(tiddler,title) {
+		if(title) {
+			results.push(options.widget.getSubstitutedText(title,{variables:operands}));
+		}
+	});
+	return results;
+};
+
+})();
+
+/*
+Questions:
+	variable names for operands, just numeric or prefix with parameter, eg parameter1
+
+*/
