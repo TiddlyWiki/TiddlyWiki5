@@ -1,4 +1,5 @@
 title: $:/core/ui/SearchResults
+explicitState: $:/state/tab/search-results/sidebar
 
 <div class="tc-search-results">
 
@@ -10,7 +11,7 @@ title: $:/core/ui/SearchResults
 	tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"
 	default={{$:/config/SearchResults/Default}}
 	actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<currentTab>>/>"
-	explicitState="$:/state/tab/search-results/sidebar"/>
+	explicitState=<<getExplicitState>>/>
 
 </$list>
 

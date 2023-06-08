@@ -1,8 +1,8 @@
 title: $:/core/ui/MoreSideBar/Plugins
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/ControlPanel/Plugins/Caption}}
-
+explicitState: $:/state/tab-1163638994
 
 {{$:/language/ControlPanel/Plugins/Installed/Hint}}
 
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/MoreSideBar/Plugins]!has[draft.of]]" default="$:/core/ui/MoreSideBar/Plugins/Plugins" explicitState="$:/state/tab-1163638994"/>
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/MoreSideBar/Plugins]!has[draft.of]]" default="$:/core/ui/MoreSideBar/Plugins/Plugins" explicitState=<<getExplicitState>>/>

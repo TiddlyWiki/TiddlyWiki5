@@ -1,0 +1,4 @@
+title: $:/core/macros/functions
+tags: $:/tags/Global
+
+\function getExplicitState() [<currentTab>get[explicitState]] ~[<currentTiddler>get[explicitState]] ~[<thisTiddler>get[explicitState]]

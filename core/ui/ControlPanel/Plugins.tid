@@ -1,6 +1,7 @@
 title: $:/core/ui/ControlPanel/Plugins
 tags: $:/tags/ControlPanel
 caption: {{$:/language/ControlPanel/Plugins/Caption}}
+explicitState: $:/state/tab--86143343
 
 \define lingo-base() $:/language/ControlPanel/Plugins/
 
@@ -17,4 +18,4 @@ caption: {{$:/language/ControlPanel/Plugins/Caption}}
 
 <<lingo Installed/Hint>>
 
-<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Plugins]!has[draft.of]]" default="$:/core/ui/ControlPanel/Plugins/Installed/Plugins" explicitState="$:/state/tab--86143343"/>
+<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Plugins]!has[draft.of]]" default="$:/core/ui/ControlPanel/Plugins/Installed/Plugins" explicitState=<<getExplicitState>>/>
