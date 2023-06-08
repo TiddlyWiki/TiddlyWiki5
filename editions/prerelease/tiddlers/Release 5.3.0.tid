@@ -30,6 +30,10 @@ These changes lay the groundwork for macros and related features to be deprecate
 
 The new transclusion architecture is not by itself sufficient to enable us to fully deprecate macros yet. To handle the remaining use cases we propose a new backtick quoted attribute format that allows for the substitution of variable values. See https://github.com/Jermolene/TiddlyWiki5/issues/6663 for details.
 
+! Defaulting to Disabling CamelCase Links
+
+<<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/7513">> CamelCase linking is now disabled by default. (Note that this wiki has CamelCase linking explicitly enabled)
+
 ! Plugin Improvements
 
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7260">> Dynannotate pugin to support three additional search modes
