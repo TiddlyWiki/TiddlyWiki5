@@ -34,6 +34,7 @@ The new transclusion architecture is not by itself sufficient to enable us to fu
 
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7260">> Dynannotate pugin to support three additional search modes
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7365">> problem with [[BrowserStorage Plugin]] unnecessarily saving shadow tiddlers
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7493">> [[CodeMirror Plugin]] to add an option to make trailing spaces visible
 
 ! Translation improvement
 
@@ -55,7 +56,9 @@ Improvements to the following translations:
 
 ! Filter improvements
 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7511"> new [[deserialize Operator]] for converting various textual representations of tiddlers into JSON data
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7292">> [[format Operator]] to support converting Unix timestamps to TiddlyWiki's native date format
+
 
 ! Hackability Improvements
 
@@ -73,6 +76,10 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7401">> bug whereby scrolling occurs if the linkcatcher widget triggers an action-navigate and the $scroll attribute is set to "no"
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7409">> problem switching between LTR and RTL text
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7448">> bug when checkbox widget's listField attribute was given the name of a date field (like <<.field created>> or <<.field modified>>)
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7529">> size of buttons in dropdown for editor "link" toolbar button
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8e132948b6bec623d81d300fbe6dc3a0307bcc6d">> crash when transcluding a lazily loaded tiddler as an attribute value
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7462">> DiffTextWidget crash with missing or empty attributes
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7448">> CheckboxWidget to avoid writing to date fields
 
 ! Developer Improvements
 
@@ -80,7 +87,9 @@ Improvements to the following translations:
 
 ! Node.js Improvements
 
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7471">> [[WebServer Parameter: authenticated-user-header]] to require URI encoding of authenticated username header, permitting non-ASCII characters in usernames
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7253">> support for `filepath` source attribute to [[tiddlywiki.files Files]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/48b22abdaab62c281c207127c66883b50898f9dd">> a warning message for JSON errors in [[tiddlywiki.info Files]] or [[plugin.info Files|PluginFolders]]
 
 ! Performance Improvements
 
@@ -92,17 +101,22 @@ Improvements to the following translations:
 
 <<.contributors """
 Arlen22
+BramChen
 btheado
 donmor
 flibbles
 GameDungeon
+JoshuaFontany
 kookma
 linonetwo
 Marxsal
+mateuszwilczek
 michsa
 muzimuzhi
 pmario
 rmunn
 saqimtiaz
+tavin
+twMat
 yaisog
 """>>
