@@ -796,6 +796,20 @@ Widget.prototype.allowActionPropagation = function() {
 	return true;
 };
 
+/*
+Evaluate a variable with parameters. This is a static convenience method that attempts to evaluate a variable as a function, returning an array of strings
+*/
+Widget.evaluateVariable  = function(widget,name,options) {
+	var result;
+	if(widget.getVariableInfo) {
+		var variableInfo = widget.getVariableInfo(name,options);
+		result = variableInfo.resultList || [variableInfo.text];
+	} else {
+		result = [widget.getVariable(name)];
+	}
+	return result;
+};
+
 exports.widget = Widget;
 
 })();
