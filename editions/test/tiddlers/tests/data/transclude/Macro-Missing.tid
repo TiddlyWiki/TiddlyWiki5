@@ -1,0 +1,40 @@
+title: Transclude/Macro/Missing
+description: Transcluding a missing or blank variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$macrocall $name="missingmacro">
+Fallback content
+</$macrocall>
+
+<$transclude $variable="missingmacro">
+Fallback content
+</$transclude>
+
+<$macrocall $name="">
+Fallback content
+</$macrocall>
+
+<$transclude $variable="">
+Fallback content
+</$transclude>
+
+<$let emptyVariable="">
+
+<$macrocall $name="emptyVariable">
+Fallback content
+</$macrocall>
+
+<$transclude $variable="emptyVariable">
+Fallback content
+</$transclude>
+
+</$let>
+
++
+title: ExpectedResult
+
+<p>Fallback content</p><p>Fallback content</p><p>Fallback content</p><p>Fallback content</p><p>Fallback content</p><p>Fallback content</p>

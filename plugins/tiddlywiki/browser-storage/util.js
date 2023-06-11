@@ -53,24 +53,31 @@ BrowserStorageUtil.prototype.saveTiddlerToLocalStorage = function(title) {
     // Get the tiddler
     var tiddler = $tw.wiki.getTiddler(title);
     if(tiddler) {
-        console.log("browser-storage: Saving",title);
-        // Get the JSON of the tiddler				
-        var json = JSON.stringify(tiddler.getFieldStrings());
-        // Try to save it to local storage
-        try {
-            window.localStorage.setItem(this.options.prefix + title,json);
-        } catch(e) {
-            if(e.name === "QuotaExceededError") {
-                // Complain if we failed
-                var msg = $tw.wiki.getTiddlerText(this.QUOTA_EXCEEDED_ALERT_TITLE,this.DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + this.DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
-                if(this.options.logger) {
-                    this.options.logger.alert(msg);
+        if (this.wiki.tiddlerExists(title)) {
+            // This is not a shadow tiddler
+            console.log("browser-storage: Saving",title);
+            // Get the JSON of the tiddler
+            var json = JSON.stringify(tiddler.getFieldStrings());
+            // Try to save it to local storage
+            try {
+                window.localStorage.setItem(this.options.prefix + title,json);
+            } catch(e) {
+                if(e.name === "QuotaExceededError") {
+                    // Complain if we failed
+                    var msg = $tw.wiki.getTiddlerText(this.QUOTA_EXCEEDED_ALERT_TITLE,this.DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + this.DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
+                    if(this.options.logger) {
+                        this.options.logger.alert(msg);
+                    }
+                    // No point in keeping old values around for this tiddler
+                    window.localStorage.removeItem(this.options.prefix + title);
+                } else {
+                    console.log("Browser-storage error:",e);
                 }
-                // No point in keeping old values around for this tiddler
-                window.localStorage.removeItem(this.options.prefix + title);
-            } else {
-                console.log("Browser-storage error:",e);
             }
+        } else {
+            // Shadow tiddler which is no longer overwritten (or never was)
+            // Ensure it is not in local storage
+            this.removeTiddlerFromLocalStorage(title);
         }
     } else {
         // In local storage, use the special value of empty string to mark the tiddler as deleted

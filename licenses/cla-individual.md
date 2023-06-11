@@ -529,3 +529,7 @@ HuanC Fu, @hffqyd, 2023/03/03
 Michelle Saad, @michsa, 2023-03-08
 
 Yukai Chou, @muzimuzhi, 2023-04-07
+
+Carmine Guida, @carmineguida, 2023-05-17
+
+Tavin Cole, @tavin, 2023/05/25

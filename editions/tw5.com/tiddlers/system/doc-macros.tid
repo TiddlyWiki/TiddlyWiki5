@@ -134,7 +134,11 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 	</dl>
 	<blockquote class="doc-example-result">
 	<$reveal default="$egvar$" type="match" text="NO-SUCH-VAR">
-		$eg$
+
+$$$text/vnd.tiddlywiki
+$eg$
+$$$
+
 	</$reveal>
 	<$reveal default="$egvar$" type="nomatch" text="NO-SUCH-VAR">
 		<<$egvar$>>

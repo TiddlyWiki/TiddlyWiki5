@@ -45,7 +45,7 @@ TranscludeWidget.prototype.execute = function() {
 	var target = this.getTransclusionTarget(),
 		parseTreeNodes = target.parseTreeNodes;
 	this.sourceText = target.text;
-	this.sourceType = target.type;
+	this.parserType = target.type;
 	this.parseAsInline = target.parseAsInline;
 	// Process the transclusion according to the output type
 	switch(this.transcludeOutput || "text/html") {
@@ -58,7 +58,7 @@ TranscludeWidget.prototype.execute = function() {
 			break;
 		default:
 			// text/plain
-			var plainText = this.wiki.renderText("text/plain",this.sourceType,this.sourceText,{parentWidget: this});
+			var plainText = this.wiki.renderText("text/plain",this.parserType,this.sourceText,{parentWidget: this});
 			parseTreeNodes = [{type: "text", text: plainText}];
 			break;
 	}
@@ -171,99 +171,86 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	}
 	var parser;
 	// Get the parse tree
-	if(this.transcludeVariable) {
-		// Transcluding a variable
-		var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()}),
-			srcVariable = variableInfo && variableInfo.srcVariable;
-		if(srcVariable) {
-			if(srcVariable.isFunctionDefinition) {
-				// Function to return parameters by name or position
-				var fnGetParam = function(name,index) {
-						// Parameter names starting with dollar must be escaped to double dollars
-						if(name.charAt(0) === "$") {
-							name = "$" + name;
-						}
-						// Look for the parameter by name
-						if(self.hasAttribute(name)) {
-							return self.getAttribute(name);
-						// Look for the parameter by index
-						} else if(self.hasAttribute(index + "")) {
-							return self.getAttribute(index + "");
-						} else {
-							return undefined;
-						}
-					},
-					result = this.evaluateVariable(this.transcludeVariable,{params: fnGetParam})[0] || "";
-				parser = {
-					tree: [{
-						type: "text",
-						text: result
-					}],
-					source: result,
-					type: "text/vnd.tiddlywiki"
-				};
-				if(parseAsInline) {
-					parser.tree[0] = {
-						type: "text",
-						text: result
-					};
-				} else {
-					parser.tree[0] = {
-						type: "element",
-						tag: "p",
-						children: [{
+	if(this.hasAttribute("$variable")) {
+		if(this.transcludeVariable) {
+			// Transcluding a variable
+			var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()}),
+				srcVariable = variableInfo && variableInfo.srcVariable;
+			if(variableInfo.text) {
+				if(srcVariable.isFunctionDefinition) {
+					// Function to return parameters by name or position
+					var result = (variableInfo.resultList ? variableInfo.resultList[0] : variableInfo.text) || "";
+					parser = {
+						tree: [{
 							type: "text",
 							text: result
-						}]
-					}
-				}
-			} else {
-				var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
-				if(variableInfo.isCacheable && srcVariable[cacheKey]) {
-					parser = srcVariable[cacheKey];
-				} else {
-					parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
-					if(variableInfo.isCacheable) {
-						srcVariable[cacheKey] = parser;
-					}
-				}
-			}
-			if(parser) {
-				// Add parameters widget for procedures and custom widgets
-				if(srcVariable.isProcedureDefinition || srcVariable.isWidgetDefinition) {
-					parser = {
-						tree: [
-							{
-								type: "parameters",
-								children: parser.tree
-							}
-						],
-						source: parser.source,
-						type: parser.type
-					}
-					$tw.utils.each(srcVariable.params,function(param) {
-						var name = param.name;
-						// Parameter names starting with dollar must be escaped to double dollars
-						if(name.charAt(0) === "$") {
-							name = "$" + name;
+						}],
+						source: result,
+						type: "text/vnd.tiddlywiki"
+					};
+					if(parseAsInline) {
+						parser.tree[0] = {
+							type: "text",
+							text: result
+						};
+					} else {
+						parser.tree[0] = {
+							type: "element",
+							tag: "p",
+							children: [{
+								type: "text",
+								text: result
+							}]
 						}
-						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
-					});
-				} else {
-					// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
-					parser = {
-						tree: [
-							{
-								type: "vars",
-								children: parser.tree
-							}
-						],
-						source: parser.source,
-						type: parser.type
 					}
-					$tw.utils.each(variableInfo.params,function(param) {
-						$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value)
-					});
+				} else {
+					var cacheKey = (parseAsInline ? "inlineParser" : "blockParser") + (this.transcludeType || "");
+					if(variableInfo.isCacheable && srcVariable[cacheKey]) {
+						parser = srcVariable[cacheKey];
+					} else {
+						parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
+						if(variableInfo.isCacheable) {
+							srcVariable[cacheKey] = parser;
+						}
+					}
+				}
+				if(parser) {
+					// Add parameters widget for procedures and custom widgets
+					if(srcVariable.isProcedureDefinition || srcVariable.isWidgetDefinition) {
+						parser = {
+							tree: [
+								{
+									type: "parameters",
+									children: parser.tree
+								}
+							],
+							source: parser.source,
+							type: parser.type
+						}
+						$tw.utils.each(srcVariable.params,function(param) {
+							var name = param.name;
+							// Parameter names starting with dollar must be escaped to double dollars
+							if(name.charAt(0) === "$") {
+								name = "$" + name;
+							}
+							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
+						});
+					} else {
+						// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
+						parser = {
+							tree: [
+								{
+									type: "vars",
+									children: parser.tree
+								}
+							],
+							source: parser.source,
+							type: parser.type
+						}
+						$tw.utils.each(variableInfo.params,function(param) {
+							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],"__" + param.name + "__",param.value)
+						});
+					}
 				}
 			}
 		}
@@ -279,6 +266,8 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							defaultType: this.transcludeType
 						});
 	}
+	// Set 'thisTiddler'
+	this.setVariable("thisTiddler",this.transcludeTitle);
 	// Return the parse tree
 	if(parser) {
 		return {
@@ -379,6 +368,13 @@ TranscludeWidget.prototype.getTransclusionSlotFill = function(name,defaultParseT
 		return defaultParseTreeNodes || [];
 	}
 };
+
+/*
+Return whether this transclusion should be visible to the slot widget
+*/
+TranscludeWidget.prototype.hasVisibleSlots = function() {
+	return this.getAttribute("$fillignore","no") === "no";
+}
 
 /*
 Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection

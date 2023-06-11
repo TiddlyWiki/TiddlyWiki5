@@ -1388,6 +1388,11 @@ html body.tc-body.tc-single-tiddler-window {
 	height: 1.2em;
 }
 
+.tc-editor-toolbar .tc-drop-down a,
+.tc-editor-toolbar .tc-drop-down button {
+	padding: 0;
+}
+
 .tc-editor-toolbar button:hover {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour background>>;
@@ -3116,6 +3121,30 @@ html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-ind
 select {
 	color: <<colour select-tag-foreground>>;
 	background: <<colour select-tag-background>>;
+}
+
+/*
+** Translink macro
+*/
+
+.tc-translink {
+	background-color: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
+	padding: 0 3px;
+	border-radius: 3px;
+}
+
+div.tc-translink > div {
+	margin: 1em;
+}
+
+div.tc-translink > div > a:first-child > h1 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+span.tc-translink > a:first-child {
+	font-weight: bold;
 }
 
 /*

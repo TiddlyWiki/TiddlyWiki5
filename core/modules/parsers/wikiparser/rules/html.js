@@ -78,7 +78,7 @@ exports.parseTag = function(source,pos,options) {
 			orderedAttributes: []
 		};
 	// Define our regexps
-	var reTagName = /([a-zA-Z0-9\-\$]+)/g;
+	var reTagName = /([a-zA-Z0-9\-\$\.]+)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a less than sign
@@ -138,7 +138,7 @@ exports.parseTag = function(source,pos,options) {
 
 exports.findNextTag = function(source,pos,options) {
 	// A regexp for finding candidate HTML tags
-	var reLookahead = /<([a-zA-Z\-\$]+)/g;
+	var reLookahead = /<([a-zA-Z\-\$\.]+)/g;
 	// Find the next candidate
 	reLookahead.lastIndex = pos;
 	var match = reLookahead.exec(source);

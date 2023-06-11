@@ -30,15 +30,15 @@ Block transclusions are shown in red, and inline transclusions are shown in gree
 				<!-- Look for a parameter starting with $ to determine if we are in legacy mode -->
 				<$list filter="[<@params>jsonindexes[]] :filter[<currentTiddler>prefix[$]] +[limit[1]]" variable="ignore" emptyMessage="""
 					<!-- Legacy mode: we render the transclusion without a dollar sign for recursionMarker and mode -->
-					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" recursionMarker="no" mode=<<mode>>>
+					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" recursionMarker="no" mode=<<mode>> $$fillignore="yes">
 						<!-- Reach back up to the grandparent transclusion to get the correct slot value -->
-						<$slot $name="ts-raw" $depth="2"/>
+						<$slot $name="ts-raw"/>
 					</$genesis>
 				""">
 					<!-- Non-legacy mode: we use dollar signs for the recursionMarker and mode -->
-					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" $$recursionMarker="no" $$mode=<<mode>>>
+					<$genesis $type="$transclude" $remappable="no" $names="[<@params>jsonindexes[]]" $values="[<@params>jsonindexes[]] :map[<@params>jsonget<currentTiddler>]" $$recursionMarker="no" $$mode=<<mode>> $$fillignore="yes">
 						<!-- Reach back up to the grandparent transclusion to get the correct slot fill value -->
-						<$slot $name="ts-raw" $depth="2"/>
+						<$slot $name="ts-raw"/>
 					</$genesis>
 				</$list>
 			</$genesis>

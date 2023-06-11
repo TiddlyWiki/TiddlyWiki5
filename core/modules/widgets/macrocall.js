@@ -51,7 +51,8 @@ MacroCallWidget.prototype.execute = function() {
 	var positionalName = 0,
 		parseTreeNodes = [{
 			type: "transclude",
-			isBlock: this.parseTreeNode.isBlock
+			isBlock: this.parseTreeNode.isBlock,
+			children: this.parseTreeNode.children
 		}];
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$variable",this.macroName);
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"$type",this.parseType);

@@ -36,7 +36,7 @@ The initial startup actions are useful for customising TiddlyWiki according to e
 Note that global macros are not available within initial startup action tiddlers by default. If you need to access them then you'll need to explicitly include them with an [[Pragma: \import]] at the top of the tiddler:
 
 ```
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 ```
 
 !! Post-Render Startup Actions
