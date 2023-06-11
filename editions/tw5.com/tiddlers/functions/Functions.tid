@@ -21,7 +21,7 @@ Functions can be invoked in several ways:
 * Directly transclude functions with the syntax `<<myfn param:"value">>`
 * Assign functions to widget attributes with the syntax `<div class=<<myfn param:"value">>>`
 * Invoke functions via the [[function Operator]] with the syntax `[function[myfn],[value],...]`
-* Directly invoke functions whose names start with a period as custom filter operators with the syntax `[.myfn[value]]`
+* Directly invoke functions whose names contain a period as custom filter operators with the syntax `[my.fn[value]]` or `[.myfn[value]]`
 
 !! How Functions Work
 

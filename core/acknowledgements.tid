@@ -3,7 +3,7 @@ title: $:/Acknowledgements
 TiddlyWiki incorporates code from these fine OpenSource projects:
 
 * [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
-* [[The Jasmine JavaScript Test Framework|http://pivotal.github.io/jasmine/]]
+* [[The Jasmine JavaScript Test Framework|https://jasmine.github.io/]]
 * [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
 
 And media from these projects:

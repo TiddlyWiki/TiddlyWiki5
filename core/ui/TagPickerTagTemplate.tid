@@ -15,7 +15,7 @@ title: $:/core/ui/TagPickerTagTemplate
 <<actions>>
 <$set name="backgroundColor" value={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}>
 <$wikify name="foregroundColor" text="""<$macrocall $name="contrastcolour" target=<<backgroundColor>> fallbackTarget=<<fallbackTarget>> colourA=<<colourA>> colourB=<<colourB>>/>""">
-<span class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>>>
+<span class="tc-tag-label tc-btn-invisible" style=<<tag-pill-styles>> data-tag-title=<<currentTiddler>> >
 {{||$:/core/ui/TiddlerIcon}}<$view field="title" format="text"/>
 </span>
 </$wikify>

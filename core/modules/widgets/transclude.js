@@ -179,22 +179,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 			if(variableInfo.text) {
 				if(srcVariable.isFunctionDefinition) {
 					// Function to return parameters by name or position
-					var fnGetParam = function(name,index) {
-							// Parameter names starting with dollar must be escaped to double dollars
-							if(name.charAt(0) === "$") {
-								name = "$" + name;
-							}
-							// Look for the parameter by name
-							if(self.hasAttribute(name)) {
-								return self.getAttribute(name);
-							// Look for the parameter by index
-							} else if(self.hasAttribute(index + "")) {
-								return self.getAttribute(index + "");
-							} else {
-								return undefined;
-							}
-						},
-						result = this.evaluateVariable(this.transcludeVariable,{params: fnGetParam})[0] || "";
+					var result = (variableInfo.resultList ? variableInfo.resultList[0] : variableInfo.text) || "";
 					parser = {
 						tree: [{
 							type: "text",
