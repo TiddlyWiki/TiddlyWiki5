@@ -1,9 +1,8 @@
-title: Settings
-tags: $:/tags/GeospatialDemo
+title: $:/plugins/tiddlywiki/geospatial/settings
 
-! Geospatial Demo Settings
+! Geospatial Plugin Settings
 
-This demo runs entirely in the browser, with no backend server component. A consequence of this design is that the API keys required to access external services must be obtained by the end user. These keys are stored in the browser and so only need to be set up once.
+This plugin runs entirely in the browser, with no backend server component. A consequence of this design is that the API keys required to access external services must be obtained by the end user. These keys are stored in the browser and so only need to be set up once.
 
 !! ~TravelTime API key
 
