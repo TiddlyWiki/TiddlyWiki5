@@ -8,7 +8,7 @@ title: HelloThere
 
 !! Prerequisites
 
-This demo requires that the API keys needed to access external services be obtained by the end user and manually configured. These keys are stored in the browser and so only need to be set up once. See the ''Settings'' tab below for details.
+This demo requires that the API keys needed to access external services be obtained by the end user and manually configured. These keys are stored in the browser and so only need to be set up once. See the ''Settings'' tab of [[the plugin|$:/plugins/tiddlywiki/geospatial]] for details.
 
 !! Demos
 
