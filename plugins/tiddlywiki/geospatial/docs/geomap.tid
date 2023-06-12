@@ -115,3 +115,8 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 <$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-refresh"/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-draggable-marker"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

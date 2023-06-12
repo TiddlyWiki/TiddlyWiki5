@@ -185,14 +185,23 @@ GeomapWidget.prototype.refreshMap = function() {
 				]
 			};
 		}
-		var layer = $tw.Leaflet.geoJSON(geoJson,{
+		var draggable = widget.getAttribute("draggable","no") === "yes",
+			layer = $tw.Leaflet.geoJSON(geoJson,{
 				style: function(geoJsonFeature) {
 					return {
 						color: widget.getAttribute("color","yellow")
 					}
 				},
 				pointToLayer: function(geoJsonPoint,latlng) {
-					$tw.Leaflet.marker(latlng,{icon: myIcon,draggable: false}).addTo(markers);
+					var marker = $tw.Leaflet.marker(latlng,{icon: myIcon,draggable: draggable});
+					marker.addTo(markers);
+					marker.on("moveend",function(event) {
+						var latlng = event.sourceTarget.getLatLng();
+						self.invokeActionString(widget.getAttribute("updateActions"),null,event,{
+							lat: latlng.lat,
+							long: latlng.lng
+						});
+					});
 					return markers;
 				},
 				onEachFeature: function(feature,layer) {

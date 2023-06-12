@@ -15,6 +15,8 @@ The following attributes are supported:
 |''lat'' |Optional latitude of marker if json attribute missing |
 |''long'' |Optional longitude of marker if json attribute missing |
 |''alt'' |Optional altitude of marker if json attribute missing |
+|''draggable'' |Set to "yes" to make the marker draggable |
+|''updateActions'' |Optional actions when the marker is dragged other otherwise modified. The variables ''lat'' and ''long'' contain the new coordinates of the marker |
 
 Note that the `<$geolayer>` widget can be used in one of two modes:
 
