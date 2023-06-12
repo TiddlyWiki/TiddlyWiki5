@@ -37,6 +37,7 @@ exports.startup = function() {
 			wiki: event.widget.wiki,
 			url: params.url,
 			method: params.method,
+			body: params.body,
 			oncompletion: params.oncompletion,
 			onprogress: params.onprogress,
 			bindStatus: params["bind-status"],
