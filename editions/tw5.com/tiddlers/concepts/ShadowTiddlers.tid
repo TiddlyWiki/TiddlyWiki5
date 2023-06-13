@@ -9,7 +9,7 @@ tags: Concepts
 <$button actions=<<actions>>>$text$</$button>
 \end
 
-ShadowTiddlers are tiddlers that are extracted from [[Plugins]] at the wiki startup. Unlike ordinary tiddlers, they don't appear in most lists.
+ShadowTiddlers are tiddlers that are loaded from [[Plugins]] at the wiki startup. Unlike ordinary tiddlers, they don't appear in most lists.
 
 !! Overriding Shadow Tiddlers to modify plugins
 
