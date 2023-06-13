@@ -25,6 +25,8 @@ Encryption/RepeatPassword: 重复输入密码
 Encryption/PasswordNoMatch: 密码不匹配
 Encryption/SetPassword: 设定密码
 Error/Caption: 错误
+Error/DeserializeOperator/MissingOperand: 筛选器错误：'deserialize' 运算符缺少运算元
+Error/DeserializeOperator/UnknownDeserializer: 筛选器错误：未知的解串器被提供为 'deserialize' 运算符的操作数
 Error/Filter: 筛选器错误
 Error/FilterRunPrefix: 筛选器错误：筛选器 run 的未知首码
 Error/FilterSyntax: 筛选器运算式中的语法错误

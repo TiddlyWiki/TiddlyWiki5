@@ -4,7 +4,7 @@ description: {{$:/language/PageTemplate/Description}}
 icon: $:/core/images/layout-button
 
 \whitespace trim
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 
 <$vars
 	tv-config-toolbar-icons={{$:/config/Toolbar/Icons}}

@@ -1,5 +1,5 @@
 created: 20141002133113496
-modified: 20230419103154329
+modified: 20230422150445336
 tags: Concepts Reference WikiText
 title: Variables
 type: text/vnd.tiddlywiki
@@ -24,6 +24,8 @@ There are several special kinds of variable that extend their basic capabilities
 * [[Macros]] are snippets of text that can contain placeholders that are filled in with parameters whenever the macro is used
 
 Note that these special kinds of variable can only be created with the associated shortcut definition syntax.
+
+For a more detailed comparison of these special kinds of variables, see [[Variable Usage]].
 
 !! Defining Variables
 

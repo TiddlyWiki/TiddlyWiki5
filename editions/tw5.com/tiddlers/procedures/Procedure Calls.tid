@@ -1,4 +1,4 @@
-caption: Macro Calls
+caption: Procedure Calls
 created: 20221007130006705
 modified: 20230419103154329
 tags: WikiText Procedures
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 !! Introduction
 
-This tiddler describes the different ways in which [[macros|Procedures]] can be called.
+This tiddler describes the different ways in which [[procedure|Procedures]] can be called.
 
 !! Procedure Call Transclusion Shortcut
 

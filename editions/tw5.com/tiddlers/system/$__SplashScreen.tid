@@ -4,7 +4,14 @@ tags: $:/tags/RawMarkupWikified/TopBody
 title: $:/SplashScreen
 type: text/vnd.tiddlywiki
 
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+
+\procedure show-icon(title)
+<$wikify name="icon" text={{{ [<title>addprefix[{{]addsuffix[}}]] }}} output="html">
+<$text text=<<icon>>/>
+</$wikify>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrocallinline
 <div class="tc-remove-when-wiki-loaded">
 <style scoped>
@@ -116,7 +123,7 @@ Please wait while {{$:/SiteTitle}} is loading
 
 <!-- Demonstrating how to embed a wikitext SVG graphic --> 
 <div class="tc-splash-text">
-{{$:/core/icon||$:/core/templates/plain-text-tiddler}}
+<<show-icon "$:/core/icon">>
 </div>
 
 </div>

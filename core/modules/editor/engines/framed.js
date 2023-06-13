@@ -124,6 +124,8 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.unicodeBidi = "";
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
+	// Ensure we don't force text direction to LTR
+	this.domNode.style.removeProperty("direction");
 };
 
 /*

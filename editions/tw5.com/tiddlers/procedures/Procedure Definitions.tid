@@ -6,15 +6,15 @@ type: text/vnd.tiddlywiki
 
 !! Introduction
 
-This tiddler describes the different ways in which [[macros|Procedures]] can be defined.
+This tiddler describes the different ways in which [[Procedures|Procedures]] can be defined.
 
 !! Procedure Definition Pragma
 
-Macros are created using the [[Pragma: \procedure]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
+Procedures are created using the [[Pragma: \procedure]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
 
 ```
 \define my-procedure(param)
-This is the macro text (param=<<param>>)
+This is the procedure text (param=<<param>>)
 \end
 ```
 
@@ -34,10 +34,10 @@ Procedures are implemented as a special kind of [[variable|Variables]] and so in
 
 The [[Pragma: \import]] or <<.wlink ImportVariablesWidget>> widget can be used to copy procedure definitions from another tiddler.
 
-!! `$:/tags/Macro` Tag
+!! `$:/tags/Global` Tag
 
-Global procedures can be defined using the [[SystemTag: $:/tags/Macro]].
+Global procedures can be defined using the [[SystemTag: $:/tags/Global]].
 
-The tag [[SystemTag: $:/tags/Macro/View]] is used to define procedures that should only be available within the main view template and the preview panel.
+The tag [[SystemTag: $:/tags/Global/View]] is used to define procedures that should only be available within the main view template and the preview panel.
 
-The tag [[SystemTag: $:/tags/Macro/View/Body]] is used to define procedures that should only be available within the main view template body and the preview panel.
+The tag [[SystemTag: $:/tags/Global/View/Body]] is used to define procedures that should only be available within the main view template body and the preview panel.

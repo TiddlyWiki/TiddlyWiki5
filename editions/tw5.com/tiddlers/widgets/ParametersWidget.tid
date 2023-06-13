@@ -1,6 +1,6 @@
 caption: parameters
 created: 20220909111836951
-modified: 20230419103154328
+modified: 20230518134032228
 tags: Widgets
 title: ParametersWidget
 type: text/vnd.tiddlywiki
@@ -48,14 +48,5 @@ These attributes provide low level access to the contents of the transcluding wi
 * The `$slotFillParseTreeNodes` attribute provides access to the raw parse tree nodes corresponding to the filled slots within the contents of the transcluding widget. Represented in JSON as an object with keys of the slot name and values being an array of parse tree nodes
 
 ! Examples
+{{ParametersWidget (Examples)}}
 
-Here the <<.wlink ParametersWidget>> widget is used to declare a parameter whose default value is transcluded from another tiddler.
-
-<$macrocall $name='wikitext-example-without-html' 
-src="""\procedure mymacro
-<$parameters name={{$:/SiteTitle}} age="21">
-My name is <<name>> and my age is <<age>>.
-</$parameters>
-\end
-
-<$transclude $variable="mymacro" age="19"/>"""/>

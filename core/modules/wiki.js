@@ -1149,7 +1149,7 @@ exports.makeTranscludeWidget = function(title,options) {
 		if(options.importVariables) {
 			parseTreeImportVariables.attributes.filter.value = options.importVariables;
 		} else if(options.importPageMacros) {
-			parseTreeImportVariables.attributes.filter.value = "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+			parseTreeImportVariables.attributes.filter.value = this.getTiddlerText("$:/core/config/GlobalImportFilter");
 		}
 		parseTreeDiv.tree[0].children.push(parseTreeImportVariables);
 		parseTreeImportVariables.children.push(parseTreeTransclude);
@@ -1414,6 +1414,14 @@ exports.checkTiddlerText = function(title,targetText,options) {
 	}
 	return text === targetText;
 }
+
+/*
+Execute an action string without an associated context widget
+*/
+exports.invokeActionString = function(actions,event,variables,options) {
+	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
+	widget.invokeActionString(actions,null,event,variables);
+};
 
 /*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read

@@ -6,13 +6,13 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-\widget $$mywidget()
+\widget $my.widget()
 <$slot $name=ts-raw>the body is empty</$slot>
 \end
 
-#<$$mywidget/>
-#<$$mywidget></$$mywidget>
-#<$$mywidget>the body is not empty</$$mywidget>
+#<$my.widget/>
+#<$my.widget></$my.widget>
+#<$my.widget>the body is not empty</$my.widget>
 
 +
 title: ExpectedResult
