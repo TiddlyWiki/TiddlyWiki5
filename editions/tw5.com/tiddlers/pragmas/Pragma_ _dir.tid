@@ -1,10 +1,10 @@
-created: 20230419103154328
-modified: 20230419103154328
+created: 20230613162508509
+modified: 20230613162508509
 tags: Pragmas
 title: Pragma: \dir
 type: text/vnd.tiddlywiki
 
-The ''\dir'' [[pragma|Pragmas]] is used to set the text direction of text within a tiddler -- see [[Right-To-Left Languages]].
+<<.from-version "5.3.0">> The ''\dir'' [[pragma|Pragmas]] is used to set the text direction of text within a tiddler -- see [[Right-To-Left Languages]].
 
 * `\dir ltr` – sets text direction to left-to-right
 * `\dir rtl` – sets text direction to right-to-left
