@@ -14,7 +14,6 @@ alt: 0
 title: Output
 
 \procedure update-actions()
-<$action-log/>
 <$action-setfield $tiddler="Oxford" $field="lat" $value=<<lat>>/>
 <$action-setfield $tiddler="Oxford" $field="long" $value=<<long>>/>
 \end
