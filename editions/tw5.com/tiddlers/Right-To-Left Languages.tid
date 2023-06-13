@@ -1,0 +1,11 @@
+created: 20230613162508509
+modified: 20230613162508509
+title: Right-To-Left Languages
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">> The [[language plugins|Languages]] in TiddlyWiki's plugin library apply the appropriate [["right-to-left" setting|https://www.w3.org/International/questions/qa-html-dir]] to the entire document. To set the right to left setting independently for an individual tiddler, use the `\dir` [[pragma|Pragma]] at the top of the tiddler:
+
+```
+\dir rtl
+This text will be displayed with right-to-left formatting
+```

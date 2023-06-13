@@ -1388,9 +1388,8 @@ html body.tc-body.tc-single-tiddler-window {
 	height: 1.2em;
 }
 
-.tc-editor-toolbar .tc-drop-down a,
-.tc-editor-toolbar .tc-drop-down button {
-	padding: 0;
+.tc-editor-toolbar .tc-drop-down button.tc-btn-mini {
+	padding: 2px 4px;
 }
 
 .tc-editor-toolbar button:hover {
