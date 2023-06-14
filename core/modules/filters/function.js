@@ -17,9 +17,13 @@ Export our filter function
 */
 exports.function = function(source,operator,options) {
 	var functionName = operator.operands[0],
-		variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(functionName);
+		params = [];
+	$tw.utils.each(operator.operands.slice(1),function(param) {
+		params.push({value: param});
+	});
+	var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(functionName,{params: params, source: source});
 	if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
-		return options.widget.evaluateVariable(functionName,{params: operator.operands.slice(1), source: source});
+		return variableInfo.resultList ? variableInfo.resultList : [variableInfo.text];
 	}
 	// Return the input list if the function wasn't found
 	var results = [];

@@ -1063,6 +1063,20 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 	return parserInfo;
 }
 
+exports.getSubstitutedText = function(text,widget,options) {
+	options = options || {};
+	var self = this,
+		widget = widget.makeFakeWidgetWithVariables(options.variables),
+		output = text.replace(/(?:\$\{([\S\s]+?)\}\$)|(?:\$\((\w+)\)\$)/g, function(match,filter,varname) {
+		if(!!filter) {
+			return self.filterTiddlers(filter,widget)[0] || "";
+		} else if(!!varname) {
+			return widget.getVariable(varname,{defaultValue: ""})
+		}
+	})
+	return output;	
+};
+
 /*
 Make a widget tree for a parse tree
 parser: parser object
@@ -1414,6 +1428,14 @@ exports.checkTiddlerText = function(title,targetText,options) {
 	}
 	return text === targetText;
 }
+
+/*
+Execute an action string without an associated context widget
+*/
+exports.invokeActionString = function(actions,event,variables,options) {
+	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
+	widget.invokeActionString(actions,null,event,variables);
+};
 
 /*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read

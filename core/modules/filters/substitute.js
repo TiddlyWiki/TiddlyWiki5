@@ -23,16 +23,10 @@ exports.substitute = function(source,operator,options) {
 	});
 	source(function(tiddler,title) {
 		if(title) {
-			results.push(options.widget.getSubstitutedText(title,{variables:operands}));
+			results.push(options.wiki.getSubstitutedText(title,options.widget,{variables:operands}));
 		}
 	});
 	return results;
 };
 
 })();
-
-/*
-Questions:
-	variable names for operands, just numeric or prefix with parameter, eg parameter1
-
-*/

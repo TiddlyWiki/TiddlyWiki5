@@ -74,7 +74,7 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 \whitespace trim
 
 <$set name="newFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
-<div class="tc-edit-fields">
+<div class="tc-edit-fields" dir=<<tv-text-direction>>>
 <table class={{{ [all[current]fields[]] :filter[lookup[$:/config/EditTemplateFields/Visibility/]!match[hide]] +[count[]!match[0]] +[then[tc-edit-fields]] ~[[tc-edit-fields tc-edit-fields-small]] }}}>
 <tbody>
 <$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField" storyview="pop">
@@ -101,7 +101,7 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 </div>
 
 <$fieldmangler>
-<div class="tc-edit-field-add">
+<div class="tc-edit-field-add" dir=<<tv-text-direction>>>
 <em class="tc-edit tc-small-gap-right">
 <<lingo Fields/Add/Prompt>>
 </em>
