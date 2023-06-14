@@ -1,0 +1,17 @@
+title: Transclude/Macro/JavaScript
+description: Transcluding a javascript macro
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+
+<<makedatauri text:"Wildebeest" type:"text/plain">>
+
+<$macrocall $name="makedatauri" text="Wildebeest" type="text/plain"/>
+
++
+title: ExpectedResult
+
+<p><a class="tc-tiddlylink-external" href="data:text/plain,Wildebeest" rel="noopener noreferrer" target="_blank">data:text/plain,Wildebeest</a></p><p><a class="tc-tiddlylink-external" href="data:text/plain,Wildebeest" rel="noopener noreferrer" target="_blank">data:text/plain,Wildebeest</a></p>

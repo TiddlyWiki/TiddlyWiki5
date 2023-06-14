@@ -13,6 +13,7 @@ core/ui/Buttons/language: hide
 core/ui/Buttons/tag-manager: hide
 core/ui/Buttons/manager: hide
 core/ui/Buttons/more-page-actions: hide
+core/ui/Buttons/network-activity: hide
 core/ui/Buttons/new-journal: hide
 core/ui/Buttons/new-image: hide
 core/ui/Buttons/palette: hide

@@ -1,8 +1,12 @@
 created: 20180905075846391
-modified: 20221207112242775
+modified: 20230319130830880
 tags: [[WebServer Guides]]
 title: Using the external JavaScript template
 type: text/vnd.tiddlywiki
+
+<!--
+This tiddler is also included in the "server-external-js" edition. Take care before editing or moving it.
+-->
 
 You can use a special template to externalise ~TiddlyWiki's core code into a separate file. This configuration allows the browser to cache the core for improved efficiency. 
 
@@ -60,7 +64,7 @@ The "server-external-js" edition lets you save the snapshot from the command lin
 tiddlywiki YOUR_WIKI_FOLDER --build index
 ```
 
-The files `index.html` and `tiddlywikicore-5.x.x.js` will be saved in your wiki folder's `output` directory.
+The files `external-5-x-x.html` and `tiddlywikicore-5.x.x.js` will be saved in your wiki folder's `output` directory.
 
 !! Obtaining the ~TiddlyWiki core in the browser
 

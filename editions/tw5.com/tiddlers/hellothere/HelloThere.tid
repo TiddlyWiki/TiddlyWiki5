@@ -5,11 +5,19 @@ tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-!! ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
+!!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-Unlike conventional online services, TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
+TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
+
+!! ''Quick Start''
+
+<div class="tc-cards tc-action-card">
+<$list filter="[tag[Quick Start]]">
+<$macrocall $name="flex-card" bordercolor={{!!color}} textcolor={{!!text-color}} backgroundcolor={{!!background-color}} captionField="caption" descriptionField="text"/>
+</$list>
+</div>
 
 !! ''Find Out More''
 
@@ -19,7 +27,7 @@ Unlike conventional online services, TiddlyWiki lets you choose where to keep yo
 </$list>
 </div>
 
-!! ''~TiddlyWiki Hubs''
+!! ''Community''
 
 <div class="tc-cards" style="font-size:0.7em;text-align:center;margin:3em auto;">
 <a href="https://talk.tiddlywiki.org/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
@@ -39,6 +47,12 @@ Unlike conventional online services, TiddlyWiki lets you choose where to keep yo
 </a>
 <a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="border-radius:4px;background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/gitter}} Gitter
+</a>
+<a href="https://www.reddit.com/r/TiddlyWiki5/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF4500;" target="_blank" rel="noopener noreferrer">
+{{Reddit Logo}} Reddit
+</a>
+<a href="https://opencollective.com/tiddlywiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#0c2c66;" target="_blank" rel="noopener noreferrer">
+{{Open Collective Logo}} Open Collective
 </a>
 </div>
 

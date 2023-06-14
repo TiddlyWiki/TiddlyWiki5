@@ -77,16 +77,16 @@ exports.parse = function() {
 		text = "";
 	}
 	// Save the macro definition
-	return [{
+	var parseTreeNodes = [{
 		type: "set",
-		attributes: {
-			name: {type: "string", value: this.match[1]},
-			value: {type: "string", value: text}
-		},
+		attributes: {},
 		children: [],
 		params: params,
 		isMacroDefinition: true
 	}];
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[1]);
+	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);
+	return parseTreeNodes;
 };
 
 })();

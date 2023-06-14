@@ -29,6 +29,8 @@ Each field can be specified as either a ''string'' or ''array'' value to be assi
 ** //extname// the extension of the filename of the file containing the tiddler
 ** //created// the creation date/time of the file containing the tiddler
 ** //modified// the modification date/time of the file containing the tiddler
+** <<.from-version "5.3.0">> //filepath// the path of the file containing the tiddler, relative to the ''path'' property of the directory (only usable in ''directories'' declarations)
+** <<.from-version "5.3.0">> //subdirectories// an array of the subdirectories in the file's path relative, to the ''path'' property of the directory (only usable in ''directories'' declarations)
 * ''prefix'' - (optional) a string to be prepended to the value of the field
 * ''suffix'' - (optional) a string to be appended to the value of the field
 
@@ -52,7 +54,7 @@ Directory specifications in the `directories` array may take the following forms
 ** ''filesRegExp'' - (optional) a [[regular expression|https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions]] that matches the filenames of the files that should be processed within the directory
 ** ''isTiddlerFile'' - (required) if `true`, the file will be treated as a [[tiddler file|TiddlerFiles]] and deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
 ** ''isEditableFile'' - <<.from-version "5.1.23">> (optional) if `true`, changes to the tiddler be saved back to the original file. The tiddler will be saved back to the original filepath as long as it does not generate a result from the $:/config/FileSystemPath filters, which will override the final filepath generated if a result is returned from a filter.
-** ''searchSubdirectories'' - <<.from-version "5.1.23">> (optional) if `true`, all subdirectories of the //path// are searched recursively for files that match the (optional) //filesRegExp//. If no //filesRegExp// is provided, all files in all subdirectories of the //path// are loaded. Tiddler titles generated via a //source// attribute (see above) will only include the filename, not any of the subdirectories of the path. If this results in multiple files with loaded with the same tiddler title, then only the last file loaded under that tiddler title will be in memory. In order to prevent this, you must have multiple directory objects listed and customise the title field with a //prefix// or //suffix// alongside the //source// attribute.
+** ''searchSubdirectories'' - <<.from-version "5.1.23">> (optional) if `true`, all subdirectories of the //path// are searched recursively for files that match the (optional) //filesRegExp//. If no //filesRegExp// is provided, all files in all subdirectories of the //path// are loaded. Tiddler titles generated via the //source// attribute //filename// (see above) will only include the filename, not any of the subdirectories of the path. If this results in multiple files with loaded with the same tiddler title, then only the last file loaded under that tiddler title will be in memory. In order to prevent this, you can use the //filepath// attribute instead of //filename//. Alternately, you can include multiple directory objects and customise the title field with a //prefix// or //suffix// alongside the //source// attribute.
 ** ''fields'' - (required) an object containing values that override or customise the fields provided in the tiddler file (see above)
 
 Fields can also be overridden for particular files by creating a file with the same name plus the suffix `.meta` -- see TiddlerFiles.
@@ -95,6 +97,7 @@ This example retrieves all the files with the extension `.pdf` from a folder spe
     ]
 }
 ```
+
 !! Importing a folder of text files
 
 This example retrieves all the files with the extension `.txt` from a folder specified by a relative path. This folder is within the wiki's base directory, and the current config file is in a directory within the wiki's "tiddlers/" directory. So, in this case the path starts with "../../" to traverse upwards two directory levels, and then down into the "externalnotes/" directory. Each tiddler is set up with the following fields:
@@ -131,3 +134,38 @@ This will load all text files in the `../../externalnotes/` directory into the w
 From the examples in [[Customising Tiddler File Naming]] we see that the final `[!tag[externalnote]addprefix[wiki/]]` filter in the $:/config/FileSystemPaths tiddler excludes all tiddlers tagged with `externalnotes` (that have not matched an earlier filter). These tiddlers have their filepath retrieved from the $:/config/OriginalTiddlerPaths generated upon boot startup.
 
 Then, the `[tag[.txt]then[.txt]]` filter in the $:/config/FileSystemExtensions tiddler forces all these tiddlers to be saved back to disk as *.txt and accompanying *.txt.meta files (overriding the normal tiddler-type to file-type mapping). In this case, allowing the snippets of Tiddlywiki wikitext or markdown-text to be saved back to "text" *.txt files.
+
+!! Importing and auto-tagging images
+
+This example imports all the image files in the `files` directory and all its subdirectories as external-image tiddlers, and tags them based on their filepath. Each tiddler is set up with the following fields:
+
+* ''title'' - set to the URI decoded base filename of the text file
+* ''created'' - set to the creation date/time of the text file
+* ''modified'' - set to the modification date/time of the text file
+* ''type'' - set to `image/jpeg`. There is currently no way to infer the correct ContentType of the image tiddler from the file, but `image/jpeg` tiddlers should render correctly even with png or gif images. As an alternative, you could create separate definitions for jpg, png, and gif files with the `image/jpeg`, `image/png`, and `image/gif` types respectively.
+* ''tags'' - generated based on the path of the image relative to the parent directory (`files` in this case). Eg, images in `files/photos` will be tagged with `photos`, those in `files/photos/family` will be tagged with both `photos` and `family`, and those in the root `files` directory will have no tags.
+* ''text'' - set to an empty string
+* ''_canonical_uri'' - set to the full filepath of the image relative to the wiki root
+
+
+```
+{
+    "directories": [
+        {
+            "path": "../../files/",
+            "filesRegExp": "^.*\\.(?:jpg|jpeg|png|gif)$",
+            "isTiddlerFile": false,
+	        "searchSubdirectories": true,
+            "fields": {
+                "title": {"source": "basename-uri-decoded"},
+                "created": {"source": "created"},
+                "modified": {"source": "modified"},
+                "type": "image/jpeg",
+                "tags": { "source": "subdirectories" },
+                "text": "",
+                "_canonical_uri": { "source": "filepath", "prefix": "files/" }
+            }
+        }
+    ]
+}
+```

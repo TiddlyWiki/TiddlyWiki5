@@ -365,5 +365,25 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	return variables;
 };
 
+/*
+Make sure the CSS selector is not invalid
+*/
+exports.querySelectorSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelector(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
+};
+
+exports.querySelectorAllSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelectorAll(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
+};
 
 })();

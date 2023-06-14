@@ -4,7 +4,7 @@ title: $:/core/templates/single.tiddler.window
 \define containerClasses()
 tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 \end
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 
 <$vars
 	tv-config-toolbar-icons={{$:/config/Toolbar/Icons}}
@@ -12,7 +12,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$
 	tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}}
 	tv-show-missing-links={{$:/config/MissingLinks}}
 	storyviewTitle={{$:/view}}
-	languageTitle={{{ [{$:/language}get[name]] }}}>
+	languageTitle={{{ [{$:/language}get[name]] }}}
+	tv-text-direction={{$:/config/DefaultTextDirection}}>
 
 <div class=<<containerClasses>>>
 
