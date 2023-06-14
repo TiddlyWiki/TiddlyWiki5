@@ -33,7 +33,7 @@
   },
   "scripts": {
     "test": "./bin/test.sh",
-    "dev": "./bin/serve.sh ./editions/tw5.com-server",
+    "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   }
