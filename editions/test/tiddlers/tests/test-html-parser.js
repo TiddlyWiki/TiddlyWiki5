@@ -165,6 +165,9 @@ describe("HTML tag new parser tests", function() {
 		expect($tw.utils.parseAttribute("p=`blah` ",0)).toEqual(
 			{ start: 0, name: 'p', type: 'substituted', rawValue: 'blah', end: 8 }
 		);
+		expect($tw.utils.parseAttribute("p=```blah``` ",0)).toEqual(
+			{ start: 0, name: 'p', type: 'substituted', rawValue: 'blah', end: 12 }
+		);
 		expect($tw.utils.parseAttribute("p=`Hello \"There\"`",0)).toEqual(
 			{ start: 0, name: 'p', type: 'substituted', rawValue: 'Hello "There"', end: 17 }
 		);

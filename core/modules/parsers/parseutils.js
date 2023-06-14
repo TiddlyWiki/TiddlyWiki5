@@ -309,7 +309,7 @@ exports.parseAttribute = function(source,pos) {
 		reUnquotedAttribute = /([^\/\s<>"'`=]+)/g,
 		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
 		reIndirectValue = /\{\{([^\}]+)\}\}/g,
-		reSubstitutedValue = /`([^`]|[\S\s]*?)`/g;
+		reSubstitutedValue = /(?:```([\s\S]*?)```|`([^`]|[\S\s]*?)`)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Get the attribute name
@@ -366,7 +366,7 @@ exports.parseAttribute = function(source,pos) {
 							if(substitutedValue) {
 								pos = substitutedValue.end;
 								node.type = "substituted";
-								node.rawValue = substitutedValue.match[1];
+								node.rawValue = substitutedValue.match[1] || substitutedValue.match[2];
 							} else {
 								node.type = "string";
 								node.value = "true";

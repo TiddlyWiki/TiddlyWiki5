@@ -6,9 +6,9 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$let project="TiddlyWiki">
+<$let project="TiddlyWiki" disabled="true">
 <div class=`$(project)$ 
-${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattrib=`` quoted="here">
+${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattrib=`` quoted="here" disabled=```$(disabled)$```>
 </div>
 </$let>
 
@@ -16,4 +16,4 @@ ${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattri
 title: ExpectedResult
 
 <p><div attrib="myvalue" blankattrib="" class="TiddlyWiki 
-HelloThere" otherattrib="" quoted="here"></div></p>
+HelloThere" disabled="true" otherattrib="" quoted="here"></div></p>
