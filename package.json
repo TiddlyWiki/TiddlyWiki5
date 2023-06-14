@@ -32,6 +32,8 @@
     "node": ">=0.8.2"
   },
   "scripts": {
+    "test": "./bin/test.sh",
+    "dev": "./bin/serve.sh ./editions/tw5.com-server",
     "lint": "eslint ."
   }
 }
