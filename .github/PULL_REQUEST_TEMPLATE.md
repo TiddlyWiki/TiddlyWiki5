@@ -18,6 +18,7 @@ NOTE: Please grant permission for repository maintainers to edit your PR.  It is
 ## Summary
 
 Category type "Brief description"
+
 <!-- This section should consist of exactly one line, edit the one above.
 
 1. Replace the word "Category" with one of these words: Usability, Widget, Filter, Hackability, Document, Plugin, Server, Performance, Infrastructure, Translation, Accessibility, Theme.
@@ -36,6 +37,8 @@ An example:
 ## Summary
 
 Widget fixed "incorrect behaviour of default values with lookup Operator"
+
+example end.
 
 -->
 
