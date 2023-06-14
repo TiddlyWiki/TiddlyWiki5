@@ -83,7 +83,6 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7529">> size of buttons in dropdown for editor "link" toolbar button
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8e132948b6bec623d81d300fbe6dc3a0307bcc6d">> crash when transcluding a lazily loaded tiddler as an attribute value
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7462">> DiffTextWidget crash with missing or empty attributes
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7448">> CheckboxWidget to avoid writing to date fields
 
 ! Developer Improvements
 
