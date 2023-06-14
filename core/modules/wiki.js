@@ -1077,15 +1077,15 @@ exports.getSubstitutedText = function(text,widget,options) {
 	var self = this,
 		substitutions = options.substitutions || [],
 		output;
-	// evaluate embedded filters and substitute with first result
+	// Evaluate embedded filters and substitute with first result
 	output = text.replace(/\$\{([\S\s]+?)\}\$/g, function(match,filter) {
 		return self.filterTiddlers(filter,widget)[0] || "";
 	});
-	// process any substitutions provided in options
+	// Process any substitutions provided in options
 	$tw.utils.each(substitutions,function(substitute) {
 		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
 	});
-	// substitute any variable references with their values
+	// Substitute any variable references with their values
 	return output.replace(/\$\((\w+)\)\$/g, function(match,varname) {
 		return widget.getVariable(varname,{defaultValue: ""})
 	});
