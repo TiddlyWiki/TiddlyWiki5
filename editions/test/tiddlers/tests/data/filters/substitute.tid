@@ -14,7 +14,7 @@ The output of the filter `[[substitute filter data 1]tags[]]` is ${[[substitute 
 +
 title: substitute filter data 3
 
-Welcome to $(projectname)$ $(1)$. Tiddlers starting with `substitute`: ${[prefix[substitute]format:titlelist[]join[ ]]}$.
+Welcome to $(projectname)$ $1$ $2$ $3$. Tiddlers starting with `substitute`: ${[prefix[substitute]format:titlelist[]join[ ]]}$.
 +
 title: Output
 
@@ -23,10 +23,10 @@ title: Output
 (<$text text={{{ [[]substitute[]] }}}/>)
 (<$text text={{{ [[Hello There, welcome to $TiddlyWiki$]substitute[]] }}}/>)
 (<$text text={{{ [[Welcome to $(projectname)$]substitute[]] }}}/>)
-(<$text text={{{ [[Welcome to $(projectname)$ $(1)$]substitute[today]] }}}/>)
+(<$text text={{{ [[Welcome to $(projectname)$ $1$]substitute[today]] }}}/>)
 (<$text text={{{ [[This is not a valid embedded filter ${ hello )$]substitute[]] }}}/>)
 (<$text text={{{ [{substitute filter data 2}substitute[]] }}}/>)
-(<$text text={{{ [{substitute filter data 3}substitute[today]] }}}/>)
+(<$text text={{{ [{substitute filter data 3}substitute[every],[day]] }}}/>)
 </$let>
 +
 title: ExpectedResult
@@ -37,4 +37,4 @@ title: ExpectedResult
 (Welcome to TiddlyWiki today)
 (This is not a valid embedded filter ${ hello )$)
 (The output of the filter `[[substitute filter data 1]tags[]]` is Hello.)
-(Welcome to TiddlyWiki today. Tiddlers starting with `substitute`: [[substitute filter data 1]] [[substitute filter data 2]] [[substitute filter data 3]].)</p>
+(Welcome to TiddlyWiki every day $3$. Tiddlers starting with `substitute`: [[substitute filter data 1]] [[substitute filter data 2]] [[substitute filter data 3]].)</p>

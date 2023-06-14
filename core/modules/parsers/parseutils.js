@@ -305,11 +305,11 @@ exports.parseAttribute = function(source,pos) {
 		start: pos
 	};
 	// Define our regexps
-	var reAttributeName = /([^\/\s>"'=]+)/g,
+	var reAttributeName = /([^\/\s>"'`=]+)/g,
 		reUnquotedAttribute = /([^\/\s<>"'`=]+)/g,
 		reFilteredValue = /\{\{\{([\S\s]+?)\}\}\}/g,
 		reIndirectValue = /\{\{([^\}]+)\}\}/g,
-		reSubstitutedValue = /`([^`]|[\S\s]+?)`/g;
+		reSubstitutedValue = /`([^`]|[\S\s]*?)`/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Get the attribute name

@@ -8,12 +8,12 @@ title: Output
 \whitespace trim
 <$let project="TiddlyWiki">
 <div class=`$(project)$ 
-${ [[Hello]addsuffix[There]] }$`>
+${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattrib=`` quoted="here">
 </div>
 </$let>
 
 +
 title: ExpectedResult
 
-<p><div class="TiddlyWiki 
-HelloThere"></div></p>
+<p><div attrib="myvalue" blankattrib="" class="TiddlyWiki 
+HelloThere" otherattrib="" quoted="here"></div></p>

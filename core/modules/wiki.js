@@ -1063,18 +1063,32 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 	return parserInfo;
 }
 
+/*
+Parse a block of text of a specified MIME type
+	text: text on which to perform substitutions
+	widget
+	options: see below
+Options include:
+	substitutions: an optional array of substitutions
+*/
 exports.getSubstitutedText = function(text,widget,options) {
 	options = options || {};
+	text = text || "";
 	var self = this,
-		widget = widget.makeFakeWidgetWithVariables(options.variables),
-		output = text.replace(/(?:\$\{([\S\s]+?)\}\$)|(?:\$\((\w+)\)\$)/g, function(match,filter,varname) {
-		if(!!filter) {
-			return self.filterTiddlers(filter,widget)[0] || "";
-		} else if(!!varname) {
-			return widget.getVariable(varname,{defaultValue: ""})
-		}
-	})
-	return output;	
+		substitutions = options.substitutions || [],
+		output;
+	// evaluate embedded filters and substitute with first result
+	output = text.replace(/\$\{([\S\s]+?)\}\$/g, function(match,filter) {
+		return self.filterTiddlers(filter,widget)[0] || "";
+	});
+	// process any substitutions provided in options
+	$tw.utils.each(substitutions,function(substitute) {
+		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
+	});
+	// substitute any variable references with their values
+	return output.replace(/\$\((\w+)\)\$/g, function(match,varname) {
+		return widget.getVariable(varname,{defaultValue: ""})
+	});
 };
 
 /*
