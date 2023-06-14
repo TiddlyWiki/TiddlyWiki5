@@ -1,0 +1,16 @@
+name: PR Validator
+on:
+  pull_request:
+    branches:
+    - master
+    types: [opened, edited, synchronize]
+jobs:
+  validate:
+    name: Validate PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Validate SUMMARY"
+        uses: CleverRaven/pr-validator@master
+        with:
+          description-regex: '(\n|^)## Summary\s+`{0,3}(SUMMARY:\s+)?(None|((Usability|Widget|Filter|Hackability|Document|Plugin|Server|Performance|Infrastructure|Translation|Accessibility|Theme) +(added|modified|fixed|extended|updated|improved|renamed|removed|hide) +"(.+)"))`{0,3}\s*(\n|$)'
+          description-regex-flags: 'i'
