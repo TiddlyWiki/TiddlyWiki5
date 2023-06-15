@@ -1,6 +1,6 @@
 base-url: http://tiddlywiki.com/
 created: 20230615050814821
-modified: 20230615113954436
+modified: 20230615173033918
 tags: [[Widget Attributes]] WikiText
 title: Substituted Attribute Values
 type: text/vnd.tiddlywiki
@@ -17,8 +17,8 @@ The value of the attribute will be the text denoted by the backticks with any of
 
 
 |placeholder syntax|description|h
-|`$(varname)$`|Text substitution of a variable. |
-|`${ filter expression }$`|Text substitution with the first result of evaluating the filter expression. Undefined variables are replaced with an empty string. |
+|`$(varname)$`|Text substitution of a variable. Undefined variables are replaced with an empty string. |
+|`${ filter expression }$`|Text substitution with the first result of evaluating the filter expression. |
 
 ! Examples
 
