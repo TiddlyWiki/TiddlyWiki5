@@ -1,5 +1,5 @@
 created: 20230615050814821
-modified: 20230615060106435
+modified: 20230615061113146
 tags: [[Widget Attributes]] WikiText
 title: Substituted Attribute Values
 type: text/vnd.tiddlywiki
@@ -27,5 +27,5 @@ The value of the attribute will be the text denoted by the backticks with any of
 
 
 !! Using a placeholder for a filter expression and a variable:
-<$macrocall $name=wikitext-example-without-html src='<$text text=`This tiddler is titled "$(currentTiddler)$" and was last modified at ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>'/>
+<$macrocall $name=wikitext-example-without-html src='<$text text=`This tiddler is titled "$(currentTiddler)$" and was last modified on ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>'/>
 
