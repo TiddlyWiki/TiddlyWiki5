@@ -1,7 +1,9 @@
 title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
-first-search-filter: [subfilter<tagFilter>!is[system]search:title<userInput>sort[]]
-second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort[]]
+first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]
+second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>sort[]]
+
+\function tagpicker-dropdown-id() [<qualify "$:/state/popup/tags-auto-complete">] [<__tagField__>] +[join[/]]
 
 \define get-tagpicker-focus-selector() [data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-add-tag-name input
 
@@ -58,8 +60,8 @@ second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort
 	>
 		<$vars
 			refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> 
-			nonSystemTagsFilter="[subfilter<tagFilter>!is[system]search:title<userInput>sort[]]"
-			systemTagsFilter="[subfilter<tagFilter>is[system]search:title<userInput>sort[]]"
+			nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]"
+			systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>sort[]]"
 		>
 			<div class="tc-edit-add-tag">
 				<div>
@@ -74,7 +76,7 @@ second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort
 							inputCancelActions=<<clear-tags-actions>>
 							tag="input"
 							placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
-							focusPopup=<<qualify "$:/state/popup/tags-auto-complete">>
+							focusPopup=<<tagpicker-dropdown-id>>
 							class="tc-edit-texteditor tc-popup-handle"
 							tabindex=<<tabIndex>>
 							focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}
@@ -83,7 +85,7 @@ second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort
 							configTiddlerFilter="[[$:/core/macros/tag-picker]]"
 						/>
 					</span>
-					<$button popup=<<qualify "$:/state/popup/tags-auto-complete">> 
+					<$button popup=<<tagpicker-dropdown-id>>
 						class="tc-btn-invisible tc-btn-dropdown"
 						tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}}
 						aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}
@@ -112,7 +114,7 @@ second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort
 					</span>
 				</div>
 				<div class="tc-block-dropdown-wrapper">
-					<$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
+					<$reveal state=<<tagpicker-dropdown-id>> type="nomatch" text="" default="">
 						<div class="tc-block-dropdown tc-block-tags-dropdown">
 							<$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
 								<$list
@@ -162,9 +164,10 @@ second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort
 </$vars>
 \end
 
-\define tag-picker(actions,tagField:"tags",tagFilter:"[tags[]]")
+\define tag-picker(actions,tagField:"tags",tiddler,tagListFilter:"[tags[]]")
 \whitespace trim
-<$vars saveTiddler=<<currentTiddler>> palette={{$:/palette}} tagFilter=<<__tagFilter__>>>
+\function targetTiddler() [<__tiddler__>is[blank]then<currentTiddler>else<__tiddler__>]
+<$let saveTiddler=<<targetTiddler>> palette={{$:/palette}} tagListFilter=<<__tagListFilter__>>>
 	<$list
 		filter="[<newTagNameTiddler>match[]]"
 		emptyMessage="<$macrocall $name='tag-picker-inner' actions=<<__actions__>> tagField=<<__tagField__>>/>"
@@ -173,5 +176,5 @@ second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort
 			<$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>
 		</$set>
 	</$list>
-</$vars>
+</$let>
 \end
