@@ -1,7 +1,7 @@
 title: $:/core/macros/tag-picker
 tags: $:/tags/Macro
-first-search-filter: [tags[]!is[system]search:title<userInput>sort[]]
-second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
+first-search-filter: [subfilter<tagFilter>!is[system]search:title<userInput>sort[]]
+second-search-filter: [subfilter<tagFilter>is[system]search:title<userInput>sort[]]
 
 \define get-tagpicker-focus-selector() [data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-add-tag-name input
 
@@ -58,8 +58,8 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 	>
 		<$vars
 			refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> 
-			nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]"
-			systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]"
+			nonSystemTagsFilter="[subfilter<tagFilter>!is[system]search:title<userInput>sort[]]"
+			systemTagsFilter="[subfilter<tagFilter>is[system]search:title<userInput>sort[]]"
 		>
 			<div class="tc-edit-add-tag">
 				<div>
@@ -162,9 +162,9 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 </$vars>
 \end
 
-\define tag-picker(actions,tagField:"tags")
+\define tag-picker(actions,tagField:"tags",tagFilter:"[tags[]]")
 \whitespace trim
-<$vars saveTiddler=<<currentTiddler>> palette={{$:/palette}}>
+<$vars saveTiddler=<<currentTiddler>> palette={{$:/palette}} tagFilter=<<__tagFilter__>>>
 	<$list
 		filter="[<newTagNameTiddler>match[]]"
 		emptyMessage="<$macrocall $name='tag-picker-inner' actions=<<__actions__>> tagField=<<__tagField__>>/>"
