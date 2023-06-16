@@ -1,5 +1,5 @@
 created: 20230616104546608
-modified: 20230616114917955
+modified: 20230616141838664
 tags: [[tag-picker Macro]] [[Macro Examples]]
 title: tag-picker Macro (Examples)
 type: text/vnd.tiddlywiki
@@ -11,7 +11,7 @@ eg="""Use all existing tags and set the ''tags'' field here: <<tag-picker>>
 """/>
 
 
-<<.tip """The following examples us a temporary tiddler: $:/temp/test/tag-picker. So this tiddler will not be changed """>>
+<<.tip """The following examples use a temporary tiddler: $:/temp/test/tag-picker. So this tiddler will not be changed """>>
 
 <$let transclusion="test">
 
