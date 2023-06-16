@@ -32,8 +32,8 @@
     "node": ">=0.8.2"
   },
   "scripts": {
-    "test": "./bin/test.sh",
     "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --rendertiddler $:/core/save/all test.html text/plain --test && echo To run the tests in a browser, open \"editions/test/output/test.html\"",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   }
