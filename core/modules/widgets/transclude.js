@@ -178,7 +178,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 				srcVariable = variableInfo && variableInfo.srcVariable;
 			if(variableInfo.text) {
 				if(srcVariable.isFunctionDefinition) {
-					// Function to return parameters by name or position
 					var result = (variableInfo.resultList ? variableInfo.resultList[0] : variableInfo.text) || "";
 					parser = {
 						tree: [{
@@ -235,7 +234,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							}
 							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
 						});
-					} else {
+					} else if(srcVariable.isMacroDefinition || !srcVariable.isFunctionDefinition) {
 						// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 						parser = {
 							tree: [
