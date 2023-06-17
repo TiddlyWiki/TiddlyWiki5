@@ -1,9 +1,9 @@
 created: 20210618133745003
 from-version: 5.3.0
 modified: 20230506172920710
-rp-input: <<.olink all>> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]
+rp-input: <<.olink all>> tiddler titles
 rp-output: the output of this filter run replaces the output of previous runs unless it is an empty list (see below)
-rp-purpose: replace any input to this filter run with its output
+rp-purpose: replace any input to this filter run with its output, only evaluating the run when there is any input
 search: 
 tags: [[Filter Run Prefix]] [[Filter Syntax]]
 title: Then Filter Run Prefix
@@ -67,47 +67,5 @@ The major difference between the <<.op then>> operator and a <<.op :then>> prefi
 |^<<.operator-example m1-1 "[tag[WikiText]] :then[[true]]">>|^<<.operator-example m1-2 "[tag[WikiText]then[true]]">><p>To make them equivalent, additional filter steps may be added:</p> <<.operator-example m1-3 "[tag[WikiText]count[]compare:number:gt[0]then[true]]">>|
 
 
-! Example
-
-!! Conditional Execution
-
-The <<.op :then>> filter run prefix can be used to avoid the need for nested [[ListWidget]]s or [[Macro Definitions in WikiText]].
-
-<$macrocall $name='wikitext-example-without-html'
-src="""<$edit-text field="search" placeholder="Search title"/>
-
-<$let searchTerm={{!!search}}>
-<$list filter="[<searchTerm>minlength[3]] :then[!is[system]search:title<searchTerm>]" template="$:/core/ui/ListItemTemplate"/>
-</$let>"""/>
-
-
-!! Conditional (Sub)Filters
-
-The <<.op :then>> filter run prefix can be combined with the <<.op :else>> prefix to create conditional filters. In this example, the fields used in <<.var searchSubfilter>> for searching depend on the value of [[$:/temp/searchFields]] and the sort order used by <<.var sortSubfilter>> depends on the value of [[$:/temp/searchSort]]. Checkboxes are used to set the values of these tiddlers.
-
-<<.tip "Note that each filter run of the subfilter receives the input of the <<.olink subfilter>> operator as input">>
-
-Since the <<.olink then>> and <<.olink else>> operators cannot call subfilters or perform additional filter steps, they cannot be used for such applications.
-
-<$macrocall $name='wikitext-example-without-html'
-src="""<$checkbox tiddler="$:/temp/searchSort"
-      field="text"
-      checked="chrono" unchecked="alpha" default="alpha">
-  Sort chronologically (newest first)
-</$checkbox><br/>
-<$checkbox tiddler="$:/temp/searchFields"
-      field="text"
-      checked="title" unchecked="default" default="title">
-  Search <<.field title>> only
-</$checkbox><p/>
-<$let searchSubfilter="[{$:/temp/searchFields}match[default]] :then[search[prefix]] :else[search:title[prefix]]"
-      sortSubfilter="[{$:/temp/searchSort}match[chrono]] :then[!nsort[modified]] :else[sort[title]]"
-      limit=10 >
-  <$list filter="[all[tiddlers]!is[system]subfilter<searchSubfilter>subfilter<sortSubfilter>first<limit>]">
-    <$link/> (<$text text={{{ [{!!modified}format:date[YYYY-0MM-0DD]] }}} />)<br/>
-  </$list>
-  <$list filter="[all[tiddlers]!is[system]subfilter<searchSubfilter>rest<limit>count[]]">
-    ... and <<currentTiddler>> more.
-  </$list>
-</$let>"""/>
+! [[Examples|Then Filter Run Prefix (Examples)]]
 
