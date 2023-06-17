@@ -172,7 +172,7 @@ second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>
 		filter="[<newTagNameTiddler>match[]]"
 		emptyMessage="<$macrocall $name='tag-picker-inner' actions=<<__actions__>> tagField=<<__tagField__>>/>"
 	>
-		<$set name="newTagNameTiddler" value=<<qualify "$:/temp/NewTagName">>>
+		<$set name="newTagNameTiddler" value={{{ [[$:/temp/NewTagName]] [<__tagField__>!match[tags]] +[join[/]] [<qualify>] +[join[]] }}}>
 			<$macrocall $name="tag-picker-inner" actions=<<__actions__>> tagField=<<__tagField__>>/>
 		</$set>
 	</$list>
