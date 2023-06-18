@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 \define time() morning
 \define field() modified
-\define sentence() This tiddler was last $(field)$ on ${[{!!modified}format:date[DDth MMM YYYY]]}$
+\procedure sentence() This tiddler was last $(field)$ on ${[{!!modified}format:date[DDth MMM YYYY]]}$
 \define name() Bugs Bunny
 \define address() Rabbit Hole Hill
 
