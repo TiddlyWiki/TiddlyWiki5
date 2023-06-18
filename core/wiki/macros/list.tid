@@ -3,12 +3,12 @@ tags: $:/tags/Macro
 
 \define list-links(filter,type:"ul",subtype:"li",class:"",emptyMessage,field:"caption")
 \whitespace trim
-<$genesis $type=<<__type__>> class=<<__class__>> >
-	<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>> >
-		<$genesis $type=<<__subtype__>> >
+<$genesis $type=<<__type__>> class=<<__class__>>>
+	<$list filter=<<__filter__>> emptyMessage=<<__emptyMessage__>>>
+		<$genesis $type=<<__subtype__>>>
 			<$link to={{!!title}}>
 				<$let tv-wikilinks="no">
-					<$transclude field=<<__field__>> >
+					<$transclude field=<<__field__>>>
 						<$view field="title"/>
 					</$transclude>
 				</$let>
@@ -27,7 +27,7 @@ tags: $:/tags/Macro
 <span class="tc-links-draggable-list">
 	<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
 		<$genesis $type=<<__type__>> class="$class$">
-			<$list filter="[list[$tiddler$!!$field$]]" emptyMessage=<<__emptyMessage__>> >
+			<$list filter="[list[$tiddler$!!$field$]]" emptyMessage=<<__emptyMessage__>>>
 				<$droppable
 					actions=<<list-links-draggable-drop-actions>>
 					tag="""$subtype$"""
@@ -80,7 +80,7 @@ tags: $:/tags/Macro
 	<!--<$action-listops $tiddler=<<actionTiddler>> $tags=<<__tag__>>/>-->
 	<!-- Using the following 5 lines as replacement makes dragging titles from outside into the dropdown apply the tag -->
 	<$list filter="[<actionTiddler>!contains:tags<__tag__>]">
-		<$fieldmangler tiddler=<<actionTiddler>> >
+		<$fieldmangler tiddler=<<actionTiddler>>>
 			<$action-sendmessage $message="tm-add-tag" $param=<<__tag__>>/>
 		</$fieldmangler>
 	</$list>
@@ -90,7 +90,7 @@ tags: $:/tags/Macro
 \define list-tagged-draggable(tag,subFilter,emptyMessage,itemTemplate,elementTag:"div",storyview:"")
 \whitespace trim
 <span class="tc-tagged-draggable-list">
-	<$set name="tag" value=<<__tag__>> >
+	<$set name="tag" value=<<__tag__>>>
 		<$list
 			filter="[<__tag__>tagging[]$subFilter$]"
 			emptyMessage=<<__emptyMessage__>>
@@ -102,7 +102,7 @@ tags: $:/tags/Macro
 					enable=<<tv-enable-drag-and-drop>>
 				>
 					<$genesis $type=<<__elementTag__>> class="tc-droppable-placeholder"/>
-					<$genesis $type=<<__elementTag__>> >
+					<$genesis $type=<<__elementTag__>>>
 						<$transclude tiddler="""$itemTemplate$""">
 							<$link to={{!!title}}>
 								<$view field="title"/>
