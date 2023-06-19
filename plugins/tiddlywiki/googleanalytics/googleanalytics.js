@@ -27,7 +27,7 @@ exports.startup = function() {
 			hasInitialised = true;
 			var gaMeasurementID = $tw.wiki.getTiddlerText("$:/GoogleAnalyticsMeasurementID","").replace(/\n/g,"");
 			var url ="https://www.googletagmanager.com/gtag/js?id=" + gaMeasurementID;
-			window.dataLayer = this.window.dataLayer || [];
+			window.dataLayer = window.dataLayer || [];
 			window.gtag = function() { window.dataLayer?.push(arguments); };
 			window.gtag("js",new Date());
 			window.gtag("config",gaMeasurementID);
