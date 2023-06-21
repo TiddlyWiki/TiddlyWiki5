@@ -36,6 +36,7 @@ options: see below:
 */
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
+	this.parseAsInline = options.parseAsInline;
 	var self = this;
 	// Check for an externally linked tiddler
 	if($tw.browser && (text || "") === "" && options._canonical_uri) {
