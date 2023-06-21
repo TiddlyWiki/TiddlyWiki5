@@ -1,6 +1,7 @@
 title: $:/core/templates/server/static.tiddler.html
 
 \whitespace trim
+\define tv-config-static() yes
 \define tv-wikilink-template() $uri_encoded$
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 <html>

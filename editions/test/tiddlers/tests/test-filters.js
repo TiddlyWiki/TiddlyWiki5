@@ -1066,7 +1066,11 @@ Tests the filtering mechanism.
 		});
 	
 		it("should handle the deserializers operator", function() {
-		expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe("application/javascript,application/json,application/x-tiddler,application/x-tiddler-html-div,application/x-tiddlers,text/css,text/html,text/plain");
+		var expectedDeserializers = ["application/javascript","application/json","application/x-tiddler","application/x-tiddler-html-div","application/x-tiddlers","text/css","text/html","text/plain"];
+		if($tw.browser) {
+			expectedDeserializers.unshift("(DOM)");
+		}
+		expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe(expectedDeserializers.join(","));
 		});
 		
 		it("should handle the charcode operator", function() {

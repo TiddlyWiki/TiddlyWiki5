@@ -3,6 +3,7 @@ tags: $:/tags/Exporter
 description: {{$:/language/Exporters/StaticRiver}}
 extension: .html
 
+\define tv-config-static() yes
 \define tv-wikilink-template() #$uri_encoded$
 \define tv-config-toolbar-icons() no
 \define tv-config-toolbar-text() no
