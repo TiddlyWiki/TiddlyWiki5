@@ -13,8 +13,7 @@ icon: $:/core/images/layout-button
 	tv-enable-drag-and-drop={{$:/config/DragAndDrop/Enable}}
 	tv-show-missing-links={{$:/config/MissingLinks}}
 	storyviewTitle={{$:/view}}
-	languageTitle={{{ [{$:/language}get[name]] }}}
-	tv-text-direction={{$:/config/DefaultTextDirection}}>
+	languageTitle={{{ [{$:/language}get[name]] }}}>
 
 <div class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/PageTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-page-container [[tc-page-view-]addsuffix<storyviewTitle>] [[tc-language-]addsuffix<languageTitle>] :and[unique[]join[ ]] }}} >
 

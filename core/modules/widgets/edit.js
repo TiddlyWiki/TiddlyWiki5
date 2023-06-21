@@ -48,7 +48,6 @@ EditWidget.prototype.execute = function() {
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editTabIndex = this.getAttribute("tabindex");
 	this.editFocus = this.getAttribute("focus","");
-	this.editDir = this.getAttribute("dir");
 	this.editCancelPopups = this.getAttribute("cancelPopups","");
 	this.editInputActions = this.getAttribute("inputActions");
 	this.editRefreshTitle = this.getAttribute("refreshTitle");
@@ -91,7 +90,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 EditWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Refresh if an attribute has changed, or the type associated with the target tiddler has changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tabindex || changedAttributes.dir || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || (changedTiddlers[this.editTitle] && this.getEditorType() !== this.editorType)) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tabindex || changedAttributes.cancelPopups || changedAttributes.inputActions || changedAttributes.refreshTitle || changedAttributes.autocomplete || (changedTiddlers[this.editTitle] && this.getEditorType() !== this.editorType)) {
 		this.refreshSelf();
 		return true;
 	} else {

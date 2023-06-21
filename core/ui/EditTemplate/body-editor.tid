@@ -9,7 +9,6 @@ title: $:/core/ui/EditTemplate/body/editor
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
   tabindex={{$:/config/EditTabIndex}}
   focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
-  dir=<<tv-text-direction>>
   cancelPopups="yes"
   fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
 
