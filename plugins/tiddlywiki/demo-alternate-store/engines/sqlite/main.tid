@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/main
+tags: $:/tags/AlternateStoreArea
+
+{{$:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/sqlite3.js}}
+`var sqlite3wasm = "`<$text text={{$:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/sqlite3.wasm}}/>`";`
+{{$:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/rawmarkup.js}}
