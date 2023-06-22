@@ -2,5 +2,5 @@ title: $:/plugins/tiddlywiki/demo-alternate-store/rawmarkup
 tags: $:/tags/RawMarkupWikified
 
 `<script>`
-<$transclude $tiddler={{{ [[$:/config/DemoAlternateStore/CurrentStore]get[text]else[$:/plugins/tiddlywiki/demo-alternate-store/engines/plain-js/rawmarkup.js]] }}} mode="inline"/>
+{{$:/plugins/tiddlywiki/demo-alternate-store/rawmarkup.js}}
 `</script>`

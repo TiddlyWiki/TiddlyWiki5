@@ -1,7 +1,6 @@
 /*\
-title: $:/plugins/tiddlywiki/demo-alternate-store/engines/plain-js/rawmarkup.js
+title: $:/plugins/tiddlywiki/sqlite3store/rawmarkup.js
 type: text/plain
-tags: $:/tags/AlternateStoreArea
 
 Startup code injected as raw markup
 
@@ -9,11 +8,14 @@ Startup code injected as raw markup
 
 (function() {
 
-// Need to initialise these because we run before bootprefix.js and boot.js
-$tw = window.$tw || Object.create(null);
+// Initialse skeleton TiddlyWiki global because we run before bootprefix.js and boot.js
+window.$tw = window.$tw || Object.create(null);
 $tw.hooks = $tw.hooks || { names: {}};
 $tw.boot = $tw.boot || {};
 $tw.boot.preloadDirty = $tw.boot.preloadDirty || [];
+
+// Tell TiddlyWiki not to boot itself
+$tw.boot.suppressBoot = true;
 
 $tw.Wiki = function(options) {
 	options = options || {};
@@ -423,4 +425,4 @@ $tw.Wiki = function(options) {
 };
 
 })();
-//# sourceURL=$:/plugins/tiddlywiki/demo-alternate-store/engines/plain-js/rawmarkup.js
+//# sourceURL=$:/plugins/tiddlywiki/sqlite3store/rawmarkup.js

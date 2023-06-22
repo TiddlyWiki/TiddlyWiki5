@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/sqlite3store/rawmarkup/bottombody
+tags: $:/tags/RawMarkupWikified/BottomBody
+
+`<script>`
+{{$:/plugins/tiddlywiki/sqlite3store/sqlite3.js}}
+`var sqlite3wasm = "`<$text text={{$:/plugins/tiddlywiki/sqlite3store/sqlite3.wasm}}/>`";`
+{{$:/plugins/tiddlywiki/sqlite3store/rawmarkup-bottombody.js}}
+`</script>`

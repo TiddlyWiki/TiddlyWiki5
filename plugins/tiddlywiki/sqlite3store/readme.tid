@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/sqlite3store/readme
+
+Wiki store implementation based on sqlite3 WASM build.

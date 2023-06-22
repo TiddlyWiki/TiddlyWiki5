@@ -7,7 +7,7 @@
 		"tiddlywiki/evernote",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
-		"tiddlywiki/demo-alternate-store"
+		"tiddlywiki/sqlite3store"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

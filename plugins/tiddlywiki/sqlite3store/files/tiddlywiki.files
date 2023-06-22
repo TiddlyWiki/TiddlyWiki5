@@ -4,7 +4,7 @@
 			"file": "sqlite3.js",
 			"fields": {
 				"type": "text/plain",
-				"title": "$:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/sqlite3.js"
+				"title": "$:/plugins/tiddlywiki/sqlite3store/sqlite3.js"
 			}
 		},
 		{
@@ -12,7 +12,7 @@
 			"encoding": "base64",
 			"fields": {
 				"type": "application/wasm",
-				"title": "$:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/sqlite3.wasm"
+				"title": "$:/plugins/tiddlywiki/sqlite3store/sqlite3.wasm"
 			}
 		}
 	]

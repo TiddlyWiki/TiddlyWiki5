@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/sqlite3store",
+	"name": "Sqlite3-based store",
+	"description": "Sqlite3-based wiki store implementation",
+	"list": "readme"
+}

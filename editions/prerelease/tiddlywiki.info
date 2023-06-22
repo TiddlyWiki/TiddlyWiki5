@@ -15,7 +15,7 @@
 		"tiddlywiki/codemirror",
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
-		"tiddlywiki/demo-alternate-store"
+		"tiddlywiki/sqlite3store"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

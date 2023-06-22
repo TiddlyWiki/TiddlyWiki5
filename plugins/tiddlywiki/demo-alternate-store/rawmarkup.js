@@ -1,6 +1,7 @@
 /*\
-title: $:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/rawmarkup.js
+title: $:/plugins/tiddlywiki/demo-alternate-store/rawmarkup.js
 type: text/plain
+tags: $:/tags/AlternateStoreArea
 
 Startup code injected as raw markup
 
@@ -8,36 +9,11 @@ Startup code injected as raw markup
 
 (function() {
 
-// Initialse skeleton TiddlyWiki global because we run before bootprefix.js and boot.js
-window.$tw = window.$tw || Object.create(null);
+// Need to initialise these because we run before bootprefix.js and boot.js
+$tw = window.$tw || Object.create(null);
 $tw.hooks = $tw.hooks || { names: {}};
 $tw.boot = $tw.boot || {};
 $tw.boot.preloadDirty = $tw.boot.preloadDirty || [];
-
-// Tell TiddlyWiki not to boot itself
-$tw.boot.suppressBoot = true;
-
-// Create a Blob URL for our wasm data
-var decodedData = window.atob(sqlite3wasm),
-	uInt8Array = new Uint8Array(decodedData.length);
-for (var i = 0; i < decodedData.length; ++i) {
-	uInt8Array[i] = decodedData.charCodeAt(i);
-}
-var blobUrl = URL.createObjectURL(new Blob([uInt8Array],{type: "application/wasm"}));
-
-// Pass sqlite an URLSearchParams object containing the Blob URL of our wasm data
-self.sqlite3InitModuleState.urlParams = new URLSearchParams();
-self.sqlite3InitModuleState.urlParams.set("sqlite3.wasm",blobUrl);
-
-// Initialise sqlite
-self.sqlite3InitModule().then((sqlite3)=>{
-	// Save a reference to the sqlite3 object
-	$tw.sqlite3 = sqlite3;
-	// Boot TiddlyWiki – the timeout appears to be needed to give boot.js a chance to run
-	setTimeout(function() {
-		$tw.boot.boot();
-	},0);
-});
 
 $tw.Wiki = function(options) {
 	options = options || {};
@@ -447,4 +423,4 @@ $tw.Wiki = function(options) {
 };
 
 })();
-//# sourceURL=$:/plugins/tiddlywiki/demo-alternate-store/engines/sqlite/rawmarkup.js
+//# sourceURL=$:/plugins/tiddlywiki/demo-alternate-store/rawmarkup.js
