@@ -80,7 +80,7 @@ ClassicStoryView.prototype.remove = function(widget) {
 	if(duration) {
 		var targetElement = widget.findFirstDomNode(),
 			removeElement = function() {
-				widget.destroy();
+				widget.removeChildDomNodes();
 			};
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
@@ -112,7 +112,7 @@ ClassicStoryView.prototype.remove = function(widget) {
 			{opacity: "0.0"}
 		]);
 	} else {
-		widget.destroy();
+		widget.removeChildDomNodes();
 	}
 };
 

@@ -569,26 +569,17 @@ $tw.utils.getTypeEncoding = function(ext) {
 	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
-var polyfill =[
-	"// this polyfills the globalThis variable",
-	"// using the this variable on a getter ",
-	"// inserted into the prototype of globalThis",
-	"(function() {",
-	"	if (typeof globalThis === 'object') return;",
-	"	// node.green says this is available since 0.10.48",
-	"	Object.prototype.__defineGetter__('__temp__', function() {",
-	"		return this;",
-	"	});",
-	"	__temp__.globalThis = __temp__;",
-	"	delete Object.prototype.__temp__;",
-	"}());"
-].join("\n");
-
 var globalCheck =[
-	"  if(Object.keys(globalThis).length){",
-	"    console.log(Object.keys(globalThis));",
+	"  Object.defineProperty(Object.prototype, '__temp__', {",
+	"    get: function () { return this; },",
+	"    configurable: true",
+	"  });",
+	"  if(Object.keys(__temp__).length){",
+	"    console.log(Object.keys(__temp__));",
+	"    delete Object.prototype.__temp__;",
 	"    throw \"Global assignment is not allowed within modules on node.\";",
-	"  }"
+	"  }",
+	"  delete Object.prototype.__temp__;",
 ].join('\n');
 
 /*
@@ -604,7 +595,6 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	});
 	// Add the code prologue and epilogue
 	code = [
-		(!$tw.browser ? polyfill : ""),
 		"(function(" + contextNames.join(",") + ") {",
 		"  (function(){\n" + code + "\n;})();",
 		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
@@ -2090,7 +2080,11 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			console.log("Warning: missing plugin.info file in " + filepath);
 			return null;
 		}
-		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"));
+		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"),function() {return null;});
+		if(!pluginInfo) {
+			console.log("warning: invalid JSON in plugin.info file at " + infoPath);
+			pluginInfo = {};
+		}
 		// Read the plugin files
 		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
 		// Save the plugin tiddlers into the plugin info
@@ -2207,7 +2201,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		pluginFields;
 	// Bail if we don't have a wiki info file
 	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"));
+		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+		if(!wikiInfo) {
+			console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
+			wikiInfo = {};
+		}
 	} else {
 		return null;
 	}

@@ -1416,6 +1416,14 @@ exports.checkTiddlerText = function(title,targetText,options) {
 }
 
 /*
+Execute an action string without an associated context widget
+*/
+exports.invokeActionString = function(actions,event,variables,options) {
+	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
+	widget.invokeActionString(actions,null,event,variables);
+};
+
+/*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
 */
 exports.readFiles = function(files,options) {

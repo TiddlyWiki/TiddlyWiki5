@@ -21,10 +21,14 @@ Export our filter function
 */
 exports["[unknown]"] = function(source,operator,options) {
 	// Check for a user defined filter operator
-	if(operator.operator.charAt(0) === ".") {
-		var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator);
-		if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
-			var list = options.widget.evaluateVariable(operator.operator,{params: operator.operands, source: source});
+	if(operator.operator.indexOf(".") !== -1) {
+		var params = [];
+		$tw.utils.each(operator.operands,function(param) {
+			params.push({value: param});
+		});	
+		var variableInfo = options.widget && options.widget.getVariableInfo && options.widget.getVariableInfo(operator.operator,{params: params, source: source});
+		if(variableInfo && variableInfo.srcVariable) {
+			var list = variableInfo.resultList ? variableInfo.resultList : [variableInfo.text];
 			if(operator.prefix === "!") {
 				var results = [];
 				source(function(tiddler,title) {

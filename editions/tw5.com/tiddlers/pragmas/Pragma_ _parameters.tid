@@ -1,10 +1,10 @@
 created: 20220917113154900
-modified: 20230419103154329
+modified: 20230518143557045
 tags: Pragmas
 title: Pragma: \parameters
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.0">> The ''\parameters'' [[pragma|Pragmas]] is used within [[procedure|Procedure Definitions]] and [[widget|Widget Definitions]] definitions to declare the parameters that are expected, and their default values. It is a shortcut syntax for the ParametersWidget.
+<<.from-version "5.3.0">> The ''\parameters'' [[pragma|Pragmas]] is used within [[procedure|Procedure Definitions]] and [[widget|Custom Widgets]] definitions to declare the parameters that are expected, and their default values. It is a shortcut syntax for the ParametersWidget.
 
 ```
 \parameters (<name>[:<default-value>],<name>[:<default-value>]...)
@@ -15,4 +15,12 @@ For example:
 ```
 \parameters (firstname:"Joe",lastname:"Blogs")
 ```
+
+To illustrate the use of ''\parameters'' pragma, see [[Core Icons]] which are parameterised. The first parameter `size` specified the size at which the icon should be rendered. For example see the text of [[$:/core/images/print-button]] tiddler. The first line defines the size parameter as `\parameters (size:"22pt")`
+
+<<wikitext-example-without-html """{{$:/core/images/print-button|16px}}
+<$transclude $tiddler="$:/core/images/print-button" size="32px"/>
+""">>
+
+In the above example, the first line shows a simple transclusion of [[$:/core/images/print-button]] icon with `size` parameter passed by position and is set to 16px. The second line is a transclusion of image with `size` parameter passed by name and is set to 32px.
 

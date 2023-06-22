@@ -1,6 +1,6 @@
 caption: fill
 created: 20220909111836951
-modified: 20230419103154328
+modified: 20230511123456782
 tags: Widgets
 title: FillWidget
 type: text/vnd.tiddlywiki
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.3.0">> The <<.wlink FillWidget>> widget is used within a <<.wlink TranscludeWidget>> widget to specify the content that should be copied to the named "slot". Slots are defined by the <<.wlink SlotWidget>> widget within the transcluded content.
 
-See the <<.wlink TranscludeWidget>> widget for details.
+See the <<.wlink TranscludeWidget>> widget for details and an example. More examples can be found in the <<.wlink SlotWidget>> widget documentation.
 
 ! Attributes
 

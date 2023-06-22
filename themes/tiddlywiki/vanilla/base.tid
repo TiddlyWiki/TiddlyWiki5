@@ -1388,6 +1388,10 @@ html body.tc-body.tc-single-tiddler-window {
 	height: 1.2em;
 }
 
+.tc-editor-toolbar .tc-drop-down button.tc-btn-mini {
+	padding: 2px 4px;
+}
+
 .tc-editor-toolbar button:hover {
 	background-color: <<colour tiddler-controls-foreground-selected>>;
 	fill: <<colour background>>;
@@ -3178,6 +3182,10 @@ span.tc-translink > a:first-child {
 
 .tc-fill-background {
 	fill: <<colour background>>;
+}
+
+.tc-network-activity-background {
+	fill: <<colour network-activity-foreground>>;
 }
 
 /*

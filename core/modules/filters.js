@@ -12,6 +12,8 @@ Adds tiddler filtering methods to the $tw.Wiki object.
 /*global $tw: false */
 "use strict";
 
+var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
+
 /* Maximum permitted filter recursion depth */
 var MAX_FILTER_DEPTH = 300;
 
@@ -269,7 +271,7 @@ exports.compileFilter = function(filterString) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widget.evaluateVariable(varTree.name,{params: varTree.params, source: source})[0] || "";
+						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
 					} else {
 						operand.value = operand.text;
 					}

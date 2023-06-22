@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 TiddlyWiki intègre du code provenant de ces excellents projets OpenSource<<dp>>
 
 * [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
-* [[The Jasmine JavaScript Test Framework|http://pivotal.github.io/jasmine/]]
+* [[The Jasmine JavaScript Test Framework|https://jasmine.github.io/]]
 * [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
 
 Et des contenus provenenant de ces sources<<dp>>
