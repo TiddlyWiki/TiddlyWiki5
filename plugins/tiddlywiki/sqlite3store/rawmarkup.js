@@ -18,6 +18,29 @@ $tw.boot.preloadDirty = $tw.boot.preloadDirty || [];
 $tw.boot.suppressBoot = true;
 
 $tw.Wiki = function(options) {
+	var capi = $tw.sqlite3.capi, // C-style API
+		  oo = $tw.sqlite3.oo1; // High-level OO API
+	// Create a test database and store and retrieve some data
+	var db = new oo.DB("/tiddlywiki.sqlite3","ct");
+	db.exec({
+		sql:"CREATE TABLE IF NOT EXISTS t(a,b)"
+	});
+	db.exec({
+		sql: "insert into t(a,b) values (?,?)",
+		bind: [3, 1415926]
+	});
+	db.exec({
+		sql: "insert into t(a,b) values (?,?)",
+		bind: [1, 4142136]
+	});
+	let resultRows = [];
+	db.exec({
+		sql: "select a, b from t order by a limit 3",
+		rowMode: "object",
+		resultRows: resultRows
+	});
+	console.log("Result rows:",JSON.stringify(resultRows,undefined,2));
+	// Plain JS wiki store implementation follows
 	options = options || {};
 	var self = this,
 	tiddlers = Object.create(null), // Hashmap of tiddlers

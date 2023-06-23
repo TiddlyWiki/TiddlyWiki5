@@ -52,6 +52,10 @@ self.sqlite3InitModuleState.urlParams.set("sqlite3.wasm",blobUrl);
 self.sqlite3InitModule().then((sqlite3)=>{
 	// Save a reference to the sqlite3 object
 	$tw.sqlite3 = sqlite3;
+	var capi = $tw.sqlite3.capi, // C-style API
+		  oo = $tw.sqlite3.oo1; // High-level OO API
+	// Get version numbers
+	console.log("sqlite3 version",capi.sqlite3_libversion());
 	// Boot TiddlyWiki
 	$tw.boot.boot();
 });
