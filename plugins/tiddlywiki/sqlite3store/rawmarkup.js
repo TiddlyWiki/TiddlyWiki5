@@ -18,10 +18,8 @@ $tw.boot.preloadDirty = $tw.boot.preloadDirty || [];
 $tw.boot.suppressBoot = true;
 
 $tw.Wiki = function(options) {
-	var capi = $tw.sqlite3.capi, // C-style API
-		  oo = $tw.sqlite3.oo1; // High-level OO API
 	// Create a test database and store and retrieve some data
-	var db = new oo.DB("/tiddlywiki.sqlite3","ct");
+	var db = new $tw.sqlite3.oo1.DB("/tiddlywiki.sqlite3","ct");
 	db.exec({
 		sql:"CREATE TABLE IF NOT EXISTS t(a,b)"
 	});
@@ -40,6 +38,40 @@ $tw.Wiki = function(options) {
 		resultRows: resultRows
 	});
 	console.log("Result rows:",JSON.stringify(resultRows,undefined,2));
+	// Basic tiddler operations
+	db.exec({
+		sql: "CREATE TABLE IF NOT EXISTS tiddlers (title TEXT PRIMARY KEY,meta TEXT,text TEXT)"
+	});
+	function sqlSaveTiddler(tiddlerFields) {
+		db.exec({
+			sql: "replace into tiddlers(title,meta,text) values ($title,$meta,$text)",
+			bind: {
+				$title: tiddlerFields.title,
+				$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
+				$text: tiddlerFields.text || ""
+			}
+		});
+	}
+	function sqlGetTiddler(title) {
+		let resultRows = [];
+		db.exec({
+			sql: "select title, meta, text from tiddlers where title = $title",
+			bind: {
+				$title: title
+			},
+			rowMode: "object",
+			resultRows: resultRows
+		});
+		if(resultRows.length > 0) {
+			return Object.assign({},JSON.parse(resultRows[0].meta),{title: resultRows[0].title, text: resultRows[0].text});
+		} else {
+			return undefined;
+		}
+	}
+	sqlSaveTiddler({title: "HelloThere", text: "One"});
+	console.log(sqlGetTiddler("HelloThere"));
+	sqlSaveTiddler({title: "HelloThere", text: "Two"});
+	console.log(sqlGetTiddler("HelloThere"));
 	// Plain JS wiki store implementation follows
 	options = options || {};
 	var self = this,
