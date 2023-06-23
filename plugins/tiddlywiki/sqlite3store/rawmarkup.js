@@ -70,7 +70,7 @@ $tw.Wiki = function(options) {
 	}
 	sqlSaveTiddler({title: "HelloThere", text: "One"});
 	console.log(sqlGetTiddler("HelloThere"));
-	sqlSaveTiddler({title: "HelloThere", text: "Two"});
+	sqlSaveTiddler({title: "HelloThere", text: "Two", custom: "A custom field"});
 	console.log(sqlGetTiddler("HelloThere"));
 	// Plain JS wiki store implementation follows
 	options = options || {};
