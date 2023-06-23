@@ -61,10 +61,21 @@ $tw.Wiki = function(options) {
 			return undefined;
 		}
 	}
+	function sqlAllTitles() {
+		let resultRows = [];
+		db.exec({
+			sql: "select title from tiddlers order by title",
+			rowMode: "object",
+			resultRows: resultRows
+		});
+		return resultRows;
+	}
 	sqlSaveTiddler({title: "HelloThere", text: "One"});
 	console.log(sqlGetTiddler("HelloThere"));
 	sqlSaveTiddler({title: "HelloThere", text: "Two", custom: "A custom field"});
 	console.log(sqlGetTiddler("HelloThere"));
+	sqlSaveTiddler({title: "AnotherTiddler", text: "Three"});
+	console.log(sqlAllTitles());
 	// Plain JS wiki store implementation follows
 	options = options || {};
 	var self = this,
