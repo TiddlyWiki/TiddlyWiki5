@@ -1,17 +1,20 @@
 /*\
-title: $:/plugins/tiddlywiki/sqlite3store/rawmarkup-bottombody.js
-type: text/plain
+title: $:/plugins/tiddlywiki/sqlite3store/init-sqlite3.js
+type: application/javascript
 
-Startup code injected as raw markup at the bottom of the body section
+Initialise sqlite3 and then boot TiddlyWiki
+
+This file is spliced into the HTML file to be executed after the boot kernel has been loaded.
 
 \*/
 
 (function() {
 
-// Get the main tiddler store
-var storeEl = document.querySelector("script.tiddlywiki-tiddler-store");
-var tiddlerStore = JSON.parse(storeEl.textContent);
+// Get the main tiddler store out of the HTML file
+var storeEl = document.querySelector("script.tiddlywiki-tiddler-store"),
+	tiddlerStore = JSON.parse(storeEl.textContent);
 
+// Helper to get a tiddler from the store by title
 function getTiddler(title) {
 	for(var t=0; t<tiddlerStore.length; t++) {
 		var tiddler = tiddlerStore[t];
@@ -21,21 +24,16 @@ function getTiddler(title) {
 	}
 	return undefined;
 }
-
-var thisPlugin = getTiddler("$:/plugins/tiddlywiki/sqlite3store");
-
-var thisPluginTiddlers = JSON.parse(thisPlugin.text).tiddlers;
-
+// Get the shadow tiddlers of this plugin
+var thisPlugin = getTiddler("$:/plugins/tiddlywiki/sqlite3store"),
+	thisPluginTiddlers = JSON.parse(thisPlugin.text).tiddlers;
 // Execute the sqlite3 module
-var sqlite3js = thisPluginTiddlers["$:/plugins/tiddlywiki/sqlite3store/sqlite3.js"].text;
-
-var context = {
-	exports: {}
-};
-
+var sqlite3js = thisPluginTiddlers["$:/plugins/tiddlywiki/sqlite3store/sqlite3.js"].text,
+	context = {
+		exports: {}
+	};
 $tw.utils.evalSandboxed(sqlite3js,context,"$:/plugins/tiddlywiki/sqlite3store/sqlite3.js",true);
-
-// Create a Blob URL for our wasm data
+// Create a Blob URL for the wasm data
 var sqlite3wasm = thisPluginTiddlers["$:/plugins/tiddlywiki/sqlite3store/sqlite3.wasm"].text;
 var decodedData = window.atob(sqlite3wasm),
 	uInt8Array = new Uint8Array(decodedData.length);
@@ -43,11 +41,9 @@ for (var i = 0; i < decodedData.length; ++i) {
 	uInt8Array[i] = decodedData.charCodeAt(i);
 }
 var blobUrl = URL.createObjectURL(new Blob([uInt8Array],{type: "application/wasm"}));
-
 // Pass sqlite an URLSearchParams object containing the Blob URL of our wasm data
 self.sqlite3InitModuleState.urlParams = new URLSearchParams();
 self.sqlite3InitModuleState.urlParams.set("sqlite3.wasm",blobUrl);
-
 // Initialise sqlite
 self.sqlite3InitModule().then((sqlite3)=>{
 	// Save a reference to the sqlite3 object
@@ -61,4 +57,4 @@ self.sqlite3InitModule().then((sqlite3)=>{
 });
 
 })();
-//# sourceURL=$:/plugins/tiddlywiki/sqlite3store/rawmarkup-bottombody.js
+//# sourceURL=$:/plugins/tiddlywiki/sqlite3store/init-sqlite3.js

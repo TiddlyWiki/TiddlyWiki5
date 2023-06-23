@@ -1,21 +1,14 @@
 /*\
-title: $:/plugins/tiddlywiki/sqlite3store/rawmarkup.js
-type: text/plain
+title: $:/plugins/tiddlywiki/sqlite3store/sql-wiki-store.js
+type: application/javascript
 
-Startup code injected as raw markup
+A sqlite3 implementation of a wiki store object
+
+This file is spliced into the HTML file to be executed before the boot kernel has been loaded.
 
 \*/
 
 (function() {
-
-// Initialse skeleton TiddlyWiki global because we run before bootprefix.js and boot.js
-window.$tw = window.$tw || Object.create(null);
-$tw.hooks = $tw.hooks || { names: {}};
-$tw.boot = $tw.boot || {};
-$tw.boot.preloadDirty = $tw.boot.preloadDirty || [];
-
-// Tell TiddlyWiki not to boot itself
-$tw.boot.suppressBoot = true;
 
 $tw.Wiki = function(options) {
 	// Create a test database and store and retrieve some data
@@ -480,4 +473,4 @@ $tw.Wiki = function(options) {
 };
 
 })();
-//# sourceURL=$:/plugins/tiddlywiki/sqlite3store/rawmarkup.js
+//# sourceURL=$:/plugins/tiddlywiki/sqlite3store/sql-wiki-store.js

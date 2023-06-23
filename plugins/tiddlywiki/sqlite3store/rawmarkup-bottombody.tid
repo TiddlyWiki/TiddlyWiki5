@@ -2,5 +2,5 @@ title: $:/plugins/tiddlywiki/sqlite3store/rawmarkup/bottombody
 tags: $:/tags/RawMarkupWikified/BottomBody
 
 `<script>`
-{{$:/plugins/tiddlywiki/sqlite3store/rawmarkup-bottombody.js}}
+{{$:/plugins/tiddlywiki/sqlite3store/init-sqlite3.js}}
 `</script>`
