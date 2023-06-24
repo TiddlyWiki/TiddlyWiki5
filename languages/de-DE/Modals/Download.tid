@@ -4,7 +4,7 @@ subtitle: Änderungen Speichern
 footer: <$button message="tm-close-tiddler">Schließen</$button>
 help: https://tiddlywiki.com/static/DownloadingChanges.html
 
-Ihr Browser unterstützt nur manuelles Speichern. 
+Ihr Browser unterstützt nur manuelles Speichern.
 
 Um das geänderte Wiki zu speichern, machen Sie einen "rechts klick" auf den folgenden Link. Wählen Sie "Datei herunterladen" oder "Datei speichern" und wählen Sie Name und Verzeichnis.
 

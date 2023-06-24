@@ -25,6 +25,8 @@ Encryption/RepeatPassword: Passwort wiederholen
 Encryption/PasswordNoMatch: Passwörter stimmen nicht überein
 Encryption/SetPassword: Passwort setzen
 Error/Caption: Fehler
+Error/DeserializeOperator/MissingOperand: Filter Fehler: Fehlender Operand für 'deserialize' Operator
+Error/DeserializeOperator/UnknownDeserializer: Filter Fehler: Unbekannter "deserializer" als Operand für 'deserialize' Operator verwendet
 Error/Filter: Filter Fehler
 Error/FilterSyntax: Syntax Fehler im Filter-Ausdruck
 Error/FilterRunPrefix: Filter Fehler: Unbekanntes Prefix für Filter lauf
@@ -40,6 +42,7 @@ Error/RetrievingSkinny: Fehler beim Empfangen einer "skinny" Tiddler Liste
 Error/SavingToTWEdit: Fehler beim Speichern mit "TWEdit"
 Error/WhileSaving: Fehler beim Speichern
 Error/XMLHttpRequest: XMLHttpRequest Fehler-Code
+Error/ZoominTextNode: "Story View Error:" Es scheint Sie versuchen mit einem Tiddler zu interagieren, der in einem speziellen Container angezeigt wird. Dies wird wahrscheinlich durch den Tag: `$:/tags/StoryTiddlerTemplateFilter`verursacht. Wahrscheinlich enthält das Template reinen Text oder Leerzeilen am Anfang. Verwenden Sie das "Pragma" `\whitespace trim` oder stellen Sie sicher, dass der Template Inhalt in einem HTML-Element "eingeschlossen" ist. Der Text, der den Fehler verursacht ist: 
 InternalJavaScriptError/Title: Interner JavaScript Fehler
 InternalJavaScriptError/Hint: Es tut uns leid, aber bitte starten Sie Ihr TiddlyWiki neu, indem sie die Seite im Browser neu laden.
 LayoutSwitcher/Description: "Layout" Selektor anzeigen
