@@ -67,6 +67,8 @@ More/Caption: mehr
 More/Hint: Weitere Aktionen
 NewHere/Caption: Neu hier
 NewHere/Hint: Erstelle einen neuen Tiddler, der mit dem Namen dieses Tiddlers getaggt ist
+NetworkActivity/Caption: Netzwerk Aktivität
+NetworkActivity/Hint: Alle offen Netwerk Anfragen beenden
 NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
 NewJournalHere/Caption: Neues Journal hier
