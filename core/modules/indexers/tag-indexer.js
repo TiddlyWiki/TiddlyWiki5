@@ -35,9 +35,22 @@ TagIndexer.prototype.rebuild = function() {
 };
 
 TagIndexer.prototype.update = function(updateDescriptor) {
-	$tw.utils.each(this.subIndexers,function(subIndexer) {
-		subIndexer.update(updateDescriptor);
-	});
+	var newTid = updateDescriptor.new.tiddler;
+	var oldTid = updateDescriptor.old.tiddler;
+	var noOldTid = oldTid === undefined;
+	var noNewTid = newTid === undefined;
+
+	var a=((newTid && newTid.fields && newTid.fields.tags === undefined) && noOldTid),
+		b=((oldTid && oldTid.fields && oldTid.fields.tags === undefined) && noNewTid),
+		c=((newTid && newTid.fields && newTid.fields.tags === undefined) && (oldTid && oldTid.fields && oldTid.fields.tags === undefined));
+
+	if( a || b || c ) {
+			return;
+		} else {
+			$tw.utils.each(this.subIndexers,function(subIndexer) {
+				subIndexer.update(updateDescriptor);
+			});
+		}
 };
 
 function TagSubIndexer(indexer,iteratorMethod) {
@@ -56,6 +69,7 @@ TagSubIndexer.prototype.addIndexMethod = function() {
 TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
+const t0 = $tw.utils.timer();
 	this.index = Object.create(null);
 	// Add all the tags
 	this.indexer.wiki[this.iteratorMethod](function(tiddler,title) {
@@ -67,6 +81,7 @@ TagSubIndexer.prototype.rebuild = function() {
 			}
 		});
 	});
+console.log("--------------- rebuild", $tw.utils.timer(t0));
 };
 
 TagSubIndexer.prototype.update = function(updateDescriptor) {
