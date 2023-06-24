@@ -28,7 +28,20 @@ The approach taken by this release is to add new functionality by extending and 
 
 These changes lay the groundwork for macros and related features to be deprecated (which is the point at which users are advised not to use old features, and instead given clear pointers to the equivalent modern functionality).
 
-The new transclusion architecture is not by itself sufficient to enable us to fully deprecate macros yet. To handle the remaining use cases we propose a new backtick quoted attribute format that allows for the substitution of variable values. See https://github.com/Jermolene/TiddlyWiki5/issues/6663 for details.
+! Text Substitution Improvements
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7526">> The new transclusion architecture is not by itself sufficient to enable us to fully deprecate macros yet. To handle most of the remaining use cases this release adds convenient new ways of using textual substitution without having to create a macro:
+
+Firstly, the new [[text substitution syntax for widget attributes|Substituted Attribute Values]] allows widget attributes to be assigned the value of a string with certain placeholders being replaced by their processed contents. For example:
+
+* Substitute variable names with the value with <$codeblock code="attr=`Current tiddler is $(currentTiddler)$`"/>
+* Substitute filter expressions with the first value they return with <$codeblock code="attr=```There are ${ [tag[Done]count[]] }$ completed tasks```"/>
+
+Secondly, the new [[substitute operator|substitute Operator]] allows the same textual substitutions to be performed via a filter operator with the addition of positional parameters that use placeholders of the form `$1$`, `$2$`, `$3$` etc.
+
+```
+[[https://$1$/$(currentTiddler)$]substitute<domain-name>]
+```
 
 ! HTTP Requests in WikiText
 
