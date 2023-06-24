@@ -380,6 +380,8 @@ Widget.prototype.computeAttribute = function(attribute) {
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
 		value = variableInfo.text;
+	} else if(attribute.type === "substituted") {
+		value = this.wiki.getSubstitutedText(attribute.rawValue,this) || "";
 	} else { // String attribute
 		value = attribute.value;
 	}
