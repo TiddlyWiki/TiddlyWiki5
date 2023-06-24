@@ -44,7 +44,12 @@ TagIndexer.prototype.update = function(updateDescriptor) {
 		b=((oldTid && oldTid.fields && oldTid.fields.tags === undefined) && noNewTid),
 		c=((newTid && newTid.fields && newTid.fields.tags === undefined) && (oldTid && oldTid.fields && oldTid.fields.tags === undefined));
 
-	if( a || b || c ) {
+	// Index should be kept when
+	// there is no new tiddler -> or
+	// a) new tiddler has no tags && no old tiddler -> or
+	// b) old tiddler has no tags && there is no new tiddler -> or
+	// c) new tiddler has no tags && old tiddler has no tags
+	if( noNewTid || a || b || c ) {
 			return;
 		} else {
 			$tw.utils.each(this.subIndexers,function(subIndexer) {
