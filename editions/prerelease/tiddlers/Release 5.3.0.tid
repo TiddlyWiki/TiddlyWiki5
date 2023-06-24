@@ -67,11 +67,9 @@ Secondly, the new [[substitute operator|substitute Operator]] allows the same te
 
 Improvements to the following translations:
 
-* 
-
-! Accessibility Improvements
-
-* 
+* German
+* Polish
+* Chinese
 
 ! Usability Improvements
 
@@ -97,6 +95,7 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7378">> missing file extensions for "audio/mpeg" files
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7417">> [[Table-of-Contents Macros]] to add consistent support for an ''exclude'' parameter
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/190613ad2989f70526f86eef17f524087f60eb72">> [[tv-config-static Variable]] for indicating static rendering
+
 ! Bug Fixes
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7215">> importing tiddlers by pasting tiddler data
@@ -108,10 +107,6 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7529">> size of buttons in dropdown for editor "link" toolbar button
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8e132948b6bec623d81d300fbe6dc3a0307bcc6d">> crash when transcluding a lazily loaded tiddler as an attribute value
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7462">> DiffTextWidget crash with missing or empty attributes
-
-! Developer Improvements
-
-* 
 
 ! Node.js Improvements
 
@@ -128,10 +123,15 @@ Improvements to the following translations:
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+AnthonyMuscio
 Arlen22
 BramChen
 btheado
+buggyj
+carlo-carlombo
+cdruan
 donmor
+EvidentlyCube
 flibbles
 GameDungeon
 JoshuaFontany
@@ -147,4 +147,5 @@ saqimtiaz
 tavin
 twMat
 yaisog
+Zacharia2
 """>>
