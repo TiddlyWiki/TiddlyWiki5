@@ -83,7 +83,7 @@ Improvements to the following translations:
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7511"> new [[deserialize Operator]] for converting various textual representations of tiddlers into JSON data
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7292">> [[format Operator]] to support converting Unix timestamps to TiddlyWiki's native date format
-
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7392">> new [[':then' filter run prefix|Then Filter Run Prefix]]
 
 ! Hackability Improvements
 
