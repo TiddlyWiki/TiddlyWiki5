@@ -1,8 +1,8 @@
 code-body: yes
 created: 20230324160845531
 modified: 20230326145119329
-tags: $:/tags/Macro
-title: $:/editions/tw5.com/breadcrumbs-macros
+tags: $:/tags/Global
+title: $:/editions/tw5.com/breadcrumbs-nav
 type: text/vnd.tiddlywiki
 
 \define .bc-link(title, class)
@@ -22,7 +22,7 @@ type: text/vnd.tiddlywiki
 \end
 
 <!-- ================================================================ -->
-<!-- This ".breadcrumbs" macro is a wrapper for global mode switching -->
+<!-- ".breadcrumbs" is a wrapper for global mode switching -->
 <!-- "mode" defaults to "story", which will recreate the hierarchy also in the story river -->
 <!-- It uses a list-like field, which defaults to "tags" as the start of the hierarchy -->
 
@@ -38,7 +38,7 @@ type: text/vnd.tiddlywiki
 \end
 
 <!-- ========================================================================= -->
-<!-- This ".breadcrumbsStory" macro uses a list-like field (default: tags) and -->
+<!-- ".breadcrumbsStory" uses a list-like field (default: tags) and -->
 <!-- it will retain the hierarchical order in the story river -->
 
 \define .openInStoryActions()
@@ -98,9 +98,8 @@ type: text/vnd.tiddlywiki
 \end
 
 <!-- ========================================================================= -->
-<!-- This macro ".breadcrumbsField" uses a field (defaults to "list") as the breadcrumbs source.
-	start is a tiddler title (defaults to "currentTiddler")
--->
+<!-- ".breadcrumbsField" uses a field (defaults to "list") as the breadcrumbs source. -->
+<!-- start is a tiddler title (defaults to "currentTiddler") -->
 
 \define .openFieldInStoryActions()
 <$set name=visited filter="[<__start__>get<__field__>enlist-input[]] -[enlist<excluded>] +[allafter<__target__>] :or[<__start__>]" >
@@ -141,7 +140,7 @@ type: text/vnd.tiddlywiki
 \end
 
 <!-- ========================================================================= -->
-<!-- This ".breadcrumbsSimple" macro uses a list-like field (default: tags) as the start of the hierarchy -->
+<!-- ".breadcrumbsSimple" uses a list-like field (default: tags) as the start of the hierarchy -->
 <!-- Links will be opened according to wiki global "open link in story-river" setting -->
 
 \define .bcRecursion(current, stop, exclude, field:"tags", sort:"yes")

@@ -1,15 +1,15 @@
 breadcrumbs: aa bb cc dd ee
 created: 20230408131424728
-modified: 20230425174048480
+modified: 20230625194907178
 tags: 
-title: Breadcrumbs Macros
+title: Breadcrumbs Navigation
 type: text/vnd.tiddlywiki
 
 !! Introduction
 
 [[Breadcrumbs]] are used as a navigational aid in user interfaces and on web pages. It allows users to keep track and maintain awareness of their locations within programs, documents, or websites.
 
-There are 4 documentation `.breadcrumbs`-related macros, which are designed for different usecaseses.
+There are 4 documentation `<<.breadcrumbs ...>>` calls, which are designed for different usecaseses.
 
 |`.breadcrumbs` |A wrapper macro that calls "-Story" (default) "-Simple" or "-Field", depending on the <<.param mode>> parameter |
 |`.breadcrumbsStory` |By default, this recursive macro uses the ''tags'' field to create the breadcrumbs structure. Opening the links recreates this structure in the story-list as close as possible |
@@ -24,17 +24,17 @@ With the <<.param mode>> parameter, the `<<.breadcrumbs mode:"story">>` macro is
 
 !!! Mode Values
 
-* <<.value story>> ... Clicking on a link will open the new tiddler according to the position within the breadcrumbs hierarchy. So the hierarchy is reflected by the position in the story-river
+* <<.value story>>: Clicking on a link will open the new tiddler according to the position within the breadcrumbs hierarchy. So the hierarchy is reflected by the position in the story-river
 
-* <<.value simple>> ... Clicking on a link will open the new tiddler according to the [[Navigation from within the story river|$:/config/Navigation/openLinkFromInsideRiver]] setting, which currently is set to: ''{{$:/config/Navigation/openLinkFromInsideRiver}}''
+* <<.value simple>>: Clicking on a link will open the new tiddler according to the [[Navigation from within the story river|$:/config/Navigation/openLinkFromInsideRiver]] setting, which currently is set to: ''{{$:/config/Navigation/openLinkFromInsideRiver}}''
 
-* <<.value field>> ... Clicking on a link will try to recreate the breadcrumbs order in the story river. Also see: ".breadcrumbsField" section
+* <<.value field>>: Clicking on a link will try to recreate the breadcrumbs order in the story river. Also see: ".breadcrumbsField" section
 
 !! Common Parameters
 
 The ''stop'' parameter ''is required''. All other parameters are optional. If the <<.param start>> parameter is omitted, the <<.var currentTiddler>> will be used
 
-All breadcrumbs macros have the following parameters in common:
+All breadcrumbs have the following parameters in common:
 
 |<<.param stop>> (required)|Tiddler title to stop recursion -- Needs to be an existing tiddler, otherwise there is an error message |
 |<<.param field>> |Defaults to <<.value tags>>. A "tag-like" field used to create the breadcrumbs hierarchy |
@@ -68,7 +68,7 @@ If the user changes the global font-size and / or line-height in the theme to hi
 
 !! Examples
 
-The breadcrumbs macros are responsive. So for small screens, they will look different according to the [[breadcrumbs CSS|$:/editions/tw5.com/breadcrumbs-css]] settings
+The breadcrumbs navigation elements are responsive. So for small screens, they will look different according to the [[breadcrumbs CSS|$:/editions/tw5.com/breadcrumbs-css]] settings
 
 !!! Story Mode
 
