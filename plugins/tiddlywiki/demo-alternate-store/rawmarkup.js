@@ -19,26 +19,15 @@ $tw.Wiki = function(options) {
 	options = options || {};
 	var self = this,
 	tiddlers = Object.create(null), // Hashmap of tiddlers
-	tiddlerTitles = null, // Array of tiddler titles
 	getTiddlerTitles = function() {
-		if(!tiddlerTitles) {
-			tiddlerTitles = Object.keys(tiddlers).sort(function(a,b) {return a.localeCompare(b);});
-		}
-		return tiddlerTitles;
+		return Object.keys(tiddlers).sort(function(a,b) {return a.localeCompare(b);});
 	},
 	pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 	pluginInfo = Object.create(null), // Hashmap of parsed plugin content
 	shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
-	shadowTiddlerTitles = null,
 	getShadowTiddlerTitles = function() {
-		if(!shadowTiddlerTitles) {
-			shadowTiddlerTitles = Object.keys(shadowTiddlers);
-		}
-		return shadowTiddlerTitles;
-	},
-	enableIndexers = options.enableIndexers || null,
-	indexers = [],
-	indexersByName = Object.create(null);
+		return Object.keys(shadowTiddlers);
+	};
 	//$tw.utils replacements
 	var eachObj = function(object,callback) {
 		var next,f,length;
@@ -94,17 +83,11 @@ $tw.Wiki = function(options) {
 	};
 
 	this.addIndexer = function(indexer,name) {
-		// Bail if this indexer is not enabled
-		if(enableIndexers && enableIndexers.indexOf(name) === -1) {
-			return;
-		}
-		indexers.push(indexer);
-		indexersByName[name] = indexer;
-		indexer.init();
+		return;
 	};
 
 	this.getIndexer = function(name) {
-		return indexersByName[name] || null;
+		return null;
 	};
 
 	// Add a tiddler to the store
@@ -116,32 +99,11 @@ $tw.Wiki = function(options) {
 		if(tiddler) {
 			var title = tiddler.fields.title;
 			if(title) {
-				// Uncomment the following line for detailed logs of all tiddler writes
-				// console.log("Adding",title,tiddler)
-				// Record the old tiddler state
-				var updateDescriptor = {
-					old: {
-						tiddler: this.getTiddler(title),
-						shadow: this.isShadowTiddler(title),
-						exists: this.tiddlerExists(title)
-					}
-				}
 				// Save the new tiddler
 				tiddlers[title] = tiddler;
-				// Check we've got the title
-				tiddlerTitles = insertSortedArray(tiddlerTitles || [],title);
-				// Record the new tiddler state
-				updateDescriptor["new"] = {
-					tiddler: tiddler,
-					shadow: this.isShadowTiddler(title),
-					exists: this.tiddlerExists(title)
-				}
-				// Update indexes
+				// Update caches
 				this.clearCache(title);
 				this.clearGlobalCache();
-				eachObj(indexers,function(indexer) {
-					indexer.update(updateDescriptor);
-				});
 				// Queue a change event
 				this.enqueueTiddlerEvent(title);
 			}
@@ -153,35 +115,11 @@ $tw.Wiki = function(options) {
 		// Uncomment the following line for detailed logs of all tiddler deletions
 		// console.log("Deleting",title)
 		if(hop(tiddlers,title)) {
-			// Record the old tiddler state
-			var updateDescriptor = {
-				old: {
-					tiddler: this.getTiddler(title),
-					shadow: this.isShadowTiddler(title),
-					exists: this.tiddlerExists(title)
-				}
-			}
 			// Delete the tiddler
 			delete tiddlers[title];
-			// Delete it from the list of titles
-			if(tiddlerTitles) {
-				var index = tiddlerTitles.indexOf(title);
-				if(index !== -1) {
-					tiddlerTitles.splice(index,1);
-				}
-			}
-			// Record the new tiddler state
-			updateDescriptor["new"] = {
-				tiddler: this.getTiddler(title),
-				shadow: this.isShadowTiddler(title),
-				exists: this.tiddlerExists(title)
-			}
-			// Update indexes
+			// Update caches
 			this.clearCache(title);
 			this.clearGlobalCache();
-			eachObj(indexers,function(indexer) {
-				indexer.update(updateDescriptor);
-			});
 			// Queue a change event
 			this.enqueueTiddlerEvent(title,true);
 		}
@@ -205,7 +143,7 @@ $tw.Wiki = function(options) {
 
 	// Get an array of all tiddler titles
 	this.allTitles = function() {
-		return getTiddlerTitles().slice(0);
+		return getTiddlerTitles();
 	};
 
 	// Iterate through all tiddler titles
@@ -214,13 +152,13 @@ $tw.Wiki = function(options) {
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			callback(tiddlers[title],title);
+			callback(self.getTiddler(title),title);
 		}
 	};
 
 	// Get an array of all shadow tiddler titles
 	this.allShadowTitles = function() {
-		return getShadowTiddlerTitles().slice(0);
+		return getShadowTiddlerTitles();
 	};
 
 	// Iterate through all shadow tiddler titles
@@ -229,8 +167,8 @@ $tw.Wiki = function(options) {
 			index,titlesLength,title;
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(tiddlers[title]) {
-				callback(tiddlers[title],title);
+			if(self.tiddlerExists(title)) {
+				callback(self.getTiddler(title),title);
 			} else {
 				var shadowInfo = shadowTiddlers[title];
 				callback(shadowInfo.tiddler,title);
@@ -244,12 +182,12 @@ $tw.Wiki = function(options) {
 			titles = getTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			callback(tiddlers[title],title);
+			callback(self.getTiddler(title),title);
 		}
 		titles = getShadowTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(!tiddlers[title]) {
+			if(!self.tiddlerExists(title)) {
 				var shadowInfo = shadowTiddlers[title];
 				callback(shadowInfo.tiddler,title);
 			}
@@ -262,8 +200,8 @@ $tw.Wiki = function(options) {
 			titles = getShadowTiddlerTitles();
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
-			if(tiddlers[title]) {
-				callback(tiddlers[title],title);
+			if(self.tiddlerExists(title)) {
+				callback(self.getTiddler(title),title);
 			} else {
 				var shadowInfo = shadowTiddlers[title];
 				callback(shadowInfo.tiddler,title);
@@ -273,7 +211,7 @@ $tw.Wiki = function(options) {
 		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
 			title = titles[index];
 			if(!shadowTiddlers[title]) {
-				callback(tiddlers[title],title);
+				callback(self.getTiddler(title),title);
 			}
 		}
 	};
@@ -312,7 +250,7 @@ $tw.Wiki = function(options) {
 			deletedPlugins: []
 		};
 		eachObj(titles || getTiddlerTitles(),function(title) {
-			var tiddler = tiddlers[title];
+			var tiddler = self.getTiddler(title);
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
 					pluginInfo[tiddler.fields.title] = parseJSONSafe(tiddler.fields.text);
@@ -412,14 +350,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null;
 		this.clearCache(null);
 		this.clearGlobalCache();
-		eachObj(indexers,function(indexer) {
-			indexer.rebuild();
-		});
 	};
-
-	if(this.addIndexersToWiki) {
-		this.addIndexersToWiki();
-	}
 };
 
 })();
