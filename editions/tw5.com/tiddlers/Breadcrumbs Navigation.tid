@@ -7,6 +7,8 @@ type: text/vnd.tiddlywiki
 
 !! Introduction
 
+At the moment the .breadcrumbs macros are only available for the TiddlyWiki documentation branch.
+
 [[Breadcrumbs]] are used as a navigational aid in user interfaces and on web pages. It allows users to keep track and maintain awareness of their locations within programs, documents, or websites.
 
 There are 4 documentation `<<.breadcrumbs ...>>` calls, which are designed for different usecaseses.
