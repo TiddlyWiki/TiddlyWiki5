@@ -25,6 +25,8 @@ Encryption/RepeatPassword: Répéter le mot de passe
 Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
 Encryption/SetPassword: Définir ce mot de passe 
 Error/Caption: Erreur
+Error/DeserializeOperator/MissingOperand: Erreur de filtre: opérande manquant pour l'opérateur 'deserialize'
+Error/DeserializeOperator/UnknownDeserializer: Erreur de filtre: l'opérateur 'deserialize' a pour opérande un désérialiseur inconnu
 Error/Filter: Erreur de filtre
 Error/FilterSyntax: Erreur de syntaxe dans l'expression du filtre
 Error/FilterRunPrefix: Erreur de filtre : Préfixe de run inconnu pour le filtre
