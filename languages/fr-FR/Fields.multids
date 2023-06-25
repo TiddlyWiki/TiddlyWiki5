@@ -15,7 +15,7 @@ dependents: Quand le tiddler est un plugin, énumère les titres des plugins dé
 description: Texte de description d'un plugin, ou d'une boîte de dialogue
 draft.of: Pour les tiddlers en cours d'édition, contient le titre du tiddler initial
 draft.title: Pour les tiddlers en cours d'édition, contient le nouveau titre prévu pour le tiddler
-footer: Texte de bas de page dans le cas d'un wizard
+footer: Texte de bas de page dans le cas d'une fenêtre modale
 hide-body: Le template de visualisation cachera le corps des tiddlers si la valeur est ''yes''
 icon: Titre du tiddler contenant l'icone associée à un tiddler
 library: Si la valeur est <q>yes</q>, indique qu'un tiddler doit être sauvegardé comme bibliothèque JavaScript
@@ -32,7 +32,7 @@ plugin-type: Dans le cas d'un tiddler plugin, le type du plugin
 revision: Numéro de révision du tiddler présent sur le serveur
 released: Date de version d'un TiddlyWiki
 source: URL source associée à ce tiddler
-subtitle: Texte du sous-titre pour un wizard
+subtitle: Texte du sous-titre pour une fenêtre modale
 tags: Liste des tags associés à un tiddler
 text: Texte du corps de ce tiddler
 throttle.refresh: Si présent, ralentit les rafraîchissements de ce tiddler
