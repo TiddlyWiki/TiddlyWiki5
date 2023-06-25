@@ -12,7 +12,7 @@ This file is spliced into the HTML file to be executed before the boot kernel ha
 
 $tw.Wiki = function(options) {
 	// Create a test database and store and retrieve some data
-	var db = new $tw.sqlite3.oo1.DB("/tiddlywiki.sqlite3","ct");
+	var db = new $tw.sqlite3.oo1.DB("/tiddlywiki.sqlite3","c");
 	db.exec({
 		sql:"CREATE TABLE IF NOT EXISTS t(a,b)"
 	});
@@ -33,7 +33,10 @@ $tw.Wiki = function(options) {
 	console.log("Result rows:",JSON.stringify(resultRows,undefined,2));
 	// Basic tiddler operations
 	db.exec({
-		sql: "CREATE TABLE IF NOT EXISTS tiddlers (title TEXT PRIMARY KEY,meta TEXT,text TEXT)"
+		sql: [
+			"CREATE TABLE IF NOT EXISTS tiddlers (title TEXT PRIMARY KEY,meta TEXT,text TEXT);",
+			"CREATE INDEX tiddlers_title_index ON tiddlers(title);"
+	]
 	});
 	function sqlSaveTiddler(tiddlerFields) {
 		db.exec({
@@ -42,6 +45,14 @@ $tw.Wiki = function(options) {
 				$title: tiddlerFields.title,
 				$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
 				$text: tiddlerFields.text || ""
+			}
+		});
+	}
+	function sqlDeleteTiddler(title) {
+		db.exec({
+			sql: "delete from tiddlers where title = $title",
+			bind: {
+				$title: title
 			}
 		});
 	}
@@ -68,7 +79,9 @@ $tw.Wiki = function(options) {
 			rowMode: "object",
 			resultRows: resultRows
 		});
-		return resultRows;
+		return resultRows.map(row => {
+			return row.title;
+		});
 	}
 	sqlSaveTiddler({title: "HelloThere", text: "One"});
 	console.log(sqlGetTiddler("HelloThere"));
@@ -79,9 +92,8 @@ $tw.Wiki = function(options) {
 	// Plain JS wiki store implementation follows
 	options = options || {};
 	var self = this,
-	tiddlers = Object.create(null), // Hashmap of tiddlers
 	getTiddlerTitles = function() {
-		return Object.keys(tiddlers).sort(function(a,b) {return a.localeCompare(b);});
+		return sqlAllTitles();
 	},
 	pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 	pluginInfo = Object.create(null), // Hashmap of parsed plugin content
@@ -161,7 +173,7 @@ $tw.Wiki = function(options) {
 			var title = tiddler.fields.title;
 			if(title) {
 				// Save the new tiddler
-				tiddlers[title] = tiddler;
+				sqlSaveTiddler(tiddler.fields);
 				// Update caches
 				this.clearCache(title);
 				this.clearGlobalCache();
@@ -175,9 +187,9 @@ $tw.Wiki = function(options) {
 	this.deleteTiddler = function(title) {
 		// Uncomment the following line for detailed logs of all tiddler deletions
 		// console.log("Deleting",title)
-		if(hop(tiddlers,title)) {
+		if(self.tiddlerExists(title)) {
 			// Delete the tiddler
-			delete tiddlers[title];
+			sqlDeleteTiddler(title);
 			// Update caches
 			this.clearCache(title);
 			this.clearGlobalCache();
@@ -189,9 +201,9 @@ $tw.Wiki = function(options) {
 	// Get a tiddler from the store
 	this.getTiddler = function(title) {
 		if(title) {
-			var t = tiddlers[title];
+			var t = sqlGetTiddler(title);
 			if(t !== undefined) {
-				return t;
+				return new $tw.Tiddler(t);
 			} else {
 				var s = shadowTiddlers[title];
 				if(s !== undefined) {
@@ -278,7 +290,7 @@ $tw.Wiki = function(options) {
 	};
 
 	this.tiddlerExists = function(title) {
-		return !!hop(tiddlers,title);
+		return !!sqlGetTiddler(title);
 	};
 
 	this.isShadowTiddler = function(title) {
