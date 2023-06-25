@@ -1,7 +1,7 @@
 code-body: yes
 created: 20230324160845531
-modified: 20230326145119329
-tags: $:/tags/Global
+modified: 20230625202117880
+tags: $:/tags/Macro
 title: $:/editions/tw5.com/breadcrumbs-nav
 type: text/vnd.tiddlywiki
 
@@ -29,10 +29,10 @@ type: text/vnd.tiddlywiki
 \define .breadcrumbs(start, stop, exclude, label, field, sort, mode:"story")
 \whitespace trim
 <$let __start__={{{ [<__start__>match[]then<currentTiddler>else<__start__>] }}}
-	macro-name={{{ ".breadcrumbs" [<__mode__>titlecase[]] +[join[]] }}}
+	bc-name={{{ ".breadcrumbs" [<__mode__>titlecase[]] +[join[]] }}}
 >
 	<$set name="excluded" filter="[subfilter<__exclude__>] :or[<__start__>]">
-		<$macrocall $name=<<macro-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
+		<$macrocall $name=<<bc-name>> start=<<__start__>> stop=<<__stop__>> exclude=<<excluded>> label=<<__label__>> field=<<__field__>> sort=<<__sort__>>/>
 	</$set>
 </$let>
 \end
