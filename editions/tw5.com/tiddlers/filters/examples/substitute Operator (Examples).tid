@@ -19,14 +19,14 @@ This example uses the following variables:
 * name: <$codeblock code=<<name>>/>
 * address: <$codeblock code=<<address>>/>
 
-<<.inline-operator-example "[[Hi, I'm $(name)$ and I live in $(address)$]substitute[]]">>
+<<.operator-example 2 "[[Hi, I'm $(name)$ and I live in $(address)$]substitute[]]">>
 
 !Substitute variables and operator parameters
 This example uses the following variable:
 
 * time: <$codeblock code=<<time>>/>
 
-<<.inline-operator-example "[[Something in the $(time)$ at $2$ about $1$ ]substitute[Maths],[the Library]]">>
+<<.operator-example 3 "[[Something in the $(time)$ at $2$ about $1$ ]substitute[Maths],[the Library]]">>
 
 !Substitute a filter expression and a variable
 This example uses the following variables:
@@ -34,4 +34,4 @@ This example uses the following variables:
 * field: <$codeblock code=<<field>>/>
 * sentence: <$codeblock code=<<sentence>>/>
 
-<<.inline-operator-example "[<sentence>substitute[]]">>
+<<.operator-example 4 "[<sentence>substitute[]]">>
