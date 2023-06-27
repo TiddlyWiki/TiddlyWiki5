@@ -13,82 +13,228 @@ This file is spliced into the HTML file to be executed before the boot kernel ha
 $tw.Wiki = function(options) {
 	// Create a test database and store and retrieve some data
 	var db = new $tw.sqlite3.oo1.DB("/tiddlywiki.sqlite3","c");
-	db.exec({
-		sql:"CREATE TABLE IF NOT EXISTS t(a,b)"
-	});
-	db.exec({
-		sql: "insert into t(a,b) values (?,?)",
-		bind: [3, 1415926]
-	});
-	db.exec({
-		sql: "insert into t(a,b) values (?,?)",
-		bind: [1, 4142136]
-	});
-	let resultRows = [];
-	db.exec({
-		sql: "select a, b from t order by a limit 3",
-		rowMode: "object",
-		resultRows: resultRows
-	});
-	console.log("Result rows:",JSON.stringify(resultRows,undefined,2));
 	// Basic tiddler operations
 	db.exec({
-		sql: [
-			"CREATE TABLE IF NOT EXISTS tiddlers (title TEXT PRIMARY KEY,meta TEXT,text TEXT);",
-			"CREATE INDEX tiddlers_title_index ON tiddlers(title);"
-	]
+		sql: `
+		DROP TABLE IF EXISTS tiddlers;
+		CREATE TABLE tiddlers (
+			title TEXT NOT NULL,
+			shadow INTEGER NOT NULL CHECK (shadow = 0 OR shadow = 1), -- 0=real tiddler, 1=shadow tiddler
+			shadowsource TEXT,
+			meta TEXT NOT NULL,
+			text TEXT NOT NULL,
+			PRIMARY KEY(title,shadow)
+		);
+		CREATE INDEX tiddlers_title_index ON tiddlers(title);
+		`
 	});
-	function sqlSaveTiddler(tiddlerFields) {
+	$tw.stats = $tw.stats || {};
+	$tw.stats.countSaveTiddler = 0;
+	$tw.stats.countDeleteTiddler = 0;
+	$tw.stats.countGetTiddler = 0;
+	$tw.stats.countGetTiddlerSucceeeded = 0;
+	$tw.stats.countGetTiddlerFailed = 0;
+	$tw.stats.countGetShadowSource = 0;
+	$tw.stats.countAllTitles = 0;
+	$tw.stats.countAllShadowTitles = 0;
+	$tw.stats.failuresGetTiddler = {};
+	$tw.stats.sortFailures = function() {
+		return Object.keys($tw.stats.failuresGetTiddler).sort(function(a,b) {
+			return $tw.stats.failuresGetTiddler[a] - $tw.stats.failuresGetTiddler[b];
+		}).map(function(a) {
+			return {title: a, occurances: $tw.stats.failuresGetTiddler[a]};
+		});
+	};
+	/*
+	Save a tiddler. shadowSource should be falsy for ordinary tiddlers, or the source plugin title for shadow tiddlers
+	*/
+	function sqlSaveTiddler(tiddlerFields,shadowSource) {
+		$tw.stats.countSaveTiddler++;
 		db.exec({
-			sql: "replace into tiddlers(title,meta,text) values ($title,$meta,$text)",
+			sql: "replace into tiddlers(title,shadow,shadowsource,meta,text) values ($title,$shadow,$shadowsource,$meta,$text)",
 			bind: {
 				$title: tiddlerFields.title,
+				$shadow: shadowSource ? 1 : 0,
+				$shadowsource: shadowSource ? shadowSource : null,
 				$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
 				$text: tiddlerFields.text || ""
 			}
 		});
 	}
 	function sqlDeleteTiddler(title) {
+		$tw.stats.countDeleteTiddler++;
 		db.exec({
-			sql: "delete from tiddlers where title = $title",
+			sql: "delete from tiddlers where title = $title and shadow = 0",
 			bind: {
 				$title: title
 			}
 		});
 	}
-	function sqlGetTiddler(title) {
-		let resultRows = [];
+	function sqlClearShadows() {
 		db.exec({
-			sql: "select title, meta, text from tiddlers where title = $title",
-			bind: {
-				$title: title
-			},
-			rowMode: "object",
-			resultRows: resultRows
+			sql: "delete from tiddlers where shadow = 1"
 		});
-		if(resultRows.length > 0) {
-			return Object.assign({},JSON.parse(resultRows[0].meta),{title: resultRows[0].title, text: resultRows[0].text});
+	}
+	var statementTiddlerExists = db.prepare("select title from tiddlers where title = $title and shadow = 0;")
+	function sqlTiddlerExists(title) {
+		statementTiddlerExists.bind({
+			$title: title
+		});
+		if(statementTiddlerExists.step()) {
+			statementTiddlerExists.reset();
+			return true;
 		} else {
+			statementTiddlerExists.reset();
+			return false;
+		}
+	}
+	var statementGetTiddler = db.prepare("select title, shadow, meta, text from tiddlers where title = $title order by shadow");
+	function sqlGetTiddler(title) {
+		$tw.stats.countGetTiddler++;
+		statementGetTiddler.bind({
+			$title: title
+		});
+		if(statementGetTiddler.step()) {
+			$tw.stats.countGetTiddlerSucceeeded++;
+			var row = statementGetTiddler.get({});
+			statementGetTiddler.reset();
+			return Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
+		} else {
+			$tw.stats.countGetTiddlerFailed++;
+			$tw.stats.failuresGetTiddler[title] = ($tw.stats.failuresGetTiddler[title] || 0) + 1;
+			statementGetTiddler.reset();
 			return undefined;
 		}
 	}
-	function sqlAllTitles() {
-		let resultRows = [];
-		db.exec({
-			sql: "select title from tiddlers order by title",
-			rowMode: "object",
-			resultRows: resultRows
+	var statementGetShadowSource = db.prepare("select title, shadowsource from tiddlers where title = $title and shadow = 1");
+	function sqlGetShadowSource(title) {
+		$tw.stats.countGetShadowSource++;
+		statementGetShadowSource.bind({
+			$title: title
 		});
-		return resultRows.map(row => {
-			return row.title;
-		});
+		if(statementGetShadowSource.step()) {
+			var row = statementGetShadowSource.get({});
+			statementGetShadowSource.reset();
+			return row.shadowsource;
+		} else {
+			statementGetShadowSource.reset();
+			return undefined;
+		}
+
 	}
-	sqlSaveTiddler({title: "HelloThere", text: "One"});
-	console.log(sqlGetTiddler("HelloThere"));
-	sqlSaveTiddler({title: "HelloThere", text: "Two", custom: "A custom field"});
-	console.log(sqlGetTiddler("HelloThere"));
-	sqlSaveTiddler({title: "AnotherTiddler", text: "Three"});
-	console.log(sqlAllTitles());
+	var statementAllTitles = db.prepare("select title from tiddlers where shadow = 0 order by title");
+	function sqlAllTitles() {
+		$tw.stats.countAllTitles++;
+		let resultRows = [];
+		while(statementAllTitles.step()) {
+			var row = statementAllTitles.get({});
+			resultRows.push(row.title);
+		}
+		statementAllTitles.reset();
+		return resultRows;
+	}
+	var statementAllShadowTitles = db.prepare("select title from tiddlers where shadow = 1 order by title");
+	function sqlAllShadowTitles() {
+		$tw.stats.countAllShadowTitles++;
+		let resultRows = [];
+		while(statementAllShadowTitles.step()) {
+			var row = statementAllShadowTitles.get({});
+			resultRows.push(row.title);
+		}
+		statementAllShadowTitles.reset();
+		return resultRows;
+	}
+	var statementEachTiddler = db.prepare("select title, meta, text from tiddlers where shadow = 0 order by title");
+	function sqlEachTiddler(callback) {
+		while(statementEachTiddler.step()) {
+			var row = statementEachTiddler.get({}),
+				tiddlerFields = Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
+			callback(tiddlerFields,row.title);
+		}
+		statementEachTiddler.reset();
+	}
+	/*
+	We get all the rows where either the shadow field is 1 and there is no row with the same title and
+	a shadow field value of zero, or the shadow field is zero and there also exists a row with the same
+	title and a shadow field value of 1
+	*/
+	var statementEachShadowTiddler = db.prepare(`
+			select title, meta, text
+			from tiddlers t1
+			where t1.shadow = 1
+				and not exists (
+					select 1
+					from tiddlers t2
+					where t2.title = t1.title
+						and t2.shadow = 0
+				)
+		union
+			select title, meta, text
+			from tiddlers t3
+			where t3.shadow = 0
+				and exists (
+					select 1
+					from tiddlers t4
+					where t4.title = t3.title
+						and t4.shadow = 1
+				);
+		order by title;
+	`);
+	function sqlEachShadowTiddler(callback) {
+		while(statementEachShadowTiddler.step()) {
+			var row = statementEachShadowTiddler.get({});
+			var tiddlerFields = Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
+			callback(tiddlerFields,row.title);	
+		}
+		statementEachShadowTiddler.reset();
+	}
+	/*
+	Return all the tiddler rows that have the "shadow" field set to 1, but only where the "title"
+	field doesn't appear in a row with the "shadow" field set to 0
+	*/
+	var statementEachTiddlerPlusShadows = db.prepare(`
+			select title,meta,text from tiddlers t1
+			where t1.shadow = 1
+				and not exists (
+					select 1
+					from tiddlers t2
+					where t2.title = t1.title
+						and t2.shadow = 0
+					)
+			order by t1.title;
+		`);
+	function sqlEachTiddlerPlusShadows(callback) {
+		sqlEachTiddler(callback);
+		while(statementEachTiddlerPlusShadows.step()) {
+			var row = statementEachTiddlerPlusShadows.get({});
+			var tiddlerFields = Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
+			callback(tiddlerFields,row.title);	
+		}
+		statementEachTiddlerPlusShadows.reset();
+	}
+	/*
+	Return all rows where the shadow field is zero, and there is no row with the same title and a shadow field of 1
+	*/
+	var statementEachShadowPlusTiddlers = db.prepare(`
+			select title,meta,text from tiddlers t1
+			where t1.shadow = 0
+				and not exists (
+					select 1
+					from tiddlers t2
+					where t2.title = t1.title
+						and t2.shadow = 1
+					)
+			order by t1.title;
+		`);
+	function sqlEachShadowPlusTiddlers(callback) {
+		sqlEachShadowTiddler(callback);
+		while(statementEachShadowPlusTiddlers.step()) {
+			var row = statementEachShadowPlusTiddlers.get({});
+			var tiddlerFields = Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
+			callback(tiddlerFields,row.title);	
+		}
+		statementEachShadowPlusTiddlers.reset();
+	}
 	// Plain JS wiki store implementation follows
 	options = options || {};
 	var self = this,
@@ -97,11 +243,10 @@ $tw.Wiki = function(options) {
 	},
 	pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 	pluginInfo = Object.create(null), // Hashmap of parsed plugin content
-	shadowTiddlers = Object.create(null), // Hashmap by title of {source:, tiddler:}
 	getShadowTiddlerTitles = function() {
-		return Object.keys(shadowTiddlers);
+		return sqlAllShadowTitles();
 	};
-	//$tw.utils replacements
+	// $tw.utils replacements
 	var eachObj = function(object,callback) {
 		var next,f,length;
 		if(object) {
@@ -204,11 +349,6 @@ $tw.Wiki = function(options) {
 			var t = sqlGetTiddler(title);
 			if(t !== undefined) {
 				return new $tw.Tiddler(t);
-			} else {
-				var s = shadowTiddlers[title];
-				if(s !== undefined) {
-					return s.tiddler;
-				}
 			}
 		}
 		return undefined;
@@ -221,12 +361,9 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all tiddler titles
 	this.each = function(callback) {
-		var titles = getTiddlerTitles(),
-			index,titlesLength,title;
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
-			callback(self.getTiddler(title),title);
-		}
+		sqlEachTiddler(function(tiddlerFields,title) {
+			callback(new $tw.Tiddler(tiddlerFields),title);
+		});
 	};
 
 	// Get an array of all shadow tiddler titles
@@ -236,72 +373,35 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all shadow tiddler titles
 	this.eachShadow = function(callback) {
-		var titles = getShadowTiddlerTitles(),
-			index,titlesLength,title;
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
-			if(self.tiddlerExists(title)) {
-				callback(self.getTiddler(title),title);
-			} else {
-				var shadowInfo = shadowTiddlers[title];
-				callback(shadowInfo.tiddler,title);
-			}
-		}
+		sqlEachShadowTiddler(function(tiddlerFields,title) {
+			callback(new $tw.Tiddler(tiddlerFields),title);
+		});
 	};
 
 	// Iterate through all tiddlers and then the shadows
 	this.eachTiddlerPlusShadows = function(callback) {
-		var index,titlesLength,title,
-			titles = getTiddlerTitles();
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
-			callback(self.getTiddler(title),title);
-		}
-		titles = getShadowTiddlerTitles();
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
-			if(!self.tiddlerExists(title)) {
-				var shadowInfo = shadowTiddlers[title];
-				callback(shadowInfo.tiddler,title);
-			}
-		}
+		sqlEachTiddlerPlusShadows(function(tiddlerFields,title) {
+			callback(new $tw.Tiddler(tiddlerFields),title);
+		});
 	};
 
 	// Iterate through all the shadows and then the tiddlers
 	this.eachShadowPlusTiddlers = function(callback) {
-		var index,titlesLength,title,
-			titles = getShadowTiddlerTitles();
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
-			if(self.tiddlerExists(title)) {
-				callback(self.getTiddler(title),title);
-			} else {
-				var shadowInfo = shadowTiddlers[title];
-				callback(shadowInfo.tiddler,title);
-			}
-		}
-		titles = getTiddlerTitles();
-		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
-			title = titles[index];
-			if(!shadowTiddlers[title]) {
-				callback(self.getTiddler(title),title);
-			}
-		}
+		sqlEachShadowPlusTiddlers(function(tiddlerFields,title) {
+			callback(new $tw.Tiddler(tiddlerFields),title);
+		});
 	};
 
 	this.tiddlerExists = function(title) {
-		return !!sqlGetTiddler(title);
+		return sqlTiddlerExists(title);
 	};
 
 	this.isShadowTiddler = function(title) {
-		return hop(shadowTiddlers,title);
+		return !!sqlGetShadowSource(title);
 	};
 
 	this.getShadowSource = function(title) {
-		if(hop(shadowTiddlers,title)) {
-			return shadowTiddlers[title].source;
-		}
-		return null;
+		return sqlGetShadowSource(title);
 	};
 
 	// Get an array of all the currently recognised plugin types
@@ -405,22 +505,19 @@ $tw.Wiki = function(options) {
 			}
 		});
 		// Now go through the plugins in ascending order and assign the shadows
-		shadowTiddlers = Object.create(null);
+		sqlClearShadows();
 		eachObj(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
 			if(hop(pluginInfo,tiddler.fields.title)) {
 				eachObj(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
 					// Save the tiddler object
 					if(constituentTitle) {
-						shadowTiddlers[constituentTitle] = {
-							source: tiddler.fields.title,
-							tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
-						};
+						var shadowTiddler = Object.assign({},constituentTiddler,{title: constituentTitle})
+						sqlSaveTiddler(shadowTiddler,tiddler.fields.title);
 					}
 				});
 			}
 		});
-		shadowTiddlerTitles = null;
 		this.clearCache(null);
 		this.clearGlobalCache();
 	};
