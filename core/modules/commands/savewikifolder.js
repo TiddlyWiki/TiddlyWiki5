@@ -5,7 +5,14 @@ module-type: command
 
 Command to save the current wiki as a wiki folder
 
---savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
+--savewikifolder <wikifolderpath> [ [<name>=<value>] ]*
+
+The following options are supported:
+
+* ''filter'': a filter expression defining the tiddlers to be included in the output
+* ''explodePlugins'': set to "no" to suppress exploding plugins into their constituent shadow tiddlers (defaults to "yes")
+
+Supports backward compatibility with --savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 
 \*/
 (function(){
@@ -40,15 +47,12 @@ Command.prototype.execute = function() {
 		tiddlerFilter,
 		explodePlugins;
 	if (regFilter.test(this.params[1])) {  
-		// --savewikifolder <wikifolderpath> [ [<name>=<value>] ]*
 		namedParames = this.commander.extractNamedParameters(this.params.slice(1));
 		tiddlerFilter = namedParames.filter || "[all[tiddlers]]";
 	} else {
-		// --savewikifolder <wikifolderpath> <filter> [ [<name>=<value>] ]*
 		namedParames = this.commander.extractNamedParameters(this.params.slice(2));
 		tiddlerFilter = this.params[1];
 	}
-	// --savewikifolder <wikifolderpath> [<filter>] 
 	tiddlerFilter = tiddlerFilter || "[all[tiddlers]]";
 	explodePlugins = namedParames.explodePlugins || "yes";
 	var wikifoldermaker = new WikiFolderMaker(this.params[0],tiddlerFilter,this.commander,explodePlugins);
@@ -59,7 +63,7 @@ function WikiFolderMaker(wikiFolderPath,wikiFilter,commander,explodePlugins) {
 	this.wikiFolderPath = wikiFolderPath;
 	this.wikiFilter = wikiFilter;
 	this.commander = commander;
-	this.explodePlugins = explodePlugins; // default: write plugins to the plugins folder
+	this.explodePlugins = explodePlugins;
 	this.wiki = commander.wiki;
 	this.savedPaths = []; // So that we can detect filename clashes
 }
