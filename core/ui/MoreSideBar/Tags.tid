@@ -3,15 +3,14 @@ tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Tags/Caption}}
 
 \whitespace trim
-
 <$let tv-config-toolbar-icons="yes" tv-config-toolbar-text="yes" tv-config-toolbar-class="">
 	<div class="tc-tiny-v-gap-bottom">
-    	{{$:/core/ui/Buttons/tag-manager}}
+		{{$:/core/ui/Buttons/tag-manager}}
 	</div>
 </$let>
 <$list filter={{$:/core/Filters/AllTags!!filter}}>
 	<div class="tc-tiny-v-gap-bottom">
-    	<$transclude tiddler="$:/core/ui/TagTemplate"/>
+		<$transclude tiddler="$:/core/ui/TagTemplate"/>
 	</div>
 </$list>
 <hr class="tc-untagged-separator">

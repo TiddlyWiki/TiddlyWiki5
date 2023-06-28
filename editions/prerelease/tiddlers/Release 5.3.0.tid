@@ -1,6 +1,6 @@
 caption: 5.3.0
-created: 20230506164543446
-modified: 20230506164543446
+created: 20230624100932287
+modified: 20230624100932287
 tags: ReleaseNotes
 title: Release 5.3.0
 type: text/vnd.tiddlywiki
@@ -28,31 +28,52 @@ The approach taken by this release is to add new functionality by extending and 
 
 These changes lay the groundwork for macros and related features to be deprecated (which is the point at which users are advised not to use old features, and instead given clear pointers to the equivalent modern functionality).
 
-The new transclusion architecture is not by itself sufficient to enable us to fully deprecate macros yet. To handle the remaining use cases we propose a new backtick quoted attribute format that allows for the substitution of variable values. See https://github.com/Jermolene/TiddlyWiki5/issues/6663 for details.
+! Text Substitution Improvements
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7526">> The new transclusion architecture is not by itself sufficient to enable us to fully deprecate macros yet. To handle most of the remaining use cases this release adds convenient new ways of using textual substitution without having to create a macro:
+
+Firstly, the new [[text substitution syntax for widget attributes|Substituted Attribute Values]] allows widget attributes to be assigned the value of a string with certain placeholders being replaced by their processed contents. For example:
+
+* Substitute variable names with the value with <$codeblock code="attr=`Current tiddler is $(currentTiddler)$`"/>
+* Substitute filter expressions with the first value they return with <$codeblock code="attr=```There are ${ [tag[Done]count[]] }$ completed tasks```"/>
+
+Secondly, the new [[substitute operator|substitute Operator]] allows the same textual substitutions to be performed via a filter operator with the addition of positional parameters that use placeholders of the form `$1$`, `$2$`, `$3$` etc.
+
+```
+[[https://$1$/$(currentTiddler)$]substitute<domain-name>]
+```
+
+! HTTP Requests in WikiText
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7422">> new [[WidgetMessage: tm-http-request]] for performing HTTP requests in WikiText. This opens up some exciting new opportunities:
+
+* Integration with Web-based APIs. The documentation includes an [[example of using the Zotero API|WidgetMessage: tm-http-request Example - Zotero]] to retrieve academic citation data
+* Dynamic content loading: additional tiddlers can be imported dynamically after the main wiki has loaded
 
 ! Defaulting to Disabling CamelCase Links
 
-<<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/7513">> CamelCase linking is now disabled by default. (Note that this wiki has CamelCase linking explicitly enabled)
+<<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/7513">> CamelCase linking is now disabled by default for new wikis. (Note that this wiki has CamelCase linking explicitly enabled)
 
 ! Plugin Improvements
 
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/7554">> Google Analytics plugin to use new GA4 code. Note that the update requires manual configuration to use the new "measurement ID" instead of the old "account ID"
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7260">> Dynannotate pugin to support three additional search modes
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7365">> problem with [[BrowserStorage Plugin]] unnecessarily saving shadow tiddlers
+
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7398">> [[BrowserStorage Plugin]] to request that browser storage be persisted without eviction
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7493">> [[CodeMirror Plugin]] to add an option to make trailing spaces visible
 
 ! Translation improvement
 
 Improvements to the following translations:
 
-* 
-
-! Accessibility Improvements
-
-* 
+* German
+* Polish
+* Chinese
 
 ! Usability Improvements
 
-* 
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7524">> consistency of layout of "Settings" tab in $:/ControlPanel
 
 ! Widget Improvements
 
@@ -62,15 +83,18 @@ Improvements to the following translations:
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7511"> new [[deserialize Operator]] for converting various textual representations of tiddlers into JSON data
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7292">> [[format Operator]] to support converting Unix timestamps to TiddlyWiki's native date format
-
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7392">> new [[':then' filter run prefix|Then Filter Run Prefix]]
 
 ! Hackability Improvements
 
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7413">> [[Core Icons]] to allow the size to be controlled with a parameter
 ** <<.warning """This change can cause problems with non-standard usage of the core icons where the text is directly rendered instead of being transcluded""">>
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7182">> new [[thisTiddler Variable]] that refers to the tiddler currently being rendered
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7530">> `data-tag-title` attribute to all tag pills, allowing easier [[Custom tag pill styles]]
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7332">> [[Story Tiddler Template Cascade]] handling to fall back to the default template if the output of the cascade is not valid
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7378">> missing file extensions for "audio/mpeg" files
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7417">> [[Table-of-Contents Macros]] to add consistent support for an ''exclude'' parameter
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/190613ad2989f70526f86eef17f524087f60eb72">> [[tv-config-static Variable]] for indicating static rendering
 
 ! Bug Fixes
 
@@ -83,10 +107,6 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7529">> size of buttons in dropdown for editor "link" toolbar button
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/8e132948b6bec623d81d300fbe6dc3a0307bcc6d">> crash when transcluding a lazily loaded tiddler as an attribute value
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7462">> DiffTextWidget crash with missing or empty attributes
-
-! Developer Improvements
-
-* 
 
 ! Node.js Improvements
 
@@ -103,10 +123,15 @@ Improvements to the following translations:
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+AnthonyMuscio
 Arlen22
 BramChen
 btheado
+buggyj
+carlo-carlombo
+cdruan
 donmor
+EvidentlyCube
 flibbles
 GameDungeon
 JoshuaFontany
@@ -122,4 +147,5 @@ saqimtiaz
 tavin
 twMat
 yaisog
+Zacharia2
 """>>
