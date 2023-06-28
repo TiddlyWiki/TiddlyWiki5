@@ -177,7 +177,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 			var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()}),
 				srcVariable = variableInfo && variableInfo.srcVariable;
 			if(variableInfo.text) {
-				if(srcVariable.isFunctionDefinition) {
+				if(srcVariable && srcVariable.isFunctionDefinition) {
 					var result = (variableInfo.resultList ? variableInfo.resultList[0] : variableInfo.text) || "";
 					parser = {
 						tree: [{
@@ -207,7 +207,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 					if(variableInfo.isCacheable && srcVariable[cacheKey]) {
 						parser = srcVariable[cacheKey];
 					} else {
-						parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable.configTrimWhiteSpace});
+						parser = this.wiki.parseText(this.transcludeType,variableInfo.text || "",{parseAsInline: parseAsInline, configTrimWhiteSpace: srcVariable && srcVariable.configTrimWhiteSpace});
 						if(variableInfo.isCacheable) {
 							srcVariable[cacheKey] = parser;
 						}
@@ -215,7 +215,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 				}
 				if(parser) {
 					// Add parameters widget for procedures and custom widgets
-					if(srcVariable.isProcedureDefinition || srcVariable.isWidgetDefinition) {
+					if(srcVariable && (srcVariable.isProcedureDefinition || srcVariable.isWidgetDefinition)) {
 						parser = {
 							tree: [
 								{
@@ -234,7 +234,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							}
 							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
 						});
-					} else if(srcVariable.isMacroDefinition || !srcVariable.isFunctionDefinition) {
+					} else if(srcVariable && (srcVariable.isMacroDefinition || !srcVariable.isFunctionDefinition)) {
 						// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 						parser = {
 							tree: [

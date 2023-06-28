@@ -182,8 +182,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	}
 	return {
 		text: text,
-		resultList: [text],
-		srcVariable: {}
+		resultList: [text]
 	};
 };
 
