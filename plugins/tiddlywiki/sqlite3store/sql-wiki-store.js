@@ -48,18 +48,18 @@ $tw.Wiki = function(options) {
 	/*
 	Save a tiddler. shadowSource should be falsy for ordinary tiddlers, or the source plugin title for shadow tiddlers
 	*/
+	var statementSaveTiddler = db.prepare("replace into tiddlers(title,shadow,shadowsource,meta,text) values ($title,$shadow,$shadowsource,$meta,$text);");
 	function sqlSaveTiddler(tiddlerFields,shadowSource) {
 		$tw.stats.countSaveTiddler++;
-		db.exec({
-			sql: "replace into tiddlers(title,shadow,shadowsource,meta,text) values ($title,$shadow,$shadowsource,$meta,$text)",
-			bind: {
-				$title: tiddlerFields.title,
-				$shadow: shadowSource ? 1 : 0,
-				$shadowsource: shadowSource ? shadowSource : null,
-				$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
-				$text: tiddlerFields.text || ""
-			}
+		statementSaveTiddler.bind({
+			$title: tiddlerFields.title,
+			$shadow: shadowSource ? 1 : 0,
+			$shadowsource: shadowSource ? shadowSource : null,
+			$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
+			$text: tiddlerFields.text || ""
 		});
+		statementSaveTiddler.step();
+		statementSaveTiddler.reset();
 	}
 	function sqlDeleteTiddler(title) {
 		$tw.stats.countDeleteTiddler++;
