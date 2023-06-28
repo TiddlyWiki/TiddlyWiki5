@@ -20,7 +20,7 @@ The content of the `<$edit-text>` widget is ignored.
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |default |The default text to be provided when the target tiddler doesn't exist |
-|class |A CSS class to be assigned to the generated HTML editing element |
+|class |A CSS class to be assigned to the generated HTML editing element. To fully expand the widget horizontally, use `tc-max-width` |
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |focus |Set to "yes" or "true" to automatically focus the editor after creation |
