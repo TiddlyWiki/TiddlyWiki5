@@ -28,29 +28,11 @@ $tw.Wiki = function(options) {
 		CREATE INDEX tiddlers_title_index ON tiddlers(title);
 		`
 	});
-	$tw.stats = $tw.stats || {};
-	$tw.stats.countSaveTiddler = 0;
-	$tw.stats.countDeleteTiddler = 0;
-	$tw.stats.countGetTiddler = 0;
-	$tw.stats.countGetTiddlerSucceeeded = 0;
-	$tw.stats.countGetTiddlerFailed = 0;
-	$tw.stats.countGetShadowSource = 0;
-	$tw.stats.countAllTitles = 0;
-	$tw.stats.countAllShadowTitles = 0;
-	$tw.stats.failuresGetTiddler = {};
-	$tw.stats.sortFailures = function() {
-		return Object.keys($tw.stats.failuresGetTiddler).sort(function(a,b) {
-			return $tw.stats.failuresGetTiddler[a] - $tw.stats.failuresGetTiddler[b];
-		}).map(function(a) {
-			return {title: a, occurances: $tw.stats.failuresGetTiddler[a]};
-		});
-	};
 	/*
 	Save a tiddler. shadowSource should be falsy for ordinary tiddlers, or the source plugin title for shadow tiddlers
 	*/
 	var statementSaveTiddler = db.prepare("replace into tiddlers(title,shadow,shadowsource,meta,text) values ($title,$shadow,$shadowsource,$meta,$text);");
 	function sqlSaveTiddler(tiddlerFields,shadowSource) {
-		$tw.stats.countSaveTiddler++;
 		statementSaveTiddler.bind({
 			$title: tiddlerFields.title,
 			$shadow: shadowSource ? 1 : 0,
@@ -62,7 +44,6 @@ $tw.Wiki = function(options) {
 		statementSaveTiddler.reset();
 	}
 	function sqlDeleteTiddler(title) {
-		$tw.stats.countDeleteTiddler++;
 		db.exec({
 			sql: "delete from tiddlers where title = $title and shadow = 0",
 			bind: {
@@ -90,25 +71,20 @@ $tw.Wiki = function(options) {
 	}
 	var statementGetTiddler = db.prepare("select title, shadow, meta, text from tiddlers where title = $title order by shadow");
 	function sqlGetTiddler(title) {
-		$tw.stats.countGetTiddler++;
 		statementGetTiddler.bind({
 			$title: title
 		});
 		if(statementGetTiddler.step()) {
-			$tw.stats.countGetTiddlerSucceeeded++;
 			var row = statementGetTiddler.get({});
 			statementGetTiddler.reset();
 			return Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
 		} else {
-			$tw.stats.countGetTiddlerFailed++;
-			$tw.stats.failuresGetTiddler[title] = ($tw.stats.failuresGetTiddler[title] || 0) + 1;
 			statementGetTiddler.reset();
 			return undefined;
 		}
 	}
 	var statementGetShadowSource = db.prepare("select title, shadowsource from tiddlers where title = $title and shadow = 1");
 	function sqlGetShadowSource(title) {
-		$tw.stats.countGetShadowSource++;
 		statementGetShadowSource.bind({
 			$title: title
 		});
@@ -124,7 +100,6 @@ $tw.Wiki = function(options) {
 	}
 	var statementAllTitles = db.prepare("select title from tiddlers where shadow = 0 order by title");
 	function sqlAllTitles() {
-		$tw.stats.countAllTitles++;
 		let resultRows = [];
 		while(statementAllTitles.step()) {
 			var row = statementAllTitles.get({});
@@ -135,7 +110,6 @@ $tw.Wiki = function(options) {
 	}
 	var statementAllShadowTitles = db.prepare("select title from tiddlers where shadow = 1 order by title");
 	function sqlAllShadowTitles() {
-		$tw.stats.countAllShadowTitles++;
 		let resultRows = [];
 		while(statementAllShadowTitles.step()) {
 			var row = statementAllShadowTitles.get({});
@@ -316,6 +290,7 @@ $tw.Wiki = function(options) {
 		// Save the tiddler
 		if(tiddler) {
 			var title = tiddler.fields.title;
+console.log("Saving",title,tiddler.fields);
 			if(title) {
 				// Save the new tiddler
 				sqlSaveTiddler(tiddler.fields);
