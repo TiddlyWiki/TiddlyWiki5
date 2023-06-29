@@ -45,7 +45,7 @@ Command.prototype.execute = function() {
 	var regFilter = /^[a-zA-Z0-9\.\-_]+=/g,  // dynamic parameters
 		namedParames,
 		tiddlerFilter,
-		explodePlugins;
+		options = {};
 	if (regFilter.test(this.params[1])) {  
 		namedParames = this.commander.extractNamedParameters(this.params.slice(1));
 		tiddlerFilter = namedParames.filter || "[all[tiddlers]]";
@@ -54,16 +54,16 @@ Command.prototype.execute = function() {
 		tiddlerFilter = this.params[1];
 	}
 	tiddlerFilter = tiddlerFilter || "[all[tiddlers]]";
-	explodePlugins = namedParames.explodePlugins || "yes";
-	var wikifoldermaker = new WikiFolderMaker(this.params[0],tiddlerFilter,this.commander,explodePlugins);
+	options.explodePlugins = namedParames.explodePlugins || "yes";
+	var wikifoldermaker = new WikiFolderMaker(this.params[0],tiddlerFilter,this.commander,options);
 	return wikifoldermaker.save();
 };
 
-function WikiFolderMaker(wikiFolderPath,wikiFilter,commander,explodePlugins) {
+function WikiFolderMaker(wikiFolderPath,wikiFilter,commander,options) {
 	this.wikiFolderPath = wikiFolderPath;
 	this.wikiFilter = wikiFilter;
 	this.commander = commander;
-	this.explodePlugins = explodePlugins;
+	this.explodePlugins = options.explodePlugins;
 	this.wiki = commander.wiki;
 	this.savedPaths = []; // So that we can detect filename clashes
 }
@@ -114,11 +114,11 @@ WikiFolderMaker.prototype.save = function() {
 						self.log("Adding built-in plugin: " + libraryDetails.name);
 						newWikiInfo[libraryDetails.type] = newWikiInfo[libraryDetails.type]  || [];
 						$tw.utils.pushTop(newWikiInfo[libraryDetails.type],libraryDetails.name);
-					} else if(self.explodePlugins == "yes") {
+					} else if(self.explodePlugins !== "no") {
 						// A custom plugin
 						self.log("Processing custom plugin: " + title);
 						self.saveCustomPlugin(tiddler);
-					} else if(self.explodePlugins == "no") {
+					} else if(self.explodePlugins === "no") {
 						self.log("Processing custom plugin to tiddlders folder: " + title);
 						self.saveTiddler("tiddlers", tiddler);
 					}
