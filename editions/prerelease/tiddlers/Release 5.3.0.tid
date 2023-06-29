@@ -67,6 +67,7 @@ Secondly, the new [[substitute operator|substitute Operator]] allows the same te
 
 Improvements to the following translations:
 
+* French
 * German
 * Polish
 * Chinese
@@ -113,6 +114,7 @@ Improvements to the following translations:
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7471">> [[WebServer Parameter: authenticated-user-header]] to require URI encoding of authenticated username header, permitting non-ASCII characters in usernames
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7253">> support for `filepath` source attribute to [[tiddlywiki.files Files]]
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/48b22abdaab62c281c207127c66883b50898f9dd">> a warning message for JSON errors in [[tiddlywiki.info Files]] or [[plugin.info Files|PluginFolders]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7490">> new "explodePlugins" option to SaveWikiFolderCommand
 
 ! Performance Improvements
 
@@ -146,6 +148,7 @@ rmunn
 saqimtiaz
 tavin
 twMat
+xcazin
 yaisog
 Zacharia2
 """>>
