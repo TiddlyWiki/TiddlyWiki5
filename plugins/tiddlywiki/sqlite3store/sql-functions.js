@@ -153,7 +153,7 @@ $tw.SqlFunctions = function(options) {
 					from tiddlers t4
 					where t4.title = t3.title
 						and t4.shadow = 1
-				);
+				)
 		order by title;
 	`);
 	this.sqlEachShadowTiddler = function(callback) {
