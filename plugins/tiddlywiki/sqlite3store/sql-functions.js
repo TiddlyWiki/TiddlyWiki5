@@ -14,6 +14,27 @@ $tw.SqlFunctions = function(options) {
 	options = options || {};
 	var self = this;
 	this.db = new $tw.sqlite3.oo1.DB("/tiddlywiki.sqlite3","c");
+	// Setup custom collation to precisely match existing sort orders
+	// Create field with `title TEXT NOT NULL COLLATE custom_collation`
+	// Use it like `... order by shadow collate custom_collation`
+	// function customCollation(ptr,lenA,a,lenB,b) {
+	// 	var jsA = $tw.sqlite3.wasm.cstrToJs(a).slice(0,lenA),
+	// 		jsB = $tw.sqlite3.wasm.cstrToJs(b).slice(0,lenB);
+	// 	if(jsA < jsB) {
+	// 		return -1;
+	// 	} else if (jsA > jsB) {
+	// 		return +1;
+	// 	} else {
+	// 		return 0;
+	// 	}
+	// }
+	// var SQLITE_UTF8 =           1; /* IMP: R-37514-35566 */
+	// var SQLITE_UTF16LE =        2; /* IMP: R-03371-37637 */
+	// var SQLITE_UTF16BE =        3; /* IMP: R-51971-34154 */
+	// var SQLITE_UTF16 =          4; /* Use native byte order */
+	// var SQLITE_ANY =            5; /* Deprecated */
+	// var SQLITE_UTF16_ALIGNED =  8; /* sqlite3_create_collation only */
+	// var collationResult = $tw.sqlite3.capi.sqlite3_create_collation_v2(this.db.pointer,"custom_collation",SQLITE_UTF8,this,customCollation,0);
 	/*
 	Create tables and indexes
 	*/
