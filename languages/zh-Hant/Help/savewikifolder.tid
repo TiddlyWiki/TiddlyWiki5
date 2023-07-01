@@ -15,7 +15,11 @@ description: 將維基儲存到一個新的維基資料夾
 支援以下選項：
 
 * ''filter''：定義要包含在輸出中的條目的篩選器運算子。
-* ''explodePlugins''：設定為 "no" 以將插件儲存到目標維基資料夾的 tiddlers 目錄中，以抑制破壞插件到其組成的影子條目中（預設為 "yes"）。
+* ''explodePlugins'': 預設為 "yes"
+** ''yes'' 將 "分解" 插件為單獨的條目檔案，並將其儲存到維基資料夾內的插件目錄中
+** ''no'' 將抑制分解插件到其組成的條目檔案中。它將把插件儲存為 tiddlers 資料夾中的單個 JSON 條目
+
+Note that both ''explodePlugins'' options will produce wiki folders that build the same exact same original wiki. The difference lies in how plugins are represented in the wiki folder.
 
 常見的用法是將一個 TiddlyWiki HTML 檔案轉換成維基資料夾:
 
