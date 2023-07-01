@@ -19,7 +19,7 @@ description: 將維基儲存到一個新的維基資料夾
 ** ''yes'' 將 "分解" 插件為單獨的條目檔案，並將其儲存到維基資料夾內的插件目錄中
 ** ''no'' 將抑制分解插件到其組成的條目檔案中。它將把插件儲存為 tiddlers 資料夾中的單個 JSON 條目
 
-Note that both ''explodePlugins'' options will produce wiki folders that build the same exact same original wiki. The difference lies in how plugins are represented in the wiki folder.
+請注意，兩個 ''explodePlugins'' 選項都會產生構建完全相同的原始維基的維基資料夾。區別在於插件在維基資料夾中的表示方式。
 
 常見的用法是將一個 TiddlyWiki HTML 檔案轉換成維基資料夾:
 
