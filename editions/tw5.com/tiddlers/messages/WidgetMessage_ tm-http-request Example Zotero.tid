@@ -6,7 +6,7 @@ Specify the Zotero group ID to import
 <$edit-text tiddler="$:/config/zotero-group" tag="input"/> or 
 <$select tiddler="$:/config/zotero-group">
 <option value="4813312">com216</option>
-<option value="4913310">pos252</option>
+<option value="4914891">steve-sunypoly</option>
 <option value="4747244">idt575</option>
 </$select>
 \end
@@ -16,6 +16,7 @@ Specify the Zotero group ID to import
 	$basetitle={{{ =[[_zotero_import ]] =[<item>jsonget[key]] =[[ ]] =[<item>jsonget[title]] +[join[]] }}}
 	text={{{ [<item>jsonget[title]] }}}
 	tags="$:/tags/ZoteroImport"
+        zotero-group={{$:/config/zotero-group}}
 >
 	<$action-setmultiplefields $tiddler=<<createTiddler-title>> $fields="[<item>jsonindexes[]addprefix[zotero-]]" $values="[<item>jsonindexes[]] :map[<item>jsonget<currentTiddler>else[.XXXXX.]]"/>
 	<$list filter="[<item>jsonindexes[creators]]" variable="creatorIndex">
