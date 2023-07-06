@@ -13,7 +13,7 @@ This file is spliced into the HTML file to be executed before the boot kernel ha
 $tw.SqlFunctions = function(options) {
 	options = options || {};
 	var self = this;
-	this.db = new $tw.sqlite3.oo1.DB("/tiddlywiki.sqlite3","c");
+	this.db = new $tw.sqlite3.oo1.DB("","c");
 	// Setup custom collation to precisely match existing sort orders
 	// Create field with `title TEXT NOT NULL COLLATE custom_collation`
 	// Use it like `... order by shadow collate custom_collation`
