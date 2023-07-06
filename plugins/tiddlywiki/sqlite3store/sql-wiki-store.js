@@ -77,6 +77,10 @@ $tw.Wiki = function(options) {
 		}
 	};
 
+	this.logTables = function() {
+		self.sqlFunctions.sqlLogTables();
+	}
+
 	this.addIndexer = function(indexer,name) {
 		return;
 	};

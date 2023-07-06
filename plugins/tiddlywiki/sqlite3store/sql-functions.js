@@ -232,6 +232,16 @@ $tw.SqlFunctions = function(options) {
 		}
 		statementEachShadowPlusTiddlers.reset();
 	};
+	var statementLogTables = self.db.prepare("select title, shadow, meta, text from tiddlers order by title,shadow");
+	this.sqlLogTables = function() {
+		let resultRows = [];
+		while(statementLogTables.step()) {
+			var row = statementLogTables.get({});
+			resultRows.push(row);
+		}
+		statementLogTables.reset();
+		console.log(resultRows);
+	};
 };
 
 })();
