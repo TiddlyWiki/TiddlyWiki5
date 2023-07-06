@@ -1,4 +1,5 @@
 title: $:/core/images/file
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-file tc-image-button" viewBox="0 0 128 128"><path d="M111.968 30.5H112V120a8 8 0 01-8 8H24a8 8 0 01-8-8V8a8 8 0 018-8h57v.02a7.978 7.978 0 015.998 2.337l22.627 22.627a7.975 7.975 0 012.343 5.516zM81 8H24v112h80V30.5H89c-4.418 0-8-3.578-8-8V8z"/><rect width="64" height="8" x="32" y="36" rx="4"/><rect width="64" height="8" x="32" y="52" rx="4"/><rect width="64" height="8" x="32" y="68" rx="4"/><rect width="64" height="8" x="32" y="84" rx="4"/><rect width="64" height="8" x="32" y="100" rx="4"/><rect width="40" height="8" x="32" y="20" rx="4"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-file tc-image-button" viewBox="0 0 128 128"><path d="M111.968 30.5H112V120a8 8 0 01-8 8H24a8 8 0 01-8-8V8a8 8 0 018-8h57v.02a7.978 7.978 0 015.998 2.337l22.627 22.627a7.975 7.975 0 012.343 5.516zM81 8H24v112h80V30.5H89c-4.418 0-8-3.578-8-8V8z"/><rect width="64" height="8" x="32" y="36" rx="4"/><rect width="64" height="8" x="32" y="52" rx="4"/><rect width="64" height="8" x="32" y="68" rx="4"/><rect width="64" height="8" x="32" y="84" rx="4"/><rect width="64" height="8" x="32" y="100" rx="4"/><rect width="40" height="8" x="32" y="20" rx="4"/></svg>

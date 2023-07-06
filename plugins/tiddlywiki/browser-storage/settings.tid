@@ -17,8 +17,8 @@ Click this button to clear browser storage and disable its use:
 This filter determines which tiddlers will be saved to local storage.
 
 * `[prefix[$:/state/]] -[prefix[$:/state/popup/]]` - the default value. Save state tiddlers except popup state tiddlers, thus preserving selected tabs and the open/closed status of table of contents entries. Any other tiddlers created or changed will be lost after reloading the page.
-* `[all[]]` - attempt to save all changed tiddlers. This means even popup state tiddlers and temporary tiddlers will be saved. In addition, when a plugin is installed, all the shadow tiddlers are individually "exploded" into local storage. Deleting the plugin requires deleting all the tiddlers individually. Not recommended unless these issues are unimportant.
-* `[all[]] -[is[shadow]!is[tiddler]] -[prefix[$:/state/popup/]] -[prefix[$:/temp/]] -[prefix[$:/HistoryList]]` - save all tiddlers except unmodified shadow tiddlers, popup state tiddlers, temp tiddlers and the history list. Solves the aforementioned issues with `[all[]]`. Recommended.
+* `[all[]]` - attempt to save all changed tiddlers. This means even popup state tiddlers and temporary tiddlers will be saved.
+* `[all[]] -[prefix[$:/state/popup/]] -[prefix[$:/temp/]] -[prefix[$:/HistoryList]]` - save all tiddlers except popup state tiddlers, temp tiddlers and the history list.
 
 <$link to="$:/config/BrowserStorage/SaveFilter">Browser Storage Save Filter</$link>: <$edit-text tiddler="$:/config/BrowserStorage/SaveFilter" default="" tag="input" size="50"/>
 
@@ -27,6 +27,16 @@ This filter determines which tiddlers will be saved to local storage.
 This setting allows a custom alert message to be displayed when an attempt to store a tiddler fails due to the storage quota being exceeded:
 
 <$link to="$:/config/BrowserStorage/QuotaExceededAlert">Quota Exceeded Alert</$link>: <$edit-text tiddler="$:/config/BrowserStorage/QuotaExceededAlert" default="" tag="input" size="50"/>
+
+! Prevent browser from evicting local storage
+
+Permission for local storage persistence: ''{{$:/info/browser/storage/persisted}}''
+
+The first time a tiddler is saved to local storage a request will be made to prevent automatic eviction of local storage for this site. This means the data will not be cleared unless the user manually clears it.
+
+Old browsers may not support this feature. New browsers might not support the feature if the wiki is hosted on a non-localhost unencrypted http connection.
+
+Some browsers will explicitly prompt the user for permission. Other browsers may automatically grant or deny the request based on site usage or based on whether the site is bookmarked.
 
 ! Startup Log
 

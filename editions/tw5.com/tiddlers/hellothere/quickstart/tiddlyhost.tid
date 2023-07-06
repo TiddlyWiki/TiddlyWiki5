@@ -1,0 +1,10 @@
+title: Quick Start: Tiddlyhost
+tags: [[Quick Start]]
+caption: Tiddlyhost
+icon: $:/core/images/globe
+button-color: #00009a
+button-text: Create Account
+background: linear-gradient(90deg,#f5f5ff, #ffffff)
+link: Tiddlyhost
+
+The easiest way to get started with an online ~TiddlyWiki

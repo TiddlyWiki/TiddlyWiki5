@@ -99,14 +99,14 @@ Tests the filtering mechanism.
 				},
 				"TiddlerSix": {
 					title: "TiddlerSix",
-					text: "Missing inaction from TiddlerOne",
+					text: "Missing inaction from [[TiddlerOne]]",
 					filter: "[[one]] [[a a]] [subfilter{hasList!!list}]",
 					tags: []
 				},
 				"TiddlerSeventh": {
 					title: "TiddlerSeventh",
 					text: "",
-					list: "TiddlerOne [[Tiddler Three]] [[a fourth tiddler]] MissingTiddler",
+					list: "[[TiddlerOne]] [[Tiddler Three]] [[a fourth tiddler]] [[MissingTiddler]]",
 					tags: ["one"]
 				},
 				"Tiddler8": {
@@ -144,7 +144,7 @@ Tests the filtering mechanism.
 			modified: "201304152211"
 		},{
 			title: "Tiddler Three",
-			text: "The speed of sound in light\n\nThere is no TiddlerZero but TiddlerSix",
+			text: "The speed of sound in light\n\nThere is no [[TiddlerZero]] but [[TiddlerSix]]",
 			tags: ["one","two"],
 			cost: "56",
 			value: "80",
@@ -252,9 +252,9 @@ Tests the filtering mechanism.
 		});
 	
 		it("should handle the lookup operator", function() {
-			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,,Tidd");
-			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
-			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler],[text]]").join(",")).toBe("Missing inaction from TiddlerOne,8,Tidd");
+			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler]]").join(",")).toBe("Missing inaction from [[TiddlerOne]],,Tidd");
+			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler]]").join(",")).toBe("Missing inaction from [[TiddlerOne]],8,Tidd");
+			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup:8[Tiddler],[text]]").join(",")).toBe("Missing inaction from [[TiddlerOne]],8,Tidd");
 			expect(wiki.filterTiddlers("Six Seventh 8 +[lookup[Tiddler],[tags]]").join(",")).toBe(",one,one");
 		});
 	
@@ -422,7 +422,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,Tiddler8,TiddlerOne,TiddlerSeventh");
 			expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne,TiddlerSeventh,Tiddler8");
 			expect(wiki.filterTiddlers("[[two]tagging[]sort[title]]").join(",")).toBe("$:/TiddlerFive,$:/TiddlerTwo,Tiddler Three");
-			var fakeWidget = {getVariable: function() {return "one";}};
+			var fakeWidget = {wiki: wiki, getVariable: function(name) {return name === "currentTiddler" ? "one": undefined;}};
 			expect(wiki.filterTiddlers("[all[current]tagging[]]",fakeWidget).join(",")).toBe("Tiddler Three,TiddlerOne,TiddlerSeventh,Tiddler8");
 		});
 	
@@ -625,7 +625,7 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[{!!title}]").join(",")).toBe("");
 			expect(wiki.filterTiddlers("[prefix{Tiddler8}] +[sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[modifier{Tiddler8!!test-field}] +[sort[title]]").join(",")).toBe("TiddlerOne");
-			var fakeWidget = {wiki: wiki, getVariable: function() {return "Tiddler Three";}};
+			var fakeWidget = {wiki: wiki, getVariable: function(name) {return name === "currentTiddler" ? "Tiddler Three": undefined;}};
 			expect(wiki.filterTiddlers("[modifier{!!modifier}] +[sort[title]]",fakeWidget).join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
 		});
 	
@@ -990,10 +990,10 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[!sortsub:number<sort1>]",anchorWidget).join(",")).toBe("filter regexp test,a fourth tiddler,$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,has filter,TiddlerOne,hasList,one");
 			expect(wiki.filterTiddlers("[sortsub:string<sort1>]",anchorWidget).join(",")).toBe("has filter,TiddlerOne,$:/TiddlerTwo,Tiddler Three,$:/ShadowPlugin,a fourth tiddler,filter regexp test,one,hasList");
 			expect(wiki.filterTiddlers("[!sortsub:string<sort1>]",anchorWidget).join(",")).toBe("hasList,one,filter regexp test,a fourth tiddler,$:/ShadowPlugin,$:/TiddlerTwo,Tiddler Three,has filter,TiddlerOne");
-			expect(wiki.filterTiddlers("[sortsub:number<sort2>]",anchorWidget).join(",")).toBe("one,TiddlerOne,hasList,has filter,a fourth tiddler,Tiddler Three,$:/TiddlerTwo,filter regexp test,$:/ShadowPlugin");
-			expect(wiki.filterTiddlers("[!sortsub:number<sort2>]",anchorWidget).join(",")).toBe("$:/ShadowPlugin,filter regexp test,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,has filter,hasList,TiddlerOne,one");
-			expect(wiki.filterTiddlers("[sortsub:string<sort2>]",anchorWidget).join(",")).toBe("one,TiddlerOne,hasList,has filter,$:/ShadowPlugin,a fourth tiddler,Tiddler Three,$:/TiddlerTwo,filter regexp test");
-			expect(wiki.filterTiddlers("[!sortsub:string<sort2>]",anchorWidget).join(",")).toBe("filter regexp test,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,$:/ShadowPlugin,has filter,hasList,TiddlerOne,one");
+			expect(wiki.filterTiddlers("[sortsub:number<sort2>]",anchorWidget).join(",")).toBe("one,TiddlerOne,hasList,has filter,a fourth tiddler,$:/TiddlerTwo,Tiddler Three,filter regexp test,$:/ShadowPlugin");
+			expect(wiki.filterTiddlers("[!sortsub:number<sort2>]",anchorWidget).join(",")).toBe("$:/ShadowPlugin,filter regexp test,Tiddler Three,$:/TiddlerTwo,a fourth tiddler,has filter,hasList,TiddlerOne,one");
+			expect(wiki.filterTiddlers("[sortsub:string<sort2>]",anchorWidget).join(",")).toBe("one,TiddlerOne,hasList,has filter,$:/ShadowPlugin,a fourth tiddler,$:/TiddlerTwo,Tiddler Three,filter regexp test");
+			expect(wiki.filterTiddlers("[!sortsub:string<sort2>]",anchorWidget).join(",")).toBe("filter regexp test,Tiddler Three,$:/TiddlerTwo,a fourth tiddler,$:/ShadowPlugin,has filter,hasList,TiddlerOne,one");
 			expect(wiki.filterTiddlers("[[TiddlerOne]] [[$:/TiddlerTwo]] [[Tiddler Three]] [[a fourth tiddler]] +[!sortsub:number<sort3>]",anchorWidget).join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne,a fourth tiddler");
 			expect(wiki.filterTiddlers("a1 a10 a2 a3 b10 b3 b1 c9 c11 c1 +[sortsub:alphanumeric<sort4>]",anchorWidget).join(",")).toBe("a1,a2,a3,a10,b1,b3,b10,c1,c9,c11");
 			// #7155. The order of the output is the same as the input when an undefined variable is used in the subfitler
@@ -1060,10 +1060,17 @@ Tests the filtering mechanism.
 			expect(wiki.filterTiddlers("[[Hello There]] [[GettingStarted]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]] GettingStarted");
 			expect(wiki.filterTiddlers("[title[Hello There]] +[format:titlelist[]]").join(" ")).toBe("[[Hello There]]");
 			expect(wiki.filterTiddlers("[title[HelloThere]] +[format:titlelist[]]").join(" ")).toBe("HelloThere");		
+			expect(wiki.filterTiddlers("0 +[format:timestamp[]]").join(",")).toBe("19700101000000000");
+			expect(wiki.filterTiddlers("1603188514443 +[format:timestamp[]]").join(",")).toBe("20201020100834443");
+			expect(wiki.filterTiddlers("void +[format:timestamp[]]").join(",")).toBe("");
 		});
 	
 		it("should handle the deserializers operator", function() {
-		expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe("application/javascript,application/json,application/x-tiddler,application/x-tiddler-html-div,application/x-tiddlers,text/css,text/html,text/plain");
+		var expectedDeserializers = ["application/javascript","application/json","application/x-tiddler","application/x-tiddler-html-div","application/x-tiddlers","text/css","text/html","text/plain"];
+		if($tw.browser) {
+			expectedDeserializers.unshift("(DOM)");
+		}
+		expect(wiki.filterTiddlers("[deserializers[]]").join(",")).toBe(expectedDeserializers.join(","));
 		});
 		
 		it("should handle the charcode operator", function() {

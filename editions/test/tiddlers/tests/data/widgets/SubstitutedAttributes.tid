@@ -1,0 +1,19 @@
+title: Widgets/SubstitutedAttributes
+description: Attributes specified as string that should have substitution performed.
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let project="TiddlyWiki" disabled="true">
+<div class=`$(project)$ 
+${ [[Hello]addsuffix[There]] }$` attrib=`myvalue` otherattrib=`$(1)$` blankattrib=`` quoted="here" disabled=```$(disabled)$```>
+</div>
+</$let>
+
++
+title: ExpectedResult
+
+<p><div attrib="myvalue" blankattrib="" class="TiddlyWiki 
+HelloThere" disabled="true" otherattrib="" quoted="here"></div></p>

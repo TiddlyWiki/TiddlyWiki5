@@ -1,0 +1,25 @@
+created: 20220917112931273
+modified: 20230419103154329
+tags: Pragmas
+title: Pragma: \rules
+type: text/vnd.tiddlywiki
+
+The ''\rules'' [[pragma|Pragmas]] adjusts the set of parser rules used to parse the remaining text.
+
+```
+\rules only|expect <rule-list>
+```
+
+The list of available parser rules can be consulted in $:/ControlPanel -> Info -> Advanced -> Parsing.
+
+For example, in stylesheets it is typical to only use the rules associated with macros and transclusions:
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+```
+
+Some users prefer not to use CamelCase links:
+
+```
+\rules except prettylink
+```

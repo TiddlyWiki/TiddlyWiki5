@@ -19,7 +19,8 @@ describe("WikiText parser tests", function() {
 
 	// Define a parsing shortcut
 	var parse = function(text) {
-		return wiki.parseText("text/vnd.tiddlywiki",text).tree;
+		var tree = wiki.parseText("text/vnd.tiddlywiki",text).tree;
+		return tree;
 	};
 
 	it("should parse tags", function() {
@@ -114,7 +115,70 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}]}]
+
+		);
+	});
+
+	it("should parse procedure definitions with no parameters", function() {
+		expect(parse("\\procedure myMacro()\nnothing\n\\end\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
+
+		);
+	});
+
+	it("should parse single line procedure definitions with no parameters", function() {
+		expect(parse("\\procedure myMacro() nothing\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
+
+		);
+	});
+
+	it("should parse procedure definitions with parameters", function() {
+		expect(parse("\\procedure myMacro(one,two,three,four:elephant)\nnothing\n\\end\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[{"name":"one"},{"name":"two"},{"name":"three"},{"name":"four","default":"elephant"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isProcedureDefinition":true}]
+
+		);
+	});
+
+	it("should parse procedure definitions", function() {
+		expect(parse("\\procedure myMacro(one:'Jaguar')\n<$text text=<<one>>/>\n\\end\n\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"<$text text=<<one>>/>"}},"children":[],"params":[{"name":"one","default":"Jaguar"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"<$text text=<<one>>/>"}],"isProcedureDefinition":true}]
+
+		);
+
+	});	it("should parse function definitions with no parameters", function() {
+		expect(parse("\\function myMacro()\nnothing\n\\end\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
+
+		);
+	});
+
+	it("should parse single line function definitions with no parameters", function() {
+		expect(parse("\\function myMacro() nothing\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
+
+		);
+	});
+
+	it("should parse function definitions with parameters", function() {
+		expect(parse("\\function myMacro(one,two,three,four:elephant)\nnothing\n\\end\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[{"name":"one"},{"name":"two"},{"name":"three"},{"name":"four","default":"elephant"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"isFunctionDefinition":true}]
+
+		);
+	});
+
+	it("should parse function definitions", function() {
+		expect(parse("\\function myMacro(one:'Jaguar')\n<$text text=<<one>>/>\n\\end\n\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"<$text text=<<one>>/>"}},"children":[],"params":[{"name":"one","default":"Jaguar"}],"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"<$text text=<<one>>/>"}],"isFunctionDefinition":true}]
 
 		);
 	});
@@ -122,7 +186,7 @@ describe("WikiText parser tests", function() {
 	it("should parse comment in pragma area. Comment will be invisible", function() {
 		expect(parse("<!-- comment in pragma area -->\n\\define aMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'set', attributes : { name : { type : 'string', value : 'aMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ], params : [  ], isMacroDefinition : true } ]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"aMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"aMacro"},{"name":"value","type":"string","value":"nothing"}]}]
 
 		);
 	});
@@ -143,38 +207,38 @@ describe("WikiText parser tests", function() {
 	it("should parse inline macro calls", function() {
 		expect(parse("<<john>><<paul>><<george>><<ringo>>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start: 0, end: 35, children: [ { type: 'macrocall', start: 0, params: [  ], name: 'john', end: 8 }, { type: 'macrocall', start: 8, params: [  ], name: 'paul', end: 16 }, { type: 'macrocall', start: 16, params: [  ], name: 'george', end: 26 }, { type: 'macrocall', start: 26, params: [  ], name: 'ringo', end: 35 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"transclude","start":0,"end":8,"attributes":{"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"}]},{"type":"transclude","start":8,"end":16,"attributes":{"$variable":{"name":"$variable","type":"string","value":"paul"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"paul"}]},{"type":"transclude","start":16,"end":26,"attributes":{"$variable":{"name":"$variable","type":"string","value":"george"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"george"}]},{"type":"transclude","start":26,"end":35,"attributes":{"$variable":{"name":"$variable","type":"string","value":"ringo"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"ringo"}]}],"start":0,"end":35}]
 
 		);
 		expect(parse("text <<john one:val1 two: 'val \"2\"' three: \"val '3'\" four: \"\"\"val 4\"5'\"\"\" five: [[val 5]] >>")).toEqual(
 
-			[{ type: 'element', tag: 'p', start: 0, end: 92, children: [ { type: 'text', text: 'text ', start: 0, end: 5 }, { type: 'macrocall', name: 'john', start: 5, params: [ { type: 'macro-parameter', start: 11, value: 'val1', name: 'one', end: 20 }, { type: 'macro-parameter', start: 20, value: 'val "2"', name: 'two', end: 35 }, { type: 'macro-parameter', start: 35, value: 'val \'3\'', name: 'three', end: 52 }, { type: 'macro-parameter', start: 52, value: 'val 4"5\'', name: 'four', end: 73 }, { type: 'macro-parameter', start: 73, value: 'val 5', name: 'five', end: 89 } ], end: 92 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"text","text":"text ","start":0,"end":5},{"type":"transclude","start":5,"end":92,"attributes":{"$variable":{"name":"$variable","type":"string","value":"john"},"one":{"name":"one","type":"string","value":"val1","start":11,"end":20},"two":{"name":"two","type":"string","value":"val \"2\"","start":20,"end":35},"three":{"name":"three","type":"string","value":"val '3'","start":35,"end":52},"four":{"name":"four","type":"string","value":"val 4\"5'","start":52,"end":73},"five":{"name":"five","type":"string","value":"val 5","start":73,"end":89}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"one","type":"string","value":"val1","start":11,"end":20},{"name":"two","type":"string","value":"val \"2\"","start":20,"end":35},{"name":"three","type":"string","value":"val '3'","start":35,"end":52},{"name":"four","type":"string","value":"val 4\"5'","start":52,"end":73},{"name":"five","type":"string","value":"val 5","start":73,"end":89}]}],"start":0,"end":92}]
 
 		);
 		expect(parse("ignored << carrots <<john>>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start: 0, end: 27, children: [ { type: 'text', text: 'ignored << carrots ', start: 0, end: 19 }, { type: 'macrocall', name: 'john', start: 19, params: [  ], end: 27 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"text","text":"ignored << carrots ","start":0,"end":19},{"type":"transclude","start":19,"end":27,"attributes":{"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"}]}],"start":0,"end":27}]
 
 		);
 		expect(parse("text <<<john>>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start: 0, end: 14, children: [ { type: 'text', text: 'text ', start: 0, end: 5 }, { type: 'macrocall', name: '<john', start: 5, params: [  ], end: 14 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"text","text":"text ","start":0,"end":5},{"type":"transclude","start":5,"end":14,"attributes":{"$variable":{"name":"$variable","type":"string","value":"<john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"<john"}]}],"start":0,"end":14}]
 
 		);
 		expect(parse("before\n<<john>>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start: 0, end: 15, children: [ { type: 'text', text: 'before\n', start: 0, end: 7 }, { type: 'macrocall', start: 7, params: [  ], name: 'john', end: 15 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"text","text":"before\n","start":0,"end":7},{"type":"transclude","start":7,"end":15,"attributes":{"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"}]}],"start":0,"end":15}]
 
 		);
 		// A single space will cause it to be inline
 		expect(parse("<<john>> ")).toEqual(
 
-			[ { type: 'element', tag: 'p', start: 0, end: 9, children: [ { type: 'macrocall', start: 0, params: [  ], name: 'john', end: 8 }, { type: 'text', text: ' ', start: 8, end: 9 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"transclude","start":0,"end":8,"attributes":{"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"}]},{"type":"text","text":" ","start":8,"end":9}],"start":0,"end":9}]
 
 		);
 		expect(parse("text <<outie one:'my <<innie>>' >>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start: 0, end: 34, children: [ { type: 'text', text: 'text ', start: 0, end: 5 }, { type: 'macrocall', start: 5, params: [ { type: 'macro-parameter', start: 12, value: 'my <<innie>>', name: 'one', end: 31 } ], name: 'outie', end: 34 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"text","text":"text ","start":0,"end":5},{"type":"transclude","start":5,"end":34,"attributes":{"$variable":{"name":"$variable","type":"string","value":"outie"},"one":{"name":"one","type":"string","value":"my <<innie>>","start":12,"end":31}},"orderedAttributes":[{"name":"$variable","type":"string","value":"outie"},{"name":"one","type":"string","value":"my <<innie>>","start":12,"end":31}]}],"start":0,"end":34}]
 
 		);
 
@@ -183,37 +247,37 @@ describe("WikiText parser tests", function() {
 	it("should parse block macro calls", function() {
 		expect(parse("<<john>>\n<<paul>>\r\n<<george>>\n<<ringo>>")).toEqual(
 
-			[ { type: 'macrocall', start: 0, name: 'john', params: [  ], end: 8, isBlock: true }, { type: 'macrocall', start: 9, name: 'paul', params: [  ], end: 17, isBlock: true }, { type: 'macrocall', start: 19, name: 'george', params: [  ], end: 29, isBlock: true }, { type: 'macrocall', start: 30, name: 'ringo', params: [  ], end: 39, isBlock: true } ]
+			[ { type: 'transclude', start: 0, attributes: { $variable: { name: "$variable", type: "string", value: "john" }}, orderedAttributes: [ { name: "$variable", type: "string", value: "john" }], end: 8, isBlock: true }, { type: 'transclude', start: 9, attributes: { $variable: { name: "$variable", type: "string", value: "paul" }}, orderedAttributes: [ { name: "$variable", type: "string", value: "paul" }], end: 17, isBlock: true }, { type: 'transclude', start: 19, attributes: { $variable: { name: "$variable", type: "string", value: "george" }}, orderedAttributes: [ { name: "$variable", type: "string", value: "george" }], end: 29, isBlock: true }, { type: 'transclude', start: 30, attributes: { $variable: { name: "$variable", type: "string", value: "ringo" }}, orderedAttributes: [ { name: "$variable", type: "string", value: "ringo" }], end: 39, isBlock: true } ]
 
 		);
 		expect(parse("<<john one:val1 two: 'val \"2\"' three: \"val '3'\" four: \"\"\"val 4\"5'\"\"\" five: [[val 5]] >>")).toEqual(
 
-			[ { type: 'macrocall', start: 0, name: 'john', params: [ { type: 'macro-parameter', start: 6, value: 'val1', name: 'one', end: 15 }, { type: 'macro-parameter', start: 15, value: 'val "2"', name: 'two', end: 30 }, { type: 'macro-parameter', start: 30, value: 'val \'3\'', name: 'three', end: 47 }, { type: 'macro-parameter', start: 47, value: 'val 4"5\'', name: 'four', end: 68 }, { type: 'macro-parameter', start: 68, value: 'val 5', name: 'five', end: 84 }], end: 87, isBlock: true } ]
+			[{"type":"transclude","start":0,"end":87,"attributes":{"$variable":{"name":"$variable","type":"string","value":"john"},"one":{"name":"one","type":"string","value":"val1","start":6,"end":15},"two":{"name":"two","type":"string","value":"val \"2\"","start":15,"end":30},"three":{"name":"three","type":"string","value":"val '3'","start":30,"end":47},"four":{"name":"four","type":"string","value":"val 4\"5'","start":47,"end":68},"five":{"name":"five","type":"string","value":"val 5","start":68,"end":84}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"one","type":"string","value":"val1","start":6,"end":15},{"name":"two","type":"string","value":"val \"2\"","start":15,"end":30},{"name":"three","type":"string","value":"val '3'","start":30,"end":47},{"name":"four","type":"string","value":"val 4\"5'","start":47,"end":68},{"name":"five","type":"string","value":"val 5","start":68,"end":84}],"isBlock":true}]
 
 		);
 		expect(parse("<< carrots\n\n<<john>>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start : 0, end : 10, children: [ { type: 'text', text: '<< carrots', start : 0, end : 10 } ] }, { type: 'macrocall', start: 12, params: [  ], name: 'john', end: 20, isBlock: true } ]
+			[ { type: 'element', tag: 'p', start : 0, end : 10, children: [ { type: 'text', text: '<< carrots', start : 0, end : 10 } ] }, { type: 'transclude', start: 12, attributes: { $variable: {name: "$variable", type:"string", value: "john"} }, orderedAttributes: [ {name: "$variable", type:"string", value: "john"} ], end: 20, isBlock: true } ]
 
 		);
 		expect(parse("before\n\n<<john>>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start : 0, end : 6, children: [ { type: 'text', text: 'before', start : 0, end : 6 } ] }, { type: 'macrocall', start: 8, name: 'john', params: [  ], end: 16, isBlock: true } ]
+			[ { type: 'element', tag: 'p', start : 0, end : 6, children: [ { type: 'text', text: 'before', start : 0, end : 6 } ] }, { type: 'transclude', start: 8, attributes: { $variable: {name: "$variable", type:"string", value: "john"} }, orderedAttributes: [ {name: "$variable", type:"string", value: "john"} ], end: 16, isBlock: true } ]
 
 		);
 		expect(parse("<<john>>\nafter")).toEqual(
 
-			[ { type: 'macrocall', start: 0, name: 'john', params: [  ], end: 8, isBlock: true }, { type: 'element', tag: 'p', start: 9, end: 14, children: [ { type: 'text', text: 'after', start: 9, end: 14 } ] } ]
+			[ { type: 'transclude', start: 0, attributes: { $variable: {name: "$variable", type:"string", value: "john"} }, orderedAttributes: [ {name: "$variable", type:"string", value: "john"} ], end: 8, isBlock: true }, { type: 'element', tag: 'p', start: 9, end: 14, children: [ { type: 'text', text: 'after', start: 9, end: 14 } ] } ]
 
 		);
 		expect(parse("<<multiline arg:\"\"\"\n\nwikitext\n\"\"\" >>")).toEqual(
 
-			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 11, value: '\n\nwikitext\n', name: 'arg', end: 33 } ], name: 'multiline', end: 36, isBlock: true }]
+			[{"type":"transclude","start":0,"end":36,"attributes":{"$variable":{"name":"$variable","type":"string","value":"multiline"},"arg":{"name":"arg","type":"string","value":"\n\nwikitext\n","start":11,"end":33}},"orderedAttributes":[{"name":"$variable","type":"string","value":"multiline"},{"name":"arg","type":"string","value":"\n\nwikitext\n","start":11,"end":33}],"isBlock":true}]
 
 		);
 		expect(parse("<<outie one:'my <<innie>>' >>")).toEqual(
 
-			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 7, value: 'my <<innie>>', name: 'one', end: 26 } ], name: 'outie', end: 29, isBlock: true } ]
+			[ { type: 'transclude', start: 0, attributes: { $variable: {name: "$variable", type:"string", value: "outie"}, one: {name: "one", type:"string", value: "my <<innie>>", start: 7, end: 26} }, orderedAttributes: [ {name: "$variable", type:"string", value: "outie"}, {name: "one", type:"string", value: "my <<innie>>", start: 7, end: 26} ], end: 29, isBlock: true } ]
 
 		);
 	});
@@ -221,23 +285,23 @@ describe("WikiText parser tests", function() {
 	it("should parse tricky macrocall parameters", function() {
 		expect(parse("<<john pa>am>>")).toEqual(
 
-			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'pa>am', end: 12 } ], name: 'john', end: 14, isBlock: true } ]
+			[{"type":"transclude","start":0,"end":14,"attributes":{"0":{"name":"0","type":"string","value":"pa>am","start":6,"end":12},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"pa>am","start":6,"end":12}],"isBlock":true}]
 
 		);
 		expect(parse("<<john param> >>")).toEqual(
 
-			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'param>', end: 13 } ], name: 'john', end: 16, isBlock: true } ]
+			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"param>","start":6,"end":13},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param>","start":6,"end":13}],"isBlock":true}]
 
 		);
 		expect(parse("<<john param>>>")).toEqual(
 
-			[ { type: 'element', tag: 'p', start: 0, end: 15, children: [ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'param', end: 12 } ], name: 'john', end: 14 }, { type: 'text', text: '>', start: 14, end: 15 } ] } ]
+			[{"type":"element","tag":"p","children":[{"type":"transclude","start":0,"end":14,"attributes":{"0":{"name":"0","type":"string","value":"param","start":6,"end":12},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"param","start":6,"end":12}]},{"type":"text","text":">","start":14,"end":15}],"start":0,"end":15}]
 
 		);
 		// equals signs should be allowed
 		expect(parse("<<john var>=4 >>")).toEqual(
 
-			[ { type: 'macrocall', start: 0, params: [ { type: 'macro-parameter', start: 6, value: 'var>=4', end: 13 } ], name: 'john', end: 16, isBlock: true } ]
+			[{"type":"transclude","start":0,"end":16,"attributes":{"0":{"name":"0","type":"string","value":"var>=4","start":6,"end":13},"$variable":{"name":"$variable","type":"string","value":"john"}},"orderedAttributes":[{"name":"$variable","type":"string","value":"john"},{"name":"0","type":"string","value":"var>=4","start":6,"end":13}],"isBlock":true}]
 
 		);
 

@@ -67,6 +67,8 @@ More/Caption: 更多
 More/Hint: 更多操作
 NewHere/Caption: 添加子条目
 NewHere/Hint: 创建一个标签为此条目名称的新条目
+NetworkActivity/Caption: 网络活动
+NetworkActivity/Hint: 取消所有网络活动
 NewJournal/Caption: 添加日志
 NewJournal/Hint: 创建一个新的日志条目
 NewJournalHere/Caption: 添加子日志

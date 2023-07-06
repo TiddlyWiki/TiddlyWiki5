@@ -1,0 +1,32 @@
+caption: <<.attr listIndex>>
+created: 20230314174442174
+description: tab
+modified: 20230317160929003
+tags: CheckboxWidget
+title: CheckboxWidget (listIndex Mode)
+
+!!<<.link "<<.attr listIndex>> Mode" "CheckboxWidget (listIndex Mode)">>
+
+Using the checkbox widget in index list mode requires the <<.attr listIndex>> attribute to specify the the property of a [[DataTiddler|DataTiddlers]]. This property contains a list. The <<.attr checked>> attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If <<.attr checked>> is absent (or empty) but <<.attr unchecked>> is present, then the logic will be inverted: the checkbox will be checked when the <<.attr unchecked>> value is missing from the list, and unchecked when the <<.attr unchecked>> value is found in the list. If both <<.attr checked>> and <<.attr unchecked>> are present, the checkbox will work like a toggle, replacing the <<.attr checked>> value with the <<.attr unchecked>> value and vice-versa. Finally, if neither <<.attr checked>> nor <<.attr unchecked>> is specified, the checkbox will be checked if the field has anything in it, but unchecked if the field is missing or empty. (This is rarely useful. Most of the time you want to specify <<.attr checked>> or <<.attr unchecked>> or both.)
+
+The <<.attr default>> attribute is used as a fallback for the checkbox state if the property is undefined.
+
+The following table summarizes the possible combinations:
+
+| !defined attributes| !<$checkbox tag="void" disabled="yes"/> | !<$checkbox field="tag" checked="void" default="void" disabled="yes" /> | !<$checkbox listField="tag" checked="void" unchecked="invalid" indeterminate="yes" disabled="yes" /> |
+| neither| property missing or list empty<br/>no <<.attr default>> defined | property has any value | -- |
+| <<.attr checked>>=<<.value item1>>| <<.value item1>> removed from list | <<.value item1>> added to list | -- |
+| <<.attr unchecked>>=<<.value item2>>| <<.value item2>> added to list | <<.value item2>> removed from list | -- |
+| both| <<.value item1>> removed from list<br/><<.value item2>> added to list | <<.value item1>> added to list<br/><<.value item2>> removed from list | <<.value item1>> not in list<br/><<.value item2>> not in list<br/>no <<.attr default>> defined |
+
+<<.warning "Make sure to set <<.attr tiddler>> correctly, because non-[[DataTiddlers]] will be overwritten without warning">>
+
+The example below creates three checkboxes that each control a different value in a property of the ExampleData tiddler.
+
+<$macrocall $name="wikitext-example-without-html" src="""<$set name=indexName filter="[<currentTiddler>addsuffix[ Colors]]" >
+<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="green" unchecked="red" default="red"> Green or red?</$checkbox><br/>
+<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="yellow" unchecked="blue" default="blue"> Yellow or blue?</$checkbox><br/>
+<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="orange" unchecked="purple" default="purple"> Orange or purple?</$checkbox><br/>
+Colors list: <$text text={{{ [[ExampleData]getindex<indexName>] }}} />
+</$set>
+"""/>

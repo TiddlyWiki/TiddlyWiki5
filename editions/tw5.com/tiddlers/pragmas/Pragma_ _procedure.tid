@@ -1,0 +1,110 @@
+created: 20221007132845007
+modified: 20230518152756112
+tags: Pragmas
+title: Pragma: \procedure
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">> The ''\procedure'' [[pragma|Pragmas]] is used to [[define procedures|Procedure Definitions]]. It is a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget.
+
+The usual form allows procedures to span multiple lines:
+
+```
+\procedure <procedure-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...)
+<multiple-line-definition-text>
+\end [<procedure-name>]
+```
+
+Note that the `\end` marker can optionally specify the name of the procedure to which it relates which allows procedure definitions to be nested.
+
+There is also a single line form for shorter procedures:
+
+```
+\define <procedure-name>(<param-name>[:<param-default-value>],<param-name>[:<param-default-value>]...) <single-line-definition-text>
+```
+
+The first line of the definition specifies the procedure name and any parameters. Each parameter has a name and, optionally, a default value that is used if no value is supplied on a particular call to the procedure. The lines that follow contain the text of the procedure text (i.e. the snippet represented by the procedure name), until `\end` appears on a line by itself:
+
+For example:
+
+```
+\procedure sayhi(name:"Bugs Bunny")
+Hi, I'm <<name>>.
+\end
+
+<<sayhi "Jeremy">>
+```
+
+Alternatively, the entire definition can be presented on a single line without an `\end` marker:
+
+```
+\procedure sayhi(name:"Bugs Bunny") Hi, I'm <<name>>.
+```
+
+Procedure definitions can be nested by specifying the name of the procedure in the `\end` marker. For example:
+
+<<wikitext-example-without-html src:"""\procedure special-button(caption:"Click me")
+\procedure actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+<<caption>>
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
+
+! Use of Parameters Inside Procedures
+The parameters can be declared inside procedures. The parameters widget is necessary in a procedure if you want to use computed default values. For example:
+
+<<wikitext-example-without-html 
+src:"""\procedure myproc()
+<$parameters name={{$:/SiteTitle}} desc={{$:/SiteSubtitle}}>
+This is <<name>> demonstrates <<desc>>.
+</$parameters>
+\end
+
+<<myproc>>
+""">>
+
+!! Caution in Using Positional Parameters
+Procedures are a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget, so generally there is no reason to have multiple parameters widgets within a definition. In the below example when passing `x` to `myproc`, it will also be set to `a`:
+
+<<wikitext-example-without-html 
+src:"""\procedure myproc(x:10)
+\parameters (a:100, b:200)
+
+x=<<x>>, a=<<a>>, b=<<b>>
+\end
+
+<<myproc 50>>
+""">>
+
+The reason for that result is clearer if we consider an equivalent with explicit parameters widgets.
+
+<$macrocall $name=wikitext-example-without-html 
+src='<$let myprog="""
+\parameters (x:10)
+\parameters (a:100, b:200)
+
+x=<<x>>, a=<<a>>, b=<<b>>
+""">
+<<myprog 50>>
+</$let>'
+/>
+
+This is because those two parameters widgets are entirely independent. They are both processed as if the other parameter widget is not there.
+
+<<.tip "The positional parameters are only required when using the parameterised transclusion shortcut syntax, and that in other cases it is generally clearer to use named parameters.">>
+
+To prevent such situation of above example, pass parameters by name as below.
+
+<<wikitext-example-without-html 
+src:"""\procedure myproc(x:10)
+\parameters (a:100, b:200)
+
+x=<<x>>, a=<<a>>, b=<<b>>
+\end
+
+<<myproc x:50>>
+""">>

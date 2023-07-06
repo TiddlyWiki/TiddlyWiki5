@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.2.7
+    TW5_BUILD_VERSION=v5.3.0
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -107,7 +107,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /empty.html			Empty
 # /empty.hta			For Internet Explorer
 node $TW5_BUILD_TIDDLYWIKI \
-	$TW5_BUILD_MAIN_EDITION \
+	./editions/empty \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--build empty \
