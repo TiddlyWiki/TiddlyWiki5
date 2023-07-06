@@ -750,7 +750,9 @@ Widget.prototype.removeLocalDomNodes = function() {
 	// If this widget has directly created DOM nodes, delete them and exit.
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
-			domNode.parentNode.removeChild(domNode);
+			if(domNode.parentNode) {
+				domNode.parentNode.removeChild(domNode);
+			}
 		});
 		this.domNodes = [];
 	}
