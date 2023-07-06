@@ -94,7 +94,11 @@ exports.runTests = function(callback,specFilter) {
 	if($tw.browser) {
 		window.jasmineRequire = jasmineCore;
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine-html.js");
+		var previousOnloadHandler = window.onload;
+		window.onload = function() {};
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/boot.js");
+		var jasmineOnloadHandler = window.onload;
+		window.onload = function() {};
 		jasmine = window.jasmine;
 	} else {
 		// Add missing properties to `jasmineCore` in order to call the Jasmine
@@ -144,9 +148,11 @@ exports.runTests = function(callback,specFilter) {
 	// Iterate through all the test modules
 	var tests = $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
 	$tw.utils.each(tests,evalInContext);
-	// In a browser environment, jasmine-core/boot.js calls `execute()` for us.
+	// In a browser environment, we use jasmine-core/boot.js to call `execute()` for us.
 	// In Node.js, we call it manually.
-	if(!$tw.browser) {
+	if($tw.browser) {
+		jasmineOnloadHandler();
+	} else {
 		nodeJasmineWrapper.execute(null,specFilter);
 	}
 };
