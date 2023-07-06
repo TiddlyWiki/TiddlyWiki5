@@ -94,6 +94,7 @@ exports.runTests = function(callback,specFilter) {
 	if($tw.browser) {
 		window.jasmineRequire = jasmineCore;
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/jasmine-html.js");
+		// Prevent jasmine-core/boot.js from installing its own onload handler. We'll execute it explicitly when everything is ready
 		var previousOnloadHandler = window.onload;
 		window.onload = function() {};
 		$tw.modules.execute("$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/boot.js");
