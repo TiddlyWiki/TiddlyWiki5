@@ -18,6 +18,8 @@ $tw.SqlFunctions = function(options) {
 	// Create field with `title TEXT NOT NULL COLLATE custom_collation`
 	// Use it like `... order by shadow collate custom_collation`
 	function customCollation(ptr,lenA,a,lenB,b) {
+		// There may be a problem here: lenA and lenB are the lengths of the two UTF8 strings in bytes,
+		// and yet we're using them with JS slice() method which counts in characters
 		var jsA = $tw.sqlite3.wasm.cstrToJs(a).slice(0,lenA),
 			jsB = $tw.sqlite3.wasm.cstrToJs(b).slice(0,lenB);
 		return jsA.localeCompare(jsB);
