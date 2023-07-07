@@ -17,24 +17,18 @@ $tw.SqlFunctions = function(options) {
 	// Setup custom collation to precisely match existing sort orders
 	// Create field with `title TEXT NOT NULL COLLATE custom_collation`
 	// Use it like `... order by shadow collate custom_collation`
-	// function customCollation(ptr,lenA,a,lenB,b) {
-	// 	var jsA = $tw.sqlite3.wasm.cstrToJs(a).slice(0,lenA),
-	// 		jsB = $tw.sqlite3.wasm.cstrToJs(b).slice(0,lenB);
-	// 	if(jsA < jsB) {
-	// 		return -1;
-	// 	} else if (jsA > jsB) {
-	// 		return +1;
-	// 	} else {
-	// 		return 0;
-	// 	}
-	// }
-	// var SQLITE_UTF8 =           1; /* IMP: R-37514-35566 */
-	// var SQLITE_UTF16LE =        2; /* IMP: R-03371-37637 */
-	// var SQLITE_UTF16BE =        3; /* IMP: R-51971-34154 */
-	// var SQLITE_UTF16 =          4; /* Use native byte order */
-	// var SQLITE_ANY =            5; /* Deprecated */
-	// var SQLITE_UTF16_ALIGNED =  8; /* sqlite3_create_collation only */
-	// var collationResult = $tw.sqlite3.capi.sqlite3_create_collation_v2(this.db.pointer,"custom_collation",SQLITE_UTF8,this,customCollation,0);
+	function customCollation(ptr,lenA,a,lenB,b) {
+		var jsA = $tw.sqlite3.wasm.cstrToJs(a).slice(0,lenA),
+			jsB = $tw.sqlite3.wasm.cstrToJs(b).slice(0,lenB);
+		return jsA.localeCompare(jsB);
+	}
+	var SQLITE_UTF8 =           1; /* IMP: R-37514-35566 */
+	var SQLITE_UTF16LE =        2; /* IMP: R-03371-37637 */
+	var SQLITE_UTF16BE =        3; /* IMP: R-51971-34154 */
+	var SQLITE_UTF16 =          4; /* Use native byte order */
+	var SQLITE_ANY =            5; /* Deprecated */
+	var SQLITE_UTF16_ALIGNED =  8; /* sqlite3_create_collation only */
+	var collationResult = $tw.sqlite3.capi.sqlite3_create_collation_v2(this.db.pointer,"custom_collation",SQLITE_UTF8,this,customCollation,0);
 	/*
 	Create tables and indexes
 	*/
@@ -42,7 +36,7 @@ $tw.SqlFunctions = function(options) {
 		sql: `
 		DROP TABLE IF EXISTS tiddlers;
 		CREATE TABLE tiddlers (
-			title TEXT NOT NULL,
+			title TEXT NOT NULL COLLATE custom_collation,
 			shadow INTEGER NOT NULL CHECK (shadow = 0 OR shadow = 1), -- 0=real tiddler, 1=shadow tiddler
 			shadowsource TEXT,
 			meta TEXT NOT NULL,
@@ -121,7 +115,7 @@ $tw.SqlFunctions = function(options) {
 			return undefined;
 		}
 	};
-	var statementAllTitles = self.db.prepare("select title from tiddlers where shadow = 0 order by title");
+	var statementAllTitles = self.db.prepare("select title from tiddlers where shadow = 0 order by title collate custom_collation");
 	this.sqlAllTitles = function() {
 		let resultRows = [];
 		while(statementAllTitles.step()) {
@@ -131,7 +125,7 @@ $tw.SqlFunctions = function(options) {
 		statementAllTitles.reset();
 		return resultRows;
 	};
-	var statementAllShadowTitles = self.db.prepare("select title from tiddlers where shadow = 1 order by title");
+	var statementAllShadowTitles = self.db.prepare("select title from tiddlers where shadow = 1 order by title collate custom_collation");
 	this.sqlAllShadowTitles = function() {
 		let resultRows = [];
 		while(statementAllShadowTitles.step()) {
@@ -141,7 +135,7 @@ $tw.SqlFunctions = function(options) {
 		statementAllShadowTitles.reset();
 		return resultRows;
 	};
-	var statementEachTiddler = self.db.prepare("select title, meta, text from tiddlers where shadow = 0 order by title");
+	var statementEachTiddler = self.db.prepare("select title, meta, text from tiddlers where shadow = 0 order by title collate custom_collation");
 	this.sqlEachTiddler = function(callback) {
 		while(statementEachTiddler.step()) {
 			var row = statementEachTiddler.get({}),
@@ -175,7 +169,7 @@ $tw.SqlFunctions = function(options) {
 					where t4.title = t3.title
 						and t4.shadow = 1
 				)
-		order by title;
+		order by title collate custom_collation;
 	`);
 	this.sqlEachShadowTiddler = function(callback) {
 		while(statementEachShadowTiddler.step()) {
@@ -198,7 +192,7 @@ $tw.SqlFunctions = function(options) {
 					where t2.title = t1.title
 						and t2.shadow = 0
 					)
-			order by t1.title;
+			order by t1.title collate custom_collation;
 		`);
 	this.sqlEachTiddlerPlusShadows = function(callback) {
 		self.sqlEachTiddler(callback);
@@ -221,7 +215,7 @@ $tw.SqlFunctions = function(options) {
 					where t2.title = t1.title
 						and t2.shadow = 1
 					)
-			order by t1.title;
+			order by t1.title collate custom_collation;
 		`);
 	this.sqlEachShadowPlusTiddlers = function(callback) {
 		self.sqlEachShadowTiddler(callback);
