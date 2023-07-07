@@ -6,7 +6,6 @@ module-type: route
 GET /
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -23,5 +22,3 @@ exports.handler = function(request,response,state) {
 	};
 	state.sendResponse(200,responseHeaders,text);
 };
-
-}());

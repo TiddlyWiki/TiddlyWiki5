@@ -6,7 +6,6 @@ module-type: route
 GET /:title
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -40,5 +39,3 @@ exports.handler = function(request,response,state) {
 		response.end();
 	}
 };
-
-}());

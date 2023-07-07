@@ -6,7 +6,6 @@ module-type: route
 GET /recipes/default/tiddlers.json?filter=<filter>
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -46,5 +45,3 @@ exports.handler = function(request,response,state) {
 	var text = JSON.stringify(tiddlers);
 	state.sendResponse(200,{"Content-Type": "application/json"},text,"utf8");
 };
-
-}());

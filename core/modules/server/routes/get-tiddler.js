@@ -6,7 +6,6 @@ module-type: route
 GET /recipes/default/tiddlers/:title
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -42,5 +41,3 @@ exports.handler = function(request,response,state) {
 		response.end();
 	}
 };
-
-}());
