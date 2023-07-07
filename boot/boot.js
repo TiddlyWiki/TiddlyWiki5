@@ -1097,6 +1097,39 @@ $tw.Tiddler.prototype.isEqual = function(tiddler,excludeFields) {
 	return differences.length === 0;
 };
 
+$tw.Tiddler.prototype.getFieldString = function(field,defaultValue) {
+	var value = this.fields[field];
+	// Check for a missing field
+	if(value === undefined || value === null) {
+		return defaultValue || "";
+	}
+	// Stringify the field with the associated tiddler field module (if any)
+	var fieldModule = $tw.Tiddler.fieldModules[field];
+	if(fieldModule && fieldModule.stringify) {
+		return fieldModule.stringify.call(this,value);
+	} else {
+		return value.toString();
+	}
+};
+
+/*
+Get all the fields as a hashmap of strings. Options:
+	exclude: an array of field names to exclude
+*/
+$tw.Tiddler.prototype.getFieldStrings = function(options) {
+	options = options || {};
+	var exclude = options.exclude || [];
+	var fields = {};
+	for(var field in this.fields) {
+		if($tw.utils.hop(this.fields,field)) {
+			if(exclude.indexOf(field) === -1) {
+				fields[field] = this.getFieldString(field);
+			}
+		}
+	}
+	return fields;
+};
+
 /*
 Register and install the built in tiddler field modules
 */

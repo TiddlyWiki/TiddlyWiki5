@@ -99,7 +99,7 @@ $tw.Wiki = function(options) {
 			var title = tiddler.fields.title;
 			if(title) {
 				// Save the new tiddler
-				self.sqlFunctions.sqlSaveTiddler(tiddler.fields);
+				self.sqlFunctions.sqlSaveTiddler(tiddler.getFieldStrings());
 				// Update caches
 				this.clearCache(title);
 				this.clearGlobalCache();
