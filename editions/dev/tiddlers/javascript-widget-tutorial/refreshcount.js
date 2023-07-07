@@ -3,7 +3,6 @@
 widget to count the number of times this widget refreshes
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -39,4 +38,3 @@ MyWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.refreshcount = MyWidget;
-

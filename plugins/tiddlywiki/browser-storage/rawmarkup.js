@@ -7,8 +7,6 @@ Startup code injected as raw markup
 
 \*/
 
-(function() {
-
 // Need to initialise these because we run before bootprefix.js and boot.js
 $tw = window.$tw || Object.create(null);
 $tw.hooks = $tw.hooks || { names: {}};
@@ -30,7 +28,7 @@ function hookBootTiddlersLoaded() {
 	// Check that browser storage is available
 	try {
 		window.localStorage;
-	} catch(e) {
+	} catch (e) {
 		return;
 	}
 	// Step through each browsder storage item
@@ -45,7 +43,7 @@ function hookBootTiddlersLoaded() {
 			if(jsonString) {
 				try {
 					jsonData = JSON.parse(jsonString);
-				} catch(e) {}
+				} catch (e) {}
 				if(jsonData) {
 					// Convert it to a tiddler
 					var incomingTiddler = new $tw.Tiddler(jsonData);
@@ -89,4 +87,3 @@ function hookBootTiddlersLoaded() {
 		text: $tw.utils.stringifyList(log)
 	});
 }
-

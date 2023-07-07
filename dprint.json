@@ -1,0 +1,32 @@
+{
+	"lineWidth": 120,
+	"typescript": {
+		"quoteProps": "asNeeded",
+		"ifStatement.spaceAfterIfKeyword": false,
+		"forStatement.spaceAfterForKeyword": false,
+		"whileStatement.spaceAfterWhileKeyword": false,
+		"spaceSurroundingProperties": false,
+		"useTabs": true,
+		"indentWidth": 1,
+		"quoteStyle": "preferDouble",
+		"binaryExpression.operatorPosition": "sameLine",
+		"trailingCommas": "never",
+		"spaceAround": false
+	},
+	"json": {
+		"useTabs": true,
+		"indentWidth": 1
+	},
+	"markdown": {},
+	"includes": [
+		"**/*.{js,json,md}",
+		"./*.json",
+		"./*.js"
+	],
+	"excludes": ["**/node_modules", "**/*-lock.json", "**.min*", "sjcl.js"],
+	"plugins": [
+		"https://plugins.dprint.dev/typescript-0.84.4.wasm",
+		"https://plugins.dprint.dev/json-0.17.2.wasm",
+		"https://plugins.dprint.dev/markdown-0.15.2.wasm"
+	]
+}

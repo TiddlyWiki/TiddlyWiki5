@@ -3,7 +3,6 @@
 Library function for creating widget using a dom creating function
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */

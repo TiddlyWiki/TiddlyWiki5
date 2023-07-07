@@ -3,7 +3,6 @@
 Hello, World widget
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -32,4 +31,3 @@ MyWidget.prototype.render = function(parent, nextSibling) {
 };
 
 exports.tiddlerfield = MyWidget;
-

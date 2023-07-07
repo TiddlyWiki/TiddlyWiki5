@@ -6,7 +6,6 @@ module-type: widget
 Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -17,7 +16,7 @@ var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
 
 var hljs = require("$:/plugins/tiddlywiki/highlight-legacy/highlight.js");
 
-hljs.configure({tabReplace: "    "});	
+hljs.configure({tabReplace: "    "});
 
 CodeBlockWidget.prototype.postRender = function() {
 	var domNode = this.domNodes[0],
@@ -29,7 +28,7 @@ CodeBlockWidget.prototype.postRender = function() {
 	if(language && hljs.getLanguage(language)) {
 		domNode.className = language.toLowerCase() + " hljs";
 		if($tw.browser && !domNode.isTiddlyWikiFakeDom) {
-			hljs.highlightBlock(domNode);			
+			hljs.highlightBlock(domNode);
 		} else {
 			var text = domNode.textContent;
 			domNode.children[0].innerHTML = hljs.fixMarkup(hljs.highlight(language,text).value);
@@ -38,6 +37,5 @@ CodeBlockWidget.prototype.postRender = function() {
 				domNode.children[0].textInnerHTML = text;
 			}
 		}
-	}	
+	}
 };
-
