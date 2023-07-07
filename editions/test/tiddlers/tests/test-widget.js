@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the wikitext rendering pipeline end-to-end. We also need tests that individually test parsers, rendertreenodes etc., but this gets us started.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -737,7 +737,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		renderWidgetNode(widgetNode);
 		var childNode = widgetNode;
-		while (childNode.children.length > 0) {
+		while(childNode.children.length > 0) {
 			childNode = childNode.children[0];
 		}
 		// First make sure A and B imported
@@ -751,7 +751,7 @@ describe("Widget module", function() {
 		wiki.addTiddler({title: "DE", text: "\\define D() D2"});
 		widgetNode.refresh({"ABC": {modified: true}, "DE": {modified: true}});
 		var childNode = widgetNode;
-		while (childNode.children.length > 0) {
+		while(childNode.children.length > 0) {
 			childNode = childNode.children[0];
 		}
 		// Make sure \import recognized changes and deletions
@@ -822,4 +822,3 @@ describe("Widget module", function() {
 	});
 });
 
-})();

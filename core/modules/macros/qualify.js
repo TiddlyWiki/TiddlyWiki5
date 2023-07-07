@@ -6,7 +6,7 @@ module-type: macro
 Macro to qualify a state tiddler title according
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -29,4 +29,3 @@ exports.run = function(title) {
 	return title + "-" + this.getStateQualifier();
 };
 
-})();

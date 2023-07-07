@@ -6,7 +6,7 @@ module-type: saver
 A bare bones saver for Tahoe-LAFS. It just PUTs the new HTML file back to the server at the same URL.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -54,4 +54,3 @@ exports.create = function(wiki) {
 	return new TahoeSaver(wiki);
 };
 
-})();

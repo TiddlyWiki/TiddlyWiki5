@@ -6,7 +6,7 @@ module-type: library
 Legacy version of the dyannotate background daemon to track the selection
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -101,4 +101,3 @@ LegacySelectionTracker.prototype.findSelectionContainer = function findSelection
 
 exports.LegacySelectionTracker = LegacySelectionTracker;
 
-})();

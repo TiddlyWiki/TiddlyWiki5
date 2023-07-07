@@ -6,7 +6,7 @@ module-type: startup
 Setup the root widget and the core root widget handlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -117,4 +117,3 @@ exports.startup = function() {
 	}
 };
 
-})();

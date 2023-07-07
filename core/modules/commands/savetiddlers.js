@@ -6,7 +6,7 @@ module-type: command
 Command to save several tiddlers to a folder of files
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -53,4 +53,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

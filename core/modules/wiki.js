@@ -16,7 +16,7 @@ Adds the following properties to the wiki object:
 * `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -198,7 +198,7 @@ exports.generateNewTitle = function(baseTitle,options) {
 		title = baseTitle,
 		template = options.template,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
-	if (template) {
+	if(template) {
 		// "count" is important to avoid an endless loop in while(...)!!
 		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
 		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
@@ -648,7 +648,7 @@ exports.findListingsOfTiddler = function(targetTitle,fieldName) {
 				for(var i = 0; i < list.length; i++) {
 					var listItem = list[i],
 						listing = listings[listItem] || [];
-					if (listing.indexOf(title) === -1) {
+					if(listing.indexOf(title) === -1) {
 						listing.push(title);
 					}
 					listings[listItem] = listing;
@@ -696,7 +696,7 @@ exports.sortByList = function(array,listTitle) {
 					}
 				}
 				// If a new position is specified, let's move it
-				if (newPos !== -1) {
+				if(newPos !== -1) {
 					// get its current Pos, and make sure
 					// sure that it's _actually_ in the list
 					// and that it would _actually_ move
@@ -1702,4 +1702,3 @@ exports.slugify = function(title,options) {
 	return slug;
 };
 
-})();

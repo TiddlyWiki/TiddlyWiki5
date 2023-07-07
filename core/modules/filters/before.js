@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator returning the tiddler from the current list that is before the tiddler named in the operand.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -28,4 +28,3 @@ exports.before = function(source,operator,options) {
 	}
 };
 
-})();

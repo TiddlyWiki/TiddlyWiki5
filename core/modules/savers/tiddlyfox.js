@@ -6,7 +6,7 @@ module-type: saver
 Handles saving changes via the TiddlyFox file extension
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false, netscape: false, Components: false */
@@ -83,4 +83,3 @@ exports.create = function(wiki) {
 	return new TiddlyFoxSaver(wiki);
 };
 
-})();

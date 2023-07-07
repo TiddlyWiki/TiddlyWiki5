@@ -6,7 +6,7 @@ module-type: widget
 Linkcatcher widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -101,4 +101,3 @@ LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 
 exports.linkcatcher = LinkCatcherWidget;
 
-})();

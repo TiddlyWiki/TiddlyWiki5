@@ -6,7 +6,7 @@ module-type: library
 The main module of the Jasmine test plugin for TiddlyWiki5
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: true */
@@ -71,7 +71,7 @@ exports.runTests = function(callback,specFilter) {
 		context.require = function(moduleTitle) {
 			// mock out the 'glob' module required in
 			// "$:/plugins/tiddlywiki/jasmine/jasmine/jasmine.js"
-			if (moduleTitle === "glob") {
+			if(moduleTitle === "glob") {
 				return {};
 			}
 			return $tw.modules.execute(moduleTitle,title);
@@ -158,4 +158,3 @@ exports.runTests = function(callback,specFilter) {
 	}
 };
 
-})();

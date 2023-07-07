@@ -6,7 +6,7 @@ module-type: utils
 Parse tree utility functions.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -123,4 +123,3 @@ exports.getParseTreeText = function getParseTreeText(tree) {
 	return output.join("");
 };
 
-})();

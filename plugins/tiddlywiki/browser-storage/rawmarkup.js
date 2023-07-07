@@ -90,4 +90,3 @@ function hookBootTiddlersLoaded() {
 	});
 }
 
-})();

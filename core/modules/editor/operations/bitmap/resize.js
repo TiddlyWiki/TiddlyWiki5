@@ -6,7 +6,7 @@ module-type: bitmapeditoroperation
 Bitmap editor operation to resize the image
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -26,4 +26,3 @@ exports["resize"] = function(event) {
 	this.saveChanges();
 };
 
-})();

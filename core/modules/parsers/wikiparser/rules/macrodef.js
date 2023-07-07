@@ -12,7 +12,7 @@ definition text, including $param$ markers
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -89,4 +89,3 @@ exports.parse = function() {
 	return parseTreeNodes;
 };
 
-})();

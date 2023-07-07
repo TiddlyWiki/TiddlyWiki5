@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operators for JSON operations
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -186,5 +186,4 @@ function getDataItem(data,indexes) {
 	return item;
 }
 
-})();
 	

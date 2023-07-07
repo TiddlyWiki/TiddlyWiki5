@@ -6,7 +6,7 @@ module-type: widget
 Dropzone widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -329,4 +329,3 @@ DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.dropzone = DropZoneWidget;
 
-})();

@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the wiki based tests
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -90,4 +90,3 @@ describe("Wiki-based tests", function() {
 
 });
 
-})();

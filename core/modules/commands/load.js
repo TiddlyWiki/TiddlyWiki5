@@ -6,7 +6,7 @@ module-type: command
 Command to load tiddlers from a file or directory
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -48,4 +48,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

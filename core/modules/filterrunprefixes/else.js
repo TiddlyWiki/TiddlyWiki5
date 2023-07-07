@@ -6,7 +6,7 @@ module-type: filterrunprefix
 Equivalent to ~ filter run prefix.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -24,4 +24,3 @@ exports.else = function(operationSubFunction) {
 	};
 };
 
-})();

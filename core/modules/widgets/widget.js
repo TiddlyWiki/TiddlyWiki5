@@ -6,7 +6,7 @@ module-type: widget
 Widget base class
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -666,7 +666,7 @@ Refresh all the children of a widget
 Widget.prototype.refreshChildren = function(changedTiddlers) {
 	var children = this.children,
 		refreshed = false;
-	for (var i = 0; i < children.length; i++) {
+	for(var i = 0; i < children.length; i++) {
 		refreshed = children[i].refresh(changedTiddlers) || refreshed;
 	}
 	return refreshed;
@@ -836,4 +836,3 @@ Widget.evaluateVariable  = function(widget,name,options) {
 
 exports.widget = Widget;
 
-})();

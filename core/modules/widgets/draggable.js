@@ -6,7 +6,7 @@ module-type: widget
 Draggable widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -120,5 +120,3 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.draggable = DraggableWidget;
-
-})();

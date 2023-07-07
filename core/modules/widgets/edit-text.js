@@ -6,7 +6,7 @@ module-type: widget
 Edit-text widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -18,4 +18,3 @@ var editTextWidgetFactory = require("$:/core/modules/editor/factory.js").editTex
 
 exports["edit-text"] = editTextWidgetFactory(FramedEngine,SimpleEngine);
 
-})();

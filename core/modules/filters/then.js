@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for replacing any titles with a constant
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -23,4 +23,3 @@ exports.then = function(source,operator,options) {
 	return results;
 };
 
-})();

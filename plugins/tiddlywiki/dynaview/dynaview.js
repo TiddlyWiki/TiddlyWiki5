@@ -6,7 +6,7 @@ module-type: startup
 Zoom everything
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -264,4 +264,3 @@ function saveViewportDimensions() {
 	}
 }
 
-})();

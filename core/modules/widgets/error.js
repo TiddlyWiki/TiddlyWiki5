@@ -6,7 +6,7 @@ module-type: widget
 Error widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -60,4 +60,3 @@ ErrorWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.error = ErrorWidget;
 
-})();

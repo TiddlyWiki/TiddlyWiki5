@@ -6,7 +6,7 @@ module-type: storyview
 Animates list insertions and removals
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -100,4 +100,3 @@ PopStoryView.prototype.remove = function(widget) {
 
 exports.pop = PopStoryView;
 
-})();

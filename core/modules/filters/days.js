@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator that selects tiddlers with a specified date field within a specified date interval.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -47,4 +47,3 @@ exports.days = function(source,operator,options) {
 	return results;
 };
 
-})();

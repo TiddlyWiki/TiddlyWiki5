@@ -3,7 +3,7 @@ title: $:/core/modules/filterrunprefixes/reduce.js
 type: application/javascript
 module-type: filterrunprefix
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -37,4 +37,3 @@ exports.reduce = function(operationSubFunction,options) {
 	}
 };
 
-})();

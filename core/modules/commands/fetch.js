@@ -6,7 +6,7 @@ module-type: command
 Commands to fetch external tiddlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -172,4 +172,3 @@ Command.prototype.processBody = function(body,type,options,url) {
 
 exports.Command = Command;
 
-})();

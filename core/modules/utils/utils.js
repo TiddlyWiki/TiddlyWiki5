@@ -6,7 +6,7 @@ module-type: utils
 Various static utility functions.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -899,7 +899,7 @@ IE does not have sign function
 */
 exports.sign = Math.sign || function(x) {
 	x = +x; // convert to a number
-	if (x === 0 || isNaN(x)) {
+	if(x === 0 || isNaN(x)) {
 		return x;
 	}
 	return x > 0 ? 1 : -1;
@@ -912,7 +912,7 @@ exports.strEndsWith = function(str,ending,position) {
 	if(str.endsWith) {
 		return str.endsWith(ending,position);
 	} else {
-		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
+		if(typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
 			position = str.length;
 		}
 		position -= ending.length;
@@ -1005,4 +1005,3 @@ exports.makeCompareFunction = function(type,options) {
 	return (types[type] || types[options.defaultType] || types.number);
 };
 
-})();

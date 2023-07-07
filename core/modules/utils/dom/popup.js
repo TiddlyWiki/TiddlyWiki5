@@ -6,7 +6,7 @@ module-type: utils
 Module that creates a $tw.utils.Popup object prototype that manages popups in the browser
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -235,7 +235,7 @@ This function is safe to call, even if the popup class was not initialized.
 */
 exports.buildCoordinates = function(prefix,position) {
 	var coord = prefix + "(" + position.left + "," + position.top + "," + position.width + "," + position.height + ")";
-	if (exports.popupLocationRegExp.test(coord)) {
+	if(exports.popupLocationRegExp.test(coord)) {
 		return coord;
 	} else {
 		return "(0,0,0,0)";
@@ -244,4 +244,3 @@ exports.buildCoordinates = function(prefix,position) {
 
 exports.Popup = Popup;
 
-})();

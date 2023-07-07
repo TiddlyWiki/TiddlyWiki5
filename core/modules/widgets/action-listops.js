@@ -6,7 +6,6 @@ module-type: widget
 Action widget to apply list operations to any tiddler field (defaults to the 'list' field of the current tiddler)
 
 \*/
-(function() {
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -87,5 +86,3 @@ ActionListopsWidget.prototype.invokeAction = function(triggeringWidget,
 };
 
 exports["action-listops"] = ActionListopsWidget;
-
-})();

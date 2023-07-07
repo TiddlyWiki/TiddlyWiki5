@@ -6,7 +6,7 @@ module-type: widget
 Encrypt widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -66,4 +66,3 @@ EncryptWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.encrypt = EncryptWidget;
 
-})();

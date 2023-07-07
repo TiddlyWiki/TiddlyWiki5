@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for returning the source plugins for shadow tiddlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -27,4 +27,3 @@ exports.shadowsource = function(source,operator,options) {
 	return results;
 };
 
-})();

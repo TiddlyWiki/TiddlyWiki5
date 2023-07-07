@@ -11,7 +11,7 @@ Wiki text inline rule for code runs. For example:
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -52,4 +52,3 @@ exports.parse = function() {
 	}];
 };
 
-})();

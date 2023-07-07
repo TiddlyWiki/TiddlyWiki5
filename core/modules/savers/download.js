@@ -6,7 +6,7 @@ module-type: saver
 Handles saving changes via HTML5's download APIs
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -81,4 +81,3 @@ exports.create = function(wiki) {
 	return new DownloadSaver(wiki);
 };
 
-})();

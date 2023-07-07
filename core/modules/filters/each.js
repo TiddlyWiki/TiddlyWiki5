@@ -7,7 +7,7 @@ Filter operator that selects one tiddler for each unique value of the specified 
 With suffix "list", selects all tiddlers that are values in a specified list field.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -64,4 +64,3 @@ exports.each = function(source,operator,options) {
 	return results;
 };
 
-})();

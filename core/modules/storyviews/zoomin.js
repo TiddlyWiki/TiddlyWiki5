@@ -6,7 +6,7 @@ module-type: storyview
 Zooms between individual tiddlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -54,7 +54,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -139,7 +139,7 @@ ZoominListView.prototype.insert = function(widget) {
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement) {
 		return;
-	} else if (targetElement.nodeType === Node.TEXT_NODE) {
+	} else if(targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
 		return;
 	}
@@ -183,7 +183,7 @@ ZoominListView.prototype.remove = function(widget) {
 	var toWidgetDomNode = toWidget && toWidget.findFirstDomNode();
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
-		if (toWidgetDomNode.nodeType === Node.TEXT_NODE) {
+		if(toWidgetDomNode.nodeType === Node.TEXT_NODE) {
 			this.logTextNodeRoot(toWidgetDomNode);
 			toWidgetDomNode = null;
 		} else {
@@ -227,4 +227,3 @@ ZoominListView.prototype.logTextNodeRoot = function(node) {
 
 exports.zoomin = ZoominListView;
 
-})();

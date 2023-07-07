@@ -6,7 +6,7 @@ module-type: utils
 Modal message mechanism
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -254,4 +254,3 @@ Modal.prototype.adjustPageClass = function() {
 
 exports.Modal = Modal;
 
-})();

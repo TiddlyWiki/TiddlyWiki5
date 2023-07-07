@@ -19,7 +19,7 @@ Attributes are stored as hashmaps of the following objects:
 	{type: "macro", macro: <TBD>} - indirect through a macro invocation
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -436,5 +436,4 @@ WikiParser.prototype.amendRules = function(type,names) {
 
 exports["text/vnd.tiddlywiki"] = WikiParser;
 
-})();
 

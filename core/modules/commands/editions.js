@@ -6,7 +6,7 @@ module-type: command
 Command to list the available editions
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -36,4 +36,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

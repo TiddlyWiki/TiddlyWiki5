@@ -6,7 +6,7 @@ module-type: library
 Text editor engine based on a CodeMirror instance
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -317,4 +317,3 @@ CodeMirrorEngine.prototype.executeTextOperation = function(operation) {
 
 exports.CodeMirrorEngine = $tw.browser ? CodeMirrorEngine : require("$:/core/modules/editor/engines/simple.js").SimpleEngine;
 
-})();

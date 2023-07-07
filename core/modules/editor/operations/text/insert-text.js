@@ -6,7 +6,7 @@ module-type: texteditoroperation
 Text editor operation insert text at the caret position. If there is a selection it is replaced.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -20,4 +20,3 @@ exports["insert-text"] = function(event,operation) {
 	operation.newSelEnd = operation.newSelStart;
 };
 
-})();

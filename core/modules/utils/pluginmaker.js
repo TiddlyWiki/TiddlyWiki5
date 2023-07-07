@@ -6,7 +6,7 @@ module-type: utils
 A quick and dirty way to pack up plugins within the browser.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -76,4 +76,3 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 	return "Plugin " + title + " successfully saved";
 };
 
-})();

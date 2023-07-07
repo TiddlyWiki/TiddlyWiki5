@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for comparing fields for equality
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -72,4 +72,3 @@ exports.field = function(source,operator,options) {
 	return results;
 };
 
-})();

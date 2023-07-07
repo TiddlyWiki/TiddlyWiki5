@@ -8,7 +8,7 @@ ENEX file deserializer
 For details see: https://blog.evernote.com/tech/2013/08/08/evernote-export-format-enex/
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -77,4 +77,3 @@ function convertDate(isoDate) {
 	return (isoDate || "").replace("T","").replace("Z","") + "000"
 }
 
-})();

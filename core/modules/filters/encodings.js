@@ -6,7 +6,6 @@ module-type: filteroperator
 Filter operator for applying decodeURIComponent() to each item.
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -113,4 +112,3 @@ exports.escapecss = function(source,operator,options) {
 	return results;
 };
 
-})();

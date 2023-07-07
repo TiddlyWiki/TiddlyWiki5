@@ -6,7 +6,7 @@ module-type: widget
 Message catcher widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -107,4 +107,3 @@ MessageCatcherWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.messagecatcher = MessageCatcherWidget;
 
-})();

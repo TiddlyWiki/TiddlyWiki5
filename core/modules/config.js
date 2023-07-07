@@ -6,7 +6,7 @@ module-type: config
 Core configuration constants
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -38,4 +38,3 @@ exports.htmlBlockElements = "address,article,aside,audio,blockquote,canvas,dd,de
 
 exports.htmlUnsafeElements = "script".split(",");
 
-})();

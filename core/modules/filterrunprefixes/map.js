@@ -3,7 +3,7 @@ title: $:/core/modules/filterrunprefixes/map.js
 type: application/javascript
 module-type: filterrunprefix
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -40,5 +40,3 @@ exports.map = function(operationSubFunction,options) {
 		}
 	}
 };
-
-})();

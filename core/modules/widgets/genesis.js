@@ -6,7 +6,7 @@ module-type: widget
 Genesis widget for dynamically creating widgets
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -112,4 +112,3 @@ GenesisWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.genesis = GenesisWidget;
 
-})();

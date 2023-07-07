@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter function for [duplicateslugs[]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -33,4 +33,3 @@ exports.duplicateslugs = function(source,operator,options) {
 	return results;
 };
 
-})();

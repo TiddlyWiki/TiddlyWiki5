@@ -6,7 +6,7 @@ module-type: global
 Keyboard handling utilities
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -384,4 +384,3 @@ KeyboardManager.prototype.handleShortcutChanges = function(changedTiddlers) {
 
 exports.KeyboardManager = KeyboardManager;
 
-})();

@@ -14,7 +14,7 @@ A suppressed external link: ~http://www.tiddlyspace.com/
 External links can be suppressed by preceding them with `~`.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -52,4 +52,3 @@ exports.parse = function() {
 	}
 };
 
-})();

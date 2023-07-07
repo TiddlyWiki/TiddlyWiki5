@@ -33,4 +33,3 @@ MyWidget.prototype.render = function(parent, nextSibling) {
 
 exports.tiddlerfield = MyWidget;
 
-})();

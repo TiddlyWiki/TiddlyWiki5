@@ -6,7 +6,7 @@ module-type: filterrunprefix
 Equivalent to a filter run with no prefix.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -21,4 +21,3 @@ exports.or = function(operationSubFunction) {
 	};
 };
 
-})();

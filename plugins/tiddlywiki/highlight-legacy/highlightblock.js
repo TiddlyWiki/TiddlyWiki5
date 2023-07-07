@@ -41,4 +41,3 @@ CodeBlockWidget.prototype.postRender = function() {
 	}	
 };
 
-})();

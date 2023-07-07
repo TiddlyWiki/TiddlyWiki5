@@ -11,7 +11,7 @@ Wiki pragma rule for parser mode specifications
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -65,4 +65,3 @@ exports.parse = function() {
 	return [];
 };
 
-})();

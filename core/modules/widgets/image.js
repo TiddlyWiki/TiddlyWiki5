@@ -22,7 +22,7 @@ Tiddlers that contain wikitext could be rendered to a DIV of the usual size of a
 The width and height attributes are interpreted as a number of pixels, and do not need to include the "px" suffix.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -158,4 +158,3 @@ ImageWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.image = ImageWidget;
 
-})();

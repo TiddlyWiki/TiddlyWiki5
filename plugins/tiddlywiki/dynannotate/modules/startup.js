@@ -6,7 +6,7 @@ module-type: startup
 Startup the dyannotate background daemon to track the selection
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -36,5 +36,4 @@ exports.startup = function() {
 	}
 };
 
-})();
 	

@@ -6,7 +6,7 @@ module-type: widget
 Tiddler widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -98,4 +98,3 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.tiddler = TiddlerWidget;
 
-})();

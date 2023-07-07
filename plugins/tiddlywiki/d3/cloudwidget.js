@@ -6,7 +6,7 @@ module-type: widget
 A widget for displaying word clouds. Derived from https://github.com/jasondavies/d3-cloud
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -130,4 +130,3 @@ CloudWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.d3cloud = CloudWidget;
 
-})();

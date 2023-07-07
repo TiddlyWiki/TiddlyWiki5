@@ -6,7 +6,7 @@ module-type: widget
 Action widget to send a message
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -96,4 +96,3 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
 exports["action-sendmessage"] = SendMessageWidget;
 
-})();

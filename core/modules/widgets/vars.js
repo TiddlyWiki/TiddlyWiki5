@@ -13,7 +13,7 @@ This widget allows multiple variables to be set in one go:
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -70,4 +70,3 @@ VarsWidget.prototype.refresh = function(changedTiddlers) {
 
 exports["vars"] = VarsWidget;
 
-})();

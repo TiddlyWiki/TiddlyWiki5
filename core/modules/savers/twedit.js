@@ -6,7 +6,7 @@ module-type: saver
 Handles saving changes via the TWEdit iOS app
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false, netscape: false, Components: false */
@@ -88,4 +88,3 @@ if($tw.browser) {
 	window.version = {title: "TiddlyWiki"};
 }
 
-})();

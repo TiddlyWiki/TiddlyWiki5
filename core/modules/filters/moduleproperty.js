@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter [[module-name]moduleproperty[name]] retrieve a module property
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -27,4 +27,3 @@ exports.moduleproperty = function(source,operator,options) {
 	return results;
 };
 
-})();

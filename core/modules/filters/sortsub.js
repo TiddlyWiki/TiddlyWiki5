@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for sorting by a subfilter
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -49,4 +49,3 @@ exports.sortsub = function(source,operator,options) {
 	return results;
 };
 
-})();

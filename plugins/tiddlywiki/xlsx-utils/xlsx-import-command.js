@@ -6,7 +6,7 @@ module-type: command
 Command to import an xlsx file
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -43,4 +43,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

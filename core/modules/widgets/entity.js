@@ -6,7 +6,7 @@ module-type: widget
 HTML entity widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -57,4 +57,3 @@ EntityWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.entity = EntityWidget;
 
-})();

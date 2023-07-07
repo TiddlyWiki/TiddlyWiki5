@@ -4,7 +4,7 @@ type: application/javascript
 module-type: filterrunprefix
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -28,4 +28,3 @@ exports.intersection = function(operationSubFunction) {
 	};
 };
 
-})();

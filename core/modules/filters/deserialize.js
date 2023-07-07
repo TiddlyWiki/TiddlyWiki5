@@ -4,7 +4,7 @@ type: application/javascript
 module-type: filteroperator
 Filter operator for deserializing string data into JSON representing tiddlers
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -35,5 +35,3 @@ exports["deserialize"] = function(source,operator,options) {
 	}
 	return results;
 }
-
-})();

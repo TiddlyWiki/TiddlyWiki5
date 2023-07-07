@@ -6,7 +6,7 @@ module-type: widget
 Action widget to log debug messages
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -90,4 +90,3 @@ LogWidget.prototype.log = function() {
 
 exports["action-log"] = LogWidget;
 
-})();

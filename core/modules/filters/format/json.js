@@ -3,7 +3,7 @@ title: $:/core/modules/filters/format/json.js
 type: application/javascript
 module-type: formatfilteroperator
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -31,5 +31,3 @@ exports.json = function(source,operand,options) {
 	});
 	return results;
 };
-
-})();

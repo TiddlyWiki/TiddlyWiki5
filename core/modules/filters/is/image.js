@@ -6,7 +6,7 @@ module-type: isfilteroperator
 Filter function for [is[image]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -33,4 +33,3 @@ exports.image = function(source,prefix,options) {
 	return results;
 };
 
-})();

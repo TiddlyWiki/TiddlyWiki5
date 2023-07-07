@@ -10,7 +10,7 @@ Wiki text inline rule for HTML entities. For example:
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -37,4 +37,3 @@ exports.parse = function() {
 	return [{type: "entity", entity: this.match[0]}];
 };
 
-})();

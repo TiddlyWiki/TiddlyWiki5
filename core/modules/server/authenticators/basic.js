@@ -6,7 +6,7 @@ module-type: authenticator
 Authenticator for WWW basic authentication
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -91,4 +91,3 @@ BasicAuthenticator.prototype.authenticateRequest = function(request,response,sta
 
 exports.AuthenticatorClass = BasicAuthenticator;
 
-})();

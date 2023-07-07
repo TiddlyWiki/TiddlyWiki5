@@ -6,7 +6,7 @@ module-type: library
 Class to import an Excel file
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -202,4 +202,3 @@ XLSXImporter.prototype.findColumns = function(sheet,sheetSize) {
 
 exports.XLSXImporter = XLSXImporter;
 
-})();

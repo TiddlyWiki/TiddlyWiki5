@@ -6,7 +6,7 @@ module-type: widget
 Raw widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -50,4 +50,3 @@ RawWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.raw = RawWidget;
 
-})();

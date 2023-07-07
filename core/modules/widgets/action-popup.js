@@ -6,7 +6,7 @@ module-type: widget
 Action widget to trigger a popup.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -82,4 +82,3 @@ ActionPopupWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
 exports["action-popup"] = ActionPopupWidget;
 
-})();

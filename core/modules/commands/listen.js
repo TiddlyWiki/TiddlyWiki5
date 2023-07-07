@@ -6,7 +6,7 @@ module-type: command
 Listen for HTTP requests and serve tiddlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -45,4 +45,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

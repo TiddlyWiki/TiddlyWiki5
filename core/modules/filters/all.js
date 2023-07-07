@@ -8,7 +8,7 @@ Filter operator for selecting tiddlers
 [all[shadows+tiddlers]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -55,4 +55,3 @@ exports.all = function(source,operator,options) {
 	return results.makeTiddlerIterator(options.wiki);
 };
 
-})();

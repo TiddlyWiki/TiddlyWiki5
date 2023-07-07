@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for slugifying a tiddler title
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -20,4 +20,3 @@ exports.slugify = function(source,operator,options) {
 	return results;
 };
 
-})();

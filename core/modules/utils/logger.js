@@ -6,7 +6,7 @@ module-type: utils
 A basic logging implementation
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -135,4 +135,3 @@ Logger.prototype.clearAlerts = function() {
 
 exports.Logger = Logger;
 
-})();

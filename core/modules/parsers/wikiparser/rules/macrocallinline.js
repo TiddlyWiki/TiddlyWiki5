@@ -10,7 +10,7 @@ Wiki rule for macro calls
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -46,4 +46,3 @@ exports.parse = function() {
 	return [call];
 };
 
-})();

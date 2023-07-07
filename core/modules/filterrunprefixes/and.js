@@ -7,7 +7,7 @@ Intersection of sets.
 Equivalent to + filter run prefix.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -25,4 +25,3 @@ exports.and = function(operationSubFunction,options) {
 	};
 };
 
-})();

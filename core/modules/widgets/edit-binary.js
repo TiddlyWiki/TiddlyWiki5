@@ -6,7 +6,7 @@ module-type: widget
 Edit-binary widget; placeholder for editing binary tiddlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -104,4 +104,3 @@ EditBinaryWidget.prototype.refresh = function(changedTiddlers) {
 
 exports["edit-binary"] = EditBinaryWidget;
 
-})();

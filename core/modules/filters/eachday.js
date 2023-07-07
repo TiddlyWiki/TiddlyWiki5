@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator that selects one tiddler for each unique day covered by the specified date field
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -36,4 +36,3 @@ exports.eachday = function(source,operator,options) {
 	return results;
 };
 
-})();

@@ -6,7 +6,7 @@ module-type: widget
 Widget for definition of transclusion parameters
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -93,4 +93,3 @@ ParametersWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.parameters = ParametersWidget;
 
-})();

@@ -6,7 +6,7 @@ module-type: texteditoroperation
 Text editor operation to wrap the selection with the specified prefix and suffix
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -47,4 +47,3 @@ exports["wrap-selection"] = function(event,operation) {
 	}
 };
 
-})();

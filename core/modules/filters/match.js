@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for checking if a title matches a string
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -50,4 +50,3 @@ exports.match = function(source,operator,options) {
 	return results;
 };
 
-})();

@@ -6,7 +6,7 @@ module-type: syncadaptor
 A sync adaptor module for synchronising with TiddlyWeb compatible servers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -84,7 +84,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			var json = null;
 			try {
 				json = JSON.parse(data);
-			} catch (e) {
+			} catch(e) {
 			}
 			if(json) {
 				self.logger.log("Status:",data);
@@ -164,7 +164,7 @@ TiddlyWebAdaptor.prototype.getCsrfToken = function() {
 	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
 		match = regex.exec(document.cookie),
 		csrf = null;
-	if (match && (match.length === 2)) {
+	if(match && (match.length === 2)) {
 		csrf = match[1];
 	}
 	return csrf;
@@ -376,4 +376,3 @@ if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {
 	exports.adaptorClass = TiddlyWebAdaptor;
 }
 
-})();

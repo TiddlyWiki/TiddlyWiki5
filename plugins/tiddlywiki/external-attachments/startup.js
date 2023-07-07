@@ -6,7 +6,7 @@ module-type: startup
 Startup initialisation
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -125,4 +125,3 @@ function test_makePathRelative() {
 }
 
 
-})();

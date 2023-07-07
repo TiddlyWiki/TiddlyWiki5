@@ -17,7 +17,7 @@ This is a widget invocation
 }}}
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -170,4 +170,3 @@ exports.isLegalTag = function(tag) {
 	}
 };
 
-})();

@@ -10,7 +10,7 @@ Wiki text block rule for rules. For example:
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -31,4 +31,3 @@ exports.parse = function() {
 	return [{type: "element", tag: "hr"}];
 };
 
-})();

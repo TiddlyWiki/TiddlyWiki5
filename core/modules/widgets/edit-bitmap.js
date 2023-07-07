@@ -6,7 +6,7 @@ module-type: widget
 Edit-bitmap widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -340,4 +340,3 @@ EditBitmapWidget.prototype.saveChanges = function() {
 
 exports["edit-bitmap"] = EditBitmapWidget;
 
-})();

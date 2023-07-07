@@ -6,7 +6,7 @@ module-type: global
 Manages switching plugins for themes and languages.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -76,4 +76,3 @@ PluginSwitcher.prototype.switchPlugins = function() {
 
 exports.PluginSwitcher = PluginSwitcher;
 
-})();

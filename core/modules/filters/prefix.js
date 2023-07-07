@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for checking if a title starts with a prefix
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -51,4 +51,3 @@ exports.prefix = function(source,operator,options) {
 	return results;
 };
 
-})();

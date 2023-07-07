@@ -6,7 +6,7 @@ module-type: command
 Command to initialise an empty wiki folder
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -56,4 +56,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

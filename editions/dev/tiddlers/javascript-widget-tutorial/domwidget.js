@@ -44,4 +44,3 @@ function createDomWidget(domCreatorFunction) {
 	return MyWidget;
 }
 module.exports = createDomWidget;
-})();

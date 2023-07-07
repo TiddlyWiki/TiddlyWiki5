@@ -6,7 +6,7 @@ module-type: utils
 Keyboard utilities; now deprecated. Instead, use $tw.keyboardManager
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -22,4 +22,3 @@ Keyboard utilities; now deprecated. Instead, use $tw.keyboardManager
 	};
 });
 
-})();

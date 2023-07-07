@@ -8,7 +8,7 @@ Filter operators for strings. Unary/binary operators work on each item in turn, 
 Sum/product/maxall/minall operate on the entire list, returning a single item.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -127,7 +127,7 @@ function diffPartsToChars(text1,text2,mode) {
             if(lineHash.hasOwnProperty ? lineHash.hasOwnProperty(line) : (lineHash[line] !== undefined)) {
 				chars += String.fromCharCode(lineHash[line]);
             } else {
-                if (lineArrayLength == maxLines) {
+                if(lineArrayLength == maxLines) {
                   line = text.substring(lineStart);
                   lineEnd = text.length;
                 }
@@ -264,7 +264,7 @@ exports.pad = function(source,operator,options) {
 			} else {
 				var padString = "",
 					padStringLength = targetLength - title.length;
-				while (padStringLength > padString.length) {
+				while(padStringLength > padString.length) {
 					padString += fill;
 				}
 				//make sure we do not exceed the specified length
@@ -290,5 +290,3 @@ exports.charcode = function(source,operator,options) {
 	});
 	return [chars.join("")];
 };
-
-})();

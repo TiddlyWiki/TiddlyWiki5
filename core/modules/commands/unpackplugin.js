@@ -6,7 +6,7 @@ module-type: command
 Command to extract the shadow tiddlers from within a plugin
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -41,4 +41,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for filtering out titles that don't meet the minimum length in the operand
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -26,4 +26,3 @@ exports.minlength = function(source,operator,options) {
 	return results;
 };
 
-})();

@@ -6,7 +6,7 @@ module-type: widget
 Set variable widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -123,4 +123,3 @@ SetWidget.prototype.refresh = function(changedTiddlers) {
 exports.setvariable = SetWidget;
 exports.set = SetWidget;
 
-})();

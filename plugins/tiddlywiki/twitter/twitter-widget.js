@@ -6,7 +6,7 @@ module-type: widget
 Twitter widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -141,4 +141,3 @@ TwitterWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.twitter = TwitterWidget;
 
-})();

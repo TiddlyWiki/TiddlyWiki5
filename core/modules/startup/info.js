@@ -6,7 +6,7 @@ module-type: startup
 Initialise $:/info tiddlers via $:/temp/info-plugin pseudo-plugin
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -55,4 +55,3 @@ exports.startup = function() {
 	$tw.wiki.unpackPluginTiddlers();
 };
 
-})();

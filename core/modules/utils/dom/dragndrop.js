@@ -6,7 +6,7 @@ module-type: utils
 Browser data transfer utilities, used with the clipboard and drag and drop
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -80,7 +80,7 @@ exports.makeDraggable = function(options) {
 				if(dataTransfer.setDragImage) {
 					if(dragImageType === "pill") {
 						dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
-					} else if (dragImageType === "blank") {
+					} else if(dragImageType === "blank") {
 						dragImage.removeChild(dragImage.firstChild);
 						dataTransfer.setDragImage(dragImage,0,0);
 					} else {
@@ -274,4 +274,3 @@ exports.dragEventContainsFiles = function(event) {
 
 exports.dragEventContainsType = dragEventContainsType;
 
-})();

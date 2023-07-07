@@ -6,7 +6,7 @@ module-type: widget
 Macrocall widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -88,4 +88,3 @@ MacroCallWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.macrocall = MacroCallWidget;
 
-})();

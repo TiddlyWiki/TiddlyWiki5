@@ -6,7 +6,7 @@ module-type: command
 Command to modify selected tiddlers to set a field to the text of a template tiddler that has been wikified with the selected tiddler as the current tiddler.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -55,4 +55,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

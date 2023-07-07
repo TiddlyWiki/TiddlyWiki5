@@ -14,7 +14,7 @@ Wiki text rule for block-level filtered transclusion. For example:
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -61,4 +61,3 @@ exports.parse = function() {
 	return [node];
 };
 
-})();

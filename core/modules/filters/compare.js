@@ -6,7 +6,7 @@ module-type: filteroperator
 General purpose comparison operator
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -37,4 +37,3 @@ var modes = {
 	"lt": function(value) {return value < 0;}
 }
 
-})();

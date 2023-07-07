@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for checking for the presence of a tag
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -55,4 +55,3 @@ exports.tag = function(source,operator,options) {
 	return results;
 };
 
-})();

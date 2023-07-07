@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for regexp matching
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -69,4 +69,3 @@ exports.regexp = function(source,operator,options) {
 	return results;
 };
 
-})();

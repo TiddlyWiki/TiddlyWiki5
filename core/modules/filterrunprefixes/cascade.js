@@ -3,7 +3,7 @@ title: $:/core/modules/filterrunprefixes/cascade.js
 type: application/javascript
 module-type: filterrunprefix
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -39,5 +39,3 @@ exports.cascade = function(operationSubFunction,options) {
 		}
 	}
 };
-
-})();

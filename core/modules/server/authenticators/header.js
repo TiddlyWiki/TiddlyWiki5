@@ -6,7 +6,7 @@ module-type: authenticator
 Authenticator for trusted header authentication
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -44,4 +44,3 @@ HeaderAuthenticator.prototype.authenticateRequest = function(request,response,st
 
 exports.AuthenticatorClass = HeaderAuthenticator;
 
-})();

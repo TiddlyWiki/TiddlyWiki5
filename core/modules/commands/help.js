@@ -6,7 +6,7 @@ module-type: command
 Help command
 
 \*/
-(function(){
+
 
 /*jshint node: true, browser: true */
 /*global $tw: false */
@@ -38,4 +38,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

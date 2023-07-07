@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator returning all the tags of the selected tiddlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -28,4 +28,3 @@ exports.tags = function(source,operator,options) {
 	return Object.keys(tags);
 };
 
-})();

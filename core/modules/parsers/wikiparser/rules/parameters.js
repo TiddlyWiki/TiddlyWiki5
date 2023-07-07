@@ -11,7 +11,7 @@ definition text
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -57,4 +57,3 @@ exports.parse = function() {
 	}];
 };
 
-})();

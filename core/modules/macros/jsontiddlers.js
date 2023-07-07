@@ -6,7 +6,7 @@ module-type: macro
 Macro to output tiddlers matching a filter to JSON
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -30,4 +30,3 @@ exports.run = function(filter,spaces) {
 	return this.wiki.getTiddlersAsJson(filter,$tw.utils.parseInt(spaces));
 };
 
-})();

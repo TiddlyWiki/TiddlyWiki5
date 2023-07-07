@@ -6,7 +6,7 @@ module-type: widget
 Widget to wikify text into a variable
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -154,4 +154,3 @@ WikifyWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.wikify = WikifyWidget;
 
-})();

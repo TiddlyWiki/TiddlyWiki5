@@ -6,7 +6,7 @@ module-type: widget
 Widget to represent a single item of data
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -55,4 +55,3 @@ DataWidget.prototype.refresh = function(changedTiddlers) {
 exports.data = DataWidget;
 exports.anchor = DataWidget;
 
-})();

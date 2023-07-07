@@ -6,7 +6,7 @@ module-type: widget
 Action widget to set multiple fields or indexes on a tiddler
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -82,5 +82,4 @@ SetMultipleFieldsWidget.prototype.invokeAction = function(triggeringWidget,event
 
 exports["action-setmultiplefields"] = SetMultipleFieldsWidget;
 
-})();
 	

@@ -6,7 +6,7 @@ module-type: startup
 Twitter initialisation
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -24,4 +24,3 @@ exports.startup = function() {
 	}
 };
 
-})();

@@ -6,7 +6,7 @@ module-type: widget
 Wrapper for `railroad-diagrams.js` that provides a `<$railroad>` widget.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -143,5 +143,3 @@ RailroadWidget.prototype.dispatchLink = function(to,event) {
 };
 
 exports.railroad = RailroadWidget;
-
-})();

@@ -5,7 +5,7 @@ module-type: macro
 
 Macro to return a new title that is unused in the wiki. It can be given a name as a base.
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -32,4 +32,3 @@ exports.run = function(baseName,separator,template) {
 	return this.wiki.generateNewTitle(baseName, {"prefix": separator, "template": template});
 };
 
-})();

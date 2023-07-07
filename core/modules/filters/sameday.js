@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator that selects tiddlers with a modified date field on the same day as the provided value.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -30,4 +30,3 @@ exports.sameday = function(source,operator,options) {
 	return results;
 };
 
-})();

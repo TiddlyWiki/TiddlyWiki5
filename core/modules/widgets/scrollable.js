@@ -6,7 +6,7 @@ module-type: widget
 Scrollable widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -198,4 +198,3 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.scrollable = ScrollableWidget;
 
-})();

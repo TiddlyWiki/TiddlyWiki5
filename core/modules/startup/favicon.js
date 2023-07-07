@@ -6,7 +6,7 @@ module-type: startup
 Favicon handling
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -40,4 +40,3 @@ function setFavicon() {
 	}
 }
 
-})();

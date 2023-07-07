@@ -6,7 +6,7 @@ module-type: widget
 Checkbox widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -116,7 +116,7 @@ CheckboxWidget.prototype.getValue = function() {
 				} else {
 					list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
 				}
-			} else if (this.checkboxListIndex) {
+			} else if(this.checkboxListIndex) {
 				list = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(tiddler,this.checkboxListIndex,this.checkboxDefault || "")) || [];
 			} else {
 				list = this.wiki.filterTiddlers(this.checkboxFilter,this) || [];
@@ -329,4 +329,3 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.checkbox = CheckboxWidget;
 
-})();

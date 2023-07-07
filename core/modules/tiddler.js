@@ -6,7 +6,7 @@ module-type: tiddlermethod
 Extension methods for the $tw.Tiddler object (constructor and methods required at boot time are in boot/boot.js)
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -100,4 +100,3 @@ exports.getFieldDay = function(field) {
 	return day;
 };
 
-})();

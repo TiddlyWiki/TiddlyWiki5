@@ -6,7 +6,7 @@ module-type: startup
 Load core modules
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -225,4 +225,3 @@ function updateLocationHash(options) {
 	}
 }
 
-})();

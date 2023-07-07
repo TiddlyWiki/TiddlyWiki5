@@ -43,4 +43,3 @@ MyWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.tiddlerfield = MyWidget;
 
-})();

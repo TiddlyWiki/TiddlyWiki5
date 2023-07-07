@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for removing a prefix from each title in the list. Titles that do not start with the prefix are removed.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -35,4 +35,3 @@ exports.removeprefix = function(source,operator,options) {
 	return results;
 };
 
-})();

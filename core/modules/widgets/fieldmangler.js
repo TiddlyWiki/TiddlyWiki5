@@ -6,7 +6,7 @@ module-type: widget
 Field mangler widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -131,4 +131,3 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 
 exports.fieldmangler = FieldManglerWidget;
 
-})();

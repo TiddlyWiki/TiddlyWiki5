@@ -6,7 +6,7 @@ module-type: widget
 Range widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -110,8 +110,8 @@ RangeWidget.prototype.handleMouseUpEvent = function(event) {
 		this.invokeActionString(this.actionsMouseUp,this,event,variables);
 	}
 	// TODO remove the following if() once IE is gone!
-	if ($tw.browser.isIE) {
-		if (this.startValue !== this.inputDomNode.value) {
+	if($tw.browser.isIE) {
+		if(this.startValue !== this.inputDomNode.value) {
 			this.handleChangeEvent(event);
 			this.startValue = this.inputDomNode.value;
 		}
@@ -119,7 +119,7 @@ RangeWidget.prototype.handleMouseUpEvent = function(event) {
 }
 
 RangeWidget.prototype.handleChangeEvent = function(event) {
-	if (this.mouseDown) {  // TODO refactor this function once IE is gone.
+	if(this.mouseDown) {  // TODO refactor this function once IE is gone.
 		this.handleInputEvent(event);
 	}
 };
@@ -193,4 +193,3 @@ RangeWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.range = RangeWidget;
 
-})();

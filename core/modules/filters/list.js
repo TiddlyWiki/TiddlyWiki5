@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator returning the tiddlers whose title is listed in the operand tiddler
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -32,4 +32,3 @@ exports.list = function(source,operator,options) {
 	return results;
 };
 
-})();

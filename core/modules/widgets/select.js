@@ -16,7 +16,7 @@ Select widget:
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -94,7 +94,7 @@ SelectWidget.prototype.setSelectValue = function() {
 		}
 	}
 	// Assign it to the select element if it's different than the current value
-	if (this.selectMultiple) {
+	if(this.selectMultiple) {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
 		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
@@ -123,9 +123,9 @@ SelectWidget.prototype.getSelectValues = function() {
 	select = this.getSelectDomNode();
 	result = [];
 	options = select && select.options;
-	for (var i=0; i<options.length; i++) {
+	for(var i=0; i<options.length; i++) {
 		opt = options[i];
-		if (opt.selected) {
+		if(opt.selected) {
 			result.push(opt.value || opt.text);
 		}
 	}
@@ -194,4 +194,3 @@ SelectWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.select = SelectWidget;
 
-})();

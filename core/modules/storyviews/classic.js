@@ -6,7 +6,7 @@ module-type: storyview
 Views the story as a linear sequence
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -118,4 +118,3 @@ ClassicStoryView.prototype.remove = function(widget) {
 
 exports.classic = ClassicStoryView;
 
-})();

@@ -6,7 +6,7 @@ module-type: widget
 View widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -225,4 +225,3 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.view = ViewWidget;
 
-})();

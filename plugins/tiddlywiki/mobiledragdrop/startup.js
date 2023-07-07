@@ -6,7 +6,7 @@ module-type: startup
 Startup initialisation
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -22,4 +22,3 @@ exports.startup = function() {
 	window.addEventListener("touchmove", function() {});
 };
 
-})();

@@ -6,7 +6,7 @@ module-type: widget
 List and list item widgets
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -95,7 +95,7 @@ ListWidget.prototype.getEmptyMessage = function() {
 		emptyMessage = this.getAttribute("emptyMessage","");
 	// this.wiki.parseText() calls 
 	// new Parser(..), which should only be done, if needed, because it's heavy!
-	if (emptyMessage === "") {
+	if(emptyMessage === "") {
 		return [];
 	}
 	parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
@@ -363,4 +363,3 @@ ListItemWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.listitem = ListItemWidget;
 
-})();

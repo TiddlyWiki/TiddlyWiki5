@@ -6,7 +6,7 @@ module-type: wikimethod
 Adds tiddler filtering methods to the $tw.Wiki object.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -70,7 +70,7 @@ function parseFilterOperation(operators,filterString,p) {
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
-			switch (bracketType) {
+			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
@@ -368,4 +368,3 @@ exports.compileFilter = function(filterString) {
 	return fnMeasured;
 };
 
-})();

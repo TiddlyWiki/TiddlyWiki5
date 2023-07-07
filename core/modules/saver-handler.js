@@ -6,7 +6,7 @@ module-type: global
 The saver handler tracks changes to the store and handles saving the entire wiki via saver modules.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -209,4 +209,3 @@ SaverHandler.prototype.updateDirtyStatus = function() {
 
 exports.SaverHandler = SaverHandler;
 
-})();

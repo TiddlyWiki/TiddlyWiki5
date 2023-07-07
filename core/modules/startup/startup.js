@@ -6,7 +6,7 @@ module-type: startup
 Miscellaneous startup logic for both the client and server.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -142,4 +142,3 @@ exports.startup = function() {
 	}
 };
 
-})();

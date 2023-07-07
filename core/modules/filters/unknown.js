@@ -8,7 +8,7 @@ Filter operator for handling unknown filter operators.
 Not intended to be used directly by end users, hence the square brackets around the name.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -46,4 +46,3 @@ exports["[unknown]"] = function(source,operator,options) {
 	return fieldFilterOperatorFn(source,operator,options);
 };
 
-})();

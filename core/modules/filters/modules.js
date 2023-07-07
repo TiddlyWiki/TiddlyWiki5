@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for returning the titles of the modules of a given type in this wiki
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -38,4 +38,3 @@ exports.modules = function(source,operator,options) {
 	return results;
 };
 
-})();

@@ -6,15 +6,15 @@ module-type: utils
 Provides CSS.escape() functionality.
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false, window: false */
 "use strict";
 
+// TODO -- resolve this construction
 exports.escapeCSS = (function() {
 	// use browser's native CSS.escape() function if available
-	if ($tw.browser && window.CSS && window.CSS.escape) {
+	if($tw.browser && window.CSS && window.CSS.escape) {
 		return window.CSS.escape;
 	}
 
@@ -23,7 +23,7 @@ exports.escapeCSS = (function() {
 
 	/*! https://mths.be/cssescape v1.5.1 by @mathias | MIT license */
 	return function(value) {
-		if (arguments.length == 0) {
+		if(arguments.length == 0) {
 			throw new TypeError('`CSS.escape` requires an argument.');
 		}
 		var string = String(value);
@@ -32,19 +32,19 @@ exports.escapeCSS = (function() {
 		var codeUnit;
 		var result = '';
 		var firstCodeUnit = string.charCodeAt(0);
-		while (++index < length) {
+		while(++index < length) {
 			codeUnit = string.charCodeAt(index);
 			// Note: there’s no need to special-case astral symbols, surrogate
 			// pairs, or lone surrogates.
 
 			// If the character is NULL (U+0000), then the REPLACEMENT CHARACTER
 			// (U+FFFD).
-			if (codeUnit == 0x0000) {
+			if(codeUnit == 0x0000) {
 				result += '\uFFFD';
 				continue;
 			}
 
-			if (
+			if(
 				// If the character is in the range [\1-\1F] (U+0001 to U+001F) or is
 				// U+007F, […]
 				(codeUnit >= 0x0001 && codeUnit <= 0x001F) || codeUnit == 0x007F ||
@@ -64,7 +64,7 @@ exports.escapeCSS = (function() {
 				continue;
 			}
 
-			if (
+			if(
 				// If the character is the first character and is a `-` (U+002D), and
 				// there is no second character, […]
 				index == 0 &&
@@ -79,7 +79,7 @@ exports.escapeCSS = (function() {
 			// greater than or equal to U+0080, is `-` (U+002D) or `_` (U+005F), or
 			// is in one of the ranges [0-9] (U+0030 to U+0039), [A-Z] (U+0041 to
 			// U+005A), or [a-z] (U+0061 to U+007A), […]
-			if (
+			if(
 				codeUnit >= 0x0080 ||
 				codeUnit == 0x002D ||
 				codeUnit == 0x005F ||
@@ -99,6 +99,4 @@ exports.escapeCSS = (function() {
 		}
 		return result;
 	};
-})();
-
 })();

@@ -6,7 +6,7 @@ module-type: macro
 Macro to choose which of two colours has the highest contrast with a base colour
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -52,4 +52,3 @@ exports.run = function(target,fallbackTarget,colourA,colourB) {
 	return Math.abs(brightnessTarget - brightnessA) > Math.abs(brightnessTarget - brightnessB) ? colourA : colourB;
 };
 
-})();

@@ -6,7 +6,7 @@ module-type: texteditoroperation
 Text editor operation to replace the entire text
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -20,4 +20,3 @@ exports["replace-all"] = function(event,operation) {
 	operation.newSelEnd = operation.replacement.length;
 };
 
-})();

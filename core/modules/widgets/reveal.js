@@ -6,7 +6,7 @@ module-type: widget
 Reveal widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -96,9 +96,9 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 		left = Math.max(0,left);
 		top = Math.max(0,top);
 	}
-	if (this.popup.absolute) {
+	if(this.popup.absolute) {
 		// Traverse the offsetParent chain and correct the offset to make it relative to the parent node.
-		for (var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
+		for(var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
 			left -= offsetParentDomNode.offsetLeft;
 			top -= offsetParentDomNode.offsetTop;
 		}
@@ -276,4 +276,3 @@ RevealWidget.prototype.updateState = function() {
 
 exports.reveal = RevealWidget;
 
-})();

@@ -6,7 +6,7 @@ module-type: startup
 Command processing
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -34,4 +34,3 @@ exports.startup = function(callback) {
 	commander.execute();
 };
 
-})();

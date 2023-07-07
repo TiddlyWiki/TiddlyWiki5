@@ -6,7 +6,7 @@ module-type: saver
 Handles saving changes in the NW.js environment. Not required by TiddlyDesktop, which re-uses the TiddlyFox saver, but useful if you're embedding a single TiddlyWiki document into a NW.js app.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false, netscape: false, Components: false */
@@ -58,4 +58,3 @@ exports.create = function(wiki) {
 	return new NodeWebKitSaver(wiki);
 };
 
-})();

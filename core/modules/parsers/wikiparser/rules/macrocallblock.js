@@ -10,7 +10,7 @@ Wiki rule for block macro calls
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -32,7 +32,7 @@ exports.findNextMatch = function(startPos) {
 			var c = this.parser.source.charAt(nextCall.end);
 			// Ensure EOL after parsed macro
 			// If we didn't need to support IE, we'd just use /(?:\r?\n|$)/ym
-			if ((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
+			if((c === "") || (c === "\n") || ((c === "\r") && this.parser.source.charAt(nextCall.end+1) === "\n")) {
 				this.nextCall = nextCall;
 				return nextStart;
 			}
@@ -53,4 +53,3 @@ exports.parse = function() {
 	return [call];
 };
 
-})();

@@ -7,7 +7,7 @@ Union of sets without de-duplication.
 Equivalent to = filter run prefix.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -22,4 +22,3 @@ exports.all = function(operationSubFunction) {
 	};
 };
 
-})();

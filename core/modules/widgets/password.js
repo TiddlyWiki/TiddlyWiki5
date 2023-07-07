@@ -6,7 +6,7 @@ module-type: widget
 Password widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -79,4 +79,3 @@ PasswordWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.password = PasswordWidget;
 
-})();

@@ -11,7 +11,7 @@ Wiki text inline rule for external links. For example:
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -112,4 +112,3 @@ exports.parseLink = function(source,pos) {
 	return node;
 };
 
-})();

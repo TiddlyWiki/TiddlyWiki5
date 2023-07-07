@@ -6,7 +6,7 @@ module-type: isfilteroperator
 Filter function for [is[system]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -33,4 +33,3 @@ exports.system = function(source,prefix,options) {
 	return results;
 };
 
-})();

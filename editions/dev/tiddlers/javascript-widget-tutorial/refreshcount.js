@@ -40,4 +40,3 @@ MyWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.refreshcount = MyWidget;
 
-})();

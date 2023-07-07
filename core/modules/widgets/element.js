@@ -6,7 +6,7 @@ module-type: widget
 Element widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -102,4 +102,3 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.element = ElementWidget;
 
-})();

@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the wikitext rendering pipeline end-to-end. We also need tests that individually test parsers, rendertreenodes etc., but this gets us started.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -71,4 +71,3 @@ describe("WikiText tests", function() {
 	});
 });
 
-})();

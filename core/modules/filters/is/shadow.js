@@ -6,7 +6,7 @@ module-type: isfilteroperator
 Filter function for [is[shadow]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -33,4 +33,3 @@ exports.shadow = function(source,prefix,options) {
 	return results;
 };
 
-})();

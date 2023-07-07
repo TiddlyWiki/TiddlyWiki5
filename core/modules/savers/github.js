@@ -6,7 +6,7 @@ module-type: saver
 Saves wiki by pushing a commit to the GitHub v3 REST API
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -116,4 +116,3 @@ exports.create = function(wiki) {
 	return new GitHubSaver(wiki);
 };
 
-})();

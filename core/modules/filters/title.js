@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for comparing title fields for equality
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -29,4 +29,3 @@ exports.title = function(source,operator,options) {
 	return results;
 };
 
-})();

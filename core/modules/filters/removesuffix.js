@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for removing a suffix from each title in the list. Titles that do not end with the suffix are removed.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -18,7 +18,7 @@ Export our filter function
 exports.removesuffix = function(source,operator,options) {
 	var results = [],
 		suffixes = (operator.suffixes || [])[0] || [];
-	if (!operator.operand) {
+	if(!operator.operand) {
 		source(function(tiddler,title) {
 			results.push(title);
 		});
@@ -39,4 +39,3 @@ exports.removesuffix = function(source,operator,options) {
 	return results;
 };
 
-})();

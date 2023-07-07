@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator returning its operand evaluated as a filter
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -30,4 +30,3 @@ exports.subfilter = function(source,operator,options) {
 	}
 };
 
-})();

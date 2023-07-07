@@ -6,7 +6,7 @@ module-type: widget
 Widget for definition of slots within transcluded content. The values provided by the translusion are passed to the slot.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -79,4 +79,3 @@ SlotWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.slot = SlotWidget;
 
-})();

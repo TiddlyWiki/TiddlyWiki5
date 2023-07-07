@@ -6,7 +6,7 @@ module-type: texteditoroperation
 Text editor operation to excise the selection to a new tiddler
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -46,4 +46,3 @@ exports["excise"] = function(event,operation) {
 	operation.newSelEnd = operation.selStart + operation.replacement.length;
 };
 
-})();

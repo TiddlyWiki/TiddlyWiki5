@@ -11,7 +11,7 @@ Wiki pragma rule for rules specifications
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -61,4 +61,3 @@ exports.parse = function() {
 	return [];
 };
 
-})();

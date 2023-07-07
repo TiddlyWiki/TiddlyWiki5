@@ -6,7 +6,7 @@ module-type: widget
 Action widget to delete a tiddler.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -70,4 +70,3 @@ DeleteTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
 exports["action-deletetiddler"] = DeleteTiddlerWidget;
 
-})();

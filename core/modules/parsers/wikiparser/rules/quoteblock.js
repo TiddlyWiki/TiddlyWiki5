@@ -29,7 +29,7 @@ Quotes can be quoted by putting more <s
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -87,4 +87,3 @@ exports.parse = function() {
 	}];
 };
 
-})();

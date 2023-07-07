@@ -6,7 +6,7 @@ module-type: library
 Background daemon to track the selection
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -168,4 +168,3 @@ SelectionTracker.prototype.performSelectionActions = function(chunks,variables,a
 
 exports.SelectionTracker = SelectionTracker;
 
-})();

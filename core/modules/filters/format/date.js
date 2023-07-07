@@ -3,7 +3,7 @@ title: $:/core/modules/filters/format/date.js
 type: application/javascript
 module-type: formatfilteroperator
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -22,5 +22,3 @@ exports.date = function(source,operand,options) {
 	});
 	return results;
 };
-
-})();

@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for replacing tiddler titles by the value of the field specified in the operand.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -28,4 +28,3 @@ exports.get = function(source,operator,options) {
 	return results;
 };
 
-})();

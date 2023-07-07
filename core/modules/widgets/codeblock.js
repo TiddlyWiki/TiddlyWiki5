@@ -6,7 +6,7 @@ module-type: widget
 Code block node widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -63,4 +63,3 @@ CodeBlockWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.codeblock = CodeBlockWidget;
 
-})();

@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests deserialize[] filter operator with various core deserializers
 
 \*/
-(function(){
+
 
 	/* jslint node: true, browser: true */
 	/* eslint-env node, browser, jasmine */
@@ -37,7 +37,6 @@ Tests deserialize[] filter operator with various core deserializers
 		});
 	});
 	
-})();
 
 
 

@@ -6,7 +6,7 @@ module-type: isfilteroperator
 Filter function for [is[tag]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -34,4 +34,3 @@ exports.tag = function(source,prefix,options) {
 	return results;
 };
 
-})();

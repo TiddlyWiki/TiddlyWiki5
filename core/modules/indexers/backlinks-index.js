@@ -6,7 +6,7 @@ module-type: indexer
 Indexes the tiddlers' backlinks
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global modules: false */
@@ -83,4 +83,3 @@ BacklinksIndexer.prototype.lookup = function(title) {
 
 exports.BacklinksIndexer = BacklinksIndexer;
 
-})();

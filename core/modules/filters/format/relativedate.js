@@ -3,7 +3,7 @@ title: $:/core/modules/filters/format/relativedate.js
 type: application/javascript
 module-type: formatfilteroperator
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -22,5 +22,3 @@ exports.relativedate = function(source,operand,options) {
 	});
 	return results;
 };
-
-})();

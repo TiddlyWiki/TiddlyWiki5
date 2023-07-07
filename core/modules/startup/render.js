@@ -6,7 +6,7 @@ module-type: startup
 Title, stylesheet and page rendering
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -115,4 +115,3 @@ exports.startup = function() {
 	$tw.rootWidget.invokeActionsByTag("$:/tags/StartupAction/PostRender");
 };
 
-})();

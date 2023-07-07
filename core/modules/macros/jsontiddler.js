@@ -6,7 +6,7 @@ module-type: macro
 Macro to output a single tiddler to JSON
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -37,4 +37,3 @@ exports.run = function(title) {
 	return JSON.stringify(fields,null,$tw.config.preferences.jsonSpaces);
 };
 
-})();

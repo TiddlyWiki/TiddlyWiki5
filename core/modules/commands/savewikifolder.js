@@ -15,7 +15,7 @@ The following options are supported:
 Supports backward compatibility with --savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -46,7 +46,7 @@ Command.prototype.execute = function() {
 		namedParames,
 		tiddlerFilter,
 		options = {};
-	if (regFilter.test(this.params[1])) {  
+	if(regFilter.test(this.params[1])) {  
 		namedParames = this.commander.extractNamedParameters(this.params.slice(1));
 		tiddlerFilter = namedParames.filter || "[all[tiddlers]]";
 	} else {
@@ -198,7 +198,7 @@ WikiFolderMaker.prototype.saveTiddler = function(directory,tiddler) {
 	});
 	try {
 		$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);
-	} catch (err) {
+	} catch(err) {
 		console.log("SaveWikiFolder: Error saving file '" + fileInfo.filepath + "', tiddler: '" + tiddler.fields.title);
 	}
 };
@@ -219,4 +219,3 @@ WikiFolderMaker.prototype.saveFile = function(filename,encoding,data) {
 
 exports.Command = Command;
 
-})();

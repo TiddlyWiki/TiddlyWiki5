@@ -6,7 +6,7 @@ module-type: widget
 Widget to display an editable keyboard shortcut
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -151,4 +151,3 @@ EditShortcutWidget.prototype.refresh = function(changedTiddlers) {
 
 exports["edit-shortcut"] = EditShortcutWidget;
 
-})();

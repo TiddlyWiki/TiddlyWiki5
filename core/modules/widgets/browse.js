@@ -6,7 +6,7 @@ module-type: widget
 Browse widget for browsing for files to import
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -100,4 +100,3 @@ BrowseWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.browse = BrowseWidget;
 
-})();

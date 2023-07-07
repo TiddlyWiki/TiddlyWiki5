@@ -6,7 +6,7 @@ module-type: tiddlerdeserializer
 BibTeX file deserializer
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -47,4 +47,3 @@ exports["application/x-bibtex"] = function(text,fields) {
 	return results;
 };
 
-})();

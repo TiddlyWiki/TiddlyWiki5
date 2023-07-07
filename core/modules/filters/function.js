@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator returning those input titles that are returned from a function
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -33,4 +33,3 @@ exports.function = function(source,operator,options) {
 	return results;
 };
 
-})();

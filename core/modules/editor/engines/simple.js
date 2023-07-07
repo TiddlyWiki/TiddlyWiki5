@@ -6,7 +6,7 @@ module-type: library
 Text editor engine based on a simple input or textarea tag
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -173,4 +173,3 @@ SimpleEngine.prototype.executeTextOperation = function(operation) {
 
 exports.SimpleEngine = SimpleEngine;
 
-})();

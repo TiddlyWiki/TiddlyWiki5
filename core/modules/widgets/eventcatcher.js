@@ -6,7 +6,7 @@ module-type: widget
 Event handler widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -156,4 +156,3 @@ EventWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.eventcatcher = EventWidget;
 
-})();

@@ -6,7 +6,7 @@ module-type: bitmapeditoroperation
 Bitmap editor operation to rotate the image left by 90 degrees
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -21,4 +21,3 @@ exports["rotate-left"] = function(event) {
 	this.saveChanges();
 };
 
-})();

@@ -6,7 +6,6 @@ module-type: command
 Clear password for crypto operations
 
 \*/
-(function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -29,5 +28,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

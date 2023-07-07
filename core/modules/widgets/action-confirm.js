@@ -5,7 +5,7 @@ type: application/javascript
 module-type: widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -75,4 +75,3 @@ ConfirmWidget.prototype.allowActionPropagation = function() {
 
 exports["action-confirm"] = ConfirmWidget;
 
-})();

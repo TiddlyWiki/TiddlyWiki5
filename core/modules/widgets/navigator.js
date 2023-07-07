@@ -6,7 +6,7 @@ module-type: widget
 Navigator widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -526,7 +526,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	var systemMessage = $tw.language.getString("Import/Upgrader/Tiddler/Unselected");
 	$tw.utils.each(messages,function(message,title) {
 		newFields["message-" + title] = message;
-		if (message.indexOf(systemMessage) !== -1) {
+		if(message.indexOf(systemMessage) !== -1) {
 			newFields["selection-" + title] = "unchecked";
 		}
 	});
@@ -633,4 +633,3 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 
 exports.navigator = NavigatorWidget;
 
-})();

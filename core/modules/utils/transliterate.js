@@ -6,7 +6,7 @@ module-type: utils
 Transliteration static utility functions.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -929,4 +929,3 @@ exports.transliterateToSafeASCII = function(str) {
 	});
 };
 
-})();

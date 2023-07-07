@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator for returning the titles of the shadow tiddlers within a plugin
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -29,4 +29,3 @@ exports.plugintiddlers = function(source,operator,options) {
 	return results;
 };
 
-})();

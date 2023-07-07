@@ -12,7 +12,7 @@ This is an em-dash: ---
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -37,4 +37,3 @@ exports.parse = function() {
 	}];
 };
 
-})();

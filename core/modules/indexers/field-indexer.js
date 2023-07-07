@@ -6,7 +6,7 @@ module-type: indexer
 Indexes the tiddlers with each field value
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global modules: false */
@@ -140,4 +140,3 @@ FieldIndexer.prototype.lookup = function(name,value) {
 
 exports.FieldIndexer = FieldIndexer;
 
-})();

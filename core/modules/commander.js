@@ -6,7 +6,7 @@ module-type: global
 The $tw.Commander class is a command interpreter
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -174,4 +174,3 @@ Commander.initCommands = function(moduleType) {
 
 exports.Commander = Commander;
 
-})();

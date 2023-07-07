@@ -9,7 +9,7 @@ Note: Since TiddlyWiki's markup contains the MOTW, the FileSystemObject normally
 However, if the wiki is loaded as an .HTA file (Windows HTML Applications) then the FSO can be used.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -71,4 +71,3 @@ exports.create = function(wiki) {
 	return new FSOSaver(wiki);
 };
 
-})();

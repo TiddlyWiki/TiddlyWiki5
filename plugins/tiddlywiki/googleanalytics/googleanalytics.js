@@ -6,7 +6,7 @@ module-type: startup
 Runs Google Analytics with the account number in the tiddler `$:/GoogleAnalyticsAccount` and the domain name in `$:/GoogleAnalyticsDomain`
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -58,4 +58,3 @@ exports.startup = function() {
 
 
 
-})();

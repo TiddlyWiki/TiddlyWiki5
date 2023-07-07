@@ -6,7 +6,7 @@ module-type: widget
 Import variable definitions from other tiddlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -85,7 +85,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 						// this widget. If it needs to refresh,
 						// it'll do so along with the the whole
 						// importvariable tree.
-						if (widgetPointer != this) {
+						if(widgetPointer != this) {
 							widgetPointer.makeChildWidgets = function(){};
 						}
 						widgetPointer = widgetPointer.children[0];
@@ -96,7 +96,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 		} 
 	});
 
-	if (widgetPointer != this) {
+	if(widgetPointer != this) {
 		widgetPointer.parseTreeNode.children = this.parseTreeNode.children;
 	} else {
 		widgetPointer.makeChildWidgets();
@@ -133,4 +133,3 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.importvariables = ImportVariablesWidget;
 
-})();

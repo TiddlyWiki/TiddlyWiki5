@@ -6,7 +6,7 @@ module-type: widget
 Action widget to delete fields of a tiddler.
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -81,4 +81,3 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
 exports["action-deletefield"] = DeleteFieldWidget;
 
-})();

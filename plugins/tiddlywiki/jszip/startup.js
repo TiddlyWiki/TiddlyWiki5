@@ -6,7 +6,7 @@ module-type: startup
 Setup the root widget event handlers
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -101,4 +101,3 @@ function downloadZipFile(title,filename) {
 	}
 }
 
-})();

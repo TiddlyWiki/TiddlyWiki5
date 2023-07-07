@@ -7,8 +7,6 @@ Runs the commands returned from a filter
 
 \*/
 
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -38,5 +36,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

@@ -6,7 +6,7 @@ module-type: allfilteroperator
 Filter function for [all[tiddlers]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -19,4 +19,3 @@ exports.tiddlers = function(source,prefix,options) {
 	return options.wiki.allTitles();
 };
 
-})();

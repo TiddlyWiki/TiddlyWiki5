@@ -6,7 +6,7 @@ module-type: startup
 Startup initialisation
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -68,11 +68,11 @@ exports.startup = function() {
 		persistPermissionRequested = false,
 		requestPersistenceOnFirstSave = function() {
 			$tw.hooks.addHook("th-saving-tiddler", function(tiddler) {
-				if (!persistPermissionRequested) {
+				if(!persistPermissionRequested) {
 					var filteredChanges = filterFn.call($tw.wiki, function(iterator) {
 						iterator(tiddler,tiddler.getFieldString("title"));
 					});
-					if (filteredChanges.length > 0) {
+					if(filteredChanges.length > 0) {
 						// The tiddler will be saved to local storage, so request persistence
 						requestPersistence();
 						persistPermissionRequested = true;
@@ -84,9 +84,9 @@ exports.startup = function() {
 	// Request the browser to never evict the localstorage. Some browsers such as firefox
 	// will prompt the user. To make the decision easier for the user only prompt them
 	// when they click the save button on a tiddler which will be stored to localstorage.
-	if (navigator.storage && navigator.storage.persist) {
+	if(navigator.storage && navigator.storage.persist) {
 		navigator.storage.persisted().then(function(isPersisted) {
-			if (!isPersisted) {
+			if(!isPersisted) {
 				setPersistedState("not requested yet");
 				requestPersistenceOnFirstSave();
 			} else {
@@ -129,4 +129,3 @@ exports.startup = function() {
 	});
 };
 
-})();

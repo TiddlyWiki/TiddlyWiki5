@@ -48,4 +48,3 @@ MyWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.hello = MyWidget;
 
-})();

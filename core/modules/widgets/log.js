@@ -6,7 +6,7 @@ module-type: widget-subclass
 Widget to log debug messages
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -26,5 +26,3 @@ exports.prototype.render = function(event) {
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).render.call(this,event);
 	Object.getPrototypeOf(Object.getPrototypeOf(this)).log.call(this);
 }
-
-})();

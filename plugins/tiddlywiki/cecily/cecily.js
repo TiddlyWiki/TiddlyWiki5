@@ -6,7 +6,7 @@ module-type: storyview
 Positions tiddlers on a 2D map
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -142,4 +142,3 @@ CecilyStoryView.prototype.lookupTiddlerInMap = function(title,domNode) {
 
 exports.cecily = CecilyStoryView;
 
-})();

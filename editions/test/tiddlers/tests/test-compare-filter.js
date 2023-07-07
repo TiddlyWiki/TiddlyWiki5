@@ -6,7 +6,7 @@ tags: [[$:/tags/test-spec]]
 Tests the compare filter.
 
 \*/
-(function(){
+
 
 /* jslint node: true, browser: true */
 /* eslint-env node, browser, jasmine */
@@ -81,4 +81,3 @@ describe("'compare' filter tests", function() {
 
 });
 
-})();

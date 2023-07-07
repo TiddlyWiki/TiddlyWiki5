@@ -6,7 +6,7 @@ module-type: texteditoroperation
 Text editor operation to save the current selection in a specified tiddler
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -20,4 +20,3 @@ exports["save-selection"] = function(event,operation) {
 	}
 };
 
-})();

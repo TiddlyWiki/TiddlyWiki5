@@ -6,7 +6,7 @@ module-type: widget
 Text node widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -59,4 +59,3 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.text = TextNodeWidget;
 
-})();

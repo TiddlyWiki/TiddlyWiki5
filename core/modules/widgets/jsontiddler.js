@@ -6,7 +6,7 @@ module-type: widget
 Render a tiddler as JSON text
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -87,5 +87,3 @@ JSONTiddlerWidget.prototype.getTiddlerFields = function() {
 };
 
 exports.jsontiddler = JSONTiddlerWidget;
-
-})();

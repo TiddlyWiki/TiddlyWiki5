@@ -6,7 +6,7 @@ module-type: widget
 Count widget
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -69,4 +69,3 @@ CountWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.count = CountWidget;
 
-})();

@@ -6,7 +6,7 @@ module-type: command
 Command to import tiddlers from a file
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -45,4 +45,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

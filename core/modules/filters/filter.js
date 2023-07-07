@@ -6,7 +6,7 @@ module-type: filteroperator
 Filter operator returning those input titles that pass a subfilter
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -31,4 +31,3 @@ exports.filter = function(source,operator,options) {
 	return results;
 };
 
-})();

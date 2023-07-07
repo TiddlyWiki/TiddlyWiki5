@@ -6,7 +6,7 @@ module-type: command
 Command to save the content of a tiddler to a file
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -48,4 +48,3 @@ Command.prototype.execute = function() {
 
 exports.Command = Command;
 
-})();

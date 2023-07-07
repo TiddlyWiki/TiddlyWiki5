@@ -6,7 +6,7 @@ module-type: utils-node
 File system utilities
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -86,7 +86,7 @@ exports.copyFile = function(srcPath,dstPath) {
 		dstFile = fs.openSync(dstPath,"w"),
 		bytesRead = 1,
 		pos = 0;
-	while (bytesRead > 0) {
+	while(bytesRead > 0) {
 		bytesRead = fs.readSync(srcFile,fileBuffer,0,FILE_BUFFER_LENGTH,pos);
 		fs.writeSync(dstFile,fileBuffer,0,bytesRead);
 		pos += bytesRead;
@@ -258,7 +258,7 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 					// Overriding to the .tid extension needs special handling
 					fileInfo.type = "application/x-tiddler";
 					fileInfo.hasMetaFile = false;
-				} else if (metaExt === ".json") {
+				} else if(metaExt === ".json") {
 					// Overriding to the .json extension needs special handling
 					fileInfo.type = "application/json";
 					fileInfo.hasMetaFile = false;
@@ -526,7 +526,7 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 	if(adaptorInfo.filepath && bootInfo.filepath && adaptorInfo.filepath !== bootInfo.filepath) {
 		$tw.utils.deleteTiddlerFile(adaptorInfo,function(err) {
 			if(err) {
-				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the previous file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error cleaning up previous file for tiddler: \""+title+"\"",err);
 					return callback(null,bootInfo);
@@ -541,4 +541,3 @@ exports.cleanupTiddlerFiles = function(options,callback) {
 	}
 };
 
-})();

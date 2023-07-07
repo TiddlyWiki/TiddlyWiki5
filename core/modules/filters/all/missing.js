@@ -6,7 +6,7 @@ module-type: allfilteroperator
 Filter function for [all[missing]]
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -19,4 +19,3 @@ exports.missing = function(source,prefix,options) {
 	return options.wiki.getMissingTitles();
 };
 
-})();

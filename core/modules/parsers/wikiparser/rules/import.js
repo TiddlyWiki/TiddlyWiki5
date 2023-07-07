@@ -10,7 +10,7 @@ Wiki pragma rule for importing variable definitions
 ```
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -50,4 +50,3 @@ exports.parse = function() {
 	}];
 };
 
-})();

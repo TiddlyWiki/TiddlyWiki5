@@ -13,7 +13,7 @@ Wiki text inline rule for assigning styles and classes to inline runs. For examp
 
 
 \*/
-(function(){
+
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
@@ -55,4 +55,3 @@ exports.parse = function() {
 	return [node];
 };
 
-})();
