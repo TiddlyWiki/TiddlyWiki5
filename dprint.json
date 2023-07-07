@@ -4,6 +4,8 @@
 		"quoteProps": "asNeeded",
 		"ifStatement.spaceAfterIfKeyword": false,
 		"forStatement.spaceAfterForKeyword": false,
+		"forInStatement.spaceAfterForKeyword": false,
+		"forOfStatement.spaceAfterForKeyword": false,
 		"whileStatement.spaceAfterWhileKeyword": false,
 		"spaceSurroundingProperties": false,
 		"useTabs": true,
