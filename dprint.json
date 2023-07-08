@@ -25,7 +25,16 @@
 		"./*.json",
 		"./*.js"
 	],
-	"excludes": ["**/node_modules", "**/*-lock.json", "**.min*", "**/files", "boot.js", "bootprefix.js", "sjcl.js", "diff_match_patch.js"],
+	"excludes": [
+		"**/node_modules",
+		"**/*-lock.json",
+		"**.min*",
+		"**/files",
+		"boot.js",
+		"bootprefix.js",
+		"sjcl.js",
+		"diff_match_patch.js"
+	],
 	"plugins": [
 		"https://plugins.dprint.dev/typescript-0.84.4.wasm",
 		"https://plugins.dprint.dev/json-0.17.2.wasm",
