@@ -16,7 +16,11 @@ var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
     chemParse = require("$:/plugins/tiddlywiki/katex/mhchem.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-katex.macros = {};
+katex.macros = {
+	'\\label': '\\htmlId{###1}{}',
+	'\\eqref': '\\htmlClass{katex-eqref}{(\\href{#####1}{\\htmlData{katex-label=#1}{\\text{#1}}})}',
+};
+
 katex.updateMacros = function() {
 	var tiddlers = $tw.wiki.getTiddlersWithTag("$:/tags/KaTeX/Macro"),
 		regex = /#\d/g, // Remove the arguments like #1#2
@@ -57,6 +61,9 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	// Render it into a span
 	var span = this.document.createElement("span"),
 		options = {throwOnError: false, displayMode: displayMode, macros: katex.macros};
+	options.trust = function (ctx) {
+		return ctx.command == '\\href' || ctx.command == '\\htmlClass' || ctx.command == '\\htmlData' || ctx.command == '\\htmlId' && ctx.id[0] == '#';
+	};
 	try {
 		if(!this.document.isTiddlyWikiFakeDom) {
 			katex.render(text,span,options);
@@ -70,6 +77,23 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	// Insert it into the DOM
 	parent.insertBefore(span,nextSibling);
 	this.domNodes.push(span);
+	var tiddlerFrame;
+	span.querySelectorAll('.katex-eqref [data-katex-label]:not([data-katex-eqnum])').forEach(element => {
+		// the tiddlyway requires a leading hash to jump inside a tiddler
+		var katexLabel = this.document.getElementById('#' + element.dataset.katexLabel);
+		if (!katexLabel) {
+			element.dataset.katexEqnum = element.dataset.katexLabel + '?';
+			return;
+		}
+		// everything is a <span> and the span holding a row doesn't even have a class
+		var katexRow = katexLabel.closest('.vlist > *');
+		var katexPos = Array.prototype.indexOf.call(katexRow.parentElement.children, katexRow);		// which row has the label
+		var katexEqn = katexRow.closest('.katex-html').querySelectorAll('.tag .eqn-num')[katexPos];	// which eqn num corresponds
+		// nodejs doesn't support ||= here ... wtf?
+		if (!tiddlerFrame) tiddlerFrame = span.closest('.tc-tiddler-frame');
+		if (!tiddlerFrame._katex_eqn_num_elements) tiddlerFrame._katex_eqn_num_elements = tiddlerFrame.getElementsByClassName('eqn-num');
+		element.dataset.katexEqnum = 1 + Array.prototype.indexOf.call(tiddlerFrame._katex_eqn_num_elements, katexEqn);
+	});
 };
 
 /*
@@ -88,7 +112,7 @@ KaTeXWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return false;	
+		return false;
 	}
 };
 

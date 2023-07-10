@@ -19,6 +19,16 @@ tags: [[$:/tags/Stylesheet]]
 	counter-reset: katexEqnNo;
 }
 
+/* Replace \eqref placeholder with generated eqnum */
+
+.katex-eqref [data-katex-eqnum] > * {
+	display: none;
+}
+
+.katex-eqref [data-katex-eqnum]::after {
+	content: attr(data-katex-eqnum);
+}
+
 /* Avoid TW5's max-width: 100% */
 
 .katex svg {
