@@ -1,10 +1,8 @@
 created: 20150124182127000
-modified: 20230415122226165
+modified: 20230710074414361
 tags: [[Filter Run]]
 title: Filter Step
 type: text/vnd.tiddlywiki
-
-<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 
 A <<.def "filter step">> represents a single operation within a <<.def "filter run">>.
 

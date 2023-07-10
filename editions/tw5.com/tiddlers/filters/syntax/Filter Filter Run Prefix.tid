@@ -1,6 +1,6 @@
 created: 20211129022455873
 from-version: 5.1.23
-modified: 20230322140650041
+modified: 20230710073334078
 rp-input: the filter output of all previous runs so far
 rp-output: the input titles for which the filter run is not empty
 rp-purpose: remove every input title for which the filter run output is an empty list
@@ -29,4 +29,4 @@ The following variables are available within the filter run:
 
 <<.tip "Compare named filter run prefix `:filter` with [[filter Operator]] which applies a subfilter to every input title, removing the titles that return an empty result from the subfilter">>
 
-[[Examples|Filter Filter Run Prefix (Examples)]]
+[[Filter Filter Run Prefix (Examples)]]

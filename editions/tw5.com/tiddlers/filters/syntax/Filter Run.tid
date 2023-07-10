@@ -1,10 +1,8 @@
 created: 20150124182117000
-modified: 20230327125749068
+modified: 20230710074357002
 tags: [[Filter Expression]]
 title: Filter Run
 type: text/vnd.tiddlywiki
-
-<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 
 <$railroad text="""
 \start none

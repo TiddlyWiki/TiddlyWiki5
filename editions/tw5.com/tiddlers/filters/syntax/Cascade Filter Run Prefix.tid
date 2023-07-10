@@ -1,6 +1,6 @@
 created: 20211130114043280
 from-version: 5.2.1
-modified: 20230322140633256
+modified: 20230710073343947
 rp-input: the filter output of all previous runs so far
 rp-output: the input titles as modified by the filters returned by this filter run
 rp-purpose: modify input titles by successively evaluating a list of filters and applying the first result
@@ -22,4 +22,4 @@ The following variables are available within the filter run:
 * <<.var currentTiddler>> - the input title
 * <<.var ..currentTiddler>> - the value of the variable <<.var currentTiddler>> outside the filter run.
 
-[[Examples|Cascade Filter Run Prefix (Examples)]]
+[[Cascade Filter Run Prefix (Examples)]]

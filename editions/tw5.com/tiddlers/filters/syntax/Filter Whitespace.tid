@@ -1,10 +1,8 @@
 created: 20150124182304000
-modified: 20230327133019370
+modified: 20230710074447240
 tags: [[Filter Expression]]
 title: Filter Whitespace
 type: text/vnd.tiddlywiki
-
-<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 
 <$railroad text="""
 \start none

@@ -1,6 +1,6 @@
 created: 20211128212902292
 from-version: 5.1.23
-modified: 20230322140656814
+modified: 20230710073322863
 rp-input: all titles from previous filter runs
 rp-output: the titles that are present in both the result of this filter run and the output from previous runs
 rp-purpose: find the intersection of titles from previous runs with titles in this filter
@@ -17,4 +17,4 @@ type: text/vnd.tiddlywiki
 
 The filter output from previous runs is set aside. The `:intersection` filter run is started with all tiddler titles as input. Once this latest filter run has completed, the latest output is compared to the set-aside output. A new output is produced that contains only titles that appeared in both the set-aside output and the latest output.
 
-[[Examples|Intersection Filter Run Prefix (Examples)]]
+[[Intersection Filter Run Prefix (Examples)]]
