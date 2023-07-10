@@ -1,10 +1,8 @@
 created: 20201214044413473
-modified: 20230327125829268
+modified: 20230710074443327
 tags: [[Filter Run Prefix]]
 title: Named Filter Run Prefix
 type: text/vnd.tiddlywiki
-
-<$macrocall $name=".breadcrumbs" stop="Filters" mode={{$:/config/docs/breadcrumbs/filterMode}}/>
 
 In <<.from-version "5.1.23">> the named filter run prefixes where implemented. `:cascade`, `:map` and `:sort` have been added later as shown in the diagrams.
 
@@ -24,7 +22,8 @@ A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expre
 [[<":map">  /"v5.2.0"/ |"Map Filter Run Prefix"]] |
 [[<":or"> |"Or Filter Run Prefix"]] |
 [[<":reduce"> |"Reduce Filter Run Prefix"]] |
-[[<":sort">  /"v5.2.0"/ |"Sort Filter Run Prefix"]]) [[run|"Filter Run"]]
+[[<":sort">  /"v5.2.0"/ |"Sort Filter Run Prefix"]] |
+[[<":then">  /"v5.3.0"/ |"Then Filter Run Prefix"]]) [[run|"Filter Run"]]
 """/>
 
 

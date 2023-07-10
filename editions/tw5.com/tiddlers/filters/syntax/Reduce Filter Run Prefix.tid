@@ -1,6 +1,6 @@
 created: 20211124151912931
 from-version: 5.1.23
-modified: 20230322140714287
+modified: 20230710073305239
 rp-input: the filter output of all previous runs so far
 rp-output: the accumulated single item
 rp-purpose: replaces all filter output so far with a single item by repeatedly applying a filter run to each input title
@@ -44,4 +44,4 @@ is equivalent to:
 [tag[shopping]reduce<num-items>]
 ```
 
-[[Examples|Reduce Filter Run Prefix (Examples)]]
+[[Reduce Filter Run Prefix (Examples)]]
