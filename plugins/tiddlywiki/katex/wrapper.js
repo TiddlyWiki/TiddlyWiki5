@@ -76,13 +76,14 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// rewrite identifiers to make them unique
 	var tiddlerFrame = parent.closest('.tc-tiddler-frame');
-	var tiddlerTitle = tiddlerFrame.dataset.tiddlerTitle;
+	var safeTitle = tiddlerFrame.dataset.tiddlerTitle.replaceAll(/\s+/g, '');
 	$tw.utils.each(span.querySelectorAll('.katex-label [id^="#"]'), function (element) {
-		element.classList.add('katex-label' + element.id);
-		element.id = '#' + tiddlerTitle + element.id;
+		var safeId = element.id.replaceAll(/\s+/g, '~');
+		element.setAttribute('id', '#' + safeTitle + safeId);
+		element.classList.add('katex-label' + safeId);
 	});
 	$tw.utils.each(span.querySelectorAll('.katex-eqref [href^="##"]'), function (element) {
-		element.href = '##' + tiddlerTitle + element.getAttribute('href').substring(1);
+		element.href = '##' + safeTitle + element.getAttribute('href').substring(1).replaceAll(/\s+/g, '~');
 	});
 	// Insert it into the DOM
 	parent.insertBefore(span,nextSibling);
@@ -90,7 +91,7 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	// compute data-katex-eqnum attributes on elements made by \eqref
 	$tw.utils.each(span.querySelectorAll('.katex-eqref [data-katex-label]'), function (element) {
 		// find a unique matching element made by \label (or quit)
-		var katexLabels = tiddlerFrame.getElementsByClassName('katex-label#' + element.dataset.katexLabel);
+		var katexLabels = tiddlerFrame.getElementsByClassName('katex-label#' + element.dataset.katexLabel.replaceAll(/\s+/g, '~'));
 		if (katexLabels.length != 1) return;
 		// everything is a <span> and the span holding a row doesn't even have a class
 		var katexRow = katexLabels[0].closest('.vlist > *');
