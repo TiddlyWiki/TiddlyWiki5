@@ -17,7 +17,7 @@ var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 katex.macros = {
-	'\\label': '\\htmlId{###1}{}',
+	'\\label': '\\htmlClass{katex-label}{\\htmlId{###1}{}}',
 	'\\eqref': '\\htmlClass{katex-eqref}{(\\href{#####1}{\\htmlData{katex-label=#1}{\\text{#1}}})}',
 };
 
@@ -50,6 +50,7 @@ KaTeXWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 KaTeXWidget.prototype.render = function(parent,nextSibling) {
+	var document = this.document;
 	// Housekeeping
 	this.parentDomNode = parent;
 	this.computeAttributes();
@@ -59,13 +60,13 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	var displayMode = this.getAttribute("displayMode",this.parseTreeNode.displayMode || "false") === "true";
 	katex.updateMacros();
 	// Render it into a span
-	var span = this.document.createElement("span"),
+	var span = document.createElement("span"),
 		options = {throwOnError: false, displayMode: displayMode, macros: katex.macros};
 	options.trust = function (ctx) {
 		return ctx.command == '\\href' || ctx.command == '\\htmlClass' || ctx.command == '\\htmlData' || ctx.command == '\\htmlId' && ctx.id[0] == '#';
 	};
 	try {
-		if(!this.document.isTiddlyWikiFakeDom) {
+		if(!document.isTiddlyWikiFakeDom) {
 			katex.render(text,span,options);
 		} else {
 			span.innerHTML = katex.renderToString(text,options);
@@ -74,24 +75,29 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 		span.className = "tc-error";
 		span.textContent = ex;
 	}
+	// rewrite identifiers to make them unique
+	var tiddlerFrame = parent.closest('.tc-tiddler-frame');
+	var tiddlerTitle = tiddlerFrame.dataset.tiddlerTitle;
+	$tw.utils.each(span.querySelectorAll('.katex-label [id^="#"]'), function (element) {
+		element.id = '#' + tiddlerTitle + element.id;
+	});
+	$tw.utils.each(span.querySelectorAll('.katex-eqref [href^="##"]'), function (element) {
+		element.href = '##' + tiddlerTitle + element.getAttribute('href').substring(1);
+	});
 	// Insert it into the DOM
 	parent.insertBefore(span,nextSibling);
 	this.domNodes.push(span);
-	var tiddlerFrame;
-	span.querySelectorAll('.katex-eqref [data-katex-label]:not([data-katex-eqnum])').forEach(element => {
-		// the tiddlyway requires a leading hash to jump inside a tiddler
-		var katexLabel = this.document.getElementById('#' + element.dataset.katexLabel);
-		if (!katexLabel) {
-			element.dataset.katexEqnum = element.dataset.katexLabel + '?';
-			return;
-		}
+	// compute data-katex-eqnum attributes
+	$tw.utils.each(span.querySelectorAll('.katex-eqref [data-katex-label]'), function (element) {
+		var katexLabel = document.getElementById('#' + tiddlerTitle + '#' + element.dataset.katexLabel);
+		if (!katexLabel) return;
 		// everything is a <span> and the span holding a row doesn't even have a class
 		var katexRow = katexLabel.closest('.vlist > *');
 		var katexPos = Array.prototype.indexOf.call(katexRow.parentElement.children, katexRow);		// which row has the label
 		var katexEqn = katexRow.closest('.katex-html').querySelectorAll('.tag .eqn-num')[katexPos];	// which eqn num corresponds
-		// nodejs doesn't support ||= here ... wtf?
-		if (!tiddlerFrame) tiddlerFrame = span.closest('.tc-tiddler-frame');
-		if (!tiddlerFrame._katex_eqn_num_elements) tiddlerFrame._katex_eqn_num_elements = tiddlerFrame.getElementsByClassName('eqn-num');
+		if (!tiddlerFrame._katex_eqn_num_elements) {
+			tiddlerFrame._katex_eqn_num_elements = tiddlerFrame.getElementsByClassName('eqn-num');
+		}
 		element.dataset.katexEqnum = 1 + Array.prototype.indexOf.call(tiddlerFrame._katex_eqn_num_elements, katexEqn);
 	});
 };
