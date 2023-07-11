@@ -29,6 +29,16 @@ tags: [[$:/tags/Stylesheet]]
 	content: attr(data-katex-eqnum);
 }
 
+/* Emulate tiddlylink style but w/o decorating the parentheses */
+
+.katex-eqref a {
+	text-decoration: none;
+}
+
+.katex-eqref a:hover .enclosing {
+	text-decoration: underline;
+}
+
 /* Avoid TW5's max-width: 100% */
 
 .katex svg {

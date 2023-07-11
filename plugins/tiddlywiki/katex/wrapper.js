@@ -18,7 +18,7 @@ var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
 
 katex.macros = {
 	'\\label': '\\htmlClass{katex-label}{\\htmlId{###1}{}}',
-	'\\eqref': '\\htmlClass{katex-eqref}{(\\href{#####1}{\\htmlData{katex-label=#1}{\\text{#1}}})}',
+	'\\eqref': '\\htmlClass{katex-eqref}{\\href{#####1}{(\\htmlData{katex-label=#1}{\\text{#1}})}}',
 };
 
 katex.updateMacros = function() {
