@@ -1,6 +1,6 @@
 created: 20230318142752854
 from-version: 5.1.23
-modified: 20230322140627879
+modified: 20230711084712170
 op-purpose: accumulation of filter steps
 rp-input: the filter output of all previous runs so far
 rp-output: output titles replace the output of previous filter runs
@@ -15,4 +15,4 @@ type: text/vnd.tiddlywiki
 [[run|"Filter Run"]]
 """/>
 
-This prefix has a [[Shortcut Filter Run Prefix]] symbol `+run`
+This prefix has an optional [[shortcut syntax|Shortcut Filter Run Prefix]] symbol `+run`

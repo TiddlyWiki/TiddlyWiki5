@@ -1,5 +1,5 @@
 created: 20190802113703788
-modified: 20230319144059319
+modified: 20230711082337975
 tags: Filters
 title: Conditional Operators
 type: text/vnd.tiddlywiki
@@ -24,3 +24,9 @@ These operators can be combined. For example:
 The <<.olink else>> operator can be used to apply a defaults for missing values. In this example, we take advantage of the fact that the <<.olink get>> operator returns an empty list if the field or tiddler does not exist:
 
 <<.operator-example 2 "[[HelloThere]get[custom-field]else[default-value]]">>
+
+''Filter Run Prefixes''
+
+The [[:then|Then Filter Run Prefix]] and [[:else|Else Filter Run Prefix]] named filter run prefixes serve a similar purpose as the conditional operators. 
+
+Also see: [[Named Filter Run Prefix]]

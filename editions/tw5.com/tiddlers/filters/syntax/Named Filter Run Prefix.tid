@@ -1,5 +1,5 @@
 created: 20201214044413473
-modified: 20230710074443327
+modified: 20230711090833212
 tags: [[Filter Run Prefix]]
 title: Named Filter Run Prefix
 type: text/vnd.tiddlywiki
@@ -31,4 +31,6 @@ A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expre
 
 <<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to used to flatten a list of items down to a single item by repeatedly applying a subfilter">> 
 
-<<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the "currentTiddler" variable is set to the title of the tiddler being processed. The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler" <<.from-version "5.2.0">>""" >>
+<<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the <<.var currentTiddler>> variable is set to the title of the tiddler being processed.<br>The value of currentTiddler outside the subfilter is available in the variable <<.var "..currentTiddler">> <<.from-version "5.2.0">>""" >>
+
+Also see: [[Interchangeable Filter Run Prefixes]]

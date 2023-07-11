@@ -1,6 +1,6 @@
 created: 20230316150731234
 from-version: 5.1.23
-modified: 20230322140619019
+modified: 20230711084644541
 rp-input: all titles from previous filter runs
 rp-output: output titles are appended to the output of previous filter runs without de-duplication.
 rp-purpose: union of sets without de-duplication
@@ -15,4 +15,4 @@ type: text/vnd.tiddlywiki
 [[run|"Filter Run"]]
 """/>
 
-This prefix has a [[Shortcut Filter Run Prefix]] symbol `=run`
+This prefix has an optional [[shortcut syntax|Shortcut Filter Run Prefix]] symbol `=run`
