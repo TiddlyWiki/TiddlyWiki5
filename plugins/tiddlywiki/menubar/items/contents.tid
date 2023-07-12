@@ -1,8 +1,10 @@
-title: $:/plugins/tiddlywiki/menubar/items/contents
-caption: Contents
-description: Table of Contents
+caption: <$text text={{{ [{$:/config/plugins/menubar/TableOfContents/Tag}get[caption]else[Contents]] }}}/>
+created: 20230519010904497
+description: <$text text={{{ [{$:/config/plugins/menubar/TableOfContents/Tag}get[description]else[Table of Contents]] }}}/>
 is-dropdown: yes
+modified: 20230712225429073
 tags: $:/tags/MenuBar
+title: $:/plugins/tiddlywiki/menubar/items/contents
 
 <div class="tc-table-of-contents">
 
