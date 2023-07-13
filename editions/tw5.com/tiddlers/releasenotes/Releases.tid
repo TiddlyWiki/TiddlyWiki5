@@ -4,6 +4,6 @@ tags: About
 title: Releases
 type: text/vnd.tiddlywiki
 
-New releases of TiddlyWiki and TiddlyDesktop are announced via the [[official discussion groups|Forums]] and [[Twitter|https://twitter.com/TiddlyWiki]] (you can also subscribe to an Atom/RSS feed of [[TiddlyWiki releases from GitHub|https://github.com/jermolene/tiddlywiki5/releases.atom]])
+New releases of TiddlyWiki and TiddlyDesktop are announced via the [[official discussion groups|Forums]] and [[Twitter|https://twitter.com/TiddlyWiki]]
 
 <<tabs "[[TiddlyWiki Releases]] [[TiddlyDesktop Releases]]" "TiddlyWiki Releases" "$:/state/tab">>
