@@ -89,7 +89,7 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(span,nextSibling);
 	this.domNodes.push(span);
 	// compute data-katex-eqnum attributes on elements made by \eqref
-	$tw.utils.each(span.querySelectorAll('.katex-eqref [data-katex-label]'), function (element) {
+	$tw.utils.each(tiddlerFrame.querySelectorAll('.katex-eqref [data-katex-label]:not([data-katex-eqnum])'), function (element) {
 		// find a unique matching element made by \label (or quit)
 		var katexLabels = tiddlerFrame.getElementsByClassName('katex-label#' + element.dataset.katexLabel.replaceAll(/\s+/g, '~'));
 		if (katexLabels.length != 1) return;
