@@ -1086,7 +1086,7 @@ exports.getSubstitutedText = function(text,widget,options) {
 		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
 	});
 	// Substitute any variable references with their values
-	return output.replace(/\$\((\w+)\)\$/g, function(match,varname) {
+	return output.replace(/\$\(([^\)\$]+)\)\$/g, function(match,varname) {
 		return widget.getVariable(varname,{defaultValue: ""})
 	});
 };
