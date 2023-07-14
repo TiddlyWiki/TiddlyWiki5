@@ -42,7 +42,7 @@ Modern mode is recommended for use in new applications.
 
 | !Attribute |<| !Description |
 | !(modern) | !(legacy) |~|
-|$variable |- |Name of the variable to transclude |
+|$variable |- |Name of the [[variable|Variables]] or [[procedure|Procedures]] to transclude |
 |$tiddler |tiddler |The title of the tiddler to transclude (defaults to the current tiddler) |
 |$field |field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
 |$index |index |The index of a property in a [[DataTiddler|DataTiddlers]] |
