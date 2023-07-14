@@ -1,6 +1,4 @@
 caption: Menu Bar
-created: 20230519012218346
-modified: 20230712224614730
 tags: $:/tags/ControlPanel/Toolbars
 title: $:/plugins/tiddlywiki/menubar/config
 
@@ -30,9 +28,19 @@ The breakpoint position between narrow and wide screens. Should include CSS unit
 
 !! Contents Tag
 
-The tag for the ~TableOfContents used in the Contents dropdown. Add //caption// and //description// fields to the tag tiddler to change ~TableOfContents' menu label.
+The tag for the ~TableOfContents used in the Contents dropdown.
 
 <$edit-text tiddler="$:/config/plugins/menubar/TableOfContents/Tag" default="" tag="input"/>
+
+Caption of the Contents menu item (stored in the tag's //caption// field):
+
+<$edit-text tiddler={{$:/config/plugins/menubar/TableOfContents/Tag}} field="caption" default="Contents" tag="input" size=50/>
+
+Description of the contents menu item (stored in the tag's //description// field):
+
+<$edit-text tiddler={{$:/config/plugins/menubar/TableOfContents/Tag}} field="description" default="Table of Contents" tag="input" size=50/>
+
+
 
 !! Menu Bar Colours
 

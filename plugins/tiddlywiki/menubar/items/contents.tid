@@ -1,8 +1,6 @@
-caption: <$text text={{{ [{$:/config/plugins/menubar/TableOfContents/Tag}get[caption]else[Contents]] }}}/>
-created: 20230519010904497
+caption: <$list filter="[{$:/config/plugins/menubar/TableOfContents/Tag}has[caption]]" emptyMessage="Contents"><$transclude $field="caption"/></$list>
 description: <$text text={{{ [{$:/config/plugins/menubar/TableOfContents/Tag}get[description]else[Table of Contents]] }}}/>
 is-dropdown: yes
-modified: 20230712225429073
 tags: $:/tags/MenuBar
 title: $:/plugins/tiddlywiki/menubar/items/contents
 
