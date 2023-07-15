@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20230714224316114
+modified: 20230715162549180
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -129,9 +129,9 @@ There are times when it makes sense to use the features of the [[SetWidget]] rat
 <div class="doc-example">
 
 ```
-<$set name="myglobalvariable" value="I am global">
+<$set name="myGlobalVariable" value="I am global">
 
-    <$set name="myotherglobalvariable" value="I am also a global variable.">
+    <$set name="myOtherGlobalVariable" value="I am also a global variable.">
 
     </$set>
 
