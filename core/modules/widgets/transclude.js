@@ -41,16 +41,17 @@ TranscludeWidget.prototype.execute = function() {
 	this.collectAttributes();
 	this.collectStringParameters();
 	this.collectSlotFillParameters();
-	// Get the parse tree nodes that we are transcluding
+	// Get the target text and parse tree nodes that we are transcluding
 	var target = this.getTransclusionTarget(),
-		parseTreeNodes = target.parseTreeNodes;
+		parseTreeNodes;
 	this.sourceText = target.text;
 	this.parserType = target.type;
 	this.parseAsInline = target.parseAsInline;
 	// Process the transclusion according to the output type
 	switch(this.transcludeOutput || "text/html") {
 		case "text/html":
-			// No further processing required
+			// Return the parse tree nodes
+			parseTreeNodes = target.parseTreeNodes;
 			break;
 		case "text/raw":
 			// Just return the raw text
@@ -158,7 +159,7 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 };
 
 /*
-Get transcluded parse tree nodes as an object {parser:,text:,type:}
+Get transcluded parse tree nodes as an object {text:,type:,parseTreeNodes:,parseAsInline:}
 */
 TranscludeWidget.prototype.getTransclusionTarget = function() {
 	var self = this;
@@ -270,7 +271,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	// Return the parse tree
 	if(parser) {
 		return {
-			parser: parser,
 			parseTreeNodes: parser.tree,
 			parseAsInline: parseAsInline,
 			text: parser.source,
@@ -279,7 +279,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 	} else {
 		// If there's no parse tree then return the missing slot value
 		return {
-			parser: null,
 			parseTreeNodes: (this.slotFillParseTrees["ts-missing"] || []),
 			parseAsInline: parseAsInline,
 			text: null,
