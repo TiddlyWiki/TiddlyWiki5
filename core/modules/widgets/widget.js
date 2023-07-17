@@ -13,7 +13,7 @@ Widget base class
 "use strict";
 
 /* Maximum permitted depth of the widget tree for recursion detection */
-var MAX_WIDGET_TREE_DEPTH = 1000;
+var MAX_WIDGET_TREE_DEPTH = 500;
 
 /*
 Create a widget object for a parse tree node
