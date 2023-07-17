@@ -106,8 +106,8 @@ function HttpClientRequest(options) {
 	this.wiki = options.wiki;
 	this.completionActions = options.oncompletion;
 	this.progressActions = options.onprogress;
-	this.bindStatus = options["bind-status"];
-	this.bindProgress = options["bind-progress"];
+	this.bindStatus = options["bindStatus"];
+	this.bindProgress = options["bindProgress"];
 	this.method = options.method || "GET";
 	this.body = options.body || "";
 	this.variables = options.variables;
@@ -132,7 +132,7 @@ HttpClientRequest.prototype.send = function(callback) {
 	var self = this,
 		setBinding = function(title,text) {
 			if(title) {
-				this.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
+				self.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
 			}
 		};
 	if(this.url) {

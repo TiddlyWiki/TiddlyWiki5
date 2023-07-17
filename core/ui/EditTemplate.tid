@@ -1,3 +1,4 @@
+code-body: yes
 title: $:/core/ui/EditTemplate
 
 \define delete-edittemplate-state-tiddlers()
