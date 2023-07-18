@@ -13,55 +13,117 @@ This file is spliced into the HTML file to be executed before the boot kernel ha
 $tw.SqlFunctions = function(options) {
 	options = options || {};
 	var self = this;
+	// Setting useCustomCollation to true allows the tests to pass (run `tiddlywiki editions/test/ --build index`)
+	// - but it takes 6 times longer to boot the prerelease than with useCustomCollation set to false
+	var useCustomCollation = false;
+	var COLLATION_CLAUSE = useCustomCollation ? "COLLATE custom_collation" : "";
+	// Create anonymous database
 	this.db = new $tw.sqlite3.oo1.DB("","c");
 	// Setup custom collation to precisely match existing sort orders
 	// Create field with `title TEXT NOT NULL COLLATE custom_collation`
 	// Use it like `... order by shadow collate custom_collation`
-	function customCollation(ptr,lenA,a,lenB,b) {
-		// There may be a problem here: lenA and lenB are the lengths of the two UTF8 strings in bytes,
-		// and yet we're using them with JS slice() method which counts in characters
-		var jsA = $tw.sqlite3.wasm.cstrToJs(a).slice(0,lenA),
-			jsB = $tw.sqlite3.wasm.cstrToJs(b).slice(0,lenB);
-		return jsA.localeCompare(jsB);
+	if(useCustomCollation) {
+		function customCollation(ptr,lenA,a,lenB,b) {
+			// There may be a problem here: lenA and lenB are the lengths of the two UTF8 strings in bytes,
+			// and yet we're using them with JS slice() method which counts in characters
+			var jsA = $tw.sqlite3.wasm.cstrToJs(a).slice(0,lenA),
+				jsB = $tw.sqlite3.wasm.cstrToJs(b).slice(0,lenB);
+			return jsA.localeCompare(jsB);
+		}
+		var SQLITE_UTF8 =           1; /* IMP: R-37514-35566 */
+		var SQLITE_UTF16LE =        2; /* IMP: R-03371-37637 */
+		var SQLITE_UTF16BE =        3; /* IMP: R-51971-34154 */
+		var SQLITE_UTF16 =          4; /* Use native byte order */
+		var SQLITE_ANY =            5; /* Deprecated */
+		var SQLITE_UTF16_ALIGNED =  8; /* sqlite3_create_collation only */
+		var collationResult = $tw.sqlite3.capi.sqlite3_create_collation_v2(this.db.pointer,"custom_collation",SQLITE_UTF8,this,customCollation,0);	
 	}
-	var SQLITE_UTF8 =           1; /* IMP: R-37514-35566 */
-	var SQLITE_UTF16LE =        2; /* IMP: R-03371-37637 */
-	var SQLITE_UTF16BE =        3; /* IMP: R-51971-34154 */
-	var SQLITE_UTF16 =          4; /* Use native byte order */
-	var SQLITE_ANY =            5; /* Deprecated */
-	var SQLITE_UTF16_ALIGNED =  8; /* sqlite3_create_collation only */
-	var collationResult = $tw.sqlite3.capi.sqlite3_create_collation_v2(this.db.pointer,"custom_collation",SQLITE_UTF8,this,customCollation,0);
 	/*
 	Create tables and indexes
 	*/
 	self.db.exec({
 		sql: `
-		DROP TABLE IF EXISTS tiddlers;
-		CREATE TABLE tiddlers (
-			title TEXT NOT NULL COLLATE custom_collation,
-			shadow INTEGER NOT NULL CHECK (shadow = 0 OR shadow = 1), -- 0=real tiddler, 1=shadow tiddler
-			shadowsource TEXT,
-			meta TEXT NOT NULL,
-			text TEXT NOT NULL,
-			PRIMARY KEY(title,shadow)
-		);
-		CREATE INDEX tiddlers_title_index ON tiddlers(title);
+			DROP TABLE IF EXISTS tiddlers;
+			CREATE TABLE tiddlers (
+				title TEXT NOT NULL ${COLLATION_CLAUSE},
+				shadow INTEGER NOT NULL CHECK (shadow = 0 OR shadow = 1), -- 0=real tiddler, 1=shadow tiddler
+				shadowsource TEXT,
+				meta TEXT NOT NULL,
+				text TEXT NOT NULL,
+				PRIMARY KEY(title,shadow)
+			);
+			CREATE INDEX tiddlers_title_index ON tiddlers(title);
+			DROP TABLE IF EXISTS tags;
+			CREATE TABLE tags (
+				tag_id INTEGER PRIMARY KEY,
+				tag TEXT NOT NULL
+			);
+			DROP TABLE IF EXISTS tiddler_tags;
+			CREATE TABLE tiddler_tags (
+				tiddler_title TEXT NOT NULL,
+				tiddler_shadow INTEGER NOT NULL,
+				tag_id INTEGER NOT NULL,
+				FOREIGN KEY (tiddler_title, tiddler_shadow) REFERENCES tiddlers (title, shadow) ON DELETE CASCADE ON UPDATE CASCADE,
+				FOREIGN KEY (tag_id) REFERENCES tags (tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
+				PRIMARY KEY (tiddler_title, tiddler_shadow, tag_id)
+			);
 		`
 	});
 	/*
 	Save a tiddler. shadowSource should be falsy for ordinary tiddlers, or the source plugin title for shadow tiddlers
 	*/
-	var statementSaveTiddler = self.db.prepare("replace into tiddlers(title,shadow,shadowsource,meta,text) values ($title,$shadow,$shadowsource,$meta,$text);");
+	var querySaveTiddlerTableTiddlers = self.db.prepare(`
+	-- Insert the new tiddler into the tiddlers table
+	INSERT OR REPLACE INTO tiddlers (title, shadow, shadowsource, meta, text)
+	VALUES ($title, $shadow, $shadowsource, $meta, $text);
+	`);
+	var querySaveTiddlerTableTags = self.db.prepare(`
+	-- Parse and insert tags from the $tags JSON array
+	WITH tag_values AS (
+	  SELECT json_each.value AS tag
+	  FROM json_each($tags)
+	)
+	INSERT INTO tags (tag)
+	SELECT DISTINCT tag
+	FROM tag_values
+	WHERE tag NOT IN (
+	  SELECT tag
+	  FROM tags
+	);
+	`);
+	var querySaveTiddlerTableTiddlerTags = self.db.prepare(`	
+	-- Associate the new tiddler with the tags in the tiddler_tags table
+	WITH tag_values AS (
+	  SELECT json_each.value AS tag
+	  FROM json_each($tags)
+	)
+	INSERT OR IGNORE INTO tiddler_tags (tiddler_title, tiddler_shadow, tag_id)
+	SELECT $title, $shadow, tags.tag_id
+	FROM tag_values
+	JOIN tags ON tag_values.tag = tags.tag;
+	`);
 	this.sqlSaveTiddler = function(tiddlerFields,shadowSource) {
-		statementSaveTiddler.bind({
+		querySaveTiddlerTableTiddlers.bind({
 			$title: tiddlerFields.title,
 			$shadow: shadowSource ? 1 : 0,
 			$shadowsource: shadowSource ? shadowSource : null,
 			$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
 			$text: tiddlerFields.text || ""
 		});
-		statementSaveTiddler.step();
-		statementSaveTiddler.reset();
+		querySaveTiddlerTableTiddlers.step();
+		querySaveTiddlerTableTiddlers.reset();
+		querySaveTiddlerTableTags.bind({
+			$tags: JSON.stringify(tiddlerFields.tags || [])
+		});
+		querySaveTiddlerTableTags.step();
+		querySaveTiddlerTableTags.reset();
+		querySaveTiddlerTableTiddlerTags.bind({
+			$title: tiddlerFields.title,
+			$shadow: shadowSource ? 1 : 0,
+			$tags: JSON.stringify(tiddlerFields.tags || [])
+		});
+		querySaveTiddlerTableTiddlerTags.step();
+		querySaveTiddlerTableTiddlerTags.reset();
 	};
 	this.sqlDeleteTiddler = function(title) {
 		self.db.exec({
@@ -76,7 +138,7 @@ $tw.SqlFunctions = function(options) {
 			sql: "delete from tiddlers where shadow = 1"
 		});
 	};
-	var statementTiddlerExists = self.db.prepare("select title from tiddlers where title = $title and shadow = 0;")
+	var statementTiddlerExists = self.db.prepare(`select title from tiddlers where title = $title and shadow = 0;`)
 	this.sqlTiddlerExists = function(title) {
 		statementTiddlerExists.bind({
 			$title: title
@@ -89,7 +151,7 @@ $tw.SqlFunctions = function(options) {
 			return false;
 		}
 	};
-	var statementGetTiddler = self.db.prepare("select title, shadow, meta, text from tiddlers where title = $title order by shadow");
+	var statementGetTiddler = self.db.prepare(`select title, shadow, meta, text from tiddlers where title = $title order by shadow`);
 	this.sqlGetTiddler = function(title) {
 		statementGetTiddler.bind({
 			$title: title
@@ -103,7 +165,7 @@ $tw.SqlFunctions = function(options) {
 			return undefined;
 		}
 	};
-	var statementGetShadowSource = self.db.prepare("select title, shadowsource from tiddlers where title = $title and shadow = 1");
+	var statementGetShadowSource = self.db.prepare(`select title, shadowsource from tiddlers where title = $title and shadow = 1`);
 	this.sqlGetShadowSource = function(title) {
 		statementGetShadowSource.bind({
 			$title: title
@@ -117,7 +179,7 @@ $tw.SqlFunctions = function(options) {
 			return undefined;
 		}
 	};
-	var statementAllTitles = self.db.prepare("select title from tiddlers where shadow = 0 order by title collate custom_collation");
+	var statementAllTitles = self.db.prepare(`select title from tiddlers where shadow = 0 order by title ${COLLATION_CLAUSE}`);
 	this.sqlAllTitles = function() {
 		let resultRows = [];
 		while(statementAllTitles.step()) {
@@ -127,7 +189,7 @@ $tw.SqlFunctions = function(options) {
 		statementAllTitles.reset();
 		return resultRows;
 	};
-	var statementAllShadowTitles = self.db.prepare("select title from tiddlers where shadow = 1 order by title collate custom_collation");
+	var statementAllShadowTitles = self.db.prepare(`select title from tiddlers where shadow = 1 order by title ${COLLATION_CLAUSE}`);
 	this.sqlAllShadowTitles = function() {
 		let resultRows = [];
 		while(statementAllShadowTitles.step()) {
@@ -137,7 +199,7 @@ $tw.SqlFunctions = function(options) {
 		statementAllShadowTitles.reset();
 		return resultRows;
 	};
-	var statementEachTiddler = self.db.prepare("select title, meta, text from tiddlers where shadow = 0 order by title collate custom_collation");
+	var statementEachTiddler = self.db.prepare(`select title, meta, text from tiddlers where shadow = 0 order by title ${COLLATION_CLAUSE}`);
 	this.sqlEachTiddler = function(callback) {
 		while(statementEachTiddler.step()) {
 			var row = statementEachTiddler.get({}),
@@ -171,7 +233,7 @@ $tw.SqlFunctions = function(options) {
 					where t4.title = t3.title
 						and t4.shadow = 1
 				)
-		order by title collate custom_collation;
+		order by title ${COLLATION_CLAUSE};
 	`);
 	this.sqlEachShadowTiddler = function(callback) {
 		while(statementEachShadowTiddler.step()) {
@@ -194,7 +256,7 @@ $tw.SqlFunctions = function(options) {
 					where t2.title = t1.title
 						and t2.shadow = 0
 					)
-			order by t1.title collate custom_collation;
+			order by t1.title ${COLLATION_CLAUSE};
 		`);
 	this.sqlEachTiddlerPlusShadows = function(callback) {
 		self.sqlEachTiddler(callback);
@@ -209,16 +271,16 @@ $tw.SqlFunctions = function(options) {
 	Return all rows where the shadow field is zero, and there is no row with the same title and a shadow field of 1
 	*/
 	var statementEachShadowPlusTiddlers = self.db.prepare(`
-			select title,meta,text from tiddlers t1
-			where t1.shadow = 0
-				and not exists (
-					select 1
-					from tiddlers t2
-					where t2.title = t1.title
-						and t2.shadow = 1
-					)
-			order by t1.title collate custom_collation;
-		`);
+		select title,meta,text from tiddlers t1
+		where t1.shadow = 0
+			and not exists (
+				select 1
+				from tiddlers t2
+				where t2.title = t1.title
+					and t2.shadow = 1
+				)
+		order by t1.title ${COLLATION_CLAUSE};
+	`);
 	this.sqlEachShadowPlusTiddlers = function(callback) {
 		self.sqlEachShadowTiddler(callback);
 		while(statementEachShadowPlusTiddlers.step()) {
@@ -228,15 +290,52 @@ $tw.SqlFunctions = function(options) {
 		}
 		statementEachShadowPlusTiddlers.reset();
 	};
-	var statementLogTables = self.db.prepare("select title, shadow, meta, text from tiddlers order by title,shadow");
-	this.sqlLogTables = function() {
+	/*
+	Return all tiddlers with a given tag. Method determines the default ordering (before the list ordering fields are observed):
+		each: just ordinary tiddlers
+		eachShadow: just shadow tiddlers
+
+	*/
+	var statementGetTiddlersWithTag = self.db.prepare(`
+	SELECT t.title
+	FROM tiddlers AS t
+	JOIN tiddler_tags AS tt ON t.title = tt.tiddler_title AND t.shadow = tt.tiddler_shadow
+	WHERE tt.tag_id = (SELECT tag_id FROM tags WHERE tag = $tag)
+	  AND (t.shadow = 0 OR NOT EXISTS (SELECT 1 FROM tiddlers WHERE title = t.title AND shadow = 0))
+	GROUP BY t.title, t.shadow 
+	ORDER BY t.title ASC, t.shadow ASC ${COLLATION_CLAUSE};
+	`);
+	this.sqlGetTiddlersWithTag = function(tag,method) {
+		statementGetTiddlersWithTag.bind({
+			$tag: tag
+		});
+		var resultRows = [];
+		while(statementGetTiddlersWithTag.step()) {
+			var row = statementGetTiddlersWithTag.get({});
+			resultRows.push(row.title);
+		}
+		statementGetTiddlersWithTag.reset();
+		return resultRows;
+	};
+	/*
+	Debugging
+	*/
+	var statementLogTiddlerTable = self.db.prepare("select title, shadow, meta, text from tiddlers order by title,shadow;"),
+		statementLogTagsTable = self.db.prepare("select tag_id, tag from tags order by tag;"),
+		statementLogTiddlerTagsTable = self.db.prepare("select tiddler_title, tiddler_shadow, tag_id from tiddler_tags order by tiddler_title, tiddler_shadow;");
+	function sqlLogTable(statement) {
 		let resultRows = [];
-		while(statementLogTables.step()) {
-			var row = statementLogTables.get({});
+		while(statement.step()) {
+			var row = statement.get({});
 			resultRows.push(row);
 		}
-		statementLogTables.reset();
-		console.log(resultRows);
+		statement.reset();
+		return resultRows;
+	}
+	this.sqlLogTables = function() {
+		console.log("tiddlers",sqlLogTable(statementLogTiddlerTable));
+		console.log("tags",sqlLogTable(statementLogTagsTable));
+		console.log("tiddler tags",sqlLogTable(statementLogTiddlerTagsTable));
 	};
 };
 

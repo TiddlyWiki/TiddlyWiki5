@@ -85,7 +85,32 @@ $tw.Wiki = function(options) {
 		return;
 	};
 
+	function TagSubIndexer(indexer,iteratorMethod) {
+		this.indexer = indexer;
+		this.iteratorMethod = iteratorMethod;
+	}
+
+	TagSubIndexer.prototype.lookup = function(tag) {
+		return self.sqlFunctions.sqlGetTiddlersWithTag(tag,this.iteratorMethod);
+	};
+
+	function TagIndexer(wiki) {
+		this.wiki = wiki;
+		this.subIndexers = [
+			new TagSubIndexer(this,"each"),
+			new TagSubIndexer(this,"eachShadow"),
+			new TagSubIndexer(this,"eachTiddlerPlusShadows"),
+			new TagSubIndexer(this,"eachShadowPlusTiddlers")
+		];
+	}
+
+	var tagIndexer = new TagIndexer();
+
 	this.getIndexer = function(name) {
+		switch(name) {
+			case "TagIndexer":
+				return tagIndexer;
+		}
 		return null;
 	};
 
