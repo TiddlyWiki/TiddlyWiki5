@@ -50,6 +50,8 @@ self.sqlite3InitModule().then((sqlite3)=>{
 	$tw.sqlite3 = sqlite3;
 	var capi = $tw.sqlite3.capi, // C-style API
 		  oo = $tw.sqlite3.oo1; // High-level OO API
+	// Boot the console
+	$tw.sqlConsole = new $tw.SqlConsole();
 	// Get version numbers
 	console.log("sqlite3 version",capi.sqlite3_libversion());
 	// Boot TiddlyWiki
