@@ -1,7 +1,10 @@
 title: $:/plugins/tiddlywiki/sqlite3store/rawmarkup-bottomhead
 tags: $:/tags/RawMarkupWikified
 
-`<script>`
+`<style>`
+{{$:/plugins/tiddlywiki/sqlite3store/sql-console/styles}}
+`</style>
+<script>`
 {{$:/plugins/tiddlywiki/sqlite3store/suppress-boot.js}}
 {{$:/plugins/tiddlywiki/sqlite3store/sql-functions.js}}
 {{$:/plugins/tiddlywiki/sqlite3store/sql-wiki-store.js}}

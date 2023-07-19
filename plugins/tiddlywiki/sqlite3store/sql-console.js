@@ -9,49 +9,80 @@ SQL console for debugging
 (function() {
 
 $tw.SqlConsole = function SqlConsole() {
-	var self = this;
-	// Container
-	this.consoleContainer = document.createElement("div");
-	this.consoleContainer.appendChild(document.createTextNode("console for sqlite3"));
+	var self = this,
+		dm = $tw.utils.domMaker;
 	// Input box
-	this.consoleInput = document.createElement("textarea");
-	this.consoleInput.setAttribute("rows","10");
-	this.consoleInput.style.width = "100%";
-	this.consoleInput.addEventListener("keypress",function(event) {
-		if(event.key === "Enter") {
-			console.log("Gto enter")
-			self.consoleRunButton.click();
-			event.preventDefault();
-			return false;
+	this.consoleInput = dm("textarea",{
+		"class": "sql-console-input",
+		attributes: {
+			"rows": "10"
 		}
 	});
-	this.consoleContainer.appendChild(this.consoleInput);
 	// Run button
-	this.consoleRunButton = document.createElement("button");
-	this.consoleRunButton.appendChild(document.createTextNode("run sql"));
+	this.consoleRunButton = dm("button",{
+		text: "run sql"
+	});
 	this.consoleRunButton.addEventListener("click",this.runQuery.bind(this));
-	this.consoleContainer.appendChild(this.consoleRunButton);
+	// Clear output button
+	this.consoleClearButton = dm("button",{
+		text: "clear output"
+	});
+	this.consoleClearButton.addEventListener("click",this.clearOutput.bind(this));
 	// Output
-	this.consoleOutput = document.createElement("div");
-	this.consoleContainer.appendChild(this.consoleOutput);
+	this.consoleOutput = dm("div",{
+		"class": "sql-console-output-container"
+	});
+	// Container
+	this.consoleContainer = dm("div",{
+		"class": "sql-console",
+		children: [
+			document.createTextNode("console for sqlite3"),
+			this.consoleInput,
+			this.consoleRunButton,
+			this.consoleClearButton,
+			this.consoleOutput
+		]
+	});
 	// Insert into DOM
 	document.body.insertBefore(this.consoleContainer,document.body.firstChild);
 };
 
+$tw.SqlConsole.prototype.clearOutput = function() {
+	while(this.consoleOutput.firstChild) {
+		this.consoleOutput.removeChild(this.consoleOutput.firstChild);
+	}
+};
+
 $tw.SqlConsole.prototype.runQuery = function() {
-	let resultRows = [],
+	var self = this,
+		dm = $tw.utils.domMaker,
+		sql = this.consoleInput.value,
+		resultRows = [],
 		exception;
+	// Execute the query
 	try {
 		$tw.wiki.sqlFunctions.db.exec({
-			sql: this.consoleInput.value,
+			sql: sql,
 			rowMode: "object",
 			resultRows: resultRows
 		});
 	} catch(e) {
 		exception = e.toString();
 	}
-	var output = document.createElement("div");
-	output.appendChild(document.createTextNode(exception || JSON.stringify(resultRows)));
+	// Display the result
+	var output = dm("div",{
+		"class": "sql-console-output",
+		children: [
+			dm("div",{
+				"class": "sql-console-output-input",
+				text: sql
+			}),
+			dm("div",{
+				"class": "sql-console-output-output",
+				text: exception || JSON.stringify(resultRows)
+			})
+		]
+	});
 	this.consoleOutput.insertBefore(output,this.consoleOutput.firstChild);
 };
 
