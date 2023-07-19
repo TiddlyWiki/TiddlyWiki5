@@ -81,14 +81,27 @@ $tw.Wiki = function(options) {
 		self.sqlFunctions.sqlLogTables();
 	}
 
+	var tagIndexer;
+
 	this.addIndexer = function(indexer,name) {
-		return;
+		switch(indexer.constructor.name) {
+			case "TagIndexer":
+				tagIndexer = new TagIndexer(this);
+				break;
+		}
 	};
 
 	function TagSubIndexer(indexer,iteratorMethod) {
 		this.indexer = indexer;
 		this.iteratorMethod = iteratorMethod;
 	}
+
+	TagSubIndexer.prototype.addIndexMethod = function() {
+		var self = this;
+		this.indexer.wiki[this.iteratorMethod].byTag = function(tag) {
+			return self.lookup(tag).slice(0);
+		};
+	};
 
 	TagSubIndexer.prototype.lookup = function(tag) {
 		return self.sqlFunctions.sqlGetTiddlersWithTag(tag,this.iteratorMethod);
@@ -102,9 +115,10 @@ $tw.Wiki = function(options) {
 			new TagSubIndexer(this,"eachTiddlerPlusShadows"),
 			new TagSubIndexer(this,"eachShadowPlusTiddlers")
 		];
+		$tw.utils.each(this.subIndexers,function(subIndexer) {
+			subIndexer.addIndexMethod();
+		});
 	}
-
-	var tagIndexer = new TagIndexer();
 
 	this.getIndexer = function(name) {
 		switch(name) {
@@ -327,6 +341,10 @@ $tw.Wiki = function(options) {
 		this.clearCache(null);
 		this.clearGlobalCache();
 	};
+
+	if(this.addIndexersToWiki) {
+		this.addIndexersToWiki();
+	}
 };
 
 })();
