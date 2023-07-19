@@ -40,15 +40,15 @@ TagIndexer.prototype.update = function(updateDescriptor) {
 	var noOldTid = oldTid === undefined;
 	var noNewTid = newTid === undefined;
 
-	var a=((newTid && newTid.fields && newTid.fields.tags === undefined) && noOldTid),
-		b=((oldTid && oldTid.fields && oldTid.fields.tags === undefined) && noNewTid),
-		c=((newTid && newTid.fields && newTid.fields.tags === undefined) && (oldTid && oldTid.fields && oldTid.fields.tags === undefined));
-
 	// Index should be kept when
 	// there is no new tiddler -> or
 	// a) new tiddler has no tags && no old tiddler -> or
 	// b) old tiddler has no tags && there is no new tiddler -> or
 	// c) new tiddler has no tags && old tiddler has no tags
+	var a=((newTid && newTid.fields && newTid.fields.tags === undefined) && noOldTid),
+		b=((oldTid && oldTid.fields && oldTid.fields.tags === undefined) && noNewTid),
+		c=((newTid && newTid.fields && newTid.fields.tags === undefined) && (oldTid && oldTid.fields && oldTid.fields.tags === undefined));
+
 	if( noNewTid || a || b || c ) {
 			return;
 		} else {
@@ -74,7 +74,6 @@ TagSubIndexer.prototype.addIndexMethod = function() {
 TagSubIndexer.prototype.rebuild = function() {
 	var self = this;
 	// Hashmap by tag of array of {isSorted:, titles:[]}
-const t0 = $tw.utils.timer();
 	this.index = Object.create(null);
 	// Add all the tags
 	this.indexer.wiki[this.iteratorMethod](function(tiddler,title) {
@@ -86,7 +85,6 @@ const t0 = $tw.utils.timer();
 			}
 		});
 	});
-console.log("--------------- rebuild", $tw.utils.timer(t0));
 };
 
 TagSubIndexer.prototype.update = function(updateDescriptor) {
