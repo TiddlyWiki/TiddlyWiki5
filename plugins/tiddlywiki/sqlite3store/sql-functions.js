@@ -103,6 +103,7 @@ $tw.SqlFunctions = function(options) {
 	JOIN tags ON tag_values.tag = tags.tag;
 	`);
 	this.sqlSaveTiddler = function(tiddlerFields,shadowSource) {
+		var tags = JSON.stringify($tw.utils.parseStringArray(tiddlerFields.tags) || []);
 		querySaveTiddlerTableTiddlers.bind({
 			$title: tiddlerFields.title,
 			$shadow: shadowSource ? 1 : 0,
@@ -113,14 +114,14 @@ $tw.SqlFunctions = function(options) {
 		querySaveTiddlerTableTiddlers.step();
 		querySaveTiddlerTableTiddlers.reset();
 		querySaveTiddlerTableTags.bind({
-			$tags: JSON.stringify(tiddlerFields.tags || [])
+			$tags: tags
 		});
 		querySaveTiddlerTableTags.step();
 		querySaveTiddlerTableTags.reset();
 		querySaveTiddlerTableTiddlerTags.bind({
 			$title: tiddlerFields.title,
 			$shadow: shadowSource ? 1 : 0,
-			$tags: JSON.stringify(tiddlerFields.tags || [])
+			$tags: tags
 		});
 		querySaveTiddlerTableTiddlerTags.step();
 		querySaveTiddlerTableTiddlerTags.reset();
