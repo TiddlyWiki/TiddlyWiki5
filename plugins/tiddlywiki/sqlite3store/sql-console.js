@@ -9,12 +9,22 @@ SQL console for debugging
 (function() {
 
 $tw.SqlConsole = function SqlConsole() {
+	var self = this;
 	// Container
 	this.consoleContainer = document.createElement("div");
 	this.consoleContainer.appendChild(document.createTextNode("console for sqlite3"));
 	// Input box
 	this.consoleInput = document.createElement("textarea");
+	this.consoleInput.setAttribute("rows","10");
 	this.consoleInput.style.width = "100%";
+	this.consoleInput.addEventListener("keypress",function(event) {
+		if(event.key === "Enter") {
+			console.log("Gto enter")
+			self.consoleRunButton.click();
+			event.preventDefault();
+			return false;
+		}
+	});
 	this.consoleContainer.appendChild(this.consoleInput);
 	// Run button
 	this.consoleRunButton = document.createElement("button");
