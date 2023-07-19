@@ -214,7 +214,9 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 			transclusion = {
 				type: "transclude",
 				start: node.start,
-				end: node.end
+				end: node.end,
+				name: node.name,
+				params: []
 			};
 		$tw.utils.addAttributeToParseTreeNode(transclusion,"$variable",node.name);
 		$tw.utils.each(node.params,function(param) {
@@ -223,10 +225,13 @@ exports.parseMacroInvocationAsTransclusion = function(source,pos) {
 				if(name.charAt(0) === "$") {
 					name = "$" + name;
 				}
-				$tw.utils.addAttributeToParseTreeNode(transclusion,{name: name,type: "string", value: param.value, start: param.start, end: param.end});
 			} else {
-				$tw.utils.addAttributeToParseTreeNode(transclusion,{name: (positionalName++) + "",type: "string", value: param.value, start: param.start, end: param.end});
+				name = (positionalName++) + "";
 			}
+			$tw.utils.addAttributeToParseTreeNode(transclusion,{name: name, type: "string", value: param.value, start: param.start, end: param.end});
+			// old style macro invocations used to have a params. It's the same as the
+			// attributes, but no $variable, and no auto-index names. We keep it around.
+			transclusion.params.push(param);
 		});
 		return transclusion;
 	}
