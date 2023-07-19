@@ -9,6 +9,7 @@ code-body: yes
 .sql-console-input,
 .sql-console-output-input {
 	font-family: monospace;
+	white-space: pre;
 	box-sizing: border-box;
 	width: 100%;
 	background: #222222;
