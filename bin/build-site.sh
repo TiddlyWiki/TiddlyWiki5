@@ -96,7 +96,7 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 # /static/static.css	Static stylesheet
 # /static/favicon.ico	Favicon for static pages
 node $TW5_BUILD_TIDDLYWIKI \
-	$TW5_BUILD_MAIN_EDITION \
+	./editions/tour \
 	--verbose \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
