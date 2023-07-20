@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20230715173942163
+modified: 20230720174707977
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -129,7 +129,6 @@ There are times when it makes sense to use the features of the [[SetWidget]] rat
 <div class="doc-example">
 
 ```
-\whitespace trim
 <$set name="myGlobalVariable" value="I am global">
     <$set name="myOtherGlobalVariable" value="I am also a global variable.">
     </$set>
@@ -137,5 +136,3 @@ There are times when it makes sense to use the features of the [[SetWidget]] rat
 ```
 </div>
 <<<
-
-Please note that the pragma `\whitespace trim` is necessary for the set variable widget to be parsed correctly.
