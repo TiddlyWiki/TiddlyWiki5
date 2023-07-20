@@ -80,7 +80,7 @@ exports.makeDraggable = function(options) {
 				if(dataTransfer.setDragImage) {
 					if(dragImageType === "pill") {
 						dataTransfer.setDragImage(dragImage.firstChild,-16,-16);
-					} else if (dragImageType === "blank") {
+					} else if(dragImageType === "blank") {
 						dragImage.removeChild(dragImage.firstChild);
 						dataTransfer.setDragImage(dragImage,0,0);
 					} else {
@@ -106,7 +106,9 @@ exports.makeDraggable = function(options) {
 					dataTransfer.setData("text/vnd.tiddler",jsonData);
 					dataTransfer.setData("text/plain",titleString);
 					dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
-				} else {
+				}
+				// Check if browser is Chrome-like and if it has a touch-input device
+				if(!($tw.browser.isChromeLike && $tw.browser.hasTouch)) {
 					dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				}
 				dataTransfer.setData("Text",titleString);
