@@ -94,6 +94,7 @@ $tw.Wiki = function(options) {
 	function TagSubIndexer(indexer,iteratorMethod) {
 		this.indexer = indexer;
 		this.iteratorMethod = iteratorMethod;
+		this.cache = Object.create(null); // Hashmap by title containing arrays of titles
 	}
 
 	TagSubIndexer.prototype.addIndexMethod = function() {
@@ -103,8 +104,21 @@ $tw.Wiki = function(options) {
 		};
 	};
 
+	TagSubIndexer.prototype.update = function(updateDescriptor) {
+		this.cache = Object.create(null);
+	};
+
 	TagSubIndexer.prototype.lookup = function(tag) {
-		return self.sqlFunctions.sqlGetTiddlersWithTag(tag,this.iteratorMethod);
+		var cachedResult = this.cache[tag];
+		if(cachedResult) {
+			return cachedResult;
+		}
+		var listing = self.sqlFunctions.sqlGetTiddlersWithTag(tag,this.iteratorMethod);
+		if(this.indexer.wiki.sortByList) {
+			listing = this.indexer.wiki.sortByList(listing,tag);
+		}
+		this.cache[tag] = listing;
+		return listing;
 	};
 
 	function TagIndexer(wiki) {
@@ -119,6 +133,12 @@ $tw.Wiki = function(options) {
 			subIndexer.addIndexMethod();
 		});
 	}
+
+	TagIndexer.prototype.update = function(updateDescriptor) {
+		$tw.utils.each(this.subIndexers,function(subIndexer) {
+			subIndexer.update(updateDescriptor);
+		});
+	};
 
 	this.getIndexer = function(name) {
 		switch(name) {
@@ -142,6 +162,9 @@ $tw.Wiki = function(options) {
 				// Update caches
 				this.clearCache(title);
 				this.clearGlobalCache();
+				if(tagIndexer) {
+					tagIndexer.update();
+				}
 				// Queue a change event
 				this.enqueueTiddlerEvent(title);
 			}
@@ -158,6 +181,9 @@ $tw.Wiki = function(options) {
 			// Update caches
 			this.clearCache(title);
 			this.clearGlobalCache();
+			if(tagIndexer) {
+				tagIndexer.update();
+			}
 			// Queue a change event
 			this.enqueueTiddlerEvent(title,true);
 		}
@@ -340,6 +366,9 @@ $tw.Wiki = function(options) {
 		});
 		this.clearCache(null);
 		this.clearGlobalCache();
+		if(tagIndexer) {
+			tagIndexer.update();
+		}
 	};
 
 	if(this.addIndexersToWiki) {
