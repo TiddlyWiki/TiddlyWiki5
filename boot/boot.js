@@ -596,11 +596,11 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Add the code prologue and epilogue
 	code = [
 		"(function(" + contextNames.join(",") + ") {",
-		"  (function(){\n" + code + "\n;})();",
+		"  (function(){" + code + "\n;})();\n",
 		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
-		"  return exports;\n",
+		"\nreturn exports;\n",
 		"})"
-	].join("\n");
+	].join("");
 
 	// Compile the code into a function
 	var fn;
