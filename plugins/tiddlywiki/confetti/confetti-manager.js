@@ -22,7 +22,8 @@ ConfettiManager.prototype.launch = function (delay,options) {
 	var self = this,
 		defaultOptions = {
 			scalar: 1.2,
-			particleCount: 400
+			particleCount: 400,
+			zIndex: 2000
 		};
 	options = $tw.utils.extend(defaultOptions,options);
 	if(delay > 0) {

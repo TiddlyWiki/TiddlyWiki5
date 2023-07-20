@@ -1,0 +1,17 @@
+title: $:/plugins/tiddlywiki/tour/steps/welcome
+tags: $:/tags/TourStep
+display-mode: fullscreen
+
+! Hello!
+
+!! An interactive tour of the Anna Freud manuals
+
+Welcome to our tour of the Anna Freud manuals. Our manuals are made to support your continued learning whether you're currently taking part in one of our courses, have completed one of our courses or just eager to expand your knowledge in one of our models.
+
+Our manuals are held on a platform called ~TiddlyWiki, this tour will help you familiarise yourself with this new and exciting platform.
+
+Don't worry if it feels overwhelming at first – ~TiddlyWiki is designed to be flexible and easy to use. You can open and close Tiddlers without losing your place, and if you get lost, you just click the "home" button to start again.
+
+We hope you'll find our manuals a helpful and supportive tool. Let's get started!
+
+<<tour-buttons>>

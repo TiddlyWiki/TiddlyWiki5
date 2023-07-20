@@ -1,0 +1,33 @@
+title: $:/plugins/tiddlywiki/tour/steps/closing-tiddlers
+tags: $:/tags/TourStep
+display-mode: fullscreen
+startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn"/>
+
+\define tour-simplified-tiddler-close-button() yes
+
+! Closing tiddlers
+
+In the top right corner of each tiddler there is a button marked {{$:/core/images/close-button|0.65em}} that can be used to close them when you are finished with them.
+
+Try closing both these tiddlers.
+
+<$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
+
+<$list
+	filter="[list[$:/temp/Tour/DemoStoryList]]"
+	history="$:/temp/Tour/DemoHistoryList"
+	template="$:/plugins/tiddlywiki/tour/simplified-tiddler"
+	storyview="classic"
+/>
+
+</$navigator>
+
+<$list filter="[list[$:/temp/Tour/DemoStoryList]count[]match[0]]" variable="ignore">
+
+<$confetti/>
+
+Congratulations, you may proceed
+
+<<tour-buttons>>
+
+</$list>

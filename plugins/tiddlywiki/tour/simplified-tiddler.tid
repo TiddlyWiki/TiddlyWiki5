@@ -1,0 +1,22 @@
+title: $:/plugins/tiddlywiki/tour/simplified-tiddler
+
+\whitespace trim
+<$let storyTiddler=<<currentTiddler>>>
+	<div class="tc-tiddler-frame tc-tiddler-view-frame tc-tiddler-exists tc-tiddler-shadow " role="article">
+		<div class="tc-tiddler-title">
+			<div class="tc-titlebar">
+				<span class="tc-tiddler-controls">
+					<$list filter="[<tour-simplified-tiddler-close-button>match[yes]]" variable="ignore">
+						{{||$:/core/ui/Buttons/close}}
+					</$list>
+				</span>
+				<span>
+					<h2 class="tc-title"><$view field="caption"/></h2>
+				</span>
+			</div>
+		</div>
+		<div class="tc-tiddler-body">
+			<$transclude field="text" mode="block"/>
+		</div>
+	</div>
+</$let>

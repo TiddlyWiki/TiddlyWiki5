@@ -1,0 +1,31 @@
+title: $:/plugins/tiddlywiki/tour/steps/links
+tags: $:/tags/TourStep
+display-mode: fullscreen
+startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter"/>
+
+! How do links work in ~TiddlyWiki?
+
+Links allow you to decide if you want more information on a particular area or term as you go.
+
+Try clicking the link to "Saturn".
+
+<$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
+
+<$list
+	filter="[list[$:/temp/Tour/DemoStoryList]]"
+	history="$:/temp/Tour/DemoHistoryList"
+	template="$:/plugins/tiddlywiki/tour/simplified-tiddler"
+	storyview="classic"
+/>
+
+</$navigator>
+
+<$list filter="[[$:/temp/Tour/DemoStoryList]contains[$:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn]limit[1]]" variable="ignore">
+
+<$confetti/>
+
+Congratulations, you may proceed
+
+<<tour-buttons>>
+
+</$list>

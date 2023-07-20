@@ -1,0 +1,5 @@
+title: $:/demoshow/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+

@@ -18,5 +18,52 @@ tags: $:/tags/Stylesheet
 	border-radius: 0em;
 	padding: 1em;
 	margin: 0.5em;
-	z-index: 1000;
+	z-index: 2000;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green {
+	margin: 0;
+}
+
+.tc-tour-panel-fullscreen {
+	top: 0;
+	right: 0;
+	width: auto;
+	height: auto;
+	box-shadow: none;
+	border: none;
+	background: <<colour page-background>>;
+	margin: 0;
+}
+
+.tc-tour-panel-fullscreen .tc-tour-panel-controls {
+	display: none;
+}
+
+.tc-tour-panel .tc-tour-panel-banner-image {
+	display: none;
+}
+
+.tc-tour-panel-fullscreen .tc-tour-panel-banner-image {
+	display: block;
+	width: 200px;
+	float: right;
+	margin: 2em;
+}
+
+.tc-tour-panel-fullscreen .tc-tour-panel-inner {
+	width: 30%;
+	min-width: 400px;
+	height: 30%;
+	margin: 20% auto;
+}
+
+.tc-tour-panel .tc-tour-panel-inner .tc-tiddler-frame {
+	width: auto;
+	padding: 1.5em 2.5em;
+}
+
+.tc-tour-panel .tc-tour-panel-inner .tc-tiddler-frame .tc-titlebar {
+	font-size: 1.5em;
+	line-height: 1.1;
 }

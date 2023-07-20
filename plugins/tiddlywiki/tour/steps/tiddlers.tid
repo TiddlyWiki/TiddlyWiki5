@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/tour/steps/tiddlers
+tags: $:/tags/TourStep
+display-mode: fullscreen
+
+! How does ~TiddlyWiki work?
+
+~TiddlyWiki is a great tool that lets you collect and organize all kinds of information into interconnected bite-sized pieces called ''tiddlers''.
+
+A tiddler is like an index card.
+
+<$let tv-wikilinks="no">
+
+{{$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter||$:/plugins/tiddlywiki/tour/simplified-tiddler}}
+
+</$let>
+
+Each tiddler must have a unique title that is used to distinguish it.
+
+<<tour-buttons>>

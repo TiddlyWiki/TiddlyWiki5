@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step
+
+<$transclude $tiddler={{$:/state/tour/step}} $field="startup-actions"/>

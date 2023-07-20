@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/tour/steps/end-of-fullscreen
+tags: $:/tags/TourStep
+display-mode: fullscreen
+
+! Going deeper
+
+Congratulations!
+
+You have completed the first part of this tour.
+
+Now we are going guide you through using ~TiddlyWiki.
+
+<<tour-buttons>>
