@@ -1173,8 +1173,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tiddler-title-icon svg {
-	width: 0.75em;
-	height: 0.75em;
+	width: 0.9em;
+	height: 0.9em;
 }
 
 .tc-system-title-prefix {
