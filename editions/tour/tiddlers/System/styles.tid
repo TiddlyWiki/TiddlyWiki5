@@ -3,3 +3,7 @@ tags: [[$:/tags/Stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
+.hero-image {
+max-width: 300px;
+max-height: 300px;
+}
