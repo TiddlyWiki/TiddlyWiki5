@@ -9,9 +9,13 @@ tags: Concepts
 <$button actions=<<actions>>>$text$</$button>
 \end
 
-ShadowTiddlers are tiddlers that are loaded from within [[Plugins]]. Unlike ordinary tiddlers, they don't appear in most lists.
+ShadowTiddlers are tiddlers that are loaded from [[Plugins]] at the wiki startup. Unlike ordinary tiddlers, they don't appear in most lists.
 
-ShadowTiddlers can be overridden with an ordinary tiddler of the same name. If that tiddler is subsequently deleted then the original shadow tiddler is automatically restored.
+!! Overriding Shadow Tiddlers to modify plugins
+
+A ShadowTiddler can be overridden with an ordinary tiddler of the same name. This leaves the shadow tiddler intact but the plugin will use the overriding tiddler in its place, effectively allowing users to modify the behaviour of plugins.
+
+Users are cautioned against overriding shadow tiddlers because if the shadow tiddler is changed in a plugin update, the overriding tiddler may no longer perform as intended. To remedy this, the overriding tiddler may be modified or deleted. If the overriding tiddler is deleted, then the plugin falls back to using the original shadow tiddler.
 
 !! Overridden Shadow Tiddlers
 

@@ -4,16 +4,29 @@ description: Zapisuje wiki do nowego folderu
 <<.from-version "5.1.20">> Zapisuje obecną wiki do nowego folderu wliczając tiddlery, wtyczki i konfigurację:
 
 ```
---savewikifolder <wikifolderpath> [<filter>]
+--savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]
 ```
 
-* Docelowy folder musi być pusty lub nieistnieć
-* `filter` określa które tiddlery będą skopiowane, domyślnie to `[all[tiddlers]]`
+* Docelowy folder musi być pusty lub nie istnieć
+* Argument `filter` określa które tiddlery będą skopiowane, domyślnie to `[all[tiddlers]]`
 * Wtyczki z oficjalnej biblioteki wtyczek są zamieniane na odnośniki do tych wtyczek w pliku `tiddlywiki.info`
 * Własne wtyczki zostają wypakowane do osobnych folderów
+
+Wspierane argumenty:
+
+* ''filter'': wyrażenie filtra określające które tiddlery mają być uwzględnione w zapisanej wiki
+* ''explodePlugins'': domyślna wartość to `yes`:
+** `yes` rozdzieli wtyczki na osobne pliki tiddlerów i zapisze je do podfolderu z wtyczkami
+** `no` każda wtyczka będzie zapisana jako jeden zbiorczy plik w formacie JSON w folderze z tiddlerami
 
 Typowe zastosowanie to konwersja pliku TiddlyWiki w formie pliku HTML do formatu folderu:
 
 ```
-tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+tiddlywiki --load ./mojawiki.html --savewikifolder ./folderwiki
+```
+
+Zapisanie wtyczek jako zwykłych tiddlerów:
+
+```
+tiddlywiki --load ./mojawiki.html --savewikifolder ./folderwiki explodePlugins=no
 ```

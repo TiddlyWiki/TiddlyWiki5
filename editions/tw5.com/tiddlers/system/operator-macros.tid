@@ -1,17 +1,17 @@
 created: 20150117152607000
-modified: 20220227210111054
+modified: 20230617183916622
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/operator-macros
 
 \define .operator-examples(op,text:"Examples") <$link to="$op$ Operator (Examples)">$text$</$link>
 
-\define .operator-example-tryit-actions() <$action-setfield $tiddler=<<.state>> text="show" filter=<<__eg__>>/>
-\define .operator-example(n,eg,ie)
+\procedure .operator-example-tryit-actions() <$action-setfield $tiddler=<<.state>> text="show" filter=<<eg>>/>
+\procedure .operator-example(n,eg,ie)
 <div class="doc-example">
-<$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$n$]]" variable=".state">
+<$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix<n>]" variable=".state">
 <$reveal state=<<.state>> type="nomatch" text="show">
-	`$eg$`
-	<$macrocall $name=".if" cond="""$ie$""" then="""<dd>&rarr; $ie$</dd>"""/>
+	<code><$text text=<<eg>>/></code>
+	<$macrocall $name=".if" cond=<<ie>> then={{{[[<dd>&rarr; ]addsuffix<ie>addsuffix[</dd>]]}}}/>
 	<dl>
 	<dd><$button actions=<<.operator-example-tryit-actions>>>Try it</$button></dd>
 	</dl>
@@ -21,7 +21,7 @@ title: $:/editions/tw5.com/operator-macros
 	<dl>
 	<dd>
 	<$button set=<<.state>> setTo="">Hide</$button>
-	<$reveal stateTitle=<<.state>> stateField="filter" type="nomatch" text=<<__eg__>>>
+	<$reveal stateTitle=<<.state>> stateField="filter" type="nomatch" text=<<eg>>>
 		<$button actions=<<.operator-example-tryit-actions>>>Reset</$button>
 	</$reveal>
 	</dd>

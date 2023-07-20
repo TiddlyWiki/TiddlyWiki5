@@ -2,6 +2,7 @@ title: $:/core/ui/PageTemplate
 name: {{$:/language/PageTemplate/Name}}
 description: {{$:/language/PageTemplate/Description}}
 icon: $:/core/images/layout-button
+code-body: yes
 
 \whitespace trim
 \import [subfilter{$:/core/config/GlobalImportFilter}]

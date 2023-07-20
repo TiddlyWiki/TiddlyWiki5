@@ -45,16 +45,6 @@ describe("WikiText tests", function() {
 	it("should support attributes specified as macro invocations", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerFour")).toBe("<p><a class=\"tc-tiddlylink tc-tiddlylink-missing\" href=\"#This%20is%20my%20%27%27amazingly%27%27%20groovy%20macro%21\">This is a link</a></p>");
 	});
-	it("should identify wikiwords to automatically link", function() {
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No wikilinks here").indexOf("<a") !== -1).toBe(false);
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","One WikiLink here").indexOf("<a") !== -1).toBe(true);
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki-Link here").indexOf("<a") !== -1).toBe(false);
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki×Link here").indexOf("<a") !== -1).toBe(false);
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki÷Link here").indexOf("<a") !== -1).toBe(false);
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No xWikiLink here").indexOf("<a") !== -1).toBe(false);
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No -WikiLink here").indexOf("<a") !== -1).toBe(false);
-		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No _WikiLink here").indexOf("<a") !== -1).toBe(false);
-	});
 	it("handles style wikitext notation", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@.myclass\n!header\n@@")).toBe("<h1 class=\"myclass\">header</h1>");
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@.myclass\n<div>\n\nContent</div>\n@@")).toBe("<div class=\"myclass\"><p>Content</p></div>");

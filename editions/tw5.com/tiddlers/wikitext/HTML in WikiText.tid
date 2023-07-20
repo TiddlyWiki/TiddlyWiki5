@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20230115100934146
+modified: 20230615060119987
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -58,12 +58,13 @@ If you do not close any other tag then it will behave as if the missing closing 
 
 ! Attributes
 
-In an extension of conventional HTML syntax, attributes of elements/widgets can be specified in several different ways: 
+In an extension of conventional HTML syntax, attributes of elements and widgets can be specified in [[several different ways|Widget Attributes]]:
 
-* a literal string
-* a transclusion of a TextReference
-* a transclusion of a [[macro/variable|Macros]]
-* as the result of a [[Filter Expression]]
+* [[a literal string|Literal Attribute Values]]
+* [[a transclusion of a textReference|Transcluded Attribute Values]]
+* [[a transclusion of a macro/variable|Transcluded Attribute Values]]
+* [[as the result of a filter expression|Filtered Attribute Values]]
+* <<.from-version "5.3.0">> [[as the result of performing filter and variable substitutions on the given string|Substituted Attribute Values]]
 
 !! Style Attributes
 
@@ -85,64 +86,10 @@ The advantage of this syntax is that it simplifies assigning computed values to 
 <div style.color={{!!color}}>Hello</div>
 ```
 
-!! Literal Attribute Values
 
-Literal attribute values can use several different styles of quoting:
 
-* Single quotes (eg `attr='value'`)
-* Double quotes (eg `attr="value"`)
-* Tripe double quotes (eg `attr="""value"""`)
-* No quoting is necessary for values that do not contain spaces (eg `attr=value`)
 
-Literal attribute values can include line breaks. For example:
 
-```
-<div data-address="Mouse House,
-Mouse Lane,
-Rodentville,
-Ratland."/>
-```
 
-By using triple-double quotes you can specify attribute values that contain single double quotes. For example:
 
-```
-<div data-address="""Mouse House,
-"Mouse" Lane,
-Rodentville,
-Ratland."""/>
-```
 
-!! Transcluded Attribute Values
-
-Transcluded attribute values are indicated with double curly braces around a TextReference. For example:
-
-```
-attr={{tiddler}}
-attr={{!!field}}
-attr={{tiddler!!field}}
-```
-<<.warning "The value of the attribute value will be the exact text retrieved from the TextReference. Any wiki syntax in that text will be left as-is.">>
-
-!! Variable Attribute Values
-
-Variable attribute values are indicated with double angle brackets around a [[macro invocation|Macro Calls]]. For example:
-
-```
-<div title=<<MyMacro "Brian">>>
-...
-</div>
-```
-<<.warning "The text from the definition of the macro will be retrieved and text substitution will be performed (i.e. <<.param $param$>> and <<.param &#36;(...)&#36;>> syntax). The value of the attribute value will be the resulting text. Any wiki syntax in that text (including further macro calls and variable references) will be left as-is.">>
-
-!! Filtered Attribute Values
-
-Filtered attribute values are indicated with triple curly braces around a [[Filter Expression]]. The value will be the first item in the resulting list, or the empty string if the list is empty.
-
-<<.from-version "5.2.2">> To improve readability, newlines can be included anywhere that whitespace is allowed within filtered attributes.
-
-This example shows how to add a prefix to a value:
-
-```
-<$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
-```
-<<.warning "The value of the attribute will be the exact text from the first item in the resulting list. Any wiki syntax in that text will be left as-is.">>

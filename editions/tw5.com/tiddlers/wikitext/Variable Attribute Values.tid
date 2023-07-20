@@ -1,0 +1,14 @@
+created: 20230615045239825
+modified: 20230615045312961
+tags: [[Widget Attributes]] WikiText
+title: Variable Attribute Values
+type: text/vnd.tiddlywiki
+
+Variable attribute values are indicated with double angle brackets around a [[macro invocation|Macro Calls]]. For example:
+
+```
+<div title=<<MyMacro "Brian">>>
+...
+</div>
+```
+<<.warning "The text from the definition of the macro will be retrieved and text substitution will be performed (i.e. <<.param $param$>> and <<.param &#36;(...)&#36;>> syntax). The value of the attribute value will be the resulting text. Any wiki syntax in that text (including further macro calls and variable references) will be left as-is.">>

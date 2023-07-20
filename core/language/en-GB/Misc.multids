@@ -25,6 +25,8 @@ Encryption/RepeatPassword: Repeat password
 Encryption/PasswordNoMatch: Passwords do not match
 Encryption/SetPassword: Set password
 Error/Caption: Error
+Error/DeserializeOperator/MissingOperand: Filter Error: Missing operand for 'deserialize' operator
+Error/DeserializeOperator/UnknownDeserializer: Filter Error: Unknown deserializer provided as operand for the 'deserialize' operator
 Error/Filter: Filter error
 Error/FilterSyntax: Syntax error in filter expression
 Error/FilterRunPrefix: Filter Error: Unknown prefix for filter run

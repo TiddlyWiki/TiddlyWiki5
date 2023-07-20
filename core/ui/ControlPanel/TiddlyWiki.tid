@@ -1,6 +1,7 @@
 title: $:/core/ui/ControlPanel/Settings/TiddlyWiki
 tags: $:/tags/ControlPanel/SettingsTab
 caption: TiddlyWiki
+list-before:
 
 \define lingo-base() $:/language/ControlPanel/Settings/
 
