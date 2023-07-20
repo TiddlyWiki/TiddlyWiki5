@@ -1172,6 +1172,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	margin-right: .1em;
 }
 
+.tc-tiddler-title-icon svg {
+	width: 0.75em;
+	height: 0.75em;
+}
+
 .tc-system-title-prefix {
 	color: <<colour muted-foreground>>;
 }
