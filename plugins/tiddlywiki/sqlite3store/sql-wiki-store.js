@@ -371,6 +371,15 @@ $tw.Wiki = function(options) {
 		}
 	};
 
+	this.optimiseFilter = function(filterString) {
+		switch($tw.utils.trim(filterString)) {
+			case "[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]]":
+				return [this.sqlFunctions.sqlQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength()];
+				break;
+		}
+		return undefined;
+	};
+
 	if(this.addIndexersToWiki) {
 		this.addIndexersToWiki();
 	}

@@ -225,6 +225,8 @@ source: an iterator function for the source tiddlers, called source(iterator), w
 widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
+	var self = this;
+	// Use cached filter function if already present
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
 		this.filterCacheCount = 0;
@@ -232,21 +234,64 @@ exports.compileFilter = function(filterString) {
 	if(this.filterCache[filterString] !== undefined) {
 		return this.filterCache[filterString];
 	}
-	var filterParseTree;
-	try {
-		filterParseTree = this.parseFilter(filterString);
-	} catch(e) {
-		// We do not cache this result, so it adjusts along with localization changes
-		return function(source,widget) {
-			return [$tw.language.getString("Error/Filter") + ": " + e];
-		};
+	// Attempt to optimise the filter into a single query
+	var operationFunctions = this.optimiseFilter && this.optimiseFilter(filterString);
+	// Otherwise compile the filter step by step
+	if(!operationFunctions) {
+		// Parse filter
+		var filterParseTree;
+		try {
+			filterParseTree = this.parseFilter(filterString);
+		} catch(e) {
+			// We do not cache this result, so it adjusts along with localization changes
+			return function(source,widget) {
+				return [$tw.language.getString("Error/Filter") + ": " + e];
+			};
+		}
+		// Compile the filter operators into functions
+		operationFunctions = this.compileFilterOperations(filterParseTree);
 	}
+	// Return a function that applies the operations to a source iterator of tiddler titles
+	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+		if(!source) {
+			source = self.each;
+		} else if(typeof source === "object") { // Array or hashmap
+			source = self.makeTiddlerIterator(source);
+		}
+		if(!widget) {
+			widget = $tw.rootWidget;
+		}
+		var results = new $tw.utils.LinkedList();
+		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
+		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
+			$tw.utils.each(operationFunctions,function(operationFunction) {
+				operationFunction(results,source,widget);
+			});
+		} else {
+			results.push("/**-- Excessive filter recursion --**/");
+		}
+		self.filterRecursionCount = self.filterRecursionCount - 1;
+		return results.toArray();
+	});
+	if(this.filterCacheCount >= 2000) {
+		// To prevent memory leak, we maintain an upper limit for cache size.
+		// Reset if exceeded. This should give us 95% of the benefit
+		// that no cache limit would give us.
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	this.filterCache[filterString] = fnMeasured;
+	this.filterCacheCount++;
+	return fnMeasured;
+};
+
+exports.compileFilterOperations = function(filterParseTree) {
+	var self = this;
 	// Get the hashmap of filter operator functions
 	var filterOperators = this.getFilterOperators();
 	// Assemble array of functions, one for each operation
 	var operationFunctions = [];
 	// Step through the operations
-	var self = this;
 	$tw.utils.each(filterParseTree,function(operation) {
 		// Create a function for the chain of operators in the operation
 		var operationSubFunction = function(source,widget) {
@@ -334,38 +379,7 @@ exports.compileFilter = function(filterString) {
 			}
 		})());
 	});
-	// Return a function that applies the operations to a source iterator of tiddler titles
-	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
-		if(!source) {
-			source = self.each;
-		} else if(typeof source === "object") { // Array or hashmap
-			source = self.makeTiddlerIterator(source);
-		}
-		if(!widget) {
-			widget = $tw.rootWidget;
-		}
-		var results = new $tw.utils.LinkedList();
-		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
-		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
-			$tw.utils.each(operationFunctions,function(operationFunction) {
-				operationFunction(results,source,widget);
-			});
-		} else {
-			results.push("/**-- Excessive filter recursion --**/");
-		}
-		self.filterRecursionCount = self.filterRecursionCount - 1;
-		return results.toArray();
-	});
-	if(this.filterCacheCount >= 2000) {
-		// To prevent memory leak, we maintain an upper limit for cache size.
-		// Reset if exceeded. This should give us 95% of the benefit
-		// that no cache limit would give us.
-		this.filterCache = Object.create(null);
-		this.filterCacheCount = 0;
-	}
-	this.filterCache[filterString] = fnMeasured;
-	this.filterCacheCount++;
-	return fnMeasured;
+	return operationFunctions;
 };
 
 })();

@@ -319,6 +319,36 @@ $tw.SqlFunctions = function(options) {
 		return resultRows;
 	};
 	/*
+	An optimisation of the filter [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]]
+	*/
+	var statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength = self.db.prepare(`
+		SELECT MAX(LENGTH(name)) AS max_length
+		FROM (
+		SELECT title, shadow, JSON_EXTRACT(meta, '$.name') AS name
+		FROM tiddlers
+		WHERE title LIKE '$:/language/Docs/Types/%'
+		AND (shadow = 0 OR (shadow = 1 AND NOT EXISTS (
+			SELECT 1
+			FROM tiddlers AS t2
+			WHERE t2.title = tiddlers.title
+			AND t2.shadow = 0
+		)))
+		);
+	`);
+	this.sqlQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength = function() {
+		// We return a filter operation function that actually performs the query
+		return function(results,source,widget) {
+			var result = 0;
+			if(statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength.step()) {
+				var row = statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength.get({});
+				result = row.max_length;
+			}
+			statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength.reset();
+			results.clear();
+			results.push(result.toString());
+		};
+	};
+	/*
 	Debugging
 	*/
 	var statementLogTiddlerTable = self.db.prepare("select title, shadow, meta, text from tiddlers order by title,shadow;"),
