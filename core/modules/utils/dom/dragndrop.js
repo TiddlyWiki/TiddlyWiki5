@@ -107,8 +107,8 @@ exports.makeDraggable = function(options) {
 					dataTransfer.setData("text/plain",titleString);
 					dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				}
-				// Check if browser is Chrome-like and if it has a touch-input device
-				if(!($tw.browser.isChromeLike && $tw.browser.hasTouch)) {
+				// If browser is Chrome-like and has a touch-input device do NOT .setData
+				if(!($tw.utils.browser.isMobileChrome())) {
 					dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 				}
 				dataTransfer.setData("Text",titleString);
