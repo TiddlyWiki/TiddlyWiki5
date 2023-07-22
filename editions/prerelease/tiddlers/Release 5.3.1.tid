@@ -9,6 +9,9 @@ type: text/vnd.tiddlywiki
 
 ! Overview of v5.3.1
 
+! Reversions of v5.3.0 Changes
+
+* Reverted adding the `widget.destroy()` method because of performance concerns (see https://github.com/Jermolene/TiddlyWiki5/pull/7468)
 
 ! Plugin Improvements
 
