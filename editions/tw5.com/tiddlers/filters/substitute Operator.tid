@@ -18,9 +18,9 @@ The <<.op substitute>> operator replaces any placeholders in the input titles in
 # variables
 
 |placeholder syntax|description|h
-|`$n$`|Text substitution of a parameter provided to the operator, where n is the position of the parameter starting with 1 for the first parameter. Unmatched placeholders pass through unchanged.|
-|`$(varname)$`|Text substitution of a variable. Undefined variables are replaced with an empty string.|
-|`${ filter expression }$`|Text substitution with the first result of evaluating the filter expression.  |
+|`$n$`|Text substitution of a parameter provided to the operator, where n is the position of the parameter starting with 1 for the first parameter. Unmatched placeholders pass through unchanged. |
+|`$(varname)$`|Text substitution of a variable. Undefined variables are replaced with an empty string. |
+|`${ filter expression }$`|Text substitution of the first result of evaluating a filter expression. In other words, if the filter returns multiple titles only the first one will be used. |
 
 <<.tip """Placeholders that contain square bracket characters are not valid filter syntax when used directly in a filter expression. However they can be provided as input to the <$macrocall $name=".op" _="substitute"/> operator as text references or variables""">>
 
