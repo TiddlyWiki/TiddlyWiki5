@@ -48,6 +48,7 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7606">> attribute substitution to handle variables containing non-word characters
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7624">> the pragmas introduced in v5.3.0 so that they can be indented with whitespace
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7619">> size of tiddler icons
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7622">> drag and drop from Chrome-like browsers to Firefox
 
 ! Node.js Improvements
 
