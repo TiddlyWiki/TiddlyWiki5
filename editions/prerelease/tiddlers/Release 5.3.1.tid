@@ -43,8 +43,11 @@ Improvements to the following translations:
 
 ! Bug Fixes
 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7627">> table of contents indentation
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7595">> bindStatus and bindProgress parameters of [[WidgetMessage: tm-http-request]]
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7606">> attribute substitution to handle variables containing non-word characters
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7624">> the pragmas introduced in v5.3.0 so that they can be indented with whitespace
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7619">> size of tiddler icons
 
 ! Node.js Improvements
 
