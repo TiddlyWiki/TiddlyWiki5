@@ -47,6 +47,8 @@ TranscludeWidget.prototype.execute = function() {
 	this.sourceText = target.text;
 	this.parserType = target.type;
 	this.parseAsInline = target.parseAsInline;
+	// Set 'thisTiddler'
+	this.setVariable("thisTiddler",this.transcludeTitle);
 	// Process the transclusion according to the output type
 	switch(this.transcludeOutput || "text/html") {
 		case "text/html":
@@ -266,8 +268,6 @@ TranscludeWidget.prototype.getTransclusionTarget = function() {
 							defaultType: this.transcludeType
 						});
 	}
-	// Set 'thisTiddler'
-	this.setVariable("thisTiddler",this.transcludeTitle);
 	// Return the parse tree
 	if(parser) {
 		return {
