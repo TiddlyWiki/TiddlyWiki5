@@ -7,7 +7,7 @@ tags: $:/tags/Macro
 
 \define toc-caption()
 \whitespace trim
-<span class="tc-toc-caption">
+<span class="tc-toc-caption tc-tiny-gap-left">
 <$set name="tv-wikilinks" value="no">
   <$transclude field="caption">
     <$view field="title"/>
@@ -145,7 +145,7 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-      <$list filter="[all[current]tagging[]$sort$limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
+      <$list filter="[all[current]tagging[]$sort$limit[1]]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
         <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
             <$transclude tiddler=<<toc-closed-icon>> />
