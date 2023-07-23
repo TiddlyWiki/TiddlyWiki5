@@ -99,6 +99,9 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.imageClass) {
 		domNode.setAttribute("class",this.imageClass);
 	}
+	if(this.imageUsemap) {
+	    	domNode.setAttribute("usemap",this.imageUsemap);
+	}
 	if(this.imageWidth) {
 		domNode.setAttribute("width",this.imageWidth);
 	}
@@ -138,6 +141,7 @@ ImageWidget.prototype.execute = function() {
 	this.imageWidth = this.getAttribute("width");
 	this.imageHeight = this.getAttribute("height");
 	this.imageClass = this.getAttribute("class");
+    	this.imageUsemap = this.getAttribute("usemap");
 	this.imageTooltip = this.getAttribute("tooltip");
 	this.imageAlt = this.getAttribute("alt");
 	this.lazyLoading = this.getAttribute("loading");
@@ -148,7 +152,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ImageWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes["class"] || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
+	if(changedAttributes.source || changedAttributes.width || changedAttributes.height || changedAttributes["class"] || changedAttributes.usemap || changedAttributes.tooltip || changedTiddlers[this.imageSource]) {
 		this.refreshSelf();
 		return true;
 	} else {
