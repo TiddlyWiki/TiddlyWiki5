@@ -1,11 +1,13 @@
 caption: tag
 created: 20141206130540337
-modified: 20150221224326000
+modified: 20230725201240201
 tags: Macros [[Core Macros]]
 title: tag Macro
 type: text/vnd.tiddlywiki
 
 The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag. Clicking the tag pill opens a dropdown. This can be compared to the [[tag-pill Macro]] which also features other parameters.
+
+<<.tip """If a [[list widget|ListWidget]] generates multiple tag macros for the same tag, clicking on one of them will open dropdowns on all of them. The simplest way to prevent this is to add the `counter="transclusion"` attribute to the list widget. See the examples below for more details.""">>
 
 !! Parameters
 
