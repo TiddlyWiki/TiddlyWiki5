@@ -41,8 +41,15 @@ TranscludeWidget.prototype.execute = function() {
 	this.collectAttributes();
 	this.collectStringParameters();
 	this.collectSlotFillParameters();
+	// Determine whether we're being used in inline or block mode
+	var parseAsInline = !this.parseTreeNode.isBlock;
+	if(this.transcludeMode === "inline") {
+		parseAsInline = true;
+	} else if(this.transcludeMode === "block") {
+		parseAsInline = false;
+	}
 	// Get the target text and parse tree nodes that we are transcluding
-	var target = this.getTransclusionTarget(),
+	var target = this.getTransclusionTarget(parseAsInline),
 		parseTreeNodes;
 	this.sourceText = target.text;
 	this.parserType = target.type;
@@ -163,15 +170,8 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 /*
 Get transcluded parse tree nodes as an object {text:,type:,parseTreeNodes:,parseAsInline:}
 */
-TranscludeWidget.prototype.getTransclusionTarget = function() {
+TranscludeWidget.prototype.getTransclusionTarget = function(parseAsInline) {
 	var self = this;
-	// Determine whether we're being used in inline or block mode
-	var parseAsInline = !this.parseTreeNode.isBlock;
-	if(this.transcludeMode === "inline") {
-		parseAsInline = true;
-	} else if(this.transcludeMode === "block") {
-		parseAsInline = false;
-	}
 	var parser;
 	// Get the parse tree
 	if(this.hasAttribute("$variable")) {
