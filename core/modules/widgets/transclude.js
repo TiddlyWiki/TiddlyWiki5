@@ -269,22 +269,12 @@ TranscludeWidget.prototype.getTransclusionTarget = function(parseAsInline) {
 						});
 	}
 	// Return the parse tree
-	if(parser) {
-		return {
-			parseTreeNodes: parser.tree,
-			parseAsInline: parseAsInline,
-			text: parser.source,
-			type: parser.type
-		};
-	} else {
-		// If there's no parse tree then return the missing slot value
-		return {
-			parseTreeNodes: (this.slotFillParseTrees["ts-missing"] || []),
-			parseAsInline: parseAsInline,
-			text: null,
-			type: null
-		};
-	}
+	return {
+		parseTreeNodes: parser ? parser.tree : (this.slotFillParseTrees["ts-missing"] || []),
+		parseAsInline: parseAsInline,
+		text: parser && parser.source,
+		type: parser && parser.type
+	};
 };
 
 /*
