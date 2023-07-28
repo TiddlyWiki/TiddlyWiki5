@@ -1,7 +1,9 @@
+caption: Third-Caption
 created: 20150221194436000
 list: ThirdOne ThirdTwo ThirdThree
 modified: 20211114013601191
 tags: Contents [[Table-of-Contents Demonstrations]]
 title: Third
+type: text/vnd.tiddlywiki
 
 <<.toc-lorem>>
