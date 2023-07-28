@@ -926,7 +926,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				}
 			} else {
 				// line number should be included in e.stack for runtime errors
-				$tw.utils.error("Error executing boot module " + name + ": " + JSON.stringify(e) + "\n\n" + e.stack);
+				$tw.utils.error("Error executing boot module " + name + ": " + String(e) + "\n\n" + e.stack);
 			}
 		}
 	}
