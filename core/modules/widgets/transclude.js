@@ -237,7 +237,7 @@ TranscludeWidget.prototype.getTransclusionTarget = function(parseAsInline) {
 							}
 							$tw.utils.addAttributeToParseTreeNode(parser.tree[0],name,param["default"])
 						});
-					} else if(srcVariable && (srcVariable.isMacroDefinition || !srcVariable.isFunctionDefinition)) {
+					} else if(srcVariable && !srcVariable.isFunctionDefinition) {
 						// For macros and ordinary variables, wrap the parse tree in a vars widget assigning the parameters to variables named "__paramname__"
 						parser = {
 							tree: [
