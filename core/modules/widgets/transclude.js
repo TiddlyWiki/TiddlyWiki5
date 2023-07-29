@@ -69,12 +69,17 @@ TranscludeWidget.prototype.execute = function() {
 			parseTreeNodes = [{type: "text", text: this.sourceText}];
 			break;
 		default:
-			// text/plain is the plain text result of wikifying the text
-			target = this.getTransclusionTarget();
+			// "text/plain" is the plain text result of wikifying the text
+			target = this.getTransclusionTargetIncludingParseTreeNodes();
 			this.sourceText = target.text;
 			this.parserType = target.type;
-			var plainText = this.wiki.renderText("text/plain",this.parserType,this.sourceText,{parentWidget: this});
-			parseTreeNodes = [{type: "text", text: plainText}];
+			var widgetNode = this.wiki.makeWidget(target.parser,{
+				parentWidget: this,
+				document: $tw.fakeDocument
+			});
+			var container = $tw.fakeDocument.createElement("div");
+			widgetNode.render(container,null);
+			parseTreeNodes = [{type: "text", text: container.textContent}];
 			break;
 	}
 	// Set the legacy transclusion context variables only if we're not transcluding a variable
@@ -309,6 +314,7 @@ TranscludeWidget.prototype.getTransclusionTargetIncludingParseTreeNodes = functi
 	}
 	// Return the parse tree
 	return {
+		parser: parser,
 		parseTreeNodes: parser ? parser.tree : (this.slotFillParseTrees["ts-missing"] || []),
 		parseAsInline: parseAsInline,
 		text: parser && parser.source,
