@@ -50,12 +50,12 @@ TranscludeWidget.prototype.execute = function() {
 	}
 	// Set 'thisTiddler'
 	this.setVariable("thisTiddler",this.transcludeTitle);
-	var parseTreeNodes;
+	var parseTreeNodes, target;
 	// Process the transclusion according to the output type
 	switch(this.transcludeOutput || "text/html") {
 		case "text/html":
 			// Return the parse tree nodes of the target
-			var target = this.getTransclusionTarget(parseAsInline);
+			target = this.getTransclusionTargetIncludingParseTreeNodes(parseAsInline);
 			this.sourceText = target.text;
 			this.parserType = target.type;
 			this.parseAsInline = target.parseAsInline;
@@ -63,18 +63,16 @@ TranscludeWidget.prototype.execute = function() {
 			break;
 		case "text/raw":
 			// Just return the raw text
-			var target = this.getTransclusionTarget(parseAsInline);
+			target = this.getTransclusionTarget();
 			this.sourceText = target.text;
 			this.parserType = target.type;
-			this.parseAsInline = target.parseAsInline;
 			parseTreeNodes = [{type: "text", text: this.sourceText}];
 			break;
 		default:
 			// text/plain is the plain text result of wikifying the text
-			var target = this.getTransclusionTarget(parseAsInline);
+			target = this.getTransclusionTarget();
 			this.sourceText = target.text;
 			this.parserType = target.type;
-			this.parseAsInline = target.parseAsInline;
 			var plainText = this.wiki.renderText("text/plain",this.parserType,this.sourceText,{parentWidget: this});
 			parseTreeNodes = [{type: "text", text: plainText}];
 			break;
@@ -175,9 +173,43 @@ TranscludeWidget.prototype.collectSlotFillParameters = function() {
 };
 
 /*
+Get transcluded details as an object {text:,type:}
+*/
+TranscludeWidget.prototype.getTransclusionTarget = function() {
+	var self = this;
+	var text;
+	// Return the text and type of the target
+	if(this.hasAttribute("$variable")) {
+		if(this.transcludeVariable) {
+			// Transcluding a variable
+			var variableInfo = this.getVariableInfo(this.transcludeVariable,{params: this.getOrderedTransclusionParameters()});
+			text = variableInfo.text;
+			return {
+				text: variableInfo.text,
+				type: this.transcludeType
+			};
+		}
+	} else {
+		// Transcluding a text reference
+		var parserInfo = this.wiki.getTextReferenceParserInfo(
+						this.transcludeTitle,
+						this.transcludeField,
+						this.transcludeIndex,
+						{
+							subTiddler: this.transcludeSubTiddler,
+							defaultType: this.transcludeType
+						});
+		return {
+			text: parserInfo.text,
+			type: parserInfo.type
+		};
+	}
+};
+
+/*
 Get transcluded parse tree nodes as an object {text:,type:,parseTreeNodes:,parseAsInline:}
 */
-TranscludeWidget.prototype.getTransclusionTarget = function(parseAsInline) {
+TranscludeWidget.prototype.getTransclusionTargetIncludingParseTreeNodes = function(parseAsInline) {
 	var self = this;
 	var parser;
 	// Get the parse tree
