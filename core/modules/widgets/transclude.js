@@ -48,26 +48,33 @@ TranscludeWidget.prototype.execute = function() {
 	} else if(this.transcludeMode === "block") {
 		parseAsInline = false;
 	}
-	// Get the target text and parse tree nodes that we are transcluding
-	var target = this.getTransclusionTarget(parseAsInline),
-		parseTreeNodes;
-	this.sourceText = target.text;
-	this.parserType = target.type;
-	this.parseAsInline = target.parseAsInline;
 	// Set 'thisTiddler'
 	this.setVariable("thisTiddler",this.transcludeTitle);
+	var parseTreeNodes;
 	// Process the transclusion according to the output type
 	switch(this.transcludeOutput || "text/html") {
 		case "text/html":
-			// Return the parse tree nodes
+			// Return the parse tree nodes of the target
+			var target = this.getTransclusionTarget(parseAsInline);
+			this.sourceText = target.text;
+			this.parserType = target.type;
+			this.parseAsInline = target.parseAsInline;
 			parseTreeNodes = target.parseTreeNodes;
 			break;
 		case "text/raw":
 			// Just return the raw text
+			var target = this.getTransclusionTarget(parseAsInline);
+			this.sourceText = target.text;
+			this.parserType = target.type;
+			this.parseAsInline = target.parseAsInline;
 			parseTreeNodes = [{type: "text", text: this.sourceText}];
 			break;
 		default:
-			// text/plain
+			// text/plain is the plain text result of wikifying the text
+			var target = this.getTransclusionTarget(parseAsInline);
+			this.sourceText = target.text;
+			this.parserType = target.type;
+			this.parseAsInline = target.parseAsInline;
 			var plainText = this.wiki.renderText("text/plain",this.parserType,this.sourceText,{parentWidget: this});
 			parseTreeNodes = [{type: "text", text: plainText}];
 			break;
