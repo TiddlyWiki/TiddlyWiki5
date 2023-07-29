@@ -304,7 +304,7 @@ $tw.SqlFunctions = function(options) {
 	WHERE tt.tag_id = (SELECT tag_id FROM tags WHERE tag = $tag)
 	  AND (t.shadow = 0 OR NOT EXISTS (SELECT 1 FROM tiddlers WHERE title = t.title AND shadow = 0))
 	GROUP BY t.title, t.shadow 
-	ORDER BY t.title ASC, t.shadow ASC ${COLLATION_CLAUSE};
+	ORDER BY t.title ${COLLATION_CLAUSE} ASC, t.shadow ASC;
 	`);
 	this.sqlGetTiddlersWithTag = function(tag,method) {
 		statementGetTiddlersWithTag.bind({
