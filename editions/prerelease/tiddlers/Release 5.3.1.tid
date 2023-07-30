@@ -9,9 +9,10 @@ type: text/vnd.tiddlywiki
 
 ! Overview of v5.3.1
 
-! Reversions of v5.3.0 Changes
+! Bug Fixes and Reversions of v5.3.0 Changes
 
 * Reverted adding the `widget.destroy()` method because of performance concerns (see https://github.com/Jermolene/TiddlyWiki5/pull/7468)
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7647">> inefficiency when transcluding with the ''$output'' attribute set to `text/plain`
 
 ! Plugin Improvements
 
