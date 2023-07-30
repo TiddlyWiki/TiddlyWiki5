@@ -56,23 +56,17 @@ TranscludeWidget.prototype.execute = function() {
 		case "text/html":
 			// Return the parse tree nodes of the target
 			target = this.parseTransclusionTarget(parseAsInline);
-			this.sourceText = target.text;
-			this.parserType = target.type;
 			this.parseAsInline = target.parseAsInline;
 			parseTreeNodes = target.parseTreeNodes;
 			break;
 		case "text/raw":
 			// Just return the raw text
 			target = this.getTransclusionTarget();
-			this.sourceText = target.text;
-			this.parserType = target.type;
-			parseTreeNodes = [{type: "text", text: this.sourceText}];
+			parseTreeNodes = [{type: "text", text: target.text}];
 			break;
 		default:
 			// "text/plain" is the plain text result of wikifying the text
-			target = this.parseTransclusionTarget();
-			this.sourceText = target.text;
-			this.parserType = target.type;
+			target = this.parseTransclusionTarget(parseAsInline);
 			var widgetNode = this.wiki.makeWidget(target.parser,{
 				parentWidget: this,
 				document: $tw.fakeDocument
@@ -82,6 +76,8 @@ TranscludeWidget.prototype.execute = function() {
 			parseTreeNodes = [{type: "text", text: container.textContent}];
 			break;
 	}
+	this.sourceText = target.text;
+	this.parserType = target.type;
 	// Set the legacy transclusion context variables only if we're not transcluding a variable
 	if(!this.transcludeVariable) {
 		var recursionMarker = this.makeRecursionMarker();
