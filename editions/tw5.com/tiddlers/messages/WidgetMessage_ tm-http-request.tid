@@ -1,6 +1,6 @@
 caption: tm-http-request
 created: 20230429161453032
-modified: 20230717104212742
+modified: 20230723215344887
 tags: Messages
 title: WidgetMessage: tm-http-request
 type: text/vnd.tiddlywiki
@@ -11,7 +11,7 @@ It uses the following properties on the `event` object:
 
 |!Name |!Description |
 |param |Not used |
-|paramObject |Hashmap of parameters (see below) |
+|//{any other params}// |Any other parameters are made available as variables within the context of the widget message. See below. |
 
 The following parameters are used:
 

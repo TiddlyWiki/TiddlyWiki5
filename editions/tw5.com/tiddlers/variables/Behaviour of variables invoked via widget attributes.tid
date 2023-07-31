@@ -1,0 +1,11 @@
+created: 20230726143332803
+modified: 20230726150616232
+tags: [[Variable Usage]]
+title: Behaviour of variables invoked via widget attributes
+type: text/vnd.tiddlywiki
+
+|tc-first-col-min-width|k
+|!how declared|!behaviour|
+|\define|Textual substitution of parameters is performed on the body text. No further processing takes place. The result after textual substitution is used as the attribute's value|
+|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|Body text is retrieved as-is and used as the attribute's value.|
+|\function|When a function is invoked as `<div class=<<macro>>/>`, it is a synonym for `<div class={{{[function[macro]]}}}/>`. As with any filtered transclusion (i.e. triple curly braces), all results except the first are discarded. That first result is used as the attribute's value. Note that functions are recursively processed even when invoked in this form. In other words a filter expression in a function can invoke another function and the processing will continue|
