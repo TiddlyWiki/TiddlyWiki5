@@ -1,5 +1,5 @@
 created: 20220917112931273
-modified: 20230419103154329
+modified: 20230724184044642
 tags: Pragmas
 title: Pragma: \rules
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 The ''\rules'' [[pragma|Pragmas]] adjusts the set of parser rules used to parse the remaining text.
 
 ```
-\rules only|expect <rule-list>
+\rules only|except <rule-list>
 ```
 
 The list of available parser rules can be consulted in $:/ControlPanel -> Info -> Advanced -> Parsing.
