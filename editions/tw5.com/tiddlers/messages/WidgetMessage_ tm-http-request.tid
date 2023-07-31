@@ -50,4 +50,4 @@ Note that the state tiddler $:/state/http-requests contains a number representin
 !! Examples
 
 * [[Zotero's|https://www.zotero.org/]] API for retrieving reference items: [[WidgetMessage: tm-http-request Example - Zotero]]
-* [[Random Dog's|https://random.dog/]] API for retrieving random pictures of dogs showing how to retrieve binary data: [[WidgetMessage: tm-http-request Example - Random Dogs]]
+* [[Random Dog's|https://random.dog/]] API for retrieving random pictures of dogs showing how to retrieve binary data: [[WidgetMessage: tm-http-request Example - Random Dog]]
