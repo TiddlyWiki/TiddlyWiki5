@@ -1,8 +1,29 @@
 created: 20150221211317000
-modified: 20150221224519000
+modified: 20230725203751870
 tags: [[tag Macro]] [[Macro Examples]]
 title: tag Macro (Examples)
 type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1" eg="""<<tag>>"""/>
 <$macrocall $name=".example" n="2" eg="""<<tag Concepts>>"""/>
+
+If a [[list widget|ListWidget]] generates multiple tag macros for the same tag, clicking any of them opens dropdowns on all of them, as in the example below. This is usually unwanted.
+<$macrocall $name=".example" n="3" eg="""<$list filter="[tag[HelloThere]]">
+
+* <$link/> is tagged with: <$list filter="[<currentTiddler>tags[]]"> <<tag>> </$list>
+
+</$list>"""/>
+
+Adding the `counter="transclusion"` attribute to the list widget that generates multiple identical tag macros causes each of them to be identified as a unique one. Clicking on any of them opens only a single dropdown.
+<$macrocall $name=".example" n="4" eg="""<$list filter="[tag[HelloThere]]" counter="transclusion">
+
+* <$link/> is tagged with: <$list filter="[<currentTiddler>tags[]]"> <<tag>> </$list>
+
+</$list>"""/>
+
+A slightly more performant option is to use the `variable="transclusion"` attribute in the list widget. In this case, the variable `<<transclusion>>` has to be used inside the list widget instead of the `<<currentTiddler>>` .
+<$macrocall $name=".example" n="5" eg="""<$list filter="[tag[HelloThere]]" variable="transclusion">
+
+* <$link to=<<transclusion>>/> is tagged with: <$list filter="[<transclusion>tags[]]"> <<tag>> </$list>
+
+</$list>"""/>
