@@ -1,5 +1,5 @@
 created: 20230615045526689
-modified: 20230615060059476
+modified: 20230731210638956
 tags: WikiText
 title: Widget Attributes
 type: text/vnd.tiddlywiki
@@ -20,8 +20,7 @@ Attributes of [[HTML elements|HTML in WikiText]] and widgets can be specified in
 |substituted|single or triple backticks around the text to be processed for substitutions|
 
 
-<<translink "Literal Attribute Values">>
-<<translink "Transcluded Attribute Values">>
-<<translink "Variable Attribute Values">>
-<<translink "Filtered Attribute Values">>
-<<translink "Substituted Attribute Values">>
+<$list filter="[[Literal Attribute Values]] [[Transcluded Attribute Values]] [[Variable Attribute Values]] [[Filtered Attribute Values]] [[Substituted Attribute Values]]">
+<$link><h1><$text text=<<currentTiddler>>/></h1></$link>
+<$transclude mode="block"/>
+</$list>
