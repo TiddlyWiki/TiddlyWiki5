@@ -1,5 +1,5 @@
 created: 20230615045239825
-modified: 20230615045312961
+modified: 20230726151053593
 tags: [[Widget Attributes]] WikiText
 title: Variable Attribute Values
 type: text/vnd.tiddlywiki
@@ -11,4 +11,7 @@ Variable attribute values are indicated with double angle brackets around a [[ma
 ...
 </div>
 ```
-<<.warning "The text from the definition of the macro will be retrieved and text substitution will be performed (i.e. <<.param $param$>> and <<.param &#36;(...)&#36;>> syntax). The value of the attribute value will be the resulting text. Any wiki syntax in that text (including further macro calls and variable references) will be left as-is.">>
+
+The behaviour of variables invoked via widget attributes is not the same as when they are [[invoked via normal wikitext|Behaviour of variables invoked via normal wikitext]]. In addition, the behaviour depends on how the variable is declared:
+
+{{Behaviour of variables invoked via widget attributes}}
