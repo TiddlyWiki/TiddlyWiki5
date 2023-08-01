@@ -82,7 +82,7 @@ Export all imported random dogs: <$macrocall $name="exportButton" exportFilter="
 <$link>
 <$text text=<<currentTiddler>>/>
 </$link>
-<div style="width:300px;height:300px;">
+<div style="width:300px;">
 <$transclude $tiddler=<<currentTiddler>>/>
 </div>
 </li>
