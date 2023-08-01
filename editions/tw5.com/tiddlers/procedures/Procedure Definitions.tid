@@ -13,7 +13,7 @@ This tiddler describes the different ways in which [[Procedures|Procedures]] can
 Procedures are created using the [[Pragma: \procedure]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
 
 ```
-\define my-procedure(param)
+\procedure my-procedure(param)
 This is the procedure text (param=<<param>>)
 \end
 ```
