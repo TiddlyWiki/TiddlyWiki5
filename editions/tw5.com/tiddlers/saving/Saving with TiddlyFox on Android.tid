@@ -4,6 +4,8 @@ tags: [[Saving with TiddlyFox]]
 title: Saving with TiddlyFox on Android
 type: text/vnd.tiddlywiki
 
+<<.deprecated-since "FireFox 57" "Saving">>
+
 (Alternatively, see the [[video tutorial|TiddlyWiki on Firefox for Android Video]])
 
 # Ensure you have the latest version of [[Firefox for Android|http://getfirefox.com]]
