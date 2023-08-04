@@ -1,0 +1,64 @@
+caption: button
+created: 20131024141900000
+modified: 20220810192251345
+tags: Widgets TriggeringWidgets
+title: ButtonWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked:
+
+* Executing any ActionWidgets passed in the `actions` attribute
+* Executing any ActionWidgets that are immediate children of the button widget
+* Execute any integrated actions:
+** Navigate to a specified tiddler
+** Dispatch a user defined [[widget message|Messages]]
+** Trigger a user defined [[popup|PopupMechanism]]
+** Assign new text to a specified tiddler
+
+The integrated actions are provided as a shortcut for invoking common actions. The same functionality is available via ActionWidgets, with the exception of the support for highlighting selected popups.
+
+! Content and Attributes
+
+The content of the `<$button>` widget is displayed within the button.
+
+|!Attribute |!Description |
+|actions |A string containing ActionWidgets to be triggered when the key combination is detected. <<.from-version "5.1.23">> the <<.def "modifier">> variable lists the modifier keys that are pressed when the action is invoked. The possible modifiers are ''ctrl'', ''ctrl-alt'', ''ctrl-shift'', ''alt'', ''alt-shift'', ''shift'' and ''ctrl-alt-shift'' |
+|to |The title of the tiddler to navigate to |
+|message |The name of the [[widget message|Messages]] to send when the button is clicked |
+|param |The optional parameter to the message |
+|set |A TextReference to which a new value will be assigned |
+|setTitle |A title to which a new value will be assigned, ''without'' TextReference. Gets preferred over <<.attr set>> |
+|setField |A ''field name'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present. Defaults to the ''text'' field |
+|setIndex |An ''index'' to which the new value will be assigned, if the attribute <<.attr setTitle>> is present |
+|setTo |The new value to assign to the TextReference identified in the `set` attribute or the text field / the field specified through <<.attr setField>> / the index specified through <<.attr setIndex>> of the title given through <<.attr setTitle>> |
+|selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in <<.attr set>> already has the value specified in <<.attr setTo>>  |
+|default |Default value if <<.attr set>> tiddler is missing for testing against <<.attr setTo>> to determine <<.attr selectedClass>> |
+|popup |Title of a state tiddler for a popup that is toggled when the button is clicked. See PopupMechanism for details |
+|popupTitle |Title of a state tiddler for a popup that is toggled when the button is clicked. In difference to the <<.attr popup>> attribute, ''no'' TextReference is used. See PopupMechanism for details |
+|popupAbsCoords |<<.from-version "5.2.4">> If set to ''yes'' writes absolute coordinates to the tiddler referenced by the <<.attr popup>>. If set to ''no'' (the default) uses relative coordinates. See [[Coordinate Systems]] for details |
+|aria-label |Optional [[Accessibility]] label |
+|tooltip |Optional tooltip |
+|class |An optional CSS class name to be assigned to the HTML element|
+|style |An optional CSS style attribute to be assigned to the HTML element |
+|tag |An optional html tag to use instead of the default "button" |
+|dragTiddler |An optional tiddler title making the button draggable and identifying the payload tiddler. See DraggableWidget for details |
+|dragFilter |An optional filter making the button draggable and identifying the list of payload tiddlers. See DraggableWidget for details |
+|tabindex |Sets the `tabindex` attribute of the button to the given value |
+|disabled|<<.from-version "5.1.23">> Optional, disables the button if set to "yes". Defaults to "no"|
+
+''Note:'' In almost all other cases where a TextReference is used as a widget attribute, it will be placed between curly brackets, to [[transclude|Transclusion in WikiText]] the value currently stored there. However, when we use a TextReference as the value of a button widget's <<.attr set>> attribute, we are referencing //the storage location itself//, rather than the value stored there, so we do ''not'' use curly brackets there. //Example:// we could code a button widget that sets the `caption` field of TiddlerA to be the same as that of TiddlerB as:
+
+<<.tip """<$macrocall $name=".from-version" version="5.1.18"/> <$macrocall $name=".attr" _="setTitle"/>, <$macrocall $name=".attr" _="setField"/> and <$macrocall $name=".attr" _="setIndex"/> attributes allow specifying Tiddler states ''directly'', without interpreting them as [[TextReferences|TextReference]].
+This is useful for edge-cases where titles may contain characters that are used to denote Tiddler fields or indices (`!!`, `##`)""">>
+
+```
+<$button set="TiddlerA!!caption" setTo={{TiddlerB!!caption}} >
+
+Press me!
+
+</$button>
+```
+
+''Tip:'' Set ''class'' to `tc-btn-invisible tc-tiddlylink` to have a button look like an internal link.
