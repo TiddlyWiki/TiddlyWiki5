@@ -1,6 +1,6 @@
 caption: action-listops
 created: 20141025120850184
-modified: 20230301183438774
+modified: 20230805103548113
 myfield: 
 tags: ActionWidgets Widgets
 title: ActionListopsWidget
@@ -21,6 +21,28 @@ The ''action-listops'' widget is invisible. Any content within it is ignored.
 |$filter |An optional filter expression, the output of which will be saved to the field/index being manipulated |
 |$subfilter |An optional subfilter expression, which takes the list being manipulated as input, and saves the modified list back to the field/index being manipulated |
 |$tags |An optional subfilter expression, which takes the <<.field tags>> field of the target tiddler as input, and saves the modified list of tags back to the <<.field tags>> field |
+
+!! Note on subfilter expressions
+
+If the manipulation depends on the current contents of the list, e.g. when using the <<.olink toggle>> operator to toggle the presence of an element, the [[Filter Run]] would be prefixed with the `+` / `:and` [[filter run prefix|Filter Expression]] so that it properly receives the list as input. 
+
+```
+<$action-listops $subfilter="+[toggle[List Item]]"/>
+```
+
+The above widget will toggle the presence of the element <<.value "List Item">> in the field <<.field list>> of the current tiddler, removing or adding the element as necessary.
+
+Similarly, if an element is to always be removed when it is present, the `-` / `:except` [[filter run prefix|Filter Expression]] can be used. Both of the following yield the same result:
+
+```
+<$action-listops $subfilter="-[[List Item]]"/>
+<$action-listops $subfilter="+[remove[List Item]]"/>
+```
+
+Without any prefixes, the filter run output is simply [[dominantly appended|Dominant Append]] to the list.
+
+See also the [[Examples|ActionListopsWidget (Examples)]].
+
 
 !! Using $filter or $subfilter
 
