@@ -51,7 +51,7 @@
 		"build-readme": [
 			"--rendertiddler","ReadMe for build.jermolene.github.io","readme.md","text/html"],
 		"favicon": [
-			"--savetiddler","$:/favicon.ico","favicon.ico"],
+			"--savetiddler","$:/favicon.ico","favicon.png"],
 		"static": [
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
