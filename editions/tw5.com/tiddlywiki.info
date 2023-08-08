@@ -37,8 +37,8 @@
 			"--render", "$:/core/save/all", "encrypted.html", "text/plain",
 			"--clearpassword"],
 		"favicon": [
-			"--savetiddler","$:/favicon.ico","favicon.png",
-			"--savetiddler","$:/green_favicon.ico","static/favicon.png],
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"],
 		"readmes": [
 			"--render","ReadMe","readme.md","text/html",
 			"--render","ReadMeBinFolder","bin/readme.md","text/html",
