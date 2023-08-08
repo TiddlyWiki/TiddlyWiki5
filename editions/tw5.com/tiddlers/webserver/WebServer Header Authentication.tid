@@ -8,7 +8,10 @@ Header authentication is a web integration technique enabling external entities 
 
 Header authentication is activated if is configured via the [[authenticated-user-header|WebServer Parameter: authenticated-user-header]]
 
-Here is an [example guide](https://www.pomerium.com/docs/guides/tiddlywiki) of how to add authentication and authorization to a TiddlyWiki instance with Pomerium, an open-source proxy.
+
+!! 3rd Party Projects That Support This Mechanism
+
+Pomerium, and open-source proxy, has [[a guide|https://www.pomerium.com/docs/guides/tiddlywiki]] for adding authentication and authorization to a TiddlyWiki instance.
 
 !! Usage in SSO
 
