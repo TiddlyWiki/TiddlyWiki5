@@ -50,12 +50,11 @@ TagIndexer.prototype.update = function(updateDescriptor) {
 		b=((newTid && newTid.fields && newTid.fields.tags === undefined) && (oldTid && oldTid.fields && oldTid.fields.tags === undefined));
 
 	if( a || b ) {
-			return;
-		} else {
-			$tw.utils.each(this.subIndexers,function(subIndexer) {
-				subIndexer.update(updateDescriptor);
-			});
-		}
+		return;
+	}
+	$tw.utils.each(this.subIndexers,function(subIndexer) {
+		subIndexer.update(updateDescriptor);
+	});
 };
 
 function TagSubIndexer(indexer,iteratorMethod) {
