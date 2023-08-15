@@ -215,7 +215,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		if($tw.utils.isArray(fieldContents)) {
 			// Make a copy so we can modify it without changing original that's refrenced elsewhere
 			listContents = fieldContents.slice(0);
-		} else if(fieldContents == undefined) {
+		} else if(fieldContents === undefined) {
 			listContents = [];
 		} else if(typeof fieldContents === "string") {
 			listContents = $tw.utils.parseStringArray(fieldContents);
