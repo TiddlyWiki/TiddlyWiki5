@@ -1,6 +1,7 @@
 caption: encodebase64
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input with base 64 encoding applied
+op-suffix: optional: `text` to treat input as text, `urlsafe` for URL-safe output
 op-parameter: 
 op-parameter-name: 
 op-purpose: apply base 64 encoding to a string
@@ -12,5 +13,9 @@ from-version: 5.2.6
 See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. TiddlyWiki uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
 
 The input strings are interpreted as binary data. The output strings are base64 encoded.
+
+The optional `text` suffix, if present, causes the input string to be interpreted as text instead of binary data. This means that an extra UTF-8 encoding step will be added before the base64 output is produced. (If you don't know what that means, just remember that the `text` suffix should be used if you're encoding text, and omitted if you're encoding an image, audio file, or other kind of binary data).
+
+The optional `urlsafe` suffix, if present, will use the alternate "URL-safe" base64 encoding, where `-` and `_` are used instead of `+` and `/` respectively, allowing the result to be used in URL query parameters or filenames.
 
 <<.operator-examples "encodebase64">>
