@@ -18,8 +18,8 @@ Export our filter functions
 
 exports.decodebase64 = function(source,operator,options) {
 	var results = [];
-	var binary = operator.suffixes.indexOf("text") === -1;
-	var urlsafe = operator.suffixes.indexOf("urlsafe") !== -1;
+	var binary = !operator.suffixes || operator.suffixes.indexOf("text") === -1;
+	var urlsafe = operator.suffixes && operator.suffixes.indexOf("urlsafe") !== -1;
 	source(function(tiddler,title) {
 		results.push($tw.utils.base64Decode(title,binary,urlsafe));
 	});
@@ -28,8 +28,8 @@ exports.decodebase64 = function(source,operator,options) {
 
 exports.encodebase64 = function(source,operator,options) {
 	var results = [];
-	var binary = operator.suffixes.indexOf("text") === -1;
-	var urlsafe = operator.suffixes.indexOf("urlsafe") !== -1;
+	var binary = !operator.suffixes || operator.suffixes.indexOf("text") === -1;
+	var urlsafe = operator.suffixes && operator.suffixes.indexOf("urlsafe") !== -1;
 	source(function(tiddler,title) {
 		results.push($tw.utils.base64Encode(title,binary,urlsafe));
 	});
