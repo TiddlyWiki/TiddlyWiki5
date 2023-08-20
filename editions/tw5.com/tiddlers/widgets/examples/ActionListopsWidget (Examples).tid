@@ -1,8 +1,9 @@
 created: 20230301174431218
 list: efg hlm pqr
-modified: 20230301174431218
+modified: 20230805103601224
 myfield: 
 revision: 0
+tags: ActionListopsWidget
 title: ActionListopsWidget (Examples)
 type: text/vnd.tiddlywiki
 
@@ -46,6 +47,16 @@ Unmangle List
 <$list filter="[list[!!myfield]]">
 
 </$list>"""/>
+
+---
+The following example toggles the tag <<.value Examples>> for the current tiddler.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$button>
+<$action-listops $tags="+[toggle[Examples]]"/>
+Toggle 'Examples' tag
+</$button>
+"""/>
 
 ---
 In this example we shall append a few tags to the 'tags' field of this tiddler (the default). We shall then remove some of the appended tags. 
