@@ -1,11 +1,12 @@
 caption: 5.3.1
-created: 20230731122156493
-modified: 20230731122156493
+created: 20230820112855583
+modified: 20230820112855583
+released: 20230820112855583
 tags: ReleaseNotes
 title: Release 5.3.1
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.0...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.0...v5.3.1]]//
 
 ! Overview of v5.3.1
 
@@ -59,8 +60,8 @@ Improvements to the following translations:
 <<.contributors """
 AnthonyMuscio
 btheado
-btheado
 catter-fly
+cmo-pomerium
 CrossEye
 flibbles
 hffqyd
@@ -75,4 +76,5 @@ saqimtiaz
 stevesunypoly
 TiddlyTweeter
 twMat
+yaisog
 """>>
