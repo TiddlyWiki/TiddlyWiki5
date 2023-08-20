@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 
 ! Overview of v5.3.1
 
-This release comes only a month after [[v5.3.0|Release 5.3.0]]. The motivation for the release is to swiftly fix some issues that have emerged with v5.3.0. There are also some other improvements included in this release, notably the ability to access binary resources over HTTP -- the [[demo|WidgetMessage: tm-http-request Example - Random Dog]] downloads a random image or video of a dog.
+This release comes only a few weeks after [[v5.3.0|Release 5.3.0]]. The motivation for the release is to swiftly fix some issues that have emerged with v5.3.0. There are also some other improvements included in this release, notably the ability to access binary resources over HTTP -- the [[demo|WidgetMessage: tm-http-request Example - Random Dog]] downloads a random image or video of a dog.
 
 ! Bug Fixes and Reversions of v5.3.0 Changes
 
