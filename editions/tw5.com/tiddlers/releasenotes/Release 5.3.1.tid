@@ -8,9 +8,15 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.0...v5.3.1]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[vilc|https://talk.tiddlywiki.org/u/vilc]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-0/7406/10]]).
+"""
+	url:"https://github.com/Jermolene/TiddlyWiki5/blob/4124bbdfb3e2445d45488006dfff1925d067ab0f/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png?raw=true"
+>>
+
 ! Overview of v5.3.1
 
-This release comes only a month after [[v5.3.0|Release 5.3.0]]. The motivation for the release is to swiftly fix some issues that have emerged with v5.3.0. There are also some other improvements included in this release, notably the ability to access binary resources over HTTP -- the [[demo|WidgetMessage: tm-http-request Example - Random Dog]] downloads a random image or video of a dog.
+This release comes only a few weeks after [[v5.3.0|Release 5.3.0]]. The motivation for the release is to swiftly fix some issues that have emerged with v5.3.0. There are also some other improvements included in this release, notably the ability to access binary resources over HTTP -- the [[demo|WidgetMessage: tm-http-request Example - Random Dog]] downloads a random image or video of a dog.
 
 ! Bug Fixes and Reversions of v5.3.0 Changes
 
