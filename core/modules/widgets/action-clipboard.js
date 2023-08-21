@@ -57,7 +57,7 @@ Invoke the action associated with this widget
 */
 ClipboardWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
-    const data = {
+    const tiddlerData = {
         text: "I love TiddlyWiki",
         title: "Copy Paste Test",
         tags: "HelloThere",
