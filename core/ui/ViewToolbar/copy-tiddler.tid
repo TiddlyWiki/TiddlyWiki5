@@ -1,4 +1,4 @@
-title: $:/core/ui/Buttons/new-here
+title: $:/core/ui/Buttons/copy-tiddler
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/copy-clipboard}} {{$:/language/Buttons/CopyTiddler/Caption}}
 description: {{$:/language/Buttons/CopyTiddler/Hint}}
