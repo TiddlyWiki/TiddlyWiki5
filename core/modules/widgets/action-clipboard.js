@@ -64,8 +64,8 @@ ClipboardWidget.prototype.invokeAction = function(triggeringWidget,event) {
         apple: "Here is a test field"
     };
 
-    e.clipboardData.setData("URL", "data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(data)));
-    e.preventDefault();
+    event.clipboardData.setData("URL", "data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(data)));
+    event.preventDefault();
 
     return true; // Action was invoked
 };
