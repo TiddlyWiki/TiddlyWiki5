@@ -6,7 +6,8 @@ description: {{$:/language/Buttons/CopyTiddler/Hint}}
 \define copyTiddlerButton()
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/CopyTiddler/Hint}} aria-label={{$:/language/Buttons/CopyTiddler/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-clipboard $tiddler=<<currentTiddler>>/>
+<$action-clipboard $tiddler=<<currentTiddler>> $text="hello"/>
+<$action-clipboard $text="hello"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/copy-clipboard}}
 </$list>

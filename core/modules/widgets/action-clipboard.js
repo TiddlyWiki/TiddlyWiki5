@@ -35,9 +35,9 @@ ClipboardWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ClipboardWidget.prototype.execute = function() {
-    this.actionTiddler = this.getAttribute("$tiddler");
-    this.actionTiddler = this.getAttribute("$text");
-    this.actionTiddler = this.getAttribute("$format");
+    this.actionTiddler = this.getAttribute("$tiddler", null);
+    this.copyText = this.getAttribute("$text", null);
+    this.tiddlerFormat = this.getAttribute("$format", null);
 };
 
 /*
@@ -45,10 +45,10 @@ Refresh the widget by ensuring our attributes are up to date
 */
 ClipboardWidget.prototype.refresh = function(changedTiddlers) {
     var changedAttributes = this.computeAttributes();
-    if(changedAttributes["$tiddler"] || changedAttributes["$text"] || changedAttributes["$format"]) {
-        this.refreshSelf();
-        return true;
-    }
+	if(Object.keys(changedAttributes).length) {
+		this.refreshSelf();
+		return true;
+	}
     return this.refreshChildren(changedTiddlers);
 };
 
@@ -57,12 +57,12 @@ Invoke the action associated with this widget
 */
 ClipboardWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
-    const tiddlerData = {
-        text: "I love TiddlyWiki",
-        title: "Copy Paste Test",
-        tags: "HelloThere",
-        apple: "Here is a test field"
-    };
+    if(this.actionTiddler !== null) {
+        var tiddler = this.wiki.getTiddler(self.actionTiddler);
+        console.log(self.actionTiddler)
+    }
+
+    console.log(self.copyText)
 
     function listener(e) {
         e.clipboardData.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(tiddlerData)));
@@ -71,7 +71,7 @@ ClipboardWidget.prototype.invokeAction = function(triggeringWidget,event) {
     }
 
     document.addEventListener("copy",listener);
-    document.execCommand("copy");
+    //document.execCommand("copy");
     document.removeEventListener("copy",listener);
 
     return true; // Action was invoked
