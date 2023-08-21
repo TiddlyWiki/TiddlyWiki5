@@ -13,7 +13,7 @@ Widget base class
 "use strict";
 
 /* Maximum permitted depth of the widget tree for recursion detection */
-var MAX_WIDGET_TREE_DEPTH = 500;
+var MAX_WIDGET_TREE_DEPTH = 1000;
 
 /*
 Create a widget object for a parse tree node
@@ -719,45 +719,22 @@ Widget.prototype.findFirstDomNode = function() {
 };
 
 /*
-Entry into destroy procedure
-*/
-Widget.prototype.destroyChildren = function() {
-	$tw.utils.each(this.children,function(childWidget) {
-		childWidget.destroy();
-	});
-};
-/*
-Legacy entry into destroy procedure
+Remove any DOM nodes created by this widget or its children
 */
 Widget.prototype.removeChildDomNodes = function() {
-	this.destroy();
-};
-/*
-Default destroy
-*/
-Widget.prototype.destroy = function() {
-	// call children to remove their resources
-	this.destroyChildren();
-	// remove our resources
-	this.children = [];
-	this.removeLocalDomNodes();	
-};
-
-/*
-Remove any DOM nodes created by this widget 
-*/
-Widget.prototype.removeLocalDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit.
+	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
-			if(domNode.parentNode) {
-				domNode.parentNode.removeChild(domNode);
-			}
+			domNode.parentNode.removeChild(domNode);
 		});
 		this.domNodes = [];
+	} else {
+		// Otherwise, ask the child widgets to delete their DOM nodes
+		$tw.utils.each(this.children,function(childWidget) {
+			childWidget.removeChildDomNodes();
+		});
 	}
 };
-
 
 /*
 Invoke the action widgets that are descendents of the current widget.
