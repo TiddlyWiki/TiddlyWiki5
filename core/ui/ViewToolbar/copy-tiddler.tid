@@ -3,15 +3,10 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/copy-clipboard}} {{$:/language/Buttons/CopyTiddler/Caption}}
 description: {{$:/language/Buttons/CopyTiddler/Hint}}
 
-\whitespace trim
-\define copyTiddlerAction()
-\whitespace trim
-<$action-clipboard $tiddler=<<currentTiddler>>/>
-\end
-
 \define copyTiddlerButton()
 \whitespace trim
-<$button actions=<<CopyTiddlerActions>> tooltip={{$:/language/Buttons/CopyTiddler/Hint}} aria-label={{$:/language/Buttons/CopyTiddler/Caption}} class=<<tv-config-toolbar-class>>>
+<$button tooltip={{$:/language/Buttons/CopyTiddler/Hint}} aria-label={{$:/language/Buttons/CopyTiddler/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-clipboard $tiddler=<<currentTiddler>>/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/copy-clipboard}}
 </$list>

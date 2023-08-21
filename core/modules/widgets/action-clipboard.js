@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/widgets/action-deletetiddler.js
+title: $:/core/modules/widgets/action-clipboard.js
 type: application/javascript
 module-type: widget
 
-Action widget to delete a tiddler.
+Action widget to copy things to clipboard.
 
 \*/
 (function(){
@@ -66,6 +66,7 @@ ClipboardWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
     function listener(e) {
         e.clipboardData.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(tiddlerData)));
+        e.clipboardData.setData("text",JSON.stringify(tiddlerData));
         e.preventDefault();
     }
 
