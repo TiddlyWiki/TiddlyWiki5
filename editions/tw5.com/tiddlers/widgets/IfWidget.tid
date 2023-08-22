@@ -1,0 +1,80 @@
+caption: if
+created: 20230822153600000
+modified: 20230822170315584
+number: 2
+tags: Widgets
+title: IfWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The if widget determines its content depending upon the result of one or more [[filters|Filters]]. It must have a child widget named `<$then>`, and can optionally have child widgets named `<$elseif>` or `<$else>`.
+
+The content of the `<$if>` widget is determined by evaluating its filter, and the filters in any `<$elseif>` widgets it contains. The first filter to return a result (i.e., not an empty list) will determine the content of the `<$if>` widget, as follows.
+
+* If the filter returns a non-empty result, the content of the `<$then>` widget will be displayed.
+* Otherwise, the filters in any `<$elseif>` widgets will be evaluated. The first `<$elseif>` whose filter returns a non-empty result will have its contents displayed.
+* If the `<$if>` widget still does not have any contents (all filters returned empty results), the content of the `<$else>` widget, if any, will be displayed.
+* If all filters returned empty results and there is no `<$else>` widget, the `<$if>` widget will be empty.
+
+<<.tip """The `<$if>` widget is ''short-circuiting'', so once the first filter returns a non-empty result, the rest of the elseif filters will ''not'' be evaluated.""">>
+
+! Content and Attributes
+
+The `<$if>` widget and its `>$elseif>` children can have the following attributes:
+
+|!Attribute |!Description |
+|filter |A filter to be evaluated |
+
+! Examples
+
+!! Simple true/false condition
+
+Here's a simple example of showing and hiding content with buttons:
+
+<<wikitext-example-without-html '\define num() 2
+
+<$if filter="[<num>compare:number:gt[3]]">
+<$then><<num>> is greater than 3</$then>
+<$else><<num>> is less than or equal to 3</$else>
+</$if>'>>
+
+Note that without an `<$else>` block, the `<$if>` widget will be empty if its condition is false:
+
+<<wikitext-example-without-html '\define num() 2
+
+<$if filter="[<num>compare:number:gt[3]]">
+<$then><<num>> is greater than 3</$then>
+</$if>'>>
+
+!! Chain of conditions: first one wins
+
+If multiple `<$elseif>` conditions are present, the first one whose condition is true will be used. Later `<$elseif>` conditions will not be evaluated, even if they would have also been true.
+
+<<wikitext-example-without-html '\define num() 2
+
+<$if filter="[<num>compare:number:gt[3]]">
+<$then><<num>> is greater than 3</$then>
+<$elseif filter="[<num>compare:number:gt[2]]"><<num>> is greater than 2</$elseif>
+<$elseif filter="[<num>compare:number:gt[1]]"><<num>> is greater than 1</$elseif>
+<$elseif filter="[<num>compare:number:gt[0]]"><<num>> is greater than 0</$elseif>
+<$else><<num>> is negative or zero</$else>
+</$if>'>>
+
+!! Short-circuiting example
+
+The `<$if>` widget is **short-circuiting**: only one of its child widgets will be selected and become the content of the `<$if>` widget. The contents of the other widgets are not evaluated. Try editing
+
+ No matter how many `<$then>`, `<$elseif>`, and `<$else>` [[JavaScript console|Web Developer Tools]]
+
+<<wikitext-example-without-html 'Number: <$edit field="number" />
+
+<$if filter="[{!!number}compare:number:gt[3]]">
+<$then><$log number={{!!number}} message="New value is greater than 3" /></$then>
+<$elseif filter="[{!!number}compare:number:gt[2]]"><$log number={{!!number}} message="New value is greater than 2" /></$elseif>
+<$elseif filter="[{!!number}compare:number:gt[1]]"><$log number={{!!number}} message="New value is greater than 1" /></$elseif>
+<$elseif filter="[{!!number}compare:number:gt[0]]"><$log number={{!!number}} message="New value is greater than 0" /></$elseif>
+<$else><$log number={{!!number}} message="New value is negative or zero" /></$else>
+</$if>
+Open the [[JavaScript console|Web Developer Tools]] and watch the log as you edit the number. Note how only one log message is shown for each edit you make.
+'>>
