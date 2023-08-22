@@ -57,6 +57,8 @@ tags: $:/tags/Global
 
 This demo uses the API of the website https://random.dog/ to import a random dog image or video.
 
+//Note that the images and videos can be quite large, so this demo is not recommended to be used over mobile data connections.//
+
 <$button actions=<<get-random-dog>>>
 Import a random dog image or video
 </$button>
@@ -80,7 +82,7 @@ Export all imported random dogs: <$macrocall $name="exportButton" exportFilter="
 <$link>
 <$text text=<<currentTiddler>>/>
 </$link>
-<div style="width:300px;height:300px;">
+<div style="width:300px;">
 <$transclude $tiddler=<<currentTiddler>>/>
 </div>
 </li>

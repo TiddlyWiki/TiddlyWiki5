@@ -1,10 +1,10 @@
 created: 20230615045526689
-modified: 20230615060059476
+modified: 20230731210638956
 tags: WikiText
 title: Widget Attributes
 type: text/vnd.tiddlywiki
 
-Attributes of HTML elements and widgets can be specified in several different ways:
+Attributes of [[HTML elements|HTML in WikiText]] and widgets can be specified in several different ways:
 
 * [[a literal string|Literal Attribute Values]]
 * [[a transclusion of a textReference|Transcluded Attribute Values]]
@@ -19,3 +19,8 @@ Attributes of HTML elements and widgets can be specified in several different wa
 |filtered |triple curly braces around a filter expression|
 |substituted|single or triple backticks around the text to be processed for substitutions|
 
+
+<$list filter="[[Literal Attribute Values]] [[Transcluded Attribute Values]] [[Variable Attribute Values]] [[Filtered Attribute Values]] [[Substituted Attribute Values]]">
+<$link><h1><$text text=<<currentTiddler>>/></h1></$link>
+<$transclude mode="block"/>
+</$list>

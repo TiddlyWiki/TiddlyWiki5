@@ -1,6 +1,6 @@
 caption: tm-focus-selector
 created: 20190628162542132
-modified: 20190628162542132
+modified: 20230723215122038
 tags: Messages
 title: WidgetMessage: tm-focus-selector
 type: text/vnd.tiddlywiki
@@ -9,6 +9,6 @@ The `tm-focus-selector` message sets the focus to the DOM element identified by 
 
 |!Name |!Description |
 |param |Selector identifying the DOM element to be focussed  |
-|paramObject |Optional hashmap of additional parameters to be passed to the [[focus()|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus]] method |
+|//{any other params}// |Any other parameters  to be passed to the  [[focus()|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus]] method as variables.|
 
 <<.tip """Use preventScroll="true" to prevent the browser from scrolling to the focused element""">>

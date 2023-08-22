@@ -575,9 +575,8 @@ var globalCheck =[
 	"    configurable: true",
 	"  });",
 	"  if(Object.keys(__temp__).length){",
-	"    console.log(Object.keys(__temp__));",
+	"    console.log(\"Warning: Global assignment detected\",Object.keys(__temp__));",
 	"    delete Object.prototype.__temp__;",
-	"    throw \"Global assignment is not allowed within modules on node.\";",
 	"  }",
 	"  delete Object.prototype.__temp__;",
 ].join('\n');
@@ -926,7 +925,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				}
 			} else {
 				// line number should be included in e.stack for runtime errors
-				$tw.utils.error("Error executing boot module " + name + ": " + JSON.stringify(e) + "\n\n" + e.stack);
+				$tw.utils.error("Error executing boot module " + name + ": " + String(e) + "\n\n" + e.stack);
 			}
 		}
 	}
