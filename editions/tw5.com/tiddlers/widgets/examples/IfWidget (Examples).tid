@@ -1,0 +1,46 @@
+created: 20230822153600000
+modified: 20230822170315584
+number: 2
+tags: IfWidget
+title: IfWidget (Examples)
+type: text/vnd.tiddlywiki
+
+!! Advanced example: no else block
+
+If the condition is false but there is no `<$else>` block, the `<$if>` widget will be empty:
+
+<<wikitext-example-without-html '\define num() 2
+
+<$if filter="[<num>compare:number:gt[3]]">
+<$then><<num>> is greater than 3</$then>
+</$if>'>>
+
+!! Advanced example: inverting the filter
+
+The `<$then>` block is required, so you can't omit a `<$then>` block. If you want an `<$if>` widget that will be empty if the condition is true, one way to do it is to invert the filter so that it becomes false (empty) when the condition is true:
+
+<<wikitext-example-without-html '\define num() 5
+
+<$if filter="[<num>compare:number:gt[3]then[]else[x]]">
+<$then>We want to avoid printing this</$then>
+<$else>Condition was false</$else>
+</$if>'>>
+
+Note that it doesn't matter what you put in the `else` filter operator: as long as the `then` operator produces an empty result and the `else` operator produces a non-empty result, the `<$if>` widget will have its condition inverted. Try editing this example and experiment with different filter conditions.
+
+!! Advanced example: short-circuiting evaluates only one child widget
+
+The `<$if>` widget is **short-circuiting**: only one of its child widgets will be selected and become the content of the `<$if>` widget. The contents of the other widgets are not evaluated.
+
+<<wikitext-example-without-html 'Number: <$edit field="number" />
+
+<$if filter="[{!!number}compare:number:gt[3]]">
+<$then><$log number={{!!number}} message="New value is greater than 3" /></$then>
+<$elseif filter="[{!!number}compare:number:gt[2]]"><$log number={{!!number}} message="New value is greater than 2" /></$elseif>
+<$elseif filter="[{!!number}compare:number:gt[1]]"><$log number={{!!number}} message="New value is greater than 1" /></$elseif>
+<$elseif filter="[{!!number}compare:number:gt[0]]"><$log number={{!!number}} message="New value is greater than 0" /></$elseif>
+<$else><$log number={{!!number}} message="New value is negative or zero" /></$else>
+</$if>
+'>>
+
+Open the [[JavaScript console|Web Developer Tools]] and watch the log as you edit the number. Note how only one log message is shown for each edit you make, because only one `<$log>` widget is evaluated.
