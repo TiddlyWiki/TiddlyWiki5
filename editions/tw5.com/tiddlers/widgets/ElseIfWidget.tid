@@ -1,0 +1,12 @@
+caption: elseif
+created: 20230822153600000
+modified: 20230823095659652
+tags: Widgets IfWidget
+title: ElseIfWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+<<.from-version "5.3.2">>
+
+The `<$elseif>` widget is part of the [[<$if> widget|IfWidget]], and is not valid on its own. See IfWidget for documentation.
