@@ -8,6 +8,8 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
+<<.from-version "5.3.2">>
+
 The if widget determines its content depending upon the result of one or more [[filters|Filters]]. It must have a child widget named `<$then>`, and can optionally have child widgets named `<$elseif>` or `<$else>`.
 
 The content of the `<$if>` widget is determined by evaluating its filter, and the filters in any `<$elseif>` widgets it contains. The first filter to return a result (i.e., not an empty list) will determine the content of the `<$if>` widget, as follows.
