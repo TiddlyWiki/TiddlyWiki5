@@ -660,6 +660,148 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>nothing</p>");
 	});
 
+	it("should deal with the if widget with no else clause", function() {
+		var wiki = new $tw.Wiki();
+		// Construct two widget nodes
+		var text = "<$if filter=''><$then>yes</$then></$if>";
+		var falsey = text;
+		var truthy = text.replace("filter=''","filter='true'");
+		var widgetNodeF = createWidgetNode(parseText(falsey,wiki),wiki);
+		var widgetNodeT = createWidgetNode(parseText(truthy,wiki),wiki);
+		// Render both widget nodes to the DOM
+		var wrapperF = renderWidgetNode(widgetNodeF);
+		var wrapperT = renderWidgetNode(widgetNodeT);
+		// Test the rendering of both
+		expect(wrapperF.innerHTML).toBe("<p></p>");
+		expect(wrapperT.innerHTML).toBe("<p>yes</p>");
+	});
+	it("should deal with the if widget with an else clause", function() {
+		var wiki = new $tw.Wiki();
+		// Construct two widget nodes
+		var text = "<$if filter=''><$then>yes</$then><$else>no</$else></$if>";
+		var falsey = text;
+		var truthy = text.replace("filter=''","filter='true'");
+		var widgetNodeF = createWidgetNode(parseText(falsey,wiki),wiki);
+		var widgetNodeT = createWidgetNode(parseText(truthy,wiki),wiki);
+		// Render both widget nodes to the DOM
+		var wrapperF = renderWidgetNode(widgetNodeF);
+		var wrapperT = renderWidgetNode(widgetNodeT);
+		// Test the rendering of both
+		expect(wrapperF.innerHTML).toBe("<p>no</p>");
+		expect(wrapperT.innerHTML).toBe("<p>yes</p>");
+	});
+	it("should deal with the if widget with an elseif but no else clause", function() {
+		var wiki = new $tw.Wiki();
+		// Construct three widget nodes
+		var text = "<$if filter='[[1]compare:number:eq[2]]'><$then>yes</$then><$elseif filter='[[3]compare:number:eq[4]]'>maybe</$elseif></$if>";
+		var falsey = text;
+		var truthy = text.replace("eq[2]]","eq[1]]");
+		var elseif = text.replace("eq[4]]","eq[3]]");
+		var widgetNodeF = createWidgetNode(parseText(falsey,wiki),wiki);
+		var widgetNodeT = createWidgetNode(parseText(truthy,wiki),wiki);
+		var widgetNodeE = createWidgetNode(parseText(elseif,wiki),wiki);
+		// Render three widget nodes to the DOM
+		var wrapperF = renderWidgetNode(widgetNodeF);
+		var wrapperT = renderWidgetNode(widgetNodeT);
+		var wrapperE = renderWidgetNode(widgetNodeE);
+		// Test the rendering of all three
+		expect(wrapperF.innerHTML).toBe("<p></p>");
+		expect(wrapperT.innerHTML).toBe("<p>yes</p>");
+		expect(wrapperE.innerHTML).toBe("<p>maybe</p>");
+	});
+	it("should deal with the if widget with two elseifs but no else clause", function() {
+		var wiki = new $tw.Wiki();
+		// Construct four widget nodes
+		var text = "<$if filter='[[1]compare:number:eq[2]]'><$then>yes</$then><$elseif filter='[[3]compare:number:eq[4]]'>maybe</$elseif><$elseif filter='[[5]compare:number:eq[6]]'>another</$elseif></$if>";
+		var falsey = text;
+		var truthy = text.replace("eq[2]]","eq[1]]");
+		var elseif1 = text.replace("eq[4]]","eq[3]]");
+		var elseif2 = text.replace("eq[6]]","eq[5]]");
+		var widgetNodeF = createWidgetNode(parseText(falsey,wiki),wiki);
+		var widgetNodeT = createWidgetNode(parseText(truthy,wiki),wiki);
+		var widgetNodeE1 = createWidgetNode(parseText(elseif1,wiki),wiki);
+		var widgetNodeE2 = createWidgetNode(parseText(elseif2,wiki),wiki);
+		// Render four widget nodes to the DOM
+		var wrapperF = renderWidgetNode(widgetNodeF);
+		var wrapperT = renderWidgetNode(widgetNodeT);
+		var wrapperE1 = renderWidgetNode(widgetNodeE1);
+		var wrapperE2 = renderWidgetNode(widgetNodeE2);
+		// Test the rendering of all four
+		expect(wrapperF.innerHTML).toBe("<p></p>");
+		expect(wrapperT.innerHTML).toBe("<p>yes</p>");
+		expect(wrapperE1.innerHTML).toBe("<p>maybe</p>");
+		expect(wrapperE2.innerHTML).toBe("<p>another</p>");
+	});
+	it("should deal with the if widget with an elseif and an else clause", function() {
+		var wiki = new $tw.Wiki();
+		// Construct four widget nodes
+		var text = "<$if filter='[[1]compare:number:eq[2]]'><$then>yes</$then><$elseif filter='[[3]compare:number:eq[4]]'>maybe</$elseif><$elseif filter='[[5]compare:number:eq[6]]'>another</$elseif><$else>no</$else></$if>";
+		var falsey = text;
+		var truthy = text.replace("eq[2]]","eq[1]]");
+		var elseif1 = text.replace("eq[4]]","eq[3]]");
+		var elseif2 = text.replace("eq[6]]","eq[5]]");
+		var widgetNodeF = createWidgetNode(parseText(falsey,wiki),wiki);
+		var widgetNodeT = createWidgetNode(parseText(truthy,wiki),wiki);
+		var widgetNodeE1 = createWidgetNode(parseText(elseif1,wiki),wiki);
+		var widgetNodeE2 = createWidgetNode(parseText(elseif2,wiki),wiki);
+		// Render four widget nodes to the DOM
+		var wrapperF = renderWidgetNode(widgetNodeF);
+		var wrapperT = renderWidgetNode(widgetNodeT);
+		var wrapperE1 = renderWidgetNode(widgetNodeE1);
+		var wrapperE2 = renderWidgetNode(widgetNodeE2);
+		// Test the rendering of all four
+		expect(wrapperF.innerHTML).toBe("<p>no</p>");
+		expect(wrapperT.innerHTML).toBe("<p>yes</p>");
+		expect(wrapperE1.innerHTML).toBe("<p>maybe</p>");
+		expect(wrapperE2.innerHTML).toBe("<p>another</p>");
+	});
+	it("should deal with the if widget with two elseifs and an else clause", function() {
+		var wiki = new $tw.Wiki();
+		// Construct four widget nodes
+		var text = "<$if filter='[[1]compare:number:eq[2]]'><$then>yes</$then><$elseif filter='[[3]compare:number:eq[4]]'>maybe</$elseif><$elseif filter='[[5]compare:number:eq[6]]'>another</$elseif><$else>no</$else></$if>";
+		var falsey = text;
+		var truthy = text.replace("eq[2]]","eq[1]]");
+		var elseif1 = text.replace("eq[4]]","eq[3]]");
+		var elseif2 = text.replace("eq[6]]","eq[5]]");
+		var widgetNodeF = createWidgetNode(parseText(falsey,wiki),wiki);
+		var widgetNodeT = createWidgetNode(parseText(truthy,wiki),wiki);
+		var widgetNodeE1 = createWidgetNode(parseText(elseif1,wiki),wiki);
+		var widgetNodeE2 = createWidgetNode(parseText(elseif2,wiki),wiki);
+		// Render four widget nodes to the DOM
+		var wrapperF = renderWidgetNode(widgetNodeF);
+		var wrapperT = renderWidgetNode(widgetNodeT);
+		var wrapperE1 = renderWidgetNode(widgetNodeE1);
+		var wrapperE2 = renderWidgetNode(widgetNodeE2);
+		// Test the rendering of all four
+		expect(wrapperF.innerHTML).toBe("<p>no</p>");
+		expect(wrapperT.innerHTML).toBe("<p>yes</p>");
+		expect(wrapperE1.innerHTML).toBe("<p>maybe</p>");
+		expect(wrapperE2.innerHTML).toBe("<p>another</p>");
+	});
+	it("if widget should short-circuit", function() {
+		var wiki = new $tw.Wiki();
+		// Construct four widget nodes
+		var text = "<$if filter='[[1]compare:number:eq[2]]'><$then>yes</$then><$elseif filter='[[3]compare:number:eq[4]]'>maybe</$elseif><$elseif filter='[[5]compare:number:eq[6]]'>another</$elseif><$else>no</$else></$if>";
+		var falsey = text;
+		var elseif2 = falsey.replace("eq[6]]","eq[5]]");
+		var elseif1 = elseif2.replace("eq[4]]","eq[3]]"); // Both second and first elseifs are true, first one wins
+		var truthy = elseif1.replace("eq[2]]","eq[1]]"); // The "main" if condition and both elseifs are true, "main" condition wins
+		var widgetNodeF = createWidgetNode(parseText(falsey,wiki),wiki);
+		var widgetNodeT = createWidgetNode(parseText(truthy,wiki),wiki);
+		var widgetNodeE1 = createWidgetNode(parseText(elseif1,wiki),wiki);
+		var widgetNodeE2 = createWidgetNode(parseText(elseif2,wiki),wiki);
+		// Render four widget nodes to the DOM
+		var wrapperF = renderWidgetNode(widgetNodeF);
+		var wrapperT = renderWidgetNode(widgetNodeT);
+		var wrapperE1 = renderWidgetNode(widgetNodeE1);
+		var wrapperE2 = renderWidgetNode(widgetNodeE2);
+		// Test the rendering of all four
+		expect(wrapperF.innerHTML).toBe("<p>no</p>");
+		expect(wrapperT.innerHTML).toBe("<p>yes</p>");
+		expect(wrapperE1.innerHTML).toBe("<p>maybe</p>");
+		expect(wrapperE2.innerHTML).toBe("<p>another</p>");
+	});
+
 	/**This test confirms that imported set variables properly refresh
 	 * if they use transclusion for their value. This relates to PR #4108.
 	 */
