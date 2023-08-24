@@ -161,7 +161,7 @@ function CodeMirrorEngine(options) {
 			if (cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
 				cm.state.draggingText(event);
 				// Ensure the editor is re-focused
-				setTimeout(() => cm.display.input.focus(), 20);
+				setTimeout(function() {cm.display.input.focus();}, 20); 
 				return;
 			}
 			try {
@@ -173,13 +173,13 @@ function CodeMirrorEngine(options) {
 					}
 					cm.setCursor(cm.coordsChar({left:event.pageX,top:event.pageY}));
 					if (selected) {
-					 	for (var i = 0; i < selected.length; ++i) {
+						for (var i = 0; i < selected.length; ++i) {
 							replaceRange(cm.doc, "", selected[i].anchor, selected[i].head, "drag");
 						}
 					}
 					cm.replaceSelection(text, "around", "paste");
 					cm.display.input.focus();
-			  }
+				}
 			}
 			catch(e){}
 		}
