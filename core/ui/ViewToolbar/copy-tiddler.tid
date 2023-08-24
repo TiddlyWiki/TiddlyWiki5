@@ -1,13 +1,16 @@
 title: $:/core/ui/Buttons/copy-tiddler
 tags: $:/tags/ViewToolbar
-caption: {{$:/core/images/copy-clipboard}} {{$:/language/Buttons/CopyTiddler/Caption}}
+caption: {{$:/core/images/copy-tiddler}} {{$:/language/Buttons/CopyTiddler/Caption}}
 description: {{$:/language/Buttons/CopyTiddler/Hint}}
 
-\define copyTiddlerButton()
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/CopyTiddler/Hint}} aria-label={{$:/language/Buttons/CopyTiddler/Caption}} class=<<tv-config-toolbar-class>>>
+\procedure copyTiddlerAction()
 <$action-clipboard $tiddler=<<currentTiddler>> $text="hello"/>
-<$action-clipboard $text="hello"/>
+\end
+
+\whitespace trim
+\define copyTiddlerButton()
+<$button actions=<<copyTiddlerAction>> tooltip={{$:/language/Buttons/CopyTiddler/Hint}} aria-label={{$:/language/Buttons/CopyTiddler/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/copy-clipboard}}
 </$list>

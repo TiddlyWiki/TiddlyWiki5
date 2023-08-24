@@ -35,21 +35,21 @@ ClipboardWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ClipboardWidget.prototype.execute = function() {
-    this.actionTiddler = this.getAttribute("$tiddler", null);
-    this.copyText = this.getAttribute("$text", null);
-    this.tiddlerFormat = this.getAttribute("$format", null);
+    this.actionTiddler = this.getAttribute("$tiddler");
+    this.copyText = this.getAttribute("$text");
+    this.tiddlerFormat = this.getAttribute("$format");
 };
 
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-ClipboardWidget.prototype.refresh = function(changedTiddlers) {
-    var changedAttributes = this.computeAttributes();
-	if(Object.keys(changedAttributes).length) {
+ClipboardWidget.prototype.refresh = function(changedTiddlers) { 
+	var changedAttributes = this.computeAttributes();
+	if($tw.utils.count(changedAttributes) > 0) {
 		this.refreshSelf();
 		return true;
 	}
-    return this.refreshChildren(changedTiddlers);
+	return this.refreshChildren(changedTiddlers);
 };
 
 /*
@@ -58,20 +58,19 @@ Invoke the action associated with this widget
 ClipboardWidget.prototype.invokeAction = function(triggeringWidget,event) {
 
     if(this.actionTiddler !== null) {
-        var tiddler = this.wiki.getTiddler(self.actionTiddler);
-        console.log(self.actionTiddler)
+        var tiddler = this.wiki.getTiddler(this.actionTiddler);
     }
 
-    console.log(self.copyText)
+    console.log(this.copyText)
 
     function listener(e) {
-        e.clipboardData.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(tiddlerData)));
-        e.clipboardData.setData("text",JSON.stringify(tiddlerData));
+        e.clipboardData.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(JSON.stringify(tiddler.fields)));
+        e.clipboardData.setData("text",JSON.stringify(tiddler.fields));
         e.preventDefault();
     }
 
     document.addEventListener("copy",listener);
-    //document.execCommand("copy");
+    document.execCommand("copy");
     document.removeEventListener("copy",listener);
 
     return true; // Action was invoked
