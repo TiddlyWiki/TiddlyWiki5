@@ -10,7 +10,7 @@ color:$(foregroundColor)$;
 <!-- This has no whitespace trim to avoid modifying $actions$. Closing tags omitted for brevity. -->
 \define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions)
 \whitespace trim
-<$vars
+<$let
 	foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>
 	backgroundColor=<<__colour__>>
 >
@@ -23,6 +23,7 @@ color:$(foregroundColor)$;
 	<$transclude tiddler=<<__icon__>>/>
 	<$view tiddler=<<__tag__>> field="title" format="text" />
 </$element-tag$>
+</$let>
 \end
 
 \define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions)
