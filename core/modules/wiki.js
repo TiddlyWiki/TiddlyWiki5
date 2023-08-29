@@ -550,6 +550,114 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 };
 
 /*
+Return an array of tiddler titles that are directly linked within the given parse tree
+annotations: This could either be:
+  * a string: to look for the availability of a single annotation
+  * an array: for any of the listed annotations 
+  * an object: defining a number of key value pairs, where either
+    * the value is function which must return true
+    * the value is '*' which allows any value
+    * the value given matches exactly the annotation
+ */
+exports.extractAnnotatedLinks = function(parseTreeRoot, annotations) {
+  var annotation_list = {};
+  switch(typeof(annotations)){
+    case "string": 
+      if (annotations.length==0){
+        return [];
+      }
+      let key = annotations;
+      annotation_list[key] = '*';
+      break;
+    case "object":
+      let original_annotations = annotations;
+      if (Array.isArray(annotations)){
+        annotations.forEach((key) => {
+          annotation_list[key] = '*';
+        });
+      }else{
+        annotation_list = annotations;
+      }
+      break;
+  }
+	// Count up the links
+	var links = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+          var add = false;
+          for (const [key, value] of Object.entries(annotation_list)) {
+          console.log(key, value, parseTreeNode.attributes);
+            add = add || ((
+              key in parseTreeNode.attributes
+            ) && (
+              value == '*' 
+              || value == parseTreeNode.attributes[key].value
+              || (
+                typeof(value) == "function" 
+                && value(parseTreeNode.attributes[key].value)
+              )
+            ));
+          }
+          if (add){
+            var value = parseTreeNode.attributes.to.value;
+            if(links.indexOf(value) === -1) {
+              links.push(value);
+            }
+          }
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return links;
+};
+
+/*
+Return an array of tiddler titles that are directly linked from the specified tiddler
+*/
+exports.getTiddlerAnnotatedLinks = function(title, annotations) {
+	var self = this;
+		var parser = self.parseTiddler(title);
+		if(parser) {
+			return self.extractAnnotatedLinks(parser.tree, annotations);
+		}
+		return [];
+	// We'll cache the links so they only get computed if the tiddler changes
+	return this.getCacheForTiddler(title,"annotatedlinks",function() {
+		// Parse the tiddler
+		var parser = self.parseTiddler(title);
+		if(parser) {
+			return self.extractAnnotatedLinks(parser.tree, annotations);
+		}
+		return [];
+	});
+};
+
+/*
+Return an array of tiddler titles that link to the specified tiddler
+*/
+exports.getTiddlerAnnotatedBacklinks = function(targetTitle) {
+	var self = this,
+		backlinksIndexer = this.getIndexer("BacklinksIndexer"),
+		backlinks = backlinksIndexer && backlinksIndexer.lookup(targetTitle);
+
+	if(!backlinks) {
+		backlinks = [];
+		this.forEachTiddler(function(title,tiddler) {
+			var links = self.getTiddlerAnnotatedLinks(title);
+			if(links.indexOf(targetTitle) !== -1) {
+				backlinks.push(title);
+			}
+		});
+	}
+	return backlinks;
+};
+
+/*
 Return a hashmap of tiddler titles that are referenced but not defined. Each value is the number of times the missing tiddler is referenced
 */
 exports.getMissingTitles = function() {
