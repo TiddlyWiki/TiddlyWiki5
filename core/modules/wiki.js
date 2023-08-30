@@ -585,6 +585,7 @@ exports.extractAnnotatedLinks = function(parseTreeRoot, annotations) {
 		checkParseTree = function(parseTree) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
+          console.log(parseTreeNode);
 				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
           var add = false;
           for (const [key, value] of Object.entries(annotation_list)) {
@@ -621,39 +622,25 @@ Return an array of tiddler titles that are directly linked from the specified ti
 */
 exports.getTiddlerAnnotatedLinks = function(title, annotations) {
 	var self = this;
-		var parser = self.parseTiddler(title);
-		if(parser) {
-			return self.extractAnnotatedLinks(parser.tree, annotations);
-		}
-		return [];
-	// We'll cache the links so they only get computed if the tiddler changes
-	return this.getCacheForTiddler(title,"annotatedlinks",function() {
-		// Parse the tiddler
-		var parser = self.parseTiddler(title);
-		if(parser) {
-			return self.extractAnnotatedLinks(parser.tree, annotations);
-		}
-		return [];
-	});
+  var parser = self.parseTiddler(title);
+  if(parser) {
+    return self.extractAnnotatedLinks(parser.tree, annotations);
+  }
+  return [];
 };
 
 /*
 Return an array of tiddler titles that link to the specified tiddler
 */
-exports.getTiddlerAnnotatedBacklinks = function(targetTitle) {
-	var self = this,
-		backlinksIndexer = this.getIndexer("BacklinksIndexer"),
-		backlinks = backlinksIndexer && backlinksIndexer.lookup(targetTitle);
-
-	if(!backlinks) {
-		backlinks = [];
-		this.forEachTiddler(function(title,tiddler) {
-			var links = self.getTiddlerAnnotatedLinks(title);
-			if(links.indexOf(targetTitle) !== -1) {
-				backlinks.push(title);
-			}
-		});
-	}
+exports.getTiddlerAnnotatedBacklinks = function(targetTitle, annotations) {
+	var self = this;
+  var backlinks = [];
+  this.forEachTiddler(function(title,tiddler) {
+    var links = self.getTiddlerAnnotatedLinks(title, annotations);
+    if(links.indexOf(targetTitle) !== -1) {
+      backlinks.push(title);
+    }
+  });
 	return backlinks;
 };
 
