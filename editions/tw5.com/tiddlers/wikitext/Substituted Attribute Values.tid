@@ -1,0 +1,45 @@
+base-url: http://tiddlywiki.com/
+created: 20230615050814821
+modified: 20230615173033918
+tags: [[Widget Attributes]] WikiText
+title: Substituted Attribute Values
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">>
+Substituted attribute values can use two different styles of quoting:
+
+* Single backticks <$codeblock code="attr=`value`"/>
+* Triple backticks <$codeblock code="attr=```value```"/>
+
+The value of the attribute will be the text denoted by the backticks with any of the placeholders for filter expressions and variables substituted with their corresponding values. Filter expression placeholders are substituted before variable placeholders, allowing for further variable substitution in their returned value.
+
+<<.warning "Any other wiki syntax in that text will be left as-is.">>
+
+
+|placeholder syntax|description|h
+|`$(varname)$`|Text substitution of a variable. Undefined variables are replaced with an empty string. |
+|`${ filter expression }$`|Text substitution with the first result of evaluating the filter expression. |
+
+! Examples
+
+!! Substituting a variable value into a string
+
+<$macrocall $name=wikitext-example-without-html src='<$text text=`Hello there this is the tiddler "$(currentTiddler)$"`/>'/>
+
+
+!! Substituting a variable value and the result of evaluating a filter expression into a string
+<$macrocall $name=wikitext-example-without-html src='<$text text=`This tiddler is titled "$(currentTiddler)$" and was last modified on ${[{!!modified}format:date[DDth MMM YYYY]]}$`/>'/>
+
+!! Concatenating strings and variables to create a URL
+
+<$macrocall $name=wikitext-example-without-html src='
+<$let hash={{{ [<currentTiddler>encodeuricomponent[]] }}}>
+<a href=`http://tiddlywiki.com/#$(hash)$`>this tiddler on tiddlywiki.com</a>
+</$let>'/>
+
+!! Concatenating variables and a text reference to create a URL
+
+<$macrocall $name=wikitext-example-without-html src='
+<$let hash={{{ [<currentTiddler>encodeuricomponent[]] }}}>
+<a href=`${ [{!!base-url}] }$#$(hash)$`>this tiddler on tiddlywiki.com</a>
+</$let>'/>

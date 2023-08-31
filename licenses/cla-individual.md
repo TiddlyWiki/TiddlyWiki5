@@ -533,3 +533,17 @@ Yukai Chou, @muzimuzhi, 2023-04-07
 Carmine Guida, @carmineguida, 2023-05-17
 
 Tavin Cole, @tavin, 2023/05/25
+
+WhiteFall, @Zacharia2, 2023/06/04
+
+@oeyoews, 2023/06/30
+
+Eric Haberstroh, @pille1842, 2023/07/23
+
+@lilscribby, 2023-07-24
+
+@TiddlyTweeter, 2023/07/25
+
+@catter-fly, 2023/07/27
+
+@cmo-pomerium, 2023/08/03

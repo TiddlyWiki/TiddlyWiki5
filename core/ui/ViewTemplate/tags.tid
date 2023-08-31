@@ -3,5 +3,5 @@ tags: $:/tags/ViewTemplate
 
 \whitespace trim
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<div class="tc-tags-wrapper" dir=<<tv-text-direction>>><$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/></div>
+<div class="tc-tags-wrapper"><$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/></div>
 </$reveal>

@@ -1,21 +1,23 @@
+caption: Styles and Classes
 created: 20131205160532119
-modified: 20131205160549129
+modified: 20230726105744098
 tags: WikiText [[How to apply custom styles]]
 title: Styles and Classes in WikiText
 type: text/vnd.tiddlywiki
-caption: Styles and Classes
 
-Content can be wrapped in `@@`double at signs`@@`  to apply specified CSS styles or classes to it. There are multiple ways to use this syntax, as presented below.
+CSS styles and classes can be applied to inline or block content wrapped in `@@double at signs@@`. Classes can be applied to certain block WikiText elements.
 
-Inline content wrapped in `@@`double at signs`@@` without specifying style or class will be assigned the `.tc-inline-style` and displayed as highlighted text. The foreground and background colours of the highlighted text are defined as `highlight-background` and `highlight-foreground` in the current palette.
+//Inline content// wrapped in `@@double at signs@@` without specifying style or class will be assigned the `tc-inline-style` class and displayed as highlighted text. The foreground and background colours of the highlighted text are defined as `highlight-background` and `highlight-foreground` in the current palette.
 
-<<wikitext-example src:"@@some highlighted text@@">>
+<<wikitext-example src:"@@Highlighted text@@">>
 
-Style attributes, e.g. `color`, each followed by `;` semicolon can be introduced immediately after the opening `@@`.
+!! Styles
 
-<<wikitext-example src:"@@color:steelblue;background-color:lightcyan;some styled text@@">>
+Multiple style attributes, e.g. `color`, each followed by `;` semicolon can be introduced immediately after the opening `@@`, without spaces in between.
 
-Similarly a style can be applied to a multiline content:
+<<wikitext-example src:"@@color:steelblue;background-color:lightcyan;Text with custom style@@">>
+
+Similarly, styles can be applied to //block content//. Wrapping block content in `@@` without specifying style or class has no effect.
 
 <<wikitext-example src:"@@background-color:lightcyan;
 * Item one
@@ -23,18 +25,49 @@ Similarly a style can be applied to a multiline content:
 @@
 ">>
 
-A class may be applied to a multiline content only:
+!! Classes
 
-<<wikitext-example src:"@@.tc-double-spaced-list
-* Item one
-* Item two
+The following `coloured-text` and `coloured-bg` classes are defined in this tiddler for demonstration purposes:
+
+
+```
+.coloured-text {color: darkkhaki;}
+.coloured-bg {background-color: cornsilk;}
+```
+
+<style>
+.coloured-text {color: darkkhaki;}
+.coloured-bg {background-color: cornsilk;}
+</style>
+
+Multiple classes, each prefixed with `.`, can be introduced immediately after the opening `@@`, followed by a ` ` space. This works both for inline and block content:
+
+<<wikitext-example src:"@@.coloured-text.coloured-bg Inline content with two assigned classes@@">>
+
+<<wikitext-example src:"@@.coloured-bg
+* Block content
+* With one assigned class
 @@">>
 
-Multiple classes and styles can be used together:
+Multiple classes and styles can be applied simultaneously. In case of inline content, the styles have to be defined first, followed by the classes.
 
-<<wikitext-example src:"@@.tc-double-spaced-list
-@@width:400px;background-color:lightcyan;
-* Item one
-* Item two
-@@
+<<wikitext-example src:"@@font-size:1.5em;.coloured-text.coloured-bg Text with custom style and classes@@">>
+
+In case of block content, the styles and classes can be defined in a single line after the opening `@@` identically as for the inline content, or in separate lines, each beginning with `@@`:
+
+<<wikitext-example src:"@@font-size:1.5em;
+@@.coloured-text
+@@.coloured-bg
+* Block content
+* With custom style and classes
+@@">>
+
+In a similar way classes, but not styles, can be applied to those block WikiText elements that are introduced through characters on the beginning of the line. The classes prefixed with `.` are specified immediately after the special characters, followed by a ` ` space.
+
+<<wikitext-example src:"!!!.coloured-bg Heading with a custom background class.
+
+* Standard list element.
+*.coloured-bg List element with a custom background colour class.
+*.coloured-text List element with  a custom text colour class.
+*.coloured-bg.coloured-text List element with both of the custom classes.
 ">>

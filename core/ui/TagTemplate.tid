@@ -3,16 +3,23 @@ title: $:/core/ui/TagTemplate
 \whitespace trim
 <span class="tc-tag-list-item" data-tag-title=<<currentTiddler>>>
 <$set name="transclusion" value=<<currentTiddler>>>
-<$macrocall $name="tag-pill-body" tag=<<currentTiddler>> icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}} colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}} palette={{$:/palette}} element-tag="""$button""" element-attributes="""popup=<<qualify "$:/state/popup/tag">> dragFilter='[all[current]tagging[]]' tag='span'"""/>
-<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes" class="tc-drop-down">
-<$set name="tv-show-missing-links" value="yes">
-<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
-</$set>
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TagDropdown]!has[draft.of]]" variable="listItem"> 
-<$transclude tiddler=<<listItem>>/> 
-</$list>
-<hr>
-<$macrocall $name="list-tagged-draggable" tag=<<currentTiddler>>/>
-</$reveal>
+	<$macrocall $name="tag-pill-body"
+		tag=<<currentTiddler>>
+		icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
+		colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+		palette={{$:/palette}}
+		element-tag="$button"
+		element-attributes="""popup=<<qualify "$:/state/popup/tag">> dragFilter="[all[current]tagging[]]" tag='span'"""
+	/>
+	<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes" class="tc-drop-down">
+		<$set name="tv-show-missing-links" value="yes">
+			<$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+		</$set>
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/TagDropdown]!has[draft.of]]" variable="listItem"> 
+			<$transclude tiddler=<<listItem>>/> 
+		</$list>
+		<hr>
+		<$macrocall $name="list-tagged-draggable" tag=<<currentTiddler>>/>
+	</$reveal>
 </$set>
 </span>

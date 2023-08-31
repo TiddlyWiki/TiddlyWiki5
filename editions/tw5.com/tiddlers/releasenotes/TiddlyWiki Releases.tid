@@ -5,7 +5,7 @@ tags: Releases
 title: TiddlyWiki Releases
 type: text/vnd.tiddlywiki
 
-Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named. Note that archived versions of release source files are available at https://github.com/Jermolene/TiddlyWiki5/releases
+Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
 
 If you are using node.js, you can also install prior versions like this:
 

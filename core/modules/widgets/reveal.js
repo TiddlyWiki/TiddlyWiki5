@@ -42,9 +42,6 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
 	}
-	if(this.direction) {
-		domNode.setAttribute("dir",this.direction);
-	}
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
@@ -126,7 +123,6 @@ RevealWidget.prototype.execute = function() {
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
 	this.retain = this.getAttribute("retain","no");
-	this.direction = this.getAttribute("dir");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
@@ -218,7 +214,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex || changedAttributes.dir) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes.positionAllowNegative || changedAttributes["default"] || changedAttributes.animate || changedAttributes.stateTitle || changedAttributes.stateField || changedAttributes.stateIndex) {
 		this.refreshSelf();
 		return true;
 	} else {

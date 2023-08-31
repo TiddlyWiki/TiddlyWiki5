@@ -1064,6 +1064,34 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 }
 
 /*
+Parse a block of text of a specified MIME type
+	text: text on which to perform substitutions
+	widget
+	options: see below
+Options include:
+	substitutions: an optional array of substitutions
+*/
+exports.getSubstitutedText = function(text,widget,options) {
+	options = options || {};
+	text = text || "";
+	var self = this,
+		substitutions = options.substitutions || [],
+		output;
+	// Evaluate embedded filters and substitute with first result
+	output = text.replace(/\$\{([\S\s]+?)\}\$/g, function(match,filter) {
+		return self.filterTiddlers(filter,widget)[0] || "";
+	});
+	// Process any substitutions provided in options
+	$tw.utils.each(substitutions,function(substitute) {
+		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
+	});
+	// Substitute any variable references with their values
+	return output.replace(/\$\(([^\)\$]+)\)\$/g, function(match,varname) {
+		return widget.getVariable(varname,{defaultValue: ""})
+	});
+};
+
+/*
 Make a widget tree for a parse tree
 parser: parser object
 options: see below

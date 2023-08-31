@@ -1,0 +1,49 @@
+created: 20230617183745774
+modified: 20230617183745774
+tags: [[Then Filter Run Prefix]]
+title: Then Filter Run Prefix (Examples)
+type: text/vnd.tiddlywiki
+
+
+!! Conditional Execution
+
+The <<.op :then>> filter run prefix can be used to avoid the need for nested [[ListWidget]]s or [[Macro Definitions in WikiText]].
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$edit-text field="search" placeholder="Search title"/>
+
+<$let searchTerm={{!!search}}>
+<$list filter="[<searchTerm>minlength[3]] :then[!is[system]search:title<searchTerm>]" template="$:/core/ui/ListItemTemplate"/>
+</$let>"""/>
+
+
+!! Conditional (Sub)Filters
+
+The <<.op :then>> filter run prefix can be combined with the <<.op :else>> prefix to create conditional filters. In this example, the fields used in <<.var searchSubfilter>> for searching depend on the value of [[$:/temp/searchFields]] and the sort order used by <<.var sortSubfilter>> depends on the value of [[$:/temp/searchSort]]. Checkboxes are used to set the values of these tiddlers.
+
+<<.tip "Note that each filter run of the subfilter receives the input of the <<.olink subfilter>> operator as input">>
+
+Since the <<.olink then>> and <<.olink else>> operators cannot call subfilters or perform additional filter steps, they cannot be used for such applications.
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<$checkbox tiddler="$:/temp/searchSort"
+      field="text"
+      checked="chrono" unchecked="alpha" default="alpha">
+  Sort chronologically (newest first)
+</$checkbox><br/>
+<$checkbox tiddler="$:/temp/searchFields"
+      field="text"
+      checked="title" unchecked="default" default="title">
+  Search <<.field title>> only
+</$checkbox><p/>
+<$let searchSubfilter="[{$:/temp/searchFields}match[default]] :then[search[prefix]] :else[search:title[prefix]]"
+      sortSubfilter="[{$:/temp/searchSort}match[chrono]] :then[!nsort[modified]] :else[sort[title]]"
+      limit=10 >
+  <$list filter="[all[tiddlers]!is[system]subfilter<searchSubfilter>subfilter<sortSubfilter>first<limit>]">
+    <$link/> (<$text text={{{ [{!!modified}format:date[YYYY-0MM-0DD]] }}} />)<br/>
+  </$list>
+  <$list filter="[all[tiddlers]!is[system]subfilter<searchSubfilter>rest<limit>count[]]">
+    ... and <<currentTiddler>> more.
+  </$list>
+</$let>"""/>
+
