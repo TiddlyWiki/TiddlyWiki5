@@ -9,7 +9,9 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.3.2">>
 
-The if widget determines its content depending upon the result of one or more [[filters|Filters]]. It must have a child widget named `<$then>`, and can optionally have child widgets named `<$elseif>` or `<$else>`.
+The `<$if>` widget determines its content depending upon the result of one or more [[filters|Filters]]. It must have a child widget named `<$then>`, and can optionally have child widgets named `<$elseif>` or `<$else>`.
+
+<<.tip """The `<$then>`, `<$elseif>`, and/or `<$else>` widgets cannot be used on their own. They must be direct children of an `<$if>` widget, or they will be ignored.""">>
 
 The content of the `<$if>` widget is determined by evaluating its filter, and the filters in any `<$elseif>` widgets it contains. The first filter to return a result (i.e., not an empty list) will determine the content of the `<$if>` widget, as follows.
 
@@ -22,10 +24,14 @@ The content of the `<$if>` widget is determined by evaluating its filter, and th
 
 ! Content and Attributes
 
-The `<$if>` widget and its `>$elseif>` children can have the following attributes:
+The `<$if>` widget and its `<$elseif>` children can have the following attributes:
 
 |!Attribute |!Description |
 |filter |A filter to be evaluated |
+
+The <<.attr filter>> attribute will treat an empty result as "false" and a non-empty result as "true" in a similar way to how the [[Conditional Operators]] work.
+
+The `<$then>` and `<$else>` widgets have no attributes.
 
 ! Examples
 
@@ -42,7 +48,7 @@ Try editing this example to remove the `<$else>` widget; then the `<$if>` widget
 
 !! Usage with elseif
 
-Note that multiple elseif widgets can be chained together. Also note the short-circuiting behaviour: the first condition to be true will end the evaluation. The remaining `<$elseif>` and `<$else>` widgets will not be considered.
+Note that multiple elseif widgets can be chained together. Also note the short-circuiting behaviour: the first condition to be true will end the evaluation. Any remaining `<$elseif>` and `<$else>` widgets will not be considered.
 
 <<wikitext-example-without-html '\define num() 2
 
