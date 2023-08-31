@@ -23,6 +23,8 @@ var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrument
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
+	// Debug view
+	$tw.debugView = new $tw.DebugView();
 	// Minimal browser detection
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));

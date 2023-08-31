@@ -330,6 +330,14 @@ exports.compileFilter = function(filterString) {
 			}
 		})());
 	});
+	// If we're debugging then wrap each operation function with debug code
+	if(true) {
+		$tw.utils.each(operationFunctions,function(operationFunction,index) {
+			operationFunctions[index] = function(results,source,widget) {
+				return operationFunction(results,source,widget);
+			};
+		});
+	}
 	// Return a function that applies the operations to a source iterator of tiddler titles
 	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
