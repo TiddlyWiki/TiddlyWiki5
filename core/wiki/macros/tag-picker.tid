@@ -3,7 +3,7 @@ tags: $:/tags/Macro
 first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]
 second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>sort[]]
 
-\function tagpicker-dropdown-id() [<qualify "$:/state/popup/tags-auto-complete">] [<__tagField__>] +[join[/]]
+\function tagpicker-dropdown-id() [<qualify "$:/state/popup/tags-auto-complete">] [[$(__tagField__)$-$(__tagListFilter__)$]substitute[]sha256[]] +[join[/]]
 
 \define get-tagpicker-focus-selector() [data-tiddler-title="$(currentTiddlerCSSEscaped)$"] .tc-add-tag-name input
 
