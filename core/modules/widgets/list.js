@@ -60,6 +60,7 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ListWidget.prototype.execute = function() {
+	var self = this;
 	// Get our attributes
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
@@ -67,6 +68,16 @@ ListWidget.prototype.execute = function() {
 	this.counterName = this.getAttribute("counter");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
+	// Look for <$list-template> and <$list-empty> widgets as immediate child widgets
+	this.explicitListTemplate = null;
+	this.explicitEmptyTemplate = null;
+	$tw.utils.each(this.parseTreeNode.children,function(node) {
+		if(node.type === "list-template") {
+			self.explicitListTemplate = node.children;
+		} else if(node.type === "list-empty") {
+			self.explicitEmptyTemplate = node.children;
+		}
+	});
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -86,17 +97,29 @@ ListWidget.prototype.execute = function() {
 };
 
 ListWidget.prototype.getTiddlerList = function() {
+	var limit = $tw.utils.getInt(this.getAttribute("limit",""),undefined);
 	var defaultFilter = "[!is[system]sort[title]]";
-	return this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
+	var results = this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
+	if(limit !== undefined) {
+		if(limit >= 0) {
+			results = results.slice(0,limit);
+		} else {
+			results = results.slice(limit);
+		}
+	}
+	return results;
 };
 
 ListWidget.prototype.getEmptyMessage = function() {
 	var parser,
-		emptyMessage = this.getAttribute("emptyMessage","");
-	// this.wiki.parseText() calls 
-	// new Parser(..), which should only be done, if needed, because it's heavy!
-	if (emptyMessage === "") {
-		return [];
+		emptyMessage = this.getAttribute("emptyMessage");
+	// If emptyMessage attribute is not present or empty then look for an explicit empty template
+	if(!emptyMessage) {
+		if(this.explicitEmptyTemplate) {
+			return this.explicitEmptyTemplate;
+		} else {
+			return [];
+		}
 	}
 	parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
 	if(parser) {
@@ -122,8 +145,14 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	if(template) {
 		templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: template}}}];
 	} else {
+		// Check for child nodes of the list widget
 		if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
-			templateTree = this.parseTreeNode.children;
+			// Check for a <$list-item> widget
+			if(this.explicitListTemplate) {
+				templateTree = this.explicitListTemplate;
+			} else {
+				templateTree = this.parseTreeNode.children;
+			}
 		} else {
 			// Default template is a link to the title
 			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
