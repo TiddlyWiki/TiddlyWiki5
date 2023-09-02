@@ -527,6 +527,38 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[15].sequenceNumber).toBe(53);
 	});
 
+	it("the list widget with counter-last should update correctly when list is appended", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddler({title: "Numbers", text: "", list: "1 2 3 4"});
+		var text = "<$list filter='[list[Numbers]]' variable='item' counter='c'><<item>><$text text={{{ [<c-last>match[no]then[, ]] }}} /></$list>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>1, 2, 3, 4</p>");
+		// Append a number
+		wiki.addTiddler({title: "Numbers", text: "", list: "1 2 3 4 5"});
+		refreshWidgetNode(widgetNode,wrapper,["Numbers"]);
+		expect(wrapper.innerHTML).toBe("<p>1, 2, 3, 4, 5</p>");
+	});
+
+	it("the list widget with counter-last should update correctly when last item is removed", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddler({title: "Numbers", text: "", list: "1 2 3 4"});
+		var text = "<$list filter='[list[Numbers]]' variable='item' counter='c'><<item>><$text text={{{ [<c-last>match[no]then[, ]] }}} /></$list>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>1, 2, 3, 4</p>");
+		// Append a number
+		wiki.addTiddler({title: "Numbers", text: "", list: "1 2 3"});
+		refreshWidgetNode(widgetNode,wrapper,["Numbers"]);
+		expect(wrapper.innerHTML).toBe("<p>1, 2, 3</p>");
+	});
+
 	it("should deal with the list widget followed by other widgets", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
