@@ -312,8 +312,9 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
-		
-		if(selectedNode.offsetLeft) {
+
+		// selectedNode.offsetLeft can be "0" and therefor we test for this edge-case, too
+		if((selectedNode.offsetLeft >= 0) && (selectedNode.offsetLeft !== null) && (selectedNode.offsetLeft !== undefined)) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
 				left: selectedNode.offsetLeft,
