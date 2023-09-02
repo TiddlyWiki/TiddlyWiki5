@@ -225,6 +225,8 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
 		var hasRefreshed = false,t;
 		if(this.counterName) {
+			var mustRefreshOldLast = this.children.length < this.list.length;
+			var oldLastIdx = this.children.length-1;
 			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
 			for(t=0; t<this.list.length; t++) {
 				if(hasRefreshed || !this.children[t] || this.children[t].parseTreeNode.itemTitle !== this.list[t]) {
@@ -238,6 +240,11 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 					var refreshed = this.children[t].refresh(changedTiddlers);
 					hasRefreshed = hasRefreshed || refreshed;
 				}
+			}
+			// If items were inserted then we must recreate the item that used to be at the last position as it is no longer last
+			if(mustRefreshOldLast && oldLastIdx >= 0) {
+				this.removeListItem(oldLastIdx);
+				this.insertListItem(oldLastIdx,this.list[oldLastIdx]);
 			}
 			// If there are items to remove and we have not refreshed then recreate the item that will now be at the last position
 			if(!hasRefreshed && this.children.length > this.list.length) {
