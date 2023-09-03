@@ -53,6 +53,10 @@ exports.parse = function() {
 	var filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
 	// Advance the parser position to past the %}
 	this.parser.pos = this.terminateIfMatch.index + this.terminateIfMatch[0].length;
+	return this.parseIfBlock(filterCondition);
+};
+
+exports.parseIfBlock = function(filterCondition) {
 	// Create the list widget
 	var listWidget = {
 		type: "list",
@@ -73,7 +77,7 @@ exports.parse = function() {
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"variable","condition");
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"limit","1");
 	// Parse the body looking for else or endif
-	var reEndString = "\\{\\%\\s*(endif)\\s*\\%\\}|\\{\\%\\s*(else)\\s*\\%\\}",
+	var reEndString = "\\{\\%\\s*(endif)\\s*\\%\\}|\\{\\%\\s*(else)\\s*\\%\\}|\\{\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\}",
 		ex;
 	if(this.is.block) {
 		ex = this.parser.parseBlocksTerminatedExtended(reEndString);
@@ -99,6 +103,9 @@ exports.parse = function() {
 			}
 			// Put the parsed content inside the list empty template
 			listWidget.children[1].children = ex.tree;
+		} else if(ex.match[3] === "elseif") {
+			// Parse the elseif block by reusing this parser, passing the new filter condition
+			listWidget.children[1].children = this.parseIfBlock(ex.match[4]);
 		}
 	}
 	// Return the parse tree node
