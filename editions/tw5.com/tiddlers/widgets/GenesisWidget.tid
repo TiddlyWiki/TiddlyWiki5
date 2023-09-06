@@ -20,7 +20,7 @@ The content of the <<.wid genesis>> widget is used as the content of the dynamic
 |$mode |An optional override of the parsing mode. May be "inline" or "block" |
 |//{other attributes starting with $}// |Other attributes starting with a single dollar sign are reserved for future use |
 |//{attributes starting with $$}// |Attributes starting with two dollar signs are applied as attributes to the output widget, but with the attribute name changed to use a single dollar sign |
-|//{attributes not starting with $}// |Any other attributes that do not start with a dollar are applied as attributes to the output widget |
+|//{attributes not starting with $}// |Any other attributes that do not start with a dollar are applied as attributes to the output widget or HTML Element |
 
 <<.from-version "5.2.6">> If the `$type` attribute is missing or blank, the <<.wlink GenesisWidget>> widget does not render an intrinsic element, instead just rendering its children.
 
