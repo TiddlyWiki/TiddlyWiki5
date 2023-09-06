@@ -28,4 +28,8 @@ src='\procedure test(animal)
 <<test "Antelope">>
 '/>
 
+Within an "if" or "elseif" block, the variable `condition` contains the value of the first result of evaluating the filter condition.
+
 Note that widgets and HTML elements must be within a single conditional block; it is not possible to start an element in one conditional block and end it in another.
+
+Note that the conditional shortcut syntax cannot contain pragmas such as procedure definitions.
