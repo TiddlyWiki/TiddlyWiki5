@@ -1,6 +1,6 @@
 caption: then
 created: 20190802112756430
-modified: 20190802113849579
+modified: 20230501174334627
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input titles with each one replaced by the string <<.place T>>
 op-parameter: a string
@@ -11,5 +11,7 @@ title: then Operator
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.20">> See [[Conditional Operators]] for an overview.
+
+<<.tip "The [[Then Filter Run Prefix]] has a similar purpose to the <<.op then>> operator. See its documentation for a comparison of usage.">>
 
 <<.operator-examples "then">>

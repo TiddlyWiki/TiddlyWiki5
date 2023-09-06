@@ -580,7 +580,7 @@ button svg, button img, label svg, label img {
 }
 
 button:disabled.tc-btn-invisible  {
-	cursor: default; 
+	cursor: default;
 	color: <<colour muted-foreground>>;
 }
 
@@ -1170,6 +1170,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-tiddler-title-icon {
 	vertical-align: middle;
 	margin-right: .1em;
+}
+
+.tc-tiddler-title-icon svg {
+	width: 0.9em;
+	height: 0.9em;
 }
 
 .tc-system-title-prefix {
@@ -2774,13 +2779,9 @@ input.tc-palette-manager-colour-input {
 	white-space: nowrap;
 }
 
-.tc-table-of-contents button {
+.tc-table-of-contents button,
+.tc-table-of-contents .toc-item-muted {
 	color: <<colour sidebar-foreground>>;
-}
-
-button + .tc-toc-caption,
-button > .tc-toc-caption{
-	margin-left: .25em;
 }
 
 .tc-table-of-contents svg {

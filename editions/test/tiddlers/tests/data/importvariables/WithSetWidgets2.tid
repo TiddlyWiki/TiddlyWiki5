@@ -1,0 +1,22 @@
+title: ImportVariables/WithSetWidgets2
+description: Import variables defined with a set widget without whitespace pragma
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\import Definitions
+<$text text=<<one>>/>,
+<$text text=<<two>>/>
++
+title: Definitions
+
+<$set name="one" value="elephant">
+<$set name="two" value="giraffe">
+</$set>
+</$set>
++
+title: ExpectedResult
+
+<p>elephant,giraffe</p>

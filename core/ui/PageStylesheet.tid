@@ -1,4 +1,5 @@
 title: $:/core/ui/PageStylesheet
+code-body: yes
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 \whitespace trim

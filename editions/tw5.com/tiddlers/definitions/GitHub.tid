@@ -1,13 +1,15 @@
 created: 20140910212609354
-modified: 20190408173002622
+modified: 20230723074351846
 tags: Definitions
 title: GitHub
 type: text/vnd.tiddlywiki
 
-GitHub is a hosting service for distributed projects that use git as their version-control system. It allows free hosting and management of open-source projects and facilitates collaborative development on the source code. Using GitHub for non-open-source endeavours requires additional fees.
+GitHub is a hosting service for distributed projects that use git as their version-control system. It allows free hosting and management of open-source projects and facilitates collaborative development on the source code. Using ~GitHub for non-open-source endeavours requires additional fees.
 
-The code and documentation of TiddlyWiki is hosted on GitHub at:
+The code and documentation of TiddlyWiki is hosted on ~GitHub at:
 
 https://github.com/Jermolene/TiddlyWiki5
 
-GitHub also offer a free web hosting service called [[GitHub Pages|https://pages.github.com/]] that can be used directly from the single file configuration. See [[Saving to a Git service]].
+~GitHub also offer a free web hosting service called [[GitHub Pages|https://pages.github.com/]] that can be used directly from the single file configuration. See [[Saving to a Git service]].
+
+An alternative to ~GitHub is GitLab
