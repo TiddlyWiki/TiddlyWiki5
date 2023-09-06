@@ -6,7 +6,7 @@ module-type: wikirule
 Conditional shortcut syntax
 
 ```
-This is a {% if [{something}] %}Elephant{% elseif [{else}] %}Pelican{% else %}Crocodile{% endif %}
+This is a <% if [{something}] %>Elephant<% elseif [{else}] %>Pelican<% else %>Crocodile<% endif %>
 ```
 
 \*/
@@ -22,19 +22,19 @@ exports.types = {inline: true, block: false};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\%\s*if\s+/mg;
-	this.terminateIfRegExp = /\%\}/mg;
+	this.matchRegExp = /\<\%\s*if\s+/mg;
+	this.terminateIfRegExp = /\%\>/mg;
 };
 
 exports.findNextMatch = function(startPos) {
-	// Look for the next {% if shortcut
+	// Look for the next <% if shortcut
 	this.matchRegExp.lastIndex = startPos;
 	this.match = this.matchRegExp.exec(this.parser.source);
 	// If not found then return no match
 	if(!this.match) {
 		return undefined;
 	}
-	// Check for the next %}
+	// Check for the next %>
 	this.terminateIfRegExp.lastIndex = this.match.index;
 	this.terminateIfMatch = this.terminateIfRegExp.exec(this.parser.source);
 	// If not found then return no match
@@ -51,7 +51,7 @@ Parse the most recent match
 exports.parse = function() {
 	// Get the filter condition
 	var filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
-	// Advance the parser position to past the %}
+	// Advance the parser position to past the %>
 	this.parser.pos = this.terminateIfMatch.index + this.terminateIfMatch[0].length;
 	return this.parseIfBlock(filterCondition);
 };
@@ -77,7 +77,7 @@ exports.parseIfBlock = function(filterCondition) {
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"variable","condition");
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"limit","1");
 	// Parse the body looking for else or endif
-	var reEndString = "\\{\\%\\s*(endif)\\s*\\%\\}|\\{\\%\\s*(else)\\s*\\%\\}|\\{\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\}",
+	var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>|\\<\\%\\s*(else)\\s*\\%\\>|\\<\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\>",
 		ex;
 	if(this.is.block) {
 		ex = this.parser.parseBlocksTerminatedExtended(reEndString);
@@ -93,7 +93,7 @@ exports.parseIfBlock = function(filterCondition) {
 			// Nothing to do if we just found an endif
 		} else if(ex.match[2] === "else") {
 			// If we found an else then we need to parse the body looking for the endif
-			var reEndString = "\\{\\%\\s*(endif)\\s*\\%\\}",
+			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
 			ex;
 			if(this.is.block) {
 				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
