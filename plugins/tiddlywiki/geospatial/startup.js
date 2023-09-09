@@ -56,7 +56,7 @@ exports.startup = function() {
 					longitude:  "" + pos.coords.longitude,
 					altitude:  "" + pos.coords.altitude,
 					accuracy:  "" + pos.coords.accuracy,
-					altitudeAccurary:  "" + pos.coords.altitudeAccurary,
+					altitudeAccuracy:  "" + pos.coords.altitudeAccuracy,
 					heading:  "" + pos.coords.heading,
 					speed:  "" + pos.coords.speed
 				},{parentWidget: $tw.rootWidget});

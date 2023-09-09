@@ -23,7 +23,7 @@ The following variables are made available to the action strings passed in the '
 |''longitude'' |The longitude of the position in decimal degrees |
 |''altitude'' |The altitude of the position in meters, relative to sea level. This value can be null if the implementation cannot provide the data |
 |''accuracy'' |A number representing the accuracy of the latitude and longitude properties, expressed in meters |
-|''altitudeAccurary'' |A number representing the accuracy of the altitude expressed in meters. This value can be null |
+|''altitudeAccuracy'' |A number representing the accuracy of the altitude expressed in meters. This value can be null |
 |''heading'' |A number representing the direction towards which the device is facing. This value, specified in degrees, indicates how far off from heading true north the device is. 0 degrees represents true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees). If speed is 0, heading is NaN. If the device is unable to provide heading information, this value is null |
 |''speed'' |A number representing the velocity of the device in meters per second. This value can be null |
 
@@ -53,7 +53,7 @@ The following variables are made available to the action strings passed in the '
 			long=<<longitude>>
 			alt=<<altitude>>
 			accuracy=<<accuracy>>
-			altitudeAccurary=<<altitudeAccurary>>
+			altitudeAccuracy=<<altitudeAccuracy>>
 			heading=<<heading>>
 			speed=<<speed>>
 		/>
@@ -86,7 +86,6 @@ The following variables are made available to the action strings passed in the '
 			<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
 		</$list>
 	</$geomap>
-/>
 """/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>

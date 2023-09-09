@@ -12,7 +12,7 @@ tags: $:/tags/GeospatialDemo
 		long=<<longitude>>
 		alt=<<altitude>>
 		accuracy=<<accuracy>>
-		altitudeAccurary=<<altitudeAccurary>>
+		altitudeAccuracy=<<altitudeAccuracy>>
 		heading=<<heading>>
 		speed=<<speed>>
 	/>
