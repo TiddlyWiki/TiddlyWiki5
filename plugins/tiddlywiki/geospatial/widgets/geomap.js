@@ -242,7 +242,11 @@ GeomapWidget.prototype.refreshMap = function() {
 						bounds = featureBounds;
 					}
 				});
-				this.map.fitBounds(bounds);
+				if(bounds) {
+					this.map.fitBounds(bounds);
+				} else {
+					this.map.fitWorld();
+				}
 				break;
 			default:
 				this.map.fitWorld();
