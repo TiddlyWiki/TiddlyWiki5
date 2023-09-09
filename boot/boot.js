@@ -287,6 +287,56 @@ $tw.utils.decodeURIComponentSafe = function(s) {
 	return v;
 };
 
+
+/*
+Convert a URI List Component encoded string (with `+` as an allowed replacement 
+for `+`) to a string
+*/
+$tw.utils.decodeTWURIList = function(s) {
+	return $tw.utils.decodeURIComponentSafe(
+		s.split('&')
+		.map(s => s.replaceAll('+', ' '))
+		.map(s => s.includes(' ') ? '[[' + s + ']]' : s)
+		.join( ' ')
+    )
+};
+
+/*
+Convert a URI Target Component encoded string (with `+` as an allowed replacement 
+for `+`) to a string
+*/
+$tw.utils.decodeTWURITarget = function(s) {
+	return $tw.utils.decodeURIComponentSafe(
+		s.replaceAll('+', ' ')
+    )
+};
+
+/*
+Convert a URIComponent encoded string (with `+` as an allowed replacement for `+`) to a string
+*/
+$tw.utils.encodeTWURIComponent = function(s) {
+	return s.split(/\[\[|\]\]\s?/)
+		.filter(Boolean)
+		.map(function(s) {return s.trim()})
+		.map(function(s) {return encodeURIComponent(s)})
+		.map(function(s) {return s.replaceAll('%20', '+')})
+		.join('&')
+};
+
+/*
+const encode = (input) => {
+  const sub = (s) => s.replace(/\[\[|\]\]/g, '')
+  const url = new URL(input)
+  const fragment = url.hash && decodeURIComponent(url.hash.slice(1))
+  if (fragment) {
+    const [focus, list = ''] = fragment.split(':')
+    const parts = list.split(/\[\[|\]\]\s?/).filter(Boolean).map(s=>s.trim()).map((s) => s.includes(' ') ? `[[${s}]]` : s).filter(Boolean)
+    const encoded = sub(focus) + (parts.length ? (':' + parts.map(sub).join('&')) : '')
+    url.hash = encoded
+  }
+  return url.toString().replaceAll('%20', ' ')
+}
+*/
 /*
 Convert a URI encoded string to a string safely
 */
