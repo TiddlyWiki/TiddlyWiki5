@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/tour/globals
+tags: $:/tags/Global
+
+\procedure tour-restart()
+<$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
+{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
+\end

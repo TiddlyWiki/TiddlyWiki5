@@ -24,7 +24,7 @@ next
 [img class="tc-tour-panel-banner-image" [$:/tour/BannerImage]]
 <div class="tc-tour-panel-inner">
 <div class="tc-tiddler-controls tc-tour-panel-controls">
-<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> ''Tour''
+<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <span class="tc-tour-panel-controls-icon">{{$:/plugins/tiddlywiki/tour/tour-button-icon}}</span> ''Tour'': {{$:/tags/TourStep!!text}}
 </div>
 <$transclude tiddler={{$:/state/tour/step}} mode="block"/>
 <$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
