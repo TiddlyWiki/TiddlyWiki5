@@ -295,8 +295,8 @@ for `+`) to a string
 $tw.utils.decodeTWURIList = function(s) {
 	return $tw.utils.decodeURIComponentSafe(
 		s.split('&')
-		.map(s => s.replaceAll('+', ' '))
-		.map(s => s.includes(' ') ? '[[' + s + ']]' : s)
+		.map(function(s) {return s.replaceAll('+', ' ')})
+		.map(function(s) {return s.includes(' ') ? '[[' + s + ']]' : s})
 		.join( ' ')
     )
 };
