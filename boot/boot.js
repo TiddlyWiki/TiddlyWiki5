@@ -294,10 +294,10 @@ for `+`) to a string
 */
 $tw.utils.decodeTWURIList = function(s) {
 	return $tw.utils.decodeURIComponentSafe(
-		s.split('&')
-		.map(function(s) {return s.replaceAll('+', ' ')})
-		.map(function(s) {return s.includes(' ') ? '[[' + s + ']]' : s})
-		.join( ' ')
+		s.split("&")
+		.map(function(s) {return s.replace(/\+/g, " ")})
+		.map(function(s) {return s.indexOf(" ") >= 0 ? "[[" + s + "]]" : s})
+		.join(" ")
     )
 };
 
@@ -307,7 +307,7 @@ for `+`) to a string
 */
 $tw.utils.decodeTWURITarget = function(s) {
 	return $tw.utils.decodeURIComponentSafe(
-		s.replaceAll('+', ' ')
+		s.replace(/\+/g, " ")
     )
 };
 
@@ -319,8 +319,8 @@ $tw.utils.encodeTWURIComponent = function(s) {
 		.filter(Boolean)
 		.map(function(s) {return s.trim()})
 		.map(function(s) {return encodeURIComponent(s)})
-		.map(function(s) {return s.replaceAll('%20', '+')})
-		.join('&')
+		.map(function(s) {return s.replace(/\%20/g, '+')})
+		.join("&")
 };
 
 /*
