@@ -324,20 +324,6 @@ $tw.utils.encodeTWURIComponent = function(s) {
 };
 
 /*
-const encode = (input) => {
-  const sub = (s) => s.replace(/\[\[|\]\]/g, '')
-  const url = new URL(input)
-  const fragment = url.hash && decodeURIComponent(url.hash.slice(1))
-  if (fragment) {
-    const [focus, list = ''] = fragment.split(':')
-    const parts = list.split(/\[\[|\]\]\s?/).filter(Boolean).map(s=>s.trim()).map((s) => s.includes(' ') ? `[[${s}]]` : s).filter(Boolean)
-    const encoded = sub(focus) + (parts.length ? (':' + parts.map(sub).join('&')) : '')
-    url.hash = encoded
-  }
-  return url.toString().replaceAll('%20', ' ')
-}
-*/
-/*
 Convert a URI encoded string to a string safely
 */
 $tw.utils.decodeURISafe = function(s) {
