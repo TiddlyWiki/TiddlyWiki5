@@ -6,14 +6,12 @@ tags: $:/tags/PageTemplate
 <div class="tc-tour-panel-navigation">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}count[]compare:number:gt[0]]" variable="ignore">
 <$button class="tc-btn-big-green" style="background-color: red;">
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
-{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
+<<tour-previous-step>>
 back
 </$button>
 </$list>
 <$button class="tc-btn-big-green" style="background-color: purple;">
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/steps/finished]] }}}/>
-{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
+<<tour-next-step>>
 next
 </$button>
 </div>
