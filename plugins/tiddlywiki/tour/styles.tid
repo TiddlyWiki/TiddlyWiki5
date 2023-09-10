@@ -47,9 +47,8 @@ tags: $:/tags/Stylesheet
 	top: 0;
 	left: 0;
 	right: 0;
-	background: <<colour very-muted-foreground>>;
 	padding: 4px;
-	color: <<colour background>>;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-tour-panel .tc-tour-panel-banner-image {
