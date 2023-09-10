@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/tour/globals
 tags: $:/tags/Global
 
 \procedure tour-initialise-current-tour-step()
-<$transclude $tiddler={{$:/state/tour/step}} $field="startup-actions"/>
+<$transclude $tiddler={{$:/state/tour/step}} $field="enter-actions"/>
 \end
 
 \procedure tour-restart()

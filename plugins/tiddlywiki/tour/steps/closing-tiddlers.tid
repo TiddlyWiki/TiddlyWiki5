@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/tour/steps/closing-tiddlers
 tags: $:/tags/TourStep
 display-mode: fullscreen
-startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn"/>
+enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn"/>
 
 \define tour-simplified-tiddler-close-button() yes
 
