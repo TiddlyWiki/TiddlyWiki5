@@ -37,11 +37,19 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tour-panel-controls-icon {
+	fill: <<colour muted-foreground>>;
 	vertical-align: middle;
 }
 
 .tc-tour-panel-fullscreen .tc-tour-panel-controls {
-	<!-- display: none; -->
+	/* display: none; */
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: <<colour very-muted-foreground>>;
+	padding: 4px;
+	color: <<colour background>>;
 }
 
 .tc-tour-panel .tc-tour-panel-banner-image {
@@ -52,7 +60,7 @@ tags: $:/tags/Stylesheet
 	display: block;
 	width: 200px;
 	float: right;
-	margin: 2em;
+	margin: 4em 2em 2em 2em;
 }
 
 .tc-tour-panel-fullscreen .tc-tour-panel-inner {

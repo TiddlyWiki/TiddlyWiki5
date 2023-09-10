@@ -19,7 +19,7 @@ next
 
 <$list filter="[{$:/config/ShowTour}!is[blank]else[show]match[show]]" variable="ignore">
 <div class={{{ tc-tour-panel [{$:/state/tour/step}get[display-mode]else[normal]addprefix[tc-tour-panel-]] +[join[ ]] }}}>
-[img class="tc-tour-panel-banner-image" [$:/tour/BannerImage]]
+[img class="tc-tour-panel-banner-image" [$:/plugins/tiddlywiki/tour/tiddlywiki-tour-logo]]
 <div class="tc-tour-panel-inner">
 <div class="tc-tiddler-controls tc-tour-panel-controls">
 <$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <span class="tc-tour-panel-controls-icon">{{$:/plugins/tiddlywiki/tour/tour-button-icon}}</span> ''Tour'': {{$:/tags/TourStep!!text}}
