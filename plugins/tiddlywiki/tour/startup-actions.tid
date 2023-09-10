@@ -1,4 +1,9 @@
 title: $:/plugins/tiddlywiki/tour/startup-actions
 tags: $:/tags/StartupAction
 
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<$action-log message="Outside"/>
+<$list filter="[[$:/config/AutoStartTour]get[text]else[no]match[yes]]" variable="ignore">
+<$action-log message="Inside"/>
 <<tour-restart>>
+</$list>

@@ -7,8 +7,12 @@ The following state tiddlers control the tour. They should not be directly modif
 but rather use the appropriate procedure to ensure that all the associated actions are performed.
 
 $:/config/CurrentTour: title of current tour definition tiddler
-$:/config/ShowTour: "show" (default) or "hide"
 $:/state/tour/step: title of current step of the tour
+
+These config tiddlers may be changed directly as required:
+
+$:/config/ShowTour: "show" (default) or "hide"
+$:/config/AutoStartTour: "no" (default) or "yes"
 
 Tour definition tiddlers have the following fields:
 
