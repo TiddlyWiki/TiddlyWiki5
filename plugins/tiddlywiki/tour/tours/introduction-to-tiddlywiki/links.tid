@@ -1,7 +1,7 @@
-title: $:/plugins/tiddlywiki/tour/steps/links
-tags: $:/tags/TourStep
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/links
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
 display-mode: fullscreen
-enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter"/>
+enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Jupiter"/>
 
 ! How do links work in ~TiddlyWiki?
 
@@ -20,7 +20,7 @@ Try clicking the link to "Saturn".
 
 </$navigator>
 
-<$list filter="[[$:/temp/Tour/DemoStoryList]contains[$:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn]limit[1]]" variable="ignore">
+<$list filter="[[$:/temp/Tour/DemoStoryList]contains[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Saturn]limit[1]]" variable="ignore">
 
 <$confetti/>
 

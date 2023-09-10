@@ -1,5 +1,5 @@
-title: $:/plugins/tiddlywiki/tour/steps/tiddlers
-tags: $:/tags/TourStep
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
 display-mode: fullscreen
 
 ! How does ~TiddlyWiki work?
@@ -10,7 +10,7 @@ A tiddler is like an index card.
 
 <$let tv-wikilinks="no">
 
-{{$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter||$:/plugins/tiddlywiki/tour/simplified-tiddler}}
+{{$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Jupiter||$:/plugins/tiddlywiki/tour/simplified-tiddler}}
 
 </$let>
 

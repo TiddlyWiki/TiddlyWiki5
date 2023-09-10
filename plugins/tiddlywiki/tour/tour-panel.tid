@@ -4,7 +4,7 @@ tags: $:/tags/PageTemplate
 \define tour-buttons()
 \define tv-action-refresh-policy() always
 <div class="tc-tour-panel-navigation">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}count[]compare:number:gt[0]]" variable="ignore">
+<$list filter="[function[tour-is-not-first-step]]" variable="ignore">
 <$button class="tc-btn-big-green" style="background-color: red;">
 <<tour-previous-step>>
 back
@@ -19,10 +19,13 @@ next
 
 <$list filter="[{$:/config/ShowTour}!is[blank]else[show]match[show]]" variable="ignore">
 <div class={{{ tc-tour-panel [{$:/state/tour/step}get[display-mode]else[normal]addprefix[tc-tour-panel-]] +[join[ ]] }}}>
-[img class="tc-tour-panel-banner-image" [$:/plugins/tiddlywiki/tour/tiddlywiki-tour-logo]]
+<$image class="tc-tour-panel-banner-image" source={{{ [{$:/config/CurrentTour}get[logo]] }}}/>
 <div class="tc-tour-panel-inner">
 <div class="tc-tiddler-controls tc-tour-panel-controls">
-<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <span class="tc-tour-panel-controls-icon">{{$:/plugins/tiddlywiki/tour/tour-button-icon}}</span> ''Tour'': {{$:/tags/TourStep!!text}}
+<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <span class="tc-tour-panel-controls-icon">{{$:/plugins/tiddlywiki/tour/tour-button-icon}}</span> ''Tour'': 
+<$transclude $tiddler={{$:/config/CurrentTour}} $field="description">
+<$text text={{$:/config/CurrentTour}}/>
+</$transclude>
 </div>
 <$transclude tiddler={{$:/state/tour/step}} mode="block"/>
 <$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">

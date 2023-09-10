@@ -1,5 +1,5 @@
-title: $:/plugins/tiddlywiki/tour/steps/search
-tags: $:/tags/TourStep
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/search
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-sidebar-search .tc-popup-handle
 
 ! Searching

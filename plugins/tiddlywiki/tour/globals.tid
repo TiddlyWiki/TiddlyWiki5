@@ -1,23 +1,49 @@
 title: $:/plugins/tiddlywiki/tour/globals
 tags: $:/tags/Global
 
+<!--
+
+The following state tiddlers control the tour. They should not be directly modified,
+but rather use the appropriate procedure to ensure that all the associated actions are performed.
+
+$:/config/CurrentTour - title of current tour definition tiddler
+$:/config/ShowTour - "show" (default) or "hide"
+$:/state/tour/step - title of current step of the tour
+
+Tour definition tiddlers have the following fields:
+
+tour-tag - name of tag used to define tour step sequence
+logo - title of tiddler containing logo of tour
+
+
+
+-->
+
+\function tour-current-tag()
+[{$:/config/CurrentTour}get[tour-tag]]
+\end
+
+\function tour-is-not-first-step()
+[all[shadows+tiddlers]tag[$:/tags/Tour/IntroductionToTiddlyWiki]before{$:/state/tour/step}count[]compare:number:gt[0]]
+\end
+
 \procedure tour-initialise-current-tour-step()
 <$transclude $tiddler={{$:/state/tour/step}} $field="enter-actions"/>
 \end
 
 \procedure tour-restart()
 <$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 
 \procedure tour-next-step()
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/steps/finished]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/finished]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 
 \procedure tour-previous-step()
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>before{$:/state/tour/step}] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 

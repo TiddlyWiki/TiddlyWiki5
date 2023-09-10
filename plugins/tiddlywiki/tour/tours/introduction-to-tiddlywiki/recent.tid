@@ -1,5 +1,5 @@
-title: $:/plugins/tiddlywiki/tour/steps/recent
-tags: $:/tags/TourStep
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/recent
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-sidebar-tabs-main .tc-timeline > .tc-menu-list-item:nth-child(1) .tc-menu-list-subitem:nth-child(1) .tc-tiddlylink
 selector-fallback-1: .tc-sidebar-tabs-main button:nth-child(3)
 

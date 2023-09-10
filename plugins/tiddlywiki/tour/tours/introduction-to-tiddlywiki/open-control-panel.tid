@@ -1,5 +1,5 @@
-title: $:/plugins/tiddlywiki/tour/steps/open-control-panel
-tags: $:/tags/TourStep
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/open-control-panel
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fcontrol-panel
 
 ! Welcome to ~TiddlyWiki
