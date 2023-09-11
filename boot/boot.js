@@ -287,15 +287,60 @@ $tw.utils.decodeURIComponentSafe = function(s) {
 	return v;
 };
 
+/*
+Helpers for encoding/decoding URIs
+*/
+
+/*
+The character that will substitute for a space in the URL
+*/
+var SPACE = "_";
+/*
+The character that will separate out the list elements in the URL
+*/
+var CONJUNCTION = ";";
+/*
+Those of the allowed url characters claimed by TW
+*/
+var claimed= [SPACE, ":", CONJUNCTION];
+/*
+Non-alphanumeric characters allowed in a URL fragment
+More information at https://www.rfc-editor.org/rfc/rfc3986#appendix-A
+*/
+var pchar = "-._~!$&'()*+,;=:@/?";
+/*
+The subset of the pchars we will not percent-encode in permalinks/permaviews
+*/
+var substitutes = pchar.split('').filter(c => claimed.indexOf(c) == -1);
+/*
+A regex to match the percent-encoded characters we will want to replace.
+Something similar to the following, depending on SPACE and CONJUNCTION
+    /(%2D|%2E|%7E|%21|%24|%26|%27|%28|%29|%2A|%2B|%3B|%3D|%40|%2F|%3F)/g
+*/
+var charMatch = new RegExp(
+	"(" + substitutes.map(c =>  "%" + c.charCodeAt(0).toString(16).toUpperCase()).join('|') + ')', 
+	"g"
+)
+/*
+A regex to match the SPACE character
+*/
+var spaceMatch = new RegExp("(\\" + SPACE + ")", "g")
+/*
+An object mapping the percent encodings back to their source characters
+*/
+var pctCharMap = substitutes.reduce(function (a, c) {
+	a['%' + c.charCodeAt(0).toString(16).toUpperCase()] = c
+	return a
+}, {});
 
 /*
 Convert a URI List Component encoded string (with `+` as an allowed replacement 
-for `+`) to a string
+for space) to a string
 */
 $tw.utils.decodeTWURIList = function(s) {
 	return $tw.utils.decodeURIComponentSafe(
-		s.split("&")
-		.map(function(s) {return s.replace(/\+/g, " ")})
+		s.split(",")
+		.map(function(s) {return s.replace(spaceMatch, " ")})
 		.map(function(s) {return s.indexOf(" ") >= 0 ? "[[" + s + "]]" : s})
 		.join(" ")
     )
@@ -307,9 +352,11 @@ for `+`) to a string
 */
 $tw.utils.decodeTWURITarget = function(s) {
 	return $tw.utils.decodeURIComponentSafe(
-		s.replace(/\+/g, " ")
+		s.replace(spaceMatch, " ")
     )
 };
+
+
 
 /*
 Convert a URIComponent encoded string (with `+` as an allowed replacement for `+`) to a string
@@ -319,8 +366,11 @@ $tw.utils.encodeTWURIComponent = function(s) {
 		.filter(Boolean)
 		.map(function(s) {return s.trim()})
 		.map(function(s) {return encodeURIComponent(s)})
-		.map(function(s) {return s.replace(/\%20/g, '+')})
-		.join("&")
+		.map(function(s) {return s.replace(/\%20/g, SPACE)})
+		.map(function(s) {return s.replace(charMatch, function(_, c) {
+			return pctCharMap[c]})
+		})
+		.join(CONJUNCTION)
 };
 
 /*
