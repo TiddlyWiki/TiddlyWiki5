@@ -287,44 +287,82 @@ $tw.utils.decodeURIComponentSafe = function(s) {
 	return v;
 };
 
-/*
-Helpers for encoding/decoding URIs
-*/
+/*************
+Code to make the permalink/permaview URLs more readable.
+(These comments are just to help reviewers; they will eventually be removed.)
+***************/
+
+
+/*************
+Helpers for encoding/decoding URIs.  **Note** that these are throw-away, only
+used to temporarily build `charMatch`, `spaceMatch`, `sentenceEnding`, and
+`sentenceTrailing`, all of which will eventually be hard-coded.
+***************/
 
 /*
 The character that will substitute for a space in the URL
 */
 var SPACE = "_";
+
+/*
+The character added to the end to avoid ending with `.`, `?`, `!` or the like
+*/
+var TRAILER = '_';
+
 /*
 The character that will separate out the list elements in the URL
 */
 var CONJUNCTION = ";";
+
 /*
 Those of the allowed url characters claimed by TW
 */
-var claimed= [SPACE, ":", CONJUNCTION];
+var CLAIMED = [SPACE, ":", CONJUNCTION];
+
 /*
 Non-alphanumeric characters allowed in a URL fragment
 More information at https://www.rfc-editor.org/rfc/rfc3986#appendix-A
 */
-var pchar = "-._~!$&'()*+,;=:@/?";
+var VALID_IN_URL_FRAGMENT = "-._~!$&'()*+,;=:@/?";
+
 /*
 The subset of the pchars we will not percent-encode in permalinks/permaviews
 */
-var substitutes = pchar.split('').filter(c => claimed.indexOf(c) == -1);
+var substitutes = VALID_IN_URL_FRAGMENT.split('').filter(function(c){return CLAIMED.indexOf(c) === -1});
+
+
+/*************
+The more permanent implementation.  These helpers (`charMatch`, `spaceMatch`,
+`sentenceEnding`, `sentenceTrailing`) will be hard-coded, not derived.
+***************/
+
 /*
 A regex to match the percent-encoded characters we will want to replace.
 Something similar to the following, depending on SPACE and CONJUNCTION
     /(%2D|%2E|%7E|%21|%24|%26|%27|%28|%29|%2A|%2B|%3B|%3D|%40|%2F|%3F)/g
 */
 var charMatch = new RegExp(
-	"(" + substitutes.map(c =>  "%" + c.charCodeAt(0).toString(16).toUpperCase()).join('|') + ')', 
+	"(" + substitutes.map(function(c) {
+		return  "%" + c.charCodeAt(0).toString(16).toUpperCase()
+	}).join('|') + ')', 
 	"g"
-)
+);
+
 /*
 A regex to match the SPACE character
 */
-var spaceMatch = new RegExp("(\\" + SPACE + ")", "g")
+var spaceMatch = new RegExp("(\\" + SPACE + ")", "g");
+
+/*
+A regex to match URLs ending with sentence-ending punctuation
+*/
+var sentenceEnding = new RegExp("(\\.|\\!|\\?|\\" + TRAILER + ")$", "g");
+
+/*
+A regex to match URLs ending with sentence-ending punctuation plus the TRAILER
+*/
+var sentenceTrailing = new RegExp("(\\.|\\!|\\?|\\" + TRAILER + ")\\" + TRAILER + "$", "g");
+
 /*
 An object mapping the percent encodings back to their source characters
 */
@@ -334,12 +372,13 @@ var pctCharMap = substitutes.reduce(function (a, c) {
 }, {});
 
 /*
-Convert a URI List Component encoded string (with `+` as an allowed replacement 
-for space) to a string
+Convert a URI List Component encoded string (with the `SPACE` value 
+as an allowed replacement for the space character) to a string
 */
 $tw.utils.decodeTWURIList = function(s) {
 	return $tw.utils.decodeURIComponentSafe(
-		s.split(",")
+		s.replace(sentenceTrailing, "$1")
+		.split(CONJUNCTION)
 		.map(function(s) {return s.replace(spaceMatch, " ")})
 		.map(function(s) {return s.indexOf(" ") >= 0 ? "[[" + s + "]]" : s})
 		.join(" ")
@@ -347,22 +386,22 @@ $tw.utils.decodeTWURIList = function(s) {
 };
 
 /*
-Convert a URI Target Component encoded string (with `+` as an allowed replacement 
-for `+`) to a string
+Convert a URI Target Component encoded string (with the `SPACE` value 
+as an allowed replacement for the space character) to a string
 */
 $tw.utils.decodeTWURITarget = function(s) {
 	return $tw.utils.decodeURIComponentSafe(
-		s.replace(spaceMatch, " ")
+		s.replace(sentenceTrailing, "$1").replace(spaceMatch, " ")
     )
 };
 
-
-
 /*
-Convert a URIComponent encoded string (with `+` as an allowed replacement for `+`) to a string
+Convert a URIComponent encoded string (with the `SPACE` value 
+as an allowed replacement for the space character) to a string
 */
 $tw.utils.encodeTWURIComponent = function(s) {
-	return s.split(/\[\[|\]\]\s?/)
+	return s.replace(sentenceEnding, "$1" + TRAILER)
+		.split(/\[\[|\]\]\s?/)
 		.filter(Boolean)
 		.map(function(s) {return s.trim()})
 		.map(function(s) {return encodeURIComponent(s)})
@@ -371,7 +410,12 @@ $tw.utils.encodeTWURIComponent = function(s) {
 			return pctCharMap[c]})
 		})
 		.join(CONJUNCTION)
+		
 };
+
+/*************
+End of changes
+***************/
 
 /*
 Convert a URI encoded string to a string safely
