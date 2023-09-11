@@ -5,7 +5,7 @@ title: WidgetMessage: tm-permalink
 type: text/vnd.tiddlywiki
 caption: tm-permalink
 
-The `tm-permalink` message changes the browser address bar to form a [[permalink|PermaLinks]] to a specified tiddler, defaulting to the current tiddler.
+The `tm-permalink` message changes the browser address bar to form a [[permalink|PermaLinks]] to a specified tiddler, defaulting to the current tiddler. The resulting link will be copied to the clipboard.
 
 The permalink message supports the following properties on the `event` object:
 
