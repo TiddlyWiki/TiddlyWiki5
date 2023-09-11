@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
  * The ''updated Dynannotate Plugin'' gains the ability to highlight screen elements using an animated spotlight effect
  ** See the [[Dynannotate Spotlight Demo|$:/plugins/tiddlywiki/dynannotate/examples/spotlight]]
 
- A standalone demo of the tour functionality is [ext[available here|./editions/tour/index.html]].
+ A standalone demo of the tour functionality is [ext[available here|./tour.html]].
 
  </div>
  

@@ -96,12 +96,12 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 # /static/static.css	Static stylesheet
 # /static/favicon.ico	Favicon for static pages
 node $TW5_BUILD_TIDDLYWIKI \
-	./editions/tour \
+	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build index \
+	--build favicon static index \
 	|| exit 1
 
 # /empty.html			Empty
@@ -120,6 +120,28 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all test.html text/plain \
+	|| exit 1
+
+# /dev/index.html			Developer docs
+# /dev/favicon.ico			Favicon for dev site
+# /dev/static.html			Static rendering of default tiddlers
+# /dev/alltiddlers.html		Static rendering of all tiddlers
+# /dev/static/*				Static single tiddlers
+# /dev/static/static.css	Static stylesheet
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/dev \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/dev \
+	--build index favicon static \
+	|| exit 1
+
+# /tour.html			tour edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/tour \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all tour.html text/plain \
 	|| exit 1
 
 # /dev/index.html			Developer docs
