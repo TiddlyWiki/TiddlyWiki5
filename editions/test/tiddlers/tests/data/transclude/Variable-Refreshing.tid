@@ -7,11 +7,20 @@ title: Output
 
 \function list-join(filter, sep:", ") [subfilter<filter>join<sep>]
 
+<$tiddler tiddler="TestData">
+
 <<list-join "[enlist{!!items}]">>
+
+</$tiddler>
+
++
+title: TestData
+
+
 +
 title: Actions
 
-<$action-setfield items={{{ [range[10]join[ ]] }}}/>
+<$action-setfield $tiddler="TestData" items={{{ [range[10]join[ ]] }}}/>
 +
 title: ExpectedResult
 
