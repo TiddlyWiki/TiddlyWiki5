@@ -150,13 +150,14 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 			// Check for a <$list-item> widget
 			if(this.explicitListTemplate) {
 				templateTree = this.explicitListTemplate;
-			} else {
+			} else if (!this.explicitEmptyTemplate) {
 				templateTree = this.parseTreeNode.children;
 			}
-		} else {
+		}
+		if(!templateTree) {
 			// Default template is a link to the title
 			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
-					{type: "text", text: title}
+				{type: "text", text: title}
 			]}]}];
 		}
 	}
