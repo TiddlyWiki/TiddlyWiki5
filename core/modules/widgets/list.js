@@ -69,15 +69,7 @@ ListWidget.prototype.execute = function() {
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
 	// Look for <$list-template> and <$list-empty> widgets as immediate child widgets
-	this.explicitListTemplate = null;
-	this.explicitEmptyTemplate = null;
-	$tw.utils.each(this.parseTreeNode.children,function(node) {
-		if(node.type === "list-template") {
-			self.explicitListTemplate = node.children;
-		} else if(node.type === "list-empty") {
-			self.explicitEmptyTemplate = node.children;
-		}
-	});
+	this.findExplicitTemplates();
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -95,6 +87,24 @@ ListWidget.prototype.execute = function() {
 	// Clear the last history
 	this.history = [];
 };
+
+ListWidget.prototype.findExplicitTemplates = function() {
+	var self = this;
+	this.explicitListTemplate = null;
+	this.explicitEmptyTemplate = null;
+	var searchChildren = function(childNodes) {
+		$tw.utils.each(childNodes,function(node) {
+			if(node.type === "list-template") {
+				self.explicitListTemplate = node.children;
+			} else if(node.type === "list-empty") {
+				self.explicitEmptyTemplate = node.children;
+			} else if(node.type === "element" && node.tag === "p") {
+				searchChildren(node.children);
+			}
+		});
+	};
+	searchChildren(this.parseTreeNode.children);
+}
 
 ListWidget.prototype.getTiddlerList = function() {
 	var limit = $tw.utils.getInt(this.getAttribute("limit",""),undefined);
