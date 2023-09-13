@@ -104,13 +104,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build favicon static index \
 	|| exit 1
 
-# /empty.html			Empty
-# /empty.hta			For Internet Explorer
+# /empty.html					Empty
+# /empty.hta					For Internet Explorer
+# /empty-external-core.html		External core empty
+# /tiddlywikicore-<version>.js	Core plugin javascript
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/empty \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
-	--build empty \
+	--build empty emptyexternalcore \
 	|| exit 1
 
 
