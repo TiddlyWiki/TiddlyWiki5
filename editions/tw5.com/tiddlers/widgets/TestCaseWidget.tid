@@ -40,7 +40,7 @@ The following conventions are used for test case tiddlers:
 <$data title="Description" text="Simple example of a test case"/>
 <$data title="Output" text="""<$testcase>
 <$data title="Description" text="How to calculate 2 plus 2"/>
-<$data title="Output" text="<$text text={{{ =2 =[add[2]] }}}/>"/>
+<$data title="Output" text="<$text text={{{ [[2]add[2]] }}}/>"/>
 </$testcase>
 """/>
 </$testcase>
