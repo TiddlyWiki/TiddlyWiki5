@@ -17,7 +17,7 @@ This is a <% if [{something}] %>Elephant<% elseif [{else}] %>Pelican<% else %>Cr
 "use strict";
 
 exports.name = "conditional";
-exports.types = {inline: true, block: false};
+exports.types = {inline: true, block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
@@ -53,10 +53,11 @@ exports.parse = function() {
 	var filterCondition = this.parser.source.substring(this.match.index + this.match[0].length,this.terminateIfMatch.index);
 	// Advance the parser position to past the %>
 	this.parser.pos = this.terminateIfMatch.index + this.terminateIfMatch[0].length;
-	return this.parseIfBlock(filterCondition);
+	// Parse the if clause
+	return this.parseIfClause(filterCondition);
 };
 
-exports.parseIfBlock = function(filterCondition) {
+exports.parseIfClause = function(filterCondition) {
 	// Create the list widget
 	var listWidget = {
 		type: "list",
@@ -76,10 +77,12 @@ exports.parseIfBlock = function(filterCondition) {
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"filter",filterCondition);
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"variable","condition");
 	$tw.utils.addAttributeToParseTreeNode(listWidget,"limit","1");
+	// Check for an immediately following double linebreak
+	var hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Parse the body looking for else or endif
 	var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>|\\<\\%\\s*(else)\\s*\\%\\>|\\<\\%\\s*(elseif)\\s+([\\s\\S]+?)\\%\\>",
 		ex;
-	if(this.is.block) {
+	if(hasLineBreak) {
 		ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 	} else {
 		var reEnd = new RegExp(reEndString,"mg");
@@ -92,10 +95,12 @@ exports.parseIfBlock = function(filterCondition) {
 		if(ex.match[1] === "endif") {
 			// Nothing to do if we just found an endif
 		} else if(ex.match[2] === "else") {
+			// Check for an immediately following double linebreak
+			hasLineBreak = !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 			// If we found an else then we need to parse the body looking for the endif
 			var reEndString = "\\<\\%\\s*(endif)\\s*\\%\\>",
 			ex;
-			if(this.is.block) {
+			if(hasLineBreak) {
 				ex = this.parser.parseBlocksTerminatedExtended(reEndString);
 			} else {
 				var reEnd = new RegExp(reEndString,"mg");
@@ -104,8 +109,8 @@ exports.parseIfBlock = function(filterCondition) {
 			// Put the parsed content inside the list empty template
 			listWidget.children[1].children = ex.tree;
 		} else if(ex.match[3] === "elseif") {
-			// Parse the elseif block by reusing this parser, passing the new filter condition
-			listWidget.children[1].children = this.parseIfBlock(ex.match[4]);
+			// Parse the elseif clause by reusing this parser, passing the new filter condition
+			listWidget.children[1].children = this.parseIfClause(ex.match[4]);
 		}
 	}
 	// Return the parse tree node

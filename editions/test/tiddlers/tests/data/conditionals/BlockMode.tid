@@ -1,5 +1,5 @@
-title: Conditionals/Nested
-description: Nested conditional shortcut syntax
+title: Conditionals/BlockMode
+description: Basic conditional shortcut syntax in block mode
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
@@ -7,14 +7,23 @@ title: Output
 
 \procedure test(animal)
 <% if [<animal>match[Elephant]] %>
-It is an elephant
+
+! It is an elephant
+
 <% else %>
+
 <% if [<animal>match[Giraffe]] %>
-It is a giraffe
+
+! It is a giraffe
+
 <% else %>
-It is completely unknown
+
+! It is completely unknown
+
 <% endif %>
+
 <% endif %>
+
 \end
 
 <<test "Giraffe">>
@@ -22,17 +31,7 @@ It is completely unknown
 <<test "Elephant">>
 
 <<test "Antelope">>
-
 +
 title: ExpectedResult
 
-
-
-It is a giraffe
-
-
-It is an elephant
-
-
-It is completely unknown
-
+<h1 class="">It is a giraffe</h1><h1 class="">It is an elephant</h1><h1 class="">It is completely unknown</h1>

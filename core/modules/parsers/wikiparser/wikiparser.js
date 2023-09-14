@@ -223,7 +223,7 @@ Parse a block from the current position
 	terminatorRegExpString: optional regular expression string that identifies the end of plain paragraphs. Must not include capturing parenthesis
 */
 WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
-	var terminatorRegExp = terminatorRegExpString ? new RegExp("(" + terminatorRegExpString + "|\\r?\\n\\r?\\n)","mg") : /(\r?\n\r?\n)/mg;
+	var terminatorRegExp = terminatorRegExpString ? new RegExp(terminatorRegExpString + "|\\r?\\n\\r?\\n","mg") : /(\r?\n\r?\n)/mg;
 	this.skipWhitespace();
 	if(this.pos >= this.sourceLength) {
 		return [];
@@ -275,7 +275,7 @@ WikiParser.prototype.parseBlocksTerminated = function(terminatorRegExpString) {
 Parse blocks of text until a terminating regexp is encountered
 */
 WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpString) {
-	var terminatorRegExp = new RegExp("(" + terminatorRegExpString + ")","mg"),
+	var terminatorRegExp = new RegExp(terminatorRegExpString,"mg"),
 		result = {
 			tree: []
 		};
