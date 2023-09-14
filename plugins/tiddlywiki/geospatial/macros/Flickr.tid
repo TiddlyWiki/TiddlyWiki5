@@ -1,5 +1,5 @@
-title: $:/plugins/tiddlywiki/geospatial/macros/Flickr
-tags: $:/tags/Macro
+title: $:/plugins/tiddlywiki/geospatial/helpers/Flickr
+tags: $:/tags/Global
 
 <!--
 Get items from a Flickr album/interestingness/collection etc.
@@ -53,7 +53,7 @@ https://api.flickr.com/services/rest/
 \end request-url
 
 <$let 
-	photoTiddlerTemplate={{{ [<photoTiddlerTemplate>!is[blank]else[$:/plugins/tiddlywiki/geospatial/macros/Flickr/DefaultPhotoTemplate]] }}}
+	photoTiddlerTemplate={{{ [<photoTiddlerTemplate>!is[blank]else[$:/plugins/tiddlywiki/geospatial/helpers/Flickr/DefaultPhotoTemplate]] }}}
 >
 	<$action-sendmessage
 		$message="tm-http-request"

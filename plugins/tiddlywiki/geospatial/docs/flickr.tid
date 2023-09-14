@@ -1,14 +1,14 @@
-title: $:/plugins/tiddlywiki/geospatial/docs/flickr-macros
-caption: Flickr macros
+title: $:/plugins/tiddlywiki/geospatial/docs/flickr-helpers
+caption: Flickr helpers
 tags: $:/tags/GeospatialDocs
 
-!! Flickr Macros
+!! Flickr Helpers
 
 !!! Photo Tiddlers
 
-The macros that retrieve photos from Flickr create a separate tiddler for each retrieved photo. The field values of these photo tiddlers are specified through a photo tiddler template that specifies a filter expression for each field that is to be included.
+The procedures that retrieve photos from Flickr create a separate tiddler for each retrieved photo. The field values of these photo tiddlers are specified through a photo tiddler template that specifies a filter expression for each field that is to be included.
 
-A [[default photo tiddler template|$:/plugins/tiddlywiki/geospatial/macros/Flickr/DefaultPhotoTemplate]] is used if one is not specified. The default template makes the following assignments:
+A [[default photo tiddler template|$:/plugins/tiddlywiki/geospatial/procedures/Flickr/DefaultPhotoTemplate]] is used if one is not specified. The default template makes the following assignments:
 
 |!Field |!Description |
 |title |Set to "Flickr Photo " appended with Flickr's ID for the photograph |
@@ -29,7 +29,7 @@ The photo tiddler template can reference the following variables. See [[Flickr's
 |photoID |Flickr photo ID for the photograph |
 |photoSecret |The URL secret associated with the photograph |
 
-!!! `flickr-get-photos-of-user-items` macro
+!!! `flickr-get-photos-of-user-items` procedure
 
 Retrieves photographs of a particular user, identified by their user ID.
 
@@ -43,7 +43,7 @@ For example:
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 <$data title="Description" text="Get photographs of user"/>
 <$data title="Output" text="""<$button>
-<$macrocall $name="flickr-get-photos-of-user-items" userID="35468148136@N01"/>
+<$transclude $variable="flickr-get-photos-of-user-items" userID="35468148136@N01"/>
 Click to get photos of user
 </$button>
 
@@ -57,7 +57,7 @@ Click to get photos of user
 """/>
 </$testcase>
 
-!!! `flickr-get-group-items` macro
+!!! `flickr-get-group-items` procedure
 
 Retrieves photographs from a group, identified by the group ID.
 
@@ -71,7 +71,7 @@ For example:
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 <$data title="Description" text="Get photographs from group"/>
 <$data title="Output" text="""<$button>
-<$macrocall $name="flickr-get-group-items" groupID="22075379@N00"/>
+<$transclude $variable="flickr-get-group-items" groupID="22075379@N00"/>
 Click to get photos from group
 </$button>
 
@@ -85,7 +85,7 @@ Click to get photos from group
 """/>
 </$testcase>
 
-!!! `flickr-get-album-items` macro
+!!! `flickr-get-album-items` procedure
 
 Retrieves photographs from an album, identified by the album ID.
 
@@ -99,7 +99,7 @@ For example:
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 <$data title="Description" text="Get photographs from album"/>
 <$data title="Output" text="""<$button>
-<$macrocall $name="flickr-get-album-items" albumID="72157630297432522"/>
+<$transclude $variable="flickr-get-album-items" albumID="72157630297432522"/>
 Click to get photos from album
 </$button>
 
@@ -113,7 +113,7 @@ Click to get photos from album
 """/>
 </$testcase>
 
-!!! `flickr-get-interesting-items` macro
+!!! `flickr-get-interesting-items` procedure
 
 Retrieves Flickr's current list of the 500 most "interesting" photographs. 
 
@@ -126,7 +126,7 @@ For example:
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 <$data title="Description" text="Get interesting photographs"/>
 <$data title="Output" text="""<$button>
-<$macrocall $name="flickr-get-interesting-items"/>
+<$transclude $variable="flickr-get-interesting-items"/>
 Click to get interesting photos
 </$button>
 

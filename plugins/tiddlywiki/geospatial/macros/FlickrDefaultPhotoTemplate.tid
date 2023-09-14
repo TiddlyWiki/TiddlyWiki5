@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/geospatial/macros/Flickr/DefaultPhotoTemplate
+title: $:/plugins/tiddlywiki/geospatial/helpers/Flickr/DefaultPhotoTemplate
 type: application/x-tiddler-dictionary
 
 title: [<photoID>addprefix[Flickr Photo ]]
