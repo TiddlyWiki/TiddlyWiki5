@@ -33,7 +33,7 @@
   },
   "scripts": {
     "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
-    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --rendertiddler $:/core/save/all test.html text/plain --test && echo To run the tests in a browser, open \"editions/test/output/test.html\"",
+    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   }
