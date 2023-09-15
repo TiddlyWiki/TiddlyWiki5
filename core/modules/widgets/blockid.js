@@ -21,6 +21,9 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	// Create an invisible DOM element with data that can be accessed from JS or CSS
 	this.spanDomNode = this.document.createElement("span");
 	this.spanDomNode.setAttribute("data-id",this.id);
+	if(this.before) {
+		this.spanDomNode.setAttribute("data-before","true");
+	}
 	this.spanDomNode.className = "tc-block-id";
 	parent.insertBefore(this.spanDomNode,nextSibling);
 	this.domNodes.push(this.spanDomNode);
@@ -32,6 +35,7 @@ Compute the internal state of the widget
 BlockIdWidget.prototype.execute = function() {
 	// Get the id from the parse tree node or manually assigned attributes
 	this.id = this.getAttribute("id");
+	this.before = this.getAttribute("before");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
