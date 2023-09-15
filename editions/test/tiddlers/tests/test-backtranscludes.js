@@ -1,7 +1,7 @@
 /*\
 title: test-backtranscludes.js
 type: application/javascript
-tags: {{$:/tags/test-spec]]
+tags: $:/tags/test-spec
 
 Tests the backtranscludes mechanism.
 
