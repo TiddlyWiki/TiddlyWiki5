@@ -34,10 +34,9 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 };
 
 BlockIdWidget.prototype.hookFocusElementEvent = function(event) {
+	if(!event.param) return event;
 	var id = event.param.replace('#','');
-	if(id !== this.id) {
-		return event;
-	}
+	if(id !== this.id) return event;
 	var element = this.parentDomNode;
 	// need to check if the block is before this node
 	if(this.previousSibling) {
