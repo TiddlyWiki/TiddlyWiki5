@@ -559,8 +559,8 @@ exports.extractTranscludes = function(parseTreeRoot) {
 		checkParseTree = function(parseTree) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
-				if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
-					var value = parseTreeNode.attributes.tiddler.value;
+				if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.$tiddler && parseTreeNode.attributes.$tiddler.type === "string") {
+					var value = parseTreeNode.attributes.$tiddler.value;
 					if(transcludes.indexOf(value) === -1) {
 						transcludes.push(value);
 					}
