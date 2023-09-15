@@ -45,7 +45,10 @@ BlockIdWidget.prototype.hookFocusElementEvent = function(event) {
 	element.focus({ focusVisible: true });
 	// toggle class to trigger highlight animation
 	$tw.utils.removeClass(element,"tc-focus-highlight");
-	$tw.utils.addClass(element,"tc-focus-highlight");
+	// Using setTimeout to ensure the removal takes effect before adding the class again.
+	setTimeout(function() {
+		$tw.utils.addClass(element,"tc-focus-highlight");
+	}, 50);
 	return false;
 };
 
