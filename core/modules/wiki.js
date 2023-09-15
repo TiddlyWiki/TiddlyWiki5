@@ -534,8 +534,8 @@ Return an array of tiddler titles that link to the specified tiddler
 */
 exports.getTiddlerBacklinks = function(targetTitle) {
 	var self = this,
-		backlinksIndexer = this.getIndexer("BacklinksIndexer"),
-		backlinks = backlinksIndexer && backlinksIndexer.lookup(targetTitle);
+		backIndexer = this.getIndexer("BackIndexer"),
+		backlinks = backIndexer && backIndexer.subIndexers.link.lookup(targetTitle);
 
 	if(!backlinks) {
 		backlinks = [];
@@ -596,17 +596,11 @@ Return an array of tiddler titles that transclude to the specified tiddler
 */
 exports.getTiddlerBacktranscludes = function(targetTitle) {
 	var self = this,
-		backtranscludesIndexer = this.getIndexer("BacktranscludesIndexer"),
-		backtranscludes = backtranscludesIndexer && backtranscludesIndexer.lookup(targetTitle);
+		backIndexer = this.getIndexer("BackIndexer"),
+		backtranscludes = backIndexer && backIndexer.subIndexers.transclude.lookup(targetTitle);
 
 	if(!backtranscludes) {
 		backtranscludes = [];
-		this.forEachTiddler(function(title,tiddler) {
-			var transcludes = self.getTiddlertranscludes(title);
-			if(transcludes.indexOf(targetTitle) !== -1) {
-				backtranscludes.push(title);
-			}
-		});
 	}
 	return backtranscludes;
 };
