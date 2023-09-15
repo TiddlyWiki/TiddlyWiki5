@@ -582,7 +582,7 @@ exports.extractTranscludes = function(parseTreeRoot) {
 
 
 /*
-Return an array of tiddler titles that are directly transcludeed from the specified tiddler
+Return an array of tiddler titles that are transcluded from the specified tiddler
 */
 exports.getTiddlerTranscludes = function(title) {
 	var self = this;

@@ -32,15 +32,6 @@ function BackSubIndexer(indexer,extractor) {
 	this.wiki = indexer.wiki;
 	this.indexer = indexer;
 	this.extractor = extractor;
-	this.index = null; // Hashmap of tag title to {isSorted: bool, titles: [array]} or null if not yet initialised
-}
-
-BackSubIndexer.prototype.init = function() {
-	// lazy init until first lookup
-	this.index = null;
-}
-
-BackSubIndexer.prototype._init = function() {
 	/**
 	 * {
 	 *   [target title, e.g. tiddler title being linked to]:
@@ -49,6 +40,15 @@ BackSubIndexer.prototype._init = function() {
 	 * 	   }
 	 * }
 	 */
+	this.index = null;
+}
+
+BackSubIndexer.prototype.init = function() {
+	// lazy init until first lookup
+	this.index = null;
+}
+
+BackSubIndexer.prototype._init = function() {
 	this.index = Object.create(null);
 	var self = this;
 	this.wiki.forEachTiddler(function(sourceTitle,tiddler) {
