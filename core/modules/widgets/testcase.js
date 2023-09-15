@@ -31,6 +31,10 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
+	// Create container DOM node
+	var domNode = this.document.createElement("div");
+	this.domNodes.push(domNode);
+	parent.insertBefore(domNode,nextSibling);
 	// Render the children into a hidden DOM node
 	var parser = {
 		tree: [{
@@ -77,10 +81,10 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.setVariable("payloadTiddlers",jsonPayload);
 	// Render the page root template of the subwiki
 	var rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{document: this.document, parseAsInline: false, parentWidget: this});
-	rootWidget.render(parent,nextSibling);
+	rootWidget.render(domNode);
 	// Trap changes in the wiki and refresh the rendering
 	this.testcaseWiki.addEventListener("change",function(changes) {
-		rootWidget.refresh(changes,parent,nextSibling);
+		rootWidget.refresh(changes,domNode);
 	});
 };
 
