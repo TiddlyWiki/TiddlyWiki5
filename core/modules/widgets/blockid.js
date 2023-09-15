@@ -37,9 +37,14 @@ BlockIdWidget.prototype.hookFocusElementEvent = function(event) {
 	if(!event.param) return event;
 	var id = event.param.replace('#','');
 	if(id !== this.id) return event;
-	var element = this.parentDomNode;
+	var selector = event.param || "",
+			element,
+			baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
+	element = $tw.utils.querySelectorSafe(selector,baseElement) || this.spanDomNode;
+	if(!element.parentNode) return;
+	element = element.parentNode;
 	// need to check if the block is before this node
-	if(this.previousSibling) {
+	if(this.previousSibling && element.previousSibling) {
 		element = element.previousSibling;
 	}
 	element.focus({ focusVisible: true });

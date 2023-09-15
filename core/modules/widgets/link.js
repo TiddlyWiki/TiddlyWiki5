@@ -168,11 +168,15 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		event: event
 	});
 	if(this.toBlockId) {
-		this.dispatchEvent({
-			type: "tm-focus-selector",
-			param: "#" + this.toBlockId,
-			event: event,
-		});
+		var duration = $tw.utils.getAnimationDuration();
+		var self = this;
+		setTimeout(function() {
+			self.dispatchEvent({
+				type: "tm-focus-selector",
+				param: "#" + self.toBlockId,
+				event: event,
+			});
+		},duration);
 	}
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();
