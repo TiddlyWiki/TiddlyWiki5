@@ -23,8 +23,8 @@ exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
-	// Regexp to match `[[Title^blockId|Alias]]`, the `^blockId` and `|Alias` are optional.
-	this.matchRegExp = /\[\[(.*?)(?:\^([^|\s^]+))?(?:\|(.*?))?\]\]/mg;
+	// Regexp to match `[[Alias|Title^blockId]]`, the `Alias|` and `^blockId` are optional.
+	this.matchRegExp = /\[\[(.*?)(?:\|(.*?)?)?(?:\^([^|\s^]+)?)?\]\]/mg;
 };
 
 exports.parse = function() {
@@ -32,8 +32,8 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Process the link
 	var text = this.match[1],
-		blockId = this.match[2] || "",
-		link = this.match[3] || text;
+		link = this.match[2] || text,
+		blockId = this.match[3] || "";
 	if($tw.utils.isLinkExternal(link)) {
 		// add back the part after `^` to the ext link, if it happen to has one.
 		if(blockId) {
@@ -57,7 +57,7 @@ exports.parse = function() {
 			type: "link",
 			attributes: {
 				to: {type: "string", value: link},
-				id: {type: "string", value: blockId},
+				toBlockId: {type: "string", value: blockId},
 			},
 			children: [{
 				type: "text", text: text
