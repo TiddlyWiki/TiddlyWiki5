@@ -1,17 +1,17 @@
 /*\
-title: $:/core/modules/widgets/blockidentifier.js
+title: $:/core/modules/widgets/blockid.js
 type: application/javascript
 module-type: widget
 
 An invisible element with block id metadata.
 \*/
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-var BlockIdentifierWidget = function(parseTreeNode,options) {
+var BlockIdWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
-BlockIdentifierWidget.prototype = new Widget();
+BlockIdWidget.prototype = new Widget();
 
-BlockIdentifierWidget.prototype.render = function(parent,nextSibling) {
+BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -29,7 +29,7 @@ BlockIdentifierWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-BlockIdentifierWidget.prototype.execute = function() {
+BlockIdWidget.prototype.execute = function() {
 	// Get the id from the parse tree node or manually assigned attributes
 	this.id = this.getAttribute("id");
 	// Make the child widgets
@@ -39,7 +39,7 @@ BlockIdentifierWidget.prototype.execute = function() {
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-BlockIdentifierWidget.prototype.refresh = function(changedTiddlers) {
+BlockIdWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(($tw.utils.count(changedAttributes) > 0)) {
 		this.refreshSelf();
@@ -49,4 +49,4 @@ BlockIdentifierWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports.blockidentifier = BlockIdentifierWidget;
+exports.blockid = BlockIdWidget;

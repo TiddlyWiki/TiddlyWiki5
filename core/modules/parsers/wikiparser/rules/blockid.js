@@ -9,7 +9,7 @@ Use hash as a tag for paragraph, we call it block identifier.
 2. When creating widgets for rendering, omit this hash, so it's invisible in view mode. But this widget will create an anchor to jump to.
 
 \*/
-exports.name = "blockidentifier";
+exports.name = "blockid";
 exports.types = {inline: true};
 
 /*
@@ -30,7 +30,7 @@ exports.parse = function() {
 	var id = this.match[0].slice(2);
 	// Parse tree nodes to return
 	return [{
-		type: "blockidentifier",
+		type: "blockid",
 		attributes: {
 			id: {type: "string", value: id}
 		},
