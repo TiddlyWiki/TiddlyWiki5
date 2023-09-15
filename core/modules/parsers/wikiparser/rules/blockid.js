@@ -39,7 +39,7 @@ exports.parse = function() {
 			id: {type: "string", value: blockId || blockBeforeId},
 			// `true` means the block is before this node, in parent node's children list.
 			// `false` means the block is this node's parent node.
-			before: {type: "boolean", value: Boolean(blockBeforeId)},
+			previousSibling: {type: "boolean", value: Boolean(blockBeforeId)},
 		},
 		children: []
 	}];

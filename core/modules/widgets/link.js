@@ -167,6 +167,13 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		shiftKey: event.shiftKey,
 		event: event
 	});
+	if(this.toBlockId) {
+		this.dispatchEvent({
+			type: "tm-focus-selector",
+			param: "#" + this.toBlockId,
+			event: event,
+		});
+	}
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();
 	}
@@ -180,6 +187,7 @@ Compute the internal state of the widget
 LinkWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
+	this.toBlockId = this.getAttribute("toBlockId");
 	this.tooltip = this.getAttribute("tooltip");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.linkClasses = this.getAttribute("class");

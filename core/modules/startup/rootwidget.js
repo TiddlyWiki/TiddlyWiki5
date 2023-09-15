@@ -72,6 +72,8 @@ exports.startup = function() {
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
+		event = $tw.hooks.invokeHook("th-focus-selector",event);
+		if (!event) return;
 		var selector = event.param || "",
 			element,
 		    	baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;

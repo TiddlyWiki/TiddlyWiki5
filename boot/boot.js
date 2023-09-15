@@ -2675,6 +2675,20 @@ $tw.hooks.addHook = function(hookName,definition) {
 };
 
 /*
+Delete hooks from the hashmap
+*/
+$tw.hooks.removeHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		var index = $tw.hooks.names[hookName].findIndex(function(hook) {
+			return hook === definition;
+		});
+		if(index !== -1) {
+			$tw.hooks.names[hookName].splice(index, 1);
+		}
+	}
+};
+
+/*
 Invoke the hook by key
 */
 $tw.hooks.invokeHook = function(hookName /*, value,... */) {

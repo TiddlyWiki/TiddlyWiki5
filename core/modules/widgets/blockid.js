@@ -18,9 +18,13 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
+	$tw.hooks.removeHook("th-focus-selector",this.hookFocusElementEvent);
+	this.hookFocusElementEvent = this.hookFocusElementEvent.bind(this);
+	$tw.hooks.addHook("th-focus-selector",this.hookFocusElementEvent);
 	// Create an invisible DOM element with data that can be accessed from JS or CSS
 	this.spanDomNode = this.document.createElement("span");
-	this.spanDomNode.setAttribute("data-id",this.id);
+	this.spanDomNode.id = this.id;
+	this.spanDomNode.setAttribute("data-block-id",this.id);
 	if(this.before) {
 		this.spanDomNode.setAttribute("data-before","true");
 	}
@@ -29,13 +33,34 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(this.spanDomNode);
 };
 
+BlockIdWidget.prototype.hookFocusElementEvent = function(event) {
+	var id = event.param.replace('#','');
+	if(id !== this.id) {
+		return event;
+	}
+	var element = this.parentDomNode;
+	// need to check if the block is before this node
+	if(this.previousSibling) {
+		element = element.previousSibling;
+	}
+	element.focus({ focusVisible: true });
+	// toggle class to trigger highlight animation
+	$tw.utils.removeClass(element,"tc-focus-highlight");
+	$tw.utils.addClass(element,"tc-focus-highlight");
+	return false;
+};
+
+BlockIdWidget.prototype.removeChildDomNodes = function() {
+	$tw.hooks.removeHook("th-focus-selector",this.hookFocusElementEvent);
+};
+
 /*
 Compute the internal state of the widget
 */
 BlockIdWidget.prototype.execute = function() {
 	// Get the id from the parse tree node or manually assigned attributes
 	this.id = this.getAttribute("id");
-	this.before = this.getAttribute("before");
+	this.previousSibling = this.getAttribute("previousSibling");
 	// Make the child widgets
 	this.makeChildWidgets();
 };

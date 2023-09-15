@@ -2413,6 +2413,19 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour alert-highlight>>;
 }
 
+@keyframes fadeHighlight {
+	0% {
+		background-color: <<colour highlight-background>>;
+	}
+	100% {
+		background-color: transparent;
+	}
+}
+
+.tc-focus-highlight {
+	animation: fadeHighlight 2s forwards;
+}
+
 @media (min-width: <<sidebarbreakpoint>>) {
 
 	.tc-static-alert {
