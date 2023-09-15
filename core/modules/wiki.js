@@ -556,17 +556,23 @@ Return an array of tiddler titles that are directly transcluded within the given
 exports.extractTranscludes = function(parseTreeRoot) {
 	// Count up the transcludes
 	var transcludes = [],
-		checkParseTree = function(parseTree) {
+		checkParseTree = function(parseTree, parentNode) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
 				if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.$tiddler && parseTreeNode.attributes.$tiddler.type === "string") {
-					var value = parseTreeNode.attributes.$tiddler.value;
+					var value;
+					// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
+					if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
+						value = parentNode.attributes.tiddler.value;
+					} else {
+						value = parseTreeNode.attributes.$tiddler.value;
+					}
 					if(transcludes.indexOf(value) === -1) {
 						transcludes.push(value);
 					}
 				}
 				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children);
+					checkParseTree(parseTreeNode.children, parseTreeNode);
 				}
 			}
 		};

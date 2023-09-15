@@ -40,6 +40,22 @@ describe('Backtranscludes tests', function() {
 		});
 	});
 
+	describe('A tiddler transclude with template will still use the tiddler as result.', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestIncoming',
+			text: 'something'});
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: 'A transclude to {{TestIncoming||$:/core/ui/TagTemplate}}'});
+
+		it('should have a backtransclude', function() {
+			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+		});
+	});
+
 	describe('A tiddler that has a transclude added to it later', function() {
 		it('should have an additional backtransclude', function() {
 			var wiki = new $tw.Wiki();
