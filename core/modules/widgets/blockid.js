@@ -36,8 +36,27 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 	if(!event || !event.toBlockId) return event;
 	if(event.toBlockId !== this.id) return event;
-	var selector = "#"+event.toBlockId;
 	var baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
+	var duration = $tw.utils.getAnimationDuration();
+	var self = this;
+	// we have enabled `navigateSuppressNavigation` to avoid collision with scroll effect of `tm-navigate`, but need to wait for tiddler dom stably added to the story view.
+	setTimeout(function() {
+		var element = self._getTargetElement(baseElement);
+		if(!element) return;
+		// toggle class to trigger highlight animation
+		$tw.utils.removeClass(element,"tc-focus-highlight");
+		element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+		element.focus({ focusVisible: true });
+		// Using setTimeout to ensure the removal takes effect before adding the class again.
+		setTimeout(function() {
+			$tw.utils.addClass(element,"tc-focus-highlight");
+		}, 50);
+	}, duration);
+	return false;
+};
+
+BlockIdWidget.prototype._getTargetElement = function(baseElement) {
+	var selector = "#"+this.id;
 	// re-query the dom node, because `this.spanDomNode.parentNode` might already be removed from document
 	var element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(!element || !element.parentNode) return;
@@ -47,16 +66,7 @@ BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 	if(this.previousSibling && element.previousSibling) {
 		element = element.previousSibling;
 	}
-	// toggle class to trigger highlight animation
-	$tw.utils.removeClass(element,"tc-focus-highlight");
-	// we have enabled `navigateSuppressNavigation` to avoid collision with scroll effect of `tm-navigate`
-	element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-	element.focus({ focusVisible: true });
-	setTimeout(function() {
-		// Using setTimeout to ensure the removal takes effect before adding the class again.
-		$tw.utils.addClass(element,"tc-focus-highlight");
-	}, 50);
-	return false;
+	return element;
 };
 
 BlockIdWidget.prototype.removeChildDomNodes = function() {
