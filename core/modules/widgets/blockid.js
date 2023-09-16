@@ -37,21 +37,19 @@ BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 	if(!event || !event.toBlockId) return event;
 	if(event.toBlockId !== this.id) return event;
 	var baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
-	var duration = $tw.utils.getAnimationDuration();
-	var self = this;
-	// we have enabled `navigateSuppressNavigation` to avoid collision with scroll effect of `tm-navigate`, but need to wait for tiddler dom stably added to the story view.
-	setTimeout(function() {
-		var element = self._getTargetElement(baseElement);
-		if(!element) return;
-		// toggle class to trigger highlight animation
-		$tw.utils.removeClass(element,"tc-focus-highlight");
-		element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-		element.focus({ focusVisible: true });
-		// Using setTimeout to ensure the removal takes effect before adding the class again.
+	var element = this._getTargetElement(baseElement);
+	if(element) {
+		// if tiddler is already in the story view, just move to it.
+		this._scrollToBlockAndHighlight(element);
+	} else {
+		var self = this;
+		// Here we still need to wait for extra time after `duration`, so tiddler dom is actually added to the story view.
+		var duration = $tw.utils.getAnimationDuration() + 50;
 		setTimeout(function() {
-			$tw.utils.addClass(element,"tc-focus-highlight");
-		}, 50);
-	}, duration);
+			element = self._getTargetElement(baseElement);
+			self._scrollToBlockAndHighlight(element);
+		}, duration);
+	}
 	return false;
 };
 
@@ -67,6 +65,19 @@ BlockIdWidget.prototype._getTargetElement = function(baseElement) {
 		element = element.previousSibling;
 	}
 	return element;
+};
+
+BlockIdWidget.prototype._scrollToBlockAndHighlight = function(element) {
+	if(!element) return;
+	// toggle class to trigger highlight animation
+	$tw.utils.removeClass(element,"tc-focus-highlight");
+	// We enable the `navigateSuppressNavigation` in LinkWidget when sending `tm-navigate`, otherwise `tm-navigate` will force move to the title
+	element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+	element.focus({ focusVisible: true });
+	// Using setTimeout to ensure the removal takes effect before adding the class again.
+	setTimeout(function() {
+		$tw.utils.addClass(element,"tc-focus-highlight");
+	}, 50);
 };
 
 BlockIdWidget.prototype.removeChildDomNodes = function() {
