@@ -3,5 +3,5 @@
 	"name": "QR Code",
 	"description": "QR Code generator",
 	"author": "Zeno Zeng",
-	"list": "readme usage examples license"
+	"list": "readme docs examples license"
 }
