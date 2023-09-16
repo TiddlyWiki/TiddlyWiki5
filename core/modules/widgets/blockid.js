@@ -81,7 +81,7 @@ BlockIdWidget.prototype._scrollToBlockAndHighlight = function(element) {
 };
 
 BlockIdWidget.prototype.removeChildDomNodes = function() {
-	$tw.hooks.removeHook("th-focus-selector",this.hookNavigatedEvent);
+	$tw.hooks.removeHook("th-navigated",this.hookNavigatedEvent);
 };
 
 /*
