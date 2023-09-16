@@ -1,6 +1,6 @@
 caption: Linking
 created: 20131205155230596
-modified: 20211230145939554
+modified: 20230916070722108
 tags: WikiText
 title: Linking in WikiText
 type: text/vnd.tiddlywiki
@@ -128,4 +128,4 @@ See [[Anchor Links using HTML]] for more information.
 
 You can link to a specific block within a tiddler using `^blockId` syntax. You will also get block level backlinks with this technique. Some examples are in [[BlockIdWidget^exampleid1]].
 
-See [[Block Level Links in WikiText]] for more information.
+See [[Block Level Links in WikiText^linkto091607]] for more information.

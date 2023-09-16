@@ -150,6 +150,7 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 	this.dispatchEvent({
 		type: "tm-navigate",
 		navigateTo: this.to,
+		toBlockId: this.toBlockId,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
@@ -160,24 +161,13 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateFromClientRight: bounds.right,
 		navigateFromClientBottom: bounds.bottom,
 		navigateFromClientHeight: bounds.height,
-		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
+		navigateSuppressNavigation: this.toBlockId || event.metaKey || event.ctrlKey || (event.button === 1),
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
 		altKey: event.altKey,
 		shiftKey: event.shiftKey,
 		event: event
 	});
-	if(this.toBlockId) {
-		var duration = $tw.utils.getAnimationDuration();
-		var self = this;
-		setTimeout(function() {
-			self.dispatchEvent({
-				type: "tm-focus-selector",
-				param: "#" + self.toBlockId,
-				event: event,
-			});
-		},duration);
-	}
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();
 	}

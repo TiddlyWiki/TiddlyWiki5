@@ -1,0 +1,11 @@
+tags: HookMechanism
+title: Hook: th-navigated
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to do things after navigation takes effect.
+
+Hook function parameters are same as [[Hook: th-navigating]]:
+
+Return value:
+
+* possibly modified event object

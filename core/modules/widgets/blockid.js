@@ -9,8 +9,8 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var BlockIdWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	// only this widget knows target info (if the block is before this node or not), so we need to hook the focus event, and process it here, instead of in the root widget.
-	this.hookFocusElementEvent = this.hookFocusElementEvent.bind(this);
-	$tw.hooks.addHook("th-focus-selector",this.hookFocusElementEvent);
+	this.hookNavigatedEvent = this.hookNavigatedEvent.bind(this);
+	$tw.hooks.addHook("th-navigated",this.hookNavigatedEvent);
 };
 BlockIdWidget.prototype = new Widget();
 
@@ -33,32 +33,34 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(this.spanDomNode);
 };
 
-BlockIdWidget.prototype.hookFocusElementEvent = function(event) {
-	if(!event || !event.param) return event;
-	var id = event.param.replace('#','');
-	if(id !== this.id) return event;
-	var selector = event.param || "",
-			element,
-			baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
-	element = $tw.utils.querySelectorSafe(selector,baseElement);
+BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
+	if(!event || !event.toBlockId) return event;
+	if(event.toBlockId !== this.id) return event;
+	var selector = "#"+event.toBlockId;
+	var baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
+	// re-query the dom node, because `this.spanDomNode.parentNode` might already be removed from document
+	var element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(!element || !element.parentNode) return;
+	// the actual block is always at the parent level
 	element = element.parentNode;
 	// need to check if the block is before this node
 	if(this.previousSibling && element.previousSibling) {
 		element = element.previousSibling;
 	}
-	element.focus({ focusVisible: true });
 	// toggle class to trigger highlight animation
 	$tw.utils.removeClass(element,"tc-focus-highlight");
-	// Using setTimeout to ensure the removal takes effect before adding the class again.
+	// we have enabled `navigateSuppressNavigation` to avoid collision with scroll effect of `tm-navigate`
+	element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+	element.focus({ focusVisible: true });
 	setTimeout(function() {
+		// Using setTimeout to ensure the removal takes effect before adding the class again.
 		$tw.utils.addClass(element,"tc-focus-highlight");
 	}, 50);
 	return false;
 };
 
 BlockIdWidget.prototype.removeChildDomNodes = function() {
-	$tw.hooks.removeHook("th-focus-selector",this.hookFocusElementEvent);
+	$tw.hooks.removeHook("th-focus-selector",this.hookNavigatedEvent);
 };
 
 /*

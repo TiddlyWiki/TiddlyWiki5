@@ -154,6 +154,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 			this.addToHistory(event.navigateTo,event.navigateFromClientRect);
 		}
 	}
+	$tw.hooks.invokeHook("th-navigated",event);
 	return false;
 };
 
