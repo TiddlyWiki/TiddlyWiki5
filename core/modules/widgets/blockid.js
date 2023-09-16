@@ -8,6 +8,9 @@ An invisible element with block id metadata.
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var BlockIdWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+	// only this widget knows target info (if the block is before this node or not), so we need to hook the focus event, and process it here, instead of in the root widget.
+	this.hookFocusElementEvent = this.hookFocusElementEvent.bind(this);
+	$tw.hooks.addHook("th-focus-selector",this.hookFocusElementEvent);
 };
 BlockIdWidget.prototype = new Widget();
 
@@ -18,9 +21,6 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
-	$tw.hooks.removeHook("th-focus-selector",this.hookFocusElementEvent);
-	this.hookFocusElementEvent = this.hookFocusElementEvent.bind(this);
-	$tw.hooks.addHook("th-focus-selector",this.hookFocusElementEvent);
 	// Create an invisible DOM element with data that can be accessed from JS or CSS
 	this.spanDomNode = this.document.createElement("span");
 	this.spanDomNode.id = this.id;
@@ -40,7 +40,7 @@ BlockIdWidget.prototype.hookFocusElementEvent = function(event) {
 	var selector = event.param || "",
 			element,
 			baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
-	element = $tw.utils.querySelectorSafe(selector,baseElement) || this.spanDomNode;
+	element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(!element.parentNode) return;
 	element = element.parentNode;
 	// need to check if the block is before this node
