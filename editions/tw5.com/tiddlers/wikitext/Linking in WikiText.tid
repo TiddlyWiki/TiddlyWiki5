@@ -123,3 +123,9 @@ See also another example of [[constructing dynamic links|Concatenating text and 
 In TiddlyWiki anchor links can help us link to target points and distinct sections within rendered tiddlers. They can help the reader navigate longer tiddler content.
 
 See [[Anchor Links using HTML]] for more information.
+
+! Linking within tiddlers - Link to block
+
+You can link to a specific block within a tiddler using `^blockId` syntax. You will also get block level backlinks with this technique. Some examples are in [[BlockIdWidget^exampleid1]].
+
+See [[Block Level Links in WikiText]] for more information.

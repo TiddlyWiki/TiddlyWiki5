@@ -34,14 +34,14 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 };
 
 BlockIdWidget.prototype.hookFocusElementEvent = function(event) {
-	if(!event.param) return event;
+	if(!event || !event.param) return event;
 	var id = event.param.replace('#','');
 	if(id !== this.id) return event;
 	var selector = event.param || "",
 			element,
 			baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
 	element = $tw.utils.querySelectorSafe(selector,baseElement);
-	if(!element.parentNode) return;
+	if(!element || !element.parentNode) return;
 	element = element.parentNode;
 	// need to check if the block is before this node
 	if(this.previousSibling && element.previousSibling) {
@@ -67,7 +67,7 @@ Compute the internal state of the widget
 BlockIdWidget.prototype.execute = function() {
 	// Get the id from the parse tree node or manually assigned attributes
 	this.id = this.getAttribute("id");
-	this.previousSibling = this.getAttribute("previousSibling");
+	this.previousSibling = this.getAttribute("previousSibling") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
