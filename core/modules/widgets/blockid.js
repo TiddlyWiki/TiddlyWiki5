@@ -23,7 +23,6 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create an invisible DOM element with data that can be accessed from JS or CSS
 	this.idNode = this.document.createElement("span");
-	this.idNode.id = this.id;
 	this.idNode.setAttribute("data-block-id",this.id);
 	this.idNode.setAttribute("data-block-title",this.tiddlerTitle);
 	if(this.before) {
@@ -56,7 +55,7 @@ BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 };
 
 BlockIdWidget.prototype._getTargetElement = function(baseElement) {
-	var selector = "#"+this.id;
+	var selector = "span[data-block-id='"+this.id+"']";
 	if(this.tiddlerTitle) {
 		// allow different tiddler have same block id in the text, and only jump to the one with a same tiddler title.
 		selector += "[data-block-title='"+this.tiddlerTitle+"']";

@@ -1,11 +1,11 @@
 caption: Block Level Links
 created: 20230916061138153
-modified: 20230916070710392
+modified: 20230917121127276
 tags: WikiText
 title: Block Level Links in WikiText
 type: text/vnd.tiddlywiki
 
-! Adding ID for block ^block091606
+! Adding ID for block ^🤗→AddingIDforblock
 
 The basic syntax for block id is:
 
@@ -13,12 +13,12 @@ The basic syntax for block id is:
 
 # Don't forget the space between the end of the line and the `^`.
 # And there is no space between `^` and the id.
-# ID should be a [ext[valid HTML element ID|https://developer.mozilla.org/docs/Web/HTML/Global_attributes/id]], to avoid inadvertent errors, only ASCII letters, digits, '_', and '-' should be used, and the value for an id attribute should start with a letter.
+# ID can contain any char other than `^` and space ` `.
 
 And this block id widget will be rendered as an invisible element:
 
 ```html
-<span id="BlockLevelLinksID1" data-block-id="BlockLevelLinksID1" class="tc-block-id"></span>
+<span class="tc-block-id" data-block-id="BlockLevelLinksID1" data-block-title="Block Level Links in WikiText"></span>
 ```
 
 !! Adding id to previous block
@@ -42,3 +42,5 @@ Adding `^blockID` after the title in the link, will make this link highlight the
 <<wikitext-example-without-html src:"[[Link to BlockLevelLinksID1|Block Level Links in WikiText^BlockLevelLinksID1]]">>
 
 <<wikitext-example-without-html src:"[[Link to BlockLevelLinksID2|Block Level Links in WikiText^BlockLevelLinksID2]]">>
+
+<<wikitext-example src:"[[Link to Title|Block Level Links in WikiText^🤗→AddingIDforblock]]">>

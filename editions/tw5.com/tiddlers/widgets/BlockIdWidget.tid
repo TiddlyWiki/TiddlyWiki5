@@ -1,6 +1,6 @@
 caption: block id
 created: 20230916061829840
-modified: 20230917120133519
+modified: 20230917121007649
 tags: Widgets
 title: BlockIdWidget
 type: text/vnd.tiddlywiki
@@ -17,7 +17,7 @@ The content of the `<$blockid>` widget is ignored.
 |id |The unique id for the block |
 |previousSibling |`yes` means the block is before this node, in parent node's children list, else it means the block is this node's direct parent node. |
 
-See [[Block Level Links in WikiText^block091606]] for WikiText syntax of block ID.
+See [[Block Level Links in WikiText^🤗→AddingIDforblock]] for WikiText syntax of block ID.
 
 ! Example
 
