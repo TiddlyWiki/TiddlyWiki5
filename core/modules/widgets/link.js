@@ -161,7 +161,7 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateFromClientRight: bounds.right,
 		navigateFromClientBottom: bounds.bottom,
 		navigateFromClientHeight: bounds.height,
-		navigateSuppressNavigation: this.toBlockId || event.metaKey || event.ctrlKey || (event.button === 1),
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
 		altKey: event.altKey,

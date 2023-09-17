@@ -9,10 +9,17 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var BlockIdWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	// only this widget knows target info (if the block is before this node or not), so we need to hook the focus event, and process it here, instead of in the root widget.
+	this.hookNavigationAddHistoryEvent = this.hookNavigationAddHistoryEvent.bind(this);
 	this.hookNavigatedEvent = this.hookNavigatedEvent.bind(this);
+	$tw.hooks.addHook("th-navigating-add-history",this.hookNavigationAddHistoryEvent);
 	$tw.hooks.addHook("th-navigated",this.hookNavigatedEvent);
 };
 BlockIdWidget.prototype = new Widget();
+
+BlockIdWidget.prototype.removeChildDomNodes = function() {
+	$tw.hooks.removeHook("th-navigating-add-history",this.hookNavigationAddHistoryEvent);
+	$tw.hooks.removeHook("th-navigated",this.hookNavigatedEvent);
+};
 
 BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
@@ -33,10 +40,15 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(this.idNode);
 };
 
+BlockIdWidget.prototype._isNavigateToHere = function(event) {
+	if(!event || !event.toBlockId) return false;
+	if(event.toBlockId !== this.id) return false;
+	if(this.tiddlerTitle && event.navigateTo !== this.tiddlerTitle) return false;
+	return true;
+}
+
 BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
-	if(!event || !event.toBlockId) return event;
-	if(event.toBlockId !== this.id) return event;
-	if(this.tiddlerTitle && event.navigateTo !== this.tiddlerTitle) return event;
+	if(!this._isNavigateToHere(event)) return event;
 	var baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
 	var element = this._getTargetElement(baseElement);
 	if(element) {
@@ -52,6 +64,14 @@ BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 		}, duration);
 	}
 	return false;
+};
+
+BlockIdWidget.prototype.hookNavigationAddHistoryEvent = function(event) {
+	// DEBUG: console this._isNavigateToHere(event)
+	console.log(`this._isNavigateToHere(event)`, this._isNavigateToHere(event));
+	if(!this._isNavigateToHere(event)) return event;
+	event.navigateSuppressNavigation = true;
+	return event;
 };
 
 BlockIdWidget.prototype._getTargetElement = function(baseElement) {
@@ -83,10 +103,6 @@ BlockIdWidget.prototype._scrollToBlockAndHighlight = function(element) {
 	setTimeout(function() {
 		$tw.utils.addClass(element,"tc-focus-highlight");
 	}, 50);
-};
-
-BlockIdWidget.prototype.removeChildDomNodes = function() {
-	$tw.hooks.removeHook("th-navigated",this.hookNavigatedEvent);
 };
 
 /*

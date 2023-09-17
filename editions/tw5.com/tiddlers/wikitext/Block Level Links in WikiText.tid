@@ -1,6 +1,6 @@
 caption: Block Level Links
 created: 20230916061138153
-modified: 20230917121127276
+modified: 20230917122221226
 tags: WikiText
 title: Block Level Links in WikiText
 type: text/vnd.tiddlywiki
@@ -35,7 +35,7 @@ Some block, for example, code block, can't be suffixed by `^id`, but we can add 
 
 ">>
 
-! Link to the block ID ^linkto091607
+! Link to the block ID ^091607
 
 Adding `^blockID` after the title in the link, will make this link highlight the block with that ID.
 
