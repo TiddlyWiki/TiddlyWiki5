@@ -22,20 +22,22 @@ BlockIdWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Create an invisible DOM element with data that can be accessed from JS or CSS
-	this.spanDomNode = this.document.createElement("span");
-	this.spanDomNode.id = this.id;
-	this.spanDomNode.setAttribute("data-block-id",this.id);
+	this.idNode = this.document.createElement("span");
+	this.idNode.id = this.id;
+	this.idNode.setAttribute("data-block-id",this.id);
+	this.idNode.setAttribute("data-block-title",this.tiddlerTitle);
 	if(this.before) {
-		this.spanDomNode.setAttribute("data-before","true");
+		this.idNode.setAttribute("data-before","true");
 	}
-	this.spanDomNode.className = "tc-block-id";
-	parent.insertBefore(this.spanDomNode,nextSibling);
-	this.domNodes.push(this.spanDomNode);
+	this.idNode.className = "tc-block-id";
+	parent.insertBefore(this.idNode,nextSibling);
+	this.domNodes.push(this.idNode);
 };
 
 BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 	if(!event || !event.toBlockId) return event;
 	if(event.toBlockId !== this.id) return event;
+	if(this.tiddlerTitle && event.navigateTo !== this.tiddlerTitle) return event;
 	var baseElement = event.event && event.event.target ? event.event.target.ownerDocument : document;
 	var element = this._getTargetElement(baseElement);
 	if(element) {
@@ -55,7 +57,11 @@ BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 
 BlockIdWidget.prototype._getTargetElement = function(baseElement) {
 	var selector = "#"+this.id;
-	// re-query the dom node, because `this.spanDomNode.parentNode` might already be removed from document
+	if(this.tiddlerTitle) {
+		// allow different tiddler have same block id in the text, and only jump to the one with a same tiddler title.
+		selector += "[data-block-title='"+this.tiddlerTitle+"']";
+	}
+	// re-query the dom node, because `this.idNode.parentNode` might already be removed from document
 	var element = $tw.utils.querySelectorSafe(selector,baseElement);
 	if(!element || !element.parentNode) return;
 	// the actual block is always at the parent level
@@ -90,6 +96,7 @@ Compute the internal state of the widget
 BlockIdWidget.prototype.execute = function() {
 	// Get the id from the parse tree node or manually assigned attributes
 	this.id = this.getAttribute("id");
+	this.tiddlerTitle = this.getVariable("currentTiddler");
 	this.previousSibling = this.getAttribute("previousSibling") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();

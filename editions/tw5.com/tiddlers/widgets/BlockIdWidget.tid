@@ -1,6 +1,6 @@
 caption: block id
 created: 20230916061829840
-modified: 20230916062346854
+modified: 20230917120133519
 tags: Widgets
 title: BlockIdWidget
 type: text/vnd.tiddlywiki
@@ -21,19 +21,14 @@ See [[Block Level Links in WikiText^block091606]] for WikiText syntax of block I
 
 ! Example
 
-<<wikitext-example-without-html """The block id widget is invisible, and is usually located at the end of the line. <$blockid id="exampleid1"/>
+<<wikitext-example-without-html """The block id widget is invisible, and is usually located at the end of the line. ID is here:<$blockid id="BlockLevelLinksID1"/>
 
-[[exampleid1|BlockIdWidget^exampleid1]]
+[[Link to BlockLevelLinksID1|BlockIdWidget^BlockLevelLinksID1]]
 """>>
 
-<<wikitext-example-without-html """You can refer to the block that is a line before the block id widget. Make sure block id widget itself is in a block (paragraph).
+<<wikitext-example """You can refer to the block that is a line before the block id widget. Make sure block id widget itself is in a block (paragraph).
 
-<p><$blockid id="exampleid2" previousSibling="yes"/></p>
+ID is here:<$blockid id="BlockLevelLinksID2" previousSibling="yes"/>
 
-[[exampleid2|BlockIdWidget^exampleid2]]
-""">>
-
-<<wikitext-example-without-html """The block id widget is invisible, and is usually located at the end of the line. <$blockid id="exampleid1"/>
-
-[[exampleid1|BlockIdWidget^exampleid1]]
+[[Link to BlockLevelLinksID2|BlockIdWidget^BlockLevelLinksID2]]
 """>>
