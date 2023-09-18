@@ -67,8 +67,6 @@ BlockIdWidget.prototype.hookNavigatedEvent = function(event) {
 };
 
 BlockIdWidget.prototype.hookNavigationAddHistoryEvent = function(event) {
-	// DEBUG: console this._isNavigateToHere(event)
-	console.log(`this._isNavigateToHere(event)`, this._isNavigateToHere(event));
 	if(!this._isNavigateToHere(event)) return event;
 	event.navigateSuppressNavigation = true;
 	return event;
