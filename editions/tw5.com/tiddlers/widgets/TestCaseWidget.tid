@@ -11,10 +11,10 @@ The testcase widget creates an independent subwiki loaded with the specified pay
 
 ! Content and Attributes
 
-The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define the payload tiddlers to be included in the test case.
+The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define the payload tiddlers to be included in the test case. The `$:/core` plugin is automatically included in the payload.
 
 |!Attribute |!Description |
-|<<.attr template>> |Optional title of the template used to display the testcase (defaults to $:/core/ui/testcases/DefaultTemplate) |
+|<<.attr template>> |Optional title of the template used to display the testcase (defaults to $:/core/ui/testcases/DefaultTemplate). Note that custom templates will need to be explicitly added to the payload |
 
 ! Payload Tiddlers
 
