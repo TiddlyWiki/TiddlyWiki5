@@ -14,6 +14,8 @@ barcodereader widget for reading barcodes
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
+var nextID = 0;
+
 var BarCodeReaderWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -32,12 +34,15 @@ BarCodeReaderWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Make the child widgets
 	this.makeChildWidgets();
+	// Generate an ID for this element
+	var id = "capture-widget-internal-" + nextID;
+	nextID += 1;
 	// Create the DOM node and render children
 	var domNode = this.document.createElement("div");
 	domNode.className = "tc-readcode-widget";
 	domNode.setAttribute("width","300px");
 	domNode.setAttribute("height","300px");
-	domNode.id = "capture"
+	domNode.id = id;
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
@@ -58,7 +63,7 @@ BarCodeReaderWidget.prototype.render = function(parent,nextSibling) {
 			console.log("Scan error",errorMessage);
 		}
 		var html5QrcodeScanner = new __Html5QrcodeLibrary__.Html5QrcodeScanner(
-			"capture",
+			id,
 			{
 				fps: 10,
 				qrbox: 250
