@@ -21,7 +21,7 @@
 		"static": [
 			"--render","$:/core/templates/static.template.html","static.html","text/plain",
 			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
-			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",				
+			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
 			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"]
 	},
 	"config": {
