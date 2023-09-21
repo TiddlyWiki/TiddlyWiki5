@@ -36,9 +36,64 @@ tags: $:/tags/Stylesheet
 	margin: 0;
 }
 
-.tc-tour-panel-controls-icon {
-	fill: <<colour muted-foreground>>;
-	vertical-align: middle;
+.tc-tour-panel-controls .tc-tour-panel-list-button {
+	padding: 2px 8px;
+	border-radius: 1em;
+	color: <<color very-muted-foreground>>;
+}
+
+.tc-tour-panel-controls .tc-tour-panel-list-wrapper {
+	display: inline-block;
+	position: relative;
+}
+
+.tc-tour-panel-controls .tc-tour-panel-list-button.tc-selected {
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	background: <<color primary>>;
+}
+
+.tc-tour-panel-controls .tc-tour-panel-list-button:hover {
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
+}
+
+.tc-tour-panel-controls .tc-popup .tc-drop-down {
+	font-size: 1em;
+	color: <<colour very-muted-foreground>>;
+	min-width: auto;
+}
+
+.tc-tour-panel-chooser-item {
+	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour background>>;
+	color: <<colour foreground>>;
+	padding: 4px 4px 4px 8px;
+	margin: 12px 0;
+	border-radius: 12px;
+	box-shadow: 3px 3px 5px <<colour muted-foreground>>;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 1em;
+}
+
+.tc-tour-panel-chooser-item .tc-tour-panel-chooser-start-button {
+	display: inline-block;
+	width: auto;
+	padding: 4px;
+	font-size: 0.7em;
+	vertical-align: baseline;
+	border-radius: 1em;
+	background: <<colour download-background>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	text-transform: uppercase;
+}
+
+.tc-tour-panel-chooser-wrapper button:hover {
+	background: <<colour primary>>;
+	color: <<colour background>>;
 }
 
 .tc-tour-panel-fullscreen .tc-tour-panel-controls {

@@ -36,6 +36,31 @@ text: longer description of the tour
 <$transclude $tiddler={{$:/state/tour/step}} $field="enter-actions"/>
 \end
 
+\procedure tour-chooser(filter:"[all[shadows+tiddlers]tag[$:/tags/Tour]]")
+\define choose-tour-actions()
+<$transclude $variable="tour-start" title=<<currentTiddler>>/>
+\end choose-tour-actions
+<div class="tc-tour-panel-chooser-wrapper">
+	<$list filter=<<filter>>>
+		<div class="tc-tour-panel-chooser-item">
+			<div class="tc-tour-panel-chooser-item-text">
+				<$transclude $field="description">
+					<$text text=<<currentTiddler>>/>
+				</$transclude>
+			</div>
+			<$button class="tc-btn-invisible tc-tour-panel-chooser-start-button" actions=<<choose-tour-actions>>>
+				start&nbsp;{{$:/core/images/chevron-right}}
+			</$button>
+		</div>
+	</$list>
+</div>
+\end tour-chooser
+
+\procedure tour-start(title)
+<$action-setfield $tiddler="$:/config/CurrentTour" text=<<title>>/>
+<<tour-restart>>
+\end
+
 \procedure tour-restart()
 <$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
 <$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
@@ -52,3 +77,8 @@ text: longer description of the tour
 <<tour-initialise-current-tour-step>>
 \end
 
+\procedure tour-display-current-tour()
+<$transclude $tiddler={{$:/config/CurrentTour}} $field="description">
+	<$text text={{$:/config/CurrentTour}}/>
+</$transclude>
+\end
