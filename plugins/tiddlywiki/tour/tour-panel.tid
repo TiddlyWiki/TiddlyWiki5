@@ -1,8 +1,10 @@
 title: $:/plugins/tiddlywiki/tour/panel
 tags: $:/tags/PageTemplate
 
-\define tour-buttons()
-\define tv-action-refresh-policy() always
+\whitespace trim
+
+\procedure tour-buttons()
+\procedure tv-action-refresh-policy() always
 <div class="tc-tour-panel-navigation">
 <$list filter="[function[tour-is-not-first-step]]" variable="ignore">
 <$button class="tc-btn-big-green" style="background-color: red;">

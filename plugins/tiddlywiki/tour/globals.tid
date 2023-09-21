@@ -1,6 +1,8 @@
 title: $:/plugins/tiddlywiki/tour/globals
 tags: $:/tags/Global
 
+\whitespace trim
+
 <!--
 
 The following state tiddlers control the tour. They should not be directly modified,
