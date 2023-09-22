@@ -45,8 +45,22 @@ next
 			<$let
 				currentTour={{$:/config/CurrentTour}}
 				currentTourStep={{$:/state/tour/step}}
+				condition-var={{{ [<currentTourStep>get[condition-var]] :map[subfilter<currentTiddler>] }}}
 			>
-				<$transclude tiddler=<<currentTourStep>> mode="block"/>
+				<!-- Handle steps without a condition -->
+				<$list filter="[<currentTourStep>!has[condition]]" variable="ignore">
+					<$transclude tiddler=<<currentTourStep>> mode="block"/>
+					<<tour-buttons>>
+				</$list>
+				<!-- Handle steps that have a condition -->
+				<$list filter="[<currentTourStep>has[condition]]" variable="ignore">
+					<$transclude tiddler=<<currentTourStep>> mode="block"/>
+					<$list filter={{{ [<currentTourStep>get[condition]] }}} limit="1" variable="ignore">
+						<$confetti/>
+						Congratulations, you may proceed
+						<<tour-buttons>>
+					</$list>
+				</$list>
 			</$let>
 			<$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
 				<$button class="tc-btn-big-green" style="background-color: green;">

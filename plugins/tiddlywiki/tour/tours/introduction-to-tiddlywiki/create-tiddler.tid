@@ -3,17 +3,8 @@ tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-story-river div[data-tiddler-title="Draft of 'New Tiddler'"] input[value]:not([value="Congratulations"])
 selector-fallback-1: .tc-story-river div[data-tiddler-title='Draft of \'New Tiddler\''] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fsave
 selector-fallback-2: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-tiddler
+condition: [list[$:/StoryList]match[Congratulations]]
 
 ! Creating Tiddlers
 
 Your task is to create and open a tiddler titled "Congratulations"
-
-<$list filter="[list[$:/StoryList]match[Congratulations]]" variable="ignore">
-
-<$confetti/>
-
-Congratulations, you may proceed
-
-<<tour-buttons>>
-
-</$list>

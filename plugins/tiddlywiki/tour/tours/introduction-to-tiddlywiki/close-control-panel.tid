@@ -1,17 +1,8 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/close-control-panel
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-story-river div[data-tiddler-title='$:/ControlPanel'] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclose
+condition: [[$:/StoryList]!contains[$:/ControlPanel]]
 
 ! Close the control panel
 
 Your task now is to close the control panel.
-
-<$list filter="[[$:/StoryList]!contains[$:/ControlPanel]limit[1]]" variable="ignore">
-
-<$confetti/>
-
-Congratulations, you may proceed
-
-<<tour-buttons>>
-
-</$list>

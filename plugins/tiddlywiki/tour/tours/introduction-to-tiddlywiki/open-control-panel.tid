@@ -1,17 +1,8 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/open-control-panel
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fcontrol-panel
+condition: [[$:/StoryList]contains[$:/ControlPanel]]
 
 ! Welcome to ~TiddlyWiki
 
 Your task is to open the control panel.
-
-<$list filter="[[$:/StoryList]contains[$:/ControlPanel]limit[1]]" variable="ignore">
-
-<$confetti/>
-
-Congratulations, you may proceed
-
-<<tour-buttons>>
-
-</$list>

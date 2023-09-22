@@ -2,21 +2,9 @@ title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/recent
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-sidebar-tabs-main .tc-timeline > .tc-menu-list-item:nth-child(1) .tc-menu-list-subitem:nth-child(1) .tc-tiddlylink
 selector-fallback-1: .tc-sidebar-tabs-main button:nth-child(3)
+condition: [list[$:/StoryList]match<condition-var>]
+condition-var: [all[tiddlers]!is[system]!sort[modified]]
 
 ! Searching
 
 Your task is to use the "Recent" tab of the sidebar to open the most recently editted tiddler.
-
-<$let recentTiddler={{{ [all[tiddlers]!is[system]!sort[modified]] }}}>
-
-<$list filter="[list[$:/StoryList]match<recentTiddler>]" variable="ignore">
-
-<$confetti/>
-
-Congratulations! You may now proceed
-
-<<tour-buttons>>
-
-</$list>
-
-</$let>

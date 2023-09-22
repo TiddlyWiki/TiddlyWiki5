@@ -1,17 +1,8 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/search
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-sidebar-search .tc-popup-handle
+condition: [{$:/temp/search}match[help]]
 
 ! Searching
 
 Your task is to search for the phrase "help".
-
-<$list filter="[{$:/temp/search}match[help]]" variable="ignore">
-
-<$confetti/>
-
-Congratulations! You may now proceed
-
-<<tour-buttons>>
-
-</$list>
