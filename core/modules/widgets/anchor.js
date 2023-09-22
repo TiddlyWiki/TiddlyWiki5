@@ -21,7 +21,7 @@ AnchorWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create an invisible DOM element with data that can be accessed from JS or CSS
 	this.idNode = this.document.createElement("span");
-	this.idNode.setAttribute("data-anchor-id",this.id);
+	this.idNode.setAttribute("data-anchor-id",this.anchorId);
 	this.idNode.setAttribute("data-anchor-title",this.tiddlerTitle);
 	// if the actual block is before this node, we need to add a flag to the node
 	if(this.previousSibling) {
@@ -37,11 +37,27 @@ Compute the internal state of the widget
 */
 AnchorWidget.prototype.execute = function() {
 	// Get the id from the parse tree node or manually assigned attributes
-	this.id = this.getAttribute("id");
+	this.anchorId = this.getAttribute("id");
 	this.tiddlerTitle = this.getVariable("currentTiddler");
 	this.previousSibling = this.getAttribute("previousSibling") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();
+};
+
+/*
+Find the DOM node pointed by this anchor
+*/
+Widget.prototype.findAnchorTargetDomNode = function() {
+	if(!this.idNode) {
+		return null;
+	}
+	// the actual block is always at the parent level
+	targetElement = this.idNode.parentNode;
+	// need to check if the block is before this node
+	if(this.previousSibling) {
+		targetElement = targetElement.previousSibling;
+	}
+	return targetElement;
 };
 
 /*

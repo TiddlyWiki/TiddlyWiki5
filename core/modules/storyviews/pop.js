@@ -23,12 +23,23 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// If anchor is provided, find the element the anchor pointing to
+	var foundAnchor = false;
+	if(listItemWidget && historyInfo.anchor) {
+		var anchorWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
+			return widget.anchorId === historyInfo.anchor;
+		});
+		if(anchorWidget) {
+			targetElement = anchorWidget.findAnchorTargetDomNode()
+			foundAnchor = true;
+		}
+	}
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	// Scroll the node into view
-	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: foundAnchor});
 };
 
 PopStoryView.prototype.insert = function(widget) {

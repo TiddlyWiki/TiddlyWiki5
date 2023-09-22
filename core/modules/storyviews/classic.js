@@ -28,14 +28,12 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 		targetElement = listItemWidget.findFirstDomNode();
 	// If anchor is provided, find the element the anchor pointing to
 	var foundAnchor = false;
-	if(targetElement && historyInfo.anchor) {
-		var anchorElement = targetElement.querySelector("[data-anchor-id='" + historyInfo.anchor + "']");
-		if(anchorElement) {
-			targetElement = anchorElement.parentNode;
-			var isBefore = anchorElement.dataset.anchorPreviousSibling === "true";
-			if(isBefore) {
-				targetElement = targetElement.previousSibling;
-			}
+	if(listItemWidget && historyInfo.anchor) {
+		var anchorWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
+			return widget.anchorId === historyInfo.anchor;
+		});
+		if(anchorWidget) {
+			targetElement = anchorWidget.findAnchorTargetDomNode()
 			foundAnchor = true;
 		}
 	}
