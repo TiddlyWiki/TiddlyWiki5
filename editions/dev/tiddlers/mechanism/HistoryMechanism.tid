@@ -1,0 +1,8 @@
+created: 20230922141042399
+modified: 20230922141423022
+tags: 
+title: HistoryMechanism
+
+The story view is created by [[$:/core/ui/PageTemplate/story]] core page template, which uses list widget to render tiddlers. In this way, page template will reflect to history's change.
+
+List widget has a `history="$:/HistoryList"` parameter, that will be used in list widget's `handleHistoryChanges` method, and pass to the `this.storyview.navigateTo`, you can read [[storyview module]] for how storyview use the changed history.
