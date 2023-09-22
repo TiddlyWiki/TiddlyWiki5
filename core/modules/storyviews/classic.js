@@ -26,13 +26,26 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// If anchor is provided, find the element the anchor pointing to
+	var foundAnchor = false;
+	if(targetElement && historyInfo.anchor) {
+		var anchorElement = targetElement.querySelector("[data-anchor-id='" + historyInfo.anchor + "']");
+		if(anchorElement) {
+			targetElement = anchorElement.parentNode;
+			var isBefore = anchorElement.dataset.anchorPreviousSibling === "true";
+			if(isBefore) {
+				targetElement = targetElement.previousSibling;
+			}
+			foundAnchor = true;
+		}
+	}
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
 	if(duration) {
 		// Scroll the node into view
-		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
+		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: foundAnchor});
 	} else {
 		targetElement.scrollIntoView();
 	}

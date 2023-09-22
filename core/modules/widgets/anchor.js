@@ -23,8 +23,9 @@ AnchorWidget.prototype.render = function(parent,nextSibling) {
 	this.idNode = this.document.createElement("span");
 	this.idNode.setAttribute("data-anchor-id",this.id);
 	this.idNode.setAttribute("data-anchor-title",this.tiddlerTitle);
-	if(this.before) {
-		this.idNode.setAttribute("data-before","true");
+	// if the actual block is before this node, we need to add a flag to the node
+	if(this.previousSibling) {
+		this.idNode.setAttribute("data-anchor-previous-sibling","true");
 	}
 	this.idNode.className = "tc-anchor";
 	parent.insertBefore(this.idNode,nextSibling);

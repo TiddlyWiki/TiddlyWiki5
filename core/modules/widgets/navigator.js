@@ -138,9 +138,10 @@ NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 Add a new record to the top of the history stack
 title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
+anchor:optional anchor id in this tiddler
 */
-NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	this.story.addToHistory(title,fromPageRect,this.historyTitle);
+NavigatorWidget.prototype.addToHistory = function(title,fromPageRect,anchor) {
+	this.story.addToHistory(title,fromPageRect,anchor);
 };
 
 /*
@@ -150,9 +151,8 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-navigating",event);
 	if(event.navigateTo) {
 		this.addToStory(event.navigateTo,event.navigateFromTitle);
-		event = $tw.hooks.invokeHook("th-navigating-add-history",event);
 		if(!event.navigateSuppressNavigation) {
-			this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+			this.addToHistory(event.navigateTo,event.navigateFromClientRect,event.toAnchor);
 		}
 	}
 	$tw.hooks.invokeHook("th-navigated",event);

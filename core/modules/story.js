@@ -90,12 +90,12 @@ Story.prototype.saveStoryList = function(storyList) {
 	));
 };
 
-Story.prototype.addToHistory = function(navigateTo,navigateFromClientRect) {
+Story.prototype.addToHistory = function(navigateTo,fromPageRect,anchor) {
 	var titles = $tw.utils.isArray(navigateTo) ? navigateTo : [navigateTo];
 	// Add a new record to the top of the history stack
 	var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
 	$tw.utils.each(titles,function(title) {
-		historyList.push({title: title, fromPageRect: navigateFromClientRect});
+		historyList.push({title: title, fromPageRect: fromPageRect, anchor: anchor});
 	});
 	this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
 };
