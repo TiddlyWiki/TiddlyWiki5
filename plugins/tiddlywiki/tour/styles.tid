@@ -22,7 +22,7 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tour-panel-navigation .tc-btn-big-green {
-	margin: 0;
+	margin: 0 1em 0 0;
 }
 
 .tc-tour-panel-fullscreen {
