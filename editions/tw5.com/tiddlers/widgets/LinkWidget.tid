@@ -16,6 +16,7 @@ The content of the link widget is rendered within the `<a>` tag representing the
 
 |!Attribute |!Description |
 |to |The title of the target tiddler for the link (defaults to the [[current tiddler|Current Tiddler]]) |
+|toAnchor |<<.from-version "5.3.2">> Optional id of the anchor for [[Block Level Links in WikiText]] |
 |aria-label |Optional accessibility label |
 |tooltip |Optional tooltip WikiText |
 |tabindex |Optional numeric [[tabindex|https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/tabIndex]] |
