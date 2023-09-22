@@ -1,11 +1,11 @@
 caption: Block Level Links
 created: 20230916061138153
-modified: 20230917122221226
+modified: 20230922150740619
 tags: WikiText
 title: Block Level Links in WikiText
 type: text/vnd.tiddlywiki
 
-! Adding ID for block ^🤗→AddingIDforblock
+<<wikitext-example-without-html src:"! Adding ID for block ^🤗→AddingIDforblock">>
 
 The basic syntax for block id is:
 
@@ -43,4 +43,6 @@ Adding `^blockID` after the title in the link, will make this link highlight the
 
 <<wikitext-example-without-html src:"[[Link to BlockLevelLinksID2|Block Level Links in WikiText^BlockLevelLinksID2]]">>
 
-<<wikitext-example src:"[[Link to Title|Block Level Links in WikiText^🤗→AddingIDforblock]]">>
+<<wikitext-example-without-html src:"[[Link to Title|Block Level Links in WikiText^🤗→AddingIDforblock]]">>
+
+<<wikitext-example-without-html  src:"[[Link to Non-existing anchor|Block Level Links in WikiText^😂❎]]">>

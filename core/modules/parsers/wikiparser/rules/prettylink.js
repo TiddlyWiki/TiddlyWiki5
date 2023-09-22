@@ -33,11 +33,11 @@ exports.parse = function() {
 	// Process the link
 	var text = this.match[1],
 		link = this.match[2] || text,
-		blockId = this.match[3] || "";
+		anchor = this.match[3] || "";
 	if($tw.utils.isLinkExternal(link)) {
 		// add back the part after `^` to the ext link, if it happen to has one.
-		if(blockId) {
-			link = link + "^" + blockId;
+		if(anchor) {
+			link = link + "^" + anchor;
 		}
 		return [{
 			type: "element",
@@ -57,7 +57,7 @@ exports.parse = function() {
 			type: "link",
 			attributes: {
 				to: {type: "string", value: link},
-				toBlockId: {type: "string", value: blockId},
+				toAnchor: {type: "string", value: anchor},
 			},
 			children: [{
 				type: "text", text: text

@@ -1,8 +1,8 @@
 caption: block id
 created: 20230916061829840
-modified: 20230917121007649
+modified: 20230922150245402
 tags: Widgets
-title: BlockIdWidget
+title: AnchorWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
@@ -11,7 +11,7 @@ The block id widget make an anchor that can be focused and jump to.
 
 ! Content and Attributes
 
-The content of the `<$blockid>` widget is ignored.
+The content of the `<$anchor>` widget is ignored.
 
 |!Attribute |!Description |
 |id |The unique id for the block |
@@ -21,14 +21,14 @@ See [[Block Level Links in WikiText^🤗→AddingIDforblock]] for WikiText synta
 
 ! Example
 
-<<wikitext-example-without-html """The block id widget is invisible, and is usually located at the end of the line. ID is here:<$blockid id="BlockLevelLinksID1"/>
+<<wikitext-example-without-html """The block id widget is invisible, and is usually located at the end of the line. ID is here:<$anchor id="BlockLevelLinksID1"/>
 
-[[Link to BlockLevelLinksID1|BlockIdWidget^BlockLevelLinksID1]]
+[[Link to BlockLevelLinksID1|AnchorWidget^BlockLevelLinksID1]]
 """>>
 
 <<wikitext-example """You can refer to the block that is a line before the block id widget. Make sure block id widget itself is in a block (paragraph).
 
-ID is here:<$blockid id="BlockLevelLinksID2" previousSibling="yes"/>
+ID is here:<$anchor id="BlockLevelLinksID2" previousSibling="yes"/>
 
-[[Link to BlockLevelLinksID2|BlockIdWidget^BlockLevelLinksID2]]
+[[Link to BlockLevelLinksID2|AnchorWidget^BlockLevelLinksID2]]
 """>>

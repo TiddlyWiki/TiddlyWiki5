@@ -150,7 +150,7 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 	this.dispatchEvent({
 		type: "tm-navigate",
 		navigateTo: this.to,
-		toBlockId: this.toBlockId,
+		toAnchor: this.toAnchor,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
@@ -181,7 +181,7 @@ Compute the internal state of the widget
 LinkWidget.prototype.execute = function() {
 	// Pick up our attributes
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
-	this.toBlockId = this.getAttribute("toBlockId");
+	this.toAnchor = this.getAttribute("toAnchor");
 	this.tooltip = this.getAttribute("tooltip");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.linkClasses = this.getAttribute("class");
