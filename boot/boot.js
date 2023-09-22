@@ -2679,11 +2679,9 @@ Delete hooks from the hashmap
 */
 $tw.hooks.removeHook = function(hookName,definition) {
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
-		var index = $tw.hooks.names[hookName].findIndex(function(hook) {
-			return hook === definition;
-		});
-		if(index !== -1) {
-			$tw.hooks.names[hookName].splice(index, 1);
+		var p = $tw.hooks.names[hookName].indexOf(definition);
+		if(p !== -1) {
+			$tw.hooks.names[hookName].splice(p, 1);
 		}
 	}
 };
