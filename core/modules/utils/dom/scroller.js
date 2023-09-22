@@ -134,10 +134,7 @@ PageScroller.prototype.scrollIntoView = function(element,callback,options) {
 				// the animation is end.
 				if(highlight) {
 					element.focus({ focusVisible: true });
-					// Using setTimeout to ensure the removal takes effect before adding the class again.
-					setTimeout(function() {
-						$tw.utils.addClass(element,"tc-focus-highlight");
-					}, 50);
+					$tw.utils.addClass(element,"tc-focus-highlight");
 				}
 			}
 		};
