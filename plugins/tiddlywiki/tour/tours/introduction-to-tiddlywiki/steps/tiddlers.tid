@@ -2,9 +2,9 @@ title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/tiddlers
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 display-mode: fullscreen
 
-! How does ~TiddlyWiki work?
+! How does {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}} work?
 
-~TiddlyWiki is a great tool that lets you collect and organize all kinds of information into interconnected bite-sized pieces called ''tiddlers''.
+{{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}} lets you collect and organise all kinds of information into interconnected bite-sized pieces called ''tiddlers''.
 
 A tiddler is like an index card.
 
