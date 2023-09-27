@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/open-control-panel
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/open-control-panel
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fcontrol-panel
 condition: [[$:/StoryList]contains[$:/ControlPanel]]

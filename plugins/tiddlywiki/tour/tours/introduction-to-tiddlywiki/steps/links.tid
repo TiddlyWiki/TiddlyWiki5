@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/links
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/links
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 display-mode: fullscreen
 enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Jupiter"/>

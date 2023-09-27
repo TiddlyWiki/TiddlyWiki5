@@ -70,7 +70,7 @@ text: longer description of the tour
 \end
 
 \procedure tour-next-step()
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/finished]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/finished]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 

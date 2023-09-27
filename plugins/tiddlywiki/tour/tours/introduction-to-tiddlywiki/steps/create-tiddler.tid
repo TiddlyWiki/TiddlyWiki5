@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/create-tiddler
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/create-tiddler
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-story-river div[data-tiddler-title="Draft of 'New Tiddler'"] input[value]:not([value="Congratulations"])
 selector-fallback-1: .tc-story-river div[data-tiddler-title='Draft of \'New Tiddler\''] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fsave
