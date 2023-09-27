@@ -3,6 +3,15 @@ tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Palette/
+\whitespace trim
+
+{{$:/core/ui/ControlPanel/Palette/LightDarkPicker}}
+
+!! <<lingo "Switcher/Heading">>
+
+<$list filter="[{$:/config/palette/enable-light-dark-detection}match[yes]]" variable="ignore">
+<<lingo "Switcher/Prompt">>
+</$list>
 
 {{$:/snippets/paletteswitcher}}
 

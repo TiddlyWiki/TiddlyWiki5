@@ -1,0 +1,9 @@
+caption: {{$:/language/ControlPanel/Palette/Config/Detection/Caption}}
+tags: $:/tags/StartupAction/Browser
+title: $:/config/startup/light-dark/detection
+
+<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
+	<$set name=default filter="[{$:/info/darkmode}match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]]">
+		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
+	</$set>
+</$reveal>

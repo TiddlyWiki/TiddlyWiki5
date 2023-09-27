@@ -57,6 +57,9 @@ LayoutSwitcher/Caption: Layout
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
+Palette/Config/DefaultDark/Caption: Default Dark Palette
+Palette/Config/DefaultLight/Caption: Default Light Palette
+Palette/Config/Detection/Caption: Detect Browser Ligh/Dark Setting
 Palette/Editor/Clone/Caption: clone
 Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
 Palette/Editor/Delete/Hint: delete this entry from the current palette
@@ -65,8 +68,14 @@ Palette/Editor/Prompt/Modified: This shadow palette has been modified
 Palette/Editor/Prompt: Editing
 Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: hide editor
+Palette/Picker/Prompt: The automatic mode detection is activated. The following settings will be used to switch between light and dark palettes, according to the browser theme settings.<br>The defaults can be changed using the palette {{$:/core/images/palette|16px}} button.
+Palette/Picker/Prompt/Info: If the browser Light/Dark detection is activated TW will switch palettes according to the browser theme settings. 
+Palette/Picker/Enable: Enable Browser Light/Dark Mode Detection on Startup
+Palette/Picker/Heading: Automatic Light/Dark Mode Configuraton
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
+Palette/Switcher/Heading: Switch Palette
+Palette/Switcher/Prompt: ''This setting will be overwritten, since "Browser Light/Dark Mode" detection is activated.'' The switcher can still be used for testing.
 Parsing/Caption: Parsing
 Parsing/Hint: Here you can globally disable/enable wiki parser rules. For changes to take effect, save and reload your wiki. Disabling certain parser rules can prevent <$text text="TiddlyWiki"/> from functioning correctly. Use [[safe mode|https://tiddlywiki.com/#SafeMode]] to restore normal operation.
 Parsing/Block/Caption: Block Parse Rules

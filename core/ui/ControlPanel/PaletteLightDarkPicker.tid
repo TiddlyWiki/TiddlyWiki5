@@ -1,0 +1,29 @@
+title: $:/core/ui/ControlPanel/Palette/LightDarkPicker
+
+\define lingo-base() $:/language/ControlPanel/Palette/
+\whitespace trim
+
+!! <<lingo "Picker/Heading">>
+
+<!-- The following text should be shown if the config tiddler does not exist or contains the text "no" -->
+<$list filter="[[$:/config/palette/enable-light-dark-detection]has[text]get[text]else[no]] :filter[match[no]]" variable="ignore">
+<<lingo "Picker/Prompt/Info">>
+</$list>
+
+<$checkbox tiddler="$:/config/palette/enable-light-dark-detection" field="text" checked="yes" unchecked="no" default="no" >
+	<span class="tc-tiny-gap-left tc-small-gap-right"><<lingo "Picker/Enable">></span>
+	<$link to="$:/config/palette/enable-light-dark-detection">
+		{{$:/core/images/open-window|12}}
+	</$link>
+</$checkbox>
+
+<!-- This section should be animated, so users do not loose focus -->
+<$reveal type="match" state="$:/config/palette/enable-light-dark-detection" text="yes" retain="yes" animate="yes">
+
+<<lingo "Picker/Prompt">>
+
+|tc-first-col-min-width tc-first-link-nowrap|k
+|<$link to="$:/config/palette/default-light" >{{$:/config/palette/default-light!!caption}}</$link> |<<palette-info "$:/config/palette/default-light">> | <<palette-picker "$:/config/palette/default-light">> |
+|<$link to="$:/config/palette/default-dark">{{$:/config/palette/default-dark!!caption}} </$link>|<<palette-info "$:/config/palette/default-dark">> | <<palette-picker "$:/config/palette/default-dark">> |
+
+</$reveal>
