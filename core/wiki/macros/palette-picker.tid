@@ -11,7 +11,7 @@ title: $:/core/macros/palette-picker
 </$tiddler>
 \end
 
-\procedure palette-picker(tiddler)
+\procedure palette-picker(tiddler, postFilter, style)
 <div class="tc-popup-keep" style="position:relative;">
 	<$button
 		popup=`$:/state/popup/$(tiddler)$`
@@ -29,8 +29,15 @@ title: $:/core/macros/palette-picker
 		</span>
 		</$list>
 	</$button>
-	<$reveal state=`$:/state/popup/$(tiddler)$` type="popup" position="belowleft" tag=div class="tc-drop-down" style="font-size:0.7em;">
-		<$transclude $tiddler="$:/snippets/paletteswitcher" palette=<<tiddler>> />
+	<$reveal state=`$:/state/popup/$(tiddler)$`
+		type="popup"
+		position="belowleft"
+		positionAllowNegative="yes"
+		tag="div"
+		class="tc-drop-down"
+		style=`$(style)$`
+	>
+		<$transclude $tiddler="$:/snippets/paletteswitcher" palette=<<tiddler>> postFilter=<<postFilter>> />
 	</$reveal>
 </div>
 \end

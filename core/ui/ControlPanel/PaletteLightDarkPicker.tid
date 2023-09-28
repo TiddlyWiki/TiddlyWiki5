@@ -23,7 +23,7 @@ title: $:/core/ui/ControlPanel/Palette/LightDarkPicker
 <<lingo "Picker/Prompt">>
 
 |tc-first-col-min-width tc-first-link-nowrap|k
-|<$link to="$:/config/palette/default-light" >{{$:/config/palette/default-light!!caption}}</$link> |<<palette-info "$:/config/palette/default-light">> | <<palette-picker "$:/config/palette/default-light">> |
-|<$link to="$:/config/palette/default-dark">{{$:/config/palette/default-dark!!caption}} </$link>|<<palette-info "$:/config/palette/default-dark">> | <<palette-picker "$:/config/palette/default-dark">> |
+|<$link to="$:/config/palette/default-light" >{{$:/config/palette/default-light!!caption}}</$link> |<<palette-info "$:/config/palette/default-light">> | <<palette-picker tiddler:"$:/config/palette/default-light" postFilter:":filter[color-scheme[light]]" >> |
+|<$link to="$:/config/palette/default-dark">{{$:/config/palette/default-dark!!caption}} </$link>|<<palette-info "$:/config/palette/default-dark">> | <<palette-picker tiddler:"$:/config/palette/default-dark" postFilter:":filter[color-scheme[dark]]">> |
 
 </$reveal>

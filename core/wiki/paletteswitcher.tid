@@ -1,11 +1,11 @@
 title: $:/snippets/paletteswitcher
 
-\parameters (palette:"$:/palette")
+\parameters (palette:"$:/palette" postFilter:"")
 \whitespace trim
 <$linkcatcher to=<<palette>> >
 	<div class="tc-chooser">
-		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]">
-			<$let pre={{{ [<palette>get[text]] }}} >
+		<$let pre={{{ [<palette>get[text]] }}} >
+			<$list filter=`[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]] $(postFilter)$`>
 				<$set name="class" filter="[all[current]prefix<pre>]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 					<div class=<<class>> >
 						<$link to={{!!title}}>
@@ -16,7 +16,7 @@ title: $:/snippets/paletteswitcher
 						</$link>
 					</div>
 				</$set>
-			</$let>
-		</$list>
+			</$list>
+		</$let>
 	</div>
 </$linkcatcher>
