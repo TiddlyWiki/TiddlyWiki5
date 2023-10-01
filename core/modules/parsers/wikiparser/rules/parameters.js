@@ -26,7 +26,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\\parameters\s*\(([^)]*)\)(\s*\r?\n)?/mg;
+	this.matchRegExp = /\\parameters\s*\((.*)\)(\s*\r?\n)?/mg;
 };
 
 /*
