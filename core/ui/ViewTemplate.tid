@@ -1,4 +1,5 @@
 title: $:/core/ui/ViewTemplate
+code-body: yes
 
 \whitespace trim
 \define folded-state()

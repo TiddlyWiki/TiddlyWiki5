@@ -4,7 +4,7 @@ description: Guarda un wiki en una nueva carpeta de wiki
 <<.from-version "5.1.20">> Guarda el wiki actual como una carpeta de wiki, incluidos tiddlers, complementos y configuración:
 
 ```
---savewikifolder <wikifolderpath> [<filter>]
+--savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
 ```
 
 * La carpeta wiki de destino debe estar vacía o no existir
@@ -12,8 +12,23 @@ description: Guarda un wiki en una nueva carpeta de wiki
 * Los complementos de la biblioteca oficial de complementos se reemplazan con referencias a esos complementos en el archivo `tiddlywiki.info`
 * Los complementos personalizados se descomprimen en su propia carpeta
 
+Se admiten las siguientes opciones:
+
+* ''filter'': una expresión de filtro que define los tiddlers que se incluirán en la salida.
+* ''explodePlugins'': por defecto "yes".
+** ''yes'' desplegará los plugins en archivos tiddler separados y los guardará en el directorio de plugins dentro de la carpeta wiki
+** ''no'' no realizará el despliegue del plugin en sus archivos tiddler constituyentes si no que guardará el plugin como un único tiddler JSON en la carpeta tiddlers.
+
+Ten en cuenta que ambas opciones ''explodePlugins'' producirán carpetas wiki que construirán exactamente el mismo wiki original. La diferencia radica en cómo se representan los plugins en la carpeta wiki.
+
 Un uso común es convertir un archivo HTML de TiddlyWiki en una carpeta wiki:
 
 ```
 tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```
+
+Guarda el plugin en el directorio tiddlers de la carpeta wiki de destino:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder explodePlugins=no
 ```

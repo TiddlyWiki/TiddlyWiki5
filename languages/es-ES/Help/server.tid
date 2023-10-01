@@ -1,5 +1,5 @@
 title: $:/language/Help/server
-description: Proporciona interfaz de servidor HTTP a TiddlyWiki (en desuso a favor del nuevo comando listen)
+description: (en desuso: utiliza el comando 'listen') Proporciona interfaz de servidor HTTP a TiddlyWiki
 
 Comando obsoleto para servir una wiki a través de HTTP.
 
