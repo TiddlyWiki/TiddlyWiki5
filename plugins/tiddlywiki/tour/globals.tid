@@ -5,24 +5,15 @@ tags: $:/tags/Global
 
 <!--
 
-The following state tiddlers control the tour. They should not be directly modified,
-but rather use the appropriate procedure to ensure that all the associated actions are performed.
+The following state tiddlers control the tour. They should not be directly modified, but rather use the appropriate procedure to ensure that all the associated actions are performed.
 
-$:/config/CurrentTour: title of current tour definition tiddler
-$:/state/tour/step: title of current step of the tour
+* $:/config/CurrentTour: title of current tour definition tiddler
+* $:/state/tour/step: title of current step of the tour
 
 These config tiddlers may be changed directly as required:
 
-$:/config/ShowTour: "show" (default) or "hide"
-$:/config/AutoStartTour: "no" (default) or "yes"
-
-Tour definition tiddlers have the following fields:
-
-tags: must include $:/tags/Tour
-tour-tag: name of tag used to define tour step sequence
-logo: title of tiddler containing logo of tour
-description: brief description of the tour
-text: longer description of the tour
+* $:/config/ShowTour: "show" (default) or "hide"
+* $:/config/AutoStartTour: "no" (default) or "yes"
 
 -->
 

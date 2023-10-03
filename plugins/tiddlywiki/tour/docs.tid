@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/tour/docs
+
+Tour definition tiddlers have the following fields:
+
+|!Name |!Description |
+|tags |Must include $:/tags/Tour |
+|tour-tag |Name of tag used to define tour step sequence |
+|logo |Title of tiddler containing logo of tour |
+|description |Brief description of the tour |
+|text |Longer description of the tour |
+
+
