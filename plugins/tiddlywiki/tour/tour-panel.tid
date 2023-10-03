@@ -36,21 +36,19 @@ tags: $:/tags/PageTemplate
 		<div class="tc-tour-panel-inner">
 			<div class="tc-tiddler-controls tc-tour-panel-controls">
 				<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
-				<div class="tc-tour-panel-list-wrapper">
-					<$button popup=<<qualify "$:/state/popup/tour-dropdown">> class="tc-btn-invisible tc-tour-panel-list-button" selectedClass="tc-selected">
-						''Tour'': <<tour-display-current-tour>>
-					</$button>
-					<$reveal state=<<qualify "$:/state/popup/tour-dropdown">> type="popup" position="belowleft" animate="yes">
-						<div class="tc-drop-down">
-							<p>
-								Choose a tour:
-							</p>
-							<p>
-								<<tour-chooser>>
-							</p>
-						</div>
-					</$reveal>
-				</div>
+				<$button popup=<<qualify "$:/state/popup/tour-dropdown">> class="tc-btn-invisible tc-tour-panel-list-button" selectedClass="tc-selected">
+					''Tour'': <<tour-display-current-tour>>
+				</$button>
+				<$reveal state=<<qualify "$:/state/popup/tour-dropdown">> type="popup" position="belowleft" animate="yes" tag="div">
+					<div class="tc-drop-down">
+						<p>
+							Choose a tour:
+						</p>
+						<p>
+							<<tour-chooser>>
+						</p>
+					</div>
+				</$reveal>
 			</div>
 			<$let
 				currentTour={{$:/config/CurrentTour}}

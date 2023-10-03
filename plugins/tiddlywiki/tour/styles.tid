@@ -40,11 +40,7 @@ tags: $:/tags/Stylesheet
 	padding: 2px 8px;
 	border-radius: 1em;
 	color: <<color very-muted-foreground>>;
-}
-
-.tc-tour-panel-controls .tc-tour-panel-list-wrapper {
-	display: inline-block;
-	position: relative;
+	text-align: left;
 }
 
 .tc-tour-panel-controls .tc-tour-panel-list-button.tc-selected {
