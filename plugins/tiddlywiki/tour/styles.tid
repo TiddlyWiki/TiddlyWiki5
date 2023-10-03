@@ -133,3 +133,61 @@ tags: $:/tags/Stylesheet
 	font-size: 1.5em;
 	line-height: 1.1;
 }
+
+.tc-tour-settings-tour-details,
+.tc-tour-settings-tour-step-details {
+	width: 100%;
+}
+
+.tc-tour-settings-tour-details th,
+.tc-tour-settings-tour-step-details th {
+	text-align: right;
+	vertical-align: top;
+	font-weight: normal;
+	width:10em;
+}
+
+.tc-tour-settings-tour-details td,
+.tc-tour-settings-tour-step-details td {
+	font-weight: bold;
+}
+
+.tc-tour-settings-tour-details-description {
+
+}
+
+.tc-tour-settings-tour-details-logo img {
+	max-width: 200px;
+	max-height: 100px;
+}
+
+.tc-tour-settings-tour-step {
+	border: 1px solid <<colour foreground>>;
+}
+
+button.tc-tour-settings-tour-step-heading {
+	background: <<colour muted-foreground>>;
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding: 0.25em;
+	border: 0;
+}
+
+.tc-tour-settings-tour-step-heading-step-number {
+	font-weight: bold;
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	border-radius: 1em;
+	font-size: 0.9em;
+	display: inline-block;
+	padding: 0 4px;
+}
+
+.tc-tour-settings-tour-step-details {
+	margin: 0;
+}
+
+.tc-tour-settings-tour-step-body {
+	padding: 0.5em;
+}
