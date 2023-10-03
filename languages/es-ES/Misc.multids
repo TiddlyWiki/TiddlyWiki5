@@ -25,6 +25,8 @@ Encryption/RepeatPassword: Repite la contraseña
 Encryption/PasswordNoMatch: Las contraseñas no coinciden
 Encryption/SetPassword: Establecer contraseña
 Error/Caption: Error
+Error/DeserializeOperator/MissingOperand: Error de filtro: Falta el operando 'deserialize
+Error/DeserializeOperator/UnknownDeserializer: Error de filtro: Deserializador desconocido proporcionado como operando para el operador 'deserialize'.
 Error/Filter: Error de filtro
 Error/FilterSyntax: Error de sintaxis en la expresión de filtro
 Error/FilterRunPrefix: Error en Filtro: Prefijo desconocido para la ejecución del filtro
@@ -40,6 +42,7 @@ Error/RetrievingSkinny: Error al recuperar la lista resumida de tiddlers
 Error/SavingToTWEdit: Error al guardar en TWEdit
 Error/WhileSaving: Error al guardar
 Error/XMLHttpRequest: Código de error XMLHttpRequest
+Error/ZoominTextNode: Error de vista de historia: Parece que has intentado interactuar con un tiddler que se muestra en un contenedor personalizado. La causa más probable es el uso de `$:/tags/StoryTiddlerTemplateFilter` con una plantilla que contiene texto o espacios en blanco al principio. Utiliza el pragma `\whitespace trim` y asegúrate de que todo el contenido del tiddler está envuelto en un único elemento HTML. El texto que causó este problema:
 InternalJavaScriptError/Hint: Hay un problema. Se recomienda que reinicies TiddlyWiki
 InternalJavaScriptError/Title: Error interno de JavaScript
 LayoutSwitcher/Description: Abre el selector de diseño
