@@ -41,7 +41,7 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 		// Check if we're dealing with a plugin
 		if(incomingTiddler && incomingTiddler["plugin-type"]) {
 			// Check whether the plugin contains JS modules
-			var requiresReload = wiki.doesPluginInfoRequireReload(JSON.parse(incomingTiddler.text)) ? (wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ") : "";
+			var requiresReload = wiki.doesPluginInfoRequireReload($tw.utils.parseJSONSafe(incomingTiddler.text)) ? (wiki.getTiddlerText("$:/language/ControlPanel/Plugins/PluginWillRequireReload") + " ") : "";
 			messages[title] = requiresReload;
 			if(incomingTiddler.version) {
 				// Upgrade the incoming plugin if it is in the upgrade library

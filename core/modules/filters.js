@@ -12,6 +12,11 @@ Adds tiddler filtering methods to the $tw.Wiki object.
 /*global $tw: false */
 "use strict";
 
+var widgetClass = require("$:/core/modules/widgets/widget.js").widget;
+
+/* Maximum permitted filter recursion depth */
+var MAX_FILTER_DEPTH = 300;
+
 /*
 Parses an operation (i.e. a run) within a filter string
 	operators: Array of array of operator nodes into which results should be inserted
@@ -95,10 +100,12 @@ function parseFilterOperation(operators,filterString,p) {
 			if(nextBracketPos === -1) {
 				throw "Missing closing bracket in filter expression";
 			}
-			if(!operator.regexp) {
+			if(operator.regexp) {
+				operand.text = "";
+			} else {
 				operand.text = filterString.substring(p,nextBracketPos);
-				operator.operands.push(operand);
 			}
+			operator.operands.push(operand);
 			p = nextBracketPos + 1;
 		}
 
@@ -218,10 +225,18 @@ source: an iterator function for the source tiddlers, called source(iterator), w
 widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
+	if(!this.filterCache) {
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	if(this.filterCache[filterString] !== undefined) {
+		return this.filterCache[filterString];
+	}
 	var filterParseTree;
 	try {
 		filterParseTree = this.parseFilter(filterString);
 	} catch(e) {
+		// We do not cache this result, so it adjusts along with localization changes
 		return function(source,widget) {
 			return [$tw.language.getString("Error/Filter") + ": " + e];
 		};
@@ -242,19 +257,21 @@ exports.compileFilter = function(filterString) {
 				var operands = [],
 					operatorFunction;
 				if(!operator.operator) {
+					// Use the "title" operator if no operator is specified
 					operatorFunction = filterOperators.title;
 				} else if(!filterOperators[operator.operator]) {
-					operatorFunction = filterOperators.field;
+					// Unknown operators treated as "[unknown]" - at run time we can distinguish between a custom operator and falling back to the default "field" operator
+					operatorFunction = filterOperators["[unknown]"];
 				} else {
+					// Use the operator function
 					operatorFunction = filterOperators[operator.operator];
 				}
-
 				$tw.utils.each(operator.operands,function(operand) {
 					if(operand.indirect) {
 						operand.value = self.getTextReference(operand.text,"",currTiddlerTitle);
 					} else if(operand.variable) {
 						var varTree = $tw.utils.parseFilterVariable(operand.text);
-						operand.value = widget.getVariable(varTree.name,{params:varTree.params,defaultValue: ""});
+						operand.value = widgetClass.evaluateVariable(widget,varTree.name,{params: varTree.params, source: source})[0] || "";
 					} else {
 						operand.value = operand.text;
 					}
@@ -318,7 +335,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	return $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
+	var fnMeasured = $tw.perf.measure("filter: " + filterString,function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -328,11 +345,27 @@ exports.compileFilter = function(filterString) {
 			widget = $tw.rootWidget;
 		}
 		var results = new $tw.utils.LinkedList();
-		$tw.utils.each(operationFunctions,function(operationFunction) {
-			operationFunction(results,source,widget);
-		});
+		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
+		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
+			$tw.utils.each(operationFunctions,function(operationFunction) {
+				operationFunction(results,source,widget);
+			});
+		} else {
+			results.push("/**-- Excessive filter recursion --**/");
+		}
+		self.filterRecursionCount = self.filterRecursionCount - 1;
 		return results.toArray();
 	});
+	if(this.filterCacheCount >= 2000) {
+		// To prevent memory leak, we maintain an upper limit for cache size.
+		// Reset if exceeded. This should give us 95% of the benefit
+		// that no cache limit would give us.
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	this.filterCache[filterString] = fnMeasured;
+	this.filterCacheCount++;
+	return fnMeasured;
 };
 
 })();

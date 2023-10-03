@@ -1,0 +1,14 @@
+title: Genesis/MultipleAttributes
+description: Usage of genesis widget with multiple attributes
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$genesis $type="$let" $names="myvar other" $values="Kitten Donkey" myvar={{{ Shark }}}>(<$text text=<<myvar>>/>|<$text text=<<other>>/>)</$genesis>
+<$genesis $type="$let" $names="$myvar $other" $values="Kitten Donkey" $$myvar="Shark">(<$text text=<<$myvar>>/>|<$text text=<<$other>>/>)</$genesis>
++
+title: ExpectedResult
+
+<p>(Kitten|Donkey)(Kitten|Donkey)</p>

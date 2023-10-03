@@ -31,5 +31,6 @@ Notes :
 
 Exemples :
 
-* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- enregistre le contenu exécuté de tous les tiddlers non-système vers des fichiers du sous-répertoire "tiddlers" nommés par encodage URL des titres et ajout d'une extension html.
+* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` -- enregistre le rendu HTML de tous les tiddlers non-système vers des fichiers du sous-répertoire "tiddlers", nommés après encodage URL des titres et ajout d'une extension html.
+* `--render '.' 'tiddlers.json' 'text/plain' '$:/core/templates/exporters/JsonFile' 'exportFilter' '[tag[HelloThere]]'` -- enregistre le rendu JSON des tiddlers tagués "HelloThere" dans un fichier nommé "tiddlers.json"
 

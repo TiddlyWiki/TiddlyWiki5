@@ -1,0 +1,94 @@
+caption: Listes
+created: 20131205160257619
+fr-title: Listes en WikiTexte
+modified: 20220417215924211
+tags: Lists WikiText
+title: Lists in WikiText
+type: text/vnd.tiddlywiki
+
+! Listes à puces
+
+Vous pouvez créer des listes à puces à l'aide du caractère `*` (<<.icon $:/core/images/list-bullet>>)<<:>>
+
+<<wikitext-example src:"* Premier élément d'une liste
+* Deuxième éléments d'un liste
+** Un sous-élément
+* Troisième élément d'une liste
+">>
+
+! Listes ordonnées
+
+Les listes ordonnées utilisent `#` au lieu de  `*` (<<.icon $:/core/images/list-number>>)<<:>>
+
+<<wikitext-example src:"# Premier élément
+# Deuxième élément
+# Troisième élément
+">>
+
+Vous pouvez combiner des listes à puces et des listes ordonnées&nbsp;:
+
+<<wikitext-example src:"* À faire ce jour
+*# Manger
+* À faire faire
+*# Ceci
+*# Cela
+*## Et le reste
+">>
+
+L'exemple inverse, avec les nombres en premier niveau<<:>>
+
+<<wikitext-example src:"# À faire ce jour
+#* Manger
+# À faire faire
+#* Ceci
+#* Cela
+#** Et le reste
+">>
+
+! Les classes CSS
+
+Vous pouvez affecter une classe CSS à l'un des membres de la liste en procédant ainsi<<:>>
+
+<<wikitext-example src:"* Liste Un
+*.MaClasse Liste Deux
+* Liste Trois
+">>
+
+! Combiner listes et citations en blocs
+
+Noter que les <<fr "Block Quotes in WikiText">> peuvent être combinées aux listes. Par exemple<<:>>
+
+<<wikitext-example src:"* Liste Une 
+** Liste deux
+**> Un bloc
+**> Un autre bloc
+* Liste trois
+">>
+
+! Les paragraphes dans les listes
+
+Les entrées d'une liste sont séparées par des sauts de ligne, rendant impossible d'y inclure des sauts de lignes sans passer à l'entrée suivante. Deux contournements sont possibles.
+
+En un, vous pouvez transclure dans le paragraphe le contenu d'un autre tiddler. Par exemple<<:>>
+
+```
+* Première entrée
+* <$transclude tiddler="MonTiddler" mode="block"/>
+* Troisième
+```
+
+En deux, vous pouvez utiliser la balise HTML "div" pour inclure un contenu multiligne. Par exemple<<:>>
+
+```
+# Étape 1
+# Étape 2
+# Étape 3<div>
+
+Ici, le premier parmi plusieurs paragraphes. Notez que le double saut de ligne précédant ce paragraphe est pris en compte.
+
+Et ici, le deuxième parmi plusieurs paragraphes.
+</div>
+# Étape 4
+# Étape 5
+# Étape 6
+```

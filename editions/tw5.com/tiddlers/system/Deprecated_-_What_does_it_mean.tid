@@ -1,15 +1,11 @@
 created: 20170126142116898
-modified: 201804111739
+modified: 20220704174221300
 title: Deprecated - What does it mean
 type: text/vnd.tiddlywiki
 
-First of all: ''Keep calm!''
-
 {{$:/deprecated}}
 
-For ~TiddlyWiki it means that you should not use this mechanism for new content anymore, ''AND you should update your existing content''!
-
-Deprecated features have a marker. See: [[How to apply custom styles by tag]]
+Deprecated features are marked with a special warning button. See: [[How to apply custom styles by tag]] for an example.
 
 ''Tiddlers tagged `$:/deprecated`''
 

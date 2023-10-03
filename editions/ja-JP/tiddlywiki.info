@@ -1,6 +1,7 @@
 {
 	"description": "Japanese (Japan) edition",
 	"plugins": [
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -9,8 +10,7 @@
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
-		"tiddlywiki/readonly",
-		"tiddlywiki/internals"
+		"tiddlywiki/readonly"
 	],
 	"languages": [
 		"ja-JP"

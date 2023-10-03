@@ -10,3 +10,6 @@ The `tm-scroll` message causes the surrounding scrollable container to scroll to
 |!Name |!Description |
 |target |Target DOM node the scrollable container should scroll to (note that this parameter can only be set via JavaScript code) |
 |selector |<<.from-version "5.1.23">> Optional string [[CSS selector|https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors]] as an alternate means of identifying the target DOM node |
+|animationDuration |<<.from-version "5.2.2">> Optional number specifying the animation duration in milliseconds for the scrolling. Defaults to the [[global animation duration|$:/config/AnimationDuration]]. |
+
+<<.tip "Set `animationDuration` to `0` to scroll without animation">>

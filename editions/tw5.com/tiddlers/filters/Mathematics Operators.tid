@@ -1,10 +1,12 @@
 created: 20190206140446821
-modified: 20210417090408263
+modified: 20220330133748666
 tags: Filters
 title: Mathematics Operators
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.20">>The mathematics filter operators allow numerical calculations to be performed within filters.
+
+! Using mathematics operators
 
 The mathematics operators interpret their arguments as numbers according to the following rules:
 
@@ -28,7 +30,10 @@ The mathematics operators take three different forms:
 ** <<.inline-operator-example "=1 =2 =3 =4 +[product[]]">>
 ** <<.inline-operator-example "=1 =2 =3 =4 +[average[]]">>
 
-Operators can be combined:
+
+! Operations Combination
+
+Operations can be combined by concatenating them while merging the inner `][` characters.
 
 * <<.inline-operator-example "[[355]divide[113]fixed[5]]">>
 * <<.inline-operator-example "[range[100]sum[]divide[100]]">>
@@ -41,4 +46,19 @@ src="""<$set name="number-of-tiddlers" value={{{ [tag[HelloThere]count[]] }}}>
 Average length of <$text text=<<number-of-tiddlers>>/> tiddlers tagged <<tag "HelloThere">>: <$text text={{{ [tag[HelloThere]get[text]length[]sum[]divide<number-of-tiddlers>fixed[3]] }}}/>
 </$set>""" />
 
-<<list-links "[tag[Mathematics Operators]]">>
+! Mathematics Operators list
+
+<table>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Purpose</th>
+</tr>
+<$list filter="[tag[Mathematics Operators]sort[caption]]">
+<tr>
+<td><$link>{{!!caption}}</$link></td>
+<td>{{!!op-purpose}}</td>
+</tr>
+</$list>
+</table>
+
+

@@ -1,0 +1,69 @@
+caption: Images
+created: 20131205160221762
+fr-title: Images en WikiTexte
+modified: 20220304132738271
+tags: WikiText [[Working with TiddlyWiki]]
+title: Images in WikiText
+type: text/vnd.tiddlywiki
+
+! Intégration d'image
+
+Les images peuvent être affichées avec la syntaxe <<fr WikiText>> suivante, selon que l'image soit déjà incluse dans un tiddler ou pointe vers une source externe&nbsp;:
+
+```
+[img[Motovun Jack.jpg]] 
+ou [img[https://tiddlywiki.com/favicon.ico]]
+```
+
+Il est également possible d'insérer des tiddlers d'images grâce à la barre d'outils d'édition. Cliquez sur ''Image'' (<<.icon $:/core/images/picture>>) et choisissez une image.
+
+Si la source de l'image correspond au titre d'un tiddler, alors le tiddler est affiché directement. Autrement elle est interprétée comme une URL et la balise HTML `<img>` est générée avec l'URL dans l'attribut `src`.
+
+Une info-bulle, visible au survol par la souris, peut être ajoutée<<:>>
+
+```
+[img[Et voilà l'info-bulle|Motovun Jack.jpg]]
+```
+
+Les attributs `width` (largeur) et `height` (hauteur) ainsi que `class` pour les classes CSS sont disponibles<<:>>
+
+```
+[img width=32 [Motovun Jack.jpg]]
+[img width=32 class="tc-image" [Motovun Jack.jpg]]
+```
+
+Notez que les attributs peuvent être spécifiés par des transclusions ou des références à des variables<<:>>
+
+```
+[img width={{!!ma_largeur}} class=<<image-classes>> [Motovun Jack.jpg]]
+```
+
+La syntaxe d'image est un raccourci d'appel au <<fr ImageWidget>>.
+
+! Affichage des images par transclusion
+
+Vous pouvez aussi afficher l'image incluse dans un tiddler en transcluant ce tiddler. L'inconvénient de cette méthode est qu'il n'y a alors pas de moyen direct pour contrôler la taille de l'image.
+
+```
+{{Motovun Jack.jpg}}
+```
+
+Affichera<<:>>
+
+{{Motovun Jack.jpg}}
+
+! Images en lien
+```
+<$link to="HelloThere" tooltip="Info-bulle personnalisée">{{$:/core/icon}}</$link>
+```
+
+Affichera<<:>>
+
+<$link to="HelloThere" tooltip="Info-bulle personnalisée">{{$:/core/icon}}</$link>
+
+! Import d'images
+
+Utilisez le bouton <<.button import>> (dans l'onglet <<.sidebar-tab Outils>> de la barre latérale), ou directement un glisser-déposer pour importer une image.
+Voir les détails ici<<:>> <<fr "Importing Tiddlers">>
+
+<<.from-version "5.2.0">> Vous pouvez aussi importer des images par copier-coller ou glisser-déposer dans l'éditeur de tiddler.

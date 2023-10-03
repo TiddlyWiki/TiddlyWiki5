@@ -21,7 +21,7 @@ Listing/Rename/ConfirmRename: Zmień nazwę tiddlera
 Listing/Rename/CancelRename: Anuluj
 Listing/Rename/OverwriteWarning: Tiddler o tej nazwie już istnieje.
 Upgrader/Plugins/Suppressed/Incompatible: Zablokowano niekompatybilne lub przestarzałe wtyczki.
-Upgrader/Plugins/Suppressed/Version: Zablokowano wtyczkę (ze względu na to, że <<incoming>< nie jest nowsza niż istniejąca już <<existing>>)
+Upgrader/Plugins/Suppressed/Version: Zablokowano wtyczkę (ze względu na wersję: <<incoming>> nie jest nowsza niż istniejąca już <<existing>>)
 Upgrader/Plugins/Upgraded: Zaktualizowano wtyczkę z <<incoming>> na <<upgrade>>.
 Upgrader/State/Suppressed: Zablokowano tiddler tymczasowego stanu.
 Upgrader/System/Disabled: Wyłączony systemowego tiddlera.
@@ -29,7 +29,7 @@ Upgrader/System/Suppressed: Zablokowano systemowego tiddlera.
 Upgrader/System/Warning: Tiddler z głównym modułem.
 Upgrader/System/Alert: Ta operacja zaimportuje tiddlera, który nadpisze jeden z gównych modułuch. Nie jest to zalecane, gdyż może spowodować niestabilne działanie systemu.
 Upgrader/ThemeTweaks/Created: Zmigrowano dostosowanie motywu z <$text text=<<from>>/>.
-Upgrader/Tiddler/Disabled: Wyłaczono tiddlera.
-Upgrader/Tiddler/Selected: Zaznaczono tiddlera.
-Upgrader/Tiddler/Unselected: Odznaczono tiddlera.
+Upgrader/Tiddler/Disabled: Wyłaczony tiddlera.
+Upgrader/Tiddler/Selected: Zaznaczony tiddlera.
+Upgrader/Tiddler/Unselected: Odznaczony tiddlera.
 

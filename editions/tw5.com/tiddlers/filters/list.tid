@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150220161020000
+modified: 20211115092315020
 tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Negatable Operators]]
 title: list Operator
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ op-neg-output: those input titles that are <<.em not>> mentioned at <<.place R>>
 
 <<.place R>> can reference either a field or a property. See [[TextReference]] for the syntax.
 
-* If neither is specified, the <<.field list>> field is used by default. So `[list[T]]` outputs the titles listed in the <<.field list>> of tiddler T.
+* If neither is specified, the <<.field list>> field is used by default. So `[list[T]]` outputs the titles listed in the <<.field list>> field of tiddler T.
 * If <<.place R>> consists of <<.em only>> a field or a property, the tiddler part of the reference defaults to the [[current tiddler|Current Tiddler]]. So `[list[!!tags]]` outputs the titles listed in the <<.field tags>> field of the current tiddler.
 
 <<.operator-examples "list">>

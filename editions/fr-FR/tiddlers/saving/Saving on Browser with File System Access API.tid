@@ -1,0 +1,20 @@
+caption: Enregistreur TW5 natif du navigateur (experimental)
+color: #FF8A65
+created: 20220206035734757
+delivery: Saver
+description: Enregistrez avec les nouvelles versions des navigateurs dérivés de Chromium
+fr-title: Enregistrer avec l'API File System Access du navigateur
+method: save
+modified: 20220402105820520
+tags: Chrome Edge Opera Saving Linux Mac Windows
+title: Saving on Browser with File System Access API
+type: text/vnd.tiddlywiki
+
+<<tw>> peut enregistrer les modifications sur le système de fichiers sans [[télécharger un nouveau fichier à chaque fois|Saving with the HTML5 fallback saver]] en utilisant [[l'API File System Access|https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API]] des navigateurs.
+
+<<.warning "Cette API n'est pas complètement standardisée, cette méthode d'enregistrement est par conséquent assez expérimentale.">>
+
+L'API utilisée par cet enregistreur fonctionne avec la plupart des navigateurs basés sur Chromium. Voir [[caniuse|https://caniuse.com/native-filesystem-api]] pour les informations actualisées sur sa disponibilité dans les navigateurs.
+
+* [[Wiki du plugin|https://slaymaker1907.github.io/tiddlywiki/plugin-library.html]]
+* [[Dépôt GitHub|https://github.com/slaymaker1907/TW5-browser-nativesaver]]

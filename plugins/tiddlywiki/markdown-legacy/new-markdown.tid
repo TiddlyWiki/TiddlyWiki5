@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/markdown-legacy/new-markdown-button
+tags: $:/tags/PageControls
+caption: {{$:/plugins/tiddlywiki/markdown-legacy/images/new-markdown-button}} {{$:/language/Buttons/NewMarkdown/Caption}}
+description: {{$:/language/Buttons/NewMarkdown/Hint}}
+list-after: $:/core/ui/Buttons/new-tiddler
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/NewMarkdown/Hint}} aria-label={{$:/language/Buttons/NewMarkdown/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-new-tiddler" type="text/markdown"/>
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{$:/plugins/tiddlywiki/markdown-legacy/images/new-markdown-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/NewMarkdown/Caption}}/></span>
+</$list>
+</$button>

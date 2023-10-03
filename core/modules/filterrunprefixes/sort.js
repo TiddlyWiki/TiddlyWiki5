@@ -25,18 +25,10 @@ exports.sort = function(operationSubFunction,options) {
 				indexes = new Array(inputTitles.length),
 				compareFn;
 			results.each(function(title) {
-				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name) {
-						switch(name) {
-							case "currentTiddler":
-								return "" + title;
-							case "..currentTiddler":
-								return widget.getVariable("currentTiddler");
-							default:
-								return widget.getVariable(name);
-						}
-					}
-				});
+				var key = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
+					"currentTiddler": "" + title,
+					"..currentTiddler": widget.getVariable("currentTiddler")
+				}));
 				sortKeys.push(key[0] || "");
 			});
 			results.clear();

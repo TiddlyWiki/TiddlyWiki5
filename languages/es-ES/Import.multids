@@ -30,5 +30,5 @@ Upgrader/System/Warning: tiddler del sistema principal.
 Upgrader/System/Alert: Estás a punto de importar un tiddler que sobrescribirá un tiddler del sistema principal. Esto no se recomienda ya que puede hacer que el sistema sea inestable.
 Upgrader/ThemeTweaks/Created: Ajuste de tema migrado de <$text text=<<from>>/>
 Upgrader/Tiddler/Disabled: Tiddler deshabilitado.
-Upgrader/Tiddler/Selected: Usuario seleccionado.
+Upgrader/Tiddler/Selected: Tiddler seleccionado.
 Upgrader/Tiddler/Unselected: Tiddler no seleccionado.

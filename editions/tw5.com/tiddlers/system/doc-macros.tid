@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 201804111739
+modified: 20230325141733992
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
 type: text/vnd.tiddlywiki
@@ -61,6 +61,37 @@ type: text/vnd.tiddlywiki
 \define .toc-tab() <<.tab "TableOfContents">>
 \define .example-tab(_) <span class="doc-tab">$_$</span>
 
+\define .doc-tabs()
+<$macrocall $name="tabs"
+      tabsList="[tag<currentTiddler>description[tab]]"
+      default={{{ [tag<currentTiddler>first[]] }}}
+      explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
+      class={{{ [[doc-tabs]] [<currentTiddler>encodeuricomponent[]escapecss[]addprefix[doc-tabs-]] +[join[ ]] }}} />
+\end
+\define .doc-tab-link(text, target, tooltip:"", class:"")
+<!-- figure out where the addressed doc-tabs are -->
+<$tiddler tiddler={{{ [<currentTiddler>search:text[.doc-tabs]] :else[<currentTiddler>tags[]search:text[.doc-tabs]first[]] :else[<currentTiddler>] }}} >
+<$button class={{{ [[tc-btn-invisible tc-tiddlylink]] [<__class__>] +[join[ ]] }}}
+      set={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
+      setTo=<<__target__>>
+      tooltip=<<__tooltip__>>>
+    <<__text__>>
+    <!-- if tiddler with tabs is open, scroll to tabs, otherwise open that tiddler (relevant from within tab subtiddlers) -->
+    <$list filter="[[$:/StoryList]contains<currentTiddler>]" variable="ignore" emptyMessage="<$action-navigate />">
+        <$action-sendmessage $message="tm-scroll" selector={{{ [<currentTiddler>encodeuricomponent[]addprefix[.doc-tabs-]] }}} />
+    </$list>
+    <$action-sendmessage $message="tm-scroll" selector={{{ [<currentTiddler>encodeuricomponent[]escapecss[]addprefix[.doc-tabs-]] }}} />
+</$button>
+</$tiddler>
+\end
+\define .widget-attr-link(text, target)
+<$macrocall $name=".doc-tab-link" 
+      text={{{ [[<code class="doc-attr">]] [<__text__>] [[</code>]] +[join[]] }}}
+      class="doc-tab-link"
+      target=<<__target__>>
+      tooltip={{{ [[Show more information about the ']] [<__text__>] [[' attribute]] +[join[]] }}} />
+\end
+
 \define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
 
 \define .icon(_) <span class="doc-icon">{{$_$}}</span>
@@ -103,7 +134,11 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 	</dl>
 	<blockquote class="doc-example-result">
 	<$reveal default="$egvar$" type="match" text="NO-SUCH-VAR">
-		$eg$
+
+$$$text/vnd.tiddlywiki
+$eg$
+$$$
+
 	</$reveal>
 	<$reveal default="$egvar$" type="nomatch" text="NO-SUCH-VAR">
 		<<$egvar$>>
@@ -111,6 +146,20 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 	</blockquote>
 </$reveal>
 </$list>
+\end
+
+\define .bad-example(eg)
+<table class="doc-bad-example">
+<tbody>
+<tr class="evenRow">
+<td><span style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
+<td>
+
+$eg$
+</td>
+</tr>
+</tbody>
+</table>
 \end
 
 \define .link-badge(text,link,colour)
@@ -129,5 +178,42 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 \define .link-badge-removed(link,colour:#a9aabc) <<.link-badge "removed" """$link$""" """$colour$""">>
 \define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renamed" """$link$""" """$colour$""">>
 \define .link-badge-updated(link,colour:#91ba66) <<.link-badge "updated" """$link$""" """$colour$""">>
+
+\define .tiddler-fields(tiddler)
+<$tiddler tiddler=<<__tiddler__>>>
+<div class="doc-tiddler-fields">
+<h2>
+<$link>
+<span class="tc-tiddler-title-icon">{{||$:/core/ui/TiddlerIcon}}</span><$text text=<<currentTiddler>>/>
+</$link>
+</h2>
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -title" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>
+</div>
+</$tiddler>
+\end
+
+\define .banner-credits(credit,url)
+<img src=<<__url__>> width="140" style="float:left;margin-right:0.5em;"/>
+
+$credit$
+
+<div style="clear:both;">
+
+</div>
+\end
+
+\define .contributors(usernames)
+<ol class="doc-github-contributors">
+<$list filter="[enlist<__usernames__>sort[]]" variable="username">
+<li>
+<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/><span class="doc-github-contributor-username">@<$text text=<<username>>/></span></a>
+</li>
+</$list>
+</ol>
+\end
 
 <pre><$view field="text"/></pre>

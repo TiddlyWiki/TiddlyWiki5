@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/codemirror-trailingspace",
+	"name": "CodeMirror Show Trailing Space",
+	"description": "Show trailing space in CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"list": "readme"
+}

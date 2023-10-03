@@ -1,0 +1,69 @@
+caption: Internet Information Services (IIS)
+color: #F06292
+created: 20180328120356008
+delivery: DIY
+description: Serveur Web intégré à Windows
+fr-title: Installer TiddlyWiki sur Microsoft Internet Information Server
+method: sync
+modified: 20220402105820520
+tags: Saving [[TiddlyWiki on Node.js]] Windows
+title: Installing TiddlyWiki on Microsoft Internet Information Server
+type: text/vnd.tiddlywiki
+
+\define example-file(title)
+<$transclude tiddler="$title$" mode="block"/> <$macrocall $name="copy-to-clipboard" src={{$title$}}/>
+\end
+
+[[Internet Information Server|https://fr.wikipedia.org/wiki/Internet_Information_Services]] (IIS) de Microsoft est le serveur web intégré de Windows. Il peut s'avérer utile d'héberger <<tw>> dans IIS afin de bénéficier des fonctionnalités de réécriture d'URL, d'hébergement de fichiers statiques ou de redémarrage automatique après un crash.
+
+! 1. Activer IIS
+
+# Dans la barre de recherche Windows, saisir <<gf "Activer ou désactiver les fonctionnalités Windows">>.
+# Cliquer sur l'icône <<gf "Activer ou désactiver les fonctionnalités Windows">> qui apparaît dans les résultats de recherche.
+# Cocher la case ''Internet Information Services (IIS)'' puis cliquer sur le bouton Ok.
+# L'installation prend quelques minutes. Une fois terminée, cliquer sur le bouton ''Fermer''
+
+! 2. Installer les outils requis
+
+# Installer le module IIS ~HttpPlatformHandler à partir de https://www.iis.net/downloads/microsoft/httpplatformhandler
+# Installer [[Node.js]] à partir de https://nodejs.org/
+# Installer Git à partir de https://git-scm.com/
+#* //optionnel<<;>> uniquement nécessaire pour utiliser la dernière version de <<tw>> à partir de ~GitHub -- voir ci-dessous//
+
+! 3. Installer <<tw>> et paramétrer un nouveau wiki
+
+# Créer un répertoire approprié pour le wiki, par exemple `C:\MesAffaires`
+# A  l'intérieur, créer un fichier `C:\MesAffaires\package.json` contenant<<:>>
+#> <<example-file "Example package.json for IIS">>
+# Créer un fichier `C:\MesAffaires\web.config` contenant<<:>>
+#> <<example-file "Example web.config for IIS">>
+# Créer un sous-répertoire <<gf "wiki">><<:>> `C:\MesAffaires\wiki`
+# A l'intérieur, créer un fichier `C:\MesAffaires\wiki\tiddlywiki.info` contenant<<:>>
+#> <<example-file "Example tiddlywiki.info for IIS">>
+# Créer un sous-répertoire <<gf "tiddlers">><<:>> `C:\MesAffaires\wiki\tiddlers`
+# A l'intérieur, créer un fichier `C:\MesAffaires\wiki\tiddlers\config-tiddlyweb-host.tid` contenant<<:>>
+#> <<example-file "Example config-tiddlyweb-host for IIS">>
+#* (Voir [[la documentation|https://docs.microsoft.com/en-us/iis/extensions/httpplatformhandler/httpplatformhandler-configuration-reference]] pour les détails des champs de configuration de ~HttpPlatformHandler)
+# Exécuter la commande `npm install` depuis le répertoire `C:/MesAffaires`
+
+! 4.  Paramétrer l'application dans IIS
+
+* Dans la barre de recherche Windows, saisir <<gf "IIS">> puis cliquer sur l'icone du <<gf "Gestionnaire des services internet (IIS)">>
+* Localiser le serveur dans la colonne <<gf Connexions>> à gauche, et cliquer sur le triangle pour développer son contenu.
+* Ouvrir le dossier <<gf "''Sites''">>
+* Faire un clic droit sur <<gf "''Default Web Site''">> et sélectionner <<gf "''Ajouter une application''">> dans le menu déroulant
+* Saisir les informations suivantes dans le formulaire<<:>>
+*# ''Alias''<<:>> `MonAppli`
+*# ''Chemin physique''<<:>> `C:\MesAffaires`
+* Cliquer sur ''OK''
+
+! 5. Tester l'application
+
+Pour tester l'application, il suffit de visiter http://localhost/MonAppli/ avec un navigateur internet.
+
+! Notes
+
+* Si vous voulez de l'authentification, spécifiez un nom d'utilisateur et un mot de passe dans la commande `--listen` du fichier `web.config`. Par exemple<<:>>
+** `arguments=".\node_modules\tiddlywiki\tiddlywiki.js ./wiki-server --listen username=jacques &quot;password=MonMotDePasse&quot; port=PORT path-prefix=/MonAppli">`
+** Notez l'emploi des guillemets autour du mot de passe, sous forme de codes HTML<<:>> `&quot;`
+* Pour prendre en compte une modification des paramètres dans le fichier `web.config` ou une modification du code de l'application, vous devrez redémarrer le serveur IIS à l'aide du <<gf "Gestionnaire des services internet (IIS)">>

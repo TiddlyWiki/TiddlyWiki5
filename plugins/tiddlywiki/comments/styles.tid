@@ -5,13 +5,13 @@ tags: [[$:/tags/Stylesheet]]
 
 .tc-is-comment-header {
 	padding: 0.25em;
-	border: 2px solid #c1e1ea;
+	border: 2px solid <<colour message-foreground>>;
 	border-radius: 4px;
-	background: #f1fcff;
+	background: <<colour message-background>>;
 }
 
 .tc-comments-segment {
-	border-top: 2px solid #d7eef4;
+	border-top: 2px solid <<colour message-border>>;
 }
 
 .tc-comment-button button {
@@ -25,7 +25,7 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-comment-button button svg {
-	fill: #26cb56;
+	fill: <<colour download-background>>;
 	height: 2em;
 	width: 2em;
 }
@@ -44,18 +44,18 @@ tags: [[$:/tags/Stylesheet]]
 
 .tc-comment-entry {
 	position: relative;
-	border: 2px solid #c1e1ea;
+	border: 2px solid <<colour message-border>>;
 	border-radius: 4px;
 	margin: 0.5em 0 0 0;
-	background: #f1fcff;
+	background: <<colour message-background>>;
 }
 
 .tc-comment-entry-heading {
 	font-size: 0.7em;
 	font-weight: bold;
 	text-transform: uppercase;
-	background: #d7eef4;
-	color: #5B6D80;
+	background: <<colour message-background>>;
+	color: <<colour message-foreground>>;
 	padding: 0 0.5em;
 }
 

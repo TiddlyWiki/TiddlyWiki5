@@ -1,0 +1,39 @@
+caption: vars
+created: 20220125160004463
+modified: 20220125163041347
+tags: Widgets
+title: QualifyWidget
+
+! Introduction
+
+The <<.wid qualify>> widget sets a variable
+to a unique string that encodes its position within the widget tree, as identified by the stack of transcluded tiddlers that lead to that position.
+
+Internally, it is implemented using the transclusion variable.
+
+! Content and Attributes
+
+The content of the <<.wid qualify>> widget is the scope for the value assigned to the <<.var name>> variable.
+
+|!Attribute |!Description |
+|//title// |The prefix for the string, normally a tiddler title |
+|//name// |The name of the variable to be set to the unique string |
+
+! Examples
+
+The two examples below are identical, but produce different results because the second one has been transcluded from [[another tiddler|$:/editions/tw5.com/widget-examples/qualify-transcluded]].
+
+Each example shows the result of calling <<.var qualify>> and then the value of the <<.vlink transclusion>> variable.
+<$macrocall $name=".example" n="1"
+eg="""<$qualify title="BaseTiddler" name="iamnotanumber">
+<ul>
+<li><code><<iamnotanumber>></code></li>
+<li><code><<transclusion>></code></li>
+</ul>
+</$qualify>
+"""/>
+{{$:/editions/tw5.com/widget-examples/qualify-transcluded}}
+
+! Remarks
+
+In most cases it will be simpler to use the [[qualify Macro]].

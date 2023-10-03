@@ -64,6 +64,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	var tail = "\r\n--" + boundary + "--\r\n",
 		data = head.join("\r\n") + text + tail;
 	// Do the HTTP post
+	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	var http = new XMLHttpRequest();
 	http.open("POST",url,true,username,password);
 	http.setRequestHeader("Content-Type","multipart/form-data; charset=UTF-8; boundary=" + boundary);
@@ -81,7 +82,6 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	} catch(ex) {
 		return callback($tw.language.getString("Error/Caption") + ":" + ex);
 	}
-	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	return true;
 };
 

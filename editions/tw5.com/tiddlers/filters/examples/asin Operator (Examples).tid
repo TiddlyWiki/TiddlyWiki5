@@ -1,0 +1,7 @@
+created: 20211020142731829
+modified: 20211020142758974
+tags: [[Operator Examples]] [[asin Operator]]
+title: asin Operator (Examples)
+
+<<.operator-example 1 "[[2]asin[]]">>
+<<.operator-example 2 "=1 =2 =3 =4 +[asin[]]">>

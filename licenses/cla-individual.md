@@ -368,7 +368,7 @@ Mark Kerrigan, @markkerrigan, 2019/08/24
 
 Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
 
-Nils-Hero Lindemann, @heronils, 2019/08/26
+Nils Lindemann, @nilslindemann, 2022/01/10
 
 Marica Odagaki, @ento, 2019/08/30
 
@@ -464,4 +464,88 @@ J. Song, @8d1h, 2021/08/05
 
 Soren Bjornstad, @sobjornstad, 2021/08/18
 
+Boris Mann, @bmann, 2021/09/28
+ 
 Maurycy Zarzycki, @evidentlycube, 2021-10-01
+
+Brian Theado, @btheado, 2021-10-10
+
+@Telumire, 2021-10-18
+
+@eiro10, 2021-11-14
+
+Fred, @tw-FRed, 2021/12/04
+
+Joseph Cosentino, @jc-ose, 2021-12-14
+
+@davout1806, 2021/12/17
+
+@pmario, @TiddlyVee, 2022/02/26
+
+Eskha, @es-kha, 2022/03/04
+
+@FSpark, 2022/03/08
+
+Guang Li, @oflg, 2022/03/12
+
+Dam S., @damscal, 2022/03/24
+
+Max Schillinger, @MaxGyver83, 2022/05/11
+
+Nolan Darilek, @NDarilek,  2022/06/21
+
+Keiichi Shiga (🎈 BALLOON | FU-SEN), @fu-sen. 2022/07/07
+
+Nathaniel Knight, @nathanielknight, 2022/07/26
+
+HuanCheng Bai, @bestony, 2022/09/17
+
+Carlo Colombo, @carlo-colombo, 2022/11/30
+
+Wincent Balin, @wincentbalin, 2022/12/18
+
+Jeffrey Zhang, @jeffrey4l, 2022/12/24
+
+cs84285, @cs8425, 2022/12/30
+
+Nick Bell, @newmedicine, 2023/01/01
+
+Frank Kmiec, @fkmiec, 2023-01-01
+
+Pippo Peppo, @pippep, 2023-01-03
+
+Scott Sauye, @CrossEye, 2023-01-04
+
+Marcus Winter, @yaisog, 2023-01-07
+
+Ethan Weller, @gamedungeon, 2023-01-17
+
+Mateusz Wilczek, @mateuszwilczek, 2023/02/16
+
+Andrea Octo, @andrigamerita, 2023/02/24
+
+HuanC Fu, @hffqyd, 2023/03/03
+
+Michelle Saad, @michsa, 2023-03-08
+
+Yukai Chou, @muzimuzhi, 2023-04-07
+
+Carmine Guida, @carmineguida, 2023-05-17
+
+Tavin Cole, @tavin, 2023/05/25
+
+WhiteFall, @Zacharia2, 2023/06/04
+
+@oeyoews, 2023/06/30
+
+Eric Haberstroh, @pille1842, 2023/07/23
+
+@lilscribby, 2023-07-24
+
+@TiddlyTweeter, 2023/07/25
+
+@catter-fly, 2023/07/27
+
+@cmo-pomerium, 2023/08/03
+
+BuckarooBanzay, @BuckarooBanzay, 2023/09/01

@@ -46,7 +46,7 @@ Command.prototype.execute = function() {
 	}
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
-			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}}),
+			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title, storyTiddler: title}}),
 			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		var text = type === "text/html" ? container.innerHTML : container.textContent,
@@ -57,7 +57,7 @@ Command.prototype.execute = function() {
 				exportPath = path.resolve(outputPath,macroPath + extension);
 			}
 		}
-		var finalPath = exportPath || path.resolve(pathname,encodeURIComponent(title) + extension);
+		var finalPath = exportPath || path.resolve(pathname,$tw.utils.encodeURIComponentExtended(title) + extension);
 		$tw.utils.createFileDirectories(finalPath);
 		fs.writeFileSync(finalPath,text,"utf8");
 	});

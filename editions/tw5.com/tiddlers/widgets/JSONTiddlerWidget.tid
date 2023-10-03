@@ -1,14 +1,15 @@
-title: JSONTiddlerWidget
-created: 20210630100923398
-modified: 20210630100923398
-tags: Widgets
 caption: jsontiddler
+created: 20210630100923398
+modified: 20220427171128693
+tags: Widgets
+title: JSONTiddlerWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
 The jsontiddler widget renders the fields of a tiddler to display as a JSON object. The fields of the tiddler can be customised or excluded.
 
-The jsontiddler widget is used in system templates to generate JSON representations of tiddlers for saving.
+The jsontiddler widget is used in system templates to generate JSON representations of tiddlers for saving. See [[JSON in TiddlyWiki]] for an overview.
 
 ! Content and Attributes
 

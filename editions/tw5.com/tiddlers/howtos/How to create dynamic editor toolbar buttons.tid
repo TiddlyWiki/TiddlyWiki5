@@ -1,5 +1,5 @@
 created: 20201216182347597
-modified: 20201217193318816
+modified: 20211018102328148
 tags: 
 title: How to create dynamic editor toolbar buttons
 type: text/vnd.tiddlywiki
@@ -86,7 +86,7 @@ This tiddler contains all the necessary elements that are important for toolbar 
 : Is used as the button tooltip
 
 ; icon 
-: Assigns the button icon. We use `$:/core/images/spiral` {{$:/core/images/spiral}} here.
+: Assigns the button icon. We use `$:/core/images/spiral` {{$:/core/images/spiral}} here. More button icons can be found in the [[Icon Gallery]]
 
 ; shortcuts
 : This is the [[Keyboard Shortcut Descriptor]] eg: `((temp-bold))`

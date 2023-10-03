@@ -72,3 +72,6 @@ jobs:
       - run: "./bin/ci-push.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
+      - run: "./bin/build-tw-org.sh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}

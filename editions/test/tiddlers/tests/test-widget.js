@@ -143,7 +143,8 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
-			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerOne'/>\n"}
+			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/>"},
+			{title: "TiddlerTwo", text: "<$transclude tiddler='TiddlerOne'/>"}
 		]);
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
@@ -156,7 +157,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>\n");
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
 	});
 
 	it("should deal with SVG elements", function() {
@@ -245,6 +246,40 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[0].sequenceNumber).toBe(2);
 		expect(wrapper.children[0].children[1].sequenceNumber).toBe(5);
 		expect(wrapper.children[0].children[2].sequenceNumber).toBe(4);
+	});
+
+	it("should deal with the let widget", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "lookup"},
+			{title: "TiddlerTwo", lookup: "value", newlookup: "value", wrong: "wrong"},
+			{title: "TiddlerThree", text: "wrong", value: "Happy Result", wrong: "ALL WRONG!!"}
+		]);
+		var text="\\define macro() TiddlerThree\n"+
+			"\\define currentTiddler() TiddlerOne\n"+
+			"<$let "+
+				"field={{!!text}} "+
+				"currentTiddler='TiddlerTwo' "+
+				"field={{{ [all[current]get<field>] }}} "+
+				"currentTiddler=<<macro>>>"+
+					"<$transclude field=<<field>>/></$let>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		var wrapper = renderWidgetNode(widgetNode);
+		expect(wrapper.innerHTML).toBe("<p>Happy Result</p>");
+
+		// This is important. $Let needs to be aware enough not to let its
+		// own variables interfere with its ability to recognise no change.
+		// Doesn't matter that nothing has changed, we just need to make sure
+		// it recognizes that that its outward facing variables are unchanged
+		// EVEN IF some intermediate variables did change, there's no need to
+		// refresh.
+		wiki.addTiddler({title: "TiddlerOne", text: "newlookup"});
+		expect(widgetNode.refresh({})).toBe(false);
+
+		// But if we make a change that might result in different outfacing
+		// variables, then it should refresh
+		wiki.addTiddler({title: "TiddlerOne", text: "badlookup"});
+		expect(widgetNode.refresh({})).toBe(true);
 	});
 
 	it("should deal with attributes specified as macro invocations", function() {
@@ -492,6 +527,29 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[15].sequenceNumber).toBe(53);
 	});
 
+	var testCounterLast = function(oldList, newList) {
+		return function() {
+			var wiki = new $tw.Wiki();
+			// Add some tiddlers
+			wiki.addTiddler({title: "Numbers", text: "", list: oldList});
+			var text = "<$list filter='[list[Numbers]]' variable='item' counter='c'><<item>><$text text={{{ [<c-last>match[no]then[, ]] }}} /></$list>";
+			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+			// Render the widget node to the DOM
+			var wrapper = renderWidgetNode(widgetNode);
+			// Test the rendering
+			expect(wrapper.innerHTML).toBe("<p>" + oldList.split(' ').join(', ') + "</p>");
+			// Append a number
+			wiki.addTiddler({title: "Numbers", text: "", list: newList});
+			refreshWidgetNode(widgetNode,wrapper,["Numbers"]);
+			expect(wrapper.innerHTML).toBe("<p>" + newList.split(' ').join(', ') + "</p>");
+		}
+	}
+
+	it("the list widget with counter-last should update correctly when list is appended", testCounterLast("1 2 3 4", "1 2 3 4 5"));
+	it("the list widget with counter-last should update correctly when last item is removed", testCounterLast("1 2 3 4", "1 2 3"));
+	it("the list widget with counter-last should update correctly when first item is inserted", testCounterLast("1 2 3 4", "0 1 2 3 4"));
+	it("the list widget with counter-last should update correctly when first item is removed", testCounterLast("1 2 3 4", "2 3 4"));
+
 	it("should deal with the list widget followed by other widgets", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
@@ -648,7 +706,7 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>New value</p>");
 	});
 
-	it("should can mix setWidgets and macros when importing", function() {
+	it("should support mixed setWidgets and macros when importing", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
@@ -662,6 +720,20 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>Aval Bval Cval</p>");
+	});
+
+	it("should skip parameters widgets when importing", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "B", text: "<$parameters bee=nothing><$set name='B' value='Bval'>\n\ndummy text</$set></$parameters>"},
+		]);
+		var text = "\\import B\n<<B>>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>Bval</p>");
 	});
 
 	it("can have more than one macroDef variable imported", function() {

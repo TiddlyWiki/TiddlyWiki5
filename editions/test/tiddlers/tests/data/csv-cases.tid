@@ -1,0 +1,282 @@
+title: csv-cases
+type: text/plain
+description: A file containing a JSON with test CSVs as string as well as expected results
+
+[
+    {
+        "name": "Empty string",
+        "options": {},
+        "csv": "",
+        "json": [],
+        "jsonWithHeaders": []
+    },
+    {
+        "name": "Null value",
+        "options": {},
+        "csv": null,
+        "json": [],
+        "jsonWithHeaders": []
+    },
+    {
+        "name": "Simple CSV with no tricks",
+        "options": {},
+        "csv": "cell-11,cell-12,cell-13\r\ncell-21,cell-22,cell-23\r\ncell-31,cell-32,cell-33",
+        "json": [
+            ["cell-11", "cell-12", "cell-13"],
+            ["cell-21", "cell-22", "cell-23"],
+            ["cell-31", "cell-32", "cell-33"]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": "cell-21", "cell-12": "cell-22", "cell-13": "cell-23"},
+            {"cell-11": "cell-31", "cell-12": "cell-32", "cell-13": "cell-33"}
+        ]
+    },
+    {
+        "name": "Custom separator",
+        "options": {"separator": "\t"},
+        "csv": ",cell-11,\t,cell-12,\t,cell-13,\r\n,cell-21,\t,cell-22,\t,cell-23,\r\n,cell-31,\t,cell-32,\t,cell-33,",
+        "json": [
+            [",cell-11,", ",cell-12,", ",cell-13,"],
+            [",cell-21,", ",cell-22,", ",cell-23,"],
+            [",cell-31,", ",cell-32,", ",cell-33,"]
+        ],
+        "jsonWithHeaders": [
+            {",cell-11,": ",cell-21,", ",cell-12,": ",cell-22,", ",cell-13,": ",cell-23,"},
+            {",cell-11,": ",cell-31,", ",cell-12,": ",cell-32,", ",cell-13,": ",cell-33,"}
+        ]
+    },
+    {
+        "name": "Support empty rows",
+        "options": {},
+        "csv": "cell-11,cell-12,cell-13\r\n\r\ncell-31,cell-32,cell-33",
+        "json": [
+            ["cell-11", "cell-12", "cell-13"],
+            [],
+            ["cell-31", "cell-32", "cell-33"]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": "", "cell-12": "", "cell-13": ""},
+            {"cell-11": "cell-31", "cell-12": "cell-32", "cell-13": "cell-33"}
+        ]
+    },
+    {
+        "name": "Support empty cells",
+        "options": {},
+        "csv": "cell-11,cell-12,cell-13\r\n,,\r\ncell-31,cell-32,cell-33",
+        "json": [
+            ["cell-11", "cell-12", "cell-13"],
+            ["", "", ""],
+            ["cell-31", "cell-32", "cell-33"]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": "", "cell-12": "", "cell-13": ""},
+            {"cell-11": "cell-31", "cell-12": "cell-32", "cell-13": "cell-33"}
+        ]
+    },
+    {
+        "name": "Support LF line endings",
+        "options": {},
+        "csv": "cell-11,cell-12,cell-13\ncell-21,cell-22,cell-23\ncell-31,cell-32,cell-33",
+        "json": [
+            ["cell-11", "cell-12", "cell-13"],
+            ["cell-21", "cell-22", "cell-23"],
+            ["cell-31", "cell-32", "cell-33"]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": "cell-21", "cell-12": "cell-22", "cell-13": "cell-23"},
+            {"cell-11": "cell-31", "cell-12": "cell-32", "cell-13": "cell-33"}
+        ]
+    },
+    {
+        "name": "Mixed line endings",
+        "options": {},
+        "csv": "cell-11,cell-12,cell-13\ncell-21,cell-22,cell-23\r\ncell-31,cell-32,cell-33",
+        "json": [
+            ["cell-11", "cell-12", "cell-13"],
+            ["cell-21", "cell-22", "cell-23"],
+            ["cell-31", "cell-32", "cell-33"]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": "cell-21", "cell-12": "cell-22", "cell-13": "cell-23"},
+            {"cell-11": "cell-31", "cell-12": "cell-32", "cell-13": "cell-33"}
+        ]
+    },
+    {
+        "name": "Quoted cells",
+        "options": {},
+        "csv": "cell-11,\"cell-12\",cell-13\r\n\"cell-21\",cell-22,cell-23\r\ncell-31,cell-32,\"cell-33\"",
+        "json": [
+            ["cell-11", "cell-12", "cell-13"],
+            ["cell-21", "cell-22", "cell-23"],
+            ["cell-31", "cell-32", "cell-33"]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": "cell-21", "cell-12": "cell-22", "cell-13": "cell-23"},
+            {"cell-11": "cell-31", "cell-12": "cell-32", "cell-13": "cell-33"}
+        ]
+    },
+    {
+        "name": "Escaped quotes in cells",
+        "options": {},
+        "csv": "cell-11,\"\"\"cell-12\"\"\",cell-13\r\n\"cell\"\"\"\"-21\",cell-22,cell-23\r\ncell-31,cell-32,\"\"\"\"\"cell\"\"\"\"-33\"\"\"\"\"",
+        "json": [
+            ["cell-11", "\"cell-12\"", "cell-13"],
+            ["cell\"\"-21", "cell-22", "cell-23"],
+            ["cell-31", "cell-32", "\"\"cell\"\"-33\"\""]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": "cell\"\"-21", "\"cell-12\"": "cell-22", "cell-13": "cell-23"},
+            {"cell-11": "cell-31", "\"cell-12\"": "cell-32", "cell-13": "\"\"cell\"\"-33\"\""}
+        ]
+    },
+    {
+        "name": "Separator in quoted cells",
+        "options": {},
+        "csv": "cell-11,\",c,e,l,l,-,1,2,\",cell-13\r\n\",c,e,l,l,-,2,1,\",cell-22,cell-23\r\ncell-31,cell-32,\",c,e,l,l,-,3,3,\"",
+        "json": [
+            ["cell-11", ",c,e,l,l,-,1,2,", "cell-13"],
+            [",c,e,l,l,-,2,1,", "cell-22", "cell-23"],
+            ["cell-31", "cell-32", ",c,e,l,l,-,3,3,"]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11": ",c,e,l,l,-,2,1,", ",c,e,l,l,-,1,2,": "cell-22", "cell-13": "cell-23"},
+            {"cell-11": "cell-31", ",c,e,l,l,-,1,2,": "cell-32", "cell-13": ",c,e,l,l,-,3,3,"}
+        ]
+    },
+    {
+        "name": "UTF-8 characters",
+        "options": {},
+        "csv": "ᑖcell-11™,°cell-12ą,ćcell-13ś\r\nżcell-21ę,łcell-22ó,Ócell-23↑\r\nŹcell-31Ż,Ącell-32Ń,Ęcell-33ę",
+        "json": [
+            ["ᑖcell-11™", "°cell-12ą", "ćcell-13ś"],
+            ["żcell-21ę", "łcell-22ó", "Ócell-23↑"],
+            ["Źcell-31Ż", "Ącell-32Ń", "Ęcell-33ę"]
+        ],
+        "jsonWithHeaders": [
+            {"ᑖcell-11™": "żcell-21ę", "°cell-12ą": "łcell-22ó", "ćcell-13ś":  "Ócell-23↑"},
+            {"ᑖcell-11™": "Źcell-31Ż", "°cell-12ą": "Ącell-32Ń", "ćcell-13ś": "Ęcell-33ę"}
+        ]
+    },
+    {
+        "name": "All in one",
+        "options": {},
+        "csv": "\"\"\",\r\n,\"\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"\"\",ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ,😣👁🔵⛔️🌹\r\n\"\"\",\r\n,\"\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"\"\",ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ,😣👁🔵⛔️🌹\n\"\"\",\r\n,\"\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"\"\",ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ,😣👁🔵⛔️🌹",
+        "json": [
+            ["\",\r\n,\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹"],
+            ["\",\r\n,\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹"],
+            ["\",\r\n,\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹"]
+        ],
+        "jsonWithHeaders": [
+            {"\",\r\n,\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"": "\",\r\n,\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ": "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹": "😣👁🔵⛔️🌹"},
+            {"\",\r\n,\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"": "\",\r\n,\",\r\nĄŚĆżóŁ\n\n\n\r\n,\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ": "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹": "😣👁🔵⛔️🌹"}
+        ]
+    },
+    {
+        "name": "All in one - custom separator",
+        "options": {"separator": "\t"},
+        "csv": "\"\"\"\t\r\n\t\"\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"\"\"\tҡ͟¼ǉ·˨Քƣйʊ͕Έӕ\t😣👁🔵⛔️🌹\r\n\"\"\"\t\r\n\t\"\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"\"\"\tҡ͟¼ǉ·˨Քƣйʊ͕Έӕ\t😣👁🔵⛔️🌹\n\"\"\"\t\r\n\t\"\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"\"\"\tҡ͟¼ǉ·˨Քƣйʊ͕Έӕ\t😣👁🔵⛔️🌹",
+        "json": [
+            ["\"\t\r\n\t\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹"],
+            ["\"\t\r\n\t\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹"],
+            ["\"\t\r\n\t\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹"]
+        ],
+        "jsonWithHeaders": [
+            {"\"\t\r\n\t\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"": "\"\t\r\n\t\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ": "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹": "😣👁🔵⛔️🌹"},
+            {"\"\t\r\n\t\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"": "\"\t\r\n\t\"\t\r\nĄŚĆżóŁ\n\n\n\r\n\t\"", "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ": "ҡ͟¼ǉ·˨Քƣйʊ͕Έӕ", "😣👁🔵⛔️🌹": "😣👁🔵⛔️🌹"}
+        ]
+    },
+    {
+        "name": "Edge case - only empty rows",
+        "options": {},
+        "csv": "\r\n\r\n",
+        "json": [
+            [],
+            [],
+            []
+        ],
+        "jsonWithHeaders": [
+            {},
+            {}
+        ]
+    },
+    {
+        "name": "Edge case - only empty cells",
+        "options": {},
+        "csv": ",,\r\n,,\r\n,,",
+        "json": [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ],
+        "jsonWithHeaders": [
+            {},
+            {}
+        ]
+    },
+    {
+        "name": "Edge case - Newline -> Comma -> Text",
+        "options": {},
+        "csv": "A,B\r\n,C",
+        "json": [
+            ["A", "B"],
+            ["", "C"]
+        ],
+        "jsonWithHeaders": [
+            {"A": "", "B": "C"}
+        ]
+    },
+    {
+        "name": "Edge case - single comma",
+        "options": {},
+        "csv": ",",
+        "json": [
+            ["", ""]
+        ],
+        "jsonWithHeaders": []
+    },
+    {
+        "@comment": "The behavior here is undefined - the only thing that matters is it should not throw an exception, the result is free to make no sense.",
+        "name": "Edge case - quote separator",
+        "options": {"separator": "\""},
+        "csv": "cell-11,\"cell-12\",cell-13\r\n\"cell-21\",cell-22,cell-23\r\ncell-31,cell-32,\"cell-33\"",
+        "json": [
+            ["cell-11,", "cell-12", ",cell-13"],
+            ["cell-21", "cell-22,cell-23"],
+            ["cell-31,cell-32,", "cell-33", ""]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11,": "cell-21", "cell-12": "cell-22,cell-23", ",cell-13": ""},
+            {"cell-11,": "cell-31,cell-32,", "cell-12": "cell-33", ",cell-13": ""}
+        ]
+    },
+    {
+        "@comment": "The behavior here is undefined - the only thing that matters is it should not throw an exception, the result is free to make no sense.",
+        "name": "Edge case - carriage return separator",
+        "options": {"separator": "\r"},
+        "csv": "cell-11,\"cell-12\",cell-13\r\n\"cell-21\",cell-22,cell-23\r\ncell-31,cell-32,\"cell-33\"",
+        "json": [
+            ["cell-11,\"cell-12\",cell-13"],
+            ["cell-21", "cell-22,cell-23"],
+            ["cell-31,cell-32,\"cell-33\""]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11,\"cell-12\",cell-13": "cell-21" },
+            {"cell-11,\"cell-12\",cell-13": "cell-31,cell-32,\"cell-33\""}
+        ]
+    },
+    {
+        "@comment": "The behavior here is undefined - the only thing that matters is it should not throw an exception, the result is free to make no sense.",
+        "name": "Edge case - newline separator",
+        "options": {"separator": "\n"},
+        "csv": "cell-11,\"cell-12\",cell-13\r\n\"cell-21\",cell-22,cell-23\r\ncell-31,cell-32,\"cell-33\"",
+        "json": [
+            ["cell-11,\"cell-12\",cell-13"],
+            ["cell-21", "cell-22,cell-23"],
+            ["cell-31,cell-32,\"cell-33\""]
+        ],
+        "jsonWithHeaders": [
+            {"cell-11,\"cell-12\",cell-13": "cell-21" },
+            {"cell-11,\"cell-12\",cell-13": "cell-31,cell-32,\"cell-33\""}
+        ]
+    }
+]

@@ -34,6 +34,8 @@ external-link-foreground-hover:
 external-link-foreground-visited: 
 external-link-foreground: 
 foreground: rgba(0, 0, 0, 0.87)
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-background: <<colour background>>
 message-border: <<colour very-muted-foreground>>
 message-foreground: rgba(0, 0, 0, 0.54)

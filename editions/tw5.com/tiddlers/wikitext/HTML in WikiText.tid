@@ -1,6 +1,6 @@
 caption: HTML
 created: 20131205160816081
-modified: 20210614100305329
+modified: 20230615060119987
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -31,13 +31,22 @@ some text <!-- inline comment -->
 
 ! Important
 
-<<.tip """[[Widgets share the same syntax as HTML tags|Widgets in WikiText]], and so the following information applies to them, too.""">>
+!! Security 
+
+<<.warning """Note that any HTML attributes prefixed with `on` are removed from the rendered HTML content. This is done to prevent event handlers (such as "onclick") being used as a clandestine way to execute untrusted JavaScript. A design goal of TiddlyWiki is to ensure that executable JavaScript can only enter the system through explicit JavaScript module tiddlers or raw markup tiddlers. This makes it possible to filter unsafe content in multiuser environments, and also makes it safer to copy untrusted wikitext examples.""">> 
+
+!! Widgets
+
+<<.tip """[[Widgets share the same syntax as HTML tags|Widgets in WikiText]]<br>and so the following information applies to them, too.""">>
+
 
 ! Block mode versus Inline mode
 
-To get the content of an HTML element to be parsed in block mode, the opening tag must be followed by two linebreaks.
+To get the content of an HTML element to be [[parsed|WikiText Parser Modes]] in [[block mode|Block Mode WikiText]], the opening tag must be followed by two linebreaks.
 
-Without the two linebreaks, the tag content will be parsed in inline mode which means that block mode formatting such as wikitext tables, lists and headings is not recognised.
+Without the two linebreaks, the tag content will be [[parsed|WikiText Parser Modes]] in [[inline mode|Inline Mode WikiText]] which means that block mode formatting such as wikitext tables, lists and headings is not recognised.
+
+See also [[WikiText parser mode: HTML examples]] and [[WikiText parser mode transitions]].
 
 ! Self closing elements
 
@@ -45,71 +54,42 @@ The following tags are treated as 'void'. This means that `<tag>` is treated as 
 
 * `<area>`, `<base>`, `<br>`, `<col>`, `<command>`, `<embed>`, `<hr>`, `<img>`, `<input>`, `<keygen>`, `<link>`, `<meta>`, `<param>`, `<source>`, `<track>`, `<wbr>`
 
-If you don’t close any other tag then it will behave as if the missing closing tag were at the end of the tiddler.
+If you do not close any other tag then it will behave as if the missing closing tag were at the end of the tiddler.
 
 ! Attributes
 
-In an extension of conventional HTML syntax, attributes of elements/widgets can be specified in several different ways: 
+In an extension of conventional HTML syntax, attributes of elements and widgets can be specified in [[several different ways|Widget Attributes]]:
 
-* a literal string
-* a transclusion of a TextReference
-* a transclusion of a [[macro/variable|Macros in WikiText]]
-* as the result of a [[Filter Expression]]
+* [[a literal string|Literal Attribute Values]]
+* [[a transclusion of a textReference|Transcluded Attribute Values]]
+* [[a transclusion of a macro/variable|Transcluded Attribute Values]]
+* [[as the result of a filter expression|Filtered Attribute Values]]
+* <<.from-version "5.3.0">> [[as the result of performing filter and variable substitutions on the given string|Substituted Attribute Values]]
 
-!! Literal Attribute Values
+!! Style Attributes
 
-Literal attribute values can use several different styles of quoting:
-
-* Single quotes (eg `attr='value'`)
-* Double quotes (eg `attr="value"`)
-* Tripe double quotes (eg `attr="""value"""`)
-* No quoting is necessary for values that do not contain spaces (eg `attr=value`)
-
-Literal attribute values can include line breaks. For example:
+<<.from-version "5.2.2">> TiddlyWiki supports the usual HTML ''style'' attribute for assigning CSS styles to elements:
 
 ```
-<div data-address="Mouse House,
-Mouse Lane,
-Rodentville,
-Ratland."/>
+<div style="color:red;">Hello</div>
 ```
 
-By using triple-double quotes you can specify attribute values that contain single double quotes. For example:
+In an extension to HTML, TiddlyWiki also supports accessing individual CSS styles as independent attributes. For example:
 
 ```
-<div data-address="""Mouse House,
-"Mouse" Lane,
-Rodentville,
-Ratland."""/>
+<div style.color="red">Hello</div>
 ```
 
-!! Transcluded Attribute Values
-
-Transcluded attribute values are indicated with double curly braces around a TextReference. For example:
+The advantage of this syntax is that it simplifies assigning computed values to CSS styles. For example:
 
 ```
-attr={{tiddler}}
-attr={{!!field}}
-attr={{tiddler!!field}}
+<div style.color={{!!color}}>Hello</div>
 ```
 
-!! Variable Attribute Values
 
-Variable attribute values are indicated with double angle brackets around a [[macro invocation|Macro Calls in WikiText]]. For example:
 
-```
-<div title=<<MyMacro "Brian">>>
-...
-</div>
-```
 
-!! Filtered Attribute Values
 
-Filtered attribute values are indicated with triple curly braces around a [[Filter Expression]]. The value will be the first item in the resulting list, or the empty string if the list is empty.
 
-This example shows how to add a prefix to a value:
 
-```
-<$text text={{{ [<currentTiddler>addprefix[$:/myprefix/]] }}} />
-```
 

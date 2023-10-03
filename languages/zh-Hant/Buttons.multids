@@ -18,6 +18,8 @@ CopyToClipboard/Caption: 複製到剪貼簿
 CopyToClipboard/Hint: 將此文字複製到剪貼簿
 Delete/Caption: 刪除
 Delete/Hint: 刪除此條目
+DeleteTiddlers/Caption: 刪除條目
+DeleteTiddlers/Hint: 刪除條目
 Edit/Caption: 編輯
 Edit/Hint: 編輯此條目
 Encryption/Caption: 加密
@@ -57,12 +59,16 @@ Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
 Language/Hint: 選擇使用者介面語言
+LayoutSwitcher/Hint: 開啟版面切換器
+LayoutSwitcher/Caption: 版面
 Manager/Caption: 條目管理器
 Manager/Hint: 開啟條目管理器
 More/Caption: 更多
 More/Hint: 更多動作
 NewHere/Caption: 新增子條目
 NewHere/Hint: 建立一個標籤為此條目名稱的新條目
+NetworkActivity/Caption: 網路活動
+NetworkActivity/Hint: 取消所有網路活動
 NewJournal/Caption: 新增日誌
 NewJournal/Hint: 建立一個新的日誌條目
 NewJournalHere/Caption: 新增子日誌

@@ -96,6 +96,20 @@ exports.repeat = function(str,count) {
 };
 
 /*
+Check if a string starts with another string
+*/
+exports.startsWith = function(str,search) {
+	return str.substring(0, search.length) === search;
+};
+
+/*
+Check if a string ends with another string
+*/
+exports.endsWith = function(str,search) {
+	return str.substring(str.length - search.length) === search;
+};
+
+/*
 Trim whitespace from the start and end of a string
 Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
 */
@@ -340,6 +354,9 @@ exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
 		matches = [
+			[/^TIMESTAMP/, function() {
+				return date.getTime();
+			}],
 			[/^0hh12/, function() {
 				return $tw.utils.pad($tw.utils.getHours12(date));
 			}],
@@ -448,7 +465,7 @@ exports.formatDateString = function(date,template) {
 	// 'return raw UTC (tiddlywiki style) date string.'
 	if(t.indexOf("[UTC]") == 0 ) {
 		if(t == "[UTC]YYYY0MM0DD0hh0mm0ssXXX")
-			return $tw.utils.stringifyDate(new Date());
+			return $tw.utils.stringifyDate(date || new Date());
 		var offset = date.getTimezoneOffset() ; // in minutes
 		date = new Date(date.getTime()+offset*60*1000) ;
 		t = t.substr(5) ;
@@ -668,9 +685,19 @@ exports.escapeRegExp = function(s) {
     return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
+/*
+Extended version of encodeURIComponent that encodes additional characters including
+those that are illegal within filepaths on various platforms including Windows
+*/
+exports.encodeURIComponentExtended = function(s) {
+	return encodeURIComponent(s).replace(/[!'()*]/g,function(c) {
+		return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+	});
+};
+
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
@@ -976,24 +1003,6 @@ exports.makeCompareFunction = function(type,options) {
 			}
 		};
 	return (types[type] || types[options.defaultType] || types.number);
-};
-
-exports.decodeURIComponentSafe = function(str) {
-	var value = str;
-	try {
-		value = decodeURIComponent(str);
-	} catch(e) {
-	}
-	return value;
-};
-
-exports.decodeURISafe = function(str) {
-	var value = str;
-	try {
-		value = decodeURI(str);
-	} catch(e) {
-	}
-	return value;
 };
 
 })();

@@ -3,6 +3,7 @@ tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/ToolbarButtonStyle/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Settings/ToolbarButtonStyle/
+\whitespace trim
 <$link to="$:/config/Toolbar/ButtonClass"><<lingo "Hint">></$link>
 
 <$select tiddler="$:/config/Toolbar/ButtonClass">

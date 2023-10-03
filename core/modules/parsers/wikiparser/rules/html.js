@@ -66,7 +66,7 @@ exports.parse = function() {
 };
 
 /*
-Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: [], isSelfClosing:, start:, end:,}
+Look for an HTML tag. Returns null if not found, otherwise returns {type: "element", name:, attributes: {}, orderedAttributes: [], isSelfClosing:, start:, end:,}
 */
 exports.parseTag = function(source,pos,options) {
 	options = options || {};
@@ -74,10 +74,11 @@ exports.parseTag = function(source,pos,options) {
 		node = {
 			type: "element",
 			start: pos,
-			attributes: {}
+			attributes: {},
+			orderedAttributes: []
 		};
 	// Define our regexps
-	var reTagName = /([a-zA-Z0-9\-\$]+)/g;
+	var reTagName = /([a-zA-Z0-9\-\$\.]+)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a less than sign
@@ -92,9 +93,6 @@ exports.parseTag = function(source,pos,options) {
 		return null;
 	}
 	node.tag = token.match[1];
-	if(node.tag.slice(1).indexOf("$") !== -1) {
-		return null;
-	}
 	if(node.tag.charAt(0) === "$") {
 		node.type = node.tag.substr(1);
 	}
@@ -106,6 +104,7 @@ exports.parseTag = function(source,pos,options) {
 	// Process attributes
 	var attribute = $tw.utils.parseAttribute(source,pos);
 	while(attribute) {
+		node.orderedAttributes.push(attribute);
 		node.attributes[attribute.name] = attribute;
 		pos = attribute.end;
 		// Get the next attribute
@@ -139,7 +138,7 @@ exports.parseTag = function(source,pos,options) {
 
 exports.findNextTag = function(source,pos,options) {
 	// A regexp for finding candidate HTML tags
-	var reLookahead = /<([a-zA-Z\-\$]+)/g;
+	var reLookahead = /<([a-zA-Z\-\$\.]+)/g;
 	// Find the next candidate
 	reLookahead.lastIndex = pos;
 	var match = reLookahead.exec(source);

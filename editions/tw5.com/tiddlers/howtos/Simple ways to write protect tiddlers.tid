@@ -1,6 +1,6 @@
 created: 20180310002601813
-modified: 20180310003428093
-tags: Learning
+modified: 20211106021629911
+tags: Learning [[How to apply custom styles]]
 title: Simple ways to write protect tiddlers
 type: text/vnd.tiddlywiki
 
@@ -10,9 +10,8 @@ Sometimes you want to protect individual tiddlers from accidental changes, eithe
 
 Create a tiddler with the following contents and tag it as `$:/tags/Stylesheet` :
 
-```
-.tc-tagged-Locked button[title="Edit this tiddler"]   {display: none;}
-
+```css
+[data-tags*="Locked"] button[title="Edit this tiddler"]   {display: none;}
 ```
 
 If your TW language isn't English, then you'll need to change the text in 'title="...."' to whatever the text is when you hover over the edit button.

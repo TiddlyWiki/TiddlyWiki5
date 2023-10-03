@@ -18,6 +18,8 @@ CopyToClipboard/Caption: copier dans le presse-papier
 CopyToClipboard/Hint: Copie ce texte dans le presse-papier
 Delete/Caption: supprimer
 Delete/Hint: Supprime ce tiddler
+DeleteTiddlers/Caption: supprimer les tiddlers
+DeleteTiddlers/Hint: Supprime ces tiddlers
 Edit/Caption: éditer
 Edit/Hint: Édite ce tiddler
 Encryption/Caption: chiffrement
@@ -57,12 +59,16 @@ Home/Caption: accueil
 Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
+LayoutSwitcher/Hint: Choix de la mise en page
+LayoutSwitcher/Caption: mise en page
 Manager/Caption: gestionnaire de tiddlers
 Manager/Hint: Ouvre le gestionnaire de tiddlers
 More/Caption: plus
 More/Hint: Actions supplémentaires
 NewHere/Caption: nouveau, à partir d'ici
 NewHere/Hint: Crée un nouveau tiddler avec pour tag le titre du tiddler courant
+NetworkActivity/Caption: activité réseau
+NetworkActivity/Hint: Annule toute l'activité réseau
 NewJournal/Caption: nouveau journal
 NewJournal/Hint: Crée un nouveau tiddler journal
 NewJournalHere/Caption: nouveau journal, à partir d'ici

@@ -33,9 +33,14 @@ title: $:/core/ui/EditorToolbar/size-dropdown
 \end
 
 \define toolbar-button-size(config-title)
+\whitespace trim
 ''{{$:/language/Buttons/Size/Hint}}''
 
-<<lingo Caption/Width>> <$edit-text tag="input" tiddler="""$config-title$/new-width""" default=<<tv-bitmap-editor-width>> focus="true" size="8"/> <<lingo Caption/Height>> <$edit-text tag="input" tiddler="""$config-title$/new-height""" default=<<tv-bitmap-editor-height>> size="8"/> <$button popup="""$config-title$/presets-popup""" class="tc-btn-invisible tc-popup-keep" style="width: auto; display: inline-block; background-colour: inherit;" selectedClass="tc-selected">
+<<lingo Caption/Width>>&#32;<$edit-text tag="input" tiddler="""$config-title$/new-width""" default=<<tv-bitmap-editor-width>> focus="true" size="8"/>
+&#32;
+<<lingo Caption/Height>>&#32;<$edit-text tag="input" tiddler="""$config-title$/new-height""" default=<<tv-bitmap-editor-height>> size="8"/>
+&#32;
+<$button popup="""$config-title$/presets-popup""" class="tc-btn-invisible tc-popup-keep" style="width: auto; display: inline-block; background-colour: inherit;" selectedClass="tc-selected">
 {{$:/core/images/down-arrow}}
 </$button>
 

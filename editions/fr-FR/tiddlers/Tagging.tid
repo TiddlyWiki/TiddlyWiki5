@@ -1,35 +1,41 @@
 created: 20140904075400000
 fr-title: Étiqueter par tag
-modified: 20150624092812640
+modified: 20220220002448916
 tags: [[Working with TiddlyWiki]] Concepts
 title: Tagging
 type: text/vnd.tiddlywiki
 
-Étiqueter un tiddler consiste à assigner par  un tag à un tiddler une catégorie de votre choix (voir [[Créer et éditer des tiddlers|Creating and editing tiddlers]] pour des instructions sur la manière de taguer). Par exemple, les tiddlers représentant des individus pourraient être étiquetés par les tags ''ami'', ''famille'', ''collègue'', etc. pour indiquer leur relation avec l'auteur. Plusieurs tags peuvent être appliqués au même tiddler.
+L'étiquetage des tiddlers permet de les organiser en catégories. Par exemple, les tiddlers représentant des individus pourraient être étiquetés avec les tags ''ami'', ''famille'', ''collègue'', etc. pour indiquer leur relation avec l'auteur.
+
+Un tag est en fait un simple tiddler (ou un tiddler potentiel), qui peut lui-même avoir ses propres tags. Plusieurs tags peuvent être appliqués au même tiddler.
+
+Voir <<fr "Creating and editing tiddlers">> pour des instructions sur la façon d'étiqueter les tiddlers.
 
 Le fait d'étiqueter les tiddlers vous procure de nombreux moyens supplémentaires de visualiser, parcourir, et organiser vos informations<<:>>
 
-* Les pastilles colorées pour chaque tag d'un tiddler vous donnent accès à tous les autres tiddlers de même tag, ainsi qu'au tiddler correspondant au tag lui-même.
-* L'onglet //Étiqueté// dans le panneau d'informations du tiddler (accessible en cliquant sur le bouton {{$:/core/images/info-button}}) vous donne les liens vers tous les tiddlers tagués avec le titre du tiddler courant.
-* Vous pouvez utiliser l'onglet Tags dans l'onglet Plus de la barre latérale pour visualiser tous vos tags et accéder à vos tiddlers étiquetés.
-* Vous pouvez utiliser des [[filtres|Filters]] pour créer des listes de tiddlers selon leurs tags, puis afficher toute combinaison de champs souhaitée. Par exemple, vous pouvez créer une liste qui montre à la fois le titre et le texte de tous les tiddlers étiquetés //Glossaire//. Ces listes peuvent être formatées à votre goût<<:>> avec des puces, des nombres, ou séparées par des virgules, etc.
-* Les tags <<gf système>> peuvent servir à personnaliser la mise en forme des tiddlers et de la page ~TiddlyWiki dans son ensemble. Voir les instructions correspondantes dans [[Personnalisation de la mise en forme de la page et des tiddlers|Page and tiddler layout customisation]].
+* Les pastilles colorées pour chaque tag d'un tiddler vous donnent accès à tous les autres tiddlers portant le même tag, ainsi qu'au tiddler correspondant au tag lui-même.
+
+* Lorsqu'un tiddler est utilisé pour étiqueter d'autres tiddlers, l'onglet ''Étiquetage'' dans son [[panneau d'informations|InfoPanel]] liste tous les tiddlers tagués avec le titre du tiddler courant.
+
+* L'onglet ''Plus'' de la barre latérale contient un onglet ''Tags'' qui permet de visualiser tous vos tags et d'accéder à vos tiddlers étiquetés.
+
+* Vous pouvez utiliser des [[filtres|Filters]] pour créer des listes de tiddlers selon leurs tags, puis afficher toute combinaison de [[champs|TiddlerFields]] souhaitée. Par exemple, vous pouvez créer un glossaire en listant le titre et le texte de tous les tiddlers étiquetés //Glossaire//. De telles listes peuvent être formatées à votre goût<<:>> avec des puces, des nombres, ou séparées par des virgules, etc.
+
+* Les <<gf "tags système">> contrôlent la mise en forme des tiddlers et de la page <<tw>> dans son ensemble. Voir les instructions correspondantes dans <<fr "Page and tiddler layout customisation">>.
 
 Encore deux choses que les tags permettent de faire<<:>>
 
-! Affecter des couleurs et des icones à un tag
+! Affecter des couleurs et des icônes à un tag
 
-Vous pouvez utiliser le [[gestionnaire de tags|$:/TagManager]], présent dans l'onglet Tags de l'onglet Plus de la barre latérale, pour affecter une couleur de fond et/ou une icone à un tag.
+Vous pouvez utiliser le <<.icon $:/core/images/tag-button>> [[gestionnaire de tags|$:/TagManager]], présent dans l'onglet ''Tags'' de l'onglet ''Plus'' de la barre latérale, pour affecter une couleur de fond et/ou une icône à un tag.
 
-* Les couleurs peuvent être affectées à un tag soit en spécifiant la valeur CSS de la couleur dans la fenêtre supérieure dans la colonne des couleurs, soit en choisissant une couleur à partir du menu déroulant proposé.
-* Les icones peuvent être affectées à un tag en cliquant sur le bouton {{$:/core/images/down-arrow}} dans la colonne des icones et en choisissant une des icones proposées.
+* Les couleurs peuvent être affectées à un tag en cliquant sur le bouton de la colonne des couleurs et en sélectionnant une proposition. Sinon, spécifiez la valeur [[CSS]] de la couleur dans la zone de saisie accessible en cliquant sur le bouton <<.icon $:/core/images/info-button>>.
+* Les icônes peuvent être affectées à un tag en cliquant sur le bouton <<.icon $:/core/images/down-arrow>> dans la colonne des icônes et en choisissant une des icônes proposées.
 
-! Utiliser des champs `list` pour ajuster l'ordre des listes par tag
+! Changer l'ordre dans lequel les tiddlers sont listés
 
-Si vous voulez créer une liste de tiddlers à l'aide d'un [[filtre|Filters]] à partir d'un tag qu'ils ont en commun, en les triant selon un ordre particulier plutôt que selon l'ordre alphabétique par défaut, vous pouvez créer un champ appelé 'list' dans le tiddler du tag lui-même, et y ajouter les titres des tiddlers à ordonner dans l'ordre désiré. ~TiddlyWiki triera les listes de tiddlers tagués dans l'ordre de priorité suivant<<:>>
+Par défaut, les tiddlers tagués sont listés dans l'ordre alphabétique.
 
-* Premièrement, les tiddlers placés dans le [[champ list|ListField]] du tiddler de tag seront placés dans une nouvelle liste dans le même ordre
-* Deuxièmement, tout tiddler sans place fixe mais disposant d'un champ ''list-before'' sera placé avant le tiddler indiqué dans le champ
-** (si le champ ''list-before'' est vide, alors le tiddler sans place prédéfinie sera placé au début de la liste)
-* Troisièmement, tout tiddler sans place prédéfinie disposant d'un champ ''list-after'' sera placé juste après le tiddler indiqué dans le champ
-* Enfin, tout tiddler n'ayant toujours pas de place prédéfinie sera placé à la fin de la liste
+Si vous voulez un ordre différent, ajoutez un champ `list` au tiddler du tag, et affectez lui comme valeur la [[liste de ses tiddlers|Title List]] dans l'ordre choisi.
+
+Le champ `list` n'a pas besoin de contenir tous les tiddlers. <<tw>> utilise des [[règles précises|Order of Tagged Tiddlers]] pour trier les tiddlers tagués.

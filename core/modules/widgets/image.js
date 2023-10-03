@@ -111,6 +111,19 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.imageAlt) {
 		domNode.setAttribute("alt",this.imageAlt);
 	}
+	if(this.lazyLoading && tag === "img") {
+		domNode.setAttribute("loading",this.lazyLoading);
+	}
+	// Add classes when the image loads or fails
+	$tw.utils.addClass(domNode,"tc-image-loading");
+	domNode.addEventListener("load",function() {
+		$tw.utils.removeClass(domNode,"tc-image-loading");
+		$tw.utils.addClass(domNode,"tc-image-loaded");
+	},false);
+	domNode.addEventListener("error",function() {
+		$tw.utils.removeClass(domNode,"tc-image-loading");
+		$tw.utils.addClass(domNode,"tc-image-error");
+	},false);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
@@ -127,6 +140,7 @@ ImageWidget.prototype.execute = function() {
 	this.imageClass = this.getAttribute("class");
 	this.imageTooltip = this.getAttribute("tooltip");
 	this.imageAlt = this.getAttribute("alt");
+	this.lazyLoading = this.getAttribute("loading");
 };
 
 /*

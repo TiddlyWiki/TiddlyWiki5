@@ -1,0 +1,26 @@
+caption: tm-relink-tiddler
+created: 20220219093748993
+modified: 20220219093748993
+tags: Messages navigator-message
+title: WidgetMessage: tm-relink-tiddler
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.2">> The `tm-relink-tiddler` message relinks a tiddler by deleting it and recreating it with a new title. Unlike the [[WidgetMessage: tm-rename-tiddler]] message, this message does not rename the tiddler, it just relinks the references to it.
+
+The relink tiddler message requires the following properties on the `event` object:
+
+|!Name |!Description |
+|from |Current title of tiddler  |
+|to |New title of tiddler  |
+|renameInTags |Optional value "no" to disable renaming in tags fields of other tiddlers (defaults to "yes") |
+|renameInLists |Optional value "no" to disable renaming in list fields of other tiddlers (defaults to "yes") |
+
+The relink tiddler message is usually generated with the ButtonWidget and is handled by the core.
+
+! Examples
+
+To relink Tiddler1 to Tiddler2 in tags and list fields of other tiddlers:
+
+```
+<$action-sendmessage $message="tm-relink-tiddler" from="Tiddler1" to="Tiddler2" />
+```

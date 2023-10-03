@@ -69,6 +69,26 @@ $tw.utils.isArrayEqual = function(array1,array2) {
 };
 
 /*
+Add an entry to a sorted array if it doesn't already exist, while maintaining the sort order
+*/
+$tw.utils.insertSortedArray = function(array,value) {
+	var low = 0, high = array.length - 1, mid, cmp;
+	while(low <= high) {
+		mid = (low + high) >> 1;
+		cmp = value.localeCompare(array[mid]);
+		if(cmp > 0) {
+			low = mid + 1;
+		} else if(cmp < 0) {
+			high = mid - 1;
+		} else {
+			return array;
+		}
+	}
+	array.splice(low,0,value);
+	return array;
+};
+
+/*
 Push entries onto an array, removing them first if they already exist in the array
 	array: array to modify (assumed to be free of duplicates)
 	value: a single value to push or an array of values to push
@@ -257,6 +277,28 @@ $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 };
 
 /*
+Convert a URIComponent encoded string to a string safely
+*/
+$tw.utils.decodeURIComponentSafe = function(s) {
+	var v = s;
+	try {
+		v = decodeURIComponent(s);
+	} catch(e) {}
+	return v;
+};
+
+/*
+Convert a URI encoded string to a string safely
+*/
+$tw.utils.decodeURISafe = function(s) {
+	var v = s;
+	try {
+		v = decodeURI(s);
+	} catch(e) {}
+	return v;
+};
+
+/*
 Convert "&amp;" to &, "&nbsp;" to nbsp, "&lt;" to <, "&gt;" to > and "&quot;" to "
 */
 $tw.utils.htmlDecode = function(s) {
@@ -271,7 +313,7 @@ $tw.utils.getLocationHash = function() {
 	var idx = href.indexOf('#');
 	if(idx === -1) {
 		return "#";
-	} else if(idx < href.length-1 && href[idx+1] === '#') {
+	} else if(href.substr(idx + 1,1) === "#" ||  href.substr(idx + 1,3) === "%23") {
 		// Special case: ignore location hash if it itself starts with a #
 		return "#";
 	} else {
@@ -333,7 +375,7 @@ $tw.utils.stringifyList = function(value) {
 		var result = new Array(value.length);
 		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
-			if(entry.indexOf(" ") !== -1) {
+			if(entry.match(/[^\S\xA0]/mg)) {
 				result[t] = "[[" + entry + "]]";
 			} else {
 				result[t] = entry;
@@ -385,6 +427,19 @@ $tw.utils.parseFields = function(text,fields) {
 		}
 	});
 	return fields;
+};
+
+// Safely parse a string as JSON
+$tw.utils.parseJSONSafe = function(text,defaultJSON) {
+	try {
+		return JSON.parse(text);
+	} catch(e) {
+		if(typeof defaultJSON === "function") {
+			return defaultJSON(e);
+		} else {
+			return defaultJSON || {};
+		}
+	}
 };
 
 /*
@@ -514,10 +569,22 @@ $tw.utils.getTypeEncoding = function(ext) {
 	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
+var globalCheck =[
+	"  Object.defineProperty(Object.prototype, '__temp__', {",
+	"    get: function () { return this; },",
+	"    configurable: true",
+	"  });",
+	"  if(Object.keys(__temp__).length){",
+	"    console.log(\"Warning: Global assignment detected\",Object.keys(__temp__));",
+	"    delete Object.prototype.__temp__;",
+	"  }",
+	"  delete Object.prototype.__temp__;",
+].join('\n');
+
 /*
 Run code globally with specified context variables in scope
 */
-$tw.utils.evalGlobal = function(code,context,filename) {
+$tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
@@ -526,25 +593,38 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + "\n;})();\nreturn exports;\n})\n";
+	code = [
+		"(function(" + contextNames.join(",") + ") {",
+		"  (function(){" + code + "\n;})();\n",
+		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
+		"\nreturn exports;\n",
+		"})"
+	].join("");
+
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
-		fn = vm.runInThisContext(code,filename);
+		if(sandbox){
+			fn = vm.runInContext(code,sandbox,filename)
+		} else {
+			fn = vm.runInThisContext(code,filename);
+		}
 	}
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-
+$tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined; 
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
-$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	var sandbox = $tw.utils.extend(Object.create(null),context);
-	vm.runInNewContext(code,sandbox,filename);
-	return sandbox.exports;
+$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename,allowGlobals) {
+	return $tw.utils.evalGlobal(
+		code,context,filename,
+		allowGlobals ? vm.createContext({}) : $tw.utils.sandbox,
+		allowGlobals
+	);
 };
 
 /*
@@ -845,7 +925,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				}
 			} else {
 				// line number should be included in e.stack for runtime errors
-				$tw.utils.error("Error executing boot module " + name + ": " + JSON.stringify(e) + "\n\n" + e.stack);
+				$tw.utils.error("Error executing boot module " + name + ": " + String(e) + "\n\n" + e.stack);
 			}
 		}
 	}
@@ -1059,7 +1139,7 @@ $tw.Wiki = function(options) {
 		tiddlerTitles = null, // Array of tiddler titles
 		getTiddlerTitles = function() {
 			if(!tiddlerTitles) {
-				tiddlerTitles = Object.keys(tiddlers);
+				tiddlerTitles = Object.keys(tiddlers).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return tiddlerTitles;
 		},
@@ -1069,7 +1149,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers);
+				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return shadowTiddlerTitles;
 		},
@@ -1112,10 +1192,8 @@ $tw.Wiki = function(options) {
 				}
 				// Save the new tiddler
 				tiddlers[title] = tiddler;
-				// Check we've got it's title
-				if(tiddlerTitles && tiddlerTitles.indexOf(title) === -1) {
-					tiddlerTitles.push(title);
-				}
+				// Check we've got the title
+				tiddlerTitles = $tw.utils.insertSortedArray(tiddlerTitles || [],title);
 				// Record the new tiddler state
 				updateDescriptor["new"] = {
 					tiddler: tiddler,
@@ -1177,13 +1255,16 @@ $tw.Wiki = function(options) {
 	this.getTiddler = function(title) {
 		if(title) {
 			var t = tiddlers[title];
-			if(t instanceof $tw.Tiddler) {
+			if(t !== undefined) {
 				return t;
-			} else if(title !== undefined && shadowTiddlers[title]) {
-				return shadowTiddlers[title].tiddler;
+			} else {
+				var s = shadowTiddlers[title];
+				if(s !== undefined) {
+					return s.tiddler;
+				}
 			}
-			return undefined;
 		}
+		return undefined;
 	};
 
 	// Get an array of all tiddler titles
@@ -1300,7 +1381,7 @@ $tw.Wiki = function(options) {
 			var tiddler = tiddlers[title];
 			if(tiddler) {
 				if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type") && tiddler.fields.text) {
-					pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+					pluginInfo[tiddler.fields.title] = $tw.utils.parseJSONSafe(tiddler.fields.text);
 					results.modifiedPlugins.push(tiddler.fields.title);
 				}
 			} else {
@@ -1433,7 +1514,7 @@ $tw.Wiki.prototype.defineTiddlerModules = function() {
 					}
 					break;
 				case "application/json":
-					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],JSON.parse(tiddler.fields.text));
+					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],$tw.utils.parseJSONSafe(tiddler.fields.text));
 					break;
 				case "application/x-tiddler-dictionary":
 					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],$tw.utils.parseFields(tiddler.fields.text));
@@ -1622,12 +1703,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 				}
 				return true;
 			},
-			data = {};
-		try {
-			data = JSON.parse(text);			
-		} catch(e) {
-			// Ignore JSON parse errors
-		}
+			data = $tw.utils.parseJSONSafe(text);
 		if($tw.utils.isArray(data) && isTiddlerArrayValid(data)) {
 			return data;
 		} else if(isTiddlerValid(data)) {
@@ -1667,7 +1743,7 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 				$tw.crypto.setPassword(data.password);
 				var decryptedText = $tw.crypto.decrypt(encryptedText);
 				if(decryptedText) {
-					var json = JSON.parse(decryptedText);
+					var json = $tw.utils.parseJSONSafe(decryptedText);
 					for(var title in json) {
 						$tw.preloadTiddler(json[title]);
 					}
@@ -1830,7 +1906,7 @@ A default set of files for TiddlyWiki to ignore during load.
 This matches what NPM ignores, and adds "*.meta" to ignore tiddler
 metadata files.
 */
-$tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
+$tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.github$|^\.vscode$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
 
 /*
 Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}. Note that no file information is returned for externally loaded tiddlers, just the `tiddlers` property.
@@ -1867,9 +1943,9 @@ filepath: pathname of the directory containing the specification file
 $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	var tiddlers = [];
 	// Read the specification
-	var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
+	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields,isEditableFile) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
@@ -1890,6 +1966,12 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				} else {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
+						case "subdirectories":
+							value = path.relative(rootPath, filename).split('/').slice(0, -1);
+							break;
+						case "filepath":
+							value = path.relative(rootPath, filename);
+							break;
 						case "filename":
 							value = path.basename(filename);
 							break;
@@ -1928,6 +2010,20 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			tiddlers.push({tiddlers: fileTiddlers});
 		}
 	};
+	// Helper to recursively search subdirectories
+	var getAllFiles = function(dirPath, recurse, arrayOfFiles) {
+		recurse = recurse || false;
+		arrayOfFiles = arrayOfFiles || [];
+		var files = fs.readdirSync(dirPath);
+		files.forEach(function(file) {
+			if (recurse && fs.statSync(dirPath + path.sep + file).isDirectory()) {
+				arrayOfFiles = getAllFiles(dirPath + path.sep + file, recurse, arrayOfFiles);
+			} else if(fs.statSync(dirPath + path.sep + file).isFile()){
+				arrayOfFiles.push(path.join(dirPath, path.sep, file));
+			}
+		});
+		return arrayOfFiles;
+	}
 	// Process the listed tiddlers
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 		if(tidInfo.prefix && tidInfo.suffix) {
@@ -1951,13 +2047,14 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 			// Process directory specifier
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-				var	files = fs.readdirSync(dirPath),
+				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
 				for(var t=0; t<files.length; t++) {
-					var filename = files[t];
+					var thisPath = path.relative(filepath, files[t]),
+					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-						processFile(dirPath + path.sep + filename,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
 					}
 				}
 			} else {
@@ -1982,7 +2079,11 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			console.log("Warning: missing plugin.info file in " + filepath);
 			return null;
 		}
-		var pluginInfo = JSON.parse(fs.readFileSync(infoPath,"utf8"));
+		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"),function() {return null;});
+		if(!pluginInfo) {
+			console.log("warning: invalid JSON in plugin.info file at " + infoPath);
+			pluginInfo = {};
+		}
 		// Read the plugin files
 		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
 		// Save the plugin tiddlers into the plugin info
@@ -2099,7 +2200,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		pluginFields;
 	// Bail if we don't have a wiki info file
 	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
+		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+		if(!wikiInfo) {
+			console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
+			wikiInfo = {};
+		}
 	} else {
 		return null;
 	}
@@ -2337,11 +2442,12 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
 	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
 	$tw.utils.registerFileType("audio/ogg","base64",".ogg");
+	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
 	$tw.utils.registerFileType("video/ogg","base64",[".ogm",".ogv",".ogg"]);
 	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
-	$tw.utils.registerFileType("audio/mp4","base64",[".mp4",".m4a"]);
+	$tw.utils.registerFileType("audio/mpeg","base64",[".mp3",".m2a",".mp2",".mpa",".mpg",".mpga"]);
 	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
@@ -2353,7 +2459,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
 	$tw.utils.registerFileType("application/octet-stream","base64",".octet-stream");
 	// Create the wiki store for the app
-	$tw.wiki = new $tw.Wiki();
+	$tw.wiki = new $tw.Wiki($tw.safeMode && {enableIndexers: []});
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules
@@ -2533,7 +2639,7 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 		for(t=0; t<remaining.length; t++) {
 			var task = remaining[t];
 			if(task.before && task.before.indexOf(name) !== -1) {
-				if($tw.boot.doesTaskMatchPlatform(task) || (task.name && $tw.boot.disabledStartupModules.indexOf(name) !== -1)) {
+				if($tw.boot.doesTaskMatchPlatform(task) && (!task.name || $tw.boot.disabledStartupModules.indexOf(task.name) === -1)) {
 					return false;
 				}
 			}
@@ -2565,6 +2671,18 @@ $tw.hooks.addHook = function(hookName,definition) {
 	}
 	else {
 		$tw.hooks.names[hookName] = [definition];
+	}
+};
+
+/*
+Delete hooks from the hashmap
+*/
+$tw.hooks.removeHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		var p = $tw.hooks.names[hookName].indexOf(definition);
+		if(p !== -1) {
+			$tw.hooks.names[hookName].splice(p, 1);
+		}
 	}
 };
 
@@ -2612,3 +2730,4 @@ if(typeof(exports) !== "undefined") {
 } else {
 	_boot(window.$tw);
 }
+//# sourceURL=$:/boot/boot.js

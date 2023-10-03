@@ -6,7 +6,7 @@ delivery: App
 description: Android app for saving changes locally to device storage
 method: save
 modified: 20200507103926292
-tags: Saving Android
+tags: Saving Android [[Standalone App]]
 title: Saving on Android
 type: text/vnd.tiddlywiki
 url: https://github.com/donmor/Tiddloid

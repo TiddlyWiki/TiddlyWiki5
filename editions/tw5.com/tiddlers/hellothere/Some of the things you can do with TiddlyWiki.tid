@@ -1,5 +1,5 @@
 created: 20140904090300000
-modified: 20160602051709631
+modified: 20211018102355896
 tags: HelloThere
 title: Some of the things you can do with TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 * Inventory just about anything: your recipes, personal library, contacts, music collection, and more
 * Create a blog or website
 * Write a book
-* Organise your images into galleries (see our [[ImageGallery Example]])
+* Organise your images into galleries (see [[Icon Gallery]])
 * Share the information in your ~TiddlyWiki with others, as an online file, as a file attachment, as a tiddler file, or as a link to a specific online tiddler (try clicking and dragging a tiddler from one ~TiddlyWiki file to another to see what happens)
 * Draw a sketch (Edit [[Motovun Jack.jpg]] and start drawing over the image to see what happens)
 * Use familiar web user interface elements such as lightboxes - see SampleWizard

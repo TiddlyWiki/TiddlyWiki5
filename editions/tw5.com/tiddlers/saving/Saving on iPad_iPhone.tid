@@ -6,7 +6,7 @@ delivery: App
 description: iPad/iPhone app for working with TiddlyWiki
 method: save
 modified: 20201007205336209
-tags: Saving iOS
+tags: Saving iOS [[Standalone App]]
 title: Saving on iPad/iPhone
 type: text/vnd.tiddlywiki
 
@@ -17,7 +17,7 @@ Instructions for use:
 # Open Quine 2
 # Tap the + toolbar button to create and open a new TiddlyWiki
 # From the file list tap an existing TiddlyWiki file to open it
-# Edit the TiddlyWiki as normal, and save as normal using either Autosave or the TiddlyWiki save button <<.icon $:/core/images/save-button>>
+# Edit the TiddlyWiki as normal, and save as normal using either Autosave or the TiddlyWiki save button <<.icon $:/core/images/save-button-dynamic>>
 # Tap the left hand "Documents" toolbar button to close an open TiddlyWiki
 
 *Quine 2 works natively in iOS with the local file system and the iCloud file system

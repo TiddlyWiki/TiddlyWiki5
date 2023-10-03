@@ -64,9 +64,9 @@ RadioWidget.prototype.getValue = function() {
 		tiddler = this.wiki.getTiddler(this.radioTitle);
 	if(tiddler) {
 		if(this.radioIndex) {
-			value = this.wiki.extractTiddlerDataItem(this.radioTitle,this.radioIndex);
+			value = this.wiki.extractTiddlerDataItem(this.radioTitle,this.radioIndex,this.radioDefault);
 		} else {
-			value = tiddler.getFieldString(this.radioField);
+			value = tiddler.getFieldString(this.radioField,this.radioDefault);
 		}
 	} else {
 		value = this.radioDefault;

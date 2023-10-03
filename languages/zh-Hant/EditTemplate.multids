@@ -1,5 +1,6 @@
 title: $:/language/EditTemplate/
 
+Caption: 編輯器
 Body/External/Hint: 此條目顯示儲存於主要的 TiddlyWiki 檔之外的內容。你可以編輯其標籤和欄位，但不能直接編輯內容本身
 Body/Placeholder: 輸入此條目的內容
 Body/Preview/Type/Output: 輸出

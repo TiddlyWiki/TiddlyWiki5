@@ -34,8 +34,10 @@ function FramedEngine(options) {
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)
+	var paletteTitle = this.widget.wiki.getTiddlerText("$:/palette");
+	var colorScheme = (this.widget.wiki.getTiddler(paletteTitle) || {fields: {}}).fields["color-scheme"] || "light";
 	this.iframeDoc.open();
-	this.iframeDoc.write("");
+	this.iframeDoc.write("<meta name='color-scheme' content='" + colorScheme + "'>");
 	this.iframeDoc.close();
 	// Style the iframe
 	this.iframeNode.className = this.dummyTextArea.className;
@@ -58,7 +60,7 @@ function FramedEngine(options) {
 		this.domNode.value = this.value;
 	}
 	// Set the attributes
-	if(this.widget.editType) {
+	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
 	if(this.widget.editPlaceholder) {
@@ -85,7 +87,7 @@ function FramedEngine(options) {
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "click",handlerObject: this,handlerMethod: "handleClickEvent"},
 		{name: "input",handlerObject: this,handlerMethod: "handleInputEvent"},
-		{name: "keydown",handlerObject: this.widget,handlerMethod: "handleKeydownEvent"},
+		{name: "keydown",handlerObject: this,handlerMethod: "handleKeydownEvent"},
 		{name: "focus",handlerObject: this,handlerMethod: "handleFocusEvent"}
 	]);
 	// Add drag and drop event listeners if fileDrop is enabled
@@ -116,6 +118,8 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.margin = "0";
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
+	// Ensure we don't force text direction to LTR
+	this.domNode.style.removeProperty("direction");
 };
 
 /*
@@ -160,13 +164,13 @@ FramedEngine.prototype.fixHeight = function() {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
-				this.iframeNode.style.height = (newHeight + 14) + "px"; // +14 for the border on the textarea
+				this.iframeNode.style.height = newHeight + "px";
 			}
 		} else {
 			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
 			this.domNode.style.height = fixedHeight + "px";
-			this.iframeNode.style.height = (fixedHeight + 14) + "px";
+			this.iframeNode.style.height = fixedHeight + "px";
 		}
 	}
 };
@@ -175,9 +179,11 @@ FramedEngine.prototype.fixHeight = function() {
 Focus the engine node
 */
 FramedEngine.prototype.focus  = function() {
-	if(this.domNode.focus && this.domNode.select) {
+	if(this.domNode.focus) {
 		this.domNode.focus();
-		this.domNode.select();
+	}
+	if(this.domNode.select) {
+		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
 	}
 };
 
@@ -188,6 +194,17 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 	if(this.widget.editCancelPopups) {
 		$tw.popup.cancel(0);
 	}
+};
+
+/*
+Handle a keydown event
+ */
+FramedEngine.prototype.handleKeydownEvent = function(event) {
+	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+		return true;
+	}
+
+	return this.widget.handleKeydownEvent(event);
 };
 
 /*
@@ -205,7 +222,7 @@ FramedEngine.prototype.handleInputEvent = function(event) {
 	this.widget.saveChanges(this.getText());
 	this.fixHeight();
 	if(this.widget.editInputActions) {
-		this.widget.invokeActionString(this.widget.editInputActions);
+		this.widget.invokeActionString(this.widget.editInputActions,this,event,{actionValue: this.getText()});
 	}
 	return true;
 };

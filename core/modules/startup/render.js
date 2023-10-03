@@ -42,12 +42,17 @@ exports.startup = function() {
 	$tw.styleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_STYLESHEET_TITLE,{document: $tw.fakeDocument});
 	$tw.styleContainer = $tw.fakeDocument.createElement("style");
 	$tw.styleWidgetNode.render($tw.styleContainer,null);
+	$tw.styleWidgetNode.assignedStyles = $tw.styleContainer.textContent;
 	$tw.styleElement = document.createElement("style");
-	$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 	document.head.insertBefore($tw.styleElement,document.head.firstChild);
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
 		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
-			$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+			var newStyles = $tw.styleContainer.textContent;
+			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
+				$tw.styleWidgetNode.assignedStyles = newStyles;
+				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
+			}
 		}
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display

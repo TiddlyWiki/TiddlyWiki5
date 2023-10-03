@@ -7,14 +7,15 @@ ClassicWarning/Upgrade/Caption: mettre à jour
 CloseAll/Button: tout fermer
 ColourPicker/Recent: Récent :
 ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tiddler « <$text text=<<title>>/> » ?
-ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
-ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
+ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
+ConfirmDeleteTiddlers: Êtes-vous sûr•e de vouloir supprimer <<resultCount>> tiddler(s) ?
+ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
 ConfirmAction: Souhaitez-vous poursuivre ?
 Count: total 
 DefaultNewTiddlerTitle: Nouveau tiddler
 Diffs/CountMessage: <<diff-count>> différences
-DropMessage: Déposer ici (ou appuyer sur « escape » pour annuler)
+DropMessage: Déposer ici (ou taper sur la touche « Escape » pour annuler)
 Encryption/Cancel: Annuler
 Encryption/ConfirmClearPassword: Souhaitez-vous supprimer ce mot de passe ? Si oui, ce wiki ne sera plus chiffré lors de la sauvegarde
 Encryption/PromptSetPassword: Choisir un nouveau mot de passe pour ce TiddlyWiki
@@ -24,6 +25,8 @@ Encryption/RepeatPassword: Répéter le mot de passe
 Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
 Encryption/SetPassword: Définir ce mot de passe 
 Error/Caption: Erreur
+Error/DeserializeOperator/MissingOperand: Erreur de filtre: opérande manquant pour l'opérateur 'deserialize'
+Error/DeserializeOperator/UnknownDeserializer: Erreur de filtre: l'opérateur 'deserialize' a pour opérande un désérialiseur inconnu
 Error/Filter: Erreur de filtre
 Error/FilterSyntax: Erreur de syntaxe dans l'expression du filtre
 Error/FilterRunPrefix: Erreur de filtre : Préfixe de run inconnu pour le filtre
@@ -39,6 +42,7 @@ Error/RetrievingSkinny: Erreur pendant la récupération de la liste des tiddler
 Error/SavingToTWEdit: Erreur lors de l'enregistrement vers TWEdit
 Error/WhileSaving: Erreur lors de l'enregistrement
 Error/XMLHttpRequest: Code d'erreur XMLHttpRequest
+Error/ZoominTextNode: Erreur de visualisation dans le déroulé : il semble que vous cherchiez à interagir avec un tiddler qui s'affiche dans un containeur personnalisé. Le problème vient probablement de l'utilisation de `$:/tags/StoryTiddlerTemplateFilter` avec un template qui commence par du texte ou des espaces. Merci d'utiliser le pragma `\whitespace trim` et de vous assurer que tout le contenu du tiddler est inclus dans un seul élément HTML. Voici le texte à l'origine du problème :
 InternalJavaScriptError/Title: Erreur interne JavaScript
 InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de rafraîchir l'affichage de votre navigateur
 LayoutSwitcher/Description: Ouvre le commutateur de mise en page

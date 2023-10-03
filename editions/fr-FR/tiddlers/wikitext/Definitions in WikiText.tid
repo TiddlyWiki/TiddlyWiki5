@@ -1,0 +1,15 @@
+caption: Définitions
+created: 20131205160424246
+fr-title: Définitions en WikiTexte
+modified: 20220422000443083
+tags: WikiText
+title: Definitions in WikiText
+type: text/vnd.tiddlywiki
+
+Les définitions utilisables en HTML sont créées en utilisant successivement `;` et `:`&nbsp;:
+
+<<wikitext-example src:"; Terme à définir
+: Définition du terme
+; Un autre terme
+: Une autre définition
+">>

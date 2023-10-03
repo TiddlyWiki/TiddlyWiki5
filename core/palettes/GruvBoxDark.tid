@@ -12,7 +12,7 @@ alert-highlight: #d79921
 alert-muted-foreground: #504945
 background: #3c3836
 blockquote-bar: <<colour muted-foreground>>
-button-foreground: <<colour page-background>>
+button-foreground: <<colour foreground>>
 code-background: #504945
 code-border: #504945
 code-foreground: #fb4934
@@ -41,6 +41,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #d3869b
 external-link-foreground: #8ec07c
 foreground: #fbf1c7
+highlight-background: #ffff79
+highlight-foreground: #000000
 menubar-background: #504945
 menubar-foreground: <<colour foreground>>
 message-background: #83a598
@@ -63,7 +65,7 @@ select-tag-background: #665c54
 select-tag-foreground: <<colour foreground>>
 selection-background: #458588
 selection-foreground: <<colour foreground>>
-sidebar-button-foreground: <<colour page-background>>
+sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #7c6f64
 sidebar-controls-foreground: #504945
 sidebar-foreground-shadow: transparent

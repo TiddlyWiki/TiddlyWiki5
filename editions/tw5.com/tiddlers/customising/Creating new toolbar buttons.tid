@@ -1,0 +1,35 @@
+created: 20211124205415217
+modified: 20211126162937536
+tags: [[Customise TiddlyWiki]]
+title: Creating new toolbar buttons
+type: text/vnd.tiddlywiki
+
+Let's say you have a skeleton tiddler called 'Recipe template', and you want to have a button available in the tiddler ViewToolbar to create new recipe tiddlers on demand. This will require the following steps:
+
+# You will want an image for your button. If none of the core images (shadow tiddlers with the prefix $:/core/images/) work for you, then you will need to create or acquire an SVG image (for example, one of the images at http://flaticon.com), drag it into your file so that it becomes a tiddler, edit the tiddler and adjust the height and width to 22px
+# You will want to create the tiddler that contains your tiddler. Create it, title it, and add the button code (see the code at the bottom of this tiddler for an example, with hints where you will need to adapt it). Tag it [[$:/tags/ViewToolbar]]
+# You will need to create a tiddler that tells TiddlyWiki whether your button should be visible in the toolbar or hidden. Let's title it [[$:/config/ViewToolbarButtons/Visibility/Recipe]]. Type `show` into the text area, and save. If you want to hide it, type `hide` into the text area and save. The button will also be accessable from the ''ControlPanel : Appearance : Toolbars : ViewToolbar'' tab
+# You will want to position the button properly. Open the tiddler $:/tags/ViewToolbar and insert your button tiddler's title in the appropriate place in the list field.
+
+```
+\define newHereButtonTags()
+[[$(currentTiddler)$]]
+\end
+\define newHereButton()
+<$button class=<<tv-config-toolbar-class>>>
+<$action-sendmessage
+  $message="tm-new-tiddler"
+$param="TITLE OF YOUR SKELETON BUTTON"
+title="New tiddler"
+  tags=<<newHereButtonTags>> />
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+{{TITLE OF YOUR SVG IMAGE TIDDLER}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<span class="tc-btn-text"><$text text="CAPTION FOR YOUR BUTTON"/></span>
+</$list>
+</$button>
+\end
+
+<<newHereButton>>
+```

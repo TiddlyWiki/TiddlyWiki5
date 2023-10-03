@@ -1,0 +1,51 @@
+created: 20220115152811251
+modified: 20220115161035903
+tags: [[Block Mode WikiText]]
+title: Block Mode WikiText (Examples)
+type: text/vnd.tiddlywiki
+
+[[Paragraphs|Paragraphs in WikiText]] are the most common WikiText. It is important to know they do not end until a blank line is encountered. Once a paragraph starts the parser will be in ''inline mode''. Until that blank line is encountered other ''block mode'' syntax will be ignored:
+
+<<<
+<<wikitext-example-without-html src:'This is a paragraph.
+Only __//inline mode//__ punctuation is recognised here.
+Block mode punctuation will be <b>ignored</b> until
+the paragraph ends (i.e. a blank line is encountered).
+For example:
+* List item punctuation is ignored
+* So is this horizontal rule:
+---
+|tables|are|ignored|
+! headings are ignored
+<<<
+multi-line block quotes are ignored
+<<<
+'>>
+<<<
+
+To get the parser to recognise the above ''block mode'' WikiText, a blank line needs to be inserted after the "For example:" line. The blank line will be treated as the end of the paragraph and the parser will start recognising ''block mode'' punctuation again. Like this:
+
+<<<
+<<wikitext-example-without-html src:'This is a paragraph.
+Only __//inline mode//__ punctuation is recognised here.
+Block mode punctuation will be <b>ignored</b> until
+the paragraph ends (i.e. a blank line is encountered).
+For example, here is a blank line:
+
+* due to above blank line,
+* list items work
+* the following horizontal rule also works:
+---
+|!tables|!work|
+|cell 1| cell 2|
+! Headings work
+<<<
+multi-line block quotes work
+<<<
+; Term
+: Definition of that term
+Another paragraph can start here, but it will not end until blank line
+'>>
+<<<
+
+All the block mode examples above except for the paragraph are written one line after the other without blanks between. Those types of WikiText don't require the extra blank line to terminate.

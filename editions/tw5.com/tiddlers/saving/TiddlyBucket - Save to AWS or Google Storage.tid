@@ -1,0 +1,15 @@
+caption: ~TiddlyBucket
+color: #f48fb1
+created: 20221126192148031
+delivery: Protocol
+description: Save to AWS or Google Storage
+method: save
+modified: 20221126192853897
+tags: Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows iOS Edge
+title: TiddlyBucket - Save to AWS or Google Storage
+type: text/vnd.tiddlywiki
+ribbon-text: NEW
+
+~TiddlyBucket - Save to AWS or Google Storage using Go
+
+This tool replicates the ~TiddlyWeb backend API and can read and write the tiddler files to a local directory like the canonical ~TiddlyWiki5 app. But, in addition, it can do the same with a given a Google Cloud Storage bucket or AWS S3 bucket. Written in the Go programming language

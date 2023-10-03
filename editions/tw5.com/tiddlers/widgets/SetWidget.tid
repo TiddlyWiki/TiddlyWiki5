@@ -1,6 +1,6 @@
 caption: set
 created: 20131115182700000
-modified: 20210505095640228
+modified: 20220523075522407
 tags: Widgets
 title: SetWidget
 type: text/vnd.tiddlywiki
@@ -70,6 +70,8 @@ src="""<$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" 
 !! Filtered List Variable Assignment
 
 This form of the set variable widget evaluates the filter and assigns the result to the variable as a space-separated list (using double square brackets for titles containing spaces).
+
+<<.warning """The [[Title List]] format cannot reliably represent items that contain certain specific character sequences such as `]] `. Thus it should not be used where there is a possibility of such sequences occurring.""">>
 
 <<<
 

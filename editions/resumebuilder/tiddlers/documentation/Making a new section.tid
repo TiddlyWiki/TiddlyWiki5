@@ -15,7 +15,7 @@ You can have multiple template tiddlers that use the same input and options tidd
 
 !!Display tiddler
 
-This is the container used to display the section in the résumé itself, there isn't any customization here.
+This is the container used to display the section in the résumé itself, there isn't any customisation here.
 
 ''Required tags'': `Section Display`<br>
 ''Required name format'': `$:/display/(section name) Display`<br>

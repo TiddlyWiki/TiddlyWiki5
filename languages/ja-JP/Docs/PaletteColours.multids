@@ -71,30 +71,30 @@ table-footer-background: テーブルフッタの背景
 table-header-background: テーブルヘッダの背景
 tag-background: タグの背景
 tag-foreground: タグの前景
-tiddler-background: tiddlerの背景
-tiddler-border: tiddlerの前景
-tiddler-controls-foreground: tiddler部品の前景
-tiddler-controls-foreground-hover: tiddler部品の前景（ホバー）
-tiddler-controls-foreground-selected: tiddler部品の前景（選択済）
-tiddler-editor-background: tiddlerエディタの背景
-tiddler-editor-border: tiddlerエディタの枠線
-tiddler-editor-border-image: tiddlerエディタの枠線イメージ
-tiddler-editor-fields-even: tiddlerエディタの背景（偶数フィールド）
-tiddler-editor-fields-odd: tiddlerエディタの背景（奇数フィールド）
-tiddler-info-background: tiddlerインフォパネルの背景
-tiddler-info-border: tiddlerインフォパネルの枠線
-tiddler-info-tab-background: tiddlerインフォパネルタブの背景
-tiddler-link-background: tiddlerリンクの背景
-tiddler-link-foreground: tiddlerリンクの前景
-tiddler-subtitle-foreground: tiddlerサブタイトルの前景
-tiddler-title-foreground: tiddlerタイトルの前景
+tiddler-background: Tiddler の背景
+tiddler-border: Tiddler の前景
+tiddler-controls-foreground: Tiddler 部品の前景
+tiddler-controls-foreground-hover: Tiddler 部品の前景（ホバー）
+tiddler-controls-foreground-selected: Tiddler 部品の前景（選択済）
+tiddler-editor-background: Tiddler エディタの背景
+tiddler-editor-border: Tiddler エディタの枠線
+tiddler-editor-border-image: Tiddler エディタの枠線イメージ
+tiddler-editor-fields-even: Tiddler エディタの背景（偶数フィールド）
+tiddler-editor-fields-odd: Tiddler エディタの背景（奇数フィールド）
+tiddler-info-background: Tiddler 情報パネルの背景
+tiddler-info-border: Tiddler 情報パネルの枠線
+tiddler-info-tab-background: Tiddler 情報パネルタブの背景
+tiddler-link-background: Tiddler リンクの背景
+tiddler-link-foreground: Tiddler リンクの前景
+tiddler-subtitle-foreground: Tiddler サブタイトルの前景
+tiddler-title-foreground: Tiddler タイトルの前景
 toolbar-cancel-button: ツールバー「キャンセル」ボタンの前景
 toolbar-close-button: ツールバー「閉じる」ボタンの前景
 toolbar-delete-button: ツールバー「削除」ボタンの前景
 toolbar-done-button: ツールバー「確定」ボタンの前景
 toolbar-edit-button: ツールバー「編集」ボタンの前景
 toolbar-info-button: ツールバー「情報」ボタンの前景
-toolbar-new-button: ツールバー「新規Tiddler」ボタンの前景
+toolbar-new-button: ツールバー「新規 Tiddler」ボタンの前景
 toolbar-options-button: ツールバー「オプション」ボタンの前景
 toolbar-save-button: ツールバー「保存」ボタンの前景
 untagged-background: 未タグ背景

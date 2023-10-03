@@ -2,6 +2,10 @@ title: $:/core/templates/static.content
 
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 
+<!-- Mastodon verification -->
+
+<a rel="me" href="https://fosstodon.org/@TiddlyWiki">Mastodon</a>
+
 <!-- For Google, and people without JavaScript-->
 
 <$reveal default="yes" text=<<savingEmpty>> type="nomatch">
@@ -13,14 +17,6 @@ It looks like this browser doesn't run JavaScript. You can use one of these stat
 
 ---
 
-{{HelloThere}}
-
 {{TiddlyWiki}}
-
-{{Features}}
-
-{{Community}}
-
-{{HelpingTiddlyWiki}}
 
 </$reveal>

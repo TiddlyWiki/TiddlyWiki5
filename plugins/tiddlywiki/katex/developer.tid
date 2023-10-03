@@ -1,0 +1,58 @@
+title: $:/plugins/tiddlywiki/katex/developer
+
+!! How to upgrade
+
+# Download latest release zip file from [[Github release|https://github.com/KaTeX/KaTeX/releases]]
+# Backup existing files
+#* `plugins/tiddlywiki/katex/files/tiddlywiki.files` file and 
+#* `katex.without-font-face.min.css` file
+#* Learn more at: $:/plugins/tiddlywiki/katex/ImplementationNotes
+# Rename extracted folder to "files" and 
+#* copy it to `plugins/tiddlywiki/katex/files`
+#* (maybe delete the old folder first, to make a full overwrite)
+#* delete unused files in it, like `*.mjs` files and `*.md` files
+# Create `plugins/tiddlywiki/katex/files/tiddlywiki.files`
+#* (or use the old one) and 
+#* register all needed files
+# Register in `files/tiddlywiki.files`
+#* `katex.without-font-face.min.css` ''as'' 
+#* `$:/plugins/tiddlywiki/katex/katex.min.css`
+#* so fonts are loaded properly in tw environment
+
+
+!! How to test
+
+To create a new "test edition" type the following command in a console window:
+
+<<<
+```
+node tiddlywiki test-katex --init katexdemo
+```
+<<<
+
+>It will create a new directory //test-katex// and clones the //katexdemo// edition.<br>The output should be:
+
+<<<
+`Copied edition 'katexdemo' to test-katex`
+<<<
+
+Type:
+
+<<<
+```
+node tiddlywiki test-katex --listen
+```
+<<<
+
+>It should output
+
+<<<
+`syncer-server-filesystem: Dispatching 'save' task: $:/StoryList
+Serving on http://127.0.0.1:8080
+(press ctrl-C to exit)
+`
+<<<
+
+Test the new version in the browser at: [[http://127.0.0.1:8080]]
+
+Make sure all equations of math and chemistry are rendered properly.
