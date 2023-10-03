@@ -3,13 +3,6 @@ tags: $:/tags/Tour/IntroductionToTiddlyWiki
 
 ! Congratulations
 
-<$confetti/>
-<$confetti delay=100/>
-<$confetti delay=200/>
-<$confetti delay=300/>
-<$confetti delay=400/>
-<$confetti delay=500/>
-
 You have completed the tour.
 
 You can choose to take another tour:

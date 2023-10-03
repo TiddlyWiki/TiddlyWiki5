@@ -31,7 +31,15 @@ text: longer description of the tour
 \end
 
 \function tour-is-not-first-step()
-[all[shadows+tiddlers]tag[$:/tags/Tour/IntroductionToTiddlyWiki]before{$:/state/tour/step}count[]compare:number:gt[0]]
+[all[shadows+tiddlers]tag<tour-current-tag>before{$:/state/tour/step}count[]compare:number:gt[0]]
+\end
+
+\function tour-is-last-step()
+[all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}count[]compare:number:eq[0]]
+\end
+
+\function tour-is-not-last-step()
+[all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}count[]compare:number:gt[0]]
 \end
 
 \procedure tour-initialise-current-tour-step()
