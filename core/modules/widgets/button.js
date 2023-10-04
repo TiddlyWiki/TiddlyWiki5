@@ -16,6 +16,8 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
+var DATA_ATTRIBUTE_PREFIX = "data-";
+
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -59,6 +61,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
+	// Assign data- attributes
+	this.updateDomNodeDataAttributes();
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -250,7 +254,15 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	//Add new classes from updated class attribute.
 	$tw.utils.pushTop(domNodeClasses,newClasses);
 	this.domNode.className = domNodeClasses.join(" ");
-}
+};
+
+ButtonWidget.prototype.updateDomNodeDataAttributes = function() {
+	$tw.utils.each(this.attributes,function(value,name) {
+		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
+			domNode.setAttribute(name,value);
+		}
+	});
+};
 
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
@@ -260,8 +272,19 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.actions || changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.selectedClass || changedAttributes.style || changedAttributes.dragFilter || changedAttributes.dragTiddler || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup]) || (this.popupTitle && changedTiddlers[this.popupTitle]) || changedAttributes.popupAbsCoords || changedAttributes.setTitle || changedAttributes.setField || changedAttributes.setIndex || changedAttributes.popupTitle || changedAttributes.disabled || changedAttributes["default"]) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
-		this.updateDomNodeClasses();
+	} else {
+		if(changedAttributes["class"]) {
+			this.updateDomNodeClasses();
+		}
+		var gotDataAttribute = false;
+		$tw.utils.each(changedAttributes,function(value,name) {
+			if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
+				gotDataAttribute = true;
+			}
+		});
+		if(gotDataAttribute) {
+			this.updateDomNodeDataAttributes();
+		}
 	}
 	return this.refreshChildren(changedTiddlers);
 };
