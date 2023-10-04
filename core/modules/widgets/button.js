@@ -257,9 +257,10 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 };
 
 ButtonWidget.prototype.updateDomNodeDataAttributes = function() {
+	var self = this;
 	$tw.utils.each(this.attributes,function(value,name) {
 		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
-			domNode.setAttribute(name,value);
+			self.domNode.setAttribute(name,value);
 		}
 	});
 };
