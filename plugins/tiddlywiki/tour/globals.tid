@@ -34,6 +34,7 @@ These config tiddlers may be changed directly as required:
 \end
 
 \procedure tour-initialise-current-tour-step()
+\procedure tv-action-refresh-policy() always
 <$transclude $tiddler={{$:/state/tour/step}} $field="enter-actions"/>
 \end
 
@@ -58,22 +59,26 @@ These config tiddlers may be changed directly as required:
 \end tour-chooser
 
 \procedure tour-start(title,step)
+\procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler="$:/config/CurrentTour" text=<<title>>/>
 <$transclude $variable="tour-restart" step=<<step>>/>
 \end
 
 \procedure tour-restart(step)
+\procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
 <$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [<step>!is[blank]] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 
 \procedure tour-next-step()
+\procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/finished]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 
 \procedure tour-previous-step()
+\procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>before{$:/state/tour/step}] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
