@@ -1,0 +1,44 @@
+title: TiddlyWiki Archive
+created: 20231005205623086
+modified: 20231005210538879
+tags: About
+
+\procedure versions()
+5.1.0 5.1.1 5.1.2 5.1.3 5.1.4 5.1.5 5.1.6 5.1.7 5.1.8 5.1.9
+5.1.10 5.1.11 5.1.12 5.1.13 5.1.14 5.1.15 5.1.16 5.1.17 5.1.18 5.1.19
+5.1.20 5.1.21 5.1.22 5.1.23
+5.2.0 5.2.1 5.2.2 5.2.3 5.2.4 5.2.5 5.2.6 5.2.7
+5.3.0 5.3.1
+\end
+
+Older versions of TiddlyWiki are available in the [[archive|https://github.com/Jermolene/jermolene.github.io/tree/master/archive]]:
+
+<table>
+	<tbody>
+		<$list filter=<<versions>> variable="version">
+			<$let
+				filename=`TiddlyWiki-$(version)$`
+				emptyFilename=`Empty-$(filename)$`
+			>
+				<tr>
+					<th>
+						<$text text=`v$(version)$`/>
+					</th>
+					<td>
+						<$view tiddler={{{ [<version>addprefix[Release ]] }}} field="released" format="date" template="DDth mmm YYYY"/>
+					</td>
+					<td>
+						<a href={{{ [<filename>addprefix[https://tiddlywiki.com/archive/full/]]}}} rel="noopener noreferrer" target="_blank">
+							<$text text=`$(filename)$.html`/>
+						</a>
+					</td>
+					<td>
+						<a href={{{ [<emptyFilename>addprefix[https://tiddlywiki.com/archive/empty/]]}}} rel="noopener noreferrer" target="_blank">
+							<$text text=`$(emptyFilename)$.html`/>
+						</a>
+					</td>
+				</tr>
+			</$let>
+		</$list>
+	</tbody>
+</table>
