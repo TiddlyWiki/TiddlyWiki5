@@ -57,14 +57,14 @@ These config tiddlers may be changed directly as required:
 </div>
 \end tour-chooser
 
-\procedure tour-start(title)
+\procedure tour-start(title,step)
 <$action-setfield $tiddler="$:/config/CurrentTour" text=<<title>>/>
-<<tour-restart>>
+<$transclude $variable="tour-restart" step=<<step>>/>
 \end
 
-\procedure tour-restart()
+\procedure tour-restart(step)
 <$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [<step>!is[blank]] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 

@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/closing-tiddlers
+caption: Closing tiddlers
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 display-mode: fullscreen
 enter-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Saturn"/>

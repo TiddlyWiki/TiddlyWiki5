@@ -1,4 +1,5 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/search
+caption: Searching
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-sidebar-search .tc-popup-handle
 condition: [{$:/temp/search}match[help]]

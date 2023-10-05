@@ -161,13 +161,36 @@ tags: $:/tags/Stylesheet
 	border: 1px solid <<colour foreground>>;
 }
 
-button.tc-tour-settings-tour-step-heading {
+.tc-tour-settings-tour-step-heading {
 	background: <<colour muted-foreground>>;
-	display: block;
-	width: 100%;
-	text-align: left;
-	padding: 0.25em;
 	border: 0;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 5px;
+}
+
+.tc-tour-settings-tour-step-open-button,
+.tc-tour-settings-tour-step-launch-button {
+	display: inline-block;
+	padding: 0.25em;
+}
+
+.tc-tour-settings-tour-step-open-button {
+	flex-grow: 1;
+	text-align: left;
+}
+
+.tc-tour-settings-tour-step-launch-button {
+	flex-grow: 0;
+}
+
+.tc-tour-settings-tour-step-open-button:hover,
+.tc-tour-settings-tour-step-launch-button:hover {
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
 }
 
 .tc-tour-settings-tour-step-heading-step-number {

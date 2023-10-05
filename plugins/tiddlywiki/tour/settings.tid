@@ -99,16 +99,24 @@ Select a tour:
 			collapseState={{{ [[$:/state/Tour/Settings/Tour/Visibility/]addsuffix<currentTour>addsuffix<currentStep>] }}}
 		>
 			<div class="tc-tour-settings-tour-step">
-				<$button class="tc-btn-invisible tc-tour-settings-tour-step-heading">
-					<$action-setfield $tiddler=<<collapseState>> text={{{ [<collapseState>get[text]else[hide]match[show]then[hide]else[show]] }}}/>
-					<$list filter="[<collapseState>get[text]else[hide]match[show]]" variable="ignore" emptyMessage="{{$:/core/images/right-arrow}}">
-						{{$:/core/images/down-arrow}}
-					</$list>
-					<span class="tc-tour-settings-tour-step-heading-step-number">
-						<$text text=<<stepNumber>>/>
-					</span>
-					<$text text=<<currentStep>>/>
-				</$button>
+				<div class="tc-tour-settings-tour-step-heading">
+					<$button class="tc-btn-invisible tc-tour-settings-tour-step-open-button">
+						<$action-setfield $tiddler=<<collapseState>> text={{{ [<collapseState>get[text]else[hide]match[show]then[hide]else[show]] }}}/>
+						<$list filter="[<collapseState>get[text]else[hide]match[show]]" variable="ignore" emptyMessage="{{$:/core/images/right-arrow}}">
+							{{$:/core/images/down-arrow}}
+						</$list>
+						<span class="tc-tour-settings-tour-step-heading-step-number">
+							<$text text=<<stepNumber>>/>
+						</span>
+						<$transclude $tiddler=<<currentStep>> $field="caption">
+							<$text text=<<currentStep>>/>
+						</$transclude>
+					</$button>
+					<$button class="tc-btn-invisible tc-tour-settings-tour-step-launch-button" tooltip="Launch this step of the tour">
+						<$transclude $variable="tour-start" title=<<currentTour>> step=<<currentStep>>/>
+						{{$:/core/images/open-window}}
+					</$button>
+				</div>
 				<$reveal state=<<collapseState>> text="show" type="match" default="hide" animate="yes">
 					<table class="tc-tour-settings-tour-step-details">
 						<tbody>
