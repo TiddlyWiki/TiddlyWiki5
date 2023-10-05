@@ -157,6 +157,12 @@ tags: $:/tags/Stylesheet
 	max-height: 100px;
 }
 
+.tc-tour-settings-tour-settings {
+	border: 1px solid <<colour muted-foreground>>;
+	margin: 0.5em 0;
+	padding: 0.5em;
+}
+
 .tc-tour-settings-tour-step {
 	border: 1px solid <<colour foreground>>;
 }

@@ -90,6 +90,14 @@ Select a tour:
 			</tr>
 		</tbody>
 	</table>
+	<$list filter="[<currentTour>has[settings]]" variable="ignore">
+		<p>
+		Custom tour settings:
+		</p>
+		<div class="tc-tour-settings-tour-settings">
+			<$transclude $tiddler={{{ [<currentTour>get[settings]] }}}/>
+		</div>
+	</$list>
 	<p>
 		<<button-expand-collapse-all "Expand All" "show">>
 		<<button-expand-collapse-all "Collapse All" "hide">>
