@@ -4,6 +4,4 @@ tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fcontrol-panel
 condition: [[$:/StoryList]contains[$:/ControlPanel]]
 
-! Welcome to {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}
-
-Your task is to open the control panel.
+Your task is to open the control panel by clicking the icon that looks like a cog in the sidebar.

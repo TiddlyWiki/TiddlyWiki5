@@ -1,9 +1,7 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/tiddlers
-caption: Tiddlers
+caption: How does {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}} work?
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 display-mode: fullscreen
-
-! How does {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}} work?
 
 {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}} lets you collect and organise all kinds of information into interconnected bite-sized pieces called ''tiddlers''.
 

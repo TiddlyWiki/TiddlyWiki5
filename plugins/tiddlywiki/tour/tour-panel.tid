@@ -55,6 +55,9 @@ tags: $:/tags/PageTemplate
 				currentTourStep={{$:/state/tour/step}}
 				condition-var={{{ [<currentTourStep>get[condition-var]] :map[subfilter<currentTiddler>] }}}
 			>
+				<$list filter="[<currentTourStep>has[caption]]" variable="ignore">
+					<h1><$transclude $tiddler=<<currentTourStep>> $field="caption" mode="inline"/></h1>
+				</$list>
 				<!-- Handle steps without a condition -->
 				<$list filter="[<currentTourStep>!has[condition]]" variable="ignore">
 					<$transclude tiddler=<<currentTourStep>> mode="block"/>

@@ -7,8 +7,6 @@ condition: [list[$:/temp/Tour/DemoStoryList]count[]match[0]]
 
 \define tour-simplified-tiddler-close-button() yes
 
-! Closing tiddlers
-
 In the top right corner of each tiddler there is a button marked {{$:/core/images/close-button|0.65em}} that can be used to close them when you are finished with them.
 
 Try closing both these tiddlers.

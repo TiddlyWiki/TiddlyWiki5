@@ -4,6 +4,4 @@ tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-sidebar-search .tc-popup-handle
 condition: [{$:/temp/search}match[help]]
 
-! Searching
-
 Your task is to search for the phrase "help".

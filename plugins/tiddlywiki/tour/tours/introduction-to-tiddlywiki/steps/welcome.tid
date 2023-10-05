@@ -3,8 +3,6 @@ caption: Welcome
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 display-mode: fullscreen
 
-! Hello!
-
 !! An interactive tour of {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}
 
 Welcome to our tour of {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}.
