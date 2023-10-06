@@ -3,42 +3,81 @@ created: 20231005205623086
 modified: 20231005210538879
 tags: About
 
-\procedure versions()
-5.1.0 5.1.1 5.1.2 5.1.3 5.1.4 5.1.5 5.1.6 5.1.7 5.1.8 5.1.9
-5.1.10 5.1.11 5.1.12 5.1.13 5.1.14 5.1.15 5.1.16 5.1.17 5.1.18 5.1.19
-5.1.20 5.1.21 5.1.22 5.1.23
-5.2.0 5.2.1 5.2.2 5.2.3 5.2.4 5.2.5 5.2.6 5.2.7
-5.3.0 5.3.1
+\procedure .archive-versions()
+5.1.23 5.1.22 5.1.21 5.1.20
+5.1.19 5.1.18 5.1.17 5.1.16 5.1.15 5.1.14 5.1.13 5.1.12 5.1.11 5.1.10
+5.1.9  5.1.8  5.1.7  5.1.6  5.1.5  5.1.4  5.1.3  5.1.2  5.1.1  5.1.0
+
+5.2.7  5.2.6  5.2.5  5.2.4  5.2.3  5.2.2  5.2.1  5.2.0
+
+5.3.1  5.3.0
 \end
 
-Older versions of TiddlyWiki are available in the [[archive|https://github.com/Jermolene/jermolene.github.io/tree/master/archive]]:
+\procedure .table-header()
+\whitespace trim
+<tr>
+	<th>Version </th><th>Release Date</th><th>Documentation</th><th>Empty</th>
+</tr>
+\end
 
+\procedure .archive-table-row()
+\whitespace trim
+<tr>
+	<th>
+		<$text text=`v$(version)$`/>
+	</th>
+	<td>
+		<$view tiddler=`Release $(version)$` field="released" format="date" template="DDth mmm YYYY"/>
+	</td>
+	<td>
+		<a href=`https://tiddlywiki.com/archive/full/$(filename)$`
+			rel="noopener noreferrer"
+			target="_blank"
+		>
+			<$text text=`$(filename)$.html`/>
+		</a>
+	</td>
+	<td>
+		<a href=`https://tiddlywiki.com/archive/empty/$(emptyFilename)$`
+			rel="noopener noreferrer"
+			target="_blank"
+		>
+			<$text text=`$(emptyFilename)$.html`/>
+		</a>
+	</td>
+</tr>
+\end
+
+\procedure .archive-table(version-prefix:"5.1" )
+\whitespace trim
 <table>
 	<tbody>
-		<$list filter=<<versions>> variable="version">
+		<<.table-header>>
+		<$list filter="[enlist<.archive-versions>prefix<version-prefix>]" variable="version">
 			<$let
 				filename=`TiddlyWiki-$(version)$`
 				emptyFilename=`Empty-$(filename)$`
 			>
-				<tr>
-					<th>
-						<$text text=`v$(version)$`/>
-					</th>
-					<td>
-						<$view tiddler={{{ [<version>addprefix[Release ]] }}} field="released" format="date" template="DDth mmm YYYY"/>
-					</td>
-					<td>
-						<a href={{{ [<filename>addprefix[https://tiddlywiki.com/archive/full/]]}}} rel="noopener noreferrer" target="_blank">
-							<$text text=`$(filename)$.html`/>
-						</a>
-					</td>
-					<td>
-						<a href={{{ [<emptyFilename>addprefix[https://tiddlywiki.com/archive/empty/]]}}} rel="noopener noreferrer" target="_blank">
-							<$text text=`$(emptyFilename)$.html`/>
-						</a>
-					</td>
-				</tr>
+			<<.archive-table-row>>
 			</$let>
 		</$list>
 	</tbody>
 </table>
+\end
+
+
+A detailed overview about: "What's New" can be found at [[Releases]]
+
+!! Major Milestones
+
+!!! Parameterised Transclusion, Procedures, Functions and Custom Widgets
+
+<<.archive-table "5.3">>
+
+!!! Unrestricted Fieldnames and New JSON Store Area
+
+<<.archive-table "5.2">>
+
+!!! Versions One and Feature Updates
+
+<<.archive-table "5.1">>
