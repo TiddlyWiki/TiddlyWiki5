@@ -101,7 +101,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build favicon static index \
+	--build favicon static index archive \
 	|| exit 1
 
 # /empty.html					Empty
