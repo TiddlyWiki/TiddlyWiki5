@@ -15,26 +15,64 @@ Older versions of TiddlyWiki are available in the [[archive|https://github.com/J
 
 <table>
 	<tbody>
-		<$list filter=<<versions>> variable="version">
+		<tr>
+			<th>
+				Version
+			</th>
+			<th>
+				Released
+			</th>
+			<th>
+				Lifetime
+			</th>
+			<th>
+				Summary
+			</th>
+			<th>
+				Download
+			</th>
+		</tr>
+		<$list filter="[enlist<versions>reverse[]]" variable="version">
 			<$let
 				filename=`TiddlyWiki-$(version)$`
 				emptyFilename=`Empty-$(filename)$`
+				releaseTiddler={{{ [<version>addprefix[Release ]] }}}
+				releaseDate={{{ [<releaseTiddler>get[released]format:date[TIMESTAMP]] }}}
+				nextVersion={{{ [enlist<versions>after<version>] }}}
+				nextReleaseTiddler={{{ [<nextVersion>addprefix[Release ]] }}}
+				nextReleaseDate={{{ [<nextReleaseTiddler>get[released]format:date[TIMESTAMP]] }}}
+				lifetime={{{ [<nextReleaseDate>subtract<releaseDate>divide[86400000]add[0.5]fixed[0]] }}}
 			>
 				<tr>
-					<th>
-						<$text text=`v$(version)$`/>
-					</th>
 					<td>
-						<$view tiddler={{{ [<version>addprefix[Release ]] }}} field="released" format="date" template="DDth mmm YYYY"/>
+						<$link to=<<releaseTiddler>>>
+							<$text text=`v$(version)$`/>
+						</$link>
+					</td>
+					<td>
+						<$view tiddler=<<releaseTiddler>> field="released" format="date" template="DDth mmm YYYY"/>
+					</td>
+					<td>
+						<$list filter="[<lifetime>compare:number:lt[0]]" variable="ignore">
+							Current
+						</$list>
+						<$list filter="[<lifetime>compare:number:gteq[0]]" variable="ignore">
+							<$text text=<<lifetime>>/>
+							day<$list filter="[<lifetime>!compare:number:eq[1]]" variable="ignore">s</$list>
+						</$list>
+					</td>
+					<td>
+						<$transclude $tiddler=<<releaseTiddler>> $field="description" $format="inline">
+							(none)
+						</$transclude>
 					</td>
 					<td>
 						<a href={{{ [<filename>addprefix[https://tiddlywiki.com/archive/full/]]}}} rel="noopener noreferrer" target="_blank">
-							<$text text=`$(filename)$.html`/>
+							Complete
 						</a>
-					</td>
-					<td>
+						|
 						<a href={{{ [<emptyFilename>addprefix[https://tiddlywiki.com/archive/empty/]]}}} rel="noopener noreferrer" target="_blank">
-							<$text text=`$(emptyFilename)$.html`/>
+							Empty
 						</a>
 					</td>
 				</tr>

@@ -5,6 +5,7 @@ released: 20190809141328809
 tags: ReleaseNotes
 title: Release 5.1.20
 type: text/vnd.tiddlywiki
+description: New conditional, mathematics and string operators, GitHub Saver, save wiki folder command, [[Innerwiki Plugin]]
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.19...v5.1.20]]//
 
