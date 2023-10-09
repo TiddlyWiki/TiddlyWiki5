@@ -5,6 +5,7 @@ released: 20170426160031661
 tags: ReleaseNotes
 title: Release 5.1.14
 type: text/vnd.tiddlywiki
+description: Drag and drop improvements, initial RTL support, plugins for XLSX import, QR Codes, ~BibTeX, Google Analytics, Twitter
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.13...v5.1.14]]//
 
