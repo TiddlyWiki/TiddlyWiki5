@@ -61,19 +61,19 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 				_canonical_uri = tiddler.fields._canonical_uri;
 			// If the tiddler has body text then it doesn't need to be lazily loaded
 			if(text) {
-                // Render the appropriate element for the image type by looking up the encoding in the content type info
-                var typeInfo = $tw.config.contentTypeInfo[type];
-                var encoding = typeInfo.encoding || "utf8";
-                if (encoding === "base64") {
-                    // .pdf .png .jpg etc.
-                    src = "data:" + type + ";base64," + text;
-                    if (type === "application/pdf") {
-                        tag = "embed";
-                    }
-                } else {
-                    // .svg .tid .xml etc.
-                    src = "data:" + type + "," + encodeURIComponent(text);
-                }
+				// Render the appropriate element for the image type by looking up the encoding in the content type info
+				var typeInfo = $tw.config.contentTypeInfo[type];
+				var encoding = typeInfo.encoding || "utf8";
+				if (encoding === "base64") {
+					// .pdf .png .jpg etc.
+					src = "data:" + type + ";base64," + text;
+					if (type === "application/pdf") {
+						tag = "embed";
+					}
+				} else {
+					// .svg .tid .xml etc.
+					src = "data:" + type + "," + encodeURIComponent(text);
+				}
 			} else if(_canonical_uri) {
 				switch(type) {
 					case "application/pdf":
