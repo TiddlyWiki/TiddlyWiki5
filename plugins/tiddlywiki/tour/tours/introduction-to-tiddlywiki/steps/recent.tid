@@ -6,4 +6,4 @@ selector-fallback-1: .tc-sidebar-tabs-main button:nth-child(3)
 condition: [list[$:/StoryList]match<condition-var>]
 condition-var: [all[tiddlers]!is[system]!sort[modified]]
 
-Your task is to use the "Recent" tab of the sidebar to open the most recently editted tiddler.
+<<tour-task "Your task is to use the "Recent" tab of the sidebar to open the most recently editted tiddler.">>

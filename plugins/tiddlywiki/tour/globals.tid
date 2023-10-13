@@ -88,3 +88,9 @@ These config tiddlers may be changed directly as required:
 	<$text text={{$:/config/CurrentTour}}/>
 </$transclude>
 \end
+
+\procedure tour-task(text)
+<div class="tc-tour-task">
+{{$:/core/images/help}} <$transclude $variable="text" $mode="inline"/>
+</div>
+\end

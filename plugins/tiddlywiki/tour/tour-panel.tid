@@ -29,6 +29,33 @@ tags: $:/tags/PageTemplate
 </div>
 \end
 
+\procedure tour-step-no-condition()
+<$transclude tiddler=<<currentTourStep>> mode="block"/>
+<<tour-buttons>>
+\end tour-step-no-condition
+
+\procedure tour-step-condition-not-satisfied()
+<$transclude tiddler=<<currentTourStep>> mode="block"/>
+<$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
+	<div class="tc-tour-panel-navigation">
+		<$button class="tc-btn-big-green" style="background-color: red;">
+			<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
+			show me a hint
+		</$button>
+	</div>
+</$list>
+\end tour-step-condition-not-satisfied
+
+\procedure tour-step-condition-satisfied()
+<$let tour-task="">
+	<$transclude tiddler=<<currentTourStep>> mode="block"/>
+</$let>
+<$confetti/>
+<p>
+	Congratulations, you may proceed
+</p>
+<<tour-buttons>>
+\end tour-step-condition-satisfied
 
 <$list filter="[{$:/config/ShowTour}!is[blank]else[show]match[show]]" variable="ignore">
 	<div class={{{ tc-tour-panel [{$:/state/tour/step}get[display-mode]else[normal]addprefix[tc-tour-panel-]] +[join[ ]] }}}>
@@ -60,25 +87,15 @@ tags: $:/tags/PageTemplate
 				</$list>
 				<!-- Handle steps without a condition -->
 				<$list filter="[<currentTourStep>!has[condition]]" variable="ignore">
-					<$transclude tiddler=<<currentTourStep>> mode="block"/>
-					<<tour-buttons>>
+					<<tour-step-no-condition>>
 				</$list>
 				<!-- Handle steps that have a condition -->
 				<$list filter="[<currentTourStep>has[condition]]" variable="ignore">
-					<$transclude tiddler=<<currentTourStep>> mode="block"/>
-					<$list filter={{{ [<currentTourStep>get[condition]] }}} limit="1" variable="ignore">
-						<$confetti/>
-						Congratulations, you may proceed
-						<<tour-buttons>>
+					<$list filter={{{ [<currentTourStep>get[condition]] }}} limit="1" variable="ignore" emptyMessage=<<tour-step-condition-not-satisfied>>>
+						<<tour-step-condition-satisfied>>
 					</$list>
 				</$list>
 			</$let>
-			<$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
-				<$button class="tc-btn-big-green" style="background-color: green;">
-					<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
-					show me a hint
-				</$button>
-			</$list>
 		</div>
 	</div>
 </$list>

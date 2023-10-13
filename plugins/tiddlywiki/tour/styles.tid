@@ -22,7 +22,13 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tour-panel-navigation .tc-btn-big-green {
+	border-radius: 0.25em;
 	margin: 0 1em 0 0;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green:hover {
+	color: <<colour background>>;
+	background: <<colour foreground>>;
 }
 
 .tc-tour-panel-fullscreen {
@@ -128,6 +134,21 @@ tags: $:/tags/Stylesheet
 .tc-tour-panel .tc-tour-panel-inner .tc-tiddler-frame .tc-titlebar {
 	font-size: 1.5em;
 	line-height: 1.1;
+}
+
+.tc-tour-task {
+	background: <<colour download-background>>;
+	color: <<colour download-foreground>>;
+	padding: 0.5em;
+	border-radius: 1em;
+}
+
+.tc-tour-task svg {
+	fill: <<colour download-foreground>>;
+	vertical-align: middle;
+	width: 1.2em;
+	height: 1.2em;
+	margin-right: 0.5em;
 }
 
 .tc-tour-settings-tour-details,

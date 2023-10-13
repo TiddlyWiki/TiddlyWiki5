@@ -12,7 +12,7 @@ Click on a tag to display a menu with:
 * A link to the tiddler with the same title as the tag
 * A list of links to the other tiddlers with the same tag
 
-Use the tag dropdown to open the tiddler Saturn.
+<<tour-task "Use the tag dropdown to open the tiddler Saturn">>
 
 <$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
 

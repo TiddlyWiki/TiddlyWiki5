@@ -7,7 +7,7 @@ condition: [[$:/temp/Tour/DemoStoryList]contains[$:/plugins/tiddlywiki/tour/intr
 
 Links allow you to decide if you want more information on a particular area or term as you go.
 
-Try clicking the link to "Saturn".
+<<tour-task "Click the blue link to open the tiddler 'Saturn'">>
 
 <$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
 
