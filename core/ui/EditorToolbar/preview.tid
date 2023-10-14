@@ -9,11 +9,17 @@ button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((preview))
 
 \whitespace trim
+<$let
+	edit-preview-state={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualify "$:/state/showeditpreview">] }}}
+>
 <$reveal state=<<edit-preview-state>> type="match" text="yes" tag="span">
 {{$:/core/images/preview-open}}
 <$action-setfield $tiddler=<<edit-preview-state>> $value="no"/>
+<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>
 </$reveal>
 <$reveal state=<<edit-preview-state>> type="nomatch" text="yes" tag="span">
 {{$:/core/images/preview-closed}}
 <$action-setfield $tiddler=<<edit-preview-state>> $value="yes"/>
+<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>
 </$reveal>
+</$let>

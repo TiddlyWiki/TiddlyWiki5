@@ -19,7 +19,7 @@ The following options are supported:
 ** ''yes'' will "explode" plugins into separate tiddler files and save them to the plugin directory within the wiki folder
 ** ''no'' will suppress exploding plugins into their constituent tiddler files. It will save the plugin as a single JSON tiddler in the tiddlers folder
 
-Note that both ''explodePlugins'' options will produce wiki folders that build the same exact same original wiki. The difference lies in how plugins are represented in the wiki folder.
+Note that both ''explodePlugins'' options will produce wiki folders that build the exact same original wiki. The difference lies in how plugins are represented in the wiki folder.
 
 A common usage is to convert a TiddlyWiki HTML file into a wiki folder:
 

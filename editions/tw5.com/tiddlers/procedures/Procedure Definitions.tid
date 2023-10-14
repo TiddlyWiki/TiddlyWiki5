@@ -1,5 +1,5 @@
 created: 20221007125701001
-modified: 20230419103154329
+modified: 20230921180332436
 tags: WikiText Procedures
 title: Procedure Definitions
 type: text/vnd.tiddlywiki
@@ -17,6 +17,8 @@ Procedures are created using the [[Pragma: \procedure]] at the start of a tiddle
 This is the procedure text (param=<<param>>)
 \end
 ```
+
+Note that the [[Pragma: \whitespace]] setting is inherited from the parsing context in which the procedure definition occurs. That means that a tiddler containing multiple procedure definitions only needs a single whitespace pragma at the top of the tiddler, and the setting will be automatically inherited by the procedure definitions without needing the pragma to be repeated.
 
 !! Procedure Definition with Set Widget
 

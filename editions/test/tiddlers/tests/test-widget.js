@@ -527,6 +527,29 @@ describe("Widget module", function() {
 		expect(wrapper.children[0].children[15].sequenceNumber).toBe(53);
 	});
 
+	var testCounterLast = function(oldList, newList) {
+		return function() {
+			var wiki = new $tw.Wiki();
+			// Add some tiddlers
+			wiki.addTiddler({title: "Numbers", text: "", list: oldList});
+			var text = "<$list filter='[list[Numbers]]' variable='item' counter='c'><<item>><$text text={{{ [<c-last>match[no]then[, ]] }}} /></$list>";
+			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+			// Render the widget node to the DOM
+			var wrapper = renderWidgetNode(widgetNode);
+			// Test the rendering
+			expect(wrapper.innerHTML).toBe("<p>" + oldList.split(' ').join(', ') + "</p>");
+			// Append a number
+			wiki.addTiddler({title: "Numbers", text: "", list: newList});
+			refreshWidgetNode(widgetNode,wrapper,["Numbers"]);
+			expect(wrapper.innerHTML).toBe("<p>" + newList.split(' ').join(', ') + "</p>");
+		}
+	}
+
+	it("the list widget with counter-last should update correctly when list is appended", testCounterLast("1 2 3 4", "1 2 3 4 5"));
+	it("the list widget with counter-last should update correctly when last item is removed", testCounterLast("1 2 3 4", "1 2 3"));
+	it("the list widget with counter-last should update correctly when first item is inserted", testCounterLast("1 2 3 4", "0 1 2 3 4"));
+	it("the list widget with counter-last should update correctly when first item is removed", testCounterLast("1 2 3 4", "2 3 4"));
+
 	it("should deal with the list widget followed by other widgets", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers

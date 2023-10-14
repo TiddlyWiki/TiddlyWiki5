@@ -1,5 +1,5 @@
 created: 20221007144237585
-modified: 20230419103154328
+modified: 20230921180332436
 tags: Concepts Reference
 title: Custom Widgets
 type: text/vnd.tiddlywiki
@@ -21,6 +21,8 @@ This is the widget, and the attribute is <<attribute>>.
 ```
 
 The name of the widget must start with a dollar sign. If it is a user defined widget that does not override an existing widget then it must include at least one period (dot) within the name (for example `$my.widget` or `$acme.logger`).
+
+Note that the [[Pragma: \whitespace]] setting is inherited from the parsing context in which the procedure definition occurs. That means that a tiddler containing multiple procedure definitions only needs a single whitespace pragma at the top of the tiddler, and the setting will be automatically inherited by the procedure definitions without needing the pragma to be repeated.
 
 !! Using Custom Widgets
 
