@@ -66,9 +66,9 @@ exports["application/enex+xml"] = function(text,fields) {
 		// process main content and metadata, and save as wikitext tiddler.
 		var result = {
 			title: getTextContent(noteNode,"title"),
-			type: "text/html",
 			tags: [],
-			text: contentNode.textContent,
+			// export mixed content of wikitext and HTML
+			text: contentNode.innerHTML,
 			modified: convertDate(getTextContent(noteNode,"created")),
 			modifier: getTextContent(noteNode,"author"),
 			creator: getTextContent(noteNode,"author"),
