@@ -40,6 +40,8 @@ exports["application/enex+xml"] = function(text,fields) {
 			tags: [],
 			text: getTextContent(noteNode,"content"),
 			modified: convertDate(getTextContent(noteNode,"created")),
+			modifier: convertDate(getTextContent(noteNode,"author")),
+			creator: convertDate(getTextContent(noteNode,"author")),
 			created:  convertDate(getTextContent(noteNode,"created"))
 
 		};
