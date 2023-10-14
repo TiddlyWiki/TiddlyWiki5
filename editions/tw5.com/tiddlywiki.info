@@ -9,7 +9,8 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"tiddlywiki/qrcode"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

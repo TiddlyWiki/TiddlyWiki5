@@ -1,9 +1,11 @@
 created: 20150419144523070
-modified: 20220802100223019
+modified: 20231005205612322
 tags: About
 title: Releases
 type: text/vnd.tiddlywiki
 
 New releases of TiddlyWiki and TiddlyDesktop are announced via the [[official discussion groups|Forums]] and [[Twitter|https://twitter.com/TiddlyWiki]]
+
+See the [[TiddlyWiki Archive]] to download older versions.
 
 <<tabs "[[TiddlyWiki Releases]] [[TiddlyDesktop Releases]]" "TiddlyWiki Releases" "$:/state/tab">>

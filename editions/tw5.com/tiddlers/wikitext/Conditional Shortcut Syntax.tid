@@ -1,0 +1,61 @@
+created: 20230901122740573
+modified: 20230901123102263
+tags: WikiText
+title: Conditional Shortcut Syntax
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.2">> The conditional shortcut syntax provides a convenient way to express if-then-else logic within WikiText. It evaluates a filter and considers the condition to be true if there is at least one result (regardless of the value of that result).
+
+A simple example:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<% if [{$:/$:/info/url/protocol}match[file:]] %>
+  Loaded from a file URI
+<% else %>
+  Not loaded from a file URI
+<% endif %>
+'/>
+
+One or more `<% elseif %>` clauses may be included before the `<% else %>` clause:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<% if [{$:/$:/info/url/protocol}match[file:]] %>
+  Loaded from a file URI
+<% elseif [{$:/$:/info/url/protocol}match[https:]] %>
+  Loaded from an HTTPS URI
+<% elseif [{$:/$:/info/url/protocol}match[http:]] %>
+  Loaded from an HTTP URI
+<% else %>
+  Loaded from an unknown protocol
+<% endif %>
+'/>
+
+The conditional shortcut syntax can be nested:
+
+<$macrocall $name='wikitext-example-without-html'
+src='\procedure test(animal)
+<% if [<animal>match[Elephant]] %>
+  It is an elephant
+<% else %>
+  <% if [<animal>match[Giraffe]] %>
+    It is a giraffe
+  <% else %>
+    It is completely unknown
+  <% endif %>
+<% endif %>
+\end
+
+<<test "Giraffe">>
+
+<<test "Elephant">>
+
+<<test "Antelope">>
+'/>
+
+Notes:
+
+* Clauses are parsed in inline mode by default. Force block mode parsing by following the opening `<% if %>`, `<% elseif %>` or `<% else %>` with two line breaks
+* Within an "if" or "elseif" clause, the variable `condition` contains the value of the first result of evaluating the filter condition
+* Widgets and HTML elements must be within a single conditional clause; it is not possible to start an element in one conditional clause and end it in another
+* The conditional shortcut syntax cannot contain pragmas such as procedure definitions
+

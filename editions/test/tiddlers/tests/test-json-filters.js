@@ -103,6 +103,24 @@ describe("json filter tests", function() {
 		expect(wiki.filterTiddlers("[{First}jsontype[d],[f],[4]]")).toEqual(["null"]);
 	});
 
+	it("should support the jsonset operator", function() {
+		expect(wiki.filterTiddlers("[{First}jsonset[]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsonset[],[Antelope]]")).toEqual(['"Antelope"']);
+		expect(wiki.filterTiddlers("[{First}jsonset:number[],[not a number]]")).toEqual(['0']);
+		expect(wiki.filterTiddlers("[{First}jsonset[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:notatype[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:boolean[id],[false]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":false}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:boolean[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:number[id],[42]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":42}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:null[id]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":null}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:array[d],[f],[5]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null,[]]}}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:object[d],[f],[5]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null,{}]}}']);
+		expect(wiki.filterTiddlers("[{First}jsonset[missing],[id],[Antelope]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:json[\"Antelope\"]]")).toEqual(['"Antelope"']);
+		expect(wiki.filterTiddlers("[{First}jsonset:json[id],[{\"a\":313}]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":{"a":313}}']);
+		expect(wiki.filterTiddlers("[{First}jsonset:json[notjson]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
+	});
+
 	it("should support the format:json operator", function() {
 		expect(wiki.filterTiddlers("[{First}format:json[]]")).toEqual(["{\"a\":\"one\",\"b\":\"\",\"c\":1.618,\"d\":{\"e\":\"four\",\"f\":[\"five\",\"six\",true,false,null]}}"]);
 		expect(wiki.filterTiddlers("[{First}format:json[4]]")).toEqual(["{\n    \"a\": \"one\",\n    \"b\": \"\",\n    \"c\": 1.618,\n    \"d\": {\n        \"e\": \"four\",\n        \"f\": [\n            \"five\",\n            \"six\",\n            true,\n            false,\n            null\n        ]\n    }\n}"]);
