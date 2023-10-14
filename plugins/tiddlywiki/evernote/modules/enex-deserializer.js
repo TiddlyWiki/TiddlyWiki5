@@ -33,6 +33,7 @@ exports["application/enex+xml"] = function(text,fields) {
 	// Get all the "note" nodes
 	var noteNodes = doc.querySelectorAll("note");
 	$tw.utils.each(noteNodes,function(noteNode) {
+		var noteTitle = getTextContent(noteNode,"title");
 		// get real note content node
 		var contentNode = noteNode.querySelector("content")
 		var contentText = (contentNode.textContent || "").replace(/&nbsp;/g, ' ').trim();
@@ -51,7 +52,9 @@ exports["application/enex+xml"] = function(text,fields) {
 			var hash = resourceNode.querySelector("data").getAttribute("hash");
 			var text = getTextContent(resourceNode,"data");
 			var mimeType = getTextContent(resourceNode,"mime");
-			var title = getTextContent(resourceNode,"resource-attributes>file-name");
+			var contentTypeInfo = $tw.config.contentTypeInfo[mimeType] || {extension:""};
+			// a few resources don't have title, use a random title
+			var title = getTextContent(resourceNode,"resource-attributes>file-name") || (noteTitle + String(Math.random()).replace("0.", "") + contentTypeInfo.extension);
 			results.push({
 				title: title,
 				type: mimeType,
@@ -65,7 +68,7 @@ exports["application/enex+xml"] = function(text,fields) {
 		});
 		// process main content and metadata, and save as wikitext tiddler.
 		var result = {
-			title: getTextContent(noteNode,"title"),
+			title: noteTitle,
 			tags: [],
 			// export mixed content of wikitext and HTML
 			text: contentNode.innerHTML,
@@ -103,7 +106,10 @@ function convertDate(isoDate) {
 function fixAttachmentReference(contentNode, md5Hash, mimeType, name) {
 	if(!contentNode) return;
 	var mediaNode = contentNode.querySelector('en-media[hash="' + md5Hash + '"]');
-	if(!mediaNode) return
+	if(!name) {
+		throw new Error("name is empty for resource hash" + md5Hash);
+	}
+	if(!mediaNode) return;
 	if(mimeType.indexOf("image/") === 0) {
 		// find en-media node, replace with image syntax
 		mediaNode.parentNode.replaceChild($tw.utils.domMaker("p", {text: "[img["+ name + "]]"}), mediaNode);
