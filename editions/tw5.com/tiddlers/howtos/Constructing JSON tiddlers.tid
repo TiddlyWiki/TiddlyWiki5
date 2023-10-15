@@ -1,7 +1,7 @@
-title: Constructing JSON tiddlers
-tags: [[JSON in TiddlyWiki]] [[Learning]]
 created: 20220427174702859
-modified: 20220427174702859
+modified: 20230809113620964
+tags: [[JSON in TiddlyWiki]] Learning
+title: Constructing JSON tiddlers
 
 See [[JSON in TiddlyWiki]] for an overview of using JSON in TiddlyWiki.
 
@@ -13,4 +13,4 @@ At a high level, we have several ways to generate JSON data in TiddlyWiki's own 
 * [[jsontiddler Macro]]
 * [[jsontiddlers Macro]]
 
-When constructing JSON data manually, the [[jsonstringify Operator]] is needed to ensure that any special characters are properly escaped.
+When constructing JSON data manually, the [[stringify Operator]] is needed to ensure that any special characters are properly escaped.

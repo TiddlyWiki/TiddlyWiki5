@@ -223,7 +223,7 @@ Parse a block from the current position
 	terminatorRegExpString: optional regular expression string that identifies the end of plain paragraphs. Must not include capturing parenthesis
 */
 WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
-	var terminatorRegExp = terminatorRegExpString ? new RegExp("(" + terminatorRegExpString + "|\\r?\\n\\r?\\n)","mg") : /(\r?\n\r?\n)/mg;
+	var terminatorRegExp = terminatorRegExpString ? new RegExp(terminatorRegExpString + "|\\r?\\n\\r?\\n","mg") : /(\r?\n\r?\n)/mg;
 	this.skipWhitespace();
 	if(this.pos >= this.sourceLength) {
 		return [];
@@ -264,11 +264,21 @@ WikiParser.prototype.parseBlocksUnterminated = function() {
 };
 
 /*
-Parse blocks of text until a terminating regexp is encountered
+Parse blocks of text until a terminating regexp is encountered. Wrapper for parseBlocksTerminatedExtended that just returns the parse tree
 */
 WikiParser.prototype.parseBlocksTerminated = function(terminatorRegExpString) {
-	var terminatorRegExp = new RegExp("(" + terminatorRegExpString + ")","mg"),
-		tree = [];
+	var ex = this.parseBlocksTerminatedExtended(terminatorRegExpString);
+	return ex.tree;
+};
+
+/*
+Parse blocks of text until a terminating regexp is encountered
+*/
+WikiParser.prototype.parseBlocksTerminatedExtended = function(terminatorRegExpString) {
+	var terminatorRegExp = new RegExp(terminatorRegExpString,"mg"),
+		result = {
+			tree: []
+		};
 	// Skip any whitespace
 	this.skipWhitespace();
 	//  Check if we've got the end marker
@@ -277,7 +287,7 @@ WikiParser.prototype.parseBlocksTerminated = function(terminatorRegExpString) {
 	// Parse the text into blocks
 	while(this.pos < this.sourceLength && !(match && match.index === this.pos)) {
 		var blocks = this.parseBlock(terminatorRegExpString);
-		tree.push.apply(tree,blocks);
+		result.tree.push.apply(result.tree,blocks);
 		// Skip any whitespace
 		this.skipWhitespace();
 		//  Check if we've got the end marker
@@ -286,8 +296,9 @@ WikiParser.prototype.parseBlocksTerminated = function(terminatorRegExpString) {
 	}
 	if(match && match.index === this.pos) {
 		this.pos = match.index + match[0].length;
+		result.match = match;
 	}
-	return tree;
+	return result;
 };
 
 /*
@@ -330,6 +341,11 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 };
 
 WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,options) {
+	var ex = this.parseInlineRunTerminatedExtended(terminatorRegExp,options);
+	return ex.tree;
+};
+
+WikiParser.prototype.parseInlineRunTerminatedExtended = function(terminatorRegExp,options) {
 	options = options || {};
 	var tree = [];
 	// Find the next occurrence of the terminator
@@ -349,7 +365,10 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 				if(options.eatTerminator) {
 					this.pos += terminatorMatch[0].length;
 				}
-				return tree;
+				return {
+					match: terminatorMatch,
+					tree: tree
+				};
 			}
 		}
 		// Process any inline rule, along with the text preceding it
@@ -373,7 +392,9 @@ WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,option
 		this.pushTextWidget(tree,this.source.substr(this.pos),this.pos,this.sourceLength);
 	}
 	this.pos = this.sourceLength;
-	return tree;
+	return {
+		tree: tree
+	};
 };
 
 /*
