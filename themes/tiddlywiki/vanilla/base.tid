@@ -1365,7 +1365,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-top: 8px;
 }
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview > .tc-editor-toolbar {
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div > .tc-editor-toolbar {
 	grid-area: toolbar;
 }
 
