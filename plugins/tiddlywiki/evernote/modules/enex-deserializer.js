@@ -15,7 +15,7 @@ For details see: https://blog.evernote.com/tech/2013/08/08/evernote-export-forma
 "use strict";
 
 // DOMParser = require("$:/plugins/tiddlywiki/xmldom/dom-parser").DOMParser;
-var illegalFilenameCharacters = /[<>\:\"\/\\\|\?\*\^\?\$\(\)\s~]/g;
+var illegalFilenameCharacters = /[\[\]<>;\:\"\/\\\|\?\*\^\?\$\(\)\s~]/g;
 
 /*
 Parse an ENEX file into tiddlers
