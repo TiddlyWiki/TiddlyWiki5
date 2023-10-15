@@ -1616,7 +1616,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-frame .tc-grid.tc-tiddler-preview .tc-edit-texteditor, .tc-tiddler-frame .tc-grid.tc-no-tiddler-preview .tc-edit-texteditor {
 	grid-area: editor;
-	width: 100%;
 }
 
 .tc-tiddler-frame .tc-grid.tc-tiddler-preview canvas.tc-edit-bitmapeditor, .tc-tiddler-frame .tc-grid.tc-no-tiddler-preview canvas.tc-edit-bitmapeditor {
