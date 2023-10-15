@@ -55,7 +55,7 @@ exports["application/enex+xml"] = function(text,fields) {
 		var noteResult = {
 			title: noteTitle.replace(illegalFilenameCharacters,"_"),
 			tags: [],
-			modified: convertDate(getTextContent(noteNode,"updated")),
+			modified: convertDate(getTextContent(noteNode,"updated") || getTextContent(noteNode,"created")),
 			modifier: getTextContent(noteNode,"author"),
 			created:  convertDate(getTextContent(noteNode,"created")),
 			creator: getTextContent(noteNode,"author")
