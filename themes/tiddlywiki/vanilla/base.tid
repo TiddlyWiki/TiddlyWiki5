@@ -1580,8 +1580,11 @@ html body.tc-body.tc-single-tiddler-window {
 	overflow: auto;
 }
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview {
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div {
 	display: grid;
+}
+
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview {
 	grid-template-areas: 
 	"toolbar toolbar"
 	"editor preview";
@@ -1590,7 +1593,6 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-tiddler-edit-frame .tc-dropzone-editor > div > div:not(.tc-tiddler-preview) {
-	display: grid;
 	grid-template-areas: 
 	"toolbar"
 	"editor";
@@ -1624,7 +1626,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
 	grid-area: editor;
-	width: 100%;
+	max-width: 100%;
 }
 
 .tc-edit-fields {
