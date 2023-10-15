@@ -15,7 +15,7 @@ For details see: https://blog.evernote.com/tech/2013/08/08/evernote-export-forma
 "use strict";
 
 // DOMParser = require("$:/plugins/tiddlywiki/xmldom/dom-parser").DOMParser;
-var illegalFilenameCharacters = /<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g;
+var illegalFilenameCharacters = /[<>\:\"\/\\\|\?\*\^\?\$\(\)\s~]/g;
 
 /*
 Parse an ENEX file into tiddlers
@@ -41,7 +41,7 @@ exports["application/enex+xml"] = function(text,fields) {
 		var noteTitle = getTextContent(noteNode,"title");
 		// get real note content node
 		var contentNode = noteNode.querySelector("content")
-		var contentText = $tw.utils.htmlDecode((contentNode.textContent || "")).trim();
+		var contentText = (contentNode.textContent || "").replace(/&nbsp;/g, ' ').trim();
 		if(contentText) {
 			// The final content will be HTML instead of xml. And we will save it as wikitext, to make wiki syntax work, and remaining HTML will also work.
 			try {
@@ -52,7 +52,7 @@ exports["application/enex+xml"] = function(text,fields) {
 			}
 		}
 		// process main content and metadata, and save as wikitext tiddler.
-		var result = {
+		var noteResult = {
 			title: noteTitle.replace(illegalFilenameCharacters,"_"),
 			tags: [],
 			modified: convertDate(getTextContent(noteNode,"updated")),
@@ -70,10 +70,10 @@ exports["application/enex+xml"] = function(text,fields) {
 			var title = getTextContent(resourceNode,"resource-attributes>file-name")
 			// a few resources don't have title, use hash as fallback
 			title = title || (hash + contentTypeInfo.extension);
-			// prefix image title with note title, to avoid name conflicts which is quite common in web-clipped content
-			title = noteTitle + "/" + title;
 			// replace all system reserved characters in title
-			title = noteTitle.replace(illegalFilenameCharacters,"_");
+			title = title.replace(illegalFilenameCharacters,"_");
+			// prefix image title with note title, to avoid name conflicts which is quite common in web-clipped content
+			title = noteResult.title + "/" + title;
 			results.push({
 				title: title,
 				type: mimeType,
@@ -81,29 +81,31 @@ exports["application/enex+xml"] = function(text,fields) {
 				height: getTextContent(resourceNode,"height"),
 				text: text,
 				// give image same modified and modifier as the note, so they can be grouped together in the "Recent"
-				modified: result.modified,
-				modifier: result.modifier,
-				created: result.created,
-				creator: result.creator
+				modified: noteResult.modified,
+				modifier: noteResult.modifier,
+				created: noteResult.created,
+				creator: noteResult.creator
 			});
 			if(hash) {
 				fixAttachmentReference(contentNode, hash, mimeType, title);
 			}
 		});
 		// export mixed content of wikitext and HTML
-		result.text = contentNode.innerHTML;
+		noteResult.text = contentNode.innerHTML;
+		// remove all ` xmlns="http://www.w3.org/1999/xhtml"` attributes to save some space
+		noteResult.text = noteResult.text.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, "");
 		$tw.utils.each(noteNode.querySelectorAll("tag"),function(tagNode) {
-			result.tags.push(tagNode.textContent);
+			noteResult.tags.push(tagNode.textContent);
 		});
 		// If there's an update date, set modifiy date accordingly
 		var update = getTextContent(noteNode,"updated");
 		if(update) {
-			result.modified = convertDate(update);
+			noteResult.modified = convertDate(update);
 		}
 		$tw.utils.each(noteNode.querySelectorAll("note-attributes>*"),function(attrNode) {
-			result[attrNode.tagName] = attrNode.textContent;
+			noteResult[attrNode.tagName] = attrNode.textContent;
 		});
-		results.push(result);
+		results.push(noteResult);
 	});
 	// Return the output tiddlers
 	return results;
