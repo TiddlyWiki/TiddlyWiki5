@@ -1365,7 +1365,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-top: 8px;
 }
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div > .tc-editor-toolbar {
+.tc-tiddler-frame .tc-grid.tc-tiddler-preview .tc-editor-toolbar, .tc-tiddler-frame .tc-grid.tc-no-tiddler-preview .tc-editor-toolbar {
 	grid-area: toolbar;
 }
 
@@ -1580,29 +1580,24 @@ html body.tc-body.tc-single-tiddler-window {
 	overflow: auto;
 }
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div {
+.tc-grid {
 	display: grid;
 }
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview {
-	grid-template-areas: 
-	"toolbar toolbar"
-	"editor preview";
+.tc-tiddler-frame .tc-grid.tc-tiddler-preview {
+	grid-template-areas: "toolbar toolbar" "editor preview";
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto 1fr;
 }
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div:not(.tc-tiddler-preview) {
-	grid-template-areas: 
-	"toolbar"
-	"editor";
+.tc-tiddler-frame .tc-grid.tc-no-tiddler-preview {
+	grid-template-areas: "toolbar" "editor";
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr;
 }
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview > .tc-tiddler-preview-preview {
+.tc-tiddler-frame .tc-grid.tc-tiddler-preview .tc-tiddler-preview-preview {
 	grid-area: preview;
-	width: calc(100% - 3px);
 	overflow-wrap: anywhere;
 	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
@@ -1619,12 +1614,12 @@ html body.tc-body.tc-single-tiddler-window {
 
 """>>
 
-.tc-tiddler-edit-frame .tc-dropzone-editor > div > div > .tc-edit-texteditor {
+.tc-tiddler-frame .tc-grid.tc-tiddler-preview .tc-edit-texteditor, .tc-tiddler-frame .tc-grid.tc-no-tiddler-preview .tc-edit-texteditor {
 	grid-area: editor;
 	width: 100%;
 }
 
-.tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
+.tc-tiddler-frame .tc-grid.tc-tiddler-preview canvas.tc-edit-bitmapeditor, .tc-tiddler-frame .tc-grid.tc-no-tiddler-preview canvas.tc-edit-bitmapeditor {
 	grid-area: editor;
 	max-width: 100%;
 }
