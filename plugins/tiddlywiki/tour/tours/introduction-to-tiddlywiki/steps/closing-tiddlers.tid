@@ -9,7 +9,7 @@ condition: [list[$:/temp/Tour/DemoStoryList]count[]match[0]]
 
 In the top right corner of each tiddler there is a button marked {{$:/core/images/close-button|0.65em}} that can be used to close them when you are finished with them. Closing a tiddler does not delete it or alter it in any way. It just removes it from the display.
 
-<<tour-task "Try closing both these tiddlers">>
+<<tour-task "Close both of these tiddlers">>
 
 <$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
 
