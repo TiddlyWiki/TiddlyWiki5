@@ -1365,6 +1365,10 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-top: 8px;
 }
 
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview > .tc-editor-toolbar {
+	grid-area: toolbar;
+}
+
 .tc-editor-toolbar button {
 	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
@@ -1576,9 +1580,29 @@ html body.tc-body.tc-single-tiddler-window {
 	overflow: auto;
 }
 
-.tc-tiddler-preview-preview {
-	float: right;
-	width: 49%;
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview {
+	display: grid;
+	grid-template-areas: 
+	"toolbar toolbar"
+	"editor preview";
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr;
+}
+
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div:not(.tc-tiddler-preview) {
+	display: grid;
+	grid-template-areas: 
+	"toolbar"
+	"editor";
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr;
+}
+
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div.tc-tiddler-preview > .tc-tiddler-preview-preview {
+	grid-area: preview;
+	width: calc(100% - 3px);
+	overflow-wrap: anywhere;
+	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
@@ -1593,12 +1617,14 @@ html body.tc-body.tc-single-tiddler-window {
 
 """>>
 
-.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
-	width: 49%;
+.tc-tiddler-edit-frame .tc-dropzone-editor > div > div > .tc-edit-texteditor {
+	grid-area: editor;
+	width: 100%;
 }
 
 .tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
-	max-width: 49%;
+	grid-area: editor;
+	width: 100%;
 }
 
 .tc-edit-fields {
