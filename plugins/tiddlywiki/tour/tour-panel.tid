@@ -6,26 +6,26 @@ tags: $:/tags/PageTemplate
 \procedure tour-buttons()
 \procedure tv-action-refresh-policy() always
 <div class="tc-tour-panel-navigation">
-	<$list filter="[function[tour-is-not-first-step]]" variable="ignore">
+	<%if [function[tour-is-not-first-step]] %>
 		<$button class="tc-btn-big-green" style="background-color: red;">
 			<<tour-previous-step>>
 			back
 		</$button>
-	</$list>
-	<$list filter="[function[tour-is-not-last-step]]" variable="ignore">
+	<%endif%>
+	<%if [function[tour-is-not-last-step]] %>
 		<$button class="tc-btn-big-green" style="background-color: purple;">
 			<<tour-next-step>>
 			next
 		</$button>
-	</$list>
-	<$list filter="[function[tour-is-last-step]]" variable="ignore">
+	<%endif%>
+	<%if [function[tour-is-last-step]] %>
 		<$confetti/>
 		<$confetti delay=100/>
 		<$confetti delay=200/>
 		<$confetti delay=300/>
 		<$confetti delay=400/>
 		<$confetti delay=500/>
-	</$list>
+	<%endif%>
 </div>
 \end
 
@@ -36,14 +36,14 @@ tags: $:/tags/PageTemplate
 
 \procedure tour-step-condition-not-satisfied()
 <$transclude tiddler=<<currentTourStep>> mode="block"/>
-<$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
+<%if [{$:/state/tour/step}has[selector]] %>
 	<div class="tc-tour-panel-navigation">
 		<$button class="tc-btn-big-green" style="background-color: red;">
 			<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
 			show me a hint
 		</$button>
 	</div>
-</$list>
+<%endif%>
 \end tour-step-condition-not-satisfied
 
 \procedure tour-step-condition-satisfied()
@@ -57,7 +57,7 @@ tags: $:/tags/PageTemplate
 <<tour-buttons>>
 \end tour-step-condition-satisfied
 
-<$list filter="[{$:/config/ShowTour}!is[blank]else[show]match[show]]" variable="ignore">
+<%if [{$:/config/ShowTour}!is[blank]else[show]match[show]] %>
 	<div class={{{ tc-tour-panel [{$:/state/tour/step}get[display-mode]else[normal]addprefix[tc-tour-panel-]] +[join[ ]] }}}>
 		<$image class="tc-tour-panel-banner-image" source={{{ [{$:/config/CurrentTour}get[logo]] }}}/>
 		<div class="tc-tour-panel-inner">
@@ -82,20 +82,24 @@ tags: $:/tags/PageTemplate
 				currentTourStep={{$:/state/tour/step}}
 				condition-var={{{ [<currentTourStep>get[condition-var]] :map[subfilter<currentTiddler>] }}}
 			>
-				<$list filter="[<currentTourStep>has[caption]]" variable="ignore">
+				<%if [<currentTourStep>has[caption]] %>
 					<h1><$transclude $tiddler=<<currentTourStep>> $field="caption" mode="inline"/></h1>
-				</$list>
+				<%endif%>
 				<!-- Handle steps without a condition -->
-				<$list filter="[<currentTourStep>!has[condition]]" variable="ignore">
+				<%if [<currentTourStep>!has[condition]] %>
 					<<tour-step-no-condition>>
-				</$list>
+				<%endif%>
 				<!-- Handle steps that have a condition -->
-				<$list filter="[<currentTourStep>has[condition]]" variable="ignore">
-					<$list filter={{{ [<currentTourStep>get[condition]] }}} limit="1" variable="ignore" emptyMessage=<<tour-step-condition-not-satisfied>>>
-						<<tour-step-condition-satisfied>>
-					</$list>
-				</$list>
+				<%if [<currentTourStep>has[condition]] %>
+					<$let condition={{{ [<currentTourStep>get[condition]] }}}>
+						<%if [subfilter<condition>] %>
+							<<tour-step-condition-satisfied>>
+						<%else%>
+							<<tour-step-condition-not-satisfied>>
+						<%endif%>
+					</$let>
+				<%endif%>
 			</$let>
 		</div>
 	</div>
-</$list>
+<%endif%>
