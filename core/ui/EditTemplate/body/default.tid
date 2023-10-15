@@ -32,7 +32,7 @@ grid-template-rows: auto 1fr;
 	importState=<<qualify $:/state/ImportImage>> >
 <$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
 <div>
-<div class={{{ [function[edit-preview-state]match[yes]then[tc-tiddler-preview]] +[join[ ]] }}} style={{{ [function[edit-preview-state]match[yes]then<display-preview-grid-styles>else<display-no-preview-grid-styles>] }}}">
+<div class={{{ [function[edit-preview-state]match[yes]then[tc-tiddler-preview]] +[join[ ]] }}} style={{{ [function[edit-preview-state]match[yes]then<display-preview-grid-styles>else<display-no-preview-grid-styles>] }}}>
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 

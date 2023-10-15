@@ -31,6 +31,9 @@ function FramedEngine(options) {
 	this.widget.domNodes.push(this.dummyTextArea);
 	// Create the iframe
 	this.iframeNode = this.widget.document.createElement("iframe");
+	$tw.utils.setStyle(this.iframeNode,[
+		{"grid-area": "editor"}
+	]);
 	this.parentNode.insertBefore(this.iframeNode,this.nextSibling);
 	this.iframeDoc = this.iframeNode.contentWindow.document;
 	// (Firefox requires us to put some empty content in the iframe)

@@ -1577,8 +1577,8 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-tiddler-preview-preview {
-	float: right;
-	width: 49%;
+	overflow-wrap: anywhere;
+	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
@@ -1593,12 +1593,8 @@ html body.tc-body.tc-single-tiddler-window {
 
 """>>
 
-.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
-	width: 49%;
-}
-
 .tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
-	max-width: 49%;
+	max-width: 100%;
 }
 
 .tc-edit-fields {

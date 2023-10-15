@@ -51,6 +51,9 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create the wrapper for the toolbar and render its content
 	this.toolbarNode = this.document.createElement("div");
+	$tw.utils.setStyle(this.toolbarNode,[
+		{"grid-area": "toolbar"}
+	]);
 	this.toolbarNode.className = "tc-editor-toolbar";
 	parent.insertBefore(this.toolbarNode,nextSibling);
 	this.domNodes.push(this.toolbarNode);
@@ -75,6 +78,9 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	// Set the width and height variables
 	this.setVariable("tv-bitmap-editor-width",this.canvasDomNode.width + "px");
 	this.setVariable("tv-bitmap-editor-height",this.canvasDomNode.height + "px");
+	$tw.utils.setStyle(this.canvasDomNode,[
+		{"grid-area": "editor"}
+	]);
 	// Render toolbar child widgets
 	this.renderChildren(this.toolbarNode,null);
 	// // Insert the elements into the DOM

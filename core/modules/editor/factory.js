@@ -50,6 +50,9 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		if(this.editShowToolbar) {
 			this.toolbarNode = this.document.createElement("div");
 			this.toolbarNode.className = "tc-editor-toolbar";
+			$tw.utils.setStyle(this.toolbarNode,[
+				{"grid-area": "toolbar"}
+			]);
 			parent.insertBefore(this.toolbarNode,nextSibling);
 			this.renderChildren(this.toolbarNode,null);
 			this.domNodes.push(this.toolbarNode);
