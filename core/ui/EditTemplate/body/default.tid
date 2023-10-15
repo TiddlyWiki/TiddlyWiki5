@@ -14,14 +14,18 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 \procedure display-preview-grid-styles()
 display: grid;
-grid-template-areas: "toolbar toolbar" "editor preview";
+grid-template-areas:
+"toolbar toolbar"
+"editor preview";
 grid-template-columns: 1fr 1fr;
 grid-template-rows: auto 1fr;
 \end
 
 \procedure display-no-preview-grid-styles()
 display: grid;
-grid-template-areas: "toolbar" "editor";
+grid-template-areas:
+"toolbar"
+"editor";
 grid-template-columns: 1fr;
 grid-template-rows: auto 1fr;
 \end
