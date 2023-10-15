@@ -12,13 +12,27 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 <$action-popup $state=<<importState>> $coords="(0,0,0,0)" $floating="yes"/>
 \end
 
+\procedure display-preview-grid-styles()
+display: grid;
+grid-template-areas: "toolbar toolbar" "editor preview";
+grid-template-columns: 1fr 1fr;
+grid-template-rows: auto 1fr;
+\end
+
+\procedure display-no-preview-grid-styles()
+display: grid;
+grid-template-areas: "toolbar" "editor";
+grid-template-columns: 1fr;
+grid-template-rows: auto 1fr;
+\end
+
 \whitespace trim
 <$let
 	importTitle=<<qualify $:/ImportImage>>
 	importState=<<qualify $:/state/ImportImage>> >
 <$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
 <div>
-<div class={{{ [function[edit-preview-state]match[yes]then[tc-tiddler-preview]] +[join[ ]] }}}>
+<div class={{{ [function[edit-preview-state]match[yes]then[tc-tiddler-preview]] +[join[ ]] }}} style={{{ [function[edit-preview-state]match[yes]then<display-preview-grid-styles>else<display-no-preview-grid-styles>] }}}">
 
 <$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
