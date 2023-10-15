@@ -29,7 +29,7 @@ exports["application/enex+xml"] = function(text,fields) {
 	var enex = doc.querySelector("en-export");
 	if(!enex) {
 		// Firefox's DOMParser have problem in some cases.
-		throw new Error('Failed to parse ENEX file, no "en-export" node found, try use Chrome/Edge to export again.')
+		throw new Error('Failed to parse ENEX file, no "en-export" node found, try use Chrome/Edge to export again.');
 	}
 	results.push({
 		title: "Evernote Import Report",
