@@ -32,6 +32,9 @@
     "node": ">=0.8.2"
   },
   "scripts": {
+    "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+    "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   }
 }
