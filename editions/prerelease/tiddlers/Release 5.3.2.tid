@@ -1,12 +1,53 @@
 caption: 5.3.2
-created: 20230820114855583
-modified: 20230820114855583
+created: 20231016122502955
+modified: 20231016122502955
 tags: ReleaseNotes
 title: Release 5.3.2
 type: text/vnd.tiddlywiki
 description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.1...master]]//
+
+! Major Improvements
+
+!! Conditional Shortcut Syntax
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7710">> a new [[shortcut syntax|Conditional Shortcut Syntax]] for concisely expressing if-then-else logic. For example:
+
+```
+<% if [<animal>match[Elephant]] %>
+  It is an elephant
+<% else %>
+  <% if [<animal>match[Giraffe]] %>
+    It is a giraffe
+  <% else %>
+    It is completely unknown
+  <% endif %>
+<% endif %>
+```
+
+!! Explicit Templates for the ListWidget
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7784">> support for `<$list-template>` and `<$list-empty>` as immediate children of the <<.wid "ListWidget">> widget to specify the list item template and/or the empty template. Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take precedence if they are present. For example:
+
+```
+<$list filter=<<filter>>>
+	<$list-template>
+		<$text text=<<currentTiddler>>/>
+	</$list-template>
+	<$list-empty>
+		None!
+	</$list-empty>
+</$list>
+```
+
+!! jsonset operator
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7742">> [[jsonset Operator]] for setting values within JSON objects
+
+!! QR Code Reader
+
+<<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7746">> QR Code plugin to be able to read QR codes and a number of other bar code formats
 
 ! Translation improvement
 
@@ -18,7 +59,8 @@ Improvements to the following translations:
 
 ! Plugin Improvements
 
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/1be8f0a9336952d4745d2bd4f2327e353580a272">> comments plugin to use predefined palette colours
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/1be8f0a9336952d4745d2bd4f2327e353580a272">> Comments Plugin to use predefined palette colours
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7785">> Evernote Importer Plugin to support images and other attachments
 
 ! Widget Improvements
 
@@ -43,6 +85,8 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7749">> editor "type" dropdown state tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7712">> handling of "counter-last" variable when appending items with the ListWidget
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6088">> upgrade download link in Firefox
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7698">> refreshing of transcluded functions
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7789">> resizing of height of textareas in control panel
 
 ! Node.js Improvements
 
