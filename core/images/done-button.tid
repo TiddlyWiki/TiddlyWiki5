@@ -1,4 +1,5 @@
 title: $:/core/images/done-button
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-done-button tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M42.26 111.032c-2.051.001-4.103-.78-5.668-2.345L2.662 74.758a8 8 0 01-.005-11.32c3.118-3.117 8.192-3.12 11.32.007l28.278 28.278 72.124-72.124a8.002 8.002 0 0111.314-.001c3.118 3.118 3.124 8.19 0 11.315l-77.78 77.78a7.978 7.978 0 01-5.658 2.343z"/></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-done-button tc-image-button" viewBox="0 0 128 128"><path fill-rule="evenodd" d="M42.26 111.032c-2.051.001-4.103-.78-5.668-2.345L2.662 74.758a8 8 0 01-.005-11.32c3.118-3.117 8.192-3.12 11.32.007l28.278 28.278 72.124-72.124a8.002 8.002 0 0111.314-.001c3.118 3.118 3.124 8.19 0 11.315l-77.78 77.78a7.978 7.978 0 01-5.658 2.343z"/></svg>

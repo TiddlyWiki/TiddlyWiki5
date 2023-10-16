@@ -1,6 +1,6 @@
 created: 20150203173506000
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20220316121232243
+modified: 20230602181119360
 tags: $:/tags/ViewTemplate
 title: $:/editions/tw5.com/operator-template
 
@@ -72,10 +72,10 @@ title: $:/editions/tw5.com/operator-template
 <!-- -->
 </table>
 
-[[Learn more about how to use Filters|Filters]]
+<p>[[Learn more about how to use Filters|Filters]]</p>
 
 <$list filter="[all[current]has[from-version]]" variable="listItem">
-<$macrocall $name=".from-version" version={{!!from-version}}/>
+<p><$macrocall $name=".from-version" version={{!!from-version}}/></p>
 </$list>
 </$list>
 </$set>

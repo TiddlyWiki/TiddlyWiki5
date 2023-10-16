@@ -1,0 +1,21 @@
+created: 20230304183158728
+modified: 20230304183159654
+tags: [[levenshtein Operator]] [[Operator Examples]]
+title: levenshtein Operator (Examples)
+type: text/vnd.tiddlywiki
+
+Determine the Levenshtein distance between two words:
+
+<<.operator-example 1 "[[motel]levenshtein[money]]">>
+
+List the 10 tiddler titles with the smallest Levenstein distance to "~TiddlyWiki":
+
+<$macrocall $name='wikitext-example-without-html'
+src="""<ul>
+<$list filter="[all[tiddlers]!is[system]] :sort:number[levenshtein[TiddlyWiki]] :and[first[10]]">
+<li>
+<$link /> (<$text text={{{ [all[current]levenshtein[TiddlyWiki]] }}} />)
+</li>
+</$list>
+</ul>
+"""/>

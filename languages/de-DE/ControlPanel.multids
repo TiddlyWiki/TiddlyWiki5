@@ -7,7 +7,7 @@ Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWikis anzupassen.
 Basics/AnimDuration/Prompt: Dauer der Animation
 Basics/AutoFocus/Prompt: Standard Fokus Feld für neue Tiddler
 Basics/Caption: Basis
-Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
+Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie {{Offene Tiddler beim Laden wiederherstellen.||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Standard-Tiddler
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden
 Basics/Language/Prompt: Hallo! Aktuelle Sprache

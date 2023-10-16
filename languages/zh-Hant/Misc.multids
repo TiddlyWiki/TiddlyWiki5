@@ -8,6 +8,7 @@ CloseAll/Button: 全部關閉
 ColourPicker/Recent: 最近︰
 ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的更改？
 ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
+ConfirmDeleteTiddlers: 您確定要刪除 <<resultCount>> 個條目？
 ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即將要編輯預設條目，任何更改將會覆蓋預設的系統，使未來的升級不尋常。您確定要編輯 "<$text text=<<title>>/>"?
 ConfirmAction: 是否要繼續？
@@ -24,6 +25,8 @@ Encryption/RepeatPassword: 重複輸入密碼
 Encryption/PasswordNoMatch: 密碼不匹配
 Encryption/SetPassword: 設定密碼
 Error/Caption: 錯誤
+Error/DeserializeOperator/MissingOperand: 篩選器錯誤：'deserialize' 運算子缺少運算元
+Error/DeserializeOperator/UnknownDeserializer: 篩選器錯誤：未知的解串器被提供為 'deserialize' 運算子的運算元
 Error/Filter: 篩選器錯誤
 Error/FilterRunPrefix: 篩選器錯誤：篩選器 run 的未知首碼
 Error/FilterSyntax: 篩選器運算式中的語法錯誤
@@ -39,6 +42,7 @@ Error/RetrievingSkinny: 簡要條目清單擷取錯誤
 Error/SavingToTWEdit: 儲存到 TWEdit 時，發生錯誤
 Error/WhileSaving: 儲存時，發生錯誤
 Error/XMLHttpRequest: XMLHttpRequest 錯誤代碼
+Error/ZoominTextNode: 故事視圖錯誤：您似乎嘗試與顯示在自定義容器中的條目進行互動。這很可能是由於將 `$:/tags/StoryTiddlerTemplateFilter` 與開頭包含文字或空格的範本一起使用引起的。請使用編譯指示 `\whitespace trim`，並確保條目的全部內容都包含在單個 HTML 元素中。導致此問題的文字：
 InternalJavaScriptError/Title: 內部的 JavaScript 錯誤
 InternalJavaScriptError/Hint: 喔，真是令人尷尬。建議刷新您的瀏覽器，重新啟動 TiddlyWiki
 LayoutSwitcher/Description: 開啟版面切換器

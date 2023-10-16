@@ -1,0 +1,53 @@
+caption: tm-http-request
+created: 20230429161453032
+modified: 20230723215344887
+tags: Messages
+title: WidgetMessage: tm-http-request
+type: text/vnd.tiddlywiki
+
+The ''tm-http-request'' message is used to make an HTTP request to a server.
+
+It uses the following properties on the `event` object:
+
+|!Name |!Description |
+|param |Not used |
+|//{any other params}// |Any other parameters are made available as variables within the context of the widget message. See below. |
+
+The following parameters are used:
+
+|!Name |!Description |
+|method |HTTP method (eg "GET", "POST") |
+|body |String data to be sent with the request |
+|binary |<<.from-version "5.3.1">> Set to "yes" to cause the response body to be treated as binary data and returned in base64 format |
+|query-* |Query string parameters with string values |
+|header-* |Headers with string values |
+|password-header-* |Headers with values taken from the password store |
+|password-query-* |Query string parameters with values taken from the password store |
+|var-* |Variables to be passed to the completion and progress handlers (without the "var-" prefix) |
+|bind-status |Title of tiddler to which the status of the request ("pending", "complete", "error") should be bound |
+|bind-progress |Title of tiddler to which the progress of the request (0 to 100) should be bound |
+|oncompletion |Action strings to be executed when the request completes |
+|onprogress |Action strings to be executed when progress is reported |
+
+The following variables are passed to the completion handler:
+
+|!Name |!Description |
+|status |HTTP result status code (see [[MDN|https://developer.mozilla.org/en-US/docs/Web/HTTP/Status]]) |
+|statusText |HTTP result status text |
+|error |Error string |
+|data |Returned data |
+|headers |Response headers as a JSON object |
+
+The following variables are passed to the progress handler:
+
+|!Name |!Description |
+|lengthComputable |Whether the progress loaded and total figures are valid - "yes" or "no" |
+|loaded |Number of bytes loaded so far |
+|total |Total number bytes to be loaded |
+
+Note that the state tiddler $:/state/http-requests contains a number representing the number of outstanding HTTP requests in progress.
+
+!! Examples
+
+* [[Zotero's|https://www.zotero.org/]] API for retrieving reference items: [[WidgetMessage: tm-http-request Example - Zotero]]
+* [[Random Dog's|https://random.dog/]] API for retrieving random pictures of dogs showing how to retrieve binary data: [[WidgetMessage: tm-http-request Example - Random Dog]]

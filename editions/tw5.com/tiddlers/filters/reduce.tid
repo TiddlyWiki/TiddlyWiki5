@@ -33,7 +33,7 @@ If the <<.op reduce>> operator receives no input, its output will be empty. The 
 </$set>
 ```
 
-<<.tip "Compare with the analagous named [[filter run prefix|Filter Expression]] `:reduce`">>
+<<.tip "Compare with the analogous named [[filter run prefix|Filter Expression]] `:reduce`">>
 
 ```
 \define num-items() [get[quantity]add<accumulator>]

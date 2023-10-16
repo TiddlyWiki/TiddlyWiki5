@@ -354,6 +354,9 @@ exports.formatDateString = function(date,template) {
 	var result = "",
 		t = template,
 		matches = [
+			[/^TIMESTAMP/, function() {
+				return date.getTime();
+			}],
 			[/^0hh12/, function() {
 				return $tw.utils.pad($tw.utils.getHours12(date));
 			}],
@@ -682,9 +685,19 @@ exports.escapeRegExp = function(s) {
     return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
+/*
+Extended version of encodeURIComponent that encodes additional characters including
+those that are illegal within filepaths on various platforms including Windows
+*/
+exports.encodeURIComponentExtended = function(s) {
+	return encodeURIComponent(s).replace(/[!'()*]/g,function(c) {
+		return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+	});
+};
+
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 

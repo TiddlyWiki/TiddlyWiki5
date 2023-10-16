@@ -1,22 +1,18 @@
 created: 20160810122928198
-modified: 20160810122934291
+modified: 20230505104214168
 tags: [[Editor toolbar]]
 title: Using Excise
 type: text/vnd.tiddlywiki
 
-
 ! Excise text
-From the EditorToolbar you can export selected text to a new tiddler and insert a [[link|Linking in WikiText]] [[Transclusion]] or [[macro|Macros]] in its place. Click ''Excise text'' (<<.icon $:/core/images/excise>>), input name of the new tiddler, and choose excise method.
+From the EditorToolbar you can export selected text to a new tiddler and insert a [[link|Linking in WikiText]], [[Transclusion]] or [[macro|Macros]] in its place. Click ''Excise text'' (<<.icon $:/core/images/excise>>), input name of the new tiddler, and choose excise method.
 
 !! How to excise text
 # Highlight the relevant piece of text 
-#Click ''Excise text'' (<<.icon $:/core/images/excise>>)
+# Click ''Excise text'' (<<.icon $:/core/images/excise>>)
 # Give the new tiddler a title.
-# Chosse if the new tiddler will be tagged with the title of the current tiddler''*''.
-# Choose replacing method. [[link|Linking in WikiText]] [[Transclusion]] or [[macro|Macros]].
-
+# Choose if the new tiddler will be tagged with the title of the current tiddler (see note below).
+# Choose replacing method: [[link|Linking in WikiText]], [[transclusion|Transclusion]], or [[macro|Macros]].
 # Click the ''{{$:/language/Buttons/Excise/Caption/Excise}}'' button
 
-
-
-''*NOTE:'' If you choose tic the option to `Tag new tiddler with the title of this tiddler`. The tag will be the'' draft title''. If you create a new tiddler (or clone an existing one), the draft title and the tag, will be `New Tiddler`. __You have to save the tiddler and re-edit it to get the new title as tag.__
+<<.strong Note!>> If you choose the option to `Tag new tiddler with the title of this tiddler`, the new tiddler will be tagged with the name of the current tiddler before it has been edited. If you have changed the title of the current tiddler, save it first and edit it again to perform excision with this option.

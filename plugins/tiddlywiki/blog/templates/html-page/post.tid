@@ -22,7 +22,7 @@ title: $:/plugins/tiddlywiki/blog/templates/html-page/post
 <body class="tc-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
 <section class="tc-story-river">
-`<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+`<$importvariables filter={{$:/core/config/GlobalImportFilter}}>
 <$view tiddler="$:/plugins/tiddlywiki/blog/templates/tiddler" format="htmlwikified"/>
 <$view tiddler="$:/plugins/tiddlywiki/blog/templates/menu" format="htmlwikified"/>
 </$importvariables>`

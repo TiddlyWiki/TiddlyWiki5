@@ -1,12 +1,13 @@
 caption: checkbox
-created: 20131024141900000
-modified: 20220402023600000
-tags: Widgets TriggeringWidgets
 colors: red orange yellow blue
+created: 20131024141900000
 fruits: bananas oranges grapes
-vegetables: carrots potatoes
+list: [[CheckboxWidget (tag Mode)]] [[CheckboxWidget (field Mode)]] [[CheckboxWidget (listField Mode)]] [[CheckboxWidget (index Mode)]] [[CheckboxWidget (listIndex Mode)]] [[CheckboxWidget (filter Mode)]] [[CheckboxWidget (indeterminate)]]
+modified: 20230316192632667
+tags: Widgets TriggeringWidgets
 title: CheckboxWidget
 type: text/vnd.tiddlywiki
+vegetables: carrots potatoes
 
 ! Introduction
 
@@ -20,111 +21,22 @@ The checkbox widget displays an HTML `<input type="checkbox">` element that is d
 The content of the `<$checkbox>` widget is displayed within an HTML `<label>` element immediately after the checkbox itself. This means that clicking on the content will toggle the checkbox.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
-|tag |The name of the tag to which the checkbox is bound |
-|invertTag |When set to ''yes'', flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
-|field |The name of the field to which the checkbox is bound |
-|listField |<<.from-version "5.2.3">> The name of the field that contains the list to which the checkbox is bound |
-|index|<<.from-version "5.1.14">> The index of the //tiddler//, a [[DataTiddler|DataTiddlers]], to which the checkbox is bound<<.tip "be sure to set the //tiddler// correctly">>|
-|listIndex |<<.from-version "5.2.3">> Like <<.attr index>>, but treats the value as a list the same way that <<.attr listField>> does |
-|filter |<<.from-version "5.2.3">> A filter whose output determines the checked state of the checkbox |
-|checked |The value of the field corresponding to the checkbox being checked |
-|unchecked |The value of the field corresponding to the checkbox being unchecked |
-|default |The default value to use if the field is not defined |
-|indeterminate |Whether ambiguous values can produce indeterminate checkboxes (see below) |
-|class |The class that will be assigned to the label element <$macrocall $name=".tip" _="""<<.from-version "5.2.3">> `tc-checkbox` is always applied by default, as well as `tc-checkbox-checked` when checked"""/> |
-|actions |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the status of the checkbox changes (whether it is checked or unchecked) |
-|uncheckactions |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
-|checkactions |<<.from-version "5.1.20">> A string containing ActionWidgets to be triggered when the checkbox is checked |
-|disabled|<<.from-version "5.1.23">> Optional, disables the checkbox if set to "yes". Defaults to "no"|
+|<<.attr tiddler>> |Title of the tiddler to manipulate (defaults to the [[Current Tiddler]]) |
+|<<.widget-attr-link tag "CheckboxWidget (tag Mode)">> |The name of the [[tag|Tagging]] to which the checkbox is bound |
+|<<.attr invertTag>> |When set to <<.value yes>>, flips the tag binding logic so that the absence of the tag causes the checkbox to be checked  |
+|<<.widget-attr-link field "CheckboxWidget (field Mode)">> |The name of the field to which the checkbox is bound |
+|<<.widget-attr-link listField "CheckboxWidget (listField Mode)">> |<<.from-version "5.2.3">> The name of the field that contains the list to which the checkbox is bound |
+|<<.widget-attr-link index "CheckboxWidget (index Mode)">> |<<.from-version "5.1.14">> The property of the [[DataTiddler|DataTiddlers]] to which the checkbox is bound|
+|<<.widget-attr-link listIndex "CheckboxWidget (listIndex Mode)">> |<<.from-version "5.2.3">> Like <<.attr index>>, but treats the value as a list the same way that <<.attr listField>> does |
+|<<.widget-attr-link filter "CheckboxWidget (filter Mode)">> |<<.from-version "5.2.3">> A filter whose output determines the checked state of the checkbox |
+|<<.attr checked>> |The value of the field corresponding to the checkbox being checked |
+|<<.attr unchecked>> |The value of the field corresponding to the checkbox being unchecked |
+|<<.attr default>> |The default value to use if the field is not defined |
+|<<.widget-attr-link indeterminate "CheckboxWidget (indeterminate)">> |Whether ambiguous values can produce indeterminate checkboxes (see below) |
+|<<.attr class>> |The class that will be assigned to the `<label>` element <$macrocall $name=".tip" _="""<<.from-version "5.2.3">> `tc-checkbox` is always applied by default, as well as `tc-checkbox-checked` when checked"""/> |
+|<<.attr actions>> |<<.from-version "5.1.14">> A string containing ActionWidgets to be triggered when the status of the checkbox changes (whether it is checked or unchecked) |
+|<<.attr uncheckactions>> |<<.from-version "5.1.16">> A string containing ActionWidgets to be triggered when the checkbox is unchecked |
+|<<.attr checkactions>> |<<.from-version "5.1.20">> A string containing ActionWidgets to be triggered when the checkbox is checked |
+|<<.attr disabled>> |<<.from-version "5.1.23">> Optionally disables the checkbox if set to <<.value yes>> (defaults to <<.value no>>)|
 
-!! Tag Mode
-
-Using the checkbox widget in tag mode requires the ''tag'' attribute to specify the name of the tag. The ''tiddler'' attribute specifies the tiddler to target, defaulting to the current tiddler if not present.
-
-This example creates a checkbox that flips the ''done'' tag on the current tiddler:
-
-<<wikitext-example-without-html """<$checkbox tag="done"> Is it done?</$checkbox>""">>
-
-!! Field Mode
-
-Using the checkbox widget in field mode requires the ''field'' attribute to specify the name of the field. The ''checked'' and ''unchecked'' attributes specify the values to be assigned to the field to correspond to its checked and unchecked states respectively. The ''default'' attribute is used as a fallback value if the field is not defined.
-
-This example creates a checkbox that is checked if the field ''status'' is equal to ''open'' and unchecked if the field is equal to ''closed''. If the field is undefined then it defaults to ''closed'', meaning that the checkbox will be unchecked if the ''status'' field is missing.
-
-<<wikitext-example-without-html """<$checkbox field="status" checked="open" unchecked="closed" default="closed"> Is it open?</$checkbox><br />''status:'' {{!!status}}""">>
-
-!! List Mode
-
-Using the checkbox widget in list mode requires the ''listField'' attribute to specify the name of a field containing a list. The ''checked'' attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If ''checked'' is absent (or empty) but ''unchecked'' is present, then the logic will be inverted: the checkbox will be checked when the "unchecked" value is missing from the list, and unchecked when the "unchecked" value is found in the list. If both ''checked'' and ''unchecked'' are present, the checkbox will work like a toggle, replacing the ''checked'' value with the ''unchecked'' value and vice-versa. Finally, if neither ''checked'' nor ''unchecked'' is specified, the checkbox will be checked if the field has anything in it, but unchecked if the field is missing or empty. (This is rarely useful; most of the time you'll want to specify ''checked'' or ''unchecked'' or both.)
-
-The ''default'' attribute is used as a fallback for the checkbox state if the field is not defined.
-
-This example creates a checkbox that is checked if the list field named ''colors'' contains ''green'' and unchecked if the field contains ''red''. If the field is undefined, or if neither ''green'' nor ''red'' appears in the field, then it defaults to ''green'', meaning that the checkbox will be checked.
-
-<<wikitext-example-without-html """<$checkbox listField="colors" checked="green" unchecked="red" default="green"> Is it green?</$checkbox><br />''colors:'' {{!!colors}}""">>
-
-Try editing the ''colors'' field of this tiddler to see how the example changes.
-
-!! Index Mode
-
-To use the checkbox widget in index mode set the ''index'' attribute to the index of a [[DataTiddler|DataTiddlers]]. The ''checked'' and ''unchecked'' attributes specify the values to be assigned to the index and correspond to its checked and unchecked states respectively. The ''default'' attribute is used as a fallback value if the index is undefined.
-
-The example below creates a checkbox that is checked if the index by the name of this tiddler in the tiddler ExampleData is equal to ''selected'' and unchecked if the index is an empty string. If the index is undefined then it defaults to an empty string, meaning the checkbox will be unchecked if the index is missing.
-
-<$macrocall $name="wikitext-example-without-html" src="""<$checkbox tiddler="ExampleData" index=<<currentTiddler>> checked="selected" unchecked="" default=""> Selected?</$checkbox>"""/>
-
-!! Index List Mode
-
-Using the checkbox widget in index list mode requires the ''listIndex'' attribute to specify the the index of a [[DataTiddler|DataTiddlers]] containing a list. The ''checked'' attribute specifies the value that should be present or absent in the list when the checkbox is checked or unchecked respectively. If ''checked'' is absent (or empty) but ''unchecked'' is present, then the logic will be inverted: the checkbox will be checked when the "unchecked" value is missing from the list, and unchecked when the "unchecked" value is found in the list. If both ''checked'' and ''unchecked'' are present, the checkbox will work like a toggle, replacing the ''checked'' value with the ''unchecked'' value and vice-versa. Finally, if neither ''checked'' nor ''unchecked'' is specified, the checkbox will be checked if the field has anything in it, but unchecked if the field is missing or empty. (This is rarely useful; most of the time you'll want to specify ''checked'' or ''unchecked'' or both.)
-
-The ''default'' attribute is used as a fallback for the checkbox state if the index is undefined.
-
-The example below creates three checkboxes that each control a different value in an index field of the ExampleData tiddler.
-
-<$macrocall $name="wikitext-example-without-html" src="""
-<$set name=indexName filter="[<currentTiddler>addsuffix[ Colors]]" >
-<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="green" unchecked="red" default="red"> Green or red?</$checkbox> <br/>
-<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="yellow" unchecked="blue" default="blue"> Yellow or blue?</$checkbox> <br/>
-<$checkbox tiddler="ExampleData" listIndex=<<indexName>> checked="orange" unchecked="purple" default="purple"> Orange or purple?</$checkbox> <br />
-Colors list: {{{ [[ExampleData]getindex<indexName>] }}}
-</$set>
-"""/>
-
-!! Filter Mode
-
-Using the checkbox widget in filter mode requires the ''filter'' attribute to contain a filter whose output will determine the checked state of the checkbox. In filter mode, checking the checkbox will not automatically make changes to any field of any tiddler. Instead, you can use the ''actions'' attribute (or ''checkactions'' and ''uncheckactions'') to specify what should happen when the checkbox is toggled. It is your responsibility to make sure the actions cause changes to the tiddlers or fields that the filter results depend on, so that the checkbox becomes properly checked or unchecked after the actions have triggered.
-
-If the filter returns an empty result, the checkbox will be unchecked. Otherwise, if the filter result is non-empty, the checkbox will be checked. However, if either the ''checked'' or ''unchecked'' attributes (or both) are specified, then their values will be looked for in the filter result, instead of considering any non-empty value to mean "checked".
-
-This example creates the same checkbox as in the list mode example, selecting between ''red'' and ''green'' in the ''colors'' list field, but using filters and actions to make the change.
-
-<<wikitext-example-without-html """\define checkActions() <$action-listops $field="colors" $subfilter="-red green"/>
-\define uncheckActions() <$action-listops $field="colors" $subfilter="red -green"/>
-<$checkbox filter="[list[!!colors]]" checked="green" unchecked="red" default="red" checkactions=<<checkActions>> uncheckactions=<<uncheckActions>> > Is "green" in colors?</$checkbox><br />''colors:'' {{!!colors}}
-""">>
-
-!! Indeterminate checkboxes
-
-If both the ''checked'' and ''unchecked'' attributes are specified, but neither one is found in the specified field (or index), the result can be ambiguous. Should the checkbox be checked or unchecked? Normally in such cases the checkbox will be unchecked, but if the ''indeterminate'' attribute is set to "yes" (default is "no"), the checkbox will instead be in an "indeterminate" state. An indeterminate checkbox counts as false for most purposes &mdash; if you click it, the checkbox will become checked and the ''checkactions'', if any, will be triggered &mdash; but indeterminate checkboxes are displayed differently in the browser.
-
-This example shows indeterminate checkboxes being used for categories in a shopping list (which could also be sub-tasks in a todo list, or many other things). If only some items in a category are selected, the category checkbox is indeterminate. You can click on the category checkboxes to see how indeterminate states are treated the same as the unchecked state, and clicking the box checks it and applies its check actions (in this case, checking all the boxes in that category). Try editing the <<.field fruits>> and <<.field vegetables>> fields on this tiddler and see what happens to the example when you do.
-
-<<wikitext-example-without-html """\define check-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[list[!!$field-name$]]" />
-\define uncheck-all(field-name:"items") <$action-listops $field="selected-$field-name$" $filter="[[]]" />
-
-<$checkbox filter="[list[!!selected-fruits]count[]]" checked={{{ [list[!!fruits]count[]] }}} unchecked="0" checkactions=<<check-all fruits>> uncheckactions=<<uncheck-all fruits>> indeterminate="yes"> fruits</$checkbox>
-<ul style="list-style: none">
-<$list variable="fruit" filter="[list[!!fruits]]">
-<li><$checkbox listField="selected-fruits" checked=<<fruit>>> <<fruit>></$checkbox></li>
-</$list>
-</ul>
-<$checkbox filter="[list[!!selected-vegetables]count[]]" checked={{{ [list[!!vegetables]count[]] }}} unchecked="0" checkactions=<<check-all vegetables>> uncheckactions=<<uncheck-all vegetables>> indeterminate="yes"> veggies</$checkbox>
-<ul style="list-style: none">
-<$list variable="veggie" filter="[list[!!vegetables]]">
-<li><$checkbox listField="selected-vegetables" checked=<<veggie>>> <<veggie>></$checkbox></li>
-</$list>
-</ul>
-
-<p>Selected veggies: {{!!selected-vegetables}}<br/>
-Selected fruits: {{!!selected-fruits}}</p>""">>
+<<.doc-tabs>>

@@ -6,9 +6,9 @@ Options: Opcje
 Options/SidebarLayout: Układ menu bocznego
 Options/SidebarLayout/Fixed-Fluid: Stałe Story River, zmienne menu boczne
 Options/SidebarLayout/Fluid-Fixed: Zmienne Story River, stałe menu boczne
-Options/StickyTitles: Przyczep nazwy
-Options/StickyTitles/Hint: Spowoduje, że nazwa tiddlera będzie "przyklejona" do górnej części okna przeglądarki
-Options/CodeWrapping: Łam długie linie kodu do nowej linii
+Options/StickyTitles: Przyklej tytuł i pasek narzędzi
+Options/StickyTitles/Hint: Tytuł obecnego tiddlera oraz jego pasek narzędzi będzie przyklejony do góry okna przeglądarki
+Options/CodeWrapping: Łam długie linie kodu
 Settings: Ustawienia
 Settings/FontFamily: Czcionka
 Settings/CodeFontFamily: Czcionka kodu

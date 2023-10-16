@@ -15,10 +15,11 @@ function LinkedList() {
 
 LinkedList.prototype.clear = function() {
 	// LinkedList performs the duty of both the head and tail node
-	this.next = Object.create(null);
-	this.prev = Object.create(null);
-	this.first = undefined;
-	this.last = undefined;
+	this.next = new LLMap();
+	this.prev = new LLMap();
+	// Linked list head initially points to itself
+	this.next.set(null, null);
+	this.prev.set(null, null);
 	this.length = 0;
 };
 
@@ -41,28 +42,29 @@ Push behaves like array.push and accepts multiple string arguments. But it also
 accepts a single array argument too, to be consistent with its other methods.
 */
 LinkedList.prototype.push = function(/* values */) {
-	var values = arguments;
+	var i, values = arguments;
 	if($tw.utils.isArray(values[0])) {
 		values = values[0];
 	}
-	for(var i = 0; i < values.length; i++) {
+	for(i = 0; i < values.length; i++) {
 		_assertString(values[i]);
 	}
-	for(var i = 0; i < values.length; i++) {
+	for(i = 0; i < values.length; i++) {
 		_linkToEnd(this,values[i]);
 	}
 	return this.length;
 };
 
 LinkedList.prototype.pushTop = function(value) {
+	var t;
 	if($tw.utils.isArray(value)) {
-		for (var t=0; t<value.length; t++) {
+		for (t=0; t<value.length; t++) {
 			_assertString(value[t]);
 		}
-		for(var t=0; t<value.length; t++) {
+		for(t=0; t<value.length; t++) {
 			_removeOne(this,value[t]);
 		}
-		for(var t=0; t<value.length; t++) {
+		for(t=0; t<value.length; t++) {
 			_linkToEnd(this,value[t]);
 		}
 	} else {
@@ -74,11 +76,11 @@ LinkedList.prototype.pushTop = function(value) {
 
 LinkedList.prototype.each = function(callback) {
 	var visits = Object.create(null),
-		value = this.first;
-	while(value !== undefined) {
+		value = this.next.get(null);
+	while(value !== null) {
 		callback(value);
-		var next = this.next[value];
-		if(typeof next === "object") {
+		var next = this.next.get(value);
+		if(Array.isArray(next)) {
 			var i = visits[value] || 0;
 			visits[value] = i+1;
 			value = next[i];
@@ -105,97 +107,99 @@ LinkedList.prototype.makeTiddlerIterator = function(wiki) {
 };
 
 function _removeOne(list,value) {
-	var prevEntry = list.prev[value],
-		nextEntry = list.next[value],
+	var nextEntry = list.next.get(value);
+	if(nextEntry === undefined) {
+		return;
+	}
+	var prevEntry = list.prev.get(value),
 		prev = prevEntry,
-		next = nextEntry;
-	if(typeof nextEntry === "object") {
+		next = nextEntry,
+		ref;
+	if(Array.isArray(nextEntry)) {
 		next = nextEntry[0];
 		prev = prevEntry[0];
 	}
 	// Relink preceding element.
-	if(list.first === value) {
-		list.first = next
-	} else if(prev !== undefined) {
-		if(typeof list.next[prev] === "object") {
-			if(next === undefined) {
-				// Must have been last, and 'i' would be last element.
-				list.next[prev].pop();
-			} else {
-				var i = list.next[prev].indexOf(value);
-				list.next[prev][i] = next;
-			}
-		} else {
-			list.next[prev] = next;
-		}
+	ref = list.next.get(prev);
+	if(Array.isArray(ref)) {
+		var i = ref.indexOf(value);
+		ref[i] = next;
 	} else {
-		return;
+		list.next.set(prev,next);
 	}
+
 	// Now relink following element
-	// Check "next !== undefined" rather than "list.last === value" because
-	// we need to know if the FIRST value is the last in the list, not the last.
-	if(next !== undefined) {
-		if(typeof list.prev[next] === "object") {
-			if(prev === undefined) {
-				// Must have been first, and 'i' would be 0.
-				list.prev[next].shift();
-			} else {
-				var i = list.prev[next].indexOf(value);
-				list.prev[next][i] = prev;
-			}
-		} else {
-			list.prev[next] = prev;
-		}
+	ref = list.prev.get(next);
+	if(Array.isArray(ref)) {
+		var i = ref.indexOf(value);
+		ref[i] = prev;
 	} else {
-		list.last = prev;
+		list.prev.set(next,prev);
 	}
+
 	// Delink actual value. If it uses arrays, just remove first entries.
-	if(typeof nextEntry === "object") {
+	if(Array.isArray(nextEntry) && nextEntry.length > 1) {
 		nextEntry.shift();
 		prevEntry.shift();
 	} else {
-		list.next[value] = undefined;
-		list.prev[value] = undefined;
+		list.next.set(value,undefined);
+		list.prev.set(value,undefined);
 	}
 	list.length -= 1;
 };
 
 // Sticks the given node onto the end of the list.
 function _linkToEnd(list,value) {
-	if(list.first === undefined) {
-		list.first = value;
+	var old = list.next.get(value);
+	var last = list.prev.get(null);
+	// Does it already exists?
+	if(old !== undefined) {
+		if(!Array.isArray(old)) {
+			old = [old];
+			list.next.set(value,old);
+			list.prev.set(value,[list.prev.get(value)]);
+		}
+		old.push(null);
+		list.prev.get(value).push(last);
 	} else {
-		// Does it already exists?
-		if(list.first === value || list.prev[value] !== undefined) {
-			if(typeof list.next[value] === "string") {
-				list.next[value] = [list.next[value]];
-				list.prev[value] = [list.prev[value]];
-			} else if(typeof list.next[value] === "undefined") {
-				// list.next[value] must be undefined.
-				// Special case. List already has 1 value. It's at the end.
-				list.next[value] = [];
-				list.prev[value] = [list.prev[value]];
-			}
-			list.prev[value].push(list.last);
-			// We do NOT append a new value onto "next" list. Iteration will
-			// figure out it must point to End-of-List on its own.
-		} else {
-			list.prev[value] = list.last;
-		}
-		// Make the old last point to this new one.
-		if(typeof list.next[list.last] === "object") {
-			list.next[list.last].push(value);
-		} else {
-			list.next[list.last] = value;
-		}
+		list.next.set(value,null);
+		list.prev.set(value,last);
 	}
-	list.last = value;
+	// Make the old last point to this new one.
+	if(value !== last) {
+		var array = list.next.get(last);
+		if(Array.isArray(array)) {
+			array[array.length-1] = value;
+		} else {
+			list.next.set(last,value);
+		}
+		list.prev.set(null,value);
+	} else {
+		// Edge case, the pushed value was already the last value.
+		// The second-to-last nextPtr for that value must point to itself now.
+		var array = list.next.get(last);
+		array[array.length-2] = value;
+	}
 	list.length += 1;
 };
 
 function _assertString(value) {
 	if(typeof value !== "string") {
 		throw "Linked List only accepts string values, not " + value;
+	}
+};
+
+var LLMap = function() {
+	this.map = Object.create(null);
+};
+
+// Just a wrapper so our object map can also accept null.
+LLMap.prototype = {
+	set: function(key,val) {
+		(key === null) ? (this.null = val) : (this.map[key] = val);
+	},
+	get: function(key) {
+		return (key === null) ? this.null : this.map[key];
 	}
 };
 

@@ -1,11 +1,13 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: 外部圖片條目的完整的 URI
+author: 一個插件作者的姓名
 bag: 條目的來源集的名稱
 caption: 顯示於頁籤或按鈕上的標題文字
 code-body: 若設定為 ''yes''，檢視範本將以程式碼形式顯示條目
 color: 條目的 CSS 顏色值
 component: 負責[[警示條目|AlertMechanism]]的元件名稱
+core-version: 對於一個插件，表示與其相容的 TiddlyWiki 版本
 created: 條目的建立日期
 creator: 條目的建立者
 current-tiddler: 用於快取[[瀏覽歷史列表|HistoryMechanism]]的最上層條目
@@ -13,7 +15,7 @@ dependents: 插件的相依插件列表
 description: 插件的說明、描述
 draft.of: 草稿條目，包含條目的標題、標籤、欄位 ...
 draft.title: 草稿條目的標題
-footer: wizard 的註腳
+footer: 互動視窗的註腳
 hide-body: 若設定為 ''yes''，檢視範本將隱藏條目的主體
 icon: 條目的標題含有與條目關聯的圖示
 library: 若設定為 ''yes''，表示條目應該被儲存為一個 JavaScript 程式庫
@@ -22,13 +24,15 @@ list-before: 當前條目名稱將被新增到條目排序清單中的設定條�
 list-after: 當前條目名稱將被新增到條目排序清單中的設定條目名稱之後，或若此欄位存在但是空的，則被新增於清單的尾端
 modified: 條目的最近修改日期與時間
 modifier: 條目的最近修改者
+module-type: 對於 javascript 條目，指定其為何種模組
 name: 具可讀性的套件條目的名稱
+parent-plugin: 對於一個插件，指定其為哪個插件的子插件
 plugin-priority: 套件條目的優先級數值
 plugin-type: 套件條目的類型
 released: TiddlyWiki 的釋出日期
 revision: 條目存放於伺服器中的修訂版本
 source: 條目的網址
-subtitle: 一個 wizard 的副標題
+subtitle: 互動視窗的副標題
 tags: 條目的標籤清單
 text: 條目的內文
 throttle.refresh: 如果存在，則限制此條目的刷新

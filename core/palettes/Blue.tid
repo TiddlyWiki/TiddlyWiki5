@@ -34,6 +34,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #0000aa
 external-link-foreground: #0000ee
 foreground: #333353
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-background: #ecf2ff
 message-border: #cfd6e6
 message-foreground: #547599

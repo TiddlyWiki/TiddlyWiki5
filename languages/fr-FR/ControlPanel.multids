@@ -7,7 +7,7 @@ Appearance/Hint: Personnalisation de l'apparence de votre ~TiddlyWiki.
 Basics/AnimDuration/Prompt: Durée de l'animation
 Basics/AutoFocus/Prompt: Champ qui recevra le focus par défaut pour les nouveaux tiddlers
 Basics/Caption: Fondamentaux
-Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
+Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de {{Conserver le déroulé actuel||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
 Basics/DefaultTiddlers/TopHint: Liste les tiddlers qui seront affichés au démarrage :
 Basics/Language/Prompt: Bonjour ! Langue active :

@@ -8,6 +8,6 @@ Tiddlers can contain formatted text:
 
 Formatting is typed with special codes:
 
-<$edit-text tiddler="FormattingDemoText" class="tc-edit-texteditor" minHeight="10px"/>
+<$edit-text tiddler="FormattingDemoText" class="tc-edit-texteditor" minHeight="100px"/>
 
 TiddlyWiki is not just for text. [[Images]] are first class citizens, too.

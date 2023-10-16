@@ -9,6 +9,7 @@ modified: 20220223160414274
 tags: Chrome Firefox [[Internet Explorer]] Linux Mac Opera Safari Saving Windows Edge
 title: Saving with Polly
 type: text/vnd.tiddlywiki
+ribbon-text: NEW
 
 [[Polly|https://github.com/Marxsal/polly]] is a batch file system using Windows //~PowerShell// to restore ~TiddlyWiki files from a specified download directory to their original home directory.
 

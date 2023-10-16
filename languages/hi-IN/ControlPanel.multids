@@ -8,7 +8,7 @@ Appearance/Caption: दिखावट
 Appearance/Hint:  आपके टिड्लीविकि को अनुकूलित रूप से दिखने के तरीके
 Basics/AnimDuration/Prompt: एनीमेशन अवधि:
 Basics/Caption: पहला
-Basics/DefaultTiddlers/BottomHint:  प्रयोग करें&#91;&#91;डबल वर्ग ब्रैकेट्स&#93;&#93;रिक्त स्थान के साथ शीर्षक के लिए। या फिर आप चुन सकते हैं<$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
+Basics/DefaultTiddlers/BottomHint:  प्रयोग करें&#91;&#91;डबल वर्ग ब्रैकेट्स&#93;&#93;रिक्त स्थान के साथ शीर्षक के लिए। या फिर आप चुन सकते हैं{{retain story ordering||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: डिफ़ॉल्ट tiddlers:
 Basics/DefaultTiddlers/TopHint: कौन सा tiddler शुरुआत मे दिखाना है 
 Basics/Language/Prompt: हैलो! वर्तमान भाषा:

@@ -25,7 +25,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\import[^\S\n]/mg;
+	this.matchRegExp = /\\import[^\S\n]/mg;
 };
 
 /*

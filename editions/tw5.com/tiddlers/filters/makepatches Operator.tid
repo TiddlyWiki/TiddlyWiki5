@@ -1,0 +1,23 @@
+caption: makepatches
+created: 20230304122354967
+modified: 20230304122400128
+op-purpose: returns a set of patches that transform the input to a given string
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string of characters
+op-parameter-name: S
+op-output: a set of patch instructions per input title to be used by the [[applypatches Operator]] to transform the input title(s) into the string <<.place S>>
+op-suffix: `lines` to operate in line mode, `words` to operate in word mode. If omitted (default), the algorithm operates in character mode. See notes below.
+op-suffix-name: T
+tags: [[Filter Operators]] [[String Operators]]
+title: makepatches Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.2.6">>
+
+The difference algorithm operates in character mode by default. This produces the most detailed diff possible. In `words` mode, each word in the input text is transformed into a meta-character, upon which the algorithm then operates. In the default character mode, the filter would find two patches between "ActionWidget" and "Action-Widgets" (the hyphen and the plural s), while in `words` mode, the whole word is found to be changed. In `lines` mode, the meta-character is formed from the whole line, delimited by newline characters, and is found to be changed independent of the number of changes within the line.
+
+The different modes influence the result when the patches are applied to texts other than the original, as well as the runtime.
+
+<<.tip "The calculation in `words` mode is roughly 10 times faster than the default character mode, while `lines` mode can be more than 100 times faster than the default.">>
+
+<<.operator-examples "makepatches and applypatches">>

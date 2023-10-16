@@ -32,6 +32,7 @@ options: see below:
 	parseAsInline: true to parse text as inline instead of block
 	wiki: reference to wiki to use
 	_canonical_uri: optional URI of content if text is missing or empty
+	configTrimWhiteSpace: true to trim whitespace
 */
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
@@ -46,7 +47,9 @@ var WikiParser = function(type,text,options) {
 	this.source = text || "";
 	this.sourceLength = this.source.length;
 	// Flag for ignoring whitespace
-	this.configTrimWhiteSpace = false;
+	this.configTrimWhiteSpace = options.configTrimWhiteSpace !== undefined ? options.configTrimWhiteSpace : false;
+	// Parser mode
+	this.parseAsInline = options.parseAsInline;
 	// Set current parse position
 	this.pos = 0;
 	// Start with empty output
@@ -83,7 +86,7 @@ var WikiParser = function(type,text,options) {
 	// Parse any pragmas
 	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
-	if(options.parseAsInline) {
+	if(this.parseAsInline) {
 		topBranch.push.apply(topBranch,this.parseInlineRun());
 	} else {
 		topBranch.push.apply(topBranch,this.parseBlocks());
@@ -116,7 +119,7 @@ WikiParser.prototype.loadRemoteTiddler = function(url) {
 */
 WikiParser.prototype.setupRules = function(proto,configPrefix) {
 	var self = this;
-	if(!$tw.safemode) {
+	if(!$tw.safeMode) {
 		$tw.utils.each(proto,function(object,name) {
 			if(self.wiki.getTiddlerText(configPrefix + name,"enable") !== "enable") {
 				delete proto[name];

@@ -161,7 +161,7 @@ function CodeMirrorEngine(options) {
 			if (cm.state.draggingText && cm.doc.sel.contains(pos) > -1) {
 				cm.state.draggingText(event);
 				// Ensure the editor is re-focused
-				setTimeout(() => cm.display.input.focus(), 20);
+				setTimeout(function() {cm.display.input.focus();}, 20); 
 				return;
 			}
 			try {
@@ -173,19 +173,23 @@ function CodeMirrorEngine(options) {
 					}
 					cm.setCursor(cm.coordsChar({left:event.pageX,top:event.pageY}));
 					if (selected) {
-					 	for (var i = 0; i < selected.length; ++i) {
+						for (var i = 0; i < selected.length; ++i) {
 							replaceRange(cm.doc, "", selected[i].anchor, selected[i].head, "drag");
 						}
 					}
 					cm.replaceSelection(text, "around", "paste");
 					cm.display.input.focus();
-			  }
+				}
 			}
 			catch(e){}
 		}
 		return false;
 	});
 	this.cm.on("keydown",function(cm,event) {
+		if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+			return true;
+		}
+	
 		return self.widget.handleKeydownEvent.call(self.widget,event);
 	});
 	this.cm.on("focus",function(cm,event) {
@@ -216,9 +220,15 @@ function CodeMirrorEngine(options) {
 			}
 		});
 		this.cm.on("paste",function(cm,event) {
+			event["twEditor"] = true;
 			self.widget.handlePasteEvent.call(self.widget,event);
 		});
+	} else {
+		this.cm.on("paste",function(cm,event){
+			event["twEditor"] = true;
+		});
 	}
+;
 }
 
 /*

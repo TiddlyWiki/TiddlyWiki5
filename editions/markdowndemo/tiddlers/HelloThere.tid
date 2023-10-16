@@ -1,11 +1,9 @@
 title: HelloThere
 
-This is a demo of TiddlyWiki5 incorporating a plugin for parsing tiddlers written in the Markdown language. The plugin uses the [[Remarkable|https://github.com/jonschlinkert/remarkable]] Markdown parser internally. The MarkdownExample tiddler below is written in Markdown.
+This is a demo of TiddlyWiki5 incorporating a plugin for parsing tiddlers written in the Markdown language. The plugin uses the [[markdown-it|https://github.com/markdown-it/markdown-it]] Markdown parser internally. The MarkdownTutorial tiddler below is written in Markdown.
 
 ! Installation
 
 To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
 
 [[$:/plugins/tiddlywiki/markdown]]
-
-{{$:/plugins/tiddlywiki/markdown/usage}}

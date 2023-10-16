@@ -117,7 +117,7 @@ C'est un exemple de tiddler. Voir [[Macros Table des matières (Exemples)|Table-
 <table class="doc-bad-example">
 <tbody>
 <tr class="evenRow">
-<td><span class="tc-inline-style" style="font-size:1.5em;">&#9888;</span> Attention&nbsp;:<br> Ne faites pas comme ça !</td>
+<td><span style="font-size:1.5em;">&#9888;</span> Attention&nbsp;:<br> Ne faites pas comme ça !</td>
 <td>
 
 $eg$

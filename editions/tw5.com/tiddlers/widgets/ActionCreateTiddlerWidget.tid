@@ -1,35 +1,39 @@
 caption: action-createtiddler
 created: 20161020152745942
-modified: 20210601092956998
+modified: 20230115084716196
 tags: Widgets ActionWidgets
 title: ActionCreateTiddlerWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-createtiddler'' widget is an [[action widget|ActionWidgets]] that creates new tiddlers. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The <<.wid "action-createtiddler">> widget is an [[action widget|ActionWidgets]] that creates new tiddlers. Action widgets are used within triggering widgets such as the ButtonWidget.
 
-There are several differences from the [[tm-new-tiddler message|WidgetMessage: tm-new-tiddler]]:
+There are several //differences// from the [[tm-new-tiddler message|WidgetMessage: tm-new-tiddler]]:
 
-* The new tiddler is not automatically displayed in the [[story river|StoryRiver]]
+* The new tiddler is not automatically displayed in the [[story river|Story River]]
 * The title of the new tiddler is made available for subsequent operations
 
 ! Content and Attributes
 
 The ''action-createtiddler'' widget is invisible.
 
-<<.from-version "5.2.0">> The action widgets contained within the ''action-createtiddler'' widget are executed after the new tiddler has been created with the title of the tiddler in the variable `createTiddler-title` and `createTiddler-draftTitle`.
-
 |!Attribute |!Description |
 |$basetitle |The initial title that will be attempted. If a tiddler with that title already exists, then a numerical counter is added to the title and incremented until it is unique|
-|$savetitle |//(deprecated – see below)// A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
-|$savedrafttitle |//(deprecated – see below)// <<.from-version "5.1.20">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
+|$savetitle |<<.deprecated-since "5.1.20" "ActionCreateTiddlerWidget Example 5">> A text reference identifying a field or index into which the title of the newly created tiddler will be stored after it is created |
+|$savedrafttitle |<<.deprecated-since "5.1.20" "ActionCreateTiddlerWidget Example 5">> A text reference identifying a field or index into which the draft title associated with the newly created tiddler will be stored after it is created. This is useful when using a sequence of action widgets to create a new tiddler, put it into edit mode, and position it within the list of its parent tag |
 |$timestamp |Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
 |$template |<<.from-version "5.1.22">> The title of a template tiddler, that will be used to create a new tiddler |
 |$overwrite |<<.from-version "5.1.22">> If set to "yes", it will overwrite existing tiddlers. ''Be careful!'' |
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be created in the new tiddler  |
 
-<<.from-version "5.2.0">> Note that the attributes `$savetitle` and `$savedrafttitle` are no longer needed. Instead, any action widgets that need to use the title of the newly created tiddler should be contained within the ''action-createtiddler'' widget, and reference the variables `createTiddler-title` and `createTiddler-draftTitle` to obtain the title.
+! Variables
+
+<<.from-version "5.2.0">> The content of the <<.wid "action-createtiddler">> widget is executed after the new tiddler has been created. The title of the newly created tiddler is stored in the variable <<.var "createTiddler-title">>.
+
+|!Variables |!Description |
+|`createTiddler-title` |The tittle of the tiddler that has been created. See [[ActionCreateTiddlerWidget Example 5]] |
+|`createTiddler-draftTitle` |This variable only exists to have feature parity with the deprecated parameters. It contains the title of a "draft tiddler" |
 
 ! Examples
 
@@ -61,4 +65,9 @@ The ''action-createtiddler'' widget is invisible.
 {{ActionCreateTiddlerWidget Example 4}}
 <<<
 
+---
+
+<<<
+{{ActionCreateTiddlerWidget Example 5}}
+<<<
 

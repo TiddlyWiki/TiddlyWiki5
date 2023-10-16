@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.2.3
+    TW5_BUILD_VERSION=v5.3.1
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -107,7 +107,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 # /empty.html			Empty
 # /empty.hta			For Internet Explorer
 node $TW5_BUILD_TIDDLYWIKI \
-	$TW5_BUILD_MAIN_EDITION \
+	./editions/empty \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--build empty \
@@ -233,6 +233,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build index \
 	|| exit 1
 
+# /editions/twitter-archivist/index.html	Twitter Archivist edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/twitter-archivist \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/editions/twitter-archivist/ \
+	--build index \
+	|| exit 1
+
 ######################################################
 #
 # Plugin demos
@@ -350,14 +359,14 @@ node $TW5_BUILD_TIDDLYWIKI \
 
 # Delete any existing static content
 
-rm $TW5_BUILD_OUTPUT/languages/de-AT/static/*
-rm $TW5_BUILD_OUTPUT/languages/de-DE/static/*
-rm $TW5_BUILD_OUTPUT/languages/es-ES/static/*
-rm $TW5_BUILD_OUTPUT/languages/fr-FR/static/*
-rm $TW5_BUILD_OUTPUT/languages/ja-JP/static/*
-rm $TW5_BUILD_OUTPUT/languages/ko-KR/static/*
-rm $TW5_BUILD_OUTPUT/languages/zh-Hans/static/*
-rm $TW5_BUILD_OUTPUT/languages/zh-Hant/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/de-AT/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/de-DE/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/es-ES/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/fr-FR/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/ja-JP/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/ko-KR/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/zh-Hans/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/zh-Hant/static/*
 
 # /languages/de-AT/index.html		Demo wiki with de-AT language
 # /languages/de-AT/empty.html		Empty wiki with de-AT language
@@ -450,7 +459,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
-	--build \
+	--build library\
 	|| exit 1
 
 # Delete the temporary build tiddler

@@ -1,0 +1,45 @@
+created: 20221007125701001
+modified: 20230921180332436
+tags: WikiText Procedures
+title: Procedure Definitions
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+This tiddler describes the different ways in which [[Procedures|Procedures]] can be defined.
+
+!! Procedure Definition Pragma
+
+Procedures are created using the [[Pragma: \procedure]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
+
+```
+\procedure my-procedure(param)
+This is the procedure text (param=<<param>>)
+\end
+```
+
+Note that the [[Pragma: \whitespace]] setting is inherited from the parsing context in which the procedure definition occurs. That means that a tiddler containing multiple procedure definitions only needs a single whitespace pragma at the top of the tiddler, and the setting will be automatically inherited by the procedure definitions without needing the pragma to be repeated.
+
+!! Procedure Definition with Set Widget
+
+Procedures are implemented as a special kind of [[variable|Variables]] and so internally are actually defined with a <<.wlink SetWidget>> widget.
+
+```
+<$set name="my-procedure" value="This is the procedure text">
+...
+</$set>
+```
+
+<<.note """that it is not currently possible to specify parameters when defining a procedure with the  <<.wlink SetWidget>> widget.""">>
+
+!! Importing Procedure Definitions
+
+The [[Pragma: \import]] or <<.wlink ImportVariablesWidget>> widget can be used to copy procedure definitions from another tiddler.
+
+!! `$:/tags/Global` Tag
+
+Global procedures can be defined using the [[SystemTag: $:/tags/Global]].
+
+The tag [[SystemTag: $:/tags/Global/View]] is used to define procedures that should only be available within the main view template and the preview panel.
+
+The tag [[SystemTag: $:/tags/Global/View/Body]] is used to define procedures that should only be available within the main view template body and the preview panel.

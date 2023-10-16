@@ -141,6 +141,7 @@ function KeyboardManager(options) {
 	this.shortcutKeysList = [], // Stores the shortcut-key descriptors
 	this.shortcutActionList = [], // Stores the corresponding action strings
 	this.shortcutParsedList = []; // Stores the parsed key descriptors
+	this.shortcutPriorityList = []; // Stores the parsed shortcut priority
 	this.lookupNames = ["shortcuts"];
 	this.lookupNames.push($tw.platform.isMac ? "shortcuts-mac" : "shortcuts-not-mac")
 	this.lookupNames.push($tw.platform.isWindows ? "shortcuts-windows" : "shortcuts-not-windows");
@@ -318,12 +319,23 @@ KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 		this.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;
 		this.shortcutActionList[i] = tiddlerFields.text;
 		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ? this.parseKeyDescriptors(this.shortcutKeysList[i]) : undefined;
+		this.shortcutPriorityList[i] = tiddlerFields.priority === "yes" ? true : false;
 	}
 };
 
-KeyboardManager.prototype.handleKeydownEvent = function(event) {
+/*
+event: the keyboard event object
+options:
+	onlyPriority: true if only priority global shortcuts should be invoked
+*/
+KeyboardManager.prototype.handleKeydownEvent = function(event, options) {
+	options = options || {};
 	var key, action;
 	for(var i=0; i<this.shortcutTiddlers.length; i++) {
+		if(options.onlyPriority && this.shortcutPriorityList[i] !== true) {
+			continue;
+		}
+
 		if(this.shortcutParsedList[i] !== undefined && this.checkKeyDescriptors(event,this.shortcutParsedList[i])) {
 			key = this.shortcutParsedList[i];
 			action = this.shortcutActionList[i];

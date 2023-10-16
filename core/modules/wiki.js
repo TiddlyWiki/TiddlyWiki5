@@ -988,7 +988,8 @@ exports.parseText = function(type,text,options) {
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
 		wiki: this,
-		_canonical_uri: options._canonical_uri
+		_canonical_uri: options._canonical_uri,
+		configTrimWhiteSpace: options.configTrimWhiteSpace
 	});
 };
 
@@ -1028,10 +1029,11 @@ exports.parseTextReference = function(title,field,index,options) {
 };
 
 exports.getTextReferenceParserInfo = function(title,field,index,options) {
-	var tiddler,
+	var defaultType = options.defaultType || "text/vnd.tiddlywiki",
+		tiddler,
 		parserInfo = {
 			sourceText : null,
-			parserType : "text/vnd.tiddlywiki"
+			parserType : defaultType
 		};
 	if(options.subTiddler) {
 		tiddler = this.getSubTiddler(title,options.subTiddler);
@@ -1062,6 +1064,34 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 }
 
 /*
+Parse a block of text of a specified MIME type
+	text: text on which to perform substitutions
+	widget
+	options: see below
+Options include:
+	substitutions: an optional array of substitutions
+*/
+exports.getSubstitutedText = function(text,widget,options) {
+	options = options || {};
+	text = text || "";
+	var self = this,
+		substitutions = options.substitutions || [],
+		output;
+	// Evaluate embedded filters and substitute with first result
+	output = text.replace(/\$\{([\S\s]+?)\}\$/g, function(match,filter) {
+		return self.filterTiddlers(filter,widget)[0] || "";
+	});
+	// Process any substitutions provided in options
+	$tw.utils.each(substitutions,function(substitute) {
+		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
+	});
+	// Substitute any variable references with their values
+	return output.replace(/\$\(([^\)\$]+)\)\$/g, function(match,varname) {
+		return widget.getVariable(varname,{defaultValue: ""})
+	});
+};
+
+/*
 Make a widget tree for a parse tree
 parser: parser object
 options: see below
@@ -1077,19 +1107,20 @@ exports.makeWidget = function(parser,options) {
 			children: []
 		},
 		currWidgetNode = widgetNode;
-	// Create set variable widgets for each variable
-	$tw.utils.each(options.variables,function(value,name) {
-		var setVariableWidget = {
-			type: "set",
+	// Create let variable widget for variables
+	if($tw.utils.count(options.variables) > 0) {
+		var letVariableWidget = {
+			type: "let",
 			attributes: {
-				name: {type: "string", value: name},
-				value: {type: "string", value: value}
 			},
 			children: []
 		};
-		currWidgetNode.children = [setVariableWidget];
-		currWidgetNode = setVariableWidget;
-	});
+		$tw.utils.each(options.variables,function(value,name) {
+			$tw.utils.addAttributeToParseTreeNode(letVariableWidget,name,"" + value);
+		});
+		currWidgetNode.children = [letVariableWidget];
+		currWidgetNode = letVariableWidget;
+	}
 	// Add in the supplied parse tree nodes
 	currWidgetNode.children = parser ? parser.tree : [];
 	// Create the widget
@@ -1146,7 +1177,7 @@ exports.makeTranscludeWidget = function(title,options) {
 		if(options.importVariables) {
 			parseTreeImportVariables.attributes.filter.value = options.importVariables;
 		} else if(options.importPageMacros) {
-			parseTreeImportVariables.attributes.filter.value = "[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]";
+			parseTreeImportVariables.attributes.filter.value = this.getTiddlerText("$:/core/config/GlobalImportFilter");
 		}
 		parseTreeDiv.tree[0].children.push(parseTreeImportVariables);
 		parseTreeImportVariables.children.push(parseTreeTransclude);
@@ -1411,6 +1442,14 @@ exports.checkTiddlerText = function(title,targetText,options) {
 	}
 	return text === targetText;
 }
+
+/*
+Execute an action string without an associated context widget
+*/
+exports.invokeActionString = function(actions,event,variables,options) {
+	var widget = this.makeWidget(null,{parentWidget: options.parentWidget});
+	widget.invokeActionString(actions,null,event,variables);
+};
 
 /*
 Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read

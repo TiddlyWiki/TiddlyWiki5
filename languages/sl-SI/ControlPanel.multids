@@ -6,7 +6,7 @@ Appearance/Caption: Videz
 Appearance/Hint: Načini prilagoditve videza vašega TiddlyWikija.
 Basics/AnimDuration/Prompt: Trajanje animacije:
 Basics/Caption: Osnove
-Basics/DefaultTiddlers/BottomHint: Za naslove s presledki uporabite &#91;&#91;double square brackets&#93;&#93;. Ali pa kliknite, <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">da bi ob nalaganju obnovili odprte tiddlerje.</$button>
+Basics/DefaultTiddlers/BottomHint: Za naslove s presledki uporabite &#91;&#91;double square brackets&#93;&#93;. Ali pa kliknite, {{da bi ob nalaganju obnovili odprte tiddlerje.||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Privzeti tiddlerji:
 Basics/DefaultTiddlers/TopHint: Izberite, kateri tiddlerji so prikazani ob zagonu:
 Basics/Language/Prompt: Zdravo! Trenutni jezik:
