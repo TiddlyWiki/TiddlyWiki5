@@ -1,8 +1,8 @@
-title: $:/plugins/tiddlywiki/qrcode/usage
+title: $:/plugins/tiddlywiki/qrcode/docs/qrcode
+tags: $:/tags/QRCodeDocs
+caption: makeqr Macro
 
-! `makeqr` Macro
-
-The <<.def makeqr>> [[macro|Macros]] converts text data into an image of the corresponding QR code. The image is returned as [[base64-encoded data URI|https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs]].
+The ''makeqr'' [[macro|Macros]] converts text data into an image of the corresponding QR code. The image is returned as [[base64-encoded data URI|https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs]].
 
 !! Parameters
 
