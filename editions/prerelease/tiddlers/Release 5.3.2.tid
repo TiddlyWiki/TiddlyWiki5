@@ -1,6 +1,6 @@
 caption: 5.3.2
-created: 20230820114855583
-modified: 20230820114855583
+created: 20231016122502955
+modified: 20231016122502955
 tags: ReleaseNotes
 title: Release 5.3.2
 type: text/vnd.tiddlywiki
@@ -59,7 +59,8 @@ Improvements to the following translations:
 
 ! Plugin Improvements
 
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/1be8f0a9336952d4745d2bd4f2327e353580a272">> comments plugin to use predefined palette colours
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/1be8f0a9336952d4745d2bd4f2327e353580a272">> Comments Plugin to use predefined palette colours
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7785">> Evernote Importer Plugin to support images and other attachments
 
 ! Widget Improvements
 
@@ -85,6 +86,7 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7712">> handling of "counter-last" variable when appending items with the ListWidget
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6088">> upgrade download link in Firefox
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7698">> refreshing of transcluded functions
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7789">> resizing of height of textareas in control panel
 
 ! Node.js Improvements
 
