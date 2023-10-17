@@ -18,6 +18,11 @@ TiddlyWiki lets you choose where to keep your data, guaranteeing that in the dec
 <$macrocall $name="flex-card" bordercolor={{!!color}} textcolor={{!!text-color}} backgroundcolor={{!!background-color}} captionField="caption" descriptionField="text"/>
 </$list>
 </div>
+<div class="tc-cards tc-small">
+<$link to="中文社区 - Chinese Community" class="tc-btn-big-green tc-card">
+中文社区 - Chinese Community
+</$link>
+</div>
 
 !! ''Find Out More''
 
