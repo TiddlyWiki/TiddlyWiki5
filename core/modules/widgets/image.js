@@ -58,24 +58,25 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		if(this.wiki.isImageTiddler(this.imageSource)) {
 			var type = tiddler.fields.type,
 				text = tiddler.fields.text,
-				_canonical_uri = tiddler.fields._canonical_uri;
+				_canonical_uri = tiddler.fields._canonical_uri,
+				typeInfo = $tw.config.contentTypeInfo[type] || {},
+				deserializerType = typeInfo.deserializerType || type;
 			// If the tiddler has body text then it doesn't need to be lazily loaded
 			if(text) {
-				// Render the appropriate element for the image type
-				switch(type) {
-					case "application/pdf":
+				// Render the appropriate element for the image type by looking up the encoding in the content type info
+				var encoding = typeInfo.encoding || "utf8";
+				if (encoding === "base64") {
+					// .pdf .png .jpg etc.
+					src = "data:" + deserializerType + ";base64," + text;
+					if (deserializerType === "application/pdf") {
 						tag = "embed";
-						src = "data:application/pdf;base64," + text;
-						break;
-					case "image/svg+xml":
-						src = "data:image/svg+xml," + encodeURIComponent(text);
-						break;
-					default:
-						src = "data:" + type + ";base64," + text;
-						break;
+					}
+				} else {
+					// .svg .tid .xml etc.
+					src = "data:" + deserializerType + "," + encodeURIComponent(text);
 				}
 			} else if(_canonical_uri) {
-				switch(type) {
+				switch(deserializerType) {
 					case "application/pdf":
 						tag = "embed";
 						src = _canonical_uri;
