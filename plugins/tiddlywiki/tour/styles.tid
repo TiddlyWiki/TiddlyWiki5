@@ -12,8 +12,8 @@ tags: $:/tags/Stylesheet
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	<<box-shadow "0px 0px 5px rgba(0, 0, 0, 0.3)">>
-	border: 1px solid #228877;
-	background: #cbfff8;
+	border: 1px solid <<colour tour-overlay-border>>;
+	background: <<colour tour-overlay-background>>;
 	border-radius: 8px;
 	padding: 1em;
 	margin: 0.5em;
@@ -26,8 +26,8 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tour-panel-navigation .tc-btn-big-green:hover {
-	color: <<colour background>>;
-	background: <<colour foreground>>;
+	color: <<colour tour-navigation-buttons-hover-foreground>>;
+	background: <<colour tour-navigation-buttons-hover-background>>;
 }
 
 .tc-tour-panel-fullscreen {
@@ -37,7 +37,7 @@ tags: $:/tags/Stylesheet
 	height: auto;
 	box-shadow: none;
 	border: none;
-	background: <<colour page-background>>;
+	background: <<colour tour-fullscreen-background>>;
 	margin: 0;
 	border-radius: none;
 }
@@ -45,35 +45,35 @@ tags: $:/tags/Stylesheet
 .tc-tour-panel-controls .tc-tour-panel-list-button {
 	padding: 2px 8px;
 	border-radius: 1em;
-	color: <<color very-muted-foreground>>;
+	color: <<color tour-chooser-button-foreground>>;
 	text-align: left;
 }
 
 .tc-tour-panel-controls .tc-tour-panel-list-button.tc-selected {
-	color: <<colour background>>;
-	fill: <<colour background>>;
-	background: <<color primary>>;
+	color: <<colour tour-chooser-button-selected-foreground>>;
+	fill: <<colour tour-chooser-button-selected-foreground>>;
+	background: <<color tour-chooser-button-selected-background>>;
 }
 
 .tc-tour-panel-controls .tc-tour-panel-list-button:hover {
-	background: <<colour muted-foreground>>;
-	color: <<colour background>>;
+	background: <<colour tour-chooser-button-hover-background>>;
+	color: <<colour tour-chooser-button-hover-foreground>>;
 }
 
 .tc-tour-panel-controls .tc-popup .tc-drop-down {
 	font-size: 1em;
-	color: <<colour very-muted-foreground>>;
+	color: <<colour tour-chooser-dropdown-foreground>>;
 	min-width: auto;
 }
 
 .tc-tour-panel-chooser-item {
-	border: 1px solid <<colour muted-foreground>>;
-	background: <<colour background>>;
-	color: <<colour foreground>>;
+	border: 1px solid <<colour tour-chooser-item-border>>;
+	background: <<colour tour-chooser-item-background>>;
+	color: <<colour tour-chooser-item-foreground>>;
 	padding: 4px 4px 4px 8px;
 	margin: 12px 0;
 	border-radius: 12px;
-	box-shadow: 3px 3px 5px <<colour muted-foreground>>;
+	box-shadow: 3px 3px 5px <<colour tour-chooser-item-shadow>>;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -87,15 +87,15 @@ tags: $:/tags/Stylesheet
 	font-size: 0.7em;
 	vertical-align: baseline;
 	border-radius: 1em;
-	background: <<colour download-background>>;
-	color: <<colour background>>;
-	fill: <<colour background>>;
+	background: <<colour tour-chooser-item-start-background>>;
+	color: <<colour tour-chooser-item-start-foreground>>;
+	fill: <<colour tour-chooser-item-start-foreground>>;
 	text-transform: uppercase;
 }
 
 .tc-tour-panel-chooser-wrapper button:hover {
-	background: <<colour primary>>;
-	color: <<colour background>>;
+	background: <<colour tour-chooser-item-start-hover-background>>;
+	color: <<colour tour-chooser-item-start-hover-foreground>>;
 }
 
 .tc-tour-panel-fullscreen .tc-tour-panel-controls {
@@ -105,7 +105,7 @@ tags: $:/tags/Stylesheet
 	left: 0;
 	right: 0;
 	padding: 4px;
-	color: <<colour muted-foreground>>;
+	color: <<colour tour-fullscreen-controls-foreground>>;
 }
 
 .tc-tour-panel .tc-tour-panel-banner-image {
@@ -137,14 +137,14 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tour-task {
-	background: <<colour download-background>>;
-	color: <<colour download-foreground>>;
+	background: <<colour tour-step-task-background>>;
+	color: <<colour tour-step-task-foreground>>;
 	padding: 0.5em;
 	border-radius: 1em;
 }
 
 .tc-tour-task svg {
-	fill: <<colour download-foreground>>;
+	fill: <<colour tour-step-task-foreground>>;
 	vertical-align: middle;
 	width: 1.2em;
 	height: 1.2em;
