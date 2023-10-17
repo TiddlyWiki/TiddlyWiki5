@@ -12,10 +12,9 @@ tags: $:/tags/Stylesheet
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	<<box-shadow "0px 0px 5px rgba(0, 0, 0, 0.3)">>
-	box-shadow: inset 0 -40px 40px rgb(0 0 0 / 6%), inset 0 25px 10px rgb(0 0 0 / 9%), 0 5px 6px 5px rgb(0 0 0 / 7%);
-	border: 1px solid #ff8;
-	background: #ffa;
-	border-radius: 0em;
+	border: 1px solid #228877;
+	background: #cbfff8;
+	border-radius: 8px;
 	padding: 1em;
 	margin: 0.5em;
 	z-index: 2000;
@@ -40,6 +39,7 @@ tags: $:/tags/Stylesheet
 	border: none;
 	background: <<colour page-background>>;
 	margin: 0;
+	border-radius: none;
 }
 
 .tc-tour-panel-controls .tc-tour-panel-list-button {
