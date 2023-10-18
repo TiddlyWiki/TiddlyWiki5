@@ -820,11 +820,26 @@ exports.hashString = function(str) {
 };
 
 /*
+Base64 utility functions that work in either browser or Node.js
+*/
+if(typeof window !== 'undefined') {
+	exports.btoa = window.btoa;
+	exports.atob = window.atob;
+} else {
+	exports.btoa = function(binstr) {
+		return Buffer.from(binstr, 'binary').toString('base64');
+	}
+	exports.atob = function(b64) {
+		return Buffer.from(b64, 'base64').toString('binary');
+	}
+}
+
+/*
 Decode a base64 string
 */
 exports.base64Decode = function(string64,binary,urlsafe) {
-	var encoded = urlsafe ? string64.replace('_','/').replace('-','+') : string64;
-	if(binary) return window.atob(encoded)
+	var encoded = urlsafe ? string64.replaceAll('_','/').replaceAll('-','+') : string64;
+	if(binary) return exports.atob(encoded)
 	else return base64utf8.base64.decode.call(base64utf8,encoded);
 };
 
@@ -832,15 +847,13 @@ exports.base64Decode = function(string64,binary,urlsafe) {
 Encode a string to base64
 */
 exports.base64Encode = function(string64,binary,urlsafe) {
-	if(binary) {
-		var encoded = window.btoa(string64);
-		if(urlsafe) {
-			encoded = encoded.replace('+','-').replace('/','_');
-		}
-		return encoded;
-	} else {
-		return base64utf8.base64.encode.call(base64utf8,string64);
+	var encoded;
+	if(binary) encoded = exports.btoa(string64);
+	else encoded = base64utf8.base64.encode.call(base64utf8,string64);
+	if(urlsafe) {
+		encoded = encoded.replaceAll('+','-').replaceAll('/','_');
 	}
+	return encoded;
 };
 
 /*
