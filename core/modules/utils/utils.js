@@ -838,7 +838,7 @@ if(typeof window !== 'undefined') {
 Decode a base64 string
 */
 exports.base64Decode = function(string64,binary,urlsafe) {
-	var encoded = urlsafe ? string64.replaceAll('_','/').replaceAll('-','+') : string64;
+	var encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
 	if(binary) return exports.atob(encoded)
 	else return base64utf8.base64.decode.call(base64utf8,encoded);
 };
@@ -851,7 +851,7 @@ exports.base64Encode = function(string64,binary,urlsafe) {
 	if(binary) encoded = exports.btoa(string64);
 	else encoded = base64utf8.base64.encode.call(base64utf8,string64);
 	if(urlsafe) {
-		encoded = encoded.replaceAll('+','-').replaceAll('/','_');
+		encoded = encoded.replace(/\+/g,'-').replace(/\//g,'_');
 	}
 	return encoded;
 };
