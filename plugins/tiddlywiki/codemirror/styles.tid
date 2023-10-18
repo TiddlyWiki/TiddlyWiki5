@@ -56,7 +56,8 @@ name: tiddlywiki
   rendering-intent: auto;
 }
 
-.tc-tiddler-frame .tc-tiddler-editor .tc-edit-texteditor {
+.tc-tiddler-frame .tc-tiddler-editor .tc-edit-texteditor,
+.tc-tiddler-frame .tc-tiddler-editor .tc-tiddler-preview-preview {
 	overflow: auto;
 }
 
