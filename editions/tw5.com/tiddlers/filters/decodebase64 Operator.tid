@@ -1,6 +1,7 @@
 caption: decodebase64
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input with base 64 decoding applied
+op-suffix: optional: `binary` to produce binary output, `urlsafe` for URL-safe input
 op-parameter: 
 op-parameter-name: 
 op-purpose: apply base 64 decoding to a string
@@ -11,6 +12,10 @@ from-version: 5.2.6
 
 See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. TiddlyWiki uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
 
-The input strings must be base64 encoded. The output strings are binary data.
+The input strings must be base64 encoded. The output strings are the text (or binary data) decoded from base64 format.
+
+The optional `binary` suffix, if present, changes how the input is processed. The input is normally assumed to be [[UTF-8|https://developer.mozilla.org/en-US/docs/Glossary/UTF-8]] text encoded in base64 form (such as what the <<.op "encodebase64">> operator produces), so only certain byte sequences in the input are valid. If the input is binary data encoded in base64 format (such as an image, audio file, video file, etc.), then use the optional `binary` suffix, which will allow all byte sequences. Note that the output will then be binary, ''not'' text, and should probably not be passed into further filter operators.
+
+The optional `urlsafe` suffix, if present, causes the decoder to assume that the base64 input uses `-` and `_` instead of `+` and `/` for the 62nd and 63rd characters of the base64 "alphabet", which is usually referred to as "URL-safe base64" or "bae64url".
 
 <<.operator-examples "decodebase64">>
