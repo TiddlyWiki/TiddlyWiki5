@@ -187,7 +187,7 @@ HttpClientRequest.prototype.send = function(callback) {
 					for (var i=0; i<len; i++) {
 						binary += String.fromCharCode(bytes[i]);
 					}
-					resultVariables.data = window.btoa(binary);
+					resultVariables.data = $tw.utils.base64Encode(binary,true);
 				}
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
 					status: completionCode,
