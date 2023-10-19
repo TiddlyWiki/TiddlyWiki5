@@ -25,6 +25,21 @@ tags: $:/tags/Stylesheet
 	margin: 0 1em 0 0;
 }
 
+.tc-tour-panel-navigation .tc-btn-big-green.tc-tour-panel-navigation-back {
+	background: <<colour tour-navigation-buttons-back-background>>;
+	color: <<colour tour-navigation-buttons-back-foreground>>;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green.tc-tour-panel-navigation-next {
+	background: <<colour tour-navigation-buttons-next-background>>;
+	color: <<colour tour-navigation-buttons-next-foreground>>;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green.tc-tour-panel-navigation-hint {
+	background: <<colour tour-navigation-buttons-hint-background>>;
+	color: <<colour tour-navigation-buttons-hint-foreground>>;
+}
+
 .tc-tour-panel-navigation .tc-btn-big-green:hover {
 	color: <<colour tour-navigation-buttons-hover-foreground>>;
 	background: <<colour tour-navigation-buttons-hover-background>>;
@@ -96,6 +111,13 @@ tags: $:/tags/Stylesheet
 .tc-tour-panel-chooser-wrapper button:hover {
 	background: <<colour tour-chooser-item-start-hover-background>>;
 	color: <<colour tour-chooser-item-start-hover-foreground>>;
+}
+
+.tc-tour-panel-fullscreen h1 {
+	background: <<colour tour-step-heading-background>>;
+	padding: 0.25em;
+	margin: -0.25em;
+	border-radius: 4px;
 }
 
 .tc-tour-panel-fullscreen .tc-tour-panel-controls {

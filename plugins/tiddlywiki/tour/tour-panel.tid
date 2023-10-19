@@ -7,13 +7,13 @@ tags: $:/tags/PageTemplate
 \procedure tv-action-refresh-policy() always
 <div class="tc-tour-panel-navigation">
 	<%if [function[tour-is-not-first-step]] %>
-		<$button class="tc-btn-big-green" style="background-color: red;">
+		<$button class="tc-btn-big-green tc-tour-panel-navigation-back">
 			<<tour-previous-step>>
 			back
 		</$button>
 	<%endif%>
 	<%if [function[tour-is-not-last-step]] %>
-		<$button class="tc-btn-big-green" style="background-color: purple;">
+		<$button class="tc-btn-big-green tc-tour-panel-navigation-next">
 			<<tour-next-step>>
 			next
 		</$button>
@@ -38,7 +38,7 @@ tags: $:/tags/PageTemplate
 <$transclude tiddler=<<currentTourStep>> mode="block"/>
 <%if [{$:/state/tour/step}has[selector]] %>
 	<div class="tc-tour-panel-navigation">
-		<$button class="tc-btn-big-green" style="background-color: red;">
+		<$button class="tc-btn-big-green tc-tour-panel-navigation-hint">
 			<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
 			show me a hint
 		</$button>
