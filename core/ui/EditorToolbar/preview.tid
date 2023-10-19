@@ -10,7 +10,7 @@ shortcuts: ((preview))
 
 \whitespace trim
 <$let
-	edit-preview-state={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualify "$:/state/showeditpreview">] }}}
+	edit-preview-state={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] }}}
 >
 <$reveal state=<<edit-preview-state>> type="match" text="yes" tag="span">
 {{$:/core/images/preview-open}}
