@@ -118,7 +118,7 @@ tags: $:/tags/Macro
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item" >
     <li class=<<toc-item-class>>>
       <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-          <$list filter="[all[current]tagging[]$sort$limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
+          <$list filter="[all[current]tagging[]$sort$limit[1]]  -[subfilter<__exclude__>]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
           <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
             <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
             <$transclude tiddler=<<toc-closed-icon>> />
@@ -145,7 +145,7 @@ tags: $:/tags/Macro
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-      <$list filter="[all[current]tagging[]$sort$limit[1]]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
+      <$list filter="[all[current]tagging[]$sort$limit[1]] -[subfilter<__exclude__>]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
         <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
             <$transclude tiddler=<<toc-closed-icon>> />
