@@ -198,19 +198,19 @@ function updateLocationHash(options) {
 	// Assemble the location hash
 	switch(options.updateAddressBar) {
 		case "permalink":
-			$tw.locationHash = "#" + $tw.utils.encodeTWURIComponent(targetTiddler);
+			$tw.locationHash = "#" + $tw.utils.encodeTiddlerTitle(targetTiddler);
 			break;
 		case "permaview":
-			$tw.locationHash = "#" + $tw.utils.encodeTWURIComponent(targetTiddler) + ":" + $tw.utils.encodeTWURIComponent($tw.utils.stringifyList(storyList));
+			$tw.locationHash = "#" + $tw.utils.encodeTiddlerTitle(targetTiddler) + ":" + $tw.utils.encodeFilterPath($tw.utils.stringifyList(storyList));
 			break;
 	}
 	// Copy URL to the clipboard
 	switch(options.copyToClipboard) {
 		case "permalink":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + $tw.utils.encodeTWURIComponent(targetTiddler));
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + $tw.utils.encodeTiddlerTitle(targetTiddler));
 			break;
 		case "permaview":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + $tw.utils.encodeTWURIComponent(targetTiddler) + ":" + $tw.utils.encodeTWURIComponent($tw.utils.stringifyList(storyList)));
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + $tw.utils.encodeTiddlerTitle(targetTiddler) + ":" + $tw.utils.encodeFilterPath($tw.utils.stringifyList(storyList)));
 			break;
 	}
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
