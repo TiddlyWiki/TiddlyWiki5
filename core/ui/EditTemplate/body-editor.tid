@@ -1,5 +1,8 @@
 title: $:/core/ui/EditTemplate/body/editor
 
+\function type-match()
+[all[tiddlers+shadows]removeprefix[$:/config/EditorTypeMappings/]] :map[<..currentTiddler>get[type]!match<currentTiddler>then[yes]else[no]] [{!!type}is[blank]then[no]] +[sort[]limit[1]match[yes]]
+\end
 \whitespace trim
 
 <$edit
@@ -8,7 +11,7 @@ title: $:/core/ui/EditTemplate/body/editor
   class="tc-edit-texteditor tc-edit-texteditor-body"
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
   tabindex={{$:/config/EditTabIndex}}
-  focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}
+  focus={{{ [{$:/config/AutoFocus}!match[text]then[false]] ~[function[type-match]match[yes]then[false]] ~[{$:/config/AutoFocus}match[text]then[true]] }}}
   cancelPopups="yes"
   fileDrop={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}}
 
