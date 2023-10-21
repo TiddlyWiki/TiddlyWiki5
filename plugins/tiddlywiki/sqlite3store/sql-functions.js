@@ -43,103 +43,191 @@ $tw.SqlFunctions = function(options) {
 	*/
 	self.db.exec({
 		sql: `
+			DROP TABLE IF EXISTS plugins;
+			CREATE TABLE plugins (
+				plugintitle TEXT NOT NULL,
+				priority INTEGER NOT NULL,
+				PRIMARY KEY(plugintitle)
+			);
 			DROP TABLE IF EXISTS tiddlers;
 			CREATE TABLE tiddlers (
 				title TEXT NOT NULL ${COLLATION_CLAUSE},
-				shadow INTEGER NOT NULL CHECK (shadow = 0 OR shadow = 1), -- 0=real tiddler, 1=shadow tiddler
-				shadowsource TEXT,
+				plugintitle TEXT, -- or NULL for non-shadow tiddlers
 				meta TEXT NOT NULL,
 				text TEXT NOT NULL,
-				PRIMARY KEY(title,shadow)
+				PRIMARY KEY(title,plugintitle)
 			);
 			CREATE INDEX tiddlers_title_index ON tiddlers(title);
-			DROP TABLE IF EXISTS tags;
-			CREATE TABLE tags (
-				tag_id INTEGER PRIMARY KEY,
-				tag TEXT NOT NULL
-			);
-			DROP TABLE IF EXISTS tiddler_tags;
-			CREATE TABLE tiddler_tags (
-				tiddler_title TEXT NOT NULL,
-				tiddler_shadow INTEGER NOT NULL,
-				tag_id INTEGER NOT NULL,
-				FOREIGN KEY (tiddler_title, tiddler_shadow) REFERENCES tiddlers (title, shadow) ON DELETE CASCADE ON UPDATE CASCADE,
-				FOREIGN KEY (tag_id) REFERENCES tags (tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
-				PRIMARY KEY (tiddler_title, tiddler_shadow, tag_id)
+			DROP TABLE IF EXISTS titles;
+			CREATE TABLE titles (
+				title TEXT NOT NULL ${COLLATION_CLAUSE},
+				plugintitle TEXT, -- or NULL for non-shadow tiddlers
+				PRIMARY KEY(title)
 			);
 		`
 	});
 	/*
-	Save a tiddler. shadowSource should be falsy for ordinary tiddlers, or the source plugin title for shadow tiddlers
+	Debugging
+	*/
+	var statementLogTiddlersTable = self.db.prepare("select title, plugintitle, meta, text from tiddlers order by title, plugintitle;"),
+		statementLogPluginsTable = self.db.prepare("select plugintitle, priority from plugins order by plugintitle;"),
+		statementLogTitlesTable = self.db.prepare("select title, plugintitle from titles order by title;");
+	function sqlLogTable(statement) {
+		let resultRows = [];
+		while(statement.step()) {
+			var row = statement.get({});
+			resultRows.push(row);
+		}
+		statement.reset();
+		return resultRows;
+	}
+	this.sqlLogTables = function() {
+		console.log("tiddlers",sqlLogTable(statementLogTiddlersTable));
+		console.log("plugins",sqlLogTable(statementLogPluginsTable));
+		console.log("titles",sqlLogTable(statementLogTitlesTable));
+	};
+	/*
+	Set the plugin priorities
+	*/
+	this.sqlSetPluginPriorities = function(prioritisedPluginTitles) {
+		self.db.exec({
+			sql: "DELETE FROM plugins"
+		});
+		let priority = 1;
+		for(const plugintitle of prioritisedPluginTitles) {
+			self.db.exec({
+				sql: "insert or replace into plugins (plugintitle, priority) values ($plugintitle, $priority)",
+				bind: {
+					$plugintitle: plugintitle,
+					$priority: priority++
+				}
+			});	
+		}
+	};
+	/*
+	Save a tiddler
 	*/
 	var querySaveTiddlerTableTiddlers = self.db.prepare(`
 	-- Insert the new tiddler into the tiddlers table
-	INSERT OR REPLACE INTO tiddlers (title, shadow, shadowsource, meta, text)
-	VALUES ($title, $shadow, $shadowsource, $meta, $text);
+	INSERT OR REPLACE INTO tiddlers (title, plugintitle, meta, text)
+	VALUES ($title, $plugintitle, $meta, $text);
 	`);
-	var querySaveTiddlerTableTags = self.db.prepare(`
-	-- Parse and insert tags from the $tags JSON array
-	WITH tag_values AS (
-	  SELECT json_each.value AS tag
-	  FROM json_each($tags)
-	)
-	INSERT INTO tags (tag)
-	SELECT DISTINCT tag
-	FROM tag_values
-	WHERE tag NOT IN (
-	  SELECT tag
-	  FROM tags
-	);
+	var querySaveTiddlerTableTitles = self.db.prepare(`
+	-- Insert the new title into the titles table
+	INSERT OR REPLACE INTO titles (title, plugintitle)
+	SELECT
+		t.title,
+		CASE
+			WHEN t.null_count > 0 THEN NULL
+			ELSE t.max_priority_plugintitle
+		END AS plugintitle
+	FROM (
+		SELECT
+			t.title,
+			SUM(CASE WHEN t.plugintitle IS NULL THEN 1 ELSE 0 END) AS null_count,
+			MAX(p.priority) AS max_priority,
+			FIRST_VALUE(t.plugintitle) OVER (PARTITION BY t.title ORDER BY p.priority DESC) AS max_priority_plugintitle
+		FROM tiddlers t
+		LEFT JOIN plugins p ON t.plugintitle = p.plugintitle
+		WHERE t.title = $title
+		GROUP BY t.title
+	) AS t;
 	`);
-	var querySaveTiddlerTableTiddlerTags = self.db.prepare(`	
-	-- Associate the new tiddler with the tags in the tiddler_tags table
-	WITH tag_values AS (
-	  SELECT json_each.value AS tag
-	  FROM json_each($tags)
-	)
-	INSERT OR IGNORE INTO tiddler_tags (tiddler_title, tiddler_shadow, tag_id)
-	SELECT $title, $shadow, tags.tag_id
-	FROM tag_values
-	JOIN tags ON tag_values.tag = tags.tag;
-	`);
-	this.sqlSaveTiddler = function(tiddlerFields,shadowSource) {
-		var tags = JSON.stringify($tw.utils.parseStringArray(tiddlerFields.tags) || []);
+	this.sqlSaveTiddler = function(tiddlerFields,plugintitle) {
 		querySaveTiddlerTableTiddlers.bind({
 			$title: tiddlerFields.title,
-			$shadow: shadowSource ? 1 : 0,
-			$shadowsource: shadowSource ? shadowSource : null,
+			$plugintitle: plugintitle || null,
 			$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
 			$text: tiddlerFields.text || ""
 		});
 		querySaveTiddlerTableTiddlers.step();
 		querySaveTiddlerTableTiddlers.reset();
-		querySaveTiddlerTableTags.bind({
-			$tags: tags
-		});
-		querySaveTiddlerTableTags.step();
-		querySaveTiddlerTableTags.reset();
-		querySaveTiddlerTableTiddlerTags.bind({
+		querySaveTiddlerTableTitles.bind({
 			$title: tiddlerFields.title,
-			$shadow: shadowSource ? 1 : 0,
-			$tags: tags
 		});
-		querySaveTiddlerTableTiddlerTags.step();
-		querySaveTiddlerTableTiddlerTags.reset();
+		querySaveTiddlerTableTitles.step();
+		querySaveTiddlerTableTitles.reset();
 	};
+	/*
+	Delete a tiddler
+	*/
+	var statementDeleteTiddlerDeleteFromTiddlers = self.db.prepare(`
+	DELETE FROM tiddlers
+	WHERE title = $title AND plugintitle IS NULL;
+	`);
+	var statementDeleteTiddlerFindShadow = self.db.prepare(`
+	WITH HighestPriority AS (
+		SELECT
+			plugintitle,
+			MAX(priority) AS max_priority
+		FROM
+			plugins
+		WHERE
+			plugintitle IS NOT NULL
+		GROUP BY
+			plugintitle
+	)
+	SELECT
+		t.title,
+		t.plugintitle,
+		t.meta,
+		t.text
+	FROM
+		tiddlers AS t
+	JOIN
+		HighestPriority AS ho ON t.plugintitle = ho.plugintitle
+	WHERE
+		t.title = $title;
+	`);
 	this.sqlDeleteTiddler = function(title) {
-		self.db.exec({
-			sql: "delete from tiddlers where title = $title and shadow = 0",
-			bind: {
-				$title: title
-			}
+		// Delete the tiddler from the tiddlers table
+		statementDeleteTiddlerDeleteFromTiddlers.bind({
+			$title: title
 		});
+		statementDeleteTiddlerDeleteFromTiddlers.step();
+		statementDeleteTiddlerDeleteFromTiddlers.reset();
+		// Find any corresponding shadow tiddler
+		statementDeleteTiddlerFindShadow.bind({
+			$title: title
+		});
+		if(statementDeleteTiddlerFindShadow.step()) {
+			// There is a corresponding shadow
+			var row = statementDeleteTiddlerFindShadow.get({});
+			// Replace the tiddler with the shadow
+			self.db.exec({
+				sql: "insert or replace into titles (title, plugintitle) values ($title, $plugintitle)",
+				bind: {
+					$title: title,
+					$plugintitle: row.plugintitle
+				}
+			});
+		} else {
+			// There is no corresponding shadow
+			// Delete the tiddler
+			self.db.exec({
+				sql: "delete from titles where title = $title",
+				bind: {
+					$title: title
+				}
+			});
+		}
+		statementDeleteTiddlerFindShadow.reset();
 	};
+	/*
+	Remove all shadow tiddlers
+	*/
 	this.sqlClearShadows = function() {
 		self.db.exec({
-			sql: "delete from tiddlers where shadow = 1"
+			sql: "delete from tiddlers where plugintitle is not null"
+		});
+		self.db.exec({
+			sql: "delete from titles where plugintitle is not null"
 		});
 	};
-	var statementTiddlerExists = self.db.prepare(`select title from tiddlers where title = $title and shadow = 0;`)
+	/*
+	Check whether a tiddler exists
+	*/
+	var statementTiddlerExists = self.db.prepare(`select title from titles where title = $title and plugintitle is null;`)
 	this.sqlTiddlerExists = function(title) {
 		statementTiddlerExists.bind({
 			$title: title
@@ -152,7 +240,16 @@ $tw.SqlFunctions = function(options) {
 			return false;
 		}
 	};
-	var statementGetTiddler = self.db.prepare(`select title, shadow, meta, text from tiddlers where title = $title order by shadow`);
+	/*
+	Get the value of a tiddler
+	*/
+	var statementGetTiddler = self.db.prepare(`
+	select t.title, ti.meta, ti.text
+	FROM titles AS t
+	JOIN tiddlers AS ti
+	ON t.title = ti.title AND (t.plugintitle = ti.plugintitle OR (t.plugintitle IS NULL AND ti.plugintitle IS NULL))
+	WHERE t.title = $title;
+	`);
 	this.sqlGetTiddler = function(title) {
 		statementGetTiddler.bind({
 			$title: title
@@ -166,7 +263,30 @@ $tw.SqlFunctions = function(options) {
 			return undefined;
 		}
 	};
-	var statementGetShadowSource = self.db.prepare(`select title, shadowsource from tiddlers where title = $title and shadow = 1`);
+	/*
+	Get the plugin from which a tiddler came
+	*/
+	var statementGetShadowSource = self.db.prepare(`
+	WITH HighestPriority AS (
+		SELECT
+			plugintitle,
+			MAX(priority) AS max_priority
+		FROM
+			plugins
+		WHERE
+			plugintitle IS NOT NULL
+		GROUP BY
+			plugintitle
+	)
+	SELECT
+		t.plugintitle
+	FROM
+		tiddlers AS t
+	JOIN
+		HighestPriority AS ho ON t.plugintitle = ho.plugintitle
+	WHERE
+		t.title = $title;
+	`);
 	this.sqlGetShadowSource = function(title) {
 		statementGetShadowSource.bind({
 			$title: title
@@ -174,13 +294,16 @@ $tw.SqlFunctions = function(options) {
 		if(statementGetShadowSource.step()) {
 			var row = statementGetShadowSource.get({});
 			statementGetShadowSource.reset();
-			return row.shadowsource;
+			return row.plugintitle;
 		} else {
 			statementGetShadowSource.reset();
-			return undefined;
+			return null;
 		}
 	};
-	var statementAllTitles = self.db.prepare(`select title from tiddlers where shadow = 0 order by title ${COLLATION_CLAUSE}`);
+	/*
+	Get all titles
+	*/
+	var statementAllTitles = self.db.prepare(`select title from titles order by title ${COLLATION_CLAUSE}`);
 	this.sqlAllTitles = function() {
 		let resultRows = [];
 		while(statementAllTitles.step()) {
@@ -190,7 +313,15 @@ $tw.SqlFunctions = function(options) {
 		statementAllTitles.reset();
 		return resultRows;
 	};
-	var statementAllShadowTitles = self.db.prepare(`select title from tiddlers where shadow = 1 order by title ${COLLATION_CLAUSE}`);
+	/*
+	All shadow titles
+	*/
+	var statementAllShadowTitles = self.db.prepare(`
+	SELECT title
+	FROM tiddlers
+	WHERE plugintitle IS NOT NULL
+	ORDER BY title ${COLLATION_CLAUSE}
+	`);
 	this.sqlAllShadowTitles = function() {
 		let resultRows = [];
 		while(statementAllShadowTitles.step()) {
@@ -200,7 +331,16 @@ $tw.SqlFunctions = function(options) {
 		statementAllShadowTitles.reset();
 		return resultRows;
 	};
-	var statementEachTiddler = self.db.prepare(`select title, meta, text from tiddlers where shadow = 0 order by title ${COLLATION_CLAUSE}`);
+	/*
+	Iterate through each tiddler
+	*/
+	var statementEachTiddler = self.db.prepare(`
+	SELECT t.title, ti.meta, ti.text
+	FROM titles AS t
+	LEFT JOIN tiddlers AS ti ON t.title = ti.title AND t.plugintitle IS NULL AND ti.plugintitle IS NULL
+	WHERE t.plugintitle IS NULL
+	ORDER BY t.title ${COLLATION_CLAUSE}
+	`);
 	this.sqlEachTiddler = function(callback) {
 		while(statementEachTiddler.step()) {
 			var row = statementEachTiddler.get({}),
@@ -210,31 +350,14 @@ $tw.SqlFunctions = function(options) {
 		statementEachTiddler.reset();
 	};
 	/*
-	We get all the rows where either the shadow field is 1 and there is no row with the same title and
-	a shadow field value of zero, or the shadow field is zero and there also exists a row with the same
-	title and a shadow field value of 1
+	Iterate through each tiddler that is a shadow (including overridden shadows)
 	*/
 	var statementEachShadowTiddler = self.db.prepare(`
-			select title, meta, text
-			from tiddlers t1
-			where t1.shadow = 1
-				and not exists (
-					select 1
-					from tiddlers t2
-					where t2.title = t1.title
-						and t2.shadow = 0
-				)
-		union
-			select title, meta, text
-			from tiddlers t3
-			where t3.shadow = 0
-				and exists (
-					select 1
-					from tiddlers t4
-					where t4.title = t3.title
-						and t4.shadow = 1
-				)
-		order by title ${COLLATION_CLAUSE};
+	SELECT DISTINCT t.title, td.meta, td.text
+	FROM titles AS t
+	JOIN tiddlers AS td ON t.title = td.title
+	WHERE td.plugintitle IS NOT NULL
+	ORDER BY t.title ${COLLATION_CLAUSE};
 	`);
 	this.sqlEachShadowTiddler = function(callback) {
 		while(statementEachShadowTiddler.step()) {
@@ -245,128 +368,47 @@ $tw.SqlFunctions = function(options) {
 		statementEachShadowTiddler.reset();
 	};
 	/*
-	Return all the tiddler rows that have the "shadow" field set to 1, but only where the "title"
-	field doesn't appear in a row with the "shadow" field set to 0
+	Iterate all tiddlers, and then the shadows
 	*/
-	var statementEachTiddlerPlusShadows = self.db.prepare(`
-			select title,meta,text from tiddlers t1
-			where t1.shadow = 1
-				and not exists (
-					select 1
-					from tiddlers t2
-					where t2.title = t1.title
-						and t2.shadow = 0
-					)
-			order by t1.title ${COLLATION_CLAUSE};
-		`);
 	this.sqlEachTiddlerPlusShadows = function(callback) {
-		self.sqlEachTiddler(callback);
-		while(statementEachTiddlerPlusShadows.step()) {
-			var row = statementEachTiddlerPlusShadows.get({});
-			var tiddlerFields = Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
-			callback(tiddlerFields,row.title);	
-		}
-		statementEachTiddlerPlusShadows.reset();
-	};
-	/*
-	Return all rows where the shadow field is zero, and there is no row with the same title and a shadow field of 1
-	*/
-	var statementEachShadowPlusTiddlers = self.db.prepare(`
-		select title,meta,text from tiddlers t1
-		where t1.shadow = 0
-			and not exists (
-				select 1
-				from tiddlers t2
-				where t2.title = t1.title
-					and t2.shadow = 1
-				)
-		order by t1.title ${COLLATION_CLAUSE};
-	`);
-	this.sqlEachShadowPlusTiddlers = function(callback) {
-		self.sqlEachShadowTiddler(callback);
-		while(statementEachShadowPlusTiddlers.step()) {
-			var row = statementEachShadowPlusTiddlers.get({});
-			var tiddlerFields = Object.assign({},JSON.parse(row.meta),{title: row.title, text: row.text});
-			callback(tiddlerFields,row.title);	
-		}
-		statementEachShadowPlusTiddlers.reset();
-	};
-	/*
-	Return all tiddlers with a given tag. Method determines the default ordering (before the list ordering fields are observed):
-		each: just ordinary tiddlers
-		eachShadow: just shadow tiddlers
-
-	*/
-	var statementGetTiddlersWithTag = self.db.prepare(`
-	SELECT t.title
-	FROM tiddlers AS t
-	JOIN tiddler_tags AS tt ON t.title = tt.tiddler_title AND t.shadow = tt.tiddler_shadow
-	WHERE tt.tag_id = (SELECT tag_id FROM tags WHERE tag = $tag)
-	  AND (t.shadow = 0 OR NOT EXISTS (SELECT 1 FROM tiddlers WHERE title = t.title AND shadow = 0))
-	GROUP BY t.title, t.shadow 
-	ORDER BY t.title ${COLLATION_CLAUSE} ASC, t.shadow ASC;
-	`);
-	this.sqlGetTiddlersWithTag = function(tag,method) {
-		statementGetTiddlersWithTag.bind({
-			$tag: tag
+		const titles = Object.create(null);
+		self.sqlEachTiddler(function(fields,title) {
+			titles[title] = true;
+			callback(fields,title);
 		});
-		var resultRows = [];
-		while(statementGetTiddlersWithTag.step()) {
-			var row = statementGetTiddlersWithTag.get({});
-			resultRows.push(row.title);
-		}
-		statementGetTiddlersWithTag.reset();
-		return resultRows;
-	};
-	/*
-	An optimisation of the filter [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]]
-	*/
-	var statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength = self.db.prepare(`
-		SELECT MAX(LENGTH(name)) AS max_length
-		FROM (
-		SELECT title, shadow, JSON_EXTRACT(meta, '$.name') AS name
-		FROM tiddlers
-		WHERE title LIKE '$:/language/Docs/Types/%'
-		AND (shadow = 0 OR (shadow = 1 AND NOT EXISTS (
-			SELECT 1
-			FROM tiddlers AS t2
-			WHERE t2.title = tiddlers.title
-			AND t2.shadow = 0
-		)))
-		);
-	`);
-	this.sqlQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength = function() {
-		// We return a filter operation function that actually performs the query
-		return function(results,source,widget) {
-			var result = 0;
-			if(statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength.step()) {
-				var row = statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength.get({});
-				result = row.max_length;
+		self.sqlEachShadowTiddler(function(fields,title) {
+			if(!titles[title]) {
+				callback(fields,title);
 			}
-			statementQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength.reset();
-			results.clear();
-			results.push(result.toString());
-		};
+		});
 	};
 	/*
-	Debugging
+	Iterate all shadows, and then the tiddlers
 	*/
-	var statementLogTiddlerTable = self.db.prepare("select title, shadow, meta, text from tiddlers order by title,shadow;"),
-		statementLogTagsTable = self.db.prepare("select tag_id, tag from tags order by tag;"),
-		statementLogTiddlerTagsTable = self.db.prepare("select tiddler_title, tiddler_shadow, tag_id from tiddler_tags order by tiddler_title, tiddler_shadow;");
-	function sqlLogTable(statement) {
-		let resultRows = [];
-		while(statement.step()) {
-			var row = statement.get({});
-			resultRows.push(row);
-		}
-		statement.reset();
-		return resultRows;
-	}
-	this.sqlLogTables = function() {
-		console.log("tiddlers",sqlLogTable(statementLogTiddlerTable));
-		console.log("tags",sqlLogTable(statementLogTagsTable));
-		console.log("tiddler tags",sqlLogTable(statementLogTiddlerTagsTable));
+	this.sqlEachShadowPlusTiddlers = function(callback) {
+		const titles = Object.create(null);
+		self.sqlEachShadowTiddler(function(fields,title) {
+			titles[title] = true;
+			callback(fields,title);
+		});
+		self.sqlEachTiddler(function(fields,title) {
+			if(!titles[title]) {
+				callback(fields,title);
+			}
+		});
+	};
+	/*
+	Return all tiddlers with a given tag
+	*/
+	this.sqlGetTiddlersWithTag = function(tag,method) {
+		const titles = [];
+		self.sqlEachShadowPlusTiddlers(function(fields,title) {
+			var tags = $tw.utils.parseStringArray(fields.tags || "");
+			if(tags.indexOf(tag) !== -1) {
+				titles.push(title);
+			}
+		});
+		return titles;
 	};
 };
 

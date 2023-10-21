@@ -54,6 +54,10 @@ self.sqlite3InitModule().then((sqlite3)=>{
 	$tw.sqlConsole = new $tw.SqlConsole();
 	// Get version numbers
 	console.log("sqlite3 version",capi.sqlite3_libversion());
+	// Run tests
+	if($tw.testSqlFunctions) {
+		$tw.testSqlFunctions();
+	}
 	// Boot TiddlyWiki
 	$tw.boot.boot();
 });

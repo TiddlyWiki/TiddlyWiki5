@@ -7,5 +7,6 @@ tags: $:/tags/RawMarkupWikified
 <script>`
 {{$:/plugins/tiddlywiki/sqlite3store/suppress-boot.js}}
 {{$:/plugins/tiddlywiki/sqlite3store/sql-functions.js}}
+{{$:/plugins/tiddlywiki/sqlite3store/test-sql-functions.js}}
 {{$:/plugins/tiddlywiki/sqlite3store/sql-wiki-store.js}}
 `</script>`

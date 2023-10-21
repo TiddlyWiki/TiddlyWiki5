@@ -352,6 +352,7 @@ $tw.Wiki = function(options) {
 		});
 		// Now go through the plugins in ascending order and assign the shadows
 		self.sqlFunctions.sqlClearShadows();
+		self.sqlFunctions.sqlSetPluginPriorities(pluginTiddlers.map(tiddler => tiddler.fields.title));
 		eachObj(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
 			if(hop(pluginInfo,tiddler.fields.title)) {
@@ -372,11 +373,11 @@ $tw.Wiki = function(options) {
 	};
 
 	this.optimiseFilter = function(filterString) {
-		switch($tw.utils.trim(filterString)) {
-			case "[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]]":
-				return [this.sqlFunctions.sqlQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength()];
-				break;
-		}
+		// switch($tw.utils.trim(filterString)) {
+		// 	case "[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]]":
+		// 		return [this.sqlFunctions.sqlQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength()];
+		// 		break;
+		// }
 		return undefined;
 	};
 
