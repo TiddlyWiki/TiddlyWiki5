@@ -17,18 +17,16 @@ description: Under development
 ```
 <% if [<animal>match[Elephant]] %>
   It is an elephant
+<% elseif [<animal>match[Giraffe]] %>
+	It is a giraffe
 <% else %>
-  <% if [<animal>match[Giraffe]] %>
-    It is a giraffe
-  <% else %>
-    It is completely unknown
-  <% endif %>
+	It is completely unknown
 <% endif %>
 ```
 
 !! Explicit Templates for the ListWidget
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7784">> support for `<$list-template>` and `<$list-empty>` as immediate children of the <<.wid "ListWidget">> widget to specify the list item template and/or the empty template. Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take precedence if they are present. For example:
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7784">> support for `<$list-template>` and `<$list-empty>` as immediate children of the <<.wid "ListWidget">> widget to specify the list item template and/or the empty template. For example:
 
 ```
 <$list filter=<<filter>>>
@@ -40,6 +38,8 @@ description: Under development
 	</$list-empty>
 </$list>
 ```
+
+Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take precedence if they are present.
 
 !! jsonset operator
 
