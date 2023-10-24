@@ -1,0 +1,27 @@
+title: ListWidget/WithBodyTemplate
+description: List widget with body template and $list-empty
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
++
+title: Output
+
+\whitespace trim
+
+\procedure test(filter)
+<$list filter=<<filter>>>
+	Item:<<currentTiddler>>,
+	<$list-empty>
+		None!
+	</$list-empty>
+</$list>
+\end
+
+<<test "1 2 3">>
+
+<<test "">>
+
++
+title: ExpectedResult
+
+<p>Item:1,Item:2,Item:3,</p><p>None!</p>

@@ -93,17 +93,42 @@ ListWidget.prototype.findExplicitTemplates = function() {
 	this.explicitListTemplate = null;
 	this.explicitEmptyTemplate = null;
 	var searchChildren = function(childNodes) {
+		var found = false;
 		$tw.utils.each(childNodes,function(node) {
 			if(node.type === "list-template") {
+				found = true;
 				self.explicitListTemplate = node.children;
 			} else if(node.type === "list-empty") {
+				found = true;
 				self.explicitEmptyTemplate = node.children;
 			} else if(node.type === "element" && node.tag === "p") {
-				searchChildren(node.children);
+				var foundInChildren = searchChildren(node.children);
+				found = found || foundInChildren;
 			}
 		});
+		return found;
 	};
-	searchChildren(this.parseTreeNode.children);
+	var removeTemplates = function(childNodes) {
+		var result = [];
+		$tw.utils.each(childNodes,function(node) {
+			if(node.type === "list-template" || node.type === "list-empty") {
+				// Do nothing
+			} else if(node.type === "element" && node.tag === "p") {
+				var nodeWithoutTemplates = $tw.utils.extend({}, node);
+				nodeWithoutTemplates.children = removeTemplates(node.children);
+				result.push(nodeWithoutTemplates);
+			} else {
+				result.push(node);
+			}
+		});
+		return result;
+	}
+	var foundExplicitTemplates = searchChildren(this.parseTreeNode.children);
+	if(foundExplicitTemplates) {
+		this.childrenWithoutExplicitTemplates = removeTemplates(this.parseTreeNode.children);
+	} else {
+		this.childrenWithoutExplicitTemplates = this.parseTreeNode.children;
+	}
 }
 
 ListWidget.prototype.getTiddlerList = function() {
@@ -154,22 +179,16 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	// Compose the transclusion of the template
 	if(template) {
 		templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: template}}}];
-	} else {
-		// Check for child nodes of the list widget
-		if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
-			// Check for a <$list-item> widget
-			if(this.explicitListTemplate) {
-				templateTree = this.explicitListTemplate;
-			} else if (!this.explicitEmptyTemplate) {
-				templateTree = this.parseTreeNode.children;
-			}
-		}
-		if(!templateTree) {
-			// Default template is a link to the title
-			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
-				{type: "text", text: title}
-			]}]}];
-		}
+	} else if(this.explicitListTemplate) {
+		templateTree = this.explicitListTemplate;
+	} else if(this.childrenWithoutExplicitTemplates && this.childrenWithoutExplicitTemplates.length > 0) {
+		templateTree = this.childrenWithoutExplicitTemplates;
+	}
+	if(!templateTree) {
+		// Default template is a link to the title
+		templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
+			{type: "text", text: title}
+		]}]}];
 	}
 	// Return the list item
 	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
