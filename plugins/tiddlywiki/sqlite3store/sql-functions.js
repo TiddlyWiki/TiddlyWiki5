@@ -45,14 +45,14 @@ $tw.SqlFunctions = function(options) {
 		sql: `
 			DROP TABLE IF EXISTS plugins;
 			CREATE TABLE plugins (
-				plugintitle TEXT NOT NULL,
+				plugintitle TEXT NOT NULL, -- Empty string shoud be the highest priority
 				priority INTEGER NOT NULL,
 				PRIMARY KEY(plugintitle)
 			);
 			DROP TABLE IF EXISTS tiddlers;
 			CREATE TABLE tiddlers (
 				title TEXT NOT NULL ${COLLATION_CLAUSE},
-				plugintitle TEXT, -- or NULL for non-shadow tiddlers
+				plugintitle TEXT NOT NULL, -- Empty string for tiddlers that are not part of a plugin
 				meta TEXT NOT NULL,
 				text TEXT NOT NULL,
 				PRIMARY KEY(title,plugintitle)
@@ -61,7 +61,7 @@ $tw.SqlFunctions = function(options) {
 			DROP TABLE IF EXISTS titles;
 			CREATE TABLE titles (
 				title TEXT NOT NULL ${COLLATION_CLAUSE},
-				plugintitle TEXT, -- or NULL for non-shadow tiddlers
+				plugintitle TEXT NOT NULL, -- Empty string for tiddlers that are not part of a plugin
 				PRIMARY KEY(title)
 			);
 		`
@@ -70,7 +70,7 @@ $tw.SqlFunctions = function(options) {
 	Debugging
 	*/
 	var statementLogTiddlersTable = self.db.prepare("select title, plugintitle, meta, text from tiddlers order by title, plugintitle;"),
-		statementLogPluginsTable = self.db.prepare("select plugintitle, priority from plugins order by plugintitle;"),
+		statementLogPluginsTable = self.db.prepare("select plugintitle, priority from plugins order by priority;"),
 		statementLogTitlesTable = self.db.prepare("select title, plugintitle from titles order by title;");
 	function sqlLogTable(statement) {
 		let resultRows = [];
@@ -90,11 +90,12 @@ $tw.SqlFunctions = function(options) {
 	Set the plugin priorities
 	*/
 	this.sqlSetPluginPriorities = function(prioritisedPluginTitles) {
+		const plugintitles = prioritisedPluginTitles.concat([""]);
 		self.db.exec({
 			sql: "DELETE FROM plugins"
 		});
 		let priority = 1;
-		for(const plugintitle of prioritisedPluginTitles) {
+		for(const plugintitle of plugintitles) {
 			self.db.exec({
 				sql: "insert or replace into plugins (plugintitle, priority) values ($plugintitle, $priority)",
 				bind: {
@@ -117,26 +118,21 @@ $tw.SqlFunctions = function(options) {
 	INSERT OR REPLACE INTO titles (title, plugintitle)
 	SELECT
 		t.title,
-		CASE
-			WHEN t.null_count > 0 THEN NULL
-			ELSE t.max_priority_plugintitle
-		END AS plugintitle
-	FROM (
-		SELECT
-			t.title,
-			SUM(CASE WHEN t.plugintitle IS NULL THEN 1 ELSE 0 END) AS null_count,
-			MAX(p.priority) AS max_priority,
-			FIRST_VALUE(t.plugintitle) OVER (PARTITION BY t.title ORDER BY p.priority DESC) AS max_priority_plugintitle
-		FROM tiddlers t
-		LEFT JOIN plugins p ON t.plugintitle = p.plugintitle
-		WHERE t.title = $title
-		GROUP BY t.title
-	) AS t;
+		(SELECT t2.plugintitle
+		 FROM tiddlers AS t2
+		 JOIN plugins AS p ON t2.plugintitle = p.plugintitle
+		 WHERE t2.title = t.title
+		 ORDER BY p.priority DESC
+		 LIMIT 1
+		) AS plugintitle
+	FROM tiddlers AS t
+	WHERE t.title = $title;	
 	`);
 	this.sqlSaveTiddler = function(tiddlerFields,plugintitle) {
+		plugintitle = plugintitle || "";
 		querySaveTiddlerTableTiddlers.bind({
 			$title: tiddlerFields.title,
-			$plugintitle: plugintitle || null,
+			$plugintitle: plugintitle,
 			$meta: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined, text: undefined})),
 			$text: tiddlerFields.text || ""
 		});
@@ -153,36 +149,22 @@ $tw.SqlFunctions = function(options) {
 	*/
 	var statementDeleteTiddlerDeleteFromTiddlers = self.db.prepare(`
 	DELETE FROM tiddlers
-	WHERE title = $title AND plugintitle IS NULL;
+	WHERE title = $title AND plugintitle = $plugintitle;
 	`);
 	var statementDeleteTiddlerFindShadow = self.db.prepare(`
-	WITH HighestPriority AS (
-		SELECT
-			plugintitle,
-			MAX(priority) AS max_priority
-		FROM
-			plugins
-		WHERE
-			plugintitle IS NOT NULL
-		GROUP BY
-			plugintitle
-	)
-	SELECT
-		t.title,
-		t.plugintitle,
-		t.meta,
-		t.text
-	FROM
-		tiddlers AS t
-	JOIN
-		HighestPriority AS ho ON t.plugintitle = ho.plugintitle
-	WHERE
-		t.title = $title;
+	SELECT t.title, t.plugintitle
+	FROM tiddlers AS t
+	JOIN plugins AS p ON t.plugintitle = p.plugintitle
+	WHERE t.title = $title
+	ORDER BY p.priority DESC
+	LIMIT 1;
 	`);
-	this.sqlDeleteTiddler = function(title) {
+	this.sqlDeleteTiddler = function(title,plugintitle) {
+		plugintitle = plugintitle || "";
 		// Delete the tiddler from the tiddlers table
 		statementDeleteTiddlerDeleteFromTiddlers.bind({
-			$title: title
+			$title: title,
+			$plugintitle: plugintitle
 		});
 		statementDeleteTiddlerDeleteFromTiddlers.step();
 		statementDeleteTiddlerDeleteFromTiddlers.reset();
@@ -191,8 +173,8 @@ $tw.SqlFunctions = function(options) {
 			$title: title
 		});
 		if(statementDeleteTiddlerFindShadow.step()) {
-			// There is a corresponding shadow
 			var row = statementDeleteTiddlerFindShadow.get({});
+			statementDeleteTiddlerFindShadow.reset();
 			// Replace the tiddler with the shadow
 			self.db.exec({
 				sql: "insert or replace into titles (title, plugintitle) values ($title, $plugintitle)",
@@ -202,8 +184,8 @@ $tw.SqlFunctions = function(options) {
 				}
 			});
 		} else {
-			// There is no corresponding shadow
-			// Delete the tiddler
+			statementDeleteTiddlerFindShadow.reset();
+			// There is no shadow tiddler, so just delete the tiddler
 			self.db.exec({
 				sql: "delete from titles where title = $title",
 				bind: {
@@ -211,23 +193,22 @@ $tw.SqlFunctions = function(options) {
 				}
 			});
 		}
-		statementDeleteTiddlerFindShadow.reset();
 	};
 	/*
 	Remove all shadow tiddlers
 	*/
 	this.sqlClearShadows = function() {
 		self.db.exec({
-			sql: "delete from tiddlers where plugintitle is not null"
+			sql: "delete from tiddlers where plugintitle != '';"
 		});
 		self.db.exec({
-			sql: "delete from titles where plugintitle is not null"
+			sql: "delete from titles where plugintitle != '';"
 		});
 	};
 	/*
 	Check whether a tiddler exists
 	*/
-	var statementTiddlerExists = self.db.prepare(`select title from titles where title = $title and plugintitle is null;`)
+	var statementTiddlerExists = self.db.prepare(`select title from titles where title = $title and plugintitle = '';`)
 	this.sqlTiddlerExists = function(title) {
 		statementTiddlerExists.bind({
 			$title: title
@@ -247,7 +228,7 @@ $tw.SqlFunctions = function(options) {
 	select t.title, ti.meta, ti.text
 	FROM titles AS t
 	JOIN tiddlers AS ti
-	ON t.title = ti.title AND (t.plugintitle = ti.plugintitle OR (t.plugintitle IS NULL AND ti.plugintitle IS NULL))
+	ON t.title = ti.title AND t.plugintitle = ti.plugintitle
 	WHERE t.title = $title;
 	`);
 	this.sqlGetTiddler = function(title) {
@@ -267,25 +248,12 @@ $tw.SqlFunctions = function(options) {
 	Get the plugin from which a tiddler came
 	*/
 	var statementGetShadowSource = self.db.prepare(`
-	WITH HighestPriority AS (
-		SELECT
-			plugintitle,
-			MAX(priority) AS max_priority
-		FROM
-			plugins
-		WHERE
-			plugintitle IS NOT NULL
-		GROUP BY
-			plugintitle
-	)
-	SELECT
-		t.plugintitle
-	FROM
-		tiddlers AS t
-	JOIN
-		HighestPriority AS ho ON t.plugintitle = ho.plugintitle
-	WHERE
-		t.title = $title;
+	SELECT t.title, t.plugintitle
+	FROM tiddlers AS t
+	LEFT JOIN plugins AS p ON t.plugintitle = p.plugintitle
+	WHERE t.title = $title AND t.plugintitle <> ''
+	ORDER BY p.priority DESC
+	LIMIT 1;
 	`);
 	this.sqlGetShadowSource = function(title) {
 		statementGetShadowSource.bind({
@@ -319,7 +287,7 @@ $tw.SqlFunctions = function(options) {
 	var statementAllShadowTitles = self.db.prepare(`
 	SELECT title
 	FROM tiddlers
-	WHERE plugintitle IS NOT NULL
+	WHERE plugintitle != ''
 	ORDER BY title ${COLLATION_CLAUSE}
 	`);
 	this.sqlAllShadowTitles = function() {
@@ -337,8 +305,8 @@ $tw.SqlFunctions = function(options) {
 	var statementEachTiddler = self.db.prepare(`
 	SELECT t.title, ti.meta, ti.text
 	FROM titles AS t
-	LEFT JOIN tiddlers AS ti ON t.title = ti.title AND t.plugintitle IS NULL AND ti.plugintitle IS NULL
-	WHERE t.plugintitle IS NULL
+	LEFT JOIN tiddlers AS ti ON t.title = ti.title AND t.plugintitle = ti.plugintitle
+	WHERE t.plugintitle == ''
 	ORDER BY t.title ${COLLATION_CLAUSE}
 	`);
 	this.sqlEachTiddler = function(callback) {
@@ -356,7 +324,7 @@ $tw.SqlFunctions = function(options) {
 	SELECT DISTINCT t.title, td.meta, td.text
 	FROM titles AS t
 	JOIN tiddlers AS td ON t.title = td.title
-	WHERE td.plugintitle IS NOT NULL
+	WHERE td.plugintitle != ''
 	ORDER BY t.title ${COLLATION_CLAUSE};
 	`);
 	this.sqlEachShadowTiddler = function(callback) {

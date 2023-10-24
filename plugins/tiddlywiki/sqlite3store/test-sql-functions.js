@@ -104,6 +104,8 @@ test("Instantiating the database", function () {
 			const titles = sqlFunctions.sqlAllShadowTitles();
 			assert.equal(titles,result,message);
 		}
+		// Set priorities for the plugins we'll use
+		sqlFunctions.sqlSetPluginPriorities([]);
 		// Save and verify an ordinary tiddler
 		sqlFunctions.sqlSaveTiddler({
 			title: "HelloThere",

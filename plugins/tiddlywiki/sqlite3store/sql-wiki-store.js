@@ -13,6 +13,7 @@ This file is spliced into the HTML file to be executed before the boot kernel ha
 $tw.Wiki = function(options) {
 	options = options || {};
 	this.sqlFunctions = new $tw.SqlFunctions();
+	this.sqlFunctions.sqlSetPluginPriorities([]);
 	// Adapted version of the boot.js wiki store implementation follows
 	var self = this,
 	getTiddlerTitles = function() {
@@ -158,7 +159,7 @@ $tw.Wiki = function(options) {
 			var title = tiddler.fields.title;
 			if(title) {
 				// Save the new tiddler
-				self.sqlFunctions.sqlSaveTiddler(tiddler.getFieldStrings());
+				self.sqlFunctions.sqlSaveTiddler(tiddler.fields);
 				// Update caches
 				this.clearCache(title);
 				this.clearGlobalCache();
