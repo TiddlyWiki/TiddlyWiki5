@@ -4,4 +4,6 @@ tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-sidebar-search .tc-popup-handle
 condition: [{$:/temp/search}match[help]]
 
-<<tour-task "Your task is to search for the phrase 'help'">>
+<<tour-task "Search for the phrase 'help'">>
+
+Type the phrase into the text box labelled "search" in the sidebar at the right.

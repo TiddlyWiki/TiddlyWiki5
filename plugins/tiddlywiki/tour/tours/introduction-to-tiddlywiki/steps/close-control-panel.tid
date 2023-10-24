@@ -4,4 +4,6 @@ tags: $:/tags/Tour/IntroductionToTiddlyWiki
 selector: .tc-story-river div[data-tiddler-title='$:/ControlPanel'] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclose
 condition: [[$:/StoryList]!contains[$:/ControlPanel]]
 
-<<tour-task "Your task now is to close the control panel">>
+<<tour-task "Now close the control panel">>
+
+Use the {{$:/core/images/close-button|0.65em}} button in the top right corner of the control panel tiddler.

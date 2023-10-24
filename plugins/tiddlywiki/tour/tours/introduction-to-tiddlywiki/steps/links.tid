@@ -9,6 +9,8 @@ Links allow you to decide if you want more information on a particular area or t
 
 <<tour-task "Click the blue link to open the tiddler 'Saturn'">>
 
+Notice how the new tiddler opens alongside the old one. This allows you to scroll back up to retrace your steps.
+
 <$navigator story="$:/temp/Tour/DemoStoryList" history="$:/temp/Tour/DemoHistoryList" openLinkFromInsideRiver="below">
 
 <$list
