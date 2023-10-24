@@ -114,9 +114,21 @@ ListWidget.prototype.findExplicitTemplates = function() {
 			if(node.type === "list-template" || node.type === "list-empty") {
 				// Do nothing
 			} else if(node.type === "element" && node.tag === "p") {
-				var nodeWithoutTemplates = $tw.utils.extend({}, node);
-				nodeWithoutTemplates.children = removeTemplates(node.children);
-				result.push(nodeWithoutTemplates);
+				var childrenWithoutTemplates = removeTemplates(node.children);
+				if(node.children && node.children.length === childrenWithoutTemplates.length) {
+					// No changes
+					result.push(node);
+				} else {
+					// Special case: if the only child of the <p> tag was an explicit template, we remove the <p> tag as well
+					// This avoids polluting the output with empty <p></p> elements which can mess up formatting
+					if(childrenWithoutTemplates.length === 0 && node.children && node.children.length !== 0) {
+						// Do nothing
+					} else {
+						var nodeWithoutTemplates = $tw.utils.extend({}, node);
+						nodeWithoutTemplates.children = childrenWithoutTemplates;
+						result.push(nodeWithoutTemplates);
+					}
+				}
 			} else {
 				result.push(node);
 			}
