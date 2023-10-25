@@ -23,7 +23,30 @@ $tw.Wiki = function(options) {
 	pluginInfo = Object.create(null), // Hashmap of parsed plugin content
 	getShadowTiddlerTitles = function() {
 		return self.sqlFunctions.sqlAllShadowTitles();
+	},
+	enableIndexers = options.enableIndexers || null,
+	indexers = [],
+	indexersByName = Object.create(null);
+
+	this.addIndexer = function(indexer,name) {
+		// We stub out this method because this store doesn't support external indexers
 	};
+
+	this.addInternalIndexer = function(indexer,name) {
+		// Bail if this indexer is not enabled
+		if(enableIndexers && enableIndexers.indexOf(name) === -1) {
+			return;
+		}
+console.log("Added indexer",name)
+		indexers.push(indexer);
+		indexersByName[name] = indexer;
+		indexer.init();
+	};
+
+	this.getIndexer = function(name) {
+		return indexersByName[name] || null;
+	};
+
 	// $tw.utils replacements
 	var eachObj = function(object,callback) {
 		var next,f,length;
@@ -82,73 +105,6 @@ $tw.Wiki = function(options) {
 		self.sqlFunctions.sqlLogTables();
 	}
 
-	var tagIndexer;
-
-	this.addIndexer = function(indexer,name) {
-		switch(indexer.constructor.name) {
-			case "TagIndexer":
-				tagIndexer = new TagIndexer(this);
-				break;
-		}
-	};
-
-	function TagSubIndexer(indexer,iteratorMethod) {
-		this.indexer = indexer;
-		this.iteratorMethod = iteratorMethod;
-		this.cache = Object.create(null); // Hashmap by title containing arrays of titles
-	}
-
-	TagSubIndexer.prototype.addIndexMethod = function() {
-		var self = this;
-		this.indexer.wiki[this.iteratorMethod].byTag = function(tag) {
-			return self.lookup(tag).slice(0);
-		};
-	};
-
-	TagSubIndexer.prototype.update = function(updateDescriptor) {
-		this.cache = Object.create(null);
-	};
-
-	TagSubIndexer.prototype.lookup = function(tag) {
-		var cachedResult = this.cache[tag];
-		if(cachedResult) {
-			return cachedResult;
-		}
-		var listing = self.sqlFunctions.sqlGetTiddlersWithTag(tag,this.iteratorMethod);
-		if(this.indexer.wiki.sortByList) {
-			listing = this.indexer.wiki.sortByList(listing,tag);
-		}
-		this.cache[tag] = listing;
-		return listing;
-	};
-
-	function TagIndexer(wiki) {
-		this.wiki = wiki;
-		this.subIndexers = [
-			new TagSubIndexer(this,"each"),
-			new TagSubIndexer(this,"eachShadow"),
-			new TagSubIndexer(this,"eachTiddlerPlusShadows"),
-			new TagSubIndexer(this,"eachShadowPlusTiddlers")
-		];
-		$tw.utils.each(this.subIndexers,function(subIndexer) {
-			subIndexer.addIndexMethod();
-		});
-	}
-
-	TagIndexer.prototype.update = function(updateDescriptor) {
-		$tw.utils.each(this.subIndexers,function(subIndexer) {
-			subIndexer.update(updateDescriptor);
-		});
-	};
-
-	this.getIndexer = function(name) {
-		switch(name) {
-			case "TagIndexer":
-				return tagIndexer;
-		}
-		return null;
-	};
-
 	// Add a tiddler to the store
 	this.addTiddler = function(tiddler) {
 		if(!(tiddler instanceof $tw.Tiddler)) {
@@ -163,9 +119,9 @@ $tw.Wiki = function(options) {
 				// Update caches
 				this.clearCache(title);
 				this.clearGlobalCache();
-				if(tagIndexer) {
-					tagIndexer.update();
-				}
+				$tw.utils.each(indexers,function(indexer) {
+					indexer.update();
+				});
 				// Queue a change event
 				this.enqueueTiddlerEvent(title);
 			}
@@ -182,9 +138,9 @@ $tw.Wiki = function(options) {
 			// Update caches
 			this.clearCache(title);
 			this.clearGlobalCache();
-			if(tagIndexer) {
-				tagIndexer.update();
-			}
+			$tw.utils.each(indexers,function(indexer) {
+				indexer.update();
+			});
 			// Queue a change event
 			this.enqueueTiddlerEvent(title,true);
 		}
@@ -368,9 +324,9 @@ $tw.Wiki = function(options) {
 		});
 		this.clearCache(null);
 		this.clearGlobalCache();
-		if(tagIndexer) {
-			tagIndexer.update();
-		}
+		$tw.utils.each(indexers,function(indexer) {
+			indexer.update();
+		});
 	};
 
 	this.optimiseFilter = function(filterString) {
@@ -382,9 +338,60 @@ $tw.Wiki = function(options) {
 		return undefined;
 	};
 
-	if(this.addIndexersToWiki) {
-		this.addIndexersToWiki();
+	function TagSubIndexer(indexer,iteratorMethod) {
+		this.indexer = indexer;
+		this.iteratorMethod = iteratorMethod;
+		this.cache = Object.create(null); // Hashmap by title containing arrays of titles
 	}
+
+	TagSubIndexer.prototype.addIndexMethod = function() {
+		var self = this;
+		this.indexer.wiki[this.iteratorMethod].byTag = function(tag) {
+			return self.lookup(tag).slice(0);
+		};
+	};
+
+	TagSubIndexer.prototype.update = function() {
+		this.cache = Object.create(null);
+	};
+
+	TagSubIndexer.prototype.lookup = function(tag) {
+		var cachedResult = this.cache[tag];
+		if(cachedResult) {
+			return cachedResult;
+		}
+		var listing = self.sqlFunctions.sqlGetTiddlersWithTag(tag,this.iteratorMethod);
+		if(this.indexer.wiki.sortByList) {
+			listing = this.indexer.wiki.sortByList(listing,tag);
+		}
+		this.cache[tag] = listing;
+		return listing;
+	};
+
+	function TagIndexer(wiki) {
+		this.wiki = wiki;
+		this.subIndexers = [
+			new TagSubIndexer(this,"each"),
+			new TagSubIndexer(this,"eachShadow"),
+			new TagSubIndexer(this,"eachTiddlerPlusShadows"),
+			new TagSubIndexer(this,"eachShadowPlusTiddlers")
+		];
+		$tw.utils.each(this.subIndexers,function(subIndexer) {
+			subIndexer.addIndexMethod();
+		});
+	}
+
+	TagIndexer.prototype.init = function() {
+	};
+
+	TagIndexer.prototype.update = function() {
+		$tw.utils.each(this.subIndexers,function(subIndexer) {
+			subIndexer.update();
+		});
+	};
+
+	this.addInternalIndexer(new TagIndexer(this),"TagIndexer");
+
 };
 
 })();
