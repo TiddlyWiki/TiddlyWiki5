@@ -16,17 +16,37 @@ $tw.Wiki = function(options) {
 	this.sqlFunctions.sqlSetPluginPriorities([]);
 	// Adapted version of the boot.js wiki store implementation follows
 	var self = this,
+	cachedTiddlerTitles = null;
 	getTiddlerTitles = function() {
-		return self.sqlFunctions.sqlAllTitles();
+		if(!cachedTiddlerTitles) {
+			cachedTiddlerTitles = self.sqlFunctions.sqlAllTitles();
+		}
+		return cachedTiddlerTitles;
 	},
 	pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
 	pluginInfo = Object.create(null), // Hashmap of parsed plugin content
+	cachedShadowTiddlerTitles = null;
 	getShadowTiddlerTitles = function() {
-		return self.sqlFunctions.sqlAllShadowTitles();
+		if(!cachedShadowTiddlerTitles) {
+			cachedShadowTiddlerTitles = self.sqlFunctions.sqlAllShadowTitles();
+		}
+		return cachedShadowTiddlerTitles;
 	},
 	enableIndexers = options.enableIndexers || null,
 	indexers = [],
 	indexersByName = Object.create(null);
+
+	this.clearAllCaches = function(title) {
+		cachedTiddlerTitles = null;
+		cachedShadowTiddlerTitles = null;
+		if(title !== undefined) {
+			this.clearCache(title);
+		}
+		this.clearGlobalCache();
+		$tw.utils.each(indexers,function(indexer) {
+			indexer.update();
+		});
+	};
 
 	this.addIndexer = function(indexer,name) {
 		// We stub out this method because this store doesn't support external indexers
@@ -117,11 +137,7 @@ console.log("Added indexer",name)
 				// Save the new tiddler
 				self.sqlFunctions.sqlSaveTiddler(tiddler.fields);
 				// Update caches
-				this.clearCache(title);
-				this.clearGlobalCache();
-				$tw.utils.each(indexers,function(indexer) {
-					indexer.update();
-				});
+				this.clearAllCaches(title);
 				// Queue a change event
 				this.enqueueTiddlerEvent(title);
 			}
@@ -136,11 +152,7 @@ console.log("Added indexer",name)
 			// Delete the tiddler
 			self.sqlFunctions.sqlDeleteTiddler(title);
 			// Update caches
-			this.clearCache(title);
-			this.clearGlobalCache();
-			$tw.utils.each(indexers,function(indexer) {
-				indexer.update();
-			});
+			this.clearAllCaches(title);
 			// Queue a change event
 			this.enqueueTiddlerEvent(title,true);
 		}
@@ -322,11 +334,7 @@ console.log("Added indexer",name)
 				});
 			}
 		});
-		this.clearCache(null);
-		this.clearGlobalCache();
-		$tw.utils.each(indexers,function(indexer) {
-			indexer.update();
-		});
+		this.clearAllCaches();
 	};
 
 	this.optimiseFilter = function(filterString) {
