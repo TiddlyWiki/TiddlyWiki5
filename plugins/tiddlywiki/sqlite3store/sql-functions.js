@@ -49,6 +49,7 @@ $tw.SqlFunctions = function(options) {
 				priority INTEGER NOT NULL,
 				PRIMARY KEY(plugintitle)
 			);
+			CREATE INDEX IF NOT EXISTS plugins_plugintitle_index ON plugins(plugintitle);
 			DROP TABLE IF EXISTS tiddlers;
 			CREATE TABLE tiddlers (
 				title TEXT NOT NULL ${COLLATION_CLAUSE},
@@ -57,13 +58,16 @@ $tw.SqlFunctions = function(options) {
 				text TEXT NOT NULL,
 				PRIMARY KEY(title,plugintitle)
 			);
-			CREATE INDEX tiddlers_title_index ON tiddlers(title);
+			CREATE INDEX IF NOT EXISTS tiddlers_title_index ON tiddlers(title);
+			CREATE INDEX IF NOT EXISTS tiddlers_plugintitle_index ON tiddlers(plugintitle);
 			DROP TABLE IF EXISTS titles;
 			CREATE TABLE titles (
 				title TEXT NOT NULL ${COLLATION_CLAUSE},
 				plugintitle TEXT NOT NULL, -- Empty string for tiddlers that are not part of a plugin
 				PRIMARY KEY(title)
 			);
+			CREATE INDEX IF NOT EXISTS titles_title_index ON titles(title);
+			CREATE INDEX IF NOT EXISTS titles_plugintitle_index ON titles(plugintitle);
 			DROP TABLE IF EXISTS tags;
 			CREATE TABLE tags (
 				tag_id INTEGER PRIMARY KEY,
@@ -78,6 +82,7 @@ $tw.SqlFunctions = function(options) {
 				FOREIGN KEY (tag_id) REFERENCES tags (tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
 				PRIMARY KEY (title, plugintitle, tag_id)
 			);
+			CREATE INDEX IF NOT EXISTS tiddler_tags_tag_id_index ON tiddler_tags(tag_id);
 		`
 	});
 	/*
