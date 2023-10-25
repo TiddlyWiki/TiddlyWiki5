@@ -75,7 +75,7 @@ let assert = {
 
 // Define the tests
 
-test("Instantiating the database", function () {
+test("Instantiate the database", function () {
 	const sqlFunctions = new $tw.SqlFunctions();
 	test("Write a tiddler and retrieve it", function() {
 		// Utilities

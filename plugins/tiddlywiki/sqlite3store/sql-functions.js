@@ -64,14 +64,30 @@ $tw.SqlFunctions = function(options) {
 				plugintitle TEXT NOT NULL, -- Empty string for tiddlers that are not part of a plugin
 				PRIMARY KEY(title)
 			);
+			DROP TABLE IF EXISTS tags;
+			CREATE TABLE tags (
+				tag_id INTEGER PRIMARY KEY,
+				tag TEXT NOT NULL
+			);
+			DROP TABLE IF EXISTS tiddler_tags;
+			CREATE TABLE tiddler_tags (
+				title TEXT NOT NULL,
+				plugintitle INTEGER NOT NULL,
+				tag_id INTEGER NOT NULL,
+				FOREIGN KEY (title, plugintitle) REFERENCES tiddlers (title, plugintitle) ON DELETE CASCADE ON UPDATE CASCADE,
+				FOREIGN KEY (tag_id) REFERENCES tags (tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
+				PRIMARY KEY (title, plugintitle, tag_id)
+			);
 		`
 	});
 	/*
 	Debugging
 	*/
 	var statementLogTiddlersTable = self.db.prepare("select title, plugintitle, meta, text from tiddlers order by title, plugintitle;"),
-		statementLogPluginsTable = self.db.prepare("select plugintitle, priority from plugins order by priority;"),
-		statementLogTitlesTable = self.db.prepare("select title, plugintitle from titles order by title;");
+		statementLogPluginsTable = self.db.prepare("select plugintitle, priority from plugins order by plugintitle;"),
+		statementLogTitlesTable = self.db.prepare("select title, plugintitle from titles order by title;"),
+		statementLogTagsTable = self.db.prepare("select tag_id, tag from tags order by tag_id;"),
+		statementLogTiddlerTagsTable = self.db.prepare("select title, plugintitle, tag_id from tiddler_tags order by title, plugintitle;");
 	function sqlLogTable(statement) {
 		let resultRows = [];
 		while(statement.step()) {
@@ -85,6 +101,8 @@ $tw.SqlFunctions = function(options) {
 		console.log("tiddlers",sqlLogTable(statementLogTiddlersTable));
 		console.log("plugins",sqlLogTable(statementLogPluginsTable));
 		console.log("titles",sqlLogTable(statementLogTitlesTable));
+		console.log("tags",sqlLogTable(statementLogTagsTable));
+		console.log("tiddlertags",sqlLogTable(statementLogTiddlerTagsTable));
 	};
 	/*
 	Set the plugin priorities
@@ -128,8 +146,47 @@ $tw.SqlFunctions = function(options) {
 	FROM tiddlers AS t
 	WHERE t.title = $title;	
 	`);
+	var querySaveTiddlerTableTags = self.db.prepare(`
+	-- Parse and insert tags from the $tags JSON array
+	WITH tag_values AS (
+	  SELECT json_each.value AS tag
+	  FROM json_each($tags)
+	)
+	INSERT INTO tags (tag)
+	SELECT DISTINCT tag
+	FROM tag_values
+	WHERE tag NOT IN (
+	  SELECT tag
+	  FROM tags
+	);
+	`);
+	var querySaveTiddlerTableTiddlerTags = self.db.prepare(`
+	-- Associate the new tiddler with the tags in the tiddler_tags table
+	WITH tag_values AS (
+	  SELECT json_each.value AS tag
+	  FROM json_each($tags)
+	)
+	INSERT OR IGNORE INTO tiddler_tags (title, plugintitle, tag_id)
+	SELECT $title, $plugintitle, tags.tag_id
+	FROM tag_values
+	JOIN tags ON tag_values.tag = tags.tag;
+	`);
 	this.sqlSaveTiddler = function(tiddlerFields,plugintitle) {
 		plugintitle = plugintitle || "";
+		// Normalise the tags by removing any double square brackets
+		let tags = tiddlerFields.tags;
+		if(typeof tags === "string") {
+			tags = $tw.utils.parseStringArray(tags);
+		}
+		const normalisedTags = (tags || []).map(tag => {
+			const match = /^[^\S\xA0]*\[\[(.*)\]\][^\S\xA0]*$/mg.exec(tag);
+			if(match) {
+				return match[1];
+			} else {
+				return tag;
+			}
+		});
+		const jsonNormalisedTags = JSON.stringify(normalisedTags);
 		querySaveTiddlerTableTiddlers.bind({
 			$title: tiddlerFields.title,
 			$plugintitle: plugintitle,
@@ -143,6 +200,18 @@ $tw.SqlFunctions = function(options) {
 		});
 		querySaveTiddlerTableTitles.step();
 		querySaveTiddlerTableTitles.reset();
+		querySaveTiddlerTableTags.bind({
+			$tags: jsonNormalisedTags
+		});
+		querySaveTiddlerTableTags.step();
+		querySaveTiddlerTableTags.reset();
+		querySaveTiddlerTableTiddlerTags.bind({
+			$title: tiddlerFields.title,
+			$plugintitle: plugintitle || "",
+			$tags: jsonNormalisedTags
+		});
+		querySaveTiddlerTableTiddlerTags.step();
+		querySaveTiddlerTableTiddlerTags.reset();
 	};
 	/*
 	Delete a tiddler
@@ -368,16 +437,31 @@ $tw.SqlFunctions = function(options) {
 	/*
 	Return all tiddlers with a given tag
 	*/
-	this.sqlGetTiddlersWithTag = function(tag,method) {
-		const titles = [];
-		self.sqlEachShadowPlusTiddlers(function(fields,title) {
-			var tags = $tw.utils.parseStringArray(fields.tags || "");
-			if(tags.indexOf(tag) !== -1) {
-				titles.push(title);
-			}
-		});
-		return titles;
-	};
+ 	var statementGetTiddlersWithTag = self.db.prepare(`
+	SELECT titles.title
+	FROM titles
+	JOIN tiddlers ON titles.title = tiddlers.title AND titles.plugintitle = tiddlers.plugintitle
+	JOIN plugins ON titles.plugintitle = plugins.plugintitle
+	JOIN tiddler_tags ON tiddlers.title = tiddler_tags.title AND tiddlers.plugintitle = tiddler_tags.plugintitle
+	JOIN tags ON tiddler_tags.tag_id = tags.tag_id
+	WHERE tags.tag = $tag
+	ORDER BY CASE
+	WHEN titles.plugintitle <> '' THEN 1
+	ELSE 2
+	END, titles.title ${COLLATION_CLAUSE} ASC;
+ 	`);
+ 	this.sqlGetTiddlersWithTag = function(tag,method) {
+ 		statementGetTiddlersWithTag.bind({
+ 			$tag: tag
+ 		});
+ 		var resultRows = [];
+ 		while(statementGetTiddlersWithTag.step()) {
+ 			var row = statementGetTiddlersWithTag.get({});
+ 			resultRows.push(row.title);
+ 		}
+ 		statementGetTiddlersWithTag.reset();
+ 		return resultRows;
+ 	};
 };
 
 })();
