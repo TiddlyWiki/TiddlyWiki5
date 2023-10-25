@@ -345,7 +345,7 @@ $tw.SqlFunctions = function(options) {
 	/*
 	Get all titles
 	*/
-	var statementAllTitles = self.db.prepare(`select title from titles order by title ${COLLATION_CLAUSE}`);
+	var statementAllTitles = self.db.prepare(`select title from titles where plugintitle = '' order by title ${COLLATION_CLAUSE}`);
 	this.sqlAllTitles = function() {
 		let resultRows = [];
 		while(statementAllTitles.step()) {
