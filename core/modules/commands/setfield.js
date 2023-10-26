@@ -39,10 +39,9 @@ Command.prototype.execute = function() {
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(templatetitle),
 			newFields = {},
-			tiddler = wiki.getTiddler(title),
-			currentValue = tiddler ? (tiddler.fields[fieldname] || "") : "";
+			tiddler = wiki.getTiddler(title);
 		if(parser) {
-			var widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title, currentValue: currentValue}});
+			var widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
 			var container = $tw.fakeDocument.createElement("div");
 			widgetNode.render(container,null);
 			newFields[fieldname] = rendertype === "text/html" ? container.innerHTML : container.textContent;
