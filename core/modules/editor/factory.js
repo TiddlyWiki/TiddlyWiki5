@@ -71,7 +71,7 @@ function editTextWidgetFactory(toolbarEngine,nonToolbarEngine) {
 		// Fix height
 		this.engine.fixHeight();
 		// Focus if required
-		if((this.editFocus === "true" || this.editFocus === "yes") && !$tw.utils.hasClass(this.parentDomNode.ownerDocument.activeElement,"tc-keep-focus")) {
+		if((this.editFocus === "true" || this.editFocus === "yes") && !$tw.utils.hasClass(this.parentDomNode.ownerDocument ? this.parentDomNode.ownerDocument.activeElement : document.activeElement,"tc-keep-focus")) {
 			this.engine.focus();
 		}
 		// Add widget message listeners
