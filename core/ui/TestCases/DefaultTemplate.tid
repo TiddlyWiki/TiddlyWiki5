@@ -1,0 +1,22 @@
+title: $:/core/ui/testcases/DefaultTemplate
+
+\whitespace trim
+<$let
+	state={{{ [<qualify "$:/state/testcase">] }}}
+>
+<div class="tc-testcase-wrapper">
+<div class="tc-testcase-header">
+<h2><$transclude tiddler="Description" mode="inline"/></h2>
+</div>
+<div class="tc-testcase-panes">
+<div class="tc-testcase-source">
+<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<state>] -Description -ExpectedResult -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
+</div>
+<div class="tc-testcase-divider">
+</div>
+<div class="tc-testcase-output">
+<$transclude tiddler="Output"/>
+</div>
+</div>
+</div>
+</$let>

@@ -3220,6 +3220,67 @@ span.tc-translink > a:first-child {
 }
 
 /*
+** Test Cases
+*/
+
+.tc-testcase-wrapper {
+	border: 1px solid <<colour foreground>>;
+	background-color: <<colour muted-foreground>>;
+	border-radius: 6px;
+}
+
+.tc-testcase-header {
+	font-weight: normal;
+	margin: 0.5em 0;
+	padding: 0 0.5em;
+}
+
+.tc-testcase-header > h2,
+.tc-testcase-source > pre {
+	margin: 0;
+}
+
+.tc-testcase-source > pre {
+	height: 100%;
+}
+
+.tc-testcase-panes {
+	background: <<colour background>>;
+	display: flex;
+	align-items: stretch;
+	flex-wrap: wrap;
+	padding: 0.5em;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+.tc-testcase-source {
+	flex: 1 0 49%;
+	min-width: 250px;
+}
+
+.tc-testcase-source .tc-field-table {
+	width: 100%;
+}
+
+.tc-testcase-divider {
+	flex: 0 0 2%;
+}
+
+.tc-testcase-source .tc-tab-buttons {
+	padding-top: 0;
+}
+
+.tc-testcase-output {
+	border-radius: 3px;
+	border: 1px solid <<colour muted-foreground>>;
+	flex: 1 0 49%;
+	min-width: 250px;
+	padding: 0.25em;
+}
+
+
+/*
 ** Flexbox utility classes
 */
 
