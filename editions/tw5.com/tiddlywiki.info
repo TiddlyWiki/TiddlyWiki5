@@ -6,7 +6,8 @@
 		"tiddlywiki/railroad",
 		"tiddlywiki/evernote",
 		"tiddlywiki/internals",
-		"tiddlywiki/menubar"
+		"tiddlywiki/menubar",
+		"tiddlywiki/qrcode"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

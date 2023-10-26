@@ -1,6 +1,6 @@
 caption: list
 created: 20131024141900000
-modified: 20230725203601441
+modified: 20230831182949930
 tags: Widgets Lists
 title: ListWidget
 type: text/vnd.tiddlywiki
@@ -70,6 +70,8 @@ See GroupedLists for how to generate nested and grouped lists using the ListWidg
 
 The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list.
 
+<<.from-version "5.3.2">> If the widgets `<$list-template>` or `<$list-empty>` are found as immediate children of the <<.wid "ListWidget">> widget then the content of those widgets are used as the list item template and/or the empty template. Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take precedence if they are present.
+
 The action of the list widget depends on the results of the filter combined with several options for specifying the template:
 
 * If the filter evaluates to an empty list, the text of the ''emptyMessage'' attribute is rendered, and all other templates are ignored
@@ -79,6 +81,7 @@ The action of the list widget depends on the results of the filter combined with
 
 |!Attribute |!Description |
 |filter |The [[tiddler filter|Filters]] to display |
+|limit |<<.from-version "5.3.2">> Optional numeric limit for the number of results that are returned. Negative values will return the results from the end of the list |
 |template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
 |editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
 |variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |

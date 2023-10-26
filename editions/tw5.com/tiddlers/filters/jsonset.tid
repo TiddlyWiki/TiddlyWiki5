@@ -1,5 +1,5 @@
-created: 20230405101444090
-modified: 20230405101444090
+created: 20230915121010948
+modified: 20230915121010948
 tags: [[Filter Operators]] [[JSON Operators]]
 title: jsonset Operator
 caption: jsonset
@@ -8,7 +8,7 @@ op-input: a selection of JSON strings
 op-parameter: one or more indexes of the property to retrieve and sometimes a value to assign
 op-output: the JSON strings with the specified property assigned
 
-<<.from-version "5.3.0">> See [[JSON in TiddlyWiki]] for background.
+<<.from-version "5.3.2">> See [[JSON in TiddlyWiki]] for background.
 
 The <<.op jsonset>> operator is used to set a property value in JSON strings. See also the following related operators:
 

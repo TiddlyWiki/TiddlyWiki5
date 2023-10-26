@@ -89,7 +89,7 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 </td>
 <td class="tc-edit-field-remove">
 <$button class="tc-btn-invisible" tooltip={{$:/language/EditTemplate/Field/Remove/Hint}} aria-label={{$:/language/EditTemplate/Field/Remove/Caption}}>
-<$action-deletefield $field=<<currentField>>/><$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/></$set>
+<$action-deletefield $field=<<currentField>>/>
 {{$:/core/images/delete-button}}
 </$button>
 </td>
