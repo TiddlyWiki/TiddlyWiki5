@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/innerwiki/geobaselayer.js
+title: $:/plugins/tiddlywiki/geospatial/geobaselayer.js
 type: application/javascript
 module-type: widget
 
