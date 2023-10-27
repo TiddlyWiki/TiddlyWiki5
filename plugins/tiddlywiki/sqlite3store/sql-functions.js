@@ -326,7 +326,7 @@ $tw.SqlFunctions = function(options) {
 	var statementGetShadowSource = self.db.prepare(`
 	SELECT t.title, t.plugintitle
 	FROM tiddlers AS t
-	LEFT JOIN plugins AS p ON t.plugintitle = p.plugintitle
+	JOIN plugins AS p ON t.plugintitle = p.plugintitle
 	WHERE t.title = $title AND t.plugintitle <> ''
 	ORDER BY p.priority DESC
 	LIMIT 1;
@@ -381,7 +381,7 @@ $tw.SqlFunctions = function(options) {
 	var statementEachTiddler = self.db.prepare(`
 	SELECT t.title, ti.meta, ti.text
 	FROM titles AS t
-	LEFT JOIN tiddlers AS ti ON t.title = ti.title AND t.plugintitle = ti.plugintitle
+	JOIN tiddlers AS ti ON t.title = ti.title AND t.plugintitle = ti.plugintitle
 	WHERE t.plugintitle == ''
 	ORDER BY t.title ${COLLATION_CLAUSE}
 	`);
