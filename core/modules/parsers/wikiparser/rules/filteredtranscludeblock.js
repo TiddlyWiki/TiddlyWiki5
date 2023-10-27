@@ -7,7 +7,7 @@ Wiki text rule for block-level filtered transclusion. For example:
 
 ```
 {{{ [tag[docs]] }}}
-{{{ [tag[docs]] ||TemplateTitle}}}
+{{{ [tag[docs]] || TemplateTitle }}}
 ```
 
 \*/
@@ -22,8 +22,7 @@ exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
-	// Regexp to match
-	// this.matchRegExp = /\{\{\{([^\|]+?)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}\}([^\}]*)\}(?:\.(\S+))?(?:\r?\n|$)/mg;
+	// Regexp to match TW versions > v5.3.1
 	this.matchRegExp = /\{\{\{([^\|]+?)(?:\|\|([^\|\{\}]+))?\}\}\}(?:\r?\n|$)/mg;
 };
 
