@@ -82,6 +82,8 @@ $tw.SqlFunctions = function(options) {
 				FOREIGN KEY (tag_id) REFERENCES tags (tag_id) ON DELETE CASCADE ON UPDATE CASCADE,
 				PRIMARY KEY (title, plugintitle, tag_id)
 			);
+			CREATE INDEX IF NOT EXISTS tiddler_tags_title_index ON tiddler_tags(title);
+			CREATE INDEX IF NOT EXISTS tiddler_tags_plugintitle_index ON tiddler_tags(plugintitle);
 			CREATE INDEX IF NOT EXISTS tiddler_tags_tag_id_index ON tiddler_tags(tag_id);
 		`
 	});
