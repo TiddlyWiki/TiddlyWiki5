@@ -5,6 +5,26 @@ tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
+<div style="border: 2px solid red; background: #ffd; padding: 0 0.5em; border-radius: 8px;">
+
+This is a preview build of ~TiddlyWiki 5 from the pull request [[#7817: Add <$testcase> widget|https://github.com/Jermolene/TiddlyWiki5/pull/7817]].
+
+It features an experimental new core widget for displaying interactive examples that show the output together with a tabbed display of the constituent tiddlers that produce it.
+
+* TestCaseWidget
+* Enhancements to the existing DataWidget
+
+For example:
+
+<$testcase>
+<$data title="Description" text="How to calculate 2 plus 2"/>
+<$data title="FirstNumber" text="2"/>
+<$data title="SecondNumber" text="2"/>
+<$data title="Output" text="<$text text={{{ [{FirstNumber}add{SecondNumber}] }}}/>"/>
+</$testcase>
+
+ </div>
+
 !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
