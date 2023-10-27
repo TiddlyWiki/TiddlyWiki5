@@ -1,25 +1,11 @@
 {
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
-		"tiddlywiki/nodewebkitsaver",
-		"tiddlywiki/browser-sniff",
-		"tiddlywiki/railroad",
-		"tiddlywiki/evernote",
-		"tiddlywiki/internals",
-		"tiddlywiki/menubar",
-		"tiddlywiki/sqlite3store",
-		"tiddlywiki/qrcode"
+		"tiddlywiki/sqlite3store"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
-		"tiddlywiki/snowwhite",
-		"tiddlywiki/starlight",
-		"tiddlywiki/seamless",
-		"tiddlywiki/centralised",
-		"tiddlywiki/tight",
-		"tiddlywiki/heavier",
-		"tiddlywiki/tight-heavier",
-		"tiddlywiki/readonly"
+		"tiddlywiki/snowwhite"
 	],
 	"languages": [
 	],
