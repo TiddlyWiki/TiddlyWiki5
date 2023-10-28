@@ -5,7 +5,7 @@ on:
       - master
       - tiddlywiki-com
 env:
-  NODE_VERSION: "12"
+  NODE_VERSION: "18"
 jobs:
   test:
     runs-on: ubuntu-latest
