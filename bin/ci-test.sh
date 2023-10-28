@@ -2,7 +2,7 @@
 
 # test TiddlyWiki5 for tiddlywiki.com
 
-npm install playwright
+npm install playwright @playwright/test
 npx playwright install chromium firefox --with-deps
 
 node ./tiddlywiki.js \
