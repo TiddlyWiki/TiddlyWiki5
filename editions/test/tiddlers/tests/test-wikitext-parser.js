@@ -202,6 +202,46 @@ describe("WikiText parser tests", function() {
 			[ { type: 'list', attributes: { filter: { type: 'string', value: ' fil\nter ' } }, isBlock: true } ]
 
 		);
+		expect(parse("{{{ link || template }}}")).toEqual(
+
+			[{"type": "list","attributes": {"filter": {"type": "string","value": " link "},"template": {"type": "string","value": "template"}},"isBlock": true}]
+
+		);
+	});
+
+	it("should check \"inline mode\" filtered transclusions with template", function() {
+		expect(parse("{{{ link || template }}} inline")).toEqual(
+
+			[{"type": "element","tag": "p","children": [{"type": "list","attributes": {"filter": {"type": "string","value": " link "},"template": {"type": "string","value": "template"}}},{"type": "text","text": " inline","start": 24,"end": 31}],"start": 0,"end": 31}]
+
+		);
+	});
+
+	it("should check block mode filtered transclusions issue 7701", function() {
+		// see: https://github.com/Jermolene/TiddlyWiki5/issues/7701 and
+		// https://github.com/Jermolene/TiddlyWiki5/issues/7797
+		expect(parse("{{{ link }}}\ntext\n\n}")).toEqual(
+
+			[
+				{"type": "list","attributes": {"filter": {"type": "string","value": " link "}},"isBlock": true},
+				{"type": "element","tag": "p","children":[{"type": "text","text": "text","start": 13,"end": 17}],"start": 13,"end": 17},
+				{"type": "element","tag": "p","children": [{"type": "text","text": "}","start": 19,"end": 20}],"start": 19,"end": 20}
+			]
+
+		);
+	});
+
+	it("should check \"inline mode\" filtered transclusions issue 7701", function() {
+		// see: https://github.com/Jermolene/TiddlyWiki5/issues/7701 and
+		// https://github.com/Jermolene/TiddlyWiki5/issues/7797
+		expect(parse("{{{ link }}} inline\ntext\n\n}")).toEqual(
+
+			[
+				{"type": "element","tag": "p","children": [{"type": "list","attributes": {"filter": {"type": "string","value": " link "}}},{"type": "text","text": " inline\ntext",	"start": 12,"end": 24}],"start": 0,"end": 24},
+				{"type": "element","tag": "p","children": [{"type": "text","text": "}","start": 26,"end": 27}],"start": 26,"end": 27}
+			]
+
+		);
 	});
 
 	it("should parse inline macro calls", function() {
