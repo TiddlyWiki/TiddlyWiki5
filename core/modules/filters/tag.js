@@ -52,7 +52,7 @@ exports.tag = function(source,operator,options) {
 			}
 		}
 	}
-	return results;
+	return $tw.browser ? results.reverse() : results;
 };
 
 })();
