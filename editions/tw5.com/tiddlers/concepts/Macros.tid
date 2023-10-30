@@ -6,7 +6,9 @@ type: text/vnd.tiddlywiki
 
 !! Important
 
-<<.from-version "5.3.0">> Macros have been [[superseded|Macro Pitfalls]] by [[Procedures]], [[Custom Widgets]] and [[Functions]] which together provide more robust and flexible ways to encapsulate and re-use code. It is now recommended to only use macros when textual substitution is specifically required.
+<<.from-version "5.3.0">> Macros have been [[superseded|Macro Pitfalls]] by [[Procedures]], [[Functions]] and [[Custom Widgets]] which together provide more robust and flexible ways to encapsulate and re-use code. 
+
+For text substitutions it is now recommended to use: [[Substituted Attribute Values]], [[substitute Operator]] and [[Transclusion and Substitution]]
 
 !! Introduction
 
