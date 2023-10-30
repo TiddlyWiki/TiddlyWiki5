@@ -1,4 +1,3 @@
-name: Build
 on:
   pull_request:
   push:
@@ -22,6 +21,15 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - name: Link artifacts to PR
+        uses: tonyhallett/artifacts-url-comments@v1.1.0
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            prefix: Here are the artifacts 
+            suffix: Have a nice day.
+            format: name
+            addTo: pullandissues
   build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
