@@ -78,6 +78,10 @@ $tw.SqlConsole.prototype.runQuery = function() {
 				text: sql
 			}),
 			dm("div",{
+				"class": "sql-console-output-count",
+				text: "" + resultRows.length
+			}),
+			dm("div",{
 				"class": "sql-console-output-output",
 				text: exception || JSON.stringify(resultRows)
 			})
