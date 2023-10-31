@@ -61,7 +61,10 @@ DataWidget.prototype.readDataTiddlerValues = function() {
 	if(this.hasAttribute("$tiddler")) {
 		title = this.getAttribute("$tiddler");
 		if(title) {
-			tiddlers.push(this.wiki.getTiddler(title));
+			var tiddler = this.wiki.getTiddler(title);
+			if(tiddler) {
+				tiddlers.push(tiddler);
+			}
 		}
 	}
 	if(this.hasAttribute("$filter")) {
