@@ -1,5 +1,6 @@
 title: $:/core/ui/testcases/DefaultTemplate/Source
 
+\whitespace trim
 <$list filter="[<currentTab>fields[]] -text +[limit[1]]" variable="ignore">
 	<table class="tc-field-table">
 		<tbody>
