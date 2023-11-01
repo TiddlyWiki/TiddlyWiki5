@@ -46,6 +46,13 @@ if [  -z "$TW5_BUILD_OUTPUT" ]; then
     TW5_BUILD_OUTPUT=./output
 fi
 
+# Chech if archive should be built
+
+if [[ "$TW5_BUILD_OUTPUT" = "./output"* ]]; then
+    echo 'Archive will be built'
+	TW5_BUILD_ARCHIVE=archive
+fi
+
 mkdir -p $TW5_BUILD_OUTPUT
 
 if [  ! -d "$TW5_BUILD_OUTPUT" ]; then
@@ -101,7 +108,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build favicon static index archive \
+	--build favicon static index $TW5_BUILD_ARCHIVE\
 	|| exit 1
 
 # /empty.html					Empty
