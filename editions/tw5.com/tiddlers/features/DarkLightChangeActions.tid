@@ -1,5 +1,5 @@
 created: 20231101120147664
-modified: 20231101124455520
+modified: 20231101180546298
 tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
@@ -19,9 +19,9 @@ The following variable is defined for all actions DarkLightChangeActions
 | Variables | Description |h
 |`dark-mode` |`yes` or `no` depending on the browser or OS setting |
 
-!! Exmample
+!! Example
 
-The following example defines the $:/palette tiddler based on the dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> <- This tag-pill dropdown can be used to see all possible palette tiddlers.
+The following example defines the $:/palette tiddler based on the dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> -- The tag-pill dropdown can be used to see all possible palette tiddlers.
 
 ```
 title: test-AutoSwitchPalette
