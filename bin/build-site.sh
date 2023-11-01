@@ -96,13 +96,13 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 #
 ######################################################
 
-# /index.html				Main site
-# /favicon.ico				Favicon for main site
-# /static.html				Static rendering of default tiddlers
-# /alltiddlers.html			Static rendering of all tiddlers
-# /static/*					Static single tiddlers
-# /static/static.css		Static stylesheet
-# /static/favicon.ico		Favicon for static pages
+# /index.html			Main site
+# /favicon.ico			Favicon for main site
+# /static.html			Static rendering of default tiddlers
+# /alltiddlers.html		Static rendering of all tiddlers
+# /static/*				Static single tiddlers
+# /static/static.css	Static stylesheet
+# /static/favicon.ico	Favicon for static pages
 # 
 # Conditionally build archive if $TW5_BUILD_ARCHIVE is set to "archive"
 #
