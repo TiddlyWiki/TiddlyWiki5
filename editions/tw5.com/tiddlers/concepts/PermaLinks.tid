@@ -42,7 +42,7 @@ Both the target tiddler title and the story filter should be URL encoded (but no
 
 !! Simpler URLS
 
-<<.from-version "5.2.3">> The URLs generated are simplified from the hard-to-read percent encoding when feasible.  Spaces are replaced with underscores (`_`), many punctuation characters are allowed to remain unencoded, and permaview filters receive a simpler encoding.  For example the tiddler "Hard Linebreaks with CSS - Example", which percent-encoded would look like 
+<<.from-version "5.3.2">> The URLs generated are simplified from the hard-to-read percent encoding when feasible.  Spaces are replaced with underscores (`_`), many punctuation characters are allowed to remain unencoded, and permaview filters receive a simpler encoding.  For example the tiddler "Hard Linebreaks with CSS - Example", which percent-encoded would look like 
 
 > @@font-family:monospace;#Hard%20Linebreaks%20with%20CSS%20-%20Example@@
 
