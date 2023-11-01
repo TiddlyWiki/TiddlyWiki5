@@ -1,12 +1,12 @@
 created: 20231101120147664
-modified: 20231101180546298
+modified: 20231101180701144
 tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
 
 <<.from-version "5.3.2">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
 
-<<.tip """Be aware, that the browser setting can be independent from the OS setting.<br>
+<<.tip """Be aware that the browser setting can be independent from the OS setting.<br>
 
 If the browser settings are set to "System theme - auto" for ~FireFox or "System default" for Chrome-like browsers, the OS setting will be shown. """>>
 
