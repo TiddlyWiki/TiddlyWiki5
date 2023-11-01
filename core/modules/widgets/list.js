@@ -160,7 +160,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 			// Check for a <$list-item> widget
 			if(this.explicitListTemplate) {
 				templateTree = this.explicitListTemplate;
-			} else if (!this.explicitEmptyTemplate) {
+			} else {
 				templateTree = this.parseTreeNode.children;
 			}
 		}
@@ -413,5 +413,28 @@ ListItemWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.listitem = ListItemWidget;
+
+/*
+Make <$list-template> and <$list-empty> widgets that do nothing
+*/
+var ListTemplateWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListTemplateWidget.prototype = new Widget();
+ListTemplateWidget.prototype.render = function() {}
+ListTemplateWidget.prototype.refresh = function() { return false; }
+
+exports["list-template"] = ListTemplateWidget;
+
+var ListEmptyWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListEmptyWidget.prototype = new Widget();
+ListEmptyWidget.prototype.render = function() {}
+ListEmptyWidget.prototype.refresh = function() { return false; }
+
+exports["list-empty"] = ListEmptyWidget;
 
 })();
