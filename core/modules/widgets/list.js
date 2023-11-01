@@ -28,6 +28,18 @@ Inherit from the base widget class
 */
 ListWidget.prototype = new Widget();
 
+ListWidget.prototype.initialise = function(parseTreeNode,options) {
+	// Bail if parseTreeNode is undefined, meaning that the ListWidget constructor was called without any arguments so that it can be subclassed
+	if(parseTreeNode === undefined) {
+		return;
+	}
+	// First call parent constructor to set everything else up
+	Widget.prototype.initialise.call(this,parseTreeNode,options);
+	// Now look for <$list-template> and <$list-empty> widgets as immediate child widgets
+	// This is safe to do during initialization because parse trees never change after creation
+	this.findExplicitTemplates();
+}
+
 /*
 Render this widget into the DOM
 */
@@ -68,8 +80,6 @@ ListWidget.prototype.execute = function() {
 	this.counterName = this.getAttribute("counter");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
-	// Look for <$list-template> and <$list-empty> widgets as immediate child widgets
-	this.findExplicitTemplates();
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
