@@ -287,7 +287,6 @@ $tw.utils.decodeURIComponentSafe = function(s) {
 	return v;
 };
 
-
 /*
 Convert a URI encoded string to a string safely
 */

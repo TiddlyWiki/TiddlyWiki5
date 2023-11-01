@@ -1005,28 +1005,6 @@ exports.makeCompareFunction = function(type,options) {
 	return (types[type] || types[options.defaultType] || types.number);
 };
 
-exports.map = function(fn) {
-	return function (xs) {
-		var results = [];
-		for (var i = 0;  i < xs.length; i++) {
-			results.push (fn(xs[i]));
-		}
-		return results;
-	}
-}
-
-exports.filter = function(fn) {
-	return function (xs) {
-		const results = []
-		for (var i = 0; i < xs.length; i++) {
-			if (fn(xs[i])) {
-				results.push(xs[i])
-            }
-		}
-		return results;
-	}
-}
-
 // The character that will substitute for a space in the URL
 var SPACE_SUBSTITUTE = "_";
 
@@ -1041,20 +1019,21 @@ var CLAIMED = [SPACE_SUBSTITUTE, ":", CONJUNCTION];
 
 // Non-alphanumeric characters allowed in a URL fragment
 // More information at https://www.rfc-editor.org/rfc/rfc3986#appendix-A
-var VALID_IN_URL_FRAGMENT = "-._~!$&'()*+,;=:@/?";
+var VALID_IN_URL_FRAGMENT = "-._~!$&'()*+,;=:@/?".split("");
 
 // The subset of the pchars we will not percent-encode in permalinks/permaviews
-var SUBSTITUTES = VALID_IN_URL_FRAGMENT.split("").filter(function(c){return CLAIMED.indexOf(c) === -1});
+var SUBSTITUTES = []
+$tw.utils.each (VALID_IN_URL_FRAGMENT, function(c) {if(CLAIMED.indexOf(c) === -1) {SUBSTITUTES.push(c)}});
 
 // A regex to match the percent-encoded characters we will want to replace.
 // Something similar to the following, depending on SPACE and CONJUNCTION
 //     /(%2D|%2E|%7E|%21|%24|%26|%27|%28|%29|%2A|%2B|%3B|%3D|%40|%2F|%3F)/g
-var CHAR_MATCH = new RegExp(
-	"(" + SUBSTITUTES.map(function(c) {
-		return  "%" + c.charCodeAt(0).toString(16).toUpperCase()
-	}).join("|") + ")", 
-	"g"
-);
+
+var CHAR_MATCH_STR = []
+$tw.utils.each(SUBSTITUTES, function(c) {
+	CHAR_MATCH_STR.push("%" + c.charCodeAt(0).toString(16).toUpperCase())
+})
+var CHAR_MATCH = new RegExp("(" + CHAR_MATCH_STR.join("|") + ")", "g");
 
 // A regex to match the SPACE_SUBSTITUTE character
 var SPACE_MATCH = new RegExp("(\\" + SPACE_SUBSTITUTE + ")", "g");
@@ -1075,8 +1054,10 @@ var PCT_CHAR_MAP = SUBSTITUTES.reduce(function (a, c) {
 // value as an allowed replacement for the space character) to a string
 exports.decodeTWURIList = function(s) {
 	var parts = s.replace(SENTENCE_TRAILING, "$1").split(CONJUNCTION);
-	var withSpaces = $tw.utils.map(function(s) {return s.replace(SPACE_MATCH, " ")})(parts);
-	var withBrackets = $tw.utils.map(function(s) {return s.indexOf(" ") >= 0 ? "[[" + s + "]]" : s})(withSpaces);
+	var withSpaces = []
+	$tw.utils.each(parts, function(s) {withSpaces.push(s.replace(SPACE_MATCH, " "))});
+	var withBrackets  = []
+	$tw.utils.each(withSpaces, function(s) {withBrackets .push(s.indexOf(" ") >= 0 ? "[[" + s + "]]" : s)});
 	return $tw.utils.decodeURIComponentSafe(withBrackets.join(" "));
 };
 
@@ -1105,13 +1086,18 @@ exports.encodeFilterPath = function(s) {
 	var parts = s.replace(SENTENCE_ENDING, "$1" + TRAILER)
 		.replace(/\[\[(.+?)\]\]/g, function (_, t) {return t.replace(/ /g, SPACE_SUBSTITUTE )})
 		.split(" ");
-	var nonEmptyParts = $tw.utils.filter(Boolean)(parts);
-	var trimmed = $tw.utils.map(function(s) {return s.trim()})(nonEmptyParts);
-	var encoded = $tw.utils.map(function(s) {return encodeURIComponent(s)})(trimmed);
-	var substituted = $tw.utils.map(function(s) {return s.replace(/\%20/g, SPACE_SUBSTITUTE)})(encoded);
-	var replaced = $tw.utils.map(function(s) {return s.replace(CHAR_MATCH, function(_, c) {
-		return PCT_CHAR_MAP[c]});
-	})(substituted);
+	var nonEmptyParts = []
+	$tw.utils.each(parts, function(p) {if (p) {nonEmptyParts.push (p)}});
+	var trimmed = [];
+	$tw.utils.each(nonEmptyParts, function(s) {trimmed.push(s.trim())});
+	var encoded = [];
+	$tw.utils.each(trimmed, function(s) {encoded.push(encodeURIComponent(s))});
+	var substituted = [];
+	$tw.utils.each(encoded, function(s) {substituted.push(s.replace(/\%20/g, SPACE_SUBSTITUTE))});
+	var replaced = []
+	$tw.utils.each(substituted, function(s) {replaced.push(s.replace(CHAR_MATCH, function(_, c) {
+		return PCT_CHAR_MAP[c];
+    }))});
 	return replaced.join(CONJUNCTION);
 };
 
