@@ -46,14 +46,6 @@ if [  -z "$TW5_BUILD_OUTPUT" ]; then
     TW5_BUILD_OUTPUT=./output
 fi
 
-# Check if archive should be built depending on environment variable TW5_BUILD_OUTPUT
-# see: https://github.com/Jermolene/TiddlyWiki5/blob/4b56cb42983d4134715eb7fe7b083fdcc04980f0/.github/workflows/ci.yml#L62
-
-if [[ $TW5_BUILD_OUTPUT = "./output" ]]; then
-    echo 'Archive HTMLs will be built'
-	TW5_BUILD_ARCHIVE=archive
-fi
-
 mkdir -p $TW5_BUILD_OUTPUT
 
 if [  ! -d "$TW5_BUILD_OUTPUT" ]; then
@@ -103,11 +95,6 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 # /static/*				Static single tiddlers
 # /static/static.css	Static stylesheet
 # /static/favicon.ico	Favicon for static pages
-# 
-# Conditionally build archive if $TW5_BUILD_ARCHIVE is set to "archive"
-#
-# /archive/Empty-TiddlyWiki-<version>.html	Empty archived version
-# /archive/TiddlyWiki-<version>.html		Full archived version
 
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
@@ -115,8 +102,27 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT \
-	--build favicon static index $TW5_BUILD_ARCHIVE \
+	--build favicon static index \
 	|| exit 1
+
+
+# Conditionally build archive if $TW5_BUILD_ARCHIVE is set to "./output/archive"
+#
+# /archive/Empty-TiddlyWiki-<version>.html	Empty archived version
+# /archive/TiddlyWiki-<version>.html		Full archived version
+
+if [ -z "$TW5_BUILD_OUTPUT_ARCHIVE" ]; then
+
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--verbose \
+	--version \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT_ARCHIVE \
+	--build archive \
+	|| exit 1
+
+fi
 
 # /empty.html					Empty
 # /empty.hta					For Internet Explorer
