@@ -37,12 +37,14 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 		infoTiddlerFields.push({title: "$:/info/browser/screen/width", text: window.screen.width.toString()});
 		infoTiddlerFields.push({title: "$:/info/browser/screen/height", text: window.screen.height.toString()});
  		// Dark mode through event listener on MediaQueryList
- 		var mqList = window.matchMedia("(prefers-color-scheme: dark)"),
- 			getDarkModeTiddler = function() {return {title: "$:/info/darkmode", text: mqList.matches ? "yes" : "no"};};
- 		infoTiddlerFields.push(getDarkModeTiddler());
- 		mqList.addListener(function(event) {
- 			updateInfoTiddlersCallback([getDarkModeTiddler()]);
- 		});
+		var mqList = window.matchMedia("(prefers-color-scheme: dark)"),
+			getDarkModeTiddler = function() {return {title: "$:/info/darkmode", text: mqList.matches ? "yes" : "no"};};
+		infoTiddlerFields.push(getDarkModeTiddler());
+		mqList.addEventListener("change", function(event){
+			updateInfoTiddlersCallback([getDarkModeTiddler()]);
+			// activate all actions tagged $:/tags/DarkLightChangeActions
+			$tw.rootWidget.invokeActionsByTag("$:/tags/DarkLightChangeActions",event,{"dark-mode":mqList.matches ? "yes" : "no"});
+		});
 		// Language
 		infoTiddlerFields.push({title: "$:/info/browser/language", text: navigator.language || ""});
 	}

@@ -1,0 +1,11 @@
+caption: $:/tags/DarkLightChangeActions
+created: 20231101115650094
+description: marks actions executed on dark / light mode changes
+modified: 20231101120653921
+tags: SystemTags
+title: SystemTag: $:/tags/DarkLightChangeActions
+
+The [[system tag|SystemTags]] `$:/tags/DarkLightChangeActions` marks actions executed on dark / light mode changes. 
+
+* <<.from-version "5.3.2">> DarkLightChangeActions
+* $:/info/darkmode

@@ -1,0 +1,39 @@
+created: 20231101120147664
+modified: 20231101124455520
+tags: Features
+title: DarkLightChangeActions
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.2">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
+
+<<.tip """Be aware, that the browser setting can be independent from the OS setting.<br>
+
+If the browser settings are set to "System theme - auto" for ~FireFox or "System default" for Chrome-like browsers, the OS setting will be shown. """>>
+
+Also see [[SystemTag: $:/tags/DarkLightChangeActions]]
+
+!! Variables
+
+The following variable is defined for all actions DarkLightChangeActions
+
+| Variables | Description |h
+|`dark-mode` |`yes` or `no` depending on the browser or OS setting |
+
+!! Exmample
+
+The following example defines the $:/palette tiddler based on the dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> <- This tag-pill dropdown can be used to see all possible palette tiddlers.
+
+```
+title: test-AutoSwitchPalette
+tags: $:/tags/DarkLightChangeActions
+
+\define darkPalette() $:/palettes/GruvboxDark
+\define lightPalette() $:/palettes/Vanilla
+
+<$action-setfield $tiddler="$:/palette" text={{{ [<dark-mode>match[yes]then<darkPalette>else<lightPalette>] }}} />
+```
+
+!! InfoMechanism
+
+<<.warning """The system info tiddler $:/info/darkmode will be dynamically updated ''after'' the actions have been executed. So it's important to use the variable `dark-mode`""">>
+
