@@ -1,5 +1,5 @@
 created: 20231101120147664
-modified: 20231101180701144
+modified: 20231101180843245
 tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
@@ -35,5 +35,5 @@ tags: $:/tags/DarkLightChangeActions
 
 !! InfoMechanism
 
-<<.warning """The system info tiddler $:/info/darkmode will be dynamically updated ''after'' the actions have been executed. So it's important to use the variable `dark-mode`""">>
+<<.warning """The system info tiddler $:/info/darkmode will be dynamically updated ''after'' the actions have been executed. Therefore it is important to use the variable `dark-mode`""">>
 
