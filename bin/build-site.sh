@@ -84,9 +84,26 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 
 ######################################################
 #
-# Core distribution
+# Core distributions
 #
 ######################################################
+
+# Conditionally build archive if $TW5_BUILD_ARCHIVE variable is set, otherwise do nothing
+#
+# /archive/Empty-TiddlyWiki-<version>.html	Empty archived version
+# /archive/TiddlyWiki-<version>.html		Full archived version
+
+if [ -n "$TW5_BUILD_OUTPUT_ARCHIVE" ]; then
+
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--verbose \
+	--version \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT_ARCHIVE \
+	--build archive \
+	|| exit 1
+fi
 
 # /index.html			Main site
 # /favicon.ico			Favicon for main site
@@ -104,25 +121,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output $TW5_BUILD_OUTPUT \
 	--build favicon static index \
 	|| exit 1
-
-
-# Conditionally build archive if $TW5_BUILD_ARCHIVE is set to "./output/archive"
-#
-# /archive/Empty-TiddlyWiki-<version>.html	Empty archived version
-# /archive/TiddlyWiki-<version>.html		Full archived version
-
-if [ -z "$TW5_BUILD_OUTPUT_ARCHIVE" ]; then
-
-node $TW5_BUILD_TIDDLYWIKI \
-	$TW5_BUILD_MAIN_EDITION \
-	--verbose \
-	--version \
-	--load $TW5_BUILD_OUTPUT/build.tid \
-	--output $TW5_BUILD_OUTPUT_ARCHIVE \
-	--build archive \
-	|| exit 1
-
-fi
 
 # /empty.html					Empty
 # /empty.hta					For Internet Explorer
