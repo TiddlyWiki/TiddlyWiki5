@@ -93,14 +93,14 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 # /archive/Empty-TiddlyWiki-<version>.html	Empty archived version
 # /archive/TiddlyWiki-<version>.html		Full archived version
 
-if [ -n "$TW5_BUILD_OUTPUT_ARCHIVE" ]; then
+if [ -n "$TW5_BUILD_ARCHIVE" ]; then
 
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
 	--version \
 	--load $TW5_BUILD_OUTPUT/build.tid \
-	--output $TW5_BUILD_OUTPUT_ARCHIVE \
+	--output $TW5_BUILD_ARCHIVE \
 	--build archive \
 	|| exit 1
 fi
