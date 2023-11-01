@@ -46,10 +46,11 @@ if [  -z "$TW5_BUILD_OUTPUT" ]; then
     TW5_BUILD_OUTPUT=./output
 fi
 
-# Chech if archive should be built
+# Check if archive should be built depending on environment variable TW5_BUILD_OUTPUT
+# see: https://github.com/Jermolene/TiddlyWiki5/blob/4b56cb42983d4134715eb7fe7b083fdcc04980f0/.github/workflows/ci.yml#L62
 
-if [[ "$TW5_BUILD_OUTPUT" = "./output"* ]]; then
-    echo 'Archive will be built'
+if [[ $TW5_BUILD_OUTPUT = "./output" ]]; then
+    echo 'Archive HTMLs will be built'
 	TW5_BUILD_ARCHIVE=archive
 fi
 
@@ -95,13 +96,19 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 #
 ######################################################
 
-# /index.html			Main site
-# /favicon.ico			Favicon for main site
-# /static.html			Static rendering of default tiddlers
-# /alltiddlers.html		Static rendering of all tiddlers
-# /static/*				Static single tiddlers
-# /static/static.css	Static stylesheet
-# /static/favicon.ico	Favicon for static pages
+# /index.html				Main site
+# /favicon.ico				Favicon for main site
+# /static.html				Static rendering of default tiddlers
+# /alltiddlers.html			Static rendering of all tiddlers
+# /static/*					Static single tiddlers
+# /static/static.css		Static stylesheet
+# /static/favicon.ico		Favicon for static pages
+# 
+# Conditionally build archive if $TW5_BUILD_ARCHIVE is set to "archive"
+#
+# /archive/Empty-TiddlyWiki-<version>.html	Empty archived version
+# /archive/TiddlyWiki-<version>.html		Full archived version
+
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
