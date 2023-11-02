@@ -139,6 +139,35 @@ ListWidget.prototype.getEmptyMessage = function() {
 	}
 };
 
+function removeEmptyTemplate(childNodes) {
+	var result = [];
+	$tw.utils.each(childNodes,function(node) {
+		if(node.type === "list-empty") {
+			// Skip this node
+		} else if(node.type === "element" && node.tag === "p") {
+			var subresult = removeEmptyTemplate(node.children);
+			if(node.children && node.children.length === subresult.length) {
+				// No <$list-empty> found in children
+				result.push(node);
+			} else {
+				// Special case: if the only child of the <p> tag was an explicit template, we remove the <p> tag as well
+				// This avoids polluting the output with empty <p></p> elements which can mess up formatting
+				if(subresult.length === 0) {
+					// Skip the now-empty <p> tag
+				} else {
+					// Clone node so we don't modify the original parse tree
+					var nodeWithoutTemplates = $tw.utils.extend({}, node);
+					nodeWithoutTemplates.children = subresult;
+					result.push(nodeWithoutTemplates);
+				}
+			}
+		} else {
+			result.push(node);
+		}
+	});
+	return result;
+}
+
 /*
 Compose the template for a list item
 */
@@ -160,11 +189,13 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 			// Check for a <$list-item> widget
 			if(this.explicitListTemplate) {
 				templateTree = this.explicitListTemplate;
+			} else if(this.explicitEmptyTemplate) {
+				templateTree = removeEmptyTemplate(this.parseTreeNode.children);
 			} else {
 				templateTree = this.parseTreeNode.children;
 			}
 		}
-		if(!templateTree) {
+		if(!templateTree || templateTree.length === 0) {
 			// Default template is a link to the title
 			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
 				{type: "text", text: title}
