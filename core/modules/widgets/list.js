@@ -92,6 +92,7 @@ ListWidget.prototype.findExplicitTemplates = function() {
 	var self = this;
 	this.explicitListTemplate = null;
 	this.explicitEmptyTemplate = null;
+	this.hasTemplateInBody = false;
 	var searchChildren = function(childNodes) {
 		$tw.utils.each(childNodes,function(node) {
 			if(node.type === "list-template") {
@@ -100,6 +101,8 @@ ListWidget.prototype.findExplicitTemplates = function() {
 				self.explicitEmptyTemplate = node.children;
 			} else if(node.type === "element" && node.tag === "p") {
 				searchChildren(node.children);
+			} else {
+				self.hasTemplateInBody = true;
 			}
 		});
 	};
@@ -139,35 +142,6 @@ ListWidget.prototype.getEmptyMessage = function() {
 	}
 };
 
-function removeEmptyTemplate(childNodes) {
-	var result = [];
-	$tw.utils.each(childNodes,function(node) {
-		if(node.type === "list-empty") {
-			// Skip this node
-		} else if(node.type === "element" && node.tag === "p") {
-			var subresult = removeEmptyTemplate(node.children);
-			if(node.children && node.children.length === subresult.length) {
-				// No <$list-empty> found in children
-				result.push(node);
-			} else {
-				// Special case: if the only child of the <p> tag was an explicit template, we remove the <p> tag as well
-				// This avoids polluting the output with empty <p></p> elements which can mess up formatting
-				if(subresult.length === 0) {
-					// Skip the now-empty <p> tag
-				} else {
-					// Clone node so we don't modify the original parse tree
-					var nodeWithoutTemplates = $tw.utils.extend({}, node);
-					nodeWithoutTemplates.children = subresult;
-					result.push(nodeWithoutTemplates);
-				}
-			}
-		} else {
-			result.push(node);
-		}
-	});
-	return result;
-}
-
 /*
 Compose the template for a list item
 */
@@ -189,9 +163,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 			// Check for a <$list-item> widget
 			if(this.explicitListTemplate) {
 				templateTree = this.explicitListTemplate;
-			} else if(this.explicitEmptyTemplate) {
-				templateTree = removeEmptyTemplate(this.parseTreeNode.children);
-			} else {
+			} else if(this.hasTemplateInBody) {
 				templateTree = this.parseTreeNode.children;
 			}
 		}
