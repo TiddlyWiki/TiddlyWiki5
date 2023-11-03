@@ -1023,7 +1023,11 @@ var VALID_IN_URL_FRAGMENT = "-._~!$&'()*+,;=:@/?".split("");
 
 // The subset of the pchars we will not percent-encode in permalinks/permaviews
 var SUBSTITUTES = []
-$tw.utils.each (VALID_IN_URL_FRAGMENT, function(c) {if(CLAIMED.indexOf(c) === -1) {SUBSTITUTES.push(c)}});
+$tw.utils.each(VALID_IN_URL_FRAGMENT, function(c) {
+	if (CLAIMED.indexOf(c) === -1) {
+		SUBSTITUTES.push(c)
+	}
+});
 
 // A regex to match the percent-encoded characters we will want to replace.
 // Something similar to the following, depending on SPACE and CONJUNCTION
@@ -1055,9 +1059,13 @@ var PCT_CHAR_MAP = SUBSTITUTES.reduce(function (a, c) {
 exports.decodeTWURIList = function(s) {
 	var parts = s.replace(SENTENCE_TRAILING, "$1").split(CONJUNCTION);
 	var withSpaces = []
-	$tw.utils.each(parts, function(s) {withSpaces.push(s.replace(SPACE_MATCH, " "))});
+	$tw.utils.each(parts, function(s) {
+		withSpaces.push(s.replace(SPACE_MATCH, " "))
+	});
 	var withBrackets  = []
-	$tw.utils.each(withSpaces, function(s) {withBrackets .push(s.indexOf(" ") >= 0 ? "[[" + s + "]]" : s)});
+	$tw.utils.each(withSpaces, function(s) {
+		withBrackets .push(s.indexOf(" ") >= 0 ? "[[" + s + "]]" : s)
+	});
 	return $tw.utils.decodeURIComponentSafe(withBrackets.join(" "));
 };
 
@@ -1087,17 +1095,29 @@ exports.encodeFilterPath = function(s) {
 		.replace(/\[\[(.+?)\]\]/g, function (_, t) {return t.replace(/ /g, SPACE_SUBSTITUTE )})
 		.split(" ");
 	var nonEmptyParts = []
-	$tw.utils.each(parts, function(p) {if (p) {nonEmptyParts.push (p)}});
+	$tw.utils.each(parts, function(p) {
+		if (p) {
+			nonEmptyParts.push (p)
+		}
+	});
 	var trimmed = [];
-	$tw.utils.each(nonEmptyParts, function(s) {trimmed.push(s.trim())});
+	$tw.utils.each(nonEmptyParts, function(s) {
+		trimmed.push(s.trim())
+	});
 	var encoded = [];
-	$tw.utils.each(trimmed, function(s) {encoded.push(encodeURIComponent(s))});
+	$tw.utils.each(trimmed, function(s) {
+		encoded.push(encodeURIComponent(s))
+	});
 	var substituted = [];
-	$tw.utils.each(encoded, function(s) {substituted.push(s.replace(/\%20/g, SPACE_SUBSTITUTE))});
+	$tw.utils.each(encoded, function(s) {
+		substituted.push(s.replace(/\%20/g, SPACE_SUBSTITUTE))
+	});
 	var replaced = []
-	$tw.utils.each(substituted, function(s) {replaced.push(s.replace(CHAR_MATCH, function(_, c) {
-		return PCT_CHAR_MAP[c];
-    }))});
+	$tw.utils.each(substituted, function(s) {
+		replaced.push(s.replace(CHAR_MATCH, function(_, c) {
+			return PCT_CHAR_MAP[c];
+		}))
+	});
 	return replaced.join(CONJUNCTION);
 };
 
