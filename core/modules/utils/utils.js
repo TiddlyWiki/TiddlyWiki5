@@ -823,8 +823,8 @@ exports.hashString = function(str) {
 Base64 utility functions that work in either browser or Node.js
 */
 if(typeof window !== 'undefined') {
-	exports.btoa = window.btoa;
-	exports.atob = window.atob;
+	exports.btoa = function(binstr) { return window.btoa(binstr); }
+	exports.atob = function(b64) { return window.atob(b64); }
 } else {
 	exports.btoa = function(binstr) {
 		return Buffer.from(binstr, 'binary').toString('base64');

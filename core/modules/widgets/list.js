@@ -28,6 +28,18 @@ Inherit from the base widget class
 */
 ListWidget.prototype = new Widget();
 
+ListWidget.prototype.initialise = function(parseTreeNode,options) {
+	// Bail if parseTreeNode is undefined, meaning that the ListWidget constructor was called without any arguments so that it can be subclassed
+	if(parseTreeNode === undefined) {
+		return;
+	}
+	// First call parent constructor to set everything else up
+	Widget.prototype.initialise.call(this,parseTreeNode,options);
+	// Now look for <$list-template> and <$list-empty> widgets as immediate child widgets
+	// This is safe to do during initialization because parse trees never change after creation
+	this.findExplicitTemplates();
+}
+
 /*
 Render this widget into the DOM
 */
@@ -68,8 +80,6 @@ ListWidget.prototype.execute = function() {
 	this.counterName = this.getAttribute("counter");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
-	// Look for <$list-template> and <$list-empty> widgets as immediate child widgets
-	this.findExplicitTemplates();
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -92,6 +102,7 @@ ListWidget.prototype.findExplicitTemplates = function() {
 	var self = this;
 	this.explicitListTemplate = null;
 	this.explicitEmptyTemplate = null;
+	this.hasTemplateInBody = false;
 	var searchChildren = function(childNodes) {
 		$tw.utils.each(childNodes,function(node) {
 			if(node.type === "list-template") {
@@ -100,6 +111,8 @@ ListWidget.prototype.findExplicitTemplates = function() {
 				self.explicitEmptyTemplate = node.children;
 			} else if(node.type === "element" && node.tag === "p") {
 				searchChildren(node.children);
+			} else {
+				self.hasTemplateInBody = true;
 			}
 		});
 	};
@@ -160,11 +173,11 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 			// Check for a <$list-item> widget
 			if(this.explicitListTemplate) {
 				templateTree = this.explicitListTemplate;
-			} else if (!this.explicitEmptyTemplate) {
+			} else if(this.hasTemplateInBody) {
 				templateTree = this.parseTreeNode.children;
 			}
 		}
-		if(!templateTree) {
+		if(!templateTree || templateTree.length === 0) {
 			// Default template is a link to the title
 			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
 				{type: "text", text: title}
@@ -413,5 +426,28 @@ ListItemWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.listitem = ListItemWidget;
+
+/*
+Make <$list-template> and <$list-empty> widgets that do nothing
+*/
+var ListTemplateWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListTemplateWidget.prototype = new Widget();
+ListTemplateWidget.prototype.render = function() {}
+ListTemplateWidget.prototype.refresh = function() { return false; }
+
+exports["list-template"] = ListTemplateWidget;
+
+var ListEmptyWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListEmptyWidget.prototype = new Widget();
+ListEmptyWidget.prototype.render = function() {}
+ListEmptyWidget.prototype.refresh = function() { return false; }
+
+exports["list-empty"] = ListEmptyWidget;
 
 })();
