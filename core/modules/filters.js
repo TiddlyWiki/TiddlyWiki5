@@ -225,6 +225,7 @@ source: an iterator function for the source tiddlers, called source(iterator), w
 widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
+	var self = this;
 	// Set up the filter function cache
 	if(!this.filterCache) {
 		this.filterCache = Object.create(null);
@@ -244,10 +245,42 @@ exports.compileFilter = function(filterString) {
 			return [$tw.language.getString("Error/Filter") + ": " + e];
 		};
 	}
+	// Get the filter function
+	var fnFilter = this.optimiseFilter && this.optimiseFilter(filterString);
+	if(!fnFilter) {
+		fnFilter = this.compileFilterToJavaScript(filterParseTree);
+	}
+	// Add recursion detection
+	var fnGuardedFilter = function guardedFilterFunction(source,widget) {
+		var results;
+		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
+		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
+			results = fnFilter(source,widget);
+		} else {
+			results = ["/**-- Excessive filter recursion --**/"];
+		}
+		self.filterRecursionCount = self.filterRecursionCount - 1;
+		return results;
+	}
+	// Add performance measurement
+	var fnMeasured = $tw.perf.measure("filter: " + filterString,fnGuardedFilter);
+	// Cache the final filter function
+	if(this.filterCacheCount >= 2000) {
+		// To prevent memory leak, we maintain an upper limit for cache size.
+		// Reset if exceeded. This should give us 95% of the benefit
+		// that no cache limit would give us.
+		this.filterCache = Object.create(null);
+		this.filterCacheCount = 0;
+	}
+	this.filterCache[filterString] = fnMeasured;
+	this.filterCacheCount++;
+	return fnMeasured;
+};
+
+exports.compileFilterToJavaScript = function(filterParseTree) {
+	var operationFunctions = [];
 	// Get the hashmap of filter operator functions
 	var filterOperators = this.getFilterOperators();
-	// Assemble array of functions, one for each operation
-	var operationFunctions = [];
 	// Step through the operations
 	var self = this;
 	$tw.utils.each(filterParseTree,function(operation) {
@@ -338,7 +371,7 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Make the filter function
-	var fnFilter = function filterFunction(source,widget) {
+	return function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -348,30 +381,11 @@ exports.compileFilter = function(filterString) {
 			widget = $tw.rootWidget;
 		}
 		var results = new $tw.utils.LinkedList();
-		self.filterRecursionCount = (self.filterRecursionCount || 0) + 1;
-		if(self.filterRecursionCount < MAX_FILTER_DEPTH) {
-			$tw.utils.each(operationFunctions,function(operationFunction) {
-				operationFunction(results,source,widget);
-			});
-		} else {
-			results.push("/**-- Excessive filter recursion --**/");
-		}
-		self.filterRecursionCount = self.filterRecursionCount - 1;
+		$tw.utils.each(operationFunctions,function(operationFunction) {
+			operationFunction(results,source,widget);
+		});
 		return results.toArray();
 	};
-	// Return a function that applies the operations to a source iterator of tiddler titles
-	var fnMeasured = $tw.perf.measure("filter: " + filterString,fnFilter);
-	// Cache the measured filter function
-	if(this.filterCacheCount >= 2000) {
-		// To prevent memory leak, we maintain an upper limit for cache size.
-		// Reset if exceeded. This should give us 95% of the benefit
-		// that no cache limit would give us.
-		this.filterCache = Object.create(null);
-		this.filterCacheCount = 0;
-	}
-	this.filterCache[filterString] = fnMeasured;
-	this.filterCacheCount++;
-	return fnMeasured;
 };
 
 })();
