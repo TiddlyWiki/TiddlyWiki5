@@ -337,15 +337,6 @@ console.log("Added indexer",name)
 		this.clearAllCaches();
 	};
 
-	this.optimiseFilter = function(filterString) {
-		// switch($tw.utils.trim(filterString)) {
-		// 	case "[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]]":
-		// 		return [this.sqlFunctions.sqlQuickFilterAllShadowsTiddlersPrefixDocTypeMaxLength()];
-		// 		break;
-		// }
-		return undefined;
-	};
-
 	function TagSubIndexer(indexer,iteratorMethod) {
 		this.indexer = indexer;
 		this.iteratorMethod = iteratorMethod;

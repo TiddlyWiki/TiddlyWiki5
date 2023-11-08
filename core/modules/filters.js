@@ -246,7 +246,7 @@ exports.compileFilter = function(filterString) {
 		};
 	}
 	// Get the filter function
-	var fnFilter = this.optimiseFilter && this.optimiseFilter(filterString);
+	var fnFilter = this.optimiseFilter && this.optimiseFilter(filterString,filterParseTree);
 	if(!fnFilter) {
 		fnFilter = this.compileFilterToJavaScript(filterParseTree);
 	}
