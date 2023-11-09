@@ -187,6 +187,7 @@ Syncer.prototype.readTiddlerInfo = function() {
 	// Record information for known tiddlers
 	var self = this,
 		tiddlers = this.getSyncedTiddlers();
+	this.logger.log("Initialising tiddlerInfo for " + tiddlers.length + " tiddlers");
 	$tw.utils.each(tiddlers,function(title) {
 		var tiddler = self.wiki.getTiddler(title);
 		if(tiddler) {
@@ -203,33 +204,38 @@ Syncer.prototype.readTiddlerInfo = function() {
 Checks whether the wiki is dirty (ie the window shouldn't be closed)
 */
 Syncer.prototype.isDirty = function() {
-	this.logger.log("Checking dirty status");
-	// Check tiddlers that are in the store and included in the filter function
-	var titles = this.getSyncedTiddlers();
-	for(var index=0; index<titles.length; index++) {
-		var title = titles[index],
-			tiddlerInfo = this.tiddlerInfo[title];
-		if(this.wiki.tiddlerExists(title)) {
-			if(tiddlerInfo) {
-				// If the tiddler is known on the server and has been modified locally then it needs to be saved to the server
-				if(this.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
+	var self = this;
+	function checkIsDirty() {
+		// Check tiddlers that are in the store and included in the filter function
+		var titles = self.getSyncedTiddlers();
+		for(var index=0; index<titles.length; index++) {
+			var title = titles[index],
+				tiddlerInfo = self.tiddlerInfo[title];
+			if(self.wiki.tiddlerExists(title)) {
+				if(tiddlerInfo) {
+					// If the tiddler is known on the server and has been modified locally then it needs to be saved to the server
+					if(self.wiki.getChangeCount(title) > tiddlerInfo.changeCount) {
+						return true;
+					}
+				} else {
+					// If the tiddler isn't known on the server then it needs to be saved to the server
 					return true;
 				}
-			} else {
-				// If the tiddler isn't known on the server then it needs to be saved to the server
+			}
+		}
+		// Check tiddlers that are known from the server but not currently in the store
+		titles = Object.keys(self.tiddlerInfo);
+		for(index=0; index<titles.length; index++) {
+			if(!self.wiki.tiddlerExists(titles[index])) {
+				// There must be a pending delete
 				return true;
 			}
 		}
+		return false;
 	}
-	// Check tiddlers that are known from the server but not currently in the store
-	titles = Object.keys(this.tiddlerInfo);
-	for(index=0; index<titles.length; index++) {
-		if(!this.wiki.tiddlerExists(titles[index])) {
-			// There must be a pending delete
-			return true;
-		}
-	}
-	return false;
+	var dirtyStatus = checkIsDirty();
+	this.logger.log("Dirty status was " + dirtyStatus);
+	return dirtyStatus;
 };
 
 /*
@@ -258,6 +264,7 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 		adaptorInfo: this.syncadaptor.getTiddlerInfo(tiddler),
 		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
 	};
+	this.logger.log("Updating tiddler info in syncer.storeTiddler for " + tiddlerFields.title + " " + JSON.stringify(this.tiddlerInfo[tiddlerFields.title]));
 };
 
 Syncer.prototype.getStatus = function(callback) {
@@ -607,6 +614,7 @@ SaveTiddlerTask.prototype.run = function(callback) {
 				revision: revision,
 				timestampLastSaved: new Date()
 			};
+			self.syncer.logger.log("Updating tiddler info in SaveTiddlerTask.run for " + self.title + " " + JSON.stringify(self.syncer.tiddlerInfo[self.title]));
 			// Invoke the callback
 			callback(null);
 		},{
@@ -633,6 +641,7 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 			return callback(err);
 		}
 		// Remove the info stored about this tiddler
+		self.syncer.logger.log("Deleting tiddler info in DeleteTiddlerTask.run for " + self.title);
 		delete self.syncer.tiddlerInfo[self.title];
 		// Invoke the callback
 		callback(null);
