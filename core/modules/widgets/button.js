@@ -16,8 +16,6 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
-var DATA_ATTRIBUTE_PREFIX = "data-";
-
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -256,11 +254,15 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	this.domNode.className = domNodeClasses.join(" ");
 };
 
-ButtonWidget.prototype.updateDomNodeDataAttributes = function() {
+ButtonWidget.prototype.updateDomNodeDataAttributes = function(changedAttributes,domNode) {
 	var self = this;
-	$tw.utils.each(this.attributes,function(value,name) {
+	changedAttributes = changedAttributes || this.attributes;
+	domNode = domNode || this.domNode;
+	var DATA_ATTRIBUTE_PREFIX = "data-";
+	$tw.utils.each(changedAttributes,function(value,name) {
+		value = self.getAttribute(name);
 		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
-			self.domNode.setAttribute(name,value);
+			domNode.setAttribute(name,value);
 		}
 	});
 };
@@ -277,15 +279,7 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedAttributes["class"]) {
 			this.updateDomNodeClasses();
 		}
-		var gotDataAttribute = false;
-		$tw.utils.each(changedAttributes,function(value,name) {
-			if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
-				gotDataAttribute = true;
-			}
-		});
-		if(gotDataAttribute) {
-			this.updateDomNodeDataAttributes();
-		}
+		this.updateDomNodeDataAttributes(changedAttributes);
 	}
 	return this.refreshChildren(changedTiddlers);
 };
