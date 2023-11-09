@@ -505,6 +505,7 @@ Syncer.prototype.processTaskQueue = function() {
 	if((!this.syncadaptor.isReady || this.syncadaptor.isReady()) && this.numTasksInProgress === 0) {
 		// Choose the next task to perform
 		var task = this.chooseNextTask();
+		self.logger.log("Chosen next task " + task);
 		// Perform the task if we had one
 		if(typeof task === "object" && task !== null) {
 			this.numTasksInProgress += 1;
@@ -596,6 +597,10 @@ function SaveTiddlerTask(syncer,title) {
 	this.type = "save";
 }
 
+SaveTiddlerTask.prototype.toString = function() {
+	return "SAVE " + this.title;
+}
+
 SaveTiddlerTask.prototype.run = function(callback) {
 	var self = this,
 		changeCount = this.syncer.wiki.getChangeCount(this.title),
@@ -632,6 +637,10 @@ function DeleteTiddlerTask(syncer,title) {
 	this.type = "delete";
 }
 
+DeleteTiddlerTask.prototype.toString = function() {
+	return "DELETE " + this.title;
+}
+
 DeleteTiddlerTask.prototype.run = function(callback) {
 	var self = this;
 	this.syncer.logger.log("Dispatching 'delete' task:",this.title);
@@ -654,6 +663,10 @@ function LoadTiddlerTask(syncer,title) {
 	this.syncer = syncer;
 	this.title = title;
 	this.type = "load";
+}
+
+LoadTiddlerTask.prototype.toString = function() {
+	return "LOAD " + this.title;
 }
 
 LoadTiddlerTask.prototype.run = function(callback) {
