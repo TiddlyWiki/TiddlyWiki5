@@ -343,6 +343,7 @@ Syncer.prototype.syncFromServer = function() {
 		this.logger.log("Retrieving skinny tiddler list");
 		cancelNextSync();
 		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
+			this.logger.log("Retrieved skinny tiddler list");
 			triggerNextSync();
 			// Check for errors
 			if(err) {
