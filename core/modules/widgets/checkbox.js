@@ -53,6 +53,8 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
+	// Assign data- attributes
+	this.updateDomNodeDataAttributes(null,this.inputDomNode);
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}

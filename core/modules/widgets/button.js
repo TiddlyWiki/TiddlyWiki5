@@ -254,19 +254,6 @@ ButtonWidget.prototype.updateDomNodeClasses = function() {
 	this.domNode.className = domNodeClasses.join(" ");
 };
 
-ButtonWidget.prototype.updateDomNodeDataAttributes = function(changedAttributes,domNode) {
-	var self = this;
-	changedAttributes = changedAttributes || this.attributes;
-	domNode = domNode || this.domNode;
-	var DATA_ATTRIBUTE_PREFIX = "data-";
-	$tw.utils.each(changedAttributes,function(value,name) {
-		value = self.getAttribute(name);
-		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
-			domNode.setAttribute(name,value);
-		}
-	});
-};
-
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */

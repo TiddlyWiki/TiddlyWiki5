@@ -811,6 +811,38 @@ Widget.evaluateVariable  = function(widget,name,options) {
 	return result;
 };
 
+/*
+Set/update the data- attributes of a DOM node according to the attributes of a widget
+changedAttributes: hashmap by name of attributes that have changed (the values of the hashmap entry doesn't matter)
+domNode: optional domNode to be assigned
+*/
+Widget.prototype.updateDomNodeDataAttributes = function(changedAttributes,domNode) {
+	var self = this;
+	changedAttributes = changedAttributes || this.attributes;
+	domNode = domNode || this.domNode;
+	var DATA_ATTRIBUTE_PREFIX = "data-";
+	$tw.utils.each(changedAttributes,function(value,name) {
+		value = self.getAttribute(name);
+		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
+			domNode.setAttribute(name,value);
+		}
+	});
+};
+
+/*
+Set the data- attributes of a parse tree node according to the attributes of the widget
+domNode: optional domNode to be assigned
+*/
+Widget.prototype.updateParseTreeDataAttributes = function(parseTreeNode) {
+	var self = this;
+	var DATA_ATTRIBUTE_PREFIX = "data-";
+	$tw.utils.each(this.attributes,function(value,name) {
+		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
+			$tw.utils.addAttributeToParseTreeNode(parseTreeNode,name,value);
+		}
+	});
+};
+
 exports.widget = Widget;
 
 })();
