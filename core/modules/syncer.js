@@ -315,7 +315,7 @@ Syncer.prototype.syncFromServer = function() {
 		},
 		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
 	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
-		this.logger.log("Retrieving updated tiddler list");
+		self.logger.log("Retrieving updated tiddler list");
 		cancelNextSync();
 		this.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
 			triggerNextSync();
@@ -343,7 +343,7 @@ Syncer.prototype.syncFromServer = function() {
 		this.logger.log("Retrieving skinny tiddler list");
 		cancelNextSync();
 		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
-			this.logger.log("Retrieved skinny tiddler list");
+			self.logger.log("Retrieved skinny tiddler list");
 			triggerNextSync();
 			// Check for errors
 			if(err) {
