@@ -171,7 +171,7 @@ exports.parseFilter = function(filterString) {
 				}
 				if(match[3]) {
 					operation.suffixes = [];
-						$tw.utils.each(match[3].split(":"),function(subsuffix) {
+					$tw.utils.each(match[3].split(":"),function(subsuffix) {
 						operation.suffixes.push([]);
 						$tw.utils.each(subsuffix.split(","),function(entry) {
 							entry = $tw.utils.trim(entry);
@@ -179,7 +179,7 @@ exports.parseFilter = function(filterString) {
 								operation.suffixes[operation.suffixes.length -1].push(entry);
 							}
 						});
-						});
+					});
 				}
 			}
 			if(match[4]) { // Opening square bracket
