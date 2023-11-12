@@ -71,7 +71,10 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		return false;
 	},false);
 	// Assign data- attributes
-	this.updateDomNodeDataAttributes(null,domNode);
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);

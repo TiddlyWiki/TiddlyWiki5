@@ -413,16 +413,23 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 };
 
 /*
-Assign the computed attributes of the widget to a domNode
+Assign the common attributes of the widget to a domNode
 options include:
-excludeEventAttributes: ignores attributes whose name begins with "on"
+sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the emtpy string)
+destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string)
+changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
+excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
 Widget.prototype.assignAttributes = function(domNode,options) {
-	options = options || {};
 	var self = this;
+	options = options || {};
+	var changedAttributes = options.changedAttributes || this.attributes;
+	var sourcePrefix = options.sourcePrefix || "";
+	var destPrefix = options.destPrefix || "";
+	var EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
 		// Check for excluded attribute names
-		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
+		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {
 			value = undefined;
 		}
 		if(value !== undefined) {
@@ -432,28 +439,23 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 				namespace = "http://www.w3.org/1999/xlink";
 				name = name.substr(6);
 			}
-			// Handle styles
-			if(name.substr(0,6) === "style." && name.length > 6) {
-				domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
-			} else {
-				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
-				try {
-					domNode.setAttributeNS(namespace,name,value);
-				} catch(e) {
-				}
+			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+			try {
+				domNode.setAttributeNS(namespace,name,value);
+			} catch(e) {
 			}
 		}
 	}
-	// Not all parse tree nodes have the orderedAttributes property
-	if(this.parseTreeNode.orderedAttributes) {
-		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
-			assignAttribute(attribute.name,self.attributes[attribute.name]);
-		});	
-	} else {
-		$tw.utils.each(Object.keys(self.attributes).sort(),function(name) {
-			assignAttribute(name,self.attributes[name]);
-		});	
-	}
+	$tw.utils.each(changedAttributes,function(value,name) {
+		value = self.getAttribute(name);
+		// Check for a prefixed attribute
+		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
+			domNode.setAttribute(destPrefix + name.substr(sourcePrefix.length),value);
+		// Check for a style attribute
+		} else if(name.substr(0,6) === "style." && name.length > 6) {
+			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+		}
+	});
 };
 
 /*
@@ -809,24 +811,6 @@ Widget.evaluateVariable  = function(widget,name,options) {
 		result = [widget.getVariable(name)];
 	}
 	return result;
-};
-
-/*
-Set/update the data- attributes of a DOM node according to the attributes of a widget
-changedAttributes: hashmap by name of attributes that have changed (the values of the hashmap entry doesn't matter)
-domNode: optional domNode to be assigned
-*/
-Widget.prototype.updateDomNodeDataAttributes = function(changedAttributes,domNode) {
-	var self = this;
-	changedAttributes = changedAttributes || this.attributes;
-	domNode = domNode || this.domNode;
-	var DATA_ATTRIBUTE_PREFIX = "data-";
-	$tw.utils.each(changedAttributes,function(value,name) {
-		value = self.getAttribute(name);
-		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
-			domNode.setAttribute(name,value);
-		}
-	});
 };
 
 /*

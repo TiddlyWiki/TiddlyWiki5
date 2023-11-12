@@ -60,7 +60,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	domNode.className = classes.join(" ");
 	// Assign data- attributes
-	this.updateDomNodeDataAttributes();
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
@@ -266,7 +269,11 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedAttributes["class"]) {
 			this.updateDomNodeClasses();
 		}
-		this.updateDomNodeDataAttributes(changedAttributes);
+		this.assignAttributes(domNode,{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 	}
 	return this.refreshChildren(changedTiddlers);
 };

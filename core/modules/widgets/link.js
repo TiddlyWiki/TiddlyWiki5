@@ -44,7 +44,10 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 		// Just insert the link text
 		var domNode = this.document.createElement("span");
 		// Assign data- attributes
-		this.updateDomNodeDataAttributes(null,domNode);
+		this.assignAttributes(domNode,{
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		parent.insertBefore(domNode,nextSibling);
 		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
