@@ -269,7 +269,7 @@ ButtonWidget.prototype.refresh = function(changedTiddlers) {
 		if(changedAttributes["class"]) {
 			this.updateDomNodeClasses();
 		}
-		this.assignAttributes(domNode,{
+		this.assignAttributes(this.domNodes[0],{
 			changedAttributes: changedAttributes,
 			sourcePrefix: "data-",
 			destPrefix: "data-"
