@@ -415,8 +415,8 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 /*
 Assign the common attributes of the widget to a domNode
 options include:
-sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the emtpy string)
-destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string)
+sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the emtpy string meaning all attributes)
+destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string which means no prefix is added)
 changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
 excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
