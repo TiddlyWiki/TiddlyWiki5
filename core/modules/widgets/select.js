@@ -169,7 +169,7 @@ SelectWidget.prototype.execute = function() {
 	if(this.selectTooltip) {
 		$tw.utils.addAttributeToParseTreeNode(selectNode,"title",this.selectTooltip);
 	}
-	this.updateParseTreeDataAttributes(selectNode);
+	this.assignAttributesToParseTreeNode(selectNode);
 	this.makeChildWidgets([selectNode]);
 };
 

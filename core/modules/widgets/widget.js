@@ -459,6 +459,21 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 };
 
 /*
+Set the data- and style. attributes of a parse tree node according to the attributes of the widget
+domNode: optional domNode to be assigned
+*/
+Widget.prototype.assignAttributesToParseTreeNode = function(parseTreeNode) {
+	var self = this;
+	var DATA_ATTRIBUTE_PREFIX = "data-",
+		STYLE_ATTRIBUTE_PREFIX = "style.";
+	$tw.utils.each(this.attributes,function(value,name) {
+		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX || name.substr(0,STYLE_ATTRIBUTE_PREFIX.length) === STYLE_ATTRIBUTE_PREFIX) {
+			$tw.utils.addAttributeToParseTreeNode(parseTreeNode,name,value);
+		}
+	});
+};
+
+/*
 Get the number of ancestor widgets for this widget
 */
 Widget.prototype.getAncestorCount = function() {
@@ -811,20 +826,6 @@ Widget.evaluateVariable  = function(widget,name,options) {
 		result = [widget.getVariable(name)];
 	}
 	return result;
-};
-
-/*
-Set the data- attributes of a parse tree node according to the attributes of the widget
-domNode: optional domNode to be assigned
-*/
-Widget.prototype.updateParseTreeDataAttributes = function(parseTreeNode) {
-	var self = this;
-	var DATA_ATTRIBUTE_PREFIX = "data-";
-	$tw.utils.each(this.attributes,function(value,name) {
-		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
-			$tw.utils.addAttributeToParseTreeNode(parseTreeNode,name,value);
-		}
-	});
 };
 
 exports.widget = Widget;
