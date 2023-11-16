@@ -54,7 +54,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \whitespace trim
 <$vars name={{{ [<newFieldNameTiddler>get[text]] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
-<$button tooltip=<<lingo Fields/Add/Button/Hint>>>
+<$button tooltip={{$:/language/EditTemplate/Fields/Add/Button/Hint}}>
 <$action-sendmessage $message="tm-add-field"
 $name=<<name>>
 $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
