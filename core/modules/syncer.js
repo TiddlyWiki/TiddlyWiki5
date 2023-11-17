@@ -24,7 +24,7 @@ Syncer.prototype.titleSyncPollingInterval = "$:/config/SyncPollingInterval";
 Syncer.prototype.titleSyncDisableLazyLoading = "$:/config/SyncDisableLazyLoading";
 Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 Syncer.prototype.titleSyncThrottleInterval = "$:/config/SyncThrottleInterval";
-Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
+Syncer.prototype.taskTimerInterval = 0.25 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
 Syncer.prototype.errorRetryInterval = 5 * 1000; // Interval to retry after an error
 Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
@@ -74,9 +74,11 @@ function Syncer(options) {
 	this.titlesHaveBeenLazyLoaded = {}; // Hashmap of titles of tiddlers that have already been lazily loaded from the server
 	// Timers
 	this.taskTimerId = null; // Timer for task dispatch
-	this.pollTimerId = null; // Timer for polling server
 	// Number of outstanding requests
 	this.numTasksInProgress = 0;
+	// True when we want to force an immediate sync from the server
+	this.forceSyncFromServer = false;
+	this.timestampLastSyncFromServer = new Date();
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
 		// Filter the changes to just include ones that are being synced
@@ -300,91 +302,8 @@ Syncer.prototype.getStatus = function(callback) {
 Synchronise from the server by reading the skinny tiddler list and queuing up loads for any tiddlers that we don't already have up to date
 */
 Syncer.prototype.syncFromServer = function() {
-	var self = this,
-		cancelNextSync = function() {
-			if(self.pollTimerId) {
-				clearTimeout(self.pollTimerId);
-				self.pollTimerId = null;
-			}
-		},
-		triggerNextSync = function() {
-			self.pollTimerId = setTimeout(function() {
-				self.pollTimerId = null;
-				self.syncFromServer.call(self);
-			},self.pollTimerInterval);
-		},
-		syncSystemFromServer = (self.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
-	if(this.syncadaptor && this.syncadaptor.getUpdatedTiddlers) {
-		self.logger.log("Retrieving updated tiddler list");
-		cancelNextSync();
-		this.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
-			triggerNextSync();
-			if(err) {
-				self.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
-				return;
-			}
-			if(updates) {
-				$tw.utils.each(updates.modifications,function(title) {
-					self.titlesToBeLoaded[title] = true;
-				});
-				$tw.utils.each(updates.deletions,function(title) {
-					if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
-						delete self.tiddlerInfo[title];
-						self.logger.log("Deleting tiddler missing from server:",title);
-						self.wiki.deleteTiddler(title);
-					}
-				});
-				if(updates.modifications.length > 0 || updates.deletions.length > 0) {
-					self.processTaskQueue();
-				}				
-			}
-		});
-	} else if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
-		this.logger.log("Retrieving skinny tiddler list");
-		cancelNextSync();
-		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
-			self.logger.log("Retrieved skinny tiddler list");
-			triggerNextSync();
-			// Check for errors
-			if(err) {
-				self.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
-				return;
-			}
-			// Keep track of which tiddlers we already know about have been reported this time
-			var previousTitles = Object.keys(self.tiddlerInfo);
-			// Process each incoming tiddler
-			for(var t=0; t<tiddlers.length; t++) {
-				// Get the incoming tiddler fields, and the existing tiddler
-				var tiddlerFields = tiddlers[t],
-					incomingRevision = tiddlerFields.revision + "",
-					tiddler = self.wiki.tiddlerExists(tiddlerFields.title) && self.wiki.getTiddler(tiddlerFields.title),
-					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
-					currRevision = tiddlerInfo ? tiddlerInfo.revision : null,
-					indexInPreviousTitles = previousTitles.indexOf(tiddlerFields.title);
-				if(indexInPreviousTitles !== -1) {
-					previousTitles.splice(indexInPreviousTitles,1);
-				}
-				// Ignore the incoming tiddler if it's the same as the revision we've already got
-				if(currRevision !== incomingRevision) {
-					// Only load the skinny version if we don't already have a fat version of the tiddler
-					if(!tiddler || tiddler.fields.text === undefined) {
-						self.storeTiddler(tiddlerFields);
-					}
-					// Do a full load of this tiddler
-					self.titlesToBeLoaded[tiddlerFields.title] = true;
-				}
-			}
-			// Delete any tiddlers that were previously reported but missing this time
-			$tw.utils.each(previousTitles,function(title) {
-				if(syncSystemFromServer || !self.wiki.isSystemTiddler(title)) {
-					delete self.tiddlerInfo[title];
-					self.logger.log("Deleting tiddler missing from server:",title);
-					self.wiki.deleteTiddler(title);
-				}
-			});
-			self.processTaskQueue();
-		});
-	}
+	this.forceSyncFromServer = true;
+	this.processTaskQueue();
 };
 
 /*
@@ -519,7 +438,7 @@ Syncer.prototype.processTaskQueue = function() {
 				} else {
 					self.updateDirtyStatus();
 					// Process the next task
-					self.processTaskQueue.call(self);					
+					self.processTaskQueue.call(self);
 				}
 			});
 		} else {
@@ -527,31 +446,39 @@ Syncer.prototype.processTaskQueue = function() {
 			this.updateDirtyStatus();
 			// And trigger a timeout if there is a pending task
 			if(task === true) {
-				this.triggerTimeout();				
+				this.triggerTimeout(this.taskTimerInterval);
+			} else {
+				this.triggerTimeout(this.pollTimerInterval);
 			}
 		}
 	} else {
-		this.updateDirtyStatus();		
+		this.updateDirtyStatus();
+		this.triggerTimeout(this.taskTimerInterval);
 	}
 };
 
 Syncer.prototype.triggerTimeout = function(interval) {
 	var self = this;
-	if(!this.taskTimerId) {
-		this.taskTimerId = setTimeout(function() {
-			self.taskTimerId = null;
-			self.processTaskQueue.call(self);
-		},interval || self.taskTimerInterval);
+	if(this.taskTimerId) {
+		clearTimeout(this.taskTimerId);
 	}
+	this.taskTimerId = setTimeout(function() {
+		self.taskTimerId = null;
+		self.processTaskQueue.call(self);
+	},interval || self.taskTimerInterval);
 };
 
 /*
-Choose the next sync task. We prioritise saves, then deletes, then loads from the server
+Choose the next sync task. We prioritise saves to the server, then getting updates from the server, then deletes to the server, then loads from the server
 
-Returns either a task object, null if there's no upcoming tasks, or the boolean true if there are pending tasks that aren't yet due
+Returns either:
+* a task object
+* the boolean true if there are pending sync tasks that aren't yet due
+* null if there's no pending sync tasks (just the next poll)
 */
 Syncer.prototype.chooseNextTask = function() {
-	var thresholdLastSaved = (new Date()) - this.throttleInterval,
+	var now = new Date(),
+		thresholdLastSaved = now - this.throttleInterval,
 		havePending = null;
 	// First we look for tiddlers that have been modified locally and need saving back to the server
 	var titles = this.getSyncedTiddlers();
@@ -565,14 +492,18 @@ Syncer.prototype.chooseNextTask = function() {
 				isReadyToSave = !tiddlerInfo || !tiddlerInfo.timestampLastSaved || tiddlerInfo.timestampLastSaved < thresholdLastSaved;
 			if(hasChanged) {
 				if(isReadyToSave) {
-					return new SaveTiddlerTask(this,title); 					
+					return new SaveTiddlerTask(this,title);
 				} else {
 					havePending = true;
 				}
 			}
 		}
 	}
-	// Second, we check tiddlers that are known from the server but not currently in the store, and so need deleting on the server
+	// Second we check for an outstanding sync from server
+	if(this.forceSyncFromServer || (this.timestampLastSyncFromServer && (now.valueOf() >= (this.timestampLastSyncFromServer.valueOf() + this.pollTimerInterval)))) {
+		return new SyncFromServerTask(this);
+	}
+	// Third, we check tiddlers that are known from the server but not currently in the store, and so need deleting on the server
 	titles = Object.keys(this.tiddlerInfo);
 	for(index=0; index<titles.length; index++) {
 		title = titles[index];
@@ -582,13 +513,13 @@ Syncer.prototype.chooseNextTask = function() {
 			return new DeleteTiddlerTask(this,title);
 		}
 	}
-	// Check for tiddlers that need loading
+	// Finally, check for tiddlers that need loading
 	title = Object.keys(this.titlesToBeLoaded)[0];
 	if(title) {
 		delete this.titlesToBeLoaded[title];
 		return new LoadTiddlerTask(this,title);
 	}
-	// No tasks are ready
+	// No tasks are ready now, but might be in the future
 	return havePending;
 };
 
@@ -685,6 +616,94 @@ LoadTiddlerTask.prototype.run = function(callback) {
 		// Invoke the callback
 		callback(null);
 	});
+};
+
+function SyncFromServerTask(syncer) {
+	this.syncer = syncer;
+	this.type = "syncfromserver";
+}
+
+SyncFromServerTask.prototype.toString = function() {
+	return "SYNCFROMSERVER";
+}
+
+SyncFromServerTask.prototype.run = function(callback) {
+	var self = this;
+	var syncSystemFromServer = (self.syncer.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "yes" ? true : false);
+	var successCallback = function() {
+		self.syncer.forceSyncFromServer = false;
+		self.syncer.timestampLastSyncFromServer = new Date();
+		callback(null);
+	};
+	if(this.syncer.syncadaptor.getUpdatedTiddlers) {
+		self.syncer.logger.log("Retrieving updated tiddler list");
+		this.syncer.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
+			if(err) {
+				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
+				return callback(err);
+			}
+			if(updates) {
+				$tw.utils.each(updates.modifications,function(title) {
+					self.syncer.titlesToBeLoaded[title] = true;
+				});
+				$tw.utils.each(updates.deletions,function(title) {
+					if(syncSystemFromServer || !self.syncer.wiki.isSystemTiddler(title)) {
+						delete self.syncer.tiddlerInfo[title];
+						self.syncer.logger.log("Deleting tiddler missing from server:",title);
+						self.syncer.wiki.deleteTiddler(title);
+					}
+				});
+			}
+			return successCallback();
+		});
+	} else if(this.syncer.syncadaptor.getSkinnyTiddlers) {
+		this.syncer.logger.log("Retrieving skinny tiddler list");
+		this.syncer.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
+			self.syncer.logger.log("Retrieved skinny tiddler list");
+			// Check for errors
+			if(err) {
+				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
+				return callback(err);
+			}
+			// Keep track of which tiddlers we already know about have been reported this time
+			var previousTitles = Object.keys(self.syncer.tiddlerInfo);
+			// Process each incoming tiddler
+			for(var t=0; t<tiddlers.length; t++) {
+				// Get the incoming tiddler fields, and the existing tiddler
+				var tiddlerFields = tiddlers[t],
+					incomingRevision = tiddlerFields.revision + "",
+					tiddler = self.syncer.wiki.tiddlerExists(tiddlerFields.title) && self.syncer.wiki.getTiddler(tiddlerFields.title),
+					tiddlerInfo = self.syncer.tiddlerInfo[tiddlerFields.title],
+					currRevision = tiddlerInfo ? tiddlerInfo.revision : null,
+					indexInPreviousTitles = previousTitles.indexOf(tiddlerFields.title);
+				if(indexInPreviousTitles !== -1) {
+					previousTitles.splice(indexInPreviousTitles,1);
+				}
+				// Ignore the incoming tiddler if it's the same as the revision we've already got
+				if(currRevision !== incomingRevision) {
+					// Only load the skinny version if we don't already have a fat version of the tiddler
+					if(!tiddler || tiddler.fields.text === undefined) {
+						self.syncer.storeTiddler(tiddlerFields);
+					}
+					// Do a full load of this tiddler
+					self.syncer.titlesToBeLoaded[tiddlerFields.title] = true;
+				}
+			}
+			// Delete any tiddlers that were previously reported but missing this time
+			$tw.utils.each(previousTitles,function(title) {
+				if(syncSystemFromServer || !self.syncer.wiki.isSystemTiddler(title)) {
+					delete self.syncer.tiddlerInfo[title];
+					self.syncer.logger.log("Deleting tiddler missing from server:",title);
+					self.syncer.wiki.deleteTiddler(title);
+				}
+			});
+			self.syncer.forceSyncFromServer = false;
+			self.syncer.timestampLastSyncFromServer = new Date();
+			return successCallback();
+		});
+	} else {
+		return successCallback();
+	}
 };
 
 exports.Syncer = Syncer;
