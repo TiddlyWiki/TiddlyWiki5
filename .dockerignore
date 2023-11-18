@@ -1,0 +1,9 @@
+.circleci/*
+.git/*
+contrib/*
+tests/*
+.editorconfig
+LICENSE
+Makefile
+*.md
+*.txt
