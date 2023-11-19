@@ -213,6 +213,18 @@ function getDataItemType(data,indexes) {
 	}
 }
 
+function getItemAtIndex(item,index) {
+	if($tw.utils.hop(item,index)) {
+		return item[index];
+	} else if($tw.utils.isArray(item)) {
+		index = $tw.utils.parseInt(index);
+		if(index < 0) { index = index + item.length };
+		return item[index]; // Will be undefined if index was out-of-bounds
+	} else {
+		return undefined;
+	}
+}
+
 /*
 Given a JSON data structure and an array of index strings, return the value at the end of the index chain, or "undefined" if any of the index strings are invalid
 */
@@ -225,7 +237,7 @@ function getDataItem(data,indexes) {
 	for(var i=0; i<indexes.length; i++) {
 		if(item !== undefined) {
 			if(item !== null && ["number","string","boolean"].indexOf(typeof item) === -1) {
-				item = item[indexes[i]];
+				item = getItemAtIndex(item,indexes[i]);
 			} else {
 				item = undefined;
 			}
@@ -249,16 +261,18 @@ function setDataItem(data,indexes,value) {
 	// Traverse the JSON data structure using the index chain
 	var current = data;
 	for(var i = 0; i < indexes.length - 1; i++) {
-		var index = indexes[i];
-		if($tw.utils.hop(current,index)) {
-			current = current[index];
-		} else {
+		current = getItemAtIndex(current,indexes[i]);
+		if(current === undefined) {
 			// Return the original JSON data structure if any of the index strings are invalid
 			return data;
 		}
 	}
 	// Add the value to the end of the index chain
 	var lastIndex = indexes[indexes.length - 1];
+	if($tw.utils.isArray(current)) {
+		lastIndex = $tw.utils.parseInt(lastIndex);
+		if(lastIndex < 0) { lastIndex = lastIndex + current.length };
+	}
 	current[lastIndex] = value;
 	return data;
 }
