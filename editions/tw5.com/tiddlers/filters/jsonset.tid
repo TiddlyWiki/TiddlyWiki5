@@ -51,6 +51,14 @@ The <<.op jsonset>> operator uses multiple operands to specify the indexes of th
 [<jsondata>jsonset[d],[f],[Panther]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": "Panther","g": {"x": "max","y": "may","z": "maize"}}"}
 ```
 
+Negative indexes into an array are counted from the end, so -1 means the last item, -2 the next-to-last item, and so on:
+
+```
+[<jsondata>jsonset[d],[f],[-1],[Elephant]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": ["five","six",true,false,"Elephant"],"g": {"x": "max","y": "may","z": "maize"}}"}
+[<jsondata>jsonset[d],[f],[-2],[Elephant]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": ["five","six",true,"Elephant",null],"g": {"x": "max","y": "may","z": "maize"}}"}
+[<jsondata>jsonset[d],[f],[-4],[Elephant]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": ["five","Elephant",true,false,null],"g": {"x": "max","y": "may","z": "maize"}}"}
+```
+
 Indexes can be dynamically composed from variables and transclusions:
 
 ```
