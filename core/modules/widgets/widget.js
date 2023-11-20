@@ -466,8 +466,10 @@ Widget.prototype.assignAttributesToParseTreeNode = function(parseTreeNode) {
 	var DATA_ATTRIBUTE_PREFIX = "data-",
 		STYLE_ATTRIBUTE_PREFIX = "style.";
 	$tw.utils.each(this.attributes,function(value,name) {
-		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX || name.substr(0,STYLE_ATTRIBUTE_PREFIX.length) === STYLE_ATTRIBUTE_PREFIX) {
+		if(name.substr(0,DATA_ATTRIBUTE_PREFIX.length) === DATA_ATTRIBUTE_PREFIX) {
 			$tw.utils.addAttributeToParseTreeNode(parseTreeNode,name,value);
+		} else if(name.substr(0,STYLE_ATTRIBUTE_PREFIX.length) === STYLE_ATTRIBUTE_PREFIX && name.length > 6) {
+			$tw.utils.addStyleToParseTreeNode(parseTreeNode,$tw.utils.unHyphenateCss(name.substr(STYLE_ATTRIBUTE_PREFIX.length)),value);
 		}
 	});
 };
