@@ -173,29 +173,6 @@ SelectWidget.prototype.execute = function() {
 	this.selectTooltip = this.getAttribute("tooltip");
 	this.selectFocus = this.getAttribute("focus");
 	// Make the child widgets
-	/*
-	var selectNode = {
-		type: "element",
-		tag: "select",
-		children: this.parseTreeNode.children
-	};
-	if(this.selectClass) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"class",this.selectClass);
-	}
-	if(this.selectMultiple) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"multiple","multiple");
-	}
-	if(this.selectSize) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"size",this.selectSize);
-	}
-	if(this.selectTabindex) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"tabindex",this.selectTabindex);
-	}
-	if(this.selectTooltip) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"title",this.selectTooltip);
-	}
-	this.assignAttributesToParseTreeNode(selectNode);
-	*/
 	this.makeChildWidgets();
 };
 
