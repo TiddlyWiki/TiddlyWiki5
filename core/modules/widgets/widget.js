@@ -460,7 +460,6 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 
 /*
 Set the data- and style. attributes of a parse tree node according to the attributes of the widget
-domNode: optional domNode to be assigned
 */
 Widget.prototype.assignAttributesToParseTreeNode = function(parseTreeNode) {
 	var self = this;
