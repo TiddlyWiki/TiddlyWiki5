@@ -40,7 +40,31 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	this.renderChildren(parent,nextSibling);
+	//Create element
+	var domNode = this.document.createElement("select");
+	if(this.selectClass) {
+		domNode.classname = this.selectClass;
+	}
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
+	if(this.selectMultiple) {
+		domNode.setAttribute("multiple","multiple");
+	}
+	if(this.selectSize) {
+		domNode.setAttribute("size",this.selectSize);
+	}
+	if(this.selectTabindex) {
+		domNode.setAttribute("tabindex",this.selectTabindex);
+	}
+	if(this.selectTooltip) {
+		domNode.setAttribute("title",this.selectTooltip);
+	}
+	this.renderChildren(domNode,nextSibling);
+	this.parentDomNode.insertBefore(domNode,nextSibling);
+	this.domNodes.push(domNode);
 	this.setSelectValue();
 	if(this.selectFocus == "yes") {
 		this.getSelectDomNode().focus();
@@ -113,7 +137,7 @@ SelectWidget.prototype.setSelectValue = function() {
 Get the DOM node of the select element
 */
 SelectWidget.prototype.getSelectDomNode = function() {
-	return this.children[0].domNodes[0];
+	return this.domNodes[0];
 };
 
 // Return an array of the selected opion values
@@ -149,6 +173,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectTooltip = this.getAttribute("tooltip");
 	this.selectFocus = this.getAttribute("focus");
 	// Make the child widgets
+	/*
 	var selectNode = {
 		type: "element",
 		tag: "select",
@@ -170,7 +195,8 @@ SelectWidget.prototype.execute = function() {
 		$tw.utils.addAttributeToParseTreeNode(selectNode,"title",this.selectTooltip);
 	}
 	this.assignAttributesToParseTreeNode(selectNode);
-	this.makeChildWidgets([selectNode]);
+	*/
+	this.makeChildWidgets();
 };
 
 /*
