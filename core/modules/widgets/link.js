@@ -143,6 +143,11 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			widget: this
 		});
 	}
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -222,3 +227,4 @@ LinkWidget.prototype.refresh = function(changedTiddlers) {
 exports.link = LinkWidget;
 
 })();
+	

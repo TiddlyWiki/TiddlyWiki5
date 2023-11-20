@@ -330,6 +330,11 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 				$tw.utils.removeClass(this.labelDomNode,"tc-checkbox-checked");
 			}
 		}
+		this.assignAttributes(this.inputDomNode,{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		return this.refreshChildren(changedTiddlers) || refreshed;
 	}
 };
@@ -337,3 +342,4 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 exports.checkbox = CheckboxWidget;
 
 })();
+	
