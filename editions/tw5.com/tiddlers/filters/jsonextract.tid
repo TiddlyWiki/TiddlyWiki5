@@ -53,6 +53,14 @@ The <<.op jsonextract>> operator uses multiple operands to specify the indexes o
 [<jsondata>jsonextract[d],[g]] --> {"x":"max","y":"may","z":"maize"}
 ```
 
+<<.from-version "5.3.2">> Negative indexes into an array are counted from the end, so -1 means the last item, -2 the next-to-last item, and so on:
+
+```
+[<jsondata>jsonextract[d],[f],[-1]] --> null
+[<jsondata>jsonextract[d],[f],[-2]] --> false
+[<jsondata>jsonextract[d],[f],[-4]] --> "six"
+```
+
 Indexes can be dynamically composed from variables and transclusions:
 
 ```

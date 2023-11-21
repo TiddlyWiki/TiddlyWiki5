@@ -171,6 +171,46 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(this.outerDomNode,nextSibling);
 	this.renderChildren(this.innerDomNode,null);
 	this.domNodes.push(this.outerDomNode);
+	// If the scroll position is bound to a tiddler
+	if(this.scrollableBind) {
+		// After a delay for rendering, scroll to the bound position
+		setTimeout(this.updateScrollPositionFromBoundTiddler.bind(this),50);
+		// Save scroll position on DOM scroll event
+		this.outerDomNode.addEventListener("scroll",function(event) {
+			var existingTiddler = self.wiki.getTiddler(self.scrollableBind),
+				newTiddlerFields = {
+					title: self.scrollableBind,
+					"scroll-left": self.outerDomNode.scrollLeft.toString(),
+					"scroll-top": self.outerDomNode.scrollTop.toString()
+				};
+			if(!existingTiddler || (existingTiddler.fields["scroll-left"] !== newTiddlerFields["scroll-left"] || existingTiddler.fields["scroll-top"] !== newTiddlerFields["scroll-top"])) {
+				self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
+			}
+		});
+	}
+};
+
+ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
+	// Bail if we're running on the fakedom
+	if(!this.outerDomNode.scrollTo) {
+		return;
+	}
+	var tiddler = this.wiki.getTiddler(this.scrollableBind);
+	if(tiddler) {
+		var scrollLeftTo = this.outerDomNode.scrollLeft;
+		if(parseFloat(tiddler.fields["scroll-left"]).toString() === tiddler.fields["scroll-left"]) {
+			scrollLeftTo = parseFloat(tiddler.fields["scroll-left"]);
+		}
+		var scrollTopTo = this.outerDomNode.scrollTop;
+		if(parseFloat(tiddler.fields["scroll-top"]).toString() === tiddler.fields["scroll-top"]) {
+			scrollTopTo = parseFloat(tiddler.fields["scroll-top"]);
+		}
+		this.outerDomNode.scrollTo({
+			top: scrollTopTo,
+			left: scrollLeftTo,
+			behavior: "instant"
+		})
+	}
 };
 
 /*
@@ -178,6 +218,7 @@ Compute the internal state of the widget
 */
 ScrollableWidget.prototype.execute = function() {
 	// Get attributes
+	this.scrollableBind = this.getAttribute("bind");
 	this.fallthrough = this.getAttribute("fallthrough","yes");
 	this["class"] = this.getAttribute("class");
 	// Make child widgets
@@ -192,6 +233,9 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
+	}
+	if(changedAttributes.bind || changedTiddlers[this.getAttribute("bind")]) {
+		this.updateScrollPositionFromBoundTiddler();
 	}
 	return this.refreshChildren(changedTiddlers);
 };

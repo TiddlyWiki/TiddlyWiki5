@@ -122,10 +122,10 @@ function openStartupTiddlers(options) {
 		var hash = $tw.locationHash.substr(1),
 			split = hash.indexOf(":");
 		if(split === -1) {
-			target = $tw.utils.decodeURIComponentSafe(hash.trim());
+			target = $tw.utils.decodeTWURITarget(hash.trim());
 		} else {
-			target = $tw.utils.decodeURIComponentSafe(hash.substr(0,split).trim());
-			storyFilter = $tw.utils.decodeURIComponentSafe(hash.substr(split + 1).trim());
+			target = $tw.utils.decodeTWURITarget(hash.substr(0,split).trim());
+			storyFilter = $tw.utils.decodeTWURIList(hash.substr(split + 1).trim());
 		}
 	}
 	// If the story wasn't specified use the current tiddlers or a blank story
@@ -198,19 +198,19 @@ function updateLocationHash(options) {
 	// Assemble the location hash
 	switch(options.updateAddressBar) {
 		case "permalink":
-			$tw.locationHash = "#" + encodeURIComponent(targetTiddler);
+			$tw.locationHash = "#" + $tw.utils.encodeTiddlerTitle(targetTiddler);
 			break;
 		case "permaview":
-			$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
+			$tw.locationHash = "#" + $tw.utils.encodeTiddlerTitle(targetTiddler) + ":" + $tw.utils.encodeFilterPath($tw.utils.stringifyList(storyList));
 			break;
 	}
 	// Copy URL to the clipboard
 	switch(options.copyToClipboard) {
 		case "permalink":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler));
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + $tw.utils.encodeTiddlerTitle(targetTiddler));
 			break;
 		case "permaview":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList)));
+			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + $tw.utils.encodeTiddlerTitle(targetTiddler) + ":" + $tw.utils.encodeFilterPath($tw.utils.stringifyList(storyList)));
 			break;
 	}
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events

@@ -194,6 +194,7 @@ Parse any pragmas at the beginning of a block of parse text
 WikiParser.prototype.parsePragmas = function() {
 	var currentTreeBranch = this.tree;
 	while(true) {
+		var savedPos = this.pos;
 		// Skip whitespace
 		this.skipWhitespace();
 		// Check for the end of the text
@@ -204,6 +205,7 @@ WikiParser.prototype.parsePragmas = function() {
 		var nextMatch = this.findNextMatch(this.pragmaRules,this.pos);
 		// If not, just exit
 		if(!nextMatch || nextMatch.matchIndex !== this.pos) {
+			this.pos = savedPos;
 			break;
 		}
 		// Process the pragma rule
