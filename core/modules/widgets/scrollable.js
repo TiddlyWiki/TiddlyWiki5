@@ -191,6 +191,10 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ScrollableWidget.prototype.updateScrollPositionFromBoundTiddler = function() {
+	// Bail if we're running on the fakedom
+	if(!this.outerDomNode.scrollTo) {
+		return;
+	}
 	var tiddler = this.wiki.getTiddler(this.scrollableBind);
 	if(tiddler) {
 		var scrollLeftTo = this.outerDomNode.scrollLeft;
