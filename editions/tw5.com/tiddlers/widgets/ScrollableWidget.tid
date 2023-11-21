@@ -1,6 +1,6 @@
 caption: scrollable
 created: 20140324223413403
-modified: 20220620115347910
+modified: 20230731100903977
 tags: Widgets
 title: ScrollableWidget
 type: text/vnd.tiddlywiki
@@ -16,12 +16,15 @@ The content of the `<$scrollable>` widget is displayed within a pair of wrapper 
 |!Attribute |!Description |
 |class |The CSS class(es) to be applied to the outer DIV |
 |fallthrough |See below |
+|bind |<<.from-version "5.3.2">> Optional title of tiddler to which the scroll position should be bound |
+
+Binding the scroll position to a tiddler automatically copies the scroll coordinates into the `scroll-left` and `scroll-top` fields as scrolling occurs. Conversely, setting those field values will automatically cause the scrollable to scroll if it can.
 
 <$macrocall $name=".note" _="""If a scrollable widget can't handle the `tm-scroll` message because the inner DIV fits within the outer DIV, then by default the message falls through to the parent widget. Setting the ''fallthrough'' attribute to `no` prevents this behaviour."""/> 
 
 ! Examples
 
-This example requires the following CSS definitions from [[$:/_tw5.com-styles]]:
+These examples require the following CSS definitions from [[$:/_tw5.com-styles]]:
 
 ```
 .tc-scrollable-demo {
@@ -33,9 +36,31 @@ This example requires the following CSS definitions from [[$:/_tw5.com-styles]]:
 }
 ```
 
+!! Simple Usage
+
 This wiki text shows how to display a list within the scrollable widget:
 
 <<wikitext-example-without-html "<$scrollable class='tc-scrollable-demo'>
+<$list filter='[tag[Reference]]'>
+
+<$view field='title'/>: <$list filter='[all[current]links[]sort[title]]' storyview='pop'>
+<$link><$view field='title'/></$link>
+</$list>
+
+</$list>
+</$scrollable>
+">>
+
+!! Binding scroll position to a tiddler
+
+[[Current scroll position|$:/my-scroll-position]]: {{$:/my-scroll-position!!scroll-left}}, {{$:/my-scroll-position!!scroll-top}}
+
+<$button>
+<$action-setfield $tiddler="$:/my-scroll-position" scroll-left="100" scroll-top="100"/>
+Set current scroll position to 100,100
+</$button>
+
+<<wikitext-example-without-html "<$scrollable class='tc-scrollable-demo' bind='$:/my-scroll-position'>
 <$list filter='[tag[Reference]]'>
 
 <$view field='title'/>: <$list filter='[all[current]links[]sort[title]]' storyview='pop'>
