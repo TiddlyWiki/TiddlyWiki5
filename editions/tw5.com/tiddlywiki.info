@@ -54,7 +54,12 @@
 			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"],
 		"external-js": [
 			"--render","$:/core/save/offline-external-js","[[external-]addsuffix<version>addsuffix[.html]]","text/plain",
-			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"]
+			"--render","$:/core/templates/tiddlywiki5.js","[[tiddlywikicore-]addsuffix<version>addsuffix[.js]]","text/plain"],
+		"archive":[
+			"--render","$:/core/save/all","[[archive/TiddlyWiki-]addsuffix<version>addsuffix[.html]]","text/plain",
+			"--render","$:/editions/tw5.com/download-empty","[[archive/Empty-TiddlyWiki-]addsuffix<version>addsuffix[.html]]","text/plain",
+			"--render","[[TiddlyWiki Archive]]","archive/index.html","text/plain","$:/core/templates/static.tiddler.html",
+			"--render","$:/core/templates/static.template.css","archive/static.css","text/plain"]
 	},
 	"config": {
 		"retain-original-tiddler-path": true
