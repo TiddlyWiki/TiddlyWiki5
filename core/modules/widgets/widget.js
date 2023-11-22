@@ -415,19 +415,30 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 /*
 Assign the common attributes of the widget to a domNode
 options include:
-sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the emtpy string meaning all attributes)
+sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the empty string meaning all attributes)
 destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string which means no prefix is added)
 changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
 excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
 Widget.prototype.assignAttributes = function(domNode,options) {
-	var self = this;
 	options = options || {};
-	var changedAttributes = options.changedAttributes || this.attributes;
-	var sourcePrefix = options.sourcePrefix || "";
-	var destPrefix = options.destPrefix || "";
-	var EVENT_ATTRIBUTE_PREFIX = "on";
+	var self = this,
+		changedAttributes = options.changedAttributes || this.attributes,
+		sourcePrefix = options.sourcePrefix || "",
+		destPrefix = options.destPrefix || "",
+		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
+		// Process any style attributes before considering sourcePrefix and destPrefix
+		if(name.substr(0,6) === "style." && name.length > 6) {
+			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+			return;
+		}
+		// Check if the sourcePrefix is a match
+		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
+			name = destPrefix + name.substr(sourcePrefix.length);
+		} else {
+			value = undefined;
+		}
 		// Check for excluded attribute names
 		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {
 			value = undefined;
@@ -445,17 +456,20 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 			} catch(e) {
 			}
 		}
+	};
+	// If the parse tree node has the orderedAttributes property then use that order
+	if(this.parseTreeNode.orderedAttributes) {
+		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
+			if(attribute.name in changedAttributes) {
+				assignAttribute(attribute.name,self.getAttribute(attribute.name));
+			}
+		});
+	// Otherwise update each changed attribute irrespective of order
+	} else {
+		$tw.utils.each(changedAttributes,function(value,name) {
+			assignAttribute(name,self.getAttribute(name));
+		});	
 	}
-	$tw.utils.each(changedAttributes,function(value,name) {
-		value = self.getAttribute(name);
-		// Check for a prefixed attribute
-		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
-			domNode.setAttribute(destPrefix + name.substr(sourcePrefix.length),value);
-		// Check for a style attribute
-		} else if(name.substr(0,6) === "style." && name.length > 6) {
-			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
-		}
-	});
 };
 
 /*
