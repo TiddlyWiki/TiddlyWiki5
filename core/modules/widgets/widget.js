@@ -436,7 +436,7 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 			value = undefined;
 		}
 		// Check for excluded attribute names
-		if(options.excludeEventAttributes && name.substr(0,2) === EVENT_ATTRIBUTE_PREFIX) {
+		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {
 			value = undefined;
 		}
 		if(value !== undefined) {
