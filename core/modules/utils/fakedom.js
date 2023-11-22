@@ -84,6 +84,12 @@ Object.defineProperty(TW_Element.prototype, "style", {
 				self._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
 			}
 		});
+	},
+	setAttribute: function(name,value) {
+		var self = this;
+		if(name && value) {
+			self._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
+		}
 	}
 });
 
@@ -104,7 +110,11 @@ TW_Element.prototype.setAttribute = function(name,value) {
 	if(this.isRaw) {
 		throw "Cannot setAttribute on a raw TW_Element";
 	}
-	this.attributes[name] = value + "";
+	if(name === "style") {
+		this.style = value;
+	} else {
+		this.attributes[name] = value + "";
+	}
 };
 
 TW_Element.prototype.setAttributeNS = function(namespace,name,value) {

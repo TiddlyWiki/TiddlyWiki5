@@ -6,7 +6,7 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$button tag="div" class="myclass" data-title="mytiddler" style.color="red">
+<$button tag="div" class="myclass" data-title="mytiddler" style.color="red" onclick="clicked">
 my tiddler
 </$button>
 <$button tag="div" class="myclass" data-title={{Temp}} style.color={{{ [[Temp]get[color]] }}}>

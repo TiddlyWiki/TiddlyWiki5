@@ -6,7 +6,7 @@ tags: [[$:/tags/wiki-test-spec]]
 title: Output
 
 \whitespace trim
-<$checkbox tag="done" data-title={{Temp}} style.color={{{ [[Temp]get[color]] }}}> Is it done?</$checkbox>
+<$checkbox tag="done" data-title={{Temp}} style.color={{{ [[Temp]get[color]] }}} onclick="clicked"> Is it done?</$checkbox>
 +
 title: Actions
 
