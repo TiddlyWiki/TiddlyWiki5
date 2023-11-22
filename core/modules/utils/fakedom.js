@@ -84,12 +84,6 @@ Object.defineProperty(TW_Element.prototype, "style", {
 				self._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
 			}
 		});
-	},
-	setAttribute: function(name,value) {
-		var self = this;
-		if(name && value) {
-			self._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
-		}
 	}
 });
 
