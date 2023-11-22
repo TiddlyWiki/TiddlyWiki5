@@ -465,7 +465,7 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 				assignAttribute(attribute.name,self.getAttribute(attribute.name));
 			}
 		});
-	// Otherwise update each changed attribute ignoring the order
+	// Otherwise update each changed attribute irrespective of order
 	} else {
 		$tw.utils.each(changedAttributes,function(value,name) {
 			assignAttribute(name,self.getAttribute(name));
