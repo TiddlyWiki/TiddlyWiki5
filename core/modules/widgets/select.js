@@ -40,7 +40,31 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	this.renderChildren(parent,nextSibling);
+	//Create element
+	var domNode = this.document.createElement("select");
+	if(this.selectClass) {
+		domNode.classname = this.selectClass;
+	}
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
+	if(this.selectMultiple) {
+		domNode.setAttribute("multiple","multiple");
+	}
+	if(this.selectSize) {
+		domNode.setAttribute("size",this.selectSize);
+	}
+	if(this.selectTabindex) {
+		domNode.setAttribute("tabindex",this.selectTabindex);
+	}
+	if(this.selectTooltip) {
+		domNode.setAttribute("title",this.selectTooltip);
+	}
+	this.renderChildren(domNode,nextSibling);
+	this.parentDomNode.insertBefore(domNode,nextSibling);
+	this.domNodes.push(domNode);
 	this.setSelectValue();
 	if(this.selectFocus == "yes") {
 		this.getSelectDomNode().focus();
@@ -113,7 +137,7 @@ SelectWidget.prototype.setSelectValue = function() {
 Get the DOM node of the select element
 */
 SelectWidget.prototype.getSelectDomNode = function() {
-	return this.children[0].domNodes[0];
+	return this.domNodes[0];
 };
 
 // Return an array of the selected opion values
@@ -149,27 +173,7 @@ SelectWidget.prototype.execute = function() {
 	this.selectTooltip = this.getAttribute("tooltip");
 	this.selectFocus = this.getAttribute("focus");
 	// Make the child widgets
-	var selectNode = {
-		type: "element",
-		tag: "select",
-		children: this.parseTreeNode.children
-	};
-	if(this.selectClass) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"class",this.selectClass);
-	}
-	if(this.selectMultiple) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"multiple","multiple");
-	}
-	if(this.selectSize) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"size",this.selectSize);
-	}
-	if(this.selectTabindex) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"tabindex",this.selectTabindex);
-	}
-	if(this.selectTooltip) {
-		$tw.utils.addAttributeToParseTreeNode(selectNode,"title",this.selectTooltip);
-	}
-	this.makeChildWidgets([selectNode]);
+	this.makeChildWidgets();
 };
 
 /*
@@ -178,17 +182,21 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 SelectWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// If we're using a different tiddler/field/index then completely refresh ourselves
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.tooltip || changedAttributes.tabindex) {
 		this.refreshSelf();
 		return true;
-	// If the target tiddler value has changed, just update setting and refresh the children
 	} else {
 		if(changedAttributes.class) {
 			this.selectClass = this.getAttribute("class");
 			this.getSelectDomNode().setAttribute("class",this.selectClass); 
 		}
-		
+		this.assignAttributes(this.getSelectDomNode(),{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		var childrenRefreshed = this.refreshChildren(changedTiddlers);
+		// If the target tiddler value has changed, just update setting and refresh the children
 		if(changedTiddlers[this.selectTitle] || childrenRefreshed) {
 			this.setSelectValue();
 		} 
