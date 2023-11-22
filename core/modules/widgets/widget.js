@@ -428,13 +428,15 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		destPrefix = options.destPrefix || "",
 		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
+		// Check if the sourcePrefix is a match
 		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
 			name = destPrefix + name.substr(sourcePrefix.length);
+		// Check for attribute names that are not prefix style. and are thus excluded
 		} else if(name.substr(0,6) !== "style." || name.length <= 6) {
 			value = undefined;
 		}
 		// Check for excluded attribute names
-		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
+		if(options.excludeEventAttributes && name.substr(0,2) === EVENT_ATTRIBUTE_PREFIX) {
 			value = undefined;
 		}
 		if(value !== undefined) {
@@ -456,31 +458,19 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 			}
 		}
 	};
-	// Not all parse tree nodes have the orderedAttributes property
+	// If the parse tree node has the orderedAttributes property then use that order
 	if(this.parseTreeNode.orderedAttributes) {
 		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
 			if(attribute.name in changedAttributes) {
 				assignAttribute(attribute.name,self.getAttribute(attribute.name));
 			}
-		});	
+		});
+	// Otherwise update each changed attribute ignoring the order
 	} else {
 		$tw.utils.each(changedAttributes,function(value,name) {
 			assignAttribute(name,self.getAttribute(name));
 		});	
 	}
-
-/*
-	$tw.utils.each(changedAttributes,function(value,name) {
-		value = self.getAttribute(name);
-		// Check for a prefixed attribute
-		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
-			assignAttribute(destPrefix + name.substr(sourcePrefix.length),value);
-		// Check for a style attribute
-		} else if(name.substr(0,6) === "style." && name.length > 6) {
-			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
-		}
-	});
-*/
 };
 
 /*
