@@ -428,11 +428,15 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		destPrefix = options.destPrefix || "",
 		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
+		// Process any style attributes before considering sourcePrefix and destPrefix
+		if(name.substr(0,6) === "style." && name.length > 6) {
+			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+			return;
+		}
 		// Check if the sourcePrefix is a match
 		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
 			name = destPrefix + name.substr(sourcePrefix.length);
-		// Check for attribute names that are not prefixed style. and are thus excluded
-		} else if(name.substr(0,6) !== "style.") {
+		} else {
 			value = undefined;
 		}
 		// Check for excluded attribute names
@@ -446,15 +450,10 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 				namespace = "http://www.w3.org/1999/xlink";
 				name = name.substr(6);
 			}
-			// Handle styles
-			if(name.substr(0,6) === "style." && name.length > 6) {
-				domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
-			} else {
-				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
-				try {
-					domNode.setAttributeNS(namespace,name,value);
-				} catch(e) {
-				}
+			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+			try {
+				domNode.setAttributeNS(namespace,name,value);
+			} catch(e) {
 			}
 		}
 	};
