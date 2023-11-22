@@ -432,7 +432,7 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
 			name = destPrefix + name.substr(sourcePrefix.length);
 		// Check for attribute names that are not prefixed style. and are thus excluded
-		} else if(name.substr(0,6) !== "style." || name.length <= 6) {
+		} else if(name.substr(0,6) !== "style.") {
 			value = undefined;
 		}
 		// Check for excluded attribute names
