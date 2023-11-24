@@ -16,7 +16,7 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 		emptyMessage="<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter='-[<tag>]'/>"
 	>
 		<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
-		$actions$
+		<$transclude $variable="__actions__"/>
 	</$list>
 </$set>
 <<delete-tag-state-tiddlers>>
@@ -102,7 +102,7 @@ second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
 						<$set name="tag" value={{{ [<newTagNameTiddler>get[text]] }}}>
 							<$button set=<<newTagNameTiddler>> setTo="" class="">
 								<$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="[<tag>trim[]]"/>
-									$actions$
+								<$transclude $variable="__actions__"/>
 								<$set name="currentTiddlerCSSEscaped" value={{{ [<saveTiddler>escapecss[]] }}}>
 									<<delete-tag-state-tiddlers>><$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
 								</$set>
