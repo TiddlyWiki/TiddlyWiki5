@@ -41,6 +41,33 @@ description: Under development
 
 Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take precedence if they are present.
 
+!! Joiners for the ListWidget
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7694">> a <<.attr "join">> attribute to the <<.wid "ListWidget">> widget to insert a short piece of text between list items. This is both easier to use and faster than using the <<.attr "counter">> attribute for the same purpose. So if your list looked like this:
+
+```
+<$list filter=<<filter>> counter="counter" variable="item">
+<$text text=<<item>>/><$list filter="[<counter-last>match[no]]" variable="ignore"><$text text=", "/></$list>
+</$list>
+```
+
+You can replace it with:
+
+```
+<$list filter=<<filter>> variable="item" join=", ">
+<$text text=<<item>>/>
+</$list>
+```
+
+If the joiner text that you need is long and awkward to write in an attribute, you can use the new `<$list-join>` widget. Like `<$list-template>` and `<$list-empty>`, it must be an immediate child of the <<.wid "ListWidget">>:
+
+```
+<$list filter=<<filter>> variable="item">
+<$text text=<<item>>/>
+<$list-join>, and <em>also</em> let's not forget </$list-join>
+</$list>
+```
+
 !! jsonset operator
 
 <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7742">> [[jsonset Operator]] for setting values within JSON objects

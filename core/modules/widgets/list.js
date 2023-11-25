@@ -50,8 +50,8 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 		$tw.modules.applyMethods("storyview",this.storyViews);
 	}
 	this.parentDomNode = parent;
-	this.computeAttributes();
-	this.execute();
+	var changedAttributes = this.computeAttributes();
+	this.execute(changedAttributes);
 	this.renderChildren(parent,nextSibling);
 	// Construct the storyview
 	var StoryView = this.storyViews[this.storyViewName];
@@ -71,7 +71,7 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-ListWidget.prototype.execute = function() {
+ListWidget.prototype.execute = function(changedAttributes) {
 	var self = this;
 	// Get our attributes
 	this.template = this.getAttribute("template");
@@ -80,6 +80,10 @@ ListWidget.prototype.execute = function() {
 	this.counterName = this.getAttribute("counter");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
+	// Create join template only if needed
+	if(this.join === undefined || (changedAttributes && changedAttributes.join)) {
+		this.join = this.makeJoinTemplate();
+	}
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -102,6 +106,7 @@ ListWidget.prototype.findExplicitTemplates = function() {
 	var self = this;
 	this.explicitListTemplate = null;
 	this.explicitEmptyTemplate = null;
+	this.explicitJoinTemplate = null;
 	this.hasTemplateInBody = false;
 	var searchChildren = function(childNodes) {
 		$tw.utils.each(childNodes,function(node) {
@@ -109,6 +114,8 @@ ListWidget.prototype.findExplicitTemplates = function() {
 				self.explicitListTemplate = node.children;
 			} else if(node.type === "list-empty") {
 				self.explicitEmptyTemplate = node.children;
+			} else if(node.type === "list-join") {
+				self.explicitJoinTemplate = node.children;
 			} else if(node.type === "element" && node.tag === "p") {
 				searchChildren(node.children);
 			} else {
@@ -153,6 +160,24 @@ ListWidget.prototype.getEmptyMessage = function() {
 };
 
 /*
+Compose the template for a join between list items
+*/
+ListWidget.prototype.makeJoinTemplate = function() {
+	var parser,
+		join = this.getAttribute("join","");
+	if(join) {
+		parser = this.wiki.parseText("text/vnd.tiddlywiki",join,{parseAsInline:true})
+		if(parser) {
+			return parser.tree;
+		} else {
+			return [];
+		}
+	} else {
+		return this.explicitJoinTemplate; // May be null, and that's fine
+	}
+};
+
+/*
 Compose the template for a list item
 */
 ListWidget.prototype.makeItemTemplate = function(title,index) {
@@ -160,6 +185,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	var tiddler = this.wiki.getTiddler(title),
 		isDraft = tiddler && tiddler.hasField("draft.of"),
 		template = this.template,
+		join = this.join,
 		templateTree;
 	if(isDraft && this.editTemplate) {
 		template = this.editTemplate;
@@ -185,12 +211,12 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 		}
 	}
 	// Return the list item
-	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
+	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree, join: join};
+	parseTreeNode.isLast = index === this.list.length - 1;
 	if(this.counterName) {
 		parseTreeNode.counter = (index + 1).toString();
 		parseTreeNode.counterName = this.counterName;
 		parseTreeNode.isFirst = index === 0;
-		parseTreeNode.isLast = index === this.list.length - 1;
 	}
 	return parseTreeNode;
 };
@@ -206,7 +232,7 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 		this.storyview.refreshStart(changedTiddlers,changedAttributes);
 	}
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
+	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.join || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		result = true;
 	} else {
@@ -310,10 +336,29 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			}
 		} else {
 			// Cycle through the list, inserting and removing list items as needed
+			var mustRecreateLastItem = false;
+			if(this.join && this.join.length) {
+				if(this.children.length !== this.list.length) {
+						mustRecreateLastItem = true;
+				} else if(prevList[prevList.length-1] !== this.list[this.list.length-1]) {
+						mustRecreateLastItem = true;
+				}
+			}
+			var isLast = false, wasLast = false;
 			for(t=0; t<this.list.length; t++) {
+				isLast = t === this.list.length-1;
 				var index = this.findListItem(t,this.list[t]);
+				wasLast = index === this.children.length-1;
+				if(wasLast && (index !== t || this.children.length !== this.list.length)) {
+					mustRecreateLastItem = !!(this.join && this.join.length);
+				}
 				if(index === undefined) {
 					// The list item must be inserted
+					if(isLast && mustRecreateLastItem && t>0) {
+						// First re-create previosly-last item that will no longer be last
+						this.removeListItem(t-1);
+						this.insertListItem(t-1,this.list[t-1]);
+					}
 					this.insertListItem(t,this.list[t]);
 					hasRefreshed = true;
 				} else {
@@ -322,9 +367,15 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 						this.removeListItem(n);
 						hasRefreshed = true;
 					}
-					// Refresh the item we're reusing
-					var refreshed = this.children[t].refresh(changedTiddlers);
-					hasRefreshed = hasRefreshed || refreshed;
+					// Refresh the item we're reusing, or recreate if necessary
+					if(mustRecreateLastItem && (isLast || wasLast)) {
+						this.removeListItem(t);
+						this.insertListItem(t,this.list[t]);
+						hasRefreshed = true;
+					} else {
+						var refreshed = this.children[t].refresh(changedTiddlers);
+						hasRefreshed = hasRefreshed || refreshed;
+					}
 				}
 			}
 		}
@@ -414,8 +465,17 @@ ListItemWidget.prototype.execute = function() {
 		this.setVariable(this.parseTreeNode.counterName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
 		this.setVariable(this.parseTreeNode.counterName + "-last",this.parseTreeNode.isLast ? "yes" : "no");
 	}
+	// Add join if needed
+	var children = this.parseTreeNode.children,
+		join = this.parseTreeNode.join;
+	if(join && join.length && !this.parseTreeNode.isLast) {
+		children = children.slice(0);
+		$tw.utils.each(join,function(joinNode) {
+			children.push(joinNode);
+		})
+	}
 	// Construct the child widgets
-	this.makeChildWidgets();
+	this.makeChildWidgets(children);
 };
 
 /*
@@ -449,5 +509,15 @@ ListEmptyWidget.prototype.render = function() {}
 ListEmptyWidget.prototype.refresh = function() { return false; }
 
 exports["list-empty"] = ListEmptyWidget;
+
+var ListJoinWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListJoinWidget.prototype = new Widget();
+ListJoinWidget.prototype.render = function() {}
+ListJoinWidget.prototype.refresh = function() { return false; }
+
+exports["list-join"] = ListJoinWidget;
 
 })();
