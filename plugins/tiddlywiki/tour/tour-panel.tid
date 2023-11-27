@@ -57,53 +57,49 @@ tags: $:/tags/PageTemplate
 <<tour-buttons>>
 \end tour-step-advance-criterion-satisfied
 
-\procedure tour-show-panel()
-<div class=`tc-tour-panel tc-tour-panel-${ [{$:/state/tour/step}get[display-mode]else[normal]] }$ ${ [{$:/config/CurrentTour}get[class]] }$`>
-	<$image class="tc-tour-panel-banner-image" source={{{ [{$:/config/CurrentTour}get[logo]] }}}/>
-	<div class="tc-tour-panel-inner">
-		<div class="tc-tiddler-controls tc-tour-panel-controls">
-			<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
-			<$button popup=<<qualify "$:/state/popup/tour-dropdown">> class="tc-btn-invisible tc-tour-panel-list-button" selectedClass="tc-selected">
-				''Tour'': <<tour-display-current-tour>>
-			</$button>
-			<$reveal state=<<qualify "$:/state/popup/tour-dropdown">> type="popup" position="belowleft" animate="yes" tag="div">
-				<div class="tc-drop-down">
-					<p>
-						Choose a tour:
-					</p>
-					<p>
-						<<tour-chooser>>
-					</p>
-				</div>
-			</$reveal>
-		</div>
-		<$let
-			currentTour={{$:/config/CurrentTour}}
-			currentTourStep={{$:/state/tour/step}}
-			advance-criterion-var={{{ [<currentTourStep>get[advance-criterion-var]] :map[subfilter<currentTiddler>] }}}
-		>
-			<%if [<currentTourStep>has[caption]] %>
-				<h1><$transclude $tiddler=<<currentTourStep>> $field="caption" mode="inline"/></h1>
-			<%endif%>
-			<!-- Handle steps without a advance-criterion -->
-			<%if [<currentTourStep>!has[advance-criterion]] %>
-				<<tour-step-no-advance-criterion>>
-			<%endif%>
-			<!-- Handle steps that have a advance-criterion -->
-			<%if [<currentTourStep>has[advance-criterion]] %>
-				<$let advance-criterion={{{ [<currentTourStep>get[advance-criterion]] }}}>
-					<%if [subfilter<advance-criterion>] %>
-						<<tour-step-advance-criterion-satisfied>>
-					<%else%>
-						<<tour-step-advance-criterion-not-satisfied>>
-					<%endif%>
-				</$let>
-			<%endif%>
-		</$let>
-	</div>
-</div>
-\end tour-show-panel
-
 <%if [{$:/config/ShowTour}!is[blank]else[show]match[show]] %>
-	<<tour-show-panel>>
+	<div class=`tc-tour-panel tc-tour-panel-${ [{$:/state/tour/step}get[display-mode]else[normal]] }$ ${ [{$:/config/CurrentTour}get[class]] }$`>
+		<$image class="tc-tour-panel-banner-image" source={{{ [{$:/config/CurrentTour}get[logo]] }}}/>
+		<div class="tc-tour-panel-inner">
+			<div class="tc-tiddler-controls tc-tour-panel-controls">
+				<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
+				<$button popup=<<qualify "$:/state/popup/tour-dropdown">> class="tc-btn-invisible tc-tour-panel-list-button" selectedClass="tc-selected">
+					''Tour'': <<tour-display-current-tour>>
+				</$button>
+				<$reveal state=<<qualify "$:/state/popup/tour-dropdown">> type="popup" position="belowleft" animate="yes" tag="div">
+					<div class="tc-drop-down">
+						<p>
+							Choose a tour:
+						</p>
+						<p>
+							<<tour-chooser>>
+						</p>
+					</div>
+				</$reveal>
+			</div>
+			<$let
+				currentTour={{$:/config/CurrentTour}}
+				currentTourStep={{$:/state/tour/step}}
+				advance-criterion-var={{{ [<currentTourStep>get[advance-criterion-var]] :map[subfilter<currentTiddler>] }}}
+			>
+				<%if [<currentTourStep>has[caption]] %>
+					<h1><$transclude $tiddler=<<currentTourStep>> $field="caption" mode="inline"/></h1>
+				<%endif%>
+				<!-- Handle steps without a advance-criterion -->
+				<%if [<currentTourStep>!has[advance-criterion]] %>
+					<<tour-step-no-advance-criterion>>
+				<%endif%>
+				<!-- Handle steps that have a advance-criterion -->
+				<%if [<currentTourStep>has[advance-criterion]] %>
+					<$let advance-criterion={{{ [<currentTourStep>get[advance-criterion]] }}}>
+						<%if [subfilter<advance-criterion>] %>
+							<<tour-step-advance-criterion-satisfied>>
+						<%else%>
+							<<tour-step-advance-criterion-not-satisfied>>
+						<%endif%>
+					</$let>
+				<%endif%>
+			</$let>
+		</div>
+	</div>
 <%endif%>
