@@ -22,16 +22,21 @@ These config tiddlers may be changed directly as required:
 \end
 
 \function tour-is-not-first-step()
-[all[shadows+tiddlers]tag<tour-current-tag>before{$:/state/tour/step}count[]compare:number:gt[0]]
+[all[shadows+tiddlers]tag<tour-current-tag>allbefore{$:/state/tour/step}filter<tour-filter-steps-by-condition>count[]compare:number:gt[0]]
 \end
 
 \function tour-is-last-step()
-[all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}count[]compare:number:eq[0]]
+[all[shadows+tiddlers]tag<tour-current-tag>allafter{$:/state/tour/step}filter<tour-filter-steps-by-condition>count[]compare:number:eq[0]]
 \end
 
 \function tour-is-not-last-step()
-[all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}count[]compare:number:gt[0]]
+[all[shadows+tiddlers]tag<tour-current-tag>allafter{$:/state/tour/step}filter<tour-filter-steps-by-condition>count[]compare:number:gt[0]]
 \end
+
+\procedure tour-filter-steps-by-condition()
+[<currentTiddler>has[condition]subfilter{!!condition}limit[1]] :else[<currentTiddler>!has[condition]then[true]]
+\end
+
 
 \procedure tour-initialise-current-tour-step()
 \procedure tv-action-refresh-policy() always
@@ -39,7 +44,7 @@ These config tiddlers may be changed directly as required:
 \end
 
 \procedure tour-chooser(filter:"[all[shadows+tiddlers]tag[$:/tags/Tour]]")
-\define choose-tour-actions()
+\procedure choose-tour-actions()
 <$transclude $variable="tour-start" title=<<currentTiddler>>/>
 \end choose-tour-actions
 <div class="tc-tour-panel-chooser-wrapper">
@@ -67,19 +72,19 @@ These config tiddlers may be changed directly as required:
 \procedure tour-restart(step)
 \procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler="$:/config/ShowTour" text="show"/>
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [<step>!is[blank]] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [<step>!is[blank]] :else[all[shadows+tiddlers]tag<tour-current-tag>filter<tour-filter-steps-by-condition>first[]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 
 \procedure tour-next-step()
 \procedure tv-action-refresh-policy() always
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>after{$:/state/tour/step}else[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/finished]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>allafter{$:/state/tour/step}filter<tour-filter-steps-by-condition>else[$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/finished]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 
 \procedure tour-previous-step()
 \procedure tv-action-refresh-policy() always
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>before{$:/state/tour/step}] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
+<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag<tour-current-tag>allbefore{$:/state/tour/step}filter<tour-filter-steps-by-condition>last[]] :else[all[shadows+tiddlers]tag<tour-current-tag>first[]] }}}/>
 <<tour-initialise-current-tour-step>>
 \end
 

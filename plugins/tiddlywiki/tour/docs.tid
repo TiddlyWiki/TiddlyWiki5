@@ -8,5 +8,6 @@ Tour definition tiddlers have the following fields:
 |logo |Title of tiddler containing logo of tour |
 |description |Brief description of the tour |
 |text |Longer description of the tour |
+|class |(optional) additional class to apply to the tour wrapper |
 
 

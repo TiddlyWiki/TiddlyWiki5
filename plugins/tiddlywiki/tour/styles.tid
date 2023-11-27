@@ -54,7 +54,7 @@ tags: $:/tags/Stylesheet
 	border: none;
 	background: <<colour tour-fullscreen-background>>;
 	margin: 0;
-	border-radius: none;
+	border-radius: 0;
 }
 
 .tc-tour-panel-controls .tc-tour-panel-list-button {
