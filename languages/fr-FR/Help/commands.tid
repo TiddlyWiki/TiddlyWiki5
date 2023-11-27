@@ -1,0 +1,18 @@
+title: $:/language/Help/commands
+description: Lance les commandes retournées par un filtre
+
+Lance la séquence des commandes retournées par un filtre
+
+```
+--commands <filtre>
+```
+
+Exemples
+
+```
+--commands "[enlist{$:/commandes-build-sous-forme-de-texte}]"
+```
+
+```
+--commands "[{$:/commandes-build-sous-forme-json}jsonindexes[]] :map[{$:/commandes-build-sous-forme-json}jsonget<currentTiddler>]"
+```

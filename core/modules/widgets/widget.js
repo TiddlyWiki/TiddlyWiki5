@@ -182,8 +182,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	}
 	return {
 		text: text,
-		resultList: [text],
-		srcVariable: {}
+		resultList: [text]
 	};
 };
 
@@ -380,6 +379,8 @@ Widget.prototype.computeAttribute = function(attribute) {
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
 		value = variableInfo.text;
+	} else if(attribute.type === "substituted") {
+		value = this.wiki.getSubstitutedText(attribute.rawValue,this) || "";
 	} else { // String attribute
 		value = attribute.value;
 	}
@@ -412,16 +413,34 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 };
 
 /*
-Assign the computed attributes of the widget to a domNode
+Assign the common attributes of the widget to a domNode
 options include:
-excludeEventAttributes: ignores attributes whose name begins with "on"
+sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the empty string meaning all attributes)
+destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string which means no prefix is added)
+changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
+excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
 Widget.prototype.assignAttributes = function(domNode,options) {
 	options = options || {};
-	var self = this;
+	var self = this,
+		changedAttributes = options.changedAttributes || this.attributes,
+		sourcePrefix = options.sourcePrefix || "",
+		destPrefix = options.destPrefix || "",
+		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
+		// Process any style attributes before considering sourcePrefix and destPrefix
+		if(name.substr(0,6) === "style." && name.length > 6) {
+			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+			return;
+		}
+		// Check if the sourcePrefix is a match
+		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
+			name = destPrefix + name.substr(sourcePrefix.length);
+		} else {
+			value = undefined;
+		}
 		// Check for excluded attribute names
-		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
+		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {
 			value = undefined;
 		}
 		if(value !== undefined) {
@@ -431,26 +450,24 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 				namespace = "http://www.w3.org/1999/xlink";
 				name = name.substr(6);
 			}
-			// Handle styles
-			if(name.substr(0,6) === "style." && name.length > 6) {
-				domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
-			} else {
-				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
-				try {
-					domNode.setAttributeNS(namespace,name,value);
-				} catch(e) {
-				}
+			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+			try {
+				domNode.setAttributeNS(namespace,name,value);
+			} catch(e) {
 			}
 		}
-	}
-	// Not all parse tree nodes have the orderedAttributes property
+	};
+	// If the parse tree node has the orderedAttributes property then use that order
 	if(this.parseTreeNode.orderedAttributes) {
 		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
-			assignAttribute(attribute.name,self.attributes[attribute.name]);
-		});	
+			if(attribute.name in changedAttributes) {
+				assignAttribute(attribute.name,self.getAttribute(attribute.name));
+			}
+		});
+	// Otherwise update each changed attribute irrespective of order
 	} else {
-		$tw.utils.each(Object.keys(self.attributes).sort(),function(name) {
-			assignAttribute(name,self.attributes[name]);
+		$tw.utils.each(changedAttributes,function(value,name) {
+			assignAttribute(name,self.getAttribute(name));
 		});	
 	}
 };
@@ -718,43 +735,22 @@ Widget.prototype.findFirstDomNode = function() {
 };
 
 /*
-Entry into destroy procedure
-*/
-Widget.prototype.destroyChildren = function() {
-	$tw.utils.each(this.children,function(childWidget) {
-		childWidget.destroy();
-	});
-};
-/*
-Legacy entry into destroy procedure
+Remove any DOM nodes created by this widget or its children
 */
 Widget.prototype.removeChildDomNodes = function() {
-	this.destroy();
-};
-/*
-Default destroy
-*/
-Widget.prototype.destroy = function() {
-	// call children to remove their resources
-	this.destroyChildren();
-	// remove our resources
-	this.children = [];
-	this.removeLocalDomNodes();	
-};
-
-/*
-Remove any DOM nodes created by this widget 
-*/
-Widget.prototype.removeLocalDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit.
+	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
 		});
 		this.domNodes = [];
+	} else {
+		// Otherwise, ask the child widgets to delete their DOM nodes
+		$tw.utils.each(this.children,function(childWidget) {
+			childWidget.removeChildDomNodes();
+		});
 	}
 };
-
 
 /*
 Invoke the action widgets that are descendents of the current widget.

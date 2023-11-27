@@ -40,7 +40,7 @@ exports.startup = function() {
 			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-id": windowID});
 		// Open the window
 		var srcWindow,
-		    srcDocument;
+			srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
 			srcWindow = window.open("","external-" + windowID,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
@@ -52,6 +52,7 @@ exports.startup = function() {
 		$tw.windows[windowID] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
+			srcWindow.focus();
 			return;
 		}
 		// Initialise the document

@@ -23,6 +23,7 @@ The `<$dynannotate>` widget uses the selection tracker to support a popup that d
 |filter |Filter identifying the annotation tiddlers applying to this content (see below) |
 |actions |Action string to be executed when an annotation is clicked. The variable `annotationTiddler` contains the title of the tiddler corresponding to the annotation that was clicked, and the variable `modifierKey` contains "ctrl", "shift", "ctrl-shift", "normal" according to which modifier keys were pressed |
 |popup |Popup state tiddler to be used to trigger a popup when an annotation is clicked |
+|floating |Setting to `yes` makes the popup need to be closed explicitly. |
 |search |Search text to be highlighted within the widget |
 |searchDisplay |"overlay" or "snippet" (see below) |
 |searchMode |"literal" (default), "regexp", "whitespace", "words" or "some" (see below) |

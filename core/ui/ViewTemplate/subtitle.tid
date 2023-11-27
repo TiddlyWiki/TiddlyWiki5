@@ -4,11 +4,8 @@ tags: $:/tags/ViewTemplate
 \whitespace trim
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
 <div class="tc-subtitle">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate/Subtitle]!has[draft.of]]" variable="subtitleTiddler" counter="indexSubtitleTiddler">
-<$list filter="[<indexSubtitleTiddler-first>match[no]]" variable="ignore">
-&nbsp;
-</$list>
-<$transclude tiddler=<<subtitleTiddler>> mode="inline"/>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate/Subtitle]!has[draft.of]]" variable="subtitleTiddler">
+<$transclude tiddler=<<subtitleTiddler>> mode="inline"/><$list-join>&nbsp;</$list-join>
 </$list>
 </div>
 </$reveal>

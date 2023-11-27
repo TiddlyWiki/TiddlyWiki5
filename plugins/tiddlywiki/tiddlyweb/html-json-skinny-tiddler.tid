@@ -1,4 +1,3 @@
 title: $:/core/templates/html-json-skinny-tiddler
 
-<$list filter="[<numTiddlers>compare:number:gteq[1]] ~[<counter>!match[1]]">`,`<$text text=<<newline>>/></$list>
 <$jsontiddler tiddler=<<currentTiddler>> exclude="text" escapeUnsafeScriptChars="yes" $revision=<<changecount>> $bag="default" $_is_skinny=""/>

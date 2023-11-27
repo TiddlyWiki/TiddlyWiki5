@@ -104,7 +104,11 @@ TW_Element.prototype.setAttribute = function(name,value) {
 	if(this.isRaw) {
 		throw "Cannot setAttribute on a raw TW_Element";
 	}
-	this.attributes[name] = value + "";
+	if(name === "style") {
+		this.style = value;
+	} else {
+		this.attributes[name] = value + "";
+	}
 };
 
 TW_Element.prototype.setAttributeNS = function(namespace,name,value) {

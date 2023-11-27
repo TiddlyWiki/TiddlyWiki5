@@ -285,6 +285,14 @@ ol.doc-github-contributors li {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.doc-op-comparison {
+	table-layout: fixed;
+	width: 80%;
+}
+.doc-op-comparison th .doc-operator {
+	background-color: unset;
+	color: #666;
+}
 .doc-tabs.tc-tab-buttons button {
   font-size: 1rem;
   padding: 0.5em;

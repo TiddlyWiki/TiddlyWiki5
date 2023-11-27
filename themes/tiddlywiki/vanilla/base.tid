@@ -1,5 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
+list-before:
 code-body: yes
 
 \define custom-background-datauri()
@@ -580,7 +581,7 @@ button svg, button img, label svg, label img {
 }
 
 button:disabled.tc-btn-invisible  {
-	cursor: default; 
+	cursor: default;
 	color: <<colour muted-foreground>>;
 }
 
@@ -1172,6 +1173,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	margin-right: .1em;
 }
 
+.tc-tiddler-title-icon svg {
+	width: 0.9em;
+	height: 0.9em;
+}
+
 .tc-system-title-prefix {
 	color: <<colour muted-foreground>>;
 }
@@ -1357,6 +1363,11 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-editor-toolbar {
 	margin-top: 8px;
+}
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-editor-toolbar,
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden .tc-editor-toolbar {
+	grid-area: toolbar;
 }
 
 .tc-editor-toolbar button {
@@ -1570,9 +1581,30 @@ html body.tc-body.tc-single-tiddler-window {
 	overflow: auto;
 }
 
-.tc-tiddler-preview-preview {
-	float: right;
-	width: 49%;
+.tc-tiddler-editor {
+	display: grid;
+}
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview {
+	grid-template-areas:
+		"toolbar toolbar"
+		"editor preview";
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto 1fr;
+}
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden {
+	grid-template-areas:
+		"toolbar"
+		"editor";
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr;
+}
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview {
+	grid-area: preview;
+	overflow-wrap: anywhere;
+	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
@@ -1587,12 +1619,15 @@ html body.tc-body.tc-single-tiddler-window {
 
 """>>
 
-.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
-	width: 49%;
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-edit-texteditor,
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden .tc-edit-texteditor {
+	grid-area: editor;
 }
 
-.tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
-	max-width: 49%;
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview canvas.tc-edit-bitmapeditor,
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden canvas.tc-edit-bitmapeditor {
+	grid-area: editor;
+	max-width: 100%;
 }
 
 .tc-edit-fields {
@@ -2774,13 +2809,9 @@ input.tc-palette-manager-colour-input {
 	white-space: nowrap;
 }
 
-.tc-table-of-contents button {
+.tc-table-of-contents button,
+.tc-table-of-contents .toc-item-muted {
 	color: <<colour sidebar-foreground>>;
-}
-
-button + .tc-toc-caption,
-button > .tc-toc-caption{
-	margin-left: .25em;
 }
 
 .tc-table-of-contents svg {

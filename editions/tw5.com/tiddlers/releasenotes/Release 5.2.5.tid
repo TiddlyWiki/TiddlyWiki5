@@ -5,6 +5,7 @@ released: 20221219184500440
 tags: ReleaseNotes
 title: Release 5.2.5
 type: text/vnd.tiddlywiki
+description: Hot fix release for v5.2.4
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.4...v5.2.5]]//
 

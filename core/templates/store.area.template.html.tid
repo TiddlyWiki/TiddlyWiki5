@@ -6,14 +6,14 @@ title: $:/core/templates/store.area.template.html
     <$list filter="[[storeAreaFormat]is[variable]getvariable[]else[json]match[json]]">
         <!-- New-style JSON store area, with an old-style store area for compatibility with v5.1.x tooling -->
         `<script class="tiddlywiki-tiddler-store" type="application/json">[`
-            <$vars newline={{{ [charcode[10]] }}}>
+            <$let newline={{{ [charcode[10]] }}} join=`,$(newline)$`>
                 <$text text=<<newline>>/>
-                <$list filter=<<saveTiddlerFilter>> counter="counter" template="$:/core/templates/html-json-tiddler"/>
+                <$list filter=<<saveTiddlerFilter>> join=<<join>> template="$:/core/templates/html-json-tiddler"/>
                 <$vars numTiddlers={{{ [subfilter<saveTiddlerFilter>count[]] }}}>
-                    <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} counter="counter" template="$:/core/templates/html-json-skinny-tiddler"/>
+                    <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} join=<<join>> template="$:/core/templates/html-json-skinny-tiddler"/>
                 </$vars>
                 <$text text=<<newline>>/>
-            </$vars>
+            </$let>
         `]</script>`
         `<div id="storeArea" style="display:none;">`
         `</div>`
