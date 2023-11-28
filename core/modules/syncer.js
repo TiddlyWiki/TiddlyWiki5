@@ -425,7 +425,7 @@ Syncer.prototype.processTaskQueue = function() {
 	if((!this.syncadaptor.isReady || this.syncadaptor.isReady()) && this.numTasksInProgress === 0) {
 		// Choose the next task to perform
 		var task = this.chooseNextTask();
-		self.logger.log("Chosen next task " + task);
+		// self.logger.log("Chosen next task " + task);
 		// Perform the task if we had one
 		if(typeof task === "object" && task !== null) {
 			this.numTasksInProgress += 1;
@@ -551,14 +551,14 @@ SaveTiddlerTask.prototype.run = function(callback) {
 				revision: revision,
 				timestampLastSaved: new Date()
 			};
-			self.syncer.logger.log("Updating tiddler info in SaveTiddlerTask.run for " + self.title + " " + JSON.stringify(self.syncer.tiddlerInfo[self.title]));
+			// self.syncer.logger.log("Updating tiddler info in SaveTiddlerTask.run for " + self.title + " " + JSON.stringify(self.syncer.tiddlerInfo[self.title]));
 			// Invoke the callback
 			callback(null);
 		},{
 			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
-		this.syncer.logger.log(" Not Dispatching 'save' task:",this.title,"tiddler does not exist");
+		// this.syncer.logger.log(" Not Dispatching 'save' task:",this.title,"tiddler does not exist");
 		$tw.utils.nextTick(callback(null));
 	}
 };
@@ -582,7 +582,7 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 			return callback(err);
 		}
 		// Remove the info stored about this tiddler
-		self.syncer.logger.log("Deleting tiddler info in DeleteTiddlerTask.run for " + self.title);
+		// self.syncer.logger.log("Deleting tiddler info in DeleteTiddlerTask.run for " + self.title);
 		delete self.syncer.tiddlerInfo[self.title];
 		// Invoke the callback
 		callback(null);
@@ -659,7 +659,7 @@ SyncFromServerTask.prototype.run = function(callback) {
 	} else if(this.syncer.syncadaptor.getSkinnyTiddlers) {
 		this.syncer.logger.log("Retrieving skinny tiddler list");
 		this.syncer.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
-			self.syncer.logger.log("Retrieved skinny tiddler list");
+			// self.syncer.logger.log("Retrieved skinny tiddler list");
 			// Check for errors
 			if(err) {
 				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
