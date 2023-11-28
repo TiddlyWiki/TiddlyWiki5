@@ -6,6 +6,8 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.3.2">> The conditional shortcut syntax provides a convenient way to express if-then-else logic within WikiText. It evaluates a filter and considers the condition to be true if there is at least one result (regardless of the value of that result).
 
+Within an "if" or "elseif" clause, the variable `condition` contains the value of the first result of evaluating the filter condition.
+
 A simple example:
 
 <$macrocall $name='wikitext-example-without-html'
@@ -55,7 +57,6 @@ src='\procedure test(animal)
 Notes:
 
 * Clauses are parsed in inline mode by default. Force block mode parsing by following the opening `<% if %>`, `<% elseif %>` or `<% else %>` with two line breaks
-* Within an "if" or "elseif" clause, the variable `condition` contains the value of the first result of evaluating the filter condition
 * Widgets and HTML elements must be within a single conditional clause; it is not possible to start an element in one conditional clause and end it in another
 * The conditional shortcut syntax cannot contain pragmas such as procedure definitions
 
