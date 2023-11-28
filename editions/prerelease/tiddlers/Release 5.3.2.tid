@@ -106,7 +106,7 @@ Improvements to the following translations:
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7769">> all the relevant core widgets to allow arbitrary `data-*` attributes and `style.*` attributes to be applied to the generated DOM nodes. This is useful for passing data to the EventCatcherWidget
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7849">> [[jsonextract Operator]], [[jsonget Operator]], [[jsonset Operator]] and [[jsontype Operator]] to allow negative indexes into arrays to be counted from the end of the array
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7690">> the default page layout to better support CSS grid and flexbox layouts
-* <<.link-bage-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7787">> the editor to use grid layout, simplifying customisation
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7787">> the editor to use grid layout, simplifying customisation
 
 ! Bug Fixes
 
@@ -132,7 +132,7 @@ Improvements to the following translations:
 
 ! Node.js Improvements
 
-* <<link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7843">> a significant flaw in the synchronisation algorithm used by the client-server configuration. The flaw could lead to tiddlers temporarily disappearing from the browser
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7843">> a significant flaw in the synchronisation algorithm used by the client-server configuration. The flaw could lead to tiddlers temporarily disappearing from the browser
 
 ! Performance Improvements
 
