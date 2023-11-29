@@ -176,16 +176,23 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 		// After a delay for rendering, scroll to the bound position
 		setTimeout(this.updateScrollPositionFromBoundTiddler.bind(this),50);
 		// Save scroll position on DOM scroll event
+		var timeout;
 		this.outerDomNode.addEventListener("scroll",function(event) {
-			var existingTiddler = self.wiki.getTiddler(self.scrollableBind),
-				newTiddlerFields = {
-					title: self.scrollableBind,
-					"scroll-left": self.outerDomNode.scrollLeft.toString(),
-					"scroll-top": self.outerDomNode.scrollTop.toString()
-				};
-			if(!existingTiddler || (existingTiddler.fields["title"] !== newTiddlerFields["title"]) || (existingTiddler.fields["scroll-left"] !== newTiddlerFields["scroll-left"] || existingTiddler.fields["scroll-top"] !== newTiddlerFields["scroll-top"])) {
-				self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
+			if(timeout) {
+				window.cancelAnimationFrame(timeout);
+				timeout = null;
 			}
+			timeout = window.requestAnimationFrame(function() {
+				var existingTiddler = self.wiki.getTiddler(self.scrollableBind),
+					newTiddlerFields = {
+						title: self.scrollableBind,
+						"scroll-left": self.outerDomNode.scrollLeft.toString(),
+						"scroll-top": self.outerDomNode.scrollTop.toString()
+					};
+				if(!existingTiddler || (existingTiddler.fields["title"] !== newTiddlerFields["title"]) || (existingTiddler.fields["scroll-left"] !== newTiddlerFields["scroll-left"] || existingTiddler.fields["scroll-top"] !== newTiddlerFields["scroll-top"])) {
+					self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
+				}
+			});
 		});
 	}
 };
