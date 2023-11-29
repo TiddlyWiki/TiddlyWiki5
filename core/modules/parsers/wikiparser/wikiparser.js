@@ -209,8 +209,12 @@ WikiParser.prototype.parsePragmas = function() {
 			break;
 		}
 		// Process the pragma rule
+		var start = this.pos;
 		var subTree = nextMatch.rule.parse();
 		if(subTree.length > 0) {
+			// Set the start and end positions of the pragma rule if
+			if (subTree[0].start === undefined) subTree[0].start = start;
+			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 			// Quick hack; we only cope with a single parse tree node being returned, which is true at the moment
 			currentTreeBranch.push.apply(currentTreeBranch,subTree);
 			subTree[0].children = [];
@@ -233,7 +237,14 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	// Look for a block rule that applies at the current position
 	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
 	if(nextMatch && nextMatch.matchIndex === this.pos) {
-		return nextMatch.rule.parse();
+		var start = this.pos;
+		var subTree = nextMatch.rule.parse();
+		// Set the start and end positions of the first and last blocks if they're not already set
+		if (subTree.length > 0) {
+			if (subTree[0].start === undefined) subTree[0].start = start;
+			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+		}
+		return subTree;
 	}
 	// Treat it as a paragraph if we didn't find a block rule
 	var start = this.pos;
@@ -330,7 +341,15 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 			this.pos = nextMatch.matchIndex;
 		}
 		// Process the run rule
-		tree.push.apply(tree,nextMatch.rule.parse());
+		var start = this.pos;
+		var subTree = nextMatch.rule.parse();
+		// Set the start and end positions of the first and last child if they're not already set
+		if (subTree.length > 0) {
+			// Set the start and end positions of the first and last child if they're not already set
+			if (subTree[0].start === undefined) subTree[0].start = start;
+			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+		}
+		tree.push.apply(tree,subTree);
 		// Look for the next run rule
 		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
 	}
@@ -381,7 +400,14 @@ WikiParser.prototype.parseInlineRunTerminatedExtended = function(terminatorRegEx
 				this.pos = inlineRuleMatch.matchIndex;
 			}
 			// Process the inline rule
-			tree.push.apply(tree,inlineRuleMatch.rule.parse());
+			var start = this.pos;
+			var subTree = inlineRuleMatch.rule.parse();
+			// Set the start and end positions of the first and last child if they're not already set
+			if (subTree.length > 0) {
+				if (subTree[0].start === undefined) subTree[0].start = start;
+				if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+			}
+			tree.push.apply(tree,subTree);
 			// Look for the next inline rule
 			inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
 			// Look for the next terminator match
@@ -407,7 +433,7 @@ WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 		text = $tw.utils.trim(text);
 	}
 	if(text) {
-		array.push({type: "text", text: text, start: start, end: end});		
+		array.push({type: "text", text: text, start: start, end: end});
 	}
 };
 
@@ -460,4 +486,3 @@ WikiParser.prototype.amendRules = function(type,names) {
 exports["text/vnd.tiddlywiki"] = WikiParser;
 
 })();
-
