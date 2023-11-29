@@ -12,6 +12,8 @@ Scrollable widget
 /*global $tw: false */
 "use strict";
 
+var DEBOUNCE_INTERVAL = 100; // Delay after last scroll event before updating the bound tiddler
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ScrollableWidget = function(parseTreeNode,options) {
@@ -179,10 +181,10 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 		var timeout;
 		this.outerDomNode.addEventListener("scroll",function(event) {
 			if(timeout) {
-				window.cancelAnimationFrame(timeout);
+				clearTimeout(timeout);
 				timeout = null;
 			}
-			timeout = window.requestAnimationFrame(function() {
+			timeout = setTimeout(function() {
 				var existingTiddler = self.wiki.getTiddler(self.scrollableBind),
 					newTiddlerFields = {
 						title: self.scrollableBind,
@@ -192,7 +194,7 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 				if(!existingTiddler || (existingTiddler.fields["title"] !== newTiddlerFields["title"]) || (existingTiddler.fields["scroll-left"] !== newTiddlerFields["scroll-left"] || existingTiddler.fields["scroll-top"] !== newTiddlerFields["scroll-top"])) {
 					self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
 				}
-			});
+			},DEBOUNCE_INTERVAL);
 		});
 	}
 };
