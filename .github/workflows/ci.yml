@@ -24,6 +24,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
       - uses: mshick/add-pr-comment@v2
+        if: always()
         with:
           message: |
             **Hello**
