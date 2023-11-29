@@ -183,7 +183,7 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 					"scroll-left": self.outerDomNode.scrollLeft.toString(),
 					"scroll-top": self.outerDomNode.scrollTop.toString()
 				};
-			if(!existingTiddler || (existingTiddler.fields["scroll-left"] !== newTiddlerFields["scroll-left"] || existingTiddler.fields["scroll-top"] !== newTiddlerFields["scroll-top"])) {
+			if(!existingTiddler || (existingTiddler.fields["title"] !== newTiddlerFields["title"]) || (existingTiddler.fields["scroll-left"] !== newTiddlerFields["scroll-left"] || existingTiddler.fields["scroll-top"] !== newTiddlerFields["scroll-top"])) {
 				self.wiki.addTiddler(new $tw.Tiddler(existingTiddler,newTiddlerFields));
 			}
 		});
