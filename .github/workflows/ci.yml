@@ -1,3 +1,5 @@
+name: Primary Workflow
+
 on:
   pull_request:
   push:
@@ -21,16 +23,73 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - name: Link artifacts to PR
-        if: always()
-        uses: tonyhallett/artifacts-url-comments@v1.1.0
+  comment:
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Artifact and Pull request info
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          WORKFLOW_RUN_EVENT_OBJ: ${{ toJSON(github.event.workflow_run) }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          PREVIOUS_JOB_ID=$(jq -r '.id' <<< "$WORKFLOW_RUN_EVENT_OBJ")
+          echo "Previous Job ID: $PREVIOUS_JOB_ID"
+          echo "PREVIOUS_JOB_ID=$PREVIOUS_JOB_ID" >> "$GITHUB_ENV"
+
+          SUITE_ID=$(jq -r '.check_suite_id' <<< "$WORKFLOW_RUN_EVENT_OBJ")
+          echo "Previous Suite ID: $SUITE_ID"
+          echo "SUITE_ID=$SUITE_ID" >> "$GITHUB_ENV"
+
+          ARTIFACT_ID=$(gh api "/repos/$OWNER/$REPO/actions/artifacts" \
+            --jq ".artifacts.[] |
+            select(.workflow_run.id==${PREVIOUS_JOB_ID}) |
+            select(.expired==false) |
+            .id")
+
+          echo "Artifact ID: $ARTIFACT_ID"
+          echo "ARTIFACT_ID=$ARTIFACT_ID" >> "$GITHUB_ENV"
+
+          PR_NUMBER=$(jq -r '.pull_requests[0].number' \
+            <<< "$WORKFLOW_RUN_EVENT_OBJ")
+
+          echo "Pull request Number: $PR_NUMBER"
+          echo "PR_NUMBER=$PR_NUMBER" >> "$GITHUB_ENV"
+
+          HEAD_SHA=$(jq -r '.pull_requests[0].head.sha' \
+            <<< "$WORKFLOW_RUN_EVENT_OBJ")
+
+          echo "Head SHA: $HEAD_SHA"
+          echo "HEAD_SHA=$HEAD_SHA" >> "$GITHUB_ENV"
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: find-comment
         with:
-            prefix: Here are the artifacts 
-            suffix: Have a nice day.
-            format: name
-            addTo: pullandissues
+          issue-number: ${{ env.PR_NUMBER }}
+          comment-author: 'github-actions[bot]'
+      - name: Update Comment
+        env:
+          JOB_PATH: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ env.PREVIOUS_JOB_ID }}"
+          ARTIFACT_URL: "${{ github.server_url }}/${{ github.repository }}/suites/$SUITE_ID/artifacts/$ARTIFACT_ID"
+          HEAD_SHA: "${{ env.HEAD_SHA }}"
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ env.PR_NUMBER }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |-
+            ![badge]
+
+            Build Successful! You can find a link to the downloadable artifact below.
+
+            | Name     | Link                    |
+            | -------- | ----------------------- |
+            | Commit   | ${{ env.HEAD_SHA }}     |
+            | Logs     | ${{ env.JOB_PATH }}     |
+            | Download | ${{ env.ARTIFACT_URL }} |
+
+            [badge]: https://img.shields.io/badge/Build_Success!-0d1117?style=for-the-badge&labelColor=3fb950&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjZmZmZmZmIj48cGF0aCBkPSJNMjEuMDMgNS43MmEuNzUuNzUgMCAwIDEgMCAxLjA2bC0xMS41IDExLjVhLjc0Ny43NDcgMCAwIDEtMS4wNzItLjAxMmwtNS41LTUuNzVhLjc1Ljc1IDAgMSAxIDEuMDg0LTEuMDM2bDQuOTcgNS4xOTVMMTkuOTcgNS43MmEuNzUuNzUgMCAwIDEgMS4wNiAwWiI+PC9wYXRoPjwvc3ZnPg==
   build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
