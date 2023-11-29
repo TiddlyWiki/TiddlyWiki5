@@ -1,5 +1,5 @@
 on:
-  pull_request_target:
+  pull_request:
   push:
     branches:
       - master
@@ -23,13 +23,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      - uses: mshick/add-pr-comment@v2
-        if: always()
-        with:
-          message: |
-            **Hello**
-            🌏
-            !
   build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
