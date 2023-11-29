@@ -189,7 +189,7 @@ Syncer.prototype.readTiddlerInfo = function() {
 	// Record information for known tiddlers
 	var self = this,
 		tiddlers = this.getSyncedTiddlers();
-	this.logger.log("Initialising tiddlerInfo for " + tiddlers.length + " tiddlers");
+	// this.logger.log("Initialising tiddlerInfo for " + tiddlers.length + " tiddlers");
 	$tw.utils.each(tiddlers,function(title) {
 		var tiddler = self.wiki.getTiddler(title);
 		if(tiddler) {
@@ -302,9 +302,15 @@ Syncer.prototype.getStatus = function(callback) {
 Synchronise from the server by reading the skinny tiddler list and queuing up loads for any tiddlers that we don't already have up to date
 */
 Syncer.prototype.syncFromServer = function() {
-	this.forceSyncFromServer = true;
-	this.processTaskQueue();
+	if(this.canSyncFromServer()) {
+		this.forceSyncFromServer = true;
+		this.processTaskQueue();	
+	}
 };
+
+Syncer.prototype.canSyncFromServer = function() {
+	return !!this.syncadaptor.getUpdatedTiddlers || !!this.syncadaptor.getSkinnyTiddlers;
+}
 
 /*
 Force load a tiddler from the server
@@ -447,7 +453,7 @@ Syncer.prototype.processTaskQueue = function() {
 			// And trigger a timeout if there is a pending task
 			if(task === true) {
 				this.triggerTimeout(this.taskTimerInterval);
-			} else {
+			} else if(this.canSyncFromServer()) {
 				this.triggerTimeout(this.pollTimerInterval);
 			}
 		}
