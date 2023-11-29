@@ -254,7 +254,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var start = this.pos;
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
-	return [{type: "element", tag: "p", children: children, start: start, end: end, parseRule: null }];
+	return [{type: "element", tag: "p", children: children, start: start, end: end, parseRule: undefined }];
 };
 
 /*
@@ -354,7 +354,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 		}
 		var rule = Object.getPrototypeOf(nextMatch.rule);
-		for (const node of subTree) node.rule = rule;
+        $tw.utils.each(subTree, function (node) { node.rule = rule; });
 		tree.push.apply(tree,subTree);
 		// Look for the next run rule
 		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
@@ -441,7 +441,7 @@ WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 		text = $tw.utils.trim(text);
 	}
 	if(text) {
-		array.push({type: "text", text: text, start: start, end: end, parseRule: null});
+		array.push({type: "text", text: text, start: start, end: end, parseRule: undefined});
 	}
 };
 
