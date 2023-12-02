@@ -255,7 +255,7 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 	}
 	// If a new scroll position was written into the tiddler, update scroll position
 	if(changedTiddlers[this.getAttribute("bind")]) {
-		setTimeout(this.updateScrollPositionFromBoundTiddler.bind(this),50);
+		this.updateScrollPositionFromBoundTiddler.bind(this);
 	}
 	return this.refreshChildren(changedTiddlers);
 };
