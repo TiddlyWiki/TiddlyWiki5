@@ -176,7 +176,7 @@ ScrollableWidget.prototype.render = function(parent,nextSibling) {
 	// If the scroll position is bound to a tiddler
 	if(this.scrollableBind) {
 		// After a delay for rendering, scroll to the bound position
-		setTimeout(this.updateScrollPositionFromBoundTiddler.bind(this),50);
+		this.updateScrollPositionFromBoundTiddler();
 		// Set up event listener
 		this.currentListener = this.listenerFunction.bind(this);
 		this.outerDomNode.addEventListener("scroll", this.currentListener);
@@ -251,13 +251,14 @@ ScrollableWidget.prototype.refresh = function(changedTiddlers) {
 		this.scrollableBind = this.getAttribute("bind");
 		this.currentListener = this.listenerFunction.bind(this);
 		this.outerDomNode.addEventListener("scroll", this.currentListener);
-		setTimeout(this.updateScrollPositionFromBoundTiddler.bind(this),50);
 	}
-	// If a new scroll position was written into the tiddler, update scroll position
-	if(changedTiddlers[this.getAttribute("bind")]) {
-		setTimeout(this.updateScrollPositionFromBoundTiddler.bind(this),50);
+	// Refresh children
+	var result = this.refreshChildren(changedTiddlers);
+	// If the bound tiddler has changed, update scroll position
+	if(changedAttributes["bind"] || changedTiddlers[this.getAttribute("bind")]) {
+		this.updateScrollPositionFromBoundTiddler();
 	}
-	return this.refreshChildren(changedTiddlers);
+	return result;
 };
 
 exports.scrollable = ScrollableWidget;
