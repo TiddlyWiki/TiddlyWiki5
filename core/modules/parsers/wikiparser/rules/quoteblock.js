@@ -52,7 +52,9 @@ exports.parse = function() {
 	this.parser.pos = this.matchRegExp.lastIndex;
 
 	// Parse any classes, whitespace and then the optional cite itself
+	var classStart = this.parser.pos;
 	classes.push.apply(classes, this.parser.parseClasses());
+	var classEnd = this.parser.pos;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var citeStart = this.parser.pos;
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
@@ -89,7 +91,7 @@ exports.parse = function() {
 		type: "element",
 		tag: "blockquote",
 		attributes: {
-			class: { type: "string", value: classes.join(" ") },
+			class: { type: "string", value: classes.join(" "), start: classStart, end: classEnd },
 		},
 		children: tree
 	}];

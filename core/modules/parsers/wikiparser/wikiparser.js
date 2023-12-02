@@ -91,6 +91,11 @@ var WikiParser = function(type,text,options) {
 	} else {
 		topBranch.push.apply(topBranch,this.parseBlocks());
 	}
+	// Build rules' name map
+	this.usingRuleMap = {};
+	$tw.utils.each(this.pragmaRules, function (ruleInfo) { self.usingRuleMap[ruleInfo.rule.name] = Object.getPrototypeOf(ruleInfo.rule); });
+	$tw.utils.each(this.blockRules, function (ruleInfo) { self.usingRuleMap[ruleInfo.rule.name] = Object.getPrototypeOf(ruleInfo.rule); });
+	$tw.utils.each(this.inlineRules, function (ruleInfo) { self.usingRuleMap[ruleInfo.rule.name] = Object.getPrototypeOf(ruleInfo.rule); });
 	// Return the parse tree
 };
 
@@ -215,8 +220,7 @@ WikiParser.prototype.parsePragmas = function() {
 			// Set the start and end positions of the pragma rule if
 			if (subTree[0].start === undefined) subTree[0].start = start;
 			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
-			var rule = Object.getPrototypeOf(nextMatch.rule);
-			for (const node of subTree) node.rule = rule;
+			$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
 			// Quick hack; we only cope with a single parse tree node being returned, which is true at the moment
 			currentTreeBranch.push.apply(currentTreeBranch,subTree);
 			subTree[0].children = [];
@@ -246,15 +250,14 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 			if (subTree[0].start === undefined) subTree[0].start = start;
 			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 		}
-		var rule = Object.getPrototypeOf(nextMatch.rule);
-		for (const node of subTree) node.rule = rule;
+		$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
 		return subTree;
 	}
 	// Treat it as a paragraph if we didn't find a block rule
 	var start = this.pos;
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
-	return [{type: "element", tag: "p", children: children, start: start, end: end, parseRule: undefined }];
+	return [{type: "element", tag: "p", children: children, start: start, end: end, rule: null }];
 };
 
 /*
@@ -353,8 +356,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 			if (subTree[0].start === undefined) subTree[0].start = start;
 			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 		}
-		var rule = Object.getPrototypeOf(nextMatch.rule);
-        $tw.utils.each(subTree, function (node) { node.rule = rule; });
+		$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
 		tree.push.apply(tree,subTree);
 		// Look for the next run rule
 		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
@@ -413,8 +415,7 @@ WikiParser.prototype.parseInlineRunTerminatedExtended = function(terminatorRegEx
 				if (subTree[0].start === undefined) subTree[0].start = start;
 				if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 			}
-			var rule = Object.getPrototypeOf(inlineRuleMatch.rule);
-			for (const node of subTree) node.rule = rule;
+			$tw.utils.each(subTree, function (node) { node.rule = inlineRuleMatch.rule.name; });
 			tree.push.apply(tree,subTree);
 			// Look for the next inline rule
 			inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
@@ -441,7 +442,7 @@ WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 		text = $tw.utils.trim(text);
 	}
 	if(text) {
-		array.push({type: "text", text: text, start: start, end: end, parseRule: undefined});
+		array.push({type: "text", text: text, start: start, end: end, rule: null});
 	}
 };
 

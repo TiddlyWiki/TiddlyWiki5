@@ -131,9 +131,11 @@ exports.parse = function() {
 			listStack.splice(match[0].length,listStack.length - match[0].length);
 		}
 		// Process the body of the list item into the last list item
+		var classStart = this.parser.pos;
 		var lastListChildren = listStack[listStack.length-1].children,
 			lastListItem = lastListChildren[lastListChildren.length-1],
 			classes = this.parser.parseClasses();
+		var classEnd = this.parser.pos;
 		this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 		var tree = this.parser.parseInlineRun(/(\r?\n)/mg);
 		lastListItem.children.push.apply(lastListItem.children,tree);
@@ -141,6 +143,8 @@ exports.parse = function() {
 		listStack[listStack.length-1].end = this.parser.pos;
 		if(classes.length > 0) {
 			$tw.utils.addClassToParseTreeNode(lastListItem,classes.join(" "));
+			lastListItem.attributes.class.start = classStart;
+			lastListItem.attributes.class.end = classEnd;
 		}
 		// Consume any whitespace following the list item
 		this.parser.skipWhitespace();
