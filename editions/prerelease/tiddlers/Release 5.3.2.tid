@@ -12,7 +12,9 @@ description: Under development
 
 !! Conditional Shortcut Syntax
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7710">> a new [[shortcut syntax|Conditional Shortcut Syntax]] for concisely expressing if-then-else logic. For example:
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7710">> a new [[shortcut syntax|Conditional Shortcut Syntax]] for concisely expressing if-then-else logic. This is the first of a new type of wikitext syntax based on tokens delimited with `<%` and `%>`. We plan to introduce other structures using the same format such as a "case" statement.
+
+These new token-based shortcuts allow a richer structure and expressivity than existing features such as widgets or pragmas. For example:
 
 ```
 <% if [<animal>match[Elephant]] %>
@@ -24,9 +26,15 @@ description: Under development
 <% endif %>
 ```
 
+Behind the scenes, the conditional shortcut syntax is rendered as the equivalent [[ListWidgets|ListWidget]].
+
 !! Explicit Templates for the ListWidget
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7784">> support for `<$list-template>` and `<$list-empty>` as immediate children of the <<.wid "ListWidget">> widget to specify the list item template and/or the empty template. For example:
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7784">> support for `<$list-template>` and `<$list-empty>` as immediate children of the <<.wid "ListWidget">> widget to specify the list item template and/or the empty template.
+
+This new feature is designed to replace a common pattern of using the `emptyMessage` attribute of the ListWidget to render complex wikitext that thus has to be quoted. Working with wikitext within quotes is awkward and error prone. The new structure can be somewhat faster because it allows the empty message to be parsed in advanced of rendering.
+
+For example:
 
 ```
 <$list filter=<<filter>>>
