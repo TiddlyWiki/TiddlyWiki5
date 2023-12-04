@@ -59,4 +59,6 @@ Indexes can be dynamically composed from variables and transclusions, e.g. `[<js
 
 In the special case where only a single parameter is defined, the operator replaces the entire input object with the the value of that parameter. If the single parameter is blank, the operation is ignored and no assignment takes place.
 
+If the input consists of multiple JSON objects with matching properties, the value is set for all of them.
+
 <<.operator-examples "jsonset">>

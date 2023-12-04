@@ -3,9 +3,7 @@ modified: 20231204115056732
 tags: [[Operator Examples]] [[jsonset Operator]]
 title: jsonset Operator (Examples)
 
-The examples below assume the following JSON object is contained in the variable `jsondata`:
-
-<$let jsondata="""{
+<$let object-a="""{
     "a": "one",
     "b": "",
     "c": "three",
@@ -25,35 +23,37 @@ The examples below assume the following JSON object is contained in the variable
         }
     }
 }
-""">
-<pre><<jsondata>></pre>
+"""
+object-b="""{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}""">
 
-<<.operator-example 1 "[<jsondata>jsonset[d],[Jaguar]]">>
-<<.operator-example 2 "[<jsondata>jsonset[d],[f],[Panther]]">>
-<<.operator-example 3 "[<jsondata>jsonset[d],[f],[-1],[Elephant]]">>
-<<.operator-example 4 "[<jsondata>jsonset[d],[f],[-2],[Elephant]]">>
-<<.operator-example 5 "[<jsondata>jsonset[d],[f],[-4],[Elephant]]">>
-<<.operator-example 6 "[<jsondata>jsonset[Panther]]" "If only a single parameter is specified, it replaces the entire JSON object">>
-<<.operator-example 7 "[<jsondata>jsonset[]]" "If only a single blank parameter is specified, no changes are made to the JSON object">>
+The examples below assume the following JSON object is contained in the variable `object-a`:
 
-</$let>
+<pre><<object-a>></pre>
 
-The examples below assume the following JSON object is contained in the variable `jsondata`:
+<<.operator-example 1 "[<object-a>jsonset[d],[Jaguar]]">>
+<<.operator-example 2 "[<object-a>jsonset[d],[f],[Panther]]">>
+<<.operator-example 3 "[<object-a>jsonset[d],[f],[-1],[Elephant]]">>
+<<.operator-example 4 "[<object-a>jsonset[d],[f],[-2],[Elephant]]">>
+<<.operator-example 5 "[<object-a>jsonset[d],[f],[-4],[Elephant]]">>
+<<.operator-example 6 "[<object-a>jsonset[Panther]]" "If only a single parameter is specified, it replaces the entire JSON object">>
+<<.operator-example 7 "[<object-a>jsonset[]]" "If only a single blank parameter is specified, no changes are made to the JSON object">>
 
-<$let jsondata="""{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}""">
-<pre><<jsondata>></pre>
 
-<<.operator-example 8 "[<jsondata>jsonset[]]">>
-<<.operator-example 9 "[<jsondata>jsonset[],[Antelope]]">>
-<<.operator-example 10 "[<jsondata>jsonset:number[],[not a number]]">>
-<<.operator-example 11 "[<jsondata>jsonset[id],[Antelope]]">>
-<<.operator-example 12 "[<jsondata>jsonset:notatype[id],[Antelope]]">>
-<<.operator-example 13 "[<jsondata>jsonset:boolean[id],[false]]">>
-<<.operator-example 14 "[<jsondata>jsonset:boolean[id],[Antelope]]">>
-<<.operator-example 15 "[<jsondata>jsonset:number[id],[42]]">>
-<<.operator-example 16 "[<jsondata>jsonset:null[id]]">>
-<<.operator-example 17 "[<jsondata>jsonset:array[d],[f],[5]]">>
-<<.operator-example 18 "[<jsondata>jsonset:object[d],[f],[5]]">>
-<<.operator-example 19 "[<jsondata>jsonset[missing],[id],[Antelope]]">>
+The examples below assume the following JSON object is contained in the variable `object-b`:
 
-</$let>
+<pre><<object-b>></pre>
+
+<<.operator-example 8 "[<object-b>jsonset[]]" "If only a single blank parameter is specified, no changes are made to the JSON object">>
+<<.operator-example 9 "[<object-b>jsonset[],[Antelope]]" "If the property to be set is blank, the entire JSON object is replaced">>
+<<.operator-example 10 "[<object-b>jsonset:number[],[not a number]]" "invalid numbers are interpreted as zero">>
+<<.operator-example 11 "[<object-b>jsonset[id],[Antelope]]" "nonexistent top level properties are added to the object">>
+<<.operator-example 19 "[<object-b>jsonset[missing],[id],[Antelope]]" "nonexistent nested properties are are ignored">>
+<<.operator-example 12 "[<object-b>jsonset:notatype[id],[Antelope]]" "invalid type suffix is interpreted as the default string type">>
+<<.operator-example 13 "[<object-b>jsonset:boolean[id],[false]]">>
+<<.operator-example 14 "[<object-b>jsonset:boolean[id],[Antelope]]" "invalid boolean value causes no assignment to be made">>
+<<.operator-example 15 "[<object-b>jsonset:number[id],[42]]">>
+<<.operator-example 16 "[<object-b>jsonset:null[id]]">>
+<<.operator-example 17 "[<object-b>jsonset:array[d],[f],[5]]">>
+<<.operator-example 18 "[<object-b>jsonset:object[d],[f],[5]]">>
+
+<<.operator-example 20 "[<object-a>] [<object-b>] :and[jsonset[b],[two]]" "If the input consists of multiple JSON objects with matching properties, the value is set for all of them">>
