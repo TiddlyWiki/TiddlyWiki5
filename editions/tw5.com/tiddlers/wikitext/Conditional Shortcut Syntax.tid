@@ -4,14 +4,14 @@ tags: WikiText
 title: Conditional Shortcut Syntax
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.2">> The conditional shortcut syntax provides a convenient way to express if-then-else logic within WikiText. It evaluates a filter and considers the condition to be true if there is at least one result (regardless of the value of that result).
+<<.from-version "5.3.2">> The conditional shortcut syntax provides a convenient way to express if-then-else logic within WikiText. It evaluates a [[filter expression|Filter Expression]] and considers the condition to be true if there is at least one result (regardless of the value of that result).
 
 Within an "if" or "elseif" clause, the variable `condition` contains the value of the first result of evaluating the filter condition.
 
 A simple example:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<% if [{$:/$:/info/url/protocol}match[file:]] %>
+src='<% if [{$:/info/url/protocol}match[file:]] %>
   Loaded from a file URI
 <% else %>
   Not loaded from a file URI
@@ -21,11 +21,11 @@ src='<% if [{$:/$:/info/url/protocol}match[file:]] %>
 One or more `<% elseif %>` clauses may be included before the `<% else %>` clause:
 
 <$macrocall $name='wikitext-example-without-html'
-src='<% if [{$:/$:/info/url/protocol}match[file:]] %>
+src='<% if [{$:/info/url/protocol}match[file:]] %>
   Loaded from a file URI
-<% elseif [{$:/$:/info/url/protocol}match[https:]] %>
+<% elseif [{$:/info/url/protocol}match[https:]] %>
   Loaded from an HTTPS URI
-<% elseif [{$:/$:/info/url/protocol}match[http:]] %>
+<% elseif [{$:/info/url/protocol}match[http:]] %>
   Loaded from an HTTP URI
 <% else %>
   Loaded from an unknown protocol
