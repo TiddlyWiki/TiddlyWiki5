@@ -1,0 +1,59 @@
+created: 20231204112944341
+modified: 20231204115056732
+tags: [[Operator Examples]] [[jsonset Operator]]
+title: jsonset Operator (Examples)
+
+The examples below assume the following JSON object is contained in the variable `jsondata`:
+
+<$let jsondata="""{
+    "a": "one",
+    "b": "",
+    "c": "three",
+    "d": {
+        "e": "four",
+        "f": [
+            "five",
+            "six",
+            true,
+            false,
+            null
+        ],
+        "g": {
+            "x": "max",
+            "y": "may",
+            "z": "maize"
+        }
+    }
+}
+""">
+<pre><<jsondata>></pre>
+
+<<.operator-example 1 "[<jsondata>jsonset[d],[Jaguar]]">>
+<<.operator-example 2 "[<jsondata>jsonset[d],[f],[Panther]]">>
+<<.operator-example 3 "[<jsondata>jsonset[d],[f],[-1],[Elephant]]">>
+<<.operator-example 4 "[<jsondata>jsonset[d],[f],[-2],[Elephant]]">>
+<<.operator-example 5 "[<jsondata>jsonset[d],[f],[-4],[Elephant]]">>
+<<.operator-example 6 "[<jsondata>jsonset[Panther]]" "If only a single parameter is specified, it replaces the entire JSON object">>
+<<.operator-example 7 "[<jsondata>jsonset[]]" "If only a single blank parameter is specified, no changes are made to the JSON object">>
+
+</$let>
+
+The examples below assume the following JSON object is contained in the variable `jsondata`:
+
+<$let jsondata="""{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}""">
+<pre><<jsondata>></pre>
+
+<<.operator-example 8 "[<jsondata>jsonset[]]">>
+<<.operator-example 9 "[<jsondata>jsonset[],[Antelope]]">>
+<<.operator-example 10 "[<jsondata>jsonset:number[],[not a number]]">>
+<<.operator-example 11 "[<jsondata>jsonset[id],[Antelope]]">>
+<<.operator-example 12 "[<jsondata>jsonset:notatype[id],[Antelope]]">>
+<<.operator-example 13 "[<jsondata>jsonset:boolean[id],[false]]">>
+<<.operator-example 14 "[<jsondata>jsonset:boolean[id],[Antelope]]">>
+<<.operator-example 15 "[<jsondata>jsonset:number[id],[42]]">>
+<<.operator-example 16 "[<jsondata>jsonset:null[id]]">>
+<<.operator-example 17 "[<jsondata>jsonset:array[d],[f],[5]]">>
+<<.operator-example 18 "[<jsondata>jsonset:object[d],[f],[5]]">>
+<<.operator-example 19 "[<jsondata>jsonset[missing],[id],[Antelope]]">>
+
+</$let>
