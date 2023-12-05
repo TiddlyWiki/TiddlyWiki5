@@ -44,6 +44,10 @@ Parse the most recent match
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var tag = this.nextTag;
+	if (!tag.isSelfClosing) {
+		tag.openTagStart = tag.start;
+		tag.openTagEnd = tag.end;
+	}
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
@@ -59,6 +63,27 @@ exports.parse = function() {
 		} else {
 			var reEnd = new RegExp("(" + reEndString + ")","mg");
 			tag.children = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+		}
+		tag.end = this.parser.pos;
+		tag.closeTagEnd = tag.end;
+		if (tag.closeTagEnd === tag.openTagEnd) {
+			tag.closeTagStart = tag.end;
+		} else {
+			tag.closeTagStart = tag.end - 1;
+			while (tag.closeTagStart >= tag.start) {
+				var char = this.parser.source[tag.closeTagStart - 1];
+				if (char === '>') {
+					tag.closeTagStart = -1;
+					break;
+				}
+				if (char === '<') {
+					break;
+				}
+				tag.closeTagStart--;
+			}
+			if (tag.closeTagStart < tag.start) {
+				tag.closeTagStart = tag.end;
+			}
 		}
 	}
 	// Return the tag
