@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/tour/startup-actions
 tags: $:/tags/StartupAction
 
-\import [subfilter{$:/core/config/GlobalImportFilter}]
+\import [[$:/plugins/tiddlywiki/tour/variables]]
 <$list filter="[[$:/config/AutoStartTour]get[text]else[no]match[yes]]" variable="ignore">
 <<tour-restart>>
 </$list>

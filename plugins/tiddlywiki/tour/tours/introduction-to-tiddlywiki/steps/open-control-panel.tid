@@ -1,8 +1,8 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/open-control-panel
 caption: Open the control panel
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
-selector: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fcontrol-panel
-condition: [[$:/StoryList]contains[$:/ControlPanel]]
+hint-selector: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fcontrol-panel
+step-success-filter: [[$:/StoryList]contains[$:/ControlPanel]]
 
 <<tour-task "Open the control panel">>
 

@@ -1,8 +1,8 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/search
 caption: Searching
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
-selector: .tc-sidebar-search .tc-popup-handle
-condition: [{$:/temp/search}match[help]]
+hint-selector: .tc-sidebar-search .tc-popup-handle
+step-success-filter: [{$:/temp/search}match[help]]
 
 <<tour-task "Search for the phrase 'help'">>
 
