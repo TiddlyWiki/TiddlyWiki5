@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/tour/settings
 
+\import [[$:/plugins/tiddlywiki/tour/variables]]
 \procedure button-expand-collapse-all(caption,text)
 <$button>
 	<$list filter="[all[shadows+tiddlers]tag<currentTourTag>]" variable="currentStep">

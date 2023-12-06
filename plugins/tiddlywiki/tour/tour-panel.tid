@@ -56,6 +56,7 @@ tags: $:/tags/PageTemplate
 </p>
 <<tour-buttons>>
 \end tour-step-success-filter-satisfied
+\import [[$:/plugins/tiddlywiki/tour/variables]]
 
 <%if [{$:/config/ShowTour}!is[blank]else[show]match[show]] %>
 	<div class=`tc-tour-panel tc-tour-panel-${ [{$:/state/tour/step}get[display-mode]else[normal]] }$ ${ [{$:/config/CurrentTour}get[class]] }$`>
