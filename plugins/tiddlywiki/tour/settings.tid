@@ -129,8 +129,8 @@ Select a tour:
 					<table class="tc-tour-settings-tour-step-details">
 						<tbody>
 							<<display-tour-step-field-text "title" "Title">>
-							<<display-tour-step-field-text "advance-criterion" "advance-criterion">>
-							<<display-tour-step-field-text "advance-criterion-var" "advance-criterion Variable">>
+							<<display-tour-step-field-text "step-success-filter" "step-success-filter">>
+							<<display-tour-step-field-text "step-success-filter-var" "step-success-filter Variable">>
 							<<display-tour-step-field-text "display-mode" "Display Mode">>
 							<<display-tour-step-field-text "enter-actions" "Enter Actions">>
 							<<display-tour-step-field-text "selector" "Hint Selector">>
