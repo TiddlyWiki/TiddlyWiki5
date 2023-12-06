@@ -66,22 +66,22 @@ exports.parse = function() {
 		}
 		tag.end = this.parser.pos;
 		tag.closeTagEnd = tag.end;
-		if (tag.closeTagEnd === tag.openTagEnd) {
+		if (tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
 			tag.closeTagStart = tag.end;
 		} else {
-			tag.closeTagStart = tag.end - 1;
-			while (tag.closeTagStart >= tag.start) {
-				var char = this.parser.source[tag.closeTagStart - 1];
+			tag.closeTagStart = tag.closeTagEnd - 2;
+			var closeTagMinPos = tag.children.length > 0 ? tag.children[tag.children.length-1].end : tag.openTagEnd;
+			if (!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
+			while (tag.closeTagStart >= closeTagMinPos) {
+				var char = this.parser.source[tag.closeTagStart];
 				if (char === '>') {
 					tag.closeTagStart = -1;
 					break;
 				}
-				if (char === '<') {
-					break;
-				}
-				tag.closeTagStart--;
+				if (char === '<') break;
+				tag.closeTagStart -= 1;
 			}
-			if (tag.closeTagStart < tag.start) {
+			if (tag.closeTagStart < closeTagMinPos) {
 				tag.closeTagStart = tag.end;
 			}
 		}
