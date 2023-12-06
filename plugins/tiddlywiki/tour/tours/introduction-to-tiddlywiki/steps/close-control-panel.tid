@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/close-control-panel
 caption: Close the control panel
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
-selector: .tc-story-river div[data-tiddler-title='$:/ControlPanel'] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclose
+hint-selector: .tc-story-river div[data-tiddler-title='$:/ControlPanel'] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclose
 step-success-filter: [[$:/StoryList]!contains[$:/ControlPanel]]
 
 <<tour-task "Now close the control panel">>

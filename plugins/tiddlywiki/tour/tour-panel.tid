@@ -36,11 +36,11 @@ tags: $:/tags/PageTemplate
 
 \procedure tour-step-success-filter-not-satisfied()
 <$transclude tiddler=<<currentTourStep>> mode="block"/>
-<%if [{$:/state/tour/step}has[selector]] %>
+<%if [{$:/state/tour/step}has[hint-selector]] %>
 	<div class="tc-tour-panel-navigation">
 		<$button class="tc-btn-big-green tc-tour-panel-navigation-hint">
-			<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
-			<$transclude tiddler={{$:/state/tour/step}} field="hint" mode="inline"> show me a hint </$transclude>
+			<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[hint-selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[hint-selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[hint-selector-fallback-2]] }}}/>
+			<$transclude tiddler={{$:/state/tour/step}} field="hint-text" mode="inline"> show me a hint </$transclude>
 		</$button>
 	</div>
 <%endif%>
