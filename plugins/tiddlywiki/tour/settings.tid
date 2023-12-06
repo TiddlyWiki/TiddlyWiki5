@@ -130,13 +130,16 @@ Select a tour:
 					<table class="tc-tour-settings-tour-step-details">
 						<tbody>
 							<<display-tour-step-field-text "title" "Title">>
+							<<display-tour-step-field-text "caption" "Caption">>
 							<<display-tour-step-field-text "step-success-filter" "step-success-filter">>
 							<<display-tour-step-field-text "step-success-filter-var" "step-success-filter Variable">>
 							<<display-tour-step-field-text "display-mode" "Display Mode">>
 							<<display-tour-step-field-text "enter-actions" "Enter Actions">>
+							<<display-tour-step-field-text "hint-text" "Hint text">>
 							<<display-tour-step-field-text "hint-selector" "Hint selector">>
 							<<display-tour-step-field-text "hint-selector-fallback-1" "Hint selector Fallback 1">>
 							<<display-tour-step-field-text "hint-selector-fallback-2" "Hint selector Fallback 2">>
+							<<display-tour-step-field-text "condition" "Condition">>
 						</tbody>
 					</table>
 					<div class="tc-tour-settings-tour-step-body">
