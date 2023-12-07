@@ -62,18 +62,13 @@ Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take 
 You can replace it with:
 
 ```
-<$list filter=<<filter>> variable="item" join=", ">
-<$text text=<<item>>/>
-</$list>
+<$list filter=<<filter>> variable="item" join=", "><$text text=<<item>>/></$list>
 ```
 
 If the joiner text that you need is long and awkward to write in an attribute, you can use the new `<$list-join>` widget. Like `<$list-template>` and `<$list-empty>`, it must be an immediate child of the <<.wid "ListWidget">>:
 
 ```
-<$list filter=<<filter>> variable="item">
-<$text text=<<item>>/>
-<$list-join>, and <em>also</em> let's not forget </$list-join>
-</$list>
+<$list filter=<<filter>> variable="item"><$text text=<<item>>/><$list-join>, and <em>also</em> let's not forget </$list-join></$list>
 ```
 
 !! jsonset operator
