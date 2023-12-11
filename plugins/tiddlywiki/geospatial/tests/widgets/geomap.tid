@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/geospatial/tests/widgets/geomap
 description: geomap widget
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec-XXXXX]]
-NOTE: THIS TEST IS DISABLED BECAUSE IT CURRENTLY DOES NOT WORK IN CI WITH PLAYWrIGHT
+NOTE: THIS TEST IS DISABLED BECAUSE IT CURRENTLY DOES NOT WORK IN CI WITH PLAYWRIGHT
 
 title: Description
 text: Map using geolayer to represent features
