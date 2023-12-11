@@ -273,7 +273,10 @@ function setDataItem(data,indexes,value) {
 		lastIndex = $tw.utils.parseInt(lastIndex);
 		if(lastIndex < 0) { lastIndex = lastIndex + current.length };
 	}
-	current[lastIndex] = value;
+	// Only set indexes on objects and arrays
+	if(typeof current === "object") {
+		current[lastIndex] = value;
+	}
 	return data;
 }
 
