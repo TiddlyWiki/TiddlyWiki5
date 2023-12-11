@@ -124,6 +124,7 @@ describe("json filter tests", function() {
 	});
 
 	it("should support the jsonset operator", function() {
+		expect(wiki.filterTiddlers("[jsonset[a],[aa]]")).toEqual(['"First"','"Second"','"Third"']);
 		expect(wiki.filterTiddlers("[{First}jsonset[]]")).toEqual(['{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}']);
 		expect(wiki.filterTiddlers("[{First}jsonset[],[Antelope]]")).toEqual(['"Antelope"']);
 		expect(wiki.filterTiddlers("[{First}jsonset:number[],[not a number]]")).toEqual(['0']);

@@ -18,7 +18,7 @@ The content of the `<$scrollable>` widget is displayed within a pair of wrapper 
 |fallthrough |See below |
 |bind |<<.from-version "5.3.2">> Optional title of tiddler to which the scroll position should be bound |
 
-Binding the scroll position to a tiddler automatically copies the scroll coordinates into the `scroll-left` and `scroll-top` fields as scrolling occurs. Conversely, setting those field values will automatically cause the scrollable to scroll if it can.
+Binding the scroll position to a tiddler automatically copies the scroll coordinates into the `scroll-left` and `scroll-top` fields after scrolling occurs. Conversely, setting those field values will automatically cause the scrollable to scroll if it can.
 
 <$macrocall $name=".note" _="""If a scrollable widget can't handle the `tm-scroll` message because the inner DIV fits within the outer DIV, then by default the message falls through to the parent widget. Setting the ''fallthrough'' attribute to `no` prevents this behaviour."""/> 
 
