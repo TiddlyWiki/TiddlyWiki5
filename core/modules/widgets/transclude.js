@@ -30,7 +30,24 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	this.renderChildren(parent,nextSibling);
+	try {
+		this.renderChildren(parent,nextSibling);
+	} catch(error) {
+		if(error instanceof $tw.utils.TranscludeRecursionError) {
+			// We were infinite looping.
+			// We need to try and abort as much of the loop as we can, so we will keep "throwing" upward until we find a transclusion that has a different signature.
+			// Hopefully that will land us just outside where the loop began. That's where we want to issue an error.
+			// Rendering widgets beneath this point may result in a freezing browser if they explode exponentially.
+			if(error.marker !== this.getVariable("transclusion")) {
+				this.children = [this.makeChildWidget({type: "error", attributes: {
+					"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
+				}})];
+				this.renderChildren(parent,nextSibling);
+				return;
+			}
+		}
+		throw error;
+	}
 };
 
 /*
