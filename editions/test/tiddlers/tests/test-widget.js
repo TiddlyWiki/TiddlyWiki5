@@ -180,7 +180,7 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span> <span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
 	});
 
-	fit("should handle many-tiddler recursion with branching nodes", function() {
+	it("should handle many-tiddler recursion with branching nodes", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
 		wiki.addTiddlers([

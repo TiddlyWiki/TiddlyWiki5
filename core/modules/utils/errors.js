@@ -8,10 +8,15 @@ Custom errors for TiddlyWiki.
 \*/
 (function(){
 
-function TranscludeRecursionError(depth) {
-	this.depth = depth;
+function TranscludeRecursionError() {
+	Error.apply(this,arguments);
 	this.signatures = Object.create(null);
 };
+
+/* Maximum permitted depth of the widget tree for recursion detection */
+TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH = 1000;
+
+TranscludeRecursionError.prototype = Object.create(Error);
 
 exports.TranscludeRecursionError = TranscludeRecursionError;
 

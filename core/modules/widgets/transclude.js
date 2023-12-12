@@ -39,7 +39,7 @@ TranscludeWidget.prototype.render = function(parent,nextSibling) {
 			// Hopefully that will land us just outside where the loop began. That's where we want to issue an error.
 			// Rendering widgets beneath this point may result in a freezing browser if they explode exponentially.
 			var transcludeSignature = this.getVariable("transclusion");
-			if(this.getAncestorCount() > error.depth - 50) {
+			if(this.getAncestorCount() > $tw.utils.TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH - 50) {
 				// For the first fifty transcludes we climb up, we simply collect signatures.
 				// We're assuming that those first 50 will likely include all transcludes involved in the loop.
 				error.signatures[transcludeSignature] = true;
