@@ -495,7 +495,7 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	var self = this;
 	// Check for too much recursion
 	if(this.getAncestorCount() > MAX_WIDGET_TREE_DEPTH) {
-		throw new $tw.utils.TranscludeRecursionError(this.getVariable("transclusion"));
+		throw new $tw.utils.TranscludeRecursionError(MAX_WIDGET_TREE_DEPTH);
 	} else {
 		// Create set variable widgets for each variable
 		$tw.utils.each(options.variables,function(value,name) {

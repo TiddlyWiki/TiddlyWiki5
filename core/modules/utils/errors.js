@@ -8,8 +8,9 @@ Custom errors for TiddlyWiki.
 \*/
 (function(){
 
-function TranscludeRecursionError(transcludeMarker) {
-	this.marker = transcludeMarker;
+function TranscludeRecursionError(depth) {
+	this.depth = depth;
+	this.signatures = Object.create(null);
 };
 
 exports.TranscludeRecursionError = TranscludeRecursionError;
