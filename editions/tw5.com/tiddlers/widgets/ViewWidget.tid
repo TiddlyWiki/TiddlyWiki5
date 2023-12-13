@@ -44,6 +44,19 @@ The following formats can be specified in the `format` attribute:
 
 To display the field content as regular WikiText, for example with working links, use the [[TranscludeWidget]] instead. 
 
+;The following examples are common variants
+
+!!!!View the value in a field of a named tiddler
+:<<wikitext-example-compact '<$view tiddler="ViewWidget" field="caption"/>'>>
+!!!!View the value in a date field of the currentTiddler as a relative date
+:<<wikitext-example-compact '<$view field=modified format=relativedate/>'>>
+!!!!View the value in a date field of the currentTiddler as formated date
+:<<wikitext-example-compact '<$view field=created format=date template="[UTC]YYYY-0MM-0DD"/>'>>
+!!!!View a date field as its raw value
+:<<wikitext-example-compact '<$view field=created format=text />'>>
+!!!!See ''String Operators'' in [[Filter Operators]] 
+:To apply similar formatting within Filters, including from titles and variables
+
 ! SubTiddler Access
 
 The view widget allows access to the individual tiddlers stored within a [[plugin|Plugins]].
