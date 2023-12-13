@@ -1,11 +1,24 @@
 title: $:/core/ui/ControlPanel/Saving/General
+modified: 20200528094915385
 tags: $:/tags/ControlPanel/Saving
 caption: {{$:/language/ControlPanel/Saving/General/Caption}}
 list-before:
 
 \define lingo-base() $:/language/ControlPanel/Settings/
 
+\define preferred-saver()
+<$text text=<<infosaver "$(currentTiddler)$">>/>
+\end
+
 {{$:/language/ControlPanel/Saving/General/Hint}}
+
+!! <$link to="$:/config/PreferredSaver"><<lingo PreferredSaver/Caption>></$link>
+
+<$select tiddler="$:/config/PreferredSaver">
+<$list filter="[savers[]]">
+<option value=<<currentTiddler>>><<preferred-saver>></option>
+</$list>
+</$select>
 
 !! <$link to="$:/config/AutoSave"><<lingo AutoSave/Caption>></$link>
 
