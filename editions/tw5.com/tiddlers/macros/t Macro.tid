@@ -14,22 +14,30 @@ The difference to [[lingo Macro]] is that translatable text can be directly plac
 : The last part of title of the tiddler that contains the text. The `<<lingo-base>>` prefix and current language name prefix is added automatically
 ;lingo-base-fallback
 : Optional lingo-base when it is not possible to define `lingo-base` variable (for example, when using this macro in the caption field), you can set the lingo base by passing this parameter
+;mode
+: Optional parameter like the "mode" parameter in [[TranscludeWidget]], default to "block".
 
 <<.macro-examples "t">>
 
 !! Example file structure in plugin
+
+!!! Suggested file structure
 
 When developing a plugin, you may want to organize your i18n (internationalization) files like this on the file system as [[MultiTiddlerFiles]]:
 
 ```tree
 ├── i18n
 │   ├── en-GB
-│   │   └── Translations.multids
+│   │   ├── Translations.multids
+│   │   └── SomeLongText.tid
 │   └── zh-Hans
-│       └── Translations.multids
+│       ├── Translations.multids
+│       └── SomeLongText.tid
 ├── other files
 └── plugin.info
 ```
+
+!!! Define Multiple Translations in One Tiddler
 
 And the content of `i18n/en-GB/Translations.multids` may looks like this:
 
@@ -50,4 +58,28 @@ caption: <<t "OpenStaticCard" "$:/plugins/yourName/pluginName/languages/">>
 \whitespace trim
 
 <<t "OpenInteractiveCard">>
+```
+
+!!! Define Long Text in regular Tiddler
+
+You can also use a regular tiddler for long text, like `SomeLongText.tid` in the example above, to store a multi-paragraph long text:
+
+```tid
+title: $:/plugins/yourName/pluginName/languages/en-GB/SomeLongText
+
+!!! SubTitle
+
+This is a long text.
+```
+
+Later you can use it like:
+
+```tid
+title: someTiddler
+
+\define lingo-base() $:/plugins/yourName/pluginName/languages/
+
+!! <<t "OpenInteractiveCard">>
+
+<<t "SomeLongText">>
 ```
