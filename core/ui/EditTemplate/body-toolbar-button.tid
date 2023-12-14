@@ -27,7 +27,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 				>
 					<span data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}/>
 					<<toolbar-button-icon>>
-					<$transclude tiddler=<<currentTiddler>> field="text"/>
+					<$transclude/>
 				</$button>
 			</$set>
 		</$list>
@@ -44,7 +44,7 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
 					>
 						<span data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}/>
 						<<toolbar-button-icon>>
-						<$transclude tiddler=<<currentTiddler>> field="text"/>
+						<$transclude/>
 					</$button>
 				</$set>
 				<$reveal
