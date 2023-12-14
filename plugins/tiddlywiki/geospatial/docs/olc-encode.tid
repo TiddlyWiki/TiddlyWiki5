@@ -4,7 +4,7 @@ tags: $:/tags/GeospatialDocs
 
 !! `olc-encode` operator
 
-The `old-encode` operator converts separate latitude and longitude numbers into an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut code with a specified length (defaults to 11 characters).
+The `olc-encode` operator converts separate latitude and longitude numbers into an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut code with a specified length (defaults to 11 characters).
 
 !! Examples
 
