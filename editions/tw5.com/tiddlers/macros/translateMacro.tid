@@ -1,10 +1,10 @@
-caption: t (translation)
+caption: translate
 created: 20231028115714556
-modified: 20231028123219684
+modified: 20231216122319684
 tags: Macros [[Core Macros]]
-title: t Macro
+title: translate Macro
 
-The <<.def t>> [[macro|Macros]] relates to the translation of ~TiddlyWiki's user interface into other languages, just like [[lingo Macro]]. It returns a piece of text in the user's currently selected language. And `t` is the abbreviation of "translation".
+The <<.def translate>> [[macro|Macros]] relates to the translation of ~TiddlyWiki's user interface into other languages, just like [[lingo Macro]]. It returns a piece of text in the user's currently selected language. And `t` is the abbreviation of "translation".
 
 The difference to [[lingo Macro]] is that translatable text can be directly placed in user's wiki, instead of in a language plugin.
 
@@ -17,16 +17,16 @@ The difference to [[lingo Macro]] is that translatable text can be directly plac
 ;mode
 : Optional parameter like the "mode" parameter in [[TranscludeWidget]], default to "block".
 
-<<.macro-examples "t">>
+<<.macro-examples "translate">>
 
 !! Example file structure in plugin
 
 !!! Suggested file structure
 
-When developing a plugin, you may want to organize your i18n (internationalization) files like this on the file system as [[MultiTiddlerFiles]]:
+When developing a plugin, you may want to organize your language files like this on the file system as [[MultiTiddlerFiles]]:
 
 ```tree
-├── i18n
+├── language
 │   ├── en-GB
 │   │   ├── Translations.multids
 │   │   └── SomeLongText.tid
@@ -39,10 +39,10 @@ When developing a plugin, you may want to organize your i18n (internationalizati
 
 !!! Define Multiple Translations in One Tiddler
 
-And the content of `i18n/en-GB/Translations.multids` may looks like this:
+And the content of `language/en-GB/Translations.multids` may looks like this:
 
 ```multids
-title: $:/plugins/yourName/pluginName/languages/en-GB/
+title: $:/plugins/yourName/pluginName/language/en-GB/
 
 OpenInteractiveCard: Open Interactive Card
 OpenStaticCard: Open Static Card
@@ -52,20 +52,20 @@ Later you can use it like:
 
 ```tid
 title: someTiddler
-caption: <<t "OpenStaticCard" "$:/plugins/yourName/pluginName/languages/">>
+caption: <<translate "OpenStaticCard" "$:/plugins/yourName/pluginName/language/">>
 
-\define lingo-base() $:/plugins/yourName/pluginName/languages/
+\define lingo-base() $:/plugins/yourName/pluginName/language/
 \whitespace trim
 
-<<t "OpenInteractiveCard">>
+<<translate "OpenInteractiveCard">>
 ```
 
-!!! Define Long Text in regular Tiddler
+!!! Define Long Text in a regular Tiddler
 
 You can also use a regular tiddler for long text, like `SomeLongText.tid` in the example above, to store a multi-paragraph long text:
 
 ```tid
-title: $:/plugins/yourName/pluginName/languages/en-GB/SomeLongText
+title: $:/plugins/yourName/pluginName/language/en-GB/SomeLongText
 
 !!! SubTitle
 
@@ -77,9 +77,9 @@ Later you can use it like:
 ```tid
 title: someTiddler
 
-\define lingo-base() $:/plugins/yourName/pluginName/languages/
+\define lingo-base() $:/plugins/yourName/pluginName/language/
 
-!! <<t "OpenInteractiveCard">>
+!! <<translate "OpenInteractiveCard">>
 
-<<t "SomeLongText">>
+<<translate "SomeLongText">>
 ```

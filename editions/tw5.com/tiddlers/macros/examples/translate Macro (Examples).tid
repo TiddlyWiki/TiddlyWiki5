@@ -1,0 +1,14 @@
+created: 20231028120432257
+modified: 20231028122408606
+tags: [[translate Macro]] [[Macro Examples]]
+title: translate Macro (Examples)
+
+\define lingo-base() translate Macro (Examples)
+
+Given the `\define lingo-base() translate Macro (Examples)`, this example shows the localizaion key `ExampleKey` being translate to the text in [[translate Macro (Examples)/en-GB/ExampleKey]]:
+
+<$macrocall $name=".example" n="1" eg="""<<translate ExampleKey>>"""/>
+
+This example shows the `lingo-base` can be set inline as second parameter:
+
+<$macrocall $name=".example" n="2" eg="""<<translate ExampleKey "translate Macro (Examples)">>"""/>
