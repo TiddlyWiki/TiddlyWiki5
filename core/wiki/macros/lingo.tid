@@ -9,14 +9,24 @@ $:/language/
 {{$(lingo-base)$$title$}}
 \end
 
-\procedure translate(key, lingoBaseFallback:"", mode:block)
+\procedure translate(key, lingo-base-fallback, mode:block)
 <!-- Allow assign lingo-base in caption field by accepting the lingo-base-fallback param. -->
-<$set name="lingoBaseWithFallback" value=<<lingo-base-fallback>> emptyValue=<<lingo-base>>>
-  <$set name="lang" filter="[[$:/language]get[text]get[name]else[en-GB]]" select="0">
-    <!-- Allow lingo-base to have or not have / ending slash, for better dev experience. Then add, e.g. `en-GB/Key` after it. -->
-    <$set name="lingoTarget" filter="[<lingoBaseWithFallback>suffix[/]then<lingoBaseWithFallback>] ~[<lingoBaseWithFallback>addsuffix[/]] +[addsuffix<lang>addsuffix[/]addsuffix<key>]" select="0">
-      <$transclude $tiddler=<<lingoTarget>> $mode=<<mode>> />
-    </$set>
-  </$set>
-</$set>
+\function target-lingo-base()
+[<lingo-base-fallback>!is[blank]else<lingo-base>]
+\end target-lingo-base
+
+\function add-lang-suffix(base)
+[[$:/language]get[text]get[name]else[en-GB]]
++[addprefix<base>]
+\end add-lang-suffix
+
+<!-- Allow lingo-base to have or not have / ending slash, for better dev experience. Then add, e.g. `en-GB/Key` after it. -->
+\function lingo-target()
+[function[target-lingo-base]suffix[/]]
+:then[function[target-lingo-base]]
+~[function[target-lingo-base]addsuffix[/]]
+:map[function[add-lang-suffix],<currentTiddler>addsuffix[/]addsuffix<key>]
+\end lingo-target
+
+<$transclude $tiddler=<<lingo-target>> $mode=<<mode>> />
 \end
