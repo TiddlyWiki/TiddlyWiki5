@@ -15,7 +15,7 @@ The difference to [[lingo Macro]] is that translatable text can be directly plac
 ;lingo-base-fallback
 : Optional lingo-base when it is not possible to define `lingo-base` variable (for example, when using this macro in the caption field), you can set the lingo base by passing this parameter
 ;mode
-: Optional parameter like the "mode" parameter in [[TranscludeWidget]], default to "block".
+: Optional parameter like the "mode" parameter in [[TranscludeWidget]], default to "block". If you are using translation in a title, you can add `mode:"inline"` to it.
 
 <<.macro-examples "translate">>
 
@@ -79,7 +79,7 @@ title: someTiddler
 
 \define lingo-base() $:/plugins/yourName/pluginName/language/
 
-!! <<translate "OpenInteractiveCard">>
+!! <<translate "OpenInteractiveCard" mode:"inline">>
 
 <<translate "SomeLongText">>
 ```
