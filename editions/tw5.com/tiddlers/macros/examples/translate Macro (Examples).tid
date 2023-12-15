@@ -9,6 +9,12 @@ Given the `\define lingo-base() translate Macro (Examples)`, this example shows 
 
 <$macrocall $name=".example" n="1" eg="""<<translate ExampleKey>>"""/>
 
-This example shows the `lingo-base` can be set inline as second parameter:
+This example shows the `lingo-base` can be set as second parameter:
 
 <$macrocall $name=".example" n="2" eg="""<<translate ExampleKey "translate Macro (Examples)">>"""/>
+
+When use translate macro in a title, the `mode` can be set as third parameter, or as named parameter `mode`:
+
+<$macrocall $name=".example" n="3" eg="""<<translate ExampleKey mode:"inline">>"""/>
+
+<$macrocall $name=".example" n="4" eg="""<<translate ExampleKey "translate Macro (Examples)" mode:"inline">>"""/>

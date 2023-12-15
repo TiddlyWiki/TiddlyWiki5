@@ -4,7 +4,7 @@ modified: 20231216122319684
 tags: Macros [[Core Macros]]
 title: translate Macro
 
-The <<.def translate>> [[macro|Macros]] relates to the translation of ~TiddlyWiki's user interface into other languages, just like [[lingo Macro]]. It returns a piece of text in the user's currently selected language. And `t` is the abbreviation of "translation".
+The <<.def translate>> [[macro|Macros]] relates to the translation of ~TiddlyWiki's user interface into other languages, just like [[lingo Macro]]. It returns a piece of text in the language which user currently selected.
 
 The difference to [[lingo Macro]] is that translatable text can be directly placed in user's wiki, instead of in a language plugin.
 
