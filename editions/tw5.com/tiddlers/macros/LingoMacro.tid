@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 The <<.def lingo>> [[macro|Macros]] relates to the translation of ~TiddlyWiki's user interface into other languages. It returns a piece of text in the user's currently selected language.
 
-Translatable text is supplied by language plugins containing tiddlers with specific titles that start with `$:/language/`. If you want to use l10n (localization) strings outside of the language plugins, you can use [[t Macro]] instead.
+Translatable text is supplied by language plugins containing tiddlers with specific titles that start with `$:/language/`. If you want to use l10n (localization) strings outside of the language plugins, you can use [[translate Macro]] instead.
 
 !! Parameters
 
