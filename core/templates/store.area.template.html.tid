@@ -9,9 +9,7 @@ title: $:/core/templates/store.area.template.html
             <$let newline={{{ [charcode[10]] }}} join=`,$(newline)$`>
                 <$text text=<<newline>>/>
                 <$list filter=<<saveTiddlerFilter>> join=<<join>> template="$:/core/templates/html-json-tiddler"/>
-                <$vars numTiddlers={{{ [subfilter<saveTiddlerFilter>count[]] }}}>
-                    <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} join=<<join>> template="$:/core/templates/html-json-skinny-tiddler"/>
-                </$vars>
+                <$list filter=<<skinnySaveTiddlerFilter>> template="$:/core/templates/html-json-skinny-tiddler"/>
                 <$text text=<<newline>>/>
             </$let>
         `]</script>`
