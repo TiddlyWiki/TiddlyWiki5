@@ -1,0 +1,60 @@
+created: 20231218192649874
+modified: 20231219125925918
+tags: 
+title: Popup Clamping Demo
+
+<style>
+.container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: 500px;
+  height: 500px;
+  overflow: hidden;
+  background-color: #F8F8F8;
+  position: relative;
+}
+.grid-item {
+    justify-self: center;
+    align-self: center;
+}
+.grid-popup .tc-drop-down {
+	padding: 1em;
+	min-width: 15em;
+}
+</style>
+
+<div class="container">
+	<$list filter="[range[25]]">
+		<div class="grid-item">
+			<$button popup="$:/state/popup-clamping">POP</$button>
+		</div>
+	</$list>
+	<$reveal type="popup"
+	         position={{{ [{$:/temp/clamp-demo-position}else[below]] }}}
+			 state="$:/state/popup-clamping"
+			 class="grid-popup"
+			 clamp={{{ [{$:/temp/clamp-demo-active}else[no]] }}}
+			 positionAllowNegative={{{ [{$:/temp/clamp-demo-allow-negative}else[no]] }}}>
+		<div class="tc-drop-down">
+
+		!! This is the popup
+		And this is some text
+		</div>
+	</$reveal>
+</div>
+
+<$checkbox tiddler="$:/temp/clamp-demo-active" field="text" checked="yes" unchecked="no" default="no"> Enable clamping</$checkbox>
+
+<$checkbox tiddler="$:/temp/clamp-demo-allow-negative" field="text" checked="yes" unchecked="no" default="no"> positionAllowNegative</$checkbox>
+
+<$select tiddler="$:/temp/clamp-demo-position" field="text" default="below">
+<option value="left">left</option>
+<option value="above">above</option>
+<option value="aboveleft">aboveleft</option>
+<option value="aboveright">aboveright</option>
+<option value="right">right</option>
+<option value="belowleft">belowleft</option>
+<option value="belowright">belowright</option>
+<option value="below">below</option>
+</$select>
