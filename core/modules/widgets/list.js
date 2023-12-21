@@ -109,6 +109,7 @@ ListWidget.prototype.findExplicitTemplates = function() {
 	this.explicitJoinTemplate = null;
 	this.hasTemplateInBody = false;
 	var searchChildren = function(childNodes) {
+		var foundInlineTemplate = false;
 		$tw.utils.each(childNodes,function(node) {
 			if(node.type === "list-template") {
 				self.explicitListTemplate = node.children;
@@ -118,12 +119,14 @@ ListWidget.prototype.findExplicitTemplates = function() {
 				self.explicitJoinTemplate = node.children;
 			} else if(node.type === "element" && node.tag === "p") {
 				searchChildren(node.children);
+				foundInlineTemplate = true;
 			} else {
-				self.hasTemplateInBody = true;
+				foundInlineTemplate = true;
 			}
 		});
+		return foundInlineTemplate;
 	};
-	searchChildren(this.parseTreeNode.children);
+	this.hasTemplateInBody = searchChildren(this.parseTreeNode.children);
 }
 
 ListWidget.prototype.getTiddlerList = function() {
