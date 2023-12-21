@@ -14,11 +14,10 @@ This is a bug fix release to address a number of bugs that were introduced with 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7900">> broken per-tiddler previews
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7897">> missing comma before skinny tiddlers in JSON store area
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7895">> handling of whitespace immediately after pragmas
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7905">> SelectWidget handling of classes and rendering typo
 
-! Acknowledgements
+Since v5.3.3 replaces v5.3.2 after only a couple of weeks, here is the release note for v5.3.2.
 
-[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+! Release Note for v5.3.2
 
-<<.contributors """
-yaisog
-""">>
+{{Release 5.3.2}}
