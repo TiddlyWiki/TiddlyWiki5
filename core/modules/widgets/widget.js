@@ -164,6 +164,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			$tw.utils.each(params,function(param) {
 				variables[param.name] = param.value;
 			});
+			variables = $tw.utils.extend({},options.variables||{},variables);
 			resultList = this.wiki.filterTiddlers(value,this.makeFakeWidgetWithVariables(variables),options.source);
 			value = resultList[0] || "";
 		}
