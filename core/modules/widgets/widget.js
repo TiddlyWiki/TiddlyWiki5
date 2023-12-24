@@ -153,7 +153,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		} else if(variable.isFunctionDefinition) {
 			// Function evaluations
 			params = self.resolveVariableParameters(variable.params,actualParams);
-			var variables = Object.create(null);
+			var variables = options.variables || Object.create(null);
 			// Apply default parameter values
 			$tw.utils.each(variable.params,function(param,index) {
 				if(param["default"]) {
@@ -164,7 +164,6 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			$tw.utils.each(params,function(param) {
 				variables[param.name] = param.value;
 			});
-			variables = $tw.utils.extend({},options.variables||{},variables);
 			resultList = this.wiki.filterTiddlers(value,this.makeFakeWidgetWithVariables(variables),options.source);
 			value = resultList[0] || "";
 		}
