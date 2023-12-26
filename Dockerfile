@@ -7,7 +7,7 @@ WORKDIR /opt/app
 COPY . ./
 RUN npm install 
 RUN ["./bin/build-site.sh"]
-RUN apk add --no-cache tree
+#RUN apk add --no-cache tree
 RUN tree -fi
 
 # Playwright Tests
