@@ -5,9 +5,7 @@ FROM node:${NODE_VERSION}-alpine as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
-RUN npm install --prefix /opt/app/a -g
-RUN apk add --no-cache tree
-RUN tree -fi
+RUN npm install
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
