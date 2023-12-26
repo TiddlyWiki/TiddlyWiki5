@@ -45,7 +45,6 @@ RUN npm run test
 
 FROM nginx:1.25.3-alpine as run
 EXPOSE 8080
-WORKDIR /opt/app
-RUN mkdir -p ./boot
+WORKDIR /usr/share/nginx/html
 COPY --from=base /opt/app/output /usr/share/nginx/html
 CMD [ "/bin/sh"]
