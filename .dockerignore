@@ -7,3 +7,4 @@ LICENSE
 Makefile
 *.md
 *.txt
+*/node_modules
