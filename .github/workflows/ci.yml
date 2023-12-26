@@ -38,7 +38,7 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v5.1.0
         with:
-          push: true
+          push: false
           context: .
           tags: tiddlywiki:latest
   build-prerelease:
