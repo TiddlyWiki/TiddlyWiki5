@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - tiddlywiki-com
+      - "*"
 env:
   NODE_VERSION: "18"
 jobs:
