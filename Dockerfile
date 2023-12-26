@@ -20,7 +20,7 @@ COPY . ./
 RUN ["./bin/ci-test.sh"]
 
 #Jasmine Tests
-FROM base as jasmine-tests
+FROM node:${NODE_VERSION}-alpine as jasmine-tests
 RUN apk add chromium
 ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN npm run test
