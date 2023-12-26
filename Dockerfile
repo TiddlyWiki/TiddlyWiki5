@@ -31,4 +31,5 @@ COPY --from=base /opt/app/package.json .
 RUN apk add --no-cache tree
 RUN tree -fi
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
-CMD [ "node", "tiddlywiki", "--listen"]
+#CMD [ "node", "tiddlywiki", "--listen"]
+CMD [ "/bin/sh"]
