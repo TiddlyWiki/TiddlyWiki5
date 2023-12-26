@@ -43,7 +43,7 @@ RUN npm run test
 #CMD [ "node", "tiddlywiki", "--listen"]
 #CMD [ "/bin/sh"]
 
-FROM 1.25.3-alpine as run
+FROM nginx:1.25.3-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
 RUN mkdir -p ./boot
