@@ -1,6 +1,6 @@
 caption: select
 created: 20131024141900000
-modified: 20211108165037846
+modified: 20231113093304323
 tags: TriggeringWidgets Widgets
 title: SelectWidget
 type: text/vnd.tiddlywiki
@@ -42,6 +42,9 @@ The content of the `<$select>` widget should be one or more HTML `<option>` or `
 |actions |A string containing ActionWidgets to be triggered when the key combination is detected |
 |focus |<<.from-version "5.2.4">> Optional. Set to "yes" to automatically focus the HTML select element after creation |
 |tabindex |<<.from-version "5.3.1">> Optional. Sets the `tabindex` attribute of the HTML select element to the given value |
+|data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the HTML element |
+|style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the HTML element |
+
 ! Examples
 
 !! Simple Lists

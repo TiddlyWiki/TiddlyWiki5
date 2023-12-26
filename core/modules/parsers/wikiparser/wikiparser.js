@@ -216,6 +216,8 @@ WikiParser.prototype.parsePragmas = function() {
 			subTree[0].children = [];
 			currentTreeBranch = subTree[0].children;
 		}
+		// Skip whitespace after the pragma
+		this.skipWhitespace();
 	}
 	return currentTreeBranch;
 };

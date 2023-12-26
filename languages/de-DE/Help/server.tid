@@ -1,5 +1,5 @@
 title: $:/language/Help/server
-description: Stellt einen HTTP server für TiddlyWiki zur Verfügung. (Dieser Befehl ist abgekündigt! - Neu ist: "listen")
+description: (Dieser Befehl ist abgekündigt! - Neu ist: "listen") -- Stellt einen HTTP server für TiddlyWiki zur Verfügung.
 
 TiddlyWiki bringt einen einfachen Web-Server mit.
 

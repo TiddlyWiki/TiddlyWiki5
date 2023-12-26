@@ -1,6 +1,6 @@
 caption: genesis
 created: 20221101100729587
-modified: 20230115101800345
+modified: 20231214093716044
 tags: Widgets
 title: GenesisWidget
 type: text/vnd.tiddlywiki
@@ -15,6 +15,7 @@ The content of the <<.wid genesis>> widget is used as the content of the dynamic
 
 |!Attribute |!Description |
 |$type |The type of widget or element to create (an initial `$` indicates a widget, otherwise an HTML element will be created) |
+|$remappable |Set to "no" to prevent the generated widget from being affected by any custom widget overrides. Needed when invoking the original widget within a custom widget definition |
 |$names |An optional filter evaluating to the names of a list of attributes to be applied to the widget |
 |$values |An optional filter evaluating to the values corresponding to the list of names specified in <<.attr $names>> |
 |$mode |An optional override of the parsing mode. May be "inline" or "block" |

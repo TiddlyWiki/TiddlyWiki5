@@ -60,6 +60,7 @@ jobs:
       TW5_BUILD_TIDDLYWIKI: "./node_modules/tiddlywiki/tiddlywiki.js"
       TW5_BUILD_MAIN_EDITION: "./editions/tw5.com"
       TW5_BUILD_OUTPUT: "./output"
+      TW5_BUILD_ARCHIVE: "./output"
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
