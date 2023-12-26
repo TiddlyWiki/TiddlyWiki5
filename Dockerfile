@@ -5,7 +5,8 @@ FROM node:${NODE_VERSION}-alpine as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
-RUN npm install && npm run build
+RUN npm install 
+RUN ["./bin/build-site.sh"]
 RUN apk add --no-cache tree
 RUN tree -fi
 
