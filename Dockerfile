@@ -12,13 +12,8 @@ COPY . .
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
 ENV CI=true
 WORKDIR /opt/app
-COPY . /opt/app
-RUN dir -s 
-RUN npm install @playwright/test
-RUN npx playwright install --with-deps
-RUN ["npx", "playwright", "test"]
-RUN npm install
-RUN npx playwright install
+COPY . ./
+SHELL ["/bin/bash", "-c", "/bin/ci-test.sh"]
 
 #Jasmine Tests
 FROM base as jasmine-tests
