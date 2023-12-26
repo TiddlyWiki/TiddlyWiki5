@@ -15,12 +15,16 @@ RUN tree -fi
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
 ENV CI=true
+RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
 RUN ["./bin/ci-test.sh"]
 
 #Jasmine Tests
 FROM node:${NODE_VERSION}-alpine as jasmine-tests
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+COPY . ./
 RUN apk add chromium
 ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN npm run test
