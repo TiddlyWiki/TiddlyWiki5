@@ -23,6 +23,9 @@ ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN npm run test
 
 #Run TiddlyWiki
-FROM base as run
+FROM node:${NODE_VERSION}-alpine as run
 EXPOSE 8080
-CMD [ "npm", "run", "dev"]
+WORKDIR /opt/app
+COPY --from=base ./tiddlywiki.js .
+#CMD [ "node", "./tiddlywiki.js", "--init", "server"]
+CMD [ "node", "./tiddlywiki.js", "--listen"]
