@@ -34,7 +34,7 @@ FROM node:${NODE_VERSION}-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
 RUN mkdir -p ./boot
-COPY --from=base /opt/app/dist .
+COPY --from=base /opt/app/ .
 #COPY --from=base /opt/app/boot ./boot/
 #COPY --from=base /opt/app/package.json .
 RUN apk add --no-cache tree
