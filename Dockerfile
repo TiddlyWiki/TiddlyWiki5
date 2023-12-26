@@ -12,7 +12,7 @@ COPY . .
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
 ENV CI=true
 WORKDIR /opt/app
-COPY . ./
+COPY . /opt/app
 RUN dir -s 
 RUN npm install @playwright/test
 RUN npx playwright install --with-deps
