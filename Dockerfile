@@ -8,6 +8,7 @@ COPY . ./
 RUN npm install 
 RUN ["./bin/build-site.sh"]
 #RUN apk add --no-cache tree
+RUN apt get install -y tree
 RUN tree -fi
 
 # Playwright Tests
