@@ -27,6 +27,7 @@ WORKDIR /opt/app
 RUN mkdir -p ./boot
 COPY --from=base /opt/app/a/bin/tiddlywiki .
 COPY --from=base /opt/app/boot ./boot/
+COPY --from=base package.json .
 RUN apk add --no-cache tree
 RUN tree -fi
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
