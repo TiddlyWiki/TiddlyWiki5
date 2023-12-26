@@ -26,6 +26,6 @@ RUN npm run test
 FROM node:${NODE_VERSION}-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
-COPY --from=base /opt/app/a .
+COPY --from=base /opt/app/a/bin/tiddlywiki .
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
-CMD [ "node", "./tiddlywiki.js", "--listen"]
+CMD [ "node", "tiddlywiki", "--listen"]
