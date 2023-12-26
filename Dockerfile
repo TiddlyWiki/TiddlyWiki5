@@ -8,7 +8,8 @@ COPY . ./
 RUN npm install 
 RUN ["./bin/build-site.sh"]
 #RUN apk add --no-cache tree
-RUN apt install -y tree
+RUN apt-get update && apt-get -y install \
+    tree wget
 RUN tree -fi
 
 # Playwright Tests
