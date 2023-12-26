@@ -6,7 +6,8 @@ RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
 RUN npm install --prefix /opt/app/a -g
-RUN apt-get update && apt-get install -y tree
+RUN apk add --no-cache tree
+RUN tree -fi
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
