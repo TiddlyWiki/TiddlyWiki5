@@ -1,7 +1,7 @@
 ARG NODE_VERSION=18.0.0
 
 # Base Image
-FROM node:${NODE_VERSION}-alpine as base
+FROM node:${NODE_VERSION}-bookworm as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
