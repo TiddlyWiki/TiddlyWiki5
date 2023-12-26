@@ -14,7 +14,7 @@ ENV CI=true
 WORKDIR /opt/app
 COPY . ./
 RUN dir -s
-RUN ["/bin/ci-test.sh"]
+RUN ["/opt/app/bin/ci-test.sh"]
 
 #Jasmine Tests
 FROM base as jasmine-tests
