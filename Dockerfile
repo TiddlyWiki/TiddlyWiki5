@@ -4,9 +4,9 @@ ARG NODE_VERSION=18.0.0
 FROM node:${NODE_VERSION}-alpine as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
-COPY package.json .
+COPY . ./
 RUN npm install
-COPY . .
+RUN dir -s
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
@@ -14,7 +14,6 @@ ENV CI=true
 WORKDIR /opt/app
 COPY . ./
 RUN ["./bin/ci-test.sh"]
-RUN dir -s
 
 #Jasmine Tests
 FROM base as jasmine-tests
@@ -28,4 +27,4 @@ EXPOSE 8080
 WORKDIR /opt/app
 COPY --from=base ./tiddlywiki.js .
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
-CMD [ "node", "./tiddlywiki.js", "--listen"]
+CMD [ "node", "tiddlywiki.js", "--listen"]
