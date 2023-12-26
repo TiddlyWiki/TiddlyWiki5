@@ -5,8 +5,8 @@ FROM node:${NODE_VERSION}-alpine as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
-RUN npm install
-RUN ls -a
+RUN npm install --prefix /opt/app/a -g
+RUN ls -a /opt/app/a
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
@@ -25,6 +25,6 @@ RUN npm run test
 FROM node:${NODE_VERSION}-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
-COPY --from=base /opt/app/tiddlywiki.js .
+COPY --from=base /opt/app/a .
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
 CMD [ "node", "./tiddlywiki.js", "--listen"]
