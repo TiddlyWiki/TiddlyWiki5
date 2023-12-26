@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18.0.0
+ARG NODE_VERSION=18.19.0
 
 # Base Image
 FROM node:${NODE_VERSION}-bookworm as base
