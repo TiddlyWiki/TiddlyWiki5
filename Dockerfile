@@ -5,7 +5,9 @@ FROM node:${NODE_VERSION}-alpine as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
-RUN npm install --prefix /opt/app/a -g
+RUN npm install && npm run build
+RUN apk add --no-cache tree
+RUN tree -fi
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
@@ -25,7 +27,7 @@ FROM node:${NODE_VERSION}-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
 RUN mkdir -p ./boot
-COPY --from=base /opt/app/a/ .
+COPY --from=base /opt/app/dist .
 #COPY --from=base /opt/app/boot ./boot/
 #COPY --from=base /opt/app/package.json .
 RUN apk add --no-cache tree
