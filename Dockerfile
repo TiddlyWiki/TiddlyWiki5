@@ -6,7 +6,8 @@ RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
 RUN npm install --prefix /opt/app/a -g
-RUN ls -a /opt/app/a
+RUN ls -aR /opt/app/a
+RUN ls -aR 
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
