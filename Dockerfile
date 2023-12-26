@@ -30,15 +30,22 @@ ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN npm run test
 
 #Run TiddlyWiki
-FROM node:${NODE_VERSION}-alpine as run
+#FROM node:${NODE_VERSION}-alpine as run
+#EXPOSE 8080
+#WORKDIR /opt/app
+#RUN mkdir -p ./boot
+#COPY --from=base /opt/app/output .
+#COPY --from=base /opt/app/boot ./boot/
+#COPY --from=base /opt/app/package.json .
+#RUN apk add --no-cache tree
+#RUN tree -fi
+#CMD [ "node", "./tiddlywiki.js", "--init", "server"]
+#CMD [ "node", "tiddlywiki", "--listen"]
+#CMD [ "/bin/sh"]
+
+FROM 1.25.3-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
 RUN mkdir -p ./boot
-COPY --from=base /opt/app/output .
-#COPY --from=base /opt/app/boot ./boot/
-#COPY --from=base /opt/app/package.json .
-RUN apk add --no-cache tree
-RUN tree -fi
-#CMD [ "node", "./tiddlywiki.js", "--init", "server"]
-#CMD [ "node", "tiddlywiki", "--listen"]
+COPY --from=base /opt/app/output /usr/share/nginx/html
 CMD [ "/bin/sh"]
