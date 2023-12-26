@@ -27,6 +27,6 @@ ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN npm run test
 
 #Run TiddlyWiki
-EXPOSE 8080
 FROM base as run
-RUN npm run dev
+EXPOSE 8080
+CMD [ "npm", "run", "dev"]
