@@ -26,8 +26,9 @@ RUN npm run test
 FROM node:${NODE_VERSION}-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
+RUN mkdir -p ./boot
 COPY --from=base /opt/app/a/bin/tiddlywiki .
-COPY --from=base /opt/app/boot/ ./
+COPY --from=base /opt/app/boot ./boot/
 RUN apk add --no-cache tree
 RUN tree -fi
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
