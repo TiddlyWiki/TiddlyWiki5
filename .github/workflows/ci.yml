@@ -21,6 +21,26 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log into registry ${{ env.REGISTRY }}
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: network=host
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v5.1.0
+        with:
+          push: true
+          context: .
+          tags: tiddlywiki:latest
   build-prerelease:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
@@ -82,26 +102,3 @@ jobs:
       - run: "./bin/build-tw-org.sh"
         env:
           GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
-  build-docker-image:
-    runs-on: ubuntu-latest
-    needs: build-tiddlywiki-com
-    steps:
-      - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@v1
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        with:
-          # network=host driver-opt needed to push to local registry
-          driver-opts: network=host
-      - name: Build and push Docker images
-        # You may pin to the exact commit or the version.
-        # uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56
-        uses: docker/build-push-action@v5.1.0
-        with:
-          push: true
-          context: .
-          tags: tiddlywiki:latest
