@@ -13,7 +13,7 @@ FROM mcr.microsoft.com/playwright:focal as playwright-tests
 ENV CI=true
 WORKDIR /opt/app
 COPY . ./
-SHELL ["/bin/bash", "-c"] 
+RUN dir -s
 RUN ["/bin/ci-test.sh"]
 
 #Jasmine Tests
