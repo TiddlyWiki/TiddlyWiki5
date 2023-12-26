@@ -54,7 +54,7 @@ exports.parse = function() {
 			paramMatch = reParam.exec(paramString);
 		}
 	}
-	// On the \define line, was there anything other than whitespace after the close paren?
+	// Is the remainder of the \define line blank after the parameter close paren?
 	var reEnd;
 	if(this.match[3]) {
 		// If so, it is a multiline definition and the end of the body is marked with \end
