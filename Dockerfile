@@ -6,8 +6,8 @@ RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
 RUN npm install --prefix /opt/app/a -g
-RUN apk add --no-cache tree
-RUN tree -fi
+#RUN apk add --no-cache tree
+#RUN tree -fi
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
@@ -27,5 +27,6 @@ FROM node:${NODE_VERSION}-alpine as run
 EXPOSE 8080
 WORKDIR /opt/app
 COPY --from=base /opt/app/a/bin/tiddlywiki .
+COPY --from=base /opt/app/boot .
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
 CMD [ "node", "tiddlywiki", "--listen"]
