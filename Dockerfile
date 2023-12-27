@@ -8,9 +8,10 @@ COPY . ./
 RUN npm install
 #RUN ["./bin/build-site.sh"] #if we want html files.
 #RUN apk add --no-cache tree
-#RUN apt-get update && apt-get -y install \
-    #tree wget
-#RUN tree -fi
+RUN apt-get update && apt-get -y install \
+    tree wget
+RUN tree -fi
+RUN find . -iname \tid*
 
 # Playwright Tests
 FROM mcr.microsoft.com/playwright:focal as playwright-tests
@@ -35,7 +36,7 @@ EXPOSE 8080
 WORKDIR /opt/app
 RUN mkdir -p ./boot
 COPY --from=base /opt/app/tiddlywiki.js .
-COPY --from=base /opt/app/tiddlywiki .
+#COPY --from=base /opt/app/tiddlywiki .
 COPY --from=base /opt/app/boot ./boot/
 COPY --from=base /opt/app/package.json .
 RUN apk add --no-cache tree
