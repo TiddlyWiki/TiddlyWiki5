@@ -43,9 +43,8 @@ RUN npm run test
 #CMD [ "node", "tiddlywiki", "--listen"]
 #CMD [ "/bin/sh"]
 
-FROM nginx:1.25.3-alpine as run
+FROM nginx:alpine as run
 EXPOSE 80
 EXPOSE 443
+#COPY --from=base /opt/app/output/index.html /usr/share/nginx/html/index.html
 COPY --from=base /opt/app/output /usr/share/nginx/html
-WORKDIR /usr/share/nginx/html
-CMD ["nginx"]
