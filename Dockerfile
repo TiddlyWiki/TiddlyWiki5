@@ -5,7 +5,7 @@ FROM node:${NODE_VERSION}-bookworm as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
-#RUN npm install 
+RUN npm install
 #RUN ["./bin/build-site.sh"] #if we want html files.
 #RUN apk add --no-cache tree
 RUN apt-get update && apt-get -y install \
