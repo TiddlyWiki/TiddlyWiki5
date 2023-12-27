@@ -5,9 +5,9 @@ FROM node:${NODE_VERSION}-bookworm as base
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
-RUN npm install 
-RUN ["./bin/build-site.sh"]
-#RUN apk add --no-cache tree
+#RUN npm install 
+#RUN ["./bin/build-site.sh"] #if we want html files.
+RUN apk add --no-cache tree
 RUN apt-get update && apt-get -y install \
     tree wget
 RUN tree -fi
@@ -29,22 +29,23 @@ RUN apk add chromium
 ENV CHROME_BIN=/usr/bin/chromium-browser
 RUN npm run test
 
-#Run TiddlyWiki
-#FROM node:${NODE_VERSION}-alpine as run
-#EXPOSE 8080
-#WORKDIR /opt/app
-#RUN mkdir -p ./boot
-#COPY --from=base /opt/app/output .
-#COPY --from=base /opt/app/boot ./boot/
-#COPY --from=base /opt/app/package.json .
-#RUN apk add --no-cache tree
-#RUN tree -fi
+#Run TiddlyWiki with nodejs backend
+FROM node:${NODE_VERSION}-alpine as run
+EXPOSE 8080
+WORKDIR /opt/app
+RUN mkdir -p ./boot
+COPY --from=base /opt/app/output .
+COPY --from=base /opt/app/boot ./boot/
+COPY --from=base /opt/app/package.json .
+RUN apk add --no-cache tree
+RUN tree -fi
 #CMD [ "node", "./tiddlywiki.js", "--init", "server"]
 #CMD [ "node", "tiddlywiki", "--listen"]
-#CMD [ "/bin/sh"]
+CMD [ "/bin/sh"]
 
-FROM nginx:alpine as run
-EXPOSE 80
-EXPOSE 443
-#COPY --from=base /opt/app/output/index.html /usr/share/nginx/html/index.html
-COPY --from=base /opt/app/output /usr/share/nginx/html
+#Simple html image
+#FROM nginx:alpine as run
+#EXPOSE 80
+#EXPOSE 443
+#COPY --from=base /opt/app/output /usr/share/nginx/html
+#COPY --from=base /opt/app/output/empty.html /usr/share/nginx/html/index.html
