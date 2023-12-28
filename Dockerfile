@@ -15,7 +15,7 @@ RUN npm ci --only=production
 #RUN ["./bin/build-site.sh"] #if we want html files.
 #RUN apk add --no-cache tree
 #RUN apt-get update && apt-get -y install \
-    tree wget
+    #tree wget
 #RUN tree -fi
 #RUN find . -iname \tid*
 
