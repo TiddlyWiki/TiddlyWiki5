@@ -39,7 +39,7 @@ RUN npm run test
 #Run TiddlyWiki with nodejs backend
 FROM node:${NODE_VERSION}-bullseye-slim as run
 ENV NODE_ENV production
-COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
+COPY --from=base /usr/bin/dumb-init /usr/bin/dumb-init
 USER node
 WORKDIR /usr/src/app
 EXPOSE 8080
