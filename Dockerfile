@@ -6,7 +6,7 @@ RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY . ./
 RUN npm install
-RUN ["./bin/npm-publish.sh"]
+
 #RUN ["./bin/build-site.sh"] #if we want html files.
 #RUN apk add --no-cache tree
 RUN apt-get update && apt-get -y install \
@@ -37,7 +37,7 @@ EXPOSE 8080
 WORKDIR /opt/app
 RUN mkdir -p ./boot
 COPY --from=base /opt/app/tiddlywiki.js .
-#COPY --from=base /opt/app/tiddlywiki .
+COPY --from=build /opt/app/node_modules .
 COPY --from=base /opt/app/boot ./boot/
 COPY --from=base /opt/app/package.json .
 RUN apk add --no-cache tree
