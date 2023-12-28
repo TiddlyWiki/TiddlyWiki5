@@ -36,7 +36,7 @@ EXPOSE 8080
 WORKDIR /opt/app
 RUN mkdir -p ./boot
 COPY --from=base /opt/app/tiddlywiki.js .
-COPY --from=build /opt/app/node_modules .
+COPY --from=base /opt/app/node_modules .
 COPY --from=base /opt/app/boot ./boot/
 COPY --from=base /opt/app/package.json .
 RUN apk add --no-cache tree
