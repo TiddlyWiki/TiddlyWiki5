@@ -44,7 +44,7 @@ USER node
 WORKDIR /usr/src/app
 EXPOSE 8080
 #WORKDIR /opt/app
-COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/src/app/node_modules
+COPY --chown=node:node --from=base /usr/src/app/node_modules /usr/src/app/node_modules
 COPY --chown=node:node . /usr/src/app
 CMD ["dumb-init", "node", "tiddlywiki.js"]
 #RUN mkdir -p ./boot
