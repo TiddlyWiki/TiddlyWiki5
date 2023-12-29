@@ -4,9 +4,9 @@ ARG NODE_VERSION=18.19.0
 FROM node:${NODE_VERSION}-bullseye-slim as base
 RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
 WORKDIR /usr/src/app
-COPY package*.json /usr/src/app/
+#COPY package*.json /usr/src/app/
 COPY . /usr/src/app/
-RUN npm ci --only=production
+RUN npm install
 
 #RUN mkdir -p /opt/app
 #WORKDIR /opt/app
