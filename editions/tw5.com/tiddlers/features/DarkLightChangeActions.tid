@@ -4,7 +4,7 @@ tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.2">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
+<<.from-version "5.3.4">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
 
 <<.tip """Be aware that the browser setting can be independent from the OS setting.<br>
 
