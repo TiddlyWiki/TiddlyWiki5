@@ -36,4 +36,3 @@ tags: $:/tags/DarkLightChangeActions
 !! InfoMechanism
 
 <<.warning """The system info tiddler $:/info/darkmode will be dynamically updated ''after'' the actions have been executed. Therefore it is important to use the variable `dark-mode`""">>
-
