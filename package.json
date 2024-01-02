@@ -26,7 +26,6 @@
   "devDependencies": {
     "eslint": "^7.32.0"
   },
-  "bundleDependencies": [],
   "license": "BSD",
   "engines": {
     "node": ">=0.8.2"
@@ -36,5 +35,8 @@
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.2.2"
   }
 }
