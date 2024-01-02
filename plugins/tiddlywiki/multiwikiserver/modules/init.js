@@ -30,7 +30,7 @@ exports.startup = function() {
 	} catch(e) {
 	}
 	if(!$tw.sqlite3.Database) {
-		logger.alert("The plugin 'tiddlywiki/multiwikiserver' requires the better-sqlite3 npm package to be installed. Run 'npm install better-sqlite3' in the root of the TiddlyWiki repository");
+		logger.alert("The plugin 'tiddlywiki/multiwikiserver' requires the better-sqlite3 npm package to be installed. Run 'npm install' in the root of the TiddlyWiki repository");
 		return;
 	}
 	// Create and initialise the tiddler store

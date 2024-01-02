@@ -5,5 +5,5 @@ This plugin extends the TiddlyWiki 5 server running on Node.js to be able to hos
 Before using the plugin, it is necessary to install dependencies by running the following command in the root of the ~TiddlyWiki5 repository:
 
 ```
-npm install better-sqlite3
+npm install
 ```
