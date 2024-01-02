@@ -7,3 +7,20 @@ Before using the plugin, it is necessary to install dependencies by running the 
 ```
 npm install
 ```
+
+To start the server:
+
+```
+tiddlywiki editions/prerelease --listen
+```
+
+Then visit the sample wikis in a browser:
+
+* http://127.0.0.1:8080/wiki/recipe-rho
+* http://127.0.0.1:8080/wiki/recipe-sigma
+
+To run the tests:
+
+```
+./bin/test.sh
+```
