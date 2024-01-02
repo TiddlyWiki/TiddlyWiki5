@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/sqlite3store/sql-console/styles
+code-body: yes
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.sql-console * {
+}
+
+.sql-console-input,
+.sql-console-output-input {
+	font-family: monospace;
+	white-space: pre;
+	box-sizing: border-box;
+	width: 100%;
+	background: #222222;
+	color: #00ff00;
+	border-radius: 4px;
+	padding: 4px;
+	margin: 4px;
+}

@@ -1,0 +1,19 @@
+{
+	"tiddlers": [
+		{
+			"file": "sqlite3.js",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/sqlite3store/sqlite3.js"
+			}
+		},
+		{
+			"file": "sqlite3.wasm",
+			"encoding": "base64",
+			"fields": {
+				"type": "application/wasm",
+				"title": "$:/plugins/tiddlywiki/sqlite3store/sqlite3.wasm"
+			}
+		}
+	]
+}

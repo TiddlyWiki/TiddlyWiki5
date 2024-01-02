@@ -1096,6 +1096,39 @@ $tw.Tiddler.prototype.isEqual = function(tiddler,excludeFields) {
 	return differences.length === 0;
 };
 
+$tw.Tiddler.prototype.getFieldString = function(field,defaultValue) {
+	var value = this.fields[field];
+	// Check for a missing field
+	if(value === undefined || value === null) {
+		return defaultValue || "";
+	}
+	// Stringify the field with the associated tiddler field module (if any)
+	var fieldModule = $tw.Tiddler.fieldModules[field];
+	if(fieldModule && fieldModule.stringify) {
+		return fieldModule.stringify.call(this,value);
+	} else {
+		return value.toString();
+	}
+};
+
+/*
+Get all the fields as a hashmap of strings. Options:
+	exclude: an array of field names to exclude
+*/
+$tw.Tiddler.prototype.getFieldStrings = function(options) {
+	options = options || {};
+	var exclude = options.exclude || [];
+	var fields = {};
+	for(var field in this.fields) {
+		if($tw.utils.hop(this.fields,field)) {
+			if(exclude.indexOf(field) === -1) {
+				fields[field] = this.getFieldString(field);
+			}
+		}
+	}
+	return fields;
+};
+
 /*
 Register and install the built in tiddler field modules
 */
@@ -1132,7 +1165,7 @@ Wiki constructor. State is stored in private members that only a small number of
 options include:
 enableIndexers - Array of indexer names to enable, or null to use all available indexers
 */
-$tw.Wiki = function(options) {
+$tw.Wiki = $tw.Wiki || function(options) {
 	options = options || {};
 	var self = this,
 		tiddlers = Object.create(null), // Hashmap of tiddlers
@@ -1494,7 +1527,7 @@ $tw.Wiki.prototype.clearGlobalCache =
 $tw.Wiki.prototype.enqueueTiddlerEvent = function() {};
 
 // Add an array of tiddlers
-$tw.Wiki.prototype.addTiddlers = function(tiddlers) {
+$tw.Wiki.prototype.addTiddlers = $tw.Wiki.prototype.addTiddlers || function(tiddlers) {
 	for(var t=0; t<tiddlers.length; t++) {
 		this.addTiddler(tiddlers[t]);
 	}
@@ -1503,7 +1536,7 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 /*
 Define all modules stored in ordinary tiddlers
 */
-$tw.Wiki.prototype.defineTiddlerModules = function() {
+$tw.Wiki.prototype.defineTiddlerModules = $tw.Wiki.prototype.defineTiddlerModules || function() {
 	this.each(function(tiddler,title) {
 		if(tiddler.hasField("module-type")) {
 			switch (tiddler.fields.type) {
@@ -1527,7 +1560,7 @@ $tw.Wiki.prototype.defineTiddlerModules = function() {
 /*
 Register all the module tiddlers that have a module type
 */
-$tw.Wiki.prototype.defineShadowModules = function() {
+$tw.Wiki.prototype.defineShadowModules = $tw.Wiki.prototype.defineShadowModules || function() {
 	var self = this;
 	this.eachShadow(function(tiddler,title) {
 		// Don't define the module if it is overidden by an ordinary tiddler
@@ -1541,7 +1574,7 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 /*
 Enable safe mode by deleting any tiddlers that override a shadow tiddler
 */
-$tw.Wiki.prototype.processSafeMode = function() {
+$tw.Wiki.prototype.processSafeMode = $tw.Wiki.prototype.processSafeMode || function() {
 	var self = this,
 		overrides = [];
 	// Find the overriding tiddlers
@@ -1572,7 +1605,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 /*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
-$tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
+$tw.Wiki.prototype.deserializeTiddlers = $tw.Wiki.prototype.deserializeTiddlers || function(type,text,srcFields,options) {
 	srcFields = srcFields || Object.create(null);
 	options = options || {};
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[options.deserializer],
@@ -2438,6 +2471,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/vnd.microsoft.icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
+	$tw.utils.registerFileType("application/wasm","base64",".wasm");
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
 	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");

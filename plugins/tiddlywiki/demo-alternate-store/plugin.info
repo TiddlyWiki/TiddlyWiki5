@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/demo-alternate-store",
+	"name": "Demo alternate store",
+	"description": "Developer demo of an alternate wiki store implementation",
+	"list": "readme"
+}

@@ -1,6 +1,7 @@
 {
 	"description": "Empty edition",
 	"plugins": [
+		"tiddlywiki/sqlite3store"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
