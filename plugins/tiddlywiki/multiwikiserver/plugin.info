@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/multiwikiserver",
+	"name": "Multi Wiki Server",
+	"description": "Multiple Wiki Server Extension",
+	"list": "readme",
+	"dependents": []
+}

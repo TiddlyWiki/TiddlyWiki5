@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/readme
+
+This plugin extends the TiddlyWiki 5 server running on Node.js to be able to host multiple wikis, which can share content or be independent.
+
+Before using the plugin, it is necessary to install dependencies by running the following command in the root of the ~TiddlyWiki5 repository:
+
+```
+npm install better-sqlite3
+```
