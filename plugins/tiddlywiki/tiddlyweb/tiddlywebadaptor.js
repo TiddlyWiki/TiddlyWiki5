@@ -42,7 +42,8 @@ TiddlyWebAdaptor.prototype.getHost = function() {
 	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
 		substitutions = [
 			{name: "protocol", value: document.location.protocol},
-			{name: "host", value: document.location.host}
+			{name: "host", value: document.location.host},
+			{name: "pathname", value: document.location.pathname}
 		];
 	for(var t=0; t<substitutions.length; t++) {
 		var s = substitutions[t];

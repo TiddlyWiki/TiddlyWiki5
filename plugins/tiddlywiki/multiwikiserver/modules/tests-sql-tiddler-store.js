@@ -45,7 +45,7 @@ describe("SQL tiddler store", function() {
 		expect(sqlTiddlerStore.getTiddler("Another Tiddler","recipe-rho")).toEqual({ title: "Another Tiddler", text: "I'm in alpha", tags: "one two three" });
 		expect(sqlTiddlerStore.getTiddler("Hello There","recipe-sigma")).toEqual({ title: "Hello There", text: "I'm in gamma", tags: "seven eight nine" });
 		expect(sqlTiddlerStore.getTiddler("Another Tiddler","recipe-sigma")).toEqual({ title: "Another Tiddler", text: "I'm in alpha", tags: "one two three" });
-		// Delete a tiddler to ensure the underlying tiddler in the recipe shows through
+		// Delete a tiddlers to ensure the underlying tiddler in the recipe shows through
 		sqlTiddlerStore.deleteTiddler("Hello There","bag-beta");
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-rho")).toEqual([ "Another Tiddler", "Hello There"]);
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-sigma")).toEqual([ "Another Tiddler", "Hello There"]);
@@ -53,6 +53,10 @@ describe("SQL tiddler store", function() {
 		sqlTiddlerStore.deleteTiddler("Another Tiddler","bag-alpha");
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-rho")).toEqual([ "Hello There"]);
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-sigma")).toEqual([ "Hello There"]);
+		// Save a recipe tiddler
+		sqlTiddlerStore.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho");
+		expect(sqlTiddlerStore.getTiddler("More","recipe-rho")).toEqual({title: "More", text: "None"});
+		
 	});
 });
 

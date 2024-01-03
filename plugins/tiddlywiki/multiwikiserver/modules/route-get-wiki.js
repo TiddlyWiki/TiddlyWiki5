@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/route-wiki.js
+title: $:/plugins/tiddlywiki/multiwikiserver/route-get-wiki.js
 type: application/javascript
 module-type: route
 
@@ -14,7 +14,7 @@ GET /wikis/:recipe_name
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/(.+)$/;
+exports.path = /^\/wiki\/([^\/]+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the recipe name from the parameters
@@ -30,6 +30,7 @@ exports.handler = function(request,response,state) {
 				$:/boot/bootprefix.js
 				$:/core
 				$:/library/sjcl.js
+				$:/plugins/tiddlywiki/tiddlyweb
 				$:/themes/tiddlywiki/snowwhite
 				$:/themes/tiddlywiki/vanilla
 			`
@@ -44,9 +45,12 @@ exports.handler = function(request,response,state) {
 	var htmlParts = [];
 	htmlParts.push(template.substring(0,markerPos + marker.length));
 	$tw.utils.each(titles,function(title) {
-		htmlParts.push(JSON.stringify($tw.sqlTiddlerStore.getTiddler(title,recipe_name)));
+		var tiddler = $tw.sqlTiddlerStore.getTiddler(title,recipe_name);
+		htmlParts.push(JSON.stringify(Object.assign({},tiddler,{revision: "0", bag: "bag-gamma"})));
 		htmlParts.push(",")
 	});
+	htmlParts.push(JSON.stringify({title: "$:/config/tiddlyweb/host",text: "$protocol$//$host$$pathname$/"}));
+	htmlParts.push(",")
 	htmlParts.push(template.substring(markerPos + marker.length))
 	// Send response
 	if(htmlParts) {
