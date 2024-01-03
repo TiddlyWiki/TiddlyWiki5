@@ -11,7 +11,7 @@ npm install
 To start the server:
 
 ```
-tiddlywiki editions/prerelease --listen
+tiddlywiki editions/multiwikiserver --listen
 ```
 
 Then visit the sample wikis in a browser:
