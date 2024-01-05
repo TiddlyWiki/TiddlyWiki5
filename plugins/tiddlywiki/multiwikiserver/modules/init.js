@@ -49,11 +49,11 @@ exports.startup = function() {
 	$tw.sqlTiddlerStore.createRecipe("recipe-rho",["bag-alpha","bag-beta"]);
 	$tw.sqlTiddlerStore.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"]);
 	$tw.sqlTiddlerStore.createRecipe("recipe-tau",["bag-alpha"]);
+	$tw.sqlTiddlerStore.createRecipe("recipe-upsilon",["bag-alpha","bag-gamma","bag-beta"]);
 	// Save tiddlers
-	$tw.sqlTiddlerStore.saveTiddler({title: "Another Tiddler",text: "I'm in alpha",tags: "one two three"},"bag-alpha");
-	$tw.sqlTiddlerStore.saveTiddler({title: "Hello There",text: "I'm in alpha as well",tags: "one two three"},"bag-alpha");
-	$tw.sqlTiddlerStore.saveTiddler({title: "Hello There",text: "I'm in beta",tags: "four five six"},"bag-beta");
-	$tw.sqlTiddlerStore.saveTiddler({title: "Hello There",text: "I'm in gamma",tags: "seven eight nine"},"bag-gamma");
+	$tw.sqlTiddlerStore.saveTiddler({title: "$:/SiteTitle",text: "Bag Alpha"},"bag-alpha");
+	$tw.sqlTiddlerStore.saveTiddler({title: "$:/SiteTitle",text: "Bag Beta"},"bag-beta");
+	$tw.sqlTiddlerStore.saveTiddler({title: "$:/SiteTitle",text: "Bag Gamma"},"bag-gamma");
 };
 
 })();

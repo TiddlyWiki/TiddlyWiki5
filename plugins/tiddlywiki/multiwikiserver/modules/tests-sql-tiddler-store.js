@@ -23,9 +23,10 @@ describe("SQL tiddler store", function() {
 	sqlTiddlerStore.createBag("bag-alpha");
 	sqlTiddlerStore.createBag("bag-beta");
 	sqlTiddlerStore.createBag("bag-gamma");
-	sqlTiddlerStore.createRecipe("recipe-rho",["bag-gamma"]);
 	sqlTiddlerStore.createRecipe("recipe-rho",["bag-alpha","bag-beta"]);
 	sqlTiddlerStore.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"]);
+	sqlTiddlerStore.createRecipe("recipe-tau",["bag-alpha"]);
+	sqlTiddlerStore.createRecipe("recipe-upsilon",["bag-alpha","bag-gamma","bag-beta"]);
 	// Tear down
 	afterAll(function() {
 		// Close the database

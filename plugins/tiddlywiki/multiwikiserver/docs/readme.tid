@@ -16,8 +16,14 @@ tiddlywiki editions/multiwikiserver --listen
 
 Then visit the sample wikis in a browser:
 
-* http://127.0.0.1:8080/wiki/recipe-rho
-* http://127.0.0.1:8080/wiki/recipe-sigma
+* http://127.0.0.1:8080/wiki/recipe-rho - bag-alpha, bag-beta
+* http://127.0.0.1:8080/wiki/recipe-sigma - bag-alpha, bag-gamma
+* http://127.0.0.1:8080/wiki/recipe-tau - bag-alpha
+* http://127.0.0.1:8080/wiki/recipe-upsilon - bag-alpha, bag-gamma, bag-beta
+
+Note that changes are written to the topmost bag in a recipe.
+
+Note that until syncing is improved it is necessary to use "Get latest changes from the server" to speed up propogation of changes.
 
 To run the tests:
 
