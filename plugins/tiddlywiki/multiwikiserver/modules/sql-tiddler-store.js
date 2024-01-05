@@ -143,11 +143,6 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
 	`,{
 		recipe_name: recipename
 	});
-	console.log(this.runStatementGetAll(`
-			SELECT * FROM json_each($bag_names) AS bag
-	`,{
-		bag_names: JSON.stringify(bagnames)
-	}));
 	this.runStatement(`
 		INSERT INTO recipe_bags (recipe_id, bag_id, position)
 		SELECT r.recipe_id, b.bag_id, j.key as position
