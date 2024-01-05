@@ -148,7 +148,7 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
 		SELECT r.recipe_id, b.bag_id, j.key as position
 		FROM recipes r
 		JOIN bags b
-		LEFT JOIN json_each($bag_names) AS j ON j.value = b.bag_name
+		INNER JOIN json_each($bag_names) AS j ON j.value = b.bag_name
 		WHERE r.recipe_name = $recipe_name
 	`,{
 		recipe_name: recipename,
