@@ -20,11 +20,12 @@ describe("SQL tiddler store", function() {
 	const sqlTiddlerStore = new SqlTiddlerStore({});
 	sqlTiddlerStore.createTables();
 	// Create bags and recipes
-	sqlTiddlerStore.saveBag("bag-alpha");
-	sqlTiddlerStore.saveBag("bag-beta");
-	sqlTiddlerStore.saveBag("bag-gamma");
-	sqlTiddlerStore.saveRecipe("recipe-rho",["bag-alpha","bag-beta"]);
-	sqlTiddlerStore.saveRecipe("recipe-sigma",["bag-alpha","bag-gamma"]);
+	sqlTiddlerStore.createBag("bag-alpha");
+	sqlTiddlerStore.createBag("bag-beta");
+	sqlTiddlerStore.createBag("bag-gamma");
+	sqlTiddlerStore.createRecipe("recipe-rho",["bag-gamma"]);
+	sqlTiddlerStore.createRecipe("recipe-rho",["bag-alpha","bag-beta"]);
+	sqlTiddlerStore.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"]);
 	// Tear down
 	afterAll(function() {
 		// Close the database

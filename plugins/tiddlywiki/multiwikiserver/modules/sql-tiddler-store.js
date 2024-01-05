@@ -9,9 +9,16 @@ Functions to perform basic tiddler operations with a sqlite3 database
 
 (function() {
 
+/*
+Create a tiddler store. Options include:
+
+databasePath - path to the database file (can be ":memory:" to get a temporary database)
+*/
 function SqlTiddlerStore(options) {
+	options = options || {};
+	var databasePath = options.databasePath || ":memory:";
 	// Create our database
-	this.db = new $tw.sqlite3.Database(":memory:",{verbose: undefined && console.log});
+	this.db = new $tw.sqlite3.Database(databasePath,{verbose: undefined && console.log});
 }
 
 SqlTiddlerStore.prototype.close = function() {
@@ -103,34 +110,51 @@ SqlTiddlerStore.prototype.logTables = function() {
 	}
 };
 
-SqlTiddlerStore.prototype.saveBag = function(bagname) {
+SqlTiddlerStore.prototype.createBag = function(bagname) {
 	// Run the queries
 	this.runStatement(`
-		INSERT OR REPLACE INTO bags (bag_name, accesscontrol) VALUES ($bag_name, $accesscontrol)
+		INSERT OR IGNORE INTO bags (bag_name, accesscontrol)
+		VALUES ($bag_name, '')
+	`,{
+		bag_name: bagname
+	});
+	this.runStatement(`
+		UPDATE bags
+		SET accesscontrol = $accesscontrol
+		WHERE bag_name = $bag_name
 	`,{
 		bag_name: bagname,
 		accesscontrol: "[some access control stuff]"
 	});
 };
 
-SqlTiddlerStore.prototype.saveRecipe = function(recipename,bagnames) {
+SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
 	// Run the queries
 	this.runStatement(`
-		-- Insert or replace the recipe with the given name
-		INSERT OR REPLACE INTO recipes (recipe_name)
+		-- Create the entry in the recipes table if required
+		INSERT OR IGNORE INTO recipes (recipe_name)
 		VALUES ($recipe_name)
 	`,{
 		recipe_name: recipename
 	});
 	this.runStatement(`
-		-- Insert bag names into recipe_bags for the given recipe name
+		-- Delete existing recipe_bags entries for this recipe
+		DELETE FROM recipe_bags WHERE recipe_id = (SELECT recipe_id FROM recipes WHERE recipe_name = $recipe_name)
+	`,{
+		recipe_name: recipename
+	});
+	console.log(this.runStatementGetAll(`
+			SELECT * FROM json_each($bag_names) AS bag
+	`,{
+		bag_names: JSON.stringify(bagnames)
+	}));
+	this.runStatement(`
 		INSERT INTO recipe_bags (recipe_id, bag_id, position)
-		SELECT r.recipe_id, b.bag_id, j.key
-		FROM (
-			SELECT * FROM json_each($bag_names)
-		) AS j
-		JOIN bags AS b ON b.bag_name = j.value
-		JOIN recipes AS r ON r.recipe_name = $recipe_name;
+		SELECT r.recipe_id, b.bag_id, j.key as position
+		FROM recipes r
+		JOIN bags b
+		LEFT JOIN json_each($bag_names) AS j ON j.value = b.bag_name
+		WHERE r.recipe_name = $recipe_name
 	`,{
 		recipe_name: recipename,
 		bag_names: JSON.stringify(bagnames)

@@ -19,6 +19,7 @@ exports.before = ["story"];
 exports.synchronous = true;
 
 exports.startup = function() {
+	var path = require("path");
 	// Install the sqlite3 global namespace
 	$tw.sqlite3 = {
 		Database: null
@@ -33,16 +34,21 @@ exports.startup = function() {
 		logger.alert("The plugin 'tiddlywiki/multiwikiserver' requires the better-sqlite3 npm package to be installed. Run 'npm install' in the root of the TiddlyWiki repository");
 		return;
 	}
+	// Compute the database path
+	var databasePath = path.resolve($tw.boot.wikiPath,"database.sqlite");
 	// Create and initialise the tiddler store
 	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore;
-	$tw.sqlTiddlerStore = new SqlTiddlerStore({});
+	$tw.sqlTiddlerStore = new SqlTiddlerStore({
+		databasePath: databasePath
+	});
 	$tw.sqlTiddlerStore.createTables();
 	// Create bags and recipes
-	$tw.sqlTiddlerStore.saveBag("bag-alpha");
-	$tw.sqlTiddlerStore.saveBag("bag-beta");
-	$tw.sqlTiddlerStore.saveBag("bag-gamma");
-	$tw.sqlTiddlerStore.saveRecipe("recipe-rho",["bag-alpha","bag-beta"]);
-	$tw.sqlTiddlerStore.saveRecipe("recipe-sigma",["bag-alpha","bag-gamma"]);
+	$tw.sqlTiddlerStore.createBag("bag-alpha");
+	$tw.sqlTiddlerStore.createBag("bag-beta");
+	$tw.sqlTiddlerStore.createBag("bag-gamma");
+	$tw.sqlTiddlerStore.createRecipe("recipe-rho",["bag-alpha","bag-beta"]);
+	$tw.sqlTiddlerStore.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"]);
+	$tw.sqlTiddlerStore.createRecipe("recipe-tau",["bag-alpha"]);
 	// Save tiddlers
 	$tw.sqlTiddlerStore.saveTiddler({title: "Another Tiddler",text: "I'm in alpha",tags: "one two three"},"bag-alpha");
 	$tw.sqlTiddlerStore.saveTiddler({title: "Hello There",text: "I'm in alpha as well",tags: "one two three"},"bag-alpha");
