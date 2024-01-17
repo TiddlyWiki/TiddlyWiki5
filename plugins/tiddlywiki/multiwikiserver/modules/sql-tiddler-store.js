@@ -13,11 +13,14 @@ Functions to perform basic tiddler operations with a sqlite3 database
 Create a tiddler store. Options include:
 
 databasePath - path to the database file (can be ":memory:" to get a temporary database)
+adminWiki - reference to $tw.Wiki object into which entity state tiddlers should be saved
 */
 function SqlTiddlerStore(options) {
 	options = options || {};
+	this.adminWiki = options.adminWiki || $tw.wiki;
+	this.entityStateTiddlerPrefix = "$:/state/multiwikiserver/";
+	// Create the database
 	var databasePath = options.databasePath || ":memory:";
-	// Create our database
 	this.db = new $tw.sqlite3.Database(databasePath,{verbose: undefined && console.log});
 }
 
@@ -48,6 +51,10 @@ SqlTiddlerStore.prototype.runStatements = function(sqlArray) {
 	for(const sql of sqlArray) {
 		this.runStatement(sql);
 	}
+};
+
+SqlTiddlerStore.prototype.saveEntityStateTiddler = function(tiddler) {
+	this.adminWiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.entityStateTiddlerPrefix + tiddler.title}));
 };
 
 SqlTiddlerStore.prototype.createTables = function() {
@@ -110,6 +117,15 @@ SqlTiddlerStore.prototype.logTables = function() {
 	}
 };
 
+SqlTiddlerStore.prototype.listBags = function() {
+	const rows = this.runStatementGetAll(`
+		SELECT bag_name, accesscontrol
+		FROM bags
+		ORDER BY bag_name
+	`);
+	return rows;
+};
+
 SqlTiddlerStore.prototype.createBag = function(bagname) {
 	// Run the queries
 	this.runStatement(`
@@ -126,6 +142,20 @@ SqlTiddlerStore.prototype.createBag = function(bagname) {
 		bag_name: bagname,
 		accesscontrol: "[some access control stuff]"
 	});
+	this.saveEntityStateTiddler({
+		title: "bags/" + bagname,
+		"bag-name": bagname,
+		text: ""
+	});
+};
+
+SqlTiddlerStore.prototype.listRecipes = function() {
+	const rows = this.runStatementGetAll(`
+		SELECT recipe_name
+		FROM recipes
+		ORDER BY recipe_name
+	`);
+	return rows;
 };
 
 SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
@@ -153,6 +183,12 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
 	`,{
 		recipe_name: recipename,
 		bag_names: JSON.stringify(bagnames)
+	});
+	this.saveEntityStateTiddler({
+		title: "recipes/" + recipename,
+		"recipe-name": recipename,
+		text: "",
+		list: $tw.utils.stringifyList(bagnames)
 	});
 };
 

@@ -1,0 +1,10 @@
+title: $:/MultiWikiServer/SideBarSegment
+tags: $:/tags/SideBarSegment
+list-before: $:/core/ui/SideBarSegments/page-controls
+
+<div class="mws-admin-sidebar">
+<$button>
+<$action-setfield $tiddler="$:/layout" text="$:/MultiWikiServer/AdminLayout"/>
+Switch back to ~MultiWikiServer administration user interface
+</$button>
+</div>

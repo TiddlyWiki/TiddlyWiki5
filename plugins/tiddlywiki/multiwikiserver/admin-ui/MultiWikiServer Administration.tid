@@ -1,0 +1,22 @@
+title: MultiWikiServer Administration
+
+<div class="mws-admin-container">
+<h1>Recipes</h1>
+<ul>
+<$list filter="[prefix[$:/state/multiwikiserver/recipes/]]">
+<li>
+<a href={{{ [{!!recipe-name}addprefix[/wiki/]] }}} rel="noopener noreferrer" target="_blank">
+<$text text={{!!recipe-name}}/>
+</a>
+</li>
+</$list>
+</ul>
+<h1>Bags</h1>
+<ul>
+<$list filter="[prefix[$:/state/multiwikiserver/bags/]]">
+<li>
+<$text text={{!!bag-name}}/>
+</li>
+</$list>
+</ul>
+</div>
