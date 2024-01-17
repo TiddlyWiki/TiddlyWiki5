@@ -43,6 +43,14 @@ function Server(options) {
 			}
 		}
 	}
+	// Register server extensions
+	this.extensions = [];
+	$tw.modules.forEachModuleOfType("server-extension",function(title,exports) {
+		var extension = new exports.Extension(self);
+		self.extensions.push(extension);
+	});
+	// Initialise server extensions
+	this.invokeExtensionHook("server-start-initialisation");
 	// Setup the default required plugins
 	this.requiredPlugins = this.get("required-plugins").split(',');
 	// Initialise CSRF
@@ -96,7 +104,15 @@ function Server(options) {
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 	this.boot.pathPrefix = this.get("path-prefix") || "";
+	// Complete initialisation of server extensions
+	this.invokeExtensionHook("server-completed-initialisation");
 }
+
+Server.prototype.invokeExtensionHook = function(hookName) {
+	$tw.utils.each(this.extensions,function(extension) {
+		extension.hook(hookName);
+	});
+};
 
 /*
 Send a response to the client. This method checks if the response must be sent
