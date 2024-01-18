@@ -284,22 +284,14 @@ SqlTiddlerStore.prototype.getTiddler = function(title,recipename) {
 		SELECT field_name, field_value
 		FROM fields
 		WHERE tiddler_id = (
-			SELECT tt.tiddler_id
-			FROM (
-				SELECT bb.bag_id, t.tiddler_id
-				FROM (
-					SELECT b.bag_id
-					FROM bags AS b
-					INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
-					INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
-					WHERE r.recipe_name = $recipe_name
-					ORDER BY rb.position
-				) AS bb
-				INNER JOIN tiddlers AS t ON bb.bag_id = t.bag_id
-				WHERE t.title = $title
-			) AS tt
-			ORDER BY tt.tiddler_id DESC
-			LIMIT 1
+			SELECT t.tiddler_id
+			FROM bags AS b
+			INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
+			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
+			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+			WHERE r.recipe_name = $recipe_name
+			AND t.title = $title
+			ORDER BY rb.position DESC
 		)
 	`,{
 		title: title,
