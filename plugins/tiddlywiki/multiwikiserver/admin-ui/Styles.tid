@@ -3,3 +3,10 @@ tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
+/*
+Styles specific to the full screen layout
+*/
+
+.mws-admin-layout {
+	padding: 1rem;
+}

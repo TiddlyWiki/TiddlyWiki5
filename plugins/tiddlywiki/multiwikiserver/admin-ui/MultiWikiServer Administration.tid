@@ -8,9 +8,19 @@ title: MultiWikiServer Administration
 <a href={{{ [{!!recipe-name}addprefix[/wiki/]] }}} rel="noopener noreferrer" target="_blank">
 <$text text={{!!recipe-name}}/>
 </a>
+<ol>
+<$list filter="[list<currentTiddler>]">
+<li>
+<$text text=<<currentTiddler>>/>
+</li>
+</$list>
+</ol>
 </li>
 </$list>
 </ul>
+<div>
+Higher numbered bags take priority if a tiddler with the same title is in more than one bag
+</div>
 <h1>Bags</h1>
 <ul>
 <$list filter="[prefix[$:/state/multiwikiserver/bags/]]">
