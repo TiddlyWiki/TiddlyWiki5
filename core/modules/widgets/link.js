@@ -217,7 +217,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if($tw.utils.count(changedAttributes) > 0) {
+	if($tw.utils.count(changedAttributes) > 0 || changedTiddlers[this.to]) {
 		this.refreshSelf();
 		return true;
 	}

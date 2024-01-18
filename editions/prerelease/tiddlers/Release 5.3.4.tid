@@ -1,12 +1,15 @@
-caption: 5.3.3
-created: 20231213080754563
-modified: 20231213080754563
+caption: 5.3.4
+created: 20231223102229103
+modified: 20231223102229103
 tags: ReleaseNotes
-title: Release 5.3.3
+title: Release 5.3.4
 type: text/vnd.tiddlywiki
 description: Under development
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.2...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.3...master]]//
+
+! Major Improvements
+
 
 ! Translation improvements
 
