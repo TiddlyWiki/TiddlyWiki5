@@ -40,7 +40,7 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.revision = "0";
-			tiddlerFields.bag = "bag-gamma";
+			tiddlerFields.bag = bag_name;
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 		} else {

@@ -270,6 +270,7 @@ SqlTiddlerStore.prototype.saveRecipeTiddler = function(tiddlerFields,recipename)
 	});
 	// Save the tiddler to the topmost bag
 	this.saveBagTiddler(tiddlerFields,row.bag_name);
+	return row.bag_name;
 };
 
 SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {
