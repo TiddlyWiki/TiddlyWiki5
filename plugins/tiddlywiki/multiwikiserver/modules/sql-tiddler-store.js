@@ -212,7 +212,7 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
 	});
 };
 
-SqlTiddlerStore.prototype.saveTiddler = function(tiddlerFields,bagname) {
+SqlTiddlerStore.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
 	// Update the tiddlers table
 	this.runStatement(`
 		INSERT OR REPLACE INTO tiddlers (bag_id, title)
@@ -269,7 +269,7 @@ SqlTiddlerStore.prototype.saveRecipeTiddler = function(tiddlerFields,recipename)
 		recipe_name: recipename
 	});
 	// Save the tiddler to the topmost bag
-	this.saveTiddler(tiddlerFields,row.bag_name);
+	this.saveBagTiddler(tiddlerFields,row.bag_name);
 };
 
 SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {

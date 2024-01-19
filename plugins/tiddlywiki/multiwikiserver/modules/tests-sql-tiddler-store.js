@@ -37,10 +37,10 @@ describe("SQL tiddler store", function() {
 	// Run tests
 	it("should save and retrieve tiddlers", function() {
 		// Save tiddlers
-		sqlTiddlerStore.saveTiddler({title: "Another Tiddler",text: "I'm in alpha",tags: "one two three"},"bag-alpha");
-		sqlTiddlerStore.saveTiddler({title: "Hello There",text: "I'm in alpha as well",tags: "one two three"},"bag-alpha");
-		sqlTiddlerStore.saveTiddler({title: "Hello There",text: "I'm in beta",tags: "four five six"},"bag-beta");
-		sqlTiddlerStore.saveTiddler({title: "Hello There",text: "I'm in gamma",tags: "seven eight nine"},"bag-gamma");
+		sqlTiddlerStore.saveBagTiddler({title: "Another Tiddler",text: "I'm in alpha",tags: "one two three"},"bag-alpha");
+		sqlTiddlerStore.saveBagTiddler({title: "Hello There",text: "I'm in alpha as well",tags: "one two three"},"bag-alpha");
+		sqlTiddlerStore.saveBagTiddler({title: "Hello There",text: "I'm in beta",tags: "four five six"},"bag-beta");
+		sqlTiddlerStore.saveBagTiddler({title: "Hello There",text: "I'm in gamma",tags: "seven eight nine"},"bag-gamma");
 		// Verify what we've got
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-rho")).toEqual([ "Another Tiddler", "Hello There"]);
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-sigma")).toEqual([ "Another Tiddler", "Hello There"]);
