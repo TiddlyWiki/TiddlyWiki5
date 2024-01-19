@@ -17,7 +17,9 @@ if($tw.node) {
 describe("SQL tiddler store", function() {
 	// Create and initialise the tiddler store
 	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore;
-	const sqlTiddlerStore = new SqlTiddlerStore({});
+	const sqlTiddlerStore = new SqlTiddlerStore({
+		adminWiki: new $tw.Wiki()
+	});
 	sqlTiddlerStore.createTables();
 	// Create bags and recipes
 	sqlTiddlerStore.createBag("bag-alpha");
