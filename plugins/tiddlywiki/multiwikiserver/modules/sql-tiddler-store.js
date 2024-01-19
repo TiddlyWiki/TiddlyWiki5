@@ -57,6 +57,26 @@ SqlTiddlerStore.prototype.saveEntityStateTiddler = function(tiddler) {
 	this.adminWiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.entityStateTiddlerPrefix + tiddler.title}));
 };
 
+SqlTiddlerStore.prototype.updateAdminWiki = function() {
+	// Update bags
+	for(const bagInfo of this.listBags()) {
+		this.saveEntityStateTiddler({
+			title: "bags/" + bagInfo.bag_name,
+			"bag-name": bagInfo.bag_name,
+			text: ""
+		});
+	}
+	// Update recipes
+	for(const recipeInfo of this.listRecipes()) {
+		this.saveEntityStateTiddler({
+			title: "recipes/" + recipeInfo.recipe_name,
+			"recipe-name": recipeInfo.recipe_name,
+			text: "",
+			list: $tw.utils.stringifyList(this.getRecipeBags(recipeInfo.recipe_name))
+		});
+	}
+};
+
 SqlTiddlerStore.prototype.createTables = function() {
 	this.runStatements([`
 		-- Bags have names and access control settings

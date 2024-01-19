@@ -42,6 +42,7 @@ exports.startup = function() {
 		databasePath: databasePath
 	});
 	$tw.sqlTiddlerStore.createTables();
+	$tw.sqlTiddlerStore.updateAdminWiki();
 	// Create bags and recipes
 	$tw.sqlTiddlerStore.createBag("bag-alpha");
 	$tw.sqlTiddlerStore.createBag("bag-beta");
