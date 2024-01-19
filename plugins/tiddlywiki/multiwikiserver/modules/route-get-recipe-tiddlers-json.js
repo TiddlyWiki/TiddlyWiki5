@@ -28,7 +28,7 @@ exports.handler = function(request,response,state) {
 		// Get a skinny version of each tiddler
 		var tiddlers = [];
 		$tw.utils.each(titles,function(title) {
-			var tiddler = $tw.sqlTiddlerStore.getTiddler(title,recipe_name);
+			var tiddler = $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
 			tiddlers.push(Object.assign({},tiddler,{text: undefined, revision: "0", bag: "bag-gamma"}));
 		});
 		var text = JSON.stringify(tiddlers);

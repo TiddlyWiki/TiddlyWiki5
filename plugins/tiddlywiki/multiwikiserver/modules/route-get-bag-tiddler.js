@@ -1,11 +1,11 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/route-get-recipe-tiddler.js
+title: $:/plugins/tiddlywiki/multiwikiserver/route-get-bag-tiddler.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:recipe_name/recipes/:recipe_name/tiddler/:title
+GET /wikis/:bag_name/bags/:bag_name/tiddler/:title
 
-NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 
 \*/
 (function() {
@@ -16,15 +16,15 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/recipes\/([^\/]+)\/tiddlers\/([^\/]+)$/;
+exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/([^\/]+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
-	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
+	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
+		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
-		tiddler = recipe_name === recipe_name_2 && $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
-	if(recipe_name === recipe_name_2 && tiddler) {
+		tiddler = bag_name === bag_name_2 && $tw.sqlTiddlerStore.getBagTiddler(title,bag_name);
+	if(bag_name === bag_name_2 && tiddler) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 				var tiddlerFields = {},

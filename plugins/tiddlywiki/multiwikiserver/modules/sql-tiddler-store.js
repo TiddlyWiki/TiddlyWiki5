@@ -299,7 +299,31 @@ SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {
 	});
 };
 
-SqlTiddlerStore.prototype.getTiddler = function(title,recipename) {
+SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
+	const rows = this.runStatementGetAll(`
+		SELECT field_name, field_value
+		FROM fields
+		WHERE tiddler_id = (
+			SELECT t.tiddler_id
+			FROM bags AS b
+			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+			WHERE t.title = $title AND b.bag_name = $bag_name
+		)
+	`,{
+		title: title,
+		bag_name: bagname
+	});
+	if(rows.length === 0) {
+		return null;
+	} else {
+		return rows.reduce((accumulator,value) => {
+			accumulator[value["field_name"]] = value.field_value;
+			return accumulator;
+		},{title: title});	
+	}
+};
+
+SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 	const rows = this.runStatementGetAll(`
 		SELECT field_name, field_value
 		FROM fields

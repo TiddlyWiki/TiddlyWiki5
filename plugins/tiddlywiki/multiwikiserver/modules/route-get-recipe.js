@@ -50,7 +50,7 @@ exports.handler = function(request,response,state) {
 		}
 		response.write(template.substring(0,markerPos + marker.length));
 		$tw.utils.each(titles,function(title) {
-			var tiddler = $tw.sqlTiddlerStore.getTiddler(title,recipe_name);
+			var tiddler = $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
 			if((tiddler.text || "").length > 10 * 1024 * 1024) {
 				response.write(JSON.stringify(Object.assign({},tiddler,{
 					revision: "0",
