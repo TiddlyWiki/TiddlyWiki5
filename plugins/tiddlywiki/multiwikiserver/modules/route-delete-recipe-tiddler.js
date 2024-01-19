@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/route-delete-tiddler.js
+title: $:/plugins/tiddlywiki/multiwikiserver/route-delete-recipe-tiddler.js
 type: application/javascript
 module-type: route
 

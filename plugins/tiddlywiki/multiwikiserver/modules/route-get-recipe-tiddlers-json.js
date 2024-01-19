@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/route-get-tiddlers-json.js
+title: $:/plugins/tiddlywiki/multiwikiserver/route-get-recipe-tiddlers-json.js
 type: application/javascript
 module-type: route
 
