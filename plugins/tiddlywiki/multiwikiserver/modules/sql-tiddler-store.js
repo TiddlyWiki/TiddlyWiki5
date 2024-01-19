@@ -337,6 +337,7 @@ SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 		WHERE r.recipe_name = $recipe_name
 		AND t.title = $title
 		ORDER BY rb.position DESC
+		LIMIT 1
 	`,{
 		title: title,
 		recipe_name: recipename
