@@ -51,7 +51,7 @@ title: MultiWikiServer Administration
 <ul>
 <$list filter="[prefix[$:/state/multiwikiserver/recipes/]]">
 <li>
-<a href={{{ [{!!recipe-name}addprefix[/wiki/]] }}} rel="noopener noreferrer" target="_blank">
+<a href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
 <$text text={{!!recipe-name}}/>
 </a>
 <ol>
@@ -74,7 +74,9 @@ Higher numbered bags take priority if a tiddler with the same title is in more t
 <ul>
 <$list filter="[prefix[$:/state/multiwikiserver/bags/]]">
 <li>
+<a href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
 <$text text={{!!bag-name}}/>
+</a>
 </li>
 </$list>
 </ul>
