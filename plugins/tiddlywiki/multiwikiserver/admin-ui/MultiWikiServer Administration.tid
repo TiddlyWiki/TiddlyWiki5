@@ -1,5 +1,51 @@
 title: MultiWikiServer Administration
 
+\procedure createBag(name)
+
+\procedure completion-createBag()
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+	<$action-log msg="In completion-createBag"/>
+	<$action-log/>
+\end completion-createBag
+
+<$action-sendmessage
+	$message="tm-http-request"
+	url=`/wiki/$(name)$/bags/$(name)$`
+	method="PUT"
+	oncompletion=<<completion-createBag>>
+/>
+\end createBag
+
+\procedure createBagButton(name)
+<$button class="">
+<$transclude $variable="createBag" name={{$:/state/NewBagName}}/>
+{{$:/core/images/new-button}}
+</$button><span class="tc-btn-text"><$text text="Create a new bag:"/></span><$edit-text tiddler="$:/state/NewBagName" tag="input"/>
+\end createBagButton
+
+\procedure createRecipe(name)
+
+\procedure completion-createRecipe()
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+	<$action-log msg="In completion-createRecipe"/>
+	<$action-log/>
+\end completion-createRecipe
+
+<$action-sendmessage
+	$message="tm-http-request"
+	url=`/wiki/$(name)$/recipes/$(name)$`
+	method="PUT"
+	oncompletion=<<completion-createRecipe>>
+/>
+\end createRecipe
+
+\procedure createRecipeButton(name)
+<$button class="">
+<$transclude $variable="createRecipe" name={{$:/state/NewRecipeName}}/>
+{{$:/core/images/new-button}}
+</$button><span class="tc-btn-text"><$text text="Create a new recipe:"/></span><$edit-text tiddler="$:/state/NewRecipeName" tag="input"/>
+\end createRecipeButton
+
 <div class="mws-admin-container">
 <h1>Recipes</h1>
 <ul>
@@ -19,6 +65,9 @@ title: MultiWikiServer Administration
 </$list>
 </ul>
 <div>
+<<createRecipeButton>>
+</div>
+<div>
 Higher numbered bags take priority if a tiddler with the same title is in more than one bag
 </div>
 <h1>Bags</h1>
@@ -29,4 +78,7 @@ Higher numbered bags take priority if a tiddler with the same title is in more t
 </li>
 </$list>
 </ul>
+<div>
+<<createBagButton>>
+</div>
 </div>
