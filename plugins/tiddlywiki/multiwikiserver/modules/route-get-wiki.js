@@ -28,7 +28,7 @@ exports.handler = function(request,response,state) {
 		// Get the tiddlers in the recipe
 		var titles = $tw.sqlTiddlerStore.getRecipeTiddlers(recipe_name);
 		// Render the template
-		var template = $tw.wiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
+		var template = $tw.sqlTiddlerStore.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
 			variables: {
 				saveTiddlerFilter: `
 					$:/boot/boot.css

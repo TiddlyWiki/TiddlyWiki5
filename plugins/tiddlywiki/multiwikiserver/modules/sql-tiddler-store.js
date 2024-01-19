@@ -328,6 +328,25 @@ SqlTiddlerStore.prototype.getTiddler = function(title,recipename) {
 };
 
 /*
+Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
+*/
+SqlTiddlerStore.prototype.getBagTiddlers = function(bagname) {
+	const rows = this.runStatementGetAll(`
+		SELECT DISTINCT title
+		FROM tiddlers
+		WHERE bag_id IN (
+			SELECT bag_id
+			FROM bags
+			WHERE bag_name = $bag_name
+		)
+		ORDER BY title ASC
+	`,{
+		bag_name: bagname
+	});
+	return rows.map(value => value.title);
+};
+
+/*
 Get the titles of the tiddlers in a recipe. Returns an empty array for recipes that do not exist
 */
 SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipename) {
