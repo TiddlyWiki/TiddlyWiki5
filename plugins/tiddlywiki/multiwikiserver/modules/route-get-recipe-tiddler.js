@@ -23,15 +23,15 @@ exports.handler = function(request,response,state) {
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
-		tiddler = recipe_name === recipe_name_2 && $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
-	if(recipe_name === recipe_name_2 && tiddler) {
+		tiddlerInfo = recipe_name === recipe_name_2 && $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
+	if(recipe_name === recipe_name_2 && tiddlerInfo) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 				var tiddlerFields = {},
 				knownFields = [
 					"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
 				];
-			$tw.utils.each(tiddler,function(value,name) {
+			$tw.utils.each(tiddlerInfo.tiddler,function(value,name) {
 				if(knownFields.indexOf(name) !== -1) {
 					tiddlerFields[name] = value;
 				} else {
@@ -40,7 +40,7 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.revision = "0";
-			tiddlerFields.bag = "bag-gamma";
+			tiddlerFields.bag = tiddlerInfo.bag_name;
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 		} else {

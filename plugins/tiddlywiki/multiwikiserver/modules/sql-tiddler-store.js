@@ -324,32 +324,42 @@ SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
 	}
 };
 
+/*
+Returns {bag_name:, tiddler: {fields}}
+*/
 SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
-	const rows = this.runStatementGetAll(`
-		SELECT field_name, field_value
-		FROM fields
-		WHERE tiddler_id = (
-			SELECT t.tiddler_id
-			FROM bags AS b
-			INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
-			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
-			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
-			WHERE r.recipe_name = $recipe_name
-			AND t.title = $title
-			ORDER BY rb.position DESC
-		)
+	const rowTiddlerId = this.runStatementGet(`	
+		SELECT t.tiddler_id, b.bag_name
+		FROM bags AS b
+		INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
+		INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
+		INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+		WHERE r.recipe_name = $recipe_name
+		AND t.title = $title
+		ORDER BY rb.position DESC
 	`,{
 		title: title,
 		recipe_name: recipename
 	});
-	if(rows.length === 0) {
+	if(!rowTiddlerId) {
 		return null;
-	} else {
-		return rows.reduce((accumulator,value) => {
-			accumulator[value["field_name"]] = value.field_value;
-			return accumulator;
-		},{title: title});	
 	}
+	// Get the fields
+	const rows = this.runStatementGetAll(`
+		SELECT field_name, field_value
+		FROM fields
+		WHERE tiddler_id = $tiddler_id
+	`,{
+		tiddler_id: rowTiddlerId.tiddler_id,
+		recipe_name: recipename
+	});
+	return {
+		bag_name: rowTiddlerId.bag_name,
+		tiddler: rows.reduce((accumulator,value) => {
+				accumulator[value["field_name"]] = value.field_value;
+				return accumulator;
+			},{title: title})
+	};
 };
 
 /*

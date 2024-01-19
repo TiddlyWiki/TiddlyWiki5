@@ -50,16 +50,16 @@ exports.handler = function(request,response,state) {
 		}
 		response.write(template.substring(0,markerPos + marker.length));
 		$tw.utils.each(titles,function(title) {
-			var tiddler = $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
-			if((tiddler.text || "").length > 10 * 1024 * 1024) {
-				response.write(JSON.stringify(Object.assign({},tiddler,{
+			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
+			if((tiddlerInfo.tiddler.text || "").length > 10 * 1024 * 1024) {
+				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
 					revision: "0",
 					bag: "bag-gamma",
 					text: undefined,
 					_canonical_uri: `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${title}`
 				})));
 			} else {
-				response.write(JSON.stringify(Object.assign({},tiddler,{
+				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
 					revision: "0",
 					bag: "bag-gamma"
 				})));
