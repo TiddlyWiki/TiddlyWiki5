@@ -47,40 +47,42 @@ title: MultiWikiServer Administration
 \end createRecipeButton
 
 <div class="mws-admin-container">
-<h1>Recipes</h1>
-<ul>
-<$list filter="[prefix[$:/state/multiwikiserver/recipes/]]">
-<li>
-<a href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-<$text text={{!!recipe-name}}/>
-</a>
-<ol>
-<$list filter="[list<currentTiddler>]">
-<li>
-<$text text=<<currentTiddler>>/>
-</li>
-</$list>
-</ol>
-</li>
-</$list>
-</ul>
-<div>
-<<createRecipeButton>>
-</div>
-<div>
-Higher numbered bags take priority if a tiddler with the same title is in more than one bag
-</div>
-<h1>Bags</h1>
-<ul>
-<$list filter="[prefix[$:/state/multiwikiserver/bags/]]">
-<li>
-<a href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-<$text text={{!!bag-name}}/>
-</a>
-</li>
-</$list>
-</ul>
-<div>
-<<createBagButton>>
-</div>
+	<h1>Recipes</h1>
+	<ul>
+		<$list filter="[prefix[$:/state/multiwikiserver/recipes/]]">
+			<li>
+				<a href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+					<img src=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
+					<$text text={{!!recipe-name}}/>
+				</a>
+				<ol>
+					<$list filter="[list<currentTiddler>]">
+						<li>
+							<$text text=<<currentTiddler>>/>
+						</li>
+					</$list>
+				</ol>
+			</li>
+		</$list>
+	</ul>
+	<div>
+		<<createRecipeButton>>
+	</div>
+	<div>
+		Higher numbered bags take priority if a tiddler with the same title is in more than one bag
+	</div>
+	<h1>Bags</h1>
+	<ul>
+		<$list filter="[prefix[$:/state/multiwikiserver/bags/]]">
+			<li>
+				<a href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+					<img src=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
+					<$text text={{!!bag-name}}/>
+				</a>
+			</li>
+		</$list>
+	</ul>
+	<div>
+		<<createBagButton>>
+	</div>
 </div>

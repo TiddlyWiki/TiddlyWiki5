@@ -10,3 +10,8 @@ Styles specific to the full screen layout
 .mws-admin-layout {
 	padding: 1rem;
 }
+
+.mws-favicon {
+	max-width: 2em;
+	max-height: 2em;
+}
