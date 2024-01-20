@@ -387,22 +387,20 @@ Get the titles of the tiddlers in a recipe. Returns an empty array for recipes t
 */
 SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipename) {
 	const rows = this.runStatementGetAll(`
-		SELECT DISTINCT title
-		FROM tiddlers
-		WHERE bag_id IN (
-			SELECT bag_id
-			FROM recipe_bags
-			WHERE recipe_id = (
-				SELECT recipe_id
-				FROM recipes
-				WHERE recipe_name = $recipe_name
-			)
+		SELECT title, bag_name
+		FROM (
+			SELECT t.title, b.bag_name, MAX(rb.position) AS position
+			FROM bags AS b
+			INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
+			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
+			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+			WHERE r.recipe_name = $recipe_name
+			GROUP BY title
 		)
-		ORDER BY title ASC
 	`,{
 		recipe_name: recipename
 	});
-	return rows.map(value => value.title);
+	return rows;
 };
 
 /*

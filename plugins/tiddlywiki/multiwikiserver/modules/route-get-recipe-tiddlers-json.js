@@ -24,12 +24,12 @@ exports.handler = function(request,response,state) {
 		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]);
 	if(recipe_name === recipe_name_2) {
 		// Get the tiddlers in the recipe
-		var titles = $tw.sqlTiddlerStore.getRecipeTiddlers(recipe_name);
+		var recipeTiddlers = $tw.sqlTiddlerStore.getRecipeTiddlers(recipe_name);
 		// Get a skinny version of each tiddler
 		var tiddlers = [];
-		$tw.utils.each(titles,function(title) {
-			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
-			tiddlers.push(Object.assign({},tiddlerInfo.tiddler,{text: undefined, revision: "0", bag: "bag-gamma"}));
+		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
+			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
+			tiddlers.push(Object.assign({},tiddlerInfo.tiddler,{text: undefined, revision: "0", bag: recipeTiddlerInfo.bag_name}));
 		});
 		var text = JSON.stringify(tiddlers);
 		state.sendResponse(200,{"Content-Type": "application/json"},text,"utf8");

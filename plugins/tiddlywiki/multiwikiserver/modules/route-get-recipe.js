@@ -26,7 +26,7 @@ exports.handler = function(request,response,state) {
 			"Content-Type": "text/html"
 		});
 		// Get the tiddlers in the recipe
-		var titles = $tw.sqlTiddlerStore.getRecipeTiddlers(recipe_name);
+		var recipeTiddlers = $tw.sqlTiddlerStore.getRecipeTiddlers(recipe_name);
 		// Render the template
 		var template = $tw.sqlTiddlerStore.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
 			variables: {
@@ -49,19 +49,19 @@ exports.handler = function(request,response,state) {
 			throw new Error("Cannot find tiddler store in template");
 		}
 		response.write(template.substring(0,markerPos + marker.length));
-		$tw.utils.each(titles,function(title) {
-			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
+		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
+			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			if((tiddlerInfo.tiddler.text || "").length > 10 * 1024 * 1024) {
 				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
 					revision: "0",
-					bag: "bag-gamma",
+					bag: recipeTiddlerInfo.bag_name,
 					text: undefined,
 					_canonical_uri: `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${title}`
 				})));
 			} else {
 				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
 					revision: "0",
-					bag: "bag-gamma"
+					bag: recipeTiddlerInfo.bag_name
 				})));
 			}
 			response.write(",")
