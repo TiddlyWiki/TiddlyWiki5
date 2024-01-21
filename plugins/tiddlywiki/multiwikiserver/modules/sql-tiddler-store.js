@@ -32,7 +32,7 @@ SqlTiddlerStore.prototype.close = function() {
 SqlTiddlerStore.prototype.runStatement = function(sql,params) {
 	params = params || {};
 	const statement = this.db.prepare(sql);
-	statement.run(params);
+	return statement.run(params);
 };
 
 SqlTiddlerStore.prototype.runStatementGet = function(sql,params) {
@@ -81,14 +81,14 @@ SqlTiddlerStore.prototype.createTables = function() {
 	this.runStatements([`
 		-- Bags have names and access control settings
 		CREATE TABLE IF NOT EXISTS bags (
-			bag_id INTEGER PRIMARY KEY,
+			bag_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			bag_name TEXT UNIQUE,
 			accesscontrol TEXT
 		)
 	`,`
 		-- Recipes have names...
 		CREATE TABLE IF NOT EXISTS recipes (
-			recipe_id INTEGER PRIMARY KEY,
+			recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			recipe_name TEXT UNIQUE
 		)
 	`,`
@@ -104,7 +104,7 @@ SqlTiddlerStore.prototype.createTables = function() {
 	`,`
 		-- Tiddlers are contained in bags and have titles
 		CREATE TABLE IF NOT EXISTS tiddlers (
-			tiddler_id INTEGER PRIMARY KEY,
+			tiddler_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			bag_id INTEGER,
 			title TEXT,
 			FOREIGN KEY (bag_id) REFERENCES bags(bag_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -212,9 +212,12 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
 	});
 };
 
+/*
+Returns {tiddler_id:}
+*/
 SqlTiddlerStore.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
 	// Update the tiddlers table
-	this.runStatement(`
+	var info = this.runStatement(`
 		INSERT OR REPLACE INTO tiddlers (bag_id, title)
 		VALUES (
 			(SELECT bag_id FROM bags WHERE bag_name = $bag_name),
@@ -246,8 +249,14 @@ SqlTiddlerStore.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
 		bag_name: bagname,
 		field_values: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined}))
 	});
+	return {
+		tiddler_id: info.lastInsertRowid
+	}
 };
 
+/*
+Returns {tiddler_id:,bag_name:}
+*/
 SqlTiddlerStore.prototype.saveRecipeTiddler = function(tiddlerFields,recipename) {
 	// Find the topmost bag in the recipe
 	var row = this.runStatementGet(`
@@ -269,8 +278,11 @@ SqlTiddlerStore.prototype.saveRecipeTiddler = function(tiddlerFields,recipename)
 		recipe_name: recipename
 	});
 	// Save the tiddler to the topmost bag
-	this.saveBagTiddler(tiddlerFields,row.bag_name);
-	return row.bag_name;
+	var info = this.saveBagTiddler(tiddlerFields,row.bag_name);
+	return {
+		tiddler_id: info.tiddler_id,
+		bag_name: row.bag_name
+	};
 };
 
 SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {
@@ -300,9 +312,12 @@ SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {
 	});
 };
 
+/*
+returns {tiddler_id:,tiddler:}
+*/
 SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
 	const rows = this.runStatementGetAll(`
-		SELECT field_name, field_value
+		SELECT field_name, field_value, tiddler_id
 		FROM fields
 		WHERE tiddler_id = (
 			SELECT t.tiddler_id
@@ -317,15 +332,18 @@ SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
 	if(rows.length === 0) {
 		return null;
 	} else {
-		return rows.reduce((accumulator,value) => {
-			accumulator[value["field_name"]] = value.field_value;
-			return accumulator;
-		},{title: title});	
+		return {
+			tiddler_id: rows[0].tiddler_id,
+			tiddler: rows.reduce((accumulator,value) => {
+					accumulator[value["field_name"]] = value.field_value;
+					return accumulator;
+				},{title: title})
+		};
 	}
 };
 
 /*
-Returns {bag_name:, tiddler: {fields}}
+Returns {bag_name:, tiddler: {fields}, tiddler_id:}
 */
 SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 	const rowTiddlerId = this.runStatementGet(`	
@@ -356,6 +374,7 @@ SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 	});
 	return {
 		bag_name: rowTiddlerId.bag_name,
+		tiddler_id: rowTiddlerId.tiddler_id,
 		tiddler: rows.reduce((accumulator,value) => {
 				accumulator[value["field_name"]] = value.field_value;
 				return accumulator;

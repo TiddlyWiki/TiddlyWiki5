@@ -39,9 +39,9 @@ exports.handler = function(request,response,state) {
 	});
 	// Require the recipe names to match
 	if(recipe_name === recipe_name_2) {
-		var bag_name = $tw.sqlTiddlerStore.saveRecipeTiddler(fields,recipe_name);
+		var result = $tw.sqlTiddlerStore.saveRecipeTiddler(fields,recipe_name);
 		response.writeHead(204, "OK",{
-			Etag: "\"" + bag_name + "/" + encodeURIComponent(title) + "/" + 2222 + ":\"",
+			Etag: "\"" + result.bag_name + "/" + encodeURIComponent(title) + "/" + result.tiddler_id + ":\"",
 			"Content-Type": "text/plain"
 		});
 		response.end();

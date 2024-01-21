@@ -53,14 +53,14 @@ exports.handler = function(request,response,state) {
 			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			if((tiddlerInfo.tiddler.text || "").length > 10 * 1024 * 1024) {
 				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
-					revision: "0",
+					revision: "" + tiddlerInfo.tiddler_id,
 					bag: recipeTiddlerInfo.bag_name,
 					text: undefined,
 					_canonical_uri: `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${title}`
 				})));
 			} else {
 				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
-					revision: "0",
+					revision: "" + tiddlerInfo.tiddler_id,
 					bag: recipeTiddlerInfo.bag_name
 				})));
 			}

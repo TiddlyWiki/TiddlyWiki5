@@ -71,7 +71,7 @@ describe("SQL tiddler store", function() {
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-rho")).toEqual([ { title: 'Hello There', bag_name: 'bag-alpha' } ]);
 		expect(sqlTiddlerStore.getRecipeTiddlers("recipe-sigma")).toEqual([ { title: 'Hello There', bag_name: 'bag-gamma' } ]);
 		// Save a recipe tiddler
-		sqlTiddlerStore.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho");
+		expect(sqlTiddlerStore.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho")).toEqual({tiddler_id: 5, bag_name: 'bag-beta'});
 		expect(sqlTiddlerStore.getRecipeTiddler("More","recipe-rho").tiddler).toEqual({title: "More", text: "None"});
 		
 	});

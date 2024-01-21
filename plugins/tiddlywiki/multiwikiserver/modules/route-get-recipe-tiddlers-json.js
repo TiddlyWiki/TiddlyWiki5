@@ -29,7 +29,7 @@ exports.handler = function(request,response,state) {
 		var tiddlers = [];
 		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
 			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
-			tiddlers.push(Object.assign({},tiddlerInfo.tiddler,{text: undefined, revision: "0", bag: recipeTiddlerInfo.bag_name}));
+			tiddlers.push(Object.assign({},tiddlerInfo.tiddler,{text: undefined, revision: "" + tiddlerInfo.tiddler_id, bag: recipeTiddlerInfo.bag_name}));
 		});
 		var text = JSON.stringify(tiddlers);
 		state.sendResponse(200,{"Content-Type": "application/json"},text,"utf8");
