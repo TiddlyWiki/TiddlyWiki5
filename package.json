@@ -37,6 +37,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "better-sqlite3": "^9.2.2"
+    "better-sqlite3": "^9.3.0"
   }
 }
