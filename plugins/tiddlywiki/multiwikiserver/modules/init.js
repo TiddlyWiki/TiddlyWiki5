@@ -41,7 +41,6 @@ exports.startup = function() {
 	$tw.sqlTiddlerStore = new SqlTiddlerStore({
 		databasePath: databasePath
 	});
-	$tw.sqlTiddlerStore.createTables();
 	$tw.sqlTiddlerStore.updateAdminWiki();
 	// Create bags and recipes
 	$tw.sqlTiddlerStore.createBag("bag-alpha");
