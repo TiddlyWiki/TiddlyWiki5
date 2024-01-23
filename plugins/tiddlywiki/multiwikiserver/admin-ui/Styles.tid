@@ -99,11 +99,13 @@ Styles specific to the full screen layout
 }
 
 .mws-favicon {
+	object-fit: contain;
 	width: 4em;
 	max-height: 4em;
 }
 
 .mws-favicon-small {
+	object-fit: contain;
 	vertical-align: text-bottom;
 	width: 1em;
 	max-height: 1em;
