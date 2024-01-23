@@ -2,7 +2,6 @@
 	"description": "Multiple wiki client-server edition",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
 		"tiddlywiki/multiwikiserver"
 	],
