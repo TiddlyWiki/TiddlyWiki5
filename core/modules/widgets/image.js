@@ -43,6 +43,7 @@ ImageWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 ImageWidget.prototype.render = function(parent,nextSibling) {
+	var self = this;
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -118,6 +119,14 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.lazyLoading && tag === "img") {
 		domNode.setAttribute("loading",this.lazyLoading);
 	}
+	// Insert element
+	parent.insertBefore(domNode,nextSibling);
+	this.domNodes.push(domNode);
+	// Render children into a wrapper
+	this.childWrapper = this.document.createElement("span");
+	this.childWrapper.style.display = "none" ;
+	parent.insertBefore(this.childWrapper,nextSibling);
+	this.renderChildren(this.childWrapper,null);
 	// Add classes when the image loads or fails
 	$tw.utils.addClass(domNode,"tc-image-loading");
 	domNode.addEventListener("load",function() {
@@ -127,10 +136,9 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	domNode.addEventListener("error",function() {
 		$tw.utils.removeClass(domNode,"tc-image-loading");
 		$tw.utils.addClass(domNode,"tc-image-error");
+		self.childWrapper.style.display = "inline" ;
+		domNode.style.display = "none";
 	},false);
-	// Insert element
-	parent.insertBefore(domNode,nextSibling);
-	this.domNodes.push(domNode);
 };
 
 /*
@@ -142,10 +150,12 @@ ImageWidget.prototype.execute = function() {
 	this.imageWidth = this.getAttribute("width");
 	this.imageHeight = this.getAttribute("height");
 	this.imageClass = this.getAttribute("class");
-    	this.imageUsemap = this.getAttribute("usemap");
+	this.imageUsemap = this.getAttribute("usemap");
 	this.imageTooltip = this.getAttribute("tooltip");
 	this.imageAlt = this.getAttribute("alt");
 	this.lazyLoading = this.getAttribute("loading");
+	// Make the child widgets
+	this.makeChildWidgets();
 };
 
 /*

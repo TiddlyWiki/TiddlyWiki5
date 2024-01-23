@@ -51,7 +51,15 @@ title: MultiWikiServer Administration
 \whitespace trim
 <$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
 	<a class="mws-bag-pill-link" href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-		<$image source=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon-small"/>
+		<$image
+			source=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+			class="mws-favicon-small"
+		>
+			<$image
+				source="$:/MultiWikiServer/images/missing-favicon.png"
+				class="mws-favicon-small"
+			/>
+		</$image>
 		<span class="mws-bag-pill-label">
 			<$text text={{!!bag-name}}/>
 		</span>
@@ -64,7 +72,15 @@ title: MultiWikiServer Administration
 \whitespace trim
 <a class="mws-wiki-card" href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
 	<div class="mws-wiki-card-image">
-		<$image source=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
+		<$image
+			source=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+			class="mws-favicon"
+		>
+			<$image
+				source="$:/MultiWikiServer/images/missing-favicon.png"
+				class="mws-favicon"
+			/>
+		</$image>
 	</div>
 	<div class="mws-wiki-card-content">
 		<div class="mws-wiki-card-header">
