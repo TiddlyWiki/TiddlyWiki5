@@ -82,7 +82,7 @@ title: MultiWikiServer Administration
 			<%endif%>
 		</div>
 		<div class="mws-wiki-card-description">
-			<$transclude $tiddler=<<currentTiddler>> $mode="inline"/>
+			<$text text={{!!text}}/>
 		</div>
 	</div>
 </a>
