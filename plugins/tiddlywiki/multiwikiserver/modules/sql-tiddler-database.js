@@ -64,7 +64,8 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		-- Recipes have names...
 		CREATE TABLE IF NOT EXISTS recipes (
 			recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
-			recipe_name TEXT UNIQUE
+			recipe_name TEXT UNIQUE,
+			description TEXT
 		)
 	`,`
 		-- ...and recipes also have an ordered list of bags
@@ -139,23 +140,27 @@ SqlTiddlerDatabase.prototype.createBag = function(bagname) {
 	});
 };
 
+/*
+Returns array of {recipe_name:,description:}
+*/
 SqlTiddlerDatabase.prototype.listRecipes = function() {
 	const rows = this.runStatementGetAll(`
-		SELECT recipe_name
+		SELECT recipe_name, description
 		FROM recipes
 		ORDER BY recipe_name
 	`);
 	return rows;
 };
 
-SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames) {
+SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames,description) {
 	// Run the queries
 	this.runStatement(`
 		-- Create the entry in the recipes table if required
-		INSERT OR IGNORE INTO recipes (recipe_name)
-		VALUES ($recipe_name)
+		INSERT OR IGNORE INTO recipes (recipe_name, description)
+		VALUES ($recipe_name, $description)
 	`,{
-		recipe_name: recipename
+		recipe_name: recipename,
+		description: description
 	});
 	this.runStatement(`
 		-- Delete existing recipe_bags entries for this recipe
@@ -219,7 +224,7 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
 };
 
 /*
-Returns {tiddler_id:,bag_name:}
+Returns {tiddler_id:,bag_name:} or null if the recipe is empty
 */
 SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipename) {
 	// Find the topmost bag in the recipe
@@ -241,6 +246,9 @@ SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipena
 	`,{
 		recipe_name: recipename
 	});
+	if(!row) {
+		return null;
+	}
 	// Save the tiddler to the topmost bag
 	var info = this.saveBagTiddler(tiddlerFields,row.bag_name);
 	return {

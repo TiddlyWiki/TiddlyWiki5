@@ -23,7 +23,7 @@ adminWiki - reference to $tw.Wiki object into which entity state tiddlers should
 function SqlTiddlerStore(options) {
 	options = options || {};
 	this.adminWiki = options.adminWiki || $tw.wiki;
-	this.entityStateTiddlerPrefix = "$:/state/multiwikiserver/";
+	this.entityStateTiddlerPrefix = "_multiwikiserver/";
 	// Create the database
 	this.databasePath = options.databasePath || ":memory:";
 	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-database.js").SqlTiddlerDatabase;
@@ -57,7 +57,7 @@ SqlTiddlerStore.prototype.updateAdminWiki = function() {
 		this.saveEntityStateTiddler({
 			title: "recipes/" + recipeInfo.recipe_name,
 			"recipe-name": recipeInfo.recipe_name,
-			text: "",
+			text: recipeInfo.description,
 			list: $tw.utils.stringifyList(this.getRecipeBags(recipeInfo.recipe_name).map(bag_name => {
 				return this.entityStateTiddlerPrefix + "bags/" + bag_name;
 			}))
@@ -110,12 +110,14 @@ SqlTiddlerStore.prototype.listRecipes = function() {
 	return this.sqlTiddlerDatabase.listRecipes();
 };
 
-SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
-	this.sqlTiddlerDatabase.createRecipe(recipename,bagnames);
+SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,description) {
+	bagnames = bagnames || [];
+	description = description || "";
+	this.sqlTiddlerDatabase.createRecipe(recipename,bagnames,description);
 	this.saveEntityStateTiddler({
 		title: "recipes/" + recipename,
 		"recipe-name": recipename,
-		text: "",
+		text: description,
 		list: $tw.utils.stringifyList(bagnames.map(bag_name => {
 			return this.entityStateTiddlerPrefix + "bags/" + bag_name;
 		}))
@@ -162,12 +164,16 @@ Returns {bag_name:, tiddler: {fields}, tiddler_id:}
 */
 SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 	var tiddlerInfo = this.sqlTiddlerDatabase.getRecipeTiddler(title,recipename);
-	return Object.assign(
-		{},
-		tiddlerInfo,
-		{
-			tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,tiddlerInfo.bag_name,recipename)
-		});
+	if(tiddlerInfo) {
+		return Object.assign(
+			{},
+			tiddlerInfo,
+			{
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,tiddlerInfo.bag_name,recipename)
+			});
+	} else {
+		return null;
+	}
 };
 
 /*

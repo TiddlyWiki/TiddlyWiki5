@@ -53,10 +53,6 @@ Styles specific to the full screen layout
 
 }
 
-.mws-wiki-card-extra {
-
-}
-
 .mws-vertical-list {
 	list-style: none;
 	padding: 0;
@@ -79,6 +75,11 @@ Styles specific to the full screen layout
 	padding: 0 0.25em;
 }
 
+.mws-bag-pill:hover {
+	background: <<colour foreground>>;
+	foreground: <<colour background>>;
+}
+
 .mws-bag-pill-topmost {
 	background: <<colour very-muted-foreground>>;
 }
@@ -87,17 +88,23 @@ Styles specific to the full screen layout
 	margin-left: 0.5em;
 }
 
+.mws-bag-pill-link {
+	text-decoration: none;
+	color: currentcolor;
+}
+
+.mws-favicon.tc-image-loading, .mws-favicon-small.tc-image-loading,
 .mws-favicon.tc-image-error, .mws-favicon-small.tc-image-error {
 	visibility: hidden;
 }
 
 .mws-favicon {
-	max-width: 4em;
+	width: 4em;
 	max-height: 4em;
 }
 
 .mws-favicon-small {
 	vertical-align: text-bottom;
-	max-width: 1em;
+	width: 1em;
 	max-height: 1em;
 }

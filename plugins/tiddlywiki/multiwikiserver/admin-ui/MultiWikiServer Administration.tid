@@ -50,10 +50,12 @@ title: MultiWikiServer Administration
 \procedure bagPill(element-tag:"span",is-topmost:"no")
 \whitespace trim
 <$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
-	<$image source=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon-small"/>
-	<span class="mws-bag-pill-label">
-		<$text text={{!!bag-name}}/>
-	</span>
+	<a class="mws-bag-pill-link" href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+		<$image source=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon-small"/>
+		<span class="mws-bag-pill-label">
+			<$text text={{!!bag-name}}/>
+		</span>
+	</a>
 </$genesis>
 \end
 
@@ -62,24 +64,25 @@ title: MultiWikiServer Administration
 \whitespace trim
 <a class="mws-wiki-card" href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
 	<div class="mws-wiki-card-image">
-		<img src=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
+		<$image source=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
 	</div>
 	<div class="mws-wiki-card-content">
 		<div class="mws-wiki-card-header">
 			<$text text={{!!recipe-name}}/>
 		</div>
 		<div class="mws-wiki-card-meta">
-			<ol class="mws-horizontal-list">
-				<$list filter="[list<currentTiddler>]" counter="counter">
-					<$transclude $variable="bagPill" is-topmost={{{ [<counter-last>match[yes]] }}} element-tag="li"/>
-				</$list>
-			</ol>
+			<%if [list<currentTiddler>] %>
+				<ol class="mws-horizontal-list">
+					<$list filter="[list<currentTiddler>]" counter="counter">
+						<$transclude $variable="bagPill" is-topmost={{{ [<counter-last>match[yes]] }}} element-tag="li"/>
+					</$list>
+				</ol>
+			<%else%>
+				(no bags defined)
+			<%endif%>
 		</div>
 		<div class="mws-wiki-card-description">
-			DDDDDD
-		</div>
-		<div class="mws-wiki-card-extra">
-			Additional Details
+			<$transclude $tiddler=<<currentTiddler>> $mode="inline"/>
 		</div>
 	</div>
 </a>
@@ -91,7 +94,7 @@ title: MultiWikiServer Administration
 		These are the wikis available on this server. Click on a wiki to visit it in a new browser tab.
 	</p>
 	<ul class="mws-vertical-list">
-		<$list filter="[prefix[$:/state/multiwikiserver/recipes/]]">
+		<$list filter="[prefix[_multiwikiserver/recipes/]]">
 			<li>
 				<<wikiCard>>
 			</li>
@@ -105,7 +108,7 @@ title: MultiWikiServer Administration
 	</div>
 	<h1>Bags</h1>
 	<ul class="mws-vertical-list">
-		<$list filter="[prefix[$:/state/multiwikiserver/bags/]]">
+		<$list filter="[prefix[_multiwikiserver/bags/]]">
 			<li>
 				<<bagPill>>
 			</li>
