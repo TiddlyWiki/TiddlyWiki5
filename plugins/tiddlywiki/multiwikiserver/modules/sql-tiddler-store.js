@@ -31,6 +31,7 @@ function SqlTiddlerStore(options) {
 		databasePath: this.databasePath
 	});
 	this.sqlTiddlerDatabase.createTables();
+	this.updateAdminWiki();
 }
 
 SqlTiddlerStore.prototype.close = function() {
