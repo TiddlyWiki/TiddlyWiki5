@@ -8,6 +8,7 @@ Higher level functions to perform basic tiddler operations with a sqlite3 databa
 This class is largely a wrapper for the sql-tiddler-database.js class, adding the following functionality:
 
 * Synchronising bag and recipe names to the admin wiki
+* Handling _canonical_uri tiddlers
 
 \*/
 
@@ -57,6 +58,30 @@ SqlTiddlerStore.prototype.updateAdminWiki = function() {
 			"recipe-name": recipeInfo.recipe_name,
 			text: "",
 			list: $tw.utils.stringifyList(this.getRecipeBags(recipeInfo.recipe_name))
+		});
+	}
+};
+
+/*
+Given tiddler fields, tiddler_id and a bagname, return the tiddler fields after the following process:
+- If the text field is over a threshold, modify the tiddler to use _canonical_uri
+- Apply the tiddler_id as the revision field
+- Apply the bag_name as the bag field
+*/
+SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddler_id,bag_name,recipe_name) {
+	if((tiddlerFields.text || "").length > 10 * 1024 * 1024) {
+		return Object.assign({},tiddlerFields,{
+			revision: "" + tiddler_id,
+			bag: bag_name,
+			text: undefined,
+			_canonical_uri: recipe_name
+				? `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${title}`
+				: `/wiki/${bag_name}/bags/${bag_name}/tiddlers/${title}`
+		});
+	} else {
+		return Object.assign({},tiddlerFields,{
+			revision: "" + tiddler_id,
+			bag: bag_name
 		});
 	}
 };
@@ -114,14 +139,30 @@ SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {
 returns {tiddler_id:,tiddler:}
 */
 SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
-	return this.sqlTiddlerDatabase.getBagTiddler(title,bagname);
+	var tiddlerInfo = this.sqlTiddlerDatabase.getBagTiddler(title,bagname);
+	if(tiddlerInfo) {
+		return Object.assign(
+			{},
+			tiddlerInfo,
+			{
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bagname,null)
+			});	
+	} else {
+		return null;
+	}
 };
 
 /*
 Returns {bag_name:, tiddler: {fields}, tiddler_id:}
 */
 SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
-	return this.sqlTiddlerDatabase.getRecipeTiddler(title,recipename);
+	var tiddlerInfo = this.sqlTiddlerDatabase.getRecipeTiddler(title,recipename);
+	return Object.assign(
+		{},
+		tiddlerInfo,
+		{
+			tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,tiddlerInfo.bag_name,recipename)
+		});
 };
 
 /*

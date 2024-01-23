@@ -50,20 +50,7 @@ exports.handler = function(request,response,state) {
 		}
 		response.write(template.substring(0,markerPos + marker.length));
 		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
-			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
-			if((tiddlerInfo.tiddler.text || "").length > 10 * 1024 * 1024) {
-				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
-					revision: "" + tiddlerInfo.tiddler_id,
-					bag: recipeTiddlerInfo.bag_name,
-					text: undefined,
-					_canonical_uri: `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${title}`
-				})));
-			} else {
-				response.write(JSON.stringify(Object.assign({},tiddlerInfo.tiddler,{
-					revision: "" + tiddlerInfo.tiddler_id,
-					bag: recipeTiddlerInfo.bag_name
-				})));
-			}
+			response.write(JSON.stringify($tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name).tiddler));
 			response.write(",")
 		});
 		response.write(JSON.stringify({title: "$:/config/tiddlyweb/host",text: "$protocol$//$host$$pathname$/"}));

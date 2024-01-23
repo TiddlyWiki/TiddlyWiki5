@@ -39,8 +39,6 @@ exports.handler = function(request,response,state) {
 					tiddlerFields.fields[name] = value;
 				}
 			});
-			tiddlerFields.revision = "" + result.tiddler_id;
-			tiddlerFields.bag = bag_name;
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 		} else {
