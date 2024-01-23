@@ -50,11 +50,11 @@ exports.handler = function(request,response,state) {
 		}
 		response.write(template.substring(0,markerPos + marker.length));
 		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
-			response.write(JSON.stringify($tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name).tiddler));
-			response.write(",")
+			response.write(JSON.stringify($tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name).tiddler).replace(/</g,"\\u003c"));
+			response.write(",\n")
 		});
 		response.write(JSON.stringify({title: "$:/config/tiddlyweb/host",text: "$protocol$//$host$$pathname$/"}));
-		response.write(",")
+		response.write(",\n")
 		response.write(template.substring(markerPos + marker.length))
 		// Finish response
 		response.end();
