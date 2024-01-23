@@ -5,14 +5,15 @@ description: Admin Layout
 icon: $:/favicon.ico
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
+
 <div class="mws-admin-layout">
-<!-- The next DIV is needed for the Jasmine test runner to know that the page has loaded -->
-<div class="tc-site-title">TiddlyWiki5</div>
-{{MultiWikiServer Administration}}
-<div class="mws-admin-layout-controls">
-<$button>
-<$action-setfield $tiddler="$:/layout" text="$:/core/ui/PageTemplate"/>
-Switch to TiddlyWiki default user interface
-</$button>
-</div>
+	<!-- The next DIV is needed for the Jasmine test runner to know that the page has loaded -->
+	<div class="tc-site-title">TiddlyWiki5</div>
+	{{MultiWikiServer Administration}}
+	<div class="mws-admin-layout-controls">
+		<$button>
+			<$action-setfield $tiddler="$:/layout" text="$:/core/ui/PageTemplate"/>
+			Switch to TiddlyWiki default user interface
+		</$button>
+	</div>
 </div>

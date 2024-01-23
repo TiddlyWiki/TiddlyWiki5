@@ -11,7 +11,93 @@ Styles specific to the full screen layout
 	padding: 1rem;
 }
 
+
+.mws-wiki-card {
+	display: flex;
+	margin: 1em 0;
+	width: 100%;
+	text-decoration: none;
+	color: <<colour foreground>>;
+	background: <<colour background>>;
+	border-radius: 0.28571429rem;
+	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+	padding: 0.5em 0.5em 0.5em 1em;
+}
+
+
+.mws-wiki-card:hover {
+	background: <<colour tiddler-info-background>>;
+	color: <<colour foreground>>;
+}
+
+.mws-wiki-card-image {
+	display: flex;
+	align-items: center;
+}
+
+.mws-wiki-card-content {
+	padding-left: 1em;
+}
+
+.mws-wiki-card-header {
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 0 0 0.25em 0;
+}
+
+.mws-wiki-card-meta {
+	color: <<colour muted-foreground>>;
+}
+
+.mws-wiki-card-description {
+
+}
+
+.mws-wiki-card-extra {
+
+}
+
+.mws-vertical-list {
+	list-style: none;
+	padding: 0;
+}
+
+.mws-horizontal-list {
+	list-style: none;
+	padding: 0;
+}
+
+.mws-horizontal-list > li {
+	display: inline-block;
+}
+
+.mws-bag-pill {
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
+	margin-right: 0.5em;
+	border-radius: 0.25em;
+	padding: 0 0.25em;
+}
+
+.mws-bag-pill-topmost {
+	background: <<colour very-muted-foreground>>;
+}
+
+.mws-bag-pill .mws-bag-pill-label {
+	margin-left: 0.5em;
+}
+
+.mws-favicon.tc-image-error, .mws-favicon-small.tc-image-error {
+	visibility: hidden;
+}
+
 .mws-favicon {
-	max-width: 2em;
-	max-height: 2em;
+	max-width: 4em;
+	max-height: 4em;
+}
+
+.mws-favicon-small {
+	vertical-align: text-bottom;
+	max-width: 1em;
+	max-height: 1em;
 }

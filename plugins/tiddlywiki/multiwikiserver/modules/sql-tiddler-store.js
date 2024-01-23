@@ -57,7 +57,9 @@ SqlTiddlerStore.prototype.updateAdminWiki = function() {
 			title: "recipes/" + recipeInfo.recipe_name,
 			"recipe-name": recipeInfo.recipe_name,
 			text: "",
-			list: $tw.utils.stringifyList(this.getRecipeBags(recipeInfo.recipe_name))
+			list: $tw.utils.stringifyList(this.getRecipeBags(recipeInfo.recipe_name).map(bag_name => {
+				return this.entityStateTiddlerPrefix + "bags/" + bag_name;
+			}))
 		});
 	}
 };
@@ -113,7 +115,9 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames) {
 		title: "recipes/" + recipename,
 		"recipe-name": recipename,
 		text: "",
-		list: $tw.utils.stringifyList(bagnames)
+		list: $tw.utils.stringifyList(bagnames.map(bag_name => {
+			return this.entityStateTiddlerPrefix + "bags/" + bag_name;
+		}))
 	});
 };
 

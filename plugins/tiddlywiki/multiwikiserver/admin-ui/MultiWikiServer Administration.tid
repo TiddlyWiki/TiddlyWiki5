@@ -46,22 +46,54 @@ title: MultiWikiServer Administration
 </$button><span class="tc-btn-text"><$text text="Create a new recipe:"/></span><$edit-text tiddler="$:/state/NewRecipeName" tag="input"/>
 \end createRecipeButton
 
+<!-- Expects currentTiddler to be the title of a bag entity state tiddler -->
+\procedure bagPill(element-tag:"span",is-topmost:"no")
+\whitespace trim
+<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
+	<$image source=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon-small"/>
+	<span class="mws-bag-pill-label">
+		<$text text={{!!bag-name}}/>
+	</span>
+</$genesis>
+\end
+
+<!-- Expects currentTiddler to be the title of a recipe entity state tiddler -->
+\procedure wikiCard()
+\whitespace trim
+<a class="mws-wiki-card" href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+	<div class="mws-wiki-card-image">
+		<img src=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
+	</div>
+	<div class="mws-wiki-card-content">
+		<div class="mws-wiki-card-header">
+			<$text text={{!!recipe-name}}/>
+		</div>
+		<div class="mws-wiki-card-meta">
+			<ol class="mws-horizontal-list">
+				<$list filter="[list<currentTiddler>]" counter="counter">
+					<$transclude $variable="bagPill" is-topmost={{{ [<counter-last>match[yes]] }}} element-tag="li"/>
+				</$list>
+			</ol>
+		</div>
+		<div class="mws-wiki-card-description">
+			DDDDDD
+		</div>
+		<div class="mws-wiki-card-extra">
+			Additional Details
+		</div>
+	</div>
+</a>
+\end
+
 <div class="mws-admin-container">
-	<h1>Recipes</h1>
-	<ul>
+	<h1>Wikis</h1>
+	<p>
+		These are the wikis available on this server. Click on a wiki to visit it in a new browser tab.
+	</p>
+	<ul class="mws-vertical-list">
 		<$list filter="[prefix[$:/state/multiwikiserver/recipes/]]">
 			<li>
-				<a href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-					<img src=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
-					<$text text={{!!recipe-name}}/>
-				</a>
-				<ol>
-					<$list filter="[list<currentTiddler>]">
-						<li>
-							<$text text=<<currentTiddler>>/>
-						</li>
-					</$list>
-				</ol>
+				<<wikiCard>>
 			</li>
 		</$list>
 	</ul>
@@ -72,13 +104,10 @@ title: MultiWikiServer Administration
 		Higher numbered bags take priority if a tiddler with the same title is in more than one bag
 	</div>
 	<h1>Bags</h1>
-	<ul>
+	<ul class="mws-vertical-list">
 		<$list filter="[prefix[$:/state/multiwikiserver/bags/]]">
 			<li>
-				<a href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-					<img src=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico` class="mws-favicon"/>
-					<$text text={{!!bag-name}}/>
-				</a>
+				<<bagPill>>
 			</li>
 		</$list>
 	</ul>
