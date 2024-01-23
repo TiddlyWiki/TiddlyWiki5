@@ -89,6 +89,21 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 	}
 };
 
+
+SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag_name) {
+	// Clear out the bag
+	this.deleteAllTiddlersInBag(bag_name);
+	// Get the tiddlers
+	var path = require("path");
+	var tiddlersFromPath = $tw.loadTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,tiddler_files_path));
+	// Save the tiddlers
+	for(const tiddlersFromFile of tiddlersFromPath) {
+		for(const tiddler of tiddlersFromFile.tiddlers) {
+			this.saveBagTiddler(tiddler,bag_name);
+		}
+	}
+};
+
 SqlTiddlerStore.prototype.logTables = function() {
 	this.sqlTiddlerDatabase.logTables();
 };
@@ -188,6 +203,10 @@ Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns an emp
 */
 SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipename) {
 	return this.sqlTiddlerDatabase.getRecipeTiddlers(recipename);
+};
+
+SqlTiddlerStore.prototype.deleteAllTiddlersInBag = function(bagname) {
+	return this.sqlTiddlerDatabase.deleteAllTiddlersInBag(bagname);
 };
 
 /*

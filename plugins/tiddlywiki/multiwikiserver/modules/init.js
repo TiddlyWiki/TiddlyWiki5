@@ -41,6 +41,13 @@ exports.startup = function() {
 	$tw.sqlTiddlerStore = new SqlTiddlerStore({
 		databasePath: databasePath
 	});
+	// Create docs bag and recipe
+	$tw.sqlTiddlerStore.createBag("docs");
+	$tw.sqlTiddlerStore.createRecipe("docs",["docs"],"TiddlyWiki Documentation from https://tiddlywiki.com/");
+	$tw.sqlTiddlerStore.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"tw5.com/tiddlers"),"docs");
+	$tw.sqlTiddlerStore.createBag("dev-docs");
+	$tw.sqlTiddlerStore.createRecipe("dev-docs",["dev-docs"],"TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
+	$tw.sqlTiddlerStore.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"dev/tiddlers"),"dev-docs");
 	// Create bags and recipes
 	$tw.sqlTiddlerStore.createBag("bag-alpha");
 	$tw.sqlTiddlerStore.createBag("bag-beta");

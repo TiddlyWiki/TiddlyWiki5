@@ -395,6 +395,19 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
 	return rows;
 };
 
+SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bagname) {
+	this.runStatement(`
+		DELETE FROM tiddlers
+		WHERE bag_id IN (
+			SELECT bag_id
+			FROM bags
+			WHERE bag_name = $bag_name
+		)
+	`,{
+		bag_name: bagname
+	});
+};
+
 /*
 Get the names of the bags in a recipe. Returns an empty array for recipes that do not exist
 */
