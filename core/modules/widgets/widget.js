@@ -153,7 +153,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 		} else if(variable.isFunctionDefinition) {
 			// Function evaluations
 			params = self.resolveVariableParameters(variable.params,actualParams);
-			var variables = Object.create(null);
+			var variables = options.variables || Object.create(null);
 			// Apply default parameter values
 			$tw.utils.each(variable.params,function(param,index) {
 				if(param["default"]) {
