@@ -1,0 +1,22 @@
+title: Transclude/Parameterised/NestedParameters
+description: Parameterised transclusion with nested parameter widgets
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\procedure elephant(first:"one",second:"two")
+\parameters (third:"three")
+\parameters (fourth:"four")
+<$text text=<<first>>/>/<$text text=<<second>>/>/<$text text=<<third>>/>/<$text text=<<fourth>>/>
+\end elephant
+
+<<elephant>>
+-
+<<elephant "a" "b" "c" "d">>
+
++
+title: ExpectedResult
+
+<p>one/two/three/four</p><p>-a/b/c/d</p>

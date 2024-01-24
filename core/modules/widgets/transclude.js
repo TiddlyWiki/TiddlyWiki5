@@ -358,7 +358,7 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 };
 
 /*
-Fetch the value of a parameter
+Fetch the value of a parameter given either its name or index
 */
 TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
 	if(name in this.stringParametersByName) {
