@@ -110,7 +110,7 @@ title: MultiWikiServer Administration
 		These are the wikis available on this server. Click on a wiki to visit it in a new browser tab.
 	</p>
 	<ul class="mws-vertical-list">
-		<$list filter="[prefix[_multiwikiserver/recipes/]]">
+		<$list filter="[prefix[$:/state/MultiWikiServer/recipes/]]">
 			<li>
 				<<wikiCard>>
 			</li>
@@ -124,7 +124,7 @@ title: MultiWikiServer Administration
 	</div>
 	<h1>Bags</h1>
 	<ul class="mws-vertical-list">
-		<$list filter="[prefix[_multiwikiserver/bags/]]">
+		<$list filter="[prefix[$:/state/MultiWikiServer/bags/]]">
 			<li>
 				<<bagPill>>
 			</li>

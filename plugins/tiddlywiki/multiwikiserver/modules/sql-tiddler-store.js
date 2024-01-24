@@ -23,7 +23,7 @@ adminWiki - reference to $tw.Wiki object into which entity state tiddlers should
 function SqlTiddlerStore(options) {
 	options = options || {};
 	this.adminWiki = options.adminWiki || $tw.wiki;
-	this.entityStateTiddlerPrefix = "_multiwikiserver/";
+	this.entityStateTiddlerPrefix = "$:/state/MultiWikiServer/";
 	// Create the database
 	this.databasePath = options.databasePath || ":memory:";
 	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-database.js").SqlTiddlerDatabase;
