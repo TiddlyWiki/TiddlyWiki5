@@ -1,107 +1,169 @@
 title: MultiWikiServer Administration
 
-\procedure createBag(name)
-
-\procedure completion-createBag()
-\import [subfilter{$:/core/config/GlobalImportFilter}]
-	<$action-log msg="In completion-createBag"/>
-	<$action-log/>
-\end completion-createBag
-
-<$action-sendmessage
-	$message="tm-http-request"
-	url=`/wiki/$(name)$/bags/$(name)$`
-	method="PUT"
-	oncompletion=<<completion-createBag>>
-/>
+\procedure createBag(name,description)
+	\procedure completion-createBag()
+		\import [subfilter{$:/core/config/GlobalImportFilter}]
+		<$action-log msg="In completion-createBag"/>
+		<$action-log/>
+	\end completion-createBag
+	<$action-sendmessage
+		$message="tm-http-request"
+		url=`/wiki/$(name)$/bags/$(name)$`
+		method="PUT"
+		body=`{"description":"${ [<description>encodeuricomponent[]] }$"}`
+		oncompletion=<<completion-createBag>>
+	/>
 \end createBag
 
 \procedure createBagButton(name)
-<$button class="">
-<$transclude $variable="createBag" name={{$:/state/NewBagName}}/>
-{{$:/core/images/new-button}}
-</$button><span class="tc-btn-text"><$text text="Create a new bag:"/></span><$edit-text tiddler="$:/state/NewBagName" tag="input"/>
+	\whitespace trim
+	<form class="mws-form">
+		<div class="mws-form-heading">
+			<$text text="Create a new bag"/>
+		</div>
+		<div class="mws-form-fields">
+			<div class="mws-form-field">
+				<label class="mws-form-field-description">
+					Bag name
+				</label>
+				<$edit-text tiddler="$:/state/NewBagName" tag="input" placeholder="(bag name)" class="mws-form-field-input"/>
+			</div>
+			<div class="mws-form-field">
+				<label class="mws-form-field-description">
+					Bag description
+				</label>
+				<$edit-text tiddler="$:/state/NewBagDescription" tag="input" placeholder="(description)" class="mws-form-field-input"/>
+			</div>
+		</div>
+		<div class="mws-form-buttons">
+			<$button class="mws-form-button">
+				<$transclude
+					$variable="createBag"
+					name={{$:/state/NewBagName}}
+					description={{$:/state/NewBagDescription}}
+				/>
+				Create Bag
+			</$button>
+		</div>
+	</form>
 \end createBagButton
 
-\procedure createRecipe(name)
-
-\procedure completion-createRecipe()
-\import [subfilter{$:/core/config/GlobalImportFilter}]
-	<$action-log msg="In completion-createRecipe"/>
-	<$action-log/>
-\end completion-createRecipe
-
-<$action-sendmessage
-	$message="tm-http-request"
-	url=`/wiki/$(name)$/recipes/$(name)$`
-	method="PUT"
-	oncompletion=<<completion-createRecipe>>
-/>
+\procedure createRecipe(name,bag_names,description)
+	\procedure completion-createRecipe()
+		\import [subfilter{$:/core/config/GlobalImportFilter}]
+		<$action-log msg="In completion-createRecipe"/>
+		<$action-log/>
+	\end completion-createRecipe
+	\procedure emptyArray() []
+	\function createRecipeJson()
+		[<bag_names>enlist-input[]] :reduce[<accumulator>!match[]else<emptyArray>jsonset<index>,<currentTiddler>]
+	\end createRecipeJson
+	<$action-log message="Sending" body=<<createRecipeJson>>/>
+	<$action-sendmessage
+		$message="tm-http-request"
+		url=`/wiki/$(name)$/recipes/$(name)$`
+		method="PUT"
+		body=`{"bag_names":${ [<createRecipeJson>] }$,"description":"${ [<description>encodeuricomponent[]] }$"}`
+		oncompletion=<<completion-createRecipe>>
+	/>
 \end createRecipe
 
-\procedure createRecipeButton(name)
-<$button class="">
-<$transclude $variable="createRecipe" name={{$:/state/NewRecipeName}}/>
-{{$:/core/images/new-button}}
-</$button><span class="tc-btn-text"><$text text="Create a new recipe:"/></span><$edit-text tiddler="$:/state/NewRecipeName" tag="input"/>
+\procedure createRecipeButton()
+	\whitespace trim
+	<form class="mws-form">
+		<div class="mws-form-heading">
+			<$text text="Create a new recipe"/>
+		</div>
+		<div class="mws-form-fields">
+			<div class="mws-form-field">
+				<label class="mws-form-field-description">
+					Recipe name
+				</label>
+				<$edit-text tiddler="$:/state/NewRecipeName" tag="input" placeholder="(recipe name)" class="mws-form-field-input"/>
+			</div>
+			<div class="mws-form-field">
+				<label class="mws-form-field-description">
+					Bag names
+				</label>
+				<$edit-text tiddler="$:/state/NewRecipeBagNames" tag="input" placeholder="(space separated list of bags)"/>
+			</div>
+			<div class="mws-form-field">
+				<label class="mws-form-field-description">
+					Recipe description
+				</label>
+				<$edit-text tiddler="$:/state/NewRecipeDescription" tag="input" placeholder="(description)" class="mws-form-field-input"/>
+			</div>
+		</div>
+		<div class="mws-form-buttons">
+			<$button class="mws-form-button">
+				<$transclude
+					$variable="createRecipe"
+					name={{$:/state/NewRecipeName}}
+					bag_names={{$:/state/NewRecipeBagNames}}
+					description={{$:/state/NewRecipeDescription}}
+				/>
+				Create Recipe
+			</$button>
+		</div>
+	</form>
 \end createRecipeButton
 
 <!-- Expects currentTiddler to be the title of a bag entity state tiddler -->
 \procedure bagPill(element-tag:"span",is-topmost:"no")
-\whitespace trim
-<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
-	<a class="mws-bag-pill-link" href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-		<$image
-			source=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
-			class="mws-favicon-small"
-		>
+	\whitespace trim
+	<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
+		<a class="mws-bag-pill-link" href=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
 			<$image
-				source="$:/plugins/multiwikiserver/images/missing-favicon.png"
+				source=`/wiki/${ [{!!bag-name}encodeuricomponent[]] }$/bags/${ [{!!bag-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
 				class="mws-favicon-small"
-			/>
-		</$image>
-		<span class="mws-bag-pill-label">
-			<$text text={{!!bag-name}}/>
-		</span>
-	</a>
-</$genesis>
+			>
+				<$image
+					source="$:/plugins/multiwikiserver/images/missing-favicon.png"
+					class="mws-favicon-small"
+				/>
+			</$image>
+			<span class="mws-bag-pill-label">
+				<$text text={{!!bag-name}}/>
+			</span>
+		</a>
+	</$genesis>
 \end
 
 <!-- Expects currentTiddler to be the title of a recipe entity state tiddler -->
 \procedure wikiCard()
-\whitespace trim
-<a class="mws-wiki-card" href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
-	<div class="mws-wiki-card-image">
-		<$image
-			source=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
-			class="mws-favicon"
-		>
+	\whitespace trim
+	<a class="mws-wiki-card" href=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+		<div class="mws-wiki-card-image">
 			<$image
-				source="$:/plugins/multiwikiserver/images/missing-favicon.png"
+				source=`/wiki/${ [{!!recipe-name}encodeuricomponent[]] }$/recipes/${ [{!!recipe-name}encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
 				class="mws-favicon"
-			/>
-		</$image>
-	</div>
-	<div class="mws-wiki-card-content">
-		<div class="mws-wiki-card-header">
-			<$text text={{!!recipe-name}}/>
+			>
+				<$image
+					source="$:/plugins/multiwikiserver/images/missing-favicon.png"
+					class="mws-favicon"
+				/>
+			</$image>
 		</div>
-		<div class="mws-wiki-card-meta">
-			<%if [list<currentTiddler>] %>
-				<ol class="mws-horizontal-list">
-					<$list filter="[list<currentTiddler>]" counter="counter">
-						<$transclude $variable="bagPill" is-topmost={{{ [<counter-last>match[yes]] }}} element-tag="li"/>
-					</$list>
-				</ol>
-			<%else%>
-				(no bags defined)
-			<%endif%>
+		<div class="mws-wiki-card-content">
+			<div class="mws-wiki-card-header">
+				<$text text={{!!recipe-name}}/>
+			</div>
+			<div class="mws-wiki-card-meta">
+				<%if [list<currentTiddler>] %>
+					<ol class="mws-horizontal-list">
+						<$list filter="[list<currentTiddler>]" counter="counter">
+							<$transclude $variable="bagPill" is-topmost={{{ [<counter-last>match[yes]] }}} element-tag="li"/>
+						</$list>
+					</ol>
+				<%else%>
+					(no bags defined)
+				<%endif%>
+			</div>
+			<div class="mws-wiki-card-description">
+				<$text text={{!!text}}/>
+			</div>
 		</div>
-		<div class="mws-wiki-card-description">
-			<$text text={{!!text}}/>
-		</div>
-	</div>
-</a>
+	</a>
 \end
 
 <div class="mws-admin-container">
@@ -127,6 +189,7 @@ title: MultiWikiServer Administration
 		<$list filter="[prefix[$:/state/MultiWikiServer/bags/]]">
 			<li>
 				<<bagPill>>
+				<$text text={{!!text}}/>
 			</li>
 		</$list>
 	</ul>

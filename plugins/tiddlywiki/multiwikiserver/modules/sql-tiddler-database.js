@@ -6,6 +6,7 @@ module-type: library
 Low level SQL functions to store and retrieve tiddlers in a SQLite database.
 
 This class is intended to encapsulate all the SQL queries used to access the database.
+Validation is for the most part left to the caller
 
 \*/
 
@@ -58,7 +59,8 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		CREATE TABLE IF NOT EXISTS bags (
 			bag_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			bag_name TEXT UNIQUE,
-			accesscontrol TEXT
+			accesscontrol TEXT,
+			description TEXT
 		)
 	`,`
 		-- Recipes have names...
@@ -115,28 +117,30 @@ SqlTiddlerDatabase.prototype.logTables = function() {
 
 SqlTiddlerDatabase.prototype.listBags = function() {
 	const rows = this.runStatementGetAll(`
-		SELECT bag_name, accesscontrol
+		SELECT bag_name, accesscontrol, description
 		FROM bags
 		ORDER BY bag_name
 	`);
 	return rows;
 };
 
-SqlTiddlerDatabase.prototype.createBag = function(bagname) {
+SqlTiddlerDatabase.prototype.createBag = function(bagname,description) {
 	// Run the queries
 	this.runStatement(`
-		INSERT OR IGNORE INTO bags (bag_name, accesscontrol)
-		VALUES ($bag_name, '')
+		INSERT OR IGNORE INTO bags (bag_name, accesscontrol, description)
+		VALUES ($bag_name, '', '')
 	`,{
 		bag_name: bagname
 	});
 	this.runStatement(`
 		UPDATE bags
-		SET accesscontrol = $accesscontrol
+		SET accesscontrol = $accesscontrol,
+		description = $description 
 		WHERE bag_name = $bag_name
 	`,{
 		bag_name: bagname,
-		accesscontrol: "[some access control stuff]"
+		accesscontrol: "[some access control stuff]",
+		description: description
 	});
 };
 

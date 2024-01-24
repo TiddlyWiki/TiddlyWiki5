@@ -42,16 +42,16 @@ exports.startup = function() {
 		databasePath: databasePath
 	});
 	// Create docs bag and recipe
-	$tw.sqlTiddlerStore.createBag("docs");
+	$tw.sqlTiddlerStore.createBag("docs","TiddlyWiki Documentation from https://tiddlywiki.com/");
 	$tw.sqlTiddlerStore.createRecipe("docs",["docs"],"TiddlyWiki Documentation from https://tiddlywiki.com/");
 	$tw.sqlTiddlerStore.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"tw5.com/tiddlers"),"docs");
-	$tw.sqlTiddlerStore.createBag("dev-docs");
+	$tw.sqlTiddlerStore.createBag("dev-docs","TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
 	$tw.sqlTiddlerStore.createRecipe("dev-docs",["dev-docs"],"TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
 	$tw.sqlTiddlerStore.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"dev/tiddlers"),"dev-docs");
 	// Create bags and recipes
-	$tw.sqlTiddlerStore.createBag("bag-alpha");
-	$tw.sqlTiddlerStore.createBag("bag-beta");
-	$tw.sqlTiddlerStore.createBag("bag-gamma");
+	$tw.sqlTiddlerStore.createBag("bag-alpha","A test bag");
+	$tw.sqlTiddlerStore.createBag("bag-beta","Another test bag");
+	$tw.sqlTiddlerStore.createBag("bag-gamma","A further test bag");
 	$tw.sqlTiddlerStore.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"First wiki");
 	$tw.sqlTiddlerStore.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"],"Second Wiki");
 	$tw.sqlTiddlerStore.createRecipe("recipe-tau",["bag-alpha"],"Third Wiki");

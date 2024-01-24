@@ -7,6 +7,7 @@ Higher level functions to perform basic tiddler operations with a sqlite3 databa
 
 This class is largely a wrapper for the sql-tiddler-database.js class, adding the following functionality:
 
+* Validating requests (eg bag and recipe name constraints)
 * Synchronising bag and recipe names to the admin wiki
 * Handling _canonical_uri tiddlers
 
@@ -34,6 +35,43 @@ function SqlTiddlerStore(options) {
 	this.updateAdminWiki();
 }
 
+/*
+Returns null if a bag/recipe name is valid, or a string error message if not
+*/
+SqlTiddlerStore.prototype.validateItemName = function(name) {
+	if(typeof name !== "string") {
+		return "Not a valid string";
+	}
+	if(name.length > 256) {
+		return "Too long";
+	}
+	if(!(/^[^\s\u00A0\x00-\x1F\x7F~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?]+$/g.test(name))) {
+		return "Invalid character(s)";
+	}
+	return null;
+};
+
+/*
+Returns null if the argument is an array of valid bag/recipe names, or a string error message if not
+*/
+SqlTiddlerStore.prototype.validateItemNames = function(names) {
+	if(!$tw.utils.isArray(names)) {
+		return "Not a valid array";
+	}
+	var errors = [];
+	for(const name of names) {
+		const result = this.validateItemName(name);
+		if(result) {
+			errors.push(result);
+		}
+	}
+	if(errors.length === 0) {
+		return null;
+	} else {
+		return errors.join("\n");
+	}
+};
+
 SqlTiddlerStore.prototype.close = function() {
 	this.sqlTiddlerDatabase.close();
 	this.sqlTiddlerDatabase = undefined;
@@ -49,7 +87,7 @@ SqlTiddlerStore.prototype.updateAdminWiki = function() {
 		this.saveEntityStateTiddler({
 			title: "bags/" + bagInfo.bag_name,
 			"bag-name": bagInfo.bag_name,
-			text: ""
+			text: bagInfo.description
 		});
 	}
 	// Update recipes
@@ -112,22 +150,42 @@ SqlTiddlerStore.prototype.listBags = function() {
 	return this.sqlTiddlerDatabase.listBags();
 };
 
-SqlTiddlerStore.prototype.createBag = function(bagname) {
-	this.sqlTiddlerDatabase.createBag(bagname);
+SqlTiddlerStore.prototype.createBag = function(bagname,description) {
+	console.log(`create bag method for ${bagname} with ${description}`)
+	console.log(`validation results are ${this.validateItemName(bagname)}`)
+	const validationBagName = this.validateItemName(bagname);
+	if(validationBagName) {
+		return {message: validationBagName};
+	}
+	this.sqlTiddlerDatabase.createBag(bagname,description);
 	this.saveEntityStateTiddler({
 		title: "bags/" + bagname,
 		"bag-name": bagname,
-		text: ""
+		text: description
 	});
+	return null;
 };
 
 SqlTiddlerStore.prototype.listRecipes = function() {
 	return this.sqlTiddlerDatabase.listRecipes();
 };
 
+/*
+Returns null on success, or {message:} on error
+*/
 SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,description) {
+	console.log(`create recipe method for ${recipename} with ${JSON.stringify(bagnames)}`)
+	console.log(`validation results are ${this.validateItemName(recipename)} and ${this.validateItemNames(bagnames)}`)
 	bagnames = bagnames || [];
 	description = description || "";
+	const validationRecipeName = this.validateItemName(recipename);
+	if(validationRecipeName) {
+		return {message: validationRecipeName};
+	}
+	const validationBagNames = this.validateItemNames(bagnames);
+	if(validationBagNames) {
+		return {message: validationBagNames};
+	}
 	this.sqlTiddlerDatabase.createRecipe(recipename,bagnames,description);
 	this.saveEntityStateTiddler({
 		title: "recipes/" + recipename,
@@ -137,6 +195,7 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,descriptio
 			return this.entityStateTiddlerPrefix + "bags/" + bag_name;
 		}))
 	});
+	return null;
 };
 
 /*
