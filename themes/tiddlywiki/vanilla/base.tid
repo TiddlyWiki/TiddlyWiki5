@@ -1589,7 +1589,7 @@ html body.tc-body.tc-single-tiddler-window {
 	grid-template-areas:
 		"toolbar toolbar"
 		"editor preview";
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: repeat(2, minmax(0px, 1fr));
 	grid-template-rows: auto 1fr;
 }
 
