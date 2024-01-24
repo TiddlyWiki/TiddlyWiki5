@@ -1,6 +1,16 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-bags
 
-! Bag <$text text={{{ [<bag-name>]}}}/>
+! <$image
+	source=`/wiki/${ [<bag-name>encodeuricomponent[]] }$/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+	class="mws-favicon-small"
+	width="32px"
+>
+	<$image
+		source="$:/plugins/multiwikiserver/images/missing-favicon.png"
+		class="mws-favicon-small"
+		width="32px"
+	/>
+</$image> Bag <$text text={{{ [<bag-name>]}}}/>
 
 <ul>
 <$list filter="[<bag-titles>jsonget[]sort[]]">
