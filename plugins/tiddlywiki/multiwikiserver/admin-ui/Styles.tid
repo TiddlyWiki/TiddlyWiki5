@@ -1,4 +1,4 @@
-title: $:/MultiWikiServer/Styles
+title: $:/plugins/multiwikiserver/Styles
 tags: $:/tags/Stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
