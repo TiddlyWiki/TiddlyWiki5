@@ -5,7 +5,6 @@ title: $:/snippets/paletteswitcher
 
 \define catchActions()
 <$action-setfield $tiddler=<<palette>> $field=text text=<<navigateTo>>/>
-
 <$list filter="[<config>!is[blank]]">
 	<$action-setfield $tiddler=<<config>> text=<<navigateTo>>/>
 </$filter>
@@ -19,6 +18,8 @@ title: $:/snippets/paletteswitcher
 					<div class=<<class>> >
 						<$link to={{!!title}}>
 							''<$view field="name" format="text"/>''
+							&#32;-&#32;
+							<$view field="color-scheme" format="text"/>
 							&#32;-&#32;
 							<$view field="description" format="text"/>
 							{{||$:/snippets/currpalettepreview}}
