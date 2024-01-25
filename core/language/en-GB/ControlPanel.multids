@@ -70,7 +70,7 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: hide editor
 Palette/Picker/Prompt: The following settings will be used to switch between light and dark palettes.<br><ul><li>The defaults can be changed using the palette {{$:/core/images/palette|16px}} button</li><li>Select a palette-preview to activate it.</li><li>Automatic selection can be configured using [[custom actions|DarkLightChangeActions]]. See: [[DarkLightChangeActions|https://tiddlywiki.com/#DarkLightChangeActions]]</li></ul>
 Palette/Picker/Enable: Enable Light/Dark Mode Handling
-Palette/Picker/Heading: Automatic Light/Dark Mode Configuraton
+Palette/Picker/Heading: Light/Dark Mode Configuraton
 Palette/Picker/ShowAllPalettes: Show all palettes
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
