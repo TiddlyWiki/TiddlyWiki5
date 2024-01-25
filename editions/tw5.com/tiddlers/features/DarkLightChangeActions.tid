@@ -4,9 +4,9 @@ tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
 
-\procedure createLightDarkSwitcherTitle() _/startup/light-dark/detection
+\procedure lightDarkSwitcherTitle() _/startup/light-dark/detection
 
-\procedure startupLightDarkTemplate()
+\procedure startupLightDarkActionTemplate()
 <$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
 	<$let default={{{ [<dark-mode>match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
 		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
@@ -15,19 +15,18 @@ type: text/vnd.tiddlywiki
 \end
 
 \procedure createLightDarkSwitcher()
-<% if [<createLightDarkSwitcherTitle>!has[text]] %>
+<% if [<lightDarkSwitcherTitle>!has[text]] %>
 <$action-createtiddler
-  $basetitle=<<createLightDarkSwitcherTitle>> 
-  text=<<startupLightDarkTemplate>>
-  caption= "{{$:/language/ControlPanel/Palette/Config/Detection/Caption}}"
-  code-body= "yes"
-  tags= "$:/tags/DarkLightChangeActions"
+	$basetitle=<<lightDarkSwitcherTitle>>
+	text=<<startupLightDarkActionTemplate>>
+	caption= "{{$:/language/ControlPanel/Palette/Config/Detection/Caption}}"
+	code-body= "yes"
+	tags= "$:/tags/DarkLightChangeActions"
 />
-<$action-navigate $to=<<createLightDarkSwitcherTitle>>/>
+<$action-navigate $to=<<lightDarkSwitcherTitle>>/>
 <% else %>
-<$action-navigate $to=<<createLightDarkSwitcherTitle>>/>
+<$action-navigate $to=<<lightDarkSwitcherTitle>>/>
 <% endif %>
-
 \end
 
 <<.from-version "5.3.4">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
@@ -53,7 +52,7 @@ The following variable is defined for all actions DarkLightChangeActions
 
 The following example defines the $:/palette tiddler based on the dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> -- The tag-pill dropdown can be used to see all possible palette tiddlers.
 
-<$button actions=<<createLightDarkSwitcher>> >Create <<createLightDarkSwitcherTitle>> tiddler</$button>
+<$button actions=<<createLightDarkSwitcher>> >Create <<lightDarkSwitcherTitle>> tiddler</$button>
 
 ```
 title: _/startup/light-dark/detection
@@ -62,4 +61,4 @@ code-body: yes
 tags: $:/tags/DarkLightChangeActions
 ```
 
-<pre><code><$transclude $variable="startupLightDarkTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>
+<pre><code><$transclude $variable="startupLightDarkActionTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>

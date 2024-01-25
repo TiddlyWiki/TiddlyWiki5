@@ -57,8 +57,8 @@ LayoutSwitcher/Caption: Layout
 LoadedModules/Caption: Loaded Modules
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 Palette/Caption: Palette
-Palette/Config/DefaultDark/Caption: Default Dark
-Palette/Config/DefaultLight/Caption: Default Light
+Palette/Config/DefaultDark/Caption: Dark palette
+Palette/Config/DefaultLight/Caption: Light palette
 Palette/Config/Detection/Caption: Detect Browser Ligh/Dark Setting
 Palette/Editor/Clone/Caption: clone
 Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
