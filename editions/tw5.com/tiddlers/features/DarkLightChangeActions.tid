@@ -1,8 +1,34 @@
 created: 20231101120147664
-modified: 20240125155840177
+modified: 20240125202358139
 tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
+
+\procedure createLightDarkSwitcherTitle() _/startup/light-dark/detection
+
+\procedure startupLightDarkTemplate()
+<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
+	<$let default={{{ [<dark-mode>match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
+		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
+	</$let>
+</$reveal>
+\end
+
+\procedure createLightDarkSwitcher()
+<% if [<createLightDarkSwitcherTitle>!has[text]] %>
+<$action-createtiddler
+  $basetitle=<<createLightDarkSwitcherTitle>> 
+  text=<<startupLightDarkTemplate>>
+  caption= "{{$:/language/ControlPanel/Palette/Config/Detection/Caption}}"
+  code-body= "yes"
+  tags= "$:/tags/DarkLightChangeActions"
+/>
+<$action-navigate $to=<<createLightDarkSwitcherTitle>>/>
+<% else %>
+<$action-navigate $to=<<createLightDarkSwitcherTitle>>/>
+<% endif %>
+
+\end
 
 <<.from-version "5.3.4">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
 
@@ -27,14 +53,13 @@ The following variable is defined for all actions DarkLightChangeActions
 
 The following example defines the $:/palette tiddler based on the dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> -- The tag-pill dropdown can be used to see all possible palette tiddlers.
 
+<$button actions=<<createLightDarkSwitcher>> >Create <<createLightDarkSwitcherTitle>> tiddler</$button>
+
 ```
 title: _/startup/light-dark/detection
 caption: {{$:/language/ControlPanel/Palette/Config/Detection/Caption}}
+code-body: yes
 tags: $:/tags/DarkLightChangeActions
-
-<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
-	<$let default={{{ [<dark-mode>match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
-		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
-	</$let>
-</$reveal>
 ```
+
+<pre><code><$transclude $variable="startupLightDarkTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>

@@ -8,8 +8,6 @@ title: $:/core/ui/ControlPanel/Palette/LightDarkConfig
 
 !! <<lingo "Picker/Heading">>
 
-<<lingo "Picker/Prompt/Info">>
-
 <$checkbox tiddler=<<config-dark-light>>
 	field="text"
 	checked="yes"
