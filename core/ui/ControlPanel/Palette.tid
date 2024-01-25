@@ -3,9 +3,9 @@ tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Palette/
+\whitespace trim
 
-{{$:/snippets/paletteswitcher}}
-
+\define paletteEditorButton()
 <$reveal type="nomatch" state="$:/state/ShowPaletteEditor" text="yes">
 
 <$button set="$:/state/ShowPaletteEditor" setTo="yes"><<lingo ShowEditor/Caption>></$button>
@@ -18,4 +18,22 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 {{$:/PaletteManager}}
 
 </$reveal>
+\end
 
+{{$:/core/ui/ControlPanel/Palette/LightDarkConfig}}
+
+<$list filter="[{$:/config/palette/enable-light-dark-detection}match[yes]]" variable="ignore">
+
+	<<paletteEditorButton>>
+
+</$list>
+
+<$list filter="[{$:/config/palette/enable-light-dark-detection}!match[yes]]" variable="ignore">
+
+!! <<lingo "Switcher/Heading">>
+
+	{{$:/snippets/paletteswitcher}}
+
+	<<paletteEditorButton>>
+
+</$list>

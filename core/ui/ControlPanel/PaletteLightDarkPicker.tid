@@ -1,0 +1,34 @@
+title: $:/core/ui/ControlPanel/Palette/LightDarkConfig
+
+\define lingo-base() $:/language/ControlPanel/Palette/
+
+\define config-dark-light() $:/config/palette/enable-light-dark-detection
+
+\whitespace trim
+
+!! <<lingo "Picker/Heading">>
+
+<<lingo "Picker/Prompt/Info">>
+
+<$checkbox tiddler=<<config-dark-light>>
+	field="text"
+	checked="yes"
+	unchecked="no"
+	default="no"
+>
+	<span class="tc-tiny-gap-left tc-small-gap-right"><<lingo "Picker/Enable">></span>
+	<$link to=<<config-dark-light>>>
+		{{$:/core/images/open-window|12}}
+	</$link>
+</$checkbox>
+
+<!-- This section should be animated, so users do not loose focus -->
+<$reveal type="match" state=<<config-dark-light>> text="yes" retain="yes" animate="yes">
+
+<<lingo "Picker/Prompt">>
+
+|tc-first-col-min-width tc-first-link-nowrap|k
+|<$link to="$:/config/palette/default-light" >{{$:/config/palette/default-light!!caption}}</$link> |<$transclude $tiddler="$:/snippets/paletteswitcher" palette=<<tiddler>> postFilter="+[{$:/config/palette/default-light}]" /> | <<palette-picker tiddler:"$:/config/palette/default-light" postFilter:":filter[color-scheme[light]]" >> |
+|<$link to="$:/config/palette/default-dark">{{$:/config/palette/default-dark!!caption}} </$link>|<$transclude $tiddler="$:/snippets/paletteswitcher" palette=<<tiddler>> postFilter="+[{$:/config/palette/default-dark}]" /> | <<palette-picker tiddler:"$:/config/palette/default-dark" postFilter:":filter[color-scheme[dark]]">> |
+
+</$reveal>

@@ -1,0 +1,43 @@
+tags: $:/tags/Global
+title: $:/core/macros/palette-picker
+
+\whitespace trim
+
+\procedure palette-info(tiddler)
+\define tv-wikilinks() no
+<$tiddler tiddler={{{ [<tiddler>get[text]] }}} >
+	''{{!!name}}'' <span class="tc-tiny-gap">-</span> {{!!description}}
+	{{||$:/snippets/currpalettepreview}}
+</$tiddler>
+\end
+
+\procedure palette-picker(tiddler, postFilter, style)
+<div class="tc-popup-keep" style="position:relative;">
+	<$button
+		popup=`$:/state/popup/$(tiddler)$`
+		tooltip={{$:/language/Buttons/Palette/Hint}}
+		aria-label={{$:/language/Buttons/Palette/Caption}}
+		class=<<tv-config-toolbar-class>>
+		selectedClass="tc-selected"
+	>
+		<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+			{{$:/core/images/palette}}
+		</$list>
+		<$list filter="[<tv-config-toolbar-text>match[yes]]">
+		<span class="tc-btn-text">
+			<$text text={{$:/language/Buttons/Palette/Caption}}/>
+		</span>
+		</$list>
+	</$button>
+	<$reveal state=`$:/state/popup/$(tiddler)$`
+		type="popup"
+		position="belowleft"
+		positionAllowNegative="yes"
+		tag="div"
+		class="tc-drop-down"
+		style=`$(style)$`
+	>
+		<$transclude $tiddler="$:/snippets/paletteswitcher" config=<<tiddler>> postFilter=<<postFilter>> />
+	</$reveal>
+</div>
+\end

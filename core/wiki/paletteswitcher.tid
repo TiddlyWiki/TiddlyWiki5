@@ -1,19 +1,31 @@
 title: $:/snippets/paletteswitcher
 
+\parameters (palette:"$:/palette" config:"" postFilter:"")
 \whitespace trim
-<$linkcatcher to="$:/palette">
-<div class="tc-chooser">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]]">
-<$set name="cls" filter="[all[current]prefix{$:/palette}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
-<div class=<<cls>>>
-<$link to={{!!title}}>
-''<$view field="name" format="text"/>''
-&#32;-&#32;
-<$view field="description" format="text"/>
-{{||$:/snippets/currpalettepreview}}
-</$link>
-</div>
-</$set>
-</$list>
-</div>
+
+\define catchActions()
+<$action-setfield $tiddler=<<palette>> $field=text text=<<navigateTo>>/>
+
+<$list filter="[<config>!is[blank]]">
+	<$action-setfield $tiddler=<<config>> text=<<navigateTo>>/>
+</$filter>
+\end
+
+<$linkcatcher actions=<<catchActions>>>
+	<div class="tc-chooser">
+		<$let pre={{{ [<palette>get[text]] }}} >
+			<$list filter=`[all[shadows+tiddlers]tag[$:/tags/Palette]sort[name]] $(postFilter)$`>
+				<$set name="class" filter="[all[current]prefix<pre>]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
+					<div class=<<class>> >
+						<$link to={{!!title}}>
+							''<$view field="name" format="text"/>''
+							&#32;-&#32;
+							<$view field="description" format="text"/>
+							{{||$:/snippets/currpalettepreview}}
+						</$link>
+					</div>
+				</$set>
+			</$list>
+		</$let>
+	</div>
 </$linkcatcher>
