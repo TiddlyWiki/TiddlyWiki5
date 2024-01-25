@@ -36,5 +36,8 @@
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1543.0"
   }
 }
