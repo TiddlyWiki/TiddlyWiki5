@@ -4,6 +4,7 @@ _canonical_uri: The full URI of an external image tiddler
 author: Name of the author of a plugin
 bag: The name of the bag from which a tiddler came
 caption: The text to be displayed on a tab or button
+class: The CSS class applied to a tiddler when rendering it - see [[Custom styles by user-class]].  Also used for [[Modals]]
 code-body: The view template will display the tiddler as code if set to ''yes''
 color: The CSS color value associated with a tiddler
 component: The name of the component responsible for an [[alert tiddler|AlertMechanism]]

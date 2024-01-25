@@ -12,3 +12,5 @@ The `tm-delete-tiddler` message deletes the specified tiddler and removes it fro
 |tiddlerTitle |Fallback title that is used if ''param'' isn't specified (automatically set by the ButtonWidget)  |
 
 The delete tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+
+Use the [[ActionDeleteTiddlerWidget]] to delete a named tiddler without getting the "Do you wish to delete the tiddler" prompt.
