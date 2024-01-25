@@ -1,5 +1,5 @@
 created: 20231101120147664
-modified: 20231101180843245
+modified: 20240125155840177
 tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
@@ -19,20 +19,22 @@ The following variable is defined for all actions DarkLightChangeActions
 | Variables | Description |h
 |`dark-mode` |`yes` or `no` depending on the browser or OS setting |
 
+!! InfoMechanism
+
+<<.warning """It is important to use the variable `dark-mode`, since the system info tiddler $:/info/darkmode will be ''updated after'' the actions have been executed. """>>
+
 !! Example
 
 The following example defines the $:/palette tiddler based on the dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> -- The tag-pill dropdown can be used to see all possible palette tiddlers.
 
 ```
-title: test-AutoSwitchPalette
+title: _/startup/light-dark/detection
+caption: {{$:/language/ControlPanel/Palette/Config/Detection/Caption}}
 tags: $:/tags/DarkLightChangeActions
 
-\define darkPalette() $:/palettes/GruvboxDark
-\define lightPalette() $:/palettes/Vanilla
-
-<$action-setfield $tiddler="$:/palette" text={{{ [<dark-mode>match[yes]then<darkPalette>else<lightPalette>] }}} />
+<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
+	<$let default={{{ [<dark-mode>match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
+		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
+	</$let>
+</$reveal>
 ```
-
-!! InfoMechanism
-
-<<.warning """The system info tiddler $:/info/darkmode will be dynamically updated ''after'' the actions have been executed. Therefore it is important to use the variable `dark-mode`""">>
