@@ -2,30 +2,23 @@ title: $:/core/ui/ControlPanel/Palette
 tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ControlPanel/Palette/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Palette/
+\procedure lingo-base() $:/language/ControlPanel/Palette/
 \whitespace trim
 
-\define paletteEditorButton()
+\procedure paletteEditorButton()
 <$reveal type="nomatch" state="$:/state/ShowPaletteEditor" text="yes">
-
-<$button set="$:/state/ShowPaletteEditor" setTo="yes"><<lingo ShowEditor/Caption>></$button>
-
+	<$button set="$:/state/ShowPaletteEditor" setTo="yes"><<lingo ShowEditor/Caption>></$button>
 </$reveal>
-
 <$reveal type="match" state="$:/state/ShowPaletteEditor" text="yes">
-
-<$button set="$:/state/ShowPaletteEditor" setTo="no"><<lingo HideEditor/Caption>></$button>
-{{$:/PaletteManager}}
-
+	<$button set="$:/state/ShowPaletteEditor" setTo="no"><<lingo HideEditor/Caption>></$button>
+	{{$:/PaletteManager}}
 </$reveal>
 \end
 
 {{$:/core/ui/ControlPanel/Palette/LightDarkConfig}}
 
 <$list filter="[{$:/config/palette/enable-light-dark-detection}match[yes]]" variable="ignore">
-
 	<<paletteEditorButton>>
-
 </$list>
 
 <$list filter="[{$:/config/palette/enable-light-dark-detection}!match[yes]]" variable="ignore">
