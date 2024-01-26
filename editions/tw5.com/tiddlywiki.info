@@ -9,7 +9,7 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/qrcode",
 		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem"
+		"tiddlywiki/filesystem",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/tour"
