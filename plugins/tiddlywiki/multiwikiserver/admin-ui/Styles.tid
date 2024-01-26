@@ -12,6 +12,12 @@ Styles specific to the full screen layout
 }
 
 
+.mws-form-error {
+	border: 2px solid red;
+	padding: 1em;
+	margin: 1em;
+}
+
 .mws-wiki-card {
 	display: flex;
 	margin: 1em 0;

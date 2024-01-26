@@ -1,10 +1,20 @@
 title: MultiWikiServer Administration
 
-\procedure createBag(name,description)
+\procedure createBag(name,description,errorTiddler)
 	\procedure completion-createBag()
 		\import [subfilter{$:/core/config/GlobalImportFilter}]
-		<$action-log msg="In completion-createBag"/>
-		<$action-log/>
+		<$action-log
+			status=<<status>>
+			statusText=<<statusText>>
+			error=<<error>>
+			data=<<data>>
+			headers=<<headers>>
+		/>
+		<%if [<error>match[]] %>
+			<$action-setfield $tiddler=<<errorTiddler>> text=""/>
+		<%else%>
+			<$action-setfield $tiddler=<<errorTiddler>> text=<<data>>/>
+		<%endif%>
 	\end completion-createBag
 	<$action-sendmessage
 		$message="tm-http-request"
@@ -12,6 +22,7 @@ title: MultiWikiServer Administration
 		method="PUT"
 		body=`{"description":"${ [<description>encodeuricomponent[]] }$"}`
 		oncompletion=<<completion-createBag>>
+		var-errorTiddler=<<errorTiddler>>
 	/>
 \end createBag
 
@@ -35,12 +46,20 @@ title: MultiWikiServer Administration
 				<$edit-text tiddler="$:/state/NewBagDescription" tag="input" placeholder="(description)" class="mws-form-field-input"/>
 			</div>
 		</div>
+		<div class="mws-form-status">
+			<%if [[$:/state/NewBagError]get[text]else[]!match[]] %>
+				<div class="mws-form-error">
+					<$text text={{$:/state/NewBagError}}/>
+				</div>
+			<%endif%>
+		</div>
 		<div class="mws-form-buttons">
 			<$button class="mws-form-button">
 				<$transclude
 					$variable="createBag"
 					name={{$:/state/NewBagName}}
 					description={{$:/state/NewBagDescription}}
+					errorTiddler="$:/state/NewBagError"
 				/>
 				Create Bag
 			</$button>
@@ -48,23 +67,26 @@ title: MultiWikiServer Administration
 	</form>
 \end createBagButton
 
-\procedure createRecipe(name,bag_names,description)
+\procedure createRecipe(name,bag_names,description,errorTiddler)
 	\procedure completion-createRecipe()
 		\import [subfilter{$:/core/config/GlobalImportFilter}]
-		<$action-log msg="In completion-createRecipe"/>
-		<$action-log/>
+		<%if [<error>match[]] %>
+			<$action-setfield $tiddler=<<errorTiddler>> text=""/>
+		<%else%>
+			<$action-setfield $tiddler=<<errorTiddler>> text=<<data>>/>
+		<%endif%>
 	\end completion-createRecipe
 	\procedure emptyArray() []
 	\function createRecipeJson()
 		[<bag_names>enlist-input[]] :reduce[<accumulator>!match[]else<emptyArray>jsonset<index>,<currentTiddler>]
 	\end createRecipeJson
-	<$action-log message="Sending" body=<<createRecipeJson>>/>
 	<$action-sendmessage
 		$message="tm-http-request"
 		url=`/wiki/$(name)$/recipes/$(name)$`
 		method="PUT"
 		body=`{"bag_names":${ [<createRecipeJson>] }$,"description":"${ [<description>encodeuricomponent[]] }$"}`
 		oncompletion=<<completion-createRecipe>>
+		var-errorTiddler=<<errorTiddler>>
 	/>
 \end createRecipe
 
@@ -94,6 +116,13 @@ title: MultiWikiServer Administration
 				<$edit-text tiddler="$:/state/NewRecipeDescription" tag="input" placeholder="(description)" class="mws-form-field-input"/>
 			</div>
 		</div>
+		<div class="mws-form-status">
+			<%if [[$:/state/NewRecipeError]get[text]else[]!match[]] %>
+				<div class="mws-form-error">
+					<$text text={{$:/state/NewRecipeError}}/>
+				</div>
+			<%endif%>
+		</div>
 		<div class="mws-form-buttons">
 			<$button class="mws-form-button">
 				<$transclude
@@ -101,6 +130,7 @@ title: MultiWikiServer Administration
 					name={{$:/state/NewRecipeName}}
 					bag_names={{$:/state/NewRecipeBagNames}}
 					description={{$:/state/NewRecipeDescription}}
+					errorTiddler="$:/state/NewRecipeError"
 				/>
 				Create Recipe
 			</$button>
