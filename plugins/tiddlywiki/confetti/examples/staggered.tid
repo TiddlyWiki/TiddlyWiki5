@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/confetti/examples/staggered
+tags: $:/tags/ConfettiExample
+
+<$button>
+<$action-sendmessage $message="tm-confetti-launch"/>
+<$action-sendmessage $message="tm-confetti-launch" originY=0.6 spread=70 delay=300/>
+<$action-sendmessage $message="tm-confetti-launch" originY=0.55 spread=30 delay=600/>
+Launch three staggered rounds of confetti
+</$button>

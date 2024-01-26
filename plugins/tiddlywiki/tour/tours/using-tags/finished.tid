@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/tour/using-tags/finished
+caption: Congratulations
+tags: $:/tags/Tour/UsingTags
+
+<<tour-chooser filter:"[all[shadows+tiddlers]tag[$:/tags/Tour]] -[<currentTour>]">>
