@@ -116,8 +116,8 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 			bag: bag_name,
 			text: undefined,
 			_canonical_uri: recipe_name
-				? `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${title}`
-				: `/wiki/${bag_name}/bags/${bag_name}/tiddlers/${title}`
+				? `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${tiddlerFields.title}`
+				: `/wiki/${bag_name}/bags/${bag_name}/tiddlers/${tiddlerFields.title}`
 		});
 	} else {
 		return Object.assign({},tiddlerFields,{
