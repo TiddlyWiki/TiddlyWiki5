@@ -186,6 +186,9 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,descriptio
 	if(validationBagNames) {
 		return {message: validationBagNames};
 	}
+	if(bagnames.length === 0) {
+		return {message: "Recipes must contain at least one bag"};
+	}
 	this.sqlTiddlerDatabase.createRecipe(recipename,bagnames,description);
 	this.saveEntityStateTiddler({
 		title: "recipes/" + recipename,
