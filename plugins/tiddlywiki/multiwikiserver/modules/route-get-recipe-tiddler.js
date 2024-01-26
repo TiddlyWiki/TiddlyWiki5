@@ -40,6 +40,7 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
+			tiddlerFields = $tw.sqlTiddlerStore.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content

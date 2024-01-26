@@ -105,25 +105,30 @@ SqlTiddlerStore.prototype.updateAdminWiki = function() {
 
 /*
 Given tiddler fields, tiddler_id and a bagname, return the tiddler fields after the following process:
-- If the text field is over a threshold, modify the tiddler to use _canonical_uri
 - Apply the tiddler_id as the revision field
 - Apply the bag_name as the bag field
 */
-SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddler_id,bag_name,recipe_name) {
+SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddler_id,bag_name) {
+	return Object.assign({},tiddlerFields,{
+		revision: "" + tiddler_id,
+		bag: bag_name
+	});
+};
+
+/*
+Given tiddler fields and a bagname or a recipename, if the text field is over a threshold, modify
+the tiddler to use _canonical_uri, otherwise return the tiddler unmodified
+*/
+SqlTiddlerStore.prototype.processCanonicalUriTiddler = function(tiddlerFields,bag_name,recipe_name) {
 	if((tiddlerFields.text || "").length > 10 * 1024 * 1024) {
 		return Object.assign({},tiddlerFields,{
-			revision: "" + tiddler_id,
-			bag: bag_name,
 			text: undefined,
 			_canonical_uri: recipe_name
 				? `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${tiddlerFields.title}`
 				: `/wiki/${bag_name}/bags/${bag_name}/tiddlers/${tiddlerFields.title}`
 		});
 	} else {
-		return Object.assign({},tiddlerFields,{
-			revision: "" + tiddler_id,
-			bag: bag_name
-		});
+		return tiddlerFields;
 	}
 };
 
@@ -229,7 +234,7 @@ SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
 			{},
 			tiddlerInfo,
 			{
-				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bagname,null)
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bagname)
 			});	
 	} else {
 		return null;
@@ -246,7 +251,7 @@ SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 			{},
 			tiddlerInfo,
 			{
-				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,tiddlerInfo.bag_name,recipename)
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,tiddlerInfo.bag_name)
 			});
 	} else {
 		return null;
