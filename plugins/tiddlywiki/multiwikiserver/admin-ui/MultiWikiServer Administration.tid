@@ -12,6 +12,7 @@ title: MultiWikiServer Administration
 		/>
 		<%if [<error>match[]] %>
 			<$action-setfield $tiddler=<<errorTiddler>> text=""/>
+			<$action-sendmessage $message="tm-server-refresh"/>
 		<%else%>
 			<$action-setfield $tiddler=<<errorTiddler>> text=<<data>>/>
 		<%endif%>
@@ -72,6 +73,7 @@ title: MultiWikiServer Administration
 		\import [subfilter{$:/core/config/GlobalImportFilter}]
 		<%if [<error>match[]] %>
 			<$action-setfield $tiddler=<<errorTiddler>> text=""/>
+			<$action-sendmessage $message="tm-server-refresh"/>
 		<%else%>
 			<$action-setfield $tiddler=<<errorTiddler>> text=<<data>>/>
 		<%endif%>
