@@ -6,22 +6,19 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 \whitespace trim
 
 \procedure paletteEditorButton()
-<$reveal type="nomatch" state="$:/state/ShowPaletteEditor" text="yes">
+<% if [{$:/state/ShowPaletteEditor}!match[yes]] %>
 	<$button set="$:/state/ShowPaletteEditor" setTo="yes"><<lingo ShowEditor/Caption>></$button>
-</$reveal>
-<$reveal type="match" state="$:/state/ShowPaletteEditor" text="yes">
+<% else %>
 	<$button set="$:/state/ShowPaletteEditor" setTo="no"><<lingo HideEditor/Caption>></$button>
 	{{$:/PaletteManager}}
-</$reveal>
+<% endif %>
 \end
 
 {{$:/core/ui/ControlPanel/Palette/LightDarkConfig}}
 
-<$list filter="[{$:/config/palette/enable-light-dark-detection}match[yes]]" variable="ignore">
+<% if  [{$:/config/palette/enable-light-dark-detection}match[yes]] %>
 	<<paletteEditorButton>>
-</$list>
-
-<$list filter="[{$:/config/palette/enable-light-dark-detection}!match[yes]]" variable="ignore">
+<% else %>
 
 !! <<lingo "Switcher/Heading">>
 
@@ -29,4 +26,4 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 	<<paletteEditorButton>>
 
-</$list>
+<% endif %>
