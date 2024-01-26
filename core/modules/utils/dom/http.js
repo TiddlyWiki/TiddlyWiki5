@@ -289,7 +289,7 @@ exports.httpRequest = function(options) {
 				return;
 			}
 		// Something went wrong
-		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,null,this);
+		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
 		}
 	};
 	// Handle progress
