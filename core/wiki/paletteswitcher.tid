@@ -3,7 +3,7 @@ title: $:/snippets/paletteswitcher
 \parameters (palette:"$:/palette" config:"" postFilter:"")
 \whitespace trim
 
-\define catchActions()
+\procedure catchActions()
 <$action-setfield $tiddler=<<palette>> $field=text text=<<navigateTo>>/>
 <$list filter="[<config>!is[blank]]">
 	<$action-setfield $tiddler=<<config>> text=<<navigateTo>>/>

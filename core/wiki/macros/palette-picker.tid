@@ -4,7 +4,7 @@ title: $:/core/macros/palette-picker
 \whitespace trim
 
 \procedure palette-info(tiddler)
-\define tv-wikilinks() no
+\procedure tv-wikilinks() no
 <$tiddler tiddler={{{ [<tiddler>get[text]] }}} >
 	''{{!!name}}'' <span class="tc-tiny-gap">-</span> {{!!description}}
 	{{||$:/snippets/currpalettepreview}}
