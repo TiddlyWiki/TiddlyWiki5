@@ -1970,7 +1970,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							value = path.relative(rootPath, filename).split('/').slice(0, -1);
 							break;
 						case "filepath":
-							value = path.relative(rootPath, filename);
+							value = path.relative(rootPath, filename).split(path.sep).join('/');
 							break;
 						case "filename":
 							value = path.basename(filename);
