@@ -77,7 +77,7 @@ Surrounds the current //selection// with the provided <<.param "prefix">> and <<
 |!Name |!Description |
 |prefix |String to be prefixed to the selection |
 |suffix |Suffix to be inserted after the selection |
-|trimSelection |<<.from-version 5.3.4>> Trim leading and trailing white-space from the selection and move it to the surrounding text. Possible values are: `yes`, `start` and `end` |
+|trimSelection |<<.from-version 5.3.4>> Trim leading and trailing white-space from the selection and move it to the surrounding text. Possible values are: `yes`, `no` (default), `start` and `end` |
 
 </div>
 \end
