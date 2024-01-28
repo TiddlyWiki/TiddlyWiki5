@@ -45,7 +45,8 @@ SqlTiddlerStore.prototype.validateItemName = function(name) {
 	if(name.length > 256) {
 		return "Too long";
 	}
-	if(!(/^[^\s\u00A0\x00-\x1F\x7F~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?]+$/g.test(name))) {
+	// Removed ~ from this list temporarily
+	if(!(/^[^\s\u00A0\x00-\x1F\x7F`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?]+$/g.test(name))) {
 		return "Invalid character(s)";
 	}
 	return null;
@@ -156,8 +157,6 @@ SqlTiddlerStore.prototype.listBags = function() {
 };
 
 SqlTiddlerStore.prototype.createBag = function(bagname,description) {
-	console.log(`create bag method for ${bagname} with ${description}`)
-	console.log(`validation results are ${this.validateItemName(bagname)}`)
 	const validationBagName = this.validateItemName(bagname);
 	if(validationBagName) {
 		return {message: validationBagName};
@@ -179,8 +178,6 @@ SqlTiddlerStore.prototype.listRecipes = function() {
 Returns null on success, or {message:} on error
 */
 SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,description) {
-	console.log(`create recipe method for ${recipename} with ${JSON.stringify(bagnames)}`)
-	console.log(`validation results are ${this.validateItemName(recipename)} and ${this.validateItemNames(bagnames)}`)
 	bagnames = bagnames || [];
 	description = description || "";
 	const validationRecipeName = this.validateItemName(recipename);
