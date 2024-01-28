@@ -11,5 +11,5 @@ shortcuts: ((strikethrough))
 	$param="wrap-selection"
 	prefix="~~"
 	suffix="~~"
-	trimSeletion="both"
+	trimSeletion="yes"
 />

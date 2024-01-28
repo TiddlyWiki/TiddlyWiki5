@@ -22,7 +22,7 @@ exports["wrap-selection"] = function(event,operation) {
 		selLength = o.selEnd - o.selStart;
 
 	var trailingSpaceAt = function(sel) {
-		// returns "both", "start", "end", "no"
+		// returns "yes", "start", "end", "no"
 		var _start,
 			_end,
 			result;
@@ -31,10 +31,10 @@ exports["wrap-selection"] = function(event,operation) {
 			case "end":
 				result = (sel.trimEnd().length !== selLength) ? "end" : "no";
 			break;
-			case "both":
+			case "yes":
 				_start = sel.trimStart().length !== selLength;
 				_end = sel.trimEnd().length !== selLength;
-				result = (_start && _end) ? "both" : (_start) ? "start" : (_end) ? "end" : "no";
+				result = (_start && _end) ? "yes" : (_start) ? "start" : (_end) ? "end" : "no";
 			break;
 			case "start":
 				result = (sel.trimStart().length !== selLength) ? "start" : "no";
@@ -89,7 +89,7 @@ exports["wrap-selection"] = function(event,operation) {
 				o.newSelStart = o.selStart;
 				o.newSelEnd = o.selStart + o.replacement.length;
 			break;
-			case "both":
+			case "yes":
 				o.cutStart = o.selEnd - (o.selection.trimStart().length);
 				o.cutEnd = o.selection.trimEnd().length + o.selStart;
 				o.replacement = prefix + o.selection.trim() + suffix;

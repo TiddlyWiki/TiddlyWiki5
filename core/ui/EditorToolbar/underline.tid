@@ -11,5 +11,5 @@ shortcuts: ((underline))
 	$param="wrap-selection"
 	prefix="__"
 	suffix="__"
-	trimSeletion="both"
+	trimSeletion="yes"
 />

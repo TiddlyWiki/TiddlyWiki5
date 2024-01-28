@@ -12,5 +12,5 @@ tags: $:/tags/EditorToolbar
 	$param="wrap-selection"
 	prefix="[["
 	suffix="]]"
-	trimSeletion="both"
+	trimSeletion="yes"
 />
