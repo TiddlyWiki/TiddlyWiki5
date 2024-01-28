@@ -145,32 +145,48 @@ SqlTiddlerDatabase.prototype.createBag = function(bagname,description) {
 };
 
 /*
-Returns array of {recipe_name:,description:}
+Returns array of {recipe_name:,description:,bag_names: []}
 */
 SqlTiddlerDatabase.prototype.listRecipes = function() {
 	const rows = this.runStatementGetAll(`
-		SELECT recipe_name, description
-		FROM recipes
-		ORDER BY recipe_name
+		SELECT r.recipe_name, r.description, b.bag_name, rb.position
+		FROM recipes AS r
+		JOIN recipe_bags AS rb ON rb.recipe_id = r.recipe_id
+		JOIN bags AS b ON rb.bag_id = b.bag_id
+		ORDER BY r.recipe_name, rb.position
 	`);
-	return rows;
+	const results = [];
+	let currentRecipeName = null, currentRecipeIndex = -1;
+	for(const row of rows) {
+		if(row.recipe_name !== currentRecipeName) {
+			currentRecipeName = row.recipe_name;
+			currentRecipeIndex += 1;
+			results.push({
+				recipe_name: row.recipe_name,
+				description: row.description,
+				bag_names: []
+			});
+		}
+		results[currentRecipeIndex].bag_names.push(row.bag_name);
+	}
+	return results;
 };
 
 SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames,description) {
 	// Run the queries
 	this.runStatement(`
-		-- Create the entry in the recipes table if required
-		INSERT OR IGNORE INTO recipes (recipe_name, description)
-		VALUES ($recipe_name, $description)
-	`,{
-		recipe_name: recipename,
-		description: description
-	});
-	this.runStatement(`
 		-- Delete existing recipe_bags entries for this recipe
 		DELETE FROM recipe_bags WHERE recipe_id = (SELECT recipe_id FROM recipes WHERE recipe_name = $recipe_name)
 	`,{
 		recipe_name: recipename
+	});
+	this.runStatement(`
+		-- Create the entry in the recipes table if required
+		INSERT OR REPLACE INTO recipes (recipe_name, description)
+		VALUES ($recipe_name, $description)
+	`,{
+		recipe_name: recipename,
+		description: description
 	});
 	this.runStatement(`
 		INSERT INTO recipe_bags (recipe_id, bag_id, position)
@@ -390,7 +406,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
 			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
 			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
 			WHERE r.recipe_name = $recipe_name
-			GROUP BY t.title
+			GROUP BY t.title, b.bag_name
 			ORDER BY t.title
 		)
 	`,{
@@ -420,12 +436,13 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 		SELECT bags.bag_name
 		FROM bags
 		JOIN (
-			SELECT rb.bag_id
+			SELECT rb.bag_id, rb.position as position
 			FROM recipe_bags AS rb
 			JOIN recipes AS r ON rb.recipe_id = r.recipe_id
 			WHERE r.recipe_name = $recipe_name
 			ORDER BY rb.position
 		) AS bag_priority ON bags.bag_id = bag_priority.bag_id
+		ORDER BY position
 	`,{
 		recipe_name: recipename
 	});
