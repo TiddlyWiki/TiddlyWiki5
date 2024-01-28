@@ -783,6 +783,10 @@ button svg.tc-image-button, button .tc-image-button img {
 	margin-right: 7px;
 }
 
+.tc-tag-missing {
+	font-style: italic;
+}
+
 .tc-missing-tiddler-label {
 	font-style: italic;
 	font-weight: normal;
