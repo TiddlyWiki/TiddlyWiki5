@@ -18,7 +18,7 @@ exports["wrap-selection"] = function(event,operation) {
 		prefixLength = prefix.length,
 		suffix = event.paramObject.suffix,
 		suffixLength = suffix.length,
-		trimSeletion = event.paramObject.trimSeletion || "no",
+		trimSelection = event.paramObject.trimSelection || "no",
 		selLength = o.selEnd - o.selStart;
 
 	var trailingSpaceAt = function(sel) {
@@ -27,7 +27,7 @@ exports["wrap-selection"] = function(event,operation) {
 			_end,
 			result;
 		// this evaluation takes the user configuration into account!
-		switch (trimSeletion) {
+		switch (trimSelection) {
 			case "end":
 				result = (sel.trimEnd().length !== selLength) ? "end" : "no";
 			break;
