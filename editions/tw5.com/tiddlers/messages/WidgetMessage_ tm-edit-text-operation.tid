@@ -153,7 +153,7 @@ An example can be seen in [[$:/core/ui/EditorToolbar/bold]]:
 	$param="wrap-selection"
 	prefix="''"
 	suffix="''"
-	trimSeletion="yes"
+	trimSelection="yes"
 />
 ```
 

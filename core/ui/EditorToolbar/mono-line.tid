@@ -11,5 +11,5 @@ shortcuts: ((mono-line))
 	$param="wrap-selection"
 	prefix="`"
 	suffix="`"
-	trimSeletion="yes"
+	trimSelection="yes"
 />

@@ -11,5 +11,5 @@ shortcuts: ((italic))
 	$param="wrap-selection"
 	prefix="//"
 	suffix="//"
-	trimSeletion="yes"
+	trimSelection="yes"
 />
