@@ -20,6 +20,9 @@ databasePath - path to the database file (can be ":memory:" to get a temporary d
 function SqlTiddlerDatabase(options) {
 	options = options || {};
 	// Create the database
+	if(options.databasePath) {
+		$tw.utils.createFileDirectories(options.databasePath);
+	}
 	var databasePath = options.databasePath || ":memory:";
 	this.db = new $tw.sqlite3.Database(databasePath,{verbose: undefined && console.log});
 }

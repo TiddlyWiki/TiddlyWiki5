@@ -35,7 +35,7 @@ exports.startup = function() {
 		return;
 	}
 	// Compute the database path
-	var databasePath = path.resolve($tw.boot.wikiPath,"database.sqlite");
+	var databasePath = path.resolve($tw.boot.wikiPath,"store/database.sqlite");
 	// Create and initialise the tiddler store
 	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore;
 	$tw.sqlTiddlerStore = new SqlTiddlerStore({
