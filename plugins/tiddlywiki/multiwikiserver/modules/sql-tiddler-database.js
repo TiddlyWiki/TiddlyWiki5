@@ -406,7 +406,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
 			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
 			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
 			WHERE r.recipe_name = $recipe_name
-			GROUP BY t.title, b.bag_name
+			GROUP BY t.title
 			ORDER BY t.title
 		)
 	`,{
