@@ -1,8 +1,12 @@
 created: 20140103134551508
-modified: 20171113131640857
+modified: 20211120190657292
 tags: [[Saving with TiddlyFox]]
 title: Saving with TiddlyFox on Android
 type: text/vnd.tiddlywiki
+
+<<.warning """TiddlyFox is now obsolete due to its incompatibility with the latest versions of Firefox - see [[TiddlyFox Apocalypse]]. There are many alternatives to TiddlyFox, but none that work in precisely the same way – see GettingStarted for details.""">>
+
+----
 
 (Alternatively, see the [[video tutorial|TiddlyWiki on Firefox for Android Video]])
 
