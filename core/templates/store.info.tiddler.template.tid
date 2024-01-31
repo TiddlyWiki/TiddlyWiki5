@@ -1,0 +1,22 @@
+title: $:/core/templates/store.info.tiddler.template
+tags: $:/tags/InfoTiddlerTemplate
+
+<!-- This template will be injected into the html file when the wiki is saved. It is activated by $:/core/templates/store.info.template.html -->
+\whitespace trim
+\procedure readableFormat() [UTC]YYYY-0MM-0DD 0hh:0mm:0ss.0XXX UTC TZD
+
+<!-- It's needed to use variables, to have the absolute same timestamp for all tiddlers -->
+<$let
+	timestamp={{{ [<now format:[UTC]YYYY0MM0DD0hh0mm0ss0XXX>] }}}
+	timeReadable={{{ [<timestamp>format:date<readableFormat>] }}}
+>
+	<% if [{$:/info/browser}match[yes]] %>
+		`{"title": "$:/info/last-saved/timestamp", "created":"`<<timestamp>>`", "modified":"`<<timestamp>>`", "text":"`<<timestamp>>`"}`
+		<$text text=<<join>>/>
+		`{"title": "$:/info/last-saved/date",  "created":"`<<timestamp>>`", "modified":"`<<timestamp>>`", "text":"`<<timeReadable>>`"}`
+	<% elseif [{$:/info/node}match[yes]] %>
+		`{"title": "$:/info/server-created-wiki/timestamp", "created":"`<<timestamp>>`", "modified":"`<<timestamp>>`", "text":"`<<timestamp>>`"}`
+		<$text text=<<join>>/>
+		`{"title": "$:/info/server-created-wiki/date",  "created":"`<<timestamp>>`", "modified":"`<<timestamp>>`", "text":"`<<timeReadable>>`"}`
+	<% endif %>
+</$let>

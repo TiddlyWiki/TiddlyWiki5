@@ -1,0 +1,21 @@
+title: $:/core/templates/store.info.template.html
+
+\whitespace trim
+<!-- Unencrypted -->
+<$list filter="[[$:/isEncrypted]get[text]else[no]match[no]]">
+	<$list filter="[[storeAreaFormat]is[variable]getvariable[]else[json]match[json]]">
+		<!-- New-style JSON store area -->
+		`<script class="tiddlywiki-tiddler-store" type="application/json">[`
+            <$let
+				newline={{{ [charcode[10]] }}}
+				join=`,$(newline)$`
+			>
+				<$text text=<<newline>>/>
+					<$list filter="[all[shadows+tiddlers]tag[$:/tags/InfoTiddlerTemplate]]">
+						<$transclude mode=block/>
+					</$list>
+				<$text text=<<newline>>/>
+			</$let>
+		`]</script>`
+	</$list>
+</$list>
