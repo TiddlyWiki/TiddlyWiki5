@@ -191,7 +191,7 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should block mode filtered transclusions", function() {
+	it("should BLOCK mode filtered transclusions SIMPLE", function() {
 		expect(parse("{{{ filter }}}")).toEqual(
 
 			[ { type: 'list', attributes: { filter: { type: 'string', value: ' filter ' } }, isBlock: true } ]
@@ -209,15 +209,84 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should check \"inline mode\" filtered transclusions with template", function() {
-		expect(parse("{{{ link || template }}} inline")).toEqual(
+	it("should BLOCK mode filtered transclusions MAX", function() {
+		expect(parse('{{{ [tag[docs]] | var="test" || TemplateTitle }} param:"value" | another="value" | any text we want \nincluding line-breaks }.class1.class2\n\n}')).toEqual(
 
-			[{"type": "element","tag": "p","children": [{"type": "list","attributes": {"filter": {"type": "string","value": " link "},"template": {"type": "string","value": "template"}}},{"type": "text","text": " inline","start": 24,"end": 31}],"start": 0,"end": 31}]
+			[
+				{
+					"type": "list",
+					"attributes": {
+						"filter": { "type": "string", "value": " [tag[docs]] "},
+						"vars": { "type": "string", "value": " var=\"test\" "},
+						"template": {"type": "string","value": "TemplateTitle"},
+						"params": { "type": "string", "value": " param:\"value\" | another=\"value\" | any text we want \nincluding line-breaks "},
+						"itemClass": {"type": "string", "value": "class1 class2"}
+					},
+					"isBlock": true
+				},
+				{
+					"type": "element", "tag": "p",
+					"children": [{ "type": "text", "text": "}", "start": 140, "end": 141 }],
+					"start": 140,
+					"end": 141
+				}
+			]
 
 		);
 	});
 
-	it("should check block mode filtered transclusions issue 7701", function() {
+	it("should INLINE mode filtered transclusions MAX", function() {
+		expect(parse('{{{ [tag[docs]] | var="test" || TemplateTitle }} param:"value" | another="value" | any text we want \nincluding line-breaks }.class1.class2 inline\n\n}')).toEqual(
+
+			[
+				{
+					"type": "element", "tag": "p",
+					"children": [
+						{ "type": "list",
+							"attributes": { "filter": {"type": "string", "value": " [tag[docs]] "},
+							"vars": { "type": "string", "value": " var=\"test\" " },
+							"template": { "type": "string", "value": "TemplateTitle"},
+							"params": { "type": "string", "value": " param:\"value\" | another=\"value\" | any text we want \nincluding line-breaks "},
+							"itemClass": { "type": "string", "value": "class1 class2"}
+							}},
+						{"type": "text", "text": " inline", "start": 138, "end": 145}
+					],
+					"start": 0,
+					"end": 145
+				},
+				{
+					"type": "element", "tag": "p",
+					"children": [{"type": "text", "text": "}", "start": 147, "end": 148}],
+					"start": 147,
+					"end": 148
+				}
+			]
+		);
+	});
+
+	it("should check INLINE mode filtered transclusions SIMPLE", function() {
+		expect(parse("{{{ link aaa }}} inline")).toEqual(
+
+			[
+				{"type": "element","tag": "p","children": [{"type": "list","attributes": {"filter": { "type": "string",	"value": " link aaa "}}},
+				{"type": "text","text": " inline","start": 16,"end": 23}],"start": 0,"end": 23 }
+			]
+
+		);
+	});
+
+	it("should check INLINE mode filtered transclusions with template", function() {
+		expect(parse("{{{ link || template }}} inline")).toEqual(
+
+		[
+			{"type": "element","tag": "p","children": [{"type": "list","attributes": {"filter": {"type": "string","value": " link "},"template": {"type": "string","value": "template"}}},
+			{"type": "text","text": " inline","start": 24,"end": 31}],"start": 0,"end": 31}
+		]
+
+		);
+	});
+
+	it("should check BLOCK mode filtered transclusions issue 7701", function() {
 		// see: https://github.com/Jermolene/TiddlyWiki5/issues/7701 and
 		// https://github.com/Jermolene/TiddlyWiki5/issues/7797
 		expect(parse("{{{ link }}}\ntext\n\n}")).toEqual(
@@ -231,13 +300,14 @@ describe("WikiText parser tests", function() {
 		);
 	});
 
-	it("should check \"inline mode\" filtered transclusions issue 7701", function() {
+	it("should check INLINE mode filtered transclusions issue 7701", function() {
 		// see: https://github.com/Jermolene/TiddlyWiki5/issues/7701 and
 		// https://github.com/Jermolene/TiddlyWiki5/issues/7797
 		expect(parse("{{{ link }}} inline\ntext\n\n}")).toEqual(
 
 			[
-				{"type": "element","tag": "p","children": [{"type": "list","attributes": {"filter": {"type": "string","value": " link "}}},{"type": "text","text": " inline\ntext",	"start": 12,"end": 24}],"start": 0,"end": 24},
+				{"type": "element","tag": "p","children": [{"type": "list","attributes": {"filter": {"type": "string","value": " link "}}},
+				{"type": "text","text": " inline\ntext","start": 12,"end": 24}],"start": 0,"end": 24},
 				{"type": "element","tag": "p","children": [{"type": "text","text": "}","start": 26,"end": 27}],"start": 26,"end": 27}
 			]
 
