@@ -1,0 +1,106 @@
+title: $:/plugins/tiddlywiki/tour/simplified-tiddler-with-tags
+
+\whitespace trim
+\define tag-pill-styles()
+background-color:$(backgroundColor)$;
+fill:$(foregroundColor)$;
+color:$(foregroundColor)$;
+\end
+
+\procedure tag-pill-label(prefix)
+<$text text={{{ [<currentTiddler>removeprefix<prefix>] }}}/>
+\end
+
+\procedure tag-pill-label-link(prefix)
+<div>
+	<$link>
+		<$transclude $variable="tag-pill-label" prefix=<<prefix>>/>
+	</$link>
+</div>
+\end
+
+<!-- This has no whitespace trim to avoid modifying $actions$. Closing tags omitted for brevity. -->
+\define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions,prefix)
+\whitespace trim
+<$let
+	foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>
+	backgroundColor=<<__colour__>>
+>
+<$element-tag$
+	$element-attributes$
+	class="tc-tag-label tc-btn-invisible"
+	style=<<tag-pill-styles>>
+>
+	<<__actions__>>
+	<$transclude tiddler=<<__icon__>>/>
+	<$let currentTiddler=<<__tag__>>>
+		<$transclude $variable="tag-pill-label" prefix=<<__prefix__>>/>
+	</$let>
+</$element-tag$>
+</$let>
+\end
+
+\define tag-pill-body(tag,icon,colour,palette,element-tag,element-attributes,actions,prefix)
+<$transclude $variable="tag-pill-inner"
+	tag=<<__tag__>>
+	icon=<<__icon__>>
+	colour=<<__colour__>>
+	fallbackTarget={{$palette$##tag-background}}
+	colourA={{$palette$##foreground}}
+	colourB={{$palette$##background}}
+	element-tag=<<__element-tag__>>
+	element-attributes=<<__element-attributes__>>
+	actions=<<__actions__>>
+	prefix=<<__prefix__>>
+/>
+\end
+
+\procedure simplified-tag(prefix)
+<span class="tc-tag-list-item" data-tag-title=<<currentTiddler>>>
+	<$set name="transclusion" value=<<currentTiddler>>>
+		<$transclude $variable="tag-pill-body"
+			tag=<<currentTiddler>>
+			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
+			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+			palette={{$:/palette}}
+			element-tag="$button"
+			element-attributes="""popup=<<qualify "$:/state/popup/tag">> dragFilter="[all[current]tagging[]]" tag='span'"""
+			prefix=<<prefix>>
+		/>
+		<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes" class="tc-drop-down">
+			<$set name="tv-show-missing-links" value="yes">
+				<$transclude $variable="tag-pill-label-link" prefix=<<prefix>>/>
+			</$set>
+			<hr>
+			<$list filter="[all[shadows+tiddlers]tag<currentTiddler>]">
+				<$transclude $variable="tag-pill-label-link" prefix=<<prefix>>/>
+			</$list>
+		</$reveal>
+	</$set>
+</span>
+\end
+
+<$let storyTiddler=<<currentTiddler>>>
+	<div class="tc-tiddler-frame tc-tiddler-view-frame tc-tiddler-exists tc-tiddler-shadow " role="article">
+		<div class="tc-tiddler-title">
+			<div class="tc-titlebar">
+				<span class="tc-tiddler-controls">
+					<$list filter="[<tour-simplified-tiddler-close-button>match[yes]]" variable="ignore">
+						{{||$:/core/ui/Buttons/close}}
+					</$list>
+				</span>
+				<span>
+					<h2 class="tc-title"><$view field="caption"/></h2>
+				</span>
+			</div>
+		</div>
+		<div class="tc-tags-wrapper">
+			<$list filter="[all[current]tags[]sort[title]]" storyview="pop">
+				<<simplified-tag "$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/">>
+			</$list>
+		</div>
+		<div class="tc-tiddler-body">
+			<$transclude field="text" mode="block"/>
+		</div>
+	</div>
+</$let>
