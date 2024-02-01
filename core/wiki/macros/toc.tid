@@ -9,6 +9,10 @@ tags: $:/tags/Macro
 
 <!-- v5.3.4 complrete rewrite -->
 \function tf.toc-stateTitle() [[$:/state/toc]addsuffix<path>addsuffix[/]addsuffix<currentTiddler>]
+\function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
+
+<!-- At the moment the following function is only used by "tabbed" tocs -->
+\function tf.toc-getItemClass() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
 
 \procedure toc-caption()
 <span class="tc-toc-caption tc-tiny-gap-left">
@@ -19,9 +23,6 @@ tags: $:/tags/Macro
 </$set>
 </span>
 \end
-
-<!-- v5.3.4 rewrite -->
-\function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
@@ -48,6 +49,10 @@ tags: $:/tags/Macro
 </ol>
 \end
 
+<!-- =======================================
+Simple toc macro which shows the full tree
+This macro is _not_ used by other toc-macros
+============================================ -->
 \procedure toc(tag,sort:"",itemClassFilter:"",exclude)
 <$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>>/>
 \end
@@ -107,6 +112,9 @@ tags: $:/tags/Macro
 </$qualify>
 \end
 
+<!-- ==========================================================
+Shows an expandable toc. Item always have an open/close chevron
+=============================================================== -->
 \procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
 <$let path=<<tf.toc-newPath>>>
 	<$set name="excluded" filter="[subfilter<exclude>] [<tag>]">
@@ -153,9 +161,6 @@ tags: $:/tags/Macro
 </$qualify>
 \end
 
-<!-- At the moment the following function is only used by "tabbed" tocs -->
-\function tf.toc-getItemClass() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
-
 \procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-getItemClass>>>
@@ -179,6 +184,10 @@ tags: $:/tags/Macro
 </$qualify>
 \end
 
+<!-- =====================================================
+Shows a selctive expandable toc. 
+If an item has no children, there is no open/close chevron
+========================================================== -->
 \procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
 <$let tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> path=<<tf.toc-newPath>>>
 	<$set name="excluded" filter="[subfilter<exclude>] [<tag>]">
@@ -202,6 +211,10 @@ tags: $:/tags/Macro
 </$let>
 \end
 
+<!-- ==============================================================
+Shows a tabbed toc.
+If a toc-item link is clicked it will open the tiddler in the story 
+=================================================================== -->
 \procedure toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
 <$tiddler tiddler={{{ [<selectedTiddler>get[text]] }}}>
 	<div class="tc-tabbed-table-of-contents">
@@ -232,6 +245,10 @@ tags: $:/tags/Macro
 </$tiddler>
 \end
 
+<!-- ========================================================
+Shows a tabbed toc. If a toc-item link is clicked 
+it will open the tiddler in the view area of the same tiddler
+============================================================= -->
 \procedure toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
 <$linkcatcher to=<<selectedTiddler>>>
 	<$macrocall
