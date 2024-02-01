@@ -3,14 +3,13 @@ tags: $:/tags/Macro
 
 \whitespace trim
 
-<!-- add Custom Icons with v5.2.4 -->
+<!-- v5.2.4 add "Custom Icons" -->
 \procedure toc-open-icon() $:/core/images/down-arrow
 \procedure toc-closed-icon() $:/core/images/right-arrow
 
-<!-- v5.3.4 rewrite -->
-\function tf.makeTocState() [[$:/state/toc]addsuffix<path>addsuffix[/]addsuffix<currentTiddler>]
+<!-- v5.3.4 complrete rewrite -->
+\function tf.toc-stateTitle() [[$:/state/toc]addsuffix<path>addsuffix[/]addsuffix<currentTiddler>]
 
-<!-- only define -> procedure -->
 \procedure toc-caption()
 <span class="tc-toc-caption tc-tiny-gap-left">
 <$set name="tv-wikilinks" value="no">
@@ -22,20 +21,26 @@ tags: $:/tags/Macro
 \end
 
 <!-- v5.3.4 rewrite -->
-\function tf.newPath() [<path>addsuffix[/]addsuffix<tag>]
+\function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
+	<!-- text substitution is needed for backwards compatibility -->
 	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>
-		<$let item=<<currentTiddler>> path=<<tf.newPath>> >
+		<$let item=<<currentTiddler>> path=<<tf.toc-newPath>> >
 			<$set name="excluded" filter="[subfilter<exclude>] [<tag>]">
 				<li class=<<tf.toc-getItemClass>>>
 					<% if [all[current]toc-link[no]] %>
 						<<toc-caption>>
 					<% else %>
-						<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}><<toc-caption>></$link>
+						<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+							<<toc-caption>>
+						</$link>
 					<% endif %>
-					<$macrocall $name="toc-body" tag=<<item>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>/>
+					<$macrocall
+						$name="toc-body"
+						tag=<<item>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>
+					/>
 				</li>
 			</$set>
 		</$let>
@@ -43,10 +48,15 @@ tags: $:/tags/Macro
 </ol>
 \end
 
-\procedure toc(tag,sort:"",itemClassFilter:"", exclude)
+\procedure toc(tag,sort:"",itemClassFilter:"",exclude)
 <$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>>/>
 \end
 
+<!--
+	If a toc-itme shows a link. Clicking the caption will open the tiddler
+	If toc-item is linked, the toc-caption is managed in the parent procedure
+	If a toc-item should not show a link, the toc-caption is part of the button. So it can be clicked to open / close the branch
+-->
 \procedure toc-item(isUnlinked:"")
 	<$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
 		<$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
@@ -67,43 +77,53 @@ tags: $:/tags/Macro
 \end
 
 \procedure toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
-<$qualify name="toc-state" title=<<tf.makeTocState>> >
+<$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-getItemClass>>>
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
 			<<toc-item>>
 			<<toc-caption>>
 		</$link>
 		<$reveal type="match" stateTitle=<<toc-state>> text="open">
-			<$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>/>
+			<$macrocall
+				$name="toc-expandable"
+				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
+			/>
 		</$reveal>
 	</li>
 </$qualify>
 \end
 
 \procedure toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
-<!-- helper function -->
-<$qualify name="toc-state" title=<<tf.makeTocState>>>
+<$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-getItemClass>>>
 		<<toc-item isUnlinked:"yes">>
 		<$reveal type="match" stateTitle=<<toc-state>> text="open">
-			<$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>/>
+			<$macrocall
+				$name="toc-expandable"
+				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
+			/>
 		</$reveal>
 	</li>
 </$qualify>
 \end
 
-\procedure toc-expandable-empty-message()
-<$macrocall $name="toc-linked-expandable-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>/>
-\end
-
 \procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
-<$let path=<<tf.newPath>>>
+<$let path=<<tf.toc-newPath>>>
 	<$set name="excluded" filter="[subfilter<exclude>] [<tag>]">
 		<ol class="tc-toc toc-expandable">
+			<!-- text substitution is needed for backwards compatibility -->
 			<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>
-				<$list filter="[all[current]toc-link[no]]" emptyMessage=<<toc-expandable-empty-message>> >
-					<$macrocall $name="toc-unlinked-expandable-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>> />
-				</$list>
+				<% if [all[current]toc-link[no]] %>
+					<$macrocall
+						$name="toc-unlinked-expandable-body"
+						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>
+					/>
+				<% else %>
+					<$macrocall
+						$name="toc-linked-expandable-body"
+						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>
+					/>
+				<% endif %>
 			</$list>
 		</ol>
 	</$set>
@@ -111,55 +131,71 @@ tags: $:/tags/Macro
 \end
 
 \procedure toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
-<$qualify name="toc-state" title=<<tf.makeTocState>>>
+<$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-getItemClass>>>
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-			<$list filter=`[all[current]tagging[]$(sort)$] -[subfilter<exclude>] +[limit[1]]` variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
+			<% if [all[current]tagging[]] -[subfilter<exclude>] +[limit[1]] %>
 				<<toc-item>>
-			</$list>
+			<% else %>
+				<$button class='tc-btn-invisible'>
+					{{$:/core/images/blank}}
+				</$button>
+			<% endif %>
 			<<toc-caption>>
 		</$link>
 		<$reveal type="match" stateTitle=<<toc-state>> text="open">
-			<$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>/>
+			<$macrocall
+				$name="toc-selective-expandable"
+				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
+			/>
 		</$reveal>
 	</li>
 </$qualify>
 \end
 
-<!-- As of v5.3.4 the following function is only used by "Tabbed" tocs -->
+<!-- At the moment the following function is only used by "tabbed" tocs -->
 \function tf.toc-getItemClass() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
 
 \procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
-<$qualify name="toc-state" title=<<tf.makeTocState>> >
+<$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-getItemClass>>>
-		<$list filter=`[all[current]tagging[]$(sort)$] -[subfilter<exclude>] +[limit[1]]`
-			variable="ignore" 
-			emptyMessage="""<$button class="tc-btn-invisible">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>"""
-		>
+		<% if [all[current]tagging[]] -[subfilter<exclude>] +[limit[1]] %>
 			<<toc-item isUnlinked:"yes">>
-		</$list>
+		<% else %>
+			<$button class="tc-btn-invisible">
+				{{$:/core/images/blank}}
+			</$button>
+			<span class="toc-item-muted">
+				<<toc-caption>>
+			</span>
+		<% endif %>
 		<$reveal type="match" stateTitle=<<toc-state>> text="open">
-			<$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>/>
+			<$macrocall
+				$name="toc-selective-expandable"
+				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
+			/>
 		</$reveal>
 	</li>
 </$qualify>
 \end
 
-\procedure toc-selective-expandable-empty-message()
-<$macrocall $name="toc-linked-selective-expandable-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>/>
-\end
-
 \procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
-<$let tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> path=<<tf.newPath>>>
+<$let tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> path=<<tf.toc-newPath>>>
 	<$set name="excluded" filter="[subfilter<exclude>] [<tag>]">
 		<ol class="tc-toc toc-selective-expandable">
+			<!-- text substitution is needed for backwards compatibility -->
 			<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>
-				<$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>> >
+				<% if [all[current]toc-link[no]] %>
 					<$macrocall
 						$name="toc-unlinked-selective-expandable-body"
 						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>
 					/>
-				</$list>
+				<% else %>
+					<$macrocall
+						$name="toc-linked-selective-expandable-body"
+						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>
+					/>
+				<% endif %>
 			</$list>
 		</ol>
 	</$set>
