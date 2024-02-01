@@ -2,8 +2,16 @@ title: $:/core/macros/toc
 tags: $:/tags/Macro
 
 
+
 \define toc-open-icon() $:/core/images/down-arrow
 \define toc-closed-icon() $:/core/images/right-arrow
+
+<!-- makeTocState test for global open / close toggles - does not work too well - just some experiments -->
+\function makeTocState() [{_/state/toc/global}match[open]then[_/state/toc/global]] :else[[$:/state/toc]addsuffix<__path__>addsuffix[/]addsuffix<currentTiddler>]
+\function makeTocState() [<qualify _/state/toc/global>get[text]match[open]then[_/state/toc/global]] :else[[$:/state/toc]addsuffix<__path__>addsuffix[/]addsuffix<currentTiddler>]
+
+<!-- makeTocState initial -->
+\function makeTocState() [[$:/state/toc]addsuffix<__path__>addsuffix[/]addsuffix<currentTiddler>]
 
 \define toc-caption()
 \whitespace trim
@@ -43,7 +51,7 @@ tags: $:/tags/Macro
 \define toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 \whitespace trim
 <!-- helper function -->
-<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title=<<makeTocState>> >
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
     <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
@@ -70,7 +78,7 @@ tags: $:/tags/Macro
 \define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 \whitespace trim
 <!-- helper function -->
-<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title=<<makeTocState>>>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
@@ -114,7 +122,7 @@ tags: $:/tags/Macro
 
 \define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 \whitespace trim
-<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title=<<makeTocState>>>
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item" >
     <li class=<<toc-item-class>>>
       <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
@@ -142,7 +150,7 @@ tags: $:/tags/Macro
 
 \define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 \whitespace trim
-<$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
+<$qualify name="toc-state" title=<<makeTocState>> >
   <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
       <$list filter="[all[current]tagging[]$sort$limit[1]] -[subfilter<__exclude__>]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
