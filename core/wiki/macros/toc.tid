@@ -8,7 +8,8 @@ tags: $:/tags/Macro
 \procedure toc-closed-icon() $:/core/images/right-arrow
 
 <!-- v5.3.4 complrete rewrite -->
-\function tf.toc-stateTitle() [[$:/state/toc]addsuffix<path>addsuffix[/]addsuffix<currentTiddler>]
+\function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
+
 \function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
 <!-- At the moment the following function is only used by "tabbed" tocs -->
@@ -63,22 +64,21 @@ This macro is _not_ used by other toc-macros
 	If a toc-item should not show a link, the toc-caption is part of the button. So it can be clicked to open / close the branch
 -->
 \procedure toc-item(isUnlinked:"")
-	<$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
-		<$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
+	<% if [<toc-state>get[text]else[close]match[close]] %>
+		<$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" tooltip=<<toc-state>>>
 			<$transclude tiddler=<<toc-closed-icon>> />
 			<% if [<isUnlinked>match[yes]] %>
 				<<toc-caption>>
 			<% endif %>
 		</$button>
-	</$reveal>
-	<$reveal type="match" stateTitle=<<toc-state>> text="open">
-		<$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
+	<% elseif [<toc-state>get[text]match[open]] %>
+		<$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" tooltip=<<toc-state>>>
 			<$transclude tiddler=<<toc-open-icon>> />
 			<% if [<isUnlinked>match[yes]] %>
 				<<toc-caption>>
 			<% endif %>
 		</$button>
-	</$reveal>
+	<% endif %>
 \end
 
 \procedure toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
@@ -88,12 +88,13 @@ This macro is _not_ used by other toc-macros
 			<<toc-item>>
 			<<toc-caption>>
 		</$link>
-		<$reveal type="match" stateTitle=<<toc-state>> text="open">
+		<!-- TODO auto expand -->
+		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
 			/>
-		</$reveal>
+		<% endif %>
 	</li>
 </$qualify>
 \end
@@ -102,12 +103,13 @@ This macro is _not_ used by other toc-macros
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-getItemClass>>>
 		<<toc-item isUnlinked:"yes">>
-		<$reveal type="match" stateTitle=<<toc-state>> text="open">
+		<!-- TODO auto expand -->
+		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
 			/>
-		</$reveal>
+		<% endif %>
 	</li>
 </$qualify>
 \end
@@ -151,12 +153,13 @@ Shows an expandable toc. Item always have an open/close chevron
 			<% endif %>
 			<<toc-caption>>
 		</$link>
-		<$reveal type="match" stateTitle=<<toc-state>> text="open">
+		<!-- TODO auto expand -->
+		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-selective-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
 			/>
-		</$reveal>
+		<% endif %>
 	</li>
 </$qualify>
 \end
@@ -174,12 +177,13 @@ Shows an expandable toc. Item always have an open/close chevron
 				<<toc-caption>>
 			</span>
 		<% endif %>
-		<$reveal type="match" stateTitle=<<toc-state>> text="open">
+		<!-- TODO auto expand -->
+		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-selective-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
 			/>
-		</$reveal>
+		<% endif %>
 	</li>
 </$qualify>
 \end
