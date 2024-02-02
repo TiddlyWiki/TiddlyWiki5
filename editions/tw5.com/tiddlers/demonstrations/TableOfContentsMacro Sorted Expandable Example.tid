@@ -1,6 +1,6 @@
 caption: Sorted
 created: 20150221201942000
-modified: 20240201161531988
+modified: 20240201234445548
 order: 3
 tags: table-of-contents-example
 title: Example Table of Contents: Sorted Expandable
@@ -8,5 +8,5 @@ type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1"
 eg="""<div class="tc-table-of-contents">
-<<toc-expandable "Contents" "!sort[title]">>
+<<toc-selective-expandable "Contents" "!sort[title]">>
 </div>"""/>

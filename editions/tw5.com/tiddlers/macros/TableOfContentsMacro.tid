@@ -1,10 +1,12 @@
 created: 20140919155729620
-modified: 20240201233726111
+modified: 20240202110108027
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
 
-~TiddlyWiki provides several macros for generating a tree of tiddler links by analysing tiddler [[tagging|Tagging]]:
+~TiddlyWiki provides several macros for generating a tree of tiddler links by analysing tiddler [[tagging|Tagging]]. The table of contents is generated as a HTML ordered list. The `<ol>` elements always have the class `tc-toc`. Expandable trees have the additional class `tc-toc-expandable`. Selectively expandable trees (including those in the two-panel browser) have `tc-toc-selective-expandable`.
+
+To make a table of contents appear in the sidebar, see [[How to add a new tab to the sidebar]].
 
 !! Macros
 
@@ -28,23 +30,7 @@ The difference between the last two has to do with what happens when the user cl
 : The target tiddler appears in the right-hand panel, replacing the tiddler that contained the link
 
 ; toc-tabbed-external-nav
-: The target tiddler appears in the normal way (which depends on the user's configured storyview)
-
-!! Structure
-
-The top level of the tree consists of the tiddlers that carry a particular tag, known as the <<.def "root tag">>. Tiddlers tagged with any of those make up the next level down, and so on.
-
-At each level, the tiddlers can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field list>> field of the parent tag tiddler. They can also be ordered by the macro's <<.param sort>> parameter.
-
-The tree displays the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise.
-
-Each tiddler in the tree is normally displayed as a link. To suppress this, give the tiddler a <<.field toc-link>> field with the the value <<.value no>>. In the [[examples|Table-of-Contents Macros (Examples)]], the SecondThree tiddler is set up like this. Clicking such a tiddler in the tree causes its branch to expand or collapse.
-
-<<.from-version "5.1.23">> By default, the links open the tiddlers making up the table of contents. Alternatively, if the tiddler contains a <<.field target>> field then its contents will be used as the target of the link.
-
-The table of contents is generated as an HTML ordered list. The `<ol>` elements always have the class `tc-toc`. Expandable trees have the additional class `tc-toc-expandable`. Selectively expandable trees (including those in the two-panel browser) have `tc-toc-selective-expandable`.
-
-To make a table of contents appear in the sidebar, see [[How to add a new tab to the sidebar]].
+: The target tiddler appears in the normal way in the story river, which depends on the user's configured storyview
 
 !! Parameters
 
@@ -58,7 +44,7 @@ The sort parameter substituted into a single [[filter expression|Filter Expressi
 
 > ``<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>``
 
-!! Tabbed TOC Additional Parameters
+!! Additional Tabbed TOC Parameters
 
 `toc-tabbed-internal-nav` and `toc-tabbed-external-nav` take additional parameters:
 
@@ -76,6 +62,24 @@ The sort parameter substituted into a single [[filter expression|Filter Expressi
 
 ; exclude <<.from-version "5.3.0">>
 : This optional parameter can be used to exclude tiddlers from the TOC list. It allows a [[Title List]] or a <<.olink subfilter>>. Eg: `exclude:"HelloThere [[Title with spaces]]"` or `exclude:"[has[excludeTOC]]"`. Where the former will exclude two tiddlers and the later would exclude every tiddler that has a field <<.field excludeTOC>> independent of its value.<br>''Be aware'' that eg: `[prefix[H]]` is a shortcut for `[all[tiddlers]prefix[H]]`, which can have a performance impact, if used carelessly. So use $:/AdvancedSearch -> ''Filters'' tab to test the <<.param exclude>> parameter
+
+!! Structure
+
+The top level of the tree consists of the tiddlers that carry a particular tag, known as the <<.def "root tag">>. Tiddlers tagged with any of those make up the next level down, and so on.
+
+At each level, the tiddlers can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field list>> field of the parent tag tiddler. They can also be ordered by the macro's <<.param sort>> parameter.
+
+!!! Tiddler Fields
+
+; caption
+: The tree displays the <<.field caption>> field of a tiddler if it has one, or the tiddler's <<.field title>> otherwise.
+
+; toc-link
+: Each tiddler in the tree is normally displayed as a link. To suppress this, give the tiddler a <<.field toc-link>> field with the the value <<.value no>>. In the [[examples|Table-of-Contents Macros (Examples)]], the SecondThree tiddler is set up like this. Clicking such a tiddler in the tree causes its branch to expand or collapse.
+
+; target
+:<<.from-version "5.1.23">> By default, the links open the tiddlers making up the table of contents. Alternatively, if the tiddler contains a <<.field target>> field then its contents will be used as the target of the link.
+
 
 !! Custom Icons
 
