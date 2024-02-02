@@ -27,6 +27,7 @@ A simple HTTP server with regexp-based routes
 options: variables - optional hashmap of variables to set (a misnomer - they are really constant parameters)
 		 routes - optional array of routes to use
 		 wiki - reference to wiki object
+		 verbose - boolean
 */
 function Server(options) {
 	var self = this;
@@ -34,6 +35,7 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
+	this.verbose = !!options.verbose;
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -454,7 +456,7 @@ Server.prototype.listen = function(port,host,prefix) {
 	// Warn if required plugins are missing
 	var missing = [];
 	for (var index=0; index<this.requiredPlugins.length; index++) {
-		if (!this.wiki.getTiddler(this.requiredPlugins[index])) {
+		if(!this.wiki.getTiddler(this.requiredPlugins[index])) {
 			missing.push(this.requiredPlugins[index]);
 		}
 	}
@@ -464,12 +466,13 @@ Server.prototype.listen = function(port,host,prefix) {
 		$tw.utils.warning(error);
 	}
 	// Create the server
-	var server;
-	if(this.listenOptions) {
-		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
-	} else {
-		server = this.transport.createServer(this.requestHandler.bind(this));
-	}
+	var server = this.transport.createServer(this.listenOptions || {},function(request,response,options) {
+		var start = new Date().getTime()
+		response.on("finish",function() {
+			// console.log("Request",request.method,request.url,(new Date().getTime()) - start);
+		});
+		self.requestHandler(request,response,options);
+	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
 		var address = server.address(),
