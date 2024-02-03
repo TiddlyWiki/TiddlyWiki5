@@ -38,8 +38,8 @@ tags: $:/tags/Macro
 	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<$let _toc-exclude={{{ [<tf.toc-exclude>match[yes]then<tf.toc-excludeYes>] :else[<tf.toc-exclude>] }}} >
 			<%if [<currentTiddler>] -[subfilter<_toc-exclude>] %>
-				<$let item=<<currentTiddler>> _path=<<tf.toc-newPath>> >
-					<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<_toc-exclude>]">
+				<$let item=<<currentTiddler>> __path=<<tf.toc-newPath>> >
+					<$set name="__excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<_toc-exclude>]">
 						<li class=<<tf.toc-getItemClass>>>
 							<% if [all[current]toc-link[no]] %>
 								<<toc-caption>>
@@ -51,7 +51,7 @@ tags: $:/tags/Macro
 							<% endif %>
 							<$macrocall
 								$name="toc-body"
-								tag=<<item>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<_excluded>> path=<<_path>>
+								tag=<<item>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
 							/>
 						</li>
 					</$set>
