@@ -25,31 +25,45 @@ tags: $:/tags/Macro
 </span>
 \end
 
+<!-- tf.toc-include needs to use <tag> -->
+\function tf.toc-include() [<tag>get[toc-include]]
+
+<!-- the following functions need to use <currentTiddler> -->
+\function tf.toc-exclude() [<currentTiddler>get[toc-exclude]]
+\function tf.toc-excludeYes() [<currentTiddler>format:titlelist[]]
+
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
 	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>
-		<$let item=<<currentTiddler>> __path=<<tf.toc-newPath>> >
-			<$set name="__excluded" filter="[subfilter<exclude>] [<tag>]">
-				<li class=<<tf.toc-getItemClass>>>
-					<% if [all[current]toc-link[no]] %>
-						<<toc-caption>>
-					<% else %>
-						<!-- v5.1.23 use target-field if present in tiddler -->
-						<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-							<<toc-caption>>
-						</$link>
-					<% endif %>
-					<$macrocall
-						$name="toc-body"
-						tag=<<item>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
-					/>
-				</li>
-			</$set>
+	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+		<$let _toc-exclude={{{ [<tf.toc-exclude>match[yes]then<tf.toc-excludeYes>] :else[<tf.toc-exclude>] }}} >
+			<%if [<currentTiddler>] -[subfilter<_toc-exclude>] %>
+				<$let item=<<currentTiddler>> _path=<<tf.toc-newPath>> >
+					<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<_toc-exclude>]">
+						<li class=<<tf.toc-getItemClass>>>
+							<% if [all[current]toc-link[no]] %>
+								<<toc-caption>>
+							<% else %>
+								<!-- v5.1.23 use target-field if present in tiddler -->
+								<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+									<<toc-caption>>
+								</$link>
+							<% endif %>
+							<$macrocall
+								$name="toc-body"
+								tag=<<item>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<_excluded>> path=<<_path>>
+							/>
+						</li>
+					</$set>
+				</$let>
+			<% endif %>
 		</$let>
 	</$list>
 </ol>
 \end
+<!-- log -->
+<!-- <$log tag=<<tag>> _t-e=<<_toc-exclude>> ct=<<currentTiddler>> sub={{{ [subfilter<_toc-exclude>]}}}  exclude=<<exclude>>/> -->
+<!-- log -->
 
 <!-- =======================================
 Simple toc macro which shows the full tree
