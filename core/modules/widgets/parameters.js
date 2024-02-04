@@ -58,13 +58,13 @@ ParametersWidget.prototype.execute = function() {
 	// Process each parameter
 	if(pointer instanceof TranscludeWidget) {
 		// Get the value for each defined parameter
-		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr,index) {
+		$tw.utils.each($tw.utils.getOrderedAttributesFromParseTreeNode(self.parseTreeNode),function(attr) {
 			var name = attr.name;
 			// If the attribute name starts with $$ then reduce to a single dollar
 			if(name.substr(0,2) === "$$") {
 				name = name.substr(1);
 			}
-			var value = pointer.getTransclusionParameter(name,index,self.getAttribute(attr.name,""));
+			var value = pointer.getTransclusionParameter(name,self.getAttribute(attr.name,""));
 			self.setVariable(name,value);
 		});
 		// Assign any metaparameters

@@ -360,12 +360,15 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 /*
 Fetch the value of a parameter given either its name or index
 */
-TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
+TranscludeWidget.prototype.getTransclusionParameter = function(name,defaultValue) {
 	if(name in this.stringParametersByName) {
 		return this.stringParametersByName[name];
 	} else {
+		var index = this.claimedIndices || 0;
 		var name = "" + index;
 		if(name in this.stringParametersByName) {
+			// This parameter now corresponds to this index. No other parameters may correspond to it, so we increment claimedIndices;
+			this.claimedIndices = index + 1;
 			return this.stringParametersByName[name];
 		}
 	}
