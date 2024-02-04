@@ -40,7 +40,10 @@ tags: $:/tags/Macro
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
 	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+	<!-- <$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`> -->
+	<$list filter=` [subfilter<tf.toc-include>]
+					:else[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$]
+					-[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-exclude>] %>
 			<$let item=<<currentTiddler>> __path=<<tf.toc-newPath>> >
 				<!-- adding tf.toc-exclude, excludes blocked elements from all visible sub-nodes -->
@@ -139,7 +142,10 @@ Shows an expandable toc. Item always have an open/close chevron
 \procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
 <ol class="tc-toc toc-expandable">
 	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+	<!-- <$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`> -->
+	<$list filter=` [subfilter<tf.toc-include>]
+					:else[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$]
+					-[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-exclude>] %>
 			<$let __path=<<tf.toc-newPath>>>
 				<$set name="__excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-exclude>]">
@@ -220,7 +226,10 @@ If an item has no children, there is no open/close chevron
 \procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc toc-selective-expandable">
 	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+	<!-- <$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`> -->
+	<$list filter=` [subfilter<tf.toc-include>]
+					:else[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$]
+					-[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-exclude>] %>
 			<$let __path=<<tf.toc-newPath>>>
 				<$set name="__excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-exclude>]">
