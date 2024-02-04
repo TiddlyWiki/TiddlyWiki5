@@ -17,24 +17,25 @@ tags: $:/tags/Macro
 \procedure toc-open-icon() $:/core/images/down-arrow
 \procedure toc-closed-icon() $:/core/images/right-arrow
 
-<!-- v5.3.4 complete rewrite -->
-\function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
-\function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
-
-<!-- At the moment the following function is only used by "tabbed" tocs -->
-\function tf.toc-getItemClass() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
+<!-- helper functions for li class definitions -->
+\function tf.toc-itemClassFilter() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
 \function tf.toc-includedClass() [subfilter<tf.toc-include>match<currentTiddler>then[toc-item-included]]
+\function tf.toc-excludedClass() [<tf.toc-exclude>!is[blank]then[toc-item-excluded]]
+<!-- join the CSS definitions from above -->
+\function tf.toc-itemClass() [<tf.toc-itemClassFilter>] [<tf.toc-includedClass>] [<tf.toc-excludedClass>] +[join[ ]]
 
-\function tf.toc-itemClass() [<tf.toc-getItemClass>] [<tf.toc-includedClass>] [<tf.toc-exclude>!is[blank]then[toc-item-excluded]] +[join[ ]]
+<!-- the following 3 functions need to use <currentTiddler> -->
+\function tf.toc-getExcludeText() [<currentTiddler>get[toc-exclude]]
+\function tf.toc-excludeIsYes() [<currentTiddler>format:titlelist[]]
+
+<!-- Special case, if toc-exclude field is "yes", we need a currentTiddler *titlelist* -- otherwise return the content as text -->
+\function tf.toc-exclude() [<tf.toc-getExcludeText>match[yes]then<tf.toc-excludeIsYes>] :else[<tf.toc-getExcludeText>]
 
 <!-- tf.toc-include needs to use <tag> -->
 \function tf.toc-include() [<tag>get[toc-include]]
 
-<!-- the following 3 functions need to use <currentTiddler> -->
-\function tf.toc-getExclude() [<currentTiddler>get[toc-exclude]]
-\function tf.toc-excludeYes() [<currentTiddler>format:titlelist[]]
-
-\function tf.toc-exclude() [<tf.toc-getExclude>match[yes]then<tf.toc-excludeYes>] :else[<tf.toc-getExclude>]
+<!-- define unique path based state title -->
+\function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
@@ -95,6 +96,8 @@ This macro is _not_ used by other toc-macros
 	</$button>
 <% endif %>
 \end
+
+\function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
 
 \procedure toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
@@ -158,12 +161,15 @@ Shows an expandable toc. Item always have an open/close chevron
 </ol>
 \end
 
+\function tf.toc-curTidInclude() [<currentTiddler>get[toc-include]]
+
 \procedure toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-itemClass>>>
 		<!-- v5.1.23 use target-field if present in tiddler -->
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-			<% if [all[current]tagging[]] -[subfilter<exclude>] +[limit[1]] %>
+			<!-- The subfilter<exclude> needs to be the last filter run -->
+			<% if [all[current]tagging[]] [subfilter<tf.toc-curTidInclude>] -[subfilter<exclude>] +[limit[1]] %>
 				<<toc-item>>
 			<% else %>
 				<$button class='tc-btn-invisible'>
@@ -186,7 +192,7 @@ Shows an expandable toc. Item always have an open/close chevron
 \procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-itemClass>>>
-		<% if [all[current]tagging[]] -[subfilter<exclude>] +[limit[1]] %>
+		<% if [all[current]tagging[]] [subfilter<tf.toc-curTidInclude>] -[subfilter<exclude>] +[limit[1]] %>
 			<<toc-item isUnlinked:"yes">>
 		<% else %>
 			<$button class="tc-btn-invisible">
@@ -245,7 +251,7 @@ If a toc-item link is clicked it will open the tiddler in the story
 	<div class="tc-tabbed-table-of-contents">
 		<$linkcatcher to=<<selectedTiddler>>>
 			<div class="tc-table-of-contents">
-				<!-- v5.3.4 itemClassFilter has been replaced by tf.toc-getItemClass -->
+				<!-- v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter -->
 				<$macrocall
 					$name="toc-selective-expandable"
 					tag=<<tag>>
