@@ -15,6 +15,8 @@ tags: $:/tags/Macro
 <!-- At the moment the following function is only used by "tabbed" tocs -->
 \function tf.toc-getItemClass() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
 
+\function tf.toc-includedClass() [tf.toc-getItemClass[]] [subfilter<tf.toc-include>match<currentTiddler>then[toc-item-included]] +[join[ ]]
+
 \procedure toc-caption()
 <span class="tc-toc-caption tc-tiny-gap-left">
 <$let name="tv-wikilinks" value="no">
@@ -40,7 +42,7 @@ tags: $:/tags/Macro
 			<%if [<currentTiddler>] -[subfilter<_toc-exclude>] %>
 				<$let item=<<currentTiddler>> __path=<<tf.toc-newPath>> >
 					<$set name="__excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<_toc-exclude>]">
-						<li class=<<tf.toc-getItemClass>>>
+						<li class=<<tf.toc-includedClass>>>
 							<% if [all[current]toc-link[no]] %>
 								<<toc-caption>>
 							<% else %>
@@ -134,26 +136,30 @@ This macro is _not_ used by other toc-macros
 Shows an expandable toc. Item always have an open/close chevron
 =============================================================== -->
 \procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
-<$let __path=<<tf.toc-newPath>>>
-	<$set name="__excluded" filter="[subfilter<exclude>] [<tag>]">
-		<ol class="tc-toc toc-expandable">
-			<!-- text substitution is needed for backwards compatibility -->
-			<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>
-				<% if [all[current]toc-link[no]] %>
-					<$macrocall
-						$name="toc-unlinked-expandable-body"
-						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
-					/>
-				<% else %>
-					<$macrocall
-						$name="toc-linked-expandable-body"
-						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
-					/>
-				<% endif %>
-			</$list>
-		</ol>
-	</$set>
-</$let>
+<ol class="tc-toc toc-expandable">
+	<!-- text substitution is needed for backwards compatibility -->
+	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+		<$let _toc-exclude={{{ [<tf.toc-exclude>match[yes]then<tf.toc-excludeYes>] :else[<tf.toc-exclude>] }}} >
+			<%if [<currentTiddler>] -[subfilter<_toc-exclude>] %>
+				<$let __path=<<tf.toc-newPath>>>
+					<$set name="__excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<_toc-exclude>]">
+						<% if [all[current]toc-link[no]] %>
+							<$macrocall
+								$name="toc-unlinked-expandable-body"
+								tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
+							/>
+						<% else %>
+							<$macrocall
+								$name="toc-linked-expandable-body"
+								tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
+							/>
+						<% endif %>
+					</$set>
+				</$let>
+			<% endif %>
+		</$let>
+	</$list>
+</ol>
 \end
 
 \procedure toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
@@ -210,26 +216,30 @@ Shows a selctive expandable toc.
 If an item has no children, there is no open/close chevron
 ========================================================== -->
 \procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
-<$let __path=<<tf.toc-newPath>>>
-	<$set name="__excluded" filter="[subfilter<exclude>] [<tag>]">
-		<ol class="tc-toc toc-selective-expandable">
-			<!-- text substitution is needed for backwards compatibility -->
-			<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] -[<tag>] -[subfilter<exclude>]`>
-				<% if [all[current]toc-link[no]] %>
-					<$macrocall
-						$name="toc-unlinked-selective-expandable-body"
-						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
-					/>
-				<% else %>
-					<$macrocall
-						$name="toc-linked-selective-expandable-body"
-						tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
-					/>
-				<% endif %>
-			</$list>
-		</ol>
-	</$set>
-</$let>
+<ol class="tc-toc toc-selective-expandable">
+	<!-- text substitution is needed for backwards compatibility -->
+	<$list filter=`[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$] [subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+		<$let _toc-exclude={{{ [<tf.toc-exclude>match[yes]then<tf.toc-excludeYes>] :else[<tf.toc-exclude>] }}} >
+			<%if [<currentTiddler>] -[subfilter<_toc-exclude>] %>
+				<$let __path=<<tf.toc-newPath>>>
+					<$set name="__excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<_toc-exclude>]">
+						<% if [all[current]toc-link[no]] %>
+							<$macrocall
+								$name="toc-unlinked-selective-expandable-body"
+								tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
+							/>
+						<% else %>
+							<$macrocall
+								$name="toc-linked-selective-expandable-body"
+								tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<__excluded>> path=<<__path>>
+							/>
+						<% endif %>
+					</$set>
+				</$let>
+			<% endif %>
+		</$let>
+	</$list>
+</ol>
 \end
 
 <!-- ==============================================================
