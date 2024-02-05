@@ -19,8 +19,8 @@ tags: $:/tags/Macro
 
 <!-- helper functions for li class definitions -->
 \function tf.toc-itemClassFilter() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
-\function tf.toc-includedClass() [subfilter<tf.toc-include>match<currentTiddler>then[toc-item-include]]
-\function tf.toc-filteredClass() [subfilter<tf.toc-filter>match<currentTiddler>then[toc-item-filter]]
+\function tf.toc-includeClass() [subfilter<tf.toc-include>match<currentTiddler>then[toc-item-include]]
+\function tf.toc-filterClass() [subfilter<tf.toc-filter>match<currentTiddler>then[toc-item-filter]]
 \function tf.toc-hideClass() [<tf.toc-hide>!is[blank]then[toc-item-hide]]
 <!-- join the CSS definitions from above -->
 \function tf.toc-itemClass() [<tf.toc-itemClassFilter>] [<tf.toc-includeClass>] [<tf.toc-filterClass>] [<tf.toc-hideClass>] +[join[ ]]
