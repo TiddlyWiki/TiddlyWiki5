@@ -5,18 +5,30 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-\whitespace trim
 \procedure elephant(first:"one",second:"two")
+\whitespace trim
 \parameters (third:"three")
-\parameters (fourth:"four")
+<$parameters fourth=four>
 <$text text=<<first>>/>/<$text text=<<second>>/>/<$text text=<<third>>/>/<$text text=<<fourth>>/>
+</$parameters>
 \end elephant
 
+Begin
 <<elephant>>
--
 <<elephant "a" "b" "c" "d">>
+<<elephant second:named a c d>>
+<<elephant third:3rd second:2nd a d>>
+<<elephant fourth:4th>>
+<<elephant a fourth:4th>>
 
 +
 title: ExpectedResult
 
-<p>one/two/three/four</p><p>-a/b/c/d</p>
+<p>Begin
+one/two/three/four
+a/b/c/d
+a/named/c/d
+a/2nd/3rd/d
+one/two/three/4th
+a/two/three/4th
+</p>
