@@ -17,6 +17,10 @@ tags: $:/tags/Macro
 \procedure toc-open-icon() $:/core/images/down-arrow
 \procedure toc-closed-icon() $:/core/images/right-arrow
 
+\procedure toc-hide-field() toc-hide
+\procedure toc-include-field() toc-include
+\procedure toc-filter-field() toc-filter
+
 <!-- helper functions for li class definitions -->
 \function tf.toc-itemClassFilter() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
 \function tf.toc-includeClass() [subfilter<tf.toc-include>match<currentTiddler>then[toc-item-include]]
@@ -26,15 +30,15 @@ tags: $:/tags/Macro
 \function tf.toc-itemClass() [<tf.toc-itemClassFilter>] [<tf.toc-includeClass>] [<tf.toc-filterClass>] [<tf.toc-hideClass>] +[join[ ]]
 
 <!-- the following 3 functions need to use <currentTiddler> -->
-\function tf.toc-getHideText() [<currentTiddler>get[toc-hide]]
+\function tf.toc-getHideText() [<currentTiddler>get<toc-hide-field>]
 \function tf.toc-hideIsYes() [<currentTiddler>format:titlelist[]]
 
 <!-- Special case, if toc-hide field is "yes", we need a currentTiddler *titlelist* -- otherwise return the content as text -->
 \function tf.toc-hide() [<tf.toc-getHideText>match[yes]then<tf.toc-hideIsYes>] :else[<tf.toc-getHideText>]
 
 <!-- tf.toc-include and tf.toc-filter need to use <tag> -->
-\function tf.toc-include() [<tag>get[toc-include]]
-\function tf.toc-filter() [<tag>get[toc-filter]]
+\function tf.toc-include() [<tag>get<toc-include-field>]
+\function tf.toc-filter() [<tag>get<toc-filter-field>]
 
 <!-- define unique path based state title -->
 \function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
@@ -167,7 +171,7 @@ Shows an expandable toc. Item always have an open/close chevron
 </ol>
 \end
 
-\function tf.toc-curTidInclude() [<currentTiddler>get[toc-include]]
+\function tf.toc-curTidInclude() [<currentTiddler>get<toc-include-field>]
 
 \procedure toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
