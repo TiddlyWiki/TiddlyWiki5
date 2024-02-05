@@ -67,20 +67,8 @@ This is <<name>> demonstrates <<desc>>.
 <<myproc>>
 """>>
 
-!! Caution in Using Positional Parameters
-Procedures are a shortcut syntax for the SetVariableWidget with an implicit ParametersWidget, so generally there is no reason to have multiple parameters widgets within a definition. In the below example when passing `x` to `myproc`, it will also be set to `a`:
-
-<<wikitext-example-without-html 
-src:"""\procedure myproc(x:10)
-\parameters (a:100, b:200)
-
-x=<<x>>, a=<<a>>, b=<<b>>
-\end
-
-<<myproc 50>>
-""">>
-
-The reason for that result is clearer if we consider an equivalent with explicit parameters widgets.
+!! When Using Positional Parameters
+It is uncommon to require multiple parameters pragma in a definition, but if you do so, the positions for parameters are assigned sequentially in the order of discovery. In the below example, `a` is the second positional parameter, because it comes after `x`:
 
 <$macrocall $name=wikitext-example-without-html 
 src='<$let myprog="""
@@ -89,15 +77,25 @@ src='<$let myprog="""
 
 x=<<x>>, a=<<a>>, b=<<b>>
 """>
-<<myprog 50>>
+<<myprog 50 73>>
 </$let>'
 />
 
-This is because those two parameters widgets are entirely independent. They are both processed as if the other parameter widget is not there.
+This behavior is the same when parameters are defined in the procedure's declaration.
+
+<<wikitext-example-without-html
+src:"""\procedure myproc(x:10)
+\parameters (a:100, b:200)
+
+x=<<x>>, a=<<a>>, b=<<b>>
+\end
+
+<<myproc 50 73>>
+""">>
+
+This is because a procedures are a shortcut syntax for the <<.wlink SetWidget>> widget with an implicit <<.wlink ParametersWidget>> widget.
 
 <<.tip "The positional parameters are only required when using the parameterised transclusion shortcut syntax, and that in other cases it is generally clearer to use named parameters.">>
-
-To prevent such situation of above example, pass parameters by name as below.
 
 <<wikitext-example-without-html 
 src:"""\procedure myproc(x:10)
@@ -106,5 +104,5 @@ src:"""\procedure myproc(x:10)
 x=<<x>>, a=<<a>>, b=<<b>>
 \end
 
-<<myproc x:50>>
+<<myproc a:73>>
 """>>
