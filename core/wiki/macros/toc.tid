@@ -19,11 +19,11 @@ tags: $:/tags/Macro
 
 <!-- helper functions for li class definitions -->
 \function tf.toc-itemClassFilter() [<selectedTiddler>get[text]match<currentTiddler>then[toc-item-selected]else[toc-item]]
-\function tf.toc-includedClass() [subfilter<tf.toc-include>match<currentTiddler>then[toc-item-included]]
-\function tf.toc-overrideClass() [subfilter<tf.toc-override>match<currentTiddler>then[toc-item-override]]
+\function tf.toc-includedClass() [subfilter<tf.toc-include>match<currentTiddler>then[toc-item-include]]
+\function tf.toc-filteredClass() [subfilter<tf.toc-filter>match<currentTiddler>then[toc-item-filter]]
 \function tf.toc-hideClass() [<tf.toc-hide>!is[blank]then[toc-item-hide]]
 <!-- join the CSS definitions from above -->
-\function tf.toc-itemClass() [<tf.toc-itemClassFilter>] [<tf.toc-includedClass>] [<tf.toc-overrideClass>] [<tf.toc-hideClass>] +[join[ ]]
+\function tf.toc-itemClass() [<tf.toc-itemClassFilter>] [<tf.toc-includeClass>] [<tf.toc-filterClass>] [<tf.toc-hideClass>] +[join[ ]]
 
 <!-- the following 3 functions need to use <currentTiddler> -->
 \function tf.toc-getHideText() [<currentTiddler>get[toc-hide]]
@@ -32,9 +32,9 @@ tags: $:/tags/Macro
 <!-- Special case, if toc-hide field is "yes", we need a currentTiddler *titlelist* -- otherwise return the content as text -->
 \function tf.toc-hide() [<tf.toc-getHideText>match[yes]then<tf.toc-hideIsYes>] :else[<tf.toc-getHideText>]
 
-<!-- tf.toc-include and tf.toc-override need to use <tag> -->
+<!-- tf.toc-include and tf.toc-filter need to use <tag> -->
 \function tf.toc-include() [<tag>get[toc-include]]
-\function tf.toc-override() [<tag>get[toc-override]]
+\function tf.toc-filter() [<tag>get[toc-filter]]
 
 <!-- define unique path based state title -->
 \function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
@@ -42,7 +42,7 @@ tags: $:/tags/Macro
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc">
 	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=` [subfilter<tf.toc-override>]
+	<$list filter=` [subfilter<tf.toc-filter>]
 					:else[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
@@ -143,7 +143,7 @@ Shows an expandable toc. Item always have an open/close chevron
 \procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
 <ol class="tc-toc toc-expandable">
 	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=` [subfilter<tf.toc-override>]
+	<$list filter=` [subfilter<tf.toc-filter>]
 					:else[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
@@ -226,7 +226,7 @@ If an item has no children, there is no open/close chevron
 \procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
 <ol class="tc-toc toc-selective-expandable">
 	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=` [subfilter<tf.toc-override>]
+	<$list filter=` [subfilter<tf.toc-filter>]
 					:else[all[shadows+tiddlers]tag<tag>!has[draft.of]$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
