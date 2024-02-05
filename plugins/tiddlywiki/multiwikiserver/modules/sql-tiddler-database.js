@@ -61,23 +61,23 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		-- Bags have names and access control settings
 		CREATE TABLE IF NOT EXISTS bags (
 			bag_id INTEGER PRIMARY KEY AUTOINCREMENT,
-			bag_name TEXT UNIQUE,
-			accesscontrol TEXT,
-			description TEXT
+			bag_name TEXT UNIQUE NOT NULL,
+			accesscontrol TEXT NOT NULL,
+			description TEXT NOT NULL
 		)
 	`,`
 		-- Recipes have names...
 		CREATE TABLE IF NOT EXISTS recipes (
 			recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
-			recipe_name TEXT UNIQUE,
-			description TEXT
+			recipe_name TEXT UNIQUE NOT NULL,
+			description TEXT NOT NULL
 		)
 	`,`
 		-- ...and recipes also have an ordered list of bags
 		CREATE TABLE IF NOT EXISTS recipe_bags (
-			recipe_id INTEGER,
-			bag_id INTEGER,
-			position INTEGER,
+			recipe_id INTEGER NOT NULL,
+			bag_id INTEGER NOT NULL,
+			position INTEGER NOT NULL,
 			FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON UPDATE CASCADE ON DELETE CASCADE,
 			FOREIGN KEY (bag_id) REFERENCES bags(bag_id) ON UPDATE CASCADE ON DELETE CASCADE,
 			UNIQUE (recipe_id, bag_id)
@@ -86,8 +86,8 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		-- Tiddlers are contained in bags and have titles
 		CREATE TABLE IF NOT EXISTS tiddlers (
 			tiddler_id INTEGER PRIMARY KEY AUTOINCREMENT,
-			bag_id INTEGER,
-			title TEXT,
+			bag_id INTEGER NOT NULL,
+			title TEXT NOT NULL,
 			FOREIGN KEY (bag_id) REFERENCES bags(bag_id) ON UPDATE CASCADE ON DELETE CASCADE,
 			UNIQUE (bag_id, title)
 		)
@@ -95,8 +95,8 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		-- Tiddlers also have unordered lists of fields, each of which has a name and associated value
 		CREATE TABLE IF NOT EXISTS fields (
 			tiddler_id INTEGER,
-			field_name TEXT,
-			field_value TEXT,
+			field_name TEXT NOT NULL,
+			field_value TEXT NOT NULL,
 			FOREIGN KEY (tiddler_id) REFERENCES tiddlers(tiddler_id) ON UPDATE CASCADE ON DELETE CASCADE,
 			UNIQUE (tiddler_id, field_name)
 		)
