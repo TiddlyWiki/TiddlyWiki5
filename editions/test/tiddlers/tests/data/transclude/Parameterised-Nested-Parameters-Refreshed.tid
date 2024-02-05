@@ -1,0 +1,44 @@
+title: Transclude/Parameterised/NestedParameters/Refreshed
+description: Parameterised transclusion with nested parameter widgets and a refresh cycle
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure elephant(first:"one",second:"two")
+\whitespace trim
+\parameters (third:"three")
+<$let variable={{Canary}}>
+<$parameters fourth=four>
+<$text text=<<first>>/>/<$text text=<<second>>/>/<$text text=<<third>>/>/<$text text=<<fourth>>/>
+</$parameters>
+</$let>
+\end elephant
+
+Begin
+<<elephant>>
+<<elephant "a" "b" "c" "d">>
+<<elephant second:named a c d>>
+<<elephant third:3rd second:2nd a d>>
+<<elephant fourth:4th>>
+<<elephant a fourth:4th>>
+
++
+title: Canary
+
+Else
++
+title: Actions
+
+<$action-setfield $tiddler="Canary" text="Something"/>
++
+title: ExpectedResult
+
+<p>Begin
+one/two/three/four
+a/b/c/d
+a/named/c/d
+a/2nd/3rd/d
+one/two/three/4th
+a/two/three/4th
+</p>
