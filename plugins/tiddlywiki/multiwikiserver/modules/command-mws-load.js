@@ -41,7 +41,7 @@ function loadBackupArchive(archivePath) {
 	const bagNames = fs.readdirSync(path.resolve(archivePath,"bags")).filter(filename => filename !== ".DS_Store");
 	for(const bagName of bagNames) {
 		console.log(`Reading bag ${bagName}`);
-		$tw.sqlTiddlerStore.createBag(decodeURIComponent(bagName),"No description for " + bagName);
+		$tw.mws.store.createBag(decodeURIComponent(bagName),"No description for " + bagName);
 		// Read the metadata
 		const jsonInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"bags",bagName,"meta/info.json"),"utf8"));
 		if(fs.existsSync(path.resolve(archivePath,"bags",bagName,"tiddlers"))) {
@@ -50,7 +50,7 @@ function loadBackupArchive(archivePath) {
 			for(const tiddlerFilename of tiddlerFilenames) {
 				const jsonTiddler = fs.readFileSync(path.resolve(archivePath,"bags",bagName,"tiddlers",tiddlerFilename),"utf8"),
 					tiddler = JSON.parse(jsonTiddler);
-				$tw.sqlTiddlerStore.saveBagTiddler(tiddler,decodeURIComponent(bagName));
+				$tw.mws.store.saveBagTiddler(tiddler,decodeURIComponent(bagName));
 			}	
 		}
 	}
@@ -58,7 +58,7 @@ function loadBackupArchive(archivePath) {
 	const recipeNames = fs.readdirSync(path.resolve(archivePath,"recipes")).filter(filename => filename !== ".DS_Store");
 	for(const recipeName of recipeNames) {
 		const jsonInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"recipes",recipeName,"info.json"),"utf8"));
-		$tw.sqlTiddlerStore.createRecipe(decodeURIComponent(recipeName),jsonInfo.recipe.map(recipeLine => recipeLine[0]),"No description for " + recipeName);
+		$tw.mws.store.createRecipe(decodeURIComponent(recipeName),jsonInfo.recipe.map(recipeLine => recipeLine[0]),"No description for " + recipeName);
 	}
 }
 

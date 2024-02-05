@@ -23,7 +23,7 @@ exports.handler = function(request,response,state) {
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
-		result = bag_name === bag_name_2 && $tw.sqlTiddlerStore.getBagTiddler(title,bag_name);
+		result = bag_name === bag_name_2 && $tw.mws.store.getBagTiddler(title,bag_name);
 	if(bag_name === bag_name_2 && result) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
@@ -40,7 +40,7 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-			tiddlerFields = $tw.sqlTiddlerStore.processCanonicalUriTiddler(tiddlerFields,bag_name,null);
+			tiddlerFields = $tw.mws.store.processCanonicalUriTiddler(tiddlerFields,bag_name,null);
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content

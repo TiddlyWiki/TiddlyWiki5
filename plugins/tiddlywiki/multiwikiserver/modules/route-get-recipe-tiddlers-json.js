@@ -24,11 +24,11 @@ exports.handler = function(request,response,state) {
 		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]);
 	if(recipe_name === recipe_name_2) {
 		// Get the tiddlers in the recipe
-		var recipeTiddlers = $tw.sqlTiddlerStore.getRecipeTiddlers(recipe_name);
+		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name);
 		// Get a skinny version of each tiddler
 		var tiddlers = [];
 		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
-			var tiddlerInfo = $tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
+			var tiddlerInfo = $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			tiddlers.push(Object.assign({},tiddlerInfo.tiddler,{text: undefined}));
 		});
 		var text = JSON.stringify(tiddlers);

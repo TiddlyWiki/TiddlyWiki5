@@ -23,7 +23,7 @@ exports.handler = function(request,response,state) {
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
-		tiddlerInfo = recipe_name === recipe_name_2 && $tw.sqlTiddlerStore.getRecipeTiddler(title,recipe_name);
+		tiddlerInfo = recipe_name === recipe_name_2 && $tw.mws.store.getRecipeTiddler(title,recipe_name);
 	if(recipe_name === recipe_name_2 && tiddlerInfo && tiddlerInfo.tiddler) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
@@ -40,7 +40,7 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-			tiddlerFields = $tw.sqlTiddlerStore.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
+			tiddlerFields = $tw.mws.store.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content

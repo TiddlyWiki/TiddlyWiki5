@@ -38,28 +38,30 @@ exports.startup = function() {
 	var databasePath = path.resolve($tw.boot.wikiPath,"store/database.sqlite");
 	// Create and initialise the tiddler store
 	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore;
-	$tw.sqlTiddlerStore = new SqlTiddlerStore({
-		databasePath: databasePath
-	});
+	$tw.mws = {
+		store: new SqlTiddlerStore({
+			databasePath: databasePath
+		})
+	};
 	// Create docs bag and recipe
-	$tw.sqlTiddlerStore.createBag("docs","TiddlyWiki Documentation from https://tiddlywiki.com/");
-	$tw.sqlTiddlerStore.createRecipe("docs",["docs"],"TiddlyWiki Documentation from https://tiddlywiki.com/");
-	$tw.sqlTiddlerStore.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"tw5.com/tiddlers"),"docs");
-	$tw.sqlTiddlerStore.createBag("dev-docs","TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
-	$tw.sqlTiddlerStore.createRecipe("dev-docs",["dev-docs"],"TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
-	$tw.sqlTiddlerStore.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"dev/tiddlers"),"dev-docs");
+	$tw.mws.store.createBag("docs","TiddlyWiki Documentation from https://tiddlywiki.com/");
+	$tw.mws.store.createRecipe("docs",["docs"],"TiddlyWiki Documentation from https://tiddlywiki.com/");
+	$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"tw5.com/tiddlers"),"docs");
+	$tw.mws.store.createBag("dev-docs","TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
+	$tw.mws.store.createRecipe("dev-docs",["dev-docs"],"TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
+	$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"dev/tiddlers"),"dev-docs");
 	// Create bags and recipes
-	$tw.sqlTiddlerStore.createBag("bag-alpha","A test bag");
-	$tw.sqlTiddlerStore.createBag("bag-beta","Another test bag");
-	$tw.sqlTiddlerStore.createBag("bag-gamma","A further test bag");
-	$tw.sqlTiddlerStore.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"First wiki");
-	$tw.sqlTiddlerStore.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"],"Second Wiki");
-	$tw.sqlTiddlerStore.createRecipe("recipe-tau",["bag-alpha"],"Third Wiki");
-	$tw.sqlTiddlerStore.createRecipe("recipe-upsilon",["bag-alpha","bag-gamma","bag-beta"],"Fourth Wiki");
+	$tw.mws.store.createBag("bag-alpha","A test bag");
+	$tw.mws.store.createBag("bag-beta","Another test bag");
+	$tw.mws.store.createBag("bag-gamma","A further test bag");
+	$tw.mws.store.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"First wiki");
+	$tw.mws.store.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"],"Second Wiki");
+	$tw.mws.store.createRecipe("recipe-tau",["bag-alpha"],"Third Wiki");
+	$tw.mws.store.createRecipe("recipe-upsilon",["bag-alpha","bag-gamma","bag-beta"],"Fourth Wiki");
 	// Save tiddlers
-	$tw.sqlTiddlerStore.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Alpha"},"bag-alpha");
-	$tw.sqlTiddlerStore.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Beta"},"bag-beta");
-	$tw.sqlTiddlerStore.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Gamma"},"bag-gamma");
+	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Alpha"},"bag-alpha");
+	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Beta"},"bag-beta");
+	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Gamma"},"bag-gamma");
 };
 
 })();

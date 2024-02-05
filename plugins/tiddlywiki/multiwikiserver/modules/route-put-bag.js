@@ -24,7 +24,7 @@ exports.handler = function(request,response,state) {
 		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		data = $tw.utils.parseJSONSafe(state.data);
 	if(bag_name === bag_name_2 && data) {
-		const result = $tw.sqlTiddlerStore.createBag(bag_name,data.description);
+		const result = $tw.mws.store.createBag(bag_name,data.description);
 		if(!result) {
 			state.sendResponse(204,{
 				"Content-Type": "text/plain"

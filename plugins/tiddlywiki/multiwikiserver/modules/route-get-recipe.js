@@ -26,9 +26,9 @@ exports.handler = function(request,response,state) {
 			"Content-Type": "text/html"
 		});
 		// Get the tiddlers in the recipe
-		var recipeTiddlers = $tw.sqlTiddlerStore.getRecipeTiddlers(recipe_name);
+		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name);
 		// Render the template
-		var template = $tw.sqlTiddlerStore.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
+		var template = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
 			variables: {
 				saveTiddlerFilter: `
 					$:/boot/boot.css
@@ -50,10 +50,10 @@ exports.handler = function(request,response,state) {
 		}
 		response.write(template.substring(0,markerPos + marker.length));
 		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
-			var result = $tw.sqlTiddlerStore.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
+			var result = $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			if(result) {
 				var tiddlerFields = result.tiddler;
-				tiddlerFields = $tw.sqlTiddlerStore.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
+				tiddlerFields = $tw.mws.store.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
 				response.write(JSON.stringify(tiddlerFields).replace(/</g,"\\u003c"));
 				response.write(",\n")
 			}

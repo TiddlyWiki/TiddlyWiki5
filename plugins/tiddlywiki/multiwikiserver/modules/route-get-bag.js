@@ -22,7 +22,7 @@ exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		titles = bag_name === bag_name_2 && $tw.sqlTiddlerStore.getBagTiddlers(bag_name);
+		titles = bag_name === bag_name_2 && $tw.mws.store.getBagTiddlers(bag_name);
 	if(bag_name === bag_name_2 && titles) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
@@ -33,7 +33,7 @@ exports.handler = function(request,response,state) {
 				"Content-Type":  "text/html"
 			});
 			// Render the html
-			var html = $tw.sqlTiddlerStore.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/get-bags",{
+			var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/get-bags",{
 				variables: {
 					"bag-name": bag_name,
 					"bag-titles": JSON.stringify(titles)
