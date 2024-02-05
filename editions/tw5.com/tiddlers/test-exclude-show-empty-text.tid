@@ -1,0 +1,17 @@
+created: 20240202112417445
+modified: 20240202131358311
+tags: test
+title: test-exclude-show-empty-text
+type: text/vnd.tiddlywiki
+
+<$let
+	myFilter="[tag[one]]"
+	toc-exclude-yes="[<currentTiddler>]]"
+	toc-exclude="yesX"
+	toc-include="[tag[test]sort[created]]"
+
+	toc-exclude={{{ [<toc-exclude>match[yes]then<toc-exclude-yes>else<toc-exclude>] }}}
+>
+
+<$list filter="[subfilter<myFilter>] [subfilter<toc-include>] -[subfilter<toc-exclude>]" emptyMessage="toc-exclude - removed everything"/>
+
