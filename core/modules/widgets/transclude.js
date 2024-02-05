@@ -364,11 +364,19 @@ TranscludeWidget.prototype.getTransclusionParameter = function(name,defaultValue
 	if(name in this.stringParametersByName) {
 		return this.stringParametersByName[name];
 	} else {
-		var index = this.claimedIndices || 0;
+		// This parameter isn't named explicitly. It may correspond to an unnamed parameter though
+		this.parameterIndicesByName = this.parameterIndicesByName || Object.create(null);
+		// Let's see if this name was already assigned an index
+		var index = this.parameterIndicesByName[name];
+		if(index === undefined) {
+			// This parameter now corresponds to this index. No other parameters may correspond to it.
+			index = this.claimedIndices || 0;
+			// We make a record of this so that it will always correspond to the same index for the life of this widget.
+			this.parameterIndicesByName[name] = index;
+			this.claimedIndices = index + 1;
+		}
 		var name = "" + index;
 		if(name in this.stringParametersByName) {
-			// This parameter now corresponds to this index. No other parameters may correspond to it, so we increment claimedIndices;
-			this.claimedIndices = index + 1;
 			return this.stringParametersByName[name];
 		}
 	}
