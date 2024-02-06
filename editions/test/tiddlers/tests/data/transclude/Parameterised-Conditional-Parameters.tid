@@ -1,0 +1,30 @@
+title: Transclude/Parameterised/ConditionalParameters
+description: Parameterised transclusion with conditional parameters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure elephant(filler)
+\whitespace trim
+<% if [[no]match[yes]] %>
+<$parameters A=defaultA>
+A/<$text text=<<filler>>/>/<$text text=<<A>>/>/<$text text=<<B>>/>
+</$parameters>
+<% else %>
+<$parameters B=defaultB>
+B/<$text text=<<filler>>/>/<$text text=<<A>>/>/<$text text=<<B>>/>
+</$parameters>
+<% endif %>
+\end elephant
+\whitespace trim
+
+-
+<<elephant ignore A:myA B:myB>>
+&#32;&#32;
+<<elephant ignore myB not-used>>
+
++
+title: ExpectedResult
+
+<p>-B/ignore//myB  B/ignore//myB</p>

@@ -1,0 +1,39 @@
+title: Transclude/Parameterised/ConditionalParameters/Refreshed
+description: Parameterised transclusion when conditional parameters are changed by a refresh
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure elephant(filler)
+\whitespace trim
+<$let name={{Canary}}>
+<% if [<name>match[yes]] %>
+<$parameters A=defaultA>
+A/<$text text=<<filler>>/>/<$text text=<<A>>/>/<$text text=<<B>>/>
+</$parameters>
+<% else %>
+<$parameters B=defaultB>
+B/<$text text=<<filler>>/>/<$text text=<<A>>/>/<$text text=<<B>>/>
+</$parameters>
+<% endif %>
+\end elephant
+\whitespace trim
+
+-
+<<elephant ignore A:myA B:myB>>
+&#32;&#32;
+<<elephant ignore myA myB>>
+
++
+title: Canary
+
+no
++
+title: Actions
+
+<$action-setfield $tiddler="Canary" text="yes"/>
++
+title: ExpectedResult
+
+<p>-A/ignore/myA/  A/ignore/myA/</p>
