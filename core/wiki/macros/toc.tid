@@ -3,11 +3,11 @@ tags: $:/tags/Macro
 
 \whitespace trim
 
-\procedure toc-viewField()
+\procedure toc-captionField()
 <span class="tc-toc-caption tc-tiny-gap-left" title={{!!tooltip}}>
 <$let tv-wikilinks="no">
-	<$transclude $tiddler={{{ [<viewFieldTemplate>!is[blank]then<viewFieldTemplate>else<currentTiddler>] }}}
-		$field={{{ [<viewFieldTemplate>!is[blank]then[text]] :else[<viewField>!is[blank]then<viewField>else[caption]] }}}
+	<$transclude $tiddler={{{ [<captionFieldTemplate>!is[blank]then<captionFieldTemplate>else<currentTiddler>] }}}
+		$field={{{ [<captionFieldTemplate>!is[blank]then[text]] :else[<captionField>!is[blank]then<captionField>else[caption]] }}}
 	>
 		<$view field="title"/>
 	</$transclude>
@@ -57,11 +57,11 @@ tags: $:/tags/Macro
 				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
 					<li class=<<tf.toc-itemClass>>>
 						<% if [all[current]toc-link[no]] %>
-							<<toc-viewField>>
+							<<toc-captionField>>
 						<% else %>
 							<!-- v5.1.23 use target-field if present in tiddler -->
 							<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
-								<<toc-viewField>>
+								<<toc-captionField>>
 							</$link>
 						<% endif %>
 						<$macrocall
@@ -81,28 +81,28 @@ Simple toc macro which alwayse shows the full tree
 This macro is _not_ used by other toc-macros
 v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 ================================================================== -->
-\procedure toc(tag, sort:"", itemClassFilter, exclude, viewField, viewFieldTemplate)
+\procedure toc(tag, sort:"", itemClassFilter, exclude, captionField, captionFieldTemplate)
 <$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
 \end
 
 <!--
 	If a toc-itme shows a link. Clicking the caption will open the tiddler
-	If toc-item is linked, the toc-viewField is managed in the parent procedure
-	If a toc-item should not show a link, the toc-viewField is part of the button. So it can be clicked to open / close the branch
+	If toc-item is linked, the toc-captionField is managed in the parent procedure
+	If a toc-item should not show a link, the toc-captionField is part of the button. So it can be clicked to open / close the branch
 -->
 \procedure toc-item(isUnlinked:"")
 <% if [<toc-state>get[text]else[close]match[close]] %>
 	<$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" tooltip=<<toc-state>>>
 		<$transclude tiddler=<<toc-closed-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
-			<<toc-viewField>>
+			<<toc-captionField>>
 		<% endif %>
 	</$button>
 <% elseif [<toc-state>get[text]match[open]] %>
 	<$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" tooltip=<<toc-state>>>
 		<$transclude tiddler=<<toc-open-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
-			<<toc-viewField>>
+			<<toc-captionField>>
 		<% endif %>
 	</$button>
 <% endif %>
@@ -110,27 +110,27 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 
 \function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
 
-\procedure toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path,viewField,viewFieldTemplate)
+\procedure toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,captionFieldTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-itemClass>>>
 		<!-- v5.1.23 use target-field if present in tiddler -->
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
 			<<toc-item>>
-			<<toc-viewField>>
+			<<toc-captionField>>
 		</$link>
 		<!-- TODO auto expand -->
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
-				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+				captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 			/>
 		<% endif %>
 	</li>
 </$qualify>
 \end
 
-\procedure toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path,viewField,viewFieldTemplate)
+\procedure toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,captionFieldTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-itemClass>>>
 		<<toc-item isUnlinked:"yes">>
@@ -139,7 +139,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 			<$macrocall
 				$name="toc-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
-				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+				captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 			/>
 		<% endif %>
 	</li>
@@ -149,7 +149,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 <!-- ==========================================================
 Shows an expandable toc. Item always have an open/close chevron
 =============================================================== -->
-\procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path, viewField, viewFieldTemplate)
+\procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path, captionField, captionFieldTemplate)
 <ol class="tc-toc toc-expandable">
 	<!-- text substitution is needed for backwards compatibility -->
 	<$list filter=` [subfilter<tf.toc-filter>]
@@ -162,13 +162,13 @@ Shows an expandable toc. Item always have an open/close chevron
 						<$macrocall
 							$name="toc-unlinked-expandable-body"
 							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+							captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 						/>
 					<% else %>
 						<$macrocall
 							$name="toc-linked-expandable-body"
 							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+							captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 						/>
 					<% endif %>
 				</$set>
@@ -180,7 +180,7 @@ Shows an expandable toc. Item always have an open/close chevron
 
 \function tf.toc-curTidInclude() [<currentTiddler>get<toc-include-field>]
 
-\procedure toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,viewField,viewFieldTemplate)
+\procedure toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,captionFieldTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
 	<li class=<<tf.toc-itemClass>>>
 		<!-- v5.1.23 use target-field if present in tiddler -->
@@ -193,21 +193,21 @@ Shows an expandable toc. Item always have an open/close chevron
 					{{$:/core/images/blank}}
 				</$button>
 			<% endif %>
-			<<toc-viewField>>
+			<<toc-captionField>>
 		</$link>
 		<!-- TODO auto expand -->
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-selective-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
-				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+				captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 			/>
 		<% endif %>
 	</li>
 </$qualify>
 \end
 
-\procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,viewField,viewFieldTemplate)
+\procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,captionFieldTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-itemClass>>>
 		<% if [all[current]tagging[]] [subfilter<tf.toc-curTidInclude>] -[subfilter<exclude>] +[limit[1]] %>
@@ -217,7 +217,7 @@ Shows an expandable toc. Item always have an open/close chevron
 				{{$:/core/images/blank}}
 			</$button>
 			<span class="toc-item-muted">
-				<<toc-viewField>>
+				<<toc-captionField>>
 			</span>
 		<% endif %>
 		<!-- TODO auto expand -->
@@ -225,7 +225,7 @@ Shows an expandable toc. Item always have an open/close chevron
 			<$macrocall
 				$name="toc-selective-expandable"
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>
-				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+				captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 			/>
 		<% endif %>
 	</li>
@@ -236,7 +236,7 @@ Shows an expandable toc. Item always have an open/close chevron
 Shows a selctive expandable toc. 
 If an item has no children, there is no open/close chevron
 ========================================================== -->
-\procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path,viewField,viewFieldTemplate)
+\procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path,captionField,captionFieldTemplate)
 <ol class="tc-toc toc-selective-expandable">
 	<!-- text substitution is needed for backwards compatibility -->
 	<$list filter=` [subfilter<tf.toc-filter>]
@@ -249,13 +249,13 @@ If an item has no children, there is no open/close chevron
 						<$macrocall
 							$name="toc-unlinked-selective-expandable-body"
 							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+							captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 						/>
 					<% else %>
 						<$macrocall
 							$name="toc-linked-selective-expandable-body"
 							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
+							captionField=<<captionField>> captionFieldTemplate=<<captionFieldTemplate>>
 						/>
 					<% endif %>
 				</$set>
@@ -269,7 +269,7 @@ If an item has no children, there is no open/close chevron
 Shows a tabbed toc.
 If a toc-item link is clicked it will open the tiddler in the story 
 =================================================================== -->
-\procedure toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude, viewField, viewFieldTemplate)
+\procedure toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude, captionField, captionFieldTemplate)
 <$tiddler tiddler={{{ [<selectedTiddler>get[text]] }}}>
 	<div class="tc-tabbed-table-of-contents">
 		<$linkcatcher to=<<selectedTiddler>>>
@@ -280,15 +280,15 @@ If a toc-item link is clicked it will open the tiddler in the story
 					tag=<<tag>>
 					sort=<<sort>>
 					exclude=<<exclude>>
-					viewField=<<viewField>>
-					viewFieldTemplate=<<viewFieldTemplate>>
+					captionField=<<captionField>>
+					captionFieldTemplate=<<captionFieldTemplate>>
 				/>
 			</div>
 		</$linkcatcher>
 		<div class="tc-tabbed-table-of-contents-content">
 			<$reveal stateTitle=<<selectedTiddler>> type="nomatch" text="">
 				<$transclude mode="block" tiddler=<<template>>>
-					<h1><<toc-viewField>></h1>
+					<h1><<toc-captionField>></h1>
 					<$transclude mode="block">$missingText$</$transclude>
 				</$transclude>
 			</$reveal>
@@ -304,7 +304,7 @@ If a toc-item link is clicked it will open the tiddler in the story
 Shows a tabbed toc. If a toc-item link is clicked 
 it will open the tiddler in the view area of the same tiddler
 ============================================================= -->
-\procedure toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude,viewField,viewFieldTemplate)
+\procedure toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude,captionField,captionFieldTemplate)
 <$linkcatcher to=<<selectedTiddler>>>
 	<$macrocall
 		$name="toc-tabbed-external-nav"
@@ -315,8 +315,8 @@ it will open the tiddler in the view area of the same tiddler
 		missingText=<<missingText>>
 		template=<<template>>
 		exclude=<<exclude>>
-		viewField=<<viewField>>
-		viewFieldTemplate=<<viewFieldTemplate>>
+		captionField=<<captionField>>
+		captionFieldTemplate=<<captionFieldTemplate>>
 	/>
 </$linkcatcher>
 \end
