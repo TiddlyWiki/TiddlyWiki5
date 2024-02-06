@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/language/zh-Hans/
+
+ConfigOfficialPluginLibrary: 使用客户端-服务器配置时，官方插件库将被禁用。取而代之的是，应按照[[here|https://tiddlywiki.com/#Installing%20a%20plugin%20from%20the%20plugin%20library]]所述，通过 "tiddlywiki.info" 文件安装插件。

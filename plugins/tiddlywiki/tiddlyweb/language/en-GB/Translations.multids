@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/language/en-GB/
+
+ConfigOfficialPluginLibrary: The official plugin library is disabled when using the client-server configuration. Instead, plugins should be installed via the `tiddlywiki.info` file, as described [[here|https://tiddlywiki.com/#Installing%20a%20plugin%20from%20the%20plugin%20library]].
+GettingStartedStep1: Step 1<br>Syncing
+CopySyncerLogs: Copy syncer logs to clipboard
