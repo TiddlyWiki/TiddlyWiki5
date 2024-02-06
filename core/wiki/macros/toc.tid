@@ -5,7 +5,7 @@ tags: $:/tags/Macro
 
 \procedure toc-viewField()
 <span class="tc-toc-caption tc-tiny-gap-left" title={{!!tooltip}}>
-<$let name="tv-wikilinks" value="no">
+<$let tv-wikilinks="no">
 	<$transclude $tiddler={{{ [<viewFieldTemplate>!is[blank]then<viewFieldTemplate>else<currentTiddler>] }}}
 		$field={{{ [<viewFieldTemplate>!is[blank]then[text]] :else[<viewField>!is[blank]then<viewField>else[caption]] }}}
 	>
