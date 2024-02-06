@@ -76,12 +76,13 @@ tags: $:/tags/Macro
 </ol>
 \end
 
-<!-- =======================================
-Simple toc macro which shows the full tree
+<!-- =============================================================
+Simple toc macro which alwayse shows the full tree
 This macro is _not_ used by other toc-macros
-============================================ -->
-\procedure toc(tag, sort:"", itemClassFilter:"", exclude, viewField, viewFieldTemplate)
-<$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>>/>
+v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
+================================================================== -->
+\procedure toc(tag, sort:"", itemClassFilter, exclude, viewField, viewFieldTemplate)
+<$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
 \end
 
 <!--
@@ -121,7 +122,7 @@ This macro is _not_ used by other toc-macros
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-expandable"
-				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
+				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
 				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 			/>
 		<% endif %>
@@ -137,7 +138,7 @@ This macro is _not_ used by other toc-macros
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-expandable"
-				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
+				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
 				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 			/>
 		<% endif %>
@@ -160,13 +161,13 @@ Shows an expandable toc. Item always have an open/close chevron
 					<% if [all[current]toc-link[no]] %>
 						<$macrocall
 							$name="toc-unlinked-expandable-body"
-							tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<_excluded>> path=<<_path>>
+							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
 							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 						/>
 					<% else %>
 						<$macrocall
 							$name="toc-linked-expandable-body"
-							tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<_excluded>> path=<<_path>>
+							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
 							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 						/>
 					<% endif %>
@@ -198,7 +199,7 @@ Shows an expandable toc. Item always have an open/close chevron
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-selective-expandable"
-				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>>
+				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
 				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 			/>
 		<% endif %>
@@ -223,7 +224,7 @@ Shows an expandable toc. Item always have an open/close chevron
 		<% if [<toc-state>get[text]match[open]] %>
 			<$macrocall
 				$name="toc-selective-expandable"
-				tag=<<currentTiddler>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<exclude>> path=<<path>
+				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>
 				viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 			/>
 		<% endif %>
@@ -236,7 +237,6 @@ Shows a selctive expandable toc.
 If an item has no children, there is no open/close chevron
 ========================================================== -->
 \procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path,viewField,viewFieldTemplate)
-
 <ol class="tc-toc toc-selective-expandable">
 	<!-- text substitution is needed for backwards compatibility -->
 	<$list filter=` [subfilter<tf.toc-filter>]
@@ -248,13 +248,13 @@ If an item has no children, there is no open/close chevron
 					<% if [all[current]toc-link[no]] %>
 						<$macrocall
 							$name="toc-unlinked-selective-expandable-body"
-							tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<_excluded>> path=<<_path>>
+							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
 							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 						/>
 					<% else %>
 						<$macrocall
 							$name="toc-linked-selective-expandable-body"
-							tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<_excluded>> path=<<_path>>
+							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
 							viewField=<<viewField>> viewFieldTemplate=<<viewFieldTemplate>>
 						/>
 					<% endif %>
@@ -270,7 +270,6 @@ Shows a tabbed toc.
 If a toc-item link is clicked it will open the tiddler in the story 
 =================================================================== -->
 \procedure toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude, viewField, viewFieldTemplate)
-
 <$tiddler tiddler={{{ [<selectedTiddler>get[text]] }}}>
 	<div class="tc-tabbed-table-of-contents">
 		<$linkcatcher to=<<selectedTiddler>>>
@@ -280,7 +279,6 @@ If a toc-item link is clicked it will open the tiddler in the story
 					$name="toc-selective-expandable"
 					tag=<<tag>>
 					sort=<<sort>>
-					itemClassFilter="[all[current]] -[<selectedTiddler>get[text]]"
 					exclude=<<exclude>>
 					viewField=<<viewField>>
 					viewFieldTemplate=<<viewFieldTemplate>>
