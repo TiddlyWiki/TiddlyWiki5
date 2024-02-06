@@ -8,3 +8,5 @@ Readonly: <$reveal state="$:/status/IsReadOnly" type="match" text="yes" default=
 Login: Login
 Logout: Logout
 SaveSnapshot: Save snapshot for offline use
+Refresh/Label: Refresh from server
+Refresh/Button: Get latest changes from the server

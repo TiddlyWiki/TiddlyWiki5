@@ -8,3 +8,5 @@ Readonly: <$reveal state="$:/status/IsReadOnly" type="match" text="yes" default=
 Login: 登录
 Logout: 登出
 SaveSnapshot: 保存快照以供离线使用
+Refresh/Label: 从服务器刷新
+Refresh/Button: 从服务器获取最新变更
