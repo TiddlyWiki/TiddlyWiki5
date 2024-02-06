@@ -9,3 +9,17 @@ Config/ContentsTag/Headings: 内容标签
 Config/ContentsTag/Description: 内容下拉菜单中使用的 TOC 目录标签
 Config/MenuBarColours/Headings: 菜单栏颜色
 Config/MenuBarColours/Description: 要更改菜单栏的颜色，请在当前选定的调色板中定义颜色 `menubar-foreground` 和 `menubar-background`。
+Items/TOC/Name: 内容
+Items/TOC/Description: 目录
+Items/Hamburger/Name: 抽屉
+Items/Hamburger/Description: 在窄屏幕上显示完整的菜单栏
+Items/PageControls/Name: 页面控件
+Items/PageControls/Description: 来自侧边栏的页面控件
+Items/Search/Name: 搜索
+Items/Server/Name: 服务器
+Items/Server/Description: 服务器选项
+Items/Sidebar/Name: 侧边栏
+Items/TopLeftBar/Name: 旧版左上角栏
+Items/TopLeftBar/Description: 来自 $:/tags/TopLeftBar 的项目
+Items/TopRightBar/Name: 旧版右上角栏
+Items/TopRightBar/Description: 来自 $:/tags/TopRightBar 的项目

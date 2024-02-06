@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/menubar/items/pagecontrols
 tags: $:/tags/MenuBar
-description: Page controls from the sidebar
-caption: Page controls
+description: <<lingo Items/PageControls/Name $:/plugins/tiddlywiki/menubar/language/>>
+caption: <<lingo Items/PageControls/Name $:/plugins/tiddlywiki/menubar/language/>>
 custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/pagecontrols" mode="inline"/>
 
 \whitespace trim
