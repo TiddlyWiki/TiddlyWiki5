@@ -7,5 +7,5 @@ tags: $:/tags/SyncerDropdown
 <$wikify name="site-title" text={{$:/config/SaveWikiButton/Filename}}>
 <$action-sendmessage $message="tm-download-file" $param={{$:/config/SaveWikiButton/Template}} filename=<<site-title>>/>
 </$wikify>
-{{$:/core/images/download-button}} Save snapshot for offline use
+{{$:/core/images/download-button}} <<lingo SaveSnapshot>>
 </$button>
