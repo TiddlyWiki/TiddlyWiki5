@@ -7,6 +7,7 @@ $:/language/
 \end lingo-base
 
 \procedure lingo(title,override-lingo-base)
+<!-- Lingo procedure -->
 <!-- Get the parse mode used to invoke this procedure -->
 <$parameters $parseMode="parseMode">
 	<!-- Compute the lingo-base-->
