@@ -1,6 +1,14 @@
 title: $:/core/macros/toc
 tags: $:/tags/Macro
 
+<!--
+Naming rules / pattern
+- functions: tf.toc-variableName, "tf." -> function prefix reservered for TW, "toc-" -> global macro prefix, "variableName"
+- procedures eg: toc-procedureName,
+- macro parameters: path, itemTemplate
+- derived macro parameters: _path, _itemTemplate -> derived variables start with an underscore
+-->
+
 \whitespace trim
 
 \procedure toc-defaultItemTemplate()
@@ -15,9 +23,10 @@ tags: $:/tags/Macro
 </span>
 \end
 
-<!-- returns the title of an itemTemplate tiddler -->
+<!-- returns the title of a tiddler -->
 \function tf.toc-getItemTemplate() [<itemTemplate>!is[blank]then<itemTemplate>] :else[<currentTiddler>get[toc-itemTemplate]]
 
+<!-- Use macro itemTemplate or one defined as a toc-itemTemplate field -->
 \procedure _itemTemplate()
 <$transclude $tiddler=<<tf.toc-getItemTemplate>> >
 	<<toc-defaultItemTemplate>>
@@ -40,17 +49,17 @@ tags: $:/tags/Macro
 <!-- join the CSS definitions from above -->
 \function tf.toc-itemClass()       [<tf.toc-itemClassFilter>] [<tf.toc-includeClass>] [<tf.toc-filterClass>] [<tf.toc-hideClass>] +[join[ ]]
 
+<!-- Special case, if toc-hide field is "yes", we need a currentTiddler *titlelist* -- otherwise return the content as text -->
 <!-- the following functions need to use <currentTiddler> -->
 \function tf.toc-getHideText() [<currentTiddler>get<toc-hideField>]
 \function tf.toc-hideIsYes()   [<currentTiddler>format:titlelist[]]
-<!-- Special case, if toc-hide field is "yes", we need a currentTiddler *titlelist* -- otherwise return the content as text -->
 \function tf.toc-hide()        [<tf.toc-getHideText>match[yes]then<tf.toc-hideIsYes>] :else[<tf.toc-getHideText>]
 
-<!-- tf.toc-include and tf.toc-filter need to use <tag> -->
-\function tf.toc-include()     [<tag>get<toc-includeField>]
-\function tf.toc-filter()      [<tag>get<toc-filterField>]
+<!-- Read tf.toc-include and tf.toc-filter from fields. Need to use <tag> -->
+\function tf.toc-include() [<tag>get<toc-includeField>]
+\function tf.toc-filter()  [<tag>get<toc-filterField>]
 
-<!-- Use a field instead of a tag -->
+<!-- Define default filter strings for different usecases: tag (default), parentField and using tag-like field -->
 \procedure toc-filterDefault() [all[shadows+tiddlers]tag<tag>!has[draft.of]]
 \procedure toc-filterParent()  [has<parentField>!has[draft.of]] :filter[get<parentField>match<tag>]
 \procedure toc-filterTagLike() [<tag>get<tagField>enlist-input[]]
@@ -61,17 +70,17 @@ tags: $:/tags/Macro
 <!-- define unique path based state title -->
 \function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
-<!-- toc helper -->
+<!-- simple toc helper body -->
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <!-- Be aware: if parentField is set, the "tag" parameter contains the currentTiddler -->
 <$set name=currentTiddler filter="[<parentField>!is[blank]then<tag>else<currentTiddler>]">
 <ol class="tc-toc">
-	<!-- text substitution is needed for backwards compatibility -->
+	<!-- text substitution for "sort" parameter backwards compatibility -->
 	<$list filter=` [subfilter<tf.toc-filter>]
 					:else[subfilter<tf.toc-filterString>$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
-			<$let item=<<currentTiddler>> _path=<<tf.toc-newPath>> >
+			<$let _path=<<tf.toc-newPath>> >
 				<!-- adding tf.toc-hide, excludes blocked elements from all visible sub-nodes -->
 				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
 					<li class=<<tf.toc-itemClass>>>
@@ -84,8 +93,8 @@ tags: $:/tags/Macro
 							</$link>
 						<% endif %>
 						<!-- toc-body only calls itself, so only modified variables have to be passed on. -->
-						<!-- The rest can be reused from toc-parameters -->
-						<$macrocall $name="toc-body" tag=<<item>> exclude=<<_excluded>> path=<<_path>>
+						<!-- The rest can be reused from toc parameters -->
+						<$macrocall $name="toc-body" tag=<<currentTiddler>> exclude=<<_excluded>> path=<<_path>>
 						/>
 					</li>
 				</$set>
@@ -100,7 +109,7 @@ tags: $:/tags/Macro
 <!--  -->
 
 <!-- =============================================================
-Simple toc macro which alwayse shows the full tree
+Simple toc macro which shows the full tree
 This macro is _not_ used by other toc-macros
 v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 ================================================================== -->
@@ -109,7 +118,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 \end
 
 <!--
-	If a toc-itme shows a link. Clicking the caption will open the tiddler
+	If a toc-item shows a link. Clicking the caption will open the tiddler
 	If toc-item is linked, the _itemTemplate is managed in the parent procedure
 	If a toc-item should not show a link, the _itemTemplate is part of the button. So it can be clicked to open / close the branch
 -->
