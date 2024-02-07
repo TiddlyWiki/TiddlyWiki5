@@ -5,8 +5,8 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-\procedure elephant(filler)
 \whitespace trim
+\procedure elephant(filler)
 <$let name={{Canary}}>
 <% if [<name>match[yes]] %>
 <$parameters A=defaultA>
@@ -18,7 +18,6 @@ B/<$text text=<<filler>>/>/<$text text=<<A>>/>/<$text text=<<B>>/>
 </$parameters>
 <% endif %>
 \end elephant
-\whitespace trim
 
 -
 <<elephant ignore A:myA B:myB>>
