@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20240206175448578
+modified: 20240207142704165
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -82,6 +82,8 @@ At each level, the tiddlers can be [[ordered|Order of Tagged Tiddlers]] by means
 ; target
 :<<.from-version "5.1.23">> By default, the links open the tiddlers making up the table of contents. Alternatively, if the tiddler contains a <<.field target>> field then its contents will be used as the target of the link.
 
+; tooltip
+: Will be used to show a tooltip about the node on mouse hover
 
 !! Custom Icons
 
