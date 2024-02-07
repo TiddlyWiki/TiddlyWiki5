@@ -117,21 +117,61 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 <$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
 \end
 
+\procedure toc-openBranch(path,currentTiddler,manual:"no")
+\procedure recursiveOpen(exclude, path)
+	<!-- tf-toc-stateTitle needs the path variable! -->
+	<$let path={{{ [<path>] "/" [<currentTiddler>] +[join[]] }}}>
+		<$list filter="[tag<currentTiddler>] -[subfilter<exclude>]" >
+			<% if [<currentTiddler>tagging[]] %>
+				<$set name="_excluded" filter="[subfilter<exclude>] [<currentTiddler>]">
+					<!-- tf-toc-stateTitle needs the path variable! -->
+					<$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
+						<$action-setfield $tiddler=<<toc-state>> text="open"/>
+						<$macrocall $name="recursiveOpen" exclude=<<_excluded>> path=<<path>> />
+					</$qualify>
+				</$set>
+			<% endif %>
+		</$list>
+	</$let>
+\end recursiveOpen
+<% if [<manual>match[yes]] %>
+	<$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
+		<$action-setfield $tiddler=<<toc-state>> text="open"/>
+		<$macrocall $name="recursiveOpen" exclude=<<exclude>> path=<<path>> />
+	</$qualify>
+<% elseif [<modifier>match[ctrl]] %>
+<$action-log/>
+	<$macrocall $name="recursiveOpen" exclude=<<exclude>> path=<<path>> />
+<% endif %>
+\end
+<!-- <$action-log toc-state=<<toc-state>> path=<<path>> exclude=<<exclude>> ct=<<currentTiddler>> /> -->
+<!-- <$action-log ct=<<currentTiddler>> prefix=<<prefix>> toc-state=<<toc-state>>/> -->
+
+\procedure toc-closeBranch(path,currentTiddler,manual:"no")
+<% if [<modifier>match[ctrl]] :else[<manual>match[yes]] %>
+<!-- <$let prefix={{{ [<toc-state>split[-]first[]] }}} > -->
+<$let prefix={{{ [<tf.toc-stateTitle>] }}} >
+	<$action-deletetiddler $filter="[prefix<prefix>]"/>
+</$let>
+<% endif %>
+\end
+
 <!--
 	If a toc-item shows a link. Clicking the caption will open the tiddler
 	If toc-item is linked, the _itemTemplate is managed in the parent procedure
-	If a toc-item should not show a link, the _itemTemplate is part of the button. So it can be clicked to open / close the branch
+	If a toc-item should not show a link, the _itemTemplate is part of the button. So it can be clicked to open / close one branch
+	The buttons also call toc-stateOpen and toc-stateClose, which by default allow us to CTRL-click to expand / fold the whole branch
 -->
 \procedure toc-item(isUnlinked:"")
 <% if [<toc-state>get[text]else[close]match[close]] %>
-	<$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep" tooltip=<<toc-state>>>
+	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible" tooltip=<<toc-state>>>
 		<$transclude tiddler=<<toc-closed-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
 			<<_itemTemplate>>
 		<% endif %>
 	</$button>
 <% elseif [<toc-state>get[text]match[open]] %>
-	<$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep" tooltip=<<toc-state>>>
+	<$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible" tooltip=<<toc-state>>>
 		<$transclude tiddler=<<toc-open-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
 			<<_itemTemplate>>
