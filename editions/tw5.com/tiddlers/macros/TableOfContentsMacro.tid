@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20240206175037389
+modified: 20240206175448578
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -65,7 +65,7 @@ The difference between the last two has to do with what happens when the user cl
 ; template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel
 
-!! Structure
+!! Tiddler Fields
 
 The top level of the tree consists of the tiddlers that carry a particular tag, known as the <<.def "root tag">>. Tiddlers tagged with any of those make up the next level down, and so on.
 
