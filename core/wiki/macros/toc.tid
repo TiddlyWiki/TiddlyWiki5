@@ -130,7 +130,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 \procedure recursiveOpen(exclude, path)
 	<!-- tf-toc-stateTitle needs the path variable! -->
 	<$let path={{{ [<path>] "/" [<currentTiddler>] +[join[]] }}}>
-		<$list filter="[subfilter<tf.toc-hasChildren>] -[subfilter<exclude>]" >
+		<$list filter="[subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>]" >
 			<% if [subfilter<tf.toc-hasChildren>] %>
 				<$set name="_excluded" filter="[subfilter<exclude>] [<currentTiddler>]">
 					<!-- tf-toc-stateTitle needs the path variable! -->
