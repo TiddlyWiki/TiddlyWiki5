@@ -124,14 +124,18 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 \procedure toc-tagChildFilter()     [tag<currentTiddler>]
 
 <!-- this function uses the variables NOT the tiddler fields -->
-\function tf.toc-hasChildren() [<tagField>!is[blank]then<toc-tagLikeChildFilter>] :else[<parentField>!is[blank]then<toc-parentChildFilter>else<toc-tagChildFilter>]
+\function tf.toc-hasChildren()
+	[<tagField>!is[blank]then<toc-tagLikeChildFilter>]
+	:else[<parentField>!is[blank]then<toc-parentChildFilter>else<toc-tagChildFilter>]
+\end
 
 \procedure toc-openBranch(path,currentTiddler,manual:"no")
 \procedure recursiveOpen(exclude, path)
 	<!-- tf-toc-stateTitle needs the path variable! -->
 	<$let path={{{ [<path>] "/" [<currentTiddler>] +[join[]] }}}>
+		<!-- It's common that users tag the <currentTiddler> with itself, so avoid redundant state tiddlers with -[<currentTiddler>] -->
 		<$list filter="[subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>]" >
-			<% if [subfilter<tf.toc-hasChildren>] %>
+			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] %>
 				<$set name="_excluded" filter="[subfilter<exclude>] [<currentTiddler>]">
 					<!-- tf-toc-stateTitle needs the path variable! -->
 					<$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
@@ -261,7 +265,7 @@ Shows an expandable toc. Item always have an open/close chevron
 </$set>
 \end
 
-\function tf.toc-curTidInclude() [<currentTiddler>get<toc-includeField>]
+\function tf.toc-curTidInclude() [<currentTiddler>get<toc-includeField>] [<currentTiddler>get<toc-filterField>]
 
 \procedure toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,tagField,parentField,itemTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>>>
