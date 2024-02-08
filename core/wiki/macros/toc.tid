@@ -269,7 +269,7 @@ Shows an expandable toc. Item always have an open/close chevron
 		<!-- v5.1.23 use target-field if present in tiddler -->
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
 			<!-- The subfilter<exclude> needs to be the last filter run -->
-			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] +[limit[1]] %>
+			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
 				<<toc-item>>
 			<% else %>
 				<$button class='tc-btn-invisible'>
@@ -290,11 +290,14 @@ Shows an expandable toc. Item always have an open/close chevron
 	</li>
 </$qualify>
 \end
+<!-- <$log ct=<<currentTiddler>> 
+	includeList={{{ [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[subfilter<exclude>] +[limit[1]] }}}
+	hasChildren={{{ [subfilter<tf.toc-hasChildren>] }}} path=<<path>> exclude=<<exclude>>/> -->
 
 \procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,tagField,parentField,itemTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-itemClass>>>
-		<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] +[limit[1]] %>
+		<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
 			<<toc-item isUnlinked:"yes">>
 		<% else %>
 			<$button class="tc-btn-invisible">
