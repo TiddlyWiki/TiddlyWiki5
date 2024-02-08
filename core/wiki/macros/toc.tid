@@ -62,7 +62,9 @@ Naming rules / pattern
 <!-- Define default filter strings for different usecases: tag (default), parentField and using tag-like field -->
 \procedure toc-filterDefault() [all[shadows+tiddlers]tag<tag>!has[draft.of]]
 \procedure toc-filterParent()  [has<parentField>!has[draft.of]] :filter[get<parentField>match<tag>]
-\procedure toc-filterTagLike() [<tag>get<tagField>enlist-input[]]
+\procedure toc-filterTagLike() [<tag>get<tagField>enlist-input[]!has[draft.of]]
+
+<!-- TODO tiddlers with parentField need caching -->
 
 <!-- activate the filterString depending on tagField, parentField or default. tagField takes precedence -->
 \function tf.toc-filterString() [<tagField>!is[blank]then<toc-filterTagLike>] :else[<parentField>!is[blank]then<toc-filterParent>else<toc-filterDefault>]
@@ -117,12 +119,19 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 <$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
 \end
 
+\procedure toc-tagLikeChildFilter() [<currentTiddler>get<tagField>enlist-input[]]
+\procedure toc-parentChildFilter()  [has<parentField>] :filter[get<parentField>match<..currentTiddler>]
+\procedure toc-tagChildFilter()     [tag<currentTiddler>]
+
+<!-- this function uses the variables NOT the tiddler fields -->
+\function tf.toc-hasChildren() [<tagField>!is[blank]then<toc-tagLikeChildFilter>] :else[<parentField>!is[blank]then<toc-parentChildFilter>else<toc-tagChildFilter>]
+
 \procedure toc-openBranch(path,currentTiddler,manual:"no")
 \procedure recursiveOpen(exclude, path)
 	<!-- tf-toc-stateTitle needs the path variable! -->
 	<$let path={{{ [<path>] "/" [<currentTiddler>] +[join[]] }}}>
-		<$list filter="[tag<currentTiddler>] -[subfilter<exclude>]" >
-			<% if [<currentTiddler>tagging[]] %>
+		<$list filter="[subfilter<tf.toc-hasChildren>] -[subfilter<exclude>]" >
+			<% if [subfilter<tf.toc-hasChildren>] %>
 				<$set name="_excluded" filter="[subfilter<exclude>] [<currentTiddler>]">
 					<!-- tf-toc-stateTitle needs the path variable! -->
 					<$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
@@ -140,19 +149,19 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 		<$macrocall $name="recursiveOpen" exclude=<<exclude>> path=<<path>> />
 	</$qualify>
 <% elseif [<modifier>match[ctrl]] %>
-<$action-log/>
 	<$macrocall $name="recursiveOpen" exclude=<<exclude>> path=<<path>> />
 <% endif %>
 \end
+<!-- <$action-log/> -->
+<!-- <$action-log ct=<<currentTiddler>> hasChildren=<<tf.toc-hasChildren>> path=<<path>> exclude=<<exclude>>/> -->
 <!-- <$action-log toc-state=<<toc-state>> path=<<path>> exclude=<<exclude>> ct=<<currentTiddler>> /> -->
 <!-- <$action-log ct=<<currentTiddler>> prefix=<<prefix>> toc-state=<<toc-state>>/> -->
 
 \procedure toc-closeBranch(path,currentTiddler,manual:"no")
 <% if [<modifier>match[ctrl]] :else[<manual>match[yes]] %>
-<!-- <$let prefix={{{ [<toc-state>split[-]first[]] }}} > -->
-<$let prefix={{{ [<tf.toc-stateTitle>] }}} >
-	<$action-deletetiddler $filter="[prefix<prefix>]"/>
-</$let>
+	<$let prefix={{{ [<tf.toc-stateTitle>] }}} >
+		<$action-deletetiddler $filter="[prefix<prefix>]"/>
+	</$let>
 <% endif %>
 \end
 
@@ -260,9 +269,7 @@ Shows an expandable toc. Item always have an open/close chevron
 		<!-- v5.1.23 use target-field if present in tiddler -->
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
 			<!-- The subfilter<exclude> needs to be the last filter run -->
-			<% if [has<parentField>] :filter[get<parentField>match<..currentTiddler>] +[limit[1]] %>
-				<<toc-item>>
-			<% elseif [all[current]tagging[]] [subfilter<tf.toc-curTidInclude>] -[subfilter<exclude>] +[limit[1]] %>
+			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] +[limit[1]] %>
 				<<toc-item>>
 			<% else %>
 				<$button class='tc-btn-invisible'>
@@ -287,9 +294,7 @@ Shows an expandable toc. Item always have an open/close chevron
 \procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,tagField,parentField,itemTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 	<li class=<<tf.toc-itemClass>>>
-		<% if [has<parentField>] :filter[get<parentField>match<..currentTiddler>] +[limit[1]] %>
-			<<toc-item>>
-		<% elseif [all[current]tagging[]] [subfilter<tf.toc-curTidInclude>] -[subfilter<exclude>] +[limit[1]] %>
+		<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] +[limit[1]] %>
 			<<toc-item isUnlinked:"yes">>
 		<% else %>
 			<$button class="tc-btn-invisible">
