@@ -7,6 +7,12 @@ Naming rules / pattern
 - procedures eg: toc-procedureName,
 - macro parameters: path, itemTemplate
 - derived macro parameters: _path, _itemTemplate -> derived variables start with an underscore
+
+The toc macro code gets more and more complex from top to bottom.
+toc-tabbed-internal-nav calls toc-tabbed-external-nav, which callse toc-selective-expandable, which calls toc-expandable
+
+The very first toc macro is _not_ "reused". So it can be used as a "simple" reverence implementation,
+because it is realatively easy to debug.
 -->
 
 \whitespace trim
@@ -59,12 +65,12 @@ Naming rules / pattern
 \function tf.toc-include() [<tag>get<toc-includeField>]
 \function tf.toc-filter()  [<tag>get<toc-filterField>]
 
-<!-- Define default filter strings for different usecases: tag (default), parentField and using tag-like field -->
+<!-- Define default filter strings for different usecases: tag (default), parentField or tagField for using a tag-like field -->
 \procedure toc-filterDefault() [all[shadows+tiddlers]tag<tag>!has[draft.of]]
 \procedure toc-filterParent()  [has<parentField>!has[draft.of]] :filter[get<parentField>match<tag>]
 \procedure toc-filterTagLike() [<tag>get<tagField>enlist-input[]!has[draft.of]]
 
-<!-- TODO tiddlers with parentField need caching -->
+<!-- TODO tiddlers with parentField MAY need caching -->
 
 <!-- activate the filterString depending on tagField, parentField or default. tagField takes precedence -->
 \function tf.toc-filterString() [<tagField>!is[blank]then<toc-filterTagLike>] :else[<parentField>!is[blank]then<toc-filterParent>else<toc-filterDefault>]
@@ -72,12 +78,21 @@ Naming rules / pattern
 <!-- define unique path based state title -->
 \function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
+<!-- ====================================================================================
+Simple toc macro which shows the full tree
+This macro is _not_ used by other toc-macros
+v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-itemClass()
+========================================================================================== -->
+\procedure toc(tag,sort:"",itemClassFilter,exclude,captionField,tagField,parentField,itemTemplate)
+	<$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
+\end
+
 <!-- simple toc helper body -->
 \procedure toc-body(tag,sort:"",itemClassFilter,exclude,path)
 <!-- Be aware: if parentField is set, the "tag" parameter contains the currentTiddler -->
 <$set name=currentTiddler filter="[<parentField>!is[blank]then<tag>else<currentTiddler>]">
 <ol class="tc-toc">
-	<!-- text substitution for "sort" parameter backwards compatibility -->
+	<!-- text substitution for $(sort)$ parameter backwards compatibility -->
 	<$list filter=` [subfilter<tf.toc-filter>]
 					:else[subfilter<tf.toc-filterString>$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
@@ -110,15 +125,7 @@ Naming rules / pattern
 <!-- <$log tag=<<tag>> parentField=<<parentField>> toc-filter=<<toc-filter>> ct=<<currentTiddler>> captionField=<<captionField>>/> -->
 <!--  -->
 
-<!-- =============================================================
-Simple toc macro which shows the full tree
-This macro is _not_ used by other toc-macros
-v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
-================================================================== -->
-\procedure toc(tag,sort:"",itemClassFilter,exclude,captionField,tagField,parentField,itemTemplate)
-<$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
-\end
-
+<!-- Helper functions for toc-openBranch and toc-closeBranch procedures -->
 \procedure toc-tagLikeChildFilter() [<currentTiddler>get<tagField>enlist-input[]]
 \procedure toc-parentChildFilter()  [has<parentField>] :filter[get<parentField>match<..currentTiddler>]
 \procedure toc-tagChildFilter()     [tag<currentTiddler>]
@@ -129,6 +136,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 	:else[<parentField>!is[blank]then<toc-parentChildFilter>else<toc-tagChildFilter>]
 \end
 
+<!-- toc-openBranch internally uses a recursiveOpen() procedure -->
 \procedure toc-openBranch(path,currentTiddler,manual:"no")
 \procedure recursiveOpen(exclude, path)
 	<!-- tf-toc-stateTitle needs the path variable! -->
@@ -147,6 +155,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter
 		</$list>
 	</$let>
 \end recursiveOpen
+
 <% if [<manual>match[yes]] %>
 	<$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
 		<$action-setfield $tiddler=<<toc-state>> text="open"/>
