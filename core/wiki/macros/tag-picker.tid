@@ -5,10 +5,15 @@ second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>
 
 \whitespace trim
 
+<!-- this one is needed if several tap-pickers targetting the same tiddler but different fields are shown in the same tiddler -->
 \function tagpicker-dropdown-id() [<qualify "$:/state/popup/tags-auto-complete">] [[$(tagField)$-$(tagListFilter)$]substitute[]sha256[]] +[join[/]]
 
 \procedure get-tagpicker-focus-selector() [data-tiddler-title=`$(thisTiddler)$`] .tc-add-tag-name input
 
+<!-- clean up temporary tiddlers, so the next "pick" starts with a clean input -->
+<!-- This could probably be optimized / removed if we would use different temp-tiddlers
+	(future improvement because keeping track is comlex for humans)
+-->
 \procedure delete-tag-state-tiddlers()
 <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
 \end
