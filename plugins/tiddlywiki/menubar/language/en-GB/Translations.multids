@@ -1,13 +1,13 @@
 title: $:/plugins/tiddlywiki/menubar/language/en-GB/
 
 Config/Heading1: Menu Bar Configuration
-Config/MenuItems/Headings: Menu Items
+Config/MenuItems/Heading: Menu Items
 Config/MenuItems/Description: Select which menu items will be shown. You can also drag items to reorder them.
-Config/BreakpointPosition/Headings: Breakpoint Position
+Config/BreakpointPosition/Heading: Breakpoint Position
 Config/BreakpointPosition/Description: The breakpoint position between narrow and wide screens. Should include CSS units (eg. `400px`).
-Config/ContentsTag/Headings: Contents Tag
+Config/ContentsTag/Heading: Contents Tag
 Config/ContentsTag/Description: The tag for the ~TableOfContents used in the Contents dropdown
-Config/MenuBarColours/Headings: Menu Bar Colours
+Config/MenuBarColours/Heading: Menu Bar Colours
 Config/MenuBarColours/Description: To change the colour of the menu bar, define the colours `menubar-foreground` and `menubar-background` in the currently selected palette
 Items/TOC/Name: Contents
 Items/TOC/Description: Table of Contents

@@ -7,7 +7,7 @@ caption: Menu Bar
 
 ! <<lingo Config/Heading1>>
 
-!! <<lingo Config/MenuItems/Headings>>
+!! <<lingo Config/MenuItems/Heading>>
 
 <<lingo Config/MenuItems/Description>>
 
@@ -21,18 +21,18 @@ caption: Menu Bar
 
 </$set>
 
-!! <<lingo Config/BreakpointPosition/Headings>>
+!! <<lingo Config/BreakpointPosition/Heading>>
 
 <<lingo Config/BreakpointPosition/Description>>
 
 <$edit-text tiddler="$:/config/plugins/menubar/breakpoint" default="" tag="input"/>
 
-!! <<lingo Config/ContentsTag/Headings>>
+!! <<lingo Config/ContentsTag/Heading>>
 
 <<lingo Config/ContentsTag/Description>>
 
 <$edit-text tiddler="$:/config/plugins/menubar/TableOfContents/Tag" default="" tag="input"/>
 
-!! <<lingo Config/MenuBarColours/Headings>>
+!! <<lingo Config/MenuBarColours/Heading>>
 
 <<lingo Config/MenuBarColours/Description>>

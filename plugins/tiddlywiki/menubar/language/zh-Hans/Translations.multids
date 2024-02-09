@@ -1,13 +1,13 @@
 title: $:/plugins/tiddlywiki/menubar/language/zh-Hans/
 
 Config/Heading1: 菜单栏配置
-Config/MenuItems/Headings: 菜单项
+Config/MenuItems/Heading: 菜单项
 Config/MenuItems/Description: 选择要显示的菜单项。您还可以通过拖动项目来重新排序。
-Config/BreakpointPosition/Headings: 响应式断点位置
+Config/BreakpointPosition/Heading: 响应式断点位置
 Config/BreakpointPosition/Description: 窄屏和宽屏之间的分界点位置。应包含 CSS 单位（如 `400px`）。
-Config/ContentsTag/Headings: 内容标签
+Config/ContentsTag/Heading: 内容标签
 Config/ContentsTag/Description: 内容下拉菜单中使用的 TOC 目录标签
-Config/MenuBarColours/Headings: 菜单栏颜色
+Config/MenuBarColours/Heading: 菜单栏颜色
 Config/MenuBarColours/Description: 要更改菜单栏的颜色，请在当前选定的调色板中定义颜色 `menubar-foreground` 和 `menubar-background`。
 Items/TOC/Name: 内容
 Items/TOC/Description: 目录
