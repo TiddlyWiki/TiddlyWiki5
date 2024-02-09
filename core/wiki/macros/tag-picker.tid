@@ -115,13 +115,13 @@ The second ESC tries to close the "draft tiddler"
 		>
 			{{$:/core/images/down-arrow}}
 		</$button>
-		<$reveal state=<<storeTitle>> type="nomatch" text="">
+		<% if [<storeTitle>has[text]] %>
 			<$button actions=<<delete-tag-state-tiddlers>> class="tc-btn-invisible tc-small-gap tc-btn-dropdown"
 				tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}} aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}
 			>
 				{{$:/core/images/close-button}}
 			</$button>
-		</$reveal>
+		<% endif %>
 		<span class="tc-add-tag-button tc-small-gap-left">
 			<$let tag=<<_tf.getTag>>>
 				<$button set=<<newTagNameTiddler>> actions=<<add-button-actions>> >
@@ -131,13 +131,13 @@ The second ESC tries to close the "draft tiddler"
 		</span>
 	</div>
 	<div class="tc-block-dropdown-wrapper">
-		<$reveal state=<<tagpicker-dropdown-id>> type="nomatch" text="">
+		<% if [<tagpicker-dropdown-id>has[text]] %>
 			<div class="tc-block-dropdown tc-block-tags-dropdown">
 				<$macrocall $name="tag-picker-listTags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" />
 				<hr>
 				<$macrocall $name="tag-picker-listTags" filter=<<systemTagsFilter>> suffix="-secondaryList" />
 			</div>
-		</$reveal>
+		<% endif %>
 	</div>
 </div>
 \end
