@@ -62,12 +62,12 @@ The second ESC tries to close the "draft tiddler"
 
 <!-- similar to add-tag-actions __but__ add-only -->
 \procedure add-button-actions()
-<$action-log />
 <$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="[<tag>trim[]]"/>
 <<actions>>
 <<delete-tag-state-tiddlers>>
 <$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
 \end
+<!-- <$action-log /> -->
 
 <!-- create dropdown list -->
 \procedure tag-picker-listTags(filter, suffix)
