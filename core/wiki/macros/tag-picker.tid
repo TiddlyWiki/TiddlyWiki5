@@ -53,10 +53,10 @@ The second ESC tries to close the "draft tiddler"
 	<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$list>
 \end
-<!-- <$action-log /> -->
 
 <!-- similar to add-tag-actions __but__ add-only -->
 \procedure add-button-actions()
+<$action-log />
 <$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="[<tag>trim[]]"/>
 <<actions>>
 <<delete-tag-state-tiddlers>>
@@ -131,11 +131,12 @@ The second ESC tries to close the "draft tiddler"
 				</$button>
 			</$reveal>
 			<span class="tc-add-tag-button tc-small-gap-left">
-					<$button set=<<newTagNameTiddler>> setTo=""
-						actions=<<add-button-actions>>
-					>
+				<!-- TODO check - this let should not be needed. maybe actionListOps $subfilter="[<tag>trim[]]" does not work fiel functions ??? -->
+				<$let tag=<<tag>> >
+					<$button set=<<newTagNameTiddler>> actions=<<add-button-actions>> >
 						{{$:/language/EditTemplate/Tags/Add/Button}}
 					</$button>
+				</$let>
 			</span>
 		</div>
 		<div class="tc-block-dropdown-wrapper">
@@ -155,6 +156,8 @@ The second ESC tries to close the "draft tiddler"
 \procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]]")
 \function userInput() [<storeTitle>get[text]]
 \function tag() [<newTagNameTiddler>get[text]]
+
+<!-- keep those variables because they may "leak" into macros using old syntax -->
 <$let
 	saveTiddler={{{ [<tiddler>is[blank]then<currentTiddler>else<tiddler>] }}}
 	palette={{$:/palette}}
