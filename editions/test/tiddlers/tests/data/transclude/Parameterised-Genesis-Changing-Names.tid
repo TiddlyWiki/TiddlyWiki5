@@ -1,0 +1,34 @@
+title: Transclude/Parameterised/GenesisChangingNames
+description: Parameterised transclusion using genesis can handle refreshes that change parameter names
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure elephant(filler)
+\whitespace trim
+<$let name={{Canary}}>
+<$genesis $type=$parameters $names="[<name>]" $values="default">
+<$text text=<<First>>/>/<$text text=<<Second>>/>
+</$genesis>
+</$let>
+\end elephant
+\whitespace trim
+
+-
+<<elephant ignore First:init Second:var>>
+-
+<<elephant ignore var>>
+
++
+title: Canary
+
+First
++
+title: Actions
+
+<$action-setfield $tiddler="Canary" text="Second"/>
++
+title: ExpectedResult
+
+<p>-/var-/var</p>

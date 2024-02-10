@@ -1,0 +1,38 @@
+title: Transclude/Parameterised/GenesisChangingCount
+description: Parameterised transclusion using genesis can handle refreshes that change number of parameters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure elephant(filler)
+\whitespace trim
+<$text text=<<filler>>/>-
+<$let args={{Canary}}>
+<$genesis $type=$parameters $names="[enlist<args>]" $values="[enlist<args>addsuffix[-default]]">
+<$text text=`($(argA)$-$(argB)$-$(argC)$)` />
+</$genesis>
+</$let>
+<$parameters other=other-default>
+-<$text text=<<other>>/>
+\end elephant
+
+-
+<<elephant filler argA:myA argB:myB argC:myC other:myOther>>
+<<elephant filler myA myB myC myOther>>
+
++
+title: Canary
+
+argA argB
++
+title: Actions
+
+<$action-setfield $tiddler="Canary" text="argA argB argC"/>
++
+title: ExpectedResult
+
+<p>-
+filler-(myA-myB-myC)-myOther
+filler-(myA-myB-myC)-myOther
+</p>

@@ -358,14 +358,26 @@ TranscludeWidget.prototype.getOrderedTransclusionParameters = function() {
 };
 
 /*
+The parameter index indicates is used by internal $parameter widgets to sequentially assign unnamed parameters.
+*/
+Object.defineProperty(TranscludeWidget.prototype, 'parameterIndex', {
+    get: function() { return this.claimedIndices || 0; },
+    set: function(value) { this.claimedIndices = value; }
+});
+
+/*
 Fetch the value of a parameter given either its name or index
 */
-TranscludeWidget.prototype.getTransclusionParameter = function(name,index,defaultValue) {
+TranscludeWidget.prototype.getTransclusionParameter = function(name,defaultValue) {
 	if(name in this.stringParametersByName) {
 		return this.stringParametersByName[name];
 	} else {
+		// Let's see if this name was already assigned an index
+		var index = this.parameterIndex;
 		var name = "" + index;
 		if(name in this.stringParametersByName) {
+			// This parameter now corresponds to this index. No other parameters may correspond to it.
+			this.claimedIndices = index + 1;
 			return this.stringParametersByName[name];
 		}
 	}
@@ -448,6 +460,8 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
+	// Reset the parameter index so that internal $parameter widgets can double-check their unnamed parameter indices.
+	this.parameterIndex = 0;
 	if(($tw.utils.count(changedAttributes) > 0) || (this.transcludeVariableIsFunction && this.functionNeedsRefresh()) || (!this.transcludeVariable && changedTiddlers[this.transcludeTitle] && this.parserNeedsRefresh())) {
 		this.refreshSelf();
 		return true;

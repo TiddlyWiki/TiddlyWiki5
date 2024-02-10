@@ -13,17 +13,13 @@ There are shortcuts for common scenarios that can often make it unnecessary to u
 * the [[Pragma: \procedure]] for declaring procedure
 * the [[Pragma: \widget]] for declaring custom widgets
 
-The <<.wlink ParametersWidget>> widget must be used directly in the following situations:
-
-* When the default value of a parameter must be computed dynamically
-* When the `$depth` attribute is used to retrieve parameters from a parent transclusion (see below)
+The <<.wlink ParametersWidget>> widget must be used directly when the default value of a parameter must be computed dynamically.
 
 ! Content and Attributes
 
 The content of the <<.wlink ParametersWidget>> widget is the scope within which the values of the parameters can be accessed as ordinary variables.
 
 |!Attribute |!Description |
-|$depth |The index of the parent transclusion from which to obtain the parameters (defaults to 1). See below |
 |$parseMode |Optional name of a variable in which is made available the parse mode of the content of the parent transclusion (the parse mode can be "inline" or "block") |
 |$parseTreeNodes |Optional name of a variable in which is made available the JSON representation of the parse tree nodes contained within the parent transclusion |
 |$slotFillParseTreeNodes |Optional name of a variable in which is made available the JSON representation of the parse tree nodes corresponding to each fill widget contained within the parent transclusion (as an object where the keys are the slot names and the values are the parse tree nodes) |
@@ -34,9 +30,6 @@ The content of the <<.wlink ParametersWidget>> widget is the scope within which 
 
 <<.note "Note the special treatment required for parameters names that start with a `$`; this can be avoided by using one of the pragmas">>
 
-!! `$depth` Attribute
-
-By default, the <<.wlink ParametersWidget>> widget retrieves parameters from the immediate parent transclusion. The `$depth` attribute permits access to the parameters of parent transclusions by specifying an index to the parent to be inspected ("1" is the immediate parent, "2" is the parent of that parent, etc.). This is useful in some situations where an intervening transclusion prevents immediate access to desired parameters.
 
 !! `$parseMode`, `$parseTreeNodes`, `$slotFillParseTreeNodes` and `$params` Attributes
 
