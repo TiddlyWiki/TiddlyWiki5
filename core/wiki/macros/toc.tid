@@ -2,17 +2,17 @@ title: $:/core/macros/toc
 tags: $:/tags/Macro
 
 <!--
-Naming rules / pattern
-- functions: tf.toc-variableName, "tf." -> function prefix reservered for TW, "toc-" -> global macro prefix, "variableName"
+Naming rules
+- functions eg: tf.toc-variableName, "tf." ... function prefix reservered for TW, "toc-" ... global macro prefix, "variableName"
 - procedures eg: toc-procedureName,
 - macro parameters: path, itemTemplate
-- derived macro parameters: _path, _itemTemplate -> derived variables start with an underscore
+- derived macro parameters: _path, _itemTemplate ... derived variables start with an underscore
+- some \function definitions are near their first use in the middle of the code, to find them easily
 
-The toc macro code gets more and more complex from top to bottom.
-toc-tabbed-internal-nav calls toc-tabbed-external-nav, which callse toc-selective-expandable, which calls toc-expandable
+The toc-macro code is heavily reused from top to bottom.
+toc-tabbed-internal-nav calls toc-tabbed-external-nav, which calls toc-selective-expandable, which calls toc-expandable
 
-The very first toc macro is _not_ "reused". So it can be used as a "simple" reverence implementation,
-because it is realatively easy to debug.
+The very first toc macro is _not_ reused. So it can be used as a simple reference implementation, because it is relatively easy to debug.
 -->
 
 \whitespace trim
@@ -39,10 +39,11 @@ because it is realatively easy to debug.
 </$transclude>
 \end
 
-<!-- v5.2.4 add "Custom Icons" -->
+<!-- Next 2 allow custom icons (TW v5.2.4). Keep names for backwards compatibility -->
 \procedure toc-open-icon() $:/core/images/down-arrow
 \procedure toc-closed-icon() $:/core/images/right-arrow
 
+<!-- Default field names -->
 \procedure toc-hideField()    toc-hide
 \procedure toc-includeField() toc-include
 \procedure toc-filterField()  toc-filter
@@ -55,7 +56,7 @@ because it is realatively easy to debug.
 <!-- join the CSS definitions from above -->
 \function tf.toc-itemClass()       [<tf.toc-itemClassFilter>] [<tf.toc-includeClass>] [<tf.toc-filterClass>] [<tf.toc-hideClass>] +[join[ ]]
 
-<!-- Special case, if toc-hide field is "yes", we need a currentTiddler *titlelist* -- otherwise return the content as text -->
+<!-- Special case: if toc-hide field is "yes", we need a currentTiddler *titlelist* - otherwise return the content as text -->
 <!-- the following functions need to use <currentTiddler> -->
 \function tf.toc-getHideText() [<currentTiddler>get<toc-hideField>]
 \function tf.toc-hideIsYes()   [<currentTiddler>format:titlelist[]]
@@ -136,6 +137,8 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	:else[<parentField>!is[blank]then<toc-parentChildFilter>else<toc-tagChildFilter>]
 \end
 
+\function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
+
 <!-- toc-openBranch internally uses a recursiveOpen() procedure -->
 \procedure toc-openBranch(path,currentTiddler,manual:"no")
 \procedure recursiveOpen(exclude, path)
@@ -201,8 +204,6 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	</$button>
 <% endif %>
 \end
-
-\function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
 
 \procedure toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,tagField,parentField,itemTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
@@ -297,7 +298,6 @@ Shows an expandable toc. Item always have an open/close chevron
 				tag=<<currentTiddler>> sort=<<sort>> exclude=<<exclude>> path=<<path>>
 				captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
 				itemTemplate=<<itemTemplate>>
-
 			/>
 		<% endif %>
 	</li>
@@ -419,4 +419,4 @@ it will open the tiddler in the view area of the same tiddler
 		itemTemplate=<<itemTemplate>>
 	/>
 </$linkcatcher>
-\end
+\end.
