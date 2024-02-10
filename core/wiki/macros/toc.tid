@@ -419,4 +419,4 @@ it will open the tiddler in the view area of the same tiddler
 		itemTemplate=<<itemTemplate>>
 	/>
 </$linkcatcher>
-\end.
+\end

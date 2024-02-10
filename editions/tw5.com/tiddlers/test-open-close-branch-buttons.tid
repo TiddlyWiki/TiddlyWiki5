@@ -1,0 +1,31 @@
+created: 20240207155537595
+modified: 20240208172049452
+tags: testTOC
+title: test-open-close-branch-buttons
+type: text/vnd.tiddlywiki
+
+\procedure closeBranch()
+<<toc-closeBranch path:"/Contents" currentTiddler:"Second" manual:yes>>
+\end
+
+\procedure openBranch()
+<<toc-openBranch path:"/" currentTiddler:"Contents" manual:yes>>
+\end
+
+<$button actions=<<openBranch>>>Open whole Tree</$button>
+
+<$button actions=<<closeBranch>>>Close branch: Second</$button>
+
+''CTRL-click'' will also expand / fold the whole branch. 
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"Contents">>
+</div>
+
+--------
+
+simple docs toc as reference
+
+<div class="tc-table-of-contents">
+<<toc tag:"Contents">>
+</div>

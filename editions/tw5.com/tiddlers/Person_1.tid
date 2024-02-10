@@ -1,0 +1,12 @@
+caption: Betty Rubble
+created: 20240204194635635
+first-name: Betty
+last-name: Rubble
+modified: 20240204201551862
+tags: Person
+title: Person/1
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+<<list-fields>>

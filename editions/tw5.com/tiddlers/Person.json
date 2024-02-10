@@ -1,0 +1,12 @@
+[
+    {
+        "created": "20240204200502854",
+        "text": "\\import [[b b]]\n\nSee: [[test-toc-sorted-names]]\n\nTiddlers tagged with this tiddler title: ''{{!!title}}''\n\n<<list-links filter:\"[tag{!!title}]\">>\n\n<<list-fields>>",
+        "tags": "nameSorted",
+        "title": "Person",
+        "modified": "20240208164734873",
+        "type": "text/vnd.tiddlywiki",
+        "toc-include": "[tag[Person]sortsub:string<name-sort>] ",
+        "caption": "People"
+    }
+]

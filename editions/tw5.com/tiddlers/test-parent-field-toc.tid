@@ -1,0 +1,56 @@
+created: 20240206215732068
+modified: 20240208172053096
+tags: testTOC
+title: test-parent-field-toc
+type: text/vnd.tiddlywiki
+
+''toc-selective expandable''
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"root" parentField:"parent" exclude:"p1.1">>
+</div>
+
+---
+
+''toc-expandable''
+
+<div class="tc-table-of-contents">
+<<toc-expandable tag:"root" parentField:"parent">>
+</div>
+
+---
+
+''tocP'' macro `field: parent`
+
+<div class="tc-table-of-contents">
+<<tocP tag:"root" >>
+</div>
+
+------
+
+''tocP'' macro `field: dad`
+
+<div class="tc-table-of-contents">
+<<tocP tag:"root" field:dad>>
+</div>
+
+--------
+
+''toc'' macro `parentField: dad` -- TODO: Add parentItemTemplate with tocP-like NewHere buttons
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" parentField:dad>>
+</div>
+
+----------
+
+''toc-tabbed-internal-nav'' -- `parentField: parent`
+
+<$macrocall
+	$name="toc-tabbed-internal-nav"
+	tag="root"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+	parentField="parent"
+/>

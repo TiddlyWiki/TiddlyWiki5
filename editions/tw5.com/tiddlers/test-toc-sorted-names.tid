@@ -1,0 +1,25 @@
+created: 20240204195218153
+modified: 20240208172112010
+tags: testTOC
+title: test-toc-sorted-names
+type: text/vnd.tiddlywiki
+
+\function  name-sort() "[{!!last-name}] [{!!first-name}] +[join[, ]]"
+
+Also see [[Talk thread about new toc-macros|https://talk.tiddlywiki.org/t/proposal-toc-macros-rewrite-using-if-functions-and-procedures-new-fuctionality/9046/32?u=pmario]]
+
+''name-sort'' function is defined as:
+
+```
+\function  name-sort() "[{!!last-name}] [{!!first-name}] +[join[, ]]"
+```
+
+* You’ll see in the “''Sorted by (tiddler) Title''” section that the people are sorted by their Person/1, Person/2, ...
+
+* In the ''People'' section, they’re ''sorted by last name'', and for those with the same last name, by first name. And that’s exactly what I was looking for.
+
+
+<div class="tc-table-of-contents">
+<<toc tag:"nameSorted">>
+</div>
+

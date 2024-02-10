@@ -1,0 +1,31 @@
+created: 20240206142124740
+modified: 20240208172109190
+tags: testTOC
+title: test-toc-simple-expandable-tabbed-internal
+type: text/vnd.tiddlywiki
+
+* show template field
+* show caption field
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" viewField:test  viewFieldTemplate:template>>
+</div>
+
+---
+
+the following toc is `toc-expandable` so it shows chevrons with every node
+
+<div class="tc-table-of-contents">
+<<toc-expandable tag:"root"   >>
+</div>
+
+
+<$macrocall
+	$name="toc-tabbed-internal-nav"
+	tag="root"
+	selectedTiddler="$:/temp/toc/selectedTiddler"
+	unselectedText="<p>Select a topic in the table of contents. Click the arrow to expand a topic.</p>"
+	missingText="<p>Missing tiddler.</p>"
+    viewField=test
+viewFieldTemplate=template
+/>

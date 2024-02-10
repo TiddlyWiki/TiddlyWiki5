@@ -1,0 +1,29 @@
+caption: b b-caption
+created: 20240202131440055
+modified: 20240208154625928
+tags: aaa
+test: b b-test
+title: b b
+toc-filter: 
+toc-hide: 
+toc-include: [tag[todo]]
+toc-link: 
+type: text/vnd.tiddlywiki
+
+\procedure list-fields()
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -text -title -bag -modified -created -revision -type " template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>
+\end
+
+* This tiddler is part of the ''tag-tree''
+* It toc-includes all tiddlers tagged: `todo`
+** The todo's are intended to be shown with a custom template, that contains checkboxes and triggers a "done" action (NOT implemented yet)
+** [[todo1]] has a field `toc-link: no`  so it cannot be clicked to open it
+** todo1 should have a chevron
+
+* This tiddler has many fields <<fields>>
+
+<<list-fields>>

@@ -1,0 +1,12 @@
+caption: Fred Flintstone
+created: 20240204194520251
+first-name: Fred
+last-name: Flintstone
+modified: 20240204201551863
+tags: Person
+title: Person/6
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+<<list-fields>>

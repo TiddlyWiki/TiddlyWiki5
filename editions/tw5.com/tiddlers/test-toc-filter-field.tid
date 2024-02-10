@@ -1,0 +1,21 @@
+created: 20240208132923069
+modified: 20240208172104378
+tags: testTOC
+title: test-toc-filter-field
+type: text/vnd.tiddlywiki
+
+* tiddler [[aaa-aaa]] has a `toc-filter` field: <code>{{aaa-aaa!!toc-filter}}</code>
+* CTRL-click on aaa-''chevron'' should expand / fold the whole tree
+* Also see [[test-open-close-branch-buttons]]
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"root" viewField:test  viewFieldTemplate:template>>
+</div>
+
+--------
+
+simple toc as reference
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" viewField:test  viewFieldTemplate:template>>
+</div>

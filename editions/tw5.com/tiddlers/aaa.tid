@@ -1,0 +1,14 @@
+created: 20240202131427117
+modified: 20240208155800851
+tag-like: aaa.a aaa.b
+tags: root [[b b]] aaa
+title: aaa
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+* This tiddler is part of several tag-trees, to test recursion detection
+* It also tags itself, to test expand / fold CTRL-click state-tiddler creation
+** There should be ''no'' redundant (not needed) state tiddlers
+
+<<list-fields>>

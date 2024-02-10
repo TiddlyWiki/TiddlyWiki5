@@ -1,0 +1,14 @@
+created: 20240204014414845
+first-name: Robert
+last-name: M.
+modified: 20240208142443958
+tags: person
+title: MR
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+* part of [[test-contacts]]
+* has `first-name`, `last-name` fields
+
+<<list-fields>>
