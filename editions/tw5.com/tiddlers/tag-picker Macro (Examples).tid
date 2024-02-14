@@ -1,5 +1,5 @@
 created: 20230616104546608
-modified: 20240209202552318
+modified: 20240214153549323
 tags: [[tag-picker Macro]] [[Macro Examples]]
 title: tag-picker Macro (Examples)
 type: text/vnd.tiddlywiki
@@ -31,7 +31,8 @@ Use all existing tags and set the $:/temp/test/tag-picker ''foo'' field: <<tag-p
 
 <<.tip """The following example expects some values in the "foo" field of the tiddler $:/temp/test/tag-picker, which can be created by the example above.""">>
 
-<$macrocall $name=".example" n="4" eg="""\define listSource() $:/temp/test/tag-picker
+<$macrocall $name=".example" n="4" eg="""\procedure listSource() $:/temp/test/tag-picker
+
 $:/temp/test/tag-picker foo: <$text text={{{ [[$:/temp/test/tag-picker]get[foo]enlist-input[]join[, ]else[n/a]] }}}/><br>
 $:/temp/test/tag-picker bar: <$text text={{{ [[$:/temp/test/tag-picker]get[bar]enlist-input[]join[, ]else[n/a]] }}}/>
 
