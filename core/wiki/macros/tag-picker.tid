@@ -7,13 +7,14 @@ second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>
 
 \whitespace trim
 
-<!-- tagpicker-dropdown-id is needed if several tap-pickers targetting the same tiddler but different fields are shown in one tiddler -->
-<!-- The qualify widget cannot be used for the state-tiddler, since mouse-clicked buttons in $:/core/ui/TagPickerTagTemplate create a different hash -->
-\function tagpicker-dropdown-id() [[$:/state/popup/tags-auto-complete]] [[$(saveTiddler)$-[$(tagField)$-$(tagListFilter)$]substitute[]sha256[]] +[join[/]]
-\function tagpicker-dropdown-class() [<tagpicker-dropdown-id>sha256[]addprefix[tc-]]
+<!-- tf.tagpicker-dropdown-id is needed if several tap-pickers are shown in one tiddler -->
+\function tf.tagpicker-dropdown-id()
+	[<qualify $:/state/popup/tags-auto-complete>]
+	[[$(saveTiddler)$-[$(tagField)$-$(tagListFilter)$]substitute[]sha256[]] +[join[/]]
+\end
 
-<!-- get-tagpicker-focus-selector is also used in $:/core/ui/TagPickerTagTemplate. So be aware of possible side effects if something is changed -->
-\function get-tagpicker-focus-selector() [<tagpicker-dropdown-class>addprefix[.]] .tc-popup-handle +[join[ ]]
+\function tf.tagpicker-dropdown-class() [<tf.tagpicker-dropdown-id>sha256[]addprefix[tc-]]
+\function tf.get-tagpicker-focus-selector() [<tf.tagpicker-dropdown-class>addprefix[.]] .tc-popup-handle +[join[ ]]
 
 <!-- clean up temporary tiddlers, so the next "pick" starts with a clean input -->
 <!-- This could probably be optimized / removed if we would use different temp-tiddlers
@@ -52,7 +53,7 @@ The second ESC tries to close the "draft tiddler"
 <!-- triggered by keyboard only -->
 \procedure clear-tags-actions()
 <$let userInput=<<_tf.getUserInput>> >
-	<!-- this list __cannot__ be transformed to conditional IF -->
+	<!-- this list __cannot__ be transformed to conditional IF. The list variable is used! -->
 	<$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" >
 		<$list-empty>
 			<<clear-tags-actions-inner>>
@@ -68,7 +69,7 @@ The second ESC tries to close the "draft tiddler"
 <$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="[<tag>trim[]]"/>
 <<actions>>
 <<delete-tag-state-tiddlers>>
-<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<tf.get-tagpicker-focus-selector>>/>
 \end
 <!-- <$action-log /> -->
 
@@ -79,9 +80,12 @@ The second ESC tries to close the "draft tiddler"
 		emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem"
 	>
 		<$list filter=<<filter>> variable="tag">
-			<!-- Not sure if the button-classes are needed here -->
+			<!-- The buttonClasses filter is used to define tc-tag-button-selected state -->
+			<!-- tf.get-tagpicker-focus-selector has to be resolved for $:/core/ui/TagPickerTagTemplate,
+				othwerwise qualify in tf.tagpicker-dropdown-id causes problems -->
 			<$let currentTiddler=<<tag>>
-				button-classes=`tc-btn-invisible ${ [<tag>addsuffix<suffix>] -[<tagSelectionState>get[text]] :then[[]] ~tc-tag-button-selected }$`
+				button-classes=`tc-btn-invisible ${[<tag>addsuffix<suffix>] -[<tagSelectionState>get[text]] :then[[]] ~tc-tag-button-selected }$`
+				get-tagpicker-focus-selector=`${[<tf.get-tagpicker-focus-selector>]}$`
 			>
 				{{||$:/core/ui/TagPickerTagTemplate}}
 			</$let>
@@ -92,7 +96,7 @@ The second ESC tries to close the "draft tiddler"
 
 <!-- tag-picker-inner is the main function -->
 \procedure tag-picker-inner()
-<div class={{{ [[tc-edit-add-tag]] [<tagpicker-dropdown-class>] +[join[ ]] }}}>
+<div class={{{ [[tc-edit-add-tag]] [<tf.tagpicker-dropdown-class>] +[join[ ]] }}}>
 	<div class="tc-edit-add-tag-ui">
 		<span class="tc-add-tag-name tc-small-gap-right">
 			<$macrocall	$name="keyboard-driven-input"
@@ -104,7 +108,7 @@ The second ESC tries to close the "draft tiddler"
 				inputCancelActions=<<clear-tags-actions>>
 				tag="input"
 				placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
-				focusPopup=<<tagpicker-dropdown-id>>
+				focusPopup=<<tf.tagpicker-dropdown-id>>
 				class="tc-edit-texteditor tc-popup-handle"
 				tabindex=<<tabIndex>>
 				focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}
@@ -113,7 +117,7 @@ The second ESC tries to close the "draft tiddler"
 				configTiddlerFilter="[[$:/core/macros/tag-picker]]"
 			/>
 		</span>
-		<$button popup=<<tagpicker-dropdown-id>> class="tc-btn-invisible tc-btn-dropdown"
+		<$button popup=<<tf.tagpicker-dropdown-id>> class="tc-btn-invisible tc-btn-dropdown"
 			tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}
 		>
 			{{$:/core/images/down-arrow}}
@@ -134,7 +138,7 @@ The second ESC tries to close the "draft tiddler"
 		</span>
 	</div>
 	<div class="tc-block-dropdown-wrapper">
-		<% if [<tagpicker-dropdown-id>has[text]] %>
+		<% if [<tf.tagpicker-dropdown-id>has[text]] %>
 			<div class="tc-block-dropdown tc-block-tags-dropdown">
 				<$macrocall $name="tag-picker-listTags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" />
 				<hr>
