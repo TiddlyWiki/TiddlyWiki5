@@ -61,6 +61,14 @@ The <<.op jsontype>> operator uses multiple operands to specify the indexes of t
 [<jsondata>jsontype[d],[f],[2]] --> "boolean"
 ```
 
+<<.from-version "5.3.2">> Negative indexes into an array are counted from the end, so -1 means the last item, -2 the next-to-last item, and so on:
+
+```
+[<jsondata>jsontype[d],[f],[-1]] --> "null"
+[<jsondata>jsontype[d],[f],[-2]] --> "boolean"
+[<jsondata>jsontype[d],[f],[-4]] --> "string"
+```
+
 Indexes can be dynamically composed from variables and transclusions:
 
 ```

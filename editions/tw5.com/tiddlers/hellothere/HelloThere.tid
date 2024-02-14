@@ -1,11 +1,11 @@
 created: 20130822170200000
 list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
-modified: 20230820112855583
+modified: 20231223102201587
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-!!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
+ !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
@@ -20,7 +20,7 @@ TiddlyWiki lets you choose where to keep your data, guaranteeing that in the dec
 </div>
 <div class="tc-cards tc-small">
 <$link to="中文社区 - Chinese Community" class="tc-btn-big-green tc-card">
-中文社区 - Chinese Community
+中文社区<br/>Chinese Community
 </$link>
 </div>
 

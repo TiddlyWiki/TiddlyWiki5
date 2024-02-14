@@ -79,9 +79,6 @@ exports.parse = function() {
 			}
 			return [tiddlerNode];
 		} else {
-			// No template or text reference is provided, so we'll use a blank target. Otherwise we'll generate
-			// a transclude widget that transcludes the current tiddler, often leading to recursion errors
-			transcludeNode.attributes["$tiddler"] = {name: "$tiddler", type: "string", value: ""};
 			return [transcludeNode];
 		}
 	}

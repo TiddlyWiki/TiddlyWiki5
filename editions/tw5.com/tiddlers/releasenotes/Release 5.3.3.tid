@@ -1,0 +1,30 @@
+caption: 5.3.3
+created: 20231223102201587
+modified: 20231223102201587
+released: 20231223102201587
+tags: ReleaseNotes
+title: Release 5.3.3
+type: text/vnd.tiddlywiki
+description: Under development
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.2...v5.3.3]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[catter-fly|https://talk.tiddlywiki.org/u/catter-fly]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-2/8569]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/5cb31b7adb0a6b226c0c215ddbed62e297ce89e1/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
+This is a bug fix release to address a number of bugs that were introduced with [[Release 5.3.2]].
+
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7903">> handling of a list widget with an empty paragraph as inline template
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7900">> broken per-tiddler previews
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7897">> missing comma before skinny tiddlers in JSON store area
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7895">> handling of whitespace immediately after pragmas
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7905">> SelectWidget handling of classes and rendering typo
+
+Since v5.3.3 replaces v5.3.2 after only a couple of weeks, here is the release note for v5.3.2.
+
+! Release Note for v5.3.2
+
+{{Release 5.3.2}}

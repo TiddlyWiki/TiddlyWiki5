@@ -40,6 +40,10 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
+	this.assignAttributes(this.inputDomNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	if(isChecked) {
 		this.inputDomNode.checked = true;
 	}
