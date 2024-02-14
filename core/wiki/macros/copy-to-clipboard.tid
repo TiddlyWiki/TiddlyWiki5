@@ -1,20 +1,26 @@
 title: $:/core/macros/copy-to-clipboard
-tags: $:/tags/Macro
+tags: $:/tags/Global
 
-\define copy-to-clipboard(src,class:"tc-btn-invisible",style)
 \whitespace trim
-<$button class=<<__class__>> style=<<__style__>> message="tm-copy-to-clipboard" param=<<__src__>> tooltip={{$:/language/Buttons/CopyToClipboard/Hint}}>
-{{$:/core/images/copy-clipboard}}
-&#32;
-<$text text={{$:/language/Buttons/CopyToClipboard/Caption}}/>
+
+\procedure copy-to-clipboard(src,class:"tc-btn-invisible",style)
+<$button message="tm-copy-to-clipboard"
+	param=<<src>>
+	class=<<class>>
+	style=<<style>>
+	tooltip={{$:/language/Buttons/CopyToClipboard/Hint}}
+>
+	{{$:/core/images/copy-clipboard}}
+	<span class="tc-tiny-gap-left">
+		<$text text={{$:/language/Buttons/CopyToClipboard/Caption}}/>
+	</span>
 </$button>
 \end
 
-\define copy-to-clipboard-above-right(src,class:"tc-btn-invisible",style)
-\whitespace trim
+\procedure copy-to-clipboard-above-right(src,class:"tc-btn-invisible",style)
 <div style="position: relative;">
-<div style="position: absolute; bottom: 0; right: 0;">
-<$macrocall $name="copy-to-clipboard" src=<<__src__>> class=<<__class__>> style=<<__style__>>/>
-</div>
+	<div style="position: absolute; bottom: 0; right: 0;">
+		<$macrocall $name="copy-to-clipboard" src=<<src>> class=<<class>> style=<<style>>/>
+	</div>
 </div>
 \end
