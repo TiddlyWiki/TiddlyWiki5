@@ -14,7 +14,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 \whitespace trim
 <$let
-  qualified-preview-state=<<qualify "$:/state/showeditpreview">>
+	qualified-preview-state=<<qualify "$:/state/showeditpreview">>
 	editPreviewStateTiddler={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] }}}
 	importTitle=<<qualify $:/ImportImage>>
 	importState=<<qualify $:/state/ImportImage>> >
