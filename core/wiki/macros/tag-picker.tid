@@ -7,10 +7,13 @@ second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>
 
 \whitespace trim
 
-<!-- this one is needed if several tap-pickers targetting the same tiddler but different fields are shown in the same tiddler -->
-\function tagpicker-dropdown-id() [<qualify "$:/state/popup/tags-auto-complete">] [[$(tagField)$-$(tagListFilter)$]substitute[]sha256[]] +[join[/]]
+<!-- tagpicker-dropdown-id is needed if several tap-pickers targetting the same tiddler but different fields are shown in one tiddler -->
+<!-- The qualify widget cannot be used for the state-tiddler, since mouse-clicked buttons in $:/core/ui/TagPickerTagTemplate create a different hash -->
+\function tagpicker-dropdown-id() [[$:/state/popup/tags-auto-complete]] [[$(saveTiddler)$-[$(tagField)$-$(tagListFilter)$]substitute[]sha256[]] +[join[/]]
+\function tagpicker-dropdown-class() [<tagpicker-dropdown-id>sha256[]addprefix[tc-]]
 
-\procedure get-tagpicker-focus-selector() [data-tiddler-title=`$(thisTiddler)$`] .tc-add-tag-name input
+<!-- get-tagpicker-focus-selector is also used in $:/core/ui/TagPickerTagTemplate. So be aware of possible side effects if something is changed -->
+\function get-tagpicker-focus-selector() [<tagpicker-dropdown-class>addprefix[.]] .tc-popup-handle +[join[ ]]
 
 <!-- clean up temporary tiddlers, so the next "pick" starts with a clean input -->
 <!-- This could probably be optimized / removed if we would use different temp-tiddlers
@@ -89,7 +92,7 @@ The second ESC tries to close the "draft tiddler"
 
 <!-- tag-picker-inner is the main function -->
 \procedure tag-picker-inner()
-<div class="tc-edit-add-tag">
+<div class={{{ [[tc-edit-add-tag]] [<tagpicker-dropdown-class>] +[join[ ]] }}}>
 	<div class="tc-edit-add-tag-ui">
 		<span class="tc-add-tag-name tc-small-gap-right">
 			<$macrocall	$name="keyboard-driven-input"
@@ -167,6 +170,8 @@ The second ESC tries to close the "draft tiddler"
 
 	nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]"
 	systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>sort[]]"
+
+	cancelPopups="yes"
 >
 	<$macrocall $name="tag-picker-inner"/>
 </$let>
