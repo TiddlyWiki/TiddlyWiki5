@@ -1,0 +1,40 @@
+created: 20240213183404352
+modified: 20240213195440187
+tags: testTOC
+title: test-Contents-toc-hide
+type: text/vnd.tiddlywiki
+
+\procedure openBranch()
+<<toc-openBranch path:"/" currentTiddler:"test-Contents-toc-hide" manual:yes>>
+\end
+
+\procedure closeBranch()
+<<toc-closeBranch path:"/" currentTiddler:"test-Contents-toc-hide" manual:yes>>
+\end
+
+<$button actions=<<openBranch>>>Open Tree</$button>
+
+<$button actions=<<closeBranch>>>Close Tree</$button>
+
+[[toc-1.1.1-hidden]] contains a field: `toc-hide: yes`
+
+The following examples uses the `toc-hide: yes` field in the currentTiddler to exclude a tiddler from the current branch
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"test-Contents-toc-hide">>
+</div>
+
+The following examples uses: `exclude:"[toc-hide[yes]]"`, which allows you to use any field name with a specific value to be excluded from every branch
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"test-Contents-toc-hide" exclude:"[toc-hide[yes]]">>
+</div>
+
+----------
+
+simple toc as a reference
+
+<div class="tc-table-of-contents">
+<<toc "test-Contents-toc-hide">>
+</div>
+

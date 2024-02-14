@@ -4,31 +4,31 @@ tags: $:/tags/Stylesheet testTOC
 title: test-styles
 type: text/vnd.tiddlywiki
 
-.toc-item-filter> a,
-.toc-item-filter> .tc-toc-caption {
+.tc-toc-filter> a,
+.tc-toc-filter> .tc-toc-caption {
   color: darkviolet;
 }
 
-.toc-item-filter> button > svg {
+.tc-toc-filter> button > svg {
   fill: darkviolet;
 }
 
-.toc-item-include  > a,
-.toc-item-include > .tc-toc-caption
+.tc-toc-include  > a,
+.tc-toc-include > .tc-toc-caption
 {
   color: green;
 }
 
-.toc-item-include > button > svg {
+.tc-toc-include > button > svg {
   fill: green;
 }
 
-.toc-item-hide> a,
-.toc-item-hide > .tc-toc-caption
+.tc-toc-hide> a,
+.tc-toc-hide > .tc-toc-caption
 {
   color: red;
 }
 
-.toc-item-hide> button > svg {
+.tc-toc-hide> button > svg {
   fill: red;
 }

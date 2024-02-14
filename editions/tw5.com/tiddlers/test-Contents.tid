@@ -1,10 +1,9 @@
 created: 20240203175824154
-modified: 20240208172040360
+modified: 20240213183451394
 tags: testTOC
 title: test-Contents
 type: text/vnd.tiddlywiki
 
-\function tf.toc-exclude() [<currentTiddler>get[toc-xxx]]
 
 <div class="tc-table-of-contents">
 <<toc "Contents">>
