@@ -127,14 +127,15 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 <!--  -->
 
 <!-- Helper functions for toc-openBranch and toc-closeBranch procedures -->
-\procedure toc-tagLikeChildFilter() [<currentTiddler>get<tagField>enlist-input[]]
-\procedure toc-parentChildFilter()  [has<parentField>] :filter[get<parentField>match<..currentTiddler>]
-\procedure toc-tagChildFilter()     [tag<currentTiddler>]
+\procedure toc-tagLikeChildFilter() [<currentTiddler>get<tagField>enlist-input[]] -[toc-hide[yes]]
+\procedure toc-parentChildFilter()  [has<parentField>] :filter[get<parentField>match<..currentTiddler>] -[toc-hide[yes]]
+\procedure toc-tagChildFilter()     [tag<currentTiddler>] -[toc-hide[yes]]
 
 <!-- this function uses the variables NOT the tiddler fields -->
 \function tf.toc-hasChildren()
 	[<tagField>!is[blank]then<toc-tagLikeChildFilter>]
-	:else[<parentField>!is[blank]then<toc-parentChildFilter>else<toc-tagChildFilter>]
+	:else[<parentField>!is[blank]then<toc-parentChildFilter>]
+	:else[<toc-tagChildFilter>]
 \end
 
 \function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
@@ -283,6 +284,14 @@ Shows an expandable toc. Item always have an open/close chevron
 		<!-- v5.1.23 use target-field if present in tiddler -->
 		<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
 			<!-- The subfilter<exclude> needs to be the last filter run -->
+<$log
+	ct=<<currentTiddler>>
+	tf.toc-hasChildren=<<tf.toc-hasChildren>>
+	tf.toc-hasChildren-f= {{{ [subfilter<tf.toc-hasChildren>]
+	exclude=<<exclude>> }}}
+	filter={{{ [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] }}}
+/>
+<!--  -->
 			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
 				<<toc-item>>
 			<% else %>
