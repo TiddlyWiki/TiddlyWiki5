@@ -313,7 +313,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
 		
-		if(selectedNode.offsetLeft) {
+		if("offsetLeft" in selectedNode) {
 			// Add variables with a (relative and absolute) popup coordinate string for the selected node
 			var nodeRect = {
 				left: selectedNode.offsetLeft,
@@ -338,12 +338,12 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		}
 	}
 	
-	if(domNode && domNode.offsetWidth) {
+	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
 	}
 
-	if(event && event.clientX && event.clientY) {
+	if(event && ("clientX" in event) && ("clientY" in event)) {
 		if(selectedNode) {
 			// Add variables for event X and Y position relative to selected node
 			selectedNodeRect = selectedNode.getBoundingClientRect();

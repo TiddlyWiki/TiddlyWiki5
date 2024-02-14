@@ -1,0 +1,32 @@
+title: Pragmas/WhitespaceNoPragma
+description: parsermode pragma
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$wikify name="parsetree" text={{Text}} mode="inline" output="parsetree">
+<$text text=<<parsetree>>/>
+</$wikify>
++
+title: Text
+
+
+
+
+
+Now!
+
++
+title: ExpectedResult
+
+<p>
+[
+    {
+        "type": "text",
+        "text": "\n\n\n\nNow!\n",
+        "start": 0,
+        "end": 9
+    }
+]
+</p>

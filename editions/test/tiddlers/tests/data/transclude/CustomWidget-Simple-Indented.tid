@@ -1,0 +1,33 @@
+title: Transclude/CustomWidget/Simple/Indented
+description: Custom widget definition indented
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+</$transclude>
++
+title: TiddlerOne
+
+\whitespace trim
+<!-- Define the <$my.widget> widget by defining a transcludable variable with that name -->
+	\widget $my.widget(one:'Jaguar')
+	\whitespace trim
+	<$text text=<<one>>/>
+	<$slot $name="ts-raw">
+		Whale
+	</$slot>
+	\end
+<$my.widget one="Dingo">
+	Crocodile
+</$my.widget>
+<$my.widget one="BumbleBee">
+	Squirrel
+</$my.widget>
+<$my.widget/>
++
+title: ExpectedResult
+
+<p>DingoCrocodileBumbleBeeSquirrelJaguarWhale</p>

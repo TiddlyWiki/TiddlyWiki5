@@ -1,18 +1,34 @@
 {
 	"tiddlers": [
 		{
-			"file": "qrcode.js",
+			"file": "qrcode/qrcode.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/qrcode/qrcode.js",
+				"title": "$:/plugins/tiddlywiki/qrcode/qrcode/qrcode.js",
 				"module-type": "library"
 			}
 		},{
-			"file": "LICENSE",
+			"file": "qrcode/LICENSE",
 			"fields": {
 				"type": "text/plain",
-				"title": "$:/plugins/tiddlywiki/qrcode/license"
+				"title": "$:/plugins/tiddlywiki/qrcode/qrcode/license"
+			}
+		},{
+			"file": "html5-qrcode/html5-qrcode.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/qrcode/html5-qrcode/html5-qrcode.js",
+				"module-type": "library"
+			},
+			"prefix": "window.__Html5QrcodeLibrary__ = {};",
+			"suffix": "\n;exports.__Html5QrcodeLibrary__ = __Html5QrcodeLibrary__;window.__Html5QrcodeLibrary__ = __Html5QrcodeLibrary__;"
+		},{
+			"file": "html5-qrcode/LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/qrcode/html5-qrcode/license"
 			}
 		}
 	]
 }
+

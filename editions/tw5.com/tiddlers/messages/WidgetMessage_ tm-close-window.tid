@@ -1,6 +1,6 @@
 caption: tm-open-window
 created: 20220228140417116
-modified: 20220409092811188
+modified: 20230723220539648
 tags: Messages
 title: WidgetMessage: tm-close-window
 type: text/vnd.tiddlywiki
@@ -29,7 +29,7 @@ src="""
   width="400"
   height="500"
   windowID="window1"
-  something="I just in over in a variable, and boy is my Hashmap tired." />
+  something="I just flew in on a variable, and boy is my Hashmap tired." />
 </$button>
 <$button>Close Window
 <$action-sendmessage 

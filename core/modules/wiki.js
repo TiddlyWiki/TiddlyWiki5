@@ -1086,7 +1086,7 @@ exports.getSubstitutedText = function(text,widget,options) {
 		output = $tw.utils.replaceString(output,new RegExp("\\$" + $tw.utils.escapeRegExp(substitute.name) + "\\$","mg"),substitute.value);
 	});
 	// Substitute any variable references with their values
-	return output.replace(/\$\((\w+)\)\$/g, function(match,varname) {
+	return output.replace(/\$\(([^\)\$]+)\)\$/g, function(match,varname) {
 		return widget.getVariable(varname,{defaultValue: ""})
 	});
 };
@@ -1287,7 +1287,7 @@ exports.search = function(text,options) {
 			console.log("Regexp error parsing /(" + text + ")/" + flags + ": ",e);
 		}
 	} else if(options.some) {
-		terms = text.trim().split(/ +/);
+		terms = text.trim().split(/[^\S\xA0]+/);
 		if(terms.length === 1 && terms[0] === "") {
 			searchTermsRegExps = null;
 		} else {
@@ -1298,7 +1298,7 @@ exports.search = function(text,options) {
 			searchTermsRegExps.push(new RegExp("(" + regExpStr + ")",flags));
 		}
 	} else { // default: words
-		terms = text.split(/ +/);
+		terms = text.split(/[^\S\xA0]+/);
 		if(terms.length === 1 && terms[0] === "") {
 			searchTermsRegExps = null;
 		} else {

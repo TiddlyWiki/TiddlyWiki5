@@ -1,0 +1,90 @@
+title: WidgetMessage: tm-http-request Example - Random Dog
+tags: $:/tags/Global
+
+\procedure download-dog(url)
+
+\procedure completion-download-dog()
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+	<$action-log msg="In completion-download-dog"/>
+	<$action-log/>
+	<!-- Success -->
+	<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+		<!-- Create the dog tiddler -->
+		<$action-createtiddler
+			$basetitle=`$:/RandomDog/$(title)$`
+			text=<<data>>
+			tags="$:/tags/RandomDog"
+			type={{{ [<headers>jsonget[content-type]] }}}
+			credits="https://random.dog/"
+		>
+			<$action-log msg="Created tiddler" title=<<createTiddler-title>>/>
+		</$createtiddler>
+	</$list>
+\end completion-download-dog
+
+<$action-sendmessage
+	$message="tm-http-request"
+	url=<<url>>
+	method="GET"
+	binary="yes"
+	oncompletion=<<completion-download-dog>>
+	var-title=<<url>>
+/>
+\end download-dog
+
+\procedure get-random-dog()
+
+\procedure completion-get-json()
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+	<$action-log msg="In completion-get-json"/>
+	<$action-log/>
+	<!-- Success -->
+	<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+		<!-- Download the dog -->
+		<$macrocall $name="download-dog" url={{{ [<data>jsonget[url]] }}}/>
+	</$list>
+\end completion-get-json
+
+<$action-sendmessage
+	$message="tm-http-request"
+	url="https://random.dog/woof.json"
+	method="GET"
+	oncompletion=<<completion-get-json>>
+/>
+\end get-random-dog
+
+!! Random Dogs
+
+This demo uses the API of the website https://random.dog/ to import a random dog image or video.
+
+//Note that the images and videos can be quite large, so this demo is not recommended to be used over mobile data connections.//
+
+<$button actions=<<get-random-dog>>>
+Import a random dog image or video
+</$button>
+
+<$list filter="[tag[$:/tags/RandomDog]limit[1]]" variable="ignore">
+
+!! Imported Tiddlers
+
+<$button>
+<$action-deletetiddler $filter="[tag[$:/tags/RandomDog]]"/>
+Delete all imported random dogs
+</$button>
+
+Export all imported random dogs: <$macrocall $name="exportButton" exportFilter="[tag[$:/tags/RandomDog]]" lingoBase="$:/language/Buttons/ExportTiddlers/"/>
+
+</$list>
+
+<ol>
+<$list filter="[tag[$:/tags/RandomDog]!sort[modified]]">
+<li>
+<$link>
+<$text text=<<currentTiddler>>/>
+</$link>
+<div style="width:300px;">
+<$transclude $tiddler=<<currentTiddler>>/>
+</div>
+</li>
+</$list>
+</ol>

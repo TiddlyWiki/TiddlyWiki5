@@ -1,5 +1,5 @@
 title: WidgetMessage: tm-http-request Example - Zotero
-tags: $:/tags/Macro
+tags: $:/tags/Global
 
 \procedure select-zotero-group()
 Specify the Zotero group ID to import
@@ -34,7 +34,7 @@ Specify the Zotero group ID to import
 \procedure zotero-get-items(start:"0",limit:"25")
 
 \procedure completion()
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 	<$action-log msg="In completion"/>
 	<$action-log/>
 	<!-- Success -->

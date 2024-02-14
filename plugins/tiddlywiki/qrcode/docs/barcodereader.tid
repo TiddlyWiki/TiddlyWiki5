@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/qrcode/docs/barcodereader
+tags: $:/tags/QRCodeDocs
+caption: barcodereader Widget
+
+The `<$barcodereader>` widget allows barcodes to be read from the device camera or from an image file. In the case of the camera, a live preview feed is shown to allow the barcode to be framed.
+
+Note that for security reasons browsers restrict the operation of the camera to only work with web pages that have been loaded via HTTPS, or via localhost. Safari and Firefox allow usage from a file URI, but Chrome crashes when attempting to use the barcode reader from a file URI.
+
+The `<$barcodereader>` widget has the following attributes:
+
+|!Name |!Description |
+|actionsSuccess |Action string to be executed when a code is successfully decoded |
+|actionsFailure |Action string to be executed in the event of an error |
+
+The following variables are passed to the ''actionsSuccess'' handler:
+
+|!Name |!Description |
+|format |Barcode format (see below) |
+|text |Decoded text |
+
+The following barcode formats are supported:
+
+* 0: "QR_CODE"
+* 1: "AZTEC"
+* 2: "CODABAR"
+* 3: "CODE_39"
+* 4: "CODE_93"
+* 5: "CODE_128"
+* 6: "DATA_MATRIX"
+* 7: "MAXICODE"
+* 8: "ITF"
+* 9: "EAN_13"
+* 10: "EAN_8"
+* 11: "PDF_417"
+* 12: "RSS_14"
+* 13: "RSS_EXPANDED"
+* 14: "UPC_A"
+* 15: "UPC_E"
+* 16: "UPC_EAN_EXTENSION"
+
+The following variables are passed to the ''actionsFailure'' handler:
+
+|!Name |!Description |
+|error |Error message |

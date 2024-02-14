@@ -90,6 +90,7 @@ wiki: wiki to be used for executing action strings
 url: URL for request
 method: method eg GET, POST
 body: text of request body
+binary: set to "yes" to force binary processing of response payload
 oncompletion: action string to be invoked on completion
 onprogress: action string to be invoked on progress updates
 bindStatus: optional title of tiddler to which status ("pending", "complete", "error") should be written
@@ -106,10 +107,11 @@ function HttpClientRequest(options) {
 	this.wiki = options.wiki;
 	this.completionActions = options.oncompletion;
 	this.progressActions = options.onprogress;
-	this.bindStatus = options["bind-status"];
-	this.bindProgress = options["bind-progress"];
+	this.bindStatus = options["bindStatus"];
+	this.bindProgress = options["bindProgress"];
 	this.method = options.method || "GET";
 	this.body = options.body || "";
+	this.binary = options.binary || "";
 	this.variables = options.variables;
 	var url = options.url;
 	$tw.utils.each(options.queryStrings,function(value,name) {
@@ -132,7 +134,7 @@ HttpClientRequest.prototype.send = function(callback) {
 	var self = this,
 		setBinding = function(title,text) {
 			if(title) {
-				this.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
+				self.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
 			}
 		};
 	if(this.url) {
@@ -156,6 +158,8 @@ HttpClientRequest.prototype.send = function(callback) {
 			type: this.method,
 			headers: this.requestHeaders,
 			data: this.body,
+			returnProp: this.binary === "" ? "responseText" : "response",
+			responseType: this.binary === "" ? "text" : "arraybuffer",
 			callback: function(err,data,xhr) {
 				var hasSucceeded = xhr.status >= 200 && xhr.status < 300,
 					completionCode = hasSucceeded ? "complete" : "error",
@@ -175,6 +179,16 @@ HttpClientRequest.prototype.send = function(callback) {
 					data: (data || "").toString(),
 					headers: JSON.stringify(headers)
 				};
+				/* Convert data from binary to base64 */
+				if (xhr.responseType === "arraybuffer") {
+					var binary = "",
+						bytes = new Uint8Array(data),
+						len = bytes.byteLength;
+					for (var i=0; i<len; i++) {
+						binary += String.fromCharCode(bytes[i]);
+					}
+					resultVariables.data = $tw.utils.base64Encode(binary,true);
+				}
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
 					status: completionCode,
 				}));
@@ -212,6 +226,7 @@ Make an HTTP request. Options are:
 	callback: function invoked with (err,data,xhr)
 	progress: optional function invoked with (lengthComputable,loaded,total)
 	returnProp: string name of the property to return as first argument of callback
+	responseType: "text" or "arraybuffer"
 */
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
@@ -264,6 +279,7 @@ exports.httpRequest = function(options) {
 			}
 		}
 	}
+	request.responseType = options.responseType || "text";
 	// Set up the state change handler
 	request.onreadystatechange = function() {
 		if(this.readyState === 4) {
