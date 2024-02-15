@@ -1,14 +1,118 @@
 title: $:/core/macros/dumpvariables
 tags: $:/tags/Macro
 
-\define dumpvariables()
 \whitespace trim
+
+\procedure dumpvariables()
 <ul>
-<$list filter="[variables[]]" variable="varname">
-<li>
-<strong><code><$text text=<<varname>>/></code></strong>:<br/>
-<$codeblock code={{{ [<varname>getvariable[]] }}}/>
-</li>
-</$list>
+	<$list filter="[variables[]]" variable="varname">
+		<li>
+			<strong><code><$text text=<<varname>>/></code></strong>:<br/>
+			<$codeblock code={{{ [<varname>getvariable[]] }}}/>
+		</li>
+	</$list>
 </ul>
+\end
+
+
+\procedure toggleState()
+<$action-setfield $tiddler=<<getVarState>> text={{{ [<getVarState>get[text]] +[toggle[yes],[no]] }}}/>
+\end
+
+\procedure toggleInfoState()
+<$action-setfield $tiddler=<<getToggleInfoState>> text={{{ [<getToggleInfoState>get[text]] +[toggle[yes],[no]] }}}/>
+<$action-setfield $tiddler=<<getSubSearch>> text={{{ [<getSubSearchText>!is[blank]then<getSubSearchText>] :else[<varname>] }}} />
+\end
+
+\procedure clearStatesButton()
+<$button class="tc-btn-invisible tc-tiny-gap-left">
+	<$action-deletetiddler $filter="[prefix<state>] [prefix[$:/temp]]"/>
+	{{$:/core/images/fold-all-button}}
+</$button>
+\end
+
+\procedure clearSearchButton()
+<$button class="tc-btn-invisible tc-tiny-gap-left">
+	<$action-deletetiddler $tiddler=<<search>>/>
+	{{$:/core/images/close-button}}
+</$button>
+\end
+
+\procedure expandAllStatesButton()
+<$button class="tc-btn-invisible tc-tiny-gap-left">
+	<$list filter="[variables[]] +[search::some<getSearchText>]" variable="varname">
+		<$action-setfield $tiddler=<<getVarState>> text="yes"/>
+	</$list>
+	{{$:/core/images/unfold-all-button}}
+</$button>
+\end
+
+\procedure info()
+<!-- <$let xx={{{ "\define" [<varname>] +[join[ ]] }}}> -->
+<div class="multi-columns">
+	<$list filter="[all[tiddlers+shadows]] :filter[search:text,tags:words<getSubSearchText>] 
+		:filter[!prefix[$:/temp]]
+		:filter[!prefix[$:/state]]
+		-[[$:/config/OriginalTiddlerPaths]]
+		:filter[!type[application/javascript]]
+		-[[$:/core]]
+		:filter[!plugin-type[plugin]]"
+	>
+		<$link class="tc-small-gap-left"/><br>
+	</$list>
+</div>
+\end
+
+<!-- =================== -->
+
+<!-- =================== -->
+\procedure filtered-dumpvariables(subfilter)
+\procedure search() :/temp/search/dump
+\procedure sub-search() :/temp/search/sub-dump
+\procedure state() :/state/search/var/
+
+\function getSearchText() [<search>get[text]]
+
+\function getSubSearch() [<sub-search>] [<varname>] [<qualify>] +[join[/]]
+\function getSubSearchText() [<getSubSearch>get[text]]
+
+\function getVarState() [<state>addsuffix<varname>] [<qualify>] +[join[]]
+\function getToggleInfoState() [<state>addsuffix<varname>]
+
+<$text text="Filtered Variable Dump -- "/><<transclusion>>
+
+<$edit-text tiddler=<<search>> tag=input/> <<clearSearchButton>> <<expandAllStatesButton>> <<clearStatesButton>>
+
+<$list filter="[variables[]] +[search::some<getSearchText>]" variable="varname">
+<div>
+	<$button actions=<<toggleState>> class="tc-small-gap-left tc-btn-invisible">
+		<% if [<getVarState>get[text]match[yes]] %>
+			{{$:/core/images/down-arrow}}
+		<% else %>
+			{{$:/core/images/right-arrow}}
+		<% endif %>
+		<strong class="tc-tiny-gap-right"><code><$text text=<<varname>>/></code></strong>
+		<$text text={{{ [<varname>getvariable[]length[]] "Chars" +[join[ ]] }}}/>
+	</$button>
+
+	<% if [<getVarState>get[text]match[yes]] %>
+		<$button actions=<<toggleInfoState>> class="tc-btn-invisible tc-small-gap-left" disabledX={{{[<getSearchText>is[blank]then[yes]else[no]] }}}>
+			<% if [<getToggleInfoState>get[text]match[yes]] %>
+				{{$:/core/images/down-arrow}}
+			<% else %>
+				{{$:/core/images/right-arrow}}
+			<% endif %>
+		</$button>
+		<% if [<getToggleInfoState>get[text]match[yes]] %>
+			<div class="tc-labeled-input-wrapper">
+				<span class="tc-fixed-label tc-align-right">Search text, tags:</span>
+				<$edit-text tiddler=<<getSubSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
+			</div>
+			<<info>>
+		<% endif %>
+		<$codeblock code={{{ [<varname>getvariable[]] }}}/>
+	<% endif %>
+</div>
+</$list>
+<hr>
 \end
