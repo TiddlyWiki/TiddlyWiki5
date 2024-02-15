@@ -12,17 +12,26 @@ tags: $:/tags/EditTemplate
 \end
 
 \procedure tag-body-inner(colour,fallbackTarget,colourA,colourB,icon,tagField:"tags")
-<$wikify name="foregroundColor" text="""<$macrocall $name="contrastcolour" target=<<colour>> fallbackTarget=<<fallbackTarget>> colourA=<<colourA>> colourB=<<colourB>> />""">
-<$let backgroundColor=<<colour>> >
-	<span style=<<tag-styles>> class="tc-tag-label tc-tag-list-item tc-small-gap-right" data-tag-title=<<currentTiddler>>>
-		<$transclude tiddler=<<icon>>/>
-		<$view field="title" format="text"/>
-		<$button class="tc-btn-invisible tc-remove-tag-button" style=<<tag-styles>>>
-			<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
-			{{$:/core/images/close-button}}
-		</$button>
-	</span>
-</$let>
+<$wikify name="foregroundColor"
+	text="""
+		<$macrocall $name="contrastcolour" 
+			target=<<colour>>
+			fallbackTarget=<<fallbackTarget>>
+			colourA=<<colourA>>
+			colourB=<<colourB>>
+		/>
+	"""
+>
+	<$let backgroundColor=<<colour>> >
+		<span style=<<tag-styles>> class="tc-tag-label tc-tag-list-item tc-small-gap-right" data-tag-title=<<currentTiddler>>>
+			<$transclude tiddler=<<icon>>/>
+			<$view field="title" format="text"/>
+			<$button class="tc-btn-invisible tc-remove-tag-button" style=<<tag-styles>>>
+				<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
+				{{$:/core/images/close-button}}
+			</$button>
+		</span>
+	</$let>
 </$wikify>
 \end
 
