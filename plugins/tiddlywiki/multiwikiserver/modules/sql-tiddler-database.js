@@ -452,6 +452,13 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 	return rows.map(value => value.bag_name);
 };
 
+/*
+Execute the given function in a transaction, committing if successful but rolling back if an error occurs.  Returns whatever the given function returns.
+*/
+SqlTiddlerDatabase.prototype.transaction = function(fn) {
+	return this.db.transaction(fn)();
+};
+
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
 
 })();
