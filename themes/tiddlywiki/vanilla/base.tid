@@ -372,6 +372,24 @@ Table utility classes
 	padding: 3px;
 }
 
+/* Labeled text input, where input is max width */
+.tc-labeled-input-wrapper {
+	display: flex;
+	padding: 6px 0;
+}
+
+.tc-align-right {
+	text-align: right;
+}
+
+.tc-fixed-label {
+	flex: auto;
+}
+
+.tc-fluid-input {
+	flex: 20;
+}
+
 /*
 CSV parser plugin
 */
