@@ -5,28 +5,27 @@ tags: $:/tags/EditTemplate
 
 \procedure lingo-base() $:/language/EditTemplate/
 
-\function tag-styles()
-[[ color:$(foregroundColor)$;
-   fill:$(foregroundColor)$;
-   background-color:$(backgroundColor)$; ]substitute[]]
-\end
-
 \procedure tag-body-inner(colour,fallbackTarget,colourA,colourB,icon,tagField:"tags")
 <$wikify name="foregroundColor"
-	text="""
-		<$macrocall $name="contrastcolour" 
-			target=<<colour>>
-			fallbackTarget=<<fallbackTarget>>
-			colourA=<<colourA>>
-			colourB=<<colourB>>
-		/>
+	text="""<$macrocall $name="contrastcolour"
+		target=<<colour>>
+		fallbackTarget=<<fallbackTarget>>
+		colourA=<<colourA>>
+		colourB=<<colourB>>/>
 	"""
 >
 	<$let backgroundColor=<<colour>> >
-		<span style=<<tag-styles>> class="tc-tag-label tc-tag-list-item tc-small-gap-right" data-tag-title=<<currentTiddler>>>
+		<span class="tc-tag-label tc-tag-list-item tc-small-gap-right"
+			data-tag-title=<<currentTiddler>>
+			style.color=<<foregroundColor>>
+			style.fill=<<foregroundColor>>
+			style.background-color=<<backgroundColor>>
+		>
 			<$transclude tiddler=<<icon>>/>
 			<$view field="title" format="text"/>
-			<$button class="tc-btn-invisible tc-remove-tag-button" style=<<tag-styles>>>
+			<$button class="tc-btn-invisible tc-remove-tag-button"
+				style.fill=<<foregroundColor>>
+			>
 				<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
 				{{$:/core/images/close-button}}
 			</$button>
@@ -53,7 +52,8 @@ tags: $:/tags/EditTemplate
 			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
 			palette={{$:/palette}}
 			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
-			tagField=<<tagField>>/>
+			tagField=<<tagField>>
+		/>
 	</$list>
 	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 		<$macrocall $name="tag-picker" tagField=<<tagField>>/>
