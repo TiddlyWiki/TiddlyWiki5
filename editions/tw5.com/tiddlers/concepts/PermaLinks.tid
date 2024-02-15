@@ -52,7 +52,7 @@ instead looks like
 
 Existing story filter URLs like
 
-> @@font-family:monospace;#:[tag[Features]]%20+[limit[5]]@@
+> @@font-family:monospace;#:[tag[Features]]%20%2B[limit[5]]@@
 
 will continue to work.
 

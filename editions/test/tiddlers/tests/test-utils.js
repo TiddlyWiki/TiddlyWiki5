@@ -209,6 +209,58 @@ describe("Utility tests", function() {
 		expect($tw.utils.insertSortedArray(["b","c","d"],"ccc").join(",")).toEqual("b,c,ccc,d");
 	});
 
+	describe("contains the function `encodeTiddlerTitle`, which", function() {
+    it("should convert spaces to plus signs", function() {
+			expect($tw.utils.encodeTiddlerTitle("Foo Bar")).toEqual("Foo+Bar");
+		});
+    it("should handle multiple spaces", function() {
+			expect($tw.utils.encodeTiddlerTitle("Foo Bar Baz Qux")).toEqual("Foo+Bar+Baz+Qux");
+		});
+    it("should handle many special characters", function() {
+			expect($tw.utils.encodeTiddlerTitle("A (...surprising?) tiddler with various *special/unusual* characters, & more")).toEqual("A+(...surprising?)+tiddler+with+various+*special/unusual*+characters,+&+more");
+		});
+    it("should add an extra `+` after trailing end-of-sentence punctuation", function() {
+			expect($tw.utils.encodeTiddlerTitle("Foo Bar Baz.")).toEqual("Foo+Bar+Baz.+");
+			expect($tw.utils.encodeTiddlerTitle("Foo Bar Baz!")).toEqual("Foo+Bar+Baz!+");
+			expect($tw.utils.encodeTiddlerTitle("Foo Bar Baz?")).toEqual("Foo+Bar+Baz?+");
+		});
+	});
+
+	describe("contains the function `decodeTWURITarget`, which", function() {
+    it("should convert plus signs to spaces", function() {
+			expect($tw.utils.decodeTWURITarget("Foo+Bar")).toEqual("Foo Bar");
+		});
+    it("should handle multiple spaces", function() {
+			expect($tw.utils.decodeTWURITarget("Foo+Bar+Baz+Qux")).toEqual("Foo Bar Baz Qux");
+		});
+    it("should handle many special characters", function() {
+			expect($tw.utils.decodeTWURITarget("A+(...surprising?)+tiddler+with+various+*special/unusual*+characters,+&+more")).toEqual("A (...surprising?) tiddler with various *special/unusual* characters, & more");
+		});
+    it("should remove an extra `+` after trailing end-of-sentence punctuation", function() {
+			expect($tw.utils.decodeTWURITarget("Foo+Bar+Baz.+")).toEqual("Foo Bar Baz.");
+			expect($tw.utils.decodeTWURITarget("Foo+Bar+Baz!+")).toEqual("Foo Bar Baz!");
+			expect($tw.utils.decodeTWURITarget("Foo+Bar+Baz?+")).toEqual("Foo Bar Baz?");
+		});
+	});
+
+	describe("contains the function `encodeFilterPath`, which", function() {
+		it("should convert a filter list format string to a plus-sign-encoded url list format", function() {
+			expect($tw.utils.encodeFilterPath("[[Alternative page layouts]] [[Using Stylesheets]] [[Customising search results]]")).toEqual("Alternative+page+layouts;Using+Stylesheets;Customising+search+results");
+			expect($tw.utils.encodeFilterPath("HelloThere [[Using Stylesheets]] [[Hidden Settings]]")).toEqual("HelloThere;Using+Stylesheets;Hidden+Settings");
+		});
+	});
+
+	describe("contains the function `decodeTWURIList`, which", function() {
+		it("should convert the plus-sign-encoded url list format to a filter list format", function() {
+			expect($tw.utils.decodeTWURIList("Alternative+page+layouts;Using+Stylesheets;Customising+search+results")).toEqual("[[Alternative page layouts]] [[Using Stylesheets]] [[Customising search results]]");
+			expect($tw.utils.decodeTWURIList("HelloThere;Using+Stylesheets;Hidden+Settings")).toEqual("HelloThere [[Using Stylesheets]] [[Hidden Settings]]");
+		});
+		it("should convert old percent-encoded filters to a filter list format", function() {
+			expect($tw.utils.decodeTWURIList("[tag[Features]]%20%2B[limit[5]]")).toEqual("[tag[Features]] +[limit[5]]");
+		});
+	});
+
 });
+
 
 })();
