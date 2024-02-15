@@ -5,7 +5,11 @@ tags: $:/tags/EditTemplate
 
 \procedure lingo-base() $:/language/EditTemplate/
 
-\function tag-styles() [[background-color:$(backgroundColor)$; fill:$(foregroundColor)$; color:$(foregroundColor)$;]substitute[]]
+\function tag-styles()
+[[ color:$(foregroundColor)$;
+   fill:$(foregroundColor)$;
+   background-color:$(backgroundColor)$; ]substitute[]]
+\end
 
 \procedure tag-body-inner(colour,fallbackTarget,colourA,colourB,icon,tagField:"tags")
 <$wikify name="foregroundColor" text="""<$macrocall $name="contrastcolour" target=<<colour>> fallbackTarget=<<fallbackTarget>> colourA=<<colourA>> colourB=<<colourB>> />""">
