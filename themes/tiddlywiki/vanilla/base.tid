@@ -1577,10 +1577,6 @@ html body.tc-body.tc-single-tiddler-window {
 	padding-left: 4px;
 }
 
-.tc-tiddler-preview {
-	overflow: auto;
-}
-
 .tc-tiddler-editor {
 	display: grid;
 }
