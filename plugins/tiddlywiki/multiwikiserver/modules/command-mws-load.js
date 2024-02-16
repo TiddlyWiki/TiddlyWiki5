@@ -48,9 +48,29 @@ function loadBackupArchive(archivePath) {
 			// Read each tiddler
 			const tiddlerFilenames = fs.readdirSync(path.resolve(archivePath,"bags",bagName,"tiddlers")).filter(filename => filename !== ".DS_Store");
 			for(const tiddlerFilename of tiddlerFilenames) {
-				const jsonTiddler = fs.readFileSync(path.resolve(archivePath,"bags",bagName,"tiddlers",tiddlerFilename),"utf8"),
+				const tiddlerPath = path.resolve(archivePath,"bags",bagName,"tiddlers",tiddlerFilename),
+					jsonTiddler = fs.readFileSync(tiddlerPath,"utf8"),
 					tiddler = JSON.parse(jsonTiddler);
-				$tw.mws.store.saveBagTiddler(tiddler,decodeURIComponent(bagName));
+				if(tiddler) {
+					var sanitisedFields = Object.create(null);
+					for(const fieldName in tiddler) {
+						const fieldValue = tiddler[fieldName];
+						let sanitisedValue = "";
+						if(typeof fieldValue === "string") {
+							sanitisedValue = fieldValue;
+						} else if($tw.utils.isDate(fieldValue)) {
+							sanitisedValue = $tw.utils.stringifyDate(fieldValue);
+						} else if($tw.utils.isArray(fieldValue)) {
+							sanitisedValue = $tw.utils.stringifyList(fieldValue);
+						}
+						sanitisedFields[fieldName] = sanitisedValue;
+					}
+					if(sanitisedFields.title) {
+						$tw.mws.store.saveBagTiddler(sanitisedFields,decodeURIComponent(bagName));
+					}
+				} else {
+					console.log(`Malformed JSON tiddler in file ${tiddlerPath}`);
+				}
 			}	
 		}
 	}
