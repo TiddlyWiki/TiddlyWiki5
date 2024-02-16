@@ -4,7 +4,7 @@ modified: 20201118192155504
 op-input: a list of items
 op-output: the input list with the title specified in the parameter toggled
 op-parameter: the <<.op toggle>> operator accepts 1 or more parameters, see below for details
-op-purpose: toggle the title specified in the operand in the input
+op-purpose: toggle the title specified in the parameter in the input
 tags: [[Filter Operators]] [[Listops Operators]] [[Order Operators]]
 title: toggle Operator
 type: text/vnd.tiddlywiki
@@ -19,7 +19,7 @@ The <<.op toggle>> operator requires at least one parameter and can accept addit
 * ''title1'' : a title to toggle in the input list. If it is already present, it is removed. Otherwise, it is added.
 * ''title2'': (optional). When the second parameter is provided, the operator toggles between the two values in the input list. If neither is present, the first parameter takes precedence is added to the list.
 
-With more than two parameters, the <<.op toggle>> behaves similar to the [[cycle|cycle Operator]] and can be used to cycle through a list of values. Note that all operands should be unique.
+With more than two parameters, the <<.op toggle>> behaves similar to the [[cycle|cycle Operator]] and can be used to cycle through a list of values. Note that all parameters should be unique.
 
 <$macrocall $name=".tip" _="While the <<.op cycle>> operator interprets its first parameter as a list of titles to cycle through and offers similar functionality, the <<.op toggle>> operator accepts an unlimited number of distinct parameters."/>
 

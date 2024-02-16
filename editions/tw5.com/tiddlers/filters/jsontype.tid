@@ -52,7 +52,7 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 
 The following examples assume that this JSON data is contained in a variable called `jsondata`.
 
-The <<.op jsontype>> operator uses multiple operands to specify the indexes of the property whose type is to be retrieved:
+The <<.op jsontype>> operator uses multiple parameters to specify the indexes of the property whose type is to be retrieved:
 
 ```
 [<jsondata>jsontype[a]] --> "string"
@@ -75,7 +75,7 @@ Indexes can be dynamically composed from variables and transclusions:
 [<jsondata>jsontype<variable>,{!!field},[0]]
 ```
 
-A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+A subtlety is that the special case of a single blank parameter is used to identify the root object. Thus:
 
 ```
 [<jsondata>jsontype[]] --> "object"

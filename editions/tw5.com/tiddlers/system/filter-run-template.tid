@@ -1,0 +1,49 @@
+code-body: yes
+created: 20230316112235083
+list-before: $:/core/ui/ViewTemplate/body
+modified: 20230326145802667
+tags: $:/tags/ViewTemplate
+title: $:/editions/tw5.com/filter-run-template
+type: text/vnd.tiddlywiki
+
+\define .op-place()
+<$macrocall $name=".if"
+	cond="""$(op-name)$"""
+	then="<<.place '$(op-name)$'>> = "
+	else=""/>
+\end
+
+\define .op-row()
+<$macrocall $name=".if"
+	cond="""$(op-body)$"""
+	then="""<tr><th align="left">$(op-head)$</th><td><<.op-place>>$(op-body)$</td></tr>"""
+	else=""/>
+\end
+
+\whitespace trim
+
+<$list filter="[all[current]tag[Named Filter Run Prefix]]">
+	<$let op-head="" op-body="" op-name="">
+		<table class="doc-table">
+			<!-- purpose -->
+			<$let op-head="purpose" op-body={{!!rp-purpose}}>
+				<<.op-row>>
+			</$let>
+			<!-- input -->
+			<$let op-head="[[input|Filter Expression]]" op-body={{!!rp-input}}>
+				<<.op-row>>
+			</$let>
+			<!-- suffix -->
+			<$let op-head="[[suffix|Filter Run Prefix]]" op-body={{!!rp-suffix}} op-name={{!!rp-suffix-name}}>
+				<<.op-row>>
+			</$let>
+			<!-- output -->
+			<$let op-head="output" op-body={{!!rp-output}}>
+				<<.op-row>>
+			</$let>
+		</table>
+		<$list filter="[all[current]has[from-version]]" variable="listItem">
+			<$macrocall $name=".from-version" version={{!!from-version}}/>
+		</$list>
+	</$let>
+</$list>

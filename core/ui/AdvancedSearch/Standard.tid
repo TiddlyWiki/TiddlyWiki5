@@ -54,7 +54,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 	variable="listItem">
 <$vars
 	userInput={{{ [[$:/temp/advancedsearch]get[text]] }}}
-	configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}
+	configTiddler={{{ [[$:/state/advancedsearch/standard/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}
 	searchListState="$:/temp/advancedsearch/selected-item">
 <$list
 	filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]"
