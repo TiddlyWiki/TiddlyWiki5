@@ -241,7 +241,14 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var start = this.pos;
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
-	return [{type: "element", tag: "p", children: children, start: start, end: end }];
+	// return [{type: "element", tag: "p", children: children, start: start, end: end }];
+	if (children[0].type === "text" ||
+		(($tw.config.htmlBlockElements.indexOf(children[0].tag) === -1) && children[0] && 
+		children[0].tag  && children[0].tag.charAt(0) !== "$")) {
+		return [{type: "element", tag: "p", children: children, start: start, end: end }];
+	} else {
+		return children;
+	}
 };
 
 /*
