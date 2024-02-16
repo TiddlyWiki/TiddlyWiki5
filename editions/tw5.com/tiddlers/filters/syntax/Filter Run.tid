@@ -1,11 +1,13 @@
 created: 20150124182117000
-modified: 20150129133716000
-tags: [[Filter Syntax]]
+modified: 20230710074357002
+tags: [[Filter Expression]]
 title: Filter Run
 type: text/vnd.tiddlywiki
 
 <$railroad text="""
-( "[" { [[step|"Filter Step"]] } "]"
+\start none
+\end none
+( "[" { [[<"Filter Step">|"Filter Step"]] } "]"
   |
   [:{/"anything but [ ] or whitespace"/}]
   |
@@ -19,7 +21,6 @@ A <<.def run>> consists of [[steps|Filter Step]], and it outputs a [[selection|T
 
 The steps are processed from left to right. The input to the first step is same as the input to the run. For each subsequent step, the input is the output of the previous step.
 
-{{Selection Constructors}}
 
 The lower three options in the diagram match syntax like `HelloThere`, `"HelloThere"`, `'HelloThere'` and `"Filter Operators"`. They are short for `[title[...]]`.
 
