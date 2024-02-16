@@ -1,14 +1,20 @@
 created: 20150221151358000
-modified: 20150221151415000
+modified: 20240216150546249
 tags: [[dumpvariables Macro]] [[Macro Examples]]
 title: dumpvariables Macro (Examples)
 type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1"
-eg="""<$set name="EXAMPLE" value="123.$(EXAMPLE2)$.789">
-<$set name="EXAMPLE2" value="456">
+eg="""<$let EXAMPLE="123" >
+<<dumpvariables subfilter:"EXAMPLE dumpvariables">>
+</$let>"""/>
 
-<<dumpvariables>>
+<$macrocall $name=".example" n="2"
+eg="""<<dumpvariables subfilter:"[prefix[.a]]">>"""/>
 
-</$set>
-</$set>"""/>
+The following list will be very long. It shows all variables known within this tiddler. Using the macro in a different context. Eg: the sidebar, variables will have different values.
+
+<$macrocall $name=".example" n="3"
+eg="""<<dumpvariables>>"""/>
+
+

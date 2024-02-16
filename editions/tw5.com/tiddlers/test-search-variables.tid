@@ -1,0 +1,7 @@
+created: 20240216004004135
+modified: 20240216010811339
+tags: 
+title: test-search-variables
+type: text/vnd.tiddlywiki
+
+<<search-variables subfilter:"[search::some[attr this]]">>
