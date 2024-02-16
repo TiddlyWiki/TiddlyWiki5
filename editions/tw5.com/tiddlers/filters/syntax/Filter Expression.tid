@@ -50,7 +50,7 @@ In technical / logical terms:
 |`~run` |`:else[run]` |else |... ELSE run |
 ||`:intersection`|intersection of sets||
 
-For the difference between `+` and `:intersection`, see [[Filter Run Prefix (Examples)]].
+For the difference between `+` and `:intersection`, see [[Intersection Filter Run Prefix (Examples)]].
 
 The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order). But the `+` prefix can change this:
 

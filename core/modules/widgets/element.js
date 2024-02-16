@@ -34,6 +34,10 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
 		this.tag = "safe-" + this.tag;
 	}
+	// Restrict tag name to digits, letts and dashes
+	this.tag = this.tag.replace(/[^0-9a-zA-Z\-]/mg,"");
+	// Default to a span
+	this.tag = this.tag || "span";
 	// Adjust headings by the current base level
 	var headingLevel = ["h1","h2","h3","h4","h5","h6"].indexOf(this.tag);
 	if(headingLevel !== -1) {

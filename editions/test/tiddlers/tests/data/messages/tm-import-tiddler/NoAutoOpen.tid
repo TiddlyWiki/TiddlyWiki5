@@ -1,0 +1,35 @@
+title: Message/tm-import-tiddlers/NoAutoOpen
+description: tm-import-tiddlers can import without automatically opening the import tiddler
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+text: <$text text={{$:/Import}}/>
+plugin-type: <$text text={{$:/Import!!plugin-type}}/>
+~$:/StoryList: <$text text={{$:/StoryList!!list}}/>
++
+title: Actions
+
+<$navigator story="$:/StoryList">
+<$action-sendmessage
+  $message="tm-import-tiddlers"
+  $param='[{"title": "Elephants"}, {"title": "Eagles"}]'
+  autoOpenOnImport=no/>
+</$navigator>
+
++
+title: ExpectedResult
+
+<p>text: {
+    "tiddlers": {
+        "Elephants": {
+            "title": "Elephants"
+        },
+        "Eagles": {
+            "title": "Eagles"
+        }
+    }
+}
+plugin-type: import
+$:/StoryList: </p>

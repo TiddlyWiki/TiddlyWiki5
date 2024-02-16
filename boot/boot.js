@@ -313,7 +313,7 @@ $tw.utils.getLocationHash = function() {
 	var idx = href.indexOf('#');
 	if(idx === -1) {
 		return "#";
-	} else if(idx < href.length-1 && href[idx+1] === '#') {
+	} else if(href.substr(idx + 1,1) === "#" ||  href.substr(idx + 1,3) === "%23") {
 		// Special case: ignore location hash if it itself starts with a #
 		return "#";
 	} else {
@@ -375,7 +375,7 @@ $tw.utils.stringifyList = function(value) {
 		var result = new Array(value.length);
 		for(var t=0, l=value.length; t<l; t++) {
 			var entry = value[t] || "";
-			if(entry.indexOf(" ") !== -1) {
+			if(entry.match(/[^\S\xA0]/mg)) {
 				result[t] = "[[" + entry + "]]";
 			} else {
 				result[t] = entry;
@@ -569,10 +569,22 @@ $tw.utils.getTypeEncoding = function(ext) {
 	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
+var globalCheck =[
+	"  Object.defineProperty(Object.prototype, '__temp__', {",
+	"    get: function () { return this; },",
+	"    configurable: true",
+	"  });",
+	"  if(Object.keys(__temp__).length){",
+	"    console.log(\"Warning: Global assignment detected\",Object.keys(__temp__));",
+	"    delete Object.prototype.__temp__;",
+	"  }",
+	"  delete Object.prototype.__temp__;",
+].join('\n');
+
 /*
 Run code globally with specified context variables in scope
 */
-$tw.utils.evalGlobal = function(code,context,filename) {
+$tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
@@ -581,25 +593,38 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + "\n;})();\nreturn exports;\n})\n";
+	code = [
+		"(function(" + contextNames.join(",") + ") {",
+		"  (function(){" + code + "\n;})();\n",
+		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
+		"\nreturn exports;\n",
+		"})"
+	].join("");
+
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
-		fn = vm.runInThisContext(code,filename);
+		if(sandbox){
+			fn = vm.runInContext(code,sandbox,filename)
+		} else {
+			fn = vm.runInThisContext(code,filename);
+		}
 	}
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
 };
-
+$tw.utils.sandbox = !$tw.browser ? vm.createContext({}) : undefined; 
 /*
 Run code in a sandbox with only the specified context variables in scope
 */
-$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	var sandbox = $tw.utils.extend(Object.create(null),context);
-	vm.runInNewContext(code,sandbox,filename);
-	return sandbox.exports;
+$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename,allowGlobals) {
+	return $tw.utils.evalGlobal(
+		code,context,filename,
+		allowGlobals ? vm.createContext({}) : $tw.utils.sandbox,
+		allowGlobals
+	);
 };
 
 /*
@@ -900,7 +925,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				}
 			} else {
 				// line number should be included in e.stack for runtime errors
-				$tw.utils.error("Error executing boot module " + name + ": " + JSON.stringify(e) + "\n\n" + e.stack);
+				$tw.utils.error("Error executing boot module " + name + ": " + String(e) + "\n\n" + e.stack);
 			}
 		}
 	}
@@ -1124,7 +1149,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers);
+				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return shadowTiddlerTitles;
 		},
@@ -1881,7 +1906,7 @@ A default set of files for TiddlyWiki to ignore during load.
 This matches what NPM ignores, and adds "*.meta" to ignore tiddler
 metadata files.
 */
-$tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
+$tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.github$|^\.vscode$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
 
 /*
 Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}. Note that no file information is returned for externally loaded tiddlers, just the `tiddlers` property.
@@ -1920,7 +1945,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 	// Read the specification
 	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 	// Helper to process a file
-	var processFile = function(filename,isTiddlerFile,fields,isEditableFile) {
+	var processFile = function(filename,isTiddlerFile,fields,isEditableFile,rootPath) {
 		var extInfo = $tw.config.fileExtensionInfo[path.extname(filename)],
 			type = (extInfo || {}).type || fields.type || "text/plain",
 			typeInfo = $tw.config.contentTypeInfo[type] || {},
@@ -1941,6 +1966,12 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 				} else {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
+						case "subdirectories":
+							value = path.relative(rootPath, filename).split(path.sep).slice(0, -1);
+							break;
+						case "filepath":
+							value = path.relative(rootPath, filename).split(path.sep).join('/');
+							break;
 						case "filename":
 							value = path.basename(filename);
 							break;
@@ -2023,7 +2054,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var thisPath = path.relative(filepath, files[t]),
 					filename = path.basename(thisPath);
 					if(filename !== "tiddlywiki.files" && !metaRegExp.test(filename) && fileRegExp.test(filename)) {
-						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile);
+						processFile(thisPath,dirSpec.isTiddlerFile,dirSpec.fields,dirSpec.isEditableFile,dirSpec.path);
 					}
 				}
 			} else {
@@ -2048,7 +2079,11 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			console.log("Warning: missing plugin.info file in " + filepath);
 			return null;
 		}
-		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"));
+		var pluginInfo = $tw.utils.parseJSONSafe(fs.readFileSync(infoPath,"utf8"),function() {return null;});
+		if(!pluginInfo) {
+			console.log("warning: invalid JSON in plugin.info file at " + infoPath);
+			pluginInfo = {};
+		}
 		// Read the plugin files
 		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
 		// Save the plugin tiddlers into the plugin info
@@ -2165,7 +2200,11 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 		pluginFields;
 	// Bail if we don't have a wiki info file
 	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"));
+		wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+		if(!wikiInfo) {
+			console.log("warning: invalid JSON in tiddlywiki.info file at " + wikiInfoPath);
+			wikiInfo = {};
+		}
 	} else {
 		return null;
 	}
@@ -2399,6 +2438,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/vnd.microsoft.icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
+	$tw.utils.registerFileType("application/wasm","base64",".wasm");
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
 	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
@@ -2408,12 +2448,17 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("video/webm","base64",".webm");
 	$tw.utils.registerFileType("video/mp4","base64",".mp4");
 	$tw.utils.registerFileType("audio/mp3","base64",".mp3");
+	$tw.utils.registerFileType("audio/mpeg","base64",[".mp3",".m2a",".mp2",".mpa",".mpg",".mpga"]);
 	$tw.utils.registerFileType("text/markdown","utf8",[".md",".markdown"],{deserializerType:"text/x-markdown"});
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.wordprocessingml.document","base64",".docx");
+	$tw.utils.registerFileType("application/msword","base64",".doc");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
+	$tw.utils.registerFileType("application/excel","base64",".xls");
+	$tw.utils.registerFileType("application/vnd.ms-excel","base64",".xls");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.presentationml.presentation","base64",".pptx");
+	$tw.utils.registerFileType("application/mspowerpoint","base64",".ppt");
 	$tw.utils.registerFileType("text/x-bibtex","utf8",".bib",{deserializerType:"application/x-bibtex"});
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
@@ -2631,6 +2676,18 @@ $tw.hooks.addHook = function(hookName,definition) {
 	}
 	else {
 		$tw.hooks.names[hookName] = [definition];
+	}
+};
+
+/*
+Delete hooks from the hashmap
+*/
+$tw.hooks.removeHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		var p = $tw.hooks.names[hookName].indexOf(definition);
+		if(p !== -1) {
+			$tw.hooks.names[hookName].splice(p, 1);
+		}
 	}
 };
 

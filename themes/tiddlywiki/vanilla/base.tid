@@ -1,5 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
+list-before:
 code-body: yes
 
 \define custom-background-datauri()
@@ -84,9 +85,7 @@ html button {
 	color: <<colour button-foreground>>;
 	fill: <<colour button-foreground>>;
 	background: <<colour button-background>>;
-	border: 1px solid <<colour button-border>>;
-	border-radius: 3px;
-	padding: 2px 5px;
+	border-color: <<colour button-border>>;
 }
 
 button:disabled svg {
@@ -222,27 +221,13 @@ dl dt {
 	margin-top: 6px;
 }
 
-/*
-** Definition for text input elements so they look consistent for all browsers
-*/
-
-textarea, input, select {
-	border: 2px solid <<colour tiddler-editor-border>>;
-	background-color: <<colour tiddler-editor-background>>;
-}
-
-/* Input elements accessibility -- overwrite the reset */
-:focus-visible {
-	outline: 2px solid <<colour primary>>;
-	outline-offset: -2px;    /* same as in reset.css [type='search'] but for more elements */
-}
-
 textarea,
 input[type=text],
 input[type=search],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
+	background: <<colour background>>;
 }
 
 input[type="checkbox"] {
@@ -357,9 +342,34 @@ Table utility classes
 	width: 1%;
 }
 
+/*
+** Utility classes work well with tables but also for other containers
+*/
+
 /* First link A element will not wrap */
 .tc-first-link-nowrap:first-of-type a {
 	white-space: nowrap;
+}
+
+/* Move the table to the center of the container */
+.tc-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tc-max-width {
+	width: 100%;
+}
+
+.tc-max-width-80 {
+	max-width: 80%;
+}
+
+/* Allow input and textarea to look like the ControlPanel inputs */
+.tc-edit-max-width input,
+.tc-edit-max-width textarea {
+	width: 100%;
+	padding: 3px;
 }
 
 /*
@@ -571,7 +581,7 @@ button svg, button img, label svg, label img {
 }
 
 button:disabled.tc-btn-invisible  {
-	cursor: default; 
+	cursor: default;
 	color: <<colour muted-foreground>>;
 }
 
@@ -805,9 +815,6 @@ button.tc-tag-label, span.tc-tag-label {
 }
 
 .tc-untagged-separator {
-	width: 10em;
-	left: 0;
-	margin-left: 0;
 	border: 0;
 	height: 1px;
 	background: <<colour tab-divider>>;
@@ -1166,6 +1173,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	margin-right: .1em;
 }
 
+.tc-tiddler-title-icon svg {
+	width: 0.9em;
+	height: 0.9em;
+}
+
 .tc-system-title-prefix {
 	color: <<colour muted-foreground>>;
 }
@@ -1353,6 +1365,11 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-top: 8px;
 }
 
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-editor-toolbar,
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden .tc-editor-toolbar {
+	grid-area: toolbar;
+}
+
 .tc-editor-toolbar button {
 	vertical-align: middle;
 	background-color: <<colour tiddler-controls-foreground>>;
@@ -1380,6 +1397,10 @@ html body.tc-body.tc-single-tiddler-window {
 .tc-editor-toolbar button svg {
 	width: 1.6em;
 	height: 1.2em;
+}
+
+.tc-editor-toolbar .tc-drop-down button.tc-btn-mini {
+	padding: 2px 4px;
 }
 
 .tc-editor-toolbar button:hover {
@@ -1439,7 +1460,7 @@ html body.tc-body.tc-single-tiddler-window {
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 42px);
 	}
@@ -1451,7 +1472,7 @@ html body.tc-body.tc-single-tiddler-window {
 		margin-right: 0;
 	}
 
-	body.tc-body .tc-storyview-zoomin-tiddler {
+	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: 100%;
 		width: calc(100% - 84px);
 	}
@@ -1498,6 +1519,10 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tiddler-controls button svg.tc-image-done-button {
 	fill: <<colour toolbar-done-button>>;
+}
+
+.tc-page-controls svg.tc-image-layout-button {
+	fill: <<colour toolbar-options-button>>;
 }
 
 /*
@@ -1552,13 +1577,30 @@ html body.tc-body.tc-single-tiddler-window {
 	padding-left: 4px;
 }
 
-.tc-tiddler-preview {
-	overflow: auto;
+.tc-tiddler-editor {
+	display: grid;
 }
 
-.tc-tiddler-preview-preview {
-	float: right;
-	width: 49%;
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview {
+	grid-template-areas:
+		"toolbar toolbar"
+		"editor preview";
+	grid-template-columns: repeat(2, minmax(0px, 1fr));
+	grid-template-rows: auto 1fr;
+}
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden {
+	grid-template-areas:
+		"toolbar"
+		"editor";
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr;
+}
+
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview {
+	grid-area: preview;
+	overflow-wrap: anywhere;
+	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
@@ -1573,12 +1615,15 @@ html body.tc-body.tc-single-tiddler-window {
 
 """>>
 
-.tc-tiddler-frame .tc-tiddler-preview .tc-edit-texteditor {
-	width: 49%;
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-edit-texteditor,
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden .tc-edit-texteditor {
+	grid-area: editor;
 }
 
-.tc-tiddler-frame .tc-tiddler-preview canvas.tc-edit-bitmapeditor {
-	max-width: 49%;
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview canvas.tc-edit-bitmapeditor,
+.tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview-hidden canvas.tc-edit-bitmapeditor {
+	grid-area: editor;
+	max-width: 100%;
 }
 
 .tc-edit-fields {
@@ -1706,7 +1751,7 @@ html body.tc-body.tc-single-tiddler-window {
 	margin-right: .3em;
 }
 
-.tc-storyview-zoomin-tiddler {
+.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 	position: absolute;
 	display: block;
 	width: 100%;
@@ -1714,7 +1759,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 @media (min-width: <<sidebarbreakpoint>>) {
 
-	.tc-storyview-zoomin-tiddler {
+	.tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
 		width: calc(100% - 84px);
 	}
 
@@ -1942,6 +1987,15 @@ html body.tc-body.tc-single-tiddler-window {
 	left: 0;
 	right: 0;
 	margin: auto;
+}
+
+/* Make search dropdown visible on small screens. issue #7003 */
+@media (max-width: <<sidebarbreakpoint>>) {
+
+	.tc-sidebar-search .tc-block-dropdown-wrapper {
+		position: initial;
+	}
+
 }
 
 /*
@@ -2751,7 +2805,8 @@ input.tc-palette-manager-colour-input {
 	white-space: nowrap;
 }
 
-.tc-table-of-contents button {
+.tc-table-of-contents button,
+.tc-table-of-contents .toc-item-muted {
 	color: <<colour sidebar-foreground>>;
 }
 
@@ -2864,6 +2919,22 @@ input.tc-palette-manager-colour-input {
 /*
 ** Dirty indicator
 */
+
+html body svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-clean {
+	visibility: visible;
+}
+
+html body svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-dirty {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-clean {
+	visibility: hidden;
+}
+
+html body.tc-dirty svg.tc-image-save-button-dynamic .tc-image-save-button-dynamic-dirty {
+	visibility: visible;
+}
 
 html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
@@ -3079,11 +3150,69 @@ select {
 }
 
 /*
+** Translink macro
+*/
+
+.tc-translink {
+	background-color: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
+	padding: 0 3px;
+	border-radius: 3px;
+}
+
+div.tc-translink > div {
+	margin: 1em;
+}
+
+div.tc-translink > div > a:first-child > h1 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+span.tc-translink > a:first-child {
+	font-weight: bold;
+}
+
+/*
+** Classes for displaying globals
+*/
+
+.tc-global-tiddler-body {
+	padding: 0.25em;
+	border: 1px solid <<colour foreground>>;
+	background-color: <<colour muted-foreground>>;
+	border-radius: 3px;
+}
+
+.tc-global-tiddler-body-heading {
+	margin: 0 0 0.25em 0;
+	font-weight: normal;
+}
+
+.tc-global-tiddler-body-type {
+	margin: 0 0 0.25em 0;
+	border-bottom: 1px solid <<colour foreground>>;
+}
+
+.tc-global-tiddler-body-details {
+	background-color: <<colour background>>;
+}
+
+.tc-global-tiddler-body pre {
+	margin: 0;
+	border: 1px solid <<colour foreground>>;
+}
+
+/*
 ** Utility classes for SVG icons
 */
 
 .tc-fill-background {
 	fill: <<colour background>>;
+}
+
+.tc-network-activity-background {
+	fill: <<colour network-activity-foreground>>;
 }
 
 /*
@@ -3114,6 +3243,8 @@ select {
 /*
 ** Other utility classes
 */
+
+/* Horizontal gaps */
 
 .tc-tiny-gap {
 	margin-left: .25em;
@@ -3156,4 +3287,10 @@ select {
 
 .tc-word-break {
 	word-break: break-all;
+}
+
+/* Vertical gaps */
+
+.tc-tiny-v-gap-bottom {
+	margin-bottom: 3px;
 }

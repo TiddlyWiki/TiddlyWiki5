@@ -12,6 +12,8 @@ Various static DOM-related utility functions.
 /*global $tw: false */
 "use strict";
 
+var Popup = require("$:/core/modules/utils/dom/popup.js");
+
 /*
 Determines whether element 'a' contains element 'b'
 Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
@@ -24,6 +26,24 @@ exports.domContains = function(a,b) {
 
 exports.domMatchesSelector = function(node,selector) {
 	return node.matches ? node.matches(selector) : node.msMatchesSelector(selector);
+};
+
+/*
+Select text in a an input or textarea (setSelectionRange crashes on certain input types)
+*/
+exports.setSelectionRangeSafe = function(node,start,end,direction) {
+	try {
+		node.setSelectionRange(start,end,direction);
+	} catch(e) {
+		node.select();
+	}
+};
+
+/*
+Select the text in an input or textarea by position
+*/
+exports.setSelectionByPosition = function(node,selectFromStart,selectFromEnd) {
+	$tw.utils.setSelectionRangeSafe(node,selectFromStart,node.value.length - selectFromEnd);
 };
 
 exports.removeChildren = function(node) {
@@ -293,9 +313,22 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
 		});
 		
-		if(selectedNode.offsetLeft) {
-			// Add a variable with a popup coordinate string for the selected node
-			variables["tv-popup-coords"] = "(" + selectedNode.offsetLeft + "," + selectedNode.offsetTop +"," + selectedNode.offsetWidth + "," + selectedNode.offsetHeight + ")";
+		if("offsetLeft" in selectedNode) {
+			// Add variables with a (relative and absolute) popup coordinate string for the selected node
+			var nodeRect = {
+				left: selectedNode.offsetLeft,
+				top: selectedNode.offsetTop,
+				width: selectedNode.offsetWidth,
+				height: selectedNode.offsetHeight
+			};
+			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
+
+			var absRect = $tw.utils.extend({}, nodeRect);
+			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+				absRect.left += currentNode.offsetLeft;
+				absRect.top += currentNode.offsetTop;
+			}
+			variables["tv-popup-abs-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csAbsolute,absRect);
 
 			// Add variables for offset of selected node
 			variables["tv-selectednode-posx"] = selectedNode.offsetLeft.toString();
@@ -305,12 +338,12 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 		}
 	}
 	
-	if(domNode && domNode.offsetWidth) {
+	if(domNode && ("offsetWidth" in domNode)) {
 		variables["tv-widgetnode-width"] = domNode.offsetWidth.toString();
 		variables["tv-widgetnode-height"] = domNode.offsetHeight.toString();
 	}
 
-	if(event && event.clientX && event.clientY) {
+	if(event && ("clientX" in event) && ("clientY" in event)) {
 		if(selectedNode) {
 			// Add variables for event X and Y position relative to selected node
 			selectedNodeRect = selectedNode.getBoundingClientRect();
@@ -332,5 +365,25 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	return variables;
 };
 
+/*
+Make sure the CSS selector is not invalid
+*/
+exports.querySelectorSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelector(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
+};
+
+exports.querySelectorAllSafe = function(selector,baseElement) {
+	baseElement = baseElement || document;
+	try {
+		return baseElement.querySelectorAll(selector);
+	} catch(e) {
+		console.log("Invalid selector: ",selector);
+	}
+};
 
 })();

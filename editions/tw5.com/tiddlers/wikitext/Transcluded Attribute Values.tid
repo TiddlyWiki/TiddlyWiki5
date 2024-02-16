@@ -1,0 +1,14 @@
+created: 20230615045327830
+modified: 20230615045353826
+tags: [[Widget Attributes]] WikiText
+title: Transcluded Attribute Values
+type: text/vnd.tiddlywiki
+
+Transcluded attribute values are indicated with double curly braces around a TextReference. For example:
+
+```
+attr={{tiddler}}
+attr={{!!field}}
+attr={{tiddler!!field}}
+```
+<<.warning "The value of the attribute value will be the exact text retrieved from the TextReference. Any wiki syntax in that text will be left as-is.">>

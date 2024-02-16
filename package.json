@@ -1,7 +1,7 @@
 {
   "name": "tiddlywiki",
   "preferGlobal": "true",
-  "version": "5.2.4-prerelease",
+  "version": "5.3.4-prerelease",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
   "description": "a non-linear personal web notebook",
   "contributors": [
@@ -32,6 +32,12 @@
     "node": ">=0.8.2"
   },
   "scripts": {
+    "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+    "lint:fix": "eslint . --fix",
     "lint": "eslint ."
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1543.0"
   }
 }

@@ -1,36 +1,7 @@
-caption: Variables
 created: 20141002141231992
 modified: 20150221221850000
-tags: WikiText
+tags: 
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
 
-See also the [[introduction to the concept of variables|Variables]].
-
-To transclude the value of a variable, use the [[macro call syntax|Macro Calls in WikiText]] with no parameters. You can also use a <<.wlink MacroCallWidget>> widget.
-
-A [[macro|Macros]] snippet can contain `$(name)$` as a [[placeholder|Macro Definitions in WikiText]] for which the value of the variable of that name will be substituted.
-
-A variable's value can be used as a [[filter parameter|Filter Parameter]], or as a [[widget attribute|Widgets in WikiText]]. The latter supports macro parameters.
-
-!! Example: defining a variable
-
-<$macrocall $name=".example" n="1"
-eg="""<$set name=animal value=zebra>
-<<animal>>
-</$set>"""/>
-
-!! Example: defining a macro
-
-The `\define` pragma below [[defines a macro|Macros in WikiText]] called <<.var tags-of-current-tiddler>>. The macro returns the value of the tiddler's <<.field tags>> field, and can be accessed from anywhere else in the same tiddler (or in any tiddler that [[imports|ImportVariablesWidget]] it).
-
-<$importvariables filter="$:/editions/tw5.com/macro-examples/tags-of-current-tiddler">
-<$codeblock code={{$:/editions/tw5.com/macro-examples/tags-of-current-tiddler}}/>
-<$macrocall $name=".example" n="2" eg="""The tags are: <<tags-of-current-tiddler>>"""/>
-</$importvariables>
-
-!! Example: using a variable as a filter parameter
-
-This example uses the <<.olink backlinks>> [[operator|Filter Operators]] to list all tiddlers that link to this one.
-
-<$macrocall $name=".example" n="3" eg="""<<list-links filter:"[<currentTiddler>backlinks[]]">>"""/>
+See [[Variables]].

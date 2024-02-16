@@ -1,11 +1,13 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: L'URI complet vers le contenu externe d'un tiddler image
+author: Nom de l'auteur d'un plugin
 bag: Nom du <q>bag</q> d'où provient le tiddler
 caption: Texte à afficher sur un onglet ou un bouton
 code-body: Le template de visualisation affichera ce tiddler comme du code si la valeur est ''yes''
 color: Couleur CSS associée au tiddler
 component: Nom du composant responsable pour un [[tiddler d'alerte|AlertMechanism]]
+core-version: Dans le cas d'un plugin, indique la version de TiddlyWiki avec laquelle il est compatible
 current-tiddler: Sert à cacher le tiddler situé au début de l'[[historique|HistoryMechanism]]
 created: Date de création du tiddler
 creator: Nom de l'utilisateur qui a créé le tiddler
@@ -13,7 +15,7 @@ dependents: Quand le tiddler est un plugin, énumère les titres des plugins dé
 description: Texte de description d'un plugin, ou d'une boîte de dialogue
 draft.of: Pour les tiddlers en cours d'édition, contient le titre du tiddler initial
 draft.title: Pour les tiddlers en cours d'édition, contient le nouveau titre prévu pour le tiddler
-footer: Texte de bas de page dans le cas d'un wizard
+footer: Texte de bas de page dans le cas d'une fenêtre modale
 hide-body: Le template de visualisation cachera le corps des tiddlers si la valeur est ''yes''
 icon: Titre du tiddler contenant l'icone associée à un tiddler
 library: Si la valeur est <q>yes</q>, indique qu'un tiddler doit être sauvegardé comme bibliothèque JavaScript
@@ -22,13 +24,15 @@ list-before: Si présent, contient le titre du tiddler avant lequel ce tiddler d
 list-after: Si présent, contient le titre du tiddler après lequel ce tiddler doit être ajouté dans la liste ordonnée des titres de tiddlers.
 modified: Date et heure à laquelle le tiddler a été modifié pour la dernière fois
 modifier: Titre du tiddler associé à l'utilisateur qui a modifié ce tiddler pour la dernière fois
-name: Dans le cas d'un tiddler provenant d'un plugin, le nom de la personne associée à ce tiddler
-plugin-priority: Dans le cas d'un tiddler provenant d'un plugin, un nombre indiquant la priorité de ce tiddler
-plugin-type: Dans le cas d'un tiddler provenant d'un plugin, le type du plugin
+module-type: Pour les tiddlers javascript, spécifie de quel type est ce module
+name: Dans le cas d'un tiddler plugin, le nom associé à ce plugin
+parent-plugin: Dans le cas d'un tiddler plugin, spécifie de quel plugin il est un sous-plugin
+plugin-priority: Dans le cas d'un tiddler plugin, un nombre indiquant sa priorité
+plugin-type: Dans le cas d'un tiddler plugin, le type du plugin
 revision: Numéro de révision du tiddler présent sur le serveur
 released: Date de version d'un TiddlyWiki
 source: URL source associée à ce tiddler
-subtitle: Texte du sous-titre pour un wizard
+subtitle: Texte du sous-titre pour une fenêtre modale
 tags: Liste des tags associés à un tiddler
 text: Texte du corps de ce tiddler
 throttle.refresh: Si présent, ralentit les rafraîchissements de ce tiddler

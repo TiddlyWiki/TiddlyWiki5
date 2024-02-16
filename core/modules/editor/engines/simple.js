@@ -34,7 +34,7 @@ function SimpleEngine(options) {
 		this.domNode.value = this.value;
 	}
 	// Set the attributes
-	if(this.widget.editType) {
+	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
 	if(this.widget.editPlaceholder) {
@@ -119,10 +119,12 @@ SimpleEngine.prototype.fixHeight = function() {
 /*
 Focus the engine node
 */
-SimpleEngine.prototype.focus  = function() {
-	if(this.domNode.focus && this.domNode.select) {
+SimpleEngine.prototype.focus = function() {
+	if(this.domNode.focus) {
 		this.domNode.focus();
-		this.domNode.select();
+	}
+	if(this.domNode.select) {
+		$tw.utils.setSelectionByPosition(this.domNode,this.widget.editFocusSelectFromStart,this.widget.editFocusSelectFromEnd);
 	}
 };
 

@@ -16,10 +16,10 @@ parser: 不同内容类型的解析器。
 route: 定义内置 HTTP 服务器如何处理各个网址格式。
 saver: 于浏览器保存文件的不同的保存处理方法。
 startup: 启动时期的功能函数。
-storyview: 查看模式用以自订 list 小部件的动画与行为。
+storyview: 视图模式用以自订 list 小部件的动画与行为。
 texteditoroperation: 一个文本编辑器工具栏操作。
 tiddlerdeserializer: 转换不同内容类型至条目。
-tiddlerfield: 定义个别条目栏位的行为。
+tiddlerfield: 定义个别条目字段的行为。
 tiddlermethod: 添加方法至 `$tw.Tiddler` 原型。
 upgrader: 于升级/导入过程中，套用升级处理至条目。
 utils: 添加方法至 `$tw.utils`。

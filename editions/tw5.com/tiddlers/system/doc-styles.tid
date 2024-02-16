@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20220617125128201
+modified: 20230325101137075
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -131,6 +131,10 @@ td svg {
 .doc-example-result ol {
 	margin-left: 0;
 	padding-left: 20px;
+}
+
+.doc-examples-hard-breaks .doc-example-result li {
+    white-space: pre-wrap;
 }
 
 .doc-bad-example code, .doc-bad-example pre, table.doc-bad-example {
@@ -281,4 +285,22 @@ ol.doc-github-contributors li {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-
+.doc-op-comparison {
+	table-layout: fixed;
+	width: 80%;
+}
+.doc-op-comparison th .doc-operator {
+	background-color: unset;
+	color: #666;
+}
+.doc-tabs.tc-tab-buttons button {
+  font-size: 1rem;
+  padding: 0.5em;
+}
+.doc-tabs button .doc-attr {
+  background-color: unset;
+  color: #666;
+}
+.doc-tab-link .doc-attr {
+  color: unset;
+}

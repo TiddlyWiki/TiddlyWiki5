@@ -1,35 +1,66 @@
 {
 	"tiddlers": [
 		{
-			"file": "remarkable.js",
+			"file": "markdown-it.min.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable.js",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown-it.js",
 				"module-type": "library"
 			}
 		},
 		{
-			"file": "remarkable-license.txt",
+			"file": "markdown-it-deflist.min.js",
 			"fields": {
-				"type": "text/plain",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable-license"
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown-it-deflist.js",
+				"module-type": "library"
 			}
 		},
 		{
-			"file": "remarkable-katex.min.js",
+			"file": "markdown-it-footnote.min.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable-katex.js",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown-it-footnote.js",
 				"module-type": "library"
-			},
-			"prefix": "(function(realRequire) {var require = function(m) {if(m===\"katex\"){m = \"$:/plugins/tiddlywiki/katex/katex.min.js\"};return realRequire(m);};",
-			"suffix": "})(require);\n"
+			}
 		},
 		{
-			"file": "remarkable-katex-license.txt",
+			"file": "markdown-it-ins.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown-it-ins.js",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "markdown-it-mark.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown-it-mark.js",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "markdown-it-sub.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown-it-sub.js",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "markdown-it-sup.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown-it-sup.js",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "LICENSE",
 			"fields": {
 				"type": "text/plain",
-				"title": "$:/plugins/tiddlywiki/markdown/remarkable-katex-license"
+				"title": "$:/plugins/tiddlywiki/markdown/license"
 			}
 		}
 	]

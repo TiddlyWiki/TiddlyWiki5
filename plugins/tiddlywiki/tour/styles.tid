@@ -1,0 +1,261 @@
+title: $:/plugins/tiddlywiki/tour/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-tour-panel {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 310px;
+	height: 400px;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	<<box-shadow "0px 0px 5px rgba(0, 0, 0, 0.3)">>
+	border: 1px solid <<colour tour-overlay-border>>;
+	background: <<colour tour-overlay-background>>;
+	border-radius: 8px;
+	padding: 1em;
+	margin: 0.5em;
+	z-index: 2000;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green {
+	border-radius: 0.25em;
+	margin: 0 1em 0 0;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green.tc-tour-panel-navigation-back {
+	background: <<colour tour-navigation-buttons-back-background>>;
+	color: <<colour tour-navigation-buttons-back-foreground>>;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green.tc-tour-panel-navigation-next {
+	background: <<colour tour-navigation-buttons-next-background>>;
+	color: <<colour tour-navigation-buttons-next-foreground>>;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green.tc-tour-panel-navigation-hint {
+	background: <<colour tour-navigation-buttons-hint-background>>;
+	color: <<colour tour-navigation-buttons-hint-foreground>>;
+}
+
+.tc-tour-panel-navigation .tc-btn-big-green:hover {
+	color: <<colour tour-navigation-buttons-hover-foreground>>;
+	background: <<colour tour-navigation-buttons-hover-background>>;
+}
+
+.tc-tour-panel-fullscreen {
+	top: 0;
+	right: 0;
+	width: auto;
+	height: auto;
+	box-shadow: none;
+	border: none;
+	background: <<colour tour-fullscreen-background>>;
+	margin: 0;
+	border-radius: 0;
+}
+
+.tc-tour-panel-controls .tc-tour-panel-list-button {
+	padding: 2px 8px;
+	border-radius: 1em;
+	color: <<color tour-chooser-button-foreground>>;
+	text-align: left;
+}
+
+.tc-tour-panel-controls .tc-tour-panel-list-button.tc-selected {
+	color: <<colour tour-chooser-button-selected-foreground>>;
+	fill: <<colour tour-chooser-button-selected-foreground>>;
+	background: <<color tour-chooser-button-selected-background>>;
+}
+
+.tc-tour-panel-controls .tc-tour-panel-list-button:hover {
+	background: <<colour tour-chooser-button-hover-background>>;
+	color: <<colour tour-chooser-button-hover-foreground>>;
+}
+
+.tc-tour-panel-controls .tc-popup .tc-drop-down {
+	font-size: 1em;
+	color: <<colour tour-chooser-dropdown-foreground>>;
+	min-width: auto;
+}
+
+.tc-tour-panel-chooser-item {
+	border: 1px solid <<colour tour-chooser-item-border>>;
+	background: <<colour tour-chooser-item-background>>;
+	color: <<colour tour-chooser-item-foreground>>;
+	padding: 4px 4px 4px 8px;
+	margin: 12px 0;
+	border-radius: 12px;
+	box-shadow: 3px 3px 5px <<colour tour-chooser-item-shadow>>;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 1em;
+}
+
+.tc-tour-panel-chooser-item .tc-tour-panel-chooser-start-button {
+	display: inline-block;
+	width: auto;
+	padding: 4px;
+	font-size: 0.7em;
+	vertical-align: baseline;
+	border-radius: 1em;
+	background: <<colour tour-chooser-item-start-background>>;
+	color: <<colour tour-chooser-item-start-foreground>>;
+	fill: <<colour tour-chooser-item-start-foreground>>;
+	text-transform: uppercase;
+}
+
+.tc-tour-panel-chooser-wrapper button:hover {
+	background: <<colour tour-chooser-item-start-hover-background>>;
+	color: <<colour tour-chooser-item-start-hover-foreground>>;
+}
+
+.tc-tour-panel-fullscreen h1 {
+	background: <<colour tour-step-heading-background>>;
+	padding: 0.25em;
+	margin: -0.25em;
+	border-radius: 4px;
+}
+
+.tc-tour-panel-fullscreen .tc-tour-panel-controls {
+	/* display: none; */
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 4px;
+	color: <<colour tour-fullscreen-controls-foreground>>;
+}
+
+.tc-tour-panel .tc-tour-panel-banner-image {
+	display: none;
+}
+
+.tc-tour-panel-fullscreen .tc-tour-panel-banner-image {
+	display: block;
+	width: 200px;
+	float: right;
+	margin: 4em 2em 2em 2em;
+}
+
+.tc-tour-panel-fullscreen .tc-tour-panel-inner {
+	width: 30%;
+	min-width: 400px;
+	height: 30%;
+	margin: 20% auto;
+}
+
+.tc-tour-panel .tc-tour-panel-inner .tc-tiddler-frame {
+	width: auto;
+	padding: 1.5em 2.5em;
+}
+
+.tc-tour-panel .tc-tour-panel-inner .tc-tiddler-frame .tc-titlebar {
+	font-size: 1.5em;
+	line-height: 1.1;
+}
+
+.tc-tour-task {
+	background: <<colour tour-step-task-background>>;
+	color: <<colour tour-step-task-foreground>>;
+	padding: 0.5em;
+	border-radius: 1em;
+}
+
+.tc-tour-task svg {
+	fill: <<colour tour-step-task-foreground>>;
+	vertical-align: middle;
+	width: 1.2em;
+	height: 1.2em;
+	margin-right: 0.5em;
+}
+
+.tc-tour-settings-tour-details,
+.tc-tour-settings-tour-step-details {
+	width: 100%;
+}
+
+.tc-tour-settings-tour-details th,
+.tc-tour-settings-tour-step-details th {
+	text-align: right;
+	vertical-align: top;
+	font-weight: normal;
+	width:10em;
+}
+
+.tc-tour-settings-tour-details td,
+.tc-tour-settings-tour-step-details td {
+	font-weight: bold;
+}
+
+.tc-tour-settings-tour-details-description {
+
+}
+
+.tc-tour-settings-tour-details-logo img {
+	max-width: 200px;
+	max-height: 100px;
+}
+
+.tc-tour-settings-tour-settings {
+	border: 1px solid <<colour muted-foreground>>;
+	margin: 0.5em 0;
+	padding: 0.5em;
+}
+
+.tc-tour-settings-tour-step {
+	border: 1px solid <<colour foreground>>;
+}
+
+.tc-tour-settings-tour-step-heading {
+	background: <<colour muted-foreground>>;
+	border: 0;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 5px;
+}
+
+.tc-tour-settings-tour-step-open-button,
+.tc-tour-settings-tour-step-launch-button {
+	display: inline-block;
+	padding: 0.25em;
+}
+
+.tc-tour-settings-tour-step-open-button {
+	flex-grow: 1;
+	text-align: left;
+}
+
+.tc-tour-settings-tour-step-launch-button {
+	flex-grow: 0;
+}
+
+.tc-tour-settings-tour-step-open-button:hover,
+.tc-tour-settings-tour-step-launch-button:hover {
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+}
+
+.tc-tour-settings-tour-step-heading-step-number {
+	font-weight: bold;
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	border-radius: 1em;
+	font-size: 0.9em;
+	display: inline-block;
+	padding: 0 4px;
+}
+
+.tc-tour-settings-tour-step-details {
+	margin: 0;
+}
+
+.tc-tour-settings-tour-step-body {
+	padding: 0.5em;
+}

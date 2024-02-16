@@ -499,3 +499,63 @@ Keiichi Shiga (🎈 BALLOON | FU-SEN), @fu-sen. 2022/07/07
 Nathaniel Knight, @nathanielknight, 2022/07/26
 
 HuanCheng Bai, @bestony, 2022/09/17
+
+Carlo Colombo, @carlo-colombo, 2022/11/30
+
+Wincent Balin, @wincentbalin, 2022/12/18
+
+Jeffrey Zhang, @jeffrey4l, 2022/12/24
+
+cs84285, @cs8425, 2022/12/30
+
+Nick Bell, @newmedicine, 2023/01/01
+
+Frank Kmiec, @fkmiec, 2023-01-01
+
+Pippo Peppo, @pippep, 2023-01-03
+
+Scott Sauye, @CrossEye, 2023-01-04
+
+Marcus Winter, @yaisog, 2023-01-07
+
+Ethan Weller, @gamedungeon, 2023-01-17
+
+Mateusz Wilczek, @mateuszwilczek, 2023/02/16
+
+Andrea Octo, @andrigamerita, 2023/02/24
+
+HuanC Fu, @hffqyd, 2023/03/03
+
+Michelle Saad, @michsa, 2023-03-08
+
+Yukai Chou, @muzimuzhi, 2023-04-07
+
+Carmine Guida, @carmineguida, 2023-05-17
+
+Tavin Cole, @tavin, 2023/05/25
+
+WhiteFall, @Zacharia2, 2023/06/04
+
+@oeyoews, 2023/06/30
+
+Eric Haberstroh, @pille1842, 2023/07/23
+
+@lilscribby, 2023-07-24
+
+@TiddlyTweeter, 2023/07/25
+
+@catter-fly, 2023/07/27
+
+@cmo-pomerium, 2023/08/03
+
+BuckarooBanzay, @BuckarooBanzay, 2023/09/01
+
+Timur, @T1mL3arn, 2023/10/04
+
+Wang Ke, @Gk0Wk, 2023/10/17
+
+@frittro, 2023/10/27
+
+@etardiff, 2023/12/10
+
+John Long, @drevarr, 2023/12/12

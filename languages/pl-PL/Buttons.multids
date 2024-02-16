@@ -59,12 +59,16 @@ Home/Caption: strona główna
 Home/Hint: Otwórz domyślne tiddlery
 Language/Caption: języki
 Language/Hint: Zmień jezyk interfejsu
+LayoutSwitcher/Hint: Otwórz przełacznik układu
+LayoutSwitcher/Caption: układ
 Manager/Caption: menedżer tiddlerów
 Manager/Hint: Otwórz menedżer tiddlerów
 More/Caption: więcej
 More/Hint: Więcej akcji
 NewHere/Caption: nowy tiddler tu
 NewHere/Hint: Stwórz nowego tiddlera otagowanego tym tiddlerem
+NetworkActivity/Caption: ruch sieciowy
+NetworkActivity/Hint: Anuluj cały ruch sieciowy
 NewJournal/Caption: nowy dziennik
 NewJournal/Hint: Tworzy nowego tiddlera o typie dziennika
 NewJournalHere/Caption: nowy dziennik tu

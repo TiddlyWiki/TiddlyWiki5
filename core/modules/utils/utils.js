@@ -685,9 +685,19 @@ exports.escapeRegExp = function(s) {
     return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
+/*
+Extended version of encodeURIComponent that encodes additional characters including
+those that are illegal within filepaths on various platforms including Windows
+*/
+exports.encodeURIComponentExtended = function(s) {
+	return encodeURIComponent(s).replace(/[!'()*]/g,function(c) {
+		return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+	});
+};
+
 // Checks whether a link target is external, i.e. not a tiddler title
 exports.isLinkExternal = function(to) {
-	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
+	var externalRegExp = /^(?:file|http|https|mailto|ftp|irc|news|obsidian|data|skype):[^\s<>{}\[\]`|"\\^]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
@@ -810,17 +820,40 @@ exports.hashString = function(str) {
 };
 
 /*
+Base64 utility functions that work in either browser or Node.js
+*/
+if(typeof window !== 'undefined') {
+	exports.btoa = function(binstr) { return window.btoa(binstr); }
+	exports.atob = function(b64) { return window.atob(b64); }
+} else {
+	exports.btoa = function(binstr) {
+		return Buffer.from(binstr, 'binary').toString('base64');
+	}
+	exports.atob = function(b64) {
+		return Buffer.from(b64, 'base64').toString('binary');
+	}
+}
+
+/*
 Decode a base64 string
 */
-exports.base64Decode = function(string64) {
-	return base64utf8.base64.decode.call(base64utf8,string64);
+exports.base64Decode = function(string64,binary,urlsafe) {
+	var encoded = urlsafe ? string64.replace(/_/g,'/').replace(/-/g,'+') : string64;
+	if(binary) return exports.atob(encoded)
+	else return base64utf8.base64.decode.call(base64utf8,encoded);
 };
 
 /*
 Encode a string to base64
 */
-exports.base64Encode = function(string64) {
-	return base64utf8.base64.encode.call(base64utf8,string64);
+exports.base64Encode = function(string64,binary,urlsafe) {
+	var encoded;
+	if(binary) encoded = exports.btoa(string64);
+	else encoded = base64utf8.base64.encode.call(base64utf8,string64);
+	if(urlsafe) {
+		encoded = encoded.replace(/\+/g,'-').replace(/\//g,'_');
+	}
+	return encoded;
 };
 
 /*

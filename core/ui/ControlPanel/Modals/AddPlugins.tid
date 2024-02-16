@@ -211,7 +211,7 @@ $:/state/add-plugin-info/$(connectionTiddler)$/$(assetInfo)$
 </div>
 \end
 
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 \whitespace trim
 
 <div>

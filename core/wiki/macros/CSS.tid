@@ -1,76 +1,69 @@
 title: $:/core/macros/CSS
-tags: $:/tags/Macro
+tags: $:/tags/Global
 
-\define colour(name)
-<$transclude tiddler={{$:/palette}} index="$name$"><$transclude tiddler="$:/palettes/Vanilla" index="$name$"><$transclude tiddler="$:/config/DefaultColourMappings/$name$"/></$transclude></$transclude>
+\procedure colour(name)
+\whitespace trim
+<$transclude $tiddler={{$:/palette}} $index=`$(name)$`>
+	<$transclude $tiddler="$:/palettes/Vanilla" $index=`$(name)$`>
+		<$transclude $tiddler=`$:/config/DefaultColourMappings/$(name)$`/>
+	</$transclude>
+</$transclude>
 \end
 
-\define color(name)
-<<colour $name$>>
+\procedure color(name)
+<$macrocall $name=colour name=`$(name)$`/>
 \end
 
-\define box-shadow(shadow)
-``
-  -webkit-box-shadow: $shadow$;
-     -moz-box-shadow: $shadow$;
-          box-shadow: $shadow$;
-``
+\function box-shadow(shadow)
+[[ -webkit-box-shadow: $(shadow)$;
+	-moz-box-shadow: $(shadow)$;
+	box-shadow: $(shadow)$;]substitute[]]
 \end
 
-\define filter(filter)
-``
-  -webkit-filter: $filter$;
-     -moz-filter: $filter$;
-          filter: $filter$;
-``
+\function filter(filter)
+[[ -webkit-filter: $(filter)$;
+	-moz-filter: $(filter)$;
+	filter: $(filter)$;]substitute[]]
 \end
 
-\define transition(transition)
-``
-  -webkit-transition: $transition$;
-     -moz-transition: $transition$;
-          transition: $transition$;
-``
+\function transition(transition)
+[[ -webkit-transition: $(transition)$;
+	-moz-transition: $(transition)$;
+	transition: $(transition)$;]substitute[]]
 \end
 
-\define transform-origin(origin)
-``
-  -webkit-transform-origin: $origin$;
-     -moz-transform-origin: $origin$;
-          transform-origin: $origin$;
-``
+\function transform-origin(origin)
+[[ -webkit-transform-origin: $(origin)$;
+	-moz-transform-origin: $(origin)$;
+	transform-origin: $(origin)$;]substitute[]]
 \end
 
-\define background-linear-gradient(gradient)
-``
-background-image: linear-gradient($gradient$);
-background-image: -o-linear-gradient($gradient$);
-background-image: -moz-linear-gradient($gradient$);
-background-image: -webkit-linear-gradient($gradient$);
-background-image: -ms-linear-gradient($gradient$);
-``
+\function background-linear-gradient(gradient)
+[[	background-image: linear-gradient($(gradient)$);
+	background-image: -o-linear-gradient($(gradient)$);
+	background-image: -moz-linear-gradient($(gradient)$);
+	background-image: -webkit-linear-gradient($(gradient)$);
+	background-image: -ms-linear-gradient($(gradient)$);]substitute[]]
 \end
 
-\define column-count(columns)
-``
--moz-column-count: $columns$;
--webkit-column-count: $columns$;
-column-count: $columns$;
-``
+\function column-count(columns)
+[[-moz-column-count: $(columns)$;
+	-webkit-column-count: $(columns)$;
+	column-count: $(columns)$;]substitute[]]
 \end
 
-\define datauri(title)
-<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}} _canonical_uri={{$title$!!_canonical_uri}}/>
+\procedure datauri(title)
+<$macrocall $name="makedatauri" type={{{ [<title>get[type]] }}} text={{{ [<title>get[text]] }}} _canonical_uri={{{ [<title>get[_canonical_uri]] }}}/>
 \end
 
-\define if-sidebar(text)
-<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes">$text$</$reveal>
+\procedure if-sidebar(text)
+<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes"><<text>></$reveal>
 \end
 
-\define if-no-sidebar(text)
-<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">$text$</$reveal>
+\procedure if-no-sidebar(text)
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes"><<text>></$reveal>
 \end
 
-\define if-background-attachment(text)
-<$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text="">$text$</$reveal>
+\procedure if-background-attachment(text)
+<$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text=""><<text>></$reveal>
 \end
