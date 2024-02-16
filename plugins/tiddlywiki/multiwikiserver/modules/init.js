@@ -34,14 +34,19 @@ exports.startup = function() {
 		logger.alert("The plugin 'tiddlywiki/multiwikiserver' requires the better-sqlite3 npm package to be installed. Run 'npm install' in the root of the TiddlyWiki repository");
 		return;
 	}
-	// Compute the database path
-	var databasePath = path.resolve($tw.boot.wikiPath,"store/database.sqlite");
-	// Create and initialise the tiddler store
-	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore;
+	// Create and initialise the tiddler store and upload manager
+	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore,
+		store = new SqlTiddlerStore({
+			databasePath: path.resolve($tw.boot.wikiPath,"store/database.sqlite")
+		}),
+		UploadManager = require("$:/plugins/tiddlywiki/multiwikiserver/upload-manager.js").UploadManager,
+		uploadManager = new UploadManager({
+			inboxPath: path.resolve($tw.boot.wikiPath,"store/inbox"),
+			store: store
+		});
 	$tw.mws = {
-		store: new SqlTiddlerStore({
-			databasePath: databasePath
-		})
+		store: store,
+		uploadManager: uploadManager
 	};
 	// Create docs bag and recipe
 	$tw.mws.store.createBag("docs","TiddlyWiki Documentation from https://tiddlywiki.com/");
