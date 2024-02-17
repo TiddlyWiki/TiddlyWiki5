@@ -139,12 +139,12 @@ type: text/vnd.tiddlywiki
 <$macrocall $name=".infoBox" text=<<_>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
 \end
 
-\procedure .tip(text:"", title:"Tip" , icon:"$:/core/images/tip", class:"doc-tip", iconSize:"22pt")
-<$macrocall $name=".infoBox" text=<<text>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
+\procedure .tip(_:"", title:"Tip" , icon:"$:/core/images/tip", class:"doc-tip", iconSize:"22pt")
+<$macrocall $name=".infoBox" text=<<_>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
 \end
 
-\procedure .warning(text:"", title:"Warning", icon:"$:/core/images/warning", class:"doc-warning", iconSize:"22pt")
-<$macrocall $name=".infoBox" text=<<text>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
+\procedure .warning(_:"", title:"Warning", icon:"$:/core/images/warning", class:"doc-warning", iconSize:"22pt")
+<$macrocall $name=".infoBox" text=<<_>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
 \end
 
 \procedure .state-prefix() $:/state/editions/tw5.com/
