@@ -1,0 +1,17 @@
+created: 20240217005620453
+modified: 20240217010209812
+tags: 
+title: Transclude/Parameterised/Mode-TODO
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+<$transclude $tiddler='TiddlerOTR' one='Ferret'>
+
+This is a block
+
+</$transclude>
+
+<$transclude $tiddler='TiddlerOTR'>
+This is inline
+</$transclude>

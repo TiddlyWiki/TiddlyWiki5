@@ -1,0 +1,9 @@
+created: 20240216233819175
+modified: 20240216233827921
+tags: 
+title: Macro
+type: text/vnd.tiddlywiki
+
+\define imported-print-this-tiddler()
+<$text text=<<thisTiddler>>/>
+\end

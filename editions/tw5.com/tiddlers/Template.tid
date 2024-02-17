@@ -1,0 +1,7 @@
+created: 20240216235230574
+modified: 20240216235241129
+tags: 
+title: Template
+type: text/vnd.tiddlywiki
+
+<$text text=<<currentTiddler>>/><$text text=<<currentTiddler>>/>

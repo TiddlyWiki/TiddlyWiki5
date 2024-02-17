@@ -1,0 +1,10 @@
+created: 20240217004927961
+modified: 20240217005640206
+tags: 
+title: genesis-block-forced-inline-TODO
+type: text/vnd.tiddlywiki
+
+<$genesis $type="$reveal" type=nomatch $mode=inline>
+
+Block forced inline
+</$genesis>

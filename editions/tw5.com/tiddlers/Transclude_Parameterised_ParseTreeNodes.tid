@@ -1,0 +1,17 @@
+created: 20240216232013920
+modified: 20240216233421133
+tags: 
+title: Transclude/Parameterised/ParseTreeNodes
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+
+This is a block
+
+</$transclude>
+
+<$transclude $tiddler='TiddlerOne'>
+This is inline
+</$transclude>

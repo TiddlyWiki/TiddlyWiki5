@@ -1,0 +1,9 @@
+created: 20240216223025948
+modified: 20240216224308544
+tags: 
+title: should parse inline macro calls
+type: text/vnd.tiddlywiki
+
+text <<john one:val1 two: 'val "2"' three: "val '3'" four: """val 4"5'""" five: [[val 5]] >>
+
+<!-- 1: <<john>><<paul>><<george>><<ringo>> -->

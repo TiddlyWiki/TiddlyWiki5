@@ -1,0 +1,23 @@
+created: 20240217000044870
+modified: 20240217000326757
+tags: 
+title: Text
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+This is a&#32;
+	<% if [<something>match[one]] %>
+		<% if [<another>match[one]] %>
+			Indian
+		<% elseif [<another>match[two]] %>
+			African
+		<% else %>
+			Unknown
+		<% endif %>
+		&#32;Elephant
+	<% elseif [<something>match[two]] %>
+		Antelope
+	<% else %>
+		Crocodile
+	<% endif %>
+, I think.
