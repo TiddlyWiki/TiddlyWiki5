@@ -21,7 +21,7 @@ Now!
 +
 title: ExpectedResult
 
-<p>
+
 [
     {
         "type": "set",
@@ -61,4 +61,3 @@ title: ExpectedResult
         "isProcedureDefinition": true
     }
 ]
-</p>

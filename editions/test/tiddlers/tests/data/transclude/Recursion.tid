@@ -10,4 +10,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><span class="tc-error">Recursive transclusion error in transclude widget</span></p>
+<span class="tc-error">Recursive transclusion error in transclude widget</span>

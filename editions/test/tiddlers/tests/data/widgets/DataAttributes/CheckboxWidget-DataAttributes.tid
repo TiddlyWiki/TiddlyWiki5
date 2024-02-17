@@ -19,4 +19,4 @@ Title1
 +
 title: ExpectedResult
 
-<p><label class="tc-checkbox "><input data-title="Title2" type="checkbox" style="color:red;"><span>Is it done?</span></label></p>
+<label class="tc-checkbox "><input data-title="Title2" type="checkbox" style="color:red;"><span>Is it done?</span></label>

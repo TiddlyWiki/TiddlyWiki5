@@ -26,4 +26,4 @@ title: TiddlerOne
 +
 title: ExpectedResult
 
-<p>one,ts-raw,two</p><p>one,ts-raw</p>
+one,ts-raw,twoone,ts-raw

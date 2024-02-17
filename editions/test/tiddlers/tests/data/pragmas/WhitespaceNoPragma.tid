@@ -20,7 +20,7 @@ Now!
 +
 title: ExpectedResult
 
-<p>
+
 [
     {
         "type": "text",
@@ -29,4 +29,3 @@ title: ExpectedResult
         "end": 9
     }
 ]
-</p>

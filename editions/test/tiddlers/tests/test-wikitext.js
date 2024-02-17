@@ -43,7 +43,7 @@ describe("WikiText tests", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerThree")).toBe("<p>The speed of sound</p><p>The light of speed</p>");
 	});
 	it("should support attributes specified as macro invocations", function() {
-		expect(wiki.renderTiddler("text/html","TiddlerFour")).toBe("<p><a class=\"tc-tiddlylink tc-tiddlylink-missing\" href=\"#This%20is%20my%20%27%27amazingly%27%27%20groovy%20macro%21\">This is a link</a></p>");
+		expect(wiki.renderTiddler("text/html","TiddlerFour")).toBe("<a class=\"tc-tiddlylink tc-tiddlylink-missing\" href=\"#This%20is%20my%20%27%27amazingly%27%27%20groovy%20macro%21\">This is a link</a>");
 	});
 	it("handles style wikitext notation", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","@@.myclass\n!header\n@@")).toBe("<h1 class=\"myclass\">header</h1>");
