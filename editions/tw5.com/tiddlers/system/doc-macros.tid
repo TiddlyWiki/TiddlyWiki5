@@ -127,12 +127,11 @@ type: text/vnd.tiddlywiki
 
 \procedure .infoBox(text:"", title, icon:"$:/core/images/info-button", class, iconSize:"1.4rem")
 \function _f.tipClass() [[doc-icon-block]] [<class>!is[blank]then<class>] +[join[ ]]
-<$log/>
 <div class=<<_f.tipClass>>>
 	<%if [<title>!is[blank]] %><div>''<<title>>''</div><% endif %>
 	<div class="doc-block-icon"><$transclude $tiddler=<<icon>> size=<<iconSize>>/></div>
 	<<text>>
-</div><br/>
+</div>
 \end
 
 \procedure .note(_:"", title:"Note", icon:"$:/core/images/info-button", class:"doc-note", iconSize:"22pt")
