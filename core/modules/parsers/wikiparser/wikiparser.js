@@ -242,13 +242,30 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
 	// return [{type: "element", tag: "p", children: children, start: start, end: end }];
-	if (children[0].type === "text" ||
-		(($tw.config.htmlBlockElements.indexOf(children[0].tag) === -1) && children[0] && 
-		children[0].tag  && children[0].tag.charAt(0) !== "$")) {
+
+	var isP = false;
+	$tw.utils.each(children, function(child) {
+		if (child.type === "text" ||
+			(($tw.config.htmlBlockElements.indexOf(child.tag) === -1) && 
+			child.tag  && child.tag.charAt(0) !== "$")) {
+			isP = true;
+			}
+	});
+
+	if (isP) {
 		return [{type: "element", tag: "p", children: children, start: start, end: end }];
-	} else {
+	}
+	else {
 		return children;
 	}
+
+	// if (children[0].type === "text" ||
+	// 	(($tw.config.htmlBlockElements.indexOf(children[0].tag) === -1) && children[0] && 
+	// 	children[0].tag  && children[0].tag.charAt(0) !== "$")) {
+	// 	return [{type: "element", tag: "p", children: children, start: start, end: end }];
+	// } else {
+	// 	return children;
+	// }
 };
 
 /*
