@@ -164,7 +164,7 @@ tr.doc-table-subheading {
 
 .doc-icon-block {
 	border-left: 4px solid <<colour blockquote-bar>>;
-	margin-left: 3em;
+	margin: 15px 0 15px 3em;
 	padding-left: 0.6em;
 	position: relative;
 }
