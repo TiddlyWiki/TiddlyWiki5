@@ -1,7 +1,7 @@
 created: 20221123151432434
-modified: 20221123151507426
+modified: 20240217220737048
 tags: 
-title: standard-deviation Operator-todo
+title: standard-deviation Operator-todo-dm
 type: text/vnd.tiddlywiki
 
 <$link to={{{ [all[current]removesuffix[-todo]] }}}/>

@@ -1,7 +1,7 @@
 created: 20221123151524270
-modified: 20221123151547322
+modified: 20240217220932874
 tags: 
-title: trunc Operator-todo
+title: trunc Operator-todo-dm
 type: text/vnd.tiddlywiki
 
 <$link to={{{ [all[current]removesuffix[-todo]] }}}/>

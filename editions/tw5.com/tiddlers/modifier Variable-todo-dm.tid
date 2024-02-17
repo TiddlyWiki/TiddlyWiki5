@@ -1,7 +1,7 @@
 created: 20221123154228557
-modified: 20221123154251842
+modified: 20240217220700028
 tags: 
-title: modifier Variable-todo
+title: modifier Variable-todo-dm
 type: text/vnd.tiddlywiki
 
 <$link to={{{ [all[current]removesuffix[-todo]] }}}/>

@@ -1,7 +1,7 @@
 created: 20221123162854638
-modified: 20221123163048951
+modified: 20240217231008248
 tags: 
-title: Formatting List Results as Tables with CSS - Specified Columns Methods-todo
+title: Formatting List Results as Tables with CSS - Specified Columns Methods-todo-dm
 type: text/vnd.tiddlywiki
 
 <$link to={{{ [all[current]removesuffix[-todo]] }}}/>

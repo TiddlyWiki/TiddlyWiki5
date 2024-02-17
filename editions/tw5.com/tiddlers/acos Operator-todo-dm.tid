@@ -1,0 +1,11 @@
+created: 20221123151031589
+modified: 20240217220455380
+tags: 
+title: acos Operator-todo-dm
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+probelme with `<.tip ` macro vertical spacing
+
+Fixed with PR: doc-macros-new-syntax
