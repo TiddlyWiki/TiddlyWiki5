@@ -36,6 +36,8 @@ console.log(`Initialised sqlTiddlerStore`)
 		store: store,
 		uploadManager: uploadManager
 	};
+	// Performance timing
+	console.time("mws-initial-load");
 	// Create docs bag and recipe
 	$tw.mws.store.createBag("docs","TiddlyWiki Documentation from https://tiddlywiki.com/");
 	$tw.mws.store.createRecipe("docs",["docs"],"TiddlyWiki Documentation from https://tiddlywiki.com/");
@@ -55,6 +57,7 @@ console.log(`Initialised sqlTiddlerStore`)
 	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Alpha"},"bag-alpha");
 	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Beta"},"bag-beta");
 	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Gamma"},"bag-gamma");
+	console.timeEnd("mws-initial-load");
 };
 
 })();

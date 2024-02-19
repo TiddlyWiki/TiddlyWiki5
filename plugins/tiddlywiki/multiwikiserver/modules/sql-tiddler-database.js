@@ -19,10 +19,13 @@ databasePath - path to the database file (can be ":memory:" to get a temporary d
 */
 function SqlTiddlerDatabase(options) {
 	options = options || {};
-	// Create the database
+	// Initialise the statement cache
+	this.statements = Object.create(null); // Hashmap by SQL text of statement objects
+	// Create the database file directories if needed
 	if(options.databasePath) {
 		$tw.utils.createFileDirectories(options.databasePath);
 	}
+	// Create the database
 	var databasePath = options.databasePath || ":memory:";
 	const { Database } = require("node-sqlite3-wasm");
 	this.db = new Database(databasePath);
@@ -30,24 +33,34 @@ function SqlTiddlerDatabase(options) {
 
 SqlTiddlerDatabase.prototype.close = function() {
 	this.db.close();
+	for(const sql in this.statements) {
+		this.statements[sql].finalize();
+	}
 	this.db = undefined;
+};
+
+SqlTiddlerDatabase.prototype.prepareStatement = function(sql) {
+	if(!(sql in this.statements)) {
+		this.statements[sql] = this.db.prepare(sql);
+	}
+	return this.statements[sql];
 };
 
 SqlTiddlerDatabase.prototype.runStatement = function(sql,params) {
 	params = params || {};
-	const statement = this.db.prepare(sql);
+	const statement = this.prepareStatement(sql);
 	return statement.run(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGet = function(sql,params) {
 	params = params || {};
-	const statement = this.db.prepare(sql);
+	const statement = this.prepareStatement(sql);
 	return statement.get(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGetAll = function(sql,params) {
 	params = params || {};
-	const statement = this.db.prepare(sql);
+	const statement = this.prepareStatement(sql);
 	return statement.all(params);
 };
 
