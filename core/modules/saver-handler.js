@@ -12,7 +12,6 @@ The saver handler tracks changes to the store and handles saving the entire wiki
 /*global $tw: false */
 "use strict";
 
-
 /*
 Instantiate the saver handler with the following options:
 wiki: wiki to be synced
