@@ -19,6 +19,7 @@ exports.before = ["story"];
 exports.synchronous = true;
 
 exports.startup = function() {
+console.log(`Initialising MWSS`)
 	var path = require("path");
 	// Install the sqlite3 global namespace
 	$tw.sqlite3 = {
@@ -30,6 +31,7 @@ exports.startup = function() {
 		$tw.sqlite3.Database = require("better-sqlite3");
 	} catch(e) {
 	}
+console.log(`Successfully required better-sqlite3`)
 	if(!$tw.sqlite3.Database) {
 		logger.alert("The plugin 'tiddlywiki/multiwikiserver' requires the better-sqlite3 npm package to be installed. Run 'npm install' in the root of the TiddlyWiki repository");
 		return;
@@ -44,6 +46,7 @@ exports.startup = function() {
 			inboxPath: path.resolve($tw.boot.wikiPath,"store/inbox"),
 			store: store
 		});
+console.log(`Initialised sqlTiddlerStore`)
 	$tw.mws = {
 		store: store,
 		uploadManager: uploadManager
