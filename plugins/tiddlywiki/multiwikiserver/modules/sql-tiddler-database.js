@@ -25,6 +25,7 @@ function SqlTiddlerDatabase(options) {
 	}
 	var databasePath = options.databasePath || ":memory:";
 	this.db = new $tw.sqlite3.Database(databasePath,{verbose: undefined && console.log});
+	this.transactionDepth = 0;
 }
 
 SqlTiddlerDatabase.prototype.close = function() {
@@ -454,9 +455,21 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 
 /*
 Execute the given function in a transaction, committing if successful but rolling back if an error occurs.  Returns whatever the given function returns.
+
+Calls to this function can be safely nested, but only the top-most call will actually take place in a transaction.
 */
 SqlTiddlerDatabase.prototype.transaction = function(fn) {
-	return this.db.transaction(fn)();
+	try {
+		const alreadyInTransaction = this.transactionDepth > 0;
+		this.transactionDepth++;
+		if(alreadyInTransaction) {
+			return fn();
+		} else {
+			return this.db.transaction(fn)();
+		}
+	} finally {
+		this.transactionDepth--;
+	}
 };
 
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
