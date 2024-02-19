@@ -21,21 +21,6 @@ exports.synchronous = true;
 exports.startup = function() {
 console.log(`Initialising MWSS`)
 	var path = require("path");
-	// Install the sqlite3 global namespace
-	$tw.sqlite3 = {
-		Database: null
-	};
-	// Check that better-sqlite3 is installed
-	var logger = new $tw.utils.Logger("multiwikiserver");
-	try {
-		$tw.sqlite3.Database = require("better-sqlite3");
-	} catch(e) {
-	}
-console.log(`Successfully required better-sqlite3`)
-	if(!$tw.sqlite3.Database) {
-		logger.alert("The plugin 'tiddlywiki/multiwikiserver' requires the better-sqlite3 npm package to be installed. Run 'npm install' in the root of the TiddlyWiki repository");
-		return;
-	}
 	// Create and initialise the tiddler store and upload manager
 	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore,
 		store = new SqlTiddlerStore({
@@ -54,10 +39,10 @@ console.log(`Initialised sqlTiddlerStore`)
 	// Create docs bag and recipe
 	$tw.mws.store.createBag("docs","TiddlyWiki Documentation from https://tiddlywiki.com/");
 	$tw.mws.store.createRecipe("docs",["docs"],"TiddlyWiki Documentation from https://tiddlywiki.com/");
-	$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"tw5.com/tiddlers"),"docs");
+	// $tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"tw5.com/tiddlers"),"docs");
 	$tw.mws.store.createBag("dev-docs","TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
 	$tw.mws.store.createRecipe("dev-docs",["dev-docs"],"TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
-	$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"dev/tiddlers"),"dev-docs");
+	// $tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"dev/tiddlers"),"dev-docs");
 	// Create bags and recipes
 	$tw.mws.store.createBag("bag-alpha","A test bag");
 	$tw.mws.store.createBag("bag-beta","Another test bag");

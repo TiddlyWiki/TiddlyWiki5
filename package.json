@@ -37,6 +37,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "better-sqlite3": "^9.4.1"
+    "node-sqlite3-wasm": "^0.8.9"
   }
 }
