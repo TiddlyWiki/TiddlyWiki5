@@ -23,7 +23,6 @@ function SqlTiddlerDatabase(options) {
 	if(options.databasePath) {
 		$tw.utils.createFileDirectories(options.databasePath);
 	}
-	console.log("Opening",options.databasePath)
 	var databasePath = options.databasePath || ":memory:";
 	const { Database } = require("node-sqlite3-wasm");
 	this.db = new Database(databasePath);
@@ -35,21 +34,18 @@ SqlTiddlerDatabase.prototype.close = function() {
 };
 
 SqlTiddlerDatabase.prototype.runStatement = function(sql,params) {
-console.log(`runStatement ${sql} with ${JSON.stringify(params)}`);
 	params = params || {};
 	const statement = this.db.prepare(sql);
 	return statement.run(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGet = function(sql,params) {
-console.log(`runStatementGet ${sql} with ${JSON.stringify(params)}`);
 	params = params || {};
 	const statement = this.db.prepare(sql);
 	return statement.get(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGetAll = function(sql,params) {
-console.log(`runStatementGetAll ${sql} with ${JSON.stringify(params)}`);
 	params = params || {};
 	const statement = this.db.prepare(sql);
 	return statement.all(params);
