@@ -36,13 +36,27 @@ exports.startup = function() {
 	};
 	// Performance timing
 	console.time("mws-initial-load");
-	// Create docs bag and recipe
-	$tw.mws.store.createBag("docs","TiddlyWiki Documentation from https://tiddlywiki.com/");
-	$tw.mws.store.createRecipe("docs",["docs"],"TiddlyWiki Documentation from https://tiddlywiki.com/");
-	$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"tw5.com/tiddlers"),"docs");
-	$tw.mws.store.createBag("dev-docs","TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
-	$tw.mws.store.createRecipe("dev-docs",["dev-docs"],"TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev/");
-	$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,"dev/tiddlers"),"dev-docs");
+	// Copy TiddlyWiki core editions
+	function copyEdition(options) {
+		console.log(`Copying edition ${options.tiddlersPath}`);
+		$tw.mws.store.createBag(options.bagName,options.bagDescription);
+		$tw.mws.store.createRecipe(options.recipeName,[options.bagName],options.recipeDescription);
+		$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,options.tiddlersPath),options.bagName);
+	}
+	// copyEdition({
+	// 	bagName: "docs",
+	// 	bagDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
+	// 	recipeName: "docs",
+	// 	recipeDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
+	// 	tiddlersPath: "tw5.com/tiddlers"
+	// });
+	copyEdition({
+		bagName: "dev-docs",
+		bagDescription: "TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev",
+		recipeName: "dev-docs",
+		recipeDescription: "TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev",
+		tiddlersPath: "dev/tiddlers"
+	});
 	// Create bags and recipes
 	$tw.mws.store.createBag("bag-alpha","A test bag");
 	$tw.mws.store.createBag("bag-beta","Another test bag");
