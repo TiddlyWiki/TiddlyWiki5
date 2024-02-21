@@ -19,7 +19,6 @@ exports.before = ["story"];
 exports.synchronous = true;
 
 exports.startup = function() {
-console.log(`Initialising MWS`)
 	var path = require("path");
 	// Create and initialise the tiddler store and upload manager
 	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore,
@@ -31,7 +30,6 @@ console.log(`Initialising MWS`)
 			inboxPath: path.resolve($tw.boot.wikiPath,"store/inbox"),
 			store: store
 		});
-console.log(`Initialised sqlTiddlerStore`)
 	$tw.mws = {
 		store: store,
 		uploadManager: uploadManager

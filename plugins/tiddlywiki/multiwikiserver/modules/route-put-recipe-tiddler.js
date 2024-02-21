@@ -37,7 +37,6 @@ exports.handler = function(request,response,state) {
 			fields[name] = $tw.utils.stringifyList(value);
 		}
 	});
-console.log(`PUT /wiki/${recipe_name}/recipes/${recipe_name_2}/tiddlers/${title}`);
 	// Require the recipe names to match
 	if(recipe_name === recipe_name_2) {
 		var result = $tw.mws.store.saveRecipeTiddler(fields,recipe_name);

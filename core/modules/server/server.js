@@ -84,7 +84,6 @@ function Server(options) {
 	});
 	// Load route handlers
 	$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
-		console.log("Loading server route " + title);
 		self.addRoute(routeDefinition);
 	});
 	// Initialise the http vs https
