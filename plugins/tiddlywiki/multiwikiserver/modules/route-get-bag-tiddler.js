@@ -16,7 +16,7 @@ NOTE: Urls currently include the bag name twice. This is temporary to minimise t
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/([^\/]+)$/;
+exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters

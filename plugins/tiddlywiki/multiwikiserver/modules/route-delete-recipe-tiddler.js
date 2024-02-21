@@ -16,7 +16,7 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "DELETE";
 
-exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/([^\/]+)$/;
+exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
