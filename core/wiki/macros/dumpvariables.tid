@@ -1,22 +1,31 @@
 title: $:/core/macros/dumpvariables
-tags: $:/tags/Macro
+tags: $:/tags/Global
 
 \whitespace trim
 
+\procedure _initRawFilter() [variables:raw<type>]
+\procedure _initFilter() [variables<type>]
+
+\function _f.filterString() [<sort>match[raw]then<_initRawFilter>else<_initFilter>]
+\function _f.varFormat() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
+\function _f.formattedVar() [<varname>format:variable<_f.varFormat>]
+
 <!-- =================== -->
-\procedure dumpvariables(subfilter:"[variables[]]")
+\procedure dumpvariables(type sort:"sort" subfilter:"[[]]" format)
 <ul>
-	<$list filter="[variables[]] :and[subfilter<subfilter>]" variable="varname">
+	<li><<transclusion>></li>
+	<$list filter="[subfilter<_f.filterString>] +[filter<subfilter>]" variable="varname">
 		<li>
-			<strong><code><$text text=<<varname>>/></code></strong>:<br/>
+			<code><$text text=<<_f.formattedVar>>/></code><br/>
+			<% if [<_f.formattedVar>prefix[\function]] %>
+				<$codeblock code={{{ [<varname>getvariable[value]] }}}/>
+			<% endif %>
 			<$codeblock code={{{ [<varname>getvariable[]] }}}/>
 		</li>
 	</$list>
 </ul>
 \end
 
-<!-- =================== -->
-\procedure search-variables(subfilter:"[variables[]]")
 
 \procedure search() $:/temp/search/dump
 \procedure sub-search() $:/temp/search/sub-dump
@@ -28,7 +37,7 @@ tags: $:/tags/Macro
 
 \procedure toggleInfoState()
 <$action-setfield $tiddler=<<getToggleInfoState>> text={{{ [<getToggleInfoState>get[text]] +[toggle[yes],[no]] }}}/>
-<$action-setfield $tiddler=<<getSubSearch>> text={{{ [<getSubSearchText>!is[blank]then<getSubSearchText>] :else[<varname>] }}} />
+<$action-setfield $tiddler=<<getSubSearch>> text={{{ [<getSubSearchText>!is[blank]then<getSubSearchText>] :else[<varname>format:variable[$type$ $name$$params$]] }}} />
 \end toggleInfoState
 
 \procedure clearStatesButton()
@@ -48,7 +57,7 @@ tags: $:/tags/Macro
 \procedure expandAllStatesButton()
 <$button class="tc-btn-invisible tc-tiny-gap-left">
 	<$action-setfield $tiddler=<<state>> text={{{ [<getToggleInfoState>get[text]] +[toggle[yes],[no]] }}}/>
-	<$list filter="[variables[]] +[search::some<getSearchText>] :filter[subfilter<subfilter>]" variable="varname">
+	<$list filter="[subfilter<_f.filterString>] +[search::some<getSearchText>] +[filter<subfilter>]" variable="varname">
 		<$action-setfield $tiddler=<<getVarState>> text="yes"/>
 	</$list>
 	{{$:/core/images/unfold-all-button}}
@@ -58,11 +67,13 @@ tags: $:/tags/Macro
 \procedure info()
 <div class="multi-columns">
 	<$list filter="[all[tiddlers+shadows]] :filter[search:text,tags:words<getSubSearchText>] 
+		-[[$:/config/OriginalTiddlerPaths]]
+		-[[$:/HistoryList]]
+		-[[$:/StoryList]]
+		-[[$:/core]]
+		:filter[!type[application/javascript]]
 		:filter[!prefix[$:/temp]]
 		:filter[!prefix[$:/state]]
-		-[[$:/config/OriginalTiddlerPaths]]
-		:filter[!type[application/javascript]]
-		-[[$:/core]]
 		:filter[!plugin-type[plugin]]"
 	>
 		<$link class="tc-small-gap-left"/><br>
@@ -78,7 +89,11 @@ tags: $:/tags/Macro
 \function getVarState() [<state>addsuffix<varname>] [<qualify>] +[join[]]
 \function getToggleInfoState() [<state>addsuffix<varname>]
 
-<$text text="Search Variables - "/><%if [<thisTiddler>!match[$:/AdvancedSearch]]%><code class="tc-small-gap-right"><<subfilter>></code><%endif%>
+<!-- =================== -->
+\procedure search-variables(type sort:"sort" subfilter:"[[]]" format)
+\function _f.varFormat() [<format>!is[blank]then<format>else[$type$ $name$($params$) $firstLine$]]
+
+<$text text="Search Variables - "/><%if [<thisTiddler>!match[$:/AdvancedSearch]]%><code class="tc-small-gap-right">sort: <<sort>>, type:<<type>></code><%endif%>
 <$edit-text tiddler=<<search>> tag=input/> <<clearSearchButton>>
 <% if [<state>get[text]match[yes]] %>
 	<<clearStatesButton>>
@@ -86,8 +101,8 @@ tags: $:/tags/Macro
 	<<expandAllStatesButton>>
 <% endif %>
 
-<!-- <$list filter="[variables[]] +[search::some<getSearchText>] :filter[subfilter<subfilter>]" variable="varname"> -->
-<$list filter="[variables[]] +[search::some<getSearchText>] :and[subfilter<subfilter>]" variable="varname">
+<!-- <$list filter="[subfilter<subfilter>] +[search::some<getSearchText>]" variable="varname"> -->
+<$list filter="[subfilter<_f.filterString>] +[search::some<getSearchText>] +[filter<subfilter>]" variable="varname">
 <div class="tc-var-item">
 	<$button actions=<<toggleState>> class="tc-small-gap-left tc-btn-invisible">
 		<% if [<getVarState>get[text]match[yes]] %>
@@ -95,8 +110,8 @@ tags: $:/tags/Macro
 		<% else %>
 			{{$:/core/images/right-arrow}}
 		<% endif %>
-		<strong class="tc-tiny-gap-right"><code><$text text=<<varname>>/></code></strong>
-		<$text text={{{ "#" [<varname>getvariable[]length[]] +[join[ ]] }}}/>
+		<code class="tc-tiny-gap-right"><$text text=<<_f.formattedVar>>/></code>
+		<!-- <$text text={{{ "#" [<varname>getvariable[]length[]] +[join[ ]] }}}/> -->
 	</$button>
 
 	<% if [<getVarState>get[text]match[yes]] %>
@@ -113,6 +128,9 @@ tags: $:/tags/Macro
 				<$edit-text tiddler=<<getSubSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
 			</div>
 			<<info>>
+		<% endif %>
+		<% if [<varname>prefix[\function]] %>
+			<$codeblock code={{{ [<varname>getvariable[value]] }}}/>
 		<% endif %>
 		<$codeblock code={{{ [<varname>getvariable[]] }}}/>
 	<% endif %>

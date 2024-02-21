@@ -1,16 +1,37 @@
+caption: variables
 created: 20190330100101453
-modified: 20190330100101453
+modified: 20240219185349859
+op-input: ignored
+op-output: the names of all the actively defined variables
+op-parameter: <<.from-version "5.3.4">> whitespace separated list of variable-types
+op-parameter-name: T
+op-purpose: select the names of all the actively defined variables
+op-suffix: <<.from-version "5.3.4">> deafults to: "sort", optional: "raw", see more details below
+op-suffix-name: S
 tags: [[Filter Operators]] [[Special Operators]] [[Selection Constructors]]
 title: variables Operator
 type: text/vnd.tiddlywiki
-caption: variables
-op-purpose: select the names of all the actively defined variables
-op-input: ignored
-op-parameter: none
-op-output: the names of all the actively defined variables
 
-<<.from-version "5.1.20">> The primary purpose of the `variables` operator is to implement the [[dumpvariables Macro]]:
+<<.from-version "5.1.20">> The primary purpose of the `variables` operator is to implement the <<.mlink dumpvariables>> or the <<.mlink serach-variables>> macros.
 
-<$codeblock code={{$:/core/macros/dumpvariables}}/>
+`[variables:<sort>[<parameters>]]`
+
+''Possible Suffixes: <<.place S>>:'' <<.from-version "5.3.4">>
+
+* ''sort'' (default): By default the returned list is alphabetically sorted
+* ''raw'': The variable list will be returned as created. The variables "near" the filter run will show up first. So if variables are defined in the tiddler, where the <<.mlink dumpvariables>> or <<.mlink search-variables>> macros are executed, they will be listed first. 
+
+''Parameters <<.place T>>:'' <<.from-version "5.3.4">>
+
+The parameters <<.place T>> allow a "whitespace separated" list of variable codes that should be listed
+
+* Default is all: `fn, var, proc, macro, widget`
+
+* ''fn'' ... will only show variables defined as functions eg: `\function test-01()`
+* ''var'' ... will only show standard variables defined with eg: `<$let test="test">...</$let>`
+* ''proc'' ... will only show variables defined as procedures eg: `\procedure test-02()`
+* ''macro'' ... will only show variables defined as macros eg: `\define test-macro()`
+* ''widgets'' ... will only show variables defined as widgets eg: `\widget my-widget()`
+
 
 <<.operator-examples "variables">>
