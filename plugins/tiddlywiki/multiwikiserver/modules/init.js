@@ -19,7 +19,6 @@ exports.before = ["story"];
 exports.synchronous = true;
 
 exports.startup = function() {
-console.log(`Initialising MWS`)
 	var path = require("path");
 	// Install the sqlite3 global namespace
 	$tw.sqlite3 = {
@@ -46,7 +45,6 @@ console.log(`Successfully required better-sqlite3`)
 			inboxPath: path.resolve($tw.boot.wikiPath,"store/inbox"),
 			store: store
 		});
-console.log(`Initialised sqlTiddlerStore`)
 	$tw.mws = {
 		store: store,
 		uploadManager: uploadManager
