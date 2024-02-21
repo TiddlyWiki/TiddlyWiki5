@@ -16,7 +16,7 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/recipes\/([^\/]+)\/tiddlers\/([^\/]+)$/;
+exports.path = /^\/wiki\/([^\/]+)\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
