@@ -25,19 +25,44 @@ function SqlTiddlerDatabase(options) {
 	if(options.databasePath) {
 		$tw.utils.createFileDirectories(options.databasePath);
 	}
+	// Choose engine
+	this.engine = "wasm"; // wasm | better
 	// Create the database
-	var databasePath = options.databasePath || ":memory:";
-	const { Database } = require("node-sqlite3-wasm");
-	this.db = new Database(databasePath);
+	const databasePath = options.databasePath || ":memory:";
+	let Database;
+	switch(this.engine) {
+		case "wasm":
+			({ Database } = require("node-sqlite3-wasm"));
+			break;
+		case "better":
+			Database = require("better-sqlite3");
+			break;
+	}
+	this.db = new Database(databasePath,{
+		verbose: undefined && console.log
+	});
 }
 
 SqlTiddlerDatabase.prototype.close = function() {
-	this.db.close();
 	for(const sql in this.statements) {
 		this.statements[sql].finalize();
 	}
 	this.statements = Object.create(null);
+	this.db.close();
 	this.db = undefined;
+};
+
+SqlTiddlerDatabase.prototype.normaliseParams = function(params) {
+	params = params || {};
+	const result = Object.create(null);
+	for(const paramName in params) {
+		if(this.engine !== "wasm" && paramName.startsWith("$")) {
+			result[paramName.slice(1)] = params[paramName];
+		} else {
+			result[paramName] = params[paramName];
+		}
+	}
+	return result;
 };
 
 SqlTiddlerDatabase.prototype.prepareStatement = function(sql) {
@@ -48,19 +73,19 @@ SqlTiddlerDatabase.prototype.prepareStatement = function(sql) {
 };
 
 SqlTiddlerDatabase.prototype.runStatement = function(sql,params) {
-	params = params || {};
+	params = this.normaliseParams(params);
 	const statement = this.prepareStatement(sql);
 	return statement.run(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGet = function(sql,params) {
-	params = params || {};
+	params = this.normaliseParams(params);
 	const statement = this.prepareStatement(sql);
 	return statement.get(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGetAll = function(sql,params) {
-	params = params || {};
+	params = this.normaliseParams(params);
 	const statement = this.prepareStatement(sql);
 	return statement.all(params);
 };
