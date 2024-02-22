@@ -27,10 +27,11 @@ function SqlTiddlerDatabase(options) {
 		$tw.utils.createFileDirectories(options.databasePath);
 	}
 	// Choose engine
-	this.engine = options.engine || "better"; // wasm | better
+	this.engine = options.engine || "wasm"; // wasm | better
 	// Create the database
 	const databasePath = options.databasePath || ":memory:";
 	let Database;
+	console.log(`Creating SQL engine ${this.engine}`)
 	switch(this.engine) {
 		case "wasm":
 			({ Database } = require("node-sqlite3-wasm"));
