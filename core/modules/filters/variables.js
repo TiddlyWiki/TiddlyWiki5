@@ -34,7 +34,7 @@ exports.variables = function(source,operator,options) {
 		case "raw":
 			sort = false;
 			break;
-		case "sort":  // the fallthrough is intentional. "sort" is default
+		case "alphabetical":  // the fallthrough is intentional. "alphabetical" is default
 		default:
 			sort = true;
 			break;
