@@ -16,38 +16,80 @@ Validation is for the most part left to the caller
 Create a tiddler store. Options include:
 
 databasePath - path to the database file (can be ":memory:" to get a temporary database)
+engine - wasm | better
 */
 function SqlTiddlerDatabase(options) {
 	options = options || {};
-	// Create the database
+	// Initialise the statement cache
+	this.statements = Object.create(null); // Hashmap by SQL text of statement objects
+	// Create the database file directories if needed
 	if(options.databasePath) {
 		$tw.utils.createFileDirectories(options.databasePath);
 	}
-	var databasePath = options.databasePath || ":memory:";
-	this.db = new $tw.sqlite3.Database(databasePath,{verbose: undefined && console.log});
+	// Choose engine
+	this.engine = options.engine || "better"; // wasm | better
+	// Create the database
+	const databasePath = options.databasePath || ":memory:";
+	let Database;
+	console.log(`Creating SQL engine ${this.engine}`)
+	switch(this.engine) {
+		case "wasm":
+			({ Database } = require("node-sqlite3-wasm"));
+			break;
+		case "better":
+			Database = require("better-sqlite3");
+			break;
+	}
+	this.db = new Database(databasePath,{
+		verbose: undefined && console.log
+	});
 	this.transactionDepth = 0;
 }
 
 SqlTiddlerDatabase.prototype.close = function() {
+	for(const sql in this.statements) {
+		this.statements[sql].finalize();
+	}
+	this.statements = Object.create(null);
 	this.db.close();
 	this.db = undefined;
 };
 
-SqlTiddlerDatabase.prototype.runStatement = function(sql,params) {
+SqlTiddlerDatabase.prototype.normaliseParams = function(params) {
 	params = params || {};
-	const statement = this.db.prepare(sql);
+	const result = Object.create(null);
+	for(const paramName in params) {
+		if(this.engine !== "wasm" && paramName.startsWith("$")) {
+			result[paramName.slice(1)] = params[paramName];
+		} else {
+			result[paramName] = params[paramName];
+		}
+	}
+	return result;
+};
+
+SqlTiddlerDatabase.prototype.prepareStatement = function(sql) {
+	if(!(sql in this.statements)) {
+		this.statements[sql] = this.db.prepare(sql);
+	}
+	return this.statements[sql];
+};
+
+SqlTiddlerDatabase.prototype.runStatement = function(sql,params) {
+	params = this.normaliseParams(params);
+	const statement = this.prepareStatement(sql);
 	return statement.run(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGet = function(sql,params) {
-	params = params || {};
-	const statement = this.db.prepare(sql);
+	params = this.normaliseParams(params);
+	const statement = this.prepareStatement(sql);
 	return statement.get(params);
 };
 
 SqlTiddlerDatabase.prototype.runStatementGetAll = function(sql,params) {
-	params = params || {};
-	const statement = this.db.prepare(sql);
+	params = this.normaliseParams(params);
+	const statement = this.prepareStatement(sql);
 	return statement.all(params);
 };
 
@@ -134,7 +176,7 @@ SqlTiddlerDatabase.prototype.createBag = function(bagname,description) {
 		INSERT OR IGNORE INTO bags (bag_name, accesscontrol, description)
 		VALUES ($bag_name, '', '')
 	`,{
-		bag_name: bagname
+		$bag_name: bagname
 	});
 	this.runStatement(`
 		UPDATE bags
@@ -142,9 +184,9 @@ SqlTiddlerDatabase.prototype.createBag = function(bagname,description) {
 		description = $description 
 		WHERE bag_name = $bag_name
 	`,{
-		bag_name: bagname,
-		accesscontrol: "[some access control stuff]",
-		description: description
+		$bag_name: bagname,
+		$accesscontrol: "[some access control stuff]",
+		$description: description
 	});
 };
 
@@ -182,15 +224,15 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames,descrip
 		-- Delete existing recipe_bags entries for this recipe
 		DELETE FROM recipe_bags WHERE recipe_id = (SELECT recipe_id FROM recipes WHERE recipe_name = $recipe_name)
 	`,{
-		recipe_name: recipename
+		$recipe_name: recipename
 	});
 	this.runStatement(`
 		-- Create the entry in the recipes table if required
 		INSERT OR REPLACE INTO recipes (recipe_name, description)
 		VALUES ($recipe_name, $description)
 	`,{
-		recipe_name: recipename,
-		description: description
+		$recipe_name: recipename,
+		$description: description
 	});
 	this.runStatement(`
 		INSERT INTO recipe_bags (recipe_id, bag_id, position)
@@ -200,8 +242,8 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames,descrip
 		INNER JOIN json_each($bag_names) AS j ON j.value = b.bag_name
 		WHERE r.recipe_name = $recipe_name
 	`,{
-		recipe_name: recipename,
-		bag_names: JSON.stringify(bagnames)
+		$recipe_name: recipename,
+		$bag_names: JSON.stringify(bagnames)
 	});
 };
 
@@ -217,8 +259,8 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
 			$title
 		)
 	`,{
-		title: tiddlerFields.title,
-		bag_name: bagname
+		$title: tiddlerFields.title,
+		$bag_name: bagname
 	});
 	// Update the fields table
 	this.runStatement(`
@@ -238,9 +280,9 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
 		) AS t
 		JOIN json_each($field_values) AS json_each
 	`,{
-		title: tiddlerFields.title,
-		bag_name: bagname,
-		field_values: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined}))
+		$title: tiddlerFields.title,
+		$bag_name: bagname,
+		$field_values: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined}))
 	});
 	return {
 		tiddler_id: info.lastInsertRowid
@@ -268,7 +310,7 @@ SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipena
 		) AS selected_bag
 		ON b.bag_id = selected_bag.bag_id
 	`,{
-		recipe_name: recipename
+		$recipe_name: recipename
 	});
 	if(!row) {
 		return null;
@@ -292,8 +334,8 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
 			WHERE b.bag_name = $bag_name AND t.title = $title
 		)
 	`,{
-		title: title,
-		bag_name: bagname
+		$title: title,
+		$bag_name: bagname
 	});
 	this.runStatement(`
 		DELETE FROM tiddlers
@@ -303,8 +345,8 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
 			WHERE bag_name = $bag_name
 		) AND title = $title
 	`,{
-		title: title,
-		bag_name: bagname
+		$title: title,
+		$bag_name: bagname
 	});
 };
 
@@ -322,8 +364,8 @@ SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bagname) {
 			WHERE t.title = $title AND b.bag_name = $bag_name
 		)
 	`,{
-		title: title,
-		bag_name: bagname
+		$title: title,
+		$bag_name: bagname
 	});
 	if(rows.length === 0) {
 		return null;
@@ -353,8 +395,8 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
 		ORDER BY rb.position DESC
 		LIMIT 1
 	`,{
-		title: title,
-		recipe_name: recipename
+		$title: title,
+		$recipe_name: recipename
 	});
 	if(!rowTiddlerId) {
 		return null;
@@ -365,8 +407,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
 		FROM fields
 		WHERE tiddler_id = $tiddler_id
 	`,{
-		tiddler_id: rowTiddlerId.tiddler_id,
-		recipe_name: recipename
+		$tiddler_id: rowTiddlerId.tiddler_id
 	});
 	return {
 		bag_name: rowTiddlerId.bag_name,
@@ -392,7 +433,7 @@ SqlTiddlerDatabase.prototype.getBagTiddlers = function(bagname) {
 		)
 		ORDER BY title ASC
 	`,{
-		bag_name: bagname
+		$bag_name: bagname
 	});
 	return rows.map(value => value.title);
 };
@@ -414,7 +455,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
 			ORDER BY t.title
 		)
 	`,{
-		recipe_name: recipename
+		$recipe_name: recipename
 	});
 	return rows;
 };
@@ -428,7 +469,7 @@ SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bagname) {
 			WHERE bag_name = $bag_name
 		)
 	`,{
-		bag_name: bagname
+		$bag_name: bagname
 	});
 };
 
@@ -448,7 +489,7 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 		) AS bag_priority ON bags.bag_id = bag_priority.bag_id
 		ORDER BY position
 	`,{
-		recipe_name: recipename
+		$recipe_name: recipename
 	});
 	return rows.map(value => value.bag_name);
 };
@@ -459,16 +500,21 @@ Execute the given function in a transaction, committing if successful but rollin
 Calls to this function can be safely nested, but only the top-most call will actually take place in a transaction.
 */
 SqlTiddlerDatabase.prototype.transaction = function(fn) {
-	try {
-		const alreadyInTransaction = this.transactionDepth > 0;
-		this.transactionDepth++;
-		if(alreadyInTransaction) {
-			return fn();
-		} else {
-			return this.db.transaction(fn)();
+	const alreadyInTransaction = this.transactionDepth > 0;
+	this.transactionDepth++;
+	if(alreadyInTransaction) {
+		return fn();
+	} else {
+		try {
+			this.runStatement(`BEGIN TRANSACTION`);
+			var result = fn();
+			this.runStatement(`COMMIT TRANSACTION`);
+		} catch(e) {
+			this.runStatement(`ROLLBACK TRANSACTION`);
+		} finally {
+			this.transactionDepth--;
 		}
-	} finally {
-		this.transactionDepth--;
+		return result;
 	}
 };
 

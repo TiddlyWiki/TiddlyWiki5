@@ -20,6 +20,7 @@ Create a tiddler store. Options include:
 
 databasePath - path to the database file (can be ":memory:" to get a temporary database)
 adminWiki - reference to $tw.Wiki object into which entity state tiddlers should be saved
+engine - wasm | better
 */
 function SqlTiddlerStore(options) {
 	options = options || {};
@@ -29,7 +30,8 @@ function SqlTiddlerStore(options) {
 	this.databasePath = options.databasePath || ":memory:";
 	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-database.js").SqlTiddlerDatabase;
 	this.sqlTiddlerDatabase = new SqlTiddlerDatabase({
-		databasePath: this.databasePath
+		databasePath: this.databasePath,
+		engine: options.engine
 	});
 	this.sqlTiddlerDatabase.createTables();
 	this.updateAdminWiki();
