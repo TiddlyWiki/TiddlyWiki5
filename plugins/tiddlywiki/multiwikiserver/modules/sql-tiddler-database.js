@@ -500,16 +500,21 @@ Execute the given function in a transaction, committing if successful but rollin
 Calls to this function can be safely nested, but only the top-most call will actually take place in a transaction.
 */
 SqlTiddlerDatabase.prototype.transaction = function(fn) {
-	try {
-		const alreadyInTransaction = this.transactionDepth > 0;
-		this.transactionDepth++;
-		if(alreadyInTransaction) {
-			return fn();
-		} else {
-			return this.db.transaction(fn)();
+	const alreadyInTransaction = this.transactionDepth > 0;
+	this.transactionDepth++;
+	if(alreadyInTransaction) {
+		return fn();
+	} else {
+		try {
+			this.runStatement(`BEGIN TRANSACTION`);
+			var result = fn();
+			this.runStatement(`COMMIT TRANSACTION`);
+		} catch(e) {
+			this.runStatement(`ROLLBACK TRANSACTION`);
+		} finally {
+			this.transactionDepth--;
 		}
-	} finally {
-		this.transactionDepth--;
+		return result;
 	}
 };
 
