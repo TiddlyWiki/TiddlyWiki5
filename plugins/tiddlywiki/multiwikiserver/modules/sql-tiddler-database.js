@@ -16,6 +16,7 @@ Validation is for the most part left to the caller
 Create a tiddler store. Options include:
 
 databasePath - path to the database file (can be ":memory:" to get a temporary database)
+engine - wasm | better
 */
 function SqlTiddlerDatabase(options) {
 	options = options || {};
@@ -26,7 +27,7 @@ function SqlTiddlerDatabase(options) {
 		$tw.utils.createFileDirectories(options.databasePath);
 	}
 	// Choose engine
-	this.engine = "wasm"; // wasm | better
+	this.engine = options.engine || "better"; // wasm | better
 	// Create the database
 	const databasePath = options.databasePath || ":memory:";
 	let Database;
