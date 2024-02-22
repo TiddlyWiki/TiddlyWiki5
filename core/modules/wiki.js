@@ -164,11 +164,52 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 			self.eventsTriggered = false;
 			if($tw.utils.count(changes) > 0) {
 				self.dispatchEvent("change",changes);
+				self.runFilteredActions();
 			}
 		});
 		this.eventsTriggered = true;
 	}
 };
+
+exports.runFilteredActions = function() {
+	if(!$tw.browser) {
+		return;
+	}
+	var self = this;
+	var now = (new Date()).getTime();
+	this.timestampLastRunFilteredActions = this.timestampLastRunFilteredActions || now;
+	this.intervalFilteredActions = this.intervalFilteredActions || 500;
+	if((this.timestampLastRunFilteredActions + this.intervalFilteredActions) > now) {
+		if(!this.filterActionTimerId) {
+			this.filterActionTimerId = setTimeout(function() {
+				self.filterActionTimerId = null;
+				self.runFilteredActions();
+			},this.intervalFilteredActions);
+		}
+		return;
+	}
+	this.timestampLastRunFilteredActions = now;
+	var filteredActions = $tw.wiki.getTiddlersWithTag("$:/tags/FilteredActions");
+	$tw.utils.each(filteredActions,function(filteredActionTitle) {
+		var tiddler = self.getTiddler(filteredActionTitle);
+		if(tiddler && tiddler.fields.filter) {
+			var results = self.filterTiddlers(tiddler.fields.filter);
+			if(results.length > 0) {
+				console.log("Executing actions",tiddler.fields.text,results)
+				self.invokeActionString(
+					tiddler.fields.text,
+					null,
+					{
+						results: $tw.utils.stringifyList(results),
+						jsonResults: JSON.stringify(results)
+					},{
+						parentWidget: $tw.rootWidget
+					}
+				);
+			}
+		}
+	});
+}
 
 exports.getSizeOfTiddlerEventQueue = function() {
 	return $tw.utils.count(this.changedTiddlers);
