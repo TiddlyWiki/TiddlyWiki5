@@ -27,7 +27,7 @@ function SqlTiddlerDatabase(options) {
 		$tw.utils.createFileDirectories(options.databasePath);
 	}
 	// Choose engine
-	this.engine = options.engine || "wasm"; // wasm | better
+	this.engine = options.engine || "better"; // wasm | better
 	// Create the database
 	const databasePath = options.databasePath || ":memory:";
 	let Database;
