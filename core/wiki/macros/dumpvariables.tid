@@ -51,14 +51,14 @@ tags: $:/tags/Global
 \procedure dv-clearStatesButton()
 <$button class="tc-btn-invisible tc-tiny-gap-left">
 	<!-- "search text details" should be preserved -->
-	<$action-deletetiddler $filter="[prefix<DV-SEARCH-STATE>] [<DV-TMP-SEARCH>]"/>
+	<$action-deletetiddler $filter="[prefix<DV-SEARCH-STATE>]"/>
 	{{$:/core/images/fold-all-button}}
 </$button>
 \end
 
 \procedure dv-clearSearchButton()
 <$button class="tc-btn-invisible tc-tiny-gap-left">
-	<$action-deletetiddler $tiddler=<<DV-TMP-SEARCH>>/>
+	<$action-deletetiddler $tiddler=<<tf.dv-searchText>>/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
