@@ -1,21 +1,25 @@
 created: 20150221151358000
-modified: 20240220015920165
+modified: 20240221165833692
 tags: [[dumpvariables Macro]] [[Macro Examples]]
 title: dumpvariables Macro (Examples)
 type: text/vnd.tiddlywiki
+
+The following example will list all variables that contain the word "example" in uppercase ''and'' also lowercase, due to the default setting of the <<.olink search>> operator.
 
 <$macrocall $name=".example" n="1"
 eg="""<$let EXAMPLE="123" >
 <<dumpvariables subfilter:"[search::some[EXAMPLE dumpvariables]]">>
 </$let>"""/>
 
-<$macrocall $name=".example" n="2"
-eg="""<<dumpvariables subfilter:"[prefix[.a]]">>"""/>
-
 Listing only specific varibles can be achieved using the <<.olink search>> operator as a subfilter
 
+<$macrocall $name=".example" n="2"
+eg="""<$let EXAMPLE="123" >
+<<dumpvariables subfilter:"[search::casesensitive,some[EXAMPLE dumpvariables]]">>
+</$let>"""/>
+
 <$macrocall $name=".example" n="3"
-eg="""<<dumpvariables  sort:"raw"  subfilter:"[search::some[sort .attr]]">>"""/>
+eg="""<<dumpvariables subfilter:"[prefix[.a]]">>"""/>
 
 The following list will be very long. It shows all variables known within this tiddler. Using the macro in a different context. Eg: the sidebar, variables will have different values.
 
