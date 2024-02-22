@@ -23,7 +23,8 @@ exports.startup = function() {
 	// Create and initialise the tiddler store and upload manager
 	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore,
 		store = new SqlTiddlerStore({
-			databasePath: path.resolve($tw.boot.wikiPath,"store/database.sqlite")
+			databasePath: path.resolve($tw.boot.wikiPath,"store/database.sqlite"),
+			engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine","better") // better || wasm
 		}),
 		UploadManager = require("$:/plugins/tiddlywiki/multiwikiserver/upload-manager.js").UploadManager,
 		uploadManager = new UploadManager({
