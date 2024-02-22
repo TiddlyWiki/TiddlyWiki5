@@ -85,25 +85,28 @@ SqlTiddlerStore.prototype.saveEntityStateTiddler = function(tiddler) {
 };
 
 SqlTiddlerStore.prototype.updateAdminWiki = function() {
-	// Update bags
-	for(const bagInfo of this.listBags()) {
-		this.saveEntityStateTiddler({
-			title: "bags/" + bagInfo.bag_name,
-			"bag-name": bagInfo.bag_name,
-			text: bagInfo.description
-		});
-	}
-	// Update recipes
-	for(const recipeInfo of this.listRecipes()) {
-		this.saveEntityStateTiddler({
-			title: "recipes/" + recipeInfo.recipe_name,
-			"recipe-name": recipeInfo.recipe_name,
-			text: recipeInfo.description,
-			list: $tw.utils.stringifyList(this.getRecipeBags(recipeInfo.recipe_name).map(bag_name => {
-				return this.entityStateTiddlerPrefix + "bags/" + bag_name;
-			}))
-		});
-	}
+	var self = this;
+	return this.sqlTiddlerDatabase.transaction(function() {
+		// Update bags
+		for(const bagInfo of self.listBags()) {
+			self.saveEntityStateTiddler({
+				title: "bags/" + bagInfo.bag_name,
+				"bag-name": bagInfo.bag_name,
+				text: bagInfo.description
+			});
+		}
+		// Update recipes
+		for(const recipeInfo of self.listRecipes()) {
+			self.saveEntityStateTiddler({
+				title: "recipes/" + recipeInfo.recipe_name,
+				"recipe-name": recipeInfo.recipe_name,
+				text: recipeInfo.description,
+				list: $tw.utils.stringifyList(self.getRecipeBags(recipeInfo.recipe_name).map(bag_name => {
+					return self.entityStateTiddlerPrefix + "bags/" + bag_name;
+				}))
+			});
+		}
+	});
 };
 
 /*
@@ -137,17 +140,20 @@ SqlTiddlerStore.prototype.processCanonicalUriTiddler = function(tiddlerFields,ba
 
 
 SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag_name) {
-	// Clear out the bag
-	this.deleteAllTiddlersInBag(bag_name);
-	// Get the tiddlers
-	var path = require("path");
-	var tiddlersFromPath = $tw.loadTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,tiddler_files_path));
-	// Save the tiddlers
-	for(const tiddlersFromFile of tiddlersFromPath) {
-		for(const tiddler of tiddlersFromFile.tiddlers) {
-			this.saveBagTiddler(tiddler,bag_name);
+	var self = this;
+	this.sqlTiddlerDatabase.transaction(function() {
+		// Clear out the bag
+		self.deleteAllTiddlersInBag(bag_name);
+		// Get the tiddlers
+		var path = require("path");
+		var tiddlersFromPath = $tw.loadTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,tiddler_files_path));
+		// Save the tiddlers
+		for(const tiddlersFromFile of tiddlersFromPath) {
+			for(const tiddler of tiddlersFromFile.tiddlers) {
+				self.saveBagTiddler(tiddler,bag_name);
+			}
 		}
-	}
+	});
 };
 
 SqlTiddlerStore.prototype.logTables = function() {
@@ -159,17 +165,20 @@ SqlTiddlerStore.prototype.listBags = function() {
 };
 
 SqlTiddlerStore.prototype.createBag = function(bagname,description) {
-	const validationBagName = this.validateItemName(bagname);
-	if(validationBagName) {
-		return {message: validationBagName};
-	}
-	this.sqlTiddlerDatabase.createBag(bagname,description);
-	this.saveEntityStateTiddler({
-		title: "bags/" + bagname,
-		"bag-name": bagname,
-		text: description
+	var self = this;
+	return this.sqlTiddlerDatabase.transaction(function() {
+		const validationBagName = self.validateItemName(bagname);
+		if(validationBagName) {
+			return {message: validationBagName};
+		}
+		self.sqlTiddlerDatabase.createBag(bagname,description);
+		self.saveEntityStateTiddler({
+			title: "bags/" + bagname,
+			"bag-name": bagname,
+			text: description
+		});
+		return null;
 	});
-	return null;
 };
 
 SqlTiddlerStore.prototype.listRecipes = function() {
@@ -193,16 +202,19 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,descriptio
 	if(bagnames.length === 0) {
 		return {message: "Recipes must contain at least one bag"};
 	}
-	this.sqlTiddlerDatabase.createRecipe(recipename,bagnames,description);
-	this.saveEntityStateTiddler({
-		title: "recipes/" + recipename,
-		"recipe-name": recipename,
-		text: description,
-		list: $tw.utils.stringifyList(bagnames.map(bag_name => {
-			return this.entityStateTiddlerPrefix + "bags/" + bag_name;
-		}))
+	var self = this;
+	return this.sqlTiddlerDatabase.transaction(function() {
+		self.sqlTiddlerDatabase.createRecipe(recipename,bagnames,description);
+		self.saveEntityStateTiddler({
+			title: "recipes/" + recipename,
+			"recipe-name": recipename,
+			text: description,
+			list: $tw.utils.stringifyList(bagnames.map(bag_name => {
+				return self.entityStateTiddlerPrefix + "bags/" + bag_name;
+			}))
+		});
+		return null;
 	});
-	return null;
 };
 
 /*
@@ -272,7 +284,10 @@ SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipename) {
 };
 
 SqlTiddlerStore.prototype.deleteAllTiddlersInBag = function(bagname) {
-	return this.sqlTiddlerDatabase.deleteAllTiddlersInBag(bagname);
+	var self = this;
+	return this.sqlTiddlerDatabase.transaction(function() {
+		return self.sqlTiddlerDatabase.deleteAllTiddlersInBag(bagname);
+	});
 };
 
 /*

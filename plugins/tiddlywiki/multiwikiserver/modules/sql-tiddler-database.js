@@ -42,6 +42,7 @@ function SqlTiddlerDatabase(options) {
 	this.db = new Database(databasePath,{
 		verbose: undefined && console.log
 	});
+	this.transactionDepth = 0;
 }
 
 SqlTiddlerDatabase.prototype.close = function() {
@@ -490,6 +491,25 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 		$recipe_name: recipename
 	});
 	return rows.map(value => value.bag_name);
+};
+
+/*
+Execute the given function in a transaction, committing if successful but rolling back if an error occurs.  Returns whatever the given function returns.
+
+Calls to this function can be safely nested, but only the top-most call will actually take place in a transaction.
+*/
+SqlTiddlerDatabase.prototype.transaction = function(fn) {
+	try {
+		const alreadyInTransaction = this.transactionDepth > 0;
+		this.transactionDepth++;
+		if(alreadyInTransaction) {
+			return fn();
+		} else {
+			return this.db.transaction(fn)();
+		}
+	} finally {
+		this.transactionDepth--;
+	}
 };
 
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
