@@ -50,7 +50,7 @@ SqlTiddlerDatabase.prototype.close = function() {
 	for(const sql in this.statements) {
 		if(this.statements[sql].finalize) {
 			this.statements[sql].finalize();
-		}	
+		}
 	}
 	this.statements = Object.create(null);
 	this.db.close();
