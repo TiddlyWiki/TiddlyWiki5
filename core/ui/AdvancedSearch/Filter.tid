@@ -1,8 +1,6 @@
-caption: {{$:/language/Search/Filter/Caption}}
-created: 20240223123612216
-modified: 20240223123648727
-tags: $:/tags/AdvancedSearch
 title: $:/core/ui/AdvancedSearch/Filter
+tags: $:/tags/AdvancedSearch
+caption: {{$:/language/Search/Filter/Caption}}
 
 \define lingo-base() $:/language/Search/
 \define set-next-input-tab(beforeafter:"after")

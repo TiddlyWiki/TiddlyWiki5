@@ -1,8 +1,6 @@
-caption: {{$:/language/Search/Standard/Caption}}
-created: 20240223125427648
-modified: 20240223130003255
-tags: $:/tags/AdvancedSearch
 title: $:/core/ui/AdvancedSearch/Standard
+tags: $:/tags/AdvancedSearch
+caption: {{$:/language/Search/Standard/Caption}}
 
 \define lingo-base() $:/language/Search/
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
