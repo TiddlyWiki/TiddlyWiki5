@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/mws-load.js
 type: application/javascript
 module-type: command
 
-Command to load tiddlers from a file or directory
+Command to load tiddlers from a directory
 
 \*/
 (function(){
@@ -39,47 +39,53 @@ function loadBackupArchive(archivePath) {
 	path = require("path");
 	// Iterate the bags
 	const bagNames = fs.readdirSync(path.resolve(archivePath,"bags")).filter(filename => filename !== ".DS_Store");
-	for(const bagName of bagNames) {
+	for(const bagFilename of bagNames) {
+		const bagName = decodeURIComponent(bagFilename);
 		console.log(`Reading bag ${bagName}`);
-		$tw.mws.store.createBag(decodeURIComponent(bagName),"No description for " + bagName);
-		// Read the metadata
-		const jsonInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"bags",bagName,"meta/info.json"),"utf8"));
-		if(fs.existsSync(path.resolve(archivePath,"bags",bagName,"tiddlers"))) {
-			// Read each tiddler
-			const tiddlerFilenames = fs.readdirSync(path.resolve(archivePath,"bags",bagName,"tiddlers")).filter(filename => filename !== ".DS_Store");
+		const bagInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"bags",bagFilename,"meta.json"),"utf8"));
+		$tw.mws.store.createBag(bagName,bagInfo.description,bagInfo.accesscontrol);
+		if(fs.existsSync(path.resolve(archivePath,"bags",bagFilename,"tiddlers"))) {
+			const tiddlerFilenames = fs.readdirSync(path.resolve(archivePath,"bags",bagFilename,"tiddlers"));
 			for(const tiddlerFilename of tiddlerFilenames) {
-				const tiddlerPath = path.resolve(archivePath,"bags",bagName,"tiddlers",tiddlerFilename),
-					jsonTiddler = fs.readFileSync(tiddlerPath,"utf8"),
-					tiddler = JSON.parse(jsonTiddler);
-				if(tiddler) {
-					var sanitisedFields = Object.create(null);
-					for(const fieldName in tiddler) {
-						const fieldValue = tiddler[fieldName];
-						let sanitisedValue = "";
-						if(typeof fieldValue === "string") {
-							sanitisedValue = fieldValue;
-						} else if($tw.utils.isDate(fieldValue)) {
-							sanitisedValue = $tw.utils.stringifyDate(fieldValue);
-						} else if($tw.utils.isArray(fieldValue)) {
-							sanitisedValue = $tw.utils.stringifyList(fieldValue);
-						}
-						sanitisedFields[fieldName] = sanitisedValue;
+				if(tiddlerFilename.endsWith(".json")) {
+					const tiddlerPath = path.resolve(archivePath,"bags",bagFilename,"tiddlers",tiddlerFilename),
+						jsonTiddler = fs.readFileSync(tiddlerPath,"utf8"),
+						tiddler = sanitiseTiddler(JSON.parse(jsonTiddler));
+					if(tiddler && tiddler.title) {
+						$tw.mws.store.saveBagTiddler(tiddler,bagName);
+					} else {
+						console.log(`Malformed JSON tiddler in file ${tiddlerPath}`);
 					}
-					if(sanitisedFields.title) {
-						$tw.mws.store.saveBagTiddler(sanitisedFields,decodeURIComponent(bagName));
-					}
-				} else {
-					console.log(`Malformed JSON tiddler in file ${tiddlerPath}`);
 				}
 			}	
 		}
 	}
 	// Iterate the recipes
-	const recipeNames = fs.readdirSync(path.resolve(archivePath,"recipes")).filter(filename => filename !== ".DS_Store");
-	for(const recipeName of recipeNames) {
-		const jsonInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"recipes",recipeName,"info.json"),"utf8"));
-		$tw.mws.store.createRecipe(decodeURIComponent(recipeName),jsonInfo.recipe.map(recipeLine => recipeLine[0]),"No description for " + recipeName);
+	const recipeNames = fs.readdirSync(path.resolve(archivePath,"recipes"));
+	for(const recipeFilename of recipeNames) {
+		if(recipeFilename.endsWith(".json")) {
+			const recipeName = decodeURIComponent(recipeFilename.substring(0,recipeFilename.length - ".json".length));
+			const jsonInfo = JSON.parse(fs.readFileSync(path.resolve(archivePath,"recipes",recipeFilename),"utf8"));
+			$tw.mws.store.createRecipe(recipeName,jsonInfo.bag_names,jsonInfo.description,jsonInfo.accesscontrol);
+		}
 	}
+};
+
+function sanitiseTiddler(tiddler) {
+	var sanitisedFields = Object.create(null);
+	for(const fieldName in tiddler) {
+		const fieldValue = tiddler[fieldName];
+		let sanitisedValue = "";
+		if(typeof fieldValue === "string") {
+			sanitisedValue = fieldValue;
+		} else if($tw.utils.isDate(fieldValue)) {
+			sanitisedValue = $tw.utils.stringifyDate(fieldValue);
+		} else if($tw.utils.isArray(fieldValue)) {
+			sanitisedValue = $tw.utils.stringifyList(fieldValue);
+		}
+		sanitisedFields[fieldName] = sanitisedValue;
+	}
+	return sanitisedFields;
 }
 
 exports.Command = Command;
