@@ -21,9 +21,11 @@ tags: $:/tags/Global
 <!-- =================== -->
 <!-- dumpvariables main  -->
 <!-- =================== -->
-\procedure dumpvariables(type sort:"sort" subfilter:"[[]]" format)
-<!-- The following function default value may be different for dumpvariables and search-variables -->
+\procedure dumpvariables(type sort subfilter:"[[]]" format)
+<!-- The following function is needed since the "format" string can contain closing brackets ")" -->
 \function _tf.dv-varFormat() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
+\function _tf.dv-type() [<type>]
+\function _tf.dv-sort() [<sort>]
 <ul>
 	<$list filter="[subfilter<tf.dv-filterString>] +[filter<subfilter>]" variable="varname">
 		<li>
@@ -98,27 +100,29 @@ tags: $:/tags/Global
 	margin-right: .25em;
 }
 </style>
-<span class="tc-dv-filterOptions">
+<span class="tc-dv-filterOptions tc-small-gap-right">
+{{$:/language/Search/Variables/Option/Type}}
 <$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
-	<$checkbox tiddler=<<tf.dv-tmpFilterOptions>> listField="text" checked=<<option>>
-		class="tc-big-gap-right" data-gap="right"
+	<$checkbox tiddler=<<tf.dv-tmpTypeOptions>> listField="text" checked=<<option>>
+		class="tc-small-gap-left tc-small-gap-right" data-gap="right"
 	>
 		<<option>>
 	</$checkbox>
-</$list>
+</$list>|
 </span>
 \end
 
 \procedure dv-sortOptions()
-<span>
-	<$select tiddler=<<tf.dv-tmpSortOptions>> default="alphabetical">
+<span class="tc-dv-sortOptions">
+	{{$:/language/Search/Variables/Option/Sort}}
+	<$select tiddler=<<tf.dv-tmpSortOptions>> default="alphabetical" class="tc-tiny-gap-left">
 		<option value="alphabetical">alphabetical</option>
 		<option value="raw">raw</option>
 	</$select>
 </span>
 \end
 
-\function tf.dv-tmpFilterOptions() [<DV-TMP-FILTER-OPTIONS>] [<qualify>] +[join[/]]
+\function tf.dv-tmpTypeOptions() [<DV-TMP-FILTER-OPTIONS>] [<qualify>] +[join[/]]
 \function tf.dv-tmpSortOptions() [<DV-TMP-SORT-OPTIONS>] [<qualify>] +[join[/]]
 
 \function tf.dv-searchText() [<DV-TMP-SEARCH>] [<qualify>] +[join[/]]
@@ -134,10 +138,10 @@ tags: $:/tags/Global
 <!-- search-variables main function -->
 <!-- ============================== -->
 \procedure search-variables(type sort subfilter:"[[]]" format)
-<!-- The following function default value may be different for dumpvariables and search-variables -->
+<!-- The following function is needed since the "format" string can contain closing brackets ")" -->
 \function _tf.dv-varFormat() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
-\function _tf.dv-type() [<type>!is[blank]then<type>] :else[<tf.dv-tmpFilterOptions>get[text]]
-\function _tf.dv-sort() [<sort>!is[blank]then<sort>] :else[<tf.dv-tmpSortOptions>get[text]]  :else[[alphabetical]]
+\function _tf.dv-type() [<type>!is[blank]then<type>] :else[<tf.dv-tmpTypeOptions>get[text]]
+\function _tf.dv-sort() [<sort>!is[blank]then<sort>] :else[<tf.dv-tmpSortOptions>get[text]] :else[[alphabetical]]
 
 <% if [<type>is[blank]] %>
 	<<dv-filterOptions>>
@@ -149,7 +153,7 @@ tags: $:/tags/Global
 	<% if [<thisTiddler>!match[$:/AdvancedSearch]] %>
 		<$text text={{$:/language/Search/Variables/Search}}/>
 		<%if [<sort>!is[blank]] %><code class="tc-small-gap">sort:<<_tf.dv-sort>></code><%endif%>
-		<%if [<type>!is[blank]] %><code class="tc-small-gap">type:<<_tf.dv-sort>></code><%endif%>
+		<%if [<type>!is[blank]] %><code class="tc-small-gap">type:<<_tf.dv-type>></code><%endif%>
 	<% endif %>
 	<$edit-text tiddler=<<tf.dv-searchText>> tag=input/> <<dv-clearSearchButton>>
 	<% if [<DV-SEARCH-STATE>get[text]match[yes]] %>
@@ -168,7 +172,7 @@ tags: $:/tags/Global
 		<% endif %>
 		<code class="tc-small-gap-right"><$text text=<<tf.dv-formattedVar>>/></code>
 		<% if [<tf.dv-formattedVar>prefix[\function]] %>
-			<code class="tc-tiny-gap-right"><$text text={{{ [<varname>format:variable[$firstLine$]] }}}/></code>
+			<span class="tc-tiny-gap-right"><$text text={{{ [<varname>format:variable[$firstLine$]] }}}/></span>
 		<% endif %>
 	</$button>
 
