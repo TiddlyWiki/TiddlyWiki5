@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/mws-save.js
+title: $:/plugins/tiddlywiki/multiwikiserver/mws-save-archive.js
 type: application/javascript
 module-type: command
 
-Command to save tiddlers to a directory
+Command to load an archive of recipes, bags and tiddlers to a directory
 
 \*/
 (function(){
@@ -27,7 +27,7 @@ Command.prototype.execute = function() {
 	var self = this;
 	// Check parameters
 	if(this.params.length < 1) {
-		return "Missing directory path";
+		return "Missing pathname";
 	}
 	var archivePath = this.params[0];
 	saveArchive(archivePath);

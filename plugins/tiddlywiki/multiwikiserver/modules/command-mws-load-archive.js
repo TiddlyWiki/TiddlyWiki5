@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/mws-load.js
+title: $:/plugins/tiddlywiki/multiwikiserver/mws-load-archive.js
 type: application/javascript
 module-type: command
 
-Command to load tiddlers from a directory
+Command to load archive of recipes, bags and tiddlers from a directory
 
 \*/
 (function(){
@@ -13,7 +13,7 @@ Command to load tiddlers from a directory
 "use strict";
 
 exports.info = {
-	name: "mws-load",
+	name: "mws-load-archive",
 	synchronous: true
 };
 
@@ -27,7 +27,7 @@ Command.prototype.execute = function() {
 	var self = this;
 	// Check parameters
 	if(this.params.length < 1) {
-		return "Missing filename";
+		return "Missing pathname";
 	}
 	var archivePath = this.params[0];
 	loadBackupArchive(archivePath);
