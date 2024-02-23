@@ -33,9 +33,9 @@ describe("SQL tiddler store", function() {
 		sqlTiddlerDatabase.createBag("bag-beta","Bag beta");
 		sqlTiddlerDatabase.createBag("bag-gamma","Bag gamma");
 		expect(sqlTiddlerDatabase.listBags()).toEqual([
-			{ bag_name: 'bag-alpha', accesscontrol: '[some access control stuff]', description: "Bag alpha" },
-			{ bag_name: 'bag-beta', accesscontrol: '[some access control stuff]', description: "Bag beta" },
-			{ bag_name: 'bag-gamma', accesscontrol: '[some access control stuff]', description: "Bag gamma" }
+			{ bag_name: 'bag-alpha', accesscontrol: '', description: "Bag alpha" },
+			{ bag_name: 'bag-beta', accesscontrol: '', description: "Bag beta" },
+			{ bag_name: 'bag-gamma', accesscontrol: '', description: "Bag gamma" }
 		]);
 		sqlTiddlerDatabase.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"Recipe rho");
 		sqlTiddlerDatabase.createRecipe("recipe-sigma",["bag-alpha","bag-gamma"],"Recipe sigma");
