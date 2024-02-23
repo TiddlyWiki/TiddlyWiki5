@@ -32,6 +32,13 @@ exports.handler = function(request,response,state) {
 			response.writeHead(200, "OK",{
 				"Content-Type":  "text/html"
 			});
+			response.write(`
+				<!doctype html>
+				<head>
+					<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+				</head>
+				<body>
+			`);
 			// Render the html
 			var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/get-bags",{
 				variables: {
@@ -40,6 +47,9 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			response.write(html);
+			response.write(`
+				</body>
+			`);
 			response.end();;
 		}
 	} else {
