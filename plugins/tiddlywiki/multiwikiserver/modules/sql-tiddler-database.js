@@ -172,7 +172,8 @@ SqlTiddlerDatabase.prototype.listBags = function() {
 	return rows;
 };
 
-SqlTiddlerDatabase.prototype.createBag = function(bagname,description) {
+SqlTiddlerDatabase.prototype.createBag = function(bagname,description,accesscontrol) {
+	accesscontrol = accesscontrol || "";
 	// Run the queries
 	this.runStatement(`
 		INSERT OR IGNORE INTO bags (bag_name, accesscontrol, description)
@@ -187,7 +188,7 @@ SqlTiddlerDatabase.prototype.createBag = function(bagname,description) {
 		WHERE bag_name = $bag_name
 	`,{
 		$bag_name: bagname,
-		$accesscontrol: "[some access control stuff]",
+		$accesscontrol: accesscontrol,
 		$description: description
 	});
 };
