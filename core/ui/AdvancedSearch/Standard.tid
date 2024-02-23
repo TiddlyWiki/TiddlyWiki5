@@ -1,6 +1,8 @@
-title: $:/core/ui/AdvancedSearch/Standard
-tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/Standard/Caption}}
+created: 20240223125427648
+modified: 20240223130003255
+tags: $:/tags/AdvancedSearch
+title: $:/core/ui/AdvancedSearch/Standard
 
 \define lingo-base() $:/language/Search/
 \define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
@@ -56,14 +58,15 @@ caption: {{$:/language/Search/Standard/Caption}}
 	userInput={{{ [[$:/temp/advancedsearch]get[text]] }}}
 	configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}
 	searchListState="$:/temp/advancedsearch/selected-item">
-<$list
-	filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]"
-	emptyMessage="<$list filter='[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]'><$transclude/></$list>">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]">
 <$macrocall $name="tabs"
 	tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"
 	default={{$:/config/SearchResults/Default}}
 	actions="<$action-setfield $tiddler='$:/state/advancedsearch/standard/currentTab' text=<<currentTab>>/>"
 	explicitState="$:/state/tab/search-results/advancedsearch" />
+</$list>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]  :else[[]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"><$transclude mode="block"/></$list>
 </$list>
 </$vars>
 </$list>
