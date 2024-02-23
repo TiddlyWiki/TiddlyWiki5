@@ -195,6 +195,11 @@ a.doc-from-version.doc-from-version-new {
     color: <<colour highlight-foreground>>;
 }
 
+a.doc-from-version svg {
+    fill: currentColor;
+    vertical-align: sub;
+}
+
 a.doc-deprecated-version.tc-tiddlylink {
     display: inline-block;
     border-radius: 1em;

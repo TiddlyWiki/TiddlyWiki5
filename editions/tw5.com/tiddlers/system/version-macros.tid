@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 \procedure .from-version-reference() 5.3.0
 
 \procedure .from-version-template(class, text)
-<$link to={{{ [<version>addprefix[Release ]] }}} class=<<class>> ><<text>><<version>></$link>
+<$link to={{{ [<version>addprefix[Release ]] }}} class=<<class>> >@@.tc-tiny-gap-right {{$:/core/images/info-button}}@@<<text>><<version>></$link>
 \end
 
 \procedure .from-version(version)
