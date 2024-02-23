@@ -1,0 +1,9 @@
+created: 20240218202032583
+modified: 20240219180731963
+tags: 
+title: test-dumpvariables
+type: text/vnd.tiddlywiki
+
+\procedure asdf(test:"hallo", x ) <<test>>
+
+<<dumpvariables >> 

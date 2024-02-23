@@ -1,0 +1,13 @@
+created: 20240218195424844
+modified: 20240223001316626
+tags: 
+title: dump-with-subfilter
+type: text/vnd.tiddlywiki
+
+<<dumpvariables  type:"fn" sort:"raw"  >>
+
+---
+
+<<dumpvariables  sort:raw subfilter:"[search::some[sort .attr ]]" >>
+
+ 

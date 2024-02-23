@@ -1,0 +1,21 @@
+created: 20240222140353499
+modified: 20240222142402534
+tags: 
+title: test-widget
+type: text/vnd.tiddlywiki
+
+\widget $my.widget(one:'Jaguar')
+<$text text=<<one>>/>
+<$slot $name="ts-raw">
+	Whale
+</$slot>
+\end
+
+<$my.widget one="Dingo">
+	Crocodile
+</$my.widget>
+
+<$my.widget/>
+
+<<dumpvariables subfilter:"[search::casesensitive,some[my. transc]]">>
+
