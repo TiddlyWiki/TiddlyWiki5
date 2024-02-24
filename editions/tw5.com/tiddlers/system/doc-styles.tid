@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20230325101137075
+modified: 20240223123123497
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -181,18 +181,23 @@ tr.doc-table-subheading {
 	fill: <<colour alert-highlight>>;
 }
 
-a.doc-from-version.tc-tiddlylink {
-    display: inline-block;
-    border-radius: 1em;
-	background: <<colour muted-foreground>>;
-	color: <<colour background>>;
-	fill: <<colour background>>;
-    padding: 0 0.4em;
-    font-size: 0.7em;
-    text-transform: uppercase;
+a.doc-from-version {
+    background-color: <<colour muted-foreground>>;
+    color: <$wikify name="background" text="<<colour muted-foreground>>" mode="inline"><$transclude $variable="contrastcolour" target=<<background>> colourA="#000000" colourB="#ffffff" /></$wikify>;
+    padding: 3px;
+    border-radius: 4px;
     font-weight: bold;
-    line-height: 1.5;
-    vertical-align: text-bottom;
+    font-size: 0.75em;
+}
+
+a.doc-from-version.doc-from-version-new {
+    background-color: <<colour highlight-background>>;
+    color: <<colour highlight-foreground>>;
+}
+
+a.doc-from-version svg {
+    fill: currentColor;
+    vertical-align: sub;
 }
 
 a.doc-deprecated-version.tc-tiddlylink {

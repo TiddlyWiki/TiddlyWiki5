@@ -1,12 +1,19 @@
 code-body: yes
 created: 20161008085627406
-modified: 20221007122259593
+modified: 20231206135257498
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/version-macros
 type: text/vnd.tiddlywiki
 
-\define .from-version(version)
-<$link to={{{ [<__version__>addprefix[Release ]] }}} class="doc-from-version">{{$:/core/images/warning}} New in: <$text text=<<__version__>>/></$link>
+\procedure .from-version-reference() 5.3.0
+
+\procedure .from-version-template(class, text)
+<$link to={{{ [<version>addprefix[Release ]] }}} class=<<class>> >@@.tc-tiny-gap-right {{$:/core/images/info-button}}@@<<text>><<version>></$link>
+\end
+
+\procedure .from-version(version)
+<$list filter="[<version>compare:version:gteq<.from-version-reference>]"><<.from-version-template "doc-from-version doc-from-version-new" "New in v">></$list>
+<$list filter="[<version>compare:version:lt<.from-version-reference>]"><<.from-version-template "doc-from-version" "Introduced in v">></$list>
 \end
 
 \define .deprecated-since(version, superseded:"TODO-Link")

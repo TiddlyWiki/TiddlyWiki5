@@ -18,7 +18,7 @@ exports.info = {
 	name: "listen",
 	synchronous: true,
 	namedParameterMode: true,
-	mandatoryParameters: [],
+	mandatoryParameters: []
 };
 
 var Command = function(params,commander,callback) {
