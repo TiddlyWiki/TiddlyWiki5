@@ -500,7 +500,7 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 /*
 Execute the given function in a transaction, committing if successful but rolling back if an error occurs.  Returns whatever the given function returns.
 
-Calls to this function can be safely nested, but only the top-most call will actually take place in a transaction.
+Calls to this function can be safely nested, but only the topmost call will actually take place in a transaction.
 */
 SqlTiddlerDatabase.prototype.transaction = function(fn) {
 	const alreadyInTransaction = this.transactionDepth > 0;
@@ -508,12 +508,13 @@ SqlTiddlerDatabase.prototype.transaction = function(fn) {
 	if(alreadyInTransaction) {
 		return fn();
 	} else {
+		this.runStatement(`BEGIN TRANSACTION`);
 		try {
-			this.runStatement(`BEGIN TRANSACTION`);
 			var result = fn();
 			this.runStatement(`COMMIT TRANSACTION`);
 		} catch(e) {
 			this.runStatement(`ROLLBACK TRANSACTION`);
+			throw(e);
 		} finally {
 			this.transactionDepth--;
 		}
