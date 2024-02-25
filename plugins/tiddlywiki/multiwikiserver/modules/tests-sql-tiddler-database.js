@@ -14,11 +14,19 @@ Tests the SQL tiddler database layer
 
 if($tw.node) {
 
-describe("SQL tiddler store", function() {
+describe("SQL tiddler store with node-sqlite3-wasm", function() {
+	runSqlDatabaseTests("wasm");
+});
+
+describe("SQL tiddler store with node-sqlite3-wasm", function() {
+	runSqlDatabaseTests("better");
+});
+
+function runSqlDatabaseTests(engine) {
 	// Create and initialise the tiddler store
 	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-database.js").SqlTiddlerDatabase;
 	const sqlTiddlerDatabase = new SqlTiddlerDatabase({
-		adminWiki: new $tw.Wiki()
+		engine: engine
 	});
 	sqlTiddlerDatabase.createTables();
 	// Tear down
@@ -27,7 +35,7 @@ describe("SQL tiddler store", function() {
 		sqlTiddlerDatabase.close();
 	});
 	// Run tests
-	it("should save and retrieve tiddlers", function() {
+	it("should save and retrieve tiddlers using engine: " + engine, function() {
 		// Create bags and recipes
 		sqlTiddlerDatabase.createBag("bag-alpha","Bag alpha");
 		sqlTiddlerDatabase.createBag("bag-beta","Bag beta");
@@ -88,9 +96,8 @@ describe("SQL tiddler store", function() {
 		// Save a recipe tiddler
 		expect(sqlTiddlerDatabase.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho")).toEqual({tiddler_id: 5, bag_name: 'bag-beta'});
 		expect(sqlTiddlerDatabase.getRecipeTiddler("More","recipe-rho").tiddler).toEqual({title: "More", text: "None"});
-		
 	});
-});
+}
 
 }
 
