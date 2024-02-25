@@ -313,6 +313,7 @@ KeyboardManager.prototype.getShortcutTiddlerList = function() {
 
 KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 	this.shortcutTiddlers = tiddlerList;
+	var needsOverRide = false;
 	for(var i=0; i<tiddlerList.length; i++) {
 		var title = tiddlerList[i],
 			tiddlerFields = $tw.wiki.getTiddler(title).fields;
@@ -320,18 +321,22 @@ KeyboardManager.prototype.updateShortcutLists = function(tiddlerList) {
 		this.shortcutActionList[i] = tiddlerFields.text;
 		this.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ? this.parseKeyDescriptors(this.shortcutKeysList[i]) : undefined;
 		this.shortcutPriorityList[i] = tiddlerFields.priority === "yes" ? true : false;
-	}
-	for(var j=0; j<tiddlerList.length; j++) {
-		var title = tiddlerList[j],
-			tiddlerFields = $tw.wiki.getTiddler(title).fields;
 		if(tiddlerFields.override === "yes") {
-			for(var k=0; k<tiddlerList.length; k++) {
-				var tiddlerTitle = tiddlerList[k];
-				if((k !== j) && (this.parseKeyDescriptors(this.shortcutKeysList[k]) === this.parseKeyDescriptors(this.shortcutKeysList[j]))) {
-					this.shortcutKeysList.splice(k,1);
-					this.shortcutActionList.splice(k,1);
-					this.shortcutParsedList.splice(k,1);
-					this.shortcutPriorityList.splice(k,1);
+			needsOverRide = true;
+		}
+	}
+	if(needsOverRide) {
+		for(var j=0; j<tiddlerList.length; j++) {
+			var title = tiddlerList[j],
+				tiddlerFields = $tw.wiki.getTiddler(title).fields;
+			if(tiddlerFields.override === "yes") {
+				for(var k=0; k<tiddlerList.length; k++) {
+					if((k !== j) && (this.parseKeyDescriptors(this.shortcutKeysList[k]) === this.parseKeyDescriptors(this.shortcutKeysList[j]))) {
+						this.shortcutKeysList.splice(k,1);
+						this.shortcutActionList.splice(k,1);
+						this.shortcutParsedList.splice(k,1);
+						this.shortcutPriorityList.splice(k,1);
+					}
 				}
 			}
 		}
