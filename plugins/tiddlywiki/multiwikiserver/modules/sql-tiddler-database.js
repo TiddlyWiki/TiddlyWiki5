@@ -501,6 +501,8 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 Execute the given function in a transaction, committing if successful but rolling back if an error occurs.  Returns whatever the given function returns.
 
 Calls to this function can be safely nested, but only the topmost call will actually take place in a transaction.
+
+TODO: better-sqlite3 provides its own transaction method which we should be using if available
 */
 SqlTiddlerDatabase.prototype.transaction = function(fn) {
 	const alreadyInTransaction = this.transactionDepth > 0;
