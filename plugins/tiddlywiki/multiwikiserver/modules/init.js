@@ -44,13 +44,13 @@ exports.startup = function() {
 		$tw.mws.store.createRecipe(options.recipeName,[options.bagName],options.recipeDescription);
 		$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,options.tiddlersPath),options.bagName);
 	}
-	// copyEdition({
-	// 	bagName: "docs",
-	// 	bagDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
-	// 	recipeName: "docs",
-	// 	recipeDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
-	// 	tiddlersPath: "tw5.com/tiddlers"
-	// });
+	copyEdition({
+		bagName: "docs",
+		bagDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
+		recipeName: "docs",
+		recipeDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
+		tiddlersPath: "tw5.com/tiddlers"
+	});
 	copyEdition({
 		bagName: "dev-docs",
 		bagDescription: "TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev",
