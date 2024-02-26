@@ -16,15 +16,6 @@ type: text/vnd.tiddlywiki
 \procedure .place(_) <code class="doc-place"><<_>></code>
 \procedure .preamble(_) <dl><dd class="doc-preamble"><<_>></dd></dl>
 
-<!-- Replaced by a new .note box with icon. Notes should _not_ be definition lists -->
-<!-- For HTML that's semantically wrong -->
-\procedure .note(_)
-@@.doc-note
-; Note
-: <<_>>
-@@
-\end
-
 \procedure .tid(_) <code class="doc-tiddler"><<_>></code>
 \procedure .tag(_) <code class="doc-tag"><<_>></code>
 \procedure .field(_) <code class="doc-field"><<_>></code>
@@ -219,12 +210,8 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 
 \procedure .banner-credits(credit,url)
 <img src=<<url>> width="140" style="float:left;margin-right:0.5em;"/>
-
 <<credit>>
-
-<div style="clear:both;">
-
-</div>
+<div style="clear:both;"/>
 \end
 
 \procedure .contributors(usernames)
