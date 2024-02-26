@@ -507,20 +507,22 @@ TODO: better-sqlite3 provides its own transaction method which we should be usin
 SqlTiddlerDatabase.prototype.transaction = function(fn) {
 	const alreadyInTransaction = this.transactionDepth > 0;
 	this.transactionDepth++;
-	if(alreadyInTransaction) {
-		return fn();
-	} else {
-		this.runStatement(`BEGIN TRANSACTION`);
-		try {
-			var result = fn();
-			this.runStatement(`COMMIT TRANSACTION`);
-		} catch(e) {
-			this.runStatement(`ROLLBACK TRANSACTION`);
-			throw(e);
-		} finally {
-			this.transactionDepth--;
+        try {
+		if(alreadyInTransaction) {
+			return fn();
+		} else {
+			this.runStatement(`BEGIN TRANSACTION`);
+			try {
+				var result = fn();
+				this.runStatement(`COMMIT TRANSACTION`);
+			} catch(e) {
+				this.runStatement(`ROLLBACK TRANSACTION`);
+				throw(e);
+			}
+			return result;
 		}
-		return result;
+	} finally {
+		this.transactionDepth--;
 	}
 };
 
