@@ -95,6 +95,7 @@ type: text/vnd.tiddlywiki
     explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
     class={{{ [[doc-tabs]] [<currentTiddler>encodeuricomponent[]escapecss[]addprefix[doc-tabs-]] +[join[ ]] }}} />
 \end
+
 \procedure .doc-tab-link(text, target, tooltip:"", class:"")
 <!-- figure out where the addressed doc-tabs are -->
 <$tiddler tiddler={{{ [<currentTiddler>search:text[.doc-tabs]] :else[<currentTiddler>tags[]search:text[.doc-tabs]first[]] :else[<currentTiddler>] }}} >
@@ -111,6 +112,7 @@ type: text/vnd.tiddlywiki
 </$button>
 </$tiddler>
 \end
+
 \procedure .widget-attr-link(text, target)
 <$macrocall $name=".doc-tab-link" 
     text={{{ [[<code class="doc-attr">]] [<text>] [[</code>]] +[join[]] }}}
@@ -170,12 +172,12 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 <$list filter=`[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$(n)$]]` variable=".state">
 <$reveal state=<<.state>> type="nomatch" text="show">
 	<dl>
-	<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
+		<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
 	</dl>
 </$reveal>
 <$reveal state=<<.state>> type="match" text="show">
 	<dl>
-	<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
+		<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
 	</dl>
 	<blockquote class="doc-example-result">
 	<$reveal default=<<egvar>> type="match" text="NO-SUCH-VAR">
@@ -195,20 +197,25 @@ $$$
 
 \procedure .bad-example(eg)
 <table class="doc-bad-example">
-<tbody>
-<tr class="evenRow">
-<td><span style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
-<td>
+	<tbody>
+		<tr class="evenRow">
+			<td>
+				<span class="tc-small-gap-right" style="font-size:1.5em;">&#9888;</span>
+				Warning:<br> Don't do it this way!
+			</td>
+		<td>
 
-<<eg>>
-</td>
-</tr>
-</tbody>
+			<<eg>>
+			</td>
+		</tr>
+	</tbody>
 </table>
 \end
 
 \procedure .link-badge(text,link,colour)
-<a href=<<link>> class="doc-link-badge" style.background-color=<<colour>> target="_blank" rel="noopener noreferrer"><$text text=<<text>>/></a>
+<a href=<<link>> class="doc-link-badge" style.background-color=<<colour>> target="_blank" rel="noopener noreferrer">
+	<$text text=<<text>>/>
+</a>
 \end
 
 <!-- TODO use $:/palette colour settings -->
@@ -236,10 +243,15 @@ $$$
 
 \procedure .contributors(usernames)
 <ol class="doc-github-contributors">
-<$list filter="[enlist<usernames>sort[]]" variable="username">
-<li>
-<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/><span class="doc-github-contributor-username">@<$text text=<<username>>/></span></a>
-</li>
-</$list>
+	<$list filter="[enlist<usernames>sort[]]" variable="username">
+		<li>
+			<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">
+				<img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/>
+				<span class="doc-github-contributor-username">
+					@<$text text=<<username>>/>
+				</span>
+			</a>
+		</li>
+	</$list>
 </ol>
 \end
