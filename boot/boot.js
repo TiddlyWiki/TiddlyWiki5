@@ -786,6 +786,7 @@ $tw.utils.Crypto = function() {
 			}
 			return outputText;
 		};
+	$tw.sjcl = sjcl;
 	this.setPassword = function(newPassword) {
 		currentPassword = newPassword;
 		this.updateCryptoStateTiddler();
