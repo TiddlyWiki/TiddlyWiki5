@@ -158,41 +158,28 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 <<.lorem>>
 \end
 
-\procedure .example(n,eg,egvar:NO-SUCH-VAR)
+\procedure .example(n,eg,egvar)
+<$let eg={{{ [<egvar>!is[blank]getvariable[]] :else[<eg>] }}}>
 <div class="doc-example">
-<$reveal default=<<egvar>> type="match" text="NO-SUCH-VAR">
-	<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>/>
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
 	<$codeblock code=<<eg>>/>
-</$reveal>
-<$reveal default=<<egvar>> type="nomatch" text="NO-SUCH-VAR">
-	<!-- allow an example to contain """ -->
-	<$macrocall $name="copy-to-clipboard-above-right" src=<<egvar>>/>
-	<$codeblock code=<<egvar>>/>
-</$reveal>
-<$list filter=`[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$(n)$]]` variable=".state">
-<$reveal state=<<.state>> type="nomatch" text="show">
-	<dl>
-		<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
-	</dl>
-</$reveal>
-<$reveal state=<<.state>> type="match" text="show">
-	<dl>
-		<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
-	</dl>
-	<blockquote class="doc-example-result">
-	<$reveal default=<<egvar>> type="match" text="NO-SUCH-VAR">
-
-$$$text/vnd.tiddlywiki
-<<eg>>
-$$$
-
-	</$reveal>
-	<$reveal default=<<egvar>> type="nomatch" text="NO-SUCH-VAR">
-		<<egvar>>
-	</$reveal>
-	</blockquote>
-</$reveal>
-</$list>
+	<$list filter=`[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$(n)$]]` variable=".state">
+		<$reveal state=<<.state>> type="nomatch" text="show">
+			<dl>
+				<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
+			</dl>
+		</$reveal>
+		<$reveal state=<<.state>> type="match" text="show">
+			<dl>
+				<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
+			</dl>
+			<blockquote class="doc-example-result">
+				<<eg>>
+			</blockquote>
+		</$reveal>
+	</$list>
+</div>
+</$let>
 \end
 
 \procedure .bad-example(eg)
@@ -203,9 +190,8 @@ $$$
 				<span class="tc-small-gap-right" style="font-size:1.5em;">&#9888;</span>
 				Warning:<br> Don't do it this way!
 			</td>
-		<td>
-
-			<<eg>>
+			<td>
+				<$transclude $variable="eg" $mode="block"/>
 			</td>
 		</tr>
 	</tbody>
