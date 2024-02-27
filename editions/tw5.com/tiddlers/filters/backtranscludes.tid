@@ -8,6 +8,6 @@ op-input: a [[selection of titles|Title Selection]]
 op-parameter: none
 op-output: any non-[[system|SystemTiddlers]] titles that contain [[transclusion|Transclusion]] to the input titles
 
-Each input title is processed in turn. The corresponding tiddler's list of backtranscludes is generated, sorted alphabetically by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+<<.from-version 5.3.4>> Similar to [[backlinks|backlinks Operator]]. Each input title is processed in turn. The corresponding tiddler's list of backtranscludes is generated, sorted alphabetically by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output.
 
 <<.operator-examples "backtranscludes">>
