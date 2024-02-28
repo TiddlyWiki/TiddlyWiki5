@@ -1,5 +1,5 @@
 created: 20150221211317000
-modified: 20240128134650786
+modified: 20240228131331605
 tags: [[tag Macro]] [[Macro Examples]]
 title: tag Macro (Examples)
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 <$macrocall $name=".example" n="1" eg="""<<tag>>"""/>
 <$macrocall $name=".example" n="2" eg="""<<tag Concepts>>"""/>
 
-The Following tag is shown with a font-style: //italic// since it does not exits. 
+The Following tag can be shown with a font-style: //italic// if the corresponding stylesheet exists. See: [[tag Macro]]
 
 <$macrocall $name=".example" n="3" eg="""<<tag "Does not exist">>"""/>
 

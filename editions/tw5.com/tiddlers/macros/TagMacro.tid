@@ -1,14 +1,12 @@
 caption: tag
 created: 20141206130540337
-modified: 20240128142041965
+modified: 20240228131301798
 tags: Macros [[Core Macros]]
 title: tag Macro
 type: text/vnd.tiddlywiki
 
-\procedure resetTagStyleTemplate()
-.tc-tag-missing {
-	font-style: initial;
-}
+\procedure setTagStyleTemplate()
+
 \end
 
 \procedure resetTagStylesTitle() reset-tag-missing-styles
@@ -17,7 +15,7 @@ type: text/vnd.tiddlywiki
 <% if [<resetTagStylesTitle>!has[text]] %>
 <$action-createtiddler
 	$basetitle=<<resetTagStylesTitle>>
-	text=<<resetTagStyleTemplate>>
+	text=<<setTagStyleTemplate>>
 	code-body= "yes"
 	tags= "$:/tags/Stylesheet"
 />
@@ -38,22 +36,28 @@ The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag. Clic
 
 !! CSS classes
 
+<<.from-version "v5.3.4">>
+
 ; `tc-tag-missing`
 : This class is defined if a tag does ''not exist'' as a tiddler. By default the format is set to //italic//
 
 ; `tc-tag-exists`
 : This class is defined if a tag does exist as a tiddler. This class has ''no'' default definition
 
+To define the `tc-tag-missing` class a stylesheet tiddler needs to be created. Eg:
 
-!! Disabling CSS classes
+''title:'' `myTagsStylesheet`<br>
+''tag:'' `$:/tags/Stylesheet`
 
-To reset `tc-tag-missing` a stylesheet tiddler tagged: `$:/tags/Stylesheet` can be created.
-
-See: <<tag "Does not exist">>
-
-<$button actions=<<resetTagFormatting>>>Reset missing tag formatting</$button>
-<$button message="tm-delete-tiddler" param=<<resetTagStylesTitle>> >Delete tiddler: <<resetTagStylesTitle>></$button>
-
-<pre><code><$transclude $variable="resetTagStyleTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>
+<<copy-to-clipboard-above-right src:"""
+.tc-tag-missing {
+	font-style: italic;
+}
+""">>
+```
+.tc-tag-missing {
+	font-style: italic;
+}
+```
 
 <<.macro-examples "tag">>
