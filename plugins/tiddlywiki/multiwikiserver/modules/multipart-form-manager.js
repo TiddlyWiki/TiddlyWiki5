@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/upload-manager.js
+title: $:/plugins/tiddlywiki/multiwikiserver/multipart-form-manager.js
 type: application/javascript
 module-type: library
 
@@ -18,7 +18,7 @@ Create an instance of the upload manager. Options include:
 inboxPath - path to the inbox folder
 store - sqlTiddlerStore to use for saving tiddlers
 */
-function UploadManager(options) {
+function MultipartFormManager(options) {
 	const path = require("path");
 	options = options || {};
 	this.inboxPath = path.resolve(options.inboxPath,);
@@ -49,7 +49,7 @@ formData is:
 	]
 }
 */
-UploadManager.prototype.processNewStream = function(options) {
+MultipartFormManager.prototype.processNewStream = function(options) {
 	let fileStream = null;
 	let fieldValue = "";
 	state.streamMultipartData({
@@ -87,9 +87,9 @@ UploadManager.prototype.processNewStream = function(options) {
 	});
 }
 
-UploadManager.prototype.close = function() {
+MultipartFormManager.prototype.close = function() {
 };
 
-exports.UploadManager = UploadManager;
+exports.MultipartFormManager = MultipartFormManager;
 
 })();
