@@ -1,5 +1,5 @@
 created: 20190206140446821
-modified: 20220330133748666
+modified: 20230321133008898
 tags: Filters
 title: Mathematics Operators
 type: text/vnd.tiddlywiki
@@ -22,7 +22,7 @@ The mathematics operators take three different forms:
 ** <<.inline-operator-example "=1 =2 =3 =4 +[negate[]]">>
 ** <<.inline-operator-example "=1.2 =2.4 =3.6 =4.8 +[trunc[]]">>
 ** <<.inline-operator-example "=1.2 =2.4 =3.6 =4.8 +[round[]]">>
-* ''Binary operators'' apply an operation and operand to each number in the input list (e.g. add, multiply, remainder) 
+* ''Binary operators'' apply an operation and parameter to each number in the input list (e.g. add, multiply, remainder) 
 ** <<.inline-operator-example "=1 =2 =3 =4 +[add[3]]">>
 ** <<.inline-operator-example "=1 =2 =3 =4 +[multiply[8]]">>
 * ''Reducing operators'' apply an operation to all of the numbers in the input list, returning a single result (e.g. sum, product)

@@ -155,6 +155,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 };
 
 LinkWidget.prototype.handleClickEvent = function(event) {
+	// Force an error to try out the Red Screen Of Embarrassment
+	var something = Everything;
 	// Send the click on its way as a navigate event
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
