@@ -49,6 +49,7 @@ exports.handler = function(request,response,state) {
 			response.write(html);
 			response.write(`
 				</body>
+				</html>
 			`);
 			response.end();;
 		}
