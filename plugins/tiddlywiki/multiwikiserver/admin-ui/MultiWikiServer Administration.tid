@@ -19,9 +19,9 @@ title: MultiWikiServer Administration
 	\end completion-createBag
 	<$action-sendmessage
 		$message="tm-http-request"
-		url=`/wiki/$(name)$/bags/$(name)$`
+		url=`/wiki/${ [<name>encodeuricomponent[]] }$/bags/${ [<name>encodeuricomponent[]] }$`
 		method="PUT"
-		body=`{"description":"${ [<description>encodeuricomponent[]] }$"}`
+		body=`{"description":"${ [<description>] }$"}`
 		oncompletion=<<completion-createBag>>
 		var-errorTiddler=<<errorTiddler>>
 	/>
@@ -84,9 +84,9 @@ title: MultiWikiServer Administration
 	\end createRecipeJson
 	<$action-sendmessage
 		$message="tm-http-request"
-		url=`/wiki/$(name)$/recipes/$(name)$`
+		url=`/wiki/${ [<name>encodeuricomponent[]] }$/recipes/${ [<name>encodeuricomponent[]] }$`
 		method="PUT"
-		body=`{"bag_names":${ [<createRecipeJson>] }$,"description":"${ [<description>encodeuricomponent[]] }$"}`
+		body=`{"bag_names":${ [<createRecipeJson>] }$,"description":"${ [<description>] }$"}`
 		oncompletion=<<completion-createRecipe>>
 		var-errorTiddler=<<errorTiddler>>
 	/>
