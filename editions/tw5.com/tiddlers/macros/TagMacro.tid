@@ -19,12 +19,14 @@ The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag. Clic
 <<.from-version "v5.3.4">>
 
 ; `tc-tag-missing`
-: This class is defined if a tag does ''not exist'' as a tiddler. By default the format is set to //italic//
+: This class is defined if a tag does ''not exist'' as a tiddler.
 
 ; `tc-tag-exists`
-: This class is defined if a tag does exist as a tiddler. This class has ''no'' default definition
+: This class is defined if a tag does exist as a tiddler
 
-To define the `tc-tag-missing` class a stylesheet tiddler needs to be created. Eg:
+!!! Defining the class
+
+To define the `tc-tag-missing` class a stylesheet tiddler needs to be created. The default font-style for missing tiddler links is //italic//, so it's used for the example code below. Eg:
 
 ''title:'' `myTagsStylesheet`<br>
 ''tag:'' `$:/tags/Stylesheet`
