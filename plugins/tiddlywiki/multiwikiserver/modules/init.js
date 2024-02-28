@@ -67,8 +67,8 @@ exports.startup = function() {
 	$tw.mws.store.createRecipe("recipe-tau",["bag-alpha"],"Third Wiki");
 	$tw.mws.store.createRecipe("recipe-upsilon",["bag-alpha","bag-gamma","bag-beta"],"Fourth Wiki");
 	// Save tiddlers
-	$tw.mws.store.saveBagTiddler({title: "😀😃😄😁😆🥹😅😂",text: "Bag Alpha"},"bag-alpha");
 	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Alpha"},"bag-alpha");
+	$tw.mws.store.saveBagTiddler({title: "😀😃😄😁😆🥹😅😂",text: "Bag Alpha"},"bag-alpha");
 	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Beta"},"bag-beta");
 	$tw.mws.store.saveBagTiddler({title: "$:/SiteTitle",text: "Bag Gamma"},"bag-gamma");
 	console.timeEnd("mws-initial-load");
