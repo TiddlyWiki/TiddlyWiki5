@@ -1,7 +1,8 @@
 title: $:/core/ui/PageTemplate
+tags: $:/tags/Layout
 name: {{$:/language/PageTemplate/Name}}
 description: {{$:/language/PageTemplate/Description}}
-icon: $:/core/images/layout-button
+icon: $:/core/images/storyview-classic
 code-body: yes
 
 \whitespace trim

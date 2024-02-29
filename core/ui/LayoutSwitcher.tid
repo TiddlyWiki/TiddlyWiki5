@@ -5,7 +5,7 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 \whitespace trim
 <$linkcatcher to="$:/layout">
 <div class="tc-chooser">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] [[$:/core/ui/PageTemplate]] +[!is[draft]sort[name]]">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] +[!is[draft]sort[name]]">
 <$list
 	filter="[{$:/layout}!has[text]]"
 	variable="ignore"
