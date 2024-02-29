@@ -31,6 +31,7 @@ type: text/vnd.tiddlywiki
 	color: <<color very-muted-foreground>>;
 	font-style: normal;
 	font-weight: bold;
+	padding: 0;
 }
 
 .doc-button,
