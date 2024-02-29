@@ -2,8 +2,12 @@ title: $:/core/ui/ControlPanel/Settings/MissingLinks
 tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/MissingLinks/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/ControlPanel/Settings/MissingLinks/
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/MissingLinks" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/MissingLinks"><<lingo Description>></$link> </$checkbox>
-
+<$checkbox tiddler="$:/config/MissingLinks" field="text" checked="yes" unchecked="no" default="yes">
+	<$link to="$:/config/MissingLinks" class="tc-control-panel-item">
+		<span class="tc-tiny-gap-left"><<lingo Description>></span>
+	</$link>
+</$checkbox>

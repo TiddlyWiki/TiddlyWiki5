@@ -56,14 +56,15 @@ caption: {{$:/language/Search/Standard/Caption}}
 	userInput={{{ [[$:/temp/advancedsearch]get[text]] }}}
 	configTiddler={{{ [[$:/state/advancedsearch/standard/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}
 	searchListState="$:/temp/advancedsearch/selected-item">
-<$list
-	filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]"
-	emptyMessage="<$list filter='[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]'><$transclude/></$list>">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]">
 <$macrocall $name="tabs"
 	tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"
 	default={{$:/config/SearchResults/Default}}
 	actions="<$action-setfield $tiddler='$:/state/advancedsearch/standard/currentTab' text=<<currentTab>>/>"
 	explicitState="$:/state/tab/search-results/advancedsearch" />
+</$list>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]  :else[[]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]"><$transclude mode="block"/></$list>
 </$list>
 </$vars>
 </$list>
