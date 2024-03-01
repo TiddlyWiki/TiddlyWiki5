@@ -21,7 +21,7 @@ store - sqlTiddlerStore to use for saving tiddlers
 function MultipartFormManager(options) {
 	const path = require("path");
 	options = options || {};
-	this.inboxPath = path.resolve(options.inboxPath,);
+	this.inboxPath = options.inboxPath;
 	this.store = options.store;
 }
 
