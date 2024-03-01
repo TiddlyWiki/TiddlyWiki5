@@ -133,6 +133,7 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 			tiddler_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			bag_id INTEGER NOT NULL,
 			title TEXT NOT NULL,
+			attachment_blob TEXT, -- null or the name of an attachment blob
 			FOREIGN KEY (bag_id) REFERENCES bags(bag_id) ON UPDATE CASCADE ON DELETE CASCADE,
 			UNIQUE (bag_id, title)
 		)
@@ -253,16 +254,19 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames,descrip
 /*
 Returns {tiddler_id:}
 */
-SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
+SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname,attachment_blob) {
+	attachment_blob = attachment_blob || null;
 	// Update the tiddlers table
 	var info = this.runStatement(`
-		INSERT OR REPLACE INTO tiddlers (bag_id, title)
+		INSERT OR REPLACE INTO tiddlers (bag_id, title, attachment_blob)
 		VALUES (
 			(SELECT bag_id FROM bags WHERE bag_name = $bag_name),
-			$title
+			$title,
+			$attachment_blob
 		)
 	`,{
 		$title: tiddlerFields.title,
+		$attachment_blob: attachment_blob,
 		$bag_name: bagname
 	});
 	// Update the fields table
@@ -295,7 +299,7 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
 /*
 Returns {tiddler_id:,bag_name:} or null if the recipe is empty
 */
-SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipename) {
+SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipename,attachment_blob) {
 	// Find the topmost bag in the recipe
 	var row = this.runStatementGet(`
 		SELECT b.bag_name
@@ -319,7 +323,7 @@ SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipena
 		return null;
 	}
 	// Save the tiddler to the topmost bag
-	var info = this.saveBagTiddler(tiddlerFields,row.bag_name);
+	var info = this.saveBagTiddler(tiddlerFields,row.bag_name,attachment_blob);
 	return {
 		tiddler_id: info.tiddler_id,
 		bag_name: row.bag_name
@@ -354,27 +358,34 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
 };
 
 /*
-returns {tiddler_id:,tiddler:}
+returns {tiddler_id:,tiddler:,attachment_blob:}
 */
 SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bagname) {
-	const rows = this.runStatementGetAll(`
-		SELECT field_name, field_value, tiddler_id
-		FROM fields
-		WHERE tiddler_id = (
-			SELECT t.tiddler_id
-			FROM bags AS b
-			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
-			WHERE t.title = $title AND b.bag_name = $bag_name
-		)
+	const rowTiddler = this.runStatementGet(`
+		SELECT t.tiddler_id, t.attachment_blob
+		FROM bags AS b
+		INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+		WHERE t.title = $title AND b.bag_name = $bag_name
 	`,{
 		$title: title,
 		$bag_name: bagname
+	});
+	if(!rowTiddler) {
+		return null;
+	}
+	const rows = this.runStatementGetAll(`
+		SELECT field_name, field_value, tiddler_id
+		FROM fields
+		WHERE tiddler_id = $tiddler_id
+	`,{
+		$tiddler_id: rowTiddler.tiddler_id
 	});
 	if(rows.length === 0) {
 		return null;
 	} else {
 		return {
 			tiddler_id: rows[0].tiddler_id,
+			attachment_blob: rowTiddler.attachment_blob,
 			tiddler: rows.reduce((accumulator,value) => {
 					accumulator[value["field_name"]] = value.field_value;
 					return accumulator;
@@ -384,11 +395,11 @@ SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bagname) {
 };
 
 /*
-Returns {bag_name:, tiddler: {fields}, tiddler_id:}
+Returns {bag_name:, tiddler: {fields}, tiddler_id:, attachment_blob:}
 */
 SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
 	const rowTiddlerId = this.runStatementGet(`	
-		SELECT t.tiddler_id, b.bag_name
+		SELECT t.tiddler_id, t.attachment_blob, b.bag_name
 		FROM bags AS b
 		INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
 		INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
@@ -415,6 +426,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
 	return {
 		bag_name: rowTiddlerId.bag_name,
 		tiddler_id: rowTiddlerId.tiddler_id,
+		attachment_blob: rowTiddlerId.attachment_blob,
 		tiddler: rows.reduce((accumulator,value) => {
 				accumulator[value["field_name"]] = value.field_value;
 				return accumulator;

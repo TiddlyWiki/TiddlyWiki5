@@ -9,7 +9,7 @@ This class is largely a wrapper for the sql-tiddler-database.js class, adding th
 
 * Validating requests (eg bag and recipe name constraints)
 * Synchronising bag and recipe names to the admin wiki
-* Handling _canonical_uri tiddlers
+* Handling large tiddlers as attachments
 
 \*/
 
@@ -20,10 +20,12 @@ Create a tiddler store. Options include:
 
 databasePath - path to the database file (can be ":memory:" to get a temporary database)
 adminWiki - reference to $tw.Wiki object into which entity state tiddlers should be saved
+attachmentStore - reference to associated attachment store
 engine - wasm | better
 */
 function SqlTiddlerStore(options) {
 	options = options || {};
+	this.attachmentStore = options.attachmentStore;
 	this.adminWiki = options.adminWiki || $tw.wiki;
 	this.entityStateTiddlerPrefix = "$:/state/MultiWikiServer/";
 	// Create the database
@@ -114,30 +116,38 @@ Given tiddler fields, tiddler_id and a bagname, return the tiddler fields after 
 - Apply the tiddler_id as the revision field
 - Apply the bag_name as the bag field
 */
-SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddler_id,bag_name) {
-	return Object.assign({},tiddlerFields,{
+SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddler_id,bag_name,attachment_blob) {
+	const fields = Object.assign({},tiddlerFields,{
 		revision: "" + tiddler_id,
 		bag: bag_name
 	});
+	if(attachment_blob !== null) {
+		delete fields.text;
+		fields._canonical_uri = `/attachments/${attachment_blob}`;
+	}
+	return fields;
 };
 
 /*
-Given tiddler fields and a bagname or a recipename, if the text field is over a threshold, modify
-the tiddler to use _canonical_uri, otherwise return the tiddler unmodified
 */
-SqlTiddlerStore.prototype.processCanonicalUriTiddler = function(tiddlerFields,bag_name,recipe_name) {
-	if((tiddlerFields.text || "").length > 10 * 1024 * 1024) {
-		return Object.assign({},tiddlerFields,{
-			text: undefined,
-			_canonical_uri: recipe_name
-				? `/wiki/${recipe_name}/recipes/${recipe_name}/tiddlers/${tiddlerFields.title}`
-				: `/wiki/${bag_name}/bags/${bag_name}/tiddlers/${tiddlerFields.title}`
+SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields) {
+	if(tiddlerFields.text && tiddlerFields.text.length > 200 * 1024) {
+		const attachment_blob = this.attachmentStore.saveAttachment({
+			text: tiddlerFields.text,
+			type: tiddlerFields.type,
+			reference: tiddlerFields.title
 		});
+		return {
+			tiddlerFields: Object.assign({},tiddlerFields,{text: undefined}),
+			attachment_blob: attachment_blob
+		};
 	} else {
-		return tiddlerFields;
+		return {
+			tiddlerFields: tiddlerFields,
+			attachment_blob: null
+		};
 	}
 };
-
 
 SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag_name) {
 	var self = this;
@@ -150,7 +160,7 @@ SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag
 		// Save the tiddlers
 		for(const tiddlersFromFile of tiddlersFromPath) {
 			for(const tiddler of tiddlersFromFile.tiddlers) {
-				self.saveBagTiddler(tiddler,bag_name);
+				self.saveBagTiddler(tiddler,bag_name,null);
 			}
 		}
 	});
@@ -220,15 +230,17 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,descriptio
 /*
 Returns {tiddler_id:}
 */
-SqlTiddlerStore.prototype.saveBagTiddler = function(tiddlerFields,bagname) {
-	return this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bagname);
+SqlTiddlerStore.prototype.saveBagTiddler = function(incomingTiddlerFields,bagname) {
+	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
+	return this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bagname,attachment_blob);
 };
 
 /*
 Returns {tiddler_id:,bag_name:}
 */
-SqlTiddlerStore.prototype.saveRecipeTiddler = function(tiddlerFields,recipename) {
-	return this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipename);
+SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipename) {
+	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
+	return this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipename,attachment_blob);
 };
 
 SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {
@@ -245,7 +257,7 @@ SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
 			{},
 			tiddlerInfo,
 			{
-				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bagname)
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bagname,tiddlerInfo.attachment_blob)
 			});	
 	} else {
 		return null;
@@ -262,7 +274,7 @@ SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 			{},
 			tiddlerInfo,
 			{
-				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,tiddlerInfo.bag_name)
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,tiddlerInfo.bag_name,tiddlerInfo.attachment_blob)
 			});
 	} else {
 		return null;
@@ -295,6 +307,15 @@ Get the names of the bags in a recipe. Returns an empty array for recipes that d
 */
 SqlTiddlerStore.prototype.getRecipeBags = function(recipename) {
 	return this.sqlTiddlerDatabase.getRecipeBags(recipename);
+};
+
+/*
+Get an attachment ready to stream. Returns null if there is an error or:
+stream: filestream of file
+type: type of file
+*/
+SqlTiddlerStore.prototype.getAttachmentStream = function(attachmentname) {
+	return this.attachmentStore.getAttachmentStream(attachmentname);
 };
 
 exports.SqlTiddlerStore = SqlTiddlerStore;

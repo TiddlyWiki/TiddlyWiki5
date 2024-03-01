@@ -53,7 +53,6 @@ exports.handler = function(request,response,state) {
 			var result = $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			if(result) {
 				var tiddlerFields = result.tiddler;
-				tiddlerFields = $tw.mws.store.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
 				response.write(JSON.stringify(tiddlerFields).replace(/</g,"\\u003c"));
 				response.write(",\n")
 			}
