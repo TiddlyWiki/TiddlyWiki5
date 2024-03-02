@@ -131,7 +131,11 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 /*
 */
 SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields) {
-	if(tiddlerFields.text && tiddlerFields.text.length > 200 * 1024) {
+	let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
+	if(attachmentSizeLimit < 100 * 1024) {
+		attachmentSizeLimit = 100 * 1024;
+	}
+	if(tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) {
 		const attachment_blob = this.attachmentStore.saveAttachment({
 			text: tiddlerFields.text,
 			type: tiddlerFields.type,
