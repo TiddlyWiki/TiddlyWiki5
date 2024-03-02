@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-attachment.js
 type: application/javascript
 module-type: route
 
-GET /attachments/:recipe_name
+GET /attachments/:attachment_name
 
 \*/
 (function() {
