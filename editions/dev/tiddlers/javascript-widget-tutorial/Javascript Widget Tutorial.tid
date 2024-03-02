@@ -1,5 +1,5 @@
 created: 20190202035524804
-modified: 20221029161501848
+modified: 20240302110658300
 tags: 
 title: Javascript Widget Tutorial
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ Intended audience:
 # Those who know tiddlywiki well and know programming and javascript and want to write their own widget.
 # Those who know tiddlywiki well and don't know javascript, but want to understand more about how tiddlywiki works. You should be able to skim through and interact with the demos and learn something.
 
-I don't make any effort to explain javascript here. For that you will need other resources, like [[MDN|https://developer.mozilla.org/en-US/docs/Web/JavaScript]].
+We don't make any effort to explain javascript here. For that you will need other resources, like [[MDN|https://developer.mozilla.org/en-US/docs/Web/JavaScript]].
 
 !! The tutorial
 * [[Undefined widget tutorial]]

@@ -1,5 +1,5 @@
-modified: 20160305222940000
 created: 20160111034749658
+modified: 20240302110735646
 title: Using ES2016 for Writing Plugins
 type: text/vnd.tiddlywiki
 
@@ -13,7 +13,7 @@ It is recommended to use develop toolkit managed by community. For example,
 
 # [[Modern.TiddlyDev|https://tiddly-gittly.github.io/Modern.TiddlyDev/]]
 
-They are known as "JavaScript Meta-Framework". With them, you can start developing in a few minutes, without hours of configuration and debugging the build steps.
+They are known as "~JavaScript Meta-Framework". With them, you can start developing in a few minutes, without hours of configuration and debugging the build steps.
 
 !! Installing and Configuring Babel by yourself
 
@@ -41,7 +41,7 @@ Inside your plugin project edit the file `.babelrc` and enter the following:
 
 <<.tip "I found it easier to manage my plugins as if they were ''npm'' modules complete with a `package.json` that compiles the output via `npm run build`. See [[npm-scripts documentation|https://docs.npmjs.com/misc/scripts]] for details.">>
 
-Another benefit of using such a "JavaScript Meta-Framework" is that you can easily maintain your configuration, you will find it difficult to upgrade those config files after several months.
+Another benefit of using such a "Meta-Framework" is that you can easily maintain your configuration, you will find it difficult to upgrade those config files after several months.
 
 !!! Compiling the Output
 
