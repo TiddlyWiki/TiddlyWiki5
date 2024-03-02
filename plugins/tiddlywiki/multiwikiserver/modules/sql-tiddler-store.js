@@ -123,7 +123,7 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 	});
 	if(attachment_blob !== null) {
 		delete fields.text;
-		fields._canonical_uri = `/attachments/${attachment_blob}`;
+		fields._canonical_uri = `/wiki/${encodeURIComponent(bag_name)}/bags/${encodeURIComponent(bag_name)}/tiddlers/${encodeURIComponent(tiddlerFields.title)}/blob`;
 	}
 	return fields;
 };
@@ -265,6 +265,36 @@ SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
 };
 
 /*
+Get an attachment ready to stream. Returns null if there is an error or:
+stream: stream of file
+type: type of file
+*/
+SqlTiddlerStore.prototype.getBagTiddlerStream = function(title,bagname) {
+	const tiddlerInfo = this.sqlTiddlerDatabase.getBagTiddler(title,bagname);
+	if(tiddlerInfo) {
+		if(tiddlerInfo.attachment_blob) {
+			return this.attachmentStore.getAttachmentStream(tiddlerInfo.attachment_blob);
+		} else {
+			const { Readable } = require('stream');
+			const stream = new Readable();
+			stream._read = function() {
+				// Push data
+				const type = tiddlerInfo.tiddler.type || "text/plain";
+				stream.push(tiddlerInfo.tiddler.text || "",($tw.config.contentTypeInfo[type] ||{encoding: "utf8"}).encoding);
+				// Push null to indicate the end of the stream
+				stream.push(null);
+			};
+			return {
+				stream: stream,
+				type: tiddlerInfo.tiddler.type || "text/plain"
+			}
+		}
+	} else {
+		return null;
+	}
+};
+
+/*
 Returns {bag_name:, tiddler: {fields}, tiddler_id:}
 */
 SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
@@ -307,15 +337,6 @@ Get the names of the bags in a recipe. Returns an empty array for recipes that d
 */
 SqlTiddlerStore.prototype.getRecipeBags = function(recipename) {
 	return this.sqlTiddlerDatabase.getRecipeBags(recipename);
-};
-
-/*
-Get an attachment ready to stream. Returns null if there is an error or:
-stream: filestream of file
-type: type of file
-*/
-SqlTiddlerStore.prototype.getAttachmentStream = function(attachmentname) {
-	return this.attachmentStore.getAttachmentStream(attachmentname);
 };
 
 exports.SqlTiddlerStore = SqlTiddlerStore;
