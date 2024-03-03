@@ -1,0 +1,17 @@
+caption: Saving with FireFox
+created: 20230803205140949
+modified: 20230803213246739
+tags: Saving Firefox
+title: Saving with FireFox
+
+# Restart [[Firefox]]
+# [[Download]] an empty TiddlyWiki by clicking this button:
+#> {{$:/editions/tw5.com/snippets/download-empty-button}}
+# Locate the file you just downloaded
+#* You may rename it, but be sure to keep the `.html` or `.htm` extension
+# Open the file in [[Firefox]]
+
+# Try creating a new tiddler using the ''new tiddler'' <<.icon $:/core/images/new-button>> button in the sidebar. Type some content for the tiddler, and click the <<.icon $:/core/images/done-button>> ''ok'' button
+# Save your changes by clicking the <<.icon $:/core/images/save-button-dynamic>> ''save changes'' button in the sidebar
+#* Look for the yellow notification ''Saved wiki'' at the top right of the window
+# Refresh the browser window to verify that your changes have been saved correctly
