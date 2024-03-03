@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki
+tags: $:/tags/Tour
+tour-tag: $:/tags/Tour/IntroductionToTiddlyWiki
+logo: $:/plugins/tiddlywiki/tour/tiddlywiki-tour-logo
+description: Introduction to {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}
+settings: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/settings
+
+An introductory tour to {{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}}

@@ -4,6 +4,7 @@ _canonical_uri: 外部圖片條目的完整的 URI
 author: 一個插件作者的姓名
 bag: 條目的來源集的名稱
 caption: 顯示於頁籤或按鈕上的標題文字
+class: 渲染條目時，套用到條目的 CSS 類別 - 請參閱[[依自訂類別的自訂樣式|Custom styles by user-class]]。也適用於[[互動視窗|Modals]]
 code-body: 若設定為 ''yes''，檢視範本將以程式碼形式顯示條目
 color: 條目的 CSS 顏色值
 component: 負責[[警示條目|AlertMechanism]]的元件名稱

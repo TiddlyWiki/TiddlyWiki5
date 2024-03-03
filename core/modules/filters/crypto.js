@@ -16,7 +16,7 @@ exports.sha256 = function(source,operator,options) {
 	var results = [],
 		length = parseInt(operator.operand,10) || 20,
 		sha256 = function(text) {
-			return sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(text)).substr(0,length);
+			return $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(text)).substr(0,length);
 		};
 	source(function(tiddler,title) {
 		results.push(sha256(title));

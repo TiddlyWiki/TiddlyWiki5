@@ -1,15 +1,20 @@
 created: 20211128212902292
-modified: 20211128212904721
-tags: [[Filter Syntax]] [[Filter Run Prefix]]
+from-version: 5.1.23
+modified: 20230710073322863
+rp-input: all titles from previous filter runs
+rp-output: the titles that are present in both the result of this filter run and the output from previous runs
+rp-purpose: find the intersection of titles from previous runs with titles in this filter
+tags: [[Named Filter Run Prefix]]
 title: Intersection Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.1.23">>
-
-|''purpose'' |find the intersection of titles from previous runs with titles in this filter run |
-|''input'' |all titles from previous filter runs |
-|''output''|the titles that are present in both the result of this filter run and the output from previous runs |
+<$railroad text="""
+\start none
+\end none
+( ":intersection" | - )
+[[run|"Filter Run"]]
+"""/>
 
 The filter output from previous runs is set aside. The `:intersection` filter run is started with all tiddler titles as input. Once this latest filter run has completed, the latest output is compared to the set-aside output. A new output is produced that contains only titles that appeared in both the set-aside output and the latest output.
 
-[[Examples|Intersection Filter Run Prefix (Examples)]]
+[[Intersection Filter Run Prefix (Examples)]]

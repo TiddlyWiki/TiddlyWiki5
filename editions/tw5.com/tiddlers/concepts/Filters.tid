@@ -1,7 +1,7 @@
 created: 20130827080000000
 list: [[Introduction to filter notation]] [[Filter Syntax]]
-modified: 20220316145511797
-tags: Reference Concepts
+modified: 20230710074511095
+tags: Reference Concepts TableOfContents
 title: Filters
 type: text/vnd.tiddlywiki
 
@@ -15,7 +15,7 @@ You can think of TiddlyWiki as a database in which the records are tiddlers. A d
 
 A <<.def filter>> is a concise notation for selecting a particular [[set of tiddlers|Title Selection]], known as its <<.def "output">>. Whenever ~TiddlyWiki encounters a filter, it calculates the output. Further work can then be done with just those tiddlers, such as [[counting|CountWidget]] or [[listing|ListWidget]] them.
 
-The following example passes a filter to the <<.mlink list-links>> macro to display a list of all tiddlers whose titles are <<.olink2 tagged tag>> with the word <<.word Filters>>:
+The following example passes a filter to the <<.mlink list-links>> macro. It displays a list of all tiddlers using the <<.olink2 tag tag>> <<.word Filters>>:
 
 <<wikitext-example-without-html """<<list-links "[tag[Filters]]">>""" >>
 
