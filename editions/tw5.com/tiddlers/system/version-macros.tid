@@ -1,21 +1,38 @@
 code-body: yes
 created: 20161008085627406
-modified: 20231206135257498
+modified: 20240229155633000
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/version-macros
 type: text/vnd.tiddlywiki
 
-\procedure .from-version-reference() 5.3.0
+\whitespace trim
+
+\function tf.from-version-reference() 5.3.0
 
 \procedure .from-version-template(class, text)
-<$link to={{{ [<version>addprefix[Release ]] }}} class=<<class>> >@@.tc-tiny-gap-right {{$:/core/images/info-button}}@@<<text>><<version>></$link>
+<$link to={{{ [<version>addprefix[Release ]] }}} class=<<class>> >
+	<span class="tc-tiny-gap-right">
+		{{$:/core/images/info-button}}
+	</span>
+	<<text>><<version>>
+</$link>
 \end
 
 \procedure .from-version(version)
-<$list filter="[<version>compare:version:gteq<.from-version-reference>]"><<.from-version-template "doc-from-version doc-from-version-new" "New in v">></$list>
-<$list filter="[<version>compare:version:lt<.from-version-reference>]"><<.from-version-template "doc-from-version" "Introduced in v">></$list>
+<% if [<version>compare:version:gteq<tf.from-version-reference>] %>
+	<<.from-version-template "doc-from-version doc-from-version-new" "New in v">>
+<% else %>
+	<<.from-version-template "doc-from-version" "Introduced in v">>
+<% endif %>
 \end
 
-\define .deprecated-since(version, superseded:"TODO-Link")
-<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: <$text text=<<__version__>>/></$link> (see <$link to=<<__superseded__>>><$text text=<<__superseded__>>/></$link>)
+\procedure .deprecated-since(version, superseded:"TODO-Link")
+<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">
+	{{$:/core/images/warning}}
+	<span class="tc-tiny-gap">Deprecated since:</span>
+	<$text text=<<version>>/>
+</$link>
+<span class="tc-tiny-gap-left">
+	(see <$link class="tc-tiny-gap-left" to=<<superseded>>><$text text=<<superseded>>/></$link>)
+</span>
 \end
