@@ -14,7 +14,7 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 <% endif %>
 \end
 
-{{$:/core/ui/ControlPanel/Palette/LightDarkConfig}}
+{{$:/core/ui/ControlPanel/Palette/DarkLightConfig}}
 
 <% if  [{$:/config/palette/enable-light-dark-detection}match[yes]] %>
 	<<paletteEditorButton>>

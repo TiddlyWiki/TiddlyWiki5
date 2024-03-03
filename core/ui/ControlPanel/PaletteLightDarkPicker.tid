@@ -1,4 +1,4 @@
-title: $:/core/ui/ControlPanel/Palette/LightDarkConfig
+title: $:/core/ui/ControlPanel/Palette/DarkLightConfig
 
 \procedure lingo-base() $:/language/ControlPanel/Palette/
 \procedure config-dark-light() $:/config/palette/enable-light-dark-detection
@@ -24,7 +24,7 @@ title: $:/core/ui/ControlPanel/Palette/LightDarkConfig
 <<lingo "Picker/Prompt">>
 
 |tc-first-col-min-width tc-first-link-nowrap|k
-|<$link to="$:/config/palette/default-light" >{{$:/config/palette/default-light!!caption}}</$link> |<$transclude $tiddler="$:/snippets/paletteswitcher" palette=<<tiddler>> postFilter="+[{$:/config/palette/default-light}]" /> | <<palette-picker tiddler:"$:/config/palette/default-light" postFilter:":filter[color-scheme[light]]" >> |
-|<$link to="$:/config/palette/default-dark">{{$:/config/palette/default-dark!!caption}} </$link>|<$transclude $tiddler="$:/snippets/paletteswitcher" palette=<<tiddler>> postFilter="+[{$:/config/palette/default-dark}]" /> | <<palette-picker tiddler:"$:/config/palette/default-dark" postFilter:":filter[color-scheme[dark]]">> |
+|<$link to="$:/config/palette/default-light" >{{$:/config/palette/default-light!!caption}}</$link> |<$transclude $tiddler="$:/snippets/paletteswitcher" postFilter="+[{$:/config/palette/default-light}]" /> | <<palette-picker tiddler:"$:/config/palette/default-light" postFilter:":filter[color-scheme[light]]" >> |
+|<$link to="$:/config/palette/default-dark">{{$:/config/palette/default-dark!!caption}} </$link>|<$transclude $tiddler="$:/snippets/paletteswitcher" postFilter="+[{$:/config/palette/default-dark}]" /> | <<palette-picker tiddler:"$:/config/palette/default-dark" postFilter:":filter[color-scheme[dark]]">> |
 
 </$reveal>

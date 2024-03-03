@@ -1,103 +1,44 @@
 created: 20231101120147664
-modified: 20240215135640660
+modified: 20240303191156570
 tags: Features
 title: DarkLightChangeActions
 type: text/vnd.tiddlywiki
 
-\procedure lightDarkSwitcherTitle() _/dynamic/light-dark/detection
-\procedure startupSwitcherTitle() _/startup/light-dark/detection
+!! ~ControlPanel Palette
 
-\procedure dynamicLightDarkActionTemplate()
-<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
-	<$let default={{{ [<dark-mode>match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
-		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
-	</$let>
-</$reveal>
-\end
+Manual dark / light mode handling can be activated in the $:/ControlPanel ''-> Appearence -> Palette'' tab or with the checkbox and configuration below.
 
-\procedure startupLightDarkActionTemplate()
-<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
-	<$let default={{{ [{$:/info/darkmode}match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
-		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
-	</$let>
-</$reveal>
-\end
+<$let tv-adjust-heading-level="1">
 
-\procedure createLightDarkSwitcher()
-<% if [<lightDarkSwitcherTitle>!has[text]] %>
-<$action-createtiddler
-	$basetitle=<<lightDarkSwitcherTitle>>
-	text=<<dynamicLightDarkActionTemplate>>
-	caption= "{{$:/language/ControlPanel/Palette/Config/Detection/Caption}}"
-	code-body= "yes"
-	tags= "$:/tags/DarkLightChangeActions"
-/>
-<$action-navigate $to=<<lightDarkSwitcherTitle>>/>
-<% else %>
-<$action-navigate $to=<<lightDarkSwitcherTitle>>/>
-<% endif %>
-\end
+{{$:/core/ui/ControlPanel/Palette/DarkLightConfig}}
+</$let>
 
-\procedure createStartupSwitcher()
-<% if [<startupSwitcherTitle>!has[text]] %>
-<$action-createtiddler
-	$basetitle=<<startupSwitcherTitle>>
-	text=<<startupLightDarkActionTemplate>>
-	caption= "{{$:/language/ControlPanel/Palette/Config/Detection/Caption}}"
-	code-body= "yes"
-	tags= "$:/tags/StartupAction/Browser"
-/>
-<$action-navigate $to=<<startupSwitcherTitle>>/>
-<% else %>
-<$action-navigate $to=<<startupSwitcherTitle>>/>
-<% endif %>
-\end
+!! Palette Modes Detection
 
 <<.tip """Be aware that the browser setting can be independent from the OS setting.<br>
 If the browser settings are set to "System theme - auto" for ~FireFox or "System default" for Chrome-like browsers, the OS setting will be shown. """>>
 
-* Actions tagged <<tag $:/tags/StartupAction/Browser>> are executed when the wiki is started. More info can be found at StartupActions
-* <<.from-version "5.3.4">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed
+* Actions tagged <<tag $:/tags/StartupAction/Browser>> are executed when the wiki is started. More info can be found at StartupActions and examples here.
+* <<.from-version "5.3.4">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
 
-!! Variables
+!!! Variable
 
-The following variable is defined for actions  tagged $:/tags/DarkLightChangeActions
+<<.from-version "5.3.4">>
+
+The following variable is defined for actions tagged: `$:/tags/DarkLightChangeActions`
 
 | Variables | Description |h
 |`dark-mode` |`yes` or `no` depending on the browser or OS setting |
 
-!! Example - Detect Browser or OS Light / Dark Theme Changes
+!!! Examples
 
-See: [[SystemTag: $:/tags/DarkLightChangeActions]]
+Examples, how to handle dark / light events can be found at: [[DarkLightChangeActions (Examples)]]
 
-<<.warning """It is important to use the variable `dark-mode`, since the system info tiddler $:/info/darkmode will be ''updated after'' the actions have been executed. """>>
 
-The following examples define the $:/palette tiddler based on the dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> -- The tag-pill dropdown can be used to see all possible palette tiddlers.
+Currently the following tiddlers are tagged ~$:/tags/DarkLightChangeActions:
 
-<$button actions=<<createLightDarkSwitcher>> >Create <<lightDarkSwitcherTitle>> tiddler</$button>
+<<list-links filter:"[tag[$:/tags/DarkLightChangeActions]]" emptyMessage:"none">>
 
-```
-title: _/dynamic/light-dark/detection
-caption: {{$:/language/ControlPanel/Palette/Config/Detection/Caption}}
-code-body: yes
-tags: $:/tags/DarkLightChangeActions
-```
+Currently the following tiddlers are tagged ~$:/tags/StartupAction/Browser:
 
-<pre><code><$transclude $variable="dynamicLightDarkActionTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>
-
-!! Example - Detect Light / Dark Setting on Startup
-
-See: [[SystemTag: $:/tags/StartupAction/Browser]]
-
-<<.warning """For startup actions, it is important to use the $:/info/darkmode tiddler  """>>
-
-<$button actions=<<createStartupSwitcher>> >Create <<startupSwitcherTitle>> tiddler</$button>
-
-```
-title: _/startup/light-dark/detection
-caption: {{$:/language/ControlPanel/Palette/Config/Detection/Caption}}
-code-body: yes
-tags: $:/tags/StartupAction/Browser
-```
-
-<pre><code><$transclude $variable="startupLightDarkActionTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>
+<<list-links filter:"[tag[$:/tags/StartupAction/Browser]]" emptyMessage:"none">>

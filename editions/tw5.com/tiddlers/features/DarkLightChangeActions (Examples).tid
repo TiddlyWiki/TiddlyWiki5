@@ -1,0 +1,103 @@
+created: 20240303170824709
+modified: 20240303182658789
+tags: 
+title: DarkLightChangeActions (Examples)
+type: text/vnd.tiddlywiki
+
+\procedure lightDarkSwitcherTitle() _/dynamic/light-dark/detection
+\procedure startupSwitcherTitle() _/startup/light-dark/detection
+
+\procedure dynamicLightDarkActionTemplate()
+<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
+	<$let default={{{ [<dark-mode>match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
+		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
+	</$let>
+</$reveal>
+\end
+
+\procedure startupLightDarkActionTemplate()
+<$reveal type="match" stateTitle="$:/config/palette/enable-light-dark-detection" text="yes">
+	<$let default={{{ [{$:/info/darkmode}match[yes]then[$:/config/palette/default-dark]else[$:/config/palette/default-light]] }}}>
+		<$action-setfield $tiddler="$:/palette" text={{{ [<default>get[text]] }}}/>
+	</$let>
+</$reveal>
+\end
+
+\procedure createLightDarkSwitcher()
+<% if [<lightDarkSwitcherTitle>!has[text]] %>
+<$action-createtiddler
+	$basetitle=<<lightDarkSwitcherTitle>>
+	text=<<dynamicLightDarkActionTemplate>>
+	caption= "Dynamically detect browser or OS setting"
+	code-body= "yes"
+	tags= "$:/tags/DarkLightChangeActions"
+/>
+<$action-navigate $to=<<lightDarkSwitcherTitle>>/>
+<% else %>
+<$action-navigate $to=<<lightDarkSwitcherTitle>>/>
+<% endif %>
+\end
+
+\procedure createStartupSwitcher()
+<% if [<startupSwitcherTitle>!has[text]] %>
+<$action-createtiddler
+	$basetitle=<<startupSwitcherTitle>>
+	text=<<startupLightDarkActionTemplate>>
+	caption= "Detect browser or OS setting on startup"
+	code-body= "yes"
+	tags= "$:/tags/StartupAction/Browser"
+/>
+<$action-navigate $to=<<startupSwitcherTitle>>/>
+<% else %>
+<$action-navigate $to=<<startupSwitcherTitle>>/>
+<% endif %>
+\end
+
+!! Detect Light / Dark Setting on Startup
+
+For most usecases, it will be enough to detect the browser or OS setting on wiki startup. 
+
+Also see: [[StartupActions]] and [[SystemTag: $:/tags/StartupAction/Browser]]
+
+<<.warning """For startup actions, it is important to use the $:/info/darkmode tiddler<br>Changing the $:/palette tiddler at startup will ''not'' trigger the [[dirty flag|SavingMechanism]].""">>
+
+Currently the following tiddlers are tagged ~$:/tags/StartupAction/Browser:
+
+<<list-links filter:"[tag[$:/tags/StartupAction/Browser]]" emptyMessage:"none">>
+
+<$button actions=<<createStartupSwitcher>> >Create <<startupSwitcherTitle>> example tiddler</$button>
+
+```
+title: _/startup/light-dark/detection
+caption: {{$:/language/ControlPanel/Palette/Config/Detection/Caption}}
+code-body: yes
+tags: $:/tags/StartupAction/Browser
+```
+
+<pre><code><$transclude $variable="startupLightDarkActionTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>
+
+
+!! Dynamically Detect Browser or OS Light / Dark Theme Changes
+
+Also see: [[DarkLightChangeActions]] and [[SystemTag: $:/tags/DarkLightChangeActions]]
+
+<<.warning """It is important to use the variable `dark-mode`, since the system info tiddler $:/info/darkmode will be ''updated after'' the actions have been executed.""">>
+
+<<.warning """Changing the $:/palette tiddler dynamically ''will trigger'' the [[dirty flag|SavingMechanism]]. If you want to avoid this behaviour, you will need to add `-[[$:/palette]]` to the the  $:/config/SaverFilter as described at [[SavingMechanism]]""">>
+
+The following example dynamically defines the $:/palette tiddler based on the browser or OS dark / light mode setting. Palettes are tagged: <<tag "$:/tags/Palette">> -- The tag-pill dropdown can be used to see all possible palette tiddlers.
+
+Currently the following tiddlers are tagged ~$:/tags/DarkLightChangeActions:
+
+<<list-links filter:"[tag[$:/tags/DarkLightChangeActions]]" emptyMessage:"none">>
+
+<$button actions=<<createLightDarkSwitcher>> >Create <<lightDarkSwitcherTitle>> example tiddler</$button>
+
+```
+title: _/dynamic/light-dark/detection
+caption: {{$:/language/ControlPanel/Palette/Config/Detection/Caption}}
+code-body: yes
+tags: $:/tags/DarkLightChangeActions
+```
+
+<pre><code><$transclude $variable="dynamicLightDarkActionTemplate" $mode=block $output="text/plain" $type="text/plain" /></code></pre>
