@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-recipe-tiddler.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:recipe_name/recipes/:recipe_name/tiddler/:title
+GET /wiki/:recipe_name/recipes/:recipe_name/tiddler/:title
 
 NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 

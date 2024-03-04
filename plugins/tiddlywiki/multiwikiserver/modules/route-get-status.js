@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-status.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:recipe_name/status
+GET /wiki/:recipe_name/status
 
 \*/
 (function() {

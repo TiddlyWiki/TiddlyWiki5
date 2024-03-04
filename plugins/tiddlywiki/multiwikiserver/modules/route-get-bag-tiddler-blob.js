@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-bag-tiddler-blob.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:bag_name/bags/:bag_name/tiddler/:title/blob
+GET /wiki/:bag_name/bags/:bag_name/tiddler/:title/blob
 
 \*/
 (function() {

@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-bag-tiddler.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:bag_name/bags/:bag_name/tiddler/:title
+GET /wiki/:bag_name/bags/:bag_name/tiddler/:title
 
 NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 
