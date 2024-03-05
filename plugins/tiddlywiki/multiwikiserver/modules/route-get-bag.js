@@ -46,7 +46,7 @@ exports.handler = function(request,response,state) {
 				<body>
 			`);
 			// Render the html
-			var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/get-bags",{
+			var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/get-bag",{
 				variables: {
 					"bag-name": bag_name,
 					"bag-titles": JSON.stringify(titles)
@@ -57,7 +57,7 @@ exports.handler = function(request,response,state) {
 				</body>
 				</html>
 			`);
-			response.end();;
+			response.end();
 		}
 	} else {
 		response.writeHead(404);

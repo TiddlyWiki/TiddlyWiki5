@@ -1,0 +1,51 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-bag
+
+! <$image
+	source=`/wiki/${ [<bag-name>encodeuricomponent[]] }$/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+	class="mws-favicon-small"
+	width="32px"
+>
+	<$image
+		source="$:/plugins/multiwikiserver/images/missing-favicon.png"
+		class="mws-favicon-small"
+		width="32px"
+	/>
+</$image> Bag <$text text={{{ [<bag-name>]}}}/>
+
+<form
+	method="post"
+	action="tiddlers/"
+	enctype="multipart/form-data"
+>
+	<div>
+		<label>
+			File to upload:
+		</label>
+		<input type="file" name="file-to-upload" accept="*/*" />
+	</div>
+	<div>
+		<label>
+			Tiddler title:
+		</label>
+		<input type="text" name="tiddler-field-title" />
+	</div>
+	<div>
+		<label>
+			Tiddler tags:
+		</label>
+		<input type="text" name="tiddler-field-tags" />
+	</div>
+	<div>
+		<input type="submit" value="Upload"/>
+	</div>
+</form>
+
+<ul>
+<$list filter="[<bag-titles>jsonget[]sort[]]">
+<li>
+<a href=`/wiki/${ [<bag-name>encodeuricomponent[]] }$/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/${ [<currentTiddler>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+<$text text=<<currentTiddler>>/>
+</a>
+</li>
+</$list>
+</ul>

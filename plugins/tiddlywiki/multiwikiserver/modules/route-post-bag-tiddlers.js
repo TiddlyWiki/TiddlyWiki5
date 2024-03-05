@@ -3,6 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-post-bag-tiddlers.js
 type: application/javascript
 module-type: route
 
+POST /wiki/:bag_name/bags/:bag_name/tiddlers/
 POST /wiki/:bag_name/bags/:bag_name/tiddlers
 
 NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
@@ -16,7 +17,7 @@ NOTE: Urls currently include the bag name twice. This is temporary to minimise t
 
 exports.method = "POST";
 
-exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers$/;
+exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/$/;
 
 exports.bodyFormat = "stream";
 
@@ -83,8 +84,10 @@ console.log(`Got ${bag_name} and ${bag_name_2}`)
 				if(!partFile) {
 					return state.sendResponse(400, {"Content-Type": "text/plain"},"Missing file to upload");
 				}
+				const type = partFile.headers["content-type"];
 				const tiddlerFields = {
-					title: partFile.filename
+					title: partFile.filename,
+					type: type
 				};
 				for(const part of parts) {
 					const tiddlerFieldPrefix = "tiddler-field-";
@@ -95,11 +98,33 @@ console.log(`Got ${bag_name} and ${bag_name_2}`)
 				console.log(`Creating tiddler with ${JSON.stringify(tiddlerFields)} and ${partFile.filename}`)
 				$tw.mws.store.saveBagTiddlerWithAttachment(tiddlerFields,bag_name,{
 					filepath: partFile.inboxFilename,
-					type: partFile.headers["content-type"],
+					type: type,
 					hash: partFile.hash
 				});
 				$tw.utils.deleteDirectory(inboxPath);
-				state.sendResponse(200, {"Content-Type": "text/plain"},`Imported tiddler ${tiddlerFields.title}`);
+				response.writeHead(200, "OK",{
+					"Content-Type":  "text/html"
+				});
+				response.write(`
+					<!doctype html>
+					<head>
+						<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+					</head>
+					<body>
+				`);
+				// Render the html
+				var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/post-bag-tiddlers",{
+					variables: {
+						"bag-name": bag_name,
+						"imported-titles": JSON.stringify([tiddlerFields.title])
+					}
+				});
+				response.write(html);
+				response.write(`
+					</body>
+					</html>
+				`);
+				response.end();
 			}
 		}
 	});
