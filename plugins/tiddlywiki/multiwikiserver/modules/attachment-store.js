@@ -78,6 +78,31 @@ AttachmentStore.prototype.saveAttachment = function(options) {
 };
 
 /*
+Adopts an attachment file into the store
+*/
+AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash) {
+	const path = require("path"),
+		fs = require("fs");
+	// Choose the best file extension for the attachment given its type
+	const contentTypeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["application/octet-stream"];
+	// Creat the attachment directory
+	const attachmentPath = path.resolve(this.storePath,"files",hash);
+	$tw.utils.createDirectory(attachmentPath);
+	// Rename the data file
+	const dataFilename = "data" + contentTypeInfo.extension,
+		dataFilepath = path.resolve(attachmentPath,dataFilename);
+	fs.renameSync(incomingFilepath,dataFilepath);
+	// Save the meta.json file
+	fs.writeFileSync(path.resolve(attachmentPath,"meta.json"),JSON.stringify({
+		modified: $tw.utils.stringifyDate(new Date()),
+		contentHash: hash,
+		filename: dataFilename,
+		type: type
+	},null,4));
+	return hash;
+};
+
+/*
 Get an attachment ready to stream. Returns null if there is an error or:
 stream: filestream of file
 type: type of file

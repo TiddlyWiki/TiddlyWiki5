@@ -15,13 +15,10 @@ be moved out of the store/inbox folder.
 /*
 Create an instance of the upload manager. Options include:
 
-inboxPath - path to the inbox folder
 store - sqlTiddlerStore to use for saving tiddlers
 */
 function MultipartFormManager(options) {
-	const path = require("path");
 	options = options || {};
-	this.inboxPath = options.inboxPath;
 	this.store = options.store;
 }
 

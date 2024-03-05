@@ -12,6 +12,34 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-bags
 	/>
 </$image> Bag <$text text={{{ [<bag-name>]}}}/>
 
+<form
+	method="post"
+	action="tiddlers"
+	enctype="multipart/form-data"
+>
+	<div>
+		<label>
+			File to upload:
+		</label>
+		<input type="file" name="file-to-upload" accept="*/*" />
+	</div>
+	<div>
+		<label>
+			Tiddler title:
+		</label>
+		<input type="text" name="tiddler-field-title" />
+	</div>
+	<div>
+		<label>
+			Tiddler tags:
+		</label>
+		<input type="text" name="tiddler-field-tags" />
+	</div>
+	<div>
+		<input type="submit" value="Upload"/>
+	</div>
+</form>
+
 <ul>
 <$list filter="[<bag-titles>jsonget[]sort[]]">
 <li>

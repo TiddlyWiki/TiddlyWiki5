@@ -3,6 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-bag.js
 type: application/javascript
 module-type: route
 
+GET /wiki/:bag_name/bags/:bag_name/
 GET /wiki/:bag_name/bags/:bag_name
 
 NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
@@ -16,9 +17,14 @@ NOTE: Urls currently include the bag name twice. This is temporary to minimise t
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/bags\/(.+)$/;
+exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)(\/?)$/;
 
 exports.handler = function(request,response,state) {
+	// Redirect if there is no trailing slash. We do this so that the relative URL specified in the upload form works correctly
+	if(state.params[2] !== "/") {
+		state.redirect(301,state.urlInfo.path + "/");
+		return;
+	}
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),

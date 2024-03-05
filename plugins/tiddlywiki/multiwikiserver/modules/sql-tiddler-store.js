@@ -240,6 +240,26 @@ SqlTiddlerStore.prototype.saveBagTiddler = function(incomingTiddlerFields,bagnam
 };
 
 /*
+Create a tiddler in a bag adopting the specified file as the attachment. The attachment file must be on the same disk as the attachment store
+Options include:
+
+filepath - filepath to the attachment file
+hash - string hash of the attachment file
+type - content type of file as uploaded
+
+Returns {tiddler_id:}
+*/
+SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddlerFields,bagname,options) {
+	console.log(`saveBagTiddlerWithAttachment ${JSON.stringify(incomingTiddlerFields)}, ${bagname}, ${JSON.stringify(options)}`);
+	const attachment_blob = this.attachmentStore.adoptAttachment(options.filepath,options.type,options.hash);
+	if(attachment_blob) {
+		return this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields,bagname,attachment_blob);
+	} else {
+		return null;
+	}
+};
+
+/*
 Returns {tiddler_id:,bag_name:}
 */
 SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipename) {

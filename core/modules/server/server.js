@@ -180,6 +180,12 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 	response.end(data,encoding);
 }
 
+function redirect(request,response,statusCode,location) {
+	response.setHeader("Location",location);
+	response.statusCode = statusCode;
+	response.end()
+}
+
 /*
 Options include:
 cbPartStart(headers,name,filename) - invoked when a file starts being received
@@ -368,15 +374,10 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.queryParameters = querystring.parse(state.urlInfo.query);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(self,request,response);
+	state.redirect = redirect.bind(self,request,response);
 	state.streamMultipartData = streamMultipartData.bind(self,request);
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
-	// Check for the CSRF header if this is a write
-	if(!this.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
-		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
-		response.end();
-		return;
-	}
 	// Check whether anonymous access is granted
 	state.allowAnon = this.isAuthorized(state.authorizationType,null);
 	// Authenticate with the first active authenticator
@@ -403,6 +404,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Return a 404 if we didn't find a route
 	if(!route) {
 		response.writeHead(404);
+		response.end();
+		return;
+	}
+	// If this is a write, check for the CSRF header unless globally disabled, or disabled for this route
+	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
 		return;
 	}
