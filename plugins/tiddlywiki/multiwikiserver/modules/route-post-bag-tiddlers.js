@@ -40,6 +40,7 @@ console.log(`Got ${bag_name} and ${bag_name_2}`)
 	$tw.utils.createDirectory(inboxPath);
 	let fileStream = null; // Current file being written
 	let hash = null; // Accumulating hash of current part
+	let length = 0; // Accumulating length of current part
 	const parts = [];
 	state.streamMultipartData({
 		cbPartStart: function(headers,name,filename) {
@@ -57,6 +58,7 @@ console.log(`Got ${bag_name} and ${bag_name_2}`)
 				part.value = "";
 			}
 			hash = new $tw.sjcl.hash.sha256();
+			length = 0;
 			parts.push(part)
 		},
 		cbPartChunk: function(chunk) {
@@ -65,7 +67,9 @@ console.log(`Got ${bag_name} and ${bag_name_2}`)
 			} else {
 				parts[parts.length - 1].value += chunk;
 			}
+			length = length + chunk.length;
 			hash.update(chunk);
+			console.log(`Got a chunk of length ${chunk.length}, length is now ${length}`);
 		},
 		cbPartEnd: function() {
 			if(fileStream) {
