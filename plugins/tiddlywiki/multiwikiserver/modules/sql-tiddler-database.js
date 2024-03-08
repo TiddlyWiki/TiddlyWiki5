@@ -454,9 +454,17 @@ SqlTiddlerDatabase.prototype.getBagTiddlers = function(bagname) {
 };
 
 /*
-Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns an empty array for recipes that do not exist
+Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 */
 SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
+	const rowsCheckRecipe = this.runStatementGetAll(`
+		SELECT * FROM recipes WHERE recipes.recipe_name = $recipe_name
+	`,{
+		$recipe_name: recipename
+	});
+	if(rowsCheckRecipe.length === 0) {
+		return null;
+	}
 	const rows = this.runStatementGetAll(`
 		SELECT title, bag_name
 		FROM (

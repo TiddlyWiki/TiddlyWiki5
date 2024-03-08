@@ -343,7 +343,7 @@ SqlTiddlerStore.prototype.getBagTiddlers = function(bagname) {
 };
 
 /*
-Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns an empty array for recipes that do not exist
+Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 */
 SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipename) {
 	return this.sqlTiddlerDatabase.getRecipeTiddlers(recipename);

@@ -21,7 +21,7 @@ exports.handler = function(request,response,state) {
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		recipeTiddlers = recipe_name && $tw.mws.store.getRecipeTiddlers(recipe_name);
 	// Check request is valid
-	if(recipe_name && recipeTiddlers && recipeTiddlers.length > 0) {
+	if(recipe_name && recipeTiddlers) {
 		// Start the response
 		response.writeHead(200, "OK",{
 			"Content-Type": "text/html"
