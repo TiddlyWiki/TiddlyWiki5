@@ -264,8 +264,8 @@ function streamMultipartData(request,options) {
 			} else {
 				const boundaryIndex = buffer.indexOf(boundaryBuffer);
 				if(boundaryIndex >= 0) {
-					// Return the part up to the boundary
-					options.cbPartChunk(Uint8Array.prototype.slice.call(buffer,0,boundaryIndex));
+					// Return the part up to the boundary minus the terminating LF CR
+					options.cbPartChunk(Uint8Array.prototype.slice.call(buffer,0,boundaryIndex - 2));
 					options.cbPartEnd();
 					processingPart = false;
 					buffer = Uint8Array.prototype.slice.call(buffer,boundaryIndex);
