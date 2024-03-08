@@ -18,15 +18,15 @@ exports.path = /^\/wiki\/([^\/]+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the recipe name from the parameters
-	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
+	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
+		recipeTiddlers = recipe_name && $tw.mws.store.getRecipeTiddlers(recipe_name);
 	// Check request is valid
-	if(recipe_name) {
+	if(recipe_name && recipeTiddlers && recipeTiddlers.length > 0) {
 		// Start the response
 		response.writeHead(200, "OK",{
 			"Content-Type": "text/html"
 		});
 		// Get the tiddlers in the recipe
-		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name);
 		// Render the template
 		var template = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
 			variables: {
