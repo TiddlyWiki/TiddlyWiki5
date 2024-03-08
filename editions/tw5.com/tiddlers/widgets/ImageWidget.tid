@@ -25,7 +25,7 @@ Any content of the `<$image>` widget is ignored.
 
 The width and the height can be specified as pixel values (eg "23" or "23px") or percentages (eg "23%"). They are both optional; if not provided the browser will use CSS rules to size the image.
 
-! HTML image maps scaling
+! Responsive images and `<map>`
 
 [[Image maps area|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/area]] coordinates are numbers of CSS pixels, therefore they do not scale. If you want to use responsive images, you can use a `svg` and `foreignObject`: 
 
