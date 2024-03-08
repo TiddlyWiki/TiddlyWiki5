@@ -93,7 +93,7 @@ DraggableWidget.prototype.execute = function() {
 };
 
 
-DraggableWidget.prototype.updateDomNodeClasses = function() {
+DraggableWidget.prototype.assignDomNodeClasses = function() {
 	var domNodeClasses = this.domNodes[0].className.split(" "),
 		oldClasses = this.draggableClasses.split(" ");
 	this.draggableClasses = this.getAttribute("class");
