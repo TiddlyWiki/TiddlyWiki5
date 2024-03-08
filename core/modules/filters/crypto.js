@@ -14,12 +14,9 @@ Filter operators for cryptography, using the Stanford JavaScript library
 
 exports.sha256 = function(source,operator,options) {
 	var results = [],
-		length = parseInt(operator.operand,10) || 20,
-		sha256 = function(text) {
-			return $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(text)).substr(0,length);
-		};
+		length = parseInt(operator.operand,10) || 20;
 	source(function(tiddler,title) {
-		results.push(sha256(title));
+		results.push($tw.utils.sha256(title,{length: length}));
 	});
 	return results;
 };
