@@ -209,8 +209,11 @@ function streamMultipartData(request,options) {
 	// Initialise
 	let buffer = Buffer.alloc(0);
 	let processingPart = false;
+	// Log file
+	let logFileStream = fs.createWriteStream(path.resolve($tw.boot.wikiPath,"incoming - " + $tw.utils.stringifyDate(new Date())));
 	// Process incoming chunks
 	request.on("data", (chunk) => {
+		logFileStream.write(chunk);
 		// Accumulate the incoming data
 		buffer = Buffer.concat([buffer, chunk]);
 		// Loop through any parts within the current buffer
@@ -278,6 +281,7 @@ function streamMultipartData(request,options) {
 	});
 	// All done
 	request.on("end", () => {
+		logFileStream.end();
 		options.cbFinished(null);
 	});
 }
