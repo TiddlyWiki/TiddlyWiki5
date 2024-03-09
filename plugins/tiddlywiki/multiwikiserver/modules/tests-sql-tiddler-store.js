@@ -93,6 +93,24 @@ function runSqlStoreTests(engine) {
 
 		expect(getBagTiddlerResult).toEqual({ attachment_blob: null, tiddler: {title: "Another Tiddler", text: "I'm in alpha", tags: "one two three"} });
 	});
+
+	it("should return a single recipe after creating that recipe", function() {
+		expect(store.createBag("bag-alpha","Bag alpha")).toEqual(null);
+		expect(store.createBag("bag-beta","Bag beta")).toEqual(null);
+		expect(store.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"Recipe rho")).toEqual(null);
+
+		expect(store.listRecipes()).toEqual([
+			{ recipe_name: "recipe-rho", bag_names: ["bag-alpha","bag-beta"], description: "Recipe rho" }
+		]);
+	});
+
+	it("should return a recipe's bags after creating that recipe", function() {
+		expect(store.createBag("bag-alpha","Bag alpha")).toEqual(null);
+		expect(store.createBag("bag-beta","Bag beta")).toEqual(null);
+		expect(store.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"Recipe rho")).toEqual(null);
+
+		expect(store.getRecipeBags("recipe-rho")).toEqual(["bag-alpha","bag-beta"]);
+	});
 }
 
 }
