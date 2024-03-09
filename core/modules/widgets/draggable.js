@@ -27,8 +27,7 @@ DraggableWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DraggableWidget.prototype.render = function(parent,nextSibling) {
-	var self = this,
-		tag,
+	var tag,
 		domNode,
 		classes = [];
 	// Save the parent dom node
@@ -85,6 +84,7 @@ DraggableWidget.prototype.execute = function() {
 Make a DOM node draggable or remove the draggable attr and the EventListeners
 */
 DraggableWidget.prototype.makeDraggable = function(domNode) {
+	var self = this;
 	if(this.dragEnable) {
 		// Add event handlers
 		$tw.utils.makeDraggable({
