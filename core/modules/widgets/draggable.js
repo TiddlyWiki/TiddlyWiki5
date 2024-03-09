@@ -60,19 +60,8 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	// Insert the node into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
-	// Add event handlers
-	if(this.dragEnable) {
-		$tw.utils.makeDraggable({
-			domNode: domNode,
-			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
-			dragFilterFn: function() {return self.getAttribute("filter");},
-			startActions: self.startActions,
-			endActions: self.endActions,
-			dragImageType: self.dragImageType,
-			widget: this,
-			selector: self.dragHandleSelector
-		});
-	}
+	// Make the DOM node draggable if needed
+	this.makeDraggable(domNode);
 	this.domNodes.push(domNode);
 };
 
@@ -90,6 +79,29 @@ DraggableWidget.prototype.execute = function() {
 	this.dragEnable = this.getAttribute("enable","yes") === "yes";
 	// Make the child widgets
 	this.makeChildWidgets();
+};
+
+/*
+Make a DOM node draggable or remove the draggable attr and the EventListeners
+*/
+DraggableWidget.prototype.makeDraggable = function(domNode) {
+	if(this.dragEnable) {
+		// Add event handlers
+		$tw.utils.makeDraggable({
+			domNode: domNode,
+			dragTiddlerFn: function() {return self.getAttribute("tiddler");},
+			dragFilterFn: function() {return self.getAttribute("filter");},
+			startActions: self.startActions,
+			endActions: self.endActions,
+			dragImageType: self.dragImageType,
+			widget: this,
+			selector: self.dragHandleSelector
+		});
+	} else if(this.dragStartReference && this.dragEndReference) {
+		domNode.removeAttribute("draggable");
+		domNode.removeEventListener("dragstart",this.dragStartReference,false);
+		domNode.removeEventListener("dragend",this.dragEndReference,false);
+	}
 };
 
 
@@ -114,10 +126,19 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 DraggableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tag || changedAttributes.selector || changedAttributes.dragimagetype || changedAttributes.enable || changedAttributes.startactions || changedAttributes.endactions) {
+	if(changedAttributes.tag || changedAttributes.selector || changedAttributes.dragimagetype || changedAttributes.startactions || changedAttributes.endactions) {
 		this.refreshSelf();
 		return true;
 	} else {
+		if(changedAttributes.enable) {
+			this.dragEnable = this.getAttribute("enable","yes") === "yes";
+			this.makeDraggable(this.domNodes[0]);
+			if(!this.dragHandleSelector && this.dragEnable && !this.domNodes[0].classList.contains("tc-draggable")) {
+				this.domNodes[0].classList.add("tc-draggable");
+			} else if(!this.dragEnable && this.domNodes[0].classList.contains("tc-draggable")) {
+				this.domNodes[0].classList.remove("tc-draggable");
+			}
+		}
 		if(changedAttributes["class"]) {
 			this.updateDomNodeClasses();
 		}
