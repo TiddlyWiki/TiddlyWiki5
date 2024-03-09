@@ -93,7 +93,7 @@ DraggableWidget.prototype.execute = function() {
 };
 
 
-DraggableWidget.prototype.assignDomNodeClasses = function() {
+DraggableWidget.prototype.updateDomNodeClasses = function() {
 	var domNodeClasses = this.domNodes[0].className.split(" "),
 		oldClasses = this.draggableClasses.split(" ");
 	this.draggableClasses = this.getAttribute("class");
@@ -119,7 +119,7 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else {
 		if(changedAttributes["class"]) {
-			this.assignDomNodeClasses();
+			this.updateDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{
 			changedAttributes: changedAttributes,
