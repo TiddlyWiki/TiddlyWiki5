@@ -69,6 +69,30 @@ function runSqlStoreTests(engine) {
 			description: "Different description"
 		}]);
 	});
+
+	it("should return a saved tiddler within a bag", function() {
+		expect(store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
+		var saveBagResult = store.saveBagTiddler({
+			title: "Another Tiddler",
+			text:  "I'm in alpha",
+			tags:  "one two three"
+		}, "bag-alpha");
+
+		expect(new Set(Object.keys(saveBagResult))).toEqual(new Set(["tiddler_id"]));
+		expect(typeof(saveBagResult.tiddler_id)).toBe("number");
+
+		expect(store.getBagTiddlers("bag-alpha")).toEqual(["Another Tiddler"]);
+
+		var getBagTiddlerResult = store.getBagTiddler("Another Tiddler","bag-alpha");
+		expect(typeof(getBagTiddlerResult.tiddler_id)).toBe("number");
+		delete getBagTiddlerResult.tiddler_id;
+
+		// these fields may eventually be removed, so don't depend on their presence
+		delete getBagTiddlerResult.tiddler.revision;
+		delete getBagTiddlerResult.tiddler.bag;
+
+		expect(getBagTiddlerResult).toEqual({ attachment_blob: null, tiddler: {title: "Another Tiddler", text: "I'm in alpha", tags: "one two three"} });
+	});
 }
 
 }
