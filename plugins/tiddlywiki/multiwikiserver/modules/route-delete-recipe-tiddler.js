@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-delete-recipe-tiddler.js
 type: application/javascript
 module-type: route
 
-DELETE /wikis/:recipe_name/recipes/:bag_name/tiddler/:title
+DELETE /wiki/:recipe_name/recipes/:bag_name/tiddler/:title
 
 NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 

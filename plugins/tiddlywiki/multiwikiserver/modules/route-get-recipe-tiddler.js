@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-recipe-tiddler.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:recipe_name/recipes/:recipe_name/tiddler/:title
+GET /wiki/:recipe_name/recipes/:recipe_name/tiddler/:title
 
 NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 
@@ -40,7 +40,6 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-			tiddlerFields = $tw.mws.store.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content

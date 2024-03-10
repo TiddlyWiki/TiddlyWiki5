@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-put-bag.js
 type: application/javascript
 module-type: route
 
-PUT /wikis/:bag_name/bags/:bag_name
+PUT /wiki/:bag_name/bags/:bag_name
 
 NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 

@@ -27,7 +27,6 @@ A simple HTTP server with regexp-based routes
 options: variables - optional hashmap of variables to set (a misnomer - they are really constant parameters)
 		 routes - optional array of routes to use
 		 wiki - reference to wiki object
-		 verbose - boolean
 */
 function Server(options) {
 	var self = this;
@@ -35,7 +34,6 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.verbose = !!options.verbose;
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -45,14 +43,6 @@ function Server(options) {
 			}
 		}
 	}
-	// Register server extensions
-	this.extensions = [];
-	$tw.modules.forEachModuleOfType("server-extension",function(title,exports) {
-		var extension = new exports.Extension(self);
-		self.extensions.push(extension);
-	});
-	// Initialise server extensions
-	this.invokeExtensionHook("server-start-initialisation");
 	// Setup the default required plugins
 	this.requiredPlugins = this.get("required-plugins").split(',');
 	// Initialise CSRF
@@ -105,15 +95,7 @@ function Server(options) {
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 	this.boot.pathPrefix = this.get("path-prefix") || "";
-	// Complete initialisation of server extensions
-	this.invokeExtensionHook("server-completed-initialisation");
 }
-
-Server.prototype.invokeExtensionHook = function(hookName) {
-	$tw.utils.each(this.extensions,function(extension) {
-		extension.hook(hookName);
-	});
-};
 
 /*
 Send a response to the client. This method checks if the response must be sent
@@ -178,6 +160,12 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 
 	response.writeHead(statusCode,headers);
 	response.end(data,encoding);
+}
+
+function redirect(request,response,statusCode,location) {
+	response.setHeader("Location",location);
+	response.statusCode = statusCode;
+	response.end()
 }
 
 /*
@@ -255,8 +243,8 @@ function streamMultipartData(request,options) {
 			} else {
 				const boundaryIndex = buffer.indexOf(boundaryBuffer);
 				if(boundaryIndex >= 0) {
-					// Return the part up to the boundary
-					options.cbPartChunk(Uint8Array.prototype.slice.call(buffer,0,boundaryIndex));
+					// Return the part up to the boundary minus the terminating LF CR
+					options.cbPartChunk(Uint8Array.prototype.slice.call(buffer,0,boundaryIndex - 2));
 					options.cbPartEnd();
 					processingPart = false;
 					buffer = Uint8Array.prototype.slice.call(buffer,boundaryIndex);
@@ -368,15 +356,10 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.queryParameters = querystring.parse(state.urlInfo.query);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(self,request,response);
+	state.redirect = redirect.bind(self,request,response);
 	state.streamMultipartData = streamMultipartData.bind(self,request);
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
-	// Check for the CSRF header if this is a write
-	if(!this.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
-		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
-		response.end();
-		return;
-	}
 	// Check whether anonymous access is granted
 	state.allowAnon = this.isAuthorized(state.authorizationType,null);
 	// Authenticate with the first active authenticator
@@ -403,6 +386,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 	// Return a 404 if we didn't find a route
 	if(!route) {
 		response.writeHead(404);
+		response.end();
+		return;
+	}
+	// If this is a write, check for the CSRF header unless globally disabled, or disabled for this route
+	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
 		return;
 	}
@@ -466,10 +455,12 @@ Server.prototype.listen = function(port,host,prefix) {
 	}
 	// Create the server
 	var server = this.transport.createServer(this.listenOptions || {},function(request,response,options) {
-		var start = new Date().getTime()
-		response.on("finish",function() {
-			// console.log("Request",request.method,request.url,(new Date().getTime()) - start);
-		});
+		if(self.get("debug-level") !== "none") {
+			var start = $tw.utils.timer();
+			response.on("finish",function() {
+				console.log("Response tim:",request.method,request.url,$tw.utils.timer() - start);
+			});	
+		}
 		self.requestHandler(request,response,options);
 	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)

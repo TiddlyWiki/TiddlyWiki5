@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-recipe.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:recipe_name
+GET /wiki/:recipe_name
 
 \*/
 (function() {
@@ -18,15 +18,15 @@ exports.path = /^\/wiki\/([^\/]+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the recipe name from the parameters
-	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
+	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
+		recipeTiddlers = recipe_name && $tw.mws.store.getRecipeTiddlers(recipe_name);
 	// Check request is valid
-	if(recipe_name) {
+	if(recipe_name && recipeTiddlers) {
 		// Start the response
 		response.writeHead(200, "OK",{
 			"Content-Type": "text/html"
 		});
 		// Get the tiddlers in the recipe
-		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name);
 		// Render the template
 		var template = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/core/templates/tiddlywiki5.html",{
 			variables: {
@@ -53,7 +53,6 @@ exports.handler = function(request,response,state) {
 			var result = $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			if(result) {
 				var tiddlerFields = result.tiddler;
-				tiddlerFields = $tw.mws.store.processCanonicalUriTiddler(tiddlerFields,null,recipe_name);
 				response.write(JSON.stringify(tiddlerFields).replace(/</g,"\\u003c"));
 				response.write(",\n")
 			}

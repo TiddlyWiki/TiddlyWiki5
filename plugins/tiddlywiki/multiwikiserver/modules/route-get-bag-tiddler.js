@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/route-get-bag-tiddler.js
 type: application/javascript
 module-type: route
 
-GET /wikis/:bag_name/bags/:bag_name/tiddler/:title
+GET /wiki/:bag_name/bags/:bag_name/tiddler/:title
 
 NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 
@@ -40,21 +40,22 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-			tiddlerFields = $tw.mws.store.processCanonicalUriTiddler(tiddlerFields,bag_name,null);
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
+			return;
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content
-			var type = result.tiddler.type || "text/plain";
-			response.writeHead(200, "OK",{
-				"Content-Type":  type
-			});
-			response.write(result.tiddler.text || "",($tw.config.contentTypeInfo[type] ||{encoding: "utf8"}).encoding);
-			response.end();;
+			const result = $tw.mws.store.getBagTiddlerStream(title,bag_name);
+			if(result) {
+				response.writeHead(200, "OK",{
+					"Content-Type":  result.type
+				});
+				result.stream.pipe(response);
+				return;
+			}
 		}
-	} else {
-		response.writeHead(404);
-		response.end();
 	}
+	response.writeHead(404);
+	response.end();
 };
 
 }());
