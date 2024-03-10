@@ -30,14 +30,9 @@ exports.startup = function() {
 			databasePath: path.resolve($tw.boot.wikiPath,"store/database.sqlite"),
 			engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine","better"), // better || wasm
 			attachmentStore: attachmentStore
-		}),
-		MultipartFormManager = require("$:/plugins/tiddlywiki/multiwikiserver/multipart-form-manager.js").MultipartFormManager,
-		multipartFormManager = new MultipartFormManager({
-			store: store
 		});
 	$tw.mws = {
-		store: store,
-		multipartFormManager: multipartFormManager
+		store: store
 	};
 	// Performance timing
 	console.time("mws-initial-load");
