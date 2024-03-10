@@ -36,8 +36,7 @@ Command.prototype.execute = function() {
 	// Set up server
 	this.server = new Server({
 		wiki: this.commander.wiki,
-		variables: self.params,
-		verbose: this.commander.verbose
+		variables: self.params
 	});
 	var nodeServer = this.server.listen();
 	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer,"tiddlywiki");
