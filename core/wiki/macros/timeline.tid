@@ -6,7 +6,7 @@ title: $:/core/macros/timeline
 <!-- Override one or both of the following two macros with a global or local macro of the same name 
 if you need to change how titles are displayed on a timeline -->
 
-\define timeline-title() <$view field="title"/>
+\define timeline-title() <$transclude field="caption"><$view field="title"/></$transclude>
 \define timeline-link() <$link to={{!!title}}><<timeline-title>></$link>
 \define timeline(limit:"100",format:"DDth MMM YYYY",subfilter:"",dateField:"modified")
 \whitespace trim
