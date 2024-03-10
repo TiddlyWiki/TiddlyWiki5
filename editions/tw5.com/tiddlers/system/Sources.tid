@@ -23,16 +23,13 @@ code-body: yes
 \end
 
 \procedure make-github-link()
-\whitespace trim
 <$set name="title" value={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>] }}}>
 	<$set name="title" filter="[<title>encodeuricomponent[]]" select="0">
 		<a href=<<github-link-base>>
 			class="tc-tiddlylink-external"
 			target="_blank"
 			rel="noopener noreferrer"
-		>
-			<$text text=<<currentTiddler>>/><span class="tc-tiny-gap-left">at github</span>
-		</a>
+		>Direct link to <$text text=<<currentTiddler>>/> on github.com</a>
 	</$set>
 </$set>
 \end
@@ -43,9 +40,8 @@ A static HTML representation of this tiddler is available at the URL:
 
 * <<make-static-link>>
 
-Help us to improve the documentation by sending a ~GitHub pull request for this tiddler:
+Help us to improve the documentation by suggesting changes to this tiddler using the [[TiddlyWiki Docs PR Maker|https://saqimtiaz.github.io/tw5-docs-pr-maker/]]
 
-* [[Contribute to TW documentation using TiddlyWiki|https://saqimtiaz.github.io/tw5-docs-pr-maker/]]
 * <<make-github-link>>
 
 </$list>
