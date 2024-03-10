@@ -111,6 +111,33 @@ function runSqlStoreTests(engine) {
 
 		expect(store.getRecipeBags("recipe-rho")).toEqual(["bag-alpha","bag-beta"]);
 	});
+
+	it("should return a saved tiddler within a recipe", function() {
+		expect(store.createBag("bag-alpha","Bag alpha")).toEqual(null);
+		expect(store.createBag("bag-beta","Bag beta")).toEqual(null);
+		expect(store.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"Recipe rho")).toEqual(null);
+
+		var saveRecipeResult = store.saveRecipeTiddler({
+			title: "Another Tiddler",
+			text:  "I'm in rho"
+		},"recipe-rho");
+
+		expect(new Set(Object.keys(saveRecipeResult))).toEqual(new Set(["tiddler_id", "bag_name"]));
+		expect(typeof(saveRecipeResult.tiddler_id)).toBe("number");
+		expect(saveRecipeResult.bag_name).toBe("bag-beta");
+
+		expect(store.getRecipeTiddlers("recipe-rho")).toEqual([{title: "Another Tiddler", bag_name: "bag-beta"}]);
+
+		var getRecipeTiddlerResult = store.getRecipeTiddler("Another Tiddler","recipe-rho");
+		expect(typeof(getRecipeTiddlerResult.tiddler_id)).toBe("number");
+		delete getRecipeTiddlerResult.tiddler_id;
+
+		// these fields may eventually be removed, so don't depend on their presence
+		delete getRecipeTiddlerResult.tiddler.revision;
+		delete getRecipeTiddlerResult.tiddler.bag;
+
+		expect(getRecipeTiddlerResult).toEqual({ attachment_blob: null, bag_name: "bag-beta", tiddler: {title: "Another Tiddler", text: "I'm in rho"} });
+	});
 }
 
 }
