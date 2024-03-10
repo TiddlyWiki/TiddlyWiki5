@@ -1,26 +1,27 @@
 code-body: yes
 created: 20230316112235083
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20230326145802667
+modified: 20240229161432000
 tags: $:/tags/ViewTemplate
 title: $:/editions/tw5.com/filter-run-template
 type: text/vnd.tiddlywiki
 
-\define .op-place()
-<$macrocall $name=".if"
-	cond="""$(op-name)$"""
-	then="<<.place '$(op-name)$'>> = "
-	else=""/>
-\end
-
-\define .op-row()
-<$macrocall $name=".if"
-	cond="""$(op-body)$"""
-	then="""<tr><th align="left">$(op-head)$</th><td><<.op-place>>$(op-body)$</td></tr>"""
-	else=""/>
-\end
-
 \whitespace trim
+
+\procedure .op-place()
+<% if [<op-name>!is[blank]] %>
+	<$macrocall $name=".place" _=<<op-name>> /><span class="tc-tiny-gap">=</span>
+<% endif %>
+\end
+
+\procedure .op-row()
+<% if [<op-body>!is[blank]] %>
+	<tr>
+		<th align="left"><<op-head>></th>
+		<td><<.op-place>><<op-body>></td>
+	</tr>
+<% endif %>
+\end
 
 <$list filter="[all[current]tag[Named Filter Run Prefix]]">
 	<$let op-head="" op-body="" op-name="">
