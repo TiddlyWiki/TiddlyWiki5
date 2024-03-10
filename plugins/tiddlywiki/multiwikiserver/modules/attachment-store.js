@@ -9,9 +9,9 @@ The store folder looks like this:
 
 store/
 	inbox/ - files that are in the process of being uploaded via a multipart form upload
-		202402282125432742-0/
-			part000
-			part001
+		202402282125432742/
+			0
+			1
 			...
 		...
 	files/ - files that are the text content of large tiddlers
