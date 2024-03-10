@@ -13,7 +13,7 @@ Command to load an archive of recipes, bags and tiddlers to a directory
 "use strict";
 
 exports.info = {
-	name: "mws-save",
+	name: "mws-save-archive",
 	synchronous: true
 };
 
