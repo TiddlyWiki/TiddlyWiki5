@@ -7,12 +7,10 @@
 		"tiddlywiki/evernote",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
-		"tiddlywiki/qrcode",
-		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/tour"
+		"tiddlywiki/tour",
+		"tiddlywiki/qrcode"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
