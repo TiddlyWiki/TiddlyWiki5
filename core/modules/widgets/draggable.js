@@ -135,7 +135,7 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 			this.makeDraggable(this.domNodes[0]);
 			if(!this.dragHandleSelector && this.dragEnable && !this.domNodes[0].classList.contains("tc-draggable")) {
 				this.domNodes[0].classList.add("tc-draggable");
-			} else if(!this.dragEnable && this.domNodes[0].classList.contains("tc-draggable")) {
+			} else if(!this.dragHandleSelector && !this.dragEnable && this.domNodes[0].classList.contains("tc-draggable")) {
 				this.domNodes[0].classList.remove("tc-draggable");
 			}
 		}
