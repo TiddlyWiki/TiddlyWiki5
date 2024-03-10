@@ -27,7 +27,6 @@ A simple HTTP server with regexp-based routes
 options: variables - optional hashmap of variables to set (a misnomer - they are really constant parameters)
 		 routes - optional array of routes to use
 		 wiki - reference to wiki object
-		 verbose - boolean
 */
 function Server(options) {
 	var self = this;
@@ -35,7 +34,6 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.verbose = !!options.verbose;
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -45,14 +43,6 @@ function Server(options) {
 			}
 		}
 	}
-	// Register server extensions
-	this.extensions = [];
-	$tw.modules.forEachModuleOfType("server-extension",function(title,exports) {
-		var extension = new exports.Extension(self);
-		self.extensions.push(extension);
-	});
-	// Initialise server extensions
-	this.invokeExtensionHook("server-start-initialisation");
 	// Setup the default required plugins
 	this.requiredPlugins = this.get("required-plugins").split(',');
 	// Initialise CSRF
@@ -105,15 +95,7 @@ function Server(options) {
 	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
 	this.boot.pathPrefix = this.get("path-prefix") || "";
-	// Complete initialisation of server extensions
-	this.invokeExtensionHook("server-completed-initialisation");
 }
-
-Server.prototype.invokeExtensionHook = function(hookName) {
-	$tw.utils.each(this.extensions,function(extension) {
-		extension.hook(hookName);
-	});
-};
 
 /*
 Send a response to the client. This method checks if the response must be sent
@@ -473,10 +455,12 @@ Server.prototype.listen = function(port,host,prefix) {
 	}
 	// Create the server
 	var server = this.transport.createServer(this.listenOptions || {},function(request,response,options) {
-		var start = new Date().getTime()
-		response.on("finish",function() {
-			// console.log("Request",request.method,request.url,(new Date().getTime()) - start);
-		});
+		if(self.get("debug-level") !== "none") {
+			var start = $tw.utils.timer();
+			response.on("finish",function() {
+				console.log("Response tim:",request.method,request.url,$tw.utils.timer() - start);
+			});	
+		}
 		self.requestHandler(request,response,options);
 	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
