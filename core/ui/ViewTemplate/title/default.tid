@@ -2,5 +2,7 @@ title: $:/core/ui/ViewTemplate/title/default
 
 \whitespace trim
 <h2 class="tc-title">
-<$view field="title"/>
+  <$transclude field="caption">
+    <$view field="title"/>
+  </$transclude>
 </h2>
