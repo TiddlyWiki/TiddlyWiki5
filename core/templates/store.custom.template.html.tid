@@ -11,7 +11,7 @@ title: $:/core/templates/store.info.template.html
 				join=`,$(newline)$`
 			>
 				<$text text=<<newline>>/>
-					<$list filter="[all[shadows+tiddlers]tag[$:/tags/InfoTiddlerTemplate]]">
+					<$list filter="[all[shadows+tiddlers]tag[$:/tags/InjectCustomTiddlers]]">
 						<$transclude mode=block/>
 					</$list>
 				<$text text=<<newline>>/>

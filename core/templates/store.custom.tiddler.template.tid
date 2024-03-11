@@ -1,7 +1,7 @@
-title: $:/core/templates/store.info.tiddler.template
-tags: $:/tags/InfoTiddlerTemplate
+title: $:/core/templates/store.custom.tiddler.template
+tags: $:/tags/InjectCustomTiddlers
 
-<!-- This template will be injected into the html file when the wiki is saved. It is activated by $:/core/templates/store.info.template.html -->
+<!-- This template will be injected into the html file when the wiki is saved. It is activated by $:/core/templates/store.custom.template.html -->
 \whitespace trim
 \procedure readableFormat() [UTC]YYYY-0MM-0DD 0hh:0mm:0ss.0XXX UTC TZD
 

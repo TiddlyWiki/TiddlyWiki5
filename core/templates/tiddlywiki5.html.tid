@@ -41,7 +41,7 @@ title: $:/core/templates/tiddlywiki5.html
 </noscript>
 <!--~~ Ordinary tiddlers ~~-->
 `{{$:/core/templates/store.area.template.html}}`
-`{{$:/core/templates/store.info.template.html}}`
+`{{$:/core/templates/store.custom.template.html}}`
 <!--~~ Library modules ~~-->
 <div id="libraryModules" style="display:none;">
 `{{{ [is[system]type[application/javascript]library[yes]] ||$:/core/templates/javascript-tiddler}}}`
