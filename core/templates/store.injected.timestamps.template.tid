@@ -1,4 +1,5 @@
-title: $:/core/templates/store.injected.tiddler.template
+title: $:/core/templates/store.injected.timestamps.template
+caption: Inject last-saved and server-created timestamps
 tags: $:/tags/InjectCustomTiddlers
 
 <!-- This template will be injected into the html file when the wiki is saved. It is activated by $:/core/templates/store.injected.template.html -->
