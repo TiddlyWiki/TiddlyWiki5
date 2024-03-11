@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: 清除密码
 Encryption/ClearPassword/Hint: 清除密码且不加密保存此维基
 Encryption/SetPassword/Caption: 设置密码
 Encryption/SetPassword/Hint: 设置加密保存此维基的密码
+EmergencyDownload/Caption: 下载条目为 json
 ExportPage/Caption: 导出所有条目
 ExportPage/Hint: 导出所有条目
 ExportTiddler/Caption: 导出此条目

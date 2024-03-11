@@ -1,5 +1,5 @@
 created: 20140112190154121
-modified: 20140912142655205
+modified: 20240202121048363
 tags: SystemTiddlers
 title: Naming of System Tiddlers
 type: text/vnd.tiddlywiki
@@ -17,11 +17,11 @@ The system tiddlers provided as part of the core are named according to the foll
 |`$:/core/wiki/*` |lowercase |Metadata about the entire wiki |
 |`$:/docs/*` |lowercase |Documentation tiddlers |
 |`$:/messages/*` |~CamelCase |System messages |
-|`$:/plugins/*` |lowercase |Plugin tiddlers, and plugin content |
+|`$:/plugins/*` |lowercase |[[Plugin|Plugins]] tiddlers, and plugin content |
 |`$:/snippets/*` |//inconsistent// |Reusable snippets (will be replaced by macros) |
-|`$:/state/*` |lowercase |User interface state tiddlers |
+|`$:/state/*` |lowercase |User interface state tiddlers (see StateMechanism) |
 |`$:/tags/*` |~CamelCase |User interface configuration tags |
-|`$:/temp/*` |lowercase |Temporary tiddlers that shouldn't be saved |
+|`$:/temp/*` |lowercase |[[Temporary tiddlers|Temporary Tiddlers]] that shouldn't be saved |
 |`$:/themes/*` |lowercase |Theme plugins |
 
 In the format column:

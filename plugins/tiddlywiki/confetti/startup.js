@@ -25,13 +25,19 @@ exports.startup = function() {
 		var paramObject = event.paramObject || {},
 			options = {},
 			extractNumericParameter = function(name) {
-				options[name] = paramObject[name] && $tw.utils.parseNumber(paramObject[name]);
+				if(paramObject[name]) {
+					options[name] = $tw.utils.parseNumber(paramObject[name]);
+				}
 			},
 			extractListParameter = function(name) {
-				options[name] = paramObject[name] && $tw.utils.parseStringArray(paramObject[name]);
+				if(paramObject[name]) {
+					options[name] = $tw.utils.parseStringArray(paramObject[name]);
+				}
 			},
 			extractBooleanParameter = function(name) {
-				options[name] = paramObject[name] && paramObject[name] === "yes";
+				if(paramObject[name]) {
+					options[name] = paramObject[name] === "yes";
+				}
 			};
 		$tw.utils.each("particleCount angle spread startVelocity decay gravity drift ticks scalar zIndex".split(" "),function(name) {
 			extractNumericParameter(name);
@@ -39,10 +45,12 @@ exports.startup = function() {
 		$tw.utils.each("colors shapes".split(" "),function(name) {
 			extractListParameter(name);
 		});
-		options.origin = {
-			x: paramObject.originX && $tw.utils.parseNumber(paramObject.originX),
-			y: paramObject.originY && $tw.utils.parseNumber(paramObject.originY)
-		};
+		if(paramObject.originX && paramObject.originY) {
+			options.origin = {
+				x: paramObject.originX && $tw.utils.parseNumber(paramObject.originX),
+				y: paramObject.originY && $tw.utils.parseNumber(paramObject.originY)
+			};
+		}
 		extractBooleanParameter("disableForReducedMotion");
 		var delay = paramObject.delay ? $tw.utils.parseNumber(paramObject.delay) : 0;
 		$tw.confettiManager.launch(delay,options);

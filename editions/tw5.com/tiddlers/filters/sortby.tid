@@ -5,7 +5,7 @@ op-input: a list of items
 op-output: all items sorted by lookup list
 op-parameter: a list specifying the order in which to sort the current list
 op-parameter-name: order
-op-purpose: sort the current list in the order of the list referenced in the operand
+op-purpose: sort the current list in the order of the list referenced in the parameter
 tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
 title: sortby Operator
 type: text/vnd.tiddlywiki

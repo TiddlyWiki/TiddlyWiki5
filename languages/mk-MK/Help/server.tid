@@ -1,0 +1,43 @@
+title: $:/language/Help/server
+description: (застарено: погледнете ја 'listen' командата) Обезбедува интерфејс помеѓу HTTP серверот и ТидлиВики
+
+Legacy command to serve a wiki over HTTP.
+
+```
+--server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
+```
+
+The parameters are:
+
+* ''port'' - port number on which to listen; non-numeric values are interpreted as a system environment variable from which the port number is extracted (defaults to "8080")
+* ''root-tiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all")
+* ''root-render-type'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
+* ''root-serve-type'' - the content type with which the root tiddler should be served (defaults to "text/html")
+* ''username'' - the default username for signing edits
+* ''password'' - optional password for basic authentication
+* ''host'' - optional hostname to serve from (defaults to "127.0.0.1" aka "localhost")
+* ''path-prefix'' - optional prefix for paths
+* ''debug-level'' - optional debug level; set to "debug" to view request details (defaults to "none")
+
+If the password parameter is specified then the browser will prompt the user for the username and password. Note that the password is transmitted in plain text so this implementation should only be used on a trusted network or over HTTPS.
+
+For example:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+The username and password can be specified as empty strings if you need to set the hostname or pathprefix and don't want to require a password.
+
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Using an address like this exposes your system to the local network. For information on opening up your instance to the entire local network, and possible security concerns, see the WebServer tiddler at TiddlyWiki.com.
+
+To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port. It can be useful to use an environment variable to pass the port number to the Node.js process. This example references an environment variable called "MY_PORT_NUMBER":
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

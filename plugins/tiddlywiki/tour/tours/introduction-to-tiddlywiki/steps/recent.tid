@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/recent
 caption: Finding recent tiddlers
 tags: $:/tags/Tour/IntroductionToTiddlyWiki
 hint-selector: .tc-sidebar-tabs-main .tc-timeline > .tc-menu-list-item:nth-child(1) .tc-menu-list-subitem:nth-child(1) .tc-tiddlylink
-hint-selector-fallback-1: .tc-sidebar-tabs-main button:nth-child(3)
+hint-selector-fallback-1: .tc-sidebar-tabs-main button[data-tab-title="\$\:\/core\/ui\/SideBar\/Recent"]
 step-success-filter: [list[$:/StoryList]match<step-success-filter-var>]
 step-success-filter-var: [all[tiddlers]!is[system]!sort[modified]]
 
