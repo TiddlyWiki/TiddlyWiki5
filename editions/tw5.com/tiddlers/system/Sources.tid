@@ -1,26 +1,36 @@
 title: $:/editions/tw5.com/TiddlerInfo/Sources
 tags: $:/tags/TiddlerInfo
 caption: Sources
+code-body: yes
 
-\define static-link-base()
-https://tiddlywiki.com/static/$(title)$.html
+\function static-link-base() [[https://tiddlywiki.com/static/$(title)$.html]substitute[]]
+
+\function github-link-base()
+[[https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/editions/tw5.com/tiddlers/$(title)$]substitute[]]
 \end
 
-\define make-static-link()
+\procedure make-static-link()
+\whitespace trim
 <$set name="title" filter="[<currentTiddler>encodeuricomponent[]encodeuricomponent[]]" select="0">
-<a href=<<static-link-base>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<static-link-base>>/></a>
+	<a href=<<static-link-base>>
+		class="tc-tiddlylink-external"
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		<$text text=<<static-link-base>>/>
+	</a>
 </$set>
 \end
 
-\define github-link-base()
-https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/editions/tw5.com/tiddlers/$(title)$
-\end
-
-\define make-github-link()
-<$set name="title" value={{$:/config/OriginalTiddlerPaths##$(currentTiddler)$}}>
-<$set name="title" filter="[<title>encodeuricomponent[]]" select="0">
-<a href=<<github-link-base>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text=<<github-link-base>>/></a>
-</$set>
+\procedure make-github-link()
+<$set name="title" value={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>] }}}>
+	<$set name="title" filter="[<title>encodeuricomponent[]]" select="0">
+		<a href=<<github-link-base>>
+			class="tc-tiddlylink-external"
+			target="_blank"
+			rel="noopener noreferrer"
+		>Direct link to <$text text=<<currentTiddler>>/> on github.com</a>
+	</$set>
 </$set>
 \end
 
@@ -30,7 +40,7 @@ A static HTML representation of this tiddler is available at the URL:
 
 * <<make-static-link>>
 
-Help us to improve the documentation by sending a ~GitHub pull request for this tiddler:
+Help us to improve the documentation by suggesting changes to this tiddler using the [[TiddlyWiki Docs PR Maker|https://saqimtiaz.github.io/tw5-docs-pr-maker/]]
 
 * <<make-github-link>>
 

@@ -5,21 +5,6 @@ tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-<div style="border: 2px solid red; background: #ffd; padding: 0 0.5em; border-radius: 8px;">
-
- This is a build of ~TiddlyWiki 5 from the branch [[confetti-plugin|https://github.com/Jermolene/TiddlyWiki5/tree/confetti-plugin]]. Despite the name of the branch, it actually introduces two new plugins and brings updates to an existing one:
-
- * The ''Tour Plugin'' allows interactive learning tours to be created and presented in TiddlyWiki
- ** Launch the tour in this wiki with the {{$:/plugins/tiddlywiki/tour/start-tour-button}} button in the sidebar
- * The ''Confetti Plugin'' displays animated bursts of confetti
- ** See the [[Confetti Plugin readme|$:/plugins/tiddlywiki/confetti/readme]] for examples
- * The ''updated Dynannotate Plugin'' gains the ability to highlight screen elements using an animated spotlight effect
- ** See the [[Dynannotate Spotlight Demo|$:/plugins/tiddlywiki/dynannotate/examples/spotlight]]
-
- A standalone demo of the tour functionality is [ext[available here|./tour.html]].
-
- </div>
- 
  !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.

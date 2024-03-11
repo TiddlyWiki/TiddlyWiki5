@@ -1,23 +1,35 @@
 created: 20150124182127000
-modified: 20201103111044922
-tags: [[Filter Syntax]]
+modified: 20230710074414361
+tags: [[Filter Run]]
 title: Filter Step
 type: text/vnd.tiddlywiki
 
+A <<.def "filter step">> represents a single operation within a <<.def "filter run">>.
+
+In programming terms, it is akin to a function call to which the step's input is passed as a parameter. A step's output is a [[title selection|Title Selection]] that contributes to a [[filter run|Filter Run]] and hence to the entire [[filter expression|Filter Expression]] that contains it.
+
 <$railroad text="""
+\start none
+\end none
 [:"!"]
-[: [[operator|"Filter Operators"]] [:":" suffix] ]
-[[parameter|"Filter Parameter"]]
+( / "if omitted, defaults to: title" /|:
+( - | :[[operator|"Filter Operators"]] )
+{ [:":" [[suffix|"Filter Operators"]] ] } )
+{ [[parameter|"Filter Parameter"]] + "," }
 """/>
 
-A <<.def step>> represents a single operation within a [[filter|Filter Syntax]].
+The step's <<.def operator>> is drawn from a list of predefined keywoards which are known as [[filter operators|Filter Operators]].
 
-In programming terms, it is akin to a function call to which [[the step's input|Filter Run]] is passed as an implicit parameter. A step's output is a [[selection|Title Selection]] that contributes to a [[run|Filter Run]] and hence to the entire [[filter expression|Filter Expression]] that contains it.
-
-The step's <<.def operator>> is drawn from a list of [[predefined keywords|Filter Operators]], which can be extended by plugins. Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. If a step's operator is omitted altogether, it defaults to `title`.
+Many steps require an explicit <<.def parameter>>, that further defines what the step is to do. 
 
 The <<.def suffix>> is additional text, often the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
 
-Many steps require an explicit <<.def parameter>> value, also known as an <<.def operand>>, that further defines what the step is to do. 
+If a step's <<.def operator>> and <<.def suffix>> are //omitted// altogether, it defaults to the [[title|title Operator]] operator.
 
-<<.from-version "5.1.23">> Some steps accept multiple parameters which are separated by a ` , ` character.
+<<.from-version "5.1.23">> Some steps accept multiple <<.def parameter>>s which are separated by a `,` character.
+
+Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. 
+
+Filter operators can be extended by plugins.
+
+{{Selection Constructors}}
