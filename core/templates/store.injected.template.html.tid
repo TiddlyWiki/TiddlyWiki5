@@ -1,4 +1,4 @@
-title: $:/core/templates/store.custom.template.html
+title: $:/core/templates/store.injected.template.html
 
 \whitespace trim
 <!-- Unencrypted -->
