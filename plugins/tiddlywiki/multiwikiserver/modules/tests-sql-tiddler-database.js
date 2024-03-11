@@ -14,11 +14,11 @@ Tests the SQL tiddler database layer
 
 if($tw.node) {
 
-describe("SQL tiddler store with node-sqlite3-wasm", function() {
+describe("SQL tiddler database with node-sqlite3-wasm", function() {
 	runSqlDatabaseTests("wasm");
 });
 
-describe("SQL tiddler store with node-sqlite3-wasm", function() {
+describe("SQL tiddler database with better-sqlite3", function() {
 	runSqlDatabaseTests("better");
 });
 
