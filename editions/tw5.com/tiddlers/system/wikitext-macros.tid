@@ -88,7 +88,7 @@ type: text/vnd.tiddlywiki
 <<tw-code $tiddler$>>
 \end
 
-\procedure flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",  inkField:"link")
+\procedure flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")
 <$link class={{{ [<class>addprefix[tc-card ]] }}} to={{{ [<currentTiddler>get<linkField>else<currentTiddler>] }}}>
 	<div class="tc-card-accent" style.borderTop={{{ [<bordercolor>!is[blank]addprefix[5px solid ]] }}} style.background={{!!background}} style.backgroundColor=<<backgroundcolor>> style.color=<<textcolor>> style.fill=<<textcolor>>>
 		<$list filter="[<currentTiddler>has[ribbon-text]]" variable="ignore">
