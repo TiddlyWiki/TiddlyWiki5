@@ -138,6 +138,19 @@ function runSqlStoreTests(engine) {
 
 		expect(getRecipeTiddlerResult).toEqual({ attachment_blob: null, bag_name: "bag-beta", tiddler: {title: "Another Tiddler", text: "I'm in rho"} });
 	});
+
+	it("should return no tiddlers after the only one has been deleted", function() {
+		expect(store.createBag("bag-alpha","Bag alpha")).toEqual(null);
+
+		store.saveBagTiddler({
+			title: "Another Tiddler",
+			text:  "I'm in alpha",
+			tags:  "one two three"
+		}, "bag-alpha");
+
+		store.deleteTiddler("Another Tiddler","bag-alpha");
+		expect(store.getBagTiddlers("bag-alpha")).toEqual([]);
+	});
 }
 
 }
