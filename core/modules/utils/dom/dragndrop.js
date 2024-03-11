@@ -25,8 +25,7 @@ widget: widget to use as the context for the filter
 exports.makeDraggable = function(options) {
 	var dragImageType = options.dragImageType || "dom",
 		dragImage,
-		domNode = options.domNode,
-		removeEventHandler = options.remove;
+		domNode = options.domNode;
 	// Make the dom node draggable (not necessary for anchor tags)
 	if(!options.selector && ((domNode.tagName || "").toLowerCase() !== "a")) {
 		domNode.setAttribute("draggable","true");
