@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js
+title: $:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js
 type: application/javascript
 module-type: library
 
@@ -30,7 +30,7 @@ function SqlTiddlerStore(options) {
 	this.entityStateTiddlerPrefix = "$:/state/MultiWikiServer/";
 	// Create the database
 	this.databasePath = options.databasePath || ":memory:";
-	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-database.js").SqlTiddlerDatabase;
+	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-database.js").SqlTiddlerDatabase;
 	this.sqlTiddlerDatabase = new SqlTiddlerDatabase({
 		databasePath: this.databasePath,
 		engine: options.engine

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/route-put-bag.js
+title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/put-bag.js
 type: application/javascript
 module-type: route
 

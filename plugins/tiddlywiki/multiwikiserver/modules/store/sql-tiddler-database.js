@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-database.js
+title: $:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-database.js
 type: application/javascript
 module-type: library
 

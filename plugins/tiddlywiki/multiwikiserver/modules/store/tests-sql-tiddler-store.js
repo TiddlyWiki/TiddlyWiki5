@@ -1,5 +1,5 @@
 /*\
-title: tests-sql-tiddler-store.js
+title: $:/plugins/tiddlywiki/multiwikiserver/store/tests-sql-tiddler-store.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
@@ -23,7 +23,7 @@ describe("SQL tiddler store with better-sqlite3", function() {
 });
 
 function runSqlStoreTests(engine) {
-	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore;
+	var SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js").SqlTiddlerStore;
 
 	var store;
 

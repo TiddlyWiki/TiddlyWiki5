@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/attachment-store.js
+title: $:/plugins/tiddlywiki/multiwikiserver/store/attachments.js
 type: application/javascript
 module-type: library
 

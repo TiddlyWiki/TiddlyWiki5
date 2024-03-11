@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/mws-save-archive.js
+title: $:/plugins/tiddlywiki/multiwikiserver/commands/mws-save-archive.js
 type: application/javascript
 module-type: command
 

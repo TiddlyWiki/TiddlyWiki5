@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/route-put-recipe.js
+title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/put-recipe.js
 type: application/javascript
 module-type: route
 

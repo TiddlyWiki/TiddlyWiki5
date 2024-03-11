@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/route-get-status.js
+title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-status.js
 type: application/javascript
 module-type: route
 

@@ -21,11 +21,11 @@ exports.synchronous = true;
 exports.startup = function() {
 	var path = require("path");
 	// Create and initialise the tiddler store and upload manager
-	var AttachmentStore = require("$:/plugins/tiddlywiki/multiwikiserver/attachment-store.js").AttachmentStore,
+	var AttachmentStore = require("$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js").AttachmentStore,
 		attachmentStore = new AttachmentStore({
 			storePath: path.resolve($tw.boot.wikiPath,"store/")
 		}),
-		SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/sql-tiddler-store.js").SqlTiddlerStore,
+		SqlTiddlerStore = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-store.js").SqlTiddlerStore,
 		store = new SqlTiddlerStore({
 			databasePath: path.resolve($tw.boot.wikiPath,"store/database.sqlite"),
 			engine: $tw.wiki.getTiddlerText("$:/config/MultiWikiServer/Engine","better"), // better || wasm
