@@ -430,8 +430,9 @@ Listen for requests
 port: optional port number (falls back to value of "port" variable)
 host: optional host address (falls back to value of "host" variable)
 prefix: optional prefix (falls back to value of "path-prefix" variable)
+callback: optional callback(err) to be invoked when the listener is up and running
 */
-Server.prototype.listen = function(port,host,prefix) {
+Server.prototype.listen = function(port,host,prefix,options) {
 	var self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
@@ -458,7 +459,7 @@ Server.prototype.listen = function(port,host,prefix) {
 		if(self.get("debug-level") !== "none") {
 			var start = $tw.utils.timer();
 			response.on("finish",function() {
-				console.log("Response tim:",request.method,request.url,$tw.utils.timer() - start);
+				console.log("Response time:",request.method,request.url,$tw.utils.timer() - start);
 			});	
 		}
 		self.requestHandler(request,response,options);
@@ -469,6 +470,9 @@ Server.prototype.listen = function(port,host,prefix) {
 			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
 		$tw.utils.log("Serving on " + url,"brown/orange");
 		$tw.utils.log("(press ctrl-C to exit)","red");
+		if(options.callback) {
+			options.callback(null);
+		}
 	});
 	// Listen
 	return server.listen(port,host);
