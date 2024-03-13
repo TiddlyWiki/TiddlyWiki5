@@ -1,25 +1,25 @@
 created: 20150203173506000
+modified: 20240229155612000
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20230602181119360
 tags: $:/tags/ViewTemplate
 code-body: yes
 title: $:/editions/tw5.com/operator-template
 
-\define .op-place()
-<$macrocall $name=".if"
-	cond="""$(op-name)$"""
-	then="<<.place '$(op-name)$'>> = "
-	else=""/>
-\end
-
-\define .op-row()
-<$macrocall $name=".if"
-	cond="""$(op-body)$"""
-	then="""<tr><th align="left">$(op-head)$</th><td><<.op-place>>$(op-body)$</td></tr>"""
-	else=""/>
-\end
-
 \whitespace trim
+
+\procedure .op-place()
+<% if [<op-name>!is[blank]] %>
+	<$macrocall $name=".place" _=<<op-name>> /><span class="tc-tiny-gap">=</span>
+<% endif %>
+\end
+
+\procedure .op-row()
+<% if [<op-body>!is[blank]] %>
+	<tr>
+		<th align="left"><<op-head>></th><td><<.op-place>><<op-body>></td>
+	</tr>
+<% endif %>
+\end
 
 <$list filter="[all[current]tag[Filter Operators]]">
 	<$let op-head="" op-body="" op-name="">

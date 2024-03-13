@@ -49,7 +49,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 	this.tiddlerList = tiddlerList || this.wiki.filterTiddlers(this.filter,this);
 	// Accumulate the <$set> widgets from each tiddler
 	$tw.utils.each(this.tiddlerList,function(title) {
-		var parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline:true, configTrimWhiteSpace:true});
+		var parser = widgetPointer.wiki.parseTiddler(title,{parseAsInline:true, configTrimWhiteSpace:false});
 		if(parser) {
 			var parseTreeNode = parser.tree[0];
 			while(parseTreeNode && ["setvariable","set","parameters"].indexOf(parseTreeNode.type) !== -1) {
