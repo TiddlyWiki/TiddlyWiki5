@@ -1,6 +1,6 @@
 created: 20210618133745003
 from-version: 5.2.0
-modified: 20230710073315595
+modified: 20240312202834547
 rp-input: the filter output of all previous runs so far
 rp-output: the input titles as modified by the result of this filter run
 rp-purpose: modify input titles by the result of evaluating this filter run for each item
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 <$railroad text="""
 \start none
 \end none
-( ":map" | - )
+( ":map" (: ":flat" | - ) | - )
 [[run|"Filter Run"]]
 """/>
 
