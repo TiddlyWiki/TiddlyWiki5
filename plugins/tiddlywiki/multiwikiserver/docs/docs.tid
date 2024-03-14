@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/docs
+
+! HTTP API
+
+The ~MultiWikiServer HTTP API provides access to resources hosted by the MWS store. It is based on [[the API of TiddlyWeb|https://tank.peermore.com/tanks/tiddlyweb/HTTP%20API]], first developed in 2008 by Chris Dent.
+
+The design goals of the API are:
+
+* To follow the principles of REST where practical
+* To present resources as nouns, not verbs
+
+General points about the design:
+
+* In MWS there are no resources that end with / (except for the root path which is /)

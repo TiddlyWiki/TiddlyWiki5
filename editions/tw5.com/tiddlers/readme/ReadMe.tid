@@ -14,7 +14,13 @@ UNDER DEVELOPMENT
 
 This is a branch of TiddlyWiki that adds the ~MultiWikiServer plugin.
 
+!! Readme
+
 {{$:/plugins/tiddlywiki/multiwikiserver/readme}}
+
+!! Docs
+
+{{$:/plugins/tiddlywiki/multiwikiserver/docs}}
 
 ---
 
