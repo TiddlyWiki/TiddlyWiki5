@@ -25,8 +25,8 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
-	// The Node.js docs are unequivocal that exiting in this way can be dangerous because pending I/O is cancelled.
-	// It would be better to just stop the server listeners explicitly so that Node.js will exit the process naturally.
+	// The Node.js docs are very clear that exiting in this way can be dangerous because pending I/O is cancelled.
+	// TODO: stop the server listeners explicitly so that Node.js will exit the process naturally.
 	process.exit();
 	return null;
 };
