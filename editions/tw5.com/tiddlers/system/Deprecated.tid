@@ -7,6 +7,6 @@ Deprecated features of TiddlyWiki are those that have been superseded by newer, 
 
 Deprecated features will still work, but are not recommended for new content.
 
-Tiddlers tagged $:/deprecated:
+''Tiddlers tagged'' $:/deprecated:
 
 <<list-links filter:"[tag[$:/deprecated]]">>
