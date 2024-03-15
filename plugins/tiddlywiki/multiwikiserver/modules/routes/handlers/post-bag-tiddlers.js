@@ -29,7 +29,6 @@ exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]);
-console.log(`Got ${bag_name} and ${bag_name_2}`)
 	// Require the bag names to match
 	if(bag_name !== bag_name_2) {
 		return state.sendResponse(400,{"Content-Type": "text/plain"},"Bad Request: bag names do not match");

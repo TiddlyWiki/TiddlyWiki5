@@ -250,7 +250,6 @@ type - content type of file as uploaded
 Returns {tiddler_id:}
 */
 SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddlerFields,bagname,options) {
-	console.log(`saveBagTiddlerWithAttachment ${JSON.stringify(incomingTiddlerFields)}, ${bagname}, ${JSON.stringify(options)}`);
 	const attachment_blob = this.attachmentStore.adoptAttachment(options.filepath,options.type,options.hash);
 	if(attachment_blob) {
 		return this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields,bagname,attachment_blob);

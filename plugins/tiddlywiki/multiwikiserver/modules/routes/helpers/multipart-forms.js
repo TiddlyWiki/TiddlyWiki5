@@ -33,7 +33,6 @@ exports.processIncomingStream = function(options) {
 	const parts = []; // Array of {name:, headers:, value:, hash:} and/or {name:, filename:, headers:, inboxFilename:, hash:} 
 	options.state.streamMultipartData({
 		cbPartStart: function(headers,name,filename) {
-			console.log(`Received file ${name} and ${filename} with ${JSON.stringify(headers)}`)
 			const part = {
 				name: name,
 				filename: filename,
@@ -58,7 +57,6 @@ exports.processIncomingStream = function(options) {
 			}
 			length = length + chunk.length;
 			hash.update(chunk);
-			console.log(`Got a chunk of length ${chunk.length}, length is now ${length}`);
 		},
 		cbPartEnd: function() {
 			if(fileStream) {
@@ -72,7 +70,6 @@ exports.processIncomingStream = function(options) {
 			if(err) {
 				return options.callback(err);
 			} else {
-				console.log(`Multipart form data processed as ${JSON.stringify(parts,null,4)}`);
 				const partFile = parts.find(part => part.name === "file-to-upload" && !!part.filename);
 				if(!partFile) {
 					return state.sendResponse(400, {"Content-Type": "text/plain"},"Missing file to upload");
@@ -88,7 +85,6 @@ exports.processIncomingStream = function(options) {
 						tiddlerFields[part.name.slice(tiddlerFieldPrefix.length)] = part.value.trim();
 					}
 				}
-				console.log(`Creating tiddler with ${JSON.stringify(tiddlerFields)} and ${partFile.filename}`)
 				options.store.saveBagTiddlerWithAttachment(tiddlerFields,options.bagname,{
 					filepath: partFile.inboxFilename,
 					type: type,

@@ -25,7 +25,6 @@ exports.handler = function(request,response,state) {
 		data = $tw.utils.parseJSONSafe(state.data);
 	if(recipe_name === recipe_name_2 && data) {
 		const result = $tw.mws.store.createRecipe(recipe_name,data.bag_names,data.description);
-		console.log(`create recipe route handler for ${recipe_name} with ${JSON.stringify(data)} got result ${JSON.stringify(result)}`)
 		if(!result) {
 			state.sendResponse(204,{
 				"Content-Type": "text/plain"
