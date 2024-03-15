@@ -244,15 +244,34 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	// return [{type: "element", tag: "p", children: children, start: start, end: end }];
 
 	var isP = false;
+	// $tw.utils.each(children, function(child) {
+	// 	if(child.type === "text" ||
+	// 		(($tw.config.htmlBlockElements.indexOf(child.tag) === -1) && 
+	// 		child.tag  && child.tag.charAt(0) !== "$") ) {
+	// 		isP = true;
+	// 		}
+	// });
+
 	$tw.utils.each(children, function(child) {
-		if (child.type === "text" ||
+		if(child.type === "text" ||
 			(($tw.config.htmlBlockElements.indexOf(child.tag) === -1) && 
-			child.tag  && child.tag.charAt(0) !== "$")) {
+			child.tag  && child.tag.charAt(0) !== "$") ||
+			(child.type === "button") ||
+			(child.type === "radio") ||
+			(child.type === "link") ||
+			(child.type === "checkbox") ) {
 			isP = true;
 			}
 	});
 
-	if (isP) {
+	// $tw.utils.each(children, function(child) {
+	// 	if(child.type === "text" ||
+	// 		(($tw.config.htmlBlockElements.indexOf(child.tag) === -1) ) ) {
+	// 		isP = true;
+	// 		}
+	// });
+
+	if(isP) {
 		return [{type: "element", tag: "p", children: children, start: start, end: end }];
 	}
 	else {

@@ -1,5 +1,5 @@
 created: 20221123151255885
-modified: 20221123151420696
+modified: 20240315205833043
 tags: 
 title: power Operator-todo
 type: text/vnd.tiddlywiki
@@ -9,3 +9,12 @@ type: text/vnd.tiddlywiki
 text and links .. all text is widget created ... Investigate in more detail. vertical spacing
 
 ''have a closer look at the DOM structure''
+
+`.operator-examples` is implemented like this: 
+
+```
+\procedure .operator-examples(op,text:"Examples") <$link to=`$(op)$ Operator (Examples)`><<text>></$link>
+```
+
+So it is implemented as an `<a>` element which is "inline". So if `<<.operator-examples "power">> ` is followed by a space it will add a paragraph -- hmmm
+
