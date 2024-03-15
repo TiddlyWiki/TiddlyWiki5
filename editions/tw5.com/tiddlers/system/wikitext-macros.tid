@@ -1,6 +1,6 @@
 code-body: yes
 created: 20150117184156000
-modified: 20240229155641000
+modified: 20240315144208842
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
@@ -65,7 +65,7 @@ type: text/vnd.tiddlywiki
 	<p>
 		That renders as:
 	</p>
-	<$macrocall $name="src"/>
+	<$transclude $variable="src" $mode="block"/>
 </div>
 \end
 
