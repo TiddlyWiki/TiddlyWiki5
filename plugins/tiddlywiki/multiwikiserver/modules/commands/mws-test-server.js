@@ -75,13 +75,14 @@ TestRunner.prototype.runTests = function(callback) {
 
 TestRunner.prototype.runTest = function(testSpec,callback) {
 	console.log(`Running Server Test: ${testSpec.description}`)
-	if(testSpec.method === "GET") {
+	if(testSpec.method === "GET" || testSpec.method === "POST") {
 		const request = this.httpLibrary.request({
 			protocol: this.urlServerParsed.protocol,
 			host: this.urlServerParsed.hostname,
 			port: this.urlServerParsed.port,
 			path: testSpec.path,
-			method: "GET"
+			method: testSpec.method,
+			headers: testSpec.headers
 		}, function(response) {
 			if (response.statusCode < 200 || response.statusCode >= 300) {
 				return callback(`Request failed to ${response.url} with status code ${response.statusCode} and ${JSON.stringify(response.headers)}`);
@@ -100,6 +101,9 @@ TestRunner.prototype.runTest = function(testSpec,callback) {
 		request.on("error", (e) => {
 			console.error(`problem with request: ${e.message}`);
 		});
+		if(testSpec.data) {
+			request.write(testSpec.data);
+		}
 		request.end();
 	} else {
 		callback("Unknown method");
@@ -116,6 +120,20 @@ const testSpecs = [
 		},
 		expectedResult: (jsonData,data) => {
 			return jsonData.username === "Joe Bloggs";
+		}
+	},
+	{
+		description: "Upload a 1px PNG",
+		method: "POST",
+		path: "/wiki/bag-alpha/bags/bag-alpha/tiddlers/",
+		headers: {
+			"Accept": 'application/json',
+			"Content-Type": 'multipart/form-data; boundary=----WebKitFormBoundaryVR9zv0PFmx9YtpLL',
+			"User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+		},
+		data: '------WebKitFormBoundaryVR9zv0PFmx9YtpLL\r\nContent-Disposition: form-data; name="file-to-upload"; filename="one-white-pixel.png"\r\nContent-Type: image/png\r\n\r\n\r\n------WebKitFormBoundaryVR9zv0PFmx9YtpLL\r\nContent-Disposition: form-data; name="tiddler-field-title"\r\n\r\nOne White Pixel\r\n------WebKitFormBoundaryVR9zv0PFmx9YtpLL\r\nContent-Disposition: form-data; name="tiddler-field-tags"\r\n\r\nimage\r\n------WebKitFormBoundaryVR9zv0PFmx9YtpLL--\r\n',
+		expectedResult: (jsonData,data) => {
+			return jsonData["imported-tiddlers"] && $tw.utils.isArray(jsonData["imported-tiddlers"]) && jsonData["imported-tiddlers"][0] === "One White Pixel";
 		}
 	}
 ];
