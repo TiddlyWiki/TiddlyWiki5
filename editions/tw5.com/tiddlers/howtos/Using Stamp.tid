@@ -21,7 +21,7 @@ Snippets can either ''replace'', or be ''added before and/or after'', the select
 
 # Create a new tiddler by clicking the //Create a new tiddler// <<.icon $:/core/images/new-button>> button in the sidebar
 
-# Change the title for the tiddler (from e.g. `New Tiddler 1`). The tiddler title determines the menu item for the stamp if you do not set a `caption` field (see below).<div><$macrocall $name=".tip" _="""''Pro tip'' Set a title like `$:/yourusername/snippets/My new stamp` to 'file' your new tiddler away as a [[system tiddler|SystemTiddlers]] which doesn't appear in the normal search results """ /></div>
+# Change the title for the tiddler (from e.g. `New Tiddler 1`). The tiddler title determines the menu item for the stamp if you do not set a `caption` field (see below).<div><$macrocall $name=".tip" _="""Set a title like `$:/yourusername/snippets/My new stamp` to 'file' your new tiddler away as a [[system tiddler|SystemTiddlers]] which doesn't appear in the normal search results """ /></div>
 
 # Add the tag <<tag-pill $:/tags/TextEditor/Snippet>> by entering `$:/tags/TextEditor/Snippet` in the `tag name` tag box and clicking //Add// (or pressing the //Enter// key)
 
@@ -30,8 +30,6 @@ Snippets can either ''replace'', or be ''added before and/or after'', the select
 # Create a field with the name `caption` and value set to the text for the snippet's stamp menu item:
 ## Enter `caption` in the //Add new field// `field name` box
 ## Enter the stamp menu item caption in the `field value` box
-
-
 
 ! Re-ordering snippets
 Your new snippet will appear at the bottom of the stamp menu by default. To adjust the order of snippets:

@@ -57,7 +57,7 @@ Note  the double quotes that are required for parameters containing special char
 
 The full list of available optional parameters is:
 
-<<list-links filter:"[tag[WebServer Parameters]]">>
+<<list-links filter:"[tag[WebServer Parameters]]" class:"multi-columns">>
 
 ! Guides
 

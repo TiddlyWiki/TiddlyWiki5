@@ -24,7 +24,7 @@ Here is an example of displaying a modal and passing parameters to it:
 (Note how all parameters to `action-sendmessage` other than `$param` and `$message` are available as variables within the modal.)
 
 <$macrocall $name='wikitext-example-without-html'
-src='Your name: <$edit-text tiddler="$:/temp/yourName" tag="input" default="Your name"/>
+src="""Your name: <$edit-text tiddler="$:/temp/yourName" tag="input" default="Your name"/>
 
 Your message:
 <$edit-text tiddler="$:/temp/yourMessage" default="Your message"/>
@@ -32,7 +32,7 @@ Your message:
 <$button>
 <$action-sendmessage $message="tm-modal" $param="SampleModal" yourName={{$:/temp/yourName}} yourMessage={{$:/temp/yourMessage}}/>
 Click me!
-</$button>'/>
+</$button>"""/>
 
 
 <<.tip """<$macrocall $name=".from-version" version="5.1.18"/> if triggered from within a ''new window'', the above examples will be displayed within that window. The <$macrocall $name=".attr" _="rootwindow"/> attribute can be set to ''yes'' or ''true'' to inherit this behavior and to display the Modal within the ''root'' window""">>

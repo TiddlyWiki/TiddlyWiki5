@@ -25,7 +25,7 @@ Clears the contents of the image and fills it with a solid colour. Parameters in
 |!Name |!Description |
 |colour |Colour the image should be filled with, defaults to <<.value "White">> |
 
-<<.tip "The colour field can take any normal CSS colour value, including the hexadecimal representation or the RGB format.">>
+<<.tip title:"" _:"The colour field can take any normal CSS colour value, including the hexadecimal representation or the RGB format.">>
 </div>
 \end
 
