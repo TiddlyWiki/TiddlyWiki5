@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate
 name: {{$:/language/PageTemplate/Name}}
 description: {{$:/language/PageTemplate/Description}}
-icon: $:/core/images/layout-button
+icon: $:/core/images/default-layout
 code-body: yes
 
 \whitespace trim

@@ -1,5 +1,5 @@
 created: 20150110182600000
-modified: 20240217204557302
+modified: 20240224170607731
 tags: [[Improving TiddlyWiki Documentation]]
 title: Documentation Macros
 type: text/vnd.tiddlywiki
@@ -18,13 +18,7 @@ The following macros are used throughout ~TiddlyWiki's documentation. Their name
 
 ! Textboxes
 
-|Macro |Used for |Example |Renderd |h
-|^.infoBox |^Text-box with an icon |`<<.infoBox text:"A generic ...">>` |<<.infoBox "A generic text box, with an optional title and a custom icon">> |
-|^.note|^Infos with a title |`<<.note text:"Some text ...">>` |<<.note "Some text in a box with a title by default">> |
-|^.tip |^hints and tips |`<<.tip text:"Eg: Turn ...">>` |<<.tip "Eg: Turn your screen on, otherwise<br>you won't be able to see much.">> |
-|^.warning |^warning advice |`<<.warning text:"Eg: Make a backup ...">>` |<<.warning "Eg: Make a backup of your file<br>before you upgrade.">> |
-
-!! Textboxe Parameters
+!! Textbox Parameters
 
 ; text
 : Text to be shown in the box
@@ -41,10 +35,20 @@ The following macros are used throughout ~TiddlyWiki's documentation. Their name
 : ''.tip''-macro defaults to `doc-tip`
 : ''.warning''-macro defaults to `doc-warning`
 
+!! Textbox Examples
+
+|Macro |Used for |Example |Renderd |h
+|^.infoBox |^Text-box with an icon |`<<.infoBox text:"A generic ...">>` |<<.infoBox "A generic text box, with an optional title and a custom icon">> |
+|^.note|^Infos with a title |`<<.note text:"Some text ...">>` |<<.note "Some text in a box with a title by default">> |
+|^.tip |^hints and tips |`<<.tip text:"Eg: Turn ...">>` |<<.tip "Eg: Turn your screen on, otherwise<br>you won't be able to see much.">> |
+|^.warning |^warning advice |`<<.warning text:"Eg: Make a backup ...">>` |<<.warning "Eg: Make a backup of your file<br>before you upgrade.">> |
+
+
+
 ! Blocks
 
-|Macro |Used for |h
-|.preamble |<<.preamble "an introductory sentence that stands apart from the rest of the tiddler">> |
+|Macro |Example |Used for |h
+|.preamble |`<<.preamble "your text comes here">>` |<<.preamble "an introductory sentence that stands apart from the rest of the tiddler">> |
 
 ! Tiddlers and Fields
 

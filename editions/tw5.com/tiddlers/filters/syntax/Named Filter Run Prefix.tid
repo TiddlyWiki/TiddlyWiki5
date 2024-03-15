@@ -1,10 +1,36 @@
 created: 20201214044413473
-modified: 20211118025845599
-tags: [[Filter Syntax]]
+modified: 20230711090833212
+tags: [[Filter Run Prefix]]
 title: Named Filter Run Prefix
+type: text/vnd.tiddlywiki
 
-<$set name="prefixlist" filter="""[all[shadows+tiddlers]has[module-type]module-type[filterrunprefix]trim:prefix[$:/core/modules/filterrunprefixes/]trim:suffix[.js]addprefix["]addsuffix["]join[|]addprefix[(]addsuffix[)]]""">
-<$railroad text=<<prefixlist>>/>
-</$set>
+In <<.from-version "5.1.23">> the named filter run prefixes where implemented. `:cascade`, `:map` and `:sort` have been added later as shown in the diagrams.
 
-A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a single-character prefix (`+`, `-` and so on). To create a new filter run prefix, create a [[Javascript module|Modules]] with a [[module-type|ModuleType]] of `filterrunprefix`.
+A named filter run prefix can precede any [[run|Filter Run]] of a [[filter expression|Filter Expression]] in place of a [[shortcut run prefix|Shortcut Filter Run Prefix]].
+
+<$railroad text="""
+\start none
+\end none
+(
+[[<":all"> |"All Filter Run Prefix"]] |
+[[<":and"> |"And Filter Run Prefix"]] |
+[[<":cascade">  /"v5.2.1"/  |"Cascade Filter Run Prefix"]] |
+[[<":else"> |"Else Filter Run Prefix"]] |
+[[<":except"> |"Except Filter Run Prefix"]] |
+[[<":filter"> |"Filter Filter Run Prefix"]] |
+[[<":intersection"> |"Intersection Filter Run Prefix"]] |
+[[<":map">  /"v5.2.0"/ |"Map Filter Run Prefix"]] |
+[[<":or"> |"Or Filter Run Prefix"]] |
+[[<":reduce"> |"Reduce Filter Run Prefix"]] |
+[[<":sort">  /"v5.2.0"/ |"Sort Filter Run Prefix"]] |
+[[<":then">  /"v5.3.0"/ |"Then Filter Run Prefix"]]) [[run|"Filter Run"]]
+"""/>
+
+
+<<.tip "Compare named filter run prefix `:filter` with [[filter Operator]] which applies a subfilter to every input title, removing the titles that return an empty result from the subfilter">>
+
+<<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to used to flatten a list of items down to a single item by repeatedly applying a subfilter">> 
+
+<<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the <<.var currentTiddler>> variable is set to the title of the tiddler being processed.<br>The value of currentTiddler outside the subfilter is available in the variable <<.var "..currentTiddler">> <<.from-version "5.2.0">>""" >>
+
+Also see: [[Interchangeable Filter Run Prefixes]]

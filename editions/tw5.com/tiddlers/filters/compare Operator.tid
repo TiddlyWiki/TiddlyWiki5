@@ -4,7 +4,7 @@ tags: [[Filter Operators]] [[Mathematics Operators]] [[String Operators]] [[Nega
 title: compare Operator
 type: text/vnd.tiddlywiki
 caption: compare
-op-purpose: filter the input by comparing each item against the operand
+op-purpose: filter the input by comparing each item against the parameter
 op-input: a [[selection of titles|Title Selection]]
 op-suffix: the <<.op compare>> operator uses a rich suffix, see below for details
 op-parameter: the value to compare
@@ -16,7 +16,7 @@ op-neg-output: those input titles <<.em not>> matching the specified comparison
 The <<.op compare>> operator uses an extended syntax to specify all the options:
 
 ```
-[compare:<type>:<mode>[<operand>]]
+[compare:<type>:<mode>[<parameter>]]
 ```
 
 The ''type'' can be:

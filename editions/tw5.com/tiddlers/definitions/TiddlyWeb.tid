@@ -2,8 +2,9 @@ created: 201308300841
 modified: 20170127221451610
 tags: Definitions
 title: TiddlyWeb
+type: text/vnd.tiddlywiki
 
-TiddlyWeb is a reference implementation for an interface to put [[Tiddlers]] on the web.
+TiddlyWeb is a reference implementation for an interface to put [[Tiddlers]] on the web using the [[Bags and Recipes]] model.
 
 It was created by a team led by Chris Dent at [[Osmosoft]] under [[BT]] from 2008 to 2012. 
 
@@ -16,5 +17,3 @@ Other implementations of the API include:
 * [[TiddlyWiki App Engine Server|https://github.com/rsc/tiddly]], a 300-line Go implementation from Russ Cox
 * [[TiddlyWiki 5 server module|https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/commands/server.js]], the bare-bones subset of the API implemented in TiddlyWiki version 5 for Node.js
 * [[tiddly-wiki-server|https://github.com/nathanielknight/tiddly-wiki-server]], an implementation based on Rust and SQLite
-
-As of early 2017, none is currently as complete as TiddlyWeb itself.

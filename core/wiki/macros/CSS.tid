@@ -1,5 +1,5 @@
 title: $:/core/macros/CSS
-tags: $:/tags/Global
+tags: $:/tags/Macro $:/tags/Global
 
 \procedure colour(name)
 \whitespace trim
