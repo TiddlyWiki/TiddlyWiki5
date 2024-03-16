@@ -1,12 +1,18 @@
 title: $:/core/ui/EditTemplate/controls
 tags: $:/tags/EditTemplate
 
-\define config-title()
-$:/config/EditToolbarButtons/Visibility/$(listItem)$
-\end
+\define config-title() $:/config/EditToolbarButtons/Visibility/$(listItem)$
 \whitespace trim
 <div class="tc-tiddler-title tc-tiddler-edit-title">
-<$view field="title"/>
-<span class="tc-tiddler-controls tc-titlebar"><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem"><$let tv-config-toolbar-class={{{ [enlist<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]]}}}><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$let></$list></span>
-<div style="clear: both;"></div>
+	<$view field="title"/>
+	<span class="tc-tiddler-controls tc-titlebar">
+		<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem">
+			<$let tv-config-toolbar-class={{{ [enlist<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]] }}}>
+				<$reveal type="nomatch" state=<<config-title>> text="hide">
+					<$transclude $tiddler=<<listItem>>/>
+				</$reveal>
+			</$let>
+		</$list>
+	</span>
+	<div style="clear: both;"></div>
 </div>
