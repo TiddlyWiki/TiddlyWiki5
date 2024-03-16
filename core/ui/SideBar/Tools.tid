@@ -18,9 +18,9 @@ caption: {{$:/language/SideBar/Tools/Caption}}
 			data-title=<<listItem>>
 		>
 			<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show" class="tc-tiny-gap-right"/>
-				<$transclude tiddler=<<listItem>>/>
+				<$transclude $tiddler=<<listItem>>/>
 				<i class="tc-tiny-gap-left tc-muted">
-					<$transclude tiddler=<<listItem>> field="description"/>
+					<$transclude $tiddler=<<listItem>> $field="description"/>
 				</i>
 		</div>
 	</$list>
