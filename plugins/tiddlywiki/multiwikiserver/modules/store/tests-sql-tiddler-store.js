@@ -48,6 +48,7 @@ function runSqlStoreTests(engine) {
 		expect(store.createBag("bag-alpha", "Bag alpha")).toEqual(null);
 		expect(store.listBags()).toEqual([{
 			bag_name: "bag-alpha",
+			bag_id: 1,
 			accesscontrol: "",
 			description: "Bag alpha"
 		}]);
@@ -65,6 +66,7 @@ function runSqlStoreTests(engine) {
 		expect(store.createBag("bag-alpha", "Different description")).toEqual(null);
 		expect(store.listBags()).toEqual([{
 			bag_name: "bag-alpha",
+			bag_id: 1,
 			accesscontrol: "",
 			description: "Different description"
 		}]);
@@ -100,7 +102,7 @@ function runSqlStoreTests(engine) {
 		expect(store.createRecipe("recipe-rho",["bag-alpha","bag-beta"],"Recipe rho")).toEqual(null);
 
 		expect(store.listRecipes()).toEqual([
-			{ recipe_name: "recipe-rho", bag_names: ["bag-alpha","bag-beta"], description: "Recipe rho" }
+			{ recipe_name: "recipe-rho", recipe_id: 1, bag_names: ["bag-alpha","bag-beta"], description: "Recipe rho" }
 		]);
 	});
 

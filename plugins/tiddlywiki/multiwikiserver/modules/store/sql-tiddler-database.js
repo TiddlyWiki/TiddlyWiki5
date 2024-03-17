@@ -87,13 +87,17 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 
 SqlTiddlerDatabase.prototype.listBags = function() {
 	const rows = this.engine.runStatementGetAll(`
-		SELECT bag_name, accesscontrol, description
+		SELECT bag_name, bag_id, accesscontrol, description
 		FROM bags
 		ORDER BY bag_name
 	`);
 	return rows;
 };
 
+/*
+Create or update a bag
+Returns the bag_id of the bag
+*/
 SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscontrol) {
 	accesscontrol = accesscontrol || "";
 	// Run the queries
@@ -103,7 +107,7 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 	`,{
 		$bag_name: bag_name
 	});
-	this.engine.runStatement(`
+	const updateBags = this.engine.runStatement(`
 		UPDATE bags
 		SET accesscontrol = $accesscontrol,
 		description = $description 
@@ -113,6 +117,7 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 		$accesscontrol: accesscontrol,
 		$description: description
 	});
+	return updateBags.lastInsertRowid;
 };
 
 /*
@@ -120,7 +125,7 @@ Returns array of {recipe_name:,description:,bag_names: []}
 */
 SqlTiddlerDatabase.prototype.listRecipes = function() {
 	const rows = this.engine.runStatementGetAll(`
-		SELECT r.recipe_name, r.description, b.bag_name, rb.position
+		SELECT r.recipe_name, r.recipe_id, r.description, b.bag_name, rb.position
 		FROM recipes AS r
 		JOIN recipe_bags AS rb ON rb.recipe_id = r.recipe_id
 		JOIN bags AS b ON rb.bag_id = b.bag_id
@@ -134,6 +139,7 @@ SqlTiddlerDatabase.prototype.listRecipes = function() {
 			currentRecipeIndex += 1;
 			results.push({
 				recipe_name: row.recipe_name,
+				recipe_id: row.recipe_id,
 				description: row.description,
 				bag_names: []
 			});
@@ -143,6 +149,10 @@ SqlTiddlerDatabase.prototype.listRecipes = function() {
 	return results;
 };
 
+/*
+Create or update a recipe
+Returns the recipe_id of the recipe
+*/
 SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,description) {
 	// Run the queries
 	this.engine.runStatement(`
@@ -151,7 +161,7 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 	`,{
 		$recipe_name: recipe_name
 	});
-	this.engine.runStatement(`
+	const updateRecipes = this.engine.runStatement(`
 		-- Create the entry in the recipes table if required
 		INSERT OR REPLACE INTO recipes (recipe_name, description)
 		VALUES ($recipe_name, $description)
@@ -170,6 +180,7 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 		$recipe_name: recipe_name,
 		$bag_names: JSON.stringify(bag_names)
 	});
+	return updateRecipes.lastInsertRowid;
 };
 
 /*
