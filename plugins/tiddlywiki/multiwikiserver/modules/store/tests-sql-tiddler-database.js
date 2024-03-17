@@ -60,10 +60,18 @@ function runSqlDatabaseTests(engine) {
 		expect(sqlTiddlerDatabase.getRecipeBags("recipe-tau")).toEqual(["bag-alpha"]);
 		expect(sqlTiddlerDatabase.getRecipeBags("recipe-upsilon")).toEqual(["bag-alpha","bag-gamma","bag-beta"]);
 		// Save tiddlers
-		sqlTiddlerDatabase.saveBagTiddler({title: "Another Tiddler",text: "I'm in alpha",tags: "one two three"},"bag-alpha");
-		sqlTiddlerDatabase.saveBagTiddler({title: "Hello There",text: "I'm in alpha as well",tags: "one two three"},"bag-alpha");
-		sqlTiddlerDatabase.saveBagTiddler({title: "Hello There",text: "I'm in beta",tags: "four five six"},"bag-beta");
-		sqlTiddlerDatabase.saveBagTiddler({title: "Hello There",text: "I'm in gamma",tags: "seven eight nine"},"bag-gamma");
+		expect(sqlTiddlerDatabase.saveBagTiddler({title: "Another Tiddler",text: "I'm in alpha",tags: "one two three"},"bag-alpha")).toEqual({
+			tiddler_id: 1
+		});
+		expect(sqlTiddlerDatabase.saveBagTiddler({title: "Hello There",text: "I'm in alpha as well",tags: "one two three"},"bag-alpha")).toEqual({
+			tiddler_id: 2
+		});
+		expect(sqlTiddlerDatabase.saveBagTiddler({title: "Hello There",text: "I'm in beta",tags: "four five six"},"bag-beta")).toEqual({
+			tiddler_id: 3
+		});
+		expect(sqlTiddlerDatabase.saveBagTiddler({title: "Hello There",text: "I'm in gamma",tags: "seven eight nine"},"bag-gamma")).toEqual({
+			tiddler_id: 4
+		});
 		// Verify what we've got
 		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-rho")).toEqual([ 
 			{ title: 'Another Tiddler', bag_name: 'bag-alpha' },
