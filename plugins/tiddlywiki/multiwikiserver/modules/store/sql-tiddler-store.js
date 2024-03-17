@@ -170,10 +170,6 @@ SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag
 	});
 };
 
-SqlTiddlerStore.prototype.logTables = function() {
-	this.sqlTiddlerDatabase.logTables();
-};
-
 SqlTiddlerStore.prototype.listBags = function() {
 	return this.sqlTiddlerDatabase.listBags();
 };
