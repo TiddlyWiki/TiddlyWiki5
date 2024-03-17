@@ -38,7 +38,7 @@ exports.handler = function(request,response,state) {
 		store: $tw.mws.store,
 		state: state,
 		response: response,
-		bagname: bag_name,
+		bag_name: bag_name,
 		callback: function(err,results) {
 			// If application/json is requested then this is an API request, and gets the response in JSON
 			if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {

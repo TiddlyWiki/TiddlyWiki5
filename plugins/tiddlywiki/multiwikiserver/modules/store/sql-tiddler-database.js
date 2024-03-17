@@ -94,14 +94,14 @@ SqlTiddlerDatabase.prototype.listBags = function() {
 	return rows;
 };
 
-SqlTiddlerDatabase.prototype.createBag = function(bagname,description,accesscontrol) {
+SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscontrol) {
 	accesscontrol = accesscontrol || "";
 	// Run the queries
 	this.engine.runStatement(`
 		INSERT OR IGNORE INTO bags (bag_name, accesscontrol, description)
 		VALUES ($bag_name, '', '')
 	`,{
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 	this.engine.runStatement(`
 		UPDATE bags
@@ -109,7 +109,7 @@ SqlTiddlerDatabase.prototype.createBag = function(bagname,description,accesscont
 		description = $description 
 		WHERE bag_name = $bag_name
 	`,{
-		$bag_name: bagname,
+		$bag_name: bag_name,
 		$accesscontrol: accesscontrol,
 		$description: description
 	});
@@ -143,20 +143,20 @@ SqlTiddlerDatabase.prototype.listRecipes = function() {
 	return results;
 };
 
-SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames,description) {
+SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,description) {
 	// Run the queries
 	this.engine.runStatement(`
 		-- Delete existing recipe_bags entries for this recipe
 		DELETE FROM recipe_bags WHERE recipe_id = (SELECT recipe_id FROM recipes WHERE recipe_name = $recipe_name)
 	`,{
-		$recipe_name: recipename
+		$recipe_name: recipe_name
 	});
 	this.engine.runStatement(`
 		-- Create the entry in the recipes table if required
 		INSERT OR REPLACE INTO recipes (recipe_name, description)
 		VALUES ($recipe_name, $description)
 	`,{
-		$recipe_name: recipename,
+		$recipe_name: recipe_name,
 		$description: description
 	});
 	this.engine.runStatement(`
@@ -167,15 +167,15 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipename,bagnames,descrip
 		INNER JOIN json_each($bag_names) AS j ON j.value = b.bag_name
 		WHERE r.recipe_name = $recipe_name
 	`,{
-		$recipe_name: recipename,
-		$bag_names: JSON.stringify(bagnames)
+		$recipe_name: recipe_name,
+		$bag_names: JSON.stringify(bag_names)
 	});
 };
 
 /*
 Returns {tiddler_id:}
 */
-SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname,attachment_blob) {
+SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bag_name,attachment_blob) {
 	attachment_blob = attachment_blob || null;
 	// Update the tiddlers table
 	var info = this.engine.runStatement(`
@@ -189,7 +189,7 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname,att
 	`,{
 		$title: tiddlerFields.title,
 		$attachment_blob: attachment_blob,
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 	// Update the fields table
 	this.engine.runStatement(`
@@ -210,7 +210,7 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname,att
 		JOIN json_each($field_values) AS json_each
 	`,{
 		$title: tiddlerFields.title,
-		$bag_name: bagname,
+		$bag_name: bag_name,
 		$field_values: JSON.stringify(Object.assign({},tiddlerFields,{title: undefined}))
 	});
 	return {
@@ -221,7 +221,7 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname,att
 /*
 Returns {tiddler_id:,bag_name:} or null if the recipe is empty
 */
-SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipename,attachment_blob) {
+SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipe_name,attachment_blob) {
 	// Find the topmost bag in the recipe
 	var row = this.engine.runStatementGet(`
 		SELECT b.bag_name
@@ -239,7 +239,7 @@ SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipena
 		) AS selected_bag
 		ON b.bag_id = selected_bag.bag_id
 	`,{
-		$recipe_name: recipename
+		$recipe_name: recipe_name
 	});
 	if(!row) {
 		return null;
@@ -252,7 +252,7 @@ SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipena
 	};
 };
 
-SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
+SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bag_name) {
 	// Delete the fields of this tiddler
 	this.engine.runStatement(`
 		DELETE FROM fields
@@ -264,7 +264,7 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
 		)
 	`,{
 		$title: title,
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 	// Mark the tiddler itself as deleted
 	this.engine.runStatement(`
@@ -277,14 +277,14 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
 		)
 	`,{
 		$title: title,
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 };
 
 /*
 returns {tiddler_id:,tiddler:,attachment_blob:}
 */
-SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bagname) {
+SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bag_name) {
 	const rowTiddler = this.engine.runStatementGet(`
 		SELECT t.tiddler_id, t.attachment_blob
 		FROM bags AS b
@@ -292,7 +292,7 @@ SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bagname) {
 		WHERE t.title = $title AND b.bag_name = $bag_name AND t.is_deleted = FALSE
 	`,{
 		$title: title,
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 	if(!rowTiddler) {
 		return null;
@@ -321,7 +321,7 @@ SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bagname) {
 /*
 Returns {bag_name:, tiddler: {fields}, tiddler_id:, attachment_blob:}
 */
-SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
+SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
 	const rowTiddlerId = this.engine.runStatementGet(`	
 		SELECT t.tiddler_id, t.attachment_blob, b.bag_name
 		FROM bags AS b
@@ -335,7 +335,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
 		LIMIT 1
 	`,{
 		$title: title,
-		$recipe_name: recipename
+		$recipe_name: recipe_name
 	});
 	if(!rowTiddlerId) {
 		return null;
@@ -362,7 +362,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
 /*
 Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
 */
-SqlTiddlerDatabase.prototype.getBagTiddlers = function(bagname) {
+SqlTiddlerDatabase.prototype.getBagTiddlers = function(bag_name) {
 	const rows = this.engine.runStatementGetAll(`
 		SELECT DISTINCT title
 		FROM tiddlers
@@ -374,7 +374,7 @@ SqlTiddlerDatabase.prototype.getBagTiddlers = function(bagname) {
 		AND tiddlers.is_deleted = FALSE
 		ORDER BY title ASC
 	`,{
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 	return rows.map(value => value.title);
 };
@@ -382,11 +382,11 @@ SqlTiddlerDatabase.prototype.getBagTiddlers = function(bagname) {
 /*
 Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 */
-SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
+SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipe_name) {
 	const rowsCheckRecipe = this.engine.runStatementGetAll(`
 		SELECT * FROM recipes WHERE recipes.recipe_name = $recipe_name
 	`,{
-		$recipe_name: recipename
+		$recipe_name: recipe_name
 	});
 	if(rowsCheckRecipe.length === 0) {
 		return null;
@@ -405,12 +405,12 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
 			ORDER BY t.title
 		)
 	`,{
-		$recipe_name: recipename
+		$recipe_name: recipe_name
 	});
 	return rows;
 };
 
-SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bagname) {
+SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bag_name) {
 	// Delete the fields
 	this.engine.runStatement(`
 		DELETE FROM fields
@@ -421,7 +421,7 @@ SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bagname) {
 			AND is_deleted = FALSE
 		)
 	`,{
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 	// Mark the tiddlers as deleted
 	this.engine.runStatement(`
@@ -430,14 +430,14 @@ SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bagname) {
 		WHERE bag_id = (SELECT bag_id FROM bags WHERE bag_name = $bag_name)
 		AND is_deleted = FALSE
 	`,{
-		$bag_name: bagname
+		$bag_name: bag_name
 	});
 };
 
 /*
 Get the names of the bags in a recipe. Returns an empty array for recipes that do not exist
 */
-SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
+SqlTiddlerDatabase.prototype.getRecipeBags = function(recipe_name) {
 	const rows = this.engine.runStatementGetAll(`
 		SELECT bags.bag_name
 		FROM bags
@@ -450,7 +450,7 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipename) {
 		) AS bag_priority ON bags.bag_id = bag_priority.bag_id
 		ORDER BY position
 	`,{
-		$recipe_name: recipename
+		$recipe_name: recipe_name
 	});
 	return rows.map(value => value.bag_name);
 };

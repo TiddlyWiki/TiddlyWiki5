@@ -42,9 +42,9 @@ function AttachmentStore(options) {
 /*
 Check if an attachment name is valid
 */
-AttachmentStore.prototype.isValidAttachmentName = function(attachmentname) {
+AttachmentStore.prototype.isValidAttachmentName = function(attachment_name) {
     const re = new RegExp('^[a-f0-9]{64}$');
-	return re.test(attachmentname);
+	return re.test(attachment_name);
 };
 
 /*
@@ -107,13 +107,13 @@ Get an attachment ready to stream. Returns null if there is an error or:
 stream: filestream of file
 type: type of file
 */
-AttachmentStore.prototype.getAttachmentStream = function(attachmentname) {
+AttachmentStore.prototype.getAttachmentStream = function(attachment_name) {
 	const path = require("path"),
 		fs = require("fs");
 	// Check the attachment name
-	if(this.isValidAttachmentName(attachmentname)) {
+	if(this.isValidAttachmentName(attachment_name)) {
 		// Construct the path to the attachment directory
-		const attachmentPath = path.resolve(this.storePath,"files",attachmentname);
+		const attachmentPath = path.resolve(this.storePath,"files",attachment_name);
 		// Read the meta.json file
 		const metaJsonPath = path.resolve(attachmentPath,"meta.json");
 		if(fs.existsSync(metaJsonPath) && fs.statSync(metaJsonPath).isFile()) {

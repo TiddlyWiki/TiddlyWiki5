@@ -112,7 +112,7 @@ SqlTiddlerStore.prototype.updateAdminWiki = function() {
 };
 
 /*
-Given tiddler fields, tiddler_id and a bagname, return the tiddler fields after the following process:
+Given tiddler fields, tiddler_id and a bag_name, return the tiddler fields after the following process:
 - Apply the tiddler_id as the revision field
 - Apply the bag_name as the bag field
 */
@@ -174,17 +174,17 @@ SqlTiddlerStore.prototype.listBags = function() {
 	return this.sqlTiddlerDatabase.listBags();
 };
 
-SqlTiddlerStore.prototype.createBag = function(bagname,description) {
+SqlTiddlerStore.prototype.createBag = function(bag_name,description) {
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
-		const validationBagName = self.validateItemName(bagname);
+		const validationBagName = self.validateItemName(bag_name);
 		if(validationBagName) {
 			return {message: validationBagName};
 		}
-		self.sqlTiddlerDatabase.createBag(bagname,description);
+		self.sqlTiddlerDatabase.createBag(bag_name,description);
 		self.saveEntityStateTiddler({
-			title: "bags/" + bagname,
-			"bag-name": bagname,
+			title: "bags/" + bag_name,
+			"bag-name": bag_name,
 			text: description
 		});
 		return null;
@@ -198,28 +198,28 @@ SqlTiddlerStore.prototype.listRecipes = function() {
 /*
 Returns null on success, or {message:} on error
 */
-SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,description) {
-	bagnames = bagnames || [];
+SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,description) {
+	bag_names = bag_names || [];
 	description = description || "";
-	const validationRecipeName = this.validateItemName(recipename);
+	const validationRecipeName = this.validateItemName(recipe_name);
 	if(validationRecipeName) {
 		return {message: validationRecipeName};
 	}
-	const validationBagNames = this.validateItemNames(bagnames);
+	const validationBagNames = this.validateItemNames(bag_names);
 	if(validationBagNames) {
 		return {message: validationBagNames};
 	}
-	if(bagnames.length === 0) {
+	if(bag_names.length === 0) {
 		return {message: "Recipes must contain at least one bag"};
 	}
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
-		self.sqlTiddlerDatabase.createRecipe(recipename,bagnames,description);
+		self.sqlTiddlerDatabase.createRecipe(recipe_name,bag_names,description);
 		self.saveEntityStateTiddler({
-			title: "recipes/" + recipename,
-			"recipe-name": recipename,
+			title: "recipes/" + recipe_name,
+			"recipe-name": recipe_name,
 			text: description,
-			list: $tw.utils.stringifyList(bagnames.map(bag_name => {
+			list: $tw.utils.stringifyList(bag_names.map(bag_name => {
 				return self.entityStateTiddlerPrefix + "bags/" + bag_name;
 			}))
 		});
@@ -230,9 +230,9 @@ SqlTiddlerStore.prototype.createRecipe = function(recipename,bagnames,descriptio
 /*
 Returns {tiddler_id:}
 */
-SqlTiddlerStore.prototype.saveBagTiddler = function(incomingTiddlerFields,bagname) {
+SqlTiddlerStore.prototype.saveBagTiddler = function(incomingTiddlerFields,bag_name) {
 	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
-	return this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bagname,attachment_blob);
+	return this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bag_name,attachment_blob);
 };
 
 /*
@@ -245,10 +245,10 @@ type - content type of file as uploaded
 
 Returns {tiddler_id:}
 */
-SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddlerFields,bagname,options) {
+SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddlerFields,bag_name,options) {
 	const attachment_blob = this.attachmentStore.adoptAttachment(options.filepath,options.type,options.hash);
 	if(attachment_blob) {
-		return this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields,bagname,attachment_blob);
+		return this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields,bag_name,attachment_blob);
 	} else {
 		return null;
 	}
@@ -257,26 +257,26 @@ SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddle
 /*
 Returns {tiddler_id:,bag_name:}
 */
-SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipename) {
+SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipe_name) {
 	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
-	return this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipename,attachment_blob);
+	return this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipe_name,attachment_blob);
 };
 
-SqlTiddlerStore.prototype.deleteTiddler = function(title,bagname) {
-	this.sqlTiddlerDatabase.deleteTiddler(title,bagname);
+SqlTiddlerStore.prototype.deleteTiddler = function(title,bag_name) {
+	this.sqlTiddlerDatabase.deleteTiddler(title,bag_name);
 };
 
 /*
 returns {tiddler_id:,tiddler:}
 */
-SqlTiddlerStore.prototype.getBagTiddler = function(title,bagname) {
-	var tiddlerInfo = this.sqlTiddlerDatabase.getBagTiddler(title,bagname);
+SqlTiddlerStore.prototype.getBagTiddler = function(title,bag_name) {
+	var tiddlerInfo = this.sqlTiddlerDatabase.getBagTiddler(title,bag_name);
 	if(tiddlerInfo) {
 		return Object.assign(
 			{},
 			tiddlerInfo,
 			{
-				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bagname,tiddlerInfo.attachment_blob)
+				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bag_name,tiddlerInfo.attachment_blob)
 			});	
 	} else {
 		return null;
@@ -288,8 +288,8 @@ Get an attachment ready to stream. Returns null if there is an error or:
 stream: stream of file
 type: type of file
 */
-SqlTiddlerStore.prototype.getBagTiddlerStream = function(title,bagname) {
-	const tiddlerInfo = this.sqlTiddlerDatabase.getBagTiddler(title,bagname);
+SqlTiddlerStore.prototype.getBagTiddlerStream = function(title,bag_name) {
+	const tiddlerInfo = this.sqlTiddlerDatabase.getBagTiddler(title,bag_name);
 	if(tiddlerInfo) {
 		if(tiddlerInfo.attachment_blob) {
 			return this.attachmentStore.getAttachmentStream(tiddlerInfo.attachment_blob);
@@ -316,8 +316,8 @@ SqlTiddlerStore.prototype.getBagTiddlerStream = function(title,bagname) {
 /*
 Returns {bag_name:, tiddler: {fields}, tiddler_id:}
 */
-SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
-	var tiddlerInfo = this.sqlTiddlerDatabase.getRecipeTiddler(title,recipename);
+SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipe_name) {
+	var tiddlerInfo = this.sqlTiddlerDatabase.getRecipeTiddler(title,recipe_name);
 	if(tiddlerInfo) {
 		return Object.assign(
 			{},
@@ -333,29 +333,29 @@ SqlTiddlerStore.prototype.getRecipeTiddler = function(title,recipename) {
 /*
 Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
 */
-SqlTiddlerStore.prototype.getBagTiddlers = function(bagname) {
-	return this.sqlTiddlerDatabase.getBagTiddlers(bagname);
+SqlTiddlerStore.prototype.getBagTiddlers = function(bag_name) {
+	return this.sqlTiddlerDatabase.getBagTiddlers(bag_name);
 };
 
 /*
 Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 */
-SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipename) {
-	return this.sqlTiddlerDatabase.getRecipeTiddlers(recipename);
+SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipe_name) {
+	return this.sqlTiddlerDatabase.getRecipeTiddlers(recipe_name);
 };
 
-SqlTiddlerStore.prototype.deleteAllTiddlersInBag = function(bagname) {
+SqlTiddlerStore.prototype.deleteAllTiddlersInBag = function(bag_name) {
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
-		return self.sqlTiddlerDatabase.deleteAllTiddlersInBag(bagname);
+		return self.sqlTiddlerDatabase.deleteAllTiddlersInBag(bag_name);
 	});
 };
 
 /*
 Get the names of the bags in a recipe. Returns an empty array for recipes that do not exist
 */
-SqlTiddlerStore.prototype.getRecipeBags = function(recipename) {
-	return this.sqlTiddlerDatabase.getRecipeBags(recipename);
+SqlTiddlerStore.prototype.getRecipeBags = function(recipe_name) {
+	return this.sqlTiddlerDatabase.getRecipeBags(recipe_name);
 };
 
 exports.SqlTiddlerStore = SqlTiddlerStore;

@@ -27,7 +27,7 @@ Command.prototype.execute = function() {
 	var self = this;
 	// Check parameters
 	if(this.params.length < 2) {
-		return "Missing pathname and/or bagname";
+		return "Missing pathname and/or bag name";
 	}
 	var tiddlersPath = this.params[0],
 		bagName = this.params[1];

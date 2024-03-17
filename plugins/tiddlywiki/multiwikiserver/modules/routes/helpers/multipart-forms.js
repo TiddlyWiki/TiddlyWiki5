@@ -16,7 +16,7 @@ Process an incoming new multipart/form-data stream. Options include:
 store - tiddler store
 state - provided by server.js
 response - provided by server.js
-bagname - name of bag to write to
+bag_name - name of bag to write to
 callback - invoked as callback(err,results). Results is an array of titles of imported tiddlers
 */
 exports.processIncomingStream = function(options) {
@@ -85,7 +85,7 @@ exports.processIncomingStream = function(options) {
 						tiddlerFields[part.name.slice(tiddlerFieldPrefix.length)] = part.value.trim();
 					}
 				}
-				options.store.saveBagTiddlerWithAttachment(tiddlerFields,options.bagname,{
+				options.store.saveBagTiddlerWithAttachment(tiddlerFields,options.bag_name,{
 					filepath: partFile.inboxFilename,
 					type: type,
 					hash: partFile.hash
