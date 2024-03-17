@@ -28,11 +28,11 @@ exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		titles = bag_name === bag_name_2 && $tw.mws.store.getBagTiddlers(bag_name);
-	if(bag_name === bag_name_2 && titles) {
+		bagTiddlers = bag_name === bag_name_2 && $tw.mws.store.getBagTiddlers(bag_name);
+	if(bag_name === bag_name_2 && bagTiddlers) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
-			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(titles),"utf8");
+			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(bagTiddlers),"utf8");
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content
 			response.writeHead(200, "OK",{
@@ -49,7 +49,8 @@ exports.handler = function(request,response,state) {
 			var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/get-bag",{
 				variables: {
 					"bag-name": bag_name,
-					"bag-titles": JSON.stringify(titles)
+					"bag-titles": JSON.stringify(bagTiddlers.map(bagTiddler => bagTiddler.title)),
+					"bag-tiddlers": JSON.stringify(bagTiddlers)
 				}
 			});
 			response.write(html);

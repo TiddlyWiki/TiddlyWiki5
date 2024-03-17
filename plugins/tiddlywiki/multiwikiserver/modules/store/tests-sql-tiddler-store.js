@@ -83,7 +83,7 @@ function runSqlStoreTests(engine) {
 		expect(new Set(Object.keys(saveBagResult))).toEqual(new Set(["tiddler_id"]));
 		expect(typeof(saveBagResult.tiddler_id)).toBe("number");
 
-		expect(store.getBagTiddlers("bag-alpha")).toEqual(["Another Tiddler"]);
+		expect(store.getBagTiddlers("bag-alpha")).toEqual([{title: "Another Tiddler", tiddler_id: 1}]);
 
 		var getBagTiddlerResult = store.getBagTiddler("Another Tiddler","bag-alpha");
 		expect(typeof(getBagTiddlerResult.tiddler_id)).toBe("number");
@@ -128,7 +128,7 @@ function runSqlStoreTests(engine) {
 		expect(typeof(saveRecipeResult.tiddler_id)).toBe("number");
 		expect(saveRecipeResult.bag_name).toBe("bag-beta");
 
-		expect(store.getRecipeTiddlers("recipe-rho")).toEqual([{title: "Another Tiddler", bag_name: "bag-beta"}]);
+		expect(store.getRecipeTiddlers("recipe-rho")).toEqual([{title: "Another Tiddler", tiddler_id: 1, bag_name: "bag-beta"}]);
 
 		var getRecipeTiddlerResult = store.getRecipeTiddler("Another Tiddler","recipe-rho");
 		expect(typeof(getRecipeTiddlerResult.tiddler_id)).toBe("number");

@@ -121,7 +121,7 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 };
 
 /*
-Returns array of {recipe_name:,description:,bag_names: []}
+Returns array of {recipe_name:,recipe_id:,description:,bag_names: []}
 */
 SqlTiddlerDatabase.prototype.listRecipes = function() {
 	const rows = this.engine.runStatementGetAll(`
@@ -375,7 +375,7 @@ Get the titles of the tiddlers in a bag. Returns an empty array for bags that do
 */
 SqlTiddlerDatabase.prototype.getBagTiddlers = function(bag_name) {
 	const rows = this.engine.runStatementGetAll(`
-		SELECT DISTINCT title
+		SELECT DISTINCT title, tiddler_id
 		FROM tiddlers
 		WHERE bag_id IN (
 			SELECT bag_id
@@ -387,11 +387,11 @@ SqlTiddlerDatabase.prototype.getBagTiddlers = function(bag_name) {
 	`,{
 		$bag_name: bag_name
 	});
-	return rows.map(value => value.title);
+	return rows;
 };
 
 /*
-Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
+Get the titles of the tiddlers in a recipe as {title:,tiddler_id:,bag_name:}. Returns null for recipes that do not exist
 */
 SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipe_name) {
 	const rowsCheckRecipe = this.engine.runStatementGetAll(`
@@ -403,9 +403,9 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipe_name) {
 		return null;
 	}
 	const rows = this.engine.runStatementGetAll(`
-		SELECT title, bag_name
+		SELECT title, tiddler_id, bag_name
 		FROM (
-			SELECT t.title, b.bag_name, MAX(rb.position) AS position
+			SELECT t.title, t.tiddler_id, b.bag_name, MAX(rb.position) AS position
 			FROM bags AS b
 			INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
 			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
