@@ -102,7 +102,7 @@ function runSqlDatabaseTests(engine) {
 		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-rho")).toEqual([ { title: 'Hello There', bag_name: 'bag-alpha' } ]);
 		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-sigma")).toEqual([ { title: 'Hello There', bag_name: 'bag-gamma' } ]);
 		// Save a recipe tiddler
-		expect(sqlTiddlerDatabase.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho")).toEqual({tiddler_id: 5, bag_name: 'bag-beta'});
+		expect(sqlTiddlerDatabase.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho")).toEqual({tiddler_id: 7, bag_name: 'bag-beta'});
 		expect(sqlTiddlerDatabase.getRecipeTiddler("More","recipe-rho").tiddler).toEqual({title: "More", text: "None"});
 	});
 }

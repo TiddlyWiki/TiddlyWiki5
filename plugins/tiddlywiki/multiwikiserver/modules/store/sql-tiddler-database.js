@@ -68,6 +68,7 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 			tiddler_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			bag_id INTEGER NOT NULL,
 			title TEXT NOT NULL,
+			is_deleted BOOLEAN NOT NULL,
 			attachment_blob TEXT, -- null or the name of an attachment blob
 			FOREIGN KEY (bag_id) REFERENCES bags(bag_id) ON UPDATE CASCADE ON DELETE CASCADE,
 			UNIQUE (bag_id, title)
@@ -178,10 +179,11 @@ SqlTiddlerDatabase.prototype.saveBagTiddler = function(tiddlerFields,bagname,att
 	attachment_blob = attachment_blob || null;
 	// Update the tiddlers table
 	var info = this.engine.runStatement(`
-		INSERT OR REPLACE INTO tiddlers (bag_id, title, attachment_blob)
+		INSERT OR REPLACE INTO tiddlers (bag_id, title, is_deleted, attachment_blob)
 		VALUES (
 			(SELECT bag_id FROM bags WHERE bag_name = $bag_name),
 			$title,
+			FALSE,
 			$attachment_blob
 		)
 	`,{
@@ -251,7 +253,7 @@ SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipena
 };
 
 SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
-	// Run the queries
+	// Delete the fields of this tiddler
 	this.engine.runStatement(`
 		DELETE FROM fields
 		WHERE tiddler_id IN (
@@ -264,13 +266,15 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bagname) {
 		$title: title,
 		$bag_name: bagname
 	});
+	// Mark the tiddler itself as deleted
 	this.engine.runStatement(`
-		DELETE FROM tiddlers
-		WHERE bag_id = (
-			SELECT bag_id
-			FROM bags
-			WHERE bag_name = $bag_name
-		) AND title = $title
+		INSERT OR REPLACE INTO tiddlers (bag_id, title, is_deleted, attachment_blob)
+		VALUES (
+			(SELECT bag_id FROM bags WHERE bag_name = $bag_name),
+			$title,
+			TRUE,
+			NULL
+		)
 	`,{
 		$title: title,
 		$bag_name: bagname
@@ -285,7 +289,7 @@ SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bagname) {
 		SELECT t.tiddler_id, t.attachment_blob
 		FROM bags AS b
 		INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
-		WHERE t.title = $title AND b.bag_name = $bag_name
+		WHERE t.title = $title AND b.bag_name = $bag_name AND t.is_deleted = FALSE
 	`,{
 		$title: title,
 		$bag_name: bagname
@@ -326,6 +330,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipename) {
 		INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
 		WHERE r.recipe_name = $recipe_name
 		AND t.title = $title
+		AND t.is_deleted = FALSE
 		ORDER BY rb.position DESC
 		LIMIT 1
 	`,{
@@ -366,6 +371,7 @@ SqlTiddlerDatabase.prototype.getBagTiddlers = function(bagname) {
 			FROM bags
 			WHERE bag_name = $bag_name
 		)
+		AND tiddlers.is_deleted = FALSE
 		ORDER BY title ASC
 	`,{
 		$bag_name: bagname
@@ -394,6 +400,7 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
 			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
 			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
 			WHERE r.recipe_name = $recipe_name
+			AND t.is_deleted = FALSE
 			GROUP BY t.title
 			ORDER BY t.title
 		)
@@ -404,13 +411,24 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipename) {
 };
 
 SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bagname) {
+	// Delete the fields
 	this.engine.runStatement(`
-		DELETE FROM tiddlers
-		WHERE bag_id IN (
-			SELECT bag_id
-			FROM bags
-			WHERE bag_name = $bag_name
+		DELETE FROM fields
+		WHERE tiddler_id IN (
+			SELECT tiddler_id
+			FROM tiddlers
+			WHERE bag_id = (SELECT bag_id FROM bags WHERE bag_name = $bag_name)
+			AND is_deleted = FALSE
 		)
+	`,{
+		$bag_name: bagname
+	});
+	// Mark the tiddlers as deleted
+	this.engine.runStatement(`
+		UPDATE tiddlers
+		SET is_deleted = TRUE
+		WHERE bag_id = (SELECT bag_id FROM bags WHERE bag_name = $bag_name)
+		AND is_deleted = FALSE
 	`,{
 		$bag_name: bagname
 	});
