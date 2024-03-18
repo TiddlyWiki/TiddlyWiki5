@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/page
+
+<!--
+Template for the basic HTML page layout. Expects the following variables:
+
+page-content: title of tiddler containing the main page content
+-->
+`
+<!doctype html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+`
+<$view tiddler=<<page-content>> field="text" format="htmlwikified" />
+`
+</body>
+</html>
+`

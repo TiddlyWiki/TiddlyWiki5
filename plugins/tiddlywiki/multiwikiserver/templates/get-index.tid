@@ -1,0 +1,62 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
+
+! Wikis Available Here
+
+<ul>
+	<$list filter="[<recipe-list>jsonindexes[]] :sort[<currentTiddler>jsonget[recipe_name]]" variable="recipe-index">
+		<li>
+			<$let
+				recipe-info={{{ [<recipe-list>jsonextract<recipe-index>] }}}
+				recipe-name={{{ [<recipe-info>jsonget[recipe_name]] }}}
+			>
+				<a
+					href=`/wiki/${ [<recipe-name>encodeuricomponent[]] }$`
+					rel="noopener noreferrer"
+					target="_blank"
+				>
+					<strong>
+						<$text text={{{ [<recipe-info>jsonget[recipe_name]] }}}/>
+					</strong>
+					: <$text text={{{ [<recipe-info>jsonget[description]] }}}/>
+				</a>
+				<ul>
+					<$list filter="[<recipe-info>jsonget[bag_names]]" variable="bag-name">
+						<li>
+							<a
+								href=`/wiki/${ [<bag-name>encodeuricomponent[]] }$/bags/${ [<bag-name>encodeuricomponent[]] }$`
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								<$text text=<<bag-name>>/>
+							</a>
+						</li>
+					</$list>
+				</ul>
+			</$let>
+		</li>
+	</$list>
+</ul>
+
+! Bags
+
+<ul>
+	<$list filter="[<bag-list>jsonindexes[]] :sort[<currentTiddler>jsonget[bag_name]]" variable="bag-index">
+		<li>
+			<$let
+				bag-info={{{ [<bag-list>jsonextract<bag-index>] }}}
+				bag-name={{{ [<bag-info>jsonget[bag_name]] }}}
+			>
+				<a
+					href=`/wiki/${ [<bag-name>encodeuricomponent[]] }$/bags/${ [<bag-name>encodeuricomponent[]] }$`
+					rel="noopener noreferrer"
+					target="_blank"
+				>
+					<strong>
+						<$text text={{{ [<bag-info>jsonget[bag_name]] }}}/>
+					</strong>
+					: <$text text={{{ [<bag-info>jsonget[description]] }}}/>
+				</a>
+			</$let>
+		</li>
+	</$list>
+</ul>

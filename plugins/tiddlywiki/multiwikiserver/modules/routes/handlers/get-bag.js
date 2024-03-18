@@ -38,26 +38,15 @@ exports.handler = function(request,response,state) {
 			response.writeHead(200, "OK",{
 				"Content-Type":  "text/html"
 			});
-			response.write(`
-				<!doctype html>
-				<head>
-					<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-				</head>
-				<body>
-			`);
-			// Render the html
-			var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/get-bag",{
+			var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 				variables: {
+					"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-bag",
 					"bag-name": bag_name,
 					"bag-titles": JSON.stringify(bagTiddlers.map(bagTiddler => bagTiddler.title)),
 					"bag-tiddlers": JSON.stringify(bagTiddlers)
 				}
 			});
 			response.write(html);
-			response.write(`
-				</body>
-				</html>
-			`);
 			response.end();
 		}
 	} else {
