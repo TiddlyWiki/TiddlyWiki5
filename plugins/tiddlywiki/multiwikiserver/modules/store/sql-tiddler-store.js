@@ -19,7 +19,7 @@ This class is largely a wrapper for the sql-tiddler-database.js class, adding th
 Create a tiddler store. Options include:
 
 databasePath - path to the database file (can be ":memory:" to get a temporary database)
-adminWiki - reference to $tw.Wiki object into which entity state tiddlers should be saved
+adminWiki - reference to $tw.Wiki object used for configuration
 attachmentStore - reference to associated attachment store
 engine - wasm | better
 */
@@ -27,7 +27,6 @@ function SqlTiddlerStore(options) {
 	options = options || {};
 	this.attachmentStore = options.attachmentStore;
 	this.adminWiki = options.adminWiki || $tw.wiki;
-	this.entityStateTiddlerPrefix = "$:/state/MultiWikiServer/";
 	// Create the database
 	this.databasePath = options.databasePath || ":memory:";
 	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-database.js").SqlTiddlerDatabase;
@@ -36,7 +35,6 @@ function SqlTiddlerStore(options) {
 		engine: options.engine
 	});
 	this.sqlTiddlerDatabase.createTables();
-	this.updateAdminWiki();
 }
 
 /*
@@ -80,35 +78,6 @@ SqlTiddlerStore.prototype.validateItemNames = function(names) {
 SqlTiddlerStore.prototype.close = function() {
 	this.sqlTiddlerDatabase.close();
 	this.sqlTiddlerDatabase = undefined;
-};
-
-SqlTiddlerStore.prototype.saveEntityStateTiddler = function(tiddler) {
-	this.adminWiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.entityStateTiddlerPrefix + tiddler.title}));
-};
-
-SqlTiddlerStore.prototype.updateAdminWiki = function() {
-	var self = this;
-	return this.sqlTiddlerDatabase.transaction(function() {
-		// Update bags
-		for(const bagInfo of self.listBags()) {
-			self.saveEntityStateTiddler({
-				title: "bags/" + bagInfo.bag_name,
-				"bag-name": bagInfo.bag_name,
-				text: bagInfo.description
-			});
-		}
-		// Update recipes
-		for(const recipeInfo of self.listRecipes()) {
-			self.saveEntityStateTiddler({
-				title: "recipes/" + recipeInfo.recipe_name,
-				"recipe-name": recipeInfo.recipe_name,
-				text: recipeInfo.description,
-				list: $tw.utils.stringifyList(self.getRecipeBags(recipeInfo.recipe_name).map(bag_name => {
-					return self.entityStateTiddlerPrefix + "bags/" + bag_name;
-				}))
-			});
-		}
-	});
 };
 
 /*
@@ -182,11 +151,6 @@ SqlTiddlerStore.prototype.createBag = function(bag_name,description) {
 			return {message: validationBagName};
 		}
 		self.sqlTiddlerDatabase.createBag(bag_name,description);
-		self.saveEntityStateTiddler({
-			title: "bags/" + bag_name,
-			"bag-name": bag_name,
-			text: description
-		});
 		return null;
 	});
 };
@@ -215,14 +179,6 @@ SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,descript
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
 		self.sqlTiddlerDatabase.createRecipe(recipe_name,bag_names,description);
-		self.saveEntityStateTiddler({
-			title: "recipes/" + recipe_name,
-			"recipe-name": recipe_name,
-			text: description,
-			list: $tw.utils.stringifyList(bag_names.map(bag_name => {
-				return self.entityStateTiddlerPrefix + "bags/" + bag_name;
-			}))
-		});
 		return null;
 	});
 };
