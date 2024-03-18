@@ -931,6 +931,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-page-controls {
 	margin-top: 14px;
+	margin-bottom: 14px;
 	font-size: 1.5em;
 }
 
