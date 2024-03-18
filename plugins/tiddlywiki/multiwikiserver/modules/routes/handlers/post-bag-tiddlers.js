@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-bag-tiddlers.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
 POST /wiki/:bag_name/bags/:bag_name/tiddlers/
 

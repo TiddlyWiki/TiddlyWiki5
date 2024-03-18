@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/put-recipe-tiddler.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
 PUT /wiki/:recipe_name/recipes/:recipe_name/tiddlers/:title
 

@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-bag-tiddler.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
 GET /wiki/:bag_name/bags/:bag_name/tiddler/:title
 

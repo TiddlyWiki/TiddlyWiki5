@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/delete-recipe-tiddler.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
 DELETE /wiki/:recipe_name/recipes/:bag_name/tiddler/:title
 

@@ -21,7 +21,7 @@ npm start
 The `npm start` command is a shortcut for the following command:
 
 ```
-node ./tiddlywiki.js ./editions/multiwikiserver --listen
+node ./tiddlywiki.js ./editions/multiwikiserver --mws-listen
 ```
 
 Then visit the administration interface in a browser:

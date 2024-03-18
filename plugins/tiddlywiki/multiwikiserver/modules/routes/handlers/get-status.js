@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-status.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
 GET /wiki/:recipe_name/status
 

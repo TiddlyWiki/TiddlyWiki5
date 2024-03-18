@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-recipe.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
 GET /wiki/:recipe_name
 

@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/put-bag.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
 PUT /wiki/:bag_name/bags/:bag_name
 
