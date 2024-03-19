@@ -466,6 +466,11 @@ Server.prototype.listen = function(port,host,prefix,options) {
 	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
+		// Stop listening when we get the "th-quit" hook
+		$tw.hooks.addHook("th-quit",function() {
+			server.close();
+		});
+		// Log listening details
 		var address = server.address(),
 			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
 		$tw.utils.log("Serving on " + url,"brown/orange");
