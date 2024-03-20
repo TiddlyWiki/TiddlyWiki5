@@ -120,14 +120,13 @@ const testSpecs = [
 			accept: "*/*"
 		},
 		expectedResult: (jsonData,data,headers) => {
-			console.log(JSON.stringify(data).slice(1,100))
 			return JSON.stringify(data).slice(1,100) === "\\n<!doctype html>\\n<head>\\n\\t<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html;charset=utf-8\\\" ";
 		}
 	},
 	{
 		description: "Upload a 1px PNG",
 		method: "POST",
-		path: "/wiki/bag-alpha/bags/bag-alpha/tiddlers/",
+		path: "/bags/bag-alpha/tiddlers/",
 		headers: {
 			"Accept": 'application/json',
 			"Content-Type": 'multipart/form-data; boundary=----WebKitFormBoundaryVR9zv0PFmx9YtpLL',
