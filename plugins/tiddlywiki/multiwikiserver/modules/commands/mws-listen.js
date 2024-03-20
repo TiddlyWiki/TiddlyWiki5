@@ -33,7 +33,8 @@ Command.prototype.execute = function() {
 	}
 	// Set up server
 	this.server = $tw.mws.serverManager.createServer({
-		wiki: $tw.wiki
+		wiki: $tw.wiki,
+		variables: self.params
 	});
 	this.server.listen(null,null,null,{
 		callback: function() {

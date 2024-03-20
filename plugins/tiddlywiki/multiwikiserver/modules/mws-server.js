@@ -316,7 +316,8 @@ Server.prototype.findMatchingRoute = function(request,state) {
 		} else {
 			match = potentialRoute.path.exec(pathname);
 		}
-		if(match && request.method === potentialRoute.method) {
+		// Allow POST as a synonym for PUT because HTML doesn't allow PUT forms
+		if(match && (request.method === potentialRoute.method || (request.method === "POST" && potentialRoute.method === "PUT"))) {
 			state.params = [];
 			for(var p=1; p<match.length; p++) {
 				state.params.push(match[p]);
@@ -346,6 +347,7 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
+	const queryString = require("querystring");
 	// Compose the state object
 	var self = this;
 	var state = {};
@@ -399,7 +401,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD") {
 		// Let the route handle the request stream itself
 		route.handler(request,response,state);
-	} else if(route.bodyFormat === "string" || !route.bodyFormat) {
+	} else if(route.bodyFormat === "string" || route.bodyFormat === "www-form-urlencoded" || !route.bodyFormat) {
 		// Set the encoding for the incoming request
 		request.setEncoding("utf8");
 		var data = "";
@@ -407,6 +409,9 @@ Server.prototype.requestHandler = function(request,response,options) {
 			data += chunk.toString();
 		});
 		request.on("end",function() {
+			if(route.bodyFormat === "www-form-urlencoded") {
+				data = queryString.parse(data);
+			}
 			state.data = data;
 			route.handler(request,response,state);
 		});

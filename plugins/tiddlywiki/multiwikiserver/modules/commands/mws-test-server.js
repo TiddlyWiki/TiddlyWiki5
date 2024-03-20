@@ -74,6 +74,7 @@ TestRunner.prototype.runTests = function(callback) {
 };
 
 TestRunner.prototype.runTest = function(testSpec,callback) {
+	const self = this;
 	console.log(`Running Server Test: ${testSpec.description}`)
 	if(testSpec.method === "GET" || testSpec.method === "POST") {
 		const request = this.httpLibrary.request({
@@ -84,8 +85,8 @@ TestRunner.prototype.runTest = function(testSpec,callback) {
 			method: testSpec.method,
 			headers: testSpec.headers
 		}, function(response) {
-			if (response.statusCode < 200 || response.statusCode >= 300) {
-				return callback(`Request failed to ${response.url} with status code ${response.statusCode} and ${JSON.stringify(response.headers)}`);
+			if (response.statusCode < 200 || response.statusCode >= 400) {
+				return callback(`Request failed to ${self.urlServerParsed.toString()} with status code ${response.statusCode} and ${JSON.stringify(response.headers)}`);
 			}	
 			response.setEncoding("utf8");
 			let buffer = "";
@@ -94,7 +95,7 @@ TestRunner.prototype.runTest = function(testSpec,callback) {
 			});
 			response.on("end", () => {
 				const jsonData = $tw.utils.parseJSONSafe(buffer,function() {return undefined;});
-				const testResult = testSpec.expectedResult(jsonData,buffer);
+				const testResult = testSpec.expectedResult(jsonData,buffer,response.headers);
 				callback(testResult ? null : "Test failed");
 			});
 		});
@@ -134,6 +135,20 @@ const testSpecs = [
 		data: '------WebKitFormBoundaryVR9zv0PFmx9YtpLL\r\nContent-Disposition: form-data; name="file-to-upload"; filename="one-white-pixel.png"\r\nContent-Type: image/png\r\n\r\n\r\n------WebKitFormBoundaryVR9zv0PFmx9YtpLL\r\nContent-Disposition: form-data; name="tiddler-field-title"\r\n\r\nOne White Pixel\r\n------WebKitFormBoundaryVR9zv0PFmx9YtpLL\r\nContent-Disposition: form-data; name="tiddler-field-tags"\r\n\r\nimage\r\n------WebKitFormBoundaryVR9zv0PFmx9YtpLL--\r\n',
 		expectedResult: (jsonData,data) => {
 			return jsonData["imported-tiddlers"] && $tw.utils.isArray(jsonData["imported-tiddlers"]) && jsonData["imported-tiddlers"][0] === "One White Pixel";
+		}
+	},
+	{
+		description: "Create a recipe",
+		method: "POST",
+		path: "/recipes",
+		headers: {
+			"Accept": '*/*',
+			"Content-Type": 'application/x-www-form-urlencoded',
+			"User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+		},
+		data: "recipe_name=Elephants3214234&bag_names=one%20two%20three&description=A%20bag%20of%20elephants",
+		expectedResult: (jsonData,data,headers) => {
+			return headers.location === "/";
 		}
 	}
 ];
