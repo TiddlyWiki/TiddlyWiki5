@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 
-\procedure bagPill(element-tag:"span",is-topmost:"no")
+\procedure bagPill(element-tag:"span",is-topmost:"yes")
 	\whitespace trim
 	<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
 		<a class="mws-bag-pill-link" href=`/bags/${ [<bag-name>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">

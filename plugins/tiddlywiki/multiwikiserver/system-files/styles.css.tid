@@ -2,6 +2,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/system-files/styles.css
 tags: $:/tags/MWS/SystemFileWikified
 system-file-type: text/css
 
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /* Import TiddlyWiki theme styles */
