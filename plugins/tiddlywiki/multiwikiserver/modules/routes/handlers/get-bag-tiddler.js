@@ -5,6 +5,9 @@ module-type: mws-route
 
 GET /bags/:bag_name/tiddler/:title
 
+Parameters:
+
+fallback=<url> // Optional redirect if the tiddler is not found
 
 \*/
 (function() {
@@ -19,17 +22,17 @@ exports.path = /^\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
-	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
+	const bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		result = bag_name && $tw.mws.store.getBagTiddler(title,bag_name);
-	if(bag_name && result) {
+		tiddlerInfo = $tw.mws.store.getBagTiddler(title,bag_name);
+	if(tiddlerInfo && tiddlerInfo.tiddler) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 				var tiddlerFields = {},
 				knownFields = [
 					"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
 				];
-			$tw.utils.each(result.tiddler,function(value,name) {
+			$tw.utils.each(tiddlerInfo.tiddler,function(value,name) {
 				if(knownFields.indexOf(name) !== -1) {
 					tiddlerFields[name] = value;
 				} else {
@@ -49,11 +52,26 @@ exports.handler = function(request,response,state) {
 				});
 				result.stream.pipe(response);
 				return;
+			} else {
+				response.writeHead(404);
+				response.end();
+				return;
 			}
 		}
+	} else {
+		// Redirect to fallback URL if tiddler not found
+		if(state.queryParameters.fallback) {
+			response.writeHead(302, "OK",{
+				"Location": state.queryParameters.fallback
+			});
+			response.end();
+			return;
+		} else {
+			response.writeHead(404);
+			response.end();
+			return;
+		}
 	}
-	response.writeHead(404);
-	response.end();
 };
 
 }());

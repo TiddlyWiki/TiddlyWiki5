@@ -5,7 +5,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 	<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
 		<a class="mws-bag-pill-link" href=`/bags/${ [<bag-name>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
 			<img
-				src=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+				src=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico?fallback=/.system/missing-favicon.png`
 				class="mws-favicon-small"
 			/>
 			<span class="mws-bag-pill-label">
@@ -29,7 +29,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 				>
 					<div class="mws-wiki-card-image">
 						<img
-							src=`/recipes/${ [<recipe-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+							src=`/recipes/${ [<recipe-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico?fallback=/.system/missing-favicon.png`
 							class="mws-favicon"
 						/>
 					</div>

@@ -1,16 +1,10 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-bag
 
-! <$image
-	source=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+! <img
+	src=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico?fallback=/.system/missing-favicon.png`
 	class="mws-favicon-small"
 	width="32px"
->
-	<$image
-		source="$:/plugins/multiwikiserver/images/missing-favicon.png"
-		class="mws-favicon-small"
-		width="32px"
-	/>
-</$image> Bag <$text text={{{ [<bag-name>]}}}/>
+/> Bag <$text text={{{ [<bag-name>]}}}/>
 
 <form
 	method="post"

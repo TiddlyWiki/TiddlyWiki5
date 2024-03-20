@@ -5,6 +5,10 @@ module-type: mws-route
 
 GET /recipes/:recipe_name/tiddler/:title
 
+Parameters:
+
+fallback=<url> // Optional redirect if the tiddler is not found
+
 \*/
 (function() {
 
@@ -20,8 +24,8 @@ exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		tiddlerInfo = recipe_name && $tw.mws.store.getRecipeTiddler(title,recipe_name);
-	if(recipe_name && tiddlerInfo && tiddlerInfo.tiddler) {
+		tiddlerInfo = $tw.mws.store.getRecipeTiddler(title,recipe_name);
+	if(tiddlerInfo && tiddlerInfo.tiddler) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 				var tiddlerFields = {},
@@ -38,6 +42,7 @@ exports.handler = function(request,response,state) {
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
+			return;
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content
 			var type = tiddlerInfo.tiddler.type || "text/plain";
@@ -46,10 +51,21 @@ exports.handler = function(request,response,state) {
 			});
 			response.write(tiddlerInfo.tiddler.text || "",($tw.config.contentTypeInfo[type] ||{encoding: "utf8"}).encoding);
 			response.end();;
+			return;
 		}
 	} else {
-		response.writeHead(404);
-		response.end();
+		// Redirect to fallback URL if tiddler not found
+		if(state.queryParameters.fallback) {
+			response.writeHead(302, "OK",{
+				"Location": state.queryParameters.fallback
+			});
+			response.end();
+			return;
+		} else {
+			response.writeHead(404);
+			response.end();
+			return;
+		}
 	}
 };
 
