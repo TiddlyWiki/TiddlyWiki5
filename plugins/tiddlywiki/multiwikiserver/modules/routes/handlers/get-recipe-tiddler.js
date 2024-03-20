@@ -28,23 +28,10 @@ exports.handler = function(request,response,state) {
 	if(tiddlerInfo && tiddlerInfo.tiddler) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
-				var tiddlerFields = {},
-				knownFields = [
-					"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
-				];
-			$tw.utils.each(tiddlerInfo.tiddler,function(value,name) {
-				if(knownFields.indexOf(name) !== -1) {
-					tiddlerFields[name] = value;
-				} else {
-					tiddlerFields.fields = tiddlerFields.fields || {};
-					tiddlerFields.fields[name] = value;
-				}
-			});
-			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 			state.sendResponse(200,{
 				Etag: state.makeTiddlerEtag(tiddlerInfo),
 				"Content-Type": "application/json"
-			},JSON.stringify(tiddlerFields),"utf8");
+			},JSON.stringify(tiddlerInfo.tiddler),"utf8");
 			return;
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content

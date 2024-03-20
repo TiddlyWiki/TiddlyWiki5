@@ -64,12 +64,12 @@ exports.handler = function(request,response,state) {
 			}
 		});
 		writeTiddler({
-			title: "$:/config/multiwikiclient/tiddlers/bag",
+			title: "$:/state/multiwikiclient/tiddlers/bag",
 			text: JSON.stringify(bagInfo),
 			type: "application/json"
 		});
 		writeTiddler({
-			title: "$:/config/multiwikiclient/tiddlers/revision",
+			title: "$:/state/multiwikiclient/tiddlers/revision",
 			text: JSON.stringify(revisionInfo),
 			type: "application/json"
 		});

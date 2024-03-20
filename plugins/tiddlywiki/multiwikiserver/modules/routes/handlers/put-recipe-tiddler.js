@@ -21,20 +21,7 @@ exports.handler = function(request,response,state) {
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		fields = $tw.utils.parseJSONSafe(state.data);
-	// Pull up any subfields in the `fields` object
-	if(typeof fields.fields === "object") {
-		$tw.utils.each(fields.fields,function(field,name) {
-			fields[name] = field;
-		});
-		delete fields.fields;
-	}
-	// Stringify any array fields
-	$tw.utils.each(fields,function(value,name) {
-		if($tw.utils.isArray(value)) {
-			fields[name] = $tw.utils.stringifyList(value);
-		}
-	});
-	if(recipe_name) {
+	if(recipe_name && title === fields.title) {
 		var result = $tw.mws.store.saveRecipeTiddler(fields,recipe_name);
 		if(result) {
 			response.writeHead(204, "OK",{

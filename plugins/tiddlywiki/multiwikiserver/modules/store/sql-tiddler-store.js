@@ -86,15 +86,18 @@ Given tiddler fields, tiddler_id and a bag_name, return the tiddler fields after
 - Apply the bag_name as the bag field
 */
 SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddler_id,bag_name,attachment_blob) {
-	const fields = Object.assign({},tiddlerFields,{
-		revision: "" + tiddler_id,
-		bag: bag_name
-	});
 	if(attachment_blob !== null) {
-		delete fields.text;
-		fields._canonical_uri = `/bags/${encodeURIComponent(bag_name)}/tiddlers/${encodeURIComponent(tiddlerFields.title)}/blob`;
+		return $tw.utils.extend(
+			{},
+			tiddlerFields,
+			{
+				text: undefined,
+				_canonical_uri: `/bags/${encodeURIComponent(bag_name)}/tiddlers/${encodeURIComponent(tiddlerFields.title)}/blob`
+			}
+		);
+	} else {
+		return tiddlerFields;
 	}
-	return fields;
 };
 
 /*

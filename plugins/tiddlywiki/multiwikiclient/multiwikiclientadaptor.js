@@ -13,7 +13,9 @@ A sync adaptor module for synchronising with MultiWikiServer-compatible servers
 "use strict";
 
 var CONFIG_HOST_TIDDLER = "$:/config/multiwikiclient/host",
-	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
+	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/",
+	BAG_STATE_TIDDLER = "$:/state/federatial/xememex/tiddlers/bag",
+	REVISION_STATE_TIDDLER = "$:/state/federatial/xememex/tiddlers/revision";
 
 function MultiWikiClientAdaptor(options) {
 	this.wiki = options.wiki;
@@ -52,14 +54,32 @@ MultiWikiClientAdaptor.prototype.getHost = function() {
 };
 
 MultiWikiClientAdaptor.prototype.getTiddlerInfo = function(tiddler) {
-	return {
-		bag: tiddler.fields.bag
-	};
+	var title = tiddler.fields.title,
+		revision = this.wiki.extractTiddlerDataItem(REVISION_STATE_TIDDLER,title),
+		bag = this.wiki.extractTiddlerDataItem(BAG_STATE_TIDDLER,title);
+	if(revision && bag) {
+		return {
+			title: title,
+			revision: revision,
+			bag: bag
+		};
+	} else {
+		return undefined;
+	}
 };
 
 MultiWikiClientAdaptor.prototype.getTiddlerRevision = function(title) {
-	var tiddler = this.wiki.getTiddler(title);
-	return tiddler.fields.revision;
+	return this.wiki.extractTiddlerDataItem(REVISION_STATE_TIDDLER,title);
+};
+
+MultiWikiClientAdaptor.prototype.setTiddlerInfo = function(title,revision,bag) {
+	this.wiki.setText(BAG_STATE_TIDDLER,null,title,revision,{suppressTimestamp: true});
+	this.wiki.setText(REVISION_STATE_TIDDLER,null,title,bag,{suppressTimestamp: true});
+};
+
+MultiWikiClientAdaptor.prototype.removeTiddlerInfo = function(title) {
+	this.wiki.setText(BAG_STATE_TIDDLER,null,title,undefined,{suppressTimestamp: true});
+	this.wiki.setText(REVISION_STATE_TIDDLER,null,title,undefined,{suppressTimestamp: true});
 };
 
 /*
@@ -157,11 +177,7 @@ MultiWikiClientAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			if(err) {
 				return callback(err);
 			}
-			// Process the tiddlers to make sure the revision is a string
-			var tiddlers = JSON.parse(data);
-			for(var t=0; t<tiddlers.length; t++) {
-				tiddlers[t] = self.convertTiddlerFromTiddlyWebFormat(tiddlers[t]);
-			}
+			var tiddlers = $tw.utils.parseJSONSafe(data);
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
 			// If Browswer Storage tiddlers were cached on reloading the wiki, add them after sync from server completes in the above callback.
@@ -186,7 +202,7 @@ MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options
 		headers: {
 			"Content-type": "application/json"
 		},
-		data: this.convertTiddlerToTiddlyWebFormat(tiddler),
+		data: JSON.stringify(tiddler.getFieldStrings()),
 		callback: function(err,data,request) {
 			if(err) {
 				return callback(err);
@@ -220,7 +236,7 @@ MultiWikiClientAdaptor.prototype.loadTiddler = function(title,callback) {
 				return callback(err);
 			}
 			// Invoke the callback
-			callback(null,self.convertTiddlerFromTiddlyWebFormat(JSON.parse(data)));
+			callback(null,$tw.utils.parseJSONSafe(data));
 		}
 	});
 };
@@ -252,64 +268,6 @@ MultiWikiClientAdaptor.prototype.deleteTiddler = function(title,callback,options
 			callback(null,null);
 		}
 	});
-};
-
-/*
-Convert a tiddler to a field set suitable for PUTting to TiddlyWeb
-*/
-MultiWikiClientAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
-	var result = {},
-		knownFields = [
-			"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
-		];
-	if(tiddler) {
-		$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {
-			var fieldString = fieldName === "tags" ?
-								tiddler.fields.tags :
-								tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
-
-			if(knownFields.indexOf(fieldName) !== -1) {
-				// If it's a known field, just copy it across
-				result[fieldName] = fieldString;
-			} else {
-				// If it's unknown, put it in the "fields" field
-				result.fields = result.fields || {};
-				result.fields[fieldName] = fieldString;
-			}
-		});
-	}
-	// Default the content type
-	result.type = result.type || "text/vnd.tiddlywiki";
-	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
-};
-
-/*
-Convert a field set in TiddlyWeb format into ordinary TiddlyWiki5 format
-*/
-MultiWikiClientAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerFields) {
-	var self = this,
-		result = {};
-	// Transfer the fields, pulling down the `fields` hashmap
-	$tw.utils.each(tiddlerFields,function(element,title,object) {
-		if(title === "fields") {
-			$tw.utils.each(element,function(element,subTitle,object) {
-				result[subTitle] = element;
-			});
-		} else {
-			result[title] = tiddlerFields[title];
-		}
-	});
-	// Make sure the revision is expressed as a string
-	if(typeof result.revision === "number") {
-		result.revision = result.revision.toString();
-	}
-	// Some unholy freaking of content types
-	if(result.type === "text/javascript") {
-		result.type = "application/javascript";
-	} else if(!result.type || result.type === "None") {
-		result.type = "text/x-tiddlywiki";
-	}
-	return result;
 };
 
 /*
