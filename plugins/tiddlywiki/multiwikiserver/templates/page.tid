@@ -11,12 +11,10 @@ page-content: title of tiddler containing the main page content
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet" href="/.system/styles.css">
 </head>
-<body>
-<div class="pageContainer">
+<body class="tc-body">
 `
 <$view tiddler=<<page-content>> field="text" format="htmlwikified" />
 `
-</div>
 </body>
 </html>
 `
