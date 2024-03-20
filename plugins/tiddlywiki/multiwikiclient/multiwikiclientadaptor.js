@@ -316,7 +316,7 @@ MultiWikiClientAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(ti
 Split an MWS Etag into its constituent parts. For example:
 
 ```
-"tiddler_id:946151"
+"tiddler:mybag/946151"
 ```
 
 Note that the value includes the opening and closing double quotes.
@@ -324,16 +324,25 @@ Note that the value includes the opening and closing double quotes.
 The parts are:
 
 ```
-tiddler_id:<revision>
+"tiddler:<bag>/<revision>"
 ```
 */
 MultiWikiClientAdaptor.prototype.parseEtag = function(etag) {
-	const PREFIX = "\"tiddler_id:";
-	if(!etag.startsWith(PREFIX)) {
-		return null;
+	const PREFIX = "\"tiddler:";
+	if(etag.startsWith(PREFIX)) {
+		const slashPos = etag.indexOf("/");
+		if(slashPos !== -1) {
+			const bag_name = etag.slice(PREFIX.length,slashPos),
+				revision = parseInt(etag.slice(slashPos + 1),10);
+			if(!isNaN(revision)) {
+				return {
+					bag_name: bag_name,
+					revision: revision
+				};
+			}
+		}
 	}
-	const revision = parseInt(etag.slice(PREFIX.length),10);
-	return isNaN(revision) ? null : revision;
+	return null;
 };
 
 if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {

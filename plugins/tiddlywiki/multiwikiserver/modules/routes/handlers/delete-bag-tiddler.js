@@ -23,7 +23,7 @@ exports.handler = function(request,response,state) {
 	if(bag_name) {
 		var result = $tw.mws.store.deleteTiddler(title,bag_name);
 		response.writeHead(204, "OK", {
-			Etag: "\"tiddler_id:" + result.tiddler_id + "\"",
+			Etag: state.makeTiddlerEtag(result),
 			"Content-Type": "text/plain"
 		});
 		response.end();	

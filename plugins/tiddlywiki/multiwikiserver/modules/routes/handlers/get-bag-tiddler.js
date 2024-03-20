@@ -42,7 +42,7 @@ exports.handler = function(request,response,state) {
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 			state.sendResponse(200,{
-				Etag: "\"tiddler_id:" + tiddlerInfo.tiddler_id + "\"",
+				Etag: state.makeTiddlerEtag(tiddlerInfo),
 				"Content-Type": "application/json"
 			},JSON.stringify(tiddlerFields),"utf8");
 			return;
@@ -51,7 +51,7 @@ exports.handler = function(request,response,state) {
 			const result = $tw.mws.store.getBagTiddlerStream(title,bag_name);
 			if(result) {
 				response.writeHead(200, "OK",{
-					Etag: "\"tiddler_id:" + result.tiddler_id + "\"",
+					Etag: state.makeTiddlerEtag(result),
 					"Content-Type":  result.type
 				});
 				result.stream.pipe(response);

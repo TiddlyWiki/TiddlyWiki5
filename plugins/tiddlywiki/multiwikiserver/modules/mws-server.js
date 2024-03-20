@@ -264,6 +264,19 @@ function streamMultipartData(request,options) {
 	});
 }
 
+/*
+Make an etag. Options include:
+bag_name:
+tiddler_id:
+*/
+function makeTiddlerEtag(options) {
+	if(options.bag_name || options.tiddler_id) {
+		return "\"tiddler:" + options.bag_name + "/" + options.tiddler_id + "\"";
+	} else {
+		throw "Missing bag_name or tiddler_id";
+	}
+}
+
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
@@ -360,6 +373,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.sendResponse = sendResponse.bind(self,request,response);
 	state.redirect = redirect.bind(self,request,response);
 	state.streamMultipartData = streamMultipartData.bind(self,request);
+	state.makeTiddlerEtag = makeTiddlerEtag.bind(self);
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
 	// Check whether anonymous access is granted
