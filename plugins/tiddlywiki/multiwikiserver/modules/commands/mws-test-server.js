@@ -113,14 +113,15 @@ TestRunner.prototype.runTest = function(testSpec,callback) {
 
 const testSpecs = [
 	{
-		description: "Check server status",
+		description: "Check index page",
 		method: "GET",
-		path: "/wiki/recipe-alpha/status",
+		path: "/",
 		headers: {
 			accept: "*/*"
 		},
-		expectedResult: (jsonData,data) => {
-			return jsonData.username === "Joe Bloggs";
+		expectedResult: (jsonData,data,headers) => {
+			console.log(JSON.stringify(data).slice(1,100))
+			return JSON.stringify(data).slice(1,100) === "\\n<!doctype html>\\n<head>\\n\\t<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html;charset=utf-8\\\" ";
 		}
 	},
 	{

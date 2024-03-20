@@ -3,9 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/put-recipe.js
 type: application/javascript
 module-type: mws-route
 
-PUT /wiki/:recipe_name/recipes/:recipe_name
-
-NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+PUT /recipes/:recipe_name
 
 \*/
 (function() {
@@ -16,14 +14,13 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "PUT";
 
-exports.path = /^\/wiki\/([^\/]+)\/recipes\/(.+)$/;
+exports.path = /^\/recipes\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		data = $tw.utils.parseJSONSafe(state.data);
-	if(recipe_name === recipe_name_2 && data) {
+	if(recipe_name && data) {
 		const result = $tw.mws.store.createRecipe(recipe_name,data.bag_names,data.description);
 		if(!result) {
 			state.sendResponse(204,{

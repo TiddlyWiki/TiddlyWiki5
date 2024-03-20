@@ -3,9 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-recipe-tiddler.
 type: application/javascript
 module-type: mws-route
 
-GET /wiki/:recipe_name/recipes/:recipe_name/tiddler/:title
-
-NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+GET /recipes/:recipe_name/tiddler/:title
 
 \*/
 (function() {
@@ -16,15 +14,14 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
+exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
-		tiddlerInfo = recipe_name === recipe_name_2 && $tw.mws.store.getRecipeTiddler(title,recipe_name);
-	if(recipe_name === recipe_name_2 && tiddlerInfo && tiddlerInfo.tiddler) {
+		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
+		tiddlerInfo = recipe_name && $tw.mws.store.getRecipeTiddler(title,recipe_name);
+	if(recipe_name && tiddlerInfo && tiddlerInfo.tiddler) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 				var tiddlerFields = {},

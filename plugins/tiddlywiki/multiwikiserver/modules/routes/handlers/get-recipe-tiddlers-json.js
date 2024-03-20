@@ -3,9 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-recipe-tiddlers
 type: application/javascript
 module-type: mws-route
 
-GET /wiki/:recipe_name/recipes/:recipe_name/tiddlers.json?filter=:filter
-
-NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+GET /recipes/:recipe_name/tiddlers.json?filter=:filter
 
 \*/
 (function() {
@@ -16,13 +14,12 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/recipes\/([^\/]+)\/tiddlers.json$/;
+exports.path = /^\/recipes\/([^\/]+)\/tiddlers.json$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
-	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]);
-	if(recipe_name === recipe_name_2) {
+	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
+	if(recipe_name) {
 		// Get the tiddlers in the recipe
 		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name);
 		// Get a skinny version of each tiddler

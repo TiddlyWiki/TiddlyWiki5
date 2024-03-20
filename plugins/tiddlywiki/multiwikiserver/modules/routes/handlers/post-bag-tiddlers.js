@@ -3,9 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/post-bag-tiddlers.j
 type: application/javascript
 module-type: mws-route
 
-POST /wiki/:bag_name/bags/:bag_name/tiddlers/
-
-NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+POST /bags/:bag_name/tiddlers/
 
 \*/
 (function() {
@@ -16,7 +14,7 @@ NOTE: Urls currently include the bag name twice. This is temporary to minimise t
 
 exports.method = "POST";
 
-exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/$/;
+exports.path = /^\/bags\/([^\/]+)\/tiddlers\/$/;
 
 exports.bodyFormat = "stream";
 
@@ -27,12 +25,7 @@ exports.handler = function(request,response,state) {
 		fs = require("fs"),
 		processIncomingStream = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/multipart-forms.js").processIncomingStream;
 	// Get the  parameters
-	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]);
-	// Require the bag names to match
-	if(bag_name !== bag_name_2) {
-		return state.sendResponse(400,{"Content-Type": "text/plain"},"Bad Request: bag names do not match");
-	}
+	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
 	// Process the incoming data
 	processIncomingStream({
 		store: $tw.mws.store,

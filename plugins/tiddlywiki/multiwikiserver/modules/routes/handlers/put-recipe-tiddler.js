@@ -3,9 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/put-recipe-tiddler.
 type: application/javascript
 module-type: mws-route
 
-PUT /wiki/:recipe_name/recipes/:recipe_name/tiddlers/:title
-
-NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+PUT /recipes/:recipe_name/tiddlers/:title
 
 \*/
 (function() {
@@ -16,13 +14,12 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "PUT";
 
-exports.path = /^\/wiki\/([^\/]+)\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
+exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
+		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		fields = $tw.utils.parseJSONSafe(state.data);
 	// Pull up any subfields in the `fields` object
 	if(typeof fields.fields === "object") {
@@ -37,8 +34,7 @@ exports.handler = function(request,response,state) {
 			fields[name] = $tw.utils.stringifyList(value);
 		}
 	});
-	// Require the recipe names to match
-	if(recipe_name === recipe_name_2) {
+	if(recipe_name) {
 		var result = $tw.mws.store.saveRecipeTiddler(fields,recipe_name);
 		if(result) {
 			response.writeHead(204, "OK",{

@@ -3,9 +3,8 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-bag-tiddler.js
 type: application/javascript
 module-type: mws-route
 
-GET /wiki/:bag_name/bags/:bag_name/tiddler/:title
+GET /bags/:bag_name/tiddler/:title
 
-NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
 
 \*/
 (function() {
@@ -16,15 +15,14 @@ NOTE: Urls currently include the bag name twice. This is temporary to minimise t
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
+exports.path = /^\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
-		result = bag_name === bag_name_2 && $tw.mws.store.getBagTiddler(title,bag_name);
-	if(bag_name === bag_name_2 && result) {
+		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
+		result = bag_name && $tw.mws.store.getBagTiddler(title,bag_name);
+	if(bag_name && result) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 				var tiddlerFields = {},

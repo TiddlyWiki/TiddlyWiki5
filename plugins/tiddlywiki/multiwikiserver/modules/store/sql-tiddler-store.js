@@ -92,7 +92,7 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 	});
 	if(attachment_blob !== null) {
 		delete fields.text;
-		fields._canonical_uri = `/wiki/${encodeURIComponent(bag_name)}/bags/${encodeURIComponent(bag_name)}/tiddlers/${encodeURIComponent(tiddlerFields.title)}/blob`;
+		fields._canonical_uri = `/bags/${encodeURIComponent(bag_name)}/tiddlers/${encodeURIComponent(tiddlerFields.title)}/blob`;
 	}
 	return fields;
 };

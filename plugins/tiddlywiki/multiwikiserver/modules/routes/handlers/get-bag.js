@@ -3,10 +3,8 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-bag.js
 type: application/javascript
 module-type: mws-route
 
-GET /wiki/:bag_name/bags/:bag_name/
-GET /wiki/:bag_name/bags/:bag_name
-
-NOTE: Urls currently include the bag name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+GET /bags/:bag_name/
+GET /bags/:bag_name
 
 \*/
 (function() {
@@ -17,19 +15,18 @@ NOTE: Urls currently include the bag name twice. This is temporary to minimise t
 
 exports.method = "GET";
 
-exports.path = /^\/wiki\/([^\/]+)\/bags\/([^\/]+)(\/?)$/;
+exports.path = /^\/bags\/([^\/]+)(\/?)$/;
 
 exports.handler = function(request,response,state) {
 	// Redirect if there is no trailing slash. We do this so that the relative URL specified in the upload form works correctly
-	if(state.params[2] !== "/") {
+	if(state.params[1] !== "/") {
 		state.redirect(301,state.urlInfo.path + "/");
 		return;
 	}
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		bag_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		bagTiddlers = bag_name === bag_name_2 && $tw.mws.store.getBagTiddlers(bag_name);
-	if(bag_name === bag_name_2 && bagTiddlers) {
+		bagTiddlers = bag_name && $tw.mws.store.getBagTiddlers(bag_name);
+	if(bag_name && bagTiddlers) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(bagTiddlers),"utf8");

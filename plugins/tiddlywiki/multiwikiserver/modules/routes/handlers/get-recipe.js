@@ -36,7 +36,7 @@ exports.handler = function(request,response,state) {
 					$:/boot/bootprefix.js
 					$:/core
 					$:/library/sjcl.js
-					$:/plugins/tiddlywiki/tiddlyweb
+					$:/plugins/tiddlywiki/multiwikiclient
 					$:/themes/tiddlywiki/snowwhite
 					$:/themes/tiddlywiki/vanilla
 				`
@@ -57,7 +57,7 @@ exports.handler = function(request,response,state) {
 				response.write(",\n")
 			}
 		});
-		response.write(JSON.stringify({title: "$:/config/tiddlyweb/host",text: "$protocol$//$host$$pathname$/"}));
+		response.write(JSON.stringify({title: "$:/config/multiwikiclient/recipe",text: recipe_name}));
 		response.write(",\n")
 		response.write(template.substring(markerPos + marker.length))
 		// Finish response

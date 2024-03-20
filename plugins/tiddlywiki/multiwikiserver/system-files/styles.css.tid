@@ -98,11 +98,6 @@ body {
 	color: currentcolor;
 }
 
-.mws-favicon.tc-image-loading, .mws-favicon-small.tc-image-loading,
-.mws-favicon.tc-image-error, .mws-favicon-small.tc-image-error {
-	visibility: hidden;
-}
-
 .mws-favicon {
 	object-fit: contain;
 	width: 4em;

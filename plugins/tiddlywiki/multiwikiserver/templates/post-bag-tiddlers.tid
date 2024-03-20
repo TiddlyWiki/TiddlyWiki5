@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/post-bag-tiddlers
 
 ! <$image
-	source=`/wiki/${ [<bag-name>encodeuricomponent[]] }$/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
+	source=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico`
 	class="mws-favicon-small"
 	width="32px"
 >
@@ -23,7 +23,7 @@ The following tiddlers were successfully imported:
 <ul>
 <$list filter="[<imported-titles>jsonget[]sort[]]">
 <li>
-<a href=`/wiki/${ [<bag-name>encodeuricomponent[]] }$/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/${ [<currentTiddler>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+<a href=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/${ [<currentTiddler>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
 <$text text=<<currentTiddler>>/>
 </a>
 </li>
