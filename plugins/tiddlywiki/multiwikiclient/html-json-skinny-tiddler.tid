@@ -1,3 +1,0 @@
-title: $:/core/templates/html-json-skinny-tiddler
-
-<$text text=<<join>>/><$jsontiddler tiddler=<<currentTiddler>> exclude="text" escapeUnsafeScriptChars="yes" $revision=<<changecount>> $bag="default" $_is_skinny=""/>

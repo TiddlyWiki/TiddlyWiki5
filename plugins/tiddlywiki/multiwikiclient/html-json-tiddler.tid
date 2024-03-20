@@ -1,3 +1,0 @@
-title: $:/core/templates/html-json-tiddler
-
-<$jsontiddler tiddler=<<currentTiddler>> escapeUnsafeScriptChars="yes" $revision=<<changecount>> $bag="default"/>
