@@ -24,7 +24,8 @@ exports.handler = function(request,response,state) {
 		const result = $tw.mws.store.getBagTiddlerStream(title,bag_name);
 		if(result) {
 			response.writeHead(200, "OK",{
-				"Content-Type":  result.type
+				Etag: "\"tiddler_id:" + result.tiddler_id + "\"",
+				"Content-Type":  result.type,
 			});
 			result.stream.pipe(response);
 			return;

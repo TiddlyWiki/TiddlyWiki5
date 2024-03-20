@@ -21,8 +21,9 @@ exports.handler = function(request,response,state) {
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]);
 	if(bag_name) {
-		$tw.mws.store.deleteTiddler(title,bag_name);
+		var result = $tw.mws.store.deleteTiddler(title,bag_name);
 		response.writeHead(204, "OK", {
+			Etag: "\"tiddler_id:" + result.tiddler_id + "\"",
 			"Content-Type": "text/plain"
 		});
 		response.end();	

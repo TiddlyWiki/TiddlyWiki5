@@ -48,17 +48,35 @@ exports.handler = function(request,response,state) {
 		if(markerPos === -1) {
 			throw new Error("Cannot find tiddler store in template");
 		}
+		function writeTiddler(tiddlerFields) {
+			response.write(JSON.stringify(tiddlerFields).replace(/</g,"\\u003c"));
+			response.write(",\n");
+		}
 		response.write(template.substring(0,markerPos + marker.length));
+		const bagInfo = {},
+			revisionInfo = {};
 		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
 			var result = $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
 			if(result) {
-				var tiddlerFields = result.tiddler;
-				response.write(JSON.stringify(tiddlerFields).replace(/</g,"\\u003c"));
-				response.write(",\n")
+				bagInfo[result.tiddler.title] = result.bag_name;
+				revisionInfo[result.tiddler.title] = result.tiddler_id.toString();
+				writeTiddler(result.tiddler);
 			}
 		});
-		response.write(JSON.stringify({title: "$:/config/multiwikiclient/recipe",text: recipe_name}));
-		response.write(",\n")
+		writeTiddler({
+			title: "$:/config/multiwikiclient/tiddlers/bag",
+			text: JSON.stringify(bagInfo),
+			type: "application/json"
+		});
+		writeTiddler({
+			title: "$:/config/multiwikiclient/tiddlers/revision",
+			text: JSON.stringify(revisionInfo),
+			type: "application/json"
+		});
+		writeTiddler({
+			title: "$:/config/multiwikiclient/recipe",
+			text: recipe_name
+		});
 		response.write(template.substring(markerPos + marker.length))
 		// Finish response
 		response.end();

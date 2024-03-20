@@ -41,12 +41,16 @@ exports.handler = function(request,response,state) {
 				}
 			});
 			tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
-			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(tiddlerFields),"utf8");
+			state.sendResponse(200,{
+				Etag: "\"tiddler_id:" + tiddlerInfo.tiddler_id + "\"",
+				"Content-Type": "application/json"
+			},JSON.stringify(tiddlerFields),"utf8");
 			return;
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content
 			var type = tiddlerInfo.tiddler.type || "text/plain";
 			response.writeHead(200, "OK",{
+				Etag: "\"tiddler_id:" + tiddlerInfo.tiddler_id + "\"",
 				"Content-Type":  type
 			});
 			response.write(tiddlerInfo.tiddler.text || "",($tw.config.contentTypeInfo[type] ||{encoding: "utf8"}).encoding);

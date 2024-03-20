@@ -202,9 +202,7 @@ MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options
 			} else {
 				var etagInfo = self.parseEtag(etag);
 				// Invoke the callback
-				callback(null,{
-					bag: etagInfo.bag
-				},etagInfo.revision);
+				callback(null,{},etagInfo.revision);
 			}
 		}
 	});
@@ -315,10 +313,10 @@ MultiWikiClientAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(ti
 };
 
 /*
-Split a TiddlyWeb Etag into its constituent parts. For example:
+Split an MWS Etag into its constituent parts. For example:
 
 ```
-"system-images_public/unsyncedIcon/946151:9f11c278ccde3a3149f339f4a1db80dd4369fc04"
+"tiddler_id:946151"
 ```
 
 Note that the value includes the opening and closing double quotes.
@@ -326,22 +324,16 @@ Note that the value includes the opening and closing double quotes.
 The parts are:
 
 ```
-<bag>/<title>/<revision>:<hash>
+tiddler_id:<revision>
 ```
 */
 MultiWikiClientAdaptor.prototype.parseEtag = function(etag) {
-	var firstSlash = etag.indexOf("/"),
-		lastSlash = etag.lastIndexOf("/"),
-		colon = etag.lastIndexOf(":");
-	if(firstSlash === -1 || lastSlash === -1 || colon === -1) {
+	const PREFIX = "\"tiddler_id:";
+	if(!etag.startsWith(PREFIX)) {
 		return null;
-	} else {
-		return {
-			bag: $tw.utils.decodeURIComponentSafe(etag.substring(1,firstSlash)),
-			title: $tw.utils.decodeURIComponentSafe(etag.substring(firstSlash + 1,lastSlash)),
-			revision: etag.substring(lastSlash + 1,colon)
-		};
 	}
+	const revision = parseInt(etag.slice(PREFIX.length),10);
+	return isNaN(revision) ? null : revision;
 };
 
 if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {

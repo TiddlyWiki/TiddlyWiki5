@@ -219,7 +219,7 @@ SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,rec
 };
 
 SqlTiddlerStore.prototype.deleteTiddler = function(title,bag_name) {
-	this.sqlTiddlerDatabase.deleteTiddler(title,bag_name);
+	return this.sqlTiddlerDatabase.deleteTiddler(title,bag_name);
 };
 
 /*
@@ -241,14 +241,19 @@ SqlTiddlerStore.prototype.getBagTiddler = function(title,bag_name) {
 
 /*
 Get an attachment ready to stream. Returns null if there is an error or:
+tiddler_id: revision of tiddler
 stream: stream of file
 type: type of file
+Returns {tiddler_id:}
 */
 SqlTiddlerStore.prototype.getBagTiddlerStream = function(title,bag_name) {
 	const tiddlerInfo = this.sqlTiddlerDatabase.getBagTiddler(title,bag_name);
 	if(tiddlerInfo) {
 		if(tiddlerInfo.attachment_blob) {
-			return this.attachmentStore.getAttachmentStream(tiddlerInfo.attachment_blob);
+			return $tw.utils.extend(
+				{},
+				this.attachmentStore.getAttachmentStream(tiddlerInfo.attachment_blob),
+				{tiddler_id: tiddlerInfo.tiddler_id});
 		} else {
 			const { Readable } = require('stream');
 			const stream = new Readable();
@@ -260,6 +265,7 @@ SqlTiddlerStore.prototype.getBagTiddlerStream = function(title,bag_name) {
 				stream.push(null);
 			};
 			return {
+				tiddler_id: tiddlerInfo.tiddler_id,
 				stream: stream,
 				type: tiddlerInfo.tiddler.type || "text/plain"
 			}
