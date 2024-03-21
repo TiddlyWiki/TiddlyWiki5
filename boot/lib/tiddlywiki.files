@@ -5,10 +5,10 @@
 			"fields": {
 				"title": "$:/library/sjcl.js",
 				"type": "application/javascript",
-				"library": yes
+				"library": "yes"
 			},
 			"prefix": "(function(define) {\n",
-			"suffix": "\n})(function (_,defined){$tw.sjcl = defined()})\n"
+			"suffix": "\n})(function (_,defined){window.sjcl = defined()})\n"
 		}
 	]
 }
