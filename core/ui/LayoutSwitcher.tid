@@ -13,10 +13,17 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 </div>
 \end
 
+\procedure input-next-actions(step:1)
+\function layouts() [filter<layouts-filter>]
+<$log layouts=<<layouts>> aaa="aaa" />
+<$action-sendmessage $message="tm-navigate" $param={{{[<layouts>cycle<layouts>,<step>]}}}/>
+\end
+
+
 \whitespace trim
 <$linkcatcher to="$:/layout">
-	<$keyboard key="((input-up))" actions=<<input-next-actions "before" "reverse[]">>>
-		<$keyboard key="((input-down))" actions=<<input-next-actions>>>
+	<$keyboard key="((input-up))" actions=<<input-next-actions>>>
+		<$keyboard key="((input-down))" actions=<<input-next-actions "-1">>>
 			<div class="tc-chooser">
 				<$list filter=<<layouts-filter>>>
 					<% if [{$:/layout}has[text]] %>
