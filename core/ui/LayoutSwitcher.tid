@@ -7,7 +7,7 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 
 \procedure layout-item()
 <div class=<<cls>>>
-	<$link to={{!!title}}>
+	<$link to={{!!title}} tabindex=<<tabIndex>>>
 		''<$transclude tiddler={{{ [<currentTiddler>get[icon]] }}}/><$transclude field="name"/>''&#32;-&#32;<$transclude field="description"/>
 	</$link>
 </div>
@@ -23,7 +23,7 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 	<$keyboard key="((input-up))" actions=<<input-next-actions>>>
 		<$keyboard key="((input-down))" actions=<<input-next-actions "-1">>>
 			<div class="tc-chooser">
-				<$list filter=<<layouts-filter>>>
+				<$list filter=<<layouts-filter>> counter="tabIndex">
 					<% if [{$:/layout}has[text]] %>
 						<$set name="cls" filter="[all[current]field:title{$:/layout}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 							<<layout-item>>
