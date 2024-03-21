@@ -2,6 +2,8 @@ title: $:/snippets/LayoutSwitcher
 tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 
+\procedure layouts-filter() [all[tiddlers+shadows]tag[$:/tags/Layout]] [[$:/core/ui/PageTemplate]] +[!is[draft]sort[name]]
+
 \procedure layout-item()
 \whitespace trim
 <div class=<<cls>>>
@@ -16,7 +18,7 @@ caption: {{$:/language/ControlPanel/LayoutSwitcher/Caption}}
 	<$keyboard key="((input-up))" actions=<<input-next-actions "before" "reverse[]">>>
 		<$keyboard key="((input-down))" actions=<<input-next-actions>>>
 			<div class="tc-chooser">
-				<$list filter="[all[tiddlers+shadows]tag[$:/tags/Layout]] [[$:/core/ui/PageTemplate]] +[!is[draft]sort[name]]">
+				<$list filter=<<layouts-filter>>>
 					<% if [{$:/layout}has[text]] %>
 						<$set name="cls" filter="[all[current]field:title{$:/layout}]" value="tc-chooser-item tc-chosen" emptyValue="tc-chooser-item">
 							<<layout-item>>
