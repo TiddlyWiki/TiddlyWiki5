@@ -263,6 +263,9 @@ SqlTiddlerDatabase.prototype.saveRecipeTiddler = function(tiddlerFields,recipe_n
 	};
 };
 
+/*
+Returns {tiddler_id:} of the delete marker
+*/
 SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bag_name) {
 	// Delete the fields of this tiddler
 	this.engine.runStatement(`
@@ -278,7 +281,7 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bag_name) {
 		$bag_name: bag_name
 	});
 	// Mark the tiddler itself as deleted
-	this.engine.runStatement(`
+	const rowDeleteMarker = this.engine.runStatement(`
 		INSERT OR REPLACE INTO tiddlers (bag_id, title, is_deleted, attachment_blob)
 		VALUES (
 			(SELECT bag_id FROM bags WHERE bag_name = $bag_name),
@@ -290,6 +293,7 @@ SqlTiddlerDatabase.prototype.deleteTiddler = function(title,bag_name) {
 		$title: title,
 		$bag_name: bag_name
 	});
+	return {tiddler_id: rowDeleteMarker.lastInsertRowid};
 };
 
 /*

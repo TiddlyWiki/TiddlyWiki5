@@ -3,6 +3,7 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
+		"tiddlywiki/multiwikiclient",
 		"tiddlywiki/multiwikiserver"
 	],
 	"themes": [

@@ -1,11 +1,9 @@
 /*\
 title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/put-recipe-tiddler.js
 type: application/javascript
-module-type: route
+module-type: mws-route
 
-PUT /wiki/:recipe_name/recipes/:recipe_name/tiddlers/:title
-
-NOTE: Urls currently include the recipe name twice. This is temporary to minimise the changes to the TiddlyWeb plugin
+PUT /recipes/:recipe_name/tiddlers/:title
 
 \*/
 (function() {
@@ -16,33 +14,18 @@ NOTE: Urls currently include the recipe name twice. This is temporary to minimis
 
 exports.method = "PUT";
 
-exports.path = /^\/wiki\/([^\/]+)\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
+exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
-		recipe_name_2 = $tw.utils.decodeURIComponentSafe(state.params[1]),
-		title = $tw.utils.decodeURIComponentSafe(state.params[2]),
+		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
 		fields = $tw.utils.parseJSONSafe(state.data);
-	// Pull up any subfields in the `fields` object
-	if(typeof fields.fields === "object") {
-		$tw.utils.each(fields.fields,function(field,name) {
-			fields[name] = field;
-		});
-		delete fields.fields;
-	}
-	// Stringify any array fields
-	$tw.utils.each(fields,function(value,name) {
-		if($tw.utils.isArray(value)) {
-			fields[name] = $tw.utils.stringifyList(value);
-		}
-	});
-	// Require the recipe names to match
-	if(recipe_name === recipe_name_2) {
+	if(recipe_name && title === fields.title) {
 		var result = $tw.mws.store.saveRecipeTiddler(fields,recipe_name);
 		if(result) {
 			response.writeHead(204, "OK",{
-				Etag: "\"" + result.bag_name + "/" + encodeURIComponent(title) + "/" + result.tiddler_id + ":\"",
+				Etag: state.makeTiddlerEtag(result),
 				"Content-Type": "text/plain"
 			});
 		} else {

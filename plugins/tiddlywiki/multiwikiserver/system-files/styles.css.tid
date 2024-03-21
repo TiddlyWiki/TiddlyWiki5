@@ -1,21 +1,18 @@
-title: $:/plugins/multiwikiserver/Styles
-tags: $:/tags/Stylesheet
+title: $:/plugins/tiddlywiki/multiwikiserver/system-files/styles.css
+tags: $:/tags/MWS/SystemFileWikified
+system-file-type: text/css
 
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
-/*
-Styles specific to the full screen layout
-*/
+/* Import TiddlyWiki theme styles */
 
-.mws-admin-layout {
+{{$:/core/ui/PageStylesheet}}
+
+/* MWS Styles */
+
+body {
 	padding: 1rem;
-}
-
-
-.mws-form-error {
-	border: 2px solid red;
-	padding: 1em;
-	margin: 1em;
 }
 
 .mws-wiki-card {
@@ -62,6 +59,7 @@ Styles specific to the full screen layout
 .mws-vertical-list {
 	list-style: none;
 	padding: 0;
+	line-height: 1.5;
 }
 
 .mws-horizontal-list {
@@ -99,11 +97,6 @@ Styles specific to the full screen layout
 .mws-bag-pill-link {
 	text-decoration: none;
 	color: currentcolor;
-}
-
-.mws-favicon.tc-image-loading, .mws-favicon-small.tc-image-loading,
-.mws-favicon.tc-image-error, .mws-favicon-small.tc-image-error {
-	visibility: hidden;
 }
 
 .mws-favicon {

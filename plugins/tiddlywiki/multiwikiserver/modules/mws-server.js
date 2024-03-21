@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/server/server.js
+title: $:/plugins/tiddlywiki/multiwikiserver/mws-server.js
 type: application/javascript
 module-type: library
 
@@ -73,8 +73,7 @@ function Server(options) {
 		self.addAuthenticator(authenticatorDefinition.AuthenticatorClass);
 	});
 	// Load route handlers
-	$tw.modules.forEachModuleOfType("route", function(title,routeDefinition) {
-		// console.log("Loading server route " + title);
+	$tw.modules.forEachModuleOfType("mws-route", function(title,routeDefinition) {
 		self.addRoute(routeDefinition);
 	});
 	// Initialise the http vs https
@@ -163,6 +162,121 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 	response.end(data,encoding);
 }
 
+function redirect(request,response,statusCode,location) {
+	response.setHeader("Location",location);
+	response.statusCode = statusCode;
+	response.end()
+}
+
+/*
+Options include:
+cbPartStart(headers,name,filename) - invoked when a file starts being received
+cbPartChunk(chunk) - invoked when a chunk of a file is received
+cbPartEnd() - invoked when a file finishes being received
+cbFinished(err) - invoked when the all the form data has been processed
+*/
+function streamMultipartData(request,options) {
+	// Check that the Content-Type is multipart/form-data
+	const contentType = request.headers['content-type'];
+	if(!contentType.startsWith("multipart/form-data")) {
+		return options.cbFinished("Expected multipart/form-data content type");
+	}
+	// Extract the boundary string from the Content-Type header
+	const boundaryMatch = contentType.match(/boundary=(.+)$/);
+	if(!boundaryMatch) {
+		return options.cbFinished("Missing boundary in multipart/form-data");
+	}
+	const boundary = boundaryMatch[1];
+	const boundaryBuffer = Buffer.from("--" + boundary);
+	// Initialise
+	let buffer = Buffer.alloc(0);
+	let processingPart = false;
+	// Process incoming chunks
+	request.on("data", (chunk) => {
+		// Accumulate the incoming data
+		buffer = Buffer.concat([buffer, chunk]);
+		// Loop through any parts within the current buffer
+		while (true) {
+			if(!processingPart) {
+				// If we're not processing a part then we try to find a boundary marker
+				const boundaryIndex = buffer.indexOf(boundaryBuffer);
+				if(boundaryIndex === -1) {
+					// Haven't reached the boundary marker yet, so we should wait for more data
+					break;
+				}
+				// Look for the end of the headers
+				const endOfHeaders = buffer.indexOf("\r\n\r\n",boundaryIndex + boundaryBuffer.length);
+				if(endOfHeaders === -1) {
+					// Haven't reached the end of the headers, so we should wait for more data
+					break;
+				}
+				// Extract and parse headers
+				const headersPart = Uint8Array.prototype.slice.call(buffer,boundaryIndex + boundaryBuffer.length,endOfHeaders).toString();
+				const currentHeaders = {};
+				headersPart.split("\r\n").forEach(headerLine => {
+					const [key, value] = headerLine.split(": ");
+					currentHeaders[key.toLowerCase()] = value;
+				});
+				// Parse the content disposition header
+				const contentDisposition = {
+					name: null,
+					filename: null
+				};
+				if(currentHeaders["content-disposition"]) {
+					// Split the content-disposition header into semicolon-delimited parts
+					const parts = currentHeaders["content-disposition"].split(";").map(part => part.trim());
+					// Iterate over each part to extract name and filename if they exist
+					parts.forEach(part => {
+						if(part.startsWith("name=")) {
+							// Remove "name=" and trim quotes
+							contentDisposition.name = part.substring(6,part.length - 1);
+						} else if(part.startsWith("filename=")) {
+							// Remove "filename=" and trim quotes
+							contentDisposition.filename = part.substring(10,part.length - 1);
+						}
+					});
+				}
+				processingPart = true;
+				options.cbPartStart(currentHeaders,contentDisposition.name,contentDisposition.filename);
+				// Slice the buffer to the next part
+				buffer = Uint8Array.prototype.slice.call(buffer,endOfHeaders + 4);
+			} else {
+				const boundaryIndex = buffer.indexOf(boundaryBuffer);
+				if(boundaryIndex >= 0) {
+					// Return the part up to the boundary minus the terminating LF CR
+					options.cbPartChunk(Uint8Array.prototype.slice.call(buffer,0,boundaryIndex - 2));
+					options.cbPartEnd();
+					processingPart = false;
+					buffer = Uint8Array.prototype.slice.call(buffer,boundaryIndex);
+				} else {
+					// Return the rest of the buffer
+					options.cbPartChunk(buffer);
+					// Reset the buffer and wait for more data
+					buffer = Buffer.alloc(0);
+					break;
+				}
+			}
+		}
+	});
+	// All done
+	request.on("end", () => {
+		options.cbFinished(null);
+	});
+}
+
+/*
+Make an etag. Options include:
+bag_name:
+tiddler_id:
+*/
+function makeTiddlerEtag(options) {
+	if(options.bag_name || options.tiddler_id) {
+		return "\"tiddler:" + options.bag_name + "/" + options.tiddler_id + "\"";
+	} else {
+		throw "Missing bag_name or tiddler_id";
+	}
+}
+
 Server.prototype.defaultVariables = {
 	port: "8080",
 	host: "127.0.0.1",
@@ -215,7 +329,8 @@ Server.prototype.findMatchingRoute = function(request,state) {
 		} else {
 			match = potentialRoute.path.exec(pathname);
 		}
-		if(match && request.method === potentialRoute.method) {
+		// Allow POST as a synonym for PUT because HTML doesn't allow PUT forms
+		if(match && (request.method === potentialRoute.method || (request.method === "POST" && potentialRoute.method === "PUT"))) {
 			state.params = [];
 			for(var p=1; p<match.length; p++) {
 				state.params.push(match[p]);
@@ -245,6 +360,7 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
+	const queryString = require("querystring");
 	// Compose the state object
 	var self = this;
 	var state = {};
@@ -255,14 +371,11 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.queryParameters = querystring.parse(state.urlInfo.query);
 	state.pathPrefix = options.pathPrefix || this.get("path-prefix") || "";
 	state.sendResponse = sendResponse.bind(self,request,response);
+	state.redirect = redirect.bind(self,request,response);
+	state.streamMultipartData = streamMultipartData.bind(self,request);
+	state.makeTiddlerEtag = makeTiddlerEtag.bind(self);
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
-	// Check for the CSRF header if this is a write
-	if(!this.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
-		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
-		response.end();
-		return;
-	}
 	// Check whether anonymous access is granted
 	state.allowAnon = this.isAuthorized(state.authorizationType,null);
 	// Authenticate with the first active authenticator
@@ -292,11 +405,17 @@ Server.prototype.requestHandler = function(request,response,options) {
 		response.end();
 		return;
 	}
+	// If this is a write, check for the CSRF header unless globally disabled, or disabled for this route
+	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
+		response.end();
+		return;
+	}
 	// Receive the request body if necessary and hand off to the route handler
 	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD") {
 		// Let the route handle the request stream itself
 		route.handler(request,response,state);
-	} else if(route.bodyFormat === "string" || !route.bodyFormat) {
+	} else if(route.bodyFormat === "string" || route.bodyFormat === "www-form-urlencoded" || !route.bodyFormat) {
 		// Set the encoding for the incoming request
 		request.setEncoding("utf8");
 		var data = "";
@@ -304,6 +423,9 @@ Server.prototype.requestHandler = function(request,response,options) {
 			data += chunk.toString();
 		});
 		request.on("end",function() {
+			if(route.bodyFormat === "www-form-urlencoded") {
+				data = queryString.parse(data);
+			}
 			state.data = data;
 			route.handler(request,response,state);
 		});
@@ -327,8 +449,9 @@ Listen for requests
 port: optional port number (falls back to value of "port" variable)
 host: optional host address (falls back to value of "host" variable)
 prefix: optional prefix (falls back to value of "path-prefix" variable)
+callback: optional callback(err) to be invoked when the listener is up and running
 */
-Server.prototype.listen = function(port,host,prefix) {
+Server.prototype.listen = function(port,host,prefix,options) {
 	var self = this;
 	// Handle defaults for port and host
 	port = port || this.get("port");
@@ -341,7 +464,7 @@ Server.prototype.listen = function(port,host,prefix) {
 	// Warn if required plugins are missing
 	var missing = [];
 	for (var index=0; index<this.requiredPlugins.length; index++) {
-		if (!this.wiki.getTiddler(this.requiredPlugins[index])) {
+		if(!this.wiki.getTiddler(this.requiredPlugins[index])) {
 			missing.push(this.requiredPlugins[index]);
 		}
 	}
@@ -351,12 +474,15 @@ Server.prototype.listen = function(port,host,prefix) {
 		$tw.utils.warning(error);
 	}
 	// Create the server
-	var server;
-	if(this.listenOptions) {
-		server = this.transport.createServer(this.listenOptions,this.requestHandler.bind(this));
-	} else {
-		server = this.transport.createServer(this.requestHandler.bind(this));
-	}
+	var server = this.transport.createServer(this.listenOptions || {},function(request,response,options) {
+		if(self.get("debug-level") !== "none") {
+			var start = $tw.utils.timer();
+			response.on("finish",function() {
+				console.log("Response time:",request.method,request.url,$tw.utils.timer() - start);
+			});	
+		}
+		self.requestHandler(request,response,options);
+	});
 	// Display the port number after we've started listening (the port number might have been specified as zero, in which case we will get an assigned port)
 	server.on("listening",function() {
 		// Stop listening when we get the "th-quit" hook
@@ -368,6 +494,9 @@ Server.prototype.listen = function(port,host,prefix) {
 			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
 		$tw.utils.log("Serving on " + url,"brown/orange");
 		$tw.utils.log("(press ctrl-C to exit)","red");
+		if(options.callback) {
+			options.callback(null);
+		}
 	});
 	// Listen
 	return server.listen(port,host);

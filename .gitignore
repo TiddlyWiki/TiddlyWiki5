@@ -5,6 +5,7 @@
 tmp/
 output/
 node_modules/
+store/
 /test-results/
 /playwright-report/
 /playwright/.cache/

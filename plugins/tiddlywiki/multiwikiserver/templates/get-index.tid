@@ -1,0 +1,133 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
+
+\procedure bagPill(element-tag:"span",is-topmost:"yes")
+	\whitespace trim
+	<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
+		<a class="mws-bag-pill-link" href=`/bags/${ [<bag-name>encodeuricomponent[]] }$` rel="noopener noreferrer" target="_blank">
+			<img
+				src=`/bags/${ [<bag-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico?fallback=/.system/missing-favicon.png`
+				class="mws-favicon-small"
+			/>
+			<span class="mws-bag-pill-label">
+				<$text text=<<bag-name>>/>
+			</span>
+		</a>
+	</$genesis>
+\end
+
+! Wikis Available Here
+
+<ul class="mws-vertical-list">
+	<$list filter="[<recipe-list>jsonindexes[]] :sort[<currentTiddler>jsonget[recipe_name]]" variable="recipe-index">
+		<li>
+			<$let
+				recipe-info={{{ [<recipe-list>jsonextract<recipe-index>] }}}
+				recipe-name={{{ [<recipe-info>jsonget[recipe_name]] }}}
+			>
+				<div
+					class="mws-wiki-card"
+				>
+					<div class="mws-wiki-card-image">
+						<img
+							src=`/recipes/${ [<recipe-name>encodeuricomponent[]] }$/tiddlers/%24%3A%2Ffavicon.ico?fallback=/.system/missing-favicon.png`
+							class="mws-favicon"
+						/>
+					</div>
+					<div class="mws-wiki-card-content">
+						<div class="mws-wiki-card-header">
+							<a
+								href=`/wiki/${ [<recipe-name>encodeuricomponent[]] }$`
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								<$text text={{{ [<recipe-info>jsonget[recipe_name]] }}}/>
+							</a>
+						</div>
+						<div class="mws-wiki-card-meta">
+							<%if true %>
+								<ol class="mws-horizontal-list">
+									<$list filter="[<recipe-info>jsonget[bag_names]]" variable="bag-name" counter="counter">
+										<$transclude $variable="bagPill" is-topmost={{{ [<counter-last>match[yes]] }}} element-tag="li"/>
+									</$list>
+								</ol>
+							<%else%>
+								(no bags defined)
+							<%endif%>
+						</div>
+						<div class="mws-wiki-card-description">
+							<$text text={{{ [<recipe-info>jsonget[description]] }}}/>
+						</div>
+					</div>
+				</div>
+			</$let>
+		</li>
+	</$list>
+</ul>
+
+<form action="/recipes" method="post" class="mws-form">
+	<div class="mws-form-heading">
+		Create a new recipe or modify and existing one
+	</div>
+	<div class="mws-form-fields">
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Recipe name
+			</label>
+			<input name="recipe_name" type="text"/>
+		</div>
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Recipe description
+			</label>
+			<input name="description" type="text"/>
+		</div>
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Bags in recipe (space separated)
+			</label>
+			<input name="bag_names" type="text"/>
+		</div>
+	</div>
+	<div class="mws-form-buttons">
+		<input type="submit" value="Create or Update Recipe" formmethod="post"/>
+	</div>
+</form>
+
+! Bags
+
+<ul class="mws-vertical-list">
+	<$list filter="[<bag-list>jsonindexes[]] :sort[<currentTiddler>jsonget[bag_name]]" variable="bag-index" counter="counter">
+		<li class="mws-wiki-card">
+			<$let
+				bag-info={{{ [<bag-list>jsonextract<bag-index>] }}}
+				bag-name={{{ [<bag-info>jsonget[bag_name]] }}}
+			>
+				<$transclude $variable="bagPill"/>
+				<$text text={{{ [<bag-info>jsonget[description]] }}}/>
+			</$let>
+		</li>
+	</$list>
+</ul>
+
+<form action="/bags" method="post" class="mws-form">
+	<div class="mws-form-heading">
+		Create a new bag or modify and existing one
+	</div>
+	<div class="mws-form-fields">
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Bag name
+			</label>
+			<input name="bag_name" type="text"/>
+		</div>
+		<div class="mws-form-field">
+			<label class="mws-form-field-description">
+				Bag description
+			</label>
+			<input name="description" type="text"/>
+		</div>
+	</div>
+	<div class="mws-form-buttons">
+		<input type="submit" value="Create or Update Bag" formmethod="post"/>
+	</div>
+</form>
