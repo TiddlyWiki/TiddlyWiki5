@@ -110,7 +110,7 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 	const updateBags = this.engine.runStatement(`
 		UPDATE bags
 		SET accesscontrol = $accesscontrol,
-		description = $description 
+		description = $description
 		WHERE bag_name = $bag_name
 	`,{
 		$bag_name: bag_name,
@@ -337,7 +337,7 @@ SqlTiddlerDatabase.prototype.getBagTiddler = function(title,bag_name) {
 Returns {bag_name:, tiddler: {fields}, tiddler_id:, attachment_blob:}
 */
 SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
-	const rowTiddlerId = this.engine.runStatementGet(`	
+	const rowTiddlerId = this.engine.runStatementGet(`
 		SELECT t.tiddler_id, t.attachment_blob, b.bag_name
 		FROM bags AS b
 		INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
@@ -468,6 +468,49 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipe_name) {
 		$recipe_name: recipe_name
 	});
 	return rows.map(value => value.bag_name);
+};
+
+/*
+Get most recently Inserted/Replaced tiddlers from a bag - returns object with array of tiddlers
+Given bag, tiddler_id returned from a prior call, limit number of tiddlers to return
+*/
+SqlTiddlerDatabase.prototype.getBagRecentTiddlers = function(bag_name,last_known_tiddler_id,limit) {
+	last_known_tiddler_id = (last_known_tiddler_id && last_known_tiddler_id > 0) ? last_known_tiddler_id : 0;
+	limit = (limit && limit > 0) ? limit : 20;
+	var rows = this.engine.runStatementGetAll(`
+		SELECT title, is_deleted, tiddler_id
+		FROM tiddlers
+		WHERE bag_id IN (
+			SELECT bag_id
+			FROM bags
+			WHERE bag_name = $bag_name
+		)
+		AND tiddler_id >= $last_known_tiddler_id
+		ORDER BY tiddler_id DESC
+		LIMIT $limit
+	`,{
+		$bag_name: bag_name,
+		$last_known_tiddler_id: last_known_tiddler_id,
+		$limit: limit && limit > 0 ? limit : 20
+	});
+	// First tiddler_id is the max tiddler_id for this bag
+	var bag_max_tiddler_id = rows.length ? rows[0].tiddler_id : 0;
+	// Remove the last known tiddler_id
+	if ( rows.length && rows[rows.length-1].tiddler_id === last_known_tiddler_id ) {
+		rows.pop();
+	}
+	// Get the tiddlers fields
+	for (let idx=0; idx < rows.length; idx++) {
+		let bag_tiddler = this.getBagTiddler(rows[idx].title,bag_name);
+		rows[idx].fields = bag_tiddler ? bag_tiddler.tiddler : null;
+	}
+	return {
+		bag_name,
+		count: rows.length,
+		bag_max_tiddler_id,
+		last_known_tiddler_id,
+		tiddlers: rows
+	};
 };
 
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
