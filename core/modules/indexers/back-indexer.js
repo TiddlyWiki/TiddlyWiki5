@@ -70,6 +70,9 @@ BackSubIndexer.prototype.rebuild = function() {
 * Get things that is being referenced in the text, e.g. tiddler names in the link syntax.
 */
 BackSubIndexer.prototype._getTarget = function(tiddler) {
+	if(this.wiki.isBinaryTiddler(tiddler.fields.text)) {
+		return [];
+	}
 	var parser = this.wiki.parseText(tiddler.fields.type, tiddler.fields.text, {});
 	if(parser) {
 		return this.wiki[this.extractor](parser.tree);
