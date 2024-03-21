@@ -236,7 +236,7 @@ SqlTiddlerStore.prototype.getBagTiddler = function(title,bag_name) {
 			tiddlerInfo,
 			{
 				tiddler: this.processOutgoingTiddler(tiddlerInfo.tiddler,tiddlerInfo.tiddler_id,bag_name,tiddlerInfo.attachment_blob)
-			});	
+			});
 	} else {
 		return null;
 	}
@@ -325,6 +325,14 @@ Get the names of the bags in a recipe. Returns an empty array for recipes that d
 */
 SqlTiddlerStore.prototype.getRecipeBags = function(recipe_name) {
 	return this.sqlTiddlerDatabase.getRecipeBags(recipe_name);
+};
+
+/*
+Get most recently Inserted/Replaced tiddlers from a bag - returns object with array of tiddlers
+Given bag, tiddler_id returned from a prior call, limit number of tiddlers to return
+*/
+SqlTiddlerStore.prototype.getBagRecentTiddlers = function(bag_name, greater_than_tiddler_id, limit) {
+	return this.sqlTiddlerDatabase.getBagRecentTiddlers(bag_name, greater_than_tiddler_id, limit);
 };
 
 exports.SqlTiddlerStore = SqlTiddlerStore;
