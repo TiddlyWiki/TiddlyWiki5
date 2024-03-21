@@ -1,0 +1,14 @@
+{
+	"tiddlers": [
+		{
+			"file": "sjcl.js",
+			"fields": {
+				"title": "$:/library/sjcl.js",
+				"type": "application/javascript",
+				"library": yes
+			},
+			"prefix": "(function(define) {\n",
+			"suffix": "\n})(function (_,defined){$tw.sjcl = defined()})\n"
+		}
+	]
+}
