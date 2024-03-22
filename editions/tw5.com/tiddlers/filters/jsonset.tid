@@ -1,21 +1,30 @@
+caption: jsonset
 created: 20230915121010948
-modified: 20230915121010948
+modified: 20231204115203428
+op-input: a selection of JSON objects
+op-output: the JSON objects with the specified value assigned to the specified property
+op-parameter: one or more indexes of the property to modify, if applicable followed by the value to be assigned
+op-purpose: set the value of a property in JSON objects
+op-suffix: data type of the value to be assigned to the property
 tags: [[Filter Operators]] [[JSON Operators]]
 title: jsonset Operator
-caption: jsonset
-op-purpose: set the value of a property in JSON strings
-op-input: a selection of JSON strings
-op-parameter: one or more indexes of the property to retrieve and sometimes a value to assign
-op-output: the JSON strings with the specified property assigned
 
-<<.from-version "5.3.2">> See [[JSON in TiddlyWiki]] for background.
-
-The <<.op jsonset>> operator is used to set a property value in JSON strings. See also the following related operators:
+<<.from-version "5.3.2">> The <<.op jsonset>> operator is used to set a property value in JSON strings. See [[JSON in TiddlyWiki]] for background. See also the following related operators:
 
 * <<.olink jsonget>> to retrieve the values of a property in JSON data
 * <<.olink jsontype>> to retrieve the type of a JSON value
 * <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
 * <<.olink jsonextract>> to retrieve a JSON value as a string of JSON
+
+The type of the value to be assigned to the property can be optionally specified with a suffix:
+
+* ''string'': default, the string is specified as the final operand
+* ''boolean'': the boolean value is true if the final operand is the string "true" and false if the final operand is the string "false", any other value for the final string results prevents the property from being assigned
+* ''number'': the numeric value is taken from the final operand, invalid numbers are interpreted as zero
+* ''json'': the JSON string value is taken from the final operand, invalid JSON prevents the property from being assigned
+* ''object'': an empty object is assigned to the property, the final operand is ignored
+* ''array'': an empty array is assigned to the property, the final operand is ignored
+* ''null'': the special value null is assigned to the property, the final operand is ignored
 
 Properties within a JSON object are identified by a sequence of indexes. In the following example, the value at `[a]` is `one`, and the value at `[d][f][0]` is `five`.
 
@@ -42,63 +51,14 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 }
 ```
 
-The following examples assume that this JSON data is contained in a variable called `jsondata`.
+The <<.op jsonset>> operator uses multiple parameters to specify the indexes of the property to set. When used to assign strings (default behaviour if no suffix is specified) the final operand is interpreted as the value to assign.
 
-The <<.op jsonset>> operator uses multiple operands to specify the indexes of the property to set. When used to assign strings the final operand is interpreted as the value to assign. For example:
+Negative indexes are counted from the end, so -1 means the last item, -2 the next-to-last item, and so on.
 
-```
-[<jsondata>jsonset[d],[Jaguar]] --> {"a": "one","b": "","c": "three","d": "Jaguar"}
-[<jsondata>jsonset[d],[f],[Panther]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": "Panther","g": {"x": "max","y": "may","z": "maize"}}"}
-```
+Indexes can be dynamically composed from variables and transclusions, e.g. `[<jsondata>jsonset<variable>,{!!field},[0],{CurrentResult}]`.
 
-Negative indexes into an array are counted from the end, so -1 means the last item, -2 the next-to-last item, and so on:
+In the special case where only a single parameter is defined, the operator replaces the entire input object with the the value of that parameter. If the single parameter is blank, the operation is ignored and no assignment takes place.
 
-```
-[<jsondata>jsonset[d],[f],[-1],[Elephant]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": ["five","six",true,false,"Elephant"],"g": {"x": "max","y": "may","z": "maize"}}"}
-[<jsondata>jsonset[d],[f],[-2],[Elephant]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": ["five","six",true,"Elephant",null],"g": {"x": "max","y": "may","z": "maize"}}"}
-[<jsondata>jsonset[d],[f],[-4],[Elephant]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": ["five","Elephant",true,false,null],"g": {"x": "max","y": "may","z": "maize"}}"}
-```
+If the input consists of multiple JSON objects with matching properties, the value is set for all of them.
 
-Indexes can be dynamically composed from variables and transclusions:
-
-```
-[<jsondata>jsonset<variable>,{!!field},[0],{CurrentResult}]
-```
-
-The data type of the value to be assigned to the property can be specified with an optional suffix:
-
-|!Suffix |!Description |
-|''string'' |The string is specified as the final operand |
-|''boolean'' |The boolean value is true if the final operand is the string "true" and false if the final operand is the string "false". Any other value for the final string results prevents the property from being assigned |
-|''number'' |The numeric value is taken from the final operand. Invalid numbers are interpreted as zero |
-|''json'' |The JSON string value is taken from the final operand. Invalid JSON prevents the property from being assigned |
-|''object'' |An empty object is assigned to the property. The final operand is not used as a value |
-|''array'' |An empty array is assigned to the property. The final operand is not used as a value |
-|''null'' |The special value null is assigned to the property. The final operand is not used as a value |
-
-For example:
-
-```
-Input string:
-{"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}
-
-[jsonset[]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}
-[jsonset[],[Antelope]] --> "Antelope"
-[jsonset:number[],[not a number]] --> 0
-[jsonset[id],[Antelope]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}
-[jsonset:notatype[id],[Antelope]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":"Antelope"}
-[jsonset:boolean[id],[false]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":false}
-[jsonset:boolean[id],[Antelope]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}
-[jsonset:number[id],[42]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":42}
-[jsonset:null[id]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]},"id":null}
-[jsonset:array[d],[f],[5]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null,[]]}}
-[jsonset:object[d],[f],[5]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null,{}]}}
-[jsonset[missing],[id],[Antelope]] --> {"a":"one","b":"","c":1.618,"d":{"e":"four","f":["five","six",true,false,null]}}
-```
-
-A subtlety is that the special case of a single operand sets the value of that operand as the new JSON string, entirely replacing the input object. If that operand is blank, the operation is ignored and no assignment takes place. Thus:
-
-```
-[<jsondata>jsonset[Panther]] --> "Panther"
-[<jsondata>jsonset[]] --> {"a": "one","b": "","c": "three","d": "{"e": "four","f": ["five", "six", true, false, null],"g": {"x": "max","y": "may","z": "maize"}}"}
-```
+<<.operator-examples "jsonset">>

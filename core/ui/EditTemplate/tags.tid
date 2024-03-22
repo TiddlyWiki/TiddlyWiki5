@@ -3,39 +3,63 @@ tags: $:/tags/EditTemplate
 
 \whitespace trim
 
-\define lingo-base() $:/language/EditTemplate/
+\procedure lingo-base() $:/language/EditTemplate/
 
-\define tag-styles()
-background-color:$(backgroundColor)$;
-fill:$(foregroundColor)$;
-color:$(foregroundColor)$;
+\procedure tag-body-inner(colour,fallbackTarget,colourA,colourB,icon,tagField:"tags")
+<$wikify name="foregroundColor"
+	text="""<$macrocall $name="contrastcolour"
+		target=<<colour>>
+		fallbackTarget=<<fallbackTarget>>
+		colourA=<<colourA>>
+		colourB=<<colourB>>/>
+	"""
+>
+	<$let backgroundColor=<<colour>> >
+		<span class="tc-tag-label tc-tag-list-item tc-small-gap-right"
+			data-tag-title=<<currentTiddler>>
+			style.color=<<foregroundColor>>
+			style.fill=<<foregroundColor>>
+			style.background-color=<<backgroundColor>>
+		>
+			<$transclude tiddler=<<icon>>/>
+			<$view field="title" format="text"/>
+			<$button class="tc-btn-invisible tc-remove-tag-button"
+				style.fill=<<foregroundColor>>
+			>
+				<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="-[{!!title}]"/>
+				{{$:/core/images/close-button}}
+			</$button>
+		</span>
+	</$let>
+</$wikify>
 \end
 
-\define tag-body-inner(colour,fallbackTarget,colourA,colourB,icon,tagField:"tags")
-\whitespace trim
-<$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
-<span style=<<tag-styles>> class="tc-tag-label tc-tag-list-item tc-small-gap-right" data-tag-title=<<currentTiddler>>>
-<$transclude tiddler="""$icon$"""/><$view field="title" format="text"/>
-<$button class="tc-btn-invisible tc-remove-tag-button" style=<<tag-styles>>><$action-listops $tiddler=<<saveTiddler>> $field=<<__tagField__>> $subfilter="-[{!!title}]"/>{{$:/core/images/close-button}}</$button>
-</span>
-</$vars>
+\procedure tag-body(colour,palette,icon,tagField:"tags")
+<$macrocall $name="tag-body-inner"
+	colour=`$(colour)$`
+	colourA={{{ [<palette>getindex[foreground]] }}}
+	colourB={{{ [<palette>getindex[background]] }}}
+	fallbackTarget={{{ [<palette>getindex[tag-background]] }}}
+	icon=<<icon>>
+	tagField=<<tagField>>
+/>
 \end
 
-\define tag-body(colour,palette,icon,tagField:"tags")
-<$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} icon="""$icon$""" tagField=<<__tagField__>>/>
-\end
-
-\define edit-tags-template(tagField:"tags")
-\whitespace trim
+\procedure edit-tags-template(tagField:"tags")
 <div class="tc-edit-tags">
-<$list filter="[list[!!$tagField$]sort[title]]" storyview="pop">
-<$macrocall $name="tag-body" colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}} palette={{$:/palette}} icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}} tagField=<<__tagField__>>/>
-</$list>
-<$vars tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
-<$macrocall $name="tag-picker" tagField=<<__tagField__>>/>
-</$vars>
+	<$list filter="[<currentTiddler>get<tagField>enlist-input[]sort[title]]" storyview="pop">
+		<$macrocall $name="tag-body"
+			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+			palette={{$:/palette}}
+			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
+			tagField=<<tagField>>
+		/>
+	</$list>
+	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
+		<$macrocall $name="tag-picker" tagField=<<tagField>>/>
+	</$let>
 </div>
 \end
-<$set name="saveTiddler" value=<<currentTiddler>>>
-<$macrocall $name="edit-tags-template" tagField=<<tagField>>/>
-</$set>
+<$let saveTiddler=<<currentTiddler>>>
+	<$macrocall $name="edit-tags-template" tagField=<<tagField>>/>
+</$let>

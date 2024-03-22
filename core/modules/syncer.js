@@ -189,7 +189,6 @@ Syncer.prototype.readTiddlerInfo = function() {
 	// Record information for known tiddlers
 	var self = this,
 		tiddlers = this.getSyncedTiddlers();
-	this.logger.log("Initialising tiddlerInfo for " + tiddlers.length + " tiddlers");
 	$tw.utils.each(tiddlers,function(title) {
 		var tiddler = self.wiki.getTiddler(title);
 		if(tiddler) {
@@ -236,7 +235,6 @@ Syncer.prototype.isDirty = function() {
 		return false;
 	}
 	var dirtyStatus = checkIsDirty();
-	this.logger.log("Dirty status was " + dirtyStatus);
 	return dirtyStatus;
 };
 
@@ -266,7 +264,6 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 		adaptorInfo: this.syncadaptor.getTiddlerInfo(tiddler),
 		changeCount: this.wiki.getChangeCount(tiddlerFields.title)
 	};
-	this.logger.log("Updating tiddler info in syncer.storeTiddler for " + tiddlerFields.title + " " + JSON.stringify(this.tiddlerInfo[tiddlerFields.title]));
 };
 
 Syncer.prototype.getStatus = function(callback) {
@@ -302,9 +299,15 @@ Syncer.prototype.getStatus = function(callback) {
 Synchronise from the server by reading the skinny tiddler list and queuing up loads for any tiddlers that we don't already have up to date
 */
 Syncer.prototype.syncFromServer = function() {
-	this.forceSyncFromServer = true;
-	this.processTaskQueue();
+	if(this.canSyncFromServer()) {
+		this.forceSyncFromServer = true;
+		this.processTaskQueue();	
+	}
 };
+
+Syncer.prototype.canSyncFromServer = function() {
+	return !!this.syncadaptor.getUpdatedTiddlers || !!this.syncadaptor.getSkinnyTiddlers;
+}
 
 /*
 Force load a tiddler from the server
@@ -425,7 +428,6 @@ Syncer.prototype.processTaskQueue = function() {
 	if((!this.syncadaptor.isReady || this.syncadaptor.isReady()) && this.numTasksInProgress === 0) {
 		// Choose the next task to perform
 		var task = this.chooseNextTask();
-		self.logger.log("Chosen next task " + task);
 		// Perform the task if we had one
 		if(typeof task === "object" && task !== null) {
 			this.numTasksInProgress += 1;
@@ -447,7 +449,7 @@ Syncer.prototype.processTaskQueue = function() {
 			// And trigger a timeout if there is a pending task
 			if(task === true) {
 				this.triggerTimeout(this.taskTimerInterval);
-			} else {
+			} else if(this.canSyncFromServer()) {
 				this.triggerTimeout(this.pollTimerInterval);
 			}
 		}
@@ -551,14 +553,12 @@ SaveTiddlerTask.prototype.run = function(callback) {
 				revision: revision,
 				timestampLastSaved: new Date()
 			};
-			self.syncer.logger.log("Updating tiddler info in SaveTiddlerTask.run for " + self.title + " " + JSON.stringify(self.syncer.tiddlerInfo[self.title]));
 			// Invoke the callback
 			callback(null);
 		},{
 			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
-		this.syncer.logger.log(" Not Dispatching 'save' task:",this.title,"tiddler does not exist");
 		$tw.utils.nextTick(callback(null));
 	}
 };
@@ -582,7 +582,6 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 			return callback(err);
 		}
 		// Remove the info stored about this tiddler
-		self.syncer.logger.log("Deleting tiddler info in DeleteTiddlerTask.run for " + self.title);
 		delete self.syncer.tiddlerInfo[self.title];
 		// Invoke the callback
 		callback(null);
@@ -636,8 +635,7 @@ SyncFromServerTask.prototype.run = function(callback) {
 		callback(null);
 	};
 	if(this.syncer.syncadaptor.getUpdatedTiddlers) {
-		self.syncer.logger.log("Retrieving updated tiddler list");
-		this.syncer.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
+		this.syncer.syncadaptor.getUpdatedTiddlers(self.syncer,function(err,updates) {
 			if(err) {
 				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
 				return callback(err);
@@ -657,9 +655,7 @@ SyncFromServerTask.prototype.run = function(callback) {
 			return successCallback();
 		});
 	} else if(this.syncer.syncadaptor.getSkinnyTiddlers) {
-		this.syncer.logger.log("Retrieving skinny tiddler list");
 		this.syncer.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
-			self.syncer.logger.log("Retrieved skinny tiddler list");
 			// Check for errors
 			if(err) {
 				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);

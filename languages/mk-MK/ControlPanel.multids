@@ -1,0 +1,231 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Напредно
+Advanced/Hint: Системски податоци за вашето ТидлиВики
+Appearance/Caption: Изглед
+Appearance/Hint: Различни начини за конфигурирање на изгледот
+Basics/AnimDuration/Prompt: Времетраење на анимација
+Basics/AutoFocus/Prompt: Поле на фокус за нови записи
+Basics/Caption: Основно
+Basics/DefaultTiddlers/BottomHint: Користете &#91;&#91;двојни квадратни загради&#93;&#93; за наслови со повеќе зборови за да направите линкови кога ќе ги запишете. Или можете да изберете {{запомни ги отворените записи||$:/snippets/retain-story-ordering-button}} доколку преферирате при секое вклучување на вашето ТидлиВики да ги видите веднаш оние записи кои сте ги отвориле претходно.
+Basics/DefaultTiddlers/Prompt: Почетни записи
+Basics/DefaultTiddlers/TopHint: Одберете кои записи ќе бидат секогаш отворени
+Basics/Language/Prompt: Одберете јазик:
+Basics/NewJournal/Tags/Prompt: Ознаки за нови записи во дневникот
+Basics/NewJournal/Text/Prompt: Содржина за нови записи во дневникот
+Basics/NewJournal/Title/Prompt: Наслов за нови записи во дневникот
+Basics/NewTiddler/Tags/Prompt: Ознаки за нови записи
+Basics/NewTiddler/Title/Prompt: Наслов за нови записи
+Basics/OverriddenShadowTiddlers/Prompt: Променливи сенки
+Basics/RemoveTags: Ажурирај во моменталниот формат
+Basics/RemoveTags/Hint: Ажурирај ги ознаките во најновиот формат
+Basics/ShadowTiddlers/Prompt: Сенки
+Basics/Subtitle/Prompt: Поднаслов
+Basics/SystemTiddlers/Prompt: Системски
+Basics/Tags/Prompt: Ознаки
+Basics/Tiddlers/Prompt: Записи
+Basics/Title/Prompt: Наслов на вашето ТидлиВики
+Basics/Username/Prompt: Име за потпис при уредување
+Basics/Version/Prompt: ТидлиВики верзија
+Cascades/Caption: Каскади
+Cascades/Hint: Овие глобални правила се користат за динамичко избирање на шаблони (templates). Каскадите служат како механизам за конструкција и приспособување на самиот интерфејс на ТидлиВики.
+Cascades/TagPrompt: Филтери за ознаки <$macrocall $name="tag" tag=<<currentTiddler>>/>
+EditorTypes/Caption: Формати
+EditorTypes/Editor/Caption: Формат
+EditorTypes/Hint: Овие записи одредуваат кој __формат__ се користи за специфичен __вид__ на запис.
+EditorTypes/Type/Caption: Вид
+EditTemplateBody/Caption: Содржина
+EditTemplateBody/Hint: Овие правила се користат од основниот уредувач за да може динамички да се одреди шаблон за содржината на еден запис.
+FieldEditor/Caption: Поле
+FieldEditor/Hint: Овие правила се користат за динамичко одбирање на шаблон за рендерирање на поле на запис врз основа на неговото име. Се користи во самиот шаблон за уредување.
+Info/Caption: Инфо
+Info/Hint: Информации за вашето ТидлиВики
+KeyboardShortcuts/Add/Caption: додади
+KeyboardShortcuts/Add/Prompt: Напиши комбинација тука
+KeyboardShortcuts/Caption: Тастатура
+KeyboardShortcuts/Hint: Управување со кратенки за тастатура
+KeyboardShortcuts/NoShortcuts/Caption: Нема доделена кратенка за тастатура
+KeyboardShortcuts/Platform/All: За сите платформи
+KeyboardShortcuts/Platform/Linux: Линукс
+KeyboardShortcuts/Platform/Mac: Мекинтош
+KeyboardShortcuts/Platform/NonLinux: Платформи кои не се Линукс
+KeyboardShortcuts/Platform/NonMac: Платформи кои не се Мекинтош
+KeyboardShortcuts/Platform/NonWindows: Платформи кои не се Виндовс
+KeyboardShortcuts/Platform/Windows: Виндовс
+KeyboardShortcuts/Remove/Hint: избриши кратенка за тастатура
+LayoutSwitcher/Caption: Распоред
+LoadedModules/Caption: Модули
+LoadedModules/Hint: Ова се вчитаните модули за запис кои водат кон своите извори. Доколку кликнете на некој од нив ќе го видите модулот. На сите модули запишани со закосен формат им недостасува извор, обично бидејќи тие биле поставувани додека сè уште траел процесот на подигање на вашето ТидлиВики.
+Palette/Caption: Палета
+Palette/Editor/Clone/Caption: клонирај
+Palette/Editor/Clone/Prompt: Препорачливо е најпрвин да ја клонирате оваа палета пред да ја уредувате.
+Palette/Editor/Delete/Hint: избришете го ова од моменталната палета
+Palette/Editor/Names/External/Show: Прикажи ги имињата на бои кои не се дел од оваа палета
+Palette/Editor/Prompt: Уредување
+Palette/Editor/Prompt/Modified: Оваа палета е модифицирана
+Palette/Editor/Reset/Caption: ресетирај
+Palette/HideEditor/Caption: сокри го уредникот
+Palette/Prompt: Моментална палета:
+Palette/ShowEditor/Caption: прикажи го уредникот
+Parsing/Block/Caption: Правила за блокирачки режим
+Parsing/Caption: Правила
+Parsing/Hint: Тука можете глобално да вклучите или исклучите правила за ''анализаторот''. За да можат записите да бидат прикажани, [[анализаторот|https://tiddlywiki.com/static/WikiText%2520Parser%2520Modes.html]] ги чита и интерпретира правилата. Постојат три вида на режим во кој анализаторот функционира: прагмантен, внатрешен и блокирачки.<br>Не заборавајте, за промената што тука ќе ја направите да има ефект треба да кликнете на //Зачувај ги промените// (црвеното копче во страничното мени). Исклучувањето на одредени правила за анализаторот можат да предизвикаат не коректно однесување на <$text text="ТидлиВики"/>. Користете [[безбеден режим|https://tiddlywiki.com/#SafeMode]] за да ги вратите нормалните операции.
+Parsing/Inline/Caption: Правила за внатрешен режим
+Parsing/Pragma/Caption: Правила за прагмантен режим
+Plugins/Add/Caption: Превземете повеќе плагени
+Plugins/Add/Hint: Инсталирајте плагени од официјалната библиотека
+Plugins/AlreadyInstalled/Hint: Овој плаген е веќе инсталиран со верзија <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: Зависи од:
+Plugins/Caption: Плагени
+Plugins/ClosePluginLibrary: Затвори ја библиотеката
+Plugins/Disable/Caption: исклучи
+Plugins/Disable/Hint: Исклучи го овој плаген откако следен пат ќе се освежи википедијата
+Plugins/Disabled/Status: (исклучено)
+Plugins/Downgrade/Caption: врати верзија
+Plugins/Empty/Hint: Ништо
+Plugins/Enable/Caption: вклучи
+Plugins/Enable/Hint: Вклучи го овој плаген откако следен пат ќе се освежи википедијата
+Plugins/Install/Caption: инсталирај
+Plugins/Installed/Hint: Инсталирани плагени:
+Plugins/Languages/Caption: Јазици
+Plugins/Languages/Hint: Плагени за јазични пакети
+Plugins/NoInfoFound/Hint: Не ''"<$text text=<<currentTab>>/>"'' пронајдено
+Plugins/NotInstalled/Hint: Овој плаген не е инсталиран
+Plugins/OpenPluginLibrary: Отвори ја библиотеката
+Plugins/Plugins/Caption: Плагени
+Plugins/Plugins/Hint: Плагени
+Plugins/PluginWillRequireReload: (освежи ја википедијата)
+Plugins/Reinstall/Caption: реинсталирај
+Plugins/SubPluginPrompt: Го има со <<count>> под-плагени
+Plugins/Themes/Caption: Теми
+Plugins/Themes/Hint: Плагени за теми
+Plugins/Update/Caption: ажурирај
+Plugins/Updates/Caption: Ажурирања
+Plugins/Updates/Hint: Достапни ажурирања за инсталираните плагени
+Plugins/Updates/UpdateAll/Caption: Ажурирај <<update-count>> плагени
+Saving/Caption: Меморирање
+Saving/DownloadSaver/AutoSave/Description: Дозволи автоматско меморирање за превземање од серверот
+Saving/DownloadSaver/AutoSave/Hint: Дозволи Автоматско Меморирање за Превземање од Серверот
+Saving/DownloadSaver/Caption: Сервер за превземање
+Saving/DownloadSaver/Hint: Овие опции важат за HTML5 компатибилен сервер за превземање
+Saving/General/Caption: Генерално
+Saving/General/Hint: Овие опции важат за сите вклучени сервери
+Saving/GitService/Branch: Таргетирај бранша за меморирање
+Saving/GitService/CommitMessage: Зачувано од ТидлиВики
+Saving/GitService/Description: Овие опции важат само при меморирање од <<service-name>>
+Saving/GitService/Filename: Име на таргетиран фајл (пр. `индекс.html`)
+Saving/GitService/Gitea/Caption: Gitea Сервер
+Saving/GitService/Gitea/Password: Токен за личен пристап за API (преку веб-интерфејсот на Gitea: `Settings | Applications | Generate New Token`)
+Saving/GitService/GitHub/Caption: ~GitHub Сервер
+Saving/GitService/GitHub/Password: Лозинка, OAUTH токен или токен за личен пристап (прочитајте ја [[оваа објава на GitHub|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] за повеќе информации)
+Saving/GitService/GitLab/Caption: ~GitLab Сервер
+Saving/GitService/GitLab/Password: Токен за личен пристап за API (прочитајте ја [[оваа објава на GitLab|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]] за повеќе информации)
+Saving/GitService/Path: Насока до таргет датотека (пр. `/вики/`)
+Saving/GitService/Repo: Таргетирано репозитори (пр. `Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: Сервер API URL
+Saving/GitService/UserName: Корисничко име
+Saving/Hint: Опции за меморирање на целосното ТидлиВики како еден фајл преку серверски модул
+Saving/TiddlySpot/Advanced/Heading: Напредни опции
+Saving/TiddlySpot/BackupDir: Датотека за резервни копии (Backup)
+Saving/TiddlySpot/Backups: Резервни копии
+Saving/TiddlySpot/Caption: ~TiddlySpot Сервер
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot Контролен Панел
+Saving/TiddlySpot/Description: Овие опции важат само при меморирање до [[TiddlySpot|http://tiddlyspot.com]], [[TiddlyHost|https://tiddlyhost.com]], или компатибилен далечински (remote) сервер. Истражи тука на оваа [[страница|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]] за повеќе информации за меморирање на конфигурација од ~TiddlySpot и ~TiddlyHost.
+Saving/TiddlySpot/Filename: Име на фајл за трансвер
+Saving/TiddlySpot/Heading: ~TiddlySpot 
+Saving/TiddlySpot/Hint: //URL на серверот е `http://<wikiname>.tiddlyspot.com/store.cgi` и може да се промени за да се користи посебна серверска адреса, пр. `http://example.com/store.php`.//
+Saving/TiddlySpot/Password: Лозинка
+Saving/TiddlySpot/ReadOnly: Имајте на ум дека [[TiddlySpot|http://tiddlyspot.com]] повеќе не дозволува создавање на нови страници. За создавање на нови страници можете да го користите [[TiddlyHost|https://tiddlyhost.com]], новиот хостинг оператор кој го заменува ~TiddlySpot.
+Saving/TiddlySpot/ServerURL: Сервер URL
+Saving/TiddlySpot/UploadDir: Датотека за трансвер
+Saving/TiddlySpot/UserName: Име на википедија
+Settings/AutoSave/Caption: Автоматско меморирање
+Settings/AutoSave/Disabled/Description: Не ги меморирај промените автоматски
+Settings/AutoSave/Enabled/Description: Меморирај ги промените автоматски
+Settings/AutoSave/Hint: Обиди се да ги зачуваш автоматски промените додека трае уредувањето при користење на соодветен сервер.
+Settings/CamelCase/Caption: CamelCase линкови
+Settings/CamelCase/Description: Вклучи автоматско ~CamelCase линкување
+Settings/CamelCase/Hint: Можете глобално да го вклучите / исклучите автоматското линкување преку ~CamelCase зборови.<br>Потребно е да ја освежите википедијата за да има ефект.
+Settings/Caption: Опции
+Settings/DefaultMoreSidebarTab/Caption: Селектирано под-мени во групата Повеќе
+Settings/DefaultMoreSidebarTab/Hint: Одберете кое под-мени ќе биде селектирано во групата __Повеќе__ која се наоѓа во страничното мени
+Settings/DefaultSidebarTab/Caption: Селектирана група во страничното мени
+Settings/DefaultSidebarTab/Hint: Одберете која група ќе биде селектирана во страничното мени
+Settings/EditorToolbar/Caption: Алатки за уредување
+Settings/EditorToolbar/Description: Прикажи ги алатките за уредување
+Settings/EditorToolbar/Hint: Вклучи / Исклучи алатки за уредување
+Settings/Hint: Овие опции ви дозволуваат да го приспособите вашето ТидлиВики.
+Settings/InfoPanelMode/Caption: Панел за повеќе информации во запис
+Settings/InfoPanelMode/Hint: Контролирајте кога панелот за повеќе информации се исклучува:
+Settings/InfoPanelMode/Popup/Description: Панелот за повеќе инфо се исклучува автоматски
+Settings/InfoPanelMode/Sticky/Description: Панелот за повеќе инфо останува вклучен додека самите не го исклучиме
+Settings/LinkToBehaviour/Caption: Начин на отворање на запис
+Settings/LinkToBehaviour/InsideRiver/Hint: Од внатрешна навигација во реката со записи
+Settings/LinkToBehaviour/OpenAbove: Отвори над моменталниот запис
+Settings/LinkToBehaviour/OpenAtBottom: Отвори најдолу во реката со записи
+Settings/LinkToBehaviour/OpenAtTop: Отвори најгоре во реката со записи
+Settings/LinkToBehaviour/OpenBelow: Отвори под моменталниот запис
+Settings/LinkToBehaviour/OutsideRiver/Hint: Од надворешна навигација во реката со записи
+Settings/MissingLinks/Caption: Вики линкови
+Settings/MissingLinks/Description: Дозволи линкување до непостоечки записи
+Settings/MissingLinks/Hint: Одберете дали сакате линкување до записи кои сè уште непостојат 
+Settings/NavigationAddressBar/Caption: Лента за навигација
+Settings/NavigationAddressBar/Hint: Начин на однесување на лентата за навигација на прелистувачот:
+Settings/NavigationAddressBar/No/Description: Не ја ажурирај лентата за навигација
+Settings/NavigationAddressBar/Permalink/Description: Додадете го таргетираниот запис
+Settings/NavigationAddressBar/Permaview/Description: Додадете го таргетираниот запис и моментално отворените записи
+Settings/NavigationHistory/Caption: Историска навигација
+Settings/NavigationHistory/Hint: Ажурирање на историјата при навигација:
+Settings/NavigationHistory/No/Description: Не ја ажурирај историјата
+Settings/NavigationHistory/Yes/Description: Ажурирај ја историјата
+Settings/NavigationPermalinkviewMode/Caption: Директен линк / Директен приказ
+Settings/NavigationPermalinkviewMode/CopyToClipboard/Description: Копирај URL од директен линк / директен приказ до клипборд
+Settings/NavigationPermalinkviewMode/Hint: Одбери како се однесува директниот линк / директниот приказ:
+Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Ажурирај ја лентата за навигација со директниот линк / директниот приказ
+Settings/PerformanceInstrumentation/Caption: Приказ на перформанси
+Settings/PerformanceInstrumentation/Description: Вклучи приказ на перформанси
+Settings/PerformanceInstrumentation/Hint: Прикажи статистика на перформанси во програмерската конзула на прелистувачот.<br>Потребно е да ја освежите википедијата за да има ефект.
+Settings/TitleLinks/Caption: Наслови на записи
+Settings/TitleLinks/Hint: Опционално прикажи ги насловите на записите како линкови
+Settings/TitleLinks/No/Description: Не ги прикажувај насловите на записите како линкови
+Settings/TitleLinks/Yes/Description: Прикажи ги насловите на записите како линкови
+Settings/ToolbarButtons/Caption: Алатки
+Settings/ToolbarButtons/Hint: Основен приказ на алатките
+Settings/ToolbarButtons/Icons/Description: Прикажи икона
+Settings/ToolbarButtons/Text/Description: Прикажи текст
+Settings/ToolbarButtonStyle/Caption: Изглед на алатки
+Settings/ToolbarButtonStyle/Hint: Одбери го изгледот на алатките:
+Settings/ToolbarButtonStyle/Styles/Borderless: Без рамка
+Settings/ToolbarButtonStyle/Styles/Boxed: Коцкасти
+Settings/ToolbarButtonStyle/Styles/Rounded: Тркалезни
+StoryTiddler/Caption: Река на записи
+StoryTiddler/Hint: Овие правила се користат за динамичко избирање на шаблон за прикажување запис во реката со записи
+StoryView/Caption: Преглед
+StoryView/Prompt: Моментален изглед:
+Stylesheets/Caption: Стил
+Stylesheets/Expand/Caption: Отвори ги сите
+Stylesheets/Hint: Ова е CSS за стилот на оние записи означени со <<tag "$:/tags/Stylesheet">>
+Stylesheets/Restore/Caption: Врати назад
+Theme/Caption: Тема
+Theme/Prompt: Моментална тема:
+TiddlerColour/Caption: Боја во запис
+TiddlerColour/Hint: Овие правила се користат за динамичко избирање на боја во запис (за иконата и пилулата за ознаки).
+TiddlerFields/Caption: Полиња
+TiddlerFields/Hint: Ова е целата листа на полиња на запис што се користат во ова ТидлиВики (вклучувајќи ги системските записи, но без сенките).
+TiddlerIcon/Caption: Икона на запис
+TiddlerIcon/Hint: Овие правила се користат за динамичко избирање на икона на запис.
+Toolbars/Caption: Алатки
+Toolbars/EditorToolbar/Caption: Алатки во уредникот
+Toolbars/EditorToolbar/Hint: Изберете кои алатки се прикажуваат во уредникот. Имајте на ум дека некои алатки ќе се прикажат само во одредени видови на записи. Со кликање и повлекување на алатките во оваа листа можете слободно да ги подредите како што сакате.
+Toolbars/EditToolbar/Caption: Алатки на записот
+Toolbars/EditToolbar/Hint: Изберете кои алатки се прикажуваат на записите при уредување. Со кликање и повлекување на алатките во оваа листа можете слободно да ги подредите како што сакате.
+Toolbars/Hint: Селектирајте ги алатките што сакате да бидат прикажани
+Toolbars/PageControls/Caption: Глобални алатки
+Toolbars/PageControls/Hint: Изберете кои глобални алатки се прикажуваат. Со кликање и повлекување на алатките во оваа листа можете слободно да ги подредите како што сакате.
+Toolbars/ViewToolbar/Caption: Видливи алатки
+Toolbars/ViewToolbar/Hint: Изберете кои други алатки се прикажуваат на записите додека не ги уредувате. Со кликање и повлекување на алатките во оваа листа можете слободно да ги подредите како што сакате.
+Tools/Download/Full/Caption: Превземете ја целата википедија
+ViewTemplateBody/Caption: Приказ
+ViewTemplateBody/Hint: Овие правила се користат за динамичко избирање на шаблон за приказ кој се користи за прикажување на содржината во записот.
+ViewTemplateTitle/Caption: Наслов
+ViewTemplateTitle/Hint: Овие правила се користат за динамичко избирање на шаблон за наслов кој се користи за прикажување на насловот на записот.

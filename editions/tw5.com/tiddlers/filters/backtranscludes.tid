@@ -1,0 +1,13 @@
+created: 20211002204500000
+tags: [[Filter Operators]]
+title: backtranscludes Operator
+type: text/vnd.tiddlywiki
+caption: backtranscludes
+op-purpose: find the titles that transcludes to each input title
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: any non-[[system|SystemTiddlers]] titles that contain [[transclusion|Transclusion]] to the input titles
+
+Each input title is processed in turn. The corresponding tiddler's list of backtranscludes is generated, sorted alphabetically by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+<<.operator-examples "backtranscludes">>

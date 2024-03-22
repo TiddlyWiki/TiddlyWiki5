@@ -1,5 +1,5 @@
 created: 20150117152418000
-modified: 20220523075540462
+modified: 20231019155036098
 tags: Concepts
 title: Title List
 type: text/vnd.tiddlywiki
@@ -15,3 +15,7 @@ Title lists are used in various places, including PermaLinks and the ListField.
 They are in fact the simplest case of a [[filter|Filters]], and are thus a way of expressing a [[selection of titles|Title Selection]].
 
 <<.warning """The [[Title List]] format cannot reliably represent items that contain certain specific character sequences such as `]] `. Thus it should not be used where there is a possibility of such sequences occurring.""">>
+
+See also:
+
+* The [[format Operator]] with the 'titlelist' suffix conditionally wraps double square brackets around a string if it contains whitespace

@@ -1,0 +1,109 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Предупредувачка боја
+alert-border: Предупредувачка боја на рамка
+alert-highlight: Предупредувачка боја на истакнатост
+alert-muted-foreground: Предупредувачка мјутирана (muted) боја
+background: Генерална боја
+blockquote-bar: Боја на вертикалната линија на цитиран текст
+button-background: Основна боја на копче
+button-border: Основна боја на рамка на копче
+button-foreground: Основна боја на текст во копче
+code-background: Боја на код
+code-border: Боја на рамка на код
+code-foreground: Боја на текст во код
+dirty-indicator: Боја на индикатор за незачувани промени
+download-background: Боја на копче за превземање
+download-foreground: Боја на текст во копче за превземање
+dragger-background: Боја на влечење
+dragger-foreground: Боја на текст при влечење
+dropdown-background: Боја на пуштање
+dropdown-border: Боја на рамка на пуштање
+dropdown-tab-background: Боја на група (таб) на пуштање
+dropdown-tab-background-selected: Боја на селектирана група (таб)
+dropzone-background: Боја на таргет место за пуштање
+external-link-background: Боја за надворешни (други) линкови
+external-link-background-hover: Боја при доближување на маусот над надворешен линк
+external-link-background-visited: Боја на посетени надворешни линкови
+external-link-foreground: Боја на текст во надворешни линкови
+external-link-foreground-hover: Боја на текст во надворешен линк при доближување на маусот
+external-link-foreground-visited: Боја на текст во посетени надворешни линкови
+foreground: Генерална боја на текст
+menubar-background: Боја на лента со мени
+menubar-foreground: Боја на текст во лента со мени
+message-background: Боја на поле за порака
+message-border: Боја на рамка на поле за порака
+message-foreground: Боја на текст во поле за порака
+modal-backdrop: Боја за модална позадина
+modal-background: Модална боја
+modal-border: Модална рамка
+modal-footer-background: Модална боја во долен дел
+modal-footer-border: Модална боја на рамка во долен дел
+modal-header-border: Модална боја во горен дел
+muted-foreground: Генерална мјутирана (muted) боја
+notification-background: Боја за нотификација
+notification-border: Боја на рамка за нотификација
+page-background: Боја на позадина
+pre-background: Боја на претходно форматиран код
+pre-border: Боја на рамка на претходно форматиран код
+primary: Боја на општа вашност
+select-tag-background: Боја на `<select>` елемент
+select-tag-foreground: Боја на текст во `<select>` елемент
+sidebar-button-foreground: Боја на текст во копче во страничното мени
+sidebar-controls-foreground: Боја на контролери во страничното мени
+sidebar-controls-foreground-hover: Боја на текст во контролери во страничното мени
+sidebar-foreground: Боја на текст во страничното мени
+sidebar-foreground-shadow: Боја на текст во сенка во страничното мени
+sidebar-muted-foreground: Мјутирана (muted) боја на текст во страничното мени
+sidebar-muted-foreground-hover: Мјутирана (muted) боја на текст при доближување со маусот во страничното мени
+sidebar-tab-background: Боја на група (таб) во страничното мени
+sidebar-tab-background-selected: Боја на селектирана група (таб) во страничното мени
+sidebar-tab-border: Боја на рамка на група (таб) во страничното мени
+sidebar-tab-border-selected: Боја на рамка за селектирана група (таб) во страничното мени
+sidebar-tab-divider: Боја на разделник во страничното мени
+sidebar-tab-foreground: Боја на текст во група (таб) во страничното мени
+sidebar-tab-foreground-selected: Боја на текст во селектирана група (таб) во страничното мени
+sidebar-tiddler-link-foreground: Боја на текст на линк од запис во страничното мени
+sidebar-tiddler-link-foreground-hover: Боја на текст во линк од запис во страничното мени при доближување со маусот
+site-title-foreground: Боја на текст на наслов
+static-alert-foreground: Боја на текст на статично предупредување
+tab-background: Боја на група (таб)
+tab-background-selected: Боја на селектирана група (таб)
+tab-border: Боја на рамка на група (таб)
+tab-border-selected: Боја на рамка на селектирана група (таб)
+tab-divider: Боја на разделник на група (таб)
+tab-foreground: Боја на текст во група (таб)
+tab-foreground-selected: Боја на текст во селектирана група (таб)
+table-border: Боја на рамка на табела
+table-footer-background: Боја на долниот дел од табелата
+table-header-background: Боја на горниот дел од табелата
+tag-background: Боја на ознака
+tag-foreground: Боја на текст во ознака
+tiddler-background: Боја на запис
+tiddler-border: Боја на рамка на запис
+tiddler-controls-foreground: Боја на текст во контролери на запис
+tiddler-controls-foreground-hover: Боја на текст во контролери на запис при доближување со маусот
+tiddler-controls-foreground-selected: Боја на текст во селектирани контролери на запис
+tiddler-editor-background: Боја на уредникот на запис
+tiddler-editor-border: Боја на рамка на уредникот на запис
+tiddler-editor-border-image: Боја на рамка во уредникот за слика
+tiddler-editor-fields-even: Боја на еднакви полиња во уредникот на запис
+tiddler-editor-fields-odd: Боја на различни полиња во уредникот на запис
+tiddler-info-background: Боја на инфо панелот на запис
+tiddler-info-border: Боја на рамка на инфо панелот на запис
+tiddler-info-tab-background: Боја на група (таб) во инфо панелот на запис
+tiddler-link-background: Боја за линк на запис
+tiddler-link-foreground: Боја за текст во линк на запис 
+tiddler-subtitle-foreground: Боја на текст во поднаслов на запис
+tiddler-title-foreground: Боја на наслов на запис 
+toolbar-cancel-button: Боја на текст во „откажи“ копчето
+toolbar-close-button: Боја на текст во „затвори“ копчето
+toolbar-delete-button: Боја на текст во „избриши“ копчето
+toolbar-done-button: Боја на текст во „заврши“ копчето
+toolbar-edit-button: Боја на текст во „уреди“ копчето
+toolbar-info-button: Боја на текст во „инфо“ копчето
+toolbar-new-button: Боја на текст во „нов запис“ копчето
+toolbar-options-button: Боја на текст во „опции“ копчето
+toolbar-save-button: Боја на текст во „зачувај“ копчето
+untagged-background: Боја на пилулата за неозначени записи
+very-muted-foreground: Многу мјутирана (muted) боја
