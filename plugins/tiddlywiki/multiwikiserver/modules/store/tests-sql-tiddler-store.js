@@ -85,6 +85,14 @@ function runSqlStoreTests(engine) {
 
 		expect(store.getBagTiddlers("bag-alpha")).toEqual([{title: "Another Tiddler", tiddler_id: 1}]);
 
+		expect(store.getBagRecentTiddlers("bag-alpha")).toEqual({
+			bag_name: "bag-alpha", count: 1, bag_max_tiddler_id: 1, last_known_tiddler_id: 0,
+			tiddlers: [{
+				title: 'Another Tiddler', is_deleted: 0, tiddler_id: 1,
+				fields: { title: 'Another Tiddler', tags: 'one two three', text: "I'm in alpha" }
+			}]
+		});
+
 		var getBagTiddlerResult = store.getBagTiddler("Another Tiddler","bag-alpha");
 		expect(typeof(getBagTiddlerResult.tiddler_id)).toBe("number");
 		delete getBagTiddlerResult.tiddler_id;
