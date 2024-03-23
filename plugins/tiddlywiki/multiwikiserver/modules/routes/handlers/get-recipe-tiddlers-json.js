@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-recipe-tiddlers
 type: application/javascript
 module-type: mws-route
 
-GET /recipes/:recipe_name/tiddlers.json?filter=:filter
+GET /recipes/:recipe_name/tiddlers.json?last_known_tiddler_id=:last_known_tiddler_id
 
 \*/
 (function() {
