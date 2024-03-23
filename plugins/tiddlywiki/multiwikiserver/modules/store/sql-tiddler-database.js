@@ -395,34 +395,103 @@ SqlTiddlerDatabase.prototype.getBagTiddlers = function(bag_name) {
 };
 
 /*
-Get the titles of the tiddlers in a recipe as {title:,tiddler_id:,bag_name:}. Returns null for recipes that do not exist
+Get the tiddler_id of the newest tiddler in a bag. Returns null for bags that do not exist
 */
-SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipe_name) {
-	const rowsCheckRecipe = this.engine.runStatementGetAll(`
-		SELECT * FROM recipes WHERE recipes.recipe_name = $recipe_name
+SqlTiddlerDatabase.prototype.getBagLastTiddlerId = function(bag_name) {
+	const row = this.engine.runStatementGet(`
+		SELECT tiddler_id
+		FROM tiddlers
+		WHERE bag_id IN (
+			SELECT bag_id
+			FROM bags
+			WHERE bag_name = $bag_name
+		)
+		ORDER BY tiddler_id DESC
+		LIMIT 1
 	`,{
-		$recipe_name: recipe_name
+		$bag_name: bag_name
 	});
-	if(rowsCheckRecipe.length === 0) {
+	if(row) {
+		return row.tiddler_id;
+	} else {
 		return null;
 	}
-	const rows = this.engine.runStatementGetAll(`
-		SELECT title, tiddler_id, bag_name
-		FROM (
-			SELECT t.title, t.tiddler_id, b.bag_name, MAX(rb.position) AS position
-			FROM bags AS b
-			INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
-			INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
-			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
-			WHERE r.recipe_name = $recipe_name
-			AND t.is_deleted = FALSE
-			GROUP BY t.title
-			ORDER BY t.title
-		)
+};
+
+/*
+Get the metadata of the tiddlers in a recipe as an array [{title:,tiddler_id:,bag_name:,is_deleted:}],
+sorted in ascending order of tiddler_id.
+
+Options include:
+
+limit: optional maximum number of results to return
+last_known_tiddler_id: tiddler_id of the last known update. Only returns tiddlers that have been created, modified or deleted since
+include_deleted: boolean, defaults to false
+
+Returns null for recipes that do not exist
+*/
+SqlTiddlerDatabase.prototype.getRecipeTiddlers = function(recipe_name,options) {
+	options = options || {};
+	// Get the recipe ID
+	const rowsCheckRecipe = this.engine.runStatementGet(`
+		SELECT recipe_id FROM recipes WHERE recipes.recipe_name = $recipe_name
 	`,{
 		$recipe_name: recipe_name
 	});
+	if(!rowsCheckRecipe) {
+		return null;
+	}
+	const recipe_id = rowsCheckRecipe.recipe_id;
+	// Compose the query to get the tiddlers
+	const params = {
+		$recipe_id: recipe_id
+	}
+	if(options.limit) {
+		params.$limit = options.limit.toString();
+	}
+	if(options.last_known_tiddler_id) {
+		params.$last_known_tiddler_id = options.last_known_tiddler_id;
+	}
+	const rows = this.engine.runStatementGetAll(`
+		SELECT title, tiddler_id, is_deleted, bag_name
+		FROM (
+			SELECT t.title, t.tiddler_id, t.is_deleted, b.bag_name, MAX(rb.position) AS position
+			FROM bags AS b
+			INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
+			INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+			WHERE rb.recipe_id = $recipe_id
+			${options.include_deleted ? "" : "AND t.is_deleted = FALSE"}
+			${options.last_known_tiddler_id ? "AND tiddler_id > $last_known_tiddler_id" : ""}
+			GROUP BY t.title
+			ORDER BY t.title, tiddler_id DESC
+			${options.limit ? "LIMIT $limit" : ""}
+		)
+	`,params);
 	return rows;
+};
+
+/*
+Get the tiddler_id of the newest tiddler in a recipe. Returns null for recipes that do not exist
+*/
+SqlTiddlerDatabase.prototype.getRecipeLastTiddlerId = function(recipe_name) {
+	const row = this.engine.runStatementGet(`
+		SELECT t.title, t.tiddler_id, b.bag_name, MAX(rb.position) AS position
+		FROM bags AS b
+		INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
+		INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
+		INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+		WHERE r.recipe_name = $recipe_name
+		GROUP BY t.title
+		ORDER BY t.tiddler_id DESC
+		LIMIT 1
+	`,{
+		$recipe_name: recipe_name
+	});
+	if(row) {
+		return row.tiddler_id;
+	} else {
+		return null;
+	}
 };
 
 SqlTiddlerDatabase.prototype.deleteAllTiddlersInBag = function(bag_name) {

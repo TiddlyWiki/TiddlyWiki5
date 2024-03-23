@@ -123,7 +123,7 @@ function runSqlStoreTests(engine) {
 		expect(typeof(saveRecipeResult.tiddler_id)).toBe("number");
 		expect(saveRecipeResult.bag_name).toBe("bag-beta");
 
-		expect(store.getRecipeTiddlers("recipe-rho")).toEqual([{title: "Another Tiddler", tiddler_id: 1, bag_name: "bag-beta"}]);
+		expect(store.getRecipeTiddlers("recipe-rho")).toEqual([{title: "Another Tiddler", tiddler_id: 1, bag_name: "bag-beta", is_deleted: 0 }]);
 
 		var getRecipeTiddlerResult = store.getRecipeTiddler("Another Tiddler","recipe-rho");
 		expect(typeof(getRecipeTiddlerResult.tiddler_id)).toBe("number");

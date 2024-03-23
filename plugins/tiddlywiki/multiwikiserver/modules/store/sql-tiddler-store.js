@@ -307,10 +307,24 @@ SqlTiddlerStore.prototype.getBagTiddlers = function(bag_name) {
 };
 
 /*
+Get the tiddler_id of the newest tiddler in a bag. Returns null for bags that do not exist
+*/
+SqlTiddlerStore.prototype.getBagLastTiddlerId = function(bag_name) {
+	return this.sqlTiddlerDatabase.getBagLastTiddlerId(bag_name);
+};
+
+/*
 Get the titles of the tiddlers in a recipe as {title:,bag_name:}. Returns null for recipes that do not exist
 */
-SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipe_name) {
-	return this.sqlTiddlerDatabase.getRecipeTiddlers(recipe_name);
+SqlTiddlerStore.prototype.getRecipeTiddlers = function(recipe_name,options) {
+	return this.sqlTiddlerDatabase.getRecipeTiddlers(recipe_name,options);
+};
+
+/*
+Get the tiddler_id of the newest tiddler in a recipe. Returns null for recipes that do not exist
+*/
+SqlTiddlerStore.prototype.getRecipeLastTiddlerId = function(recipe_name) {
+	return this.sqlTiddlerDatabase.getRecipeLastTiddlerId(recipe_name);
 };
 
 SqlTiddlerStore.prototype.deleteAllTiddlersInBag = function(bag_name) {

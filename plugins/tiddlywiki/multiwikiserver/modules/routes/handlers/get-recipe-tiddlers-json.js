@@ -20,17 +20,14 @@ exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]);
 	if(recipe_name) {
-		// Get the tiddlers in the recipe
-		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name);
-		// Get a skinny version of each tiddler
-		var tiddlers = [];
-		$tw.utils.each(recipeTiddlers,function(recipeTiddlerInfo) {
-			var tiddlerInfo = $tw.mws.store.getRecipeTiddler(recipeTiddlerInfo.title,recipe_name);
-			tiddlers.push(Object.assign({},tiddlerInfo.tiddler,{text: undefined}));
+		// Get the tiddlers in the recipe, optionally since the specified last known tiddler_id
+		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name,{
+			last_known_tiddler_id: state.queryParameters.last_known_tiddler_id
 		});
-		var text = JSON.stringify(tiddlers);
-		state.sendResponse(200,{"Content-Type": "application/json"},text,"utf8");
-		return;
+		if(recipeTiddlers) {
+			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify(recipeTiddlers),"utf8");
+			return;
+		}
 	}
 	// Fail if something went wrong
 	response.writeHead(404);

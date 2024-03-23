@@ -14,13 +14,14 @@ A sync adaptor module for synchronising with MultiWikiServer-compatible servers
 
 var CONFIG_HOST_TIDDLER = "$:/config/multiwikiclient/host",
 	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/",
-	BAG_STATE_TIDDLER = "$:/state/federatial/xememex/tiddlers/bag",
-	REVISION_STATE_TIDDLER = "$:/state/federatial/xememex/tiddlers/revision";
+	BAG_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/bag",
+	REVISION_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/revision";
 
 function MultiWikiClientAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
 	this.recipe = this.wiki.getTiddlerText("$:/config/multiwikiclient/recipe");
+	this.last_known_tiddler_id = $tw.utils.parseNumber(this.wiki.getTiddlerText("$:/state/multiwikiclient/recipe/last_tiddler_id","0"));
 	this.logger = new $tw.utils.Logger("MultiWikiClientAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
@@ -66,6 +67,10 @@ MultiWikiClientAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	} else {
 		return undefined;
 	}
+};
+
+MultiWikiClientAdaptor.prototype.getTiddlerBag = function(title) {
+	return this.wiki.extractTiddlerDataItem(BAG_STATE_TIDDLER,title);
 };
 
 MultiWikiClientAdaptor.prototype.getTiddlerRevision = function(title) {
@@ -163,23 +168,38 @@ MultiWikiClientAdaptor.prototype.getCsrfToken = function() {
 };
 
 /*
-Get an array of skinny tiddler fields from the server
+Get details of changed tiddlers from the server
 */
-MultiWikiClientAdaptor.prototype.getSkinnyTiddlers = function(callback) {
+MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) {
 	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		data: {
-			filter: "[all[tiddlers]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]]"
+			last_known_tiddler_id: this.last_known_tiddler_id
 		},
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
 				return callback(err);
 			}
-			var tiddlers = $tw.utils.parseJSONSafe(data);
-			// Invoke the callback with the skinny tiddlers
-			callback(null,tiddlers);
+			var modifications = [],
+				deletions = [];
+			var tiddlerInfoArray = $tw.utils.parseJSONSafe(data);
+			$tw.utils.each(tiddlerInfoArray,function(tiddlerInfo) {
+				if(tiddlerInfo.tiddler_id > self.last_known_tiddler_id) {
+					self.last_known_tiddler_id = tiddlerInfo.tiddler_id;
+				}
+				if(tiddlerInfo.is_deleted) {
+					deletions.push(tiddlerInfo.title);
+				} else {
+					modifications.push(tiddlerInfo.title);
+				}
+			});
+			// Invoke the callback with the results
+			callback(null,{
+				modifications: modifications,
+				deletions: deletions
+			});
 			// If Browswer Storage tiddlers were cached on reloading the wiki, add them after sync from server completes in the above callback.
 			if($tw.browserStorage && $tw.browserStorage.isEnabled()) { 
 				$tw.browserStorage.addCachedTiddlers();
@@ -252,7 +272,7 @@ MultiWikiClientAdaptor.prototype.deleteTiddler = function(title,callback,options
 		return callback(null);
 	}
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
-	var bag = options.tiddlerInfo.adaptorInfo && options.tiddlerInfo.adaptorInfo.bag;
+	var bag = this.getTiddlerBag(title);
 	if(!bag) {
 		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
@@ -264,6 +284,7 @@ MultiWikiClientAdaptor.prototype.deleteTiddler = function(title,callback,options
 			if(err) {
 				return callback(err);
 			}
+			self.removeTiddlerInfo(title);
 			// Invoke the callback & return null adaptorInfo
 			callback(null,null);
 		}
