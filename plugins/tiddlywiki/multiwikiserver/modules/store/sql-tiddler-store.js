@@ -107,7 +107,9 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields) {
 	if(attachmentSizeLimit < 100 * 1024) {
 		attachmentSizeLimit = 100 * 1024;
 	}
-	if(tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) {
+	const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"],
+		isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
+	if(isBinary && tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) {
 		const attachment_blob = this.attachmentStore.saveAttachment({
 			text: tiddlerFields.text,
 			type: tiddlerFields.type,
