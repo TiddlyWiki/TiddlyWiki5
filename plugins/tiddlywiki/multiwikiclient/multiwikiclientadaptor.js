@@ -78,8 +78,8 @@ MultiWikiClientAdaptor.prototype.getTiddlerRevision = function(title) {
 };
 
 MultiWikiClientAdaptor.prototype.setTiddlerInfo = function(title,revision,bag) {
-	this.wiki.setText(BAG_STATE_TIDDLER,null,title,revision,{suppressTimestamp: true});
-	this.wiki.setText(REVISION_STATE_TIDDLER,null,title,bag,{suppressTimestamp: true});
+	this.wiki.setText(BAG_STATE_TIDDLER,null,title,bag,{suppressTimestamp: true});
+	this.wiki.setText(REVISION_STATE_TIDDLER,null,title,revision,{suppressTimestamp: true});
 };
 
 MultiWikiClientAdaptor.prototype.removeTiddlerInfo = function(title) {
@@ -88,7 +88,7 @@ MultiWikiClientAdaptor.prototype.removeTiddlerInfo = function(title) {
 };
 
 /*
-Get the current status of the TiddlyWeb connection
+Get the current status of the server connection
 */
 MultiWikiClientAdaptor.prototype.getStatus = function(callback) {
 	// Invoke the callback if present
@@ -169,14 +169,12 @@ MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options
 				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title)
 			}
 			// Save the details of the new revision of the tiddler
-			var etag = request.getResponseHeader("Etag");
-			if(!etag) {
-				callback("Response from server is missing required `etag` header");
-			} else {
-				var etagInfo = self.parseEtag(etag);
-				// Invoke the callback
-				callback(null,{},etagInfo.revision);
-			}
+			var revision = request.getResponseHeader("X-Revision-Number"),
+				bag_name = request.getResponseHeader("X-Bag-Name");
+console.log(`Saved ${tiddler.fields.title} with revision ${revision} and bag ${bag_name}`)
+			// Invoke the callback
+			self.setTiddlerInfo(tiddler.fields.title,revision,bag_name);
+			callback(null,{bag: bag_name},revision);
 		}
 	});
 };
@@ -189,10 +187,15 @@ MultiWikiClientAdaptor.prototype.loadTiddler = function(title,callback) {
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
 		callback: function(err,data,request) {
-			if(err) {
+			if(err === 404) {
+				return callback(null,null);
+			} else if(err) {
 				return callback(err);
 			}
 			// Invoke the callback
+			var revision = request.getResponseHeader("X-Revision-Number"),
+				bag_name = request.getResponseHeader("X-Bag-Name");
+			self.setTiddlerInfo(title,revision,bag_name);
 			callback(null,$tw.utils.parseJSONSafe(data));
 		}
 	});
@@ -226,39 +229,6 @@ MultiWikiClientAdaptor.prototype.deleteTiddler = function(title,callback,options
 			callback(null,null);
 		}
 	});
-};
-
-/*
-Split an MWS Etag into its constituent parts. For example:
-
-```
-"tiddler:mybag/946151"
-```
-
-Note that the value includes the opening and closing double quotes.
-
-The parts are:
-
-```
-"tiddler:<bag>/<revision>"
-```
-*/
-MultiWikiClientAdaptor.prototype.parseEtag = function(etag) {
-	const PREFIX = "\"tiddler:";
-	if(etag.startsWith(PREFIX)) {
-		const slashPos = etag.indexOf("/");
-		if(slashPos !== -1) {
-			const bag_name = etag.slice(PREFIX.length,slashPos),
-				revision = parseInt(etag.slice(slashPos + 1),10);
-			if(!isNaN(revision)) {
-				return {
-					bag_name: bag_name,
-					revision: revision
-				};
-			}
-		}
-	}
-	return null;
 };
 
 if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {

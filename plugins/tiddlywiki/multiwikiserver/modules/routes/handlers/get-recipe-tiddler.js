@@ -29,6 +29,8 @@ exports.handler = function(request,response,state) {
 		// If application/json is requested then this is an API request, and gets the response in JSON
 		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 			state.sendResponse(200,{
+				"X-Revision-Number": tiddlerInfo.tiddler_id,
+				"X-Bag-Name": tiddlerInfo.bag_name,
 				Etag: state.makeTiddlerEtag(tiddlerInfo),
 				"Content-Type": "application/json"
 			},JSON.stringify(tiddlerInfo.tiddler),"utf8");

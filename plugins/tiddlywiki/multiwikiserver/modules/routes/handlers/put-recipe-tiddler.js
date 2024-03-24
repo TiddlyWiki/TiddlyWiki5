@@ -25,6 +25,8 @@ exports.handler = function(request,response,state) {
 		var result = $tw.mws.store.saveRecipeTiddler(fields,recipe_name);
 		if(result) {
 			response.writeHead(204, "OK",{
+				"X-Revision-Number": result.tiddler_id.toString(),
+				"X-Bag-Name": result.bag_name,
 				Etag: state.makeTiddlerEtag(result),
 				"Content-Type": "text/plain"
 			});
