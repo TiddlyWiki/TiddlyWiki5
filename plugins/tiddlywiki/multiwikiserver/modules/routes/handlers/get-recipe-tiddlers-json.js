@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-recipe-tiddlers
 type: application/javascript
 module-type: mws-route
 
-GET /recipes/:recipe_name/tiddlers.json?last_known_tiddler_id=:last_known_tiddler_id
+GET /recipes/:recipe_name/tiddlers.json?last_known_tiddler_id=:last_known_tiddler_id&include_deleted=true|false
 
 \*/
 (function() {
@@ -22,6 +22,7 @@ exports.handler = function(request,response,state) {
 	if(recipe_name) {
 		// Get the tiddlers in the recipe, optionally since the specified last known tiddler_id
 		var recipeTiddlers = $tw.mws.store.getRecipeTiddlers(recipe_name,{
+			include_deleted: state.queryParameters.include_deleted === "true",
 			last_known_tiddler_id: state.queryParameters.last_known_tiddler_id
 		});
 		if(recipeTiddlers) {

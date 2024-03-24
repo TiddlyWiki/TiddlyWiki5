@@ -175,7 +175,8 @@ MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) 
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		data: {
-			last_known_tiddler_id: this.last_known_tiddler_id
+			last_known_tiddler_id: this.last_known_tiddler_id,
+			include_deleted: "true"
 		},
 		callback: function(err,data) {
 			// Check for errors
