@@ -17,6 +17,11 @@ var CONFIG_HOST_TIDDLER = "$:/config/multiwikiclient/host",
 	BAG_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/bag",
 	REVISION_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/revision";
 
+var SERVER_NOT_CONNECTED = 0,
+	SERVER_CONNECTING_SSE = 1,
+	SERVER_CONNECTED_SSE  = 2,
+	SERVER_POLLING = 3;
+
 function MultiWikiClientAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
@@ -26,6 +31,7 @@ function MultiWikiClientAdaptor(options) {
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
 	this.logoutIsAvailable = true;
+	this.serverUpdatesConnection = SERVER_NOT_CONNECTED;
 }
 
 MultiWikiClientAdaptor.prototype.name = "multiwikiclient";
@@ -108,38 +114,84 @@ Get details of changed tiddlers from the server
 */
 MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) {
 	var self = this;
+	// Do nothing if there's already a connection in progress.
+	if(this.serverUpdatesConnection !== SERVER_NOT_CONNECTED) {
+		return callback(null,{
+			modifications: [],
+			deletions: []
+		});
+	}
+	// Try to connect a server stream
+	this.serverUpdatesConnection = SERVER_CONNECTING_SSE;
+	this.connectServerStream({
+		syncer: syncer,
+		onerror: function(err) {
+			self.logger.log("Error connecting SSE stream",err);
+			// If the stream didn't work, try polling
+			self.serverUpdatesConnection = SERVER_POLLING;
+			self.pollServer({
+				callback: function(err,changes) {
+					self.serverUpdatesConnection = SERVER_NOT_CONNECTED;
+					callback(null,changes);
+				}
+			});
+		},
+		onopen: function() {
+			self.serverUpdatesConnection = SERVER_CONNECTED_SSE;
+			// The syncer is expecting a callback but we don't have any data to send
+			callback(null,{
+				modifications: [],
+				deletions: []
+			});
+		}
+	});
+};
+
+/*
+Attempt to establish an SSE stream with the server and transfer tiddler changes. Options include:
+
+syncer: reference to syncer object used for storing data
+onopen: invoked when the stream is successfully opened
+onerror: invoked if there is an error
+*/
+MultiWikiClientAdaptor.prototype.connectServerStream = function(options) {
+	var self = this;
 	const eventSource = new EventSource("/recipes/" + this.recipe + "/events?last_known_tiddler_id=" + this.last_known_tiddler_id);
 	eventSource.onerror = function(event) {
-		console.log("SSE connection error",event);
+		if(options.onerror) {
+			options.onerror(event);
+		}
 	}
 	eventSource.onopen = function(event) {
-		console.log("SSE connection opened",event);
+		if(options.onopen) {
+			options.onopen(event);
+		}
 	}
-	eventSource.onmessage = function(event) {
-	  console.log("SSE Event",event);
-	};
 	eventSource.addEventListener("change", function(event) {
 		const data = $tw.utils.parseJSONSafe(event.data);
 		if(data) {
 			console.log("SSE data",data)
 			if(data.is_deleted) {
 				self.removeTiddlerInfo(data.title);
-				delete syncer.tiddlerInfo[data.title];
-				syncer.logger.log("Deleting tiddler missing from server:",data.title);
-				syncer.wiki.deleteTiddler(data.title);
-				syncer.processTaskQueue();
+				delete options.syncer.tiddlerInfo[data.title];
+				options.syncer.logger.log("Deleting tiddler missing from server:",data.title);
+				options.syncer.wiki.deleteTiddler(data.title);
+				options.syncer.processTaskQueue();
 			} else {
-				syncer.titlesToBeLoaded[data.title] = true;
-				syncer.processTaskQueue();
+				options.syncer.titlesToBeLoaded[data.title] = true;
+				options.syncer.processTaskQueue();
 			}
 		}
 	});
+};
 
-	return callback(null,{
-		modifications: [],
-		deletions: []
-	});
-	
+/*
+Poll the server for changes. Options include:
+
+callback: invoked on completion as (err,changes)
+*/
+MultiWikiClientAdaptor.prototype.pollServer = function(options) {
+	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		data: {
@@ -149,7 +201,7 @@ MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) 
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
-				return callback(err);
+				return options.callback(err);
 			}
 			var modifications = [],
 				deletions = [];
@@ -165,7 +217,7 @@ MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) 
 				}
 			});
 			// Invoke the callback with the results
-			callback(null,{
+			options.callback(null,{
 				modifications: modifications,
 				deletions: deletions
 			});
