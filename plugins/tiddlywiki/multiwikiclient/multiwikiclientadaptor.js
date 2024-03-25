@@ -181,6 +181,9 @@ MultiWikiClientAdaptor.prototype.connectServerStream = function(options) {
 		if(data) {
 			console.log("SSE data",data)
 			if(data.is_deleted) {
+				if(data.tiddler_id > self.last_known_tiddler_id) {
+					self.last_known_tiddler_id = data.tiddler_id;
+				}
 				self.removeTiddlerInfo(data.title);
 				delete options.syncer.tiddlerInfo[data.title];
 				options.syncer.logger.log("Deleting tiddler missing from server:",data.title);
