@@ -31,7 +31,7 @@
     "node": ">=0.8.2"
   },
   "scripts": {
-	"start": "node ./tiddlywiki.js ./editions/multiwikiserver --listen",
+	"start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-listen",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index && node ./tiddlywiki ./editions/multiwikiserver/ --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
