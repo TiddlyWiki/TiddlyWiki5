@@ -190,8 +190,8 @@ MultiWikiClientAdaptor.prototype.connectServerStream = function(options) {
 				options.syncer.wiki.deleteTiddler(data.title);
 				options.syncer.processTaskQueue();
 			} else {
-				options.syncer.titlesToBeLoaded[data.title] = true;
-				options.syncer.processTaskQueue();
+				self.setTiddlerInfo(data.title,data.tiddler_id,data.bag_name);
+				options.syncer.storeTiddler(data.tiddler);
 			}
 		}
 	});
