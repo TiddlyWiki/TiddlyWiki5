@@ -39,6 +39,13 @@ Commander.prototype.log = function(str) {
 };
 
 /*
+Clear pending commands
+*/
+Commander.prototype.clearCommands = function() {
+	this.commandTokens = this.commandTokens.slice(0,this.nextToken);
+};
+
+/*
 Write a string if verbose flag is set
 */
 Commander.prototype.write = function(str) {

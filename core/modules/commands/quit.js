@@ -25,6 +25,8 @@ var Command = function(params,commander,callback) {
 };
 
 Command.prototype.execute = function() {
+	// Clear any pending commands
+	this.commander.clearCommands();
 	// We don't actually quit, we just issue the "th-quit" hook to give listeners a chance to exit
 	$tw.hooks.invokeHook("th-quit");
 	return null;
