@@ -15,12 +15,13 @@ A sync adaptor module for synchronising with MultiWikiServer-compatible servers
 var CONFIG_HOST_TIDDLER = "$:/config/multiwikiclient/host",
 	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/",
 	BAG_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/bag",
-	REVISION_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/revision";
+	REVISION_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/revision",
+	CONNECTION_STATE_TIDDLER = "$:/state/multiwikiclient/connection";
 
-var SERVER_NOT_CONNECTED = 0,
-	SERVER_CONNECTING_SSE = 1,
-	SERVER_CONNECTED_SSE  = 2,
-	SERVER_POLLING = 3;
+var SERVER_NOT_CONNECTED = "NOT CONNECTED",
+	SERVER_CONNECTING_SSE = "CONNECTING SSE",
+	SERVER_CONNECTED_SSE  = "CONNECTED SSE",
+	SERVER_POLLING = "SERVER POLLING";
 
 function MultiWikiClientAdaptor(options) {
 	this.wiki = options.wiki;
@@ -31,8 +32,16 @@ function MultiWikiClientAdaptor(options) {
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
 	this.logoutIsAvailable = true;
-	this.serverUpdatesConnection = SERVER_NOT_CONNECTED;
+	this.setUpdateConnectionStatus(SERVER_NOT_CONNECTED);
 }
+
+MultiWikiClientAdaptor.prototype.setUpdateConnectionStatus = function(status) {
+	this.serverUpdateConnectionStatus = status;
+	this.wiki.addTiddler({
+		title: CONNECTION_STATE_TIDDLER,
+		text: status
+	});
+};
 
 MultiWikiClientAdaptor.prototype.name = "multiwikiclient";
 
@@ -115,29 +124,29 @@ Get details of changed tiddlers from the server
 MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) {
 	var self = this;
 	// Do nothing if there's already a connection in progress.
-	if(this.serverUpdatesConnection !== SERVER_NOT_CONNECTED) {
+	if(this.serverUpdateConnectionStatus !== SERVER_NOT_CONNECTED) {
 		return callback(null,{
 			modifications: [],
 			deletions: []
 		});
 	}
 	// Try to connect a server stream
-	this.serverUpdatesConnection = SERVER_CONNECTING_SSE;
+	this.setUpdateConnectionStatus(SERVER_CONNECTING_SSE);
 	this.connectServerStream({
 		syncer: syncer,
 		onerror: function(err) {
 			self.logger.log("Error connecting SSE stream",err);
 			// If the stream didn't work, try polling
-			self.serverUpdatesConnection = SERVER_POLLING;
+			self.setUpdateConnectionStatus(SERVER_POLLING);
 			self.pollServer({
 				callback: function(err,changes) {
-					self.serverUpdatesConnection = SERVER_NOT_CONNECTED;
+					self.setUpdateConnectionStatus(SERVER_NOT_CONNECTED);
 					callback(null,changes);
 				}
 			});
 		},
 		onopen: function() {
-			self.serverUpdatesConnection = SERVER_CONNECTED_SSE;
+			self.setUpdateConnectionStatus(SERVER_CONNECTED_SSE);
 			// The syncer is expecting a callback but we don't have any data to send
 			callback(null,{
 				modifications: [],
