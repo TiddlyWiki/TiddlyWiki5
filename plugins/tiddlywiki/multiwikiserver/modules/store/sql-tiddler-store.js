@@ -27,6 +27,8 @@ function SqlTiddlerStore(options) {
 	options = options || {};
 	this.attachmentStore = options.attachmentStore;
 	this.adminWiki = options.adminWiki || $tw.wiki;
+	this.eventListeners = {}; // Hashmap by type of array of event listener functions
+	this.eventOutstanding = {}; // Hashmap by type of boolean true of outstanding events
 	// Create the database
 	this.databasePath = options.databasePath || ":memory:";
 	var SqlTiddlerDatabase = require("$:/plugins/tiddlywiki/multiwikiserver/store/sql-tiddler-database.js").SqlTiddlerDatabase;
@@ -36,6 +38,39 @@ function SqlTiddlerStore(options) {
 	});
 	this.sqlTiddlerDatabase.createTables();
 }
+
+SqlTiddlerStore.prototype.addEventListener = function(type,listener) {
+	this.eventListeners[type] = this.eventListeners[type]  || [];
+	this.eventListeners[type].push(listener);
+};
+
+SqlTiddlerStore.prototype.removeEventListener = function(type,listener) {
+	const listeners = this.eventListeners[type];
+	if(listeners) {
+		var p = listeners.indexOf(listener);
+		if(p !== -1) {
+			listeners.splice(p,1);
+		}
+	}
+};
+
+SqlTiddlerStore.prototype.dispatchEvent = function(type /*, args */) {
+	const self = this;
+	if(!this.eventOutstanding[type]) {
+		$tw.utils.nextTick(function() {
+			self.eventOutstanding[type] = false;
+			const args = Array.prototype.slice.call(arguments,1),
+				listeners = self.eventListeners[type];
+			if(listeners) {
+				for(var p=0; p<listeners.length; p++) {
+					var listener = listeners[p];
+					listener.apply(listener,args);
+				}
+			}
+			});
+		this.eventOutstanding[type] = true;
+	}
+};
 
 /*
 Returns null if a bag/recipe name is valid, or a string error message if not
@@ -142,6 +177,7 @@ SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag
 			}
 		}
 	});
+	self.dispatchEvent("change");
 };
 
 SqlTiddlerStore.prototype.listBags = function() {
@@ -156,6 +192,7 @@ SqlTiddlerStore.prototype.createBag = function(bag_name,description) {
 			return {message: validationBagName};
 		}
 		self.sqlTiddlerDatabase.createBag(bag_name,description);
+		self.dispatchEvent("change");
 		return null;
 	});
 };
@@ -184,6 +221,7 @@ SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,descript
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
 		self.sqlTiddlerDatabase.createRecipe(recipe_name,bag_names,description);
+		self.dispatchEvent("change");
 		return null;
 	});
 };
@@ -193,7 +231,9 @@ Returns {tiddler_id:}
 */
 SqlTiddlerStore.prototype.saveBagTiddler = function(incomingTiddlerFields,bag_name) {
 	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
-	return this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bag_name,attachment_blob);
+	const result = this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bag_name,attachment_blob);
+	this.dispatchEvent("change");
+	return result;
 };
 
 /*
@@ -209,7 +249,9 @@ Returns {tiddler_id:}
 SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddlerFields,bag_name,options) {
 	const attachment_blob = this.attachmentStore.adoptAttachment(options.filepath,options.type,options.hash);
 	if(attachment_blob) {
-		return this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields,bag_name,attachment_blob);
+		const result = this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields,bag_name,attachment_blob);
+		this.dispatchEvent("change");
+		return result;
 	} else {
 		return null;
 	}
@@ -220,11 +262,15 @@ Returns {tiddler_id:,bag_name:}
 */
 SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipe_name) {
 	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
-	return this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipe_name,attachment_blob);
+	const result = this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipe_name,attachment_blob);
+	this.dispatchEvent("change");
+	return result;
 };
 
 SqlTiddlerStore.prototype.deleteTiddler = function(title,bag_name) {
-	return this.sqlTiddlerDatabase.deleteTiddler(title,bag_name);
+	const result = this.sqlTiddlerDatabase.deleteTiddler(title,bag_name);
+	this.dispatchEvent("change");
+	return result;
 };
 
 /*
@@ -332,7 +378,9 @@ SqlTiddlerStore.prototype.getRecipeLastTiddlerId = function(recipe_name) {
 SqlTiddlerStore.prototype.deleteAllTiddlersInBag = function(bag_name) {
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
-		return self.sqlTiddlerDatabase.deleteAllTiddlersInBag(bag_name);
+		const result = self.sqlTiddlerDatabase.deleteAllTiddlersInBag(bag_name);
+		self.dispatchEvent("change");
+		return result;
 	});
 };
 

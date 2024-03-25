@@ -108,6 +108,38 @@ Get details of changed tiddlers from the server
 */
 MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) {
 	var self = this;
+	const eventSource = new EventSource("/recipes/" + this.recipe + "/events?last_known_tiddler_id=" + this.last_known_tiddler_id);
+	eventSource.onerror = function(event) {
+		console.log("SSE connection error",event);
+	}
+	eventSource.onopen = function(event) {
+		console.log("SSE connection opened",event);
+	}
+	eventSource.onmessage = function(event) {
+	  console.log("SSE Event",event);
+	};
+	eventSource.addEventListener("change", function(event) {
+		const data = $tw.utils.parseJSONSafe(event.data);
+		if(data) {
+			console.log("SSE data",data)
+			if(data.is_deleted) {
+				self.removeTiddlerInfo(data.title);
+				delete syncer.tiddlerInfo[data.title];
+				syncer.logger.log("Deleting tiddler missing from server:",data.title);
+				syncer.wiki.deleteTiddler(data.title);
+				syncer.processTaskQueue();
+			} else {
+				syncer.titlesToBeLoaded[data.title] = true;
+				syncer.processTaskQueue();
+			}
+		}
+	});
+
+	return callback(null,{
+		modifications: [],
+		deletions: []
+	});
+	
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		data: {
