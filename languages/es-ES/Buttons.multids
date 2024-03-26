@@ -67,6 +67,8 @@ More/Caption: Más
 More/Hint: Otras acciones
 NewHere/Caption: Nuevo aquí
 NewHere/Hint: Crea un nuevo tiddler etiquetado con el título de este tiddler
+NetworkActivity/Caption: actividad de red
+NetworkActivity/Hint: Cancelar la actividad de red
 NewJournal/Caption: Nueva entrada
 NewJournal/Hint: Crea una nueva entrada de diario
 NewJournalHere/Caption: Entrada nueva aquí

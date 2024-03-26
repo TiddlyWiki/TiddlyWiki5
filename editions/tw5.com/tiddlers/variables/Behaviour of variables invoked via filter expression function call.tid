@@ -1,0 +1,10 @@
+created: 20230726143929233
+modified: 20230726150604831
+tags: [[Variable Usage]]
+title: Behaviour of variables invoked via filter expression function call
+type: text/vnd.tiddlywiki
+
+|tc-first-col-min-width|k
+|!how declared|!behaviour|
+|\define, <<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|Every function is a variable, but only variables defined using \function are invokable using the <<.olink function>> filter operator. Attempts to use a non-function variable is the same as if the function doesn't exist. The behavior in this case is like the identity function. All filter input is passed unchanged to the output.|
+|\function|The body text of the function is treated as a filter expression and evaluated. This filter expression can itself contain a function call. Filter expressions can be factored out into functions arbitrarily deep.|

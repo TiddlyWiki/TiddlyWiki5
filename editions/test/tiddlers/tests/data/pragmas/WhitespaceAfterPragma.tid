@@ -1,0 +1,64 @@
+title: Pragmas/WhitespaceAfterPragma
+description: parsermode pragma
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<$wikify name="parsetree" text={{Text}} mode="inline" output="parsetree">
+<$text text=<<parsetree>>/>
+</$wikify>
++
+title: Text
+
+\procedure this-is-a-definition() Something
+
+
+
+
+Now!
+
++
+title: ExpectedResult
+
+<p>
+[
+    {
+        "type": "set",
+        "attributes": {
+            "name": {
+                "name": "name",
+                "type": "string",
+                "value": "this-is-a-definition"
+            },
+            "value": {
+                "name": "value",
+                "type": "string",
+                "value": "Something"
+            }
+        },
+        "children": [
+            {
+                "type": "text",
+                "text": "Now!\n",
+                "start": 48,
+                "end": 53
+            }
+        ],
+        "params": [],
+        "orderedAttributes": [
+            {
+                "name": "name",
+                "type": "string",
+                "value": "this-is-a-definition"
+            },
+            {
+                "name": "value",
+                "type": "string",
+                "value": "Something"
+            }
+        ],
+        "isProcedureDefinition": true
+    }
+]
+</p>

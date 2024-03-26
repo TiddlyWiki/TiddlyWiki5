@@ -1,0 +1,26 @@
+title: Conditionals/MissingEndif
+description: Conditional shortcut syntax with missing endif
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Text
+
+This is a <% if [<something>match[one]] %>Elephant
++
+title: Output
+
+<$let something="one">
+{{Text}}
+</$let>
+
+<$let something="two">
+{{Text}}
+</$let>
++
+title: ExpectedResult
+
+<p>
+This is a Elephant
+</p><p>
+This is a 
+</p>

@@ -1,81 +1,100 @@
 created: 20150117152607000
-modified: 20230325141733992
+modified: 20240229155550000
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
+code-body: yes
 type: text/vnd.tiddlywiki
 
-\define .concat(1,2,3,4,5) $1$$2$$3$$4$$5$
+\whitespace trim
 
-\define .def(_) <dfn class="doc-def">$_$</dfn>
-\define .em(_) <em class="doc-em">$_$</em>
-\define .strong(_) <strong class="doc-strong">$_$</strong>
-\define .place(_) <code class="doc-place">$_$</code>
-\define .word(_) "$_$"
+\function .concat(1,2,3,4,5) [[$(1)$$(2)$$(3)$$(4)$$(5)$]substitute[]]
+\function .word(_) [["]] [<_>] =[["]] +[join[]]
 
-\define .preamble(_) :.doc-preamble $_$
-\define .note(_)
-@@.doc-note
-;Note
-: $_$
-@@
+\procedure .def(_) <dfn class="doc-def"><<_>></dfn>
+\procedure .em(_) <em class="doc-em"><<_>></em>
+\procedure .strong(_) <strong class="doc-strong"><<_>></strong>
+\procedure .place(_) <code class="doc-place"><<_>></code>
+\procedure .preamble(_) <dl><dd class="doc-preamble"><<_>></dd></dl>
+
+\procedure .tid(_) <code class="doc-tiddler"><<_>></code>
+\procedure .tag(_) <code class="doc-tag"><<_>></code>
+\procedure .field(_) <code class="doc-field"><<_>></code>
+\procedure .value(_) <code class="doc-value"><<_>></code>
+\procedure .op(_) <code class="doc-operator"><<_>></code>
+\procedure .var(_) <code class="doc-var"><<_>></code>
+\procedure .wid(_) <code class="doc-widget"><$macrocall $name=".concat" 1="$" 2=<<_>>/></code>
+\procedure .attr(_) <code class="doc-attr"><<_>></code>
+\procedure .param(_) <code class="doc-param"><<_>></code>
+
+\procedure .tiddler-fields(tiddler)
+<$tiddler tiddler=<<tiddler>>>
+	<div class="doc-tiddler-fields">
+		<h2>
+		<$link>
+			<span class="tc-tiddler-title-icon">{{||$:/core/ui/TiddlerIcon}}</span><$text text=<<currentTiddler>>/>
+		</$link>
+		</h2>
+		<table class="tc-view-field-table">
+			<tbody>
+				<$list filter="[all[current]fields[]sort[title]] -title" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+			</tbody>
+		</table>
+	</div>
+</$tiddler>
 \end
 
-\define .tid(_) <code class="doc-tiddler">$_$</code>
-\define .tag(_) <code class="doc-tag">$_$</code>
-\define .field(_) <code class="doc-field">$_$</code>
-\define .value(_) <code class="doc-value">$_$</code>
-\define .op(_) <code class="doc-operator">$_$</code>
-\define .var(_) <code class="doc-var">$_$</code>
-\define .wid(_) <code class="doc-widget">$$_$</code>
-\define .attr(_) <code class="doc-attr">$_$</code>
-\define .param(_) <code class="doc-param">$_$</code>
+\function .mtitle(_) [<_>] Macro +[join[ ]]
+\function .otitle(_) [<_>] Operator +[join[ ]]
+\function .vtitle(_) [<_>] Variable +[join[ ]]
 
-\define .mtitle(_) $_$ Macro
-\define .otitle(_) $_$ Operator
-\define .vtitle(_) $_$ Variable
+\procedure .link(_,to) <$link to=<<to>> ><<_>></$link>
+\procedure .clink(_,to) <span class="doc-clink"><$link to=<<to>>><<_>></$link></span>
 
-\define .link(_,to) <$link to="$to$">$_$</$link>
-\define .clink(_,to) <span class="doc-clink"><<.link """$_$""" "$to$">></span>
-\define .dlink(_,to) <$macrocall $name=".link" _=<<.def "$_$">> to="$to$">/>
-\define .dlink-ex(_,to) <a href="$to$" class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><<.def "$_$">></a>
-\define .flink(to) <$macrocall $name=".link" _=<<.field {{$to$!!caption}}>> to="$to$"/>
-\define .mlink(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to=<<.mtitle "$_$">>/>
-\define .mlink2(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to="$to$"/>
-\define .olink(_) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$_$">>/>
-\define .olink2(_,to) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$to$">>/>
-\define .vlink(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to=<<.vtitle "$_$">>/>
-\define .vlink2(_,to) <$macrocall $name=".link" _=<<.var "$_$">> to="$to$"/>
-\define .wlink(to) <$macrocall $name=".link" _=<<.wid {{$to$!!caption}}>> to="$to$"/>
-\define .wlink2(_,to) <$macrocall $name=".link" _="$_$" to="$to$"/>
+\procedure .dlink(_,to) <$link to=<<to>>><$macrocall $name=".def" _=<<_>>/></$link>
 
-\define .key(_) <span class="doc-key">$_$</span>
-\define .combokey(_) <$macrocall $name=".if" cond="$_$" then=<<.key '$_$'>>/>
-\define .keycombo(1,2,3,4) <<.combokey "$1$">><<.if "$2$" +>><<.combokey "$2$">><<.if "$3$" +>><<.combokey "$3$">><<.if "$4$" +>><<.combokey "$4$">>
+\procedure .dlink-ex(_,to) <a href=<<to>> class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$macrocall $name=".def" _=<<_>>/></a>
+\procedure .flink(to) <$macrocall $name=".link" _=`<<.field {{$(to)$!!caption}}>>` to=<<to>>/>
 
-\define .tab(_) <span class="doc-tab">{{$_$!!caption}}</span>
-\define .sidebar-tab(_) <<.tab "$:/core/ui/SideBar/$_$">>
-\define .more-tab(_) <<.tab "$:/core/ui/MoreSideBar/$_$">>
-\define .info-tab(_) <<.tab "$:/core/ui/TiddlerInfo/$_$">>
-\define .controlpanel-tab(_) <<.tab "$:/core/ui/ControlPanel/$_$">>
-\define .advancedsearch-tab(_) <<.tab "$:/core/ui/AdvancedSearch/$_$">>
-\define .toc-tab() <<.tab "TableOfContents">>
-\define .example-tab(_) <span class="doc-tab">$_$</span>
+\procedure .mlink(_) <$link to={{{ [.mtitle<_>] }}}><$macrocall $name=".var" _=<<_>>/> </$link>
+\procedure .mlink2(_,to) <$link to=<<to>>><$macrocall $name=".var" _=<<_>>/> </$link>
 
-\define .doc-tabs()
+\procedure .olink(_) <$link to={{{ [.otitle<_>] }}}><$macrocall $name=".op" _=<<_>>/> </$link>
+\procedure .olink2(_,to) <$link to={{{ [.otitle<to>] }}}><$macrocall $name=".op" _=<<_>>/> </$link>
+
+\procedure .vlink(_) <$link to={{{ [.vtitle<_>] }}}><$macrocall $name=".var" _=<<_>>/> </$link>
+\procedure .vlink2(_,to) <$link to=<<to>>><$macrocall $name=".var" _=<<_>>/></$link>
+
+\procedure .wlink(to) <$link to=<<to>> > <$macrocall $name=".wid" _={{{ [<to>get[caption]] }}}> </$link>
+\procedure .wlink2(_,to) <$link to=<<to>> ><<_>></$link>
+
+\procedure .key(_) <span class="doc-key"><<_>></span>
+\procedure .keys(_) <span class="doc-key"><<_>></span>
+
+\procedure .tab(_) <span class="doc-tab"><$transclude $tiddler=<<_>> $field=caption ><<_>></$transclude></span>
+\procedure .sidebar-tab(_) <$macrocall $name=".tab" _=`$:/core/ui/SideBar/$(_)$`/>
+\procedure .more-tab(_) <$macrocall $name=".tab" _=`$:/core/ui/MoreSideBar/$(_)$`/>
+\procedure .info-tab(_) <$macrocall $name=".tab" _=`$:/core/ui/TiddlerInfo/$(_)$`/>
+\procedure .controlpanel-tab(_) <$macrocall $name=".tab" _=`$:/core/ui/ControlPanel/$(_)$`/>
+\procedure .advancedsearch-tab(_) <$macrocall $name=".tab" _=`$:/core/ui/AdvancedSearch/$(_)$`/>
+\procedure .toc-tab() <$macrocall $name=".tab" _="TableOfContents"/>
+\procedure .example-tab(_) <span class="doc-tab"><<_>></span>
+
+\procedure .doc-tabs()
 <$macrocall $name="tabs"
-      tabsList="[tag<currentTiddler>description[tab]]"
-      default={{{ [tag<currentTiddler>first[]] }}}
-      explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
-      class={{{ [[doc-tabs]] [<currentTiddler>encodeuricomponent[]escapecss[]addprefix[doc-tabs-]] +[join[ ]] }}} />
+    tabsList="[tag<currentTiddler>description[tab]]"
+    default={{{ [tag<currentTiddler>first[]] }}}
+    explicitState={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
+    class={{{ [[doc-tabs]] [<currentTiddler>encodeuricomponent[]escapecss[]addprefix[doc-tabs-]] +[join[ ]] }}} />
 \end
-\define .doc-tab-link(text, target, tooltip:"", class:"")
+
+\procedure .doc-tab-link(text, target, tooltip:"", class:"")
 <!-- figure out where the addressed doc-tabs are -->
 <$tiddler tiddler={{{ [<currentTiddler>search:text[.doc-tabs]] :else[<currentTiddler>tags[]search:text[.doc-tabs]first[]] :else[<currentTiddler>] }}} >
-<$button class={{{ [[tc-btn-invisible tc-tiddlylink]] [<__class__>] +[join[ ]] }}}
-      set={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
-      setTo=<<__target__>>
-      tooltip=<<__tooltip__>>>
-    <<__text__>>
+<$button class={{{ [[tc-btn-invisible tc-tiddlylink]] [<class>] +[join[ ]] }}}
+    set={{{ [<currentTiddler>addprefix[$:/state/tab/]] }}}
+    setTo=<<target>>
+    tooltip=<<tooltip>>>
+    <<text>>
     <!-- if tiddler with tabs is open, scroll to tabs, otherwise open that tiddler (relevant from within tab subtiddlers) -->
     <$list filter="[[$:/StoryList]contains<currentTiddler>]" variable="ignore" emptyMessage="<$action-navigate />">
         <$action-sendmessage $message="tm-scroll" selector={{{ [<currentTiddler>encodeuricomponent[]addprefix[.doc-tabs-]] }}} />
@@ -84,136 +103,128 @@ type: text/vnd.tiddlywiki
 </$button>
 </$tiddler>
 \end
-\define .widget-attr-link(text, target)
+
+\procedure .widget-attr-link(text, target)
 <$macrocall $name=".doc-tab-link" 
-      text={{{ [[<code class="doc-attr">]] [<__text__>] [[</code>]] +[join[]] }}}
-      class="doc-tab-link"
-      target=<<__target__>>
-      tooltip={{{ [[Show more information about the ']] [<__text__>] [[' attribute]] +[join[]] }}} />
+    text={{{ [[<code class="doc-attr">]] [<text>] [[</code>]] +[join[]] }}}
+    class="doc-tab-link"
+    target=<<target>>
+    tooltip={{{ [[Show more information about the ']] [<text>] [[' attribute]] +[join[]] }}} />
 \end
 
-\define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
+\procedure .button(_) <span class="doc-button"><$transclude $tiddler=`$:/core/ui/Buttons/$(_)$` $field="caption" ><<_>></$transclude></span>
 
-\define .icon(_) <span class="doc-icon">{{$_$}}</span>
+\procedure .icon(_) <span class="doc-icon"><$transclude $tiddler=<<_>>/></span>
 
-\define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
-\define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
+\procedure .infoBox(text:"", title, icon:"$:/core/images/info-button", class, iconSize:"1.4rem")
+\function _f.tipClass() [[doc-icon-block]] [<class>!is[blank]then<class>] +[join[ ]]
+<div class=<<_f.tipClass>>>
+	<%if [<title>!is[blank]] %><div>''<<title>>''</div><% endif %>
+	<div class="doc-block-icon"><$transclude $tiddler=<<icon>> size=<<iconSize>>/></div>
+	<<text>>
+</div>
+\end
 
-\define .state-prefix() $:/state/editions/tw5.com/
+\procedure .note(_:"", title:"Note", icon:"$:/core/images/info-button", class:"doc-note", iconSize:"22pt")
+<$macrocall $name=".infoBox" text=<<_>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
+\end
 
-\define .lorem()
+\procedure .tip(_:"", title:"Tip" , icon:"$:/core/images/tip", class:"doc-tip", iconSize:"22pt")
+<$macrocall $name=".infoBox" text=<<_>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
+\end
+
+\procedure .warning(_:"", title:"Warning", icon:"$:/core/images/warning", class:"doc-warning", iconSize:"22pt")
+<$macrocall $name=".infoBox" text=<<_>> title=<<title>> icon=<<icon>> class=<<class>> iconSize=<<iconSize>>/>
+\end
+
+\procedure .state-prefix() $:/state/editions/tw5.com/
+
+\procedure .lorem()
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 \end
 
-\define .toc-lorem()
+\procedure .toc-lorem()
 This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 
 <<.lorem>>
 \end
 
-\define .example(n,eg,egvar:NO-SUCH-VAR)
+\procedure .example(n,eg,egvar)
+<$let eg={{{ [<egvar>!is[blank]getvariable[]] :else[<eg>] }}}>
 <div class="doc-example">
-<$reveal default="$egvar$" type="match" text="NO-SUCH-VAR">
-	<$macrocall $name="copy-to-clipboard-above-right" src="""$eg$"""/>
-	<$codeblock code="""$eg$"""/>
-</$reveal>
-<$reveal default="$egvar$" type="nomatch" text="NO-SUCH-VAR">
-	<!-- allow an example to contain """ -->
-	<$macrocall $name="copy-to-clipboard-above-right" src=<<$egvar$>>/>
-	<$codeblock code=<<$egvar$>>/>
-</$reveal>
-<$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$n$]]" variable=".state">
-<$reveal state=<<.state>> type="nomatch" text="show">
-	<dl>
-	<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
-	</dl>
-</$reveal>
-<$reveal state=<<.state>> type="match" text="show">
-	<dl>
-	<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
-	</dl>
-	<blockquote class="doc-example-result">
-	<$reveal default="$egvar$" type="match" text="NO-SUCH-VAR">
-
-$$$text/vnd.tiddlywiki
-$eg$
-$$$
-
-	</$reveal>
-	<$reveal default="$egvar$" type="nomatch" text="NO-SUCH-VAR">
-		<<$egvar$>>
-	</$reveal>
-	</blockquote>
-</$reveal>
-</$list>
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<eg>>/>
+	<$codeblock code=<<eg>>/>
+	<$list filter=`[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$(n)$]]` variable=".state">
+		<$reveal state=<<.state>> type="nomatch" text="show">
+			<dl>
+				<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
+			</dl>
+		</$reveal>
+		<$reveal state=<<.state>> type="match" text="show">
+			<dl>
+				<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
+			</dl>
+			<blockquote class="doc-example-result">
+				<<eg>>
+			</blockquote>
+		</$reveal>
+	</$list>
+</div>
+</$let>
 \end
 
-\define .bad-example(eg)
+\procedure .bad-example(eg)
 <table class="doc-bad-example">
-<tbody>
-<tr class="evenRow">
-<td><span style="font-size:1.5em;">&#9888;</span> Warning:<br> Don't do it this way!</td>
-<td>
-
-$eg$
-</td>
-</tr>
-</tbody>
+	<tbody>
+		<tr class="evenRow">
+			<td>
+				<span class="tc-small-gap-right" style="font-size:1.5em;">&#9888;</span>
+				Warning:<br> Don't do it this way!
+			</td>
+			<td>
+				<$transclude $variable="eg" $mode="block"/>
+			</td>
+		</tr>
+	</tbody>
 </table>
 \end
 
-\define .link-badge(text,link,colour)
-<a href=<<__link__>> class="doc-link-badge" style="background-color:$colour$;" target="_blank" rel="noopener noreferrer"><$text text=<<__text__>>/></a>
+\procedure .link-badge(text,link,colour)
+<a href=<<link>> class="doc-link-badge" style.background-color=<<colour>> target="_blank" rel="noopener noreferrer">
+	<$text text=<<text>>/>
+</a>
 \end
 
+<!-- TODO use $:/palette colour settings -->
+\procedure .link-badge-added(link,colour:#ffe246)    <$macrocall $name=".link-badge" text="added"    link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-addendum(link,colour:#fcc84a) <$macrocall $name=".link-badge" text="addendum" link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-extended(link,colour:#f9a344) <$macrocall $name=".link-badge" text="extended" link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-fixed(link,colour:#ffa86d)    <$macrocall $name=".link-badge" text="fixed"    link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-here(link,colour:#d88e63)     <$macrocall $name=".link-badge" text="here"     link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-hide(link,colour:#9d959f)     <$macrocall $name=".link-badge" text="hide"     link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-improved(link,colour:#7593c7) <$macrocall $name=".link-badge" text="improved" link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-modified(link,colour:#7f99c9) <$macrocall $name=".link-badge" text="modified" link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-removed(link,colour:#a9aabc)  <$macrocall $name=".link-badge" text="removed"  link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-renamed(link,colour:#b4b995)  <$macrocall $name=".link-badge" text="renamed"  link=<<link>> colour=<<colour>>/>
+\procedure .link-badge-updated(link,colour:#91ba66)  <$macrocall $name=".link-badge" text="updated"  link=<<link>> colour=<<colour>>/>
 
-\define .link-badge-added(link,colour:#ffe246) <<.link-badge "added" """$link$""" """$colour$""">>
-\define .link-badge-addendum(link,colour:#fcc84a) <<.link-badge "addendum" """$link$""" """$colour$""">>
-\define .link-badge-extended(link,colour:#f9a344) <<.link-badge "extended" """$link$""" """$colour$""">>
-\define .link-badge-fixed(link,colour:#ffa86d) <<.link-badge "fixed" """$link$""" """$colour$""">>
-\define .link-badge-here(link,colour:#d88e63) <<.link-badge "here" """$link$""" """$colour$""">>
-\define .link-badge-hide(link,colour:#9d959f) <<.link-badge "hide" """$link$""" """$colour$""">>
-\define .link-badge-improved(link,colour:#7593c7) <<.link-badge "improved" """$link$""" """$colour$""">>
-\define .link-badge-modified(link,colour:#7f99c9) <<.link-badge "modified" """$link$""" """$colour$""">>
-\define .link-badge-removed(link,colour:#a9aabc) <<.link-badge "removed" """$link$""" """$colour$""">>
-\define .link-badge-renamed(link,colour:#b4b995) <<.link-badge "renamed" """$link$""" """$colour$""">>
-\define .link-badge-updated(link,colour:#91ba66) <<.link-badge "updated" """$link$""" """$colour$""">>
-
-\define .tiddler-fields(tiddler)
-<$tiddler tiddler=<<__tiddler__>>>
-<div class="doc-tiddler-fields">
-<h2>
-<$link>
-<span class="tc-tiddler-title-icon">{{||$:/core/ui/TiddlerIcon}}</span><$text text=<<currentTiddler>>/>
-</$link>
-</h2>
-<table class="tc-view-field-table">
-<tbody>
-<$list filter="[all[current]fields[]sort[title]] -title" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
-</tbody>
-</table>
-</div>
-</$tiddler>
+\procedure .banner-credits(credit,url)
+<img src=<<url>> width="140" style="float:left;margin-right:0.5em;"/>
+<<credit>>
+<div style="clear:both;"/>
 \end
 
-\define .banner-credits(credit,url)
-<img src=<<__url__>> width="140" style="float:left;margin-right:0.5em;"/>
-
-$credit$
-
-<div style="clear:both;">
-
-</div>
-\end
-
-\define .contributors(usernames)
+\procedure .contributors(usernames)
 <ol class="doc-github-contributors">
-<$list filter="[enlist<__usernames__>sort[]]" variable="username">
-<li>
-<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/><span class="doc-github-contributor-username">@<$text text=<<username>>/></span></a>
-</li>
-</$list>
+	<$list filter="[enlist<usernames>sort[]]" variable="username">
+		<li>
+			<a href={{{ [[https://github.com/]addsuffix<username>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">
+				<img src={{{ [[https://github.com/]addsuffix<username>addsuffix[.png?size=64]] }}} width="64" height="64"/>
+				<span class="doc-github-contributor-username">
+					@<$text text=<<username>>/>
+				</span>
+			</a>
+		</li>
+	</$list>
 </ol>
 \end
-
-<pre><$view field="text"/></pre>

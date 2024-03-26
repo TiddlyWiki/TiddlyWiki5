@@ -20,7 +20,7 @@ Mögliche Parameter:
 * ''anon-username'' - Name, der für anonymer Benutzer verwendet wird, um bearbeitete Tiddler zu markieren
 * ''username'' - Benutzername für die Basis-Authentifizierung
 * ''password'' - Passwort für die Basis-Authentifizierung
-* ''authenticated-user-header'' - HTTP Header-Name für vertrauenswürdige, authentifizierte Benutzer
+* ''authenticated-user-header'' - Optionaler HTTP Header-Name für vertrauenswürdige, authentifizierte Benutzer
 * ''readers'' - Komma-separierte Liste für Benutzer, mit Schreiberlaubnis
 * ''writers'' - Komma-separierte Liste für Benutzer, mit Leseerlaubnis
 * ''csrf-disable'' - "yes" bedeutet, dass CSRF checks deaktiviert sind. (Standard: "no")

@@ -5,7 +5,7 @@ op-input: a [[selection of titles|Title Selection]]
 op-output: the logarithm of each input title as numbers, with base <<.place N>> if specified otherwise base `e`
 op-parameter: a number
 op-parameter-name: N
-op-purpose: treating each input title as a number, return its logarithm with base equal to the numeric value of the operand if specified, otherwise base `e`
+op-purpose: treating each input title as a number, return its logarithm with base equal to the numeric value of the parameter if specified, otherwise base `e`
 tags: [[Filter Operators]] [[Mathematics Operators]] [[Binary Mathematics Operators]]
 title: log Operator
 type: text/vnd.tiddlywiki

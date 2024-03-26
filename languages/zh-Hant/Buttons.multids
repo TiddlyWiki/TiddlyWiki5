@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: 清除密碼
 Encryption/ClearPassword/Hint: 清除密碼且不加密儲存此維基
 Encryption/SetPassword/Caption: 設定密碼
 Encryption/SetPassword/Hint: 設定加密儲存此維基的密碼
+EmergencyDownload/Caption: 下載條目為 json
 ExportPage/Caption: 導出所有條目
 ExportPage/Hint: 導出所有條目
 ExportTiddler/Caption: 導出此條目
@@ -67,6 +68,8 @@ More/Caption: 更多
 More/Hint: 更多動作
 NewHere/Caption: 新增子條目
 NewHere/Hint: 建立一個標籤為此條目名稱的新條目
+NetworkActivity/Caption: 網路活動
+NetworkActivity/Hint: 取消所有網路活動
 NewJournal/Caption: 新增日誌
 NewJournal/Hint: 建立一個新的日誌條目
 NewJournalHere/Caption: 新增子日誌

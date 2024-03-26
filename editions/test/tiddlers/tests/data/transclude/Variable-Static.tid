@@ -1,0 +1,15 @@
+title: Transclude/Variable/Static
+description: Transcluding a function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+items: 1 2 3 4 5 6 7 8 9 10
+
+\function list-join(filter, sep:", ") [subfilter<filter>join<sep>]
+
+<<list-join "[enlist{!!items}]">>
++
+title: ExpectedResult
+
+<p>1, 2, 3, 4, 5, 6, 7, 8, 9, 10</p>

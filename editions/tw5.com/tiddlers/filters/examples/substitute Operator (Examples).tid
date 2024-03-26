@@ -1,0 +1,37 @@
+created: 20230614225302905
+modified: 20230614233448662
+tags: [[Operator Examples]] [[substitute Operator]]
+title: substitute Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define time() morning
+\define field() modified
+\procedure sentence() This tiddler was last $(field)$ on ${[{!!modified}format:date[DDth MMM YYYY]]}$
+\define name() Bugs Bunny
+\define address() Rabbit Hole Hill
+
+!Substitute <<.op substitute[]>> operator parameters
+<<.operator-example 1 "[[Hi, I'm $1$ and I live in $2$]substitute[Bugs Bunny],[Rabbit Hole Hill]]">>
+
+!Substitute variables
+This example uses the following variables:
+
+* name: <$codeblock code=<<name>>/>
+* address: <$codeblock code=<<address>>/>
+
+<<.operator-example 2 "[[Hi, I'm $(name)$ and I live in $(address)$]substitute[]]">>
+
+!Substitute variables and operator parameters
+This example uses the following variable:
+
+* time: <$codeblock code=<<time>>/>
+
+<<.operator-example 3 "[[Something in the $(time)$ at $2$ about $1$ ]substitute[Maths],[the Library]]">>
+
+!Substitute a filter expression and a variable
+This example uses the following variables:
+
+* field: <$codeblock code=<<field>>/>
+* sentence: <$codeblock code=<<sentence>>/>
+
+<<.operator-example 4 "[<sentence>substitute[]]">>

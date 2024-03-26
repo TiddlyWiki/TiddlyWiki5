@@ -7,7 +7,6 @@
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.js",
 				"module-type": "library"
 			},
-			"prefix": "var hljs = require(\"$:/plugins/tiddlywiki/highlight/highlight.js\");\n",
 			"suffix": "\nexports.hljs = hljs;\n"
 		},
 		{

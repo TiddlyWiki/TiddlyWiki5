@@ -112,14 +112,18 @@ Get the prevailing value of a context variable
 name: name of variable
 options: see below
 Options include
+
 params: array of {name:, value:} for each parameter
 defaultValue: default value if the variable is not defined
+source: optional source iterator for evaluating function invocations
 allowSelfAssigned: if true, includes the current widget in the context chain instead of just the parent
 
 Returns an object with the following fields:
 
-params: array of {name:,value:} of parameters passed to wikitext variables
+params: array of {name:,value:} or {value:} of parameters to be applied
 text: text of variable, with parameters properly substituted
+resultList: result of variable evaluation as an array
+srcVariable: reference to the object defining the variable
 */
 Widget.prototype.getVariableInfo = function(name,options) {
 	options = options || {};
@@ -135,7 +139,8 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	if(variable) {
 		var originalValue = variable.value,
 			value = originalValue,
-			params = [];
+			params = [],
+			resultList = [value];
 		// Only substitute parameter and variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
 			params = self.resolveVariableParameters(variable.params,actualParams);
@@ -144,10 +149,28 @@ Widget.prototype.getVariableInfo = function(name,options) {
 				value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
 			});
 			value = self.substituteVariableReferences(value,options);
+			resultList = [value];
+		} else if(variable.isFunctionDefinition) {
+			// Function evaluations
+			params = self.resolveVariableParameters(variable.params,actualParams);
+			var variables = options.variables || Object.create(null);
+			// Apply default parameter values
+			$tw.utils.each(variable.params,function(param,index) {
+				if(param["default"]) {
+					variables[param.name] = param["default"];
+				}
+			});
+			// Parameters are an array of {value:} or {name:, value:} pairs
+			$tw.utils.each(params,function(param) {
+				variables[param.name] = param.value;
+			});
+			resultList = this.wiki.filterTiddlers(value,this.makeFakeWidgetWithVariables(variables),options.source);
+			value = resultList[0] || "";
 		}
 		return {
 			text: value,
 			params: params,
+			resultList: resultList,
 			srcVariable: variable,
 			isCacheable: originalValue === value
 		};
@@ -159,7 +182,7 @@ Widget.prototype.getVariableInfo = function(name,options) {
 	}
 	return {
 		text: text,
-		srcVariable: {}
+		resultList: [text]
 	};
 };
 
@@ -317,60 +340,9 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 			};
 		},
 		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
-		evaluateVariable: self.evaluateVariable,
 		resolveVariableParameters: self.resolveVariableParameters,
 		wiki: self.wiki
 	};
-};
-
-/*
-Evaluate a variable and associated actual parameters and return the resulting array.
-The way that the variable is evaluated depends upon its type:
-* Functions are evaluated as parameterised filter strings
-* Macros are returned as plain text with substitution of parameters
-* Procedures and widgets are returned as plain text
-
-Options are:
-params - the actual parameters – may be one of:
-	* an array of values that may be an anonymous string value, or a {name:, value:} pair
-	* a hashmap of {name: value} pairs
-	* a function invoked with parameters (name,index) that returns a parameter value by name or position
-source - iterator for source tiddlers
-*/
-Widget.prototype.evaluateVariable = function(name,options) {
-	options = options || {};
-	var params = options.params || [];
-	// Get the details of the variable (includes processing text substitution for macros
-	var variableInfo = this.getVariableInfo(name,{params: params,defaultValue: ""});
-	// Process function parameters
-	var variables = Object.create(null);
-	if(variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
-		// Apply default parameter values
-		$tw.utils.each(variableInfo.srcVariable.params,function(param,index) {
-			if(param["default"]) {
-				variables[param.name] = param["default"];
-			}
-		});
-		if($tw.utils.isArray(params)) {
-			// Parameters are an array of values or {name:, value:} pairs
-			$tw.utils.each(this.resolveVariableParameters(variableInfo.srcVariable.params,params),function(param) {
-				variables[param.name] = param.value;
-			});
-		} else if(typeof params === "function") {
-			// Parameters are passed via a function
-			$tw.utils.each(variableInfo.srcVariable.params,function(param,index) {
-				variables[param.name] = params(param.name,index) || param["default"] || "";
-			});
-		} else {
-			// Parameters are a hashmap
-			$tw.utils.each(params,function(value,name) {
-				variables[name] = value;
-			});
-		}
-		return this.wiki.filterTiddlers(variableInfo.text,this.makeFakeWidgetWithVariables(variables),options.source);
-	} else {
-		return [variableInfo.text];
-	}
 };
 
 /*
@@ -406,13 +378,9 @@ Widget.prototype.computeAttribute = function(attribute) {
 		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler")) || "";
 	} else if(attribute.type === "macro") {
 		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
-		if(variableInfo.srcVariable && variableInfo.srcVariable.isFunctionDefinition) {
-			// It is a function definition. Go through each of the defined parameters, and make a variable with the value of the corresponding provided parameter
-			var paramArray = this.resolveVariableParameters(variableInfo.srcVariable.params,attribute.value.params);
-			value = this.evaluateVariable(attribute.value.name,{params: paramArray})[0] || "";
-		} else {
-			value = variableInfo.text;
-		}
+		value = variableInfo.text;
+	} else if(attribute.type === "substituted") {
+		value = this.wiki.getSubstitutedText(attribute.rawValue,this) || "";
 	} else { // String attribute
 		value = attribute.value;
 	}
@@ -445,16 +413,34 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 };
 
 /*
-Assign the computed attributes of the widget to a domNode
+Assign the common attributes of the widget to a domNode
 options include:
-excludeEventAttributes: ignores attributes whose name begins with "on"
+sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the empty string meaning all attributes)
+destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string which means no prefix is added)
+changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
+excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
 Widget.prototype.assignAttributes = function(domNode,options) {
 	options = options || {};
-	var self = this;
+	var self = this,
+		changedAttributes = options.changedAttributes || this.attributes,
+		sourcePrefix = options.sourcePrefix || "",
+		destPrefix = options.destPrefix || "",
+		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
+		// Process any style attributes before considering sourcePrefix and destPrefix
+		if(name.substr(0,6) === "style." && name.length > 6) {
+			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+			return;
+		}
+		// Check if the sourcePrefix is a match
+		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
+			name = destPrefix + name.substr(sourcePrefix.length);
+		} else {
+			value = undefined;
+		}
 		// Check for excluded attribute names
-		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
+		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {
 			value = undefined;
 		}
 		if(value !== undefined) {
@@ -464,26 +450,24 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 				namespace = "http://www.w3.org/1999/xlink";
 				name = name.substr(6);
 			}
-			// Handle styles
-			if(name.substr(0,6) === "style." && name.length > 6) {
-				domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
-			} else {
-				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
-				try {
-					domNode.setAttributeNS(namespace,name,value);
-				} catch(e) {
-				}
+			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+			try {
+				domNode.setAttributeNS(namespace,name,value);
+			} catch(e) {
 			}
 		}
-	}
-	// Not all parse tree nodes have the orderedAttributes property
+	};
+	// If the parse tree node has the orderedAttributes property then use that order
 	if(this.parseTreeNode.orderedAttributes) {
 		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
-			assignAttribute(attribute.name,self.attributes[attribute.name]);
-		});	
+			if(attribute.name in changedAttributes) {
+				assignAttribute(attribute.name,self.getAttribute(attribute.name));
+			}
+		});
+	// Otherwise update each changed attribute irrespective of order
 	} else {
-		$tw.utils.each(Object.keys(self.attributes).sort(),function(name) {
-			assignAttribute(name,self.attributes[name]);
+		$tw.utils.each(changedAttributes,function(value,name) {
+			assignAttribute(name,self.getAttribute(name));
 		});	
 	}
 };
@@ -827,6 +811,20 @@ Widget.prototype.invokeActionsByTag = function(tag,event,variables) {
 
 Widget.prototype.allowActionPropagation = function() {
 	return true;
+};
+
+/*
+Evaluate a variable with parameters. This is a static convenience method that attempts to evaluate a variable as a function, returning an array of strings
+*/
+Widget.evaluateVariable  = function(widget,name,options) {
+	var result;
+	if(widget.getVariableInfo) {
+		var variableInfo = widget.getVariableInfo(name,options);
+		result = variableInfo.resultList || [variableInfo.text];
+	} else {
+		result = [widget.getVariable(name)];
+	}
+	return result;
 };
 
 exports.widget = Widget;

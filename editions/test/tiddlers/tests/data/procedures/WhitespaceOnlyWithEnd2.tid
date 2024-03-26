@@ -1,0 +1,15 @@
+title: Procedures/WhitespaceOnlyWithEnd2
+description: Line with \end can start with whitespace
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure empty()
+ \end
+
+Out: <<empty>>
++
+title: ExpectedResult
+
+<p>Out: </p>

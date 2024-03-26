@@ -20,6 +20,39 @@ exports.before = ["story"];
 exports.synchronous = true;
 
 exports.startup = function() {
+	// Install the HTTP client event handler
+	$tw.httpClient = new $tw.utils.HttpClient();
+	var getPropertiesWithPrefix = function(properties,prefix) {
+		var result = Object.create(null);
+		$tw.utils.each(properties,function(value,name) {
+			if(name.indexOf(prefix) === 0) {
+				result[name.substring(prefix.length)] = properties[name];
+			}
+		});
+		return result;
+	};
+	$tw.rootWidget.addEventListener("tm-http-request",function(event) {
+		var params = event.paramObject || {};
+		$tw.httpClient.initiateHttpRequest({
+			wiki: event.widget.wiki,
+			url: params.url,
+			method: params.method,
+			body: params.body,
+			binary: params.binary,
+			oncompletion: params.oncompletion,
+			onprogress: params.onprogress,
+			bindStatus: params["bind-status"],
+			bindProgress: params["bind-progress"],
+			variables: getPropertiesWithPrefix(params,"var-"),
+			headers: getPropertiesWithPrefix(params,"header-"),
+			passwordHeaders: getPropertiesWithPrefix(params,"password-header-"),
+			queryStrings: getPropertiesWithPrefix(params,"query-"),
+			passwordQueryStrings: getPropertiesWithPrefix(params,"password-query-")
+		});
+	});
+	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",function(event) {
+		$tw.httpClient.cancelAllHttpRequests();
+	});
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tm-modal",function(event) {

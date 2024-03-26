@@ -177,6 +177,7 @@ document: defaults to current document
 eventListeners: array of event listeners (this option won't work until $tw.utils.addEventListeners() has been loaded)
 */
 $tw.utils.domMaker = function(tag,options) {
+	var options = options || {};
 	var doc = options.document || document;
 	var element = doc.createElementNS(options.namespace || "http://www.w3.org/1999/xhtml",tag);
 	if(options["class"]) {
@@ -218,9 +219,34 @@ $tw.utils.error = function(err) {
 			heading = dm("h1",{text: errHeading}),
 			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
 			message = dm("div",{text: err, "class":"tc-error-message"}),
-			button = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )})], "class": "tc-error-prompt"}),
-			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
+			closeButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "close" : $tw.language.getString("Buttons/Close/Caption") )})], "class": "tc-error-prompt"}),
+			downloadButton = dm("div",{children: [dm("button",{text: ( $tw.language == undefined ? "download tiddlers" : $tw.language.getString("Buttons/EmergencyDownload/Caption") )})], "class": "tc-error-prompt"}),
+			form = dm("form",{children: [heading,prompt,downloadButton,message,closeButton], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
+		downloadButton.addEventListener("click",function(event) {
+			if($tw && $tw.wiki) {
+				var tiddlers = [];
+				$tw.wiki.each(function(tiddler,title) {
+					tiddlers.push(tiddler.fields);
+				});
+				var link = dm("a"),
+					text = JSON.stringify(tiddlers);
+				if(Blob !== undefined) {
+					var blob = new Blob([text], {type: "text/html"});
+					link.setAttribute("href", URL.createObjectURL(blob));
+				} else {
+					link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+				}
+				link.setAttribute("download","emergency-tiddlers-" + (new Date()) + ".json");
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			} else {
+				alert("Emergency tiddler download is not available");
+			}
+			event.preventDefault();
+			return false;
+		},true);
 		form.addEventListener("submit",function(event) {
 			document.body.removeChild(form);
 			event.preventDefault();
@@ -575,9 +601,8 @@ var globalCheck =[
 	"    configurable: true",
 	"  });",
 	"  if(Object.keys(__temp__).length){",
-	"    console.log(Object.keys(__temp__));",
+	"    console.log(\"Warning: Global assignment detected\",Object.keys(__temp__));",
 	"    delete Object.prototype.__temp__;",
-	"    throw \"Global assignment is not allowed within modules on node.\";",
 	"  }",
 	"  delete Object.prototype.__temp__;",
 ].join('\n');
@@ -596,11 +621,11 @@ $tw.utils.evalGlobal = function(code,context,filename,sandbox,allowGlobals) {
 	// Add the code prologue and epilogue
 	code = [
 		"(function(" + contextNames.join(",") + ") {",
-		"  (function(){\n" + code + "\n;})();",
+		"  (function(){" + code + "\n;})();\n",
 		(!$tw.browser && sandbox && !allowGlobals) ? globalCheck : "",
-		"  return exports;\n",
+		"\nreturn exports;\n",
 		"})"
-	].join("\n");
+	].join("");
 
 	// Compile the code into a function
 	var fn;
@@ -787,6 +812,7 @@ $tw.utils.Crypto = function() {
 			}
 			return outputText;
 		};
+	$tw.sjcl = sjcl;
 	this.setPassword = function(newPassword) {
 		currentPassword = newPassword;
 		this.updateCryptoStateTiddler();
@@ -926,7 +952,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				}
 			} else {
 				// line number should be included in e.stack for runtime errors
-				$tw.utils.error("Error executing boot module " + name + ": " + JSON.stringify(e) + "\n\n" + e.stack);
+				$tw.utils.error("Error executing boot module " + name + ": " + String(e) + "\n\n" + e.stack);
 			}
 		}
 	}
@@ -1150,7 +1176,7 @@ $tw.Wiki = function(options) {
 		shadowTiddlerTitles = null,
 		getShadowTiddlerTitles = function() {
 			if(!shadowTiddlerTitles) {
-				shadowTiddlerTitles = Object.keys(shadowTiddlers);
+				shadowTiddlerTitles = Object.keys(shadowTiddlers).sort(function(a,b) {return a.localeCompare(b);});
 			}
 			return shadowTiddlerTitles;
 		},
@@ -1968,10 +1994,10 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 					var value = tiddler[name];
 					switch(fieldInfo.source) {
 						case "subdirectories":
-							value = path.relative(rootPath, filename).split('/').slice(0, -1);
+							value = path.relative(rootPath, filename).split(path.sep).slice(0, -1);
 							break;
 						case "filepath":
-							value = path.relative(rootPath, filename);
+							value = path.relative(rootPath, filename).split(path.sep).join('/');
 							break;
 						case "filename":
 							value = path.basename(filename);
@@ -2439,6 +2465,7 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/vnd.microsoft.icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
+	$tw.utils.registerFileType("application/wasm","base64",".wasm");
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	$tw.utils.registerFileType("application/x-font-ttf","base64",".woff");
 	$tw.utils.registerFileType("application/font-woff2","base64",".woff2");
@@ -2453,8 +2480,12 @@ $tw.boot.initStartup = function(options) {
 	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	$tw.utils.registerFileType("application/enex+xml","utf8",".enex");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.wordprocessingml.document","base64",".docx");
+	$tw.utils.registerFileType("application/msword","base64",".doc");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","base64",".xlsx");
+	$tw.utils.registerFileType("application/excel","base64",".xls");
+	$tw.utils.registerFileType("application/vnd.ms-excel","base64",".xls");
 	$tw.utils.registerFileType("application/vnd.openxmlformats-officedocument.presentationml.presentation","base64",".pptx");
+	$tw.utils.registerFileType("application/mspowerpoint","base64",".ppt");
 	$tw.utils.registerFileType("text/x-bibtex","utf8",".bib",{deserializerType:"application/x-bibtex"});
 	$tw.utils.registerFileType("application/x-bibtex","utf8",".bib");
 	$tw.utils.registerFileType("application/epub+zip","base64",".epub");
@@ -2672,6 +2703,18 @@ $tw.hooks.addHook = function(hookName,definition) {
 	}
 	else {
 		$tw.hooks.names[hookName] = [definition];
+	}
+};
+
+/*
+Delete hooks from the hashmap
+*/
+$tw.hooks.removeHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		var p = $tw.hooks.names[hookName].indexOf(definition);
+		if(p !== -1) {
+			$tw.hooks.names[hookName].splice(p, 1);
+		}
 	}
 };
 
