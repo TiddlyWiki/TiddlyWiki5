@@ -1,4 +1,4 @@
-title: $:/core/ui/PageStylesheet
+title: $:/core/ui/RootStylesheet
 code-body: yes
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
@@ -8,9 +8,7 @@ code-body: yes
 
 <$set name="languageTitle" value={{!!name}}>
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
-<$transclude mode="block"/>
-</$list>
+<<stylesheet>>
 
 </$set>
 

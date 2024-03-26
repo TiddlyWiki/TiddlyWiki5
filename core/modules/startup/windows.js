@@ -68,7 +68,7 @@ exports.startup = function() {
 			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
 				var stylesheetText = $tw.wiki.getTiddlerText($tw.stylesheetTiddlers[i]);
 				$tw.utils.extend(variables,{ stylesheet: stylesheetText });
-				var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
+				var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/RootStylesheet",{
 					document: $tw.fakeDocument,
 					variables: variables,
 					importPageMacros: true}),
@@ -85,14 +85,13 @@ exports.startup = function() {
 
 		function getStylesheets() {
 			// Get our stylesheets in reversed order
-			return $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]reverse[]]");
+			return $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]").reverse();
 		}
 
 		$tw.windows[windowID].stylesheetTiddlers = getStylesheets();
 		$tw.windows[windowID].styleWidgetNodes = [];
 		$tw.windows[windowID].styleContainers = [];
 		$tw.windows[windowID].styleElements = [];
-
 		setStylesheets();
 
 		// Render the text of the tiddler
@@ -110,7 +109,6 @@ exports.startup = function() {
 				$tw.windows[windowID].styleWidgetNodes = [];
 				$tw.windows[windowID].styleContainers = [];
 				$tw.windows[windowID].styleElements = [];
-
 				setStylesheets();
 			}
 			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {

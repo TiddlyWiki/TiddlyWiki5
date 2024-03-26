@@ -20,7 +20,7 @@ exports.synchronous = true;
 
 // Default story and history lists
 var PAGE_TITLE_TITLE = "$:/core/wiki/title";
-var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
+var PAGE_STYLESHEET_TITLE = "$:/core/ui/RootStylesheet";
 var PAGE_TEMPLATE_TITLE = "$:/core/ui/RootTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
@@ -59,7 +59,19 @@ exports.startup = function() {
 
 	function getStylesheets() {
 		// Get our stylesheets in reversed order
-		return $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]reverse[]]");
+		return $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]").reverse();
+	}
+
+	function detectStylesheetRefresh(changes) {
+		for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+			if($tw.styleWidgetNodes[i].refresh(changes,$tw.styleContainers[i],null)) {
+				var newStyles = $tw.styleContainers[i].textContent;
+				if(newStyles !== $tw.styleWidgetNodes[i].assignedStyles) {
+					$tw.styleWidgetNodes[i].assignedStyles = newStyles;
+					$tw.styleElements[i].innerHTML = $tw.styleWidgetNodes[i].assignedStyles;
+				}
+			}
+		}
 	}
 
 	// Get our stylesheets
@@ -67,10 +79,8 @@ exports.startup = function() {
 	$tw.styleWidgetNodes = [];
 	$tw.styleContainers = [];
 	$tw.styleElements = [];
-
 	setStylesheets();
 
-	// Listen for changes: Added / removed stylesheet Tiddlers, changed stylesheet Tiddlers
 	$tw.wiki.addEventListener("change",function(changes) {
 		var stylesheetTiddlers = getStylesheets();
 		if(stylesheetTiddlers.length !== $tw.stylesheetTiddlers.length || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
@@ -84,19 +94,10 @@ exports.startup = function() {
 
 			setStylesheets();
 		}
+		$tw.perf.report("styleRefresh",function() {
+			detectStylesheetRefresh(changes);
+		})();
 	});
-
-	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
-		for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
-			if($tw.styleWidgetNodes[i].refresh(changes,$tw.styleContainers[i],null)) {
-				var newStyles = $tw.styleContainers[i].textContent;
-				if(newStyles !== $tw.styleWidgetNodes[i].assignedStyles) {
-					$tw.styleWidgetNodes[i].assignedStyles = newStyles;
-					$tw.styleElements[i].innerHTML = $tw.styleWidgetNodes[i].assignedStyles;
-				}
-			}
-		}
-	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
 		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget, recursionMarker: "no"});
