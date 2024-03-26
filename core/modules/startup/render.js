@@ -38,20 +38,62 @@ exports.startup = function() {
 			document.title = $tw.titleContainer.textContent;
 		}
 	});
-	// Set up the styles
-	$tw.styleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_STYLESHEET_TITLE,{document: $tw.fakeDocument});
-	$tw.styleContainer = $tw.fakeDocument.createElement("style");
-	$tw.styleWidgetNode.render($tw.styleContainer,null);
-	$tw.styleWidgetNode.assignedStyles = $tw.styleContainer.textContent;
-	$tw.styleElement = document.createElement("style");
-	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
-	document.head.insertBefore($tw.styleElement,document.head.firstChild);
+
+	function setStylesheets() {
+		// Set up the styles for each stylesheet Tiddler
+		for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+			var styleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_STYLESHEET_TITLE,{document: $tw.fakeDocument, variables: {
+				stylesheet: $tw.wiki.getTiddlerText($tw.stylesheetTiddlers[i])
+			}});
+			$tw.styleWidgetNodes.push(styleWidgetNode);
+			var styleContainer = $tw.fakeDocument.createElement("style");
+			$tw.styleContainers.push(styleContainer);
+			styleWidgetNode.render(styleContainer,null);
+			styleWidgetNode.assignedStyles = styleContainer.textContent;
+			var styleElement = document.createElement("style");
+			$tw.styleElements.push(styleElement);
+			styleElement.innerHTML = styleWidgetNode.assignedStyles;
+			document.head.insertBefore(styleElement,document.head.firstChild);
+		}
+	}
+
+	function getStylesheets() {
+		// Get our stylesheets in reversed order
+		return $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]reverse[]]");
+	}
+
+	// Get our stylesheets
+	$tw.stylesheetTiddlers = getStylesheets();
+	$tw.styleWidgetNodes = [];
+	$tw.styleContainers = [];
+	$tw.styleElements = [];
+
+	setStylesheets();
+
+	// Listen for changes: Added / removed stylesheet Tiddlers, changed stylesheet Tiddlers
+	$tw.wiki.addEventListener("change",function(changes) {
+		var stylesheetTiddlers = getStylesheets();
+		if(stylesheetTiddlers.length !== $tw.stylesheetTiddlers.length || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
+			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+				document.head.removeChild($tw.styleElements[i]);
+			}
+			$tw.stylesheetTiddlers = stylesheetTiddlers;
+			$tw.styleWidgetNodes = [];
+			$tw.styleContainers = [];
+			$tw.styleElements = [];
+
+			setStylesheets();
+		}
+	});
+
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
-		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
-			var newStyles = $tw.styleContainer.textContent;
-			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
-				$tw.styleWidgetNode.assignedStyles = newStyles;
-				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
+		for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+			if($tw.styleWidgetNodes[i].refresh(changes,$tw.styleContainers[i],null)) {
+				var newStyles = $tw.styleContainers[i].textContent;
+				if(newStyles !== $tw.styleWidgetNodes[i].assignedStyles) {
+					$tw.styleWidgetNodes[i].assignedStyles = newStyles;
+					$tw.styleElements[i].innerHTML = $tw.styleWidgetNodes[i].assignedStyles;
+				}
 			}
 		}
 	}));
