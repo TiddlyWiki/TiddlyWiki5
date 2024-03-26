@@ -64,23 +64,56 @@ exports.startup = function() {
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
-		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
-				document: $tw.fakeDocument,
-				variables: variables,
-				importPageMacros: true}),
-			styleContainer = $tw.fakeDocument.createElement("style");
-		styleWidgetNode.render(styleContainer,null);
-		var styleElement = srcDocument.createElement("style");
-		styleElement.innerHTML = styleContainer.textContent;
-		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
+		function setStylesheets() {
+			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+				var stylesheetText = $tw.wiki.getTiddlerText($tw.stylesheetTiddlers[i]);
+				$tw.utils.extend(variables,{ stylesheet: stylesheetText });
+				var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
+					document: $tw.fakeDocument,
+					variables: variables,
+					importPageMacros: true}),
+					styleContainer = $tw.fakeDocument.createElement("style");
+				$tw.windows[windowID].styleWidgetNodes.push(styleWidgetNode);
+				$tw.windows[windowID].styleContainers.push(styleContainer);
+				styleWidgetNode.render(styleContainer,null);
+				var styleElement = srcDocument.createElement("style");
+				$tw.windows[windowID].styleElements.push(styleElement);
+				styleElement.innerHTML = styleContainer.textContent;
+				srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
+			}
+		}
+
+		$tw.windows[windowID].styleWidgetNodes = [];
+		$tw.windows[windowID].styleContainers = [];
+		$tw.windows[windowID].styleElements = [];
+
+		setStylesheets();
+
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
-			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
-				styleElement.innerHTML = styleContainer.textContent;
+			var stylesheetTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]reverse[]]");
+			if(stylesheetTiddlers.length !== $tw.stylesheetTiddlers.length || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
+				for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+					srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
+				}
+				$tw.windows[windowID].styleWidgetNodes = [];
+				$tw.windows[windowID].styleContainers = [];
+				$tw.windows[windowID].styleElements = [];
+
+				setStylesheets();
+			}
+			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+				if($tw.windows[windowID].styleWidgetNodes[i].refresh(changes,$tw.windows[windowID].styleContainers[i],null)) {
+					var newStyles = $tw.windows[windowID].styleContainers[i].textContent;
+					if(newStyles !== $tw.windows[windowID].styleWidgetNodes[i].assignedStyles) {
+						$tw.windows[windowID].styleWidgetNodes[i].assignedStyles = newStyles;
+						$tw.windows[windowID].styleElements[i].innerHTML = $tw.windows[windowID].styleWidgetNodes[i].assignedStyles;
+					}
+				}
 			}
 			widgetNode.refresh(changes);
 		};
