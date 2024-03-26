@@ -83,6 +83,12 @@ exports.startup = function() {
 			}
 		}
 
+		function getStylesheets() {
+			// Get our stylesheets in reversed order
+			return $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]reverse[]]");
+		}
+
+		$tw.windows[windowID].stylesheetTiddlers = getStylesheets();
 		$tw.windows[windowID].styleWidgetNodes = [];
 		$tw.windows[windowID].styleContainers = [];
 		$tw.windows[windowID].styleElements = [];
@@ -95,11 +101,12 @@ exports.startup = function() {
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
-			var stylesheetTiddlers = $tw.wiki.filterTiddlers("[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]reverse[]]");
-			if(stylesheetTiddlers.length !== $tw.stylesheetTiddlers.length || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
-				for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+			var stylesheetTiddlers = getStylesheets();
+			if(stylesheetTiddlers.length !== $tw.windows[windowID].stylesheetTiddlers.length || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
+				for(var i=0; i<$tw.windows[windowID].stylesheetTiddlers.length; i++) {
 					srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
 				}
+				$tw.windows[windowID].stylesheetTiddlers = stylesheetTiddlers;
 				$tw.windows[windowID].styleWidgetNodes = [];
 				$tw.windows[windowID].styleContainers = [];
 				$tw.windows[windowID].styleElements = [];
