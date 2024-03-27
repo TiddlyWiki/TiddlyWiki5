@@ -65,7 +65,7 @@ exports.startup = function() {
 		},false);
 		// Set up the styles
 		function setStylesheets() {
-			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
+			for(var i=0; i<$tw.windows[windowID].stylesheetTiddlers.length; i++) {
 				var stylesheetText = $tw.wiki.getTiddlerText($tw.stylesheetTiddlers[i]);
 				$tw.utils.extend(variables,{ stylesheet: stylesheetText });
 				var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/RootStylesheet",{
@@ -89,6 +89,7 @@ exports.startup = function() {
 		}
 
 		$tw.windows[windowID].stylesheetTiddlers = getStylesheets();
+		$tw.windows[windowID].excludedStylesheets = $tw.wiki.getTiddlersWithTag("$:/tags/Stylesheet/Static");
 		$tw.windows[windowID].styleWidgetNodes = [];
 		$tw.windows[windowID].styleContainers = [];
 		$tw.windows[windowID].styleElements = [];
@@ -101,6 +102,7 @@ exports.startup = function() {
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
 			var stylesheetTiddlers = getStylesheets();
+			$tw.windows[windowID].excludedStylesheets = $tw.wiki.getTiddlersWithTag("$:/tags/Stylesheet/Static");
 			if(!$tw.utils.arraysEqual(stylesheetTiddlers,$tw.windows[windowID].stylesheetTiddlers) || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
 				for(var i=0; i<$tw.windows[windowID].stylesheetTiddlers.length; i++) {
 					srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
@@ -111,12 +113,14 @@ exports.startup = function() {
 				$tw.windows[windowID].styleElements = [];
 				setStylesheets();
 			}
-			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
-				if($tw.windows[windowID].styleWidgetNodes[i].refresh(changes,$tw.windows[windowID].styleContainers[i],null)) {
-					var newStyles = $tw.windows[windowID].styleContainers[i].textContent;
-					if(newStyles !== $tw.windows[windowID].styleWidgetNodes[i].assignedStyles) {
-						$tw.windows[windowID].styleWidgetNodes[i].assignedStyles = newStyles;
-						$tw.windows[windowID].styleElements[i].innerHTML = $tw.windows[windowID].styleWidgetNodes[i].assignedStyles;
+			for(var i=0; i<$tw.windows[windowID].stylesheetTiddlers.length; i++) {
+				if($tw.windows[windowID].excludedStylesheets.indexOf($tw.windows[windowID].stylesheetTiddlers[i]) === -1) {
+					if($tw.windows[windowID].styleWidgetNodes[i].refresh(changes,$tw.windows[windowID].styleContainers[i],null)) {
+						var newStyles = $tw.windows[windowID].styleContainers[i].textContent;
+						if(newStyles !== $tw.windows[windowID].styleWidgetNodes[i].assignedStyles) {
+							$tw.windows[windowID].styleWidgetNodes[i].assignedStyles = newStyles;
+							$tw.windows[windowID].styleElements[i].innerHTML = $tw.windows[windowID].styleWidgetNodes[i].assignedStyles;
+						}
 					}
 				}
 			}
