@@ -94,24 +94,6 @@ exports.startup = function() {
 		$tw.windows[windowID].styleElements = [];
 		setStylesheets();
 
-		function arraysEqual(a,b) {
-			if(a === b) {
-				return true;
-			}
-			if(a === null || b === null) {
-				return false;
-			}
-			if(a.length !== b.length) {
-				return false;
-			}
-			for(var i=0; i<a.length; i++) {
-				if(a[i] !== b[i]) {
-					return false;
-				}
-			}
-			return true;
-		}
-
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
@@ -119,7 +101,7 @@ exports.startup = function() {
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
 			var stylesheetTiddlers = getStylesheets();
-			if(!arraysEqual(stylesheetTiddlers,$tw.windows[windowID].stylesheetTiddlers) || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
+			if(!$tw.utils.arraysEqual(stylesheetTiddlers,$tw.windows[windowID].stylesheetTiddlers) || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
 				for(var i=0; i<$tw.windows[windowID].stylesheetTiddlers.length; i++) {
 					srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
 				}
