@@ -1,5 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/reset
 type: text/css
+tags: $:/tags/Stylesheet $:/tags/Stylesheet/Static
+list-before: $:/themes/tiddlywiki/vanilla/base
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 

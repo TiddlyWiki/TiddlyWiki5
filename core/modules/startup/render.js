@@ -64,11 +64,13 @@ exports.startup = function() {
 
 	function detectStylesheetRefresh(changes) {
 		for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
-			if($tw.styleWidgetNodes[i].refresh(changes,$tw.styleContainers[i],null)) {
-				var newStyles = $tw.styleContainers[i].textContent;
-				if(newStyles !== $tw.styleWidgetNodes[i].assignedStyles) {
-					$tw.styleWidgetNodes[i].assignedStyles = newStyles;
-					$tw.styleElements[i].innerHTML = $tw.styleWidgetNodes[i].assignedStyles;
+			if($tw.excludedStylesheets.indexOf($tw.stylesheetTiddlers[i]) === -1) {
+				if($tw.styleWidgetNodes[i].refresh(changes,$tw.styleContainers[i],null)) {
+					var newStyles = $tw.styleContainers[i].textContent;
+					if(newStyles !== $tw.styleWidgetNodes[i].assignedStyles) {
+						$tw.styleWidgetNodes[i].assignedStyles = newStyles;
+						$tw.styleElements[i].innerHTML = $tw.styleWidgetNodes[i].assignedStyles;
+					}
 				}
 			}
 		}
@@ -76,6 +78,7 @@ exports.startup = function() {
 
 	// Get our stylesheets
 	$tw.stylesheetTiddlers = getStylesheets();
+	$tw.excludedStylesheets = $tw.wiki.getTiddlersWithTag("$:/tags/Stylesheet/Static");
 	$tw.styleWidgetNodes = [];
 	$tw.styleContainers = [];
 	$tw.styleElements = [];
@@ -83,6 +86,7 @@ exports.startup = function() {
 
 	$tw.wiki.addEventListener("change",function(changes) {
 		var stylesheetTiddlers = getStylesheets();
+		$tw.excludedStylesheets = $tw.wiki.getTiddlersWithTag("$:/tags/Stylesheet/Static");
 		if(!$tw.utils.arraysEqual(stylesheetTiddlers,$tw.stylesheetTiddlers) || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
 			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
 				document.head.removeChild($tw.styleElements[i]);
