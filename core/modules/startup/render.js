@@ -81,9 +81,27 @@ exports.startup = function() {
 	$tw.styleElements = [];
 	setStylesheets();
 
+	function arraysEqual(a,b) {
+		if(a === b) {
+			return true;
+		}
+		if(a === null || b === null) {
+			return false;
+		}
+		if(a.length !== b.length) {
+			return false;
+		}
+		for(var i=0; i<a.length; i++) {
+			if(a[i] !== b[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	$tw.wiki.addEventListener("change",function(changes) {
 		var stylesheetTiddlers = getStylesheets();
-		if(stylesheetTiddlers.length !== $tw.stylesheetTiddlers.length || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
+		if(!arraysEqual(stylesheetTiddlers,$tw.stylesheetTiddlers) || $tw.utils.hopArray(changes,stylesheetTiddlers)) {
 			for(var i=0; i<$tw.stylesheetTiddlers.length; i++) {
 				document.head.removeChild($tw.styleElements[i]);
 			}
@@ -91,7 +109,6 @@ exports.startup = function() {
 			$tw.styleWidgetNodes = [];
 			$tw.styleContainers = [];
 			$tw.styleElements = [];
-
 			setStylesheets();
 		}
 		$tw.perf.report("styleRefresh",function() {
