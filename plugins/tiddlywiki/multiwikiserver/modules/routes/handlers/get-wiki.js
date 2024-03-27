@@ -79,7 +79,7 @@ exports.handler = function(request,response,state) {
 		});
 		writeTiddler({
 			title: "$:/state/multiwikiclient/recipe/last_tiddler_id",
-			text: $tw.mws.store.getRecipeLastTiddlerId(recipe_name).toString()
+			text: ($tw.mws.store.getRecipeLastTiddlerId(recipe_name) || 0).toString()
 		});
 		response.write(template.substring(markerPos + marker.length))
 		// Finish response
