@@ -85,22 +85,9 @@ function runSqlStoreTests(engine) {
 
 		expect(store.getBagTiddlers("bag-alpha")).toEqual([{title: "Another Tiddler", tiddler_id: 1}]);
 
-		expect(store.getBagRecentTiddlers("bag-alpha")).toEqual({
-			bag_name: "bag-alpha", count: 1, bag_max_tiddler_id: 1, last_known_tiddler_id: 0,
-			tiddlers: [{
-				title: 'Another Tiddler', is_deleted: 0, tiddler_id: 1,
-				fields: { title: 'Another Tiddler', tags: 'one two three', text: "I'm in alpha" }
-			}]
-		});
-
 		var getBagTiddlerResult = store.getBagTiddler("Another Tiddler","bag-alpha");
 		expect(typeof(getBagTiddlerResult.tiddler_id)).toBe("number");
 		delete getBagTiddlerResult.tiddler_id;
-
-		// these fields may eventually be removed, so don't depend on their presence
-		delete getBagTiddlerResult.tiddler.revision;
-		delete getBagTiddlerResult.tiddler.bag;
-
 		expect(getBagTiddlerResult).toEqual({ attachment_blob: null, tiddler: {title: "Another Tiddler", text: "I'm in alpha", tags: "one two three"} });
 	});
 
@@ -136,16 +123,11 @@ function runSqlStoreTests(engine) {
 		expect(typeof(saveRecipeResult.tiddler_id)).toBe("number");
 		expect(saveRecipeResult.bag_name).toBe("bag-beta");
 
-		expect(store.getRecipeTiddlers("recipe-rho")).toEqual([{title: "Another Tiddler", tiddler_id: 1, bag_name: "bag-beta"}]);
+		expect(store.getRecipeTiddlers("recipe-rho")).toEqual([{title: "Another Tiddler", tiddler_id: 1, bag_name: "bag-beta", is_deleted: 0 }]);
 
 		var getRecipeTiddlerResult = store.getRecipeTiddler("Another Tiddler","recipe-rho");
 		expect(typeof(getRecipeTiddlerResult.tiddler_id)).toBe("number");
 		delete getRecipeTiddlerResult.tiddler_id;
-
-		// these fields may eventually be removed, so don't depend on their presence
-		delete getRecipeTiddlerResult.tiddler.revision;
-		delete getRecipeTiddlerResult.tiddler.bag;
-
 		expect(getRecipeTiddlerResult).toEqual({ attachment_blob: null, bag_name: "bag-beta", tiddler: {title: "Another Tiddler", text: "I'm in rho"} });
 	});
 

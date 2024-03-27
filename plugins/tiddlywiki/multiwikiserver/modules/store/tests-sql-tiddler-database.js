@@ -74,12 +74,12 @@ function runSqlDatabaseTests(engine) {
 		});
 		// Verify what we've got
 		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-rho")).toEqual([ 
-			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha' },
-			{ title: 'Hello There', tiddler_id: 3, bag_name: 'bag-beta' }
+			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha', is_deleted: 0 },
+			{ title: 'Hello There', tiddler_id: 3, bag_name: 'bag-beta', is_deleted: 0 }
 		]);
 		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-sigma")).toEqual([
-			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha' },
-    		{ title: 'Hello There', tiddler_id: 4, bag_name: 'bag-gamma' }
+			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha', is_deleted: 0 },
+    		{ title: 'Hello There', tiddler_id: 4, bag_name: 'bag-gamma', is_deleted: 0 }
 		]);
 		expect(sqlTiddlerDatabase.getRecipeTiddler("Hello There","recipe-rho").tiddler).toEqual({ title: "Hello There", text: "I'm in beta", tags: "four five six" });
 		expect(sqlTiddlerDatabase.getRecipeTiddler("Missing Tiddler","recipe-rho")).toEqual(null);
@@ -90,17 +90,17 @@ function runSqlDatabaseTests(engine) {
 		// Delete a tiddlers to ensure the underlying tiddler in the recipe shows through
 		sqlTiddlerDatabase.deleteTiddler("Hello There","bag-beta");
 		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-rho")).toEqual([
-			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha' },
-    		{ title: 'Hello There', tiddler_id: 2, bag_name: 'bag-alpha' }
+			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha', is_deleted: 0 },
+    		{ title: 'Hello There', tiddler_id: 2, bag_name: 'bag-alpha', is_deleted: 0 }
 		]);
 		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-sigma")).toEqual([ 
-			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha' },
-			{ title: 'Hello There', tiddler_id: 4, bag_name: 'bag-gamma' }
+			{ title: 'Another Tiddler', tiddler_id: 1, bag_name: 'bag-alpha', is_deleted: 0 },
+			{ title: 'Hello There', tiddler_id: 4, bag_name: 'bag-gamma', is_deleted: 0 }
 		]);
 		expect(sqlTiddlerDatabase.getRecipeTiddler("Hello There","recipe-beta")).toEqual(null);
 		sqlTiddlerDatabase.deleteTiddler("Another Tiddler","bag-alpha");
-		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-rho")).toEqual([ { title: 'Hello There', tiddler_id: 2, bag_name: 'bag-alpha' } ]);
-		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-sigma")).toEqual([ { title: 'Hello There', tiddler_id: 4, bag_name: 'bag-gamma' } ]);
+		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-rho")).toEqual([ { title: 'Hello There', tiddler_id: 2, bag_name: 'bag-alpha', is_deleted: 0 } ]);
+		expect(sqlTiddlerDatabase.getRecipeTiddlers("recipe-sigma")).toEqual([ { title: 'Hello There', tiddler_id: 4, bag_name: 'bag-gamma', is_deleted: 0 } ]);
 		// Save a recipe tiddler
 		expect(sqlTiddlerDatabase.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho")).toEqual({tiddler_id: 7, bag_name: 'bag-beta'});
 		expect(sqlTiddlerDatabase.getRecipeTiddler("More","recipe-rho").tiddler).toEqual({title: "More", text: "None"});
