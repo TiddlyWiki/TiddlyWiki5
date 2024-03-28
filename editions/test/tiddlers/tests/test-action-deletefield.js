@@ -30,8 +30,10 @@ function setupWiki(condition, targetField, wikiOptions) {
 	if(condition.targetTiddlerExists) {
 		var fields = {
 			title: TEST_TIDDLER_TITLE,
-			modified: TEST_TIDDLER_MODIFIED,
 		};
+		if(condition.modifiedFieldExists) {
+			fields.modified = TEST_TIDDLER_MODIFIED;
+		}
 		if(condition.targetFieldExists) {
 			fields[targetField] = "some text";
 		}
@@ -58,11 +60,14 @@ function generateTestConditions() {
 		$tw.utils.each([true, false], function(targetTiddlerExists) {
 			$tw.utils.each([true, false], function(targetFieldExists) {
 				$tw.utils.each([true, false], function(fieldArgumentIsUsed) {
-					conditions.push({
-						tiddlerArgumentIsPresent: tiddlerArgumentIsPresent,
-						targetTiddlerExists: targetTiddlerExists,
-						targetFieldExists: targetFieldExists,
-						fieldArgumentIsUsed: fieldArgumentIsUsed,
+					$tw.utils.each([true, false], function(modifiedFieldExists) {
+						conditions.push({
+							tiddlerArgumentIsPresent: tiddlerArgumentIsPresent,
+							targetTiddlerExists: targetTiddlerExists,
+							targetFieldExists: targetFieldExists,
+							fieldArgumentIsUsed: fieldArgumentIsUsed,
+							modifiedFieldExists: modifiedFieldExists,
+						});
 					});
 				});
 			});
