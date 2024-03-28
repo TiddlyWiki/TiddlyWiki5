@@ -1,167 +1,182 @@
 title: $:/core/macros/tag-picker
-tags: $:/tags/Macro $:/tags/Global
-first-search-filter: [tags[]!is[system]search:title<userInput>sort[]]
-second-search-filter: [tags[]is[system]search:title<userInput>sort[]]
+tags: tags: $:/tags/Macro $:/tags/Global
+first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]
+second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>sort[]]
 
-\procedure get-tagpicker-focus-selector()
-\function currentTiddlerCSSEscaped() [<saveTiddler>escapecss[]]
-[data-tiddler-title=`$(currentTiddlerCSSEscaped)$`] .tc-add-tag-name input
+<!-- first-search-filter and second-search-filter fields are not used here in the code, but they are defined as parameters for keyboard-driven-input macro -->
+
+\whitespace trim
+
+<!-- tf.tagpicker-dropdown-id is needed if several tap-pickers are shown in one tiddler -->
+\function tf.tagpicker-dropdown-id()
+	[<qualify $:/state/popup/tags-auto-complete>]
+	[[$(saveTiddler)$-[$(tagField)$-$(tagListFilter)$]substitute[]sha256[]] +[join[/]]
 \end
 
-\procedure delete-tag-state-tiddlers() <$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
+\function tf.tagpicker-dropdown-class() [<tf.tagpicker-dropdown-id>sha256[]addprefix[tc-]]
+\function tf.get-tagpicker-focus-selector() [<tf.tagpicker-dropdown-class>addprefix[.]] .tc-popup-handle +[join[ ]]
 
+<!-- clean up temporary tiddlers, so the next "pick" starts with a clean input -->
+<!-- This could probably be optimized / removed if we would use different temp-tiddlers
+	(future improvement because keeping track is comlex for humans)
+-->
+\procedure delete-tag-state-tiddlers()
+<$action-deletetiddler $filter="[<newTagNameTiddler>] [<storeTitle>] [<tagSelectionState>]"/>
+\end
+
+<!-- trigger __toggle tag__ by keyboard -->
 \procedure add-tag-actions()
-\whitespace trim
-<$let tag=<<tag>>>
-<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter='+[toggle<tag>trim[]]'/>
-<$list
-	filter="[<tag>] :intersection[<saveTiddler>get<tagField>enlist-input[]]"
-	variable="ignore"
-	emptyMessage="<<actions>>"
-/>
-</$let>
-<<delete-tag-state-tiddlers>>
-<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
-\end
-
-\procedure clear-tags-actions-inner()
-\whitespace trim
-<$list
-	filter="[<storeTitle>has[text]] ~[<newTagNameTiddler>has[text]]"
-	variable="ignore"
-	emptyMessage="<<cancel-delete-tiddler-actions 'cancel'>>"
->
+<$let tag=<<_tf.getTag>> >
+	<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter='+[toggle<tag>trim[]]'/>
+	<% if [<tag>] :intersection[<saveTiddler>get<tagField>enlist-input[]] %>
+		<!-- tag has been removed - do nothing -->
+	<% else %>
+		<<actions>>
+	<% endif %>
 	<<delete-tag-state-tiddlers>>
-</$list>
+	<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
+</$let>
+\end
+<!-- <$action-log  /> -->
+
+<!-- ESC key removes the text from the input
+The second ESC tries to close the "draft tiddler"
+-->
+\procedure clear-tags-actions-inner()
+<% if [<storeTitle>has[text]] ~[<newTagNameTiddler>has[text]] %>
+	<<delete-tag-state-tiddlers>>
+<% else %>
+		<<cancel-delete-tiddler-actions "cancel">>
+<% endif %>
 \end
 
+<!-- triggered by keyboard only -->
 \procedure clear-tags-actions()
-\whitespace trim
-<$let userInput=<<userInput>>>
-	<$list
-		filter="[<newTagNameTiddler>get[text]!match<userInput>]"
-		emptyMessage="<<clear-tags-actions-inner>>"
-	>
+<$let userInput=<<_tf.getUserInput>> >
+	<!-- this list __cannot__ be transformed to conditional IF. The list variable is used! -->
+	<$list filter="[<newTagNameTiddler>get[text]!match<userInput>]" >
+		<$list-empty>
+			<<clear-tags-actions-inner>>
+		</$list-empty>
 		<$action-setfield $tiddler=<<newTagNameTiddler>> text=<<userInput>>/>
 		<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 	</$list>
 </$let>
 \end
 
+<!-- similar to add-tag-actions __but__ add-only -->
 \procedure add-button-actions()
 <$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter="[<tag>trim[]]"/>
 <<actions>>
 <<delete-tag-state-tiddlers>>
-<$action-sendmessage $message="tm-focus-selector" $param=<<get-tagpicker-focus-selector>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<tf.get-tagpicker-focus-selector>>/>
 \end
+<!-- <$action-log /> -->
 
-\procedure list-tags(filter, suffix)
-\whitespace trim
-<$list
-	filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]"
-	emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem"
->
-	<$list filter=<<filter>> variable="tag">
-		<$let
-			button-classes=`tc-btn-invisible ${ [<tag>addsuffix<suffix>] -[<tagSelectionState>get[text]] :then[[]] ~tc-tag-button-selected }$`
-			currentTiddler=<<tag>>
-		>
-			{{||$:/core/ui/TagPickerTagTemplate}}
-		</$let>
-	</$list>
-</$list>
-\end
-
-\procedure tag-picker-inner()
-\whitespace trim
-<$let
-	newTagNameInputTiddlerQualified=<<qualify "$:/temp/NewTagName/input">>
-	newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">>
-	fallbackTarget={{{ [<palette>getindex[tag-background]] }}}
-	colourA={{{ [<palette>getindex[foreground]] }}}
-	colourB={{{ [<palette>getindex[background]] }}}
-
-	storeTitle={{{ [<newTagNameInputTiddler>!match[]] ~[<newTagNameInputTiddlerQualified>] }}}
-	tagSelectionState={{{ [<newTagNameSelectionTiddler>!match[]] ~[<newTagNameSelectionTiddlerQualified>] }}}
-	tagAutoComplete=<<qualify "$:/state/popup/tags-auto-complete">>
-
-	refreshTitle=<<qualify "$:/temp/NewTagName/refresh">> 
-	nonSystemTagsFilter="[tags[]!is[system]search:title<userInput>sort[]]"
-	systemTagsFilter="[tags[]is[system]search:title<userInput>sort[]]"
->
-	<div class="tc-edit-add-tag">
-		<div>
-			<span class="tc-add-tag-name tc-small-gap-right">
-				<$transclude
-					$variable="keyboard-driven-input"
-					tiddler=<<newTagNameTiddler>>
-					storeTitle=<<storeTitle>>
-					refreshTitle=<<refreshTitle>>
-					selectionStateTitle=<<tagSelectionState>>
-					inputAcceptActions=<<add-tag-actions>>
-					inputCancelActions=<<clear-tags-actions>>
-					tag="input"
-					placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
-					focusPopup=<<tagAutoComplete>>
-					class="tc-edit-texteditor tc-popup-handle"
-					tabindex=<<tabIndex>>
-					focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}
-					filterMinLength={{$:/config/Tags/MinLength}}
-					cancelPopups=<<cancelPopups>>
-					configTiddlerFilter="[[$:/core/macros/tag-picker]]"
-				/>
-			</span>
-			<$button popup=<<tagAutoComplete>> 
-				class="tc-btn-invisible tc-btn-dropdown"
-				tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}}
-				aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}
+<!-- create dropdown list -->
+\procedure tag-picker-listTags(filter, suffix)
+<$let userInput=<<_tf.getUserInput>> >
+	<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]"
+		emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem"
+	>
+		<$list filter=<<filter>> variable="tag">
+			<!-- The buttonClasses filter is used to define tc-tag-button-selected state -->
+			<!-- tf.get-tagpicker-focus-selector has to be resolved for $:/core/ui/TagPickerTagTemplate,
+				othwerwise qualify in tf.tagpicker-dropdown-id causes problems -->
+			<$let currentTiddler=<<tag>>
+				button-classes=`tc-btn-invisible ${[<tag>addsuffix<suffix>] -[<tagSelectionState>get[text]] :then[[]] ~tc-tag-button-selected }$`
+				get-tagpicker-focus-selector=`${[<tf.get-tagpicker-focus-selector>]}$`
 			>
-				{{$:/core/images/down-arrow}}
-			</$button>
-			<$reveal state=<<storeTitle>> type="nomatch" text="">
-				<$button actions=<<delete-tag-state-tiddlers>>
-					class="tc-btn-invisible tc-small-gap tc-btn-dropdown"
-					tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}}
-					aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}
-				>
-					{{$:/core/images/close-button}}
-				</$button>
-			</$reveal>
-			<span class="tc-add-tag-button tc-small-gap-left">
-				<$let tag=<<tag>>>
-					<$button set=<<newTagNameTiddler>> setTo=""
-						actions=<<add-button-actions>>
-					>
-						{{$:/language/EditTemplate/Tags/Add/Button}}
-					</$button>
-				</$let>
-			</span>
-		</div>
-		<div class="tc-block-dropdown-wrapper">
-			<$reveal state=<<tagAutoComplete>> type="nomatch" text="">
-				<div class="tc-block-dropdown tc-block-tags-dropdown">
-					<$let userInput=<<userInput>>>
-						<$transclude $variable="list-tags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" />
-						<hr>
-						<$transclude $variable="list-tags" filter=<<systemTagsFilter>> suffix="-secondaryList" />
-					</$let>
-				</div>
-			</$reveal>
-		</div>
-	</div>
+				{{||$:/core/ui/TagPickerTagTemplate}}
+			</$let>
+		</$list>
+	</$list>
 </$let>
 \end
 
-\procedure tag-picker(actions, tagField:"tags")
-\function userInput() [<storeTitle>get[text]]
-\function tag() [<newTagNameTiddler>get[text]]
-\whitespace trim
+<!-- tag-picker-inner is the main function -->
+\procedure tag-picker-inner()
+<div class={{{ [[tc-edit-add-tag]] [<tf.tagpicker-dropdown-class>] +[join[ ]] }}}>
+	<div class="tc-edit-add-tag-ui">
+		<span class="tc-add-tag-name tc-small-gap-right">
+			<$macrocall	$name="keyboard-driven-input"
+				tiddler=<<newTagNameTiddler>>
+				storeTitle=<<storeTitle>>
+				refreshTitle=<<refreshTitle>>
+				selectionStateTitle=<<tagSelectionState>>
+				inputAcceptActions=<<add-tag-actions>>
+				inputCancelActions=<<clear-tags-actions>>
+				tag="input"
+				placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}}
+				focusPopup=<<tf.tagpicker-dropdown-id>>
+				class="tc-edit-texteditor tc-popup-handle"
+				tabindex=<<tabIndex>>
+				focus={{{ [{$:/config/AutoFocus}match[tags]then[true]] ~[[false]] }}}
+				filterMinLength={{$:/config/Tags/MinLength}}
+				cancelPopups=<<cancelPopups>>
+				configTiddlerFilter="[[$:/core/macros/tag-picker]]"
+			/>
+		</span>
+		<$button popup=<<tf.tagpicker-dropdown-id>> class="tc-btn-invisible tc-btn-dropdown"
+			tooltip={{$:/language/EditTemplate/Tags/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Tags/Dropdown/Caption}}
+		>
+			{{$:/core/images/down-arrow}}
+		</$button>
+		<% if [<storeTitle>has[text]] %>
+			<$button actions=<<delete-tag-state-tiddlers>> class="tc-btn-invisible tc-small-gap tc-btn-dropdown"
+				tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}} aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}
+			>
+				{{$:/core/images/close-button}}
+			</$button>
+		<% endif %>
+		<span class="tc-add-tag-button tc-small-gap-left">
+			<$let tag=<<_tf.getTag>>>
+				<$button set=<<newTagNameTiddler>> actions=<<add-button-actions>> >
+					{{$:/language/EditTemplate/Tags/Add/Button}}
+				</$button>
+			</$let>
+		</span>
+	</div>
+	<div class="tc-block-dropdown-wrapper">
+		<% if [<tf.tagpicker-dropdown-id>has[text]] %>
+			<div class="tc-block-dropdown tc-block-tags-dropdown">
+				<$macrocall $name="tag-picker-listTags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" />
+				<hr>
+				<$macrocall $name="tag-picker-listTags" filter=<<systemTagsFilter>> suffix="-secondaryList" />
+			</div>
+		<% endif %>
+	</div>
+</div>
+\end
+
+<!-- prepare all variables for tag-picker keyboard handling -->
+\procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]]")
+
+\function _tf.getUserInput() [<storeTitle>get[text]]
+\function _tf.getTag() [<newTagNameTiddler>get[text]]
+
+<!-- keep those variables because they may "blead" into macros using old syntax -->
 <$let
-	saveTiddler=<<currentTiddler>>
 	palette={{$:/palette}}
-	qualified=<<qualify "$:/temp/NewTagName">>
-	newTagNameTiddler={{{ [<newTagNameTiddler>!match[]] ~[<qualified>] }}}
+	colourA={{{ [<palette>getindex[foreground]] }}}
+	colourB={{{ [<palette>getindex[background]] }}}
+	fallbackTarget={{{ [<palette>getindex[tag-background]] }}}
+
+	saveTiddler={{{ [<tiddler>is[blank]then<currentTiddler>else<tiddler>] }}}
+
+	newTagNameTiddler={{{ [[$:/temp/NewTagName]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]] }}}
+	storeTitle={{{ [[$:/temp/NewTagName/input]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]] }}}
+
+	newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">>
+	tagSelectionState={{{ [<newTagNameSelectionTiddler>!match[]] ~[<newTagNameSelectionTiddlerQualified>] }}}
+
+	refreshTitle=<<qualify "$:/temp/NewTagName/refresh">>
+
+	nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]"
+	systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>sort[]]"
+
+	cancelPopups="yes"
 >
-	<$transclude $variable="tag-picker-inner" />
+	<$macrocall $name="tag-picker-inner"/>
 </$let>
 \end
