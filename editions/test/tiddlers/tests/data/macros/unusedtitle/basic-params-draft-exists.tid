@@ -1,0 +1,27 @@
+title: Macros/unusedtitle/basic-draft-exists
+description: test <<unusedtitle>> with basic macro parameters but they are empty
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Draft of 'test'
+draft.of: test
+draft.title: test
+
++
+title: Draft of 'asdf 0'
+draft.of: asdf 0
+draft.title: asdf 0
+
++
+title: Output
+
+<!-- hanled in wiki.js -->
+<<unusedtitle baseName:"test">>
+
+<!-- handled in unusedtitle.js -->
+<<unusedtitle baseName:"asdf" separator:" " template:"$basename$$separator$$count:1$">>
+
++
+title: ExpectedResult
+
+<p>test 1</p><p>asdf 1</p>
