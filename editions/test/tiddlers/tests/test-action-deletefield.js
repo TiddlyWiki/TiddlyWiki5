@@ -61,12 +61,15 @@ function generateTestConditions() {
 			$tw.utils.each([true, false], function(targetFieldExists) {
 				$tw.utils.each([true, false], function(fieldArgumentIsUsed) {
 					$tw.utils.each([true, false], function(modifiedFieldExists) {
-						conditions.push({
-							tiddlerArgumentIsPresent: tiddlerArgumentIsPresent,
-							targetTiddlerExists: targetTiddlerExists,
-							targetFieldExists: targetFieldExists,
-							fieldArgumentIsUsed: fieldArgumentIsUsed,
-							modifiedFieldExists: modifiedFieldExists,
+						$tw.utils.each(["", "yes", "no"], function(timestampArgument) {
+							conditions.push({
+								tiddlerArgumentIsPresent: tiddlerArgumentIsPresent,
+								targetTiddlerExists: targetTiddlerExists,
+								targetFieldExists: targetFieldExists,
+								fieldArgumentIsUsed: fieldArgumentIsUsed,
+								modifiedFieldExists: modifiedFieldExists,
+								timestampArgument: timestampArgument,
+							});
 						});
 					});
 				});
@@ -82,6 +85,7 @@ function generateActionWikitext(condition, targetField) {
 		"<$action-deletefield",
 		(condition.tiddlerArgumentIsPresent ? "$tiddler='" + TEST_TIDDLER_TITLE + "'" : ""),
 		(condition.fieldArgumentIsUsed ? "$field='" + targetField + "'" : targetField),
+		(condition.timestampArgument !== "" ? "$timestamp='" + condition.timestampArgument + "'" : ""),
 		"/>",
 	];
 
@@ -131,18 +135,19 @@ it("should correctly delete fields", function() {
 				expect(tiddler.hasField(field)).withContext(testContext).toBeFalsy();
 
 				var targetFieldWasPresent = originalTiddler.hasField(field);
+				var updateTimestamps = condition.timestampArgument !== "no";
 
-				// "created" should exist if it did beforehand, or if the tiddler changed
-				var createdFieldShouldExist = originalTiddler.hasField("created") || targetFieldWasPresent;
+				// "created" should exist if it did beforehand, or if the tiddler changed and we asked the widget to update timestamps
+				var createdFieldShouldExist = originalTiddler.hasField("created") || (targetFieldWasPresent && updateTimestamps);
 
-				// "created" should change only if it didn't exist beforehand and the tiddler changed
-				var createdFieldShouldChange = !originalTiddler.hasField("created") && targetFieldWasPresent;
+				// "created" should change only if it didn't exist beforehand and the tiddler changed and we asked the widget to update timestamps
+				var createdFieldShouldChange = !originalTiddler.hasField("created") && (targetFieldWasPresent && updateTimestamps);
 
-				// "modified" should exist if it did beforehand, or if the tiddler changed
-				var modifiedFieldShouldExist = originalTiddler.hasField("modified") || targetFieldWasPresent;
+				// "modified" should exist if it did beforehand, or if the tiddler changed and we asked the widget to update timestamps
+				var modifiedFieldShouldExist = originalTiddler.hasField("modified") || (targetFieldWasPresent && updateTimestamps);
 
-				// "modified" should change if the tiddler changed
-				var modifiedFieldShouldChange = targetFieldWasPresent;
+				// "modified" should change if the tiddler changed and we asked the widget to update timestamps
+				var modifiedFieldShouldChange = targetFieldWasPresent && updateTimestamps;
 
 				expect(tiddler.hasField("created")).withContext(testContext).toBe(createdFieldShouldExist);
 				expect(tiddler.hasField("modified")).withContext(testContext).toBe(modifiedFieldShouldExist);

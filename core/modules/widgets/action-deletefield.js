@@ -37,6 +37,7 @@ Compute the internal state of the widget
 DeleteFieldWidget.prototype.execute = function() {
 	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
 	this.actionField = this.getAttribute("$field",null);
+	this.actionTimestamp = this.getAttribute("$timestamp","yes") === "yes";
 };
 
 /*
@@ -75,7 +76,9 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 			}
 		});
 		if(hasChanged) {
-			this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,removeFields,this.wiki.getModificationFields()));
+			var creationFields = this.actionTimestamp ? this.wiki.getCreationFields() : {};
+			var modificationFields = this.actionTimestamp ? this.wiki.getModificationFields() : {};
+			this.wiki.addTiddler(new $tw.Tiddler(creationFields,tiddler,removeFields,modificationFields));
 		}
 	}
 	return true; // Action was invoked
