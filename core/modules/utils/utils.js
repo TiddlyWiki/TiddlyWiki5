@@ -820,6 +820,15 @@ exports.hashString = function(str) {
 };
 
 /*
+Cryptographic hash function as used by sha256 filter operator
+options.length .. number of characters returned defaults to 64
+*/
+exports.sha256 = function(str, options) {
+	options = options || {}
+	return sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
+}
+
+/*
 Base64 utility functions that work in either browser or Node.js
 */
 if(typeof window !== 'undefined') {
@@ -922,7 +931,7 @@ IE does not have sign function
 */
 exports.sign = Math.sign || function(x) {
 	x = +x; // convert to a number
-	if (x === 0 || isNaN(x)) {
+	if(x === 0 || isNaN(x)) {
 		return x;
 	}
 	return x > 0 ? 1 : -1;
@@ -935,7 +944,7 @@ exports.strEndsWith = function(str,ending,position) {
 	if(str.endsWith) {
 		return str.endsWith(ending,position);
 	} else {
-		if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
+		if(typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > str.length) {
 			position = str.length;
 		}
 		position -= ending.length;

@@ -202,7 +202,7 @@ Extended filter operators to manipulate the current list.
 		}
 		if(resultsIndex !== -1) {
 			i = i + step;
-			nextOperandIndex = (i < opLength ? i : i - opLength);
+			nextOperandIndex = (i < opLength ? i : i % opLength);
 			if(operands.length > 1) {
 				results.splice(resultsIndex,1,operands[nextOperandIndex]);
 			} else {
