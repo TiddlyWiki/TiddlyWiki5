@@ -69,7 +69,9 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		$tw.utils.each(this.attributes,function(attribute,name) {
 			if(name.charAt(0) !== "$" && name !== "title") {
 				removeFields[name] = undefined;
-				hasChanged = true;
+				if(name in tiddler.fields) {
+					hasChanged = true;
+				}
 			}
 		});
 		if(hasChanged) {
