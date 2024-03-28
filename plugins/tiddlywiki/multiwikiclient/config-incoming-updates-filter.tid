@@ -1,2 +1,2 @@
 title: $:/config/multiwikiclient/incoming-updates-filter
-text: [all[]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]] -[[$:/StoryList]] -[[$:/HistoryList]]
+text: [all[]] -[[$:/isEncrypted]] -[prefix[$:/temp/]] -[prefix[$:/status/]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/library/sjcl.js]] -[[$:/core]] -[prefix[$:/StoryList]] -[prefix[$:/HistoryList]]
