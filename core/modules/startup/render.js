@@ -81,6 +81,8 @@ exports.startup = function() {
 		deferredChanges = Object.create(null);
 		$tw.hooks.invokeHook("th-page-refreshed");
 	}
+	var throttledRefresh = $tw.perf.report("throttledRefresh",refresh);
+
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
 		// Check if only tiddlers that are throttled have changed
@@ -101,7 +103,7 @@ exports.startup = function() {
 			if(isNaN(timeout)) {
 				timeout = THROTTLE_REFRESH_TIMEOUT;
 			}
-			timerId = setTimeout(refresh,timeout);
+			timerId = setTimeout(throttledRefresh,timeout);
 			$tw.utils.extend(deferredChanges,changes);
 		} else {
 			$tw.utils.extend(deferredChanges,changes);
