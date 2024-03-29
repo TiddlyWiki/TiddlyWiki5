@@ -1,0 +1,14 @@
+{
+	"description": "Base edition for WebDAV integration",
+	"plugins": [
+		"tiddlywiki/webdav"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","tiddlywebdav.html","text/plain"]
+	}
+}
