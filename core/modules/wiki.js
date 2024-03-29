@@ -534,8 +534,8 @@ Return an array of tiddler titles that link to the specified tiddler
 */
 exports.getTiddlerBacklinks = function(targetTitle) {
 	var self = this,
-		backlinksIndexer = this.getIndexer("BacklinksIndexer"),
-		backlinks = backlinksIndexer && backlinksIndexer.lookup(targetTitle);
+		backIndexer = this.getIndexer("BackIndexer"),
+		backlinks = backIndexer && backIndexer.subIndexers.link.lookup(targetTitle);
 
 	if(!backlinks) {
 		backlinks = [];
@@ -547,6 +547,68 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 		});
 	}
 	return backlinks;
+};
+
+
+/*
+Return an array of tiddler titles that are directly transcluded within the given parse tree
+ */
+exports.extractTranscludes = function(parseTreeRoot) {
+	// Count up the transcludes
+	var transcludes = [],
+		checkParseTree = function(parseTree, parentNode) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.$tiddler && parseTreeNode.attributes.$tiddler.type === "string") {
+					var value;
+					// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
+					if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
+						value = parentNode.attributes.tiddler.value;
+					} else {
+						value = parseTreeNode.attributes.$tiddler.value;
+					}
+					if(transcludes.indexOf(value) === -1) {
+						transcludes.push(value);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children, parseTreeNode);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return transcludes;
+};
+
+
+/*
+Return an array of tiddler titles that are transcluded from the specified tiddler
+*/
+exports.getTiddlerTranscludes = function(title) {
+	var self = this;
+	// We'll cache the transcludes so they only get computed if the tiddler changes
+	return this.getCacheForTiddler(title,"transcludes",function() {
+		// Parse the tiddler
+		var parser = self.parseTiddler(title);
+		if(parser) {
+			return self.extractTranscludes(parser.tree);
+		}
+		return [];
+	});
+};
+
+/*
+Return an array of tiddler titles that transclude to the specified tiddler
+*/
+exports.getTiddlerBacktranscludes = function(targetTitle) {
+	var self = this,
+		backIndexer = this.getIndexer("BackIndexer"),
+		backtranscludes = backIndexer && backIndexer.subIndexers.transclude.lookup(targetTitle);
+
+	if(!backtranscludes) {
+		backtranscludes = [];
+	}
+	return backtranscludes;
 };
 
 /*

@@ -1,0 +1,16 @@
+title: Macros/MismatchedNamedEnd
+description: Mismatched named end is part of the body
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\define hello()
+ \end goodbye
+\end
+
+Out: <<hello>>
++
+title: ExpectedResult
+
+<p>Out:  \end goodbye</p>

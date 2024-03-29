@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: Покажува помош за ТидлиВики команди
+
+Displays help text for a command:
+
+```
+--help [<command>]
+```
+
+If the command name is omitted then a list of available commands is displayed.

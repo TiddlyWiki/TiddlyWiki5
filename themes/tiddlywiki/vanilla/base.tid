@@ -931,6 +931,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-page-controls {
 	margin-top: 14px;
+	margin-bottom: 14px;
 	font-size: 1.5em;
 }
 
@@ -1335,6 +1336,7 @@ canvas.tc-edit-bitmapeditor  {
 	clear: both;
 }
 
+.tc-single-tiddler-window .tc-tiddler-body,
 .tc-tiddler-frame .tc-tiddler-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
@@ -1343,6 +1345,11 @@ canvas.tc-edit-bitmapeditor  {
 .tc-titlebar, .tc-tiddler-edit-title {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
 }
+
+/*
+* Tiddler in a new window.
+* Also see: .tc-single-tiddler-window .tc-tiddler-body, above
+*/
 
 html body.tc-body.tc-single-tiddler-window {
 	margin: 1em;
@@ -1577,10 +1584,6 @@ html body.tc-body.tc-single-tiddler-window {
 	padding-left: 4px;
 }
 
-.tc-tiddler-preview {
-	overflow: auto;
-}
-
 .tc-tiddler-editor {
 	display: grid;
 }
@@ -1589,7 +1592,7 @@ html body.tc-body.tc-single-tiddler-window {
 	grid-template-areas:
 		"toolbar toolbar"
 		"editor preview";
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: repeat(2, minmax(0px, 1fr));
 	grid-template-rows: auto 1fr;
 }
 

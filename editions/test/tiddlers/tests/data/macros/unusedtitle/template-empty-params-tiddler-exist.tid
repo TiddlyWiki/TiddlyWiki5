@@ -1,0 +1,50 @@
+title: Macros/unusedtitle/template-empty-params-tiddler-exist
+description: test <<unusedtitle>> with templates where parameters are empty
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: New Tiddler
+
++
+title: xxx
+
++
+title: 00-New Tiddler
+
++
+title: 0000 asdf
+
++
+title: 0001 asdf
+
++
+title: 0000 abc
+
++
+title: Output
+
+<!-- empty template - no template handling at all -->
+<<unusedtitle template:"">>
+
+<!--
+	uses basename AND separator if tiddler exists
+	because it uses default naming build rules - no template handling
+-->
+<<unusedtitle template:"" separator:"-y-" baseName:"xxx">>
+
+<<unusedtitle baseName:"" template:"$count:2$-$basename$">>
+
+<!-- 
+	EDGECASE: if separator is empty it will be initialized with a single space " "
+	to have the same rules for templates and default title creation
+-->
+<<unusedtitle baseName:"asdf" separator:"" template:"$count:4$$separator$$basename$">>
+
+<!-- separator = " " -->
+<<unusedtitle baseName:"abc" separator:" " template:"$count:4$$separator$$basename$">>
+
+
++
+title: ExpectedResult
+
+<p>New Tiddler 1</p><p>xxx-y-1</p><p>01-New Tiddler</p><p>0002 asdf</p><p>0001 abc</p>

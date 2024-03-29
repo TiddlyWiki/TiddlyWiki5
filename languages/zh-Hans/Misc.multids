@@ -31,7 +31,7 @@ Error/Filter: 筛选器错误
 Error/FilterRunPrefix: 筛选器错误：筛选器 run 的未知首码
 Error/FilterSyntax: 筛选器运算式中的语法错误
 Error/FormatFilterOperator: 筛选器错误：`format` 筛选器运算符的未知尾码
-Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算符的未知操作数
+Error/IsFilterOperator: 筛选器错误︰'is' 筛选器运算子的未知参数
 Error/LoadingPluginLibrary: 加载插件库时，发生错误
 Error/NetworkErrorAlert: `<h2>''网络错误''</h2>与服务器的连缐似乎已中断。这可能表示您的网络连缐有问题。请尝试恢复网路连缐才能继续。<br><br>''恢复连缐时，所有未保存的更改，将自动同步''。`
 Error/PutEditConflict: 服务器上的文件已更改

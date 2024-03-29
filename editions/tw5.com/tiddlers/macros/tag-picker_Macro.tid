@@ -1,6 +1,6 @@
 caption: tag-picker
 created: 20161128191316701
-modified: 20161128191435641
+modified: 20230616114543787
 tags: Macros [[Core Macros]]
 title: tag-picker Macro
 type: text/vnd.tiddlywiki
@@ -9,9 +9,17 @@ The <<.def tag-picker>> [[macro|Macros]] generates a combination of a text box a
 
 !! Parameters
 
-;actions
-: Action widgets to be triggered when the pill is clicked. Within the text, the variable ''tag'' contains the title of the selected tag.
-;tagField
-: <<.from-version 5.1.23>> The ''field'' that gets updated with the selected tag. Defaults to ''tags''.
+; actions
+: Action widgets to be triggered when the pill is clicked. Within the text, the variable <<.var tag>> contains the title of the selected tag.
+
+; tagField
+: <<.from-version 5.1.23>> The specified ''field'' that gets updated with the selected tag. Defaults to `tags`.
+
+; tiddler
+: <<.from-version 5.3.4>> Defines the target tiddler, which should be manipulated. Defaults to: <<.var currentTiddler>>.
+
+; tagListFilter
+: <<.from-version 5.3.4>> This parameter defaults to: `[tags[]]` which creates a list of all existing tags. If the tag list should come from a different source the filter should look similar to eg: `[<listSource>get[field-name]enlist-input[]]`. 
+
 
 <<.macro-examples "tag-picker">>
