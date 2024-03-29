@@ -1,0 +1,19 @@
+title: $:/core/ui/RootStylesheet
+code-body: yes
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+\whitespace trim
+
+<$set name="currentTiddler" value={{$:/language}}>
+
+<$set name="languageTitle" value={{!!name}}>
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+<style type="text/css">
+<$transclude mode="block"/>
+</style>
+</$list>
+
+</$set>
+
+</$set>
