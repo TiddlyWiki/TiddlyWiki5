@@ -92,13 +92,19 @@ exports.startup = function() {
 						$tw.styleElements[i].innerHTML = newStyles;
 					}
 				}
-				for(var i=0; i<$tw.styleWidgets.length; i++) {
-					if($tw.styleElements[i] && styleWidgets.indexOf($tw.styleWidgets[i]) === -1) {
-						document.head.removeChild($tw.styleElements[i]);
-						$tw.styleElements.splice(i,1);
+				if(styleWidgets.length < $tw.styleElements.length) {
+					var removedElements = [];
+					for(var i=0; i<$tw.styleWidgets.length; i++) {
+						if($tw.styleElements[i] && styleWidgets.indexOf($tw.styleWidgets[i]) === -1) {
+							document.head.removeChild($tw.styleElements[i]);
+							removedElements.push(i);
+						}
+					}
+					for(i=0; i<removedElements.length; i++) {
+						var index = removedElements[i];
+						$tw.styleElements.splice(index,1);
 					}
 				}
-				$tw.styleWidgets = styleWidgets;
 			} else if(styleWidgets.length === 0) {
 				for(var i=($tw.styleWidgets.length - 1); i>=1; i--) {
 					if($tw.styleElements[i]) {
@@ -110,8 +116,8 @@ exports.startup = function() {
 				if(newStyles !== $tw.styleElements[0].textContent) {
 					$tw.styleElements[0].innerHTML = newStyles;
 				}
-				$tw.styleWidgets = styleWidgets;
 			}
+			$tw.styleWidgets = styleWidgets;
 		}
 	}));
 

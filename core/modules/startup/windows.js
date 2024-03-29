@@ -82,6 +82,7 @@ exports.startup = function() {
 			styleContainer = $tw.fakeDocument.createElement("style");
 		styleWidgetNode.render(styleContainer,null);
 		
+		$tw.windows[windowID].styleWidgets = getStyleWidgets(styleWidgetNode);
 		$tw.windows[windowID].styleElements = [];
 		var styleTags = srcDocument.head.getElementsByTagName("style"),
 			lastStyleTag = styleTags[styleTags.length - 1],
@@ -112,8 +113,8 @@ exports.startup = function() {
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
-				var styleWidgets = getStyleWidgets($tw.styleWidgetNode);
-				if(styleWidgets.length && styleWidgets !== $tw.styleWidgets) {
+				var styleWidgets = getStyleWidgets(styleWidgetNode);
+				if(styleWidgets.length && styleWidgets !== $tw.windows[windowID].styleWidgets) {
 					for(var i=0; i<styleWidgets.length; i++) {
 						var newStyles = styleWidgets[i].textContent;
 						if(!$tw.windows[windowID].styleElements[i]) {
@@ -125,24 +126,32 @@ exports.startup = function() {
 							$tw.windows[windowID].styleElements[i].innerHTML = newStyles;
 						}
 					}
-					for(var i=0; i<$tw.styleWidgets.length; i++) {
-						if($tw.styleElements[i] && styleWidgets.indexOf($tw.styleWidgets[i]) === -1) {
-							srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
-							$tw.windows[windowID].styleElements.splice(i,1);
+					if(styleWidgets.length < $tw.windows[windowID].styleElements.length) {
+						var removedElements = [];
+						for(var i=0; i<$tw.windows[windowID].styleWidgets.length; i++) {
+							if($tw.windows[windowID].styleElements[i] && styleWidgets.indexOf($tw.windows[windowID].styleWidgets[i]) === -1) {
+								srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
+								removedElements.push(i);
+							}
+						}
+						for(i=0; i<removedElements.length; i++) {
+							var index = removedElements[i];
+							$tw.windows[windowID].styleElements.splice(index,1);
 						}
 					}
 				} else if(styleWidgets.length === 0) {
-					for(var i=($tw.styleWidgets.length - 1); i>=1; i--) {
+					for(var i=($tw.windows[windowID].styleWidgets.length - 1); i>=1; i--) {
 						if($tw.styleElements[i]) {
 							srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
 							$tw.windows[windowID].styleElements.splice(i,1);
 						}
 					}
-					var newStyles = $tw.styleContainer.textContent;
-					if(newStyles !== $tw.styleElements[0].textContent) {
+					var newStyles = styleContainer.textContent;
+					if(newStyles !== $tw.windows[windowID].styleElements[0].textContent) {
 						$tw.windows[windowID].styleElements[0].innerHTML = newStyles;
 					}
 				}
+				$tw.windows[windowID].styleWidgets = styleWidgets;
 			}
 			widgetNode.refresh(changes);
 		};
