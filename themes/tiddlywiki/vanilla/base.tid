@@ -65,12 +65,6 @@ $else$
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
-/*
-** Start with the normalize CSS reset, and then belay some of its effects
-*/
-
-{{$:/themes/tiddlywiki/vanilla/reset}}
-
 *, input[type="search"] {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;

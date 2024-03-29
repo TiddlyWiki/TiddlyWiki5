@@ -1,4 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/reset
+tags: $:/tags/Stylesheet
+list-before: $:/themes/tiddlywiki/vanilla/base
 type: text/css
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
