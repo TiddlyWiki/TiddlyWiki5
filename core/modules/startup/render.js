@@ -77,7 +77,7 @@ exports.startup = function() {
 		document.head.insertBefore(styleElement,insertBeforeElement);
 	}
 
-	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
+	var styleWidgetRefreshHandler = function(changes) {
 		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
 			var styleWidgets = getStyleWidgets($tw.styleWidgetNode);
 			if(styleWidgets.length && styleWidgets !== $tw.styleWidgets) {
@@ -119,7 +119,9 @@ exports.startup = function() {
 			}
 			$tw.styleWidgets = styleWidgets;
 		}
-	}));
+	};
+
+	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",styleWidgetRefreshHandler));
 
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
