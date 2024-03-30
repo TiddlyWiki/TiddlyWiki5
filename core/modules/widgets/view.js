@@ -32,11 +32,12 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	var textNode;
 	if(this.viewUpdate && this.viewWikified) {
-		this.fakeWidget = this.wiki.makeTranscludeWidget(this.viewSubtiddler || this.viewTitle,{
+		this.fakeWidget = this.wiki.makeTranscludeWidget(this.viewTitle,{
 			document: $tw.fakeDocument,
 			field: this.viewField,
 			parseAsInline: this.viewMode !== "block",
-			parentWidget: this
+			parentWidget: this,
+			subTiddler: this.viewSubtiddler
 		});
 		this.fakeNode = $tw.fakeDocument.createElement("div");
 		this.fakeWidget.makeChildWidgets();
