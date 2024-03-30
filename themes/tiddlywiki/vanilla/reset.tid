@@ -3,6 +3,8 @@ tags: $:/tags/Stylesheet $:/tags/Stylesheet/Static
 list-before: $:/themes/tiddlywiki/vanilla/base
 type: text/css
 
+\rules only
+
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
