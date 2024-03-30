@@ -64,7 +64,8 @@ exports.startup = function() {
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 
-		function getStyleWidgets(widget,array = []) {
+		function getStyleWidgets(widget,array) {
+			array = array || [];
 			if(widget.parseTreeNode.type === "element" && widget.parseTreeNode.tag === "style") {
 				array.push(widget.domNodes[0]);
 			}
@@ -92,15 +93,16 @@ exports.startup = function() {
 		} else {
 			insertBeforeElement = srcDocument.head.firstChild;
 		}
+		var styleElement;
 		if($tw.styleWidgets.length) {
 			for(var i=0; i<$tw.styleWidgets.length; i++) {
-				var styleElement = srcDocument.createElement("style");
+				styleElement = srcDocument.createElement("style");
 				styleElement.innerHTML = $tw.styleWidgets[i].textContent;
 				$tw.windows[windowID].styleElements.push(styleElement);
 				srcDocument.head.insertBefore(styleElement,insertBeforeElement);
 			}
 		} else {
-			var styleElement = srcDocument.createElement("style");
+			styleElement = srcDocument.createElement("style");
 			styleElement.innerHTML = $tw.styleContainer.textContent;
 			$tw.windows[windowID].styleElements.push(styleElement);
 			srcDocument.head.insertBefore(styleElement,insertBeforeElement);
@@ -113,12 +115,13 @@ exports.startup = function() {
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
-				var styleWidgets = getStyleWidgets(styleWidgetNode);
+				var styleWidgets = getStyleWidgets(styleWidgetNode),
+					newStyles,i;
 				if(styleWidgets.length && styleWidgets !== $tw.windows[windowID].styleWidgets) {
-					for(var i=0; i<styleWidgets.length; i++) {
-						var newStyles = styleWidgets[i].textContent;
+					for(i=0; i<styleWidgets.length; i++) {
+						newStyles = styleWidgets[i].textContent;
 						if(!$tw.windows[windowID].styleElements[i]) {
-							var styleElement = srcDocument.createElement("style");
+							styleElement = srcDocument.createElement("style");
 							srcDocument.head.insertBefore(styleElement,$tw.windows[windowID].styleElements[i] || $tw.windows[windowID].styleElements[i - 1].nextSibling);
 							$tw.windows[windowID].styleElements.splice(i,0,styleElement);
 						}
@@ -128,7 +131,7 @@ exports.startup = function() {
 					}
 					if(styleWidgets.length < $tw.windows[windowID].styleElements.length) {
 						var removedElements = [];
-						for(var i=0; i<$tw.windows[windowID].styleWidgets.length; i++) {
+						for(i=0; i<$tw.windows[windowID].styleWidgets.length; i++) {
 							if($tw.windows[windowID].styleElements[i] && styleWidgets.indexOf($tw.windows[windowID].styleWidgets[i]) === -1) {
 								srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
 								removedElements.push(i);
@@ -140,13 +143,13 @@ exports.startup = function() {
 						}
 					}
 				} else if(styleWidgets.length === 0) {
-					for(var i=($tw.windows[windowID].styleWidgets.length - 1); i>=1; i--) {
+					for(i=($tw.windows[windowID].styleWidgets.length - 1); i>=1; i--) {
 						if($tw.styleElements[i]) {
 							srcDocument.head.removeChild($tw.windows[windowID].styleElements[i]);
 							$tw.windows[windowID].styleElements.splice(i,1);
 						}
 					}
-					var newStyles = styleContainer.textContent;
+					newStyles = styleContainer.textContent;
 					if(newStyles !== $tw.windows[windowID].styleElements[0].textContent) {
 						$tw.windows[windowID].styleElements[0].innerHTML = newStyles;
 					}

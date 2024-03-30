@@ -39,7 +39,8 @@ exports.startup = function() {
 		}
 	});
 
-	function getStyleWidgets(widget,array = []) {
+	function getStyleWidgets(widget,array) {
+		array = array || [];
 		if(widget.parseTreeNode.type === "element" && widget.parseTreeNode.tag === "style") {
 			array.push(widget.domNodes[0]);
 		}
@@ -63,15 +64,16 @@ exports.startup = function() {
 	} else {
 		insertBeforeElement = document.head.firstChild;
 	}
+	var styleElement;
 	if($tw.styleWidgets.length) {
 		for(var i=0; i<$tw.styleWidgets.length; i++) {
-			var styleElement = document.createElement("style");
+			styleElement = document.createElement("style");
 			styleElement.innerHTML = $tw.styleWidgets[i].textContent;
 			$tw.styleElements.push(styleElement);
 			document.head.insertBefore(styleElement,insertBeforeElement);
 		}
 	} else {
-		var styleElement = document.createElement("style");
+		styleElement = document.createElement("style");
 		styleElement.innerHTML = $tw.styleContainer.textContent;
 		$tw.styleElements.push(styleElement);
 		document.head.insertBefore(styleElement,insertBeforeElement);
@@ -79,12 +81,13 @@ exports.startup = function() {
 
 	var styleWidgetRefreshHandler = function(changes) {
 		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
-			var styleWidgets = getStyleWidgets($tw.styleWidgetNode);
+			var styleWidgets = getStyleWidgets($tw.styleWidgetNode),
+				newStyles,i;
 			if(styleWidgets.length && styleWidgets !== $tw.styleWidgets) {
-				for(var i=0; i<styleWidgets.length; i++) {
-					var newStyles = styleWidgets[i].textContent;
+				for(i=0; i<styleWidgets.length; i++) {
+					newStyles = styleWidgets[i].textContent;
 					if(!$tw.styleElements[i]) {
-						var styleElement = document.createElement("style");
+						styleElement = document.createElement("style");
 						document.head.insertBefore(styleElement,$tw.styleElements[i] || $tw.styleElements[i - 1].nextSibling);
 						$tw.styleElements.splice(i,0,styleElement);
 					}
@@ -94,7 +97,7 @@ exports.startup = function() {
 				}
 				if(styleWidgets.length < $tw.styleElements.length) {
 					var removedElements = [];
-					for(var i=0; i<$tw.styleWidgets.length; i++) {
+					for(i=0; i<$tw.styleWidgets.length; i++) {
 						if($tw.styleElements[i] && styleWidgets.indexOf($tw.styleWidgets[i]) === -1) {
 							document.head.removeChild($tw.styleElements[i]);
 							removedElements.push(i);
@@ -106,13 +109,13 @@ exports.startup = function() {
 					}
 				}
 			} else if(styleWidgets.length === 0) {
-				for(var i=($tw.styleWidgets.length - 1); i>=1; i--) {
+				for(i=($tw.styleWidgets.length - 1); i>=1; i--) {
 					if($tw.styleElements[i]) {
 						document.head.removeChild($tw.styleElements[i]);
 						$tw.styleElements.splice(i,1);
 					}
 				}
-				var newStyles = $tw.styleContainer.textContent;
+				newStyles = $tw.styleContainer.textContent;
 				if(newStyles !== $tw.styleElements[0].textContent) {
 					$tw.styleElements[0].innerHTML = newStyles;
 				}
