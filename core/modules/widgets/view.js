@@ -226,7 +226,7 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else if(this.viewUpdate && this.fakeWidget) {
-		var refreshed = this.fakeWidget.refreshChildren(changedTiddlers);
+		var refreshed = this.fakeWidget.refresh(changedTiddlers);
 		if(refreshed) {
 			var newText = this.fakeNode.textContent;
 			if(newText !== this.text) {
