@@ -62,15 +62,19 @@ ViewWidget.prototype.execute = function() {
 	this.viewTemplate = this.getAttribute("template","");
 	this.viewMode = this.getAttribute("mode","block");
 	this.viewUpdate = this.getAttribute("update","no") === "yes";
+	this.viewWikified = false;
 	switch(this.viewFormat) {
 		case "htmlwikified":
 			this.text = this.getValueAsHtmlWikified(this.viewMode);
+			this.viewWikified = true;
 			break;
 		case "plainwikified":
 			this.text = this.getValueAsPlainWikified(this.viewMode);
+			this.viewWikified = true;
 			break;
 		case "htmlencodedplainwikified":
 			this.text = this.getValueAsHtmlEncodedPlainWikified(this.viewMode);
+			this.viewWikified = true;
 			break;
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
@@ -228,7 +232,7 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedAttributes.update || changedTiddlers[this.viewTitle]) {
 		this.refreshSelf();
 		return true;
-	} else if(this.viewUpdate && this.fakeWidget) {
+	} else if(this.viewUpdate && this.viewWikified) {
 		var refreshed = this.fakeWidget.refresh(changedTiddlers);
 		if(refreshed) {
 			var newText = this.fakeNode.textContent;
