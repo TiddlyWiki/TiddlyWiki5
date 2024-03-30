@@ -31,7 +31,7 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	var textNode;
-	if(this.viewUpdate) {
+	if(this.viewUpdate && this.viewWikified) {
 		this.fakeWidget = this.wiki.makeTranscludeWidget(this.viewTitle,{document: $tw.fakeDocument,importPageMacros: true});
 		this.fakeNode = $tw.fakeDocument.createElement("div");
 		this.fakeWidget.makeChildWidgets();
