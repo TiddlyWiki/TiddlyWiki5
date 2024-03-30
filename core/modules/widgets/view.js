@@ -241,7 +241,18 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 	} else if(this.viewUpdate && this.viewWikified) {
 		var refreshed = this.fakeWidget.refresh(changedTiddlers);
 		if(refreshed) {
-			var newText = this.fakeNode.textContent;
+			var newText;
+			switch(this.viewFormat) {
+				case "htmlwikified":
+					newText = this.fakeNode.innerHTML;
+					break;
+				case "plainwikified":
+					newText = this.fakeNode.textContent;
+					break;
+				case "htmlencodedplainwikified":
+					newText = $tw.utils.htmlEncode(this.fakeNode.textContent);
+					break;
+			}
 			if(newText !== this.text) {
 				this.domNodes[0].textContent = newText;
 				this.text = newText;
