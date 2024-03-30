@@ -30,16 +30,19 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	if(this.text) {
-		var textNode = this.document.createTextNode(this.text);
+	var textNode;
+	if(this.viewUpdate) {
+		this.fakeWidget = this.wiki.makeTranscludeWidget(this.viewTitle,{document: $tw.fakeDocument,importPageMacros: true});
+		this.fakeNode = $tw.fakeDocument.createElement("div");
+		this.fakeWidget.makeChildWidgets();
+		this.fakeWidget.renderChildren(this.fakeNode,null);
+		textNode = this.document.createTextNode(this.text || "");
 		parent.insertBefore(textNode,nextSibling);
 		this.domNodes.push(textNode);
-		if(this.viewUpdate) {
-			this.fakeWidget = this.wiki.makeTranscludeWidget(this.viewTitle,{document: $tw.fakeDocument,importPageMacros: true});
-			this.fakeNode = $tw.fakeDocument.createElement("div");
-			this.fakeWidget.makeChildWidgets();
-			this.fakeWidget.renderChildren(this.fakeNode,null);
-		}
+	} else if(this.text) {
+		textNode = this.document.createTextNode(this.text);
+		parent.insertBefore(textNode,nextSibling);
+		this.domNodes.push(textNode);
 	} else {
 		this.makeChildWidgets();
 		this.renderChildren(parent,nextSibling);
@@ -232,10 +235,9 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 			if(newText !== this.text) {
 				this.domNodes[0].textContent = newText;
 				this.text = newText;
-				return true;
 			}
 		}
-		return false;
+		return refreshed;
 	} else {
 		return false;
 	}
