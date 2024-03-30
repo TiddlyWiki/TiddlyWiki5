@@ -34,6 +34,12 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 		var textNode = this.document.createTextNode(this.text);
 		parent.insertBefore(textNode,nextSibling);
 		this.domNodes.push(textNode);
+		if(this.viewUpdate) {
+			this.fakeWidget = this.wiki.makeTranscludeWidget(this.viewTitle,{document: $tw.fakeDocument,importPageMacros: true});
+			this.fakeNode = $tw.fakeDocument.createElement("div");
+			this.fakeWidget.makeChildWidgets();
+			this.fakeWidget.renderChildren(this.fakeNode,null);
+		}
 	} else {
 		this.makeChildWidgets();
 		this.renderChildren(parent,nextSibling);
@@ -52,6 +58,7 @@ ViewWidget.prototype.execute = function() {
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
 	this.viewMode = this.getAttribute("mode","block");
+	this.viewUpdate = this.getAttribute("update","no") === "yes";
 	switch(this.viewFormat) {
 		case "htmlwikified":
 			this.text = this.getValueAsHtmlWikified(this.viewMode);
@@ -215,9 +222,20 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ViewWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedTiddlers[this.viewTitle]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedAttributes.update || changedTiddlers[this.viewTitle]) {
 		this.refreshSelf();
 		return true;
+	} else if(this.viewUpdate && this.fakeWidget) {
+		var refreshed = this.fakeWidget.refreshChildren(changedTiddlers);
+		if(refreshed) {
+			var newText = this.fakeNode.textContent;
+			if(newText !== this.text) {
+				this.domNodes[0].textContent = newText;
+				this.text = newText;
+				return true;
+			}
+		}
+		return false;
 	} else {
 		return false;
 	}
