@@ -194,7 +194,7 @@ ViewWidget.prototype.getValueAsRelativeDate = function(format) {
 	}
 };
 
-ViewWidget.prototype.getValueAsStrippedComments = function() {
+ViewWidget.prototype.getValueAsStrippedComments = function(srcText) {
 	var lines = this.getValueAsText().split("\n"),
 		out = [];
 	for(var line=0; line<lines.length; line++) {
@@ -208,6 +208,10 @@ ViewWidget.prototype.getValueAsStrippedComments = function() {
 
 ViewWidget.prototype.getValueAsJsEncoded = function() {
 	return $tw.utils.stringify(this.getValueAsText());
+};
+
+ViewWidget.prototype.stripComments = function(text) {
+	return text.replace(/\/\*[\s\S]*?\*\/|(?<=[^:])\/\/.*|^\/\/.*/g,'').trim();
 };
 
 /*
