@@ -68,6 +68,9 @@ exports.startup = function() {
 	if($tw.styleWidgets.length) {
 		for(var i=0; i<$tw.styleWidgets.length; i++) {
 			styleElement = document.createElement("style");
+			for(var key in $tw.styleWidgets[i].attributes) {
+				styleElement.setAttribute(key,$tw.styleWidgets[i].attributes[key]);
+			}
 			styleElement.innerHTML = $tw.styleWidgets[i].textContent;
 			$tw.styleElements.push(styleElement);
 			document.head.insertBefore(styleElement,insertBeforeElement);
@@ -88,6 +91,9 @@ exports.startup = function() {
 					newStyles = styleWidgets[i].textContent;
 					if(!$tw.styleElements[i]) {
 						styleElement = document.createElement("style");
+						for(var key in styleWidgets[i].attributes) {
+							styleElement.setAttribute(key,styleWidgets[i].attributes[key]);
+						}
 						document.head.insertBefore(styleElement,$tw.styleElements[i] || $tw.styleElements[i - 1].nextSibling);
 						$tw.styleElements.splice(i,0,styleElement);
 					}
