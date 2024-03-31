@@ -10,7 +10,7 @@ code-body: yes
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
 <style type="text/css">
-<$view format="plainwikified" update={{{ [<currentTiddler>!tag[$:/tags/Stylesheet/Static]then[yes]] }}}/>
+<$view format="plainwikified" stripcomments="yes" update={{{ [<currentTiddler>!tag[$:/tags/Stylesheet/Static]then[yes]] }}}/>
 </style>
 </$list>
 
