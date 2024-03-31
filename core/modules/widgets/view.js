@@ -30,23 +30,8 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var textNode;
-	if(this.viewUpdate && this.viewWikified) {
-		this.fakeWidget = this.wiki.makeTranscludeWidget(this.viewTitle,{
-			document: $tw.fakeDocument,
-			field: this.viewField,
-			parseAsInline: this.viewMode !== "block",
-			parentWidget: this,
-			subTiddler: this.viewSubtiddler
-		});
-		this.fakeNode = $tw.fakeDocument.createElement("div");
-		this.fakeWidget.makeChildWidgets();
-		this.fakeWidget.renderChildren(this.fakeNode,null);
-		textNode = this.document.createTextNode(this.text || "");
-		parent.insertBefore(textNode,nextSibling);
-		this.domNodes.push(textNode);
-	} else if(this.text) {
-		textNode = this.document.createTextNode(this.text);
+	if(this.text) {
+		var textNode = this.document.createTextNode(this.text);
 		parent.insertBefore(textNode,nextSibling);
 		this.domNodes.push(textNode);
 	} else {
@@ -67,20 +52,15 @@ ViewWidget.prototype.execute = function() {
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
 	this.viewMode = this.getAttribute("mode","block");
-	this.viewUpdate = this.getAttribute("update","no") === "yes";
-	this.viewWikified = false;
 	switch(this.viewFormat) {
 		case "htmlwikified":
 			this.text = this.getValueAsHtmlWikified(this.viewMode);
-			this.viewWikified = true;
 			break;
 		case "plainwikified":
 			this.text = this.getValueAsPlainWikified(this.viewMode);
-			this.viewWikified = true;
 			break;
 		case "htmlencodedplainwikified":
 			this.text = this.getValueAsHtmlEncodedPlainWikified(this.viewMode);
-			this.viewWikified = true;
 			break;
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
@@ -235,30 +215,9 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ViewWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedAttributes.update || changedTiddlers[this.viewTitle]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedTiddlers[this.viewTitle]) {
 		this.refreshSelf();
 		return true;
-	} else if(this.viewUpdate && this.viewWikified) {
-		var refreshed = this.fakeWidget.refresh(changedTiddlers);
-		if(refreshed) {
-			var newText;
-			switch(this.viewFormat) {
-				case "htmlwikified":
-					newText = this.fakeNode.innerHTML;
-					break;
-				case "plainwikified":
-					newText = this.fakeNode.textContent;
-					break;
-				case "htmlencodedplainwikified":
-					newText = $tw.utils.htmlEncode(this.fakeNode.textContent);
-					break;
-			}
-			if(newText !== this.text) {
-				this.domNodes[0].textContent = newText;
-				this.text = newText;
-			}
-		}
-		return refreshed;
 	} else {
 		return false;
 	}
