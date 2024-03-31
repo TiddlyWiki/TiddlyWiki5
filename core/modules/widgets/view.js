@@ -243,7 +243,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ViewWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedAttributes.update || changedTiddlers[this.viewTitle]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedAttributes.update || changedAttributes.stripcomments || changedTiddlers[this.viewTitle]) {
 		this.refreshSelf();
 		return true;
 	} else if(this.viewUpdate && this.viewWikified) {
