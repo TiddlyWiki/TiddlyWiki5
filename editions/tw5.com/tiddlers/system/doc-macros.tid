@@ -1,8 +1,8 @@
+code-body: yes
 created: 20150117152607000
-modified: 20240229155550000
+modified: 20240317091700545
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/doc-macros
-code-body: yes
 type: text/vnd.tiddlywiki
 
 \whitespace trim
@@ -165,7 +165,7 @@ This is an example tiddler. See [[Table-of-Contents Macros (Examples)]].
 				<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
 			</dl>
 			<blockquote class="doc-example-result">
-				<<eg>>
+				<$transclude $variable="eg" $mode="block"/>
 			</blockquote>
 		</$reveal>
 	</$list>
