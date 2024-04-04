@@ -25,6 +25,7 @@ title: $:/core/templates/tiddlywiki5.html
 `{{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/core/wiki/rawmarkup]] ||$:/core/templates/plain-text-tiddler}}}
 {{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}
 {{{ [enlist<saveTiddlerAndShadowsFilter>tag[$:/tags/RawMarkupWikified]] ||$:/core/templates/raw-static-tiddler}}}`
+<!--~~ Style section start ~~-->
 </head>
 <body class="tc-body">
 <!--~~ Raw markup for the top of the body section ~~-->

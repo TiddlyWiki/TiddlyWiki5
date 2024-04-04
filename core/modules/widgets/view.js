@@ -18,10 +18,68 @@ var ViewWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
+var ViewHandler = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+};
+
 /*
 Inherit from the base widget class
 */
 ViewWidget.prototype = new Widget();
+
+/*
+Inherit from the base widget class
+*/
+ViewHandler.prototype = new Widget();
+
+/*
+Render this widget into the DOM
+*/
+ViewHandler.prototype.render = function(parent,nextSibling,options) {
+	this.parentDomNode = parent;
+	this.fakeWidget = this.wiki.makeTranscludeWidget(options.title,{
+		document: $tw.fakeDocument,
+		field: options.field,
+		index: options.index,
+		parseAsInline: options.mode !== "block",
+		parentWidget: this,
+		subTiddler: options.subTiddler
+	});
+	this.text = options.text || "";
+	this.viewFormat = options.format;
+	this.fakeNode = $tw.fakeDocument.createElement("div");
+	this.fakeWidget.makeChildWidgets();
+	this.fakeWidget.renderChildren(this.fakeNode,null);
+	var textNode = this.document.createTextNode(this.text);
+	parent.insertBefore(textNode,nextSibling);
+	this.domNodes.push(textNode);
+};
+
+/*
+Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+*/
+ViewHandler.prototype.refresh = function(changedTiddlers) {
+	var refreshed = this.fakeWidget.refresh(changedTiddlers);
+	if(refreshed) {
+		var newText;
+		switch(this.viewFormat) {
+			case "htmlwikified":
+				newText = this.fakeNode.innerHTML;
+				break;
+			case "plainwikified":
+				newText = this.fakeNode.textContent;
+				break;
+			case "htmlencodedplainwikified":
+				newText = $tw.utils.htmlEncode(this.fakeNode.textContent);
+				break;
+		}
+		if(newText !== this.text) {
+			this.domNodes[0].textContent = newText;
+			this.text = newText;
+		}
+	}
+	return refreshed;
+};
 
 /*
 Render this widget into the DOM
@@ -30,7 +88,25 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	if(this.text) {
+	if(this.viewWikified) {
+		var options = {
+			text: this.text,
+			title: this.viewTitle,
+			subTiddler: this.viewSubtiddler,
+			field: this.viewField,
+			index: this.viewIndex,
+			format: this.viewFormat,
+			template: this.viewTemplate,
+			mode: this.viewMode
+		}
+		this.viewHandler = new ViewHandler(this.parseTreeNode,{
+			wiki: this.wiki,
+			parentWidget: this,
+			document: this.document
+		});
+		this.viewHandler.render(parent,nextSibling,options);
+		//this.viewHandler.render(parent,nextSibling,options);
+	} else if(this.text) {
 		var textNode = this.document.createTextNode(this.text);
 		parent.insertBefore(textNode,nextSibling);
 		this.domNodes.push(textNode);
@@ -52,15 +128,19 @@ ViewWidget.prototype.execute = function() {
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
 	this.viewMode = this.getAttribute("mode","block");
+	this.viewWikified = false;
 	switch(this.viewFormat) {
 		case "htmlwikified":
 			this.text = this.getValueAsHtmlWikified(this.viewMode);
+			this.viewWikified = true;
 			break;
 		case "plainwikified":
 			this.text = this.getValueAsPlainWikified(this.viewMode);
+			this.viewWikified = true;
 			break;
 		case "htmlencodedplainwikified":
 			this.text = this.getValueAsHtmlEncodedPlainWikified(this.viewMode);
+			this.viewWikified = true;
 			break;
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
@@ -219,6 +299,9 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
+		if(this.viewHandler) {
+			return this.viewHandler.refresh(changedTiddlers);
+		}
 		return false;
 	}
 };
