@@ -5,9 +5,9 @@ code-body: yes
 \whitespace trim
 <$set name="currentTiddler" value={{$:/language}}>
 <$set name="languageTitle" value={{!!name}}>
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]]">
 <style type="text/css">
-<$view format="plainwikified"/>
+<$view format={{{ [<currentTiddler>tag[$:/tags/Stylesheet/Static]then[text]else[plainwikified]] }}}/>
 </style>
 </$list>
 </$set>
