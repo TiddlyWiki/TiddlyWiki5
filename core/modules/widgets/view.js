@@ -18,35 +18,35 @@ var ViewWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-var ViewHandler = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
-};
-
 /*
 Inherit from the base widget class
 */
 ViewWidget.prototype = new Widget();
 
-/*
-Inherit from the base widget class
-*/
-ViewHandler.prototype = new Widget();
+var ViewHandler = function(options) {
+	this.document = options.document,
+	this.title = options.title,
+	this.field = options.field,
+	this.index = options.index,
+	this.mode = options.mode,
+	this.subTiddler = options.subTiddler,
+	this.text = options.text || "",
+	this.viewFormat = options.format,
+	this.wiki = options.wiki,
+	this.parentWidget = options.widget,
+	this.domNodes = [];
+};
 
-/*
-Render this widget into the DOM
-*/
-ViewHandler.prototype.render = function(parent,nextSibling,options) {
+ViewHandler.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
-	this.fakeWidget = this.wiki.makeTranscludeWidget(options.title,{
+	this.fakeWidget = this.wiki.makeTranscludeWidget(this.title,{
 		document: $tw.fakeDocument,
-		field: options.field,
-		index: options.index,
-		parseAsInline: options.mode !== "block",
-		parentWidget: this,
-		subTiddler: options.subTiddler
+		field: this.field,
+		index: this.index,
+		parseAsInline: this.mode !== "block",
+		parentWidget: this.parentWidget,
+		subTiddler: this.subTiddler
 	});
-	this.text = options.text || "";
-	this.viewFormat = options.format;
 	this.fakeNode = $tw.fakeDocument.createElement("div");
 	this.fakeWidget.makeChildWidgets();
 	this.fakeWidget.renderChildren(this.fakeNode,null);
@@ -97,15 +97,13 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 			index: this.viewIndex,
 			format: this.viewFormat,
 			template: this.viewTemplate,
-			mode: this.viewMode
-		}
-		this.viewHandler = new ViewHandler(this.parseTreeNode,{
+			mode: this.viewMode,
+			widget: this,
 			wiki: this.wiki,
-			parentWidget: this,
 			document: this.document
-		});
-		this.viewHandler.render(parent,nextSibling,options);
-		//this.viewHandler.render(parent,nextSibling,options);
+		}
+		this.viewHandler = new ViewHandler(options);
+		this.viewHandler.render(parent,nextSibling);
 	} else if(this.text) {
 		var textNode = this.document.createTextNode(this.text);
 		parent.insertBefore(textNode,nextSibling);
