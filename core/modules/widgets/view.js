@@ -18,6 +18,8 @@ var ViewWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
+var ViewHandler = function() {};
+
 /*
 Inherit from the base widget class
 */
