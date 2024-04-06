@@ -4,20 +4,16 @@ code-body: yes
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 \whitespace trim
 
-<$set name="currentTiddler" value={{$:/language}}>
+<$let currentTiddler" value={{$:/language}} languageTitle={{!!name}}>
 
-	<$set name="languageTitle" value={{!!name}}>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]]">
 
-		<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!is[draft]]">
+		<style type="text/css">
 
-			<style type="text/css">
+			<$view format={{{ [<currentTiddler>tag[$:/tags/Stylesheet/Static]then[text]else[plainwikified]] }}}/>
 
-				<$view format={{{ [<currentTiddler>tag[$:/tags/Stylesheet/Static]then[text]else[plainwikified]] }}}/>
+		</style>
 
-			</style>
+	</$list>
 
-		</$list>
-
-	</$set>
-
-</$set>
+</$let>
