@@ -21,6 +21,7 @@ exports.synchronous = true;
 // Default story and history lists
 var PAGE_TITLE_TITLE = "$:/core/wiki/title";
 var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
+var ROOT_STYLESHEET_TITLE = "$:/core/ui/RootStylesheet";
 var PAGE_TEMPLATE_TITLE = "$:/core/ui/RootTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
@@ -39,7 +40,7 @@ exports.startup = function() {
 		}
 	});
 
-	var styleParser = $tw.wiki.parseTiddler("$:/core/ui/RootStylesheet",{parseAsInline: true}),
+	var styleParser = $tw.wiki.parseTiddler(ROOT_STYLESHEET_TITLE,{parseAsInline: true}),
 		styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: document});
 	styleWidgetNode.render(document.head,null);
 
