@@ -35,6 +35,15 @@ ViewHandler.prototype.render = function(parent,nextSibling) {
 };
 
 /*
+Base ViewHandler render method for wikified views
+*/
+ViewHandler.prototype.renderWikified = function(parent,nextSibling) {
+	this.text = this.getValue(this.widget.viewMode);
+	this.createFakeWidget();
+	this.createWikifiedTextNode(parent,nextSibling);
+};
+
+/*
 ViewHandler method to create a simple text node
 */
 ViewHandler.prototype.createTextNode = function(parent,nextSibling) {
@@ -172,10 +181,9 @@ Initialise HTML wikified view methods
 */
 ViewWidget.prototype.initialiseHTMLWikifiedView = function(View) {
 	var self = this;
+
 	View.prototype.render = function(parent,nextSibling) {
-		this.text = this.getValue(self.viewMode);
-		this.createFakeWidget();
-		this.createWikifiedTextNode(parent,nextSibling);
+		this.renderWikified(parent,nextSibling);
 	};
 
 	View.prototype.getValue = function(mode) {
@@ -204,10 +212,9 @@ Initialise plain wikified view methods
 */
 ViewWidget.prototype.initialisePlainWikifiedView = function(View) {
 	var self = this;
+
 	View.prototype.render = function(parent,nextSibling) {
-		this.text = this.getValue(self.viewMode);
-		this.createFakeWidget();
-		this.createWikifiedTextNode(parent,nextSibling);
+		this.renderWikified(parent,nextSibling);
 	};
 
 	View.prototype.getValue = function(mode) {
@@ -236,10 +243,9 @@ Initialise HTML encoded plain wikified methods
 */
 ViewWidget.prototype.initialiseHTMLEncodedPlainWikifiedView = function(View) {
 	var self = this;
+	
 	View.prototype.render = function(parent,nextSibling) {
-		this.text = this.getValue(self.viewMode);
-		this.createFakeWidget();
-		this.createWikifiedTextNode(parent,nextSibling);
+		this.renderWikified(parent,nextSibling);
 	};
 
 	View.prototype.getValue = function(mode) {
