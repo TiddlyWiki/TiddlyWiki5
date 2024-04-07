@@ -72,6 +72,7 @@ ViewHandler.prototype.createFakeWidget = function() {
 		field: this.widget.viewField,
 		index: this.widget.viewIndex,
 		parseAsInline: this.widget.viewMode !== "block",
+		mode: this.widget.viewMode === "block" ? "block" : "inline",
 		parentWidget: this.widget,
 		subTiddler: this.widget.viewSubTiddler
 	});
