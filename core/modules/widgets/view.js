@@ -81,7 +81,7 @@ ViewHandler.prototype.createFakeWidget = function() {
 	});
 	this.fakeNode = $tw.fakeDocument.createElement("div");
 	this.fakeWidget.makeChildWidgets();
-	this.fakeWidget.renderChildren(this.fakeNode,null);
+	this.fakeWidget.render(this.fakeNode,null);
 };
 
 ViewHandler.prototype.refreshWikified = function(changedTiddlers) {
