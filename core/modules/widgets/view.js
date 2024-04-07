@@ -80,6 +80,18 @@ ViewHandler.prototype.createFakeWidget = function() {
 	this.fakeWidget.renderChildren(this.fakeNode,null);
 };
 
+ViewHandler.prototype.refreshWikified = function(changedTiddlers) {
+	var refreshed = this.fakeWidget.refresh(changedTiddlers);
+	if(refreshed) {
+		var newText = this.getValue();
+		if(newText !== this.text) {
+			this.widget.domNodes[0].textContent = newText;
+			this.text = newText;
+		}
+	}
+	return refreshed;
+};
+
 /*
 Base ViewHandler refresh method
 */
@@ -188,15 +200,7 @@ ViewWidget.prototype.initialiseHTMLWikifiedView = function(View) {
 	};
 
 	View.prototype.refresh = function(changedTiddlers) {
-		var refreshed = this.fakeWidget.refresh(changedTiddlers);
-		if(refreshed) {
-			var newText = this.getValue();
-			if(newText !== this.text) {
-				self.domNodes[0].textContent = newText;
-				this.text = newText;
-			}
-		}
-		return refreshed;
+		return this.refreshWikified(changedTiddlers);
 	};
 	return View;
 };
@@ -216,15 +220,7 @@ ViewWidget.prototype.initialisePlainWikifiedView = function(View) {
 	};
 
 	View.prototype.refresh = function(changedTiddlers) {
-		var refreshed = this.fakeWidget.refresh(changedTiddlers);
-		if(refreshed) {
-			var newText = this.getValue();
-			if(newText !== this.text) {
-				self.domNodes[0].textContent = newText;
-				this.text = newText;
-			}
-		}
-		return refreshed;
+		return this.refreshWikified(changedTiddlers);
 	};
 	return View;
 };
@@ -244,15 +240,7 @@ ViewWidget.prototype.initialiseHTMLEncodedPlainWikifiedView = function(View) {
 	};
 
 	View.prototype.refresh = function(changedTiddlers) {
-		var refreshed = this.fakeWidget.refresh(changedTiddlers);
-		if(refreshed) {
-			var newText = this.getValue();
-			if(newText !== this.text) {
-				self.domNodes[0].textContent = newText;
-				this.text = newText;
-			}
-		}
-		return refreshed;
+		return this.refreshWikified(changedTiddlers);
 	};
 	return View;
 };
