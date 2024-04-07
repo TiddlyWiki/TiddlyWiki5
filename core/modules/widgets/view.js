@@ -38,8 +38,8 @@ ViewHandler.prototype.render = function(parent,nextSibling) {
 Base ViewHandler render method for wikified views
 */
 ViewHandler.prototype.renderWikified = function(parent,nextSibling) {
-	this.text = this.getValue(this.widget.viewMode);
 	this.createFakeWidget();
+	this.text = this.getValue();
 	this.createWikifiedTextNode(parent,nextSibling);
 };
 
@@ -186,17 +186,14 @@ ViewWidget.prototype.initialiseHTMLWikifiedView = function(View) {
 		this.renderWikified(parent,nextSibling);
 	};
 
-	View.prototype.getValue = function(mode) {
-		return self.wiki.renderText("text/html","text/vnd.tiddlywiki",self.getValueAsText(),{
-			parseAsInline: mode !== "block",
-			parentWidget: self
-		});
+	View.prototype.getValue = function() {
+		return this.fakeNode.innerHTML;
 	};
 
 	View.prototype.refresh = function(changedTiddlers) {
 		var refreshed = this.fakeWidget.refresh(changedTiddlers);
 		if(refreshed) {
-			var newText = this.fakeNode.innerHTML;
+			var newText = this.getValue();
 			if(newText !== this.text) {
 				self.domNodes[0].textContent = newText;
 				this.text = newText;
@@ -217,17 +214,14 @@ ViewWidget.prototype.initialisePlainWikifiedView = function(View) {
 		this.renderWikified(parent,nextSibling);
 	};
 
-	View.prototype.getValue = function(mode) {
-		return self.wiki.renderText("text/plain","text/vnd.tiddlywiki",self.getValueAsText(),{
-			parseAsInline: mode !== "block",
-			parentWidget: self
-		});
+	View.prototype.getValue = function() {
+		return this.fakeNode.textContent;
 	};
 
 	View.prototype.refresh = function(changedTiddlers) {
 		var refreshed = this.fakeWidget.refresh(changedTiddlers);
 		if(refreshed) {
-			var newText = this.fakeNode.textContent;
+			var newText = this.getValue();
 			if(newText !== this.text) {
 				self.domNodes[0].textContent = newText;
 				this.text = newText;
@@ -248,17 +242,14 @@ ViewWidget.prototype.initialiseHTMLEncodedPlainWikifiedView = function(View) {
 		this.renderWikified(parent,nextSibling);
 	};
 
-	View.prototype.getValue = function(mode) {
-		return $tw.utils.htmlEncode(self.wiki.renderText("text/plain","text/vnd.tiddlywiki",self.getValueAsText(),{
-			parseAsInline: mode !== "block",
-			parentWidget: self
-		}));
+	View.prototype.getValue = function() {
+		return $tw.utils.htmlEncode(this.fakeNode.textContent);
 	};
 
 	View.prototype.refresh = function(changedTiddlers) {
 		var refreshed = this.fakeWidget.refresh(changedTiddlers);
 		if(refreshed) {
-			var newText = $tw.utils.htmlEncode(this.fakeNode.textContent);
+			var newText = this.getValue();
 			if(newText !== this.text) {
 				self.domNodes[0].textContent = newText;
 				this.text = newText;
