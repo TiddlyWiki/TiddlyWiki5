@@ -192,7 +192,6 @@ ViewWidget.prototype.initialiseView = function() {
 Initialise HTML wikified view methods
 */
 ViewWidget.prototype.initialiseHTMLWikifiedView = function(View) {
-	var self = this;
 
 	View.prototype.render = function(parent,nextSibling) {
 		this.renderWikified(parent,nextSibling);
@@ -212,7 +211,6 @@ ViewWidget.prototype.initialiseHTMLWikifiedView = function(View) {
 Initialise plain wikified view methods
 */
 ViewWidget.prototype.initialisePlainWikifiedView = function(View) {
-	var self = this;
 
 	View.prototype.render = function(parent,nextSibling) {
 		this.renderWikified(parent,nextSibling);
@@ -232,7 +230,6 @@ ViewWidget.prototype.initialisePlainWikifiedView = function(View) {
 Initialise HTML encoded plain wikified methods
 */
 ViewWidget.prototype.initialiseHTMLEncodedPlainWikifiedView = function(View) {
-	var self = this;
 	
 	View.prototype.render = function(parent,nextSibling) {
 		this.renderWikified(parent,nextSibling);
