@@ -382,7 +382,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 			filepath += char.charCodeAt(0).toString();
 		});
 	}
-	// Add a uniquifier if the file already exists
+	// Add a uniquifier if the file already exists (default)
 	var fullPath = path.resolve(directory, filepath + extension);
 	if (!overwrite) {
 		var oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
