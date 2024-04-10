@@ -141,6 +141,12 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 			}
 		}
 	}
+	else
+	{
+		// broswers will try to cache 200, 203, 204, 206, 300, 301, 
+		// 404, 405, 410, 414, and 501 unless given explicit cache controls
+		headers["Cache-Control"] = "no-store";
+	}
 	/*
 	If the gzip=yes is set, check if the user agent permits compression. If so,
 	compress our response if the raw data is bigger than 2k. Compressing less
