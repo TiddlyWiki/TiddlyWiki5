@@ -321,6 +321,7 @@ exports.generateTiddlerFilepath = function(title,options) {
 	var directory = options.directory || "",
 		extension = options.extension || "",
 		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
+		overwrite = options.overwrite || false,
 		filepath;
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
@@ -382,18 +383,19 @@ exports.generateTiddlerFilepath = function(title,options) {
 		});
 	}
 	// Add a uniquifier if the file already exists
-	var fullPath, oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
+	var fullPath = path.resolve(directory, filepath + extension);
+	if (!overwrite) {
+		var oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
 		count = 0;
-	do {
-		fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
-		if(oldPath && oldPath == fullPath) {
-			break;
-		}
-		count++;
-	} while(fs.existsSync(fullPath));
+		do {
+			fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
+			if(oldPath && oldPath == fullPath) break;
+			count++;
+		} while(fs.existsSync(fullPath));
+	}
 	// If the last write failed with an error, or if path does not start with:
 	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory, 
-	//	or the 'originalpath' directory, then $tw.utils.encodeURIComponentExtended() and resolve to tiddler directory.
+	//	or the 'originalpath' directory, then $tw.utils.encodeURIComponentExtended() and resolve to options.directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode) {
