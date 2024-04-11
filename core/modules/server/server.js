@@ -140,9 +140,7 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 				return;
 			}
 		}
-	}
-	else
-	{
+	} else {
 		// RFC 7231, 6.1. Overview of Status Codes:
 		// Browser clients may cache 200, 203, 204, 206, 300, 301, 
 		// 404, 405, 410, 414, and 501 unless given explicit cache controls
