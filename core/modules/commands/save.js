@@ -38,7 +38,7 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 		$tw.utils.each(tiddlers,function(title) {
 			if(!result) {
 				var tiddler = self.commander.wiki.getTiddler(title);
-				if(tiddler) {
+				if(tiddler) { debugger;
 					var fileInfo = $tw.utils.generateTiddlerFileInfo(tiddler,{
 						directory: path.resolve(self.commander.outputPath),
 						pathFilters: [filenameFilter],

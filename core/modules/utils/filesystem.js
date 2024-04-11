@@ -316,12 +316,13 @@ Options include:
 	pathFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters
 	fileInfo: an existing fileInfo object to check against
+	fileInfo.overwrite: if true, turns off filename clash numbers (defaults to false)
 */
 exports.generateTiddlerFilepath = function(title,options) {
 	var directory = options.directory || "",
 		extension = options.extension || "",
 		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
-		overwrite = options.overwrite || false,
+		overwrite = options.fileInfo && options.fileInfo.overwrite || false,
 		filepath;
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
