@@ -21,8 +21,6 @@ var ViewHandler = function(widget) {
 	this.document = widget.document;
 };
 
-ViewHandler.prototype = {};
-
 /*
 Base ViewHandler render method
 */
