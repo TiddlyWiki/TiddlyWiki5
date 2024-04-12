@@ -14,6 +14,7 @@ A sync adaptor module for synchronising with MultiWikiServer-compatible servers
 
 var CONFIG_HOST_TIDDLER = "$:/config/multiwikiclient/host",
 	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/",
+	MWC_STATE_TIDDLER_PREFIX = "$:/state/multiwikiclient/",
 	BAG_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/bag",
 	REVISION_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/revision",
 	CONNECTION_STATE_TIDDLER = "$:/state/multiwikiclient/connection",
@@ -252,7 +253,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 	var self = this;
-	if(this.isReadOnly) {
+	if(this.isReadOnly || tiddler.fields.title.substr(0,MWC_STATE_TIDDLER_PREFIX.length) === MWC_STATE_TIDDLER_PREFIX) {
 		return callback(null);
 	}
 	$tw.utils.httpRequest({
