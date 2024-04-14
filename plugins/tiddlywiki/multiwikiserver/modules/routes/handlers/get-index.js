@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/get-index.js
 type: application/javascript
 module-type: mws-route
 
-GET /
+GET /?show_system=true
 
 \*/
 (function() {
@@ -31,6 +31,7 @@ exports.handler = function(request,response,state) {
 		// Render the html
 		var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{
 			variables: {
+				"show-system": state.queryParameters.show_system || "off",
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-index",
 				"bag-list": JSON.stringify(bagList),
 				"recipe-list": JSON.stringify(recipeList)

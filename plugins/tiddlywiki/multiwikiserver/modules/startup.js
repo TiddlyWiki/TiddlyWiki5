@@ -46,30 +46,112 @@ function setupStore() {
 }
 
 function loadStore(store) {
-	const path = require("path");
+	const path = require("path"),
+		fs = require("fs");
 	// Performance timing
 	console.time("mws-initial-load");
+	// Copy plugins
+	var makePluginBagName = function(type,publisher,name) {
+			return "$:/" + type + "/" + (publisher ? publisher + "/" : "") + name;
+		},
+		savePlugin = function(pluginFields,type,publisher,name) {
+			const bagName = makePluginBagName(type,publisher,name);
+			const result = store.createBag(bagName,pluginFields.description || "(no description)",{allowPrivilegedCharacters: true});
+			store.saveBagTiddler(pluginFields,bagName);
+		},
+		collectPlugins = function(folder,type,publisher) {
+			var pluginFolders = $tw.utils.getSubdirectories(folder) || [];
+			for(var p=0; p<pluginFolders.length; p++) {
+				const pluginFolderName = pluginFolders[p];
+				if(!$tw.boot.excludeRegExp.test(pluginFolderName)) {
+					var pluginFields = $tw.loadPluginFolder(path.resolve(folder,"./" + pluginFolderName));
+					if(pluginFields && pluginFields.title) {
+						savePlugin(pluginFields,type,publisher,pluginFolderName);
+					}
+				}
+			}
+		},
+		collectPublisherPlugins = function(folder,type) {
+			var publisherFolders = $tw.utils.getSubdirectories(folder) || [];
+			for(var t=0; t<publisherFolders.length; t++) {
+				const publisherFolderName = publisherFolders[t];
+				if(!$tw.boot.excludeRegExp.test(publisherFolderName)) {
+					collectPlugins(path.resolve(folder,"./" + publisherFolderName),type,publisherFolderName);
+				}
+			}
+		};
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,$tw.config.pluginsEnvVar),function(folder) {
+		collectPublisherPlugins(folder,"plugin");
+	});
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,$tw.config.themesEnvVar),function(folder) {
+		collectPublisherPlugins(folder,"theme");
+	});
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,$tw.config.languagesEnvVar),function(folder) {
+		collectPlugins(folder,"language");
+	});
 	// Copy TiddlyWiki core editions
 	function copyEdition(options) {
-		console.log(`Copying edition ${options.tiddlersPath}`);
-		store.createBag(options.bagName,options.bagDescription);
-		store.createRecipe(options.recipeName,[options.bagName],options.recipeDescription);
-		store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,options.tiddlersPath),options.bagName);
+		// Read the tiddlywiki.info file
+		const wikiInfoPath = path.resolve($tw.boot.corePath,$tw.config.editionsPath,options.wikiPath,$tw.config.wikiInfo);
+		let wikiInfo;
+		if(fs.existsSync(wikiInfoPath)) {
+			wikiInfo = $tw.utils.parseJSONSafe(fs.readFileSync(wikiInfoPath,"utf8"),function() {return null;});
+		}
+		if(wikiInfo) {
+			// Create the bag
+			store.createBag(options.bagName,options.bagDescription);
+			// Add plugins to the recipe list
+			const recipeList = [];
+			const processPlugins = function(type,plugins) {
+				$tw.utils.each(plugins,function(pluginName) {
+					const parts = pluginName.split("/");
+					let publisher, name;
+					if(parts.length === 2) {
+						publisher = parts[0];
+						name = parts[1];
+					} else {
+						name = parts[0];
+					}
+					recipeList.push(makePluginBagName(type,publisher,name));
+				});	
+			};
+			processPlugins("plugin",wikiInfo.plugins);
+			processPlugins("theme",wikiInfo.themes);
+			processPlugins("language",wikiInfo.languages);
+			// Create the recipe
+			recipeList.push(options.bagName);
+			store.createRecipe(options.recipeName,recipeList,options.recipeDescription);
+			store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,options.wikiPath,$tw.config.wikiTiddlersSubDir),options.bagName);	
+		}
 	}
 	copyEdition({
 		bagName: "docs",
 		bagDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
 		recipeName: "docs",
 		recipeDescription: "TiddlyWiki Documentation from https://tiddlywiki.com",
-		tiddlersPath: "tw5.com/tiddlers"
+		wikiPath: "tw5.com"
 	});
 	copyEdition({
 		bagName: "dev-docs",
 		bagDescription: "TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev",
 		recipeName: "dev-docs",
 		recipeDescription: "TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev",
-		tiddlersPath: "dev/tiddlers"
+		wikiPath: "dev"
 	});
+	copyEdition({
+		bagName: "tour",
+		bagDescription: "TiddlyWiki Interactive Tour from https://tiddlywiki.com",
+		recipeName: "tour",
+		recipeDescription: "TiddlyWiki Interactive Tour from https://tiddlywiki.com",
+		wikiPath: "tour"
+	});
+	// copyEdition({
+	// 	bagName: "full",
+	// 	bagDescription: "TiddlyWiki Fully Loaded Edition from https://tiddlywiki.com",
+	// 	recipeName: "full",
+	// 	recipeDescription: "TiddlyWiki Fully Loaded Edition from https://tiddlywiki.com",
+	// 	wikiPath: "full"
+	// });
 	// Create bags and recipes
 	store.createBag("bag-alpha","A test bag");
 	store.createBag("bag-beta","Another test bag");

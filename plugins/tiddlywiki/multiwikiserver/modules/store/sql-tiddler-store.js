@@ -75,7 +75,7 @@ SqlTiddlerStore.prototype.dispatchEvent = function(type /*, args */) {
 /*
 Returns null if a bag/recipe name is valid, or a string error message if not
 */
-SqlTiddlerStore.prototype.validateItemName = function(name) {
+SqlTiddlerStore.prototype.validateItemName = function(name,allowPrivilegedCharacters) {
 	if(typeof name !== "string") {
 		return "Not a valid string";
 	}
@@ -83,8 +83,14 @@ SqlTiddlerStore.prototype.validateItemName = function(name) {
 		return "Too long";
 	}
 	// Removed ~ from this list temporarily
-	if(!(/^[^\s\u00A0\x00-\x1F\x7F`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?]+$/g.test(name))) {
-		return "Invalid character(s)";
+	if(allowPrivilegedCharacters) {
+		if(!(/^[^\s\u00A0\x00-\x1F\x7F`!@#%^&*()+={}\[\];\'\"<>,\\\?]+$/g.test(name))) {
+			return "Invalid character(s)";
+		}
+	} else {
+		if(!(/^[^\s\u00A0\x00-\x1F\x7F`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?]+$/g.test(name))) {
+			return "Invalid character(s)";
+		}
 	}
 	return null;
 };
@@ -92,14 +98,14 @@ SqlTiddlerStore.prototype.validateItemName = function(name) {
 /*
 Returns null if the argument is an array of valid bag/recipe names, or a string error message if not
 */
-SqlTiddlerStore.prototype.validateItemNames = function(names) {
+SqlTiddlerStore.prototype.validateItemNames = function(names,allowPrivilegedCharacters) {
 	if(!$tw.utils.isArray(names)) {
 		return "Not a valid array";
 	}
 	var errors = [];
 	for(const name of names) {
-		const result = this.validateItemName(name);
-		if(result) {
+		const result = this.validateItemName(name,allowPrivilegedCharacters);
+		if(result && errors.indexOf(result) === -1) {
 			errors.push(result);
 		}
 	}
@@ -184,10 +190,16 @@ SqlTiddlerStore.prototype.listBags = function() {
 	return this.sqlTiddlerDatabase.listBags();
 };
 
-SqlTiddlerStore.prototype.createBag = function(bag_name,description) {
+/*
+Options include:
+
+allowPrivilegedCharacters - allows "$", ":" and "/" to appear in recipe name
+*/
+SqlTiddlerStore.prototype.createBag = function(bag_name,description,options) {
+	options = options || {};
 	var self = this;
 	return this.sqlTiddlerDatabase.transaction(function() {
-		const validationBagName = self.validateItemName(bag_name);
+		const validationBagName = self.validateItemName(bag_name,options.allowPrivilegedCharacters);
 		if(validationBagName) {
 			return {message: validationBagName};
 		}
@@ -203,17 +215,18 @@ SqlTiddlerStore.prototype.listRecipes = function() {
 
 /*
 Returns null on success, or {message:} on error
+
+Options include:
+
+allowPrivilegedCharacters - allows "$", ":" and "/" to appear in recipe name
 */
-SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,description) {
+SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,description,options) {
 	bag_names = bag_names || [];
 	description = description || "";
-	const validationRecipeName = this.validateItemName(recipe_name);
+	options = options || {};
+	const validationRecipeName = this.validateItemName(recipe_name,options.allowPrivilegedCharacters);
 	if(validationRecipeName) {
 		return {message: validationRecipeName};
-	}
-	const validationBagNames = this.validateItemNames(bag_names);
-	if(validationBagNames) {
-		return {message: validationBagNames};
 	}
 	if(bag_names.length === 0) {
 		return {message: "Recipes must contain at least one bag"};

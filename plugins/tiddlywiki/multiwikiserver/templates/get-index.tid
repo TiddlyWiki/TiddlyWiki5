@@ -1,5 +1,11 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 
+
+\function .hide.system()
+[<show-system>match[on]]
+[all[]!prefix[$:/]]
+\end
+
 \procedure bagPill(element-tag:"span",is-topmost:"yes")
 	\whitespace trim
 	<$genesis $type=<<element-tag>> class={{{ mws-bag-pill [<is-topmost>match[yes]then[mws-bag-pill-topmost]] +[join[ ]] }}}>
@@ -45,9 +51,9 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 						</div>
 						<div class="mws-wiki-card-meta">
 							<%if true %>
-								<ol class="mws-horizontal-list">
-									<$list filter="[<recipe-info>jsonget[bag_names]]" variable="bag-name" counter="counter">
-										<$transclude $variable="bagPill" is-topmost={{{ [<counter-last>match[yes]] }}} element-tag="li"/>
+								<ol class="mws-vertical-list">
+									<$list filter="[<recipe-info>jsonget[bag_names]reverse[]] :filter[.hide.system[]]" variable="bag-name" counter="counter">
+										<$transclude $variable="bagPill" is-topmost={{{ [<counter-first>match[yes]] }}} element-tag="li"/>
 									</$list>
 								</ol>
 							<%else%>
@@ -96,7 +102,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 ! Bags
 
 <ul class="mws-vertical-list">
-	<$list filter="[<bag-list>jsonindexes[]] :sort[<currentTiddler>jsonget[bag_name]]" variable="bag-index" counter="counter">
+	<$list filter="[<bag-list>jsonindexes[]] :filter[<bag-list>jsonget<currentTiddler>,[bag_name].hide.system[]] :sort[<bag-list>jsonget<currentTiddler>,[bag_name]]" variable="bag-index" counter="counter">
 		<li class="mws-wiki-card">
 			<$let
 				bag-info={{{ [<bag-list>jsonextract<bag-index>] }}}
@@ -130,4 +136,17 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 	<div class="mws-form-buttons">
 		<input type="submit" value="Create or Update Bag" formmethod="post"/>
 	</div>
+</form>
+
+! Advanced
+
+
+<form id="checkboxForm" action="." method="GET">
+<%if [<show-system>match[on]] %>
+<input type="checkbox" id="chkShowSystem" name="show_system" value="on" checked="checked"/>
+<%else%>
+<input type="checkbox" id="chkShowSystem" name="show_system" value="on"/>
+<%endif%>
+<label for="chkShowSystem">Show system bags</label>
+<button type="submit">Update</button>
 </form>
