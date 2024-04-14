@@ -43,6 +43,11 @@ function SqlEngine(options) {
 	this.db = new Database(databasePath,{
 		verbose: undefined && console.log
 	});
+	// Turn on WAL mode for better-sqlite3
+	if(this.engine === "better") {
+		// See https://github.com/WiseLibs/better-sqlite3/blob/master/docs/performance.md
+		this.db.pragma("journal_mode = WAL");
+	}
 }
 
 SqlEngine.prototype.close = function() {
