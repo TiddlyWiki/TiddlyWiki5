@@ -1,6 +1,12 @@
 title: TiddlyWiki Pre-release
 modified: 20230731122156493
 
+<$let currentTiddler="HelloThere">
+
+<$button>{{}}</$button>
+
+</$let>
+
 This is a pre-release build of TiddlyWiki provided for testing and review purposes. ''Please don't try to depend on the pre-release for anything important'' -- you should use the latest official release from https://tiddlywiki.com.
 
 All of the changes in this pre-release are provisional until it is released and they become frozen by our backwards compatibility policies. This is the perfect time to raise questions or make suggestions. Please [[open a ticket at GitHub|https://github.com/Jermolene/TiddlyWiki5/issues/new/choose]] or make a post at https://talk.tiddlywiki.org/.
@@ -13,4 +19,5 @@ The pre-release is also available as an [[empty wiki|https://tiddlywiki.com/prer
 </div>
 <div class="tc-subtitle">Updated: <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/></div>
 <$transclude mode="block"/>
+
 </$list>
