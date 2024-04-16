@@ -1,0 +1,9 @@
+created: 20240415124530887
+modified: 20240416092728701
+tags: 
+title: test-recursive button
+type: text/vnd.tiddlywiki
+
+<$button>
+<$transclude/>
+</$button>

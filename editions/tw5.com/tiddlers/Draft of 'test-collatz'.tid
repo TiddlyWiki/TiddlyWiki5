@@ -1,0 +1,25 @@
+created: 20240415102801809
+draft.of: test-collatz
+draft.title: test-collatz
+modified: 20240416094922377
+tags: 
+title: Draft of 'test-collatz'
+type: text/vnd.tiddlywiki
+
+\procedure collatz(n) 
+<% if [<n>match[1]] %>
+  1
+<% elseif [<n>remainder[2]match[1]] %>
+  <<n>> <$button>→</$button> <$transclude $variable="collatz" n = {{{ [<n>multiply[3]add[1]] }}}/>
+<% else %>
+  <<n>> <$button>→</$button> <$transclude $variable="collatz" n = {{{ [<n>divide[2]] }}}/>
+<% endif %>
+\end
+
+\procedure test(x:10)
+<$let tv-UNSAFE-max-widget-tree-depth="2000">
+<$transclude $variable=collatz n=<<x>>/>
+</$let>
+\end
+
+<<test 77031>>

@@ -1,0 +1,11 @@
+created: 20240415124530887
+draft.of: test-recursive button
+draft.title: test-recursive button
+modified: 20240416094919710
+tags: 
+title: Draft of 'test-recursive button'
+type: text/vnd.tiddlywiki
+
+<$button>
+<$transclude/>
+</$button>
