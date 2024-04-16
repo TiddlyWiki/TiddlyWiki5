@@ -12,12 +12,24 @@ Button widget
 /*global $tw: false */
 "use strict";
 
+/* String: Maximum -relative- permitted depth of the widget tree for recursion detection */
+var MAX_WIDGET_TREE_DEPTH_RELATIVE = "50";
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+
+	// Check if any parent is a button. Custom recursion detection for widgets in buttons
+	if(!this.hasVariable("tv-button","true")) {
+		this.setVariable("tv-button", "true");
+		// set "local" max depth to a relative value, so nesting in higher levels is possible
+		this.setVariable("tv-UNSAFE-max-widget-tree-depth", this.getAncestorCount() + MAX_WIDGET_TREE_DEPTH_RELATIVE);
+		// allow users to debug the info
+		this.setVariable("tv-ancestors", this.getAncestorCount() + "");
+	}
 };
 
 /*
@@ -74,7 +86,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
-	if (this.role) {
+	if(this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {
