@@ -58,7 +58,7 @@ function loadStore(store) {
 			const bagName = makePluginBagName(type,publisher,name);
 			const result = store.createBag(bagName,pluginFields.description || "(no description)",{allowPrivilegedCharacters: true});
 			if(result !== null) {
-				throw `Error creating plugin bag ${bagname}: ${JSON.stringify(result)}`;
+				console.log(`Error creating plugin bag ${bagname}: ${JSON.stringify(result)}`);
 			}
 			store.saveBagTiddler(pluginFields,bagName);
 		},
@@ -104,7 +104,7 @@ function loadStore(store) {
 			// Create the bag
 			const result = store.createBag(options.bagName,options.bagDescription);
 			if(!result) {
-				throw `Error creating bag ${options.bagName} for edition ${options.wikiPath}: ${JSON.stringify(result)}`;
+				console.log(`Error creating bag ${options.bagName} for edition ${options.wikiPath}: ${JSON.stringify(result)}`);
 			}
 			// Add plugins to the recipe list
 			const recipeList = [];
