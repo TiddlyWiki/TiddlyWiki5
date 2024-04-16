@@ -9,7 +9,7 @@ title: Output
 +
 title: Button
 
-<$button><<tv-ancestors>></$button>
+<$button><<tv-widget-ancestors>></$button>
 +
 title: ExpectedResult
 
