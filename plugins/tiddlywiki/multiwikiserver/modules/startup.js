@@ -60,6 +60,7 @@ function loadStore(store) {
 			if(result) {
 				console.log(`Error creating plugin bag ${bagname}: ${JSON.stringify(result)}`);
 			}
+			console.log(`saveBagTiddler of ${pluginFields.title} to ${bagName}`);
 			store.saveBagTiddler(pluginFields,bagName);
 		},
 		collectPlugins = function(folder,type,publisher) {
