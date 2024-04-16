@@ -104,7 +104,7 @@ function loadStore(store) {
 			// Create the bag
 			const result = store.createBag(options.bagName,options.bagDescription);
 			if(!result) {
-				console.log(`Error creating bag ${options.bagName} for edition ${options.wikiPath}: ${JSON.stringify(result)}`);
+				console.log(`Error creating bag ${options.bagName} for edition ${options.wikiPath}: ${result}`);
 			}
 			// Add plugins to the recipe list
 			const recipeList = [];
