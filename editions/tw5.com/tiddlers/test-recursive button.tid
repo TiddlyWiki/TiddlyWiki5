@@ -1,9 +1,10 @@
 created: 20240415124530887
-modified: 20240416092728701
+modified: 20240416111839904
 tags: 
 title: test-recursive button
 type: text/vnd.tiddlywiki
 
+\whitespace trim
 <$button>
 <$transclude/>
 </$button>
