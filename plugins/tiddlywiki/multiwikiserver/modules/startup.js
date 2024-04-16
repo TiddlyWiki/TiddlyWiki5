@@ -67,7 +67,7 @@ function loadStore(store) {
 			for(var p=0; p<pluginFolders.length; p++) {
 				const pluginFolderName = pluginFolders[p];
 				if(!$tw.boot.excludeRegExp.test(pluginFolderName)) {
-					var pluginFields = $tw.loadPluginFolder(path.resolve(folder,"./" + pluginFolderName));
+					var pluginFields = $tw.loadPluginFolder(path.resolve(folder,pluginFolderName));
 					if(pluginFields && pluginFields.title) {
 						savePlugin(pluginFields,type,publisher,pluginFolderName);
 					}
@@ -79,7 +79,7 @@ function loadStore(store) {
 			for(var t=0; t<publisherFolders.length; t++) {
 				const publisherFolderName = publisherFolders[t];
 				if(!$tw.boot.excludeRegExp.test(publisherFolderName)) {
-					collectPlugins(path.resolve(folder,"./" + publisherFolderName),type,publisherFolderName);
+					collectPlugins(path.resolve(folder,publisherFolderName),type,publisherFolderName);
 				}
 			}
 		};
