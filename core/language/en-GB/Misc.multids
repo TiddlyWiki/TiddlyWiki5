@@ -37,6 +37,7 @@ Error/NetworkErrorAlert: `<h2>''Network Error''</h2>It looks like the connection
 Error/PutEditConflict: File changed on server
 Error/PutForbidden: Permission denied
 Error/PutUnauthorized: Authentication required
+Error/RecursiveButton: Possible Recursive Error: Button in button is not allowed
 Error/RecursiveTransclusion: Recursive transclusion error in transclude widget
 Error/RetrievingSkinny: Error retrieving skinny tiddler list
 Error/SavingToTWEdit: Error saving to TWEdit
