@@ -1,0 +1,15 @@
+title: Transclude/Recursion/Button
+description: Transclusion recursion inside a button
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$button>
+<$transclude/>
+</$button>
++
+title: ExpectedResult
+
+<p><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><button class=""><span class="tc-error">55 - Recursive transclusion error in transclude widget</span></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></button></p>
