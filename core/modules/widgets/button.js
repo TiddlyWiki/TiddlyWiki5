@@ -12,8 +12,8 @@ Button widget
 /*global $tw: false */
 "use strict";
 
-/* String: Maximum -relative- permitted depth of the widget tree for recursion detection */
-var MAX_WIDGET_TREE_DEPTH_RELATIVE = "50";
+/* Maximum -relative- permitted depth of the widget tree for recursion detection */
+var MAX_WIDGET_TREE_DEPTH_RELATIVE = 50;
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
@@ -26,7 +26,7 @@ var ButtonWidget = function(parseTreeNode,options) {
 	if(!this.hasVariable("tv-button","true")) {
 		this.setVariable("tv-button", "true");
 		// set "local" max depth to a relative value, so nesting in higher levels is possible
-		this.setVariable("tv-UNSAFE-max-widget-tree-depth", this.getAncestorCount() + MAX_WIDGET_TREE_DEPTH_RELATIVE);
+		this.setVariable("tv-UNSAFE-max-widget-tree-depth", this.getAncestorCount() + MAX_WIDGET_TREE_DEPTH_RELATIVE + "");
 		// allow users to debug the info
 		this.setVariable("tv-ancestors", this.getAncestorCount() + "");
 	}

@@ -12,8 +12,8 @@ Widget base class
 /*global $tw: false */
 "use strict";
 
-/* String: Maximum permitted depth of the widget tree for recursion detection */
-var MAX_WIDGET_TREE_DEPTH = "1000";
+/* Maximum permitted depth of the widget tree for recursion detection */
+var MAX_WIDGET_TREE_DEPTH = 1000;
 
 /*
 Create a widget object for a parse tree node
@@ -481,7 +481,7 @@ Widget.prototype.getAncestorCount = function() {
 			this.ancestorCount = this.parentWidget.getAncestorCount() + 1;
 		} else {
 			this.ancestorCount = 0;
-			this.setVariable("tv-UNSAFE-max-widget-tree-depth", MAX_WIDGET_TREE_DEPTH);
+			this.setVariable("tv-UNSAFE-max-widget-tree-depth", MAX_WIDGET_TREE_DEPTH + "");
 		}
 	}
 	return this.ancestorCount;
@@ -493,10 +493,9 @@ Make child widgets correspondng to specified parseTreeNodes
 Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	options = options || {};
 	this.children = [];
-	var self = this,
-		maxWidgetTreeDepth = $tw.utils.getInt(this.variables["tv-UNSAFE-max-widget-tree-depth"].value, MAX_WIDGET_TREE_DEPTH);
+	var self = this;
 	// Check for too much recursion
-	if(this.getAncestorCount() > maxWidgetTreeDepth) {
+	if(this.getAncestorCount() > $tw.utils.getInt(this.variables["tv-UNSAFE-max-widget-tree-depth"].value, MAX_WIDGET_TREE_DEPTH + "")) {
 		this.children.push(this.makeChildWidget({type: "error", attributes: {
 			"$message": {type: "string", value: this.getAncestorCount() + " - " + $tw.language.getString("Error/RecursiveTransclusion")}
 		}}));
