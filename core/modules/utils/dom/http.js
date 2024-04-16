@@ -245,20 +245,6 @@ exports.httpRequest = function(options) {
 		getHeader = function(targetHeader) {
 			return headers[targetHeader] || headers[targetHeader.toLowerCase()];
 		},
-		isSimpleRequest = function(type,headers) {
-			if(["GET","HEAD","POST"].indexOf(type) === -1) {
-				return false;
-			}
-			for(var header in headers) {
-				if(["accept","accept-language","content-language","content-type"].indexOf(header.toLowerCase()) === -1) {
-					return false;
-				}
-			}
-			if(hasHeader("Content-Type") && ["application/x-www-form-urlencoded","multipart/form-data","text/plain"].indexOf(getHeader["Content-Type"]) === -1) {
-				return false;
-			}
-			return true;	
-		},
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
 		data = "",
@@ -309,9 +295,6 @@ exports.httpRequest = function(options) {
 	}
 	if(data && !hasHeader("Content-Type")) {
 		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
-	}
-	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers)) {
-		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
 	// Send data
 	try {
