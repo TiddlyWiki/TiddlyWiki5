@@ -479,6 +479,8 @@ Widget.prototype.getAncestorCount = function() {
 	if(this.ancestorCount === undefined) {
 		if(this.parentWidget) {
 			this.ancestorCount = this.parentWidget.getAncestorCount() + 1;
+			// Allow users to debug the info. Should help with recursion / nesting problems
+			this.setVariable("tv-widget-ancestors", this.ancestorCount + "");
 		} else {
 			this.ancestorCount = 0;
 			this.setVariable("tv-UNSAFE-max-widget-tree-depth", MAX_WIDGET_TREE_DEPTH + "");
