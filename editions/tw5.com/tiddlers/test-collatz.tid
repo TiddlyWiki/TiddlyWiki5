@@ -1,5 +1,5 @@
 created: 20240415102801809
-modified: 20240416092855340
+modified: 20240417081000709
 tags: 
 title: test-collatz
 type: text/vnd.tiddlywiki
@@ -15,9 +15,8 @@ type: text/vnd.tiddlywiki
 \end
 
 \procedure test(x:10)
-<$let tv-UNSAFE-max-widget-tree-depth="2000">
+<<set_UNSAFE_max_widget_tree_depth 2000>>
 <$transclude $variable=collatz n=<<x>>/>
-</$let>
 \end
 
 <<test 77031>>
