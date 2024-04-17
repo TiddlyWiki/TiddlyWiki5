@@ -1,12 +1,12 @@
 created: 20240417070900019
-modified: 20240417082244189
+modified: 20240417083823331
 tags: 
 title: test-new-set-get-macros
 type: text/vnd.tiddlywiki
 
 \import test-collatz
 
-ancestor count: <<widget-ancestorcount>>
+ancestor count: <<parent-ancestorcount>>
 
 UNSAFE_max_widget_tree_depth: <<get_UNSAFE_max_widget_tree_depth>>
 

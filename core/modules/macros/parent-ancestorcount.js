@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/macros/widget-ancestorcount.js
+title: $:/core/modules/macros/parent-ancestorcount.js
 type: application/javascript
 module-type: macro
 
-Macro to return the widget this.ancestors variable
+Macro to return the parent widget this.ancestors variable
 
 \*/
 /*jslint node: true, browser: true */
@@ -14,7 +14,7 @@ Macro to return the widget this.ancestors variable
 Information about this macro
 */
 
-exports.name = "widget-ancestorcount";
+exports.name = "parent-ancestorcount";
 
 exports.params = [];
 
@@ -22,5 +22,5 @@ exports.params = [];
 Run the macro
 */
 exports.run = function() {
-	return this.getAncestorCount() + "" || "";
+	return (this.parentWidget) ? this.parentWidget.getAncestorCount() + "" : "";
 };
