@@ -9,7 +9,7 @@ tags: $:/tags/Macro
 </li>
 \end
 
-\define branch-node(prefix,chunk,field,separator: "/")
+\define branch-node(prefix,chunk,separator: "/",field: "title")
 \whitespace trim
 <li>
 <$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<__prefix__>addsuffix<__chunk__>] }}}>
@@ -26,13 +26,13 @@ tags: $:/tags/Macro
 &#32;
 <span>(<$count filter="[all[shadows+tiddlers]get<__field__>removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
 <$reveal type="match" stateTitle=<<reveal-state>> text="show">
-<$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} field=<<__field__>> separator=<<__separator__>>/>
+<$macrocall $name="tree-node" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>> field=<<__field__>>/>
 </$reveal>
 </$set>
 </li>
 \end
 
-\define tree-node(prefix,field,separator: "/")
+\define tree-node(prefix,separator: "/",field: "title")
 \whitespace trim
 <ol>
 <$list filter="[all[shadows+tiddlers]get<__field__>prefix<__prefix__>removeprefix<__prefix__>splitbefore<__separator__>sort[]!suffix<__separator__>]" variable="chunk">
@@ -41,17 +41,17 @@ tags: $:/tags/Macro
 </$list>
 </$list>
 <$list filter="[all[shadows+tiddlers]get<__field__>prefix<__prefix__>removeprefix<__prefix__>splitbefore<__separator__>sort[]suffix<__separator__>]" variable="chunk">
-<$macrocall $name="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> field=<<__field__>> separator=<<__separator__>>/>
+<$macrocall $name="branch-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>> field=<<__field__>>/>
 </$list>
 </ol>
 \end
 
-\define tree(prefix: "$:/",field:"title",separator: "/")
+\define tree(prefix: "$:/",separator: "/",field: "title")
 \whitespace trim
 <div class="tc-tree">
 <span><$text text=<<__prefix__>>/></span>
 <div>
-<$macrocall $name="tree-node" prefix=<<__prefix__>> field=<<__field__>> separator=<<__separator__>>/>
+<$macrocall $name="tree-node" prefix=<<__prefix__>> separator=<<__separator__>> field=<<__field__>>/>
 </div>
 </div>
 \end
