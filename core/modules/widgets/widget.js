@@ -479,11 +479,10 @@ Widget.prototype.getAncestorCount = function() {
 	if(this.ancestorCount === undefined) {
 		if(this.parentWidget) {
 			this.ancestorCount = this.parentWidget.getAncestorCount() + 1;
-			// Allow users to debug the info. Should help with recursion / nesting problems
-			this.setVariable("tv-widget-ancestors", this.ancestorCount + "");
+			this.UNSAFE_max_widget_tree_depth = this.parentWidget.UNSAFE_max_widget_tree_depth || MAX_WIDGET_TREE_DEPTH;
 		} else {
 			this.ancestorCount = 0;
-			this.setVariable("tv-UNSAFE-max-widget-tree-depth", MAX_WIDGET_TREE_DEPTH + "");
+			this.UNSAFE_max_widget_tree_depth = MAX_WIDGET_TREE_DEPTH;
 		}
 	}
 	return this.ancestorCount;
@@ -497,8 +496,8 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	this.children = [];
 	var self = this;
 	// Check for too much recursion
-	if(this.getAncestorCount() > $tw.utils.getInt(this.variables["tv-UNSAFE-max-widget-tree-depth"].value, MAX_WIDGET_TREE_DEPTH + "")) {
-		this.children.push(this.makeChildWidget({type: "error", attributes: {
+	if(this.getAncestorCount() > this.UNSAFE_max_widget_tree_depth) {
+			this.children.push(this.makeChildWidget({type: "error", attributes: {
 			"$message": {type: "string", value: this.getAncestorCount() + " - " + $tw.language.getString("Error/RecursiveTransclusion")}
 		}}));
 	} else {
