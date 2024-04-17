@@ -18,6 +18,10 @@ var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+	// Check if any parent is a button. Custom recursion detection for buttons in buttons
+	if(!this.hasVariable("tv-is-button","yes")) {
+		this.setVariable("tv-is-button", "yes");
+	}
 };
 
 /*
@@ -37,6 +41,17 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
+	// Check "button in button". Return early with an error message
+	// This check also prevents fatal recursion errors using the transclusion widget
+	if(this.parentWidget && this.parentWidget.hasVariable("tv-is-button","yes")) {
+		var domNode = this.document.createElement("span");
+		var textNode = this.document.createTextNode($tw.language.getString("Error/RecursiveButton"));
+		domNode.appendChild(textNode);
+		domNode.className = "tc-error";
+		parent.insertBefore(domNode,nextSibling);
+		this.domNodes.push(domNode);
+		return;
+	}
 	// Create element
 	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
 		tag = this.buttonTag;
@@ -74,7 +89,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
-	if (this.role) {
+	if(this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {

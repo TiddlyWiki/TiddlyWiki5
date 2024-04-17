@@ -1,0 +1,15 @@
+title: Transclude/Recursion/ButtonInButton
+description: Button in Button
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$button>Test Button 
+<$button>Invalid button
+</$button>
++
+title: ExpectedResult
+
+<p><button class="">Test Button<span class="tc-error">Possible Recursive Error: Button in button is not allowed</span></button></p>
