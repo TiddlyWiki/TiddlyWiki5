@@ -5,11 +5,11 @@ tags: [[$:/tags/wiki-test-spec]]
 
 title: Output
 
-<<tv-UNSAFE-max-widget-tree-depth>> - {{Button}}
+<<get_UNSAFE_max_widget_tree_depth>> - {{Button}}
 +
 title: Button
 
-<$button><<tv-widget-ancestors>></$button>
+<$button><<parent-ancestorcount>></$button>
 +
 title: ExpectedResult
 
