@@ -18,10 +18,6 @@ var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	// Check if any parent is a button. Custom recursion detection for buttons in buttons
-	if(!this.hasVariable("tv-is-button","yes")) {
-		this.setVariable("tv-is-button", "yes");
-	}
 };
 
 /*
