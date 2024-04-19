@@ -16,6 +16,7 @@ dependents: For a plugin, lists the dependent plugin titles
 description: The descriptive text for a plugin, or a modal dialogue
 draft.of: For draft tiddlers, contains the title of the tiddler of which this is a draft
 draft.title: For draft tiddlers, contains the proposed new title of the tiddler
+explicitState: Used in tiddlers that contain the tabs-macro with a `<<getExplicitState>>` parameter
 footer: The footer text for a modal
 hide-body: The view template will hide bodies of tiddlers if set to ''yes''
 icon: The title of the tiddler containing the icon associated with a tiddler

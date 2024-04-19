@@ -1,5 +1,5 @@
 created: 20130825213300000
-modified: 20220109101407050
+modified: 20240419093902000
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
@@ -30,6 +30,7 @@ Other fields used by the core are:
 |`description` |<<lingo description>> |
 |`draft.of` |<<lingo draft.of>> |
 |`draft.title` |<<lingo draft.title>> |
+|`explicitState`|<<.from-version "5.3.4">> <<lingo explicitState>>|
 |`footer` |<<lingo footer>> |
 |`hide-body`|<<lingo hide-body>>|
 |`icon` |<<lingo icon>> |
