@@ -12,4 +12,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><button class=""><span class="tc-error">Possible Recursive Error: Button in button is not allowed</span></button></p>
+<p><button class=""><button class=""><button class=""><span class="tc-error">Possible Recursive Error: Button in button is not allowed</span></button></button></button></p>
