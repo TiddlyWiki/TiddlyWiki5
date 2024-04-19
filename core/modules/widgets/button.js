@@ -29,10 +29,13 @@ ButtonWidget.prototype = new Widget();
 Detect nested buttons
 */
 ButtonWidget.prototype.isNestedButton = function() {
-	var pointer = this.parentWidget;
+	var pointer = this.parentWidget,
+		depth = 0;
 	while(pointer) {
 		if(pointer instanceof ButtonWidget) {
-			return true;
+			// we allow 1 nested button
+			if(depth > 1) return true;
+			depth += 1;
 		}
 		pointer = pointer.parentWidget;
 	}
