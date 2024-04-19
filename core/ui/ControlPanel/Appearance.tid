@@ -7,5 +7,9 @@ explicitState: $:/state/tab--1963855381
 {{$:/language/ControlPanel/Appearance/Hint}}
 
 <div class="tc-control-panel">
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Appearance]!has[draft.of]]" default="$:/core/ui/ControlPanel/Theme" explicitState=<<getExplicitState>>/>
+	<$macrocall $name="tabs"
+		tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Appearance]!has[draft.of]]"
+		default="$:/core/ui/ControlPanel/Theme"
+		explicitState=<<getExplicitState>>
+	/>
 </div>

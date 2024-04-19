@@ -18,4 +18,8 @@ explicitState: $:/state/tab--86143343
 
 <<lingo Installed/Hint>>
 
-<$macrocall $name="tabs" tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Plugins]!has[draft.of]]" default="$:/core/ui/ControlPanel/Plugins/Installed/Plugins" explicitState=<<getExplicitState>>/>
+<$macrocall $name="tabs"
+	tabsList="[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Plugins]!has[draft.of]]"
+	default="$:/core/ui/ControlPanel/Plugins/Installed/Plugins"
+	explicitState=<<getExplicitState>>
+/>

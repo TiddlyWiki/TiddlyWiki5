@@ -7,5 +7,9 @@ explicitState: $:/state/tab-2065006209
 {{$:/language/ControlPanel/Saving/Hint}}
 
 <div class="tc-control-panel">
-<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Saving]!has[draft.of]]" default="$:/core/ui/ControlPanel/Saving/General" explicitState=<<getExplicitState>>/>
+	<$macrocall $name="tabs"
+		tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Saving]!has[draft.of]]"
+		default="$:/core/ui/ControlPanel/Saving/General"
+		explicitState=<<getExplicitState>>
+	/>
 </div>
