@@ -9,7 +9,7 @@ explicitState: $:/state/tab/sidebar--595412856
 	default={{$:/config/DefaultSidebarTab}}
 	state="$:/state/tab/sidebar"
 	class="tc-sidebar-tabs-main"
-	explicitState=<<getExplicitState>>
+	explicitState=<<tf.getExplicitState>>
 />
 
 </div>

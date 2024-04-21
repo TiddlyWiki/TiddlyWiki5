@@ -2,4 +2,4 @@ title: $:/core/macros/functions
 tags: $:/tags/Global
 
 <!-- This global function can be used when the eexplicitState parameter is used with tabs-macros -->
-\function getExplicitState() [<currentTab>get[explicitState]] ~[<currentTiddler>get[explicitState]] ~[<thisTiddler>get[explicitState]]
+\function tf.getExplicitState() [<currentTab>get[explicitState]] ~[<currentTiddler>get[explicitState]] ~[<thisTiddler>get[explicitState]]

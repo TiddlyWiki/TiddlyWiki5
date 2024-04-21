@@ -10,6 +10,6 @@ explicitState: $:/state/tab--2112689675
 	<$macrocall $name="tabs"
 		tabsList="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Info]!has[draft.of]]"
 		default="$:/core/ui/ControlPanel/Basics"
-		explicitState=<<getExplicitState>>
+		explicitState=<<tf.getExplicitState>>
 	/>
 </div>
