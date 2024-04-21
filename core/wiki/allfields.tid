@@ -3,7 +3,7 @@ title: $:/snippets/allfields
 \whitespace trim
 \import [[$:/core/ui/ControlPanel/Basics]]
 
-\function getLingoText() [[$:/language/Docs/Fields/]] [<title>] +[join[]get[text]]
+\function tf.getLingoText() [[$:/language/Docs/Fields/]] [<title>] +[join[]get[text]]
 
 \procedure renderfield(title)
 <tr class="tc-view-field">
@@ -11,7 +11,7 @@ title: $:/snippets/allfields
 		''<$text text=<<title>>/>'':
 	</td>
 	<td class="tc-view-field-value">
-		//<<getLingoText>>//
+		//<<tf.getLingoText>>//
 	</td>
 	<td class="tc-view-field-links">
 		<!-- show-filter-count expects a filter string. It does no more processing -->
