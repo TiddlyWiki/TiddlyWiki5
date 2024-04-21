@@ -10,7 +10,7 @@ shortcuts: ((preview))
 
 \whitespace trim
 <span>
-	<$transclude $tiddler={{{ [<editPreviewStateTiddler>get[text]match[yes]then[$:/core/images/preview-open]else[$:/core/images/preview-closed]] }}} />
+	<$transclude $tiddler={{{ [<edit-preview-state>match[yes]then[$:/core/images/preview-open]else[$:/core/images/preview-closed]] }}} />
 </span>
 <$action-setfield $tiddler=<<editPreviewStateTiddler>> $value={{{ [<editPreviewStateTiddler>get[text]toggle[yes],[no]] }}} />
 <$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>

@@ -51,3 +51,4 @@ Note that the state tiddler $:/state/http-requests contains a number representin
 
 * [[Zotero's|https://www.zotero.org/]] API for retrieving reference items: [[WidgetMessage: tm-http-request Example - Zotero]]
 * [[Random Dog's|https://random.dog/]] API for retrieving random pictures of dogs showing how to retrieve binary data: [[WidgetMessage: tm-http-request Example - Random Dog]]
+* Example of using HTTP Basic Authentication: [[WidgetMessage: tm-http-request Example - Basic Authentication]]

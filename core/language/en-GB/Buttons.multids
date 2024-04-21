@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: clear password
 Encryption/ClearPassword/Hint: Clear the password and save this wiki without encryption
 Encryption/SetPassword/Caption: set password
 Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
+EmergencyDownload/Caption: download tiddlers as json
 ExportPage/Caption: export all
 ExportPage/Hint: Export all tiddlers
 ExportTiddler/Caption: export tiddler

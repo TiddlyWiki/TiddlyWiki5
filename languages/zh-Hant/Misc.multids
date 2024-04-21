@@ -31,7 +31,7 @@ Error/Filter: 篩選器錯誤
 Error/FilterRunPrefix: 篩選器錯誤：篩選器 run 的未知首碼
 Error/FilterSyntax: 篩選器運算式中的語法錯誤
 Error/FormatFilterOperator: 篩選器錯誤：`format` 篩選器運算子的未知尾碼
-Error/IsFilterOperator: 篩選器錯誤︰'is' 篩選器運算子的未知運算元
+Error/IsFilterOperator: 篩選器錯誤︰'is' 篩選器運算子的未知參數
 Error/LoadingPluginLibrary: 載入插件程式庫時，發生錯誤
 Error/NetworkErrorAlert: `<h2>''網路錯誤''</h2>與伺服器的連線似乎已中斷。這可能表示您的網路連線有問題。請嘗試恢復網路連線才能繼續。<br><br>''恢復連線時，所有未儲存的變更，將自動同步''。`
 Error/PutEditConflict: 伺服器上的檔案已更改

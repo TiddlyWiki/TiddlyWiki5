@@ -1,174 +1,199 @@
 created: 20150110182600000
-modified: 20230325161424684
+modified: 20240224170607731
 tags: [[Improving TiddlyWiki Documentation]]
 title: Documentation Macros
 type: text/vnd.tiddlywiki
 
 The following macros are used throughout ~TiddlyWiki's documentation. Their names start with a dot to keep them out of the way of names that a user might try experimenting with.
 
-!General
+! General
 
-|!Macro |!Used for |!Example |
-|.def |the defining instance of a term |<<.def widget>> |
-|.em |minor emphasis within a sentence |<<.em not>> |
-|.place |a placeholder for the user to fill in |<<.place tagname>> |
-|.strong |major emphasis within a tiddler |<<.strong Important!>> |
-|.word |a mention of an ordinary word or phrase |<<.word "hello world">> |
-|.icon |an icon, sized to match the surrounding text |<<.icon "$:/core/images/globe">> |
+|Macro |Used for |Example |Rendered|h
+|.def |the defining instance of a term |`<<.def widget>>` |<<.def widget>> |
+|.em |minor emphasis within a sentence |`<<.em not>>` |<<.em not>> |
+|.place |a placeholder for the user to fill in |`<<.place tagname>>` |<<.place tagname>> |
+|.strong |major emphasis within a tiddler |`<<.strong Important!>>` |<<.strong Important!>> |
+|.word |a mention of an ordinary word or phrase |`<<.word "hello world">>` |<<.word "hello world">> |
+|.icon |an icon, sized to match the surrounding text |`<<.icon "$:/core/images/globe">>` |<<.icon "$:/core/images/globe">> |
 
-!Advice
+! Textboxes
 
-|!Macro |!Used for |!Example |
-|^.tip |^hints and tips |<<.tip "Turn your screen on, otherwise<br>you won't be able to see much.">> |
-|^.warning |^warning advice |<<.warning "Make a backup of your file<br>before you upgrade.">> |
+!! Textbox Parameters
 
-!Blocks
-|!Macro |!Used for |
-|.preamble |an introductory sentence that stands apart from the rest of the tiddler |
+; text
+: Text to be shown in the box
 
-!Tiddlers and fields
+; title
+: A title shown as an HTML STRONG element
 
-|!Macro |!Used for |!Example |
-|.tid |a tiddler title |<<.tid Example>> |
-|.tag |a tag |<<.tag Example>> |
-|.field |a field name |<<.field example>> |
-|.value |a field value |<<.value "example value">> |
-|.op |a filter operator |<<.op backlinks>> |
-|.var |a variable or macro name |<<.var currentTiddler>> |
-|.wid |a widget name |<<.wid list>> |
-|.attr |an attribute name |<<.attr filter>> |
-|.param |a macro parameter name |<<.param text>> |
-|.tiddler-fields |a list of tiddler fields |<<.tiddler-fields "Monday">> |
+; icon
+: Core icons can be found at [[Icon Gallery]]
+
+; class
+: An optional custom class can be added to the text block. It will overwrite the defaults. To keep the defaults, ''add them'' to the custom class settings. 
+: ''.note''-macro defaults to `doc-note`
+: ''.tip''-macro defaults to `doc-tip`
+: ''.warning''-macro defaults to `doc-warning`
+
+!! Textbox Examples
+
+|Macro |Used for |Example |Renderd |h
+|^.infoBox |^Text-box with an icon |`<<.infoBox text:"A generic ...">>` |<<.infoBox "A generic text box, with an optional title and a custom icon">> |
+|^.note|^Infos with a title |`<<.note text:"Some text ...">>` |<<.note "Some text in a box with a title by default">> |
+|^.tip |^hints and tips |`<<.tip text:"Eg: Turn ...">>` |<<.tip "Eg: Turn your screen on, otherwise<br>you won't be able to see much.">> |
+|^.warning |^warning advice |`<<.warning text:"Eg: Make a backup ...">>` |<<.warning "Eg: Make a backup of your file<br>before you upgrade.">> |
 
 
-!Links
 
-|!Macro |!Used for |!Example |
-|.link |a link containing WikiText |<<.link "^^an^^ ~~example~~" Example>> |
-|.clink |a code link |<<.clink `<$list>` ListWidget>> |
-|.dlink |a link on a defining instance of a term |<<.dlink widget Widgets>> |
-|.dlink-ex |an external link on a defining instance of a term |<<.dlink-ex Example "http://example.com/">> |
-|.flink |a link to a field |<<.flink ListField>> |
-|.mlink |a link to a macro |<<.mlink qualify>> |
-|.mlink2 |a link to a macro, with specified target |<<.mlink2 foo "Examples of Macros">> |
-|.olink |a link to an operator |<<.olink prefix>> |
-|.olink2 |a link to an operator, with specified target |<<.olink2 foo prefix>> |
-|.vlink |a link to a variable |<<.vlink currentTiddler>> |
-|.vlink2 |a link to a variable, with specified target |<<.vlink2 foo "Examples of Variables">> |
-|.wlink |a link to a widget |<<.wlink ButtonWidget>> |
-|.wlink2 |a link to a widget, with specified text |<<.wlink2 foo ButtonWidget>> |
+! Blocks
 
-!Tabs
-|!Macro |!Used for |!Example |
+|Macro |Example |Used for |h
+|.preamble |`<<.preamble "your text comes here">>` |<<.preamble "an introductory sentence that stands apart from the rest of the tiddler">> |
+
+! Tiddlers and Fields
+
+|Macro |Used for |Example |Rendered |h
+|.tid |a tiddler title |`<<.tid Example>>` |<<.tid Example>> |
+|.tag |a tag |`<<.tag Example>>` |<<.tag Example>> |
+|.field |a field name |`<<.field example>>` |<<.field example>> |
+|.value |a field value |`<<.value "example value">>` |<<.value "example value">> |
+|.op |a filter operator |`<<.op backlinks>>` |<<.op backlinks>> |
+|.var |a variable or macro name |`<<.var currentTiddler>>` |<<.var currentTiddler>> |
+|.wid |a widget name |`<<.wid list>>` |<<.wid list>> |
+|.attr |an attribute name |`<<.attr filter>>` |<<.attr filter>> |
+|.param |a macro parameter name |`<<.param text>>` |<<.param text>> |
+|.tiddler-fields |a list of tiddler fields |`<<.tiddler-fields "Monday">>` |<<.tiddler-fields "Monday">> |
+
+! Links
+
+|!Macro |Used for |Example |Renderd |h
+|.link |link containing WikiText |`<<.link "^^an^^ ~~example~~" Example>>` |<<.link "^^an^^ ~~example~~" Example>> |
+|.clink |code link |``<<.clink `<$list>` ListWidget>>`` |<<.clink `<$list>` ListWidget>> |
+|.dlink |definition link for a instance of a term |`<<.dlink widget Widgets>>` |<<.dlink widget Widgets>> |
+|.dlink-ex |external link to a defining instance of a term |`<<.dlink-ex Example "http://example.com/">>` |<<.dlink-ex Example "http://example.com/">> |
+|.flink |field link |`<<.flink ListField>>` |<<.flink ListField>> |
+|.mlink |macro link |`<<.mlink qualify>>` |<<.mlink qualify>> |
+|.mlink2 |macro link with a specified target |`<<.mlink2 foo "Examples of Macros">>` |<<.mlink2 foo "Examples of Macros">> |
+|.olink |operator link |`<<.olink prefix>>` |<<.olink prefix>> |
+|.olink2 |operator link with specified target |`<<.olink2 foo prefix>>` |<<.olink2 foo prefix>> |
+|.vlink |variable link |`<<.vlink currentTiddler>>` |<<.vlink currentTiddler>> |
+|.vlink2 |variable link with specified target |`<<.vlink2 foo "Examples of Variables">>` |<<.vlink2 foo "Examples of Variables">> |
+|.wlink |widget link |`<<.wlink ButtonWidget>>` |<<.wlink ButtonWidget>> |
+|.wlink2 |widget link with specified text |`<<.wlink2 foo ButtonWidget>>` |<<.wlink2 foo ButtonWidget>> |
+
+! Keyboard Shortcuts
+
+|Macro |Used for |Example |Rendered |h
+|.key |a key on the keyboard |`<<.key Escape>>` |<<.key Escape>> |
+|.keys |a key combination |`<<.keys Ctrl+Enter>>` |<<.keys Ctrl+Enter>> |
+
+! Doc-Tabs
+
+See: [[CheckboxWidget]]
+
+|Macro |Used for |Example |h
 |.doc-tabs |showing a tab set in a documentation tiddler | -- |
 |.doc-tab-link |button to activate a tab | -- |
 |.widget-attr-link |button with a widget attribute name to activate a tab | -- |
 
+! Sidebar Tabs
 
-!User interface
+|Macro |Used for |Example |Rendered |h
+|.sidebar-tab |the name of a sidebar tab |`<<.sidebar-tab More>>` |<<.sidebar-tab More>> |
+|.more-tab |the name of a subtab of the More tab |`<<.more-tab Shadows>>` |<<.more-tab Shadows>> |
+|.info-tab |the name of a tiddler info tab |`<<.info-tab Fields>>` |<<.info-tab Fields>> |
+|.controlpanel-tab |the name of a Control Panel tab |`<<.controlpanel-tab Settings>>` |<<.controlpanel-tab Settings>> |
+|.advancedsearch-tab |the name of an Advanced Search tab |`<<.advancedsearch-tab Filter>>` |<<.advancedsearch-tab Filter>> |
+|.toc-tab |name of the tw5.com TOC tab |`<<.toc-tab>>` |<<.toc-tab>> |
+|.example-tab |an example tab name |`<<.example-tab "Notes">>` |<<.example-tab "Notes">> |
 
-|!Macro |!Used for |!Example |
-|.key |a key on the keyboard |<<.key Escape>> |
-|.keycombo |a key combination |<<.keycombo Ctrl Enter>> |
+!! Parameters for .sidebar-tab
 
-!Tabs
+|Open |`<<.sidebar-tab Open>>` |<<.sidebar-tab Open>> |
+|Recent |`<<.sidebar-tab Recent>>` |<<.sidebar-tab Recent>> |
+|Tools |`<<.sidebar-tab Tools>>` |<<.sidebar-tab Tools>> |
+|More |`<<.sidebar-tab More>>` |<<.sidebar-tab More>> |
 
-|!Macro |!Used for |!Example |
-|.sidebar-tab |the name of a sidebar tab |<<.sidebar-tab More>> |
-|.more-tab |the name of a subtab of the More tab |<<.more-tab Shadows>> |
-|.info-tab |the name of a tiddler info tab |<<.info-tab Fields>> |
-|.controlpanel-tab |the name of a Control Panel tab |<<.controlpanel-tab Settings>> |
-|.advancedsearch-tab |the name of an Advanced Search tab |<<.advancedsearch-tab Filter>> |
-|.toc-tab |name of the tw5.com TOC tab |<<.toc-tab>> |
-|.example-tab |an example tab name |<<.example-tab "Notes">> |
+!! Parameters for .more-tab
 
-!!Parameters for .sidebar-tab
+|All |`<<.more-tab All>>` |<<.more-tab All>> |
+|Recent |`<<.more-tab Recent>>` |<<.more-tab Recent>> |
+|Tags |`<<.more-tab Tags>>` |<<.more-tab Tags>> |
+|Missing |`<<.more-tab Missing>>` |<<.more-tab Missing>> |
+|Drafts |`<<.more-tab Drafts>>` |<<.more-tab Drafts>> |
+|Orphans |`<<.more-tab Orphans>>` |<<.more-tab Orphans>> |
+|Types |`<<.more-tab Types>>` |<<.more-tab Types>> |
+|System |`<<.more-tab System>>` |<<.more-tab System>> |
+|Shadows |`<<.more-tab Shadows>>` |<<.more-tab Shadows>> |
 
-|Open |<<.sidebar-tab Open>> |
-|Recent |<<.sidebar-tab Recent>> |
-|Tools |<<.sidebar-tab Tools>> |
-|More |<<.sidebar-tab More>> |
+!! Parameters for .info-tab
 
-!!Parameters for .more-tab
+|Tools |`<<.info-tab Tools>>` |<<.info-tab Tools>> |
+|References |`<<.info-tab References>>` |<<.info-tab References>> |
+|Tagging |`<<.info-tab Tagging>>` |<<.info-tab Tagging>> |
+|List |`<<.info-tab List>>` |<<.info-tab List>> |
+|Listed |`<<.info-tab Listed>>` |<<.info-tab Listed>> |
+|Fields |`<<.info-tab Fields>>` |<<.info-tab Fields>> |
+|Advanced |`<<.info-tab Advanced>>` |<<.info-tab Advanced>> |
 
-|All |<<.more-tab All>> |
-|Recent |<<.more-tab Recent>> |
-|Tags |<<.more-tab Tags>> |
-|Missing |<<.more-tab Missing>> |
-|Drafts |<<.more-tab Drafts>> |
-|Orphans |<<.more-tab Orphans>> |
-|Types |<<.more-tab Types>> |
-|System |<<.more-tab System>> |
-|Shadows |<<.more-tab Shadows>> |
+!! Parameters for .controlpanel-tab
 
-!!Parameters for .info-tab
+|Info |`<<.controlpanel-tab Info>>` |<<.controlpanel-tab Info>> |
+|Appearance |`<<.controlpanel-tab Appearance>>` |<<.controlpanel-tab Appearance>> |
+|Settings |`<<.controlpanel-tab Settings>>` |<<.controlpanel-tab Settings>> |
+|Saving |`<<.controlpanel-tab Saving>>` |<<.controlpanel-tab Saving>> |
+|Plugins |`<<.controlpanel-tab Plugins>>` |<<.controlpanel-tab Plugins>> |
 
-|Tools |<<.info-tab Tools>> |
-|References |<<.info-tab References>> |
-|Tagging |<<.info-tab Tagging>> |
-|List |<<.info-tab List>> |
-|Listed |<<.info-tab Listed>> |
-|Fields |<<.info-tab Fields>> |
-|Advanced |<<.info-tab Advanced>> |
+!! Parameters for .advancedsearch-tab
 
-!!Parameters for .controlpanel-tab
+|Standard |`<<.advancedsearch-tab Standard>>` |<<.advancedsearch-tab Standard>> |
+|System |`<<.advancedsearch-tab System>>` |<<.advancedsearch-tab System>> |
+|Shadows |`<<.advancedsearch-tab Shadows>>` |<<.advancedsearch-tab Shadows>> |
+|Filter |`<<.advancedsearch-tab Filter>>` |<<.advancedsearch-tab Filter>> |
 
-|Info |<<.controlpanel-tab Info>> |
-|Appearance |<<.controlpanel-tab Appearance>> |
-|Settings |<<.controlpanel-tab Settings>> |
-|Saving |<<.controlpanel-tab Saving>> |
-|Plugins |<<.controlpanel-tab Plugins>> |
+! Buttons
 
-!!Parameters for .advancedsearch-tab
+|Macro |Used for |Example |Rendered |h
+|.button |a standard button name and icon |`<<.button "new-tiddler">>` |<<.button "new-tiddler">> |
 
-|Standard |<<.advancedsearch-tab Standard>> |
-|System |<<.advancedsearch-tab System>> |
-|Shadows |<<.advancedsearch-tab Shadows>> |
-|Filter |<<.advancedsearch-tab Filter>> |
+!! Parameters for .button
 
-!Buttons
+!!! Tiddler toolbar
 
-|!Macro |!Used for |!Example |
-|.button |a standard button name and icon |<<.button "new-tiddler">> |
+|clone |`<<.button "clone">>` |<<.button "clone">> |
+|close |`<<.button "close">>` |<<.button "close">> |
+|close-others |`<<.button "close-others">>` |<<.button "close-others">> |
+|edit |`<<.button "edit">>` |<<.button "edit">> |
+|export-tiddler |`<<.button "export-tiddler">>` |<<.button "export-tiddler">> |
+|info |`<<.button "info">>` |<<.button "info">> |
+|more-tiddler-actions |`<<.button "more-tiddler-actions">>` |<<.button "more-tiddler-actions">> |
+|new-here |`<<.button "new-here">>` |<<.button "new-here">> |
+|new-journal-here |`<<.button "new-journal-here">>` |<<.button "new-journal-here">> |
+|permalink |`<<.button "permalink">>` |<<.button "permalink">> |
 
-!!Parameters for .button
+!!! Edit-mode toolbar
 
-!!!Tiddler toolbar
+|cancel |`<<.button "cancel">>` |<<.button "cancel">> |
+|delete |`<<.button "delete">>` |<<.button "delete">> |
+|save |`<<.button "save">>` |<<.button "save">> |
 
-|clone |<<.button "clone">> |
-|close |<<.button "close">> |
-|close-others |<<.button "close-others">> |
-|edit |<<.button "edit">> |
-|export-tiddler |<<.button "export-tiddler">> |
-|info |<<.button "info">> |
-|more-tiddler-actions |<<.button "more-tiddler-actions">> |
-|new-here |<<.button "new-here">> |
-|new-journal-here |<<.button "new-journal-here">> |
-|permalink |<<.button "permalink">> |
+!!! Page toolbar
 
-!!!Edit-mode toolbar
-
-|cancel |<<.button "cancel">> |
-|delete |<<.button "delete">> |
-|save |<<.button "save">> |
-
-!!!Page toolbar
-
-|advanced-search |<<.button "advanced-search">> |
-|close-all |<<.button "close-all">> |
-|control-panel |<<.button "control-panel">> |
-|encryption |<<.button "encryption">> |
-|export-page |<<.button "export-page">> |
-|full-screen |<<.button "full-screen">> |
-|home |<<.button "home">> |
-|import |<<.button "import">> |
-|language |<<.button "language">> |
-|more-page-actions |<<.button "more-page-actions">> |
-|new-journal |<<.button "new-journal">> |
-|new-tiddler |<<.button "new-tiddler">> |
-|permaview |<<.button "permaview">> |
-|refresh |<<.button "refresh">> |
-|save-wiki |<<.button "save-wiki">> |
-|storyview |<<.button "storyview">> |
-|tag-manager |<<.button "tag-manager">> |
-|theme |<<.button "theme">> |
+|advanced-search |`<<.button "advanced-search">>` |<<.button "advanced-search">> |
+|close-all |`<<.button "close-all">>` |<<.button "close-all">> |
+|control-panel |`<<.button "control-panel">>` |<<.button "control-panel">> |
+|encryption |`<<.button "encryption">>` |<<.button "encryption">> |
+|export-page |`<<.button "export-page">>` |<<.button "export-page">> |
+|full-screen |`<<.button "full-screen">>` |<<.button "full-screen">> |
+|home |`<<.button "home">>` |<<.button "home">> |
+|import |`<<.button "import">>` |<<.button "import">> |
+|language |`<<.button "language">>` |<<.button "language">> |
+|more-page-actions |`<<.button "more-page-actions">>` |<<.button "more-page-actions">> |
+|new-journal |`<<.button "new-journal">>` |<<.button "new-journal">> |
+|new-tiddler |`<<.button "new-tiddler">>` |<<.button "new-tiddler">> |
+|permaview |`<<.button "permaview">>` |<<.button "permaview">> |
+|refresh |`<<.button "refresh">>` |<<.button "refresh">> |
+|save-wiki |`<<.button "save-wiki">>` |<<.button "save-wiki">> |
+|storyview |`<<.button "storyview">>` |<<.button "storyview">> |
+|tag-manager |`<<.button "tag-manager">>` |<<.button "tag-manager">> |
+|theme |`<<.button "theme">>` |<<.button "theme">> |
