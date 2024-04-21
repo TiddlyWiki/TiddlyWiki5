@@ -1,5 +1,5 @@
 created: 20200412212935849
-modified: 20200412212935849
+modified: 20240421123141645
 tags: [[compare Operator]] [[Operator Examples]]
 title: compare Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -9,3 +9,7 @@ type: text/vnd.tiddlywiki
 <<.operator-example 3 "[list[Days of the Week]compare:string:gt[M]compare:string:lt[W]]">>
 <<.operator-example 4 "[[v5.1.23-prerelease]compare:version:gt[v5.1.22]]">>
 <<.operator-example 5 "[[1]compare:number:gt[2]then[yes]else[no]]">>
+<<.operator-example 6 "[[-2]compare::lt[-1]]">>
+
+
+
