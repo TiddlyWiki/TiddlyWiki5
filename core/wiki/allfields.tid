@@ -3,16 +3,19 @@ title: $:/snippets/allfields
 \whitespace trim
 \import [[$:/core/ui/ControlPanel/Basics]]
 
-\define renderfield(title)
+\function getLingoText() [[$:/language/Docs/Fields/]] [<title>] +[join[]get[text]]
+
+\procedure renderfield(title)
 <tr class="tc-view-field">
 	<td class="tc-view-field-name">
-		''<$text text=<<__title__>>/>'':
+		''<$text text=<<title>>/>'':
 	</td>
 	<td class="tc-view-field-value">
-		//<$text text={{$:/language/Docs/Fields/$title$}}/>//
+		//<<getLingoText>>//
 	</td>
 	<td class="tc-view-field-links">
-		<<show-filter-count "[has[$title$]sort[]]">>
+		<!-- show-filter-count expects a filter string. It does no more processing -->
+		<$macrocall $name="show-filter-count" filter=`[has[$(title)$]sort[]]`>>
 	</td>
 </tr>
 \end
