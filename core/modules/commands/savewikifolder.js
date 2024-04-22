@@ -177,7 +177,9 @@ WikiFolderMaker.prototype.saveCustomPlugin = function(pluginTiddler) {
 	self.log("Writing " + directory + path.sep + "plugin.info: " + JSON.stringify(pluginInfo,null,$tw.config.preferences.jsonSpaces));
 	var pluginTiddlers = $tw.utils.parseJSONSafe(pluginTiddler.fields.text).tiddlers; // A hashmap of tiddlers in the plugin
 	$tw.utils.each(pluginTiddlers,function(tiddler,title) {
-		if(!tiddler.title) tiddler.title = title;
+		if(!tiddler.title) {
+			tiddler.title = title;
+		 }
 		self.saveTiddler(directory,new $tw.Tiddler(tiddler));
 	});
 };
