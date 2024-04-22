@@ -19,9 +19,16 @@ System/Caption: System
 System/Hint: Search for system tiddlers
 System/Matches: //<small><<resultCount>> matches</small>//
 Variables/Caption: Variables
+Variables/Clear: Clear
+Variables/Exclude: Exclude:
+Variables/Exclude/Hint: Filter
+Variables/Exclude/Show: Show exclude input
+Variables/Exclude/Hide: Hide exclude input
+Variables/Filter: Filter:
+Variables/Filter/Hint: Text
 Variables/Hint: Filter global variables
 Variables/Matches: //<small><<resultCount>> matches</small>//
-Variables/Search: Search Variables -
+Variables/Search: Search Variables
 Variables/Search/Details: Search tiddler text, tags:
 Variables/Option/Type: Type:
 Variables/Option/Sort: Sort:
