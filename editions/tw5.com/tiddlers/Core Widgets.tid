@@ -1,0 +1,10 @@
+created: 20240422083130158
+modified: 20240422083155753
+tags: Reference
+title: Core Widgets
+
+{{Widgets}}
+
+The following classes of widget are built into the core:
+
+<<list-links "[tag[Widgets]]" class:"multi-columns">>

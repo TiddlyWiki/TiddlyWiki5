@@ -1,12 +1,13 @@
 created: 20150220161908000
-modified: 20150228134138000
+modified: 20240421144847774
+tags: Reference
 title: Core Variables
 type: text/vnd.tiddlywiki
 
 The following [[variables|Variables]] are built into ~TiddlyWiki's core:
 
-<<list-links "[tag[Core Variables]] -[tag[Configuration Variables]]">>
+<<list-links filter:"[tag[Core Variables]] -[tag[Configuration Variables]]" class:"multi-columns">>
 
 The core will also use various configuration variables and macros if you define them:
 
-<<list-links "[tag[Configuration Variables]]">>
+<<list-links filter:"[tag[Configuration Variables]]"  class:"multi-columns">>
