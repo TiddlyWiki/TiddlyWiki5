@@ -469,7 +469,7 @@ a.tc-tiddlylink-external:hover {
 }
 
 /* wikitext bold for ''[[internal link]]'' */
-strong .tc-tiddlylink {
+strong.tc-strong .tc-tiddlylink {
 	font-weight: bolder;
 }
 

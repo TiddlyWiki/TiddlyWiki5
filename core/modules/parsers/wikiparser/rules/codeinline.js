@@ -47,6 +47,9 @@ exports.parse = function() {
 		tag: "code",
 		children: [{
 			type: "text",
+			attributes: {
+				class: {type: "string", value: "tc-emphasis tc-code"}
+			},
 			text: text
 		}]
 	}];
