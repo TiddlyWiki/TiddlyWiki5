@@ -468,7 +468,7 @@ a.tc-tiddlylink-external:hover {
 	color: <<colour tiddler-link-background>>;
 }
 
-/* wikitext bodl for ''[[internal link]]'' */
+/* wikitext bold for ''[[internal link]]'' */
 strong .tc-tiddlylink {
 	font-weight: bolder;
 }
