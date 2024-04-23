@@ -12,11 +12,9 @@ tags: $:/tags/Global
 \define DV-FILTER-STR() [variables<_tf.dv-type>]
 
 \define DV-TMP-SEARCH() $:/temp/varSearch
-\define DV-TMP-EXCLUDE() $:/temp/varExclude
 \define DV-TMP-SEARCH-DETAILS() $:/temp/varSearch/details
 \define DV-SEARCH-STATE() $:/state/varSearch
-
-\define DV-TMP-EXCLUDE-SUBFILTER() [[]]
+\define DV-TMP-EXCLUDE() $:/state/varExclude
 
 \function tf.dv-filterString() [<_tf.dv-sort>match[raw]then<DV-RAW-FILTER-STR>else<DV-FILTER-STR>]
 \function tf.dv-formattedVar() [<varname>format:variable<_tf.dv-varFormat>]
@@ -139,7 +137,6 @@ tags: $:/tags/Global
 \function tf.dv-getSearchText() [<tf.dv-searchText>get[text]]
 
 \function tf.dv-excludeText() [<DV-TMP-EXCLUDE>] [<qualify>] +[join[/]]
-\function tf.dv-getExcludeText() [<tf.dv-excludeText>get[text]else<DV-TMP-EXCLUDE-SUBFILTER>]
 \function tf.dv-getExcludeText() [<tf.dv-excludeText>get[text]]
 
 \function tf.dv-detailsSearch() [<DV-TMP-SEARCH-DETAILS>] [<varname>] [<qualify>] +[join[/]]
@@ -177,7 +174,11 @@ tags: $:/tags/Global
 	<% endif %>
 	<br>
 	<$text text={{$:/language/Search/Variables/Exclude}}/>
-	<$edit-text tiddler=<<tf.dv-excludeText>> tag=input class="tc-tiny-gap-left" placeholder={{$:/language/Search/Variables/Exclude/Hint}}/> <<dv-clearExcludeButton>>
+	<$edit-text tiddler=<<tf.dv-excludeText>> tag=input class="tc-tiny-gap" placeholder={{$:/language/Search/Variables/Exclude/Hint}}/>
+	<<variablesMorePopup>>
+	<% if [<tf.dv-getExcludeText>!is[blank]] %>
+		<<dv-clearExcludeButton>>
+	<% endif %>
 </div>
 <$list filter="[subfilter<tf.dv-filterString>] +[search::some<tf.dv-getSearchText>] +[filter<subfilter>] +[!filter<tf.dv-getExcludeText>]" variable="varname">
 	<div class="tc-var-item">
@@ -217,4 +218,68 @@ tags: $:/tags/Global
 		<% endif %>
 	</div>
 </$list>
+\end
+
+<!-- ============== -->
+
+<!-- TODO Select the focus to right input -->
+\procedure lc-actionsXX()
+<$action-setfield $tiddler="$:/temp/advancedsearch" text=<<navigateTo>>/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" text=<<navigateTo>>/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
+<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
+\end
+
+\procedure lc-actions()
+<$action-setfield $tiddler=<<tf.dv-excludeText>> text=<<navigateTo>>/>
+\end
+
+\procedure addVariableFilter()
+<$action-sendmessage
+	$message="tm-new-tiddler"
+	tags="$:/tags/Variables/Exclude/Snippet"
+	description={{$:/language/Search/Variables/Exclude/Description}}
+	text=<<tf.dv-getExcludeText>>
+/>
+
+<$action-deletetiddler
+	$tiddler=<<dropdown-state>>
+/>
+\end
+
+\procedure addNewVariableFilter()
+<hr>
+<$button tag="a" actions=<<addVariableFilter>> class="tc-tiddlylink">
+	<em>
+		<$text text={{$:/language/Search/Variables/Exclude/Save}}/>
+	</em>
+</$button>
+\end
+
+\procedure variablesMorePopup()
+<span class="tc-popup-keep">
+<$button popup=<<qualify "$:/state/variableDropdown">> class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+</span>
+
+<$reveal state=<<qualify "$:/state/variableDropdown">> type="popup" position="belowleft">
+	<$let name="tv-show-missing-links" value="yes">
+		<$linkcatcher actions=<<lc-actions>> >
+			<div class="tc-block-dropdown-wrapper">
+				<div class="tc-block-dropdown tc-edit-type-dropdown">
+					<$macrocall $name="list-tagged-draggable"
+						tag="$:/tags/Variables/Exclude/Snippet"
+						subFilter="!is[draft]"
+						itemTemplate="$:/core/ui/AdvancedSearch/Variables/ItemTemplate"
+					/>
+					<!-- <$list filter="[all[shadows+tiddlers]tag[$:/tags/Variables/Exclude/Snippet]!is[draft]]"> -->
+						<!-- <$link to={{!!text}}><$let tv-wikilinks="no"><$transclude field="description"/></$let></$link> -->
+					<!-- </$list> -->
+					<<addNewVariableFilter>>
+				</div>
+			</div>
+		</$linkcatcher>
+	</$let>
+</$reveal>
 \end

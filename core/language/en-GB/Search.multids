@@ -21,11 +21,13 @@ System/Matches: //<small><<resultCount>> matches</small>//
 Variables/Caption: Variables
 Variables/Clear: Clear
 Variables/Exclude: Exclude:
-Variables/Exclude/Hint: Filter
-Variables/Exclude/Show: Show exclude input
 Variables/Exclude/Hide: Hide exclude input
+Variables/Exclude/Hint: Filter eg: [prefix[.]]
+Variables/Exclude/Save: Create / Save Exclude Filter
+Variables/Exclude/Show: Show exclude input
+Variables/Exclude/Description: EDIT ME - Description is shown in the dropdown
 Variables/Filter: Filter:
-Variables/Filter/Hint: Text
+Variables/Filter/Hint: Text eg: .attr
 Variables/Hint: Filter global variables
 Variables/Matches: //<small><<resultCount>> matches</small>//
 Variables/Search: Search Variables
