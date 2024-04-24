@@ -1,0 +1,16 @@
+title: $:/core/ui/AdvancedSearch/Variables/ItemTemplate
+
+\whitespace trim
+
+\procedure editSnippet()
+<$action-sendmessage $message="tm-edit-tiddler" title=<<currentTiddler>> />
+\end
+
+<$link to={{!!text}} >
+	<$let tv-wikilinks="no">
+		<$transclude field="description"/>
+	</$let>
+</$link>
+<$button actions=<<editSnippet>> class="tc-btn-invisible tc-small-gap-left">
+	{{$:/core/images/edit-button}}
+</$button>

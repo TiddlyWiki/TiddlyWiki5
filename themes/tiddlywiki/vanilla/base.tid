@@ -1954,6 +1954,22 @@ html body.tc-body.tc-single-tiddler-window {
 	text-decoration: none;
 }
 
+.tc-block-dropdown-wrapper .tc-variables-dropdown {
+	position: relative;
+}
+
+.tc-block-dropdown-wrapper .tc-variables-dropdown a {
+	display: inline-block;
+	width: 90%;
+}
+
+.tc-block-dropdown-wrapper .tc-variables-dropdown svg {
+	height: .9rem;
+	width: .9rem;
+}
+
+
+
 .tc-search-results {
 	padding: 0 7px 0 7px;
 }
