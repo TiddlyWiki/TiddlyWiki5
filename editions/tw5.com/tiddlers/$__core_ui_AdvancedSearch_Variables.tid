@@ -8,4 +8,6 @@ type: text/vnd.tiddlywiki
 
 {{$:/language/Search/Variables/Hint}}
 
+<div class="tc-search tc-advanced-search">
 <<search-variables>>
+</div>
