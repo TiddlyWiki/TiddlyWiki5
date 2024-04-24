@@ -1,0 +1,103 @@
+title: /core/template/flexible-form/styles
+tags: $:/tags/Stylesheet
+
+.tc-flexible-form {
+	<!-- outline: 1px solid blue; -->
+	overflow: auto;
+	margin-bottom: 1em;
+}
+.tc-flexible-checkbox-container {
+	padding: 4px 3px 3px 3px;
+	border-bottom: 1px dotted black;
+	display: grid;
+	grid-column-gap: 0.3em;
+	grid-template-columns: 5.3em 3em 3em 4em 4em 5em 5em 8em 8em 1fr;
+	grid-template-areas:
+		"t-txt c-fn c-var c-proc c-macro c-widget sel-txt sel-drop ex-btn";
+}
+
+.tc-flexible-input-container {
+	padding: 4px 3px 3px 3px;
+	display: grid;
+	<% if [<tf.dv-foldedState>get[text]match[show]] %>
+		grid-row-gap: 0.2em;
+	<% endif %>
+	grid-column-gap: 0.3em;
+	grid-template-columns: 1em 4em 1fr 1.5em 1.5em;
+	grid-template-areas:
+		"btn-fld x-txt x-inp btn-x btn-xx"
+		"btn-fld y-txt y-inp btn-y btn-yy";
+}
+
+.btn-fld {
+	<% if [<tf.dv-foldedState>get[text]match[show]] %>
+		align-self: center;
+	<% endif %>
+	padding: 0 2px;
+	grid-area: btn-fld;
+}
+
+.x-inp {
+	grid-area: x-inp;
+}
+.y-inp {
+	grid-area: y-inp;
+}
+
+.t-txt,
+.x-txt,
+.y-txt {
+	text-align: right;
+}
+.t-txt {
+	grid-area: t-txt;
+}
+.x-txt {
+	grid-area: x-txt;
+}
+.y-txt {
+	grid-area: y-txt;
+}
+
+.btn-t {
+	grid-area: btn-t;
+}
+.btn-x {
+	grid-area: btn-x;
+}
+.btn-y {
+	grid-area: btn-y;
+}
+
+.btn-xx {
+	grid-area: btn-xx;
+}
+.btn-yy {
+	grid-area: btn-yy;
+}
+
+.c-fn {
+	grid-area: c-fn;
+}
+.c-var {
+	grid-area: c-var;
+}
+.c-proc {
+	grid-area: c-proc;
+}
+.c-macro {
+	grid-area: c-macro;
+}
+.c-widget {
+	grid-area: c-widget;
+}
+.sel-txt {
+	text-align: right;
+	grid-area: sel-txt;
+}
+.sel-drop {
+	grid-area: sel-drop;
+}
+.ex-btn {
+	grid-area: ex-btn;
+}

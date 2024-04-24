@@ -28,7 +28,7 @@ Variables/Exclude/Show: Show exclude input
 Variables/Exclude/Description: EDIT ME - Description is shown in the dropdown
 Variables/ExpandAll: Expand All:
 Variables/FoldAll: Fold All:
-Variables/Filter: Filter:
+Variables/Filter: Search:
 Variables/Filter/Hint: Text eg: .attr
 Variables/Hint: Filter global variables
 Variables/Matches: //<small><<resultCount>> matches</small>//

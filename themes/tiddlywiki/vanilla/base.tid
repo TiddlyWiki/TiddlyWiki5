@@ -938,7 +938,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-advanced-search input {
-	width: 60%;
+	width: 90%;
+}
+
+.tc-advanced-search .tc-flexible-form .txt-input {
+	width: 100%;
 }
 
 .tc-search a svg {
@@ -1954,6 +1958,7 @@ html body.tc-body.tc-single-tiddler-window {
 	text-decoration: none;
 }
 
+.tc-block-dropdown-wrapper .tc-edit-type-dropdown,
 .tc-block-dropdown-wrapper .tc-variables-dropdown {
 	position: relative;
 }
@@ -1968,7 +1973,9 @@ html body.tc-body.tc-single-tiddler-window {
 	width: .9rem;
 }
 
-
+.tc-variables-dropdown a.tc-tiddlylink-missing {
+	font-style: normal;
+}
 
 .tc-search-results {
 	padding: 0 7px 0 7px;

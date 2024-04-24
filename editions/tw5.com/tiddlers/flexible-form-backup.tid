@@ -1,0 +1,112 @@
+created: 20240424104446409
+modified: 20240424104446409
+title: /core/template/flexible-form
+type: text/vnd.tiddlywiki
+
+\parameters (sort, type)
+
+\whitespace trim
+
+\define FI-VAR-FILTER-OPTIONS() fn var proc macro widget
+
+\define FI-FOLDED() $:/temp/varFolded
+\define FI-SEARCH() $:/temp/varSearch
+\define FI-EXCLUDE() $:/temp/varExclude
+
+\function tf.fi-tmpTypeOptions() [<DV-TMP-FILTER-OPTIONS>] [<qualify>] +[join[/]]
+\function tf.fi-tmpSortOptions() [<DV-TMP-SORT-OPTIONS>] [<qualify>] +[join[/]]
+
+\function tf.fi-foldedState() [<FI-FOLDED>] [<qualify>] +[join[/]]
+
+\function tf.fi-searchText() [<FI-SEARCH>] [<qualify>] +[join[/]]
+\function tf.fi-getSearchText() [<tf.fi-searchText>get[text]]
+
+\function tf.fi-excludeText() [<FI-EXCLUDE>] [<qualify>] +[join[/]]
+\function tf.fi-getExcludeText() [<tf.fi-excludeText>get[text]]
+
+\procedure fi-clearSearchButton()
+<$button class="tc-btn-invisible btn-x" tooltip=`${ [{$:/language/Search/Variables/Clear}] [{$:/language/Search/Variables/Filter}] +[join[ ]] }$`>
+	<$action-deletetiddler $tiddler=<<tf.dv-searchText>>/>
+	{{$:/core/images/close-button}}
+</$button>
+\end
+
+\procedure fi-clearExcludeButton()
+<$button class="tc-btn-invisible btn-y" tooltip=`${ [{$:/language/Search/Variables/Clear}] [{$:/language/Search/Variables/Exclude}] +[join[ ]] }$`>
+	<$action-deletetiddler $tiddler=<<tf.dv-excludeText>>/>
+	{{$:/core/images/close-button}}
+</$button>
+\end
+
+\procedure fi-search-input-box()
+<%if [<sort>!is[blank]] %>
+	<code class="tc-small-gap">sort:<<_tf.fi-sort>></code>
+<%endif%>
+<%if [<type>!is[blank]] %>
+	<code class="tc-small-gap">type:<<_tf.fi-type>></code>
+<%endif%>
+<span class="x-txt"><$text text={{$:/language/Search/Variables/Filter}}/></span>
+<$edit-text tiddler=<<tf.fi-searchText>> tag=input class="x-inp" placeholder="filter variables by name"/> <<fi-clearSearchButton>>
+<% if [<DV-SEARCH-STATE>get[text]match[yes]] %>
+	<<fi-clearStatesButton>>
+<% else %>
+	<<fi-expandAllStatesButton>>
+<% endif %>
+\end
+
+\procedure fi-exclude-input-box()
+<span class="y-txt"><$text text={{$:/language/Search/Variables/Exclude}}/></span>
+<$edit-text tiddler=<<tf.fi-excludeText>> tag=input class="y-inp"/> <<fi-clearExcludeButton>>
+\end
+
+\function tf.fi-opt-class() "c" [<option>] +[join[-]] "tc-dv-filterOptions" +[join[ ]]
+
+\procedure fi-filterOptions()
+<style>
+.tc-dv-filterOptions [data-gap="right"] {
+	width: auto;
+	margin-right: .25em;
+}
+</style>
+<span class="t-txt">{{$:/language/Search/Variables/Option/Type}}</span>
+<$list filter="[enlist<FI-VAR-FILTER-OPTIONS>]" variable="option">
+	<$checkbox tiddler=<<tf.fi-tmpTypeOptions>> listField="text" checked=<<option>>
+		class=<<tf.fi-opt-class>> data-gap="right"
+	>
+		<<option>>
+	</$checkbox>
+</$list>
+\end
+
+\procedure fi-sortOptions()
+<span class="sel-txt">{{$:/language/Search/Variables/Option/Sort}}</span>
+<$select tiddler=<<tf.fi-tmpSortOptions>> default="alphabetical" class="sel-drop">
+	<option value="alphabetical">alphabetical</option>
+	<option value="raw">raw</option>
+</$select>
+\end
+
+<div class="tc-flexible-form">
+	<div class="tc-flexible-checkbox-container">
+	<<fi-filterOptions>> <<fi-sortOptions>>
+	</div>
+	<div class="tc-flexible-input-container">
+		<$reveal tag="div" type="nomatch" stateTitle=<<tf.fi-foldedState>> text="show" default="hide" class="btn-fld">
+			<$button tooltip={{$:/language/Search/Variables/Exclude/Show}}  class="tc-fi-btn tc-btn-invisible">
+				<$action-setfield $tiddler=<<tf.fi-foldedState>> $field=text $value="show"/>
+				{{$:/core/images/right-arrow}}
+			</$button>
+		</$reveal>
+		<$reveal tag="div" type="nomatch" stateTitle=<<tf.fi-foldedState>> text="hide" default="hide" class="btn-fld">
+			<$button tooltip={{$:/language/Search/Variables/Exclude/Hide}}  class="tc-fi-btn tc-btn-invisible">
+				<$action-setfield $tiddler=<<tf.fi-foldedState>> $field=text $value="hide"/>
+				{{$:/core/images/up-arrow}}
+			</$button>
+		</$reveal>
+		<<fi-search-input-box>>
+		<% if [<tf.fi-foldedState>get[text]match[show]] %>
+			<<fi-exclude-input-box>>
+		<% endif %>
+	</div>
+</div>
+
