@@ -52,6 +52,8 @@ tags: $:/tags/Global
 \end
 
 \procedure dv-clearStatesButton()
+<span class="tc-small-gap-left">|</span>
+<span class="tc-small-gap">{{$:/language/Search/Variables/FoldAll}}</span>
 <$button class="tc-btn-invisible tc-tiny-gap-left">
 	<!-- "search text details" should be preserved -->
 	<$action-deletetiddler $filter="[prefix<DV-SEARCH-STATE>]"/>
@@ -67,13 +69,15 @@ tags: $:/tags/Global
 \end
 
 \procedure dv-clearExcludeButton()
-<$button class="tc-btn-invisible tc-tiny-gap-left">
+<$button class="tc-btn-invisible">
 	<$action-deletetiddler $tiddler=<<tf.dv-excludeText>>/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
 
 \procedure dv-expandAllStatesButton()
+<span class="tc-small-gap-left">|</span>
+<span class="tc-small-gap">{{$:/language/Search/Variables/ExpandAll}}</span>
 <$button class="tc-btn-invisible tc-tiny-gap-left">
 	<$action-setfield $tiddler=<<DV-SEARCH-STATE>> text={{{ [<tf.dv-toggleInfoState>get[text]] +[toggle[yes],[no]] }}}/>
 	<!-- only expand currently visible elements -->
@@ -160,6 +164,13 @@ tags: $:/tags/Global
 <% if [<sort>is[blank]] %>
 	<<dv-sortOptions>>
 <% endif %>
+
+<% if [<DV-SEARCH-STATE>get[text]match[yes]] %>
+	<<dv-clearStatesButton>>
+<% else %>
+	<<dv-expandAllStatesButton>>
+<% endif %>
+
 <div class="tc-dv-search-input">
 	<% if [<thisTiddler>!match[$:/AdvancedSearch]] %>
 		<%if [<sort>!is[blank]] %><code class="tc-small-gap">sort:<<_tf.dv-sort>></code><%endif%>
@@ -167,11 +178,6 @@ tags: $:/tags/Global
 	<% endif %>
 	<$text text={{$:/language/Search/Variables/Filter}}/>
 	<$edit-text tiddler=<<tf.dv-searchText>> tag=input class="tc-tiny-gap-left" placeholder={{$:/language/Search/Variables/Filter/Hint}}/> <<dv-clearSearchButton>>
-	<% if [<DV-SEARCH-STATE>get[text]match[yes]] %>
-		<<dv-clearStatesButton>>
-	<% else %>
-		<<dv-expandAllStatesButton>>
-	<% endif %>
 	<br>
 	<$text text={{$:/language/Search/Variables/Exclude}}/>
 	<$edit-text tiddler=<<tf.dv-excludeText>> tag=input class="tc-tiny-gap" placeholder={{$:/language/Search/Variables/Exclude/Hint}}/>
