@@ -10,7 +10,9 @@ title: Output
 title: Button
 
 <$button><<parent-ancestorcount>></$button>
+<$button><<parent-ancestorcount-dom>></$button>
 +
 title: ExpectedResult
 
-<p>1000 - <button class="">6</button></p>
+<p>1000 - <button>6</button>
+<button>2</button></p>
