@@ -637,9 +637,6 @@ Render the children of this widget into the DOM
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {
 	var children = this.children;
-	// if(this.tag) {
-	// 	var x = this.getAncestorCountDom(true);
-	// }
 	for(var i = 0; i < children.length; i++) {
 		children[i].render(parent,nextSibling);
 	};
