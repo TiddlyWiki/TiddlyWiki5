@@ -14,6 +14,7 @@ Set a field or index at a given tiddler via radio buttons
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var RadioWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

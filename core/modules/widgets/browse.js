@@ -15,6 +15,7 @@ Browse widget for browsing for files to import
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var BrowseWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

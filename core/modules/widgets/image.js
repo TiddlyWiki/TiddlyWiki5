@@ -31,6 +31,7 @@ The width and height attributes are interpreted as a number of pixels, and do no
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ImageWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 
@@ -65,10 +66,10 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 			if(text) {
 				// Render the appropriate element for the image type by looking up the encoding in the content type info
 				var encoding = typeInfo.encoding || "utf8";
-				if (encoding === "base64") {
+				if(encoding === "base64") {
 					// .pdf .png .jpg etc.
 					src = "data:" + deserializerType + ";base64," + text;
-					if (deserializerType === "application/pdf") {
+					if(deserializerType === "application/pdf") {
 						tag = "embed";
 					}
 				} else {

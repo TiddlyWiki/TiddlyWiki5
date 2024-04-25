@@ -25,6 +25,7 @@ var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

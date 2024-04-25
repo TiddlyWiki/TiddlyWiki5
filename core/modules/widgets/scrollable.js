@@ -17,6 +17,7 @@ var DEBOUNCE_INTERVAL = 100; // Delay after last scroll event before updating th
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ScrollableWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

@@ -15,6 +15,7 @@ Widget to wikify text into a variable
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var WikifyWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

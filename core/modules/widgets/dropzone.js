@@ -17,6 +17,7 @@ var IMPORT_TITLE = "$:/Import";
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var DropZoneWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 

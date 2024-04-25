@@ -15,6 +15,7 @@ Checkbox widget
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var CheckboxWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 
