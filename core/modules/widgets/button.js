@@ -75,7 +75,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
-	var classes = this["class"].split(" ") || [],
+	var classes = (this["class"]) ? this["class"].split(" ") : [],
 		isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();
 	if(this.selectedClass) {
 		if((this.set || this.setTitle) && this.setTo && this.isSelected()) {
@@ -89,7 +89,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(isPoppedUp) {
 		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
-	domNode.className = classes.join(" ");
+	if(classes.length > 0) {
+		domNode.className = classes.join(" ");
+	}
 	// Assign data- attributes
 	this.assignAttributes(domNode,{
 		sourcePrefix: "data-",
