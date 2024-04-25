@@ -49,13 +49,12 @@ exports.parse = function() {
 		}];
 	} else {
 		return [{
-			type: "link",
-			attributes: {
-				to: {type: "string", value: link}
-			},
-			children: [{
-				type: "text", text: text
-			}]
+			type: "macrocall",
+			name: "tm-prettylink-internal",
+			params: [
+				{name: "to", value: link},
+				{name: "text", value: text}
+			]
 		}];
 	}
 };

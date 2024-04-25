@@ -1,0 +1,13 @@
+title: $:/core/macros/shortcuts/prettylink
+tags: $:/tags/Macro
+
+\define x-tm-prettylink-internal(to,text)
+<$link to=<<__to__>>><$text text=<<__text__>>/></$link>
+\end
+
+\define tm-prettylink-internal(to,text)
+<$button>
+<$action-navigate $to=<<__to__>>/>
+<$text text=<<__text__>>/>
+</$button>
+\end
