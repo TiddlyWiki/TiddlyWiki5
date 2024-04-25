@@ -17,6 +17,7 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var Popup = require("$:/core/modules/utils/dom/popup.js");
 
 var ButtonWidget = function(parseTreeNode,options) {
+	options.hasDom = true;
 	this.initialise(parseTreeNode,options);
 };
 
@@ -56,14 +57,16 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Check "button in button". Return early with an error message
 	// This check also prevents fatal recursion errors using the transclusion widget
-	if(this.isNestedButton()) {
-		var domNode = this.document.createElement("span");
-		var textNode = this.document.createTextNode($tw.language.getString("Error/RecursiveButton"));
-		domNode.appendChild(textNode);
-		domNode.className = "tc-error";
-		parent.insertBefore(domNode,nextSibling);
-		this.domNodes.push(domNode);
-		return;  // an error message
+	if(this.getVariable("tv-limit-nested-buttons") === "yes") {
+		if(this.isNestedButton()) {
+			var domNode = this.document.createElement("span");
+			var textNode = this.document.createTextNode($tw.language.getString("Error/RecursiveButton"));
+			domNode.appendChild(textNode);
+			domNode.className = "tc-error";
+			parent.insertBefore(domNode,nextSibling);
+			this.domNodes.push(domNode);
+			return;  // an error message
+		}
 	}
 	// Create element
 	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
