@@ -1,5 +1,5 @@
 created: 20240417070900019
-modified: 20240418072413015
+modified: 20240425133540950
 tags: 
 title: test-new-set-get-macros
 type: text/vnd.tiddlywiki
@@ -7,6 +7,8 @@ type: text/vnd.tiddlywiki
 \import test-collatz
 
 ancestor count: <<parent-ancestorcount>>
+
+ancestor dom count: <<parent-ancestorcount-dom>>
 
 UNSAFE_max_widget_tree_depth: <<get_UNSAFE_max_widget_tree_depth>>
 

@@ -1,10 +1,13 @@
 created: 20240415124530887
-modified: 20240416111839904
+modified: 20240425142547412
 tags: 
 title: test-recursive button
 type: text/vnd.tiddlywiki
 
 \whitespace trim
+
+<<parent-ancestorcount-dom>>
+
 <$button>
 <$transclude/>
 </$button>

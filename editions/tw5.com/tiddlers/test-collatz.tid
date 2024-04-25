@@ -1,5 +1,5 @@
 created: 20240415102801809
-modified: 20240418072358045
+modified: 20240425142244830
 tags: 
 title: test-collatz
 type: text/vnd.tiddlywiki
@@ -8,15 +8,12 @@ type: text/vnd.tiddlywiki
 <% if [<n>match[1]] %>
   1
 <% elseif [<n>remainder[2]match[1]] %>
-  <<n>> → <$transclude $variable="collatz" n = {{{ [<n>multiply[3]add[1]] }}}/>
+  <<n>> - ^^@@<<parent-ancestorcount>>@@^^ → <$transclude $variable="collatz" n = {{{ [<n>multiply[3]add[1]] }}}/>
 <% else %>
-  <<n>> → <$transclude $variable="collatz" n = {{{ [<n>divide[2]] }}}/>
+  <<n>> - ^^@@<<parent-ancestorcount>>@@^^ → <$transclude $variable="collatz" n = {{{ [<n>divide[2]] }}}/>
 <% endif %>
 \end
 
-\procedure test(x:10)
-<<set_UNSAFE_max_widget_tree_depth 2000>>
-<$transclude $variable=collatz n=<<x>>/>
-\end
+<<set_UNSAFE_max_widget_tree_depth 5000>>
 
-<<test 77031>>
+<<collatz 9780657630>>
