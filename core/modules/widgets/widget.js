@@ -14,6 +14,7 @@ Widget base class
 
 /* Maximum permitted depth of the widget tree for recursion detection */
 var MAX_WIDGET_TREE_DEPTH = 1000;
+var MAX_DOM_TREE_DEPTH = 100;
 
 /*
 Create a widget object for a parse tree node
@@ -65,6 +66,23 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 			}
 		});
 	}
+	// Increment ancestorCountDom if options.hasDom = true otherwise set it to the "old" value
+	this.getAncestorCountDom(options.hasDom);
+};
+
+Widget.prototype.getAncestorCountDom = function(createsDomNode) {
+	if(this.ancestorCountDom === undefined) {
+		if(this.parentWidget) {
+			if(createsDomNode) {
+				this.ancestorCountDom = this.parentWidget.getAncestorCountDom() + 1;
+			} else {
+				this.ancestorCountDom = this.parentWidget.getAncestorCountDom();
+			}
+		} else {
+			this.ancestorCountDom = 0;
+		}
+	}
+	return this.ancestorCountDom;
 };
 
 /*
@@ -496,10 +514,18 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	this.children = [];
 	var self = this;
 	// Check for too much recursion
-	if(this.getAncestorCount() > this.UNSAFE_max_widget_tree_depth) {
-			this.children.push(this.makeChildWidget({type: "error", attributes: {
-			"$message": {type: "string", value: this.getAncestorCount() + " - " + $tw.language.getString("Error/RecursiveTransclusion")}
-		}}));
+	// if(this.getAncestorCount() > this.UNSAFE_max_widget_tree_depth) {
+	// if(this.getAncestorCount() > MAX_WIDGET_TREE_DEPTH) {
+	if((this.getAncestorCountDom() > MAX_DOM_TREE_DEPTH) || (this.getAncestorCount() > this.UNSAFE_max_widget_tree_depth)) {
+		this.children.push(this.makeChildWidget({
+			type: "error", attributes: {
+				"$message": {
+					type: "string",
+					value: this.getAncestorCount() + " - " + (this.getAncestorCountDom() + 1 ) + " - " +
+							$tw.language.getString("Error/RecursiveTransclusion")
+				}
+			}
+		}));
 	} else {
 		// Create set variable widgets for each variable
 		$tw.utils.each(options.variables,function(value,name) {
@@ -611,6 +637,9 @@ Render the children of this widget into the DOM
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {
 	var children = this.children;
+	// if(this.tag) {
+	// 	var x = this.getAncestorCountDom(true);
+	// }
 	for(var i = 0; i < children.length; i++) {
 		children[i].render(parent,nextSibling);
 	};
