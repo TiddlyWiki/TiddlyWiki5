@@ -61,9 +61,10 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var self = this;
 	// Sanitise the specified tag
 	var tag = this.linkTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-		tag = "a";
-	}
+	tag = $tw.utils.isTagNameSafe(tag,"a");
+	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	// 	tag = "a";
+	// }
 	// Create our element
 	var namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"}),
 		domNode = this.document.createElementNS(namespace,tag);

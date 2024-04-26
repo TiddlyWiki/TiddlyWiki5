@@ -289,7 +289,7 @@ exports.copyToClipboard = function(text,options) {
 	var succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");
-	} catch (err) {
+	} catch(err) {
 	}
 	if(!options.doNotNotify) {
 		$tw.notifier.display(succeeded ? "$:/language/Notifications/CopiedToClipboard/Succeeded" : "$:/language/Notifications/CopiedToClipboard/Failed");
@@ -306,8 +306,8 @@ Collect DOM variables
 */
 exports.collectDOMVariables = function(selectedNode,domNode,event) {
 	var variables = {},
-	    selectedNodeRect,
-	    domNodeRect;
+		selectedNodeRect,
+		domNodeRect;
 	if(selectedNode) {
 		$tw.utils.each(selectedNode.attributes,function(attribute) {
 			variables["dom-" + attribute.name] = attribute.value.toString();
@@ -324,7 +324,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
 
 			var absRect = $tw.utils.extend({}, nodeRect);
-			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+			for(var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
 				absRect.left += currentNode.offsetLeft;
 				absRect.top += currentNode.offsetTop;
 			}
@@ -366,7 +366,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 };
 
 /*
-Make sure the CSS selector is not invalid
+Make sure the CSS selector is valid
 */
 exports.querySelectorSafe = function(selector,baseElement) {
 	baseElement = baseElement || document;
@@ -385,5 +385,20 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 		console.log("Invalid selector: ",selector);
 	}
 };
+
+/*
+Make sure HTML tag names are valid
+*/
+exports.isTagNameSafe = function(tag,defaultTag) {
+	defaultTag = defaultTag || "SPAN";
+	// This implements standard DOM elements: https://html.spec.whatwg.org/#syntax-tag-name
+	// It does _not_ implement Custom Elements: https://html.spec.whatwg.org/#valid-custom-element-name
+	var regexp = /[a-zA-Z0-9]/g;
+	if(tag && tag.match(regexp) && $tw.config.htmlUnsafeElements.indexOf(tag) === -1) {
+		return tag;
+	}
+	return defaultTag;
+};
+
 
 })();

@@ -31,9 +31,10 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Neuter blacklisted elements
 	this.tag = this.parseTreeNode.tag;
-	if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
-		this.tag = "safe-" + this.tag;
-	}
+	this.tag = $tw.utils.isTagNameSafe(this.tag, "safe" + this.tag);
+	// if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
+	// 	this.tag = "safe-" + this.tag;
+	// }
 	// Restrict tag name to digits, letts and dashes
 	this.tag = this.tag.replace(/[^0-9a-zA-Z\-]/mg,"");
 	// Default to a span

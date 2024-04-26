@@ -38,9 +38,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
-		tag = this.buttonTag;
-	}
+	// if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
+	// 	tag = this.buttonTag;
+	// }
+	tag = $tw.utils.isTagNameSafe(this.buttonTag,tag)
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes
@@ -74,7 +75,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
-	if (this.role) {
+	if(this.role) {
 		domNode.setAttribute("role", this.role);
 	}
 	if(this.popup || this.popupTitle) {

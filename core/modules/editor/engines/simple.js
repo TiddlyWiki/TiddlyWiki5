@@ -22,10 +22,11 @@ function SimpleEngine(options) {
 	this.parentNode = options.parentNode;
 	this.nextSibling = options.nextSibling;
 	// Construct the textarea or input node
-	var tag = this.widget.editTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-		tag = "input";
-	}
+	var tag = $tw.utils.isTagNameSafe(this.widget.editTag,"input");
+	// var tag = this.widget.editTag;
+	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	// 	tag = "input";
+	// }
 	this.domNode = this.widget.document.createElement(tag);
 	// Set the text
 	if(this.widget.editTag === "textarea") {

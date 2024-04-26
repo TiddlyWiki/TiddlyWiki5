@@ -38,10 +38,10 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Sanitise the specified tag
-	tag = this.draggableTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-		tag = "div";
-	}
+	tag = $tw.utils.isTagNameSafe(this.draggableTag,"div");
+	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	// 	tag = "div";
+	// }
 	// Create our element
 	domNode = this.document.createElement(tag);
 	// Assign classes

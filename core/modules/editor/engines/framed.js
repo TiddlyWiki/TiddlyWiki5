@@ -48,10 +48,10 @@ function FramedEngine(options) {
 	this.iframeDoc.body.style.padding = "0";
 	this.widget.domNodes.push(this.iframeNode);
 	// Construct the textarea or input node
-	var tag = this.widget.editTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-		tag = "input";
-	}
+	var tag = $tw.utils.isTagNameSafe(this.widget.editTag, "input");
+	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+	// 	tag = "input";
+	// }
 	this.domNode = this.iframeDoc.createElement(tag);
 	// Set the text
 	if(this.widget.editTag === "textarea") {
@@ -200,7 +200,7 @@ FramedEngine.prototype.handleFocusEvent = function(event) {
 Handle a keydown event
  */
 FramedEngine.prototype.handleKeydownEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
 
