@@ -59,18 +59,18 @@ Date/Short/Day/3: śr.
 Date/Short/Day/4: czw.
 Date/Short/Day/5: pt.
 Date/Short/Day/6: sob.
-Date/Short/Month/1: st
-Date/Short/Month/2: lut
-Date/Short/Month/3: mrz
-Date/Short/Month/4: kw
-Date/Short/Month/5: maj
-Date/Short/Month/6: cz
-Date/Short/Month/7: lip
-Date/Short/Month/8: sier
-Date/Short/Month/9: wrz
-Date/Short/Month/10: paź
-Date/Short/Month/11: lis
-Date/Short/Month/12: gr
+Date/Short/Month/1: I
+Date/Short/Month/2: II
+Date/Short/Month/3: III
+Date/Short/Month/4: IV
+Date/Short/Month/5: V
+Date/Short/Month/6: VI
+Date/Short/Month/7: VII
+Date/Short/Month/8: VIII
+Date/Short/Month/9: IX
+Date/Short/Month/10: X
+Date/Short/Month/11: XI
+Date/Short/Month/12: XII
 RelativeDate/Future/Days: <<period>> dni od teraz
 RelativeDate/Future/Hours: <<period>> godzin od teraz
 RelativeDate/Future/Minutes: <<period>> minut od teraz
