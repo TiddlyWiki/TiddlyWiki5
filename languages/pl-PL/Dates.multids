@@ -52,13 +52,13 @@ Date/Long/Month/11: listopad
 Date/Long/Month/12: grudzień
 Date/Period/am: rano
 Date/Period/pm: po południu
-Date/Short/Day/0: nd
-Date/Short/Day/1: pn
-Date/Short/Day/2: wt
-Date/Short/Day/3: śr
-Date/Short/Day/4: cz
-Date/Short/Day/5: pt
-Date/Short/Day/6: sb
+Date/Short/Day/0: niedz.
+Date/Short/Day/1: pon.
+Date/Short/Day/2: wt.
+Date/Short/Day/3: śr.
+Date/Short/Day/4: czw.
+Date/Short/Day/5: pt.
+Date/Short/Day/6: sob.
 Date/Short/Month/1: st
 Date/Short/Month/2: lut
 Date/Short/Month/3: mrz
