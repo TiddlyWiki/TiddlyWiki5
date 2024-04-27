@@ -79,7 +79,7 @@ RelativeDate/Future/Second: 1 sekunda od teraz
 RelativeDate/Future/Seconds: <<period>> sekund od teraz
 RelativeDate/Future/Years: <<period>> lat od teraz
 RelativeDate/Past/Days: <<period>> dni temu
-RelativeDate/Past/Hours: <<period>> godizn temu
+RelativeDate/Past/Hours: <<period>> godzin temu
 RelativeDate/Past/Minutes: <<period>> minut temu
 RelativeDate/Past/Months: <<period>> miesięcy temu
 RelativeDate/Past/Second: 1 sekundę temu
