@@ -50,8 +50,8 @@ Date/Long/Month/9: wrzesień
 Date/Long/Month/10: październik
 Date/Long/Month/11: listopad
 Date/Long/Month/12: grudzień
-Date/Period/am: AM
-Date/Period/pm: PM
+Date/Period/am: rano
+Date/Period/pm: po południu
 Date/Short/Day/0: nd
 Date/Short/Day/1: pn
 Date/Short/Day/2: wt
