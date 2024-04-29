@@ -310,7 +310,11 @@ tags: $:/tags/Global
 		>
 			<$button tooltip={{$:/language/Search/Variables/Exclude/Show}} class="tc-dv-btn tc-btn-invisible">
 				<$action-setfield $tiddler=<<tf.dv-foldedState>> $field=text $value="show"/>
-				{{$:/core/images/right-arrow}}
+				<% if [<tf.dv-getExcludeText>!is[blank]]%>
+					{{$:/core/images/star-filled}}
+				<% else %>
+					{{$:/core/images/right-arrow}}
+				<% endif %>
 			</$button>
 		</$reveal>
 		<$reveal stateTitle=<<tf.dv-foldedState>>
@@ -323,7 +327,11 @@ tags: $:/tags/Global
 		>
 			<$button tooltip={{$:/language/Search/Variables/Exclude/Hide}}  class="tc-dv-btn tc-btn-invisible">
 				<$action-setfield $tiddler=<<tf.dv-foldedState>> $field=text $value="hide"/>
-				{{$:/core/images/up-arrow}}
+				<% if [<tf.dv-getExcludeText>!is[blank]]%>
+					{{$:/core/images/star-filled}}
+				<% else %>
+					{{$:/core/images/up-arrow}}
+				<% endif %>
 			</$button>
 		</$reveal>
 		<<dv-search-input-box>>

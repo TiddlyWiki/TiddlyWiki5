@@ -45,7 +45,7 @@ tags: $:/tags/Stylesheet
 
 .btn-fld-has-exluded button:hover svg,
 .btn-fld-has-exluded button svg {
-	fill: <<colour dirty-indicator>>;
+	<!-- fill: <<colour dirty-indicator>>; -->
 }
 
 .btn-fld {
