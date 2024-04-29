@@ -18,7 +18,8 @@ tags: $:/tags/Global
 \procedure DV-SEARCH-DETAILS() $:/temp/varSearch/details
 \procedure DV-SEARCH-STATE() $:/state/varSearch/name
 \procedure DV-EXCLUDE() $:/state/varExclude
-\procedure DV-TYPE-STATE() $:/state/typeState
+<!-- typeSelector options: checkbox, radio (default) -->
+\procedure DV-TYPE-CONFIG() $:/config/DumpVariables/type-selector
 
 <!-- Construct filter strings -->
 \function tf.dv-filterString() [<_tf.dv-sort>match[raw]then<DV-RAW-FILTER-STR>else<DV-FILTER-STR>]
@@ -36,6 +37,7 @@ tags: $:/tags/Global
 \function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
 \function _tf.dv-type() [<type>]
 \function _tf.dv-sort() [<sort>]
+
 <ul>
 	<$list filter="[subfilter<tf.dv-filterString>] +[filter<subfilter>]" variable="varname">
 		<li>
@@ -246,7 +248,7 @@ tags: $:/tags/Global
 </style>
 <span class="t-txt">{{$:/language/Search/Variables/Option/Type}}</span>
 <$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
-	<%if [<DV-TYPE-STATE>get[text]match[checkbox]] %>
+	<%if [<DV-TYPE-CONFIG>get[text]match[checkbox]] %>
 		<$checkbox tiddler=<<tf.dv-tmpTypeOptions>>
 			listField="text"
 			checked=<<option>>
