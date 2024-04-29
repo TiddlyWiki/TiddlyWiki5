@@ -23,7 +23,7 @@ Variables/Clear: Clear
 Variables/Exclude: Exclude:
 Variables/Exclude/Hide: Hide exclude input
 Variables/Exclude/Hint: Filter eg: [prefix[.]]
-Variables/Exclude/Save: Create / Save Exclude Filter
+Variables/Exclude/Save: Create Exclude Filter
 Variables/Exclude/Show: Show exclude input
 Variables/Exclude/Description: EDIT ME - Description is shown in the dropdown
 Variables/ExpandAll: Expand All:
