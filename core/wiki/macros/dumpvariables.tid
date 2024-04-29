@@ -67,7 +67,6 @@ tags: $:/tags/Global
 <$action-setfield $tiddler=<<tf.dv-detailsSearch>>
 	text={{{ [<tf.dv-getDetailsSearchText>!is[blank]then<tf.dv-getDetailsSearchText>] :else[<varname>format:variable[$type$ $name$($params$)]] }}}
 />
-
 \end
 
 \procedure dv-clearStatesButton()
@@ -82,6 +81,7 @@ tags: $:/tags/Global
 \procedure dv-clearSearchButton()
 <$button class="tc-btn-invisible btn-x" tooltip={{$:/language/Search/Variables/Clear/Search}}>
 	<$action-deletetiddler $tiddler=<<tf.dv-searchText>>/>
+	<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input.x-inp"/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
@@ -89,6 +89,7 @@ tags: $:/tags/Global
 \procedure dv-clearExcludeButton()
 <$button class="tc-btn-invisible btn-yy" tooltip={{$:/language/Search/Variables/Clear/Exclude}}>
 	<$action-deletetiddler $tiddler=<<tf.dv-excludeText>>/>
+	<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input.y-inp"/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
@@ -224,6 +225,7 @@ tags: $:/tags/Global
 	tag=input
 	class="txt-input x-inp"
 	placeholder={{$:/language/Search/Variables/Filter/Hint}}
+	focus="yes"
 />
 <<dv-clearSearchButton>>
 \end
@@ -348,20 +350,12 @@ tags: $:/tags/Global
 </div>
 \end
 
-
 <!-- ==================== -->
 <!-- More Variables Popup -->
 
-<!-- TODO Select the focus to right input -->
-\procedure dv-lc-actionsXX()
-<$action-setfield $tiddler="$:/temp/advancedsearch" text=<<navigateTo>>/>
-<$action-setfield $tiddler="$:/temp/advancedsearch/input" text=<<navigateTo>>/>
-<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
-<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
-\end
-
 \procedure dv-lc-actions()
 <$action-setfield $tiddler=<<tf.dv-excludeText>> text=<<navigateTo>>/>
+<!-- <$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input.y-inp"/> -->
 \end
 
 \procedure dv-addNewVariableFilter-actions()
@@ -380,7 +374,7 @@ tags: $:/tags/Global
 \procedure dv-addNewVariableFilter()
 <$button tag="a" actions=<<dv-addNewVariableFilter-actions>> class="tc-tiddlylink">
 	<em>
-		<$text text=<<lingo Exclude/Save>>/>
+		<$text text={{$:/language/Search/Variables/Exclude/Save}}/>
 	</em>
 </$button>
 \end
