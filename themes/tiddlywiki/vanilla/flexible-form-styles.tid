@@ -1,0 +1,123 @@
+title: /core/template/flexible-form/styles
+tags: $:/tags/Stylesheet
+
+.tc-flexible-form {
+	<!-- outline: 1px solid blue; -->
+	overflow: auto;
+	margin-bottom: 1em;
+}
+.tc-flexible-checkbox-container {
+	padding: 4px 3px 3px 3px;
+	border-bottom: 1px dotted black;
+	display: grid;
+	grid-column-gap: 0.3em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: 5.3em 3em 3em 3em 4em 5em 5em 5em 8em 10em 1fr;
+	grid-template-areas:
+		"t-txt c-all c-fn c-var c-proc c-macro c-widget sel-txt sel-drop ex-btn";
+}
+
+<!-- TODO Try this without a media query!!! -->
+@media (max-width:
+	<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]]
+		[{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}removesuffix[px]]
+		:reduce[<currentTiddler>add<accumulator>addsuffix[px]] }}}
+	/>) {
+	.tc-flexible-checkbox-container {
+		grid-column-gap: 0.1em;
+		grid-template-columns: 3em 3em 3em 3em 4em 5em 5em 5em 8em 10em 1fr;
+		grid-template-areas:
+			"t-txt   c-all    c-fn     c-var     c-proc c-macro c-widget"
+			"sel-txt sel-drop sel-drop  sel-drop ex-btn ex-btn  ex-btn";
+	}
+}
+
+.tc-flexible-input-container {
+	padding: 4px 3px 3px 3px;
+	display: grid;
+	grid-row-gap: 0.2em;
+	grid-column-gap: 0.3em;
+	grid-template-columns: 1em 4em 1fr 1.5em 1.5em;
+	grid-template-areas:
+		"btn-fld x-txt x-inp btn-x btn-xx"
+		"btn-fld y-txt y-inp btn-y btn-yy";
+}
+
+.btn-fld-has-exluded button:hover svg,
+.btn-fld-has-exluded button svg {
+	fill: <<colour dirty-indicator>>;
+}
+
+.btn-fld {
+	padding: 0 2px;
+	grid-area: btn-fld;
+}
+
+.x-inp {
+	grid-area: x-inp;
+}
+.y-inp {
+	grid-area: y-inp;
+}
+
+.t-txt,
+.x-txt,
+.y-txt {
+	text-align: right;
+}
+.t-txt {
+	grid-area: t-txt;
+}
+.x-txt {
+	grid-area: x-txt;
+}
+.y-txt {
+	grid-area: y-txt;
+}
+
+.btn-t {
+	grid-area: btn-t;
+}
+.btn-x {
+	grid-area: btn-x;
+}
+.btn-y {
+	grid-area: btn-y;
+}
+
+.btn-xx {
+	grid-area: btn-xx;
+}
+.btn-yy {
+	grid-area: btn-yy;
+}
+
+.c-all {
+	grid-area: c-all;
+}
+.c-fn {
+	grid-area: c-fn;
+}
+.c-var {
+	grid-area: c-var;
+}
+.c-proc {
+	grid-area: c-proc;
+}
+.c-macro {
+	grid-area: c-macro;
+}
+.c-widget {
+	grid-area: c-widget;
+}
+.sel-txt {
+	text-align: right;
+	grid-area: sel-txt;
+}
+.sel-drop {
+	grid-area: sel-drop;
+	border: none;
+}
+.ex-btn {
+	grid-area: ex-btn;
+}
