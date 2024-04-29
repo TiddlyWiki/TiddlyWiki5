@@ -1,6 +1,6 @@
 caption: variables
 created: 20190330100101453
-modified: 20240219185349859
+modified: 20240429134329720
 op-input: ignored
 op-output: the names of all the actively defined variables
 op-parameter: <<.from-version "5.3.4">> whitespace separated list of variable-types
@@ -25,13 +25,14 @@ type: text/vnd.tiddlywiki
 
 The parameters <<.place T>> allow a "whitespace separated" list of variable codes that should be listed
 
-* Default is all: `fn, var, proc, macro, widget`
+* Default is `all` - `fn, var, proc, macro, widget`
 
-* ''fn'' ... will only show variables defined as functions eg: `\function test-01()`
-* ''var'' ... will only show standard variables defined with eg: `<$let test="test">...</$let>`
-* ''proc'' ... will only show variables defined as procedures eg: `\procedure test-02()`
-* ''macro'' ... will only show variables defined as macros eg: `\define test-macro()`
-* ''widgets'' ... will only show variables defined as widgets eg: `\widget my-widget()`
+* ''all'' ... If set it takes precedence and will show all variables
+* ''fn'' ... Will only show variables defined as functions eg: `\function test-01()`
+* ''var'' ... Will only show standard variables defined with eg: `<$let test="test">...</$let>`
+* ''proc'' ... Will only show variables defined as procedures eg: `\procedure test-02()`
+* ''macro'' ... Will only show variables defined as macros eg: `\define test-macro()`
+* ''widgets'' ... Will only show variables defined as widgets eg: `\widget my-widget()`
 
 
 <<.operator-examples "variables">>

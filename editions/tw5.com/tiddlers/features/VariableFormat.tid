@@ -1,5 +1,5 @@
 created: 20240219185725834
-modified: 20240221012350449
+modified: 20240429134515751
 tags: Features
 title: VariableFormat
 type: text/vnd.tiddlywiki
@@ -10,11 +10,11 @@ Finding "self explaining" variable names for functions, procedures, widgets and 
 
 The <<.olink variables>> operator returns all "visible" variables from the current context, depending on where the filter run is executed. The <<.olink getvariable>> allows us to return the "text" or the "value" of variables. But this information is not enough to get a good understanding of existing variables. 
 
-So using <<.olink getvariables>> operator in combination with the <<.olink format>> operator we are able to improve information in variable listings. 
+So using <<.olink getvariable>> operator in combination with the <<.olink format>> operator we are able to improve information in variable listings. 
 
 |Token |Substituted Value |h
 |`$type$` |variabe type eg: `\function`, `\procedure` and so on |
 |`$name$` |returns the name of the variable |
 |`$params$` |returns a list of parameters, which are defined with functions, procedures ... |
-|`$firstLine$` |returns the first line of the variable content-type as used by <<.olink getvariables>> |
+|`$firstLine$` |returns the first line of the variable content-type as used by <<.olink getvariable>> |
 |`$varType$` |returns `var`, `fn`, ` proc`, ` macro` or ` widget` which can be used with the <<.olink variables>> operator |
