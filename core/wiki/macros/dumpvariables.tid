@@ -3,6 +3,8 @@ tags: $:/tags/Global
 
 \whitespace trim
 
+\procedure lingo-base() $:/language/Search/Variables/
+
 <!-- CONST string definitions -->
 \procedure DV-VAR-FILTER-OPTIONS() all fn var proc macro widget
 \procedure DV-FILTER-OPTIONS() $:/temp/varSearch/options
@@ -64,13 +66,12 @@ tags: $:/tags/Global
 <!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
 <$action-setfield $tiddler=<<tf.dv-detailsSearch>>
 	text={{{ [<tf.dv-getDetailsSearchText>!is[blank]then<tf.dv-getDetailsSearchText>] :else[<varname>format:variable[$type$ $name$($params$)]] }}}
->
-<$action-log $$filter="[prefix[tf.]]"/>
-</$action-setfield>
+/>
+
 \end
 
 \procedure dv-clearStatesButton()
-<span class="tc-small-gap">{{$:/language/Search/Variables/FoldAll}}</span>
+<span class="tc-small-gap"><<lingo FoldAll>></span>
 <$button class="tc-btn-invisible tc-tiny-gap-left">
 	<!-- "search text details" should be preserved -->
 	<$action-deletetiddler $filter="[prefix<DV-SEARCH-STATE>]"/>
@@ -79,25 +80,21 @@ tags: $:/tags/Global
 \end
 
 \procedure dv-clearSearchButton()
-<$button class="tc-btn-invisible btn-x"
-	tooltip=`${ [{$:/language/Search/Variables/Clear}] [{$:/language/Search/Variables/Filter}] +[join[ ]] }$`
->
+<$button class="tc-btn-invisible btn-x" tooltip={{$:/language/Search/Variables/Clear/Search}}>
 	<$action-deletetiddler $tiddler=<<tf.dv-searchText>>/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
 
 \procedure dv-clearExcludeButton()
-<$button class="tc-btn-invisible btn-yy"
-	tooltip=`${ [{$:/language/Search/Variables/Clear}] [{$:/language/Search/Variables/Exclude}] +[join[ ]] }$`
->
+<$button class="tc-btn-invisible btn-yy" tooltip={{$:/language/Search/Variables/Clear/Exclude}}>
 	<$action-deletetiddler $tiddler=<<tf.dv-excludeText>>/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
 
 \procedure dv-expandAllStatesButton()
-<span class="tc-tiny-gap">{{$:/language/Search/Variables/ExpandAll}}</span>
+<span class="tc-tiny-gap"><<lingo ExpandAll>></span>
 <$button class="tc-btn-invisible">
 	<$action-setfield $tiddler=<<DV-SEARCH-STATE>>
 		text={{{ [<tf.dv-toggleInfoState>get[text]] +[toggle[yes],[no]] }}}
@@ -157,6 +154,13 @@ tags: $:/tags/Global
 
 <<dv-searchForm>>
 
+<p><$text text=`${ [subfilter<tf.dv-filterString>] 
+	+[search::some<tf.dv-getSearchText>]
+	+[filter<subfilter>]
+	+[!filter<tf.dv-getExcludeText>]
+	+[count[]] }$`
+/> <<lingo Matches>></p>
+
 <$list filter="[subfilter<tf.dv-filterString>] 
 		+[search::some<tf.dv-getSearchText>]
 		+[filter<subfilter>]
@@ -188,7 +192,7 @@ tags: $:/tags/Global
 			<blockquote class="tc-quote">
 				<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
 					<div class="tc-labeled-input-wrapper">
-						<span class="tc-fixed-label tc-align-right">{{$:/language/Search/Variables/Search/Details}}</span>
+						<span class="tc-fixed-label tc-align-right"><<lingo Search/Details>></span>
 						<$edit-text tiddler=<<tf.dv-detailsSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
 					</div>
 					<<dv-info>>
@@ -246,7 +250,7 @@ tags: $:/tags/Global
 	margin-right: .25em;
 }
 </style>
-<span class="t-txt">{{$:/language/Search/Variables/Option/Type}}</span>
+<span class="t-txt"><<lingo Option/Type>></span>
 <$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
 	<%if [<DV-TYPE-CONFIG>get[text]match[checkbox]] %>
 		<$checkbox tiddler=<<tf.dv-tmpTypeOptions>>
@@ -273,7 +277,7 @@ tags: $:/tags/Global
 
 \procedure dv-sortOptions()
 <span class="sel-txt">
-	{{$:/language/Search/Variables/Option/Sort}}
+	<<lingo Option/Sort>>
 </span>
 <$select tiddler=<<tf.dv-tmpSortOptions>>
 	default="alphabetical"
@@ -364,7 +368,7 @@ tags: $:/tags/Global
 <$action-sendmessage
 	$message="tm-new-tiddler"
 	tags="$:/tags/Variables/Exclude/Snippet"
-	description={{$:/language/Search/Variables/Exclude/Description}}
+	description=<<lingo Exclude/Description>>
 	text=<<tf.dv-getExcludeText>>
 />
 
@@ -376,7 +380,7 @@ tags: $:/tags/Global
 \procedure dv-addNewVariableFilter()
 <$button tag="a" actions=<<dv-addNewVariableFilter-actions>> class="tc-tiddlylink">
 	<em>
-		<$text text={{$:/language/Search/Variables/Exclude/Save}}/>
+		<$text text=<<lingo Exclude/Save>>/>
 	</em>
 </$button>
 \end
