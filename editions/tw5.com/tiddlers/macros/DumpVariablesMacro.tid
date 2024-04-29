@@ -1,11 +1,11 @@
 caption: dumpvariables
 created: 20140908104107181
-modified: 20240221005326328
+modified: 20240427121039507
 tags: Macros [[Core Macros]]
 title: dumpvariables Macro
 type: text/vnd.tiddlywiki
 
-The <<.def dumpvariables>> [[macro|Macros]] returns a table showing the values of all [[variables|Variables]] and [[macros|Macros]] that exist at that position in the [[widget tree|Widgets]].
+The <<.def dumpvariables>> [[macro|Macros]] returns a table showing the values of all [[variables|Variables]], [[procedures|Procedures]], [[functions|Functions]], [[widgets|Widgets]] and [[macros|Macros]] that exist at that position in the [[widget tree|Widgets]].
 
 It is useful for debugging and exploring ~TiddlyWiki's internals.
 
@@ -13,11 +13,14 @@ Placeholders are replaced with values in the normal way, but using the default v
 
 !! Parameters
 
+The following parameters are <<.from-version "5.3.4">>
+
 ; type
 : If type is empty all variable types are shown: `fn, var, proc, macro, widget`. Using the type parameter will reduce the list.
 
-; raw
-: Is used to allow the <<.olink variables>> to return a raw list. By default the list is alphabetically sorted.
+; sort
+: `raw`: Is used to allow the <<.olink variables>> to return a raw list.
+: `alphabetical`: If sort is missing, by ''default ''the list is alphabetically sorted.
 
 ; subfilter
 : This parameter limits the number of variables that are listed eg:  `subfilter:"[search::some[sort .attr]]" `
@@ -26,3 +29,5 @@ Placeholders are replaced with values in the normal way, but using the default v
 : Format the output string using the VariableFormat. Defaults to `$type$ $name$($params$) $firstLine$`.
 
 !!! <<.macro-examples "dumpvariables">>
+
+Also see: [[search-variables Macro]]

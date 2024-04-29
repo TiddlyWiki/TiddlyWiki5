@@ -1,0 +1,34 @@
+caption: search-variables
+created: 20240427120451313
+modified: 20240427123016441
+tags: Macros [[Core Macros]]
+title: search-variables Macro
+type: text/vnd.tiddlywiki
+
+This macro is <<.from-version "5.3.4">>
+
+The <<.def search-variables>> presents a form, which allows fast filtering of the resulting list. This procedure is also used in the $:/AdvancedSearch ''-> Variables'' tab.
+
+It returns a table showing the values of all [[variables|Variables]], [[procedures|Procedures]], [[functions|Functions]], [[widgets|Widgets]] and [[macros|Macros]] that exist at that position in the [[widget tree|Widgets]].
+
+It is useful for debugging and exploring ~TiddlyWiki's internals.
+
+!! Parameters
+
+; type
+: If type is empty all variable types are shown
+: optional: `fn, var, proc, macro, widget`. Using the type parameter will reduce the list.
+
+; sort
+: `raw`: Is used to allow the <<.olink variables>> to return a raw list.
+: `alphabetical`: If sort is missing, by ''default ''the list is alphabetically sorted.
+
+; subfilter
+: This parameter limits the number of variables that are listed eg:  `subfilter:"[search::some[sort .attr]]" `
+
+; format
+: Format the output string using the VariableFormat. Defaults to `$type$ $name$($params$) $firstLine$`.
+
+!!! <<.macro-examples "search-variables">>
+
+Also see: [[dumpvariables Macro]]

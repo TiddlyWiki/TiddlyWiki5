@@ -1,5 +1,5 @@
 created: 20150221151358000
-modified: 20240221165833692
+modified: 20240427120040367
 tags: [[dumpvariables Macro]] [[Macro Examples]]
 title: dumpvariables Macro (Examples)
 type: text/vnd.tiddlywiki
@@ -21,7 +21,7 @@ eg="""<$let EXAMPLE="123" >
 <$macrocall $name=".example" n="3"
 eg="""<<dumpvariables subfilter:"[prefix[.a]]">>"""/>
 
-The following list will be very long. It shows all variables known within this tiddler. Using the macro in a different context. Eg: the sidebar, variables will have different values.
+''The following list will be very long.'' It shows all variables known within this tiddler. Using the macro in a ''different context''. Eg: the sidebar, variables will show ''different values''.
 
 <$macrocall $name=".example" n="4"
 eg="""<<dumpvariables>>"""/>
