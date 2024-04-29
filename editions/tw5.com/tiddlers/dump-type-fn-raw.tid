@@ -1,0 +1,7 @@
+created: 20240427113318944
+modified: 20240427113819817
+tags: 
+title: dump-type-fn-raw
+type: text/vnd.tiddlywiki
+
+<<.example 1 """<<dumpvariables  type:"fn" sort:"raw"  >>""">>
