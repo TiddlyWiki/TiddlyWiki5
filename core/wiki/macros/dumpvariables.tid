@@ -4,7 +4,7 @@ tags: $:/tags/Global
 \whitespace trim
 
 <!-- CONST string definitions -->
-\procedure DV-VAR-FILTER-OPTIONS() fn var proc macro widget
+\procedure DV-VAR-FILTER-OPTIONS() all fn var proc macro widget
 \procedure DV-FILTER-OPTIONS() $:/temp/varSearch/options
 \procedure DV-SORT-OPTIONS() $:/temp/varSearch/sort
 
@@ -16,22 +16,24 @@ tags: $:/tags/Global
 \procedure DV-FOLDED() $:/temp/varFolded
 \procedure DV-SEARCH() $:/temp/varSearch
 \procedure DV-SEARCH-DETAILS() $:/temp/varSearch/details
-\procedure DV-SEARCH-STATE() $:/state/varSearch
+\procedure DV-SEARCH-STATE() $:/state/varSearch/name
 \procedure DV-EXCLUDE() $:/state/varExclude
+\procedure DV-TYPE-STATE() $:/state/typeState
 
 <!-- Construct filter strings -->
 \function tf.dv-filterString() [<_tf.dv-sort>match[raw]then<DV-RAW-FILTER-STR>else<DV-FILTER-STR>]
-\function tf.dv-formattedVar() [<varname>format:variable<_tf.dv-varFormat>]
+\function tf.dv-formattedVar() [<varname>format:variable<_tf.dv-varFormatStr>]
 
 \function tf.dv-foldedState() [<DV-FOLDED>] [<qualify>] +[join[/]]
 
-<!-- =================== -->
-<!-- dumpvariables main  -->
-<!-- =================== -->
+<!-- ============================ -->
+<!-- dumpvariables main procedure -->
+<!-- ============================ -->
 \procedure dumpvariables(type sort subfilter:"[[]]" format)
 
 <!-- The following function is needed since the "format" string can contain closing brackets ")" -->
-\function _tf.dv-varFormat() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
+<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
+\function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
 \function _tf.dv-type() [<type>]
 \function _tf.dv-sort() [<sort>]
 <ul>
@@ -57,9 +59,12 @@ tags: $:/tags/Global
 	text={{{ [<tf.dv-toggleInfoState>get[text]] +[toggle[yes],[no]] }}}
 />
 <!-- Existing user modified "search text details" should be preserved. If empty use default formatted signature -->
+<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
 <$action-setfield $tiddler=<<tf.dv-detailsSearch>>
 	text={{{ [<tf.dv-getDetailsSearchText>!is[blank]then<tf.dv-getDetailsSearchText>] :else[<varname>format:variable[$type$ $name$($params$)]] }}}
-/>
+>
+<$action-log $$filter="[prefix[tf.]]"/>
+</$action-setfield>
 \end
 
 \procedure dv-clearStatesButton()
@@ -90,8 +95,8 @@ tags: $:/tags/Global
 \end
 
 \procedure dv-expandAllStatesButton()
-<span class="tc-small-gap">{{$:/language/Search/Variables/ExpandAll}}</span>
-<$button class="tc-btn-invisible tc-tiny-gap-left">
+<span class="tc-tiny-gap">{{$:/language/Search/Variables/ExpandAll}}</span>
+<$button class="tc-btn-invisible">
 	<$action-setfield $tiddler=<<DV-SEARCH-STATE>>
 		text={{{ [<tf.dv-toggleInfoState>get[text]] +[toggle[yes],[no]] }}}
 	/>
@@ -122,7 +127,7 @@ tags: $:/tags/Global
 </div>
 \end
 
-\procedure dv-filterOptions()
+<!-- \procedure dv-filterOptions()
 <style>
 .tc-dv-filterOptions [data-gap="right"] {
 	width: auto;
@@ -149,7 +154,7 @@ tags: $:/tags/Global
 		<option value="raw">raw</option>
 	</$select>
 </span>
-\end
+\end -->
 
 \function tf.dv-tmpTypeOptions() [<DV-FILTER-OPTIONS>] [<qualify>] +[join[/]]
 \function tf.dv-tmpSortOptions() [<DV-SORT-OPTIONS>] [<qualify>] +[join[/]]
@@ -166,13 +171,14 @@ tags: $:/tags/Global
 \function tf.dv-varState() [<DV-SEARCH-STATE>] [<varname>] [<qualify>] +[join[/]]
 \function tf.dv-toggleInfoState() [<DV-SEARCH-STATE>] [<varname>] +[join[/]]
 
-<!-- ============================== -->
-<!-- search-variables main function -->
-<!-- ============================== -->
+<!-- =============================== -->
+<!-- search-variables main procedure -->
+<!-- =============================== -->
 \procedure search-variables(type sort subfilter:"[[]]" format)
 
 <!-- The following function is needed since the "format" string can contain closing brackets ")" -->
-\function _tf.dv-varFormat() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
+<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
+\function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
 \function _tf.dv-type() [<type>!is[blank]then<type>] :else[<tf.dv-tmpTypeOptions>get[text]]
 \function _tf.dv-sort() [<sort>!is[blank]then<sort>] :else[<tf.dv-tmpSortOptions>get[text]] :else[[alphabetical]]
 
@@ -193,6 +199,7 @@ tags: $:/tags/Global
 			<% endif %>
 			<code class="tc-small-gap-right"><$text text=<<tf.dv-formattedVar>>/></code>
 			<% if [<tf.dv-formattedVar>prefix[\function]] %>
+				<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
 				<span class="tc-tiny-gap-right"><$text text={{{ [<varname>format:variable[$firstLine$]] }}}/></span>
 			<% endif %>
 		</$button>
@@ -226,6 +233,7 @@ tags: $:/tags/Global
 
 <!-- ================================== -->
 <!-- Grid Based Advanced Variables Form -->
+<!-- ================================== -->
 
 \procedure dv-search-input-box()
 <%if [<sort>!is[blank]] %>
@@ -238,7 +246,7 @@ tags: $:/tags/Global
 <$edit-text tiddler=<<tf.dv-searchText>>
 	tag=input
 	class="txt-input x-inp"
-	placeholder="filter variables by name"
+	placeholder={{$:/language/Search/Variables/Filter/Hint}}
 />
 <<dv-clearSearchButton>>
 \end
@@ -248,6 +256,7 @@ tags: $:/tags/Global
 <$edit-text tiddler=<<tf.dv-excludeText>>
 	tag=input
 	class="txt-input y-inp"
+	placeholder={{$:/language/Search/Variables/Exclude/Hint}}
 />
 <<moreVariablesPopup>>
 <% if [<tf.dv-getExcludeText>!is[blank]] %>
@@ -266,11 +275,26 @@ tags: $:/tags/Global
 </style>
 <span class="t-txt">{{$:/language/Search/Variables/Option/Type}}</span>
 <$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
-	<$checkbox tiddler=<<tf.dv-tmpTypeOptions>> listField="text" checked=<<option>>
-		class=<<tf.dv-opt-class>> data-gap="right"
-	>
-		<<option>>
-	</$checkbox>
+	<%if [<DV-TYPE-STATE>get[text]match[checkbox]] %>
+		<$checkbox tiddler=<<tf.dv-tmpTypeOptions>>
+			listField="text"
+			checked=<<option>>
+			default="all"
+			class=<<tf.dv-opt-class>>
+			data-gap="right"
+		>
+			<<option>>
+		</$checkbox>
+	<% else %>
+		<$radio tiddler=<<tf.dv-tmpTypeOptions>>
+			listField="text" value=<<option>>
+			default="all"
+			class=<<tf.dv-opt-class>>
+			data-gap="right"
+		>
+			<<option>>
+		</$radio>
+	<% endif %>
 </$list>
 \end
 
@@ -297,6 +321,9 @@ tags: $:/tags/Global
 </span>
 \end
 
+<!-- ========================================== -->
+<!-- Main -- Grid Based Advanced Variables Form -->
+<!-- ========================================== -->
 \procedure dv-searchForm()
 <div class="tc-flexible-form">
 	<div class="tc-flexible-checkbox-container">
@@ -305,7 +332,7 @@ tags: $:/tags/Global
 	<div class="tc-flexible-input-container">
 		<$reveal stateTitle=<<tf.dv-foldedState>>
 			tag="div"
-			class="btn-fld"
+			class=`btn-fld ${[<tf.dv-getExcludeText>!is[blank]then[btn-fld-has-exluded]]}$`
 			type="nomatch"
 			text="show"
 			default="hide"
@@ -317,10 +344,11 @@ tags: $:/tags/Global
 		</$reveal>
 		<$reveal stateTitle=<<tf.dv-foldedState>>
 			tag="div"
-			class="btn-fld"
+			class=`btn-fld ${[<tf.dv-getExcludeText>!is[blank]then[btn-fld-has-exluded]]}$`
 			type="nomatch"
 			text="hide"
 			default="hide"
+			style="align-self: center;"
 		>
 			<$button tooltip={{$:/language/Search/Variables/Exclude/Hide}}  class="tc-dv-btn tc-btn-invisible">
 				<$action-setfield $tiddler=<<tf.dv-foldedState>> $field=text $value="hide"/>
@@ -351,7 +379,7 @@ tags: $:/tags/Global
 <$action-setfield $tiddler=<<tf.dv-excludeText>> text=<<navigateTo>>/>
 \end
 
-\procedure addVariableFilter()
+\procedure dv-addNewVariableFilter-actions()
 <$action-sendmessage
 	$message="tm-new-tiddler"
 	tags="$:/tags/Variables/Exclude/Snippet"
@@ -364,8 +392,8 @@ tags: $:/tags/Global
 />
 \end
 
-\procedure addNewVariableFilter()
-<$button tag="a" actions=<<addVariableFilter>> class="tc-tiddlylink">
+\procedure dv-addNewVariableFilter()
+<$button tag="a" actions=<<dv-addNewVariableFilter-actions>> class="tc-tiddlylink">
 	<em>
 		<$text text={{$:/language/Search/Variables/Exclude/Save}}/>
 	</em>
@@ -395,7 +423,7 @@ tags: $:/tags/Global
 						</div>
 					</$list>
 					<hr>
-					<<addNewVariableFilter>>
+					<<dv-addNewVariableFilter>>
 				</div>
 			</div>
 		</$linkcatcher>
