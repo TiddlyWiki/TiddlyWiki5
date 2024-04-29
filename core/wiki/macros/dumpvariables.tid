@@ -162,7 +162,7 @@ tags: $:/tags/Global
 	+[count[]] }$`
 /> <<lingo Matches>></p>
 
-<$list filter="[subfilter<tf.dv-filterString>] 
+<$list filter="[subfilter<tf.dv-filterString>]
 		+[search::some<tf.dv-getSearchText>]
 		+[filter<subfilter>]
 		+[!filter<tf.dv-getExcludeText>]"
