@@ -127,35 +127,6 @@ tags: $:/tags/Global
 </div>
 \end
 
-<!-- \procedure dv-filterOptions()
-<style>
-.tc-dv-filterOptions [data-gap="right"] {
-	width: auto;
-	margin-right: .25em;
-}
-</style>
-<span class="tc-dv-filterOptions tc-small-gap-right">
-{{$:/language/Search/Variables/Option/Type}}
-<$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
-	<$checkbox tiddler=<<tf.dv-tmpTypeOptions>> listField="text" checked=<<option>>
-		class="tc-small-gap-left tc-small-gap-right" data-gap="right"
-	>
-		<<option>>
-	</$checkbox>
-</$list>|
-</span>
-\end
-
-\procedure dv-sortOptions()
-<span class="tc-dv-sortOptions">
-	{{$:/language/Search/Variables/Option/Sort}}
-	<$select tiddler=<<tf.dv-tmpSortOptions>> default="alphabetical" class="tc-tiny-gap-left">
-		<option value="alphabetical">alphabetical</option>
-		<option value="raw">raw</option>
-	</$select>
-</span>
-\end -->
-
 \function tf.dv-tmpTypeOptions() [<DV-FILTER-OPTIONS>] [<qualify>] +[join[/]]
 \function tf.dv-tmpSortOptions() [<DV-SORT-OPTIONS>] [<qualify>] +[join[/]]
 
