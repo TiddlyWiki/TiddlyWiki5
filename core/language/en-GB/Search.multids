@@ -24,7 +24,7 @@ Variables/Clear/Exclude: Clear exlude
 Variables/Clear/Search: Clear search
 Variables/Exclude: Exclude:
 Variables/Exclude/Edit: Edit
-Variables/Function/Content: Function content
+Variables/Function/Content: Function definition
 Variables/Function/Definition: Function definition
 Variables/Exclude/Hide: Hide exclude input
 Variables/Exclude/Hint: Exclude Filter eg: [prefix[.]]

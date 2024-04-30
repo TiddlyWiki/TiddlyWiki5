@@ -162,6 +162,7 @@ tags: $:/tags/Global
 	+[count[]] }$`
 /> <<lingo Matches>></p>
 
+<div class="tc-variables-results">
 <$list filter="[subfilter<tf.dv-filterString>]
 		+[search::some<tf.dv-getSearchText>]
 		+[filter<subfilter>]
@@ -175,7 +176,7 @@ tags: $:/tags/Global
 			<% else %>
 				{{$:/core/images/right-arrow}}
 			<% endif %>
-			<code class="tc-small-gap-right"><$text text=<<tf.dv-formattedVar>>/></code>
+			<code title={{$:/language/Search/Variables/Signature}} class="tc-small-gap-right"><$text text=<<tf.dv-formattedVar>>/></code>
 		</$button>
 		<% if [<tf.dv-formattedVar>prefix[\function]] %>
 			<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
@@ -210,6 +211,7 @@ tags: $:/tags/Global
 		<% endif %>
 	</div>
 </$list>
+</div>
 \end
 
 
