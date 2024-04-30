@@ -71,7 +71,7 @@ tags: $:/tags/Global
 
 \procedure dv-clearStatesButton()
 <span class="tc-small-gap"><<lingo FoldAll>></span>
-<$button class="tc-btn-invisible tc-tiny-gap-left">
+<$button class="tc-btn-invisible tc-tiny-gap-left" tooltip={{$:/language/Search/Variables/FoldAll}}>
 	<!-- "search text details" should be preserved -->
 	<$action-deletetiddler $filter="[prefix<DV-SEARCH-STATE>]"/>
 	{{$:/core/images/fold-all-button}}
@@ -96,7 +96,7 @@ tags: $:/tags/Global
 
 \procedure dv-expandAllStatesButton()
 <span class="tc-tiny-gap"><<lingo ExpandAll>></span>
-<$button class="tc-btn-invisible">
+<$button class="tc-btn-invisible" tooltip={{$:/language/Search/Variables/ExpandAll}}>
 	<$action-setfield $tiddler=<<DV-SEARCH-STATE>>
 		text={{{ [<tf.dv-toggleInfoState>get[text]] +[toggle[yes],[no]] }}}
 	/>
@@ -155,7 +155,7 @@ tags: $:/tags/Global
 
 <<dv-searchForm>>
 
-<p><$text text=`${ [subfilter<tf.dv-filterString>]
+<p tabindex="0"><$text text=`${ [subfilter<tf.dv-filterString>]
 	+[search::some<tf.dv-getSearchText>]
 	+[filter<subfilter>]
 	+[!filter<tf.dv-getExcludeText>]
@@ -176,24 +176,28 @@ tags: $:/tags/Global
 				{{$:/core/images/right-arrow}}
 			<% endif %>
 			<code class="tc-small-gap-right"><$text text=<<tf.dv-formattedVar>>/></code>
-			<% if [<tf.dv-formattedVar>prefix[\function]] %>
-				<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
-				<span class="tc-tiny-gap-right"><$text text={{{ [<varname>format:variable[$firstLine$]] }}}/></span>
-			<% endif %>
 		</$button>
+		<% if [<tf.dv-formattedVar>prefix[\function]] %>
+			<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
+			<span tabindex="0" class="tc-tiny-gap-right" title={{$:/language/Search/Variables/Function/Content}}>
+				<$text text={{{ [<varname>format:variable[$firstLine$]] }}}/>
+			</span>
+		<% endif %>
 
 		<% if [<tf.dv-varState>get[text]match[yes]] %>
-			<$button actions=<<dv-toggleInfoState>> class="tc-btn-invisible tc-small-gap-left">
+			<$button actions=<<dv-toggleInfoState>> 
+				class="tc-btn-invisible tc-small-gap-left"
+			>
 				<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
-					{{$:/core/images/up-arrow}}
+					<span title={{$:/language/Search/Variables/Info/Toggle/Hide}}>{{$:/core/images/up-arrow}}</span>
 				<% else %>
-					{{$:/core/images/advanced-search-button}}
+					<span title={{$:/language/Search/Variables/Info/Toggle/Show}}>{{$:/core/images/advanced-search-button}}</span>
 				<% endif %>
 			</$button>
 			<blockquote class="tc-quote">
 				<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
 					<div class="tc-labeled-input-wrapper">
-						<span class="tc-fixed-label tc-align-right"><<lingo Search/Details>></span>
+						<span tabindex="0" class="tc-fixed-label tc-align-right"><<lingo Search/Details>></span>
 						<$edit-text tiddler=<<tf.dv-detailsSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
 					</div>
 					<<dv-info>>
@@ -201,7 +205,7 @@ tags: $:/tags/Global
 				<% if [<varname>prefix[\function]] %>
 					<$codeblock code={{{ [<varname>getvariable[value]] }}}/>
 				<% endif %>
-				<$codeblock code={{{ [<varname>getvariable[]] }}}/>
+				<pre tabindex="0" title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
 			</blockquote>
 		<% endif %>
 	</div>
@@ -380,7 +384,12 @@ tags: $:/tags/Global
 \end
 
 \procedure dv-addNewVariableFilter()
-<$button tag="a" actions=<<dv-addNewVariableFilter-actions>> class="tc-tiddlylink">
+<$button tag="a"
+	actions=<<dv-addNewVariableFilter-actions>>
+	class="tc-tiddlylink"
+	aria-label={{$:/language/Search/Variables/Exclude/Save}}
+	tabindex="0"
+>
 	<em>
 		<$text text={{$:/language/Search/Variables/Exclude/Save}}/>
 	</em>
@@ -389,7 +398,10 @@ tags: $:/tags/Global
 
 \procedure moreVariablesPopup()
 <span class="tc-popup-keep btn-y">
-	<$button popup=<<qualify "$:/state/variableDropdown">> class="tc-btn-invisible">
+	<$button popup=<<qualify "$:/state/variableDropdown">> 
+		class="tc-btn-invisible"
+		tooltip={{$:/language/Search/Variables/Exclude/Show/Config}}
+	>
 		{{$:/core/images/down-arrow}}
 	</$button>
 </span>

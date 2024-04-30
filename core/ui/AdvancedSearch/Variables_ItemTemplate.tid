@@ -11,6 +11,6 @@ title: $:/core/ui/AdvancedSearch/Variables/ItemTemplate
 		<$transclude field="description"/>
 	</$let>
 </$link>
-<$button actions=<<editSnippet>> class="tc-btn-invisible tc-small-gap-left">
+<$button actions=<<editSnippet>> class="tc-btn-invisible tc-small-gap-left" tooltip={{$:/language/Search/Variables/Exclude/Edit}}>
 	{{$:/core/images/edit-button}}
 </$button>

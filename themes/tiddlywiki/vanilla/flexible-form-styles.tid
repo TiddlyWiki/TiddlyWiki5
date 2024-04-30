@@ -21,7 +21,7 @@ tags: $:/tags/Stylesheet
 .tc-dv-type {
 	grid-area: tc-dv-type;
 	display: grid;
-	grid-column-gap: .5em;
+	grid-column-gap: 0.3em;
 	grid-row-gap: 0.2em;
 	grid-template-columns: 5.3em;
 	grid-template-areas:
@@ -29,14 +29,14 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-dv-filterOptions {
-	border: 1px solid <<colour code-border>>;
+	<!-- border: 1px solid <<colour code-border>>; -->
 	padding: 0 .3em;
 }
 
 .tc-dv-sort {
 	grid-area: tc-dv-sort;
 	display: grid;
-	grid-column-gap: 0.5em;
+	grid-column-gap: 0.3em;
 	grid-row-gap: 0.2em;
 	grid-template-columns: 6em 9em;
 	grid-template-areas:

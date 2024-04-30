@@ -19,19 +19,25 @@ System/Caption: System
 System/Hint: Search for system tiddlers
 System/Matches: //<small><<resultCount>> matches</small>//
 Variables/Caption: Variables
+Variables/Content: Variable content
 Variables/Clear/Exclude: Clear exlude
 Variables/Clear/Search: Clear search
 Variables/Exclude: Exclude:
+Variables/Exclude/Edit: Edit
+Variables/Function/Content: Function content
 Variables/Exclude/Hide: Hide exclude input
-Variables/Exclude/Hint: Filter eg: [prefix[.]]
-Variables/Exclude/Save: Create exclude filter
+Variables/Exclude/Hint: Exclude Filter eg: [prefix[.]]
+Variables/Exclude/Save: Create new exclude filter
 Variables/Exclude/Show: Show exclude input
+Variables/Exclude/Show/Config: Show saved exclude configurations
 Variables/Exclude/Description: EDIT ME - Description is shown in the dropdown
 Variables/ExpandAll: Expand all:
 Variables/FoldAll: Fold all:
 Variables/Filter: Search:
-Variables/Filter/Hint: Text eg: .attr
+Variables/Filter/Hint: Search Variable Name eg: .attr
 Variables/Hint: Filter global variables
+Variables/Info/Toggle/Show: Show details search input
+Variables/Info/Toggle/Hide: Hide details search input
 Variables/Matches: //<small><<resultCount>> matches</small>//
 Variables/Search: Search Variables
 Variables/Search/Details: Search tiddler text, tags:
