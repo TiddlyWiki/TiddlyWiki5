@@ -214,12 +214,6 @@ tags: $:/tags/Global
 <!-- ================================== -->
 
 \procedure dv-search-input-box()
-<%if [<sort>!is[blank]] %>
-	<code class="tc-small-gap">sort:<<_tf.dv-sort>></code>
-<%endif%>
-<%if [<type>!is[blank]] %>
-	<code class="tc-small-gap">type:<<_tf.dv-type>></code>
-<%endif%>
 <span class="x-txt"><$text text={{$:/language/Search/Variables/Filter}}/></span>
 <$edit-text tiddler=<<tf.dv-searchText>>
 	tag=input
@@ -253,41 +247,51 @@ tags: $:/tags/Global
 }
 </style>
 <span class="t-txt"><<lingo Option/Type>></span>
-<$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
-	<%if [<DV-TYPE-CONFIG>get[text]match[checkbox]] %>
-		<$checkbox tiddler=<<tf.dv-tmpTypeOptions>>
-			listField="text"
-			checked=<<option>>
-			default="all"
-			class=<<tf.dv-opt-class>>
-			data-gap="right"
-		>
-			<<option>>
-		</$checkbox>
-	<% else %>
-		<$radio tiddler=<<tf.dv-tmpTypeOptions>>
-			listField="text" value=<<option>>
-			default="all"
-			class=<<tf.dv-opt-class>>
-			data-gap="right"
-		>
-			<<option>>
-		</$radio>
-	<% endif %>
-</$list>
+<%if [<type>!is[blank]] %>
+	<$list filter="[<_tf.dv-type>split[ ]]" variable="option">
+		<code class=<<tf.dv-opt-class>> ><<option>></code>
+	</$list>
+<% else %>
+	<$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
+		<%if [<DV-TYPE-CONFIG>get[text]match[checkbox]] %>
+			<$checkbox tiddler=<<tf.dv-tmpTypeOptions>>
+				listField="text"
+				checked=<<option>>
+				default="all"
+				class=<<tf.dv-opt-class>>
+				data-gap="right"
+			>
+				<<option>>
+			</$checkbox>
+		<% else %>
+			<$radio tiddler=<<tf.dv-tmpTypeOptions>>
+				listField="text" value=<<option>>
+				default="all"
+				class=<<tf.dv-opt-class>>
+				data-gap="right"
+			>
+				<<option>>
+			</$radio>
+		<% endif %>
+	</$list>
+<% endif %>
 \end
 
 \procedure dv-sortOptions()
 <span class="sel-txt">
 	<<lingo Option/Sort>>
 </span>
-<$select tiddler=<<tf.dv-tmpSortOptions>>
-	default="alphabetical"
-	class="sel-drop"
->
-	<option value="alphabetical">alphabetical</option>
-	<option value="raw">raw</option>
-</$select>
+<%if [<sort>!is[blank]] %>
+	<code class="sel-drop"><<_tf.dv-sort>></code>
+<% else %>
+	<$select tiddler=<<tf.dv-tmpSortOptions>>
+		default="alphabetical"
+		class="sel-drop"
+	>
+		<option value="alphabetical">alphabetical</option>
+		<option value="raw">raw</option>
+	</$select>
+<% endif %>
 \end
 
 \procedure dv-expandFoldOption()
