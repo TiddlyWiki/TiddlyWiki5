@@ -87,7 +87,7 @@ type: text/vnd.tiddlywiki
 \end
 
 <div class="tc-flexible-form">
-	<div class="tc-flexible-checkbox-container">
+	<div class="tc-advanced-search-container">
 	<<fi-filterOptions>> <<fi-sortOptions>>
 	</div>
 	<div class="tc-flexible-input-container">
