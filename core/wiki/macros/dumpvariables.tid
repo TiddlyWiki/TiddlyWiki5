@@ -155,7 +155,7 @@ tags: $:/tags/Global
 
 <<dv-searchForm>>
 
-<p><$text text=`${ [subfilter<tf.dv-filterString>] 
+<p><$text text=`${ [subfilter<tf.dv-filterString>]
 	+[search::some<tf.dv-getSearchText>]
 	+[filter<subfilter>]
 	+[!filter<tf.dv-getExcludeText>]
@@ -237,7 +237,7 @@ tags: $:/tags/Global
 <% endif %>
 \end
 
-\function tf.dv-opt-class() "c" [<option>] +[join[-]] "tc-dv-filterOptions" +[join[ ]]
+\function tf.dv-opt-class() "c" [<option>] +[join[-]] "tc-tiny-gap-right" "tc-dv-filterOptions" +[join[ ]]
 
 \procedure dv-filterOptions()
 <style>
@@ -248,9 +248,11 @@ tags: $:/tags/Global
 </style>
 <span class="t-txt"><<lingo Option/Type>></span>
 <%if [<type>!is[blank]] %>
-	<$list filter="[<_tf.dv-type>split[ ]]" variable="option">
-		<code class=<<tf.dv-opt-class>> ><<option>></code>
-	</$list>
+	<span> <!-- span is needed to overwrite grid-area settings -->
+		<$list filter="[<_tf.dv-type>split[ ]]" variable="option">
+			<code class=<<tf.dv-opt-class>> ><<option>></code>
+		</$list>
+	</span>
 <% else %>
 	<$list filter="[enlist<DV-VAR-FILTER-OPTIONS>]" variable="option">
 		<%if [<DV-TYPE-CONFIG>get[text]match[checkbox]] %>
@@ -309,8 +311,10 @@ tags: $:/tags/Global
 <!-- ========================================== -->
 \procedure dv-searchForm()
 <div class="tc-flexible-form">
-	<div class="tc-flexible-checkbox-container">
-	<<dv-filterOptions>> <<dv-sortOptions>> <<dv-expandFoldOption>>
+	<div class="tc-advanced-search-container">
+	<span class="tc-dv-type"><<dv-filterOptions>></span>
+	<span class="tc-dv-sort"><<dv-sortOptions>></span>
+	<span class="tc-dv-extra"><<dv-expandFoldOption>></span>
 	</div>
 	<div class="tc-flexible-input-container">
 		<$reveal stateTitle=<<tf.dv-foldedState>>

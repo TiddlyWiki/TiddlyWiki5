@@ -6,15 +6,51 @@ tags: $:/tags/Stylesheet
 	overflow: auto;
 	margin-bottom: 1em;
 }
-.tc-flexible-checkbox-container {
+
+.tc-advanced-search-container {
 	padding: 4px 3px 3px 3px;
 	border-bottom: 1px dotted black;
 	display: grid;
+	grid-column-gap: 1em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: minmax(max-content, auto) minmax(max-content, auto) 1fr;
+	grid-template-areas:
+		"tc-dv-type tc-dv-sort tc-dv-extra";
+}
+
+.tc-dv-type {
+	grid-area: tc-dv-type;
+	display: grid;
+	grid-column-gap: .5em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: 5.3em;
+	grid-template-areas:
+		"t-txt c-all c-fn c-var c-proc c-macro c-widget";
+}
+
+.tc-dv-filterOptions {
+	border: 1px solid <<colour code-border>>;
+	padding: 0 .3em;
+}
+
+.tc-dv-sort {
+	grid-area: tc-dv-sort;
+	display: grid;
+	grid-column-gap: 0.5em;
+	grid-row-gap: 0.2em;
+	grid-template-columns: 6em 9em;
+	grid-template-areas:
+		"sel-txt sel-drop";
+}
+
+.tc-dv-extra {
+	grid-area: tc-dv-extra;
+	display: grid;
 	grid-column-gap: 0.3em;
 	grid-row-gap: 0.2em;
-	grid-template-columns: 5.3em 3em 3em 3em 4em 5em 5em 5em 8em 10em 1fr;
+	grid-template-columns: 1fr;
 	grid-template-areas:
-		"t-txt c-all c-fn c-var c-proc c-macro c-widget sel-txt sel-drop ex-btn";
+		"ex-btn";
 }
 
 <!-- TODO Try this without a media query!!! -->
@@ -23,12 +59,15 @@ tags: $:/tags/Stylesheet
 		[{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}removesuffix[px]]
 		:reduce[<currentTiddler>add<accumulator>addsuffix[px]] }}}
 	/>) {
-	.tc-flexible-checkbox-container {
+	.tc-dv-sort {
+		grid-template-columns: 5.3em 9em;
+	}
+
+	.tc-advanced-search-container {
 		grid-column-gap: 0.1em;
-		grid-template-columns: 3em 3em 3em 3em 4em 5em 5em 5em 8em 10em 1fr;
 		grid-template-areas:
-			"t-txt   c-all    c-fn     c-var     c-proc c-macro c-widget"
-			"sel-txt sel-drop sel-drop  sel-drop ex-btn ex-btn  ex-btn";
+			"tc-dv-type tc-dv-type tc-dv-type"
+			"tc-dv-sort tc-dv-sort tc-dv-extra";
 	}
 }
 
@@ -116,7 +155,7 @@ tags: $:/tags/Stylesheet
 }
 .sel-drop {
 	grid-area: sel-drop;
-	border: none;
+	border: 1px solid <<colour code-border>>;
 }
 .ex-btn {
 	grid-area: ex-btn;
