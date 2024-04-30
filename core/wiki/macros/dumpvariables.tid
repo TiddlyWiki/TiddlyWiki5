@@ -81,7 +81,7 @@ tags: $:/tags/Global
 \procedure dv-clearSearchButton()
 <$button class="tc-btn-invisible btn-x" tooltip={{$:/language/Search/Variables/Clear/Search}}>
 	<$action-deletetiddler $tiddler=<<tf.dv-searchText>>/>
-	<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input.x-inp"/>
+	<$action-sendmessage $message="tm-focus-selector" $param="input.x-inp"/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
@@ -89,7 +89,7 @@ tags: $:/tags/Global
 \procedure dv-clearExcludeButton()
 <$button class="tc-btn-invisible btn-yy" tooltip={{$:/language/Search/Variables/Clear/Exclude}}>
 	<$action-deletetiddler $tiddler=<<tf.dv-excludeText>>/>
-	<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input.y-inp"/>
+	<$action-sendmessage $message="tm-focus-selector" $param="input.y-inp"/>
 	{{$:/core/images/close-button}}
 </$button>
 \end
@@ -355,7 +355,7 @@ tags: $:/tags/Global
 
 \procedure dv-lc-actions()
 <$action-setfield $tiddler=<<tf.dv-excludeText>> text=<<navigateTo>>/>
-<!-- <$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input.y-inp"/> -->
+<!-- <$action-sendmessage $message="tm-focus-selector" $param="input.y-inp"/> -->
 \end
 
 \procedure dv-addNewVariableFilter-actions()

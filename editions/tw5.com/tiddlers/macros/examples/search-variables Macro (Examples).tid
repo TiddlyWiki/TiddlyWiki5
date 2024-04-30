@@ -1,5 +1,5 @@
 created: 20240427121446051
-modified: 20240427122708648
+modified: 20240429205843171
 title: search-variables Macro (Examples)
 type: text/vnd.tiddlywiki
 
@@ -8,22 +8,22 @@ The following example will list all variables that contain the word "example" in
 While ''the following list will be long'' it should be easy to refine it. It shows all variables known within this tiddler. Using the procedure in a ''different context''. Eg: the sidebar, variables will show ''different values''.
 
 <$macrocall $name=".example" n="1"
-eg="""<<search-variables >>"""/>
+eg="""<div><<search-variables >></div>"""/>
 
 <$macrocall $name=".example" n="2"
-eg="""<$let EXAMPLE="123" >
+eg="""<div><$let EXAMPLE="123" >
 <<search-variables subfilter:"[search::some[EXAMPLE dumpvariables]]">>
-</$let>"""/>
+</$let></div>"""/>
 
 Listing only specific varibles can be achieved using the <<.olink search>> operator as a subfilter
 
 <$macrocall $name=".example" n="3"
-eg="""<$let EXAMPLE="123" >
+eg="""<div><$let EXAMPLE="123" >
 <<search-variables subfilter:"[search::casesensitive,some[EXAMPLE dumpvariables]]">>
-</$let>"""/>
+</$let></div>"""/>
 
 <$macrocall $name=".example" n="4"
-eg="""<<search-variables subfilter:"[prefix[.a]]">>"""/>
+eg="""<div><<search-variables subfilter:"[prefix[.a]]">></div>"""/>
 
 
 
