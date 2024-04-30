@@ -1,0 +1,9 @@
+created: 20240430134820097
+modified: 20240430135154411
+tags: $:/tags/Global
+title: test-search-widget
+type: text/vnd.tiddlywiki
+
+\widget $w.test-world()
+Hello World
+\end
