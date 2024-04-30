@@ -25,6 +25,7 @@ Variables/Clear/Search: Clear search
 Variables/Exclude: Exclude:
 Variables/Exclude/Edit: Edit
 Variables/Function/Content: Function content
+Variables/Function/Definition: Function definition
 Variables/Exclude/Hide: Hide exclude input
 Variables/Exclude/Hint: Exclude Filter eg: [prefix[.]]
 Variables/Exclude/Save: Create new exclude filter
@@ -41,5 +42,6 @@ Variables/Info/Toggle/Hide: Hide details search input
 Variables/Matches: //<small><<resultCount>> matches</small>//
 Variables/Search: Search Variables
 Variables/Search/Details: Search tiddler text, tags:
+Variables/Signature: Variable signature
 Variables/Option/Type: Type:
 Variables/Option/Sort: Sort:

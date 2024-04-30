@@ -43,11 +43,11 @@ tags: $:/tags/Global
 <ul>
 	<$list filter="[subfilter<tf.dv-filterString>] +[filter<subfilter>]" variable="varname">
 		<li>
-			<code><$text text=<<tf.dv-formattedVar>>/></code><br/>
+			<code title={{$:/language/Search/Variables/Signature}}><$text text=<<tf.dv-formattedVar>>/></code><br/>
 			<% if [<tf.dv-formattedVar>prefix[\function]] %>
-				<$codeblock code={{{ [<varname>getvariable[value]] }}}/>
+				<pre title={{$:/language/Search/Variables/Function/Definition}}><code><$text text={{{ [<varname>getvariable[value]] }}}/></code></pre>
 			<% endif %>
-			<$codeblock code={{{ [<varname>getvariable[]] }}}/>
+			<pre title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
 		</li>
 	</$list>
 </ul>
