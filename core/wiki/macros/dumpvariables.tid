@@ -69,6 +69,14 @@ tags: $:/tags/Global
 />
 \end
 
+\procedure dv-setDetailsSearchText()
+<!-- Existing user modified "search text details" should be preserved. If empty use default formatted signature -->
+<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
+<$action-setfield $tiddler=<<tf.dv-detailsSearch>>
+	text={{{ [<varname>format:variable[$type$ $name$($params$)]] }}}
+/>
+\end
+
 \procedure dv-clearStatesButton()
 <span class="tc-small-gap"><<lingo FoldAll>></span>
 <$button class="tc-btn-invisible tc-tiny-gap-left" tooltip={{$:/language/Search/Variables/FoldAll}}>
@@ -200,6 +208,12 @@ tags: $:/tags/Global
 					<div class="tc-labeled-input-wrapper">
 						<span tabindex="0" class="tc-fixed-label tc-align-right"><<lingo Search/Details>></span>
 						<$edit-text tiddler=<<tf.dv-detailsSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
+						<$button actions=<<dv-setDetailsSearchText>>
+							class="tc-btn-invisible tc-tiny-gap-left"
+							tooltip={{$:/language/Search/Variables/Info/Reset}}
+						>
+							{{$:/core/images/refresh-button}}
+						</$button>
 					</div>
 					<<dv-info>>
 				<% endif %>

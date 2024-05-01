@@ -37,6 +37,7 @@ Variables/FoldAll: Fold all:
 Variables/Filter: Search:
 Variables/Filter/Hint: Search Variable Name eg: .attr
 Variables/Hint: Filter global variables
+Variables/Info/Reset: Reset details search input
 Variables/Info/Toggle/Show: Show details search input
 Variables/Info/Toggle/Hide: Hide details search input
 Variables/Matches: //<small><<resultCount>> matches</small>//
