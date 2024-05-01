@@ -1,5 +1,5 @@
 created: 20240427121446051
-modified: 20240501113433319
+modified: 20240501121207308
 title: search-variables Macro (Examples)
 type: text/vnd.tiddlywiki
 
@@ -15,10 +15,12 @@ eg="""<div><$let EXAMPLE="123" >
 <<search-variables subfilter:"[search::some[EXAMPLE dumpvariables]]">>
 </$let></div>"""/>
 
-Listing only specific varibles can be achieved using the <<.olink search>> operator as a subfilter
+Listing only specific varibles can be achieved using the <<.olink search>> operator as a subfilter.
+
+<<.tip """The ''transclusion'' variable is set to eg:"3" so if several "search interfaces" are open in the same tiddler, that type and sort parameters should have no side effects.""">>
 
 <$macrocall $name=".example" n="3"
-eg="""<div><$let EXAMPLE="123" >
+eg="""<div><$let EXAMPLE="123" transclusion="3">
 <<search-variables subfilter:"[search::casesensitive,some[EXAMPLE dumpvariables]]">>
 </$let></div>"""/>
 
