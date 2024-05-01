@@ -34,24 +34,22 @@ tags: $:/tags/Global
 <!-- dumpvariables main procedure -->
 <!-- ============================ -->
 \procedure dumpvariables(type sort subfilter:"[[]]" format)
-
-<!-- The following function is needed since the "format" string can contain closing brackets ")" -->
-<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
-\function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
-\function _tf.dv-type() [<type>]
-\function _tf.dv-sort() [<sort>]
-
-<ul>
-	<$list filter="[subfilter<tf.dv-filterString>] +[filter<subfilter>]" variable="varname">
-		<li>
-			<code title={{$:/language/Search/Variables/Signature}}><$text text=<<tf.dv-formattedVar>>/></code><br/>
-			<% if [<tf.dv-formattedVar>prefix[\function]] %>
-				<pre title={{$:/language/Search/Variables/Function/Definition}}><code><$text text={{{ [<varname>getvariable[value]] }}}/></code></pre>
-			<% endif %>
-			<pre title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
-		</li>
-	</$list>
-</ul>
+	<!-- The following function is needed since the "format" string can contain closing brackets ")" -->
+	<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
+	\function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
+	\function _tf.dv-type() [<type>]
+	\function _tf.dv-sort() [<sort>]
+	<ul>
+		<$list filter="[subfilter<tf.dv-filterString>] +[filter<subfilter>]" variable="varname">
+			<li>
+				<code title={{$:/language/Search/Variables/Signature}}><$text text=<<tf.dv-formattedVar>>/></code><br/>
+				<% if [<tf.dv-formattedVar>prefix[\function]] %>
+					<pre title={{$:/language/Search/Variables/Function/Definition}}><code><$text text={{{ [<varname>getvariable[value]] }}}/></code></pre>
+				<% endif %>
+				<pre title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
+			</li>
+		</$list>
+	</ul>
 \end
 
 <!-- search-variables helper functions -->
@@ -155,78 +153,77 @@ tags: $:/tags/Global
 <!-- search-variables main procedure -->
 <!-- =============================== -->
 \procedure search-variables(type sort subfilter:"[[]]" format)
+	<!-- The following function is needed since the "format" string can contain closing brackets ")" -->
+	<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
+	\function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
+	\function _tf.dv-type() [<type>!is[blank]then<type>] :else[<tf.dv-tmpTypeOptions>get[text]]
+	\function _tf.dv-sort() [<sort>!is[blank]then<sort>] :else[<tf.dv-tmpSortOptions>get[text]] :else[[alphabetical]]
 
-<!-- The following function is needed since the "format" string can contain closing brackets ")" -->
-<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
-\function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
-\function _tf.dv-type() [<type>!is[blank]then<type>] :else[<tf.dv-tmpTypeOptions>get[text]]
-\function _tf.dv-sort() [<sort>!is[blank]then<sort>] :else[<tf.dv-tmpSortOptions>get[text]] :else[[alphabetical]]
+	<<dv-searchForm>>
 
-<<dv-searchForm>>
-
-<p tabindex="0"><$text text=`${ [subfilter<tf.dv-filterString>]
-	+[search::some<tf.dv-getSearchText>]
-	+[filter<subfilter>]
-	+[!filter<tf.dv-getExcludeText>]
-	+[count[]] }$`
-/> <<lingo Matches>></p>
-
-<div class="tc-variables-results">
-<$list filter="[subfilter<tf.dv-filterString>]
+	<p tabindex="0"><$text text=`${ [subfilter<tf.dv-filterString>]
 		+[search::some<tf.dv-getSearchText>]
 		+[filter<subfilter>]
-		+[!filter<tf.dv-getExcludeText>]"
-	variable="varname"
->
-	<div class="tc-var-item">
-		<$button actions=<<dv-toggleState>> class="tc-small-gap-left tc-btn-invisible">
-			<% if [<tf.dv-varState>get[text]match[yes]] %>
-				{{$:/core/images/down-arrow}}
-			<% else %>
-				{{$:/core/images/right-arrow}}
-			<% endif %>
-			<code title={{$:/language/Search/Variables/Signature}} class="tc-small-gap-right"><$text text=<<tf.dv-formattedVar>>/></code>
-		</$button>
-		<% if [<tf.dv-formattedVar>prefix[\function]] %>
-			<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
-			<span tabindex="0" class="tc-tiny-gap-right" title={{$:/language/Search/Variables/Function/Content}}>
-				<$text text={{{ [<varname>format:variable[$firstLine$]] }}}/>
-			</span>
-		<% endif %>
+		+[!filter<tf.dv-getExcludeText>]
+		+[count[]] }$`
+	/> <<lingo Matches>></p>
 
-		<% if [<tf.dv-varState>get[text]match[yes]] %>
-			<$button actions=<<dv-toggleInfoState>> 
-				class="tc-btn-invisible tc-small-gap-left"
-			>
-				<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
-					<span title={{$:/language/Search/Variables/Info/Toggle/Hide}}>{{$:/core/images/up-arrow}}</span>
+	<div class="tc-variables-results">
+	<$list filter="[subfilter<tf.dv-filterString>]
+			+[search::some<tf.dv-getSearchText>]
+			+[filter<subfilter>]
+			+[!filter<tf.dv-getExcludeText>]"
+		variable="varname"
+	>
+		<div class="tc-var-item">
+			<$button actions=<<dv-toggleState>> class="tc-small-gap-left tc-btn-invisible">
+				<% if [<tf.dv-varState>get[text]match[yes]] %>
+					{{$:/core/images/down-arrow}}
 				<% else %>
-					<span title={{$:/language/Search/Variables/Info/Toggle/Show}}>{{$:/core/images/advanced-search-button}}</span>
+					{{$:/core/images/right-arrow}}
 				<% endif %>
+				<code title={{$:/language/Search/Variables/Signature}} class="tc-small-gap-right"><$text text=<<tf.dv-formattedVar>>/></code>
 			</$button>
-			<blockquote class="tc-quote">
-				<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
-					<div class="tc-labeled-input-wrapper">
-						<span tabindex="0" class="tc-fixed-label tc-align-right"><<lingo Search/Details>></span>
-						<$edit-text tiddler=<<tf.dv-detailsSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
-						<$button actions=<<dv-setDetailsSearchText>>
-							class="tc-btn-invisible tc-tiny-gap-left"
-							tooltip={{$:/language/Search/Variables/Info/Reset}}
-						>
-							{{$:/core/images/refresh-button}}
-						</$button>
-					</div>
-					<<dv-info>>
-				<% endif %>
-				<% if [<varname>prefix[\function]] %>
-					<$codeblock code={{{ [<varname>getvariable[value]] }}}/>
-				<% endif %>
-				<pre tabindex="0" title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
-			</blockquote>
-		<% endif %>
+			<% if [<tf.dv-formattedVar>prefix[\function]] %>
+				<!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
+				<span tabindex="0" class="tc-tiny-gap-right" title={{$:/language/Search/Variables/Function/Content}}>
+					<$text text={{{ [<varname>format:variable[$firstLine$]] }}}/>
+				</span>
+			<% endif %>
+
+			<% if [<tf.dv-varState>get[text]match[yes]] %>
+				<$button actions=<<dv-toggleInfoState>> 
+					class="tc-btn-invisible tc-small-gap-left"
+				>
+					<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
+						<span title={{$:/language/Search/Variables/Info/Toggle/Hide}}>{{$:/core/images/up-arrow}}</span>
+					<% else %>
+						<span title={{$:/language/Search/Variables/Info/Toggle/Show}}>{{$:/core/images/advanced-search-button}}</span>
+					<% endif %>
+				</$button>
+				<blockquote class="tc-quote">
+					<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
+						<div class="tc-labeled-input-wrapper">
+							<span tabindex="0" class="tc-fixed-label tc-align-right"><<lingo Search/Details>></span>
+							<$edit-text tiddler=<<tf.dv-detailsSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
+							<$button actions=<<dv-setDetailsSearchText>>
+								class="tc-btn-invisible tc-tiny-gap-left"
+								tooltip={{$:/language/Search/Variables/Info/Reset}}
+							>
+								{{$:/core/images/refresh-button}}
+							</$button>
+						</div>
+						<<dv-info>>
+					<% endif %>
+					<% if [<varname>prefix[\function]] %>
+						<$codeblock code={{{ [<varname>getvariable[value]] }}}/>
+					<% endif %>
+					<pre tabindex="0" title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
+				</blockquote>
+			<% endif %>
+		</div>
+	</$list>
 	</div>
-</$list>
-</div>
 \end
 
 
