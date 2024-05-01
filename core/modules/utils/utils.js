@@ -310,17 +310,17 @@ exports.slowInSlowOut = function(t) {
 };
 
 exports.formatVariableString = function(template,options) {
-	var name = options.name || "",
-		params = options.params || "",
+	var result = "",
 		firstLine = "",
-		os = options.srcVariable,
-		type = (os.isFunctionDefinition) ? "\\\\function" : (os.isMacroDefinition) ? "\\\\define" :
+		name = options.name || "",
+		params = options.params || "",
+		os = options.srcVariable || options.name;
+	var	type = (os.isFunctionDefinition) ? "\\\\function" : (os.isMacroDefinition) ? "\\\\define" :
 			(os.isProcedureDefinition) ? "\\\\procedure" : (os.isWidgetDefinition) ? "\\\\widget" : "",
 		varType = (os.isFunctionDefinition) ? "fn" : (os.isMacroDefinition) ? "macro" :
 			(os.isProcedureDefinition) ? "proc" : (os.isWidgetDefinition) ? "widget" : "var";
-	var result = "",
-		t = (!os.isFunctionDefinition && !os.isMacroDefinition && !os.isProcedureDefinition && !os.isWidgetDefinition) ? "$name$" : template,
-		matches = [
+		var t = (!os.isFunctionDefinition && !os.isMacroDefinition && !os.isProcedureDefinition && !os.isWidgetDefinition) ? "$name$" : template;
+		var matches = [
 			[/^\$type\$/i, function() {
 				return (type) ? type : "";
 			}],
@@ -330,7 +330,7 @@ exports.formatVariableString = function(template,options) {
 			[/^\$params\$/i, function() {
 				var elements = [],
 					paramString = "";
-				if (params && params[0] && params[0].name) {
+				if(params && params[0] && params[0].name) {
 					$tw.utils.each(params, function(p) {
 						elements.push(p.name + ((p.default) ? ':"' + p.default + '"' : ""));
 					});
