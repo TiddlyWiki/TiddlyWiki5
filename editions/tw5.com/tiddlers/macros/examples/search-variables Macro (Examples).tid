@@ -1,5 +1,5 @@
 created: 20240427121446051
-modified: 20240429205843171
+modified: 20240501113433319
 title: search-variables Macro (Examples)
 type: text/vnd.tiddlywiki
 
@@ -25,5 +25,9 @@ eg="""<div><$let EXAMPLE="123" >
 <$macrocall $name=".example" n="4"
 eg="""<div><<search-variables subfilter:"[prefix[.a]]">></div>"""/>
 
+<$macrocall $name=".example" n="5"
+eg="""<div><<search-variables type:"fn" sort:"raw">></div>"""/>
 
+<$macrocall $name=".example" n="6"
+eg="""<div><<search-variables type:"fn" sort:"raw" subfilter:"[prefix[.]]">></div>"""/>
 

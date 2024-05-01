@@ -166,7 +166,12 @@ tags: $:/tags/Global
 		+[filter<subfilter>]
 		+[!filter<tf.dv-getExcludeText>]
 		+[count[]] }$`
-	/> <<lingo Matches>></p>
+	/>
+		<<lingo Matches>>
+		<% if [<subfilter>split[]count[]compare::gt[4]] %>
+			<span class="tc-small-gap-left"><$text text=`subfilter: $(subfilter)$`/></span>
+		<%endif%>
+	</p>
 
 	<div class="tc-variables-results">
 	<$list filter="[subfilter<tf.dv-filterString>]
