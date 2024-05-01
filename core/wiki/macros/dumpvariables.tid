@@ -39,6 +39,18 @@ tags: $:/tags/Global
 	\function _tf.dv-varFormatStr() [<format>!is[blank]then<format>else[$type$ $name$($params$)]]
 	\function _tf.dv-type() [<type>]
 	\function _tf.dv-sort() [<sort>]
+
+	<p>
+		<$text text=`${ [subfilter<tf.dv-filterString>]
+			+[filter<subfilter>]
+			+[count[]] }$`
+		/>
+		<<lingo Matches>>
+		<% if [<subfilter>split[]count[]compare::gt[4]] %>
+			<span class="tc-small-gap-left"><$text text=`subfilter: $(subfilter)$`/></span>
+		<%endif%>
+	</p>
+
 	<ul>
 		<$list filter="[subfilter<tf.dv-filterString>] +[filter<subfilter>]" variable="varname">
 			<li>
@@ -161,13 +173,14 @@ tags: $:/tags/Global
 
 	<<dv-searchForm>>
 
-	<p tabindex="0"><$text text=`${ [subfilter<tf.dv-filterString>]
-		+[search::some<tf.dv-getSearchText>]
-		+[filter<subfilter>]
-		+[!filter<tf.dv-getExcludeText>]
-		+[count[]] }$`
-	/>
-		<<lingo Matches>>
+	<p tabindex="0">
+		<$text text=`${ [subfilter<tf.dv-filterString>]
+			+[search::some<tf.dv-getSearchText>]
+			+[filter<subfilter>]
+			+[!filter<tf.dv-getExcludeText>]
+			+[count[]] }$`
+		/>
+			<<lingo Matches>>
 		<% if [<subfilter>split[]count[]compare::gt[4]] %>
 			<span class="tc-small-gap-left"><$text text=`subfilter: $(subfilter)$`/></span>
 		<%endif%>
