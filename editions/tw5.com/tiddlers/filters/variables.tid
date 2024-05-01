@@ -1,6 +1,6 @@
 caption: variables
 created: 20190330100101453
-modified: 20240429134329720
+modified: 20240501101748198
 op-input: ignored
 op-output: the names of all the actively defined variables
 op-parameter: <<.from-version "5.3.4">> whitespace separated list of variable-types
@@ -18,14 +18,14 @@ type: text/vnd.tiddlywiki
 
 ''Possible Suffixes: <<.place S>>:'' <<.from-version "5.3.4">>
 
-* ''sort'' (default): By default the returned list is alphabetically sorted
+* ''alphabetical'' (default): By default the returned list is alphabetically sorted
 * ''raw'': The variable list will be returned as created. The variables "near" the filter run will show up first. So if variables are defined in the tiddler, where the <<.mlink dumpvariables>> or <<.mlink search-variables>> macros are executed, they will be listed first. 
 
 ''Parameters <<.place T>>:'' <<.from-version "5.3.4">>
 
-The parameters <<.place T>> allow a "whitespace separated" list of variable codes that should be listed
+The parameters <<.place T>> allow a ''whitespace separated list'' of variable codes that should be listed
 
-* Default is `all` - `fn, var, proc, macro, widget`
+* Default is `all` or `fn, var, proc, macro, widget`
 
 * ''all'' ... If set it takes precedence and will show all variables
 * ''fn'' ... Will only show variables defined as functions eg: `\function test-01()`

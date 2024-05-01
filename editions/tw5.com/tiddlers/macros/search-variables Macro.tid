@@ -1,6 +1,6 @@
 caption: search-variables
 created: 20240427120451313
-modified: 20240427123016441
+modified: 20240501101929800
 tags: Macros [[Core Macros]]
 title: search-variables Macro
 type: text/vnd.tiddlywiki
@@ -29,6 +29,6 @@ It is useful for debugging and exploring ~TiddlyWiki's internals.
 ; format
 : Format the output string using the VariableFormat. Defaults to `$type$ $name$($params$) $firstLine$`.
 
-!!! <<.macro-examples "search-variables">>
-
 Also see: [[dumpvariables Macro]]
+
+!!! <<.macro-examples "search-variables">>

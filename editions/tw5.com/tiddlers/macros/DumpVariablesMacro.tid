@@ -1,6 +1,6 @@
 caption: dumpvariables
 created: 20140908104107181
-modified: 20240427121039507
+modified: 20240501101941520
 tags: Macros [[Core Macros]]
 title: dumpvariables Macro
 type: text/vnd.tiddlywiki
@@ -28,6 +28,6 @@ The following parameters are <<.from-version "5.3.4">>
 ; format
 : Format the output string using the VariableFormat. Defaults to `$type$ $name$($params$) $firstLine$`.
 
-!!! <<.macro-examples "dumpvariables">>
-
 Also see: [[search-variables Macro]]
+
+!!! <<.macro-examples "dumpvariables">>
