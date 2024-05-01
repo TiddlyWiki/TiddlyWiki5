@@ -20,7 +20,8 @@ tags: $:/tags/Global
 \procedure DV-SEARCH-DETAILS() $:/temp/varSearch/details
 \procedure DV-SEARCH-STATE() $:/state/varSearch/name
 \procedure DV-EXCLUDE() $:/state/varExclude
-<!-- typeSelector options: checkbox, radio (default) -->
+
+<!-- HiddenSettings typeSelector options: checkbox, radio (default) -->
 \procedure DV-TYPE-CONFIG() $:/config/DumpVariables/type-selector
 
 <!-- Construct filter strings -->
