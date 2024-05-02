@@ -15,7 +15,10 @@
 		"tiddlywiki/codemirror",
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
-		"tiddlywiki/innerwiki"
+		"tiddlywiki/innerwiki",
+		"tiddlywiki/confetti",
+		"tiddlywiki/dynannotate",
+		"tiddlywiki/tour"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

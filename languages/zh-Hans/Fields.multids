@@ -5,6 +5,7 @@ author: 一个插件作者的姓名
 bag: 条目的来源集的名称
 caption: 显示于页签或按钮上的标题文字
 code-body: 若设置为 ''yes''，视图模板将以程式码形式显示条目
+class: 渲染条目时，套用到条目的 CSS 类别 - 请参阅[[依自订类别的自订样式|Custom styles by user-class]]。也适用于[[互动窗口|Modals]]
 color: 条目的 CSS 颜色值
 component: 负责[[提醒条目|AlertMechanism]]的组件名称
 core-version: 对于一个插件，表示与其兼容的 TiddlyWiki 版本

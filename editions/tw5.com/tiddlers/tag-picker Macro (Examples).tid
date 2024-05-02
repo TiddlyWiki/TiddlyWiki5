@@ -1,0 +1,69 @@
+created: 20230616104546608
+modified: 20240214174032498
+tags: [[tag-picker Macro]] [[Macro Examples]]
+title: tag-picker Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<<.warning """The first example will set the tag of the <<.tid currentTiddler>> so you should copy / paste it to a new tiddler for testing. Otherwise you'll change "this tiddler" """>>
+
+<$macrocall $name=".example" n="1"
+eg="""Use all existing tags and set the ''tags'' field here: <<tag-picker>>
+"""/>
+
+----
+
+<$let transclusion=test>
+
+<<.tip """The following examples use a temporary tiddler: $:/temp/test/tag-picker. So this tiddler will not be changed """>>
+
+
+<$macrocall $name=".example" n="2" 
+eg="""$:/temp/test/tag-picker ''tags'': <$text text={{{ [[$:/temp/test/tag-picker]get[tags]enlist-input[]join[, ]else[n/a]] }}}/>
+
+Use all existing tags and set the $:/temp/test/tag-picker ''tags'' field: <<tag-picker tiddler:"$:/temp/test/tag-picker">>
+"""/>
+
+----
+
+<<.tip """Use the following example to populate the $:/temp/test/tag-picker ''foo''-field, which are needed by some examples below """>>
+
+<$macrocall $name=".example" n="3" 
+eg="""$:/temp/test/tag-picker ''foo'': <$text text={{{ [[$:/temp/test/tag-picker]get[foo]enlist-input[]join[, ]else[n/a]] }}}/>
+
+Use all existing tags and set the $:/temp/test/tag-picker ''foo'' field: <<tag-picker tagField:"foo"  tiddler:"$:/temp/test/tag-picker">>
+"""/>
+
+----
+
+<<.tip """The following example expects some values in the "foo" field of the tiddler $:/temp/test/tag-picker, which can be created by the example above.""">>
+
+<$macrocall $name=".example" n="4" eg="""\procedure listSource() $:/temp/test/tag-picker
+
+$:/temp/test/tag-picker foo: <$text text={{{ [[$:/temp/test/tag-picker]get[foo]enlist-input[]join[, ]else[n/a]] }}}/><br>
+$:/temp/test/tag-picker bar: <$text text={{{ [[$:/temp/test/tag-picker]get[bar]enlist-input[]join[, ]else[n/a]] }}}/>
+
+Use $:/temp/test/tag-picker ''foo'' field as source and set ''bar'': <<tag-picker tagField:"bar" tagListFilter:"[<listSource>get[foo]enlist-input[]]" tiddler:"$:/temp/test/tag-picker">>
+"""/>
+
+----
+
+<<.tip """The following example expects some values in the "foo" field of the tiddler $:/temp/test/tag-picker, which can be created by the example above.<br>
+It will also add completely new tags to the bar-field and the source tiddlers foo-field. New tags can be entered by typing into the tag-name input
+""">>
+
+<$macrocall $name=".example" n="5" eg="""
+\procedure listSource() $:/temp/test/tag-picker
+\procedure listSourceField() foo
+
+\procedure addNewTagToSource()
+	<$action-listops $tiddler=<<listSource>> $field=<<listSourceField>> $subfilter='[<listSource>get<listSourceField>enlist-input[]] [<tag>trim[]]'/>
+\end
+
+$:/temp/test/tag-picker foo: <$text text={{{ [[$:/temp/test/tag-picker]get[foo]enlist-input[]join[, ]else[n/a]] }}}/><br>
+$:/temp/test/tag-picker ''bar'': <$text text={{{ [[$:/temp/test/tag-picker]get[bar]enlist-input[]join[, ]else[n/a]] }}}/>
+
+Use $:/temp/test/tag-picker ''foo'' field as source and set ''bar'': <$macrocall $name="tag-picker" tagField="bar" tagListFilter="[<listSource>get<listSourceField>enlist-input[]]" tiddler="$:/temp/test/tag-picker" actions=<<addNewTagToSource>>/>
+
+"""/>
+
+</$let>

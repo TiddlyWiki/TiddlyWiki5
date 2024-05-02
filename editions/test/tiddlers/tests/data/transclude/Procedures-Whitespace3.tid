@@ -1,0 +1,30 @@
+title: Transclude/Procedures/Whitespace3
+description: Procedures should inherit whitespace settings from definition site
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\import Definitions
+
+This is a sentence
+[<<testproc>>]
+[<<testmacro>>]
+
++
+title: Definitions
+
+\procedure testproc()
+This is a sentence    
+\end
+
+\define testmacro()
+This is a sentence    
+\end
++
+title: ExpectedResult
+
+<p>This is a sentence
+[This is a sentence    ]
+[This is a sentence    ]
+</p>
