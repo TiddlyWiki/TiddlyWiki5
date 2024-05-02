@@ -3,9 +3,6 @@ type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 description: Standalone data widget to create individual tiddlers
 
-title: Description
-text: Standalone data widget to create individual tiddlers
-+
 title: Output
 
 \whitespace trim
