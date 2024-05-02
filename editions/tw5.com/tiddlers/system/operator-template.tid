@@ -1,83 +1,64 @@
 created: 20150203173506000
+modified: 20240229155612000
 list-before: $:/core/ui/ViewTemplate/body
-modified: 20230602181119360
 tags: $:/tags/ViewTemplate
+code-body: yes
 title: $:/editions/tw5.com/operator-template
 
-\define .op-place()
-<$macrocall $name=".if"
-  cond="""$(op-name)$"""
-  then="<<.place '$(op-name)$'>> = "
-  else=""/>
+\whitespace trim
+
+\procedure .op-place()
+<% if [<op-name>!is[blank]] %>
+	<$macrocall $name=".place" _=<<op-name>> /><span class="tc-tiny-gap">=</span>
+<% endif %>
 \end
 
-\define .op-row()
-<$macrocall $name=".if"
-  cond="""$(op-body)$"""
-  then="""<tr><th align="left">$(op-head)$</th><td><<.op-place>>$(op-body)$</td></tr>"""
-  else=""/>
+\procedure .op-row()
+<% if [<op-body>!is[blank]] %>
+	<tr>
+		<th align="left"><<op-head>></th><td><<.op-place>><<op-body>></td>
+	</tr>
+<% endif %>
 \end
 
-<$set name="op-head" value="">
-<$set name="op-body" value="">
-<$set name="op-name" value="">
 <$list filter="[all[current]tag[Filter Operators]]">
-<table class="doc-table before-tiddler-body">
-<!-- -->
-<$set name="op-head" value="purpose">
-<$set name="op-body" value={{!!op-purpose}}>
-<<.op-row>>
-</$set>
-</$set>
-<!-- -->
-<$set name="op-head" value="[[input|Filter Syntax]]">
-<$set name="op-body" value={{!!op-input}}>
-<<.op-row>>
-</$set>
-</$set>
-<!-- -->
-<$set name="op-head" value="`!` input">
-<$set name="op-body" value={{!!op-neg-input}}>
-<<.op-row>>
-</$set>
-</$set>
-<!-- -->
-<$set name="op-head" value="[[suffix|Filter Step]]">
-<$set name="op-body" value={{!!op-suffix}}>
-<$set name="op-name" value={{!!op-suffix-name}}>
-<<.op-row>>
-</$set>
-</$set>
-</$set>
-<!-- -->
-<$set name="op-head" value="[[parameter|Filter Parameter]]">
-<$set name="op-body" value={{!!op-parameter}}>
-<$set name="op-name" value={{!!op-parameter-name}}>
-<<.op-row>>
-</$set>
-</$set>
-</$set>
-<!-- -->
-<$set name="op-head" value="output">
-<$set name="op-body" value={{!!op-output}}>
-<<.op-row>>
-</$set>
-</$set>
-<!-- -->
-<$set name="op-head" value="`!` output">
-<$set name="op-body" value={{!!op-neg-output}}>
-<<.op-row>>
-</$set>
-</$set>
-<!-- -->
-</table>
+	<$let op-head="" op-body="" op-name="">
+		<table class="doc-table before-tiddler-body">
+			<!-- purpose -->
+			<$let op-head="purpose" op-body={{!!op-purpose}}>
+				<<.op-row>>
+			</$let>
+			<!-- input -->
+			<$let op-head="[[input|Filter Syntax]]" op-body={{!!op-input}}>
+				<<.op-row>>
+			</$let>
+			<!-- input negated -->
+			<$let op-head="`!` input" op-body={{!!op-neg-input}}>
+				<<.op-row>>
+			</$let>
+			<!-- suffix -->
+			<$let op-head="[[suffix|Filter Step]]" op-body={{!!op-suffix}} op-name={{!!op-suffix-name}}>
+				<<.op-row>>
+			</$let>
+			<!-- parameter -->
+			<$let op-head="[[parameter|Filter Parameter]]" op-body={{!!op-parameter}} op-name={{!!op-parameter-name}}>
+				<<.op-row>>
+			</$let>
+			<!-- output -->
+			<$let op-head="output" op-body={{!!op-output}}>
+				<<.op-row>>
+			</$let>
+			<!-- output negated -->
+			<$let op-head="`!` output" op-body={{!!op-neg-output}}>
+				<<.op-row>>
+			</$let>
+		</table>
+		<p>
+			[[Learn more about how to use Filters|Filters]]
+		</p>
 
-<p>[[Learn more about how to use Filters|Filters]]</p>
-
-<$list filter="[all[current]has[from-version]]" variable="listItem">
-<p><$macrocall $name=".from-version" version={{!!from-version}}/></p>
+		<$list filter="[all[current]has[from-version]]" variable="listItem">
+			<$macrocall $name=".from-version" version={{!!from-version}}/>
+		</$list>
+	</$let>
 </$list>
-</$list>
-</$set>
-</$set>
-</$set>

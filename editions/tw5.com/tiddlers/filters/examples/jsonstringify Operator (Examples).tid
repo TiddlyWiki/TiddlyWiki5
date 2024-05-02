@@ -1,0 +1,11 @@
+created: 20230922121858167
+modified: 20230922122333325
+tags: [[Operator Examples]] [[jsonstringify Operator]]
+title: jsonstringify Operator (Examples)
+type: text/vnd.tiddlywiki
+
+Compare the encoding of quotes and control characters in the first example with the analogue [[example for the stringify operator|stringify Operator (Examples)]].
+<<.operator-example 1 """[[Backslash \, double quote ", single quote ', tab 	, line feed
+]] +[jsonstringify[]]""">>
+<<.operator-example 2 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 without suffix]] +[jsonstringify[]]""">>
+<<.operator-example 3 """[[Accents and emojis -> äñøßπ ⌛🎄🍪🍓 with rawunicode suffix]] +[jsonstringify:rawunicode[]]""">>

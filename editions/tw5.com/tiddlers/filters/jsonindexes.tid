@@ -43,7 +43,7 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 
 The following examples assume that this JSON data is contained in a variable called `jsondata`.
 
-The <<.op jsonindexes>> operator uses multiple operands to specify the indexes of the property to retrieve:
+The <<.op jsonindexes>> operator uses multiple parameters to specify the indexes of the property to retrieve:
 
 ```
 [<jsondata>jsonindexes[d],[f]] --> "0", "1", "2", "3", "4"
@@ -58,7 +58,7 @@ Indexes can be dynamically composed from variables and transclusions:
 
 Retrieving the indexes of JSON properties that are not objects or arrays will return nothing.
 
-A subtlety is that the special case of a single blank operand is used to identify the root object. Thus:
+A subtlety is that the special case of a single blank parameter is used to identify the root object. Thus:
 
 ```
 [<jsondata>jsonindexes[]] --> "a", "b", "c", "d"

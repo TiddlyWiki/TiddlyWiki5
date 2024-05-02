@@ -43,7 +43,7 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	//Create element
 	var domNode = this.document.createElement("select");
 	if(this.selectClass) {
-		domNode.classname = this.selectClass;
+		domNode.className = this.selectClass;
 	}
 	// Assign data- attributes
 	this.assignAttributes(domNode,{
@@ -62,8 +62,8 @@ SelectWidget.prototype.render = function(parent,nextSibling) {
 	if(this.selectTooltip) {
 		domNode.setAttribute("title",this.selectTooltip);
 	}
-	this.renderChildren(domNode,nextSibling);
 	this.parentDomNode.insertBefore(domNode,nextSibling);
+	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
 	this.setSelectValue();
 	if(this.selectFocus == "yes") {

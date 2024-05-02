@@ -1,0 +1,25 @@
+title: $:/language/Help/save
+description: Ги зачувува записите одделно во фајлови
+
+Saves individual tiddlers identified by a filter in their raw text or binary format to the specified files.
+
+```
+--save <tiddler-filter> <filename-filter>
+```
+
+* ''tiddler-filter'': A filter identifying the tiddler(s) to be saved
+* ''filename-filter'': Optional filter transforming tiddler titles into pathnames. If omitted, defaults to `[is[tiddler]]`, which uses the unchanged tiddler title as the filename
+
+By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+
+Notes:
+
+* The output directory is not cleared of any existing files
+* Any missing directories in the path to the filename are automatically created.
+* When saving a tiddler with spaces in its title, take care to use both the quotes required by your shell and also TiddlyWiki's double square brackets: `--save "[[Motovun Jack.jpg]]"`
+* The filename filter is evaluated with the selected items being set to the title of the tiddler currently being saved, allowing the title to be used as the basis for computing the filename. For example `[encodeuricomponent[]addprefix[static/]]` applies URI encoding to each title, and then adds the prefix `static/`
+* The `--save` command is a more flexible replacement for both the `--savetiddler` and `--savetiddlers` commands, which are deprecated
+
+Examples:
+
+* `--save "[!is[system]is[image]]" "[encodeuricomponent[]addprefix[tiddlers/]]"` -- saves all non-system image tiddlers as files in the subdirectory "tiddlers" with URL-encoded titles

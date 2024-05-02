@@ -635,7 +635,7 @@ SyncFromServerTask.prototype.run = function(callback) {
 		callback(null);
 	};
 	if(this.syncer.syncadaptor.getUpdatedTiddlers) {
-		this.syncer.syncadaptor.getUpdatedTiddlers(self,function(err,updates) {
+		this.syncer.syncadaptor.getUpdatedTiddlers(self.syncer,function(err,updates) {
 			if(err) {
 				self.syncer.displayError($tw.language.getString("Error/RetrievingSkinny"),err);
 				return callback(err);

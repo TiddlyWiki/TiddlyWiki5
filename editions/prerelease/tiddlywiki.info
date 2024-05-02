@@ -16,7 +16,10 @@
 		"tiddlywiki/menubar",
 		"tiddlywiki/jszip",
 		"tiddlywiki/geospatial",
-		"tiddlywiki/xlsx-utils"
+		"tiddlywiki/xlsx-utils",
+		"tiddlywiki/confetti",
+		"tiddlywiki/dynannotate",
+		"tiddlywiki/tour"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

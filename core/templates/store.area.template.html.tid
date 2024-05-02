@@ -9,9 +9,7 @@ title: $:/core/templates/store.area.template.html
             <$let newline={{{ [charcode[10]] }}} join=`,$(newline)$`>
                 <$text text=<<newline>>/>
                 <$list filter=<<saveTiddlerFilter>> join=<<join>> template="$:/core/templates/html-json-tiddler"/>
-                <$vars numTiddlers={{{ [subfilter<saveTiddlerFilter>count[]] }}}>
-                    <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} join=<<join>> template="$:/core/templates/html-json-skinny-tiddler"/>
-                </$vars>
+                <$list filter="[subfilter<skinnySaveTiddlerFilter>]"  template="$:/core/templates/html-json-skinny-tiddler"/>
                 <$text text=<<newline>>/>
             </$let>
         `]</script>`
@@ -22,8 +20,8 @@ title: $:/core/templates/store.area.template.html
         <!-- Old-style DIV/PRE-based store area -->
         <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
             `<div id="storeArea" style="display:none;">`
-                <$list filter=<<saveTiddlerFilter>> template="$:/core/templates/html-div-tiddler"/>
-                <$list filter={{{ [<skinnySaveTiddlerFilter>] }}} template="$:/core/templates/html-div-skinny-tiddler"/>
+                <$list filter={{{ [<saveTiddlerFilter>] }}} template="$:/core/templates/html-div-tiddler"/>
+                <$list filter="[subfilter<skinnySaveTiddlerFilter>]" template="$:/core/templates/html-div-skinny-tiddler"/>
             `</div>`
         </$reveal>
     </$list>

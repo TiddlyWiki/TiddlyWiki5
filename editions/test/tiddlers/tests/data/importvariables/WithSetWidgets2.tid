@@ -12,6 +12,7 @@ title: Output
 +
 title: Definitions
 
+\whitespace trim
 <$set name="one" value="elephant">
 <$set name="two" value="giraffe">
 </$set>

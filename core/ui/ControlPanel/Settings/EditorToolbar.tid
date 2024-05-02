@@ -2,8 +2,15 @@ title: $:/core/ui/ControlPanel/Settings/EditorToolbar
 tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/EditorToolbar/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/ControlPanel/Settings/EditorToolbar/
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/TextEditor/EnableToolbar" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/TextEditor/EnableToolbar"><<lingo Description>></$link> </$checkbox>
-
+<$checkbox tiddler="$:/config/TextEditor/EnableToolbar"
+	field="text" checked="yes" unchecked="no" default="yes"
+	class="tc-control-panel-item"
+>
+	<$link to="$:/config/TextEditor/EnableToolbar" class="tc-tiny-gap-left">
+		<<lingo Description>>
+	</$link>
+</$checkbox>

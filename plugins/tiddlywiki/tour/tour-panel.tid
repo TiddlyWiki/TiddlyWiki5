@@ -1,0 +1,106 @@
+title: $:/plugins/tiddlywiki/tour/panel
+tags: $:/tags/PageTemplate
+
+\whitespace trim
+
+\procedure tour-buttons()
+\procedure tv-action-refresh-policy() always
+<div class="tc-tour-panel-navigation">
+	<%if [function[tour-is-not-first-step]] %>
+		<$button class="tc-btn-big-green tc-tour-panel-navigation-back">
+			<<tour-previous-step>>
+			back
+		</$button>
+	<%endif%>
+	<%if [function[tour-is-not-last-step]] %>
+		<$button class="tc-btn-big-green tc-tour-panel-navigation-next">
+			<<tour-next-step>>
+			next
+		</$button>
+	<%endif%>
+	<%if [function[tour-is-last-step]] %>
+		<$confetti/>
+		<$confetti delay=100/>
+		<$confetti delay=200/>
+		<$confetti delay=300/>
+		<$confetti delay=400/>
+		<$confetti delay=500/>
+	<%endif%>
+</div>
+\end
+
+\procedure tour-step-no-success-filter()
+<$transclude tiddler=<<currentTourStep>> mode="block"/>
+<<tour-buttons>>
+\end tour-step-no-success-filter
+
+\procedure tour-step-success-filter-not-satisfied()
+<$transclude tiddler=<<currentTourStep>> mode="block"/>
+<%if [{$:/state/tour/step}has[hint-selector]] %>
+	<div class="tc-tour-panel-navigation">
+		<$button class="tc-btn-big-green tc-tour-panel-navigation-hint">
+			<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[hint-selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[hint-selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[hint-selector-fallback-2]] }}}/>
+			<$transclude tiddler={{$:/state/tour/step}} field="hint-text" mode="inline"> show me a hint </$transclude>
+		</$button>
+	</div>
+<%endif%>
+\end tour-step-success-filter-not-satisfied
+
+\procedure tour-step-success-filter-satisfied()
+<$let tour-task="">
+	<$transclude tiddler=<<currentTourStep>> mode="block"/>
+</$let>
+<$confetti/>
+<p>
+	Congratulations, you may proceed
+</p>
+<<tour-buttons>>
+\end tour-step-success-filter-satisfied
+\import [[$:/plugins/tiddlywiki/tour/variables]]
+
+<%if [{$:/config/ShowTour}!is[blank]else[show]match[show]] %>
+	<div class=`tc-tour-panel tc-tour-panel-${ [{$:/state/tour/step}get[display-mode]else[normal]] }$ ${ [{$:/config/CurrentTour}get[class]] }$`>
+		<$image class="tc-tour-panel-banner-image" source={{{ [{$:/config/CurrentTour}get[logo]] }}}/>
+		<div class="tc-tour-panel-inner">
+			<div class="tc-tiddler-controls tc-tour-panel-controls">
+				<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button>
+				<$button popup=<<qualify "$:/state/popup/tour-dropdown">> class="tc-btn-invisible tc-tour-panel-list-button" selectedClass="tc-selected">
+					<span class="tc-small-gap-right">''Tour'':</span> <<tour-display-current-tour>>
+				</$button>
+				<$reveal state=<<qualify "$:/state/popup/tour-dropdown">> type="popup" position="belowleft" animate="yes" tag="div">
+					<div class="tc-drop-down">
+						<p>
+							Choose a tour:
+						</p>
+						<p>
+							<<tour-chooser>>
+						</p>
+					</div>
+				</$reveal>
+			</div>
+			<$let
+				currentTour={{$:/config/CurrentTour}}
+				currentTourStep={{$:/state/tour/step}}
+				step-success-filter-var={{{ [<currentTourStep>get[step-success-filter-var]] :map[subfilter<currentTiddler>] }}}
+			>
+				<%if [<currentTourStep>has[caption]] %>
+					<h1><$transclude $tiddler=<<currentTourStep>> $field="caption" mode="inline"/></h1>
+				<%endif%>
+				<!-- Handle steps without a step-success-filter -->
+				<%if [<currentTourStep>!has[step-success-filter]] %>
+					<<tour-step-no-success-filter>>
+				<%endif%>
+				<!-- Handle steps that have a step-success-filter -->
+				<%if [<currentTourStep>has[step-success-filter]] %>
+					<$let step-success-filter={{{ [<currentTourStep>get[step-success-filter]] }}}>
+						<%if [subfilter<step-success-filter>] %>
+							<<tour-step-success-filter-satisfied>>
+						<%else%>
+							<<tour-step-success-filter-not-satisfied>>
+						<%endif%>
+					</$let>
+				<%endif%>
+			</$let>
+		</div>
+	</div>
+<%endif%>

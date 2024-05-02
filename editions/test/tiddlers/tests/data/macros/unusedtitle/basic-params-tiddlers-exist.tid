@@ -1,0 +1,28 @@
+title: Macros/unusedtitle/basic-params-tiddlers-exist
+description: test <<unusedtitle>> with basic macro parameters, where new-name tiddlers already exist
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: New Tiddler
+
++
+title: anotherBase
+
++
+title: About
+
++
+title: Output
+
+<<unusedtitle>>
+
+<<unusedtitle separator:"-">>
+
+<<unusedtitle baseName:"anotherBase">>
+
+<<unusedtitle baseName:"About" separator:"-">>
+
++
+title: ExpectedResult
+
+<p>New Tiddler 1</p><p>New Tiddler-1</p><p>anotherBase 1</p><p>About-1</p>
