@@ -10,12 +10,23 @@ description: Under development
 
 ! Major Improvements
 
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7734">> several new features that together allow interactive learning tours to be created and presented in TiddlyWiki.
+
+The demo TiddlyWiki interactive tour can be seen at https://tiddlywiki.com/prerelease/tour
+
+The new features include:
+
+* The new Tour Plugin itself
+* The new Confetti Plugin that allows animated bursts of confetti to be displayed
+* Improvements to the Dynannotate Plugin to add the ability to highlight screen elements using an animated spotlight effect
 
 ! Translation improvements
 
 Improvements to the following translations:
 
-* 
+* Chinese
+* Macedonian
+* Polish
 
 ! Plugin Improvements
 
@@ -23,23 +34,44 @@ Improvements to the following translations:
 
 ! Widget Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/8115">> ''$timestamp'' attribute to ActionDeleteFieldWidget
+
+! Filter Improvements
+
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> new [[backtranscludes Operator]]
 
 ! Usability Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/issues/8121">> new keyboard shortcut for refreshing the page
 
 ! Hackability Improvements
 
-* 
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> button to the JavaScript error popup allowing tiddlers to be saved to a local JSON file
+* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/8120">> to latest version of modern-normalize 2.0.0
 
 ! Bug Fixes
 
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7933">> TiddlyWikiClassic build process
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7935">> LinkWidget not refreshing when the `to` attribute changes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/3460">> parsing bug with empty procedures/macros
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7907">> functions to use variables set by filter runs
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7943">> edit widget not refreshing when the editor type changes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7922">> editor preview width
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/9bf3c0602d4fd3fe5ac7411db697b51f87a79056">> [[WidgetMessage: tm-http-request]] not returning data in the event of an error
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8150">> [[WidgetMessage: tm-http-request]] incorrectly interpreting 2XX status codes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7949">> processing of path separators in `tiddlywiki.files` files on Windows
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7975">> incorrect state reference in advanced search
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7985">> clipping of popups in preview pane
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8039">> JavaScript error when attempting to export missing tiddlers to a CSV file
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7909">> imported procedures defaulting to `\whitespace trim`
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/801ed0ea1164aab4f88547322f9d73704388143f">> crash with [[cycle Operator]] if the the step size is larger than the number of operands
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8095">> proper DOCTYPE for the open window template
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7945">> theme font size settings to open in new window CSS
 
 ! Node.js Improvements
 
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8141">> usage of "Cache-Control" header
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7878">> SaveCommand not overwriting files when required
 
 ! Performance Improvements
 
@@ -58,4 +90,29 @@ Improvements to the following translations:
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+andjar
+AnthonyMuscio
+bimlas
+BramChen
+btheado
+BurningTreeC
+catter-fly
+eschlon
+etardiff
+flibbles
+FSpark
+hoelzro
+jinix6
+joshuafontany
+linonetwo
+mateuszwilczek
+mklauber
+oeyoews
+pmario
+PotOfCoffee2Go
+rmunn
+saqimtiaz
+sarna
+Telumire
+yaisog
 """>>
