@@ -21,11 +21,13 @@ exports.init = function(parser) {
 	this.matchRegExp = /^\|(?:[^\n]*)\|(?:[fhck]?)\r?(?:\n|$)/mg;
 };
 
-var processRow = function(prevColumns) {
+var processRow = function(prevColumns,options) {
+	options = options || {};
 	var cellRegExp = /(?:\|([^\n\|]*)\|)|(\|[fhck]?\r?(?:\n|$))/mg,
 		cellTermRegExp = /((?:\x20*)\|)/mg,
 		tree = [],
 		col = 0,
+		colCount,
 		colSpanCount = 1,
 		prevCell,
 		vAlign;
@@ -103,9 +105,12 @@ var processRow = function(prevColumns) {
 			// Record information about this cell
 			prevCell = cell;
 			prevColumns[col] = {rowSpanCount:1,element:cell};
+			// column count is 1 based
+			colCount = col + 1;
 			// Check for a colspan
 			if(colSpanCount > 1) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"colspan",colSpanCount);
+				colCount = colCount - 1;
 				colSpanCount = 1;
 			}
 			// Parse the cell
@@ -121,6 +126,9 @@ var processRow = function(prevColumns) {
 			}
 			// Move back to the closing `|`
 			this.parser.pos--;
+			$tw.utils.addClassToParseTreeNode(cell,colCount%2 ? "oddCol" : "evenCol");
+			$tw.utils.addAttributeToParseTreeNode(cell,"data-col",colCount);
+			$tw.utils.addAttributeToParseTreeNode(cell,"data-addr",options.rowCount + "/" + colCount);
 		}
 		col++;
 		cellRegExp.lastIndex = this.parser.pos;
@@ -171,9 +179,10 @@ exports.parse = function() {
 				// Create the row
 				var theRow = {type: "element", tag: "tr", children: []};
 				$tw.utils.addClassToParseTreeNode(theRow,rowCount%2 ? "oddRow" : "evenRow");
+				$tw.utils.addAttributeToParseTreeNode(theRow,"data-row",rowCount);
 				rowContainer.children.push(theRow);
 				// Process the row
-				theRow.children = processRow.call(this,prevColumns);
+				theRow.children = processRow.call(this,prevColumns,{rowCount: rowCount});
 				this.parser.pos = rowMatch.index + rowMatch[0].length;
 				// Increment the row count
 				rowCount++;
