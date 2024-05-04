@@ -49,9 +49,6 @@ function FramedEngine(options) {
 	this.widget.domNodes.push(this.iframeNode);
 	// Construct the textarea or input node
 	var tag = $tw.utils.makeTagNameSafe(this.widget.editTag, "input");
-	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-	// 	tag = "input";
-	// }
 	this.domNode = this.iframeDoc.createElement(tag);
 	// Set the text
 	if(this.widget.editTag === "textarea") {

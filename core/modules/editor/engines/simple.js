@@ -23,10 +23,6 @@ function SimpleEngine(options) {
 	this.nextSibling = options.nextSibling;
 	// Construct the textarea or input node
 	var tag = $tw.utils.makeTagNameSafe(this.widget.editTag,"input");
-	// var tag = this.widget.editTag;
-	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-	// 	tag = "input";
-	// }
 	this.domNode = this.widget.document.createElement(tag);
 	// Set the text
 	if(this.widget.editTag === "textarea") {

@@ -34,9 +34,6 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	var tag = this.parseTreeNode.isBlock ? "div" : "span";
 	tag = $tw.utils.makeTagNameSafe(this.revealTag,tag);
-	// if(this.revealTag && $tw.config.htmlUnsafeElements.indexOf(this.revealTag) === -1) {
-	// 	tag = this.revealTag;
-	// }
 	var domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	this.assignDomNodeClasses();

@@ -39,9 +39,6 @@ DraggableWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Sanitise the specified tag
 	tag = $tw.utils.makeTagNameSafe(this.draggableTag,"div");
-	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-	// 	tag = "div";
-	// }
 	// Create our element
 	domNode = this.document.createElement(tag);
 	// Assign classes
