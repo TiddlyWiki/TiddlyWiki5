@@ -48,7 +48,7 @@ function FramedEngine(options) {
 	this.iframeDoc.body.style.padding = "0";
 	this.widget.domNodes.push(this.iframeNode);
 	// Construct the textarea or input node
-	var tag = $tw.utils.makeTagNameSafe(this.widget.editTag, "input");
+	var tag = $tw.utils.makeTagNameSafe(this.widget.editTag,"input");
 	this.domNode = this.iframeDoc.createElement(tag);
 	// Set the text
 	if(this.widget.editTag === "textarea") {
