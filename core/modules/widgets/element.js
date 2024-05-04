@@ -31,7 +31,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Neuter blacklisted elements
 	this.tag = this.parseTreeNode.tag;
-	this.tag = $tw.utils.isTagNameSafe(this.tag, "safe" + this.tag);
+	this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe" + this.tag);
 	// if($tw.config.htmlUnsafeElements.indexOf(this.tag) !== -1) {
 	// 	this.tag = "safe-" + this.tag;
 	// }

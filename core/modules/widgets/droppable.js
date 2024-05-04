@@ -35,7 +35,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	tag = $tw.utils.isTagNameSafe(this.droppableTag,tag);
+	tag = $tw.utils.makeTagNameSafe(this.droppableTag,tag);
 	// if(this.droppableTag && $tw.config.htmlUnsafeElements.indexOf(this.droppableTag) === -1) {
 	// 	tag = this.droppableTag;
 	// }

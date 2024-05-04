@@ -41,7 +41,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
 	// 	tag = this.buttonTag;
 	// }
-	tag = $tw.utils.isTagNameSafe(this.buttonTag,tag)
+	tag = $tw.utils.makeTagNameSafe(this.buttonTag,tag)
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	// Assign classes

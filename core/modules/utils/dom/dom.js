@@ -389,10 +389,10 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 /*
 Make sure HTML tag names are valid
 */
-exports.isTagNameSafe = function(tag,defaultTag) {
+exports.makeTagNameSafe = function(tag,defaultTag) {
 	defaultTag = defaultTag || "SPAN";
-	// This implements standard DOM elements: https://html.spec.whatwg.org/#syntax-tag-name
-	// It does _not_ implement Custom Elements: https://html.spec.whatwg.org/#valid-custom-element-name
+	// This implements a check for standard DOM elements: https://html.spec.whatwg.org/#syntax-tag-name
+	// It does _not_ deal with Custom Elements: https://html.spec.whatwg.org/#valid-custom-element-name
 	var regexp = /[a-zA-Z0-9]/g;
 	if(tag && tag.match(regexp) && $tw.config.htmlUnsafeElements.indexOf(tag) === -1) {
 		return tag;

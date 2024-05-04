@@ -35,7 +35,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create element
 	var tag = this.parseTreeNode.isBlock ? "div" : "span";
-	tag = $tw.utils.isTagNameSafe(this.elementTag,tag)
+	tag = $tw.utils.makeTagNameSafe(this.elementTag,tag)
 	// if(this.elementTag && $tw.config.htmlUnsafeElements.indexOf(this.elementTag) === -1) {
 	// 	tag = this.elementTag;
 	// }

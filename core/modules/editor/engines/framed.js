@@ -48,7 +48,7 @@ function FramedEngine(options) {
 	this.iframeDoc.body.style.padding = "0";
 	this.widget.domNodes.push(this.iframeNode);
 	// Construct the textarea or input node
-	var tag = $tw.utils.isTagNameSafe(this.widget.editTag, "input");
+	var tag = $tw.utils.makeTagNameSafe(this.widget.editTag, "input");
 	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 	// 	tag = "input";
 	// }

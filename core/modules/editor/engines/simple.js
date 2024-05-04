@@ -22,7 +22,7 @@ function SimpleEngine(options) {
 	this.parentNode = options.parentNode;
 	this.nextSibling = options.nextSibling;
 	// Construct the textarea or input node
-	var tag = $tw.utils.isTagNameSafe(this.widget.editTag,"input");
+	var tag = $tw.utils.makeTagNameSafe(this.widget.editTag,"input");
 	// var tag = this.widget.editTag;
 	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 	// 	tag = "input";

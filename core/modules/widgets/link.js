@@ -61,7 +61,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	var self = this;
 	// Sanitise the specified tag
 	var tag = this.linkTag;
-	tag = $tw.utils.isTagNameSafe(tag,"a");
+	tag = $tw.utils.makeTagNameSafe(tag,"a");
 	// if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
 	// 	tag = "a";
 	// }
