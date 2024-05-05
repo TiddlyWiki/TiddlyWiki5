@@ -76,7 +76,7 @@ tags: $:/tags/Global
 <!-- Existing user modified "search text details" should be preserved. If empty use default formatted signature -->
 <!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
 <$action-setfield $tiddler=<<tf.dv-detailsSearch>>
-	text={{{ [<tf.dv-getDetailsSearchText>!is[blank]then<tf.dv-getDetailsSearchText>] :else[<varname>format:variable[$type$ $name$($params$)]] }}}
+	text={{{ [<tf.dv-getDetailsSearchText>!is[blank]then<tf.dv-getDetailsSearchText>] :else[<varname>format:variable[$type$ $name$]] }}}
 />
 \end
 
@@ -84,7 +84,7 @@ tags: $:/tags/Global
 <!-- Existing user modified "search text details" should be preserved. If empty use default formatted signature -->
 <!-- Be aware that the "format" filter operator uses $var-name$ for compatibility reasons -->
 <$action-setfield $tiddler=<<tf.dv-detailsSearch>>
-	text={{{ [<varname>format:variable[$type$ $name$($params$)]] }}}
+	text={{{ [<varname>format:variable[$type$ $name$]] }}}
 />
 \end
 
