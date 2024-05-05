@@ -1,0 +1,19 @@
+title: TestCases/TranscludeWidget/SimpleTransclusion
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Simple transclusion
+
+title: Output
+
+Good morning, my name is {{Name}} and I live in {{Address}}
++
+title: Name
+
+Robert Rabbit
++
+title: Address
+
+14 Carrot Street, Vegetabletown
++
+title: ExpectedResult
+text: <p>Good morning, my name is Robert Rabbit and I live in 14 Carrot Street, Vegetabletown</p>

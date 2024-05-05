@@ -1,0 +1,11 @@
+title: TestCases/TestCaseWidget/FailingTest
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: An example of a failing test
+
+title: Output
+
+The sum is <$text text={{{ [[2]add[2]] }}}/>.
++
+title: ExpectedResult
+text: The sum is not 8.

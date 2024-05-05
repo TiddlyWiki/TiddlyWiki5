@@ -1,0 +1,13 @@
+title: TestCaseTiddlers
+
+
+
+Behind the scenes, the templates used to view TestCaseTiddlers use the <<.wlink TestCaseWidget>> widget.
+
+! Testcase Conventions
+
+The following conventions are used for testcase tiddlers:
+
+* `Description` contains a brief description of the test (rendered in inline mode)
+* `Output` contains the tiddler text to be rendered. It can also reference other tiddlers
+* `ExpectedResult` contains the HTML that should match the rendering of the tiddler `Output`
