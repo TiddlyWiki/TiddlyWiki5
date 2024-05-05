@@ -130,11 +130,25 @@ DroppableWidget.prototype.handleDropEvent  = function(event) {
 			self.performActions(fields.title || fields.text,event);
 		});
 	});
+	// Send a TitleList to performListActions
+	$tw.utils.importDataTransfer(dataTransfer,null,function(fieldsArray) {
+		var titleList = fieldsArray.map(function(field) {
+			return (field.title.indexOf(" ") > 0) ? "[[" + field.title + "]]" : field.title
+		}).join(" ");
+		self.performListActions(titleList,event);
+	});
 	// Tell the browser that we handled the drop
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
 	return false;
+};
+
+DroppableWidget.prototype.performListActions = function(titleList,event) {
+	if(this.droppableListActions) {
+		var modifierKey = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+		this.invokeActionString(this.droppableListActions,this,event,{actionTiddlerList: titleList, modifier: modifierKey});
+	}
 };
 
 DroppableWidget.prototype.performActions = function(title,event) {
@@ -149,6 +163,7 @@ Compute the internal state of the widget
 */
 DroppableWidget.prototype.execute = function() {
 	this.droppableActions = this.getAttribute("actions");
+	this.droppableListActions = this.getAttribute("listactions");
 	this.droppableEffect = this.getAttribute("effect","copy");
 	this.droppableTag = this.getAttribute("tag");
 	this.droppableEnable = (this.getAttribute("enable") || "yes") === "yes";
