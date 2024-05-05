@@ -65,6 +65,9 @@ sidebar-tab-foreground-selected: Sidebar tab foreground for selected tabs
 sidebar-tab-foreground: Sidebar tab foreground
 sidebar-tiddler-link-foreground-hover: Sidebar tiddler link foreground hover
 sidebar-tiddler-link-foreground: Sidebar tiddler link foreground
+testcase-accent-level-1: Testcase accent colour with no nesting
+testcase-accent-level-2: Testcase accent colour with 2nd level nesting
+testcase-accent-level-3: Testcase accent colour with 3rd level nesting or higher
 site-title-foreground: Site title foreground
 static-alert-foreground: Static alert foreground
 tab-background-selected: Tab background for selected tabs
