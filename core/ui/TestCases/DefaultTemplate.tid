@@ -7,16 +7,18 @@ title: $:/core/ui/testcases/DefaultTemplate
 	<div class="tc-testcase-wrapper">
 		<div class="tc-testcase-header">
 			<h2>
-				<%if [<testResult>!match[]] %>
-					<span class={{{ tc-testcase-result-icon [<testResult>!match[fail]then[tc-testcase-result-icon-pass]] [<testResult>match[fail]then[tc-testcase-result-icon-fail]] +[join[ ]] }}}>
-						<%if [<testResult>!match[fail]] %>
-							{{$:/core/images/done-button}}
-						<%else%>
-							{{$:/core/images/close-button}}
-						<%endif%>
-					</span>
-				<%endif%>
-				<$view tiddler="Description" mode="inline"/>
+				<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[div]] }}}>
+					<%if [<testResult>!match[]] %>
+						<span class={{{ tc-testcase-result-icon [<testResult>!match[fail]then[tc-testcase-result-icon-pass]] [<testResult>match[fail]then[tc-testcase-result-icon-fail]] +[join[ ]] }}}>
+							<%if [<testResult>!match[fail]] %>
+								{{$:/core/images/done-button}}
+							<%else%>
+								{{$:/core/images/close-button}}
+							<%endif%>
+						</span>
+					<%endif%>
+					<$view tiddler="Description" mode="inline"/>
+				</$genesis>
 			</h2>
 		</div>
 		<%if [<testResult>match[fail]] %>

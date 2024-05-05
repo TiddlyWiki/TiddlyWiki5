@@ -1,6 +1,7 @@
 title: $:/core/ui/TestCaseTemplate
 
 \parameters (hideIfPass:"no")
+<$let linkTarget="yes">
 <$testcase
 	testOutput="Output"
 	testExpectedResult="ExpectedResult"
@@ -10,3 +11,4 @@ title: $:/core/ui/TestCaseTemplate
 <$data $compound-tiddler=<<currentTiddler>>/>
 <$data title="Description" text={{!!description}}/>
 </$testcase>
+</$let>
