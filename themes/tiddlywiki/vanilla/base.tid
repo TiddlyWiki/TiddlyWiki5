@@ -983,7 +983,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
-	
+
 	<<if-no-sidebar """
 
 		.tc-sidebar-header {
@@ -2264,11 +2264,11 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-manager-wrapper {
-	
+
 }
 
 .tc-manager-controls {
-	
+
 }
 
 .tc-manager-control {
@@ -3340,7 +3340,6 @@ span.tc-translink > a:first-child {
 	min-width: 250px;
 	padding: 0.25em;
 }
-
 
 /*
 ** Flexbox utility classes
