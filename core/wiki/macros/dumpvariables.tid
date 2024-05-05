@@ -67,6 +67,7 @@ tags: $:/tags/Global
 <!-- search-variables helper functions -->
 \procedure dv-toggleState()
 <$action-setfield $tiddler=<<tf.dv-varState>> text={{{ [<tf.dv-varState>get[text]] +[toggle[yes],[no]] }}}/>
+<<dv-toggleInfoState>>
 \end
 
 \procedure dv-toggleInfoState()
@@ -210,8 +211,8 @@ tags: $:/tags/Global
 			<% endif %>
 
 			<% if [<tf.dv-varState>get[text]match[yes]] %>
-				<$button actions=<<dv-toggleInfoState>> 
-					class="tc-btn-invisible tc-small-gap-left"
+				<$button actions=<<dv-toggleInfoState>>
+					class="tc-btn-details tc-btn-invisible tc-small-gap-left"
 				>
 					<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
 						<span title={{$:/language/Search/Variables/Info/Toggle/Hide}}>{{$:/core/images/up-arrow}}</span>

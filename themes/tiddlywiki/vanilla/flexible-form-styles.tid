@@ -87,6 +87,11 @@ tags: $:/tags/Stylesheet
 	<!-- fill: <<colour dirty-indicator>>; -->
 }
 
+.tc-variables-results button.tc-btn-details svg {
+	width: .9em;
+	height: .9em;
+}
+
 .btn-fld {
 	padding: 0 2px;
 	grid-area: btn-fld;
