@@ -3277,13 +3277,6 @@ span.tc-translink > a:first-child {
 	height: 0.5em;
 }
 
-.tc-testcase-result-fail {
-	border: 1px solid <<colour foreground>>;
-	background-color: <<colour background>>;
-	margin: 1em;
-	padding: 1em;
-}
-
 .tc-testcase-header > h2,
 .tc-testcase-source > pre {
 	margin: 0;
@@ -3291,6 +3284,24 @@ span.tc-translink > a:first-child {
 
 .tc-testcase-header > h2 a.tc-tiddlylink-missing {
 	font-style: normal;
+}
+
+.tc-testcase-result-fail {
+	border: 1px solid <<colour foreground>>;
+	background-color: <<colour background>>;
+	border-radius: 4px;
+	margin: 0 0.5em;
+	padding: 0;
+}
+
+.tc-testcase-result-fail-header {
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	padding: 4px;
+}
+
+.tc-testcase-result-fail-body {
+	padding: 4px;
 }
 
 .tc-testcase-source > pre {

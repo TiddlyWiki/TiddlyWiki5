@@ -23,10 +23,12 @@ title: $:/core/ui/testcases/DefaultTemplate
 		</div>
 		<%if [<testResult>match[fail]] %>
 			<div class="tc-testcase-result-fail">
-				<div>
-				TEST FAILED
+				<div class="tc-testcase-result-fail-header">
+					TEST FAILED
 				</div>
-				<$diff-text source=<<expectedHTML>> dest=<<outputHTML>>/>
+				<div class="tc-testcase-result-fail-body">
+					<$diff-text source=<<expectedHTML>> dest=<<outputHTML>>/>
+				</div>
 			</div>
 		<%endif%>
 		<div class="tc-testcase-panes">

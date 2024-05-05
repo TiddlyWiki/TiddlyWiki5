@@ -8,4 +8,4 @@ title: Output
 The sum is <$text text={{{ [[2]add[2]] }}}/>.
 +
 title: ExpectedResult
-text: The sum is not 8.
+text: <p>The sum is not 8.</p>
