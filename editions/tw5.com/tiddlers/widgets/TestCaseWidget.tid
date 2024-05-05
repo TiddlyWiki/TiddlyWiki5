@@ -9,24 +9,46 @@ type: text/vnd.tiddlywiki
 
 The testcase widget creates an independent subwiki loaded with the specified payload tiddlers and then renders a specified template from within the subwiki.The default template displays a split view with the source tiddlers on the left and the rendered tiddler titled `Output` on the right. It also displays the tiddler titled `Description` as the heading. This makes it possible to run independent tests that also serve as documentation examples.
 
+The testcase widget can optionally also be used to run and verify test results within the subwiki.
+
+The testcase widget creates a lightweight TiddlyWiki environment with the following important limitations:
+
+* Output is rendered into a DIV, and so cannot be styled independently of the host wiki
+* Any changes to the wiki made interactively by the user are volatile, and are lost when the testcase widget is refreshed
+* Startup actions are not supported
+* Only plugins available in the host wiki can be included in the testcase
+
+The [[Innerwiki Plugin]] offers the ability to embed a fully independent subwiki via an `<iframe>` element, but without the testing related features of the testcase widget.
+
 ! Content and Attributes
 
-The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define the payload tiddlers to be included in the test case. The `$:/core` plugin is automatically included in the payload.
+The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define the payload tiddlers to be included in the testcase.
 
 |!Attribute |!Description |
 |<<.attr template>> |Optional title of the template used to display the testcase (defaults to $:/core/ui/testcases/DefaultTemplate). Note that custom templates will need to be explicitly added to the payload |
+|<<.attr testOutput>> |Optional title of the tiddler whose output should be subject to testing (note that both <<.attr testOutput>> and  <<.attr testExpectedResult>> must be provided in order for testing to occur) |
+|<<.attr testExpectedResult>> |Optional title of the tiddler whose content is the expected result of rendering the output tiddler (note that both <<.attr testOutput>> and  <<.attr testExpectedResult>> must be provided in order for testing to occur)  |
+|<<.attr testActions>> |Optional title of the tiddler containing actions that should be executed before the test occurs |
+|<<.attr testHideIfPass>> |If set to "yes", hides the testcase widget if the test passes |
 
 ! Payload Tiddlers
 
-The payload tiddlers are the tiddler values that are loaded into the subwiki that is created to run the tests. They are created via <<.wlink DataWidget>> widgets within the body of the `<$testcase>` widget.
+The payload tiddlers are the tiddler values that are loaded into the subwiki that is created to run the tests. They are created via <<.wlink DataWidget>> widgets within the body of the `<$testcase>` widget. The `$:/core` plugin is automatically included in the payload.
 
-! State Handling
+! Testcase Template Variables
 
-The `<$testcase>` widget sets the variable `transclusion` to a hash that reflects the names and values of all the payload tiddlers. This makes it easier for test case templates to create unique state tiddler titles using the [[qualify Macro]] or QualifyWidget.
+The testcase widget makes the following variables available within the rendered template:
 
-! Test Case Conventions
+|!Variable |!Description |
+|<<.var transclusion>> |A hash that reflects the names and values of all the payload tiddlers. This makes it easier for testcase templates to create unique state tiddler titles using the [[qualify Macro]] or QualifyWidget |
+|<<.var payloadTiddlers>> |JSON array of payload tiddler fields |
+|<<.var outputHTML>> |The actual output HTML if running tests |
+|<<.var expectedHTML>> |The expected output HTML if running tests |
+|<<.var testResult>> |The tests result if running tests (may be "pass" or "fail") |
 
-The following conventions are used for test case tiddlers:
+! Testcase Conventions
+
+The following conventions are used for testcase tiddlers:
 
 * `Description` contains a brief description of the test (rendered in inline mode)
 * `Output` contains the tiddler text to be rendered. It can also reference other tiddlers
@@ -35,9 +57,7 @@ The following conventions are used for test case tiddlers:
 ! Example
 
 <$testcase>
-<$data $tiddler="$:/core/ui/testcases/DefaultTemplate"/>
-<$data $tiddler="$:/core/ui/testcases/DefaultTemplate/Source"/>
-<$data title="Description" text="Simple example of a test case"/>
+<$data title="Description" text="Simple example of a testcase"/>
 <$data title="Output" text="""<$testcase>
 <$data title="Description" text="How to calculate 2 plus 2"/>
 <$data title="Output" text="<$text text={{{ [[2]add[2]] }}}/>"/>

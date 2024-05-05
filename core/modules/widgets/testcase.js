@@ -79,8 +79,52 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.setVariable("transclusion",$tw.utils.hashString(jsonPayload));
 	// Generate a `payloadTiddlers` variable that contains the payload in JSON format
 	this.setVariable("payloadTiddlers",jsonPayload);
+	// Render the test rendering if required
+	if(this.testcaseTestOutput && this.testcaseTestExpectedResult) {
+		var testcaseOutputContainer = $tw.fakeDocument.createElement("div");
+		var testcaseOutputWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTestOutput,{
+			document: $tw.fakeDocument,
+			parseAsInline: false,
+			parentWidget: this,
+			variables: {
+				currentTiddler: this.testcaseTestOutput
+			}
+		});
+		testcaseOutputWidget.render(testcaseOutputContainer);
+	}
+	// Clear changes queue
+	this.testcaseWiki.clearTiddlerEventQueue();
+	// Run the actions if provided
+	if(this.testcaseWiki.tiddlerExists(this.testcaseTestActions)) {
+		testcaseOutputWidget.invokeActionString(this.testcaseWiki.getTiddlerText(this.testcaseTestActions));
+		testcaseOutputWidget.refresh(this.testcaseWiki.changedTiddlers,testcaseOutputContainer);
+	}
+	// Set up the test result variables
+	var testResult = "",
+		outputHTML = "",
+		expectedHTML = "";
+	if(this.testcaseTestOutput && this.testcaseTestExpectedResult) {
+		outputHTML = testcaseOutputContainer.children[0].innerHTML;
+		expectedHTML = this.testcaseWiki.getTiddlerText(this.testcaseTestExpectedResult);
+		if(outputHTML === expectedHTML) {
+			testResult = "pass";
+		} else {
+			testResult = "fail";
+		}
+		this.setVariable("outputHTML",outputHTML);
+		this.setVariable("expectedHTML",expectedHTML);
+		this.setVariable("testResult",testResult);
+	}
+	// Don't display anything if testHideIfPass is "yes" and the tests have passed
+	if(this.testcaseHideIfPass === "yes" && testResult === "pass") {
+		return;
+	}
 	// Render the page root template of the subwiki
-	var rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{document: this.document, parseAsInline: false, parentWidget: this});
+	var rootWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTemplate,{
+		document: this.document,
+		parseAsInline: false,
+		parentWidget: this
+	});
 	rootWidget.render(domNode);
 	// Trap changes in the wiki and refresh the rendering
 	this.testcaseWiki.addEventListener("change",function(changes) {
@@ -93,6 +137,10 @@ Compute the internal state of the widget
 */
 TestCaseWidget.prototype.execute = function() {
 	this.testcaseTemplate = this.getAttribute("template","$:/core/ui/testcases/DefaultTemplate");
+	this.testcaseTestOutput = this.getAttribute("testOutput");
+	this.testcaseTestActions = this.getAttribute("testActions");
+	this.testcaseTestExpectedResult = this.getAttribute("testExpectedResult");
+	this.testcaseHideIfPass = this.getAttribute("testHideIfPass");
 };
 
 /*

@@ -1,6 +1,7 @@
 title: $:/core/ui/testcases/DefaultTemplate/Source
 
 \whitespace trim
+\procedure body()
 <$list filter="[<currentTab>fields[]] -text +[limit[1]]" variable="ignore">
 	<table class="tc-field-table">
 		<tbody>
@@ -18,3 +19,6 @@ title: $:/core/ui/testcases/DefaultTemplate/Source
 	</table>
 </$list>
 <$edit class="tc-edit-texteditor" tiddler=<<currentTab>>/>
+\end
+
+<$transclude $variable="body" $mode="inline"/>

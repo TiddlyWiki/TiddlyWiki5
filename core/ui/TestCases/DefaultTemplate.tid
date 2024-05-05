@@ -6,8 +6,27 @@ title: $:/core/ui/testcases/DefaultTemplate
 >
 	<div class="tc-testcase-wrapper">
 		<div class="tc-testcase-header">
-			<h2><$transclude tiddler="Description" mode="inline"/></h2>
+			<h2>
+				<%if [<testResult>!match[]] %>
+					<span class={{{ tc-testcase-result-icon [<testResult>!match[fail]then[tc-testcase-result-icon-pass]] [<testResult>match[fail]then[tc-testcase-result-icon-fail]] +[join[ ]] }}}>
+						<%if [<testResult>!match[fail]] %>
+							{{$:/core/images/done-button}}
+						<%else%>
+							{{$:/core/images/close-button}}
+						<%endif%>
+					</span>
+				<%endif%>
+				<$view tiddler="Description" mode="inline"/>
+			</h2>
 		</div>
+		<%if [<testResult>match[fail]] %>
+			<div class="tc-testcase-result-fail">
+				<div>
+				TEST FAILED
+				</div>
+				<$diff-text source=<<expectedHTML>> dest=<<outputHTML>>/>
+			</div>
+		<%endif%>
 		<div class="tc-testcase-panes">
 			<div class="tc-testcase-source">
 				<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<state>] -Description -ExpectedResult -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
@@ -15,7 +34,7 @@ title: $:/core/ui/testcases/DefaultTemplate
 			<div class="tc-testcase-divider">
 			</div>
 			<div class="tc-testcase-output">
-				<$transclude tiddler="Output"/>
+				<$transclude $tiddler="Output" $mode="block"/>
 			</div>
 		</div>
 	</div>

@@ -3250,6 +3250,40 @@ span.tc-translink > a:first-child {
 	padding: 0 0.5em;
 }
 
+.tc-testcase-divider {
+	x-background-color: <<colour muted-foreground>>;
+}
+
+.tc-testcase-result-icon {
+	fill: #fff;
+	padding: 0.25em;
+	display: inline-block;
+	line-height: 0;
+	border-radius: 1em;
+	vertical-align: bottom;
+	margin-right: 0.25em;
+}
+
+.tc-testcase-result-icon-pass {
+	background-color: green;
+}
+
+.tc-testcase-result-icon-fail {
+	background-color: red;
+}
+
+.tc-testcase-result-icon svg {
+	width: 0.5em;
+	height: 0.5em;
+}
+
+.tc-testcase-result-fail {
+	border: 1px solid <<colour foreground>>;
+	background-color: <<colour background>>;
+	margin: 1em;
+	padding: 1em;
+}
+
 .tc-testcase-header > h2,
 .tc-testcase-source > pre {
 	margin: 0;
@@ -3260,7 +3294,6 @@ span.tc-translink > a:first-child {
 }
 
 .tc-testcase-panes {
-	background: <<colour background>>;
 	display: flex;
 	align-items: stretch;
 	flex-wrap: wrap;
@@ -3274,8 +3307,21 @@ span.tc-translink > a:first-child {
 	min-width: 250px;
 }
 
+.tc-testcase-source .tc-tab-content {
+	background: <<colour background>>;
+	margin: 0;
+}
+
 .tc-testcase-source .tc-field-table {
 	width: 100%;
+}
+
+.tc-testcase-source table.tc-field-table {
+	margin: 0;
+}
+
+.tc-tiddler-frame .tc-edit-texteditor {
+	margin: 0;
 }
 
 .tc-testcase-divider {
@@ -3287,6 +3333,7 @@ span.tc-translink > a:first-child {
 }
 
 .tc-testcase-output {
+	background: <<colour background>>;
 	border-radius: 3px;
 	border: 1px solid <<colour muted-foreground>>;
 	flex: 1 0 49%;
