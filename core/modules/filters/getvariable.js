@@ -1,5 +1,3 @@
-const { widget } = require("../widgets/widget");
-
 /*\
 title: $:/core/modules/filters/getvariable.js
 type: application/javascript
@@ -19,11 +17,16 @@ Export our filter function
 */
 exports.getvariable = function(source,operator,options) {
 	var results = [],
-		operand = operator.operand,
+		operand = operator.operand || "text",
 		widget = options.widget;
 	source(function(tiddler,title) {
 		var variable = widget.getVariableInfo(title, {}),
-			text = (operand === "value") ? variable.srcVariable.value : variable.text;
+			text = "";
+		if(operand === "text") {
+			text = variable.text;
+		} else if((operand === "value") && variable.srcVariable) {
+			text = variable.srcVariable.value;
+		}
 		results.push(text || "");
 	});
 	return results;
