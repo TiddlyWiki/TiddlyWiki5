@@ -11,7 +11,7 @@ The data widget is used with the <<.wlink TestCaseWidget>> widget and the [[Inne
 
 ! Content and Attributes
 
-The content of the data widget is rendered as if the data widget were not present. It supports the following attributes:
+The content of the data widget is ignored. It supports the following attributes:
 
 |!Attribute |!Description |
 |<<.attr $tiddler>> |Optional title of a tiddler to be used as a payload tiddler (optional) |
