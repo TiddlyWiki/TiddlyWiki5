@@ -1,5 +1,5 @@
 created: 20240506064659892
-modified: 20240506100851338
+modified: 20240506101142810
 tags: 
 title: test-getvariablejson
 type: text/vnd.tiddlywiki
@@ -9,6 +9,8 @@ type: text/vnd.tiddlywiki
 \procedure test-proc(a:10) test proc
 
 \function my.test(x:3, abc:def) [<test-proc>split[ ]]
+
+\function tab() [charcode[9]]
 
 
 \define elements() srcVariable params name default
