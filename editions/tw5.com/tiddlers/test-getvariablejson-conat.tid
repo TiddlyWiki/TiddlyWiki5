@@ -1,0 +1,40 @@
+created: 20240506101435113
+modified: 20240506105325655
+tags: 
+title: test-getvariablejson-conat
+type: text/vnd.tiddlywiki
+
+''Nice to have''
+
+<<.example 1 """\function tab() [charcode[9]]
+
+<pre><$text text={{{[[.concat]getvariablejson[]]}}}/></pre>
+""">>
+
+''Human readable version''
+
+<<.example 2 """\function tab() [charcode[9]]
+
+<pre><$text text={{{[[.concat]getvariablejson[]format:json<tab>]}}}/></pre>
+""">>
+
+''Function definition''
+
+<<.example 3 """\function tab() [charcode[9]]
+
+<pre><$text text={{{[[.concat]getvariablejson[]jsonextract[srcVariable],[value]format:json<tab>]}}}/></pre>
+""">>
+
+''Get parameters''
+
+<<.example 4 """\function tab() [charcode[9]]
+
+<pre><$text text={{{[[.concat]getvariablejson[]jsonextract[srcVariable],[params]format:json<tab>]}}}/></pre>
+""">>
+
+''Expected''
+
+<<.example 5 """\function tab() [charcode[9]]
+
+<pre><$text text={{{[[.concat]format:variable[]]}}}/></pre>
+""">>
