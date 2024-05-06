@@ -1,6 +1,6 @@
 caption: jsonvariable
 created: 20240506131935424
-modified: 20240506145944709
+modified: 20240506151517068
 op-input: a selection variable names
 op-output: the JSON string values of each of the retrieved properties
 op-parameter: one or more indexes of the property to retrieve
@@ -11,7 +11,7 @@ title: jsonvariable Operator
 type: text/vnd.tiddlywiki
 
 \procedure testProc() [[aa aa]] bb
-\function fn.test(splitChar:" ") [enlist<testProc>format:titlelist[]]
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
 \function tab() [charcode[9]]
 
 <<.from-version "5.3.4">>
@@ -22,7 +22,7 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 
 ```
 \procedure testProc() [[aa aa]] bb
-\function fn.test(splitChar:" ") [enlist<testProc>format:titlelist[]]
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
 
 \function tab() [charcode[9]]
 
