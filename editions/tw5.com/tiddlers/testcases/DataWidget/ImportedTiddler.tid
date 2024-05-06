@@ -1,0 +1,28 @@
+title: TestCases/DataWidget/ImportedTiddler
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Imported tiddler definition
+
+title: Output
+
+<pre>
+<$data $tiddler="HelloThere" custom="Alpha"/>
+</pre>
++
+title: HelloThere
+modifier: JoeBloggs
+
+This is the HelloThere tiddler
++
+title: ExpectedResult
+
+<p><pre>
+[
+    {
+        "title": "HelloThere",
+        "modifier": "JoeBloggs",
+        "text": "This is the HelloThere tiddler",
+        "custom": "Alpha"
+    }
+]
+</pre></p>

@@ -1,0 +1,48 @@
+title: TestCases/DataWidget/ImportedFilter
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Imported filter definition
+
+title: Output
+
+<pre>
+<$data $filter="[prefix[Day: T]]" custom="Beta"/>
+</pre>
++
+title: Day: Monday
+text: Today is Monday
++
+title: Day: Tuesday
+text: Today is Tuesday
++
+title: Day: Wednesday
+text: Today is Wednesday
++
+title: Day: Thursday
+text: Today is Thursday
++
+title: Day: Friday
+text: Today is Friday
++
+title: Day: Saturday
+text: Today is Saturday
++
+title: Day: Sunday
+text: Today is Sunday
++
+title: ExpectedResult
+
+<p><pre>
+[
+    {
+        "title": "Day: Thursday",
+        "text": "Today is Thursday",
+        "custom": "Beta"
+    },
+    {
+        "title": "Day: Tuesday",
+        "text": "Today is Tuesday",
+        "custom": "Beta"
+    }
+]
+</pre></p>
