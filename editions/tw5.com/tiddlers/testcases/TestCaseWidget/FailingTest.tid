@@ -1,6 +1,6 @@
 title: TestCases/TestCaseWidget/FailingTest
 type: text/vnd.tiddlywiki-multiple
-tags: [[$:/tags/wiki-test-spec]]
+tags: [[$:/tags/wiki-test-spec-failing]]
 description: An example of a failing test
 
 title: Output
