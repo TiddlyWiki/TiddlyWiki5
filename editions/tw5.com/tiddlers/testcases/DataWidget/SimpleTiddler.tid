@@ -1,0 +1,18 @@
+title: TestCases/DataWidget/SimpleTiddler
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Simple tiddler definition
+display-format: plaintext
+
+title: Output
+
+<$data title="Epsilon" text="Theta"/>
++
+title: ExpectedResult
+
+<p>[
+    {
+        "title": "Epsilon",
+        "text": "Theta"
+    }
+]</p>

@@ -17,6 +17,7 @@
 		"tiddlywiki/jszip",
 		"tiddlywiki/geospatial",
 		"tiddlywiki/xlsx-utils",
+		"tiddlywiki/innerwiki",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/tour"

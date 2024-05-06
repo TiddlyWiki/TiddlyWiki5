@@ -31,7 +31,10 @@ DataWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	this.renderChildren(parent,nextSibling);
+	var jsonPayload = JSON.stringify(this.readDataTiddlerValues(),null,4);
+	var textNode = this.document.createTextNode(jsonPayload);
+	parent.insertBefore(textNode,nextSibling);
+	this.domNodes.push(textNode);
 };
 
 /*
@@ -61,7 +64,10 @@ DataWidget.prototype.readDataTiddlerValues = function() {
 	if(this.hasAttribute("$tiddler")) {
 		title = this.getAttribute("$tiddler");
 		if(title) {
-			tiddlers.push(this.wiki.getTiddler(title));
+			var tiddler = this.wiki.getTiddler(title);
+			if(tiddler) {
+				tiddlers.push(tiddler);
+			}
 		}
 	}
 	if(this.hasAttribute("$filter")) {

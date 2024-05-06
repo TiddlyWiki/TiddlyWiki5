@@ -11,7 +11,7 @@ The data widget is used with the <<.wlink TestCaseWidget>> widget and the [[Inne
 
 ! Content and Attributes
 
-The content of the data widget is rendered as if the data widget were not present. It supports the following attributes:
+The content of the data widget is ignored. It supports the following attributes:
 
 |!Attribute |!Description |
 |<<.attr $tiddler>> |Optional title of a tiddler to be used as a payload tiddler (optional) |
@@ -23,29 +23,25 @@ The data widget is not rendered when used within the <<.wlink TestCaseWidget>> w
 
 Without any of the attributes <<.attr $tiddler>>, <<.attr $filter>> or <<.attr $compound-tiddler>>, any attributes whose name does not start with $ are used as the field values for creating a single new tiddler. For example, here a tiddler with the title "Epsilon" and the text "Theta" is created:
 
-```
-<$data title="Epsilon" text="Theta"/>
-```
+<<testcase "TestCases/DataWidget/SimpleTiddler">>
 
 If any of the attributes <<.attr $tiddler>>, <<.attr $filter>> or <<.attr $compound-tiddler>> are specified then they are used to generate base tiddlers that are then modified with the addition of fields derived from any attributes whose name does not start with $.
 
 This example, here we specify a copy of the "HelloThere" tiddler with the addition of the field "custom" set to "Alpha":
 
-```
-<$data $tiddler="HelloThere" custom="Alpha"/>
-```
+<<testcase "TestCases/DataWidget/ImportedTiddler">>
 
 This example injects all image tiddlers with the addition of the field "custom" set to "Beta":
 
-```
-<$data $filter="[is[image]]" custom="Beta"/>
-```
+<<testcase "TestCases/DataWidget/ImportedFilter">>
 
 ! Compound Tiddlers
 
 Compound tiddlers provide a way to easily create multiple tiddlers from within a single tiddler. They are contained in tiddlers of type `text/vnd.tiddlywiki-multiple`. The text field consists of a series of tiddlers in the same format as `.tid` files, each separated by a line containing a single `+` character.
 
-For example:
+<<testcase "TestCases/DataWidget/ImportCompound">>
+
+Here is a more complex example of the content of a compound tiddler:
 
 ```
 title: First

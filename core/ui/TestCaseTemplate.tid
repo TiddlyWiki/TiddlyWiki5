@@ -1,0 +1,18 @@
+title: $:/core/ui/TestCaseTemplate
+
+\parameters (hideIfPass:"no")
+\whitespace trim
+<$let
+	linkTarget="yes"
+	displayFormat={{!!display-format}}
+>
+	<$testcase
+		testOutput="Output"
+		testExpectedResult="ExpectedResult"
+		testActions="Actions"
+		testHideIfPass=<<hideIfPass>>
+	>
+		<$data $compound-tiddler=<<currentTiddler>>/>
+		<$data title="Description" text={{!!description}}/>
+	</$testcase>
+</$let>
