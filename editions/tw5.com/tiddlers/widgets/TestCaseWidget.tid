@@ -29,6 +29,8 @@ If the test fails, a red cross is shown, and there is a display of the differenc
 
 The <<.wid testcase>> widget can be used directly as documented below, but it is generally easier and more flexible to create [[TestCaseTiddlers]]. These are special, self contained tiddlers that can contain multiple payload tiddlers making up a testcase.
 
+Note that the testcase wiki will inherit variables that are visible to the <<.wid testcase>> widget itself.
+
 ! Limitations
 
 The <<.wid testcase>> widget creates a lightweight TiddlyWiki environment that is a parasite of the main wiki. Because it is not a full, independent TiddlyWiki environment, there are some important limitations:
@@ -57,7 +59,15 @@ The payload tiddlers are the tiddler values that are loaded into the subwiki tha
 
 ! Testcase Templates
 
-The <<.attr template>> attribute defaults to $:/core/ui/testcases/DefaultTemplate but can be used to specify a custom template for special purposes. The provided template $:/core/ui/testcases/RawJSONTemplate can be used for debugging purposes to display all of the payload widgets in JSON.
+The <<.attr template>> attribute defaults to $:/core/ui/testcases/DefaultTemplate
+
+The default template uses several variables that can be set by the user:
+
+|!Variable |!Description |
+|<<.var linkTarget>> |Causes the testcase description to be rendered as a link to the current tiddler |
+|<<.var displayFormat>> |Defaults to "wikitext", can also be "plaintext" to force plain text display |
+
+A custom template can be specified for special purposes. For example, the provided template $:/core/ui/testcases/RawJSONTemplate just displays the payload tiddlers in JSON, which can be used for debugging purposes.
 
 ! Testcase Template Variables
 

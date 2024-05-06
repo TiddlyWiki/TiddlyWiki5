@@ -38,7 +38,11 @@ title: $:/core/ui/testcases/DefaultTemplate
 			<div class="tc-testcase-divider">
 			</div>
 			<div class="tc-testcase-output">
-				<$transclude $tiddler="Output" $mode="block"/>
+				<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
+					<pre><$view tiddler="Output" format="plainwikified" mode="block"/></pre>
+				<%else%>
+					<$transclude $tiddler="Output" $mode="block"/>
+				<%endif%>
 			</div>
 		</div>
 	</div>

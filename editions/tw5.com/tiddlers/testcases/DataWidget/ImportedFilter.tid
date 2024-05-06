@@ -2,12 +2,11 @@ title: TestCases/DataWidget/ImportedFilter
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 description: Imported filter definition
+display-format: plaintext
 
 title: Output
 
-<pre>
 <$data $filter="[prefix[Day: T]]" custom="Beta"/>
-</pre>
 +
 title: Day: Monday
 text: Today is Monday
@@ -32,8 +31,7 @@ text: Today is Sunday
 +
 title: ExpectedResult
 
-<p><pre>
-[
+<p>[
     {
         "title": "Day: Thursday",
         "text": "Today is Thursday",
@@ -44,5 +42,4 @@ title: ExpectedResult
         "text": "Today is Tuesday",
         "custom": "Beta"
     }
-]
-</pre></p>
+]</p>
