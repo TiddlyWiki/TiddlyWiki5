@@ -1,6 +1,18 @@
 title: $:/core/ui/testcases/DefaultTemplate
 
 \whitespace trim
+\procedure linkcatcherActions()
+<%if [<navigateTo>has[title]] %>
+	<$let
+		state={{{ [<qualify "$:/state/testcase">] }}}
+	>
+		<$qualify title=<<state>> name="qualifiedState">
+			<$action-setfield $tiddler=<<qualifiedState>> text=<<navigateTo>>/>
+		</$qualify>
+	</$let>
+<%endif%>
+\end
+
 <$let
 	state={{{ [<qualify "$:/state/testcase">] }}}
 >
@@ -41,7 +53,9 @@ title: $:/core/ui/testcases/DefaultTemplate
 				<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
 					<pre><$view tiddler="Output" format="plainwikified" mode="block"/></pre>
 				<%else%>
-					<$transclude $tiddler="Output" $mode="block"/>
+					<$linkcatcher actions=<<linkcatcherActions>>>
+						<$transclude $tiddler="Output" $mode="block"/>
+					</$linkcatcher>
 				<%endif%>
 			</div>
 		</div>
