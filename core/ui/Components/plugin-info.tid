@@ -40,6 +40,15 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 <div class="tc-plugin-info-chunk tc-plugin-info-description">
 	<h1>
 		''<$text text={{{ [<currentTiddler>get[name]] ~[<currentTiddler>split[/]last[1]] }}}/>'':&nbsp;<$view field="description"><$view field="title"/></$view>&nbsp;$disabledMessage$
+		<%if [<currentTiddler>get[stability]match[STABILITY_0_DEPRECATED]] %>
+			<span class="tc-plugin-info-stability tc-plugin-info-stability-deprecated">DEPRECATED</span>
+		<%elseif [<currentTiddler>get[stability]match[STABILITY_1_EXPERIMENTAL]] %>
+			<span class="tc-plugin-info-stability tc-plugin-info-stability-experimental">EXPERIMENTAL</span>
+		<%elseif [<currentTiddler>get[stability]match[STABILITY_2_STABLE]] %>
+			<span class="tc-plugin-info-stability tc-plugin-info-stability-stable">STABLE</span>
+		<%elseif [<currentTiddler>get[stability]match[STABILITY_3_LEGACY]] %>
+			<span class="tc-plugin-info-stability tc-plugin-info-stability-legacy">LEGACY</span>
+		<%endif%>
 	</h1>
 	<h2>
 		<$view field="title"/>

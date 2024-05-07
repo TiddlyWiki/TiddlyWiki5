@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/help",
 	"name": "Help",
 	"description": "Floating help panel",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }
