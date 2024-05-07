@@ -1,0 +1,26 @@
+title: TestCases/DataWidget/Refreshing
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Refreshing the data widget
+display-format: plaintext
+
+title: Output
+
+<$data title="Epsilon" text={{Subject}}/>
++
+title: Subject
+
+Nothing
++
+title: Actions
+
+<$action-setfield $tiddler="Subject" text="Theta"/>
++
+title: ExpectedResult
+
+<p>[
+    {
+        "title": "Epsilon",
+        "text": "Theta"
+    }
+]</p>
