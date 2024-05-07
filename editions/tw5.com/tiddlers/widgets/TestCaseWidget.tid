@@ -19,6 +19,8 @@ Here is an example of a testcase showing the default split view with the source 
 
 The payload tiddlers listed in the tabs on the left are editable, with the results being immediately reflected in the preview pane on the right. However, if the <<.wid testcase>> widget is refreshed then the modifications are lost.
 
+Notice also that clicking on links within the output pane will switch to the tab containing that tiddler.
+
 The green tick at the top left of a testcase indicates that a test has been set up and that it passes.
 
 If the test fails, a red cross is shown, and there is a display of the differences between the actual results and the expected results:

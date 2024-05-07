@@ -5,7 +5,7 @@ description: Simple transclusion
 
 title: Output
 
-Good morning, my name is {{Name}} and I live in {{Address}}
+Good morning, my [[name|Name]] is {{Name}} and I [[live in|Address]] {{Address}}
 +
 title: Name
 
@@ -16,4 +16,4 @@ title: Address
 14 Carrot Street, Vegetabletown
 +
 title: ExpectedResult
-text: <p>Good morning, my name is Robert Rabbit and I live in 14 Carrot Street, Vegetabletown</p>
+text: <p>Good morning, my <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Name">name</a> is Robert Rabbit and I <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Address">live in</a> 14 Carrot Street, Vegetabletown</p>
