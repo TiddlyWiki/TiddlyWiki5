@@ -2593,11 +2593,11 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability {
-	padding: 3px;
-	font-size: 0.6em;
+	margin-right: 4px;
+	padding: 1px 3px;
+	font-size: 0.8em;
 	border-radius: 4px;
 	font-weight: bold;
-	float: right;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-stable {
@@ -2606,8 +2606,8 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-experimental {
-	border: 1px solid orange;
-	color: orange;
+	border: 1px solid #c07c00;
+	color: #c07c00;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-deprecated {
@@ -2641,7 +2641,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-description div {
-	font-size: 0.7em;
+	font-size: 0.8em;
 	line-height: 1.2;
 	margin: 2px 0 2px 0;
 }
