@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/data.js
 type: application/javascript
 module-type: widget
 
-Widget to represent a single item of data
+Widget to dynamically represent one or more tiddlers
 
 \*/
 (function(){
