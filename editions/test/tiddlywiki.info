@@ -1,8 +1,7 @@
 {
 	"description": "TiddlyWiki core tests",
 	"plugins": [
-		"tiddlywiki/jasmine",
-		"tiddlywiki/geospatial"
+		"tiddlywiki/jasmine"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
