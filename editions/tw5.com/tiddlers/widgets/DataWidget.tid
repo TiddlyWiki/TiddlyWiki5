@@ -40,22 +40,3 @@ The attribute <<.attr $filter>> is used to ingest multiple tiddlers from the wik
 [[Compound tiddlers|CompoundTiddlers]] provide a way to easily create multiple tiddlers from within a single tiddler. They are contained in tiddlers of type `text/vnd.tiddlywiki-multiple`. The text field consists of a series of tiddlers in the same format as `.tid` files, each separated by a line containing a single `+` character.
 
 <<testcase "TestCases/DataWidget/ImportCompound">>
-
-Here is a more complex example of the content of a compound tiddler:
-
-```
-title: First
-tags: one two
-
-This is the first tiddler
-+
-title: Second
-tags: three four
-
-This is the second tiddler
-+
-title: third
-tags: five six
-
-This is the third tiddler
-```

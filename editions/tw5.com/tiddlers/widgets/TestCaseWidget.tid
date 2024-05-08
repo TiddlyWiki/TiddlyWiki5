@@ -11,6 +11,8 @@ The <<.wid testcase>> widget is designed to present interactive example test cas
 
 This makes it possible to run independent tests that also serve as documentation examples.
 
+The <<.wid testcase>> widget can be used directly as documented below, but it is generally easier to create [[TestCaseTiddlers]]. These are special CompoundTiddlers that can contain multiple payload tiddlers making up a testcase.
+
 !! Features
 
 Here is an example of a testcase showing the default split view with the source tiddlers on the left and the tiddler titled `Output` rendered on the right.
@@ -26,12 +28,6 @@ The green tick at the top left of a testcase indicates that a test has been set 
 If the test fails, a red cross is shown, and there is a display of the differences between the actual results and the expected results:
 
 <<testcase "TestCases/TestCaseWidget/FailingTest">>
-
-!! Usage
-
-The <<.wid testcase>> widget can be used directly as documented below, but it is generally easier to create [[TestCaseTiddlers]]. These are special CompoundTiddlers that can contain multiple payload tiddlers making up a testcase.
-
-Note that the rendering of the testcase wiki will inherit variables that are visible to the <<.wid testcase>> widget itself.
 
 ! Limitations
 
@@ -71,7 +67,7 @@ The default testcase template assigns special meanings to a number of payload ti
 |''Output'' |The tiddler that produces the test output |
 |''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
 
-The default template uses several variables that can be set by the user:
+The testcase wiki will inherit variables that are visible to the <<.wid testcase>> widget itself. The default template uses several variables that can be set by the user:
 
 |!Variable |!Description |
 |<<.var linkTarget>> |Causes the testcase description to be rendered as a link to the current tiddler |
