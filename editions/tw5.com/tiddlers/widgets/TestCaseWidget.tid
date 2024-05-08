@@ -1,6 +1,6 @@
 caption: testcase
-created: 20230406161341763
-modified: 20230406161341763
+created: 20240507221902644
+modified: 20240507221902644
 tags: Widgets
 title: TestCaseWidget
 type: text/vnd.tiddlywiki
@@ -13,13 +13,13 @@ This makes it possible to run independent tests that also serve as documentation
 
 !! Features
 
-Here is an example of a testcase showing the default split view with the source tiddlers on the left and the tiddler titled `Output` rendered on the right. It also displays the tiddler titled `Description` as the heading.
+Here is an example of a testcase showing the default split view with the source tiddlers on the left and the tiddler titled `Output` rendered on the right.
 
 <<testcase "TestCases/TranscludeWidget/SimpleTransclusion">>
 
-The payload tiddlers listed in the tabs on the left are editable, with the results being immediately reflected in the preview pane on the right. However, if the <<.wid testcase>> widget is refreshed then the modifications are lost.
-
 Notice also that clicking on links within the output pane will switch to the tab containing that tiddler.
+
+The text of the payload tiddlers listed on the left are editable, with the results being immediately reflected in the preview pane on the right. However, if the <<.wid testcase>> widget is refreshed then the modifications are lost.
 
 The green tick at the top left of a testcase indicates that a test has been set up and that it passes.
 
@@ -29,9 +29,9 @@ If the test fails, a red cross is shown, and there is a display of the differenc
 
 !! Usage
 
-The <<.wid testcase>> widget can be used directly as documented below, but it is generally easier and more flexible to create [[TestCaseTiddlers]]. These are special, self contained tiddlers that can contain multiple payload tiddlers making up a testcase.
+The <<.wid testcase>> widget can be used directly as documented below, but it is generally easier to create [[TestCaseTiddlers]]. These are special CompoundTiddlers that can contain multiple payload tiddlers making up a testcase.
 
-Note that the testcase wiki will inherit variables that are visible to the <<.wid testcase>> widget itself.
+Note that the rendering of the testcase wiki will inherit variables that are visible to the <<.wid testcase>> widget itself.
 
 ! Limitations
 
@@ -63,6 +63,14 @@ The payload tiddlers are the tiddler values that are loaded into the subwiki tha
 
 The <<.attr template>> attribute defaults to $:/core/ui/testcases/DefaultTemplate
 
+The default testcase template assigns special meanings to a number of payload tiddlers:
+
+|!Tiddler |!Description |
+|''Description'' |Descriptive heading for the test, intended to make it easy to identify the test |
+|''Narrative'' |Narrative description of the test, intended to explain the purpose and operation of the test |
+|''Output'' |The tiddler that produces the test output |
+|''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
+
 The default template uses several variables that can be set by the user:
 
 |!Variable |!Description |
@@ -82,16 +90,16 @@ The <<.wid testcase>> widget makes the following variables available within the 
 |<<.var expectedHTML>> |The expected output HTML if running tests |
 |<<.var testResult>> |The tests result if running tests (may be "pass" or "fail") |
 
-! Examples
+! Example
 
 Here is an example of setting up a testcase that includes expected test results:
 
 <$testcase>
 <$data title="Description" text="Example of a testcase with expected results"/>
 <$data title="Output" text="""<$testcase testOutput="Output" testExpectedResult="ExpectedResult">
-<$data title="Description" text="How to calculate 2 plus 2"/>
-<$data title="Output" text="<$text text={{{ [[2]add[2]] }}}/>"/>
-<$data title="ExpectedResult" text="<p>8</p>"/>
+    <$data title="Description" text="How to calculate 2 plus 2"/>
+    <$data title="Output" text="<$text text={{{ [[2]add[2]] }}}/>"/>
+    <$data title="ExpectedResult" text="<p>8</p>"/>
 </$testcase>
 """/>
 </$testcase>

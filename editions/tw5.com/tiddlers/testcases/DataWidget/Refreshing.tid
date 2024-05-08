@@ -4,6 +4,10 @@ tags: [[$:/tags/wiki-test-spec]]
 description: Refreshing the data widget
 display-format: plaintext
 
+title: Narrative
+
+Verifying that the JSON output of the data widget is correctly refreshed when the data changes
++
 title: Output
 
 <$data title="Epsilon" text={{Subject}}/>

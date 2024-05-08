@@ -33,6 +33,11 @@ title: $:/core/ui/testcases/DefaultTemplate
 				</$genesis>
 			</h2>
 		</div>
+		<%if [[Narrative]is[tiddler]] %>
+			<div class="tc-testcase-narrative">
+				<$transclude $tiddler="Narrative" mode="block"/>
+			</div>
+		<%endif%>
 		<%if [<testResult>match[fail]] %>
 			<div class="tc-testcase-result-fail">
 				<div class="tc-testcase-result-fail-header">
@@ -45,7 +50,7 @@ title: $:/core/ui/testcases/DefaultTemplate
 		<%endif%>
 		<div class="tc-testcase-panes">
 			<div class="tc-testcase-source">
-				<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<state>] -Description -ExpectedResult -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
+				<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<state>] -Description -Narrative -ExpectedResult -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/Source"/>
 			</div>
 			<div class="tc-testcase-divider">
 			</div>

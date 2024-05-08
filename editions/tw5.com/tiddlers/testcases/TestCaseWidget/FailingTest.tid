@@ -3,6 +3,10 @@ type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec-failing]]
 description: An example of a failing test
 
+title: Narrative
+
+This testcase intentionally fails to show how failures are displayed.
++
 title: Output
 
 The sum is <$text text={{{ [[2]add[2]] }}}/>.

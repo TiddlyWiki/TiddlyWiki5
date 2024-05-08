@@ -3,6 +3,10 @@ type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 description: Simple transclusion
 
+title: Narrative
+
+This testcase demonstrates transclusion of and links to other tiddlers.
++
 title: Output
 
 Good morning, my [[name|Name]] is {{Name}} and I [[live in|Address]] {{Address}}
