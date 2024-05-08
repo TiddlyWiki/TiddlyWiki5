@@ -3,13 +3,9 @@ title: $:/core/ui/testcases/DefaultTemplate
 \whitespace trim
 \procedure linkcatcherActions()
 <%if [<navigateTo>has[title]] %>
-	<$let
-		state={{{ [<qualify "$:/state/testcase">] }}}
-	>
-		<$qualify title=<<state>> name="qualifiedState">
-			<$action-setfield $tiddler=<<qualifiedState>> text=<<navigateTo>>/>
-		</$qualify>
-	</$let>
+	<$qualify title=<<state>> name="qualifiedState">
+		<$action-setfield $tiddler=<<qualifiedState>> text=<<navigateTo>>/>
+	</$qualify>
 <%endif%>
 \end
 
