@@ -1,5 +1,5 @@
 created: 20240508093242925
-modified: 20240508100006103
+modified: 20240508103709871
 tags: [[Hidden Settings]]
 title: Hidden Setting: Tag Pill Drag Filter
 type: text/vnd.tiddlywiki
@@ -19,4 +19,4 @@ defaults to:
 <%endif%>
 <code>{{$:/core/config/TagPillDragFilter}}</code>
 
-<<.note title:"Be Aware" _:"The core default filter does ''not'' include shadow-tiddlers. See: [[is Operator]] for details about the `is[tiddler]` and other possibilities.">>
+<<.note title:"Be Aware" _:"The core default filter does //not// include shadow-tiddlers. It will //include overwritten// shadow tiddlers. See: [[is Operator]] for details about the `is[tiddler]` and other possibilities.">>
