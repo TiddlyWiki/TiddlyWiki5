@@ -1,4 +1,4 @@
-title: $:/core/ui/testcases/DefaultTemplate/Source
+title: $:/core/ui/testcases/DefaultTemplate/SourceTabs
 
 \whitespace trim
 \procedure body()
