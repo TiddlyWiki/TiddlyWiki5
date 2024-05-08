@@ -15,10 +15,13 @@ Testcase tiddlers have the following fields:
 |<<.field description>> |Descriptive heading for the test, intended to make it easy to identify the test |
 |<<.field display-format>> |Optional, defaults to `wikitext`. Set to `plaintext` to cause the output to be rended as plain text |
 
+Testcase tiddlers with the appropriate tag are shown in $:/ControlPanel
+
 Some payload tiddlers are set aside for special purposes:
 
 |!Tiddler |!Description |
 |''Narrative'' |Narrative description of the test, intended to explain the purpose and operation of the test |
 |''Output'' |The tiddler that produces the test output |
 |''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
+
 
