@@ -61,8 +61,6 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	}
 	loadTiddler("$:/core");
 	loadTiddler("$:/plugins/tiddlywiki/codemirror");
-	// Load the test case template
-	// loadTiddler(this.testcaseTemplate);
 	// Load tiddlers from child data widgets
 	var tiddlers = [];
 	this.findChildrenDataWidgets(this.contentRoot.children,"data",function(widget) {
