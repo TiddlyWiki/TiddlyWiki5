@@ -11,11 +11,11 @@ The <<.wid testcase>> widget is designed to present interactive example test cas
 
 This makes it possible to run independent tests that also serve as documentation examples.
 
-The <<.wid testcase>> widget can be used directly as documented below, but it is generally easier to create [[TestCaseTiddlers]]. These are special CompoundTiddlers that can contain multiple payload tiddlers making up a testcase.
+The <<.wid testcase>> widget can be used directly as documented below, but it is generally easier to create [[TestCaseTiddlers]]. These are special CompoundTiddlers that can contain multiple payload tiddlers making up a test case.
 
 !! Features
 
-Here is an example of a testcase showing the default split view with the source tiddlers on the left and the tiddler titled `Output` rendered on the right.
+Here is an example of a test case showing the default split view with the source tiddlers on the left and the tiddler titled `Output` rendered on the right.
 
 <<testcase "TestCases/TranscludeWidget/SimpleTransclusion">>
 
@@ -23,7 +23,7 @@ Notice also that clicking on links within the output pane will switch to the tab
 
 The text of the payload tiddlers listed on the left are editable, with the results being immediately reflected in the preview pane on the right. However, if the <<.wid testcase>> widget is refreshed then the modifications are lost.
 
-The green tick at the top left of a testcase indicates that a test has been set up and that it passes.
+The green tick at the top left of a test case indicates that a test has been set up and that it passes.
 
 If the test fails, a red cross is shown, and there is a display of the differences between the actual results and the expected results:
 
@@ -36,16 +36,16 @@ The <<.wid testcase>> widget creates a lightweight TiddlyWiki environment that i
 * Output is rendered into a DIV, and so cannot be styled independently of the host wiki
 * Any changes to the wiki made interactively by the user are volatile, and are lost when the <<.wid testcase>> widget is refreshed
 * Startup actions are not supported
-* Only plugins available in the host wiki can be included in the testcase
+* Only plugins available in the host wiki can be included in the test case
 
 If these limitations are a problem, the [[Innerwiki Plugin]] offers the ability to embed a fully independent subwiki via an `<iframe>` element, but without the testing related features of the <<.wid testcase>> widget.
 
 ! Content and Attributes
 
-The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define the payload tiddlers to be included in the testcase.
+The content of the `<$testcase>` widget is not displayed but instead is scanned for <<.wlink DataWidget>> widgets that define the payload tiddlers to be included in the test case.
 
 |!Attribute |!Description |
-|<<.attr template>> |Optional title of the template used to display the testcase (defaults to $:/core/ui/testcases/DefaultTemplate). Note that custom templates will need to be explicitly added to the payload |
+|<<.attr template>> |Optional title of the template used to display the test case (defaults to $:/core/ui/testcases/DefaultTemplate). Note that custom templates will need to be explicitly added to the payload |
 |<<.attr testOutput>> |Optional title of the tiddler whose output should be subject to testing (note that both <<.attr testOutput>> and  <<.attr testExpectedResult>> must be provided in order for testing to occur) |
 |<<.attr testExpectedResult>> |Optional title of the tiddler whose content is the expected result of rendering the output tiddler (note that both <<.attr testOutput>> and  <<.attr testExpectedResult>> must be provided in order for testing to occur)  |
 |<<.attr testActions>> |Optional title of the tiddler containing actions that should be executed before the test occurs |
@@ -59,7 +59,7 @@ The payload tiddlers are the tiddler values that are loaded into the subwiki tha
 
 The <<.attr template>> attribute defaults to $:/core/ui/testcases/DefaultTemplate
 
-The default testcase template assigns special meanings to a number of payload tiddlers:
+The default test case template assigns special meanings to a number of payload tiddlers:
 
 |!Tiddler |!Description |
 |''Description'' |Descriptive heading for the test, intended to make it easy to identify the test |
@@ -67,20 +67,20 @@ The default testcase template assigns special meanings to a number of payload ti
 |''Output'' |The tiddler that produces the test output |
 |''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
 
-The testcase wiki will inherit variables that are visible to the <<.wid testcase>> widget itself. The default template uses several variables that can be set by the user:
+The test case wiki will inherit variables that are visible to the <<.wid testcase>> widget itself. The default template uses several variables that can be set by the user:
 
 |!Variable |!Description |
-|<<.var linkTarget>> |Causes the testcase description to be rendered as a link to the current tiddler |
+|<<.var linkTarget>> |Causes the test case description to be rendered as a link to the current tiddler |
 |<<.var displayFormat>> |Defaults to "wikitext", can also be "plaintext" to force plain text display |
 
 A custom template can be specified for special purposes. For example, the provided template $:/core/ui/testcases/RawJSONTemplate just displays the payload tiddlers in JSON, which can be used for debugging purposes.
 
-! Testcase Template Variables
+! Test Czase Template Variables
 
 The <<.wid testcase>> widget makes the following variables available within the rendered template:
 
 |!Variable |!Description |
-|<<.var transclusion>> |A hash that reflects the names and values of all the payload tiddlers. This makes it easier for testcase templates to create unique state tiddler titles using the [[qualify Macro]] or QualifyWidget |
+|<<.var transclusion>> |A hash that reflects the names and values of all the payload tiddlers. This makes it easier for test case templates to create unique state tiddler titles using the [[qualify Macro]] or QualifyWidget |
 |<<.var payloadTiddlers>> |JSON array of payload tiddler fields |
 |<<.var outputHTML>> |The actual output HTML if running tests |
 |<<.var expectedHTML>> |The expected output HTML if running tests |
@@ -88,10 +88,10 @@ The <<.wid testcase>> widget makes the following variables available within the 
 
 ! Example
 
-Here is an example of setting up a testcase that includes expected test results:
+Here is an example of setting up a test case that includes expected test results:
 
 <$testcase>
-<$data title="Description" text="Example of a testcase with expected results"/>
+<$data title="Description" text="Example of a test case with expected results"/>
 <$data title="Output" text="""<$testcase testOutput="Output" testExpectedResult="ExpectedResult">
     <$data title="Description" text="How to calculate 2 plus 2"/>
     <$data title="Output" text="<$text text={{{ [[2]add[2]] }}}/>"/>

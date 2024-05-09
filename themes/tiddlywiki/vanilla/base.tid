@@ -3226,40 +3226,40 @@ span.tc-translink > a:first-child {
 ** Test Cases
 */
 
-.tc-testcase-wrapper {
+.tc-test-case-wrapper {
 	border: 1px solid <<colour foreground>>;
 	background-color: <<colour muted-foreground>>;
 	border-radius: 6px;
 }
 
-.tc-tiddler-frame .tc-testcase-wrapper {
+.tc-tiddler-frame .tc-test-case-wrapper {
 	margin-left: -0.5em;
 	margin-right: -0.5em;
 }
 
-.tc-testcase-wrapper {
+.tc-test-case-wrapper {
 	background-color: <<colour testcase-accent-level-1>>;
 }
 
-.tc-testcase-wrapper .tc-testcase-wrapper {
+.tc-test-case-wrapper .tc-test-case-wrapper {
 	background-color: <<colour testcase-accent-level-2>>;
 }
 
-.tc-testcase-wrapper .tc-testcase-wrapper .tc-testcase-wrapper {
+.tc-test-case-wrapper .tc-test-case-wrapper .tc-test-case-wrapper {
 	background-color: <<colour testcase-accent-level-3>>;
 }
 
-.tc-testcase-header {
+.tc-test-case-header {
 	font-weight: normal;
 	margin: 0.5em 0;
 	padding: 0 0.5em;
 }
 
-.tc-testcase-divider {
+.tc-test-case-divider {
 	x-background-color: <<colour muted-foreground>>;
 }
 
-.tc-testcase-result-icon {
+.tc-test-case-result-icon {
 	fill: #fff;
 	padding: 0.25em;
 	display: inline-block;
@@ -3269,29 +3269,29 @@ span.tc-translink > a:first-child {
 	margin-right: 0.25em;
 }
 
-.tc-testcase-result-icon-pass {
+.tc-test-case-result-icon-pass {
 	background-color: green;
 }
 
-.tc-testcase-result-icon-fail {
+.tc-test-case-result-icon-fail {
 	background-color: red;
 }
 
-.tc-testcase-result-icon svg {
+.tc-test-case-result-icon svg {
 	width: 0.5em;
 	height: 0.5em;
 }
 
-.tc-testcase-header > h2,
-.tc-testcase-source > pre {
+.tc-test-case-header > h2,
+.tc-test-case-source > pre {
 	margin: 0;
 }
 
-.tc-testcase-header > h2 a.tc-tiddlylink-missing {
+.tc-test-case-header > h2 a.tc-tiddlylink-missing {
 	font-style: normal;
 }
 
-.tc-testcase-result-fail {
+.tc-test-case-result-fail {
 	border: 1px solid <<colour foreground>>;
 	background-color: <<colour background>>;
 	border-radius: 4px;
@@ -3299,7 +3299,7 @@ span.tc-translink > a:first-child {
 	padding: 0;
 }
 
-.tc-testcase-result-fail-header {
+.tc-test-case-result-fail-header {
 	background: <<colour diff-delete-background>>;
 	color: <<colour diff-delete-foreground>>;
 	border-top-left-radius: 4px;
@@ -3307,19 +3307,19 @@ span.tc-translink > a:first-child {
 	padding: 4px;
 }
 
-.tc-testcase-result-fail-body {
+.tc-test-case-result-fail-body {
 	padding: 4px;
 }
 
-.tc-testcase-source > pre {
+.tc-test-case-source > pre {
 	height: 100%;
 }
 
-.tc-testcase-narrative {
+.tc-test-case-narrative {
 	padding: 0.5em;
 }
 
-.tc-testcase-panes {
+.tc-test-case-panes {
 	display: flex;
 	align-items: stretch;
 	flex-wrap: wrap;
@@ -3328,21 +3328,21 @@ span.tc-translink > a:first-child {
 	border-bottom-right-radius: 6px;
 }
 
-.tc-testcase-source {
+.tc-test-case-source {
 	flex: 1 0 49%;
 	min-width: 250px;
 }
 
-.tc-testcase-source .tc-tab-content {
+.tc-test-case-source .tc-tab-content {
 	background: <<colour background>>;
 	margin: 0;
 }
 
-.tc-testcase-source .tc-field-table {
+.tc-test-case-source .tc-field-table {
 	width: 100%;
 }
 
-.tc-testcase-source table.tc-field-table {
+.tc-test-case-source table.tc-field-table {
 	margin: 0;
 }
 
@@ -3350,15 +3350,15 @@ span.tc-translink > a:first-child {
 	margin: 0;
 }
 
-.tc-testcase-divider {
+.tc-test-case-divider {
 	flex: 0 0 1.5%;
 }
 
-.tc-testcase-source .tc-tab-buttons {
+.tc-test-case-source .tc-tab-buttons {
 	padding-top: 0;
 }
 
-.tc-testcase-output {
+.tc-test-case-output {
 	box-shadow: inset 2px 2px 10px 0px <<colour muted-foreground>>;
 	background: <<colour background>>;
 	border-radius: 4px;

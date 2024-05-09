@@ -3,19 +3,19 @@ modified: 20240507221902644
 created: 20240507221902644
 tags: Concepts
 
-Testcase tiddlers encapsulate one or more tiddlers that can be displayed as a [[testcase|TestCaseWidget]]: an independent embedded wiki that can be used for testing or learning purposes.
+Test case tiddlers encapsulate one or more tiddlers that can be displayed as a [[test case|TestCaseWidget]]: an independent embedded wiki that can be used for testing or learning purposes.
 
-Testcase tiddlers are formatted as CompoundTiddlers, allowing them to contain multiple tiddlers packed into one.
+Test case tiddlers are formatted as CompoundTiddlers, allowing them to contain multiple tiddlers packed into one.
 
-Testcase tiddlers have the following fields:
+Test case tiddlers have the following fields:
 
 |!Field |!Description |
 |<<.field type>> | Should be set to `text/vnd.tiddlywiki-multiple` |
-|<<.field tags>> | Testcases are tagged [[$:/tags/wiki-test-spec]]. Test cases that intentionally fail are tagged [[$:/tags/wiki-test-spec-failing]] |
+|<<.field tags>> | Test cases are tagged [[$:/tags/wiki-test-spec]]. Test cases that intentionally fail are tagged [[$:/tags/wiki-test-spec-failing]] |
 |<<.field description>> |Descriptive heading for the test, intended to make it easy to identify the test |
 |<<.field display-format>> |Optional, defaults to `wikitext`. Set to `plaintext` to cause the output to be rended as plain text |
 
-Testcase tiddlers with the appropriate tag are shown in $:/ControlPanel
+Test case tiddlers with the appropriate tag are shown in $:/ControlPanel
 
 Some payload tiddlers are set aside for special purposes:
 
