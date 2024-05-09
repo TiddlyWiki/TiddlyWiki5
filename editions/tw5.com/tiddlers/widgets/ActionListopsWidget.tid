@@ -1,6 +1,6 @@
 caption: action-listops
 created: 20141025120850184
-modified: 20240509074011368
+modified: 20240509135041526
 myfield: 
 tags: ActionWidgets Widgets
 title: ActionListopsWidget
@@ -39,7 +39,7 @@ Similarly, if an element is to always be removed when it is present, the `-` / `
 <$action-listops $subfilter="+[remove[ListItem]]"/>
 ```
 
-<<.infoBox """Note that the parameter of the [[remove Operator]] is a [[Title List]]. To remove titles containing spaces, or to remove multiple titles, the individual titles must be wrapped in double square brackets, usually via a variable assignment. See //Filtered List Variable Assignment// in the [[SetWidget]] documentation to learn more.""">>
+<<.infoBox """Note that the parameter of the [[remove Operator]] is a [[Title List]]. To remove one or more titles containing spaces the individual titles must be wrapped in double square brackets, usually via a soft [[Filter Parameter]]. See //Filtered List Variable Assignment// in the [[SetWidget]] documentation to learn more.""">>
 
 Without any prefixes, the filter run output is simply [[dominantly appended|Dominant Append]] to the list.
 
