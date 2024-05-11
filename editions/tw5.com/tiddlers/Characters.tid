@@ -1,0 +1,14 @@
+created: 20240511051123950
+modified: 20240511052132451
+parent: JContents
+title: Characters
+toc-filter: [tag<currentTiddler>]
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+This tiddler contains a toc-filter: {{!!toc-filter}}, which defines the tree below this level. So "parent" based TOCs can be mixed with "tag" based TOCs
+
+Also see: [[JContents]]
+
+<<list-fields>>
