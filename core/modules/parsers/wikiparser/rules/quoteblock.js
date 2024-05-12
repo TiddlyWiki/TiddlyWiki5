@@ -27,7 +27,6 @@ exports.parse = function() {
 	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
-	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	// Parse any classes, whitespace and then the optional cite itself
 	classes.push.apply(classes, this.parser.parseClasses());
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
