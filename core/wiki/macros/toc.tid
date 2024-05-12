@@ -18,13 +18,17 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 \whitespace trim
 
 \procedure toc-defaultItemTemplate()
-<span class="tc-toc-caption tc-tiny-gap-left" title={{!!tooltip}}>
+<span class="tc-toc-caption tc-tiny-gap-left" title={{{ [{!!toc-tooltip}!is[blank]] :else[<currentTiddler>] }}}>
 <$let tv-wikilinks="no">
 	<$transclude $tiddler={{{ [<itemTemplate>!is[blank]then<itemTemplate>else<currentTiddler>] }}}
-		$field={{{ [<itemTemplate>!is[blank]then[text]] :else[<captionField>!is[blank]then<captionField>else[caption]] }}}
+		$field={{{ [<itemTemplate>!is[blank]then[text]]
+			:else[<captionField>!is[blank]then<captionField>] }}}
 	>
-		<$view field="title"/>
+		<$transclude $field={{{ [{!!caption}!is[blank]then[caption]else[title]] }}}>
+			<$view field="title"/>
+		</$transclude>
 	</$transclude>
+	<$log/>
 </$let>
 </span>
 \end
@@ -190,14 +194,16 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 -->
 \procedure toc-item(isUnlinked:"")
 <% if [<toc-state>get[text]else[close]match[close]] %>
-	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible" tooltip=<<toc-state>>>
+	<!-- <$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible" tooltip=<<toc-state>>> -->
+	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible">
 		<$transclude tiddler=<<toc-closed-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
 			<<_itemTemplate>>
 		<% endif %>
 	</$button>
 <% elseif [<toc-state>get[text]match[open]] %>
-	<$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible" tooltip=<<toc-state>>>
+	<!-- <$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible" tooltip=<<toc-state>>> -->
+	<$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible">
 		<$transclude tiddler=<<toc-open-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
 			<<_itemTemplate>>
@@ -287,7 +293,7 @@ Shows an expandable toc. Item always have an open/close chevron
 			<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
 				<<toc-item>>
 			<% else %>
-				<$button class='tc-btn-invisible'>
+				<$button class='tc-btn-invisible' tabindex="-1">
 					{{$:/core/images/blank}}
 				</$button>
 			<% endif %>
