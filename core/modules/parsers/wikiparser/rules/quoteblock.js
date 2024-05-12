@@ -24,7 +24,7 @@ exports.init = function(parser) {
 exports.parse = function() {
 	var classes = ["tc-quote"];
 	// Get all the details of the match
-	var reEndString = "^\\s*" + this.match[1] + "(?!<)";   
+	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
@@ -33,7 +33,7 @@ exports.parse = function() {
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	// before handling the cite, parse the body of the quote
-	var tree = this.parser.parseBlocks(reEndString);       
+	var tree = this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
 	if(cite.length > 0) {
 		tree.unshift({
@@ -63,5 +63,5 @@ exports.parse = function() {
 		children: tree
 	}];
 };
-	
+
 })();
