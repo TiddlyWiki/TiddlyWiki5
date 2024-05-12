@@ -28,7 +28,7 @@ exports.parse = function() {
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-// Parse any classes, whitespace and then the optional cite itself
+	// Parse any classes, whitespace and then the optional cite itself
 	classes.push.apply(classes, this.parser.parseClasses());
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
@@ -45,8 +45,8 @@ exports.parse = function() {
 	// Parse any optional cite
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	cite = this.parser.parseInlineRun(/(\r?\n)/mg);
-// If we got a cite, push it
-if(cite.length > 0) {
+	// If we got a cite, push it
+	if(cite.length > 0) {
 		tree.push({
 			type: "element",
 			tag: "cite",
