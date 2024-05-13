@@ -1,9 +1,12 @@
 caption: Characters
 created: 20240511051311906
-modified: 20240511052226076
+description: indirect tooltip
+modified: 20240513092023864
 parent: Lands of Stone and Steel
 tags: character-category
+test: 
 title: LandCharacters
+toc-tooltip: some text
 type: text/vnd.tiddlywiki
 
 \import [[b b]]

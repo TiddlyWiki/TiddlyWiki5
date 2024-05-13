@@ -1,5 +1,5 @@
 created: 20240511050424528
-modified: 20240511053519935
+modified: 20240513105625703
 tags: TOC
 title: JContents
 type: text/vnd.tiddlywiki
@@ -9,5 +9,9 @@ This is a "parent" based TOC
 See: https://talk.tiddlywiki.org/t/optimal-toc-use-for-multiple-topics/9804
 
 <div class="tc-table-of-contents">
-<<toc-selective-expandable tag:"JContents" parentField:"parent" >>
+<<toc tag:"JContents" parentField:"parent" captionField:test itemTemplate:>>
+</div>
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"JContents" parentField:"parent">>
 </div>

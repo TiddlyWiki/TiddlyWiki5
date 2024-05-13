@@ -1,8 +1,9 @@
 created: 20240511051244986
-modified: 20240511051941344
+modified: 20240513102713108
 parent: TowerCharacters
 tags: Characters
 title: John Doe
+toc-itemTemplate: y
 type: text/vnd.tiddlywiki
 
 \import [[b b]]
