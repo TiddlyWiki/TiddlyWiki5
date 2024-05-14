@@ -3,22 +3,7 @@ tags: $:/tags/ControlPanel/Info
 caption: {{$:/language/ControlPanel/Basics/Caption}}
 
 \procedure lingo-base() $:/language/ControlPanel/Basics/
-
 \whitespace trim
-
-\procedure show-filter-count(filter)
-<$button class="tc-btn-invisible">
-<$action-setfield $tiddler="$:/temp/advancedsearch" $value=<<filter>>/>
-<$action-setfield $tiddler="$:/temp/advancedsearch/input" $value=<<filter>>/>
-<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
-<$action-setfield $tiddler="$:/state/tab--1498284803" $value="$:/core/ui/AdvancedSearch/Filter"/>
-<$action-navigate $to="$:/AdvancedSearch"/>
-<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
-''<$count filter=<<filter>>/>''
-&#32;
-{{$:/core/images/advanced-search-button}}
-</$button>
-\end
 
 |tc-max-width tc-edit-max-width|k
 |<<lingo Version/Prompt>> |''<<version>>'' |

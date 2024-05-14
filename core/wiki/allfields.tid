@@ -1,7 +1,6 @@
 title: $:/snippets/allfields
 
 \whitespace trim
-\import [[$:/core/ui/ControlPanel/Basics]]
 
 \function tf.getLingoText() [[$:/language/Docs/Fields/]] [<title>] +[join[]get[text]]
 
