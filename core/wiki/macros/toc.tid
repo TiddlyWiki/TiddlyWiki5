@@ -22,6 +22,8 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 \procedure _hasCaptionField() [get<captionField>!is[blank]then<captionField>]
 \procedure _hasCaption() [has[caption]then[caption]]
 
+\function tf.toc-getTooltip() [<currentTiddler>get[toc-tooltip]!is[blank]] :else[<currentTiddler>]
+
 <!-- Use this item template as a default -->
 \procedure toc-defaultItemTemplate()
 <$let tv-wikilinks="no"
@@ -29,7 +31,7 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 >
 	<span class=""
 		data-fieldClass=`field-$(field)$`
-		title={{{ [{!!toc-tooltip}!is[blank]] :else[<currentTiddler>] }}}
+		title=<<tf.toc-getTooltip>>
 	>
 		<$transclude $field=<<field>>/>
 	</span>
