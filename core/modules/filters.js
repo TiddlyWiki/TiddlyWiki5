@@ -70,7 +70,7 @@ function parseFilterOperation(operators,filterString,p) {
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
-			switch (bracketType) {
+			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
@@ -144,7 +144,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:\/\/(.*)|(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -171,7 +171,7 @@ exports.parseFilter = function(filterString) {
 				}
 				if(match[3]) {
 					operation.suffixes = [];
-					 $tw.utils.each(match[3].split(":"),function(subsuffix) {
+					$tw.utils.each(match[3].split(":"),function(subsuffix) {
 						operation.suffixes.push([]);
 						$tw.utils.each(subsuffix.split(","),function(entry) {
 							entry = $tw.utils.trim(entry);
@@ -179,17 +179,18 @@ exports.parseFilter = function(filterString) {
 								operation.suffixes[operation.suffixes.length -1].push(entry);
 							}
 						});
-					 });
+					});
 				}
 			}
-			if(match[4]) { // Opening square bracket
+			// if(match[4]) {} // Since v5.3.4 match[4] is a comment so it is ignored
+			if(match[5]) { // Opening square bracket
 				p = parseFilterOperation(operation.operators,filterString,p);
 			} else {
 				p = match.index + match[0].length;
 			}
-			if(match[5] || match[6] || match[7]) { // Double quoted string, single quoted string or unquoted title
+			if(match[6] || match[7] || match[8]) { // Double quoted string, single quoted string or unquoted title
 				operation.operators.push(
-					{operator: "title", operands: [{text: match[5] || match[6] || match[7]}]}
+					{operator: "title", operands: [{text: match[6] || match[7] || match[8]}]}
 				);
 			}
 			results.push(operation);
@@ -322,7 +323,7 @@ exports.compileFilter = function(filterString) {
 					return filterRunPrefixes["and"](operationSubFunction, options);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
 					return filterRunPrefixes["else"](operationSubFunction, options);
-				default: 
+				default:
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {
