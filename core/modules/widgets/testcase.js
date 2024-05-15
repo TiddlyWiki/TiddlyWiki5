@@ -112,6 +112,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		this.setVariable("outputHTML",outputHTML);
 		this.setVariable("expectedHTML",expectedHTML);
 		this.setVariable("testResult",testResult);
+		this.setVariable("currentTiddler",this.testcaseTestOutput);
 	}
 	// Don't display anything if testHideIfPass is "yes" and the tests have passed
 	if(this.testcaseHideIfPass === "yes" && testResult === "pass") {
