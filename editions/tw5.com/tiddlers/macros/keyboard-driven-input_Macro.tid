@@ -1,5 +1,5 @@
-title: keyboard-driven-input Macro
 tags: Macros [[Core Macros]]
+title: keyboard-driven-input Macro
 
 The <<.def keyboard-driven-input>> [[macro|Macros]] generates an input field or textarea that lets you cycle through a given list of entries with the <kbd><<displayshortcuts ((input-up))>></kbd> and <kbd><<displayshortcuts ((input-down))>></kbd> keys. Doing so, an entry gets selected and can be processed with further actions
 
@@ -19,7 +19,6 @@ The additional parameters are:
 |firstSearchFilterField |the field of the configTiddler where the first search-filter is stored. Defaults to <<.field first-search-filter>> |
 |secondSearchFilterField |the field of the configTiddler where the second search-filter is stored. Defaults to <<.field second-search-filter>> |
 |filterMinLength |the minimum length of the user input after which items are filtered |
+|disableUpDownCancel|<<.from-version "5.3.4">> Defaults to "no". If set to "yes" the up-, down- and cancel-keys defined by the macro are disabled. This setting is needed to be able to navigate in a textarea as used by the $:/AdvancedSearch -> Filter tab. Also see: [[KeyboardWidget]]|
 
 See [[Demonstration: keyboard-driven-input Macro]] for further guidance on using this macro.
-
-

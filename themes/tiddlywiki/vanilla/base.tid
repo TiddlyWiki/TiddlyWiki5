@@ -920,7 +920,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-advanced-search input {
-	width: 60%;
+	width: 80%;
+}
+
+.tc-advanced-search-filter textarea {
+	max-width: 80%;
+	min-width: 80%;
 }
 
 .tc-search a svg {

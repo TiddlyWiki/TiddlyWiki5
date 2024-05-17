@@ -43,9 +43,11 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	this.domNode = domNode;
 	this.assignDomNodeClasses();
 	// Add a keyboard event handler
-	$tw.utils.addEventListeners(domNode,[
-		{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
-	]);
+	if(this.disabled === "no") {
+		$tw.utils.addEventListeners(domNode,[
+			{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
+		]);
+	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -53,10 +55,9 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 };
 
 KeyboardWidget.prototype.handleChangeEvent = function(event) {
-	if ($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
+	if($tw.keyboardManager.handleKeydownEvent(event, {onlyPriority: true})) {
 		return true;
 	}
-
 	var keyInfo = $tw.keyboardManager.getMatchingKeyDescriptor(event,this.keyInfoArray);
 	if(keyInfo) {
 		var handled = this.invokeActions(this,event);
@@ -96,6 +97,7 @@ KeyboardWidget.prototype.execute = function() {
 	this.param = this.getAttribute("param","");
 	this.key = this.getAttribute("key","");
 	this.tag = this.getAttribute("tag","");
+	this.disabled = this.getAttribute("disabled","no");
 	this.keyInfoArray = $tw.keyboardManager.parseKeyDescriptors(this.key);
 	if(this.key.substr(0,2) === "((" && this.key.substr(-2,2) === "))") {
 		this.shortcutTiddlers = [];
@@ -111,6 +113,9 @@ KeyboardWidget.prototype.execute = function() {
 KeyboardWidget.prototype.assignDomNodeClasses = function() {
 	var classes = this.getAttribute("class","").split(" ");
 	classes.push("tc-keyboard");
+	if(this.disabled === "yes") {
+		classes.push("tc-disabled");
+	}
 	this.domNode.className = classes.join(" ");
 };
 
@@ -119,7 +124,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 KeyboardWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes.tag) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.key || changedAttributes.tag || changedAttributes.disabled) {
 		this.refreshSelf();
 		return true;
 	} else if(changedAttributes["class"]) {
