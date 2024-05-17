@@ -1,5 +1,5 @@
 created: 20240222140353499
-modified: 20240222142402534
+modified: 20240517094709340
 tags: 
 title: test-widget
 type: text/vnd.tiddlywiki
@@ -17,5 +17,5 @@ type: text/vnd.tiddlywiki
 
 <$my.widget/>
 
-<<dumpvariables subfilter:"[search::casesensitive,some[my. transc]]">>
+<<wl-dumpvariables subfilter:"[search::casesensitive,some[my. transc]]">>
 

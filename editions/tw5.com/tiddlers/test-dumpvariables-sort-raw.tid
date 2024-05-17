@@ -1,10 +1,10 @@
 created: 20240218202032583
-modified: 20240427114143241
+modified: 20240517094448903
 tags: 
 title: test-dumpvariables-sort-raw
 type: text/vnd.tiddlywiki
 
 <<.example 1 """\procedure asdf(test:"hallo", x ) <<test>>
 
-<<dumpvariables sort:"raw">> """>>
+<<wl-dumpvariables sort:"raw">> """>>
 

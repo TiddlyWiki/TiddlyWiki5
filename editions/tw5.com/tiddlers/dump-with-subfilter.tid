@@ -1,9 +1,9 @@
 created: 20240218195424844
-modified: 20240427113751174
+modified: 20240517094940707
 tags: 
 title: dump-with-subfilter
 type: text/vnd.tiddlywiki
 
-<<.example 1 """<<dumpvariables  sort:raw subfilter:"[search::some[thisTiddler .attr ]]" >>""">>
+<<.example 1 """<<wl-dumpvariables  sort:raw subfilter:"[search::some[thisTiddler .attr ]]" >>""">>
 
  

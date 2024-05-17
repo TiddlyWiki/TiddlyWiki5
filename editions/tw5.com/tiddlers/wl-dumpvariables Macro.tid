@@ -1,11 +1,11 @@
-caption: dumpvariables
+caption: wl-dumpvariables
 created: 20140908104107181
-modified: 20240501101941520
+modified: 20240517094925367
 tags: Macros [[Core Macros]]
-title: dumpvariables Macro
+title: wl-dumpvariables Macro
 type: text/vnd.tiddlywiki
 
-The <<.def dumpvariables>> [[macro|Macros]] returns a table showing the values of all [[variables|Variables]], [[procedures|Procedures]], [[functions|Functions]], [[widgets|Widgets]] and [[macros|Macros]] that exist at that position in the [[widget tree|Widgets]].
+The <<.def wl-dumpvariables>> [[macro|Macros]] returns a table showing the values of all [[variables|Variables]], [[procedures|Procedures]], [[functions|Functions]], [[widgets|Widgets]] and [[macros|Macros]] that exist at that position in the [[widget tree|Widgets]].
 
 It is useful for debugging and exploring ~TiddlyWiki's internals.
 
@@ -30,4 +30,4 @@ The following parameters are <<.from-version "5.3.4">>
 
 Also see: [[search-variables Macro]]
 
-!!! <<.macro-examples "dumpvariables">>
+!!! <<.macro-examples "wl-dumpvariables">>
