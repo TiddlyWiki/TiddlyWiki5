@@ -222,9 +222,9 @@ tags: $:/tags/Global
 				</$button>
 				<blockquote class="tc-quote">
 					<% if [<tf.dv-toggleInfoState>get[text]match[yes]] %>
-						<div class="tc-labeled-input-wrapper">
-							<span tabindex="0" class="tc-fixed-label tc-align-right"><<lingo Search/Details>></span>
-							<$edit-text tiddler=<<tf.dv-detailsSearch>> tag=input class="tc-fluid-input tc-small-gap-left"/>
+						<div class="wltc-labeled-input-wrapper">
+							<span tabindex="0" class="wltc-fixed-label wltc-align-right"><<lingo Search/Details>></span>
+							<$edit-text tiddler=<<tf.dv-detailsSearch>> tag=input class="wltc-fluid-input tc-small-gap-left"/>
 							<$button actions=<<dv-setDetailsSearchText>>
 								class="tc-btn-invisible tc-tiny-gap-left"
 								tooltip={{$:/language/Search/Variables/Info/Reset}}
@@ -347,7 +347,7 @@ tags: $:/tags/Global
 <!-- Main -- Grid Based Advanced Variables Form -->
 <!-- ========================================== -->
 \procedure dv-searchForm()
-<div class="tc-flexible-form">
+<div class="wltc-flexible-form">
 	<div class="tc-advanced-search-container">
 	<span class="tc-dv-type"><<dv-filterOptions>></span>
 	<span class="tc-dv-sort"><<dv-sortOptions>></span>
@@ -443,7 +443,7 @@ tags: $:/tags/Global
 	<$let name="tv-show-missing-links" value="yes">
 		<$linkcatcher actions=<<dv-lc-actions>> >
 			<div class="tc-block-dropdown-wrapper">
-				<div class="tc-block-dropdown tc-variables-dropdown">
+				<div class="tc-block-dropdown wltc-variables-dropdown">
 					<!-- <$macrocall $name="list-tagged-draggable"
 						tag="$:/tags/Variables/Exclude/Snippet"
 						subFilter="!is[draft]"

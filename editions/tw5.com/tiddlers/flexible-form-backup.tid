@@ -86,7 +86,7 @@ type: text/vnd.tiddlywiki
 </$select>
 \end
 
-<div class="tc-flexible-form">
+<div class="wltc-flexible-form">
 	<div class="tc-advanced-search-container">
 	<<fi-filterOptions>> <<fi-sortOptions>>
 	</div>
