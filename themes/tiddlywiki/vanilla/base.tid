@@ -928,6 +928,10 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	min-width: 80%;
 }
 
+.tc-advanced-search-filter button {
+	vertical-align: top;
+}
+
 .tc-search a svg {
 	width: 1.2em;
 	height: 1.2em;
