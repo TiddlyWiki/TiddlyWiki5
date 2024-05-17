@@ -372,24 +372,6 @@ Table utility classes
 	padding: 3px;
 }
 
-/* Labeled text input, where input is max width */
-.tc-labeled-input-wrapper {
-	display: flex;
-	padding: 6px 0;
-}
-
-.tc-align-right {
-	text-align: right;
-}
-
-.tc-fixed-label {
-	flex: auto;
-}
-
-.tc-fluid-input {
-	flex: 20;
-}
-
 /*
 CSV parser plugin
 */
@@ -938,11 +920,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-advanced-search input {
-	width: 90%;
-}
-
-.tc-advanced-search .tc-flexible-form .txt-input {
-	width: 100%;
+	width: 60%;
 }
 
 .tc-search a svg {
@@ -1956,25 +1934,6 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
-}
-
-.tc-block-dropdown-wrapper .tc-edit-type-dropdown,
-.tc-block-dropdown-wrapper .tc-variables-dropdown {
-	position: relative;
-}
-
-.tc-block-dropdown-wrapper .tc-variables-dropdown a {
-	display: inline-block;
-	width: 90%;
-}
-
-.tc-block-dropdown-wrapper .tc-variables-dropdown svg {
-	height: .9rem;
-	width: .9rem;
-}
-
-.tc-variables-dropdown a.tc-tiddlylink-missing {
-	font-style: normal;
 }
 
 .tc-search-results {

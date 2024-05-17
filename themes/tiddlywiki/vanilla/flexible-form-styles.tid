@@ -1,7 +1,55 @@
 title: /core/template/flexible-form/styles
 tags: $:/tags/Stylesheet
 
-.tc-flexible-form {
+<!-- imported from vanilla base -->
+
+/* Labeled text input, where input is max width */
+.wltc-labeled-input-wrapper {
+	display: flex;
+	padding: 6px 0;
+}
+
+.wltc-align-right {
+	text-align: right;
+}
+
+.wltc-fixed-label {
+	flex: auto;
+}
+
+.wltc-fluid-input {
+	flex: 20;
+}
+
+.tc-advanced-search input {
+	width: 90%;
+}
+
+.tc-advanced-search .wltc-flexible-form .txt-input {
+	width: 100%;
+}
+
+.tc-block-dropdown-wrapper .tc-edit-type-dropdown,
+.tc-block-dropdown-wrapper .wltc-variables-dropdown {
+	position: relative;
+}
+
+.tc-block-dropdown-wrapper .wltc-variables-dropdown a {
+	display: inline-block;
+	width: 90%;
+}
+
+.tc-block-dropdown-wrapper .wltc-variables-dropdown svg {
+	height: .9rem;
+	width: .9rem;
+}
+
+.wltc-variables-dropdown a.tc-tiddlylink-missing {
+	font-style: normal;
+}
+
+<!-- flex form -->
+.wltc-flexible-form {
 	<!-- outline: 1px solid blue; -->
 	overflow: auto;
 	margin-bottom: 1em;
