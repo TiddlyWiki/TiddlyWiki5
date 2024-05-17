@@ -43,7 +43,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	this.domNode = domNode;
 	this.assignDomNodeClasses();
 	// Add a keyboard event handler
-	if(this.disabled === "no") {
+	if(this.disabled !== "yes") {
 		$tw.utils.addEventListeners(domNode,[
 			{name: "keydown", handlerObject: this, handlerMethod: "handleChangeEvent"}
 		]);
