@@ -213,6 +213,7 @@ Options include:
 	extFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters,
 	fileInfo: an existing fileInfo to check against
+TODO: Look into patching there
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;

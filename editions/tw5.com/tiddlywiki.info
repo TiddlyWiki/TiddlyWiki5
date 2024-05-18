@@ -10,7 +10,8 @@
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
 		"tiddlywiki/tour",
-		"tiddlywiki/qrcode"
+		"tiddlywiki/qrcode",
+		"cyberfoxar/fm-md"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

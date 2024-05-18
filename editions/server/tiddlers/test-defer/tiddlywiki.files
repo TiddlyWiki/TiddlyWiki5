@@ -1,0 +1,19 @@
+{
+    "directories": [
+        {
+            "path": ".",
+            "filesRegExp": "^.*\\.md$",
+            "isTiddlerFile": true,
+            "isEditableFile": true,
+            "fields": {
+                "title": {"source": "basename-uri-decoded"},
+                "created": {"source": "created"},
+                "modified": {"source": "modified"},
+                "type": "text/markdown",
+                "tags": ["test-defer"]
+            },
+            "isDeferred": true,
+            "deferredType": "bin/test-tiddler"
+        }
+    ]
+}

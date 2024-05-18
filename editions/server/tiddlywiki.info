@@ -3,7 +3,9 @@
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
-		"tiddlywiki/highlight"
+		"tiddlywiki/highlight",
+		"tiddlywiki/markdown",
+		"cyberfoxar/fm-md"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
