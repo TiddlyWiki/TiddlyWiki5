@@ -1,5 +1,12 @@
 title: $:/core/ui/RootTemplate
 code-body: yes
 
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/AboveRoot]!has[draft.of]]">
+<$transclude/>
+</$list>
+
 <$transclude tiddler={{{ [{$:/layout}has[text]] ~[[$:/core/ui/PageTemplate]] }}} mode="inline"/>
 
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/BelowRoot]!has[draft.of]]">
+<$transclude/>
+</$list>
