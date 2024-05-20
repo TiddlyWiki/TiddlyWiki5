@@ -5,8 +5,7 @@
 		"tiddlywiki/filesystem",
 		"tiddlywiki/highlight",
 		"tiddlywiki/mobiledragdrop",
-		"tiddlywiki/internals",
-		"cyberfoxar/fm-md"
+		"tiddlywiki/internals"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
