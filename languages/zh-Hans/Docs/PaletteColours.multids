@@ -65,6 +65,9 @@ sidebar-tab-foreground-selected: 侧边栏选定页签前景
 sidebar-tab-foreground: 侧边栏页签前景
 sidebar-tiddler-link-foreground-hover: 侧边栏悬停条目链结前景
 sidebar-tiddler-link-foreground: 侧边栏条目链结前景
+testcase-accent-level-1: 无嵌套的测试案例强调色
+testcase-accent-level-2: 第二级嵌套的测试案例强调色
+testcase-accent-level-3: 第三级或更高级别嵌套的测试案例强调色
 site-title-foreground: 网站标题前景
 static-alert-foreground: 静态提醒前景
 tab-background-selected: 选定的页签背景
