@@ -1,0 +1,64 @@
+title: $:/core/ui/testcases/DefaultTemplate
+
+\whitespace trim
+\procedure linkcatcherActions()
+<%if [<navigateTo>has[title]] %>
+	<$qualify title=<<state>> name="qualifiedState">
+		<$action-setfield $tiddler=<<qualifiedState>> text=<<navigateTo>>/>
+	</$qualify>
+<%endif%>
+\end
+
+<$let
+	state={{{ [<qualify "$:/state/testcase">] }}}
+>
+	<div class="tc-test-case-wrapper">
+		<div class="tc-test-case-header">
+			<h2>
+				<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[div]] }}}>
+					<%if [<testResult>!match[]] %>
+						<span class={{{ tc-test-case-result-icon [<testResult>!match[fail]then[tc-test-case-result-icon-pass]] [<testResult>match[fail]then[tc-test-case-result-icon-fail]] +[join[ ]] }}}>
+							<%if [<testResult>!match[fail]] %>
+								{{$:/core/images/done-button}}
+							<%else%>
+								{{$:/core/images/close-button}}
+							<%endif%>
+						</span>
+					<%endif%>
+					<$view tiddler="Description" mode="inline"/>
+				</$genesis>
+			</h2>
+		</div>
+		<%if [[Narrative]is[tiddler]] %>
+			<div class="tc-test-case-narrative">
+				<$transclude $tiddler="Narrative" mode="block"/>
+			</div>
+		<%endif%>
+		<%if [<testResult>match[fail]] %>
+			<div class="tc-test-case-result-fail">
+				<div class="tc-test-case-result-fail-header">
+					TEST FAILED
+				</div>
+				<div class="tc-test-case-result-fail-body">
+					<$diff-text source=<<expectedHTML>> dest=<<outputHTML>>/>
+				</div>
+			</div>
+		<%endif%>
+		<div class="tc-test-case-panes">
+			<div class="tc-test-case-source">
+				<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<state>] -Description -Narrative -ExpectedResult -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"/>
+			</div>
+			<div class="tc-test-case-divider">
+			</div>
+			<div class="tc-test-case-output">
+				<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
+					<pre><$view tiddler="Output" format="plainwikified" mode="block"/></pre>
+				<%else%>
+					<$linkcatcher actions=<<linkcatcherActions>>>
+						<$transclude $tiddler="Output" $mode="block"/>
+					</$linkcatcher>
+				<%endif%>
+			</div>
+		</div>
+	</div>
+</$let>

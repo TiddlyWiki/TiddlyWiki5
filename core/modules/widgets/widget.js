@@ -814,6 +814,21 @@ Widget.prototype.allowActionPropagation = function() {
 };
 
 /*
+Find child <$data> widgets recursively. The tag name allows aliased versions of the widget to be found too
+*/
+Widget.prototype.findChildrenDataWidgets = function(children,tag,callback) {
+	var self = this;
+	$tw.utils.each(children,function(child) {
+		if(child.dataWidgetTag === tag) {
+			callback(child);
+		}
+		if(child.children) {
+			self.findChildrenDataWidgets(child.children,tag,callback);
+		}
+	});
+};
+
+/*
 Evaluate a variable with parameters. This is a static convenience method that attempts to evaluate a variable as a function, returning an array of strings
 */
 Widget.evaluateVariable  = function(widget,name,options) {
