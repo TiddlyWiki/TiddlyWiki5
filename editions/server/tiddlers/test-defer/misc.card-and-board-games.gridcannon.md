@@ -1,10 +1,19 @@
 ---
-id: vouch037emrmt5a3eugh7jm
-title: Gridcannon
+created: 20240512202422824
+deferredFiletype: bin/test-tiddler
 desc: ''
+id: vouch037emrmt5a3eugh7jm
+modified: 20240520160136893
+tags: test-defer
+title: misc.card-and-board-games.gridcannon
+type: text/markdown
 updated: 1648720082424
-created: 1648720082424
 ---
+# An example markdown file
+
+Below is an example taken from my (CyberFoxar's) notes. It's the rules from a card game called gridcannon, feel free to read it if you want, here it's merely placeholder text.
+
+
 ## [Gridcannon: A Single Player Game With Regular Playing Cards](https://www.pentadact.com/2019-08-20-gridcannon-a-single-player-game-with-regular-playing-cards/)
 
 I thought it would be an interesting game design challenge to come up with a single player game you can play with a regular deck of playing cards. My first try, about a month ago, didn’t work. But on Sunday I had a new idea, and with one tweak from me and another from my friend [Chris Thursten](https://twitter.com/CThursten), it’s playing pretty well now! In the video I both explain it and play a full game. I’ll write the rules here, but they’ll make more sense when you see it played:

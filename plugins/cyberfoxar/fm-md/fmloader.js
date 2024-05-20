@@ -1,15 +1,12 @@
 /*\
-title: $:/plugins/cyberfoxar/fm-md/test.js
+title: $:/plugins/cyberfoxar/fm-md/fmloader.js
 type: application/javascript
 module-type: tiddlerLoader
 
-Example API
+Proof-of-concept plugin for a tiddlerloader.
 \*/
 
 (function(){
-    console.log("LOADING TEST tiddlerLoader MODULE LETSGO");
-
-
     /**
      * One thing I might be able to do to 'parse' dendron:
      * use `$tw.utils.parseFields` which parses plaintext fields.
@@ -33,9 +30,6 @@ Example API
      * @returns {$tw.Tiddler} - decoded Tiddler object to be added to the store
      */
     function loadTiddlerFromBinary(filename, fileBuffer, fileSpec){
-        console.log("TiddlerLoaderPlugin asked to load stuff: ", filename, fileBuffer, fileSpec)
-        // throw Error("not implemented")
-
         var lines = fileBuffer.toString().split(/(?:\r\n|\r|\n)/g)
         var fm, text
 
@@ -59,15 +53,10 @@ Example API
         fm = fm ? fm.join('\n') : ""
         var myfields = $tw.utils.parseFields(fm)
 
-        console.log('FRONTMATTER IS:', myfields)
         myfields.text = text
         myfields.type = 'text/markdown'
         myfields.deferredFiletype = 'bin/test-tiddler'
 
-        // var fields = Object.create(null);
-        // fields.text = "TEST TIDDLER DO NOT EAT.";
-        // fields.type = "text/plain";
-        // fields.title = "test/myTiddler/lol"
         return [myfields]
     }
 
@@ -75,25 +64,37 @@ Example API
      * When given a Tiddler, binarize it however we like and gives
      * back a temporary object holding the data.
      * 
-     * @param {string} filename 
+     * @param {string} filePath 
      * @param {$tw.Tiddler} tiddler - tiddler to be binarized
      * @returns {
      *  {
+     *      filePath: string
      *      buffer: Buffer,
-     *      filename: string
      *      fileOptions: {fs.WriteFileOptions | undefined}
      *  }
      * }
      */
-    function makeBinaryFromTiddler(filename, tiddler){
-        throw Error("not implemented")
+    function makeBinaryFromTiddler(filePath, tiddler){
+        // This is a very naive implementation of fences-in-markdown style.
+        // It works, though.
+
+        var fm = tiddler.getFieldStringBlock({exclude: ["text","bag"]});
+        var content = "---\n" + (fm) + "\n---\n" + (!!tiddler.fields.text ? tiddler.fields.text : "")
+
+        return {
+            filePath: filePath,
+            buffer: content,
+            fileOptions: {
+                encoding: "utf8"
+            }
+        }
     }
 
     TiddlerLoaderPlugin.prototype.load = loadTiddlerFromBinary
     TiddlerLoaderPlugin.prototype.save = makeBinaryFromTiddler
 
     function TiddlerLoaderPlugin(){
-        console.log("TiddlerLoaderPlugin init called")
+        // console.log("TiddlerLoaderPlugin init called")
     }
 
     exports["bin/test-tiddler"] = TiddlerLoaderPlugin

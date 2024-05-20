@@ -6,6 +6,7 @@ module-type: startup
 Register tiddlerloader plugins and load deferred tiddlers.
 \*/
 (function(){
+    ospath = require("path");
 
     /*jslint node: true, browser: true */
     /*global $tw: false */
@@ -33,7 +34,6 @@ Register tiddlerloader plugins and load deferred tiddlers.
                 }
             }
         });
-        console.log("deserializerParsers: ", parsers)
 
         var specs = $tw.deferredDirSpecs;
         // console.log("Specs to load: ", specs)
@@ -57,12 +57,21 @@ Register tiddlerloader plugins and load deferred tiddlers.
 
             var tiddlers = $tw.loadTiddlersFromSpecification(path, undefined, true)
             $tw.utils.each(tiddlers,function(tiddlerFile) {
-                console.log("After defer, adding tiddler: ", tiddlerFile.tiddlers)
+                // console.log("After defer, adding tiddler: ", tiddlerFile.tiddlers)
+                $tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
+                    relativePath = ospath.relative($tw.boot.wikiTiddlersPath,tiddlerFile.filepath);
+                    // Keep track of our file tiddlers, so add them to boot.files
+                    $tw.boot.files[tiddler.title] = {
+                        filepath: tiddlerFile.filepath,
+                        type: tiddlerFile.type,
+                        hasMetaFile: tiddlerFile.hasMetaFile,
+                        isEditableFile: tiddlerFile.isEditableFile || tiddlerFile.filepath.indexOf($tw.boot.wikiTiddlersPath) !== 0,
+                        originalpath: relativePath
+                    };
+                });
                 $tw.wiki.addTiddlers(tiddlerFile.tiddlers);
             });
         });
-
-        // console.log("wikiop: ", $tw.wiki.readPluginInfo())
     };
     
     })();
