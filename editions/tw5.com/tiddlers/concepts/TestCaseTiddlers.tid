@@ -1,0 +1,27 @@
+title: TestCaseTiddlers
+modified: 20240507221902644
+created: 20240507221902644
+tags: Concepts
+
+Test case tiddlers encapsulate one or more tiddlers that can be displayed as a [[test case|TestCaseWidget]]: an independent embedded wiki that can be used for testing or learning purposes.
+
+Test case tiddlers are formatted as CompoundTiddlers, allowing them to contain multiple tiddlers packed into one.
+
+Test case tiddlers have the following fields:
+
+|!Field |!Description |
+|<<.field type>> | Should be set to `text/vnd.tiddlywiki-multiple` |
+|<<.field tags>> | Test cases are tagged [[$:/tags/wiki-test-spec]]. Test cases that intentionally fail are tagged [[$:/tags/wiki-test-spec-failing]] |
+|<<.field description>> |Descriptive heading for the test, intended to make it easy to identify the test |
+|<<.field display-format>> |Optional, defaults to `wikitext`. Set to `plaintext` to cause the output to be rended as plain text |
+
+Test case tiddlers with the appropriate tag are shown in $:/ControlPanel
+
+Some payload tiddlers are set aside for special purposes:
+
+|!Tiddler |!Description |
+|''Narrative'' |Narrative description of the test, intended to explain the purpose and operation of the test |
+|''Output'' |The tiddler that produces the test output |
+|''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
+
+
