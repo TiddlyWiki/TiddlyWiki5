@@ -1449,7 +1449,6 @@ $tw.Wiki = function(options) {
 				checkTiddler(tiddler,title);
 			});
 		}
-		console.log("Registered plugins: ", registeredTitles)
 		return registeredTitles;
 	};
 
@@ -1599,8 +1598,6 @@ $tw.Wiki.prototype.processSafeMode = function() {
 
 /*
 Extracts tiddlers from a typed block of text, specifying default field values
-TODO: Look into patching that.
-'k, at this point it's too late. We already have loaded the file in memory. 
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
 	srcFields = srcFields || Object.create(null);
@@ -1902,7 +1899,6 @@ if($tw.node) {
 /*
 Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file) returned as {filepath:,type:,tiddlers:[],hasMetaFile:}
 */
-// TODO: Patch here, maybe ?
 $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
 		extensionInfo = $tw.utils.getFileExtensionInfo(ext),
@@ -1972,7 +1968,6 @@ $tw.deferredDirSpecs = [];
 /*
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
-TODO: If I want to add defer, it would comes from somewhere around here.
 */
 $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,loadDeferred) {
 	var loadDeferred = loadDeferred || false;
@@ -1980,10 +1975,8 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,loadDeferred
 	// Read the specification
 	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 
-	// Helper to fill-in fields from filesystem vars
-	// TODO: See how can use in $tw.utils.each
 	/**
-	 * Fill the tiddler fields with info given in combined fields.
+	 * Helper to fill the tiddler fields with info given in combined fields.
 	 * The combined fields can derive info from file info.
 	 * @param {Object} tiddler tiddle-like object
 	 * @param {Object} combinedFields fields object
@@ -2077,7 +2070,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,loadDeferred
 		return arrayOfFiles;
 	}
 	// Process the listed tiddlers
-	// Should patch, will ignore for now
+	// TODO: Patch for deferred loading
 	$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 		if(tidInfo.prefix && tidInfo.suffix) {
 			tidInfo.fields.text = {prefix: tidInfo.prefix,suffix: tidInfo.suffix};
@@ -2101,14 +2094,13 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,loadDeferred
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(dirSpec.isDeferred && !loadDeferred){
 				$tw.deferredDirSpecs.push({filepath, dirSpec})
-				console.log("Found deferred dir at ", filepath, " - keeping it for later.")
+				// console.log("Found deferred dir at ", filepath, " - keeping it for later.")
 				return; //Skip it, we're in a each
 			}
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
 				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),
 					fileRegExp = new RegExp(dirSpec.filesRegExp || "^.*$"),
 					metaRegExp = /^.*\.meta$/;
-				console.log("Processing files: ", files)
 				for(var t=0; t<files.length; t++) {
 					var thisPath = path.relative(filepath, files[t]),
 					filename = path.basename(thisPath);
@@ -2491,8 +2483,6 @@ $tw.boot.initStartup = function(options) {
 		}
 	}
 	// Add file extension information
-	// Register filetype, can be intresting to look at
-	// $tw.utils.registerFileType("text/test","utf8",".cbr",{deserializerType:"application/x-tiddler"}) //works, but saves as tid, which is expected
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddlers","utf8",".multids");
@@ -2607,7 +2597,6 @@ $tw.boot.execStartup = function(options){
 	$tw.boot.executedStartupModules = Object.create(null);
 	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
-	console.log("===== Initial BOOT done =====");
 	$tw.boot.executeNextStartupTask(options.callback);
 }
 /*

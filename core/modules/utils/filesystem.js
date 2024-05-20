@@ -213,7 +213,6 @@ Options include:
 	extFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters,
 	fileInfo: an existing fileInfo to check against
-TODO: Look into patching there
 */
 exports.generateTiddlerFileInfo = function(tiddler,options) {
 	var fileInfo = {}, metaExt;
@@ -432,7 +431,6 @@ Save a tiddler to a file described by the fileInfo:
 	filepath: the absolute path to the file containing the tiddler
 	type: the type of the tiddler file (NOT the type of the tiddler)
 	hasMetaFile: true if the file also has a companion .meta file
-	TODO: Patch more like here ig ?
 */
 exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
