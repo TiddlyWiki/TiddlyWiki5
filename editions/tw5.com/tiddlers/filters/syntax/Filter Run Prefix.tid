@@ -4,7 +4,7 @@ tags: [[Filter Expression]]
 title: Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-There are 2 types of filter run prefixes that are interchangeable. Named prefixes and shortcut prefixes. 
+There are 2 types of filter run prefixes that are interchangeable; [[named prefixes|Named Filter Run Prefix]] and [[shortcut prefixes|Shortcut Filter Run Prefix]]. 
 
 <$railroad text="""
 \start none
