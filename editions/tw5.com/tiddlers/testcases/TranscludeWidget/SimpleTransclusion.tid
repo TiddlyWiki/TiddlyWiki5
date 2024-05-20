@@ -1,0 +1,23 @@
+title: TestCases/TranscludeWidget/SimpleTransclusion
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Simple transclusion
+
+title: Narrative
+
+This test case demonstrates transclusion of and links to other tiddlers.
++
+title: Output
+
+Good morning, my [[name|Name]] is {{Name}} and I [[live in|Address]] {{Address}}
++
+title: Name
+
+Robert Rabbit
++
+title: Address
+
+14 Carrot Street, Vegetabletown
++
+title: ExpectedResult
+text: <p>Good morning, my <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Name">name</a> is Robert Rabbit and I <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#Address">live in</a> 14 Carrot Street, Vegetabletown</p>
