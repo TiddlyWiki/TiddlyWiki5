@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/data.js
 type: application/javascript
 module-type: widget
 
-Widget to represent a single item of data
+Widget to dynamically represent one or more tiddlers
 
 \*/
 (function(){
@@ -134,10 +134,10 @@ DataWidget.prototype.extractCompoundTiddler = function(title) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DataWidget.prototype.refresh = function(changedTiddlers) {
-	// Refresh our attributes
-	var changedAttributes = this.computeAttributes();
-	// Refresh our children, and indicate that we refreshed if any of our attribute values have changed
-	return this.refreshChildren(changedTiddlers) || $tw.utils.count(changedAttributes) > 0;
+	// It would be expensive to calculate whether the changedTiddlers impact the filter
+	// identified by the $filter attribute so we just refresh ourselves unconditionally
+	this.refreshSelf();
+	return true;
 };
 
 exports.data = DataWidget;

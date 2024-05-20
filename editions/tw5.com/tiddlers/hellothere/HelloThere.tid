@@ -15,8 +15,6 @@ A demo of the geospatial functionality is [ext[available here|./plugins/tiddlywi
 
 It also includes a number of new features that are intended for eventual inclusion in the core:
 
-* TestCaseWidget
-* Enhancements to the existing DataWidget
 * [[jsonset Operator]]
 
 </div>

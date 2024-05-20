@@ -61,8 +61,6 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	}
 	loadTiddler("$:/core");
 	loadTiddler("$:/plugins/tiddlywiki/codemirror");
-	// Load the test case template
-	// loadTiddler(this.testcaseTemplate);
 	// Load tiddlers from child data widgets
 	var tiddlers = [];
 	this.findChildrenDataWidgets(this.contentRoot.children,"data",function(widget) {
@@ -114,6 +112,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		this.setVariable("outputHTML",outputHTML);
 		this.setVariable("expectedHTML",expectedHTML);
 		this.setVariable("testResult",testResult);
+		this.setVariable("currentTiddler",this.testcaseTestOutput);
 	}
 	// Don't display anything if testHideIfPass is "yes" and the tests have passed
 	if(this.testcaseHideIfPass === "yes" && testResult === "pass") {
