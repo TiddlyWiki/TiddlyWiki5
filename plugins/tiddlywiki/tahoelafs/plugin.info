@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/tahoelafs",
 	"name": "TahoeLAFS",
 	"description": "Tahoe-LAFS saver",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_0_DEPRECATED"
 }
