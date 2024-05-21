@@ -5,5 +5,6 @@
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
 	"plugin-priority": "0",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }
