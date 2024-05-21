@@ -1,6 +1,6 @@
-caption: {{$:/language/OfficialPluginLibrary}}
-tags: $:/tags/PluginLibrary
 title: $:/config/OfficialPluginLibrary
-url: https://tiddlywiki5-git-plugin-stability-badges-jermolenes-projects.vercel.app/library/v5.3.3/index.html
+tags: $:/tags/PluginLibrary
+url: https://tiddlywiki.com/library/v5.3.3/index.html
+caption: {{$:/language/OfficialPluginLibrary}}
 
-Plugin library for https://tiddlywiki5-git-plugin-stability-badges-jermolenes-projects.vercel.app
+{{$:/language/OfficialPluginLibrary/Hint}}
