@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/confetti",
 	"name": "Confetti",
 	"description": "Animated confetti effect",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_1_EXPERIMENTAL"
 }

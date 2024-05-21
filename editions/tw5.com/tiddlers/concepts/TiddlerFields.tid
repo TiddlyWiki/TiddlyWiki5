@@ -1,5 +1,5 @@
 created: 20130825213300000
-modified: 20240416103247799
+modified: 20240520162904479
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
@@ -39,6 +39,7 @@ Other fields used by the core are:
 |`name` |<<lingo name>> |
 |`plugin-priority` |<<lingo plugin-priority>> |
 |`plugin-type` |<<lingo plugin-type>> |
+|`stability` |<<lingo stability>> |
 |`source` |<<lingo source>> |
 |`subtitle` |<<lingo subtitle>> |
 |`throttle.refresh` |<<lingo throttle.refresh>> |
