@@ -3,5 +3,6 @@
 	"name": "MultiWikiClient",
 	"description": "Synchronise changes from the browser to TiddlyWiki ~MultiWikiServer",
 	"list": "readme",
-	"plugin-priority": 10
+	"plugin-priority": 10,
+	"stability": "STABILITY_1_EXPERIMENTAL"
 }

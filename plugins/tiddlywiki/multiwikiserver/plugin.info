@@ -3,5 +3,6 @@
 	"name": "Multi Wiki Server",
 	"description": "Multiple Wiki Server Extension",
 	"list": "readme docs",
-	"dependents": []
+	"dependents": [],
+	"stability": "STABILITY_1_EXPERIMENTAL"
 }
