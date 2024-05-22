@@ -18,7 +18,8 @@ var CONFIG_HOST_TIDDLER = "$:/config/multiwikiclient/host",
 	BAG_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/bag",
 	REVISION_STATE_TIDDLER = "$:/state/multiwikiclient/tiddlers/revision",
 	CONNECTION_STATE_TIDDLER = "$:/state/multiwikiclient/connection",
-	INCOMING_UPDATES_FILTER_TIDDLER = "$:/config/multiwikiclient/incoming-updates-filter";
+	INCOMING_UPDATES_FILTER_TIDDLER = "$:/config/multiwikiclient/incoming-updates-filter",
+	ENABLE_SSE_TIDDLER = "$:/config/multiwikiclient/use-server-sent-events";
 
 var SERVER_NOT_CONNECTED = "NOT CONNECTED",
 	SERVER_CONNECTING_SSE = "CONNECTING SSE",
@@ -29,6 +30,7 @@ function MultiWikiClientAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
 	this.recipe = this.wiki.getTiddlerText("$:/config/multiwikiclient/recipe");
+	this.useServerSentEvents = this.wiki.getTiddlerText(ENABLE_SSE_TIDDLER) === "yes";
 	this.last_known_tiddler_id = $tw.utils.parseNumber(this.wiki.getTiddlerText("$:/state/multiwikiclient/recipe/last_tiddler_id","0"));
 	this.logger = new $tw.utils.Logger("MultiWikiClientAdaptor");
 	this.isLoggedIn = false;
@@ -126,46 +128,46 @@ MultiWikiClientAdaptor.prototype.getStatus = function(callback) {
 Get details of changed tiddlers from the server
 */
 MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) {
-	// Temporary override to disable SSE
-	this.pollServer({
-		callback: function(err,changes) {
-			callback(null,changes);
-		}
-	});
-	return;
-	// Disabled SSE code
-	var self = this;
-	// Do nothing if there's already a connection in progress.
-	if(this.serverUpdateConnectionStatus !== SERVER_NOT_CONNECTED) {
-		return callback(null,{
-			modifications: [],
-			deletions: []
-		});
-	}
-	// Try to connect a server stream
-	this.setUpdateConnectionStatus(SERVER_CONNECTING_SSE);
-	this.connectServerStream({
-		syncer: syncer,
-		onerror: function(err) {
-			self.logger.log("Error connecting SSE stream",err);
-			// If the stream didn't work, try polling
-			self.setUpdateConnectionStatus(SERVER_POLLING);
-			self.pollServer({
-				callback: function(err,changes) {
-					self.setUpdateConnectionStatus(SERVER_NOT_CONNECTED);
-					callback(null,changes);
-				}
-			});
-		},
-		onopen: function() {
-			self.setUpdateConnectionStatus(SERVER_CONNECTED_SSE);
-			// The syncer is expecting a callback but we don't have any data to send
-			callback(null,{
+	if(this.useServerSentEvents) {
+		var self = this;
+		// Do nothing if there's already a connection in progress.
+		if(this.serverUpdateConnectionStatus !== SERVER_NOT_CONNECTED) {
+			return callback(null,{
 				modifications: [],
 				deletions: []
 			});
 		}
-	});
+		// Try to connect a server stream
+		this.setUpdateConnectionStatus(SERVER_CONNECTING_SSE);
+		this.connectServerStream({
+			syncer: syncer,
+			onerror: function(err) {
+				self.logger.log("Error connecting SSE stream",err);
+				// If the stream didn't work, try polling
+				self.setUpdateConnectionStatus(SERVER_POLLING);
+				self.pollServer({
+					callback: function(err,changes) {
+						self.setUpdateConnectionStatus(SERVER_NOT_CONNECTED);
+						callback(null,changes);
+					}
+				});
+			},
+			onopen: function() {
+				self.setUpdateConnectionStatus(SERVER_CONNECTED_SSE);
+				// The syncer is expecting a callback but we don't have any data to send
+				callback(null,{
+					modifications: [],
+					deletions: []
+				});
+			}
+		});
+	} else {
+		this.pollServer({
+			callback: function(err,changes) {
+				callback(null,changes);
+			}
+		});	
+	}
 };
 
 /*
