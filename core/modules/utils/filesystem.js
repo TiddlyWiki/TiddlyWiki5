@@ -459,7 +459,9 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 			});
 		} else {
 			// If we have a deferred filetype, call parser first and then save.
-			var content, fileOptions = "utf8", filepath = fileInfo.filepath;
+			var content, 
+				fileOptions = "utf8", 
+				filepath = fileInfo.filepath;
 			if(fileInfo.deferredFiletype) {
 				var loader = new $tw.deserializerParsers[fileInfo.deferredFiletype]();
 				var binContent = loader.save(fileInfo.filepath, tiddler);

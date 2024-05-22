@@ -1,6 +1,0 @@
-{
-	"title": "$:/plugins/cyberfoxar/fm-md",
-	"description": "A PoC plugin for frontmatter loading and showing off deferred loading",
-	"author": "CyberFoxar",
-	"version": "0.0.1"
-}

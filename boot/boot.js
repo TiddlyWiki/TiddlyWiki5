@@ -1968,9 +1968,12 @@ $tw.deferredDirSpecs = [];
 /*
 Load all the tiddlers defined by a `tiddlywiki.files` specification file
 filepath: pathname of the directory containing the specification file
+options:
+	loadDeferred {bool|undefined}: wheter or not to load the tiddlers marked as "deferred" in the specification.
 */
-$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,loadDeferred) {
-	var loadDeferred = loadDeferred || false;
+$tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,options) {
+	options = options || {};
+	var loadDeferred = options.loadDeferred || false;
 	var tiddlers = [];
 	// Read the specification
 	var filesInfo = $tw.utils.parseJSONSafe(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
