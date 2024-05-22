@@ -126,6 +126,14 @@ MultiWikiClientAdaptor.prototype.getStatus = function(callback) {
 Get details of changed tiddlers from the server
 */
 MultiWikiClientAdaptor.prototype.getUpdatedTiddlers = function(syncer,callback) {
+	// Temporary override to disable SSE
+	this.pollServer({
+		callback: function(err,changes) {
+			callback(null,changes);
+		}
+	});
+	return;
+	// Disabled SSE code
 	var self = this;
 	// Do nothing if there's already a connection in progress.
 	if(this.serverUpdateConnectionStatus !== SERVER_NOT_CONNECTED) {
