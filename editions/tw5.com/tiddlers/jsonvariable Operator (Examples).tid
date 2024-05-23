@@ -1,5 +1,5 @@
 created: 20240506132850677
-modified: 20240506151551620
+modified: 20240523052607425
 tags: [[Operator Examples]] [[jsonvariables Operator]]
 title: jsonvariables Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -30,7 +30,7 @@ The following example extracts the ''function definition'' using the <<.olink js
 <pre><code><$text text={{{[[fn.test]jsonvariables[]jsonextract[srcVariable],[value]]}}}/></code></pre>
 """>>
 
-The following example extracts the `srcVariables.params` without pretty printing using <<.olink jsonextract>>
+The following example extracts the `srcVariables.params` with pretty printing using <<.olink jsonextract>>
 
 <<.example 4 """\procedure testProc() [[aa aa]] bb
 \function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
