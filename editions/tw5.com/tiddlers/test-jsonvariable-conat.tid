@@ -1,35 +1,35 @@
 created: 20240506101435113
 modified: 20240506140610448
 tags: 
-title: test-jsonvariable-conat
+title: test-jsonvariables-conat
 type: text/vnd.tiddlywiki
 
 ''Nice to have''
 
 <<.example 1 """\function tab() [charcode[9]]
 
-<pre><$text text={{{[[.concat]jsonvariable[]]}}}/></pre>
+<pre><$text text={{{[[.concat]jsonvariables[]]}}}/></pre>
 """>>
 
 ''Human readable version''
 
 <<.example 2 """\function tab() [charcode[9]]
 
-<pre><$text text={{{[[.concat]jsonvariable[]format:json<tab>]}}}/></pre>
+<pre><$text text={{{[[.concat]jsonvariables[]format:json<tab>]}}}/></pre>
 """>>
 
 ''Function definition''
 
 <<.example 3 """\function tab() [charcode[9]]
 
-<pre><$text text={{{[[.concat]jsonvariable[]jsonextract[srcVariable],[value]format:json<tab>]}}}/></pre>
+<pre><$text text={{{[[.concat]jsonvariables[]jsonextract[srcVariable],[value]format:json<tab>]}}}/></pre>
 """>>
 
 ''Get parameters''
 
 <<.example 4 """\function tab() [charcode[9]]
 
-<pre><$text text={{{[[.concat]jsonvariable[]jsonextract[srcVariable],[params]format:json<tab>]}}}/></pre>
+<pre><$text text={{{[[.concat]jsonvariables[]jsonextract[srcVariable],[params]format:json<tab>]}}}/></pre>
 """>>
 
 ''Expected''

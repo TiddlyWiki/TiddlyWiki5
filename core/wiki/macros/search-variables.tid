@@ -56,7 +56,7 @@ tags: $:/tags/Global
 			<li>
 				<code title={{$:/language/Search/Variables/Signature}}><$text text=<<wlf.dv-formattedVar>>/></code><br/>
 				<% if [<wlf.dv-formattedVar>prefix[\function]] %>
-					<pre title={{$:/language/Search/Variables/Function/Definition}}><code><$text text={{{ [<varname>jsonvariable[]jsonextract[srcVariable],[value]] }}}/></code></pre>
+					<pre title={{$:/language/Search/Variables/Function/Definition}}><code><$text text={{{ [<varname>jsonvariables[]jsonextract[srcVariable],[value]] }}}/></code></pre>
 				<% endif %>
 				<pre title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
 			</li>
@@ -235,7 +235,7 @@ tags: $:/tags/Global
 						<<dv-info>>
 					<% endif %>
 					<% if [<varname>prefix[\function]] %>
-						<$codeblock code={{{ [<varname>jsonvariable[]jsonextract[srcVariable],[value]] }}}/>
+						<$codeblock code={{{ [<varname>jsonvariables[]jsonextract[srcVariable],[value]] }}}/>
 					<% endif %>
 					<pre tabindex="0" title={{$:/language/Search/Variables/Content}}><code><$text text={{{ [<varname>getvariable[]] }}}/></code></pre>
 				</blockquote>
