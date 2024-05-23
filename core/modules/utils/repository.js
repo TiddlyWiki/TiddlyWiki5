@@ -43,9 +43,9 @@ exports.getAllPlugins = function(options) {
 				}
 			}
 		};
-	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,options.ignoreEnvironmentVariables ? "" : $tw.config.pluginsEnvVar),collectPublisherPlugins);
-	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,options.ignoreEnvironmentVariables ? "" : $tw.config.themesEnvVar),collectPublisherPlugins);
-	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,options.ignoreEnvironmentVariables ? "" : $tw.config.languagesEnvVar),collectPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.pluginsEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.themesEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.languagesEnvVar),collectPlugins);
 	return tiddlers;
 };
 
