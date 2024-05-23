@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/filters/jsonvariables.js
+title: $:/core/modules/filters/jsonvariable.js
 type: application/javascript
 module-type: filteroperator
 
@@ -16,7 +16,7 @@ Display as JSON with basic formatting
 /*
 Export our filter function
 */
-exports.jsonvariables = function(source,operator,options) {
+exports.jsonvariable = function(source,operator,options) {
 	var results = [],
 		widget = options.widget;
 	// "replacer" must be defined, otherwise JSON.stringify will throw a circular reference error RSOD

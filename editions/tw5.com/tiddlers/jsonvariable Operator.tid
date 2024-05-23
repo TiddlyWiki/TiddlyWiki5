@@ -1,4 +1,4 @@
-caption: jsonvariables
+caption: jsonvariable
 created: 20240506131935424
 modified: 20240506151517068
 op-input: a selection variable names
@@ -7,7 +7,7 @@ op-parameter: one or more indexes of the property to retrieve
 op-parameter-name: R
 op-purpose: retrieve the JSON string from a ~TiddlyWiki variable
 tags: [[Filter Operators]] [[JSON Operators]]
-title: jsonvariables Operator
+title: jsonvariable Operator
 type: text/vnd.tiddlywiki
 
 \procedure testProc() [[aa aa]] bb
@@ -16,9 +16,9 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.3.4">>
 
-The <<.op jsonvariables>> operator is used to retrieve variables as JSON substrings. See also the following related operators:
+The <<.op jsonvariable>> operator is used to retrieve variables as JSON substrings. See also the following related operators:
 
-Properties within a JSON object are identified by a sequence of indexes. In the following example, we use a procedure: `testProc` and a function: `fn.test` to show the possibilities of <<.op jsonvariables>>. The `tab`-function is needed for the <<.olink format>> ooperator, which is used to "pretty-print" the output.
+Properties within a JSON object are identified by a sequence of indexes. In the following example, we use a procedure: `testProc` and a function: `fn.test` to show the possibilities of <<.op jsonvariable>>. The `tab`-function is needed for the <<.olink format>> ooperator, which is used to "pretty-print" the output.
 
 ```
 \procedure testProc() [[aa aa]] bb
@@ -26,12 +26,12 @@ Properties within a JSON object are identified by a sequence of indexes. In the 
 
 \function tab() [charcode[9]]
 
-<pre><code><$text text={{{[[fn.test]jsonvariables[]format:json<tab>]}}}/></code></pre>
+<pre><code><$text text={{{[[fn.test]jsonvariable[]format:json<tab>]}}}/></code></pre>
 ```
 
 Which results to:
 
-<pre><code><$text text={{{[[fn.test]jsonvariables[]format:json<tab>]}}}/></code></pre>
+<pre><code><$text text={{{[[fn.test]jsonvariable[]format:json<tab>]}}}/></code></pre>
 
 Also see:
 
@@ -42,4 +42,4 @@ Also see:
 
 Every TW variable has this internal structure, which we can use to extract the info we need. 
 
-!! <<.operator-examples "jsonvariables">>
+!! <<.operator-examples "jsonvariable">>
