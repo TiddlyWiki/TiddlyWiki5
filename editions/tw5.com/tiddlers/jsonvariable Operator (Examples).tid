@@ -1,0 +1,41 @@
+created: 20240506132850677
+modified: 20240523052607425
+tags: [[Operator Examples]] [[jsonvariables Operator]]
+title: jsonvariables Operator (Examples)
+type: text/vnd.tiddlywiki
+
+The following example shows the "internal" structure of the `fn.test` function defined in <<.olink jsonvariables>> operator
+
+<<.example 1 """\procedure testProc() [[aa aa]] bb
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
+
+<pre><code><$text text={{{[[fn.test]jsonvariables[]]}}}/></code></pre>
+""">>
+
+The following example shows the same structure ''pretty printed'' using the <<.olink format>> filter operator
+
+<<.example 2 """\procedure testProc() [[aa aa]] bb
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
+
+\function tab() [charcode[9]]
+
+<pre><code><$text text={{{[[fn.test]jsonvariables[]format:json<tab>]}}}/></code></pre>
+""">>
+
+The following example extracts the ''function definition'' using the <<.olink jsonextract>> filter operator
+
+<<.example 3 """\procedure testProc() [[aa aa]] bb
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
+
+<pre><code><$text text={{{[[fn.test]jsonvariables[]jsonextract[srcVariable],[value]]}}}/></code></pre>
+""">>
+
+The following example extracts the `srcVariables.params` with pretty printing using <<.olink jsonextract>>
+
+<<.example 4 """\procedure testProc() [[aa aa]] bb
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
+
+\function tab() [charcode[9]]
+
+<pre><code><$text text={{{[[fn.test]jsonvariables[]jsonextract[srcVariable],[params]format:json<tab>]}}}/></code></pre>""">>
+

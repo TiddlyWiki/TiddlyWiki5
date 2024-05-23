@@ -1,0 +1,45 @@
+caption: jsonvariables
+created: 20240506131935424
+modified: 20240523053415687
+op-input: a selection variable names
+op-output: the JSON string values of each of the retrieved properties
+op-parameter: one or more indexes of the property to retrieve
+op-parameter-name: R
+op-purpose: retrieve the JSON string from a ~TiddlyWiki variable
+tags: [[Filter Operators]] [[JSON Operators]]
+title: jsonvariables Operator
+type: text/vnd.tiddlywiki
+
+\procedure testProc() [[aa aa]] bb
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
+\function tab() [charcode[9]]
+
+<<.from-version "5.3.4">>
+
+The <<.op jsonvariables>> operator is used to retrieve variables as JSON substrings. See also the following related operators:
+
+Properties within a JSON object are identified by a sequence of indexes. In the following example, we use a procedure: `testProc` and a function: `fn.test` to show the possibilities of <<.op jsonvariables>>. The `tab`-function is needed for the <<.olink format>> ooperator, which is used to "pretty-print" the output.
+
+```
+\procedure testProc() [[aa aa]] bb
+\function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
+
+\function tab() [charcode[9]]
+
+<pre><code><$text text={{{[[fn.test]jsonvariables[]format:json<tab>]}}}/></code></pre>
+```
+
+Which results to:
+
+<pre><code><$text text={{{[[fn.test]jsonvariables[]format:json<tab>]}}}/></code></pre>
+
+Also see:
+
+* <<.olink jsonextract>> to retrieve a JSON value as a string of JSON
+* <<.olink jsonget>> to retrieve the values of a property in JSON data
+* <<.olink jsontype>> to retrieve the type of a JSON value
+* <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+
+Every TW variable has this internal structure, which we can use to extract the info we need. 
+
+!! <<.operator-examples "jsonvariables">>
