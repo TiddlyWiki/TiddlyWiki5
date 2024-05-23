@@ -19,6 +19,7 @@ Options:
 ignoreEnvironmentVariables: defaults to false
 */
 exports.getAllPlugins = function(options) {
+	options = options || {};
 	var fs = require("fs"),
 		path = require("path"),
 		tiddlers = {};
