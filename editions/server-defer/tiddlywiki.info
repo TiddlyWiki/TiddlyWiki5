@@ -1,9 +1,11 @@
 {
-	"description": "Basic client-server edition",
+	"description": "Basic client-server edition, showing off deferred loading",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
-		"tiddlywiki/highlight"
+		"tiddlywiki/highlight",
+		"tiddlywiki/markdown",
+		"cyberfoxar/frontmatter-tiddler"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
