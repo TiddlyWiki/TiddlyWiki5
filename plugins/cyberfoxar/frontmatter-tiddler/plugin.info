@@ -2,5 +2,6 @@
 	"title": "$:/plugins/cyberfoxar/frontmatter-tiddler",
 	"description": "A PoC plugin for loading and saving a text-based tiddlers as a unified file with frontmatter meta and showing off deferred loading",
 	"author": "CyberFoxar",
-	"version": "0.0.1"
+	"version": "0.0.1",
+	"stability": "STABILITY_1_EXPERIMENTAL"
 }
