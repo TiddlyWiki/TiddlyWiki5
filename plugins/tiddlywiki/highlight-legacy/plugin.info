@@ -3,5 +3,6 @@
 	"name": "Highlight (Legacy)",
 	"description": "Highlight.js syntax highlighting for legacy browsers",
 	"author": "Joao Bolila",
-	"list": "readme usage license"
+	"list": "readme usage license",
+	"stability": "STABILITY_3_LEGACY"
 }
