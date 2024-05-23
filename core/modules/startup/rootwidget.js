@@ -68,7 +68,10 @@ exports.startup = function() {
 	});
 	// Install the copy-to-clipboard  mechanism
 	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
-		$tw.utils.copyToClipboard(event.param);
+		$tw.utils.copyToClipboard(event.param,{
+			successNotification: event.paramObject.successNotification,
+			failureNotification: event.paramObject.failureNotification
+		});
 	});
 	// Install the tm-focus-selector message
 	$tw.rootWidget.addEventListener("tm-focus-selector",function(event) {
