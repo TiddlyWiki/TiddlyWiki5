@@ -22,22 +22,30 @@ if($tw.node) {
 		describe("every plugin should have the required standard fields", function() {
 			var titles = Object.keys(tiddlers);
 			$tw.utils.each(titles,function(title) {
-				it("plugin " + title + " should have the required standard fields",function() {
-					var fields = tiddlers[title];
-					expect(fields["plugin-type"]).toMatch(/^(?:plugin|language|theme)$/);
-					switch(fields["plugin-type"]) {
-						case "plugin":
-							expect(!!(fields.name && fields.description && fields.list)).toEqual(true);
-							expect(fields.stability).toMatch(/^(?:STABILITY_0_DEPRECATED|STABILITY_1_EXPERIMENTAL|STABILITY_2_STABLE|STABILITY_3_LEGACY)$/);
-							break;
-						case "language":
-							expect(!!(fields.name && fields.description)).toEqual(true);
-							break;
-						case "theme":
-							expect(!!(fields.name && fields.description)).toEqual(true);
-							break;
-						}
+				var fields = tiddlers[title];
+				it("plugin should have a recognised plugin-type field",function() {
+					expect(["plugin","language","theme"].indexOf(fields["plugin-type"]) !== -1).toEqual(true);
 				});
+				switch(fields["plugin-type"]) {
+					case "plugin":
+						it("plugin " + title + " should have name, description and list fields",function() {
+							expect(!!(fields.name && fields.description && fields.list)).toBe(true);
+						});
+						it("plugin " + title + " should have a valid stability field",function() {
+							expect(["STABILITY_0_DEPRECATED","STABILITY_1_EXPERIMENTAL","STABILITY_2_STABLE","STABILITY_3_LEGACY"].indexOf(fields.stability) !== -1).toBe(true);
+						});
+						break;
+					case "language":
+						it("language " + title + " should have name and description fields",function() {
+							expect(!!(fields.name && fields.description)).toEqual(true);
+						});
+						break;
+					case "theme":
+						it("theme " + title + " should have name and description fields",function() {
+							expect(!!(fields.name && fields.description)).toEqual(true);
+						});
+						break;
+				}
 			});
 		});
 	});
