@@ -12,9 +12,6 @@ Widget base class
 /*global $tw: false */
 "use strict";
 
-/* Maximum permitted depth of the widget tree for recursion detection */
-var MAX_WIDGET_TREE_DEPTH = 1000;
-
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -494,10 +491,8 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	this.children = [];
 	var self = this;
 	// Check for too much recursion
-	if(this.getAncestorCount() > MAX_WIDGET_TREE_DEPTH) {
-		this.children.push(this.makeChildWidget({type: "error", attributes: {
-			"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
-		}}));
+	if(this.getAncestorCount() > $tw.utils.TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH) {
+		throw new $tw.utils.TranscludeRecursionError();
 	} else {
 		// Create set variable widgets for each variable
 		$tw.utils.each(options.variables,function(value,name) {
