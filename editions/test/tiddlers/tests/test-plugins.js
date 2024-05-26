@@ -17,7 +17,7 @@ if($tw.node) {
 	describe("Plugin tests", function() {
 
 		// Get all the plugins as a hashmap by title of a JSON string with the plugin content
-		var tiddlers = $tw.utils.getAllPlugins();
+		var tiddlers = $tw.utils.getAllPlugins({ignoreEnvironmentVariables: true});
 		// console.log(JSON.stringify(Object.keys(tiddlers),null,4));
 		describe("every plugin should have the required standard fields", function() {
 			var titles = Object.keys(tiddlers);
