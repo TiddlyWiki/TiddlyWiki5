@@ -1,0 +1,35 @@
+{
+	"tiddlers": [
+		{
+			"file": "sjcl.js",
+			"fields": {
+				"title": "$:/library/sjcl.js",
+				"type": "application/javascript",
+				"library": "yes"
+			},
+			"prefix": "(function(define) {\n",
+			"suffix": "\n})(function (_,defined){window.sjcl = defined()})\n"
+		},
+		{
+			"file": "boot.js",
+			"fields": {
+				"title": "$:/boot/boot.js",
+				"type": "application/javascript"
+			}
+		},
+		{
+			"file": "bootprefix.js",
+			"fields": {
+				"title": "$:/boot/bootprefix.js",
+				"type": "application/javascript"
+			}
+		},
+		{
+			"file": "boot.css.tid",
+			"fields": {
+				"title": "$:/boot/boot.css",
+				"type": "text/css"
+			}
+		}
+	]
+}
