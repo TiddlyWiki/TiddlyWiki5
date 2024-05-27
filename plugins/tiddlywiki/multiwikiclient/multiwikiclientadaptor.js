@@ -3,7 +3,15 @@ title: $:/plugins/tiddlywiki/multiwikiclient/multiwikiclientadaptor.js
 type: application/javascript
 module-type: syncadaptor
 
-A sync adaptor module for synchronising with MultiWikiServer-compatible servers
+A sync adaptor module for synchronising with MultiWikiServer-compatible servers. It has three key areas of concern:
+
+* Basic operations like put, get, and delete a tiddler on the server
+* Real time updates from the server (handled by SSE)
+* Managing login/logout (not yet implemeneted)
+* Bags and recipes, which are unknown to the syncer
+
+A key aspect of the design is that the syncer never overlaps basic server operations; it waits for the
+previous operation to complete before sending a new one.
 
 \*/
 (function(){
@@ -32,6 +40,8 @@ function MultiWikiClientAdaptor(options) {
 	this.recipe = this.wiki.getTiddlerText("$:/config/multiwikiclient/recipe");
 	this.useServerSentEvents = this.wiki.getTiddlerText(ENABLE_SSE_TIDDLER) === "yes";
 	this.last_known_tiddler_id = $tw.utils.parseNumber(this.wiki.getTiddlerText("$:/state/multiwikiclient/recipe/last_tiddler_id","0"));
+	this.outstandingRequests = Object.create(null); // Hashmap by title of outstanding request object: {type: "PUT"|"GET"|"DELETE"}
+	this.lastRecordedUpdate = Object.create(null); // Hashmap by title of last recorded update via SSE: {type: "update"|"detetion", tiddler_id:}
 	this.logger = new $tw.utils.Logger("MultiWikiClientAdaptor");
 	this.isLoggedIn = false;
 	this.isReadOnly = false;
@@ -194,21 +204,30 @@ MultiWikiClientAdaptor.prototype.connectServerStream = function(options) {
 		const data = $tw.utils.parseJSONSafe(event.data);
 		if(data) {
 			console.log("SSE data",data)
+			// Update last seen tiddler_id
 			if(data.tiddler_id > self.last_known_tiddler_id) {
 				self.last_known_tiddler_id = data.tiddler_id;
 			}
-			if(data.is_deleted) {
-				self.removeTiddlerInfo(data.title);
-				delete options.syncer.tiddlerInfo[data.title];
-				options.syncer.logger.log("Deleting tiddler missing from server:",data.title);
-				options.syncer.wiki.deleteTiddler(data.title);
-				options.syncer.processTaskQueue();
-			} else {
-				var result = self.incomingUpdatesFilterFn.call(self.wiki,self.wiki.makeTiddlerIterator([data.title]));
-				if(result.length > 0) {
-					self.setTiddlerInfo(data.title,data.tiddler_id,data.bag_name);
-					options.syncer.storeTiddler(data.tiddler);	
-				}
+			// Record the last update to this tiddler
+			self.lastRecordedUpdate[data.title] = {
+				type: data.is_deleted ? "deletion" : "update",
+				tiddler_id: data.tiddler_id
+			};
+			// Process the update if the tiddler is not the subject of an outstanding request
+			if(!self.outstandingRequests[data.title]) {
+				if(data.is_deleted) {
+					self.removeTiddlerInfo(data.title);
+					delete options.syncer.tiddlerInfo[data.title];
+					options.syncer.logger.log("Deleting tiddler missing from server:",data.title);
+					options.syncer.wiki.deleteTiddler(data.title);
+					options.syncer.processTaskQueue();
+				} else {
+					var result = self.incomingUpdatesFilterFn.call(self.wiki,self.wiki.makeTiddlerIterator([data.title]));
+					if(result.length > 0) {
+						self.setTiddlerInfo(data.title,data.tiddler_id,data.bag_name);
+						options.syncer.storeTiddler(data.tiddler);	
+					}
+				}	
 			}
 		}
 	});
@@ -262,31 +281,39 @@ MultiWikiClientAdaptor.prototype.pollServer = function(options) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
-	var self = this;
-	if(this.isReadOnly || tiddler.fields.title.substr(0,MWC_STATE_TIDDLER_PREFIX.length) === MWC_STATE_TIDDLER_PREFIX) {
+	var self = this,
+		title = tiddler.fields.title;
+	if(this.isReadOnly || title.substr(0,MWC_STATE_TIDDLER_PREFIX.length) === MWC_STATE_TIDDLER_PREFIX) {
 		return callback(null);
 	}
+	self.outstandingRequests[title] = {type: "PUT"};
 	$tw.utils.httpRequest({
-		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
+		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
 		type: "PUT",
 		headers: {
 			"Content-type": "application/json"
 		},
 		data: JSON.stringify(tiddler.getFieldStrings()),
 		callback: function(err,data,request) {
+			delete self.outstandingRequests.title;
 			if(err) {
 				return callback(err);
 			}
 			//If Browser-Storage plugin is present, remove tiddler from local storage after successful sync to the server
 			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
-				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title)
+				$tw.browserStorage.removeTiddlerFromLocalStorage(title)
 			}
 			// Save the details of the new revision of the tiddler
 			var revision = request.getResponseHeader("X-Revision-Number"),
 				bag_name = request.getResponseHeader("X-Bag-Name");
-console.log(`Saved ${tiddler.fields.title} with revision ${revision} and bag ${bag_name}`)
+console.log(`Saved ${title} with revision ${revision} and bag ${bag_name}`)
+			// If there has been a more recent update from the server then enqueue a load of this tiddler
+			var lru = self.lastRecordedUpdate[title];
+			if(lru && lru.tiddler_id > revision) {
+				options.syncer.enqueueLoadTiddler(title);
+			}
 			// Invoke the callback
-			self.setTiddlerInfo(tiddler.fields.title,revision,bag_name);
+			self.setTiddlerInfo(title,revision,bag_name);
 			callback(null,{bag: bag_name},revision);
 		}
 	});
@@ -295,19 +322,26 @@ console.log(`Saved ${tiddler.fields.title} with revision ${revision} and bag ${b
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
 */
-MultiWikiClientAdaptor.prototype.loadTiddler = function(title,callback) {
+MultiWikiClientAdaptor.prototype.loadTiddler = function(title,callback,options) {
 	var self = this;
+	self.outstandingRequests[title] = {type: "GET"};
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
 		callback: function(err,data,request) {
+			delete self.outstandingRequests.title;
 			if(err === 404) {
 				return callback(null,null);
 			} else if(err) {
 				return callback(err);
 			}
-			// Invoke the callback
 			var revision = request.getResponseHeader("X-Revision-Number"),
 				bag_name = request.getResponseHeader("X-Bag-Name");
+			// If there has been a more recent update from the server then enqueue a load of this tiddler
+			var lru = self.lastRecordedUpdate[title];
+			if(lru && lru.tiddler_id > revision) {
+				options.syncer.enqueueLoadTiddler(title);
+			}
+			// Invoke the callback
 			self.setTiddlerInfo(title,revision,bag_name);
 			callback(null,$tw.utils.parseJSONSafe(data));
 		}
@@ -329,13 +363,21 @@ MultiWikiClientAdaptor.prototype.deleteTiddler = function(title,callback,options
 	if(!bag) {
 		return callback(null,options.tiddlerInfo.adaptorInfo);
 	}
+	self.outstandingRequests[title] = {type: "DELETE"};
 	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
 		url: this.host + "bags/" + encodeURIComponent(bag) + "/tiddlers/" + encodeURIComponent(title),
 		type: "DELETE",
 		callback: function(err,data,request) {
+			delete self.outstandingRequests.title;
 			if(err) {
 				return callback(err);
+			}
+			var revision = request.getResponseHeader("X-Revision-Number");
+			// If there has been a more recent update from the server then enqueue a load of this tiddler
+			var lru = self.lastRecordedUpdate[title];
+			if(lru && lru.tiddler_id > revision) {
+				options.syncer.enqueueLoadTiddler(title);
 			}
 			self.removeTiddlerInfo(title);
 			// Invoke the callback & return null adaptorInfo

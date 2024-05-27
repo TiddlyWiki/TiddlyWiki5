@@ -2,4 +2,4 @@ title: $:/plugins/multiwikiclient/SideBarSegment
 tags: $:/tags/SideBarSegment
 list-before: $:/core/ui/SideBarSegments/page-controls
 
-<!-- MWS Connection Status: {{$:/state/multiwikiclient/connection}} -->
+MWS Connection Status: {{$:/state/multiwikiclient/connection}}

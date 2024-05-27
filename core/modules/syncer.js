@@ -560,6 +560,7 @@ SaveTiddlerTask.prototype.run = function(callback) {
 			// Invoke the callback
 			callback(null);
 		},{
+			syncer: self.syncer,
 			tiddlerInfo: self.syncer.tiddlerInfo[self.title]
 		});
 	} else {
@@ -590,6 +591,7 @@ DeleteTiddlerTask.prototype.run = function(callback) {
 		// Invoke the callback
 		callback(null);
 	},{
+		syncer: self.syncer,
 		tiddlerInfo: self.syncer.tiddlerInfo[this.title]
 	});
 };
@@ -618,6 +620,8 @@ LoadTiddlerTask.prototype.run = function(callback) {
 		}
 		// Invoke the callback
 		callback(null);
+	},{
+		syncer: self.syncer
 	});
 };
 
