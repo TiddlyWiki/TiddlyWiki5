@@ -278,6 +278,20 @@ MultiWikiClientAdaptor.prototype.pollServer = function(options) {
 };
 
 /*
+Queue a load for a tiddler if there has been an update for it since the specified revision
+*/
+MultiWikiClientAdaptor.prototype.checkLastRecordedUpdate = function(title,revision,syncer) {
+	var lru = this.lastRecordedUpdate[title];
+	if(lru) {
+		var numTiddlerId = $tw.utils.parseNumber(lru.tiddler_id),
+			numRevision = $tw.utils.parseNumber(revision);
+		if(numTiddlerId > numRevision) {
+			options.syncer.enqueueLoadTiddler(title);
+		}
+	}
+}
+
+/*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
@@ -308,10 +322,7 @@ MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options
 				bag_name = request.getResponseHeader("X-Bag-Name");
 console.log(`Saved ${title} with revision ${revision} and bag ${bag_name}`)
 			// If there has been a more recent update from the server then enqueue a load of this tiddler
-			var lru = self.lastRecordedUpdate[title];
-			if(lru && lru.tiddler_id > revision) {
-				options.syncer.enqueueLoadTiddler(title);
-			}
+			self.checkLastRecordedUpdate(title,revision,options.syncer);
 			// Invoke the callback
 			self.setTiddlerInfo(title,revision,bag_name);
 			callback(null,{bag: bag_name},revision);
@@ -337,10 +348,7 @@ MultiWikiClientAdaptor.prototype.loadTiddler = function(title,callback,options) 
 			var revision = request.getResponseHeader("X-Revision-Number"),
 				bag_name = request.getResponseHeader("X-Bag-Name");
 			// If there has been a more recent update from the server then enqueue a load of this tiddler
-			var lru = self.lastRecordedUpdate[title];
-			if(lru && lru.tiddler_id > revision) {
-				options.syncer.enqueueLoadTiddler(title);
-			}
+			self.checkLastRecordedUpdate(title,revision,options.syncer);
 			// Invoke the callback
 			self.setTiddlerInfo(title,revision,bag_name);
 			callback(null,$tw.utils.parseJSONSafe(data));
@@ -375,10 +383,7 @@ MultiWikiClientAdaptor.prototype.deleteTiddler = function(title,callback,options
 			}
 			var revision = request.getResponseHeader("X-Revision-Number");
 			// If there has been a more recent update from the server then enqueue a load of this tiddler
-			var lru = self.lastRecordedUpdate[title];
-			if(lru && lru.tiddler_id > revision) {
-				options.syncer.enqueueLoadTiddler(title);
-			}
+			self.checkLastRecordedUpdate(title,revision,options.syncer);
 			self.removeTiddlerInfo(title);
 			// Invoke the callback & return null adaptorInfo
 			callback(null,null);
