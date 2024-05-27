@@ -25,7 +25,7 @@
 			}
 		},
 		{
-			"file": "boot.css.tid",
+			"file": "boot.css",
 			"fields": {
 				"title": "$:/boot/boot.css",
 				"type": "text/css"
