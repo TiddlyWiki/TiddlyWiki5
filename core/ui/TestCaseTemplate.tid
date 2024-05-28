@@ -5,6 +5,7 @@ title: $:/core/ui/TestCaseTemplate
 <$let
 	linkTarget="yes"
 	displayFormat={{!!display-format}}
+	testcaseTiddler=<<currentTiddler>>
 >
 	<$testcase
 		testOutput="Output"
