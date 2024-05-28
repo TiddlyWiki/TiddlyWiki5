@@ -2,4 +2,8 @@ title: $:/plugins/multiwikiclient/SideBarSegment
 tags: $:/tags/SideBarSegment
 list-before: $:/core/ui/SideBarSegments/page-controls
 
+<%if [{$:/config/multiwikiclient/use-server-sent-events}match[yes]] %>
+
 MWS Connection Status: {{$:/state/multiwikiclient/connection}}
+
+<%endif%>
