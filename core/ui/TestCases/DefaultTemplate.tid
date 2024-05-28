@@ -55,7 +55,9 @@ title: $:/core/ui/testcases/DefaultTemplate
 					<pre><$view tiddler="Output" format="plainwikified" mode="block"/></pre>
 				<%else%>
 					<$linkcatcher actions=<<linkcatcherActions>>>
-						<$transclude $tiddler="Output" $mode="block"/>
+						<$tiddler tiddler="Output">
+							<$transclude $tiddler="Output" $mode="block"/>
+						</$tiddler>
 					</$linkcatcher>
 				<%endif%>
 			</div>
