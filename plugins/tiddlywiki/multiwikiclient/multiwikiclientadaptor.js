@@ -213,6 +213,7 @@ MultiWikiClientAdaptor.prototype.connectServerStream = function(options) {
 				type: data.is_deleted ? "deletion" : "update",
 				tiddler_id: data.tiddler_id
 			};
+			console.log(`Oustanding requests is ${JSON.stringify(self.outstandingRequests[data.title])}`)
 			// Process the update if the tiddler is not the subject of an outstanding request
 			if(!self.outstandingRequests[data.title]) {
 				if(data.is_deleted) {
@@ -224,7 +225,7 @@ MultiWikiClientAdaptor.prototype.connectServerStream = function(options) {
 				} else {
 					var result = self.incomingUpdatesFilterFn.call(self.wiki,self.wiki.makeTiddlerIterator([data.title]));
 					if(result.length > 0) {
-						self.setTiddlerInfo(data.title,data.tiddler_id,data.bag_name);
+						self.setTiddlerInfo(data.title,data.tiddler_id.toString(),data.bag_name);
 						options.syncer.storeTiddler(data.tiddler);	
 					}
 				}	
@@ -283,9 +284,9 @@ Queue a load for a tiddler if there has been an update for it since the specifie
 MultiWikiClientAdaptor.prototype.checkLastRecordedUpdate = function(title,revision,syncer) {
 	var lru = this.lastRecordedUpdate[title];
 	if(lru) {
-		var numTiddlerId = $tw.utils.parseNumber(lru.tiddler_id),
-			numRevision = $tw.utils.parseNumber(revision);
-		if(numTiddlerId > numRevision) {
+		var numRevision = $tw.utils.getInt(revision);
+		console.log(`Checking for updates to ${title} since ${JSON.stringify(revision)} comparing to ${numRevision}`)
+		if(lru.tiddler_id > numRevision) {
 			options.syncer.enqueueLoadTiddler(title);
 		}
 	}
@@ -309,7 +310,7 @@ MultiWikiClientAdaptor.prototype.saveTiddler = function(tiddler,callback,options
 		},
 		data: JSON.stringify(tiddler.getFieldStrings()),
 		callback: function(err,data,request) {
-			delete self.outstandingRequests.title;
+			delete self.outstandingRequests[title];
 			if(err) {
 				return callback(err);
 			}
@@ -339,7 +340,7 @@ MultiWikiClientAdaptor.prototype.loadTiddler = function(title,callback,options) 
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
 		callback: function(err,data,request) {
-			delete self.outstandingRequests.title;
+			delete self.outstandingRequests[title];
 			if(err === 404) {
 				return callback(null,null);
 			} else if(err) {
@@ -377,7 +378,7 @@ MultiWikiClientAdaptor.prototype.deleteTiddler = function(title,callback,options
 		url: this.host + "bags/" + encodeURIComponent(bag) + "/tiddlers/" + encodeURIComponent(title),
 		type: "DELETE",
 		callback: function(err,data,request) {
-			delete self.outstandingRequests.title;
+			delete self.outstandingRequests[title];
 			if(err) {
 				return callback(err);
 			}
