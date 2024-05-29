@@ -160,6 +160,47 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
 	});
 
+	it("should handle single-tiddler recursion with branching nodes", function() {
+		var wiki = new $tw.Wiki();
+		// Add a tiddler
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "<$tiddler tiddler='TiddlerOne'><$transclude /> <$transclude /></$tiddler>"},
+		]);
+		// Test parse tree
+		var parseTreeNode = {type: "widget", children: [
+								{type: "transclude", attributes: {
+										"tiddler": {type: "string", value: "TiddlerOne"}
+									}}
+							]};
+		// Construct the widget node
+		var widgetNode = createWidgetNode(parseTreeNode,wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span> <span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
+	});
+
+	it("should handle many-tiddler recursion with branching nodes", function() {
+		var wiki = new $tw.Wiki();
+		// Add a tiddler
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerTwo'/> <$transclude tiddler='TiddlerTwo'/>"},
+			{title: "TiddlerTwo", text: "<$transclude tiddler='TiddlerOne'/>"}
+		]);
+		// Test parse tree
+		var parseTreeNode = {type: "widget", children: [
+								{type: "transclude", attributes: {
+										"tiddler": {type: "string", value: "TiddlerOne"}
+									}}
+							]};
+		// Construct the widget node
+		var widgetNode = createWidgetNode(parseTreeNode,wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>");
+	});
+
 	it("should deal with SVG elements", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node

@@ -825,7 +825,7 @@ options.length .. number of characters returned defaults to 64
 */
 exports.sha256 = function(str, options) {
 	options = options || {}
-	return sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
+	return $tw.sjcl.codec.hex.fromBits($tw.sjcl.hash.sha256.hash(str)).substr(0,options.length || 64);
 }
 
 /*
