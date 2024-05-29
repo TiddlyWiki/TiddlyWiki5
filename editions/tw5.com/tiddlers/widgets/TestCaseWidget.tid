@@ -75,7 +75,7 @@ The test case wiki will inherit variables that are visible to the <<.wid testcas
 
 A custom template can be specified for special purposes. For example, the provided template $:/core/ui/testcases/RawJSONTemplate just displays the payload tiddlers in JSON, which can be used for debugging purposes.
 
-! Test Czase Template Variables
+! Test Case Template Variables
 
 The <<.wid testcase>> widget makes the following variables available within the rendered template:
 

@@ -5,7 +5,7 @@ description: An example of a failing test
 
 title: Narrative
 
-This test case intentionally fails to show how failures are displayed.
+This test case intentionally fails (in order to show how failures are displayed)
 +
 title: Output
 
