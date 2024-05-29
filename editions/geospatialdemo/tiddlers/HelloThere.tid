@@ -12,6 +12,7 @@ This demo requires that the API keys needed to access external services be obtai
 
 !! Demos
 
+* Try the demos [[built into the plugin|$:/plugins/tiddlywiki/geospatial]]
 * Visit the ~GeoFeatures and ~GeoMarkers tabs to see the data loaded into this wiki
 * Click on a link to a layer or marker to open the corresponding tiddler that includes a map
 * Use the Flickr tab to retrieve geotagged photographs from Flickr
