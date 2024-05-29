@@ -59,12 +59,14 @@ Improvements to the following translations:
 ! Usability Improvements
 
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/issues/8121">> new keyboard shortcut for refreshing the page
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/f3614c1e47e6ac5d5fec221b060699e975cd5ef6">> and simplified the splash screen for tiddlywiki.com. See [[Creating a splash screen]] for instructions on creating your own splash screen
 
 ! Hackability Improvements
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7882">> infinite recursion handling using a custom exception
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> button to the JavaScript error popup allowing tiddlers to be saved to a local JSON file
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/8120">> to latest version of modern-normalize 2.0.0
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8211">> [[tm-permalink|WidgetMessage: tm-permalink]], [[tm-permaview|WidgetMessage: tm-permaview]] and [[tm-copy-to-clipboard|WidgetMessage: tm-copy-to-clipboard]] messages to allow the notification text to be customised
 
 ! Bug Fixes
 
@@ -85,6 +87,7 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/801ed0ea1164aab4f88547322f9d73704388143f">> crash with [[cycle Operator]] if the the step size is larger than the number of operands
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8095">> proper DOCTYPE for the open window template
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7945">> theme font size settings to open in new window CSS
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8098">> backlink parser to prevent it parsing binary tiddlers
 
 ! Node.js Improvements
 
@@ -99,6 +102,7 @@ Improvements to the following translations:
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8195">> issue with fakedom TW_Node inheritence
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8099">> SJCL library creating variables in global scope
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8179">> fix `widget.getVariableInfo()` to always return a `params` property
 
 ! Infrastructure Improvements
 
