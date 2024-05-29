@@ -77,8 +77,13 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	this.setVariable("transclusion",$tw.utils.hashString(jsonPayload));
 	// Generate a `payloadTiddlers` variable that contains the payload in JSON format
 	this.setVariable("payloadTiddlers",jsonPayload);
+	// Only run the tests if the testcase output and expected results were specified, and those tiddlers actually exist in the wiki
+	var shouldRunTests = false;
+	if(this.testcaseTestOutput && this.testcaseWiki.tiddlerExists(this.testcaseTestOutput) && this.testcaseTestExpectedResult && this.testcaseWiki.tiddlerExists(this.testcaseTestExpectedResult)) {
+		shouldRunTests = true;
+	}
 	// Render the test rendering if required
-	if(this.testcaseTestOutput && this.testcaseTestExpectedResult) {
+	if(shouldRunTests) {
 		var testcaseOutputContainer = $tw.fakeDocument.createElement("div");
 		var testcaseOutputWidget = this.testcaseWiki.makeTranscludeWidget(this.testcaseTestOutput,{
 			document: $tw.fakeDocument,
@@ -101,7 +106,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 	var testResult = "",
 		outputHTML = "",
 		expectedHTML = "";
-	if(this.testcaseTestOutput && this.testcaseTestExpectedResult) {
+	if(shouldRunTests) {
 		outputHTML = testcaseOutputContainer.children[0].innerHTML;
 		expectedHTML = this.testcaseWiki.getTiddlerText(this.testcaseTestExpectedResult);
 		if(outputHTML === expectedHTML) {
@@ -115,7 +120,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		this.setVariable("currentTiddler",this.testcaseTestOutput);
 	}
 	// Don't display anything if testHideIfPass is "yes" and the tests have passed
-	if(this.testcaseHideIfPass === "yes" && testResult === "pass") {
+	if(this.testcaseHideIfPass === "yes" && testResult !== "fail") {
 		return;
 	}
 	// Render the page root template of the subwiki
