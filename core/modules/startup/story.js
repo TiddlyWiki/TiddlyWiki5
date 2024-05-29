@@ -94,8 +94,8 @@ exports.startup = function() {
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
 				targetTiddler: event.param || event.tiddlerTitle,
 				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permalink" : "none",
-				successNotification: event.paramObject.successNotification,
-				failureNotification: event.paramObject.failureNotification
+				successNotification: event.paramObject && event.paramObject.successNotification,
+				failureNotification: event.paramObject && event.paramObject.failureNotification
 			});
 		});
 		// Listen for the tm-permaview message
@@ -105,8 +105,8 @@ exports.startup = function() {
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
 				targetTiddler: event.param || event.tiddlerTitle,
 				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permaview" : "none",
-				successNotification: event.paramObject.successNotification,
-				failureNotification: event.paramObject.failureNotification
+				successNotification: event.paramObject && event.paramObject.successNotification,
+				failureNotification: event.paramObject && event.paramObject.failureNotification
 			});
 		});
 	}
