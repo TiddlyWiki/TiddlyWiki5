@@ -4,6 +4,8 @@ tags: $:/tags/GeospatialDemo
 
 ! Retrieve Geotagged Flickr Photos
 
+This demo will not work until you have set a Flickr API key in the [[Geospatial plugin settings|$:/plugins/tiddlywiki/geospatial/settings]].
+
 <$button>
 <$macrocall $name="flickr-get-album-items" albumID={{$:/config/flickr-param/album-id}}/>
 Get Flickr album
