@@ -220,7 +220,9 @@ function updateLocationHash(options) {
 			url = $tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 			break;
 	}
-	$tw.utils.copyToClipboard(url,{successNotification: options.successNotification, failureNotification: options.failureNotification});
+	if(url) {
+		$tw.utils.copyToClipboard(url,{successNotification: options.successNotification, failureNotification: options.failureNotification});
+	}
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
 	if($tw.utils.getLocationHash() !== $tw.locationHash) {
 		if(options.updateHistory === "yes") {
