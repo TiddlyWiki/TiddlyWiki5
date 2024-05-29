@@ -217,7 +217,10 @@ exports.splitregexp = function(source,operator,options) {
 		return ["RegExp error: " + ex];
 	}
 	source(function(tiddler,title) {
-		Array.prototype.push.apply(result,title.split(regExp));
+		var parts = title.split(regExp).map(function(part){
+			return part+"";	// make sure it's a string
+		});
+		Array.prototype.push.apply(result,parts);
 	});
 	return result;
 };
