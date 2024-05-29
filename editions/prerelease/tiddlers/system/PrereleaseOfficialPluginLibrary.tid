@@ -1,6 +1,6 @@
-caption: {{$:/language/OfficialPluginLibrary}}
-tags: $:/tags/PluginLibrary
 title: $:/config/OfficialPluginLibrary
-url: https://tiddlywiki5-git-plugin-stability-badges-jermolenes-projects.vercel.app/library/v5.3.3/index.html
+tags: $:/tags/PluginLibrary
+url: https://tiddlywiki.com/prerelease/library/v5.3.4/index.html
+caption: {{$:/language/OfficialPluginLibrary}} (Prerelease)
 
-Plugin library for https://tiddlywiki5-git-plugin-stability-badges-jermolenes-projects.vercel.app
+The prerelease version of the official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.

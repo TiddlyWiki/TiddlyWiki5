@@ -14,8 +14,12 @@ Utilities for working with the TiddlyWiki repository file structure
 
 /*
 Get an object containing all the plugins as a hashmap by title of the JSON representation of the plugin
+Options:
+
+ignoreEnvironmentVariables: defaults to false
 */
-exports.getAllPlugins = function() {
+exports.getAllPlugins = function(options) {
+	options = options || {};
 	var fs = require("fs"),
 		path = require("path"),
 		tiddlers = {};
@@ -39,9 +43,9 @@ exports.getAllPlugins = function() {
 				}
 			}
 		};
-	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,$tw.config.pluginsEnvVar),collectPublisherPlugins);
-	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,$tw.config.themesEnvVar),collectPublisherPlugins);
-	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,$tw.config.languagesEnvVar),collectPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.pluginsEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.themesEnvVar),collectPublisherPlugins);
+	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,options.ignoreEnvironmentVariables ? undefined : $tw.config.languagesEnvVar),collectPlugins);
 	return tiddlers;
 };
 

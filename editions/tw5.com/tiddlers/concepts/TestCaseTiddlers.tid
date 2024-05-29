@@ -23,5 +23,4 @@ Some payload tiddlers are set aside for special purposes:
 |''Narrative'' |Narrative description of the test, intended to explain the purpose and operation of the test |
 |''Output'' |The tiddler that produces the test output |
 |''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
-
-
+|''Description'' |Set to the text of the <<.field description>> field |
