@@ -19,7 +19,6 @@ Tries to find a fenced frontmatter block and parse the content like a tiddler me
 	function loadTiddlerFromBinary(filename, fileBuffer, fileSpec){
 		var lines = fileBuffer.toString().split(/(?:\r\n|\r|\n)/g)
 		var fm, text
-
 		for (let index = 0; index < lines.length; index++) {
 			const line = lines[index];
 			console.log('read line:', line)
@@ -49,7 +48,9 @@ Tries to find a fenced frontmatter block and parse the content like a tiddler me
 
 	/**
 	 * When given a Tiddler, binarize it however we like and gives
-	 * back a temporary object holding the data.
+	 * back a temporary object holding the data, as well as the path
+	 * where to save it.
+	 * **This must include a file extension.**
 	 * 
 	 * @param {string} filePath 
 	 * @param {$tw.Tiddler} tiddler - tiddler to be binarized
@@ -67,9 +68,9 @@ Tries to find a fenced frontmatter block and parse the content like a tiddler me
 
 		var fm = tiddler.getFieldStringBlock({exclude: ["text","bag"]});
 		var content = "---\n" + (fm) + "\n---\n" + (!!tiddler.fields.text ? tiddler.fields.text : "")
-
+		var fpath = filePath.concat(".fmd")
 		return {
-			filePath: filePath,
+			filePath: fpath,
 			buffer: content,
 			fileOptions: {
 				encoding: "utf8"

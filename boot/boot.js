@@ -557,12 +557,15 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	return $tw.utils.compareVersions(versionStringA,versionStringB) !== -1;
 };
 
-/*
-Register file type information
-options: {flags: flags,deserializerType: deserializerType}
-	flags:"image" for image types
-	deserializerType: defaults to type if not specified
-*/
+/**
+ * Register file type information in `$tw.config.contentTypeInfo[type]`
+ * @param {string} type - MIME-style content type string
+ * @param {string} encoding - Valid NodeJS-style file encoding
+ * @param {string[]} extension - File extensions that should match this filetype
+ * @param {Object=} options - Optional object to give some more info
+ * @param {Array=} options.flags - Useful flags to be used, "image" for image types
+ * @param {string} [options.deserializerType=type] - key to a deserializer to be used with this filetype, defaults to "type"
+ */
 $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	options = options || {};
 	if($tw.utils.isArray(extension)) {
@@ -576,10 +579,27 @@ $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};
 };
 
-/*
-Given an extension, always access the $tw.config.fileExtensionInfo
-using a lowercase extension only.
-*/
+/**
+ * @typedef ContentTypeInfo
+ * @type {object}
+ * @property {string} encoding
+ * @property {string} extension
+ * @property {Array=} flags
+ * @property {string} deserializerType
+ */
+
+/**
+ * @typedef FileExtensionInfo
+ * @type {object}
+ * @property {string} type
+ */
+
+/**
+ * Given an extension, always access the $tw.config.fileExtensionInfo
+ * using a lowercase extension only.
+ * @param {string} ext - Extension to find a type for
+ * @returns {FileExtensionInfo | null | undefined}
+ */
 $tw.utils.getFileExtensionInfo = function(ext) {
 	return ext ? $tw.config.fileExtensionInfo[ext.toLowerCase()] : null;
 }
@@ -1596,9 +1616,15 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
 };
 
-/*
-Extracts tiddlers from a typed block of text, specifying default field values
-*/
+/**
+ * Extracts tiddlers from a typed block of text, specifying default field values
+ * @param {str} type - MIME-style content type string or file extension
+ * @param {any} text - content to call the deserializer with
+ * @param {Array=} srcFields - a list of already-defined fields to add to the tiddler
+ * @param {Object=} options - Option object
+ * @param {string} options.deserializer - key of a deserializer registered in `$tw.Wiki.tiddlerDeserializerModules`
+ * @returns {Object[]}
+ */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields,options) {
 	srcFields = srcFields || Object.create(null);
 	options = options || {};
@@ -2097,8 +2123,8 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp,options) {
 			var dirPath = path.resolve(filepath,dirSpec.path);
 			if(dirSpec.isDeferred && !loadDeferred){
 				$tw.deferredDirSpecs.push({filepath, dirSpec})
-				// console.log("Found deferred dir at ", filepath, " - keeping it for later.")
-				return; //Skip it, we're in a each
+				console.log("Found defer dir:", filepath)
+				return; //Do not process deferred dirs yet.
 			}
 			if(fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
 				var	files = getAllFiles(dirPath, dirSpec.searchSubdirectories),

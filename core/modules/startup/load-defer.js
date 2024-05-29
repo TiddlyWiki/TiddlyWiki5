@@ -34,10 +34,10 @@ exports.startup = function(callback) {
 	$tw.utils.each(specs, function(spec){
 
 		var fpath = spec.filepath;
-		var tiddlers = $tw.loadTiddlersFromSpecification(fpath, undefined, true)
+		var tiddlers = $tw.loadTiddlersFromSpecification(fpath, undefined, {loadDeferred: true})
 		$tw.utils.each(tiddlers,function(tiddlerFile) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
-				relativePath = path.relative($tw.boot.wikiTiddlersPath,tiddlerFile.filepath);
+				var relativePath = path.relative($tw.boot.wikiTiddlersPath,tiddlerFile.filepath);
 				// Keep track of our file tiddlers, so add them to boot.files
 				$tw.boot.files[tiddler.title] = {
 					filepath: tiddlerFile.filepath,

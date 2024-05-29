@@ -2,7 +2,7 @@
     "directories": [
         {
             "path": ".",
-            "filesRegExp": "^.*\\.md$",
+            "filesRegExp": "^.*\\.fmd$",
             "isTiddlerFile": true,
             "isEditableFile": true,
             "fields": {

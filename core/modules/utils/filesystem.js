@@ -278,11 +278,10 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 		// Check if a parser/loader exists for that filetype
 		var loader = $tw.deserializerParsers[deferredFiletype];
 		if(loader) {
-			// Serialize the file?
-			// Or mark the file as serializable by this parser more like
+			// Mark the file as serializable and pass on the info.
 			fileInfo.deferredFiletype = deferredFiletype;
+			options.fileInfo.deferredFiletype = deferredFiletype;
 			fileInfo.hasMetaFile = false;
-			metaExt = ".md"; //TODO: find a way to define the file extension when binary-ish
 		}
 	}
 
@@ -397,6 +396,12 @@ exports.generateTiddlerFilepath = function(title,options) {
 			filepath += char.charCodeAt(0).toString();
 		});
 	}
+
+	// If we are handling deferred files, ignore normal file extension.
+	if ((options.fileInfo && options.fileInfo.deferredFiletype)) {
+		extension = "";
+	}
+	
 	// Add a uniquifier if the file already exists (default)
 	var fullPath = path.resolve(directory, filepath + extension);
 	if (!overwrite) {

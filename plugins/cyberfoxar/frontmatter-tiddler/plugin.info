@@ -4,7 +4,7 @@
 	"author": "CyberFoxar",
 	"version": "0.0.1",
 	"name": "Frontmatter loader/parser",
-	"list": "",
+	"list": "n/a",
 	"plugin-type": "plugin",
-	"stability": STABILITY_1_EXPERIMENTAL
+	"stability": "STABILITY_1_EXPERIMENTAL"
 }
