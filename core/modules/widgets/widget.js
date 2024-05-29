@@ -163,6 +163,8 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			});
 			resultList = this.wiki.filterTiddlers(value,this.makeFakeWidgetWithVariables(variables),options.source);
 			value = resultList[0] || "";
+		} else {
+			params = variable.params;
 		}
 		return {
 			text: value,
