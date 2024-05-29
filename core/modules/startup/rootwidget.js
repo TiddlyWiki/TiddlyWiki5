@@ -39,7 +39,6 @@ exports.startup = function() {
 			method: params.method,
 			body: params.body,
 			binary: params.binary,
-			defaultHeaders: params.defaultHeaders,
 			oncompletion: params.oncompletion,
 			onprogress: params.onprogress,
 			bindStatus: params["bind-status"],
