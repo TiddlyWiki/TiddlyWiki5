@@ -112,7 +112,7 @@ function HttpClientRequest(options) {
 	this.method = options.method || "GET";
 	this.body = options.body || "";
 	this.binary = options.binary || "";
-	this.defaultHeaders = options.defaultHeaders || true,
+	this.useDefaultHeaders = options.useDefaultHeaders || true,
 	this.variables = options.variables;
 	var url = options.url;
 	$tw.utils.each(options.queryStrings,function(value,name) {
@@ -232,7 +232,8 @@ Make an HTTP request. Options are:
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		url = options.url,
-		headers = options.headers || (options.defaultHeaders ? {accept: "application/json"} : {}),
+		useDefaultHeaders = options.useDefaultHeaders || true,
+		headers = options.headers || (useDefaultHeaders ? {accept: "application/json"} : {}),
 		hasHeader = function(targetHeader) {
 			targetHeader = targetHeader.toLowerCase();
 			var result = false;
@@ -308,10 +309,10 @@ exports.httpRequest = function(options) {
 			request.setRequestHeader(headerTitle,header);
 		});
 	}
-	if(data && !hasHeader("Content-Type") && options.defaultHeaders) {
+	if(data && !hasHeader("Content-Type") && useDefaultHeaders) {
 		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
-	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers) && options.defaultHeaders) {
+	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers) && useDefaultHeaders) {
 		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
 	// Send data
