@@ -1,6 +1,6 @@
 caption: action-listops
 created: 20141025120850184
-modified: 20230805103548113
+modified: 20240509135041526
 myfield: 
 tags: ActionWidgets Widgets
 title: ActionListopsWidget
@@ -35,9 +35,11 @@ The above widget will toggle the presence of the element <<.value "List Item">> 
 Similarly, if an element is to always be removed when it is present, the `-` / `:except` [[filter run prefix|Filter Expression]] can be used. Both of the following yield the same result:
 
 ```
-<$action-listops $subfilter="-[[List Item]]"/>
-<$action-listops $subfilter="+[remove[List Item]]"/>
+<$action-listops $subfilter="-[[ListItem]]"/>
+<$action-listops $subfilter="+[remove[ListItem]]"/>
 ```
+
+<<.infoBox """Note that the parameter of the [[remove Operator]] is a [[Title List]]. To remove one or more titles containing spaces the individual titles must be wrapped in double square brackets, usually via a soft [[Filter Parameter]]. See //Filtered List Variable Assignment// in the [[SetWidget]] documentation to learn more.""">>
 
 Without any prefixes, the filter run output is simply [[dominantly appended|Dominant Append]] to the list.
 
