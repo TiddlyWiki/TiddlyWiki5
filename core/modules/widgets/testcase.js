@@ -120,7 +120,7 @@ TestCaseWidget.prototype.render = function(parent,nextSibling) {
 		this.setVariable("currentTiddler",this.testcaseTestOutput);
 	}
 	// Don't display anything if testHideIfPass is "yes" and the tests have passed
-	if(this.testcaseHideIfPass === "yes" && testResult === "pass") {
+	if(this.testcaseHideIfPass === "yes" && testResult !== "fail") {
 		return;
 	}
 	// Render the page root template of the subwiki
