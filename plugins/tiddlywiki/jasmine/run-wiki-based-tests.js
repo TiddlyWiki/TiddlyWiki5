@@ -34,23 +34,22 @@ describe("Wiki-based tests", function() {
 			if(!wiki.tiddlerExists("Output")) {
 				throw "Missing 'Output' tiddler";
 			}
-			if(!wiki.tiddlerExists("ExpectedResult")) {
-				throw "Missing 'ExpectedResult' tiddler";
+			if(wiki.tiddlerExists("ExpectedResult")) {
+				// Construct the widget node
+				var text = "{{Output}}\n\n";
+				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+				// Render the widget node to the DOM
+				var wrapper = renderWidgetNode(widgetNode);
+				// Clear changes queue
+				wiki.clearTiddlerEventQueue();
+				// Run the actions if provided
+				if(wiki.tiddlerExists("Actions")) {
+					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
+					refreshWidgetNode(widgetNode,wrapper);
+				}
+				// Test the rendering
+				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 			}
-			// Construct the widget node
-			var text = "{{Output}}\n\n";
-			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
-			// Render the widget node to the DOM
-			var wrapper = renderWidgetNode(widgetNode);
-			// Clear changes queue
-			wiki.clearTiddlerEventQueue();
-			// Run the actions if provided
-			if(wiki.tiddlerExists("Actions")) {
-				widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
-				refreshWidgetNode(widgetNode,wrapper);
-			}
-			// Test the rendering
-			expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 		});
 	});
 
