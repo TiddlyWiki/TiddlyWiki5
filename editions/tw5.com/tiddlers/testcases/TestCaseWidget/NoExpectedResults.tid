@@ -1,0 +1,12 @@
+title: TestCases/TestCaseWidget/NoExpectedResults
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: A testcase that does not specify expected results
+
+title: Narrative
+
+This testcase will display without the pass/fail icons because it does not include an `ExpectedResults` tiddler, and so will only be rendered, and not be executed as a test
++
+title: Output
+
+This is the output
