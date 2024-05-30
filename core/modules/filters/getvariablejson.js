@@ -20,21 +20,29 @@ exports.getvariablejson = function(source,operator,options) {
 	var results = [],
 		widget = options.widget;
 	// "replacer" must be defined, otherwise JSON.stringify will throw a circular reference error RSOD
-	// "replacer" does not contain: isCacheable
-	var replacer= "params name value default text isFunctionDefinition isProcedureDefinition isWidgetDefinition isMacroDefinition".split(" ");
+	var replacer= "params name value default text isFunctionDefinition isProcedureDefinition isWidgetDefinition isMacroDefinition isVariable".split(" ");
 	source(function(tiddler,title) {
-		var v = widget.getVariableInfo(title, {});
-		var x = {};
-		if (v.params && v.srcVariable) {
-			x.params = v.params;
-			x.text = v.text;
-			x.value = v.srcVariable.value;
-			x.isFunctionDefinition = v.srcVariable.isFunctionDefinition;
-			x.isProcedureDefinition = v.srcVariable.isProcedureDefinition;
-			x.isWidgetDefinition = v.srcVariable.isWidgetDefinition;
-			x.isMacroDefinition = v.srcVariable.isMacroDefinition;
-			var text = JSON.stringify(x,replacer);
+		var text;
+		var out = {};
+		var info = widget.getVariableInfo(title, {});
+
+		out.text = info.text;
+		if (info.params) {
+			// unify parameter elements
+			out.params = info.params.map(function(param) {
+				return {"name":param.name, "default": param.value || param.default || ""}
+			});
+		};
+		if (info.srcVariable) {
+			out.value = info.srcVariable.value;
+			out.isFunctionDefinition = (info.srcVariable.isFunctionDefinition) ? "yes" : "no";
+			out.isProcedureDefinition = (info.srcVariable.isProcedureDefinition) ? "yes" : "no";
+			out.isWidgetDefinition = (info.srcVariable.isWidgetDefinition) ? "yes" : "no";
+			out.isMacroDefinition = (info.srcVariable.isMacroDefinition) ? "yes" : "no";
+			out.isVariable = ((out.isFunctionDefinition + out.isProcedureDefinition + 
+					out.isWidgetDefinition + out.isMacroDefinition).indexOf("yes") === -1) ? "yes" : "no";
 		}
+		text = JSON.stringify(out,replacer);
 		results.push(text || "");
 	});
 	return results;
