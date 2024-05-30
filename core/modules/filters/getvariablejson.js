@@ -39,8 +39,10 @@ exports.getvariablejson = function(source,operator,options) {
 			out.isProcedureDefinition = (info.srcVariable.isProcedureDefinition) ? "yes" : "no";
 			out.isWidgetDefinition = (info.srcVariable.isWidgetDefinition) ? "yes" : "no";
 			out.isMacroDefinition = (info.srcVariable.isMacroDefinition) ? "yes" : "no";
-			out.isVariable = ((out.isFunctionDefinition + out.isProcedureDefinition + 
-					out.isWidgetDefinition + out.isMacroDefinition).indexOf("yes") === -1) ? "yes" : "no";
+			out.isVariable = (info.srcVariable.isFunctionDefinition ||
+					info.srcVariable.isProcedureDefinition || 
+					info.srcVariable.isWidgetDefinition ||
+					info.srcVariable.isMacroDefinition) ? "no" : "yes";
 		}
 		text = JSON.stringify(out,replacer);
 		results.push(text || "");
