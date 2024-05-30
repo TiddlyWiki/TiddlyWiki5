@@ -202,7 +202,7 @@ GeomapWidget.prototype.refreshMap = function() {
 							long: latlng.lng
 						});
 					});
-					return markers;
+					return marker;
 				},
 				onEachFeature: function(feature,layer) {
 					if(feature.properties) {
