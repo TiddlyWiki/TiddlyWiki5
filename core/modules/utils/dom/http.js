@@ -112,7 +112,7 @@ function HttpClientRequest(options) {
 	this.method = options.method || "GET";
 	this.body = options.body || "";
 	this.binary = options.binary || "";
-	this.useDefaultHeaders = options.useDefaultHeaders || true,
+	this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false,
 	this.variables = options.variables;
 	var url = options.url;
 	$tw.utils.each(options.queryStrings,function(value,name) {
@@ -157,6 +157,7 @@ HttpClientRequest.prototype.send = function(callback) {
 		this.xhr = $tw.utils.httpRequest({
 			url: this.url,
 			type: this.method,
+			useDefaultHeaders: this.useDefaultHeaders,
 			headers: this.requestHeaders,
 			data: this.body,
 			returnProp: this.binary === "" ? "responseText" : "response",
@@ -232,7 +233,7 @@ Make an HTTP request. Options are:
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		url = options.url,
-		useDefaultHeaders = options.useDefaultHeaders || true,
+		useDefaultHeaders = options.useDefaultHeaders !== false ? true : false,
 		headers = options.headers || (useDefaultHeaders ? {accept: "application/json"} : {}),
 		hasHeader = function(targetHeader) {
 			targetHeader = targetHeader.toLowerCase();
