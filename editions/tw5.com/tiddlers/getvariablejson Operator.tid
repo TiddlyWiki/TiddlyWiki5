@@ -1,6 +1,6 @@
 caption: getvariablejson
 created: 20240506131935424
-modified: 20240529111652185
+modified: 20240530125501260
 op-input: a selection variable names
 op-output: the JSON string values of each of the retrieved properties
 op-parameter: one or more indexes of the property to retrieve

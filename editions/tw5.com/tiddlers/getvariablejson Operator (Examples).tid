@@ -1,5 +1,5 @@
 created: 20240506132850677
-modified: 20240523052607425
+modified: 20240530130003480
 tags: [[Operator Examples]] [[getvariablejson Operator]]
 title: getvariablejson Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -27,15 +27,25 @@ The following example extracts the ''function definition'' using the <<.olink js
 <<.example 3 """\procedure testProc() [[aa aa]] bb
 \function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
 
-<pre><code><$text text={{{[[fn.test]getvariablejson[]jsonextract[srcVariable],[value]]}}}/></code></pre>
+<pre><code><$text text={{{[[fn.test]getvariablejson[]jsonextract[value]]}}}/></code></pre>
 """>>
 
-The following example extracts the `srcVariables.params` with pretty printing using <<.olink jsonextract>>
+The following example extracts the `params` with pretty printing using <<.olink jsonextract>>
 
-<<.example 4 """\procedure testProc() [[aa aa]] bb
+<<.example 4 """\function tab() [charcode[9]]
+\procedure testProc() [[aa aa]] bb
 \function fn.test(splitChar:" " not-used) [enlist<testProc>format:titlelist[]]
 
-\function tab() [charcode[9]]
+<pre><code><$text text={{{[[fn.test]getvariablejson[]jsonextract[params]format:json<tab>]}}}/></code></pre>""">>
 
-<pre><code><$text text={{{[[fn.test]getvariablejson[]jsonextract[srcVariable],[params]format:json<tab>]}}}/></code></pre>""">>
+The following example shows a variable, that was defined using the let-widget
+
+<<.example 5 """\function tab() [charcode[9]]
+\procedure testProc(aa:"bb" not-used) let procedure
+
+<$let X=<<testProc aa:"xx">> >
+	<pre><code><$text text={{{ [[X]getvariablejson[]format:json<tab>] }}}/></code></pre>
+</$let>""">>
+
+
 
