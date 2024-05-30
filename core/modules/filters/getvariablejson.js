@@ -21,10 +21,20 @@ exports.getvariablejson = function(source,operator,options) {
 		widget = options.widget;
 	// "replacer" must be defined, otherwise JSON.stringify will throw a circular reference error RSOD
 	// "replacer" does not contain: isCacheable
-	var replacer= "params name value default resultList srcVariable text isFunctionDefinition isProcedureDefinition isWidgetDefinition isMacroDefinition".split(" ");
+	var replacer= "params name value default text isFunctionDefinition isProcedureDefinition isWidgetDefinition isMacroDefinition".split(" ");
 	source(function(tiddler,title) {
-		var variable = widget.getVariableInfo(title, {}),
-		text = JSON.stringify(variable,replacer);
+		var v = widget.getVariableInfo(title, {});
+		var x = {};
+		if (v.params && v.srcVariable) {
+			x.params = v.params;
+			x.text = v.text;
+			x.value = v.srcVariable.value;
+			x.isFunctionDefinition = v.srcVariable.isFunctionDefinition;
+			x.isProcedureDefinition = v.srcVariable.isProcedureDefinition;
+			x.isWidgetDefinition = v.srcVariable.isWidgetDefinition;
+			x.isMacroDefinition = v.srcVariable.isMacroDefinition;
+			var text = JSON.stringify(x,replacer);
+		}
 		results.push(text || "");
 	});
 	return results;
