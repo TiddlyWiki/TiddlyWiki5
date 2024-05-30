@@ -1,0 +1,34 @@
+title: Filters/getvariablejson-procedure
+description: Test getvariablejson operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function tab() [charcode[9]]
+\procedure testProc(aa:"bb" not-used) procedure
+
+<$text text={{{ [[testProc]getvariablejson[]format:json<tab>] }}}/>
++
+title: ExpectedResult
+
+<p>{
+	"params": [
+		{
+			"name": "aa",
+			"default": "bb"
+		},
+		{
+			"name": "not-used",
+			"default": ""
+		}
+	],
+	"value": "procedure",
+	"text": "procedure",
+	"isFunctionDefinition": "no",
+	"isProcedureDefinition": "yes",
+	"isWidgetDefinition": "no",
+	"isMacroDefinition": "no",
+	"isVariable": "no"
+}</p>

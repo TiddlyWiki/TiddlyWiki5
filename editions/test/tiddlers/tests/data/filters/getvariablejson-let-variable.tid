@@ -1,0 +1,26 @@
+title: Filters/getvariablejson-let-varible
+description: Test getvariablejson operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\function tab() [charcode[9]]
+\procedure testProc(aa:"bb" not-used) let procedure
+
+<$let X=<<testProc aa:"xx">> >
+	<$text text={{{ [[X]getvariablejson[]format:json<tab>] }}}/>
+</$let>
++
+title: ExpectedResult
+
+<p>{
+	"value": "let procedure",
+	"text": "let procedure",
+	"isFunctionDefinition": "no",
+	"isProcedureDefinition": "no",
+	"isWidgetDefinition": "no",
+	"isMacroDefinition": "no",
+	"isVariable": "yes"
+}</p>
