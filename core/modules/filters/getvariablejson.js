@@ -22,9 +22,9 @@ exports.getvariablejson = function(source,operator,options) {
 	// "replacer" must be defined, otherwise JSON.stringify will throw a circular reference error RSOD
 	var replacer= "params name value default text isFunctionDefinition isProcedureDefinition isWidgetDefinition isMacroDefinition isVariable".split(" ");
 	source(function(tiddler,title) {
-		var text;
-		var out = {};
-		var info = widget.getVariableInfo(title, {});
+		var text,
+			out = {},
+			info = widget.getVariableInfo(title, {});
 
 		out.text = info.text;
 		if (info.params) {
@@ -47,5 +47,4 @@ exports.getvariablejson = function(source,operator,options) {
 	});
 	return results;
 };
-
 })();
