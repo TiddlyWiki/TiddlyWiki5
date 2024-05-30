@@ -25,11 +25,8 @@
 			}
 		},
 		{
-			"file": "boot.css",
-			"fields": {
-				"title": "$:/boot/boot.css",
-				"type": "text/css"
-			}
+			"file": "boot.css.tid",
+			"isTiddlerFile": true
 		}
 	]
 }
