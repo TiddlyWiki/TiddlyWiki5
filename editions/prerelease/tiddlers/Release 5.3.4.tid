@@ -34,7 +34,7 @@ The Geospatial Plugin incorporates a number of third party libraries and online 
 * [[Flickr|https://www.flickr.com/services/api/]], a free API for retrieving geotagged photographs
 * [[OpenLocationCode|https://github.com/google/open-location-code]], Google's open source library for converting to and from Open Location Codes (also known as [[PlusCodes|https://maps.google.com/pluscodes/]])
 
-Try it out at https://tiddlywiki.com/prerelease/plugins/geospatialdemo
+Try it out at https://tiddlywiki.com/prerelease/plugins/tiddlywiki/geospatial/
 
 !! <<.wlink TestCaseWidget>> Widget
 
