@@ -1,0 +1,7 @@
+import-field-column: State
+import-field-name: state
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/state
+type: text/vnd.tiddlywiki
+
