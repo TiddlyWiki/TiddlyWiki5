@@ -69,7 +69,7 @@ HttpClient.prototype.cancelAllHttpRequests = function() {
 		for(var t=this.requests.length - 1; t--; t>=0) {
 			var requestInfo = this.requests[t];
 			requestInfo.request.cancel();
-		}	
+		}
 	}
 	this.requests = [];
 	this.updateRequestTracker();
@@ -112,6 +112,7 @@ function HttpClientRequest(options) {
 	this.method = options.method || "GET";
 	this.body = options.body || "";
 	this.binary = options.binary || "";
+	this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false,
 	this.variables = options.variables;
 	var url = options.url;
 	$tw.utils.each(options.queryStrings,function(value,name) {
@@ -156,6 +157,7 @@ HttpClientRequest.prototype.send = function(callback) {
 		this.xhr = $tw.utils.httpRequest({
 			url: this.url,
 			type: this.method,
+			useDefaultHeaders: this.useDefaultHeaders,
 			headers: this.requestHeaders,
 			data: this.body,
 			returnProp: this.binary === "" ? "responseText" : "response",
@@ -231,7 +233,8 @@ Make an HTTP request. Options are:
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		url = options.url,
-		headers = options.headers || {accept: "application/json"},
+		useDefaultHeaders = options.useDefaultHeaders !== false ? true : false,
+		headers = options.headers || (useDefaultHeaders ? {accept: "application/json"} : {}),
 		hasHeader = function(targetHeader) {
 			targetHeader = targetHeader.toLowerCase();
 			var result = false;
@@ -257,7 +260,7 @@ exports.httpRequest = function(options) {
 			if(hasHeader("Content-Type") && ["application/x-www-form-urlencoded","multipart/form-data","text/plain"].indexOf(getHeader["Content-Type"]) === -1) {
 				return false;
 			}
-			return true;	
+			return true;
 		},
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
@@ -307,10 +310,10 @@ exports.httpRequest = function(options) {
 			request.setRequestHeader(headerTitle,header);
 		});
 	}
-	if(data && !hasHeader("Content-Type")) {
+	if(data && !hasHeader("Content-Type") && useDefaultHeaders) {
 		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
-	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers)) {
+	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers) && useDefaultHeaders) {
 		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
 	// Send data

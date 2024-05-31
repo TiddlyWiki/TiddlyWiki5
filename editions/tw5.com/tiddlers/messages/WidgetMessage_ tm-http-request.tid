@@ -19,6 +19,7 @@ The following parameters are used:
 |method |HTTP method (eg "GET", "POST") |
 |body |String data to be sent with the request |
 |binary |<<.from-version "5.3.1">> Set to "yes" to cause the response body to be treated as binary data and returned in base64 format |
+|useDefaultHeaders |<<.from-version "5.3.4">> Defaults to true.  Set to "false" to prevent default headers from being added.  This can be helpful when dealing with apis that restrict header fields. |
 |query-* |Query string parameters with string values |
 |header-* |Headers with string values |
 |password-header-* |Headers with values taken from the password store |

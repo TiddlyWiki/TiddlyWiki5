@@ -2,7 +2,8 @@
 	"description": "TiddlyWiki core tests",
 	"plugins": [
 		"tiddlywiki/jasmine",
-		"tiddlywiki/multiwikiserver"
+		"tiddlywiki/multiwikiserver",
+		"tiddlywiki/geospatial"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

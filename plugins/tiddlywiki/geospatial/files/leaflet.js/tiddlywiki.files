@@ -1,0 +1,34 @@
+{
+	"tiddlers": [
+		{
+			"file": "leaflet.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.js",
+				"module-type": "library"
+			}
+		},
+		{
+			"file": "leaflet.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			}
+		},
+		{
+			"file": "images/layers-2x.png",
+			"fields": {
+				"type": "image/png",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet/images/layers-2x.png"
+			}
+		},
+		{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.js/LICENSE"
+			}
+		}
+	]
+}
