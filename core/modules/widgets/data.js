@@ -31,34 +31,49 @@ DataWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var jsonPayload = JSON.stringify(this.readDataTiddlerValues(),null,4);
-	var textNode = this.document.createTextNode(jsonPayload);
-	parent.insertBefore(textNode,nextSibling);
-	this.domNodes.push(textNode);
+	this.dataPayload = this.computeDataTiddlerValues(); // Array of $tw.Tiddler objects
+	this.domNode = this.document.createTextNode(this.readDataTiddlerValuesAsJson());
+	parent.insertBefore(this.domNode,nextSibling);
+	this.domNodes.push(this.domNode);
 };
 
 /*
 Compute the internal state of the widget
 */
 DataWidget.prototype.execute = function() {
-	// Construct the child widgets
-	this.makeChildWidgets();
+	// Nothing to do here
 };
 
 /*
-Read the tiddler value(s) from a data widget – must be called after the .render() method
+Read the tiddler value(s) from a data widget as an array of tiddler field objects (not $tw.Tiddler objects)
 */
 DataWidget.prototype.readDataTiddlerValues = function() {
+	var results = [];
+	$tw.utils.each(this.dataPayload,function(tiddler,index) {
+		results.push(tiddler.getFieldStrings());
+	});
+	return results;
+};
+
+/*
+Read the tiddler value(s) from a data widget as an array of tiddler field objects (not $tw.Tiddler objects)
+*/
+DataWidget.prototype.readDataTiddlerValuesAsJson = function() {
+	return JSON.stringify(this.readDataTiddlerValues(),null,4);
+};
+
+/*
+Compute list of tiddlers from a data widget
+*/
+DataWidget.prototype.computeDataTiddlerValues = function() {
 	var self = this;
-	// Start with a blank object
-	var item = Object.create(null);
 	// Read any attributes not prefixed with $
+	var item = Object.create(null);
 	$tw.utils.each(this.attributes,function(value,name) {
 		if(name.charAt(0) !== "$") {
 			item[name] = value;	
 		}
 	});
-	item = new $tw.Tiddler(item);
 	// Deal with $tiddler, $filter or $compound-tiddler attributes
 	var tiddlers = [],title;
 	if(this.hasAttribute("$tiddler")) {
@@ -86,21 +101,22 @@ DataWidget.prototype.readDataTiddlerValues = function() {
 			tiddlers.push.apply(tiddlers,this.extractCompoundTiddler(title));
 		}
 	}
-	// Convert the literal item to field strings
-	item = item.getFieldStrings();
-	if(tiddlers.length === 0) {
+	// Return the literal item if none of the special attributes were used
+	if(!this.hasAttribute("$tiddler") && !this.hasAttribute("$filter") && !this.hasAttribute("$compound-tiddler")) {
 		if(Object.keys(item).length > 0 && !!item.title) {
-			return [item];
+			return [new $tw.Tiddler(item)];
 		} else {
 			return [];
 		}
 	} else {
-		var results = [];
-		$tw.utils.each(tiddlers,function(tiddler,index) {
-			var fields = tiddler.getFieldStrings();
-			results.push($tw.utils.extend({},fields,item));
-		});
-		return results;	
+		// Apply the item fields to each of the tiddlers
+		delete item.title; // Do not overwrite the title
+		if(Object.keys(item).length > 0) {
+			$tw.utils.each(tiddlers,function(tiddler,index) {
+				tiddlers[index] = new $tw.Tiddler(tiddler,item);
+			});
+		}
+		return tiddlers;
 	}
 };
 
@@ -134,11 +150,32 @@ DataWidget.prototype.extractCompoundTiddler = function(title) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 DataWidget.prototype.refresh = function(changedTiddlers) {
-	// It would be expensive to calculate whether the changedTiddlers impact the filter
-	// identified by the $filter attribute so we just refresh ourselves unconditionally
-	this.refreshSelf();
-	return true;
+	var changedAttributes = this.computeAttributes();
+	var newPayload = this.computeDataTiddlerValues();
+	if(hasPayloadChanged(this.dataPayload,newPayload)) {
+		this.dataPayload = newPayload;
+		this.domNode.textContent = this.readDataTiddlerValuesAsJson();
+		return true;
+	} else {
+		return false;
+	}
 };
+
+/*
+Compare two arrays of tiddlers and return true if they are different
+*/
+function hasPayloadChanged(a,b) {
+	if(a.length === b.length) {
+		for(var t=0; t<a.length; t++) {
+			if(!(a[t].isEqual(b[t]))) {
+				return true;
+			}
+		}
+		return false;
+	} else {
+		return true;
+	}
+}
 
 exports.data = DataWidget;
 
