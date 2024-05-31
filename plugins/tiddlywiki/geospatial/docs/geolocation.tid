@@ -75,6 +75,7 @@ The following variables are made available to the action strings passed in the '
 	<$button actions=<<onclick>> style="background: red; color: white; font-size: 18pt;">
 		Click this button to request current location
 	</$button>
+	Your browser will ask for permission before granting the request. On some system it may take a couple of seconds for the location to appear.
 	<hr>
 	{{CurrentLocation}}
 	{{CurrentLocation||$:/core/ui/TiddlerFields}}
