@@ -22,6 +22,20 @@ The new features include:
 * The new Confetti Plugin that allows animated bursts of confetti to be displayed
 * Improvements to the Dynannotate Plugin to add the ability to highlight screen elements using an animated spotlight effect
 
+!! Geospatial Plugin
+
+<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7406">> new Geospatial Plugin that adds new primitives to the TiddlyWiki platform to enable non-developers to build sophisticated interactive geospatial applications.
+
+The Geospatial Plugin incorporates a number of third party libraries and online services:
+
+* [[Leaflet.js|https://leafletjs.com/]], an open source library to display interactive maps
+* [[Turf.js|https://turfjs.org/]], an open source library to perform geospatial calculations with [[GeoJSON|https://en.wikipedia.org/wiki/GeoJSON]] objects
+* [[TravelTime|https://traveltime.com/]], a commercial API for [[geocoding|https://traveltime.com/features/geocoding]], [[routing|https://traveltime.com/features/multi-modal-routing]] and [[isochrones|https://traveltime.com/features/isochrones]]
+* [[Flickr|https://www.flickr.com/services/api/]], a free API for retrieving geotagged photographs
+* [[OpenLocationCode|https://github.com/google/open-location-code]], Google's open source library for converting to and from Open Location Codes (also known as [[PlusCodes|https://maps.google.com/pluscodes/]])
+
+Try it out at https://tiddlywiki.com/prerelease/plugins/geospatialdemo
+
 !! <<.wlink TestCaseWidget>> Widget
 
 <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7817">> new <<.wlink TestCaseWidget>> widget that is intended to solve a problem with the examples that we feature in the documentation. The existing macros are workable for simple, self-contained examples, but can be hard to follow in cases where the examples use additional tiddlers. The <<.wlink TestCaseWidget>> widget displays complete, self-contained interactive examples showing the output together with a tabbed display of the constituent tiddlers that produce it:
@@ -67,6 +81,7 @@ Improvements to the following translations:
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> button to the JavaScript error popup allowing tiddlers to be saved to a local JSON file
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/8120">> to latest version of modern-normalize 2.0.0
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8211">> [[tm-permalink|WidgetMessage: tm-permalink]], [[tm-permaview|WidgetMessage: tm-permaview]] and [[tm-copy-to-clipboard|WidgetMessage: tm-copy-to-clipboard]] messages to allow the notification text to be customised
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8225">> [[WidgetMessage: tm-http-request]] to allow the default headers to be suppressed
 
 ! Bug Fixes
 
