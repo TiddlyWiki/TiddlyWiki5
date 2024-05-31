@@ -39,6 +39,7 @@ exports.startup = function() {
 			method: params.method,
 			body: params.body,
 			binary: params.binary,
+			useDefaultHeaders: params.useDefaultHeaders,
 			oncompletion: params.oncompletion,
 			onprogress: params.onprogress,
 			bindStatus: params["bind-status"],
@@ -69,8 +70,8 @@ exports.startup = function() {
 	// Install the copy-to-clipboard  mechanism
 	$tw.rootWidget.addEventListener("tm-copy-to-clipboard",function(event) {
 		$tw.utils.copyToClipboard(event.param,{
-			successNotification: event.paramObject.successNotification,
-			failureNotification: event.paramObject.failureNotification
+			successNotification: event.paramObject && event.paramObject.successNotification,
+			failureNotification: event.paramObject && event.paramObject.failureNotification
 		});
 	});
 	// Install the tm-focus-selector message

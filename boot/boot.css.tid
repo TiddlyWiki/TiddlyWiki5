@@ -1,3 +1,6 @@
+title: $:/boot/boot.css
+type: text/css
+
 /*
 Basic styles used before we boot up the parsing engine
 */
