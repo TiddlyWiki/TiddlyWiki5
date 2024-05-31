@@ -5,20 +5,6 @@ tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-<div style="border: 2px solid red; background: #ffd; padding: 0 0.5em; border-radius: 8px;">
-
-This is a build of ~TiddlyWiki 5 from the branch [[geospatial-plugin|https://github.com/Jermolene/TiddlyWiki5/tree/geospatial-plugin]].
-
-It introduces a number of new primitives for working with geospatial data.
-
-A demo of the geospatial functionality is [ext[available here|./plugins/tiddlywiki/geospatial/index.html]].
-
-It also includes a number of new features that are intended for eventual inclusion in the core:
-
-* [[jsonset Operator]]
-
-</div>
-
 !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
