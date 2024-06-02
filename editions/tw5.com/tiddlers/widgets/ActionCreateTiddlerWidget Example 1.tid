@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 <$testcase>
 <$data title=Description text="Default widget with no attributes"/>
 <$data title=Narrative text='The button in this example uses the $action-createtiddler widget to create "New Tiddler", "New Tiddler 1", " New Tiddler 2" and so on'/>
-<$data title=Output text="""\define testCreate() <$action-createtiddler />
+<$data title=Output text="""\procedure testCreate() <$action-createtiddler />
 
 <$button actions=<<testCreate>> >
 Create Tiddler

@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 <$testcase>
 <$data title=Description text="Create a new page control button"/>
 <$data title=Narrative text="""Use the $action-createtiddler widget to create and open a new, non-functional page control button tiddler"""/>
-<$data title=Output text="""\define testCreate()
+<$data title=Output text="""\procedure testCreate()
 <$action-createtiddler $basetitle="Homemade Button" tags="$:/tags/PageControls" text={{$:/state/new-button-caption}}>
 	<$action-navigate $to=<<createTiddler-title>>/>
 </$action-createtiddler>

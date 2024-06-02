@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 <$data title=Description text="Child action widget uses the created tiddler title"/>
 <$data title=Narrative text="""The $action-createtiddler widget in this example uses the <<.var createTiddler-title>> variable to navigate to the created tiddler"""/>
 <$data $tiddler="ActionCreateTiddlerWidget Template"/>
-<$data title=Output text="""\define testCreate()
+<$data title=Output text="""\procedure testCreate()
 <$action-createtiddler  $basetitle="base" $template="ActionCreateTiddlerWidget Template">
 	<$action-navigate $to=<<createTiddler-title>>/>
 </$action-createtiddler>

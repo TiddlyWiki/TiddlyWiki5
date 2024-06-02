@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 It will overwrite the tiddler if the button is clicked several times."""/>
 <$data $tiddler="$:/language/DefaultNewTiddlerTitle"/>
-<$data title=Output text="""\define testCreate()
+<$data title=Output text="""\procedure testCreate()
 <$action-createtiddler $basetitle={{$:/language/DefaultNewTiddlerTitle}} $overwrite="yes"/>
 \end
 

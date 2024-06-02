@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 There will be new fields "aa" and "bb" which are added to the new tiddlers.
 """/>
 <$data $tiddler="ActionCreateTiddlerWidget Template"/>
-<$data title=Output text="""\define testCreate()
+<$data title=Output text="""\procedure testCreate()
 <$action-createtiddler $basetitle="base" $template="ActionCreateTiddlerWidget Template" aa="new field aa" bb="new field bb" />
 \end
 
