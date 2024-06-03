@@ -24,6 +24,10 @@ The following parameters are used:
 |header-* |Headers with string values |
 |password-header-* |Headers with values taken from the password store |
 |password-query-* |Query string parameters with values taken from the password store |
+|basic-auth-username |<<.from-version "5.3.4">> Optional username for HTTP basic authentication |
+|basic-auth-username-from-store |<<.from-version "5.3.4">> Optional username for HTTP basic authentication, specified as the name of the entry in the password store containing the username |
+|basic-auth-password |<<.from-version "5.3.4">> Optional password for HTTP basic authentication |
+|basic-auth-password-from-store |<<.from-version "5.3.4">> Optional password for HTTP basic authentication, specified as the name of the entry in the password store containing the password |
 |var-* |Variables to be passed to the completion and progress handlers (without the "var-" prefix) |
 |bind-status |Title of tiddler to which the status of the request ("pending", "complete", "error") should be bound |
 |bind-progress |Title of tiddler to which the progress of the request (0 to 100) should be bound |
