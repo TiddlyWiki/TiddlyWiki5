@@ -317,7 +317,8 @@ Widget.prototype.getStateQualifier = function(name) {
 Make a fake widget with specified variables, suitable for variable lookup in filters
 */
 Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
-	var self = this;
+	var self = this,
+		variables = variables || {};
 	return {
 		getVariable: function(name,opts) {
 			if($tw.utils.hop(variables,name)) {
@@ -335,7 +336,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				};
 			} else {
 				opts = opts || {};
-				opts.variables = variables;
+				opts.variables = $tw.utils.extend(variables,opts.variables);
 				return self.getVariableInfo(name,opts);
 			};
 		},
