@@ -4,8 +4,6 @@ This plugin provides a diagonal ribbon across the corner of the window. It resem
 
 The ribbon can be positioned over any corner, and can incorporate user defined text, colours and a link.
 
-The CSS stylesheet is adapted from work by Simon Whitaker:
+The CSS stylesheet is adapted from work by [[Simon Whitaker|https://github.com/simonwhitaker/github-fork-ribbon-css/]]
 
-https://github.com/simonwhitaker/github-fork-ribbon-css/
-
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/github-fork-ribbon]]
+[[Plugin source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/github-fork-ribbon]]

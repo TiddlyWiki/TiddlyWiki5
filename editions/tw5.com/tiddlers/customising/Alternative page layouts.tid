@@ -1,5 +1,5 @@
 created: 20201123172925848
-modified: 20211126120310891
+modified: 20230803052005116
 tags: [[Customise TiddlyWiki]]
 title: Alternative page layouts
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 ! Creating an alternative page layout
 
-Creating an alternative layout goes beyond [[adding or removing features|Page and tiddler layout customisation]] from the default interface and allows you to create an entirely new layout from scratch.
+Creating an alternative layout goes beyond [[adding or removing features|Customising TiddlyWiki's user interface]] from the default interface and allows you to create an entirely new layout from scratch.
 
 To create an alternative page layout and have the ability to switch to it, you need to create an alternative page template tiddler with the [[SystemTag: $:/tags/Layout]].
 

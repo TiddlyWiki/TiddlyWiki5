@@ -35,9 +35,11 @@ exports.run = function(filter,format) {
 	// Collect all the fields
 	for(t=0;t<tiddlers.length; t++) {
 		tiddler = this.wiki.getTiddler(tiddlers[t]);
-		for(f in tiddler.fields) {
-			if(fields.indexOf(f) === -1) {
-				fields.push(f);
+		if(tiddler) {
+			for(f in tiddler.fields) {
+				if(fields.indexOf(f) === -1) {
+					fields.push(f);
+				}
 			}
 		}
 	}
@@ -60,8 +62,10 @@ exports.run = function(filter,format) {
 	for(var t=0;t<tiddlers.length; t++) {
 		row = [];
 		tiddler = this.wiki.getTiddler(tiddlers[t]);
-			for(f=0; f<fields.length; f++) {
-				row.push(quoteAndEscape(tiddler ? tiddler.getFieldString(fields[f]) || "" : ""));
+			if(tiddler) {
+				for(f=0; f<fields.length; f++) {
+					row.push(quoteAndEscape(tiddler ? tiddler.getFieldString(fields[f]) || "" : ""));
+				}	
 			}
 		output.push(row.join(","));
 	}

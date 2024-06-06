@@ -1,0 +1,16 @@
+{
+	"description": "A step by step introduction to TiddlyWiki",
+	"plugins": [
+		"tiddlywiki/tour",
+		"tiddlywiki/confetti",
+		"tiddlywiki/dynannotate"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+	}
+}
