@@ -21,6 +21,7 @@ function Logger(componentName,options) {
 	options = options || {};
 	this.componentName = componentName || "";
 	this.colour = options.colour || "white";
+	this.prefix = options.prefix || "";
 	this.enable = "enable" in options ? options.enable : true;
 	this.save = "save" in options ? options.save : true;
 	this.saveLimit = options.saveLimit || 100 * 1024;
@@ -31,6 +32,20 @@ function Logger(componentName,options) {
 
 Logger.prototype.setSaveBuffer = function(logger) {
 	this.saveBufferLogger = logger;
+};
+
+/*
+Change the output colour
+*/
+Logger.prototype.setColour = function(colour) {
+	this.colour = colour || "white";
+};
+
+/*
+Change the prefix
+*/
+Logger.prototype.setPrefix = function(prefix) {
+	this.prefix = prefix || "";
 };
 
 /*

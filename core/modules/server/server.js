@@ -33,7 +33,13 @@ function Server(options) {
 	this.routes = options.routes || [];
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
+	this.logger = new $tw.utils.Logger("server",{colour: "cyan"});
+	this.logger.setPrefix(":" + process.pid + "-" + (Number(new Date()) - 1095776640000));
 	this.boot = options.boot || $tw.boot;
+	// Name the server and init the boot state
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.boot.pathPrefix = this.get("path-prefix") || "";
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -92,10 +98,6 @@ function Server(options) {
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
-	// Name the server and init the boot state
-	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
-	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
-	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
 /*
@@ -287,9 +289,9 @@ Server.prototype.requestHandler = function(request,response,options) {
 	var route = self.findMatchingRoute(request,state);
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {
-		console.log("Request path:",JSON.stringify(state.urlInfo));
-		console.log("Request headers:",JSON.stringify(request.headers));
-		console.log("authenticatedUsername:",state.authenticatedUsername);
+		self.logger.log("Request path:",JSON.stringify(state.urlInfo.href));
+		self.logger.log("Request headers:",JSON.stringify(request.headers));
+		self.logger.log("authenticatedUsername:",state.authenticatedUsername);
 	}
 	// Return a 404 if we didn't find a route
 	if(!route) {

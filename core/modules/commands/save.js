@@ -48,7 +48,7 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 						}
 					});
 					if(self.commander.verbose) {
-						console.log("Saving \"" + title + "\" to \"" + fileInfo.filepath + "\"");
+						self.commander.log("Saving \"" + title + "\" to \"" + filepath + "\"");
 					}
 					try {
 						$tw.utils.saveTiddlerToFileSync(tiddler,fileInfo);

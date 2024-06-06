@@ -47,7 +47,7 @@ Render individual tiddlers and save the results to the specified files
 		$tw.utils.each(tiddlers,function(title) {
 			var filepath = path.resolve(self.commander.outputPath,wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0]);
 			if(self.commander.verbose) {
-				console.log("Rendering \"" + title + "\" to \"" + filepath + "\"");
+				self.commander.log("Rendering \"" + title + "\" to \"" + filepath + "\"");
 			}
 			var parser = wiki.parseTiddler(template || title),
 				widgetNode = wiki.makeWidget(parser,{variables: $tw.utils.extend({},variables,{currentTiddler: title,storyTiddler: title})}),
