@@ -1,5 +1,5 @@
 created: 20150118134611000
-modified: 20150118183143000
+modified: 20220226043344258
 tags: [[butlast Operator]] [[Operator Examples]]
 title: butlast Operator (Examples)
 type: text/vnd.tiddlywiki
@@ -7,5 +7,6 @@ type: text/vnd.tiddlywiki
 <<.using-days-of-week>>
 
 <<.operator-example 1 "[list[Days of the Week]butlast[]]">>
-<<.operator-example 2 "[list[Days of the Week]butlast[2]]">>
-<<.operator-example 3 "A B C D E F G H I J K L M +[butlast[7]]">>
+<<.operator-example 2 "[list[Days of the Week]butlast[0]]">>
+<<.operator-example 3 "[list[Days of the Week]butlast[2]]">>
+<<.operator-example 4 "A B C D E F G H I J K L M +[butlast[7]]">>

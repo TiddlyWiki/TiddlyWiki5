@@ -4,7 +4,14 @@ tags: $:/tags/RawMarkupWikified/TopBody
 title: $:/SplashScreen
 type: text/vnd.tiddlywiki
 
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+
+\procedure show-icon(title)
+<$wikify name="icon" text={{{ [<title>addprefix[{{]addsuffix[}}]] }}} output="html">
+<$text text=<<icon>>/>
+</$wikify>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrocallinline
 <div class="tc-remove-when-wiki-loaded">
 <style scoped>
@@ -19,6 +26,11 @@ type: text/vnd.tiddlywiki
 	text-align: center;
 	color: <<colour foreground>>;
 	fill: <<colour foreground>>;
+}
+
+.tc-splash-text img {
+	width: 150px;
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
 
 html body.tc-body {
@@ -94,24 +106,26 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 }
 </style>
 
-<div class="tc-splash-text">
-Please wait while {{$:/SiteTitle}} is loading
-</div>
-
 <div class="tc-splash-spinner">
   <div class="tc-splash-bounce-1"></div>
   <div class="tc-splash-bounce-2"></div>
   <div class="tc-splash-bounce-3"></div>
 </div>
 
-<!-- Demonstrating how to embed a wikitext SVG graphic --> 
 <div class="tc-splash-text">
-{{$:/core/images/home-button||$:/core/templates/plain-text-tiddler}}
+<strong>{{$:/SiteTitle}}</strong>
+<br/>
+is loading
 </div>
 
 <!-- Demonstrating how to embed a bitmap graphic --> 
 <div class="tc-splash-text">
-<img src="data:image/jpeg;base64,{{Motovun Jack.jpg||$:/core/templates/plain-text-tiddler}}" width="100"/>
+<img src="data:image/jpeg;base64,{{New Release Banner||$:/core/templates/plain-text-tiddler}}" width="100"/>
+</div>
+
+<!-- Demonstrating how to embed a wikitext SVG graphic --> 
+<div class="tc-splash-text">
+<<show-icon "$:/core/icon">>
 </div>
 
 </div>

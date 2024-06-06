@@ -1,5 +1,6 @@
 title: $:/palettes/Blanca
 name: Blanca
+color-scheme: light
 description: A clean white palette to let you focus
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
@@ -33,6 +34,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #0000aa
 external-link-foreground: #0000ee
 foreground: #333333
+highlight-background: #ffff00
+highlight-foreground: #000000
 message-background: #ecf2ff
 message-border: #cfd6e6
 message-foreground: #547599

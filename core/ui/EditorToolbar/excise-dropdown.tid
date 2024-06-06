@@ -3,9 +3,10 @@ title: $:/core/ui/EditorToolbar/excise-dropdown
 \define lingo-base() $:/language/Buttons/Excise/
 
 \define body(config-title)
+\whitespace trim
 ''<<lingo Hint>>''
 
-<<lingo Caption/NewTitle>> <$edit-text tag="input" tiddler="$config-title$/new-title" default="" focus="true"/>
+<<lingo Caption/NewTitle>>&#32;<$edit-text tag="input" tiddler="$config-title$/new-title" default="" focus="true"/>
 
 <$set name="new-title" value={{$config-title$/new-title}}>
 <$list filter="""[<new-title>is[tiddler]]""">
@@ -15,16 +16,16 @@ title: $:/core/ui/EditorToolbar/excise-dropdown
 </$list>
 </$set>
 
-<$checkbox tiddler="""$config-title$/tagnew""" field="text" checked="yes" unchecked="no" default="false"> <<lingo Caption/Tag>></$checkbox>
+<$checkbox tiddler="""$config-title$/tagnew""" field="text" checked="yes" unchecked="no" default="false">&#32;<<lingo Caption/Tag>></$checkbox>
 
-<<lingo Caption/Replace>> <$select tiddler="""$config-title$/type""" default="transclude">
+<<lingo Caption/Replace>>&#32;<$select tiddler="""$config-title$/type""" default="transclude">
 <option value="link"><<lingo Caption/Replace/Link>></option>
 <option value="transclude"><<lingo Caption/Replace/Transclusion>></option>
 <option value="macro"><<lingo Caption/Replace/Macro>></option>
 </$select>
 
 <$reveal state="""$config-title$/type""" type="match" text="macro">
-<<lingo Caption/MacroName>> <$edit-text tag="input" tiddler="""$config-title$/macro-title""" default="translink"/>
+<<lingo Caption/MacroName>>&#32;<$edit-text tag="input" tiddler="""$config-title$/macro-title""" default="translink"/>
 </$reveal>
 
 <$button>

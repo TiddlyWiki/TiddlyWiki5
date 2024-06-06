@@ -1,0 +1,12 @@
+created: 20151015072304780
+modified: 20210106151027432
+tags: [[Community Plugins]]
+title: datepicker plugin based on Pikaday, by kixam
+type: text/vnd.tiddlywiki
+url: http://kixam.github.io/TW5-datePicker/
+
+An interactive date picker plugin based on [[Pikaday|https://github.com/dbushell/Pikaday]]. A demo can be found here: {{!!url}}.
+
+<<<
+datepicker is a TiddlyWiki plugin that allows you to use a widget much like EditTextWidget to pick a date, and optionaly a time. It shows a nice interactive mini-calendar when clicked, allows you to set a date format for display, and is compatible with core date fields such as `modified` and `created`.
+<<<

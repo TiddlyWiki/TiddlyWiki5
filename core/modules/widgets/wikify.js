@@ -100,7 +100,7 @@ WikifyWidget.prototype.getWidgetTree = function() {
 					break;
 				case "text":
 					resultNode.text = widgetNode.parseTreeNode.text;
-					break;	
+					break;
 			}
 			if(Object.keys(widgetNode.attributes || {}).length > 0) {
 				resultNode.attributes = {};

@@ -17,9 +17,11 @@ exports.method = "GET";
 exports.path = /^\/$/;
 
 exports.handler = function(request,response,state) {
-	response.writeHead(200, {"Content-Type": state.server.get("root-serve-type")});
-	var text = state.wiki.renderTiddler(state.server.get("root-render-type"),state.server.get("root-tiddler"));
-	response.end(text,"utf8");
+	var text = state.wiki.renderTiddler(state.server.get("root-render-type"),state.server.get("root-tiddler")),
+		responseHeaders = {
+		"Content-Type": state.server.get("root-serve-type")
+	};
+	state.sendResponse(200,responseHeaders,text);
 };
 
 }());

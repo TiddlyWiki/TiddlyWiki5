@@ -1,50 +1,21 @@
 created: 20150124182421000
-modified: 20181120125803533
+modified: 20230710074507466
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
 
+A <<.def "filter expression">> is the outermost level of the [[filter syntax|Filter Syntax]]. It consists of [[filter runs|Filter Run]] with optional [[filter run prefixes|Filter Run Prefix]]. Multiple filter runs are separated by [[whitespace|Filter Whitespace]].
+
 <$railroad text="""
-[{:
-  [: [[whitespace|"Filter Whitespace"]] ]
-  ("+"|"~"|:-|"-")
+{ (
+    - |
+    : [[<"prefix">|"Filter Run Prefix"]]
+  )
   [[run|"Filter Run"]]
-}]
+  +  [[whitespace|"Filter Whitespace"]]
+}
 """/>
 
-A <<.def "filter expression">> is the outermost level of the [[filter syntax|Filter Syntax]]. It consists of one or more [[runs|Filter Run]].
+<<.tip """If the diagram has a single start and end line, as shown above, it means there is more info in the linked level above. The breadcrumbs can be used to navigate""">>
 
-If a run has:
-
-* no prefix, its output titles are [[dominantly appended|Dominant Append]] to the filter's output
-* the prefix `-`, output titles are <<.em removed>> from the filter's output (if such tiddlers exist)
-* the prefix `+`, it receives the filter output so far as its input; its output then <<.em "replaces">> all filter ouput so far and forms the input for the next run
-* <<.from-version "5.1.18">> the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored
-
-In technical / logical terms:
-
-|!Run |!Interpretation |!Output |
-|`run` |union of sets |... OR run |
-|`+run` |intersection of sets |... AND run |
-|`-run` |difference of sets |... AND NOT run |
-|`~run` |else |... ELSE run |
-
-The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order). But the `+` prefix can change this:
-
-|Prefix|Input|h
-|`-`, `~` or none| <$link to="all Operator">`[all[]]`</$link> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]|
-|`+`|the filter output of all previous runs so far|
-
-Precisely because of varying inputs, be aware that both prefixes `-` and `+` do not behave inverse to one another!
-
-For example, in both of the following, `$:/baz` will only be removed if it actually exists:
-
-* <$link to="is Operator"> `foo bar $:/baz -[is[system]]`</$link>
-* <$link to="prefix Operator">`foo bar $:/baz -[prefix[$:/]]`</$link>
-
-To understand why, consider the input for both final runs with their `-` prefix.
-
-In order to remove `$:/baz` in any case, existing or not, simply use the `+` prefix with [[negated filter operators|Filter Operators]]:
-
-* <$link to="is Operator">`foo bar $:/baz +[!is[system]]`</$link>
-* <$link to="prefix Operator">`foo bar $:/baz +[!prefix[$:/]]`</$link>
+<<.tip """If the diagram has no start and no end, as used in lower levels, it means that higher level syntax elements have been removed, to increase readability and simplicity. The breadcrumbs can be used to navigate""">>

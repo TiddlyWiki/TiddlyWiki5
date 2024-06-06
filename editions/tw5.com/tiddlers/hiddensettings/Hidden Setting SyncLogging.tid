@@ -1,0 +1,13 @@
+created: 20190903192324700
+modified: 20190903192324700
+tags: [[Hidden Settings]]
+title: Hidden Setting: Sync Logging
+type: text/vnd.tiddlywiki
+
+Specifies whether [[Syncadaptor|https://tiddlywiki.com/dev/#Syncadaptor]] should log information to the browser's developer console or not.
+
+Defaults to `yes`. Set to `no` to disable logging.
+
+Changing needs restart to take effect.
+
+$:/config/SyncLogging

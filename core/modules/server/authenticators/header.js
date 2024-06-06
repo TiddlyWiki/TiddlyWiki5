@@ -14,7 +14,7 @@ Authenticator for trusted header authentication
 
 function HeaderAuthenticator(server) {
 	this.server = server;
-	this.header = server.get("authenticated-user-header");
+	this.header = server.get("authenticated-user-header") ? server.get("authenticated-user-header").toLowerCase() : undefined;
 }
 
 /*
@@ -37,7 +37,7 @@ HeaderAuthenticator.prototype.authenticateRequest = function(request,response,st
 		return false;
 	} else {
 		// authenticatedUsername will be undefined for anonymous users
-		state.authenticatedUsername = username;
+		state.authenticatedUsername = $tw.utils.decodeURIComponentSafe(username);
 		return true;
 	}
 };

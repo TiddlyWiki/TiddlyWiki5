@@ -1,0 +1,40 @@
+title: $:/language/Help/fetch
+description: Pobierz tiddlery z wiki po URLu
+
+Pobierze jeden lub wiecej plików przez internet i zaimportuj tiddlery pasujące do filtra, opcjonalnie zmieniając ich nazwy.
+
+```
+--fetch file <url> <import-filter> <transform-filter>
+--fetch files <url-filter> <import-filter> <transform-filter>
+--fetch raw-file <url> <transform-filter>
+--fetch raw-files <url-filter> <transform-filter>
+```
+
+"file" i "files" pobierają wybrane pliki i próbuję zaimportować zawarte w nich tiddlery (w ten sam sposób jakby pliki zostały przeciągnięte do okna przeglądarki).  "raw-file" i "raw-files" pobierają pliki i zapisują je jako surowe dane w tiddlerach, bez dokonywania zmian.
+
+
+"file" i "raw-file" pobierają tylko jeden plik i pierwszy argument to URL do tego pliku.
+
+
+"files" i "raw-files" pobierają wiele plików i pierwszy argument to filtr, który będzie uruchomiony by wygenerowac listę adresów i pobrać z nich pliki. Dla przykładu, jeżeli masz kilka tiddlerów otagowanych jako "remote-server" i każdy ma pole "url", filtre `[tag[remote-server]get[url]]` pobierze wszystkie URLe w nich zawarte.
+
+Dla "file" i "files", argument `<import-filter>` określa filtr, który ograniczy które tiddlery zaimportować. Domyślnie jest to `[all[tiddlers]]`.
+
+Aegument `<transform-filter>` określa opcjonalny filtr, który zmieni nazw zaimportowanych tiddlerów. Dla przykładu, `[addprefix[$:/myimports/]]` doda przedrostek `$:/myimports/` do każdej nazwy.
+
+Jeżeli przed komendą `--fetch` dodasz komendę `--verbose`, to komenda wypisze dodatkowe informacje w czasie importu.
+
+Uwaga: TiddlyWiki nie pobierze starszej wersji już wczytanej wtyczki.
+
+Poniższy przykład pobierze wszystkie niesystemowe wtyczki z https://tiddlywiki.com i zapisze je w pliku JSON:
+
+```
+tiddlywiki --verbose --fetch file "https://tiddlywiki.com/" "[!is[system]]" "" --rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[!is[system]]"
+```
+
+Poniższy przykład pobierze plik "favicon" z tiddlywiki.com i zapisze go w pliku "output.com". Zwróc uwagę, że pośredni tiddler "Icon Tiddler" jest w nawiasach w komendzie "--fetch", ponieważ jest użyty jako filtr by nadpisać domyślny tytuł, podczas gdy przy komendzie "--savetiddler" nie ma nawiasów gdyż tam jest użyty bezposrednio jako tytuł
+
+```
+tiddlywiki --verbose --fetch raw-file "https://tiddlywiki.com/favicon.ico" "[[Icon Tiddler]]" --savetiddler "Icon Tiddler" output.ico
+```
+

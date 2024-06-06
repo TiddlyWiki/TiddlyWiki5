@@ -1,0 +1,136 @@
+title: $:/palettes/Nord
+name: Nord
+color-scheme: dark
+description: An arctic, north-bluish color palette.
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+license: MIT, arcticicestudio, https://github.com/arcticicestudio/nord/blob/develop/LICENSE.md
+
+alert-background: #D08770
+alert-border: #D08770
+alert-highlight: #B48EAD
+alert-muted-foreground: #4C566A
+background: #3b4252
+blockquote-bar: <<colour muted-foreground>>
+button-foreground: <<colour foreground>>
+code-background: #2E3440
+code-border: #2E3440
+code-foreground: #BF616A
+diff-delete-background: #BF616A
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #A3BE8C
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #BF616A
+download-background: #A3BE8C
+download-foreground: <<colour background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour background>>
+dropdown-tab-background-selected: #ECEFF4
+dropdown-tab-background: #4C566A
+dropzone-background: #A3BE8C
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #5E81AC
+external-link-foreground: #8FBCBB
+foreground: #d8dee9
+highlight-background: #ffff78
+highlight-foreground: #000000
+menubar-background: #2E3440
+menubar-foreground: #d8dee9
+message-background: #2E3440
+message-border: #2E3440
+message-foreground: #547599
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #3b4252
+modal-footer-background: #3b4252
+modal-footer-border: #3b4252
+modal-header-border: #3b4252
+muted-foreground: #4C566A
+notification-background: <<colour primary>>
+notification-border: #EBCB8B
+page-background: #2e3440
+pre-background: #2E3440
+pre-border: #2E3440
+primary: #5E81AC
+select-tag-background: #3b4252
+select-tag-foreground: <<colour foreground>>
+selection-background: #5E81AC
+selection-foreground: <<colour foreground>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #D8DEE9
+sidebar-controls-foreground: #4C566A
+sidebar-foreground-shadow: transparent
+sidebar-foreground: #D8DEE9
+sidebar-muted-foreground-hover: #4C566A
+sidebar-muted-foreground: #4C566A
+sidebar-tab-background-selected: #ECEFF4
+sidebar-tab-background: #4C566A
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: #4C566A
+sidebar-tab-divider: <<colour page-background>>
+sidebar-tab-foreground-selected: #4C566A
+sidebar-tab-foreground: <<colour tab-foreground>>
+sidebar-tiddler-link-foreground-hover: #A3BE8C
+sidebar-tiddler-link-foreground: #81A1C1
+site-title-foreground: <<colour tiddler-title-foreground>>
+static-alert-foreground: #B48EAD
+tab-background-selected: #ECEFF4
+tab-background: #4C566A
+tab-border-selected: #4C566A
+tab-border: #4C566A
+tab-divider: #4C566A
+tab-foreground-selected: #4C566A
+tab-foreground: #D8DEE9
+table-border: #4C566A
+table-footer-background: #2e3440
+table-header-background: #2e3440
+tag-background: #A3BE8C
+tag-foreground: #4C566A
+tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
+tiddler-controls-foreground-hover: 
+tiddler-controls-foreground-selected: #EBCB8B
+tiddler-controls-foreground: #4C566A
+tiddler-editor-background: #2e3440
+tiddler-editor-border-image: #2e3440
+tiddler-editor-border: #3b4252
+tiddler-editor-fields-even: #2e3440
+tiddler-editor-fields-odd: #2e3440
+tiddler-info-background: #2e3440
+tiddler-info-border: #2e3440
+tiddler-info-tab-background: #2e3440
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #4C566A
+tiddler-title-foreground: #81A1C1
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: #2d3038
+very-muted-foreground: #2d3038
+wikilist-background: <<colour page-background>>
+wikilist-toolbar-background: <<colour background>>
+wikilist-item: <<colour background>>
+wikilist-title: <<colour foreground>>
+wikilist-info: <<colour muted-foreground>>
+wikilist-button-open: #A3BE8C
+wikilist-button-open-hover: #A3BE8C
+wikilist-button-reveal: #81A1C1
+wikilist-button-reveal-hover: #81A1C1
+wikilist-button-remove: #B48EAD
+wikilist-button-remove-hover: #B48EAD

@@ -1,0 +1,123 @@
+title: $:/palettes/Twilight
+tags: $:/tags/Palette
+author: Thomas Elmiger
+type: application/x-tiddler-dictionary
+name: Twilight
+description: Delightful, soft darkness.
+color-scheme: dark
+
+alert-background: rgb(255, 255, 102)
+alert-border: rgb(232, 232, 125)
+alert-highlight: rgb(255, 51, 51)
+alert-muted-foreground: rgb(224, 82, 82)
+background: rgb(38, 38, 38)
+blockquote-bar: rgba(240, 196, 117, 0.7)
+button-background: rgb(63, 63, 63)
+button-border: rgb(127, 127, 127)
+button-foreground: rgb(179, 179, 179)
+code-background: rgba(0,0,0,0.03)
+code-border: rgba(0,0,0,0.08)
+code-foreground: rgb(255, 94, 94)
+diff-delete-background: #ffc9c9
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #aaefad
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: rgb(255, 94, 94)
+download-background: #19a974
+download-foreground: rgb(38, 38, 38)
+dragger-background: rgb(179, 179, 179)
+dragger-foreground: rgb(38, 38, 38)
+dropdown-background: rgb(38, 38, 38)
+dropdown-border: rgb(255, 255, 255)
+dropdown-tab-background: rgba(0,0,0,.1)
+dropdown-tab-background-selected: rgba(255,255,255,1)
+dropzone-background: #9eebcf
+external-link-background: inherit
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-foreground: rgb(179, 179, 255)
+external-link-foreground-hover: inherit
+external-link-foreground-visited: rgb(153, 153, 255)
+foreground: rgb(179, 179, 179)
+highlight-background: #ffff78
+highlight-foreground: #000000
+message-background: <<colour tag-foreground>>
+message-border: #96ccff
+message-foreground: <<colour tag-background>>
+modal-backdrop: rgb(179, 179, 179)
+modal-background: rgb(38, 38, 38)
+modal-border: rgba(0,0,0,.5)
+modal-footer-background: #f4f4f4
+modal-footer-border: rgba(0,0,0,.1)
+modal-header-border: rgba(0,0,0,.2)
+muted-foreground: rgb(255, 255, 255)
+notification-background: <<colour tag-foreground>>
+notification-border: <<colour tag-background>>
+page-background: rgb(26, 26, 26)
+pre-background: rgb(25, 25, 25)
+pre-border: rgba(0,0,0,.2)
+primary: rgb(255, 201, 102)
+select-tag-background: 
+select-tag-foreground: 
+sidebar-button-foreground: rgb(179, 179, 179)
+sidebar-controls-foreground: rgb(153, 153, 153)
+sidebar-controls-foreground-hover: <<colour tiddler-controls-foreground-hover>>
+sidebar-foreground: rgb(141, 141, 141)
+sidebar-foreground-shadow: transparent
+sidebar-muted-foreground: rgba(0, 0, 0, 0.5)
+sidebar-muted-foreground-hover: rgb(141, 141, 141)
+sidebar-tab-background: rgba(141, 141, 141, 0.2)
+sidebar-tab-background-selected: rgb(26, 26, 26)
+sidebar-tab-border: rgb(127, 127, 127)
+sidebar-tab-border-selected: rgb(127, 127, 127)
+sidebar-tab-divider: rgb(127, 127, 127)
+sidebar-tab-foreground: rgb(179, 179, 179)
+sidebar-tab-foreground-selected: rgb(179, 179, 179)
+sidebar-tiddler-link-foreground: rgb(179, 179, 179)
+sidebar-tiddler-link-foreground-hover: rgb(115, 115, 115)
+site-title-foreground: rgb(255, 201, 102)
+static-alert-foreground: rgba(0,0,0,.3)
+tab-background: rgba(0,0,0,0.125)
+tab-background-selected: rgb(38, 38, 38)
+tab-border: rgb(255, 201, 102)
+tab-border-selected: rgb(255, 201, 102)
+tab-divider: rgb(255, 201, 102)
+tab-foreground: rgb(179, 179, 179)
+tab-foreground-selected: rgb(179, 179, 179)
+table-border: rgba(255,255,255,.3)
+table-footer-background: rgba(0,0,0,.4)
+table-header-background: rgba(0,0,0,.1)
+tag-background: rgb(255, 201, 102)
+tag-foreground: rgb(25, 25, 25)
+tiddler-background: rgb(38, 38, 38)
+tiddler-border: rgba(240, 196, 117, 0.7)
+tiddler-controls-foreground: rgb(128, 128, 128)
+tiddler-controls-foreground-hover: rgba(255, 255, 255, 0.8)
+tiddler-controls-foreground-selected: rgba(255, 255, 255, 0.9)
+tiddler-editor-background: rgb(33, 33, 33)
+tiddler-editor-border: rgb(63, 63, 63)
+tiddler-editor-border-image: rgb(25, 25, 25)
+tiddler-editor-fields-even: rgb(33, 33, 33)
+tiddler-editor-fields-odd: rgb(28, 28, 28)
+tiddler-info-background: rgb(43, 43, 43)
+tiddler-info-border: rgb(25, 25, 25)
+tiddler-info-tab-background: rgb(43, 43, 43)
+tiddler-link-background: rgb(38, 38, 38)
+tiddler-link-foreground: rgb(204, 204, 255)
+tiddler-subtitle-foreground: rgb(255, 255, 255)
+tiddler-title-foreground: rgb(255, 192, 76)
+toolbar-cancel-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-done-button: 
+toolbar-edit-button: 
+toolbar-info-button: 
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+untagged-background: rgb(255, 255, 255)
+very-muted-foreground: rgba(240, 196, 117, 0.7)

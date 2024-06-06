@@ -1,49 +1,60 @@
 title: $:/core/macros/toc
 tags: $:/tags/Macro
 
+
+\define toc-open-icon() $:/core/images/down-arrow
+\define toc-closed-icon() $:/core/images/right-arrow
+
 \define toc-caption()
+\whitespace trim
+<span class="tc-toc-caption tc-tiny-gap-left">
 <$set name="tv-wikilinks" value="no">
   <$transclude field="caption">
     <$view field="title"/>
   </$transclude>
 </$set>
+</span>
 \end
 
 \define toc-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <ol class="tc-toc">
-  <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
-    <$vars item=<<currentTiddler>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}} excluded="""[enlist<__exclude__>] -[<__tag__>]""">
-      <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
-        <li class=<<toc-item-class>>>
-          <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link><$view field='caption'><$view field='title'/></$view></$link>">
-            <<toc-caption>>
-          </$list>
-          <$macrocall $name="toc-body" tag=<<item>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>>/>
-        </li>
+  <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[subfilter<__exclude__>]""">
+    <$let item=<<currentTiddler>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+      <$set name="excluded" filter="[subfilter<__exclude__>] [<__tag__>]">
+        <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
+          <li class=<<toc-item-class>>>
+            <$list filter="[all[current]toc-link[no]]" emptyMessage="<$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}><<toc-caption>></$link>">
+              <<toc-caption>>
+            </$list>
+            <$macrocall $name="toc-body" tag=<<item>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>>/>
+          </li>
+        </$set>
       </$set>
-    </$vars>
+    </$let>
   </$list>
 </ol>
 \end
 
-\define toc(tag,sort:"",itemClassFilter:" ")
-<$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> />
+\define toc(tag,sort:"",itemClassFilter:"", exclude)
+<$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>>/>
 \end
 
 \define toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <!-- helper function -->
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
-  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
+  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-    <$link>
+    <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
-          {{$:/core/images/right-arrow}}
+          <$transclude tiddler=<<toc-closed-icon>> />
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
-          {{$:/core/images/down-arrow}}
+          <$transclude tiddler=<<toc-open-icon>> />
         </$button>
       </$reveal>
       <<toc-caption>>
@@ -56,20 +67,21 @@ tags: $:/tags/Macro
 </$qualify>
 \end
 
-\define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
+\define toc-unlinked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <!-- helper function -->
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
-  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
+  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
       <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
-          {{$:/core/images/right-arrow}}
+        <$transclude tiddler=<<toc-closed-icon>> />
           <<toc-caption>>
         </$button>
       </$reveal>
       <$reveal type="match" stateTitle=<<toc-state>> text="open">
         <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
-          {{$:/core/images/down-arrow}}
+          <$transclude tiddler=<<toc-open-icon>> />
           <<toc-caption>>
         </$button>
       </$reveal>
@@ -85,32 +97,36 @@ tags: $:/tags/Macro
 <$macrocall $name="toc-linked-expandable-body" tag=<<tag>> sort=<<sort>> itemClassFilter=<<itemClassFilter>> exclude=<<excluded>> path=<<path>>/>
 \end
 
-\define toc-expandable(tag,sort:"",itemClassFilter:" ",exclude,path)
-<$vars tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> excluded="""[enlist<__exclude__>] -[<__tag__>]""" path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
-  <ol class="tc-toc toc-expandable">
-    <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
-      <$list filter="[all[current]toc-link[no]]" emptyMessage=<<toc-expandable-empty-message>> >
-        <$macrocall $name="toc-unlinked-expandable-body" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="""itemClassFilter""" exclude=<<excluded>> path=<<path>> />
+\define toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
+\whitespace trim
+<$let tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+  <$set name="excluded" filter="[subfilter<__exclude__>] [<__tag__>]">
+    <ol class="tc-toc toc-expandable">
+      <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[subfilter<__exclude__>]""">
+        <$list filter="[all[current]toc-link[no]]" emptyMessage=<<toc-expandable-empty-message>> >
+          <$macrocall $name="toc-unlinked-expandable-body" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="""itemClassFilter""" exclude=<<excluded>> path=<<path>> />
+        </$list>
       </$list>
-    </$list>
-  </ol>
-</$vars>
+    </ol>
+  </$set>
+</$let>
 \end
 
-\define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
+\define toc-linked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
-  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected" >
+  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item" >
     <li class=<<toc-item-class>>>
-      <$link>
-          <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
+      <$link to={{{ [<currentTiddler>get[target]else<currentTiddler>] }}}>
+          <$list filter="[all[current]tagging[]$sort$limit[1]]  -[subfilter<__exclude__>]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
           <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
             <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
-              {{$:/core/images/right-arrow}}
+            <$transclude tiddler=<<toc-closed-icon>> />
             </$button>
           </$reveal>
           <$reveal type="match" stateTitle=<<toc-state>> text="open">
             <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
-              {{$:/core/images/down-arrow}}
+              <$transclude tiddler=<<toc-open-icon>> />
             </$button>
           </$reveal>
         </$list>
@@ -124,20 +140,21 @@ tags: $:/tags/Macro
 </$qualify>
 \end
 
-\define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter:" ",exclude,path)
+\define toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
+\whitespace trim
 <$qualify name="toc-state" title={{{ [[$:/state/toc]addsuffix<__path__>addsuffix[-]addsuffix<currentTiddler>] }}}>
-  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item" value="toc-item-selected">
+  <$set name="toc-item-class" filter=<<__itemClassFilter__>> emptyValue="toc-item-selected" value="toc-item">
     <li class=<<toc-item-class>>>
-      <$list filter="[all[current]tagging[]limit[1]]" variable="ignore" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button> <$view field='caption'><$view field='title'/></$view>">
+      <$list filter="[all[current]tagging[]$sort$limit[1]] -[subfilter<__exclude__>]" variable="ignore" emptyMessage="""<$button class="tc-btn-invisible">{{$:/core/images/blank}}</$button><span class="toc-item-muted"><<toc-caption>></span>""">
         <$reveal type="nomatch" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-popup-keep">
-            {{$:/core/images/right-arrow}}
+            <$transclude tiddler=<<toc-closed-icon>> />
             <<toc-caption>>
           </$button>
         </$reveal>
         <$reveal type="match" stateTitle=<<toc-state>> text="open">
           <$button setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-popup-keep">
-            {{$:/core/images/down-arrow}}
+            <$transclude tiddler=<<toc-open-icon>> />
             <<toc-caption>>
           </$button>
         </$reveal>
@@ -155,23 +172,27 @@ tags: $:/tags/Macro
 \end
 
 \define toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
-<$vars tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> excluded="""[enlist<__exclude__>] -[<__tag__>]""" path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
-  <ol class="tc-toc toc-selective-expandable">
-    <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[enlist<__exclude__>]""">
-      <$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>> >
-        <$macrocall $name="toc-unlinked-selective-expandable-body" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>>/>
+\whitespace trim
+<$let tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+  <$set name="excluded" filter="[subfilter<__exclude__>] [<__tag__>]">
+    <ol class="tc-toc toc-selective-expandable">
+      <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[subfilter<__exclude__>]""">
+        <$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage=<<toc-selective-expandable-empty-message>> >
+          <$macrocall $name="toc-unlinked-selective-expandable-body" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<excluded>> path=<<path>>/>
+        </$list>
       </$list>
-    </$list>
-  </ol>
-</$vars>
+    </ol>
+  </$set>
+</$let>
 \end
 
-\define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
+\define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
+\whitespace trim
 <$tiddler tiddler={{{ [<__selectedTiddler__>get[text]] }}}>
   <div class="tc-tabbed-table-of-contents">
     <$linkcatcher to=<<__selectedTiddler__>>>
       <div class="tc-table-of-contents">
-        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="[all[current]field:title<__selectedTiddler__>]"/>
+        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="[all[current]] -[<__selectedTiddler__>get[text]]" exclude=<<__exclude__>>/>
       </div>
     </$linkcatcher>
     <div class="tc-tabbed-table-of-contents-content">
@@ -189,9 +210,9 @@ tags: $:/tags/Macro
 </$tiddler>
 \end
 
-\define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"")
+\define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
+\whitespace trim
 <$linkcatcher to=<<__selectedTiddler__>>>
-  <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>>/>
+  <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>> exclude=<<__exclude__>> />
 </$linkcatcher>
 \end
-

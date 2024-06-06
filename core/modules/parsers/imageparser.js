@@ -28,6 +28,8 @@ var ImageParser = function(type,text,options) {
 		}
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["image/svg+xml"] = ImageParser;
@@ -39,6 +41,7 @@ exports["image/webp"] = ImageParser;
 exports["image/heic"] = ImageParser;
 exports["image/heif"] = ImageParser;
 exports["image/x-icon"] = ImageParser;
+exports["image/vnd.microsoft.icon"] = ImageParser;
 
 })();
 

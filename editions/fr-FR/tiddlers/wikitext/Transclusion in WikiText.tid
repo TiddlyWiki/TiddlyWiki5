@@ -1,0 +1,54 @@
+caption: Transclusion
+created: 20131205160146648
+fr-title: Transclusion en WikiTexte
+modified: 20220417223717492
+tags: WikiText
+title: Transclusion in WikiText
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Vous pouvez insérer le contenu d'un tiddler dans un autre en utilisant les marques de <<fr Transclusion>><<:>>
+
+* `{{MonTiddler}}` transclut un seul tiddler
+* `{{MonTiddler||TitreDuGabarit}}` affiche un tiddler via un format spécifié par un [[Gabarit de Tiddler|TemplateTiddlers]]
+* `{{||TitreDuGabarit}}` affiche le gabarit spécifié sans altérer le [[Tiddler en cours|currentTiddler Variable]]
+
+!! Transclure les Références de Texte
+
+Vous pouvez aussi utiliser une [[Référence de Texte|TextReference]] à la place du titre d'un tiddler<<:>>
+
+* `{{MonTiddler!!champ}}` transclut un champ spécifique d'un tiddler quelconque
+* `{{!!champ}}` transclut le champ spécifique du tiddler courant
+* `{{MonTiddler##index}}` transclut une propriété indexée spécifique d'un [[Tiddler Data|DataTiddlers]]
+* `{{##index}}` transclut une propriété indéxée spécifique du [[Tiddler Data|DataTiddlers]] courant
+
+!! Transclusion Filtrée
+
+Une syntaxe similaire peut être mise en œuvre pour transclure une liste de tiddlers définie par un [[filtre|Filters]]<<:>>
+
+```
+{{{ [tag[mécanisme]] }}}
+{{{ [tag[mécanisme]] ||TitreDuGabarit}}}
+```
+
+! Widgets Générés
+
+La syntaxe de transclusion en <<fr WikiText>> génère un <<fr TiddlerWidget>> enveloppé dans un <<fr TranscludeWidget>>. Par exemple, `{{MonTiddler||MonGabarit!!monChamp}}` génère cette paire de widgets<<:>>
+
+{{MonTiddler||MonGabarit!!monChamp}}
+
+```
+<$tiddler tiddler="MonTiddler">
+<$transclude tiddler="MonGabarit" field="monChamp"/>
+</$tiddler>
+```
+
+Voir Aussi&nbsp;:
+
+* <<fr "Transclusion Basic Usage">>
+* <<fr "Transclusion with Templates">>
+* <<fr "TemplateTiddlers">>
+* <<fr "TranscludeWidget">>
+* <<fr "Transclusion and Substitution">>
+* <<fr "WikiText parser mode: transclusion examples">>

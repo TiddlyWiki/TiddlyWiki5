@@ -1,8 +1,9 @@
 created: 201401191419
-modified: 201401190837
+modified: 201901150000
 tags: Widgets
 title: TextWidget
 caption: text
+text-test: e=mc^^2^^
 
 ! Introduction
 
@@ -17,22 +18,16 @@ The content of the `<$text>` widget is not used.
 
 ! Example
 
-```
-<$vars string="//italic//">
+<$macrocall $name='wikitext-example-without-html' src='<$vars string="//italic//">
 
 * <<string>>
 * <$text text=<<string>>/>
 
 </$vars>
-```
+' />
 
-Displays as:
+<$macrocall $name='wikitext-example-without-html' src='
+The text-test field of this tiddler has a field value: <$text text={{!!text-test}}/>
 
-<<<
-<$vars string="//italic//">
-
-* <<string>>
-* <$text text=<<string>>/>
-
-</$vars>
-<<<
+It displays in its normal WikiText format as: {{!!text-test}}
+' />

@@ -46,6 +46,9 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.nwsaveas) {
 		domNode.setAttribute("nwsaveas",this.nwsaveas);
 	}
+	if(this.accept) {
+		domNode.setAttribute("accept",this.accept);
+	}
 	// Nw.js supports "webkitdirectory" and "nwdirectory" to allow a directory to be selected
 	if(this.webkitdirectory) {
 		domNode.setAttribute("webkitdirectory",this.webkitdirectory);
@@ -67,6 +70,11 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		}
 		return false;
 	},false);
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -83,6 +91,7 @@ BrowseWidget.prototype.execute = function() {
 	this.param = this.getAttribute("param");
 	this.tooltip = this.getAttribute("tooltip");
 	this.nwsaveas = this.getAttribute("nwsaveas");
+	this.accept = this.getAttribute("accept");
 	this.webkitdirectory = this.getAttribute("webkitdirectory");
 	this.nwdirectory = this.getAttribute("nwdirectory");
 };
@@ -91,6 +100,11 @@ BrowseWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 BrowseWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if($tw.utils.count(changedAttributes) > 0) {
+		this.refreshSelf();
+		return true;	
+	}
 	return false;
 };
 

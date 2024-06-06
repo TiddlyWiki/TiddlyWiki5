@@ -6,7 +6,7 @@ Appearance/Caption: Εμφάνιση
 Appearance/Hint: Τρόποι για να παραμετροποιήσετε την εμφάνιση του δικού σας TiddlyWiki.
 Basics/AnimDuration/Prompt: Διάρκεια κινούμενων εφέ:
 Basics/Caption: Βασικά
-Basics/DefaultTiddlers/BottomHint: Χρησιμοποιήστε &#91;&#91;διπλές αγκύλες &#93;&#93; για τίτλους με κενά. Ή, μπορείτε να διαλέξετε τη <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">διατήρηση της διάταξης της ιστορίας</$button>
+Basics/DefaultTiddlers/BottomHint: Χρησιμοποιήστε &#91;&#91;διπλές αγκύλες &#93;&#93; για τίτλους με κενά. Ή, μπορείτε να διαλέξετε τη {{διατήρηση της διάταξης της ιστορίας||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Προκαθορισμένα tiddler:
 Basics/DefaultTiddlers/TopHint: Επιλέξτε τα tiddler που θα εμφανίζονται κατά την έναρξη:
 Basics/Language/Prompt: Γεια σας! Τρέχουσα γλώσσα:

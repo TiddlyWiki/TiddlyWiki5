@@ -35,22 +35,23 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
   filter="[all[current]!has[dropdown]]"
   variable="no-dropdown"
 
-><$button
+><$set name=disabled filter={{!!condition-disabled}}><$button
 
   class="tc-btn-invisible $(buttonClasses)$"
   tooltip=<<tooltip-text>>
   actions={{!!actions}}
+  disabled=<<disabled>>
 
 ><span
 
-  data-tw-keyboard-shortcut={{!!shortcuts}}
+  data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}
 
 /><<toolbar-button-icon>><$transclude
 
   tiddler=<<currentTiddler>>
   field="text"
 
-/></$button></$list><$list
+/></$button></$set></$list><$list
 
   filter="[all[current]has[dropdown]]"
   variable="dropdown"
@@ -60,24 +61,25 @@ title: $:/core/ui/EditTemplate/body/toolbar/button
   name="dropdown-state"
   value=<<qualify "$:/state/EditorToolbarDropdown">>
 
-><$button
+><$set name=disabled filter={{!!condition-disabled}}><$button
 
   popup=<<dropdown-state>>
   class="tc-popup-keep tc-btn-invisible $(buttonClasses)$"
   selectedClass="tc-selected"
   tooltip=<<tooltip-text>>
   actions={{!!actions}}
+  disabled=<<disabled>>
 
 ><span
 
-  data-tw-keyboard-shortcut={{!!shortcuts}}
+  data-tw-keyboard-shortcut={{{ [<disabled>match[yes]then[]else{!!shortcuts}] }}}
 
 /><<toolbar-button-icon>><$transclude
 
   tiddler=<<currentTiddler>>
   field="text"
 
-/></$button><$reveal
+/></$button></$set><$reveal
 
   state=<<dropdown-state>>
   type="popup"

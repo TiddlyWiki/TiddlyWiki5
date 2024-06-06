@@ -8,10 +8,10 @@ You can import tiddlers into a ~TiddlyWiki from external files or directly from 
 
 !! Importing content from external files
 
-There are several ways to import content from external files:
+There are several ways to import content (including text, images, pdf documents, etc.) from external files:
 
-* Use the {{$:/core/images/import-button}} ''import'' button (under the ''Tools'' tab in the sidebar) to select a local file
-* Drag and drop files from Windows Explorer or OS X Finder etc. into the TiddlyWiki browser window
+* Use the <<.icon $:/core/images/import-button>> ''import'' button (under the ''Tools'' tab in the sidebar) to select a local file
+* Drag and drop files from Windows Explorer or OS X Finder etc. into the ~TiddlyWiki browser window
 * Paste content directly from the clipboard using the menu or keyboard shortcut (<kbd>ctrl-V</kbd> or <kbd>cmd-V</kbd>)
 ** Currently supported in Chrome, Firefox and Edge (but not Internet Explorer)
 
@@ -22,5 +22,5 @@ Most files are imported as individual tiddlers. The exceptions are:
 
 !! Importing content from other ~TiddlyWiki browser windows
 
-Tiddlers can be imported from other ~TiddlyWiki browser windows via [[Drag and Drop]]. Drag a tiddler link or tag from one ~TiddlyWiki browser window to another. Dragging a link will import a single tiddler while dragging a tag pill will import all of the tiddlers that carry that tag.
+Tiddlers can be imported from other ~TiddlyWiki browser windows via [[Drag and Drop]]. Drag a TiddlyWiki internal link or a tag from one ~TiddlyWiki browser window to another. Dragging an internal link will import a single tiddler while dragging a tag pill will import all of the tiddlers that carry that tag.
 

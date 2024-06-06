@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/line-width
 caption: {{$:/language/Buttons/LineWidth/Caption}}
 description: {{$:/language/Buttons/LineWidth/Hint}}
-condition: [<targetTiddler>is[image]]
+condition: [<targetTiddler>is[image]] -[<targetTiddler>type[image/svg+xml]]
 dropdown: $:/core/ui/EditorToolbar/line-width-dropdown
 
 <$text text={{$:/config/BitmapEditor/LineWidth}}/>

@@ -3,17 +3,19 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/advanced-search-button}} {{$:/language/Buttons/AdvancedSearch/Caption}}
 description: {{$:/language/Buttons/AdvancedSearch/Hint}}
 
-\define control-panel-button(class)
+\whitespace trim
+\define advanced-search-button(class)
+\whitespace trim
 <$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
-<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/core/images/advanced-search-button}}
 </$list>
-<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/AdvancedSearch/Caption}}/></span>
 </$list>
 </$button>
 \end
 
-<$list filter="[list[$:/StoryList]] +[field:title[$:/AdvancedSearch]]" emptyMessage=<<control-panel-button>>>
-<<control-panel-button "tc-selected">>
+<$list filter="[list[$:/StoryList]] +[field:title[$:/AdvancedSearch]]" emptyMessage=<<advanced-search-button>>>
+<<advanced-search-button "tc-selected">>
 </$list>

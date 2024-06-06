@@ -1,8 +1,4 @@
 title: $:/core/ui/BinaryWarning
 
 \define lingo-base() $:/language/BinaryWarning/
-<div class="tc-binary-warning">
-
 <<lingo Prompt>>
-
-</div>

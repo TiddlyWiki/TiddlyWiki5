@@ -1,0 +1,18 @@
+caption: tm-unload-plugin-library
+created: 20191004112527669
+modified: 20191004113621714
+tags: Messages
+title: WidgetMessage: tm-unload-plugin-library
+type: text/vnd.tiddlywiki
+
+The `tm-unload-plugin-library` message unloads the specified plugin library and deletes associated temporary tiddlers.
+
+|!Name |!Description |
+|url |Url specifying the plugin library to be unloaded |
+
+Unloading a plugin library deletes the following tiddlers:
+
+* The tiddler titled `$:/temp/ServerConnection/` + `<url>`
+* All tiddlers with the prefix `$:/temp/RemoteAssetInfo/` + `<url>` + `/`
+
+The `tm-unload-plugin-library` message is usually generated with the ButtonWidget and is handled by the core itself.

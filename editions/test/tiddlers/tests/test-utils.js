@@ -25,14 +25,89 @@ describe("Utility tests", function() {
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
 
+	it("should handle parsing a date", function() {
+		var pd = function(v) {
+			return $tw.utils.parseDate(v).toUTCString();
+		};
+		expect(pd("20150428204930183")).toEqual("Tue, 28 Apr 2015 20:49:30 GMT");
+		expect(pd("-20150428204930183")).toEqual("Sun, 28 Apr -2015 20:49:30 GMT");
+		expect(pd("00730428204930183")).toEqual("Fri, 28 Apr 0073 20:49:30 GMT");
+		expect(pd("-00730428204930183")).toEqual("Thu, 28 Apr -0073 20:49:30 GMT");
+	});
+
+	it("should handle base64 encoding emojis", function() {
+		var booksEmoji = "📚";
+		expect(booksEmoji).toBe(booksEmoji);
+		// 📚 is U+1F4DA BOOKS, which is represented by surrogate pair 0xD83D 0xDCDA in Javascript
+		expect(booksEmoji.length).toBe(2);
+		expect(booksEmoji.charCodeAt(0)).toBe(55357); // 0xD83D
+		expect(booksEmoji.charCodeAt(1)).toBe(56538); // 0xDCDA
+		expect($tw.utils.base64Encode(booksEmoji)).not.toBe("7aC97bOa", "if base64 is 7aC97bOa then surrogate pairs were incorrectly treated as codepoints");
+		expect($tw.utils.base64Encode(booksEmoji)).toBe("8J+Tmg==", "if surrogate pairs are correctly treated as a single code unit then base64 should be 8J+Tmg==");
+		expect($tw.utils.base64Decode("8J+Tmg==")).toBe(booksEmoji);
+		expect($tw.utils.base64Decode($tw.utils.base64Encode(booksEmoji))).toBe(booksEmoji, "should round-trip correctly");
+	});
+
+	it("should handle base64 encoding emojis in URL-safe variant", function() {
+		var booksEmoji = "📚";
+		expect($tw.utils.base64Encode(booksEmoji, false, true)).toBe("8J-Tmg==", "if surrogate pairs are correctly treated as a single code unit then base64 should be 8J+Tmg==");
+		expect($tw.utils.base64Decode("8J-Tmg==", false, true)).toBe(booksEmoji);
+		expect($tw.utils.base64Decode($tw.utils.base64Encode(booksEmoji, false, true), false, true)).toBe(booksEmoji, "should round-trip correctly");
+	});
+
+	it("should handle base64 encoding binary data", function() {
+		var binaryData = "\xff\xfe\xfe\xff";
+		var encoded = $tw.utils.base64Encode(binaryData,true);
+		expect(encoded).toBe("//7+/w==");
+		var decoded = $tw.utils.base64Decode(encoded,true);
+		expect(decoded).toBe(binaryData, "Binary data did not round-trip correctly");
+	});
+
+	it("should handle base64 encoding binary data in URL-safe variant", function() {
+		var binaryData = "\xff\xfe\xfe\xff";
+		var encoded = $tw.utils.base64Encode(binaryData,true,true);
+		expect(encoded).toBe("__7-_w==");
+		var decoded = $tw.utils.base64Decode(encoded,true,true);
+		expect(decoded).toBe(binaryData, "Binary data did not round-trip correctly");
+	});
+
+	it("should handle stringifying a string array", function() {
+		var str = $tw.utils.stringifyList;
+		expect(str([])).toEqual("");
+		expect(str(["Tiddler8"])).toEqual("Tiddler8");
+		expect(str(["Tiddler8  "])).toEqual("[[Tiddler8  ]]");
+		expect(str(["A+B", "A-B", "A=B"])).toEqual("A+B A-B A=B");
+		expect(str(["A B"])).toEqual("[[A B]]");
+		// Starting special characters aren't treated specially,
+		// even though this makes a list incompatible with a filter parser.
+		expect(str(["+T", "-T", "~T", "=T", "$T"])).toEqual("+T -T ~T =T $T");
+		expect(str(["A", "", "B"])).toEqual("A  B");
+	});
+
+	it("stringifyList shouldn't interfere with setting variables to negative numbers", function() {
+		var wiki = new $tw.Wiki();
+		wiki.addTiddler({title: "test", text: "<$set name=X filter='\"-7\"'>{{{ [<X>add[2]] }}}</$set>"});
+		// X shouldn't be wrapped in brackets. If it is, math filters will treat it as zero.
+		expect(wiki.renderTiddler("text/plain","test")).toBe("-5");
+	});
+
 	it("should handle formatting a date string", function() {
 		var fds = $tw.utils.formatDateString,
 			// nov is month: 10!
 			d = new Date(2014,10,9,17,41,28,542);
+		expect(fds(d,"{era:bce||ce}")).toBe("ce");
+		expect(fds(d,"YYYY")).toBe("2014");
 		expect(fds(d,"DDD DD MMM YYYY")).toBe("Sunday 9 November 2014");
 		expect(fds(d,"ddd hh mm ssss")).toBe("Sun 17 41 2828");
 		expect(fds(d,"MM0DD")).toBe("1109");
 		expect(fds(d,"MM0\\D\\D")).toBe("110DD");
+		expect(fds(d,"TIMESTAMP")).toBe(d.getTime().toString());
+		const day = d.getUTCDate();
+		const dayStr = ("" + day).padStart(2, '0');
+		const hours = d.getUTCHours();
+		const hoursStr = ("" + hours).padStart(2, '0');
+		const expectedUtcStr = `201411${dayStr}${hoursStr}4128542`;
+		expect(fds(d,"[UTC]YYYY0MM0DD0hh0mm0ssXXX")).toBe(expectedUtcStr);
 
 		// test some edge cases found at: https://en.wikipedia.org/wiki/ISO_week_date
 		// 2016-11-13 is Week 45 and it's a Sunday (month nr: 10)
@@ -59,6 +134,19 @@ describe("Utility tests", function() {
 		d = new Date(2014,11,29,23,59,59);
 		expect(fds(d,"WW")).toBe("1");
 		expect(fds(d,"wYYYY")).toBe("2015");
+
+		// Negative years
+		d = new Date(-2014,10,9,17,41,28,542);
+		expect(fds(d,"YYYY")).toBe("-2014");
+		expect(fds(d,"aYYYY")).toBe("2014");
+		expect(fds(d,"{era:bce||ce}")).toBe("bce");
+
+		// Zero years
+		d = new Date(0,10,9,17,41,28,542);
+		d.setUTCFullYear(0); // See https://stackoverflow.com/a/5870822
+		expect(fds(d,"YYYY")).toBe("0000");
+		expect(fds(d,"aYYYY")).toBe("0000");
+		expect(fds(d,"{era:bce|z|ce}")).toBe("z");
 	});
 
 	it("should parse text references", function() {
@@ -85,6 +173,40 @@ describe("Utility tests", function() {
 			{ title : 'title', field : 'field##index' }
 		);
 
+	});
+
+	it("should compare versions", function() {
+		var cv = $tw.utils.compareVersions;
+		expect(cv("v0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("0.0.0","v0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","0.0.0")).toEqual(0);
+		expect(cv("v0.0.0","not a version")).toEqual(0);
+		expect(cv("v0.0.0",undefined)).toEqual(0);
+		expect(cv("not a version","v0.0.0")).toEqual(0);
+		expect(cv(undefined,"v0.0.0")).toEqual(0);
+		expect(cv("v1.0.0","v1.0.0")).toEqual(0);
+		expect(cv("v1.0.0","1.0.0")).toEqual(0);
+
+		expect(cv("v1.0.1",undefined)).toEqual(+1);
+		expect(cv("v1.0.1","v1.0.0")).toEqual(+1);
+		expect(cv("v1.1.1","v1.1.0")).toEqual(+1);
+		expect(cv("v1.1.2","v1.1.1")).toEqual(+1);
+		expect(cv("1.1.2","v1.1.1")).toEqual(+1);
+
+		expect(cv("v1.0.0","v1.0.1")).toEqual(-1);
+		expect(cv("v1.1.0","v1.1.1")).toEqual(-1);
+		expect(cv("v1.1.1","v1.1.2")).toEqual(-1);
+		expect(cv("1.1.1","1.1.2")).toEqual(-1);
+	});
+
+	it("should insert strings into sorted arrays", function() {
+		expect($tw.utils.insertSortedArray([],"a").join(",")).toEqual("a");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"a").join(",")).toEqual("a,b,c,d");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"d").join(",")).toEqual("b,c,d");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"f").join(",")).toEqual("b,c,d,f");
+		expect($tw.utils.insertSortedArray(["b","c","d","e"],"f").join(",")).toEqual("b,c,d,e,f");
+		expect($tw.utils.insertSortedArray(["b","c","g"],"f").join(",")).toEqual("b,c,f,g");
+		expect($tw.utils.insertSortedArray(["b","c","d"],"ccc").join(",")).toEqual("b,c,ccc,d");
 	});
 
 });

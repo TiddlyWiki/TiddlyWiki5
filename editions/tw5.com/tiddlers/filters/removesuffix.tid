@@ -1,15 +1,31 @@
+caption: removesuffix
 created: 20140828133830424
-modified: 20150203190744000
+modified: 20230711082859816
+op-input: a [[selection of titles|Title Selection]]
+op-output: those input titles that end with <<.place S>>, but with those characters discarded
+op-parameter: a string of characters
+op-parameter-name: S
+op-purpose: filter the input titles by how they end, deleting that suffix
+op-suffix: the <<.op removesuffix>> operator uses a rich suffix, see below for details
 tags: [[Filter Operators]] [[String Operators]]
 title: removesuffix Operator
 type: text/vnd.tiddlywiki
-caption: removesuffix
-op-purpose: filter the input titles by how they end, deleting that suffix
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: a string of characters
-op-parameter-name: S
-op-output: those input titles that end with <<.place S>>, but with those characters discarded
 
-<<.s-matching-is-case-sensitive>>
+<<.tip " This filters out input titles that do not end with S. For removing S without filtering out input titles that don't end with S, see [[trim|trim Operator]].">>
+
+<<.from-version "5.2.2">>
+
+The <<.op removesuffix>> operator uses an extended syntax that permits multiple flags to be passed:
+
+```
+[removesuffix:<flag list>[<parameter>]]
+```
+
+* ''flag list'': a comma delimited list of flags
+
+The available flags are:
+
+* ''casesensitive'': (default), this flag forces a case-sensitive match, where upper and lower case letters are considered different
+* ''caseinsensitive'': overrides the default so that upper and lower case letters are considered identical for matching purposes
 
 <<.operator-examples "removesuffix">>

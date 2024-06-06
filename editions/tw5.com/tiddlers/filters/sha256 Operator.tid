@@ -1,0 +1,18 @@
+caption: sha256
+created: 20220129105504961
+modified: 20220129105504961
+op-input: a [[selection of titles|Title Selection]]
+op-output: the base64 encoded sha256 of the input, truncated to the specified length
+op-parameter: the number of characters to return, up to a maximum of 64
+op-parameter-name: L
+op-purpose: apply sha256 hash to a string
+tags: [[Filter Operators]] [[String Operators]]
+title: sha256 Operator
+type: text/vnd.tiddlywiki
+from-version: 5.1.14
+
+Hashes are a way of turning strings of arbitrary length into obfuscated strings of fixed length. They are often used in situations where items need to be stored by name but it is inconvenient to allow arbitrary length strings.
+
+See Wikipedia for details of the [[sha256|https://en.wikipedia.org/wiki/SHA-2]] operation.
+
+<<.operator-examples "sha256">>

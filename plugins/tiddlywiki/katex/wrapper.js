@@ -15,18 +15,23 @@ Wrapper for `katex.min.js` that provides a `<$latex>` widget. It is also availab
 var katex = require("$:/plugins/tiddlywiki/katex/katex.min.js"),
     chemParse = require("$:/plugins/tiddlywiki/katex/mhchem.min.js"),
 	Widget = require("$:/core/modules/widgets/widget.js").widget;
-// Add \ce, \pu, and \tripledash to the KaTeX macros.
-katex.__defineMacro("\\ce", function(context) {
-  return chemParse(context.consumeArgs(1)[0], "ce")
-});
-katex.__defineMacro("\\pu", function(context) {
-  return chemParse(context.consumeArgs(1)[0], "pu");
-});
-//  Needed for \bond for the ~ forms
-//  Raise by 2.56mu, not 2mu. We're raising a hyphen-minus, U+002D, not 
-//  a mathematical minus, U+2212. So we need that extra 0.56.
-katex.__defineMacro("\\tripledash", "{\\vphantom{-}\\raisebox{2.56mu}{$\\mkern2mu"
-+ "\\tiny\\text{-}\\mkern1mu\\text{-}\\mkern1mu\\text{-}\\mkern2mu$}}");
+
+katex.macros = {};
+katex.updateMacros = function() {
+	var tiddlers = $tw.wiki.getTiddlersWithTag("$:/tags/KaTeX/Macro"),
+		regex = /#\d/g, // Remove the arguments like #1#2
+		tid, macro, cmd;
+	for (var i=0; i < tiddlers.length; i++) {
+		tid = $tw.wiki.getTiddler(tiddlers[i]);
+		try {
+			macro = tid.fields["caption"];
+			macro = macro.replace(regex, "");
+			cmd = tid.fields["text"];
+			katex.macros[macro] = cmd;
+		} catch(ex) {// Catch the bad ones
+		};
+	};
+};
 
 var KaTeXWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
@@ -48,9 +53,10 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	// Get the source text
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
 	var displayMode = this.getAttribute("displayMode",this.parseTreeNode.displayMode || "false") === "true";
+	katex.updateMacros();
 	// Render it into a span
 	var span = this.document.createElement("span"),
-		options = {throwOnError: false, displayMode: displayMode};
+		options = {throwOnError: false, displayMode: displayMode, macros: katex.macros};
 	try {
 		if(!this.document.isTiddlyWikiFakeDom) {
 			katex.render(text,span,options);

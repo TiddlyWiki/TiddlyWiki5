@@ -1,0 +1,73 @@
+title: $:/plugins/tiddlywiki/share/wizard
+
+\define generate-json()
+<$macrocall $name="jsontiddlers" filter=<<share-filter>> spaces="" $output="text/raw"/>
+\end
+
+\define inner-share-actions()
+<$wikify name="json" text=<<generate-json>>>
+<$action-sendmessage $message="tm-copy-to-clipboard" $param={{{ [<json>encodeuricomponent[]addprefix[##]addprefix<base-url>] }}}/>
+</$wikify>
+\end
+
+\define share-actions()
+<$set name="base-url" value={{$:/config/plugins/share/base-url}} emptyValue={{$:/info/url/full}}>
+<$set name="tv-action-refresh-policy" value="always">
+<$set name="share-filter" value={{$:/config/plugins/share/filter}}>
+<<inner-share-actions>>
+</$set>
+</$set>
+</$set>
+\end
+
+<div class="tc-sharing-wizard-wrapper">
+
+! Welcome to the sharing edition of ~TiddlyWiki
+
+This edition of ~TiddlyWiki allows users to create links to wikis with the special capability of containing embedded tiddlers that are loaded into the target wiki at startup. Most browsers allow tens of kilobytes of data to be loaded in this way, making it possible to conveniently share groups of tiddlers as a fully functional wiki. See the [[readme|$:/plugins/tiddlywiki/share]] for more details.
+
+!! 1 - Import or create the tiddlers that are to be shared
+
+The first step to create a sharing URL is to import or otherwise create the tiddlers that are to be shared.
+
+!! 2 - Check that the sharing filter is correct
+
+The tiddlers that are included in the sharing URL are determined by the combination of two filters.
+
+The sharing filter specifies the tiddlers to be shared:
+
+<$edit-text tiddler="$:/config/plugins/share/filter" tag="input" class="tc-sharing-wizard-editor"/>
+
+The exclusion subfilter is used to exclude the system tiddlers comprising this wiki:
+
+<$edit-text tiddler="$:/config/plugins/share/exclusions" tag="input" class="tc-sharing-wizard-editor"/>
+
+!! 3 - Review the tiddlers to be shared
+
+Tiddlers to be shared (<$count filter={{$:/config/plugins/share/filter}}/>):
+
+<ul>
+<$list filter={{$:/config/plugins/share/filter}}>
+<li>
+<$link>
+<$view field="title"/>
+</$link>
+</li>
+</$list>
+</ul>
+
+!! 3 - Generate the sharing link
+
+<$button>
+<<share-actions>>
+Generate sharing link
+</$button> (the link will be copied to the clipboard)
+
+!! 5 - Export the shared tiddlers
+
+<$button>
+<$action-sendmessage $message="tm-download-file" $param="$:/core/templates/exporters/JsonFile" exportFilter={{$:/config/plugins/share/filter}} filename="tiddlers.json"/>
+Export as JSON
+</$button>
+
+</div>

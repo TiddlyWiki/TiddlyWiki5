@@ -1,0 +1,33 @@
+created: 20190205023543910
+modified: 20190217012121130
+tags: 
+title: Widget attributes tutorial part II
+type: text/vnd.tiddlywiki
+
+This example will build on the previous one. The only modification will be to add a check to the `refresh` method. The `refreshSelf` will only be called if a change to the attributes is detected.
+
+The `computeAttributes` method returns a Javascript object containing properties for each attribute which has changed. So a check like `if (changedAttributes.attr1 || changedAttributes.attr2 || changedAttributes.attr3)` etc. can be used to detect the change.  See the refresh method in [[$:/core/modules/widgets/view.js]] for an example showing the check for multiple attributes.
+
+For this example, `message` is the only attribute implemented.
+
+```javascript
+/*
+Refresh if the attribute value changed since render
+*/
+MyWidget.prototype.refresh = function(changedTiddlers) {
+	// Find which attributes have changed
+	var changedAttributes = this.computeAttributes();
+	if (changedAttributes.message) {
+		this.refreshSelf();
+		return true;
+	} else {
+		return false;
+	}
+};
+```
+
+The full code can be seen at [[hello-attribute-optimized.js]] and here is the result ([[Widget attributes demo II]]):
+
+{{Widget attributes demo II}}
+
+The visible behavior here should be identical to the unoptimized behavior of the previous tutorial.

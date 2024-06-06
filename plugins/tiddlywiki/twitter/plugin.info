@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/twitter",
-	"description": "Twitter for TiddlyWiki",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"list": "readme usage"
+	"name": "Twitter",
+	"description": "Twitter embedding tools",
+	"list": "readme usage",
+	"stability": "STABILITY_3_LEGACY"
 }

@@ -19,7 +19,8 @@ html body .tc-subtitle {
 }
 
 .tc-view-toolbar-tools {
-	font-size: 0.7em;	
+	font-size: 0.5em;
+	line-height: 1.1;
 }
 
 .tc-view-toolbar-tools p {

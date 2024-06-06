@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 Before experimenting with TiddlyDesktop internals you should find the location of the “user configuration folder” - click the “Settings” button on the main TiddlyDesktop window, and then click the button “Open user config folder”. Then move up to locate the parent folder, which should be called “TiddlyDesktop”. If things go wrong, you can reset TiddlyDesktop to its factory state by deleting this entire folder.
 
-Click the `Backstage` button on the main TiddlyDesktop window to open the backstage wiki. This is is a Node.js-like instance of TiddlyWiki that runs the UI and logic of TiddlyDesktop.
+Click the `Backstage` button on the main TiddlyDesktop window to open the backstage wiki. This is a Node.js-like instance of TiddlyWiki that runs the UI and logic of TiddlyDesktop.
 
 !! How do I get rid of the "Add a ~TiddlyWiki Folder" button.
 

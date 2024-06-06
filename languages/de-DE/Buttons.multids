@@ -17,7 +17,9 @@ ControlPanel/Hint: Öffne das Control-Panel
 CopyToClipboard/Caption: Kopiere in die Zwischenablage
 CopyToClipboard/Hint: Kopiere diesen Text in die Zwischenablage
 Delete/Caption: Löschen
-Delete/Hint: Lösche diesen Tiddler
+Delete/Hint: Lösche den Tiddler
+DeleteTiddlers/Caption: Lösche Tiddler
+DeleteTiddlers/Hint: Lösche diese Tiddler
 Edit/Caption: Bearbeiten
 Edit/Hint: Bearbeite diesen Tiddler
 Encryption/Caption: Verschlüsselung
@@ -32,6 +34,7 @@ ExportTiddler/Caption: Exportieren
 ExportTiddler/Hint: Diesen Tiddler exportieren
 ExportTiddlers/Caption: Mehrere exportieren
 ExportTiddlers/Hint: Mehrere Tiddler exportieren
+SidebarSearch/Hint: Aktiviere das "sidebar" Suchfeld
 Fold/Caption: Ausblenden Textbereich
 Fold/Hint: Der Tiddler Textbereich wird ausgeblendet
 Fold/FoldBar/Caption: Textbereich ein/aus
@@ -56,12 +59,16 @@ Home/Caption: Home
 Home/Hint: Öffnen der Standard-Tiddler
 Language/Caption: Sprache
 Language/Hint: Auswahldialog für die Systemsprache
+LayoutSwitcher/Hint: Öffne den Layout Selektor
+LayoutSwitcher/Caption: Layout
 Manager/Caption: Tiddler Manager
 Manager/Hint: Öffne den Tiddler Manager
 More/Caption: mehr
 More/Hint: Weitere Aktionen
 NewHere/Caption: Neu hier
 NewHere/Hint: Erstelle einen neuen Tiddler, der mit dem Namen dieses Tiddlers getaggt ist
+NetworkActivity/Caption: Netzwerk Aktivität
+NetworkActivity/Hint: Alle offen Netwerk Anfragen beenden
 NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
 NewJournalHere/Caption: Neues Journal hier
@@ -181,6 +188,7 @@ Subscript/Caption: Tiefsgestellt
 Subscript/Hint: Ausgewählten Text tiefgestellt darstellen
 Superscript/Caption: Hochgestellt
 Superscript/Hint: Ausgewählten Text hochgestellt darstellen
+ToggleSidebar/Hint: Invertiere die "sidebar" Sichtbarkeit
 Transcludify/Caption: Transklusion
 Transcludify/Hint: Transklusion - Den selektierten Text in geschwungene Klammern setzen
 Underline/Caption: Unterstreichen

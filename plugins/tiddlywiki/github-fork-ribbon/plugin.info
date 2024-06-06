@@ -1,6 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/github-fork-ribbon",
-	"description": "Corner ribbon",
-	"author": "Simon Whitaker, adapted for TiddlyWiki by JeremyRuston",
-	"list": "readme usage"
+	"name": "GitHub Fork Ribbon",
+	"description": "GitHub-inspired corner ribbon",
+	"author": "Simon Whitaker",
+	"list": "readme usage",
+	"stability": "STABILITY_0_DEPRECATED"
 }

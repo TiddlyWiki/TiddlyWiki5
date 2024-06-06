@@ -1,0 +1,28 @@
+caption: ~TidGi Desktop
+color: #FF8A65
+community-author: LinOnetwo
+created: 20220221080637764
+delivery: App
+description: Application de bureau pour présenter et synchroniser TiddlyWiki
+fr-title: Enregistrer avec TidGi Desktop
+method: save
+modified: 20220402105820520
+tags: Saving Mac Windows Linux
+title: Saving on TidGi Desktop
+type: text/vnd.tiddlywiki
+url: https://github.com/tiddly-gittly/TidGi-Desktop/releases/latest
+
+Les détails sur les choix de conception de TidGi sont disponibles ici<<:>> [[Lisez-moi !|https://github.com/tiddly-gittly/TidGi-Desktop#readme]]. En voici un bref résumé<<:>>
+
+# TidGi est basé sur <<fr "TiddlyWiki on Node.js">> alors que [[TiddlyDesktop|Saving on TiddlyDesktop]] se concentre sur les wikis mono-fichier HTML
+# TidGi intègre un script de synchronisation de sauvegarde git-sync
+# TidGi fournit des fonctionnalités basées sur electron, telles qu'une mini-fenêtre de menu et une console de ligne de commande.
+
+!!! Installation
+
+# Installez la dernière version de TidGi Desktop disponible sur {{!!url}}
+# Ouvrez TidGi
+# Créez un nouveau wiki, ou ouvrez un dossier hébergeant un wiki nodejs existant
+# Les modifications sont enregistrées automatiquement, et vous pouvez éventuellement configurer TidGi pour les synchroniser sur github toutes les 30 minutes
+
+[img[https://github.com/tiddly-gittly/TidGi-Desktop/raw/master/docs/images/preference.png]]

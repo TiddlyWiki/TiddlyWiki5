@@ -341,3 +341,233 @@ Abraham Samma, @abesamma, 2018/10/31
 German Ramírez, @g0erman, 2018/11/14
 
 @00SS, 2018/12/10
+
+David Nebauer, @dnebauer, 2019/01/01
+
+Moritz Ulrich, @the-kenny, 2019/01/03
+
+Johannes Löthberg, @kyrias, 2019/01/07
+
+Ben Webber, @benwebber, 2019/01/09
+
+Jesse Weinstein, @JesseWeinstein, 2019/01/14
+
+Adam Sherwood, @admls, 2019/01/27
+
+Joshua Fontany, @joshuafontany, 2019/03/07
+
+Irene Castaños, @jdjdjdjdjdjd, 2019/03/11
+
+Dong Zhihong, @donmor, 2019/05/29
+
+Joshua Stubbs, @LordRatte, 2019/05/31
+
+Robin Munn, @rmunn, 2019/06/16
+
+Mark Kerrigan, @markkerrigan, 2019/08/24
+
+Stefan Schuster-Teupke, @StefanSTFG, 2019/08/26
+
+Nils Lindemann, @nilslindemann, 2022/01/10
+
+Marica Odagaki, @ento, 2019/08/30
+
+Mark Stegeman, @markstegeman, 2019/08/31
+
+Mohammad Rahmani, @kookma, 2019/09/03
+
+Jan-Oliver Kaiser, @janno, 2019/09/06
+
+Xavier Maysonnave, @xmaysonnave, 2019/11/08
+
+Will Atwood Mitchell, @wam, 2019/12/11
+
+Stefan Krüger, @s-light, 2020/01/04
+
+Lee Sheng Long, @s-l-lee, 2020/01/25
+
+Scott Willeke, @activescott, 2020/02/01
+
+@lucible, 2020/02/05
+
+Matthias Bilger, @m42e, 2020/03/11
+
+Mandar Vaze, @mandarvaze, 2020/04/08
+
+Lin Dongwu, @linonetwo, 2020/04/15
+
+Tobias Hermann, @idotobi, 2020/04/19 
+
+Nicolas Petton, @NicolasPetton, 2020/04/30
+
+Csaba Molnar, @mocsa, 2020/04/29
+
+Jonas Passerini, @passuf, 2020/05/14
+
+Dazhong Xia, @jdangerx, 2020/06/23
+
+Diep Pham, @favadi, 2020/07/30
+
+Adithya Badidey, @adithya-badidey, 2020/08/10
+
+Kamal Habash, @Kamal-Habash, 2020/08/28
+
+Florian Kohrt, @fkohrt, 2020/09/10
+
+Gerald Liu, @gera2ld, 2020/09/25
+
+Stefano Stoduto, @OmbraDiFenice, 2020/10/03
+
+Ryan Kramer, @default-kramer, 2020/10/24
+
+Miha Lunar, @SmilyOrg, 2020/11/04
+
+Maki Lam, @makiaea, 2020/12/27
+
+Chris Nicoll, @clutterstack, 2020/12/28
+
+Odin Jorna, @OdinJorna, 2020/12/31
+
+Joe Bordes, @joebordes, 2021/01/02
+
+Glenn Dixon, @dixonge, 2021/01/03
+
+Russ Thomas, @codacodr, 2021/01/03
+
+Peter Neumark, @neumark, 2021/01/15
+
+Daniel Goß, @FlashSystems, 2021/01/19
+
+@leehawk787, 2021/01/21
+
+Yoonchae Lee, @BlueGreenMagick, 2021/01/21
+
+Dyllon Gagnier, @slaymaker1907, 2021/01/24
+
+J. Wilhelm, @jeremyredhead, 2021/01/27
+
+Quentin Minster, @laomaiweng, 2021/03/10
+
+Cindy Ruan, @cdruan, 2021/03/18
+
+Urban Alič, @ualich, 2021/05/06
+
+Joe Bordes, @joebordes, 2021/05/30
+
+Frank Bruns-Ballhausen, @FBB-de, 2021/06/09
+
+Álvaro González Rincón, @Alzacon, 2021/06/10
+
+RJ Skerry-Ryan, @rryan, 2021/07/03
+
+J. Song, @8d1h, 2021/08/05
+
+Soren Bjornstad, @sobjornstad, 2021/08/18
+
+Boris Mann, @bmann, 2021/09/28
+ 
+Maurycy Zarzycki, @evidentlycube, 2021-10-01
+
+Brian Theado, @btheado, 2021-10-10
+
+@Telumire, 2021-10-18
+
+@eiro10, 2021-11-14
+
+Fred, @tw-FRed, 2021/12/04
+
+Joseph Cosentino, @jc-ose, 2021-12-14
+
+@davout1806, 2021/12/17
+
+@pmario, @TiddlyVee, 2022/02/26
+
+Eskha, @es-kha, 2022/03/04
+
+@FSpark, 2022/03/08
+
+Guang Li, @oflg, 2022/03/12
+
+Dam S., @damscal, 2022/03/24
+
+Max Schillinger, @MaxGyver83, 2022/05/11
+
+Nolan Darilek, @NDarilek,  2022/06/21
+
+Keiichi Shiga (🎈 BALLOON | FU-SEN), @fu-sen. 2022/07/07
+
+Nathaniel Knight, @nathanielknight, 2022/07/26
+
+HuanCheng Bai, @bestony, 2022/09/17
+
+Carlo Colombo, @carlo-colombo, 2022/11/30
+
+Wincent Balin, @wincentbalin, 2022/12/18
+
+Jeffrey Zhang, @jeffrey4l, 2022/12/24
+
+cs84285, @cs8425, 2022/12/30
+
+Nick Bell, @newmedicine, 2023/01/01
+
+Frank Kmiec, @fkmiec, 2023-01-01
+
+Pippo Peppo, @pippep, 2023-01-03
+
+Scott Sauye, @CrossEye, 2023-01-04
+
+Marcus Winter, @yaisog, 2023-01-07
+
+Ethan Weller, @gamedungeon, 2023-01-17
+
+Mateusz Wilczek, @mateuszwilczek, 2023/02/16
+
+Andrea Octo, @andrigamerita, 2023/02/24
+
+HuanC Fu, @hffqyd, 2023/03/03
+
+Michelle Saad, @michsa, 2023-03-08
+
+Yukai Chou, @muzimuzhi, 2023-04-07
+
+Carmine Guida, @carmineguida, 2023-05-17
+
+Tavin Cole, @tavin, 2023/05/25
+
+WhiteFall, @Zacharia2, 2023/06/04
+
+@oeyoews, 2023/06/30
+
+Eric Haberstroh, @pille1842, 2023/07/23
+
+@lilscribby, 2023-07-24
+
+@TiddlyTweeter, 2023/07/25
+
+@catter-fly, 2023/07/27
+
+@cmo-pomerium, 2023/08/03
+
+BuckarooBanzay, @BuckarooBanzay, 2023/09/01
+
+Timur, @T1mL3arn, 2023/10/04
+
+Wang Ke, @Gk0Wk, 2023/10/17
+
+@frittro, 2023/10/27
+
+@etardiff, 2023/12/10
+
+John Long, @drevarr, 2023/12/12
+
+Ed Holsinger, @eschlon, 2024/02/08
+
+Kim I. McKinley, @PotOfCoffee2Go, 2024/03/16
+
+@Jinix6, 2024/03/31
+
+Anders Jarmund, @andjar, 2024/04/05
+
+@sarna, 2024/04/28
+
+Fokzo Kat, @CyberFoxar, 2024/05/20

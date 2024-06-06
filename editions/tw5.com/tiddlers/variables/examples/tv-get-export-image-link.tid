@@ -1,11 +1,17 @@
 created: 20150228124038000
+modified: 20240310134432122
 tags: [[tv-get-export-image-link Variable]] [[Variable Examples]]
 title: tv-get-export-image-link Variable (Examples)
 type: text/vnd.tiddlywiki
 
-This example fetches [[the TiddlyWiki icon|https://www.tiddlywiki.com/favicon.ico]]:
+This example fetches [[the TiddlyWiki icon|https://www.tiddlywiki.com/favicon.ico]]
 
 <$importvariables filter="$:/editions/tw5.com/macro-examples/tv-get-export-image-link">
 <$codeblock code={{$:/editions/tw5.com/macro-examples/tv-get-export-image-link}}/>
 <$macrocall $name=".example" n="1" eg="""[img[favicon.ico]]"""/>
 </$importvariables>
+
+Also see:
+
+* [[substitute Operator]]
+* [[Substituted Attribute Values]]

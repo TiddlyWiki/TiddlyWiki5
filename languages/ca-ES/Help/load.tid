@@ -13,4 +13,4 @@ Per carregar els tiddlers d'un fitxer TiddlyWiki encriptat cal indicar la contra
 tiddlywiki ./ElMeuWiki --password c0ntras3nya --load la_meva_wiki.html
 ```
 
-Noteu que TiddlyWiki no carregarà una versió anterior d'un connector ja carregat.
+Tingueu en compte que TiddlyWiki no carregarà una versió anterior d'un connector ja carregat.

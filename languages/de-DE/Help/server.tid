@@ -1,7 +1,7 @@
 title: $:/language/Help/server
-description: Stellt einen HTTP server für TiddlyWiki zur Verfügung. (Dieser Befehl ist abgekündigt! - Neu ist: "listen")
+description: (Dieser Befehl ist abgekündigt! - Neu ist: "listen") -- Stellt einen HTTP server für TiddlyWiki zur Verfügung.
 
-TiddlyWiki bringt einen sehr einfachen Web-Server mit. Dieser ist zwar kompatibel mit dem TiddlyWeb Protokoll, ist jedoch nicht ausgereift genug, um im produktiven Einsatz im Netz eingesetzt zu werden. 
+TiddlyWiki bringt einen einfachen Web-Server mit.
 
 Der Server kann spezifische Tiddler im angegebenen Format anzeigen (rendern). Zudem können einzelne, oder mehrere Tiddler im JSON Format übertragen werden. Die unterstützten HTTP Funktionen sind: `GET`, `PUT` und `DELETE`
 
@@ -34,6 +34,8 @@ Der Name und das Passwort können als "leere" Zeichenketten definiert werden, we
 ```
 --server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
 ```
+
+Wenn Sie eine Addresse wie oben verwenden, dann ist der Server für das lokale Netzwerk sichtbar. Weitere Sicherheitshinweise finden sie unter: WebServer auf tiddlywiki.com
 
 Es ist möglich mehrere TiddlyWiki Server gleichzeitig zu starten. Jeder Server muss jedoch mit einem eigenen Port gestartet werden. Es kann sinnvoll sein, den Prozess mit lokalen "Umgebungsvariable" zu starten. Hier wird "MEINE_PORT_NUMMER" als Beispiel verwendet.
 

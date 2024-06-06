@@ -8,7 +8,7 @@ In the default "classic" storyview mode, open tiddlers are displayed in a vertic
 
 * The best approach is to ''use the Open tab'' in the sidebar to click on the open tiddler to which you wish to navigate.
 
-** The ''Open'' tab contains a list of all the open tiddlers. You can click on any tiddler in the list to jump to it, or click the "×" next to a tiddler link to close it. There is also a handy {{$:/core/images/close-all-button}} ''close all'' button at the bottom of the list of open tiddlers.
+** The ''Open'' tab contains a list of all the open tiddlers. You can click on any tiddler in the list to jump to it, or click the "×" next to a tiddler link to close it. There is also a handy <<.icon $:/core/images/close-all-button>> ''close all'' button at the bottom of the list of open tiddlers.
 
 * Another way is to simply ''scroll the page up and down'' using the story river scrollbar to the right.
 

@@ -1,7 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/async",
-	"description": "Wrapper for async.js by Caolan McMahon",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"list": "readme license"
+	"name": "Async",
+	"description": "async.js library",
+	"author": "Caolan McMahon",
+	"list": "readme license",
+	"stability": "STABILITY_2_STABLE"
 }

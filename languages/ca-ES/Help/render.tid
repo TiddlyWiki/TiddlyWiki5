@@ -1,0 +1,36 @@
+title: $:/language/Help/render
+description: Genera fitxers individuals a partir de tiddlers
+
+Genera els tiddlers individuals indicats per un filtre i desa els resultats als fitxers indicats.
+
+Opcionalment, es pot especificar el títol d’un tiddler de plantilla. En aquest cas, en lloc de generar directament cada tiddler, el tiddler de la plantilla es genera amb la variable "currentTiddler" establerta al títol del tiddler que s'està generant.
+
+També es pot indicar opcionalment un nom i un valor per a una altra variable.
+
+```
+--render <filtre-de-tiddler> [<nom-del-filtre>] [<render-type>] [<plantilla>] [<nom>] [<valor>]
+```
+
+* '' filtre-de-tiddler '': Filtre que indica els tiddler(s) que s'han de generar
+* '' nom-del-filtre '': Filtre opcional que transforma els títols dels tiddlers en noms de ruta. Si s'omet, el valor per omissió és `[is[tiddler]addsuffix [.html]]`, que utilitza el títol de tiddler sense modificar com a nom de fitxer
+* '' tipus-de-contingut '': tipus de contingut opcional: `text / html` (el valor per omissió) retorna el text HTML complet i ` text/plain` només retorna el contingut del text (és a dir, ignora les etiquetes HTML i altres materials no imprimibles)
+* ''plantilla'': Plantilla opcional per a generar cada tiddler
+* ''nom'': Nom de variable opcional
+* ''valor'': Valor de variable opcional
+
+Per omissió, el nom del fitxer es resol en relació amb la subcarpeta `output ' de la carpeta d’edició. L'ordre `--output` es pot utilitzar per dirigir la sortida a una altra carpeta.
+
+Notes:
+
+* A la carpeta de sortida no s'esborra cap fitxer existent
+* Es generen automàticament les carpetes que falten a la ruta del nom del fitxer.
+* En referir un tiddler amb espais al seu títol, tingueu cura de fer servir tant les cometes necessàries pel vostre intèrpret d'ordres com els dobles claudàtors de TiddlyWiki: `--render" [[Motovun Jack.jpg]] "`
+
+* El nom del filtre s'avalua amb els elements seleccionats establerts al títol del tiddler que s'està generant, el que permet que el títol s’utilitzi com a base per calcular el nom del fitxer. Per exemple `[encodeuricomponent[]addprefix[static/]]` s'aplica la codificació URI a cada títol i després afegeix el prefix `static/`
+
+* L'ordre `--render` reemplaça, i és més flexible, que les ordres` --rendertiddler` i `--rendertiddlers`, que estan obsoletes.
+
+Exemples:
+
+* `--render "[!is[system]]" "[encodeuricomponent[]addprefix[tiddlers/]addsuffix[.html]]"` --
+genera tots els tiddlers que no siguin del sistema com a fitxers a la carpeta "tiddlers" amb títols codificats per URL amb l'extensió HTML

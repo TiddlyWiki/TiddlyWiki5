@@ -1,0 +1,28 @@
+caption: TW5-firebase
+color: #FFEB3B
+community-author: Peter Neumark
+created: 20210115121027582
+delivery: Google Firebase backend
+description: Plateforme Google Firebase pour TiddlyWiki
+fr-title: TW5-firebase: TiddlyWiki5 sur Google Firebase par Peter Neumark
+method: save
+modified: 20220402105820520
+tags: Chrome Firefox [[Internet Explorer]] Linux Mac Opera [[Other Resources]] Safari Saving Windows plugins Edge
+title: TW5-firebase: TiddlyWiki5 for Google Firebase by Peter Neumark
+type: text/vnd.tiddlywiki
+url: https://github.com/neumark/tw5-firebase
+
+Une version de TiddlyWiki5 hébergée sur Google-Firebase.
+
+{{!!url}}
+
+<<<
+J'utilise TiddlyWiki5 avec Google Firebase depuis plus d'un an. C'est suffisamment stable pour l'utiliser au quotidien. Il y a un accompagnement détaillé sur la façon de créer sa propre instance avec de nombreuses captures d'écran. Le processus complet prend moins de 30 minutes<<:>> https://neumark.github.io/tw5-firebase/
+
+Merci de considérer cette version comme une preuve de concept plus qu'un produit fini<<!>> Je me suis concentré sur la collaboration multi-appareils ou en petites équipes<<:>>
+
+* Authentification de base (les sacs ont une politique d'accès qui détermine qui peut les lire ou les écrire).
+* De multiples wikis peuvent être hébergés avec le même compte Firebase.
+* Utilise l'authentification sociale intégrée à Firebase pour identifier les utilisateurs.
+* Les tiddlers sont verrouillés individuellement en écriture, pour éviter que les utilisateurs écrasent mutuellement leurs modifications.
+<<< Traduction de [[l'annonce de publication par Peter Neumark|https://groups.google.com/g/tiddlywikidev/c/2WN2b6uCxJ8]]

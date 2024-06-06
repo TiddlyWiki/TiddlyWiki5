@@ -6,7 +6,7 @@ Appearance/Caption: Apparentia
 Appearance/Hint: Manieras de cambiar le apparentia de tu TiddlyWiki.
 Basics/AnimDuration/Prompt: Animation - duration:
 Basics/Caption: Basic
-Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;parentheses quadrate duple&#93;&#93; pro titulos con spatios. O selige <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">mantener le ordine de historia</$button>
+Basics/DefaultTiddlers/BottomHint: Usa &#91;&#91;parentheses quadrate duple&#93;&#93; pro titulos con spatios. O selige {{mantener le ordine de historia||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Notas standard:
 Basics/DefaultTiddlers/TopHint: Selige qual notas es monstrate in le initio:
 Basics/Language/Prompt: Hallo! Lingua actual:

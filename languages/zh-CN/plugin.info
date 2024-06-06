@@ -1,0 +1,10 @@
+{
+	"title": "$:/languages/zh-CN",
+	"name": "zh-CN",
+	"plugin-type": "language",
+	"description": "Chinese (China)",
+	"author": "BramChen",
+	"core-version": ">=5.0.8",
+	"dependents": ["$:/languages/zh-Hans"],
+	"plugin-priority": 110
+}

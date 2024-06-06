@@ -1,16 +1,63 @@
 title: $:/plugins/tiddlywiki/highlight/usage
 
+\import $:/plugins/tiddlywiki/highlight/readme
+
+\define jsDelivrLink() https://www.jsdelivr.com/package/gh/highlightjs/cdn-release?path=build%2Flanguages&version=$(highlightVersion)$
+\define unpkgLink() https://unpkg.com/browse/@highlightjs/cdn-assets@$(highlightVersion)$/languages/
+
 ! Usage
 
-Fenced code blocks can have a language specifier added to trigger highlighting in a specific language. Otherwise heuristics are used to detect the language.
+Syntax highlighting is triggered when you add language information to code blocks defined with triple backticks or with the `<$codeblock>` widget. For fenced code blocks, specify the code's language immediately after the first set of backticks:
 
 ```
  ```js
  var a = b + c; // Highlighted as JavaScript
  ```
 ```
+
 ! Adding Themes
 
 You can add themes from highlight.js by copying the CSS to a new tiddler and tagging it with [[$:/tags/Stylesheet]]. The available themes can be found on GitHub:
 
 https://github.com/isagalaev/highlight.js/tree/master/src/styles
+
+! Supporting Additional Languages
+
+The [[highlight.js|https://github.com/highlightjs/highlight.js]] project supports many languages. Only a subset of these languages are supported by the plugin. You can change the language set using either of the following methods:
+
+!! Browser-based Method
+
+You can import language definitions into <$text text="JavaScript"/> tiddlers, with their `module-type` set to "highlight".
+
+First, locate the language file(s) you need. You can fetch the files from the following CDNs:
+
+* <a href=<<jsDelivrLink>>>jsDelivr</a>
+* <a href=<<unpkgLink>>>unpkg</a>
+
+Then, click the button below to create a "highlight" module. Copy and paste the content of a language file into the the text area. Give your tiddler a meaningful title so you can keep track of the languages you've installed. You may choose to either create one tiddler per language or lump all language definitions into one tiddler. Save and reload your wiki.
+
+<$button tooltip="add new languages" aria-label="add new languages"  >
+<$action-createtiddler $basetitle="highlight-language.js"  text="" type="application/javascript" module-type="highlight">
+<$action-sendmessage $message="tm-edit-tiddler" $param=<<createTiddler-title>>/>
+</$action-createtiddler>
+Add New Language(s)
+</$button>
+
+!!! Keeping Your Language Definitions Up-to-date
+
+Remember to update installed languages whenever this plugin is upgraded: 
+
+<ul>
+<$list filter="[[highlight]modules[]]" emptyMessage="""<li>(none installed)</li>""">
+<li><$link><<currentTiddler>></$link></li>
+</$list>
+</ul>
+
+!! Via <$text text="TiddlyWiki"/> on Node.js
+
+You can replace the supplied highlight.js library with a custom version:
+
+# Go to the highlight.js project [[download page|https://highlightjs.org/download/]], select the language definitions to include, and press the Download button to download a zip archive containing customised support files for a highlight.js syntax highlighting server.
+# Locate the `highlight.min.js` file in the highlight plugin -- on a stock Debian 8 system running Tiddlywiki5 under node-js, it is in `/usr/local/lib/node_modules/tiddlywiki/plugins/tiddlywiki/highlight/files/`.
+# Replace the plugin `highlight.min.js` file located in step 2 with the one from the downloaded archive obtained in step 1.
+# Restart the ~TiddlyWiki server.

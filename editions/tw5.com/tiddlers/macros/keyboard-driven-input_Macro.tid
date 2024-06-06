@@ -1,0 +1,25 @@
+title: keyboard-driven-input Macro
+tags: Macros [[Core Macros]]
+
+The <<.def keyboard-driven-input>> [[macro|Macros]] generates an input field or textarea that lets you cycle through a given list of entries with the <kbd><<displayshortcuts ((input-up))>></kbd> and <kbd><<displayshortcuts ((input-down))>></kbd> keys. Doing so, an entry gets selected and can be processed with further actions
+
+!! Parameters
+
+To create the input field or textarea, the <<.def keyboard-driven-input>> [[macro|Macros]] accepts all parameters of the EditTextWidget
+
+The additional parameters are:
+
+|parameter  |purpose |h
+|storeTitle |the title of the tiddler that stores the user input |
+|selectionStateTitle |the title of the tiddler that stores the selected entry with a -primaryList or -secondaryList suffix to make it unique |
+|inputAcceptActions |the actions that get processed when the user hits <kbd><<displayshortcuts ((input-accept))>></kbd> |
+|inputAcceptVariantActions |the actions that get processed when the user hits <kbd><<displayshortcuts ((input-accept-variant))>></kbd> |
+|inputCancelActions |the actions that get processed when the user hits <kbd><<displayshortcuts ((input-cancel))>></kbd> |
+|configTiddlerFilter |a ''filter'' that specifies the tiddler that stores the first item-filter in its <<.field first-search-filter>> field and the second item-filter in its <<.field second-search-filter>> field |
+|firstSearchFilterField |the field of the configTiddler where the first search-filter is stored. Defaults to <<.field first-search-filter>> |
+|secondSearchFilterField |the field of the configTiddler where the second search-filter is stored. Defaults to <<.field second-search-filter>> |
+|filterMinLength |the minimum length of the user input after which items are filtered |
+
+See [[Demonstration: keyboard-driven-input Macro]] for further guidance on using this macro.
+
+

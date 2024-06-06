@@ -18,6 +18,8 @@ CopyToClipboard/Caption: 複製到剪貼簿
 CopyToClipboard/Hint: 將此文字複製到剪貼簿
 Delete/Caption: 刪除
 Delete/Hint: 刪除此條目
+DeleteTiddlers/Caption: 刪除條目
+DeleteTiddlers/Hint: 刪除條目
 Edit/Caption: 編輯
 Edit/Hint: 編輯此條目
 Encryption/Caption: 加密
@@ -26,12 +28,14 @@ Encryption/ClearPassword/Caption: 清除密碼
 Encryption/ClearPassword/Hint: 清除密碼且不加密儲存此維基
 Encryption/SetPassword/Caption: 設定密碼
 Encryption/SetPassword/Hint: 設定加密儲存此維基的密碼
+EmergencyDownload/Caption: 下載條目為 json
 ExportPage/Caption: 導出所有條目
 ExportPage/Hint: 導出所有條目
 ExportTiddler/Caption: 導出此條目
 ExportTiddler/Hint: 導出此條目
 ExportTiddlers/Caption: 導出條目
 ExportTiddlers/Hint: 導出條目
+SidebarSearch/Hint: 選擇側邊欄的搜尋欄位
 Fold/Caption: 收合條目
 Fold/Hint: 收合此條目的內容
 Fold/FoldBar/Caption: 收合條
@@ -51,17 +55,21 @@ Help/Hint: 顯示說明中心
 Home/Caption: 首頁
 Home/Hint: 開啟首頁條目
 Import/Caption: 導入
-Import/Hint: 導入許多類型的檔案包括文字、圖像、TiddlyWiki 或 JSON
+Import/Hint: 導入許多類型的檔案包括文字、圖像、~TiddlyWiki 或 JSON
 Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
 Language/Hint: 選擇使用者介面語言
+LayoutSwitcher/Hint: 開啟版面切換器
+LayoutSwitcher/Caption: 版面
 Manager/Caption: 條目管理器
 Manager/Hint: 開啟條目管理器
 More/Caption: 更多
 More/Hint: 更多動作
 NewHere/Caption: 新增子條目
 NewHere/Hint: 建立一個標籤為此條目名稱的新條目
+NetworkActivity/Caption: 網路活動
+NetworkActivity/Hint: 取消所有網路活動
 NewJournal/Caption: 新增日誌
 NewJournal/Hint: 建立一個新的日誌條目
 NewJournalHere/Caption: 新增子日誌
@@ -181,6 +189,7 @@ Subscript/Caption: 下標
 Subscript/Hint: 套用下標格式於所選文字
 Superscript/Caption: 上標
 Superscript/Hint: 套用上標格式於所選文字
+ToggleSidebar/Hint: 切換顯示或隱藏側邊欄
 Transcludify/Caption: 嵌入
 Transcludify/Hint: 套用嵌入於所選文字
 Underline/Caption: 底線

@@ -3,6 +3,7 @@ tags: $:/tags/Exporter
 description: {{$:/language/Exporters/StaticRiver}}
 extension: .html
 
+\define tv-config-static() yes
 \define tv-wikilink-template() #$uri_encoded$
 \define tv-config-toolbar-icons() no
 \define tv-config-toolbar-text() no
@@ -14,6 +15,7 @@ extension: .html
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="generator" content="TiddlyWiki" />
 <meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="format-detection" content="telephone=no">
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <title>{{$:/core/wiki/title}}</title>
@@ -26,7 +28,7 @@ extension: .html
 </head>
 <body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
-<section class="tc-story-river">
+<section class="tc-story-river tc-static-story-river">
 {{$:/core/templates/exporters/StaticRiver/Content||$:/core/templates/html-tiddler}}
 </section>
 </body>

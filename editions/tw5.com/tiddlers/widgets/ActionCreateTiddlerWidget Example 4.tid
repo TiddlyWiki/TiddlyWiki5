@@ -1,0 +1,28 @@
+created: 20200131150229551
+modified: 20211113011129601
+tags: ActionCreateTiddlerWidget
+title: ActionCreateTiddlerWidget Example 4
+type: text/vnd.tiddlywiki
+
+\define testCreate()
+<$action-createtiddler $basetitle="base" $template="ActionCreateTiddlerWidget Template" aa="new field aa" bb="new field bb" />
+\end
+
+This example uses a base-title "base" and a template: [[ActionCreateTiddlerWidget Template]].
+
+There will be new fields "aa" and "bb" which are added to the new tiddlers.
+
+```
+\define testCreate()
+<$action-createtiddler $basetitle="base" $template="ActionCreateTiddlerWidget Template" aa="new field aa" bb="new field bb" />
+\end
+
+<$button actions=<<testCreate>> >
+Create Tiddler
+</$button>
+```
+
+<$button actions=<<testCreate>> >
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+Create Tiddler
+</$button> - Clicking this button will also open the Right sidebar: Recent tab

@@ -28,12 +28,8 @@ function getAllFilterOperators() {
 Export our filter function
 */
 exports.all = function(source,operator,options) {
-	// Get our suboperators
-	var allFilterOperators = getAllFilterOperators();
-	// Cycle through the suboperators accumulating their results
-	var results = [],
-		subops = operator.operand.split("+");
 	// Check for common optimisations
+	var subops = operator.operand.split("+");
 	if(subops.length === 1 && subops[0] === "") {
 		return source;
 	} else if(subops.length === 1 && subops[0] === "tiddlers") {
@@ -46,13 +42,17 @@ exports.all = function(source,operator,options) {
 		return options.wiki.eachShadowPlusTiddlers;
 	}
 	// Do it the hard way
+	// Get our suboperators
+	var allFilterOperators = getAllFilterOperators();
+	// Cycle through the suboperators accumulating their results
+	var results = new $tw.utils.LinkedList();
 	for(var t=0; t<subops.length; t++) {
 		var subop = allFilterOperators[subops[t]];
 		if(subop) {
-			$tw.utils.pushTop(results,subop(source,operator.prefix,options));
+			results.pushTop(subop(source,operator.prefix,options));
 		}
 	}
-	return results;
+	return results.makeTiddlerIterator(options.wiki);
 };
 
 })();

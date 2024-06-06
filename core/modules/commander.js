@@ -154,7 +154,7 @@ Commander.prototype.extractNamedParameters = function(params,mandatoryParameters
 	if(errors.length > 0) {
 		return errors.join(" and\n");
 	} else {
-		return paramsByName;		
+		return paramsByName;
 	}
 };
 

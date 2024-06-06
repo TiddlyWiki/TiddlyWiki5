@@ -1,6 +1,6 @@
 title: $:/core/ui/EditTemplate/body/preview/diffs-current
 tags: $:/tags/EditPreview
-caption: differences from current
+caption: {{$:/language/EditTemplate/Body/Preview/Type/DiffCurrent}}
 list-after: $:/core/ui/EditTemplate/body/preview/output
 
 <$list filter="[<currentTiddler>!is[image]]" emptyMessage={{$:/core/ui/EditTemplate/body/preview/output}}>

@@ -1,0 +1,34 @@
+title: $:/language/Help/savewikifolder
+description: Enregistre un wiki dans un nouveau dossier wiki
+
+<<.from-version "5.1.20">> Enregistre le wiki courant sous la forme d'un dossier wiki, comprenant les tiddlers, les plugins et les informations de configuration&nbsp;:
+
+```
+--savewikifolder <chemindudossierwiki> [<filtre>]
+```
+
+* Le dossier wiki cible doit être vide ou inexistant
+* Le filtre spécifie les tiddlers à inclure. Il est optionnel et vaut par défaut `[all[tiddlers]]`
+* Les plugins appartenant à la bibliothèque officielle de plugins sont remplacés par des références à ces plugins dans le fichier `tiddlywiki.info`
+* Les plugins sur mesure sont déballés dans leur propre dossier
+
+Les options suivantes sont acceptées :
+
+* ''filter'': une expression filtre qui définit les tiddlers à inclure en sortie.
+* ''explodePlugins'': "yes" par défaut
+** ''yes'' "explosera" les plugins en fichiers séparés (un par tiddler) et les sauvegardera dans le répertoire plugin sous le dossier principal du wiki
+** ''no'' empêchera l'explosion des plugins en autant de fichiers que de tiddlers qui les constituaient. Le plugin sera sauvegardé en un seul tiddler JSON sous le dossier tiddlers/.
+
+On notera que les deux options ''explodePlugins'' produiront des dossiers wiki qui ne changeront pas le wiki original. La différence réside dans la manière dont les plugins sont représentés sous le dossier principal du wiki.
+
+On utilise typiquement cette commande avec la commande `--load` pour convertir un fichier TiddlyWiki HTML en un dossier wiki&nbsp;:
+
+```
+tiddlywiki --load ./monwiki.html --savewikifolder ./mondossierwiki
+```
+
+Sauvegarde des plugins directement sous le répertoire tiddlers/ du dossier wiki cible :
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder explodePlugins=no
+```

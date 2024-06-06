@@ -15,7 +15,6 @@ description: एक प्लगइन के लिए वर्णनात्
 draft.of: tiddler के शीर्षक में शामिल,जिसमें से यह एक ड्राफ्ट है,ड्राफ्ट tiddlers के लिए
 draft.title: ड्राफ्ट tiddlers के लिए, tiddler के प्रस्तावित नए शीर्षक में शामिल
 footer: एक विज़ार्ड के के लिए footer टेक्स्ट
-hack-to-give-us-something-to-compare-against: एक अस्थायी भंडारण क्षेत्र में इस्तेमाल  [[$: / कोर / टेम्पलेट्स / static.content]]
 icon: एक tiddler के साथ जुड़े चिह्न युक्त tiddler का खिताब
 library: अगर"हाँ" सेट किया है, तो यह संकेत करता है की एक tiddler किसी JavaScript लाइब्रेरी के रूप सेव की जानी चाहिए
 list: एक tiddler के साथ जुड़े tiddler खिताब के एक आदेश सूची

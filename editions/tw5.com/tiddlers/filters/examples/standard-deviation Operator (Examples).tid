@@ -1,0 +1,10 @@
+created: 20210426130306824
+modified: 20210426131553553
+tags: [[Operator Examples]] [[standard-deviation Operator]]
+title: standard-deviation Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "=1 =3 =4 =5 +[standard-deviation[]]">>
+
+Note that if there is no input the operator returns `NaN`
+<<.operator-example 2 "[title[NotATiddler]get[price]] +[standard-deviation[]]">>

@@ -4,10 +4,14 @@ homeUrl: http://codemirror.net
 addOnUrl: http://codemirror.net/doc/manual.html#addons
 configUrl: http://codemirror.net/doc/manual.html#config
 controlPanel/hint: These settings let you customise the behaviour of [[CodeMirror|$:/plugins/tiddlywiki/codemirror]].
+controlPanel/keyboard: Keyboard shortcuts
 controlPanel/usage: Usage information
+cursorBlinkRate/hint: Cursor blink rate
 editorFont/hint: Editor font family
 editorFont/info: Set the font family for the ~CodeMirror text-editor
-controlPanel/keyboard: Keyboard shortcuts
+indentUnit/hint: How many spaces a block should be indented
+indentWithTabs/hint: Enable indenting with tabs
+indentWithTabs/info: Whether, when indenting, the first N*`tabSize` spaces should be replaced by N tabs.
 keyMap/hint: ~CodeMirror keymap
 keyMap/info: ~The Keyboard KeyMap used within the ~CodeMirror text-editor
 lineNumbers/hint: Enable line numbers
@@ -16,7 +20,10 @@ lineWrapping/hint: Enable line wrapping
 lineWrapping/info: Whether CodeMirror should scroll or wrap for long lines. Defaults to `false` (scroll).
 showCursorWhenSelecting/hint: Show cursor, when selecting
 showCursorWhenSelecting/info: Whether the cursor should be drawn when a selection is active.
+smartIndent/hint: Enable smart indent
+smartIndent/info: Whether to use the context-sensitive indentation that the mode provides (or just indent the same as the line before). Defaults to `true`.
 styleActiveLine/hint: Highlight active line
 styleActiveLine/info: Whether or not to highlight the active text-editor line
+tabSize/hint: Width of a tab character
 theme/hint: Select a theme
 theme/info: Choose between ~CodeMirror themes

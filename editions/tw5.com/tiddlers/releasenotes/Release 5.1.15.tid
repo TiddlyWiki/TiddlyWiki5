@@ -5,6 +5,7 @@ released: 20171113161124237
 tags: ReleaseNotes
 title: Release 5.1.15
 type: text/vnd.tiddlywiki
+description: Explorer tab, whitespace pragma, save and render commands
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.14...v5.1.15]]//
 

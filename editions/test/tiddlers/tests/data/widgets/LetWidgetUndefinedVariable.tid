@@ -1,0 +1,15 @@
+title: Widgets/LetWidgetUndefinedVariable
+description: Test let widget undefined variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$let test1=<<test>> test2={{{ [<test1>] }}}>
+<<test2>>
+</$let>
++
+title: ExpectedResult
+
+<p></p>

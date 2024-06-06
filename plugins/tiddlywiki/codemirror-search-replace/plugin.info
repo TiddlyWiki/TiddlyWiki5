@@ -1,6 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror-search-replace",
-	"description": "CodeMirror AddOn: Search and Replace",
-	"author": "JeremyRuston",
-	"list": "readme"
+	"name": "CodeMirror Search and Replace",
+	"description": "Search and replace for CodeMirror",
+	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

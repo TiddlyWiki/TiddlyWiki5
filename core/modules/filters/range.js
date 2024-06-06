@@ -17,9 +17,13 @@ Export our filter function
 */
 exports.range = function(source,operator,options) {
 	var results = [];
-	// Split the operand into numbers delimited by these symbols
-	var parts = operator.operand.split(/[,:;]/g),
-		beg, end, inc, i, fixed = 0;
+	// For backwards compatibility, if there is only one operand, try to split it using one of the delimiters
+	var parts = operator.operands || [];
+	if(parts.length === 1) {
+		parts = operator.operand.split(/[,:;]/g);
+	}
+	// Process the parts
+	var beg, end, inc, i, fixed = 0;
 	for (i=0; i<parts.length; i++) {
 		// Validate real number
 		if(!/^\s*[+-]?((\d+(\.\d*)?)|(\.\d+))\s*$/.test(parts[i])) {

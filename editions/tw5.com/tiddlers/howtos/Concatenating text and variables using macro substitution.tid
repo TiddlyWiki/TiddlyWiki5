@@ -1,17 +1,22 @@
 created: 20160424150551727
-modified: 20170101020235437
+modified: 20230615114519672
 tags: Learning
 title: Concatenating text and variables using macro substitution
 type: text/vnd.tiddlywiki
 
+!! Important
+
+<<.from-version "5.3.0">> It is recommended to use [[substituted attributes|Substituted Attribute Values]] or the [[substitute filter operator|substitute Operator]] to concatenate text and variables.
 
 It's a frequent use case in ~TiddlyWiki that you will want to put the results of variables together with various bits of strings of text. This process in some programming languages is often referred to as "concatenating" text.
 
+---
+
+!! What is Wrong
+
 You might, for instance want to set up a template for your customer database, where links will automatically refer to additional contact information about your customer. Inside your tiddler, you might try something like this:
 
-
-|warning|k
-|@@font-size:1.5em;&#9888;@@ Warning:<br/> Don't do it this way!| `[[Additional Info|<<currentTiddler>>-Contact]]` |
+<<.bad-example "`[[Additional Info|<<currentTiddler>>-Contact]]`">>
 
 But that won't work. If you try this, the link will be interpreted very literally, and will attempt to take you to:
 
@@ -21,7 +26,7 @@ But that won't work. If you try this, the link will be interpreted very literall
 
 The solution is to use a macro to put the rendered value of `<<currentTiddler>>` together with the bit of additional text, `-Contact`.
 
-Create a macro either at the top of the tiddler or in a global tiddler (see [[Macros]]) like this:
+Create a macro at the top of the tiddler like this:
 
 ```
 \define linkup(link) [[Additional Info|$link$-Contact]]
@@ -29,9 +34,7 @@ Create a macro either at the top of the tiddler or in a global tiddler (see [[Ma
 
 You might be tempted to invoke the new macro like this:
 
-|warning|k
-|@@font-size:1.5em;&#9888;@@ Warning:<br/> Don't do it this way!| `<<linkup <<currentTiddler>> >>` |
-
+<<.bad-example "`<<linkup <<currentTiddler>> >>`">>
 
 But if you do, you will find that `<<currentTiddler>>` doesn't get rendered, but instead gets passed literally.
 
@@ -54,9 +57,3 @@ Notice that in this case we don't pass an argument. Instead, we reference the va
 ```
 <<linkup>>
 ```
-
-<style>
-.warning code  {background-color:#ffff80}
-table.warning {background-color:#ffff80;}
-
-</style>

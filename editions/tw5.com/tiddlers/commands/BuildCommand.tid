@@ -7,4 +7,4 @@ caption: build
 
 {{$:/language/Help/build}}
 
-See TiddlyWikiFolders for details of defining build targets.
+See [[tiddlywiki.info Files]] for details of defining build targets.

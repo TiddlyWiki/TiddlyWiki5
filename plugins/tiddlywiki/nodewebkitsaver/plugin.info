@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/nodewebkitsaver",
-	"description": "NW.js saver",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"list": "readme"
+	"name": "nw.js Saver",
+	"description": "Saver for nw.js",
+	"list": "readme",
+	"stability": "STABILITY_0_DEPRECATED"
 }

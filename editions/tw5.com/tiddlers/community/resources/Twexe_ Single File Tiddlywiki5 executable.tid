@@ -1,0 +1,29 @@
+caption: Twexe
+color: #ff8a65
+community-author: ihm4u
+created: 20200507214737998
+delivery: App
+description: Single File Tiddlywiki5 executable
+method: save
+modified: 20210106151027674
+tags: Firefox [[Internet Explorer]] Opera [[Other Resources]] Safari Saving Windows Edge Linux
+title: Twexe: Single File Tiddlywiki5 executable
+type: text/vnd.tiddlywiki
+url: https://ihm4u.github.io/twexe/
+
+{{!!description}}
+{{!!url}}
+
+!! Features
+
+* Automatic backups
+* Automatic saving
+* No browser add-ons needed!!
+* Works on Linux and Windows
+* Single file executable, can be moved, copied, etc.
+* Wiki is compressed, occupying less space on your disk (sometimes even a third of the space!)
+* Converts //any// Tiddlywiki5 file to a single file executable  <<twexe>>, no need for special tiddlywiki plugins
+* Automatically uses the saving tab in the control panel (there you can specify a backup directory if you don't like the default)
+* Easily get back the html wiki file from the executable twexe (if you  need it for some reason)
+* Opens up the possibility to run external executables from your wiki (to draw charts, etc.) - stay tuned!!
+* Supports external images (i.e. with _canonical_uri field)

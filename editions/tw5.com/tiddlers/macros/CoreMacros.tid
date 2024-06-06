@@ -5,4 +5,4 @@ type: text/vnd.tiddlywiki
 
 The following [[macros|Macros]] are built into ~TiddlyWiki's core:
 
-<<list-links "[tag[Core Macros]]">>
+<<list-links "[tag[Core Macros]]" class:"multi-columns">>

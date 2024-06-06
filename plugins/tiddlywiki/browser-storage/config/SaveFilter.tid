@@ -1,0 +1,2 @@
+title: $:/config/BrowserStorage/SaveFilter
+text: [prefix[$:/state/]] -[prefix[$:/state/popup/]]

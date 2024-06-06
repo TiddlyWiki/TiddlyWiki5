@@ -1,49 +1,56 @@
 created: 20130825213300000
-modified: 20160610081054535
+modified: 20240520162904479
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/language/Docs/Fields/
-TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names must be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period).
+~TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names may contain any combination of characters (prior to [[v5.2.0|Release 5.2.0]], fields were constrained to be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period)).
 
 The standard fields are:
 
-|!Field Name |!Reference |!Description |
-|`title` |TitleField |<<lingo title>> |
-|`text` |TextField |<<lingo text>> |
-|`modified` |ModifiedField |<<lingo modified>> |
-|`modifier` |ModifierField |<<lingo modifier>> |
-|`created` |CreatedField |<<lingo created>> |
-|`creator` |CreatorField |<<lingo creator>> |
-|`tags` |TagsField |<<lingo tags>> |
-|`type` |TypeField |<<lingo type>> |
-|`list` |ListField |<<lingo list>> |
-|`caption` |CaptionField |<<lingo caption>> |
+|!Field Name |!Description |
+|`title` |<<lingo title>> |
+|`text` |<<lingo text>> |
+|`modified` |<<lingo modified>> |
+|`modifier` |<<lingo modifier>> |
+|`created` |<<lingo created>> |
+|`creator` |<<lingo creator>> |
+|`tags` |<<lingo tags>> |
+|`type` |<<lingo type>> |
+|`list` |<<lingo list>> -- see ListField |
+|`caption` |<<lingo caption>> |
 
 Other fields used by the core are:
 
-|!Field Name |!Reference |!Description |
-|`class` |ClassField |<<lingo class>> |
-|`color` |ColorField |<<lingo color>> |
-|`description` |DescriptionField |<<lingo description>> |
-|`draft.of` |DraftOfField |<<lingo draft.of>> |
-|`draft.title` |DraftTitleField |<<lingo draft.title>> |
-|`footer` |FooterField |<<lingo footer>> |
-|`icon` |IconField |<<lingo icon>> |
-|`library` |LibraryField |<<lingo library>> |
-|`list-after` |ListAfterField |<<lingo list-after>> |
-|`list-before` |ListBeforeField |<<lingo list-before>> |
-|`name` |NameField |<<lingo name>> |
-|`plugin-priority` |PluginPriorityField |<<lingo plugin-priority>> |
-|`plugin-type` |PluginTypeField |<<lingo plugin-type>> |
-|`source` |SourceField |<<lingo source>> |
-|`subtitle` |SubtitleField |<<lingo subtitle>> |
+|!Field Name |!Description |
+|`class` |<<.from-version "5.1.16">> <<lingo class>> |
+|`code-body` |<<.from-version "5.2.1">> <<lingo code-body>> |
+|`color` |<<lingo color>> |
+|`description` |<<lingo description>> |
+|`draft.of` |<<lingo draft.of>> |
+|`draft.title` |<<lingo draft.title>> |
+|`footer` |<<lingo footer>> |
+|`hide-body`|<<lingo hide-body>>|
+|`icon` |<<lingo icon>> |
+|`library` |<<lingo library>> |
+|`list-after` |<<lingo list-after>> |
+|`list-before` |<<lingo list-before>> |
+|`name` |<<lingo name>> |
+|`plugin-priority` |<<lingo plugin-priority>> |
+|`plugin-type` |<<lingo plugin-type>> |
+|`stability` |<<lingo stability>> |
+|`source` |<<lingo source>> |
+|`subtitle` |<<lingo subtitle>> |
+|`throttle.refresh` |<<lingo throttle.refresh>> |
+|`toc-link`|<<lingo toc-link>>|
+|`_canonical_uri`|<<lingo _canonical_uri>>|
 
 The TiddlyWebAdaptor uses a few more fields:
 
-|!Field Name |!Reference |!Description |
-|`bag` |BagField |<<lingo bag>> |
-|`revision` |RevisionField |<<lingo revision>> |
+|!Field Name |!Description |
+|`bag` |<<lingo bag>> |
+|`revision` |<<lingo revision>> |
+|`_is_skinny` |<<lingo _is_skinny>> |
 
-See the ''Advanced > Tiddler Fields'' tab of the [[control panel|$:/ControlPanel]] {{$:/core/images/options-button}} for details of the fields used in this wiki.
+Details of the fields used in this ~TiddlyWiki are shown in the [[control panel|$:/ControlPanel]] {{$:/core/ui/Buttons/control-panel}} under the <<.controlpanel-tab Info>> tab >> <<.info-tab Advanced>> sub-tab >> Tiddler Fields

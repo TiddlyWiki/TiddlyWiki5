@@ -6,7 +6,7 @@ Appearance/Caption: Внешний вид
 Appearance/Hint: Способы настройки внешнего вида TiddlyWiki.
 Basics/AnimDuration/Prompt: Продолжительность анимации:
 Basics/Caption: Основные
-Basics/DefaultTiddlers/BottomHint: Заметки, содержащие пробелы нужно взять в &#91;&#91;двойные квадратные скобки&#93;&#93;. А также можно возвращать <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">открытые ранее заметки</$button>
+Basics/DefaultTiddlers/BottomHint: Заметки, содержащие пробелы нужно взять в &#91;&#91;двойные квадратные скобки&#93;&#93;. А также можно возвращать {{открытые ранее заметки||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Открывать при старте:
 Basics/DefaultTiddlers/TopHint: Выберите заметки открытые при запуске:
 Basics/Language/Prompt: Привет! Текущий язык:

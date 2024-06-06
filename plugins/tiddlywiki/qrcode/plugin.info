@@ -1,7 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/qrcode",
+	"name": "QR Code",
 	"description": "QR Code generator",
-	"author": "Zeno Zeng, adapted by Jeremy Ruston",
-	"plugin-type": "plugin",
-	"list": "readme usage examples license"
+	"author": "Zeno Zeng",
+	"list": "readme docs examples license",
+	"stability": "STABILITY_2_STABLE"
 }

@@ -1,0 +1,22 @@
+caption: Formatage
+created: 20141016142259705
+fr-title: Mise en forme en WikiTexte
+modified: 20220420234926288
+tags: WikiText
+title: Formatting in WikiText
+type: text/vnd.tiddlywiki
+
+Voici les formats de caractères disponibles en <<fr WikiText>><<:>>
+
+|Format |Résultat |Icône |h
+|<code>&#96;code&#96;</code><br><code>&#96;&#96;code contenant du &#96;code&#96; &#96;&#96;</code> |`code`<br>``code contenant du `code` `` |<<.icon $:/core/images/mono-line>> |
+|`''gras''` |texte en ''gras'' |<<.icon $:/core/images/bold>> |
+|`//italique//` |texte en //italique// |<<.icon $:/core/images/italic>> |
+|`__souligné__` |texte __souligné__ |<<.icon $:/core/images/underline>> |
+|`~~barré~~` |texte ~~barré~~ |<<.icon $:/core/images/strikethrough>> |
+|`^^exposant^^` |texte en ^^exposant^^ |<<.icon $:/core/images/superscript>> |
+|`,,indice,,` |texte en ,,indice,, |<<.icon $:/core/images/subscript>> |
+
+Voir aussi<<:>> <<fr "Code Blocks in WikiText">>
+
+<<.tip """Dans l'exemple de <code>&#96;&#96;code contenant du &#96;code&#96; &#96;&#96;</code>, notez qu'à la fin, l'espace entre le <code>&#96;</code> et les <code>&#96;&#96;</code> est obligatoire.""">>

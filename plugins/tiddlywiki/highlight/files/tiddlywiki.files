@@ -1,17 +1,16 @@
 {
 	"tiddlers": [
 		{
-			"file": "highlight.pack.js",
+			"file": "highlight.min.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.js",
 				"module-type": "library"
 			},
-			"prefix": "var hljs = require(\"$:/plugins/tiddlywiki/highlight/highlight.js\");\n",
 			"suffix": "\nexports.hljs = hljs;\n"
 		},
 		{
-			"file": "default.css",
+			"file": "default.min.css",
 			"fields": {
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.css",

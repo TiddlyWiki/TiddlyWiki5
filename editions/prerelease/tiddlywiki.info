@@ -1,20 +1,23 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
 		"tiddlywiki/stacked-view",
 		"tiddlywiki/powered-by-tiddlywiki",
 		"tiddlywiki/internals",
 		"tiddlywiki/highlight",
-		"tiddlywiki/markdown",
 		"tiddlywiki/bibtex",
 		"tiddlywiki/savetrail",
 		"tiddlywiki/external-attachments",
 		"tiddlywiki/dynaview",
+		"tiddlywiki/dynannotate",
 		"tiddlywiki/codemirror",
-		"tiddlywiki/comments"
+		"tiddlywiki/menubar",
+		"tiddlywiki/jszip",
+		"tiddlywiki/confetti",
+		"tiddlywiki/dynannotate",
+		"tiddlywiki/tour"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

@@ -1,0 +1,18 @@
+title: $:/language/Help/commands
+description: Ejecuta instrucciones devueltas por un filtro
+
+Ejecuta secuencialmente las instrucciones devueltas por un filtro
+
+```
+--commands <filter>
+```
+
+Ejemplos
+
+```
+--commands "[enlist{$:/build-commands-as-text}]"
+```
+
+```
+--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"
+```

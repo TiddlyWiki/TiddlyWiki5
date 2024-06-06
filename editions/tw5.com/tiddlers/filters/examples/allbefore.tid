@@ -8,3 +8,4 @@ type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[list[Days of the Week]allbefore[Wednesday]]">>
 <<.operator-example 2 "[list[Days of the Week]allbefore:include[Wednesday]]">>
+<<.operator-example 3 "A B C D E +[allbefore:include[C]count[]]">>

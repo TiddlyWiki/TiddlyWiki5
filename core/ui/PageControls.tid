@@ -1,15 +1,14 @@
 title: $:/core/ui/PageTemplate/pagecontrols
 
-\define config-title()
-$:/config/PageControlButtons/Visibility/$(listItem)$
-\end
-<div class="tc-page-controls">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
-<$reveal type="nomatch" state=<<config-title>> text="hide">
-<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
-<$transclude tiddler=<<listItem>> mode="inline"/>
-</$set>
-</$reveal>
-</$list>
-</div>
+\whitespace trim
+\function config-title() [[$:/config/PageControlButtons/Visibility/$(listItem)$]substitute[]]
 
+<div class="tc-page-controls">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
+		<$list filter="[<config-title>!text[hide]]" storyview="pop" variable="ignore">
+			<$let tv-config-toolbar-class={{{ [enlist<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]] }}}>
+				<$transclude $tiddler=<<listItem>> $mode="inline"/>
+			</$let>
+		</$list>
+	</$list>
+</div>

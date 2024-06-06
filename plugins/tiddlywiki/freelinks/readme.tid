@@ -1,0 +1,42 @@
+title: $:/plugins/tiddlywiki/freelinks/readme
+
+This plugin adds automatic generation of links to tiddler titles.
+
+''Note that automatic link generation can be very slow when there are a large number of tiddlers''.
+
+Freelinking is activated for runs of text that have the following variables set:
+
+* `tv-wikilinks` is NOT equal to `no`
+* `tv-freelinks` is set to `yes`
+
+Freelinks are case sensitive by default but can be configured to ignore case in the settings tab.
+
+Within view templates, the variable `tv-freelinks` is automatically set to the content of $:/config/Freelinks/Enable, which can be set via the settings panel of this plugin.
+
+!! Notes
+
+To change within which tiddlers freelinking occurs requires customising the shadow tiddler [[$:/plugins/tiddlywiki/freelinks/macros/view]]. This tiddler is tagged $:/tags/Macro/View  which means that it will be included as a local macro in each view template. By default, its content is:
+
+```
+<$set name="tv-freelinks" value={{$:/config/Freelinks/Enable}}/>
+```
+
+That means that for each tiddler the variable tv-freelinks will be set to the tiddler $:/config/Freelinks/Enable, which is set to "yes" or "no" by the settings in control panel.
+
+Instead, we can use a filter expression to, say, only freelink within the tiddler with the title "HelloThere":
+
+```
+<$set name="tv-freelinks" value={{{ [<currentTiddler>match[HelloThere]then[yes]else[no]] }}}/>
+```
+
+Or, we can make a filter that will only freelink within tiddlers with the tag "MyTag":
+
+```
+<$set name="tv-freelinks" value={{{ [<currentTiddler>tag[MyTags]then[yes]else[no]] }}}/>
+```
+
+Or we can combine both approaches:
+
+```
+<$set name="tv-freelinks" value={{{ [<currentTiddler>match[HelloThere]] ~[<currentTiddler>tag[MyTag]] +[then[yes]else[no]] }}}/>
+```

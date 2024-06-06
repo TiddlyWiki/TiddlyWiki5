@@ -52,7 +52,7 @@ PluginSwitcher.prototype.switchPlugins = function() {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
 				plugins.push(title);
-				var pluginInfo = JSON.parse(self.wiki.getTiddlerText(title)),
+				var pluginInfo = $tw.utils.parseJSONSafe(self.wiki.getTiddlerText(title)),
 					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
 				$tw.utils.each(dependents,function(title) {
 					accumulatePlugin(title);
@@ -60,6 +60,8 @@ PluginSwitcher.prototype.switchPlugins = function() {
 			}
 		};
 	accumulatePlugin(selectedPluginTitle);
+	// Read the plugin info for the incoming plugins
+	var changes = $tw.wiki.readPluginInfo(plugins);
 	// Unregister any existing theme tiddlers
 	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
 	// Register any new theme tiddlers

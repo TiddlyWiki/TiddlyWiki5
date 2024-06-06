@@ -1,0 +1,33 @@
+caption: sortsub
+created: 20200424160155182
+modified: 20210522162521222
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: the input, sorted into reverse order by the result of evaluating subfilter <<.param S>>
+op-output: the input, sorted into ascending order by the result of evaluating subfilter <<.param S>>
+op-parameter: a subfilter to be evaluated
+op-parameter-name: S
+op-purpose: sort the input by the result of evaluating a subfilter for each item
+op-suffix: the type used for the comparison (string, number, integer, date, version), defaulting to string
+op-suffix-name: T
+tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: sortsub Operator
+type: text/vnd.tiddlywiki
+
+Each item in the list of input titles is passed to the subfilter in turn. The subfilter transforms the input titles into the form needed for sorting. For example, the subfilter `[length[]]` transforms each input title in the number representing its length, and thus sorts the input titles according to their length.
+
+Note that within the subfilter, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits subfilters like `[{!!value}divide{!!cost}]` to be used for computation. 
+
+The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler". <<.from-version "5.2.0">>
+
+The suffix <<.place T>> determines how the items are compared and can be:
+
+* "string" (the default)
+* "number" - invalid numbers are interpreted as zero
+* "integer" - invalid integers are interpreted as zero
+* "date" - invalid dates are interpreted as 1st January 1970
+* "version" - invalid versions are interpreted as "v0.0.0"
+* "alphanumeric" - treat items as alphanumerics <<.from-version "5.2.0">>
+
+Note that subfilters should return the same number of items that they are passed. Any missing entries will be treated as zero or the empty string. In particular, when retrieving the value of a field with the [[get Operator]] it is helpful to guard against a missing field value using the [[else Operator]]. For example `[get[myfield]else[default-value]...`.
+
+<<.operator-examples "sortsub">>

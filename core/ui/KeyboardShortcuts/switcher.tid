@@ -1,0 +1,5 @@
+title: $:/core/ui/KeyboardShortcuts/switcher
+tags: $:/tags/KeyboardShortcut
+key: ((layout-switcher))
+
+<$action-sendmessage $message="tm-show-switcher" switch="layout"/>

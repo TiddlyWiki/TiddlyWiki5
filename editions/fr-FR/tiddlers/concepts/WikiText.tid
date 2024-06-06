@@ -1,0 +1,17 @@
+caption: WikiText
+created: 20141016134519861
+fr-title: WikiTexte
+modified: 20220422222111475
+tags: Concepts Reference
+title: WikiText
+type: text/vnd.tiddlywiki
+
+Le WikiTexte est le langage de balisage de TiddlyWiki, qui permet d'écrire de manière concise et expressive une grande variété de formatages de texte, de liens hypertextes et de fonctionnalités interactives. Il permet de se concentrer sur l'écriture, sans l'interférence d'une interface complexe. Il est conçu pour être familier aux utilisateurs de [[Markdown]], tout en étant plus focalisé sur les liens et les fonctionnalités interactives.
+
+La <<fr "Editor toolbar">> permet d'insérer des balises de ~WikiTexte dans le texte du tiddler en cours d'édition.
+
+Voir <<fr "Formatting text in TiddlyWiki">> pour une introduction au ~WikiTexte.
+
+Les syntaxes suivantes sont intégrées nativement dans <<tw>><<:>>
+
+<<list-links "[tag[WikiText]]">>

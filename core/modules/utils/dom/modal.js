@@ -13,6 +13,7 @@ Modal message mechanism
 "use strict";
 
 var widget = require("$:/core/modules/widgets/widget.js");
+var navigator = require("$:/core/modules/widgets/navigator.js");
 
 var Modal = function(wiki) {
 	this.wiki = wiki;
@@ -25,12 +26,14 @@ Display a modal dialogue
 	options: see below
 Options include:
 	downloadLink: Text of a big download link to include
+	event: widget event
+	variables: from event.paramObject
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
 	this.srcDocument = options.variables && (options.variables.rootwindow === "true" ||
 				options.variables.rootwindow === "yes") ? document :
-				(options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
+				(options.event && options.event.event && options.event.event.target ? options.event.event.target.ownerDocument : document);
 	this.srcWindow = this.srcDocument.defaultView;
 	var self = this,
 		refreshHandler,
@@ -41,7 +44,12 @@ Modal.prototype.display = function(title,options) {
 		return;
 	}
 	// Create the variables
-	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
+	var variables = $tw.utils.extend({
+			currentTiddler: title,
+			"tv-story-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-story-list") : ""),
+			"tv-history-list": (options.event && options.event.widget ? options.event.widget.getVariable("tv-history-list") : "")
+		},options.variables);
+
 	// Create the wrapper divs
 	var wrapper = this.srcDocument.createElement("div"),
 		modalBackdrop = this.srcDocument.createElement("div"),
@@ -58,6 +66,9 @@ Modal.prototype.display = function(title,options) {
 	this.adjustPageClass();
 	// Add classes
 	$tw.utils.addClass(wrapper,"tc-modal-wrapper");
+	if(tiddler.fields && tiddler.fields.class) {
+		$tw.utils.addClass(wrapper,tiddler.fields.class);
+	}
 	$tw.utils.addClass(modalBackdrop,"tc-modal-backdrop");
 	$tw.utils.addClass(modalWrapper,"tc-modal");
 	$tw.utils.addClass(modalHeader,"tc-modal-header");
@@ -72,6 +83,31 @@ Modal.prototype.display = function(title,options) {
 	modalFooter.appendChild(modalFooterHelp);
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
+	var navigatorTree = {
+		"type": "navigator",
+		"attributes": {
+			"story": {
+				"name": "story",
+				"type": "string",
+				"value": variables["tv-story-list"]
+			},
+			"history": {
+				"name": "history",
+				"type": "string",
+				"value": variables["tv-history-list"]
+			}
+		},
+		"tag": "$navigator",
+		"isBlock": true,
+		"children": []
+	};
+	var navigatorWidgetNode = new navigator.navigator(navigatorTree, {
+		wiki: this.wiki,
+		document : this.srcDocument,
+		parentWidget: $tw.rootWidget
+	});
+	navigatorWidgetNode.render(modalBody,null);
+
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
@@ -83,7 +119,7 @@ Modal.prototype.display = function(title,options) {
 					type: "string",
 					value: title
 		}}}],
-		parentWidget: $tw.rootWidget,
+		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
@@ -91,11 +127,12 @@ Modal.prototype.display = function(title,options) {
 	headerWidgetNode.render(headerTitle,null);
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
-		parentWidget: $tw.rootWidget,
+		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
 	});
+
 	bodyWidgetNode.render(modalBody,null);
 	// Setup the link if present
 	if(options.downloadLink) {
@@ -104,7 +141,7 @@ Modal.prototype.display = function(title,options) {
 		modalBody.appendChild(modalLink);
 	}
 	// Render the footer of the message
-	if(tiddler && tiddler.fields && tiddler.fields.help) {
+	if(tiddler.fields && tiddler.fields.help) {
 		var link = this.srcDocument.createElement("a");
 		link.setAttribute("href",tiddler.fields.help);
 		link.setAttribute("target","_blank");
@@ -132,7 +169,7 @@ Modal.prototype.display = function(title,options) {
 						value: $tw.language.getString("Buttons/Close/Caption")
 			}}}
 		]}],
-		parentWidget: $tw.rootWidget,
+		parentWidget: navigatorWidgetNode,
 		document: this.srcDocument,
 		variables: variables,
 		importPageMacros: true
@@ -174,6 +211,10 @@ Modal.prototype.display = function(title,options) {
 	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	// Whether to close the modal dialog when the mask (area outside the modal) is clicked
+	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true")) {
+		modalBackdrop.addEventListener("click",closeHandler,false);
+	}
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}
@@ -208,6 +249,7 @@ Modal.prototype.adjustPageClass = function() {
 	if(windowContainer) {
 		$tw.utils.toggleClass(windowContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
+	$tw.utils.toggleClass(this.srcDocument.body,"tc-modal-prevent-scroll",this.modalCount > 0);
 };
 
 exports.Modal = Modal;

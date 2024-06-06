@@ -19,7 +19,9 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 // Global to keep track of open windows (hashmap by title)
-var windows = {};
+$tw.windows = {};
+// Default template to use for new windows
+var DEFAULT_WINDOW_TEMPLATE = "$:/core/templates/single.tiddler.window";
 
 exports.startup = function() {
 	// Handle open window message
@@ -28,32 +30,37 @@ exports.startup = function() {
 		var refreshHandler,
 			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
-			template = paramObject.template || "$:/core/templates/single.tiddler.window",
+			windowTitle = paramObject.windowTitle || title,
+			windowID = paramObject.windowID || title,
+			template = paramObject.template || DEFAULT_WINDOW_TEMPLATE,
 			width = paramObject.width || "700",
 			height = paramObject.height || "600",
-			variables = $tw.utils.extend({},paramObject,{currentTiddler: title});
+			top = paramObject.top,
+			left = paramObject.left,
+			variables = $tw.utils.extend({},paramObject,{currentTiddler: title, "tv-window-id": windowID});
 		// Open the window
 		var srcWindow,
-		    srcDocument;
+			srcDocument;
 		// In case that popup blockers deny opening a new window
 		try {
-			srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
+			srcWindow = window.open("","external-" + windowID,"scrollbars,width=" + width + ",height=" + height + (top ? ",top=" + top : "" ) + (left ? ",left=" + left : "" )),
 			srcDocument = srcWindow.document;
 		}
 		catch(e) {
 			return;
 		}
-		windows[title] = srcWindow;
+		$tw.windows[windowID] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
+			srcWindow.focus();
 			return;
 		}
 		// Initialise the document
-		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
+		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
-		srcDocument.title = title;
+		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
-			delete windows[title];
+			delete $tw.windows[windowID];
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
@@ -83,20 +90,25 @@ exports.startup = function() {
 			name: "keydown",
 			handlerObject: $tw.keyboardManager,
 			handlerMethod: "handleKeydownEvent"
-		},{
-			name: "click",
-			handlerObject: $tw.popup,
-			handlerMethod: "handleEvent"
 		}]);
+		srcWindow.document.documentElement.addEventListener("click",$tw.popup,true);
 		srcWindow.haveInitialisedWindow = true;
 	});
-	// Close open windows when unloading main window
-	$tw.addUnloadTask(function() {
-		$tw.utils.each(windows,function(win) {
+	$tw.rootWidget.addEventListener("tm-close-window",function(event) {
+		var windowID = event.param,
+			win = $tw.windows[windowID];
+			if(win) {
+				win.close();
+			}
+	});
+	var closeAllWindows = function() {
+		$tw.utils.each($tw.windows,function(win) {
 			win.close();
 		});
-	});
-
+	}
+	$tw.rootWidget.addEventListener("tm-close-all-windows",closeAllWindows);
+	// Close open windows when unloading main window
+	$tw.addUnloadTask(closeAllWindows);
 };
 
 })();

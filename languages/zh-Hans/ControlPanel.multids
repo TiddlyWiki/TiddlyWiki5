@@ -2,31 +2,42 @@ title: $:/language/ControlPanel/
 
 Advanced/Caption: 高级
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
-Appearance/Caption: 视觉外观
+Appearance/Caption: 外观
 Appearance/Hint: 定制您的 TiddlyWiki 外观。
-Basics/AnimDuration/Prompt: 动画持续时间：
-Basics/Caption: 基本
-Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
-Basics/DefaultTiddlers/Prompt: 首页：
-Basics/DefaultTiddlers/TopHint: 默认开启的条目：
+Basics/AnimDuration/Prompt: 动画持续时间
+Basics/AutoFocus/Prompt: 编辑条目时的默认自动停留字段
+Basics/Caption: 基础
+Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 {{保留开启中的条目顺序||$:/snippets/retain-story-ordering-button}}
+Basics/DefaultTiddlers/Prompt: 首页
+Basics/DefaultTiddlers/TopHint: 默认开启的条目
 Basics/Language/Prompt: 您好！当前的语言：
 Basics/NewJournal/Tags/Prompt: 新日志条目的标签
 Basics/NewJournal/Text/Prompt: 新日志条目的内容
 Basics/NewJournal/Title/Prompt: 新日志条目的名称
+Basics/NewTiddler/Tags/Prompt: 新条目的标签
 Basics/NewTiddler/Title/Prompt: 新条目的名称
-Basics/OverriddenShadowTiddlers/Prompt: 被覆写的默认条目数量：
-Basics/ShadowTiddlers/Prompt: 默认条目数量：
-Basics/Subtitle/Prompt: 副标题：
-Basics/SystemTiddlers/Prompt: 系统条目数量：
-Basics/Tags/Prompt: 标签数量：
-Basics/Tiddlers/Prompt: 一般条目数量：
-Basics/Title/Prompt: 标题：
-Basics/Username/Prompt: 编辑者署名：
-Basics/Version/Prompt: ~TiddlyWiki 版本：
+Basics/OverriddenShadowTiddlers/Prompt: 被覆盖的默认条目数量
+Basics/RemoveTags: 更新到当前格式
+Basics/RemoveTags/Hint: 将标签配置更新为最新格式
+Basics/ShadowTiddlers/Prompt: 默认条目数量
+Basics/Subtitle/Prompt: 副标题
+Basics/SystemTiddlers/Prompt: 系统条目数量
+Basics/Tags/Prompt: 标签数量
+Basics/Tiddlers/Prompt: 一般条目数量
+Basics/Title/Prompt: 此 ~TiddlyWiki 的标题
+Basics/Username/Prompt: 编辑者署名
+Basics/Version/Prompt: ~TiddlyWiki 版本
+Cascades/Caption: 级联
+Cascades/Hint: 这些全域规则用于动态选择某些模板。级联的结果是返回结果的序列中的第一个筛选的结果
+Cascades/TagPrompt: 筛选器标签为 <$macrocall $name="tag" tag=<<currentTiddler>>/>
 EditorTypes/Caption: 编辑器类型
 EditorTypes/Editor/Caption: 编辑器
 EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
 EditorTypes/Type/Caption: 类型
+EditTemplateBody/Caption: 编辑模板主体
+EditTemplateBody/Hint: 默认的编辑模板使用此规则级联，动态选择模板来编辑条目的主体。
+FieldEditor/Caption: 字段编辑器
+FieldEditor/Hint: 此规则级联用于根据名称，动态选择用于呈现一个条目字段的模板。其用于编辑模板中。
 Info/Caption: 信息
 Info/Hint: 有关此 TiddlyWiki 的信息
 KeyboardShortcuts/Add/Prompt: 在此输入快捷键
@@ -42,11 +53,14 @@ KeyboardShortcuts/Platform/Linux: 仅 Linux 平台
 KeyboardShortcuts/Platform/NonLinux: 仅非 Linux 平台
 KeyboardShortcuts/Platform/Windows: 仅 Windows 平台
 KeyboardShortcuts/Platform/NonWindows: 仅非 Windows 平台
+LayoutSwitcher/Caption: 布局
 LoadedModules/Caption: 已加载的模块
 LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
 Palette/Caption: 调色板
 Palette/Editor/Clone/Caption: 复制
 Palette/Editor/Clone/Prompt: 建议您修改前先复制此默认调色板
+Palette/Editor/Delete/Hint: 从当前调色板中删除此项
+Palette/Editor/Names/External/Show: 显示不属于当前调色板的颜色名称
 Palette/Editor/Prompt/Modified: 此默认调色板已被修改过
 Palette/Editor/Prompt: 编辑
 Palette/Editor/Reset/Caption: 重置
@@ -56,10 +70,12 @@ Palette/ShowEditor/Caption: 显示编辑器
 Plugins/Add/Hint: 从官方插件库安装插件
 Plugins/Add/Caption: 获取更多插件
 Plugins/AlreadyInstalled/Hint: 此插件已经安装版本 <$text text=<<installedVersion>>/>
+Plugins/AlsoRequires: 还需要：
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 禁用
 Plugins/Disable/Hint: 重新加载页面时禁用此插件
 Plugins/Disabled/Status: (已禁用)
+Plugins/Downgrade/Caption: 降级
 Plugins/Empty/Hint: 无
 Plugins/Enable/Caption: 启用
 Plugins/Enable/Hint: 重新加载页面时启用此插件
@@ -70,13 +86,19 @@ Plugins/Languages/Hint: 语言包插件
 Plugins/NoInfoFound/Hint: 无 ''"<$text text=<<currentTab>>/>"''
 Plugins/NoInformation/Hint: 未提供信息
 Plugins/NotInstalled/Hint: 尚未安装此插件
-Plugins/OpenPluginLibrary: 开启插件程式库
-Plugins/ClosePluginLibrary: 关闭插件程式库
+Plugins/OpenPluginLibrary: 打开插件库
+Plugins/ClosePluginLibrary: 关闭插件库
+Plugins/PluginWillRequireReload: （需要重新加载）
 Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Reinstall/Caption: 重新安装
-Plugins/Themes/Caption: 布景主题
-Plugins/Themes/Hint: 布景主题插件
+Plugins/Themes/Caption: 布局主题
+Plugins/Themes/Hint: 布局主题插件
+Plugins/Update/Caption: 更新
+Plugins/Updates/Caption: 更新
+Plugins/Updates/Hint: 已安装插件的可用更新
+Plugins/Updates/UpdateAll/Caption: 更新 <<update-count>> 个插件
+Plugins/SubPluginPrompt: 提供 <<count>> 个可用的附加插件
 Parsing/Caption: 解析
 Parsing/Hint: 在此您可以全域禁用或启用维基解析规则。要使更改生效，请保存并重新加载您的维基。禁用某些解析规则，会妨碍 <$text text="TiddlyWiki"/> 正常运作。可使用[[安全模式|https://tiddlywiki.com/#SafeMode]]恢复正常操作。
 Parsing/Block/Caption: 区块解析规则
@@ -90,15 +112,31 @@ Saving/DownloadSaver/Hint: 这些设置适用于兼容 HTML5 的下载保存模�
 Saving/General/Caption: 通用
 Saving/General/Hint: 这些设置适用于所有已载入的保存模块
 Saving/Hint: 用于通过保存模块将整个 TiddlyWiki 保存为单个文件的设置
+Saving/GitService/Branch: 用于保存的目标分支
+Saving/GitService/CommitMessage: 由 TiddlyWiki 保存
+Saving/GitService/Description: 这些设置仅用于保存至 <<service-name>>
+Saving/GitService/Filename: 目标文件的文件名称 (例如，`index.html`)
+Saving/GitService/Path: 目标文件的路径 (例如，`/wiki/`)
+Saving/GitService/Repo: 目标存储库 (例如，`Jermolene/TiddlyWiki5`)
+Saving/GitService/ServerURL: 服务器 API 网址
+Saving/GitService/UserName: 用户名称
+Saving/GitService/GitHub/Caption: ~GitHub 保存模块
+Saving/GitService/GitHub/Password: 密码、OAUTH 令牌，或个人存取令牌 (详见 [[GitHub 帮助页面|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]])
+Saving/GitService/GitLab/Caption: ~GitLab 保存模块
+Saving/GitService/GitLab/Password: 个人存取令牌的 API (详见 [[GitLab 帮助页面|https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html]])
+Saving/GitService/Gitea/Caption: Gitea 保存模块
+Saving/GitService/Gitea/Password: 个人存取令牌的 API (通过 Gitea 的 Web 界面：`设定 | 应用程序 | 产生新的令牌`)
 Saving/TiddlySpot/Advanced/Heading: 高级设置
 Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
 Saving/TiddlySpot/Caption: ~TiddlySpot 保存模块
-Saving/TiddlySpot/Description: 这些设置只适用于保存到 http://tiddlyspot.com 或兼容的远程服务器时。
+Saving/TiddlySpot/ControlPanel: ~TiddlySpot 控制台
+Saving/TiddlySpot/Description: 这些设置只适用于保存到 [[TiddlySpot|http://tiddlyspot.com]]、[[TiddlyHost|https://tiddlyhost.com]]，或兼容的远程服务器。有关 ~TiddlySpot 和 ~TiddlyHost 的保存设置信息，请参阅[[此处|https://github.com/simonbaird/tiddlyhost/wiki/TiddlySpot-Saver-configuration-for-Tiddlyhost-and-Tiddlyspot]]。
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密码
+Saving/TiddlySpot/ReadOnly: 请注意，[[TiddlySpot|http://tiddlyspot.com]] 不再允许创建新网站。对于新网站，您可以使用 [[TiddlyHost|https://tiddlyhost.com]]，一个新的取代 ~TiddlySpot 的讬管服务 。
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹
 Saving/TiddlySpot/UserName: 用户
@@ -127,18 +165,18 @@ Settings/LinkToBehaviour/InsideRiver/Hint: 从故事河//中//导航
 Settings/LinkToBehaviour/OutsideRiver/Hint: 从故事河//外//导航
 Settings/LinkToBehaviour/OpenAbove: 开启于当前条目之上
 Settings/LinkToBehaviour/OpenBelow: 开启于当前条目之下
-Settings/LinkToBehaviour/OpenAtTop: 开启于故事河的顶端
+Settings/LinkToBehaviour/OpenAtTop: 开启于故事河的顶部
 Settings/LinkToBehaviour/OpenAtBottom: 开启于故事河的底部
 Settings/MissingLinks/Caption: 维基链接
 Settings/MissingLinks/Hint: 选择是否要链接到尚未存在的条目
 Settings/MissingLinks/Description: 启用链接到佚失条目
-Settings/NavigationAddressBar/Caption: 网址栏导览
-Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：
+Settings/NavigationAddressBar/Caption: 网址栏导航
+Settings/NavigationAddressBar/Hint: 在浏览器网址栏导航到条目时的行为：
 Settings/NavigationAddressBar/No/Description: 不更新网址栏
 Settings/NavigationAddressBar/Permalink/Description: 包含目标条目
 Settings/NavigationAddressBar/Permaview/Description: 包括目标条目和当前已开启的条目序列
-Settings/NavigationHistory/Caption: 历史记录导览
-Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
+Settings/NavigationHistory/Caption: 历史记录导航
+Settings/NavigationHistory/Hint: 当导航到条目时，更新浏览器历史记录：
 Settings/NavigationHistory/No/Description: 不更新历史记录
 Settings/NavigationHistory/Yes/Description: 更新历史记录
 Settings/NavigationPermalinkviewMode/Caption: 引用链接/固定链接 模式
@@ -161,16 +199,28 @@ Settings/TitleLinks/Caption: 条目标题
 Settings/TitleLinks/Hint: 可选地显示条目标题为链接
 Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
-StoryView/Caption: 查看模式
-StoryView/Prompt: 当前的查看模式：
+StoryTiddler/Caption: 故事条目
+StoryTiddler/Hint: 此规则级联用于动态选择模板，以便在故事河中显示条目。
+StoryView/Caption: 视图模式
+StoryView/Prompt: 当前的视图模式：
 Stylesheets/Caption: 样式表
 Stylesheets/Expand/Caption: 全部展开
 Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式表条目呈现的 CSS
 Stylesheets/Restore/Caption: 复原
-Theme/Caption: 布景主题
-Theme/Prompt: 当前的布景主题：
-TiddlerFields/Caption: 条目栏位
-TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
+TestCases/Caption: 测试案例
+TestCases/Hint: 测试案例是用于测试和学习的自给自足的范例
+TestCases/All/Caption: 所有测试案例
+TestCases/All/Hint: 所有测试案例
+TestCases/Failed/Caption: 失败的测试案例
+TestCases/Failed/Hint: 仅失败的测试案例
+Theme/Caption: 布局主题
+Theme/Prompt: 当前的布局主题：
+TiddlerColour/Caption: 条目颜色
+TiddlerColour/Hint: 此规则级联用于动态地为条目选择颜色 (用于图示和关联的标签丸)。
+TiddlerFields/Caption: 条目字段
+TiddlerFields/Hint: 这是本维基使用中的所有条目字段（含系统条目的字段，但默认条目的字段除外）。
+TiddlerIcon/Caption: 条目图示
+TiddlerIcon/Hint: 此规则级联用于动态地为条目选择图示。
 Toolbars/Caption: 工具栏
 Toolbars/EditToolbar/Caption: 编辑工具栏
 Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式工具栏。拖放可改变顺序。
@@ -180,5 +230,9 @@ Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏�
 Toolbars/EditorToolbar/Caption: 编辑器工具栏
 Toolbars/EditorToolbar/Hint: 选择将显示哪些按钮于编辑器工具栏。请注意，某些按钮只会出现在编辑某一类型的条目时。拖放可改变顺序。
 Toolbars/ViewToolbar/Caption: 查看工具栏
-Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏。拖放可改变顺序。
+Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的视图模式工具栏。拖放可改变顺序。
 Tools/Download/Full/Caption: 下载完整副本
+ViewTemplateBody/Caption: 查看模板主体
+ViewTemplateBody/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的主体。
+ViewTemplateTitle/Caption: 查看模板标题
+ViewTemplateTitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标题。

@@ -1,7 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/hammerjs",
-	"description": "HammerJS library by Jorik Tangelder (Eight Media)",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"list": "readme license"
+	"name": "HammerJS",
+	"description": "HammerJS touch gesture library",
+	"author": "Jorik Tangelder (Eight Media)",
+	"list": "readme license",
+	"stability": "STABILITY_0_DEPRECATED"
 }

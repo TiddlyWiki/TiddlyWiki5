@@ -1,0 +1,20 @@
+created: 20210623075733310
+modified: 20210623081959571
+tags: HookMechanism
+title: Hook: th-closing-tiddler
+type: text/vnd.tiddlywiki
+
+This hook allows plugins to monitor the closing of a tiddler from the story.
+
+Hook function parameters:
+
+* ''event'': Widget message object with the following properties:
+** ''event'': DOM event object that triggered the widget message
+** ''tiddlerTitle'': the title of the tiddler being closed
+** ''widget'': reference to the widget that sent the message.
+
+Return value:
+
+* ''event'': Widget message object
+
+The original event widget message object can be returned unmodified by the hook. 

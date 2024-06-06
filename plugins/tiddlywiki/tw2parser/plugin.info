@@ -1,7 +1,8 @@
 {
 	"title": "$:/plugins/tiddlywiki/tw2parser",
+	"name": "TW2 Parser",
 	"description": "TiddlyWiki Classic parser",
-	"authors": "JeremyRuston, JeffreyWilkinson",
-	"core-version": ">=5.0.15",
-	"list": "readme"
+	"author": "Jeffrey Wilkinson",
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

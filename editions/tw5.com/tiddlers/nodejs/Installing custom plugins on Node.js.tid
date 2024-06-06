@@ -1,0 +1,19 @@
+created: 20191022095653896
+modified: 20220617130125173
+tags: [[TiddlyWiki on Node.js]] PluginsCS
+title: Installing custom plugins on Node.js
+type: text/vnd.tiddlywiki
+
+\rules except wikilink
+
+! Introduction
+
+There are several ways in which official plugins and custom plugins can be installed when using TiddlyWiki with a Node.js client-server configuration.
+
+<$macrocall $name=".note" _="""For instructions on installing plugins from libraries to ''single-file'' wikis learn more at [[Plugins]].
+"""/> 
+
+!! Plugin Load Order
+
+{{Plugin Ordering}}
+

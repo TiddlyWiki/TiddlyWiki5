@@ -1,7 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/external-attachments",
-	"description": "External attachment support for TiddlyDesktop et al.",
-	"author": "Jeremy Ruston",
-	"core-version": ">=5.0.0",
-	"list": "readme settings"
+	"name": "External Attachments",
+	"description": "External attachments for TiddlyDesktop",
+	"list": "readme settings",
+	"stability": "STABILITY_2_STABLE"
 }

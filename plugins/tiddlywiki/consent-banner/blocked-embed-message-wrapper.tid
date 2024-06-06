@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/consent-banner/blocked-embed-message-wrapper
+
+\define styles()
+width:$(width)$;height:$(height)$;
+\end
+
+<div class="tc-blocked-embedded-content" style=<<styles>>>
+<div class="tc-blocked-embedded-content-inner">
+<div class="tc-blocked-embedded-content-inner-inner">
+<$transclude tiddler="$:/config/plugins/tiddlywiki/consent-banner/blocked-embed-message" mode="inline"/>
+</div>
+</div>
+</div>

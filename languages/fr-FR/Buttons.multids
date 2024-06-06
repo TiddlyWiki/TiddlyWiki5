@@ -14,8 +14,12 @@ CloseOthers/Caption: fermer les autres tiddlers
 CloseOthers/Hint: Ferme les autres tiddlers
 ControlPanel/Caption: panneau de contrôle
 ControlPanel/Hint: Ouvre le panneau de contrôle
+CopyToClipboard/Caption: copier dans le presse-papier
+CopyToClipboard/Hint: Copie ce texte dans le presse-papier
 Delete/Caption: supprimer
 Delete/Hint: Supprime ce tiddler
+DeleteTiddlers/Caption: supprimer les tiddlers
+DeleteTiddlers/Hint: Supprime ces tiddlers
 Edit/Caption: éditer
 Edit/Hint: Édite ce tiddler
 Encryption/Caption: chiffrement
@@ -24,12 +28,14 @@ Encryption/ClearPassword/Caption: résilier le mot de passe
 Encryption/ClearPassword/Hint: Résilie le mot de passe et sauvegarde ce wiki sans chiffrement
 Encryption/SetPassword/Caption: affecter un mot de passe
 Encryption/SetPassword/Hint: Affecte un mot de passe pour sauvegarde une version chiffrée de ce wiki
+EmergencyDownload/Caption: Télécharge les tidders au format json
 ExportPage/Caption: exporter tout
 ExportPage/Hint: Exporte tous les tiddlers
 ExportTiddler/Caption: exporter ce tiddler
 ExportTiddler/Hint: Exporte ce tiddler
 ExportTiddlers/Caption: exporter ces tiddlers
 ExportTiddlers/Hint: Exporte ces tiddlers
+SidebarSearch/Hint: Choisit le champ de recherche dans la barre latérale
 Fold/Caption: replier le tiddler
 Fold/Hint: Replie le corps du tiddler
 Fold/FoldBar/Caption: Barre de repli
@@ -38,8 +44,8 @@ Unfold/Caption: déplier le tiddler
 Unfold/Hint: Déplie le corps de ce tiddler
 FoldOthers/Caption: replier les autres tiddlers
 FoldOthers/Hint: Replie le corps des autres tiddlers ouverts
-FoldAll/Caption: replie tous les tiddlers
-FoldAll/Hint: Replier le corps de tous les tiddlers ouverts
+FoldAll/Caption: replier tous les tiddlers
+FoldAll/Hint: Replie le corps de tous les tiddlers ouverts
 UnfoldAll/Caption: déplier tous les tiddlers
 UnfoldAll/Hint: Déplie le corps de tous les tiddlers ouverts
 FullScreen/Caption: plein-écran
@@ -54,10 +60,16 @@ Home/Caption: accueil
 Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
+LayoutSwitcher/Hint: Choix de la mise en page
+LayoutSwitcher/Caption: mise en page
+Manager/Caption: gestionnaire de tiddlers
+Manager/Hint: Ouvre le gestionnaire de tiddlers
 More/Caption: plus
 More/Hint: Actions supplémentaires
 NewHere/Caption: nouveau, à partir d'ici
 NewHere/Hint: Crée un nouveau tiddler avec pour tag le titre du tiddler courant
+NetworkActivity/Caption: activité réseau
+NetworkActivity/Hint: Annule toute l'activité réseau
 NewJournal/Caption: nouveau journal
 NewJournal/Hint: Crée un nouveau tiddler journal
 NewJournalHere/Caption: nouveau journal, à partir d'ici
@@ -177,6 +189,7 @@ Subscript/Caption: indice
 Subscript/Hint: Met en indice le texte sélectionné
 Superscript/Caption: exposant
 Superscript/Hint: Met en exposant le texte sélectionné
+ToggleSidebar/Hint: Bascule la visibilité de la barre latérale
 Transcludify/Caption: transclusion
 Transcludify/Hint: Encadre la sélection avec des accolades
 Underline/Caption: souligné

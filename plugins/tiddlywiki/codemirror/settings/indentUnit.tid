@@ -1,0 +1,7 @@
+title: $:/core/ui/ControlPanel/Settings/codemirror/indentUnit
+tags: $:/tags/ControlPanel/Settings/CodeMirror
+caption: {{$:/language/codemirror/indentUnit/hint}}
+
+\define lingo-base() $:/language/codemirror/indentUnit/
+
+|<$link to="$:/config/codemirror/indentUnit"><<lingo hint>></$link> |<$edit-text tiddler="$:/config/codemirror/indentUnit" default="" placeholder="indentUnit" tag="input"/> |

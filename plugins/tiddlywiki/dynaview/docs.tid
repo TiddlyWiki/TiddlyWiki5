@@ -13,23 +13,42 @@ The components of this plugin include:
 
 ! Scroll Features
 
-!! Scroll Position Preservation
+!! Scroll position preservation during refresh
 
 Some recent browsers have a feature called "scroll anchoring" whereby they suppress the apparent scrolling that occurs when elements are inserted or removed above the current viewport. (See https://github.com/WICG/ScrollAnchoring for more details).
 
 ~DynaView can optionally polyfill this behaviour for older browsers by setting the configuration tiddler $:/config/DynaView/PreserveScrollPosition to `yes`.
 
-!! Set tiddler field when visible
+!! Startup scroll position restoration
 
-The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll into view. The first time that they do, the background task assigns the value in the attribute `data-dynaview-set-value` to the tiddler whose title is in the attribute `data-dynaview-set-tiddler`. This assignment can be tied to a reveal widget to cause content to be displayed when it becomes visible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+Optionally, ~DynaView can store the current scroll position in local storage and restore it upon startup. Set the configuration tiddler $:/config/DynaView/RestoreScrollPositionAtStartup to `yes`.
 
-!! Unset tiddler field when set visible before but then scrolled out of view
+Note that it is not recommended to use this setting at the same time as the "UpdateAddressBar" option.
 
-The background task detects when elements with the class `tc-dynaview-set-tiddler-when-visible` scroll out view after they have scrolled into view. When scrolling out of view after they have scrolled in, the background task assigns the value in the attribute `data-dynaview-unset-value` to the tiddler whose title is in the attribute `data-dynaview-unset-tiddler`. This assignment can be tied to a reveal widget to cause content to be hidden when it becomes invisible. If the class `tc-dynaview-expand-viewport` is set then the viewport is expanded so that the processing occurs when elements move near the viewport.
+!! Visibility tracking
+
+The background task detects when elements with the class `tc-dynaview-track-tiddler-when-visible` scroll in and out of view. It tracks four different states:
+
+* ''Blank/missing'' -- The element has not yet been scrolled into view
+* ''0'' -- The element has been scrolled into view, but subsequently scrolled out of view
+* ''1'' -- The element is near the viewport
+* ''2'' -- The element is partially or wholly within the viewport
+
+The processing applied to each element is as follows:
+
+* If the element is partially or wholly within the viewport then set the state to "2"
+* If the element is near the viewport then set the state to "1"
+* If the element is fully outside the viewport then only set the state to "0" if it is currently unset (ie blank/missing)
+
+Attributes on the tracked element specify the following parameters:
+
+* ''data-dynaview-track-tiddler'' -- specifies the tiddler in which the element tracking state will be stored
 
 !! Update address bar when scrolling
 
-The background task detects the tiddler at the top of the viewport and sets the address bar location hash to the title of that tiddler.
+If the configuration tiddler $:/config/DynaView/UpdateAddressBar is set to `yes` the background task detects the tiddler at the top of the viewport and sets the address bar location hash to the title of that tiddler.
+
+Note that it is not recommended to use this setting at the same time as the "RestoreScrollPositionAtStartup" option.
 
 ! Viewport Size Features
 

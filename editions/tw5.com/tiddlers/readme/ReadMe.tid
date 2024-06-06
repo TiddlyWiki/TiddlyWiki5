@@ -4,7 +4,7 @@ title: ReadMe
 type: text/vnd.tiddlywiki
 
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 
 Welcome to TiddlyWiki, a non-linear personal web notebook that anyone can use and keep forever, independently of any corporation.
 

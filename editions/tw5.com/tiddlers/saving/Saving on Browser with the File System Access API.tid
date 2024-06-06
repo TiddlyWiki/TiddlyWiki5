@@ -1,0 +1,21 @@
+caption: TW5-browser-nativesaver (experimental)
+color: #FF8A65
+created: 20220206035734757
+delivery: Saver
+description: Save changes using new versions of Chromium based browsers
+method: save
+modified: 20220206035734757
+tags: Chrome Edge Opera Saving Linux Mac Windows
+title: Saving on Browser with File System Access API
+type: text/vnd.tiddlywiki
+
+Tiddlywiki can save changes to the filesystem without [[downloading a new file each time|Saving with the HTML5 fallback saver]]
+each time using the [[File System Access API|https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API]].
+
+<<.warning "This API is not yet fully standardized hence this method of saving is somewhat experimental.">>
+
+The API used by this saver works in most Chromium based browsers. See [[caniuse|https://caniuse.com/native-filesystem-api]]
+for up to date information on browser support.
+
+* [[Plugin Wiki|https://slaymaker1907.github.io/tiddlywiki/plugin-library.html]]
+* [[GitHub Repo|https://github.com/slaymaker1907/TW5-browser-nativesaver]]

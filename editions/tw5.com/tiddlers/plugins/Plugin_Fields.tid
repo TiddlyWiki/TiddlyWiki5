@@ -1,22 +1,22 @@
 created: 20161015122718559
-modified: 20161015122719647
+modified: 20190928083018378
 tags: PluginMechanism
 title: Plugin Fields
 type: text/vnd.tiddlywiki
 
-! Plugin fields
-
 Plugins are stored as tiddlers with the following fields:
 
 |!Field |!Description |
-|title |Title of plugin |
+|author |//(optional)// Author of plugin |
+|dependents |List of dependencies: plugins that should be installed in order for this one to work |
 |description |Description of plugin |
-|author |Author of plugin |
-|version |Version string (must conform to [ext[SemanticVersioning|http://semver.org/]] convention) |
-|source |Source URL of plugin |
-|type |Must be ''application/json'' |
-|plugin-type |Can be ''plugin'' (default), ''language'' or ''theme'' |
-|text |JSON encoding of the list of tiddlers comprising the plugin |
 |list |Names of exposed plugin information tiddlers (see below) |
-|name |Name of the theme (only for themes) |
-|dependents |List of dependent plugins (currently only implemented for themes) |
+|name |Brief name of the plugin |
+|plugin-priority |//(optional)// Numerical priority (higher numbers install later, the core plugin has a priority of zero |
+|plugin-type |Generally ''plugin'', ''language'' or ''theme''; see PluginMechanism for details |
+|parent-plugin |//(optional)// <<.from-version "5.1.22">> Title of the plugin under which this plugin should be displayed as a sub-plugin in the control panel plugin chooser |
+|source |//(optional)// Source URL of plugin |
+|text |JSON encoding of the list of tiddlers comprising the plugin |
+|title |Title of plugin |
+|type |Must be ''application/json'' |
+|version |//(optional)// Version string (should conform to [ext[SemanticVersioning|http://semver.org/]] convention) |

@@ -1,0 +1,72 @@
+created: 20220122153235162
+modified: 20220122180508134
+tags: [[WikiText parser mode transitions]]
+title: WikiText parser mode: HTML examples
+type: text/vnd.tiddlywiki
+
+<<wikitext-example-without-html "<div>
+
+* blank line after open tag allows
+* block mode punctuation (i.e. this list) to
+* be recognised
+</div>
+">>
+
+---
+
+The open tag blank line "trick" also works inside of punctuation only recognised in inline mode (such as [[Formatting in WikiText]]):
+
+<<wikitext-example-without-html "''<div>
+
+* list item one
+* list item two
+</div>''">>
+
+---
+
+<<wikitext-example-without-html "<div>
+* Open tag without a blank line means
+* block mode punctuation (i.e. this list) will
+* NOT be recognised.
+
+Paragraphs are only recognised in block mode. Even with blank lines, new paragraphs are not recognised.
+
+This also is not a new paragraph.
+</div>">>
+
+---
+
+[[Tables in WikiText]] is one construct for which the open tag blank line "trick" cannot work. In order for the parser to recognise a table row, the entire row must be on a single line.
+
+Adding a blank link after an open tag within a table cell causes the row to span mulitple lines and the parser ceases to be able to recognise it as a table row.
+
+<<wikitext-example-without-html "|table row|all on|one line|is recognised|">>
+
+<<wikitext-example-without-html "|For a blank line after open tag|<div>
+
+* list is recognised
+* but the surrounding table row is not
+</div>|">>
+
+---
+
+The only way to get [[block mode|Block Mode WikiText]] punctuation recognised in [[wikitext tables|Tables in WikiText]] is to use <<.wlink TranscludeWidget>> with <<.attr mode>> = <<.value block>>.
+
+<<wikitext-example-without-html '|Nested table:|<$transclude tiddler="table-example" mode=block/>|'>>
+
+Note that <<.wlink MacroCallWidget>> does not have a similar <<.attr mode>> attribute and the content of macro definitions can only be parsed in [[inline mode|Inline Mode WikiText]]
+
+---
+
+The less convenient `<table>`, `<tr>`, `<td>` html tags can be used as a foolproof way to get [[block mode|Block Mode WikiText]] punctuation recognised inside of table cells.
+
+<<wikitext-example-without-html "<table>
+<tr><td>
+
+* list item one
+* list item two
+</td><td>
+
+|nested|table|
+</td></tr>
+</table>">>

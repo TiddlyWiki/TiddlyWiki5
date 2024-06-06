@@ -12,7 +12,7 @@ Aquí hay un video de [[introducción a TiddlyDesktop|Introducing TiddlyDesktop 
 
 ! Instrucciones
 
-# Descarga la última versión de TiddlyDesktop de https://github.com/Jermolene/TiddlyDesktop/releases
+# Descarga la última versión de TiddlyDesktop de https://github.com/TiddlyWiki/TiddlyDesktop/releases
 
 # Ejecuta TiddlyDesktop
 
@@ -24,6 +24,6 @@ Aquí hay un video de [[introducción a TiddlyDesktop|Introducing TiddlyDesktop 
 
 ~TiddlyDesktop se basa en [[NW.js]], proyecto [[de código abierto|OpenSource]] y la fuente se encuentra en GitHub:
 
-https://github.com/Jermolene/TiddlyDesktop/
+https://github.com/TiddlyWiki/TiddlyDesktop/
 
 Consulta las [[versiones de TiddlyDesktop|TiddlyDesktop Releases]]

@@ -1,0 +1,19 @@
+title: $:/language/Help/savewikifolder
+description: Desa un wiki a una nova carpeta wiki
+
+<<.from-version "5.1.20">> Desa el wiki actual a una carpeta wiki, incloent el tiddlers, els connectors i la configuració:
+
+```
+--carpeta-per-desar-el-wiki <ruta-per-desar-el-wiki> [<filtre>]
+```
+
+* La carpeta de destinació de la wiki ha d'estar buida o inexistent
+* El filtre indica els tiddlers que s'han d'incloure. És opcional, per omissió és`[all[tiddlers]]`
+* Els connectors de la biblioteca oficial de complements es reemplacen per referències a aquests connectors al fitxer `tiddlywiki.info '
+* Els connectors personalitzats es descomprimeixen a la seva pròpia carpeta
+
+Un ús habitual és convertir un fitxer HTML de TiddlyWiki en una carpeta wiki:
+
+```
+tiddlywiki --load ./elmeuwiki --carpeta-per-desar-el-wiki ./la-meva-carpeta-wiki
+```

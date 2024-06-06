@@ -1,0 +1,34 @@
+created: 20220427174702859
+modified: 20220611104737314
+tags: [[JSON in TiddlyWiki]] Learning
+title: Reading data from JSON tiddlers
+type: text/vnd.tiddlywiki
+
+See [[JSON in TiddlyWiki]] for an overview of using JSON in TiddlyWiki.
+
+!! Filter Operators for Accessing JSON Data
+
+The following filter operators allow values to be read from JSON data:
+
+* <<.olink jsonget>> to retrieve the values of a property in JSON data
+* <<.olink jsontype>> to retrieve the type of a JSON value
+* <<.olink jsonindexes>> to retrieve the names of the fields of a JSON object, or the indexes of a JSON array
+* <<.olink jsonextract>> to retrieve a JSON value as a string of JSON
+
+!! Text References for Accessing JSON Data
+
+[[Text references|TextReference]] are a simple shortcut syntax to look up the value of a named property. For example, if a [[DictionaryTiddler|DictionaryTiddlers]] called `MonthDays` contains:
+
+```
+oct:31
+nov:30
+dec:31
+```
+
+... then `{{MonthDays##nov}}` will resolve to the value `30`.
+
+The same is true if `MonthDays` is a [[JSONTiddler|JSONTiddlers]] with the following content:
+
+```
+{"oct":31,"nov":30,"dec":31}
+```

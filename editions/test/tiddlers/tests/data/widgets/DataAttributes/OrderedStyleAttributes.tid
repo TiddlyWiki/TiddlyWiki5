@@ -1,0 +1,15 @@
+title: Widgets/DataAttributes/OrderedStyleAttributes
+description: Ordered style attributes
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<div style="background:red;color:blue;" style.background="green">
+hello
+</div>
++
+title: ExpectedResult
+
+<p><div style="background:green;color:blue;">hello</div></p>

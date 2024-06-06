@@ -60,7 +60,7 @@ var WikiTextParser = function(type,text,options) {
 	this.output = null;
 	this.subWikify(this.children);
 	// prepend tw2 macros locally to the content
-	var parser = $tw.wiki.parseTiddler("$:/plugins/tiddlywiki/tw2parser/macrodefs",{parseAsInline:false});
+	var parser = this.wiki.parseTiddler("$:/plugins/tiddlywiki/tw2parser/macrodefs",{parseAsInline:false});
 	this.tree = [{
 		type: "element",
 		tag: "div",

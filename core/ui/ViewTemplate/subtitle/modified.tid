@@ -1,0 +1,4 @@
+title: $:/core/ui/ViewTemplate/subtitle/modified
+tags: $:/tags/ViewTemplate/Subtitle
+
+<$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>

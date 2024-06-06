@@ -36,7 +36,9 @@ var HELP_OPEN_EXTERNAL_WINDOW = "http://tiddlywiki.com/#WidgetMessage%3A%20tm-op
 
 exports.startup = function() {
 	// Open startup tiddlers
-	openStartupTiddlers();
+	openStartupTiddlers({
+		disableHistory: $tw.boot.disableStartupNavigation
+	});
 	if($tw.browser) {
 		// Set up location hash update
 		$tw.wiki.addEventListener("change",function(changes) {
@@ -52,7 +54,9 @@ exports.startup = function() {
 			var hash = $tw.utils.getLocationHash();
 			if(hash !== $tw.locationHash) {
 				$tw.locationHash = hash;
-				openStartupTiddlers({defaultToCurrentStory: true});
+				if(hash !== "#") {
+					openStartupTiddlers({defaultToCurrentStory: true});
+				}
 			}
 		},false);
 		// Listen for the tm-browser-refresh message
@@ -89,7 +93,9 @@ exports.startup = function() {
 				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permalink" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
 				targetTiddler: event.param || event.tiddlerTitle,
-				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permalink" : "none"
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permalink" : "none",
+				successNotification: event.paramObject && event.paramObject.successNotification,
+				failureNotification: event.paramObject && event.paramObject.failureNotification
 			});
 		});
 		// Listen for the tm-permaview message
@@ -98,14 +104,17 @@ exports.startup = function() {
 				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permaview" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
 				targetTiddler: event.param || event.tiddlerTitle,
-				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permaview" : "none"
-			});				
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permaview" : "none",
+				successNotification: event.paramObject && event.paramObject.successNotification,
+				failureNotification: event.paramObject && event.paramObject.failureNotification
+			});
 		});
 	}
 };
 
 /*
 Process the location hash to open the specified tiddlers. Options:
+disableHistory: if true $:/History is NOT updated
 defaultToCurrentStory: If true, the current story is retained as the default, instead of opening the default tiddlers
 */
 function openStartupTiddlers(options) {
@@ -117,10 +126,10 @@ function openStartupTiddlers(options) {
 		var hash = $tw.locationHash.substr(1),
 			split = hash.indexOf(":");
 		if(split === -1) {
-			target = decodeURIComponent(hash.trim());
+			target = $tw.utils.decodeURIComponentSafe(hash.trim());
 		} else {
-			target = decodeURIComponent(hash.substr(0,split).trim());
-			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
+			target = $tw.utils.decodeURIComponentSafe(hash.substr(0,split).trim());
+			storyFilter = $tw.utils.decodeURIComponentSafe(hash.substr(split + 1).trim());
 		}
 	}
 	// If the story wasn't specified use the current tiddlers or a blank story
@@ -146,15 +155,23 @@ function openStartupTiddlers(options) {
 	}
 	// Save the story list
 	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
-	// If a target tiddler was specified add it to the history stack
-	if(target && target !== "") {
-		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
-		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
-			target = target.substr(2,target.length - 4);
+	// Update history
+	var story = new $tw.Story({
+		wiki: $tw.wiki,
+		storyTitle: DEFAULT_STORY_TITLE,
+		historyTitle: DEFAULT_HISTORY_TITLE
+	});
+	if(!options.disableHistory) {
+		// If a target tiddler was specified add it to the history stack
+		if(target && target !== "") {
+			// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
+			if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
+				target = target.substr(2,target.length - 4);
+			}
+			story.addToHistory(target);
+		} else if(storyList.length > 0) {
+			story.addToHistory(storyList[0]);
 		}
-		$tw.wiki.addToHistory(target);
-	} else if(storyList.length > 0) {
-		$tw.wiki.addToHistory(storyList[0]);
 	}
 }
 
@@ -164,6 +181,8 @@ options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permavi
 options.updateHistory: "yes" or "no" (defaults to "no")
 options.copyToClipboard: "permalink", "permaview" or "no" (defaults to "no")
 options.targetTiddler: optional title of target tiddler for permalink
+options.successNotification: optional title of tiddler to use as the notification in case of success
+options.failureNotification: optional title of tiddler to use as the notification in case of failure
 */
 function updateLocationHash(options) {
 	// Get the story and the history stack
@@ -192,13 +211,17 @@ function updateLocationHash(options) {
 			break;
 	}
 	// Copy URL to the clipboard
+	var url = "";
 	switch(options.copyToClipboard) {
 		case "permalink":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler));
+			url = $tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler);
 			break;
 		case "permaview":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList)));
+			url = $tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 			break;
+	}
+	if(url) {
+		$tw.utils.copyToClipboard(url,{successNotification: options.successNotification, failureNotification: options.failureNotification});
 	}
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
 	if($tw.utils.getLocationHash() !== $tw.locationHash) {

@@ -1,0 +1,8 @@
+created: 20190611174214039
+modified: 20190611174245197
+tags: [[abs Operator]] [[Operator Examples]]
+title: abs Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[-2000]abs[]]">>
+<<.operator-example 2 "=-1 =-2 =3 =4 =5 +[abs[]]">>

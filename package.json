@@ -1,7 +1,7 @@
 {
   "name": "tiddlywiki",
   "preferGlobal": "true",
-  "version": "5.1.20-prerelease",
+  "version": "5.3.4-prerelease",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
   "description": "a non-linear personal web notebook",
   "contributors": [
@@ -23,11 +23,18 @@
     "tiddlywiki5",
     "wiki"
   ],
-  "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  },
   "bundleDependencies": [],
   "license": "BSD",
   "engines": {
     "node": ">=0.8.2"
+  },
+  "scripts": {
+    "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+    "lint:fix": "eslint . --fix",
+    "lint": "eslint ."
   }
 }

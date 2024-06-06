@@ -1,39 +1,128 @@
 caption: Liens
 created: 20131205155230596
-fr-title: Liens avec WikiText
-modified: 20150601094319226
+fr-title: Liens en WikiTexte
+modified: 20220304013852623
+mon_texte: Ceci est le contenu du champ `mon_texte`
 tags: WikiText
 title: Linking in WikiText
 type: text/vnd.tiddlywiki
 
-L'une des aptitudes-clé de WikiText est sa capacité à créer des liens vers d'autres mémos (appelés tiddlers) ou vers des sites externes. Il existe plusieurs moyens de les mettre en oeuvre&nbsp;:
+L'une des aptitudes clés du <<fr WikiText>> est sa capacité à créer des liens vers d'autres mémos (appelés tiddlers) ou vers des sites externes. Il existe plusieurs moyens de les mettre en œuvre.
 
-* Lien vers un tiddler via le titre&nbsp;: `[[Titre du Tiddler]]`
-* Lien vers un tiddler avec libellé&nbsp;: `[[Texte à afficher|Titre du Tiddler]]`
-* Pour les tiddlers conformes aux règles CamelCase, saisir leur titre génère automatiquement la création du lien
-* Pour un lien vers un site externe, saisir l'URL complète du site&nbsp;: `https://tiddlywiki.com/` ou `[[TW5|https://tiddlywiki.com/]]`
+! Liens manuels
 
-Vous pouvez annuler la prise en compte du lien en le préfixant du signe `~`. 
-
-Par exemple&nbsp;:
-
-<<wikitext-example src:"* ~SalueATous suit la règle CamelCase, mais n'est pas considéré comme un lien
-* ~http://google.com/ n'est pas un lien automatique non plus">>
-
-Pour que cette syntaxe fonctionne, l'adresse URL doit être reconnue comme une URL, donc débuter par un protocole comme `http://` ou `file://`. Mais, vous pouvez forcer le lien externe sans cela en utilisant cette syntaxe&nbsp;:
+Lien vers un tiddler par son titre<<:>>
 
 ```
-[ext[tiddlywiki.com]]
-
-[ext[libellé à afficher|tiddlywiki.com]]
-
-[ext[Faire un Don|bitcoin:1aabbdd....?amount=0.001]]
+[[Titre de Tiddler]]
 ```
 
-! Personnaliser les Liens des Tiddlers
+Pour changer le texte affiché par le lien<<:>>
 
-Voir le LinkWidget pour plus de détail sur le widget sous-jacent utilisé pour implémenter les liens des tiddlers, et notamment les macros qui peuvent être utilisées pour personnaliser leur comportements.
+```
+[[Texte à afficher|Titre du Tiddler]]
+```
 
-! Personnaliser les Liens des Tiddlers
+Les liens peuvent aussi être créés à l'aide de la barre d'outils d'édition. Cliquez sur le bouton <<.icon $:/core/images/link>> ''lien'', puis recherchez et sélectionnez un tiddler.
 
-Voir le LinkWidget pour plus de détail sur le widget sous-jacent utilisé pour implémenter les liens des tiddlers, et notamment les macros qui peuvent être utilisées pour personnaliser leur comportements.
+! Lien en <<gf "notation chameau">>
+
+Pour les tiddlers dont le titre respecte les règles de la [[notation chameau|CamelCase]], saisir leur titre sans l'encadrer entre doubles crochets suffit à créer automatiquement un lien.
+
+Il est possible de neutraliser un lien en le préfixant avec le symbole `~`. Par exemple<<:>>
+
+<<wikitext-example src:"* ~HelloThere n'est pas un lien
+* ~http://google.com/ n'est pas un lien">>
+
+! Liens externes
+
+Pour inclure un lien vers une [[ressource Web externe|https://fr.wikipedia.org/wiki/Ressource_du_World_Wide_Web]] comme un site ou un fichier, il est nécessaire de saisir son [[URL|https://fr.wikipedia.org/wiki/Uniform_Resource_Locator]] //complète//,  en incluant son [[sigle URI|https://fr.wikipedia.org/wiki/Uniform_Resource_Identifier]], par exemple un protocole comme `http://`, `file://` ou `mailto:`<<:>>
+
+```
+https://tiddlywiki.com/
+
+[[TW5|https://tiddlywiki.com/languages/fr-FR/index.html]]
+
+[[Envoyez-moi un courriel|mailto:moi@ici.net]]
+
+[[Ouvrez le fichier|file:///c:/users/moi/index.html]]
+```
+
+Pour que cette syntaxe fonctionne, l'URL doit être reconnaissable en tant qu'URL. Dans le cas contraire elle est interprétée comme un titre de tiddler. Par conséquent, pour créer un lien vers une ressource localisée avec un chemin relatif, il faut utiliser la syntaxe étendue<<:>>
+
+```
+[ext[Ouvrir le fichier|index.html]]
+
+[ext[Ouvrir le fichier|./index.html]]
+
+[ext[Ouvrir le fichier|../README.md]]
+
+[ext[Ouvrir le fichier|c:\users\moi\index.html]]
+```
+
+La syntaxe étendue fonctionne aussi avec les URL complètes, même si dans ce cas elle n'est pas nécessaire<<:>>
+
+```
+[ext[https://tiddlywiki.com/]]
+
+[ext[TW5|https://tiddlywiki.com/languages/fr-FR/index.html]]
+
+[ext[Envoyez-moi un courriel|mailto:moi@ici.net]]
+
+[ext[Ouvrez le fichier|file:///c:/users/moi/index.html]]
+```
+
+Vous pouvez aussi utiliser la syntaxe étendue pour forcer l'interprétation en tant que lien externe<<:>>
+
+```
+[ext[Donnez|bitcoin:1aabbdd....?amount=0.001]]
+```
+
+! Personnalisation des liens
+
+Voir le <<fr LinkWidget>> pour plus de détails sur le widget sous-jacent utilisé pour implémenter les liens des tiddlers, et notamment les macros qui peuvent être utilisées pour personnaliser son comportement.
+
+! Génération de liens dynamiques
+
+Les <<fr "Linking in WikiText">> ne se prêtent pas bien à la création de liens dynamiques. C'est parce que ce lien <<fr WikiText>><<:>>
+
+
+```
+[[lien vers moi-même|Linking in WikiText]]
+```
+est un raccourci qui utilise le <<fr LinkWidget>> et le <<fr TextWidget>> ainsi<<:>>
+
+```
+<$link to="Linking in WikiText">
+  <$text text="lien vers moi-même"/>
+</$link>
+```
+Comme le titre du lien ("lien vers moi-même") et la cible du lien ("Linking in WikiText") sont utilisés en tant qu'attributs de widgets, aucune expansion de <<fr WikiText>> ne peut avoir lieu.
+
+Par exemple, une tentative d'utilisation d'une [[référence|TextReference]] et d'une [[variable|Variables]] pour générer un lien dynamique comme ceci<<:>>
+
+<<.bad-example "`[[{{!!mon_texte}}|<<currentTiddler>>]]`">>
+
+revient à essayer d'utiliser les widgets Lien et Texte ainsi<<:>>
+
+<<.bad-example """```
+<$link to="<<currentTiddler>>">
+  <$text text="{{!!mon_texte}}"/>
+</$link>
+```""">>
+
+ce qui ne fonctionnera pas comme espéré. Le contenu des attributs est placé entre guillemets et donc [[traité comme une valeur littérale|HTML in WikiText]] protégée contre l'expansion <<fr WikiText>>. Il sera donc affiché ainsi<<:>>
+
+>[[{{!!mon_texte}}|<<currentTiddler>>]]
+
+Afin d'obtenir l'effet désiré, le <<fr LinkWidget>> peut être utilisé explicitement ainsi<<:>>
+
+<<wikitext-example-without-html src:"<$link to=<<currentTiddler>>>{{!!mon_texte}}</$link>">>
+
+Autre exemple de [[construction dynamique de liens|Concatenating text and variables using macro substitution]].
+
+! Liens internes aux tiddlers - <<gf "liens ancrés">>
+
+Dans <<tw>> les liens ancrés peuvent cibler des points particuliers et des sections distinctes à l'intérieur même de tiddlers, qui aident le lecteur à naviguer dans le contenu des tiddlers les plus longs.
+
+Voir <<fr "Anchor Links using HTML">> pour plus d'informations.

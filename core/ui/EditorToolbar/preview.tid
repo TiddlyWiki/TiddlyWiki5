@@ -8,11 +8,9 @@ condition: [<targetTiddler>]
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((preview))
 
-<$reveal state="$:/state/showeditpreview" type="match" text="yes" tag="span">
-{{$:/core/images/preview-open}}
-<$action-setfield $tiddler="$:/state/showeditpreview" $value="no"/>
-</$reveal>
-<$reveal state="$:/state/showeditpreview" type="nomatch" text="yes" tag="span">
-{{$:/core/images/preview-closed}}
-<$action-setfield $tiddler="$:/state/showeditpreview" $value="yes"/>
-</$reveal>
+\whitespace trim
+<span>
+	<$transclude $tiddler={{{ [<edit-preview-state>match[yes]then[$:/core/images/preview-open]else[$:/core/images/preview-closed]] }}} />
+</span>
+<$action-setfield $tiddler=<<editPreviewStateTiddler>> $value={{{ [<editPreviewStateTiddler>get[text]toggle[yes],[no]] }}} />
+<$action-sendmessage $message="tm-edit-text-operation" $param="focus-editor"/>

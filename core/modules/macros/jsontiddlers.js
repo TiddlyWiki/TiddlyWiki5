@@ -19,14 +19,15 @@ Information about this macro
 exports.name = "jsontiddlers";
 
 exports.params = [
-	{name: "filter"}
+	{name: "filter"},
+	{name: "spaces"}
 ];
 
 /*
 Run the macro
 */
-exports.run = function(filter) {
-	return this.wiki.getTiddlersAsJson(filter);
+exports.run = function(filter,spaces) {
+	return this.wiki.getTiddlersAsJson(filter,$tw.utils.parseInt(spaces));
 };
 
 })();

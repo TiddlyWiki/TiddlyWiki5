@@ -1,0 +1,15 @@
+title: $:/core/ui/ControlPanel/TestCases/Failed
+tags: $:/tags/ControlPanel/TestCases
+caption: {{$:/language/ControlPanel/TestCases/Failed/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/
+<<lingo TestCases/Failed/Hint>>
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/wiki-test-spec]type[text/vnd.tiddlywiki-multiple]] [all[tiddlers+shadows]tag[$:/tags/wiki-test-spec-failing]type[text/vnd.tiddlywiki-multiple]]">
+
+<$transclude
+	$tiddler="$:/core/ui/TestCaseTemplate"
+	hideIfPass="yes"
+/>
+
+</$list>

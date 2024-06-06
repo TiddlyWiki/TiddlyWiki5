@@ -1,28 +1,56 @@
+code-body: yes
 title: $:/core/ui/EditTemplate
 
-\define actions()
-<$action-sendmessage $message="tm-add-tag" $param={{$:/temp/NewTagName}}/>
-<$action-deletetiddler $tiddler="$:/temp/NewTagName"/>
-<$action-sendmessage $message="tm-add-field" $name={{$:/temp/newfieldname}} $value={{$:/temp/newfieldvalue}}/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
-<$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
+\define delete-edittemplate-state-tiddlers()
+<$set name="safeNewFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
+	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<newFieldNameInputTiddler>] [<newFieldNameSelectionTiddler>] [<newTagNameTiddler>] [<newTagNameInputTiddler>] [<newTagNameSelectionTiddler>] [<typeInputTiddler>] [<typeSelectionTiddler>]"/>
+</$set>
+\end
+
+<!-- Beware this is duplicated from fields.tid. For details see bug #7054 -->
+\define get-field-value-tiddler-filter() [subfilter<get-field-editor-filter>sha256[16]addprefix[/]addprefix<newFieldValueTiddlerPrefix>]
+\define get-field-editor-filter() [<newFieldNameTiddler>get[text]else[]] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}]
+
+\define save-tiddler-actions()
+\whitespace trim
+<$action-sendmessage $message="tm-add-tag" $param={{{ [<newTagNameTiddler>get[text]] }}}/>
+<$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
+<<delete-edittemplate-state-tiddlers>>
 <$action-sendmessage $message="tm-save-tiddler"/>
 \end
-\define frame-classes()
-tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
+
+\define cancel-delete-tiddler-actions(message)
+\whitespace trim
+<<delete-edittemplate-state-tiddlers>>
+<$action-sendmessage $message="tm-$message$-tiddler"/>
 \end
-<div class=<<frame-classes>> data-tiddler-title=<<currentTiddler>>>
+
+\whitespace trim
+<div
+	data-tiddler-title=<<currentTiddler>>
+	data-tags={{!!tags}}
+	class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/TiddlerTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-tiddler-frame tc-tiddler-edit-frame [<currentTiddler>is[tiddler]then[tc-tiddler-exists]] [<currentTiddler>is[missing]!is[shadow]then[tc-tiddler-missing]] [<currentTiddler>is[shadow]then[tc-tiddler-exists tc-tiddler-shadow]] [<currentTiddler>is[system]then[tc-tiddler-system]] [{!!class}] [<currentTiddler>tags[]encodeuricomponent[]addprefix[tc-tagged-]] +[join[ ]] }}}
+	role="region"
+	aria-label={{$:/language/EditTemplate/Caption}}>
 <$fieldmangler>
-<$set name="storyTiddler" value=<<currentTiddler>>>
-<$keyboard key="((cancel-edit-tiddler))" message="tm-cancel-tiddler">
-<$keyboard key="((save-tiddler))" actions=<<actions>>>
+<$vars
+	storyTiddler=<<currentTiddler>>
+	newTagNameTiddler=<<qualify "$:/temp/NewTagName">>
+	newFieldNameTiddler=<<qualify "$:/temp/NewFieldName">>
+	newFieldValueTiddlerPrefix=<<qualify "$:/temp/NewFieldValue">>
+	newFieldNameInputTiddler=<<qualify "$:/temp/NewFieldName/input">>
+	newFieldNameSelectionTiddler=<<qualify "$:/temp/NewFieldName/selected-item">>
+	newTagNameInputTiddler=<<qualify "$:/temp/NewTagName/input">>
+	newTagNameSelectionTiddler=<<qualify "$:/temp/NewTagName/selected-item">>
+	typeInputTiddler=<<qualify "$:/temp/Type/input">>
+	typeSelectionTiddler=<<qualify "$:/temp/Type/selected-item">>>
+<$keyboard key="((cancel-edit-tiddler))" actions=<<cancel-delete-tiddler-actions "cancel">> tag="div">
+<$keyboard key="((save-tiddler))" actions=<<save-tiddler-actions>> tag="div">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
-<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
 <$transclude tiddler=<<listItem>>/>
-</$set>
 </$list>
 </$keyboard>
 </$keyboard>
-</$set>
+</$vars>
 </$fieldmangler>
 </div>

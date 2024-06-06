@@ -1,0 +1,84 @@
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - tiddlywiki-com
+env:
+  NODE_VERSION: "18"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - run: "./bin/ci-test.sh"
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+  build-prerelease:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    needs: test
+    env:
+      TW5_BUILD_TIDDLYWIKI: "./tiddlywiki.js"
+      TW5_BUILD_MAIN_EDITION: "./editions/prerelease"
+      TW5_BUILD_OUTPUT: "./output/prerelease"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - run: "./bin/ci-pre-build.sh"
+      # There's another near-duplicate "Set dynamic environment variables" step in
+      # the `build-tiddlywiki-com` job.
+      # These _could_ be extracted as a script (or moved into `ci-pre-build.sh`) to do away with the
+      # duplication, but, the visibility that comes from having these in the workflow file seems
+      # valuable. Environment variables are global variables and setting them at the top-level
+      # makes sense.
+      # Time to reconsider this decision might be when this setup turns out to be mistake-prone.
+      - name: "Set dynamic environment variables"
+        run: |
+          TW5_BUILD_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          echo "TW5_BUILD_BRANCH=${TW5_BUILD_BRANCH}" >> $GITHUB_ENV
+          echo "TW5_BUILD_VERSION=$(./bin/get-plugin-library-version-number)" >> $GITHUB_ENV
+          echo "TW5_BUILD_DETAILS=Prerelease built from branch '$TW5_BUILD_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')" >> $GITHUB_ENV
+      - run: "./bin/build-site.sh"
+      - run: "./bin/ci-push.sh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
+  build-tiddlywiki-com:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/tiddlywiki-com'
+    needs: test
+    env:
+      TW5_BUILD_TIDDLYWIKI: "./node_modules/tiddlywiki/tiddlywiki.js"
+      TW5_BUILD_MAIN_EDITION: "./editions/tw5.com"
+      TW5_BUILD_OUTPUT: "./output"
+      TW5_BUILD_ARCHIVE: "./output"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+      - run: "./bin/ci-pre-build.sh"
+      # When making a change here, don't forget to see if it also applies to the step
+      # with the same name in the `build-prerelease` job.
+      - name: "Set dynamic environment variables"
+        run: |
+          TW5_BUILD_BRANCH=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
+          echo "TW5_BUILD_BRANCH=${TW5_BUILD_BRANCH}" >> $GITHUB_ENV
+          echo "TW5_BUILD_VERSION=$(./bin/get-plugin-library-version-number)" >> $GITHUB_ENV
+          echo "TW5_BUILD_DETAILS=Built from branch '$TW5_BUILD_BRANCH' at commit $(git rev-parse HEAD) of $(git remote get-url origin) at $(date +'%F %T %Z')" >> $GITHUB_ENV
+      - run: "./bin/build-site.sh"
+      - run: "./bin/ci-push.sh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}
+      - run: "./bin/build-tw-org.sh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUBPUSHTOKEN }}

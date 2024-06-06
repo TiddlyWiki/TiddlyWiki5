@@ -1,0 +1,25 @@
+caption: Paragraphes
+created: 20141017122121853
+fr-title: Paragraphes en WikiTexte
+modified: 20220422011108016
+tags: WikiText
+title: Paragraphs in WikiText
+type: text/vnd.tiddlywiki
+
+Pour marquer la fin d'un paragraphe, il faut appuyer deux fois sur la touche `Entrée` pour créer deux retours à la ligne<<:>>
+
+<<wikitext-example-without-html "Ceci est un premier paragraphe.
+
+Et ceci est un deuxième paragraphe.">>
+
+; Remarque
+* Peu importe le nombre de retours à la lignes supplémentaires, l'espacement entre les paragraphes reste le même.
+
+Au sein d'un paragraphe, un retour à la ligne seul est ignoré<<:>>
+
+<<wikitext-example-without-html "Ceci est un
+paragraphe constitué
+de plusieurs
+lignes courtes.">>
+
+Pour les situations où ce comportement n'est pas pratique, voir aussi<<:>> <<fr "Hard Linebreaks in WikiText">>.

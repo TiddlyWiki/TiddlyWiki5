@@ -17,8 +17,8 @@ exports.method = "PUT";
 exports.path = /^\/recipes\/default\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
-	var title = decodeURIComponent(state.params[0]),
-	fields = JSON.parse(state.data);
+	var title = $tw.utils.decodeURIComponentSafe(state.params[0]),
+	fields = $tw.utils.parseJSONSafe(state.data);
 	// Pull up any subfields in the `fields` object
 	if(fields.fields) {
 		$tw.utils.each(fields.fields,function(field,name) {
@@ -30,7 +30,17 @@ exports.handler = function(request,response,state) {
 	if(fields.revision) {
 		delete fields.revision;
 	}
-	state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title},state.wiki.getModificationFields()));
+	// If this is a skinny tiddler, it means the client never got the full
+	// version of the tiddler to edit. So we must preserve whatever text
+	// already exists on the server, or else we'll inadvertently delete it.
+	if(fields._is_skinny !== undefined) {
+		var tiddler = state.wiki.getTiddler(title);
+		if(tiddler) {
+			fields.text = tiddler.fields.text;
+		}
+		delete fields._is_skinny;
+	}
+	state.wiki.addTiddler(new $tw.Tiddler(fields,{title: title}));
 	var changeCount = state.wiki.getChangeCount(title).toString();
 	response.writeHead(204, "OK",{
 		Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\"",

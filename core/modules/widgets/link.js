@@ -43,6 +43,11 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	} else {
 		// Just insert the link text
 		var domNode = this.document.createElement("span");
+		// Assign data- attributes
+		this.assignAttributes(domNode,{
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		parent.insertBefore(domNode,nextSibling);
 		this.renderChildren(domNode,null);
 		this.domNodes.push(domNode);
@@ -60,7 +65,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		tag = "a";
 	}
 	// Create our element
-	var domNode = this.document.createElement(tag);
+	var namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"}),
+		domNode = this.document.createElementNS(namespace,tag);
 	// Assign classes
 	var classes = [];
 	if(this.overrideClasses === undefined) {
@@ -76,7 +82,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			}
 		}
 		if(this.linkClasses) {
-			classes.push(this.linkClasses);			
+			classes.push(this.linkClasses);
 		}
 	} else if(this.overrideClasses !== "") {
 		classes.push(this.overrideClasses)
@@ -96,13 +102,14 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		// Expand the tv-wikilink-template variable to construct the href
 		var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 			wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$";
-		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",encodeURIComponent(this.to));
-		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkTemplate,"$uri_encoded$",$tw.utils.encodeURIComponentExtended(this.to));
+		wikiLinkText = $tw.utils.replaceString(wikiLinkText,"$uri_doubleencoded$",$tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.to)));
 	}
 	// Override with the value of tv-get-export-link if defined
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
 	if(tag === "a") {
-		domNode.setAttribute("href",wikiLinkText);
+		var namespaceHref = (namespace === "http://www.w3.org/2000/svg") ? "http://www.w3.org/1999/xlink" : undefined;
+		domNode.setAttributeNS(namespaceHref,"href",wikiLinkText);
 	}
 	// Set the tabindex
 	if(this.tabIndex) {
@@ -136,6 +143,11 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			widget: this
 		});
 	}
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -152,11 +164,18 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
+		navigateFromClientTop: bounds.top,
+		navigateFromClientLeft: bounds.left,
+		navigateFromClientWidth: bounds.width,
+		navigateFromClientRight: bounds.right,
+		navigateFromClientBottom: bounds.bottom,
+		navigateFromClientHeight: bounds.height,
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1),
 		metaKey: event.metaKey,
 		ctrlKey: event.ctrlKey,
 		altKey: event.altKey,
-		shiftKey: event.shiftKey
+		shiftKey: event.shiftKey,
+		event: event
 	});
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();
@@ -183,7 +202,14 @@ LinkWidget.prototype.execute = function() {
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
 	this.hideMissingLinks = (this.getVariable("tv-show-missing-links") || "yes") === "no";
 	// Make the child widgets
-	this.makeChildWidgets();
+	var templateTree;
+	if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
+		templateTree = this.parseTreeNode.children;
+	} else {
+		// Default template is a link to the title
+		templateTree = [{type: "text", text: this.to}];
+	}
+	this.makeChildWidgets(templateTree);
 };
 
 /*
@@ -191,7 +217,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip) {
+	if($tw.utils.count(changedAttributes) > 0 || changedTiddlers[this.to]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -201,3 +227,4 @@ LinkWidget.prototype.refresh = function(changedTiddlers) {
 exports.link = LinkWidget;
 
 })();
+	

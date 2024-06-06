@@ -1,0 +1,65 @@
+title: $:/plugins/tiddlywiki/highlight-legacy/readme
+
+This plugin provides syntax highlighting of code blocks using v9.18.1 of [[highlight.js|https://github.com/isagalaev/highlight.js]] from Ivan Sagalaev. This legacy version should be installed in place of the regular Highlight plugin when you require your wiki to be opened in browsers that do not fully support <$text text="JavaScript"/> ES6 (2015). Here's a [[ES6 compatibility table|https://caniuse.com/?search=es6]].
+
+! Built-in Language Brushes
+
+The plugin includes support for the following languages (referred to as "brushes" by highlight.js):
+
+* apache
+* arduino
+* arm assembly
+* asciidoc
+* autohotkey
+* awk
+* bash
+* cmake
+* coffeescript
+* cpp
+* cs
+* css
+* diff
+* dockerfile
+* erlang
+* elixir
+* fortran
+* go
+* gradle
+* haskell
+* html
+* http
+* ini
+* intel x86 assembly
+* java
+* javascript
+* json
+* kotlin
+* less
+* lua
+* makefile
+* markdown
+* mathematica
+* matlab
+* nginx
+* objectivec
+* perl
+* php
+* plaintext
+* powershell
+* properties
+* python
+* R
+* ruby
+* rust
+* scss
+* shell session
+* sql
+* swift
+* toml
+* typescript
+* vala
+* vim script
+* xml
+* yaml
+
+The mapping between a MIME type and a highlight.js language specifier is accomplished via mapping tiddlers whose titles start with `$:/config/HighlightPlugin/TypeMappings/`.

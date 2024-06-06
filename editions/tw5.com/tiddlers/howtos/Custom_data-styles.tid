@@ -4,7 +4,7 @@ tags: data-tags-styles [[How to apply custom styles]] $:/tags/Stylesheet
 title: Custom data-styles
 type: text/vnd.tiddlywiki
 
-[data-tiddler-title="Custom styles by title"] {
+[data-tiddler-title="Custom styles by data-tiddler-title"] {
   border: 1px solid blue;
 }
 

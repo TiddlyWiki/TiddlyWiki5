@@ -1,7 +1,8 @@
-created: 201308291647
-modified: 201308291647
+created: 20130829164700000
+modified: 20220427171321793
 tags: Concepts
 title: DataTiddlers
+type: text/vnd.tiddlywiki
 
 A data tiddler is a miniature database contained within a tiddler.
 
@@ -12,22 +13,4 @@ There are two standard formats:
 
 Other formats of tiddler can also be parsed to yield blocks of data that behave like data tiddlers.
 
-Use a TextReference to look up the value of a named property. For example, if a [[DictionaryTiddler|DictionaryTiddlers]] called `MonthDays` contains:
-
-```
-oct:31
-nov:30
-dec:31
-```
-
-... then `{{MonthDays##nov}}` will resolve to the value `30`.
-
-The same is true if `MonthDays` is a [[JSONTiddler|JSONTiddlers]] with the following content:
-
-```
-{"oct":31,"nov":30,"dec":31}
-```
-
-Note: //It is currently only possible to retrieve data from the immediate properties of the root object of a JSONTiddler.//
-
-The widgets ActionSetFieldWidget and ActionListopsWidget can manipulate named properties of data tiddlers by indicating the name of the property in the $index attribute. To create or modify a named property with ActionSetFieldWidget, provide a $value attribute. To delete a named property with ActionSetFieldWidget, omit the $value attribute. ActionListopsWidget assigns the named property the list constructed through its $filter and $subfilter attributes.
+See [[JSON in TiddlyWiki]] for an overview.

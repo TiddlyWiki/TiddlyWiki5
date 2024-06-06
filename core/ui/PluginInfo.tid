@@ -9,6 +9,7 @@ $(currentTiddler)$/$(currentTab)$
 \define default-tiddler-title()
 $:/core/ui/PluginInfo/Default/$(currentTab)$
 \end
+\whitespace trim
 <$transclude tiddler=<<localised-info-tiddler-title>> mode="block">
 <$transclude tiddler=<<currentTiddler>> subtiddler=<<localised-info-tiddler-title>> mode="block">
 <$transclude tiddler=<<currentTiddler>> subtiddler=<<info-tiddler-title>> mode="block">

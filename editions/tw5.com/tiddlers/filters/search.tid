@@ -1,22 +1,22 @@
+caption: search
 created: 20140410103123179
-modified: 20181025082022690
+modified: 20230711084359603
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers in which <<.em not>> all of the search terms can be found
+op-output: those input tiddlers in which <<.em all>> of the search terms can be found in the value of field <<.place F>>
+op-parameter: one or more search terms, separated by spaces, or a literal search string
+op-purpose: filter the input by searching tiddler content
+op-suffix: the <<.op search>> operator uses a rich suffix, see below for details
 tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
 title: search Operator
 type: text/vnd.tiddlywiki
-caption: search
-op-purpose: filter the input by searching tiddler content
-op-input: a [[selection of titles|Title Selection]]
-op-suffix: the <<.op search>> operator uses a rich suffix, see below for details
-op-parameter: one or more search terms, separated by spaces, or a literal search string
-op-output: those input tiddlers in which <<.em all>> of the search terms can be found in the value of field <<.place F>>
-op-neg-output: those input tiddlers in which <<.em not>> all of the search terms can be found
 
 <<.from-version "5.1.18">> The search filter operator was significantly enhanced in 5.1.18. Earlier versions do not support the extended syntax and therefore do not permit searching multiple fields, or the ''literal'' or ''casesensitive'' options.
 
 The <<.op search>> operator uses an extended syntax that permits multiple fields and flags to be passed:
 
 ```
-[search:<field list>:<flag list>[<operand>]]
+[search:<field list>:<flag list>[<parameter>]]
 ```
 
 * ''field list'': a comma delimited list of field names to restrict the search
@@ -24,7 +24,7 @@ The <<.op search>> operator uses an extended syntax that permits multiple fields
 ** an asterisk `*` instead of the field list causes the search to be performed across all fields available on each tiddler
 ** preceding the list with a minus sign `-` reverses the order so that the search is performed on all fields except the listed fields
 * ''flag list'': a comma delimited list of flags (defaults to `words` if blank)
-* ''operand'': filter operand
+* ''parameter'': filter parameter
 
 This example searches the fields <<.field title>> and <<.field caption>> for a case-sensitive match for the literal string <<.op-word "The first">>:
 
@@ -38,7 +38,9 @@ The available flags are:
 ** ''literal'': considers the search string to be a literal string, and requires an exact match
 ** ''whitespace'': considers the search string to be a literal string, but will consider all runs of whitespace to be equivalent to a single space. Thus `A B` matches `A   B`
 ** ''regexp'': treats the search string as a regular expression. Note that the ''regexp'' option obviates the need for the older <<.olink regexp>> operator.
-** ''words'': (the default) treats the search string as a list of tokens separated by whitespace, and matches if all of the tokens appear in the string (regardless of ordering and whether there is other text in between)
+** ''words'': (the default) treats the search string as a list of tokens separated by whitespace, and matches if ''all of the tokens'' appear in the string (regardless of ordering and whether there is other text in between)
+** ''some'': <<.from-version "5.2.2">> treats the search string as a list of tokens separated by whitespace, and matches if ''at least one'' of the tokens appear in the string
 * ''casesensitive'': if present, this flag forces a case-sensitive match, where upper and lower case letters are considered different. By default, upper and lower case letters are considered identical for matching purposes.
+* ''anchored'': <<.from-version "5.1.20">> anchors the search to the start of the string (applies to ''whitespace'', ''literal'' and ''words'' modes)
 
 <<.operator-examples "search">>

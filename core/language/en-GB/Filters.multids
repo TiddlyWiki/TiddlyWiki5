@@ -10,6 +10,7 @@ Orphans: Orphan tiddlers
 SystemTiddlers: System tiddlers
 ShadowTiddlers: Shadow tiddlers
 OverriddenShadowTiddlers: Overridden shadow tiddlers
+SessionTiddlers: Tiddlers modified since the wiki was loaded
 SystemTags: System tags
 StoryList: Tiddlers in the story river, excluding <$text text="$:/AdvancedSearch"/>
 TypedTiddlers: Non wiki-text tiddlers

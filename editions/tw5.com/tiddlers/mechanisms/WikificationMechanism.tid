@@ -1,0 +1,28 @@
+created: 20191012080221911
+modified: 20191013094002890
+tags: Mechanisms
+title: WikificationMechanism
+type: text/vnd.tiddlywiki
+
+"Wikification" is a general term for the dynamic process of converting tiddlers containing WikiText into the HTML DOM representation needed by the browser, and updating that representation if the underlying tiddlers change.
+
+It is composed of several distinct steps:
+
+* ParserMechanism: reading the text of tiddlers and scanning for wikitext constructions, outputting a tree representation of the resulting structure. It is an expensive process so parse trees are cached, and only need to be updated if the corresponding tiddler is changed
+* WidgetMechanism: starting with a specified root tiddler, recursively instantiate a widget for each parse tree node making a rendering tree. Widgets can optionally also create DOM nodes
+* RefreshMechanism: handling changes to the tiddler store by selectively and efficiently updating a rendering tree
+
+This mechanism is used in the browser to build TiddlyWiki's main interactive page. At startup, the tiddler $:/core/ui/PageTemplate is parsed and rendered to the DOM, recursively pulling in other tiddlers to build the entire user interface. Any user interactions -- following a link, clicking a button, or typing in a text box -- trigger a change in the tiddler store which then automatically propagates through the widget tree.  For example, if the user clicks a link to navigate to a new tiddler, the following steps take place:
+
+# Clicking the link triggers the action of the LinkWidget which by default is to add the target tiddler to the list field of the tiddler $:/StoryList
+# The modification to the tiddler store asynchronously triggers the refresh cycle. The asynchronous triggering ensures that the refresh cycle is only run once even if multiple tiddlers were modified in succession
+# The refresh cycle recursively visits each node of the render tree giving them the chance to update themselves in the light of the accumulated changes to the tiddler store. In this case, the ListWidget of the main story river notices that a single tiddler needs to be added to the river, and renders that newly displayed tiddler without disturbing the other tiddlers
+
+The performance of the entire wikification process is critical. If the refresh cycle takes more than about 400ms then the user will notice a delay between their actions and the effects. See [[Performance]] for some discussion of how to optimise performance.
+
+The rendering process is also aggressively reused in other parts of TiddlyWiki, both in the browser and on the server:
+
+* Generating TiddlyWiki's standalone HTML representation
+* Creating static HTML renderings of tiddlers
+* Dynamically rendering CSS stylesheet tiddlers
+
