@@ -14,7 +14,7 @@ This is the procedure, and the parameter is <<parameter>>.
 \end
 ```
 
-The name wrapped in double angled [[brackets|Brackets]] is used a shorthand way of [[transcluding|Transclusion]] the snippet. Each of these <<.def "procedure calls">> can supply a different set of parameters:
+The name wrapped in double angled [[brackets|Brackets]] is a shorthand way of [[transcluding|Transclusion]] the snippet. Each of these <<.def "procedure calls">> can supply a different set of parameters:
 
 ```
 <<my-procedure>>

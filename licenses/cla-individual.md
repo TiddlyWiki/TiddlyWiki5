@@ -563,3 +563,11 @@ John Long, @drevarr, 2023/12/12
 Ed Holsinger, @eschlon, 2024/02/08
 
 Kim I. McKinley, @PotOfCoffee2Go, 2024/03/16
+
+@Jinix6, 2024/03/31
+
+Anders Jarmund, @andjar, 2024/04/05
+
+@sarna, 2024/04/28
+
+Fokzo Kat, @CyberFoxar, 2024/05/20

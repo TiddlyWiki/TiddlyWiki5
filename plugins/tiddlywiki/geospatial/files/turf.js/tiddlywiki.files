@@ -1,0 +1,21 @@
+{
+	"tiddlers": [
+		{
+			"file": "turf.6.5.0.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/geospatial/turf.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/geospatial/turf.js/LICENSE"
+			}
+		}
+	]
+}
