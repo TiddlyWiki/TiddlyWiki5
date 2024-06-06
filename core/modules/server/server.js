@@ -33,10 +33,13 @@ function Server(options) {
 	this.routes = options.routes || [];
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
-	this.servername = $tw.utils.transliterateToSafeASCII(this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
 	this.logger = new $tw.utils.Logger("server",{colour: "cyan"});
 	this.logger.setPrefix(":" + process.pid + "-" + (Number(new Date()) - 1095776640000));
 	this.boot = options.boot || $tw.boot;
+	// Name the server and init the boot state
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.boot.pathPrefix = this.get("path-prefix") || "";
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -95,10 +98,6 @@ function Server(options) {
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
-	// Name the server and init the boot state
-	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
-	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
-	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
 /*
@@ -369,8 +368,8 @@ Server.prototype.listen = function(port,host,prefix) {
 	server.on("listening",function() {
 		var address = server.address(),
 			url = self.protocol + "://" + (address.family === "IPv6" ? "[" + address.address + "]" : address.address) + ":" + address.port + prefix;
-		self.logger.log("Serving on " + url,"brown/orange");
-		self.logger.log("(press ctrl-C to exit)","red");
+		$tw.utils.log("Serving on " + url,"brown/orange");
+		$tw.utils.log("(press ctrl-C to exit)","red");
 	});
 	// Listen
 	return server.listen(port,host);
