@@ -69,7 +69,7 @@ HttpClient.prototype.cancelAllHttpRequests = function() {
 		for(var t=this.requests.length - 1; t--; t>=0) {
 			var requestInfo = this.requests[t];
 			requestInfo.request.cancel();
-		}	
+		}
 	}
 	this.requests = [];
 	this.updateRequestTracker();
@@ -90,6 +90,7 @@ wiki: wiki to be used for executing action strings
 url: URL for request
 method: method eg GET, POST
 body: text of request body
+binary: set to "yes" to force binary processing of response payload
 oncompletion: action string to be invoked on completion
 onprogress: action string to be invoked on progress updates
 bindStatus: optional title of tiddler to which status ("pending", "complete", "error") should be written
@@ -99,6 +100,10 @@ headers: hashmap of header name to header value to be sent with the request
 passwordHeaders: hashmap of header name to password store name to be sent with the request
 queryStrings: hashmap of query string parameter name to parameter value to be sent with the request
 passwordQueryStrings: hashmap of query string parameter name to password store name to be sent with the request
+basicAuthUsername: plain username for basic authentication
+basicAuthUsernameFromStore: name of password store entry containing username
+basicAuthPassword: plain password for basic authentication
+basicAuthPasswordFromStore: name of password store entry containing password
 */
 function HttpClientRequest(options) {
 	var self = this;
@@ -106,10 +111,12 @@ function HttpClientRequest(options) {
 	this.wiki = options.wiki;
 	this.completionActions = options.oncompletion;
 	this.progressActions = options.onprogress;
-	this.bindStatus = options["bind-status"];
-	this.bindProgress = options["bind-progress"];
+	this.bindStatus = options["bindStatus"];
+	this.bindProgress = options["bindProgress"];
 	this.method = options.method || "GET";
 	this.body = options.body || "";
+	this.binary = options.binary || "";
+	this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false,
 	this.variables = options.variables;
 	var url = options.url;
 	$tw.utils.each(options.queryStrings,function(value,name) {
@@ -126,13 +133,18 @@ function HttpClientRequest(options) {
 	$tw.utils.each(options.passwordHeaders,function(value,name) {
 		self.requestHeaders[name] = $tw.utils.getPassword(value) || "";
 	});
+	this.basicAuthUsername = options.basicAuthUsername || (options.basicAuthUsernameFromStore && $tw.utils.getPassword(options.basicAuthUsernameFromStore)) || "";
+	this.basicAuthPassword = options.basicAuthPassword || (options.basicAuthPasswordFromStore && $tw.utils.getPassword(options.basicAuthPasswordFromStore)) || "";
+	if(this.basicAuthUsername && this.basicAuthPassword) {
+		this.requestHeaders.Authorization = "Basic " + $tw.utils.base64Encode(this.basicAuthUsername + ":" + this.basicAuthPassword);
+	}
 }
 
 HttpClientRequest.prototype.send = function(callback) {
 	var self = this,
 		setBinding = function(title,text) {
 			if(title) {
-				this.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
+				self.wiki.addTiddler(new $tw.Tiddler({title: title, text: text}));
 			}
 		};
 	if(this.url) {
@@ -154,8 +166,11 @@ HttpClientRequest.prototype.send = function(callback) {
 		this.xhr = $tw.utils.httpRequest({
 			url: this.url,
 			type: this.method,
+			useDefaultHeaders: this.useDefaultHeaders,
 			headers: this.requestHeaders,
 			data: this.body,
+			returnProp: this.binary === "" ? "responseText" : "response",
+			responseType: this.binary === "" ? "text" : "arraybuffer",
 			callback: function(err,data,xhr) {
 				var hasSucceeded = xhr.status >= 200 && xhr.status < 300,
 					completionCode = hasSucceeded ? "complete" : "error",
@@ -175,6 +190,16 @@ HttpClientRequest.prototype.send = function(callback) {
 					data: (data || "").toString(),
 					headers: JSON.stringify(headers)
 				};
+				/* Convert data from binary to base64 */
+				if (xhr.responseType === "arraybuffer") {
+					var binary = "",
+						bytes = new Uint8Array(data),
+						len = bytes.byteLength;
+					for (var i=0; i<len; i++) {
+						binary += String.fromCharCode(bytes[i]);
+					}
+					resultVariables.data = $tw.utils.base64Encode(binary,true);
+				}
 				self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(requestTrackerTitle),{
 					status: completionCode,
 				}));
@@ -212,11 +237,13 @@ Make an HTTP request. Options are:
 	callback: function invoked with (err,data,xhr)
 	progress: optional function invoked with (lengthComputable,loaded,total)
 	returnProp: string name of the property to return as first argument of callback
+	responseType: "text" or "arraybuffer"
 */
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		url = options.url,
-		headers = options.headers || {accept: "application/json"},
+		useDefaultHeaders = options.useDefaultHeaders !== false ? true : false,
+		headers = options.headers || (useDefaultHeaders ? {accept: "application/json"} : {}),
 		hasHeader = function(targetHeader) {
 			targetHeader = targetHeader.toLowerCase();
 			var result = false;
@@ -242,7 +269,7 @@ exports.httpRequest = function(options) {
 			if(hasHeader("Content-Type") && ["application/x-www-form-urlencoded","multipart/form-data","text/plain"].indexOf(getHeader["Content-Type"]) === -1) {
 				return false;
 			}
-			return true;	
+			return true;
 		},
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
@@ -264,16 +291,17 @@ exports.httpRequest = function(options) {
 			}
 		}
 	}
+	request.responseType = options.responseType || "text";
 	// Set up the state change handler
 	request.onreadystatechange = function() {
 		if(this.readyState === 4) {
-			if(this.status === 200 || this.status === 201 || this.status === 204) {
+			if(this.status >= 200 && this.status < 300) {
 				// Success!
 				options.callback(null,this[returnProp],this);
 				return;
 			}
 		// Something went wrong
-		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,null,this);
+		options.callback($tw.language.getString("Error/XMLHttpRequest") + ": " + this.status,this[returnProp],this);
 		}
 	};
 	// Handle progress
@@ -291,10 +319,10 @@ exports.httpRequest = function(options) {
 			request.setRequestHeader(headerTitle,header);
 		});
 	}
-	if(data && !hasHeader("Content-Type")) {
+	if(data && !hasHeader("Content-Type") && useDefaultHeaders) {
 		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
-	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers)) {
+	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers) && useDefaultHeaders) {
 		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
 	// Send data

@@ -3,30 +3,7 @@ title: $:/core/modules/parsers/wikiparser/rules/quoteblock.js
 type: application/javascript
 module-type: wikirule
 
-Wiki text rule for quote blocks. For example:
-
-```
-	<<<.optionalClass(es) optional cited from
-	a quote
-	<<<
-	
-	<<<.optionalClass(es)
-	a quote
-	<<< optional cited from
-```
-
-Quotes can be quoted by putting more <s
-
-```
-	<<<
-	Quote Level 1
-	
-	<<<<
-	QuoteLevel 2
-	<<<<
-	
-	<<<
-```
+Wiki text rule for quote blocks.
 
 \*/
 (function(){
@@ -47,16 +24,15 @@ exports.init = function(parser) {
 exports.parse = function() {
 	var classes = ["tc-quote"];
 	// Get all the details of the match
-	var reEndString = "^" + this.match[1] + "(?!<)";
+	var reEndString = "^\\s*" + this.match[1] + "(?!<)";
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
-	
 	// Parse any classes, whitespace and then the optional cite itself
 	classes.push.apply(classes, this.parser.parseClasses());
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	// before handling the cite, parse the body of the quote
-	var tree= this.parser.parseBlocks(reEndString);
+	var tree = this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
 	if(cite.length > 0) {
 		tree.unshift({

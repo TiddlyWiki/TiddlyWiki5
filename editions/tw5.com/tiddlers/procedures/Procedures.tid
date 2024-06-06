@@ -1,5 +1,5 @@
 created: 20221007124007426
-modified: 20230419103154329
+modified: 20240310173130052
 tags: Concepts Reference
 title: Procedures
 type: text/vnd.tiddlywiki
@@ -18,10 +18,12 @@ The name wrapped in double angled [[brackets|Brackets]] is used a shorthand way 
 
 ```
 <<my-procedure>>
-<<my-procedure "The parameter">>
+<<my-procedure parameter:"The parameter">>
 ```
 
 The parameters that are specified in the procedure call are made available as variables.
+
+<<.tip """If a procedure has more than 1 parameter, it is highly encouraged to use "named parameters", as shown in the second example above. Even if it is more to type, it will pay off in the long run.""">>
 
 !! How Procedures Work
 
@@ -32,4 +34,4 @@ Procedures are implemented as a special kind of [[variable|Variables]]. The only
 * [[Procedure Definitions]] describes how to create procedures
 * [[Procedure Calls]] describes how to use procedures
 * [[Procedure Parameter Handling]] describes how procedure parameters work
-
+* [[Procedure Syntax]] is a formal syntax description using railroad diagrams

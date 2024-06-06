@@ -6,11 +6,12 @@ type: text/vnd.tiddlywiki
 
 !! Introduction
 
-A <<.def variable>> is a snippet of text that can be accessed by name. The text is referred to as the variable's <<.def value>>.
+* A <<.def variable>> is a ''snippet of text'' that can be accessed by name.
+* The text is referred to as the variable's <<.def value>>.
 
-Variables are defined by [[widgets|Widgets]]. Several core widgets define variables, the most common being the <<.wlink SetWidget>>, <<.wlink LetWidget>> and <<.wlink ListWidget>> widgets.
+Variables are defined by [[widgets|Widgets]]. Several core widgets define variables, the most common being the <<.wlink LetWidget>>, <<.wlink SetWidget>> and <<.wlink ListWidget>> widgets.
 
-The values of variables are available to descendant widgets, including transcluded content. For example, within each tiddler in the main story river the variable "currentTiddler" is set to the title of the tiddler.
+The values of variables are available to descendant widgets, including transcluded content. For example, within each tiddler in the main story river the variable <<.var currentTiddler>> is set to the title of the tiddler.
 
 Variables can also be overwritten by descendent widgets defining variables of the same name, thus binding a different snippet to that name for the scope of the children of the widget.
 

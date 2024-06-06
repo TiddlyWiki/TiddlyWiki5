@@ -1,5 +1,5 @@
 created: 20140820151051019
-modified: 20190115165616599
+modified: 20240313114828368
 tags: Community
 title: Improving TiddlyWiki Documentation
 type: text/vnd.tiddlywiki
@@ -8,9 +8,29 @@ Anyone can submit improvements to the TiddlyWiki documentation that appears on h
 
 <<.warning """If you already know GitHub, note that documentation updates must be directed to the `tiddlywiki-com` branch""">>
 
+! Before you start editing
+
 # Read and observe the [[Documentation Style Guide]]
 # Create an account on https://github.com if you don't already have one
 # If you haven't done so already, sign the [[Contributor License Agreement]] as described in [[Signing the Contributor License Agreement]]
+
+! Editing and submitting your edits
+
+You can choose to edit the documentation using the [[TiddlyWiki Docs PR Maker]] or directly in ~GitHub. The first method is especially recommended for users not familiar with ~GitHub.
+
+!! Using [[Docs PR Maker|TiddlyWiki Docs PR Maker]] edition
+
+# Go to https://saqimtiaz.github.io/tw5-docs-pr-maker/ or click the link displayed in the ribbon underneath the title when editing a tiddler on tiddlywiki.com
+# Go through the quick introduction where you will need to provide your ~GitHub username and a ~GitHub access token (you will be guided in creating one)
+# Edit or create tiddlers to update the documentation, the wiki will keep track of all changes
+# Click the "Submit updates" button and check if all the tiddlers that you edited are included in the submission; if not, drag them into the box
+# Provide a concise title and description of your changes (see the rules about titling pull requests in [[contribution guidelines|Contributing]])
+# Submit your changes:
+** "Save as draft" will create a //draft// pull request, this is useful if you don't want the changes to be merged //yet//, because you want to work on it later or discuss it first
+** "Submit documentation update" will create a pull request, which will be immediately available for review and merging 
+
+!! Using ~GitHub
+
 # On https://tiddlywiki.com, click "edit" on the tiddler you want to improve
 # You should see a pink banner with the text: //Can you help us improve this documentation? Find out how to edit this tiddler on ~GitHub//
 # Click on the external link ...''this tiddler on ~GitHub''

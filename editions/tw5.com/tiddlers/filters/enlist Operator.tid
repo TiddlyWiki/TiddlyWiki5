@@ -7,14 +7,14 @@ op-neg-output: those input titles that are <<.em not>> listed in <<.place L>>
 op-output: the titles stored as a [[title list|Title List]] at <<.place L>>
 op-parameter: a [[title list|Title List]]
 op-parameter-name: L
-op-purpose: select titles from the operand interpreted as a [[title list|Title List]]
+op-purpose: select titles from the parameter interpreted as a [[title list|Title List]]
 op-suffix: <<.from-version "5.1.20">> `dedupe` (the default) to remove duplicates, `raw` to leave duplicates untouched
 op-suffix-name: D
 tags: [[Filter Operators]] [[Field Operators]] [[Selection Constructors]] [[Negatable Operators]]
 title: enlist Operator
 type: text/vnd.tiddlywiki
 
-<<.tip """Literal filter operands cannot contain square brackets but you can work around the issue by using a variable. ''Learn more at:'' [[SetWidget]] documentation under the heading "Filtered List Variable Assignment" """>>
+<<.tip """Literal filter parameters cannot contain square brackets but you can work around the issue by using a variable. ''Learn more at:'' [[SetWidget]] documentation under the heading "Filtered List Variable Assignment" """>>
 
 ```
 <$set name="myList" value="first [[second with a space]] third">

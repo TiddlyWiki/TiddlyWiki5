@@ -16,6 +16,7 @@ The ''action-deletefield'' widget is invisible. Any content within it is ignored
 |!Attribute |!Description |
 |$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[current tiddler|Current Tiddler]]) |
 |$field |Optional name of a field to delete |
+|$timestamp |<<.from-version "5.3.4">> Specifies whether the timestamp(s) of the target tiddler will be updated (''modified'' and ''modifier'', plus ''created'' and ''creator'' for newly created tiddlers). Can be "yes" (the default) or "no" |
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be deleted. The attribute value is ignored and need not be specified |
 
 ! Examples

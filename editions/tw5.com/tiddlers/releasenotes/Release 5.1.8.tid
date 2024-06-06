@@ -5,6 +5,7 @@ tags: ReleaseNotes
 title: Release 5.1.8
 type: text/vnd.tiddlywiki
 released: 2015041716307227
+description: Plugin library, Railroad Plugin, sticky titles, 7 new translations
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.7...v5.1.8]]//
 

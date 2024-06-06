@@ -1,27 +1,26 @@
+caption: suffix
 created: 20140828133830424
-modified: 20220218023400000
+modified: 20230711083049169
+op-input: a [[selection of titles|Title Selection]]
+op-neg-output: those input tiddlers that do <<.em not>> end with <<.place S>>
+op-output: those input titles that end with <<.place S>>
+op-parameter: a string of characters
+op-parameter-name: S
+op-purpose: filter the input titles by how they end
+op-suffix: the <<.op suffix>> operator uses a rich suffix, see below for details
 tags: [[Filter Operators]] [[String Operators]] [[Negatable Operators]]
 title: suffix Operator
 type: text/vnd.tiddlywiki
-caption: suffix
-op-purpose: filter the input titles by how they end
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: a string of characters
-op-parameter-name: S
-op-output: those input titles that end with <<.place S>>
-op-neg-output: those input tiddlers that do <<.em not>> end with <<.place S>>
-op-suffix: the <<.op suffix>> operator uses a rich suffix, see below for details
 
 <<.from-version "5.2.2">>
 
 The <<.op suffix>> operator uses an extended syntax that permits multiple flags to be passed:
 
 ```
-[suffix:<flag list>[<operand>]]
+[suffix:<flag list>[<parameter>]]
 ```
 
 * ''flag list'': a comma delimited list of flags
-* ''operand'': filter operand
 
 The available flags are:
 

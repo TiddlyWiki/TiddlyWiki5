@@ -1,0 +1,64 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/geolookup
+description: geolookup operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Description
+
+geolookup operator
++
+title: Output
+
+\whitespace trim
+<$text text={{{ [geopoint[100.5],[0.5]geolookup{TestData}jsonget[0],[animal]] }}}/>
++
+title: TestData
+type: application/json
+
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [102.0,0.5]
+			},
+			"properties": {
+				"animal": "amoeba"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[102.0,0.0],[103.0,1.0],[104.0,0.0],[105.0,1.0]
+				]
+			},
+			"properties": {
+				"animal": "snake",
+				"length": 100.0
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[[100.0,0.0],[101.0,0.0],[101.0,1.0],[100.0,1.0],[100.0,0.0]]
+				]
+			},
+			"properties": {
+				"animal": "boxfish",
+				"prop1": {
+					"this": "that"
+				}
+			}
+		}
+	]
+}
++
+title: ExpectedResult
+
+<p>boxfish</p>

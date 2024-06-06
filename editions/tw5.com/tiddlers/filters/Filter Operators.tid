@@ -1,5 +1,6 @@
+breadcrumbs: [[Filter Step]]
 created: 20140410103123179
-modified: 20211217141224284
+modified: 20230410114132501
 tags: Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -18,13 +19,19 @@ type: text/vnd.tiddlywiki
 <tr class="doc-table-subheading"><th colspan="5" align="center">$_$</th></tr>
 \end
 
-A <<.def "filter operator">> is a predefined keyword attached to an individual [[step|Filter Step]] of a [[filter|Filters]]. It defines the particular action of that step.
+A <<.def "filter operator">> is a predefined keyword attached to an individual step of a [[filter|Filters]]. It defines the particular action of that step.
 
-''Important:'' Each first [[step|Filter Step]] of a [[filter run|Filter Run]] not given any input titles receives the output of <$link to="all Operator">[all[tiddlers]]</$link> as its input.
+''Important:'' In general, each first [[filter step|Filter Step]] of a [[filter run|Filter Run]] not given any input titles receives the output of <$link to="all Operator">[all[tiddlers]]</$link> as its input.
 
-The following table lists all core operators, the most common ones marked ✓. The `!` column indicates whether an operator allows ''negation'' using the <$link to="Filter Step"><code>!</code> prefix</$link>. For specifics as to each operator's negated output please refer to its documentation. 
 
-Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few [[construct an entirely new selection|Selection Constructors]] instead, as indicated by the last column. A `C?` indicates it might construct a new selection, depending on usage. For specifics as to each operator's selection creation please refer to its documentation. 
+''Table legend:''
+
+|tc-table-no-border tc-first-col-min-width|k
+|^ ✓|^... |,Used to mark the most common ones |
+|^ `!`|^... |,The column indicates whether an operator allows ''negation'' using the <$link to="Filter Step"><code>!</code> prefix</$link>.<br>For specifics as to each operator's negated output please refer to its documentation |
+|^ `C`|^... |,Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few [[construct an entirely new selection|Selection Constructors]] instead, as indicated by the last column.<br>A `C?` indicates it might construct a new selection, depending on usage. For specifics as to each operator's selection creation please refer to its documentation |
+
+The following table lists all core operators:
 
 <table>
 <tr>
@@ -49,6 +56,6 @@ Most steps process the [[selection of titles|Title Selection]] that are supplied
 <<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[Mathematics Operators]!tag[String Operators]!tag[Tag Operators]tag[Special Operators]sort[]]">>
 </table>
 
-A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameter]]. 
+A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameter]].
 
 For the exact rules, see [[Filter Syntax]].

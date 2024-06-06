@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/geospatial/license
+
+This plugin is part of TiddlyWiki 5 and is licensed with TiddlyWiki's 3-clause BSD open source license.
+
+It incorporates the following third-party libraries with their own licenses:
+
+* [[Leaflet.js|https://leafletjs.com/]] license -- $:/plugins/tiddlywiki/geospatial/leaflet.js/LICENSE
+* [[Leaflet.mastercluster|https://github.com/Leaflet/Leaflet.markercluster]] license -- $:/plugins/tiddlywiki/geospatial/leaflet.markercluster/LICENSE
+* [[Turf.js|https://turfjs.org/]] license -- $:/plugins/tiddlywiki/geospatial/turf.js/LICENSE
+* [[OpenLocationCode|https://github.com/google/open-location-code]] license -- $:/plugins/tiddlywiki/geospatial/openlocationcode/LICENSE
