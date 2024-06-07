@@ -120,7 +120,7 @@ Command.prototype.fetchFile = function(url,options,callback,redirectCount) {
 	        }
 	   	});
 	   	response.on("error",function(e) {
-			self.commander.log("Error on GET request: " + e);
+			console.log("Error on GET request: " + e);
 			callback(e);
 	   	});
 	});
