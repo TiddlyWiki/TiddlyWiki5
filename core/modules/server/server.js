@@ -36,10 +36,6 @@ function Server(options) {
 	this.logger = new $tw.utils.Logger("server",{colour: "cyan"});
 	this.logger.setPrefix(":" + process.pid + "-" + (Number(new Date()) - 1095776640000));
 	this.boot = options.boot || $tw.boot;
-	// Name the server and init the boot state
-	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
-	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
-	this.boot.pathPrefix = this.get("path-prefix") || "";
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -98,6 +94,10 @@ function Server(options) {
 		this.protocol = "https";
 	}
 	this.transport = require(this.protocol);
+	// Name the server and init the boot state
+	this.servername = $tw.utils.transliterateToSafeASCII(this.get("server-name") || this.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5");
+	this.boot.origin = this.get("origin")? this.get("origin"): this.protocol+"://"+this.get("host")+":"+this.get("port");
+	this.boot.pathPrefix = this.get("path-prefix") || "";
 }
 
 /*
