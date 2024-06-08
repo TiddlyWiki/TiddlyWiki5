@@ -79,6 +79,7 @@ Improvements to the following translations:
 
 ! Hackability Improvements
 
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7866">> the wikitext parser to generate start/end properties for all nodes
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/8109">> [[WidgetMessage: tm-http-request]] to be able to use Basic Authentication
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7882">> infinite recursion handling using a custom exception
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> button to the JavaScript error popup allowing tiddlers to be saved to a local JSON file
@@ -146,6 +147,7 @@ eschlon
 etardiff
 flibbles
 FSpark
+Gk0Wk
 hoelzro
 jinix6
 joshuafontany
