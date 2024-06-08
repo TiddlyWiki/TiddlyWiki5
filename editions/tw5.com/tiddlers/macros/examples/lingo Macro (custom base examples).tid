@@ -1,0 +1,21 @@
+created: 20231028120432257
+modified: 20240206113509050
+tags: [[lingo Macro]] [[Macro Examples]]
+title: lingo (for custom base) Macro (Examples)
+type: text/vnd.tiddlywiki
+
+\define lingo-base() lingo Macro (custom base examples)/
+
+Given the `\define lingo-base() lingo Macro (custom base examples)/`, this example shows the localizaion key `ExampleKey` being translate to the text in [[lingo Macro (custom base examples)/en-GB/ExampleKey]]:
+
+<$macrocall $name=".example" n="1" eg="""<<lingo ExampleKey>>"""/>
+
+This example shows the `lingo-base` can be set as second parameter:
+
+<$macrocall $name=".example" n="2" eg="""<<lingo ExampleKey "lingo Macro (custom base examples)/">>"""/>
+
+When use lingo macro in a [[Inline Mode WikiText]] like [[list|Lists in WikiText]] or [[title|Headings in WikiText]], the parse mode will be inline, so translated text will be inlined too.
+
+<$macrocall $name=".example" n="3" eg="""# <<lingo ExampleKey>>"""/>
+
+<$macrocall $name=".example" n="4" eg="""!! <<lingo ExampleKey>>"""/>

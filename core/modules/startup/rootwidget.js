@@ -48,7 +48,11 @@ exports.startup = function() {
 			headers: getPropertiesWithPrefix(params,"header-"),
 			passwordHeaders: getPropertiesWithPrefix(params,"password-header-"),
 			queryStrings: getPropertiesWithPrefix(params,"query-"),
-			passwordQueryStrings: getPropertiesWithPrefix(params,"password-query-")
+			passwordQueryStrings: getPropertiesWithPrefix(params,"password-query-"),
+			basicAuthUsername: params["basic-auth-username"],
+			basicAuthUsernameFromStore: params["basic-auth-username-from-store"],
+			basicAuthPassword: params["basic-auth-password"],
+			basicAuthPasswordFromStore: params["basic-auth-password-from-store"]
 		});
 	});
 	$tw.rootWidget.addEventListener("tm-http-cancel-all-requests",function(event) {

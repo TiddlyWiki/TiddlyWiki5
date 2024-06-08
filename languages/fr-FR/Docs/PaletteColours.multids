@@ -79,6 +79,9 @@ table-footer-background: Fond pour les bas de tableau
 table-header-background: Fond pour les en-têtes de tableau
 tag-background: Fond pour les tags
 tag-foreground: Premier plan pour les tags
+testcase-accent-level-1: Couleur d'accentuation des scénarios de test de premier niveau
+testcase-accent-level-2: Couleur d'accentuation des scénarios de test de profondeur 2
+testcase-accent-level-3: Couleur d'accentuation des scénarios de test de profondeur 3 et plus
 tiddler-background: Fond pour les tiddlers
 tiddler-border: Bordure pour les tiddlers
 tiddler-controls-foreground-hover: Premier plan au passage de la souris sur les boutons de commande d'un tiddler

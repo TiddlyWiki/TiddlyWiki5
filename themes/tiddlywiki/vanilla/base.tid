@@ -3374,7 +3374,7 @@ span.tc-translink > a:first-child {
 	margin: 0;
 }
 
-.tc-tiddler-frame .tc-edit-texteditor {
+.tc-test-case-source .tc-tiddler-frame .tc-edit-texteditor {
 	margin: 0;
 }
 
