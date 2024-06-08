@@ -1,14 +1,14 @@
 created: 20140908130500000
-modified: 20150219182745000
+modified: 20240326164134356
 tags: Concepts Reference
 title: Widgets
 type: text/vnd.tiddlywiki
 
 ~TiddlyWiki's display is driven by an underlying collection of <<.def widgets>>. These are organised into a tree structure: each widget has a parent widget and zero or more child widgets.
 
-~TiddlyWiki generates this <<.def "widget tree">> by parsing the WikiText of tiddlers. Each component of the WikiText syntax, including even the trivial case of ordinary text, generates a corresponding widget. The widget tree is an intermediate representation that is subsequently rendered into the actual display.
+~TiddlyWiki generates this <<.def "widget tree">> by parsing the ~WikiText of tiddlers. Each component of the ~WikiText syntax, including even the trivial case of ordinary text, generates a corresponding widget. The widget tree is an intermediate representation that is subsequently rendered into the actual display.
 
-Widgets are analogous to elements in an HTML document. Indeed, HTML tags in WikiText generate dedicated <<.def "element widgets">>.
+Widgets are analogous to elements in an HTML document. Indeed, HTML tags in ~WikiText generate dedicated <<.def "element widgets">>.
 
 Each class of widget contributes a specific ability to the overall functionality, such as the ability to <<.wlink2 "display an image" ImageWidget>> or <<.wlink2 "a button" ButtonWidget>>, to <<.wlink2 "call a macro" MacroCallWidget>> or <<.wlink2 "transclude text from elsewhere" TranscludeWidget>>, or to [[mark a piece of text as a heading|HTML in WikiText]].
 
@@ -16,4 +16,4 @@ The more specialised widgets use a general-purpose [[widget syntax|Widgets in Wi
 
 The following classes of widget are built into the core:
 
-<<list-links "[tag[Widgets]]">>
+<<list-links "[tag[Widgets]]" class:"multi-columns">>

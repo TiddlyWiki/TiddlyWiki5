@@ -70,6 +70,11 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 		}
 		return false;
 	},false);
+	// Assign data- attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -95,6 +100,11 @@ BrowseWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 BrowseWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if($tw.utils.count(changedAttributes) > 0) {
+		this.refreshSelf();
+		return true;	
+	}
 	return false;
 };
 

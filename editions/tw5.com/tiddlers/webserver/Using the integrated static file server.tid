@@ -1,5 +1,5 @@
 created: 20180703095630828
-modified: 20180703100445719
+modified: 20240413045124764
 tags: [[WebServer Guides]]
 title: Using the integrated static file server
 type: text/vnd.tiddlywiki
@@ -14,3 +14,18 @@ Static files can be referenced directly:
 * `[img[./files/a-big-image.png]]` - to embed an image
 
 Alternatively, the ''_canonical_uri'' field can be used to reference the files as [[external tiddlers|ExternalImages]].
+
+If [[WebServer Parameter: use-browser-cache]] is used, these files will be cached by the client's browser to save on bandwidth. In this case, the `cache busting strategy` can be used to make sure the client always has the latest updated files.
+
+
+<<<
+https://javascript.plainenglish.io/what-is-cache-busting-55366b3ac022
+
+!! Cache Busting
+
+There are a couple different ways of changing the names of files so that they will load when they change. One way is to use version numbers and have them somewhere in the file name when loading. You could have a subdirectory for every version, `v1/index.js` `v2/index.css` . You could also have the version in queries in the URLs, `index.js?v1` , `index.css?v2` .
+
+Another way is to change the name of the file, `index.v1.js` , `index.v2.css` . These ways are not as manageable because this can become very hard once you have a ton of files that are being changed.
+
+A more popular and manageable way is to keep hashes inside the file names. Hashes, if you don’t know, are fixed length character representations of any content and they are irreversible, meaning you can get the hash from the file but you can’t get the file from the hash. Hashes are perfect for this, because when a file changes its hash will change, so if we keep the hash inside the filename `index.[someHashHere].js` browsers will detect it and load it instead of an old file.
+<<<

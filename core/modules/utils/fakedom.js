@@ -42,7 +42,7 @@ var TW_TextNode = function(text) {
 	this.textContent = text + "";
 };
 
-Object.setPrototypeOf(TW_TextNode,TW_Node.prototype);
+Object.setPrototypeOf(TW_TextNode.prototype,TW_Node.prototype);
 
 Object.defineProperty(TW_TextNode.prototype, "nodeType", {
 	get: function() {
@@ -67,7 +67,7 @@ var TW_Element = function(tag,namespace) {
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
-Object.setPrototypeOf(TW_Element,TW_Node.prototype);
+Object.setPrototypeOf(TW_Element.prototype,TW_Node.prototype);
 
 Object.defineProperty(TW_Element.prototype, "style", {
 	get: function() {
@@ -104,7 +104,11 @@ TW_Element.prototype.setAttribute = function(name,value) {
 	if(this.isRaw) {
 		throw "Cannot setAttribute on a raw TW_Element";
 	}
-	this.attributes[name] = value + "";
+	if(name === "style") {
+		this.style = value;
+	} else {
+		this.attributes[name] = value + "";
+	}
 };
 
 TW_Element.prototype.setAttributeNS = function(namespace,name,value) {
