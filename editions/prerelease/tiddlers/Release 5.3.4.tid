@@ -61,6 +61,7 @@ Improvements to the following translations:
 
 ! Plugin Improvements
 
+* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7821">> the [[lingo Macro]] so that plugins can be translated in a similar way to the core. The pull request also updates the menubar and tiddlyweb plugins to use the new mechanism
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/8198">> badges to the core plugins to indicate their [[stability level|Plugin Stability]] from "deprecated", "experimental", "stable" and "legacy". These badges are shown in the plugin library and in the control panel
 
 ! Widget Improvements
