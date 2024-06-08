@@ -259,7 +259,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	var start = this.pos;
 	var children = this.parseInlineRun(terminatorRegExp);
 	var end = this.pos;
-	return [{type: "element", tag: "p", children: children, start: start, end: end, rule: null }];
+	return [{type: "element", tag: "p", children: children, start: start, end: end }];
 };
 
 /*
@@ -444,7 +444,7 @@ WikiParser.prototype.pushTextWidget = function(array,text,start,end) {
 		text = $tw.utils.trim(text);
 	}
 	if(text) {
-		array.push({type: "text", text: text, start: start, end: end, rule: null});
+		array.push({type: "text", text: text, start: start, end: end});
 	}
 };
 
