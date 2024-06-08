@@ -1,0 +1,30 @@
+title: $:/plugins/tiddlywiki/menubar/language/zh-Hans/readme
+
+!! 简介
+
+该插件提供的菜单栏具有以下功能：
+
+* 菜单项的形式可以是简单的文本链接、下拉菜单或完全自定义的内容
+* 可通过控制面板单独启用菜单项
+* 通过将菜单项缩减为抽屉式导航（也叫"汉堡包"下拉菜单）来应对屏幕宽度减小的情况
+
+!! 菜单项标记
+
+菜单项被标记为 <<tag $:/tags/MenuBar>>。本插件使用以下字段：
+
+|!字段名称 |!用途 |
+|title |每个菜单项必须有一个唯一的标题（不显示给用户）|
+|description |在列表中使用的描述 |
+|tags |必须包含 `$:/tags/MenuBar` |
+|caption |菜单项显示的文本。避免使用链接，必要时使用 `~` 来抑制 CamelCase 链接 |
+|target |对于简单链接菜单项，指定一个 tiddler 标题作为链接的目标 |
+|is-dropdown |设置为 `yes` 表示下拉菜单项 |
+|dropdown-position |下拉位置（可选 "左"、"上"、"左上" 等，需要使用英文 ''left'', ''above'', ''aboveleft'', ''aboveright'', ''right'', ''belowleft'', ''belowright'', ''below''） |
+|text |对于下拉菜单项，指定下拉菜单的正文 |
+|custom-menu-content |可选显示的维基文本，以代替标题 |
+|custom-menu-styles-wide |当菜单栏是宽模式时，应用于菜单项的样式字符串选项 |
+|custom-menu-styles-narrow |当菜单栏是窄模式时，应用于菜单项的样式的可选字符串 |
+
+自定义菜单项应确保可点击链接或按钮是直接子元素，而不是包裹在其他元素中。
+
+请注意，菜单项可以通过将 ''custom-menu-styles'' 字段设置为 `float: right;` 而推到菜单栏的右侧。

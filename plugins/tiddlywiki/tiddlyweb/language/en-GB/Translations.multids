@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/language/en-GB/
+
+ConfigOfficialPluginLibrary: The official plugin library is disabled when using the client-server configuration. Instead, plugins should be installed via the `tiddlywiki.info` file, as described [[here|https://tiddlywiki.com/#Installing%20a%20plugin%20from%20the%20plugin%20library]].
+GettingStartedStep1: Step 1<br>Syncing
+CopySyncerLogs: Copy syncer logs to clipboard
+LoginAs: You are logged in<$reveal state="$:/status/UserName" type="nomatch" text="" default=""> as <strong><$text text={{$:/status/UserName}}/></strong></$reveal>
+Readonly: <$reveal state="$:/status/IsReadOnly" type="match" text="yes" default="no"> (read-only)</$reveal>
+Login: Login
+Logout: Logout
+SaveSnapshot: Save snapshot for offline use
+Refresh/Label: Refresh from server
+Refresh/Button: Get latest changes from the server
