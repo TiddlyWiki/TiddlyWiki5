@@ -18,8 +18,8 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match the anchor.
-	// 1. located on the end of the line, with a space before it, means it's the id of the current block.
-	// 2. located at start of the line, no space, means it's the id of the previous block. Because some block can't have id suffix, otherwise id break the block mode parser like codeblock.
+	// 1. inlineId: located on the end of the line, with a space before it, means it's the id of the current block.
+	// 2. blockId: located at start of the line, no space, means it's the id of the previous block. Because some block can't have id suffix, otherwise id break the block mode parser like codeblock.
 	this.matchRegExp = /[ ]\^(\S+)$|^\^(\S+)$/mg;
 };
 
@@ -30,16 +30,19 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// will be one of following case, another will be undefined
-	var anchorId = this.match[1];
-	var anchorBeforeId = this.match[2];
+	var inlineId = this.match[1];
+	var blockId = this.match[2];
+	var id = inlineId || blockId || '';
+	var anchorStart = this.parser.pos;
+	var anchorEnd = anchorStart + id.length;
 	// Parse tree nodes to return
 	return [{
 		type: "anchor",
 		attributes: {
-			id: {type: "string", value: anchorId || anchorBeforeId},
+			id: {type: "string", value: id, start: anchorStart, end: anchorEnd},
 			// `yes` means the block that this anchor pointing to, is before this node, both anchor and the block, is in a same parent node's children list.
 			// empty means the block is this node's direct parent node.
-			previousSibling: {type: "string", value: Boolean(anchorBeforeId) ? "yes" : ""},
+			previousSibling: {type: "string", value: Boolean(blockId) ? "yes" : ""},
 		},
 		children: []
 	}];
