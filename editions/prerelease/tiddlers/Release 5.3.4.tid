@@ -110,6 +110,8 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7945">> theme font size settings to open in new window CSS
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8098">> backlink parser to prevent it parsing binary tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8203">> issue where default parameters were not applied when a ParametersWidget did not find a parent TranscludeWidget
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8222">> crash when using [[splitregexp Operator]] with a regular expression that includes capture groups
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8239">> ActionLogWidget evaluating all variables in scope
 
 ! Node.js Improvements
 
