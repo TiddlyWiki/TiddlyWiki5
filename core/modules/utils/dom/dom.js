@@ -388,16 +388,54 @@ exports.querySelectorAllSafe = function(selector,baseElement) {
 
 /*
 Make sure HTML tag names are valid
+	1. Check the string, if it is a valid html tag - using this spec: https://html.spec.whatwg.org/#syntax-tag-name
+		1.1 Tag names are "case-insensitive"
+    2. Extend 1. and allow hyphens: "-"
+		2.1 Browsers allow "AA-AA", so do we
+		2.2 AA-AA cannot be used for styling
+		2.3 aa-aa can be used for styling
+
+    3. Implement a forbidden list according to https://html.spec.whatwg.org/#valid-custom-element-name
+		3.1 exports.htmlForbiddenTags = "annotation-xml,color-profile,font-face,font-face-src,font-face-uri,font-face-format,font-face-name,missing-glyph".split(",");
+
+	4. If 1., 2. and 3. pass return the HTML tag as a valid tag -- That should be fast and cover 90% of html tags users will use.
+
+    5. If 4. does not match, we check for invalid character ranges up to \uFFFF. So we can detect problems in a range JS RegExp can handle.
+    6. We assume that everything out of js RegExp-range is valid, which would be OK for \u10000-\uEFFFF according to the spec.
+
 */
 exports.makeTagNameSafe = function(tag,defaultTag) {
 	defaultTag = defaultTag || "SPAN";
-	// This implements a check for standard DOM elements: https://html.spec.whatwg.org/#syntax-tag-name
-	// It does _not_ deal with Custom Elements: https://html.spec.whatwg.org/#valid-custom-element-name
-	var regexp = /[a-zA-Z0-9]/g;
-	if(tag && tag.match(regexp) && $tw.config.htmlUnsafeElements.indexOf(tag) === -1) {
-		return tag;
+	var result = defaultTag;
+
+	// RegExp for valid standard HTML element, extended with hyphen "-"
+	var regexValidTag = /(?:[a-z]|[A-Z]|[0-9]|-)+/g;
+
+	// Custom web-components must to be "lowercase()"
+	var regxInvalidlTag = new RegExp($tw.config.htmlCustomPrimitives.nonValidPCENChar,"mg");
+
+	// Check if tag matches regexp as a whole
+	if(tag && (tag.match(regexValidTag)[0] === tag)) {
+		result = tag; // valid tag
 	}
-	return defaultTag;
+
+	// Sanitize invalid characters in result
+	if( regxInvalidlTag.exec(result.toLowerCase()) !== null) {
+		result = result.toLowerCase().replace(regxInvalidlTag,"");
+	}
+
+	// Check for unsafe tags
+	if( $tw.config.htmlUnsafeElements.indexOf(result) === -1) {
+		result = "safe-" + result;	
+	}
+
+	// Check for forbidden tag names and log info 
+	if($tw.config.htmlForbiddenTags.indexOf(result.toLowerCase()) >= 0) {
+		console.log("Forbidden custom element:\"" + result.toLowerCase() + "\" See: https://html.spec.whatwg.org/#valid-custom-element-name")
+		result = "safe-" + result;
+	}
+
+	return result;
 };
 
 
