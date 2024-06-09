@@ -33,7 +33,9 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.tag = this.parseTreeNode.tag;
 	this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe" + this.tag);
 	// Restrict tag name to digits, letts and dashes
-	this.tag = this.tag.replace(/[^0-9a-zA-Z\-]/mg,"");
+
+	// this.tag = this.tag.replace(/[^0-9a-zA-Z\-]/mg,"");
+	
 	// Default to a span
 	this.tag = this.tag || "span";
 	// Adjust headings by the current base level
