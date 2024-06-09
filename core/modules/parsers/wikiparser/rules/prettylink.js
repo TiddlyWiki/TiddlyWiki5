@@ -40,7 +40,7 @@ exports.parse = function() {
 		textEndPos = this.matchRegExp.lastIndex - 2;
 	}
 	var linkStart = this.match[2] ? (start + this.match[1].length + 1) : start;
-	var linkEnd = linkStart + link.length;
+	var linkEnd = anchor ? (linkStart + link.length + 1 + anchor.length) : (linkStart + link.length);
 	if($tw.utils.isLinkExternal(link)) {
 		// add back the part after `^` to the ext link, if it happen to has one.
 		if(anchor) {
