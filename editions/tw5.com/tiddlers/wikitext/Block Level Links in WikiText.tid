@@ -11,7 +11,7 @@ The basic syntax for block id is:
 
 <<wikitext-example src:"There is a block id that is invisible, but you can find it using developer tool's inspect element feature. ^BlockLevelLinksID1">>
 
-# Don't forget the space between the end of the line and the `^`.
+# You should add a space between the end of your text and the `^`.
 # And there is no space between `^` and the id.
 # ID can contain any char other than `^` and space ` `.
 

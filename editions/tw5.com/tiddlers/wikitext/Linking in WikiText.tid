@@ -126,6 +126,6 @@ See [[Anchor Links using HTML]] for more information.
 
 ! Linking within tiddlers - Link to block
 
-You can link to a specific block within a tiddler using `^blockId` syntax. You will also get block level backlinks with this technique. Some examples are in [[BlockIdWidget^exampleid1]].
+You can link to a specific block within a tiddler using `^blockId` syntax. You will also get block level backlinks with this technique.
 
 See [[Block Level Links in WikiText^091607]] for more information.
