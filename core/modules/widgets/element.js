@@ -29,15 +29,10 @@ Render this widget into the DOM
 ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
-	// Neuter blacklisted elements
+	// Eliminate blacklisted elements
 	this.tag = this.parseTreeNode.tag;
-	this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe" + this.tag);
-	// Restrict tag name to digits, letts and dashes
-
-	// this.tag = this.tag.replace(/[^0-9a-zA-Z\-]/mg,"");
-	
-	// Default to a span
-	this.tag = this.tag || "span";
+	// Sanitize tag name if needed according to Custom Web-Componenets spec
+	this.tag = $tw.utils.makeTagNameSafe(this.tag, "safe-" + this.tag);
 	// Adjust headings by the current base level
 	var headingLevel = ["h1","h2","h3","h4","h5","h6"].indexOf(this.tag);
 	if(headingLevel !== -1) {

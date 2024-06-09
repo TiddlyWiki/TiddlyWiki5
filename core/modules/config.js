@@ -38,15 +38,16 @@ exports.htmlBlockElements = "address,article,aside,audio,blockquote,canvas,dd,de
 
 exports.htmlUnsafeElements = "script".split(",");
 
-// See: https://html.spec.whatwg.org/#valid-custom-element-name
+// Custom Web Components: https://html.spec.whatwg.org/#valid-custom-element-name
 exports.htmlForbiddenTags = "annotation-xml,color-profile,font-face,font-face-src,font-face-uri,font-face-format,font-face-name,missing-glyph".split(",");
 
+// (EBNF notation) - PotentialCustomElementName ::= [a-z] (PCENChar)* '-' (PCENChar)*
 // Unicode table with ranges see: https://symbl.cc/en/unicode-table
-// The "prefix" is obligatory!
 exports.htmlCustomPrimitives = {
 	prefix: "[a-z]",
 	validPCENChar: ".|[0-9]|_|[a-z]|\xB7|[\xC0-\xD6]|[\xD8-\xF6]|[\u00F8-\u037D]|[\u037F-\u1FFF]|[\u200C-\u200D]|[\u203F-\u2040]|[\u2070-\u218F]|[\u2C00-\u2FEF]|[\u3001-\uD7FF]|[\uF900-\uFDCF]|[\uFDF0-\uFFFD]",
-	nonValidPCENChar: "[\x00-\x2C]|\x2F|[\x3A-\x40]|[\x5B-\x60]|[\x7B-\xB6]|[\xB8-\xBF]|\xD7|\xF7|\x37E|[\u2000\u200B]|[\u200E-\u203E]|[\u2041-\u206F]|[\u2190-\u2BFF]|[\u2FF0-\u3000]|[\uD800-\uF8FF]|[\uFDD0-\uFDEF]|[\uFFFE-\uFFFF]"
-};
+	sanitizePCENChar: "[\x00-\x2C]|\x2F|[\x3A-\x40]|[\x5B-\x60]|[\x7B-\xB6]|[\xB8-\xBF]|\xD7|\xF7|\x37E|[\u2000\u200B]|[\u200E-\u203E]|[\u2041-\u206F]|[\u2190-\u2BFF]|[\u2FF0-\u3000]|[\uD800-\uF8FF]|[\uFDD0-\uFDEF]|[\uFFFE-\uFFFF]"
+	};
+exports.htmlCustomPrimitives.nonValidPCENChar = "[A-Z]|" + exports.htmlCustomPrimitives.sanitizePCENChar;
 
 })();
