@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/geopoint
+description: geopoint operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Description
+
+geopoint operator
++
+title: Output
+
+<$text text={{{ [geopoint[51.751944],[-1.257778]] }}}/>
+
+<$text text={{{ [geopoint[51.751944],[-1.257778]jsonset[id],[Oxford]] }}}/>
+
+<$text text={{{ [geopoint[51.751944],[-1.257778],[2]] }}}/>
+
++
+title: ExpectedResult
+
+{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,0]}}{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,0]},"id":"Oxford"}{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,2]}}

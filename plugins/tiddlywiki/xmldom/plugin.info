@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/xmldom",
 	"name": "xmldom",
 	"description": "xmldom library",
-	"list": "readme license"
+	"list": "readme license",
+	"stability": "STABILITY_2_STABLE"
 }

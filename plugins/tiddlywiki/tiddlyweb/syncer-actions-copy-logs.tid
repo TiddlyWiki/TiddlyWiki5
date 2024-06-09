@@ -1,6 +1,8 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/syncer-actions/copy-logs
 tags: $:/tags/SyncerDropdown
 
+\define lingo-base() $:/plugins/tiddlywiki/tiddlyweb/language/
+
 <$button message="tm-copy-syncer-logs-to-clipboard" class="tc-btn-invisible">
-{{$:/core/images/copy-clipboard}} Copy syncer logs to clipboard
+{{$:/core/images/copy-clipboard}} <<lingo CopySyncerLogs>>
 </$button>

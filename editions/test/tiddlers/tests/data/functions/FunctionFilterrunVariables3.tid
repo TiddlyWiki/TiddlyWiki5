@@ -1,0 +1,21 @@
+title: Functions/FunctionFilterrunVariables3
+description: Nested functions in filter runs that set variables
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\define currentTiddler() old-current
+
+\function .inner() [<currentTiddler>]
+\function .outer() [<currentTiddler>match[intermediate2]then[new-current]] :map[function[.inner]]
+\function .wrappertwo() [<currentTiddler>match[intermediate]addsuffix[2]] :map[function[.outer]]
+\function .wrapper() intermediate :map[.wrappertwo[]]
+
+<$text text={{{ [.wrapper[]] }}}/>
+
++
+title: ExpectedResult
+
+new-current

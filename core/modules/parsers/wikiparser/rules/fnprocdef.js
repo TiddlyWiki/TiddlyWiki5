@@ -49,11 +49,11 @@ exports.parse = function() {
 	if(this.match[3]) {
 		params = $tw.utils.parseParameterDefinition(this.match[4]);
 	}
-	// Is this a multiline definition?
+	// Is the remainder of the line blank after the parameter close paren?
 	var reEnd;
 	if(this.match[5]) {
-		// If so, the end of the body is marked with \end
-		reEnd = new RegExp("(\\r?\\n[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[2]) + ")?(?:$|\\r?\\n))","mg");
+		// If so, it is a multiline definition and the end of the body is marked with \end
+		reEnd = new RegExp("((:?^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[2]) + ")?(?:$|\\r?\\n))","mg");
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /($|\r?\n)/mg;

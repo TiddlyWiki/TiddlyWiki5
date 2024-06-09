@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/geospatial/helpers/Flickr/DefaultPhotoTemplate
+type: application/x-tiddler-dictionary
+
+title: [<photoID>addprefix[Flickr Photo ]]
+tags: $:/tags/GeoMarker $:/tags/FlickrPhoto +[join[ ]]
+caption: [<photoData>jsonget[title]]
+lat: [<photoData>jsonget[latitude]]
+long: [<photoData>jsonget[longitude]]
+alt: 0
+photo-url: [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_b.jpg]]
+icon-url: [[https://farm]addsuffix<photoFarm>addsuffix[.staticflickr.com/]addsuffix<photoServer>addsuffix[/]addsuffix<photoID>addsuffix[_]addsuffix<photoSecret>addsuffix[_s.jpg]]

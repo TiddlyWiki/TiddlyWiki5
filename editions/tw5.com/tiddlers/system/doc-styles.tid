@@ -1,5 +1,6 @@
+code-body: yes
 created: 20150117152612000
-modified: 20230325101137075
+modified: 20240223123123497
 tags: $:/tags/Stylesheet
 title: $:/editions/tw5.com/doc-styles
 type: text/vnd.tiddlywiki
@@ -31,6 +32,7 @@ type: text/vnd.tiddlywiki
 	color: <<color very-muted-foreground>>;
 	font-style: normal;
 	font-weight: bold;
+	padding: 0;
 }
 
 .doc-button,
@@ -85,7 +87,6 @@ td svg {
 .doc-preamble {
 	border: 2px solid <<colour code-border>>;
 	color: <<colour very-muted-foreground>>;
-	font-size: 90%;
 	margin-left: 0;
 	padding: 0.5em 0.7em;
 }
@@ -112,7 +113,7 @@ td svg {
 }
 
 .doc-example input[type=search] { 
-  width: 95%;
+	width: 95%;
 }
 .doc-example pre:first-child {
 	margin-top: 0;
@@ -138,7 +139,7 @@ td svg {
 }
 
 .doc-bad-example code, .doc-bad-example pre, table.doc-bad-example {
-  background-color:#ffff80;
+	background-color:#ffff80;
 }
 
 .doc-table th, .doc-table tr {
@@ -164,35 +165,58 @@ tr.doc-table-subheading {
 }
 
 .doc-icon-block {
-	border-left: 2px solid <<colour code-border>>;
-	margin-left: 3em;
+	border-left: 4px solid <<colour blockquote-bar>>;
+	margin: 15px 0 15px 3em;
 	padding-left: 0.6em;
 	position: relative;
 }
+
 .doc-block-icon {
 	position: absolute;
 	left: -3em;
 	top: 0.2em;
 }
+
+.doc-icon-block.doc-note {
+	border-left: 4px solid <<colour blockquote-bar>>;
+	background: <<colour blockquote-bar>>11;
+}
+
+.doc-icon-block.doc-tip {
+	border-left: 4px solid <<colour primary>>;
+	background: <<colour primary>>11;
+}
+
+.doc-icon-block.doc-warning {
+	border-left: 4px solid <<colour alert-highlight>>;
+	background: <<colour alert-highlight>>11;
+}
+
 .doc-block-icon .tc-image-tip {
 	fill: <<colour primary>>;
 }
+
 .doc-block-icon .tc-image-warning {
 	fill: <<colour alert-highlight>>;
 }
 
-a.doc-from-version.tc-tiddlylink {
-    display: inline-block;
-    border-radius: 1em;
-	background: <<colour muted-foreground>>;
-	color: <<colour background>>;
-	fill: <<colour background>>;
-    padding: 0 0.4em;
-    font-size: 0.7em;
-    text-transform: uppercase;
+a.doc-from-version {
+    background-color: <<colour muted-foreground>>;
+    color: <$wikify name="background" text="<<colour muted-foreground>>" mode="inline"><$transclude $variable="contrastcolour" target=<<background>> colourA="#000000" colourB="#ffffff" /></$wikify>;
+    padding: 3px;
+    border-radius: 4px;
     font-weight: bold;
-    line-height: 1.5;
-    vertical-align: text-bottom;
+    font-size: 0.75em;
+}
+
+a.doc-from-version.doc-from-version-new {
+    background-color: <<colour highlight-background>>;
+    color: <<colour highlight-foreground>>;
+}
+
+a.doc-from-version svg {
+    fill: currentColor;
+    vertical-align: sub;
 }
 
 a.doc-deprecated-version.tc-tiddlylink {
@@ -240,7 +264,6 @@ a.doc-deprecated-version.tc-tiddlylink {
 .doc-tiddler-fields h2 svg {
 	height: 1em;
 }
-
 
 .doc-tiddler-fields table, 
 .doc-tiddler-fields h2 {
@@ -294,13 +317,13 @@ ol.doc-github-contributors li {
 	color: #666;
 }
 .doc-tabs.tc-tab-buttons button {
-  font-size: 1rem;
-  padding: 0.5em;
+	font-size: 1rem;
+	padding: 0.5em;
 }
 .doc-tabs button .doc-attr {
-  background-color: unset;
-  color: #666;
+	background-color: unset;
+	color: #666;
 }
 .doc-tab-link .doc-attr {
-  color: unset;
+	color: unset;
 }

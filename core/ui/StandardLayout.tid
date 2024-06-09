@@ -1,0 +1,37 @@
+title: $:/core/ui/PageTemplate
+name: {{$:/language/PageTemplate/Name}}
+description: {{$:/language/PageTemplate/Description}}
+icon: $:/core/images/standard-layout
+code-body: yes
+
+\whitespace trim
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+
+<$vars
+	tv-config-toolbar-icons={{$:/config/Toolbar/Icons}}
+	tv-config-toolbar-text={{$:/config/Toolbar/Text}}
+	tv-config-toolbar-class={{$:/config/Toolbar/ButtonClass}}
+	tv-enable-drag-and-drop={{$:/config/DragAndDrop/Enable}}
+	tv-show-missing-links={{$:/config/MissingLinks}}
+	storyviewTitle={{$:/view}}
+	languageTitle={{{ [{$:/language}get[name]] }}}>
+
+<div class={{{ [all[shadows+tiddlers]tag[$:/tags/ClassFilters/PageTemplate]!is[draft]] :map:flat[subfilter{!!text}] tc-page-container [[tc-page-view-]addsuffix<storyviewTitle>] [[tc-language-]addsuffix<languageTitle>] :and[unique[]join[ ]] }}} >
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+
+<$dropzone enable=<<tv-enable-drag-and-drop>> class="tc-dropzone tc-page-container-inner">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageTemplate]!has[draft.of]]" variable="listItem">
+
+<$transclude tiddler=<<listItem>>/>
+
+</$list>
+
+</$dropzone>
+
+</$navigator>
+
+</div>
+
+</$vars>

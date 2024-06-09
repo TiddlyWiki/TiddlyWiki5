@@ -1,0 +1,23 @@
+title: Macros/unusedtitle/basic-params-empty-tiddler-exists
+description: test <<unusedtitle>> with basic macro parameters but they are empty
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: New Tiddler
+
++
+title: Output
+
+<!-- hanled in wiki.js -->
+<<unusedtitle separator:"">>
+
+<!-- handled in unusedtitle.js -->
+<<unusedtitle baseName:"">>
+
+<!-- handled in wiki.js -->
+<<unusedtitle template:"">>
+
++
+title: ExpectedResult
+
+<p>New Tiddler 1</p><p>New Tiddler 1</p><p>New Tiddler 1</p>

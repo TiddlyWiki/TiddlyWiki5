@@ -1,0 +1,7 @@
+import-field-column: City
+import-field-name: city
+import-field-source: column
+import-spec-role: field
+title: $:/_importspec/RealEstate/PropertiesRow/Field/city
+type: text/vnd.tiddlywiki
+

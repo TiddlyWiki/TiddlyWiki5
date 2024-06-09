@@ -9,7 +9,7 @@ config: Données à inclure dans `$tw.config`.
 filteroperator: Méthodes d'opérateurs pour les filtres.
 global: Données globales à inclure dans `$tw`.
 info: Publie des informations système via le pseudo-plugin [[$:/temp/info-plugin]].
-isfilteroperator: Opérandes pour l'opérateur de filtre ''is''.
+isfilteroperator: Paramètres pour l'opérateur de filtre ''is''.
 library: Module générique pour les modules ~JavaScript de portée générale.
 macro: Définitions de macros ~JavaScript.
 parser: Parseurs pour divers types de contenu.
