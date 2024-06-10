@@ -70,7 +70,7 @@ Improvements to the following translations:
 
 ! Filter Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> new [[backtranscludes Operator]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> new [[transcludes|transcludes Operator]] and [[backtranscludes|backtranscludes Operator]] operators
 
 ! Usability Improvements
 
