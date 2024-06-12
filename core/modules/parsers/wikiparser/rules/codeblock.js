@@ -57,4 +57,8 @@ exports.parse = function() {
 	}];
 };
 
+exports.getText = function(tree) {
+	return "\n```" + tree.attributes.language.value + "\n" + tree.attributes.code.value + "\n```\n";
+}
+
 })();
