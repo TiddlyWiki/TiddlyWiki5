@@ -182,7 +182,7 @@ describe('Backtranscludes and transclude filter tests', function() {
 		});
 	});
 
-	describe('ignore self transclusion', function() {
+	describe('include implicit self transclusion', function() {
 		var wiki = new $tw.Wiki();
 
 		wiki.addTiddler({
@@ -190,15 +190,15 @@ describe('Backtranscludes and transclude filter tests', function() {
 			text: "{{!!created}}\n\nAn implicit self-referential transclude to <$transclude $field='created'/> and <$transclude field='created'/>"});
 
 		it('should have no transclude', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('');
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestOutgoing');
 		});
 
 		it('should have no back transcludes', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('');
+			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
 		});
 	});
 
-	describe('Explicit self transclusion', function() {
+	describe('include explicit self transclusion', function() {
 		var wiki = new $tw.Wiki();
 
 		wiki.addTiddler({
@@ -206,15 +206,15 @@ describe('Backtranscludes and transclude filter tests', function() {
 			text: "{{TestOutgoing!!created}}\n\n<$transclude $tiddler='TestOutgoing' $field='created'/> and <$transclude tiddler='TestOutgoing' field='created'/>"});
 
 			it('should have no transclude', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('');
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestOutgoing');
 		});
 
 		it('should have no back transcludes', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('');
+			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
 		});
 	});
 
-	describe('recognize soft transclusion defined by widget', function() {
+	describe('recognize transclusion defined by widget', function() {
 		var wiki = new $tw.Wiki();
 
 		wiki.addTiddler({

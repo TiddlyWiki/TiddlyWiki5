@@ -571,8 +571,11 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 					} else if(parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
 						value = parseTreeNode.attributes.tiddler.value;
 					}
-					// ignore empty value (like `{{!!field}}`), and deduplicate
-					if(value && transcludes.indexOf(value) === -1 && value !== title) {
+					if (!value) {
+						value = title;
+					}
+					// Empty value (like `{{!!field}}`) means self-referential transclusion. Also deduplicate the result.
+					if(transcludes.indexOf(value) === -1) {
 						transcludes.push(value);
 					}
 				}
