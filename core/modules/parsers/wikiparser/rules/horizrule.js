@@ -31,8 +31,8 @@ exports.parse = function() {
 	return [{type: "element", tag: "hr"}];
 };
 
-exports.getText = function() {
-	return "---";
+exports.serialize = function() {
+	return "\n---\n";
 }
 
 })();
