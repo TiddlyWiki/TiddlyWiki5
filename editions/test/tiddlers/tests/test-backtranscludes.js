@@ -187,9 +187,25 @@ describe('Backtranscludes and transclude filter tests', function() {
 
 		wiki.addTiddler({
 			title: 'TestOutgoing',
-			text: "{{!!created}}\n\nA transclude to {{!!title}}"});
+			text: "{{!!created}}\n\nAn implicit self-referential transclude to <$transclude $field='created'/> and <$transclude field='created'/>"});
 
 		it('should have no transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('');
+		});
+
+		it('should have no back transcludes', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('');
+		});
+	});
+
+	describe('Explicit self transclusion', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: "{{TestOutgoing!!created}}\n\n<$transclude $tiddler='TestOutgoing' $field='created'/> and <$transclude tiddler='TestOutgoing' field='created'/>"});
+
+			it('should have no transclude', function() {
 			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('');
 		});
 

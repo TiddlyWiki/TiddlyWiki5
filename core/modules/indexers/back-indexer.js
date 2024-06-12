@@ -75,7 +75,7 @@ BackSubIndexer.prototype._getTarget = function(tiddler) {
 	}
 	var parser = this.wiki.parseText(tiddler.fields.type, tiddler.fields.text, {});
 	if(parser) {
-		return this.wiki[this.extractor](parser.tree);
+		return this.wiki[this.extractor](parser.tree, tiddler.fields.title);
 	}
 	return [];
 }

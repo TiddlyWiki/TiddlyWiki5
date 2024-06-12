@@ -551,9 +551,9 @@ exports.getTiddlerBacklinks = function(targetTitle) {
 
 
 /*
-Return an array of tiddler titles that are directly transcluded within the given parse tree
+Return an array of tiddler titles that are directly transcluded within the given parse tree. `title` is the tiddler being parsed, we will ignore its self-referential transclusions, only return
  */
-exports.extractTranscludes = function(parseTreeRoot) {
+exports.extractTranscludes = function(parseTreeRoot, title) {
 	// Count up the transcludes
 	var transcludes = [],
 		checkParseTree = function(parseTree, parentNode) {
@@ -567,7 +567,8 @@ exports.extractTranscludes = function(parseTreeRoot) {
 					} else {
 						value = parseTreeNode.attributes.$tiddler.value;
 					}
-					if(transcludes.indexOf(value) === -1 && value !== undefined) {
+					// ignore empty value (like `{{!!field}}`), and deduplicate
+					if(value && transcludes.indexOf(value) === -1 && value !== title) {
 						transcludes.push(value);
 					}
 				}
@@ -591,7 +592,8 @@ exports.getTiddlerTranscludes = function(title) {
 		// Parse the tiddler
 		var parser = self.parseTiddler(title);
 		if(parser) {
-			return self.extractTranscludes(parser.tree);
+			// this will ignore self-referential transclusions from `title`
+			return self.extractTranscludes(parser.tree, title);
 		}
 		return [];
 	});
