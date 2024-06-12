@@ -106,7 +106,7 @@ exports.findParseTreeNode = function(nodeArray,search) {
 /*
 Helper to get the text of a parse tree node or array of nodes
 */
-exports.getParseTreeText = function getParseTreeText(tree) {
+exports.getParseTreeText = function getParseTreeText(tree, tiddlerType) {
 	var output = [];
 	if($tw.utils.isArray(tree)) {
 		$tw.utils.each(tree,function(node) {
@@ -115,6 +115,14 @@ exports.getParseTreeText = function getParseTreeText(tree) {
 	} else {
 		if(tree.type === "text") {
 			output.push(tree.text);
+		} else {
+			var Parser = $tw.wiki.getParser(tiddlerType);
+			var Rule = Parser.prototype.blockRuleClasses[tree.type] ||
+				Parser.prototype.inlineRuleClasses[tree.type] ||
+				Parser.prototype.pragmaRuleClasses[tree.type];
+			if(Rule && Rule.prototype.getText) {
+				output.push(Rule.prototype.getText(tree));
+			}
 		}
 		if(tree.children) {
 			return getParseTreeText(tree.children);
