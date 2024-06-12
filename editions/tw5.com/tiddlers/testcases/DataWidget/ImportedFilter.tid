@@ -1,0 +1,49 @@
+title: TestCases/DataWidget/ImportedFilter
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Imported filter definition
+display-format: plaintext
+
+title: Narrative
+
+Using the data widget to create copies of all the tiddlers with the title prefix "Day: T", adding the field "custom" set to "Beta"
++
+title: Output
+
+<$data $filter="[prefix[Day: T]]" custom="Beta"/>
++
+title: Day: Monday
+text: Today is Monday
++
+title: Day: Tuesday
+text: Today is Tuesday
++
+title: Day: Wednesday
+text: Today is Wednesday
++
+title: Day: Thursday
+text: Today is Thursday
++
+title: Day: Friday
+text: Today is Friday
++
+title: Day: Saturday
+text: Today is Saturday
++
+title: Day: Sunday
+text: Today is Sunday
++
+title: ExpectedResult
+
+<p>[
+    {
+        "title": "Day: Thursday",
+        "text": "Today is Thursday",
+        "custom": "Beta"
+    },
+    {
+        "title": "Day: Tuesday",
+        "text": "Today is Tuesday",
+        "custom": "Beta"
+    }
+]</p>

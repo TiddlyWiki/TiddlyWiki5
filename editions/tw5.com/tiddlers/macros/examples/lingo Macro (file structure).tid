@@ -1,0 +1,73 @@
+created: 20231028120432257
+modified: 20240206122408606
+tags: [[lingo Macro]] [[Macro Examples]]
+title: lingo Macro (file structure)
+
+!! Example file structure for [[TiddlyWiki on Node.js]]
+
+!!! Suggested file structure
+
+When developing a plugin, you may want to organize your language files like this on the file system as [[MultiTiddlerFiles]]:
+
+```tree
+├── language
+│   ├── en-GB
+│   │   ├── Translations.multids
+│   │   └── SomeLongText.tid
+│   └── zh-Hans
+│       ├── Translations.multids
+│       └── SomeLongText.tid
+├── other files
+└── plugin.info
+```
+
+See [[$:/plugins/tiddlywiki/menubar/tree]] for an example.
+
+!!! Define Multiple Translations in One Tiddler
+
+And the content of `language/en-GB/Translations.multids` may looks like this:
+
+```multids
+title: $:/plugins/yourName/pluginName/language/en-GB/
+
+OpenInteractiveCard: Open Interactive Card
+OpenStaticCard: Open Static Card
+```
+
+Later you can use it like:
+
+```tid
+title: someTiddler
+caption: <<lingo OpenStaticCard "$:/plugins/yourName/pluginName/language/">>
+
+\define lingo-base() $:/plugins/yourName/pluginName/language/
+\whitespace trim
+
+<<lingo OpenInteractiveCard>>
+```
+
+!!! Define Long Text in a regular Tiddler
+
+You can also use a regular tiddler for long text, like `SomeLongText.tid` in the example above, to store a multi-paragraph long text:
+
+```tid
+title: $:/plugins/yourName/pluginName/language/en-GB/SomeLongText
+
+!!! SubTitle
+
+This is a long text.
+```
+
+Later you can use it like:
+
+```tid
+title: someTiddler
+
+\define lingo-base() $:/plugins/yourName/pluginName/language/
+
+!! <<lingo "OpenInteractiveCard">>
+
+<<lingo SomeLongText>>
+```
+
+Note that lingo macro will use the [[parse mode|WikiText Parser Modes]] in the current position where this procedure is invoked.

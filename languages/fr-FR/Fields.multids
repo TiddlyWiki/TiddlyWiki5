@@ -4,6 +4,7 @@ _canonical_uri: L'URI complet vers le contenu externe d'un tiddler image
 author: Nom de l'auteur d'un plugin
 bag: Nom du <q>bag</q> d'où provient le tiddler
 caption: Texte à afficher sur un onglet ou un bouton
+class: La classe CSS appliquée à un tiddler lors de son rendu — voir [[Custom styles by user-class]]. Également utilisée pour les [[Modals]]
 code-body: Le template de visualisation affichera ce tiddler comme du code si la valeur est ''yes''
 color: Couleur CSS associée au tiddler
 component: Nom du composant responsable pour un [[tiddler d'alerte|AlertMechanism]]
@@ -29,8 +30,9 @@ name: Dans le cas d'un tiddler plugin, le nom associé à ce plugin
 parent-plugin: Dans le cas d'un tiddler plugin, spécifie de quel plugin il est un sous-plugin
 plugin-priority: Dans le cas d'un tiddler plugin, un nombre indiquant sa priorité
 plugin-type: Dans le cas d'un tiddler plugin, le type du plugin
-revision: Numéro de révision du tiddler présent sur le serveur
+stability: Le statut de développement d'un plugin : deprecated, experimental, stable, ou legacy
 released: Date de version d'un TiddlyWiki
+revision: Numéro de révision du tiddler présent sur le serveur
 source: URL source associée à ce tiddler
 subtitle: Texte du sous-titre pour une fenêtre modale
 tags: Liste des tags associés à un tiddler

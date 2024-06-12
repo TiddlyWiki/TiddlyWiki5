@@ -114,7 +114,7 @@ exports.parseStringLiteral = function(source,pos) {
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
 		node.value = match[1] !== undefined ? match[1] :(
-			match[2] !== undefined ? match[2] : match[3] 
+			match[2] !== undefined ? match[2] : match[3]
 					);
 		node.end = pos + match[0].length;
 		return node;

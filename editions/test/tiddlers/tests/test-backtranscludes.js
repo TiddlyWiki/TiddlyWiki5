@@ -11,7 +11,7 @@ Tests the backtranscludes mechanism.
 /*global $tw: false */
 "use strict";
 
-describe('Backtranscludes tests', function() {
+describe('Backtranscludes and transclude filter tests', function() {
 	describe('a tiddler with no transcludes to it', function() {
 		var wiki = new $tw.Wiki();
 
@@ -53,6 +53,26 @@ describe('Backtranscludes tests', function() {
 
 		it('should have a backtransclude', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+		});
+	});
+
+	describe('A data tiddler transclude will still use the tiddler as result.', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestIncoming',
+			type: 'application/x-tiddler-dictionary',
+			text: 'name: value'});
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: 'A transclude to {{TestIncoming##name}}'});
+
+		it('should have a backtransclude', function() {
+			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+		});
+		it('should have a transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming');
 		});
 	});
 
@@ -141,6 +161,56 @@ describe('Backtranscludes tests', function() {
 			wiki.deleteTiddler('TestOutgoing');
 
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('');
+		});
+	});
+
+	describe('a tiddler with some transcludes on it in order', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: "{{New Tiddler!!created}}\n\nA transclude to {{TestIncoming}}"
+		});
+
+		it('should have a transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('New Tiddler,TestIncoming');
+		});
+
+		it('should have a back transclude', function() {
+			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+			expect(wiki.filterTiddlers('[[New Tiddler]] +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+		});
+	});
+
+	describe('ignore self transclusion', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: "{{!!created}}\n\nA transclude to {{!!title}}"});
+
+		it('should have no transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('');
+		});
+
+		it('should have no back transcludes', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('');
+		});
+	});
+
+	describe('recognize soft transclusion defined by widget', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: "<$tiddler tiddler='TestIncoming'><$transclude $tiddler /></$tiddler>"});
+
+		it('should have a transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming');
+		});
+
+		it('should have a back transclude', function() {
+			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
 		});
 	});
 });

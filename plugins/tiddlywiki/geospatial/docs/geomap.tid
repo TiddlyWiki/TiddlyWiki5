@@ -1,0 +1,122 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geomap
+caption: geomap widget
+tags: $:/tags/GeospatialDocs
+
+!! `<$geomap>` widget
+
+The `<$geomap>` widget displays an interactive map using [[Leaflet.js|https://leafletjs.com/]]. `<$geolayer>` and `<$geobaselayer>` widgets inside the `<$geomap>` widget are used to indicate the overlay layers and markers to display, and the base map layer to be used.
+
+The following attributes are supported:
+
+|!Attribute |!Description |
+|''state'' |The title of a state tiddler used to track the state of the map in the `zoom`, `long` and `lat` fields |
+|''startPosition'' |Optional starting position for the map: "world" (the default) shows the entire map, "bounds" zooms to the bounds of the loaded layes |
+|''layersPanel'' |Optional starting status for the layers panel: "collapsed" (the default) causes the layers panel to initially be shown collapsed, "open" causes the layers panel to initially be shown opened |
+
+If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>` widget then all the available base layers will be loaded by the equivalent of the following code:
+
+```
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoBaseLayer]]">
+	<$geobaselayer title=<<currentTiddler>>/>
+</$list>
+```
+
+!! Examples
+
+<$testcase>
+<$data
+	title="Description"
+	text="Map with state preservation"
+/>
+<$data
+	title="Output"
+	text="""<$geomap
+	state=<<qualify "$:/state/demo-map">>
+/>
+"""/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data
+	title="Description"
+	text="Map with geomarker"
+/>
+<$data
+	title="Oxford"
+	tags="$:/tags/GeoMarker"
+	caption="Oxford"
+	lat="51.751944"
+	long="-1.257778"
+	alt="0"
+	text="""This is Oxford!"""/>
+<$data title="Output" text="""<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
+</$geomap>
+"""/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data
+	title="Description"
+	text="Map with geofeature"
+/>
+<$data
+	title="Layer"
+	tags="$:/tags/GeoFeature"
+	type="application/json"
+	color="red"
+	text="""{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "An example geofeature feature",
+			"properties": {
+				"custom": "A custom property of this feature"
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[
+						[-90,35],
+						[-90,30],
+						[-85,30],
+						[-85,35],
+						[-90,35]
+					]
+				]
+			}
+		}
+	]
+}"""/>
+<$data title="Output" text="""<$geomap
+	state=<<qualify "$:/state/demo-map">>
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]">
+		<$geolayer json={{!!text}} color={{!!color}}/>
+	</$list>
+</$geomap>
+"""/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-refresh"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-draggable-marker"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

@@ -567,7 +567,7 @@ exports.extractTranscludes = function(parseTreeRoot) {
 					} else {
 						value = parseTreeNode.attributes.$tiddler.value;
 					}
-					if(transcludes.indexOf(value) === -1) {
+					if(transcludes.indexOf(value) === -1 && value !== undefined) {
 						transcludes.push(value);
 					}
 				}

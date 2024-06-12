@@ -3,5 +3,6 @@
 	"name": "TW2 Parser",
 	"description": "TiddlyWiki Classic parser",
 	"author": "Jeffrey Wilkinson",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

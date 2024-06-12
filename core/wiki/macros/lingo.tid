@@ -1,10 +1,24 @@
 title: $:/core/macros/lingo
-tags: $:/tags/Macro
+tags: $:/tags/Global
 
-\define lingo-base()
+<!-- Note that lingo-base should end with a trailing slash character -->
+\procedure lingo-base()
 $:/language/
-\end
+\end lingo-base
 
-\define lingo(title)
-{{$(lingo-base)$$title$}}
-\end
+\procedure lingo(title,override-lingo-base)
+<!-- Lingo procedure -->
+<!-- Get the parse mode used to invoke this procedure -->
+<$parameters $parseMode="parseMode">
+	<!-- Compute the lingo-base-->
+	<$let active-lingo-base={{{ [<override-lingo-base>!match[]else<lingo-base>] }}}>
+		<!-- First try the old school <active-lingo-base><title> format -->
+		<$transclude $tiddler={{{ [<active-lingo-base>addsuffix<title>] }}} $mode=<<parseMode>>>
+			<!-- If that didn't work, try the new <lingo-base><langcode>/<title> format -->
+			<$let language-code={{{  [[$:/language]get[text]get[name]else[en-GB]] }}}>
+        <$transclude $tiddler={{{ [<active-lingo-base>addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>/>
+			</$let>
+		</$transclude>
+	</$let>
+</$parameters>
+\end lingo
