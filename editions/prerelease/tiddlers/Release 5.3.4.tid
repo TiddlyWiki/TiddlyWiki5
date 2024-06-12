@@ -52,7 +52,9 @@ The easiest way to use the <<.wlink TestCaseWidget>> is by creating TestCaseTidd
 
 ! Translation improvements
 
-Improvements to the following translations:
+<<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7821">> the [[lingo Macro]] so that plugins can be translated in a similar way to the core. The menubar and tiddlyweb plugins have been updated to use the new mechanism, and we welcome pull requests to convert more of the core plugins to the new mechanism.
+
+This release also includes improvements to the following translations:
 
 * Chinese
 * French
@@ -61,7 +63,6 @@ Improvements to the following translations:
 
 ! Plugin Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7821">> the [[lingo Macro]] so that plugins can be translated in a similar way to the core. The pull request also updates the menubar and tiddlyweb plugins to use the new mechanism
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/8198">> badges to the core plugins to indicate their [[stability level|Plugin Stability]] from "deprecated", "experimental", "stable" and "legacy". These badges are shown in the plugin library and in the control panel
 
 ! Widget Improvements
@@ -70,7 +71,7 @@ Improvements to the following translations:
 
 ! Filter Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> new [[transcludes|transcludes Operator]] and [[backtranscludes|backtranscludes Operator]] operators
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6081">> new [[transcludes|transcludes Operator]] and [[backtranscludes|backtranscludes Operator]] operators
 
 ! Usability Improvements
 
