@@ -559,13 +559,17 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 		checkParseTree = function(parseTree, parentNode) {
 			for(var t=0; t<parseTree.length; t++) {
 				var parseTreeNode = parseTree[t];
-				if(parseTreeNode.type === "transclude" && parseTreeNode.attributes.$tiddler && parseTreeNode.attributes.$tiddler.type === "string") {
-					var value;
-					// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
-					if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
-						value = parentNode.attributes.tiddler.value;
-					} else {
-						value = parseTreeNode.attributes.$tiddler.value;
+				if(parseTreeNode.type === "transclude") {
+					if(parseTreeNode.attributes.$tiddler && parseTreeNode.attributes.$tiddler.type === "string") {
+						var value;
+						// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
+						if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
+							value = parentNode.attributes.tiddler.value;
+						} else {
+							value = parseTreeNode.attributes.$tiddler.value;
+						}
+					} else if(parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
+						value = parseTreeNode.attributes.tiddler.value;
 					}
 					// ignore empty value (like `{{!!field}}`), and deduplicate
 					if(value && transcludes.indexOf(value) === -1 && value !== title) {

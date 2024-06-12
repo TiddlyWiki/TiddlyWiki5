@@ -219,14 +219,15 @@ describe('Backtranscludes and transclude filter tests', function() {
 
 		wiki.addTiddler({
 			title: 'TestOutgoing',
-			text: "<$tiddler tiddler='TestIncoming'><$transclude $tiddler /></$tiddler>"});
+			text: "<$tiddler tiddler='TestIncoming'><$transclude $tiddler /></$tiddler>\n\n<$transclude tiddler='TiddlyWiki Pre-release'/>"});
 
 		it('should have a transclude', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming');
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming,TiddlyWiki Pre-release');
 		});
 
 		it('should have a back transclude', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+			expect(wiki.filterTiddlers('[[TiddlyWiki Pre-release]] +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
 		});
 	});
 });
