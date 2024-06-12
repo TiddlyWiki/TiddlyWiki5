@@ -81,11 +81,11 @@ Improvements to the following translations:
 
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7866">> the wikitext parser to generate start/end properties for all nodes
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/8109">> [[WidgetMessage: tm-http-request]] to be able to use Basic Authentication
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8225">> [[WidgetMessage: tm-http-request]] to allow the default headers to be suppressed
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7882">> infinite recursion handling using a custom exception
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> button to the JavaScript error popup allowing tiddlers to be saved to a local JSON file
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/8120">> to latest version of modern-normalize 2.0.0
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8211">> [[tm-permalink|WidgetMessage: tm-permalink]], [[tm-permaview|WidgetMessage: tm-permaview]] and [[tm-copy-to-clipboard|WidgetMessage: tm-copy-to-clipboard]] messages to allow the notification text to be customised
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8225">> [[WidgetMessage: tm-http-request]] to allow the default headers to be suppressed
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8097">> window title rendering to automatically include global definitions
 
 ! Bug Fixes
@@ -126,7 +126,7 @@ Improvements to the following translations:
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8195">> issue with fakedom TW_Node inheritence
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8099">> SJCL library creating variables in global scope
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8179">> fix `widget.getVariableInfo()` to always return a `params` property
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8179">> `widget.getVariableInfo()` to always return a `params` property
 
 ! Infrastructure Improvements
 
