@@ -1035,6 +1035,18 @@ Options include:
 exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
+	var Parser = this.getParser(type,options)
+	// Return the parser instance
+	return new Parser(type,text,{
+		parseAsInline: options.parseAsInline,
+		wiki: this,
+		_canonical_uri: options._canonical_uri,
+		configTrimWhiteSpace: options.configTrimWhiteSpace
+	});
+};
+
+exports.getParser = function(type,options) {
+	options = $tw.utils.extend({},options);
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
@@ -1046,13 +1058,7 @@ exports.parseText = function(type,text,options) {
 	if(!Parser) {
 		return null;
 	}
-	// Return the parser instance
-	return new Parser(type,text,{
-		parseAsInline: options.parseAsInline,
-		wiki: this,
-		_canonical_uri: options._canonical_uri,
-		configTrimWhiteSpace: options.configTrimWhiteSpace
-	});
+	return Parser;
 };
 
 /*
