@@ -3,12 +3,13 @@ tags: $:/tags/ControlPanel/Toolbars
 caption: Menu Bar
 
 \define config-base() $:/config/plugins/menubar/MenuItems/Visibility/
+\define lingo-base() $:/plugins/tiddlywiki/menubar/language/
 
-! Menu Bar Configuration
+! <<lingo Config/Heading1>>
 
-!! Menu Items
+!! <<lingo Config/MenuItems/Heading>>
 
-Select which menu items will be shown. You can also drag items to reorder them.
+<<lingo Config/MenuItems/Description>>
 
 <$set name="tv-config-toolbar-icons" value="yes">
 
@@ -20,18 +21,18 @@ Select which menu items will be shown. You can also drag items to reorder them.
 
 </$set>
 
-!! Breakpoint Position
+!! <<lingo Config/BreakpointPosition/Heading>>
 
-The breakpoint position between narrow and wide screens. Should include CSS units (eg. `400px`).
+<<lingo Config/BreakpointPosition/Description>>
 
 <$edit-text tiddler="$:/config/plugins/menubar/breakpoint" default="" tag="input"/>
 
-!! Contents Tag
+!! <<lingo Config/ContentsTag/Heading>>
 
-The tag for the ~TableOfContents used in the Contents dropdown
+<<lingo Config/ContentsTag/Description>>
 
 <$edit-text tiddler="$:/config/plugins/menubar/TableOfContents/Tag" default="" tag="input"/>
 
-!! Menu Bar Colours
+!! <<lingo Config/MenuBarColours/Heading>>
 
-To change the colour of the menu bar, define the colours `menubar-foreground` and `menubar-background` in the currently selected palette
+<<lingo Config/MenuBarColours/Description>>

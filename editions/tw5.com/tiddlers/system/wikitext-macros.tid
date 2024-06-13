@@ -1,104 +1,96 @@
 code-body: yes
 created: 20150117184156000
-modified: 20220617122915793
+modified: 20240315144208842
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
 
-\define activatePluginTab()
+\whitespace trim
+
+\procedure activatePluginTab()
 <$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Plugins"/>
 <$action-navigate $to="$:/ControlPanel"/>
 \end
 
-\define activateTiddlerWindow()
-<$action-sendmessage $message="tm-open-window"
-  $param=<<currentTiddler>> windowTitle="Side by Side View"
-  width="800" height="600" />
+\procedure activateTiddlerWindow()
+<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> windowTitle="Side by Side View" width="800" height="600" />
 \end
 
-\define controlPanel-plugin-link()
+\procedure controlPanel-plugin-link()
 <$button actions=<<activatePluginTab>> class="tc-btn-invisible tc-tiddlylink">
-{{$:/core/images/options-button}} ~ControlPanel
+	{{$:/core/images/options-button}} ~ControlPanel
 </$button>
 \end
 
-\define open-tiddler-in-window()
+\procedure open-tiddler-in-window()
+\whitespace notrim
 <$button actions=<<activateTiddlerWindow>> class="tc-btn-invisible tc-tiddlylink">
-open ''this'' tiddler in a new window
+	open ''this'' tiddler in a new window
 </$button>
 \end
 
-\define activateEditionWindow(url)
-<$action-sendmessage $message="tm-open-external-window"
-  $param="""$url$""" windowName="_edition"
-  windowFeatures="width=800 height=600" />
+\procedure activateEditionWindow(url)
+<$action-sendmessage $message="tm-open-external-window" $param=<<url>> windowName="_edition" windowFeatures="width=800 height=600" />
 \end
 
-\define open-external-window(url)
-<$button actions=<<activateEditionWindow """$url$""">> class="tc-btn-invisible tc-tiddlylink">
-open the ''example edition'' in a new window
+\procedure open-external-window(url)
+\whitespace notrim
+<$button actions=<<activateEditionWindow <<url>> class="tc-btn-invisible tc-tiddlylink">
+	open the ''example edition'' in a new window
 </$button>
 \end
 
 
-\define wikitext-example(src)
+\procedure wikitext-example(src)
 <div class="doc-example">
-
-<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
-
-<$codeblock code=<<__src__>>/>
-
-That renders as:
-
-<$macrocall $name="__src__"/>
-
-... and the underlying HTML is:
-
-<$wikify name="html" text=<<__src__>> output="html">
-<$codeblock code=<<html>>/>
-</$wikify>
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<src>>/>
+	<$codeblock code=<<src>>/>
+	<p>
+		That renders as:
+	</p>
+	<$transclude $variable="src" $mode="block"/>
+	<p>
+		... and the underlying HTML is:
+	</p>
+	<$wikify name="html" text=<<src>> output="html">
+		<$codeblock code=<<html>>/>
+	</$wikify>
 </div>
 \end
 
-\define wikitext-example-without-html(src)
+\procedure wikitext-example-without-html(src)
 <div class="doc-example">
-
-<$macrocall $name="copy-to-clipboard-above-right" src=<<__src__>>/>
-
-<$codeblock code=<<__src__>>/>
-
-That renders as:
-
-<$macrocall $name="__src__"/>
-
+	<$macrocall $name="copy-to-clipboard-above-right" src=<<src>>/>
+	<$codeblock code=<<src>>/>
+	<p>
+		That renders as:
+	</p>
+	<$transclude $variable="src" $mode="block"/>
 </div>
 \end
 
-\define wikitext-example-table-header() <thead><tr><th/><th>wiki text</th><th>renders as</th></tr></thead>
+\procedure wikitext-example-table-header() <thead><tr><th/><th>wiki text</th><th>renders as</th></tr></thead>
 
-\define wikitext-example-table-row(id, code)
- <tr>
-<th><<__id__>></th><td><$codeblock code=<<__code__>>/></td><td>
-
-<<__code__>>
-</td>
+\procedure wikitext-example-table-row(id, code)
+<tr>
+	<th><<id>></th>
+	<td><$codeblock code=<<code>>/></td>
+	<td><<code>></td>
 </tr>
 \end
 
-\define tw-code(tiddler)
+\procedure tw-code(tiddler)
 <$codeblock language={{$tiddler$!!type}} code={{$tiddler$}}/>
 \end
 
-\define tw-code-link(tiddler)
+\procedure tw-code-link(tiddler)
 [[$tiddler$]]:
-
 <<tw-code $tiddler$>>
 \end
 
-\define flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")
-\whitespace trim
-<$link class={{{ [<__class__>addprefix[tc-card ]] }}} to={{{ [<currentTiddler>get<__linkField__>else<currentTiddler>] }}}>
-	<div class="tc-card-accent" style.borderTop={{{ [<__bordercolor__>!is[blank]addprefix[5px solid ]] }}} style.background={{!!background}} style.backgroundColor=<<__backgroundcolor__>> style.color=<<__textcolor__>> style.fill=<<__textcolor__>>>
+\procedure flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")
+<$link class={{{ [<class>addprefix[tc-card ]] }}} to={{{ [<currentTiddler>get<linkField>else<currentTiddler>] }}}>
+	<div class="tc-card-accent" style.borderTop={{{ [<bordercolor>!is[blank]addprefix[5px solid ]] }}} style.background={{!!background}} style.backgroundColor=<<backgroundcolor>> style.color=<<textcolor>> style.fill=<<textcolor>>>
 		<$list filter="[<currentTiddler>has[ribbon-text]]" variable="ignore">
 			<div class="tc-card-ribbon-wrapper">
 				<div class="tc-card-ribbon" style.backgroundColor={{{ [<currentTiddler>get[ribbon-color]else[red]] }}}>
@@ -108,21 +100,21 @@ That renders as:
 				</div>
 			</div>
 		</$list>
-		<$list filter="[<currentTiddler>has<__imageField__>]" variable="ignore">
+		<$list filter="[<currentTiddler>has<imageField>]" variable="ignore">
 			<div class="tc-card-image">
-				<$image source={{{ [<currentTiddler>get<__imageField__>] }}}/>
+				<$image source={{{ [<currentTiddler>get<imageField>] }}}/>
 			</div>
 		</$list>
-		<div class="tc-card-title"><$transclude field=<<__captionField__>>><$view field="title"/></$transclude></div>
-		<$list filter="[<__subtitle__>!is[blank]]" variable="ignore">
+		<div class="tc-card-title"><$transclude field=<<captionField>>><$view field="title"/></$transclude></div>
+		<$list filter="[<subtitle>!is[blank]]" variable="ignore">
 			<div class="tc-card-subtitle">
-				<$text text=<<__subtitle__>>/>
+				<$text text=<<subtitle>>/>
 			</div>
 		</$list>
 		<div class="tc-card-icon"><$transclude tiddler={{!!icon}}/></div>
 		<div class="tc-card-body-wrapper">
 			<div class="tc-card-body">
-				<$transclude field=<<__descriptionField__>> mode="block"/>
+				<$transclude field=<<descriptionField>> mode="block"/>
 			</div>
 			<div class="tc-card-body-clear">
 			</div>

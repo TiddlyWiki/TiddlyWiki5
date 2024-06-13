@@ -1,0 +1,8 @@
+created: 20240202112358997
+modified: 20240202120248326
+tags: Concepts
+title: Temporary Tiddlers
+
+Temporary tiddlers are tiddlers that will be discarded when TiddlyWiki is saved. Under default configuration of the SavingMechanism (more specifically, the filter in [[$:/core/save/all]]), these are tiddlers prefixed with `$:/temp/`. This prefix makes them SystemTiddlers as well.
+
+One example usage of temporary tiddlers is storing the search queries. The query typed in the [[$:/AdvancedSearch]] is stored in [[$:/temp/advancedsearch]].

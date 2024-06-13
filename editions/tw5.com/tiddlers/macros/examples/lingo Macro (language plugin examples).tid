@@ -1,0 +1,13 @@
+created: 20150221151358000
+modified: 20150221160113000
+tags: [[lingo Macro]] [[Macro Examples]]
+title: lingo (for language plugin) Macro (Examples)
+type: text/vnd.tiddlywiki
+
+This example shows the text used as the basis for the title of a newly created tiddler:
+
+<$macrocall $name=".example" n="1" eg="""<<lingo DefaultNewTiddlerTitle>>"""/>
+
+This example shows the name of the eighth month of the year, for use in [[formatting dates|DateFormat]]:
+
+<$macrocall $name=".example" n="2" eg="""<<lingo Date/Long/Month/8>>"""/>

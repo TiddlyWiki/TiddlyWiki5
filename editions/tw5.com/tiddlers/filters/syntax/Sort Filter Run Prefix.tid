@@ -1,19 +1,26 @@
 created: 20210428083929749
-modified: 20210522162628946
-tags: [[Filter Syntax]] [[Filter Run Prefix]]
+from-version: 5.2.0
+modified: 20240312203002082
+rp-input: the filter output of all previous runs so far
+rp-output: output titles replace the output of previous filter runs
+rp-purpose: sort the input titles by the result of evaluating this filter run for each item
+rp-suffix: the <<.op :sort>> filter run prefix uses a rich suffix, see below for details
+tags: [[Named Filter Run Prefix]]
 title: Sort Filter Run Prefix
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.2.0">>
-
-|''purpose'' |sort the input titles by the result of evaluating this filter run for each item |
-|''input'' |all titles from previous filter runs |
-|''suffix'' |the `:sort` filter run prefix uses a rich suffix, see below for details |
-|''output''|the sorted result of previous filter runs |
+<$railroad text="""
+\start none
+\end none
+( ( ":sort" ) 
+( : ":string" | ":alphanumeric" | ":number" | ":integer" | ":version" | ":date" )
+( : ":casesensitive" /"required for string and alphanumeric"/ | ":caseinsensitive" /"required for string and alphanumeric"/  | ":reverse" /"optional"/ | - ) | - )
+[[run|"Filter Run"]]
+"""/>
 
 Each input title from previous runs is passed to this run in turn. The filter run transforms the input titles into the form needed for sorting. For example, the filter run `[length[]]` transforms each input title in to the number representing its length, and thus sorts the input titles according to their length.
 
-Note that within the filter run, the "currentTiddler" variable is set to the title of the tiddler being processed. This permits filter runs like `:sort:number[{!!value}divide{!!cost}]` to be used for computation. The value of currentTiddler outside the run is available in the variable "..currentTiddler".
+Note that within the filter run, the <<.var currentTiddler>> variable is set to the title of the tiddler being processed. This permits filter runs like `:sort:number[{!!value}divide{!!cost}]` to be used for computation. The value of <<.var currentTiddler>> outside the run is available in the variable <<.var "..currentTiddler">>.
 
 The `:sort` filter run prefix uses an extended syntax that allows for multiple suffixes, some of which are required:
 

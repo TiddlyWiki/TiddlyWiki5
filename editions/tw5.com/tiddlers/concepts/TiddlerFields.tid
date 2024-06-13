@@ -1,11 +1,11 @@
 created: 20130825213300000
-modified: 20220109101407050
+modified: 20240520162904479
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
 
 \define lingo-base() $:/language/Docs/Fields/
-~TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names must be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period).
+~TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names may contain any combination of characters (prior to [[v5.2.0|Release 5.2.0]], fields were constrained to be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period)).
 
 The standard fields are:
 
@@ -39,6 +39,7 @@ Other fields used by the core are:
 |`name` |<<lingo name>> |
 |`plugin-priority` |<<lingo plugin-priority>> |
 |`plugin-type` |<<lingo plugin-type>> |
+|`stability` |<<lingo stability>> |
 |`source` |<<lingo source>> |
 |`subtitle` |<<lingo subtitle>> |
 |`throttle.refresh` |<<lingo throttle.refresh>> |

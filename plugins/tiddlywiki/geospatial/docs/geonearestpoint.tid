@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geonearestpoint
+caption: geonearestpoint operator
+tags: $:/tags/GeospatialDocs
+
+!! `geonearestpoint` operator
+
+The `geonearestpoint` operator determines the point in a list that is nearest to a target point. Each input list item is interpreted as a [[GeoJSON Feature]] comprising the candidate points. The target point is specified as the first operand in [[GeoJSON Point Feature]] format.
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geonearestpoint"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/geonearestpoint2"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

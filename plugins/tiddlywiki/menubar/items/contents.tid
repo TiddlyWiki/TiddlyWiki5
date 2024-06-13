@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/items/contents
-caption: Contents
-description: Table of Contents
+caption: <<lingo Items/TOC/Name $:/plugins/tiddlywiki/menubar/language/>>
+description: <<lingo Items/TOC/Description $:/plugins/tiddlywiki/menubar/language/>>
 is-dropdown: yes
 tags: $:/tags/MenuBar
 

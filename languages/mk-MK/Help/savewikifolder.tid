@@ -1,0 +1,34 @@
+title: $:/language/Help/savewikifolder
+description: Зачувува википедија во нов фолдер
+
+<<.from-version "5.1.20">> Saves the current wiki as a wiki folder, including tiddlers, plugins and configuration:
+
+```
+--savewikifolder <wikifolderpath> [<filter>] [ [<name>=<value>] ]*
+```
+
+* The target wiki folder must be empty or non-existent
+* The filter specifies which tiddlers should be included. It is optional, defaulting to `[all[tiddlers]]`
+* Plugins from the official plugin library are replaced with references to those plugins in the `tiddlywiki.info` file
+* Custom plugins are unpacked into their own folder
+
+The following options are supported:
+
+* ''filter'': a filter expression that defines the tiddlers to include in the output.
+* ''explodePlugins'': defaults to "yes"
+** ''yes'' will "explode" plugins into separate tiddler files and save them to the plugin directory within the wiki folder
+** ''no'' will suppress exploding plugins into their constituent tiddler files. It will save the plugin as a single JSON tiddler in the tiddlers folder
+
+Note that both ''explodePlugins'' options will produce wiki folders that build the exact same original wiki. The difference lies in how plugins are represented in the wiki folder.
+
+A common usage is to convert a TiddlyWiki HTML file into a wiki folder:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder
+```
+
+Save the plugin to the tiddlers directory of the target wiki folder:
+
+```
+tiddlywiki --load ./mywiki.html --savewikifolder ./mywikifolder explodePlugins=no
+```
