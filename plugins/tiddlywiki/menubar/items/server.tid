@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/menubar/items/server
 tags: $:/tags/MenuBar
-description: Server options
-caption: Server
+description: <<lingo Items/Server/Description $:/plugins/tiddlywiki/menubar/language/>>
+caption: <<lingo Items/Server/Name $:/plugins/tiddlywiki/menubar/language/>>
 custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/server" mode="inline"/>
 
 <$list filter="[[$:/status/IsLoggedIn]get[text]else[no]match[yes]]" variable="ignore">

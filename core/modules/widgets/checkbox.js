@@ -53,6 +53,11 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
+	// Assign data- attributes
+	this.assignAttributes(this.inputDomNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
@@ -215,6 +220,8 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		if($tw.utils.isArray(fieldContents)) {
 			// Make a copy so we can modify it without changing original that's refrenced elsewhere
 			listContents = fieldContents.slice(0);
+		} else if(fieldContents === undefined) {
+			listContents = [];
 		} else if(typeof fieldContents === "string") {
 			listContents = $tw.utils.parseStringArray(fieldContents);
 			// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
@@ -323,9 +330,13 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 				$tw.utils.removeClass(this.labelDomNode,"tc-checkbox-checked");
 			}
 		}
+		this.assignAttributes(this.inputDomNode,{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		return this.refreshChildren(changedTiddlers) || refreshed;
 	}
 };
 
 exports.checkbox = CheckboxWidget;
-

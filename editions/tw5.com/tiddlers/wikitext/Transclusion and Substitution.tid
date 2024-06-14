@@ -1,5 +1,5 @@
 created: 20141018090608643
-modified: 20230419103154329
+modified: 20231030124224424
 tags: WikiText
 title: Transclusion and Substitution
 type: text/vnd.tiddlywiki
@@ -27,7 +27,7 @@ As described in [[HTML in WikiText]], you can also transclude tiddler field valu
 <$text text={{MyTiddler}}/>
 ```
 
-As described in [[Introduction to filter notation]], you can also transclude tiddler field values as filter operands. For example:
+As described in [[Introduction to filter notation]], you can also transclude tiddler field values using the [[filter syntax|Filter Syntax]]. For example:
 
 ```
 {{{ [tag{TiddlerContainingMyTag}] }}}
@@ -47,7 +47,7 @@ As described in [[HTML in WikiText]], you can also transclude a variable as the 
 <$text text=<<myMacro>>/>
 ```
 
-As described in [[Introduction to filter notation]], you can also transclude a variable as the value of a filter operand. For example:
+As described in [[Introduction to filter notation]], you can also transclude a variable as the value of a filter parameter using the [[filter syntax|Filter Syntax]]. For example:
 
 ```
 {{{ [tag<myMacro>] }}}
@@ -55,6 +55,6 @@ As described in [[Introduction to filter notation]], you can also transclude a v
 
 ! Textual Substitution
 
-Textual substitution occurs when the value of a macro/variable is used. It is described in [[Macros]].
+Textual substitution occurs when the value of a macro/variable is used. It is described in [[Substituted Attribute Values]] and [[substitute Operator]]
 
-The key difference between substitution and transclusion is that substitution occurs before WikiText parsing. This means that you can use substitution to build WikiText constructions. Transclusions are processed independently, and cannot be combined with adjacent text to define WikiText constructions.
+The key difference between substitution and transclusion is that substitution occurs before WikiText parsing. This means that you can use substitution to build ~WikiText constructions. Transclusions are processed independently, and cannot be combined with adjacent text to define ~WikiText constructions.

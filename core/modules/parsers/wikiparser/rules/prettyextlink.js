@@ -96,15 +96,20 @@ exports.parseLink = function(source,pos) {
 		splitPos = null;
 	}
 	// Pull out the tooltip and URL
-	var tooltip, URL;
+	var tooltip, URL, urlStart;
+	textNode.start = pos;
 	if(splitPos) {
+		urlStart = splitPos + 1;
 		URL = source.substring(splitPos + 1,closePos).trim();
 		textNode.text = source.substring(pos,splitPos).trim();
+		textNode.end = splitPos;
 	} else {
+		urlStart = pos;
 		URL = source.substring(pos,closePos).trim();
 		textNode.text = URL;
+		textNode.end = closePos;
 	}
-	node.attributes.href = {type: "string", value: URL};
+	node.attributes.href = {type: "string", value: URL, start: urlStart, end: closePos};
 	node.attributes.target = {type: "string", value: "_blank"};
 	node.attributes.rel = {type: "string", value: "noopener noreferrer"};
 	// Update the end position

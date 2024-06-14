@@ -66,7 +66,12 @@ LogWidget.prototype.log = function() {
 	});
 
 	for(var v in this.variables) {
-		allVars[v] = this.getVariable(v,{defaultValue:""});
+		var variable = this.parentWidget && this.parentWidget.variables[v];
+		if(variable && variable.isFunctionDefinition) {
+			allVars[v] = variable.value;
+		} else {
+			allVars[v]  = this.getVariable(v,{defaultValue:""});
+		}
 	}
 	if(this.filter) {
 		filteredVars = this.wiki.compileFilter(this.filter).call(this.wiki,this.wiki.makeTiddlerIterator(allVars));

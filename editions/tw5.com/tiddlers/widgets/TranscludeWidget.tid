@@ -18,11 +18,11 @@ Transclusion is the underlying mechanism for many higher level wikitext features
 Here is a complete example showing the important features of the <<.wlink TranscludeWidget>> widget:
 
 ```
-\procedure mymacro(name,age)
+\procedure myproc(name,age)
 My name is <<name>> and my age is <<age>>.
 \end
 
-<$transclude $variable="mymacro" name="James" age="19"/>
+<$transclude $variable="myproc" name="James" age="19"/>
 ```
 
 * `\procedure` defines a variable as a procedure with two parameters, ''name'' and ''age''

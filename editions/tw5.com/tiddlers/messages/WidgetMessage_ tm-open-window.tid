@@ -1,6 +1,6 @@
 caption: tm-open-window
 created: 20160424181447704
-modified: 20220301162140993
+modified: 20230831201518773
 tags: Messages
 title: WidgetMessage: tm-open-window
 type: text/vnd.tiddlywiki
@@ -20,10 +20,17 @@ The `tm-open-window` [[message|Messages]] opens a tiddler in a new //browser// w
 
 The `tm-open-window` message is best generated with the ActionSendMessageWidget, which in turn is triggered by a widget such as the ButtonWidget. The message is handled by the core itself.
 
-<<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>> """>>
-<<.tip """Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, <<.param height>>, <<.param left>> and <<.param top>> require the ActionSendMessageWidget.""">>
-<<.tip """<<.from-version 5.2.2>> To close a window opened with tm-open-window use [[WidgetMessage: tm-close-window]]""">>
-<<.tip """<<.from-version 5.2.2>> To open a tiddler in more than one new window, use a unique value for <<.param windowID>>""">>
+<<.tip """When used with the ActionSendMessageWidget, <<.param 'param'>> becomes <<.param '$param'>>.<br>
+Parameters <<.param template>>, <<.param windowTitle>>, <<.param width>>, <<.param height>>, <<.param left>> and <<.param top>> require the ActionSendMessageWidget. """>>
+
+<<.tip """<<.from-version 5.2.2>>
+To close a window opened with tm-open-window use [[WidgetMessage: tm-close-window]]<br>
+To open a tiddler in more than one new window, use a unique value for <<.param windowID>>
+""">>
+
+<<.tip """<<.from-version 5.3.2>>
+If the new window is hidden by other windows, clicking the "open" button again will bring it to the foreground and set focus to the new window. This behaviour should be consistent for all browsers now
+""">>
 
 <$macrocall $name='wikitext-example-without-html'
 src="""

@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Активира опширен излезен режим
+
+Активира опширен излезен режим, корисен за debugging
+
+```
+--verbose
+```

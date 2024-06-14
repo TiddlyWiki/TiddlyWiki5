@@ -187,31 +187,31 @@ exports.unique = function (source, operator) {
 	return set;
 };
 
-var cycleValueInArray = function(results,operands,stepSize) {
-	var resultsIndex,
-		step = stepSize || 1,
-		i = 0,
-		opLength = operands.length,
-		nextOperandIndex;
-	for(i; i < opLength; i++) {
-		resultsIndex = results.indexOf(operands[i]);
+	var cycleValueInArray = function(results,operands,stepSize) {
+		var resultsIndex,
+			step = stepSize || 1,
+			i = 0,
+			opLength = operands.length,
+			nextOperandIndex;
+		for(i; i < opLength; i++) {
+			resultsIndex = results.indexOf(operands[i]);
+			if(resultsIndex !== -1) {
+				break;
+			}
+		}
 		if(resultsIndex !== -1) {
-			break;
-		}
-	}
-	if(resultsIndex !== -1) {
-		i = i + step;
-		nextOperandIndex = (i < opLength ? i : i - opLength);
-		if(operands.length > 1) {
-			results.splice(resultsIndex,1,operands[nextOperandIndex]);
+			i = i + step;
+			nextOperandIndex = (i < opLength ? i : i % opLength);
+			if(operands.length > 1) {
+				results.splice(resultsIndex,1,operands[nextOperandIndex]);
+			} else {
+				results.splice(resultsIndex,1);
+			}
 		} else {
-			results.splice(resultsIndex,1);
+			results.push(operands[0]);
 		}
-	} else {
-		results.push(operands[0]);
+		return results;
 	}
-	return results;
-}
 
 /*
 Toggles an item in the current list.

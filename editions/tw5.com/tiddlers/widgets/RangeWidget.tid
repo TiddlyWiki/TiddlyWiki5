@@ -1,6 +1,6 @@
 caption: range
 created: 20171102134825376
-modified: 20211009121606405
+modified: 20231113093304323
 tags: Widgets TriggeringWidgets
 title: RangeWidget
 type: text/vnd.tiddlywiki
@@ -26,6 +26,8 @@ The content of the `<$range>` widget is ignored.
 |actionsStart|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''clicked''. <br>The variable: ''actionValueHasChanged'' is always `no` here|
 |actionsStop|<<.from-version "5.1.23">> Optional, A string containing ~ActionWidgets to be triggered when the "handle" is ''released''. <br>The variable: ''actionValueHasChanged'' is `yes`, ''if'' the new-value is different to the start-value |
 |disabled|<<.from-version "5.1.23">> Optional, disables the range input if set to "yes". Defaults to "no"|
+|data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the `<input>` HTML element |
+|style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the `<input>` HTML element |
 
 ! Examples
 

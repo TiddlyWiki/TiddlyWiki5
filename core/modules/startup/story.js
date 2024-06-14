@@ -93,7 +93,9 @@ exports.startup = function() {
 				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permalink" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
 				targetTiddler: event.param || event.tiddlerTitle,
-				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permalink" : "none"
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permalink" : "none",
+				successNotification: event.paramObject && event.paramObject.successNotification,
+				failureNotification: event.paramObject && event.paramObject.failureNotification
 			});
 		});
 		// Listen for the tm-permaview message
@@ -102,7 +104,9 @@ exports.startup = function() {
 				updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_UPDATE_ADDRESS_BAR,"yes").trim() === "yes" ? "permaview" : "none",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
 				targetTiddler: event.param || event.tiddlerTitle,
-				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permaview" : "none"
+				copyToClipboard: $tw.wiki.getTiddlerText(CONFIG_PERMALINKVIEW_COPY_TO_CLIPBOARD,"yes").trim() === "yes" ? "permaview" : "none",
+				successNotification: event.paramObject && event.paramObject.successNotification,
+				failureNotification: event.paramObject && event.paramObject.failureNotification
 			});
 		});
 	}
@@ -177,6 +181,8 @@ options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permavi
 options.updateHistory: "yes" or "no" (defaults to "no")
 options.copyToClipboard: "permalink", "permaview" or "no" (defaults to "no")
 options.targetTiddler: optional title of target tiddler for permalink
+options.successNotification: optional title of tiddler to use as the notification in case of success
+options.failureNotification: optional title of tiddler to use as the notification in case of failure
 */
 function updateLocationHash(options) {
 	// Get the story and the history stack
@@ -205,13 +211,17 @@ function updateLocationHash(options) {
 			break;
 	}
 	// Copy URL to the clipboard
+	var url = "";
 	switch(options.copyToClipboard) {
 		case "permalink":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler));
+			url = $tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler);
 			break;
 		case "permaview":
-			$tw.utils.copyToClipboard($tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList)));
+			url = $tw.utils.getLocationPath() + "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 			break;
+	}
+	if(url) {
+		$tw.utils.copyToClipboard(url,{successNotification: options.successNotification, failureNotification: options.failureNotification});
 	}
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
 	if($tw.utils.getLocationHash() !== $tw.locationHash) {

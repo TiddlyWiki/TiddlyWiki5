@@ -42,6 +42,11 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
 	this.assignDomNodeClasses();
+	// Assign data- attributes and style. attributes
+	this.assignAttributes(domNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Add event handlers
 	if(this.droppableEnable) {
 		$tw.utils.addEventListeners(domNode,[
@@ -166,8 +171,15 @@ DroppableWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.tag || changedAttributes.enable || changedAttributes.disabledClass || changedAttributes.actions || changedAttributes.effect) {
 		this.refreshSelf();
 		return true;
-	} else if(changedAttributes["class"]) {
-		this.assignDomNodeClasses();
+	} else {
+		if(changedAttributes["class"]) {
+			this.assignDomNodeClasses();
+		}
+		this.assignAttributes(this.domNodes[0],{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 	}
 	return this.refreshChildren(changedTiddlers);
 };

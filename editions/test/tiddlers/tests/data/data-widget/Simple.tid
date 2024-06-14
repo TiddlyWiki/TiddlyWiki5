@@ -1,0 +1,18 @@
+title: Data/Simple
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Standalone data widget to create individual tiddlers
+
+title: Description
+text: Standalone data widget to create individual tiddlers
++
+title: Output
+
+\whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
+<$data title="Epsilon" text="Theta"/>
+</$testcase>
++
+title: ExpectedResult
+
+<p><div><div>[{"title":"Epsilon","text":"Theta"}]</div></div></p>

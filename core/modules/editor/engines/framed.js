@@ -60,7 +60,7 @@ function FramedEngine(options) {
 		this.domNode.value = this.value;
 	}
 	// Set the attributes
-	if(this.widget.editType) {
+	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
 	if(this.widget.editPlaceholder) {

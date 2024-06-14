@@ -58,6 +58,7 @@ Last entry/entries in list
 exports.last = function(source,operator,options) {
 	var count = $tw.utils.getInt(operator.operand,1),
 		results = [];
+	if(count === 0) return results;
 	source(function(tiddler,title) {
 		results.push(title);
 	});

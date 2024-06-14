@@ -1,44 +1,13 @@
 created: 20210618133745003
 from-version: 5.3.0
-modified: 20230506172920710
+modified: 20230710074225410
 rp-input: <<.olink all>> tiddler titles
 rp-output: the output of this filter run replaces the output of previous runs unless it is an empty list (see below)
 rp-purpose: replace any input to this filter run with its output, only evaluating the run when there is any input
 search: 
-tags: [[Filter Run Prefix]] [[Filter Syntax]]
+tags: [[Named Filter Run Prefix]]
 title: Then Filter Run Prefix
 type: text/vnd.tiddlywiki
-
-\define .op-row()
-<$macrocall $name=".if"
-	cond="""$(op-body)$"""
-	then="""<tr><th align="left">$(op-head)$</th><td><<.op-place>>$(op-body)$</td></tr>"""
-	else=""/>
-\end
-
-<$list filter="[all[current]has[from-version]]" variable="listItem">
-	<$macrocall $name=".from-version" version={{!!from-version}}/>
-</$list>
-<$let op-head="" op-body="" op-name="">
-	<table class="doc-table">
-		<!-- purpose -->
-		<$let op-head="purpose" op-body={{!!rp-purpose}}>
-			<<.op-row>>
-		</$let>
-		<!-- input -->
-		<$let op-head="[[input|Filter Expression]]" op-body={{!!rp-input}}>
-			<<.op-row>>
-		</$let>
-		<!-- suffix -->
-		<$let op-head="suffix" op-body={{!!rp-suffix}} op-name={{!!rp-suffix-name}}>
-			<<.op-row>>
-		</$let>
-		<!-- output -->
-		<$let op-head="output" op-body={{!!rp-output}}>
-			<<.op-row>>
-		</$let>
-	</table>
-</$let>
 
 <$railroad text="""
 \start none
@@ -46,8 +15,6 @@ type: text/vnd.tiddlywiki
 ":then"
 [[run|"Filter Run"]]
 """/>
-
-!Introduction
 
 The <<.op :then>> filter run prefix is used to replace the result of all previous filter runs with its output.
 
@@ -67,5 +34,5 @@ The major difference between the <<.op then>> operator and a <<.op :then>> prefi
 |^<<.operator-example m1-1 "[tag[WikiText]] :then[[true]]">>|^<<.operator-example m1-2 "[tag[WikiText]then[true]]">><p>To make them equivalent, additional filter steps may be added:</p> <<.operator-example m1-3 "[tag[WikiText]count[]compare:number:gt[0]then[true]]">>|
 
 
-! [[Examples|Then Filter Run Prefix (Examples)]]
+[[Then Filter Run Prefix (Examples)]]
 

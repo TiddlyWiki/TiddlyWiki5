@@ -38,13 +38,14 @@ exports.parse = function() {
 	// Parse the filter terminated by a line break
 	var reMatch = /(.*)(?:$|\r?\n)/mg;
 	reMatch.lastIndex = this.parser.pos;
+	var filterStart = this.parser.source;
 	var match = reMatch.exec(this.parser.source);
 	this.parser.pos = reMatch.lastIndex;
 	// Parse tree nodes to return
 	return [{
 		type: "importvariables",
 		attributes: {
-			filter: {type: "string", value: match[1]}
+			filter: {type: "string", value: match[1], start: filterStart, end: this.parser.pos}
 		},
 		children: []
 	}];

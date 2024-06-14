@@ -5,6 +5,7 @@ tags: ReleaseNotes
 title: Release 5.1.4
 type: text/vnd.tiddlywiki
 released: 20141022155524581
+description: Dragging links into text boxes, coloured errors and warnings under Node.js
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.3...v5.1.4]]//
 

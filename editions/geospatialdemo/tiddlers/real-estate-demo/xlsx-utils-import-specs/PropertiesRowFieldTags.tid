@@ -1,0 +1,7 @@
+import-spec-role: field
+import-field-name: tags
+import-field-type: string
+import-field-source: constant
+import-field-value: $:/tags/GeoMarker
+title: $:/_importspec/RealEstate/PropertiesRow/Field/tags
+type: text/vnd.tiddlywiki

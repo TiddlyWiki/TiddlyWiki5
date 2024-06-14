@@ -1,14 +1,14 @@
 caption: reveal
 created: 20131024141900000
 jeremy: tiddlywiki
-modified: 20201121100908827
+modified: 20230803052644851
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The reveal widget hides or shows its content depending upon the value of a [[state tiddler|StateTiddlers]]. The type of the widget determines the condition for the content being displayed:
+The reveal widget hides or shows its content depending upon the value of a [[state tiddler|StateTiddler]]. The type of the widget determines the condition for the content being displayed:
 
 * type=''match'': the content is displayed if the state tiddler matches the text attribute value
 * type=''nomatch'': the content is displayed if the state tiddler doesn't match the text attribute value

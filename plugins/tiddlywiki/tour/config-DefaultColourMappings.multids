@@ -1,0 +1,31 @@
+title: $:/config/DefaultColourMappings/
+
+tour-chooser-button-foreground: <<colour very-muted-foreground>>
+tour-chooser-button-hover-background: <<colour muted-foreground>>
+tour-chooser-button-hover-foreground:: <<colour background>>
+tour-chooser-button-selected-background: <<colour primary>>
+tour-chooser-button-selected-foreground: <<colour background>>
+tour-chooser-dropdown-foreground: <<colour very-muted-foreground>>
+tour-chooser-item-background: <<colour background>>
+tour-chooser-item-border: <<colour muted-foreground>>
+tour-chooser-item-foreground: <<colour foreground>>
+tour-chooser-item-shadow: <<colour muted-foreground>>
+tour-chooser-item-start-background: <<colour download-background>>
+tour-chooser-item-start-foreground: <<colour background>>
+tour-chooser-item-start-hover-background: <<colour primary>>
+tour-chooser-item-start-hover-foreground: <<colour background>>
+tour-fullscreen-background: <<colour page-background>>
+tour-fullscreen-controls-foreground: <<colour muted-foreground>>
+tour-navigation-buttons-back-background: red
+tour-navigation-buttons-back-foreground: white
+tour-navigation-buttons-hint-background: purple
+tour-navigation-buttons-hint-foreground: white
+tour-navigation-buttons-hover-background: <<colour foreground>>
+tour-navigation-buttons-hover-foreground: <<colour background>>
+tour-navigation-buttons-next-background: purple
+tour-navigation-buttons-next-foreground: white
+tour-overlay-background: #cbfff8
+tour-overlay-border: #228877
+tour-step-heading-background: none
+tour-step-task-background: <<colour download-background>>
+tour-step-task-foreground: <<colour download-foreground>>

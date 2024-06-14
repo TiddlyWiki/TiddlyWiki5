@@ -28,6 +28,18 @@ Inherit from the base widget class
 */
 ListWidget.prototype = new Widget();
 
+ListWidget.prototype.initialise = function(parseTreeNode,options) {
+	// Bail if parseTreeNode is undefined, meaning that the ListWidget constructor was called without any arguments so that it can be subclassed
+	if(parseTreeNode === undefined) {
+		return;
+	}
+	// First call parent constructor to set everything else up
+	Widget.prototype.initialise.call(this,parseTreeNode,options);
+	// Now look for <$list-template> and <$list-empty> widgets as immediate child widgets
+	// This is safe to do during initialization because parse trees never change after creation
+	this.findExplicitTemplates();
+}
+
 /*
 Render this widget into the DOM
 */
@@ -38,8 +50,8 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 		$tw.modules.applyMethods("storyview",this.storyViews);
 	}
 	this.parentDomNode = parent;
-	this.computeAttributes();
-	this.execute();
+	var changedAttributes = this.computeAttributes();
+	this.execute(changedAttributes);
 	this.renderChildren(parent,nextSibling);
 	// Construct the storyview
 	var StoryView = this.storyViews[this.storyViewName];
@@ -59,7 +71,8 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-ListWidget.prototype.execute = function() {
+ListWidget.prototype.execute = function(changedAttributes) {
+	var self = this;
 	// Get our attributes
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
@@ -67,6 +80,10 @@ ListWidget.prototype.execute = function() {
 	this.counterName = this.getAttribute("counter");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
+	// Create join template only if needed
+	if(this.join === undefined || (changedAttributes && changedAttributes.join)) {
+		this.join = this.makeJoinTemplate();
+	}
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -85,24 +102,81 @@ ListWidget.prototype.execute = function() {
 	this.history = [];
 };
 
+ListWidget.prototype.findExplicitTemplates = function() {
+	var self = this;
+	this.explicitListTemplate = null;
+	this.explicitEmptyTemplate = null;
+	this.explicitJoinTemplate = null;
+	this.hasTemplateInBody = false;
+	var searchChildren = function(childNodes) {
+		var foundInlineTemplate = false;
+		$tw.utils.each(childNodes,function(node) {
+			if(node.type === "list-template") {
+				self.explicitListTemplate = node.children;
+			} else if(node.type === "list-empty") {
+				self.explicitEmptyTemplate = node.children;
+			} else if(node.type === "list-join") {
+				self.explicitJoinTemplate = node.children;
+			} else if(node.type === "element" && node.tag === "p") {
+				searchChildren(node.children);
+				foundInlineTemplate = true;
+			} else {
+				foundInlineTemplate = true;
+			}
+		});
+		return foundInlineTemplate;
+	};
+	this.hasTemplateInBody = searchChildren(this.parseTreeNode.children);
+}
+
 ListWidget.prototype.getTiddlerList = function() {
+	var limit = $tw.utils.getInt(this.getAttribute("limit",""),undefined);
 	var defaultFilter = "[!is[system]sort[title]]";
-	return this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
+	var results = this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
+	if(limit !== undefined) {
+		if(limit >= 0) {
+			results = results.slice(0,limit);
+		} else {
+			results = results.slice(limit);
+		}
+	}
+	return results;
 };
 
 ListWidget.prototype.getEmptyMessage = function() {
 	var parser,
-		emptyMessage = this.getAttribute("emptyMessage","");
-	// this.wiki.parseText() calls 
-	// new Parser(..), which should only be done, if needed, because it's heavy!
-	if(emptyMessage === "") {
-		return [];
+		emptyMessage = this.getAttribute("emptyMessage");
+	// If emptyMessage attribute is not present or empty then look for an explicit empty template
+	if(!emptyMessage) {
+		if(this.explicitEmptyTemplate) {
+			return this.explicitEmptyTemplate;
+		} else {
+			return [];
+		}
 	}
 	parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
 	if(parser) {
 		return parser.tree;
 	} else {
 		return [];
+	}
+};
+
+/*
+Compose the template for a join between list items
+*/
+ListWidget.prototype.makeJoinTemplate = function() {
+	var parser,
+		join = this.getAttribute("join","");
+	if(join) {
+		parser = this.wiki.parseText("text/vnd.tiddlywiki",join,{parseAsInline:true})
+		if(parser) {
+			return parser.tree;
+		} else {
+			return [];
+		}
+	} else {
+		return this.explicitJoinTemplate; // May be null, and that's fine
 	}
 };
 
@@ -114,6 +188,7 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	var tiddler = this.wiki.getTiddler(title),
 		isDraft = tiddler && tiddler.hasField("draft.of"),
 		template = this.template,
+		join = this.join,
 		templateTree;
 	if(isDraft && this.editTemplate) {
 		template = this.editTemplate;
@@ -122,22 +197,29 @@ ListWidget.prototype.makeItemTemplate = function(title,index) {
 	if(template) {
 		templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: template}}}];
 	} else {
+		// Check for child nodes of the list widget
 		if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
-			templateTree = this.parseTreeNode.children;
-		} else {
+			// Check for a <$list-item> widget
+			if(this.explicitListTemplate) {
+				templateTree = this.explicitListTemplate;
+			} else if(this.hasTemplateInBody) {
+				templateTree = this.parseTreeNode.children;
+			}
+		}
+		if(!templateTree || templateTree.length === 0) {
 			// Default template is a link to the title
 			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
-					{type: "text", text: title}
+				{type: "text", text: title}
 			]}]}];
 		}
 	}
 	// Return the list item
-	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
+	var parseTreeNode = {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree, join: join};
+	parseTreeNode.isLast = index === this.list.length - 1;
 	if(this.counterName) {
 		parseTreeNode.counter = (index + 1).toString();
 		parseTreeNode.counterName = this.counterName;
 		parseTreeNode.isFirst = index === 0;
-		parseTreeNode.isLast = index === this.list.length - 1;
 	}
 	return parseTreeNode;
 };
@@ -153,7 +235,7 @@ ListWidget.prototype.refresh = function(changedTiddlers) {
 		this.storyview.refreshStart(changedTiddlers,changedAttributes);
 	}
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
+	if(changedAttributes.filter || changedAttributes.variable || changedAttributes.counter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.join || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		result = true;
 	} else {
@@ -225,6 +307,8 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 		// If we are providing an counter variable then we must refresh the items, otherwise we can rearrange them
 		var hasRefreshed = false,t;
 		if(this.counterName) {
+			var mustRefreshOldLast = false;
+			var oldLength = this.children.length;
 			// Cycle through the list and remove and re-insert the first item that has changed, and all the remaining items
 			for(t=0; t<this.list.length; t++) {
 				if(hasRefreshed || !this.children[t] || this.children[t].parseTreeNode.itemTitle !== this.list[t]) {
@@ -232,12 +316,21 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 						this.removeListItem(t);
 					}
 					this.insertListItem(t,this.list[t]);
+					if(!hasRefreshed && t === oldLength) {
+						mustRefreshOldLast = true;
+					}
 					hasRefreshed = true;
 				} else {
 					// Refresh the item we're reusing
 					var refreshed = this.children[t].refresh(changedTiddlers);
 					hasRefreshed = hasRefreshed || refreshed;
 				}
+			}
+			// If items were inserted then we must recreate the item that used to be at the last position as it is no longer last
+			if(mustRefreshOldLast && oldLength > 0) {
+				var oldLastIdx = oldLength-1;
+				this.removeListItem(oldLastIdx);
+				this.insertListItem(oldLastIdx,this.list[oldLastIdx]);
 			}
 			// If there are items to remove and we have not refreshed then recreate the item that will now be at the last position
 			if(!hasRefreshed && this.children.length > this.list.length) {
@@ -246,10 +339,29 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			}
 		} else {
 			// Cycle through the list, inserting and removing list items as needed
+			var mustRecreateLastItem = false;
+			if(this.join && this.join.length) {
+				if(this.children.length !== this.list.length) {
+						mustRecreateLastItem = true;
+				} else if(prevList[prevList.length-1] !== this.list[this.list.length-1]) {
+						mustRecreateLastItem = true;
+				}
+			}
+			var isLast = false, wasLast = false;
 			for(t=0; t<this.list.length; t++) {
+				isLast = t === this.list.length-1;
 				var index = this.findListItem(t,this.list[t]);
+				wasLast = index === this.children.length-1;
+				if(wasLast && (index !== t || this.children.length !== this.list.length)) {
+					mustRecreateLastItem = !!(this.join && this.join.length);
+				}
 				if(index === undefined) {
 					// The list item must be inserted
+					if(isLast && mustRecreateLastItem && t>0) {
+						// First re-create previosly-last item that will no longer be last
+						this.removeListItem(t-1);
+						this.insertListItem(t-1,this.list[t-1]);
+					}
 					this.insertListItem(t,this.list[t]);
 					hasRefreshed = true;
 				} else {
@@ -258,9 +370,15 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 						this.removeListItem(n);
 						hasRefreshed = true;
 					}
-					// Refresh the item we're reusing
-					var refreshed = this.children[t].refresh(changedTiddlers);
-					hasRefreshed = hasRefreshed || refreshed;
+					// Refresh the item we're reusing, or recreate if necessary
+					if(mustRecreateLastItem && (isLast || wasLast)) {
+						this.removeListItem(t);
+						this.insertListItem(t,this.list[t]);
+						hasRefreshed = true;
+					} else {
+						var refreshed = this.children[t].refresh(changedTiddlers);
+						hasRefreshed = hasRefreshed || refreshed;
+					}
 				}
 			}
 		}
@@ -350,8 +468,17 @@ ListItemWidget.prototype.execute = function() {
 		this.setVariable(this.parseTreeNode.counterName + "-first",this.parseTreeNode.isFirst ? "yes" : "no");
 		this.setVariable(this.parseTreeNode.counterName + "-last",this.parseTreeNode.isLast ? "yes" : "no");
 	}
+	// Add join if needed
+	var children = this.parseTreeNode.children,
+		join = this.parseTreeNode.join;
+	if(join && join.length && !this.parseTreeNode.isLast) {
+		children = children.slice(0);
+		$tw.utils.each(join,function(joinNode) {
+			children.push(joinNode);
+		})
+	}
 	// Construct the child widgets
-	this.makeChildWidgets();
+	this.makeChildWidgets(children);
 };
 
 /*
@@ -363,3 +490,68 @@ ListItemWidget.prototype.refresh = function(changedTiddlers) {
 
 exports.listitem = ListItemWidget;
 
+/*
+Make <$list-template> and <$list-empty> widgets that do nothing
+*/
+var ListTemplateWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListTemplateWidget.prototype = new Widget();
+ListTemplateWidget.prototype.render = function() {}
+ListTemplateWidget.prototype.refresh = function() { return false; }
+
+exports["list-template"] = ListTemplateWidget;
+
+var ListEmptyWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListEmptyWidget.prototype = new Widget();
+ListEmptyWidget.prototype.render = function() {}
+ListEmptyWidget.prototype.refresh = function() { return false; }
+
+exports["list-empty"] = ListEmptyWidget;
+
+var ListJoinWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListJoinWidget.prototype = new Widget();
+ListJoinWidget.prototype.render = function() {}
+ListJoinWidget.prototype.refresh = function() { return false; }
+
+exports["list-join"] = ListJoinWidget;
+
+/*
+Make <$list-template> and <$list-empty> widgets that do nothing
+*/
+var ListTemplateWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListTemplateWidget.prototype = new Widget();
+ListTemplateWidget.prototype.render = function() {}
+ListTemplateWidget.prototype.refresh = function() { return false; }
+
+exports["list-template"] = ListTemplateWidget;
+
+var ListEmptyWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListEmptyWidget.prototype = new Widget();
+ListEmptyWidget.prototype.render = function() {}
+ListEmptyWidget.prototype.refresh = function() { return false; }
+
+exports["list-empty"] = ListEmptyWidget;
+
+var ListJoinWidget = function(parseTreeNode,options) {
+	// Main initialisation inherited from widget.js
+	this.initialise(parseTreeNode,options);
+};
+ListJoinWidget.prototype = new Widget();
+ListJoinWidget.prototype.render = function() {}
+ListJoinWidget.prototype.refresh = function() { return false; }
+
+exports["list-join"] = ListJoinWidget;

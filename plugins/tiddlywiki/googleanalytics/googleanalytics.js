@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/googleanalytics/googleanalytics.js
 type: application/javascript
 module-type: startup
 
-Runs Google Analytics with the account number in the tiddler `$:/GoogleAnalyticsAccount` and the domain name in `$:/GoogleAnalyticsDomain`
+Runs Google Analytics with the measurement ID in the tiddler `$:/GoogleAnalyticsMeasurementID`
 
 \*/
 

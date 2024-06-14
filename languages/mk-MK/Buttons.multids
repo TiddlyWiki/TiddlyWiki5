@@ -1,0 +1,195 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: напредно пребарување
+AdvancedSearch/Hint: Напредно пребарување
+Bold/Caption: здебелен
+Bold/Hint: Здебелен формат на селекција
+Cancel/Caption: откажи
+Cancel/Hint: Отстрани ги промените
+Clear/Caption: исчисти
+Clear/Hint: Исчисти ја сликата во еднобојна позадина
+Clone/Caption: клонирај
+Clone/Hint: Клонирај го овој запис
+Close/Caption: затвори
+Close/Hint: Затвори запис
+CloseAll/Caption: затвори ги сите
+CloseAll/Hint: Затвори ги сите записи
+CloseOthers/Caption: затвори ги другите
+CloseOthers/Hint: Затвори ги сите други записи
+ControlPanel/Caption: контролен панел
+ControlPanel/Hint: Отвори контролен панел
+CopyToClipboard/Caption: копирај до клипборд
+CopyToClipboard/Hint: Копирај го овој текст до клипборд
+Delete/Caption: избриши
+Delete/Hint: Избриши запис
+DeleteTiddlers/Caption: избриши записи
+DeleteTiddlers/Hint: Избриши записи
+Edit/Caption: промени
+Edit/Hint: Промени запис
+EditorHeight/Caption: димензија на уредник
+EditorHeight/Caption/Auto: Автоматски приспособи ја димензијата за да одговара на содржината
+EditorHeight/Caption/Fixed: Фиксирана димензија:
+EditorHeight/Hint: Одбери димензија за уредникот на текст
+Encryption/Caption: шифрирање
+Encryption/ClearPassword/Caption: избриши лозинка
+Encryption/ClearPassword/Hint: Избриши ја лозинката и зачувај ја оваа википедија без шифрирање
+Encryption/Hint: Постави или избриши лозинка за меморирање на оваа википедија
+Encryption/SetPassword/Caption: постави лозинка
+Encryption/SetPassword/Hint: Постави лозинка за меморирање на оваа википедија со шифрирање
+Excise/Caption: проектирај
+Excise/Caption/Excise: Изврши проекција
+Excise/Caption/MacroName: Име на макро:
+Excise/Caption/NewTitle: Наслов на новиот запис:
+Excise/Caption/Replace: Карактеристика на проектираниот текст:
+Excise/Caption/Replace/Link: линк
+Excise/Caption/Replace/Macro: макро
+Excise/Caption/Replace/Transclusion: огледало
+Excise/Caption/Tag: Означи го новиот запис со насловот од овој запис
+Excise/Caption/TiddlerExists: Предупредување: записот веќе постои
+Excise/Hint: Проектирај селектиран текст во нов запис
+ExportPage/Caption: експортирај сè
+ExportPage/Hint: Експортирај ги сите записи
+ExportTiddler/Caption: експортирај
+ExportTiddler/Hint: Експортирај го овој запис
+ExportTiddlers/Caption: експортирај записи
+ExportTiddlers/Hint: Експортирај записи
+Fold/Caption: превиткај запис
+Fold/FoldBar/Caption: превиткана хоризонтала
+Fold/FoldBar/Hint: Дополнителна хоризонтала за превиткување и одвиткување на записи
+Fold/Hint: Превиткај ја содржината на овој запис
+FoldAll/Caption: превиткај ги сите
+FoldAll/Hint: Превиткај ги содржините на сите отворени записи
+FoldOthers/Caption: превиткај ги другите
+FoldOthers/Hint: Превиткај ги содржините на другите отворени записи
+FullScreen/Caption: цел-екран
+FullScreen/Hint: Вклучи или исклучи режим за цел-екран
+Heading1/Caption: наслов 1
+Heading1/Hint: Формат за наслов 1
+Heading2/Caption: наслов 2
+Heading2/Hint: Формат за наслов 2
+Heading3/Caption: наслов 3
+Heading3/Hint: Формат за наслов 3
+Heading4/Caption: наслов 4
+Heading4/Hint: Формат за наслов 4
+Heading5/Caption: наслов 5
+Heading5/Hint: Формат за наслов 5
+Heading6/Caption: наслов 6
+Heading6/Hint: Формат за наслов 6
+Help/Caption: помош
+Help/Hint: Прикажи го помошниот панел
+HideSideBar/Caption: скриј странично мени
+HideSideBar/Hint: Сокри го страничното мени
+Home/Caption: почетна
+Home/Hint: Отвори ги почетните записи
+Import/Caption: импортирај
+Import/Hint: Импортирај различни фајлови (текст, слика, ТидлиВики...)
+Info/Caption: инфо
+Info/Hint: Прикажи повеќе информации за овој запис
+Italic/Caption: закосен
+Italic/Hint: Закосен формат на селекција
+Language/Caption: јазик
+Language/Hint: Одбери јазик за интерфејс
+LayoutSwitcher/Caption: распоред
+LayoutSwitcher/Hint: Отвори го менувачот за распоред
+LineWidth/Caption: дебелина
+LineWidth/Hint: Дебелина на четка
+Link/Caption: линк
+Link/Hint: Креирај линк до друг запис
+Linkify/Caption: вики-линк
+Linkify/Hint: Квадратни загради на селекција
+ListBullet/Caption: листа со точки
+ListBullet/Hint: Листа со точки
+ListNumber/Caption: нумерирана листа
+ListNumber/Hint: Нумерирана листа
+Manager/Caption: менаџер на записи
+Manager/Hint: Отвори го менаџерот на записи
+MonoBlock/Caption: еднопростран блок
+MonoBlock/Hint: Еднопростран блок
+MonoLine/Caption: еднопространи
+MonoLine/Hint: Еднопространи карактери
+More/Caption: повеќе
+More/Hint: Повеќе опции
+NetworkActivity/Caption: мрежна активност
+NetworkActivity/Hint: Исклучи ги сите мрежни активности
+NewHere/Caption: нов запис оттука
+NewHere/Hint: Креирај нов запис означен со овој запис
+NewImage/Caption: нова слика
+NewImage/Hint: Креирај нова слика
+NewJournal/Caption: ново во дневник
+NewJournal/Hint: Креирај нов запис во дневникот
+NewJournalHere/Caption: ново во дневник оттука
+NewJournalHere/Hint: Креирај нов запис во дневникот означен со овој запис
+NewMarkdown/Caption: нов Markdown запис
+NewMarkdown/Hint: Креирај нов Markdown запис
+NewTiddler/Caption: нов запис
+NewTiddler/Hint: Креирај нов запис
+Opacity/Caption: видливост
+Opacity/Hint: Видливост на боја
+OpenWindow/Caption: отвори во нов прозорец
+OpenWindow/Hint: Отвори го записот во нов прозорец
+Paint/Caption: палета на бои
+Paint/Hint: Одбери боја за цртање
+Palette/Caption: палета
+Palette/Hint: Одбери палета со бои
+Permalink/Caption: директен линк
+Permalink/Hint: Копирај ја адресата за директен линк до овој запис
+Permaview/Caption: директен приказ
+Permaview/Hint: Копирај ја адресата за директен приказ до сите отворени записи
+Picture/Caption: слика
+Picture/Hint: Вметни слика
+Preview/Caption: преглед
+Preview/Hint: Прикажи рендер во уредникот
+PreviewType/Caption: видови на приказ
+PreviewType/Hint: Одбери приказ
+Print/Caption: принт
+Print/Hint: Испринтај ги отворените записи
+Quote/Caption: цитат
+Quote/Hint: Цитат
+Refresh/Caption: освежи
+Refresh/Hint: Целосно освежување на отворената википедија
+RotateLeft/Caption: ротирај лево
+RotateLeft/Hint: Ротирај ја сликата за 90 степени
+Save/Caption: во ред
+Save/Hint: Зачувај ги промените
+SaveWiki/Caption: зачувај
+SaveWiki/Hint: Зачувај ги промените
+ShowSideBar/Caption: прикажи странично мени
+ShowSideBar/Hint: Прикажи го страничното мени
+SidebarSearch/Hint: Избери го полето за пребарување во страничното мени
+Size/Caption: димензии на слика
+Size/Caption/Height: Висина:
+Size/Caption/Resize: Постави димензија
+Size/Caption/Width: Должина:
+Size/Hint: Промени димензија на слика
+Stamp/Caption: печат
+Stamp/Caption/New: Додади свој фрагмент
+Stamp/Hint: Вметни конфигуриран фрагмент
+Stamp/New/Text: Запишете го тука текстот на фрагментот. Не заборавајте да додадете име (caption) подолу.
+Stamp/New/Title: Име што ќе биде прикажано во листата на фрагменти
+StoryView/Caption: преглед
+StoryView/Hint: Одбери визуелен преглед
+Strikethrough/Caption: прешкртано
+Strikethrough/Hint: Прешкртан формат на селекција
+Subscript/Caption: долна-зона
+Subscript/Hint: Форматирај текст во долна зона
+Superscript/Caption: горна-зона
+Superscript/Hint: Форматирај текст во горна зона
+TagManager/Caption: менаџер на ознаки
+TagManager/Hint: Отвори го менаџерот на ознаки
+Theme/Caption: тема
+Theme/Hint: Одбери визуелна тема
+Timestamp/Caption: време
+Timestamp/Hint: Калкулирај го времето додека записите претрпуваат промени
+Timestamp/Off/Caption: исклучено време
+Timestamp/Off/Hint: Не го ажурирај времето додека записите претрпуваат промени
+Timestamp/On/Caption: вклучено време
+Timestamp/On/Hint: Ажурирај го времето додека записите претрпуваат промени
+ToggleSidebar/Hint: Вклучи / Исклучи видливост на страничното мени
+Transcludify/Caption: проекција
+Transcludify/Hint: Заокружувачки загради на селекција
+Underline/Caption: подвлечено
+Underline/Hint: Подвлечен формат на селекција
+Unfold/Caption: одвиткај запис
+Unfold/Hint: Одвиткај ја содржината на овој запис
+UnfoldAll/Caption: одвиткај ги сите
+UnfoldAll/Hint: Одвиткај ги содржините на сите затворени записи

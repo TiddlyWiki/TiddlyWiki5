@@ -1,7 +1,5 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/readme
 
-This plugin runs in the browser to synchronise tiddler changes to and from a TiddlyWeb-compatible server (including TiddlyWiki 5 itself, running on Node.js). It is inert when run under Node.js. Disabling this plugin via the browser can not be undone via the browser since this plugin provides the mechanism to synchronize settings with the server.
+\define lingo-base() $:/plugins/tiddlywiki/tiddlyweb/language/
 
-Changes made while offline are saved in memory and automatically synchonised with the server when the connection is re-established. However, if the browser tab is closed or another URL is loaded, the in-memory changes will be lost. The [[https://tiddlywiki.com/#BrowserStorage Plugin]] may be added to provide temporary filesystem storage of tiddler changes made while offline and enable them to be synchronised with the server the next time the wiki is loaded in the same browser.  
-
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/tiddlyweb]]
+<<lingo readme>>
