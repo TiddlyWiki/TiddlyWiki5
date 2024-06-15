@@ -12,7 +12,7 @@ Abrufen eines oder mehrerer Tiddler über HTTP/HTTPS. Importieren der tiddler, d
 
 Wird der `file` oder `raw-file` Parameter verwendet, wird nur eine einzelne Datei geladen. Der erste Parameter ist die URL von der die Datei ''importiert'' werden soll.
 
-Wird der `files` Parameter verwendet, werden mehrere Tiddler geladen. In diesem Fall ist der erste Parameter ein Filter, der eine Liste von URLs ergibt, von denen die Tiddler gelesen werden sollen. Zum Beispiel: Mehrere Tiddler sind getagged mit: `remote-server` und enthalten ein Feld: `url`. ... Der Filter `[tag[remote-server]get[url]]` wird alle verfügbaren URLs ansprechen.
+Wird der `files` Parameter verwendet, werden mehrere Dateien geholt. In diesem Fall ist der erste Parameter ein Filter, der eine Liste von URLs ergibt, von denen die Dateien gelesen werden sollen. Zum Beispiel: Mehrere Tiddler sind getaggt mit: `remote-server` und enthalten ein Feld: `url`. ... Der Filter `[tag[remote-server]get[url]]` wird alle verfügbaren URLs ansprechen.
 
 Werden die `raw-file` oder `raw-files` Varianten verwendet, wird der Klartext der Datei importiert. Es wird nicht versucht die Import-Logik anzuwenden.
 
