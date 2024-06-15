@@ -11,7 +11,7 @@
 	],
 	"build": {
 		"test-server": [
-			"--output", "./files/local/library/tmp",
+			"--output", "./editions/pluginlibrary/files/local/library/tmp",
 			"--build", "library",
 			"--listen", "port=8888"
 		],
