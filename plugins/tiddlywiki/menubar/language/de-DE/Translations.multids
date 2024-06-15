@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/menubar/language/de-DE/
+
+Config/Heading1: Konfiguration
+Config/MenuItems/Heading: Top Menü Elemente
+Config/MenuItems/Description: Wähle alle Elemente, die angezeigt werden sollen. Drag and Drop kann zum sortieren verwendet werden.
+Config/BreakpointPosition/Heading: Breakpoint Position
+Config/BreakpointPosition/Description: Diese Einstellung schaltet zwischen breiten bzw. schmalen Displays um. CSS Einheiten werden benötigt - zB: `400px`.
+Config/ContentsTag/Heading: Inhaltsverzeichnis Tag
+Config/ContentsTag/Description: Tag, der für das Inhaltsverzeichnis verwendet wird.
+Config/MenuBarColours/Heading: Menü Farben
+Config/MenuBarColours/Description: Farben können mit `menubar-foreground` und `menubar-background` in der aktuellen Palette: {{$:/palette}} definiert werden.
+Items/TOC/Name: Inhalt
+Items/TOC/Description: Inhaltsverzeichnis
+Items/Hamburger/Name: Menü Icon
+Items/Hamburger/Description: Bei einem schmalen Bildschirm wird ein Menü-Icon angezeigt.
+Items/PageControls/Name: Page controls
+Items/PageControls/Description: Page controls from the sidebar.
+Items/Search/Name: Suche
+Items/Server/Name: Server
+Items/Server/Description: Server Optionen.
+Items/Sidebar/Name: Sidebar
+Items/TopLeftBar/Name: Legacy Top Left Bar
+Items/TopLeftBar/Description: Elemente von $:/tags/TopLeftBar
+Items/TopRightBar/Name: Legacy Top Right Bar
+Items/TopRightBar/Description: Elemente von $:/tags/TopRightBar
