@@ -19,7 +19,7 @@ $:/language/
 			<$let language-code={{{  [[$:/language]get[text]get[name]else[en-GB]] }}}>
         <$transclude $tiddler={{{ [<active-lingo-base>addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>>
 					<!-- Fallback to its first dependent, like "de-AT" will fallback to "de-DE" in some cases -->
-					<$let language-code={{{ [[$:/languages/]addsuffix<language-code>get[dependents]removeprefix[$:/languages/]first[]] }}}>
+					<$let language-code={{{ [[$:/languages/]addsuffix<language-code>get[dependents]removeprefix[$:/languages/]] }}}>
 						<$transclude $tiddler={{{ [<active-lingo-base>addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>>
 							<!-- When current language and its dependent don't have translation, fallback to English -->
 							<$transclude $tiddler={{{ [<active-lingo-base>addsuffix[en-GB]addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>/>
