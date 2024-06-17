@@ -564,18 +564,23 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 						var value;
 						// if it is Transclusion with Templates like `{{Index||$:/core/ui/TagTemplate}}`, the `$tiddler` will point to the template. We need to find the actual target tiddler from parent node
 						if(parentNode && parentNode.type === "tiddler" && parentNode.attributes.tiddler && parentNode.attributes.tiddler.type === "string") {
-							value = parentNode.attributes.tiddler.value;
+							// Empty value (like `{{!!field}}`) means self-referential transclusion. 
+							value = parentNode.attributes.tiddler.value || title;
 						} else {
 							value = parseTreeNode.attributes.$tiddler.value;
 						}
 					} else if(parseTreeNode.attributes.tiddler && parseTreeNode.attributes.tiddler.type === "string") {
+						// Old transclude widget usage
 						value = parseTreeNode.attributes.tiddler.value;
-					}
-					if (!value) {
+					} else if(parseTreeNode.attributes.$field && parseTreeNode.attributes.$field.type === "string") {
+						// Empty value (like `<$transclude $field='created'/>`) means self-referential transclusion. 
+						value = title;
+					} else if(parseTreeNode.attributes.field && parseTreeNode.attributes.field.type === "string") {
+						// Old usage with Empty value (like `<$transclude field='created'/>`)
 						value = title;
 					}
-					// Empty value (like `{{!!field}}`) means self-referential transclusion. Also deduplicate the result.
-					if(transcludes.indexOf(value) === -1) {
+					// Deduplicate the result.
+					if(value && transcludes.indexOf(value) === -1) {
 						transcludes.push(value);
 					}
 				}

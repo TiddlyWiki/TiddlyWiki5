@@ -22,6 +22,9 @@ describe('Backtranscludes and transclude filter tests', function() {
 		it('should have no backtranscludes', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('');
 		});
+		it('should have no transcludes', function() {
+			expect(wiki.filterTiddlers('TestIncoming +[transcludes[]]').join(',')).toBe('');
+		});
 	});
 
 	describe('A tiddler added to the wiki with a transclude to it', function() {
@@ -37,6 +40,9 @@ describe('Backtranscludes and transclude filter tests', function() {
 
 		it('should have a backtransclude', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+		});
+		it('should have a transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming');
 		});
 	});
 
