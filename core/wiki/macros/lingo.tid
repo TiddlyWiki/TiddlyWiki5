@@ -15,8 +15,12 @@ $:/language/
 		<!-- First try the old school <active-lingo-base><title> format -->
 		<$transclude $tiddler={{{ [<active-lingo-base>addsuffix<title>] }}} $mode=<<parseMode>>>
 			<!-- If that didn't work, try the new <lingo-base><langcode>/<title> format -->
+			<!-- Get active language, if not language is selected, fallback to English -->
 			<$let language-code={{{  [[$:/language]get[text]get[name]else[en-GB]] }}}>
-        <$transclude $tiddler={{{ [<active-lingo-base>addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>/>
+        <$transclude $tiddler={{{ [<active-lingo-base>addsuffix<language-code>addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>>
+					<!-- When current language don't have translation, fallback to English -->
+					<$transclude $tiddler={{{ [<active-lingo-base>addsuffix[en-GB]addsuffix[/]addsuffix<title>] }}} $mode=<<parseMode>>/>
+				</$transclude>
 			</$let>
 		</$transclude>
 	</$let>
