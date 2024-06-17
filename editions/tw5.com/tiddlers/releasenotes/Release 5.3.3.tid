@@ -1,11 +1,11 @@
 caption: 5.3.3
 created: 20231223102201587
+description: Bugfix release for v5.3.2
 modified: 20231223102201587
 released: 20231223102201587
 tags: ReleaseNotes
 title: Release 5.3.3
 type: text/vnd.tiddlywiki
-description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.2...v5.3.3]]//
 
