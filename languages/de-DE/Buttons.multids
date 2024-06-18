@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: Verschlüsselung deaktivieren
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
 Encryption/SetPassword/Caption: Verschlüsselung
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
+EmergencyDownload/Caption: Speichern aller Tiddler als JSON File
 ExportPage/Caption: Alle exportieren
 ExportPage/Hint: Alle Tiddler exportieren
 ExportTiddler/Caption: Exportieren
