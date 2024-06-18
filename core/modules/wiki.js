@@ -581,11 +581,11 @@ exports.extractTranscludes = function(parseTreeRoot, title) {
 					}
 					// Deduplicate the result.
 					if(value && transcludes.indexOf(value) === -1) {
-						transcludes.push(value);
+						$tw.utils.pushTop(transcludes,value);
 					}
 				}
 				if(parseTreeNode.children) {
-					checkParseTree(parseTreeNode.children, parseTreeNode);
+					checkParseTree(parseTreeNode.children,parseTreeNode);
 				}
 			}
 		};
@@ -605,7 +605,7 @@ exports.getTiddlerTranscludes = function(title) {
 		var parser = self.parseTiddler(title);
 		if(parser) {
 			// this will ignore self-referential transclusions from `title`
-			return self.extractTranscludes(parser.tree, title);
+			return self.extractTranscludes(parser.tree,title);
 		}
 		return [];
 	});
