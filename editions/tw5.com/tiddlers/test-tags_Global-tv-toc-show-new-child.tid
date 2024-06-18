@@ -1,0 +1,8 @@
+code-body: yes
+created: 20240618150559884
+modified: 20240618150722129
+tags: $:/tags/Global
+title: test-tags/Global-tv-toc-show-new-child
+type: text/vnd.tiddlywiki
+
+\define tv-toc-show-new-child() yes

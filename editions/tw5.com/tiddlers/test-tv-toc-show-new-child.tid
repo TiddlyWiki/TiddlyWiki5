@@ -1,0 +1,17 @@
+created: 20240618145407617
+modified: 20240618150119710
+tags: 
+title: test-tv-toc-show-new-child
+type: text/vnd.tiddlywiki
+
+\define tv-toc-show-new-child() yes
+
+```
+\define tv-toc-show-new-child() yes
+```
+
+''toc-selective expandable''
+
+<div class="tc-table-of-contents">
+<<toc-selective-expandable tag:"root" parentField:"parent" exclude:"p1.1">>
+</div>
