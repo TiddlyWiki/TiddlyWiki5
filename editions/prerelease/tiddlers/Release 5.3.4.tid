@@ -52,12 +52,11 @@ The easiest way to use the <<.wlink TestCaseWidget>> is by creating TestCaseTidd
 
 ! Translation improvements
 
-<<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7821">> the [[lingo Macro]] so that plugins can be translated in a similar way to the core. The menubar and tiddlyweb plugins have been updated to use the new mechanism, and we welcome pull requests to convert more of the core plugins to the new mechanism.
-
 This release also includes improvements to the following translations:
 
 * Chinese
 * French
+* German
 * Macedonian
 * Polish
 
@@ -118,6 +117,8 @@ This release also includes improvements to the following translations:
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8141">> usage of "Cache-Control" header
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7878">> SaveCommand not overwriting files when required
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8237">> server header authentication when header is missing
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8253">> ButtonWidget should refresh when "tooltip" attribute changes
 
 ! Performance Improvements
 
