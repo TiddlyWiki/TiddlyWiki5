@@ -4,6 +4,4 @@ url: https://tiddlywiki.com/library/v5.1.23/index.html
 caption: {{$:/language/OfficialPluginLibrary}}
 enabled: no
 
-\define lingo-base() $:/plugins/tiddlywiki/tiddlyweb/language/
-
-<<lingo ConfigOfficialPluginLibrary>>
+The official plugin library is disabled when using the client-server configuration. Instead, plugins should be installed via the `tiddlywiki.info` file, as described [[here|https://tiddlywiki.com/#Installing%20a%20plugin%20from%20the%20plugin%20library]].
