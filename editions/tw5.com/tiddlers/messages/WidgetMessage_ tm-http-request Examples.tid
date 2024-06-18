@@ -1,0 +1,117 @@
+created: 20240609152203076
+modified: 20240614210714914
+tags: 
+title: WidgetMessage: tm-http-request Examples
+type: text/vnd.tiddlywiki
+
+<$let store-fetched-output="""\procedure store-fetched-output()
+<$action-setfield $tiddler=Output status=<<status>> error=<<error>> data=<<data>> headers=<<headers>>/>
+\end
+""">
+<$testcase>
+<$data title=Description text="Simple tm-http-request GET"/>
+<$data title=Narrative text="""Use the oncompletion attribute to store the results of a method="GET" request"""/>
+<$data title=Output text=`$(store-fetched-output)$
+\procedure http-get()
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://httpbin.org/get"
+		method="GET"
+		oncompletion=<<store-fetched-output>>
+	/>
+\end
+
+<$button actions=<<http-get>>>send HTTP GET</$button>`/>
+</$testcase>
+
+<$testcase>
+<$data title=Description text="Simple tm-http-request POST"/>
+<$data title=Narrative text="""Use the oncompletion attribute to store the results of a method="POST" request. Use the body attribute to send data"""/>
+<$data title=Output text=`$(store-fetched-output)$
+\procedure http-post()
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://httpbin.org/post"
+		method="POST"
+		body='{"foo": "bar"}'
+		oncompletion=<<store-fetched-output>>
+	/>
+\end
+
+<$button actions=<<http-post>>>send HTTP POST</$button>`/>
+</$testcase>
+
+<$testcase>
+<$data title=Description text="tm-http-request with delayed response"/>
+<$data title=Narrative text="""Use the bind-status and bind-progress attributes to watch the intermediate state of a slow response"""/>
+<$data title=Output text=`$(store-fetched-output)$
+\procedure http-get()
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://httpbin.org/delay/2"
+		bind-status=status
+		bind-progress=progress
+		method="GET"
+		oncompletion=<<store-fetched-output>>
+	/>
+\end
+
+<$button actions=<<http-get>>>send HTTP GET</$button>
+
+|!status |{{status}}|
+|!progress %|{{progress}}|`/>
+</$testcase>
+
+<$testcase>
+<$data title=Description text="tm-http-request with dripped response"/>
+<$data title=Narrative text="""Use the bind-status and bind-progress attributes to watch progress of data which arrives a little at a time"""/>
+<$data title=Output text=`$(store-fetched-output)$
+\procedure http-get()
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://httpbin.org/drip?duration=2&numbytes=10&code=200&delay=2"
+		bind-status=status
+		bind-progress=progress
+		method="GET"
+		oncompletion=<<store-fetched-output>>
+	/>
+\end
+
+<$button actions=<<http-get>>>send HTTP GET</$button>
+
+|!status |{{status}}|
+|!progress %|{{progress}}|`/>
+</$testcase>
+
+<$testcase>
+<$data title=Description text="tm-http-request 504 Bad Gateway error response"/>
+<$data title=Narrative text="""Send a request to a url which simulates a 504 HTTP response in order to illustrate what an error response looks like"""/>
+<$data title=Output text=`$(store-fetched-output)$
+\procedure http-get()
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://httpbin.org/status/504"
+		method="GET"
+		oncompletion=<<store-fetched-output>>
+	/>
+\end
+
+<$button actions=<<http-get>>>send HTTP GET</$button>`/>
+</$testcase>
+
+<$testcase>
+<$data title=Description text="tm-http-request 405 Method Not Allowed error response"/>
+<$data title=Narrative text="""Another error response example. This one sends a GET to a URL which only allows POST"""/>
+<$data title=Output text=`$(store-fetched-output)$
+\procedure http-get()
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://httpbin.org/post"
+		method="GET"
+		oncompletion=<<store-fetched-output>>
+	/>
+\end
+
+<$button actions=<<http-get>>>send HTTP GET</$button>`/>
+</$testcase>
+</$let>
