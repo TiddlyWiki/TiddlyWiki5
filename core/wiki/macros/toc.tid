@@ -35,12 +35,40 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 	>
 		<$transclude $field=<<field>>/>
 	</span>
+	<<toc-newChildButton>>
+	<!-- <sup class="tc-small-gap-left"><<_mode>></sup> -->
 </$let>
+\end
+
+\procedure toc-newChildButton()
+	\procedure _newChild(field:"parent")
+	<$button actions=<<__actions>> tooltip=`New Child -> "$(field)$: $(currentTiddler)$"`
+		aria-label="new child here" class="tc-btn-invisible"
+	>
+		<$action-sendmessage $message="tm-new-tiddler" $name=<<field>> $value=<<currentTiddler>>/>
+		<% if [<_mode>match[tagLikeMode]] %>
+			{{$:/core/images/new-here-button}}
+		<% else %>
+			{{$:/wikilabs/images/new-child-alone}}
+		<% endif %>
+	</$button>
+	\end _newChild
+
+	<% if [<tv-toc-show-new-child>match[yes]] %>
+		<% if [<_mode>match[tagMode]] %>
+			<span class="tc-small-gap-left">{{||$:/core/ui/Buttons/new-here}}</span>
+		<% elseif [<_mode>match[tocpMode]] %>
+			<span class="tc-small-gap-left"><$macrocall $name="_newChild" field=<<parentField>>/></span>
+		<% elseif [<_mode>match[tagLikeMode]] %>
+			<span class="tc-small-gap-left"><$macrocall $name="_newChild" field=<<tagField>>/></span>
+		<% endif %>
+	<% endif %>
 \end
 
 <!--
 Check if a user defined item template should be used.
-It can be a macro parameter: itemTemplate or a tiddler field: toc-itemTemplate.
+It can be a macro parameter: itemTemplate or a tiddler field: toc-itemTemplate. Tiddler field takes precedence
+If the macro parameter is empty - Use the toc-defaultItemTemplate
 -->
 \function tf.toc-getItemTemplateTitle() [<currentTiddler>get[toc-itemTemplate]] :filter[has[text]] :else[<itemTemplate>has[text]then<itemTemplate>]
 
@@ -87,6 +115,9 @@ It can be a macro parameter: itemTemplate or a tiddler field: toc-itemTemplate.
 <!-- Activate the filterString depending on tagField, parentField or default. tagField takes precedence -->
 \function tf.toc-filterString() [<tagField>!is[blank]then<toc-filterTagLike>] :else[<parentField>!is[blank]then<toc-filterParent>else<toc-filterDefault>]
 
+<!-- The main filter string defines the current _mode variable. tagLikeMode, tocpMode or tagMode -->
+\function tf.toc-mode() [<tf.toc-filterString>match<toc-filterTagLike>then[tagLikeMode]] :else[<tf.toc-filterString>match<toc-filterParent>then[tocpMode]else[tagMode]]
+
 <!-- Define unique path based state title -->
 \function tf.toc-newPath() [<path>addsuffix[/]addsuffix<tag>]
 
@@ -109,7 +140,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 					:else[subfilter<tf.toc-filterString>$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
-			<$let _path=<<tf.toc-newPath>> >
+			<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
 				<!-- adding tf.toc-hide, excludes blocked elements from all visible sub-nodes -->
 				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
 					<li class=<<tf.toc-itemClass>>>
@@ -266,7 +297,7 @@ Shows an expandable toc. Item always have an open/close chevron
 					:else[subfilter<tf.toc-filterString>$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
-			<$let _path=<<tf.toc-newPath>>>
+			<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
 				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
 					<% if [all[current]toc-link[no]] %>
 						<$macrocall $name="toc-unlinked-expandable-body"
@@ -367,7 +398,7 @@ If an item has no children, there is no open/close chevron
 					:else[subfilter<tf.toc-filterString>$(sort)$]
 					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
 		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
-			<$let _path=<<tf.toc-newPath>>>
+			<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
 				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
 					<% if [all[current]toc-link[no]] %>
 						<$macrocall $name="toc-unlinked-selective-expandable-body"
