@@ -54,7 +54,7 @@ GeomapWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(this.domNode,nextSibling);
 	this.domNodes.push(this.domNode);
 	// Render the map
-	if($tw.browser) {
+	if($tw.browser && !this.domNode.isTiddlyWikiFakeDom) {
 		this.renderMap();
 		this.refreshMap();
 	}
