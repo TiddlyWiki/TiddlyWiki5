@@ -490,6 +490,66 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 };
 
 /*
+Return an array of tiddler titles that are directly linked within the given parse tree
+ */
+exports.extractLinks = function(parseTreeRoot) {
+	// Count up the links
+	var links = [],
+		checkParseTree = function(parseTree) {
+			for(var t=0; t<parseTree.length; t++) {
+				var parseTreeNode = parseTree[t];
+				if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+					var value = parseTreeNode.attributes.to.value;
+					if(links.indexOf(value) === -1) {
+						links.push(value);
+					}
+				}
+				if(parseTreeNode.children) {
+					checkParseTree(parseTreeNode.children);
+				}
+			}
+		};
+	checkParseTree(parseTreeRoot);
+	return links;
+};
+
+/*
+Return an array of tiddler titles that are directly linked from the specified tiddler
+*/
+exports.getTiddlerLinks = function(title) {
+	var self = this;
+	// We'll cache the links so they only get computed if the tiddler changes
+	return this.getCacheForTiddler(title,"links",function() {
+		// Parse the tiddler
+		var parser = self.parseTiddler(title);
+		if(parser) {
+			return self.extractLinks(parser.tree);
+		}
+		return [];
+	});
+};
+
+/*
+Return an array of tiddler titles that link to the specified tiddler
+*/
+exports.getTiddlerBacklinks = function(targetTitle) {
+	var self = this,
+		backIndexer = this.getIndexer("BackIndexer"),
+		backlinks = backIndexer && backIndexer.subIndexers.link.lookup(targetTitle);
+
+	if(!backlinks) {
+		backlinks = [];
+		this.forEachTiddler(function(title,tiddler) {
+			var links = self.getTiddlerLinks(title);
+			if(links.indexOf(targetTitle) !== -1) {
+				backlinks.push(title);
+			}
+		});
+	}
+	return backlinks;
+};
+
+/*
 Return a hashmap of tiddler titles that are referenced but not defined. Each value is the number of times the missing tiddler is referenced
 */
 exports.getMissingTitles = function() {
