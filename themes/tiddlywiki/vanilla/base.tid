@@ -2601,22 +2601,22 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-stable {
-	border: 1px solid green;
+	border: 1px solid <<colour stability-stable>>;
 	color: green;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-experimental {
-	border: 1px solid #c07c00;
+	border: 1px solid <<colour stability-experimental>>;
 	color: #c07c00;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-deprecated {
-	border: 1px solid red;
+	border: 1px solid <<colour stability-deprecated>>;
 	color: red;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-legacy {
-	border: 1px solid blue;
+	border: 1px solid <<colour stability-legacy>>;
 	color: blue;
 }
 
