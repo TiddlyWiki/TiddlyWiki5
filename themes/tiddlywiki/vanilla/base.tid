@@ -2602,22 +2602,22 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-stable {
 	border: 1px solid <<colour stability-stable>>;
-	color: green;
+	color: <<colour stability-stable>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-experimental {
 	border: 1px solid <<colour stability-experimental>>;
-	color: #c07c00;
+	color: <<colour stability-experimental>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-deprecated {
 	border: 1px solid <<colour stability-deprecated>>;
-	color: red;
+	color: <<colour stability-deprecated>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-legacy {
 	border: 1px solid <<colour stability-legacy>>;
-	color: blue;
+	color: <<colour stability-legacy>>;
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-buttons {
