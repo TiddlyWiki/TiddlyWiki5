@@ -1,8 +1,11 @@
 title: $:/language/EditTemplate/
 
+Caption: Editor
 Body/External/Hint: Este es un tiddler externo, es decir, guardado fuera del archivo TiddlyWiki principal <br> Puedes editar sus etiquetas y campos, pero no se puede editar directamente el contenido
 Body/Placeholder: Escribe el texto aquí
 Body/Preview/Type/Output: Visible
+Body/Preview/Type/DiffShadow: diferencias con la copia (si las hay)
+Body/Preview/Type/DiffCurrent: diferencias con el actual
 Field/Remove/Caption: Eliminar campo
 Field/Remove/Hint: Elimina el campo y su valor
 Field/Dropdown/Caption: lista de campos

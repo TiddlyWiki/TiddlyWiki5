@@ -1,5 +1,5 @@
 title: $:/language/Help/server
-description: Tworzy serwer HTTP wystawiający TiddlyWiki (zalecamy użycie komendy "--listen" zamiast tej)
+description: (nieaktualne: patrz komenda 'listen') Tworzy serwer HTTP wystawiający TiddlyWiki (zalecamy użycie komendy "--listen" zamiast tej)
 
 Dawna komenda do stawiania serwera wystawiającego wiki.
 

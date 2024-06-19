@@ -1,0 +1,67 @@
+created: 20150220181617000
+modified: 20230419103154328
+tags: WikiText Macros
+title: Macro Definitions
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+This tiddler describes the different ways in which [[macros|Macros]] can be defined.
+
+!! Macro Definition Pragma
+
+Macros are created using the [[Pragma: \define]] at the start of a tiddler. The definitions are available in the rest of the tiddler that defines them, plus any tiddlers that it transcludes.
+
+```
+\define mymacro(param)
+This is the macro text (param=$param$)
+\end
+```
+
+!! Nested Macro Definitions
+
+Macro definitions can be nested to any number of required levels by specifying the name of the macro in the `\end` marker. Nested macro definitions must appear at the start of the definition that contains them. For example:
+
+<<wikitext-example-without-html src:"""\define special-button(caption:"Click me")
+\define actions()
+<$action-sendmessage $message="tm-notify" $param="HelloThere"/>
+\end actions
+<$button actions=<<actions>>>
+$caption$
+</$button>
+\end special-button
+
+<<special-button>>
+""">>
+
+Note that the textual substitution of macro parameters that occurs when the outer macro is rendered will apply to the nested definitions as well. That generally means that textual substitution of macro parameters should not be used within nested macros.
+
+Parameters of nested macros can also be accessed via the `<<__variablename__>>` syntax. As ordinary variables, these parameters are available within nested child macros (and grandchildren etc).
+
+!! Macro Definition with Set Widget
+
+Macros are implemented as a special type of [[variable|Variables]] and so internally are actually defined with a <<.wlink SetWidget>> widget.
+
+```
+<$set name="mymacro" value="This is the macro text">
+...
+</$set>
+```
+
+<<.note """that it is not currently possible to specify parameters when defining a macro with the  <<.wlink SetWidget>> widget.""">>
+
+!! Importing Macro Definitions
+
+The [[Pragma: \import]] or <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions from another tiddler.
+
+!! `$:/tags/Macro` Tag
+
+Global macros can be defined using the [[SystemTag: $:/tags/Macro]].
+
+The tag [[SystemTag: $:/tags/Macro/View]] is used to define macros that should only be available within the main view template and the preview panel.
+
+The tag [[SystemTag: $:/tags/Macro/View/Body]] is used to define macros that should only be available within the main view template body and the preview panel.
+
+!! JavaScript Macros
+
+Macros can also be <<.js-macro-link "written as JavaScript modules">>.

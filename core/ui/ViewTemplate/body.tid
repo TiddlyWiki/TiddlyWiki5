@@ -1,7 +1,7 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
-\import [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!has[draft.of]]
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View/Body]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View/Body]!is[draft]]
 
 <$reveal tag="div" class="tc-tiddler-body" type="nomatch" stateTitle=<<folded-state>> text="hide" retain="yes" animate="yes">
 

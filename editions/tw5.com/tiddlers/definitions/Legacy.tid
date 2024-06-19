@@ -1,0 +1,9 @@
+created: 20230319131443509
+modified: 20230319132235520
+tags: Definitions
+title: Legacy
+type: text/vnd.tiddlywiki
+
+>Legacy code is old computer source code that is no longer supported on the standard hardware and environments, and is a codebase that is in some respect obsolete or supporting something obsolete. Legacy code may be written in programming languages, use frameworks and external libraries, or use architecture and patterns that are no longer considered modern, increasing the mental burden and ramp-up time for software engineers who work on the codebase.
+>
+>https://en.wikipedia.org/wiki/Legacy_system

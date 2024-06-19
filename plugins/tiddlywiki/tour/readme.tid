@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/tour/readme
+
+The Tour Plugin for TiddlyWiki provides a framework for making interactive guided tours. An "Introduction to ~TiddlyWiki" tour is included in the plugin but it is also possible to load additional tours and switch between them.

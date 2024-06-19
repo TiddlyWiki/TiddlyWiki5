@@ -1,0 +1,45 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/geonearestpoint2
+description: geonearestpoint operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Description
+
+geonearestpoint operator
++
+title: Output
+
+\whitespace trim
+<$let
+	oxford={{{ [geopoint[51.751944],[-1.257778]jsonset[id],[Oxford]] }}}
+	winchester={{{ [geopoint[51.0632],[-1.308]jsonset[id],[Winchester]] }}}
+	new-york={{{ [geopoint[40.730610],[-73.935242]jsonset[id],[New York]] }}}
+	places="""{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"id": "Oxford",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [51.751944, -1.257778]
+			}
+		},{
+			"type": "Feature",
+			"id": "Winchester",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [51.0632, -1.308]
+			}
+		}
+	]
+}
+"""
+>
+<$text text={{{ [<places>geonearestpoint<new-york>jsonget[id]] }}}/>
+</$let>
+
++
+title: ExpectedResult
+
+<p>Winchester</p>

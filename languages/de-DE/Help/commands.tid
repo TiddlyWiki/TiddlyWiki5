@@ -1,0 +1,14 @@
+title: $:/language/Help/commands
+description: Ausführen von Befehlen aus einem Filter
+
+Sequentielle Abarbeitung von Befehlen aus einem Filter.
+
+```
+--commands <filter>
+```
+
+Beispiele
+
+`--commands "[enlist:raw{$:/build-commands-as-text}]"`
+
+`--commands "[{$:/build-commands-as-json}jsonindexes[]] :map[{$:/build-commands-as-json}jsonget<currentTiddler>]"`

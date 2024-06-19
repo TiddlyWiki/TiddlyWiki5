@@ -15,7 +15,7 @@ Structure for modelling mapping between a string and its representation in the D
 var PREFIX_SUFFIX_LENGTH = 50;
 
 /*
-Build a map of the text content of a dom node and its descendents:
+Build a map of the text content of a DOM node and its descendants:
 
 string: concatenation of the text content of child nodes
 metadata: array of {start,end,domNode} where start and end identify position in the string
@@ -60,7 +60,7 @@ exports.TextMap.prototype.locateMetadata = function(position) {
 };
 
 /*
-Search for the first occurance of a target string within the textmap of a dom node
+Search for the first occurrence of a target string within the textmap of a DOM node
 
 Returns an object with the following properties:
 	startNode: node containing the start of the text
@@ -92,10 +92,10 @@ exports.TextMap.prototype.findText = function(targetString,targetPrefix,targetSu
 };
 
 /*
-Search for all occurances of a string within the textmap of a dom node
+Search for all occurrences of a string within the textmap of a DOM node
 
 Options include:
-	mode: "normal", "regexp" or "whitespace"
+	mode: "normal", "literal", "regexp", "whitespace", "some" or "words"
 	caseSensitive: true if the search should be case sensitive
 
 Returns an array of objects with the following properties:
@@ -121,6 +121,11 @@ exports.TextMap.prototype.search = function(searchString,options) {
 		regExpString = "(" + searchString.split(/\s+/g).filter(function(word) {
 			return !!word
 		}).map($tw.utils.escapeRegExp).join("\\s+") + ")";
+	} else if(options.mode === "words" || options.mode === "some") {
+		// Match any word separated by whitespace
+		regExpString = "(" + searchString.split(/\s+/g).filter(function(word) {
+			return !!word
+		}).map($tw.utils.escapeRegExp).join("|") + ")";
 	} else {
 		// Normal search
 		regExpString = "(" + $tw.utils.escapeRegExp(searchString) + ")";

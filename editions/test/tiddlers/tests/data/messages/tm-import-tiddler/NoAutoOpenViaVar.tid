@@ -1,0 +1,36 @@
+title: Message/tm-import-tiddlers/NoAutoOpenViaVar
+description: tm-import-tiddlers can import and open based on tv-auto-open-on-import
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+text: <$text text={{$:/Import}}/>
+plugin-type: <$text text={{$:/Import!!plugin-type}}/>
+~$:/StoryList: <$text text={{$:/StoryList!!list}}/>
++
+title: Actions
+
+<$let tv-auto-open-on-import="no">
+<$navigator story="$:/StoryList">
+<$action-sendmessage
+  $message="tm-import-tiddlers"
+  $param='[{"title": "Elephants"}, {"title": "Eagles"}]'/>
+</$navigator>
+</$let>
+
++
+title: ExpectedResult
+
+<p>text: {
+    "tiddlers": {
+        "Elephants": {
+            "title": "Elephants"
+        },
+        "Eagles": {
+            "title": "Eagles"
+        }
+    }
+}
+plugin-type: import
+$:/StoryList: </p>

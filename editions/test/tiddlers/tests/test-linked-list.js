@@ -59,10 +59,35 @@ describe("LinkedList class tests", function() {
 		return pair;
 	};
 
+	// This returns an array in reverse using a LinkList's prev member. Thus
+	// testing that prev is not corrupt. It doesn't exist in the LinkList module
+	// itself to avoid full support for it. Maybe that will change later.
+	function toReverseArray(list) {
+		var visits = Object.create(null),
+			value = list.prev.get(null),
+			array = [];
+		while(value !== null) {
+			array.push(value);
+			var prev = list.prev.get(value);
+			if(Array.isArray(prev)) {
+				var i = (visits[value] || prev.length) - 1;
+				visits[value] = i;
+				value = prev[i];
+			} else {
+				value = prev;
+			}
+		}
+		return array;
+	};
+
 	// compares an array and a linked list to make sure they match up
 	function compare(pair) {
-		expect(pair.list.toArray()).toEqual(pair.array);
+		var forward = pair.list.toArray();
+		expect(forward).toEqual(pair.array);
 		expect(pair.list.length).toBe(pair.array.length);
+		// Now we reverse the linked list and test it back to front, thus
+		// confirming that the list.prev isn't corrupt.
+		expect(toReverseArray(pair.list)).toEqual(forward.reverse());
 		return pair;
 	};
 
@@ -115,7 +140,7 @@ describe("LinkedList class tests", function() {
 		// for list.last to be anything other than a string, but I
 		// can't figure out how to make that corruption manifest a problem.
 		// So I dig into its private members. Bleh...
-		expect(typeof pair.list.last).toBe("string");
+		expect(typeof pair.list.prev.get(null)).toBe("string");
 	});
 
 	it("can pushTop value linked to by a repeat item", function() {
@@ -135,6 +160,21 @@ describe("LinkedList class tests", function() {
 		compare(pushTop(newPair(["A", "A", "X", "C"]), "X")); // AACX
 		compare(pushTop(newPair(["X", "A", "A"]), "X")); // AAX
 		compare(pushTop(newPair(["C", "X", "A", "A"]), "X")); // CAAX
+	});
+
+	it("can remove all instances of a multi-instance value #7059", function() {
+		// Remove duplicate items when one or more items between the duplicates
+		// are not removed and the first of those duplicates is not the first item.
+		// These tests used to fail prior to the fix to #7059
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["A", "C", "A", "A"])); // B
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["C", "A", "A", "A"])); // B
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["A", "A", "A"])); // CB
+		compare(remove(newPair(["A", "A", "C", "B", "A"]), ["A", "A", "A", "C"])); // B
+		compare(remove(newPair(["A", "A", "B", "A"]), ["A", "A", "A"])); // B
+		compare(remove(newPair(["A", "A", "B", "A"]), ["A", "A", "A", "B"])); //
+		compare(remove(newPair(["C", "A", "B", "A"]), ["C", "A", "A"])); // B
+		compare(remove(newPair(["C", "A", "B", "A", "C"]), ["C", "A", "A", "C"])); // B
+		compare(remove(newPair(["B", "A", "B", "A"]), ["B", "A", "A"])); // B
 	});
 
 	it("can handle particularly nasty pushTop pitfall", function() {

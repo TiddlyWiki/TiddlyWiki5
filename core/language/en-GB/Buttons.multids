@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: clear password
 Encryption/ClearPassword/Hint: Clear the password and save this wiki without encryption
 Encryption/SetPassword/Caption: set password
 Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
+EmergencyDownload/Caption: download tiddlers as json
 ExportPage/Caption: export all
 ExportPage/Hint: Export all tiddlers
 ExportTiddler/Caption: export tiddler
@@ -59,12 +60,16 @@ Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
+LayoutSwitcher/Hint: Open layout switcher
+LayoutSwitcher/Caption: layout
 Manager/Caption: tiddler manager
 Manager/Hint: Open tiddler manager
 More/Caption: more
 More/Hint: More actions
 NewHere/Caption: new here
 NewHere/Hint: Create a new tiddler tagged with this one
+NetworkActivity/Caption: network activity
+NetworkActivity/Hint: Cancel all network activity
 NewJournal/Caption: new journal
 NewJournal/Hint: Create a new journal tiddler
 NewJournalHere/Caption: new journal here

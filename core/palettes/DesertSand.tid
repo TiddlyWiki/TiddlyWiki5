@@ -40,6 +40,8 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: #313163
 external-link-foreground: #555592
 foreground: #2D2A23
+highlight-background: #ffff00
+highlight-foreground: #000000
 menubar-background: #CDC2A6
 menubar-foreground: #5A5446
 message-background: #ECE5CF

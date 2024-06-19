@@ -5,6 +5,7 @@ released: 20180512104329616
 tags: ReleaseNotes
 title: Release 5.1.17
 type: text/vnd.tiddlywiki
+description: Minor bug fix release
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.16...v5.1.17]]//
 

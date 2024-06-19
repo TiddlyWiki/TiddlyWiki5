@@ -26,6 +26,8 @@ Display a modal dialogue
 	options: see below
 Options include:
 	downloadLink: Text of a big download link to include
+	event: widget event
+	variables: from event.paramObject
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
@@ -209,6 +211,10 @@ Modal.prototype.display = function(title,options) {
 	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	// Whether to close the modal dialog when the mask (area outside the modal) is clicked
+	if(tiddler.fields && (tiddler.fields["mask-closable"] === "yes" || tiddler.fields["mask-closable"] === "true")) {
+		modalBackdrop.addEventListener("click",closeHandler,false);
+	}
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}

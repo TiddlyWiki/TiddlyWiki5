@@ -1,5 +1,5 @@
 created: 20181002131215403
-modified: 2020031109590546
+modified: 20220909094340097
 tags: [[WebServer API]]
 title: WebServer API: Get All Tiddlers
 type: text/vnd.tiddlywiki
@@ -16,6 +16,8 @@ Parameters:
 * ''exclude'' - comma delimited list of fields to excluded from the returned tiddlers (optional, defaults to "text")
 
 In order to avoid denial of service attacks with malformed filters in the default configuration the only filter that is accepted is the default filter "[all[tiddlers]!is[system]sort[title]]"; attempts to use any other filter will result in an HTTP 403 error.
+
+<<.note "System tiddlers will not be returned by this API unless the [[Hidden Setting: Sync System Tiddlers From Server]] is explicitly switched on by setting $:/config/SyncSystemTiddlersFromServer to `yes`">>
 
 To enable a particular filter, create a tiddler with the title "$:/config/Server/ExternalFilters/" concatenated with the filter text, and the text field set to "yes". For example, the TiddlyWeb plugin includes the following shadow tiddler to enable the filter that it requires:
 

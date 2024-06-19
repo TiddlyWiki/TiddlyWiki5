@@ -11,8 +11,8 @@ An interactive network visualisation plugin based on [[Vis.js|http://visjs.org]]
 ~TiddlyMap is a TiddlyWiki plugin that allows you to link your wiki-topics (tiddlers) in order to create clickable graphs. By creating relations between your topics you can easily do the following:
 
 * Create concept maps and quickly manifest your ideas in tiddlers.
-* Create task-dependency graphs to organize and describe your tasks.
-* Visualize your topic structures to get an immediate grasp of topics and relations.
+* Create task-dependency graphs to organise and describe your tasks.
+* Visualise your topic structures to get an immediate grasp of topics and relations.
 
-In general you may create, visualize and describe any network-structure you have in mind.
+In general you may create, visualise and describe any network-structure you have in mind.
 <<<

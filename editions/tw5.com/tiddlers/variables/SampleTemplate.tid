@@ -1,0 +1,10 @@
+created: 20230506165016526
+description: I'm a demonstration template
+modified: 20230506170529579
+tags: Demonstrations thisTiddler
+title: SampleTemplate
+type: text/vnd.tiddlywiki
+
+''thisTiddler'': <$text text=<<thisTiddler>> />
+
+''currentTiddler'': <$text text=<<currentTiddler>> />

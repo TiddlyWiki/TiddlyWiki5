@@ -150,7 +150,7 @@ exports.parse = function() {
 		} else {
 			// Otherwise, create a new row if this one is of a different type
 			if(rowType !== currRowType) {
-				rowContainer = {type: "element", tag: rowContainerTypes[rowType], children: []};
+				rowContainer = {type: "element", tag: rowContainerTypes[rowType], children: [], start: this.parser.pos, end: this.parser.pos};
 				table.children.push(rowContainer);
 				currRowType = rowType;
 			}
@@ -178,6 +178,7 @@ exports.parse = function() {
 				// Increment the row count
 				rowCount++;
 			}
+			rowContainer.end = this.parser.pos;
 		}
 		rowMatch = rowRegExp.exec(this.parser.source);
 	}

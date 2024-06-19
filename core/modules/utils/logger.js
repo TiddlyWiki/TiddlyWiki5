@@ -48,7 +48,9 @@ Logger.prototype.log = function(/* args */) {
 			this.saveBufferLogger.buffer = this.saveBufferLogger.buffer.slice(-this.saveBufferLogger.saveLimit);
 		}
 		if(console !== undefined && console.log !== undefined) {
-			return Function.apply.call(console.log, console, [$tw.utils.terminalColour(this.colour),this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0)).concat($tw.utils.terminalColour()));
+			var logMessage = [$tw.utils.terminalColour(this.colour) + this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0));
+			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
+			return Function.apply.call(console.log, console, logMessage);
 		}
 	} 
 };

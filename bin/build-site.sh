@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.2.3
+    TW5_BUILD_VERSION=v5.3.3
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -84,9 +84,26 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 
 ######################################################
 #
-# Core distribution
+# Core distributions
 #
 ######################################################
+
+# Conditionally build archive if $TW5_BUILD_ARCHIVE variable is set, otherwise do nothing
+#
+# /archive/Empty-TiddlyWiki-<version>.html	Empty archived version
+# /archive/TiddlyWiki-<version>.html		Full archived version
+
+if [ -n "$TW5_BUILD_ARCHIVE" ]; then
+
+node $TW5_BUILD_TIDDLYWIKI \
+	$TW5_BUILD_MAIN_EDITION \
+	--verbose \
+	--version \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_ARCHIVE \
+	--build archive \
+	|| exit 1
+fi
 
 # /index.html			Main site
 # /favicon.ico			Favicon for main site
@@ -95,6 +112,7 @@ echo -e -n "title: $:/build\ncommit: $TW5_BUILD_COMMIT\n\n$TW5_BUILD_DETAILS\n" 
 # /static/*				Static single tiddlers
 # /static/static.css	Static stylesheet
 # /static/favicon.ico	Favicon for static pages
+
 node $TW5_BUILD_TIDDLYWIKI \
 	$TW5_BUILD_MAIN_EDITION \
 	--verbose \
@@ -104,13 +122,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build favicon static index \
 	|| exit 1
 
-# /empty.html			Empty
-# /empty.hta			For Internet Explorer
+# /empty.html					Empty
+# /empty.hta					For Internet Explorer
+# /empty-external-core.html		External core empty
+# /tiddlywikicore-<version>.js	Core plugin javascript
 node $TW5_BUILD_TIDDLYWIKI \
-	$TW5_BUILD_MAIN_EDITION \
+	./editions/empty \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
-	--build empty \
+	--build empty emptyexternalcore \
 	|| exit 1
 
 
@@ -120,6 +140,28 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all test.html text/plain \
+	|| exit 1
+
+# /dev/index.html			Developer docs
+# /dev/favicon.ico			Favicon for dev site
+# /dev/static.html			Static rendering of default tiddlers
+# /dev/alltiddlers.html		Static rendering of all tiddlers
+# /dev/static/*				Static single tiddlers
+# /dev/static/static.css	Static stylesheet
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/dev \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/dev \
+	--build index favicon static \
+	|| exit 1
+
+# /tour.html			tour edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/tour \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all tour.html text/plain \
 	|| exit 1
 
 # /dev/index.html			Developer docs
@@ -233,6 +275,15 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--build index \
 	|| exit 1
 
+# /editions/twitter-archivist/index.html	Twitter Archivist edition
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/twitter-archivist \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT/editions/twitter-archivist/ \
+	--build index \
+	|| exit 1
+
 ######################################################
 #
 # Plugin demos
@@ -342,6 +393,17 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/highlight/empty.html text/plain \
 	|| exit 1
 
+# /plugins/tiddlywiki/geospatial/index.html		Demo wiki with geospatial plugin
+# /plugins/tiddlywiki/geospatial/empty.html		Empty wiki with geospatial plugin
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/geospatialdemo \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all plugins/tiddlywiki/geospatial/index.html text/plain \
+	--rendertiddler $:/core/save/empty plugins/tiddlywiki/geospatial/empty.html text/plain \
+	|| exit 1
+
 ######################################################
 #
 # Language editions
@@ -350,14 +412,14 @@ node $TW5_BUILD_TIDDLYWIKI \
 
 # Delete any existing static content
 
-rm $TW5_BUILD_OUTPUT/languages/de-AT/static/*
-rm $TW5_BUILD_OUTPUT/languages/de-DE/static/*
-rm $TW5_BUILD_OUTPUT/languages/es-ES/static/*
-rm $TW5_BUILD_OUTPUT/languages/fr-FR/static/*
-rm $TW5_BUILD_OUTPUT/languages/ja-JP/static/*
-rm $TW5_BUILD_OUTPUT/languages/ko-KR/static/*
-rm $TW5_BUILD_OUTPUT/languages/zh-Hans/static/*
-rm $TW5_BUILD_OUTPUT/languages/zh-Hant/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/de-AT/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/de-DE/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/es-ES/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/fr-FR/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/ja-JP/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/ko-KR/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/zh-Hans/static/*
+rm -rf $TW5_BUILD_OUTPUT/languages/zh-Hant/static/*
 
 # /languages/de-AT/index.html		Demo wiki with de-AT language
 # /languages/de-AT/empty.html		Empty wiki with de-AT language
@@ -450,7 +512,7 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--load $TW5_BUILD_OUTPUT/build.tid \
 	--output $TW5_BUILD_OUTPUT/library/$TW5_BUILD_VERSION \
-	--build \
+	--build library\
 	|| exit 1
 
 # Delete the temporary build tiddler

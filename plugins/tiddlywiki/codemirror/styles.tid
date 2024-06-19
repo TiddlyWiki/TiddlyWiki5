@@ -56,6 +56,11 @@ name: tiddlywiki
   rendering-intent: auto;
 }
 
+.tc-tiddler-frame .tc-tiddler-editor .tc-edit-texteditor,
+.tc-tiddler-frame .tc-tiddler-editor .tc-tiddler-preview-preview {
+	overflow: auto;
+}
+
 .cm-s-tiddlywiki.CodeMirror, .cm-s-tiddlywiki .CodeMirror-gutters { background-color: <<colour tiddler-editor-background>>; color: <<colour foreground>>; }
 .cm-s-tiddlywiki .CodeMirror-gutters {background: <<colour tiddler-editor-background>>; border-right: 1px solid <<colour tiddler-editor-border>>;}
 .cm-s-tiddlywiki .CodeMirror-linenumber {color: <<colour foreground>>;}

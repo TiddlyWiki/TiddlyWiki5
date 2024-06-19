@@ -10,6 +10,6 @@
 	],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+			"--render","$:/core/save/all","index.html","text/plain"]
 	}
 }

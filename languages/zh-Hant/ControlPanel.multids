@@ -7,7 +7,7 @@ Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
 Basics/AnimDuration/Prompt: 動畫持續時間
 Basics/AutoFocus/Prompt: 編輯條目時的預設自動停留欄位
 Basics/Caption: 基本
-Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
+Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 {{保留開啟中的條目順序||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: 首頁
 Basics/DefaultTiddlers/TopHint: 預設開啟的條目
 Basics/Language/Prompt: 您好！當前的語言：
@@ -207,6 +207,12 @@ Stylesheets/Caption: 樣式表
 Stylesheets/Expand/Caption: 全部展開
 Stylesheets/Hint: 這是當前標籤為 <<tag "$:/tags/Stylesheet">> 的樣式表條目呈現的 CSS
 Stylesheets/Restore/Caption: 復原
+TestCases/Caption: 測試案例
+TestCases/Hint: 測試案例是用於測試和學習的自給自足的範例
+TestCases/All/Caption: 所有測試案例
+TestCases/All/Hint: 所有測試案例
+TestCases/Failed/Caption: 失敗的測試案例
+TestCases/Failed/Hint: 僅失敗的測試案例
 Theme/Caption: 佈景主題
 Theme/Prompt: 當前的佈景主題：
 TiddlerColour/Caption: 條目顏色

@@ -1,0 +1,18 @@
+created: 20190201212238781
+modified: 20190201213112748
+tags: 
+title: Undefined widget demo
+type: text/vnd.tiddlywiki
+
+<$innerwiki width="600" height="400" style="width:100%;">
+	<$data title="$:/DefaultTiddlers" text="[[Undefined widget]]"/>
+	<$data title="Undefined widget" text="""
+```
+<$donothing/>
+```
+
+Renders as:
+
+<$donothing/>
+"""/>
+</$innerwiki>

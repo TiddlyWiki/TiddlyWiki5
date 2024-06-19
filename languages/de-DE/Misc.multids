@@ -8,6 +8,7 @@ CloseAll/Button: alle schließen
 ColourPicker/Recent: Kürzlich:
 ConfirmCancelTiddler: Wollen Sie die Änderungen im Tiddler: "<$text text=<<title>>/>" verwerfen?
 ConfirmDeleteTiddler: Wollen Sie den Tiddler: "<$text text=<<title>>/>" löschen?
+ConfirmDeleteTiddlers: Wollen Sie <<resultCount>> Tiddler löschen?
 ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK überschreibt den tiddler!
 ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können Ihre Änderungen rückgängig machen, indem Sie diesen Tiddler wieder löschen. Wollen Sie den Tiddler: "<$text text=<<title>>/>" ändern?
 ConfirmAction: Möchten Sie weitermachen? 
@@ -24,11 +25,13 @@ Encryption/RepeatPassword: Passwort wiederholen
 Encryption/PasswordNoMatch: Passwörter stimmen nicht überein
 Encryption/SetPassword: Passwort setzen
 Error/Caption: Fehler
+Error/DeserializeOperator/MissingOperand: Filter Fehler: Fehlender Parameter für 'deserialize' Operator
+Error/DeserializeOperator/UnknownDeserializer: Filter Fehler: Unbekannter "deserializer" als Parameter für 'deserialize' Operator verwendet
 Error/Filter: Filter Fehler
 Error/FilterSyntax: Syntax Fehler im Filter-Ausdruck
 Error/FilterRunPrefix: Filter Fehler: Unbekanntes Prefix für Filter lauf
-Error/IsFilterOperator: Filter Fehler: Unbekannter Operand für den 'is' Filter Operator
-Error/FormatFilterOperator: Filter Fehler: Unbekannter Operand für den 'format' Filter Operator
+Error/IsFilterOperator: Filter Fehler: Unbekannter Parameter für den 'is' Filter Operator
+Error/FormatFilterOperator: Filter Fehler: Unbekannter Parameter für den 'format' Filter Operator
 Error/LoadingPluginLibrary: Fehler beim Laden der "plugin library"
 Error/NetworkErrorAlert: `<h2>''Netzwerk Fehler''</h2>Es scheint, die Verbindung zum Server ist ausgefallen. Das weist auf Probleme mit der Netzwerkverbindung hin. Bitte versuchen Sie die Verbingung wider herzustellen, bevor Sie weitermachen.<br><br>''Nicht gespeicherte Änderungen werden automatich synchronisiert, sobald die Verbindung wider hergestellt ist.
 Error/PutEditConflict: Datei am Server verändert
@@ -39,6 +42,7 @@ Error/RetrievingSkinny: Fehler beim Empfangen einer "skinny" Tiddler Liste
 Error/SavingToTWEdit: Fehler beim Speichern mit "TWEdit"
 Error/WhileSaving: Fehler beim Speichern
 Error/XMLHttpRequest: XMLHttpRequest Fehler-Code
+Error/ZoominTextNode: "Story View Error:" Es scheint Sie versuchen mit einem Tiddler zu interagieren, der in einem speziellen Container angezeigt wird. Dies wird wahrscheinlich durch den Tag: `$:/tags/StoryTiddlerTemplateFilter`verursacht. Wahrscheinlich enthält das Template reinen Text oder Leerzeilen am Anfang. Verwenden Sie das "Pragma" `\whitespace trim` oder stellen Sie sicher, dass der Template Inhalt in einem HTML-Element "eingeschlossen" ist. Der Text, der den Fehler verursacht ist: 
 InternalJavaScriptError/Title: Interner JavaScript Fehler
 InternalJavaScriptError/Hint: Es tut uns leid, aber bitte starten Sie Ihr TiddlyWiki neu, indem sie die Seite im Browser neu laden.
 LayoutSwitcher/Description: "Layout" Selektor anzeigen
@@ -66,7 +70,7 @@ No: Nein
 OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin-Verzeichnis
 OfficialPluginLibrary/Hint: Offizielles ~TiddlyWiki Plugin-Verzeichnis auf tiddlywiki.com. Plugin, Themes und Sprach Dateien werden vom "core team" gewartet.
 PageTemplate/Description: das Standard ~TiddlyWiki Layout
-PageTemplate/Name: Standard ~PageTemplate
+PageTemplate/Name: Standard Layout
 PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die ~JavaScript Plugins ausgeführt werden.
 RecentChanges/DateFormat: YYYY MMM DD
 Shortcuts/Input/AdvancedSearch/Hint: Öffne den ~AdvancedSearch Tiddler vom "Suchmenü" aus

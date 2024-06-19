@@ -53,6 +53,11 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
+	// Assign data- attributes
+	this.assignAttributes(this.inputDomNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
@@ -66,14 +71,14 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler || this.checkboxFilter) {
-		if(this.checkboxTag) {
+		if(tiddler && this.checkboxTag) {
 			if(this.checkboxInvertTag === "yes") {
 				return !tiddler.hasTag(this.checkboxTag);
 			} else {
 				return tiddler.hasTag(this.checkboxTag);
 			}
 		}
-		if(this.checkboxField || this.checkboxIndex) {
+		if(tiddler && (this.checkboxField || this.checkboxIndex)) {
 			// Same logic applies to fields and indexes
 			var value;
 			if(this.checkboxField) {
@@ -112,11 +117,11 @@ CheckboxWidget.prototype.getValue = function() {
 			var list;
 			if(this.checkboxListField) {
 				if($tw.utils.hop(tiddler.fields,this.checkboxListField)) {
-					list = tiddler.getFieldList(this.checkboxListField);
+					list = tiddler.getFieldList(this.checkboxListField) || [];
 				} else {
 					list = $tw.utils.parseStringArray(this.checkboxDefault || "") || [];
 				}
-			} else if (this.checkboxListIndex) {
+			} else if(this.checkboxListIndex) {
 				list = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(tiddler,this.checkboxListIndex,this.checkboxDefault || "")) || [];
 			} else {
 				list = this.wiki.filterTiddlers(this.checkboxFilter,this) || [];
@@ -206,11 +211,24 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	// Set the list field (or index) if specified
 	if(this.checkboxListField || this.checkboxListIndex) {
-		var listContents, oldPos, newPos;
+		var fieldContents, listContents, oldPos, newPos;
 		if(this.checkboxListField) {
-			listContents = tiddler.getFieldList(this.checkboxListField);
+			fieldContents = (tiddler ? tiddler.fields[this.checkboxListField] : undefined) || [];
 		} else {
-			listContents = $tw.utils.parseStringArray(this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex) || "") || [];
+			fieldContents = this.wiki.extractTiddlerDataItem(this.checkboxTitle,this.checkboxListIndex);
+		}
+		if($tw.utils.isArray(fieldContents)) {
+			// Make a copy so we can modify it without changing original that's refrenced elsewhere
+			listContents = fieldContents.slice(0);
+		} else if(fieldContents === undefined) {
+			listContents = [];
+		} else if(typeof fieldContents === "string") {
+			listContents = $tw.utils.parseStringArray(fieldContents);
+			// No need to copy since parseStringArray returns a fresh array, not refrenced elsewhere
+		} else {
+			// Field was neither an array nor a string; it's probably something that shouldn't become
+			// an array (such as a date field), so bail out *without* triggering actions
+			return;
 		}
 		oldPos = notValue ? listContents.indexOf(notValue) : -1;
 		newPos = value ? listContents.indexOf(value) : -1;
@@ -312,6 +330,11 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 				$tw.utils.removeClass(this.labelDomNode,"tc-checkbox-checked");
 			}
 		}
+		this.assignAttributes(this.inputDomNode,{
+			changedAttributes: changedAttributes,
+			sourcePrefix: "data-",
+			destPrefix: "data-"
+		});
 		return this.refreshChildren(changedTiddlers) || refreshed;
 	}
 };
@@ -319,3 +342,4 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 exports.checkbox = CheckboxWidget;
 
 })();
+	

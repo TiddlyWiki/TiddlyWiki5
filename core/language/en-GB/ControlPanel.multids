@@ -7,7 +7,7 @@ Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
 Basics/AnimDuration/Prompt: Animation duration
 Basics/AutoFocus/Prompt: Default focus field for new tiddlers
 Basics/Caption: Basics
-Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to {{retain story ordering||$:/snippets/retain-story-ordering-button}}
 Basics/DefaultTiddlers/Prompt: Default tiddlers
 Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup
 Basics/Language/Prompt: Hello! Current language:
@@ -90,8 +90,8 @@ Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
 Plugins/NoInfoFound/Hint: No ''"<$text text=<<currentTab>>/>"'' found
 Plugins/NotInstalled/Hint: This plugin is not currently installed
-Plugins/OpenPluginLibrary: open plugin library
-Plugins/ClosePluginLibrary: close plugin library
+Plugins/OpenPluginLibrary: Open plugin library
+Plugins/ClosePluginLibrary: Close plugin library
 Plugins/PluginWillRequireReload: (requires reload)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
@@ -206,6 +206,12 @@ Stylesheets/Caption: Stylesheets
 Stylesheets/Expand/Caption: Expand All
 Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restore
+TestCases/Caption: Test Cases
+TestCases/Hint: Test cases are self contained examples for testing and learning
+TestCases/All/Caption: All Test Cases
+TestCases/All/Hint: All Test Cases
+TestCases/Failed/Caption: Failed Test Cases
+TestCases/Failed/Hint: Only Failed Test Cases
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields
