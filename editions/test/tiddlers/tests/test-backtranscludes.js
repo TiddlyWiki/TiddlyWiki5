@@ -22,6 +22,9 @@ describe('Backtranscludes and transclude filter tests', function() {
 		it('should have no backtranscludes', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('');
 		});
+		it('should have no transcludes', function() {
+			expect(wiki.filterTiddlers('TestIncoming +[transcludes[]]').join(',')).toBe('');
+		});
 	});
 
 	describe('A tiddler added to the wiki with a transclude to it', function() {
@@ -37,6 +40,9 @@ describe('Backtranscludes and transclude filter tests', function() {
 
 		it('should have a backtransclude', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+		});
+		it('should have a transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming');
 		});
 	});
 
@@ -182,35 +188,52 @@ describe('Backtranscludes and transclude filter tests', function() {
 		});
 	});
 
-	describe('ignore self transclusion', function() {
+	describe('include implicit self transclusion', function() {
 		var wiki = new $tw.Wiki();
 
 		wiki.addTiddler({
 			title: 'TestOutgoing',
-			text: "{{!!created}}\n\nA transclude to {{!!title}}"});
+			text: "{{!!created}}\n\nAn implicit self-referential transclude to <$transclude $field='created'/> and <$transclude field='created'/>"});
 
 		it('should have no transclude', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('');
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestOutgoing');
 		});
 
 		it('should have no back transcludes', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('');
+			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
 		});
 	});
 
-	describe('recognize soft transclusion defined by widget', function() {
+	describe('include explicit self transclusion', function() {
 		var wiki = new $tw.Wiki();
 
 		wiki.addTiddler({
 			title: 'TestOutgoing',
-			text: "<$tiddler tiddler='TestIncoming'><$transclude $tiddler /></$tiddler>"});
+			text: "{{TestOutgoing!!created}}\n\n<$transclude $tiddler='TestOutgoing' $field='created'/> and <$transclude tiddler='TestOutgoing' field='created'/>"});
+
+			it('should have no transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestOutgoing');
+		});
+
+		it('should have no back transcludes', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+		});
+	});
+
+	describe('recognize transclusion defined by widget', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: "<$tiddler tiddler='TestIncoming'><$transclude $tiddler /></$tiddler>\n\n<$transclude tiddler='TiddlyWiki Pre-release'/>"});
 
 		it('should have a transclude', function() {
-			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming');
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('TestIncoming,TiddlyWiki Pre-release');
 		});
 
 		it('should have a back transclude', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
+			expect(wiki.filterTiddlers('[[TiddlyWiki Pre-release]] +[backtranscludes[]]').join(',')).toBe('TestOutgoing');
 		});
 	});
 });
