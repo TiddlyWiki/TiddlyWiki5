@@ -1,5 +1,5 @@
 created: 20131205155227468
-modified: 20230303214711802
+modified: 20240619183215966
 tags: Concepts Reference
 title: WikiText
 type: text/vnd.tiddlywiki
@@ -12,4 +12,4 @@ See [[Formatting in WikiText]] and [[Formatting text in TiddlyWiki]] for an intr
 
 The following elements of ~WikiText syntax are built into the core:
 
-<<list-links filter:"[tag[WikiText]]" class:"multi-columns">>
+<<list-links filter:"[tag[WikiText]]" class:"tc-multi-columns">>

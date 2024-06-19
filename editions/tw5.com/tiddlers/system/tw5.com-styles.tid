@@ -1,5 +1,5 @@
 created: 20200507002727378
-modified: 20220719132112414
+modified: 20240619182904679
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
@@ -387,8 +387,8 @@ type: text/vnd.tiddlywiki
 
 /* WikiText rules */
 
-.multi-columns,
-.fourcolumns {
+.tc-multi-columns,
+.tc-four-columns {
 	display: block;
 	column-count: 4;
 	column-gap: 1em;
@@ -399,7 +399,7 @@ type: text/vnd.tiddlywiki
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	.multi-columns {
+	.tc-multi-columns {
 		column-count: 2;
 	}
 }

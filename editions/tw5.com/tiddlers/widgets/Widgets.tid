@@ -1,5 +1,5 @@
 created: 20140908130500000
-modified: 20240326164134356
+modified: 20240619183242386
 tags: Concepts Reference
 title: Widgets
 type: text/vnd.tiddlywiki
@@ -16,4 +16,4 @@ The more specialised widgets use a general-purpose [[widget syntax|Widgets in Wi
 
 The following classes of widget are built into the core:
 
-<<list-links "[tag[Widgets]]" class:"multi-columns">>
+<<list-links "[tag[Widgets]]" class:"tc-multi-columns">>
