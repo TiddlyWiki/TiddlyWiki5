@@ -113,6 +113,9 @@ function SaverHandler(options) {
 
 SaverHandler.prototype.titleSyncFilter = "$:/config/SaverFilter";
 SaverHandler.prototype.titleAutoSave = "$:/config/AutoSave";
+SaverHandler.prototype.titleThrottleAutoSave = "$:/config/AutoSave/Throttle";
+SaverHandler.prototype.titleAutoSaveThrottleInterval = "$:/config/AutoSave/ThrottleInterval";
+SaverHandler.prototype.autoSaveThrottleInterval = 60000; //Defer saving for 60s after an AutoSave 
 SaverHandler.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 
 /*
@@ -142,6 +145,21 @@ SaverHandler.prototype.initSavers = function(moduleType) {
 	});
 };
 
+SaverHandler.prototype.getAutoSaveThrottleInterval = function() {
+	return parseInt(this.wiki.getTiddlerText(this.titleAutoSaveThrottleInterval,this.autoSaveThrottleInterval),10);
+};
+
+SaverHandler.prototype.queueAutoSave = function(options) {
+	var self = this;
+	if(this.autoSaveTimerId) {
+		return;
+	}
+	this.autoSaveTimerId = setTimeout(function() {
+		self.autoSaveTimerId = null;
+		self.saveWiki(options);
+	},self.getAutoSaveThrottleInterval());
+};
+
 /*
 Save the wiki contents. Options are:
 	method: "save", "autosave" or "download"
@@ -151,14 +169,29 @@ Save the wiki contents. Options are:
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
 	var self = this,
-		method = options.method || "save";
+		method = options.method || "save",
+		now = new Date().getTime();
 	// Ignore autosave if disabled
-	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
-		return false;
+	if(method === "autosave") {
+		if($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes") {
+			return false;
+		}
+		if(this.wiki.getTiddlerText(this.titleThrottleAutoSave,"no") === "yes" && (now - this.autoSaveThrottleInterval <= this.timestampLastAutoSave)) {
+			this.logger.log("Queueing autosave");
+			this.queueAutoSave(options);
+			return false;
+		} else {
+			this.timestampLastAutoSave = now;
+		}
+	} else if(method === "save" && this.autoSaveTimerId) {
+		// Clear the queue of any pending autosave
+		// TODO: brittle if save fails, but resetting in the save callback risks clearing an AutoSave that was queued after the save was initiated
+		this.logger.log("Clearing autosave queue");
+		clearTimeout(this.autoSaveTimerId);
 	}
 	var	variables = options.variables || {},
 		template = (options.template || 
-		           this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
+			this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
