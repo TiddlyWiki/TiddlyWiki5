@@ -1,6 +1,6 @@
 caption: all
 created: 20140410103123179
-modified: 20211217135719266
+modified: 20230321131457669
 op-input: ignored, unless the parameter is empty
 op-output: the titles that belong to all the specified categories
 op-parameter: zero or more categories
@@ -9,10 +9,14 @@ tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]] [[Sel
 title: all Operator
 type: text/vnd.tiddlywiki
 
-The parameter specifies zero or more fundamental categories using the following syntax:
+The parameter specifies zero or more fundamental categories using the following [[filter step|Filter Step]] syntax:
 
 <$railroad text="""
-[{: ("current" | "missing" |: "orphans" | "shadows" | "tags" | "tiddlers" ) +"+" }]
+\start none
+\end none
+<-"all"->  (  "[" | "<" | "{"  )
+   [{: ("current" | "missing" |: "orphans" | "shadows" | "tags" | "tiddlers" ) +"+" }] 
+   (  "]" | ">" | "}"  )
 """/>
 
 |!Category |!Members |!Sorted |
@@ -25,7 +29,7 @@ The parameter specifies zero or more fundamental categories using the following 
 
 If the parameter specifies more than one category, they are processed from left to right. The overall output is initially empty, and each category's output is [[dominantly appended|Dominant Append]] to it in turn. Unrecognised categories contribute nothing to the output.
 
-As a special case, if the parameter is empty, the output is simply a copy of the input. This can be useful when the parameter is [[soft|Filter Parameter]].
+As a special case, if the parameter is empty, the output is simply a copy of the input. This can be useful when the parameter is a [[soft parameter|Filter Parameter]].
 
 The <<.olink is>> operator is similar, but its scope is restricted to its input.
 

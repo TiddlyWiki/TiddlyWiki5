@@ -1,0 +1,29 @@
+created: 20230601200356736
+modified: 20230602105036887
+tags: [[Operator Examples]] [[deserialize Operator]]
+title: deserialize Operator (Examples)
+type: text/vnd.tiddlywiki
+
+\define html-data()
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Test Data</title>
+</head>
+<body>
+
+<!--~~ Ordinary tiddlers ~~-->
+<div id="storeArea" style="display:none;"><div title="Hello &quot;There&quot;" type="text/vnd.tiddlywiki">
+<pre>Abacus</pre>
+</div>
+</div>
+<script class="tiddlywiki-tiddler-store" type="application/json">[{"title":"Hello \"There\"","text":"Calculator"},{"title":"Hello \"There\"","text":"Protractor"}]</script>
+</body>
+</html>
+\end
+
+This example uses the predefined variable `html-data`:
+<$codeblock code=<<html-data>> language="HTML"/>
+
+<<.operator-example 1 "[<html-data>deserialize[text/html]]">>

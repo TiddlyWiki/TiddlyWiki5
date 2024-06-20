@@ -1,0 +1,52 @@
+created: 20230726145210484
+modified: 20230726145757234
+tags: [[Variable Usage]]
+title: Behaviour of invoked variables depends on how the variable was declared
+type: text/vnd.tiddlywiki
+
+\define m1(a1) $a1$ - <<__a1__>> - <<a1>>
+\procedure p1(a1) $a1$ - <<__a1__>> - <<a1>>
+\function f1(a1) "$a1$" "-" [<__a1__>] ="-" [<a1>] :and[join[ ]]
+
+Invoked in normal wikitext context: `<$transclude $variable=macro/>` or `<<macro>>`
+
+{{Behaviour of variables invoked via normal wikitext}}
+
+Invoked via widget attribute: `<div class=<<macro>>/>`
+
+{{Behaviour of variables invoked via widget attributes}}
+
+Invoked via filter operator parameter: `[<macro>]`
+
+{{Behaviour of variables invoked via filter operator parameter}}
+
+Invoked via function call in a filter expression: `[function[macro]]`
+
+{{Behaviour of variables invoked via filter expression function call}}
+
+!! Examples
+
+Below is an example macro, procedure and function definition.  All three forms of parameter substitution `$a1$`, `<<__a1__>>`, and `<<a1>>` are included in each definition. The output helps illustrate when each form of substitution will or will not have affect.
+
+```
+\define m1(a1) $a1$ - <<__a1__>> - <<a1>>
+\procedure p1(a1) $a1$ - <<__a1__>> - <<a1>>
+\function f1(a1) $a1$ "-" [<__a1__>] ="-" [<a1>] :and[join[ ]]
+```
+
+| !Variable transclusion|!output |
+| `<<m1 foo>>`|<<m1 foo>>|
+| `<<p1 foo>>`|<<p1 foo>>|
+| `<<f1 foo>>`|<<f1 foo>>|
+| !Widget attribute|!output |
+| `<$text text=<<m1 foo>>/>`|<$text text=<<m1 foo>>/>|
+| `<$text text=<<p1 foo>>/>`|<$text text=<<p1 foo>>/>|
+| `<$text text=<<f1 foo>>/>`|<$text text=<<f1 foo>>/>|
+| !Filter operator parameter|!output |
+| `[<m1 foo>]`|<$text text={{{[<m1 foo>]}}}/>|
+| `[<p1 foo>]`|<$text text={{{[<p1 foo>]}}}/>|
+| `[<f1 foo>]`|<$text text={{{[<f1 foo>]}}}/>|
+| !Function call in filter expression|!output |
+| `[function[m1],[foo]]`|<$text text={{{[function[m1],[foo]]}}}/>|
+| `[function[p1],[foo]]`|<$text text={{{[function[p1],[foo]]}}}/>|
+| `[function[f1],[foo]]`|<$text text={{{[function[f1],[foo]]}}}/>|

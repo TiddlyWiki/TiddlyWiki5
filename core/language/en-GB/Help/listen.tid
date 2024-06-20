@@ -18,7 +18,7 @@ All parameters are optional with safe defaults, and can be specified in any orde
 * ''anon-username'' - the username for signing edits for anonymous users
 * ''username'' - optional username for basic authentication
 * ''password'' - optional password for basic authentication
-* ''authenticated-user-header'' - optional name of header to be used for trusted authentication
+* ''authenticated-user-header'' - optional name of request header to be used for trusted authentication.
 * ''readers'' - comma-separated list of principals allowed to read from this wiki
 * ''writers'' - comma-separated list of principals allowed to write to this wiki
 * ''csrf-disable'' - set to "yes" to disable CSRF checks (defaults to "no")

@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/qrcode/readme
+
+The QR Code Plugin contains several features for working with QR codes and other types of barcode.
+
+* The ''makeqr'' macro enables any text to be rendered as a [[QR code|https://en.wikipedia.org/wiki/QR_code]]. QR codes are a type of 2-dimensional bar code that encodes arbitrary data: text, numbers, links. QR code readers are available or built-in for smartphones, making them a convenient means to transfer information between devices
+* The `<$barcodereader>` widget that enables barcodes to be decoded from the device camera or direct from an image file
+* A new toolbar button that can display several QR code renderings of the content of a tiddler:
+** Raw content
+** Rendered, formatted content
+** URL of tiddler
+
+This plugin uses the following open source libraries:
+
+* [[qrcode.js by Zeno Zeng|https://github.com/zenozeng/node-yaqrcode]]
+* [[Html5-QRCode by Minhaz|https://github.com/mebjas/html5-qrcode]]

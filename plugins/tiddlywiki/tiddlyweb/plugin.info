@@ -3,5 +3,6 @@
 	"name": "TiddlyWeb",
 	"description": "Sync changes from the browser to TW5 (node.js) or TiddlyWeb server",
 	"list": "readme",
-	"plugin-priority": 10
+	"plugin-priority": 10,
+	"stability": "STABILITY_2_STABLE"
 }

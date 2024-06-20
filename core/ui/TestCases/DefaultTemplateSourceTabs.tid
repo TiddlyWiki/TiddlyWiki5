@@ -1,0 +1,24 @@
+title: $:/core/ui/testcases/DefaultTemplate/SourceTabs
+
+\whitespace trim
+\procedure body()
+<$list filter="[<currentTab>fields[]] -text +[limit[1]]" variable="ignore">
+	<table class="tc-field-table">
+		<tbody>
+			<$list filter="[<currentTab>fields[]sort[]] -text -title title +[putfirst[]]" variable="fieldName">
+				<tr>
+					<td>
+						<$text text=<<fieldName>>/>
+					</td>
+					<td>
+						<$view tiddler=<<currentTab>> field=<<fieldName>>/>
+					</td>
+				</tr>
+			</$list>
+		</tbody>
+	</table>
+</$list>
+<$edit class="tc-edit-texteditor" tiddler=<<currentTab>>/>
+\end
+
+<$transclude $variable="body" $mode="inline"/>

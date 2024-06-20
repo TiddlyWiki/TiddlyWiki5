@@ -56,7 +56,7 @@ Tests the checkbox widget thoroughly.
          * Test data for checkbox widget tests
          */
     
-        const fieldModeTests = [
+        var fieldModeTests = [
             {
                 testName: "field mode checked",
                 tiddlers: [{title: "TiddlerOne", text: "Jolly Old World", expand: "yes"}],
@@ -95,16 +95,16 @@ Tests the checkbox widget thoroughly.
             },
         ];
 
-        const indexModeTests = fieldModeTests.map(data => {
-            const newData = {...data};
-            const newName = data.testName.replace('field mode', 'index mode');
-            const newTiddlers = data.tiddlers.map(tiddler => {
+        var indexModeTests = fieldModeTests.map(data => {
+            var newData = {...data};
+            var newName = data.testName.replace('field mode', 'index mode');
+            var newTiddlers = data.tiddlers.map(tiddler => {
                 return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\nexpand: ${tiddler.expand}\ntwo: b`}
             });
-            const newWidgetText = data.widgetText.replace("field='expand'", "index='expand'");
-            const newChange = {};
-            for (const key of Object.keys(data.expectedChange)) {
-                const oldChange = data.expectedChange[key];
+            var newWidgetText = data.widgetText.replace("field='expand'", "index='expand'");
+            var newChange = {};
+            for (var key of Object.keys(data.expectedChange)) {
+                var oldChange = data.expectedChange[key];
                 if (oldChange.expand) {
                     newChange[key] = { text: `one: a\nexpand: ${oldChange.expand}\ntwo: b` }
                 } else {
@@ -119,7 +119,26 @@ Tests the checkbox widget thoroughly.
             return newData;
         });
 
-        const listModeTests = [
+        var listModeTestsForDateFields = [
+            {
+                testName: "list mode created date field",
+                tiddlers: [{title: "Colors", created: "201304152222", modified: "202301022222"}],
+                widgetText: "<$checkbox tiddler='Colors' listField='created' checked='green' />",
+                startsOutChecked: false,
+                finalValue: false,
+                expectedChange: { "Colors": { created: new Date("2013-04-15T22:22:00Z")}} // created field should *not* be touched by a listField checkbox
+            },
+            {
+                testName: "list mode modified date field",
+                tiddlers: [{title: "Colors", created: "201304152222", modified: "202301022222"}],
+                widgetText: "<$checkbox tiddler='Colors' listField='modified' checked='green' />",
+                startsOutChecked: false,
+                finalValue: false,
+                expectedChange: { "Colors": { modified: new Date("2023-01-02T22:22:00Z")}} // modified field should *not* be touched by a listField checkbox
+            },
+        ]
+
+        var listModeTests = [
             {
                 testName: "list mode add",
                 tiddlers: [{title: "Colors", colors: "orange yellow"}],
@@ -235,11 +254,11 @@ Tests the checkbox widget thoroughly.
         ];
 
         // https://github.com/Jermolene/TiddlyWiki5/issues/6871
-        const listModeTestsWithListField = (
+        var listModeTestsWithListField = (
             listModeTests
             .filter(data => data.widgetText.includes("listField='colors'"))
             .map(data => {
-                const newData = {
+                var newData = {
                     ...data,
                     tiddlers: data.tiddlers.map(tiddler => ({...tiddler, list: tiddler.colors, colors: undefined})),
                     widgetText: data.widgetText.replace("listField='colors'", "listField='list'"),
@@ -250,11 +269,11 @@ Tests the checkbox widget thoroughly.
                 return newData;
             })
         );
-        const listModeTestsWithTagsField = (
+        var listModeTestsWithTagsField = (
             listModeTests
             .filter(data => data.widgetText.includes("listField='colors'"))
             .map(data => {
-                const newData = {
+                var newData = {
                     ...data,
                     tiddlers: data.tiddlers.map(tiddler => ({...tiddler, tags: tiddler.colors, colors: undefined})),
                     widgetText: data.widgetText.replace("listField='colors'", "listField='tags'"),
@@ -266,20 +285,20 @@ Tests the checkbox widget thoroughly.
             })
         );
 
-        const indexListModeTests = listModeTests.map(data => {
-            const newData = {...data};
-            const newName = data.testName.replace('list mode', 'index list mode');
-            const newTiddlers = data.tiddlers.map(tiddler => {
+        var indexListModeTests = listModeTests.map(data => {
+            var newData = {...data};
+            var newName = data.testName.replace('list mode', 'index list mode');
+            var newTiddlers = data.tiddlers.map(tiddler => {
                 if (tiddler.hasOwnProperty('colors')) {
                     return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\ncolors: ${tiddler.colors}\ntwo: b`}
                 } else if (tiddler.hasOwnProperty('someField')) {
                     return {title: tiddler.title, type: "application/x-tiddler-dictionary", text: `one: a\nsomeField: ${tiddler.someField}\ntwo: b`}
                 }
             });
-            const newWidgetText = data.widgetText.replace("listField='colors'", "listIndex='colors'").replace(/\$field/g, '$index').replace("listField='someField'", "listIndex='someField'");
-            const newChange = {};
-            for (const key of Object.keys(data.expectedChange)) {
-                const oldChange = data.expectedChange[key];
+            var newWidgetText = data.widgetText.replace("listField='colors'", "listIndex='colors'").replace(/\$field/g, '$index').replace("listField='someField'", "listIndex='someField'");
+            var newChange = {};
+            for (var key of Object.keys(data.expectedChange)) {
+                var oldChange = data.expectedChange[key];
                 if (oldChange.colors) {
                     newChange[key] = { text: `one: a\ncolors: ${oldChange.colors}\ntwo: b` }
                 } else if (oldChange.someField !== undefined) {
@@ -296,7 +315,7 @@ Tests the checkbox widget thoroughly.
             return newData;
         });
 
-        const filterModeTests = [
+        var filterModeTests = [
             {
                 testName: "filter mode false -> true",
                 tiddlers: [{title: "Colors", colors: "red orange yellow"}],
@@ -482,9 +501,10 @@ Tests the checkbox widget thoroughly.
             },
         ];
 
-        const checkboxTestData = fieldModeTests.concat(
+        var checkboxTestData = fieldModeTests.concat(
             indexModeTests,
             listModeTests,
+            listModeTestsForDateFields,
             listModeTestsWithListField,
             listModeTestsWithTagsField,
             indexListModeTests,
@@ -494,7 +514,7 @@ Tests the checkbox widget thoroughly.
         /*
          * Checkbox widget tests using the test data above
          */
-        for (const data of checkboxTestData) {
+        for (var data of checkboxTestData) {
             it('checkbox widget test: ' + data.testName, function() {
                 // Setup
     
@@ -505,7 +525,7 @@ Tests the checkbox widget thoroughly.
     
                 // Check initial state
     
-                const widget = findNodeOfType('checkbox', widgetNode);
+                var widget = findNodeOfType('checkbox', widgetNode);
                 // Verify that the widget is or is not checked as expected
                 expect(widget.getValue()).toBe(data.startsOutChecked);
     
@@ -519,16 +539,16 @@ Tests the checkbox widget thoroughly.
                 widget.handleChangeEvent(null);
     
                 // Check state again: in most tests, checkbox should be inverse of what it was
-                const finalValue = data.hasOwnProperty('finalValue') ? data.finalValue : !data.startsOutChecked;
+                var finalValue = data.hasOwnProperty('finalValue') ? data.finalValue : !data.startsOutChecked;
                 expect(widget.getValue()).toBe(finalValue);
     
                 // Check that tiddler(s) has/have gone through expected change(s)
-                for (const key of Object.keys(data.expectedChange)) {
-                    const tiddler = wiki.getTiddler(key);
-                    const change = data.expectedChange[key];
-                    for (const fieldName of Object.keys(change)) {
-                        const expectedValue = change[fieldName];
-                        const fieldValue = tiddler.fields[fieldName];
+                for (var key of Object.keys(data.expectedChange)) {
+                    var tiddler = wiki.getTiddler(key);
+                    var change = data.expectedChange[key];
+                    for (var fieldName of Object.keys(change)) {
+                        var expectedValue = change[fieldName];
+                        var fieldValue = tiddler.fields[fieldName];
                         expect(fieldValue).toEqual(expectedValue);
                     }
                 }

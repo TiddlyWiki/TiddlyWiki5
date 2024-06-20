@@ -5,6 +5,7 @@ released: 20221213163110439
 tags: ReleaseNotes
 title: Release 5.2.4
 type: text/vnd.tiddlywiki
+description: Hot fixes for v5.2.3, Twitter archivist plugin, GenesisWidget, JSON read operators, nested macro definitions
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.3...v5.2.4]]//
 
@@ -13,6 +14,10 @@ type: text/vnd.tiddlywiki
 """
 	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/0dc30086e933cf2272cddb076a9fcbedad252735/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
 >>
+
+! Important Update
+
+After the release of v5.2.5, we found some backwards compatibility issues with the stylesheet changes in [[#7039|https://github.com/Jermolene/TiddlyWiki5/pull/7039]] and [[#6910|https://github.com/Jermolene/TiddlyWiki5/pull/6910]]. We have therefore decided to make a rapid bug fix [[Release 5.2.5]] to resolve these issues, and all users should upgrade to the new version.
 
 ! Major Improvements
 

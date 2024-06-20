@@ -1,6 +1,8 @@
-title: $:/ContributionBanner
-tags: $:/tags/EditTemplate
+created: 20240313115309914
 list-after: $:/core/ui/EditTemplate/title
+modified: 20240313115810689
+tags: $:/tags/EditTemplate
+title: $:/ContributionBanner
 
 \define base-github()
 https://github.com/Jermolene/TiddlyWiki5/edit/tiddlywiki-com/editions/tw5.com/tiddlers/
@@ -10,7 +12,9 @@ https://github.com/Jermolene/TiddlyWiki5/edit/tiddlywiki-com/editions/tw5.com/ti
 <$list filter="[[$:/config/OriginalTiddlerPaths]getindex<draft-of>]" variable="target" >
 <div class="tc-improvement-banner">
 {{$:/core/images/star-filled}} Can you help us improve this documentation? [[Find out how|Improving TiddlyWiki Documentation]] to
-<a href={{{ [<target>addprefix<base-github>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">edit this tiddler on ~GitHub</a>
+<a href={{{ [<draft-of>encodeuricomponent[]addprefix[https://saqimtiaz.github.io/tw5-docs-pr-maker/#]] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">edit this tiddler in Docs PR Maker</a>
+or
+<a href={{{ [<target>addprefix<base-github>] }}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">edit it directly on ~GitHub</a>
 </div>
 </$list>
 </$set>

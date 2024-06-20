@@ -1,0 +1,27 @@
+caption: substitute
+created: 20230614223551834
+modified: 20230615173049692
+op-input: a [[selection of titles|Title Selection]]
+op-output: the input titles with placeholders for filter expressions, parameter and variables replaced with their corresponding values
+op-parameter: the <<.op substitute>> operator optionally accepts a variable number of parameters, see below for details
+op-purpose: returns each item in the list, replacing within each title placeholders for filters, parameters and variables with their corresponding values
+tags: [[Filter Operators]] [[String Operators]]
+title: substitute Operator
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.0">>
+
+The <<.op substitute>> operator replaces any placeholders in the input titles in the following order:
+
+# filter expressions
+# parameters to the <<.op substitute>> operator
+# variables
+
+|placeholder syntax|description|h
+|`$n$`|Text substitution of a parameter provided to the operator, where n is the position of the parameter starting with 1 for the first parameter. Unmatched placeholders pass through unchanged. |
+|`$(varname)$`|Text substitution of a variable. Undefined variables are replaced with an empty string. |
+|`${ filter expression }$`|Text substitution of the first result of evaluating a filter expression. In other words, if the filter returns multiple titles only the first one will be used. |
+
+<<.tip """Placeholders that contain square bracket characters are not valid filter syntax when used directly in a filter expression. However they can be provided as input to the <$macrocall $name=".op" _="substitute"/> operator as text references or variables""">>
+
+<<.operator-examples "substitute">>

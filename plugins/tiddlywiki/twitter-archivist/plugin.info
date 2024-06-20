@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/twitter-archivist",
 	"name": "Twitter Archivist",
 	"description": "Twitter archiving tools",
-	"list": "readme usage spec todo"
+	"list": "readme usage spec todo",
+	"stability": "STABILITY_2_STABLE"
 }

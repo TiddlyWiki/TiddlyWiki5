@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: Verschlüsselung deaktivieren
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
 Encryption/SetPassword/Caption: Verschlüsselung
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
+EmergencyDownload/Caption: Speichern aller Tiddler als JSON File
 ExportPage/Caption: Alle exportieren
 ExportPage/Hint: Alle Tiddler exportieren
 ExportTiddler/Caption: Exportieren
@@ -67,6 +68,8 @@ More/Caption: mehr
 More/Hint: Weitere Aktionen
 NewHere/Caption: Neu hier
 NewHere/Hint: Erstelle einen neuen Tiddler, der mit dem Namen dieses Tiddlers getaggt ist
+NetworkActivity/Caption: Netzwerk Aktivität
+NetworkActivity/Hint: Alle offen Netwerk Anfragen beenden
 NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
 NewJournalHere/Caption: Neues Journal hier

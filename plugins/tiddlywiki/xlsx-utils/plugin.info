@@ -3,5 +3,6 @@
 	"name": "XLSX Utils",
 	"description": "XLSX spreadsheet utilities",
 	"list": "readme controls license",
-	"dependents": ["$:/plugins/tiddlywiki/jszip"]
+	"dependents": ["$:/plugins/tiddlywiki/jszip"],
+	"stability": "STABILITY_2_STABLE"
 }

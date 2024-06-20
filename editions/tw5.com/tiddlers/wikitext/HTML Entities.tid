@@ -1,0 +1,66 @@
+created: 20130204165019000
+modified: 20221025124615415
+tags: WikiText
+title: HTML Entities
+type: text/vnd.tiddlywiki
+
+!! Summary
+
+Use HTML entities to enter characters that cannot easily be typed on an ordinary keyboard. They take the form of an ampersand (`&`), an identifying string, and a terminating semi-colon (`;`), e.g. `&amp;` for the ''&'' character.
+
+!! Markup
+
+```
+The value of Tiddlers&trade; cannot even be expressed in &pound;, &euro; or &dollar;.
+```
+
+''Displays as:''
+
+The value of Tiddlers&trade; cannot even be expressed in &pound;, &euro; or &dollar;.
+
+!! Entity References
+
+Comprehensive lists of html entities can be found at...
+
+* [[Mozilla Developer Network -- Entities|https://developer.mozilla.org/en-US/docs/Glossary/Entity]]
+
+* [[HTML Spec official list -- Entities|https://html.spec.whatwg.org/multipage/named-characters.html#named-character-references]]
+
+
+!! Examples Of Common And Useful Entities
+
+|>|>|>|>|>|>| ! HTML Entities |
+| &amp;nbsp; | &nbsp; | no-break space | &nbsp;&nbsp; | &amp;apos; | &apos; | single quote, apostrophe |
+| &amp;ndash; | &ndash; | en dash |~| &amp;quot; | " | quotation mark |
+| &amp;mdash; | &mdash; | em dash |~| &amp;prime; | &prime; | prime; minutes; feet |
+| &amp;hellip; | &hellip; |	horizontal ellipsis |~| &amp;Prime; | &Prime; | double prime; seconds; inches |
+| &amp;copy; | &copy; | Copyright symbol |~| &amp;lsquo; | &lsquo; | left single quote |
+| &amp;reg; | &reg; | Registered symbol |~| &amp;rsquo; | &rsquo; | right  single quote |
+| &amp;trade; | &trade; | Trademark symbol |~| &amp;ldquo; | &ldquo; | left double quote |
+| &amp;dagger; | &dagger; | dagger |~| &amp;rdquo; | &rdquo; | right double quote |
+| &amp;Dagger; | &Dagger; | double dagger |~| &amp;laquo; | &laquo; | left angle quote |
+| &amp;para; | &para; | paragraph sign |~| &amp;raquo; | &raquo; | right angle quote |
+| &amp;sect; | &sect; | section sign |~| &amp;times; | &times; | multiplication symbol |
+| &amp;uarr; | &uarr; | up arrow |~| &amp;darr; | &darr; | down arrow |
+| &amp;larr; | &larr; | left arrow |~| &amp;rarr; | &rarr; | right arrow |
+| &amp;lArr; | &lArr; | double left arrow |~| &amp;rArr; | &rArr; | double right arrow |
+| &amp;harr; | &harr; | left right arrow |~| &amp;hArr; | &hArr; | double left right arrow |
+
+!! Accented Characters
+
+The table below shows how accented characters can be built up by //substituting// the 
+underscore (_) in the second table into the corresponding character. eg:
+
+|Code |Character |Example |Result |h
+|`&Auml;` |Ä | `&Auml;pfel` |&Auml;pfel |
+
+
+|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>|>| ! Accented Characters |
+| grave accent | &amp;_grave; | &Agrave; | &agrave; | &Egrave; | &egrave; | &Igrave; | &igrave; | &Ograve; | &ograve; | &Ugrave; | &ugrave; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| acute accent | &amp;_acute; | &Aacute; | &aacute; | &Eacute; | &eacute; | &Iacute; | &iacute; | &Oacute; | &oacute; | &Uacute; | &uacute; | &nbsp; | &nbsp; | &Yacute; | &yacute; | &nbsp; | &nbsp; |
+| circumflex accent | &amp;_circ; | &Acirc; | &acirc; | &Ecirc; | &ecirc; | &Icirc; | &icirc; | &Ocirc; | &ocirc; | &Ucirc; | &ucirc; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| umlaut mark | &amp;_uml; | &Auml; | &auml; |  &Euml; | &euml; | &Iuml; | &iuml; | &Ouml; | &ouml; | &Uuml; | &uuml; | &nbsp; | &nbsp; | &Yuml; | &yuml; | &nbsp; | &nbsp; |
+| tilde | &amp;_tilde; | &Atilde; | &atilde; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &Otilde; | &otilde; | &nbsp; | &nbsp; | &Ntilde; | &ntilde; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| ring | &amp;_ring; | &Aring; | &aring; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| slash | &amp;_slash; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &Oslash; | &oslash; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| cedilla | &amp;_cedil; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &Ccedil; | &ccedil; |

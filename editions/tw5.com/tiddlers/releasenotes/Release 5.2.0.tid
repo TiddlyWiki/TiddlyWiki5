@@ -5,6 +5,7 @@ released: 20211003151502543
 tags: ReleaseNotes
 title: Release 5.2.0
 type: text/vnd.tiddlywiki
+description: JSON store area, nestable macros, counter attribute for ListWidget, MessageCatcherWidget
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.23...v5.2.0]]//
 

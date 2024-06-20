@@ -1,11 +1,13 @@
 title: $:/language/Docs/Fields/
 
 _canonical_uri: Pełny adres URL do zewnętrznego obrazu
+author: Imię autora wtyczki
 bag: Nazwa worka, z ktorego pochodzi tiddler
 caption: Tekst wyświetlany na zakładce lub przycisku
 code-body: Ustawienie wartości na ''tak'' spowoduje wyświetlanie tiddlera jako kod
 color: Wartość koloru CSS powiążanego z tym tiddlerem
 component: Nazwa komponentu odpowiedzialnego za [[alert|AlertMechanism]]
+core-version: Wersja TiddlyWiki która jest wspierana przez wtyczkę
 current-tiddler: Używane by zapamiętać ostatniego tiddlera w [[liście historii|HistoryMechanism]]
 created: Data kiedy utworzono tiddlera
 creator: Imię twórcy tiddlera
@@ -22,7 +24,9 @@ list-before: Jeżeli ustawione, nazwa tiddlera przed którym ten tiddler będzie
 list-after: Jeżeli ustawione, nazwa tiddlera po którym ten tiddler będzie dodany w sortowanej liście nazw tiddlerów; lub na końcu listy jeżeli pole jest obecne ale puste
 modified: Czas i data ostatniej modyfikacji
 modifier: Tytuł tiddlera powiązanego z osobą, która ostatnio modyfikowała tego tiddlera
+module-type: Rodzaj modułu używany przez wtyczki napisane w javascripcie
 name: Czytelna nazwa powiązana z tiddlerem wtyczki
+parent-plugin: Określa nadrzędną wtyczkę
 plugin-priority: Numeryczna wartość określająca tiddlera wtyczki
 plugin-type: Typ tiddlera wtyczki
 revision: Numer rewizji tiddlera przechowywany na serwerze
