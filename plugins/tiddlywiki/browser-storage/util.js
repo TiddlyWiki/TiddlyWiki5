@@ -45,7 +45,7 @@ BrowserStorageUtil.prototype.addCachedTiddlers = function() {
 };
 
 BrowserStorageUtil.prototype.removeTiddlerFromLocalStorage = function(title) {
-    console.log("browser-storage: Removing", title);
+    this.logger.log("Removing", title);
     window.localStorage.removeItem(this.options.prefix + title);
 };
 
@@ -53,9 +53,9 @@ BrowserStorageUtil.prototype.saveTiddlerToLocalStorage = function(title) {
     // Get the tiddler
     var tiddler = $tw.wiki.getTiddler(title);
     if(tiddler) {
-        if (this.wiki.tiddlerExists(title)) {
+        if(this.wiki.tiddlerExists(title)) {
             // This is not a shadow tiddler
-            console.log("browser-storage: Saving",title);
+            this.logger.log("Saving",title);
             // Get the JSON of the tiddler
             var json = JSON.stringify(tiddler.getFieldStrings());
             // Try to save it to local storage
@@ -65,13 +65,11 @@ BrowserStorageUtil.prototype.saveTiddlerToLocalStorage = function(title) {
                 if(e.name === "QuotaExceededError") {
                     // Complain if we failed
                     var msg = $tw.wiki.getTiddlerText(this.QUOTA_EXCEEDED_ALERT_TITLE,this.DEFAULT_QUOTA_EXCEEDED_ALERT_PREFIX + title + this.DEFAULT_QUOTA_EXCEEDED_ALERT_SUFFIX);
-                    if(this.options.logger) {
-                        this.options.logger.alert(msg);
-                    }
+                    this.logger.alert(msg);
                     // No point in keeping old values around for this tiddler
                     window.localStorage.removeItem(this.options.prefix + title);
                 } else {
-                    console.log("Browser-storage error:",e);
+                    this.logger.log("Error:",e);
                 }
             }
         } else {
@@ -83,18 +81,17 @@ BrowserStorageUtil.prototype.saveTiddlerToLocalStorage = function(title) {
         // In local storage, use the special value of empty string to mark the tiddler as deleted
         // On future page loads, if the tiddler is already gone from startup then the blank entry
         // will be removed from localstorage. Otherwise, the tiddler will be deleted.
-        console.log("browser-storage: Blanking",title); 
+        this.logger.log("Blanking",title);
         try {
             window.localStorage.setItem(this.options.prefix + title, "");
         } catch(e) {
-            console.log("Browser-storage error:",e);
+            this.logger.error("Error:",e);
         }
     }
 };
 
 BrowserStorageUtil.prototype.clearLocalStorage = function() {
-    var url = window.location.pathname,
-        log = [];
+    var url = window.location.pathname;
     // Step through each browser storage item
     if(window.localStorage) {
         for(var index=window.localStorage.length - 1; index>=0; index--) {
