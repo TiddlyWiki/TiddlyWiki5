@@ -6,7 +6,7 @@ op-input: a list of items
 op-output: those items at least as long as the specified minimum length
 op-parameter: the minimum length for items
 op-parameter-name: minlength
-op-purpose: filter items their length is greater than the specified minimum length
+op-purpose: filter items whose length is greater than the specified minimum length
 tags: [[Filter Operators]]
 title: minlength Operator
 type: text/vnd.tiddlywiki
