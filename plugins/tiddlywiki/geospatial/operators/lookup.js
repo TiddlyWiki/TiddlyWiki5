@@ -33,7 +33,7 @@ exports.geolookup = function(source,operator,options) {
 
 function getPolygonsContainingPoint(featureCollection,point) {
 	// Filter the GeoJSON feature collection to only include polygon features containing the point
-	const properties = [];
+	var properties = [];
 	turf.featureEach(featureCollection,function(feature) {
 		if(feature.geometry.type === "Polygon" && turf.booleanPointInPolygon(point,feature)) {
 			properties.push(feature.properties);

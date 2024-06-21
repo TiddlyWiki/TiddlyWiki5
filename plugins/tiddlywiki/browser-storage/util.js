@@ -53,7 +53,7 @@ BrowserStorageUtil.prototype.saveTiddlerToLocalStorage = function(title) {
     // Get the tiddler
     var tiddler = $tw.wiki.getTiddler(title);
     if(tiddler) {
-        if (this.wiki.tiddlerExists(title)) {
+        if(this.wiki.tiddlerExists(title)) {
             // This is not a shadow tiddler
             console.log("browser-storage: Saving",title);
             // Get the JSON of the tiddler

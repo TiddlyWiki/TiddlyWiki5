@@ -35,7 +35,7 @@ exports.startup = function() {
 			actionsSuccess = params.actionsSuccess,
 			actionsError = params.actionsError;
 		// Assemble the options for getCurrentPosition()
-		const opts = {
+		var opts = {
 			enableHighAccuracy: params.accuracy !== "low",
 			timeout: Infinity,
 			maximumAge: 0

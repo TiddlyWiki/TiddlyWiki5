@@ -84,7 +84,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
-				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
+				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = fileInfo;
@@ -131,7 +131,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	if(fileInfo) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
 			if(err) {
-				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler \"" + title + "\"",err);
 					return callback(null,fileInfo);
