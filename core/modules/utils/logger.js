@@ -16,6 +16,12 @@ var ALERT_TAG = "$:/tags/Alert";
 
 /*
 Make a new logger
+componentName: logger name, eg: "filesystem" as found in: $:/plugins/tiddlywiki/filesystem/filesystemadaptor.js
+Options:
+- colour ... default colour used to style text output
+- enable ... default: true - logger is enabled
+- save ... default: true - message will be saved to buffer
+- saveLimit ... default 100kByte - limit buffer size
 */
 function Logger(componentName,options) {
 	options = options || {};
@@ -33,19 +39,23 @@ Logger.prototype.setSaveBuffer = function(logger) {
 	this.saveBufferLogger = logger;
 };
 
+Logger.prototype.writeToBuffer = function(/* args */) {
+	var self = this;
+	this.saveBufferLogger.buffer += $tw.utils.formatDateString(new Date(),"YYYY-0MM-0DD 0hh:0mm:0ss.0XXX") + " #";
+	$tw.utils.each(Array.prototype.slice.call(arguments,0),function(arg,index) {
+		self.saveBufferLogger.buffer += " " + arg.join(" - ");
+	});
+	this.saveBufferLogger.buffer += "\n";
+	this.saveBufferLogger.buffer = this.saveBufferLogger.buffer.slice(-this.saveBufferLogger.saveLimit);
+};
+
 /*
 Log a message
 */
 Logger.prototype.log = function(/* args */) {
-	var self = this;
 	if(this.enable) {
 		if(this.saveBufferLogger.save) {
-			this.saveBufferLogger.buffer += $tw.utils.formatDateString(new Date(),"YYYY MM DD 0hh:0mm:0ss.0XXX") + ":";
-			$tw.utils.each(Array.prototype.slice.call(arguments,0),function(arg,index) {
-				self.saveBufferLogger.buffer += " " + arg;
-			});
-			this.saveBufferLogger.buffer += "\n";
-			this.saveBufferLogger.buffer = this.saveBufferLogger.buffer.slice(-this.saveBufferLogger.saveLimit);
+			this.writeToBuffer(Array.prototype.slice.call(arguments,0));
 		}
 		if(console !== undefined && console.log !== undefined) {
 			var logMessage = [$tw.utils.terminalColour(this.colour) + this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0));
@@ -56,14 +66,50 @@ Logger.prototype.log = function(/* args */) {
 };
 
 /*
-Log an error message to console.error so it also gets a red colour in browsers
+Log an "error" message to console.error so it also gets a red colour in browsers
 */
 Logger.prototype.error = function(/* args */) {
-	var self = this;
-	if(console !== undefined && console.error !== undefined) {
-		var logMessage = [$tw.utils.terminalColour(this.colour) + this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0));
-		logMessage[logMessage.length-1] += $tw.utils.terminalColour();
-		return Function.apply.call(console.error, console, logMessage);
+	if(this.enable) {
+		if(this.saveBufferLogger.save) {
+			this.writeToBuffer(Array.prototype.slice.call(arguments,0));
+		}
+		if(console !== undefined && console.error !== undefined) {
+			var logMessage = [$tw.utils.terminalColour("red") + this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0));
+			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
+			return Function.apply.call(console.error, console, logMessage);
+		}
+	}
+};
+
+/*
+Log an "info" message to console.info so it also gets an (i) info icon in front
+*/
+Logger.prototype.info = function(/* args */) {
+	if(this.enable) {
+		if(this.saveBufferLogger.save) {
+			this.writeToBuffer(Array.prototype.slice.call(arguments,0));
+		}
+		if(console !== undefined && console.info !== undefined) {
+			var logMessage = [$tw.utils.terminalColour(this.colour) + this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0));
+			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
+			return Function.apply.call(console.info, console, logMessage);
+		}
+	}
+};
+
+/*
+Log an "warning" message to console.info so it also gets an (!) warning icon in front
+*/
+Logger.prototype.warn = function(/* args */) {
+	if(this.enable) {
+		if(this.saveBufferLogger.save) {
+			this.writeToBuffer(Array.prototype.slice.call(arguments,0));
+		}
+		if(console !== undefined && console.warn !== undefined) {
+			var logMessage = [$tw.utils.terminalColour("orange") + this.componentName + ":"].concat(Array.prototype.slice.call(arguments,0));
+			logMessage[logMessage.length-1] += $tw.utils.terminalColour();
+			return Function.apply.call(console.warn, console, logMessage);
+		}
 	}
 };
 
@@ -72,6 +118,13 @@ Read the message buffer
 */
 Logger.prototype.getBuffer = function() {
 	return this.saveBufferLogger.buffer;
+};
+
+/*
+Clear the message buffer
+*/
+Logger.prototype.clearBuffer = function() {
+	this.saveBufferLogger.buffer = "";
 };
 
 /*
