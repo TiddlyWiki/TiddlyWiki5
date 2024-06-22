@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/items/sidebar
-caption: <<lingo Items/Sidebar/Name $:/plugins/tiddlywiki/menubar/language/>>
-description: <<lingo Items/Sidebar/Name $:/plugins/tiddlywiki/menubar/language/>>
+caption: Sidebar
+description: Sidebar
 is-dropdown: yes
 tags: $:/tags/MenuBar
 

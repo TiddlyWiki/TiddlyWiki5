@@ -28,9 +28,13 @@ exports.parse = function() {
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any classes, whitespace and then the optional cite itself
+	var classStart = this.parser.pos;
 	classes.push.apply(classes, this.parser.parseClasses());
+	var classEnd = this.parser.pos;
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
+	var citeStart = this.parser.pos;
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
+	var citeEnd = this.parser.pos;
 	// before handling the cite, parse the body of the quote
 	var tree = this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
@@ -38,18 +42,24 @@ exports.parse = function() {
 		tree.unshift({
 			type: "element",
 			tag: "cite",
-			children: cite
+			children: cite,
+			start: citeStart,
+			end: citeEnd
 		});
 	}
 	// Parse any optional cite
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
+	citeStart = this.parser.pos;
 	cite = this.parser.parseInlineRun(/(\r?\n)/mg);
+	citeEnd = this.parser.pos;
 	// If we got a cite, push it
 	if(cite.length > 0) {
 		tree.push({
 			type: "element",
 			tag: "cite",
-			children: cite
+			children: cite,
+			start: citeStart,
+			end: citeEnd
 		});
 	}
 	// Return the blockquote element
@@ -57,7 +67,7 @@ exports.parse = function() {
 		type: "element",
 		tag: "blockquote",
 		attributes: {
-			class: { type: "string", value: classes.join(" ") },
+			class: { type: "string", value: classes.join(" "), start: classStart, end: classEnd },
 		},
 		children: tree
 	}];

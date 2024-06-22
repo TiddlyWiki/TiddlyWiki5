@@ -136,16 +136,16 @@ tags: $:/tags/Stylesheet
 
 .tc-tour-panel-fullscreen .tc-tour-panel-banner-image {
 	display: block;
-	width: 200px;
+	width: 100px;
 	float: right;
 	margin: 4em 2em 2em 2em;
 }
 
 .tc-tour-panel-fullscreen .tc-tour-panel-inner {
 	width: 30%;
-	min-width: 400px;
+	min-width: 350px;
 	height: 30%;
-	margin: 20% auto;
+	margin: 10em auto 0 auto;
 }
 
 .tc-tour-panel .tc-tour-panel-inner .tc-tiddler-frame {

@@ -52,10 +52,11 @@ The easiest way to use the <<.wlink TestCaseWidget>> is by creating TestCaseTidd
 
 ! Translation improvements
 
-Improvements to the following translations:
+This release also includes improvements to the following translations:
 
 * Chinese
 * French
+* German
 * Macedonian
 * Polish
 
@@ -69,7 +70,7 @@ Improvements to the following translations:
 
 ! Filter Improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> new [[backtranscludes Operator]]
+* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6081">> new [[transcludes|transcludes Operator]] and [[backtranscludes|backtranscludes Operator]] operators
 
 ! Usability Improvements
 
@@ -78,12 +79,13 @@ Improvements to the following translations:
 
 ! Hackability Improvements
 
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7866">> the wikitext parser to generate start/end properties for all nodes
 * <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/8109">> [[WidgetMessage: tm-http-request]] to be able to use Basic Authentication
+* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8225">> [[WidgetMessage: tm-http-request]] to allow the default headers to be suppressed
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7882">> infinite recursion handling using a custom exception
 * <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7966">> button to the JavaScript error popup allowing tiddlers to be saved to a local JSON file
 * <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/8120">> to latest version of modern-normalize 2.0.0
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8211">> [[tm-permalink|WidgetMessage: tm-permalink]], [[tm-permaview|WidgetMessage: tm-permaview]] and [[tm-copy-to-clipboard|WidgetMessage: tm-copy-to-clipboard]] messages to allow the notification text to be customised
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8225">> [[WidgetMessage: tm-http-request]] to allow the default headers to be suppressed
 * <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/8097">> window title rendering to automatically include global definitions
 
 ! Bug Fixes
@@ -108,11 +110,15 @@ Improvements to the following translations:
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7945">> theme font size settings to open in new window CSS
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8098">> backlink parser to prevent it parsing binary tiddlers
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8203">> issue where default parameters were not applied when a ParametersWidget did not find a parent TranscludeWidget
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8222">> crash when using [[splitregexp Operator]] with a regular expression that includes capture groups
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8239">> ActionLogWidget evaluating all variables in scope
 
 ! Node.js Improvements
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8141">> usage of "Cache-Control" header
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7878">> SaveCommand not overwriting files when required
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8237">> server header authentication when header is missing
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8253">> ButtonWidget should refresh when "tooltip" attribute changes
 
 ! Performance Improvements
 
@@ -122,7 +128,7 @@ Improvements to the following translations:
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8195">> issue with fakedom TW_Node inheritence
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8099">> SJCL library creating variables in global scope
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8179">> fix `widget.getVariableInfo()` to always return a `params` property
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8179">> `widget.getVariableInfo()` to always return a `params` property
 
 ! Infrastructure Improvements
 
@@ -145,6 +151,7 @@ eschlon
 etardiff
 flibbles
 FSpark
+Gk0Wk
 hoelzro
 jinix6
 joshuafontany

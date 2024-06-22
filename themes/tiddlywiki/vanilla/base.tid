@@ -2513,6 +2513,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
+.tc-control-panel-setting {
+	border-top: 1px solid <<colour blockquote-bar>>;
+}
+
 .tc-plugin-info {
 	display: flex;
 	text-shadow: none;
@@ -2601,23 +2605,23 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-stable {
-	border: 1px solid green;
-	color: green;
+	border: 1px solid <<colour stability-stable>>;
+	color: <<colour stability-stable>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-experimental {
-	border: 1px solid #c07c00;
-	color: #c07c00;
+	border: 1px solid <<colour stability-experimental>>;
+	color: <<colour stability-experimental>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-deprecated {
-	border: 1px solid red;
-	color: red;
+	border: 1px solid <<colour stability-deprecated>>;
+	color: <<colour stability-deprecated>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-legacy {
-	border: 1px solid blue;
-	color: blue;
+	border: 1px solid <<colour stability-legacy>>;
+	color: <<colour stability-legacy>>;
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-buttons {
