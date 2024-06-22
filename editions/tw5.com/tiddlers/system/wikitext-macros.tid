@@ -75,7 +75,10 @@ type: text/vnd.tiddlywiki
 <tr>
 	<th><<id>></th>
 	<td><$codeblock code=<<code>>/></td>
-	<td><<code>></td>
+	<td>
+
+		<<code>>
+	</td>
 </tr>
 \end
 
