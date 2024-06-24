@@ -2,21 +2,21 @@ title: $:/plugins/tiddlywiki/multiwikiserver/readme
 
 This plugin extends the TiddlyWiki 5 server running on Node.js to be able to host multiple wikis that can share content or be independent.
 
-Installation
+!! Installation
 
 ```
+# Clone the repo into ./TiddlyWiki5
 git clone https://github.com/Jermolene/TiddlyWiki5.git --branch multi-wiki-support
-
 cd TiddlyWiki5
 
+# Install dependencies
 npm install
-```
 
-To start the server:
-
-```
+# Start the server
 npm start
 ```
+
+Then visit the administration interface in a browser: http://127.0.0.1:8080/
 
 The `npm start` command is a shortcut for the following command:
 
@@ -24,13 +24,9 @@ The `npm start` command is a shortcut for the following command:
 node ./tiddlywiki.js ./editions/multiwikiserver --mws-listen
 ```
 
-Then visit the administration interface in a browser:
-
-* http://127.0.0.1:8080/
-
 Note that changes are written to the topmost bag in a recipe.
 
-Note that until syncing is improved it is necessary to use "Get latest changes from the server" to speed up propogation of changes.
+Note that until syncing is improved it is necessary to use "Get latest changes from the server" to speed up propogation of changes between users.
 
 To run the tests:
 
