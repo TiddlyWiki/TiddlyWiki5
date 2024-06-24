@@ -13,7 +13,7 @@ title: $:/core/ui/testcases/DefaultTemplate
 	state={{{ [<qualify "$:/state/testcase">] }}}
 >
 	<div class="tc-test-case-wrapper">
-		<$transclude $variable="copy-to-clipboard-above-right" src={{{[<payloadTiddlers>jsonindexes[]] :filter[<payloadTiddlers>jsonget<currentTiddler>,[title]match[Output]] :map[<payloadTiddlers>jsonget<currentTiddler>,[text]]}}}/>
+		<$transclude $variable="copy-to-clipboard-above-right" src={{Output}}/>
 		<div class="tc-test-case-header">
 			<h2>
 				<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[div]] }}} to=<<testcaseTiddler>>>
