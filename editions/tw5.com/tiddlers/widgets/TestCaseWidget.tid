@@ -72,6 +72,7 @@ The test case wiki will inherit variables that are visible to the <<.wid testcas
 |!Variable |!Description |
 |<<.var linkTarget>> |Causes the test case description to be rendered as a link to the current tiddler |
 |<<.var displayFormat>> |Defaults to "wikitext", can also be "plaintext" to force plain text display |
+|<<.var testcaseTiddler>> |Title of the tiddler to be used as a link target for the testcase description |
 
 A custom template can be specified for special purposes. For example, the provided template $:/core/ui/testcases/RawJSONTemplate just displays the payload tiddlers in JSON, which can be used for debugging purposes.
 
