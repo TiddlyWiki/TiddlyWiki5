@@ -19,6 +19,7 @@ title: $:/core/ui/testcases/DefaultTemplate/SourceTabs
 	</table>
 </$list>
 <$edit class="tc-edit-texteditor" tiddler=<<currentTab>>/>
+<$macrocall $name="copy-to-clipboard" src={{{ [<currentTab>get[text]] }}}/>
 \end
 
 <$transclude $variable="body" $mode="inline"/>

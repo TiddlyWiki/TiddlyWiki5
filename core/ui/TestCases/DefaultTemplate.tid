@@ -27,6 +27,31 @@ title: $:/core/ui/testcases/DefaultTemplate
 					<%endif%>
 					<$view tiddler="Description" mode="inline"/>
 				</$genesis>
+				<span class="tc-test-case-toolbar">
+					<$button popup=`$(state)$-more`
+						tooltip={{$:/language/Buttons/More/Hint}}
+						aria-label={{$:/language/Buttons/More/Caption}}
+						class="tc-btn-invisible"
+						selectedClass="tc-selected"
+					>
+						{{$:/core/images/down-arrow}}
+					</$button>
+					<$let 
+						tv-config-toolbar-icons="yes"
+						tv-config-toolbar-text="yes"
+						tv-config-toolbar-class="tc-btn-invisible"
+					>
+						<$reveal state=`$(state)$-more` type="popup" position="belowleft" animate="yes">
+							<div class="tc-drop-down">
+								<$list filter="[all[shadows+tiddlers]tag[$:/tags/TestCase/Actions]!has[draft.of]]"
+									variable="listItem"
+								>
+									<$transclude tiddler=<<listItem>> mode="inline"/>
+								</$list>
+							</div>
+						</$reveal>
+					</$let>
+				</span>
 			</h2>
 		</div>
 		<%if [[Narrative]is[tiddler]] %>
