@@ -1,0 +1,11 @@
+title: $:/core/ui/testcases/actions/Import
+tags: $:/tags/TestCase/Actions
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/TestCaseImport/Hint}} aria-label={{$:/language/Buttons/TestCaseImport/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-sendmessage $message="tm-import-tiddlers" $param=<<payloadTiddlers>>/>
+{{$:/core/images/permalink-button}}
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/TestCaseImport/Caption}}/>
+</span>
+</$button>
