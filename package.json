@@ -32,7 +32,15 @@
     "node": ">=0.8.2"
   },
   "scripts": {
+    "start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
     "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+    "pre": "node ./tiddlywiki.js ./editions/prerelease --listen",
+    "empty": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/empty --listen",
+    "tour": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/tour --listen",
+    "tw.org": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/tw.org --listen",
+    "upgrade": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/upgrade --listen",
+    "full": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/full --listen",
+    "translators": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/translators --listen",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
