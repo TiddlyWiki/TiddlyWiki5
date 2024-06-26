@@ -3337,6 +3337,10 @@ span.tc-translink > a:first-child {
 	fill: <<colour tiddler-controls-foreground>>;
 }
 
+.tc-test-case-toolbar .tc-drop-down {
+	font-size: 0.8em;
+}
+
 .tc-test-case-result-fail {
 	border: 1px solid <<colour foreground>>;
 	background-color: <<colour background>>;
@@ -3380,8 +3384,12 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-source .tc-tab-content {
-	background: <<colour background>>;
+	background: inherit;
 	margin: 0;
+}
+
+.tc-test-case-source .tc-tab-content .tc-field-table {
+	background: <<colour background>>;
 }
 
 .tc-test-case-source .tc-field-table {
@@ -3402,6 +3410,11 @@ span.tc-translink > a:first-child {
 
 .tc-test-case-source .tc-tab-buttons {
 	padding-top: 0;
+}
+
+.tc-test-case-footer-toolbar {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .tc-test-case-output {
