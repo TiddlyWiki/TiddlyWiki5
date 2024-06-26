@@ -66,3 +66,16 @@ Provide a dated heading for this example where only the placeholder (but not the
 <$macrocall $name=".example" n="3"
 eg="""<$edit-text tiddler=<<currentTiddler>> field="heading" size="25" focus="yes" focusSelectFromEnd="13" default={{{ [[Heading Text (]] [<now YYYY-0MM-0DD>] [[)]] +[join[]] }}} />
 """/>
+
+!!! Input Actions 
+
+<$macrocall $name=".example" n="4"
+eg="""\define onInput()
+  <%if [get[temp]split[]first[3]join[]match[$:/]] %>
+		<$action-sendmessage $message="tm-confetti-launch"/>
+  <% endif %>
+\end
+
+Type a new tiddler name, starting with the system prefix `$:/`: <$edit-text inputActions=<<onInput>> field="temp" size=30/>
+
+"""/>
