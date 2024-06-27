@@ -45,7 +45,7 @@
     "server-external-js": "node ./tiddlywiki.js ./editions/server-external-js --listen",
 
     "prewiki": "npm run wiki:info -s",
-    "postwiki:info" : "echo \"or: [translators, aws, classicparserdemo, codemirrordemo, d3demo, dynaviewdemo, geospatialdemo, highlightdemo, innerwikidemo, introduction, ja-JP, katexdemo, markdowndemo, prerelease, resumebuilder, tw5.com-docs, text-slicer, twitter-archivist, zh-Hans, zh-Hant\"",
+    "postwiki:info" : "echo \"or: [translators, aws, classicparserdemo, codemirrordemo, d3demo, dynaviewdemo, geospatialdemo, highlightdemo, innerwikidemo, introduction, ja-JP, katexdemo, markdowndemo, prerelease, resumebuilder, share, tw5.com-docs, text-slicer, twitter-archivist, zh-Hans, zh-Hant\"",
 
     "precs": "npm run cs:info -s",
 
