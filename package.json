@@ -33,15 +33,22 @@
   },
   "scripts": {
     "start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
-    "dev": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
-    "pre": "node ./tiddlywiki.js ./editions/prerelease --listen",
-    "empty": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/empty --listen",
-    "tour": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/tour --listen",
-    "tw.org": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/tw.org --listen",
-    "upgrade": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/upgrade --listen",
-    "full": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/full --listen",
-    "translators": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/translators --listen",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+
+    "wiki:info": "echo \"use: npm run wiki --edition=<wiki> [empty, prerelease, dev, tour, tw.org, upgrade, full]\"",
+    "wiki": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/%npm_config_edition% --listen",
+
+    "cs:info": "echo \"use: npm run cs --edition=tw5.com [de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
+    "cs": "node ./editions/%npm_config_edition%-server --listen",
+
+    "server": "node ./tiddlywiki.js ./editions/server --listen",
+    "server-external-js": "node ./tiddlywiki.js ./editions/server-external-js --listen",
+
+    "prewiki": "npm run wiki:info -s",
+    "postwiki:info" : "echo \"or: [translators, aws, classicparserdemo, codemirrordemo, d3demo, dynaviewdemo, geospatialdemo, highlightdemo, innerwikidemo, introduction, ja-JP, katexdemo, markdowndemo, prerelease, resumebuilder, tw5.com-docs, text-slicer, twitter-archivist, zh-Hans, zh-Hant\"",
+
+    "precs": "npm run cs:info -s",
+
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   }
