@@ -8,6 +8,12 @@ description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.3...master]]//
 
+<<.banner-credits
+	credit:"""Congratulations to [[duarte.framos|https://talk.tiddlywiki.org/u/duarte.framos]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-4/9940]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/05792a9de331dc31b5016c2029a43977114eb018/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
+
 ! Major Improvements
 
 !! Tour Plugin
