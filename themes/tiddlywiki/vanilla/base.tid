@@ -3264,11 +3264,6 @@ span.tc-translink > a:first-child {
 	border-radius: 6px;
 }
 
-.tc-tiddler-frame .tc-test-case-wrapper {
-	margin-left: -0.5em;
-	margin-right: -0.5em;
-}
-
 .tc-test-case-wrapper {
 	background-color: <<colour testcase-accent-level-1>>;
 }
