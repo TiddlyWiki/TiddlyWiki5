@@ -1,0 +1,6 @@
+title: $:/core/ui/PageTemplate/commandpalette
+tags: $:/tags/PageTemplate
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/CommandPalette]!has[draft.of]]">
+<$transclude/>
+</$list>
