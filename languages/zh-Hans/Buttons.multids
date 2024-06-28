@@ -104,6 +104,8 @@ ShowSideBar/Caption: 显示侧边栏
 ShowSideBar/Hint: 显示侧边栏
 TagManager/Caption: 标签管理
 TagManager/Hint: 标签管理
+TestCaseImport/Caption: 导入条目
+TestCaseImport/Hint: 导入条目
 Timestamp/Caption: 时间戳
 Timestamp/Hint: 选择修改是否更新时间戳
 Timestamp/On/Caption: 时间戳开启

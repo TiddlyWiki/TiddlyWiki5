@@ -104,6 +104,8 @@ ShowSideBar/Caption: show sidebar
 ShowSideBar/Hint: Show sidebar
 TagManager/Caption: tag manager
 TagManager/Hint: Open tag manager
+TestCaseImport/Caption: import tiddlers
+TestCaseImport/Hint: Import tiddlers
 Timestamp/Caption: timestamps
 Timestamp/Hint: Choose whether modifications update timestamps
 Timestamp/On/Caption: timestamps are on

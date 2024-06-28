@@ -3264,11 +3264,6 @@ span.tc-translink > a:first-child {
 	border-radius: 6px;
 }
 
-.tc-tiddler-frame .tc-test-case-wrapper {
-	margin-left: -0.5em;
-	margin-right: -0.5em;
-}
-
 .tc-test-case-wrapper {
 	background-color: <<colour testcase-accent-level-1>>;
 }
@@ -3297,7 +3292,7 @@ span.tc-translink > a:first-child {
 	display: inline-block;
 	line-height: 0;
 	border-radius: 1em;
-	vertical-align: bottom;
+	vertical-align: text-bottom;
 	margin-right: 0.25em;
 }
 
@@ -3314,6 +3309,12 @@ span.tc-translink > a:first-child {
 	height: 0.5em;
 }
 
+.tc-test-case-header > h2 {
+	background: <<colour background>>;
+	border-radius: 4px;
+	padding: 0.25em;
+}
+
 .tc-test-case-header > h2,
 .tc-test-case-source > pre {
 	margin: 0;
@@ -3321,6 +3322,18 @@ span.tc-translink > a:first-child {
 
 .tc-test-case-header > h2 a.tc-tiddlylink-missing {
 	font-style: normal;
+}
+
+.tc-test-case-toolbar {
+	float: right;
+}
+
+.tc-test-case-toolbar svg {
+	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-test-case-toolbar .tc-drop-down {
+	font-size: 0.8em;
 }
 
 .tc-test-case-result-fail {
@@ -3366,8 +3379,12 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-source .tc-tab-content {
-	background: <<colour background>>;
+	background: inherit;
 	margin: 0;
+}
+
+.tc-test-case-source .tc-tab-content .tc-field-table {
+	background: <<colour background>>;
 }
 
 .tc-test-case-source .tc-field-table {
@@ -3390,11 +3407,16 @@ span.tc-translink > a:first-child {
 	padding-top: 0;
 }
 
+.tc-test-case-footer-toolbar {
+	display: flex;
+	justify-content: flex-end;
+}
+
 .tc-test-case-output {
 	box-shadow: inset 2px 2px 10px 0px <<colour muted-foreground>>;
 	background: <<colour background>>;
 	border-radius: 4px;
-	border: 1px solid <<colour foreground>>;
+	border: 1px solid <<colour muted-foreground>>;
 	flex: 1 0 49%;
 	min-width: 250px;
 	padding: 0.25em 1em;

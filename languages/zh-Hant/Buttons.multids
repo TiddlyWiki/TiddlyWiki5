@@ -104,6 +104,8 @@ ShowSideBar/Caption: 顯示側邊欄
 ShowSideBar/Hint: 顯示側邊欄
 TagManager/Caption: 標籤管理
 TagManager/Hint: 標籤管理
+TestCaseImport/Caption: 導入條目
+TestCaseImport/Hint: 導入條目
 Timestamp/Caption: 時間戳記
 Timestamp/Hint: 選擇修改是否更新時間戳記
 Timestamp/On/Caption: 時間戳記開啟
