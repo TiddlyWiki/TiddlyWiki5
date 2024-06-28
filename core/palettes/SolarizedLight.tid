@@ -72,6 +72,10 @@ sidebar-tab-foreground-selected: #586e75
 sidebar-tiddler-link-foreground: #2aa198
 sidebar-tiddler-link-foreground-hover: #002b36
 site-title-foreground: #d33682
+stability-deprecated: #dc322f
+stability-experimental: #b58900
+stability-legacy: #268bd2
+stability-stable: #859900
 static-alert-foreground: #586e75
 tab-background: #eee8d5
 tab-background-selected: #fdf6e3
