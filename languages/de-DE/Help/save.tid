@@ -1,14 +1,13 @@
 title: $:/language/Help/save
 description: Speichert Klartext Tiddler als Dateien
 
-Speichert einzelne oder mehrere Klartext Tiddler als Text oder im Binärformat in Dateien. Die zu speichernden Tiddler werden über Filter spezifiziert. 
-
+Speichert einzelne oder mehrere Klartext Tiddler als Text oder im Binärformat in Dateien. Die zu speichernden Tiddler werden über Filter spezifiziert.
 
 ```
 --save <tiddler-filter> <filename-filter>
 ```
 
-* ''tiddler-filter'': Ein Filter, der die zu speichernden Tiddler anzeigt. 
+* ''tiddler-filter'': Ein Filter, der die zu speichernden Tiddler anzeigt.
 * ''filename-filter'': [Option] Ein Filter, der die Tiddler Titel in Verzeichnis Namen aufspaltet. Wenn nicht spezifiziert, dann wird: `[is[tiddler]]` verwendet. `[is[tiddler]]` übernimmt den Tiddler Titel unverändert.
 
 Standardmäßig sind die Dateinamen "relativ" zum `output` Verzeichnis, des `edition` Verzeichnisses.
@@ -20,7 +19,7 @@ Hinweise:
 * Das `output` Verzeichnis wird nicht gelöscht, bevor neue Dateien geschrieben werden.
 * Verzeichnisse und Dateien werden automatisch angelegt, sollten sie nicht vorhanden sein.
 * Wenn eine Datei Leerzeichen enthält, dann muss dies ''doppelt'' angezeigt werden. Für TiddlyWiki mit eckigen Klammern `[[]]` und für die Kommandozeile mit Hochkomma "". Zum Beispiel: `--render "[[Motovun Jack.jpg]]"`
-* Dateinamens-Filter zeigen immer auf den Titel, des gerade umzusetzenden Tiddlers. Das erlaubt uns, diesen als Basis für den Dateinamen zu verwenden. zB: `[encodeuricomponent[]addprefix[static/]]` ... Verwendet eine URI-Enkodierung für jeden Dateinamen und stellt das Wort `static/` als Pfadname voran. 
+* Dateinamens-Filter zeigen immer auf den Titel, des gerade umzusetzenden Tiddlers. Das erlaubt uns, diesen als Basis für den Dateinamen zu verwenden. zB: `[encodeuricomponent[]addprefix[static/]]` ... Verwendet eine URI-Enkodierung für jeden Dateinamen und stellt das Wort `static/` als Pfadname voran.
 * Der `--save` Befehl ist flexibler und ersetzt daher `--savetiddler` und `--savetiddlers`, welche mit V5.1.15 auslaufen!
 
 Beispiel:

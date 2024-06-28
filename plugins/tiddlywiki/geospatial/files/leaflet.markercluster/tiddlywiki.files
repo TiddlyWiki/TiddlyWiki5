@@ -1,0 +1,41 @@
+{
+	"tiddlers": [
+		{
+			"file": "leaflet.markercluster.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.markercluster.js",
+				"module-type": "library"
+			},
+			"prefix": "(function() {var L = require('$:/plugins/tiddlywiki/geospatial/leaflet.js');",
+			"suffix": "\n})();"
+		},
+		{
+			"file": "MarkerCluster.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.MarkerCluster.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "MarkerCluster.Default.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.MarkerCluster.Default.css",
+				"tags": "[[$:/tags/Stylesheet]]"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "MIT-LICENCE.txt",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/tiddlywiki/geospatial/leaflet.markercluster/LICENSE"
+			}
+		}
+	]
+}

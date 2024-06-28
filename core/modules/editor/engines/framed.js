@@ -60,7 +60,7 @@ function FramedEngine(options) {
 		this.domNode.value = this.value;
 	}
 	// Set the attributes
-	if(this.widget.editType) {
+	if(this.widget.editType && this.widget.editTag !== "textarea") {
 		this.domNode.setAttribute("type",this.widget.editType);
 	}
 	if(this.widget.editPlaceholder) {
@@ -118,6 +118,8 @@ FramedEngine.prototype.copyStyles = function() {
 	this.domNode.style.margin = "0";
 	// In Chrome setting -webkit-text-fill-color overrides the placeholder text colour
 	this.domNode.style["-webkit-text-fill-color"] = "currentcolor";
+	// Ensure we don't force text direction to LTR
+	this.domNode.style.removeProperty("direction");
 };
 
 /*
@@ -162,13 +164,13 @@ FramedEngine.prototype.fixHeight = function() {
 		if(this.widget.editAutoHeight) {
 			if(this.domNode && !this.domNode.isTiddlyWikiFakeDom) {
 				var newHeight = $tw.utils.resizeTextAreaToFit(this.domNode,this.widget.editMinHeight);
-				this.iframeNode.style.height = (newHeight + 14) + "px"; // +14 for the border on the textarea
+				this.iframeNode.style.height = newHeight + "px";
 			}
 		} else {
 			var fixedHeight = parseInt(this.widget.wiki.getTiddlerText(HEIGHT_VALUE_TITLE,"400px"),10);
 			fixedHeight = Math.max(fixedHeight,20);
 			this.domNode.style.height = fixedHeight + "px";
-			this.iframeNode.style.height = (fixedHeight + 14) + "px";
+			this.iframeNode.style.height = fixedHeight + "px";
 		}
 	}
 };

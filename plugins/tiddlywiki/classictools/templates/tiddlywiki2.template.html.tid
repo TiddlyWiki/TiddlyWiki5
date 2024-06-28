@@ -6,35 +6,35 @@ title: $:/core/templates/tiddlywiki2.template.html
 <head>
 <script id="versionArea" type="text/javascript">
 //<![CDATA[
-{{{ [prefix[{version}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{version}]] ||$:/core/templates/plain-text-tiddler}}}
 //]]>
 </script>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="copyright" content="
-{{{ [prefix[{copyright}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{copyright}]] ||$:/core/templates/plain-text-tiddler}}}
 " />
 <!--PRE-HEAD-START-->
-{{{ [prefix[{prehead}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{prehead}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--PRE-HEAD-END-->
 <title>
-{{{ [prefix[{title}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{title}]] ||$:/core/templates/plain-text-tiddler}}}
 </title>
 <style id="styleArea" type="text/css">
-{{{ [prefix[{style}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{style}]] ||$:/core/templates/plain-text-tiddler}}}
 </style>
 <!--POST-HEAD-START-->
-{{{ [prefix[{posthead}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{posthead}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--POST-HEAD-END-->
 </head>
 <body onload="main();" onunload="if(window.unload) unload();">
 <!--PRE-BODY-START-->
-{{{ [prefix[{prebody}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{prebody}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--PRE-BODY-END-->
 <div id="copyright">
 Welcome to TiddlyWiki created by Jeremy Ruston; Copyright &copy; 2004-2007 Jeremy Ruston, Copyright &copy; 2007-2011 UnaMesa Association
 </div>
 <noscript>
-{{{ [prefix[{noscript}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{noscript}]] ||$:/core/templates/plain-text-tiddler}}}
 </noscript>
 <div id="saveTest"></div>
 <div id="backstageCloak"></div>
@@ -46,39 +46,39 @@ Welcome to TiddlyWiki created by Jeremy Ruston; Copyright &copy; 2004-2007 Jerem
 <div id="contentWrapper"></div>
 <div id="contentStash"></div>
 <div id="shadowArea">
-{{{ [prefix[{shadow}]] +[sortcs[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{shadow}]] +[sortcs[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-{{{ [prefix[{tiddler}]] +[sortcs[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
-{{{ [prefix[{plugin}]] ||$:/core/templates/plain-text-tiddler}}}
-{{{ [prefix[{posttiddlers}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{tiddler}]] +[sortcs[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{plugin}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{posttiddlers}]] ||$:/core/templates/plain-text-tiddler}}}
 </div>
 <!--POST-STOREAREA-->
 <!--POST-BODY-START-->
-{{{ [prefix[{postbody}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{postbody}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--POST-BODY-END-->
 <script id="jsArea" type="text/javascript">
 //<![CDATA[
-{{{ [prefix[{prejs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
-{{{ [prefix[{js}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
-{{{ [prefix[{postjs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{prejs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{js}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{postjs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
-{{{ [prefix[{jsext}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{jsext}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 <script id="jsdeprecatedArea" type="text/javascript">
 //<![CDATA[
-{{{ [prefix[{jsdeprecated}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{jsdeprecated}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
 <script id="jslibArea" type="text/javascript">
 //<![CDATA[
-{{{ [prefix[{jslib}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{jslib}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
 <script id="jqueryArea" type="text/javascript">
 //<![CDATA[
-{{{ [prefix[{jquery}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{jquery}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
 <script type="text/javascript">
@@ -88,7 +88,7 @@ if(useJavaSaver)
 //]]>
 </script>
 <!--POST-SCRIPT-START-->
-{{{ [prefix[{postscript}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [list[$:/RecipeTiddlers]prefix[{postscript}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--POST-SCRIPT-END-->
 </body>
 </html>

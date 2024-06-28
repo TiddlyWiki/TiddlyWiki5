@@ -1,0 +1,29 @@
+title: ThisTiddler/Simple
+description: Simple usage of thisTiddler variable
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+\import Macro
+\define print-this-tiddler()
+<$text text=<<thisTiddler>>/>
+\end
+
+(<$text text=<<thisTiddler>>/>)
+
+(<<print-this-tiddler>>)
+
+(<<imported-print-this-tiddler>>)
+
++
+title: Macro
+
+\define imported-print-this-tiddler()
+<$text text=<<thisTiddler>>/>
+\end
++
+title: ExpectedResult
+
+<p>(Output)</p><p>(Output)</p><p>(Output)</p>

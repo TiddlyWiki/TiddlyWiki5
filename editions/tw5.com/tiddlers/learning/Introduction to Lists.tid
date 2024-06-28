@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 Making lists of items plays a central role in working with TiddlyWiki. The following is a brief run-through of some of the more common techniques.
 
-~TiddlyWiki [[uses|The Extended Listops Filters]] lists [[internally|ListField]] for many purposes so the word can have several meanings. Here we are concerned with displaying sequences of items, but not necessarily presented as a conventional bullet list.
+~TiddlyWiki [[uses|Extended Listops Filters]] lists [[internally|ListField]] for many purposes so the word can have several meanings. Here we are concerned with displaying sequences of items, but not necessarily presented as a conventional bullet list.
 
 ! Manually Typed Lists
 

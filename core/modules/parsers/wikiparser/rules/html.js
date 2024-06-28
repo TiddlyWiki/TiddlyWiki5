@@ -44,11 +44,15 @@ Parse the most recent match
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var tag = this.nextTag;
+	if (!tag.isSelfClosing) {
+		tag.openTagStart = tag.start;
+		tag.openTagEnd = tag.end;
+	}
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
 	// Check for an immediately following double linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/y);
+	var hasLineBreak = !tag.isSelfClosing && !!$tw.utils.parseTokenRegExp(this.parser.source,this.parser.pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 	// Set whether we're in block mode
 	tag.isBlock = this.is.block || hasLineBreak;
 	// Parse the body if we need to
@@ -59,6 +63,27 @@ exports.parse = function() {
 		} else {
 			var reEnd = new RegExp("(" + reEndString + ")","mg");
 			tag.children = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
+		}
+		tag.end = this.parser.pos;
+		tag.closeTagEnd = tag.end;
+		if (tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
+			tag.closeTagStart = tag.end;
+		} else {
+			tag.closeTagStart = tag.closeTagEnd - 2;
+			var closeTagMinPos = tag.children.length > 0 ? tag.children[tag.children.length-1].end : tag.openTagEnd;
+			if (!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
+			while (tag.closeTagStart >= closeTagMinPos) {
+				var char = this.parser.source[tag.closeTagStart];
+				if (char === '>') {
+					tag.closeTagStart = -1;
+					break;
+				}
+				if (char === '<') break;
+				tag.closeTagStart -= 1;
+			}
+			if (tag.closeTagStart < closeTagMinPos) {
+				tag.closeTagStart = tag.end;
+			}
 		}
 	}
 	// Return the tag
@@ -78,7 +103,7 @@ exports.parseTag = function(source,pos,options) {
 			orderedAttributes: []
 		};
 	// Define our regexps
-	var reTagName = /([a-zA-Z0-9\-\$]+)/y;
+	var reTagName = /([a-zA-Z0-9\-\$\.]+)/g;
 	// Skip whitespace
 	pos = $tw.utils.skipWhiteSpace(source,pos);
 	// Look for a less than sign
@@ -93,9 +118,6 @@ exports.parseTag = function(source,pos,options) {
 		return null;
 	}
 	node.tag = token.match[1];
-	if(node.tag.slice(1).indexOf("$") !== -1) {
-		return null;
-	}
 	if(node.tag.charAt(0) === "$") {
 		node.type = node.tag.substr(1);
 	}
@@ -129,7 +151,7 @@ exports.parseTag = function(source,pos,options) {
 	pos = token.end;
 	// Check for a required line break
 	if(options.requireLineBreak) {
-		token = $tw.utils.parseTokenRegExp(source,pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/y);
+		token = $tw.utils.parseTokenRegExp(source,pos,/([^\S\n\r]*\r?\n(?:[^\S\n\r]*\r?\n|$))/g);
 		if(!token) {
 			return null;
 		}
@@ -141,7 +163,7 @@ exports.parseTag = function(source,pos,options) {
 
 exports.findNextTag = function(source,pos,options) {
 	// A regexp for finding candidate HTML tags
-	var reLookahead = /<([a-zA-Z\-\$]+)/g;
+	var reLookahead = /<([a-zA-Z\-\$\.]+)/g;
 	// Find the next candidate
 	reLookahead.lastIndex = pos;
 	var match = reLookahead.exec(source);

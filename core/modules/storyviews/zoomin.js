@@ -129,7 +129,7 @@ function findTitleDomNode(widget,targetClass) {
 	targetClass = targetClass || "tc-title";
 	var domNode = widget.findFirstDomNode();
 	if(domNode && domNode.querySelector) {
-		return domNode.querySelector("." + targetClass);
+		return $tw.utils.querySelectorSafe("." + targetClass,domNode);
 	}
 	return null;
 }

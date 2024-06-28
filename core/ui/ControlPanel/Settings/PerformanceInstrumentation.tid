@@ -2,7 +2,15 @@ title: $:/core/ui/ControlPanel/Settings/PerformanceInstrumentation
 tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/PerformanceInstrumentation/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/ControlPanel/Settings/PerformanceInstrumentation/
 <<lingo Hint>>
 
-<$checkbox tiddler="$:/config/Performance/Instrumentation" field="text" checked="yes" unchecked="no" default="no"> <$link to="$:/config/Performance/Instrumentation"><<lingo Description>></$link> </$checkbox>
+<$checkbox tiddler="$:/config/Performance/Instrumentation"
+	field="text" checked="yes" unchecked="no" default="no"
+	class="tc-control-panel-item"
+>
+	<$link to="$:/config/Performance/Instrumentation" class="tc-tiny-gap-left">
+		<<lingo Description>>
+	</$link>
+</$checkbox>

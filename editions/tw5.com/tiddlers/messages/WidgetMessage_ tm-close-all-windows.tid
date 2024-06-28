@@ -3,6 +3,7 @@ modified: 20220301180818011
 tags: Messages
 title: WidgetMessage: tm-close-all-windows
 type: text/vnd.tiddlywiki
+caption: tm-close-all-windows
 
 <<.from-version 5.2.2>>
 The `tm-close-all-windows` [[message|Messages]] closes all additional //browser// window that were opened with [[tm-open-window|WidgetMessage: tm-open-window]]. 

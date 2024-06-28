@@ -200,7 +200,7 @@ function tw_filteredtranscludeinline(state,silent) {
 }
 
 // based on markdown-it html_block()
-var WidgetTagRegEx = [/^<\/?\$[a-zA-Z0-9\-\$]+(?=(\s|\/?>|$))/, /^$/];
+var WidgetTagRegEx = [/^<\/?\$[a-zA-Z0-9\-\$\.]+(?=(\s|\/?>|$))/, /^$/];
 function tw_block(state,startLine,endLine,silent) {
 	var i, nextLine, token, lineText,
 		pos = state.bMarks[startLine] + state.tShift[startLine],
@@ -364,7 +364,7 @@ function tw_prettyextlink(state,silent) {
 	return true;
 }
 
-var TWCloseTagRegEx = /<\/\$[A-Za-z0-9\-\$]+\s*>/gm;
+var TWCloseTagRegEx = /<\/\$[A-Za-z0-9\-\$\.]+\s*>/gm;
 function extendHtmlInline(origRule) {
 	return function(state,silent) {
 		if(origRule(state,silent)) {

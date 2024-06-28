@@ -1,0 +1,10 @@
+title: Quick Start: Desktop
+tags: [[Quick Start]]
+caption: Desktop
+icon: $:/core/images/storyview-zoomin
+button-color: #37753e
+button-text: Download
+background: linear-gradient(90deg,#f0fff1, #ffffff)
+link: TiddlyDesktop
+
+Download the official desktop application for macOS, Windows and Linux

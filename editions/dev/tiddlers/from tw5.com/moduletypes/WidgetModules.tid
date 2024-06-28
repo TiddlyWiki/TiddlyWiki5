@@ -1,7 +1,8 @@
-title: WidgetModules
+created: 20131101130700000
+modified: 20230601130631884
 tags: dev moduletypes
-created: 201311011307
-modified: 201311011307
+title: WidgetModules
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -78,4 +79,10 @@ The individual methods defined by the widget object are documented in the source
 !! Widget `refreshChildren` method
 !! Widget `findNextSiblingDomNode` method
 !! Widget `findFirstDomNode` method
+!! Widget `destroy` method
+
+<<.from-version "5.3.0">> Gets called when any parent widget is unmounted from the widget tree.
+
+[[Examples|Widget `destroy` method examples]]
+
 !! Widget `removeChildDomNodes` method

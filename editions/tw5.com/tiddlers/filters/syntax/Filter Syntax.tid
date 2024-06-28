@@ -1,18 +1,24 @@
 created: 20140210141217955
-modified: 20150124184229000
+list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
+modified: 20230710074340943
 tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
-list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
 
 <<.preamble """[[Filters]] follow a grammar that is presented here, using [[railroad diagrams|Railroad Diagrams]], for those who find formal syntax descriptions helpful. However, you can [[learn to write filters|Introduction to filter notation]] without needing to understand this group of tiddlers.""">>
 
-A <<.def filter>> is a pipeline for transforming an <<.def input>> into an <<.def output>>. Both the input and the output are [[ordered sets of titles|Title Selection]] of things like tiddlers and fields.
+A <<.def filter>> is a pipeline for transforming an <<.def input>> into an <<.def output>>. Both the input and the output are [[ordered sets of titles|Title Selection]] of tiddlers and fields.
 
-Filters are [[expressions|Filter Expression]] constructed from smaller building blocks, called [[runs|Filter Run]] and [[steps|Filter Step]], each of which also transforms an input to an output.
+Filters are ''expressions'' constructed from smaller building blocks, called ''runs'', which are built using ''steps''. Eeach of which also transforms an input to an output.
 
 A filter starts with an empty output. Its runs are processed from left to right, progressively modifying the output.
 
-Here are details of the various building blocks involved:
+The "Filter Syntax" description starts with:
 
-<<list-links "[tag[Filter Syntax]]">>
+<$railroad text="""
+\start double
+\end double
+[[<"Filter Expression">|"Filter Expression"]]
+"""/>
+
+<<.tip "The railroad boxes as the one above can be used to navigate">>

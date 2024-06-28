@@ -1,6 +1,7 @@
 title: $:/core/ui/PageStylesheet
+code-body: yes
 
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 \whitespace trim
 
 <$set name="currentTiddler" value={{$:/language}}>

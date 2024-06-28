@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/create-tiddler
+caption: Creating Tiddlers
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
+hint-selector: .tc-story-river div[data-tiddler-title="Draft of 'New Tiddler'"] input[value]:not([value="Congratulations"])
+hint-selector-fallback-1: .tc-story-river div[data-tiddler-title='Draft of \'New Tiddler\''] .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fsave
+hint-selector-fallback-2: .tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-tiddler
+step-success-filter: [list[$:/StoryList]match[Congratulations]]
+
+<<tour-task "Create a tiddler titled 'Congratulations'">>
+
+Use the {{$:/core/images/new-button|0.65em}} button to create the new tiddler, then type correct "title". Finally, click the {{$:/core/images/done-button|0.65em}} button.
