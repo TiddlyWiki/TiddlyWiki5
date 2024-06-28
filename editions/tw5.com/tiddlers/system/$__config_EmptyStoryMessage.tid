@@ -1,0 +1,20 @@
+title: $:/config/EmptyStoryMessage
+
+\whitespace trim
+<style>
+.tc-story-empty {
+	text-align: center;
+	padding-top: 5em;
+}
+.tc-story-empty button svg.tc-image-button {
+	height: 30em;
+	width: 30em;
+}
+</style>
+<$wikify name="fill-colour" text="<<color muted-foreground>>">
+	<div class="tc-story-empty">
+		<$button class=" tc-btn-invisible" style=`fill: $(fill-colour)$;` message="tm-home">
+			{{$:/core/images/home-button}}
+		</$button>
+	</div>
+</$wikify>
