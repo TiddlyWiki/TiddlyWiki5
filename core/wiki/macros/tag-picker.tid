@@ -1,5 +1,5 @@
 title: $:/core/macros/tag-picker
-tags: tags: $:/tags/Macro $:/tags/Global
+tags: $:/tags/Macro $:/tags/Global
 first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]
 second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>sort[]]
 
