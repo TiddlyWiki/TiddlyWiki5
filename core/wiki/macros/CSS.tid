@@ -11,6 +11,8 @@ tags: $:/tags/Macro $:/tags/Global
 </$transclude>
 \end
 
+\define color(name) <<colour $name$>>
+
 <!-- New syntax that allows: <div style.background=<<tf.colour sidebar-tab-border>>> -->
 \define colorRegexp() <<colou?r\s.*>>
 \define removeRegex() <<colou?r\s|"|'|>>
