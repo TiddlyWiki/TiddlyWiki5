@@ -1,18 +1,34 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro $:/tags/Global
 
-\procedure colour(name)
+<!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
+\define colour(name)
 \whitespace trim
-<$transclude $tiddler={{$:/palette}} $index=`$(name)$`>
-	<$transclude $tiddler="$:/palettes/Vanilla" $index=`$(name)$`>
-		<$transclude $tiddler=`$:/config/DefaultColourMappings/$(name)$`/>
+<$transclude tiddler={{$:/palette}} index="$name$">
+	<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
+		<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
 	</$transclude>
 </$transclude>
 \end
 
-\procedure color(name)
-<$macrocall $name=colour name=`$(name)$`/>
+<!-- New syntax that allows: <div style.background=<<tf.colour sidebar-tab-border>>> -->
+\define colorRegexp() <<colou?r\s.*>>
+\define removeRegex() <<colou?r\s|"|'|>>
+
+\function tf.colour(name)
+	[{$:/palette}getindex<name>]
+	:else[[$:/palettes/Vanilla]getindex<name>]
+	:else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]trim[]]
+	:map[_tf.recolour<currentTiddler>]
 \end
+
+\function _tf.recolour(name)
+	[<name>regexp<colorRegexp>]
+	:then[<name>search-replace:g:regexp<removeRegex>,[]trim[]] :map[tf.colour<currentTiddler>]
+	:else[<name>]
+\end
+
+\function tf.color(name) [tf.colour<name>]
 
 \function box-shadow(shadow)
 [[ -webkit-box-shadow: $(shadow)$;
