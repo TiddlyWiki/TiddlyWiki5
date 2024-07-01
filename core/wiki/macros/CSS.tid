@@ -13,25 +13,6 @@ tags: $:/tags/Macro $:/tags/Global
 
 \define color(name) <<colour $name$>>
 
-<!-- New syntax that allows: <div style.background=<<tf.colour sidebar-tab-border>>> -->
-\define colorRegexp() <<colou?r\s.*>>
-\define removeRegex() <<colou?r\s|"|'|>>
-
-\function tf.colour(name)
-	[{$:/palette}getindex<name>]
-	:else[[$:/palettes/Vanilla]getindex<name>]
-	:else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]trim[]]
-	:map[_tf.recolour<currentTiddler>]
-\end
-
-\function _tf.recolour(name)
-	[<name>regexp<colorRegexp>]
-	:then[<name>search-replace:g:regexp<removeRegex>,[]trim[]] :map[tf.colour<currentTiddler>]
-	:else[<name>]
-\end
-
-\function tf.color(name) [tf.colour<name>]
-
 \function box-shadow(shadow)
 [[ -webkit-box-shadow: $(shadow)$;
 	-moz-box-shadow: $(shadow)$;
