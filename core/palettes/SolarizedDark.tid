@@ -18,7 +18,7 @@ button-foreground: #93a1a1
 code-background: #073642
 code-border: #586e75
 code-foreground: #93a1a1
-dirty-indicator: inherit
+dirty-indicator: #dc322f
 download-background: #859900
 download-foreground: #073642
 dragger-background: #073642
