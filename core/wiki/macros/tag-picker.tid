@@ -157,7 +157,7 @@ The second ESC tries to close the "draft tiddler"
 <!-- Use this function if tag-picker is a stand alone macro. Otherwise use "newTagNameTiddler" defined for fieldmangler in EditTemplate -->
 \function _tf.makeTagNameTiddler() [[$:/temp/NewTagName]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]]
 
-<!-- keep those variables because they may "blead" into macros using old syntax -->
+<!-- keep those variables because they may "bleed" into macros using old syntax -->
 <$let
 	palette={{$:/palette}}
 	colourA={{{ [<palette>getindex[foreground]] }}}
