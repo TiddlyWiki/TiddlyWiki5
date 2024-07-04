@@ -154,8 +154,10 @@ The second ESC tries to close the "draft tiddler"
 
 \function _tf.getUserInput() [<storeTitle>get[text]]
 \function _tf.getTag() [<newTagNameTiddler>get[text]]
+<!-- Use this function if tag-picker is a stand alone macro. Otherwise use "newTagNameTiddler" defined for fieldmangler in EditTemplate -->
+\function _tf.makeTagNameTiddler() [[$:/temp/NewTagName]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]]
 
-<!-- keep those variables because they may "blead" into macros using old syntax -->
+<!-- keep those variables because they may "bleed" into macros using old syntax -->
 <$let
 	palette={{$:/palette}}
 	colourA={{{ [<palette>getindex[foreground]] }}}
@@ -164,7 +166,7 @@ The second ESC tries to close the "draft tiddler"
 
 	saveTiddler={{{ [<tiddler>is[blank]then<currentTiddler>else<tiddler>] }}}
 
-	newTagNameTiddler={{{ [[$:/temp/NewTagName]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]] }}}
+	newTagNameTiddler={{{ [[newTagNameTiddler]is[variable]then<newTagNameTiddler>] :else[<_tf.makeTagNameTiddler>] }}}
 	storeTitle={{{ [[$:/temp/NewTagName/input]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]] }}}
 
 	newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">>
