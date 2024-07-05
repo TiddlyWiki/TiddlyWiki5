@@ -8,57 +8,37 @@ description: Under development
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.4...master]]//
 
-! Major Improvements
+<<.banner-credits
+	credit:"""Congratulations to [[duarte.framos|https://talk.tiddlywiki.org/u/duarte.framos]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-4/9940]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/a9b6de8c35f0789a27a36218e8422bb11066f115/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
 
-! Translation improvements
+This is a bug fix release to address a number of bugs that were introduced with [[Release 5.3.4]].
 
-This release also includes improvements to the following translations:
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8327">> backwards compatibility issues with [[colour Macro]] as a procedure
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8322">> typo extra "tags: "
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8332">> adding fields without clicking the "add" button
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8317">> stability badges colors in the Gruvbox, Nord and Solarized palettes
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8333">> crash with DataWidget if `$filter` attribute specifies a missing tiddler
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/6554b5c9f4f6888f0c25c833b775c3a74ea15531">> reapplies [[#8246 Link to correct plugin instructions for Node.js|https://github.com/Jermolene/TiddlyWiki5/pull/8246]] which had accidentally been reverted
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d2c2ada33ccd3d73d39d8c0461f327e4dee68234">> tour display in "zoomin" storyview
 
-* 
-
-! Plugin Improvements
-
-* 
-
-! Widget Improvements
-
-* 
-
-! Filter Improvements
-
-* 
-
-! Usability Improvements
-
-* 
-
-! Hackability Improvements
-
-* 
-
-! Bug Fixes
-
-* 
-
-! Node.js Improvements
-
-*
-
-! Performance Improvements
-
-* 
-
-! Developer Improvements
-
-* 
-
-! Infrastructure Improvements
-
-* 
-
-! Acknowledgements
+! Acknowledgements for v5.3.5
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+Leilei332
+oeyoews
+pmario
+springerspandrel
 """>>
+
+---
+
+! Release Note for v5.3.4
+
+Since v5.3.5 replaces v5.3.4 after only a couple of weeks, here is the release note for v5.3.4.
+
+{{Release 5.3.4}}
