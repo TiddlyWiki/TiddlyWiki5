@@ -22,6 +22,7 @@ This is a bug fix release to address a number of bugs that were introduced with 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8317">> stability badges colors in the Gruvbox, Nord and Solarized palettes
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8333">> crash with DataWidget if `$filter` attribute specifies a missing tiddler
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/6554b5c9f4f6888f0c25c833b775c3a74ea15531">> reapplies [[#8246 Link to correct plugin instructions for Node.js|https://github.com/Jermolene/TiddlyWiki5/pull/8246]] which had accidentally been reverted
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d2c2ada33ccd3d73d39d8c0461f327e4dee68234">> tour display in "zoomin" storyview
 
 ! Acknowledgements for v5.3.5
 
