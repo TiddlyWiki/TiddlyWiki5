@@ -11,12 +11,20 @@
 		"tiddlywiki/snowwhite"
 	],
 	"build": {
-		"index": [
-			"--render","$:/plugins/tiddlywiki/tiddlyweb/save/offline","index.html","text/plain"],
-		"static": [
-			"--render","$:/core/templates/static.template.html","static.html","text/plain",
-			"--render","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
-			"--render","[!is[system]]","[encodeuricomponent[]addprefix[static/]addsuffix[.html]]","text/plain","$:/core/templates/static.tiddler.html",
-			"--render","$:/core/templates/static.template.css","static/static.css","text/plain"]
+		"load-mws-demo-data": [
+			"--mws-load-wiki-folder","./editions/tw5.com","docs", "TiddlyWiki Documentation from https://tiddlywiki.com","docs","TiddlyWiki Documentation from https://tiddlywiki.com",
+			"--mws-load-wiki-folder","./editions/dev","dev","TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev","dev-docs", "TiddlyWiki Developer Documentation from https://tiddlywiki.com/dev",
+			"--mws-load-wiki-folder","./editions/tour","tour","TiddlyWiki Interactive Tour from https://tiddlywiki.com","tour", "TiddlyWiki Interactive Tour from https://tiddlywiki.com",
+			"--mws-create-bag","bag-alpha","A test bag",
+			"--mws-create-bag","bag-beta","Another test bag",
+			"--mws-create-bag","bag-gamma","A further test bag",
+			"--mws-create-recipe","recipe-rho","bag-alpha bag-beta","First wiki",
+			"--mws-create-recipe","recipe-sigma","bag-alpha bag-gamma","Second Wiki", "--mws-create-recipe","recipe-tau","bag-alpha","Third Wiki",
+			"--mws-create-recipe","recipe-upsilon","bag-alpha bag-gamma bag-beta","Fourth Wiki",
+			"--mws-save-tiddler-text","bag-alpha","$:/SiteTitle","bag-alpha",
+			"--mws-save-tiddler-text","bag-alpha","😀😃😄😁😆🥹😅😂","bag-alpha",
+			"--mws-save-tiddler-text","bag-beta","$:/SiteTitle","bag-beta",
+			"--mws-save-tiddler-text","bag-gamma","$:/SiteTitle","bag-gamma"
+			]
 	}
 }
