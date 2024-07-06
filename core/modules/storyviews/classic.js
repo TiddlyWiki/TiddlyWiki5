@@ -84,26 +84,33 @@ ClassicStoryView.prototype.remove = function(widget) {
 			};
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
-			removeElement();
+			widget.removeChildDomNodes();
 			return;
 		}
+		// Clone the target element
+		var cloneElement = targetElement.cloneNode(true);
+		targetElement.parentNode.insertBefore(cloneElement,targetElement);
+		// Remove the original element
+		widget.removeChildDomNodes();
 		// Get the current height of the tiddler
-		var currWidth = targetElement.offsetWidth,
-			computedStyle = window.getComputedStyle(targetElement),
+		var currWidth = cloneElement.offsetWidth,
+			computedStyle = window.getComputedStyle(cloneElement),
 			currMarginBottom = parseInt(computedStyle.marginBottom,10),
 			currMarginTop = parseInt(computedStyle.marginTop,10),
-			currHeight = targetElement.offsetHeight + currMarginTop;
+			currHeight = cloneElement.offsetHeight + currMarginTop;
 		// Remove the dom nodes of the widget at the end of the transition
-		setTimeout(removeElement,duration);
+		setTimeout(function() {
+			cloneElement.parentNode.removeChild(cloneElement);
+		},duration);
 		// Animate the closure
-		$tw.utils.setStyle(targetElement,[
+		$tw.utils.setStyle(cloneElement,[
 			{transition: "none"},
 			{transform: "translateX(0px)"},
 			{marginBottom:  currMarginBottom + "px"},
 			{opacity: "1.0"}
 		]);
-		$tw.utils.forceLayout(targetElement);
-		$tw.utils.setStyle(targetElement,[
+		$tw.utils.forceLayout(cloneElement);
+		$tw.utils.setStyle(cloneElement,[
 			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
 						"opacity " + duration + "ms " + easing + ", " +
 						"margin-bottom " + duration + "ms " + easing},
