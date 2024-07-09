@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/ai-tools/servers/openai
+tags: $:/tags/AI/CompletionServer
+url: https://api.openai.com
+caption: OpenAI Service

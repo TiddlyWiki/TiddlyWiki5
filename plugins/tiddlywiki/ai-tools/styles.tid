@@ -1,0 +1,204 @@
+title: $:/plugins/tiddlywiki/ai-tools/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.ai-conversation {
+	background: #f0eeff;
+	border-radius: 2em;
+	padding: 1em 1em;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.ai-conversation .ai-message {
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+	border-radius: 1em;
+	display: flex;
+	flex-direction: column;
+}
+
+.ai-conversation .ai-message .ai-message-toolbar {
+	background: rgba(1,1,1,0.35);
+	color: white;
+	padding: 0.25em 1em 0.25em 1em;
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+	display: flex;
+	justify-content: space-between;
+}
+
+.ai-conversation .ai-message .ai-message-toolbar .tc-tiddlylink {
+	color: inherit;
+}
+
+.ai-conversation .ai-message .ai-message-toolbar .ai-message-toolbar-button {
+	background: rgba(255,255,255,0.35);
+	color: #333333;
+	cursor: pointer;
+	display: inline-block;
+	outline: 0;
+	overflow: hidden;
+	pointer-events: auto;
+	position: relative;
+	text-align: center;
+	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
+	vertical-align: top;
+	white-space: nowrap;
+	border: 0;
+	border-radius: 4px;
+}
+
+.ai-conversation .ai-message .ai-message-toolbar .ai-message-toolbar-button:hover {
+	color: #ffffff;
+	background: rgba(255,255,255,0.55);
+
+}
+
+.ai-conversation .ai-message .ai-message-body {
+	padding: 0 1em 0 1em
+}
+
+.ai-conversation .ai-message.ai-message-role-system {
+	width: 60%;
+	background: #4c4c80;
+	color: white;
+}
+
+.ai-conversation .ai-message.ai-message-role-user {
+	width: 60%;
+	margin-left: auto;
+	background: #ffcde0;
+}
+
+.ai-conversation .ai-message.ai-message-role-assistant {
+	background: #dfd;
+}
+
+.ai-conversation .ai-message.ai-message-role-error {
+	background: #fdd;
+}
+
+.ai-conversation .ai-user-prompt {
+	padding: 1em;
+	background: #ffcde0;
+	border-radius: 1em;
+	box-shadow: inset 3px 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ai-conversation .ai-user-prompt button svg.tc-image-button {
+	fill: #000;
+}
+
+.ai-conversation .ai-user-prompt-text {
+	display: flex;
+	align-items: flex-start;
+	gap: 1em;
+}
+
+.ai-conversation .ai-user-prompt button.ai-user-prompt-send {
+	background-color: initial;
+	background-image: linear-gradient(-180deg, #e0c3ce, #963057);
+	border-radius: 1em;
+	box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	outline: 0;
+	overflow: hidden;
+	padding: 0 20px;
+	pointer-events: auto;
+	position: relative;
+	text-align: center;
+	touch-action: manipulation;
+	user-select: none;
+	-webkit-user-select: none;
+	vertical-align: top;
+	white-space: nowrap;
+	border: 0;
+	transition: box-shadow .2s;
+	line-height: 2;
+}
+
+.ai-conversation .ai-user-prompt button.ai-user-prompt-send:hover:not(:disabled) {
+	box-shadow: rgb(255 62 135 / 64%) 0 3px 8px;
+}
+
+.ai-conversation .ai-user-prompt button.ai-user-prompt-send:disabled {
+	background: #ddd;
+	color: #444;
+}
+
+.ai-conversation .ai-user-prompt textarea {
+	margin: 0;
+}
+
+.ai-request-spinner {
+	animation: ai-request-spinner-animation-rotate 1s infinite;
+	height: 50px;
+	width: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.ai-request-spinner:before,
+.ai-request-spinner:after {
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 20px;
+	width: 20px;
+}
+
+.ai-request-spinner:before {
+	animation: ai-request-spinner-animation-ball1 1s infinite;
+	background-color: #ddffdd;
+	box-shadow: 30px 0 0 #90a690;
+	margin-bottom: 10px;
+}
+
+.ai-request-spinner:after {
+	animation: ai-request-spinner-animation-ball2 1s infinite;
+	background-color: #90a690;
+	box-shadow: 30px 0 0 #ddffdd;
+}
+
+@keyframes ai-request-spinner-animation-rotate {
+	0% { transform: rotate(0deg) scale(0.8) }
+	50% { transform: rotate(360deg) scale(1.2) }
+	100% { transform: rotate(720deg) scale(0.8) }
+}
+
+@keyframes ai-request-spinner-animation-ball1 {
+	0% {
+		box-shadow: 30px 0 0 #90a690;
+	}
+	50% {
+		box-shadow: 0 0 0 #90a690;
+		margin-bottom: 0;
+		transform: translate(15px, 15px);
+	}
+	100% {
+		box-shadow: 30px 0 0 #90a690;
+		margin-bottom: 10px;
+	}
+}
+
+@keyframes ai-request-spinner-animation-ball2 {
+	0% {
+		box-shadow: 30px 0 0 #ddffdd;
+	}
+	50% {
+		box-shadow: 0 0 0 #ddffdd;
+		margin-top: -20px;
+		transform: translate(15px, 15px);
+	}
+	100% {
+		box-shadow: 30px 0 0 #ddffdd;
+		margin-top: 0;
+	}
+}

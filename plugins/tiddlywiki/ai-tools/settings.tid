@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/ai-tools/settings
+
+! AI Tools Settings
+
+This plugin runs entirely in the browser, with no backend server component. A consequence of this design is that the API keys required to access external services must be obtained by the end user. These keys are stored in the browser and so only need to be set up once.
+
+!! ~OpenAI API key
+
+# Register for an account at https://platform.openai.com/
+#* Newly registered accounts can claim a small amount of credit, thereafter payment is needed
+#* Note that ~OpenAI run completely different payment systems for ~ChatGPT and the API platform. Even if you are already a subscriber to ~ChatGPT you will still need to pay for API usage after the initial free service
+# Visit https://platform.openai.com/api-keys to create a new secret API key
+# Copy and paste the value into the box below
+
+~OpenAI Secret API Key: <$password name="openai-secret-key"/>
+

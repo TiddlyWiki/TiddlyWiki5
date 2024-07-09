@@ -104,6 +104,8 @@ basicAuthUsername: plain username for basic authentication
 basicAuthUsernameFromStore: name of password store entry containing username
 basicAuthPassword: plain password for basic authentication
 basicAuthPasswordFromStore: name of password store entry containing password
+bearerAuthToken: plain text token for bearer authentication
+bearerAuthTokenFromStore: name of password store entry contain bear authorization token
 */
 function HttpClientRequest(options) {
 	var self = this;
@@ -135,8 +137,11 @@ function HttpClientRequest(options) {
 	});
 	this.basicAuthUsername = options.basicAuthUsername || (options.basicAuthUsernameFromStore && $tw.utils.getPassword(options.basicAuthUsernameFromStore)) || "";
 	this.basicAuthPassword = options.basicAuthPassword || (options.basicAuthPasswordFromStore && $tw.utils.getPassword(options.basicAuthPasswordFromStore)) || "";
+	this.bearerAuthToken = options.bearerAuthToken || (options.bearerAuthTokenFromStore && $tw.utils.getPassword(options.bearerAuthTokenFromStore)) || "";
 	if(this.basicAuthUsername && this.basicAuthPassword) {
 		this.requestHeaders.Authorization = "Basic " + $tw.utils.base64Encode(this.basicAuthUsername + ":" + this.basicAuthPassword);
+	} else if(this.bearerAuthToken) {
+		this.requestHeaders.Authorization = "Bearer " + this.bearerAuthToken;
 	}
 }
 
