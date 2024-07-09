@@ -69,6 +69,7 @@ AttachmentStore.prototype.saveAttachment = function(options) {
 	fs.writeFileSync(path.resolve(attachmentPath,dataFilename),options.text,contentTypeInfo.encoding);
 	// Save the meta.json file
 	fs.writeFileSync(path.resolve(attachmentPath,"meta.json"),JSON.stringify({
+		created: $tw.utils.stringifyDate(new Date()),
 		modified: $tw.utils.stringifyDate(new Date()),
 		contentHash: contentHash,
 		filename: dataFilename,
@@ -94,6 +95,7 @@ AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash)
 	fs.renameSync(incomingFilepath,dataFilepath);
 	// Save the meta.json file
 	fs.writeFileSync(path.resolve(attachmentPath,"meta.json"),JSON.stringify({
+		created: $tw.utils.stringifyDate(new Date()),
 		modified: $tw.utils.stringifyDate(new Date()),
 		contentHash: hash,
 		filename: dataFilename,
