@@ -579,3 +579,5 @@ Andrei Rybak, @rybak, 2024/06/09
 @springerspandrel, 2024/06/27
 
 @andrewgoz, 2024/07/10
+
+Michael McDermott, @michaeljmcd, 2024-07-09
