@@ -1,5 +1,5 @@
 created: 20150123220223000
-modified: 20240709151004998
+modified: 20240709170746678
 tags: Filters
 title: Dominant Append
 type: text/vnd.tiddlywiki
@@ -14,4 +14,4 @@ This behaviour can cause unexpected results when working with [[Mathematics Oper
 
 In such situations, the `=` prefix can be used to disable the de-duplication. For example, `=1 =1 =1 +[sum[]]` evaluates to `3` as expected. Alternatively, the [[split Operator]] can be used: `[[1,1,1]split[,]sum[]]`.
 
-<<.tip """To build a list of unique values that retains only the <<.em earliest>> copy of each value (the opposite behavior from <<.link "Dominant Append" "Dominant Append">>), first use the <<.link `:all` "All Filter Run Prefix">> filter run prefix (or its short form `=`) to retain all duplicate values while building your list. Then finish your filter run with the <<.olink unique>> operator" to remove later duplicates.""">>
+<<.tip """To build a list of unique values that retains only the <<.em earliest>> copy of each value (the opposite behavior from <<.link "Dominant Append" "Dominant Append">>), first use the <<.link `:all` "All Filter Run Prefix">> filter run prefix (or its short form `=`) to retain all duplicate values while building your list. Then finish your filter run with the <<.olink unique>> operator to remove later duplicates.""">>
