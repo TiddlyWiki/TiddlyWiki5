@@ -1,12 +1,12 @@
 caption: minlength
 created: 20161011074235805
 from-version: 5.1.14
-modified: 20240621073052597
+modified: 20240709161140504
 op-input: a list of items
 op-output: those items at least as long as the specified minimum length
 op-parameter: the minimum length for items
 op-parameter-name: minlength
-op-purpose: filter items whose length is greater than the specified minimum length
+op-purpose: filter items whose length is greater than or equal to the specified minimum length
 tags: [[Filter Operators]]
 title: minlength Operator
 type: text/vnd.tiddlywiki
