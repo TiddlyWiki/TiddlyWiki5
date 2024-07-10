@@ -32,7 +32,7 @@
   },
   "scripts": {
 	"start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
-    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index && node ./tiddlywiki ./editions/multiwikiserver/ --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
+    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index && node ./tiddlywiki ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   },
