@@ -133,7 +133,7 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 			tiddlerFields,
 			{
 				text: undefined,
-				_canonical_uri: `/bags/${encodeURIComponent(bag_name)}/tiddlers/${encodeURIComponent(tiddlerFields.title)}/blob`
+				_canonical_uri: `/bags/${$tw.utils.encodeURIComponentExtended(bag_name)}/tiddlers/${$tw.utils.encodeURIComponentExtended(tiddlerFields.title)}/blob`
 			}
 		);
 	} else {

@@ -45,14 +45,14 @@ function saveArchive(archivePath) {
 	}
 	for(const recipeInfo of $tw.mws.store.listRecipes()) {
 		console.log(`Recipe ${recipeInfo.recipe_name}`);
-		saveJsonFile(`recipes/${encodeURIComponent(recipeInfo.recipe_name)}.json`,recipeInfo);
+		saveJsonFile(`recipes/${$tw.utils.encodeURIComponentExtended(recipeInfo.recipe_name)}.json`,recipeInfo);
 	}
 	for(const bagInfo of $tw.mws.store.listBags()) {
 		console.log(`Bag ${bagInfo.bag_name}`);
-		saveJsonFile(`bags/${encodeURIComponent(bagInfo.bag_name)}/meta.json`,bagInfo);
+		saveJsonFile(`bags/${$tw.utils.encodeURIComponentExtended(bagInfo.bag_name)}/meta.json`,bagInfo);
 		for(const title of $tw.mws.store.getBagTiddlers(bagInfo.bag_name)) {
 			const tiddlerInfo = $tw.mws.store.getBagTiddler(title,bagInfo.bag_name);
-			saveJsonFile(`bags/${encodeURIComponent(bagInfo.bag_name)}/tiddlers/${encodeURIComponent(title)}.json`,tiddlerInfo.tiddler);
+			saveJsonFile(`bags/${$tw.utils.encodeURIComponentExtended(bagInfo.bag_name)}/tiddlers/${$tw.utils.encodeURIComponentExtended(title)}.json`,tiddlerInfo.tiddler);
 		}
 	}
 }
