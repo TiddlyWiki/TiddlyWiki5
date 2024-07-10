@@ -1,12 +1,12 @@
 caption: 5.3.5
-created: 20240627165523990
-modified: 20240627165523990
+created: 20240710115948992
+modified: 20240710115948992
 tags: ReleaseNotes
 title: Release 5.3.5
 type: text/vnd.tiddlywiki
 description: Under development
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.4...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.4...v5.3.5]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[duarte.framos|https://talk.tiddlywiki.org/u/duarte.framos]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-4/9940]]).
@@ -31,7 +31,10 @@ This is a bug fix release to address a number of bugs that were introduced with 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+andrewgoz
+btheado
 Leilei332
+michaeljmcd
 oeyoews
 pmario
 springerspandrel
