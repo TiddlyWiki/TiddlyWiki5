@@ -20,7 +20,7 @@ The <<.def tag-picker>> [[macro|Macros]] generates a combination of a text box a
 
 ; tagListFilter
 : <<.from-version 5.3.4>> This parameter defaults to: `[tags[]]` which creates a list of all existing tags. If the tag list should come from a different source the filter should look similar to eg: `[<listSource>get[field-name]enlist-input[]]`. See examples.
-: <<.from-version 5.3.6>> This parameter defaults to: `[tags[]sort[]]`. This change allows a custom sort order, since `sort[]` is not hardcoded into the tag-picker macro anymore. 
+: <<.from-version 5.3.5>> This parameter defaults to: `[tags[]sort[]]`. This change allows a custom sort order, since `sort[]` is not hardcoded into the tag-picker macro anymore. 
 
 
 <<.macro-examples "tag-picker">>
