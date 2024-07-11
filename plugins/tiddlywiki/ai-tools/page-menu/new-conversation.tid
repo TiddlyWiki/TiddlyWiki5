@@ -6,7 +6,7 @@ tags: $:/tags/AI/PageMenu
 	$basetitle="AI Conversation"
 	tags="$:/tags/AI/Conversation"
 	system-prompt="You are a helpful assistant."
-	current-response-text="Please describe this picture"
+	current-response-text="Please list the 10 most important things that happened in South East Asia in the Twentieth Century"
 >
 <$action-navigate $to=<<createTiddler-title>>/>
 </$action-createtiddler>

@@ -2,3 +2,23 @@ title: $:/plugins/tiddlywiki/ai-tools/servers/local-llamafile
 tags: $:/tags/AI/CompletionServer
 url: http://127.0.0.1:8080
 caption: Locally running Llamafile server
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
+{
+	"model": "gpt-4o",
+	"messages": [
+		{
+			"role": "system",
+			"content": "<$text text={{{ [<conversationTitle>get[system-prompt]jsonstringify[]] }}}/>"
+		}
+		<!-- Loop through the tiddlers tagged with this one to pick up all the messages in the conversation -->
+		<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]">
+			,
+			{
+				<!-- We use JSON stringify to escape the characters that can't be used directly in JSON -->
+				"role": "<$text text={{{ [<currentTiddler>get[role]jsonstringify[]] }}}/>",
+				"content": "<$text text={{{ [<currentTiddler>get[text]jsonstringify[]] }}}/>"
+			}
+		</$list>
+	]
+}

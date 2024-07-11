@@ -66,46 +66,6 @@ Procedure to display a message from an AI conversation. Current tiddler is the c
 \end ai-message
 
 <!--
-Procedure that is wikified to generate the JSON payload for the LLM
--->
-\procedure payload()
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
-{
-	"model": "gpt-4o",
-	"messages": [
-		{
-			"role": "system",
-			"content": "<$text text={{{ [<currentTiddler>get[system-prompt]jsonstringify[]] }}}/>"
-		}
-		<!-- Loop through the tiddlers tagged with this one to pick up all the messages in the conversation -->
-		<$list filter="[all[shadows+tiddlers]tag<currentTiddler>!is[draft]sort[created]]">
-			,
-			{
-				<!-- We use JSON stringify to escape the characters that can't be used directly in JSON -->
-				"role": "<$text text={{{ [<currentTiddler>get[role]jsonstringify[]] }}}/>",
-				"content": [
-					{
-						"type": "text",
-						"text": "<$text text={{{ [<currentTiddler>get[text]jsonstringify[]] }}}/>"
-					}
-					<%if [<currentTiddler>get[image]else[]!match[]] %>
-						,
-						{
-							"type": "image_url",
-							"image_url": {
-								"url": "<$text text={{{ [[data:]] [<currentTiddler>get[image]get[type]] [[;base64,]] [<currentTiddler>get[image]get[text]jsonstringify[]] +[join[]] }}}/>"
-							}
-						}
-					<%endif%>
-				]
-				
-			}
-		</$list>
-	]
-}
-\end payload
-
-<!--
 Action procedure to get the next response from the LLM
 -->
 \procedure action-get-response()
@@ -123,16 +83,14 @@ Action procedure to get the next response from the LLM
 	>
 		<$action-deletefield $tiddler=<<currentTiddler>> $field="current-response-text"/>
 		<$action-deletefield $tiddler=<<currentTiddler>> $field="current-response-image"/>
-		<$wikify name="json" text=<<payload>>>
-			<$transclude
-				$variable="get-llm-completion"
-				payload=<<json>>
-				completionServer={{!!completion-server}}
-				resultTitlePrefix=<<resultTitlePrefix>>
-				resultTags=<<resultTags>>
-				statusTitle=<<statusTitle>>
-			/>
-		</$wikify>
+		<$transclude
+			$variable="get-llm-completion"
+			conversationTitle=<<currentTiddler>>
+			completionServer={{!!completion-server}}
+			resultTitlePrefix=<<resultTitlePrefix>>
+			resultTags=<<resultTags>>
+			statusTitle=<<statusTitle>>
+		/>
 	</$action-createtiddler>
 </$let>
 \end action-get-response

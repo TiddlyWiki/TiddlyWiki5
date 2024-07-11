@@ -7,13 +7,13 @@ tags: $:/tags/Global
 
 <!--
 Action procedure to retrieve an LLM completion, given the following parameters:
-payload - JSON payload to be posted to the LLM
+conversationTitle - Title of the tiddler containing the conversation
 resultTitlePrefix - Prefix of the tiddler to be used for saving the result. If the tiddler already exists then a number will be added repeatedly until the resulting title is unique
 resultTags - Tags to be applied to the result tiddler
 statusTitle - Optional title of a tiddler to which the status of the request will be bound: "pending", "complete", "error"
 completionServer - Optional URL of server
 -->
-\procedure get-llm-completion(payload,resultTitlePrefix,resultTags,statusTitle,completionServer)
+\procedure get-llm-completion(conversationTitle,resultTitlePrefix,resultTags,statusTitle,completionServer)
 	<!--
 	Callback for the HTTP response from the LLM
 	-->
@@ -42,19 +42,21 @@ completionServer - Optional URL of server
 <$let
 	completionServer={{{ [<completionServer>!is[blank]else<default-llm-completion-server>] }}}
 >
-	<$action-log message="get-llm-completion"/>
-	<$action-log/>
-	<$action-sendmessage
-		$message="tm-http-request"
-		url={{{ [<completionServer>get[url]addsuffix[/v1/chat/completions]] }}}
-		body=<<payload>>
-		header-content-type="application/json"
-		bearer-auth-token-from-store="openai-secret-key"
-		method="POST"
-		oncompletion=<<get-llm-completion-callback>>
-		bind-status=<<statusTitle>>
-		var-resultTitlePrefix=<<resultTitlePrefix>>
-		var-resultTags=<<resultTags>>
-	/>
+	<$wikify name="json" text={{{ [<completionServer>get[text]] }}}>
+		<$action-log message="get-llm-completion"/>
+		<$action-log/>
+		<$action-sendmessage
+			$message="tm-http-request"
+			url={{{ [<completionServer>get[url]addsuffix[/v1/chat/completions]] }}}
+			body=<<json>>
+			header-content-type="application/json"
+			bearer-auth-token-from-store="openai-secret-key"
+			method="POST"
+			oncompletion=<<get-llm-completion-callback>>
+			bind-status=<<statusTitle>>
+			var-resultTitlePrefix=<<resultTitlePrefix>>
+			var-resultTags=<<resultTags>>
+		/>
+	</$wikify>
 </$let>
 \end get-llm-completion

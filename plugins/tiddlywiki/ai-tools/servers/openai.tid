@@ -2,3 +2,38 @@ title: $:/plugins/tiddlywiki/ai-tools/servers/openai
 tags: $:/tags/AI/CompletionServer
 url: https://api.openai.com
 caption: OpenAI Service
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
+{
+	"model": "gpt-4o",
+	"messages": [
+		{
+			"role": "system",
+			"content": "<$text text={{{ [<conversationTitle>get[system-prompt]jsonstringify[]] }}}/>"
+		}
+		<!-- Loop through the tiddlers tagged with this one to pick up all the messages in the conversation -->
+		<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]">
+			,
+			{
+				<!-- We use JSON stringify to escape the characters that can't be used directly in JSON -->
+				"role": "<$text text={{{ [<currentTiddler>get[role]jsonstringify[]] }}}/>",
+				"content": [
+					{
+						"type": "text",
+						"text": "<$text text={{{ [<currentTiddler>get[text]jsonstringify[]] }}}/>"
+					}
+					<%if [<currentTiddler>get[image]else[]!match[]] %>
+						,
+						{
+							"type": "image_url",
+							"image_url": {
+								"url": "<$text text={{{ [[data:]] [<currentTiddler>get[image]get[type]] [[;base64,]] [<currentTiddler>get[image]get[text]jsonstringify[]] +[join[]] }}}/>"
+							}
+						}
+					<%endif%>
+				]
+				
+			}
+		</$list>
+	]
+}
