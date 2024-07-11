@@ -26,8 +26,7 @@ exports.tags = function(source,operator,options) {
 			}
 		}
 	});
-	// return results.makeTiddlerIterator(options.wiki);
-	return results.toArray();
+	return results.makeTiddlerIterator(options.wiki);
 };
 
 })();
