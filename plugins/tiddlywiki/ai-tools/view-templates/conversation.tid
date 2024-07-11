@@ -97,7 +97,7 @@ Action procedure to get the next response from the LLM
 
 <%if [<currentTiddler>tag[$:/tags/AI/Conversation]] %>
 
-<$select tiddler=<<currentTiddler>> field="completion-server" default=<<default-llm-completion-server>>>
+Server: <$select tiddler=<<currentTiddler>> field="completion-server" default=<<default-llm-completion-server>>>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AI/CompletionServer]sort[caption]]">
 <option value=<<currentTiddler>>><$view field='caption'/></option>
 </$list>
