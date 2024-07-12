@@ -533,9 +533,9 @@ a.tc-tiddlylink-external:hover {
 	outline: 2px dashed <<colour dropzone-background>>;
 }
 
-/* content: braille pattern 28FF */
+/* content: braille pattern 283F */
 .tc-horizontal-draggable-item .tc-draggable::before {
-	content: '⣿';
+	content: '⠿';
 	cursor: move;
 }
 
