@@ -528,6 +528,16 @@ a.tc-tiddlylink-external:hover {
 	border: 2px dashed <<colour dropzone-background>>;
 }
 
+.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder {
+	display: inline;
+	outline: 2px dashed <<colour dropzone-background>>;
+}
+
+.tc-horizontal-draggable-item .tc-draggable::before {
+	content: '⣿ ';
+	cursor: move;
+}
+
 .tc-draggable {
 	cursor: move;
 }
