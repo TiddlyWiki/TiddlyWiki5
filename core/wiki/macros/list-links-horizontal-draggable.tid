@@ -12,7 +12,7 @@ tags: $:/tags/Macro $:/tags/Global
 
 \procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate)
 <span class="tc-horizontal-draggable tc-tiny-gap-right">
-	<$vars targetTiddler=<<tiddler>> targetField=<<field>>>
+	<$let targetTiddler=<<tiddler>> targetField=<<field>>>
 		<$genesis $type=<<type>> class=<<class>>>
 			<$list filter="[<tiddler>get<field>enlist-input[]]" emptyMessage=<<emptyMessage>>>
 				<$droppable
@@ -24,13 +24,13 @@ tags: $:/tags/Macro $:/tags/Global
 					<span class="tc-horizontal-draggable-item tc-tiny-gap-right">
 						<$draggable tiddler={{!!title}} tag="span">
 							<% if [<itemTemplate>is[variable]] %>
-									<$transclude $variable=<<itemTemplate>>>
-										<<list-links-horizontal-draggable-caption>>
-									</$transclude>
+								<$transclude $variable=<<itemTemplate>>>
+									<<list-links-horizontal-draggable-caption>>
+								</$transclude>
 							<% else %>
-									<$transclude $tiddler=<<itemTemplate>>>
-										<<list-links-horizontal-draggable-caption>>
-									</$transclude>
+								<$transclude $tiddler=<<itemTemplate>>>
+									<<list-links-horizontal-draggable-caption>>
+								</$transclude>
 							<% endif %>
 						</$draggable>
 					</span>
@@ -48,6 +48,6 @@ tags: $:/tags/Macro $:/tags/Global
 				</$droppable>
 			</$tiddler>
 		</$genesis>
-	</$vars>
+	</$let>
 </span>
 \end
