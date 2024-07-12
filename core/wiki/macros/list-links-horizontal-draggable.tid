@@ -11,10 +11,12 @@ tags: $:/tags/Macro $:/tags/Global
 \end
 
 \procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate)
+	\procedure customSort() [<tiddler>get<field>enlist-input[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]
+
 <span class="tc-horizontal-draggable tc-tiny-gap-right">
 	<$let targetTiddler=<<tiddler>> targetField=<<field>>>
 		<$genesis $type=<<type>> class=<<class>>>
-			<$list filter="[<tiddler>get<field>enlist-input[]]" emptyMessage=<<emptyMessage>>>
+			<$list filter=<<customSort>> emptyMessage=<<emptyMessage>>>
 				<$droppable
 					actions=<<list-links-draggable-drop-actions>>
 					tag=<<subtype>>

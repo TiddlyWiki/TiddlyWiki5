@@ -59,7 +59,7 @@ tags: $:/tags/EditTemplate
 			<!-- Since we have no possibility atm to use parameters in procedure calls we need $let to define them  -->
 			<$macrocall $name="list-links-horizontal-draggable" tiddler=<<currentTiddler>> field=<<tagField>> itemTemplate="tag-body-itemTemplate"/>
 		<% else %>
-			<$list filter="[<currentTiddler>get<tagField>enlist-input[]sort[title]]" storyview="pop">
+			<$list filter="[all[current]tags[]sort[title]]" storyview="pop">
 				<$macrocall $name="tag-body" colour=<<colour>> palette=<<palette>> icon=<<icon>> tagField=<<tagField>>/>
 			</$list>
 		<% endif %>
