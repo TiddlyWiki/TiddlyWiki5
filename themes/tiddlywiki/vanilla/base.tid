@@ -534,7 +534,7 @@ a.tc-tiddlylink-external:hover {
 }
 
 .tc-horizontal-draggable-item .tc-draggable::before {
-	content: '⣿ ';
+	content: '⣿';
 	cursor: move;
 }
 

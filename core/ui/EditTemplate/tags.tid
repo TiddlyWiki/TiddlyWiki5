@@ -34,15 +34,8 @@ tags: $:/tags/EditTemplate
 </$wikify>
 \end
 
-\procedure tag-bodyX()
-<$macrocall $name="tag-body-inner"
-	colour=`$(colour)$`
-	colourA={{{ [<palette>getindex[foreground]] }}}
-	colourB={{{ [<palette>getindex[background]] }}}
-	fallbackTarget={{{ [<palette>getindex[tag-background]] }}}
-	icon=<<icon>>
-	tagField=<<tagField>>
-/>
+\procedure tag-body-itemTemplate()
+<$macrocall $name="tag-body" colour=<<colour>> palette=<<palette>> icon=<<icon>> tagField=<<tagField>>/>
 \end
 
 \procedure tag-body(colour,palette,icon,tagField:"tags")
@@ -56,29 +49,21 @@ tags: $:/tags/EditTemplate
 />
 \end
 
-\function tf.tagFilter() [<currentTiddler>get<tagField>enlist-input[]sort[title]format:titlelist[]join[ ]]
-\function tf.tagFilter() [<currentTiddler>get<tagField>enlist-input[]format:titlelist[]join[ ]]
-
 \procedure edit-tags-template(tagField:"tags")
 <div class="tc-edit-tags tc-links-draggable-list">
-	<% if [{$:/config/Tags/CustomSort/enabled}trim[]match[yes]] %>
-		<$let colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
-			palette={{$:/palette}}
-			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
-			tagField=<<tagField>>
-		>
-			<$macrocall $name="list-links-horizontal-draggable" tiddler=<<currentTiddler>> field=<<tagField>> itemTemplate="tag-bodyX"/>
-		</$let>
-	<% else %>
-		<$list filter=<<tf.tagFilter>> storyview="pop">
-			<$macrocall $name="tag-body"
-				colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
-				palette={{$:/palette}}
-				icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
-				tagField=<<tagField>>
-			/>
-		</$list>
-	<% endif %>
+	<$let colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+		palette={{$:/palette}}
+		icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
+	>
+		<% if [{$:/config/Tags/CustomSort/enabled}trim[]match[yes]] %>
+			<!-- Since we have no possibility atm to use parameters in procedure calls we need $let to define them  -->
+			<$macrocall $name="list-links-horizontal-draggable" tiddler=<<currentTiddler>> field=<<tagField>> itemTemplate="tag-body-itemTemplate"/>
+		<% else %>
+			<$list filter="[<currentTiddler>get<tagField>enlist-input[]sort[title]]" storyview="pop">
+				<$macrocall $name="tag-body" colour=<<colour>> palette=<<palette>> icon=<<icon>> tagField=<<tagField>>/>
+			</$list>
+		<% endif %>
+	</$let>
 	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 		<$macrocall $name="tag-picker" tagField=<<tagField>>/>
 	</$let>

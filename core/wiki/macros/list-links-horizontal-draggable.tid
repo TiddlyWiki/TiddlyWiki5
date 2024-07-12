@@ -1,46 +1,44 @@
 title: $:/core/macros/list-links-horizontal-draggable
 tags: $:/tags/Macro $:/tags/Global
 
-\define list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate)
 \whitespace trim
+\procedure list-links-horizontal-draggable-caption()
+<$let tv-wikilinks="no">
+	<$transclude field="caption">
+		<$view field="title"/>
+	</$transclude>
+</$let>
+\end
+
+\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate)
 <span class="tc-horizontal-draggable tc-tiny-gap-right">
-	<$vars targetTiddler="""$tiddler$""" targetField="""$field$""">
-		<$genesis $type=<<__type__>> class="$class$">
-			<$list filter="[list[$tiddler$!!$field$]]" emptyMessage=<<__emptyMessage__>>>
+	<$vars targetTiddler=<<tiddler>> targetField=<<field>>>
+		<$genesis $type=<<type>> class=<<class>>>
+			<$list filter="[<tiddler>get<field>enlist-input[]]" emptyMessage=<<emptyMessage>>>
 				<$droppable
 					actions=<<list-links-draggable-drop-actions>>
-					tag="""$subtype$"""
+					tag=<<subtype>>
 					enable=<<tv-enable-drag-and-drop>>
 				>
 					<span class="tc-horizontal-draggable-placeholder"/>
 					<span class="tc-horizontal-draggable-item tc-tiny-gap-right">
-						<% if [<__itemTemplate__>is[variable]] %>
-							<$draggable tiddler={{!!title}} tag="span">
-								<$transclude $variable=<<__itemTemplate__>>>
-									<$let tv-wikilinks="no">
-										<$transclude field="caption">
-											<$view field="title"/>
-										</$transclude>
-									</$let>
-								</$transclude>
-							</$draggable>
-						<% else %>
-							<$draggable tiddler={{!!title}} tag="span">
-								<$transclude $tiddler=<<__itemTemplate__>>>
-									<$let tv-wikilinks="no">
-										<$transclude field="caption">
-											<$view field="title"/>
-										</$transclude>
-									</$let>
-								</$transclude>
-							</$draggable>
-						<% endif %>
+						<$draggable tiddler={{!!title}} tag="span">
+							<% if [<itemTemplate>is[variable]] %>
+									<$transclude $variable=<<itemTemplate>>>
+										<<list-links-horizontal-draggable-caption>>
+									</$transclude>
+							<% else %>
+									<$transclude $tiddler=<<itemTemplate>>>
+										<<list-links-horizontal-draggable-caption>>
+									</$transclude>
+							<% endif %>
+						</$draggable>
 					</span>
 				</$droppable>
 			</$list>
 			<$tiddler tiddler="">
 				<$droppable
-					actions=<<list-links-draggable-drop-actions>> 
+					actions=<<list-links-draggable-drop-actions>>
 					tag="span"
 					enable=<<tv-enable-drag-and-drop>>
 				>
@@ -53,5 +51,3 @@ tags: $:/tags/Macro $:/tags/Global
 	</$vars>
 </span>
 \end
-
-<$macrocall $name="list-links-horizontal-draggable" tiddler=a field=tags/> -- test
