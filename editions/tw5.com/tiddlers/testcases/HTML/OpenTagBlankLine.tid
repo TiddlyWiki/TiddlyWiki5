@@ -1,0 +1,23 @@
+created: 20240622142425004
+description: Blank line after open tag
+modified: 20240622144230258
+tags: $:/tags/wiki-test-spec
+title: TestCases/HTML/OpenTagBlankLine
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+A blank line after an open html tag allows block mode punctuation to be recognised
++
+title: Output
+
+<div>
+
+* blank line after open tag allows
+* block mode punctuation (i.e. this list) to
+* be recognised
+</div>
++
+title: ExpectedResult
+
+<div><ul><li>blank line after open tag allows</li><li>block mode punctuation (i.e. this list) to</li><li>be recognised</li></ul></div>
