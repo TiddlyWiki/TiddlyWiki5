@@ -45,7 +45,7 @@ tags: $:/tags/Macro $:/tags/Global
 					enable=<<tv-enable-drag-and-drop>>
 				>
 					<span class="tc-horizontal-draggable-placeholder">
-						&nbsp;
+						&nbsp;&nbsp;
 					</span>
 				</$droppable>
 			</$tiddler>
