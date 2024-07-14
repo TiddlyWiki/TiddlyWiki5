@@ -57,7 +57,12 @@ tags: $:/tags/EditTemplate
 	>
 		<% if [{$:/config/Tags/CustomSort/enabled}trim[]match[yes]] %>
 			<!-- Since we have no possibility atm to use parameters in procedure calls we need $let to define them  -->
-			<$macrocall $name="list-links-horizontal-draggable" tiddler=<<currentTiddler>> field=<<tagField>> itemTemplate="tag-body-itemTemplate"/>
+			<$macrocall $name="list-links-horizontal-draggable"
+				tiddler=<<currentTiddler>>
+				field=<<tagField>>
+				itemTemplate="tag-body-itemTemplate"
+				dragHandle="no"
+			/>
 		<% else %>
 			<$list filter="[all[current]tags[]sort[title]]" storyview="pop">
 				<$macrocall $name="tag-body" colour=<<colour>> palette=<<palette>> icon=<<icon>> tagField=<<tagField>>/>
