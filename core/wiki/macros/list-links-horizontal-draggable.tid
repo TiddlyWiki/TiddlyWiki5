@@ -10,7 +10,7 @@ tags: $:/tags/Macro $:/tags/Global
 </$let>
 \end
 
-\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate)
+\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"yes")
 	\procedure customSort() [<tiddler>get<field>enlist-input[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]
 
 <span class="tc-horizontal-draggable tc-tiny-gap-right">
@@ -23,19 +23,25 @@ tags: $:/tags/Macro $:/tags/Global
 					enable=<<tv-enable-drag-and-drop>>
 				>
 					<span class="tc-horizontal-draggable-placeholder"/>
-					<span class="tc-horizontal-draggable-item tc-tiny-gap-right">
-						<$draggable tiddler={{!!title}} tag="span">
-							<% if [<itemTemplate>is[variable]] %>
-								<$transclude $variable=<<itemTemplate>>>
-									<<list-links-horizontal-draggable-caption>>
-								</$transclude>
-							<% else %>
-								<$transclude $tiddler=<<itemTemplate>>>
-									<<list-links-horizontal-draggable-caption>>
-								</$transclude>
-							<% endif %>
-						</$draggable>
-					</span>
+					<$draggable tiddler={{!!title}}
+						enable={{{ [<dragHandle>match[yes]] }}}
+						tag="span" class={{{ [<dragHandle>match[yes]then[tc-draggable-handle]] }}}
+					>
+					</$draggable>
+					<$draggable tiddler={{!!title}}
+						enable={{{ [<dragHandle>!match[yes]then[yes]] }}}
+						tag="span" class="tc-horizontal-draggable-item tc-tiny-gap-right"
+					>
+						<% if [<itemTemplate>is[variable]] %>
+							<$transclude $variable=<<itemTemplate>>>
+								<<list-links-horizontal-draggable-caption>>
+							</$transclude>
+						<% else %>
+							<$transclude $tiddler=<<itemTemplate>>>
+								<<list-links-horizontal-draggable-caption>>
+							</$transclude>
+						<% endif %>
+					</$draggable>
 				</$droppable>
 			</$list>
 			<$tiddler tiddler="">
@@ -44,9 +50,7 @@ tags: $:/tags/Macro $:/tags/Global
 					tag="span"
 					enable=<<tv-enable-drag-and-drop>>
 				>
-					<span class="tc-horizontal-draggable-placeholder">
-						&nbsp;&nbsp;
-					</span>
+					<span class="tc-horizontal-draggable-placeholder tc-horizontal-draggable-placeholder-end"></span>
 				</$droppable>
 			</$tiddler>
 		</$genesis>
