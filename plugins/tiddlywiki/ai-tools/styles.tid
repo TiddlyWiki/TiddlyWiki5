@@ -156,15 +156,15 @@ tags: [[$:/tags/Stylesheet]]
 
 .ai-request-spinner:before {
 	animation: ai-request-spinner-animation-ball1 1s infinite;
-	background-color: #ddffdd;
-	box-shadow: 30px 0 0 #90a690;
+	background-color: #9c9ab0;
+	box-shadow: 30px 0 0 #fefdff;
 	margin-bottom: 10px;
 }
 
 .ai-request-spinner:after {
 	animation: ai-request-spinner-animation-ball2 1s infinite;
-	background-color: #90a690;
-	box-shadow: 30px 0 0 #ddffdd;
+	background-color: #fefdff;
+	box-shadow: 30px 0 0 #9c9ab0;
 }
 
 @keyframes ai-request-spinner-animation-rotate {
@@ -175,30 +175,30 @@ tags: [[$:/tags/Stylesheet]]
 
 @keyframes ai-request-spinner-animation-ball1 {
 	0% {
-		box-shadow: 30px 0 0 #90a690;
+		box-shadow: 30px 0 0 #fefdff;
 	}
 	50% {
-		box-shadow: 0 0 0 #90a690;
+		box-shadow: 0 0 0 #fefdff;
 		margin-bottom: 0;
 		transform: translate(15px, 15px);
 	}
 	100% {
-		box-shadow: 30px 0 0 #90a690;
+		box-shadow: 30px 0 0 #fefdff;
 		margin-bottom: 10px;
 	}
 }
 
 @keyframes ai-request-spinner-animation-ball2 {
 	0% {
-		box-shadow: 30px 0 0 #ddffdd;
+		box-shadow: 30px 0 0 #9c9ab0;
 	}
 	50% {
-		box-shadow: 0 0 0 #ddffdd;
+		box-shadow: 0 0 0 #9c9ab0;
 		margin-top: -20px;
 		transform: translate(15px, 15px);
 	}
 	100% {
-		box-shadow: 30px 0 0 #ddffdd;
+		box-shadow: 30px 0 0 #9c9ab0;
 		margin-top: 0;
 	}
 }
