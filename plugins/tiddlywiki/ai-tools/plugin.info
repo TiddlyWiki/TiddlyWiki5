@@ -2,6 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/ai-tools",
 	"name": "AI Tools",
 	"description": "AI Tools for TiddlyWiki",
-	"list": "readme docs settings",
+	"list": "readme docs tools settings",
 	"stability": "STABILITY_1_EXPERIMENTAL"
 }
