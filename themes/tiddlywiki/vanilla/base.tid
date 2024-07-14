@@ -546,8 +546,19 @@ a.tc-tiddlylink-external:hover {
 	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-end,
 	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder {
 		display: inline-block;
-		min-width: 3em;
+		min-width: 4em;
 		min-height: 1em;
+	}
+
+	.tc-horizontal-draggable-placeholder-end {
+		outline: 1px dashed <<colour foreground>>;
+		display: block;
+		min-height: 2em;
+	}
+
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-end {
+		display: block;
+		min-height: 2em;
 	}
 }
 
