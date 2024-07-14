@@ -528,19 +528,41 @@ a.tc-tiddlylink-external:hover {
 	border: 2px dashed <<colour dropzone-background>>;
 }
 
-.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder {
-	display: inline;
+.tc-droppable.tc-dragover .tc-horizontal-draggable-placeholder {
 	outline: 2px dashed <<colour dropzone-background>>;
 }
 
+.tc-horizontal-draggable-placeholder {
+	display: inline;
+}
+
+.tc-horizontal-draggable-placeholder-end {
+	display: inline-block;
+	min-width: 1em;
+	min-height: 1em;
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-end,
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder {
+		display: inline-block;
+		min-width: 3em;
+		min-height: 1em;
+	}
+}
+
 /* content: braille pattern 283F */
-.tc-horizontal-draggable-item .tc-draggable::before {
+.tc-draggable-handle::before {
 	content: '⠿';
-	cursor: move;
+	cursor: ew-resize;
 }
 
 .tc-draggable {
 	cursor: move;
+}
+
+.tc-horizontal-draggable .tc-draggable {
+	cursor: ew-resize;
 }
 
 .tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
@@ -1593,6 +1615,13 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-remove-tag-button {
 	padding-left: 4px;
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+	.tc-remove-tag-button {
+		padding-left: 14px;
+		margin-left: 6px;
+	}
 }
 
 .tc-tiddler-editor {
