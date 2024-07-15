@@ -82,6 +82,10 @@ ClassicStoryView.prototype.remove = function(widget) {
 			removeElement = function() {
 				widget.removeChildDomNodes();
 			};
+		// Blur the focus if it is within the descendents of the node we are removing
+		if($tw.utils.domContains(targetElement,targetElement.ownerDocument.activeElement)) {
+			targetElement.ownerDocument.activeElement.blur();
+		}
 		// Abandon if the list entry isn't a DOM element (it might be a text node)
 		if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 			removeElement();
