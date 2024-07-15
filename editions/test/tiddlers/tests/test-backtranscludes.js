@@ -220,6 +220,22 @@ describe('Backtranscludes and transclude filter tests', function() {
 		});
 	});
 
+	describe('exclude self when target tiddler is not string', function() {
+		var wiki = new $tw.Wiki();
+
+		wiki.addTiddler({
+			title: 'TestOutgoing',
+			text: "<$transclude $tiddler={{TestOutgoing!!title}} $field='created'/> and <$transclude tiddler={{TestOutgoing!!title}} field='created'/>"});
+
+		it('should have no transclude', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[transcludes[]]').join(',')).toBe('');
+		});
+
+		it('should have no back transcludes', function() {
+			expect(wiki.filterTiddlers('TestOutgoing +[backtranscludes[]]').join(',')).toBe('');
+		});
+	});
+
 	describe('recognize transclusion defined by widget', function() {
 		var wiki = new $tw.Wiki();
 
