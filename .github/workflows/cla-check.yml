@@ -1,0 +1,30 @@
+name: Check CLA Signature
+on:
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+    paths-ignore:
+      - 'licenses/cla-individual.md'
+jobs:
+  check_cla:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    if: ${{ (github.event.pull_request.user.login != github.repository_owner) }}
+    steps:
+    - run: |
+        if ! curl -s https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/tiddlywiki-com/licenses/cla-individual.md | grep -o "@$USER,"; then
+          echo "CLA not signed"
+          gh pr comment "$NUMBER" -b "@$USER It appears that this is your first contribution to the project, welcome.
+          
+          With apologies for the bureaucracy, please could you prepare a separate PR to the 'tiddlywiki-com' branch with your signature for the Contributor License Agreement (see [contributing.md](https://github.com/Jermolene/TiddlyWiki5/blob/master/contributing.md))."
+        else
+          echo "CLA already signed"
+          gh pr comment "$NUMBER" -b "**$USER** has signed the Contributor License Agreement (see [contributing.md](https://github.com/Jermolene/TiddlyWiki5/blob/master/contributing.md))"
+        fi
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+        NUMBER: ${{ github.event.pull_request.number }}
+        USER: ${{ github.actor }}
