@@ -58,7 +58,6 @@ tags: $:/tags/EditTemplate
 />
 \end
 
-
 \procedure edit-tags-template(tagField:"tags")
 	\function tf.palette() [{$:/palette}]
 	\function tf.tag-colour() [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]]

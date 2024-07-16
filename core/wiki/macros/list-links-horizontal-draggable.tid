@@ -23,14 +23,14 @@ tags: $:/tags/Macro $:/tags/Global
 					enable=<<tv-enable-drag-and-drop>>
 				>
 					<span class="tc-horizontal-draggable-placeholder"/>
-					<$draggable tiddler={{!!title}}
+					<$draggable tiddler={{!!title}} tag="span"
 						enable={{{ [<dragHandle>match[yes]] }}}
-						tag="span" class={{{ [<dragHandle>match[yes]then[tc-draggable-handle]] }}}
+						class={{{ [<dragHandle>match[yes]then[tc-draggable-handle]] }}}
 					>
 					</$draggable>
-					<$draggable tiddler={{!!title}}
+					<$draggable tiddler={{!!title}} tag="span"
 						enable={{{ [<dragHandle>!match[yes]then[yes]] }}}
-						tag="span" class="tc-horizontal-draggable-item tc-small-gap-right"
+						class="tc-horizontal-draggable-item tc-small-gap-right"
 					>
 						<% if [<itemTemplate>is[variable]] %>
 							<$transclude $variable=<<itemTemplate>>>
