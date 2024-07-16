@@ -318,7 +318,8 @@ SqlTiddlerStore.prototype.getBagTiddlerStream = function(title,bag_name) {
 				{},
 				this.attachmentStore.getAttachmentStream(tiddlerInfo.attachment_blob),
 				{
-					tiddler_id: tiddlerInfo.tiddler_id
+					tiddler_id: tiddlerInfo.tiddler_id,
+					bag_name: bag_name
 				}
 			);
 		} else {
