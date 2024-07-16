@@ -14,18 +14,19 @@ Filter operator returning all the tags of the selected tiddlers
 
 /*
 Export our filter function
+LinkedList instead of Object. Should be as performant but allows us a guaranteed custom sort order
 */
 exports.tags = function(source,operator,options) {
-	var tags = {};
+	var results = new $tw.utils.LinkedList();
 	source(function(tiddler,title) {
 		var t, length;
 		if(tiddler && tiddler.fields.tags) {
 			for(t=0, length=tiddler.fields.tags.length; t<length; t++) {
-				tags[tiddler.fields.tags[t]] = true;
+				results.pushTop(tiddler.fields.tags[t])
 			}
 		}
 	});
-	return Object.keys(tags);
+	return results.makeTiddlerIterator(options.wiki);
 };
 
 })();
