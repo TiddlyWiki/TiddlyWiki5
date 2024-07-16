@@ -4,9 +4,11 @@ tags: $:/tags/Macro $:/tags/Global
 \whitespace trim
 \procedure list-links-horizontal-draggable-caption()
 <$let tv-wikilinks="no">
-	<$transclude field="caption">
-		<$view field="title"/>
-	</$transclude>
+	<span class="tc-small-gap-right">
+		<$transclude field="caption">
+			<$view field="title"/>
+		</$transclude>
+	</span>
 </$let>
 \end
 
@@ -30,7 +32,7 @@ tags: $:/tags/Macro $:/tags/Global
 					</$draggable>
 					<$draggable tiddler={{!!title}} tag="span"
 						enable={{{ [<dragHandle>!match[yes]then[yes]] }}}
-						class="tc-horizontal-draggable-item tc-small-gap-right"
+						class="tc-horizontal-draggable-item"
 					>
 						<% if [<itemTemplate>is[variable]] %>
 							<$transclude $variable=<<itemTemplate>>>
