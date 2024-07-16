@@ -536,7 +536,7 @@ a.tc-tiddlylink-external:hover {
 	display: inline;
 }
 
-.tc-horizontal-draggable-placeholder-end {
+.tc-horizontal-draggable-placeholder-last {
 	display: inline-block;
 	min-width: 1em;
 	min-height: 1em;
@@ -557,20 +557,20 @@ a.tc-tiddlylink-external:hover {
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
-	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-end,
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-last,
 	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder {
 		display: inline-block;
 		min-width: 4em;
 		min-height: 1em;
 	}
 
-	.tc-horizontal-draggable-placeholder-end {
+	.tc-horizontal-draggable-placeholder-last {
 		outline: 1px dashed <<colour foreground>>;
 		display: block;
 		min-height: 2em;
 	}
 
-	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-end {
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-last {
 		display: block;
 		min-height: 2em;
 	}
