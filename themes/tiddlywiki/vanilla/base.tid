@@ -543,9 +543,15 @@ a.tc-tiddlylink-external:hover {
 }
 
 /* content: braille pattern 283F */
+<<<<<<< HEAD
 .tc-draggable-handle::before {
 	content: '⠿';
 	cursor: ew-resize;
+=======
+.tc-draggable-handle {
+	cursor: ew-resize;
+	display: inline-block;
+>>>>>>> add-list-links-horizontal-draggable-procedure
 }
 
 .tc-draggable {
@@ -574,11 +580,14 @@ a.tc-tiddlylink-external:hover {
 		display: block;
 		min-height: 2em;
 	}
+<<<<<<< HEAD
 	.tc-draggable-handle::before {
 		content: '⠿';
 		padding-left: 10px;
 		padding-right: 7px;
 	}
+=======
+>>>>>>> add-list-links-horizontal-draggable-procedure
 }
 
 
