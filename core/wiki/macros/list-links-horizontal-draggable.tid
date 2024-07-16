@@ -12,26 +12,31 @@ tags: $:/tags/Macro $:/tags/Global
 </$let>
 \end
 
-\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"yes")
+\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"yes",enable:"yes")
 	\procedure customSort() [<tiddler>get<field>enlist-input[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]
 
 <span class="tc-horizontal-draggable tc-tiny-gap-right">
-	<$let targetTiddler=<<tiddler>> targetField=<<field>>>
+	<$let targetTiddler=<<tiddler>>
+		targetField=<<field>>
+		_enable={{{ [<tv-enable-drag-and-drop>!match[no]then<enable>else[yes]] }}}
+		_dragHandle={{{ [<_enable>match[yes]then<dragHandle>else[no]] }}}
+	>
 		<$genesis $type=<<type>> class=<<class>>>
 			<$list filter=<<customSort>> emptyMessage=<<emptyMessage>>>
 				<$droppable
 					actions=<<list-links-draggable-drop-actions>>
 					tag=<<subtype>>
-					enable=<<tv-enable-drag-and-drop>>
+					enable=<<_enable>>
 				>
 					<span class="tc-horizontal-draggable-placeholder"/>
+					<% if [<_dragHandle>match[yes]] %>
+						<$draggable tiddler={{!!title}} tag="span"
+							class="tc-draggable-handle"
+						>
+						</$draggable>
+					<% endif %>
 					<$draggable tiddler={{!!title}} tag="span"
-						enable={{{ [<dragHandle>match[yes]] }}}
-						class={{{ [<dragHandle>match[yes]then[tc-draggable-handle]] }}}
-					>
-					</$draggable>
-					<$draggable tiddler={{!!title}} tag="span"
-						enable={{{ [<dragHandle>!match[yes]then[yes]] }}}
+						enable={{{ [<_dragHandle>!match[yes]then<_enable>else[no]]  }}}
 						class="tc-horizontal-draggable-item"
 					>
 						<% if [<itemTemplate>is[variable]] %>
@@ -46,15 +51,17 @@ tags: $:/tags/Macro $:/tags/Global
 					</$draggable>
 				</$droppable>
 			</$list>
-			<$tiddler tiddler="">
-				<$droppable
-					actions=<<list-links-draggable-drop-actions>>
-					tag="span"
-					enable=<<tv-enable-drag-and-drop>>
-				>
-					<span class="tc-horizontal-draggable-placeholder tc-horizontal-draggable-placeholder-end"></span>
-				</$droppable>
-			</$tiddler>
+			<% if [<_enable>match[yes]] %>
+				<$tiddler tiddler="">
+					<$droppable
+						actions=<<list-links-draggable-drop-actions>>
+						tag="span"
+						enable=<<_enable>>
+					>
+						<span class="tc-horizontal-draggable-placeholder tc-horizontal-draggable-placeholder-last"></span>
+					</$droppable>
+				</$tiddler>
+			<% endif %>
 		</$genesis>
 	</$let>
 </span>
