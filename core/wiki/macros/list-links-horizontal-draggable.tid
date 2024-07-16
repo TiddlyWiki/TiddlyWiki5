@@ -30,7 +30,7 @@ tags: $:/tags/Macro $:/tags/Global
 					</$draggable>
 					<$draggable tiddler={{!!title}}
 						enable={{{ [<dragHandle>!match[yes]then[yes]] }}}
-						tag="span" class="tc-horizontal-draggable-item tc-tiny-gap-right"
+						tag="span" class="tc-horizontal-draggable-item tc-small-gap-right"
 					>
 						<% if [<itemTemplate>is[variable]] %>
 							<$transclude $variable=<<itemTemplate>>>
