@@ -69,7 +69,7 @@ tags: $:/tags/EditTemplate
 		tiddler=<<currentTiddler>>
 		field=<<tagField>>
 		itemTemplate="tag-body-itemTemplate"
-		dragHandle="no"
+		dragHandle=""
 		enable={{{ [{$:/config/Tags/CustomSort/subfilter}trim[]is[blank]then[yes]else[no]] }}}
 	/>
 	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
