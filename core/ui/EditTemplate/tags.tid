@@ -34,10 +34,19 @@ tags: $:/tags/EditTemplate
 </$wikify>
 \end
 
+<!-- template used for list-links-horizontal-draggable call -->
 \procedure tag-body-itemTemplate()
-<$macrocall $name="tag-body" colour=<<colour>> palette=<<palette>> icon=<<icon>> tagField=<<tagField>>/>
+<$macrocall $name="tag-body-inner"
+	colour=<<tf.tag-colour>>
+	colourA={{{ [<tf.palette>getindex[foreground]] }}}
+	colourB={{{ [<tf.palette>getindex[background]] }}}
+	fallbackTarget={{{ [<tf.palette>getindex[tag-background]] }}}
+	icon=<<tf.tag-icon>>
+	tagField=<<tagField>>
+/>
 \end
 
+<!-- We must keep the procedure "signature" for backwards compatibility -->
 \procedure tag-body(colour,palette,icon,tagField:"tags")
 <$macrocall $name="tag-body-inner"
 	colour=`$(colour)$`
@@ -49,26 +58,26 @@ tags: $:/tags/EditTemplate
 />
 \end
 
+
 \procedure edit-tags-template(tagField:"tags")
+	\function tf.palette() [{$:/palette}]
+	\function tf.tag-colour() [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]]
+	\function tf.tag-icon() [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]]
+
 <div class="tc-edit-tags tc-links-draggable-list">
-	<$let colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
-		palette={{$:/palette}}
-		icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
-	>
-		<% if [{$:/config/Tags/CustomSort/enabled}trim[]match[yes]] %>
-			<!-- Since we have no possibility atm to use parameters in procedure calls we need $let to define them  -->
-			<$macrocall $name="list-links-horizontal-draggable"
-				tiddler=<<currentTiddler>>
-				field=<<tagField>>
-				itemTemplate="tag-body-itemTemplate"
-				dragHandle="no"
-			/>
-		<% else %>
-			<$list filter="[all[current]tags[]sort[title]]" storyview="pop">
-				<$macrocall $name="tag-body" colour=<<colour>> palette=<<palette>> icon=<<icon>> tagField=<<tagField>>/>
-			</$list>
-		<% endif %>
-	</$let>
+	<% if [{$:/config/Tags/CustomSort/enabled}trim[]match[yes]] %>
+		<!-- Since we have no possibility atm to use parameters in procedure calls we need $let to define them  -->
+		<$macrocall $name="list-links-horizontal-draggable"
+			tiddler=<<currentTiddler>>
+			field=<<tagField>>
+			itemTemplate="tag-body-itemTemplate"
+			dragHandle="no"
+		/>
+	<% else %>
+		<$list filter="[all[current]tags[]sort[title]]" storyview="pop">
+			<$macrocall $name="tag-body" colour=<<tf.tag-colour>> palette=<<tf.palette>> icon=<<tf.tag-icon>> tagField=<<tagField>>/>
+		</$list>
+	<% endif %>
 	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 		<$macrocall $name="tag-picker" tagField=<<tagField>>/>
 	</$let>
