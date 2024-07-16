@@ -12,14 +12,14 @@ tags: $:/tags/Macro $:/tags/Global
 </$let>
 \end
 
-\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"yes",enable:"yes")
+\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"⠿",enable:"yes")
 	\procedure customSort() [<tiddler>get<field>enlist-input[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]
 
 <span class="tc-horizontal-draggable tc-tiny-gap-right">
 	<$let targetTiddler=<<tiddler>>
 		targetField=<<field>>
 		_enable={{{ [<tv-enable-drag-and-drop>!match[no]then<enable>else[yes]] }}}
-		_dragHandle={{{ [<_enable>match[yes]then<dragHandle>else[no]] }}}
+		_dragHandle={{{ [<_enable>match[yes]then<dragHandle>else[]] }}}
 	>
 	<$log/>
 		<$genesis $type=<<type>> class=<<class>>>
@@ -30,16 +30,15 @@ tags: $:/tags/Macro $:/tags/Global
 					enable=<<_enable>>
 				>
 					<span class="tc-horizontal-draggable-placeholder"/>
-					<% if [<_dragHandle>match[yes]] %>
-						<$draggable tiddler={{!!title}} tag="span"
-							class="tc-draggable-handle"
-						/>
-					<% endif %>
 					<$draggable tiddler={{!!title}} tag="span"
-						enable={{{ [<_dragHandle>!match[yes]then<_enable>else[no]]  }}}
+						enable=<<_enable>>
 						class="tc-horizontal-draggable-item"
 					>
-						<span class="tc-draggable-item"/>
+						<% if [<_dragHandle>!is[blank]] %>
+							<span class="tc-draggable-handle tc-tiny-gap-right">
+								<<_dragHandle>>
+							</span>
+						<% endif %>
 						<% if [<itemTemplate>is[variable]] %>
 							<$transclude $variable=<<itemTemplate>>>
 								<<list-links-horizontal-draggable-caption>>

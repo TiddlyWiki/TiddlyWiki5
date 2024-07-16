@@ -1,6 +1,12 @@
 created: 20240712134945885
-modified: 20240712135014913
+modified: 20240716222408892
 title: list-links-horizontal-draggable Macro (Examples)
 type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1" eg="""<<list-links-horizontal-draggable tiddler:"Days of the Week">>"""/>
+
+<$macrocall $name=".example" n="2" eg="""<<list-links-horizontal-draggable tiddler:"Days of the Week" dragHandle:"">>"""/>
+
+<$macrocall $name=".example" n="3" eg="""<<list-links-horizontal-draggable tiddler:"Days of the Week" dragHandle:{{$:/core/images/close-others-button|11px}}>>"""/>
+
+<$macrocall $name=".example" n="4" eg="""<<list-links-horizontal-draggable tiddler:"Days of the Week" enable:"no">>"""/>

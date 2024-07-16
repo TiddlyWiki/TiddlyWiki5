@@ -1,6 +1,6 @@
 caption: list-links-horizontal-draggable
 created: 20240712134619467
-modified: 20240716135427247
+modified: 20240716221918196
 tags: Macros [[Core Macros]]
 title: list-links-horizontal-draggable Procedure
 type: text/vnd.tiddlywiki
@@ -33,7 +33,7 @@ The <<.def list-links-horizontal-draggable>> [[procedure|Procedures]] renders th
 : Optional title of a tiddler to use as the template for rendering list items
 
 ; dragHandle
-: Defaults to: ''yes''. If shows a drag handle: `⠿` in front of every item. If set to ''no'' the handle is removed
+: Defaults to: `⠿`. It shows ⠿ in front of every item. If set to an ''empty string'' the handle is removed
 
 ; enable
 : Defaults to: ''yes''. If set to ''no'' the draggability function and the handles are removed

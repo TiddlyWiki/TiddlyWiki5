@@ -543,8 +543,7 @@ a.tc-tiddlylink-external:hover {
 }
 
 /* content: braille pattern 283F */
-.tc-draggable-handle::before {
-	content: '⠿';
+.tc-draggable-handle {
 	cursor: ew-resize;
 	display: inline-block;
 }
@@ -574,11 +573,6 @@ a.tc-tiddlylink-external:hover {
 	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-last {
 		display: block;
 		min-height: 2em;
-	}
-	.tc-draggable-handle::before {
-		content: '⠿';
-		padding-left: 10px;
-		padding-right: 7px;
 	}
 }
 
