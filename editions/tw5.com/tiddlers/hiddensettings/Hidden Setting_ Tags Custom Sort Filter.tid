@@ -1,0 +1,39 @@
+created: 20240712135147083
+modified: 20240716140734127
+tags: [[Hidden Settings]]
+title: Hidden Setting: Tags Custom Sort Filter
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.7">> By default tags are alphabetically sorted using a filter shown in the code below. There is a subfilter which uses the new configuration variable: $:/config/Tags/CustomSort/subfilter:
+
+```
+filter="[all[current]tags[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]"
+```
+
+''Current configuration''
+
+* The active sort subfilter is: <code><$text text={{{ [{$:/config/Tags/CustomSort/subfilter}!is[blank]else[n/a]] }}}/></code>
+* The default value is: `[{!!title}]`
+
+''Special Usecase''
+
+If the configuration tiddler: $:/config/Tags/CustomSort/subfilter is set to an ''empty value'':
+
+* The tags are sorted in creation order
+* The tag-editor will activate drag and drop sorting
+
+''Possible values for $:/config/Tags/CustomSort/subfilter'', //which should be chnaged by experienced users only//.
+
+If the custom sort order is changed the subfilter in $:/config/Tags/CustomSort/subfilter will be used as the default filter to define the sort order in the view- and edit-template. 
+
+<<.tip """The custom sort order is implemented with a [[Sort Filter Run Prefix]]. Please ''carefully'' read the documentation. This configuration is only needed if you want to overwrite the default sort order, or activate drag and drop sorting in the tag editor""">>
+
+* `[{!!title}]`
+* `[length[]]`
+* `[get[color]else[zzzz]]`
+
+
+Also see:
+
+* $:/core/ui/ViewTemplate/tags
+* $:/core/ui/EditTemplate/tags
