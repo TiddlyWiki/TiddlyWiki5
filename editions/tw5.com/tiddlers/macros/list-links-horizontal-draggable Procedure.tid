@@ -1,11 +1,11 @@
-caption: list-links-draggable
+caption: list-links-horizontal-draggable
 created: 20240712134619467
-modified: 20240712134855835
+modified: 20240716135427247
 tags: Macros [[Core Macros]]
-title: list-links-horizontal-draggable Macro
+title: list-links-horizontal-draggable Procedure
 type: text/vnd.tiddlywiki
 
-The <<.def list-links-horizontal-draggable>> [[macro|Macros]] renders the ListField of a tiddler as a list that can be reordered via [[drag and drop|Drag and Drop]].
+The <<.def list-links-horizontal-draggable>> [[procedure|Procedures]] renders the ListField of a tiddler as a list that can be reordered via [[drag and drop|Drag and Drop]].
 
 !! Parameters
 
@@ -30,6 +30,15 @@ The <<.def list-links-horizontal-draggable>> [[macro|Macros]] renders the ListFi
 ; itemTemplate
 : Optional title of a tiddler to use as the template for rendering list items
 
+; dragHandle
+: Defaults to: ''yes''. If shows a drag handle: `⠿` in front of every item. If set to ''no'' the handle is removed
+
+; enable
+: Defaults to: ''yes''. If set to ''no'' the draggability function and the handles are removed
+
 If the `itemTemplate` parameter is not provided then the list items are rendered as simple text. Within the `itemTemplate`, the [[currentTiddler Variable]] refers to the current list item.
+
+<<.warning """Be ware, that the macro internally respects the global variable `tv-enable-drag-and-drop`.<br>See: [[Hidden Setting: Disable Drag and Drop]]""">>
+
 
 <<.macro-examples "list-links-horizontal-draggable">>
