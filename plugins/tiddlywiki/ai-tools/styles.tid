@@ -100,6 +100,11 @@ tags: [[$:/tags/Stylesheet]]
 	gap: 1em;
 }
 
+.ai-conversation .ai-user-prompt-text textarea {
+	color: #000;
+	background: #fff;
+}
+
 .ai-conversation .ai-user-prompt button.ai-user-prompt-send {
 	background-color: initial;
 	background-image: linear-gradient(-180deg, #e0c3ce, #963057);
@@ -135,6 +140,11 @@ tags: [[$:/tags/Stylesheet]]
 
 .ai-conversation .ai-user-prompt textarea {
 	margin: 0;
+}
+
+.ai-conversation .ai-user-prompt .ai-user-prompt-image button {
+	color: #000;
+	fill: #000;
 }
 
 .ai-request-spinner {
