@@ -1,9 +1,12 @@
 title: $:/core/macros/tag-picker
 tags: $:/tags/Macro $:/tags/Global
-first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]
-second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>sort[]]
+first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>]
+second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>]
 
-<!-- first-search-filter and second-search-filter fields are not used here in the code, but they are defined as parameters for keyboard-driven-input macro -->
+<!--
+	Fields: "first-search-filter", "second-search-filter" are assigned to the keyboard-driven input macro with parameter: "configTiddlerFilter"
+	They __need to be the same__ as used for variables: "nonSystemTagsFilter" and "systemTagsFilter". See code below!
+-->
 
 \whitespace trim
 
@@ -150,7 +153,7 @@ The second ESC tries to close the "draft tiddler"
 \end
 
 <!-- prepare all variables for tag-picker keyboard handling -->
-\procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]]")
+\procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]sort[]]")
 
 \function _tf.getUserInput() [<storeTitle>get[text]]
 \function _tf.getTag() [<newTagNameTiddler>get[text]]
@@ -158,6 +161,7 @@ The second ESC tries to close the "draft tiddler"
 \function _tf.makeTagNameTiddler() [[$:/temp/NewTagName]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]]
 
 <!-- keep those variables because they may "bleed" into macros using old syntax -->
+<!-- "nonSystemTagsFilter", "systemTagsFilter" __need to be the same__ as fields: "first-search-filter", "second-search-filter" -->
 <$let
 	palette={{$:/palette}}
 	colourA={{{ [<palette>getindex[foreground]] }}}
@@ -174,8 +178,8 @@ The second ESC tries to close the "draft tiddler"
 
 	refreshTitle=<<qualify "$:/temp/NewTagName/refresh">>
 
-	nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]"
-	systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>sort[]]"
+	nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>]"
+	systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>]"
 
 	cancelPopups="yes"
 >
