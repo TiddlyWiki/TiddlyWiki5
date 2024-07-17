@@ -1,11 +1,11 @@
 caption: list-links-horizontal-draggable
 created: 20240712134619467
-modified: 20240716221918196
+modified: 20240717095358843
 tags: Macros [[Core Macros]]
 title: list-links-horizontal-draggable Procedure
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.7">>
+<<.from-version "5.3.6">>
 
 The <<.def list-links-horizontal-draggable>> [[procedure|Procedures]] renders the ListField of a tiddler as a list that can be reordered via [[drag and drop|Drag and Drop]].
 
