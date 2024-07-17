@@ -1,5 +1,5 @@
 created: 20210428074912172
-modified: 20230315165343329
+modified: 20240717110449956
 tags: [[Sort Filter Run Prefix]]
 title: Sort Filter Run Prefix (Examples)
 type: text/vnd.tiddlywiki
@@ -21,7 +21,7 @@ Sort by newest of modified dates:
 <<.operator-example 4 "[tag[Field Operators]] :sort:date[get[modified]else[19700101]] +[limit[10]]">>
 
 Sort by title:
-<<.operator-example 5 "[tag[Field Operators]] :sort:string:casesensitive[get[caption]] +[limit[10]]">>
+<<.operator-example 5 "[tag[Field Operators]] :sort:string:caseinsensitive[get[caption]] +[limit[10]]">>
 
 Sort by title in reverse order:
 <<.operator-example 6 "[tag[Field Operators]] :sort:string:casesensitive,reverse[get[caption]] +[limit[10]]">>
