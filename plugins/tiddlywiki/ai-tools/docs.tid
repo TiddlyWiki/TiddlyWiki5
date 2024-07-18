@@ -8,8 +8,8 @@ See the ''settings'' tab for set up instructions.
 
 # Click the {{||$:/plugins/tiddlywiki/ai-tools/page-menu}} icon in the sidebar to open a new conversation
 # Choose the server from the dropdown:
-#* ''Locally running Llamafile server'' - LLlamafile is an open source project that lets you distribute and run LLMs as a single file. The files are large, typically 4+ gigabytes but offer reasonable performance on modern hardware, and total privacy
-#* ''~OpenAI Service'' - ~OpenAI is a commercial service that offers paid APIs for accessing some of the most sophisticated LLMs that are available. ~OpenAI requires tokens to be purchased for API usage (this is entirely separate from ~ChatGPT subscriptions)
+#* ''Locally running Llamafile server''
+#* ''~OpenAI Service'' (requires API key to be specified in ''settings'')
 # Type a prompt for the LLM in the text box
 #* If using ~OpenAI it is possible to attach a single image to a prompt
 # Click "Send" and wait for the output of the LLM

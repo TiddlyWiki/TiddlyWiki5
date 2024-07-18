@@ -4,3 +4,9 @@ title: $:/plugins/tiddlywiki/ai-tools/readme
 
 This plugin adds integrated LLM conversations to the TiddlyWiki platform.
 
+The plugin allows live conversations within TiddlyWiki and also importing ~ChatGPT conversation archives.
+
+The plugin supports two options for the LLM server:
+
+* ''Locally running Llamafile server'' - LLlamafile is an open source project that lets you distribute and run LLMs as a single file. The files are large, typically 4+ gigabytes but offer reasonable performance on modern hardware, and total privacy
+* ''~OpenAI Service'' - ~OpenAI is a commercial service that offers paid APIs for accessing some of the most sophisticated LLMs that are available. ~OpenAI requires tokens to be purchased for API usage (this is entirely separate from ~ChatGPT subscriptions)
