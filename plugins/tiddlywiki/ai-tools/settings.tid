@@ -2,9 +2,9 @@ title: $:/plugins/tiddlywiki/ai-tools/settings
 
 ! AI Tools Settings
 
-This plugin runs entirely in the browser, with no backend server component. A consequence of this design is that the API keys required to access external services must be obtained by the end user. These keys are stored in the browser and so only need to be set up once.
-
 !! ~OpenAI API key
+
+This plugin runs entirely in the browser, with no backend server component. A consequence of this design is that the API keys required to access external services must be obtained by the end user. These keys are stored in the browser and so only need to be set up once.
 
 # Register for an account at https://platform.openai.com/
 #* Newly registered accounts can claim a small amount of credit, thereafter payment is needed
@@ -13,4 +13,13 @@ This plugin runs entirely in the browser, with no backend server component. A co
 # Copy and paste the value into the box below
 
 ~OpenAI Secret API Key: <$password name="openai-secret-key"/>
+
+!! Llamafile Setup
+
+[[Llamafile|https://github.com/Mozilla-Ocho/llamafile]] lets you download and run LLMs as a single file. See the [[announcment blog post|https://hacks.mozilla.org/2023/11/introducing-llamafile/]] for background.
+
+1. Download and run Llamafile as [[described in the QuickStart guide|https://github.com/Mozilla-Ocho/llamafile?tab=readme-ov-file#quickstart]]
+2. Visit http://127.0.0.1:8080 in a browser and verify that you can see the Llamafile interface. You can also try it out here
+3. Return to AI Tools and start a conversation, specifying Llamafile as the server
+
 
