@@ -9,9 +9,12 @@ The `<$geomap>` widget displays an interactive map using [[Leaflet.js|https://le
 The following attributes are supported:
 
 |!Attribute |!Description |
+|''width'' |<<.from-version "5.3.6">> The width of the map in CSS units (defaults to `100%`) |
+|''height'' |<<.from-version "5.3.6">> The height of the map in CSS units (defaults to `600px`) |
 |''state'' |The title of a state tiddler used to track the state of the map in the `zoom`, `long` and `lat` fields |
 |''startPosition'' |Optional keyword representing the starting position for the map: "world" (the default) shows the entire map, "bounds" zooms to the bounds of the loaded layers |
 |''layersPanel'' |Optional starting status for the layers panel: "collapsed" (the default) causes the layers panel to initially be shown collapsed, "open" causes the layers panel to initially be shown opened |
+|''maxZoom'' |<<.from-version "5.3.6">> Optional maximum zoom level, from 1 to the maximum zoom level supported by the background layer |
 
 If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>` widget then all the available base layers will be loaded by the equivalent of the following code:
 
