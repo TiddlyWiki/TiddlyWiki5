@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/subscript
+list-after: $:/core/ui/EditorToolbar/subscript
+tags: $:/tags/EditorToolbar
+icon: $:/core/images/subscript
+caption: {{$:/language/Buttons/Subscript/Caption}} (Markdown)
+description: {{$:/language/Buttons/Subscript/Hint}}
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+shortcuts: ((subscript))
+
+<$action-sendmessage
+	$message="tm-edit-text-operation"
+	$param="wrap-selection"
+	prefix="~"
+	suffix="~"
+/>
