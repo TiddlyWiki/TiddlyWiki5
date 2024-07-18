@@ -1,7 +1,7 @@
 /*\
 title: test-tags-operator.js
 type: application/javascript
-tags: [[$:/tags/test-specX]]
+tags: [[$:/tags/test-spec]]
 
 Tests the tagging mechanism.
 
