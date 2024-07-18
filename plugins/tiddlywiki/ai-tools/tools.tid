@@ -4,7 +4,7 @@ title: $:/plugins/tiddlywiki/ai-tools/tools
 
 Any tiddlers containing ~ChatGPT exported `conversation.json` files will be shown here for import.
 
-<$list filter="[all[tiddlers+shadows]type[application/json]sort[title]]" template="$:/plugins/tiddlywiki/ai-tools/view-templates/imported-conversations-json"/>
+<$list filter="[all[tiddlers+shadows]type[application/json]!has[plugin-type]sort[title]]" template="$:/plugins/tiddlywiki/ai-tools/view-templates/imported-conversations-json"/>
 
 ! Loaded Conversations
 
