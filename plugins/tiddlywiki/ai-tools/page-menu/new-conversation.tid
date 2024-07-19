@@ -7,6 +7,7 @@ tags: $:/tags/AI/PageMenu
 	tags="$:/tags/AI/Conversation"
 	system-prompt="You are a helpful assistant."
 	current-response-text="Please list the 10 most important mechanical inventions of the Twentieth Century"
+	text="."
 >
 <$action-navigate $to=<<createTiddler-title>>/>
 </$action-createtiddler>

@@ -27,7 +27,8 @@ ConversationsArchiveImporter.prototype.import = function(widget,conversationsTit
 			title: conversationTitle,
 			tags: $tw.utils.stringifyList(["$:/tags/AI/Conversation"]),
 			created: conversationCreated,
-			modified: conversationModified
+			modified: conversationModified,
+			text: "."
 		};
 		tiddlers.push(conversationFields);
 		var messageIndex = 1;
