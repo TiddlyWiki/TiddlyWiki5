@@ -28,20 +28,20 @@ describe("Tabs-macro HTML tests", function() {
 	// Create a wiki with test tiddlers
 
 	// Add a couple of tiddlers
-	$tw.wiki.addTiddler({title: "TabOne",   text: "Text tab 1", caption:"t 1"});
-	$tw.wiki.addTiddler({title: "TabTwo",   text: "Text tab 2", caption:"t 2"});
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "TabOne",   text: "Text tab 1", caption:"t 1"},$tw.wiki.getModificationFields()));
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "TabTwo",   text: "Text tab 2", caption:"t 2"},$tw.wiki.getModificationFields()));
 	// TabThree shows description used in button-template instead of caption
-	$tw.wiki.addTiddler({title: "TabThree", text: "Text tab 3", caption:"t 3", description:"desc"});
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "TabThree", text: "Text tab 3", caption:"t 3", description:"desc"},$tw.wiki.getModificationFields()));
 	// Tab Four has no caption field, so title will be used
-	$tw.wiki.addTiddler({title: "TabFour",  text: "Text tab 4"});
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "TabFour",  text: "Text tab 4"},$tw.wiki.getModificationFields()));
 
 	// Template tiddlers
-	$tw.wiki.addTiddler({title: "body-template",
-						text: '!! <<currentTab>>\n\n<$transclude tiddler=<<currentTab>> mode="block"/>'});
-	$tw.wiki.addTiddler({title: "button-template",
-						text: '<$transclude tiddler=<<currentTab>> field="description"><$transclude tiddler=<<currentTab>> field="caption"><$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/></$transclude></$transclude>'});
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "body-template", "code-body":"yes",
+						text: '!! <<currentTab>>\n\n<$transclude tiddler=<<currentTab>> mode="block"/>'},$tw.wiki.getModificationFields()));
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "button-template", "code-body":"yes",
+						text: '<$transclude tiddler=<<currentTab>> field="description"><$transclude tiddler=<<currentTab>> field="caption"><$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/></$transclude></$transclude>'},$tw.wiki.getModificationFields()));
 	// tabs macro cloned, to be used with \\import
-	$tw.wiki.addTiddler({title: "tabs-macro-definition", text: coreTabsTiddler.fields.text});
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: "tabs-macro-definition", "code-body":"yes", text: coreTabsTiddler.fields.text},$tw.wiki.getModificationFields()));
 
 	// horizontal tabs test uses `tabsList`, `default` and `state` -- unnamed params
 	$tw.wiki.addTiddler(new $tw.Tiddler(
