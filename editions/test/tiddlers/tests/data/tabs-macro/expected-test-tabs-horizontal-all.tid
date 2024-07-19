@@ -1,0 +1,5 @@
+title: expected-test-tabs-horizontal-all
+type: text/html
+description: Horizontal tabs with all parameters active. This is the expected HTML output from a test in test-wikitext-tabs-macro.js
+
+<p><div class="tc-tab-set "><div class="tc-tab-buttons "><button class="" data-tab-title="TabOne" role="switch">t 1</button><button aria-checked="true" class=" tc-tab-selected" data-tab-title="TabTwo" role="switch">t 2</button><button class="" data-tab-title="TabThree" role="switch">desc</button><button class="" data-tab-title="TabFour" role="switch">TabFour</button></div><div class="tc-tab-divider "></div><div class="tc-tab-content "><div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal"><h2 class="">TabTwo</h2><p><p>Text tab 2</p></p></div><div class=" tc-reveal" hidden="true"></div><div class=" tc-reveal" hidden="true"></div></div></div></p>
