@@ -167,8 +167,10 @@ GeomapWidget.prototype.refreshMap = function() {
 	});
 	this.map.addLayer(markers);
 	// Process embedded geolayer widgets
+	var defaultPopupTemplateTitle = self.getAttribute("popupTemplate","$:/plugins/tiddlywiki/geospatial/templates/default-popup-template");
 	this.findChildrenDataWidgets(this.contentRoot.children,"geolayer",function(widget) {
 		var jsonText = widget.getAttribute("json"),
+			popupTemplateTitle = widget.getAttribute("popupTemplate",defaultPopupTemplateTitle),
 			geoJson = [];
 		if(jsonText) {
 			// Layer is defined by JSON blob
@@ -192,7 +194,7 @@ GeomapWidget.prototype.refreshMap = function() {
 				]
 			};
 			if(properties) {
-				geoJson.features[0].properties = JSON.parse(properties);
+				geoJson.features[0].properties = $tw.utils.parseJSONSafe(properties);
 			}
 		}
 		var draggable = widget.getAttribute("draggable","no") === "yes",
@@ -216,10 +218,9 @@ GeomapWidget.prototype.refreshMap = function() {
 				},
 				onEachFeature: function(feature,layer) {
 					layer.bindPopup(function() {
-						var templateTitle = self.getAttribute("popupTemplate","$:/plugins/tiddlywiki/geospatial/templates/default-popup-template")
-							widget = self.wiki.makeTranscludeWidget(templateTitle, {
+						var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
 								document: self.document,
-								parseAsInline: true,
+								parseAsInline: false,
 								importPageMacros: true,
 								variables: {
 									feature: JSON.stringify(feature)
