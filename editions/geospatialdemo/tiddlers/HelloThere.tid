@@ -22,12 +22,13 @@ This demo requires that the API keys needed to access external services be obtai
 <$geomap
 	state=<<qualify "$:/state/demo-map">>
 	startPosition="bounds"
+	popupTemplate="ui/PopupTemplate"
 >
 	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoBaseLayer]]">
 		<$geobaselayer title=<<currentTiddler>>/>
 	</$list>
 	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
-		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} name={{!!caption}}/>
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} name={{!!caption}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}}/>
 	</$list>
 	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]">
 		<$geolayer json={{!!text}} color={{!!color}} name={{!!caption}}/>

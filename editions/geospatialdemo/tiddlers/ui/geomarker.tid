@@ -67,7 +67,7 @@ title: ui/geomarker
 	state=<<qualify "$:/state/demo-map">>
 	startPosition="bounds"
 >
-	<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}}/>
 </$geomap>
 
 !! Distance to other markers

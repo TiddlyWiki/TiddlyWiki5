@@ -15,6 +15,7 @@ The following attributes are supported:
 |''startPosition'' |Optional keyword representing the starting position for the map: "world" (the default) shows the entire map, "bounds" zooms to the bounds of the loaded layers |
 |''layersPanel'' |Optional starting status for the layers panel: "collapsed" (the default) causes the layers panel to initially be shown collapsed, "open" causes the layers panel to initially be shown opened |
 |''maxZoom'' |<<.from-version "5.3.6">> Optional maximum zoom level, from 1 to the maximum zoom level supported by the background layer |
+|''popupTemplate'' |<<.from-version "5.3.6">> Optional template to be used for popups. The template is rendered with the variable ''feature'' containing the JSON text of the feature |
 
 If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>` widget then all the available base layers will be loaded by the equivalent of the following code:
 
@@ -61,6 +62,25 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 	</$list>
 </$geomap>
 """/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
+
+<$testcase>
+<$data
+	title="Description"
+	text="Map with geomarker with popup"
+/>
+<$data $filter="[tag[$:/tags/Demo/Cities]sort[title]]"/>
+<$data title="Output" text="""<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	popupTemplate="ui/PopupTemplate"
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}}/>
+	</$list>
+</$geomap>
+"""/>
+<$data $tiddler="ui/PopupTemplate"/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>
 

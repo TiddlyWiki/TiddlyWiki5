@@ -177,7 +177,8 @@ GeomapWidget.prototype.refreshMap = function() {
 			// Layer is defined by lat long fields
 			var lat = $tw.utils.parseNumber(widget.getAttribute("lat","0")),
 				long = $tw.utils.parseNumber(widget.getAttribute("long","0")),
-				alt = $tw.utils.parseNumber(widget.getAttribute("alt","0"));
+				alt = $tw.utils.parseNumber(widget.getAttribute("alt","0")),
+				properties = widget.getAttribute("properties");
 			geoJson = {
 				"type": "FeatureCollection",
 				"features": [
@@ -190,6 +191,9 @@ GeomapWidget.prototype.refreshMap = function() {
 					}
 				]
 			};
+			if(properties) {
+				geoJson.features[0].properties = JSON.parse(properties);
+			}
 		}
 		var draggable = widget.getAttribute("draggable","no") === "yes",
 			layer = $tw.Leaflet.geoJSON(geoJson,{
@@ -211,9 +215,23 @@ GeomapWidget.prototype.refreshMap = function() {
 					return marker;
 				},
 				onEachFeature: function(feature,layer) {
-					if(feature.properties) {
-						layer.bindPopup(JSON.stringify(feature.properties,null,4));
-					}
+					layer.bindPopup(function() {
+						var templateTitle = self.getAttribute("popupTemplate","$:/plugins/tiddlywiki/geospatial/templates/default-popup-template")
+							widget = self.wiki.makeTranscludeWidget(templateTitle, {
+								document: self.document,
+								parseAsInline: true,
+								importPageMacros: true,
+								variables: {
+									feature: JSON.stringify(feature)
+								}
+						});
+						var container = self.document.createElement("div");
+						widget.render(container,null);
+						self.wiki.addEventListener("change",function(changes) {
+							widget.refresh(changes,container,null);
+						});
+						return container;
+					});
 				}
 			}).addTo(self.map);
 		var name = widget.getAttribute("name") || ("Untitled " + untitledCount++);
