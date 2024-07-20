@@ -1,0 +1,10 @@
+title: $:/geospatialdemo/features/harvard-volcanoes-of-the-world/popupTemplate
+
+!!! Harvard Volcanoes of the World
+
+|Number |<$text text={{{ [<feature>jsonget[properties],[NUMBER_]] }}}/> |
+|Name |<$text text={{{ [<feature>jsonget[properties],[NAME_]] }}}/> |
+|Location |<$text text={{{ [<feature>jsonget[properties],[LOCATION]] }}}/> |
+|Type |<$text text={{{ [<feature>jsonget[properties],[TYPE_]] }}}/> |
+|Status |<$text text={{{ [<feature>jsonget[properties],[STATUS]] }}}/> |
+|Time Frame |<$text text={{{ [<feature>jsonget[properties],[TIME_FRAME]] }}}/> |
