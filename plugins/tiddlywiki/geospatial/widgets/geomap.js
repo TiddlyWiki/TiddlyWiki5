@@ -220,6 +220,7 @@ GeomapWidget.prototype.refreshMap = function() {
 					layer.bindPopup(function() {
 						var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
 								document: self.document,
+								parentWidget: self,
 								parseAsInline: false,
 								importPageMacros: true,
 								variables: {
