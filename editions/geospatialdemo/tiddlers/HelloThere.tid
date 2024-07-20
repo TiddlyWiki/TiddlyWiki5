@@ -35,4 +35,4 @@ This demo requires that the API keys needed to access external services be obtai
 	</$list>
 </$geomap>
 
-<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoMarkers">>
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoFeatures">>
