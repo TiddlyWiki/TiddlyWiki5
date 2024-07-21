@@ -24,4 +24,7 @@ title: Output
 And this is some text
 
 </$reveal>
++
+title: ExpectedResult
 
+<div class=" tc-reveal"><p><button class="">Show me</button></p></div><div class=" tc-reveal" hidden="true"></div>

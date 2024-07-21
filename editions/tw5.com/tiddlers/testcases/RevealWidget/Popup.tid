@@ -21,4 +21,7 @@ And this is some text
 
 </div>
 </$reveal>
++
+title: ExpectedResult
 
+<p><button aria-expanded="false" class="">Pop me up!</button></p><p><span class=" tc-reveal" hidden="true"></span></p>

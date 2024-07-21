@@ -20,3 +20,8 @@ title: Output
 And this is some text
 
 </$reveal>
++
+title: ExpectedResult
+
+<p><button class="">Show me</button>
+<button class="">Hide me</button></p><div class=" tc-reveal" hidden="true"></div>
