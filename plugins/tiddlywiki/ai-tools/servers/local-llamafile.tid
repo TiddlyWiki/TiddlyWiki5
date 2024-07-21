@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/ai-tools/servers/local-llamafile
 tags: $:/tags/AI/CompletionServer
-url: http://127.0.0.1:8080/v1/chat/completions
+url: http://127.0.0.1:8080/completion
 caption: Locally running Llamafile server
 
 <!--
@@ -9,24 +9,55 @@ Wikified JSON text to be sent to server
 \procedure json-prompt()
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
 {
-	"model": "gpt-4o",
-	"messages": [
-		{
-			"role": "system",
-			"content": "<$text text={{{ [<conversationTitle>get[system-prompt]jsonstringify[]] }}}/>"
-		}
-		<!-- Loop through the tiddlers tagged with this one to pick up all the messages in the conversation -->
-		<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]">
-			,
-			{
-				<!-- We use JSON stringify to escape the characters that can't be used directly in JSON -->
-				"role": "<$text text={{{ [<currentTiddler>get[role]jsonstringify[]] }}}/>",
-				"content": "<$text text={{{ [<currentTiddler>get[text]jsonstringify[]] }}}/>"
-			}
+	"image_data": [
+		<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]" counter="counter">
+			<%if [<currentTiddler>has[image]] %>
+				<%if [<counter-first>!match[yes]] %>,<%endif%>
+				{
+					"id": <$text text=<<counter>>/>,
+					"data": "<$text text={{{ [<currentTiddler>get[image]get[text]jsonstringify[]] +[join[]] }}}/>"
+				}
+			<%endif%>
 		</$list>
-	]
+	],
+	"prompt": "<<json-prompt-text>>",
+	"cache_prompt": false,
+	"frequency_penalty": 0,
+	"grammar": "",
+	"mirostat_eta": 0.1,
+	"mirostat_tau": 5,
+	"mirostat": 0,
+	"n_predict": 400,
+	"n_probs": 0,
+	"presence_penalty": 0,
+	"repeat_last_n": 256,
+	"repeat_penalty": 1.18,
+	"slot_id": -1,
+	"stop": ["</s>", "Llama:", "User:"],
+	"stream" : false,
+	"temperature": 0.7,
+	"tfs_z": 1,
+	"top_k": 40,
+	"top_p": 0.5,
+	"typical_p": 1
 }
 \end json-prompt
+
+\procedure json-prompt-text()
+\whitespace trim
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
+<$text text={{{ [<conversationTitle>get[system-prompt]jsonstringify[]] }}}/>
+\n
+<$list filter="[all[shadows+tiddlers]tag<conversationTitle>!is[draft]sort[created]]" counter="counter">
+\n
+<$text text={{{ [<currentTiddler>get[role]else[user]match[user]then[User:]else[Llama:]] }}}/>
+<%if [<currentTiddler>has[image]] %>
+[img-<$text text=<<counter>>/>]
+<%endif%>
+<$text text={{{ [<currentTiddler>get[text]jsonstringify[]] }}}/>
+</$list>
+\nLlama: 
+\end json-prompt-text
 
 <!--
 Callback for the HTTP response from the LLM
@@ -38,8 +69,8 @@ Callback for the HTTP response from the LLM
 			$basetitle=<<resultTitlePrefix>>
 			tags=<<resultTags>>
 			type="text/markdown"
-			role={{{ [<data>jsonget[choices],[0],[message],[role]] }}}
-			text={{{ [<data>jsonget[choices],[0],[message],[content]] }}}
+			role="assistant"
+			text={{{ [<data>jsonget[content]] }}}
 		/>
 	<%else%>
 		<!-- Error -->
