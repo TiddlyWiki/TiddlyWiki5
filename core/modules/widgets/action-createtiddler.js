@@ -104,7 +104,7 @@ CreateTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	}
 	this.setVariable("createTiddler-title",title);
 	this.setVariable("createTiddler-draftTitle",draftTitle);
-	this.refreshChildren();
+	this.refreshChildren([]);
 	return true; // Action was invoked
 };
 

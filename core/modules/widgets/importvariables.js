@@ -107,6 +107,7 @@ ImportVariablesWidget.prototype.execute = function(tiddlerList) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
+	changedTiddlers = changedTiddlers || {};
 	// Recompute our attributes and the filter list
 	var changedAttributes = this.computeAttributes(),
 		tiddlerList = this.wiki.filterTiddlers(this.getAttribute("filter"),this);
