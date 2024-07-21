@@ -3,6 +3,10 @@ tags: $:/tags/AI/CompletionServer
 url: https://api.openai.com/v1/chat/completions
 caption: OpenAI Service
 
+<!--
+Wikified JSON text to be sent to server
+-->
+\procedure json-prompt()
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
 {
 	"model": "gpt-4o",
@@ -37,3 +41,29 @@ caption: OpenAI Service
 		</$list>
 	]
 }
+\end json-prompt
+
+<!--
+Callback for the HTTP response from the LLM
+-->
+\procedure completion-callback()
+	<%if [<status>compare:number:gteq[200]compare:number:lteq[299]] %>
+		<!-- Success -->
+		<$action-createtiddler
+			$basetitle=<<resultTitlePrefix>>
+			tags=<<resultTags>>
+			type="text/markdown"
+			role={{{ [<data>jsonget[choices],[0],[message],[role]] }}}
+			text={{{ [<data>jsonget[choices],[0],[message],[content]] }}}
+		/>
+	<%else%>
+		<!-- Error -->
+		<$action-createtiddler
+			$basetitle=<<resultTitlePrefix>>
+			tags=<<resultTags>>
+			type="text/markdown"
+			role="error"
+			text={{{ [[Error:]] [<statusText>] [<data>jsonget[error],[message]]  +[join[]] }}}
+		/>
+	<%endif%>
+\end completion-callback

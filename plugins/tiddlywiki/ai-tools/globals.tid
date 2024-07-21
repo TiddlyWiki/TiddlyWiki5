@@ -14,49 +14,26 @@ statusTitle - Optional title of a tiddler to which the status of the request wil
 completionServer - Optional URL of server
 -->
 \procedure get-llm-completion(conversationTitle,resultTitlePrefix,resultTags,statusTitle,completionServer)
-	<!--
-	Callback for the HTTP response from the LLM
-	-->
-	\procedure get-llm-completion-callback()
-		<%if [<status>compare:number:gteq[200]compare:number:lteq[299]] %>
-			<!-- Success -->
-			<$action-createtiddler
-				$basetitle=<<resultTitlePrefix>>
-				tags=<<resultTags>>
-				type="text/markdown"
-				role={{{ [<data>jsonget[choices],[0],[message],[role]] }}}
-				text={{{ [<data>jsonget[choices],[0],[message],[content]] }}}
-			/>
-		<%else%>
-			<!-- Error -->
-			<$action-createtiddler
-				$basetitle=<<resultTitlePrefix>>
-				tags=<<resultTags>>
-				type="text/markdown"
-				role="error"
-				text={{{ [[Error:]] [<statusText>] [<data>jsonget[error],[message]]  +[join[]] }}}
-			/>
-		<%endif%>
-	\end get-llm-completion-callback
-
 <$let
 	completionServer={{{ [<completionServer>!is[blank]else<default-llm-completion-server>] }}}
 >
-	<$wikify name="json" text={{{ [<completionServer>get[text]] }}}>
-		<$action-log message="get-llm-completion"/>
-		<$action-log/>
-		<$action-sendmessage
-			$message="tm-http-request"
-			url={{{ [<completionServer>get[url]] }}}
-			body=<<json>>
-			header-content-type="application/json"
-			bearer-auth-token-from-store="openai-secret-key"
-			method="POST"
-			oncompletion=<<get-llm-completion-callback>>
-			bind-status=<<statusTitle>>
-			var-resultTitlePrefix=<<resultTitlePrefix>>
-			var-resultTags=<<resultTags>>
-		/>
-	</$wikify>
+	<$importvariables filter="[<completionServer>]">
+		<$wikify name="json" text=<<json-prompt>>>
+			<$action-log message="get-llm-completion"/>
+			<$action-log/>
+			<$action-sendmessage
+				$message="tm-http-request"
+				url={{{ [<completionServer>get[url]] }}}
+				body=<<json>>
+				header-content-type="application/json"
+				bearer-auth-token-from-store="openai-secret-key"
+				method="POST"
+				oncompletion=<<completion-callback>>
+				bind-status=<<statusTitle>>
+				var-resultTitlePrefix=<<resultTitlePrefix>>
+				var-resultTags=<<resultTags>>
+			/>
+		</$wikify>
+	</$importvariables>
 </$let>
 \end get-llm-completion
