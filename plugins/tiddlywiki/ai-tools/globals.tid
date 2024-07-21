@@ -47,7 +47,7 @@ completionServer - Optional URL of server
 		<$action-log/>
 		<$action-sendmessage
 			$message="tm-http-request"
-			url={{{ [<completionServer>get[url]addsuffix[/v1/chat/completions]] }}}
+			url={{{ [<completionServer>get[url]] }}}
 			body=<<json>>
 			header-content-type="application/json"
 			bearer-auth-token-from-store="openai-secret-key"

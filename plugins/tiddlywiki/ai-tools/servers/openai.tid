@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/ai-tools/servers/openai
 tags: $:/tags/AI/CompletionServer
-url: https://api.openai.com
+url: https://api.openai.com/v1/chat/completions
 caption: OpenAI Service
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline

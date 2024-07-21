@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/ai-tools/servers/local-llamafile
 tags: $:/tags/AI/CompletionServer
-url: http://127.0.0.1:8080
+url: http://127.0.0.1:8080/v1/chat/completions
 caption: Locally running Llamafile server
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html conditional commentblock commentinline
