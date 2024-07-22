@@ -1,0 +1,27 @@
+created: 20240721163229297
+description: Simple content reveal
+modified: 20240721172211283
+tags: $:/tags/wiki-test-spec
+title: TestCases/RevealWidget/SimpleReveal
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Two distinct buttons toggle the state of the tiddler value. The reveal widget displays its content for one of the two states.
++
+title: Output
+
+<$button set="$:/state/SampleReveal1" setTo="show">Show me</$button>
+<$button set="$:/state/SampleReveal1" setTo="hide">Hide me</$button>
+
+<$reveal type="match" state="$:/state/SampleReveal1" text="show">
+
+! This is the revealed content
+And this is some text
+
+</$reveal>
++
+title: ExpectedResult
+
+<p><button class="">Show me</button>
+<button class="">Hide me</button></p><div class=" tc-reveal" hidden="true"></div>
