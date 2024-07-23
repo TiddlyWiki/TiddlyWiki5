@@ -91,7 +91,9 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 			var titles = this.wiki.filterTiddlers(filter);
 			$tw.utils.each(titles,function(title) {
 				var tiddler = self.wiki.getTiddler(title);
-				tiddlers.push(tiddler);
+				if(tiddler) {
+					tiddlers.push(tiddler);
+				}
 			});
 		}
 	}

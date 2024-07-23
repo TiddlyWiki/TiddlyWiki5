@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/menubar/items/toprightbar
 tags: $:/tags/MenuBar
-description: <<lingo Items/TopRightBar/Description $:/plugins/tiddlywiki/menubar/language/>>
-caption: <<lingo Items/TopRightBar/Name $:/plugins/tiddlywiki/menubar/language/>>
+description: Items from $:/tags/TopRightBar
+caption: Legacy Top Right Bar
 custom-menu-content: <$transclude tiddler="$:/plugins/tiddlywiki/menubar/items/toprightbar" mode="inline"/>
 custom-menu-styles-wide: float: right;
 

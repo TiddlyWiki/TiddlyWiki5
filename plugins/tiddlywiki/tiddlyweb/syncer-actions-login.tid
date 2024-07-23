@@ -1,10 +1,8 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/syncer-actions/login
 tags: $:/tags/SyncerDropdown
 
-\define lingo-base() $:/plugins/tiddlywiki/tiddlyweb/language/
-
 <$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
 <$button message="tm-login" class="tc-btn-invisible">
-{{$:/core/images/unlocked-padlock}} <<lingo Login>>
+{{$:/core/images/unlocked-padlock}} Login
 </$button>
 </$reveal>

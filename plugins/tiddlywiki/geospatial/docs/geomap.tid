@@ -10,7 +10,7 @@ The following attributes are supported:
 
 |!Attribute |!Description |
 |''state'' |The title of a state tiddler used to track the state of the map in the `zoom`, `long` and `lat` fields |
-|''startPosition'' |Optional starting position for the map: "world" (the default) shows the entire map, "bounds" zooms to the bounds of the loaded layes |
+|''startPosition'' |Optional keyword representing the starting position for the map: "world" (the default) shows the entire map, "bounds" zooms to the bounds of the loaded layers |
 |''layersPanel'' |Optional starting status for the layers panel: "collapsed" (the default) causes the layers panel to initially be shown collapsed, "open" causes the layers panel to initially be shown opened |
 
 If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>` widget then all the available base layers will be loaded by the equivalent of the following code:

@@ -65,6 +65,10 @@ sidebar-tab-foreground-selected: Sidebar tab foreground for selected tabs
 sidebar-tab-foreground: Sidebar tab foreground
 sidebar-tiddler-link-foreground-hover: Sidebar tiddler link foreground hover
 sidebar-tiddler-link-foreground: Sidebar tiddler link foreground
+stability-stable: Badge for stability level "stable"
+stability-experimental: Badge for stability level "experimental"
+stability-deprecated: Badge for stability level "deprecated"
+stability-legacy: Badge for stability level "legacy"
 testcase-accent-level-1: Test case accent colour with no nesting
 testcase-accent-level-2: Test case accent colour with 2nd level nesting
 testcase-accent-level-3: Test case accent colour with 3rd level nesting or higher

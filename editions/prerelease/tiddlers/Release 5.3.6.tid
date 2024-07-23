@@ -1,0 +1,56 @@
+caption: 5.3.6
+created: 20240710120027897
+modified: 20240710120027897
+tags: ReleaseNotes
+title: Release 5.3.6
+type: text/vnd.tiddlywiki
+description: Under development
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.5...master]]//
+
+! Major Improvements
+
+! Translation improvements
+
+This release includes improvements to the following translations:
+
+* 
+
+! Plugin Improvements
+
+* 
+
+! Widget Improvements
+
+* 
+
+! Filter Improvements
+
+* 
+
+! Usability Improvements
+
+* 
+
+! Hackability Improvements
+
+* 
+
+! Bug Fixes
+
+* 
+
+! Node.js Improvements
+
+* 
+
+! Developer Improvements
+
+* 
+
+! Acknowledgements
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+<<.contributors """
+""">>

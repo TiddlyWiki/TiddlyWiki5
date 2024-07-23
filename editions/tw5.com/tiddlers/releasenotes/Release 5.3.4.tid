@@ -1,12 +1,19 @@
 caption: 5.3.4
-created: 20240529100240232
-modified: 20240529100240232
+created: 20240627165458407
+description: Testcase Widget, Tour Plugin, Geospatial Plugin, transcludes- backtranscludes operators, ... 
+modified: 20240628132840367
+released: 20240627165458407
 tags: ReleaseNotes
 title: Release 5.3.4
 type: text/vnd.tiddlywiki
-description: Under development
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.3...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.3...v5.3.4]]//
+
+<<.banner-credits
+	credit:"""Congratulations to [[duarte.framos|https://talk.tiddlywiki.org/u/duarte.framos]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-4/9940]]).
+"""
+	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/05792a9de331dc31b5016c2029a43977114eb018/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
+>>
 
 ! Major Improvements
 
@@ -14,7 +21,7 @@ description: Under development
 
 <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7734">> several new features that together allow interactive learning tours to be created and presented in TiddlyWiki.
 
-The demo TiddlyWiki interactive tour can be seen at https://tiddlywiki.com/prerelease/tour
+The demo TiddlyWiki interactive tour can be seen at https://tiddlywiki.com/tour
 
 The new features include:
 
@@ -34,7 +41,7 @@ The Geospatial Plugin incorporates a number of third party libraries and online 
 * [[Flickr|https://www.flickr.com/services/api/]], a free API for retrieving geotagged photographs
 * [[OpenLocationCode|https://github.com/google/open-location-code]], Google's open source library for converting to and from Open Location Codes (also known as [[PlusCodes|https://maps.google.com/pluscodes/]])
 
-Try it out at https://tiddlywiki.com/prerelease/plugins/tiddlywiki/geospatial/
+Try it out at https://tiddlywiki.com/plugins/tiddlywiki/geospatial/
 
 !! <<.wlink TestCaseWidget>> Widget
 
@@ -48,16 +55,15 @@ Test cases can also specify the raw HTML of the expected result which causes the
 
 <<testcase "TestCases/TestCaseWidget/FailingTest">>
 
-The easiest way to use the <<.wlink TestCaseWidget>> is by creating TestCaseTiddlers using the new CompoundTiddlers format. There are also many test cases to view in the TiddlyWiki test edition at https://tiddlywiki.com/prerelease/test.html
+The easiest way to use the <<.wlink TestCaseWidget>> is by creating TestCaseTiddlers using the new CompoundTiddlers format. There are also many test cases to view in the TiddlyWiki test edition at https://tiddlywiki.com/test.html
 
 ! Translation improvements
-
-<<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7821">> the [[lingo Macro]] so that plugins can be translated in a similar way to the core. The menubar and tiddlyweb plugins have been updated to use the new mechanism, and we welcome pull requests to convert more of the core plugins to the new mechanism.
 
 This release also includes improvements to the following translations:
 
 * Chinese
 * French
+* German
 * Macedonian
 * Polish
 
@@ -118,20 +124,14 @@ This release also includes improvements to the following translations:
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8141">> usage of "Cache-Control" header
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/7878">> SaveCommand not overwriting files when required
-
-! Performance Improvements
-
-* 
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8237">> server header authentication when header is missing
+* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/8253">> ButtonWidget should refresh when "tooltip" attribute changes
 
 ! Developer Improvements
 
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8195">> issue with fakedom TW_Node inheritence
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8099">> SJCL library creating variables in global scope
 * <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/8179">> `widget.getVariableInfo()` to always return a `params` property
-
-! Infrastructure Improvements
-
-* 
 
 ! Acknowledgements
 

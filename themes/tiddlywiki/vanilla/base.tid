@@ -2513,6 +2513,10 @@ html body.tc-body.tc-single-tiddler-window {
 	width: 100%;
 }
 
+.tc-control-panel-setting {
+	border-top: 1px solid <<colour blockquote-bar>>;
+}
+
 .tc-plugin-info {
 	display: flex;
 	text-shadow: none;
@@ -2572,6 +2576,11 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 	fill: <<colour background>>;
 }
 
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	border: 1px solid <<colour background>>;
+	color: <<colour background>>;
+}
+
 .tc-plugin-info-chunk {
 	margin: 2px;
 }
@@ -2601,23 +2610,23 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-stable {
-	border: 1px solid green;
-	color: green;
+	border: 1px solid <<colour stability-stable>>;
+	color: <<colour stability-stable>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-experimental {
-	border: 1px solid #c07c00;
-	color: #c07c00;
+	border: 1px solid <<colour stability-experimental>>;
+	color: <<colour stability-experimental>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-deprecated {
-	border: 1px solid red;
-	color: red;
+	border: 1px solid <<colour stability-deprecated>>;
+	color: <<colour stability-deprecated>>;
 }
 
 .tc-plugin-info-chunk .tc-plugin-info-stability-legacy {
-	border: 1px solid blue;
-	color: blue;
+	border: 1px solid <<colour stability-legacy>>;
+	color: <<colour stability-legacy>>;
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-buttons {
@@ -3260,11 +3269,6 @@ span.tc-translink > a:first-child {
 	border-radius: 6px;
 }
 
-.tc-tiddler-frame .tc-test-case-wrapper {
-	margin-left: -0.5em;
-	margin-right: -0.5em;
-}
-
 .tc-test-case-wrapper {
 	background-color: <<colour testcase-accent-level-1>>;
 }
@@ -3293,7 +3297,7 @@ span.tc-translink > a:first-child {
 	display: inline-block;
 	line-height: 0;
 	border-radius: 1em;
-	vertical-align: bottom;
+	vertical-align: text-bottom;
 	margin-right: 0.25em;
 }
 
@@ -3310,6 +3314,12 @@ span.tc-translink > a:first-child {
 	height: 0.5em;
 }
 
+.tc-test-case-header > h2 {
+	background: <<colour background>>;
+	border-radius: 4px;
+	padding: 0.25em;
+}
+
 .tc-test-case-header > h2,
 .tc-test-case-source > pre {
 	margin: 0;
@@ -3317,6 +3327,18 @@ span.tc-translink > a:first-child {
 
 .tc-test-case-header > h2 a.tc-tiddlylink-missing {
 	font-style: normal;
+}
+
+.tc-test-case-toolbar {
+	float: right;
+}
+
+.tc-test-case-toolbar svg {
+	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-test-case-toolbar .tc-drop-down {
+	font-size: 0.8em;
 }
 
 .tc-test-case-result-fail {
@@ -3362,8 +3384,12 @@ span.tc-translink > a:first-child {
 }
 
 .tc-test-case-source .tc-tab-content {
-	background: <<colour background>>;
+	background: inherit;
 	margin: 0;
+}
+
+.tc-test-case-source .tc-tab-content .tc-field-table {
+	background: <<colour background>>;
 }
 
 .tc-test-case-source .tc-field-table {
@@ -3386,11 +3412,16 @@ span.tc-translink > a:first-child {
 	padding-top: 0;
 }
 
+.tc-test-case-footer-toolbar {
+	display: flex;
+	justify-content: flex-end;
+}
+
 .tc-test-case-output {
 	box-shadow: inset 2px 2px 10px 0px <<colour muted-foreground>>;
 	background: <<colour background>>;
 	border-radius: 4px;
-	border: 1px solid <<colour foreground>>;
+	border: 1px solid <<colour muted-foreground>>;
 	flex: 1 0 49%;
 	min-width: 250px;
 	padding: 0.25em 1em;
