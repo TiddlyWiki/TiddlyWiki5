@@ -36,6 +36,7 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 		<$transclude $field=<<field>>/>
 	</span>
 	<<toc-newChildButton>>
+	<!-- Do not remove next line it's needed for debugging -->
 	<!-- <sup class="tc-small-gap-left"><<_mode>></sup> -->
 </$let>
 \end
@@ -111,6 +112,7 @@ If the macro parameter is empty - Use the toc-defaultItemTemplate
 \procedure toc-filterDefault() [all[shadows+tiddlers]tag<tag>!has[draft.of]]
 \procedure toc-filterParent()  [has<parentField>!has[draft.of]] :filter[get<parentField>match<tag>]
 \procedure toc-filterTagLike() [<tag>get<tagField>enlist-input[]!has[draft.of]]
+\procedure toc-filterTagLike() [has<tagField>!has[draft.of]] :filter[get<tagField>enlist-input[]match<tag>]
 
 <!-- TODO tiddlers with parentField MAY need caching -->
 
@@ -167,11 +169,14 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 </$set>
 \end
 <!--  -->
-<!-- <$log tag=<<tag>> parentField=<<parentField>> toc-filter=<<toc-filter>> ct=<<currentTiddler>> captionField=<<captionField>>/> -->
+<!-- <$log $$filter="tag currentTiddler _excluded _path" /> -->
+<!-- <$log $$filter="tag parentField toc-filter currentTiddler captionField /> -->
 <!--  -->
 
 <!-- Helper functions for toc-openBranch and toc-closeBranch procedures -->
 \procedure toc-tagLikeChildFilter() [<currentTiddler>get<tagField>enlist-input[]] -[toc-hide[yes]]
+\procedure toc-tagLikeChildFilter() [has<tagField>] :filter[get<tagField>enlist-input[]match<..currentTiddler>] -[toc-hide[yes]]
+
 \procedure toc-parentChildFilter()  [has<parentField>] :filter[get<parentField>match<..currentTiddler>] -[toc-hide[yes]]
 \procedure toc-tagChildFilter()     [tag<currentTiddler>] -[toc-hide[yes]]
 
@@ -238,7 +243,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-closed-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
-			<<_itemTemplate>>
+			<span class="tc-toc-unlinked tc-tiny-gap-left"><<_itemTemplate>></span>
 		<% endif %>
 	</$button>
 <% elseif [<toc-state>get[text]match[open]] %>
@@ -246,7 +251,7 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	<$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-open-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
-			<<_itemTemplate>>
+			<span class="tc-toc-unlinked tc-tiny-gap-left"><<_itemTemplate>></span>
 		<% endif %>
 	</$button>
 <% endif %>
@@ -351,17 +356,19 @@ Shows an expandable toc. Item always have an open/close chevron
 </$qualify>
 \end
 <!-- Keep them for now -->
+<!-- <$log
+	ct=<<currentTiddler>>
+	tf.toc-hasChildren=<<tf.toc-hasChildren>>
+	tf.toc-hasChildren-f= {{{ [subfilter<tf.toc-hasChildren>] +[join[, ]] }}}
+	filter={{{ [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] }}}
+	exclude=<<exclude>>
+	tag=<<tag>>
+	hasTagField={{{ [has<tagField>join[, ]] }}}
+/> -->
 <!-- <$log ct=<<currentTiddler>> 
 	includeList={{{ [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[subfilter<exclude>] +[limit[1]] }}}
 	hasChildren={{{ [subfilter<tf.toc-hasChildren>] }}} path=<<path>> exclude=<<exclude>>/>
 -->
-<!-- <$log
-	ct=<<currentTiddler>>
-	tf.toc-hasChildren=<<tf.toc-hasChildren>>
-	tf.toc-hasChildren-f= {{{ [subfilter<tf.toc-hasChildren>]
-	exclude=<<exclude>> }}}
-	filter={{{ [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] }}}
-/> -->
 
 \procedure toc-unlinked-selective-expandable-body(tag,sort:"",itemClassFilter,exclude,path,captionField,tagField,parentField,itemTemplate)
 <$qualify name="toc-state" title=<<tf.toc-stateTitle>> >
@@ -369,7 +376,7 @@ Shows an expandable toc. Item always have an open/close chevron
 		<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
 			<<toc-item isUnlinked:"yes">>
 		<% else %>
-			<$button class="tc-btn-invisible tc-tiny-gap-right">
+			<$button class="tc-btn-invisible tc-tiny-gap">
 				{{$:/core/images/blank}}
 			</$button>
 			<span class="toc-item-muted">
