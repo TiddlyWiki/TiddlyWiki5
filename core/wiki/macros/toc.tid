@@ -376,7 +376,7 @@ Shows an expandable toc. Item always have an open/close chevron
 		<% if [subfilter<tf.toc-hasChildren>] [subfilter<tf.toc-curTidInclude>] -[<currentTiddler>] -[subfilter<exclude>] +[limit[1]] %>
 			<<toc-item isUnlinked:"yes">>
 		<% else %>
-			<$button class="tc-btn-invisible tc-tiny-gap">
+			<$button class="tc-btn-invisible ">
 				{{$:/core/images/blank}}
 			</$button>
 			<span class="toc-item-muted">
