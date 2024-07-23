@@ -1,5 +1,5 @@
 created: 20240202131409493
-modified: 20240208142624463
+modified: 20240723111518110
 tags: aaa
 title: aaa-aaa
 toc-filter: [tag[person]sort[last-name]]
@@ -9,6 +9,6 @@ type: text/vnd.tiddlywiki
 \import [[b b]]
 
 * this tiddler contains `toc-filter`: <code>{{!!toc-filter}}</code>
-* this tiddler contains `toc-itemTemplate`: <code>{{!!toc-itemTemplate}}</code>
+* this tiddler contains `toc-itemTemplate`: <$link to={{!!toc-itemTemplate}}>{{!!toc-itemTemplate}}</$link>
 
 <<list-fields>>
