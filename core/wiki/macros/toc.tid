@@ -62,7 +62,7 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 			<!-- <span class="tc-small-gap-left">{{||$:/core/ui/Buttons/new-here}}</span> -->
 		<% elseif [<_mode>match[tocpMode]] %>
 			<span class="tc-small-gap-left"><$macrocall $name="_newChild" field=<<parentField>>/></span>
-		<% elseif [<_mode>match[tagLikeModeXXX]] %>
+		<% elseif [<_mode>match[tagLikeMode]] %>
 			<span class="tc-small-gap-left"><$macrocall $name="_newChild" field=<<tagField>>/></span>
 		<% endif %>
 	<% endif %>
