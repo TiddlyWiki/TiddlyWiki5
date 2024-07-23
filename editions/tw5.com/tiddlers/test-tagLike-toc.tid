@@ -1,5 +1,5 @@
 created: 20240206221213901
-modified: 20240618132345317
+modified: 20240723105249050
 tags: testTOC
 title: test-tagLike-toc
 type: text/vnd.tiddlywiki
@@ -13,7 +13,7 @@ All tiddlers that have a "tag-like" field
 <<list-links filter:"[has[tag-like]]">>
 
 
-<<.example n:1 eg:"""<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc-selective-expandable tag:"tag-like-root" tagField:"tag-like">>
 </div>
 """>>
@@ -21,7 +21,7 @@ All tiddlers that have a "tag-like" field
 
 This table excludes: todo1 and todo2 so it should not show a chevron at "b b-caption"
 
-<<.example n:2 eg:"""<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc-selective-expandable tag:"tag-like-root" tagField:"tag-like" exclude:"todo1 todo2">>
 </div>
 """>>
@@ -30,7 +30,7 @@ This table excludes: todo1 and todo2 so it should not show a chevron at "b b-cap
 
 simple-toc as reference
 
-<<.example n:3 eg:"""<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc tag:"tag-like-root" tagField:"tag-like">>
 </div>
 """>>
