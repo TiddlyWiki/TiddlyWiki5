@@ -111,7 +111,6 @@ If the macro parameter is empty - Use the toc-defaultItemTemplate
 <!-- Define default filter strings for different usecases: tag (default), parentField or tagField for using a tag-like field -->
 \procedure toc-filterDefault() [all[shadows+tiddlers]tag<tag>!has[draft.of]]
 \procedure toc-filterParent()  [has<parentField>!has[draft.of]] :filter[get<parentField>match<tag>]
-\procedure toc-filterTagLike() [<tag>get<tagField>enlist-input[]!has[draft.of]]
 \procedure toc-filterTagLike() [has<tagField>!has[draft.of]] :filter[get<tagField>enlist-input[]match<tag>]
 
 <!-- TODO tiddlers with parentField MAY need caching -->
@@ -174,7 +173,6 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 <!--  -->
 
 <!-- Helper functions for toc-openBranch and toc-closeBranch procedures -->
-\procedure toc-tagLikeChildFilter() [<currentTiddler>get<tagField>enlist-input[]] -[toc-hide[yes]]
 \procedure toc-tagLikeChildFilter() [has<tagField>] :filter[get<tagField>enlist-input[]match<..currentTiddler>] -[toc-hide[yes]]
 
 \procedure toc-parentChildFilter()  [has<parentField>] :filter[get<parentField>match<..currentTiddler>] -[toc-hide[yes]]
