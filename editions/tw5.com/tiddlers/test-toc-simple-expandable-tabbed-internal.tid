@@ -1,5 +1,5 @@
 created: 20240206142124740
-modified: 20240208172109190
+modified: 20240723095239945
 tags: testTOC
 title: test-toc-simple-expandable-tabbed-internal
 type: text/vnd.tiddlywiki
@@ -7,20 +7,19 @@ type: text/vnd.tiddlywiki
 * show template field
 * show caption field
 
-<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc tag:"root" viewField:test  viewFieldTemplate:template>>
-</div>
+</div>""">>
 
 ---
 
 the following toc is `toc-expandable` so it shows chevrons with every node
 
-<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc-expandable tag:"root"   >>
-</div>
+</div>""">>
 
-
-<$macrocall
+<<wikitext-example-without-html src:"""<$macrocall
 	$name="toc-tabbed-internal-nav"
 	tag="root"
 	selectedTiddler="$:/temp/toc/selectedTiddler"
@@ -28,4 +27,4 @@ the following toc is `toc-expandable` so it shows chevrons with every node
 	missingText="<p>Missing tiddler.</p>"
     viewField=test
 viewFieldTemplate=template
-/>
+/>""">>

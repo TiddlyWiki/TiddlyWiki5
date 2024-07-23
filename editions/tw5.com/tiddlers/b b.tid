@@ -1,6 +1,7 @@
 caption: b b-caption
 created: 20240202131440055
-modified: 20240208154625928
+modified: 20240723104825891
+tag-like: tag-like-root
 tags: aaa
 test: b b-test
 title: b b
@@ -17,6 +18,18 @@ type: text/vnd.tiddlywiki
 </tbody>
 </table>
 \end
+
+This tiddler contains the `list-fields` procedure which is included in many test tiddlers.
+
+```
+\procedure list-fields()
+<table class="tc-view-field-table">
+<tbody>
+<$list filter="[all[current]fields[]sort[title]] -text -title -bag -modified -created -revision -type " template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+</tbody>
+</table>
+\end
+```
 
 * This tiddler is part of the ''tag-tree''
 * It toc-includes all tiddlers tagged: `todo`

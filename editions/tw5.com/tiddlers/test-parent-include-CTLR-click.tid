@@ -1,11 +1,11 @@
 created: 20240208121820397
-modified: 20240208172055595
+modified: 20240723104002405
 tags: testTOC
 title: test-parent-include-CTLR-click
 type: text/vnd.tiddlywiki
 
 CTRL-click on p1 should open the whole path including `toc-include`
 
-<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc-selective-expandable tag:"root" parentField:"parent" exclude:"p1.1">>
-</div>
+</div>""">>

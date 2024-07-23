@@ -1,5 +1,5 @@
 created: 20240206133241785
-modified: 20240208135458608
+modified: 20240723103429610
 tags: $:/tags/Stylesheet testTOC
 title: test-styles
 type: text/vnd.tiddlywiki
@@ -31,4 +31,8 @@ type: text/vnd.tiddlywiki
 
 .tc-toc-hide> button > svg {
   fill: red;
+}
+
+.tc-toc-unlinked {
+	margin-left: .5em;
 }

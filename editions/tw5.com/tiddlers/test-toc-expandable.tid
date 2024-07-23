@@ -1,17 +1,17 @@
 created: 20240208130742136
-modified: 20240208172101138
+modified: 20240723103937692
 tags: testTOC
 title: test-toc-expandable
 type: text/vnd.tiddlywiki
 
-<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc-expandable tag:"root" viewField:test  >>
-</div>
+</div>""">>
 
 ----
 
 simple toc as reference
 
-<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc tag:"root" viewField:test  >>
-</div>
+</div>""">>

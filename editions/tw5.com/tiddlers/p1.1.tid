@@ -1,10 +1,12 @@
 created: 20240206220521559
-modified: 20240208142702506
+modified: 20240723091924604
 parent: p1
 tags: 
 title: p1.1
 type: text/vnd.tiddlywiki
 
 \import [[b b]]
+
+this tiddler is excluded in the function call of [[test-tv-toc-show-new-child]] with the "exclude:" parameter
 
 <<list-fields>>

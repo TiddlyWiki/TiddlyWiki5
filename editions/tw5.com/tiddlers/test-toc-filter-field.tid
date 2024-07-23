@@ -1,5 +1,5 @@
 created: 20240208132923069
-modified: 20240208172104378
+modified: 20240723103904274
 tags: testTOC
 title: test-toc-filter-field
 type: text/vnd.tiddlywiki
@@ -8,14 +8,14 @@ type: text/vnd.tiddlywiki
 * CTRL-click on aaa-''chevron'' should expand / fold the whole tree
 * Also see [[test-open-close-branch-buttons]]
 
-<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc-selective-expandable tag:"root" viewField:test  viewFieldTemplate:template>>
-</div>
+</div>""">>
 
 --------
 
 simple toc as reference
 
-<div class="tc-table-of-contents">
+<<wikitext-example-without-html src:"""<div class="tc-table-of-contents">
 <<toc tag:"root" viewField:test  viewFieldTemplate:template>>
-</div>
+</div>""">>
