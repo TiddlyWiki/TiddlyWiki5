@@ -1,0 +1,20 @@
+created: 20240724082221230
+modified: 20240724100646572
+tags: 
+title: Examples/TOC/SimpleToc/captionField
+type: text/vnd.tiddlywiki
+
+<$testcase testOutput="Output">
+
+<$data title="Description" text="Simple TOC - captionField parameter"/>
+
+<$data title="Narrative-extended" text="""* The "Fifth" tiddler has an alternative "caption-field" """/>
+
+<$data $compound-tiddler="Examples/TOC/SimpleToc"/>
+
+<$data title="Fifth" tags="Fourth" text="5th" alt="alt-caption"/>
+
+<$data title="Output" text="""<div class="tc-table-of-contents">
+<<toc tag:"root" captionField:"alt">>
+</div>
+"""/>
