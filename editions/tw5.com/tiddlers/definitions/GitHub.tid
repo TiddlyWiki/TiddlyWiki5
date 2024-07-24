@@ -8,7 +8,7 @@ GitHub is a hosting service for distributed projects that use git as their versi
 
 The code and documentation of TiddlyWiki is hosted on ~GitHub at:
 
-https://github.com/Jermolene/TiddlyWiki5
+https://github.com/TiddlyWiki/TiddlyWiki5
 
 ~GitHub also offer a free web hosting service called [[GitHub Pages|https://pages.github.com/]] that can be used directly from the single file configuration. See [[Saving to a Git service]].
 
