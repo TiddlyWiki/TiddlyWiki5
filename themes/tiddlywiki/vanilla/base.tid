@@ -288,10 +288,12 @@ form.tc-form-inline {
 Markdown likes putting code elements inside pre elements
 */
 pre > code {
-	padding: 0;
+	display: block;
+	padding: 0.5em;
 	border: none;
 	background-color: inherit;
 	color: inherit;
+	overflow-x: auto;
 }
 
 /*
