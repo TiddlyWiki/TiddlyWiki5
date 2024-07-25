@@ -4,4 +4,4 @@ This plugin runs in the browser to synchronise tiddler changes to and from a Tid
 
 Changes made while offline are saved in memory and automatically synchonised with the server when the connection is re-established. However, if the browser tab is closed or another URL is loaded, the in-memory changes will be lost. The [[https://tiddlywiki.com/#BrowserStorage Plugin]] may be added to provide temporary filesystem storage of tiddler changes made while offline and enable them to be synchronised with the server the next time the wiki is loaded in the same browser.  
 
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/tiddlyweb]]
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/tiddlyweb]]

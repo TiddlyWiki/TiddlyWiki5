@@ -2,6 +2,6 @@ title: $:/plugins/tiddlywiki/codemirror/readme
 
 This plugin provides an enhanced text editor component based on [[CodeMirror|http://codemirror.net]]. The basic configuration is designed to be as lightweight as possible and is just around 235kb of size. Additional features can be installed with ~CodeMirror ~AddOns from the plugin library.
 
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/codemirror]]
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/codemirror]]
 
 Based on ~CodeMirror version 5.58.3

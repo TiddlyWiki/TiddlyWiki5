@@ -4,4 +4,4 @@ The D3 plugin is a proof-of-concept demo of integration with the D3.js data visu
 
 It is not currently in a state where it can be used for anything useful.
 
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/d3]]
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/d3]]
