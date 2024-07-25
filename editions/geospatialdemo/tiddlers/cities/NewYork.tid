@@ -1,8 +1,10 @@
 title: cities/NewYork
-tags: $:/tags/GeoMarker
+tags: $:/tags/GeoMarker $:/tags/Demo/Cities
 caption: New York
 lat: 40.712778
 long: -74.006111
 alt: 0
+
+{{cities/NewYork/image}}
 
 This is New York!
