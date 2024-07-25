@@ -21,12 +21,10 @@ exports.tags = function(source,operator,options) {
 	source(function(tiddler,title) {
 		var t, length;
 		if(tiddler && tiddler.fields.tags) {
-			for(t=0, length=tiddler.fields.tags.length; t<length; t++) {
-				results.pushTop(tiddler.fields.tags[t])
-			}
+			results.pushTop(tiddler.fields.tags);
 		}
 	});
-	return results.makeTiddlerIterator(options.wiki);
+	return results.toArray();
 };
 
 })();
