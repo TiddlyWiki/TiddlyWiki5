@@ -157,6 +157,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -288,7 +289,6 @@ Markdown likes putting code elements inside pre elements
 */
 pre > code {
 	display: block;
-	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	padding: 0.5em;
 	border: none;
 	background-color: inherit;
