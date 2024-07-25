@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 You can report bugs or problems with TiddlyWiki via our [[discussion groups|Forums]]. If you have a GitHub account then you can raise an issue there:
 
-https://github.com/Jermolene/TiddlyWiki5/issues/new
+https://github.com/TiddlyWiki/TiddlyWiki5/issues/new
 
 Unless you are already familiar with GitHub, it's usually easiest to report problems through the discussion groups.
 

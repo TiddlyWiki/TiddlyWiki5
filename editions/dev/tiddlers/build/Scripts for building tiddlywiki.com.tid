@@ -16,7 +16,7 @@ These scripts require the following directories to be siblings:
 
 * `build.jermolene.github.io` - a local copy of https://github.com/Jermolene/build.jermolene.github.io
 * `jermolene.github.io` - a local copy of the repo https://github.com/TiddlyWiki/tiddlywiki.com-gh-pages
-* `TiddlyWiki5` - a local copy of the repo https://github.com/Jermolene/TiddlyWiki5
+* `TiddlyWiki5` - a local copy of the repo https://github.com/TiddlyWiki/TiddlyWiki5
 
 The scripts are designed to be executed with the current directory being the `TiddlyWiki5` directory.
 

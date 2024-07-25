@@ -47,7 +47,7 @@ TiddlyWiki lets you choose where to keep your data, guaranteeing that in the dec
 <a rel="me" href="https://fosstodon.org/@TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#2b90d9;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/mastodon}} Mastodon
 </a>
-<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
+<a href="https://github.com/TiddlyWiki/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/github}} ~GitHub
 </a>
 <a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="border-radius:4px;background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
