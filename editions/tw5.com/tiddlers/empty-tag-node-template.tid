@@ -1,0 +1,11 @@
+created: 20240710161501472
+list-after: 
+modified: 20240719201317702
+tags: $:/tags/ViewTemplate
+title: $:/editions/tw5.com/empty-tag-node-template
+type: 
+
+<$list filter='[<storyTiddler>!has[text]!has[tags]] :filter[tagging[]]'>
+The following tiddlers are tagged with <<tag>>:
+</$list>
+<<list-links filter:"[<storyTiddler>!has[text]!has[tags]tagging[]]" class:"multi-columns">>
