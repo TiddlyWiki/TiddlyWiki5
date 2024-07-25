@@ -2,10 +2,20 @@ title: $:/core/ui/ViewTemplate/tags
 tags: $:/tags/ViewTemplate
 
 \whitespace trim
+
+\procedure fieldDefaultSort() [<currentTiddler>tags[]sort[title]]
+
+\function tf.getSortString() [{$:/config/Tags/CustomSortFilter}trim[]is[blank]then<fieldDefaultSort>else{$:/config/Tags/CustomSortFilter}trim[]]
+
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
 <div class="tc-tags-wrapper">
-	<$list filter="[all[current]tags[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]"
-		template="$:/core/ui/TagTemplate"
+	<$macrocall $name="list-links-horizontal-draggable"
+		tiddler=<<currentTiddler>>
+		field="tags"
+		itemTemplate="$:/core/ui/TagTemplate"
+		dragHandle=""
+		sortFilter=<<tf.getSortString>>
+		enable="no"
 		storyview="pop"
 	/>
 </div>

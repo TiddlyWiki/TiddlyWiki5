@@ -1,0 +1,4 @@
+title: $:/config/Tags/CustomSortFilter
+TODO: Remove this tiddler for production. It should be created by users if needed
+
+[<currentTiddler>get<field>enlist-input[]]

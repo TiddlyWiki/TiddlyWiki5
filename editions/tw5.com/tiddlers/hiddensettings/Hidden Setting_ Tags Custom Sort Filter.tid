@@ -1,39 +1,33 @@
 created: 20240712135147083
-modified: 20240716140734127
+modified: 20240725171233010
 tags: [[Hidden Settings]]
 title: Hidden Setting: Tags Custom Sort Filter
 type: text/vnd.tiddlywiki
 
-<<.from-version "5.3.7">> By default tags are alphabetically sorted using a filter shown in the code below. There is a subfilter which uses the new configuration variable: $:/config/Tags/CustomSort/subfilter:
+\import [[$:/core/ui/ViewTemplate/tags]]
+
+Tags are alphabetically sorted using the ''default filter'': <code><$text text=<<fieldDefaultSort>>/></code>
+
+<<.from-version "5.3.6">> a configuration tiddler $:/config/Tags/CustomSortFilter, which expects a filter run, can be used to change the tag sort order. There is a function `tf.getSortString`, which defines if the custom filter is activated or not. See code below.
 
 ```
-filter="[all[current]tags[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]"
+\procedure fieldDefaultSort() [<currentTiddler>tags[]sort[title]]
+
+\function tf.getSortString() [{$:/config/Tags/CustomSortFilter}trim[]is[blank]then<fieldDefaultSort>else{$:/config/Tags/CustomSortFilter}trim[]]
 ```
 
 ''Current configuration''
 
-* The active sort subfilter is: <code><$text text={{{ [{$:/config/Tags/CustomSort/subfilter}!is[blank]else[n/a]] }}}/></code>
-* The default value is: `[{!!title}]`
+* The active filter is: <code><$text text={{{ [{$:/config/Tags/CustomSortFilter}!is[blank]else<fieldDefaultSort>] }}}/></code>
 
 ''Special Usecase''
 
-If the configuration tiddler: $:/config/Tags/CustomSort/subfilter is set to an ''empty value'':
+The configuration tiddler: $:/config/Tags/CustomSortFilter expects a valid filter. If active, this filter defines the ''tags sort order'' in the [[ViewTemplate|$:/core/ui/ViewTemplate/tags]] and the [[EditTemplate|$:/core/ui/EditTemplate/tags]].
 
-* The tags are sorted in creation order
-* The tag-editor will activate drag and drop sorting
+''Possible Values''
 
-''Possible values for $:/config/Tags/CustomSort/subfilter'', //which should be chnaged by experienced users only//.
+* `[<currentTiddler>get[tags]enlist-input[]]` ... The tags are sorted in order of creation
+* `[<currentTiddler>tags[]] :sort[length[]]` ... Tags are sorted by tag length
+* `[<currentTiddler>tags[]] :sort[get[color]else[zzzz]]` ... Tags are sorted by colour name or colour code (This is just an example)
 
-If the custom sort order is changed the subfilter in $:/config/Tags/CustomSort/subfilter will be used as the default filter to define the sort order in the view- and edit-template. 
-
-<<.tip """The custom sort order is implemented with a [[Sort Filter Run Prefix]]. Please ''carefully'' read the documentation. This configuration is only needed if you want to overwrite the default sort order, or activate drag and drop sorting in the tag editor""">>
-
-* `[{!!title}]`
-* `[length[]]`
-* `[get[color]else[zzzz]]`
-
-
-Also see:
-
-* $:/core/ui/ViewTemplate/tags
-* $:/core/ui/EditTemplate/tags
+<<.tip """If the config tiddler is set to a valid filter the edit template will activate drag and drop sorting. ''Be aware'', that your cutom filter will need to allow sorting of tags. So you need to use `[<currentTiddler>get[tags]enlist-input[]]` or something similar.""">>

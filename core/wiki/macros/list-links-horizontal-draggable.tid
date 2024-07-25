@@ -12,10 +12,7 @@ tags: $:/tags/Macro $:/tags/Global
 </$let>
 \end
 
-\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"⠿",enable:"yes")
-	\procedure tagSort() [<tiddler>get<field>enlist-input[]] :sort:alphanumeric:caseinsensitive[subfilter{$:/config/Tags/CustomSort/subfilter}]
-	\procedure defaultSort() [<tiddler>get<field>enlist-input[]]
-	\function tf.customSort() [<field>match[tags]then<tagSort>else<defaultSort>]
+\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"⠿",enable:"yes",sortFilter:"[<tiddler>get<field>enlist-input[]]",storyview)
 
 <span class="tc-horizontal-draggable tc-tiny-gap-right">
 	<$let targetTiddler=<<tiddler>>
@@ -24,7 +21,7 @@ tags: $:/tags/Macro $:/tags/Global
 		_dragHandle={{{ [<_enable>match[yes]then<dragHandle>else[]] }}}
 	>
 		<$genesis $type=<<type>> class=<<class>>>
-			<$list filter=<<tf.customSort>> emptyMessage=<<emptyMessage>>>
+			<$list filter=<<sortFilter>> emptyMessage=<<emptyMessage>> storyview=<<storyview>> >
 				<$droppable
 					actions=<<list-links-draggable-drop-actions>>
 					tag=<<subtype>>
