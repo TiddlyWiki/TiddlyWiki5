@@ -1,14 +1,18 @@
+caption: tags
 created: 20140410103123179
-modified: 20150203191657000
+modified: 20240725124555323
+op-input: a [[selection of titles|Title Selection]]
+op-output: all the tags carried by the input tiddlers
+op-parameter: none
+op-purpose: select all tags of the input tiddlers
+op-suffix: `ordered` guarantees the sort order even if tags are numbers. <<.from-version "5.3.6">>
+op-suffix-name: S
 tags: [[Filter Operators]] [[Tag Operators]]
 title: tags Operator
 type: text/vnd.tiddlywiki
-caption: tags
-op-purpose: select all tags of the input tiddlers
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: none
-op-output: all the tags carried by the input tiddlers
 
 Each input title is processed in turn. The corresponding tiddler's tags are retrieved (in order of appearance in the <<.field tags>> field) and then [[dominantly appended|Dominant Append]] to the operator's output.
+
+<<.from-version "5.3.6">> If the <<.param suffix>> <<.place S>> is set to  `ordered`, numerical and unicode tags are also listed in order of creation.
 
 <<.operator-examples "tags">>
