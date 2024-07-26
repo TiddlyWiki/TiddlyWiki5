@@ -1343,7 +1343,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-titlebar, .tc-tiddler-edit-title {
-	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
+	overflow: hidden; /* https://github.com/TiddlyWiki/TiddlyWiki5/issues/282 */
 }
 
 /*
@@ -2574,6 +2574,11 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 
 a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
 	fill: <<colour background>>;
+}
+
+a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-stability {
+	border: 1px solid <<colour background>>;
+	color: <<colour background>>;
 }
 
 .tc-plugin-info-chunk {

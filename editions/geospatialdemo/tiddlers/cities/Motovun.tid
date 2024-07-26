@@ -1,9 +1,11 @@
 title: cities/Motovun
-tags: $:/tags/GeoMarker
+tags: $:/tags/GeoMarker $:/tags/Demo/Cities
 icon: Motovun Jack.svg
 caption: Motovun
 lat: 45.336453407749225
 long: 13.828231379455806
 alt: 0
+
+{{cities/Motovun/image}}
 
 This is Motovun!
