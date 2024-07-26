@@ -21,8 +21,6 @@ if(!$tw) {
 
 $tw.utils = $tw.utils || Object.create(null);
 
-/////////////////////////// Standard node.js libraries
-
 var fs, path, vm;
 if($tw.node) {
 	fs = require("fs");
@@ -30,7 +28,7 @@ if($tw.node) {
 	vm = require("vm");
 }
 
-/////////////////////////// Utility functions
+// #region Utility functions
 
 $tw.boot.log = function(str) {
 	$tw.boot.logMessages = $tw.boot.logMessages || [];
@@ -837,7 +835,7 @@ $tw.utils.Crypto = function() {
 	};
 };
 
-/////////////////////////// Module mechanism
+// #region Module mechanism
 
 /*
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
@@ -1025,7 +1023,7 @@ $tw.modules.createClassesFromModules = function(moduleType,subType,baseClass) {
 	return classes;
 };
 
-/////////////////////////// Barebones tiddler object
+// #region Barebones tiddler object
 
 /*
 Construct a tiddler object from a hashmap of tiddler fields. If multiple hasmaps are provided they are merged,
@@ -1152,7 +1150,7 @@ $tw.modules.define("$:/boot/tiddlerfields/list","tiddlerfield",{
 	stringify: $tw.utils.stringifyList
 });
 
-/////////////////////////// Barebones wiki store
+// #region Barebones wiki store
 
 /*
 Wiki constructor. State is stored in private members that only a small number of privileged accessor methods have direct access. Methods added via the prototype have to use these accessors and cannot access the state data directly.
@@ -1744,7 +1742,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 	}
 });
 
-/////////////////////////// Browser definitions
+// #region Browser definitions
 
 if($tw.browser && !$tw.node) {
 
@@ -1880,7 +1878,7 @@ $tw.loadTiddlersBrowser = function() {
 
 } else {
 
-/////////////////////////// Server definitions
+// #region Server definitions
 
 /*
 Get any encrypted tiddlers
@@ -1892,7 +1890,7 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 
 } // End of if($tw.browser && !$tw.node)
 
-/////////////////////////// Node definitions
+// #region Node definitions
 
 if($tw.node) {
 
@@ -2368,7 +2366,7 @@ $tw.loadTiddlersNode = function() {
 // End of if($tw.node)
 }
 
-/////////////////////////// Main startup function called once tiddlers have been decrypted
+// #region Main startup function
 
 /*
 Startup TiddlyWiki
@@ -2734,8 +2732,9 @@ $tw.hooks.invokeHook = function(hookName /*, value,... */) {
 	return args[0];
 };
 
-/////////////////////////// Main boot function to decrypt tiddlers and then startup
+// #region Main boot
 
+// Decrypt tiddlers and then startup
 $tw.boot.boot = function(callback) {
 	// Initialise crypto object
 	$tw.crypto = new $tw.utils.Crypto();
@@ -2750,7 +2749,7 @@ $tw.boot.boot = function(callback) {
 	});
 };
 
-/////////////////////////// Autoboot in the browser
+// #region Browser autoboot
 
 if($tw.browser && !$tw.boot.suppressBoot) {
 	$tw.boot.boot();
