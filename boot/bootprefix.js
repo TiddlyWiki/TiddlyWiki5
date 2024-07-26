@@ -21,7 +21,7 @@ $tw.boot = $tw.boot || Object.create(null);
 
 // Detect platforms
 if(!("browser" in $tw)) {
-	$tw.browser = typeof(window) !== "undefined" ? {} : null;
+	$tw.browser = typeof(window) !== "undefined" && typeof(document) !== "undefined" ? {} : null;
 }
 if(!("node" in $tw)) {
 	$tw.node = typeof(process) === "object" ? {} : null;
