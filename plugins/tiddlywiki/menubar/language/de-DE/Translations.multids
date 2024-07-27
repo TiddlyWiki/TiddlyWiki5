@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/languages/de-DE/
 
-Config/Heading1: Konfiguration
+Config/HeadingMain: Konfiguration
 Config/MenuItems/Heading: Top Menü Elemente
 Config/MenuItems/Description: Wähle alle Elemente, die angezeigt werden sollen. Drag and Drop kann zum sortieren verwendet werden.
 Config/BreakpointPosition/Heading: Breakpoint Position

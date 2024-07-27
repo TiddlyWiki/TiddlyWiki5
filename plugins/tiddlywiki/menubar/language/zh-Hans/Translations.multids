@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/languages/zh-Hans/
 
-Config/Heading1: 菜单栏配置
+Config/HeadingMain: 菜单栏配置
 Config/MenuItems/Heading: 菜单项
 Config/MenuItems/Description: 选择要显示的菜单项。您还可以通过拖动项目来重新排序。
 Config/BreakpointPosition/Heading: 响应式断点位置

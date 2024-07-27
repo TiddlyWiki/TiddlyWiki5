@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/languages/en-GB/
 
-Config/Heading1: Menu Bar Configuration
+Config/HeadingMain: Menu Bar Configuration
 Config/MenuItems/Heading: Menu Items
 Config/MenuItems/Description: Select which menu items will be shown. You can also drag items to reorder them.
 Config/BreakpointPosition/Heading: Breakpoint Position

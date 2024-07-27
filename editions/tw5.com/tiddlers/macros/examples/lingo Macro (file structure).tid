@@ -73,3 +73,11 @@ title: someTiddler
 ```
 
 Note that lingo macro will use the [[parse mode|WikiText Parser Modes]] in the current position where this procedure is invoked.
+
+!!! Patch other plugin
+
+If you want to add translations to another plugin, simply add tiddler with title prefix of that plugin. For example, if you want to add `de-AT` translations to `$:/plugins/tiddlywiki/menubar`, you can create a new tiddler with the title `$:/plugins/tiddlywiki/menubar/languages/de-AT/SomeTranslations` and put your translations in it.
+
+Make sure your plugin's `plugin.info` has a higher `plugin-priority` than the plugin you want to patch.
+
+This is the last resort if you can't directly PR to original plugin's code repository.

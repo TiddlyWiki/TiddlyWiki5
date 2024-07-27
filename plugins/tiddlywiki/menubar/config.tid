@@ -5,7 +5,7 @@ caption: Menu Bar
 \define config-base() $:/config/plugins/menubar/MenuItems/Visibility/
 \define lingo-base() $:/plugins/tiddlywiki/menubar/language/
 
-! <<lingo Config/Heading1>>
+! <<lingo Config/HeadingMain>>
 
 !! <<lingo Config/MenuItems/Heading>>
 
