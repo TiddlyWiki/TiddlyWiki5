@@ -22,9 +22,22 @@ exports.activatePluginTranslations = function(shadowTiddlers,pluginTitle,constit
 			if($tw.utils.startsWith(tiddler.title,sourcePath)) {
 				var newTitle = tiddler.title.replace(sourcePath, targetNamespace);
 				shadowTiddlers[newTitle] = {
-					source: pluginTitle,
+					source: otherPluginTitle,
 					tiddler: new $tw.Tiddler(tiddler,{title: newTitle})
 				};
+			} else if(!$tw.utils.startsWith(tiddler.title,pluginTitle) && tiddler.title.includes("/languages/")) {
+				// Allow patch other plugin's translation.
+				var parts = tiddler.title.split("/languages/");
+				var otherPluginTitle = parts[0];
+				if($tw.wiki.getPluginInfo(otherPluginTitle) && parts[1]) {
+					// Remove the language name from the path.
+					var languageName = parts[1].split("/")[0];
+					var newTitle = tiddler.title.replace("/languages/" + languageName, "/language");
+					shadowTiddlers[newTitle] = {
+						source: pluginTitle,
+						tiddler: new $tw.Tiddler(tiddler,{title: newTitle})
+					};
+				}
 			}
 		});
 	}
