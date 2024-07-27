@@ -1491,7 +1491,8 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
 			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
-				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+				var constituentTiddlers = pluginInfo[tiddler.fields.title].tiddlers;
+				$tw.utils.each(constituentTiddlers,function(constituentTiddler,constituentTitle) {
 					// Save the tiddler object
 					if(constituentTitle) {
 						shadowTiddlers[constituentTitle] = {
@@ -1500,6 +1501,9 @@ $tw.Wiki = function(options) {
 						};
 					}
 				});
+				// DEBUG: console $tw.utils?.moveActiveTranslations
+				console.log(`$tw.utils?.moveActiveTranslations`, $tw.utils?.moveActiveTranslations);
+				$tw.utils?.moveActiveTranslations?.(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
 			}
 		});
 		shadowTiddlerTitles = null;
