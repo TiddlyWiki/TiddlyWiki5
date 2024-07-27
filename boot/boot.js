@@ -1501,9 +1501,9 @@ $tw.Wiki = function(options) {
 						};
 					}
 				});
-				// DEBUG: console $tw.utils?.moveActiveTranslations
-				console.log(`$tw.utils?.moveActiveTranslations`, $tw.utils?.moveActiveTranslations);
-				$tw.utils?.moveActiveTranslations?.(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
+				if($tw.browser && $tw.utils.activatePluginTranslations) {
+					$tw.utils.activatePluginTranslations(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
+				}
 			}
 		});
 		shadowTiddlerTitles = null;

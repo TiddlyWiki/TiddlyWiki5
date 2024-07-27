@@ -12,17 +12,19 @@ Move active translations from a plugin's `/languages` path to the `/language` pa
 /*global $tw: false */
 "use strict";
 
-exports.moveActiveTranslations = function(shadowTiddlers,pluginTitle,constituentTiddlers) {
+exports.activatePluginTranslations = function(shadowTiddlers,pluginTitle,constituentTiddlers) {
 	// Define the source and target namespaces
-	var sourceNamespace = pluginTitle + "languages/";
-	var targetNamespace = pluginTitle + "language/";
-	
+	var sourceNamespace = pluginTitle + "/languages/";
+	var targetNamespace = pluginTitle + "/language/";
 	// Function to extract tiddlers from a source namespace to the target namespace
 	function extractTiddlers(sourcePath) {
-		$tw.utils.each(constituentTiddlers, function(tiddler) {
-			if(tiddler.title.startsWith(sourceNamespace)) {
-				var newTitle = title.replace(sourcePath, targetNamespace);
-				$tw.wiki.addTiddler(new $tw.Tiddler(tiddler, { title: newTitle }));
+		$tw.utils.each(constituentTiddlers,function(tiddler) {
+			if($tw.utils.startsWith(tiddler.title,sourcePath)) {
+				var newTitle = tiddler.title.replace(sourcePath, targetNamespace);
+				shadowTiddlers[newTitle] = {
+					source: pluginTitle,
+					tiddler: new $tw.Tiddler(tiddler,{title: newTitle})
+				};
 			}
 		});
 	}
@@ -31,10 +33,10 @@ exports.moveActiveTranslations = function(shadowTiddlers,pluginTitle,constituent
 	extractTiddlers(sourceNamespace + "en-GB/");
 
 	// Step 2: Check the $:/language tiddler
-	var selectedLanguage = $tw.wiki.getTiddlerText("$:/language");
-	if (selectedLanguage) {
+	var selectedLanguagePlugin = $tw.wiki.getTiddlerText("$:/language");
+	if (selectedLanguagePlugin) {
 		// Step 3: Extract tiddlers for the selected language
-		extractTiddlers(sourceNamespace + selectedLanguage + "/");
+		extractTiddlers(sourceNamespace + selectedLanguagePlugin.replace('$:/languages/','') + "/");
 	}
 
 	// Step 4: Resolve dependents and extract them in reverse order
@@ -42,7 +44,7 @@ exports.moveActiveTranslations = function(shadowTiddlers,pluginTitle,constituent
 		var pluginTiddler = $tw.wiki.getTiddler(pluginTitle);
 		if (pluginTiddler) {
 			var dependents = $tw.utils.parseStringArray(pluginTiddler.fields.dependents || "");
-			dependents.reverse().forEach(function(dependent) {
+			$tw.utils.each(dependents.reverse(),function(dependent) {
 				extractTiddlers(sourceNamespace + dependent + "/");
 				resolveDependents(dependent);
 			});
@@ -50,8 +52,8 @@ exports.moveActiveTranslations = function(shadowTiddlers,pluginTitle,constituent
 	}
 
 	// Step 5: Resolve dependents for the selected language
-	if (selectedLanguage) {
-		resolveDependents(selectedLanguage);
+	if (selectedLanguagePlugin) {
+		resolveDependents(selectedLanguagePlugin);
 	}
 };
 
