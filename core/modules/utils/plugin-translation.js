@@ -34,7 +34,7 @@ exports.activatePluginTranslations = function(shadowTiddlers,pluginTitle,constit
 
 	// Step 2: Check the $:/language tiddler
 	var selectedLanguagePlugin = $tw.wiki.getTiddlerText("$:/language");
-	if (selectedLanguagePlugin) {
+	if(selectedLanguagePlugin) {
 		// Step 3: Extract tiddlers for the selected language
 		extractTiddlers(sourceNamespace + selectedLanguagePlugin.replace('$:/languages/','') + "/");
 	}
@@ -42,7 +42,7 @@ exports.activatePluginTranslations = function(shadowTiddlers,pluginTitle,constit
 	// Step 4: Resolve dependents and extract them in reverse order
 	function resolveDependents(pluginTitle) {
 		var pluginTiddler = $tw.wiki.getTiddler(pluginTitle);
-		if (pluginTiddler) {
+		if(pluginTiddler) {
 			var dependents = $tw.utils.parseStringArray(pluginTiddler.fields.dependents || "");
 			$tw.utils.each(dependents.reverse(),function(dependent) {
 				extractTiddlers(sourceNamespace + dependent + "/");
@@ -52,7 +52,7 @@ exports.activatePluginTranslations = function(shadowTiddlers,pluginTitle,constit
 	}
 
 	// Step 5: Resolve dependents for the selected language
-	if (selectedLanguagePlugin) {
+	if(selectedLanguagePlugin) {
 		resolveDependents(selectedLanguagePlugin);
 	}
 };
