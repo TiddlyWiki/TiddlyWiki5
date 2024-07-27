@@ -36,7 +36,7 @@ mkdir TW5
 !!! 2. Make a local read-only copy of the ~TiddlyWiki5 repository
 
 ```bash
-git clone https://github.com/Jermolene/TiddlyWiki5.git TW5
+git clone https://github.com/TiddlyWiki/TiddlyWiki5.git TW5
 
 ```
 

@@ -66,5 +66,5 @@ jobs:
   
         for number in "${prs[@]}"  
         do  
-          gh pr comment "$number" -b "**$AUTHOR** has signed the Contributor License Agreement (see [contributing.md](https://github.com/Jermolene/TiddlyWiki5/blob/master/contributing.md))"
+          gh pr comment "$number" -b "**$AUTHOR** has signed the Contributor License Agreement (see [contributing.md](https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/contributing.md))"
         done     

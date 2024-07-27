@@ -7,7 +7,7 @@ tags: ReleaseNotes
 title: Release 5.3.2
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.1...v5.3.2]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.1...v5.3.2]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[catter-fly|https://talk.tiddlywiki.org/u/catter-fly]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/banner-image-competition-for-v5-3-2/8569]]).
@@ -18,7 +18,7 @@ type: text/vnd.tiddlywiki
 
 !! Conditional Shortcut Syntax
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7710">> a new [[shortcut syntax|Conditional Shortcut Syntax]] for concisely expressing if-then-else logic. This is the first of a new type of wikitext syntax based on tokens delimited with `<%` and `%>`. We plan to introduce other structures using the same format such as a "case" statement.
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7710">> a new [[shortcut syntax|Conditional Shortcut Syntax]] for concisely expressing if-then-else logic. This is the first of a new type of wikitext syntax based on tokens delimited with `<%` and `%>`. We plan to introduce other structures using the same format such as a "case" statement.
 
 These new token-based shortcuts allow a richer structure and expressivity than existing features such as widgets or pragmas. For example:
 
@@ -36,7 +36,7 @@ Behind the scenes, the conditional shortcut syntax is rendered as the equivalent
 
 !! Explicit Templates for the ListWidget
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7784">> support for `<$list-template>` and `<$list-empty>` as immediate children of the <<.wid "ListWidget">> widget to specify the list item template and/or the empty template.
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7784">> support for `<$list-template>` and `<$list-empty>` as immediate children of the <<.wid "ListWidget">> widget to specify the list item template and/or the empty template.
 
 This new feature is designed to replace a common pattern of using the `emptyMessage` attribute of the ListWidget to render complex wikitext that thus has to be quoted. Working with wikitext within quotes is awkward and error prone. The new structure can be somewhat faster because it allows the empty message to be parsed in advanced of rendering.
 
@@ -57,7 +57,7 @@ Note that the <<.attr "emptyMessage">> and <<.attr "template">> attributes take 
 
 !! Joiners for the ListWidget
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7694">> a <<.attr "join">> attribute to the <<.wid "ListWidget">> widget to insert a short piece of text between list items. This is both easier to use and faster than using the <<.attr "counter">> attribute for the same purpose. So if your list looked like this:
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7694">> a <<.attr "join">> attribute to the <<.wid "ListWidget">> widget to insert a short piece of text between list items. This is both easier to use and faster than using the <<.attr "counter">> attribute for the same purpose. So if your list looked like this:
 
 ```
 <$list filter=<<filter>> counter="counter" variable="item">
@@ -79,11 +79,11 @@ If the joiner text that you need is long and awkward to write in an attribute, y
 
 !! jsonset operator
 
-<<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7742">> [[jsonset Operator]] for setting values within JSON objects
+<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7742">> [[jsonset Operator]] for setting values within JSON objects
 
 !! QR Code Reader
 
-<<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7746">> QR Code plugin to be able to read QR codes and a number of other bar code formats
+<<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7746">> QR Code plugin to be able to read QR codes and a number of other bar code formats
 
 ! Translation improvements
 
@@ -95,67 +95,67 @@ Improvements to the following translations:
 
 ! Plugin Improvements
 
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/1be8f0a9336952d4745d2bd4f2327e353580a272">> Comments Plugin to use predefined palette colours
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7785">> Evernote Importer Plugin to support images and other attachments
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7790">> `$floating` attribute to Dynannotate Plugin to support popups that do not disappear when another part of the screen is clicked. Instead they have to dismissed manually
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1be8f0a9336952d4745d2bd4f2327e353580a272">> Comments Plugin to use predefined palette colours
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7785">> Evernote Importer Plugin to support images and other attachments
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7790">> `$floating` attribute to Dynannotate Plugin to support popups that do not disappear when another part of the screen is clicked. Instead they have to dismissed manually
 
 ! Widget Improvements
 
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7734">> ImageWidget encoding for more image types
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7634">> ImageWidget to add a "usemap" attribute
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7649">> the ScrollableWidget to allow the scroll position to be bound to a tiddler, so that changes to the tiddler affect the scroll position, and vice versa
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7734">> ImageWidget encoding for more image types
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7634">> ImageWidget to add a "usemap" attribute
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7649">> the ScrollableWidget to allow the scroll position to be bound to a tiddler, so that changes to the tiddler affect the scroll position, and vice versa
 
 ! Usability Improvements
 
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/7747">> editor preview button to automatically focus the editor
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7764">> file type names in the export menu
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7747">> editor preview button to automatically focus the editor
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7764">> file type names in the export menu
 
 ! Hackability Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7769">> all the relevant core widgets to allow arbitrary `data-*` attributes and `style.*` attributes to be applied to the generated DOM nodes. This is useful for passing data to the EventCatcherWidget
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/7849">> [[jsonextract Operator]], [[jsonget Operator]], [[jsonset Operator]] and [[jsontype Operator]] to allow negative indexes into arrays to be counted from the end of the array
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7690">> the default page layout to better support CSS grid and flexbox layouts
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7787">> the editor to use grid layout, simplifying customisation
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7769">> all the relevant core widgets to allow arbitrary `data-*` attributes and `style.*` attributes to be applied to the generated DOM nodes. This is useful for passing data to the EventCatcherWidget
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7849">> [[jsonextract Operator]], [[jsonget Operator]], [[jsonset Operator]] and [[jsontype Operator]] to allow negative indexes into arrays to be counted from the end of the array
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7690">> the default page layout to better support CSS grid and flexbox layouts
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7787">> the editor to use grid layout, simplifying customisation
 
 ! Bug Fixes
 
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7758">> ordering of Vanilla stylesheets
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/fa9bfa07a095548eb2f8339b0b1b816d2e6794ef">> missing closing tag in tag-pill-inner macro
-* <<.link-badge-removed "https://github.com/Jermolene/TiddlyWiki5/issues/7732">> invalid "type" attribute from textarea elements generated by the EditTextWidget
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7749">> editor "type" dropdown state tiddlers
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7712">> handling of "counter-last" variable when appending items with the ListWidget
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6088">> upgrade download link in Firefox
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7698">> refreshing of transcluded functions
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7789">> resizing of height of textareas in control panel
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7683">> [[encodebase64 Operator]] and [[decodebase64 Operator]] to work properly with binary data
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7708">> [[WidgetMessage: tm-open-window]] when opening an existing window to bring it to the front and focus it
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7809">> behaviour of [[last Operator]] when zero items selected
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7806">> incorrectly setting focus on field name input field when deleting field using the delete field button
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7802">> [[Table-of-Contents Macros]] to not show expander icon for a sublist that has all children excluded
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7794">> overflow of [[CodeMirror Plugin]] editor within grid container
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7835">> wikitest parser removing whitespace when parsing pragmas
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7842">> tooltip for editor add field button
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7844">> plain text parser being susceptible to the CodeBlockWidget being redefined
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7855">> pragmas not working within the action string of several core macros
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7758">> ordering of Vanilla stylesheets
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/fa9bfa07a095548eb2f8339b0b1b816d2e6794ef">> missing closing tag in tag-pill-inner macro
+* <<.link-badge-removed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7732">> invalid "type" attribute from textarea elements generated by the EditTextWidget
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7749">> editor "type" dropdown state tiddlers
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7712">> handling of "counter-last" variable when appending items with the ListWidget
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6088">> upgrade download link in Firefox
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7698">> refreshing of transcluded functions
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7789">> resizing of height of textareas in control panel
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7683">> [[encodebase64 Operator]] and [[decodebase64 Operator]] to work properly with binary data
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7708">> [[WidgetMessage: tm-open-window]] when opening an existing window to bring it to the front and focus it
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7809">> behaviour of [[last Operator]] when zero items selected
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7806">> incorrectly setting focus on field name input field when deleting field using the delete field button
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7802">> [[Table-of-Contents Macros]] to not show expander icon for a sublist that has all children excluded
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7794">> overflow of [[CodeMirror Plugin]] editor within grid container
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7835">> wikitest parser removing whitespace when parsing pragmas
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7842">> tooltip for editor add field button
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7844">> plain text parser being susceptible to the CodeBlockWidget being redefined
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7855">> pragmas not working within the action string of several core macros
 
 ! Node.js Improvements
 
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/7843">> a significant flaw in the synchronisation algorithm used by the client-server configuration. The flaw could lead to tiddlers temporarily disappearing from the browser
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7843">> a significant flaw in the synchronisation algorithm used by the client-server configuration. The flaw could lead to tiddlers temporarily disappearing from the browser
 
 ! Performance Improvements
 
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7702">> performance of predefined patterns with [[all Operator]]
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/7671">> favicon format to PNG
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7702">> performance of predefined patterns with [[all Operator]]
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/issues/7671">> favicon format to PNG
 
 ! Developer Improvements
 
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7751">> global hook handling to support removing hooks
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7539">> some useful npm scripts to `package.json`
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7751">> global hook handling to support removing hooks
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7539">> some useful npm scripts to `package.json`
 
 ! Infrastructure Improvements
 
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/7820">> Continuous Integration tests to use Playwright to run our browser-based tests
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/7737">> an automatic build of the external core TiddlyWiki at https://tiddlywiki.com/empty-external-core.html
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7820">> Continuous Integration tests to use Playwright to run our browser-based tests
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7737">> an automatic build of the external core TiddlyWiki at https://tiddlywiki.com/empty-external-core.html
 
 ! Acknowledgements
 

@@ -3,7 +3,7 @@ tags: $:/tags/EditTemplate
 list-after: $:/core/ui/EditTemplate/title
 
 \define base-github()
-https://github.com/Jermolene/TiddlyWiki5/edit/master/editions/dev/tiddlers/
+https://github.com/TiddlyWiki/TiddlyWiki5/edit/master/editions/dev/tiddlers/
 \end
 
 <$set name="draft-of" value={{{ [<currentTiddler>get[draft.of]] }}}>
