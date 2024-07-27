@@ -1,6 +1,6 @@
 title: GettingStarted
 tags: $:/tags/GettingStarted
-caption: <<lingo GettingStartedStep1 "$:/plugins/tiddlywiki/tiddlyweb/language/">>
+caption: {{$:/plugins/tiddlywiki/tiddlyweb/language/GettingStartedStep1}}
 
 \define lingo-base() $:/plugins/tiddlywiki/tiddlyweb/language/
 

@@ -38,7 +38,7 @@ Later you can use it like:
 
 ```tid
 title: someTiddler
-caption: <<lingo OpenStaticCard "$:/plugins/yourName/pluginName/language/">>
+caption: {{$:/plugins/yourName/pluginName/language/OpenStaticCard}}
 
 \procedure lingo-base() $:/plugins/yourName/pluginName/language/
 \whitespace trim
@@ -67,7 +67,7 @@ title: someTiddler
 
 \procedure lingo-base() $:/plugins/yourName/pluginName/language/
 
-!! <<lingo "OpenInteractiveCard">>
+!! <<lingo OpenInteractiveCard>>
 
 <<lingo SomeLongText>>
 ```
