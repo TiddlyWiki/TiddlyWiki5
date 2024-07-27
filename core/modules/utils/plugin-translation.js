@@ -29,31 +29,29 @@ exports.activatePluginTranslations = function(shadowTiddlers,pluginTitle,constit
 		});
 	}
 
-	// Step 1: Extract default language tiddlers (en-GB) from the sourceNamespace
+	// Extract fallback language tiddlers (en-GB) from the sourceNamespace
 	extractTiddlers(sourceNamespace + "en-GB/");
 
-	// Step 2: Check the $:/language tiddler
+	// Check the $:/language tiddler
 	var selectedLanguagePlugin = $tw.wiki.getTiddlerText("$:/language");
-	if(selectedLanguagePlugin) {
-		// Step 3: Extract tiddlers for the selected language
-		extractTiddlers(sourceNamespace + selectedLanguagePlugin.replace('$:/languages/','') + "/");
-	}
 
-	// Step 4: Resolve dependents and extract them in reverse order
-	function resolveDependents(pluginTitle) {
-		var pluginTiddler = $tw.wiki.getTiddler(pluginTitle);
-		if(pluginTiddler) {
-			var dependents = $tw.utils.parseStringArray(pluginTiddler.fields.dependents || "");
-			$tw.utils.each(dependents.reverse(),function(dependent) {
-				extractTiddlers(sourceNamespace + dependent + "/");
+	// Resolve dependents and extract them in reverse order
+	function resolveDependents(languagePluginTitle) {
+		var languagePlugin = $tw.wiki.getTiddler(languagePluginTitle);
+		if(languagePlugin) {
+			var dependents = $tw.utils.parseStringArray(languagePlugin.fields.dependents || "");
+			$tw.utils.each(dependents,function(dependent) {
+				// Resolve dependents for the selected language, extract as fallback
 				resolveDependents(dependent);
+				// Extract translation tiddlers for the selected language
+				extractTiddlers(sourceNamespace + dependent.replace("$:/languages/","") + "/");
 			});
 		}
 	}
-
-	// Step 5: Resolve dependents for the selected language
+	
 	if(selectedLanguagePlugin) {
 		resolveDependents(selectedLanguagePlugin);
+		extractTiddlers(sourceNamespace + selectedLanguagePlugin.replace("$:/languages/","") + "/");
 	}
 };
 
