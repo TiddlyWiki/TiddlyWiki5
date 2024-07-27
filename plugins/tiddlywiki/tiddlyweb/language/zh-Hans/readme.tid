@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/language/zh-Hans/readme
+
+该插件在浏览器中运行，用于双向同步更改的条目到与 TiddlyWeb 兼容的服务器上（包括在 Node.js 上运行的 TiddlyWiki 5 本身）。在 Node.js 上运行时，它是无法自救的：由于就是该插件提供了与服务器同步设置和插件的机制，因此通过浏览器禁用该插件后，是无法撤销对自己的禁用的。
+
+离线时所作的更改会保存在内存中，并在重新建立连接时自动与服务器同步。不过，如果关闭浏览器标签页或加载另一个 URL，内存中的更改就会丢失。可以添加[[https://tiddlywiki.com/#BrowserStorage Plugin]]，为离线时的条目更改提供临时文件系统存储，并使其在下次在同一浏览器中加载知识库时与服务器同步。 
+
+[[源代码|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/tiddlyweb]]

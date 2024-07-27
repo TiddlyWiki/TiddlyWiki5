@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/language/zh-Hans/GettingStarted
+
+欢迎来到太微和太微社区
+
+访问 https://tiddlywiki.com/ 了解太微的细节和了解它能做什么。
+
+! 同步更改到服务器
+
+在你开始在太微中存储重要信息之前，确保你的修改被服务器可靠地保存是非常重要的。
+
+# 使用右侧边栏的 {{$:/core/images/new-button}} 按钮创建一个新条目
+# 点击新条目右上方的 {{$:/core/images/done-button}} 按钮
+# 检查太微命令行是否有确认条目已保存的信息
+# 刷新浏览器页面，确认新条目已正确保存
