@@ -7,10 +7,10 @@ type: text/vnd.tiddlywiki
 
 The <<.def lingo>> [[macro|Macros]] relates to the translation of ~TiddlyWiki's user interface into other languages. It returns a piece of text in the user's currently selected language.
 
-Translatable text is supplied by：
+Translatable text, aka l10n (localization), is supplied by：
 
 # Language plugins
-# Any l10n (localization) strings outside of the language plugins
+# Tiddlers under any plugins's `languages/` path
 
 !! Language plugins
 
@@ -21,16 +21,14 @@ You can directly pass title to `lingo` macro, when there is a language plugin co
 
 <<.macro-examples "lingo (for language plugin)">>
 
-!! Any l10n strings
+!! Plugins
 
-To translate any text that directly placed in user's wiki, instead of in a language plugin, you can set the `lingo-base` variable to teach <<.def lingo>> macro the place to look for.
+When writing a plugin, you can place translatable text in tiddlers under the `$:/plugins/xxx/yyy/languages/` path of your plugin. During wiki boot they are automatically moved to `$:/plugins/xxx/yyy/language/` path, so lingo macro can use `$:/plugins/xxx/yyy/language/` as base path to get the translation.
 
-!!! Parameters
+!! Parameters
 
 ;key
 : The last part of title of the tiddler that contains the text. The `<<lingo-base>>` prefix and current language name prefix is added automatically
-;lingo-base-fallback
-: Optional lingo-base when it is not possible to define `lingo-base` variable (for example, when using this macro in the caption field), you can set the lingo base by passing this parameter
 
 <<.macro-examples "lingo (for custom base)">>
 
