@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/tiddlyweb/language/zh-Hans/readme
+title: $:/plugins/tiddlywiki/tiddlyweb/languages/zh-Hans/readme
 
 离线时所作的更改会保存在内存中，并在重新建立连接时自动与服务器同步。不过，如果关闭浏览器标签页或加载另一个 URL，内存中的更改就会丢失。可以添加[[https://tiddlywiki.com/#BrowserStorage Plugin]]，为离线时的条目更改提供临时文件系统存储，并使其在下次在同一浏览器中加载知识库时与服务器同步。 
 

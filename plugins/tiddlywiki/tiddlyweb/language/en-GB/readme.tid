@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/tiddlyweb/language/en-GB/readme
+title: $:/plugins/tiddlywiki/tiddlyweb/languages/en-GB/readme
 
 Changes made while offline are saved in memory and automatically synchonised with the server when the connection is re-established. However, if the browser tab is closed or another URL is loaded, the in-memory changes will be lost. The [[https://tiddlywiki.com/#BrowserStorage Plugin]] may be added to provide temporary filesystem storage of tiddler changes made while offline and enable them to be synchronised with the server the next time the wiki is loaded in the same browser.  
 
