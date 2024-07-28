@@ -68,6 +68,7 @@ PluginSwitcher.prototype.switchPlugins = function() {
 	var registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
 	// Unpack the current theme tiddlers
 	$tw.wiki.unpackPluginTiddlers();
+	$tw.wiki.unpackPluginLanguagesTiddlers();
 	// Call the switch handler
 	if(this.onSwitch) {
 		this.onSwitch(plugins);

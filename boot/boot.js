@@ -1467,11 +1467,9 @@ $tw.Wiki = function(options) {
 		return unregisteredTitles;
 	};
 
-	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
-	this.unpackPluginTiddlers = function() {
-		var self = this;
-		// Sort the plugin titles by the `plugin-priority` field
-		pluginTiddlers.sort(function(a,b) {
+	// Sort the plugin titles by the `plugin-priority` field
+	this.getSortedPluginTiddlers = function() {
+		return pluginTiddlers.sort(function(a,b) {
 			if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
 				return a.fields["plugin-priority"] - b.fields["plugin-priority"];
 			} else if("plugin-priority" in a.fields) {
@@ -1486,13 +1484,25 @@ $tw.Wiki = function(options) {
 				return +1;
 			}
 		});
+	};
+
+	this.rebuildShadowTiddlerIndexer = function() {
+		shadowTiddlerTitles = null;
+		this.clearCache(null);
+		this.clearGlobalCache();
+		$tw.utils.each(indexers,function(indexer) {
+			indexer.rebuild();
+		});
+	};
+
+	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
+	this.unpackPluginTiddlers = function() {
 		// Now go through the plugins in ascending order and assign the shadows
 		shadowTiddlers = Object.create(null);
-		$tw.utils.each(pluginTiddlers,function(tiddler) {
+		$tw.utils.each(this.getSortedPluginTiddlers(),function(tiddler) {
 			// Extract the constituent tiddlers
 			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
-				var constituentTiddlers = pluginInfo[tiddler.fields.title].tiddlers;
-				$tw.utils.each(constituentTiddlers,function(constituentTiddler,constituentTitle) {
+				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
 					// Skip translation tiddlers of plugin that follows `$:/plugins/xxx/yyy/languages/` pattern, will handle it later
 					if(constituentTitle.split('/')[4] === 'languages') return;
 					// Save the tiddler object
@@ -1503,20 +1513,26 @@ $tw.Wiki = function(options) {
 						};
 					}
 				});
-				// Handle language tiddlers of plugin
-				if($tw.browser && $tw.utils.activatePluginTranslations) {
-					$tw.utils.activatePluginTranslations(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
-				}
 			}
 		});
-		shadowTiddlerTitles = null;
-		this.clearCache(null);
-		this.clearGlobalCache();
-		$tw.utils.each(indexers,function(indexer) {
-			indexer.rebuild();
-		});
+		this.rebuildShadowTiddlerIndexer();
 	};
 
+	// Handle language tiddlers of plugin
+	this.unpackPluginLanguagesTiddlers = function() {
+		$tw.utils.each(this.getSortedPluginTiddlers(),function(tiddler) {
+			// Extract the constituent tiddlers
+			if($tw.utils.hop(pluginInfo,tiddler.fields.title) && $tw.browser && $tw.utils.activatePluginTranslations) {
+				$tw.utils.activatePluginTranslations(
+					shadowTiddlers,
+					tiddler.fields.title,
+					pluginInfo[tiddler.fields.title].tiddlers
+				);
+			}
+		});
+		this.rebuildShadowTiddlerIndexer();
+	};
+	
 	if(this.addIndexersToWiki) {
 		this.addIndexersToWiki();
 	}
