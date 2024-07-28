@@ -1486,15 +1486,6 @@ $tw.Wiki = function(options) {
 		});
 	};
 
-	this.rebuildShadowTiddlerIndexer = function() {
-		shadowTiddlerTitles = null;
-		this.clearCache(null);
-		this.clearGlobalCache();
-		$tw.utils.each(indexers,function(indexer) {
-			indexer.rebuild();
-		});
-	};
-
 	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
 	this.unpackPluginTiddlers = function() {
 		// Now go through the plugins in ascending order and assign the shadows
@@ -1502,7 +1493,8 @@ $tw.Wiki = function(options) {
 		$tw.utils.each(this.getSortedPluginTiddlers(),function(tiddler) {
 			// Extract the constituent tiddlers
 			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
-				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+				var constituentTiddlers = pluginInfo[tiddler.fields.title].tiddlers;
+				$tw.utils.each(constituentTiddlers,function(constituentTiddler,constituentTitle) {
 					// Skip translation tiddlers of plugin that follows `$:/plugins/xxx/yyy/languages/` pattern, will handle it later
 					if(constituentTitle.split('/')[4] === 'languages') return;
 					// Save the tiddler object
@@ -1513,26 +1505,20 @@ $tw.Wiki = function(options) {
 						};
 					}
 				});
+				// Handle language tiddlers of plugin
+				if($tw.browser && $tw.utils.activatePluginTranslations) {
+					$tw.utils.activatePluginTranslations(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
+				}
 			}
 		});
-		this.rebuildShadowTiddlerIndexer();
+		shadowTiddlerTitles = null;
+		this.clearCache(null);
+		this.clearGlobalCache();
+		$tw.utils.each(indexers,function(indexer) {
+			indexer.rebuild();
+		});
 	};
 
-	// Handle language tiddlers of plugin
-	this.unpackPluginLanguagesTiddlers = function() {
-		$tw.utils.each(this.getSortedPluginTiddlers(),function(tiddler) {
-			// Extract the constituent tiddlers
-			if($tw.utils.hop(pluginInfo,tiddler.fields.title) && $tw.browser && $tw.utils.activatePluginTranslations) {
-				$tw.utils.activatePluginTranslations(
-					shadowTiddlers,
-					tiddler.fields.title,
-					pluginInfo[tiddler.fields.title].tiddlers
-				);
-			}
-		});
-		this.rebuildShadowTiddlerIndexer();
-	};
-	
 	if(this.addIndexersToWiki) {
 		this.addIndexersToWiki();
 	}
