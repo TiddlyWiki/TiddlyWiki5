@@ -44,7 +44,8 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 \procedure toc-newChildButton()
 	\procedure _newChild(field:"parent")
 	<$button tooltip=`New Child -> "$(field)$: $(currentTiddler)$"`
-		aria-label="new child here" class="tc-btn-invisible"
+		aria-label="new child here"
+		class="tc-btn-invisible tc-toc-new-child"
 	>
 		<% if [<_mode>match[tocpMode]] %>
 			<$action-sendmessage $message="tm-new-tiddler" $name=<<field>> $value=<<currentTiddler>>/>
@@ -58,12 +59,12 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 
 	<% if [<tv-toc-show-new-child>match[yes]] %>
 		<% if [<_mode>match[tagMode]] %>
-			<span class="tc-small-gap-left"><$macrocall $name="_newChild" field="tags"/></span>
+			<span class="tc-small-gap-left tc-toc-new-child-tag"><$macrocall $name="_newChild" field="tags"/></span>
 			<!-- <span class="tc-small-gap-left">{{||$:/core/ui/Buttons/new-here}}</span> -->
 		<% elseif [<_mode>match[tocpMode]] %>
-			<span class="tc-small-gap-left"><$macrocall $name="_newChild" field=<<parentField>>/></span>
+			<span class="tc-small-gap-left  tc-toc-new-child-parent"><$macrocall $name="_newChild" field=<<parentField>>/></span>
 		<% elseif [<_mode>match[tagLikeMode]] %>
-			<span class="tc-small-gap-left"><$macrocall $name="_newChild" field=<<tagField>>/></span>
+			<span class="tc-small-gap-left tc-toc-new-child-tagLike"><$macrocall $name="_newChild" field=<<tagField>>/></span>
 		<% endif %>
 	<% endif %>
 \end
