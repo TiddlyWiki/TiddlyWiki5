@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/ai-tools/globals
 tags: $:/tags/Global
 
-\function default-llm-completion-server()
+\function ai-tools-default-llm-completion-server()
 [all[shadows+tiddlers]tag[$:/tags/AI/CompletionServer]sort[caption]first[]]
 \end
 
@@ -10,16 +10,16 @@ Action procedure to retrieve an LLM completion, given the following parameters:
 conversationTitle - Title of the tiddler containing the conversation
 resultTitlePrefix - Prefix of the tiddler to be used for saving the result. If the tiddler already exists then a number will be added repeatedly until the resulting title is unique
 resultTags - Tags to be applied to the result tiddler
-statusTitle - Optional title of a tiddler to which the status of the request will be bound: "pending", "complete", "error"
+ai-tools-status-title - Optional title of a tiddler to which the status of the request will be bound: "pending", "complete", "error"
 completionServer - Optional URL of server
 -->
-\procedure get-llm-completion(conversationTitle,resultTitlePrefix,resultTags,statusTitle,completionServer)
+\procedure ai-tools-get-llm-completion(conversationTitle,resultTitlePrefix,resultTags,ai-tools-status-title,completionServer)
 <$let
-	completionServer={{{ [<completionServer>!is[blank]else<default-llm-completion-server>] }}}
+	completionServer={{{ [<completionServer>!is[blank]else<ai-tools-default-llm-completion-server>] }}}
 >
 	<$importvariables filter="[<completionServer>]">
 		<$wikify name="json" text=<<json-prompt>>>
-			<$action-log message="get-llm-completion"/>
+			<$action-log message="ai-tools-get-llm-completion"/>
 			<$action-log/>
 			<$action-sendmessage
 				$message="tm-http-request"
@@ -29,11 +29,176 @@ completionServer - Optional URL of server
 				bearer-auth-token-from-store="openai-secret-key"
 				method="POST"
 				oncompletion=<<completion-callback>>
-				bind-status=<<statusTitle>>
+				bind-status=<<ai-tools-status-title>>
 				var-resultTitlePrefix=<<resultTitlePrefix>>
 				var-resultTags=<<resultTags>>
 			/>
 		</$wikify>
 	</$importvariables>
 </$let>
-\end get-llm-completion
+\end ai-tools-get-llm-completion
+
+<!--
+-->
+\function ai-tools-status-title()
+[<currentTiddler>addprefix[$:/temp/ai-tools/status/]]
+\end ai-tools-status-title
+
+<!--
+Procedure to display a message from an AI conversation. Current tiddler is the conversation tiddler
+-->
+\procedure ai-tools-message(tiddler,field,role,makeLink:"yes")
+<$qualify
+	name="state"
+	title={{{ [[$:/state/ai-tools-message-state/]addsuffix<tiddler>] }}}
+>
+	<$let
+		editStateTiddler={{{ [<state>addsuffix[-edit-state]] }}}
+		editState={{{ [<editStateTiddler>get[text]else[view]]  }}}
+	>
+		<div class={{{ ai-tools-message [<role>addprefix[ai-tools-message-role-]] +[join[ ]] }}}>
+			<div class="ai-tools-message-toolbar">
+				<div class="ai-tools-message-toolbar-left">
+					<$genesis $type={{{ [<makeLink>match[yes]then[$link]else[span]] }}} to=<<tiddler>>>
+						<$text text=<<role>>/>
+					</$genesis>
+				</div>
+				<div class="ai-tools-message-toolbar-left">
+					<%if [<editState>!match[edit]] %>
+						<$button class="ai-tools-message-toolbar-button">
+							<$action-setfield $tiddler=<<editStateTiddler>> text="edit"/>
+							edit
+						</$button>
+					<%endif%>
+					<%if [<editState>!match[view]] %>
+						<$button class="ai-tools-message-toolbar-button">
+							<$action-setfield $tiddler=<<editStateTiddler>> text="view"/>
+							view
+						</$button>
+					<%endif%>
+					<$button class="ai-tools-message-toolbar-button">
+						<$action-sendmessage $message="tm-copy-to-clipboard" $param={{{ [<tiddler>get<field>else[]] }}}/>
+						copy
+					</$button>
+					<$button class="ai-tools-message-toolbar-button">
+						<$action-deletetiddler $tiddler=<<tiddler>>/>
+						delete
+					</$button>
+				</div>
+			</div>
+			<div class="ai-tools-message-body">
+				<%if [<editState>match[view]] %>
+					<$transclude $tiddler=<<tiddler>> $field=<<field>> $mode="block"/>
+				<%else%>
+					<$edit-text tiddler=<<tiddler>> field=<<field>> tag="textarea" class="tc-edit-texteditor"/>
+				<%endif%>
+				<%if [<tiddler>get[image]else[]!match[]] %>
+					<$image source={{{ [<tiddler>get[image]] }}}/>
+				<%endif%>
+			</div>
+		</div>
+	</$let>
+</$qualify>
+\end ai-tools-message
+
+<!--
+Action procedure to get the next response from the LLM
+-->
+\procedure ai-tools-action-get-response()
+<$let
+	resultTitlePrefix={{{ [<currentTiddler>addsuffix[ - Prompt]] }}}
+	resultTags={{{ [<currentTiddler>format:titlelist[]] }}}
+>
+	<$action-createtiddler
+		$basetitle=<<resultTitlePrefix>>
+		tags=<<resultTags>>
+		type="text/markdown"
+		role="user"
+		text={{!!current-response-text}}
+		image={{!!current-response-image}}
+	>
+		<$action-deletefield $tiddler=<<currentTiddler>> $field="current-response-text"/>
+		<$action-deletefield $tiddler=<<currentTiddler>> $field="current-response-image"/>
+		<$transclude
+			$variable="ai-tools-get-llm-completion"
+			conversationTitle=<<currentTiddler>>
+			completionServer={{!!completion-server}}
+			resultTitlePrefix=<<resultTitlePrefix>>
+			resultTags=<<resultTags>>
+			ai-tools-status-title=<<ai-tools-status-title>>
+		/>
+	</$action-createtiddler>
+</$let>
+\end ai-tools-action-get-response
+
+\procedure ai-tools-conversation(conversationTitle)
+<$let currentTiddler=<<conversationTitle>>>
+
+	Server: <$select tiddler=<<currentTiddler>> field="completion-server" default=<<ai-tools-default-llm-completion-server>>>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/AI/CompletionServer]sort[caption]]">
+	<option value=<<currentTiddler>>><$view field='caption'/></option>
+	</$list>
+	</$select>
+
+	<div class="ai-conversation">
+		<$transclude
+			$variable="ai-tools-message"
+			tiddler=<<currentTiddler>>
+			field="system-prompt"
+			role="system"
+			makeLink="no"
+		/>
+		<$list filter="[all[shadows+tiddlers]tag<currentTiddler>!is[draft]sort[created]]" variable="message" storyview="pop">
+			<$transclude
+				$variable="ai-tools-message"
+				tiddler=<<message>>
+				field="text"
+				role={{{ [<message>get[role]] }}}
+			/>
+		</$list>
+		<%if [<ai-tools-status-title>get[text]else[complete]match[pending]] %>
+			<div class="ai-request-status">
+				<div class="ai-request-spinner"></div>
+			</div>
+		<%endif%>
+		<div class="ai-user-prompt">
+			<div class="ai-user-prompt-text">
+				<$edit-text tiddler=<<currentTiddler>> field="current-response-text" tag="textarea" class="tc-edit-texteditor"/>
+				<$button
+					class="ai-user-prompt-send"
+					actions=<<ai-tools-action-get-response>>
+					disabled={{{ [<ai-tools-status-title>get[text]else[complete]match[pending]then[yes]] [<currentTiddler>get[current-response-text]else[]match[]then[yes]] ~[[no]] }}}
+				>
+					Send
+				</$button>
+			</div>
+			<div class="ai-user-prompt-image">
+				<div class="tc-drop-down-wrapper">
+					<$let state=<<qualify "$:/state/ai-user-prompt-image-dropdown-state/">>>
+						<$button popup=<<state>> class="tc-btn-invisible tc-btn-dropdown">Choose an image {{$:/core/images/down-arrow}}</$button>
+						<$link to={{!!current-response-image}}>
+							<$text text={{!!current-response-image}}/>
+						</$link>
+						<$reveal state=<<state>> type="popup" position="belowleft" text="" default="" class="tc-popup-keep">
+							<div class="tc-drop-down" style="text-align:center;">
+								<$transclude
+									$variable="image-picker"
+									filter="[all[shadows+tiddlers]is[image]is[binary]!has[_canonical_uri]] -[type[application/pdf]] +[!has[draft.of]sort[title]]"
+									actions="""
+										<$action-setfield
+											$tiddler=<<currentTiddler>>
+											current-response-image=<<imageTitle>>
+										/>
+										<$action-deletetiddler $tiddler=<<state>>/>
+									"""
+								/>
+							</div>
+						</$reveal>
+					</$let>
+					<$image source={{!!current-response-image}}/>
+				</div>
+			</div>
+		</div>
+	</div>
+</$let>
+\end ai-tools-conversation

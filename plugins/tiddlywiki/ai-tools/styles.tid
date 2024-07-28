@@ -13,14 +13,14 @@ tags: [[$:/tags/Stylesheet]]
 	box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
 
-.ai-conversation .ai-message {
+.ai-conversation .ai-tools-message {
 	box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 	border-radius: 1em;
 	display: flex;
 	flex-direction: column;
 }
 
-.ai-conversation .ai-message .ai-message-toolbar {
+.ai-conversation .ai-tools-message .ai-tools-message-toolbar {
 	background: rgba(1,1,1,0.35);
 	color: white;
 	padding: 0.25em 1em 0.25em 1em;
@@ -30,11 +30,11 @@ tags: [[$:/tags/Stylesheet]]
 	justify-content: space-between;
 }
 
-.ai-conversation .ai-message .ai-message-toolbar .tc-tiddlylink {
+.ai-conversation .ai-tools-message .ai-tools-message-toolbar .tc-tiddlylink {
 	color: inherit;
 }
 
-.ai-conversation .ai-message .ai-message-toolbar .ai-message-toolbar-button {
+.ai-conversation .ai-tools-message .ai-tools-message-toolbar .ai-tools-message-toolbar-button {
 	background: rgba(255,255,255,0.35);
 	color: #333333;
 	cursor: pointer;
@@ -53,33 +53,33 @@ tags: [[$:/tags/Stylesheet]]
 	border-radius: 4px;
 }
 
-.ai-conversation .ai-message .ai-message-toolbar .ai-message-toolbar-button:hover {
+.ai-conversation .ai-tools-message .ai-tools-message-toolbar .ai-tools-message-toolbar-button:hover {
 	color: #ffffff;
 	background: rgba(255,255,255,0.55);
 
 }
 
-.ai-conversation .ai-message .ai-message-body {
+.ai-conversation .ai-tools-message .ai-tools-message-body {
 	padding: 0 1em 0 1em
 }
 
-.ai-conversation .ai-message.ai-message-role-system {
+.ai-conversation .ai-tools-message.ai-tools-message-role-system {
 	width: 60%;
 	background: #4c4c80;
 	color: white;
 }
 
-.ai-conversation .ai-message.ai-message-role-user {
+.ai-conversation .ai-tools-message.ai-tools-message-role-user {
 	width: 60%;
 	margin-left: auto;
 	background: #ffcde0;
 }
 
-.ai-conversation .ai-message.ai-message-role-assistant {
+.ai-conversation .ai-tools-message.ai-tools-message-role-assistant {
 	background: #dfd;
 }
 
-.ai-conversation .ai-message.ai-message-role-error {
+.ai-conversation .ai-tools-message.ai-tools-message-role-error {
 	background: #fdd;
 }
 
