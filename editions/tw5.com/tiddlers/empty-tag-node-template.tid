@@ -5,7 +5,8 @@ tags: $:/tags/ViewTemplate
 title: $:/editions/tw5.com/empty-tag-node-template
 type: 
 
-<$list filter='[<storyTiddler>!has[text]!has[tags]] :filter[tagging[]]'>
+<% if [<storyTiddler>!has[text]!has[tags]tagging[]] %>
 The following tiddlers are tagged with <<tag>>:
-</$list>
+
 <<list-links filter:"[<storyTiddler>!has[text]!has[tags]tagging[]]" class:"multi-columns">>
+<% endif %>
