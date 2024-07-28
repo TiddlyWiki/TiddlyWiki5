@@ -1493,6 +1493,8 @@ $tw.Wiki = function(options) {
 			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
 				var constituentTiddlers = pluginInfo[tiddler.fields.title].tiddlers;
 				$tw.utils.each(constituentTiddlers,function(constituentTiddler,constituentTitle) {
+					// Skip translation tiddlers of plugin that follows `$:/plugins/xxx/yyy/languages/` pattern, will handle it later
+					if(constituentTitle.split('/')[4] === 'languages') return;
 					// Save the tiddler object
 					if(constituentTitle) {
 						shadowTiddlers[constituentTitle] = {
@@ -1501,6 +1503,7 @@ $tw.Wiki = function(options) {
 						};
 					}
 				});
+				// Handle language tiddlers of plugin
 				if($tw.browser && $tw.utils.activatePluginTranslations) {
 					$tw.utils.activatePluginTranslations(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
 				}
