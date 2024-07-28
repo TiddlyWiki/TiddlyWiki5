@@ -34,5 +34,5 @@ tags: $:/tags/RawMarkupWikified
 <<meta-plain "twitter:domain" "$:/SiteDomain" "property">>
 <<meta-plain "twitter:url" "$:/SiteUrl" "property">>
 <<meta-wikified "twitter:title" "$:/SiteTitle">>
-<<meta-wikified "twitter:description" "$:/SiteDescription">>
+<<meta-wikified "twitter:description" "$:/SiteSubtitle">>
 <<meta-plain "twitter:image" "$:/SiteThumbnailUrl">>
