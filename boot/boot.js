@@ -1467,9 +1467,10 @@ $tw.Wiki = function(options) {
 		return unregisteredTitles;
 	};
 
-	// Sort the plugin titles by the `plugin-priority` field
-	this.getSortedPluginTiddlers = function() {
-		return pluginTiddlers.sort(function(a,b) {
+	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
+	this.unpackPluginTiddlers = function() {
+		// Sort the plugin titles by the `plugin-priority` field
+		pluginTiddlers.sort(function(a,b) {
 			if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
 				return a.fields["plugin-priority"] - b.fields["plugin-priority"];
 			} else if("plugin-priority" in a.fields) {
@@ -1484,13 +1485,9 @@ $tw.Wiki = function(options) {
 				return +1;
 			}
 		});
-	};
-
-	// Unpack the currently registered plugins, creating shadow tiddlers for their constituent tiddlers
-	this.unpackPluginTiddlers = function() {
 		// Now go through the plugins in ascending order and assign the shadows
 		shadowTiddlers = Object.create(null);
-		$tw.utils.each(this.getSortedPluginTiddlers(),function(tiddler) {
+		$tw.utils.each(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
 			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
 				var constituentTiddlers = pluginInfo[tiddler.fields.title].tiddlers;
