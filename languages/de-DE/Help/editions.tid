@@ -7,4 +7,4 @@ Listet alle verfügbaren TiddlyWiki Editionen auf.
 --editions
 ```
 
-Sie können ein neues Wiki mit dem `--init` Kommando erstellen. Dabei wird eine der angezeigten Editionen "geklont".
+Sie können ein neues Wiki mit dem `--init` Befehl erstellen. Dabei wird eine der angezeigten Editionen "geklont".

@@ -1,6 +1,6 @@
 caption: splitregexp
 created: 20190613154722705
-modified: 20190613154924724
+modified: 20240606113433618
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input titles split into separate items according to the specified regular expression <<.place R>>
 op-parameter: The regular expression at which to split each title
@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 
 <<.from-version "5.1.20">>
 
-Note that in some circumstances the <<.op splitregexp>> operator will include blank items in the list of results. For example, 
+<<.note """... that in some circumstances the <<.op splitregexp>> operator will include blank items in the list of results. For example, """>>
 
 ```
 [[the band thethe are the best the]splitregexp[the]]
@@ -42,3 +42,21 @@ Syntax errors in the regular expression will cause the filter to return an error
 <<.operator-example 2 "[[the cat sat on the mat]splitregexp[\]]">>
 
 <<.operator-examples "splitregexp">>
+
+----
+
+The <<.op splitregexp>> operator is intended to be used as described above. If the `regexp` contains //capture groups// those groups will be included into the output.
+
+<<.bad-example """```
+\procedure re() (color)|(colour)ed
+\procedure str() Some coloured text
+{{{ [<str>splitregexp<re>join[, ]] }}}
+```""">>
+
+Somewhat more useful may be this code. 
+
+```
+\procedure re() (colou?red)
+\procedure str() Some coloured text
+{{{ [<str>splitregexp<re>join[, ]] }}}
+```

@@ -2,12 +2,15 @@ title: $:/core/ui/ControlPanel/Settings/ToolbarButtonStyle
 tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/ToolbarButtonStyle/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Settings/ToolbarButtonStyle/
 \whitespace trim
-<$link to="$:/config/Toolbar/ButtonClass"><<lingo "Hint">></$link>
+\define lingo-base() $:/language/ControlPanel/Settings/ToolbarButtonStyle/
 
-<$select tiddler="$:/config/Toolbar/ButtonClass">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ToolbarButtonStyle]]">
-<option value={{!!text}}>{{!!caption}}</option>
-</$list>
+<$link to="$:/config/Toolbar/ButtonClass" class="tc-control-panel-item">
+	<<lingo "Hint">>
+</$link>
+
+<$select tiddler="$:/config/Toolbar/ButtonClass" class="tc-select">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/ToolbarButtonStyle]]">
+		<option value={{!!text}}>{{!!caption}}</option>
+	</$list>
 </$select>

@@ -1,6 +1,6 @@
 caption: tm-http-request
 created: 20230429161453032
-modified: 20230723215344887
+modified: 20240614204704401
 tags: Messages
 title: WidgetMessage: tm-http-request
 type: text/vnd.tiddlywiki
@@ -19,10 +19,15 @@ The following parameters are used:
 |method |HTTP method (eg "GET", "POST") |
 |body |String data to be sent with the request |
 |binary |<<.from-version "5.3.1">> Set to "yes" to cause the response body to be treated as binary data and returned in base64 format |
+|useDefaultHeaders |<<.from-version "5.3.4">> Defaults to true.  Set to "false" to prevent default headers from being added.  This can be helpful when dealing with apis that restrict header fields. |
 |query-* |Query string parameters with string values |
 |header-* |Headers with string values |
 |password-header-* |Headers with values taken from the password store |
 |password-query-* |Query string parameters with values taken from the password store |
+|basic-auth-username |<<.from-version "5.3.4">> Optional username for HTTP basic authentication |
+|basic-auth-username-from-store |<<.from-version "5.3.4">> Optional username for HTTP basic authentication, specified as the name of the entry in the password store containing the username |
+|basic-auth-password |<<.from-version "5.3.4">> Optional password for HTTP basic authentication |
+|basic-auth-password-from-store |<<.from-version "5.3.4">> Optional password for HTTP basic authentication, specified as the name of the entry in the password store containing the password |
 |var-* |Variables to be passed to the completion and progress handlers (without the "var-" prefix) |
 |bind-status |Title of tiddler to which the status of the request ("pending", "complete", "error") should be bound |
 |bind-progress |Title of tiddler to which the progress of the request (0 to 100) should be bound |
@@ -49,6 +54,7 @@ Note that the state tiddler $:/state/http-requests contains a number representin
 
 !! Examples
 
+* Several simple examples using https://httpbin.org: [[WidgetMessage: tm-http-request Examples]]
 * [[Zotero's|https://www.zotero.org/]] API for retrieving reference items: [[WidgetMessage: tm-http-request Example - Zotero]]
 * [[Random Dog's|https://random.dog/]] API for retrieving random pictures of dogs showing how to retrieve binary data: [[WidgetMessage: tm-http-request Example - Random Dog]]
 * Example of using HTTP Basic Authentication: [[WidgetMessage: tm-http-request Example - Basic Authentication]]

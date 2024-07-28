@@ -1,0 +1,53 @@
+title: GeoMarkers
+tags: $:/tags/GeospatialDemo
+
+
+
+\procedure onsuccess()
+	<$action-setfield
+		$tiddler="CurrentLocation"
+		tags="$:/tags/GeoMarker"
+		timestamp=<<timestamp>>
+		lat=<<latitude>>
+		long=<<longitude>>
+		alt=<<altitude>>
+		accuracy=<<accuracy>>
+		altitudeAccuracy=<<altitudeAccuracy>>
+		heading=<<heading>>
+		speed=<<speed>>
+	/>
+\end
+\procedure onerror()
+	<$action-setfield
+		$tiddler="CurrentLocation"
+		$field="text"
+		$value=<<error>>
+	/>
+\end
+\procedure onclick()
+	<$action-sendmessage
+		$message="tm-request-geolocation"
+		actionsSuccess=<<onsuccess>>
+		actionsError=<<onerror>>
+	/>
+\end
+
+This is a list of all the tiddlers containing ~GeoJSON markers in this wiki (identified by the tag <<tag "$:/tags/GeoMarker">>). A ~GeoJSON marker identifies a location via latitude and longitude (and optional altitude) and may also contain associated metadata in JSON format.
+
+Click this button to create a marker from the current location. Your browser will ask for permission before granting the request. On some browsers it takes a couple of seconds for the location to appear.
+
+<$button actions=<<onclick>>>
+Request location
+</$button>
+
+{{CurrentLocation}}
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]]">
+<li>
+<$link>
+<$view field="caption"><$view field="title"/></$view>
+</$link>
+</li>
+</$list>
+</ul>

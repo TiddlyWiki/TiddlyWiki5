@@ -70,7 +70,7 @@ No: No
 OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
 OfficialPluginLibrary/Hint: The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
 PageTemplate/Description: the default ~TiddlyWiki layout
-PageTemplate/Name: Default ~PageTemplate
+PageTemplate/Name: Standard Layout
 PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to ~JavaScript plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
 Shortcuts/Input/AdvancedSearch/Hint: Open the ~AdvancedSearch panel from within the sidebar search field

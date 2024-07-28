@@ -1,0 +1,54 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/geodifference
+description: geodifference operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Description
+
+geodifference operator
++
+title: Output
+
+\whitespace trim
+<$text text={{{ =[{LayerOne}] =[{LayerTwo}] +[geodifference[]] }}}/>
++
+title: LayerOne
+type: application/json
+
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[[100.0,0.0],[102.0,0.0],[102.0,2.0],[100.0,2.0],[100.0,0.0]]
+				]
+			}
+		}
+	]
+}
++
++
+title: LayerTwo
+type: application/json
+
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[[101.0,1.0],[103.0,1.0],[103.0,3.0],[101.0,3.0],[101.0,1.0]]
+				]
+			}
+		}
+	]
+}
++
+title: ExpectedResult
+
+<p>{"type":"FeatureCollection","features":[]}</p>

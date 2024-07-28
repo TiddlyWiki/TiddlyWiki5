@@ -206,6 +206,12 @@ Stylesheets/Caption: Stylesheets
 Stylesheets/Expand/Caption: Expand All
 Stylesheets/Hint: This is the rendered CSS of the current stylesheet tiddlers tagged with <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restore
+TestCases/Caption: Test Cases
+TestCases/Hint: Test cases are self contained examples for testing and learning
+TestCases/All/Caption: All Test Cases
+TestCases/All/Hint: All Test Cases
+TestCases/Failed/Caption: Failed Test Cases
+TestCases/Failed/Hint: Only Failed Test Cases
 Theme/Caption: Theme
 Theme/Prompt: Current theme:
 TiddlerFields/Caption: Tiddler Fields

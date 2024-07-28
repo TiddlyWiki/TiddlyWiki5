@@ -1,5 +1,5 @@
 title: $:/language/Help/server
-description: Fournit une interface serveur HTTP à TiddlyWiki (déprécié en faveur de la nouvelle commande listen)
+description: (déprécié en faveur de la nouvelle commande 'listen') Fournit une interface serveur HTTP à TiddlyWiki
 
 Ancienne commande pour servir un wiki sur HTTP.
 

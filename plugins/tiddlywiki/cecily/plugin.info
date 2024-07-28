@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/cecily",
 	"name": "Cecily",
 	"description": "Zoomable storyview (Cecily)",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_0_DEPRECATED"
 }

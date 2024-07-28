@@ -1,6 +1,6 @@
 caption: action-deletetiddler
 created: 20141025120850184
-modified: 20141106173455527
+modified: 20240608152211834
 tags: Widgets ActionWidgets
 title: ActionDeleteTiddlerWidget
 type: text/vnd.tiddlywiki
@@ -25,18 +25,20 @@ The ''action-deletetiddler'' widget is invisible. Any content within it is ignor
 
 ! Examples
 
-Here is an example of a button that deletes the tiddler HelloThere:
-
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-deletetiddler $tiddler="HelloThere"/>
+<$testcase>
+<$data title=Description text="Delete a specific tiddler"/>
+<$data title=Narrative text="""Use the $tiddler attribute of the $action-deletefield widget to delete the "~HelloThere" tiddler"""/>
+<$data $tiddler="HelloThere"/>
+<$data title=Output text="""<$button actions="<$action-deletetiddler $tiddler=HelloThere/>">
 Delete "~HelloThere"
-</$button>'/>
+</$button>"""/>
+</$testcase>
 
-Here is an example of a button that deletes all tiddlers tagged [[TableOfContents]]:
-
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-deletetiddler $filter="[tag[TableOfContents]]"/>
+<$testcase>
+<$data title=Description text="Delete tiddlers matching a filter"/>
+<$data title=Narrative text="""Use the $filter attribute of the $action-deletefield widget to delete all tiddlers tagged "~TableOfContents" """/>
+<$data $filter="[tag[TableOfContents]]"/>
+<$data title=Output text="""<$button actions='<$action-deletetiddler $filter="[tag[TableOfContents]]"/>'>
 Delete tiddlers tagged "~TableOfContents"
-</$button>'/>
+</$button>"""/>
+</$testcase>

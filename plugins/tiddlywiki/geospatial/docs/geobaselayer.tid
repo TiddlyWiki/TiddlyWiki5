@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geobaselayer
+caption: geobaselayer widget
+tags: $:/tags/GeospatialDocs
+
+!! `<$geobaselayer>` widget
+
+The `<$geobaselayer>` widget is used inside the `<$geomap>` widget to define the base layers to display on the map.
+
+The following attributes are supported:
+
+|!Attribute |!Description |
+|''title'' |Optional title of a tiddler that defines the base layer through the fields ''caption'', ''tiles-url'', ''max-zoom'' and ''text'' (the text field defines the attribution string for the base layer) |
+|''name'' |Optional name for the base layer |
+|''tiles-url'' |Optional templated tile server URL for the base layer |
+|''max-zoom'' |Optional maximum zoom level for the base layer |
+|''attribution'' |Optional attribution text for the base layer |
+
+The base layer will only work if all four of the required items ''name'', ''tiles-url'', ''max-zoom'' and ''attribution'' must be provided, either through the base layer tiddler specified in the title attribute, or explicitly via their own attributes.
+
+See https://leaflet-extras.github.io/leaflet-providers/preview/ for a collection of compatible base layers.

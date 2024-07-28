@@ -37,7 +37,7 @@ aws_secret_access_key = &lt;your secret access key>
 
 Even if you have already installed TiddlyWiki, you should create a new installation for working with the AWS plugin.
 
-Visit the TiddlyWiki5 repository at https://github.com/Jermolene/TiddlyWiki5. You can either download or clone a copy:
+Visit the TiddlyWiki5 repository at https://github.com/TiddlyWiki/TiddlyWiki5. You can either download or clone a copy:
 
 * Download to get up and running quickly
 * Clone to make it easier to upgrade in the future

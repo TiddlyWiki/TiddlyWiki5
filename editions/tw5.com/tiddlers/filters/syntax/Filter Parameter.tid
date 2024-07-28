@@ -1,5 +1,5 @@
 created: 20150220152540000
-modified: 20230710074423650
+modified: 20240708202234843
 tags: [[Filter Step]]
 title: Filter Parameter
 type: text/vnd.tiddlywiki
@@ -28,6 +28,8 @@ The parameter to a [[filter operator|Filter Operators]] can be:
 :: `<like this>`
 :: The parameter is the current value of the [[variable|Variables]] whose name appears between the angle brackets. Macro parameters are <<.em not>> supported up to v5.2.0
 ::<<.from-version "5.2.0">> Literal macro parameters are supported. For example: `[<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>]`.
+
+<<.note """Every [[filter Operator]] must be followed by a parameter expression. In the case of [[Operators without parameters]], that expression is empty, as with the filter Operator <<.olink links>> in `[<currentTiddler>links[]]`.""">>
 
 ---
 

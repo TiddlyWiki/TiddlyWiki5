@@ -1,5 +1,5 @@
 created: 20201123172925848
-modified: 20230803052005116
+modified: 20240627060629394
 tags: [[Customise TiddlyWiki]]
 title: Alternative page layouts
 type: text/vnd.tiddlywiki
@@ -8,8 +8,39 @@ type: text/vnd.tiddlywiki
 
 ! Creating an alternative page layout
 
-Creating an alternative layout goes beyond [[adding or removing features|Customising TiddlyWiki's user interface]] from the default interface and allows you to create an entirely new layout from scratch.
+Creating an alternative layout goes beyond [[adding or removing features|Customising TiddlyWiki's user interface]] from the default interface, which also known as [[standard layout|$:/core/ui/PageTemplate]], and allows you to create an entirely new layout from scratch.
 
 To create an alternative page layout and have the ability to switch to it, you need to create an alternative page template tiddler with the [[SystemTag: $:/tags/Layout]].
 
 This alternative page template can either be a tweaked and modified version of the [[default page template|$:/core/ui/PageTemplate]], or something entirely different. The layout switching mechanism requires that your page template tiddler has the fields `name` and `description`, which are used in the listing in the switching user interface.
+
+!! Common layout setup
+
+```tid
+\whitespace trim
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+\define containerClasses()
+tc-page-container tc-language-$(languageTitle)$ your-plugin-name-container
+\end
+\procedure redirected-navigate-actions()
+  <$action-setfield $tiddler="$:/layout" text="" $timestamp="no">
+    <$action-navigate $to=<<event-navigateTo>> $scroll="yes" />
+  </$action-setfield>
+\end
+
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+	<$messagecatcher $tm-navigate=<<redirected-navigate-actions>>>
+		{{$:/core/ui/CommandPaletteTemplate}}
+		<div class=<<containerClasses>>>
+			<!-- Your layout content here -->
+		</div>
+	</$messagecatcher>
+</$navigator>
+```
+
+It includes
+
+# Import macros that is globally available in standard layout, so wikitext that works on standard layout also works on your layout.
+# Define the top-level css class, some style may depends on them. You can add your plugin's name in css class here.
+# Handle navigation when click on links. If your layout does not contains a story view (for example, you are writing a calendar or whiteboard layout), then the combination of `redirected-navigate-actions` `$navigator` and `$messagecatcher` will redirect user back to standard layout, and open the tiddler there.
+# Add some [[PageTemplate|$:/tags/PageTemplate]] back, for example the `$:/core/ui/CommandPaletteTemplate` or `$:/core/ui/PageTemplate/sidebar`, if you want them exist on your layout.

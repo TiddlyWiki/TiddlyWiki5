@@ -1,5 +1,5 @@
 title: $:/language/Docs/Types/application/json
-description: Données au format JSON
+description: données JSON
 name: application/json
-group: Développeur
+group: Developer
 group-sort: 2
