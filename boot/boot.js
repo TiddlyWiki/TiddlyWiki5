@@ -1503,8 +1503,8 @@ $tw.Wiki = function(options) {
 					}
 				});
 				// Handle language tiddlers of plugin
-				if($tw.browser && $tw.utils.activatePluginTranslations) {
-					$tw.utils.activatePluginTranslations(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
+				if($tw.browser && $tw.language !== undefined) {
+					$tw.language.activatePluginTranslations(shadowTiddlers,tiddler.fields.title,constituentTiddlers);
 				}
 			}
 		});
