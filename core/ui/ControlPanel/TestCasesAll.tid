@@ -1,0 +1,24 @@
+title: $:/core/ui/ControlPanel/TestCases/All
+tags: $:/tags/ControlPanel/TestCases
+caption: {{$:/language/ControlPanel/TestCases/All/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/
+<<lingo TestCases/All/Hint>>
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/wiki-test-spec]type[text/vnd.tiddlywiki-multiple]] [all[tiddlers+shadows]tag[$:/tags/wiki-test-spec-failing]type[text/vnd.tiddlywiki-multiple]]">
+
+<h2>
+
+<$link>
+
+<$text text=<<currentTiddler>>/>
+
+</$link>
+
+</h2>
+
+<$transclude
+	$tiddler="$:/core/ui/TestCaseTemplate"
+/>
+
+</$list>

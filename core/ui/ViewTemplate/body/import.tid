@@ -6,6 +6,7 @@ title: $:/core/ui/ViewTemplate/body/import
 \whitespace trim
 <$action-confirm $message={{$:/language/Import/Listing/Cancel/Warning}} >
 <$action-deletetiddler $tiddler=<<currentTiddler>>/>
+<$action-deletetiddler $tiddler="$:/state/import/select-all"/>
 <$action-sendmessage $message="tm-close-tiddler" title=<<currentTiddler>>/>
 </$action-confirm>
 \end

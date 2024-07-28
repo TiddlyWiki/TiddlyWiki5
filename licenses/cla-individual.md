@@ -569,3 +569,19 @@ Kim I. McKinley, @PotOfCoffee2Go, 2024/03/16
 Anders Jarmund, @andjar, 2024/04/05
 
 @sarna, 2024/04/28
+
+Fokzo Kat, @CyberFoxar, 2024/05/20
+
+Andrei Rybak, @rybak, 2024/06/09
+
+@Leilei332, 2024/06/28
+
+@springerspandrel, 2024/06/27
+
+@andrewgoz, 2024/07/10
+
+Michael McDermott, @michaeljmcd, 2024-07-09
+
+@webplusai, 2024/07/23
+
+Val Packett, @valpackett, 2024/07/26

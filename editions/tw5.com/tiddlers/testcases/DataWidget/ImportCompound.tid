@@ -1,0 +1,33 @@
+title: TestCases/DataWidget/ImportCompound
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Importing a compound payload tiddler and adding custom fields
+display-format: plaintext
+
+title: Narrative
+
+Using the data widget to import a tiddler stored in a compound tiddler
++
+title: Output
+
+<$data $compound-tiddler="Compound" custom="Alpha"/>
++
+title: Compound
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Payload Tiddler
+tags: Alpha Beta Gamma
+
+This is a payload tiddler from a compound tiddler
++
+title: ExpectedResult
+
+<p>[
+    {
+        "title": "Payload Tiddler",
+        "tags": "Alpha Beta Gamma",
+        "text": "This is a payload tiddler from a compound tiddler",
+        "custom": "Alpha"
+    }
+]</p>

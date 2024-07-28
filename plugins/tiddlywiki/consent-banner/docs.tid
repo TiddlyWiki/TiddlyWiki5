@@ -61,4 +61,4 @@ Third party plugins that set cookies can configure themselves to defer setting c
 * The consent-banner plugin includes a shadow tiddler [[$:/config/cookie-consent-required]] with the text `yes`. The third-party plugin should inspect this tiddler at startup; if it is not set to "yes" then it can proceed to set tiddlers immediately
 * Otherwise, the third-party plugin should listen for changes to the tiddler [[$:/state/consent-banner/accepted]] and only start setting cookies when and if the value changes to "yes"
 
-The [[Google Analytics plugin|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/googleanalytics]] shows an example of how this mechanism can be implemented.
+The [[Google Analytics plugin|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/plugins/tiddlywiki/googleanalytics]] shows an example of how this mechanism can be implemented.
