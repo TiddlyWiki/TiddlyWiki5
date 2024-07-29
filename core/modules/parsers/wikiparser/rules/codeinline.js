@@ -56,7 +56,7 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree) {
-	return "`" + tree.children.text + "`";
+	return "`" + tree.children[0].text + "`";
 }
 
 })();

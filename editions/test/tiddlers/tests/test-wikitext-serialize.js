@@ -23,17 +23,18 @@ describe("WikiAST serialization tests", function() {
 	wiki.addTiddler({title: "TiddlerFour", text: "Simple `JS` and complex\n\n---\n\n```js\nvar match = reEnd.exec(this.parser.source)\n```\nend"});
 
 	it("should render tiddlers with no special markup as-is", function() {
-		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerOne').tree)).toBe(wiki.getTiddlerText('TiddlerOne'));
+		// `trimEnd` because when we handle `p` element when parsing block rules, we always add a newline. But original text that may not have a trailing newline, will still be recognized as a block.
+		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerOne').tree).trimEnd()).toBe(wiki.getTiddlerText('TiddlerOne'));
 	});
 	it("should preserve single new lines", function() {
-		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerTwo').tree)).toBe(wiki.getTiddlerText('TiddlerTwo'));
+		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerTwo').tree).trimEnd()).toBe(wiki.getTiddlerText('TiddlerTwo'));
 	});
 	it("should preserve double new lines to create paragraphs", function() {
-		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerThree').tree)).toBe(wiki.getTiddlerText('TiddlerThree'));
+		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerThree').tree).trimEnd()).toBe(wiki.getTiddlerText('TiddlerThree'));
 	});
 	
 	it("should render inline code and block code", function() {
-		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerFour').tree)).toBe(wiki.getTiddlerText('TiddlerFour'));
+		expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerFour').tree).trimEnd()).toBe(wiki.getTiddlerText('TiddlerFour'));
 	});
 });
 

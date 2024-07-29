@@ -32,7 +32,7 @@ exports.parse = function() {
 };
 
 exports.serialize = function() {
-	return "\n---\n";
+	return "---\n";
 }
 
 })();
