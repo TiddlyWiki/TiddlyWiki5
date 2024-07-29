@@ -48,7 +48,7 @@ var PutSaver = function(wiki) {
 	var self = this;
 	var uri = this.uri();
 	// Async server probe. Until probe finishes, save will fail fast
-	// See also https://github.com/Jermolene/TiddlyWiki5/issues/2276
+	// See also https://github.com/TiddlyWiki/TiddlyWiki5/issues/2276
 	$tw.utils.httpRequest({
 		url: uri,
 		type: "OPTIONS",

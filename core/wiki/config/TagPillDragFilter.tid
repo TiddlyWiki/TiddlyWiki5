@@ -1,0 +1,2 @@
+title: $:/core/config/TagPillDragFilter
+text: [all[current]tagging[]] +[!is[draft]]

@@ -32,6 +32,7 @@ mono-line: {{$:/language/Buttons/MonoLine/Hint}}
 new-image: {{$:/language/Buttons/NewImage/Hint}}
 new-journal: {{$:/language/Buttons/NewJournal/Hint}}
 new-tiddler: {{$:/language/Buttons/NewTiddler/Hint}}
+open-control-panel: {{$:/language/Buttons/OpenControlPanel/Hint}}
 picture: {{$:/language/Buttons/Picture/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}

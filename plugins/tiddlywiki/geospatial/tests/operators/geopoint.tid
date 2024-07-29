@@ -18,4 +18,4 @@ title: Output
 +
 title: ExpectedResult
 
-{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,0]}}{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,0]},"id":"Oxford"}{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.751944,-1.257778,2]}}
+{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-1.257778,51.751944,0]}}{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-1.257778,51.751944,0]},"id":"Oxford"}{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-1.257778,51.751944,2]}}

@@ -7,72 +7,72 @@ type: text/vnd.tiddlywiki
 released: 20141126153016142
 description: Export button, more ActionWidgets, Danish and Greek translations
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.4...v5.1.5]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.4...v5.1.5]]//
 
 !! Translation Improvements
 
 * Added new translators edition making it much easier to create and maintain translations of TiddlyWiki
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/615425cf0634233d27f4f1ea430589b2a618feb6]] improved Japanese translation
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8ba1a9b72ac5a4f50a4f670a24393d564c137c0c]] new Danish translation
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/14a64ef3effc1e4cf1098b35af6d6cb864d77ac2]] new Greek translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/615425cf0634233d27f4f1ea430589b2a618feb6]] improved Japanese translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8ba1a9b72ac5a4f50a4f670a24393d564c137c0c]] new Danish translation
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/14a64ef3effc1e4cf1098b35af6d6cb864d77ac2]] new Greek translation
 
 !! Usability Improvements
 
-* [[Improvements|https://github.com/Jermolene/TiddlyWiki5/commit/09a3f94d79fc6eacbfd46c86594748e996191eb2]] to tooltips for accessibility
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6fc5c70ace43219710983f6d9640f4b01d620908]] export button to tiddler toolbar, page controls and [[advanced search|$:/AdvancedSearch]] "filter" tab
+* [[Improvements|https://github.com/TiddlyWiki/TiddlyWiki5/commit/09a3f94d79fc6eacbfd46c86594748e996191eb2]] to tooltips for accessibility
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6fc5c70ace43219710983f6d9640f4b01d620908]] export button to tiddler toolbar, page controls and [[advanced search|$:/AdvancedSearch]] "filter" tab
 * Improved layout of [[$:/TagManager]]
-* [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/0a986ccd995266bf3a47182fa584d79f9dd3e153]] default tiddler toolbar buttons
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/63b00fd0f80ce0c9917e233287d4a0138e8c385f]] advanced search button to sidebar search results
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d061d0fee959fdc5ab470dc8f8379bedfa946d9]] search results by listing title matches at the top
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/da1f9f7d2233eb2aacc027bc1fc1053fa8b7bc2e]] input box for specifying new field value in edit template
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/0bb8e08edca61f415aa084327b6751c278e45108]] tag pill rendering so that the foreground colour is dynamically chosen for maximum contrast with the background colour
+* [[Simplified|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0a986ccd995266bf3a47182fa584d79f9dd3e153]] default tiddler toolbar buttons
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/63b00fd0f80ce0c9917e233287d4a0138e8c385f]] advanced search button to sidebar search results
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4d061d0fee959fdc5ab470dc8f8379bedfa946d9]] search results by listing title matches at the top
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/da1f9f7d2233eb2aacc027bc1fc1053fa8b7bc2e]] input box for specifying new field value in edit template
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0bb8e08edca61f415aa084327b6751c278e45108]] tag pill rendering so that the foreground colour is dynamically chosen for maximum contrast with the background colour
 * Enhancements to many of the [[core icons|ImageGallery Example]]
-* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/1dfa6f369bddd8dedba2e47dc4707eba28ccf4e1]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/145713e7668a41320981ed87b448542cd30d13dc]], [[here|https://github.com/Jermolene/TiddlyWiki5/commit/3035badf144abb85f5d42b2b1d395cf0f65fb03e]] and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/e69e2c1c91002c296e1789532ca74286fae8d5a4]]) unnecessary confirmations when abandoning or deleting unmodified tiddlers
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a5c7089bcfe3d2439eb082535527a7cc767891cc]] a subtle rounded corner to tiddlers and tabs
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6f0d581d720e611fade3b3f346ad0409ef5e291b]] automatic focusing of the title of newly created tiddlers
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/81481588e07ed3cb1e378a6c6f21d26dcbaa8345]] advanced search links on tiddler counts in [[$:/ControlPanel]]
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1dfa6f369bddd8dedba2e47dc4707eba28ccf4e1]] (and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/145713e7668a41320981ed87b448542cd30d13dc]], [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3035badf144abb85f5d42b2b1d395cf0f65fb03e]] and [[here|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e69e2c1c91002c296e1789532ca74286fae8d5a4]]) unnecessary confirmations when abandoning or deleting unmodified tiddlers
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a5c7089bcfe3d2439eb082535527a7cc767891cc]] a subtle rounded corner to tiddlers and tabs
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6f0d581d720e611fade3b3f346ad0409ef5e291b]] automatic focusing of the title of newly created tiddlers
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/81481588e07ed3cb1e378a6c6f21d26dcbaa8345]] advanced search links on tiddler counts in [[$:/ControlPanel]]
 
 !! Hackability Improvements
 
 * Introduced new ActionSetFieldWidget, ActionDeleteFieldWidget and ActionDeleteTiddlerWidget for manipulating tiddler fields and values
-* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/c7971d3da3bbef4bbc81d4462ee93590adc248f8]] [[WidgetMessage: tm-new-tiddler]] to allow a skeleton to be specified with additional fields
-* [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c20c935faabbb63f679bc4720b52162c56b6af64]] new system image for videos: [[$:/core/images/video]]
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c13cf94413c94ee56bebc60fab2d9231d1824d88]] search results to allow custom visualisations - see [[Customising search results]]
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/a3a50dbf6d96e7441e5e8ec183e40134bc4eb618]] <<.mlink timeline>> macro to be able to use different date fields
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/8260d000be1cf1caf35a557f6cd54a0fb8ccf4f0]] the <<.olink search>> operator to allow a field to be specified
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/73491f14dd63612d527632210d2c3873eb81188f]] the highlight plugin to display tabs as spaces
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/91a7c397911726e391ca368f96b50fbe1687d56a]] modal handling to permit variables to be passed to the modal (see [[WidgetMessage: tm-modal]])
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/853f5fd06402b16e271e8f119ef380de485aeff2]] simple logging to help track down drop/paste issues (see https://tiddlywiki.com/dev/#ImportLogging)
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/b520efdeb83f6ac7536a69cf5af2bab3f94cf77f]] [[WidgetMessage: tm-download-file]] and [[WidgetMessage: tm-save-wiki]] to allow variables to be specified for the rendering
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f5055c0205d24102a36b9cf3a9dd9306e148a1f0]] [[Example Table of Contents: Tabbed Internal]]
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/79e428757b5562bd4a925b9b0428ea4ba70ad05a]] RevealWidget so that it can be used without specifying a state tiddler
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/90caf5bf42523cfb6cd603b979aadb719ddcede4]] "hooks" mechanism so that plugins can modify the default tiddler list
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b882a0dff12dc2660426de53e64d8c018f3a9d84]] support for nested popups
+* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c7971d3da3bbef4bbc81d4462ee93590adc248f8]] [[WidgetMessage: tm-new-tiddler]] to allow a skeleton to be specified with additional fields
+* [[Enhanced|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c20c935faabbb63f679bc4720b52162c56b6af64]] new system image for videos: [[$:/core/images/video]]
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c13cf94413c94ee56bebc60fab2d9231d1824d88]] search results to allow custom visualisations - see [[Customising search results]]
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a3a50dbf6d96e7441e5e8ec183e40134bc4eb618]] <<.mlink timeline>> macro to be able to use different date fields
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8260d000be1cf1caf35a557f6cd54a0fb8ccf4f0]] the <<.olink search>> operator to allow a field to be specified
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/73491f14dd63612d527632210d2c3873eb81188f]] the highlight plugin to display tabs as spaces
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/91a7c397911726e391ca368f96b50fbe1687d56a]] modal handling to permit variables to be passed to the modal (see [[WidgetMessage: tm-modal]])
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/853f5fd06402b16e271e8f119ef380de485aeff2]] simple logging to help track down drop/paste issues (see https://tiddlywiki.com/dev/#ImportLogging)
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b520efdeb83f6ac7536a69cf5af2bab3f94cf77f]] [[WidgetMessage: tm-download-file]] and [[WidgetMessage: tm-save-wiki]] to allow variables to be specified for the rendering
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f5055c0205d24102a36b9cf3a9dd9306e148a1f0]] [[Example Table of Contents: Tabbed Internal]]
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/79e428757b5562bd4a925b9b0428ea4ba70ad05a]] RevealWidget so that it can be used without specifying a state tiddler
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/90caf5bf42523cfb6cd603b979aadb719ddcede4]] "hooks" mechanism so that plugins can modify the default tiddler list
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b882a0dff12dc2660426de53e64d8c018f3a9d84]] support for nested popups
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/90096cbd367a7a685fb5dc5b2cbaa69a00d8199f]] problem with CodeMirror editor and missing tiddlers
-* [[Exclude|https://github.com/Jermolene/TiddlyWiki5/commit/5093cdc86047209f23b9ead5ee0f216d0414e4f2]] drafts from [[Table-of-Contents Macros]]
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5599f9f9338a5f96080143b2192214a78b961509]] problem with encoding of HTML tiddlers
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/835e3a945244dd8a07f4c7fd570eb890e9fdcc2c]] problem with sticky titles being covered by vertical tabs
-* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/d1bbe7253c135ceed138fd02c82b0f861d5dda6b]] flicker when automatically resizing textareas
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/4bf6fe7fe9416f4e304036302ab5727148ae5222]] JSON deserialiser so that all fields can be imported
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/90096cbd367a7a685fb5dc5b2cbaa69a00d8199f]] problem with CodeMirror editor and missing tiddlers
+* [[Exclude|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5093cdc86047209f23b9ead5ee0f216d0414e4f2]] drafts from [[Table-of-Contents Macros]]
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5599f9f9338a5f96080143b2192214a78b961509]] problem with encoding of HTML tiddlers
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/835e3a945244dd8a07f4c7fd570eb890e9fdcc2c]] problem with sticky titles being covered by vertical tabs
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d1bbe7253c135ceed138fd02c82b0f861d5dda6b]] flicker when automatically resizing textareas
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4bf6fe7fe9416f4e304036302ab5727148ae5222]] JSON deserialiser so that all fields can be imported
 
 !! Node.js Changes
 
 //These changes are only relevant to people using TiddlyWiki under Node.js//
 
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/8e685e5150e636aed6655c6caa09c7b6cffdcea2]] ''includeWikis'' mechanism of TiddlyWikiFolders to allow read-only wikis to be included
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/cea963420ca2800b86989e29d42d06ccb7ea2a00]] error handling under Node.js
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/17a594a97ad5655142c834dfd5fa68855a61d201]] UnpackPluginCommand
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/04d26e6fae20671a6d455e113f7b0afedabc7122]] EditionsCommand to list the available editions
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/8e685e5150e636aed6655c6caa09c7b6cffdcea2]] ''includeWikis'' mechanism of TiddlyWikiFolders to allow read-only wikis to be included
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/cea963420ca2800b86989e29d42d06ccb7ea2a00]] error handling under Node.js
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/17a594a97ad5655142c834dfd5fa68855a61d201]] UnpackPluginCommand
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/04d26e6fae20671a6d455e113f7b0afedabc7122]] EditionsCommand to list the available editions
 
 !! Changes affecting plugin authors
 
-* [[Disabled|https://github.com/Jermolene/TiddlyWiki5/commit/f7a2849d27bb082e4bbf6b056a800a1edb30f510]] wiki change events for shadow tiddlers
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/d93c19daaa126f0938048009a83796cb52690541]] structure of widget messages that have a hashmap parameter
+* [[Disabled|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f7a2849d27bb082e4bbf6b056a800a1edb30f510]] wiki change events for shadow tiddlers
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d93c19daaa126f0938048009a83796cb52690541]] structure of widget messages that have a hashmap parameter
 * The support for nested popups has necessitated a change in the way that popups are styled that affects popups that are triggered with the focusPopup attribute of the EditTextWidget: it is now necessary for the widget to be given the class `tc-popup-handle`.
 
 !! Contributors

@@ -16,7 +16,7 @@
   "main": "./boot/boot.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jermolene/TiddlyWiki5.git"
+    "url": "https://github.com/TiddlyWiki/TiddlyWiki5.git"
   },
   "keywords": [
     "tiddlywiki",

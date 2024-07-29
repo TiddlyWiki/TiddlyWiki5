@@ -27,14 +27,14 @@ exports["olc-decode"] = function(source,operator,options) {
 		obj;
 	if(suffixes.indexOf("bounds") !== -1) {
 		obj = turf.polygon([[
-			[olc.latitudeLo, olc.longitudeLo],
-			[olc.latitudeHi, olc.longitudeLo],
-			[olc.latitudeHi, olc.longitudeHi],
-			[olc.latitudeLo, olc.longitudeHi],
-			[olc.latitudeLo, olc.longitudeLo]
+			[olc.longitudeLo, olc.latitudeLo],
+			[olc.longitudeLo, olc.latitudeHi],
+			[olc.longitudeHi, olc.latitudeHi],
+			[olc.longitudeHi, olc.latitudeLo],
+			[olc.longitudeLo, olc.latitudeLo]
 		]]);
 	} else {
-		obj = turf.point([olc.latitudeCenter,olc.longitudeCenter]);
+		obj = turf.point([olc.longitudeCenter,olc.latitudeCenter]);
 	}
 	return [JSON.stringify(obj)];
 };

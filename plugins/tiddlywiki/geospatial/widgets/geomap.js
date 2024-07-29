@@ -48,8 +48,7 @@ GeomapWidget.prototype.render = function(parent,nextSibling) {
 	this.contentRoot.render(this.contentContainer,null);
 	// Render a wrapper for the map
 	this.domNode = this.document.createElement("div");
-	this.domNode.style.width = "100%";
-	this.domNode.style.height = "600px";
+	this.setMapSize();
 	// Insert it into the DOM
 	parent.insertBefore(this.domNode,nextSibling);
 	this.domNodes.push(this.domNode);
@@ -63,7 +62,13 @@ GeomapWidget.prototype.render = function(parent,nextSibling) {
 GeomapWidget.prototype.renderMap = function() {
 	var self = this;
 	// Create the map
-	this.map = $tw.Leaflet.map(this.domNode);
+	var options = {
+		
+	};
+	if(this.geomapMaxZoom) {
+		options.maxZoom = $tw.utils.parseInt(this.geomapMaxZoom);
+	}
+	this.map = $tw.Leaflet.map(this.domNode,options);
 	// No layers rendered
 	this.renderedLayers = [];
 	this.baseLayers = [];
@@ -73,16 +78,17 @@ GeomapWidget.prototype.renderMap = function() {
 	$tw.Leaflet.control.scale().addTo(this.map);
 	// Listen for pan and zoom events and update the state tiddler
 	this.map.on("moveend zoomend",function(event) {
-		if(self.geomapStateTitle) {
-			var c = self.map.getCenter(),
+		if(self.hasAttribute("state")) {
+			var stateTitle = self.getAttribute("state"),
+				c = self.map.getCenter(),
 				lat = "" + c.lat,
 				long = "" + c.lng,
 				zoom = "" + self.map.getZoom(),
-				tiddler = self.wiki.getTiddler(self.geomapStateTitle);
+				tiddler = self.wiki.getTiddler(stateTitle);
 			// Only write the tiddler if the values have changed
 			if(!tiddler || tiddler.fields.lat !== lat || tiddler.fields.long !== long || tiddler.fields.zoom !== zoom) {
 				self.wiki.addTiddler(new $tw.Tiddler({
-					title: self.geomapStateTitle,
+					title: stateTitle,
 					lat: lat,
 					long: long,
 					zoom: zoom
@@ -161,8 +167,10 @@ GeomapWidget.prototype.refreshMap = function() {
 	});
 	this.map.addLayer(markers);
 	// Process embedded geolayer widgets
+	var defaultPopupTemplateTitle = self.getAttribute("popupTemplate","$:/plugins/tiddlywiki/geospatial/templates/default-popup-template");
 	this.findChildrenDataWidgets(this.contentRoot.children,"geolayer",function(widget) {
 		var jsonText = widget.getAttribute("json"),
+			popupTemplateTitle = widget.getAttribute("popupTemplate",defaultPopupTemplateTitle),
 			geoJson = [];
 		if(jsonText) {
 			// Layer is defined by JSON blob
@@ -171,7 +179,8 @@ GeomapWidget.prototype.refreshMap = function() {
 			// Layer is defined by lat long fields
 			var lat = $tw.utils.parseNumber(widget.getAttribute("lat","0")),
 				long = $tw.utils.parseNumber(widget.getAttribute("long","0")),
-				alt = $tw.utils.parseNumber(widget.getAttribute("alt","0"));
+				alt = $tw.utils.parseNumber(widget.getAttribute("alt","0")),
+				properties = widget.getAttribute("properties");
 			geoJson = {
 				"type": "FeatureCollection",
 				"features": [
@@ -184,6 +193,9 @@ GeomapWidget.prototype.refreshMap = function() {
 					}
 				]
 			};
+			if(properties) {
+				geoJson.features[0].properties = $tw.utils.parseJSONSafe(properties);
+			}
 		}
 		var draggable = widget.getAttribute("draggable","no") === "yes",
 			layer = $tw.Leaflet.geoJSON(geoJson,{
@@ -205,9 +217,23 @@ GeomapWidget.prototype.refreshMap = function() {
 					return marker;
 				},
 				onEachFeature: function(feature,layer) {
-					if(feature.properties) {
-						layer.bindPopup(JSON.stringify(feature.properties,null,4));
-					}
+					layer.bindPopup(function() {
+						var widget = self.wiki.makeTranscludeWidget(popupTemplateTitle, {
+								document: self.document,
+								parentWidget: self,
+								parseAsInline: false,
+								importPageMacros: true,
+								variables: {
+									feature: JSON.stringify(feature)
+								}
+						});
+						var container = self.document.createElement("div");
+						widget.render(container,null);
+						self.wiki.addEventListener("change",function(changes) {
+							widget.refresh(changes,container,null);
+						});
+						return container;
+					});
 				}
 			}).addTo(self.map);
 		var name = widget.getAttribute("name") || ("Untitled " + untitledCount++);
@@ -226,12 +252,12 @@ GeomapWidget.prototype.refreshMap = function() {
 		overlayLayers[layer.name] = layer.layer;
 	});
 	this.layerControl = $tw.Leaflet.control.layers(baseLayers,overlayLayers,{
-		collapsed: this.geomapLayersPanel !== "open"
+		collapsed: this.getAttribute("layersPanel") !== "open"
 	}).addTo(this.map);
 	// Restore the saved map position and zoom level
 	if(!this.setMapView()) {
 		// If there was no saved position then look at the startPosition attribute
-		switch(this.geomapStartPosition) {
+		switch(this.getAttribute("startPosition")) {
 			case "bounds":
 				var bounds = null;
 				$tw.utils.each(this.renderedLayers,function(layer) {
@@ -259,6 +285,11 @@ GeomapWidget.prototype.refreshMap = function() {
 Set the map center and zoom level from the values in the state tiddler. Returns true if the map view was successfully set
 */
 GeomapWidget.prototype.setMapView = function() {
+	// Set the maximum zoom level
+	if(this.hasAttribute("maxZoom")) {
+		this.map.setMaxZoom($tw.utils.parseInt(this.getAttribute("maxZoom")));
+	}
+	// Set the view to the content of the state tiddler
 	var stateTiddler = this.geomapStateTitle && this.wiki.getTiddler(this.geomapStateTitle);
 	if(stateTiddler) {
 		this.map.setView([$tw.utils.parseNumber(stateTiddler.fields.lat,0),$tw.utils.parseNumber(stateTiddler.fields.long,0)], $tw.utils.parseNumber(stateTiddler.fields.zoom,0));
@@ -267,13 +298,15 @@ GeomapWidget.prototype.setMapView = function() {
 	return false;
 };
 
+GeomapWidget.prototype.setMapSize = function() {
+	this.domNode.style.width = this.getAttribute("width","100%");
+	this.domNode.style.height = this.getAttribute("height","600px");
+};
+
 /*
 Compute the internal state of the widget
 */
 GeomapWidget.prototype.execute = function() {
-	this.geomapStateTitle = this.getAttribute("state");
-	this.geomapStartPosition = this.getAttribute("startPosition");
-	this.geomapLayersPanel = this.getAttribute("layersPanel");
 };
 
 /*
@@ -286,9 +319,12 @@ GeomapWidget.prototype.refresh = function(changedTiddlers) {
 	if(result) {
 		this.refreshMap();
 	} else {
+		// Reset the width and height and max zoom if they have changed
+		if(changedAttributes.width || changedAttributes.height) {
+			this.setMapSize();
+		}
 		// If we're not doing a full refresh, reset the position if the state tiddler has changed
-		if(changedAttributes.state || changedTiddlers[this.geomapStateTitle]) {
-			this.geomapStateTitle = this.getAttribute("state");
+		if(changedAttributes.state || (this.hasAttribute("state") && changedTiddlers[this.getAttribute("state")]) || changedAttributes.maxZoom) {
 			this.setMapView();
 		}
 	}

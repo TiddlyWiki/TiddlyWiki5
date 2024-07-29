@@ -22,14 +22,14 @@ title: Output
 			"id": "Oxford",
 			"geometry": {
 				"type": "Point",
-				"coordinates": [51.751944, -1.257778]
+				"coordinates": [-1.257778, 51.751944]
 			}
 		},{
 			"type": "Feature",
 			"id": "Winchester",
 			"geometry": {
 				"type": "Point",
-				"coordinates": [51.0632, -1.308]
+				"coordinates": [-1.308, 51.0632]
 			}
 		}
 	]
@@ -42,4 +42,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Winchester</p>
+<p>Oxford</p>

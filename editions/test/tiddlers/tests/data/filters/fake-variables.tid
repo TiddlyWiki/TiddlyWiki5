@@ -1,5 +1,5 @@
 title: Filters/FakeVariables
-description: Test for https://github.com/Jermolene/TiddlyWiki5/issues/6303
+description: Test for https://github.com/TiddlyWiki/TiddlyWiki5/issues/6303
 type: text/vnd.tiddlywiki-multiple
 tags: [[$:/tags/wiki-test-spec]]
 
