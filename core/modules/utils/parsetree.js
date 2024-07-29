@@ -124,9 +124,10 @@ exports.getParseTreeText = function getParseTreeText(tree) {
 };
 
 /*
-Utility to get the (similarly but not 1:1 equal) original wikitext of a parse tree node or array of nodes
+Utility to get the (similarly but not 1:1 equal) original wikitext of a parse tree node or array of nodes.
+Based on `node.rule` metadata added in `wikiparser.js`.
 */
-exports.serializeParseTree = function serializeParseTree(tree, tiddlerType) {
+exports.serializeParseTree = function serializeParseTree(tree,tiddlerType) {
 	var output = [];
 	if($tw.utils.isArray(tree)) {
 		$tw.utils.each(tree,function(node) {
@@ -141,11 +142,10 @@ exports.serializeParseTree = function serializeParseTree(tree, tiddlerType) {
 				Parser.prototype.inlineRuleClasses[tree.rule] ||
 				Parser.prototype.pragmaRuleClasses[tree.rule];
 			if(Rule && Rule.prototype.serialize) {
-				output.push(Rule.prototype.serialize(tree));
+				output.push(Rule.prototype.serialize(tree,serializeParseTree));
+			} else if(tree.rule === "parseBlock") {
+				output.push(serializeParseTree(tree.children,tiddlerType),"\n\n");
 			}
-		}
-		if(tree.children) {
-			return serializeParseTree(tree.children);
 		}
 	}
 	return output.join("");
