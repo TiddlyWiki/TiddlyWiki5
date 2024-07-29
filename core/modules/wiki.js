@@ -1064,7 +1064,7 @@ exports.parseText = function(type,text,options) {
 };
 
 exports.getParser = function(type,options) {
-	options = $tw.utils.extend({},options);
+	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
@@ -1083,7 +1083,7 @@ exports.getParser = function(type,options) {
 Parse a tiddler according to its MIME type
 */
 exports.parseTiddler = function(title,options) {
-	options = $tw.utils.extend({},options);
+	options = options || {};
 	var cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
