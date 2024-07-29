@@ -75,7 +75,9 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 		}
 	});
 	// Deal with $tiddler, $filter or $compound-tiddler attributes
-	var tiddlers = [],title;
+	var tiddlers = [],
+		compoundTiddlers,
+		title;
 	if(this.hasAttribute("$tiddler")) {
 		title = this.getAttribute("$tiddler");
 		if(title) {
@@ -103,8 +105,17 @@ DataWidget.prototype.computeDataTiddlerValues = function() {
 			tiddlers.push.apply(tiddlers,this.extractCompoundTiddler(title));
 		}
 	}
+	if(this.hasAttribute("$compound-filter")) {
+		filter = this.getAttribute("$compound-filter");
+		if(filter) {
+			compoundTiddlers = this.wiki.filterTiddlers(filter);
+			$tw.utils.each(compoundTiddlers, function(title){
+				tiddlers.push.apply(tiddlers,self.extractCompoundTiddler(title));
+			});
+		}
+	}
 	// Return the literal item if none of the special attributes were used
-	if(!this.hasAttribute("$tiddler") && !this.hasAttribute("$filter") && !this.hasAttribute("$compound-tiddler")) {
+	if(!this.hasAttribute("$tiddler") && !this.hasAttribute("$filter") && !this.hasAttribute("$compound-tiddler") && !this.hasAttribute("$compound-filter")) {
 		if(Object.keys(item).length > 0 && !!item.title) {
 			return [new $tw.Tiddler(item)];
 		} else {
