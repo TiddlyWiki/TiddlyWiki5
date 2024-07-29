@@ -218,8 +218,8 @@ WikiParser.prototype.parsePragmas = function() {
 		var subTree = nextMatch.rule.parse();
 		if(subTree.length > 0) {
 			// Set the start and end positions of the pragma rule if
-			if (subTree[0].start === undefined) subTree[0].start = start;
-			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+			if(subTree[0].start === undefined) subTree[0].start = start;
+			if(subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 			$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
 			// Quick hack; we only cope with a single parse tree node being returned, which is true at the moment
 			currentTreeBranch.push.apply(currentTreeBranch,subTree);
@@ -248,9 +248,9 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 		var start = this.pos;
 		var subTree = nextMatch.rule.parse();
 		// Set the start and end positions of the first and last blocks if they're not already set
-		if (subTree.length > 0) {
-			if (subTree[0].start === undefined) subTree[0].start = start;
-			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+		if(subTree.length > 0) {
+			if(subTree[0].start === undefined) subTree[0].start = start;
+			if(subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 		}
 		$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
 		return subTree;
@@ -353,10 +353,10 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 		var start = this.pos;
 		var subTree = nextMatch.rule.parse();
 		// Set the start and end positions of the first and last child if they're not already set
-		if (subTree.length > 0) {
+		if(subTree.length > 0) {
 			// Set the start and end positions of the first and last child if they're not already set
-			if (subTree[0].start === undefined) subTree[0].start = start;
-			if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+			if(subTree[0].start === undefined) subTree[0].start = start;
+			if(subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 		}
 		$tw.utils.each(subTree, function (node) { node.rule = nextMatch.rule.name; });
 		tree.push.apply(tree,subTree);
@@ -413,9 +413,9 @@ WikiParser.prototype.parseInlineRunTerminatedExtended = function(terminatorRegEx
 			var start = this.pos;
 			var subTree = inlineRuleMatch.rule.parse();
 			// Set the start and end positions of the first and last child if they're not already set
-			if (subTree.length > 0) {
-				if (subTree[0].start === undefined) subTree[0].start = start;
-				if (subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
+			if(subTree.length > 0) {
+				if(subTree[0].start === undefined) subTree[0].start = start;
+				if(subTree[subTree.length - 1].end === undefined) subTree[subTree.length - 1].end = this.pos;
 			}
 			$tw.utils.each(subTree, function (node) { node.rule = inlineRuleMatch.rule.name; });
 			tree.push.apply(tree,subTree);
