@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/heading-1
 caption: {{$:/language/Buttons/Heading1/Caption}}
 description: {{$:/language/Buttons/Heading1/Hint}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 button-classes: tc-text-editor-toolbar-item-start-group
 shortcuts: ((heading-1))
 
