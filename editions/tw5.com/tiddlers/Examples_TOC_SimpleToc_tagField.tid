@@ -1,0 +1,48 @@
+created: 20240729105221520
+description: Simple TOC - tagField = tagLike
+modified: 20240729110636440
+tags: $:/tags/wiki-test-spec
+title: Examples/TOC/SimpleToc/tagField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* This test-case creates a "Simple Table of Contents" using "root" as the base tag
+* It uses a field named: ''tagLike'' which defines the TOC structure
+* Click through all the tabs to get additional info
+
+<$transclude $tiddler="Narrative-extended" $mode="block"/>
+
++
+title: root
+
+This is the base tag for a ''tagLike'' TOC
+
++
+title: First
+tagLike: root
+
+1st 1st 1st 1st 1st
++
+title: Second
+tagLike: First
+
+2nd 2nd 2nd 2nd 2nd
++
+title: Third
+tagLike: root
+
+3rd 3rd 3rd 3rd 3rd
++
+title: Fourth
+tagLike: root
+
+4th 4th 4th 4th 4th 
+
++
+title: Output
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" tagField:"tagLike">>
+</div>
+
