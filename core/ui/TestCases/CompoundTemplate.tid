@@ -40,22 +40,11 @@ code-body: yes
 					</$let>
 				</span>
 			</h2>
+		<$linkcatcher actions=<<linkcatcherActions>>>
 		<div class="tc-test-case-panes">
 			<div class="tc-test-case-source">
-				<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix[$:/state/]] -[has[plugin-type]]" state=<<state>> template="$:/core/ui/testcases/CompoundTemplate/SourceTabs"/>
+				<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix[$:/state/]] -[has[plugin-type]]" default=`${ [all[tiddlers]sort[]] -[prefix[$:/state/]] -[has[plugin-type]] +[first[]] }$` state=<<state>> template="$:/core/ui/testcases/CompoundTemplate/SourceTabs"/>
 			</div>
 		</div>
-		<$wikify name=statename text=`$:/state/testcase$(qualify)$$(qualify)$`>
- 		<$wikify name=getcurrenttab text=`{{$(statename)$}}`>
-		<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
-			<pre><$view tiddler=<<getcurrenttab>> format="plainwikified" mode="block"/></pre>
-		<%else%>
-			<$linkcatcher actions=<<linkcatcherActions>>>
-				<$tiddler tiddler=<<getcurrenttab>>>
-					<$transclude $tiddler=<<getcurrenttab>> $mode="block"/>
-				</$tiddler>
-			</$linkcatcher>
-		<%endif%>
-		</$wikify>
-		</$wikify>
+		</$linkcatcher>
 </$let>

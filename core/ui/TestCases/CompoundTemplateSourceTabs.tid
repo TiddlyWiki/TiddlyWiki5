@@ -19,6 +19,13 @@ title: $:/core/ui/testcases/CompoundTemplate/SourceTabs
 		</tbody>
 	</table>
 </$list>
+<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
+	<pre><$view tiddler=<<currentTab>> format="plainwikified" mode="block"/></pre>
+<%else%>
+		<$tiddler tiddler=<<currentTab>>>
+			<$transclude $tiddler=<<currentTab>> $mode="block"/>
+		</$tiddler>
+<%endif%>
 \end
 
 <$transclude $variable="body" $mode="inline"/>
