@@ -49,7 +49,7 @@ Show
 : "right" (default), "left", "right-bottom" and "left-bottom"
 
 ; url
-: Target URL, default: https://github.com/Jermolene/TiddlyWiki5
+: Target URL, default: https://github.com/TiddlyWiki/TiddlyWiki5
 
 ; text
 : Ribbon text. default: `Fork me on ~GitHub`

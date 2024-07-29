@@ -33,7 +33,7 @@ ConfettiManager.prototype.launch = function (delay,options) {
 				self.outstandingTimers.splice(p,1);
 			} else {
 				console.log("Confetti Manager Error: Cannot find previously stored timer ID");
-				debugger;
+				// debugger;
 			}
 			confetti(options);
 		},delay);

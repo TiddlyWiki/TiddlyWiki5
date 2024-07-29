@@ -18,12 +18,13 @@ The name wrapped in double angled [[brackets|Brackets]] is a shorthand way of [[
 
 ```
 <<my-procedure>>
+<<my-procedure "The parameter">>
 <<my-procedure parameter:"The parameter">>
 ```
 
 The parameters that are specified in the procedure call are made available as variables.
 
-<<.tip """If a procedure has more than 1 parameter, it is highly encouraged to use "named parameters", as shown in the second example above. Even if it is more to type, it will pay off in the long run.""">>
+<<.tip """If a procedure has more than one parameter, it is highly encouraged to use "named parameters", as shown in the third example above and in contrast to the second example. Even if it is more to type, it will pay off in the long run.""">>
 
 !! How Procedures Work
 

@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: Verschlüsselung deaktivieren
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
 Encryption/SetPassword/Caption: Verschlüsselung
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
+EmergencyDownload/Caption: Speichern aller Tiddler als JSON File
 ExportPage/Caption: Alle exportieren
 ExportPage/Hint: Alle Tiddler exportieren
 ExportTiddler/Caption: Exportieren
@@ -103,6 +104,8 @@ ShowSideBar/Caption: Sidebar einblenden
 ShowSideBar/Hint: Sidebar einblenden
 TagManager/Caption: Tag-Manager
 TagManager/Hint: Öffne den Tag-Manager
+TestCaseImport/Caption: importiere Tiddler
+TestCaseImport/Hint: Importiere im Test enthaltene Tiddler
 Timestamp/Caption: Zeitstempel
 Timestamp/Hint: Einstellung, ob Änderungen den Zeitstempel beeinflussen
 Timestamp/On/Caption: Zeitstempel EIN

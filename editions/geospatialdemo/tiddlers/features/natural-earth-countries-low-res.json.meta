@@ -1,0 +1,6 @@
+title: $:/geospatialdemo/features/natural-earth-countries-low-res
+caption: Countries of the World from Natural Earth
+type: application/json
+tags: $:/tags/GeoFeature
+color: #88f
+popup-template: $:/geospatialdemo/features/natural-earth-countries-low-res/popupTemplate
