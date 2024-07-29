@@ -55,8 +55,8 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree) {
-	return "`" + tree.children[0].text + "`";
+exports.serialize = function(tree,serialize) {
+	return "`" + serialize(tree.children) + "`";
 }
 
 })();

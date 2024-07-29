@@ -57,7 +57,7 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree) {
+exports.serialize = function(tree,serialize) {
 	return "\n```" + tree.attributes.language.value + "\n" + tree.attributes.code.value + "\n```\n";
 }
 
