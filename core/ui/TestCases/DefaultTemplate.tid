@@ -15,7 +15,7 @@ title: $:/core/ui/testcases/DefaultTemplate
 	<div class="tc-test-case-wrapper">
 		<div class="tc-test-case-header">
 			<h2>
-				<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[div]] }}} to=<<testcaseTiddler>>>
+				<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[span]] }}} to=<<testcaseTiddler>>>
 					<%if [<testResult>!match[]] %>
 						<span class={{{ tc-test-case-result-icon [<testResult>!match[fail]then[tc-test-case-result-icon-pass]] [<testResult>match[fail]then[tc-test-case-result-icon-fail]] +[join[ ]] }}}>
 							<%if [<testResult>!match[fail]] %>

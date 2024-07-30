@@ -1,0 +1,23 @@
+created: 20240721163229297
+description: Reveal widget text references
+modified: 20240721174826529
+tags: $:/tags/wiki-test-spec
+title: TestCases/RevealWidget/TextReference
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+The state attribute of the reveal widget can use the text reference syntax to refer to a specific field. In this example if the field ``jeremy`` contains the text ``tiddlywiki``, then the reveal widget's content will be displayed.
++
+title: Output
+jeremy: tiddlywiki
+
+<$reveal type="match" state="!!jeremy" text="tiddlywiki">
+~TiddlyWiki!
+</$reveal>
++
+title: ExpectedResult
+
+<p><span class=" tc-reveal">
+TiddlyWiki!
+</span></p>

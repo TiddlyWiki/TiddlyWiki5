@@ -149,6 +149,7 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tour-panel .tc-tour-panel-inner .tc-tiddler-frame {
+	position: static;
 	width: auto;
 	padding: 1.5em 2.5em;
 }

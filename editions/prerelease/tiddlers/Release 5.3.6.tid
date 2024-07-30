@@ -1,18 +1,18 @@
-caption: 5.3.5
-created: 20240627165523990
-modified: 20240627165523990
+caption: 5.3.6
+created: 20240710120027897
+modified: 20240710120027897
 tags: ReleaseNotes
-title: Release 5.3.5
+title: Release 5.3.6
 type: text/vnd.tiddlywiki
 description: Under development
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.4...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.5...master]]//
 
 ! Major Improvements
 
 ! Translation improvements
 
-This release also includes improvements to the following translations:
+This release includes improvements to the following translations:
 
 * 
 
@@ -42,17 +42,9 @@ This release also includes improvements to the following translations:
 
 ! Node.js Improvements
 
-*
-
-! Performance Improvements
-
 * 
 
 ! Developer Improvements
-
-* 
-
-! Infrastructure Improvements
 
 * 
 
