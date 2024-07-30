@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/italic
 caption: {{$:/language/Buttons/Italic/Caption}}
 description: {{$:/language/Buttons/Italic/Hint}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 shortcuts: ((italic))
 
 <$action-sendmessage

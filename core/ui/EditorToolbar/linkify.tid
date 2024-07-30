@@ -1,5 +1,5 @@
 caption: {{$:/language/Buttons/Linkify/Caption}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 description: {{$:/language/Buttons/Linkify/Hint}}
 icon: $:/core/images/linkify
 list-before: $:/core/ui/EditorToolbar/mono-block
