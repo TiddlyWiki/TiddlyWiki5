@@ -49,14 +49,13 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 	>
 		<% if [<_mode>match[tocpMode]] %>
 			<$action-sendmessage $message="tm-new-tiddler" $name=<<field>> $value=<<currentTiddler>>/>
-			{{$:/wikilabs/images/new-child-alone}}
+			{{$:/core/images/new-child}}
 		<% else %>
 			<$action-sendmessage $message="tm-new-tiddler" $name=<<field>> $value={{{[<currentTiddler>format:titlelist[]]}}}/>
 			{{$:/core/images/new-here-button}}
 		<% endif %>
 	</$button>
 	\end _newChild
-
 	<% if [<tv-toc-show-new-child>match[yes]] %>
 		<% if [<_mode>match[tagMode]] %>
 			<span class="tc-small-gap-left tc-toc-new-child-tag"><$macrocall $name="_newChild" field="tags"/></span>
