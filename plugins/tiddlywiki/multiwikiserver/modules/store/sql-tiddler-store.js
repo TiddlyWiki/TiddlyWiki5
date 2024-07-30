@@ -151,8 +151,9 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields) {
 	const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments","yes") === "yes";
 	const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"],
 		isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
-	if(attachmentsEnabled && isBinary && tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) {
-		const attachment_blob = this.attachmentStore.saveAttachment({
+
+	if (attachmentsEnabled && isBinary && ((tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) || (!!tiddlerFields?.attachment_blob && tiddlerFields?.attachment_blob?.length < attachmentSizeLimit))) {
+		const attachment_blob = tiddlerFields?.attachment_blob ?? this.attachmentStore.saveAttachment({
 			text: tiddlerFields.text,
 			type: tiddlerFields.type,
 			reference: tiddlerFields.title
@@ -275,6 +276,10 @@ SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddle
 Returns {tiddler_id:,bag_name:}
 */
 SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipe_name) {
+	var tiddlerInfo = this.sqlTiddlerDatabase.getRecipeTiddler(incomingTiddlerFields.title,recipe_name);
+	if (incomingTiddlerFields.type?.includes('image') && tiddlerInfo?.attachment_blob) {
+		incomingTiddlerFields['attachment_blob'] = tiddlerInfo.attachment_blob
+	} 
 	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
 	const result = this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipe_name,attachment_blob);
 	this.dispatchEvent("change");
