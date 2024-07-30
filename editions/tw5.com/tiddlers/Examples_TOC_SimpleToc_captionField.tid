@@ -1,20 +1,25 @@
 created: 20240724082221230
-modified: 20240724100646572
-tags: 
+import-compound: Examples/TOC/SimpleToc
+modified: 20240730081240127
+tags: $:/tags/wiki-test-spec
 title: Examples/TOC/SimpleToc/captionField
-type: text/vnd.tiddlywiki
+type: text/vnd.tiddlywiki-multiple
 
-<$testcase testOutput="Output">
+title: Description
+text: Simple TOC - captionField parameter
++
+title: Narrative-extended
 
-<$data title="Description" text="Simple TOC - captionField parameter"/>
+* The "Fifth" tiddler has an alternative "caption-field"
 
-<$data title="Narrative-extended" text="""* The "Fifth" tiddler has an alternative "caption-field" """/>
++
+title: Fifth
+tags: Fourth
+alt: alt-caption
+text: 5th
++
+title: Output
 
-<$data $compound-tiddler="Examples/TOC/SimpleToc"/>
-
-<$data title="Fifth" tags="Fourth" text="5th" alt="alt-caption"/>
-
-<$data title="Output" text="""<div class="tc-table-of-contents">
+<div class="tc-table-of-contents">
 <<toc tag:"root" captionField:"alt">>
 </div>
-"""/>

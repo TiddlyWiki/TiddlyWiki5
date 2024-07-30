@@ -1,0 +1,52 @@
+created: 20240730081443212
+description: Simple TOC - parentField parameter
+modified: 20240730090835300
+tags: $:/tags/wiki-test-spec
+title: Examples/TOC/SimpleToc/parentField
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+* The "Output" code defines a "Simple Table of Contents" using the ''parent'' field in child-tiddlers to connect to a parent-tiddler
+* Click through all the tabs to get additional info
+
+<$transclude $tiddler="Narrative-extended" $mode="block"/>
+
++
+title: root
+
+The parent-field in the ''child''-tiddlers are used to define the relation to the parent tiddler
++
+title: Child-1
+parent: root
+
+1st 1st 1st 1st 1st
++
+title: Child-2
+parent: root
+
+2nd 2nd 2nd 2nd 2nd
++
+title: Child-3
+parent: root
+
+3rd 3rd 3rd 3rd 3rd
++
+title: Child-2-1
+caption: 2-1 caption
+parent: Child-2
+
+This tiddler contains a caption, which will be shown in the TOC instead of the tiddler title
++
+title: Output
+
+<!-- 
+This variable set to yes allows you to show a New-Child button.
+This button will create a "real" tiddler, which will _not_ be listed here
+-->
+\define tv-toc-show-new-child() no
+
+<div class="tc-table-of-contents">
+<<toc tag:"root" parentField:"parent">>
+</div>
+
