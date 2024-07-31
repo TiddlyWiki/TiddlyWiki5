@@ -1,13 +1,16 @@
 title: $:/plugins/tiddlywiki/markdown/EditorToolbar/picture-dropdown
 
 \define replacement-text()
-![](<#$(imageTitle)$>)
+![](<#$(escaped-text)$>)
 \end
+
+\define escapetitle() [()<>\\]
 
 ''{{$:/language/Buttons/Picture/Hint}}''
 
 <$macrocall $name="image-picker" actions="""
 
+<$let escaped-text={{{ [<imageTitle>search-replace:g:regexp<escapetitle>,[\$&]] }}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="replace-selection"
@@ -17,5 +20,5 @@ title: $:/plugins/tiddlywiki/markdown/EditorToolbar/picture-dropdown
 <$action-deletetiddler
 	$tiddler=<<dropdown-state>>
 />
-
+</$let>
 """/>
