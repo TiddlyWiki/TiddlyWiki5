@@ -40,7 +40,7 @@ code-body: yes
 						>
 							{{$:/core/images/down-arrow}}
 						</$button>
-						<$let 
+						<$let
 							tv-config-toolbar-icons="yes"
 							tv-config-toolbar-text="yes"
 							tv-config-toolbar-class="tc-btn-invisible"
@@ -75,7 +75,7 @@ code-body: yes
 			<%endif%>
 			<div class="tc-test-case-panes">
 				<div class="tc-test-case-source">
-					<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<state>] -[prefix[$:/HistoryList/]] -[prefix[$:/StoryList/]] -Description -Narrative -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"/>
+					<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] Output +[putfirst[]] -[prefix<state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -Description -Narrative -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"/>
 				</div>
 				<div class="tc-test-case-divider">
 				</div>
