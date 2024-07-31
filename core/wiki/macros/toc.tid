@@ -54,6 +54,8 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 			<$action-sendmessage $message="tm-new-tiddler" $name=<<field>> $value={{{[<currentTiddler>format:titlelist[]]}}}/>
 			{{$:/core/images/new-here-button}}
 		<% endif %>
+		<!-- Allows the toc macros to navigate in test-case tiddlers -->
+		<$action-navigate $to={{{ [<tv-history-list>get[current-tiddler]] }}}/>
 	</$button>
 	\end _newChild
 	<% if [<tv-toc-show-new-child>match[yes]] %>
