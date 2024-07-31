@@ -1,0 +1,7 @@
+title: $:/language/Snippets/ProcedureDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Procedure definition
+
+\procedure procName(param1:"default value",param2)
+Your text comes here.
+\end
