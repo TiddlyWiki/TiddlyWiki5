@@ -1,0 +1,60 @@
+caption: list-links-horizontal-draggable
+created: 20240712134619467
+<<<<<<< HEAD
+modified: 20240716135427247
+=======
+modified: 20240716221918196
+>>>>>>> add-list-links-horizontal-draggable-procedure
+tags: Macros [[Core Macros]]
+title: list-links-horizontal-draggable Procedure
+type: text/vnd.tiddlywiki
+
+<<<<<<< HEAD
+=======
+<<.from-version "5.3.7">>
+
+>>>>>>> add-list-links-horizontal-draggable-procedure
+The <<.def list-links-horizontal-draggable>> [[procedure|Procedures]] renders the ListField of a tiddler as a list that can be reordered via [[drag and drop|Drag and Drop]].
+
+!! Parameters
+
+; tiddler
+: The title of the tiddler containing the list
+
+; field
+: The name of the field containing the list (defaults to `list`)
+
+; emptyMessage
+: Optional wikitext to display if there is no output (tiddler is not existed, field is not existed or empty)
+
+; type
+: The element tag to use for the list wrapper (defaults to `span`)
+
+; subtype
+: The element tag to use for the list items (defaults to `span`)
+
+; class
+: Optional space separated classes to add to the wrapper element
+
+; itemTemplate
+: Optional title of a tiddler to use as the template for rendering list items
+
+; dragHandle
+<<<<<<< HEAD
+: Defaults to: ''yes''. If shows a drag handle: `⠿` in front of every item. If set to ''no'' the handle is removed
+=======
+: Defaults to: `⠿`. It shows ⠿ in front of every item. If set to an ''empty string'' the handle is removed
+>>>>>>> add-list-links-horizontal-draggable-procedure
+
+; enable
+: Defaults to: ''yes''. If set to ''no'' the draggability function and the handles are removed
+
+If the `itemTemplate` parameter is not provided then the list items are rendered as simple text. Within the `itemTemplate`, the [[currentTiddler Variable]] refers to the current list item.
+
+<<.warning """Be ware, that the macro internally respects the global variable `tv-enable-drag-and-drop`.<br>See: [[Hidden Setting: Disable Drag and Drop]]""">>
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> add-list-links-horizontal-draggable-procedure
+<<.macro-examples "list-links-horizontal-draggable">>

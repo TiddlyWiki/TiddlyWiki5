@@ -528,9 +528,68 @@ a.tc-tiddlylink-external:hover {
 	border: 2px dashed <<colour dropzone-background>>;
 }
 
+.tc-droppable.tc-dragover .tc-horizontal-draggable-placeholder {
+	outline: 2px dashed <<colour dropzone-background>>;
+}
+
+.tc-horizontal-draggable-placeholder {
+	display: inline;
+}
+
+.tc-horizontal-draggable-placeholder-last {
+	display: inline-block;
+	min-width: 1em;
+	min-height: 1em;
+}
+
+/* content: braille pattern 283F */
+<<<<<<< HEAD
+.tc-draggable-handle::before {
+	content: '⠿';
+	cursor: ew-resize;
+=======
+.tc-draggable-handle {
+	cursor: ew-resize;
+	display: inline-block;
+>>>>>>> add-list-links-horizontal-draggable-procedure
+}
+
 .tc-draggable {
 	cursor: move;
 }
+
+.tc-horizontal-draggable .tc-draggable {
+	cursor: ew-resize;
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-last,
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder {
+		display: inline-block;
+		min-width: 4em;
+		min-height: 1em;
+	}
+
+	.tc-horizontal-draggable-placeholder-last {
+		outline: 1px dashed <<colour foreground>>;
+		display: block;
+		min-height: 2em;
+	}
+
+	.tc-droppable.tc-dragover > .tc-horizontal-draggable-placeholder-last {
+		display: block;
+		min-height: 2em;
+	}
+<<<<<<< HEAD
+	.tc-draggable-handle::before {
+		content: '⠿';
+		padding-left: 10px;
+		padding-right: 7px;
+	}
+=======
+>>>>>>> add-list-links-horizontal-draggable-procedure
+}
+
 
 .tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
 .tc-links-draggable-list .tc-droppable-placeholder {
@@ -1581,7 +1640,15 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-remove-tag-button {
-	padding-left: 4px;
+	padding-left: 6px;
+	margin-left: 4px;
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+	.tc-remove-tag-button {
+		padding-left: 14px;
+		margin-left: 6px;
+	}
 }
 
 .tc-tiddler-editor {

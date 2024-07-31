@@ -34,6 +34,19 @@ tags: $:/tags/EditTemplate
 </$wikify>
 \end
 
+<!-- Template used for list-links-horizontal-draggable call instead of tag-body -->
+\procedure tag-body-itemTemplate()
+<$macrocall $name="tag-body-inner"
+	colour=<<tf.tag-colour>>
+	colourA={{{ [<tf.palette>getindex[foreground]] }}}
+	colourB={{{ [<tf.palette>getindex[background]] }}}
+	fallbackTarget={{{ [<tf.palette>getindex[tag-background]] }}}
+	icon=<<tf.tag-icon>>
+	tagField=<<tagField>>
+/>
+\end
+
+<!-- We must keep the procedure "signature" for backwards compatibility -->
 \procedure tag-body(colour,palette,icon,tagField:"tags")
 <$macrocall $name="tag-body-inner"
 	colour=`$(colour)$`
@@ -46,15 +59,19 @@ tags: $:/tags/EditTemplate
 \end
 
 \procedure edit-tags-template(tagField:"tags")
-<div class="tc-edit-tags">
-	<$list filter="[<currentTiddler>get<tagField>enlist-input[]sort[title]]" storyview="pop">
-		<$macrocall $name="tag-body"
-			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
-			palette={{$:/palette}}
-			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
-			tagField=<<tagField>>
-		/>
-	</$list>
+	<!-- It may be possible to use the next 3 functions globally instead of duplicating that code -->
+	\function tf.palette() [{$:/palette}]
+	\function tf.tag-colour() [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]]
+	\function tf.tag-icon() [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]]
+
+<div class="tc-edit-tags tc-links-draggable-list">
+	<$macrocall $name="list-links-horizontal-draggable"
+		tiddler=<<currentTiddler>>
+		field=<<tagField>>
+		itemTemplate="tag-body-itemTemplate"
+		dragHandle=""
+		enable={{{ [{$:/config/Tags/CustomSortFilter}trim[]is[blank]then[no]else[yes]] }}}
+	/>
 	<$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
 		<$macrocall $name="tag-picker" tagField=<<tagField>>/>
 	</$let>

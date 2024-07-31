@@ -1,0 +1,66 @@
+title: $:/core/macros/list-links-horizontal-draggable
+tags: $:/tags/Macro $:/tags/Global
+
+\whitespace trim
+\procedure list-links-horizontal-draggable-caption()
+<$let tv-wikilinks="no">
+	<span class="tc-small-gap-right">
+		<$transclude field="caption">
+			<$view field="title"/>
+		</$transclude>
+	</span>
+</$let>
+\end
+
+\procedure list-links-horizontal-draggable(tiddler,field:"list",emptyMessage,type:"span",subtype:"span",class:"",itemTemplate,dragHandle:"⠿",enable:"yes",sortFilter:"[<tiddler>get<field>enlist-input[]]",storyview)
+
+<span class="tc-horizontal-draggable tc-tiny-gap-right">
+	<$let targetTiddler=<<tiddler>>
+		targetField=<<field>>
+		_enable={{{ [<tv-enable-drag-and-drop>!match[no]then<enable>else[yes]] }}}
+		_dragHandle={{{ [<_enable>match[yes]then<dragHandle>else[]] }}}
+	>
+		<$genesis $type=<<type>> class=<<class>>>
+			<$list filter=<<sortFilter>> emptyMessage=<<emptyMessage>> storyview=<<storyview>> >
+				<$droppable
+					actions=<<list-links-draggable-drop-actions>>
+					tag=<<subtype>>
+					enable=<<_enable>>
+				>
+					<span class="tc-horizontal-draggable-placeholder"/>
+					<$draggable tiddler={{!!title}} tag="span"
+						enable=<<_enable>>
+						class="tc-horizontal-draggable-item"
+					>
+						<% if [<_dragHandle>!is[blank]] %>
+							<span class="tc-draggable-handle tc-tiny-gap-right">
+								<<_dragHandle>>
+							</span>
+						<% endif %>
+						<% if [<itemTemplate>is[variable]] %>
+							<$transclude $variable=<<itemTemplate>>>
+								<<list-links-horizontal-draggable-caption>>
+							</$transclude>
+						<% else %>
+							<$transclude $tiddler=<<itemTemplate>>>
+								<<list-links-horizontal-draggable-caption>>
+							</$transclude>
+						<% endif %>
+					</$draggable>
+				</$droppable>
+			</$list>
+			<% if [<_enable>match[yes]] %>
+				<$tiddler tiddler="">
+					<$droppable
+						actions=<<list-links-draggable-drop-actions>>
+						tag="span"
+						enable=<<_enable>>
+					>
+						<span class="tc-horizontal-draggable-placeholder tc-horizontal-draggable-placeholder-last"></span>
+					</$droppable>
+				</$tiddler>
+			<% endif %>
+		</$genesis>
+	</$let>
+</span>
+\end

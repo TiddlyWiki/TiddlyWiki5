@@ -1,0 +1,8 @@
+created: 20240712124202397
+modified: 20240725165735752
+tags: 
+title: test-pure
+type: text/vnd.tiddlywiki
+
+
+<$macrocall $name="list-links-horizontal-draggable" tiddler="test-tags-list-linked-draggable" field=tags/> -- test
