@@ -157,7 +157,7 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields) {
 			type: tiddlerFields.type,
 			reference: tiddlerFields.title
 		});
-		if (tiddlerFields?.attachment_blob) {
+		if(tiddlerFields?.attachment_blob) {
 			delete tiddlerFields.attachment_blob
 		}
 		return {
@@ -281,7 +281,7 @@ SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,rec
 	var tiddlerInfo = this.sqlTiddlerDatabase.getRecipeTiddler(incomingTiddlerFields.title,recipe_name);
 	const contentTypeInfo = $tw.config.contentTypeInfo[incomingTiddlerFields.type || "text/vnd.tiddlywiki"],
 		isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
-	if (isBinary && tiddlerInfo?.attachment_blob) {
+	if(isBinary && tiddlerInfo?.attachment_blob) {
 		incomingTiddlerFields['attachment_blob'] = tiddlerInfo.attachment_blob
 	} 
 	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields);
