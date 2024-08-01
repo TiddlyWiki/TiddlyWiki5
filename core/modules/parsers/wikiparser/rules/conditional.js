@@ -117,4 +117,16 @@ exports.parseIfClause = function(filterCondition) {
 	return [listWidget];
 };
 
+exports.serialize = function(tree, serialize) {
+	var filterCondition = tree.attributes.filter.value;
+	var ifClause = serialize(tree.children[0].children);
+	var elseClause = serialize(tree.children[1].children);
+	var serialized = '<% if ' + filterCondition + ' %>' + ifClause;
+	if(elseClause) {
+		serialized += '<% else %>' + elseClause;
+	}
+	serialized += '<% endif %>';
+	return serialized;
+};
+
 })();

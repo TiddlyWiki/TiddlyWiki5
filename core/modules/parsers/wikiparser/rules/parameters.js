@@ -57,4 +57,13 @@ exports.parse = function() {
 	}];
 };
 
+exports.serialize = function(tree) {
+	// Parameters
+	var params = tree.orderedAttributes.map(function(param) {
+			return param.name + (param.value ? ":" + param.value : "");
+	}).join(",");
+	// Construct the serialized string
+	return "\\parameters(" + params + ")";
+};
+
 })();

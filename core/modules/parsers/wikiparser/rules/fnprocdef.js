@@ -93,5 +93,20 @@ exports.parse = function() {
 	return parseTreeNodes;
 };
 
+exports.serialize = function(tree, serialize) {
+	// Type of definition: "function", "procedure", or "widget"
+	var type = tree.isFunctionDefinition ? "function" : (tree.isProcedureDefinition ? "procedure" : "widget");
+	// Name of the function, procedure, or widget
+	var name = tree.attributes.name.value;
+	// Parameters with default values
+	var params = tree.params.map(function(param) {
+			return param.name + (param.default ? ":" + param.default : "");
+	}).join(",");
+	// Definition text
+	var definition = tree.attributes.value.value;
+	// Construct the serialized string
+	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end";
+};
+
 })();
 	

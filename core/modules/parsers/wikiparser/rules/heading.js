@@ -45,4 +45,16 @@ exports.parse = function() {
 		children: tree
 	}];
 };
+
+exports.serialize = function(tree, serialize) {
+	// Heading level
+	var headingLevel = tree.tag.length - 1;
+	// Classes
+	var classes = tree.attributes.class ? tree.attributes.class.value.split(" ").join(".") : "";
+	// Serialized heading text
+	var headingText = serialize(tree.children).join('');
+	// Construct the serialized string
+	return Array(headingLevel + 1).join("!") + (classes ? "." + classes : "") + " " + headingText;
+};
+
 })();

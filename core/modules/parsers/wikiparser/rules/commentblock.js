@@ -46,11 +46,24 @@ exports.findNextMatch = function(startPos) {
 	return undefined;
 };
 
+
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.endMatchRegExp.lastIndex;
-	// Don't return any elements
-	return [];
+	// Return a node representing the comment that is not rendered
+	var commentStart = this.match.index;
+	var commentEnd = this.endMatch.index + this.endMatch[0].length;
+	var commentText = this.parser.source.slice(commentStart, commentEnd);
+	return [{
+			type: "commentblock",
+			text: commentText,
+			start: commentStart,
+			end: commentEnd
+	}];
+};
+
+exports.serialize = function(tree) {
+	return tree.text;
 };
 
 })();

@@ -53,4 +53,15 @@ exports.parse = function() {
 	return [call];
 };
 
+exports.serialize = function(tree) {
+	// Macro name
+	var name = tree.name;
+	// Macro parameters
+	var params = tree.params.map(function(param) {
+			return param.value;
+	}).join(" ");
+	// Construct the serialized string
+	return "<<" + name + " " + params + ">>";
+};
+
 })();

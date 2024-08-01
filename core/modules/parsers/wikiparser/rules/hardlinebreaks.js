@@ -57,4 +57,19 @@ exports.parse = function() {
 	return tree;
 };
 
+exports.serialize = function(tree,serialize) {
+	// Serialized text with hard line breaks
+	var serialized = '"""\n';
+	// Serialize each node in the tree
+	tree.forEach(function(node) {
+		if(node.type === "element" && node.tag === "br") {
+			serialized += "\n";
+		} else {
+			serialized += serialize([node]).join('');
+		}
+	});
+	serialized += '\n"""';
+	return serialized;
+};
+
 })();

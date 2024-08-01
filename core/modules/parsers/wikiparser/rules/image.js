@@ -130,4 +130,17 @@ exports.parseImage = function(source,pos) {
 	return node;
 };
 
+exports.serialize = function(tree) {
+	// Width attribute
+	var width = tree.attributes.width ? " width=" + tree.attributes.width.value : "";
+	// Height attribute
+	var height = tree.attributes.height ? " height=" + tree.attributes.height.value : "";
+	// Tooltip attribute
+	var tooltip = tree.attributes.tooltip ? tree.attributes.tooltip.value + "|" : "";
+	// Source attribute
+	var source = tree.attributes.source.value;
+	// Construct the serialized string
+	return "[img" + width + height + " [" + tooltip + source + "]]";
+};
+
 })();

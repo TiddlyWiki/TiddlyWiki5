@@ -71,4 +71,19 @@ exports.parse = function() {
 	return [node];
 };
 
+exports.serialize = function(tree) {
+	// Filter expression
+	var serialized = "{{{" + tree.attributes.filter.value;
+	// Tooltip text
+	if(tree.attributes.tooltip) serialized += "|" + tree.attributes.tooltip.value;
+	// Template title
+	if(tree.attributes.template) serialized += "||" + tree.attributes.template.value;
+	serialized += "}}}";
+	// Inline styles
+	if(tree.attributes.style) serialized += tree.attributes.style.value;
+	// CSS classes
+	if(tree.attributes.itemClass) serialized += "." + tree.attributes.itemClass.value.split(" ").join(".");
+	return serialized;
+};
+
 })();

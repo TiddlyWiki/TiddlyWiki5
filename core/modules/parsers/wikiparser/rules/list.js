@@ -153,4 +153,28 @@ exports.parse = function() {
 	return [listStack[0]];
 };
 
+exports.serialize = function(tree, serialize) {
+	// Serialize the list recursively
+	return serializeList(tree, serialize, 0);
+};
+
+// utility to handle recursion of list
+function serializeList(node, serialize, depth) {
+	// List tag
+	var listTag = node.tag;
+	// List item tag
+	var itemTag = listTypes[listTag[0]].itemTag;
+	// Serialized list items
+	var items = node.children.map(function(child) {
+			// Classes
+			var classes = child.attributes && child.attributes.class ? child.attributes.class.value.split(" ").join(".") : "";
+			// Serialized children
+			var children = serialize(child.children).join('');
+			// Construct the serialized list item
+			return Array(depth + 1).join(listTag[0]) + (classes ? "." + classes : "") + " " + children;
+	}).join("\n");
+	// Return the serialized list
+	return items;
+}
+
 })();

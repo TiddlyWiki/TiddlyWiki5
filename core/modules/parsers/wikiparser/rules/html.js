@@ -195,4 +195,19 @@ exports.isLegalTag = function(tag) {
 	}
 };
 
+exports.serialize = function(tree, serialize) {
+	var tag = tree.tag;
+	var attributes = Object.keys(tree.attributes).map(function(key) {
+			return key + '="' + tree.attributes[key].value + '"';
+	}).join(" ");
+	// Children
+	var children = tree.children ? serialize(tree.children).join('') : '';
+	// Self-closing tag
+	if(tree.isSelfClosing) {
+			return "<" + tag + (attributes ? " " + attributes : "") + " />";
+	}
+	// Opening and closing tags
+	return "<" + tag + (attributes ? " " + attributes : "") + ">" + children + "</" + tag + ">";
+};
+
 })();

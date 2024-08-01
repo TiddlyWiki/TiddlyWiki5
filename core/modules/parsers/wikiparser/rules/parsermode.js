@@ -65,4 +65,11 @@ exports.parse = function() {
 	return [];
 };
 
+exports.serialize = function(tree) {
+	// Parser mode
+	var mode = tree.parser.parseAsInline ? "inline" : "block";
+	// Construct the serialized string
+	return "\\parsermode " + mode;
+};
+
 })();

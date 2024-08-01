@@ -89,4 +89,17 @@ exports.parse = function() {
 	return parseTreeNodes;
 };
 
+exports.serialize = function(tree) {
+	// Macro name
+	var name = tree.attributes.name.value;
+	// Parameters
+	var params = tree.params.map(function(param) {
+			return param.name + (param.default ? ":" + param.default : "");
+	}).join(",");
+	// Definition text
+	var definition = tree.attributes.value.value;
+	// Construct the serialized string
+	return "\\define " + name + "(" + params + ")\n" + definition + "\n\\end";
+};
+
 })();

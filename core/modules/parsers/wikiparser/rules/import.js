@@ -51,4 +51,11 @@ exports.parse = function() {
 	}];
 };
 
+exports.serialize = function(tree) {
+	// Filter attribute
+	var filter = tree.attributes.filter.value;
+	// Construct the serialized string
+	return "\\import " + filter;
+};
+
 })();

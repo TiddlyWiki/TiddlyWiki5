@@ -37,4 +37,9 @@ exports.parse = function() {
 	return [{type: "entity", entity: this.match[0]}];
 };
 
+// Serialize method for the entity rule
+exports.serialize = function(tree, serialize) {
+	return tree.entity;
+};
+
 })();
