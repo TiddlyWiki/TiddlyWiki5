@@ -157,13 +157,13 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, metad
 	const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"],
 		isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
 	const shouldProcessAttachment = ((tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) || (tiddlerInfo?.attachment_blob && tiddlerInfo?.attachment_blob?.length < attachmentSizeLimit))
-	if (attachmentsEnabled && isBinary && shouldProcessAttachment) {
+	if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
 		const attachment_blob = tiddlerInfo?.attachment_blob || this.attachmentStore.saveAttachment({
 			text: tiddlerFields.text,
 			type: tiddlerFields.type,
 			reference: tiddlerFields.title
 		});
-		if (tiddlerFields?._canonical_uri) {
+		if(tiddlerFields?._canonical_uri) {
 			delete tiddlerFields._canonical_uri
 		}
 		return {
