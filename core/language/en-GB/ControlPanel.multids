@@ -235,3 +235,7 @@ ViewTemplateBody/Caption: View Template Body
 ViewTemplateBody/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the body of a tiddler.
 ViewTemplateTitle/Caption: View Template Title
 ViewTemplateTitle/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the title of a tiddler.
+ViewTemplateSubtitle/Caption: View Template Subtitle
+ViewTemplateSubtitle/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the subtitle of a tiddler.
+ViewTemplateTags/Caption: View Template Tags
+ViewTemplateTags/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the tags area of a tiddler.
