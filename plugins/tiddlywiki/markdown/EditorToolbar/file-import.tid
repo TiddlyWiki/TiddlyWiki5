@@ -16,12 +16,16 @@ condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/mark
 
 \define postImportActions()
 \whitespace trim
-<$list filter="[<importTitle>links[]search-replace:g:regexp<replacement-regexp>,[\$&]] :reduce[get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<currentTiddler>addprefix<accumulator>]" variable="imageTitle">
+<$list filter="[<importTitle>links[]]">
+<$let escaped-title={{{ [<currentTiddler>search-replace:g:regexp<replacement-regexp>,[\$&]] }}}>
+<$let insertText={{{ [get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<escaped-title>] }}}>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="insert-text"
-	text=<<imageTitle>>
+	text=<<insertText>>
 />
+</$let>
+</$let>
 </$list>
 <<closePopupActions>>
 \end
