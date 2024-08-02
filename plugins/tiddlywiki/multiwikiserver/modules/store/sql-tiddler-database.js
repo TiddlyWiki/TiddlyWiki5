@@ -539,6 +539,42 @@ SqlTiddlerDatabase.prototype.getRecipeBags = function(recipe_name) {
 	return rows.map(value => value.bag_name);
 };
 
+/*
+Get the attachment value of a bag, if any exist
+*/
+SqlTiddlerDatabase.prototype.getBagTiddlerAttachmentBlob = function(title,bag_name) {
+	const row = this.engine.runStatementGet(`
+		SELECT t.attachment_blob
+		FROM bags AS b
+		INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+		WHERE t.title = $title AND b.bag_name = $bag_name AND t.is_deleted = FALSE
+	`, {
+		$title: title,
+		$bag_name: bag_name
+	});
+	return row ? row.attachment_blob : null;
+};
+
+/*
+Get the attachment value of a recipe, if any exist
+*/
+SqlTiddlerDatabase.prototype.getRecipeTiddlerAttachmentBlob = function(title,recipe_name) {
+	const row = this.engine.runStatementGet(`
+		SELECT t.attachment_blob
+		FROM bags AS b
+		INNER JOIN recipe_bags AS rb ON b.bag_id = rb.bag_id
+		INNER JOIN recipes AS r ON rb.recipe_id = r.recipe_id
+		INNER JOIN tiddlers AS t ON b.bag_id = t.bag_id
+		WHERE r.recipe_name = $recipe_name AND t.title = $title AND t.is_deleted = FALSE
+		ORDER BY rb.position DESC
+		LIMIT 1
+	`, {
+		$title: title,
+		$recipe_name: recipe_name
+	});
+	return row ? row.attachment_blob : null;
+};
+
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
 
 })();

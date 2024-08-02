@@ -37,10 +37,6 @@ function SqlTiddlerStore(options) {
 		engine: options.engine
 	});
 	this.sqlTiddlerDatabase.createTables();
-	this.fetchTiddlerFuncMap = {
-		recipe: 'getRecipeTiddler',
-		bag: 'getBagTiddler'
-	}
 }
 
 SqlTiddlerStore.prototype.addEventListener = function(type,listener) {
@@ -147,18 +143,17 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 
 /*
 */
-SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, metadata) {
+SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, exisiting_attachment_blob) {
 	let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
 	if(attachmentSizeLimit < 100 * 1024) {
 		attachmentSizeLimit = 100 * 1024;
 	}
-	var tiddlerInfo = this.sqlTiddlerDatabase[this.fetchTiddlerFuncMap[metadata.entityType]](metadata.title,metadata.name);	
 	const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments","yes") === "yes";
 	const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"],
 		isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
-	const shouldProcessAttachment = ((tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) || (tiddlerInfo?.attachment_blob && tiddlerInfo?.attachment_blob?.length < attachmentSizeLimit))
+	const shouldProcessAttachment = ((tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) || (exisiting_attachment_blob && exisiting_attachment_blob?.length < attachmentSizeLimit))
 	if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
-		const attachment_blob = tiddlerInfo?.attachment_blob || this.attachmentStore.saveAttachment({
+		const attachment_blob = exisiting_attachment_blob || this.attachmentStore.saveAttachment({
 			text: tiddlerFields.text,
 			type: tiddlerFields.type,
 			reference: tiddlerFields.title
@@ -253,12 +248,8 @@ SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,descript
 Returns {tiddler_id:}
 */
 SqlTiddlerStore.prototype.saveBagTiddler = function(incomingTiddlerFields,bag_name) {
-	const metadata = {
-		title: incomingTiddlerFields.title,
-		name: bag_name,
-		entityType: 'bag'
-	};
-	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields, metadata);
+	const exisiting_attachment_blob = this.sqlTiddlerDatabase.getBagTiddlerAttachmentBlob(incomingTiddlerFields.title,bag_name)
+	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields,exisiting_attachment_blob);
 	const result = this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bag_name,attachment_blob);
 	this.dispatchEvent("change");
 	return result;
@@ -289,12 +280,8 @@ SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddle
 Returns {tiddler_id:,bag_name:}
 */
 SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipe_name) {
-	const metadata = {
-		title: incomingTiddlerFields.title,
-		name: recipe_name,
-		entityType: 'recipe'
-	};
-	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields,metadata);
+	const exisiting_attachment_blob = this.sqlTiddlerDatabase.getRecipeTiddlerAttachmentBlob(incomingTiddlerFields.title,recipe_name)
+	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields,exisiting_attachment_blob);
 	const result = this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipe_name,attachment_blob);
 	this.dispatchEvent("change");
 	return result;
