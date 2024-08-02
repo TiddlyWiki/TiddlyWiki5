@@ -47,14 +47,11 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// Heading level
-	var headingLevel = tree.tag.length - 1;
-	// Classes
+	// Get heading level from number after `h`
+	var headingLevel = parseInt(tree.tag.substr(1),10);
 	var classes = tree.attributes.class ? tree.attributes.class.value.split(" ").join(".") : "";
-	// Serialized heading text
-	var headingText = serialize(tree.children).join('');
-	// Construct the serialized string
-	return Array(headingLevel + 1).join("!") + (classes ? "." + classes : "") + " " + headingText;
+	var headingText = serialize(tree.children);
+	return Array(headingLevel + 1).join("!") + (classes ? "." + classes : "") + " " + headingText + "\n";
 };
 
 })();

@@ -104,8 +104,8 @@ exports.serialize = function(tree, serialize) {
 	}).join(",");
 	// Definition text
 	var definition = tree.attributes.value.value;
-	// Construct the serialized string
-	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end";
+	// Construct the serialized string, concat the children because pragma rule wrap everything below it as children
+	return "\\" + type + " " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + serialize(tree.children) + "\n";
 };
 
 })();

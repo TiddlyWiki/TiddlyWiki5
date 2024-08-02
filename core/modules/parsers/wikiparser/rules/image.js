@@ -131,16 +131,14 @@ exports.parseImage = function(source,pos) {
 };
 
 exports.serialize = function(tree) {
-	// Width attribute
+	// DEBUG: console tree
+	console.warn(`tree`, JSON.stringify(tree, null, '  '));
 	var width = tree.attributes.width ? " width=" + tree.attributes.width.value : "";
-	// Height attribute
 	var height = tree.attributes.height ? " height=" + tree.attributes.height.value : "";
-	// Tooltip attribute
+	var padSpace = width || height ? " " : "";
 	var tooltip = tree.attributes.tooltip ? tree.attributes.tooltip.value + "|" : "";
-	// Source attribute
 	var source = tree.attributes.source.value;
-	// Construct the serialized string
-	return "[img" + width + height + " [" + tooltip + source + "]]";
+	return "[img" + width + height + padSpace + "[" + tooltip + source + "]]";
 };
 
 })();

@@ -7,7 +7,7 @@ Tests the wikitext inverse-rendering from Wiki AST.
 
 \*/
 
-describe('WikiAST serialization tests', function () {
+describe('WikiAST serialization unit tests', function () {
   var wiki = new $tw.Wiki();
 
   wiki.addTiddler({
@@ -64,35 +64,35 @@ describe('WikiAST serialization tests', function () {
     expect(serialized).toBe(wiki.getTiddlerText('UnderscoreEmphasisTest').trimEnd());
   });
 
-  wiki.addTiddler({ title: 'TiddlerOne', text: 'The quick brown fox' });
+  wiki.addTiddler({ title: 'SimpleTextTest', text: 'The quick brown fox' });
   it('should render tiddlers with no special markup as-is', function () {
     // `trimEnd` because when we handle `p` element when parsing block rules, we always add a newline. But original text that may not have a trailing newline, will still be recognized as a block.
-    expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerOne').tree).trimEnd()).toBe(
-      wiki.getTiddlerText('TiddlerOne')
+    expect($tw.utils.serializeParseTree(wiki.parseTiddler('SimpleTextTest').tree).trimEnd()).toBe(
+      wiki.getTiddlerText('SimpleTextTest')
     );
   });
 
-  wiki.addTiddler({ title: 'TiddlerTwo', text: 'The rain in Spain\nfalls mainly on the plain' });
+  wiki.addTiddler({ title: 'SoftLineBreakTest', text: 'The rain in Spain\nfalls mainly on the plain' });
   it('should preserve single new lines', function () {
-    expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerTwo').tree).trimEnd()).toBe(
-      wiki.getTiddlerText('TiddlerTwo')
+    expect($tw.utils.serializeParseTree(wiki.parseTiddler('SoftLineBreakTest').tree).trimEnd()).toBe(
+      wiki.getTiddlerText('SoftLineBreakTest')
     );
   });
 
-  wiki.addTiddler({ title: 'TiddlerThree', text: 'The speed of sound\n\nThe light of speed' });
+  wiki.addTiddler({ title: 'BlockRule', text: 'The speed of sound\n\nThe light of speed' });
   it('should preserve double new lines to create paragraphs', function () {
-    expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerThree').tree).trimEnd()).toBe(
-      wiki.getTiddlerText('TiddlerThree')
+    expect($tw.utils.serializeParseTree(wiki.parseTiddler('BlockRule').tree).trimEnd()).toBe(
+      wiki.getTiddlerText('BlockRule')
     );
   });
 
   wiki.addTiddler({
-    title: 'TiddlerFour',
+    title: 'CodeBlockTest',
     text: 'Simple `JS` and complex\n\n---\n\n```js\nvar match = reEnd.exec(this.parser.source)\n```\nend',
   });
   it('should render inline code and block code', function () {
-    expect($tw.utils.serializeParseTree(wiki.parseTiddler('TiddlerFour').tree).trimEnd()).toBe(
-      wiki.getTiddlerText('TiddlerFour')
+    expect($tw.utils.serializeParseTree(wiki.parseTiddler('CodeBlockTest').tree).trimEnd()).toBe(
+      wiki.getTiddlerText('CodeBlockTest')
     );
   });
 
@@ -177,7 +177,6 @@ describe('WikiAST serialization tests', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('FunctionDefinition').tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText('FunctionDefinition').trimEnd());
   });
-  return;
 
   wiki.addTiddler({
     title: 'HardLineBreaksTest',
@@ -214,6 +213,7 @@ describe('WikiAST serialization tests', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ImageTest').tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText('ImageTest').trimEnd());
   });
+  return;
 
   wiki.addTiddler({
     title: 'ImportTest',
