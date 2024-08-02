@@ -1,11 +1,11 @@
 created: 20240802065815656
 modified: 20240802065836064
-title: Cascade Mechanism
+title: How to Create a Custom Cascade Entry
 type: text/vnd.tiddlywiki
 
-Basic usage is already explained in the official documentation. This guide will tell you how to add new cascade to the ~TiddlyWiki core or your own plugins.
+This guide will tell you how to add new [[cascade|https://tiddlywiki.com/#Cascades]] entry to the ~TiddlyWiki core or your own plugins, so third-party plugins can use it to extend the functionality of the core or your plugin.
 
-!! Add new cascade transclusion
+!! Add new cascade entry
 
 !!! The default template as a fallback
 
@@ -33,7 +33,7 @@ And if it return nothing, next `:and[!is[blank]else` will give a fallback. But i
 
 !!! Control panel
 
-Don't forget adding related language files!
+This creates a new tab under ControlPanel - Advanced - [[Cascade|$:/core/ui/ControlPanel/Cascades]].
 
 ```tid
 title: $:/core/ui/ControlPanel/ViewTemplateTags
@@ -47,6 +47,15 @@ caption: {{$:/language/ControlPanel/ViewTemplateTags/Caption}}
 {{$:/tags/ViewTemplateTagsFilter||$:/snippets/ListTaggedCascade}}
 ```
 
+It is important to add the related language files as follows:
+
+```multid
+title: $:/language/ControlPanel/
+
+ViewTemplateTags/Caption: View Template Tags
+ViewTemplateTags/Hint: This rule cascade is used by the default view template to dynamically choose the template for displaying the tags area of a tiddler.
+```
+
 !!! Default config that shows on Control panel
 
 ```tid
@@ -56,28 +65,56 @@ tags: $:/tags/ViewTemplateTagsFilter
 default: [[$:/core/ui/ViewTemplate/tags/default]]
 ```
 
-!! Use your new cascade
+!! Use the new cascade
 
-The example below is on [ext[Github|https://github.com/tiddly-gittly/title-caption/tree/master/src/edit-tags-on-view-mode]].
+This is a simplified example based on real-world use case. It provides a button to toggle the "EditMode" based on a state tiddler. It will show how the default template we created above can be overridden by a custom template.
 
 !!! Your template
 
-Add what you want to show conditionally.
+Add what you want to show conditionally, and update `publisher/plugin-name` to your own plugin name.
+
+This template doesn't have anything directly related to the cascade mechanism we just created, but its title will be used later.
 
 ```tid
 code-body: yes
-title: $:/plugins/linonetwo/edit-tags-on-view-mode/EditMode
+title: $:/plugins/publisher/plugin-name/EditMode
 
-<!-- Omitted -->
+\whitespace trim
+<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
+  <div class="tc-tags-wrapper" style="display:flex">
+    <$transclude tiddler="$:/core/ui/EditTemplate/tags"/>
+    <$button class="tc-btn-invisible" style="margin-left:1em;">
+      {{$:/core/images/done-button}}
+      <$action-deletetiddler $tiddler={{{ [[$:/state/edit-view-mode-tags/]addsuffix<storyTiddler>] }}}/>
+    </$button>
+  </div>
+</$reveal>
 ```
 
 !!! The condition
 
+Write a filter ends with the `then[$:/plugins/publisher/plugin-name/EditMode]`.
+
 ```tid
 code-body: yes
 tags: $:/tags/ViewTemplateTagsFilter
-title: $:/plugins/linonetwo/edit-tags-on-view-mode/CascadeEditMode
+title: $:/plugins/publisher/plugin-name/CascadeEditMode
 list-before: $:/config/ViewTemplateTagsFilters/default
 
-[[$:/state/edit-view-mode-tags/]addsuffix<currentTiddler>get[text]compare:string:eq[yes]then[$:/plugins/linonetwo/edit-tags-on-view-mode/EditMode]]
+[[$:/state/edit-view-mode-tags/]addsuffix<currentTiddler>get[text]compare:string:eq[yes]then[$:/plugins/publisher/plugin-name/EditMode]]
+```
+
+!!! A button to trigger the condition
+
+```tid
+code-body: yes
+tags: $:/tags/ViewTemplate/Tags
+title: $:/plugins/publisher/plugin-name/TriggerEdit
+
+\whitespace trim
+<%if [<storyTiddler>get[tags]!is[blank]] %>
+  <$button class="tc-btn-invisible" set={{{ [[$:/state/edit-view-mode-tags/]addsuffix<storyTiddler>] }}} setTo="yes" tooltip="add tags">
+    {{$:/core/images/new-here-button}}
+  </$button>
+<%endif%>
 ```
