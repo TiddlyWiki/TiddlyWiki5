@@ -25,7 +25,7 @@ Note that the syntax for comments is simplified to an opening "<!--" sequence an
 "use strict";
 
 exports.name = "commentblock";
-exports.types = {block:true, pragma:true};
+exports.types = {block:true};
 
 exports.init = function(parser) {
 	this.parser = parser;
@@ -62,8 +62,8 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree) {
-	return tree.text;
+exports.serialize = function(tree, serialize) {
+	return tree.text + "\n\n";
 };
 
 })();
