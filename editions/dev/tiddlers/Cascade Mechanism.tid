@@ -1,0 +1,83 @@
+created: 20240802065815656
+modified: 20240802065836064
+title: Cascade Mechanism
+type: text/vnd.tiddlywiki
+
+Basic usage is already explained in the official documentation. This guide will tell you how to add new cascade to the ~TiddlyWiki core or your own plugins.
+
+!! Add new cascade transclusion
+
+!!! The default template as a fallback
+
+(omitted here, see the latest version on [ext[Github|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/ui/ViewTemplate/tags/default.tid]])
+
+```tid
+title: $:/core/ui/ViewTemplate/tags/default
+
+<!-- Omitted -->
+```
+
+!!! Transclusion of current active template
+
+```tid
+title: $:/core/ui/ViewTemplate/tags
+tags: $:/tags/ViewTemplate
+
+\whitespace trim
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateTagsFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/tags/default]] }}} />
+```
+
+`:cascade` here will collect all tiddlers it find, use their filter text. And use them one by one, most of collected filter here will not return any text, so they will be skipped. And finally one filter return a tiddler title as result (or the last one, the fallback default filter may always return a default tiddler). This first returned result that is find, will be the result of this `:cascade` filter clause.
+
+And if it return nothing, next `:and[!is[blank]else` will give a fallback. But it is redundent here, because usually you will already have a fallback tagged with `$:/tags/ViewTemplateTagsFilter`, so the `:cascade` will always find something. But adding fallback everywhere as defensive programming is a good practice.
+
+!!! Control panel
+
+Don't forget adding related language files!
+
+```tid
+title: $:/core/ui/ControlPanel/ViewTemplateTags
+tags: $:/tags/ControlPanel/Cascades
+caption: {{$:/language/ControlPanel/ViewTemplateTags/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/ViewTemplateTags/
+
+<<lingo Hint>>
+
+{{$:/tags/ViewTemplateTagsFilter||$:/snippets/ListTaggedCascade}}
+```
+
+!!! Default config that shows on Control panel
+
+```tid
+title: $:/config/ViewTemplateTagsFilters/
+tags: $:/tags/ViewTemplateTagsFilter
+
+default: [[$:/core/ui/ViewTemplate/tags/default]]
+```
+
+!! Use your new cascade
+
+The example below is on [ext[Github|https://github.com/tiddly-gittly/title-caption/tree/master/src/edit-tags-on-view-mode]].
+
+!!! Your template
+
+Add what you want to show conditionally.
+
+```tid
+code-body: yes
+title: $:/plugins/linonetwo/edit-tags-on-view-mode/EditMode
+
+<!-- Omitted -->
+```
+
+!!! The condition
+
+```tid
+code-body: yes
+tags: $:/tags/ViewTemplateTagsFilter
+title: $:/plugins/linonetwo/edit-tags-on-view-mode/CascadeEditMode
+list-before: $:/config/ViewTemplateTagsFilters/default
+
+[[$:/state/edit-view-mode-tags/]addsuffix<currentTiddler>get[text]compare:string:eq[yes]then[$:/plugins/linonetwo/edit-tags-on-view-mode/EditMode]]
+```
