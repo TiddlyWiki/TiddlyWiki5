@@ -77,9 +77,10 @@ exports.serialize = function(tree) {
 	if(tree.attributes.tooltip) serialized += "|" + tree.attributes.tooltip.value;
 	// Template title
 	if(tree.attributes.template) serialized += "||" + tree.attributes.template.value;
-	serialized += "}}}";
+	serialized += "}}";
 	// Inline styles
 	if(tree.attributes.style) serialized += tree.attributes.style.value;
+	serialized += "}"
 	// CSS classes
 	if(tree.attributes.itemClass) serialized += "." + tree.attributes.itemClass.value.split(" ").join(".");
 	return serialized;

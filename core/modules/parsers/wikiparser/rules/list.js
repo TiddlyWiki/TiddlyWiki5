@@ -169,7 +169,7 @@ function serializeList(node, serialize, depth) {
 			// Classes
 			var classes = child.attributes && child.attributes.class ? child.attributes.class.value.split(" ").join(".") : "";
 			// Serialized children
-			var children = serialize(child.children).join('');
+			var children = serialize(child.children);
 			// Construct the serialized list item
 			return Array(depth + 1).join(listTag[0]) + (classes ? "." + classes : "") + " " + children;
 	}).join("\n");

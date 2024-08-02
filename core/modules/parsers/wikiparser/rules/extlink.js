@@ -31,11 +31,11 @@ exports.init = function(parser) {
 
 exports.parse = function() {
 	// Move past the match
-    var start = this.parser.pos;
+	var start = this.parser.pos;
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Create the link unless it is suppressed
 	if(this.match[0].substr(0,1) === "~") {
-		return [{type: "text", text: this.match[0].substr(1)}];
+		return [{type: "text", text: this.match[0].substr(1), start: start, end: this.parser.pos}];
 	} else {
 		return [{
 			type: "element",
@@ -53,10 +53,9 @@ exports.parse = function() {
 	}
 };
 
-// Serialize method for the extlink rule
 exports.serialize = function(tree, serialize) {
 	if(tree.type === "text") {
-			return tree.text;
+			return "~" + tree.text;
 	} else if(tree.type === "element" && tree.tag === "a") {
 			return tree.attributes.href.value;
 	}

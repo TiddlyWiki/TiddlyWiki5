@@ -134,7 +134,7 @@ exports.serializeParseTree = function serializeParseTree(tree,tiddlerType) {
 			output.push(serializeParseTree(node,tiddlerType));
 		});
 	} else {
-		if(tree.type === "text") {
+		if(tree.type === "text" && !tree.rule) {
 			output.push(tree.text);
 		} else {
 			var Parser = $tw.wiki.getParser(tiddlerType);
@@ -145,6 +145,9 @@ exports.serializeParseTree = function serializeParseTree(tree,tiddlerType) {
 				output.push(Rule.prototype.serialize(tree,serializeParseTree));
 			} else if(tree.rule === "parseBlock") {
 				output.push(serializeParseTree(tree.children,tiddlerType),"\n\n");
+			} else {
+				// when no rule is found, just serialize the children
+				output.push(serializeParseTree(tree.children,tiddlerType));
 			}
 		}
 	}

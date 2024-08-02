@@ -199,9 +199,9 @@ exports.serialize = function(tree, serialize) {
 	var tag = tree.tag;
 	var attributes = Object.keys(tree.attributes).map(function(key) {
 			return key + '="' + tree.attributes[key].value + '"';
-	}).join(" ");
+	});
 	// Children
-	var children = tree.children ? serialize(tree.children).join('') : '';
+	var children = tree.children ? serialize(tree.children) : '';
 	// Self-closing tag
 	if(tree.isSelfClosing) {
 			return "<" + tag + (attributes ? " " + attributes : "") + " />";
