@@ -65,4 +65,17 @@ exports.parse = function() {
 	}];
 };
 
+exports.serialize = function(tree, serialize) {
+	// tree: { type: 'link', attributes: { to: { type: 'string', value: 'AWikiLink' } }, children: [{ type: 'text', text: 'AWikiLink' }] }
+	// serialize: function that accepts array of nodes or a node and returns a string
+	// Check if the link is suppressed
+	var isSuppressed = tree.children[0].text.substr(0,1) === $tw.config.textPrimitives.unWikiLink;
+	// Initialize the serialized string
+	var serialized = isSuppressed ? $tw.config.textPrimitives.unWikiLink : "";
+	// Append the link text
+	serialized += tree.attributes.to.value;
+	// Return the complete serialized string
+	return serialized;
+};
+
 })();

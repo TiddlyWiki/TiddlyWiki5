@@ -10,6 +10,60 @@ Tests the wikitext inverse-rendering from Wiki AST.
 describe('WikiAST serialization tests', function () {
   var wiki = new $tw.Wiki();
 
+  wiki.addTiddler({
+    title: 'BoldEmphasisTest',
+    text: "This is ''bold'' text"
+  });
+  it('should serialize bold emphasis correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('BoldEmphasisTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('BoldEmphasisTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'ItalicEmphasisTest',
+    text: "This is //italic// text"
+  });
+  it('should serialize italic emphasis correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ItalicEmphasisTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('ItalicEmphasisTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'StrikethroughEmphasisTest',
+    text: "This is ~~strikethrough~~ text"
+  });
+  it('should serialize strikethrough emphasis correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('StrikethroughEmphasisTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('StrikethroughEmphasisTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'SubscriptEmphasisTest',
+    text: "This is ,,subscript,, text"
+  });
+  it('should serialize subscript emphasis correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('SubscriptEmphasisTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('SubscriptEmphasisTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'SuperscriptEmphasisTest',
+    text: "This is ^^superscript^^ text"
+  });
+  it('should serialize superscript emphasis correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('SuperscriptEmphasisTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('SuperscriptEmphasisTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'UnderscoreEmphasisTest',
+    text: "This is __underscore__ text"
+  });
+  it('should serialize underscore emphasis correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('UnderscoreEmphasisTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('UnderscoreEmphasisTest').trimEnd());
+  });
+
   wiki.addTiddler({ title: 'TiddlerOne', text: 'The quick brown fox' });
   it('should render tiddlers with no special markup as-is', function () {
     // `trimEnd` because when we handle `p` element when parsing block rules, we always add a newline. But original text that may not have a trailing newline, will still be recognized as a block.
@@ -260,5 +314,104 @@ describe('WikiAST serialization tests', function () {
   it('should serialize pretty links correctly', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('PrettyLinkTest').tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText('PrettyLinkTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'QuoteBlockTest',
+    text: '<<<tc-quote\nQuote text\n<<<',
+  });
+  it('should serialize quote blocks correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('QuoteBlockTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('QuoteBlockTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'RulesPragmaTest',
+    text: '\\rules except ruleone ruletwo rulethree\n\\rules only ruleone ruletwo rulethree',
+  });
+  it('should serialize rules pragma correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('RulesPragmaTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('RulesPragmaTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'StyleBlockTest',
+    text: '@@.myClass\n@@background-color:red;\nThis paragraph will have the CSS class `myClass`.\n\n* The `<ul>` around this list will also have the class `myClass`\n* List item 2\n@@',
+  });
+  it('should serialize style blocks correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('StyleBlockTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('StyleBlockTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'StyleInlineTest',
+    text: '@@.myClass This is some text with a class@@\n@@background-color:red;This is some text with a background colour@@\n@@width:100px;.myClass This is some text with a class and a width@@',
+  });
+  it('should serialize style inlines correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('StyleInlineTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('StyleInlineTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'SysLinkTest',
+    text: '$:TiddlerTitle\n~$:TiddlerTitle'
+  });
+  it('should serialize system links correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('SysLinkTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('SysLinkTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'TableTest',
+    text: '|! |!Alpha |!Beta |!Gamma |!Delta |\n|!One | | | | |\n|!Two | | | | |\n|!Three | | | | |'
+  });
+  it('should serialize tables correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('TableTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('TableTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'TranscludeBlockTest',
+    text: '{{MyTiddler}}\n{{MyTiddler||TemplateTitle}}'
+  });
+  it('should serialize block-level transclusions correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('TranscludeBlockTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('TranscludeBlockTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'TranscludeInlineTest',
+    text: '{{MyTiddler}}\n{{MyTiddler||TemplateTitle}}'
+  });
+  it('should serialize inline-level transclusions correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('TranscludeInlineTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('TranscludeInlineTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'TypedBlockTest',
+    text: '$$$.js\nThis will be rendered as JavaScript\n$$$\n$$$.svg\n<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">\n  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />\n</svg>\n$$$\n$$$text/vnd.tiddlywiki>text/html\nThis will be rendered as an //HTML representation// of WikiText\n$$$'
+  });
+  it('should serialize typed blocks correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('TypedBlockTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('TypedBlockTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'WikiLinkTest',
+    text: 'AWikiLink\nAnotherLink\n~SuppressedLink'
+  });
+  it('should serialize wiki links correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('WikiLinkTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('WikiLinkTest').trimEnd());
+  });
+
+  wiki.addTiddler({
+    title: 'WikiLinkPrefixTest',
+    text: '~SuppressedLink'
+  });
+  it('should serialize suppressed wiki links correctly', function () {
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('WikiLinkPrefixTest').tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText('WikiLinkPrefixTest').trimEnd());
   });
 });

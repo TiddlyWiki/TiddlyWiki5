@@ -44,7 +44,7 @@ Parse the most recent match
 exports.parse = function() {
 	// Retrieve the most recent match so that recursive calls don't overwrite it
 	var tag = this.nextTag;
-	if (!tag.isSelfClosing) {
+	if(!tag.isSelfClosing) {
 		tag.openTagStart = tag.start;
 		tag.openTagEnd = tag.end;
 	}
@@ -66,22 +66,22 @@ exports.parse = function() {
 		}
 		tag.end = this.parser.pos;
 		tag.closeTagEnd = tag.end;
-		if (tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
+		if(tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
 			tag.closeTagStart = tag.end;
 		} else {
 			tag.closeTagStart = tag.closeTagEnd - 2;
 			var closeTagMinPos = tag.children.length > 0 ? tag.children[tag.children.length-1].end : tag.openTagEnd;
-			if (!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
-			while (tag.closeTagStart >= closeTagMinPos) {
+			if(!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
+			while(tag.closeTagStart >= closeTagMinPos) {
 				var char = this.parser.source[tag.closeTagStart];
-				if (char === '>') {
+				if(char === '>') {
 					tag.closeTagStart = -1;
 					break;
 				}
-				if (char === '<') break;
+				if(char === '<') break;
 				tag.closeTagStart -= 1;
 			}
-			if (tag.closeTagStart < closeTagMinPos) {
+			if(tag.closeTagStart < closeTagMinPos) {
 				tag.closeTagStart = tag.end;
 			}
 		}

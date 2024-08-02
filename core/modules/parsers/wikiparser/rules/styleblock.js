@@ -70,4 +70,26 @@ exports.parse = function() {
 	return tree;
 };
 
+exports.serialize = function(tree, serialize) {
+	// tree: [{ type: 'element', tag: 'p', attributes: { class: { type: 'string', value: 'myClass' }, style: { type: 'string', value: 'background-color:red;' } }, children: [{ type: 'text', text: 'This paragraph will have the CSS class `myClass`.' }] }]
+	// serialize: function that accepts array of nodes or a node and returns a string
+	// Initialize the serialized string with the opening delimiter
+	var serialized = "@@";
+	// Check for styles and append them to the serialized string
+	if(tree[0].attributes.style) {
+		serialized += tree[0].attributes.style.value;
+	}
+	// Check for classes and append them to the serialized string
+	if(tree[0].attributes.class) {
+		var classes = tree[0].attributes.class.value.split(" ");
+		for(var i = 0; i < classes.length; i++) {
+			serialized += "." + classes[i];
+		}
+	}
+	// Append the serialized children and the closing delimiter
+	serialized += "\n" + serialize(tree) + "\n@@";
+	// Return the complete serialized string
+	return serialized;
+};
+
 })();

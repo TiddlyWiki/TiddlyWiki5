@@ -37,4 +37,15 @@ exports.parse = function() {
 	return [{type: "text", text: linkText.substr(1)}];
 };
 
+exports.serialize = function(tree, serialize) {
+	// tree: { type: 'text', text: 'SuppressedLink' }
+	// serialize: function that accepts array of nodes or a node and returns a string
+	// Initialize the serialized string with the unwikilink character
+	var serialized = $tw.config.textPrimitives.unWikiLink;
+	// Append the text
+	serialized += tree.text;
+	// Return the complete serialized string
+	return serialized;
+};
+
 })();

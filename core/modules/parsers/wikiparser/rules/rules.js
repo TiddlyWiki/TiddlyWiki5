@@ -61,4 +61,17 @@ exports.parse = function() {
 	return [];
 };
 
+exports.serialize = function(tree, serialize) {
+	// tree: { type: 'pragma', name: 'rules', args: ['except', 'ruleone', 'ruletwo', 'rulethree'] }
+	// serialize: function that accepts array of nodes or a node and returns a string
+	// Start the serialized string with the pragma name
+	var serialized = "\\rules";
+	// Iterate over the arguments and append them to the serialized string
+	for(var i = 0; i < tree.args.length; i++) {
+		serialized += " " + tree.args[i];
+	}
+	// Return the complete serialized string
+	return serialized;
+};
+
 })();

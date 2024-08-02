@@ -55,4 +55,26 @@ exports.parse = function() {
 	return [node];
 };
 
+exports.serialize = function(tree, serialize) {
+	// tree: { type: 'element', tag: 'span', attributes: { class: { type: 'string', value: 'myClass' }, style: { type: 'string', value: 'background-color:red;' } }, children: [{ type: 'text', text: 'This is some text with a class and a background colour' }] }
+	// serialize: function that accepts array of nodes or a node and returns a string
+	// Initialize the serialized string with the opening delimiter
+	var serialized = "@@";
+	// Check for styles and append them to the serialized string
+	if(tree.attributes.style) {
+		serialized += tree.attributes.style.value;
+	}
+	// Check for classes and append them to the serialized string
+	if(tree.attributes.class) {
+		var classes = tree.attributes.class.value.split(" ");
+		for(var i = 0; i < classes.length; i++) {
+			serialized += "." + classes[i] + " ";
+		}
+	}
+	// Append the serialized children and the closing delimiter
+	serialized += serialize(tree.children) + "@@";
+	// Return the complete serialized string
+	return serialized;
+};
+
 })();

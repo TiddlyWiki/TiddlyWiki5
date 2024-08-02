@@ -47,4 +47,17 @@ exports.parse = function() {
 	}];
 };
 
+exports.serialize = function(tree, serialize) {
+	// tree: { type: 'element', tag: 'em', children: [{ type: 'text', text: 'italic' }] }
+	// serialize: function that accepts array of nodes or a node and returns a string
+	// Initialize the serialized string with the opening delimiter
+	var serialized = "//";
+	// Serialize the children of the italic element
+	serialized += serialize(tree.children);
+	// Close the serialized string with the closing delimiter
+	serialized += "//";
+	// Return the complete serialized string
+	return serialized;
+};
+
 })();

@@ -50,4 +50,17 @@ exports.parse = function() {
 	}
 };
 
+exports.serialize = function(tree, serialize) {
+	// tree: { type: 'link', attributes: { to: { type: 'string', value: '$:TiddlerTitle' } }, children: [{ type: 'text', text: '$:TiddlerTitle' }] }
+	// serialize: function that accepts array of nodes or a node and returns a string
+	// Check if the link is suppressed
+	var isSuppressed = tree.children[0].text.substr(0,1) === "~";
+	// Initialize the serialized string
+	var serialized = isSuppressed ? "~" : "";
+	// Append the link value
+	serialized += tree.attributes.to.value;
+	// Return the complete serialized string
+	return serialized;
+};
+
 })();
