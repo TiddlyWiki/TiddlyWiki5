@@ -173,6 +173,37 @@ describe("HTML tag new parser tests", function() {
 		);
 	});
 
+	
+	describe('serializeAttribute', function () {
+		it('should serialize string attributes', function () {
+			expect($tw.utils.serializeAttribute({ type: 'string', name: 'p', value: 'blah' })).toBe('p="blah"');
+			expect($tw.utils.serializeAttribute({ type: 'string', name: 'p', value: 'true' })).toBe('p');
+		});
+
+		it('should serialize filtered attributes', function () {
+			expect($tw.utils.serializeAttribute({ type: 'filtered', name: 'p', filter: 'blah' })).toBe('p={{{blah}}}');
+		});
+
+		it('should serialize indirect attributes', function () {
+			expect($tw.utils.serializeAttribute({ type: 'indirect', name: 'p', textReference: 'blah' })).toBe('p={{blah}}');
+		});
+
+		it('should serialize substituted attributes', function () {
+			expect($tw.utils.serializeAttribute({ type: 'substituted', name: 'p', rawValue: 'blah' })).toBe('p=`blah`');
+		});
+
+		it('should return null for unsupported types', function () {
+			expect($tw.utils.serializeAttribute({ type: 'unknown', name: 'p', value: 'blah' })).toBeNull();
+		});
+
+		it('should return null for invalid input', function () {
+			expect($tw.utils.serializeAttribute(null)).toBeNull();
+			expect($tw.utils.serializeAttribute({})).toBeNull();
+			expect($tw.utils.serializeAttribute({ type: 'string' })).toBeNull();
+			expect($tw.utils.serializeAttribute({ name: 'p' })).toBeNull();
+		});
+	});
+
 	it("should parse HTML tags", function() {
 		expect(parser.parseTag("<mytag>",1)).toEqual(
 			null

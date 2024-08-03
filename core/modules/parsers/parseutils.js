@@ -385,4 +385,35 @@ exports.parseAttribute = function(source,pos) {
 	return node;
 };
 
+/*
+Given a parsed attribute node, serialize it back into its source string representation.
+*/
+exports.serializeAttribute = function(node) {
+	if(!node || typeof node !== 'object' || !node.name || !node.type) {
+			return null;
+	}
+
+	var attributeString = node.name;
+
+	if(node.type === 'string') {
+			if(node.value === 'true') {
+					return attributeString;
+			}
+			attributeString += '="' + node.value + '"';
+	} else if(node.type === 'filtered') {
+			attributeString += '={{{' + node.filter + '}}}';
+	} else if(node.type === 'indirect') {
+			attributeString += '={{' + node.textReference + '}}';
+	} else if(node.type === 'substituted') {
+			attributeString += '=`' + node.rawValue + '`';
+	} else if(node.type === 'macro') {
+			// Assuming macro serialization is complex and handled elsewhere
+			attributeString += '=' + node.value.serialize();
+	} else {
+			return null; // Unsupported type
+	}
+
+	return attributeString;
+};
+
 })();
