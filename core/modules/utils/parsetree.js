@@ -133,7 +133,7 @@ exports.serializeParseTree = function serializeParseTree(tree,tiddlerType) {
 		$tw.utils.each(tree,function(node) {
 			output.push(serializeParseTree(node,tiddlerType));
 		});
-	} else {
+	} else if(tree) {
 		if(tree.type === "text" && !tree.rule) {
 			output.push(tree.text);
 		} else {
