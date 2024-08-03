@@ -51,11 +51,11 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree) {
+exports.serialize = function(tree,serialize) {
 	// Filter attribute
 	var filter = tree.attributes.filter.value;
-	// Construct the serialized string
-	return "\\import " + filter;
+	// Construct the serialized string with children that is actually the sibling below the pragma.
+	return "\\import " + filter + "\n" + serialize(tree.children);
 };
 
 })();

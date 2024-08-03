@@ -153,28 +153,54 @@ exports.parse = function() {
 	return [listStack[0]];
 };
 
-exports.serialize = function(tree, serialize) {
-	// Serialize the list recursively
-	return serializeList(tree, serialize, 0);
-};
+exports.serialize = function (tree, serialize) {
+	// Helper function to find the marker for a given list container tag and item tag
+	function findMarker(listTag, itemTag) {
+		for(var key in listTypes) {
+			if(listTypes[key].listTag === listTag && listTypes[key].itemTag === itemTag) {
+				return key; // Return the marker associated with the list tag and item tag
+			}
+		}
+		return ''; // Return empty string if no matching marker is found
+	}
 
-// utility to handle recursion of list
-function serializeList(node, serialize, depth) {
-	// List tag
-	var listTag = node.tag;
-	// List item tag
-	var itemTag = listTypes[listTag[0]].itemTag;
-	// Serialized list items
-	var items = node.children.map(function(child) {
-			// Classes
-			var classes = child.attributes && child.attributes.class ? child.attributes.class.value.split(" ").join(".") : "";
-			// Serialized children
-			var children = serialize(child.children);
-			// Construct the serialized list item
-			return Array(depth + 1).join(listTag[0]) + (classes ? "." + classes : "") + " " + children;
-	}).join("\n");
-	// Return the serialized list
-	return items;
-}
+	// Recursive function to serialize list nodes, handling nested lists and formatting output
+	function serializeList(node, markerPrefix) {
+		var result = [];
+		if(node.type === 'element' && ['ul', 'ol', 'dl', 'blockquote'].includes(node.tag)) {
+			node.children.forEach(function (child) {
+				if(['li', 'dt', 'dd', 'div'].includes(child.tag)) {
+					var currentMarker = findMarker(node.tag, child.tag);
+					// Handle class attributes
+					var classAttr = child.attributes && child.attributes.class ? '.' + child.attributes.class.value : '';
+					// same level text nodes may be split into multiple children, and separated by deeper list sub-tree. We collect same level text nodes into this list, and concat then submit them before enter deeper list.
+					var content = [];
+					$tw.utils.each(child.children,function (subNode) {
+						// Check if the child is a nested list or a simple line of list item
+						if(['ul', 'ol', 'dl', 'blockquote'].includes(subNode.tag)) {
+							// Recursive call for nested lists
+							if(content.length > 0) {
+								result.push(markerPrefix + currentMarker + classAttr + ' ' + content.join('').trim());
+								content = []
+							}
+							result.push(serializeList(subNode, markerPrefix + currentMarker).trim())
+						} else {
+							content.push(serialize(subNode)) ;
+						}
+						return ''; // Default return for unhandled node types
+					});
+					if(content.length > 0) {
+						result.push(markerPrefix + currentMarker + classAttr + ' ' + content.join('').trim());
+						content = []
+					}
+				}
+			});
+		}
+		return result.join('\n');
+	}
+
+	// Begin serialization from the root node, with an empty string as the initial marker prefix
+	return serializeList(tree, '') + '\n\n';
+};
 
 })();

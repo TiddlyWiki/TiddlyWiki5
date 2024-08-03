@@ -213,11 +213,10 @@ describe('WikiAST serialization unit tests', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ImageTest').tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText('ImageTest').trimEnd());
   });
-  return;
 
   wiki.addTiddler({
     title: 'ImportTest',
-    text: '\\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]',
+    text: '\\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]\n\\import [[$:/core/ui/PageMacros]]',
   });
   it('should serialize import pragma correctly', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ImportTest').tree).trimEnd();
@@ -232,6 +231,7 @@ describe('WikiAST serialization unit tests', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ListTest').tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText('ListTest').trimEnd());
   });
+  return;
 
   wiki.addTiddler({
     title: 'MacroCallBlockTest',
