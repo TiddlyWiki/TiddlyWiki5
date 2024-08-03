@@ -34,6 +34,7 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Move past the pragma invocation
+	var start = this.parser.pos;
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse whitespace delimited tokens terminated by a line break
 	var reMatch = /[^\S\n]*(\S+)|(\r?\n)/mg,
@@ -61,15 +62,17 @@ exports.parse = function() {
 			this.parser.parseAsInline = true;
 		}
 	}
-	// No parse tree nodes to return
-	return [];
+	return [{
+		type: "parsermode",
+		parseAsInline: this.parser.parseAsInline,
+		start: start,
+		end: this.parser.pos
+	}];
 };
 
-exports.serialize = function(tree) {
-	// Parser mode
-	var mode = tree.parser.parseAsInline ? "inline" : "block";
-	// Construct the serialized string
-	return "\\parsermode " + mode;
+exports.serialize = function(tree,serialize) {
+	var mode = tree.parseAsInline ? "inline" : "block";
+	return "\\parsermode " + mode + "\n\n" + serialize(tree.children);
 };
 
 })();
