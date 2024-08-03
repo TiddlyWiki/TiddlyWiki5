@@ -207,7 +207,7 @@ describe('WikiAST serialization unit tests', function () {
 
   wiki.addTiddler({
     title: 'ImageTest',
-    text: '[img[https://tiddlywiki.com/fractalveg.jpg]]\n[img width=23 height=24 [https://tiddlywiki.com/fractalveg.jpg]]\n[img width={{!!width}} height={{!!height}} [https://tiddlywiki.com/fractalveg.jpg]]\n[img[Description of image|https://tiddlywiki.com/fractalveg.jpg]]\n[img[TiddlerTitle]]\n[img[Description of image|TiddlerTitle]]',
+    text: '[img[https://tiddlywiki.com/fractalveg.jpg]]\n[img width="23" height="24" [https://tiddlywiki.com/fractalveg.jpg]]\n[img width={{!!width}} height={{!!height}} [https://tiddlywiki.com/fractalveg.jpg]]\n[img[Description of image|https://tiddlywiki.com/fractalveg.jpg]]\n[img[TiddlerTitle]]\n[img[Description of image|TiddlerTitle]]',
   });
   it('should serialize image tags correctly', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ImageTest').tree).trimEnd();

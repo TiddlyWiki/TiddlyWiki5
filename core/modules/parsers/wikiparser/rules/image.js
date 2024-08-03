@@ -131,10 +131,8 @@ exports.parseImage = function(source,pos) {
 };
 
 exports.serialize = function(tree) {
-	// DEBUG: console tree
-	console.warn(`tree`, JSON.stringify(tree, null, '  '));
-	var width = tree.attributes.width ? " width=" + tree.attributes.width.value : "";
-	var height = tree.attributes.height ? " height=" + tree.attributes.height.value : "";
+	var width = tree.attributes.width ? " " + $tw.utils.serializeAttribute(tree.attributes.width) : "";
+	var height = tree.attributes.height ? " " + $tw.utils.serializeAttribute(tree.attributes.height) : "";
 	var padSpace = width || height ? " " : "";
 	var tooltip = tree.attributes.tooltip ? tree.attributes.tooltip.value + "|" : "";
 	var source = tree.attributes.source.value;
