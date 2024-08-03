@@ -55,7 +55,7 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 			{{$:/core/images/new-here-button}}
 		<% endif %>
 		<!-- Allows the toc macros to navigate in test-case tiddlers -->
-		<$action-navigate $to={{{ [<tv-history-list>get[current-tiddler]] }}}/>
+		<!-- <$action-navigate $to={{{ [<tv-history-list>get[current-tiddler]] }}}/> -->
 	</$button>
 	\end _newChild
 	<% if [<tv-toc-show-new-child>match[yes]] %>

@@ -2,94 +2,142 @@ title: $:/core/ui/testcases/DefaultTemplate
 code-body: yes
 
 \whitespace trim
-\procedure linkcatcherActions()
-<$action-log/>
-<%if [<navigateTo>has[title]] %>
-	<$qualify title=<<state>> name="qualifiedState">
-		<$action-setfield $tiddler=<<qualifiedState>> text=<<navigateTo>>/>
-	</$qualify>
-<%endif%>
+
+\function tf.state() [<qualify "$:/state/testcase">]
+
+\procedure textcase-toolbar()
+<$button popup=`$(tf.state)$-more`
+	tooltip={{$:/language/Buttons/More/Hint}}
+	aria-label={{$:/language/Buttons/More/Caption}}
+	class="tc-btn-invisible"
+	selectedClass="tc-selected"
+>
+	{{$:/core/images/down-arrow}}
+</$button>
+<$let
+	tv-config-toolbar-icons="yes"
+	tv-config-toolbar-text="yes"
+	tv-config-toolbar-class="tc-btn-invisible"
+>
+	<$reveal state=`$(tf.state)$-more` type="popup" position="belowleft" animate="yes">
+		<div class="tc-drop-down">
+			<$list filter="[all[shadows+tiddlers]tag[$:/tags/TestCase/Actions]!has[draft.of]]"
+				variable="listItem"
+			>
+				<$transclude $tiddler=<<listItem>> $mode="inline"/>
+			</$list>
+		</div>
+	</$reveal>
+</$let>
 \end
 
-<$navigator story={{{ [<qualify $:/StoryList/>] }}} history={{{ [<qualify $:/HistoryList/>] }}}>
-<$let
-	state={{{ [<qualify "$:/state/testcase">] }}}
->
-	<$linkcatcher actions=<<linkcatcherActions>>>
-		<div class="tc-test-case-wrapper">
-			<div class="tc-test-case-header">
-				<h2>
-					<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[span]] }}} to=<<testcaseTiddler>>>
-						<%if [<testResult>!match[]] %>
-							<span class={{{ tc-test-case-result-icon [<testResult>!match[fail]then[tc-test-case-result-icon-pass]] [<testResult>match[fail]then[tc-test-case-result-icon-fail]] +[join[ ]] }}}>
-								<%if [<testResult>!match[fail]] %>
-									{{$:/core/images/done-button}}
-								<%else%>
-									{{$:/core/images/close-button}}
-								<%endif%>
-							</span>
-						<%endif%>
-						<$view tiddler="Description" mode="inline"/>
-					</$genesis>
-					<span class="tc-test-case-toolbar">
-						<$button popup=`$(state)$-more`
-							tooltip={{$:/language/Buttons/More/Hint}}
-							aria-label={{$:/language/Buttons/More/Caption}}
-							class="tc-btn-invisible"
-							selectedClass="tc-selected"
-						>
-							{{$:/core/images/down-arrow}}
-						</$button>
-						<$let
-							tv-config-toolbar-icons="yes"
-							tv-config-toolbar-text="yes"
-							tv-config-toolbar-class="tc-btn-invisible"
-						>
-							<$reveal state=`$(state)$-more` type="popup" position="belowleft" animate="yes">
-								<div class="tc-drop-down">
-									<$list filter="[all[shadows+tiddlers]tag[$:/tags/TestCase/Actions]!has[draft.of]]"
-										variable="listItem"
-									>
-										<$transclude $tiddler=<<listItem>> $mode="inline"/>
-									</$list>
-								</div>
-							</$reveal>
-						</$let>
-					</span>
-				</h2>
-			</div>
-			<%if [[Narrative]is[tiddler]] %>
-				<div class="tc-test-case-narrative">
-					<$transclude $tiddler="Narrative" $mode="block"/>
-				</div>
-			<%endif%>
-			<%if [<testResult>match[fail]] %>
-				<div class="tc-test-case-result-fail">
-					<div class="tc-test-case-result-fail-header">
-						TEST FAILED
-					</div>
-					<div class="tc-test-case-result-fail-body">
-						<$diff-text source=<<expectedHTML>> dest=<<outputHTML>>/>
-					</div>
-				</div>
-			<%endif%>
-			<div class="tc-test-case-panes">
-				<div class="tc-test-case-source">
-					<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] Output +[putfirst[]] -[prefix<state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -Description -Narrative -[has[plugin-type]]" state=<<state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"/>
-				</div>
-				<div class="tc-test-case-divider">
-				</div>
-				<div class="tc-test-case-output">
-					<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
-						<pre><$view tiddler="Output" format="plainwikified" mode="block"/></pre>
+\procedure testcase-header()
+<div class="tc-test-case-header">
+	<h2>
+		<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[span]] }}} to=<<testcaseTiddler>>>
+			<%if [<testResult>!match[]] %>
+				<span class={{{ tc-test-case-result-icon [<testResult>!match[fail]then[tc-test-case-result-icon-pass]] [<testResult>match[fail]then[tc-test-case-result-icon-fail]] +[join[ ]] }}}>
+					<%if [<testResult>!match[fail]] %>
+						{{$:/core/images/done-button}}
 					<%else%>
-							<$tiddler tiddler="Output">
-								<$transclude $tiddler="Output" $mode="block"/>
-							</$tiddler>
+						{{$:/core/images/close-button}}
 					<%endif%>
+				</span>
+			<%endif%>
+			<$view tiddler="Description" mode="inline"/>
+		</$genesis>
+		<span class="tc-test-case-toolbar">
+			<<textcase-toolbar>>
+		</span>
+	</h2>
+</div>
+\end
+
+\procedure testcase-narrative()
+<div class="tc-test-case-narrative">
+	<$transclude $tiddler="Narrative" $mode="block"/>
+</div>
+\end
+
+\procedure testcase-fail()
+<div class="tc-test-case-result-fail">
+	<div class="tc-test-case-result-fail-header">
+		TEST FAILED
+	</div>
+	<div class="tc-test-case-result-fail-body">
+		<$diff-text source=<<expectedHTML>> dest=<<outputHTML>>/>
+	</div>
+</div>
+\end
+
+\procedure testcase-output()
+<div class="tc-test-case-output">
+	<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
+		<pre><$view tiddler="Output" format="plainwikified" mode="block"/></pre>
+	<%else%>
+		<$tiddler tiddler="Output">
+			<$transclude $tiddler="Output" $mode="block"/>
+		</$tiddler>
+	<%endif%>
+</div>
+\end
+
+\procedure testcase-body()
+<div class="tc-test-case-wrapper">
+	<<testcase-header>>
+	<%if [[Narrative]is[tiddler]] %>
+		<<testcase-narrative>>
+	<%endif%>
+	<%if [<testResult>match[fail]] %>
+		<<testcase-fail>>
+	<%endif%>
+	<div class="tc-test-case-panes">
+		<div class="tc-test-case-source">
+			<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<tf.state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"/>
+
+			<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
+				<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
+					<$list filter="[all[tiddlers]sort[]] Output +[putfirst[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -[has[plugin-type]]"
+						variable="currentTab"
+						storyview="pop"
+					>
+						<$set name="save-currentTiddler"
+							value=<<currentTiddler>>
+						>
+							<$tiddler tiddler=<<currentTab>>>
+								<$button
+									to=<<currentTab>>
+									class={{{ [{$:/HistoryList!!current-tiddler}!is[blank]] :then[{$:/HistoryList!!current-tiddler}match<currentTab>then[tc-tab-selected]else[]] :else[<currentTiddler>match[Output]then[tc-tab-selected]else[]] }}}
+									tooltip={{{[<currentTab>get[tooltip]]}}}
+									role="switch"
+									data-tab-title=<<currentTab>>
+								>
+									<$tiddler tiddler=<<save-currentTiddler>>>
+										<$set name="tv-wikilinks" value="no">
+											<$transclude tiddler=<<buttonTemplate>> mode="inline">
+												<$transclude tiddler=<<currentTab>> field="caption">
+													<$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
+												</$transclude>
+											</$transclude>
+										</$set>
+									</$tiddler>
+								</$button>
+							</$tiddler>
+						</$set>
+					</$list>
 				</div>
+			</div>
+			<div class="tc-tab-divider "></div>
+			<div class="tc-tab-content">
+			{{||$:/core/ui/testcases/DefaultTemplate/SourceTabsNEW}}
 			</div>
 		</div>
-	</$linkcatcher>
-</$let>
+		<div class="tc-test-case-divider"></div>
+		<<testcase-output>>
+	</div>
+</div>
+\end
+
+<$navigator story="$:/StoryList" history="$:/HistoryList">
+<<testcase-body>>
 </$navigator>
