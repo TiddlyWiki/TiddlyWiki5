@@ -121,24 +121,24 @@ exports.serialize = function(tree, serialize) {
 	var filterCondition = tree.attributes.filter.value;
 	var ifClause = serialize(tree.children[0].children);
 	var elseClause = tree.children[1].children;
-	var serialized = '<% if ' + filterCondition + '%>' + ifClause;
+	var serialized = "<% if " + filterCondition + "%>" + ifClause;
 
 	if(elseClause && elseClause.length > 0) {
 		for(var i = 0; i < elseClause.length; i++) {
-			if(elseClause[i].type === 'list' && elseClause[i].attributes.filter) {
+			if(elseClause[i].type === "list" && elseClause[i].attributes.filter) {
 				// Handle elseif clause
 				var elseifCondition = elseClause[i].attributes.filter.value;
 				var elseifClause = serialize(elseClause[i].children[0]);
-				serialized += '<% elseif ' + elseifCondition + '%>' + elseifClause;
+				serialized += "<% elseif " + elseifCondition + "%>" + elseifClause;
 			}
 			if(elseClause[i].children[1]) {
 				var elseClauseText = serialize(elseClause[i].children[1]);
-				serialized += '<% else %>' + elseClauseText;
+				serialized += "<% else %>" + elseClauseText;
 			}
 		}
 	}
 
-	serialized += '<% endif %>';
+	serialized += "<% endif %>";
 	return serialized;
 };
 

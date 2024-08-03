@@ -99,7 +99,7 @@ exports.serialize = function(tree) {
 	// Definition text
 	var definition = tree.attributes.value.value;
 	// Construct the serialized string
-	return "\\define " + name + "(" + params + ")\n" + definition + "\n\\end";
+	return "\\define " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + serialize(tree.children);
 };
 
 })();

@@ -63,6 +63,13 @@ var listTypes = {
 	">": {listTag: "blockquote", itemTag: "div"}
 };
 
+var listTags = Object.values(listTypes).map(function(type) {
+	return type.listTag;
+});
+var itemTags = Object.values(listTypes).map(function(type) {
+	return type.itemTag;
+});
+
 /*
 Parse the most recent match
 */
@@ -161,46 +168,46 @@ exports.serialize = function (tree, serialize) {
 				return key; // Return the marker associated with the list tag and item tag
 			}
 		}
-		return ''; // Return empty string if no matching marker is found
+		return ""; // Return empty string if no matching marker is found
 	}
 
 	// Recursive function to serialize list nodes, handling nested lists and formatting output
 	function serializeList(node, markerPrefix) {
 		var result = [];
-		if(node.type === 'element' && ['ul', 'ol', 'dl', 'blockquote'].includes(node.tag)) {
+		if(node.type === "element" && listTags.includes(node.tag)) {
 			node.children.forEach(function (child) {
-				if(['li', 'dt', 'dd', 'div'].includes(child.tag)) {
+				if(itemTags.includes(child.tag)) {
 					var currentMarker = findMarker(node.tag, child.tag);
 					// Handle class attributes
-					var classAttr = child.attributes && child.attributes.class ? '.' + child.attributes.class.value : '';
+					var classAttr = child.attributes && child.attributes.class ? "." + child.attributes.class.value : "";
 					// same level text nodes may be split into multiple children, and separated by deeper list sub-tree. We collect same level text nodes into this list, and concat then submit them before enter deeper list.
 					var content = [];
 					$tw.utils.each(child.children,function (subNode) {
 						// Check if the child is a nested list or a simple line of list item
-						if(['ul', 'ol', 'dl', 'blockquote'].includes(subNode.tag)) {
+						if(listTags.includes(subNode.tag)) {
 							// Recursive call for nested lists
 							if(content.length > 0) {
-								result.push(markerPrefix + currentMarker + classAttr + ' ' + content.join('').trim());
+								result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
 								content = []
 							}
 							result.push(serializeList(subNode, markerPrefix + currentMarker).trim())
 						} else {
 							content.push(serialize(subNode)) ;
 						}
-						return ''; // Default return for unhandled node types
+						return ""; // Default return for unhandled node types
 					});
 					if(content.length > 0) {
-						result.push(markerPrefix + currentMarker + classAttr + ' ' + content.join('').trim());
+						result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
 						content = []
 					}
 				}
 			});
 		}
-		return result.join('\n');
+		return result.join("\n");
 	}
 
 	// Begin serialization from the root node, with an empty string as the initial marker prefix
-	return serializeList(tree, '') + '\n\n';
+	return serializeList(tree, "") + "\n\n";
 };
 
 })();

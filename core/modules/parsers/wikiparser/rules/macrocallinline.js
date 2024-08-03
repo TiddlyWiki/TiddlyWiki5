@@ -46,15 +46,25 @@ exports.parse = function() {
 	return [call];
 };
 
-exports.serialize = function(tree) {
-	// Macro name
-	var name = tree.name;
-	// Macro parameters
-	var params = tree.params.map(function(param) {
-			return param.value;
-	}).join(" ");
-	// Construct the serialized string
-	return "<<" + name + " " + params + ">>";
+/*
+Same as macrocallblock but without \n\n
+*/
+exports.serialize = function (node) {
+	// Start with macro opener
+	var result = "<<";
+	if(node.attributes && node.attributes["$variable"]) {
+		result += node.attributes["$variable"].value; // Add macro name
+	}
+	// Append ordered arguments if any
+	if(node.orderedAttributes) {
+		node.orderedAttributes.forEach(function (attr) {
+			if(attr.name !== "$variable") {
+				result += " " + '"' + attr.value + '"'; // Add each additional value
+			}
+		});
+	}
+	result += ">>";
+	return result;
 };
 
 })();

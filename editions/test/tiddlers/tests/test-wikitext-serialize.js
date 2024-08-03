@@ -231,11 +231,10 @@ describe('WikiAST serialization unit tests', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ListTest').tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText('ListTest').trimEnd());
   });
-  return;
 
   wiki.addTiddler({
     title: 'MacroCallBlockTest',
-    text: '<<name value value2>>',
+    text: '<<name "value" "value2">>\n\n<<.def "macro calls">>',
   });
   it('should serialize block macro calls correctly', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('MacroCallBlockTest').tree).trimEnd();
@@ -244,7 +243,7 @@ describe('WikiAST serialization unit tests', function () {
 
   wiki.addTiddler({
     title: 'MacroCallInlineTest',
-    text: 'This is a macro call: <<name value value2>>',
+    text: 'These are macro calls in a line: <<name "value" "value2">> and <<.def "macro calls">>',
   });
   it('should serialize inline macro calls correctly', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('MacroCallInlineTest').tree).trimEnd();
@@ -271,12 +270,13 @@ describe('WikiAST serialization unit tests', function () {
 
   wiki.addTiddler({
     title: 'ParserModeTest',
-    text: '\\parsermode block\n\\parsermode inline',
+    text: '\\parsermode block\n\n\\parsermode inline\n\nTest.',
   });
   it('should serialize parser mode specifications correctly', function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler('ParserModeTest').tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText('ParserModeTest').trimEnd());
   });
+  return;
 
   wiki.addTiddler({
     title: 'PrettyExtLinkTest',

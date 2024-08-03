@@ -63,7 +63,7 @@ exports.serialize = function(tree) {
 			return param.name + (param.value ? ":" + param.value : "");
 	}).join(",");
 	// Construct the serialized string
-	return "\\parameters(" + params + ")";
+	return "\\parameters(" + params + ")\n\n" + serialize(tree.children);
 };
 
 })();
