@@ -63,8 +63,8 @@ exports.parse = function() {
 		}
 	}
 	return [{
-		type: "element",
-		tag: "data",
+		type: "parsermode",
+		void: true,
 		parseAsInline: this.parser.parseAsInline,
 		start: start,
 		end: this.parser.pos

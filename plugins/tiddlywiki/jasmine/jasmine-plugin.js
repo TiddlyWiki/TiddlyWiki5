@@ -12,8 +12,7 @@ The main module of the Jasmine test plugin for TiddlyWiki5
 /*global $tw: true */
 "use strict";
 
-// DEBUG: only run my tests for development, remove before PR merge
-var TEST_TIDDLER_FILTER = "[[test-wikitext-serialize.js]]";
+var TEST_TIDDLER_FILTER = "[all[tiddlers+shadows]type[application/javascript]tag[$:/tags/test-spec]]";
 var TESTS_DONE = false;
 
 exports.testsWereRun = function() {

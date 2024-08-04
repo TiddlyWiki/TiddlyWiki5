@@ -55,8 +55,8 @@ exports.parse = function() {
 	var commentEnd = this.endMatch.index + this.endMatch[0].length;
 	var commentText = this.parser.source.slice(commentStart, commentEnd);
 	return [{
-			type: "element",
-			tag: "data",
+			type: "comment",
+			void: true,
 			text: commentText,
 			start: commentStart,
 			end: commentEnd
@@ -64,7 +64,7 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	return tree.text + "\n\n";
+	return tree.text + "\n\n" + serialize(tree.children);
 };
 
 })();
