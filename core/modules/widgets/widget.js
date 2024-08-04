@@ -553,7 +553,6 @@ Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
-		// Skip void node that is not intended for render. Show error for missing widgets.
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
 	}
 	// Create set variable widgets for each variable
