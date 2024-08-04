@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-empty-layer
+
+<$testcase testOutput="Output" testExpectedResult="ExpectedResult">
+<$data title="Description" text="Map using geolayer without json and lat/long attributes"/>
+<$data title="Narrative" text="Verify exception reported in [[8452|https://github.com/TiddlyWiki/TiddlyWiki5/issues/8452]] is not thrown when the geolayer widget has no attributes"/>
+<$data title="Output" text="""<$geomap startPosition="bounds">
+<$geolayer/>
+</$geomap>"""/>
+<$data title="ExpectedResult" text="""<p><div style="width:100%;height:600px;"></div></p>"""/>
+<!-- Without this, "infinite bounds exception" will be thrown -->
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
