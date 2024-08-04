@@ -63,8 +63,7 @@ exports.parse = function() {
 		}
 	}
 	return [{
-		type: "parsermode",
-		void: true,
+		type: "void",
 		parseAsInline: this.parser.parseAsInline,
 		start: start,
 		end: this.parser.pos

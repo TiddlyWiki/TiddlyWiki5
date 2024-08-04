@@ -48,8 +48,7 @@ exports.parse = function() {
 	var commentEnd = this.endMatch.index + this.endMatch[0].length;
 	var commentText = this.parser.source.slice(commentStart, commentEnd);
 	return [{
-			type: "comment",
-			void: true,
+			type: "void",
 			text: commentText,
 			start: commentStart,
 			end: commentEnd
