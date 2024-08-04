@@ -80,6 +80,7 @@ NewMarkdown/Caption: 新增 Markdown 條目
 NewMarkdown/Hint: 建立一個新的 Markdown 條目
 NewTiddler/Caption: 新增條目
 NewTiddler/Hint: 建立一個新的條目
+OpenControlPanel/Hint: 開啟控制台
 OpenWindow/Caption: 開啟於新視窗
 OpenWindow/Hint: 在新視窗中開啟條目
 Palette/Caption: 調色盤

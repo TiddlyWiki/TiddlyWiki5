@@ -236,3 +236,7 @@ ViewTemplateBody/Caption: 查看模板主体
 ViewTemplateBody/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的主体。
 ViewTemplateTitle/Caption: 查看模板标题
 ViewTemplateTitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标题。
+ViewTemplateSubtitle/Caption: 查看模板副标题
+ViewTemplateSubtitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的副标题。
+ViewTemplateTags/Caption: 查看模板标签区
+ViewTemplateTags/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标签区域。

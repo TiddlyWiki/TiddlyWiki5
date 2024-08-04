@@ -1,5 +1,5 @@
 caption: {{$:/language/Buttons/Transcludify/Caption}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 description: {{$:/language/Buttons/Transcludify/Hint}}
 icon: $:/core/images/transcludify
 list-before: $:/core/ui/EditorToolbar/mono-block
