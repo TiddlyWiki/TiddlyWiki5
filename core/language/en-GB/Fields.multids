@@ -1,5 +1,8 @@
 title: $:/language/Docs/Fields/
 
+table-header-name-20240804162913000: Name
+table-header-description-20240804162913000: Description
+table-header-list-20240804162913000: Show List
 _canonical_uri: The full URI of an external image tiddler
 author: Name of the author of a plugin
 bag: The name of the bag from which a tiddler came

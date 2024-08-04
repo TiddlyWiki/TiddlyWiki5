@@ -2,7 +2,9 @@ title: $:/snippets/allfields
 
 \whitespace trim
 
-\function tf.getLingoText() [[$:/language/Docs/Fields/]] [<title>] +[join[]get[text]]
+\procedure lingo-base() $:/language/Docs/Fields/
+
+\function tf.getLingoText() [<lingo-base>] [<title>] +[join[]get[text]]
 
 \procedure renderfield(title)
 <tr class="tc-view-field">
@@ -12,8 +14,8 @@ title: $:/snippets/allfields
 	<td class="tc-view-field-value">
 		//<<tf.getLingoText>>//
 	</td>
-	<td class="tc-view-field-links">
-		<!-- show-filter-count expects a filter string. It does no more processing -->
+	<td class="tc-view-field-list">
+		<!-- show-filter-count expects a filter string. It does no wikification -->
 		<$macrocall $name="show-filter-count" filter=`[has[$(title)$]sort[]]`>>
 	</td>
 </tr>
@@ -22,13 +24,13 @@ title: $:/snippets/allfields
 \procedure renderfieldHeader()
 <tr class="tc-view-field">
 	<th class="tc-view-field-name">
-		''Name'':
+		''<<lingo table-header-name-20240804162913000>>'':
 	</th>
 	<th class="tc-view-field-value">
-		''Description''
+		''<<lingo table-header-description-20240804162913000>>''
 	</th>
-	<th class="tc-view-field-links">
-		''Show Links''
+	<th class="tc-view-field-list">
+		''<<lingo table-header-list-20240804162913000>>''
 	</th>
 </tr>
 \end
