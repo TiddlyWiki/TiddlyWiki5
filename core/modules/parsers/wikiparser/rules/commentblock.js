@@ -25,7 +25,7 @@ Note that the syntax for comments is simplified to an opening "<!--" sequence an
 "use strict";
 
 exports.name = "commentblock";
-exports.types = {block:true};
+exports.types = {block: true, pragma: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
@@ -56,6 +56,7 @@ exports.parse = function() {
 	var commentText = this.parser.source.slice(commentStart, commentEnd);
 	return [{
 			type: "void",
+			children: [],
 			text: commentText,
 			start: commentStart,
 			end: commentEnd

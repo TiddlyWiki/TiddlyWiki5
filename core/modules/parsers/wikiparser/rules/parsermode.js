@@ -64,6 +64,7 @@ exports.parse = function() {
 	}
 	return [{
 		type: "void",
+		children: [],
 		parseAsInline: this.parser.parseAsInline,
 		start: start,
 		end: this.parser.pos
