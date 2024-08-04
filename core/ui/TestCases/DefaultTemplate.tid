@@ -5,7 +5,7 @@ code-body: yes
 
 \function tf.state() [<qualify "$:/state/testcase">]
 
-\procedure textcase-toolbar()
+\procedure testcase-toolbar()
 <$button popup=`$(tf.state)$-more`
 	tooltip={{$:/language/Buttons/More/Hint}}
 	aria-label={{$:/language/Buttons/More/Caption}}
@@ -47,7 +47,7 @@ code-body: yes
 			<$view tiddler="Description" mode="inline"/>
 		</$genesis>
 		<span class="tc-test-case-toolbar">
-			<<textcase-toolbar>>
+			<<testcase-toolbar>>
 		</span>
 	</h2>
 </div>
@@ -85,6 +85,7 @@ code-body: yes
 \procedure testcase-body()
 <div class="tc-test-case-wrapper">
 	<<testcase-header>>
+	<$navigator story="$:/StoryList" history="$:/HistoryList">
 	<%if [[Narrative]is[tiddler]] %>
 		<<testcase-narrative>>
 	<%endif%>
@@ -97,17 +98,16 @@ code-body: yes
 
 			<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
 				<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
-					<$list filter="[all[tiddlers]sort[]] Output +[putfirst[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -[has[plugin-type]]"
+					<$list filter="[all[tiddlers]] [enlist{$:/StoryList!!list}] +[sort[]] Output +[putfirst[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -[has[plugin-type]]"
 						variable="currentTab"
 						storyview="pop"
 					>
-						<$set name="save-currentTiddler"
-							value=<<currentTiddler>>
-						>
+						<$set name="save-currentTiddler" value=<<currentTiddler>> >
 							<$tiddler tiddler=<<currentTab>>>
+<$log />
 								<$button
 									to=<<currentTab>>
-									class={{{ [{$:/HistoryList!!current-tiddler}!is[blank]] :then[{$:/HistoryList!!current-tiddler}match<currentTab>then[tc-tab-selected]else[]] :else[<currentTiddler>match[Output]then[tc-tab-selected]else[]] }}}
+									class={{{ [[$:/HistoryList]has[current-tiddler]] :then[{$:/HistoryList!!current-tiddler}match<currentTab>then[tc-tab-selected]else[]] :else[<currentTiddler>match[Output]then[tc-tab-selected]else[]] }}}
 									tooltip={{{[<currentTab>get[tooltip]]}}}
 									role="switch"
 									data-tab-title=<<currentTab>>
@@ -135,9 +135,8 @@ code-body: yes
 		<div class="tc-test-case-divider"></div>
 		<<testcase-output>>
 	</div>
+</$navigator>
 </div>
 \end
 
-<$navigator story="$:/StoryList" history="$:/HistoryList">
 <<testcase-body>>
-</$navigator>
