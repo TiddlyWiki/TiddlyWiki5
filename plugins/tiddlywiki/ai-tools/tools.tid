@@ -2,18 +2,41 @@ title: $:/plugins/tiddlywiki/ai-tools/tools
 
 ! Import ~ChatGPT Export Archive
 
+These instructions allow you to import the conversations from a ~ChatGPT export archive.
+
+!! 1- Request your archive
+
+Visit the ~ChatGPT site to request your achive. You will be sent an email with a link to a ZIP file. Download the file and locate the file `conversations.json` within it.
+
+!! 2 - Import `conversations.json` as a tiddler
+
+It is not possible to use the normal import process to import the `conversations.json` file because TiddlyWiki will erroneously recognise it as a JSON file of tiddlers.
+
+Instead, drag the `conversations.json` file to the dropzone below. Then click the "Import" button to complete the import:
+
+<$dropzone deserializer="text/plain" autoOpenOnImport="yes" filesOnly="yes" class="tc-ai-tools-dropzone">
+Drop your file here
+</$dropzone>
+
+!! 3 - Import the conversations within it
+
 Any tiddlers containing ~ChatGPT exported `conversation.json` files will be shown here for import.
 
 <$list filter="[all[tiddlers+shadows]type[application/json]!has[plugin-type]sort[title]]" template="$:/plugins/tiddlywiki/ai-tools/view-templates/imported-conversations-json"/>
 
-! Loaded Conversations
+!! 4 - Review Loaded Conversations
 
 <ul>
 	<$list filter="[all[tiddlers+shadows]tag[$:/tags/AI/Conversation]sort[title]]">
-		<li>
-			<$link>
-				<$text text=<<currentTiddler>>/>
-			</$link>
-		</li>
+		<$list-empty>
+			No conversations found
+		</$list-empty>
+		<$list-template>
+			<li>
+				<$link>
+					<$text text=<<currentTiddler>>/>
+				</$link>
+			</li>
+		</$list-template>
 	</$list>
 </ul>

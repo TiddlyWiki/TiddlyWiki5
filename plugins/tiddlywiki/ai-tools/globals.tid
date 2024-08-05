@@ -202,3 +202,18 @@ Action procedure to get the next response from the LLM
 	</div>
 </$let>
 \end ai-tools-conversation
+
+\procedure ai-tools-new-conversation()
+<$action-createtiddler
+	$basetitle="AI Conversation"
+	tags="$:/tags/AI/Conversation"
+	system-prompt="Transcript of a never ending dialog, where the User interacts with an Assistant. The Assistant is helpful, kind, honest, good at writing, and never fails to answer the User's requests immediately and with precision."
+	current-response-text="Please list the 10 most important mechanical inventions of the Twentieth Century"
+>
+<$action-navigate $to=<<createTiddler-title>>/>
+</$action-createtiddler>
+\end ai-tools-new-conversation
+
+\procedure ai-tools-import-conversations()
+<$action-navigate $to="$:/plugins/tiddlywiki/ai-tools/tools"/>
+\end ai-tools-import-conversations

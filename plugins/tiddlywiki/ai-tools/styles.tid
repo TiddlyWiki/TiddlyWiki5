@@ -212,3 +212,14 @@ tags: [[$:/tags/Stylesheet]]
 		margin-top: 0;
 	}
 }
+
+.tc-ai-tools-dropzone {
+	background: yellow;
+	text-align: center;
+	width: 100%;
+	height: 4em;
+}
+
+.tc-ai-tools-dropzone.tc-dragover {
+	background: red;
+}

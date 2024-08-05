@@ -1,17 +1,6 @@
 title: $:/plugins/tiddlywiki/ai-tools/page-menu/new-conversation
 tags: $:/tags/AI/PageMenu
 
-\define actions()
-<$action-createtiddler
-	$basetitle="AI Conversation"
-	tags="$:/tags/AI/Conversation"
-	system-prompt="Transcript of a never ending dialog, where the User interacts with an Assistant. The Assistant is helpful, kind, honest, good at writing, and never fails to answer the User's requests immediately and with precision."
-	current-response-text="Please list the 10 most important mechanical inventions of the Twentieth Century"
->
-<$action-navigate $to=<<createTiddler-title>>/>
-</$action-createtiddler>
-\end actions
-
-<$button actions=<<actions>> class="tc-btn-invisible">
+<$button actions=<<ai-tools-new-conversation>> class="tc-btn-invisible">
 {{$:/core/images/new-button}} New Conversation
 </$button>

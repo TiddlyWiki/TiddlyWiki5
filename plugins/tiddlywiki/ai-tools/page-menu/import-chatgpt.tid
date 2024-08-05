@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/ai-tools/page-menu/import-chatgpt
+tags: $:/tags/AI/PageMenu
+
+<$button actions=<<ai-tools-import-conversations>> class="tc-btn-invisible">
+{{$:/core/images/input-button}} Import Conversations from ~ChatGPT
+</$button>
