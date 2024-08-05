@@ -82,60 +82,68 @@ code-body: yes
 </div>
 \end
 
+<!-- Create a tabbed story-river -->
+\procedure testcase-tabbed-story()
+<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
+	<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
+		<$list filter="[all[tiddlers]] [enlist{$:/StoryList!!list}] +[sort[]] Output +[putfirst[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -[has[plugin-type]]"
+			variable="currentTab"
+			storyview="pop"
+		>
+			<$set name="save-currentTiddler" value=<<currentTiddler>> >
+				<$tiddler tiddler=<<currentTab>>>
+					<$button
+						to=<<currentTab>>
+						class={{{ [[$:/HistoryList]has[current-tiddler]] :then[{$:/HistoryList!!current-tiddler}match<currentTab>then[tc-tab-selected]else[]] :else[<currentTiddler>match[Output]then[tc-tab-selected]else[]] }}}
+						tooltip={{{[<currentTab>get[tooltip]]}}}
+						role="switch"
+						data-tab-title=<<currentTab>>
+					>
+						<$tiddler tiddler=<<save-currentTiddler>>>
+							<$set name="tv-wikilinks" value="no">
+								<$transclude tiddler=<<buttonTemplate>> mode="inline">
+									<$transclude tiddler=<<currentTab>> field="caption">
+										<$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
+									</$transclude>
+								</$transclude>
+							</$set>
+						</$tiddler>
+					</$button>
+				</$tiddler>
+			</$set>
+		</$list>
+	</div>
+</div>
+<div class="tc-tab-divider "></div>
+<div class="tc-tab-content">
+	{{||$:/core/ui/testcases/DefaultTemplate/TabbedStory}}
+</div>
+\end
+
+\procedure testcase-tabs()
+<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<tf.state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"/>
+\end
+
 \procedure testcase-body()
 <div class="tc-test-case-wrapper">
 	<<testcase-header>>
 	<$navigator story="$:/StoryList" history="$:/HistoryList">
-	<%if [[Narrative]is[tiddler]] %>
-		<<testcase-narrative>>
-	<%endif%>
-	<%if [<testResult>match[fail]] %>
-		<<testcase-fail>>
-	<%endif%>
-	<div class="tc-test-case-panes">
-		<div class="tc-test-case-source">
-			<$macrocall $name="tabs" tabsList="[all[tiddlers]sort[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -Output Output +[putfirst[]] -[has[plugin-type]]" state=<<tf.state>> default="Output" template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"/>
+		<%if [[Narrative]is[tiddler]] %>
+			<<testcase-narrative>>
+		<%endif%>
+		<%if [<testResult>match[fail]] %>
+			<<testcase-fail>>
+		<%endif%>
+		<div class="tc-test-case-panes">
+			<div class="tc-test-case-source">
+				<<testcase-tabs>>
 
-			<div class={{{ [[tc-tab-set]addsuffix[ ]addsuffix<__class__>] }}}>
-				<div class={{{ [[tc-tab-buttons]addsuffix[ ]addsuffix<__class__>] }}}>
-					<$list filter="[all[tiddlers]] [enlist{$:/StoryList!!list}] +[sort[]] Output +[putfirst[]] -[prefix<tf.state>] -[prefix[$:/HistoryList]] -[prefix[$:/StoryList]] -[[$:/temp/testcase/draft-title]] -Description -Narrative -[has[plugin-type]]"
-						variable="currentTab"
-						storyview="pop"
-					>
-						<$set name="save-currentTiddler" value=<<currentTiddler>> >
-							<$tiddler tiddler=<<currentTab>>>
-<$log />
-								<$button
-									to=<<currentTab>>
-									class={{{ [[$:/HistoryList]has[current-tiddler]] :then[{$:/HistoryList!!current-tiddler}match<currentTab>then[tc-tab-selected]else[]] :else[<currentTiddler>match[Output]then[tc-tab-selected]else[]] }}}
-									tooltip={{{[<currentTab>get[tooltip]]}}}
-									role="switch"
-									data-tab-title=<<currentTab>>
-								>
-									<$tiddler tiddler=<<save-currentTiddler>>>
-										<$set name="tv-wikilinks" value="no">
-											<$transclude tiddler=<<buttonTemplate>> mode="inline">
-												<$transclude tiddler=<<currentTab>> field="caption">
-													<$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
-												</$transclude>
-											</$transclude>
-										</$set>
-									</$tiddler>
-								</$button>
-							</$tiddler>
-						</$set>
-					</$list>
-				</div>
+				<<testcase-tabbed-story>>
 			</div>
-			<div class="tc-tab-divider "></div>
-			<div class="tc-tab-content">
-			{{||$:/core/ui/testcases/DefaultTemplate/SourceTabsNEW}}
-			</div>
+			<div class="tc-test-case-divider"></div>
+			<<testcase-output>>
 		</div>
-		<div class="tc-test-case-divider"></div>
-		<<testcase-output>>
-	</div>
-</$navigator>
+	</$navigator>
 </div>
 \end
 
