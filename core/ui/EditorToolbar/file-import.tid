@@ -8,13 +8,19 @@ condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
 <$action-deletetiddler $filter="[title<importState>] [title<importTitle>]"/>
 \end
 
-\procedure replacement-text-image() [img[$1$]]
+\procedure tw5-ImageTemplate() [img[$1$]]
+\procedure tw5-FileTemplate() [[$1$]]
 
-\procedure replacement-text-file() [[$1$]]
+\procedure markdown-ImageTemplate() ![]($1$)
+\procedure mardkown-FileTempalte() []($1$)
+
+\function getImageTemplate() [<storyTiddler>type[text/x-markdown]then<markdown-ImageTemplate>else<tw5-ImageTemplate>]
+\function getFileTemplate() [<storyTiddler>type[text/x-markdown]then<mardkown-FileTemplate>else<tw5-FileTemplate>]
+\function getReplacementTemplate() [get[type]prefix[image]then<getImageTemplate>else<getFileTemplate>]
 
 \procedure postImportActions()
 \whitespace trim
-<$list filter="[<importTitle>links[]] :reduce[get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>substitute<currentTiddler>addprefix<accumulator>]" variable="imageTitle">
+<$list filter="[<importTitle>links[]] :reduce[<getReplacementTemplate>substitute<currentTiddler>addprefix<accumulator>]" variable="imageTitle">
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="insert-text"
