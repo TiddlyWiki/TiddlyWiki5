@@ -2,19 +2,19 @@ title: $:/plugins/tiddlywiki/markdown/EditorToolbar/file-import
 tags: $:/tags/EditorTools
 condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 
-\define lingo-base() $:/language/Import/
+\procedure lingo-base() $:/language/Import/
 
-\define closePopupActions()
+\procedure closePopupActions()
 <$action-deletetiddler $filter="[title<importState>] [title<importTitle>]"/>
 \end
 
-\define replacement-text-image() ![](<#$title$>)
+\procedure replacement-text-image() ![](<#$title$>)
 
-\define replacement-text-file() [](<#$title$>)
+\procedure replacement-text-file() [](<#$title$>)
 
-\define replacement-regexp() [()<>\\]
+\procedure replacement-regexp() [()<>\\]
 
-\define postImportActions()
+\procedure postImportActions()
 \whitespace trim
 <$list filter="[<importTitle>links[]]">
 <$let escaped-title={{{ [<currentTiddler>search-replace:g:regexp<replacement-regexp>,[\$&]] }}}>
@@ -30,7 +30,7 @@ condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/mark
 <<closePopupActions>>
 \end
 
-\define buttons()
+\procedure buttons()
 \whitespace trim
 <$button class="tc-btn-invisible" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
 &#32;
