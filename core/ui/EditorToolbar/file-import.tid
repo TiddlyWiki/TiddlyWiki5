@@ -1,6 +1,6 @@
 title: $:/core/ui/EditorToolbar/file-import
 tags: $:/tags/EditorTools
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
 
 \procedure lingo-base() $:/language/Import/
 
