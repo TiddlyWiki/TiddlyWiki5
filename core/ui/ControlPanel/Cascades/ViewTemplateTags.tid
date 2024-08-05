@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/ViewTemplateTags
+tags: $:/tags/ControlPanel/Cascades
+caption: {{$:/language/ControlPanel/ViewTemplateTags/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/ViewTemplateTags/
+
+<<lingo Hint>>
+
+{{$:/tags/ViewTemplateTagsFilter||$:/snippets/ListTaggedCascade}}

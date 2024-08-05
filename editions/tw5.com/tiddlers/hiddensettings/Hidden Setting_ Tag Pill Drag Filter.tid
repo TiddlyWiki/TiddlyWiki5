@@ -1,0 +1,22 @@
+created: 20240508093242925
+modified: 20240728134955433
+tags: [[Hidden Settings]]
+title: Hidden Setting: Tag Pill Drag Filter
+type: text/vnd.tiddlywiki
+
+The ''~$:/core/config/TagPillDragFilter'' defines the filter string, that is used to drag & drop a tap-pill eg: <<tag HelloThere>> from 1 wiki to an other wiki. 
+
+* By default the set contains all tiddlers that are ''tagged:'' HelloThere ''without'' the HelloThere tag-tiddler itself
+** Core Default: <code><$transclude $tiddler="$:/core" $subtiddler="$:/core/config/TagPillDragFilter" output="text/plain" /></code>
+* If you do want to include the tag-tiddler use the following filter:
+** Tagged tiddlers only: `[all[current]tagging[]] [all[current]is[tiddler]] +[!is[draft]]`
+
+Your $:/core/config/TagPillDragFilter
+<%if [[$:/core/config/TagPillDragFilter]is[tiddler]] %>
+''has been overwritten'' and  contains:
+<%else%>
+defaults to:
+<%endif%>
+<code>{{$:/core/config/TagPillDragFilter}}</code>
+
+<<.note title:"Be Aware" _:"The core default filter does //not// include shadow-tiddlers. It will //include overwritten// shadow tiddlers. See: [[is Operator]] for details about the `is[tiddler]` and other possibilities.">>
