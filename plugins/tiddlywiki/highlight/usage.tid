@@ -2,8 +2,8 @@ title: $:/plugins/tiddlywiki/highlight/usage
 
 \import $:/plugins/tiddlywiki/highlight/readme
 
-\procedure jsDelivrLink() https://www.jsdelivr.com/package/gh/highlightjs/cdn-release?path=build%2Flanguages&version=$(highlightVersion)$
-\procedure unpkgLink() https://unpkg.com/browse/@highlightjs/cdn-assets@$(highlightVersion)$/languages/
+\define jsDelivrLink() https://www.jsdelivr.com/package/gh/highlightjs/cdn-release?path=build%2Flanguages&version=$(highlightVersion)$
+\define unpkgLink() https://unpkg.com/browse/@highlightjs/cdn-assets@$(highlightVersion)$/languages/
 
 ! Usage
 
