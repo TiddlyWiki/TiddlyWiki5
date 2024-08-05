@@ -14,9 +14,11 @@ condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
 \procedure markdown-ImageTemplate() ![]($1$)
 \procedure mardkown-FileTempalte() []($1$)
 
-\function getImageTemplate() [<storyTiddler>type[text/x-markdown]then<markdown-ImageTemplate>else<tw5-ImageTemplate>]
-\function getFileTemplate() [<storyTiddler>type[text/x-markdown]then<mardkown-FileTemplate>else<tw5-FileTemplate>]
+\function is.Markdown.Tiddler() [all[]type[text/x-markdown]] [all[]type[text/markdown]]
+\function getImageTemplate() [<storyTiddler>is.Markdown.Tiddler[]then<markdown-ImageTemplate>else<tw5-ImageTemplate>]
+\function getFileTemplate() [<storyTiddler>is.Markdown.Tiddler[]then<mardkown-FileTemplate>else<tw5-FileTemplate>]
 \function getReplacementTemplate() [get[type]prefix[image]then<getImageTemplate>else<getFileTemplate>]
+
 
 \procedure postImportActions()
 \whitespace trim
