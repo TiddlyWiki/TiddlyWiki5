@@ -1,0 +1,4 @@
+title: $:/config/ViewTemplateTagsFilters/
+tags: $:/tags/ViewTemplateTagsFilter
+
+default: [[$:/core/ui/ViewTemplate/tags/default]]
