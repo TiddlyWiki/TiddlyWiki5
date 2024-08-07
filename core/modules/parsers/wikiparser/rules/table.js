@@ -93,11 +93,12 @@ var processRow = function(prevColumns) {
 			}
 			// Check whether this is a heading cell
 			var cell;
+			var start = this.parser.pos;
 			if(chr === "!") {
 				this.parser.pos++;
-				cell = {type: "element", tag: "th", children: []};
+				cell = {type: "element", tag: "th", start: start, children: []};
 			} else {
-				cell = {type: "element", tag: "td", children: []};
+				cell = {type: "element", tag: "td", start: start, children: []};
 			}
 			tree.push(cell);
 			// Record information about this cell
@@ -121,6 +122,7 @@ var processRow = function(prevColumns) {
 			}
 			// Move back to the closing `|`
 			this.parser.pos--;
+			cell.end = this.parser.pos;
 		}
 		col++;
 		cellRegExp.lastIndex = this.parser.pos;
