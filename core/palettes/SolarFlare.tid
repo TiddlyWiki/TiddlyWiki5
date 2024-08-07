@@ -104,6 +104,7 @@ foreground: #657b83
         dropdown-tab-background: <<colour tab-background>>
 : base3
     alert-background: <<colour base3>>
+    footnote-target-background: <<colour base3>>
     message-background: <<colour base3>>
 : yellow
 : orange
