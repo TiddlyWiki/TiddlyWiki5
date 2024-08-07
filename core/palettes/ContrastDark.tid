@@ -33,7 +33,7 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #00a
 external-link-foreground: #00e
-footnote-target-background: <<colour foreground>>
+footnote-target-background: #e5e5e5
 foreground: #000
 highlight-background: #ffff00
 highlight-foreground: #000000
