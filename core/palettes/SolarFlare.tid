@@ -131,6 +131,7 @@ external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
 external-link-foreground-hover: inherit
+footnote-target-background: #ded8c5
 highlight-background: #ffff00
 highlight-foreground: #000000
 message-border: #cfd6e6

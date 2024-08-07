@@ -34,6 +34,7 @@ external-link-background-visited: inherit
 external-link-foreground: #268bd2
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #268bd2
+footnote-target-background: #eee8d5
 foreground: #657b83
 highlight-background: #ffff00
 highlight-foreground: #000000
