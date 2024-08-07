@@ -169,12 +169,13 @@ exports.parse = function() {
 				rowContainer.children = this.parser.parseInlineRun(rowTermRegExp,{eatTerminator: true});
 			} else {
 				// Create the row
-				var theRow = {type: "element", tag: "tr", children: []};
+				var theRow = {type: "element", tag: "tr", children: [], start: rowMatch.index};
 				$tw.utils.addClassToParseTreeNode(theRow,rowCount%2 ? "oddRow" : "evenRow");
 				rowContainer.children.push(theRow);
 				// Process the row
 				theRow.children = processRow.call(this,prevColumns);
 				this.parser.pos = rowMatch.index + rowMatch[0].length;
+				theRow.end = this.parser.pos;
 				// Increment the row count
 				rowCount++;
 			}
