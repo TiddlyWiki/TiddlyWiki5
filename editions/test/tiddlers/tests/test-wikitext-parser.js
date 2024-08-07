@@ -349,6 +349,8 @@ describe("WikiText parser tests", function() {
 					orderedAttributes: [
 						{ name: 'class', type: 'string', value: 'evenRow' },
 					],
+					start: 0,
+					end: 18,
 					children: [{
 						type: 'element',
 						tag: 'th',
@@ -379,6 +381,8 @@ describe("WikiText parser tests", function() {
 					orderedAttributes: [
 						{ name: 'class', type: 'string', value: 'oddRow' },
 					],
+					start: 18,
+					end: 33,
 					children: [{
 						type: 'element',
 						tag: 'td',
