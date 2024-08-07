@@ -57,21 +57,33 @@ exports.parse = function() {
 	if(tokens.length > 0) {
 		this.parser.amendRules(tokens[0],tokens.slice(1));
 	}
-	// No parse tree nodes to return
-	return [];
+	// No widget to render, return void node.
+	return [{
+		type: "void",
+		attributes: {
+			action: {type: "string", value: tokens[0]},
+			rules: {type: "string", value: tokens.slice(1).join(" ")}
+		},
+		children: []
+	}];
 };
 
-exports.serialize = function(tree, serialize) {
-	// tree: { type: 'pragma', name: 'rules', args: ['except', 'ruleone', 'ruletwo', 'rulethree'] }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Start the serialized string with the pragma name
-	var serialized = "\\rules";
-	// Iterate over the arguments and append them to the serialized string
-	for(var i = 0; i < tree.args.length; i++) {
-		serialized += " " + tree.args[i];
+exports.serialize = function (tree, serialize) {
+	// tree: { type: "void", attributes: { action: { type: "string", value: "except" }, rules: { type: "string", value: "ruleone ruletwo rulethree" } }, children: [{ type: "void", attributes: { action: { type: "string", value: "only" }, rules: { type: "string", value: "ruleone ruletwo rulethree" } }, children: [] }] }
+	var result = [];
+	if(tree.attributes.action && tree.attributes.rules) {
+		// tree.attributes.action.value: "except"
+		// tree.attributes.rules.value: "ruleone ruletwo rulethree"
+		result.push("\\rules " + tree.attributes.action.value + " " + tree.attributes.rules.value);
+		tree.children.forEach(function (child) {
+			if(child.type === "void" && child.attributes.action && child.attributes.rules) {
+				// child.attributes.action.value: "only"
+				// child.attributes.rules.value: "ruleone ruletwo rulethree"
+				result.push("\\rules " + child.attributes.action.value + " " + child.attributes.rules.value);
+			}
+		});
 	}
-	// Return the complete serialized string
-	return serialized;
+	return result.join("\n");
 };
 
 })();

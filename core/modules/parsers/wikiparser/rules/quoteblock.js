@@ -73,17 +73,20 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree, serialize) {
-	// tree: { type: 'element', tag: 'blockquote', attributes: { class: { type: 'string', value: 'tc-quote' } }, children: [{ type: 'text', text: 'Quote text' }] }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Split the class attribute value into an array of classes, classes: ['tc-quote']
-	var classes = tree.attributes.class.value.split(" ");
-	// Start the serialized string with the opening delimiter and classes, serialized: '<<<tc-quote\n'
-	var serialized = "<<<" + classes.join(" ") + "\n";
-	// Serialize the children of the blockquote, serialized: '<<<tc-quote\nQuote text'
-	serialized += serialize(tree.children);
-	// Return the complete serialized string with the closing delimiter, serialized: '<<<tc-quote\nQuote text\n<<<'
-	return serialized + "\n<<<";
+exports.serialize = function (tree, serialize) {
+	// tree: { type: "element", tag: "blockquote", attributes: { class: { type: "string", value: "tc-quote" } }, children: [{ type: "element", tag: "cite", children: [{ type: "text", text: "tc-quote" }] }, { type: "element", tag: "p", children: [{ type: "text", text: "Quote text\n" }] }] }
+	var result = [];
+	if(tree.type === "element" && tree.tag === "blockquote") {
+		// tree.attributes.class.value: "tc-quote"
+		result.push("<<<" + tree.attributes.class.value);
+		tree.children.forEach(function (child) {
+			if(child.type === "element" && child.tag === "p") {
+				result.push(serialize(child.children).trim());
+			}
+		});
+		result.push("<<<");
+	}
+	return result.join("\n");
 };
 
 })();

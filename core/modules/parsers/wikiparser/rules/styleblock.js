@@ -67,29 +67,62 @@ exports.parse = function() {
 			$tw.utils.addAttributeToParseTreeNode(tree[t],"style",styles.join(""));
 		}
 	}
-	return tree;
+	return [{
+		type: "void",
+		children: tree
+	}]
 };
 
 exports.serialize = function(tree, serialize) {
-	// tree: [{ type: 'element', tag: 'p', attributes: { class: { type: 'string', value: 'myClass' }, style: { type: 'string', value: 'background-color:red;' } }, children: [{ type: 'text', text: 'This paragraph will have the CSS class `myClass`.' }] }]
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Initialize the serialized string with the opening delimiter
-	var serialized = "@@";
-	// Check for styles and append them to the serialized string
-	if(tree[0].attributes.style) {
-		serialized += tree[0].attributes.style.value;
-	}
-	// Check for classes and append them to the serialized string
-	if(tree[0].attributes.class) {
-		var classes = tree[0].attributes.class.value.split(" ");
-		for(var i = 0; i < classes.length; i++) {
-			serialized += "." + classes[i];
+	// serialize: function that serializes an array of nodes or a single node to a string
+	var result = [];
+	var classes = [];
+	var styles = [];
+
+	// Collect all unique classes and styles from child nodes
+	for(var i = 0; i < tree.children.length; i++) {
+		var node = tree.children[i];
+		if(node.attributes && node.attributes.class) {
+			var nodeClasses = node.attributes.class.value.split(" ");
+			for(var j = 0; j < nodeClasses.length; j++) {
+				if(classes.indexOf(nodeClasses[j]) === -1) {
+					classes.push(nodeClasses[j]);
+				}
+			}
+		}
+		if(node.attributes && node.attributes.style) {
+			var nodeStyles = node.attributes.style.value.split(";");
+			for(var k = 0; k < nodeStyles.length; k++) {
+				var style = nodeStyles[k].trim();
+				if(style && styles.indexOf(style) === -1) {
+					styles.push(style);
+				}
+			}
 		}
 	}
-	// Append the serialized children and the closing delimiter
-	serialized += "\n" + serialize(tree) + "\n@@";
-	// Return the complete serialized string
-	return serialized;
+
+	// Add the style block header if there are any classes or styles
+	if(classes.length > 0 || styles.length > 0) {
+		if(styles.length > 0) {
+			result.push("@@");
+			result.push(styles.join(";"));
+			result.push(";\n");
+		}
+		if(classes.length > 0) {
+			result.push("@@.");
+			result.push(classes.join("."));
+			result.push("\n");
+		}
+	}
+
+	// Serialize each child node and add to result
+	for(var i = 0; i < tree.children.length; i++) {
+		result.push(serialize(tree.children[i]));
+	}
+
+	// Add the closing @@ for the style block
+	result.push("@@");
+	return result.join("");
 };
 
 })();

@@ -276,7 +276,6 @@ describe("WikiAST serialization unit tests", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("ParserModeTest").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("ParserModeTest").trimEnd());
   });
-  return;
 
   wiki.addTiddler({
     title: "PrettyExtLinkTest",
@@ -316,12 +315,19 @@ describe("WikiAST serialization unit tests", function () {
 
   wiki.addTiddler({
     title: "StyleBlockTest",
-    text: "@@.myClass\n@@background-color:red;\nThis paragraph will have the CSS class `myClass`.\n\n* The `<ul>` around this list will also have the class `myClass`\n* List item 2\n@@",
+    text: "@@.myClass\n@@background-color:red;\nThis paragraph will have the CSS class `myClass`.\n\n* The `<ul>` around this list will also have the class `myClass`\n* List item 2\n@@\n\n@@font-size:1.5em;\n@@.coloured-text\n@@.coloured-bg\n* Block content\n* With custom style and classes\n@@",
+  });
+  wiki.addTiddler({
+    title: "StyleBlockTest2",
+    text: "@@.myFirstClass.mySecondClass\n@@width:100px;.myThirdClass\nThis is a paragraph\n@@\n\n@@background-color:lightcyan;\n* Item one\n* Item two\n@@",
   });
   it("should serialize style blocks correctly", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("StyleBlockTest").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("StyleBlockTest").trimEnd());
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("StyleBlockTest2").tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText("StyleBlockTest2").trimEnd());
   });
+  return;
 
   wiki.addTiddler({
     title: "StyleInlineTest",
