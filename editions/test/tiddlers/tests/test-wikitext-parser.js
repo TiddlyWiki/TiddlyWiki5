@@ -360,6 +360,8 @@ describe("WikiText parser tests", function() {
 						orderedAttributes: [
 							{ name: 'align', type: 'string', value: 'left' },
 						],
+						start: 1,
+						end: 8,
 						children: [{type: 'text', text: 'Cell1', start: 2, end: 7}],
 					}, {
 						type: 'element',
@@ -370,6 +372,8 @@ describe("WikiText parser tests", function() {
 						orderedAttributes: [
 							{ name: 'align', type: 'string', value: 'left' },
 						],
+						start: 9,
+						end: 16,
 						children: [{type: 'text', text: 'Cell2', start: 10, end: 15}],
 					}],
 				}, {
@@ -392,6 +396,8 @@ describe("WikiText parser tests", function() {
 						orderedAttributes: [
 							{ name: 'align', type: 'string', value: 'left' },
 						],
+						start: 19,
+						end: 25,
 						children: [{type: 'text', text: 'Cell3', start: 19, end: 24}],
 					}, {
 						type: 'element',
@@ -402,6 +408,8 @@ describe("WikiText parser tests", function() {
 						orderedAttributes: [
 							{ name: 'align', type: 'string', value: 'left' },
 						],
+						start: 26,
+						end: 32,
 						children: [{type: 'text', text: 'Cell4', start: 26, end: 31}],
 					}],
 				}],
