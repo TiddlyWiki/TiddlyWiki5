@@ -143,34 +143,51 @@ SqlTiddlerStore.prototype.processOutgoingTiddler = function(tiddlerFields,tiddle
 
 /*
 */
-SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, exisiting_attachment_blob) {
-	let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
+SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, existing_attachment_blob, existing_canonical_uri) {
+  let attachmentSizeLimit = $tw.utils.parseNumber(this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/AttachmentSizeLimit"));
 	if(attachmentSizeLimit < 100 * 1024) {
 		attachmentSizeLimit = 100 * 1024;
 	}
-	const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments","yes") === "yes";
-	const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"],
-		isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
-	const shouldProcessAttachment = ((tiddlerFields.text && tiddlerFields.text.length > attachmentSizeLimit) || (exisiting_attachment_blob && exisiting_attachment_blob?.length < attachmentSizeLimit))
-	if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
-		const attachment_blob = exisiting_attachment_blob || this.attachmentStore.saveAttachment({
-			text: tiddlerFields.text,
-			type: tiddlerFields.type,
-			reference: tiddlerFields.title
-		});
-		if(tiddlerFields?._canonical_uri) {
-			delete tiddlerFields._canonical_uri
-		}
-		return {
-			tiddlerFields: Object.assign({},tiddlerFields,{text: undefined}),
-			attachment_blob: attachment_blob
-		};
-	} else {
-		return {
-			tiddlerFields: tiddlerFields,
-			attachment_blob: null
-		};
-	}
+  const attachmentsEnabled = this.adminWiki.getTiddlerText("$:/config/MultiWikiServer/EnableAttachments", "yes") === "yes";
+  const contentTypeInfo = $tw.config.contentTypeInfo[tiddlerFields.type || "text/vnd.tiddlywiki"];
+  const isBinary = !!contentTypeInfo && contentTypeInfo.encoding === "base64";
+
+  let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length <= attachmentSizeLimit;
+
+  if (existing_attachment_blob) {
+    const fileSize = this.attachmentStore.getAttachmentFileSize(existing_attachment_blob);
+    if (fileSize <= attachmentSizeLimit) {
+      const existingAttachmentMeta = this.attachmentStore.getAttachmentMetadata(existing_attachment_blob);
+      const hasCanonicalField = !!tiddlerFields._canonical_uri;
+      const skipAttachment = hasCanonicalField && (tiddlerFields._canonical_uri === (existingAttachmentMeta?._canonical_uri || existing_canonical_uri));
+      shouldProcessAttachment = !skipAttachment;
+    } else {
+      shouldProcessAttachment = false;
+    }
+  }
+
+  if (attachmentsEnabled && isBinary && shouldProcessAttachment) {
+    const attachment_blob = existing_attachment_blob || this.attachmentStore.saveAttachment({
+      text: tiddlerFields.text,
+      type: tiddlerFields.type,
+      reference: tiddlerFields.title,
+      _canonical_uri: tiddlerFields._canonical_uri
+    });
+    
+    if (tiddlerFields?._canonical_uri) {
+      delete tiddlerFields._canonical_uri;
+    }
+    
+    return {
+      tiddlerFields: Object.assign({}, tiddlerFields, { text: undefined }),
+      attachment_blob: attachment_blob
+    };
+  } else {
+    return {
+      tiddlerFields: tiddlerFields,
+      attachment_blob: existing_attachment_blob
+    };
+  }
 };
 
 SqlTiddlerStore.prototype.saveTiddlersFromPath = function(tiddler_files_path,bag_name) {
@@ -248,8 +265,12 @@ SqlTiddlerStore.prototype.createRecipe = function(recipe_name,bag_names,descript
 Returns {tiddler_id:}
 */
 SqlTiddlerStore.prototype.saveBagTiddler = function(incomingTiddlerFields,bag_name) {
-	const exisiting_attachment_blob = this.sqlTiddlerDatabase.getBagTiddlerAttachmentBlob(incomingTiddlerFields.title,bag_name)
-	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields,exisiting_attachment_blob);
+	let _canonical_uri;
+	const existing_attachment_blob = this.sqlTiddlerDatabase.getBagTiddlerAttachmentBlob(incomingTiddlerFields.title,bag_name)
+	if(existing_attachment_blob) {
+		_canonical_uri = `/bags/${$tw.utils.encodeURIComponentExtended(bag_name)}/tiddlers/${$tw.utils.encodeURIComponentExtended(incomingTiddlerFields.title)}/blob`
+	}
+	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields,existing_attachment_blob,_canonical_uri);
 	const result = this.sqlTiddlerDatabase.saveBagTiddler(tiddlerFields,bag_name,attachment_blob);
 	this.dispatchEvent("change");
 	return result;
@@ -266,7 +287,7 @@ type - content type of file as uploaded
 Returns {tiddler_id:}
 */
 SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddlerFields,bag_name,options) {
-	const attachment_blob = this.attachmentStore.adoptAttachment(options.filepath,options.type,options.hash);
+	const attachment_blob = this.attachmentStore.adoptAttachment(options.filepath,options.type,options.hash,options._canonical_uri);
 	if(attachment_blob) {
 		const result = this.sqlTiddlerDatabase.saveBagTiddler(incomingTiddlerFields,bag_name,attachment_blob);
 		this.dispatchEvent("change");
@@ -280,8 +301,8 @@ SqlTiddlerStore.prototype.saveBagTiddlerWithAttachment = function(incomingTiddle
 Returns {tiddler_id:,bag_name:}
 */
 SqlTiddlerStore.prototype.saveRecipeTiddler = function(incomingTiddlerFields,recipe_name) {
-	const exisiting_attachment_blob = this.sqlTiddlerDatabase.getRecipeTiddlerAttachmentBlob(incomingTiddlerFields.title,recipe_name)
-	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields,exisiting_attachment_blob);
+	const existing_attachment_blob = this.sqlTiddlerDatabase.getRecipeTiddlerAttachmentBlob(incomingTiddlerFields.title,recipe_name)
+	const {tiddlerFields, attachment_blob} = this.processIncomingTiddler(incomingTiddlerFields,existing_attachment_blob,incomingTiddlerFields._canonical_uri);
 	const result = this.sqlTiddlerDatabase.saveRecipeTiddler(tiddlerFields,recipe_name,attachment_blob);
 	this.dispatchEvent("change");
 	return result;

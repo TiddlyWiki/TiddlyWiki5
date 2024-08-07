@@ -69,11 +69,12 @@ AttachmentStore.prototype.saveAttachment = function(options) {
 	fs.writeFileSync(path.resolve(attachmentPath,dataFilename),options.text,contentTypeInfo.encoding);
 	// Save the meta.json file
 	fs.writeFileSync(path.resolve(attachmentPath,"meta.json"),JSON.stringify({
+		_canonical_uri: options._canonical_uri,
 		created: $tw.utils.stringifyDate(new Date()),
 		modified: $tw.utils.stringifyDate(new Date()),
 		contentHash: contentHash,
 		filename: dataFilename,
-		type: options.type
+		type: options.type,
 	},null,4));
 	return contentHash;
 };
@@ -81,7 +82,7 @@ AttachmentStore.prototype.saveAttachment = function(options) {
 /*
 Adopts an attachment file into the store
 */
-AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash) {
+AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash,canonicalUri) {
 	const path = require("path"),
 		fs = require("fs");
 	// Choose the best file extension for the attachment given its type
@@ -95,6 +96,7 @@ AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash)
 	fs.renameSync(incomingFilepath,dataFilepath);
 	// Save the meta.json file
 	fs.writeFileSync(path.resolve(attachmentPath,"meta.json"),JSON.stringify({
+		_canonical_uri: canonicalUri,
 		created: $tw.utils.stringifyDate(new Date()),
 		modified: $tw.utils.stringifyDate(new Date()),
 		contentHash: hash,
@@ -137,6 +139,42 @@ AttachmentStore.prototype.getAttachmentStream = function(attachment_name) {
 	return null;
 };
 
+/*
+Get the size of an attachment file given the contentHash.
+Returns the size in bytes, or null if the file doesn't exist.
+*/
+AttachmentStore.prototype.getAttachmentFileSize = function(contentHash) {
+	const path = require("path"),
+		fs = require("fs");
+	// Construct the path to the attachment directory
+	const attachmentPath = path.resolve(this.storePath, "files", contentHash);
+	// Read the meta.json file
+	const metaJsonPath = path.resolve(attachmentPath, "meta.json");
+	if(fs.existsSync(metaJsonPath) && fs.statSync(metaJsonPath).isFile()) {
+		const meta = $tw.utils.parseJSONSafe(fs.readFileSync(metaJsonPath, "utf8"), function() { return null; });
+		if(meta) {
+			const dataFilepath = path.resolve(attachmentPath, meta.filename);
+			// Check if the data file exists and return its size
+			if(fs.existsSync(dataFilepath) && fs.statSync(dataFilepath).isFile()) {
+				return fs.statSync(dataFilepath).size;
+			}
+		}
+	}
+	// Return null if the file doesn't exist or there was an error
+	return null;
+};
+
+AttachmentStore.prototype.getAttachmentMetadata = function(attachmentBlob) {
+	const path = require("path"),
+		fs = require("fs");
+	const attachmentPath = path.resolve(this.storePath, "files", attachmentBlob);
+	const metaJsonPath = path.resolve(attachmentPath, "meta.json");
+	if(fs.existsSync(metaJsonPath)) {
+		const metadata = JSON.parse(fs.readFileSync(metaJsonPath, "utf8"));
+		return metadata;
+	}
+	return null;
+};
 exports.AttachmentStore = AttachmentStore;
 
 })();
