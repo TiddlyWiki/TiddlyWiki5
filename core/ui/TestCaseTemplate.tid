@@ -13,6 +13,7 @@ title: $:/core/ui/TestCaseTemplate
 		testActions="Actions"
 		testHideIfPass=<<hideIfPass>>
 	>
+		<$data $filter={{!!import}}/>
 		<$data $compound-filter={{!!import-compound}}/>
 		<$data $compound-tiddler=<<currentTiddler>>/>
 		<%if [{!!description}!is[blank]] %><$data title="Description" text={{!!description}}/><%endif%>
