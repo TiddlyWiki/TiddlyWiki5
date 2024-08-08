@@ -25,7 +25,8 @@ exports["excise"] = function(event,operation) {
 		{
 			title: excisionTitle,
 			text: operation.selection,
-			tags: event.paramObject.tagnew === "yes" ?  [editTiddlerTitle] : []
+			tags: event.paramObject.tagnew === "yes" ?  [editTiddlerTitle] : [],
+			type: editTiddler.fields.type
 		}
 	));
 	operation.replacement = excisionTitle;
