@@ -80,6 +80,7 @@ NewMarkdown/Caption: new Markdown tiddler
 NewMarkdown/Hint: Create a new Markdown tiddler
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
+OpenControlPanel/Hint: Open control panel
 OpenWindow/Caption: open in new window
 OpenWindow/Hint: Open tiddler in new window
 Palette/Caption: palette

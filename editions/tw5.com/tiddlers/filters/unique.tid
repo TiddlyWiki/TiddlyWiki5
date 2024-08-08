@@ -1,4 +1,6 @@
 caption: unique
+created: 20240709151018238
+modified: 20240709151336906
 op-input: a list of items
 op-output: a list of unique items
 op-parameter: ignored
@@ -6,5 +8,7 @@ op-purpose: remove all duplicate items from the current list
 tags: [[Filter Operators]] [[Order Operators]] [[Listops Operators]]
 title: unique Operator
 type: text/vnd.tiddlywiki
+
+<<.note """Unlike the default <<.link "Dominant Append" "Dominant Append">> handling of duplication, the effect of <<.op unique>> is to retain only the <<.em earliest>> instance among duplicated values.""">>
 
 <<.operator-examples "unique">>

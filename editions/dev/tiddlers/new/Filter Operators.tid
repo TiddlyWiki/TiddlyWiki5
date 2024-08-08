@@ -25,7 +25,7 @@ The function should return either a new [[tiddler iterator|Tiddler Iterators]], 
 
 There are several filter operators built into the core which can serve as a jumping off point for your own filter operators:
 
-https://github.com/Jermolene/TiddlyWiki5/tree/master/core/modules/filters
+https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/core/modules/filters
 
 ! Example
 

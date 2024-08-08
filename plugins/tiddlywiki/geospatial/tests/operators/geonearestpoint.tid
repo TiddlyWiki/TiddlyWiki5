@@ -17,7 +17,7 @@ title: Output
 >
 
 <$text text={{{ =[<oxford>] =[<winchester>] +[geonearestpoint<new-york>jsonget[id]] }}}/>,
-<$text text={{{ =[<oxford>] =[[Not a point]] +[geonearestpoint<new-york>jsonget[id]] }}}/>,
+<$text text={{{ =[<winchester>] =[[Not a point]] +[geonearestpoint<new-york>jsonget[id]] }}}/>,
 <$text text={{{ =[[Not a point]] +[geonearestpoint<new-york>jsonget[id]] }}}/>
 
 </$let>
@@ -25,4 +25,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p>Winchester,Oxford,</p>
+<p>Oxford,Winchester,</p>

@@ -1,8 +1,10 @@
 title: cities/Toronto
-tags: $:/tags/GeoMarker
+tags: $:/tags/GeoMarker $:/tags/Demo/Cities
 caption: Toronto
 lat: 43.651070
 long: -79.347015
 alt: 0
+
+{{cities/Toronto/image}}
 
 This is Toronto!

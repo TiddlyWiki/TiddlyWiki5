@@ -42,6 +42,7 @@ external-link-background-visited: inherit
 external-link-foreground: rgb(179, 179, 255)
 external-link-foreground-hover: inherit
 external-link-foreground-visited: rgb(153, 153, 255)
+footnote-target-background: <<colour tag-foreground>>
 foreground: rgb(179, 179, 179)
 highlight-background: #ffff78
 highlight-foreground: #000000

@@ -1,0 +1,7 @@
+title: $:/language/Snippets/FunctionDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: 函数定义
+
+\function f.name(param1,param2:"默认值") [<param1>!is[blank]else<param2>]
+
+<<f.name>>

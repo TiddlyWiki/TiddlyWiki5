@@ -1,7 +1,7 @@
-title: $:/palettes/ContrastDark
-name: Contrast (Dark)
-color-scheme: dark
-description: High contrast and unambiguous (dark version)
+title: $:/palettes/ContrastLight
+name: Contrast (Light)
+color-scheme: light
+description: High contrast and unambiguous (light version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
@@ -9,7 +9,7 @@ alert-background: #f00
 alert-border: <<colour background>>
 alert-highlight: <<colour foreground>>
 alert-muted-foreground: #800
-background: #000
+background: #fff
 blockquote-bar: <<colour muted-foreground>>
 button-background: <<colour background>>
 button-foreground: <<colour foreground>>
@@ -33,7 +33,8 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #00a
 external-link-foreground: #00e
-foreground: #fff
+footnote-target-background: #e5e5e5
+foreground: #000
 highlight-background: #ffff00
 highlight-foreground: #000000
 message-background: <<colour foreground>>
@@ -82,8 +83,8 @@ tab-foreground: <<colour background>>
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #fff
-tag-foreground: #000
+tag-background: #000
+tag-foreground: #fff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour foreground>>
 tiddler-controls-foreground-hover: #ddd

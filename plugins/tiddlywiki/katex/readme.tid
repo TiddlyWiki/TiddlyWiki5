@@ -4,4 +4,4 @@ This is a TiddlyWiki plugin for mathematical and chemical typesetting based on [
 
 It is completely self-contained, and doesn't need an Internet connection in order to work. It works both in the browser and under Node.js.
 
-[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/katex]]
+[[Source code|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/plugins/tiddlywiki/katex]]

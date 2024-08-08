@@ -1,6 +1,6 @@
 caption: link
 created: 20131024141900000
-modified: 20231113093304323
+modified: 20240730065043721
 tags: Widgets
 title: LinkWidget
 type: text/vnd.tiddlywiki
@@ -69,11 +69,13 @@ This causes the tooltip to be the ''tooltip'' field of the target tiddler. If th
 
 The link widget automatically determines and applies the following classes to links:
 
-* `tc-tiddlylink` - applied to all links
+* `tc-tiddlylink` - applied to ''all'' links
 * `tc-tiddlylink-external` - applied to external, non-tiddler links
 * `tc-tiddlylink-internal` - applied to tiddler links
 * `tc-tiddlylink-missing` - applied to tiddler links where the target tiddler doesn't exist
 * `tc-tiddlylink-resolves` - applied to tiddler links when the target tiddler does exist
+* `tc-tiddlylink-shadow` - applied to tiddler links when the target is a shadow tiddler
+** `tc-tiddlylink-shadow tc-tiddlylink-resolves` - applied to ''overwritten'' shadow tiddlers
 
 Use the `class` attribute to specify additional css classes, or `overrideClass` to apply only that but not the above defaults, e.g. when used in a LinkCatcherWidget:
 
