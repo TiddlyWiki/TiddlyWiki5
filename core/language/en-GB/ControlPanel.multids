@@ -198,6 +198,12 @@ Settings/TitleLinks/Yes/Description: Display tiddler titles as links
 Settings/MissingLinks/Caption: Wiki Links
 Settings/MissingLinks/Hint: Choose whether to link to tiddlers that do not exist yet
 Settings/MissingLinks/Description: Enable links to missing tiddlers
+SocialCard/Caption: Social Media Card
+SocialCard/Domain/Prompt: Domain name to display for the link (for example, ''tiddlywiki.com'')
+SocialCard/Hint: This information is used by social and messaging services to display a preview card for links to this TiddlyWiki when hosted online
+SocialCard/PreviewUrl/Prompt: Full URL to preview image for this TiddlyWiki
+SocialCard/PreviewUrl/Preview: Preview image:
+SocialCard/Url/Prompt: Full URL of this TiddlyWiki
 StoryTiddler/Caption: Story Tiddler
 StoryTiddler/Hint: This rule cascade is used to dynamically choose the template for displaying a tiddler in the story river.
 StoryView/Caption: Story View
