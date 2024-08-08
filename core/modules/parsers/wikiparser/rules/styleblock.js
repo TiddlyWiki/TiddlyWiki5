@@ -75,54 +75,52 @@ exports.parse = function() {
 
 exports.serialize = function(tree, serialize) {
 	// serialize: function that serializes an array of nodes or a single node to a string
-	var result = [];
+	var lines = [];
 	var classes = [];
 	var styles = [];
 
-	// Collect all unique classes and styles from child nodes
-	for(var i = 0; i < tree.children.length; i++) {
-		var node = tree.children[i];
-		if(node.attributes && node.attributes.class) {
-			var nodeClasses = node.attributes.class.value.split(" ");
-			for(var j = 0; j < nodeClasses.length; j++) {
-				if(classes.indexOf(nodeClasses[j]) === -1) {
-					classes.push(nodeClasses[j]);
-				}
+	// Same classes are set to each children. So only collect from first child.
+	var node = tree.children[0];
+	if(node && node.attributes && node.attributes.class) {
+		var nodeClasses = node.attributes.class.value.split(" ");
+		for(var j = 0; j < nodeClasses.length; j++) {
+			if(classes.indexOf(nodeClasses[j]) === -1) {
+				classes.push(nodeClasses[j]);
 			}
 		}
-		if(node.attributes && node.attributes.style) {
-			var nodeStyles = node.attributes.style.value.split(";");
-			for(var k = 0; k < nodeStyles.length; k++) {
-				var style = nodeStyles[k].trim();
-				if(style && styles.indexOf(style) === -1) {
-					styles.push(style);
-				}
+	}
+	if(node && node.attributes && node.attributes.style) {
+		var nodeStyles = node.attributes.style.value.split(";");
+		for(var k = 0; k < nodeStyles.length; k++) {
+			var style = nodeStyles[k].trim();
+			if(style && styles.indexOf(style) === -1) {
+				styles.push(style);
 			}
 		}
 	}
 
-	// Add the style block header if there are any classes or styles
+	// Add the style block header, sort styles first, and classes later. Original order is not preserved intentionally for simplicity.
 	if(classes.length > 0 || styles.length > 0) {
 		if(styles.length > 0) {
-			result.push("@@");
-			result.push(styles.join(";"));
-			result.push(";\n");
+			lines.push("@@");
+			lines.push(styles.join(";"));
+			lines.push(";\n");
 		}
 		if(classes.length > 0) {
-			result.push("@@.");
-			result.push(classes.join("."));
-			result.push("\n");
+			lines.push("@@.");
+			lines.push(classes.join("."));
+			lines.push("\n");
 		}
 	}
 
 	// Serialize each child node and add to result
 	for(var i = 0; i < tree.children.length; i++) {
-		result.push(serialize(tree.children[i]));
+		lines.push(serialize(tree.children[i]));
 	}
-
+	var result = lines.join("").trimEnd();
 	// Add the closing @@ for the style block
-	result.push("@@");
-	return result.join("");
+	result += "\n@@\n\n"
+	return result;
 };
 
 })();
