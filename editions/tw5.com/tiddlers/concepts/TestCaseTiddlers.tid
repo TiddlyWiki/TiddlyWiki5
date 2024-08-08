@@ -1,5 +1,5 @@
 created: 20240507221902644
-modified: 20240729083054531
+modified: 20240808020847667
 tags: Concepts
 title: TestCaseTiddlers
 type: text/vnd.tiddlywiki
@@ -14,8 +14,9 @@ Test case tiddlers have the following ''fields'':
 |<<.field type>> |Needs to be set to `text/vnd.tiddlywiki-multiple` |
 |<<.field tags>> |Test cases are tagged [[$:/tags/wiki-test-spec]]. Test cases that intentionally fail are tagged [[$:/tags/wiki-test-spec-failing]] |
 |<<.field description>> |Descriptive heading for the test, intended to make it easy to identify the test |
-|<<.field display-format>> |Optional, defaults to `wikitext`. Set to `plaintext` to cause the output to be rended as plain text |
-|<<.field import-compound>> |<<.from-version "5.3.6">> A filter string, that defines a list of compound tiddlers, that should be imported. See: <<.wlink DataWidget>> widget |
+|<<.field display-format>> |Optional, defaults to `wikitext`. Set to `plaintext` to cause the output to be rendered as plain text |
+|<<.field import>> |<<.from-version "5.3.6">> A filter string that defines a list of tiddlers to import |
+|<<.field import-compound>> |<<.from-version "5.3.6">> A filter string that defines a list of compound tiddlers to import. See: <<.wlink DataWidget>> widget |
 
 Test case tiddlers with the appropriate tag are shown in the $:/ControlPanel ''-> Advanced -> Test Cases ''
 
