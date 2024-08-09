@@ -186,9 +186,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// tree: { type: 'element', tag: 'table', children: [{ type: 'element', tag: 'thead', children: [{ type: 'element', tag: 'tr', children: [{ type: 'element', tag: 'th', children: [{ type: 'text', text: 'Alpha' }] }, { type: 'element', tag: 'th', children: [{ type: 'text', text: 'Beta' }] }, { type: 'element', tag: 'th', children: [{ type: 'text', text: 'Gamma' }] }, { type: 'element', tag: 'th', children: [{ type: 'text', text: 'Delta' }] }] }] }, { type: 'element', tag: 'tbody', children: [{ type: 'element', tag: 'tr', children: [{ type: 'element', tag: 'th', children: [{ type: 'text', text: 'One' }] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }] }, { type: 'element', tag: 'tr', children: [{ type: 'element', tag: 'th', children: [{ type: 'text', text: 'Two' }] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }] }, { type: 'element', tag: 'tr', children: [{ type: 'element', tag: 'th', children: [{ type: 'text', text: 'Three' }] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }, { type: 'element', tag: 'td', children: [] }] }] }] }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Initialize the serialized string
 	var serialized = "";
 	// Iterate over the table rows
 	for(var i = 0; i < tree.children.length; i++) {
@@ -201,10 +198,14 @@ exports.serialize = function(tree, serialize) {
 			// Iterate over the cells in the row
 			for(var k = 0; k < row.children.length; k++) {
 				var cell = row.children[k];
+				// if is th, append additional `!`
+				if(cell.tag === "th") {
+					serialized += "!";
+				}
 				// Serialize the cell content
 				serialized += serialize(cell.children);
-				// End the cell
-				serialized += "|";
+				// End the cell with a tailing space
+				serialized += " |";
 			}
 			// End the row
 			serialized += "\n";
