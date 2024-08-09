@@ -11,8 +11,8 @@ condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
 \procedure tw5-ImageTemplate() [img[$(currentTiddler)$]]
 \procedure tw5-FileTemplate() [[$(currentTiddler)$]]
 
-\procedure escape-regexp() [()<>\\]
-\function escape.title() [search-replace:g:regexp<escape-regexp>,[\$&]]
+<!-- The following characters must be escaped in markdown: <>()\ -->
+\function escape.title() [search-replace:g:regexp[\(|\)|<|>|\\],[\$&]]
 \procedure markdown-ImageTemplate() ![](<#${ [<currentTiddler>escape.title[]] }$>)
 \procedure markdown-FileTemplate() [](<#${ [<currentTiddler>escape.title[]] }$>)
 
