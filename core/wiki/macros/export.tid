@@ -1,5 +1,9 @@
 title: $:/core/macros/export
-tags: $:/tags/Global
+tags: $:/tags/Macro $:/tags/Global
+
+\define exportButtonFilename(baseFilename)
+$baseFilename$$(extension)$
+\end
 
 \procedure exportButton(exportFilter:"[!is[system]sort[title]]",lingoBase,baseFilename:"tiddlers")
 \whitespace trim
