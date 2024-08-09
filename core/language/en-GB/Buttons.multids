@@ -127,6 +127,7 @@ Excise/Caption: excise
 Excise/Caption/Excise: Perform excision
 Excise/Caption/MacroName: Macro name:
 Excise/Caption/NewTitle: Title of new tiddler:
+Excise/Caption/DefaultTitle: New Excision
 Excise/Caption/Replace: Replace excised text with:
 Excise/Caption/Replace/Macro: macro
 Excise/Caption/Replace/Link: link
