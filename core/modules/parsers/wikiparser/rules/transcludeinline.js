@@ -85,9 +85,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// tree: { type: 'transclude', attributes: { $tiddler: { name: '$tiddler', type: 'string', value: 'MyTiddler' }, $field: { name: '$field', type: 'string', value: 'text' } } }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Initialize the serialized string
 	var serialized = "{{";
 	// Check for tiddler attribute
 	if(tree.attributes.$tiddler) {

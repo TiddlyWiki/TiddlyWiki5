@@ -84,9 +84,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function (tree, serialize) {
-	// tree: { type: 'element', tag: 'pre', children: [{ type: 'text', text: 'This will be rendered as JavaScript' }] }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Initialize the serialized string with the opening delimiter and type
 	var serialized = '$$$'; // Extract the type from the tree node (assuming it's stored in a specific attribute)
 	if(tree.attributes && tree.attributes.type) {
 		serialized += tree.attributes.type.value;

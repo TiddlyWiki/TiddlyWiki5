@@ -48,9 +48,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// tree: { type: 'element', tag: 'sup', children: [{ type: 'text', text: 'superscript' }] }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Initialize the serialized string with the opening delimiter
 	var serialized = "^^";
 	// Serialize the children of the superscript element
 	serialized += serialize(tree.children);

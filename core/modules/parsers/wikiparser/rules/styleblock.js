@@ -74,7 +74,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// serialize: function that serializes an array of nodes or a single node to a string
 	var lines = [];
 	var classes = [];
 	var styles = [];

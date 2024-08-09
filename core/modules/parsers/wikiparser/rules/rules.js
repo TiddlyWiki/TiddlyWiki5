@@ -69,7 +69,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function (tree, serialize) {
-	// tree: { type: "void", attributes: { action: { type: "string", value: "except" }, rules: { type: "string", value: "ruleone ruletwo rulethree" } }, children: [{ type: "void", attributes: { action: { type: "string", value: "only" }, rules: { type: "string", value: "ruleone ruletwo rulethree" } }, children: [] }] }
 	var result = [];
 	if(tree.attributes.action && tree.attributes.rules) {
 		// tree.attributes.action.value: "except"

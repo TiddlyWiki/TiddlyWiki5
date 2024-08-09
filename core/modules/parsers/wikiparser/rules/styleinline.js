@@ -56,8 +56,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// tree: {type: "element", tag: "span", children: [...], attributes: {class: {name: "class", type: "string", value: " myClass "}, style: {name: "style", type: "string", value: "background-color:red;"}}, orderedAttributes: [...], start: 0, end: 43, rule: "styleinline"}
-	// serialize: function that accepts an array of nodes or a single node and returns a string
 	var result = "@@";
 	// Add styles if present
 	if(tree.attributes && tree.attributes.style) {

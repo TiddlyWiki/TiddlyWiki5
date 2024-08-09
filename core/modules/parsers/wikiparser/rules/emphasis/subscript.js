@@ -48,9 +48,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// tree: { type: 'element', tag: 'sub', children: [{ type: 'text', text: 'subscript' }] }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Initialize the serialized string with the opening delimiter
 	var serialized = ",,";
 	// Serialize the children of the subscript element
 	serialized += serialize(tree.children);

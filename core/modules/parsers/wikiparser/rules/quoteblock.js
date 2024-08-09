@@ -74,7 +74,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function (tree, serialize) {
-	// tree: { type: "element", tag: "blockquote", attributes: { class: { type: "string", value: "tc-quote" } }, children: [{ type: "element", tag: "cite", children: [{ type: "text", text: "tc-quote" }] }, { type: "element", tag: "p", children: [{ type: "text", text: "Quote text\n" }] }] }
 	var result = [];
 	if(tree.type === "element" && tree.tag === "blockquote") {
 		// tree.attributes.class.value: "tc-quote"
