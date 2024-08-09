@@ -327,11 +327,10 @@ describe("WikiAST serialization unit tests", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("StyleBlockTest2").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("StyleBlockTest2").trimEnd());
   });
-  return;
 
   wiki.addTiddler({
     title: "StyleInlineTest",
-    text: "@@.myClass This is some text with a class@@\n@@background-color:red;This is some text with a background colour@@\n@@width:100px;.myClass This is some text with a class and a width@@",
+    text: "@@.myClass This is some text with a class@@\n@@background-color:red; This is some text with a background colour@@\n@@width:100px;.myClass This is some text with a class and a width@@",
   });
   it("should serialize style inlines correctly", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("StyleInlineTest").tree).trimEnd();
@@ -355,6 +354,7 @@ describe("WikiAST serialization unit tests", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TableTest").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("TableTest").trimEnd());
   });
+  return;
 
   wiki.addTiddler({
     title: "TranscludeBlockTest",

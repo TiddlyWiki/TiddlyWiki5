@@ -25,7 +25,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(\.(?:[^\r\n\s]+)\s+)?/mg;
+	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?\s*(\.(?:[^\r\n\s]+)\s+)?/mg;
 };
 
 exports.parse = function() {
@@ -56,25 +56,20 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// tree: { type: 'element', tag: 'span', attributes: { class: { type: 'string', value: 'myClass' }, style: { type: 'string', value: 'background-color:red;' } }, children: [{ type: 'text', text: 'This is some text with a class and a background colour' }] }
-	// serialize: function that accepts array of nodes or a node and returns a string
-	// Initialize the serialized string with the opening delimiter
-	var serialized = "@@";
-	// Check for styles and append them to the serialized string
-	if(tree.attributes.style) {
-		serialized += tree.attributes.style.value;
+	// tree: {type: "element", tag: "span", children: [...], attributes: {class: {name: "class", type: "string", value: " myClass "}, style: {name: "style", type: "string", value: "background-color:red;"}}, orderedAttributes: [...], start: 0, end: 43, rule: "styleinline"}
+	// serialize: function that accepts an array of nodes or a single node and returns a string
+	var result = "@@";
+	// Add styles if present
+	if(tree.attributes && tree.attributes.style) {
+		result += tree.attributes.style.value.trim();
 	}
-	// Check for classes and append them to the serialized string
-	if(tree.attributes.class) {
-		var classes = tree.attributes.class.value.split(" ");
-		for(var i = 0; i < classes.length; i++) {
-			serialized += "." + classes[i] + " ";
-		}
+	// Add classes if present
+	if(tree.attributes && tree.attributes.class) {
+		result += "." + tree.attributes.class.value.trim().split(" ").join(".");
 	}
-	// Append the serialized children and the closing delimiter
-	serialized += serialize(tree.children) + "@@";
-	// Return the complete serialized string
-	return serialized;
+	// Serialize children and append to result
+	result += " " + serialize(tree.children) + "@@";
+	return result;
 };
 
 })();
