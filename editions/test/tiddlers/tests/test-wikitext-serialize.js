@@ -388,7 +388,6 @@ describe("WikiAST serialization unit tests", function () {
     serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TypedBlockTest2").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("TypedBlockTest2").trimEnd());
   });
-  return;
 
   wiki.addTiddler({
     title: "WikiLinkTest",
