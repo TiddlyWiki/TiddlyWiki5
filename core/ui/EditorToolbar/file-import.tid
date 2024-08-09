@@ -11,8 +11,10 @@ condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
 \procedure tw5-ImageTemplate() [img[$(currentTiddler)$]]
 \procedure tw5-FileTemplate() [[$(currentTiddler)$]]
 
-\procedure markdown-ImageTemplate() ![](<#${ [<currentTiddler>encodeuri[]] }$>)
-\procedure markdown-FileTemplate() [](<#${ [<currentTiddler>encodeuri[]] }$>)
+\procedure escape-regexp() [()<>\\]
+\function escape.title() [search-replace:g:regexp<escape-regexp>,[\$&]]
+\procedure markdown-ImageTemplate() ![](<#${ [<currentTiddler>escape.title[]] }$>)
+\procedure markdown-FileTemplate() [](<#${ [<currentTiddler>escape.title[]] }$>)
 
 \function is.markdown.tiddler() [all[]type[text/x-markdown]] [all[]type[text/markdown]]
 \function is.image() [get[type]prefix[image]]
@@ -23,7 +25,6 @@ condition: [<targetTiddler>filter{$:/config/Editor/EnableImportFilter}]
 \procedure postImportActions()
 \whitespace trim
 <$list filter="[<importTitle>links[]] :reduce[get.link.template[]substitute[]addprefix<accumulator>]" variable="imageTitle">
-<$action-log $$filter="imageTitle"/>
 <$action-sendmessage
 	$message="tm-edit-text-operation"
 	$param="insert-text"
