@@ -49,22 +49,10 @@ exports.parse = function() {
 /*
 Same as macrocallblock but without \n\n
 */
-exports.serialize = function (node) {
-	// Start with macro opener
-	var result = "<<";
-	if(node.attributes && node.attributes["$variable"]) {
-		result += node.attributes["$variable"].value; // Add macro name
-	}
-	// Append ordered arguments if any
-	if(node.orderedAttributes) {
-		node.orderedAttributes.forEach(function (attr) {
-			if(attr.name !== "$variable") {
-				result += " " + '"' + attr.value + '"'; // Add each additional value
-			}
-		});
-	}
-	result += ">>";
-	return result;
+exports.serialize = function (tree, serialize) {
+	var macrocallblock = require("$:/core/modules/parsers/wikiparser/rules/macrocallblock.js");
+	var result = macrocallblock.serialize(tree, serialize);
+	return result.trimEnd();
 };
 
 })();

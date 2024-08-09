@@ -71,8 +71,7 @@ exports.parse = function() {
 	return [node];
 };
 
-exports.serialize = function(tree) {
-	// Filter expression
+exports.serialize = function(tree, serialize) {
 	var serialized = "{{{" + tree.attributes.filter.value;
 	// Tooltip text
 	if(tree.attributes.tooltip) serialized += "|" + tree.attributes.tooltip.value;

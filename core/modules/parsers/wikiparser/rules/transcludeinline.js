@@ -85,37 +85,9 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	var serialized = "{{";
-	// Check for tiddler attribute
-	if(tree.attributes.$tiddler) {
-		serialized += tree.attributes.$tiddler.value;
-		// Check for field attribute
-		if(tree.attributes.$field) {
-			serialized += "##" + tree.attributes.$field.value;
-		}
-		// Check for index attribute
-		if(tree.attributes.$index) {
-			serialized += "!!" + tree.attributes.$index.value;
-		}
-	}
-	// Check for template attribute
-	if(tree.attributes.$template) {
-		serialized += "||" + tree.attributes.$template.value;
-	}
-	// Check for parameters
-	var params = [];
-	for(var key in tree.attributes) {
-		if(key !== "$tiddler" && key !== "$field" && key !== "$index" && key !== "$template") {
-			params.push(tree.attributes[key].value);
-		}
-	}
-	if(params.length > 0) {
-		serialized += "|" + params.join("|");
-	}
-	// Close the serialized string
-	serialized += "}}";
-	// Return the complete serialized string
-	return serialized;
+	var transcludeblock = require("$:/core/modules/parsers/wikiparser/rules/transcludeblock.js");
+	var result = transcludeblock.serialize(tree, serialize);
+	return result.trimEnd();
 };
 
 })();

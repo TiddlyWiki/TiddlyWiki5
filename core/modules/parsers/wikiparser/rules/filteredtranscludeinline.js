@@ -70,20 +70,10 @@ exports.parse = function() {
 	return [node];
 };
 
-exports.serialize = function(tree) {
-	// Filter expression
-	var serialized = "{{{" + tree.attributes.filter.value;
-	// Tooltip text
-	if(tree.attributes.tooltip) serialized += "|" + tree.attributes.tooltip.value;
-	// Template title
-	if(tree.attributes.template) serialized += "||" + tree.attributes.template.value;
-	serialized += "}}";
-	// Inline styles
-	if(tree.attributes.style) serialized += tree.attributes.style.value;
-	serialized += "}"
-	// CSS classes
-	if(tree.attributes.itemClass) serialized += "." + tree.attributes.itemClass.value.split(" ").join(".");
-	return serialized;
+exports.serialize = function(tree, serialize) {
+	var filteredtranscludeblock = require("$:/core/modules/parsers/wikiparser/rules/filteredtranscludeblock.js");
+	var result = filteredtranscludeblock.serialize(tree, serialize);
+	return result.trimEnd();
 };
 
 })();
