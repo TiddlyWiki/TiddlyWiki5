@@ -354,11 +354,10 @@ describe("WikiAST serialization unit tests", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TableTest").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("TableTest").trimEnd());
   });
-  return;
 
   wiki.addTiddler({
     title: "TranscludeBlockTest",
-    text: "{{MyTiddler}}\n{{MyTiddler||TemplateTitle}}",
+    text: "{{MyTiddler}}\n\n{{MyTiddler||TemplateTitle}}\n\n{{||TemplateTitle}}\n\n{{MyTiddler|Parameter}}\n\n{{MyTiddler||TemplateTitle|Parameter|SecondParameter}}\n\n{{MyTiddler!!field}}\n\n{{!!field}}\n\n{{MyTiddler##index}}\n\n{{##index}}",
   });
   it("should serialize block-level transclusions correctly", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TranscludeBlockTest").tree).trimEnd();
@@ -367,12 +366,13 @@ describe("WikiAST serialization unit tests", function () {
 
   wiki.addTiddler({
     title: "TranscludeInlineTest",
-    text: "{{MyTiddler}}\n{{MyTiddler||TemplateTitle}}",
+    text: "{{MyTiddler}} {{MyTiddler||TemplateTitle}}",
   });
   it("should serialize inline-level transclusions correctly", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TranscludeInlineTest").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("TranscludeInlineTest").trimEnd());
   });
+  return;
 
   wiki.addTiddler({
     title: "TypedBlockTest",

@@ -87,37 +87,53 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	var serialized = "{{";
-	// Check for tiddler attribute
-	if(tree.attributes.$tiddler) {
-		serialized += tree.attributes.$tiddler.value;
-		// Check for field attribute
-		if(tree.attributes.$field) {
-			serialized += "##" + tree.attributes.$field.value;
+	var result = "{{";
+	function handleTransclude(transcludeNode) {
+		// Handle field
+		if(transcludeNode.attributes.$field) {
+			result += "!!" + transcludeNode.attributes.$field.value;
 		}
 		// Check for index attribute
-		if(tree.attributes.$index) {
-			serialized += "!!" + tree.attributes.$index.value;
+		if(transcludeNode.attributes.$index) {
+			result += "##" + transcludeNode.attributes.$index.value;
+		}
+		// Handle template
+		var tiddlerTitle = tree.attributes.tiddler ? tree.attributes.tiddler.value : undefined;
+		if(transcludeNode.attributes.$tiddler && transcludeNode.attributes.$tiddler.value !== tiddlerTitle) {
+			result += "||" + transcludeNode.attributes.$tiddler.value;
+		}
+		// Check for parameters
+		var params = [];
+		var excludedAttributes = ["tiddler", "$tiddler", "$field", "$index", "$template"];
+		for(var key in transcludeNode.attributes) {
+			if(excludedAttributes.indexOf(key) === -1) {
+				params.push(transcludeNode.attributes[key].value);
+			}
+		}
+		if(params.length > 0) {
+			result += "|" + params.join("|");
 		}
 	}
-	// Check for template attribute
-	if(tree.attributes.$template) {
-		serialized += "||" + tree.attributes.$template.value;
-	}
-	// Check for parameters
-	var params = [];
-	for(var key in tree.attributes) {
-		if(key !== "$tiddler" && key !== "$field" && key !== "$index" && key !== "$template") {
-			params.push(tree.attributes[key].value);
+	function handleTiddler(tiddlerNode) {
+		// Check for tiddler attribute
+		if(tree.attributes.tiddler.value) { 
+			result += tree.attributes.tiddler.value;
 		}
+		$tw.utils.each(tree.children, function(child) {
+			if(child.type === "transclude") {
+				handleTransclude(child);
+			}
+		});
 	}
-	if(params.length > 0) {
-		serialized += "|" + params.join("|");
+	if(tree.type === "tiddler") {
+		handleTiddler(tree);
+	} else if(tree.type === "transclude") {
+		handleTransclude(tree);
 	}
-	// Close the serialized string
-	serialized += "}}";
-	// Return the complete serialized string
-	return serialized;
+	// Close the result string
+	result += "}}\n\n";
+	// Return the complete result string
+	return result;
 };
 
 })();
