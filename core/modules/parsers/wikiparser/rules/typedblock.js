@@ -63,36 +63,46 @@ exports.parse = function() {
 	var parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
 	// If there's no render type, just return the parse tree
 	if(!renderType) {
-		return parser.tree;
+		return  [{
+			type: "void",
+			children: $tw.utils.isArray(parser.tree) ? parser.tree : [parser.tree],
+			parseType: parseType,
+			renderType: renderType,
+			text: text,
+			start: start,
+			end: this.parser.pos
+		}];
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
 		var widgetNode = this.parser.wiki.makeWidget(parser),
 			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
-		text = renderType === "text/html" ? container.innerHTML : container.textContent;
+		var renderResult = renderType === "text/html" ? container.innerHTML : container.textContent;
 		return [{
-			type: "element",
-			tag: "pre",
+			type: "void",
 			children: [{
-				type: "text",
-				text: text,
-				start: start,
-				end: this.parser.pos
-			}]
+				type: "element",
+				tag: "pre",
+				children: [{
+					type: "text",
+					text: renderResult,
+				}]
+			}],
+			parseType: parseType,
+			renderType: renderType,
+			text: text,
+			start: start,
+			end: this.parser.pos
 		}];
 	}
 };
 
 exports.serialize = function (tree, serialize) {
-	var serialized = '$$$'; // Extract the type from the tree node (assuming it's stored in a specific attribute)
-	if(tree.attributes && tree.attributes.type) {
-		serialized += tree.attributes.type.value;
+	if(tree.type === "void") {
+		// Directly process the tree's text content
+		return "$$$" + tree.parseType + (tree.renderType ? " > " + tree.renderType : "") + "\n" + tree.text + "\n$$$\n\n";
 	}
-	serialized += '\n'; // Serialize the children of the block
-	serialized += serialize(tree.children); 	// Close the serialized string
-	serialized += "\n$$$";
-	// Return the complete serialized string
-	return serialized;
+	return "";
 };
 
 })();

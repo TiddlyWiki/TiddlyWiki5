@@ -372,16 +372,23 @@ describe("WikiAST serialization unit tests", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TranscludeInlineTest").tree).trimEnd();
     expect(serialized).toBe(wiki.getTiddlerText("TranscludeInlineTest").trimEnd());
   });
-  return;
 
   wiki.addTiddler({
-    title: "TypedBlockTest",
-    text: '$$$.js\nThis will be rendered as JavaScript\n$$$\n$$$.svg\n<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">\n  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />\n</svg>\n$$$\n$$$text/vnd.tiddlywiki>text/html\nThis will be rendered as an //HTML representation// of WikiText\n$$$',
+    title: "TypedBlockTest1",
+    text: "$$$text/vnd.tiddlywiki > text/plain\nThis is ''some'' wikitext\n$$$\n\n$$$text/unknown\nSome plain text, which will not be //formatted//.\n\n$$$text/vnd.tiddlywiki > text/html\nThis is ''some'' wikitext\n$$$\n\n",
   });
+  wiki.addTiddler({
+    title: "TypedBlockTest2",
+    text: '$$$.js\nThis will be rendered as JavaScript\n$$$\n\n$$$.svg\n<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">\n  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />\n</svg>\n$$$\n\n$$$image/svg+xml\n<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">\n  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />\n</svg>\n$$$',
+  });
+  
   it("should serialize typed blocks correctly", function () {
-    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TypedBlockTest").tree).trimEnd();
-    expect(serialized).toBe(wiki.getTiddlerText("TypedBlockTest").trimEnd());
+    var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TypedBlockTest1").tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText("TypedBlockTest1").trimEnd());
+    serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("TypedBlockTest2").tree).trimEnd();
+    expect(serialized).toBe(wiki.getTiddlerText("TypedBlockTest2").trimEnd());
   });
+  return;
 
   wiki.addTiddler({
     title: "WikiLinkTest",
