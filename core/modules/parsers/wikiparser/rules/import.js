@@ -52,9 +52,8 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree,serialize) {
-	// Filter attribute
 	var filter = tree.attributes.filter.value;
-	// Construct the serialized string with children that is actually the sibling below the pragma.
+	// Sibling below the pragma become children, so we append the serialized children to the end..
 	return "\\import " + filter + "\n" + serialize(tree.children);
 };
 

@@ -118,11 +118,8 @@ exports.parseLink = function(source,pos) {
 };
 
 exports.serialize = function(tree) {
-	// Tooltip text
 	var tooltip = tree.children[0].text;
-	// URL
 	var url = tree.attributes.href.value;
-	// Construct the serialized string
 	return "[ext[" + (tooltip !== url ? tooltip + "|" : "") + url + "]]";
 };
 

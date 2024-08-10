@@ -66,7 +66,6 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	// Check if the link is suppressed
 	var isSuppressed = tree.children[0].text.substr(0,1) === $tw.config.textPrimitives.unWikiLink;
 
 	var serialized = isSuppressed ? $tw.config.textPrimitives.unWikiLink : "";

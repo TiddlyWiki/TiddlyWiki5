@@ -68,11 +68,8 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree) {
-	// Link text
 	var text = tree.children[0].text;
-	// Link target
 	var target = tree.attributes.to ? tree.attributes.to.value : tree.attributes.href.value;
-	// Construct the serialized string
 	return "[[" + text + (text !== target ? "|" + target : "") + "]]";
 };
 

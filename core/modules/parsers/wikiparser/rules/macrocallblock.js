@@ -57,16 +57,16 @@ exports.parse = function() {
 Serialize a macro call node to wikitext
 */
 exports.serialize = function (node) {
-	// Start with macro opener
 	var result = "<<";
+	// Macro name
 	if(node.attributes && node.attributes["$variable"]) {
-		result += node.attributes["$variable"].value; // Add macro name
+		result += node.attributes["$variable"].value;
 	}
 	// Append ordered arguments if any
 	if(node.orderedAttributes) {
 		node.orderedAttributes.forEach(function (attr) {
 			if(attr.name !== "$variable") {
-				result += " " + '"' + attr.value + '"'; // Add each additional value
+				result += " " + '"' + attr.value + '"';
 			}
 		});
 	}

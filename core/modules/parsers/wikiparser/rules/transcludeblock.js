@@ -130,9 +130,7 @@ exports.serialize = function(tree, serialize) {
 	} else if(tree.type === "transclude") {
 		handleTransclude(tree);
 	}
-	// Close the result string
 	result += "}}\n\n";
-	// Return the complete result string
 	return result;
 };
 

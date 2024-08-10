@@ -78,6 +78,7 @@ exports.parse = function() {
 			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		var renderResult = renderType === "text/html" ? container.innerHTML : container.textContent;
+		// Use void node to carry important info for typedblock
 		return [{
 			type: "void",
 			children: [{
@@ -99,7 +100,6 @@ exports.parse = function() {
 
 exports.serialize = function (tree, serialize) {
 	if(tree.type === "void") {
-		// Directly process the tree's text content
 		return "$$$" + tree.parseType + (tree.renderType ? " > " + tree.renderType : "") + "\n" + tree.text + "\n$$$\n\n";
 	}
 	return "";

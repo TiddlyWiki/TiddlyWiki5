@@ -38,8 +38,7 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree) {
-	var dash = tree.entity === "&ndash;" ? "--" : "---";
-	return dash;
+	return tree.entity === "&ndash;" ? "--" : "---";
 };
 
 })();

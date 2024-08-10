@@ -48,13 +48,7 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree, serialize) {
-	var serialized = "^^";
-	// Serialize the children of the superscript element
-	serialized += serialize(tree.children);
-	// Close the serialized string with the closing delimiter
-	serialized += "^^";
-	// Return the complete serialized string
-	return serialized;
+	return "^^" + serialize(tree.children) + "^^";
 };
 
 })();

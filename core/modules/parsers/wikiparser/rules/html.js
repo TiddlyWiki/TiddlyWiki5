@@ -66,7 +66,7 @@ exports.parse = function() {
 		}
 		tag.end = this.parser.pos;
 		tag.closeTagEnd = tag.end;
-		if(tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== '>') {
+		if(tag.closeTagEnd === tag.openTagEnd || this.parser.source[tag.closeTagEnd - 1] !== ">") {
 			tag.closeTagStart = tag.end;
 		} else {
 			tag.closeTagStart = tag.closeTagEnd - 2;
@@ -74,11 +74,11 @@ exports.parse = function() {
 			if(!Number.isSafeInteger(closeTagMinPos)) closeTagMinPos = tag.openTagEnd;
 			while(tag.closeTagStart >= closeTagMinPos) {
 				var char = this.parser.source[tag.closeTagStart];
-				if(char === '>') {
+				if(char === ">") {
 					tag.closeTagStart = -1;
 					break;
 				}
-				if(char === '<') break;
+				if(char === "<") break;
 				tag.closeTagStart -= 1;
 			}
 			if(tag.closeTagStart < closeTagMinPos) {
@@ -199,9 +199,9 @@ exports.serialize = function(tree, serialize) {
 	var tag = tree.tag;
 	var attributes = Object.keys(tree.attributes).map(function(key) {
 			return key + '="' + tree.attributes[key].value + '"';
-	}).join('');
+	}).join("");
 	// Children
-	var children = tree.children ? serialize(tree.children) : '';
+	var children = tree.children ? serialize(tree.children) : "";
 	// Self-closing tag
 	if(tree.isSelfClosing) {
 			return "<" + tag + (attributes ? " " + attributes : "") + " />";

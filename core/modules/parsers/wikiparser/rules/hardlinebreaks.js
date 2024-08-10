@@ -60,15 +60,14 @@ exports.parse = function() {
 };
 
 exports.serialize = function(tree,serialize) {
-	// we get each of element on tree from `parse` one by one here.
-	var text = tree.tag === 'br' ? '\n' : tree.text;
+	var text = tree.tag === "br" ? "\n" : (tree.text || "");
 	if(tree.isRuleStart) {
 		return '"""\n' + text;
 	}
 	if(tree.isRuleEnd) {
 		return text + '"""';
 	}
-	return text;
+	return text + serialize(tree.children);
 };
 
 })();
