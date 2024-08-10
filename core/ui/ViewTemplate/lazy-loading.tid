@@ -4,7 +4,9 @@ tags: $:/tags/ViewTemplate
 \whitespace trim
 \rules except dash
 
-<!-- Render the text to trigger lazy-loading -->
-{{||$:/core/ui/ViewTemplate/body/default}}
-<!-- Indicator of loading state -->
-<div class="tc-tiddler-lazy-loading" />
+<%if [has:field[_is_skinny]] %>
+  <!-- Render the text to trigger lazy-loading -->
+  {{||$:/core/ui/ViewTemplate/body/default}}
+  <!-- Indicator of loading state -->
+  <div class="tc-tiddler-lazy-loading" />
+<%endif%>
