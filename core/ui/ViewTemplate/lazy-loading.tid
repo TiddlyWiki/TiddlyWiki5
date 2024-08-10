@@ -4,7 +4,7 @@ tags: $:/tags/ViewTemplate
 \whitespace trim
 \rules except dash
 
-<%if [has:field[_is_skinny]] %>
+<%if [<currentTiddler>has:field[_is_skinny]] %>
   <!-- Render the text to trigger lazy-loading -->
   {{||$:/core/ui/ViewTemplate/body/default}}
   <!-- Indicator of loading state -->
