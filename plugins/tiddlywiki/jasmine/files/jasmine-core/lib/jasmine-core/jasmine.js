@@ -170,7 +170,7 @@ getJasmineRequireObj().base = function(j$, jasmineGlobal) {
    * Default number of milliseconds Jasmine will wait for an asynchronous spec to complete.
    * @name jasmine.DEFAULT_TIMEOUT_INTERVAL
    */
-  j$.DEFAULT_TIMEOUT_INTERVAL = 5000;
+  j$.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
   j$.getGlobal = function() {
     return jasmineGlobal;

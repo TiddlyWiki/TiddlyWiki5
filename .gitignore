@@ -10,3 +10,4 @@ store/
 /playwright-report/
 /playwright/.cache/
 $__StoryList.tid
+/editions/test/test-store/*
