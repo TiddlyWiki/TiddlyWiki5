@@ -24,20 +24,29 @@
     "wiki"
   ],
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "eslint": "^7.32.0",
+    "jasmine": "^5.2.0",
+    "nyc": "^17.0.0"
   },
   "license": "BSD",
   "engines": {
     "node": ">=0.8.2"
   },
   "scripts": {
-	"start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
+    "start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
     "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index && node ./tiddlywiki ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
+    "coverage": "nyc --reporter=lcov --reporter=text npm test",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   },
   "dependencies": {
     "better-sqlite3": "^9.4.3",
     "node-sqlite3-wasm": "^0.8.10"
+  },
+  "nyc": {
+    "reporter": ["text", "html"],
+    "all": true,
+    "include": ["plugins/tiddlywiki/multiwikiserver/modules/store/**/*.js"],
+    "exclude": []
   }
 }
