@@ -6,4 +6,4 @@ tags: SystemTags
 title: SystemTag: $:/tags/ControlPanel/SettingsTab
 type: text/vnd.tiddlywiki
 
-The [[system tag|SystemTags]] `$:/tags/ControlPanel/Settings` marks elements to be placed under "Settings" tab in [[$:/ControlPanel]]
+The [[system tag|SystemTags]] `$:/tags/ControlPanel/SettingsTab` marks elements to be placed under "Settings" tab in [[$:/ControlPanel]]
