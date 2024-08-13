@@ -106,6 +106,7 @@ code-body: yes
 -Description
 -Narrative
 -[has[plugin-type]]
+-[prefix[$:/state/popup/export]]
 \end
 
 \procedure testcase-source()
