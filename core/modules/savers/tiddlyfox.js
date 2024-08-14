@@ -30,16 +30,16 @@ TiddlyFoxSaver.prototype.save = function(text,method,callback) {
 			pathname = pathname.substr(8).replace(/\//g,"\\");
 		// Firefox Windows network path file://///server/share/blah/blah --> //server/share/blah/blah
 		} else if(pathname.indexOf("file://///") === 0) {
-			pathname = "\\\\" + unescape(pathname.substr(10)).replace(/\//g,"\\");
+			pathname = "\\\\" + decodeURIComponent(pathname.substr(10)).replace(/\//g,"\\");
 		// Mac/Unix local path file:///path/path --> /path/path
 		} else if(pathname.indexOf("file:///") === 0) {
-			pathname = unescape(pathname.substr(7));
+			pathname = decodeURIComponent(pathname.substr(7));
 		// Mac/Unix local path file:/path/path --> /path/path
 		} else if(pathname.indexOf("file:/") === 0) {
-			pathname = unescape(pathname.substr(5));
+			pathname = decodeURIComponent(pathname.substr(5));
 		// Otherwise Windows networth path file://server/share/path/path --> \\server\share\path\path
 		} else {
-			pathname = "\\\\" + unescape(pathname.substr(7)).replace(new RegExp("/","g"),"\\");
+			pathname = "\\\\" + decodeURIComponent(pathname.substr(7)).replace(new RegExp("/","g"),"\\");
 		}
 		// Create the message element and put it in the message box
 		var message = document.createElement("div");
