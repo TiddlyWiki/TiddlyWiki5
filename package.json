@@ -34,8 +34,10 @@
   },
   "scripts": {
     "start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
-    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index && node ./tiddlywiki ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
-    "coverage": "nyc --reporter=lcov --reporter=text npm test",
+    "build:test-edition": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+    "build:multiwikiserver-edition": "node ./tiddlywiki.js ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
+    "test": "npm run build:test-edition && npm run build:multiwikiserver-edition",
+    "coverage": "nyc --reporter=lcov --reporter=text npm run test",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   },
@@ -44,9 +46,13 @@
     "node-sqlite3-wasm": "^0.8.10"
   },
   "nyc": {
-    "reporter": ["text", "html"],
+    "sourceMap": true,
+    "instrument": true,
     "all": true,
+    "reporter": ["text", "html"],
     "include": ["plugins/tiddlywiki/multiwikiserver/modules/store/**/*.js"],
-    "exclude": []
+    "exclude": [],
+    "extension": [".js"],
+    "report-dir": "./coverage"
   }
 }
