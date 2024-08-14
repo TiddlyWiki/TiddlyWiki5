@@ -224,6 +224,10 @@ dl dt {
 textarea,
 input[type=text],
 input[type=search],
+input[type=number],
+input[type=password],
+input[type=email],
+input[type=tel],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
