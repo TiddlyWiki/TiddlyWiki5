@@ -7,7 +7,7 @@ code-body: yes
 
 \procedure linkcatcherActions()
 <%if [<navigateTo>has[title]] %>
-	<$qualify title=<<state>> name="qualifiedState">
+	<$qualify title=<<tf.state>> name="qualifiedState">
 		<$action-setfield $tiddler=<<qualifiedState>> text=<<navigateTo>>/>
 	</$qualify>
 <%endif%>
