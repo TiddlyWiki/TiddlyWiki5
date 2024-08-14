@@ -28,6 +28,7 @@ exports.handler = function(request,response,state) {
 			return;
 		}
 	}
+	filter = filter + "-[subfilter{$:/config/Server/GlobalExclusionFilter}]";
 	if(state.wiki.getTiddlerText("$:/config/SyncSystemTiddlersFromServer") === "no") {
 		filter += "+[!is[system]]";
 	}
