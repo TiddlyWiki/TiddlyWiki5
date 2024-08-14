@@ -228,6 +228,7 @@ input[type=number],
 input[type=password],
 input[type=email],
 input[type=tel],
+input[type=url],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
