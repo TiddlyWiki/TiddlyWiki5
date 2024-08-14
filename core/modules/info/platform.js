@@ -26,6 +26,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 			},
 			location = document.location;
 		setLocationProperty("full", (location.toString()).split("#")[0]);
+		setLocationProperty("hash", location.hash);
 		setLocationProperty("host", location.host);
 		setLocationProperty("hostname", location.hostname);
 		setLocationProperty("protocol", location.protocol);
