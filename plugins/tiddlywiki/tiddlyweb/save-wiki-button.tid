@@ -1,19 +1,19 @@
 title: $:/core/ui/Buttons/save-wiki
 tags: $:/tags/PageControls
-caption: {{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}} Server status
-description: Status of synchronisation with server
+caption: {{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}} {{$:/config/plugins/tiddlywiki/tiddlyweb/language/ServerStatus}}
+description: {{$:/config/plugins/tiddlywiki/tiddlyweb/language/ServerStatus/Description}}
 
 \whitespace trim
 \define config-title()
 $:/config/PageControlButtons/Visibility/$(listItem)$
 \end
-<$button popup=<<qualify "$:/state/popup/save-wiki">> tooltip="Status of synchronisation with server" aria-label="Server status" class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<$button popup=<<qualify "$:/state/popup/save-wiki">> tooltip={{$:/config/plugins/tiddlywiki/tiddlyweb/language/ServerStatus/Description}} aria-label={{$:/config/plugins/tiddlywiki/tiddlyweb/language/ServerStatus}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <span class="tc-dirty-indicator">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/plugins/tiddlywiki/tiddlyweb/icon/cloud}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text"><$text text="Server status"/></span>
+<span class="tc-btn-text"><$text text={{$:/config/plugins/tiddlywiki/tiddlyweb/language/ServerStatus}}/></span>
 </$list>
 </span>
 </$button>
