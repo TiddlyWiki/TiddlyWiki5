@@ -1,8 +1,8 @@
-title: $:/plugins/tiddlywiki/menubar/items/contents
-caption: Contents
-description: Table of Contents
+caption: <$list filter="[{$:/config/plugins/menubar/TableOfContents/Tag}has[caption]]" emptyMessage="Contents"><$transclude $field="caption"/></$list>
+description: <$text text={{{ [{$:/config/plugins/menubar/TableOfContents/Tag}get[description]else[Table of Contents]] }}}/>
 is-dropdown: yes
 tags: $:/tags/MenuBar
+title: $:/plugins/tiddlywiki/menubar/items/contents
 
 <div class="tc-table-of-contents">
 
