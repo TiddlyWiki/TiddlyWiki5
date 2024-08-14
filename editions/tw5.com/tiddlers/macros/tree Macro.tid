@@ -1,11 +1,16 @@
 caption: tree
 created: 20170628164534981
-modified: 20170628164654430
+modified: 20191001170000000
 tags: Macros [[Core Macros]]
 title: tree Macro
 type: text/vnd.tiddlywiki
 
-The <<.def tree>> [[macro|Macros]] renders an expandable tree view based on a prefix and separator within tiddler titles.
+~TiddlyWiki provides two [[macros|Macros]] that renders a tree view based on a prefix and separator within tiddler titles.
+
+;<<.var tree>>
+: A simple expandable tree
+;<<.var tree-compact>>
+: The same as above except that when a //folder// is also a tiddler, it will appear only once in the tree: As a folder with a link to the tiddler. You expand a folder by clicking on the icon and not on the title (which drives you to the tiddler)
 
 !! Parameters
 

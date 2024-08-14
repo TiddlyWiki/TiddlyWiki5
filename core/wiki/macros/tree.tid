@@ -5,6 +5,12 @@ tags: $:/tags/Macro
 <$link to=<<__full-title__>>><$text text=<<__chunk__>>/></$link>
 \end
 
+\define branch-link(full-title,chunk,separator:"/")
+<$set name="short-title" value={{{ [<__chunk__>removesuffix<__separator__>] }}}>
+<$list filter="[<__full-title__>is[missing]]"><$text text=<<short-title>> /></$list><$list filter="[<__full-title__>!is[missing]]"><$link to=<<__full-title__>> ><<short-title>></$link></$list>
+</$set>
+\end
+
 \define leaf-node(prefix,chunk)
 \whitespace trim
 <li>
@@ -39,6 +45,28 @@ tags: $:/tags/Macro
 </li>
 \end
 
+\define branch-node-compact(prefix,chunk,separator: "/")
+<li>
+<$set name="full-title" value={{{ [<__prefix__>addsuffix<__chunk__>removesuffix<__separator__>] }}}>
+<$set name="reveal-state" value={{{ [[$:/state/tree/]addsuffix<__prefix__>addsuffix<__chunk__>] }}}>
+<$reveal type="nomatch" stateTitle=<<reveal-state>> text="show" >
+<$button setTitle=<<reveal-state>> setTo="show" class="tc-btn-invisible">
+{{$:/core/images/folder}}
+</$button> <$macrocall $name="branch-link" full-title=<<full-title>> chunk=<<chunk>> separator=<<__separator__>> />
+</$reveal>
+<$reveal type="match" stateTitle=<<reveal-state>> text="show" >
+<$button setTitle=<<reveal-state>> setTo="hide" class="tc-btn-invisible">
+{{$:/core/images/folder}}
+</$button> <$macrocall $name="branch-link" full-title=<<full-title>> chunk=<<chunk>> separator=<<__separator__>> />
+</$reveal>
+<span>(<$count filter="[all[shadows+tiddlers]removeprefix<__prefix__>removeprefix<__chunk__>] -[<__prefix__>addsuffix<__chunk__>]"/>)</span>
+<$reveal type="match" stateTitle=<<reveal-state>> text="show" >
+<$macrocall $name="tree-node-compact" prefix={{{ [<__prefix__>addsuffix<__chunk__>] }}} separator=<<__separator__>> />
+</$reveal>
+</$set></$set>
+</li>
+\end
+
 \define tree-node(prefix,separator: "/")
 \whitespace trim
 <ol>
@@ -51,12 +79,48 @@ tags: $:/tags/Macro
 </ol>
 \end
 
+\define tree-node-compact(prefix,separator: "/")
+<ol>
+<$list filter="[all[shadows+tiddlers]removeprefix<__prefix__>splitbefore<__separator__>sort[]]" variable="chunk">
+<$list filter="[<chunk>suffix<__separator__>]">
+<$macrocall $name="branch-node-compact" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>> />
+</$list>
+<$list filter="[<chunk>!suffix<__separator__>]">
+<$set name="branch-test" value={{{ [<__prefix__>addsuffix<chunk>addsuffix<__separator__>] }}}>
+<$list filter="[all[tiddlers+shadows]prefix<branch-test>count[]match[0]]"><$macrocall $name="leaf-node" prefix=<<__prefix__>> chunk=<<chunk>> separator=<<__separator__>> /></$list>
+</$set>
+</$list>
+</$list>
+</ol>
+\end
+
 \define tree(prefix: "$:/",separator: "/")
 \whitespace trim
 <div class="tc-tree">
 <span><$text text=<<__prefix__>>/></span>
 <div>
 <$macrocall $name="tree-node" prefix=<<__prefix__>> separator=<<__separator__>>/>
+</div>
+</div>
+\end
+
+\define tree-compact(prefix: "$:/",separator: "/")
+<div class="tc-tree">
+<div>
+<$list filter="[<__prefix__>suffix<__separator__>]">
+<ol><li><$set name="short-title" value={{{ [<__prefix__>removesuffix<__separator__>] }}}>
+<$list filter="[<__short-title__>is[missing]]"><span class="tc-reveal"><$text text=<<short-title>>/></span></$list>
+<$list filter="[<__short-title__>!is[missing]]"><span class="tc-reveal"><$link to=<<__short-title__>> ><<short-title>></$link></span></$list>
+<$macrocall $name="tree-node-compact" prefix=<<__prefix__>> chunk="" separator=<<__separator__>>/>
+</$set></li></ol>
+</$list>
+<$list filter="[<__prefix__>!suffix<__separator__>]">
+<ol><li><$set name="start-title" value={{{ [<__prefix__>addsuffix<__separator__>] }}}>
+<$list filter="[<__prefix__>is[missing]]"><span class="tc-reveal"><$text text=<<__prefix__>>/></span></$list>
+<$list filter="[<__prefix__>!is[missing]]"><span class="tc-reveal"><$link to=<<__prefix__>> ><<__prefix__>></$link></span></$list>
+<$macrocall $name="tree-node-compact" prefix=<<start-title>> chunk="" separator=<<__separator__>>/>
+</$set></li></ol>
+</$list>
 </div>
 </div>
 \end
