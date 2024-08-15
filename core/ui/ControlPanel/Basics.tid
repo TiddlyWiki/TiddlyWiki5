@@ -25,7 +25,7 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 |<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
 |<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
 |<$link to="$:/status/UserName"><<lingo Username/Prompt>></$link> |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
-|<$link to="$:/config/AnimationDuration"><<lingo AnimDuration/Prompt>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
+|<$link to="$:/config/AnimationDuration"><<lingo AnimDuration/Prompt>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input" type="number"/> |
 |<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit class="tc-edit-texteditor" tiddler="$:/DefaultTiddlers" autoHeight="yes"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
 |<$link to="$:/language/DefaultNewTiddlerTitle"><<lingo NewTiddler/Title/Prompt>></$link> |<$edit-text tiddler="$:/language/DefaultNewTiddlerTitle" default="" tag="input"/> |
 |<$link to="$:/config/NewJournal/Title"><<lingo NewJournal/Title/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Title" default="" tag="input"/> |
