@@ -100,10 +100,10 @@ code-body: yes
 
 \procedure testcase-tabsList()
 [all[tiddlers]sort[]] Output +[putfirst[]]
--[prefix<tf.state>]
 -Description
 -Narrative
 -[has[plugin-type]]
+-[prefix<tf.state>]
 -[prefix[$:/state/popup/export]]
 \end
 
