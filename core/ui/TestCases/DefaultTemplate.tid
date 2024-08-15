@@ -7,9 +7,7 @@ code-body: yes
 
 \procedure linkcatcherActions()
 <%if [<navigateTo>has[title]] %>
-	<$qualify title=<<tf.state>> name="qualifiedState">
-		<$action-setfield $tiddler=<<qualifiedState>> text=<<navigateTo>>/>
-	</$qualify>
+	<$action-setfield $tiddler=<<tf.state>> text=<<navigateTo>>/>
 <%endif%>
 \end
 
@@ -113,7 +111,7 @@ code-body: yes
 <div class="tc-test-case-source">
 	<$macrocall $name="tabs"
 		tabsList=<<testcase-tabsList>>
-		state=<<tf.state>>
+		explicitState=<<tf.state>>
 		default="Output"
 		template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"
 	/>
