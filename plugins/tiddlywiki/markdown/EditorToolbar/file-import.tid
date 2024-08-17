@@ -2,6 +2,8 @@ title: $:/plugins/tiddlywiki/markdown/EditorToolbar/file-import
 tags: $:/tags/EditorTools
 condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 
+\whitespace trim
+
 \procedure lingo-base() $:/language/Import/
 
 \procedure closePopupActions()
@@ -15,29 +17,25 @@ condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/mark
 \procedure replacement-regexp() [()<>\\]
 
 \procedure postImportActions()
-\whitespace trim
 <$list filter="[<importTitle>links[]]">
-<$let escaped-title={{{ [<currentTiddler>search-replace:g:regexp<replacement-regexp>,[\$&]] }}}>
-<$let insertText={{{ [get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<escaped-title>] }}}>
-<$action-sendmessage
-	$message="tm-edit-text-operation"
-	$param="insert-text"
-	text=<<insertText>>
-/>
-</$let>
-</$let>
+	<$let escaped-title={{{ [<currentTiddler>search-replace:g:regexp<replacement-regexp>,[\$&]] }}}>
+		<$let insertText={{{ [get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<escaped-title>] }}}>
+			<$action-sendmessage
+				$message="tm-edit-text-operation"
+				$param="insert-text"
+				text=<<insertText>>
+			/>
+		</$let>
+	</$let>
 </$list>
 <<closePopupActions>>
 \end
 
 \procedure buttons()
-\whitespace trim
-<$button class="tc-btn-invisible" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
-&#32;
+<$button class="tc-btn-invisible tc-small-gap-right" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
 <$button class="tc-btn-invisible" message="tm-perform-import" param=<<importTitle>> actions=<<postImportActions>> ><<lingo Listing/Import/Caption>></$button>
 \end
 
-\whitespace trim
 <$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">
 <div class="tc-editor-import">
 <$list filter="[<importTitle>field:plugin-type[import]]">
