@@ -1,4 +1,4 @@
 title: $:/core/ui/testcases/actions/Export
 tags: $:/tags/TestCase/Actions
 
-<$macrocall $name="exportButton" exportFilter="[all[tiddlers]sort[]] -[prefix[$:/state/]] -Description -Narrative -ExpectedResult -Output Output +[putfirst[]] -[has[plugin-type]]" lingoBase="$:/language/Buttons/ExportTiddlers/"/>
+<$macrocall $name="exportButton" exportFilter="[all[tiddlers]sort[]] -[prefix[$:/state/]] -Description -Narrative -ExpectedResult -[has[plugin-type]]" lingoBase="$:/language/Buttons/ExportTiddlers/"/>
