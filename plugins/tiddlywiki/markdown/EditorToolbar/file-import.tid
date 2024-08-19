@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/markdown/EditorToolbar/file-import
+tags: $:/tags/EditorTools
+image: ![](<#$title$>)
+file: [](<#$title$>)
+regexp-search: [()<>\\]
+regexp-replace: \$&
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
+
+{{||$:/core/ui/FileImportTemplate}}

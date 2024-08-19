@@ -1,0 +1,43 @@
+title: $:/core/ui/FileImportTemplate
+
+\whitespace trim
+
+\procedure lingo-base() $:/language/Import/
+
+\procedure closePopupActions()
+<$action-deletetiddler $filter="[title<importState>] [title<importTitle>]"/>
+\end
+
+\procedure postImportActions()
+<$list filter="[<importTitle>links[]]">
+	<$let escaped-title={{{ [<currentTiddler>search-replace:g:regexp<replacement-regexp>,<replacement-replace>] }}}>
+		<$let insertText={{{ [get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<escaped-title>] }}}>
+			<$action-sendmessage
+				$message="tm-edit-text-operation"
+				$param="insert-text"
+				text=<<insertText>>
+			/>
+		</$let>
+	</$let>
+</$list>
+<<closePopupActions>>
+\end
+
+\procedure buttons()
+<$button class="tc-btn-invisible tc-small-gap-right" actions=<<closePopupActions>> ><<lingo Listing/Cancel/Caption>></$button>
+<$button class="tc-btn-invisible" message="tm-perform-import" param=<<importTitle>> actions=<<postImportActions>> ><<lingo Listing/Import/Caption>></$button>
+\end
+
+<$let replacement-text-image={{!!image}} replacement-text-file={{!!file}} replacement-regexp={{!!regexp-search}} replacement-replace={{!!regexp-replace}}>
+<$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">
+<div class="tc-editor-import">
+<$list filter="[<importTitle>field:plugin-type[import]]">
+<h2><<lingo Editor/Import/Heading>></h2>
+<$tiddler tiddler=<<importTitle>>>
+{{||$:/core/ui/ImportListing}}
+<<buttons>>
+</$tiddler>
+</$list>
+</div>
+</$reveal>
+</$let>
