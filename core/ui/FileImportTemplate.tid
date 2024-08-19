@@ -29,15 +29,15 @@ title: $:/core/ui/FileImportTemplate
 \end
 
 <$let replacement-text-image={{!!image}} replacement-text-file={{!!file}} replacement-regexp={{!!regexp-search}} replacement-replace={{!!regexp-replace}}>
-<$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">
-<div class="tc-editor-import">
-<$list filter="[<importTitle>field:plugin-type[import]]">
-<h2><<lingo Editor/Import/Heading>></h2>
-<$tiddler tiddler=<<importTitle>>>
-{{||$:/core/ui/ImportListing}}
-<<buttons>>
-</$tiddler>
-</$list>
-</div>
-</$reveal>
+	<$reveal type="popup" state=<<importState>> tag="div" class="tc-editor-importpopup">
+		<div class="tc-editor-import">
+			<$list filter="[<importTitle>field:plugin-type[import]]">
+				<h2><<lingo Editor/Import/Heading>></h2>
+				<$tiddler tiddler=<<importTitle>>>
+				{{||$:/core/ui/ImportListing}}
+				<<buttons>>
+				</$tiddler>
+			</$list>
+		</div>
+	</$reveal>
 </$let>
