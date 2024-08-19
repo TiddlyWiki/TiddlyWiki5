@@ -1334,6 +1334,7 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-tiddler-body {
 	clear: both;
+	overflow-x: auto;
 }
 
 .tc-single-tiddler-window .tc-tiddler-body,
@@ -2206,6 +2207,7 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tab-content {
 	margin-top: 14px;
+	overflow-x: auto;
 }
 
 .tc-tab-content.tc-vertical  {
