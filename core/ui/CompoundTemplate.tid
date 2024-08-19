@@ -1,0 +1,14 @@
+title: $:/core/ui/CompoundTemplate
+
+\whitespace trim
+<$let
+	linkTarget="yes"
+	displayFormat={{!!display-format}}
+	testcaseTiddler=<<currentTiddler>>
+>
+	<$testcase
+        template="$:/core/ui/testcases/CompoundTemplate"
+	>
+		<$data $compound-tiddler=<<currentTiddler>>/>
+	</$testcase>
+</$let>

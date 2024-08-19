@@ -8,5 +8,6 @@ system: [prefix[$:/boot/]] [prefix[$:/core/macros]] [prefix[$:/core/save/]] [pre
 code-body: [field:code-body[yes]then[$:/core/ui/ViewTemplate/body/code]]
 import: [field:plugin-type[import]then[$:/core/ui/ViewTemplate/body/import]]
 plugin: [has[plugin-type]then[$:/core/ui/ViewTemplate/body/plugin]]
+compound: [type[text/vnd.tiddlywiki-multiple]then[$:/core/ui/CompoundTemplate]]
 hide-body: [field:hide-body[yes]then[$:/core/ui/ViewTemplate/body/blank]]
 default: [[$:/core/ui/ViewTemplate/body/default]]
