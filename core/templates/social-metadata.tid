@@ -1,0 +1,38 @@
+title: $:/core/templates/social-metadata
+tags: $:/tags/RawMarkupWikified
+
+\procedure meta-plain(name,source,name-attribute:"name")
+\whitespace trim
+<%if [<source>has[text]] %>
+	&lt;meta <$text text=<<name-attribute>>/>="<$text text=<<name>>/>" content="<$text text={{{ [<source>get[text]encodehtml[]] }}}/>"&gt;
+	<$text text={{{ [charcode[10]] }}}/>
+<%endif%>
+\end meta-plain
+
+\procedure meta-wikified(name,source,name-attribute:"name")
+\whitespace trim
+<%if [<source>has[text]] %>
+	<$wikify name="html" text={{{ [<source>get[text]] }}} output="text">
+		&lt;meta <$text text=<<name-attribute>>/>="<$text text=<<name>>/>" content="<$text text={{{ [<html>encodehtml[]] }}}/>"&gt;
+		<$text text={{{ [charcode[10]] }}}/>
+	</$wikify>
+<%endif%>
+\end meta-wikified
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional commentinline commentblock
+<<meta-wikified "description" "$:/SiteSubtitle">>
+
+<!-- Facebook Meta Tags -->
+<<meta-plain "og:url" "$:/SiteUrl" "property">>
+<<meta-plain "og:type" "website" "property">>
+<<meta-wikified "og:title" "$:/SiteTitle" "property">>
+<<meta-wikified "og:description" "$:/SiteSubtitle" "property">>
+<<meta-plain "og:image" "$:/SitePreviewImageUrl" "property">>
+
+<!-- Twitter Meta Tags -->
+<<meta-plain "twitter:card" "summary_large_image">>
+<<meta-plain "twitter:domain" "$:/SiteDomain" "property">>
+<<meta-plain "twitter:url" "$:/SiteUrl" "property">>
+<<meta-wikified "twitter:title" "$:/SiteTitle">>
+<<meta-wikified "twitter:description" "$:/SiteSubtitle">>
+<<meta-plain "twitter:image" "$:/SitePreviewImageUrl">>
