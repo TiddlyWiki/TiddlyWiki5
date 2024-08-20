@@ -38,16 +38,20 @@
     "wiki:info": "echo \"use: npm run wiki --edition=<wiki> [empty, prerelease, dev, tour, tw.org, upgrade, full]\"",
     "wiki": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/%npm_config_edition% --listen",
 
-    "cs:info": "echo \"use: npm run cs --edition=tw5.com [de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
-    "cs": "node ./editions/%npm_config_edition%-server --listen",
+    "edition:info": "echo \"use: npm run edition --edition=tw5.com [de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
+    "edition": "node ./editions/%npm_config_edition%-server --listen",
 
     "server": "node ./tiddlywiki.js ./editions/server --listen",
     "server-external-js": "node ./tiddlywiki.js ./editions/server-external-js --listen",
 
+    "library:info": "echo \"use: npm run library\" && echo \"IMPORTANT: It starts on port:8888\"",
+    "library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
+
     "prewiki": "npm run wiki:info -s",
     "postwiki:info" : "echo \"or: [translators, aws, classicparserdemo, codemirrordemo, d3demo, dynaviewdemo, geospatialdemo, highlightdemo, innerwikidemo, introduction, ja-JP, katexdemo, markdowndemo, prerelease, resumebuilder, share, tw5.com-docs, text-slicer, twitter-archivist, zh-Hans, zh-Hant\"",
 
-    "precs": "npm run cs:info -s",
+    "preedition": "npm run edition:info -s",
+    "prelibrary": "npm run library:info -s",
 
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
