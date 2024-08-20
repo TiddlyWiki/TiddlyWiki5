@@ -2,7 +2,7 @@
 	"title": "$:/languages/zh-CN",
 	"name": "zh-CN",
 	"plugin-type": "language",
-	"description": "Chinese (China)",
+	"description": "简体中文 (中国)",
 	"author": "BramChen",
 	"core-version": ">=5.0.8",
 	"dependents": ["$:/languages/zh-Hans"],
