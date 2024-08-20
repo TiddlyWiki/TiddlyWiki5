@@ -2,7 +2,7 @@
     "title": "$:/languages/ar-PS",
     "name": "ar-PS",
     "plugin-type": "language",
-    "description": "Arabic (Palestine)",
+    "description": "العربية (فلسطين)",
     "author": "Kamal-Habash",
     "core-version": ">=5.1.23",
 	"text-direction": "rtl"

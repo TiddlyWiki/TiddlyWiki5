@@ -2,7 +2,7 @@
 	"title": "$:/languages/el-GR",
 	"name": "el-GR",
 	"plugin-type": "language",
-	"description": "Greek (Greece)",
+	"description": "Ελληνικά (Ελλάδα)",
 	"author": "Stratis Aravias@ΓΕΛ Σαμοθράκης",
 	"core-version": ">=5.0.0"
 }
