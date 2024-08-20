@@ -70,7 +70,7 @@ var WikiTextParser = function(type,text,options) {
 	var root = JSON.parse(JSON.stringify(parser.tree));
 	// macros are defined in a linear tree; walk down the tree and append the source's parsed content 
 	var baseroot = root;
-	while (root[0] && root[0].children && root[0].children.length !== 0 ){ 
+	while(root[0] && root[0].children && root[0].children.length !== 0 ){ 
 		root = root[0].children;
 	}
 	root[0].children[0] = this.tree[0];
