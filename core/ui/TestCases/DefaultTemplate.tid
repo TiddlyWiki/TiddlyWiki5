@@ -3,7 +3,7 @@ code-body: yes
 
 \whitespace trim
 
-\function tf.state() [<qualify "$:/state/testcase">]
+\function tf.state() "$:/state/testcase"
 
 \procedure linkcatcherActions()
 <%if [<navigateTo>has[title]] %>
@@ -102,9 +102,12 @@ code-body: yes
 [all[tiddlers]sort[]] Output +[putfirst[]]
 -Description
 -Narrative
+-[[$:/temp/testcase/draft-title]]
 -[has[plugin-type]]
 -[prefix<tf.state>]
 -[prefix[$:/state/popup/export]]
+-[prefix[$:/HistoryList]]
+-[prefix[$:/StoryList]]
 \end
 
 \procedure testcase-source()
@@ -129,13 +132,17 @@ code-body: yes
 \procedure testcase-body()
 <div class="tc-test-case-wrapper">
 	<<testcase-header>>
-	<%if [[Narrative]is[tiddler]] %>
-		<<testcase-narrative>>
-	<%endif%>
-	<%if [<testResult>match[fail]] %>
-		<<testcase-fail>>
-	<%endif%>
-	<<testcase-panes>>
+	<$let testcase-source-state = <<tf.state>>>
+		<$navigator story="$:/StoryList" history="$:/HistoryList">
+			<%if [[Narrative]is[tiddler]] %>
+				<<testcase-narrative>>
+			<%endif%>
+			<%if [<testResult>match[fail]] %>
+				<<testcase-fail>>
+			<%endif%>
+			<<testcase-panes>>
+		</$navigator>
+	</$let>
 </div>
 \end
 
