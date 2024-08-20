@@ -708,21 +708,35 @@ button svg.tc-image-button, button .tc-image-button img {
 
 .tc-unfold-banner {
 	position: absolute;
-	padding: 0;
-	margin: 0;
+	padding: .1em 0 .1em 0;
+	margin-top: 4px;
+	margin-left: -43px;
 	background: none;
 	border: none;
-	width: 100%;
+	width: 100%; /* for old browsers which can not handle calc() */
 	width: calc(100% + 2px);
-	margin-left: -43px;
 	text-align: center;
-	border-top: 2px solid <<colour tiddler-info-background>>;
-	margin-top: 4px;
+	border-top: 1px solid <<colour tiddler-info-background>>;
+	border-bottom: 1px solid <<colour tiddler-info-background>>;
 }
+
+.tc-unfold-banner .tc-image-button {
+	outline: 2px solid <<colour tiddler-controls-foreground>>;
+	min-width: 1.7em;
+	min-height: 1.7em;
+	padding: .3em;
+	border-radius: 50%;
+}
+
+.tc-unfold-banner:hover .tc-image-button {
+	outline-color: <<colour tiddler-controls-foreground-hover>>;
+}
+
 
 .tc-unfold-banner:hover {
 	background: <<colour tiddler-info-background>>;
 	border-top: 2px solid <<colour tiddler-info-border>>;
+	border-bottom: 2px solid <<colour tiddler-info-border>>;
 }
 
 .tc-unfold-banner svg, .tc-fold-banner svg {
