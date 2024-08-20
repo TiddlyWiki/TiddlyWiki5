@@ -1,59 +1,61 @@
 {
-  "name": "tiddlywiki",
-  "preferGlobal": "true",
-  "version": "5.3.6-prerelease",
-  "author": "Jeremy Ruston <jeremy@jermolene.com>",
-  "description": "a non-linear personal web notebook",
-  "contributors": [
-    {
-      "name": "Jeremy Ruston",
-      "email": "jeremy@jermolene.com"
-    }
-  ],
-  "bin": {
-    "tiddlywiki": "./tiddlywiki.js"
-  },
-  "main": "./boot/boot.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TiddlyWiki/TiddlyWiki5.git"
-  },
-  "keywords": [
-    "tiddlywiki",
-    "tiddlywiki5",
-    "wiki"
-  ],
-  "devDependencies": {
-    "eslint": "^7.32.0"
-  },
-  "bundleDependencies": [],
-  "license": "BSD",
-  "engines": {
-    "node": ">=0.8.2"
-  },
-  "scripts": {
-    "start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
-    "test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
+	"name": "tiddlywiki",
+	"preferGlobal": "true",
+	"version": "5.3.6-prerelease",
+	"author": "Jeremy Ruston <jeremy@jermolene.com>",
+	"description": "a non-linear personal web notebook",
+	"contributors": [
+		{
+			"name": "Jeremy Ruston",
+			"email": "jeremy@jermolene.com"
+		}
+	],
+	"bin": {
+		"tiddlywiki": "./tiddlywiki.js"
+	},
+	"main": "./boot/boot.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/TiddlyWiki/TiddlyWiki5.git"
+	},
+	"keywords": [
+		"tiddlywiki",
+		"tiddlywiki5",
+		"wiki"
+	],
+	"devDependencies": {
+		"eslint": "^7.32.0"
+	},
+	"bundleDependencies": [],
+	"license": "BSD",
+	"engines": {
+		"node": ">=0.8.2"
+	},
+	"scripts": {
+		"start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
+		"test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
 
-    "wiki:info": "echo \"use: npm run wiki --edition=<wiki> [empty, prerelease, dev, tour, tw.org, upgrade, full]\"",
-    "wiki": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/%npm_config_edition% --listen",
+		"wiki:info": "echo \"use: npm run wiki --edition=<wiki> [empty, prerelease, dev, tour, tw.org, upgrade, full]\"",
+		"wiki": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/%npm_config_edition% --listen",
 
-    "edition:info": "echo \"use: npm run edition --edition=tw5.com [de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
-    "edition": "node ./editions/%npm_config_edition%-server --listen",
+		"edition:info": "echo \"use: npm run edition --edition=tw5.com [de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
+		"edition": "node ./editions/%npm_config_edition%-server --listen",
 
-    "server": "node ./tiddlywiki.js ./editions/server --listen",
-    "server-external-js": "node ./tiddlywiki.js ./editions/server-external-js --listen",
+		"server": "node ./tiddlywiki.js ./editions/server --listen",
+		"server-external-js": "node ./tiddlywiki.js ./editions/server-external-js --listen",
 
-    "library:info": "echo \"use: npm run library\" && echo \"IMPORTANT: It starts on port:8888\"",
-    "library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
+		"library:info": "echo \"use: npm run library\" && echo \"IMPORTANT: It starts on port:8888\"",
+		"library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
 
-    "prewiki": "npm run wiki:info -s",
-    "postwiki:info" : "echo \"or: [translators, aws, classicparserdemo, codemirrordemo, d3demo, dynaviewdemo, geospatialdemo, highlightdemo, innerwikidemo, introduction, ja-JP, katexdemo, markdowndemo, prerelease, resumebuilder, share, tw5.com-docs, text-slicer, twitter-archivist, zh-Hans, zh-Hant\"",
+		"help": "node ./tiddlywiki.js --help",
 
-    "preedition": "npm run edition:info -s",
-    "prelibrary": "npm run library:info -s",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
 
-    "lint:fix": "eslint . --fix",
-    "lint": "eslint ."
-  }
+		"prewiki": "npm run wiki:info -s",
+		"postwiki:info" : "echo \"or: [translators, aws, classicparserdemo, codemirrordemo, d3demo, dynaviewdemo, geospatialdemo, highlightdemo, innerwikidemo, introduction, ja-JP, katexdemo, markdowndemo, prerelease, resumebuilder, share, tw5.com-docs, text-slicer, twitter-archivist, zh-Hans, zh-Hant\"",
+
+		"preedition": "npm run edition:info -s",
+		"prelibrary": "npm run library:info -s"
+	}
 }
