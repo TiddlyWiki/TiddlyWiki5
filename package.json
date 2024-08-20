@@ -1,7 +1,7 @@
 {
   "name": "tiddlywiki",
   "preferGlobal": "true",
-  "version": "5.3.4-prerelease",
+  "version": "5.3.6-prerelease",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
   "description": "a non-linear personal web notebook",
   "contributors": [
@@ -16,7 +16,7 @@
   "main": "./boot/boot.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jermolene/TiddlyWiki5.git"
+    "url": "https://github.com/TiddlyWiki/TiddlyWiki5.git"
   },
   "keywords": [
     "tiddlywiki",

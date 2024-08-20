@@ -1,0 +1,17 @@
+tags: $:/tags/Stylesheet
+title: $:/_tw5.com/prerelease-styles
+type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-scary-warning {
+	font-weight: bold;
+	padding: 0 1em;
+	margin-left: -1em;
+	margin-right: -1em;
+	color: #f22;
+	border-radius: 4px;
+	border: 3px solid transparent;
+	background: #ffd;
+	background: linear-gradient(#ffd, #ffd) padding-box, repeating-linear-gradient(-45deg, red 0, red 25%, transparent 0, transparent 50%) 0 / .6em .6em;
+}

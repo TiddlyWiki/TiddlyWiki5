@@ -67,13 +67,13 @@ title: ui/geomarker
 	state=<<qualify "$:/state/demo-map">>
 	startPosition="bounds"
 >
-	<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} properties={{{ [[{}]jsonset[title],<currentTiddler>] }}} popupTemplate="ui/PopupTemplate"/>
 </$geomap>
 
 !! Distance to other markers
 
 <$let
-	thisLocation={{{ [geopoint{!!long},{!!lat}] }}}
+	thisLocation={{{ [geopoint{!!lat},{!!long}] }}}
 >
 <ul>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]] -[<currentTiddler>]">
@@ -81,7 +81,7 @@ title: ui/geomarker
 <$link><$view field="caption"><$view field="title"/></$view></$link>
 --
 <$let
-	otherLocation={{{ [geopoint{!!long},{!!lat}] }}}
+	otherLocation={{{ [geopoint{!!lat},{!!long}] }}}
 >
 <$text text={{{ [geodistance<thisLocation>,<otherLocation>,[miles]fixed[0]] }}}/> miles
 </$let>
@@ -93,7 +93,7 @@ title: ui/geomarker
 !! GeoFeature Lookups
 
 <$let
-	thisLocation={{{ [geopoint{!!long},{!!lat}] }}}
+	thisLocation={{{ [geopoint{!!lat},{!!long}] }}}
 >
 <ul>
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoFeature]sort[caption]]">

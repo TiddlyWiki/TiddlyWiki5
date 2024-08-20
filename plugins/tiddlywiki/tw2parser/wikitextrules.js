@@ -249,7 +249,7 @@ var rules = [
 				}
 				applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell.children,this.cellTermRegExp);
-				if (!cell.attributes) cell.attributes ={};
+				if(!cell.attributes) cell.attributes ={};
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
 					$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
 				else if(spaceLeft)
@@ -370,9 +370,9 @@ var rules = [
 					var f = stack[stack.length-1];
 					e = {type:"element",tag:this.element,children: []};
 					stack.push(e);
-					if (t ===0){
+					if(t ===0){
 						w.output.push(e);
-					}else {
+					} else {
 						f.children.push(e);
 						
 					}
@@ -458,7 +458,7 @@ var rules = [
 			w.source = oldSource;
 			w.nextMatch = oldNextMatch;
 			w.children = oldChildren;
-			for (var i=0; i<parser.tree.length; i++) {
+			for(var i=0; i<parser.tree.length; i++) {
 				w.output.push(parser.tree[i]);
 			}
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
@@ -488,12 +488,12 @@ var rules = [
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			name = lookaheadMatch[1] || lookaheadMatch[2];
 			var params = lookaheadMatch[3], nameold =name;
-			if (name) {
-				if (!!macroadapter.paramadapter[name]) {
+			if(name) {
+				if(!!macroadapter.paramadapter[name]) {
 					params=macroadapter.paramadapter[name](params);
 					//alert("going out as "+params);
 				}
-				if (!!macroadapter.namedapter[name]) {
+				if(!!macroadapter.namedapter[name]) {
 					name=macroadapter.namedapter[name];
 				}
 				w.nextMatch = this.lookaheadRegExp.lastIndex;

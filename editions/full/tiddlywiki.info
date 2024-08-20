@@ -57,7 +57,8 @@
 		"sl-SI",
 		"sv-SE",
 		"zh-Hans",
-		"zh-Hant"
+		"zh-Hant",
+		"zh-HK"
 	],
 	"themes": [
 		"tiddlywiki/centralised",

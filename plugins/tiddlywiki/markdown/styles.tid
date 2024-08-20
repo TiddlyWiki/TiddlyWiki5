@@ -36,7 +36,7 @@ code-body: yes
 	margin-left: 0.25em;
 }
 .markdown a.footnote-ref:target, .markdown .footnote-item:target {
-	background-color: <<colour message-background>>;
+	background-color: <<colour footnote-target-background>>;
 	scroll-margin-top: {{{ [{$:/themes/tiddlywiki/vanilla/options/stickytitles}match[yes]then[120px]else[60px]] }}};
 }
 .markdown li > p:first-child {

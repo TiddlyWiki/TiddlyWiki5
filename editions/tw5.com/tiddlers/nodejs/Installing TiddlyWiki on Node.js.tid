@@ -37,6 +37,6 @@ type: text/vnd.tiddlywiki
 
 The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.
 
-<<.warning "If you are using Debian or Debian-based Linux and you are receiving a `node: command not found` error though node.js package is installed, you may need to create a symbolic link between `nodejs` and `node`. Consult your distro's manual and `whereis` to correctly create a link. See github [[issue 1434|http://github.com/Jermolene/TiddlyWiki5/issues/1434]]. <br><br>Example Debian v8.0: `sudo ln -s /usr/bin/nodejs /usr/bin/node`">>
+<<.warning "If you are using Debian or Debian-based Linux and you are receiving a `node: command not found` error though node.js package is installed, you may need to create a symbolic link between `nodejs` and `node`. Consult your distro's manual and `whereis` to correctly create a link. See github [[issue 1434|http://github.com/TiddlyWiki/TiddlyWiki5/issues/1434]]. <br><br>Example Debian v8.0: `sudo ln -s /usr/bin/nodejs /usr/bin/node`">>
 <br>
 <<.tip "You can also install prior versions like this: <br><code> npm install -g tiddlywiki@5.1.13</code>">>

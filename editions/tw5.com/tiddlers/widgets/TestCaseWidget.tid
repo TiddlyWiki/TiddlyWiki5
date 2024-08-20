@@ -23,6 +23,11 @@ Notice also that clicking on links within the output pane will switch to the tab
 
 The text of the payload tiddlers listed on the left are editable, with the results being immediately reflected in the preview pane on the right. However, if the <<.wid testcase>> widget is refreshed then the modifications are lost.
 
+There is a dropdown menu at the top right of the menu that has two options:
+
+* Export the payload tiddlers to a file in the usual export formats
+* Import the payload tiddlers into the host wiki. This option loads the payload tiddlers into the $:/Import tiddler so that they can be renamed and/or individually selected
+
 The green tick at the top left of a test case indicates that a test has been set up and that it passes.
 
 If the test fails, a red cross is shown, and there is a display of the differences between the actual results and the expected results:

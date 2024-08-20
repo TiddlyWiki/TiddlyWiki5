@@ -236,3 +236,7 @@ ViewTemplateBody/Caption: 檢視範本主體
 ViewTemplateBody/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的主體。
 ViewTemplateTitle/Caption: 檢視範本標題
 ViewTemplateTitle/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的標題。
+ViewTemplateSubtitle/Caption: 檢視範本副標題
+ViewTemplateSubtitle/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的副標題。
+ViewTemplateTags/Caption: 檢視範本標籤
+ViewTemplateTags/Hint: 預設的檢視範本使用此規則級聯，動態選擇範本以顯示條目的標籤。

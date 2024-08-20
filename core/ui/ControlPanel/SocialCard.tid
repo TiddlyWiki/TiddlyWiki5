@@ -1,0 +1,22 @@
+title: $:/core/ui/ControlPanel/SocialCard
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/SocialCard/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/
+
+<<lingo SocialCard/Hint>>
+
+|<$link to="$:/SiteTitle"><<lingo Basics/Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Basics/Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/SiteDomain"><<lingo SocialCard/Domain/Prompt>></$link> |<$edit-text tiddler="$:/SiteDomain" default="" tag="input"/> |
+|<$link to="$:/SiteUrl"><<lingo SocialCard/Url/Prompt>></$link> |<$edit-text tiddler="$:/SiteUrl" default="" tag="input"/> |
+|<$link to="$:/SitePreviewUrl"><<lingo SocialCard/PreviewUrl/Prompt>></$link> |<$edit-text tiddler="$:/SitePreviewUrl" default="" tag="input"/> |
+
+<%if [[$:/SitePreviewUrl]get[text]else[]!is[blank]] %>
+<div>
+<div>
+<<lingo SocialCard/PreviewUrl/Preview>>
+</div>
+<img src={{$:/SitePreviewUrl}}/>
+</div>
+<%endif%>

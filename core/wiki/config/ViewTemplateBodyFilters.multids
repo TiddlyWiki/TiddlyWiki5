@@ -4,7 +4,7 @@ tags: $:/tags/ViewTemplateBodyFilter
 testcase: [tag[$:/tags/wiki-test-spec]type[text/vnd.tiddlywiki-multiple]then[$:/core/ui/TestCaseTemplate]] [tag[$:/tags/wiki-test-spec-failing]type[text/vnd.tiddlywiki-multiple]then[$:/core/ui/TestCaseTemplate]]
 stylesheet: [tag[$:/tags/Stylesheet]then[$:/core/ui/ViewTemplate/body/rendered-plain-text]]
 core-ui-tags: [tag[$:/tags/PageTemplate]] [tag[$:/tags/EditTemplate]] [tag[$:/tags/ViewTemplate]] [tag[$:/tags/KeyboardShortcut]] [tag[$:/tags/ImportPreview]] [tag[$:/tags/EditPreview]][tag[$:/tags/EditorToolbar]] [tag[$:/tags/Actions]] :then[[$:/core/ui/ViewTemplate/body/code]]
-system: [prefix[$:/boot/]] [prefix[$:/config/]] [prefix[$:/core/macros]] [prefix[$:/core/save/]] [prefix[$:/core/templates/]]  [prefix[$:/info/]] [prefix[$:/language/]] [prefix[$:/languages/]] [prefix[$:/snippets/]] [prefix[$:/state/]] [prefix[$:/status/]] [prefix[$:/info/]] [prefix[$:/temp/]] +[!is[image]limit[1]then[$:/core/ui/ViewTemplate/body/code]]
+system: [prefix[$:/boot/]] [prefix[$:/core/macros]] [prefix[$:/core/save/]] [prefix[$:/core/templates/]]  [prefix[$:/config/]] [prefix[$:/info/]] [prefix[$:/language/]] [prefix[$:/languages/]] [prefix[$:/snippets/]]  [prefix[$:/info/]] [prefix[$:/state/]] [prefix[$:/status/]] [prefix[$:/temp/]] :and[!is[image]]  :then[[$:/core/ui/ViewTemplate/body/code]]
 code-body: [field:code-body[yes]then[$:/core/ui/ViewTemplate/body/code]]
 import: [field:plugin-type[import]then[$:/core/ui/ViewTemplate/body/import]]
 plugin: [has[plugin-type]then[$:/core/ui/ViewTemplate/body/plugin]]
