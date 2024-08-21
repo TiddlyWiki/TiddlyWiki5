@@ -2,8 +2,6 @@ title: $:/core/ui/ViewTemplate/lazy-loading
 tags: $:/tags/ViewTemplate
 
 \whitespace trim
-\rules except dash
-
 <%if [<currentTiddler>has:field[_is_skinny]] %>
   <!-- Render the text to trigger lazy-loading -->
   {{||$:/core/ui/ViewTemplate/body/default}}

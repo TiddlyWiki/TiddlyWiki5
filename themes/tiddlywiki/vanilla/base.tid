@@ -1186,8 +1186,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 .tc-tiddler-lazy-loading {
 	height: 4px;
 	width: 100%;
-	--c:no-repeat linear-gradient(<<colour background>> 0 0);
-	background: var(--c),var(--c),<<colour primary>>;
+	background: no-repeat linear-gradient(<<colour background>> 0 0),no-repeat linear-gradient(<<colour background>> 0 0),<<colour primary>>;
 	background-size: 60% 100%;
 	animation: animation-loading-progress 3s infinite;
 }
