@@ -8,9 +8,9 @@ caption: {{$:/language/ControlPanel/SocialCard/Caption}}
 
 |<$link to="$:/SiteTitle"><<lingo Basics/Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
 |<$link to="$:/SiteSubtitle"><<lingo Basics/Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
-|<$link to="$:/SiteDomain"><<lingo SocialCard/Domain/Prompt>></$link> |<$edit-text tiddler="$:/SiteDomain" default="" tag="input"/> |
-|<$link to="$:/SiteUrl"><<lingo SocialCard/Url/Prompt>></$link> |<$edit-text tiddler="$:/SiteUrl" default="" tag="input"/> |
-|<$link to="$:/SitePreviewUrl"><<lingo SocialCard/PreviewUrl/Prompt>></$link> |<$edit-text tiddler="$:/SitePreviewUrl" default="" tag="input"/> |
+|<$link to="$:/SiteDomain"><<lingo SocialCard/Domain/Prompt>></$link> |<$edit-text tiddler="$:/SiteDomain" default="" tag="input" type="url"/> |
+|<$link to="$:/SiteUrl"><<lingo SocialCard/Url/Prompt>></$link> |<$edit-text tiddler="$:/SiteUrl" default="" tag="input" type="url"/> |
+|<$link to="$:/SitePreviewUrl"><<lingo SocialCard/PreviewUrl/Prompt>></$link> |<$edit-text tiddler="$:/SitePreviewUrl" default="" tag="input" type="url"/> |
 
 <%if [[$:/SitePreviewUrl]get[text]else[]!is[blank]] %>
 <div>
