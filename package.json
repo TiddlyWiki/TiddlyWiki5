@@ -24,9 +24,7 @@
     "wiki"
   ],
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "jasmine": "^5.2.0",
-    "nyc": "^17.0.0"
+    "eslint": "^7.32.0"
   },
   "license": "BSD",
   "engines": {
@@ -37,22 +35,11 @@
     "build:test-edition": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
     "build:multiwikiserver-edition": "node ./tiddlywiki.js ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
     "test": "npm run build:test-edition && npm run build:multiwikiserver-edition",
-    "coverage": "nyc --reporter=lcov --reporter=text npm run test",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   },
   "dependencies": {
     "better-sqlite3": "^9.4.3",
     "node-sqlite3-wasm": "^0.8.10"
-  },
-  "nyc": {
-    "sourceMap": true,
-    "instrument": true,
-    "all": true,
-    "reporter": ["text", "html"],
-    "include": ["plugins/tiddlywiki/multiwikiserver/modules/store/**/*.js"],
-    "exclude": [],
-    "extension": [".js"],
-    "report-dir": "./coverage"
   }
 }
