@@ -18,7 +18,7 @@ flexoki-300:         #B7B5AC
 flexoki-200:         #CECDC3
 flexoki-150:         #DAD8CE
 flexoki-100:         #E6E4D9
-flexoki-50:          #F2F0E5
+flexoki-050:          #F2F0E5
 flexoki-red-600:     #AF3029
 flexoki-red-400:     #D14D41
 flexoki-orange-600:  #BC5215
@@ -32,7 +32,7 @@ flexoki-green-400:   #879A39
 flexoki-cyan-950:    #142625
 flexoki-cyan-600:    #24837B
 flexoki-cyan-400:    #3AA99F
-flexoki-cyan-50:     #EBF2E7
+flexoki-cyan-050:     #EBF2E7
 flexoki-blue-600:    #205EA6
 flexoki-blue-400:    #4385BE
 flexoki-purple-600:  #5E409D
@@ -46,7 +46,7 @@ flexoki-tx-3: <<colour flexoki-300>>
 flexoki-ui-3: <<colour flexoki-200>>
 flexoki-ui-2: <<colour flexoki-150>>
 flexoki-ui: <<colour flexoki-100>>
-flexoki-bg-2: <<colour flexoki-50>>
+flexoki-bg-2: <<colour flexoki-050>>
 flexoki-bg: <<colour flexoki-paper>>
 
 flexoki-re: <<colour flexoki-red-400>>
