@@ -224,6 +224,11 @@ dl dt {
 textarea,
 input[type=text],
 input[type=search],
+input[type=number],
+input[type=password],
+input[type=email],
+input[type=tel],
+input[type=url],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
@@ -2662,7 +2667,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 
 .tc-plugin-info-chunk.tc-plugin-info-icon img, .tc-plugin-info-chunk.tc-plugin-info-icon svg {
 	width: 2em;
-	height: 2em;
+	height: auto;
 }
 
 .tc-plugin-info-dropdown {

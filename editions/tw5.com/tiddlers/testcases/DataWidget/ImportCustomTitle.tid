@@ -1,0 +1,29 @@
+title: TestCases/DataWidget/ImportCustomTitle
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Importing a payload tiddler and overwriting the title
+display-format: plaintext
+
+title: Narrative
+
+Importing a payload tiddler and overwriting the title
++
+title: Output
+
+\whitespace trim
+<$data $tiddler="HelloThere" title="RealTitle"/>
++
+title: HelloThere
+tags: Definitions
+
+This is the tiddler HelloThere
++
+title: ExpectedResult
+
+<p>[
+    {
+        "title": "RealTitle",
+        "tags": "Definitions",
+        "text": "This is the tiddler HelloThere"
+    }
+]</p>
