@@ -1,0 +1,203 @@
+title: $:/palettes/FlexokiLight
+name: FlexokiLight
+description: An inky color scheme for prose and code from https://stephango.com/flexoki
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+flexoki-black:       #100F0F
+flexoki-paper:       #FFFCF0
+flexoki-950:         #1C1B1A
+flexoki-900:         #282726
+flexoki-850:         #343331
+flexoki-800:         #403E3C
+flexoki-700:         #575653
+flexoki-600:         #6F6E69
+flexoki-500:         #878580
+flexoki-300:         #B7B5AC
+flexoki-200:         #CECDC3
+flexoki-150:         #DAD8CE
+flexoki-100:         #E6E4D9
+flexoki-50:          #F2F0E5
+flexoki-red-600:     #AF3029
+flexoki-red-400:     #D14D41
+flexoki-orange-600:  #BC5215
+flexoki-orange-400:  #DA702C
+flexoki-yellow-900:  #4D3A0B
+flexoki-yellow-600:  #AD8301
+flexoki-yellow-400:  #D0A215
+flexoki-yellow-100:  #FCEEB8
+flexoki-green-600:   #66800B
+flexoki-green-400:   #879A39
+flexoki-cyan-950:    #142625
+flexoki-cyan-600:    #24837B
+flexoki-cyan-400:    #3AA99F
+flexoki-cyan-50:     #EBF2E7
+flexoki-blue-600:    #205EA6
+flexoki-blue-400:    #4385BE
+flexoki-purple-600:  #5E409D
+flexoki-purple-400:  #8B7EC8
+flexoki-magenta-600: #A02F6F
+flexoki-magenta-400: #CE5D97
+
+flexoki-tx: <<colour flexoki-black>>
+flexoki-tx-2: <<colour flexoki-600>>
+flexoki-tx-3: <<colour flexoki-300>>
+flexoki-ui-3: <<colour flexoki-200>>
+flexoki-ui-2: <<colour flexoki-150>>
+flexoki-ui: <<colour flexoki-100>>
+flexoki-bg-2: <<colour flexoki-50>>
+flexoki-bg: <<colour flexoki-paper>>
+
+flexoki-re: <<colour flexoki-red-400>>
+flexoki-or: <<colour flexoki-orange-400>>
+flexoki-ye: <<colour flexoki-yellow-400>>
+flexoki-gr: <<colour flexoki-green-400>>
+flexoki-cy: <<colour flexoki-cyan-400>>
+flexoki-bl: <<colour flexoki-blue-400>>
+flexoki-pu: <<colour flexoki-purple-400>>
+flexoki-ma: <<colour flexoki-magenta-400>>
+
+alert-background: #ffe476
+alert-border: #b99e2f
+alert-highlight: #881122
+alert-muted-foreground: #b99e2f
+background: <<colour flexoki-bg>>
+blockquote-bar: <<colour muted-foreground>>
+button-background:
+button-foreground:
+button-border:
+code-background: #f7f7f9
+code-border: #e1e1e8
+code-foreground: #dd1144
+diff-delete-background: #ffc9c9
+diff-delete-foreground: <<colour foreground>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: #aaefad
+diff-insert-foreground: <<colour foreground>>
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
+dirty-indicator: #ff0000
+download-background: #34c734
+download-foreground: <<colour background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour muted-foreground>>
+dropdown-tab-background-selected: #fff
+dropdown-tab-background: #ececec
+dropzone-background: rgba(0,200,0,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #0000aa
+external-link-foreground: #0000ee
+footnote-target-background: #ecf2ff
+foreground: <<colour flexoki-tx>>
+highlight-background: #ffff00
+highlight-foreground: #000000
+message-background: #ecf2ff
+message-border: #cfd6e6
+message-foreground: #547599
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #999999
+modal-footer-background: #f5f5f5
+modal-footer-border: #dddddd
+modal-header-border: #eeeeee
+muted-foreground: #bbb
+network-activity-foreground: #448844
+notification-background: #ffffdd
+notification-border: #999999
+page-background: <<colour flexoki-bg-2>>
+pre-background: #f5f5f5
+pre-border: #cccccc
+primary: <<colour flexoki-cy>>
+selection-background:
+selection-foreground:
+select-tag-background:
+select-tag-foreground:
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: #000000
+sidebar-controls-foreground: #aaaaaa
+sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-foreground: #acacac
+sidebar-muted-foreground-hover: #444444
+sidebar-muted-foreground: #c0c0c0
+sidebar-tab-background-selected: #f4f4f4
+sidebar-tab-background: #e0e0e0
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: <<colour tab-border>>
+sidebar-tab-divider: #e4e4e4
+sidebar-tab-foreground-selected:
+sidebar-tab-foreground: <<colour tab-foreground>>
+sidebar-tiddler-link-foreground-hover: #444444
+sidebar-tiddler-link-foreground: #999999
+site-title-foreground: <<colour tiddler-title-foreground>>
+stability-stable: #008000
+stability-experimental: #c07c00
+stability-deprecated: #ff0000
+stability-legacy: #0000ff
+static-alert-foreground: #aaaaaa
+tab-background-selected: <<colour background>>
+tab-background: <<colour flexoki-bg-2>>
+tab-border-selected: <<colour flexoki-ui-3>>
+tab-border: <<colour flexoki-ui>>
+tab-divider: <<colour flexoki-ui-2>>
+tab-foreground-selected: <<colour tab-foreground>>
+tab-foreground: <<colour flexoki-tx>>
+table-border: #dddddd
+table-footer-background: #a8a8a8
+table-header-background: #f0f0f0
+tag-background: #ec6
+tag-foreground: #ffffff
+testcase-accent-level-1: #c1eaff
+testcase-accent-level-2: #E3B740
+testcase-accent-level-3: #5FD564
+tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
+tiddler-controls-foreground-hover: #888888
+tiddler-controls-foreground-selected: #444444
+tiddler-controls-foreground: #cccccc
+tiddler-editor-background: #f8f8f8
+tiddler-editor-border-image: #ffffff
+tiddler-editor-border: #cccccc
+tiddler-editor-fields-even: #e0e8e0
+tiddler-editor-fields-odd: #f0f4f0
+tiddler-info-background: #f8f8f8
+tiddler-info-border: #dddddd
+tiddler-info-tab-background: #f8f8f8
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #c0c0c0
+tiddler-title-foreground: #182955
+toolbar-new-button:
+toolbar-options-button:
+toolbar-save-button:
+toolbar-info-button:
+toolbar-edit-button:
+toolbar-close-button:
+toolbar-delete-button:
+toolbar-cancel-button:
+toolbar-done-button:
+untagged-background: #999999
+very-muted-foreground: #888888
+wikilist-background: #e5e5e5
+wikilist-item: #fff
+wikilist-info: #000
+wikilist-title: #666
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: #aaa
+wikilist-button-open: #4fb82b
+wikilist-button-open-hover: green
+wikilist-button-reveal: #5778d8
+wikilist-button-reveal-hover: blue
+wikilist-button-remove: #d85778
+wikilist-button-remove-hover: red
+wikilist-toolbar-background: #d3d3d3
+wikilist-toolbar-foreground: #888
+wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-button-background: #acacac
+wikilist-button-foreground: #000
