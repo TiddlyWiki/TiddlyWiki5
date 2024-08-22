@@ -58,23 +58,23 @@ flexoki-bl: <<colour flexoki-blue-400>>
 flexoki-pu: <<colour flexoki-purple-400>>
 flexoki-ma: <<colour flexoki-magenta-400>>
 
-alert-background: #ffe476
-alert-border: #b99e2f
-alert-highlight: #881122
-alert-muted-foreground: #b99e2f
+alert-background: <<colour flexoki-bg-2>>
+alert-border: <<colour flexoki-ui>>
+alert-highlight: <<colour flexoki-tx-3>>
+alert-muted-foreground: <<colour flexoki-tx-2>>
 background: <<colour flexoki-bg>>
 blockquote-bar: <<colour muted-foreground>>
 button-background:
 button-foreground:
 button-border:
-code-background: #f7f7f9
-code-border: #e1e1e8
-code-foreground: #dd1144
-diff-delete-background: #ffc9c9
+code-background: <<colour flexoki-bg>>
+code-border: <<colour flexoki-tx>>
+code-foreground: <<colour flexoki-tx>>
+diff-delete-background: <<colour flexoki-re>>
 diff-delete-foreground: <<colour foreground>>
 diff-equal-background: 
 diff-equal-foreground: <<colour foreground>>
-diff-insert-background: #aaefad
+diff-insert-background: <<colour flexoki-gr>>
 diff-insert-foreground: <<colour foreground>>
 diff-invisible-background: 
 diff-invisible-foreground: <<colour muted-foreground>>
