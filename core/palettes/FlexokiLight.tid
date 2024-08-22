@@ -79,7 +79,7 @@ diff-insert-foreground: <<colour foreground>>
 diff-invisible-background: 
 diff-invisible-foreground: <<colour muted-foreground>>
 dirty-indicator: #ff0000
-download-background: #34c734
+download-background: <<colour flexoki-gr>>
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
