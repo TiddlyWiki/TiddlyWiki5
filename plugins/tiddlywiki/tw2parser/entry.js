@@ -21,7 +21,7 @@ exports.params = [
 Run the macro
 */
 exports.run = function(key,map) {
-	try{
+	try {
 		return  JSON.parse(map)[key];
 	} catch(e) {
 		return "";

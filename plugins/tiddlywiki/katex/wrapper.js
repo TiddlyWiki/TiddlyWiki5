@@ -21,7 +21,7 @@ katex.updateMacros = function() {
 	var tiddlers = $tw.wiki.getTiddlersWithTag("$:/tags/KaTeX/Macro"),
 		regex = /#\d/g, // Remove the arguments like #1#2
 		tid, macro, cmd;
-	for (var i=0; i < tiddlers.length; i++) {
+	for(var i=0; i < tiddlers.length; i++) {
 		tid = $tw.wiki.getTiddler(tiddlers[i]);
 		try {
 			macro = tid.fields["caption"];

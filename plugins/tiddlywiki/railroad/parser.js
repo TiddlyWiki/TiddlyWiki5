@@ -377,7 +377,7 @@ Parser.prototype.tokenise = function(source) {
 		// Skip whitespace
 		pos = $tw.utils.skipWhiteSpace(source,pos);
 		// Avoid falling off the end of the string
-		if (pos >= source.length) {
+		if(pos >= source.length) {
 			break;
 		}
 		// Examine the next character
