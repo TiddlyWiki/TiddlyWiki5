@@ -3,3 +3,4 @@ caption: US State Boundaries
 type: application/json
 tags: $:/tags/GeoFeature
 color: #88f
+popup-template: $:/geospatialdemo/features/us-states/popupTemplate

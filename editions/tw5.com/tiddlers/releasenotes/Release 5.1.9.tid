@@ -11,7 +11,7 @@ description: Fluid-fixed layout, vars widget, open in new window
 <$edit-text tiddler="""$tiddler$""" index="""$colour$""" type="color" tag="input"/>
 \end
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.8...v5.1.9]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.8...v5.1.9]]//
 
 ! Major Improvements
 
@@ -96,7 +96,7 @@ Two new [[hidden settings|Hidden Settings]] for advanced configuration:
 
 !! New Vars widget
 
-[[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1678]] VarsWidget for setting multiple variables in one operation:
+[[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/1678]] VarsWidget for setting multiple variables in one operation:
 
 ```
 <$vars greeting="Hi" me={{!!title}} sentence=<<helloworld>>>
@@ -113,7 +113,7 @@ Two new [[hidden settings|Hidden Settings]] for advanced configuration:
 
 !! Usability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/789069bb6b9ca1bd9da75e035b18728e83eb232c]] new page control icon for setting the palette: <$set name="tv-config-toolbar-class" value="btn">
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/789069bb6b9ca1bd9da75e035b18728e83eb232c]] new page control icon for setting the palette: <$set name="tv-config-toolbar-class" value="btn">
 <$set name="tv-config-toolbar-icons" value="yes">
 <$set name="tv-config-toolbar-text" value="yes">
 {{$:/core/ui/Buttons/palette}}
@@ -124,42 +124,42 @@ Two new [[hidden settings|Hidden Settings]] for advanced configuration:
 palette <span title="$:/core/images/palette">{{$:/core/images/palette}}</span>
 and "open new window" <span title="$:/core/images/open-window">{{$:/core/images/open-window}}</span>
 </span>
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/648f670bcbba088780bc76f0c33cbe378d283bbd]] the theme icon to better match the new palette icon: <span style="fill:#aaa;">
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/648f670bcbba088780bc76f0c33cbe378d283bbd]] the theme icon to better match the new palette icon: <span style="fill:#aaa;">
 <span title="$:/core/images/theme-button">{{$:/core/images/theme-button}}</span>
 <span title="$:/core/images/plugin-generic-theme">{{$:/core/images/plugin-generic-theme}}</span>
 </span>
-* [[Avoid|https://github.com/Jermolene/TiddlyWiki5/commit/7b4153f87f8b4793fa055ec287a659ece3150d99]] glitch with autofocusing the search box in the plugin library
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9f92c086c31a528a2ffb6bc9fed53d4cc016480f]] information about TiddlyDesktop to [[Releases]]
-* [[Stopped|https://github.com/Jermolene/TiddlyWiki5/commit/4a3a5bf1f06c4efb8449c860e90c214f707954f6]] autosaving after cancelling an edit
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/062aa03c5acf6ac506169e9f3bac9cb0307667e4]] dropdown to edit template to allow existing field names to be selected
+* [[Avoid|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7b4153f87f8b4793fa055ec287a659ece3150d99]] glitch with autofocusing the search box in the plugin library
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/9f92c086c31a528a2ffb6bc9fed53d4cc016480f]] information about TiddlyDesktop to [[Releases]]
+* [[Stopped|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4a3a5bf1f06c4efb8449c860e90c214f707954f6]] autosaving after cancelling an edit
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/062aa03c5acf6ac506169e9f3bac9cb0307667e4]] dropdown to edit template to allow existing field names to be selected
 
 !! Hackability Improvements
 
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/5f3587c38c2968ff63780552ef50b52d87ada3ca]] to ~KaTeX version 0.4.3, with the following editions since the previous 0.2.0 release that was distributed with TiddlyWiki 5.1.8:
+* [[Updated|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5f3587c38c2968ff63780552ef50b52d87ada3ca]] to ~KaTeX version 0.4.3, with the following editions since the previous 0.2.0 release that was distributed with TiddlyWiki 5.1.8:
 ** Added support for some `\begin`/`\end` environments, including support for `array`, `matrix`, `pmatrix`, `bmatrix`, `vmatrix`, and `Vmatrix`
 ** Added support for optional `\sqrt` arguments, e.g. `\sqrt[3]{x}`
 ** Add support for `\phantom`
 ** Add `\#`, `\&`
 ** See the [[KaTeX GitHub page|https://github.com/Khan/KaTeX/releases]] for full release details
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/9b4b9d4d8878b8646112de7b5a7b282f50a4d1cb]] ActionSendMessageWidget for more flexible passing of named parameters via new `$name` and `$value` attributes
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6942efa6289c9f1d99ea9f63972aa314ac06a8b1]] styling for `<kbd>` elements such as <kbd>escape</kbd> and <kbd>enter</kbd>
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/637aaca2fc3563cc695ab5603fc0cde222a770da]] subtle new "pin stripe" pattern for page background - <$button>
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/9b4b9d4d8878b8646112de7b5a7b282f50a4d1cb]] ActionSendMessageWidget for more flexible passing of named parameters via new `$name` and `$value` attributes
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/6942efa6289c9f1d99ea9f63972aa314ac06a8b1]] styling for `<kbd>` elements such as <kbd>escape</kbd> and <kbd>enter</kbd>
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/637aaca2fc3563cc695ab5603fc0cde222a770da]] subtle new "pin stripe" pattern for page background - <$button>
 <$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" text="Pinstripe.gif"/>
 <$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment" text="fixed"/>
 <$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" text="auto"/>
 Try it out
 </$button>
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/139496209f92d229feadf5c2883edec9090c0a0a]] support for custom elements to the ButtonWidget
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/d8366cc45f25d16c9085e05ee18965e626e218ff]] CodeMirror plugin to automatically refresh when a tiddler type changes
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0d5033e2a00e34a7665c2cff58c0d15da224dd2b]] new setting in $:/ControlPanel to render tiddler titles as links, which can be convenient for drag and drop
-* [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/f42842f80104e8e892545c758ea0b997cacbdd31]] detecting the preview pane with the [[tv-tiddler-preview Variable]]
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/50c6ce8b73aef692920d7a03b1c9c46c35f972d6]] automatic linking of system tiddler titles by restricting them to letters and the characters `/.-`
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/139496209f92d229feadf5c2883edec9090c0a0a]] support for custom elements to the ButtonWidget
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d8366cc45f25d16c9085e05ee18965e626e218ff]] CodeMirror plugin to automatically refresh when a tiddler type changes
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/0d5033e2a00e34a7665c2cff58c0d15da224dd2b]] new setting in $:/ControlPanel to render tiddler titles as links, which can be convenient for drag and drop
+* [[Simplified|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f42842f80104e8e892545c758ea0b997cacbdd31]] detecting the preview pane with the [[tv-tiddler-preview Variable]]
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/50c6ce8b73aef692920d7a03b1c9c46c35f972d6]] automatic linking of system tiddler titles by restricting them to letters and the characters `/.-`
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5a6249894d5e79ee4e472c72be8956ce59558797]] problem with special characters in field names
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/230f40c3bd71177eb7b1f7e8252a5164e99a12c5]] static banner layout on mobile devices
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/df84e932833b3643ce600499ddd5fef497bec908]] popups within the scrollable widget by adding `position: relative;` to example scrollable widget styles
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5a6249894d5e79ee4e472c72be8956ce59558797]] problem with special characters in field names
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/230f40c3bd71177eb7b1f7e8252a5164e99a12c5]] static banner layout on mobile devices
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/df84e932833b3643ce600499ddd5fef497bec908]] popups within the scrollable widget by adding `position: relative;` to example scrollable widget styles
 
 !! Contributors
 

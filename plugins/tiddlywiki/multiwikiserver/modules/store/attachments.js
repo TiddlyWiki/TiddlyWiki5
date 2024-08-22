@@ -53,6 +53,7 @@ Saves an attachment to a file. Options include:
 text: text content (may be binary)
 type: MIME type of content
 reference: reference to use for debugging
+_canonical_uri: canonical uri of the content
 */
 AttachmentStore.prototype.saveAttachment = function(options) {
 	const path = require("path"),
@@ -74,7 +75,7 @@ AttachmentStore.prototype.saveAttachment = function(options) {
 		modified: $tw.utils.stringifyDate(new Date()),
 		contentHash: contentHash,
 		filename: dataFilename,
-		type: options.type,
+		type: options.type
 	},null,4));
 	return contentHash;
 };
@@ -82,7 +83,7 @@ AttachmentStore.prototype.saveAttachment = function(options) {
 /*
 Adopts an attachment file into the store
 */
-AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash,canonicalUri) {
+AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash,_canonical_uri) {
 	const path = require("path"),
 		fs = require("fs");
 	// Choose the best file extension for the attachment given its type
@@ -96,7 +97,7 @@ AttachmentStore.prototype.adoptAttachment = function(incomingFilepath,type,hash,
 	fs.renameSync(incomingFilepath,dataFilepath);
 	// Save the meta.json file
 	fs.writeFileSync(path.resolve(attachmentPath,"meta.json"),JSON.stringify({
-		_canonical_uri: canonicalUri,
+		_canonical_uri: _canonical_uri,
 		created: $tw.utils.stringifyDate(new Date()),
 		modified: $tw.utils.stringifyDate(new Date()),
 		contentHash: hash,

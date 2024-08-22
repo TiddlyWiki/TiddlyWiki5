@@ -154,9 +154,9 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, exist
 
   let shouldProcessAttachment = tiddlerFields.text && tiddlerFields.text.length <= attachmentSizeLimit;
 
-  if (existing_attachment_blob) {
+  if(existing_attachment_blob) {
     const fileSize = this.attachmentStore.getAttachmentFileSize(existing_attachment_blob);
-    if (fileSize <= attachmentSizeLimit) {
+    if(fileSize <= attachmentSizeLimit) {
       const existingAttachmentMeta = this.attachmentStore.getAttachmentMetadata(existing_attachment_blob);
       const hasCanonicalField = !!tiddlerFields._canonical_uri;
       const skipAttachment = hasCanonicalField && (tiddlerFields._canonical_uri === (existingAttachmentMeta?._canonical_uri || existing_canonical_uri));
@@ -166,7 +166,7 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, exist
     }
   }
 
-  if (attachmentsEnabled && isBinary && shouldProcessAttachment) {
+  if(attachmentsEnabled && isBinary && shouldProcessAttachment) {
     const attachment_blob = existing_attachment_blob || this.attachmentStore.saveAttachment({
       text: tiddlerFields.text,
       type: tiddlerFields.type,
@@ -174,7 +174,7 @@ SqlTiddlerStore.prototype.processIncomingTiddler = function(tiddlerFields, exist
       _canonical_uri: tiddlerFields._canonical_uri
     });
     
-    if (tiddlerFields?._canonical_uri) {
+    if(tiddlerFields?._canonical_uri) {
       delete tiddlerFields._canonical_uri;
     }
     

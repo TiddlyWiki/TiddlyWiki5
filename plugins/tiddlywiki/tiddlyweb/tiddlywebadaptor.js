@@ -85,7 +85,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			var json = null;
 			try {
 				json = JSON.parse(data);
-			} catch (e) {
+			} catch(e) {
 			}
 			if(json) {
 				self.logger.log("Status:",data);
@@ -165,7 +165,7 @@ TiddlyWebAdaptor.prototype.getCsrfToken = function() {
 	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
 		match = regex.exec(document.cookie),
 		csrf = null;
-	if (match && (match.length === 2)) {
+	if(match && (match.length === 2)) {
 		csrf = match[1];
 	}
 	return csrf;

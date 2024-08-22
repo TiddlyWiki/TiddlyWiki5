@@ -6,7 +6,7 @@ title: Release 5.3.6
 type: text/vnd.tiddlywiki
 description: Under development
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.3.5...master]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.3.5...master]]//
 
 ! Major Improvements
 
@@ -18,7 +18,14 @@ This release includes improvements to the following translations:
 
 ! Plugin Improvements
 
-* 
+!! Geospatial Plugin
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8404">> support for custom wikitext popups to be attached to map features
+
+!! Markdown Plugin
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8395">> strikethrough, superscript and subscript editor toolbar buttons
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8402">> readability of Markdown links to other tiddlers
 
 ! Widget Improvements
 
@@ -30,7 +37,7 @@ This release includes improvements to the following translations:
 
 ! Usability Improvements
 
-* 
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8407">> the contrast of plugin stability badges on hover
 
 ! Hackability Improvements
 
@@ -38,11 +45,15 @@ This release includes improvements to the following translations:
 
 ! Bug Fixes
 
-* 
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8333">> tiddlers should not be interactive after they are closed
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8393">> crash when [[WidgetMessage: tm-copy-to-clipboard]] is passed an empty string
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8399">> disengage "select all" when cancelling an import
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8382">> [[transcludes Operator]] and [[backtranscludes Operator]] minor issue with transclusions made via a filtered attribute
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8416">> [[TestCaseWidget]] default template to allow wikitext within the test case narrative
 
 ! Node.js Improvements
 
-* 
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8409">> filesystem handling so that [[Compound Tiddlers]] are saved as .tid files
 
 ! Developer Improvements
 
@@ -53,4 +64,13 @@ This release includes improvements to the following translations:
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 <<.contributors """
+btheado
+flibbles
+kookma
+Leilei332
+pmario
+saqimtiaz
+simonbaird
+springerspandrel
+webplusai
 """>>

@@ -1,0 +1,44 @@
+title: $:/language/Help/server
+description: （已棄用：請參閲 'listen' 命令）提供一個 HTTP 伺服器介面到 TiddlyWiki
+
+在伺服器中內建 TiddlyWiki5 是非常簡單。雖與 TiddlyWeb 相容，但不支援許多健全網際網路面向的使用方式所需的功能。
+
+提供呈現一個指定條目，也可將個別條目編碼成 JSON，且支援基本的 HTTP 操作 `GET`、`PUT` 及 `DELETE`.
+
+```
+--server <port> <root-tiddler> <root-render-type> <root-serve-type> <username> <password> <host> <path-prefix> <debug-level>
+```
+
+參數説明：
+
+* ''port'' - 要偵聽的埠號；非數值會被解譯為一個系統環境變數，從其中提取埠號 (預設為 "8080")
+* ''root-tiddler'' - 服務的基本條目 (預設為 "$:/core/save/all")
+* ''root-render-type'' - 呈現的基本條目的內容類型 (預設為 "text/plain")
+* ''root-serve-type'' - 服務的基本條目的內容類型 (預設為 "text/html")
+* ''username'' - 預設的編輯者署名
+* ''password'' - 可選的基本驗證密碼
+* ''host'' - 可選的主機名稱， (預設為 "127.0.0.1" 或名為 "localhost")
+* ''path-prefix'' - 可選的的路徑前綴
+* ''debug-level'' - 可選的偵錯層級；設定為 "debug" 來檢視請求的詳細資訊；(預設為 "none")
+
+若指定密碼參數，瀏覽器將提示使用者輸入帳號與密碼。注意，密碼係以明碼方式傳遞，應只在受信任的網路或 HTTPS 上使用。
+
+例如：
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+若您需要設定主機名稱或路徑前綴，而不要求輸入密碼，則可以指定空字串的使用者名和密碼。
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+使用這樣的位址，會將您的系統暴露給本地網路。有關向整個本地網路開啟實例的資訊，以及可能的安全問題，請參閲 TiddlyWiki.com 的 WebServer 條目。
+
+同時執行多個 TiddlyWiki 伺服器，須分別指定不同的埠號。使用環境變數，有助於將埠號傳遞給 Node.js 進程。本示例引用一個名為 "MY_PORT_NUMBER" 的環境變數:
+
+```
+--server MY_PORT_NUMBER $:/core/save/all text/plain text/html MyUserName passw0rd
+```

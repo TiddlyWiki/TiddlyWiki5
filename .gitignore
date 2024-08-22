@@ -11,5 +11,3 @@ store/
 /playwright/.cache/
 $__StoryList.tid
 /editions/test/test-store/*
-/coverage
-/.nyc_output

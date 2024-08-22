@@ -14,7 +14,7 @@ title: ui/geofeature
 	state=<<qualify "$:/state/demo-map">>
 	startPosition="bounds"
 >
-	<$geolayer json={{!!text}} color={{!!color}}/>
+	<$geolayer json={{!!text}} color={{!!color}} popupTemplate={{!!popup-template}}/>
 </$geomap>
 
 !! Intersect with other features

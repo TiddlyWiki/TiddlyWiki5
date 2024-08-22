@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 released: 201409221100
 description: [[KaTeX Plugin]]
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.0...v5.1.1]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.0...v5.1.1]]//
 
 This is a minor bug fix release to improve the documentation and correct some issues with the first full release of TiddlyWiki.
 
@@ -15,14 +15,14 @@ This is a minor bug fix release to improve the documentation and correct some is
 
 Certain features that were deprecated in [[Release 5.0.17-beta]] have now been removed:
 
-* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/62edd1e8a3fddc0c11b87c87b3e5b404d8e1e395]] deprecated `title` attribute on the ButtonWidget
-* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/d047ccdc84ab6f23779c3614712e0d6fa0ef63ec]] support for deprecated `$:/tags/stylesheet` system tag
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/62edd1e8a3fddc0c11b87c87b3e5b404d8e1e395]] deprecated `title` attribute on the ButtonWidget
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d047ccdc84ab6f23779c3614712e0d6fa0ef63ec]] support for deprecated `$:/tags/stylesheet` system tag
 
 Note that the next release will also remove support for regular expression filter operands, which was also deprecated in 5.0.17-beta.
 
 !! Hackability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/96b7d0eebaf73dcfd4eccb848b90caaa055e5e20]] first implementation of the [[KaTeX Plugin]] for mathematical typesetting
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/96b7d0eebaf73dcfd4eccb848b90caaa055e5e20]] first implementation of the [[KaTeX Plugin]] for mathematical typesetting
 
 !! Contributors
 
