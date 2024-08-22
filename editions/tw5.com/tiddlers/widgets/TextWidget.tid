@@ -9,6 +9,9 @@ text-test: e=mc^^2^^
 
 The text widget displays plain text without parsing it as [[WikiText]], opposite of [[WikifyWidget]].
 
+* The ~TextWidget can be used to suppress a soft link from being recognised see [[Hard and Soft Links]]
+* The ~TextWidget is commonly used to suppress a soft link when using [[Filtered Transclusions|Transclusion in WikiText]]
+
 ! Content and Attributes
 
 The content of the `<$text>` widget is not used.
