@@ -707,7 +707,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 }
 
 button svg.tc-image-button, button .tc-image-button img {
-	height: 1em;
+	height: auto;
 	width: 1em;
 }
 
@@ -2819,7 +2819,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-language-chooser .tc-image-button img {
-	width: 2em;
+	width: auto;
 	vertical-align: -0.15em;
 }
 
