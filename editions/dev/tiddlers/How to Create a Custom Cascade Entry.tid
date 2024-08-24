@@ -9,13 +9,7 @@ This guide will tell you how to add new [[cascade|https://tiddlywiki.com/#Cascad
 
 !!! The default template as a fallback
 
-(omitted here, see the latest version on [ext[Github|https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/ui/ViewTemplate/tags/default.tid]])
-
-```tid
-title: $:/core/ui/ViewTemplate/tags/default
-
-<!-- Omitted -->
-```
+[[$:/core/ui/ViewTemplate/tags/default]]
 
 !!! Transclusion of current active template
 
