@@ -19,11 +19,11 @@ Manual dark / light mode handling can be activated in the $:/ControlPanel ''-> A
 If the browser settings are set to "System theme - auto" for ~FireFox or "System default" for Chrome-like browsers, the OS setting will be shown. """>>
 
 * Actions tagged <<tag $:/tags/StartupAction/Browser>> are executed when the wiki is started. More info can be found at StartupActions and examples here.
-* <<.from-version "5.3.4">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
+* <<.from-version "5.3.6">> Actions tagged <<tag "$:/tags/DarkLightChangeActions">> are executed whenever the browser or OS dark / light setting is changed.
 
 !!! Variable
 
-<<.from-version "5.3.4">>
+<<.from-version "5.3.6">>
 
 The following variable is defined for actions tagged: `$:/tags/DarkLightChangeActions`
 
