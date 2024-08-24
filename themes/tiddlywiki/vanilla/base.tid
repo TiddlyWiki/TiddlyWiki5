@@ -157,7 +157,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -291,6 +291,7 @@ pre > code {
 	display: block;
 	padding: 0.5em;
 	border: none;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: inherit;
 	color: inherit;
 	overflow-x: auto;
