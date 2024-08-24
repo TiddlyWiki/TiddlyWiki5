@@ -16,14 +16,4 @@ caption: {{$:/language/ControlPanel/Palette/Caption}}
 
 {{$:/core/ui/ControlPanel/Palette/DarkLightConfig}}
 
-<% if  [{$:/config/palette/enable-light-dark-detection}match[yes]] %>
-	<<paletteEditorButton>>
-<% else %>
-
-!! <<lingo "Switcher/Heading">>
-
-	{{$:/snippets/paletteswitcher}}
-
-	<<paletteEditorButton>>
-
-<% endif %>
+<<paletteEditorButton>>
