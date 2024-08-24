@@ -1,8 +1,5 @@
-created: 20240824120124697
-modified: 20240824121153728
-tags: $:/tags/Image
 title: $:/core/images/moon-button
-type: text/vnd.tiddlywiki
+tags: $:/tags/Image
 
 \parameters (size:"22pt")
 <svg class="tc-image-moon-button tc-image-button" width=<<size>> height=<<size>> viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">

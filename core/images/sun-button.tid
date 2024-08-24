@@ -1,8 +1,5 @@
-created: 20240824114346679
-modified: 20240824121141152
-tags: $:/tags/Image
 title: $:/core/images/sun-button
-type: text/vnd.tiddlywiki
+tags: $:/tags/Image
 
 \parameters (size:"22pt")
 <svg class="tc-image-sun-button tc-image-button" width=<<size>> height=<<size>> viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
