@@ -206,6 +206,12 @@ Stylesheets/Caption: Stylesheets
 Stylesheets/Expand/Caption: Alle erweitern
 Stylesheets/Hint: Hier wird der "erweiterte" CSS Code dargestellt. Die Reihenfolge, kann in der "Tag-Liste" <<tag "$:/tags/Stylesheet">> mit "Drag & Drop" angepasst werden!
 Stylesheets/Restore/Caption: Alle zurücksetzen
+TestCases/Caption: Test Beispiele
+TestCases/Hint: Test Beispiele sind eigenständige Beispiele zum testen und lernen einzelner Funktionen
+TestCases/All/Caption: Alle Beispiele
+TestCases/All/Hint: Alle Test Beispiele
+TestCases/Failed/Caption: Test Nicht Bestehenden
+TestCases/Failed/Hint: Nicht bestandene Tests - Übersicht
 Theme/Caption: Theme
 Theme/Prompt: Ausgewähltes Theme:
 TiddlerFields/Caption: Tiddler Felder

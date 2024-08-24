@@ -1,0 +1,28 @@
+title: Macros/unusedtitle/template
+description: test <<unusedtitle>> with templates
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<!-- empty template - standard rules are used -->
+<<unusedtitle template:"">>
+
+<<unusedtitle template:"count-missing">>
+
+<<unusedtitle template:"$count:2$-new">>
+
+<!-- template is handled using $tw.utils.formatTitleString -->
+<<unusedtitle baseName:"base" template:"$count:2$-$basename$">>
+
+<<unusedtitle baseName:"" template:"$count:2$-$basename$">>
+
+<!-- UPPERCASES are intentional in template strings. They should be case-insensistive -->
+<<unusedtitle baseName:"asdf" separator:"-" template:"$coUNT:2$$sepaRATor$$baseName$">>
+
+<<unusedtitle baseName:"asdf" separator:"" template:"$count:2$$separator$$basename$">>
+
++
+title: ExpectedResult
+
+<p>New Tiddler</p><p>count-missing</p><p>00-new</p><p>00-base</p><p>00-New Tiddler</p><p>00-asdf</p><p>00 asdf</p>

@@ -22,7 +22,9 @@ function FileSystemAdaptor(options) {
 	this.boot = options.boot || $tw.boot;
 	this.logger = new $tw.utils.Logger("filesystem",{colour: "blue"});
 	// Create the <wiki>/tiddlers folder if it doesn't exist
-	$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+	if(this.boot.wikiTiddlersPath) {
+		$tw.utils.createDirectory(this.boot.wikiTiddlersPath);
+	}
 }
 
 FileSystemAdaptor.prototype.name = "filesystem";
@@ -52,6 +54,10 @@ The type is found by looking up the extension in $tw.config.fileExtensionInfo (e
 It is the responsibility of the filesystem adaptor to update this.boot.files for new files that are created.
 */
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
+	// Error if we don't have a this.boot.wikiTiddlersPath
+	if(!this.boot.wikiTiddlersPath) {
+		return callback("filesystemadaptor requires a valid wiki folder");
+	}
 	// Always generate a fileInfo object when this fuction is called
 	var title = tiddler.fields.title, newInfo, pathFilters, extFilters,
 		fileInfo = this.boot.files[title];
@@ -84,7 +90,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		}
 		$tw.utils.saveTiddlerToFile(tiddler,fileInfo,function(err,fileInfo) {
 			if(err) {
-				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
+				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "open") {
 					fileInfo = fileInfo || self.boot.files[tiddler.fields.title];
 					fileInfo.writeError = true;
 					self.boot.files[tiddler.fields.title] = fileInfo;
@@ -131,7 +137,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	if(fileInfo) {
 		$tw.utils.deleteTiddlerFile(fileInfo,function(err,fileInfo) {
 			if(err) {
-				if ((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
+				if((err.code == "EPERM" || err.code == "EACCES") && err.syscall == "unlink") {
 					// Error deleting the file on disk, should fail gracefully
 					$tw.syncer.displayError("Server desynchronized. Error deleting file for deleted tiddler \"" + title + "\"",err);
 					return callback(null,fileInfo);

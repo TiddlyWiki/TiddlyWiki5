@@ -1,16 +1,13 @@
 {
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
-		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/railroad",
-		"tiddlywiki/evernote",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",
 		"tiddlywiki/dynannotate",
-		"tiddlywiki/tour",
-		"tiddlywiki/qrcode"
+		"tiddlywiki/tour"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

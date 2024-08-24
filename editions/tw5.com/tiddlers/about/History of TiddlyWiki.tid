@@ -1,5 +1,5 @@
 created: 20140908114400000
-modified: 20140923141919329
+modified: 20230803053808167
 tags: About
 title: History of TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -32,17 +32,17 @@ Much of the early feedback was that TiddlyWiki was neat, but that it would be mo
 
 Within a few months I saw an experimental Firefox extension that enabled TiddlyWiki to save changes in the browser. Examining the code, I realised that the APIs that it used to write to the file system were actually available in ordinary HTML files - as long as they were loaded via a `file://` URI.
 
-I adapted the Firefox code into the core of TiddlyWiki, and soon added a similar ability for Internet Explorer (making use of an old ActiveX control that Microsoft distributed with Internet Explorer).
+I adapted the Firefox code into the core of TiddlyWiki, and soon added a similar ability for Internet Explorer (making use of an old [[ActiveX|https://en.wikipedia.org/wiki/ActiveX]] control that Microsoft distributed with Internet Explorer).
 
 ! Growth of TiddlyWiki
 
-A major milestone in the growth of TiddlyWiki was the creation of "GTDTiddlyWiki" by Nathan Bowers. He took the vanilla TiddlyWiki product and adapted it for the specific application of keeping track of tasks using the popular Getting Things Done methodology. GTDTiddlyWiki was an immediate hit, being enthusiastically greeted on websites like LifeHacker.
+A major milestone in the growth of TiddlyWiki was the creation of "GTDTiddlyWiki" by Nathan Bowers. He took the vanilla TiddlyWiki product and adapted it for the specific application of keeping track of tasks using the popular Getting Things Done methodology. GTDTiddlyWiki was an immediate hit, being enthusiastically greeted on websites like [[LifeHacker|https://lifehacker.com/]].
 
-Over the next couple of years TiddlyWiki continued to grow in popularity, and gained new features and capabilities. Within a year I was able to support myself by performing bespoke development work on TiddlyWiki, notably working with wiki pioneer SocialText on the ability to synchronise changes with an online server
+Over the next couple of years TiddlyWiki continued to grow in popularity, and gained new features and capabilities. Within a year I was able to support myself by performing bespoke development work on TiddlyWiki, notably working with wiki pioneer [[SocialText|https://en.wikipedia.org/wiki/Socialtext]] on the ability to synchronise changes with an online server
 
 ! BT Acquisition
 
-In May 2007, [[BT]] acquired [[Osmosoft]], my consultancy company. It was an unusual decision to acquire a company with a single employee and a tiny trickle of revenue - [[Osmosoft]] didn't even own the intellectual property in TiddlyWiki since I had handed it over to UnaMesa to assure its future for the community.
+In May 2007, [[BT]] acquired [[Osmosoft]], my consultancy company. It was an unusual decision to acquire a company with a single employee and a tiny trickle of revenue - [[Osmosoft]] didn't even own the intellectual property in TiddlyWiki since I had handed it over to [[UnaMesa]] to assure its future for the community.
 
 [[BT]]'s motivation was to help them understand community-based ecosystems. I joined the organisation as "Head of Open Source Innovation", taking responsibility for open source governance, and providing advice and expertise on how to participate in open soure communities.
 

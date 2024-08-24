@@ -13,4 +13,4 @@ caption: {{$:/language/ControlPanel/Saving/GitService/GitLab/Caption}}
 |<<lingo Branch>> |<$edit-text tiddler="$:/GitLab/Branch" default="master" tag="input"/> |
 |<<lingo Path>> |<$edit-text tiddler="$:/GitLab/Path" default="" tag="input"/> |
 |<<lingo Filename>> |<$edit-text tiddler="$:/GitLab/Filename" default="" tag="input"/> |
-|<<lingo ServerURL>> |<$edit-text tiddler="$:/GitLab/ServerURL" default="https://gitlab.com/api/v4" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/GitLab/ServerURL" default="https://gitlab.com/api/v4" tag="input" type="url"/> |

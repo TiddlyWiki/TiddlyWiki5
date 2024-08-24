@@ -2,7 +2,7 @@
 	"title": "$:/languages/nl-NL",
 	"name": "nl-NL",
 	"plugin-type": "language",
-	"description": "Dutch (The Netherlands)",
+	"description": "Nederlands (Nederland)",
 	"author": "gernert",
 	"core-version": ">=5.1.5"
 }

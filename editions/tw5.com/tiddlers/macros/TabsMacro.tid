@@ -1,6 +1,6 @@
 caption: tabs
 created: 20131228162203521
-modified: 20210721122823354
+modified: 20240627201724476
 tags: Macros [[Core Macros]]
 title: tabs Macro
 type: text/vnd.tiddlywiki
@@ -34,7 +34,7 @@ By default the tabs are arranged horizontally above the content. To get vertical
 
 Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 
-The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro. This can put you in trouble if the list of tabs includes tiddlers that depend on the value of the <<.vlink currentTiddler>>, for example tiddlers listing children based on its own name. To overcome this problem you can use a [[TemplateTiddler|TemplateTiddlers]] like the following:
+The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro. This can put you in trouble if the list of tabs includes tiddlers that depend on the value of the <<.vlink currentTiddler>>, for example tiddlers listing children based on its own name. To overcome this problem you can make use of the <<.vlink currentTab>> variable, which can be used in a [[TemplateTiddler|TemplateTiddlers]] such as the following:
 
 ```
 <$tiddler tiddler=<<currentTab>>>

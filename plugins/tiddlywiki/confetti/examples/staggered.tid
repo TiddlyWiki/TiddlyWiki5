@@ -3,7 +3,8 @@ tags: $:/tags/ConfettiExample
 
 <$button>
 <$action-sendmessage $message="tm-confetti-launch"/>
-<$action-sendmessage $message="tm-confetti-launch" originY=0.6 spread=70 delay=300/>
-<$action-sendmessage $message="tm-confetti-launch" originY=0.55 spread=30 delay=600/>
-Launch three staggered rounds of confetti
+<$action-sendmessage $message="tm-confetti-launch" delay=300 originY=0.6  spread=100 scalar=1.5/>
+<$action-sendmessage $message="tm-confetti-launch" delay=400 originY=0.55 spread=130/>
+<$action-sendmessage $message="tm-confetti-launch" delay=500 originY=0.55 spread=170 scalar=2/>
+Launch four staggered rounds of confetti
 </$button>

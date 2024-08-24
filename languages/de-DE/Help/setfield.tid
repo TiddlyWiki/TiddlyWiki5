@@ -3,7 +3,7 @@ description: Experimentell - Setzt ein Tiddler "field" auf einen bestimmten Wert
 
 //Wichtig! Dieser Befehl is experimentell und kann während der Betaphase geändert oder ersetzt werden!//
 
-Setzt ein spezifiziertes Feld, für eine Gruppe von Tiddlern. Ein Template wird "wikifiziert" und das Ergebnis in das Feld geschrieben. Die `currentTiddler` Variable wird auf den jeweiligen Tiddler gesetzt. 
+Setzt ein spezifiziertes Feld, für eine Gruppe von Tiddlern. Ein Template wird "wikifiziert" und das Ergebnis in das Feld geschrieben. Die `currentTiddler` Variable wird auf den jeweiligen Tiddler gesetzt.
 
 ```
 --setfield <filter> <fieldname> <templatetitle> <rendertype>
