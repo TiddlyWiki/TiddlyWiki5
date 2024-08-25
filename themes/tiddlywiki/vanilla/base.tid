@@ -71,10 +71,16 @@ $else$
 
 {{$:/themes/tiddlywiki/vanilla/reset}}
 
-*, input[type="search"] {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
+input[type="search"] {
+	outline-offset: initial;
+}
+
+button, textarea, input, select {
+	outline-color: <<colour primary>>;
+}
+
+:-moz-focusring {
+	outline: 2px solid <<colour primary>>;
 }
 
 /*
