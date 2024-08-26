@@ -1,0 +1,4 @@
+title: $:/config/ViewTemplateSubtitleFilters/
+tags: $:/tags/ViewTemplateSubtitleFilter
+
+default: [[$:/core/ui/ViewTemplate/subtitle/default]]

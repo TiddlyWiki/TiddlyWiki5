@@ -71,10 +71,16 @@ $else$
 
 {{$:/themes/tiddlywiki/vanilla/reset}}
 
-*, input[type="search"] {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
+input[type="search"] {
+	outline-offset: initial;
+}
+
+button, textarea, input, select {
+	outline-color: <<colour primary>>;
+}
+
+:-moz-focusring {
+	outline: 2px solid <<colour primary>>;
 }
 
 /*
@@ -157,7 +163,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -224,6 +230,11 @@ dl dt {
 textarea,
 input[type=text],
 input[type=search],
+input[type=number],
+input[type=password],
+input[type=email],
+input[type=tel],
+input[type=url],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
@@ -288,10 +299,13 @@ form.tc-form-inline {
 Markdown likes putting code elements inside pre elements
 */
 pre > code {
-	padding: 0;
+	display: block;
+	padding: 0.5em;
 	border: none;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: inherit;
 	color: inherit;
+	overflow-x: auto;
 }
 
 /*
@@ -702,7 +716,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 }
 
 button svg.tc-image-button, button .tc-image-button img {
-	height: 1em;
+	height: auto;
 	width: 1em;
 }
 
@@ -2662,7 +2676,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 
 .tc-plugin-info-chunk.tc-plugin-info-icon img, .tc-plugin-info-chunk.tc-plugin-info-icon svg {
 	width: 2em;
-	height: 2em;
+	height: auto;
 }
 
 .tc-plugin-info-dropdown {
@@ -2814,7 +2828,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-language-chooser .tc-image-button img {
-	width: 2em;
+	width: auto;
 	vertical-align: -0.15em;
 }
 

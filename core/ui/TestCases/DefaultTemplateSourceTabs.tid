@@ -2,14 +2,17 @@ title: $:/core/ui/testcases/DefaultTemplate/SourceTabs
 
 \whitespace trim
 
+\procedure testcaseNewTitle() $:/temp/testcase/draft-title
+
 \procedure saveActions()
-<$action-log/>
+<$action-setfield $tiddler=<<currentTab>> $field="draft.title" $value=<<newTitle>>/>
 <$action-sendmessage $message="tm-save-tiddler" $param=<<title>> />
-<$action-navigate $to=<<navTitle>> $scroll="no"/>
+<$action-setfield $tiddler=<<testcase-source-state>> text=<<newTitle>>/>
+<$action-deletetiddler $tiddler=<<testcaseNewTitle>>/>
 \end
 
-\procedure saveButton(title, navTitle)
-<$button class="tc-btn-invisible tc-test-case-save-button tc-small-gap-left" actions=<<saveActions>> >
+\procedure saveButton(title, newTitle)
+<$button class="tc-btn-invisible tc-test-case-save-button tc-small-gap-left" actions=<<saveActions>> disabled={{{ [<testcaseNewTitle>!has[text]then[yes]] }}}>
 {{$:/core/images/done-button}}
 </$button>
 \end
@@ -24,9 +27,9 @@ title: $:/core/ui/testcases/DefaultTemplate/SourceTabs
 						<$text text=<<fieldName>>/>
 					</td>
 					<td>
-						<%if [<fieldName>match[draft.title]] :filter[<currentTab>has[draft.of]] %>
-							<$edit class="tc-edit-texteditor tc-max-width-80" tiddler=<<currentTab>> field=<<fieldName>>/>
-							<$macrocall $name="saveButton" navTitle={{{ [<currentTab>get[draft.title]] }}} title=<<currentTab>>/>
+						<%if [<fieldName>match[draft.title]]  %>
+							<$edit-text class="tc-edit-texteditor tc-max-width-80" tiddler=<<testcaseNewTitle>> focus="yes" tag="input"/>
+							<$macrocall $name="saveButton" newTitle={{{ [<testcaseNewTitle>get[text]] }}} title=<<currentTab>>/>
 						<%else%>
 							<$view tiddler=<<currentTab>> field=<<fieldName>>/>
 						<%endif%>

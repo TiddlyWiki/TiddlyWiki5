@@ -39,6 +39,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 </$keyboard>
 </$keyboard>
 </$keyboard>
+&#32;
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <<cancel-search-actions>>

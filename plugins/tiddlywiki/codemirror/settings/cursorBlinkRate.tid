@@ -4,4 +4,4 @@ caption: {{$:/language/codemirror/cursorBlinkRate/hint}}
 
 \define lingo-base() $:/language/codemirror/cursorBlinkRate/
 
-|<$link to="$:/config/codemirror/cursorBlinkRate"><<lingo hint>></$link> |<$edit-text tiddler="$:/config/codemirror/cursorBlinkRate" default="" placeholder="cursorBlinkRate" tag="input"/> |
+|<$link to="$:/config/codemirror/cursorBlinkRate"><<lingo hint>></$link> |<$edit-text tiddler="$:/config/codemirror/cursorBlinkRate" default="" placeholder="cursorBlinkRate" tag="input" type="number"/> |
