@@ -1,5 +1,5 @@
 created: 20230726145210484
-modified: 20230726145757234
+modified: 20240619211734149
 tags: [[Variable Usage]]
 title: Behaviour of invoked variables depends on how the variable was declared
 type: text/vnd.tiddlywiki
@@ -8,19 +8,19 @@ type: text/vnd.tiddlywiki
 \procedure p1(a1) $a1$ - <<__a1__>> - <<a1>>
 \function f1(a1) "$a1$" "-" [<__a1__>] ="-" [<a1>] :and[join[ ]]
 
-Invoked in normal wikitext context: `<$transclude $variable=macro/>` or `<<macro>>`
+Invoked in normal wikitext context: `<$transclude $variable=myvar/>` or `<<myvar>>`
 
 {{Behaviour of variables invoked via normal wikitext}}
 
-Invoked via widget attribute: `<div class=<<macro>>/>`
+Invoked via widget attribute: `<div class=<<myvar>>/>`
 
 {{Behaviour of variables invoked via widget attributes}}
 
-Invoked via filter operator parameter: `[<macro>]`
+Invoked via filter operator parameter: `[<myvar>]`
 
 {{Behaviour of variables invoked via filter operator parameter}}
 
-Invoked via function call in a filter expression: `[function[macro]]`
+Invoked via function call in a filter expression: `[function[.myfun]]`
 
 {{Behaviour of variables invoked via filter expression function call}}
 

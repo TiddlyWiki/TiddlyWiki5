@@ -6,5 +6,5 @@ Type the word "launch": <$edit-text tiddler="$:/temp/confetti/launchstatus" tag=
 <$list filter="[{$:/temp/confetti/launchstatus}match:caseinsensitive[launch]]" variable="ignore">
 Launched!
 <$confetti particleCount=100/>
-<$confetti particleCount=100 delay=300/>
+<$confetti particleCount=100 spread=170 delay=300/>
 </$list>

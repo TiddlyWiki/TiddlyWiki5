@@ -2,7 +2,7 @@
 	"title": "$:/languages/zh-Hant",
 	"name": "zh-Hant",
 	"plugin-type": "language",
-	"description": "Chinese (Traditional)",
+	"description": "繁體中文",
 	"author": "BramChen",
 	"core-version": ">=5.0.8",
 	"plugin-priority": 100

@@ -15,8 +15,8 @@ Import the configuration tiddler: $:/config/LocalPluginLibrary to your "test wik
 The following commands will create the library files and start a test server at http://localhost:8888
 
 ```
-cd /your/path/to/TiddlyWiki5/editions/pluginlibrary
-tiddlywiki --build test-server
+cd /your/path/to/TiddlyWiki5
+node ./tiddlywiki.js ./editions/pluginlibrary --build test-server
 ```
 
 !! Test the Library with a Single File Wiki

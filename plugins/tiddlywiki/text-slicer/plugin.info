@@ -3,5 +3,6 @@
 	"name": "Text Slicer",
 	"description": "Tools for slicing text into tiddlers",
 	"list": "readme docs",
-	"dependents": ["$:/plugins/tiddlywiki/sax"]
+	"dependents": ["$:/plugins/tiddlywiki/sax"],
+	"stability": "STABILITY_2_STABLE"
 }

@@ -1,0 +1,149 @@
+title: $:/core/ui/testcases/DefaultTemplate
+code-body: yes
+
+\whitespace trim
+
+\function tf.state() "$:/state/testcase"
+
+\procedure linkcatcherActions()
+<%if [<navigateTo>has[title]] %>
+	<$action-setfield $tiddler=<<tf.state>> text=<<navigateTo>>/>
+<%endif%>
+\end
+
+\procedure testcase-header()
+<div class="tc-test-case-header">
+	<h2>
+		<$genesis $type={{{ [<linkTarget>!match[]then[$link]else[span]] }}} to=<<testcaseTiddler>>>
+			<%if [<testResult>!match[]] %>
+				<span class={{{ tc-test-case-result-icon
+					[<testResult>!match[fail]then[tc-test-case-result-icon-pass]]
+					[<testResult>match[fail]then[tc-test-case-result-icon-fail]]
+					+[join[ ]] }}}
+				>
+					<%if [<testResult>!match[fail]] %>
+						{{$:/core/images/done-button}}
+					<%else%>
+						{{$:/core/images/close-button}}
+					<%endif%>
+				</span>
+			<%endif%>
+			<$view tiddler="Description" mode="inline"/>
+		</$genesis>
+		<span class="tc-test-case-toolbar">
+			<<testcase-toolbar>>
+		</span>
+	</h2>
+</div>
+\end
+
+\procedure testcase-toolbar()
+<$button popup=`$(tf.state)$-more`
+	tooltip={{$:/language/Buttons/More/Hint}}
+	aria-label={{$:/language/Buttons/More/Caption}}
+	class="tc-btn-invisible"
+	selectedClass="tc-selected"
+>
+	{{$:/core/images/down-arrow}}
+</$button>
+<$let
+	tv-config-toolbar-icons="yes"
+	tv-config-toolbar-text="yes"
+	tv-config-toolbar-class="tc-btn-invisible"
+>
+	<$reveal state=`$(tf.state)$-more` type="popup" position="belowleft" animate="yes">
+		<div class="tc-drop-down">
+			<$list filter="[all[shadows+tiddlers]tag[$:/tags/TestCase/Actions]!has[draft.of]]"
+				variable="listItem"
+			>
+				<$transclude $tiddler=<<listItem>> $mode="inline"/>
+			</$list>
+		</div>
+	</$reveal>
+</$let>
+\end
+
+\procedure testcase-narrative()
+<div class="tc-test-case-narrative">
+	<$transclude $tiddler="Narrative" $mode="block"/>
+</div>
+\end
+
+\procedure testcase-fail()
+<div class="tc-test-case-result-fail">
+	<div class="tc-test-case-result-fail-header">
+		TEST FAILED
+	</div>
+	<div class="tc-test-case-result-fail-body">
+		<$diff-text source=<<expectedHTML>> dest=<<outputHTML>>/>
+	</div>
+</div>
+\end
+
+\procedure testcase-output-wikified()
+<$linkcatcher actions=<<linkcatcherActions>>>
+	<$tiddler tiddler="Output">
+		<$transclude $tiddler="Output" $mode="block"/>
+	</$tiddler>
+</$linkcatcher>
+\end
+
+\procedure testcase-output()
+<div class="tc-test-case-output">
+	<%if [<displayFormat>!match[]else[wikitext]match[plaintext]] %>
+		<pre><$view tiddler="Output" format="plainwikified" mode="block"/></pre>
+	<%else%>
+		<<testcase-output-wikified>>
+	<%endif%>
+</div>
+\end
+
+\procedure testcase-tabsList()
+[all[tiddlers]sort[]] Output +[putfirst[]]
+-Description
+-Narrative
+-[[$:/temp/testcase/draft-title]]
+-[has[plugin-type]]
+-[prefix<tf.state>]
+-[prefix[$:/state/popup/export]]
+-[prefix[$:/HistoryList]]
+-[prefix[$:/StoryList]]
+\end
+
+\procedure testcase-source()
+<div class="tc-test-case-source">
+	<$macrocall $name="tabs"
+		tabsList=<<testcase-tabsList>>
+		explicitState=<<tf.state>>
+		default="Output"
+		template="$:/core/ui/testcases/DefaultTemplate/SourceTabs"
+	/>
+</div>
+\end
+
+\procedure testcase-panes()
+<div class="tc-test-case-panes">
+	<<testcase-source>>
+	<div class="tc-test-case-divider"></div>
+	<<testcase-output>>
+</div>
+\end
+
+\procedure testcase-body()
+<div class="tc-test-case-wrapper">
+	<<testcase-header>>
+	<$let testcase-source-state = <<tf.state>>>
+		<$navigator story="$:/StoryList" history="$:/HistoryList">
+			<%if [[Narrative]is[tiddler]] %>
+				<<testcase-narrative>>
+			<%endif%>
+			<%if [<testResult>match[fail]] %>
+				<<testcase-fail>>
+			<%endif%>
+			<<testcase-panes>>
+		</$navigator>
+	</$let>
+</div>
+\end
+
+<<testcase-body>>

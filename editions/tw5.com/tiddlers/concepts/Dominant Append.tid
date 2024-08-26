@@ -1,5 +1,5 @@
 created: 20150123220223000
-modified: 20190610165255223
+modified: 20240709170746678
 tags: Filters
 title: Dominant Append
 type: text/vnd.tiddlywiki
@@ -13,3 +13,5 @@ For example, if a selection contains `Andrew Becky Clara Daniel` and `Andrew Bar
 This behaviour can cause unexpected results when working with [[Mathematics Operators]]. For example, `1 2 3 +[sum[]]` evaluates to `6`, as expected. But `1 1 1 +[sum[]]` evaluates to `1`. Removing the `+[sum[]]` from each filter reveals the problem: `1 2 3` evaluates to the list `1`, `2`, `3`, while `1 1 1` evaluates to the single item `1` due to de-duplication.
 
 In such situations, the `=` prefix can be used to disable the de-duplication. For example, `=1 =1 =1 +[sum[]]` evaluates to `3` as expected. Alternatively, the [[split Operator]] can be used: `[[1,1,1]split[,]sum[]]`.
+
+<<.tip """To build a list of unique values that retains only the <<.em earliest>> copy of each value (the opposite behavior from <<.link "Dominant Append" "Dominant Append">>), first use the <<.link `:all` "All Filter Run Prefix">> filter run prefix (or its short form `=`) to retain all duplicate values while building your list. Then finish your filter run with the <<.olink unique>> operator to remove later duplicates.""">>

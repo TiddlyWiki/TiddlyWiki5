@@ -41,6 +41,7 @@ external-link-background: inherit
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #0000aa
 external-link-foreground: #0000ee
+footnote-target-background: #ecf2ff
 foreground: #333333
 highlight-background: #ffff00
 highlight-foreground: #000000
@@ -82,6 +83,10 @@ sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #444444
 sidebar-tiddler-link-foreground: #999999
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-stable: #008000
+stability-experimental: #c07c00
+stability-deprecated: #ff0000
+stability-legacy: #0000ff
 static-alert-foreground: #aaaaaa
 tab-background-selected: #ffffff
 tab-background: #d8d8d8
@@ -95,6 +100,9 @@ table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
 tag-background: #ec6
 tag-foreground: #ffffff
+testcase-accent-level-1: #c1eaff
+testcase-accent-level-2: #E3B740
+testcase-accent-level-3: #5FD564
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #888888

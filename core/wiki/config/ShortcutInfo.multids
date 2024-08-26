@@ -32,9 +32,11 @@ mono-line: {{$:/language/Buttons/MonoLine/Hint}}
 new-image: {{$:/language/Buttons/NewImage/Hint}}
 new-journal: {{$:/language/Buttons/NewJournal/Hint}}
 new-tiddler: {{$:/language/Buttons/NewTiddler/Hint}}
+open-control-panel: {{$:/language/Buttons/OpenControlPanel/Hint}}
 picture: {{$:/language/Buttons/Picture/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}
+refresh: {{$:/language/Buttons/Refresh/Hint}}
 save-tiddler: {{$:/language/Buttons/Save/Hint}}
 save-wiki: {{$:/language/Buttons/SaveWiki/Hint}}
 sidebar-search: {{$:/language/Buttons/SidebarSearch/Hint}}

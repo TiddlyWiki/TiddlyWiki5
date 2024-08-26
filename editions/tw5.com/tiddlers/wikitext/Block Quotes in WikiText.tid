@@ -1,6 +1,6 @@
 caption: Block Quotes
 created: 20131206154636572
-modified: 20170417165145317
+modified: 20240512000910702
 tags: WikiText
 title: Block Quotes in WikiText
 type: text/vnd.tiddlywiki
@@ -72,3 +72,34 @@ You can also mix block quotes with other list items. For example:
 **> Another quote
 * List Three
 ">>
+
+! Advanced Wikitext and Block Quotes
+You can also mix block quotes with paragraphs and other block wikitext. Be mindful of block mode - if other quoted content follows a paragraph, end it with a blank line. The final paragraph in the quote does not need to end with a blank line. If using indentation, make sure __not to indent the blank lines__. The parser will interpret this as additional inline content and not return to block mode. For example:
+
+<<wikitext-example src:'<<< Mixing Block Quotes with Inline Wikitext
+A paragraph appears before other //wikitext//, which needs to end with a blank line.
+
+    * List One
+    ** List Two
+    **> A quote
+"""
+A poem
+with line beaks
+needs to have
+a blank line after
+the final quotes
+if followed
+by other content
+"""
+
+    <<<< Deep Block Quote
+        A paragraph before other //wikitext//, which ends with a blank line.
+
+        ! A Header
+        Another paragraph, which needs to end with a blank line.
+
+            !! Sub Header
+            A final paragraph, which __does not__ need to end with a blank line as the Block Quote ends.
+    <<<<
+<<<
+'>>

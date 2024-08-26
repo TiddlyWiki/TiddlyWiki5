@@ -58,7 +58,10 @@ title: ExpectedResult
                 "value": "Something"
             }
         ],
-        "isProcedureDefinition": true
+        "isProcedureDefinition": true,
+        "start": 0,
+        "end": 43,
+        "rule": "fnprocdef"
     }
 ]
 </p>

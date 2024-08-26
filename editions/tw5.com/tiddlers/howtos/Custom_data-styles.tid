@@ -1,8 +1,10 @@
-created: 201804111739
-modified: 201804111739
+created: 20180411173900000
+modified: 20230803050721827
 tags: data-tags-styles [[How to apply custom styles]] $:/tags/Stylesheet
 title: Custom data-styles
 type: text/vnd.tiddlywiki
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
 
 [data-tiddler-title="Custom styles by data-tiddler-title"] {
   border: 1px solid blue;

@@ -2,7 +2,7 @@
 	"title": "$:/languages/cs-CZ",
 	"name": "cs-CZ",
 	"plugin-type": "language",
-	"description": "Česky (Czech Republic)",
+	"description": "Čeština (Česká republika)",
 	"author": "Zdeněk Jašek",
 	"core-version": ">=5.0.0"
 }

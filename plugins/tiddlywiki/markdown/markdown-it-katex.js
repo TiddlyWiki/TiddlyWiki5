@@ -31,17 +31,17 @@ function isValidDelim(state, pos) {
 
     // Check non-whitespace conditions for opening and closing, and
     // check that closing delimeter isn't followed by a number
-    if (prevChar === 0x20/* " "  */ || prevChar === 0x09/* \t */ ||
+    if(prevChar === 0x20/* " "  */ || prevChar === 0x09/* \t */ ||
         prevChar === 0x0d/* "\r" */ || prevChar === 0x0a/* \n */ ||
         (nextChar >= 0x30/* "0"  */ && nextChar <=  0x39/* "9" */)) {
         can_close = false;
     }
-    if (nextChar === 0x20/* " "  */ || nextChar === 0x09/* \t */ ||
+    if(nextChar === 0x20/* " "  */ || nextChar === 0x09/* \t */ ||
         nextChar === 0x0d/* "\r" */ || nextChar === 0x0a/* \ns */) {
         can_open = false;
     }
 
-    if (state.src.substring(pos,pos+3) === "$:/") {
+    if(state.src.substring(pos,pos+3) === "$:/") {
         can_open = false;
         can_close = false;
     }
@@ -55,11 +55,11 @@ function isValidDelim(state, pos) {
 function math_inline(state, silent) {
     var start, match, token, res, pos, esc_count;
 
-    if (state.src[state.pos] !== "$") { return false; }
+    if(state.src[state.pos] !== "$") { return false; }
 
     res = isValidDelim(state, state.pos);
-    if (!res.can_open) {
-        if (!silent) { state.pending += "$"; }
+    if(!res.can_open) {
+        if(!silent) { state.pending += "$"; }
         state.pos += 1;
         return true;
     }
@@ -70,40 +70,40 @@ function math_inline(state, silent) {
     // we have found an opening delimieter already.
     start = state.pos + 1;
     match = start;
-    while ( (match = state.src.indexOf("$", match)) !== -1) {
+    while( (match = state.src.indexOf("$", match)) !== -1) {
         // Found potential $, look for escapes, pos will point to
         // first non escape when complete
         pos = match - 1;
-        while (state.src[pos] === "\\") { pos -= 1; }
+        while(state.src[pos] === "\\") { pos -= 1; }
 
         // Even number of escapes, potential closing delimiter found
-        if ( ((match - pos) % 2) == 1 ) { break; }
+        if( ((match - pos) % 2) == 1 ) { break; }
         match += 1;
     }
 
     // No closing delimter found.  Consume $ and continue.
-    if (match === -1) {
-        if (!silent) { state.pending += "$"; }
+    if(match === -1) {
+        if(!silent) { state.pending += "$"; }
         state.pos = start;
         return true;
     }
 
     // Check if we have empty content, ie: $$.  Do not parse.
-    if (match - start === 0) {
-        if (!silent) { state.pending += "$$"; }
+    if(match - start === 0) {
+        if(!silent) { state.pending += "$$"; }
         state.pos = start + 1;
         return true;
     }
 
     // Check for valid closing delimiter
     res = isValidDelim(state, match);
-    if (!res.can_close) {
-        if (!silent) { state.pending += "$"; }
+    if(!res.can_close) {
+        if(!silent) { state.pending += "$"; }
         state.pos = start;
         return true;
     }
 
-    if (!silent) {
+    if(!silent) {
         token         = state.push('math_inline', '$latex', 0);
         token.markup  = "$";
         token.content = state.src.slice(start, match);
@@ -126,32 +126,32 @@ function math_inline_block(state, silent) {
     // we have found an opening delimieter already.
     start = state.pos + 2;
     match = start;
-    while ( (match = state.src.indexOf("$$", match)) !== -1) {
+    while( (match = state.src.indexOf("$$", match)) !== -1) {
         // Found potential $$, look for escapes, pos will point to
         // first non escape when complete
         pos = match - 1;
-        while (state.src[pos] === "\\") { pos -= 1; }
+        while(state.src[pos] === "\\") { pos -= 1; }
 
         // Even number of escapes, potential closing delimiter found
-        if ( ((match - pos) % 2) == 1 ) { break; }
+        if( ((match - pos) % 2) == 1 ) { break; }
         match += 2;
     }
 
     // No closing delimter found.  Consume $$ and continue.
-    if (match === -1) {
-        if (!silent) { state.pending += "$$"; }
+    if(match === -1) {
+        if(!silent) { state.pending += "$$"; }
         state.pos = start;
         return true;
     }
 
     // Check if we have empty content, ie: $$$$.  Do not parse.
-    if (match - start === 0) {
-        if (!silent) { state.pending += "$$$$"; }
+    if(match - start === 0) {
+        if(!silent) { state.pending += "$$$$"; }
         state.pos = start + 2;
         return true;
     }
 
-    if (!silent) {
+    if(!silent) {
         token         = state.push('math_inline_block', '$latex', 0);
         token.block   = true;
         token.markup  = "$$";

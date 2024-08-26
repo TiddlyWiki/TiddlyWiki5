@@ -3,5 +3,6 @@
 	"name": "CodeMirror Close Tag",
 	"description": "Close tags automatically for CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }
