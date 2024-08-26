@@ -81,8 +81,10 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 	border-radius: 0.25em;
 }
 
-:-moz-focusring {
+button:-moz-focusring, input:-moz-focusring, textarea:-moz-focusring, select:-moz-focusring {
 	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
 }
 
 /*
