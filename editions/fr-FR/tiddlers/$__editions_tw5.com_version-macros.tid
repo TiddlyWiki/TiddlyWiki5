@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 \end
 
 \define .deprecated-since(version, superseded:"TODO-Link")
-<$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Obsolète depuis<<:>> $version$ </$button>. Utilisez [[$superseded$]] à la place
+<$button to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Obsolète depuis<<:>> $version$ </$button>. <%if [<__superseded__>else[]!match[]] %>Utilisez [[$superseded$]] à la place<%endif%>
 \end
 
 <pre><$view field="text"/></pre>
