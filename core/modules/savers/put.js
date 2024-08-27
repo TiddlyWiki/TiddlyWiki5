@@ -55,7 +55,7 @@ var PutSaver = function(wiki) {
 		callback: function(err,data,xhr) {
 			// Check DAV header http://www.webdav.org/specs/rfc2518.html#rfc.section.9.1
 			if(!err) {
-				self.serverAcceptsPuts = xhr.status === 200 && !!xhr.getResponseHeader("dav");
+				self.serverAcceptsPuts = xhr.status >= 200 && xhr.status < 300 && !!xhr.getResponseHeader("dav");
 			}
 		}
 	});
