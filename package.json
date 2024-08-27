@@ -35,6 +35,9 @@
 		"start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
 		"test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
 
+		"watch.info": "This command needs Node.js V20.x to work",
+		"watch": "node --watch-path=./core --watch-preserve-output ./tiddlywiki.js ./editions/tw5.com-server --listen",
+
 		"wiki:info": "echo \"use: npm run wiki --edition=<wiki> [empty, prerelease, dev, tour, tw.org, upgrade, full]\"",
 		"wiki": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/%npm_config_edition% --listen",
 
