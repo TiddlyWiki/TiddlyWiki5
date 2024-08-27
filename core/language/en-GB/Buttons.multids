@@ -133,6 +133,7 @@ Excise/Caption/Replace/Link: link
 Excise/Caption/Replace/Transclusion: transclusion
 Excise/Caption/Tag: Tag new tiddler with the title of this tiddler
 Excise/Caption/TiddlerExists: Warning: tiddler already exists
+Excise/DefaultTitle: New Excision
 Excise/Hint: Excise the selected text into a new tiddler
 Heading1/Caption: heading 1
 Heading1/Hint: Apply heading level 1 formatting to lines containing selection
