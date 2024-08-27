@@ -55,7 +55,7 @@ tags: $:/tags/SideBarSegment
 <$macrocall $name="keyboard-driven-input" tiddler=<<editTiddler>> storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
-		class="tc-popup-handle" filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
+		class="tc-tiny-gap-right tc-popup-handle" filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" 
 		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
 </form>
