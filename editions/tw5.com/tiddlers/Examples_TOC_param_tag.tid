@@ -1,8 +1,8 @@
 created: 20240724070813184
-description: Simple TOC
-modified: 20240729112105751
+description: TOC tag parameter
+modified: 20240826164015156
 tags: $:/tags/wiki-test-spec
-title: Examples/TOC/SimpleToc
+title: Examples/TOC/param/tag
 type: text/vnd.tiddlywiki-multiple
 
 title: Narrative

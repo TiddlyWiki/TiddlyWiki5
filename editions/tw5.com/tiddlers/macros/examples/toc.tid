@@ -1,8 +1,10 @@
 created: 20150221193056000
-modified: 20240207125739904
+modified: 20240826172042818
 tags: [[Table-of-Contents Macros]] [[Macro Examples]]
 title: Table-of-Contents Macros (Examples)
 type: text/vnd.tiddlywiki
+
+The following examples provide information about the "core" toc macors. The rewritten toc-macros should be 100% compatible with the functionality presented here. 
 
 These examples derive tables of contents from the root tag <<.tag Contents>>. See [[Table-of-Contents Macros]] for details on how to use the Table-of-Contents Macros to make your own structured table-of-contents.
 

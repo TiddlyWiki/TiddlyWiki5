@@ -1,8 +1,8 @@
 created: 20240724082221230
-import-compound: Examples/TOC/SimpleToc
-modified: 20240730081240127
+import-compound: Examples/TOC/param/tag
+modified: 20240826164358077
 tags: $:/tags/wiki-test-spec
-title: Examples/TOC/SimpleToc/captionField
+title: Examples/TOC/param/captionField
 type: text/vnd.tiddlywiki-multiple
 
 title: Description
