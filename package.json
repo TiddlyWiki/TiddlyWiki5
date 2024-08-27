@@ -33,8 +33,8 @@
   "scripts": {
     "start": "node ./tiddlywiki.js ./editions/multiwikiserver --mws-load-plugin-bags --build load-mws-demo-data --mws-listen",
     "build:test-edition": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
-    "build:multiwikiserver-edition": "node ./tiddlywiki.js ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
-    "test": "npm run build:test-edition && npm run build:multiwikiserver-edition",
+    "test:multiwikiserver-edition": "node ./tiddlywiki.js ./editions/multiwikiserver/ --build load-mws-demo-data --mws-listen --mws-test-server http://127.0.0.1:8080/ --quit",
+    "test": "npm run build:test-edition && npm run test:multiwikiserver-edition",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   },
