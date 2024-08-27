@@ -14,11 +14,12 @@ Text editor operation to excise the selection to a new tiddler
 
 exports["excise"] = function(event,operation) {
 	var editTiddler = this.wiki.getTiddler(this.editTitle),
-		editTiddlerTitle = this.editTitle;
+		editTiddlerTitle = this.editTitle,
+		excisionBaseTitle = $tw.language.getString("Buttons/Excise/DefaultTitle");
 	if(editTiddler && editTiddler.fields["draft.of"]) {
 		editTiddlerTitle = editTiddler.fields["draft.of"];
 	}
-	var excisionTitle = event.paramObject.title || this.wiki.generateNewTitle("New Excision");
+	var excisionTitle = event.paramObject.title || this.wiki.generateNewTitle(excisionBaseTitle);
 	this.wiki.addTiddler(new $tw.Tiddler(
 		this.wiki.getCreationFields(),
 		this.wiki.getModificationFields(),
