@@ -19,7 +19,7 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 |[[$:/info/browser/language]] |<<.from-version "5.1.20">> Language as reported by browser (note that some browsers report two character codes such as `en` while others report full codes such as `en-GB`) |
 |[[$:/info/browser/screen/width]] |Screen width in pixels |
 |[[$:/info/browser/screen/height]] |Screen height in pixels |
-|[[$:/info/browser/darkmode]] |<<.from-version "5.3.6">> Is dark mode enabled? ("yes" or "no") |
+|[[$:/info/browser/darkmode]] |<<.from-version "5.3.6">> Is dark mode preferred? ("yes" or "no") |
 |[[$:/info/darkmode]] |<<.deprecated-since "5.3.6">> Alias for  $:/info/browser/darkmode |
 |[[$:/info/node]] |Running under [[Node.js]]? ("yes" or "no") |
 |[[$:/info/url/full]] |<<.from-version "5.1.14">> Full URL of wiki (eg, ''<<example full>>'') |

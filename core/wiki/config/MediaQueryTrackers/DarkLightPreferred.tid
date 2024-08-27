@@ -1,4 +1,4 @@
-title: $:/core/wiki/config/MediaQueryTrackers/DarkLightSwitch
+title: $:/core/wiki/config/MediaQueryTrackers/DarkLightPreferred
 tags: $:/tags/MediaQueryTracker
 media-query: (prefers-color-scheme: dark)
 info-tiddler: $:/info/browser/darkmode

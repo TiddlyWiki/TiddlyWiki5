@@ -35,7 +35,7 @@ exports.getInfoTiddlerFields = function(updateInfoTiddlersCallback) {
 						return tiddlers;
 					};
 					infoTiddlerFields.push.apply(infoTiddlerFields,getResultTiddlers());
-					mqList.addListener(function(event) {
+					mqList.addEventListener("change",function(event) {
 						updateInfoTiddlersCallback(getResultTiddlers());
 					});
 				}
