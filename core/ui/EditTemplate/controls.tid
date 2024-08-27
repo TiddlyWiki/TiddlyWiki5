@@ -3,8 +3,8 @@ tags: $:/tags/EditTemplate
 
 \define config-title() $:/config/EditToolbarButtons/Visibility/$(listItem)$
 \whitespace trim
-<div class="tc-tiddler-title tc-tiddler-edit-title">
-	<$view field="title"/>
+<div class="tc-tiddler-title tc-tiddler-edit-title clearfix">
+	<span tc-tiddler-draft-title><$view field="title"/></span>
 	<span class="tc-tiddler-controls tc-titlebar">
 		<$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem">
 			<$let tv-config-toolbar-class={{{ [enlist<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]] +[join[ ]] }}}>
@@ -14,5 +14,4 @@ tags: $:/tags/EditTemplate
 			</$let>
 		</$list>
 	</span>
-	<div style="clear: both;"></div>
 </div>

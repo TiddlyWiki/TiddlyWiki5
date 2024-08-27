@@ -1,0 +1,40 @@
+created: 20240827160751380
+modified: 20240827171047518
+tags: 
+title: test-aside-float-right
+type: text/vnd.tiddlywiki
+
+<style>
+/*------------------------------------------*/
+/* ASIDE needs float and .clearfixes        */
+
+.float-box {
+    width: 40%;
+    padding: .5rem 1rem;
+    margin-left: .5rem;
+    float: right;
+    box-shadow: inset 5px 0 5px -5px #29627e;
+    font-style: italic;
+    color: #29627e;
+}
+</style>
+<aside class="float-box clearfix">
+Some test text. Some test text. Some test text. Some test text. 
+</aside>
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+<aside class="float-box clearfix">
+
+Te aside ''needs'' a `clearfix` class in the containing "wrapper". Otherwise weird things can happen
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore 
+</aside>
+
+A small paragraphs.
+
+An other small paragraphs.
+
+
+
+
