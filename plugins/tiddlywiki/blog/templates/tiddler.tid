@@ -1,8 +1,8 @@
 title: $:/plugins/tiddlywiki/blog/templates/tiddler
 
-<div class="tc-tiddler-frame tc-tiddler-view-frame">
+<div class="tc-tiddler-frame tc-tiddler-view-frame clearfix">
 
-<div class="tc-tiddler-title">
+<div class="tc-tiddler-title clearfix">
 
 <div class="tc-titlebar">
 
