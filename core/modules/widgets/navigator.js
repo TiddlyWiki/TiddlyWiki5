@@ -410,6 +410,9 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 // If a draft of the target tiddler already exists then it is reused
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-new-tiddler", event);
+	if(!event) {
+		return false;
+	}
 	// Get the story details
 	var storyList = this.getStoryList(),
 		templateTiddler, additionalFields, title, draftTitle, existingTiddler;
