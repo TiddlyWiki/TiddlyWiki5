@@ -26,13 +26,15 @@ type: text/vnd.tiddlywiki
 <% endif %>
 \end
 
-\procedure .deprecated-since(version, superseded:"TODO-Link")
+\procedure .deprecated-since(version, superseded:"")
 <$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">
 	{{$:/core/images/warning}}
-	<span class="tc-tiny-gap">Deprecated since:</span>
-	<$text text=<<version>>/>
+	<span class="tc-tiny-gap">Deprecated from </span>
+	v<$text text=<<version>>/>
 </$link>
-<span class="tc-tiny-gap-left">
-	(see <$link class="tc-tiny-gap-left" to=<<superseded>>><$text text=<<superseded>>/></$link>)
-</span>
+<%if [<superseded>else[]!match[]] %>
+	<span class="tc-tiny-gap-left">
+		(see <$link class="tc-tiny-gap-left" to=<<superseded>>><$text text=<<superseded>>/></$link>)
+	</span>
+<%endif%>
 \end
