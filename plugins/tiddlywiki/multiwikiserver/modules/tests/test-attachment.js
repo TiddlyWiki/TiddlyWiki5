@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/multiwikiserver/modules/test-attachment.js
+title: $:/plugins/tiddlywiki/multiwikiserver/modules/tests/test-attachment.js
 type: application/javascript
 tags: [[$:/tags/test-spec]]
 
