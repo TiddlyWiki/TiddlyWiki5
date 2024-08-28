@@ -133,6 +133,7 @@ Excise/Caption/Replace/Link: 鏈接
 Excise/Caption/Replace/Transclusion: 嵌入
 Excise/Caption/Tag: 將新條目的標籤設為此條目的名稱
 Excise/Caption/TiddlerExists: 警示：條目已經存在
+Excise/DefaultTitle: 新的剪切
 Excise/Hint: 剪切所選文字到一個新條目
 Heading1/Caption: 標題 1
 Heading1/Hint: 套用標題級別 1 的格式於包含所選文字的列
