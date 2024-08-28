@@ -199,6 +199,12 @@ Settings/TitleLinks/Caption: 条目标题
 Settings/TitleLinks/Hint: 可选地显示条目标题为链接
 Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
+SocialCard/Caption: 社交媒体卡
+SocialCard/Domain/Prompt: 显示链接的网域名称（例如 ''tiddlywiki.com''）
+SocialCard/Hint: 社交和消息服务使用此信息来显示在线托管时指向此 TiddlyWiki 的链接的预览卡
+SocialCard/PreviewUrl/Prompt: 用于预览此 TiddlyWiki 图像的完整网址
+SocialCard/PreviewUrl/Preview: 预览图像：
+SocialCard/Url/Prompt: 此 TiddlyWiki 的完整网址
 StoryTiddler/Caption: 故事条目
 StoryTiddler/Hint: 此规则级联用于动态选择模板，以便在故事河中显示条目。
 StoryView/Caption: 视图模式
