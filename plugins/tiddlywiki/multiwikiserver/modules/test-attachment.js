@@ -47,6 +47,10 @@ if($tw.node) {
     var originalTimeout;
 
     beforeAll(function() {
+      const dirPath = path.dirname(`${storePath}/files`);
+      if(!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+      }
       originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
       jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
     });
