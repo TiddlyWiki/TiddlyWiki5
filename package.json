@@ -24,7 +24,9 @@
     "wiki"
   ],
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "dprint": "0.36.1",
+    "eslint": "8.41.0",
+    "eslint-plugin-dprint-integration": "0.3.0"
   },
   "bundleDependencies": [],
   "license": "BSD",

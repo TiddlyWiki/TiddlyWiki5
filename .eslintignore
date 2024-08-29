@@ -6,3 +6,5 @@
 /core/modules/utils/diff-match-patch/diff_match_patch_uncompressed.js
 /core/modules/utils/dom/csscolorparser.js
 /plugins/tiddlywiki/*/files/
+/tmp/
+/output/
