@@ -412,7 +412,8 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-new-tiddler", event);
 	// Get the story details
 	var storyList = this.getStoryList(),
-		templateTiddler, additionalFields, title, draftTitle, existingTiddler, templateHasTags=false;
+		templateTiddler, additionalFields, title, draftTitle, existingTiddler,
+		templateHasTags = false;
 	// Get the template tiddler (if any)
 	if(typeof event.param === "string") {
 		// Get the template tiddler
@@ -457,7 +458,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		// Merge tags
 		mergedTags = $tw.utils.pushTop(mergedTags,$tw.utils.parseStringArray(additionalFields.tags));
 	}
-	var additionalFieldsHasTags = (additionalFields && (additionalFields.tags === "")) ? true : false;
+	var additionalFieldsHasTags = !!(additionalFields && (additionalFields.tags === ""));
 	if(templateTiddler && templateTiddler.fields.tags) {
 		// Merge tags
 		templateHasTags = true;
@@ -477,7 +478,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 			title: draftTitle,
 			"draft.of": title,
 			// If template or additionalFields have "tags" even if empty a tags field will be created.
-			tags: ((mergedTags.length>0) || templateHasTags || additionalFieldsHasTags) ? mergedTags : undefined
+			tags: ((mergedTags.length > 0) || templateHasTags || additionalFieldsHasTags) ? mergedTags : undefined
 		},this.wiki.getModificationFields());
 	this.wiki.addTiddler(draftTiddler);
 	// Update the story to insert the new draft at the top and remove any existing tiddler
