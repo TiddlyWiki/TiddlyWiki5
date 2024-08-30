@@ -83,6 +83,9 @@ The second ESC tries to close the "draft tiddler"
 		emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem"
 	>
 		<$list filter=<<filter>> variable="tag">
+			<$list-empty>
+				<span class="tc-small-gap-left">{{$:/language/EditTemplate/Tags/EmptyMessage}}</span>
+			</$list-empty>
 			<!-- The buttonClasses filter is used to define tc-tag-button-selected state -->
 			<!-- tf.get-tagpicker-focus-selector has to be resolved for $:/core/ui/TagPickerTagTemplate,
 				othwerwise qualify in tf.tagpicker-dropdown-id causes problems -->

@@ -1,10 +1,8 @@
 {
 	"description": "Documentation from https://tiddlywiki.com",
 	"plugins": [
-		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/railroad",
-		"tiddlywiki/evernote",
 		"tiddlywiki/internals",
 		"tiddlywiki/menubar",
 		"tiddlywiki/confetti",

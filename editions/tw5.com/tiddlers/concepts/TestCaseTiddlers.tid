@@ -1,26 +1,30 @@
-title: TestCaseTiddlers
-modified: 20240507221902644
 created: 20240507221902644
+modified: 20240729083054531
 tags: Concepts
+title: TestCaseTiddlers
+type: text/vnd.tiddlywiki
 
-Test case tiddlers encapsulate one or more tiddlers that can be displayed as a [[test case|TestCaseWidget]]: an independent embedded wiki that can be used for testing or learning purposes.
+Test case tiddlers encapsulate one or more tiddlers that can be displayed as a <<.wlink TestCaseWidget>>: an independent embedded wiki that can be used for testing or learning purposes.
 
 Test case tiddlers are formatted as CompoundTiddlers, allowing them to contain multiple tiddlers packed into one.
 
-Test case tiddlers have the following fields:
+Test case tiddlers have the following ''fields'':
 
 |!Field |!Description |
-|<<.field type>> | Should be set to `text/vnd.tiddlywiki-multiple` |
-|<<.field tags>> | Test cases are tagged [[$:/tags/wiki-test-spec]]. Test cases that intentionally fail are tagged [[$:/tags/wiki-test-spec-failing]] |
+|<<.field type>> |Needs to be set to `text/vnd.tiddlywiki-multiple` |
+|<<.field tags>> |Test cases are tagged [[$:/tags/wiki-test-spec]]. Test cases that intentionally fail are tagged [[$:/tags/wiki-test-spec-failing]] |
 |<<.field description>> |Descriptive heading for the test, intended to make it easy to identify the test |
 |<<.field display-format>> |Optional, defaults to `wikitext`. Set to `plaintext` to cause the output to be rended as plain text |
+|<<.field import-compound>> |<<.from-version "5.3.6">> A filter string, that defines a list of compound tiddlers, that should be imported. See: <<.wlink DataWidget>> widget |
 
-Test case tiddlers with the appropriate tag are shown in $:/ControlPanel
+Test case tiddlers with the appropriate tag are shown in the $:/ControlPanel ''-> Advanced -> Test Cases ''
 
-Some payload tiddlers are set aside for special purposes:
+Some ''payload ''tiddlers are set aside for special purposes:
 
 |!Tiddler |!Description |
 |''Narrative'' |Narrative description of the test, intended to explain the purpose and operation of the test |
 |''Output'' |The tiddler that produces the test output |
 |''~ExpectedResult'' |HTML of expected result of rendering the ''Output'' tiddler |
-|''Description'' |Set to the text of the <<.field description>> field |
+|''Description'' |Set to the text of the <<.field description>> field, if the field exists |
+
+Also see: TestCaseWidget, DataWidget

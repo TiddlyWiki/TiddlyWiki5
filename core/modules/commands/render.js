@@ -45,17 +45,22 @@ Render individual tiddlers and save the results to the specified files
 				variableList = variableList.slice(2);
 			}
 		$tw.utils.each(tiddlers,function(title) {
-			var filepath = path.resolve(self.commander.outputPath,wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]))[0]);
-			if(self.commander.verbose) {
-				console.log("Rendering \"" + title + "\" to \"" + filepath + "\"");
+			var filenameResults = wiki.filterTiddlers(filenameFilter,$tw.rootWidget,wiki.makeTiddlerIterator([title]));
+			if(filenameResults.length > 0) {
+				var filepath = path.resolve(self.commander.outputPath,filenameResults[0]);
+				if(self.commander.verbose) {
+					console.log("Rendering \"" + title + "\" to \"" + filepath + "\"");
+				}
+				var parser = wiki.parseTiddler(template || title),
+					widgetNode = wiki.makeWidget(parser,{variables: $tw.utils.extend({},variables,{currentTiddler: title,storyTiddler: title})}),
+					container = $tw.fakeDocument.createElement("div");
+				widgetNode.render(container,null);
+				var text = type === "text/html" ? container.innerHTML : container.textContent;
+				$tw.utils.createFileDirectories(filepath);
+				fs.writeFileSync(filepath,text,"utf8");
+			} else {
+				console.log("Not rendering \"" + title + "\" because the filename filter returned an empty result");
 			}
-			var parser = wiki.parseTiddler(template || title),
-				widgetNode = wiki.makeWidget(parser,{variables: $tw.utils.extend({},variables,{currentTiddler: title,storyTiddler: title})}),
-				container = $tw.fakeDocument.createElement("div");
-			widgetNode.render(container,null);
-			var text = type === "text/html" ? container.innerHTML : container.textContent;
-			$tw.utils.createFileDirectories(filepath);
-			fs.writeFileSync(filepath,text,"utf8");
 		});
 		return null;
 	};

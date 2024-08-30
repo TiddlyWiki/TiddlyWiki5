@@ -13,4 +13,4 @@ caption: {{$:/language/ControlPanel/Saving/GitService/Gitea/Caption}}
 |<<lingo Branch>> |<$edit-text tiddler="$:/Gitea/Branch" default="master" tag="input"/> |
 |<<lingo Path>> |<$edit-text tiddler="$:/Gitea/Path" default="" tag="input"/> |
 |<<lingo Filename>> |<$edit-text tiddler="$:/Gitea/Filename" default="" tag="input"/> |
-|<<lingo ServerURL>> |<$edit-text tiddler="$:/Gitea/ServerURL" default="https://gitea/api/v1" tag="input"/> |
+|<<lingo ServerURL>> |<$edit-text tiddler="$:/Gitea/ServerURL" default="https://gitea/api/v1" tag="input" type="url"/> |

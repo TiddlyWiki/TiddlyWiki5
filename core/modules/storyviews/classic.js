@@ -30,12 +30,8 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
 		return;
 	}
-	if(duration) {
-		// Scroll the node into view
-		this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
-	} else {
-		targetElement.scrollIntoView();
-	}
+	// Scroll the node into view
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 };
 
 ClassicStoryView.prototype.insert = function(widget) {

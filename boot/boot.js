@@ -386,8 +386,8 @@ $tw.utils.parseDate = function(value) {
 				parseInt(value.substr(10,2)||"00",10),
 				parseInt(value.substr(12,2)||"00",10),
 				parseInt(value.substr(14,3)||"000",10)));
-		  d.setUTCFullYear(year); // See https://stackoverflow.com/a/5870822
-		  return d;
+		d.setUTCFullYear(year); // See https://stackoverflow.com/a/5870822
+		return d;
 	} else if($tw.utils.isDate(value)) {
 		return value;
 	} else {

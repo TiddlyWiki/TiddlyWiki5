@@ -53,13 +53,10 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 	lat="51.751944"
 	long="-1.257778"
 	alt="0"
-	text="""This is Oxford!"""/>
+	text="""{{$:/core/images/star-filled}} This is Oxford!"""/>
 <$data title="Output" text="""<$geomap
 	state=<<qualify "$:/state/demo-map">>
 >
-	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
-		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
-	</$list>
 </$geomap>
 """/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
@@ -80,7 +77,24 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 	</$list>
 </$geomap>
 """/>
-<$data $tiddler="ui/PopupTemplate"/>
+<$data
+	title="Oxford"
+	tags="$:/tags/GeoMarker"
+	caption="Oxford"
+	lat="51.751944"
+	long="-1.257778"
+	alt="0"
+	text="""{{$:/core/images/star-filled}} This is Oxford!"""/>
+	properties=""/>
+<$data title="ui/PopupTemplate" text="""
+	<div width="300px">
+		<$let currentTiddler={{{ [<feature>jsonget[properties],[title]] }}}>
+			<$link><$text text=<<currentTiddler>>/></$link>
+			<!-- <$codeblock code={{{ [<feature>] }}}/> -->
+			<$transclude $tiddler=<<currentTiddler>> $mode="block"/>
+		</$let>
+	</div>
+"""/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
 </$testcase>
 

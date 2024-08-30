@@ -41,6 +41,9 @@ TiddlyWiki lets you choose where to keep your data, guaranteeing that in the dec
 <a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="border-radius:4px;background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/video}} ~YouTube
 </a>
+<a href="https://discord.gg/HFFZVQ8" class="tc-btn-big-green" style="border-radius:4px;background-color:#5462EB;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/discord}} Discord
+</a>
 <a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#1DA1F2;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/twitter}} Twitter
 </a>
