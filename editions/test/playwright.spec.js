@@ -12,9 +12,9 @@ test('get started link', async ({ page }) => {
 
     // Load the generated test TW html
     await page.goto(`file:///${crossPlatformIndexPath}`);
-    const title = await page.title();    
+
     // Sanity check
-    await expect(title, "Expected correct page title to verify the test page was loaded").toContain('TiddlyWiki5');
+    await expect(page.locator('.tc-site-title'), "Expected correct page title to verify the test page was loaded").toHaveText('TiddlyWiki5');
 
     // Wait for jasmine results bar to appear
     await expect(page.locator('.jasmine-overall-result'), "Expected jasmine test results bar to be present").toBeVisible({timeout});
