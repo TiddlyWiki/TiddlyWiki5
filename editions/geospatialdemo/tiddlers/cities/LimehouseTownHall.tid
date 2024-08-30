@@ -1,9 +1,11 @@
 title: cities/LimehouseTownHall
-tags: $:/tags/GeoMarker
+tags: $:/tags/GeoMarker $:/tags/Demo/Cities
 caption: Limehouse Town Hall
 lat: 51.51216651476898
 long: -0.03138562132137639
 alt: 0
+
+{{cities/LimehouseTownHall/image}}
 
 This is Limehouse Town Hall!
 

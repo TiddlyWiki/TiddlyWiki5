@@ -231,7 +231,10 @@ rules:
   prefer-spread: 'off'
   prefer-template: 'off'
   quote-props: 'off'
-  quotes: 'off'
+  quotes:
+    - error
+    - double
+    - avoidEscape: true
   radix: 'off'
   require-atomic-updates: error
   require-await: error

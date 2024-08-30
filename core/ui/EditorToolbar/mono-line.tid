@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/mono-line
 caption: {{$:/language/Buttons/MonoLine/Caption}}
 description: {{$:/language/Buttons/MonoLine/Hint}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 shortcuts: ((mono-line))
 
 <$action-sendmessage
