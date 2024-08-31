@@ -28,7 +28,6 @@ exports.decodebase64 = function(source,operator,options) {
 
 exports.encodebase64 = function(source,operator,options) {
 	var results = [];
-	console.log(operator.suffixes);
 	var binary = operator.suffixes && operator.suffixes[0].indexOf("binary") !== -1;
 	var urlsafe = operator.suffixes && operator.suffixes[0].indexOf("urlsafe") !== -1;
 	source(function(tiddler,title) {
