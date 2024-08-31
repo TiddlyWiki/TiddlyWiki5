@@ -63,15 +63,13 @@ caption: {{$:/language/Search/Filter/Caption}}
 &#32;
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterButton]!has[draft.of]]"><$transclude/></$list>
 </div>
-<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="" tag="div" class="tc-search-results">
 <$set name="resultCount" value="<$count filter={{$:/temp/advancedsearch}}/>">
-<div class="tc-search-results">
 <p><<lingo Filter/Matches>></p>
 <$list filter={{$:/temp/advancedsearch}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
-</div>
 </$set>
 </$reveal>
