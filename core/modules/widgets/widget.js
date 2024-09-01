@@ -732,11 +732,30 @@ Widget.prototype.findFirstDomNode = function() {
 	return null;
 };
 
+
+
 /*
-Remove any DOM nodes created by this widget or its children
+Depth first destroy
 */
-Widget.prototype.removeChildDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
+Widget.prototype.desendDestroy = function() {
+	this.waitDestroy = true; //for blocking repeat calls to this method from removeChildDomNodes
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.desendDestroy();
+	});
+	
+	if (this.destroy) {
+		this.destroy();
+	}
+	this.waitDestroy = false;
+};
+
+Widget.prototype.waitDestroy = false;
+/*
+Remove any DOM nodes created by this widget or its children, and start destroy procedure
+*/
+Widget.prototype.removeChildDomNodes = function(destroy) {
+     var destroy = (destroy !== undefined ? destroy : true);
+	// If this widget has directly created DOM nodes, delete them. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
@@ -745,9 +764,10 @@ Widget.prototype.removeChildDomNodes = function() {
 	} else {
 		// Otherwise, ask the child widgets to delete their DOM nodes
 		$tw.utils.each(this.children,function(childWidget) {
-			childWidget.removeChildDomNodes();
+			childWidget.removeChildDomNodes(false); 
 		});
-	}
+	} 
+	if (destroy && !this.waitDestroy) this.desendDestroy();
 };
 
 /*
