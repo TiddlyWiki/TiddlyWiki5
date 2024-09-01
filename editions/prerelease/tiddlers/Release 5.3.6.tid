@@ -35,7 +35,7 @@ This release includes improvements to the following translations:
 
 ! TestCaseWidget and Related Improvements
 
-This release includes several fixes and improvements to the TestCaseWidget, its default template, and the related DataWidget and CompoundTiddlers format:
+This release includes several fixes and improvements to the TestCaseWidget, its default template, and the related DataWidget and CompoundTiddlers format. These features were first introduced in [[Release 5.3.4]] and are undergoing continuous improvement as we work on integrating them more widely across the system.
 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8447">> new `$compound-filter` attribute for the DataWidget that allows other compound tiddlers to be imported. There is also a companion ''import-compound'' field for the TestCaseWidget template
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8514">> the TestCaseWidget default template to make it more modular
