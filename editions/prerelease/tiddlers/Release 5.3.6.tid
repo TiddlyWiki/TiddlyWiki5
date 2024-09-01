@@ -35,15 +35,15 @@ This release includes improvements to the following translations:
 
 ! TestCaseWidget and Related Improvements
 
-This release includes several fixes and improvements to the TestCaseWidget, its default template, and the related DataWidget:
+This release includes several fixes and improvements to the TestCaseWidget, its default template, and the related DataWidget and CompoundTiddlers format:
 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8447">> new `$compound-filter` attribute for the DataWidget that allows other compound tiddlers to be imported. There is also a companion ''import-compound'' field for the TestCaseWidget template
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8514">> the TestCaseWidget default template to make it more modular
-* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8499">> support for an `import` field in the default TestCaseWidget template, allowing additional tiddlers to be imported
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8499">> support for an ''import'' field in the default TestCaseWidget template, allowing additional tiddlers to be imported
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8416">> [[TestCaseWidget]] default template to allow wikitext within the test case narrative
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8449">> WikiText formatting buttons when editing CompoundTiddlers
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8450">> CompoundTiddlers type `text/vnd.tiddlywiki-multiple` to the editor type dropdown
-* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8409">> filesystem handling so that [[Compound Tiddlers]] are saved as .tid files
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8409">> filesystem handling so that CompoundTiddlers are saved as .tid files
 
 ! Widget Improvements
 
