@@ -19,11 +19,11 @@ type: text/vnd.tiddlywiki
 \end
 
 \procedure .from-version(version)
-<% if [<version>compare:version:gteq<tf.from-version-reference>] %>
+<%if [<version>compare:version:gteq<tf.from-version-reference>] %>
 	<<.from-version-template "doc-from-version doc-from-version-new" "New in v">>
-<% else %>
+<%else%>
 	<<.from-version-template "doc-from-version" "Introduced in v">>
-<% endif %>
+<%endif%>
 \end
 
 \procedure .deprecated-since(version, superseded:"")

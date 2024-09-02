@@ -83,11 +83,11 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 
 <div class="tc-search-results">
 
-<% if [<resultCount>match[0]] %>
+<%if [<resultCount>match[0]] %>
 	{{$:/language/Search/Matches/NoMatch}}
-<% else %>
+<%else%>
 	<<lingo Shadows/Matches>>
-<% endif %>
+<%endif%>
 
 <$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]">
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
