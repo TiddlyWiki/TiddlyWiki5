@@ -1,25 +1,25 @@
 created: 20240217004718488
-modified: 20240217005648458
+modified: 20240901192622102
 tags: 
 title: Genesis/Block-TODO
 type: text/vnd.tiddlywiki
 
 
-<$genesis $type="$reveal" type=nomatch>
+<$genesis $type="$reveal" $type=nomatch >
 
 Block
 </$genesis>
 
-<$genesis $type="$reveal" type=nomatch $mode=block>
+<$genesis $type="$reveal" $type=nomatch $mode=block>
 
 Block forced block
 </$genesis>
 
-<$genesis $type="$reveal" type=nomatch $mode=inline>
+<$genesis $type="$reveal" $type=nomatch $mode=inline>
 
 Block forced inline
 </$genesis>
 
-<$genesis $type=$reveal type=nomatch>Inline</$genesis>
-<$genesis $type=$reveal type=nomatch $mode=block>Inline forced block</$genesis>
-<$genesis $type=$reveal type=nomatch $mode=inline>Inline forced inline</$genesis>
+<$genesis $type=$reveal $type=nomatch>Inline</$genesis>
+<$genesis $type=$reveal $type=nomatch $mode=block>Inline forced block</$genesis>
+<$genesis $type=$reveal $type=nomatch $mode=inline>Inline forced inline</$genesis>

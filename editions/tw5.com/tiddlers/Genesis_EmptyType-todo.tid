@@ -1,8 +1,14 @@
 created: 20240217003121792
-modified: 20240217003441872
+modified: 20240901192405616
 tags: 
 title: Genesis/EmptyType-todo
 type: text/vnd.tiddlywiki
+
+```
+<$genesis>Mouse</$genesis>
+
+<$genesis $type="">Mouse</$genesis>
+```
 
 <$genesis>Mouse</$genesis>
 

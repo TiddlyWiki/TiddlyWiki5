@@ -1,0 +1,15 @@
+created: 20221123152205007
+modified: 20240901190747879
+tags: 
+title: BrowseWidget-todo-5.3-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+rendered as looks completely different -- Check DOM 
+
+[img[browse-widget-old.png]]
+
+----
+
+[img[browse-widget-new.png]]

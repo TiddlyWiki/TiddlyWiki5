@@ -1,0 +1,9 @@
+created: 20221123151204903
+modified: 20240901192118038
+tags: 
+title: log Operator-todo-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+text and links vertical spacing 

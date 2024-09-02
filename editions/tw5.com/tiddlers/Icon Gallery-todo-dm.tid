@@ -1,9 +1,0 @@
-created: 20221123163201236
-modified: 20240217220627499
-tags: 
-title: Icon Gallery-todo-dm
-type: text/vnd.tiddlywiki
-
-<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
-
-tip-macro vertical distance to image gallery list is wrong

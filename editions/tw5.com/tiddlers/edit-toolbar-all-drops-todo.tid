@@ -1,5 +1,5 @@
 created: 20221125103758471
-modified: 20221125104146153
+modified: 20240901204132331
 tags: 
 title: edit-toolbar-all-drops-todo
 type: text/vnd.tiddlywiki
@@ -17,10 +17,13 @@ type: text/vnd.tiddlywiki
 
 ----
 
+''fixed''
 
 [img[editor-max-height-new.png]]
 
 -------
+
+Needs a padding: `.tc-editor-toolbar .tc-text-editor-toolbar-more { padding: 0 8px` -- Same as P tag
 
 [img[more-dropdown-new.png]]
 

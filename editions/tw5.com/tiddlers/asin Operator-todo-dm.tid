@@ -1,9 +1,0 @@
-created: 20221123151106354
-modified: 20240217220515788
-tags: 
-title: asin Operator-todo-dm
-type: text/vnd.tiddlywiki
-
-<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
-
-tip macro vertical spacing 

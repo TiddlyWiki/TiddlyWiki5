@@ -1,8 +1,10 @@
 created: 20221123155254602
-modified: 20221123155407720
+modified: 20240901191357371
 tags: 
 title: thumbnail Macro (Examples)-todo
 type: text/vnd.tiddlywiki
+
+There is a pending PR: https://github.com/TiddlyWiki/TiddlyWiki5/pull/8557
 
 <$link to={{{ [all[current]removesuffix[-todo]] }}}/>
 
