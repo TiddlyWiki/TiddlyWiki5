@@ -75,7 +75,7 @@ eg="""<$edit-text tiddler=<<currentTiddler>> field="heading" size="25" focus="ye
 eg="""\procedure onInput()
   <%if [get[temp]match[$:/]] %>
 		<$action-confirm $message="Yes, this is how system tiddler names begin!"/>
-  <% endif %>
+  <%endif%>
 \end
 
 Type a new tiddler name, starting with the system prefix `$:/`: <$edit-text inputActions=<<onInput>> field="temp" class="tc-edit-texteditor"/>

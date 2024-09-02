@@ -82,11 +82,11 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 
 <div class="tc-search-results">
 
-<% if [<resultCount>match[0]] %>
+<%if [<resultCount>match[0]] %>
 	{{$:/language/Search/Matches/NoMatch}}
-<% else %>
+<%else%>
 	<<lingo System/Matches>>
-<% endif %>
+<%endif%>
 
 <$list filter="[is[system]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]">
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
