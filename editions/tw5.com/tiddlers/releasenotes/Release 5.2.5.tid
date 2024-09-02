@@ -7,7 +7,7 @@ title: Release 5.2.5
 type: text/vnd.tiddlywiki
 description: Hot fix release for v5.2.4
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.4...v5.2.5]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.2.4...v5.2.5]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[dmikh|https://talk.tiddlywiki.org/u/dmikh]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-v5-2-4/4982]] and the [[voting thread|https://talk.tiddlywiki.org/t/vote-for-the-v5-2-4-new-release-banner/5140/2]]).
@@ -15,7 +15,7 @@ description: Hot fix release for v5.2.4
 	url:"https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/25b8f26073504dace56a5537f29c8bff0ead2acd/editions/tw5.com/tiddlers/images/New%20Release%20Banner.png"
 >>
 
-This is a bug fix release intended to resolve backwards compatibility issues discovered in v5.2.4. See [[this GitHub ticket|https://github.com/Jermolene/TiddlyWiki5/issues/7126]] for the background.
+This is a bug fix release intended to resolve backwards compatibility issues discovered in v5.2.4. See [[this GitHub ticket|https://github.com/TiddlyWiki/TiddlyWiki5/issues/7126]] for the background.
 
 The issues are entirely cosmetic stylesheet changes, and do not affect the functionality of TiddlyWiki. However, we encourage all users to upgrade to this new version for consistency.
 

@@ -18,7 +18,7 @@ button-foreground: #586e75
 code-background: #eee8d5
 code-border: #93a1a1
 code-foreground: #586e75
-dirty-indicator: inherit
+dirty-indicator: #dc322f
 download-background: #859900
 download-foreground: #eee8d5
 dragger-background: #eee8d5
@@ -34,6 +34,7 @@ external-link-background-visited: inherit
 external-link-foreground: #268bd2
 external-link-foreground-hover: inherit
 external-link-foreground-visited: #268bd2
+footnote-target-background: #eee8d5
 foreground: #657b83
 highlight-background: #ffff00
 highlight-foreground: #000000
@@ -72,6 +73,10 @@ sidebar-tab-foreground-selected: #586e75
 sidebar-tiddler-link-foreground: #2aa198
 sidebar-tiddler-link-foreground-hover: #002b36
 site-title-foreground: #d33682
+stability-deprecated: #dc322f
+stability-experimental: #b58900
+stability-legacy: #268bd2
+stability-stable: #859900
 static-alert-foreground: #586e75
 tab-background: #eee8d5
 tab-background-selected: #fdf6e3

@@ -30,6 +30,7 @@ name: The human readable name associated with a plugin tiddler
 parent-plugin: For a plugin, specifies which plugin of which it is a sub-plugin
 plugin-priority: A numerical value indicating the priority of a plugin tiddler
 plugin-type: The type of plugin in a plugin tiddler
+stability: The development status of a plugin: deprecated, experimental, stable, or legacy
 revision: The revision of the tiddler held at the server
 released: Date of a TiddlyWiki release
 source: The source URL associated with a tiddler

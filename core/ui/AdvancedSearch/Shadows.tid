@@ -79,11 +79,15 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 
 <$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem">
 
-<$set name="resultCount" value="<$count filter='[all[shadows]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]'/>">
+<$set name="resultCount" value={{{ [all[shadows]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] +[count[]]}}}>
 
 <div class="tc-search-results">
 
-<<lingo Shadows/Matches>>
+<% if [<resultCount>match[0]] %>
+	{{$:/language/Search/Matches/NoMatch}}
+<% else %>
+	<<lingo Shadows/Matches>>
+<% endif %>
 
 <$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]]">
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>

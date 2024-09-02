@@ -69,7 +69,7 @@ HttpClient.prototype.cancelAllHttpRequests = function() {
 		for(var t=this.requests.length - 1; t--; t>=0) {
 			var requestInfo = this.requests[t];
 			requestInfo.request.cancel();
-		}	
+		}
 	}
 	this.requests = [];
 	this.updateRequestTracker();
@@ -100,6 +100,10 @@ headers: hashmap of header name to header value to be sent with the request
 passwordHeaders: hashmap of header name to password store name to be sent with the request
 queryStrings: hashmap of query string parameter name to parameter value to be sent with the request
 passwordQueryStrings: hashmap of query string parameter name to password store name to be sent with the request
+basicAuthUsername: plain username for basic authentication
+basicAuthUsernameFromStore: name of password store entry containing username
+basicAuthPassword: plain password for basic authentication
+basicAuthPasswordFromStore: name of password store entry containing password
 */
 function HttpClientRequest(options) {
 	var self = this;
@@ -112,6 +116,7 @@ function HttpClientRequest(options) {
 	this.method = options.method || "GET";
 	this.body = options.body || "";
 	this.binary = options.binary || "";
+	this.useDefaultHeaders = options.useDefaultHeaders !== "false" ? true : false,
 	this.variables = options.variables;
 	var url = options.url;
 	$tw.utils.each(options.queryStrings,function(value,name) {
@@ -128,6 +133,11 @@ function HttpClientRequest(options) {
 	$tw.utils.each(options.passwordHeaders,function(value,name) {
 		self.requestHeaders[name] = $tw.utils.getPassword(value) || "";
 	});
+	this.basicAuthUsername = options.basicAuthUsername || (options.basicAuthUsernameFromStore && $tw.utils.getPassword(options.basicAuthUsernameFromStore)) || "";
+	this.basicAuthPassword = options.basicAuthPassword || (options.basicAuthPasswordFromStore && $tw.utils.getPassword(options.basicAuthPasswordFromStore)) || "";
+	if(this.basicAuthUsername && this.basicAuthPassword) {
+		this.requestHeaders.Authorization = "Basic " + $tw.utils.base64Encode(this.basicAuthUsername + ":" + this.basicAuthPassword);
+	}
 }
 
 HttpClientRequest.prototype.send = function(callback) {
@@ -156,6 +166,7 @@ HttpClientRequest.prototype.send = function(callback) {
 		this.xhr = $tw.utils.httpRequest({
 			url: this.url,
 			type: this.method,
+			useDefaultHeaders: this.useDefaultHeaders,
 			headers: this.requestHeaders,
 			data: this.body,
 			returnProp: this.binary === "" ? "responseText" : "response",
@@ -231,7 +242,8 @@ Make an HTTP request. Options are:
 exports.httpRequest = function(options) {
 	var type = options.type || "GET",
 		url = options.url,
-		headers = options.headers || {accept: "application/json"},
+		useDefaultHeaders = options.useDefaultHeaders !== false ? true : false,
+		headers = options.headers || (useDefaultHeaders ? {accept: "application/json"} : {}),
 		hasHeader = function(targetHeader) {
 			targetHeader = targetHeader.toLowerCase();
 			var result = false;
@@ -257,7 +269,7 @@ exports.httpRequest = function(options) {
 			if(hasHeader("Content-Type") && ["application/x-www-form-urlencoded","multipart/form-data","text/plain"].indexOf(getHeader["Content-Type"]) === -1) {
 				return false;
 			}
-			return true;	
+			return true;
 		},
 		returnProp = options.returnProp || "responseText",
 		request = new XMLHttpRequest(),
@@ -283,7 +295,7 @@ exports.httpRequest = function(options) {
 	// Set up the state change handler
 	request.onreadystatechange = function() {
 		if(this.readyState === 4) {
-			if(this.status === 200 || this.status === 201 || this.status === 204) {
+			if(this.status >= 200 && this.status < 300) {
 				// Success!
 				options.callback(null,this[returnProp],this);
 				return;
@@ -307,10 +319,10 @@ exports.httpRequest = function(options) {
 			request.setRequestHeader(headerTitle,header);
 		});
 	}
-	if(data && !hasHeader("Content-Type")) {
+	if(data && !hasHeader("Content-Type") && useDefaultHeaders) {
 		request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
-	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers)) {
+	if(!hasHeader("X-Requested-With") && !isSimpleRequest(type,headers) && useDefaultHeaders) {
 		request.setRequestHeader("X-Requested-With","TiddlyWiki");
 	}
 	// Send data

@@ -56,7 +56,7 @@ exports.startup = function() {
 			return;
 		}
 		// Initialise the document
-		srcDocument.write("<html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
+		srcDocument.write("<!DOCTYPE html><head></head><body class='tc-body tc-single-tiddler-window'></body></html>");
 		srcDocument.close();
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {

@@ -70,7 +70,7 @@ No: 否
 OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
 OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式庫。由核心團隊維護的插件、主題和語言包。
 PageTemplate/Description: 預設的 ~Tiddlywiki 佈局
-PageTemplate/Name: 預設的 ~PageTemplate
+PageTemplate/Name: 標準佈局
 PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} ，使 ~JavaScript 插件的更改生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 Shortcuts/Input/Accept/Hint: 接受選取的項目

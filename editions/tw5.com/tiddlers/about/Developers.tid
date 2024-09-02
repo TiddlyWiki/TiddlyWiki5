@@ -7,11 +7,11 @@ type: text/vnd.tiddlywiki
 There are several resources for developers to learn more about TiddlyWiki and to discuss and contribute to its development.
 
 * [[tiddlywiki.com/dev|https://tiddlywiki.com/dev]] is the official developer documentation
-* Get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+* Get involved in the [[development on GitHub|https://github.com/TiddlyWiki/TiddlyWiki5]]
 ** [img[https://repobeats.axiom.co/api/embed/5a3bb51fd1ebe84a2da5548f78d2d74e456cebf3.svg]]
-** [[Discussions|https://github.com/Jermolene/TiddlyWiki5/discussions]] are for Q&A and open-ended discussion
-** [[Issues|https://github.com/Jermolene/TiddlyWiki5/issues]] are for raising bug reports and proposing specific, actionable new ideas
-* The older ~TiddlyWikiDev Google Group is now closed in favour of [[GitHub Discussions|https://github.com/Jermolene/TiddlyWiki5/discussions]] but remains a useful archive: https://groups.google.com/group/TiddlyWikiDev
+** [[Discussions|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]] are for Q&A and open-ended discussion
+** [[Issues|https://github.com/TiddlyWiki/TiddlyWiki5/issues]] are for raising bug reports and proposing specific, actionable new ideas
+* The older ~TiddlyWikiDev Google Group is now closed in favour of [[GitHub Discussions|https://github.com/TiddlyWiki/TiddlyWiki5/discussions]] but remains a useful archive: https://groups.google.com/group/TiddlyWikiDev
 ** An enhanced group search facility is available on [[mail-archive.com|https://www.mail-archive.com/tiddlywikidev@googlegroups.com/]]
 * Follow [[@TiddlyWiki on Twitter|http://twitter.com/#!/TiddlyWiki]] for the latest news
 * Chat at https://gitter.im/TiddlyWiki/public (development room coming soon)

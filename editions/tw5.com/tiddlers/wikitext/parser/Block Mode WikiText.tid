@@ -1,6 +1,6 @@
 caption: block parser mode
 created: 20220110234234616
-modified: 20220122182842032
+modified: 20240512001555383
 tags: [[WikiText Parser Modes]]
 title: Block Mode WikiText
 type: text/vnd.tiddlywiki
@@ -28,7 +28,7 @@ Common characteristics of such block mode WikiText:
 The above WikiText types are only recognised in ''block mode''. However, the text <<.em enclosed>> by most of them will be parsed in ''inline mode'' ([[Block Quotes in WikiText]] and [[Styles and Classes in WikiText]] are the two exceptions in which the parser will continue in ''block mode''). While in ''inline mode'' the parser may encounter something which moves it to ''block mode'' (see [[WikiText parser mode transitions]]).
 
 At the end of the terminating line, the parser will return to ''block mode''. 
-<<.tip 'Note: [[Hard Linebreaks in WikiText]] require an extra blank line after the trailing `"""` before the parser will return to <b>block mode</b>'>>.
+<<.tip 'Note: [[Hard Linebreaks in WikiText]] require an extra blank line after the trailing `"""` before the parser will return to <strong>block mode</strong>.'>>
 
 If the punctuation for the above types of WikiText is encountered while the parser is in ''inline mode'', it will be //ignored// and output as-is.
 

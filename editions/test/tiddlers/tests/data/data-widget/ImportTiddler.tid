@@ -1,0 +1,23 @@
+title: Data/ImportTiddler
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Importing a payload tiddler and adding custom fields
+
+title: Description
+text: Importing a payload tiddler and adding custom fields
++
+title: Output
+
+\whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
+<$data $tiddler="HelloThere" custom="Alpha"/>
+</$testcase>
++
+title: HelloThere
+tags: Definitions
+
+This is the tiddler HelloThere
++
+title: ExpectedResult
+
+<p><div><div>[{"title":"HelloThere","tags":"Definitions","text":"This is the tiddler HelloThere","custom":"Alpha"}]</div></div></p>

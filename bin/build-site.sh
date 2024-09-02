@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.3.3
+    TW5_BUILD_VERSION=v5.3.6
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -391,6 +391,17 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/highlight/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/highlight/empty.html text/plain \
+	|| exit 1
+
+# /plugins/tiddlywiki/geospatial/index.html		Demo wiki with geospatial plugin
+# /plugins/tiddlywiki/geospatial/empty.html		Empty wiki with geospatial plugin
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/geospatialdemo \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all plugins/tiddlywiki/geospatial/index.html text/plain \
+	--rendertiddler $:/core/save/empty plugins/tiddlywiki/geospatial/empty.html text/plain \
 	|| exit 1
 
 ######################################################

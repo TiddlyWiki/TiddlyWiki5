@@ -1,18 +1,17 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro $:/tags/Global
 
-\procedure colour(name)
+<!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
+\define colour(name)
 \whitespace trim
-<$transclude $tiddler={{$:/palette}} $index=`$(name)$`>
-	<$transclude $tiddler="$:/palettes/Vanilla" $index=`$(name)$`>
-		<$transclude $tiddler=`$:/config/DefaultColourMappings/$(name)$`/>
+<$transclude tiddler={{$:/palette}} index="$name$">
+	<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
+		<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
 	</$transclude>
 </$transclude>
 \end
 
-\procedure color(name)
-<$macrocall $name=colour name=`$(name)$`/>
-\end
+\define color(name) <<colour $name$>>
 
 \function box-shadow(shadow)
 [[ -webkit-box-shadow: $(shadow)$;

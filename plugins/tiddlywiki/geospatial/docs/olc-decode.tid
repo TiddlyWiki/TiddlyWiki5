@@ -1,0 +1,14 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/olc-decode
+caption: olc-decode operator
+tags: $:/tags/GeospatialDocs
+
+!! `olc-decode` operator
+
+The `olc-decode` operator converts an [[OpenLocationCode|https://github.com/google/open-location-code]] shortcut into the [[GeoJSON Point Feature]] at its centre or the [[GeoJSON Polygon Feature]] representing the bounds of the area identified by the input code.
+
+!! Examples
+
+<$testcase>
+<$data $compound-tiddler="$:/plugins/tiddlywiki/geospatial/tests/operators/olc-decode"/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>

@@ -16,11 +16,11 @@ Filter operator for returning all the backtranscludes from a tiddler
 Export our filter function
 */
 exports.backtranscludes = function(source,operator,options) {
-	var results = [];
+	var results = new $tw.utils.LinkedList();
 	source(function(tiddler,title) {
-		$tw.utils.pushTop(results,options.wiki.getTiddlerBacktranscludes(title));
+		results.pushTop(options.wiki.getTiddlerBacktranscludes(title));
 	});
-	return results;
+	return results.makeTiddlerIterator(options.wiki);
 };
 
 })();

@@ -1,7 +1,9 @@
 caption: edit-text
 created: 20131024141900000
-modified: 20230122210049893
+heading: 
+modified: 20240627184331133
 tags: Widgets
+temp: 
 title: EditTextWidget
 type: text/vnd.tiddlywiki
 
@@ -66,3 +68,18 @@ Provide a dated heading for this example where only the placeholder (but not the
 <$macrocall $name=".example" n="3"
 eg="""<$edit-text tiddler=<<currentTiddler>> field="heading" size="25" focus="yes" focusSelectFromEnd="13" default={{{ [[Heading Text (]] [<now YYYY-0MM-0DD>] [[)]] +[join[]] }}} />
 """/>
+
+!!! Input Actions, with class attribute
+
+<$macrocall $name=".example" n="4"
+eg="""\procedure onInput()
+  <%if [get[temp]match[$:/]] %>
+		<$action-confirm $message="Yes, this is how system tiddler names begin!"/>
+  <% endif %>
+\end
+
+Type a new tiddler name, starting with the system prefix `$:/`: <$edit-text inputActions=<<onInput>> field="temp" class="tc-edit-texteditor"/>
+
+"""/>
+
+
