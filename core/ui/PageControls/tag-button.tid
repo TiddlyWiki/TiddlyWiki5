@@ -6,14 +6,14 @@ description: {{$:/language/Buttons/TagManager/Hint}}
 \whitespace trim
 \procedure control-panel-button(class)
 <$button to="$:/TagManager" tooltip={{$:/language/Buttons/TagManager/Hint}} aria-label={{$:/language/Buttons/TagManager/Caption}} class=`$(tv-config-toolbar-class)$ $(class)$`>
-<% if [<tv-config-toolbar-icons>match[yes]] %>
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/tag-button}}
-<% endif %>
-<% if [<tv-config-toolbar-text>match[yes]] %>
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/TagManager/Caption}}/>
 </span>
-<% endif %>
+<%endif%>
 </$button>
 \end
 

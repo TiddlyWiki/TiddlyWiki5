@@ -12,14 +12,14 @@ description: {{$:/language/Buttons/More/Hint}}
 	class=<<tv-config-toolbar-class>>
 	selectedClass="tc-selected"
 >
-	<% if [<tv-config-toolbar-icons>match[yes]] %>
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
 		{{$:/core/images/down-arrow}}
-	<% endif %>
-	<% if [<tv-config-toolbar-text>match[yes]] %>
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
 		<span class="tc-btn-text">
 			<$text text={{$:/language/Buttons/More/Caption}}/>
 		</span>
-	<% endif %>
+	<%endif%>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
 	<div class="tc-drop-down">
