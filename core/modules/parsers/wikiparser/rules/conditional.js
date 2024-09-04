@@ -6,7 +6,7 @@ module-type: wikirule
 Conditional shortcut syntax
 
 ```
-This is a <% if [{something}] %>Elephant<% elseif [{else}] %>Pelican<% else %>Crocodile<% endif %>
+This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocodile<%endif%>
 ```
 
 \*/
@@ -27,7 +27,7 @@ exports.init = function(parser) {
 };
 
 exports.findNextMatch = function(startPos) {
-	// Look for the next <% if shortcut
+	// Look for the next <%if shortcut
 	this.matchRegExp.lastIndex = startPos;
 	this.match = this.matchRegExp.exec(this.parser.source);
 	// If not found then return no match
@@ -121,7 +121,7 @@ exports.serialize = function(tree, serialize) {
 	var filterCondition = tree.attributes.filter.value;
 	var ifClause = serialize(tree.children[0].children);
 	var elseClause = tree.children[1].children;
-	var serialized = "<% if " + filterCondition + "%>" + ifClause;
+	var serialized = "<%if " + filterCondition + "%>" + ifClause;
 
 	if(elseClause && elseClause.length > 0) {
 		for(var i = 0; i < elseClause.length; i++) {
@@ -129,11 +129,11 @@ exports.serialize = function(tree, serialize) {
 				// Handle elseif clause
 				var elseifCondition = elseClause[i].attributes.filter.value;
 				var elseifClause = serialize(elseClause[i].children[0]);
-				serialized += "<% elseif " + elseifCondition + "%>" + elseifClause;
+				serialized += "<%elseif " + elseifCondition + "%>" + elseifClause;
 			}
 			if(elseClause[i].children[1]) {
 				var elseClauseText = serialize(elseClause[i].children[1]);
-				serialized += "<% else %>" + elseClauseText;
+				serialized += "<%else%>" + elseClauseText;
 			}
 		}
 	}
