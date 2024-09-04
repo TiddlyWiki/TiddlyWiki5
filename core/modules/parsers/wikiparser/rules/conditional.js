@@ -138,7 +138,7 @@ exports.serialize = function(tree, serialize) {
 		}
 	}
 
-	serialized += "<% endif %>";
+	serialized += "<%endif%>";
 	return serialized;
 };
 
