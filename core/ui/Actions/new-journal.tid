@@ -3,7 +3,7 @@ tags: $:/tags/Actions
 description: create a new journal tiddler
 
 \whitespace trim
-\function tf.get-tags() [<textFieldTags>] [<tagsFieldTags>] +[join[]]
+\function tf.get-tags() [<textFieldTags>] [<tagsFieldTags>] +[join[ ]]
 <$let journalTitleTemplate={{$:/config/NewJournal/Title}} textFieldTags={{$:/config/NewJournal/Tags}} tagsFieldTags={{$:/config/NewJournal/Tags!!tags}} journalText={{$:/config/NewJournal/Text}}>
 <$wikify name="journalTitle" text="<$transclude $variable='now' format=<<journalTitleTemplate>>/>">
 <$reveal type="nomatch" state=<<journalTitle>> text="">

@@ -3,7 +3,7 @@ tags: $:/tags/Actions
 description: create a new empty tiddler
 
 \whitespace trim
-\function tf.get-tags() [<textFieldTags>] [<tagsFieldTags>] +[join[]]
+\function tf.get-tags() [<textFieldTags>] [<tagsFieldTags>] +[join[ ]]
 <$let textFieldTags={{$:/config/NewTiddler/Tags}} tagsFieldTags={{$:/config/NewTiddler/Tags!!tags}}>
 <$action-sendmessage $message="tm-new-tiddler" tags=<<tf.get-tags>>/>
 </$let>
