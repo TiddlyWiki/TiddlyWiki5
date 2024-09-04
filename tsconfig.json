@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "paths": {       // Add paths
+      "$:/core/*": ["./core/*"]
+    },
+    "noImplicitAny": false,
+    "strict": false,
+
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "checkJs": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "Node16",
+    "outDir": "silences wrong TS error, we don't compile, we only typecheck",
+    "rootDir": "core",
+    "skipLibCheck": true,
+    "target": "ESNext"
+  },
+  "include": ["./core/**/*.js", "**/*.d.ts"]
+}
