@@ -116,7 +116,7 @@ describe("WikiAST serialization unit tests", function () {
 
   wiki.addTiddler({
     title: "ConditionalTest",
-    text: "This is a <% if [{something}] %>Elephant<% elseif [{else}] %>Pelican<% else %>Crocodile<% endif %>",
+    text: "This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocodile<%endif%>",
   });
   it("should serialize conditional statements correctly", function () {
     var serialized = $tw.utils.serializeParseTree(wiki.parseTiddler("ConditionalTest").tree).trimEnd();
