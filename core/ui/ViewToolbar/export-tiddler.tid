@@ -3,7 +3,4 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/export-button}} {{$:/language/Buttons/ExportTiddler/Caption}}
 description: {{$:/language/Buttons/ExportTiddler/Hint}}
 
-\define makeExportFilter()
-[[$(currentTiddler)$]]
-\end
-<$macrocall $name="exportButton" exportFilter=<<makeExportFilter>> lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>
+<$transclude $variable="exportButton" exportFilter=`[[$(currentTiddler)$]]` lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>
