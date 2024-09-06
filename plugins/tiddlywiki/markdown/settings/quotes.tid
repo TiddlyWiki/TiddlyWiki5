@@ -1,6 +1,7 @@
 title: $:/plugins/tiddlywiki/markdown/settings/quotes
 tags: $:/tags/ControlPanel/Settings/Markdown
 caption: Quotes replacement
+list-after: $:/plugins/tiddlywiki/markdown/settings/typographer
 
 markdown-it library config: Double + single quotes replacement pairs, when [[typographer|$:/config/markdown/typographer]] is enabled.
 
