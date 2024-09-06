@@ -2,8 +2,6 @@ title: $:/plugins/tiddlywiki/markdown/config
 
 ! Plugin Configuration
 
-{{$:/plugins/tiddlywiki/markdown/settings}}
-
 <h2 style="margin-top:1.5em">~WikiText Pragma</h2>
 
 The value of [[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]] has been carefully tuned to properly integrate markdown with ~TiddlyWiki. Changing this setting may produce unexpected results, but the inclusion of the following parser rules should be fine:

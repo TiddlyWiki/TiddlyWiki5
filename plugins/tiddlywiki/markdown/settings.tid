@@ -2,7 +2,7 @@ title: $:/plugins/tiddlywiki/markdown/settings
 tags: $:/tags/ControlPanel/SettingsTab
 caption: Markdown
 
-These settings let you customise the behaviour of Markdown.
+These settings let you customise the behaviour of Markdown. See [[plugin|$:/plugins/tiddlywiki/markdown]] readme and config tab for more information.
 
 ''IMPORTANT:'' You must reload your wiki for changes to take effect.
 
