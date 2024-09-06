@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/markdown/settings/quotes
+tags: $:/tags/ControlPanel/Settings/Markdown
+caption: Quotes replacement
+
+markdown-it library config: Double + single quotes replacement pairs, when [[typographer|$:/config/markdown/typographer]] is enabled.
+
+|[[Quotes replacement|$:/config/markdown/quotes]]|<$edit-text tiddler="$:/config/markdown/quotes" tag="input"/> |
