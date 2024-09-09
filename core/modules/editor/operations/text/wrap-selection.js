@@ -19,17 +19,17 @@ exports["wrap-selection"] = function(event,operation) {
 		trimSelection = event.paramObject.trimSelection || "no",
 		selLength = o.selEnd - o.selStart;
 
-	// This function detects, if trailing spaces are part of the selection and if the user wants to handle them
+	// This function detects, if trailing spaces are part of the selection __and__ if the user wants to handle them
 	// Returns "yes", "start", "end", "no" (default)
-	// yes .. there are trailing spaces at both ends
-	// start .. there are trailing spaces at start
-	// end .. there are trailing spaces at the end
-	// no .. no trailing spaces are taken into account
+	//	yes .. there are trailing spaces at both ends
+	//	start .. there are trailing spaces at the start
+	//	end .. there are trailing spaces at the end
+	//	no .. no trailing spaces are taken into account
 	var trailingSpaceAt = function(sel) {
 		var _start,
 			_end,
 			result;
-		// trimSelection is a user parameter, which this evaluations take into account
+		// trimSelection is a user parameter, which this evaluations takes into account
 		switch (trimSelection) {
 			case "end":
 				result = (sel.trimEnd().length !== selLength) ? "end" : "no";
@@ -119,7 +119,7 @@ exports["wrap-selection"] = function(event,operation) {
 	}
 
 	if(o.selStart === o.selEnd) {
-		// No selection; Create prefix and suffix. Set cursor between them: ""|""
+		// No selection; Create prefix and suffix. Set cursor in between them: ""|""
 		togglePrefixSuffix();
 	} else if(	o.text.substring(o.selStart, o.selStart + prefix.length) === prefix &&
 				o.text.substring(o.selEnd - suffix.length,o.selEnd) === suffix) {
