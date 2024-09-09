@@ -1,23 +1,23 @@
 title: $:/core/templates/server/static.tiddler.wikitext
 
 \whitespace trim
-<div class="tc-tiddler-title">
+<div class="tc-tiddler-title tc-clearfix">
 <div class="tc-titlebar">
 <h2><$text text=<<currentTiddler>>/></h2>
 </div>
 </div>
-<div class="tc-subtitle">
+<div class="tc-subtitle tc-clearfix">
 <$link to={{!!modifier}}>
 <$view field="modifier"/>
 </$link> <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
 </div>
-<div class="tc-tags-wrapper">
+<div class="tc-tags-wrapper" tc-clearfix>
 <$list filter="[all[current]tags[]sort[title]]">
 <a href={{{ [<currentTiddler>encodeuricomponent[]] }}}>
 <$macrocall $name="tag-pill" tag=<<currentTiddler>>/>
 </a>
 </$list>
 </div>
-<div class="tc-tiddler-body">
+<div class="tc-tiddler-body tc-clearfix">
 <$transclude mode="block"/>
 </div>

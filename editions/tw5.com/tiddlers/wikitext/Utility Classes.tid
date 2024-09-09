@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki
 |`tc-max-width-80`|Sets the width of a block-element to use 80% of the maximum container width. This setting is useful with the `tc-center` class |
 |`tc-edit-max-width `|Expands [[TextWidget]]s to use the maximum available width. See [[ControlPanel -> Info -> Basics|$:/core/ui/ControlPanel/Basics]]|
 |`tc-first-link-nowrap` |Ensures that any links in the first table column will never wrap to the next line |
-
+|`tc-clearfix`|<<.from-version "5.3.6">> This class can be used to prevent elements, that have a `class="tc-float-right"` from overflowing their container elements. tc-clearfix is already assigned to all major ViewTemplate and EditTemplate elements. So it only needs to be used where the default does not work out of the box.|
 !! Table Utility Classes
 
 |`tc-table-no-border` |Removes the borders of a table |

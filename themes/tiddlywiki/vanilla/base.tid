@@ -1350,10 +1350,6 @@ canvas.tc-edit-bitmapeditor  {
 	display: block;
 }
 
-.tc-tiddler-body {
-	clear: both;
-}
-
 .tc-single-tiddler-window .tc-tiddler-body,
 .tc-tiddler-frame .tc-tiddler-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
@@ -2773,6 +2769,16 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	float: right;
 }
 
+/* Float tc-clearfix. Needs to be used by elements that allow float:right in their content.
+** So the floating element does not overflow
+*/
+
+.tc-clearfix:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
 /*
 ** Chooser
 */
@@ -3524,3 +3530,4 @@ span.tc-translink > a:first-child {
 .tc-tiny-v-gap-bottom {
 	margin-bottom: 3px;
 }
+
