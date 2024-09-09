@@ -3,5 +3,6 @@
 	"name": "GitHub Fork Ribbon",
 	"description": "GitHub-inspired corner ribbon",
 	"author": "Simon Whitaker",
-	"list": "readme usage"
+	"list": "readme usage",
+	"stability": "STABILITY_0_DEPRECATED"
 }

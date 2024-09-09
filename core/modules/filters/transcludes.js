@@ -20,7 +20,7 @@ exports.transcludes = function(source,operator,options) {
 	source(function(tiddler,title) {
 		results.pushTop(options.wiki.getTiddlerTranscludes(title));
 	});
-	return results.toArray();
+	return results.makeTiddlerIterator(options.wiki);
 };
 
 })();

@@ -1,7 +1,7 @@
 title: $:/language/Help/fetch
-description: Fetch tiddlers from wiki by URL
+description: Laden mehrerer Tiddler über eine URL
 
-Abrufen eines oder mehrerer Dateien über HTTP/HTTPS. Importieren der tiddler, die dem Filter entsprechen. Umwandeln der ankommenden Titel, wenn nötig.
+Abrufen eines oder mehrerer Tiddler über HTTP/HTTPS. Importieren der tiddler, die dem Filter entsprechen. Umwandeln der ankommenden Titel, wenn nötig.
 
 ```
 --fetch file <url> <import-filter> <transform-filter>
@@ -10,11 +10,11 @@ Abrufen eines oder mehrerer Dateien über HTTP/HTTPS. Importieren der tiddler, d
 --fetch raw-files <url-filter> <transform-filter>
 ```
 
-Wird der `file` Parameter verwendet, wird nur eine einzelne Datei geholt. Der erste Parameter ist die URL von der die Datei ''importiert'' werden soll.
+Wird der `file` oder `raw-file` Parameter verwendet, wird nur eine einzelne Datei geladen. Der erste Parameter ist die URL von der die Datei ''importiert'' werden soll.
 
-Wird der `files` Parameter verwendet, werden mehrere Dateien geholt. In diesem Fall ist der erste Parameter ein Filter, der eine Liste von URLs ergibt, von denen die Dateien gelesen werden sollen. Zum Beispiel: Mehrere Tiddler sind getagged mit: `remote-server` und enthalten ein Feld: `url`. ... Der Filter `[tag[remote-server]get[url]]` wird alle verfügbaren URLs ansprechen.
+Wird der `files` Parameter verwendet, werden mehrere Dateien geholt. In diesem Fall ist der erste Parameter ein Filter, der eine Liste von URLs ergibt, von denen die Dateien gelesen werden sollen. Zum Beispiel: Mehrere Tiddler sind getaggt mit: `remote-server` und enthalten ein Feld: `url`. ... Der Filter `[tag[remote-server]get[url]]` wird alle verfügbaren URLs ansprechen.
 
-Werden die `raw-file` oder `raw-files` Varianten verwendet, wird der Klartext der Datei importiert. Es wird nicht versucht die Import-logik anzuwenden.
+Werden die `raw-file` oder `raw-files` Varianten verwendet, wird der Klartext der Datei importiert. Es wird nicht versucht die Import-Logik anzuwenden.
 
 Der `<import-filter>` Parameter spezifiziert jene Tiddler, die importiert werden sollen. Ohne diesen Parameter wird standardmäßig `[all[tiddlers]]` als Filter verwendet.
 
@@ -22,7 +22,7 @@ Der `<transform-filter>` Parameter, spezifiziert einen Filter, mit dem der Tiddl
 
 Wird `--verbose` vor dem `--fetch` Befehl benutzt, dann werden erweiterte Diagnose Infos ausgegeben.
 
-Hinweis: ~TiddlyWiki wird ''keine'' veralteten plugins importieren.
+Hinweis: TiddlyWiki wird ''keine'' veraltete Plugins importieren.
 
 Das folgende Beispiel wird alle "nicht-system" Tiddler von https://tiddlywiki.com holen und in ein `JSON` file speichern.
 

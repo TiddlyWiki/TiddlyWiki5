@@ -6,6 +6,8 @@ Filter/Hint: Search via a [[filter expression|https://tiddlywiki.com/static/Filt
 Filter/Matches: //<small><<resultCount>> matches</small>//
 Matches: //<small><<resultCount>> matches</small>//
 Matches/All: All matches:
+Matches/NoMatch: //No match//
+Matches/NoResult: //No search result//
 Matches/Title: Title matches:
 Search: Search
 Search/TooShort: Search text too short

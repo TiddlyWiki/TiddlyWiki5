@@ -7,13 +7,13 @@ type: text/vnd.tiddlywiki
 released: 20160713104714652
 description: Editor toolbars, improved bitmap editor, Internals plugin, WikifyWidget
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.11...v5.1.12]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.11...v5.1.12]]//
 
 ! Major Improvements
 
 !! New Editor Toolbars
 
-[[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2315]] support for extensible formatting toolbars for the editor widgets.
+[[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2315]] support for extensible formatting toolbars for the editor widgets.
 
 * Formatting operations for WikiText, with support for Markdown:
 ** Character formatting operations for bold, italic, strikethrough, underline, superscript, subscript, inline monospace
@@ -52,10 +52,10 @@ Several of the official plugins available in the plugin library have been update
 
 !! Text-Slicer Plugin Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/176d2ccd76856b10aadd5e71af587574e7bcd447]] support for sticky notes within documents
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c98ef97d236fb023c3b5099a5fc52c1e8da7eb4d]] support for slicing documents to Node.js
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/1335dff45013f83fb06a47453e6063b5c0e2c0b3]] document metadata display
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/46800d790a6521aafba24fc9cb9e0d0e8f1a48a2]] `list-children` filter operator
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/176d2ccd76856b10aadd5e71af587574e7bcd447]] support for sticky notes within documents
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/c98ef97d236fb023c3b5099a5fc52c1e8da7eb4d]] support for slicing documents to Node.js
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1335dff45013f83fb06a47453e6063b5c0e2c0b3]] document metadata display
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/46800d790a6521aafba24fc9cb9e0d0e8f1a48a2]] `list-children` filter operator
 * Fixed bugs
 
 ! Other Improvements
@@ -63,40 +63,40 @@ Several of the official plugins available in the plugin library have been update
 
 !! Usability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/7908e10488cc4280dd8e4f405bcb09f2fb6d3524]] a setting for disabling linking to missing tiddlers
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/de3adf905aff80e547dc630890f0d18bd87da880]] a setting for forcing word wrapping in monospaced code blocks
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/2351]] a warning when creating or editing tiddler titles containing troublesome characters
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7908e10488cc4280dd8e4f405bcb09f2fb6d3524]] a setting for disabling linking to missing tiddlers
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/de3adf905aff80e547dc630890f0d18bd87da880]] a setting for forcing word wrapping in monospaced code blocks
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/issues/2351]] a warning when creating or editing tiddler titles containing troublesome characters
 * Addition of “new image” button to the “Tools” tab of the sidebar
 * Introduction of new general purpose [[colour-picker Macro]]
 * Introduction of new general purpose [[image-picker Macro]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/adf45b346847a81d4ed26397466daa4514035bb9]] a bulk delete button to [[advanced search|$:/AdvancedSearch]] "Filter" tab
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/adf45b346847a81d4ed26397466daa4514035bb9]] a bulk delete button to [[advanced search|$:/AdvancedSearch]] "Filter" tab
 
 !! Hackability Improvements
 
-* [[Introduction|https://github.com/Jermolene/TiddlyWiki5/issues/2337]] of the new WikifyWidget
+* [[Introduction|https://github.com/TiddlyWiki/TiddlyWiki5/issues/2337]] of the new WikifyWidget
 * Introduction of new EditShortcutWidget for direct entry of keyboard shortcut codes
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/7daebba46bad0e7ea3e4dfc1fc2e59e36414a683]] editor preview pane to allow plugins to add further types of preview (see the new `tiddlywiki/internals` plugin for an example)
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f8565443d7617f4d18b90ba7ce3f55b9764eccb2]] a simple HTTP PUT saver for use with WebDav or REST servers
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/37823f64e96809df16884c605b062f8da2453635]] build targets to the server edition
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/2364]] [[days Operator]] to better cope with operations on today and yesterday
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/3c20f2396e7c794b6e28c3e369e09230352402d0]] ActionWidgets mechanism to allow them to be used with the LinkCatcherWidget and SelectWidget
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/19e699d3302da842c4a6596f7b9ecc4dcaf8fbc2]] `mobile-web-app-capable` meta tag for Android Chrome
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3d5885f5a5ef8a395ba15285e68c19a8db115e6b]] new `plainwikified` format for the ViewWidget
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/7daebba46bad0e7ea3e4dfc1fc2e59e36414a683]] editor preview pane to allow plugins to add further types of preview (see the new `tiddlywiki/internals` plugin for an example)
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/f8565443d7617f4d18b90ba7ce3f55b9764eccb2]] a simple HTTP PUT saver for use with WebDav or REST servers
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/37823f64e96809df16884c605b062f8da2453635]] build targets to the server edition
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2364]] [[days Operator]] to better cope with operations on today and yesterday
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3c20f2396e7c794b6e28c3e369e09230352402d0]] ActionWidgets mechanism to allow them to be used with the LinkCatcherWidget and SelectWidget
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/19e699d3302da842c4a6596f7b9ecc4dcaf8fbc2]] `mobile-web-app-capable` meta tag for Android Chrome
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/3d5885f5a5ef8a395ba15285e68c19a8db115e6b]] new `plainwikified` format for the ViewWidget
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/54bf6c8a93f026ad1128dfc9cd745a67aaa6cda0]] problem with tiddler titles containing single quotes in [[Table-of-Contents Macros]]
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/037cfb7cc7c1b32153e23774697e8a9045d8f36a]] problem with z-ordering of modals in zoomin story view
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/2284]] problem with [[has Operator]]
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/4a03dcab2031a31eb60f99b6d15a70ff0449182c]] problem with double byte entities in the EntityWidget
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/276074b6cfde9d916f9428b2185f795915e190ae]] problem with ScrollableWidget in static renderings
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/1e0d019610acd960b8c70c0b85b7bb1a25096a8f]] problem with repeatedly lazy loading of tiddlers without a text field
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b326ba5b2c9e622f5fe99b00ab368bb484c1d4e5]] problem with titles containing URLs being interpreted as external links
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/54bf6c8a93f026ad1128dfc9cd745a67aaa6cda0]] problem with tiddler titles containing single quotes in [[Table-of-Contents Macros]]
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/037cfb7cc7c1b32153e23774697e8a9045d8f36a]] problem with z-ordering of modals in zoomin story view
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2284]] problem with [[has Operator]]
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/4a03dcab2031a31eb60f99b6d15a70ff0449182c]] problem with double byte entities in the EntityWidget
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/276074b6cfde9d916f9428b2185f795915e190ae]] problem with ScrollableWidget in static renderings
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1e0d019610acd960b8c70c0b85b7bb1a25096a8f]] problem with repeatedly lazy loading of tiddlers without a text field
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b326ba5b2c9e622f5fe99b00ab368bb484c1d4e5]] problem with titles containing URLs being interpreted as external links
 
 !! Node.js Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/2379]] ability to [[customise the paths used for tiddler saving|Customising Tiddler File Naming]]
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/bf74d13df544e323066cde9a019cbf1855d3db04]] problem saving non-JPG binary files
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/pull/2379]] ability to [[customise the paths used for tiddler saving|Customising Tiddler File Naming]]
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bf74d13df544e323066cde9a019cbf1855d3db04]] problem saving non-JPG binary files
 
 ! Contributors
 

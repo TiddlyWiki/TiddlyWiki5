@@ -9,7 +9,7 @@ Nous accueillons les contributions au code et à la documentation de TiddlyWiki 
 
 * [[SignalerBugs|ReportingBugs]]
 * Aider à [[améliorer notre documentation|Improving TiddlyWiki Documentation]]
-* Contribuer au code via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+* Contribuer au code via [[GitHub|https://github.com/TiddlyWiki/TiddlyWiki5]]
 ** Voir https://tiddlywiki.com/dev pour plus de détails
 
 Il existe encore plusieurs façons d'[[aider TiddlyWiki|HelpingTiddlyWiki]].
@@ -18,8 +18,8 @@ Il existe encore plusieurs façons d'[[aider TiddlyWiki|HelpingTiddlyWiki]].
 
 À l'instar d'autres projets OpenSource, TiddlyWiki5 a besoin que ses contributeurs signent un accord de licence pour leurs contributions. C'est un accord contractuel qui permet aux contributeurs de confirmer qu'ils sont propriétaires des droits d'auteur de leurs contributions, et qu'ils acceptent de les licencier à l'Association UnaMesa (l'entité juridique qui possède TiddlyWiki au nom de la communauté).
 
-* Pour les licences individuelles<<dp>> [[licenses/CLA-individuelle|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
-* Pour les licences d'organisation<<dp>> [[licenses/CLA-organisation|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
+* Pour les licences individuelles<<dp>> [[licenses/CLA-individuelle|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
+* Pour les licences d'organisation<<dp>> [[licenses/CLA-organisation|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
 
 ! Comment signer la CLA
 
@@ -27,7 +27,7 @@ Proposez une contribution (PullRequest) sur GitHub en ajoutant à `cla-individua
 
 ''pas à pas''
 
-# Cliquez [[licenses/CLA-individuelle|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]] ou [[licenses/CLA-organisation|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
+# Cliquez [[licenses/CLA-individuelle|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/licenses/cla-individual.md]] ou [[licenses/CLA-organisation|https://github.com/TiddlyWiki/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
 # Dans le document `cla-individual.md` ou le `cla-entity.md` cliquez sur l'icone dans le coin en haut à droite, ce qui créera une copie modifiable du projet, un ''fork'', dans votre espace de propositions et vous permettra de modifier ses différents documents
 # Modifiez la licence en ajoutant votre nom en bas comme dans l'exemple, eg<<:>> `Jeremy Ruston, @Jermolene, 2011/11/22`
 # Validez par un PullRequest

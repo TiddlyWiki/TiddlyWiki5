@@ -12,9 +12,6 @@ Widget base class
 /*global $tw: false */
 "use strict";
 
-/* Maximum permitted depth of the widget tree for recursion detection */
-var MAX_WIDGET_TREE_DEPTH = 1000;
-
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -166,6 +163,8 @@ Widget.prototype.getVariableInfo = function(name,options) {
 			});
 			resultList = this.wiki.filterTiddlers(value,this.makeFakeWidgetWithVariables(variables),options.source);
 			value = resultList[0] || "";
+		} else {
+			params = variable.params;
 		}
 		return {
 			text: value,
@@ -317,7 +316,8 @@ Widget.prototype.getStateQualifier = function(name) {
 Make a fake widget with specified variables, suitable for variable lookup in filters
 */
 Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
-	var self = this;
+	var self = this,
+		variables = variables || {};
 	return {
 		getVariable: function(name,opts) {
 			if($tw.utils.hop(variables,name)) {
@@ -335,7 +335,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				};
 			} else {
 				opts = opts || {};
-				opts.variables = variables;
+				opts.variables = $tw.utils.extend(variables,opts.variables);
 				return self.getVariableInfo(name,opts);
 			};
 		},
@@ -494,10 +494,8 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	this.children = [];
 	var self = this;
 	// Check for too much recursion
-	if(this.getAncestorCount() > MAX_WIDGET_TREE_DEPTH) {
-		this.children.push(this.makeChildWidget({type: "error", attributes: {
-			"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
-		}}));
+	if(this.getAncestorCount() > $tw.utils.TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH) {
+		throw new $tw.utils.TranscludeRecursionError();
 	} else {
 		// Create set variable widgets for each variable
 		$tw.utils.each(options.variables,function(value,name) {
@@ -811,6 +809,21 @@ Widget.prototype.invokeActionsByTag = function(tag,event,variables) {
 
 Widget.prototype.allowActionPropagation = function() {
 	return true;
+};
+
+/*
+Find child <$data> widgets recursively. The tag name allows aliased versions of the widget to be found too
+*/
+Widget.prototype.findChildrenDataWidgets = function(children,tag,callback) {
+	var self = this;
+	$tw.utils.each(children,function(child) {
+		if(child.dataWidgetTag === tag) {
+			callback(child);
+		}
+		if(child.children) {
+			self.findChildrenDataWidgets(child.children,tag,callback);
+		}
+	});
 };
 
 /*

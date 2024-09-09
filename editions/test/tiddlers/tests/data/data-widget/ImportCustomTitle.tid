@@ -1,0 +1,23 @@
+title: Data/ImportCustomTitle
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Importing a payload tiddler and overwriting the title
+
+title: Description
+text: Importing a payload tiddler and overwriting the title
++
+title: Output
+
+\whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
+<$data $tiddler="HelloThere" title="RealTitle"/>
+</$testcase>
++
+title: HelloThere
+tags: Definitions
+
+This is the tiddler HelloThere
++
+title: ExpectedResult
+
+<p><div><div>[{"title":"RealTitle","tags":"Definitions","text":"This is the tiddler HelloThere"}]</div></div></p>

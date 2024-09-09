@@ -3,5 +3,6 @@
 	"name": "AWS",
 	"description": "Amazon Web Services extensions and tools",
 	"list": "readme setup commands lambda",
-	"dependents": ["$:/plugins/tiddlywiki/async","$:/plugins/tiddlywiki/jszip"]
+	"dependents": ["$:/plugins/tiddlywiki/async","$:/plugins/tiddlywiki/jszip"],
+	"stability": "STABILITY_2_STABLE"
 }

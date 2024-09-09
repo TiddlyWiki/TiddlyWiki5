@@ -1,0 +1,27 @@
+title: Data/ImportCompound
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Importing a compound payload tiddler and adding custom fields
+
+title: Description
+text: Importing a compound payload tiddler and adding custom fields
++
+title: Output
+
+\whitespace trim
+<$testcase template="$:/core/ui/testcases/RawJSONTemplate">
+<$data $compound-tiddler="Compound" custom="Alpha"/>
+</$testcase>
++
+title: Compound
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Payload Tiddler
+tags: Alpha Beta Gamma
+
+This is a payload tiddler from a compound tiddler
++
+title: ExpectedResult
+
+<p><div><div>[{"title":"Payload Tiddler","tags":"Alpha Beta Gamma","text":"This is a payload tiddler from a compound tiddler","custom":"Alpha"}]</div></div></p>

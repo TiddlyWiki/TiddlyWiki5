@@ -1,6 +1,6 @@
 caption: action-deletefield
 created: 20141025120850184
-modified: 20150220162042000
+modified: 20240608151322035
 tags: Widgets ActionWidgets
 title: ActionDeleteFieldWidget
 type: text/vnd.tiddlywiki
@@ -21,26 +21,56 @@ The ''action-deletefield'' widget is invisible. Any content within it is ignored
 
 ! Examples
 
-Here is an example of a button that deletes the caption and tags fields of the current tiddler:
+<$testcase>
+<$data title=Description text="Delete currentTiddler fields using plain attributes"/>
+<$data title=Narrative text="""Use the $action-deletefield widget to delete the "caption" and "tags" fields of the current tiddler"""/>
+<$data title=Output caption="A caption" tags="tag1 tag2 tag3" text="""Click
+<$button actions="<$action-deletefield caption tags/>">
+Delete
+</$button>
+and watch the "caption" and "tags" field disappear."""/>
+</$testcase>
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-deletefield caption tags/>
-Delete "caption" and "tags"
-</$button>'/>
+<$testcase>
+<$data title=Description text="Delete fields from a specific tiddler"/>
+<$data title=Narrative text="""Use the $action-deletefield widget to delete the "list" and "tags" fields of the tiddler ~HelloThere"""/>
+<$data $tiddler="HelloThere"/>
+<$data title=Output text="""Click HelloThere, then click
+<$button actions='<$action-deletefield $tiddler="HelloThere" list tags/>'>
+Delete
+</$button>
+and watch the "list" and "tags" fields disappear"""/>
+</$testcase>
 
-Here is an example of a button that deletes the modified date and tags fields of the tiddler HelloThere:
+<$testcase>
+<$data title=Description text="Delete field from a specific tiddler"/>
+<$data title=Narrative text="""Use the $field attribute of the $action-deletefield widget to delete the "text" field of the tiddler ~HelloThere"""/>
+<$data $tiddler="HelloThere"/>
+<$data title=Output text="""Click HelloThere, then click
+<$button actions='<$action-deletefield $tiddler="HelloThere" $field="text"/>'>
+Delete
+</$button>
+and watch the contents of the "text" field disappear"""/>
+</$testcase>
 
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-deletefield $tiddler="HelloThere" modified tags/>
-Delete "modified" and "tags" from ~HelloThere
-</$button>'/>
+<$testcase>
+<$data title=Description text="Delete a variable field name"/>
+<$data title=Narrative text="""Use the $field attribute of the $action-deletefield widget to delete a variable field name"""/>
+<$data title=Output description="This field will be deleted" text="""<$let fieldName=description>
+Click
+<$button actions="<$action-deletefield $field=<<fieldName>>/>">
+Delete
+</$button>
+and watch the "<<fieldName>>" field disappear."""/>
+</$let>
+</$testcase>
 
-Here is an example of a button that uses the optional $field attribute to delete the text field of the tiddler HelloThere:
-
-<$macrocall $name='wikitext-example-without-html'
-src='<$button>
-<$action-deletefield $tiddler="HelloThere" $field="text"/>
-Delete text from ~HelloThere
-</$button>'/>
+<$testcase>
+<$data title=Description text="Delete field without updating timestamps"/>
+<$data title=Narrative text="""Use the $timestamp attribute of the $action-deletefield widget to prevent creation/change of "modified" and "created" fields"""/>
+<$data title=Output description="This field will be deleted" text="""Click
+<$button actions='<$action-deletefield $field="description" $timestamp="no"/>'>
+Delete
+</$button>
+and watch the "description" field disappear without the "modified" and "created" fields getting added"""/>
+</$testcase>

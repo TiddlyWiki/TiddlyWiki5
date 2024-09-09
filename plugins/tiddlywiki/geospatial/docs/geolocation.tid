@@ -1,0 +1,92 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geolocation
+caption: tm-request-geolocation message
+tags: $:/tags/GeospatialDocs
+
+!! `tm-request-geolocation` message
+
+The `tm-request-geolocation` message requests the location of the device on which TiddlyWiki is running. Browsers will request permission from the user before returning the location.
+
+The following parameters are supported:
+
+|!Parameters |!Description |
+|''actionsSuccess'' |Action string that is invoked if the request succeeds. See below for the variable values that are made available to the action string  |
+|''actionsError'' |Action string that is invoked if the request fails. See below for the variable values that are made available to the action string |
+|''accuracy'' |Optional value "low" or "high", defaults to "high". Note that higher accuracy can be significantly slower |
+|''timeout'' |Optional timeout value in milliseconds after which requests are automatically aborted. Defaults to infinity, meaning that requests do not timeout |
+|''maximumAge'' |An optional positive value indicating the maximum age in milliseconds of a possible cached position that is acceptable to return. If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position |
+
+The following variables are made available to the action strings passed in the ''actionsSuccess'' parameter:
+
+|!Name |!Description |
+|''timestamp'' |Date and time at which the location was retrieved, in TiddlyWiki YYYYMMDDHHMMSSmmm format |
+|''latitude'' |The latitude of the position in decimal degrees |
+|''longitude'' |The longitude of the position in decimal degrees |
+|''altitude'' |The altitude of the position in meters, relative to sea level. This value can be null if the implementation cannot provide the data |
+|''accuracy'' |A number representing the accuracy of the latitude and longitude properties, expressed in meters |
+|''altitudeAccuracy'' |A number representing the accuracy of the altitude expressed in meters. This value can be null |
+|''heading'' |A number representing the direction towards which the device is facing. This value, specified in degrees, indicates how far off from heading true north the device is. 0 degrees represents true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees). If speed is 0, heading is NaN. If the device is unable to provide heading information, this value is null |
+|''speed'' |A number representing the velocity of the device in meters per second. This value can be null |
+
+Note that Safari appears to provide obfuscated values for some items for privacy reasons.
+
+The following variables are made available to the action strings passed in the ''actionsError'' parameter:
+
+|!Name |!Description |
+|''error'' |Message associated with the error |
+
+!! Examples
+
+<$testcase>
+<$data
+	title="Description"
+	text="Retrieve current location"
+/>
+<$data
+	title="Output"
+	text="""
+	\procedure onsuccess()
+		<$action-setfield
+			$tiddler="CurrentLocation"
+			tags="$:/tags/GeoMarker"
+			timestamp=<<timestamp>>
+			lat=<<latitude>>
+			long=<<longitude>>
+			alt=<<altitude>>
+			accuracy=<<accuracy>>
+			altitudeAccuracy=<<altitudeAccuracy>>
+			heading=<<heading>>
+			speed=<<speed>>
+		/>
+	\end
+	\procedure onerror()
+		<$action-setfield
+			$tiddler="CurrentLocation"
+			$field="text"
+			$value=<<error>>
+		/>
+	\end
+	\procedure onclick()
+		<$action-sendmessage
+			$message="tm-request-geolocation"
+			actionsSuccess=<<onsuccess>>
+			actionsError=<<onerror>>
+		/>
+	\end
+	<$button actions=<<onclick>> style="background: red; color: white; font-size: 18pt;">
+		Click this button to request current location
+	</$button>
+	Your browser will ask for permission before granting the request. On some system it may take a couple of seconds for the location to appear.
+	<hr>
+	{{CurrentLocation}}
+	{{CurrentLocation||$:/core/ui/TiddlerFields}}
+	<hr>
+	<$geomap
+		state=<<qualify "$:/state/demo-map">>
+	>
+		<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+			<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+		</$list>
+	</$geomap>
+"""/>
+<$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
+</$testcase>
