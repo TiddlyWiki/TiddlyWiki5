@@ -2,4 +2,4 @@ title: Using TiddlyWiki as a library in another Node.js application
 
 Node.js applications can include TiddlyWiki as a library so that they can use wikitext rendering.
 
-See the demo at https://github.com/Jermolene/TiddlyWiki5DemoApp
+See the demo at https://github.com/TiddlyWiki/TiddlyWiki5DemoApp

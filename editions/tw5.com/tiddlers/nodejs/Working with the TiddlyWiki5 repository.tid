@@ -13,7 +13,7 @@ Mario Pietsch has created a [[short video introduction|Working with the TiddlyWi
 ! Setting Up
 
 # Create an account on GitHub if you don't already have one
-# Fork the TiddlyWiki5 GitHub repository from https://github.com/Jermolene/TiddlyWiki5
+# Fork the TiddlyWiki5 GitHub repository from https://github.com/TiddlyWiki/TiddlyWiki5
 # Clone a local copy of your fork
 # Open a command line terminal and change the current working directory to the root of the repo
 # Type `npm link` (Windows) or `sudo npm link` (Mac/Linux) to tell [[npm]] to use this copy of the repo as the globally installed one

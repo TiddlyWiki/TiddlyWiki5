@@ -2,7 +2,7 @@
 	"title": "$:/languages/da-DK",
 	"name": "da-DK",
 	"plugin-type": "language",
-	"description": "Danish (Denmark)",
+	"description": "Dansk (Danmark)",
 	"author": "Birthe C",
 	"core-version": ">=5.0.8"
 }

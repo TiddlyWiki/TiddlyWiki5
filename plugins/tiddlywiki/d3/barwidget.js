@@ -122,7 +122,7 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 	return {
 		domNode: svgElement[0][0],
 		updateChart: function() {
-			if (self.barGrouped !== "no") {
+			if(self.barGrouped !== "no") {
 				transitionGrouped();
 			} else {
 				transitionStacked();
@@ -160,14 +160,14 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 			var x = 1 / (0.1 + Math.random()),
 				y = 2 * Math.random() - 0.5,
 				z = 10 / (0.1 + Math.random());
-			for (var i = 0; i < n; i++) {
+			for(var i = 0; i < n; i++) {
 			var w = (i / n - y) * z;
 			a[i] += x * Math.exp(-w * w);
 			}
 		}
 		var a = [], i;
-		for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
-		for (i = 0; i < 5; ++i) bump(a);
+		for(i = 0; i < n; ++i) a[i] = o + o * Math.random();
+		for(i = 0; i < 5; ++i) bump(a);
 		return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
 	}
 };

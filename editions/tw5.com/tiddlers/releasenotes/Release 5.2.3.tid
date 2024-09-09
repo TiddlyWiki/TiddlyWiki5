@@ -7,7 +7,7 @@ title: Release 5.2.3
 type: text/vnd.tiddlywiki
 description: Minor fixes and improvements
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.2.2...v5.2.3]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.2.2...v5.2.3]]//
 
 <<.banner-credits
 	credit:"""Congratulations to [[feedthegood|https://talk.tiddlywiki.org/u/feedthegood]] for their winning design for the banner for this release (here is the [[competition thread|https://talk.tiddlywiki.org/t/new-release-banner-competition-for-v5-2-3]] and the [[voting thread|https://talk.tiddlywiki.org/t/banner-competition-voting-for-v5-2-3]]).
@@ -17,16 +17,16 @@ description: Minor fixes and improvements
 
 ! Plugin Improvements
 
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/commit/2f817e42935a3ab15cad697a7b8200dd8152eb9f">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/bbae2ab6da6c6cd1facab37fb7b9fd42e1d73169">>) [[KaTeX Plugin]] to ~KaTeX v0.16
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6625">> [[BrowserStorage Plugin]] to be able to delete existing tiddlers as well as modify or add tiddlers
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6691">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/pull/6691">>) [[Markdown Plugin]] to add the ''link'' and ''linkify'' editor toolbar buttons
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/commit/2f817e42935a3ab15cad697a7b8200dd8152eb9f">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/bbae2ab6da6c6cd1facab37fb7b9fd42e1d73169">>) [[KaTeX Plugin]] to ~KaTeX v0.16
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6625">> [[BrowserStorage Plugin]] to be able to delete existing tiddlers as well as modify or add tiddlers
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6691">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6691">>) [[Markdown Plugin]] to add the ''link'' and ''linkify'' editor toolbar buttons
 ** The linkify button just inserts `[]()`. If any text is selected, it will be inside the square brackets: `[text]()`
 ** The link button opens a popup menu in which you can either paste a URL or search for an existing tiddler
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6689">> [[Markdown Plugin]] to add the ''codeblock'' editor toolbar button
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6696">> [[Markdown Plugin]] to add <kbd>ctrl-M</kbd> (Mac) or <kbd>alt-M</kbd> (other platforms) to create a new Markdown tiddler
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6675">> Browser Sniff Plugin to expose [[$:/info/browser/is/mobile]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6701">> [[BrowserStorage Plugin]] crashing if local storage not available
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/commit/df7416d16bf8fe39d7a2a8a4a917248d45506ba1">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/0391e1855cd5c770928a3b4252aef54ed0a51385">>) Dynannotate Plugin selection tracker, making it easier to add a popup menu to text selections
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6689">> [[Markdown Plugin]] to add the ''codeblock'' editor toolbar button
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6696">> [[Markdown Plugin]] to add <kbd>ctrl-M</kbd> (Mac) or <kbd>alt-M</kbd> (other platforms) to create a new Markdown tiddler
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6675">> Browser Sniff Plugin to expose [[$:/info/browser/is/mobile]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6701">> [[BrowserStorage Plugin]] crashing if local storage not available
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/commit/df7416d16bf8fe39d7a2a8a4a917248d45506ba1">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/0391e1855cd5c770928a3b4252aef54ed0a51385">>) Dynannotate Plugin selection tracker, making it easier to add a popup menu to text selections
 
 ! Translation improvements
 
@@ -38,83 +38,83 @@ description: Minor fixes and improvements
 
 ! Accessibility Improvements
 
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6742">> [[ARIA|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA]] support for the sidebar and story river
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6743">> [[ARIA|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA]] support for notifications so that screen readers will automatically read them
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6749">> [[ARIA|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA]] support for the edit template
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6742">> [[ARIA|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA]] support for the sidebar and story river
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6743">> [[ARIA|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA]] support for notifications so that screen readers will automatically read them
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6749">> [[ARIA|https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA]] support for the edit template
 
 ! Usability Improvements
 
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/issues/5916">> ActionSetFieldWidget to avoid inadvertent changes to the current tiddler
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6589">> "put" and "upload" savers (as used by [[TiddlyHost|Saving on TiddlyHost]] to display error responses from the server
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6655">> (and <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6661">>) various palettes to work with ''color-scheme: dark''
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6698">> the monospaced blocks and block quotes editor buttons so that they can be undone by clicking the button again
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6740">> field and tag editors to trim whitespace
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6778">> formatting of stylesheet tiddlers to use syntax highlighting if the [[Highlight Plugin]] is installed
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/issues/5916">> ActionSetFieldWidget to avoid inadvertent changes to the current tiddler
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6589">> "put" and "upload" savers (as used by [[TiddlyHost|Saving on TiddlyHost]] to display error responses from the server
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6655">> (and <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6661">>) various palettes to work with ''color-scheme: dark''
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6698">> the monospaced blocks and block quotes editor buttons so that they can be undone by clicking the button again
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6740">> field and tag editors to trim whitespace
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6778">> formatting of stylesheet tiddlers to use syntax highlighting if the [[Highlight Plugin]] is installed
 
 ! Widget Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/issues/6593">> CheckboxWidget to support the indeterminate state
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6561">> CheckboxWidget to support the ''listField'' and ''filter'' attributes
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6581">> DraggableWidget to support an ''enabled'' attribute
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6582">> DraggableWidget to pass additional context variables to the ''dragstartactions'' action string
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6787">> refreshing of DraggableWidget
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6786">> brittle selector implementation for the DraggableWidget
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6809">> the ImageWidget to support [[lazy loading of images|https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading]]
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6593">> CheckboxWidget to support the indeterminate state
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6561">> CheckboxWidget to support the ''listField'' and ''filter'' attributes
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6581">> DraggableWidget to support an ''enabled'' attribute
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6582">> DraggableWidget to pass additional context variables to the ''dragstartactions'' action string
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6787">> refreshing of DraggableWidget
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6786">> brittle selector implementation for the DraggableWidget
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6809">> the ImageWidget to support [[lazy loading of images|https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading]]
 
 ! Filter improvements
 
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/35b0833e0cafc477e402309c006a163eb59a94ca">> handling of `{!!title}` in a filter with no currentTiddler variable set
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6806">> new "flat" option to the [[Map Filter Run Prefix]] enabling multiple items to be returned from each invocation of the filter run
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6771">> new [[insertafter Operator]] to match the existing [[insertbefore Operator]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/35b0833e0cafc477e402309c006a163eb59a94ca">> handling of `{!!title}` in a filter with no currentTiddler variable set
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6806">> new "flat" option to the [[Map Filter Run Prefix]] enabling multiple items to be returned from each invocation of the filter run
 
 ! Hackability Improvements
 
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6779">> tiddler subtitle rendering to allow individual elements to be controlled via the [[SystemTag: $:/tags/ViewTemplate/Subtitle]]
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/commit/f3bf5b6e850691b6bff430b0575387a09f6aaf97">> support for [[SystemTag: $:/tags/Macro/View/Body]]
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6624">> [[colour Macro]] to allow for palette-specific fallback colours to be specified
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/pull/6578">> whitespace and indentation of [[tabs Macro]] to improve readability
-* <<.link-badge-added "https://github.com/Jermolene/TiddlyWiki5/pull/6659">> ''color-scheme'' CSS property to the root of the Vanilla base theme
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6681">> EventCatcherWidget to support `tv-widgetnode-width` and `tv-widgetnode-height`
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6776">> [[list-links-draggable Macro]] to support an message to be displayed if the list is empty
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6779">> tiddler subtitle rendering to allow individual elements to be controlled via the [[SystemTag: $:/tags/ViewTemplate/Subtitle]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/f3bf5b6e850691b6bff430b0575387a09f6aaf97">> support for [[SystemTag: $:/tags/Macro/View/Body]]
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6624">> [[colour Macro]] to allow for palette-specific fallback colours to be specified
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6578">> whitespace and indentation of [[tabs Macro]] to improve readability
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6659">> ''color-scheme'' CSS property to the root of the Vanilla base theme
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6681">> EventCatcherWidget to support `tv-widgetnode-width` and `tv-widgetnode-height`
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6776">> [[list-links-draggable Macro]] to support an message to be displayed if the list is empty
 
 ! Bug Fixes
 
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6789">> issue with drag and drop running on mobile Chrome browsers
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6628">> problem when switching fields in the editor causing their values to be cleared
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6656">> incorrect ''color-scheme'' metatag for iframe content with the framed editor
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6649">> crash when using the SaveCommand to attempt to save missing fields
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6614">> bug with formatting UTC date strings
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6603">> SaveCommand crash when attempting to save missing tiddlers
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6599">> fix broken [[style block behaviour|Styles and Classes in WikiText]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6594">> incorrect display of image system tiddlers as text
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/1c16f12d6f5b81d86f79c3e687eec05b3a8d45bf">> erroneous link rendering within captions in [[list-links Macro]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/758d590837c30ddde9cc7b8171273756680f1545">> erroneous link rendering within captions in [[list-links-draggable Macro]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6644">> bug with JavaScript modules and lazy loading
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6679">> fixed tiddler title indentation discrepancy
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6697">> problem with numbered list editor button not undoing markers in Markdown tiddlers
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6700">> palette manager showing duplicate entries
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/7e4722f07a81fadc419738d2c2a55a090a830f8c">> crash with missing palette tiddlers
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/d5030eb87b7a21c5b76978aeed819eedc4740245">> (and <<.link-badge-here "https://github.com/Jermolene/TiddlyWiki5/commit/a29889a7412fcba45d7779e8a8ee9ca91b499946">>) search inputs not to trigger Chrome's password autocomplete popup
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6755">> embedded SVG [[foreignObject|https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject]] namespace
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6757">> anchor links not working when address bar is updated with a permalink, and animation duration is set to zero
-* <<.link-badge-improved "https://github.com/Jermolene/TiddlyWiki5/issues/6767">> positioning of server page control dropdown
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6832">> "save changes" button in the menu bar not turning red when the wiki is dirty
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/pull/6825">> hardcoded spaces in [[Table-of-Contents Macros]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/issues/6840">> state handling in [[tabs Macro]]
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/34b1b8128f4832e111a5d71af36d5ca2e2a1e0d4">> fixed formatting of IPv6 URLs by ListenCommand and ServerCommand
-* <<.link-badge-fixed "https://github.com/Jermolene/TiddlyWiki5/commit/667da96c970283cbf0fc2b3672fba3812886be65">> crash when closing multiple plugin libraries
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6789">> issue with drag and drop running on mobile Chrome browsers
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6628">> problem when switching fields in the editor causing their values to be cleared
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6656">> incorrect ''color-scheme'' metatag for iframe content with the framed editor
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6649">> crash when using the SaveCommand to attempt to save missing fields
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6614">> bug with formatting UTC date strings
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6603">> SaveCommand crash when attempting to save missing tiddlers
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6599">> fix broken [[style block behaviour|Styles and Classes in WikiText]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6594">> incorrect display of image system tiddlers as text
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/1c16f12d6f5b81d86f79c3e687eec05b3a8d45bf">> erroneous link rendering within captions in [[list-links Macro]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/758d590837c30ddde9cc7b8171273756680f1545">> erroneous link rendering within captions in [[list-links-draggable Macro]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6644">> bug with JavaScript modules and lazy loading
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6679">> fixed tiddler title indentation discrepancy
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6697">> problem with numbered list editor button not undoing markers in Markdown tiddlers
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6700">> palette manager showing duplicate entries
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/7e4722f07a81fadc419738d2c2a55a090a830f8c">> crash with missing palette tiddlers
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/d5030eb87b7a21c5b76978aeed819eedc4740245">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/commit/a29889a7412fcba45d7779e8a8ee9ca91b499946">>) search inputs not to trigger Chrome's password autocomplete popup
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6755">> embedded SVG [[foreignObject|https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject]] namespace
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6757">> anchor links not working when address bar is updated with a permalink, and animation duration is set to zero
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6767">> positioning of server page control dropdown
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6832">> "save changes" button in the menu bar not turning red when the wiki is dirty
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6825">> hardcoded spaces in [[Table-of-Contents Macros]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/6840">> state handling in [[tabs Macro]]
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/34b1b8128f4832e111a5d71af36d5ca2e2a1e0d4">> fixed formatting of IPv6 URLs by ListenCommand and ServerCommand
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/667da96c970283cbf0fc2b3672fba3812886be65">> crash when closing multiple plugin libraries
 
 ! Developer Improvements
 
-* A number of core tiddlers have been refactored to use `\whitespace trim` for improved readability. The work was split into a number of PRs: [[#6257|https://github.com/Jermolene/TiddlyWiki5/pull/6257]], [[#6265|https://github.com/Jermolene/TiddlyWiki5/pull/6265]], [[#6269|https://github.com/Jermolene/TiddlyWiki5/pull/6269]], [[#6270|https://github.com/Jermolene/TiddlyWiki5/pull/6270]], [[#6272|https://github.com/Jermolene/TiddlyWiki5/pull/6272]], [[#6275|https://github.com/Jermolene/TiddlyWiki5/pull/6275]], [[#6276|https://github.com/Jermolene/TiddlyWiki5/pull/6276]], [[#6587|https://github.com/Jermolene/TiddlyWiki5/pull/6587]], [[#6600|https://github.com/Jermolene/TiddlyWiki5/pull/6600]], [[#6604|https://github.com/Jermolene/TiddlyWiki5/pull/6604]], [[#6611|https://github.com/Jermolene/TiddlyWiki5/pull/6611]]
+* A number of core tiddlers have been refactored to use `\whitespace trim` for improved readability. The work was split into a number of PRs: [[#6257|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6257]], [[#6265|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6265]], [[#6269|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6269]], [[#6270|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6270]], [[#6272|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6272]], [[#6275|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6275]], [[#6276|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6276]], [[#6587|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6587]], [[#6600|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6600]], [[#6604|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6604]], [[#6611|https://github.com/TiddlyWiki/TiddlyWiki5/pull/6611]]
 
 ! Node.js Improvements
 
-* <<.link-badge-extended "https://github.com/Jermolene/TiddlyWiki5/pull/6746">> RenderCommand to support the `storyTiddler` variable
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6746">> RenderCommand to support the `storyTiddler` variable
 
 ! Performance Improvements
 
-* <<.link-badge-updated "https://github.com/Jermolene/TiddlyWiki5/pull/6402">> filter processing to allow compiled filters to be cached
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/6402">> filter processing to allow compiled filters to be cached
 
 ! Acknowledgements
 

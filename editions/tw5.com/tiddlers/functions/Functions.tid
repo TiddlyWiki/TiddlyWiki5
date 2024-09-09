@@ -1,5 +1,5 @@
 created: 20221009124003601
-modified: 20230419103154328
+modified: 20240619211228560
 tags: Concepts Reference
 title: Functions
 type: text/vnd.tiddlywiki
@@ -11,17 +11,17 @@ type: text/vnd.tiddlywiki
 Functions are usually defined with the [[Pragma: \function]]:
 
 ```
-\function my-function(parameter:"2")
-[<parameter>multiply[1.5]]
+\function myfun(param:"2")
+[<param>multiply[1.5]]
 \end
 ```
 
 Functions can be invoked in several ways:
 
-* Directly transclude functions with the syntax `<<myfn param:"value">>`
-* Assign functions to widget attributes with the syntax `<div class=<<myfn param:"value">>>`
-* Invoke functions via the [[function Operator]] with the syntax `[function[myfn],[value],...]`
-* Directly invoke functions whose names contain a period as custom filter operators with the syntax `[my.fn[value]]` or `[.myfn[value]]`
+* Directly transclude functions with the syntax `<<myfun param:"value">>`
+* Assign functions to widget attributes with the syntax `<div class=<<myfun param:"value">>>`
+* Invoke functions via the [[function Operator]] with the syntax `[function[myfun],[value],...]`
+* Directly invoke functions whose names contain a period as custom filter operators with the syntax `[my.fun[value]]` or `[.myfun[value]]`
 
 !! How Functions Work
 

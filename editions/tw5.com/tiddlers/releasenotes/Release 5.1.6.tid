@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 released: 20141219155007260
 description: Minor bug fix release for v5.1.5
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.5...v5.1.6]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.5...v5.1.6]]//
 
 !! Translation Improvements
 
@@ -16,29 +16,29 @@ description: Minor bug fix release for v5.1.5
 
 !! Hackability Improvements
 
-* [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/b29973312d7c16292cabb493e5914668f7c3f127]] buttons to be styled to look like internal links
-* [[Disabled|https://github.com/Jermolene/TiddlyWiki5/commit/5b38c21a417d2e5e2b85aed8010c88af32420e24]] linking when transcluding ''caption'' field in [[Table-of-Contents Macros]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b220c19fb7b789eb6d00c9d1a71414676d87130e]] support for templates to tabbed [[Table-of-Contents Macros]]
-* [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/31b5eb1578640fabe8712f0cd4edd49708bc4493]] shadow tiddlers to appear in [[Table-of-Contents Macros]]
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5154a25ab95f0cc08eb079a624be4fd3353e6dbd]] tooltip to BrowseWidget
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/42dba113ccdb18d7e76ac7a773c7dca532207007]] handling of missing tiddlers by the <<.olink has>> and <<.olink field>> operators
+* [[Allow|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b29973312d7c16292cabb493e5914668f7c3f127]] buttons to be styled to look like internal links
+* [[Disabled|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5b38c21a417d2e5e2b85aed8010c88af32420e24]] linking when transcluding ''caption'' field in [[Table-of-Contents Macros]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b220c19fb7b789eb6d00c9d1a71414676d87130e]] support for templates to tabbed [[Table-of-Contents Macros]]
+* [[Allow|https://github.com/TiddlyWiki/TiddlyWiki5/commit/31b5eb1578640fabe8712f0cd4edd49708bc4493]] shadow tiddlers to appear in [[Table-of-Contents Macros]]
+* [[Added|https://github.com/TiddlyWiki/TiddlyWiki5/commit/5154a25ab95f0cc08eb079a624be4fd3353e6dbd]] tooltip to BrowseWidget
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/42dba113ccdb18d7e76ac7a773c7dca532207007]] handling of missing tiddlers by the <<.olink has>> and <<.olink field>> operators
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/182c2428ca7b38d00d36d2d6650e761026470e63]] problem with download saver using incorrect filename
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d031a93c6d607d5b10d025149608f10977181e26]] [[problem|https://github.com/Jermolene/TiddlyWiki5/issues/1010]] with processing of date format templates
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a0c13a0856cb6b4a2592acdd46975e44eb7c53a8]] problem with ''storytop'' theme tweak not being respected when the narrow responsive design kicks in
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/182c2428ca7b38d00d36d2d6650e761026470e63]] problem with download saver using incorrect filename
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/d031a93c6d607d5b10d025149608f10977181e26]] [[problem|https://github.com/TiddlyWiki/TiddlyWiki5/issues/1010]] with processing of date format templates
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a0c13a0856cb6b4a2592acdd46975e44eb7c53a8]] problem with ''storytop'' theme tweak not being respected when the narrow responsive design kicks in
 
 !! Node.js Changes
 
 //These changes are only relevant to people using TiddlyWiki under Node.js//
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/bb74be7ac1a24eeaee10a3cb3d3633e3aa318632]] problem with "all tiddlers" static HTML export
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/51db48acc901d8fb298d9b0f7f10b47ffe90df05]] incorrect checking for an empty folder with the InitCommand
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/bb74be7ac1a24eeaee10a3cb3d3633e3aa318632]] problem with "all tiddlers" static HTML export
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/51db48acc901d8fb298d9b0f7f10b47ffe90df05]] incorrect checking for an empty folder with the InitCommand
 
 !! Changes affecting plugin authors
 
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/1e47a62c2af392f30a492da732b33b89f23a2e4c]] `$tw.utils.each` so that the loop can be broken out of
+* [[Extended|https://github.com/TiddlyWiki/TiddlyWiki5/commit/1e47a62c2af392f30a492da732b33b89f23a2e4c]] `$tw.utils.each` so that the loop can be broken out of
 
 !! Contributors
 
