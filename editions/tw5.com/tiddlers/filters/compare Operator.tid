@@ -1,6 +1,6 @@
 caption: compare
 created: 20200412181551706
-modified: 20240421123100900
+modified: 20200412181551706
 op-input: a [[selection of titles|Title Selection]]
 op-neg-output: those input titles <<.em not>> matching the specified comparison
 op-output: those input titles matching the specified comparison
