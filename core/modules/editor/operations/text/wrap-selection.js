@@ -30,7 +30,7 @@ exports["wrap-selection"] = function(event,operation) {
 			_end,
 			result;
 		// trimSelection is a user parameter, which this evaluations takes into account
-		switch (trimSelection) {
+		switch(trimSelection) {
 			case "end":
 				result = (sel.trimEnd().length !== selLength) ? "end" : "no";
 				break;
@@ -82,7 +82,7 @@ exports["wrap-selection"] = function(event,operation) {
 
 	function addPrefixSuffix() {
 		// remove trailing space if requested
-		switch (trailingSpaceAt(o.selection)) {
+		switch(trailingSpaceAt(o.selection)) {
 			case "no":
 				// has no trailing spaces
 				o.cutStart = o.selStart;
@@ -121,11 +121,11 @@ exports["wrap-selection"] = function(event,operation) {
 	if(o.selStart === o.selEnd) {
 		// No selection; Create prefix and suffix. Set cursor in between them: ""|""
 		togglePrefixSuffix();
-	} else if(	o.text.substring(o.selStart, o.selStart + prefix.length) === prefix &&
+	} else if(o.text.substring(o.selStart, o.selStart + prefix.length) === prefix &&
 				o.text.substring(o.selEnd - suffix.length,o.selEnd) === suffix) {
 		// Prefix and suffix are already present, so remove them
 		removePrefixSuffix();
-	} else if(	o.text.substring(o.selStart - prefix.length, o.selStart) === prefix &&
+	} else if(o.text.substring(o.selStart - prefix.length, o.selStart) === prefix &&
 				o.text.substring(o.selEnd, o.selEnd + suffix.length) === suffix) {
 		// Prefix and suffix are present BUT not selected -> remove them
 		removePrefixSuffix({"lenPrefix": prefix.length, "lenSuffix": suffix.length});
