@@ -2769,6 +2769,16 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	float: right;
 }
 
+/* Float tc-clearfix. Needs to be used by elements that allow float:right in their content.
+** So the floating element does not overflow
+*/
+
+.tc-clearfix:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
 /*
 ** Chooser
 */
@@ -3521,12 +3531,3 @@ span.tc-translink > a:first-child {
 	margin-bottom: 3px;
 }
 
-/* Float clearfix. Needs to be used by elements that allow float:right in their content.
-** So the floating element does not overflow
-*/
-
-.clearfix:after {
-	content: "";
-	clear: both;
-	display: table;
-}
