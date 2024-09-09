@@ -1,9 +1,12 @@
 title: $:/core/macros/tag-picker
-tags: tags: $:/tags/Macro $:/tags/Global
-first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]
-second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>sort[]]
+tags: $:/tags/Macro $:/tags/Global
+first-search-filter: [subfilter<tagListFilter>!is[system]search:title<userInput>]
+second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>]
 
-<!-- first-search-filter and second-search-filter fields are not used here in the code, but they are defined as parameters for keyboard-driven-input macro -->
+<!--
+	Fields: "first-search-filter", "second-search-filter" are assigned to the keyboard-driven input macro with parameter: "configTiddlerFilter"
+	They __need to be the same__ as used for variables: "nonSystemTagsFilter" and "systemTagsFilter". See code below!
+-->
 
 \whitespace trim
 
@@ -28,11 +31,11 @@ second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>
 \procedure add-tag-actions()
 <$let tag=<<_tf.getTag>> >
 	<$action-listops $tiddler=<<saveTiddler>> $field=<<tagField>> $subfilter='+[toggle<tag>trim[]]'/>
-	<% if [<tag>] :intersection[<saveTiddler>get<tagField>enlist-input[]] %>
+	<%if [<tag>] :intersection[<saveTiddler>get<tagField>enlist-input[]] %>
 		<!-- tag has been removed - do nothing -->
-	<% else %>
+	<%else%>
 		<<actions>>
-	<% endif %>
+	<%endif%>
 	<<delete-tag-state-tiddlers>>
 	<$action-setfield $tiddler=<<refreshTitle>> text="yes"/>
 </$let>
@@ -43,11 +46,11 @@ second-search-filter: [subfilter<tagListFilter>is[system]search:title<userInput>
 The second ESC tries to close the "draft tiddler"
 -->
 \procedure clear-tags-actions-inner()
-<% if [<storeTitle>has[text]] ~[<newTagNameTiddler>has[text]] %>
+<%if [<storeTitle>has[text]] ~[<newTagNameTiddler>has[text]] %>
 	<<delete-tag-state-tiddlers>>
-<% else %>
+<%else%>
 		<<cancel-delete-tiddler-actions "cancel">>
-<% endif %>
+<%endif%>
 \end
 
 <!-- triggered by keyboard only -->
@@ -80,6 +83,9 @@ The second ESC tries to close the "draft tiddler"
 		emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem"
 	>
 		<$list filter=<<filter>> variable="tag">
+			<$list-empty>
+				<span class="tc-small-gap-left">{{$:/language/EditTemplate/Tags/EmptyMessage}}</span>
+			</$list-empty>
 			<!-- The buttonClasses filter is used to define tc-tag-button-selected state -->
 			<!-- tf.get-tagpicker-focus-selector has to be resolved for $:/core/ui/TagPickerTagTemplate,
 				othwerwise qualify in tf.tagpicker-dropdown-id causes problems -->
@@ -122,13 +128,13 @@ The second ESC tries to close the "draft tiddler"
 		>
 			{{$:/core/images/down-arrow}}
 		</$button>
-		<% if [<storeTitle>has[text]] %>
+		<%if [<storeTitle>has[text]] %>
 			<$button actions=<<delete-tag-state-tiddlers>> class="tc-btn-invisible tc-small-gap tc-btn-dropdown"
 				tooltip={{$:/language/EditTemplate/Tags/ClearInput/Hint}} aria-label={{$:/language/EditTemplate/Tags/ClearInput/Caption}}
 			>
 				{{$:/core/images/close-button}}
 			</$button>
-		<% endif %>
+		<%endif%>
 		<span class="tc-add-tag-button tc-small-gap-left">
 			<$let tag=<<_tf.getTag>>>
 				<$button set=<<newTagNameTiddler>> actions=<<add-button-actions>> >
@@ -138,24 +144,27 @@ The second ESC tries to close the "draft tiddler"
 		</span>
 	</div>
 	<div class="tc-block-dropdown-wrapper">
-		<% if [<tf.tagpicker-dropdown-id>has[text]] %>
+		<%if [<tf.tagpicker-dropdown-id>has[text]] %>
 			<div class="tc-block-dropdown tc-block-tags-dropdown">
 				<$macrocall $name="tag-picker-listTags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" />
 				<hr>
 				<$macrocall $name="tag-picker-listTags" filter=<<systemTagsFilter>> suffix="-secondaryList" />
 			</div>
-		<% endif %>
+		<%endif%>
 	</div>
 </div>
 \end
 
 <!-- prepare all variables for tag-picker keyboard handling -->
-\procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]]")
+\procedure tag-picker(actions, tagField:"tags", tiddler, tagListFilter:"[tags[]sort[]]")
 
 \function _tf.getUserInput() [<storeTitle>get[text]]
 \function _tf.getTag() [<newTagNameTiddler>get[text]]
+<!-- Use this function if tag-picker is a stand alone macro. Otherwise use "newTagNameTiddler" defined for fieldmangler in EditTemplate -->
+\function _tf.makeTagNameTiddler() [[$:/temp/NewTagName]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]]
 
-<!-- keep those variables because they may "blead" into macros using old syntax -->
+<!-- keep those variables because they may "bleed" into macros using old syntax -->
+<!-- "nonSystemTagsFilter", "systemTagsFilter" __need to be the same__ as fields: "first-search-filter", "second-search-filter" -->
 <$let
 	palette={{$:/palette}}
 	colourA={{{ [<palette>getindex[foreground]] }}}
@@ -164,7 +173,7 @@ The second ESC tries to close the "draft tiddler"
 
 	saveTiddler={{{ [<tiddler>is[blank]then<currentTiddler>else<tiddler>] }}}
 
-	newTagNameTiddler={{{ [[$:/temp/NewTagName]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]] }}}
+	newTagNameTiddler={{{ [[newTagNameTiddler]is[variable]then<newTagNameTiddler>] :else[<_tf.makeTagNameTiddler>] }}}
 	storeTitle={{{ [[$:/temp/NewTagName/input]] [<tagField>!match[tags]] +[join[/]] [<qualify>] +[join[]] }}}
 
 	newTagNameSelectionTiddlerQualified=<<qualify "$:/temp/NewTagName/selected-item">>
@@ -172,8 +181,8 @@ The second ESC tries to close the "draft tiddler"
 
 	refreshTitle=<<qualify "$:/temp/NewTagName/refresh">>
 
-	nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>sort[]]"
-	systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>sort[]]"
+	nonSystemTagsFilter="[subfilter<tagListFilter>!is[system]search:title<userInput>]"
+	systemTagsFilter="[subfilter<tagListFilter>is[system]search:title<userInput>]"
 
 	cancelPopups="yes"
 >

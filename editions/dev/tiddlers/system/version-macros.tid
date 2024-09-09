@@ -9,6 +9,6 @@ type: text/vnd.tiddlywiki
 <$link to={{{ [<__version__>addprefix[Release ]] }}} class="doc-from-version">{{$:/core/images/warning}} New in: <$text text=<<__version__>>/></$link>
 \end
 
-\define .deprecated-since(version, superseded:"TODO-Link")
-<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated since: <$text text=<<__version__>>/></$link> (see <$link to=<<__superseded__>>><$text text=<<__superseded__>>/></$link>)
+\define .deprecated-since(version, superseded:"")
+<$link to="Deprecated - What does it mean" class="doc-deprecated-version tc-btn-invisible">{{$:/core/images/warning}} Deprecated from v<$text text=<<__version__>>/></$link> <%if [<__superseded__>else[]!match[]] %>(see <$link to=<<__superseded__>>><$text text=<<__superseded__>>/></$link>)<%endif%>
 \end

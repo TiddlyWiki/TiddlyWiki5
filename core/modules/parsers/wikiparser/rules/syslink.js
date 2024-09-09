@@ -29,10 +29,11 @@ exports.init = function(parser) {
 exports.parse = function() {
 	var match = this.match[0];
 	// Move past the match
+	var start = this.parser.pos;
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Create the link unless it is suppressed
 	if(match.substr(0,1) === "~") {
-		return [{type: "text", text: match.substr(1)}];
+		return [{type: "text", text: match.substr(1), start: start+1, end: this.parser.pos}];
 	} else {
 		return [{
 			type: "link",
@@ -41,7 +42,9 @@ exports.parse = function() {
 			},
 			children: [{
 				type: "text",
-				text: match
+				text: match,
+				start: start,
+				end: this.parser.pos
 			}]
 		}];
 	}

@@ -95,6 +95,7 @@ function SaverHandler(options) {
 	if($tw.browser) {
 		$tw.rootWidget.addEventListener("tm-save-wiki",function(event) {
 			self.saveWiki({
+				wiki: event.widget.wiki,
 				template: event.param,
 				downloadType: "text/plain",
 				variables: event.paramObject
@@ -102,6 +103,7 @@ function SaverHandler(options) {
 		});
 		$tw.rootWidget.addEventListener("tm-download-file",function(event) {
 			self.saveWiki({
+				wiki: event.widget.wiki,
 				method: "download",
 				template: event.param,
 				downloadType: "text/plain",
@@ -147,20 +149,22 @@ Save the wiki contents. Options are:
 	method: "save", "autosave" or "download"
 	template: the tiddler containing the template to save
 	downloadType: the content type for the saved file
+	wiki: optional wiki, overriding the default wiki specified in the constructor
 */
 SaverHandler.prototype.saveWiki = function(options) {
 	options = options || {};
 	var self = this,
+		wiki = options.wiki || this.wiki,
 		method = options.method || "save";
 	// Ignore autosave if disabled
-	if(method === "autosave" && ($tw.config.disableAutoSave || this.wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
+	if(method === "autosave" && ($tw.config.disableAutoSave || wiki.getTiddlerText(this.titleAutoSave,"yes") !== "yes")) {
 		return false;
 	}
 	var	variables = options.variables || {},
 		template = (options.template || 
-		           this.wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
+		           wiki.getTiddlerText("$:/config/SaveWikiButton/Template","$:/core/save/all")).trim(),
 		downloadType = options.downloadType || "text/plain",
-		text = this.wiki.renderTiddler(downloadType,template,options),
+		text = wiki.renderTiddler(downloadType,template,options),
 		callback = function(err) {
 			if(err) {
 				alert($tw.language.getString("Error/WhileSaving") + ":\n\n" + err);

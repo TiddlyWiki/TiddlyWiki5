@@ -3,5 +3,6 @@
 	"name": "sax js",
 	"description": "sax.js library",
 	"author": "Isaac Z. Schlueter",
-	"list": "readme license"
+	"list": "readme license",
+	"stability": "STABILITY_2_STABLE"
 }

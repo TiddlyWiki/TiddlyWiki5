@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: résilier le mot de passe
 Encryption/ClearPassword/Hint: Résilie le mot de passe et sauvegarde ce wiki sans chiffrement
 Encryption/SetPassword/Caption: affecter un mot de passe
 Encryption/SetPassword/Hint: Affecte un mot de passe pour sauvegarde une version chiffrée de ce wiki
+EmergencyDownload/Caption: Télécharge les tidders au format json
 ExportPage/Caption: exporter tout
 ExportPage/Hint: Exporte tous les tiddlers
 ExportTiddler/Caption: exporter ce tiddler

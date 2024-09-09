@@ -46,6 +46,7 @@ exports.parse = function() {
 		renderType = this.match[2];
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+	var start = this.parser.pos;
 	// Look for the end of the block
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
@@ -74,7 +75,9 @@ exports.parse = function() {
 			tag: "pre",
 			children: [{
 				type: "text",
-				text: text
+				text: text,
+				start: start,
+				end: this.parser.pos
 			}]
 		}];
 	}
