@@ -4,8 +4,7 @@ caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 description: {{$:/language/Buttons/Save/Hint}}
 
 \whitespace trim
-\define save-tiddler-button()
-\whitespace trim
+\procedure save-tiddler-button()
 <$fieldmangler>
 	<$button
 		tooltip={{$:/language/Buttons/Save/Hint}}
@@ -13,12 +12,12 @@ description: {{$:/language/Buttons/Save/Hint}}
 		class=<<tv-config-toolbar-class>>
 	>
 		<<save-tiddler-actions>>
-		<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+		<%if [<tv-config-toolbar-icons>match[yes]] %>
 			{{$:/core/images/done-button}}
-		</$list>
-		<$list filter="[<tv-config-toolbar-text>match[yes]]">
+		<%endif%>
+		<%if [<tv-config-toolbar-text>match[yes]] %>
 			<span class="tc-btn-text"><$text text={{$:/language/Buttons/Save/Caption}}/></span>
-		</$list>
+		<%endif%>
 	</$button>
 </$fieldmangler>
 \end

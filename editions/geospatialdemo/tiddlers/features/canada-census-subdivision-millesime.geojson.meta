@@ -3,3 +3,4 @@ caption: Canada Census Subdivisions Millesime
 type: application/json
 tags: $:/tags/GeoFeature
 color: #f8f
+popup-template: $:/geospatialdemo/features/canada-census-subdivision-millesime/popupTemplate

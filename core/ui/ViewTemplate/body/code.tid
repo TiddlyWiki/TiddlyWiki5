@@ -1,3 +1,4 @@
 title: $:/core/ui/ViewTemplate/body/code
 
+<$transclude $variable="copy-to-clipboard-above-right" src={{{ [<currentTiddler>get[text]] }}} />
 <$codeblock code={{{ [<currentTiddler>get[text]] }}} language={{{ [<currentTiddler>get[type]else[text/vnd.tiddlywiki]] }}}/>

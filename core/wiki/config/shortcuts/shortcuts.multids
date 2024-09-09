@@ -28,6 +28,7 @@ list-bullet: ctrl-shift-L
 list-number: ctrl-shift-N
 mono-block: ctrl-shift-M
 mono-line: ctrl-M
+open-control-panel: ctrl-alt-C
 picture: ctrl-shift-I
 preview: alt-P
 quote: ctrl-Q

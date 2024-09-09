@@ -1,6 +1,6 @@
 code-body: yes
 created: 20150117184156000
-modified: 20240315144208842
+modified: 20240716181836632
 tags: $:/tags/Macro
 title: $:/editions/tw5.com/wikitext-macros
 type: text/vnd.tiddlywiki
@@ -80,12 +80,12 @@ type: text/vnd.tiddlywiki
 \end
 
 \procedure tw-code(tiddler)
-<$codeblock language={{$tiddler$!!type}} code={{$tiddler$}}/>
+<$codeblock language={{{ [<tiddler>get[type]] }}} code={{{ [<tiddler>get[text]] }}}/>
 \end
 
 \procedure tw-code-link(tiddler)
-[[$tiddler$]]:
-<<tw-code $tiddler$>>
+<$link to=<<tiddler>>/>:
+<$transclude $variable=tw-code tiddler=<<tiddler>> />
 \end
 
 \procedure flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")

@@ -8,7 +8,7 @@ title: $:/editions/tw5.com/TiddlerInfo/Sources
 \function static-link-base() [[https://tiddlywiki.com/static/$(title)$.html]substitute[]]
 
 \function github-link-base()
-[[https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/editions/tw5.com/tiddlers/$(title)$]substitute[]]
+[[https://github.com/TiddlyWiki/TiddlyWiki5/blob/tiddlywiki-com/editions/tw5.com/tiddlers/$(title)$]substitute[]]
 \end
 
 \procedure make-static-link()

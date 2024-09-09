@@ -9,12 +9,10 @@ description: {{$:/language/Buttons/Delete/Hint}}
 	aria-label={{$:/language/Buttons/Delete/Hint}}
 	class=<<tv-config-toolbar-class>>
 >
-	<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+	<%if [<tv-config-toolbar-icons>match[yes]] %>
 		{{$:/core/images/delete-button}}
-	</$list>
-	<$list filter="[<tv-config-toolbar-text>match[yes]]">
-		<span class="tc-btn-text">
-			<$text text={{$:/language/Buttons/Delete/Caption}}/>
-		</span>
-	</$list>
+	<%endif%>
+	<%if [<tv-config-toolbar-text>match[yes]] %>
+		<span class="tc-btn-text"><$text text={{$:/language/Buttons/Delete/Caption}}/></span>
+	<%endif%>
 </$button>
