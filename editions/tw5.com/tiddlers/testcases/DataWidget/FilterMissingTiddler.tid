@@ -1,0 +1,17 @@
+title: TestCases/DataWidget/FilterMissingTiddler
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+description: Filter returns title of missing tiddler
+display-format: plaintext
+
+title: Narrative
+
+When the $filter attribute of the data widget returns the title of a missing tiddler, no tiddler should be added to the output array of tiddlers.
++
+title: Output
+
+<$data $filter="missing"/>
++
+title: ExpectedResult
+
+<p>[]</p>

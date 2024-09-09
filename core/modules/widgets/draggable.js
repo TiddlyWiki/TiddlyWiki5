@@ -119,7 +119,7 @@ DraggableWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else {
 		if(changedAttributes["class"]) {
-			this.assignDomNodeClasses();
+			this.updateDomNodeClasses();
 		}
 		this.assignAttributes(this.domNodes[0],{
 			changedAttributes: changedAttributes,

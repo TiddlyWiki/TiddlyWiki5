@@ -6,3 +6,4 @@ underline: ctrl-U
 new-image: alt-I
 new-journal: alt-J
 new-tiddler: alt-N
+refresh: ctrl-R

@@ -4,9 +4,15 @@ tags: Learning
 title: Concatenating text and variables using macro substitution
 type: text/vnd.tiddlywiki
 
+!! Important
+
 <<.from-version "5.3.0">> It is recommended to use [[substituted attributes|Substituted Attribute Values]] or the [[substitute filter operator|substitute Operator]] to concatenate text and variables.
 
 It's a frequent use case in ~TiddlyWiki that you will want to put the results of variables together with various bits of strings of text. This process in some programming languages is often referred to as "concatenating" text.
+
+---
+
+!! What is Wrong
 
 You might, for instance want to set up a template for your customer database, where links will automatically refer to additional contact information about your customer. Inside your tiddler, you might try something like this:
 

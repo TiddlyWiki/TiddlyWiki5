@@ -29,10 +29,14 @@ exports.getEditionInfo = function() {
 			for(var entryIndex=0; entryIndex<entries.length; entryIndex++) {
 				var entry = entries[entryIndex];
 				// Check if directories have a valid tiddlywiki.info
-				if(!editionInfo[entry] && $tw.utils.isDirectory(path.resolve(editionPath,entry))) {
-					var info = $tw.utils.parseJSONSafe(fs.readFileSync(path.resolve(editionPath,entry,"tiddlywiki.info"),"utf8"),null);
-					if(info) {
-						editionInfo[entry] = info;
+				// Check if the entry is a hidden directory
+				if((entry.charAt(0) !== ".") && !editionInfo[entry] && $tw.utils.isDirectory(path.resolve(editionPath,entry))) {
+					var file=path.resolve(editionPath,entry,"tiddlywiki.info");
+					if(fs.existsSync(file)) {
+						var info = $tw.utils.parseJSONSafe(fs.readFileSync(file,"utf8"),null);
+						if(info) {
+							editionInfo[entry] = info;
+						}
 					}
 				}
 			}

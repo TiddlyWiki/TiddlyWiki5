@@ -1,0 +1,54 @@
+title: ReservedWikiText
+description: Verify that reserved wikitext constructions are not parsed
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+Verifies that certain wikitext constructions that are reserved for use by other tools are not parsed by TiddlyWiki.
++
+title: TestTiddler
+
+{%%}
+(==)
+{% %}
+(= =)
+{% something %}
+(= something =)
+Inline {% something %} substitution
+Inline (= something =) substitution
+Prefix-{%
+Prefix-(=
+%}-Postfix
+=)-Postfix
+  {%
+  (=
+  %}
+  =)
++
+title: Output
+
+<$wikify name="parsetree" text={{TestTiddler}} output="parsetree">
+<$text text={{{ [<parsetree>jsonget[0],[children],[0],[text]] }}}/>
+</$wikify>
++
+title: ExpectedResult
+
+<p>
+{%%}
+(==)
+{% %}
+(= =)
+{% something %}
+(= something =)
+Inline {% something %} substitution
+Inline (= something =) substitution
+Prefix-{%
+Prefix-(=
+%}-Postfix
+=)-Postfix
+  {%
+  (=
+  %}
+  =)
+</p>

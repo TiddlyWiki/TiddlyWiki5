@@ -2,13 +2,18 @@ caption: {{$:/language/ControlPanel/Settings/DefaultMoreSidebarTab/Caption}}
 tags: $:/tags/ControlPanel/Settings
 title: $:/core/ui/ControlPanel/Settings/DefaultMoreSidebarTab
 
-\define lingo-base() $:/language/ControlPanel/Settings/DefaultMoreSidebarTab/
 \whitespace trim
+\define lingo-base() $:/language/ControlPanel/Settings/DefaultMoreSidebarTab/
 
-<$link to="$:/config/DefaultMoreSidebarTab"><<lingo Hint>></$link>
+<$link to="$:/config/DefaultMoreSidebarTab" class="tc-control-panel-item">
+	<<lingo Hint>>
+</$link>
 
-<$select tiddler="$:/config/DefaultMoreSidebarTab">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/MoreSideBar]!has[draft.of]]">
-<option value=<<currentTiddler>>><$transclude field="caption"><$text text=<<currentTiddler>>/></$transclude></option>
-</$list>
+<$select tiddler="$:/config/DefaultMoreSidebarTab" class="tc-select">
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/MoreSideBar]!has[draft.of]]">
+		<option value=<<currentTiddler>>><$transclude field="caption">
+			<$text text=<<currentTiddler>>/>
+			</$transclude>
+		</option>
+	</$list>
 </$select>

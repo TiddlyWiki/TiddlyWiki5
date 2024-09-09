@@ -5,6 +5,7 @@ The ''Dynannotate'' plugin allows annotations on textual content to be created a
 * The dynannotate widget draws clickable textual annotations, search highlights and search snippets as overlays over the top of the content that it contains
 * The selection tracker keeps track of changes to the selected text in the main browser window. It triggers an action string when the selection changes, passing it the details of the selection. It can be used to display a popup menu
 ** The original legacy selection tracker is also provided for backwards compatibility. It is much more limited, and not recommended for new projects
+* The element spotlight highlights on screen elements using a spotlight animation
 
 !! Dynannotate Widget
 
@@ -172,3 +173,12 @@ Notes:
 
 * The selection popup will disappear if the selection is cancelled; this will happen if the user clicks on any other element apart than a button. Thus it is not possible to have any interactive controls within the popup apart from buttons
 
+!! Element Spotlight
+
+The `tm-spotlight-element` message causes a spotlight effect to briefly appear to highlight a specified element. The message accepts the following parameters:
+
+|!Parameter |!Description |
+|`selector` |CSS selector of the element to highlight |
+|{//Any parameter names starting with `selector-`}// |Fallback CSS selectors to be used if the primary selector does not resolve to an element |
+
+The fallback CSS selectors are case-insensitively sorted by title before use, with uppercase letters sorting before lower case letters. The usual convention is to use numeric suffixes: `selector-00`, `selector-01` etc.

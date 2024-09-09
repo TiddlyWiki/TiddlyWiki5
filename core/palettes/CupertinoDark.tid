@@ -31,6 +31,7 @@ external-link-background: transparent
 external-link-foreground-hover: 
 external-link-foreground-visited: #BF5AF2
 external-link-foreground: #32D74B
+footnote-target-background: #747474
 foreground: #FFFFFF
 highlight-background: #ffff78
 highlight-foreground: #000000

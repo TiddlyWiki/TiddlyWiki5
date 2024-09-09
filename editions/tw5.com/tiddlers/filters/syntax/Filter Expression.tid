@@ -1,73 +1,21 @@
 created: 20150124182421000
-modified: 20211129014550442
+modified: 20230710074507466
 tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
 
+A <<.def "filter expression">> is the outermost level of the [[filter syntax|Filter Syntax]]. It consists of [[filter runs|Filter Run]] with optional [[filter run prefixes|Filter Run Prefix]]. Multiple filter runs are separated by [[whitespace|Filter Whitespace]].
+
 <$railroad text="""
-[{:
-  [: [[whitespace|"Filter Whitespace"]] ]
-  ("+"|"~"|:-|"-"|"="|":"[[named-prefix|"Named Filter Run Prefix"]])
+{ (
+    - |
+    : [[<"prefix">|"Filter Run Prefix"]]
+  )
   [[run|"Filter Run"]]
-}]
+  +  [[whitespace|"Filter Whitespace"]]
+}
 """/>
 
-A <<.def "filter expression">> is the outermost level of the [[filter syntax|Filter Syntax]]. It consists of one or more [[runs|Filter Run]].
+<<.tip """If the diagram has a single start and end line, as shown above, it means there is more info in the linked level above. The breadcrumbs can be used to navigate""">>
 
-If a run has:
-
-* no prefix, its output titles are [[dominantly appended|Dominant Append]] to the filter's output
-* the prefix `=`, output titles are appended to the filter's output without de-duplication. <<.from-version "5.1.20">> 
-* the prefix `-`, output titles are <<.em removed>> from the filter's output (if such tiddlers exist)
-* the prefix `+`, it receives the filter output so far as its input; its output then <<.em "replaces">> all filter output so far and forms the input for the next run
-* the prefix `~`, if the filter output so far is an empty list then the output titles of the run are [[dominantly appended|Dominant Append]] to the filter's output. If the filter output so far is not an empty list then the run is ignored. <<.from-version "5.1.18">>
-* named prefixes for filter runs are available. <<.from-version "5.1.23">>
-* named prefix `:filter`, it receives the filter output so far as its input. The next run is evaluated for each title of the input, removing every input title for which the output is an empty list. <<.from-version "5.1.23">>
-** See [[Filter Filter Run Prefix]].
-* named prefix `:intersection` replaces all filter output so far with titles that are present in the output of this run, as well as the output from previous runs. Forms the input for the next run. <<.from-version "5.1.23">>
-** See [[Intersection Filter Run Prefix]].
-* named prefix `:reduce` replaces all filter output so far with a single item by repeatedly applying a formula to each input title. A typical use is to add up the values in a given field of each input title. <<.from-version "5.1.23">>
-** See [[Reduce Filter Run Prefix]].
-* named prefix `:sort` sorts all filter output so far by applying this run to each input title and sorting according to that output. <<.from-version "5.2.0">>
-** See [[Sort Filter Run Prefix]].
-* named prefix `:map` transforms all filter output so far by applying this run to each input title and replacing the input title with the output of this run for that title.
-** See [[Map Filter Run Prefix]]. <<.from-version "5.2.0">>
-
-
-<<.tip "Compare named filter run prefix `:filter` with [[filter Operator]] which applies a subfilter to every input title, removing the titles that return an empty result from the subfilter">>
-
-<<.tip "Compare named filter run prefix `:reduce` with [[reduce Operator]] which is used to used to flatten a list of items down to a single item by repeatedly applying a subfilter.">> 
-
-<<.tip """Within the filter runs prefixed with `:reduce`, `:sort`, `:map` and `:filter`, the "currentTiddler" variable is set to the title of the tiddler being processed. The value of currentTiddler outside the subfilter is available in the variable "..currentTiddler".<<.from-version "5.2.0">>""" >>
-
-In technical / logical terms:
-
-|!Run |!Equivalent named prefix |!Interpretation |!Output |
-|`run` |`:or[run]` |de-duplicated union of sets |... OR run |
-|`=run` |`:all[run]` |union of sets without de-duplication |... OR run |
-|`+run` |`:and[run]` |accumulation of filter steps |... AND run |
-|`-run` |`:except[run]` |difference of sets |... AND NOT run |
-|`~run` |`:else[run]` |else |... ELSE run |
-||`:intersection`|intersection of sets||
-
-For the difference between `+` and `:intersection`, see [[Intersection Filter Run Prefix (Examples)]].
-
-The input of a run is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order). But the `+` prefix can change this:
-
-|Prefix|Input|h
-|`-`, `~`, `=`, `:intersection` or none| <$link to="all Operator">`[all[]]`</$link> tiddler titles, unless otherwise determined by the first [[filter operator|Filter Operators]]|
-|`+`, `:filter`, `:reduce`,`:sort`|the filter output of all previous runs so far|
-
-Precisely because of varying inputs, be aware that both prefixes `-` and `+` do not behave inverse to one another!
-
-For example, in both of the following, `$:/baz` will only be removed if it actually exists:
-
-* <$link to="is Operator"> `foo bar $:/baz -[is[system]]`</$link>
-* <$link to="prefix Operator">`foo bar $:/baz -[prefix[$:/]]`</$link>
-
-To understand why, consider the input for both final runs with their `-` prefix.
-
-In order to remove `$:/baz` in any case, existing or not, simply use the `+` prefix with [[negated filter operators|Filter Operators]]:
-
-* <$link to="is Operator">`foo bar $:/baz +[!is[system]]`</$link>
-* <$link to="prefix Operator">`foo bar $:/baz +[!prefix[$:/]]`</$link>
+<<.tip """If the diagram has no start and no end, as used in lower levels, it means that higher level syntax elements have been removed, to increase readability and simplicity. The breadcrumbs can be used to navigate""">>

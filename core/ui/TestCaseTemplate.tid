@@ -1,0 +1,21 @@
+title: $:/core/ui/TestCaseTemplate
+
+\parameters (hideIfPass:"no")
+\whitespace trim
+<$let
+	linkTarget="yes"
+	displayFormat={{!!display-format}}
+	testcaseTiddler=<<currentTiddler>>
+>
+	<$testcase
+		testOutput="Output"
+		testExpectedResult="ExpectedResult"
+		testActions="Actions"
+		testHideIfPass=<<hideIfPass>>
+	>
+		<$data $filter={{!!import}}/>
+		<$data $compound-filter={{!!import-compound}}/>
+		<$data $compound-tiddler=<<currentTiddler>>/>
+		<%if [{!!description}!is[blank]] %><$data title="Description" text={{!!description}}/><%endif%>
+	</$testcase>
+</$let>

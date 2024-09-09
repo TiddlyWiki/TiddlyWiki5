@@ -199,6 +199,12 @@ Settings/TitleLinks/Caption: 条目标题
 Settings/TitleLinks/Hint: 可选地显示条目标题为链接
 Settings/TitleLinks/No/Description: 不显示条目标题为链接
 Settings/TitleLinks/Yes/Description: 显示条目标题为链接
+SocialCard/Caption: 社交媒体卡
+SocialCard/Domain/Prompt: 显示链接的网域名称（例如 ''tiddlywiki.com''）
+SocialCard/Hint: 社交和消息服务使用此信息来显示在线托管时指向此 TiddlyWiki 的链接的预览卡
+SocialCard/PreviewUrl/Prompt: 用于预览此 TiddlyWiki 图像的完整网址
+SocialCard/PreviewUrl/Preview: 预览图像：
+SocialCard/Url/Prompt: 此 TiddlyWiki 的完整网址
 StoryTiddler/Caption: 故事条目
 StoryTiddler/Hint: 此规则级联用于动态选择模板，以便在故事河中显示条目。
 StoryView/Caption: 视图模式
@@ -207,6 +213,12 @@ Stylesheets/Caption: 样式表
 Stylesheets/Expand/Caption: 全部展开
 Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式表条目呈现的 CSS
 Stylesheets/Restore/Caption: 复原
+TestCases/Caption: 测试案例
+TestCases/Hint: 测试案例是用于测试和学习的自给自足的范例
+TestCases/All/Caption: 所有测试案例
+TestCases/All/Hint: 所有测试案例
+TestCases/Failed/Caption: 失败的测试案例
+TestCases/Failed/Hint: 仅失败的测试案例
 Theme/Caption: 布局主题
 Theme/Prompt: 当前的布局主题：
 TiddlerColour/Caption: 条目颜色
@@ -230,3 +242,7 @@ ViewTemplateBody/Caption: 查看模板主体
 ViewTemplateBody/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的主体。
 ViewTemplateTitle/Caption: 查看模板标题
 ViewTemplateTitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标题。
+ViewTemplateSubtitle/Caption: 查看模板副标题
+ViewTemplateSubtitle/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的副标题。
+ViewTemplateTags/Caption: 查看模板标签区
+ViewTemplateTags/Hint: 默认的查看模板使用此规则级联，动态选择模板以显示条目的标签区域。

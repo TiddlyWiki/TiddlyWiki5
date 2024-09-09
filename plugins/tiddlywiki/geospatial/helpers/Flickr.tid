@@ -1,0 +1,99 @@
+title: $:/plugins/tiddlywiki/geospatial/helpers/Flickr
+tags: $:/tags/Global
+
+<!--
+Get items from a Flickr album/interestingness/collection etc.
+-->
+\procedure flickr-get-items(per_page:"100",page_number:"1",method:"flickr.photosets.getPhotos",paramName:"group_id",paramValue:"",resultPhotoRoot:"photoset",photoTiddlerTemplate)
+
+\procedure completion()
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+	<$action-log msg="In completion"/>
+	<$action-log/>
+	<!-- Success -->
+	<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+		<$list filter="[<data>jsonindexes<resultPhotoRoot>,[photo]]" variable="photoIndex">
+			<$let
+				photoData={{{ [<data>jsonextract<resultPhotoRoot>,[photo],<photoIndex>] }}}
+				photoFarm={{{ [<photoData>jsonget[farm]] }}}
+				photoServer={{{ [<photoData>jsonget[server]] }}}
+				photoID={{{ [<photoData>jsonget[id]] }}}
+				photoSecret={{{ [<photoData>jsonget[secret]] }}}
+				photoTiddlerTitleFilter={{{ [<photoTiddlerTemplate>getindex[title]] }}}
+				photoTiddlerTitle={{{ [subfilter<photoTiddlerTitleFilter>] }}}
+			>
+				<$list filter="[<photoTiddlerTemplate>indexes[]]" variable="fieldName">
+					<$let fieldValueFilter={{{ [<photoTiddlerTemplate>getindex<fieldName>] }}}>
+						<$action-setfield
+							$tiddler=<<photoTiddlerTitle>>
+							$field=<<fieldName>>
+							$value={{{ [subfilter<fieldValueFilter>] }}}
+						/>
+					</$let>
+				</$list>
+			</$let>
+		</$list>
+		<$let
+			pages={{{ [<data>jsonget[photos],[pages]] }}}
+		>
+			<$list filter="[<page_number>compare:number:lt<pages>]" variable="ignore">
+				<$macrocall $name="flickr-get-items" page_page=<<per_page>> page_number={{{ [<page_number>add[1]] }}} method=<<method>> resultPhotoRoot=<<resultPhotoRoot>> photoTiddlerTemplate=<<photoTiddlerTemplate>>/>
+			</$list>
+		</$let>
+	</$list>
+\end completion
+
+\procedure progress()
+\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+	<$action-log message="In progress-actions"/>
+\end progress
+
+\procedure request-url()
+https://api.flickr.com/services/rest/
+\end request-url
+
+<$let 
+	photoTiddlerTemplate={{{ [<photoTiddlerTemplate>!is[blank]else[$:/plugins/tiddlywiki/geospatial/helpers/Flickr/DefaultPhotoTemplate]] }}}
+>
+	<$action-sendmessage
+		$message="tm-http-request"
+		url=<<request-url>>
+		method="GET"
+		query-method=<<method>>
+		query-extras="geo"
+		query-per_page=<<per_page>>
+		query-page=<<page_number>>
+		query-format="json"
+		query-nojsoncallback="1"
+		$names="[<paramName>addprefix[query-]]"
+		$values=<<paramValue>>
+		header-accept="application/json"
+		password-query-api_key="flickr-api-key"
+		bind-status="$:/temp/flickr/status"
+		bind-progress="$:/temp/flickr/progress"
+		oncompletion=<<completion>>
+		onprogress=<<progress>>
+		var-method=<<method>>
+		var-per_page=<<per_page>>
+		var-page_number=<<page_number>>
+		var-resultPhotoRoot=<<resultPhotoRoot>>
+		var-photoTiddlerTemplate=<<photoTiddlerTemplate>>
+	/>
+</$let>
+\end
+
+\procedure flickr-get-photos-of-user-items(userID,photoTiddlerTemplate)
+<$macrocall $name="flickr-get-items" method="flickr.people.getPhotosOf" paramName="user_id" paramValue=<<userID>> resultPhotoRoot="photos" photoTiddlerTemplate=<<photoTiddlerTemplate>>/>
+\end
+
+\procedure flickr-get-group-items(groupID,photoTiddlerTemplate)
+<$macrocall $name="flickr-get-items" method="flickr.groups.pools.getPhotos" paramName="group_id" paramValue=<<groupID>> resultPhotoRoot="photos" photoTiddlerTemplate=<<photoTiddlerTemplate>>/>
+\end
+
+\procedure flickr-get-album-items(albumID,photoTiddlerTemplate)
+<$macrocall $name="flickr-get-items" method="flickr.photosets.getPhotos" paramName="photoset_id" paramValue=<<albumID>> resultPhotoRoot="photoset" photoTiddlerTemplate=<<photoTiddlerTemplate>>/>
+\end
+
+\procedure flickr-get-interesting-items(photoTiddlerTemplate)
+<$macrocall $name="flickr-get-items" method="flickr.interestingness.getList" resultPhotoRoot="photos" photoTiddlerTemplate=<<photoTiddlerTemplate>>/>
+\end
