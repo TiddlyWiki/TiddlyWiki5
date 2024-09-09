@@ -70,12 +70,12 @@ exports["wrap-selection"] = function(event,operation) {
 	// options: lenPrefix, lenSuffix
 	function removePrefixSuffix(options) {
 		options = options || {};
-		var lenPrefix = options.lenPrefix || 0;
-		var lenSuffix = options.lenSuffix || 0;
+		var _lenPrefix = options.lenPrefix || 0;
+		var _lenSuffix = options.lenSuffix || 0;
 
-		o.cutStart = o.selStart - lenPrefix;
-		o.cutEnd = o.selEnd + lenSuffix;
-		o.replacement = (lenPrefix || lenSuffix) ? o.selection : o.selection.substring(prefix.length, o.selection.length - suffix.length);
+		o.cutStart = o.selStart - _lenPrefix;
+		o.cutEnd = o.selEnd + _lenSuffix;
+		o.replacement = (_lenPrefix || _lenSuffix) ? o.selection : o.selection.substring(prefix.length, o.selection.length - suffix.length);
 		o.newSelStart = o.cutStart;
 		o.newSelEnd = o.cutStart + o.replacement.length;
 	}
