@@ -30,7 +30,7 @@ Other fields used by the core are:
 |`description` |<<lingo description>> |
 |`draft.of` |<<lingo draft.of>> |
 |`draft.title` |<<lingo draft.title>> |
-|`explicitState`|<<.from-version "5.3.4">> <<lingo explicitState>>|
+|`explicitState`|<<.from-version "5.3.6">> <<lingo explicitState>>|
 |`footer` |<<lingo footer>> |
 |`hide-body`|<<lingo hide-body>>|
 |`icon` |<<lingo icon>> |
