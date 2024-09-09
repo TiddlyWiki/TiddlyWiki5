@@ -21,7 +21,7 @@ It uses the same method as the create new tiddler button, a number is appended t
 : <<.from-version "5.2.0">> An ''optional'' template string can be used to allow you maximum flexibility. If the template string is used, there will always be a counter value. 
 
 ; startCount
-: <<.from-version "5.3.4">> An ''optional'' parameter, that sets the initial value for the new tiddler counter.
+: <<.from-version "5.3.6">> An ''optional'' parameter, that sets the initial value for the new tiddler counter.
 
 !! Template String
 
