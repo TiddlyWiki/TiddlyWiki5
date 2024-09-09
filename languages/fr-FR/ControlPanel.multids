@@ -206,6 +206,12 @@ Stylesheets/Caption: Feuilles de style
 Stylesheets/Expand/Caption: Tout déployer
 Stylesheets/Hint: Voici le rendu CSS courant pour les tiddlers feuilles de style tagués avec <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restaurer
+TestCases/Caption: Scénarios de test
+TestCases/Hint: Les scénarios de test sont des exemples sans dépendance extérieure, conçus à des fins de tests et d'apprentissage
+TestCases/All/Caption: Tous les scénarios de test
+TestCases/All/Hint: Tous les scénarios de test définis dans ce wiki
+TestCases/Failed/Caption: Scénarios de test en échec 
+TestCases/Failed/Hint: Seulement les scénarios de test qui échouent
 Theme/Caption: Thème
 Theme/Prompt: Thème courant :
 TiddlerFields/Caption: Champs des tiddlers

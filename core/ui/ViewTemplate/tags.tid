@@ -2,6 +2,4 @@ title: $:/core/ui/ViewTemplate/tags
 tags: $:/tags/ViewTemplate
 
 \whitespace trim
-<$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
-<div class="tc-tags-wrapper"><$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/></div>
-</$reveal>
+<$transclude tiddler={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/ViewTemplateTagsFilter]!is[draft]get[text]] :and[!is[blank]else[$:/core/ui/ViewTemplate/tags/default]] }}} />

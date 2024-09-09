@@ -61,7 +61,7 @@ exports.startup = function() {
 				// Collect the shadow tiddlers of any modified plugins
 				$tw.utils.each(changes.modifiedPlugins,function(pluginTitle) {
 					var pluginInfo = $tw.wiki.getPluginInfo(pluginTitle);
-					if(pluginInfo) {
+					if(pluginInfo && pluginInfo.tiddlers) {
 						$tw.utils.each(Object.keys(pluginInfo.tiddlers),function(title) {
 							changedShadowTiddlers[title] = false;
 						});

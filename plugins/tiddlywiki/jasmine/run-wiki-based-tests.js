@@ -12,7 +12,7 @@ Tests the wiki based tests
 /*global $tw: false */
 "use strict";
 
-var TEST_WIKI_TIDDLER_FILTER = "[type[text/vnd.tiddlywiki-multiple]tag[$:/tags/wiki-test-spec]]";
+var TEST_WIKI_TIDDLER_FILTER = "[all[tiddlers+shadows]type[text/vnd.tiddlywiki-multiple]tag[$:/tags/wiki-test-spec]]";
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
@@ -24,29 +24,32 @@ describe("Wiki-based tests", function() {
 		var tiddler = $tw.wiki.getTiddler(title);
 		it(tiddler.fields.title + ": " + tiddler.fields.description, function() {
 			// Add our tiddlers
-			var wiki = new $tw.Wiki();
+			var wiki = new $tw.Wiki(),
+				coreTiddler = $tw.wiki.getTiddler("$:/core");
+			if(coreTiddler) {
+				wiki.addTiddler(coreTiddler);
+			}
 			wiki.addTiddlers(readMultipleTiddlersTiddler(title));
 			// Complain if we don't have the ouput and expected results
 			if(!wiki.tiddlerExists("Output")) {
 				throw "Missing 'Output' tiddler";
 			}
-			if(!wiki.tiddlerExists("ExpectedResult")) {
-				throw "Missing 'ExpectedResult' tiddler";
+			if(wiki.tiddlerExists("ExpectedResult")) {
+				// Construct the widget node
+				var text = "{{Output}}\n\n";
+				var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+				// Render the widget node to the DOM
+				var wrapper = renderWidgetNode(widgetNode);
+				// Clear changes queue
+				wiki.clearTiddlerEventQueue();
+				// Run the actions if provided
+				if(wiki.tiddlerExists("Actions")) {
+					widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
+					refreshWidgetNode(widgetNode,wrapper);
+				}
+				// Test the rendering
+				expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 			}
-			// Construct the widget node
-			var text = "{{Output}}\n\n";
-			var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
-			// Render the widget node to the DOM
-			var wrapper = renderWidgetNode(widgetNode);
-			// Clear changes queue
-			wiki.clearTiddlerEventQueue();
-			// Run the actions if provided
-			if(wiki.tiddlerExists("Actions")) {
-				widgetNode.invokeActionString(wiki.getTiddlerText("Actions"));
-				refreshWidgetNode(widgetNode,wrapper);
-			}
-			// Test the rendering
-			expect(wrapper.innerHTML).toBe(wiki.getTiddlerText("ExpectedResult"));
 		});
 	});
 

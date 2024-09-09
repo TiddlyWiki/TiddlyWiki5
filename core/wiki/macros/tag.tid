@@ -21,7 +21,9 @@ color:$(foregroundColor)$;
 >
 	<<__actions__>>
 	<$transclude tiddler=<<__icon__>>/>
-	<$view tiddler=<<__tag__>> field="title" format="text" />
+	<span class={{{ [<__tag__>is[missing]then[tc-tag-missing]else[tc-tag-exists]] }}}>
+		<$view tiddler=<<__tag__>> field="title" format="text" />
+	</span>
 </$element-tag$>
 </$let>
 \end

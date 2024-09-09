@@ -1,0 +1,20 @@
+title: Macros/unusedtitle/basic-params
+description: test <<unusedtitle>> with basic macro parameters
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+<<unusedtitle>>
+
+<!-- EDGECASE: separator is ignored if tiddler title does not exist -->
+<<unusedtitle separator:"-">>
+
+<<unusedtitle baseName:"anotherBase">>
+
+<<unusedtitle baseName:"About" separator:"-">>
+
++
+title: ExpectedResult
+
+<p>New Tiddler</p><p>New Tiddler</p><p>anotherBase</p><p>About</p>

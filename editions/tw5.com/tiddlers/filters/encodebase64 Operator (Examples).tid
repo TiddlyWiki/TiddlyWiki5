@@ -1,0 +1,10 @@
+created: 20240831025156306
+modified: 20240831041537886
+tags: [[encodebase64 Operator]] [[Operator Examples]]
+title: encodebase64 Operator (Examples)
+
+<<.operator-example 1 "[[test]encodebase64[]]">>
+
+<<.operator-example 2 "[[😎]encodebase64[]]">>
+
+<<.operator-example 3 "[[😎]encodebase64:urlsafe[]]">>

@@ -1,12 +1,14 @@
 created: 20140103134551508
-modified: 20171113131640857
+modified: 20230803051340676
 tags: [[Saving with TiddlyFox]]
 title: Saving with TiddlyFox on Android
 type: text/vnd.tiddlywiki
 
+<<.deprecated-since "FireFox 57" "Saving">>
+
 (Alternatively, see the [[video tutorial|TiddlyWiki on Firefox for Android Video]])
 
-# Ensure you have the latest version of [[Firefox for Android]]
+# Ensure you have the latest version of [[Firefox for Android|http://getfirefox.com]]
 #* http://getfirefox.com
 # Install the latest release of the TiddlyFox extension from:
 #* https://addons.mozilla.org/en-GB/firefox/addon/tiddlyfox/

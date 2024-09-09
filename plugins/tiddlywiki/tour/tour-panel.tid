@@ -20,11 +20,9 @@ tags: $:/tags/PageTemplate
 	<%endif%>
 	<%if [function[tour-is-last-step]] %>
 		<$confetti/>
-		<$confetti delay=100/>
-		<$confetti delay=200/>
-		<$confetti delay=300/>
-		<$confetti delay=400/>
-		<$confetti delay=500/>
+		<$confetti delay=300 originY=0.6  spread=100 scalar=1.5/>
+		<$confetti delay=400 originY=0.55 spread=130/>
+		<$confetti delay=500 originY=0.55 spread=170 scalar=2/>
 	<%endif%>
 </div>
 \end
