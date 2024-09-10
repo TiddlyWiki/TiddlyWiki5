@@ -1494,9 +1494,13 @@ exports.search = function(text,options) {
 	return results;
 };
 
-/*
-Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
-*/
+/**
+ * Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
+ *
+ * @param {string} title - The title of the tiddler.
+ * @param {string} [defaultText] - The default text to return if the tiddler is missing.
+ * @returns {string | null | undefined} - The text of the tiddler, undefined if the tiddler is missing, or null if the tiddler is being lazily loaded.
+ */
 exports.getTiddlerText = function(title,defaultText) {
 	var tiddler = this.getTiddler(title);
 	// Return undefined if the tiddler isn't found
