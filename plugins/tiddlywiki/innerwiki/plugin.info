@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/innerwiki",
 	"name": "Innerwiki",
 	"description": "Innerwikis for screenshots and hacking",
-	"list": "readme docs examples"
+	"list": "readme docs examples",
+	"stability": "STABILITY_2_STABLE"
 }

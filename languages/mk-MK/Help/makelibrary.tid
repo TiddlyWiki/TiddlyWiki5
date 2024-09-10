@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Го конструира плагенот за библиотеката потребен за процес на надградба
+
+Constructs the `$:/UpgradeLibrary` tiddler for the upgrade process.
+
+The upgrade library is formatted as an ordinary plugin tiddler with the plugin type `library`. It contains a copy of each of the plugins, themes and language packs available within the TiddlyWiki5 repository.
+
+This command is intended for internal use; it is only relevant to users constructing a custom upgrade procedure.
+
+```
+--makelibrary <title>
+```
+
+The title argument defaults to `$:/UpgradeLibrary`.

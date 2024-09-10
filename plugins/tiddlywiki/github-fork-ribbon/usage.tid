@@ -1,26 +1,81 @@
 title: $:/plugins/tiddlywiki/github-fork-ribbon/usage
 
-Copy appropriate chunks on a new tiddler and tag it `$:/tags/PageControls`. Name of the new tiddler does not matter. Only the tag matters.
+\procedure ribbonCode()
+\whitespace trim
+<$transclude $tiddler="$:/plugins/tiddlywiki/github-fork-ribbon/template" top="30px" fixed=fixed color="green"/>
+\end
 
-```
-<!-- TOP RIGHT RIBBON: START COPYING HERE -->
-<div class="github-fork-ribbon-wrapper right"><div class="github-fork-ribbon"><a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on ~GitHub</a></div>
-</div>
-<!-- TOP RIGHT RIBBON: END COPYING HERE -->
+\procedure ribbonCreateActions()
+<% if [[$:/github-ribbon]!is[tiddler]] %>
+	<$action-setfield $tiddler="$:/github-ribbon" $field="text" $value=<<ribbonCode>>
+		tags="$:/tags/PageTemplate" 
+		code-body="yes" />
+<% endif %>
+<$action-navigate $to="$:/github-ribbon" />
+\end
 
-<!-- TOP LEFT RIBBON: START COPYING HERE -->
-<div class="github-fork-ribbon-wrapper left"><div class="github-fork-ribbon"><a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on ~GitHub</a></div>
-</div>
-<!-- TOP LEFT RIBBON: END COPYING HERE -->
+\procedure createRibbon()
+<$button actions=<<ribbonCreateActions>> >
+<%if [[$:/github-ribbon]!is[tiddler]] %>
+Create
+<% else %>
+Show
+<% endif %> ~$:/github-ribbon
+</$button>
+\end
+
+\procedure ribbonToggleTagActions()
+<$action-listops $tiddler="$:/github-ribbon" $field="tags" $subfilter="+[toggle[$:/tags/PageTemplate]]" />
+\end
+
+\procedure ribbonToggleTag() <$button actions=<<ribbonToggleTagActions>> >Toggle Tag</$button>
 
 
-<!-- BOTTOM RIGHT RIBBON: START COPYING HERE -->
-<div class="github-fork-ribbon-wrapper right-bottom"><div class="github-fork-ribbon"><a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on ~GitHub</a></div>
-</div>
-<!-- BOTTOM RIGHT RIBBON: END COPYING HERE -->
+`$:/plugins/tiddlywiki/github-fork-ribbon/template` is a template tiddler, that can be used with a transclusion and parameters.
 
-<!-- BOTTOM LEFT RIBBON: START COPYING HERE -->
-<div class="github-fork-ribbon-wrapper left-bottom"><div class="github-fork-ribbon"><a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on ~GitHub</a></div>
-</div>
-<!-- BOTTOM LEFT RIBBON: END COPYING HERE -->
-```
+!! Usage
+
+* Create a new tiddler eg: $:/github-ribbon
+* Tag it `$:/tags/PageTemplate`
+* Copy the code below
+
+<pre><$text text=<<ribbonCode>>/></pre>
+
+<<createRibbon>> <<ribbonToggleTag>>
+
+!! Parameters
+
+; position
+: "right" (default), "left", "right-bottom" and "left-bottom"
+
+; url
+: Target URL, default: https://github.com/Jermolene/TiddlyWiki5
+
+; text
+: Ribbon text. default: `Fork me on ~GitHub`
+
+; color
+: Ribbon background color: default: `#aa0000`
+
+; top
+: Offset from the top if postion is top. default: `0` eg: `30px`, if the menu-toolbar plugin is installed
+
+; bottom
+: Offset from the bottom in px
+
+; left
+: Offset from the left in px
+
+; right
+: Offset from the right in px
+
+; fixed
+: If position is ''top'', the ribbon will scroll out of the viewport by default
+: If the parameter `fixed="fixed"` it will be fixed
+
+!! Remove the Ribbon
+
+* Disable the plugin
+* ''Remove the tag'' from $:/github-ribbon tiddler
+* Delete the $:/github-ribbon tiddler
+* <<ribbonToggleTag>>

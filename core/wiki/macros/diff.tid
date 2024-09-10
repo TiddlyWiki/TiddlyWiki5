@@ -1,37 +1,37 @@
 title: $:/core/macros/diff
-tags: $:/tags/Macro
+tags: $:/tags/Macro $:/tags/Global
 
-\define compareTiddlerText(sourceTiddlerTitle,sourceSubTiddlerTitle,destTiddlerTitle,destSubTiddlerTitle)
 \whitespace trim
-<$set name="source" tiddler=<<__sourceTiddlerTitle__>> subtiddler=<<__sourceSubTiddlerTitle__>>>
-<$set name="dest" tiddler=<<__destTiddlerTitle__>> subtiddler=<<__destSubTiddlerTitle__>>>
-<$diff-text source=<<source>> dest=<<dest>>/>
-</$set>
+
+\procedure compareTiddlerText(sourceTiddlerTitle,sourceSubTiddlerTitle,destTiddlerTitle,destSubTiddlerTitle)
+<$set name="source" tiddler=<<sourceTiddlerTitle>> subtiddler=<<sourceSubTiddlerTitle>>>
+	<$set name="dest" tiddler=<<destTiddlerTitle>> subtiddler=<<destSubTiddlerTitle>>>
+		<$diff-text source=<<source>> dest=<<dest>>/>
+	</$set>
 </$set>
 \end
 
-\define compareTiddlers(sourceTiddlerTitle,sourceSubTiddlerTitle,destTiddlerTitle,destSubTiddlerTitle,exclude)
-\whitespace trim
+\procedure compareTiddlers(sourceTiddlerTitle,sourceSubTiddlerTitle,destTiddlerTitle,destSubTiddlerTitle,exclude)
 <table class="tc-diff-tiddlers">
-<tbody>
-<$set name="sourceFields" filter="[<__sourceTiddlerTitle__>fields[]sort[]]">
-<$set name="destFields" filter="[<__destSubTiddlerTitle__>subtiddlerfields<__destTiddlerTitle__>sort[]]">
-<$list filter="[enlist<sourceFields>] [enlist<destFields>] -[enlist<__exclude__>] +[sort[]]" variable="fieldName">
-<tr>
-<th>
-<$text text=<<fieldName>>/>
-</th>
-<td>
-<$set name="source" tiddler=<<__sourceTiddlerTitle__>> subtiddler=<<__sourceSubTiddlerTitle__>> field=<<fieldName>>>
-<$set name="dest" tiddler=<<__destTiddlerTitle__>> subtiddler=<<__destSubTiddlerTitle__>> field=<<fieldName>>>
-<$diff-text source=<<source>> dest=<<dest>>>&#32;</$diff-text>
-</$set>
-</$set>
-</td>
-</tr>
-</$list>
-</$set>
-</$set>
-</tbody>
+	<tbody>
+		<$set name="sourceFields" filter="[<sourceTiddlerTitle>fields[]sort[]]">
+			<$set name="destFields" filter="[<destSubTiddlerTitle>subtiddlerfields<destTiddlerTitle>sort[]]">
+			<$list filter="[enlist<sourceFields>] [enlist<destFields>] -[enlist<exclude>] +[sort[]]" variable="fieldName">
+				<tr>
+					<th>
+						<$text text=<<fieldName>>/>
+					</th>
+					<td>
+						<$set name="source" tiddler=<<sourceTiddlerTitle>> subtiddler=<<sourceSubTiddlerTitle>> field=<<fieldName>>>
+							<$set name="dest" tiddler=<<destTiddlerTitle>> subtiddler=<<destSubTiddlerTitle>> field=<<fieldName>>>
+								<$diff-text source=<<source>> dest=<<dest>>>&#32;</$diff-text>
+							</$set>
+						</$set>
+					</td>
+				</tr>
+			</$list>
+			</$set>
+		</$set>
+	</tbody>
 </table>
 \end

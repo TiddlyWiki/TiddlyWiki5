@@ -1,0 +1,37 @@
+title: HelloThere
+
+//The latest build of the Geospatial Plugin can be found at:// https://tiddlywiki5-git-geospatial-plugin-jermolene.vercel.app/plugins/tiddlywiki/geospatial/index.html
+
+!! Introduction
+
+{{$:/plugins/tiddlywiki/geospatial/readme}}
+
+!! Prerequisites
+
+This demo requires that the API keys needed to access external services be obtained by the end user and manually configured. These keys are stored in the browser and so only need to be set up once. See the ''Settings'' tab of [[the plugin|$:/plugins/tiddlywiki/geospatial]] for details.
+
+!! Demos
+
+* Visit the ~GeoFeatures and ~GeoMarkers tabs to see the data loaded into this wiki
+* Click on a link to a layer or marker to open the corresponding tiddler that includes a map
+* Use the Flickr tab to retrieve geotagged photographs from Flickr
+* Visit a ~GeoMarker tiddler and use the "Call ~TravelTime" button to calculate an isochrone from that location using the ~TravelTime API
+
+! Map Showing All Features and Markers
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	startPosition="bounds"
+>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoBaseLayer]]">
+		<$geobaselayer title=<<currentTiddler>>/>
+	</$list>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}} name={{!!caption}}/>
+	</$list>
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoFeature]]">
+		<$geolayer json={{!!text}} color={{!!color}} name={{!!caption}}/>
+	</$list>
+</$geomap>
+
+<<tabs tabsList:"[all[tiddlers+shadows]tag[$:/tags/GeospatialDemo]]" default:"GeoMarkers">>

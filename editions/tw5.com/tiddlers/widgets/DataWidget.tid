@@ -1,0 +1,42 @@
+caption: data
+created: 20240507221902644
+modified: 20240507221902644
+tags: Widgets
+title: DataWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The data widget is used with the <<.wlink TestCaseWidget>> widget and the [[Innerwiki Plugin]] to specify payload tiddlers that are to be included in the test case or innerwiki.
+
+! Content and Attributes
+
+The content of the data widget is ignored. It supports the following attributes:
+
+|!Attribute |!Description |
+|<<.attr $tiddler>> |Optional title of a tiddler to be used as a payload tiddler (optional) |
+|<<.attr $filter>> |Optional filter string identifying tiddlers to be used as payload tiddlers (optional) |
+|<<.attr $compound-tiddler>> |Optional title of a tiddler containing payload tiddlers in `text/vnd.tiddlywiki-multiple` format (see below) |
+|//any attribute<br>not starting<br>with $// |Field values to be assigned to the payload tiddler(s) |
+
+The data widget is not rendered when used within the <<.wlink TestCaseWidget>> widget or the [[Innerwiki Plugin]] but for ease of testing, when used elsewhere it renders a JSON representation of the payload tiddlers.
+
+Without any of the attributes <<.attr $tiddler>>, <<.attr $filter>> or <<.attr $compound-tiddler>>, any attributes whose name does not start with $ are used as the field values for creating a single new tiddler.
+
+<<testcase "TestCases/DataWidget/SimpleTiddler">>
+
+If any of the attributes <<.attr $tiddler>>, <<.attr $filter>> or <<.attr $compound-tiddler>> are specified then they are used to generate base tiddlers that are then modified with the addition of fields derived from any attributes whose name does not start with $.
+
+The attribute <<.attr $tiddler>> is used to ingest a single tiddler from the wiki containing the data widget:
+
+<<testcase "TestCases/DataWidget/ImportedTiddler">>
+
+The attribute <<.attr $filter>> is used to ingest multiple tiddlers from the wiki containing the data widget:
+
+<<testcase "TestCases/DataWidget/ImportedFilter">>
+
+! Compound Tiddlers
+
+[[Compound tiddlers|CompoundTiddlers]] provide a way to easily create multiple tiddlers from within a single tiddler. They are contained in tiddlers of type `text/vnd.tiddlywiki-multiple`. The text field consists of a series of tiddlers in the same format as `.tid` files, each separated by a line containing a single `+` character.
+
+<<testcase "TestCases/DataWidget/ImportCompound">>

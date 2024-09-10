@@ -1,0 +1,30 @@
+created: 20240721163229297
+description: Reveal widget for accordion or slider functionality
+modified: 20240721172211283
+tags: $:/tags/wiki-test-spec
+title: TestCases/RevealWidget/AccordionSlider
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Two distinct buttons toggle the state of the tiddler value. Two reveal widgets. The first displays the button to show the content. The second displays both the content and the button to hide the content.
++
+title: Output
+
+<$reveal type="nomatch" state="$:/state/SampleReveal2" text="show">
+
+<$button set="$:/state/SampleReveal2" setTo="show">Show me</$button>
+
+</$reveal>
+<$reveal type="match" state="$:/state/SampleReveal2" text="show">
+
+<$button set="$:/state/SampleReveal2" setTo="hide">Hide me</$button>
+
+! This is the revealed content
+And this is some text
+
+</$reveal>
++
+title: ExpectedResult
+
+<div class=" tc-reveal"><p><button class="">Show me</button></p></div><div class=" tc-reveal" hidden="true"></div>

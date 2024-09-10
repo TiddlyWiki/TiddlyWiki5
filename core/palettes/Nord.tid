@@ -82,6 +82,10 @@ sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #A3BE8C
 sidebar-tiddler-link-foreground: #81A1C1
 site-title-foreground: <<colour tiddler-title-foreground>>
+stability-deprecated: #bf616a
+stability-experimental: #d08770
+stability-legacy: #88c0d0
+stability-stable: #a3be8c
 static-alert-foreground: #B48EAD
 tab-background-selected: #ECEFF4
 tab-background: #4C566A

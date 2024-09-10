@@ -1,0 +1,14 @@
+title: GeoFeatures
+tags: $:/tags/GeospatialDemo
+
+This is a list of all the tiddlers containing ~GeoJSON feature collections in this wiki (identified by the tag <<tag "$:/tags/GeoFeature">>). A ~GeoJSON feature collection is a list of features, each of which consists of a geometry and associated metadata.
+
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoFeature]sort[caption]]">
+<li>
+<$link>
+<$transclude field="caption"><$view field="title"/></$view>
+</$link>
+</li>
+</$list>
+</ul>

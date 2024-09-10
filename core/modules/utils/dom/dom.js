@@ -292,7 +292,9 @@ exports.copyToClipboard = function(text,options) {
 	} catch (err) {
 	}
 	if(!options.doNotNotify) {
-		$tw.notifier.display(succeeded ? "$:/language/Notifications/CopiedToClipboard/Succeeded" : "$:/language/Notifications/CopiedToClipboard/Failed");
+		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
+			failureNotification = options.failureNotification || "$:/language/Notifications/CopiedToClipboard/Failed"
+		$tw.notifier.display(succeeded ? successNotification : failureNotification);
 	}
 	document.body.removeChild(textArea);
 };

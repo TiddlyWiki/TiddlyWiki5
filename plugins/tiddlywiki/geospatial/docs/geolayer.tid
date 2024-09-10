@@ -1,0 +1,24 @@
+title: $:/plugins/tiddlywiki/geospatial/docs/geolayer
+caption: geolayer widget
+tags: $:/tags/GeospatialDocs
+
+!! `<$geolayer>` widget
+
+The `<$geolayer>` widget is used inside the `<$geomap>` widget to indicate the layers and markers to display.
+
+The following attributes are supported:
+
+|!Attribute |!Description |
+|''json'' |Optional GeoJSON Feature Collection to be rendered |
+|''name'' |Optional name to be displayed for this layer |
+|''color'' |Optional CSS colour for this layer |
+|''lat'' |Optional latitude of marker if json attribute missing |
+|''long'' |Optional longitude of marker if json attribute missing |
+|''alt'' |Optional altitude of marker if json attribute missing |
+|''draggable'' |Set to "yes" to make the marker draggable |
+|''updateActions'' |Optional actions when the marker is dragged other otherwise modified. The variables ''lat'' and ''long'' contain the new coordinates of the marker |
+
+Note that the `<$geolayer>` widget can be used in one of two modes:
+
+* With the ''json'' attibute specifying the layer to be drawn
+* With the ''lat'', ''long'' and optional ''alt'' attributes specifying a marker to be drawn

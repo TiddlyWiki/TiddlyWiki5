@@ -2,9 +2,17 @@ title: $:/core/ui/ControlPanel/Settings/TitleLinks
 tags: $:/tags/ControlPanel/Settings
 caption: {{$:/language/ControlPanel/Settings/TitleLinks/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/ControlPanel/Settings/TitleLinks/
-<$link to="$:/config/Tiddlers/TitleLinks"><<lingo Hint>></$link>
 
-<$radio tiddler="$:/config/Tiddlers/TitleLinks" value="yes"> <<lingo Yes/Description>> </$radio>
+<$link to="$:/config/Tiddlers/TitleLinks" class="tc-control-panel-item">
+	<<lingo Hint>>
+</$link>
 
-<$radio tiddler="$:/config/Tiddlers/TitleLinks" value="no"> <<lingo No/Description>> </$radio>
+<$radio tiddler="$:/config/Tiddlers/TitleLinks" value="yes">
+	<span class="tc-tiny-gap-left"><<lingo Yes/Description>></span>
+</$radio>
+
+<$radio tiddler="$:/config/Tiddlers/TitleLinks" value="no">
+	<span class="tc-tiny-gap-left"><<lingo No/Description>></span>
+</$radio>

@@ -207,6 +207,12 @@ Stylesheets/Caption: 样式表
 Stylesheets/Expand/Caption: 全部展开
 Stylesheets/Hint: 这是当前标签为 <<tag "$:/tags/Stylesheet">> 的样式表条目呈现的 CSS
 Stylesheets/Restore/Caption: 复原
+TestCases/Caption: 测试案例
+TestCases/Hint: 测试案例是用于测试和学习的自给自足的范例
+TestCases/All/Caption: 所有测试案例
+TestCases/All/Hint: 所有测试案例
+TestCases/Failed/Caption: 失败的测试案例
+TestCases/Failed/Hint: 仅失败的测试案例
 Theme/Caption: 布局主题
 Theme/Prompt: 当前的布局主题：
 TiddlerColour/Caption: 条目颜色

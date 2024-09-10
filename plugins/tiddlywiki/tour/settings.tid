@@ -1,0 +1,154 @@
+title: $:/plugins/tiddlywiki/tour/settings
+
+\import [[$:/plugins/tiddlywiki/tour/variables]]
+\procedure button-expand-collapse-all(caption,text)
+<$button>
+	<$list filter="[all[shadows+tiddlers]tag<currentTourTag>]" variable="currentStep">
+		<$let
+			collapseState={{{ [[$:/state/Tour/Settings/Tour/Visibility/]addsuffix<currentTour>addsuffix<currentStep>] }}}
+		>
+			<$action-setfield $tiddler=<<collapseState>> text=<<text>>/>
+		</$let>
+	</$list>
+	<$text text=<<caption>>/>
+</$button>
+\end
+
+\procedure display-tour-step-field-text(fieldName,fieldCaption)
+<$list filter="[<currentStep>has<fieldName>]" variable="ignore">
+	<tr>
+		<th>
+			<$text text=<<fieldCaption>>/>
+		</th>
+		<td>
+			<$text text={{{ [<currentStep>get<fieldName>] }}}/>
+		</td>
+	</tr>
+</$list>
+\end
+
+<$let
+	stateCurrentTour=<<qualify "$:/state/Tour/Settings/Current">>
+	defaultTour={{{ [{$:/config/CurrentTour}] :else[all[shadows+tiddlers]tag[$:/tags/Tour]] }}}
+>
+
+! Tour Overview
+
+Select a tour:
+<$select tiddler=<<stateCurrentTour>> default=<<defaultTour>>>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/Tour]]">
+		<option value=<<currentTiddler>>>
+			<$transclude $field="description">
+				<$text text=<<currentTiddler>>/>
+			</$transclude>
+		</option>
+	</$list>
+</$select>
+
+<$let
+	currentTour={{{ [<stateCurrentTour>get[text]] :else[<defaultTour>] }}}
+	currentTourTag={{{ [<currentTour>get[tour-tag]] }}}
+>
+	<table class="tc-tour-settings-tour-details">
+		<tbody>
+			<tr>
+				<th>
+					Tour title
+				</th>
+				<td>
+					<$link to=<<currentTour>>><$text text=<<currentTour>>/></$link>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Tour description
+				</th>
+				<td>
+					<div class="tc-tour-settings-tour-details-description">
+						<$transclude $tiddler=<<currentTour>>>
+							(No description available)
+						</$transclude>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Tour logo
+				</th>
+				<td>
+					<div class="tc-tour-settings-tour-details-logo">
+						<$image source={{{ [<currentTour>get[logo]] }}}/>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Tour step tag
+				</th>
+				<td>
+					<$transclude $variable="tag" tag=<<currentTourTag>>/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<$list filter="[<currentTour>has[settings]]" variable="ignore">
+		<p>
+		Custom tour settings:
+		</p>
+		<div class="tc-tour-settings-tour-settings">
+			<$transclude $tiddler={{{ [<currentTour>get[settings]] }}}/>
+		</div>
+	</$list>
+	<p>
+		<<button-expand-collapse-all "Expand All" "show">>
+		<<button-expand-collapse-all "Collapse All" "hide">>
+	</p>
+	<$list filter="[all[shadows+tiddlers]tag<currentTourTag>]" variable="currentStep" counter="stepNumber">
+		<$let
+			collapseState={{{ [[$:/state/Tour/Settings/Tour/Visibility/]addsuffix<currentTour>addsuffix<currentStep>] }}}
+		>
+			<div class="tc-tour-settings-tour-step">
+				<div class="tc-tour-settings-tour-step-heading">
+					<$button class="tc-btn-invisible tc-tour-settings-tour-step-open-button">
+						<$action-setfield $tiddler=<<collapseState>> text={{{ [<collapseState>get[text]else[hide]match[show]then[hide]else[show]] }}}/>
+						<$list filter="[<collapseState>get[text]else[hide]match[show]]" variable="ignore" emptyMessage="{{$:/core/images/right-arrow}}">
+							{{$:/core/images/down-arrow}}
+						</$list>
+						<span class="tc-tour-settings-tour-step-heading-step-number">
+							<$text text=<<stepNumber>>/>
+						</span>
+						<$transclude $tiddler=<<currentStep>> $field="caption">
+							<$text text=<<currentStep>>/>
+						</$transclude>
+					</$button>
+					<$button class="tc-btn-invisible tc-tour-settings-tour-step-launch-button" tooltip="Launch this step of the tour">
+						<$transclude $variable="tour-start" title=<<currentTour>> step=<<currentStep>>/>
+						{{$:/core/images/open-window}}
+					</$button>
+				</div>
+				<$reveal state=<<collapseState>> text="show" type="match" default="hide" animate="yes">
+					<table class="tc-tour-settings-tour-step-details">
+						<tbody>
+							<<display-tour-step-field-text "title" "Title">>
+							<<display-tour-step-field-text "caption" "Caption">>
+							<<display-tour-step-field-text "step-success-filter" "step-success-filter">>
+							<<display-tour-step-field-text "step-success-filter-var" "step-success-filter Variable">>
+							<<display-tour-step-field-text "display-mode" "Display Mode">>
+							<<display-tour-step-field-text "enter-actions" "Enter Actions">>
+							<<display-tour-step-field-text "hint-text" "Hint text">>
+							<<display-tour-step-field-text "hint-selector" "Hint selector">>
+							<<display-tour-step-field-text "hint-selector-fallback-1" "Hint selector Fallback 1">>
+							<<display-tour-step-field-text "hint-selector-fallback-2" "Hint selector Fallback 2">>
+							<<display-tour-step-field-text "condition" "Condition">>
+						</tbody>
+					</table>
+					<div class="tc-tour-settings-tour-step-body">
+						<$transclude $tiddler=<<currentStep>> $mode="block"/>
+					</div>
+				</$reveal>
+			</div>
+		</$let>
+	</$list>
+</$let>
+
+</$let>

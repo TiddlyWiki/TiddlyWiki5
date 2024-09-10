@@ -316,11 +316,13 @@ Options include:
 	pathFilters: optional array of filters to be used to generate the base path
 	wiki: optional wiki for evaluating the pathFilters
 	fileInfo: an existing fileInfo object to check against
+	fileInfo.overwrite: if true, turns off filename clash numbers (defaults to false)
 */
 exports.generateTiddlerFilepath = function(title,options) {
 	var directory = options.directory || "",
 		extension = options.extension || "",
 		originalpath = (options.fileInfo && options.fileInfo.originalpath) ? options.fileInfo.originalpath : "",
+		overwrite = options.fileInfo && options.fileInfo.overwrite || false,
 		filepath;
 	// Check if any of the pathFilters applies
 	if(options.pathFilters && options.wiki) {
@@ -381,19 +383,20 @@ exports.generateTiddlerFilepath = function(title,options) {
 			filepath += char.charCodeAt(0).toString();
 		});
 	}
-	// Add a uniquifier if the file already exists
-	var fullPath, oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
+	// Add a uniquifier if the file already exists (default)
+	var fullPath = path.resolve(directory, filepath + extension);
+	if (!overwrite) {
+		var oldPath = (options.fileInfo) ? options.fileInfo.filepath : undefined,
 		count = 0;
-	do {
-		fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
-		if(oldPath && oldPath == fullPath) {
-			break;
-		}
-		count++;
-	} while(fs.existsSync(fullPath));
+		do {
+			fullPath = path.resolve(directory,filepath + (count ? "_" + count : "") + extension);
+			if(oldPath && oldPath == fullPath) break;
+			count++;
+		} while(fs.existsSync(fullPath));
+	}
 	// If the last write failed with an error, or if path does not start with:
 	//	the resolved options.directory, the resolved wikiPath directory, the wikiTiddlersPath directory, 
-	//	or the 'originalpath' directory, then $tw.utils.encodeURIComponentExtended() and resolve to tiddler directory.
+	//	or the 'originalpath' directory, then $tw.utils.encodeURIComponentExtended() and resolve to options.directory.
 	var writePath = $tw.hooks.invokeHook("th-make-tiddler-path",fullPath,fullPath),
 		encode = (options.fileInfo || {writeError: false}).writeError == true;
 	if(!encode) {

@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/olc-decode
+description: olc-decode operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Description
+
+Open Location Code operators
++
+title: Output
+
+(<$text text={{{ [olc-decode:bounds[9C3WQP2R+QV]] }}}/>)
+(<$text text={{{ [olc-decode:point[9C3WQP2R+QVH]] }}}/>)
+
++
+title: ExpectedResult
+
+<p>({"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[51.751875,-1.257875],[51.752,-1.257875],[51.752,-1.25775],[51.751875,-1.25775],[51.751875,-1.257875]]]}})
+({"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[51.7519375,-1.257765625]}})
+</p>
