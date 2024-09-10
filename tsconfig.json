@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "paths": {       // Add paths
+    "paths": {
+      // Allow `import('$:/core/modules/...')` instead of `import('../../core/modules/...')`. Only works inside this project.
       "$:/core/*": ["./core/*"]
     },
     "noImplicitAny": false,
@@ -12,10 +13,10 @@
     "declaration": true,
     "declarationDir": "types",
     "declarationMap": true,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "Node16",
-    "outDir": "silences wrong TS error, we don't compile, we only typecheck",
+    "outDir": "types",
     "rootDir": "core",
     "skipLibCheck": true,
     "target": "ESNext"

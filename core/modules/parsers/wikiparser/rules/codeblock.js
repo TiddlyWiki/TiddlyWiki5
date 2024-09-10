@@ -1,4 +1,4 @@
-/**
+/*\
 title: $:/core/modules/parsers/wikiparser/rules/codeblock.js
 type: application/javascript
 module-type: wikirule
@@ -10,8 +10,6 @@ Wiki text rule for code blocks. For example:
 	This text will not be //wikified//
 	```
 ```
-
-@module $:/core/modules/parsers/wikiparser/rules/codeblock.js
 
 \*/
 

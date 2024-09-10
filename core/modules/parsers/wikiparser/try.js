@@ -1,5 +1,5 @@
 /**
- * @typedef {import('./rules/codeblock').CodeblockNode} CodeblockNode
+ * @typedef {import('$:/core/modules/parsers/wikiparser/rules/codeblock.js').CodeblockNode} CodeblockNode
  */
 
 /**
