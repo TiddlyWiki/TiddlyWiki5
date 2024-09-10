@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
+~TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
 
 !! ''Quick Start''
 
@@ -19,7 +19,7 @@ TiddlyWiki lets you choose where to keep your data, guaranteeing that in the dec
 </$list>
 </div>
 <div class="tc-cards tc-small">
-<$link to="中文社区 - Chinese Community" class="tc-btn-big-green tc-card">
+<$link to="中文社区 - Chinese Community" class="tc-btn-big-green tc-card" aria-label="Chinese Community">
 中文社区<br/>Chinese Community
 </$link>
 </div>
