@@ -1,8 +1,3 @@
-/**
- * @typedef {import('$:/core/modules/parsers/wikiparser/wikiparser.js')["text/vnd.tiddlywiki"]} WikiParser
- * @typedef {import('$:/core/modules/widgets/widget.js').widget} Widget
- */
-
 /*\
 title: $:/core/modules/wiki.js
 type: application/javascript
@@ -21,16 +16,8 @@ Adds the following properties to the wiki object:
 * `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
-(function(){
 
-/*jslint node: true, browser: true */
-/*global $tw: false */
-"use strict";
-
-/**
- * @type {Widget}
- */
-var widget = require("$:/core/modules/widgets/widget.js");
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var USER_NAME_TITLE = "$:/status/UserName",
 	TIMESTAMP_DISABLE_TITLE = "$:/config/TimestampDisable";
@@ -1050,6 +1037,10 @@ exports.initParsers = function(moduleType) {
 };
 
 /**
+ * @typedef {import('$:/core/modules/parsers/wikiparser/wikiparser.js')["text/vnd.tiddlywiki"]} WikiParser
+ */
+
+/**
  * Parse a block of text of a specified MIME type.
  * 
  * @param {string} type - The content type of the text to be parsed.
@@ -1188,15 +1179,17 @@ exports.getSubstitutedText = function(text,widget,options) {
 	});
 };
 
-/*
-Make a widget tree for a parse tree
-parser: parser object
-options: see below
-Options include:
-document: optional document to use
-variables: hashmap of variables to set
-parentWidget: optional parent widget for the root node
-*/
+/**
+ * Create a widget tree for a parse tree.
+ * 
+ * @param {Object} parser - The parser object containing the parse tree.
+ * @param {Object} [options] - Options for creating the widget tree.
+ * @param {Document} [options.document] - Optional document to use.
+ * @param {Object} [options.variables] - Hashmap of variables to set.
+ * @param {Widget} [options.parentWidget] - Optional parent widget for the root node.
+ * 
+ * @returns {Widget} The root widget of the created widget tree.
+ */
 exports.makeWidget = function(parser,options) {
 	options = options || {};
 	var widgetNode = {
@@ -1221,7 +1214,7 @@ exports.makeWidget = function(parser,options) {
 	// Add in the supplied parse tree nodes
 	currWidgetNode.children = parser ? parser.tree : [];
 	// Create the widget
-	return new widget.widget(widgetNode,{
+	return new Widget(widgetNode,{
 		wiki: this,
 		document: options.document || $tw.fakeDocument,
 		parentWidget: options.parentWidget
@@ -1802,5 +1795,3 @@ exports.slugify = function(title,options) {
 	}
 	return slug;
 };
-
-})();
