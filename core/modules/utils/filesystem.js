@@ -272,6 +272,19 @@ exports.generateTiddlerFileInfo = function(tiddler,options) {
 			}
 		}
 	}
+	// Checks for deferred loading/saving field
+	var deferredFiletype = tiddler.fields.deferredFiletype;
+	if(deferredFiletype) {
+		// Check if a parser/loader exists for that filetype
+		var loader = $tw.deserializerParsers[deferredFiletype];
+		if(loader) {
+			// Mark the file as serializable and pass on the info.
+			fileInfo.deferredFiletype = deferredFiletype;
+			options.fileInfo.deferredFiletype = deferredFiletype;
+			fileInfo.hasMetaFile = false;
+		}
+	}
+
 	// Take the file extension from the tiddler content type or metaExt
 	var contentTypeInfo = $tw.config.contentTypeInfo[fileInfo.type] || {extension: ""};
 	// Generate the filepath
@@ -383,6 +396,12 @@ exports.generateTiddlerFilepath = function(title,options) {
 			filepath += char.charCodeAt(0).toString();
 		});
 	}
+
+	// If we are handling deferred files, ignore normal file extension.
+	if ((options.fileInfo && options.fileInfo.deferredFiletype)) {
+		extension = "";
+	}
+	
 	// Add a uniquifier if the file already exists (default)
 	var fullPath = path.resolve(directory, filepath + extension);
 	if (!overwrite) {
@@ -444,7 +463,21 @@ exports.saveTiddlerToFile = function(tiddler,fileInfo,callback) {
 				return callback(null,fileInfo);
 			});
 		} else {
-			fs.writeFile(fileInfo.filepath,JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces),"utf8",function(err) {
+			// If we have a deferred filetype, call parser first and then save.
+			var content, 
+				fileOptions = "utf8", 
+				filepath = fileInfo.filepath;
+			if(fileInfo.deferredFiletype) {
+				var loader = new $tw.deserializerParsers[fileInfo.deferredFiletype]();
+				var binContent = loader.save(fileInfo.filepath, tiddler);
+				filepath = binContent.filePath;
+				content = binContent.buffer;
+				fileOptions = binContent.fileOptions;
+			} else {
+				content = JSON.stringify([tiddler.getFieldStrings({exclude: ["bag"]})],null,$tw.config.preferences.jsonSpaces)
+			}
+
+			fs.writeFile(filepath,content,fileOptions,function(err) {
 				if(err) {
 					return callback(err);
 				}
@@ -459,6 +492,7 @@ Save a tiddler to a file described by the fileInfo:
 	filepath: the absolute path to the file containing the tiddler
 	type: the type of the tiddler file (NOT the type of the tiddler)
 	hasMetaFile: true if the file also has a companion .meta file
+	TODO: Add the deferredFiletype saver here too.
 */
 exports.saveTiddlerToFileSync = function(tiddler,fileInfo) {
 	$tw.utils.createDirectory(path.dirname(fileInfo.filepath));
