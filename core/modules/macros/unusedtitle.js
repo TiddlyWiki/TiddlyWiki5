@@ -16,20 +16,22 @@ exports.name = "unusedtitle";
 exports.params = [
 	{name: "baseName"},
 	{name: "separator"},
-	{name: "template"}
+	{name: "template"},
+	{name: "startCount"}
 ];
 
 /*
 Run the macro
 */
-exports.run = function(baseName,separator,template) {
+exports.run = function(baseName,separator,template,startCount) {
 	separator = separator || " ";
+	startCount = startCount || 0;
 	if(!baseName) {
 		baseName = $tw.language.getString("DefaultNewTiddlerTitle");
 	}
 	// $tw.wiki.generateNewTitle = function(baseTitle,options)
-	// options.prefix must be a string! 
-	return this.wiki.generateNewTitle(baseName, {"prefix": separator, "template": template});
+	// options.prefix must be a string!
+	return this.wiki.generateNewTitle(baseName, {"prefix": separator, "template": template, "startCount": startCount});
 };
 
 })();

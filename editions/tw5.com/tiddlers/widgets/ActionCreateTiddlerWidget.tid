@@ -1,6 +1,6 @@
 caption: action-createtiddler
 created: 20161020152745942
-modified: 20230115084716196
+modified: 20240602153213986
 tags: Widgets ActionWidgets
 title: ActionCreateTiddlerWidget
 type: text/vnd.tiddlywiki
@@ -37,37 +37,6 @@ The ''action-createtiddler'' widget is invisible.
 
 ! Examples
 
-<<<
-<$macrocall $name='wikitext-example-without-html' src={{ActionCreateTiddlerWidget Example}}/>
-<<<
-
----
-
-<<<
-<$transclude tiddler="ActionCreateTiddlerWidget Example 1" mode=block/>
-<<<
-
----
-
-<<<
-{{ActionCreateTiddlerWidget Example 2}}
-<<<
-
----
-
-<<<
-{{ActionCreateTiddlerWidget Example 3}}
-<<<
-
----
-
-<<<
-{{ActionCreateTiddlerWidget Example 4}}
-<<<
-
----
-
-<<<
-{{ActionCreateTiddlerWidget Example 5}}
-<<<
-
+<$list filter="[prefix[ActionCreateTiddlerWidget Example]]">
+<$transclude/>
+</$list>

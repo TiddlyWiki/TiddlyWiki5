@@ -199,6 +199,12 @@ Settings/TitleLinks/Caption: 條目標題
 Settings/TitleLinks/Hint: 可選地顯示條目標題為鏈接
 Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
 Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
+SocialCard/Caption: 社交媒體卡
+SocialCard/Domain/Prompt: 顯示連結的網域名稱（例如 ''tiddlywiki.com''）
+SocialCard/Hint: 社交和訊息服務使用此資訊來顯示線上託管時指向此 TiddlyWiki 的連結的預覽卡
+SocialCard/PreviewUrl/Prompt: 用於預覽此 TiddlyWiki 圖像的完整網址
+SocialCard/PreviewUrl/Preview: 預覽圖像：
+SocialCard/Url/Prompt: 此 TiddlyWiki 的完整網址
 StoryTiddler/Caption: 故事條目
 StoryTiddler/Hint: 此規則級聯用於動態選擇範本，以便在故事河中顯示條目。
 StoryView/Caption: 檢視模式

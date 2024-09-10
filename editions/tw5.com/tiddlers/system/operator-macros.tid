@@ -16,9 +16,9 @@ title: $:/editions/tw5.com/operator-macros
 	<$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix<n>]" variable=".state">
 		<$reveal state=<<.state>> type="nomatch" text="show">
 			<code><$text text=<<eg>>/></code>
-			<% if [<ie>!is[blank]] %>
+			<%if [<ie>!is[blank]] %>
 				<dd>&rarr;&nbsp;<<ie>></dd>
-			<% endif %>
+			<%endif%>
 			<dl>
 				<dd><$button actions=<<.operator-example-tryit-actions>>>Try it</$button></dd>
 			</dl>

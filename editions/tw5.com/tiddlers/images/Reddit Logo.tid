@@ -1,4 +1,5 @@
 title: Reddit Logo
+alt-text: Reddit Logo
 
 \parameters (size:"22pt")
 <svg width=<<size>> height=<<size>> viewBox="0 0 20 20">
