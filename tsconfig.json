@@ -11,15 +11,16 @@
     "allowSyntheticDefaultImports": true,
     "checkJs": true,
     "declaration": true,
-    "declarationDir": "types",
+    "declarationDir": "types/generated",
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "Node16",
-    "outDir": "types",
-    "rootDir": "core",
+    "outDir": "types/generated",
+    "rootDir": ".",
     "skipLibCheck": true,
     "target": "ESNext"
   },
-  "include": ["./core/**/*.js", "**/*.d.ts"]
+  "include": ["./core/**/*.js", "./core/**/*.d.ts", "types/tw.d.ts"],
+  "exclude": ["types/generated"]
 }

@@ -22,6 +22,13 @@ Adds the following properties to the wiki object:
 /*global $tw: false */
 "use strict";
 
+/**
+ * @typedef {import('$:/core/modules/widgets/widget.js').widget} Widget
+ */
+
+/**
+ * @type {Widget}
+ */
 var widget = require("$:/core/modules/widgets/widget.js");
 
 var USER_NAME_TITLE = "$:/status/UserName",
