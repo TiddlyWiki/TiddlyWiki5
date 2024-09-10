@@ -1,3 +1,8 @@
+/**
+ * @typedef {import('$:/core/modules/parsers/wikiparser/wikiparser.js')["text/vnd.tiddlywiki"]} WikiParser
+ * @typedef {import('$:/core/modules/widgets/widget.js').widget} Widget
+ */
+
 /*\
 title: $:/core/modules/wiki.js
 type: application/javascript
@@ -21,10 +26,6 @@ Adds the following properties to the wiki object:
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-
-/**
- * @typedef {import('$:/core/modules/widgets/widget.js').widget} Widget
- */
 
 /**
  * @type {Widget}
@@ -1048,19 +1049,26 @@ exports.initParsers = function(moduleType) {
 	}
 };
 
-/*
-Parse a block of text of a specified MIME type
-	type: content type of text to be parsed
-	text: text
-	options: see below
-Options include:
-	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
-	_canonical_uri: optional string of the canonical URI of this content
-*/
+/**
+ * Parse a block of text of a specified MIME type.
+ * 
+ * @param {string} type - The content type of the text to be parsed.
+ * @param {string} text - The text to be parsed.
+ * @param {Object} [options] - Options for parsing.
+ * @param {boolean} [options.parseAsInline=false] - If true, the text will be parsed as an inline run.
+ * @param {string} [options._canonical_uri] - Optional string of the canonical URI of this content.
+ * @param {string} [options.defaultType="text/vnd.tiddlywiki"] - The default type to use if no parser is found for the specified type.
+ * @param {boolean} [options.configTrimWhiteSpace=false] - If true, trims white space according to configuration.
+ * 
+ * @returns {WikiParser|null} The parser instance or null if no parser is found.
+ */
 exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
-	// Select a parser
+	/**
+	 * @type WikiParser
+	 * Select a parser
+	 */
 	var Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
 		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
@@ -1150,14 +1158,16 @@ exports.getTextReferenceParserInfo = function(title,field,index,options) {
 	return parserInfo;
 }
 
-/*
-Parse a block of text of a specified MIME type
-	text: text on which to perform substitutions
-	widget
-	options: see below
-Options include:
-	substitutions: an optional array of substitutions
-*/
+/**
+ * Parse a block of text of a specified MIME type and perform substitutions.
+ * 
+ * @param {string} text - The text on which to perform substitutions.
+ * @param {Widget} widget - The widget context used for variable substitution.
+ * @param {Object} [options] - Options for substitutions.
+ * @param {Array<{name: string, value: string}>} [options.substitutions] - An optional array of substitutions.
+ * 
+ * @returns {string} The text with substitutions applied.
+ */
 exports.getSubstitutedText = function(text,widget,options) {
 	options = options || {};
 	text = text || "";
