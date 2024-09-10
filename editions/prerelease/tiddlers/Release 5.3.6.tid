@@ -63,7 +63,6 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 * <<.link-badge-added "github.com/TiddlyWiki/TiddlyWiki5/pull/8441">> support for social media cards to be added to TiddlyWiki
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8518">> type attribute to input fields in control panel, allowing virtual keyboards to switch to the proper one when editing settings
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8558">> empty message to tag picker, search dropdown and advanced search
-* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8524">> handling of tiddler content that horizontally overflows by adding scrollbars
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8157">> a search button to the control panel tiddler fields tab
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8323">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8324">>) the view and edit toolbars with more descriptive Aria labels
 

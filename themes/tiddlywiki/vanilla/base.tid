@@ -1350,10 +1350,6 @@ canvas.tc-edit-bitmapeditor  {
 	display: block;
 }
 
-.tc-tiddler-body {
-	overflow-x: auto;
-}
-
 .tc-single-tiddler-window .tc-tiddler-body,
 .tc-tiddler-frame .tc-tiddler-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
@@ -2224,7 +2220,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-tab-content {
 	margin-top: 14px;
-	overflow-x: auto;
 }
 
 .tc-tab-content.tc-vertical  {
