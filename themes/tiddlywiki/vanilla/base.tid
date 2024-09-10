@@ -52,13 +52,13 @@ $else$
 \define set-type-selector-min-width()
 <$set name="typeLength" value={{{ [all[shadows+tiddlers]prefix[$:/language/Docs/Types/]get[name]length[]maxall[]] }}}>
 
-.tc-type-selector-dropdown-wrapper {
-	min-width: calc(<<typeLength>>ch + 4em);
-}
+	.tc-type-selector-dropdown-wrapper {
+		min-width: calc(<<typeLength>>ch + 4em);
+	}
 
-.tc-type-selector-dropdown-wrapper input.tc-edit-typeeditor {
-	min-width: <<typeLength>>ch;
-}
+	.tc-type-selector-dropdown-wrapper input.tc-edit-typeeditor {
+		min-width: <<typeLength>>ch;
+	}
 
 </$set>
 \end
@@ -72,34 +72,34 @@ $else$
 {{$:/themes/tiddlywiki/vanilla/reset}}
 
 input[type="search"] {
-outline-offset: initial;
+	outline-offset: initial;
 }
 
 button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-outline: 2px solid <<colour primary>>;
-outline-offset: -2px;
-border-radius: 0.25em;
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
 }
 
 button:-moz-focusring, input:-moz-focusring, textarea:-moz-focusring, select:-moz-focusring {
-outline: 2px solid <<colour primary>>;
-outline-offset: -2px;
-border-radius: 0.25em;
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
 }
 
 /*
 ** Button default styles. Makes them look consistent for all browsers
 */
 html button {
-line-height: 1.2;
-color: <<colour button-foreground>>;
-fill: <<colour button-foreground>>;
-background: <<colour button-background>>;
-border-color: <<colour button-border>>;
+	line-height: 1.2;
+	color: <<colour button-foreground>>;
+	fill: <<colour button-foreground>>;
+	background: <<colour button-background>>;
+	border-color: <<colour button-border>>;
 }
 
 button:disabled svg {
-fill: <<colour muted-foreground>>;
+	fill: <<colour muted-foreground>>;
 }
 
 /*
@@ -107,128 +107,128 @@ fill: <<colour muted-foreground>>;
 */
 
 html, body {
-font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
-text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
+	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 html:-webkit-full-screen {
-background-color: <<colour page-background>>;
+	background-color: <<colour page-background>>;
 }
 
 body.tc-body {
-font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
-line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
-word-wrap: break-word;
-<<custom-background-datauri>>
-color: <<colour foreground>>;
-background-color: <<colour page-background>>;
-fill: <<colour foreground>>;
+	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
+	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
+	word-wrap: break-word;
+	<<custom-background-datauri>>
+	color: <<colour foreground>>;
+	background-color: <<colour page-background>>;
+	fill: <<colour foreground>>;
 }
 
 <<if-background-attachment """
 
 body.tc-body {
-background-color: transparent;
+	background-color: transparent;
 }
 
 """>>
 
 /**
-* Correct the font size and margin on `h1` elements within `section` and
-* `article` contexts in Chrome, Firefox, and Safari.
-*/
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
 
 h1 {
-font-size: 2em;
+	font-size: 2em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-line-height: 1.2;
-font-weight: normal;
+	line-height: 1.2;
+	font-weight: normal;
 }
 
 pre {
-display: block;
-margin-top: 1em;
-margin-bottom: 1em;
-word-break: normal;
-word-wrap: break-word;
-white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
-background-color: <<colour pre-background>>;
-border: 1px solid <<colour pre-border>>;
-padding: 0 3px 2px;
-border-radius: 3px;
-font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+	display: block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	word-break: normal;
+	word-wrap: break-word;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	background-color: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
+	padding: 0 3px 2px;
+	border-radius: 3px;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
 code {
-color: <<colour code-foreground>>;
-background-color: <<colour code-background>>;
-border: 1px solid <<colour code-border>>;
-white-space: pre-wrap;
-padding: 0 3px 2px;
-border-radius: 3px;
-font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
+	color: <<colour code-foreground>>;
+	background-color: <<colour code-background>>;
+	border: 1px solid <<colour code-border>>;
+	white-space: pre-wrap;
+	padding: 0 3px 2px;
+	border-radius: 3px;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
 blockquote {
-border-left: 5px solid <<colour blockquote-bar>>;
-margin-left: 25px;
-padding-left: 10px;
-quotes: "\201C""\201D""\2018""\2019";
+	border-left: 5px solid <<colour blockquote-bar>>;
+	margin-left: 25px;
+	padding-left: 10px;
+	quotes: "\201C""\201D""\2018""\2019";
 }
 
 blockquote > div {
-margin-top: 1em;
-margin-bottom: 1em;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 blockquote.tc-big-quote {
-font-family: Georgia, serif;
-position: relative;
-background: <<colour pre-background>>;
-border-left: none;
-margin-left: 50px;
-margin-right: 50px;
-padding: 10px;
-border-radius: 8px;
+	font-family: Georgia, serif;
+	position: relative;
+	background: <<colour pre-background>>;
+	border-left: none;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding: 10px;
+	border-radius: 8px;
 }
 
 blockquote.tc-big-quote cite:before {
-content: "\2014 \2009";
+	content: "\2014 \2009";
 }
 
 blockquote.tc-big-quote:before {
-font-family: Georgia, serif;
-color: <<colour blockquote-bar>>;
-content: open-quote;
-font-size: 8em;
-line-height: 0.1em;
-margin-right: 0.25em;
-vertical-align: -0.4em;
-position: absolute;
-left: -50px;
-top: 42px;
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: open-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+	left: -50px;
+	top: 42px;
 }
 
 blockquote.tc-big-quote:after {
-font-family: Georgia, serif;
-color: <<colour blockquote-bar>>;
-content: close-quote;
-font-size: 8em;
-line-height: 0.1em;
-margin-right: 0.25em;
-vertical-align: -0.4em;
-position: absolute;
-right: -80px;
-bottom: -20px;
+	font-family: Georgia, serif;
+	color: <<colour blockquote-bar>>;
+	content: close-quote;
+	font-size: 8em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+	position: absolute;
+	right: -80px;
+	bottom: -20px;
 }
 
 dl dt {
-font-weight: bold;
-margin-top: 6px;
+	font-weight: bold;
+	margin-top: 6px;
 }
 
 textarea,
@@ -241,75 +241,75 @@ input[type=tel],
 input[type=url],
 input[type=""],
 input:not([type]) {
-color: <<colour foreground>>;
-background: <<colour background>>;
+	color: <<colour foreground>>;
+	background: <<colour background>>;
 }
 
 input[type="checkbox"] {
-vertical-align: middle;
+	vertical-align: middle;
 }
 
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
--webkit-appearance:none;
+	-webkit-appearance:none;
 }
 
 .tc-muted {
-color: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 svg.tc-image-button {
-padding: 0px 1px 1px 0px;
+	padding: 0px 1px 1px 0px;
 }
 
 .tc-icon-wrapper > svg {
-width: 1em;
-height: 1em;
+	width: 1em;
+	height: 1em;
 }
 
 kbd {
-display: inline-block;
-padding: 3px 5px;
-font-size: 0.8em;
-line-height: 1.2;
-color: <<colour foreground>>;
-vertical-align: middle;
-background-color: <<colour background>>;
-border: solid 1px <<colour muted-foreground>>;
-border-bottom-color: <<colour muted-foreground>>;
-border-radius: 3px;
-box-shadow: inset 0 -1px 0 <<colour muted-foreground>>;
+	display: inline-block;
+	padding: 3px 5px;
+	font-size: 0.8em;
+	line-height: 1.2;
+	color: <<colour foreground>>;
+	vertical-align: middle;
+	background-color: <<colour background>>;
+	border: solid 1px <<colour muted-foreground>>;
+	border-bottom-color: <<colour muted-foreground>>;
+	border-radius: 3px;
+	box-shadow: inset 0 -1px 0 <<colour muted-foreground>>;
 }
 
 ::selection {
-background-color: Highlight;
-color: HighlightText;
-background-color: <<colour selection-background>>;
-color: <<colour selection-foreground>>;
+	background-color: Highlight;
+	color: HighlightText;
+	background-color: <<colour selection-background>>;
+	color: <<colour selection-foreground>>;
 }
 
 .tc-inline-style {
-background: <<colour highlight-background>>;
-color: <<colour highlight-foreground>>;
+	background: <<colour highlight-background>>;
+	color: <<colour highlight-foreground>>;
 }
 
 form.tc-form-inline {
-display: inline;
+	display: inline;
 }
 
 /*
 Markdown likes putting code elements inside pre elements
 */
 pre > code {
-display: block;
-padding: 0.5em;
-border: none;
-white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
-background-color: inherit;
-color: inherit;
-overflow-x: auto;
+	display: block;
+	padding: 0.5em;
+	border: none;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	background-color: inherit;
+	color: inherit;
+	overflow-x: auto;
 }
 
 /*
@@ -317,30 +317,30 @@ Table defaults
 */
 
 table {
-border: 1px solid <<colour table-border>>;
-width: auto;
-max-width: 100%;
-caption-side: bottom;
-margin-top: 1em;
-margin-bottom: 1em;
-/* next 2 elements needed, since normalize 8.0.1 */
-border-collapse: collapse;
-border-spacing: 0;
+	border: 1px solid <<colour table-border>>;
+	width: auto;
+	max-width: 100%;
+	caption-side: bottom;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	/* next 2 elements needed, since normalize 8.0.1 */
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 table th, table td {
-padding: 0 7px 0 7px;
-border-top: 1px solid <<colour table-border>>;
-border-left: 1px solid <<colour table-border>>;
+	padding: 0 7px 0 7px;
+	border-top: 1px solid <<colour table-border>>;
+	border-left: 1px solid <<colour table-border>>;
 }
 
 table thead tr td, table th {
-background-color: <<colour table-header-background>>;
-font-weight: bold;
+	background-color: <<colour table-header-background>>;
+	font-weight: bold;
 }
 
 table tfoot tr td {
-background-color: <<colour table-footer-background>>;
+	background-color: <<colour table-footer-background>>;
 }
 
 /*
@@ -351,13 +351,13 @@ Table utility classes
 .tc-table-no-border,
 .tc-table-no-border th,
 .tc-table-no-border td {
-border: initial;
+	border: initial;
 }
 
 /* First column in table width will fit to text.*/
 /* This rule makes most sense with tc-first-link-nowrap*/
 .tc-first-col-min-width td:nth-child(1) {
-width: 1%;
+	width: 1%;
 }
 
 /*
@@ -366,28 +366,28 @@ width: 1%;
 
 /* First link A element will not wrap */
 .tc-first-link-nowrap:first-of-type a {
-white-space: nowrap;
+	white-space: nowrap;
 }
 
 /* Move the table to the center of the container */
 .tc-center {
-margin-left: auto;
-margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .tc-max-width {
-width: 100%;
+	width: 100%;
 }
 
 .tc-max-width-80 {
-max-width: 80%;
+	max-width: 80%;
 }
 
 /* Allow input and textarea to look like the ControlPanel inputs */
 .tc-edit-max-width input,
 .tc-edit-max-width textarea {
-width: 100%;
-padding: 3px;
+	width: 100%;
+	padding: 3px;
 }
 
 /*
@@ -395,12 +395,12 @@ CSV parser plugin
 */
 
 .tc-csv-table {
-white-space: nowrap;
+	white-space: nowrap;
 }
 
 .tc-csv-table th,
 .tc-csv-table td {
-white-space: pre-line;
+	white-space: pre-line;
 }
 
 /*
@@ -412,17 +412,17 @@ Tiddler frame in story river
 .tc-tiddler-frame canvas,
 .tc-tiddler-frame embed,
 .tc-tiddler-frame iframe {
-max-width: 100%;
+	max-width: 100%;
 }
 
 .tc-tiddler-body > embed,
 .tc-tiddler-body > iframe {
-width: 100%;
-height: 600px;
+	width: 100%;
+	height: 600px;
 }
 
 :root {
-color-scheme: {{{ [{$:/palette}get[color-scheme]] ~light }}};
+	color-scheme: {{{ [{$:/palette}get[color-scheme]] ~light }}};
 }
 
 /*
@@ -431,59 +431,59 @@ color-scheme: {{{ [{$:/palette}get[color-scheme]] ~light }}};
 
 button.tc-tiddlylink,
 a.tc-tiddlylink {
-text-decoration: none;
-font-weight: 500;
-color: <<colour tiddler-link-foreground>>;
--webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
--webkit-touch-callout: none; /* Prevents long presses from bringing up a link preview */
+	text-decoration: none;
+	font-weight: 500;
+	color: <<colour tiddler-link-foreground>>;
+	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
+	-webkit-touch-callout: none; /* Prevents long presses from bringing up a link preview */
 }
 
 .tc-sidebar-lists a.tc-tiddlylink {
-color: <<colour sidebar-tiddler-link-foreground>>;
+	color: <<colour sidebar-tiddler-link-foreground>>;
 }
 
 .tc-sidebar-lists a.tc-tiddlylink:hover {
-color: <<colour sidebar-tiddler-link-foreground-hover>>;
+	color: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
 
 button.tc-tiddlylink:hover,
 a.tc-tiddlylink:hover {
-text-decoration: underline;
+	text-decoration: underline;
 }
 
 a.tc-tiddlylink-resolves {
 }
 
 a.tc-tiddlylink-shadow {
-font-weight: bold;
+	font-weight: bold;
 }
 
 a.tc-tiddlylink-shadow.tc-tiddlylink-resolves {
-font-weight: normal;
+	font-weight: normal;
 }
 
 a.tc-tiddlylink-missing {
-font-style: italic;
+	font-style: italic;
 }
 
 a.tc-tiddlylink-external {
-text-decoration: underline;
-color: <<colour external-link-foreground>>;
-background-color: <<colour external-link-background>>;
+	text-decoration: underline;
+	color: <<colour external-link-foreground>>;
+	background-color: <<colour external-link-background>>;
 }
 
 a.tc-tiddlylink-external:visited {
-color: <<colour external-link-foreground-visited>>;
-background-color: <<colour external-link-background-visited>>;
+	color: <<colour external-link-foreground-visited>>;
+	background-color: <<colour external-link-background-visited>>;
 }
 
 a.tc-tiddlylink-external:hover {
-color: <<colour external-link-foreground-hover>>;
-background-color: <<colour external-link-background-hover>>;
+	color: <<colour external-link-foreground-hover>>;
+	background-color: <<colour external-link-background-hover>>;
 }
 
 .tc-drop-down a.tc-tiddlylink:hover {
-color: <<colour tiddler-link-background>>;
+	color: <<colour tiddler-link-background>>;
 }
 
 /*
@@ -491,78 +491,78 @@ color: <<colour tiddler-link-background>>;
 */
 
 .tc-tiddler-dragger {
-position: relative;
-z-index: -10000;
+	position: relative;
+	z-index: -10000;
 }
 
 .tc-tiddler-dragger-inner {
-position: absolute;
-top: -1000px;
-left: -1000px;
-display: inline-block;
-padding: 8px 20px;
-font-size: 16.9px;
-font-weight: bold;
-line-height: 20px;
-color: <<colour dragger-foreground>>;
-text-shadow: 0 1px 0 rgba(0, 0, 0, 1);
-white-space: nowrap;
-vertical-align: baseline;
-background-color: <<colour dragger-background>>;
-border-radius: 20px;
+	position: absolute;
+	top: -1000px;
+	left: -1000px;
+	display: inline-block;
+	padding: 8px 20px;
+	font-size: 16.9px;
+	font-weight: bold;
+	line-height: 20px;
+	color: <<colour dragger-foreground>>;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 1);
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: <<colour dragger-background>>;
+	border-radius: 20px;
 }
 
 .tc-tiddler-dragger-cover {
-position: absolute;
-background-color: <<colour page-background>>;
+	position: absolute;
+	background-color: <<colour page-background>>;
 }
 
 .tc-page-container > .tc-dropzone {
-min-height: 100vh;
+	min-height: 100vh;
 }
 
 .tc-dropzone {
-position: relative;
+	position: relative;
 }
 
 .tc-dropzone.tc-dragover:before {
-z-index: 10000;
-display: block;
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-background: <<colour dropzone-background>>;
-text-align: center;
-content: "<<lingo DropMessage>>";
+	z-index: 10000;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: <<colour dropzone-background>>;
+	text-align: center;
+	content: "<<lingo DropMessage>>";
 }
 
 .tc-droppable > .tc-droppable-placeholder {
-display: none;
+	display: none;
 }
 
 .tc-droppable.tc-dragover > .tc-droppable-placeholder {
-display: block;
-border: 2px dashed <<colour dropzone-background>>;
+	display: block;
+	border: 2px dashed <<colour dropzone-background>>;
 }
 
 .tc-draggable {
-cursor: move;
+	cursor: move;
 }
 
 .tc-sidebar-tab-open .tc-droppable-placeholder, .tc-tagged-draggable-list .tc-droppable-placeholder,
 .tc-links-draggable-list .tc-droppable-placeholder {
-line-height: 2em;
-height: 2em;
+	line-height: 2em;
+	height: 2em;
 }
 
 .tc-sidebar-tab-open-item {
-position: relative;
+	position: relative;
 }
 
 .tc-sidebar-tab-open .tc-btn-invisible.tc-btn-mini svg {
-font-size: 0.7em;
-fill: <<colour muted-foreground>>;
+	font-size: 0.7em;
+	fill: <<colour muted-foreground>>;
 }
 
 /*
@@ -570,14 +570,14 @@ fill: <<colour muted-foreground>>;
 */
 
 .tc-plugin-reload-warning {
-z-index: 1000;
-display: block;
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-background: <<colour alert-background>>;
-text-align: center;
+	z-index: 1000;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: <<colour alert-background>>;
+	text-align: center;
 }
 
 /*
@@ -585,202 +585,202 @@ text-align: center;
 */
 
 button svg, button img, label svg, label img {
-vertical-align: middle;
+	vertical-align: middle;
 }
 
 .tc-btn-invisible {
-padding: 0;
-margin: 0;
-background: none;
-border: none;
-cursor: pointer;
-color: <<colour foreground>>;
-fill: <<colour foreground>>;
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: <<colour foreground>>;
+	fill: <<colour foreground>>;
 }
 
 button:disabled.tc-btn-invisible  {
-cursor: default;
-color: <<colour muted-foreground>>;
+	cursor: default;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-btn-boxed {
-font-size: 0.6em;
-padding: 0.2em;
-margin: 1px;
-background: none;
-border: 1px solid <<colour tiddler-controls-foreground>>;
-border-radius: 0.25em;
+	font-size: 0.6em;
+	padding: 0.2em;
+	margin: 1px;
+	background: none;
+	border: 1px solid <<colour tiddler-controls-foreground>>;
+	border-radius: 0.25em;
 }
 
 html body.tc-body .tc-btn-boxed svg {
-font-size: 1.6666em;
+	font-size: 1.6666em;
 }
 
 .tc-btn-boxed:hover {
-background: <<colour muted-foreground>>;
-color: <<colour background>>;
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
 }
 
 html body.tc-body .tc-btn-boxed:hover svg {
-fill: <<colour background>>;
+	fill: <<colour background>>;
 }
 
 .tc-btn-rounded {
-font-size: 0.5em;
-line-height: 2;
-padding: 0em 0.3em 0.2em 0.4em;
-margin: 1px;
-border: 1px solid <<colour muted-foreground>>;
-background: <<colour muted-foreground>>;
-color: <<colour background>>;
-border-radius: 2em;
+	font-size: 0.5em;
+	line-height: 2;
+	padding: 0em 0.3em 0.2em 0.4em;
+	margin: 1px;
+	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
+	border-radius: 2em;
 }
 
 html body.tc-body .tc-btn-rounded svg {
-font-size: 1.6666em;
-fill: <<colour background>>;
+	font-size: 1.6666em;
+	fill: <<colour background>>;
 }
 
 .tc-btn-rounded:hover {
-border: 1px solid <<colour muted-foreground>>;
-background: <<colour background>>;
-color: <<colour muted-foreground>>;
+	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour background>>;
+	color: <<colour muted-foreground>>;
 }
 
 html body.tc-body .tc-btn-rounded:hover svg {
-fill: <<colour muted-foreground>>;
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-btn-icon svg {
-height: 1em;
-width: 1em;
-fill: <<colour muted-foreground>>;
+	height: 1em;
+	width: 1em;
+	fill: <<colour muted-foreground>>;
 }
 
 
 .tc-btn-text {
-margin-left: 7px;
+	margin-left: 7px;
 }
 
 /* used for documentation "fake" buttons */
 .tc-btn-standard {
-line-height: 1.8;
-color: #667;
-background-color: #e0e0e0;
-border: 1px solid #888;
-padding: 2px 1px 2px 1px;
-margin: 1px 4px 1px 4px;
+	line-height: 1.8;
+	color: #667;
+	background-color: #e0e0e0;
+	border: 1px solid #888;
+	padding: 2px 1px 2px 1px;
+	margin: 1px 4px 1px 4px;
 }
 
 .tc-btn-big-green {
-display: inline-block;
-padding: 8px;
-margin: 4px 8px 4px 8px;
-background: <<colour download-background>>;
-color: <<colour download-foreground>>;
-fill: <<colour download-foreground>>;
-border: none;
-border-radius: 2px;
-font-size: 1.2em;
-line-height: 1.4em;
-text-decoration: none;
+	display: inline-block;
+	padding: 8px;
+	margin: 4px 8px 4px 8px;
+	background: <<colour download-background>>;
+	color: <<colour download-foreground>>;
+	fill: <<colour download-foreground>>;
+	border: none;
+	border-radius: 2px;
+	font-size: 1.2em;
+	line-height: 1.4em;
+	text-decoration: none;
 }
 
 .tc-btn-big-green svg,
 .tc-btn-big-green img {
-height: 2em;
-width: 2em;
-vertical-align: middle;
-fill: <<colour download-foreground>>;
+	height: 2em;
+	width: 2em;
+	vertical-align: middle;
+	fill: <<colour download-foreground>>;
 }
 
 .tc-primary-btn {
-background: <<colour primary>>;
+	background: <<colour primary>>;
 }
 
 .tc-sidebar-lists input {
-color: <<colour foreground>>;
+	color: <<colour foreground>>;
 }
 
 .tc-sidebar-lists button {
-color: <<colour sidebar-button-foreground>>;
-fill: <<colour sidebar-button-foreground>>;
+	color: <<colour sidebar-button-foreground>>;
+	fill: <<colour sidebar-button-foreground>>;
 }
 
 .tc-sidebar-lists button.tc-btn-mini {
-color: <<colour sidebar-muted-foreground>>;
+	color: <<colour sidebar-muted-foreground>>;
 }
 
 .tc-sidebar-lists button.tc-btn-mini:hover {
-color: <<colour sidebar-muted-foreground-hover>>;
+	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
 .tc-sidebar-lists button small {
-color: <<colour foreground>>;
+	color: <<colour foreground>>;
 }
 
 button svg.tc-image-button, button .tc-image-button img {
-height: auto;
-width: 1em;
+	height: auto;
+	width: 1em;
 }
 
 .tc-unfold-banner {
-position: absolute;
-padding: 0;
-margin: 0;
-background: none;
-border: none;
-width: 100%;
-width: calc(100% + 2px);
-margin-left: -43px;
-text-align: center;
-border-top: 2px solid <<colour tiddler-info-background>>;
-margin-top: 4px;
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+	width: 100%;
+	width: calc(100% + 2px);
+	margin-left: -43px;
+	text-align: center;
+	border-top: 2px solid <<colour tiddler-info-background>>;
+	margin-top: 4px;
 }
 
 .tc-unfold-banner:hover {
-background: <<colour tiddler-info-background>>;
-border-top: 2px solid <<colour tiddler-info-border>>;
+	background: <<colour tiddler-info-background>>;
+	border-top: 2px solid <<colour tiddler-info-border>>;
 }
 
 .tc-unfold-banner svg, .tc-fold-banner svg {
-height: 0.75em;
-fill: <<colour tiddler-controls-foreground>>;
+	height: 0.75em;
+	fill: <<colour tiddler-controls-foreground>>;
 }
 
 .tc-unfold-banner:hover svg, .tc-fold-banner:hover svg {
-fill: <<colour tiddler-controls-foreground-hover>>;
+	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
 .tc-fold-banner {
-position: absolute;
-padding: 0;
-margin: 0;
-background: none;
-border: none;
-width: 23px;
-text-align: center;
-margin-left: -35px;
-top: 6px;
-bottom: 6px;
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+	width: 23px;
+	text-align: center;
+	margin-left: -35px;
+	top: 6px;
+	bottom: 6px;
 }
 
 .tc-fold-banner:hover {
-background: <<colour tiddler-info-background>>;
+	background: <<colour tiddler-info-background>>;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-.tc-unfold-banner {
-	position: static;
-	width: calc(100% + 59px);
-}
+	.tc-unfold-banner {
+		position: static;
+		width: calc(100% + 59px);
+	}
 
-.tc-fold-banner {
-	width: 16px;
-	margin-left: -16px;
-	font-size: 0.75em;
-}
+	.tc-fold-banner {
+		width: 16px;
+		margin-left: -16px;
+		font-size: 0.75em;
+	}
 
 }
 
@@ -789,87 +789,87 @@ background: <<colour tiddler-info-background>>;
 */
 
 .tc-tag-list-item {
-position: relative;
-display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .tc-tags-wrapper {
-margin: 4px 0 14px 0;
+	margin: 4px 0 14px 0;
 }
 
 .tc-tags-wrapper .tc-tag-list-item {
-margin-right: 7px;
+	margin-right: 7px;
 }
 
 .tc-missing-tiddler-label {
-font-style: italic;
-font-weight: normal;
-display: inline-block;
-font-size: 11.844px;
-line-height: 14px;
-white-space: nowrap;
-vertical-align: baseline;
+	font-style: italic;
+	font-weight: normal;
+	display: inline-block;
+	font-size: 11.844px;
+	line-height: 14px;
+	white-space: nowrap;
+	vertical-align: baseline;
 }
 
 .tc-block-tags-dropdown > .tc-btn-invisible:hover {
-background-color: <<colour primary>>;
+	background-color: <<colour primary>>;
 }
 
 button.tc-tag-label, span.tc-tag-label {
-display: inline-block;
-padding: 0.16em 0.7em;
-font-size: 0.9em;
-font-weight: normal;
-line-height: 1.2em;
-color: <<colour tag-foreground>>;
-white-space: break-spaces;
-vertical-align: baseline;
-background-color: <<colour tag-background>>;
-border-radius: 1em;
+	display: inline-block;
+	padding: 0.16em 0.7em;
+	font-size: 0.9em;
+	font-weight: normal;
+	line-height: 1.2em;
+	color: <<colour tag-foreground>>;
+	white-space: break-spaces;
+	vertical-align: baseline;
+	background-color: <<colour tag-background>>;
+	border-radius: 1em;
 }
 
 .tc-sidebar-scrollable .tc-tag-label {
-text-shadow: none;
+	text-shadow: none;
 }
 
 .tc-untagged-separator {
-border: 0;
-height: 1px;
-background: <<colour tab-divider>>;
+	border: 0;
+	height: 1px;
+	background: <<colour tab-divider>>;
 }
 
 button.tc-untagged-label {
-background-color: <<colour untagged-background>>;
+	background-color: <<colour untagged-background>>;
 }
 
 .tc-tag-label svg, .tc-tag-label img {
-height: 1em;
-width: 1em;
-margin-right: 3px;
-margin-bottom: 1px;
-vertical-align: bottom;
+	height: 1em;
+	width: 1em;
+	margin-right: 3px;
+	margin-bottom: 1px;
+	vertical-align: bottom;
 }
 
 .tc-edit-tags button.tc-remove-tag-button svg {
-font-size: 0.7em;
-vertical-align: middle;
+	font-size: 0.7em;
+	vertical-align: middle;
 }
 
 .tc-tag-manager-table .tc-tag-label {
 }
 
 .tc-tag-manager-tag {
-width: 100%;
+	width: 100%;
 }
 
 button.tc-btn-invisible.tc-remove-tag-button {
-outline: none;
+	outline: none;
 }
 
 .tc-tag-button-selected,
 .tc-list-item-selected a.tc-tiddlylink, a.tc-list-item-selected {
-background-color: <<colour primary>>;
-color: <<colour tiddler-background>>;
+	background-color: <<colour primary>>;
+	color: <<colour tiddler-background>>;
 }
 
 /*
@@ -877,214 +877,214 @@ color: <<colour tiddler-background>>;
 */
 
 .tc-topbar {
-position: fixed;
-z-index: 1200;
+	position: fixed;
+	z-index: 1200;
 }
 
 .tc-topbar-left {
-left: 29px;
-top: 5px;
+	left: 29px;
+	top: 5px;
 }
 
 .tc-topbar-right {
-top: 5px;
-right: 29px;
+	top: 5px;
+	right: 29px;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-.tc-topbar-right {
-	right: 10px;
-}
+	.tc-topbar-right {
+		right: 10px;
+	}
 
 }
 
 .tc-topbar button {
-padding: 8px;
+	padding: 8px;
 }
 
 .tc-topbar svg {
-fill: <<colour muted-foreground>>;
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-topbar button:hover svg {
-fill: <<colour foreground>>;
+	fill: <<colour foreground>>;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-.tc-show-sidebar-btn svg.tc-image-chevron-left, .tc-hide-sidebar-btn svg.tc-image-chevron-right {
-	transform: rotate(-90deg);
-}
+	.tc-show-sidebar-btn svg.tc-image-chevron-left, .tc-hide-sidebar-btn svg.tc-image-chevron-right {
+		transform: rotate(-90deg);
+	}
 
 }
 
 .tc-sidebar-header {
-color: <<colour sidebar-foreground>>;
-fill: <<colour sidebar-foreground>>;
+	color: <<colour sidebar-foreground>>;
+	fill: <<colour sidebar-foreground>>;
 }
 
 .tc-sidebar-header .tc-title a.tc-tiddlylink-resolves {
-font-weight: normal;
+	font-weight: normal;
 }
 
 .tc-sidebar-header .tc-sidebar-lists p {
-margin-top: 3px;
-margin-bottom: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .tc-sidebar-header .tc-missing-tiddler-label {
-color: <<colour sidebar-foreground>>;
+	color: <<colour sidebar-foreground>>;
 }
 
 .tc-advanced-search input {
-width: 60%;
+	width: 60%;
 }
 
 .tc-search a svg {
-width: 1.2em;
-height: 1.2em;
-vertical-align: middle;
+	width: 1.2em;
+	height: 1.2em;
+	vertical-align: middle;
 }
 
 .tc-page-controls {
-margin-top: 14px;
-margin-bottom: 14px;
-font-size: 1.5em;
+	margin-top: 14px;
+	margin-bottom: 14px;
+	font-size: 1.5em;
 }
 
 .tc-page-controls .tc-drop-down {
-font-size: 1rem;
+	font-size: 1rem;
 }
 
 .tc-page-controls button {
-margin-right: 0.5em;
+	margin-right: 0.5em;
 }
 
 .tc-page-controls a.tc-tiddlylink:hover {
-text-decoration: none;
+	text-decoration: none;
 }
 
 .tc-page-controls img {
-width: 1em;
+	width: 1em;
 }
 
 .tc-page-controls svg {
-fill: <<colour sidebar-controls-foreground>>;
+	fill: <<colour sidebar-controls-foreground>>;
 }
 
 .tc-page-controls button:hover svg, .tc-page-controls a:hover svg {
-fill: <<colour sidebar-controls-foreground-hover>>;
+	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
 .tc-sidebar-lists .tc-menu-list-item {
-white-space: nowrap;
+	white-space: nowrap;
 }
 
 .tc-menu-list-count {
-font-weight: bold;
+	font-weight: bold;
 }
 
 .tc-menu-list-subitem {
-padding-left: 7px;
+	padding-left: 7px;
 }
 
 .tc-story-river {
-position: relative;
+	position: relative;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-.tc-sidebar-header {
-	padding: 14px;
-	min-height: 32px;
-	margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-	transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
-}
-
-<<if-no-sidebar """
-
 	.tc-sidebar-header {
-		min-height: 0;
-		padding-top: 0;
-		padding-bottom: 0;
+		padding: 14px;
+		min-height: 32px;
+		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		transition:  min-height {{$:/config/AnimationDuration}}ms ease-in-out, padding-top {{$:/config/AnimationDuration}}ms ease-in-out, padding-bottom {{$:/config/AnimationDuration}}ms ease-in-out;
 	}
 
-""">>
+	<<if-no-sidebar """
 
-.tc-story-river {
-	position: relative;
-	padding: 0;
-}
+		.tc-sidebar-header {
+			min-height: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+	""">>
+
+	.tc-story-river {
+		position: relative;
+		padding: 0;
+	}
 }
 
 @media (min-width: <<sidebarbreakpoint>>) {
 
-.tc-message-box {
-	margin: 21px -21px 21px -21px;
-}
+	.tc-message-box {
+		margin: 21px -21px 21px -21px;
+	}
 
-.tc-sidebar-scrollable {
-	position: fixed;
-	top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-	left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
-	bottom: 0;
-	right: 0;
-	overflow-y: auto;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	margin: 0 0 0 -42px;
-	padding: 71px 0 28px 42px;
-}
+	.tc-sidebar-scrollable {
+		position: fixed;
+		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+		bottom: 0;
+		right: 0;
+		overflow-y: auto;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		margin: 0 0 0 -42px;
+		padding: 71px 0 28px 42px;
+	}
 
-html[dir="rtl"] .tc-sidebar-scrollable {
-	left: auto;
-	right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
-}
+	html[dir="rtl"] .tc-sidebar-scrollable {
+		left: auto;
+		right: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+	}
 
-.tc-story-river {
-	position: relative;
-	left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-	top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-	width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
-	padding: 42px 42px 42px 42px;
-}
+	.tc-story-river {
+		position: relative;
+		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
+		padding: 42px 42px 42px 42px;
+	}
 
 <<if-no-sidebar "
 
-.tc-story-river {
-	width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
-}
+	.tc-story-river {
+		width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+	}
 
 ">>
 
-.tc-story-river.tc-static-story-river {
-	margin-right: 0;
-	padding-right: 42px;
-}
+	.tc-story-river.tc-static-story-river {
+		margin-right: 0;
+		padding-right: 42px;
+	}
 
 }
 
 @media print {
 
-body.tc-body {
-	background-color: transparent;
-}
+	body.tc-body {
+		background-color: transparent;
+	}
 
-.tc-sidebar-header, .tc-topbar {
-	display: none;
-}
+	.tc-sidebar-header, .tc-topbar {
+		display: none;
+	}
 
-.tc-story-river {
-	margin: 0;
-	padding: 0;
-}
+	.tc-story-river {
+		margin: 0;
+		padding: 0;
+	}
 
-.tc-story-river .tc-tiddler-frame {
-	margin: 0;
-	border: none;
-	padding: 0;
-}
+	.tc-story-river .tc-tiddler-frame {
+		margin: 0;
+		border: none;
+		padding: 0;
+	}
 }
 
 /*
@@ -1092,262 +1092,262 @@ body.tc-body {
 */
 
 .tc-tiddler-frame {
-position: relative;
-margin-bottom: 28px;
-background-color: <<colour tiddler-background>>;
-border: 1px solid <<colour tiddler-border>>;
+	position: relative;
+	margin-bottom: 28px;
+	background-color: <<colour tiddler-background>>;
+	border: 1px solid <<colour tiddler-border>>;
 }
 
 {{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
-overflow: hidden;
-padding: 14px 42px 14px 42px;
-background-color: <<colour tiddler-info-background>>;
-border-top: 1px solid <<colour tiddler-info-border>>;
-border-bottom: 1px solid <<colour tiddler-info-border>>;
+	overflow: hidden;
+	padding: 14px 42px 14px 42px;
+	background-color: <<colour tiddler-info-background>>;
+	border-top: 1px solid <<colour tiddler-info-border>>;
+	border-bottom: 1px solid <<colour tiddler-info-border>>;
 }
 
 .tc-tiddler-info p {
-margin-top: 3px;
-margin-bottom: 3px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .tc-tiddler-info .tc-tab-buttons button.tc-tab-selected {
-background-color: <<colour tiddler-info-tab-background>>;
-border-bottom: 1px solid <<colour tiddler-info-tab-background>>;
+	background-color: <<colour tiddler-info-tab-background>>;
+	border-bottom: 1px solid <<colour tiddler-info-tab-background>>;
 }
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-.tc-tiddler-info {
-	padding: 14px 14px 14px 14px;
-}
+	.tc-tiddler-info {
+		padding: 14px 14px 14px 14px;
+	}
 
 }
 
 .tc-view-field-table {
-width: 100%;
-}
-
-.tc-view-field-name {
-width: 1%; /* Makes this column be as narrow as possible */
-white-space: nowrap;
-vertical-align: top;
-text-align: right;
-font-style: italic;
-font-weight: normal;
-}
-
-.tc-view-field-value {
-word-break: break-all;
-}
-
-@media (max-width: <<sidebarbreakpoint-minus-one>>) {
-.tc-tiddler-frame {
-	padding: 14px 14px 14px 14px;
-	margin-bottom: .5em;
-}
-
-.tc-tiddler-info {
-	margin: 0 -14px 0 -14px;
-}
-}
-
-@media (min-width: <<sidebarbreakpoint>>) {
-.tc-tiddler-frame {
-	padding: 28px 42px 42px 42px;
-	width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
-	border-radius: 2px;
-}
-
-<<if-no-sidebar "
-
-.tc-tiddler-frame {
 	width: 100%;
 }
 
+.tc-view-field-name {
+	width: 1%; /* Makes this column be as narrow as possible */
+	white-space: nowrap;
+	vertical-align: top;
+	text-align: right;
+	font-style: italic;
+	font-weight: normal;
+}
+
+.tc-view-field-value {
+	word-break: break-all;
+}
+
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
+	.tc-tiddler-frame {
+		padding: 14px 14px 14px 14px;
+		margin-bottom: .5em;
+	}
+
+	.tc-tiddler-info {
+		margin: 0 -14px 0 -14px;
+	}
+}
+
+@media (min-width: <<sidebarbreakpoint>>) {
+	.tc-tiddler-frame {
+		padding: 28px 42px 42px 42px;
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+		border-radius: 2px;
+	}
+
+<<if-no-sidebar "
+
+	.tc-tiddler-frame {
+		width: 100%;
+	}
+
 ">>
 
-.tc-tiddler-info {
-	margin: 0 -42px 0 -42px;
-}
+	.tc-tiddler-info {
+		margin: 0 -42px 0 -42px;
+	}
 }
 
 .tc-site-title,
 .tc-titlebar {
-font-weight: normal;
-font-size: 2.35em;
-line-height: 1.35em;
-color: <<colour tiddler-title-foreground>>;
-margin: 0;
+	font-weight: normal;
+	font-size: 2.35em;
+	line-height: 1.35em;
+	color: <<colour tiddler-title-foreground>>;
+	margin: 0;
 }
 
 .tc-site-title {
-color: <<colour site-title-foreground>>;
+	color: <<colour site-title-foreground>>;
 }
 
 .tc-tiddler-title-icon {
-vertical-align: middle;
-margin-right: .1em;
+	vertical-align: middle;
+	margin-right: .1em;
 }
 
 .tc-tiddler-title-icon svg {
-width: 0.9em;
-height: 0.9em;
+	width: 0.9em;
+	height: 0.9em;
 }
 
 .tc-system-title-prefix {
-color: <<colour muted-foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 .tc-titlebar h2 {
-font-size: 1em;
-display: inline;
+	font-size: 1em;
+	display: inline;
 }
 
 .tc-titlebar img {
-height: 1em;
+	height: 1em;
 }
 
 .tc-subtitle {
-font-size: 0.9em;
-color: <<colour tiddler-subtitle-foreground>>;
-font-weight: normal;
+	font-size: 0.9em;
+	color: <<colour tiddler-subtitle-foreground>>;
+	font-weight: normal;
 }
 
 .tc-subtitle .tc-tiddlylink {
-margin-right: .3em;
+	margin-right: .3em;
 }
 
 .tc-tiddler-missing .tc-title {
-font-style: italic;
-font-weight: normal;
+	font-style: italic;
+	font-weight: normal;
 }
 
 .tc-tiddler-frame .tc-tiddler-controls {
-float: right;
-padding: 3px; /* make space for outline */
+	float: right;
+	padding: 3px; /* make space for outline */
 }
 
 .tc-tiddler-controls .tc-drop-down {
-font-size: 0.6em;
+	font-size: 0.6em;
 }
 
 .tc-tiddler-controls .tc-drop-down .tc-drop-down {
-font-size: 1em;
+	font-size: 1em;
 }
 
 .tc-tiddler-controls > span > button,
 .tc-tiddler-controls > span > span > button,
 .tc-tiddler-controls > span > span > span > button {
-vertical-align: baseline;
-margin-left:5px;
+	vertical-align: baseline;
+	margin-left:5px;
 }
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img,
 .tc-search button svg, .tc-search a svg {
-fill: <<colour tiddler-controls-foreground>>;
+	fill: <<colour tiddler-controls-foreground>>;
 }
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img {
-height: 0.75em;
+	height: 0.75em;
 }
 
 .tc-search button svg, .tc-search a svg {
-height: 1.2em;
-width: 1.2em;
-margin: 0 0.25em;
+	height: 1.2em;
+	width: 1.2em;
+	margin: 0 0.25em;
 }
 
 .tc-tiddler-controls button.tc-selected svg,
 .tc-page-controls button.tc-selected svg  {
-fill: <<colour tiddler-controls-foreground-selected>>;
+	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
 .tc-tiddler-controls button.tc-btn-invisible:hover svg,
 .tc-search button:hover svg, .tc-search a:hover svg {
-fill: <<colour tiddler-controls-foreground-hover>>;
+	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
 @media print {
-.tc-tiddler-controls {
-	display: none;
-}
+	.tc-tiddler-controls {
+		display: none;
+	}
 }
 
 .tc-tiddler-help { /* Help prompts within tiddler template */
-color: <<colour muted-foreground>>;
-margin-top: 14px;
+	color: <<colour muted-foreground>>;
+	margin-top: 14px;
 }
 
 .tc-tiddler-help a.tc-tiddlylink {
-color: <<colour very-muted-foreground>>;
+	color: <<colour very-muted-foreground>>;
 }
 
 .tc-tiddler-frame .tc-edit-texteditor {
-width: 100%;
-margin: 4px 0 4px 0;
+	width: 100%;
+	margin: 4px 0 4px 0;
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor,
 .tc-tiddler-frame iframe.tc-edit-texteditor,
 .tc-tiddler-frame select.tc-edit-texteditor {
-padding: 3px 3px 3px 3px;
-border: 1px solid <<colour tiddler-editor-border>>;
-line-height: 1.3em;
-font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+	padding: 3px 3px 3px 3px;
+	border: 1px solid <<colour tiddler-editor-border>>;
+	line-height: 1.3em;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor,
 .tc-tiddler-frame iframe.tc-edit-texteditor {
--webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
 .tc-tiddler-frame select.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor {
-background-color: <<colour tiddler-editor-background>>;
+	background-color: <<colour tiddler-editor-background>>;
 }
 
 .tc-tiddler-frame iframe.tc-edit-texteditor {
-background-color: <<colour tiddler-background>>;
+	background-color: <<colour tiddler-background>>;
 }
 
 .tc-tiddler-frame .tc-edit-fields input.tc-edit-fieldeditor,
 .tc-tiddler-frame .tc-edit-fields select.tc-edit-fieldeditor,
 .tc-tiddler-frame .tc-edit-fields textarea.tc-edit-fieldeditor {
-margin: 0;
-padding: 2px 3px;
+	margin: 0;
+	padding: 2px 3px;
 }
 
 .tc-tiddler-frame .tc-binary-warning {
-width: 100%;
-height: 5em;
-text-align: center;
-padding: 3em 3em 6em 3em;
-background: <<colour alert-background>>;
-border: 1px solid <<colour alert-border>>;
+	width: 100%;
+	height: 5em;
+	text-align: center;
+	padding: 3em 3em 6em 3em;
+	background: <<colour alert-background>>;
+	border: 1px solid <<colour alert-border>>;
 }
 
 canvas.tc-edit-bitmapeditor  {
-border: 6px solid <<colour tiddler-editor-border-image>>;
-cursor: crosshair;
--moz-user-select: none;
--webkit-user-select: none;
--ms-user-select: none;
-margin-top: 6px;
-margin-bottom: 6px;
+	border: 6px solid <<colour tiddler-editor-border-image>>;
+	cursor: crosshair;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	margin-top: 6px;
+	margin-bottom: 6px;
 }
 
 .tc-edit-bitmapeditor-width {
-display: block;
+	display: block;
 }
 
 .tc-edit-bitmapeditor-height {
-display: block;
+	display: block;
 }
 
 .tc-tiddler-body {
