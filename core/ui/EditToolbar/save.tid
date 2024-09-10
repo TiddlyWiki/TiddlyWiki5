@@ -8,7 +8,7 @@ description: {{$:/language/Buttons/Save/Hint}}
 <$fieldmangler>
 	<$button
 		tooltip={{$:/language/Buttons/Save/Hint}}
-		aria-label={{$:/language/Buttons/Save/Caption}}
+		aria-label={{$:/language/Buttons/Save/Hint}}
 		class=<<tv-config-toolbar-class>>
 	>
 		<<save-tiddler-actions>>
