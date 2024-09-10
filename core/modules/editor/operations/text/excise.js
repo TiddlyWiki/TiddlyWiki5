@@ -12,9 +12,15 @@ Text editor operation to excise the selection to a new tiddler
 /*global $tw: false */
 "use strict";
 
+function isMarkdown(mediaType) {
+	return mediaType === 'text/markdown' || mediatype === 'text/x-markdown';
+}
+
 exports["excise"] = function(event,operation) {
 	var editTiddler = this.wiki.getTiddler(this.editTitle),
-		editTiddlerTitle = this.editTitle;
+		editTiddlerTitle = this.editTitle,
+		wikiLinks = !isMarkdown(editTiddler.fields.type);
+
 	if(editTiddler && editTiddler.fields["draft.of"]) {
 		editTiddlerTitle = editTiddler.fields["draft.of"];
 	}
@@ -35,7 +41,8 @@ exports["excise"] = function(event,operation) {
 			operation.replacement = "{{" + operation.replacement+ "}}";
 			break;
 		case "link":
-			operation.replacement = "[[" + operation.replacement+ "]]";
+			operation.replacement = wikiLinks ? "[[" + operation.replacement+ "]]"
+				: ("[" + operation.replacement + "](<#" + operation.replacement + ">)");
 			break;
 		case "macro":
 			operation.replacement = "<<" + (event.paramObject.macro || "translink") + " \"\"\"" + operation.replacement + "\"\"\">>";
