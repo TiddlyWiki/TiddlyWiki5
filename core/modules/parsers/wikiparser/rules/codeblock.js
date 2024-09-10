@@ -1,4 +1,3 @@
-// @ts-check
 /**
 title: $:/core/modules/parsers/wikiparser/rules/codeblock.js
 type: application/javascript
