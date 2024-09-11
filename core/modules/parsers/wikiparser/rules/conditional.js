@@ -6,7 +6,7 @@ module-type: wikirule
 Conditional shortcut syntax
 
 ```
-This is a <% if [{something}] %>Elephant<% elseif [{else}] %>Pelican<% else %>Crocodile<% endif %>
+This is a <%if [{something}] %>Elephant<%elseif [{else}] %>Pelican<%else%>Crocodile<%endif%>
 ```
 
 \*/
@@ -27,7 +27,7 @@ exports.init = function(parser) {
 };
 
 exports.findNextMatch = function(startPos) {
-	// Look for the next <% if shortcut
+	// Look for the next <%if shortcut
 	this.matchRegExp.lastIndex = startPos;
 	this.match = this.matchRegExp.exec(this.parser.source);
 	// If not found then return no match

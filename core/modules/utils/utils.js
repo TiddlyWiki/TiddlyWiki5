@@ -330,16 +330,18 @@ exports.formatTitleString = function(template,options) {
 			}]
 		];
 	while(t.length){
-		var matchString = "";
+		var matchString = "",
+			found = false;
 		$tw.utils.each(matches, function(m) {
 			var match = m[0].exec(t);
 			if(match) {
+				found = true;
 				matchString = m[1].call(null,match);
 				t = t.substr(match[0].length);
 				return false;
 			}
 		});
-		if(matchString) {
+		if(found) {
 			result += matchString;
 		} else {
 			result += t.charAt(0);

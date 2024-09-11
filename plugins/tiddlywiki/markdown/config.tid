@@ -2,16 +2,6 @@ title: $:/plugins/tiddlywiki/markdown/config
 
 ! Plugin Configuration
 
-|!Config |!Default |!Description |
-|[[breaks|$:/config/markdown/breaks]]|`false`|markdown-it library config: Convert '\n' in paragraphs into `<br>` |
-|[[linkify|$:/config/markdown/linkify]]|`false`|markdown-it library config: Autoconvert URL-like text to links |
-|[[renderWikiText|$:/config/markdown/renderWikiText]]|`true`|After Markdown is parsed, should any text elements be handed off to the ~WikiText parser for further processing? |
-|[[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]]|<code><$view tiddler="$:/plugins/tiddlywiki/markdown" subtiddler="$:/config/markdown/renderWikiTextPragma" mode="inline"/></code>|When handing off to the ~WikiText parser, what parser rules should it follow? |
-|[[typographer|$:/config/markdown/typographer]]|`false`|markdown-it library config: Enable some language-neutral replacement + quotes beautification |
-|[[quotes|$:/config/markdown/quotes]]|`“”‘’`|markdown-it library config: Double + single quotes replacement pairs, when `typographer` is enabled |
-
-''IMPORTANT:'' You must reload your wiki for changes to take effect.
-
 <h2 style="margin-top:1.5em">~WikiText Pragma</h2>
 
 The value of [[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]] has been carefully tuned to properly integrate markdown with ~TiddlyWiki. Changing this setting may produce unexpected results, but the inclusion of the following parser rules should be fine:

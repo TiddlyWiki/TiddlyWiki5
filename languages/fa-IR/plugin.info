@@ -2,7 +2,7 @@
 	"title": "$:/languages/fa-IR",
 	"name": "fa",
 	"plugin-type": "language",
-	"description": "Persian (Iran)",
+	"description": "فارسی (ایران)",
 	"author": "amirography",
 	"core-version": ">=5.0.0",
 	"text-direction": "rtl"

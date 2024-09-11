@@ -234,12 +234,12 @@ function MarkdownParser(type,text,options) {
 			rules: { pragma: {}, block: this.blockRuleClasses, inline: this.inlineRuleClasses }
 		});
 	}
-	catch (err) {
+	catch(err) {
 		wikiParser = $tw.wiki.parseText("text/vnd.tiddlywiki",
 			"<strong>Error encountered while parsing the tiddler:</strong><p>" + err.message + "</p>",
 			{parseAsInline: false, wiki: options.wiki});
 	}
-	finally {
+	finally{
 		$tw.utils.parseStringLiteral = origParseStringLiteral;
 	}
 	if(wikiParser.tree.length > 0) {

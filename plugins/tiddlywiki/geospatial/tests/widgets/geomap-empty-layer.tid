@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/widgets/geomap-empty-layer
+description: Map using geolayer without json and lat/long attributes
+import: $:/plugins/tiddlywiki/geospatial
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Narrative
+
+Verify exception reported in [[8452|https://github.com/TiddlyWiki/TiddlyWiki5/issues/8452]] is not thrown when the geolayer widget has no attributes
++
+title: Output
+
+<$geomap startPosition="bounds">
+<$geolayer/>
+</$geomap>
++
+title: ExpectedResult
+
+<p><div style="width:100%;height:600px;"></div></p>
