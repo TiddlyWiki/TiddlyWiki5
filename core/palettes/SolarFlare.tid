@@ -142,6 +142,10 @@ sidebar-controls-foreground-hover:
 sidebar-muted-foreground-hover:
 sidebar-tab-background: #ded8c5
 sidebar-tiddler-link-foreground-hover:
+stability-deprecated: <<colour red>>
+stability-experimental: <<colour yellow>>
+stability-legacy: <<colour blue>>
+stability-stable: <<colour green>>
 static-alert-foreground: #aaaaaa
 tab-border: #cccccc
     modal-footer-border: <<colour tab-border>>

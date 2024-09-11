@@ -1,5 +1,5 @@
 created: 20240609152203076
-modified: 20240614210714914
+modified: 20240901142049810
 tags: 
 title: WidgetMessage: tm-http-request Examples
 type: text/vnd.tiddlywiki
@@ -32,6 +32,7 @@ type: text/vnd.tiddlywiki
 	<$action-sendmessage
 		$message="tm-http-request"
 		url="https://httpbin.org/post"
+		header-content-type="application/json"
 		method="POST"
 		body='{"foo": "bar"}'
 		oncompletion=<<store-fetched-output>>

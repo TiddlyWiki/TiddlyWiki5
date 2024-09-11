@@ -133,6 +133,7 @@ Excise/Caption/Replace/Link: 链接
 Excise/Caption/Replace/Transclusion: 嵌入
 Excise/Caption/Tag: 将新条目的标签设为此条目的名称
 Excise/Caption/TiddlerExists: 提醒：条目已经存在
+Excise/DefaultTitle: 新的剪切
 Excise/Hint: 剪切所选文本到一个新条目
 Heading1/Caption: 标题 1
 Heading1/Hint: 套用标题级别 1 的格式于包含所选文本的列

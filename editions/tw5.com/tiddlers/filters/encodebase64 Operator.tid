@@ -1,14 +1,16 @@
 caption: encodebase64
+created: 20240831034955575
+from-version: 5.2.6
+modified: 20240831035003716
 op-input: a [[selection of titles|Title Selection]]
 op-output: the input with base 64 encoding applied
-op-suffix: optional: `binary` to treat input as binary data, `urlsafe` for URL-safe output
 op-parameter: 
 op-parameter-name: 
-op-purpose: apply base 64 encoding to a string
+op-purpose: apply [[base 64|Base64]] encoding to a string
+op-suffix: optional: `binary` to treat input as binary data, `urlsafe` for URL-safe output
 tags: [[Filter Operators]] [[String Operators]]
 title: encodebase64 Operator
 type: text/vnd.tiddlywiki
-from-version: 5.2.6
 
 See Mozilla Developer Network for details of [[base 64 encoding|https://developer.mozilla.org/en-US/docs/Glossary/Base64]]. TiddlyWiki uses [[library code from @nijikokun|https://gist.github.com/Nijikokun/5192472]] to handle the conversion.
 
