@@ -1051,7 +1051,7 @@ exports.initParsers = function(moduleType) {
  * @param {string} [options.defaultType="text/vnd.tiddlywiki"] - Default type to use if no parser is found for specified type
  * @param {boolean} [options.configTrimWhiteSpace=false] - If true, trims white space according to configuration
  * 
- * @returns {Parser|null} Parser instance or null if no parser is found
+ * @returns {Parser | null} Parser instance or null if no parser is found
  */
 exports.parseText = function(type,text,options) {
 	text = text || "";

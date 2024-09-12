@@ -1,3 +1,9 @@
+/*\
+title: $:/core/modules/parsers/base.js
+type: application/javascript
+module-type: library
+\*/
+
 /**
  * Base structure for a parse node
  * 
