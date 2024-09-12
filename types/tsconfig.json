@@ -4,17 +4,16 @@
       // Allow `import('$:/core/modules/...')` instead of `import('../../core/modules/...')`. Only works inside this project.
       "$:/core/*": ["core/*"]
     },
-    "baseUrl": "./generated",
-    "rootDir": "./generated",
+    "baseUrl": "./",
+    "rootDir": "./",
     "noEmit": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationDir": "types/generated",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "Node16",
     "skipLibCheck": true,
     "target": "ESNext"
   },
-  "include": ["./generated/**/*.d.ts"]
+  "include": ["./core/**/*.d.ts"]
 }

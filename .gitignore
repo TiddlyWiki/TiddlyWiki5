@@ -9,4 +9,4 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 $__StoryList.tid
-types/generated/
+types/core/
