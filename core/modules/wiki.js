@@ -1037,7 +1037,7 @@ exports.initParsers = function(moduleType) {
 };
 
 /**
- * @typedef {import('$:/core/modules/parsers/wikiparser/wikiparser.js')["text/vnd.tiddlywiki"]} WikiParser
+ * @typedef {import('$:/core/modules/parsers/base.js').Parser} Parser
  */
 
 /**
@@ -1051,13 +1051,12 @@ exports.initParsers = function(moduleType) {
  * @param {string} [options.defaultType="text/vnd.tiddlywiki"] - Default type to use if no parser is found for specified type
  * @param {boolean} [options.configTrimWhiteSpace=false] - If true, trims white space according to configuration
  * 
- * @returns {WikiParser|null} Parser instance or null if no parser is found
+ * @returns {Parser|null} Parser instance or null if no parser is found
  */
 exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
 	/**
-	 * @type WikiParser
 	 * Select a parser
 	 */
 	var Parser = $tw.Wiki.parsers[type];
