@@ -1,4 +1,4 @@
-import * as Wiki from '../core/modules/wiki';
+import * as Wiki from '$:/core/modules/wiki';
 
 declare global {
   var $tw: {
