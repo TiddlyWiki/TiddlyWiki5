@@ -15,6 +15,9 @@ Wiki text rule for code blocks. For example:
 
 /**
  * @typedef {import("$:/core/modules/parsers/base.js").ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ * @typedef {typeof exports & WikiRuleBase} ThisRule
  */
 
 /**
@@ -48,6 +51,7 @@ exports.init = function(parser) {
 /**
  * Parses the code block and returns an array of `codeblock` widgets.
  * 
+ * @this {ThisRule}
  * @returns {ParseTreeCodeblockNode[]} An array containing a single codeblock widget object.
  */
 exports.parse = function() {

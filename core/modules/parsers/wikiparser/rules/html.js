@@ -21,6 +21,9 @@ This is a widget invocation
 
 /**
  * @typedef {import("$:/core/modules/parsers/base.js").ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ * @typedef {typeof exports & WikiRuleBase & {nextTag?:ParseTreeHtmlNode;}} ThisRule
  */
 
 /**
@@ -51,10 +54,18 @@ This is a widget invocation
 exports.name = "html";
 exports.types = {inline: true, block: true};
 
+/**
+ * @param {Parser} parser 
+ */
 exports.init = function(parser) {
 	this.parser = parser;
 };
 
+/**
+ * @this {ThisRule}
+ * @param {number} startPos 
+ * @returns {number | undefined} Start position of next HTML tag
+ */
 exports.findNextMatch = function(startPos) {
 	// Find the next tag
 	this.nextTag = this.findNextTag(this.parser.source,startPos,{
@@ -65,7 +76,7 @@ exports.findNextMatch = function(startPos) {
 
 /**
  * Parse most recent match
- * 
+ * @this {ThisRule}
  * @returns {ParseTreeHtmlNode[]} Array containing parsed HTML tag object
  */
 exports.parse = function() {
@@ -191,6 +202,15 @@ exports.parseTag = function(source,pos,options) {
 	return node;
 };
 
+/**
+ * Find the next HTML tag in the source
+ * 
+ * @this {ThisRule}
+ * @param {string} source
+ * @param {number} pos - Position to start searching from
+ * @param {Object} options
+ * @returns {Object|null} Parsed tag object or null if no valid tag is found
+ */
 exports.findNextTag = function(source,pos,options) {
 	// A regexp for finding candidate HTML tags
 	var reLookahead = /<([a-zA-Z\-\$\.]+)/g;
