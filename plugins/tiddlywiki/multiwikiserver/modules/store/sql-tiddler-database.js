@@ -38,6 +38,72 @@ SqlTiddlerDatabase.prototype.transaction = function(fn) {
 
 SqlTiddlerDatabase.prototype.createTables = function() {
 	this.engine.runStatements([`
+		-- Users table
+		CREATE TABLE IF NOT EXISTS users (
+			user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			username TEXT UNIQUE NOT NULL,
+			email TEXT UNIQUE NOT NULL,
+			created_at TEXT DEFAULT (datetime('now')),
+			last_login TEXT
+		)
+	`,`
+		-- Groups table
+		CREATE TABLE IF NOT EXISTS groups (
+			group_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			group_name TEXT UNIQUE NOT NULL,
+			description TEXT
+		)
+	`,`
+		-- Roles table
+		CREATE TABLE IF NOT EXISTS roles (
+			role_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			role_name TEXT UNIQUE NOT NULL,
+			description TEXT
+		)
+	`,`
+		-- Permissions table
+		CREATE TABLE IF NOT EXISTS permissions (
+			permission_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			permission_name TEXT UNIQUE NOT NULL,
+			description TEXT
+		)
+	`,`
+		-- User-Group association table
+		CREATE TABLE IF NOT EXISTS user_groups (
+			user_id INTEGER,
+			group_id INTEGER,
+			PRIMARY KEY (user_id, group_id),
+			FOREIGN KEY (user_id) REFERENCES users(user_id),
+			FOREIGN KEY (group_id) REFERENCES groups(group_id)
+		)
+	`,`
+		-- User-Role association table
+		CREATE TABLE IF NOT EXISTS user_roles (
+			user_id INTEGER,
+			role_id INTEGER,
+			PRIMARY KEY (user_id, role_id),
+			FOREIGN KEY (user_id) REFERENCES users(user_id),
+			FOREIGN KEY (role_id) REFERENCES roles(role_id)
+		)
+	`,`
+		-- Group-Role association table
+		CREATE TABLE IF NOT EXISTS group_roles (
+			group_id INTEGER,
+			role_id INTEGER,
+			PRIMARY KEY (group_id, role_id),
+			FOREIGN KEY (group_id) REFERENCES groups(group_id),
+			FOREIGN KEY (role_id) REFERENCES roles(role_id)
+		)
+	`,`
+		-- Role-Permission association table
+		CREATE TABLE IF NOT EXISTS role_permissions (
+			role_id INTEGER,
+			permission_id INTEGER,
+			PRIMARY KEY (role_id, permission_id),
+			FOREIGN KEY (role_id) REFERENCES roles(role_id),
+			FOREIGN KEY (permission_id) REFERENCES permissions(permission_id)
+		)
+	`,`
 		-- Bags have names and access control settings
 		CREATE TABLE IF NOT EXISTS bags (
 			bag_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -82,6 +148,26 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 			FOREIGN KEY (tiddler_id) REFERENCES tiddlers(tiddler_id) ON UPDATE CASCADE ON DELETE CASCADE,
 			UNIQUE (tiddler_id, field_name)
 		)
+	`,`
+		-- ACL table (using bag/recipe ids directly)
+		CREATE TABLE IF NOT EXISTS acl (
+			acl_id INTEGER PRIMARY KEY AUTOINCREMENT,
+			entity_id INTEGER NOT NULL,
+			entity_type TEXT NOT NULL CHECK (entity_type IN ('bag', 'recipe')),
+			role_id INTEGER,
+			permission_id INTEGER,
+			FOREIGN KEY (role_id) REFERENCES roles(role_id),
+			FOREIGN KEY (permission_id) REFERENCES permissions(permission_id)
+		)
+	`,`
+		-- Indexes for performance (we can add more as needed based on query patterns)
+		CREATE INDEX IF NOT EXISTS idx_tiddlers_bag_id ON tiddlers(bag_id)
+	`,`
+		CREATE INDEX IF NOT EXISTS idx_fields_tiddler_id ON fields(tiddler_id)
+	`,`
+		CREATE INDEX IF NOT EXISTS idx_recipe_bags_recipe_id ON recipe_bags(recipe_id)
+	`,`
+		CREATE INDEX IF NOT EXISTS idx_acl_entity_id ON acl(entity_id)
 	`]);
 };
 
@@ -573,6 +659,333 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlerAttachmentBlob = function(title,rec
 		$recipe_name: recipe_name
 	});
 	return row ? row.attachment_blob : null;
+};
+
+// User CRUD operations
+SqlTiddlerDatabase.prototype.createUser = function(username, email) {
+	const result = this.engine.runStatement(`
+			INSERT INTO users (username, email)
+			VALUES ($username, $email)
+	`, {
+			$username: username,
+			$email: email
+	});
+	return result.lastInsertRowid;
+};
+
+SqlTiddlerDatabase.prototype.getUser = function(userId) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM users WHERE user_id = $userId
+	`, {
+			$userId: userId
+	});
+};
+
+SqlTiddlerDatabase.prototype.updateUser = function(userId, username, email) {
+	this.engine.runStatement(`
+			UPDATE users
+			SET username = $username, email = $email
+			WHERE user_id = $userId
+	`, {
+			$userId: userId,
+			$username: username,
+			$email: email
+	});
+};
+
+SqlTiddlerDatabase.prototype.deleteUser = function(userId) {
+	this.engine.runStatement(`
+			DELETE FROM users WHERE user_id = $userId
+	`, {
+			$userId: userId
+	});
+};
+
+SqlTiddlerDatabase.prototype.listUsers = function() {
+	return this.engine.runStatementGetAll(`
+			SELECT * FROM users ORDER BY username
+	`);
+};
+
+// Group CRUD operations
+SqlTiddlerDatabase.prototype.createGroup = function(groupName, description) {
+	const result = this.engine.runStatement(`
+			INSERT INTO groups (group_name, description)
+			VALUES ($groupName, $description)
+	`, {
+			$groupName: groupName,
+			$description: description
+	});
+	return result.lastInsertRowid;
+};
+
+SqlTiddlerDatabase.prototype.getGroup = function(groupId) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM groups WHERE group_id = $groupId
+	`, {
+			$groupId: groupId
+	});
+};
+
+SqlTiddlerDatabase.prototype.updateGroup = function(groupId, groupName, description) {
+	this.engine.runStatement(`
+			UPDATE groups
+			SET group_name = $groupName, description = $description
+			WHERE group_id = $groupId
+	`, {
+			$groupId: groupId,
+			$groupName: groupName,
+			$description: description
+	});
+};
+
+SqlTiddlerDatabase.prototype.deleteGroup = function(groupId) {
+	this.engine.runStatement(`
+			DELETE FROM groups WHERE group_id = $groupId
+	`, {
+			$groupId: groupId
+	});
+};
+
+SqlTiddlerDatabase.prototype.listGroups = function() {
+	return this.engine.runStatementGetAll(`
+			SELECT * FROM groups ORDER BY group_name
+	`);
+};
+
+// Role CRUD operations
+SqlTiddlerDatabase.prototype.createRole = function(roleName, description) {
+	const result = this.engine.runStatement(`
+			INSERT INTO roles (role_name, description)
+			VALUES ($roleName, $description)
+	`, {
+			$roleName: roleName,
+			$description: description
+	});
+	return result.lastInsertRowid;
+};
+
+SqlTiddlerDatabase.prototype.getRole = function(roleId) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM roles WHERE role_id = $roleId
+	`, {
+			$roleId: roleId
+	});
+};
+
+SqlTiddlerDatabase.prototype.updateRole = function(roleId, roleName, description) {
+	this.engine.runStatement(`
+			UPDATE roles
+			SET role_name = $roleName, description = $description
+			WHERE role_id = $roleId
+	`, {
+			$roleId: roleId,
+			$roleName: roleName,
+			$description: description
+	});
+};
+
+SqlTiddlerDatabase.prototype.deleteRole = function(roleId) {
+	this.engine.runStatement(`
+			DELETE FROM roles WHERE role_id = $roleId
+	`, {
+			$roleId: roleId
+	});
+};
+
+SqlTiddlerDatabase.prototype.listRoles = function() {
+	return this.engine.runStatementGetAll(`
+			SELECT * FROM roles ORDER BY role_name
+	`);
+};
+
+// Permission CRUD operations
+SqlTiddlerDatabase.prototype.createPermission = function(permissionName, description) {
+	const result = this.engine.runStatement(`
+			INSERT INTO permissions (permission_name, description)
+			VALUES ($permissionName, $description)
+	`, {
+			$permissionName: permissionName,
+			$description: description
+	});
+	return result.lastInsertRowid;
+};
+
+SqlTiddlerDatabase.prototype.getPermission = function(permissionId) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM permissions WHERE permission_id = $permissionId
+	`, {
+			$permissionId: permissionId
+	});
+};
+
+SqlTiddlerDatabase.prototype.updatePermission = function(permissionId, permissionName, description) {
+	this.engine.runStatement(`
+			UPDATE permissions
+			SET permission_name = $permissionName, description = $description
+			WHERE permission_id = $permissionId
+	`, {
+			$permissionId: permissionId,
+			$permissionName: permissionName,
+			$description: description
+	});
+};
+
+SqlTiddlerDatabase.prototype.deletePermission = function(permissionId) {
+	this.engine.runStatement(`
+			DELETE FROM permissions WHERE permission_id = $permissionId
+	`, {
+			$permissionId: permissionId
+	});
+};
+
+SqlTiddlerDatabase.prototype.listPermissions = function() {
+	return this.engine.runStatementGetAll(`
+			SELECT * FROM permissions ORDER BY permission_name
+	`);
+};
+
+// ACL CRUD operations
+SqlTiddlerDatabase.prototype.createACL = function(entityId, entityType, roleId, permissionId) {
+	const result = this.engine.runStatement(`
+			INSERT INTO acl (entity_id, entity_type, role_id, permission_id)
+			VALUES ($entityId, $entityType, $roleId, $permissionId)
+	`, {
+			$entityId: entityId,
+			$entityType: entityType,
+			$roleId: roleId,
+			$permissionId: permissionId
+	});
+	return result.lastInsertRowid;
+};
+
+SqlTiddlerDatabase.prototype.getACL = function(aclId) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM acl WHERE acl_id = $aclId
+	`, {
+			$aclId: aclId
+	});
+};
+
+SqlTiddlerDatabase.prototype.updateACL = function(aclId, entityId, entityType, roleId, permissionId) {
+	this.engine.runStatement(`
+			UPDATE acl
+			SET entity_id = $entityId, entity_type = $entityType, 
+					role_id = $roleId, permission_id = $permissionId
+			WHERE acl_id = $aclId
+	`, {
+			$aclId: aclId,
+			$entityId: entityId,
+			$entityType: entityType,
+			$roleId: roleId,
+			$permissionId: permissionId
+	});
+};
+
+SqlTiddlerDatabase.prototype.deleteACL = function(aclId) {
+	this.engine.runStatement(`
+			DELETE FROM acl WHERE acl_id = $aclId
+	`, {
+			$aclId: aclId
+	});
+};
+
+SqlTiddlerDatabase.prototype.listACLs = function() {
+	return this.engine.runStatementGetAll(`
+			SELECT * FROM acl ORDER BY entity_type, entity_id
+	`);
+};
+
+// Association management functions
+SqlTiddlerDatabase.prototype.addUserToGroup = function(userId, groupId) {
+	this.engine.runStatement(`
+			INSERT OR IGNORE INTO user_groups (user_id, group_id)
+			VALUES ($userId, $groupId)
+	`, {
+			$userId: userId,
+			$groupId: groupId
+	});
+};
+
+SqlTiddlerDatabase.prototype.isUserInGroup = function(userId, groupId) {
+	const result = this.engine.runStatementGet(`
+			SELECT 1 FROM user_groups
+			WHERE user_id = $userId AND group_id = $groupId
+	`, {
+			$userId: userId,
+			$groupId: groupId
+	});
+	return result !== undefined;
+};
+
+SqlTiddlerDatabase.prototype.removeUserFromGroup = function(userId, groupId) {
+	this.engine.runStatement(`
+			DELETE FROM user_groups
+			WHERE user_id = $userId AND group_id = $groupId
+	`, {
+			$userId: userId,
+			$groupId: groupId
+	});
+};
+
+SqlTiddlerDatabase.prototype.addRoleToUser = function(userId, roleId) {
+	this.engine.runStatement(`
+			INSERT OR IGNORE INTO user_roles (user_id, role_id)
+			VALUES ($userId, $roleId)
+	`, {
+			$userId: userId,
+			$roleId: roleId
+	});
+};
+
+SqlTiddlerDatabase.prototype.removeRoleFromUser = function(userId, roleId) {
+	this.engine.runStatement(`
+			DELETE FROM user_roles
+			WHERE user_id = $userId AND role_id = $roleId
+	`, {
+			$userId: userId,
+			$roleId: roleId
+	});
+};
+
+SqlTiddlerDatabase.prototype.addRoleToGroup = function(groupId, roleId) {
+	this.engine.runStatement(`
+			INSERT OR IGNORE INTO group_roles (group_id, role_id)
+			VALUES ($groupId, $roleId)
+	`, {
+			$groupId: groupId,
+			$roleId: roleId
+	});
+};
+
+SqlTiddlerDatabase.prototype.removeRoleFromGroup = function(groupId, roleId) {
+	this.engine.runStatement(`
+			DELETE FROM group_roles
+			WHERE group_id = $groupId AND role_id = $roleId
+	`, {
+			$groupId: groupId,
+			$roleId: roleId
+	});
+};
+
+SqlTiddlerDatabase.prototype.addPermissionToRole = function(roleId, permissionId) {
+	this.engine.runStatement(`
+			INSERT OR IGNORE INTO role_permissions (role_id, permission_id)
+			VALUES ($roleId, $permissionId)
+	`, {
+			$roleId: roleId,
+			$permissionId: permissionId
+	});
+};
+
+SqlTiddlerDatabase.prototype.removePermissionFromRole = function(roleId, permissionId) {
+	this.engine.runStatement(`
+			DELETE FROM role_permissions
+			WHERE role_id = $roleId AND permission_id = $permissionId
+	`, {
+			$roleId: roleId,
+			$permissionId: permissionId
+	});
 };
 
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;

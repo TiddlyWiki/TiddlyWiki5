@@ -105,6 +105,65 @@ function runSqlDatabaseTests(engine) {
 		expect(sqlTiddlerDatabase.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho")).toEqual({tiddler_id: 7, bag_name: 'bag-beta'});
 		expect(sqlTiddlerDatabase.getRecipeTiddler("More","recipe-rho").tiddler).toEqual({title: "More", text: "None"});
 	});
+
+	it("should manage users correctly", function() {
+		console.log("should manage users correctly")
+		// Create users
+		const userId1 = sqlTiddlerDatabase.createUser("john_doe", "john@example.com");
+		const userId2 = sqlTiddlerDatabase.createUser("jane_doe", "jane@example.com");
+
+		// Retrieve users
+		const user1 = sqlTiddlerDatabase.getUser(userId1);
+		expect(user1.user_id).toBe(userId1);
+		expect(user1.username).toBe("john_doe");
+		expect(user1.email).toBe("john@example.com");
+		expect(user1.created_at).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/); // Match timestamp format
+		expect(user1.last_login).toBeNull();
+
+		// Update user
+		sqlTiddlerDatabase.updateUser(userId1, "john_updated", "john_updated@example.com");
+		expect(sqlTiddlerDatabase.getUser(userId1).username).toBe("john_updated");
+		expect(sqlTiddlerDatabase.getUser(userId1).email).toBe("john_updated@example.com");
+
+		// List users
+		const users = sqlTiddlerDatabase.listUsers();
+		expect(users.length).toBe(2);
+		expect(users[0].username).toBe("jane_doe");
+		expect(users[1].username).toBe("john_updated");
+
+		// Delete user
+		sqlTiddlerDatabase.deleteUser(userId2);
+		// expect(sqlTiddlerDatabase.getUser(userId2)).toBe(null || undefined);
+	});
+
+	it("should manage groups correctly", function() {
+		console.log("should manage groups correctly")
+		// Create groups
+		const groupId1 = sqlTiddlerDatabase.createGroup("Editors", "Can edit content");
+		const groupId2 = sqlTiddlerDatabase.createGroup("Viewers", "Can view content");
+
+		// Retrieve groups
+		expect(sqlTiddlerDatabase.getGroup(groupId1)).toEqual({
+			group_id: groupId1,
+			group_name: "Editors",
+			description: "Can edit content"
+		});
+
+		// Update group
+		sqlTiddlerDatabase.updateGroup(groupId1, "Super Editors", "Can edit all content");
+		expect(sqlTiddlerDatabase.getGroup(groupId1).group_name).toBe("Super Editors");
+		expect(sqlTiddlerDatabase.getGroup(groupId1).description).toBe("Can edit all content");
+
+		// List groups
+		const groups = sqlTiddlerDatabase.listGroups();
+		expect(groups.length).toBe(2);
+		expect(groups[0].group_name).toBe("Super Editors");
+		expect(groups[1].group_name).toBe("Viewers");
+
+		// Delete group
+		sqlTiddlerDatabase.deleteGroup(groupId2);
+		// expect(sqlTiddlerDatabase.getGroup(groupId2)).toBe(null || undefined);
+	});
 }
 
 }
