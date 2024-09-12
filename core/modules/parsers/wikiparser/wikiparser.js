@@ -30,13 +30,13 @@ Attributes are stored as hashmaps of the following objects:
  * 
  * @class
  * @constructor
- * @param {string} type - The content type of the text to be parsed.
- * @param {string} text - The text to be parsed.
- * @param {Object} options - Options for parsing.
- * @param {boolean} [options.parseAsInline=false] - If true, the text will be parsed as an inline run.
- * @param {Object} options.wiki - Reference to the wiki to use.
- * @param {string} [options._canonical_uri] - Optional URI of the content if the text is missing or empty.
- * @param {boolean} [options.configTrimWhiteSpace=false] - If true, trims white space according to configuration.
+ * @param {string} type - Content type of the text to be parsed
+ * @param {string} text - Text to be parsed
+ * @param {Object} options - Parser options
+ * @param {boolean} [options.parseAsInline=false] - If true, the text will be parsed as an inline run
+ * @param {Object} options.wiki - Reference to the wiki store in use
+ * @param {string} [options._canonical_uri] - Optional URI of the content if text is missing or empty
+ * @param {boolean} [options.configTrimWhiteSpace=false] - If true, the parser trims white space
  */
 function WikiParser(type,text,options) {
 	this.wiki = options.wiki;

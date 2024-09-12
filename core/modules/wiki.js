@@ -1041,17 +1041,17 @@ exports.initParsers = function(moduleType) {
  */
 
 /**
- * Parse a block of text of a specified MIME type.
+ * Parse a block of text of a specified MIME type
  * 
- * @param {string} type - The content type of the text to be parsed.
- * @param {string} text - The text to be parsed.
- * @param {Object} [options] - Options for parsing.
- * @param {boolean} [options.parseAsInline=false] - If true, the text will be parsed as an inline run.
- * @param {string} [options._canonical_uri] - Optional string of the canonical URI of this content.
- * @param {string} [options.defaultType="text/vnd.tiddlywiki"] - The default type to use if no parser is found for the specified type.
- * @param {boolean} [options.configTrimWhiteSpace=false] - If true, trims white space according to configuration.
+ * @param {string} type - Content type of text to be parsed
+ * @param {string} text - Text to be parsed
+ * @param {Object} [options] - Options for parsing
+ * @param {boolean} [options.parseAsInline=false] - If true, text will be parsed as an inline run
+ * @param {string} [options._canonical_uri] - Optional string of canonical URI of this content
+ * @param {string} [options.defaultType="text/vnd.tiddlywiki"] - Default type to use if no parser is found for specified type
+ * @param {boolean} [options.configTrimWhiteSpace=false] - If true, trims white space according to configuration
  * 
- * @returns {WikiParser|null} The parser instance or null if no parser is found.
+ * @returns {WikiParser|null} Parser instance or null if no parser is found
  */
 exports.parseText = function(type,text,options) {
 	text = text || "";
