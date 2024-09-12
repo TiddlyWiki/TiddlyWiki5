@@ -17,6 +17,31 @@ This is a widget invocation
 }}}
 
 \*/
+
+
+/**
+ * @typedef {import("$:/core/modules/parsers/base.js").ParseTreeAttribute} ParseTreeAttribute
+ */
+
+/**
+ * Represents the parser `html` rule
+ * 
+ * @typedef {Object} ParseTreeHtmlNode
+ * @property {"html"} rule
+ * @property {"element"} type
+ * @property {keyof HTMLElementTagNameMap} tag
+ * @property {number} start
+ * @property {number} end
+ * @property {Record<string,ParseTreeAttribute>} attributes - Contains attributes of HTML element
+ * @property {boolean} isSelfClosing - If tag is self-closing
+ * @property {boolean} isBlock - If tag is a block element
+ * @property {number} openTagStart
+ * @property {number} openTagEnd
+ * @property {number} closeTagStart
+ * @property {number} closeTagEnd
+ * @property {ParseTreeHtmlNode[]} [children]
+ */
+
 (function(){
 
 /*jslint node: true, browser: true */
@@ -38,11 +63,16 @@ exports.findNextMatch = function(startPos) {
 	return this.nextTag ? this.nextTag.start : undefined;
 };
 
-/*
-Parse the most recent match
-*/
+/**
+ * Parse most recent match
+ * 
+ * @returns {ParseTreeHtmlNode[]} Array containing parsed HTML tag object
+ */
 exports.parse = function() {
-	// Retrieve the most recent match so that recursive calls don't overwrite it
+	/**
+	 * @type {ParseTreeHtmlNode}
+	 * Retrieve the most recent match so that recursive calls don't overwrite it
+	 */
 	var tag = this.nextTag;
 	if (!tag.isSelfClosing) {
 		tag.openTagStart = tag.start;
