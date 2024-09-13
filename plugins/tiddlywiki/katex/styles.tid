@@ -7,7 +7,7 @@ tags: [[$:/tags/Stylesheet]]
 
 {{$:/plugins/tiddlywiki/katex/katex.min.css}}
 
-/* Force text-rendering  (see https://github.com/Jermolene/TiddlyWiki5/issues/2500) */
+/* Force text-rendering  (see https://github.com/TiddlyWiki/TiddlyWiki5/issues/2500) */
 
 .katex {
     text-rendering: auto;

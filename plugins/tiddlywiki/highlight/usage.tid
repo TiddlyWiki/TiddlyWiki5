@@ -31,8 +31,8 @@ You can import language definitions into <$text text="JavaScript"/> tiddlers, wi
 
 First, locate the language file(s) you need. You can fetch the files from the following CDNs:
 
-* <a href=<<jsDelivrLink>>>jsDelivr</a>
-* <a href=<<unpkgLink>>>unpkg</a>
+* <a href=<<jsDelivrLink>> class="tc-tiddlylink-external" target="_blank">jsDelivr</a>
+* <a href=<<unpkgLink>> class="tc-tiddlylink-external" target="_blank">unpkg</a>
 
 Then, click the button below to create a "highlight" module. Copy and paste the content of a language file into the the text area. Give your tiddler a meaningful title so you can keep track of the languages you've installed. You may choose to either create one tiddler per language or lump all language definitions into one tiddler. Save and reload your wiki.
 

@@ -1,5 +1,30 @@
 title: $:/plugins/tiddlywiki/menubar/readme
 
-\define lingo-base() $:/plugins/tiddlywiki/menubar/language/
+!! Introduction
 
-<<lingo readme>>
+This plugin provides a menu bar with the following features:
+
+* Menu items take the form of simple text links, dropdowns, or entirely custom content
+* Menu items can be individually enabled via the control panel
+* Responds to reduced screen width by abbreviating the menu items to a "hamburger" dropdown
+
+!! Menu Item Tiddlers
+
+Menu items are tagged <<tag $:/tags/MenuBar>>. The following fields are used by this plugin:
+
+|!Field Name |!Purpose |
+|title |Each menu item must have a unique title (not shown to the user) |
+|description |Description for use in listings |
+|tags |Must contain `$:/tags/MenuBar` |
+|caption |The text that is displayed for the menu item. Avoid links, using `~` to suppress CamelCase links if required |
+|target |For simple link menu items specifies a tiddler title as the target of the link |
+|is-dropdown |Set to `yes` to indicate a dropdown menu item |
+|dropdown-position |Optional position for the dropdown (can be ''left'', ''above'', ''aboveleft'', ''aboveright'', ''right'', ''belowleft'', ''belowright'' or ''below'') |
+|text |For dropdown menu items, specifies the body of the dropdown |
+|custom-menu-content |Optional wikitext to be displayed in place of the caption |
+|custom-menu-styles-wide |Optional string of styles to be applied to menu item when the menubar is wide |
+|custom-menu-styles-narrow |Optional string of styles to be applied to menu item when the menubar is narrow |
+
+Custom menu items should make sure that the clickable link or button is an immediate child, and not wrapped in another element.
+
+Note that menu items can be pushed to the right of the menu bar setting the ''custom-menu-styles'' field to `float: right;`.

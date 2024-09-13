@@ -1,8 +1,10 @@
 title: cities/Oxford
-tags: $:/tags/GeoMarker
+tags: $:/tags/GeoMarker $:/tags/Demo/Cities
 caption: Oxford
 lat: 51.751944
 long: -1.257778
 alt: 0
+
+{{cities/Oxford/image}}
 
 This is Oxford!

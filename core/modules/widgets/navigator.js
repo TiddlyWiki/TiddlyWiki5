@@ -185,7 +185,7 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 // Place a tiddler in edit mode
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 	var editTiddler = $tw.hooks.invokeHook("th-editing-tiddler",event),
-	    win = event.event && event.event.view ? event.event.view : window;
+		win = event.event && event.event.view ? event.event.view : window;
 	if(!editTiddler) {
 		return false;
 	}
@@ -307,7 +307,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
 		storyList = this.getStoryList(),
-	    	win = event.event && event.event.view ? event.event.view : window;
+		win = event.event && event.event.view ? event.event.view : window;
 	// Replace the original tiddler with the draft
 	if(tiddler) {
 		var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
@@ -413,7 +413,8 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	event = $tw.hooks.invokeHook("th-new-tiddler", event);
 	// Get the story details
 	var storyList = this.getStoryList(),
-		templateTiddler, additionalFields, title, draftTitle, existingTiddler;
+		templateTiddler, additionalFields, title, draftTitle, existingTiddler,
+		templateHasTags = false;
 	// Get the template tiddler (if any)
 	if(typeof event.param === "string") {
 		// Get the template tiddler
@@ -458,8 +459,10 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		// Merge tags
 		mergedTags = $tw.utils.pushTop(mergedTags,$tw.utils.parseStringArray(additionalFields.tags));
 	}
+	var additionalFieldsHasTags = !!(additionalFields && (additionalFields.tags === ""));
 	if(templateTiddler && templateTiddler.fields.tags) {
 		// Merge tags
+		templateHasTags = true;
 		mergedTags = $tw.utils.pushTop(mergedTags,templateTiddler.fields.tags);
 	}
 	// Save the draft tiddler
@@ -475,7 +478,8 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		{
 			title: draftTitle,
 			"draft.of": title,
-			tags: mergedTags
+			// If template or additionalFields have "tags" even if empty a tags field will be created.
+			tags: ((mergedTags.length > 0) || templateHasTags || additionalFieldsHasTags) ? mergedTags : undefined
 		},this.wiki.getModificationFields());
 	this.wiki.addTiddler(draftTiddler);
 	// Update the story to insert the new draft at the top and remove any existing tiddler
@@ -527,7 +531,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	var systemMessage = $tw.language.getString("Import/Upgrader/Tiddler/Unselected");
 	$tw.utils.each(messages,function(message,title) {
 		newFields["message-" + title] = message;
-		if (message.indexOf(systemMessage) !== -1) {
+		if(message.indexOf(systemMessage) !== -1) {
 			newFields["selection-" + title] = "unchecked";
 		}
 	});

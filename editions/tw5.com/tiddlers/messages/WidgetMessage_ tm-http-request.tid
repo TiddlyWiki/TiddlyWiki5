@@ -1,6 +1,6 @@
 caption: tm-http-request
 created: 20230429161453032
-modified: 20230723215344887
+modified: 20240614204704401
 tags: Messages
 title: WidgetMessage: tm-http-request
 type: text/vnd.tiddlywiki
@@ -54,6 +54,7 @@ Note that the state tiddler $:/state/http-requests contains a number representin
 
 !! Examples
 
+* Several simple examples using https://httpbin.org: [[WidgetMessage: tm-http-request Examples]]
 * [[Zotero's|https://www.zotero.org/]] API for retrieving reference items: [[WidgetMessage: tm-http-request Example - Zotero]]
 * [[Random Dog's|https://random.dog/]] API for retrieving random pictures of dogs showing how to retrieve binary data: [[WidgetMessage: tm-http-request Example - Random Dog]]
 * Example of using HTTP Basic Authentication: [[WidgetMessage: tm-http-request Example - Basic Authentication]]

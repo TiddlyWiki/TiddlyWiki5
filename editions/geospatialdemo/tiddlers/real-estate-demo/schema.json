@@ -16,7 +16,7 @@
 		{"name": "nearest-volcano", "caption": "Nearest Volcano", "type": "string", "display": "[{$:/geospatialdemo/features/harvard-volcanoes-of-the-world}geonearestpoint<coords>]"}
 	],
 	"variables": {
-		"coords": "[<rowTiddler>] :map[geopoint{!!long},{!!lat}]",
-		"census-data": "[<rowTiddler>] :map[geopoint{!!long},{!!lat}geolookup{$:/geospatialdemo/features/canada-census-subdivision-millesime}]"
+		"coords": "[<rowTiddler>] :map[geopoint{!!lat},{!!long}]",
+		"census-data": "[<rowTiddler>] :map[geopoint{!!lat},{!!long}geolookup{$:/geospatialdemo/features/canada-census-subdivision-millesime}]"
 	}
 }

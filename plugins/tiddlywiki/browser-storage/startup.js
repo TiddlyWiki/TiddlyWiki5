@@ -26,11 +26,11 @@ var BrowserStorageUtil = require("$:/plugins/tiddlywiki/browser-storage/util.js"
 
 exports.startup = function() {
 	var self = this;
-	
-        // If not exists, add ENABLED tiddler with default value "yes"
-        if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
-                $tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
-        }
+
+	// If not exists, add ENABLED tiddler with default value "yes"
+	if(!$tw.wiki.getTiddler(ENABLED_TITLE)) {
+		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "yes"});
+	}
 	// Compute our prefix for local storage keys
 	var prefix = "tw5#" + window.location.pathname + "#";
 	// Make a logger
@@ -68,11 +68,11 @@ exports.startup = function() {
 		persistPermissionRequested = false,
 		requestPersistenceOnFirstSave = function() {
 			$tw.hooks.addHook("th-saving-tiddler", function(tiddler) {
-				if (!persistPermissionRequested) {
+				if(!persistPermissionRequested) {
 					var filteredChanges = filterFn.call($tw.wiki, function(iterator) {
 						iterator(tiddler,tiddler.getFieldString("title"));
 					});
-					if (filteredChanges.length > 0) {
+					if(filteredChanges.length > 0) {
 						// The tiddler will be saved to local storage, so request persistence
 						requestPersistence();
 						persistPermissionRequested = true;
@@ -84,9 +84,9 @@ exports.startup = function() {
 	// Request the browser to never evict the localstorage. Some browsers such as firefox
 	// will prompt the user. To make the decision easier for the user only prompt them
 	// when they click the save button on a tiddler which will be stored to localstorage.
-	if (navigator.storage && navigator.storage.persist) {
+	if(navigator.storage && navigator.storage.persist) {
 		navigator.storage.persisted().then(function(isPersisted) {
-			if (!isPersisted) {
+			if(!isPersisted) {
 				setPersistedState("not requested yet");
 				requestPersistenceOnFirstSave();
 			} else {

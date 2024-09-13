@@ -270,6 +270,7 @@ Copy plain text to the clipboard on browsers that support it
 */
 exports.copyToClipboard = function(text,options) {
 	options = options || {};
+	text = text || "";
 	var textArea = document.createElement("textarea");
 	textArea.style.position = "fixed";
 	textArea.style.top = 0;
@@ -289,7 +290,7 @@ exports.copyToClipboard = function(text,options) {
 	var succeeded = false;
 	try {
 		succeeded = document.execCommand("copy");
-	} catch (err) {
+	} catch(err) {
 	}
 	if(!options.doNotNotify) {
 		var successNotification = options.successNotification || "$:/language/Notifications/CopiedToClipboard/Succeeded",
@@ -326,7 +327,7 @@ exports.collectDOMVariables = function(selectedNode,domNode,event) {
 			variables["tv-popup-coords"] = Popup.buildCoordinates(Popup.coordinatePrefix.csOffsetParent,nodeRect);
 
 			var absRect = $tw.utils.extend({}, nodeRect);
-			for (var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
+			for(var currentNode = selectedNode.offsetParent; currentNode; currentNode = currentNode.offsetParent) {
 				absRect.left += currentNode.offsetLeft;
 				absRect.top += currentNode.offsetTop;
 			}

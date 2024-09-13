@@ -1,0 +1,22 @@
+created: 20240622144038465
+description: Blank line after open tag in bold syntax
+modified: 20240622145114506
+tags: $:/tags/wiki-test-spec
+title: TestCases/HTML/OpenTagBlankLineInBoldSyntax
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+A blank line after an open html tag allows block mode punctuation to be recognised even when the html is embedded within inline punctuation (bold here).
++
+title: Output
+
+''<div>
+
+* list item one
+* list item two
+</div>''
++
+title: ExpectedResult
+
+<p><strong><div><ul><li>list item one</li><li>list item two</li></ul></div></strong></p>
