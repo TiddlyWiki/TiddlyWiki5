@@ -461,6 +461,56 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
 };
 
 /*
+Checks if a user has permission to access a recipe
+*/
+SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName) {
+	const hasPermission = this.engine.runStatementGet(`
+		SELECT 1
+		FROM users u
+		JOIN user_roles ur ON u.user_id = ur.user_id
+		JOIN role_permissions rp ON ur.role_id = rp.role_id
+		JOIN permissions p ON rp.permission_id = p.permission_id
+		JOIN acl ON rp.role_id = acl.role_id AND rp.permission_id = acl.permission_id
+		JOIN recipes r ON acl.entity_id = r.recipe_id
+		WHERE u.user_id = $user_id
+		AND r.recipe_name = $recipe_name
+		AND p.permission_name = 'read'
+		AND acl.entity_type = 'recipe'
+		LIMIT 1
+	`, {
+		$user_id: userId,
+		$recipe_name: recipeName
+	});
+
+	return hasPermission;
+};
+
+/*
+Checks if a user has permission to access a bag
+*/
+SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permissionName) {
+	const hasBagPermission = this.engine.runStatementGet(`
+		SELECT 1
+		FROM users u
+		JOIN user_roles ur ON u.user_id = ur.user_id
+		JOIN role_permissions rp ON ur.role_id = rp.role_id
+		JOIN permissions p ON rp.permission_id = p.permission_id
+		JOIN acl ON rp.role_id = acl.role_id AND rp.permission_id = acl.permission_id
+		JOIN bags b ON acl.entity_id = b.bag_id
+		WHERE u.user_id = $user_id
+		AND b.bag_name = $bag_name
+		AND p.permission_name = 'read'
+		AND acl.entity_type = 'bag'
+		LIMIT 1
+	`, {
+		$user_id: userId,
+		$bag_name: bagName
+	});
+
+	return hasBagPermission;
+};
+
+/*
 Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
 */
 SqlTiddlerDatabase.prototype.getBagTiddlers = function(bag_name) {
