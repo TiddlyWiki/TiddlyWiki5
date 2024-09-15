@@ -1297,7 +1297,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.3em;
-	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}};
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/editorfontfamily}}; // is this on purpose?
 }
 
 .tc-tiddler-frame input.tc-edit-texteditor,
