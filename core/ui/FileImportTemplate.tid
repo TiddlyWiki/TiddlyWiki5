@@ -11,7 +11,7 @@ title: $:/core/ui/FileImportTemplate
 \procedure postImportActions()
 <$list filter="[<importTitle>links[]]">
 	<$let escaped-title={{{ [<currentTiddler>search-replace:g:regexp<replacement-regexp>,<replacement-replace>] }}}>
-		<$let insertText={{{ [get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>search-replace[$title$],<escaped-title>] }}}>
+		<$let insertText={{{ [get[type]prefix[image]then<replacement-text-image>else<replacement-text-file>substitute<escaped-title>] }}}>
 			<$action-sendmessage
 				$message="tm-edit-text-operation"
 				$param="insert-text"

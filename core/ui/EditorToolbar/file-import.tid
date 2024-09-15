@@ -1,7 +1,7 @@
 title: $:/core/ui/EditorToolbar/file-import
 tags: $:/tags/EditorTools
-image: [img[$title$]]
-file: [[$title$]]
+image: [img[$1$]]
+file: [[$1$]]
 regexp-search:
 regexp-replace:
 condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
