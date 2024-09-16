@@ -2779,6 +2779,20 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	display: table;
 }
 
+/* Fix overflow in table and toc */
+.tc-tiddler-body .tc-tabbed-table-of-contents {
+	overflow-x: auto;
+}
+
+.tc-tiddler-body > table {
+  display: block;
+  overflow: auto;
+}
+.tc-tiddler-body > table tbody {
+  display: table;
+  width: 100%;
+}
+
 /*
 ** Chooser
 */
