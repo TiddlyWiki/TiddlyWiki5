@@ -358,9 +358,43 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
+Server.prototype.authenticateUser = function(request, response) {
+	const authHeader = request.headers.authorization;
+	if (!authHeader) {
+			this.requestAuthentication(response);
+			return false;
+	}
+
+	const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+	const username = auth[0];
+	const password = auth[1];
+
+	// Check if the username and password match the configured credentials
+	if (username === this.get("username") && password === this.get("password")) {
+			return username;
+	} else {
+			this.requestAuthentication(response);
+			return false;
+	}
+};
+
+Server.prototype.requestAuthentication = function(response) {
+	response.writeHead(401, {
+			'WWW-Authenticate': 'Basic realm="Secure Area"'
+	});
+	response.end('Authentication required.');
+};
+
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
 	const queryString = require("querystring");
+
+	// Authenticate the user
+	const authenticatedUsername = this.authenticateUser(request, response);
+	if (!authenticatedUsername) {
+		return; // Stop processing if authentication failed
+	}
+
 	// Compose the state object
 	var self = this;
 	var state = {};
@@ -374,6 +408,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.redirect = redirect.bind(self,request,response);
 	state.streamMultipartData = streamMultipartData.bind(self,request);
 	state.makeTiddlerEtag = makeTiddlerEtag.bind(self);
+	state.authenticatedUsername = authenticatedUsername;
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
 	// Check whether anonymous access is granted
