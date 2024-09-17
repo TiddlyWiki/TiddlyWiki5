@@ -1,0 +1,77 @@
+title: $:/plugins/tiddlywiki/authentication/login
+tags: $:/tags/ServerRoute
+route-method: GET
+route-path: /login
+
+\define loginForm()
+<form class="login-form" method="POST" action="/login">
+  <input type="hidden" name="returnUrl" value=<<returnUrl>>/>
+  <input type="text" name="username" placeholder="Username"/>
+  <input type="password" name="password" placeholder="Password"/>
+  <input type="submit" value="Log In"/>
+</form>
+\end
+
+<html>
+<head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.login-container {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.login-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.login-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+.login-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+.tc-error-message {
+    color: #ff0000;
+    text-align: center;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+<div class="login-container">
+  <h1>TiddlyWiki Login</h1>
+  <$set name="returnUrl" value={{{ [{$:/temp/mws/login/returnUrl}!is[blank]else{$:/info/url/query}split[returnUrl=]last[]else[/]] }}}>
+    <<loginForm>>
+  </$set>
+  <$list filter="[[$:/temp/mws/login/error]!is[missing]]" variable="errorTiddler">
+    <div class="tc-error-message">
+      {{$:/temp/mws/login/error}}
+    </div>
+  </$list>
+</div>
+</body>
+</html>

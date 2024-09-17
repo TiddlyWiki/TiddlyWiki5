@@ -76,6 +76,8 @@ function Server(options) {
 	$tw.modules.forEachModuleOfType("mws-route", function(title,routeDefinition) {
 		self.addRoute(routeDefinition);
 	});
+	// Load tiddler-based routes
+	self.loadAuthRoutes();
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
@@ -301,6 +303,84 @@ Server.prototype.addRoute = function(route) {
 	this.routes.push(route);
 };
 
+Server.prototype.loadAuthRoutes = function () {
+	var self = this;
+	// add the login page route
+	self.addRoute({
+		method: "GET",
+		path: /^\/login$/,
+		handler: function (request, response, state) {
+			var loginTiddler = self.wiki.getTiddler("$:/plugins/tiddlywiki/authentication/login");
+			if (loginTiddler) {
+				var text = self.wiki.renderTiddler("text/html", loginTiddler.fields.title);
+				response.writeHead(200, { "Content-Type": "text/html" });
+				response.end(text);
+			} else {
+				response.writeHead(404);
+				response.end("Login page not found");
+			}
+		}
+	});
+	// add the login submission handler route
+	self.addRoute({
+		method: "POST",
+		path: /^\/login$/,
+		csrfDisable: true,
+		handler: function(request, response, state) {
+			self.handleLogin(request, response, state);
+		}.bind(self)
+	});
+};
+
+Server.prototype.handleLogin = function(request, response, state) {
+	var self = this;
+	const querystring = require('querystring');
+	const formData = querystring.parse(state.data);
+	const { username, password, returnUrl } = formData;
+
+	console.log("Parsed form data:", formData);
+
+	// Use the SQL method to get the user
+	// const user = $tw.mws.sqlTiddlerDatabase.getUserByUsername(username);
+	// console.log("USER =>", username, user);
+
+	// if(user && self.verifyPassword(password, user.password_hash)) {
+	// 	// Authentication successful
+	// 	const sessionId = self.createSession(user.user_id);
+	// 	response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
+		// state.redirect(returnUrl ?? '/');
+		response.writeHead(302, {
+			'Location': '/'//returnUrl ?? '/'
+		});
+		response.end();
+	// } else {
+	// 	// Authentication failed
+	// 	self.wiki.addTiddler(new $tw.Tiddler({
+	// 		title: "$:/temp/mws/login/error",
+	// 		text: "Invalid username or password"
+	// 	}));
+	// 	state.redirect(`/login?returnUrl=${encodeURIComponent(returnUrl)}`);
+	// }
+};
+
+Server.prototype.verifyPassword = function(inputPassword, storedHash) {
+	// Implement password verification logic here
+	// This depends on how you've stored the passwords (e.g., bcrypt, argon2)
+	// For example, using bcrypt:
+	// return bcrypt.compareSync(inputPassword, storedHash);
+	
+	// Placeholder implementation (NOT SECURE, replace with proper verification):
+	return inputPassword === storedHash;
+};
+
+Server.prototype.createSession = function(userId) {
+	const sessionId = crypto.randomBytes(16).toString('hex');
+	// Store the session in your database or in-memory store
+	// For example:
+	// this.sqlTiddlerDatabase.createSession(sessionId, userId);
+	return sessionId;
+};
+
 Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 	// Instantiate and initialise the authenticator
 	var authenticator = new AuthenticatorClass(this),
@@ -359,30 +439,40 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 }
 
 Server.prototype.authenticateUser = function(request, response) {
-	const authHeader = request.headers.authorization;
-	if (!authHeader) {
-			this.requestAuthentication(response);
-			return false;
+	const authHeader = request.headers.authorization;	
+	if(!authHeader) {
+		this.requestAuthentication(response);
+		return false;
 	}
 
 	const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
 	const username = auth[0];
 	const password = auth[1];
+	// console.log({authHeader, auth, username, password, setUsername: this.get("username"), setPassword: this.get("password")})
 
 	// Check if the username and password match the configured credentials
-	if (username === this.get("username") && password === this.get("password")) {
-			return username;
-	} else {
-			this.requestAuthentication(response);
-			return false;
+	if(username === this.get("username") && password === this.get("password")) {
+		return username;
+	}else{
+		return false;
 	}
 };
 
 Server.prototype.requestAuthentication = function(response) {
-	response.writeHead(401, {
+	if (!response.headersSent) {
+		response.writeHead(401, {
 			'WWW-Authenticate': 'Basic realm="Secure Area"'
+		});
+		response.end('Authentication required.');
+	}
+};
+
+Server.prototype.redirectToLogin = function(response, returnUrl) {
+	const loginUrl = '/login?returnUrl=' + encodeURIComponent(returnUrl);
+	response.writeHead(302, {
+			'Location': loginUrl
 	});
-	response.end('Authentication required.');
+	response.end();
 };
 
 Server.prototype.requestHandler = function(request,response,options) {
@@ -391,9 +481,6 @@ Server.prototype.requestHandler = function(request,response,options) {
 
 	// Authenticate the user
 	const authenticatedUsername = this.authenticateUser(request, response);
-	if (!authenticatedUsername) {
-		return; // Stop processing if authentication failed
-	}
 
 	// Compose the state object
 	var self = this;
@@ -409,43 +496,53 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.streamMultipartData = streamMultipartData.bind(self,request);
 	state.makeTiddlerEtag = makeTiddlerEtag.bind(self);
 	state.authenticatedUsername = authenticatedUsername;
+
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
+	
 	// Check whether anonymous access is granted
-	state.allowAnon = this.isAuthorized(state.authorizationType,null);
-	// Authenticate with the first active authenticator
-	if(this.authenticators.length > 0) {
-		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
-			// Bail if we failed (the authenticator will have sent the response)
+	state.allowAnon = false;//this.isAuthorized(state.authorizationType,null);
+
+	// If not authenticated and anonymous access is not allowed, request authentication
+	if(!authenticatedUsername && !state.allowAnon) {
+		// Don't redirect if this is already a request to the login page
+		if(state.urlInfo.pathname !== '/login') {
+			this.redirectToLogin(response, request.url);
 			return;
 		}
 	}
+
 	// Authorize with the authenticated username
-	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername)) {
-		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
+	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername) && !response.headersSent) {
+		response.writeHead(403,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 		response.end();
 		return;
 	}
+
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
+	
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
 		console.log("Request headers:",JSON.stringify(request.headers));
 		console.log("authenticatedUsername:",state.authenticatedUsername);
 	}
+	
 	// Return a 404 if we didn't find a route
-	if(!route) {
+	if(!route && !response.headersSent) {
 		response.writeHead(404);
 		response.end();
 		return;
 	}
+	
 	// If this is a write, check for the CSRF header unless globally disabled, or disabled for this route
-	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki" && !response.headersSent) {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
 		return;
 	}
+	if (response.headersSent) return;
 	// Receive the request body if necessary and hand off to the route handler
 	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD") {
 		// Let the route handle the request stream itself

@@ -731,6 +731,14 @@ SqlTiddlerDatabase.prototype.getUser = function(userId) {
 	});
 };
 
+SqlTiddlerDatabase.prototype.getUserByUsername = function(username) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM users WHERE username = $username
+	`, {
+			$username: username
+	});
+};
+
 SqlTiddlerDatabase.prototype.updateUser = function(userId, username, email) {
 	this.engine.runStatement(`
 			UPDATE users
