@@ -96,6 +96,10 @@ Plugins/PluginWillRequireReload: (requires reload)
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall/Caption: reinstall
+Plugins/Stability/Deprecated: DEPRECATED
+Plugins/Stability/Experimental: EXPERIMENTAL
+Plugins/Stability/Legacy: LEGACY
+Plugins/Stability/Stable: STABLE
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
 Plugins/Update/Caption: update
