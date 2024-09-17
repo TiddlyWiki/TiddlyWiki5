@@ -198,6 +198,12 @@ Settings/TitleLinks/Yes/Description: Wyświetlaj nazwy jako linki
 Settings/MissingLinks/Caption: Wiki Linki
 Settings/MissingLinks/Hint: Wybierz czy linkować do nieistniejących jeszcze tiddlerów
 Settings/MissingLinks/Description: Włacz linowanie do nieistniejących tiddlerów
+SocialCard/Caption: Karta Mediów Społecznościowych
+SocialCard/Domain/Prompt: Domena wyświetlana przy linku (np, ''tiddlywiki.com'')
+SocialCard/Hint: Informacje wykorzysytwane przez media społecznościowe i komunikatury by wyświetlić kartę z podglądem link do tej TiddlyWiki przy wklejeniu linka
+SocialCard/PreviewUrl/Prompt: Pełen adres do obrazka podglądku dla tej TiddlyWiki
+SocialCard/PreviewUrl/Preview: Podgląd obrazka:
+SocialCard/Url/Prompt: Pełen adres do tej TiddlyWiki
 StoryTiddler/Caption: Widok Tiddlera
 StoryTiddler/Hint: Ta kaskada określa szablon używany podczas wyświetlania tiddlera w Story River.
 StoryView/Caption: Widok Story River
@@ -206,6 +212,12 @@ Stylesheets/Caption: Style:
 Stylesheets/Expand/Caption: Rozwiń Wszystko
 Stylesheets/Hint: To jest wyrenderowany CSS obecnych tiddlerów otagowanych jako <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Przywróć
+TestCases/Caption: Przypadki Testowe
+TestCases/Hint: Przypadki testowe służą do nauki oraz testowania systemu
+TestCases/All/Caption: Wszystkie Przypadki Testowe
+TestCases/All/Hint: Wszystkie Przypadki Testowe
+TestCases/Failed/Caption: Nieudane Przypadki Testowe
+TestCases/Failed/Hint: Tylko Nieudane Przypadki Testowe
 Theme/Caption: Motyw
 Theme/Prompt: Obecny motyw:
 TiddlerFields/Caption: Pola tiddlerów
@@ -229,3 +241,7 @@ ViewTemplateBody/Caption: Treść Wyświetlanego Tiddlera
 ViewTemplateBody/Hint: Ta kaskada określa szablon wyświetlania treści tiddlera (czyli jego tekstu, w przeciwieństwie do kaskady 'Widok Tiddlera').
 ViewTemplateTitle/Caption: Tytuł Wyświetlanego Tiddlera
 ViewTemplateTitle/Hint: Ta kaskada określa szablon wyświetlania tytułu tiddlera.
+ViewTemplateSubtitle/Caption: Podtytuł Wyświetlanego Tiddlera
+ViewTemplateSubtitle/Hint: Ta kaskada określa szablon wyświetlania podtytułu tiddlera.
+ViewTemplateTags/Caption: Tagi Wyświetlanego Tiddlera
+ViewTemplateTags/Hint: Ta kaskada określa szablon wyświetlania tagów tiddlera.
