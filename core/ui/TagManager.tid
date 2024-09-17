@@ -55,7 +55,7 @@ color: #bbb
 \whitespace trim
 <div class="tc-drop-down-wrapper">
 <$button class="tc-btn-invisible" popup={{{ [[$:/state/tag-manager/color/]addsuffix<currentTiddler>] }}}>{{$:/core/images/palette}}</$button>
-<$reveal type="popup" tag="div" class="tc-drop-down" state={{{ [[$:/state/tag-manager/color/]addsuffix<currentTiddler>] }}}>
+<$reveal type="popup" tag="div" class="tc-drop-down tc-popup-keep" state={{{ [[$:/state/tag-manager/color/]addsuffix<currentTiddler>] }}}>
 <$transclude $variable="colour-picker" actions=<<color-picker-actions>>/>
 </$reveal>
 </div>
