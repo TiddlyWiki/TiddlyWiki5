@@ -34,6 +34,7 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
+	this.sqlTiddlerDatabase = $tw.mws.store.sqlTiddlerDatabase;
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -310,6 +311,14 @@ Server.prototype.loadAuthRoutes = function () {
 		method: "GET",
 		path: /^\/login$/,
 		handler: function (request, response, state) {
+			// Check if the user already has a valid session
+			const authenticatedUser = self.authenticateUser(request, response);
+			if (authenticatedUser) {
+					// User is already logged in, redirect to home page
+					response.writeHead(302, { 'Location': '/' });
+					response.end();
+					return;
+			}
 			var loginTiddler = self.wiki.getTiddler("$:/plugins/tiddlywiki/authentication/login");
 			if (loginTiddler) {
 				var text = self.wiki.renderTiddler("text/html", loginTiddler.fields.title);
@@ -332,52 +341,46 @@ Server.prototype.loadAuthRoutes = function () {
 	});
 };
 
-Server.prototype.handleLogin = function(request, response, state) {
+Server.prototype.handleLogin = function (request, response, state) {
 	var self = this;
 	const querystring = require('querystring');
 	const formData = querystring.parse(state.data);
-	const { username, password, returnUrl } = formData;
+	const { username, password } = formData;
+	const user = self.sqlTiddlerDatabase.getUserByUsername(username);
+	const isPasswordValid = self.verifyPassword(password, user?.password)
 
-	console.log("Parsed form data:", formData);
-
-	// Use the SQL method to get the user
-	// const user = $tw.mws.sqlTiddlerDatabase.getUserByUsername(username);
-	// console.log("USER =>", username, user);
-
-	// if(user && self.verifyPassword(password, user.password_hash)) {
-	// 	// Authentication successful
-	// 	const sessionId = self.createSession(user.user_id);
-	// 	response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
-		// state.redirect(returnUrl ?? '/');
+	if (user && isPasswordValid) {
+		const sessionId = self.createSession(user.user_id);
+		const {returnUrl} = this.parseCookieString(request.headers.cookie)
+		response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
 		response.writeHead(302, {
-			'Location': '/'//returnUrl ?? '/'
+			'Location': returnUrl || '/'
 		});
-		response.end();
-	// } else {
-	// 	// Authentication failed
-	// 	self.wiki.addTiddler(new $tw.Tiddler({
-	// 		title: "$:/temp/mws/login/error",
-	// 		text: "Invalid username or password"
-	// 	}));
-	// 	state.redirect(`/login?returnUrl=${encodeURIComponent(returnUrl)}`);
-	// }
+	} else {
+		this.wiki.addTiddler(new $tw.Tiddler({
+			title: "$:/temp/mws/login/error",
+			text: errorMessage
+		}));
+		response.writeHead(302, {
+			'Location': '/login'
+		});
+	}
+	response.end();
 };
 
 Server.prototype.verifyPassword = function(inputPassword, storedHash) {
-	// Implement password verification logic here
-	// This depends on how you've stored the passwords (e.g., bcrypt, argon2)
-	// For example, using bcrypt:
-	// return bcrypt.compareSync(inputPassword, storedHash);
-	
-	// Placeholder implementation (NOT SECURE, replace with proper verification):
-	return inputPassword === storedHash;
+	const hashedInput = this.hashPassword(inputPassword);
+  return hashedInput === storedHash;
+};
+
+Server.prototype.hashPassword = function(password) {
+	return crypto.createHash('sha256').update(password).digest('hex');
 };
 
 Server.prototype.createSession = function(userId) {
 	const sessionId = crypto.randomBytes(16).toString('hex');
 	// Store the session in your database or in-memory store
-	// For example:
-	// this.sqlTiddlerDatabase.createSession(sessionId, userId);
+	this.sqlTiddlerDatabase.createOrUpdateUserSession(userId, sessionId);
 	return sessionId;
 };
 
@@ -438,28 +441,39 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
+Server.prototype.parseCookieString = function(cookieString) {
+	const cookies = {};
+	if (typeof cookieString !== 'string') return cookies;
+
+	cookieString.split(';').forEach(cookie => {
+			const parts = cookie.split('=');
+			if (parts.length >= 2) {
+					const key = parts[0].trim();
+					const value = parts.slice(1).join('=').trim();
+					cookies[key] = decodeURIComponent(value);
+			}
+	});
+
+	return cookies;
+}
+
 Server.prototype.authenticateUser = function(request, response) {
-	const authHeader = request.headers.authorization;	
-	if(!authHeader) {
-		this.requestAuthentication(response);
+	const {session: session_id} = this.parseCookieString(request.headers.cookie)
+	if (!session_id) {
 		return false;
 	}
-
-	const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
-	const username = auth[0];
-	const password = auth[1];
-	// console.log({authHeader, auth, username, password, setUsername: this.get("username"), setPassword: this.get("password")})
-
-	// Check if the username and password match the configured credentials
-	if(username === this.get("username") && password === this.get("password")) {
-		return username;
-	}else{
-		return false;
+	// get user info
+	const user = this.sqlTiddlerDatabase.findUserBySessionId(session_id);
+	if (!user) {
+		return false
 	}
+	delete user.password;
+
+	return user
 };
 
 Server.prototype.requestAuthentication = function(response) {
-	if (!response.headersSent) {
+	if(!response.headersSent) {
 		response.writeHead(401, {
 			'WWW-Authenticate': 'Basic realm="Secure Area"'
 		});
@@ -468,11 +482,14 @@ Server.prototype.requestAuthentication = function(response) {
 };
 
 Server.prototype.redirectToLogin = function(response, returnUrl) {
-	const loginUrl = '/login?returnUrl=' + encodeURIComponent(returnUrl);
-	response.writeHead(302, {
-			'Location': loginUrl
-	});
-	response.end();
+	if(!response.headersSent) {
+		response.setHeader('Set-Cookie', `returnUrl=${returnUrl}; HttpOnly; Path=/`);
+		const loginUrl = '/login?returnUrl=' + encodeURIComponent(returnUrl);
+		response.writeHead(302, {
+				'Location': loginUrl
+		});
+		response.end();
+	}
 };
 
 Server.prototype.requestHandler = function(request,response,options) {
@@ -480,7 +497,8 @@ Server.prototype.requestHandler = function(request,response,options) {
 	const queryString = require("querystring");
 
 	// Authenticate the user
-	const authenticatedUsername = this.authenticateUser(request, response);
+	const authenticatedUser = this.authenticateUser(request, response);
+	const authenticatedUsername = authenticatedUser?.username;
 
 	// Compose the state object
 	var self = this;
@@ -495,6 +513,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.redirect = redirect.bind(self,request,response);
 	state.streamMultipartData = streamMultipartData.bind(self,request);
 	state.makeTiddlerEtag = makeTiddlerEtag.bind(self);
+	state.authenticatedUser = authenticatedUser;
 	state.authenticatedUsername = authenticatedUsername;
 
 	// Get the principals authorized to access this resource

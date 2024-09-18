@@ -43,8 +43,19 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 			user_id INTEGER PRIMARY KEY AUTOINCREMENT,
 			username TEXT UNIQUE NOT NULL,
 			email TEXT UNIQUE NOT NULL,
+			password TEXT NOT NULL,
 			created_at TEXT DEFAULT (datetime('now')),
 			last_login TEXT
+		)
+	`,`
+		-- User Session  table
+		CREATE TABLE IF NOT EXISTS sessions (
+			user_id INTEGER NOT NULL,
+			session_id TEXT NOT NULL,
+			created_at TEXT NOT NULL,
+			last_accessed TEXT NOT NULL,
+			PRIMARY KEY (user_id),
+			FOREIGN KEY (user_id) REFERENCES users(user_id)
 		)
 	`,`
 		-- Groups table
@@ -763,6 +774,92 @@ SqlTiddlerDatabase.prototype.listUsers = function() {
 	return this.engine.runStatementGetAll(`
 			SELECT * FROM users ORDER BY username
 	`);
+};
+
+SqlTiddlerDatabase.prototype.createOrUpdateUserSession = function(userId, sessionId) {
+	const currentTimestamp = new Date().toISOString();
+
+	// First, try to update an existing session
+	const updateResult = this.engine.runStatement(`
+			UPDATE sessions
+			SET session_id = $sessionId, last_accessed = $timestamp
+			WHERE user_id = $userId
+	`, {
+			$userId: userId,
+			$sessionId: sessionId,
+			$timestamp: currentTimestamp
+	});
+
+	// If no existing session was updated, create a new one
+	if (updateResult.changes === 0) {
+			this.engine.runStatement(`
+					INSERT INTO sessions (user_id, session_id, created_at, last_accessed)
+					VALUES ($userId, $sessionId, $timestamp, $timestamp)
+			`, {
+					$userId: userId,
+					$sessionId: sessionId,
+					$timestamp: currentTimestamp
+			});
+	}
+
+	return sessionId;
+};
+
+SqlTiddlerDatabase.prototype.findUserBySessionId = function(sessionId) {
+	// First, get the user_id from the sessions table
+	const sessionResult = this.engine.runStatementGet(`
+			SELECT user_id, last_accessed
+			FROM sessions
+			WHERE session_id = $sessionId
+	`, {
+			$sessionId: sessionId
+	});
+
+	if (!sessionResult) {
+			return null; // Session not found
+	}
+
+	const lastAccessed = new Date(sessionResult.last_accessed);
+	const expirationTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+	if (new Date() - lastAccessed > expirationTime) {
+			// Session has expired
+			this.deleteSession(sessionId);
+			return null;
+	}
+
+	// Update the last_accessed timestamp
+	const currentTimestamp = new Date().toISOString();
+	this.engine.runStatement(`
+			UPDATE sessions
+			SET last_accessed = $timestamp
+			WHERE session_id = $sessionId
+	`, {
+			$sessionId: sessionId,
+			$timestamp: currentTimestamp
+	});
+
+	const userResult = this.engine.runStatementGet(`
+			SELECT *
+			FROM users
+			WHERE user_id = $userId
+	`, {
+			$userId: sessionResult.user_id
+	});
+
+	if (!userResult) {
+			return null;
+	}
+
+	return userResult;
+};
+
+SqlTiddlerDatabase.prototype.deleteSession = function(sessionId) {
+	this.engine.runStatement(`
+			DELETE FROM sessions
+			WHERE session_id = $sessionId
+	`, {
+			$sessionId: sessionId
+	});
 };
 
 // Group CRUD operations
