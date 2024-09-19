@@ -521,6 +521,82 @@ SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permis
 	return hasBagPermission;
 };
 
+SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName, permissionName) {
+	const entityTypeToTableMap = {
+			bag: {
+					table: 'bags',
+					column: 'bag_name'
+			},
+			recipe: {
+					table: 'recipes',
+					column: 'recipe_name'
+			}
+	};
+
+	const entityInfo = entityTypeToTableMap[entityType];
+	if (!entityInfo) {
+			throw new Error('Invalid entity type: ' + entityType);
+	}
+
+	console.log("Starting ACL permission check:", { userId, entityType, entityName, permissionName, entityInfo });
+
+	// Step 1: Get the entity ID
+	const entityQuery = `
+			SELECT ${entityInfo.table.slice(0, -1)}_id as entity_id
+			FROM ${entityInfo.table}
+			WHERE ${entityInfo.column} = $entity_name
+	`;
+	const entityResult = this.engine.runStatementGet(entityQuery, { $entity_name: entityName });
+	console.log("Entity query result:", entityResult);
+
+	if (!entityResult) {
+			console.log(`${entityType} not found: ${entityName}`);
+			return false;
+	}
+
+	const entityId = entityResult.entity_id;
+
+	// Step 2: Get user's roles
+	const userRolesQuery = `
+			SELECT r.role_id
+			FROM users u
+			JOIN user_roles ur ON u.user_id = ur.user_id
+			JOIN roles r ON ur.role_id = r.role_id
+			WHERE u.user_id = $user_id
+	`;
+	const userRoles = this.engine.runStatementGetAll(userRolesQuery, { $user_id: userId });
+	console.log("User roles:", userRoles);
+
+	if (userRoles.length === 0) {
+			console.log(`No roles found for user: ${userId}`);
+			return false;
+	}
+
+	// Step 3: Check for permission
+	const roleIds = userRoles.map(role => role.role_id);
+	const permissionQuery = `
+			SELECT 1
+			FROM acl a
+			JOIN permissions p ON a.permission_id = p.permission_id
+			WHERE a.role_id IN (${roleIds.join(',')})
+			AND a.entity_type = $entity_type
+			AND a.entity_id = $entity_id
+			AND p.permission_name = $permission_name
+			LIMIT 1
+	`;
+	const permissionResult = this.engine.runStatementGet(permissionQuery, {
+			$entity_type: entityType,
+			$entity_id: entityId,
+			$permission_name: permissionName
+	});
+	console.log("Permission query result:", permissionResult);
+
+	const hasPermission = permissionResult !== undefined;
+	console.log("Final permission check result:", hasPermission);
+
+	return hasPermission;
+};
+
 /*
 Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
 */
