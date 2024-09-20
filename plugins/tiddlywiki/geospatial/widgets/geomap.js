@@ -262,10 +262,12 @@ GeomapWidget.prototype.refreshMap = function() {
 				var bounds = null;
 				$tw.utils.each(this.renderedLayers,function(layer) {
 					var featureBounds = layer.layer.getBounds();
-					if(bounds) {
-						bounds.extend(featureBounds);
-					} else {
-						bounds = featureBounds;
+					if(featureBounds.isValid()) {
+						if(bounds) {
+							bounds.extend(featureBounds);
+						} else {
+							bounds = featureBounds;
+						}
 					}
 				});
 				if(bounds) {

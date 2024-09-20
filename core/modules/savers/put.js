@@ -20,7 +20,7 @@ Retrieve ETag if available
 */
 var retrieveETag = function(self) {
 	var headers = {
-		Accept: "*/*;charset=UTF-8"
+		Accept: "*/*"
 	};
 	$tw.utils.httpRequest({
 		url: self.uri(),

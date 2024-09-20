@@ -54,6 +54,13 @@ exports.startup = function() {
 		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
 		$tw.browserStorage.clearLocalStorage();
 	});
+	// Seperate clear cookie and disable action
+	$tw.rootWidget.addEventListener("tm-delete-browser-storage",function(event) {
+		$tw.browserStorage.clearLocalStorage();
+	});
+	$tw.rootWidget.addEventListener("tm-disable-browser-storage",function(event) {
+		$tw.wiki.addTiddler({title: ENABLED_TITLE, text: "no"});
+	});
 	// Helpers for protecting storage from eviction
 	var setPersistedState = function(state) {
 			$tw.wiki.addTiddler({title: PERSISTED_STATE_TITLE, text: state});
