@@ -163,7 +163,7 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 		-- ACL table (using bag/recipe ids directly)
 		CREATE TABLE IF NOT EXISTS acl (
 			acl_id INTEGER PRIMARY KEY AUTOINCREMENT,
-			entity_id INTEGER NOT NULL,
+			entity_name TEXT NOT NULL,
 			entity_type TEXT NOT NULL CHECK (entity_type IN ('bag', 'recipe')),
 			role_id INTEGER,
 			permission_id INTEGER,
@@ -178,7 +178,7 @@ SqlTiddlerDatabase.prototype.createTables = function() {
 	`,`
 		CREATE INDEX IF NOT EXISTS idx_recipe_bags_recipe_id ON recipe_bags(recipe_id)
 	`,`
-		CREATE INDEX IF NOT EXISTS idx_acl_entity_id ON acl(entity_id)
+		CREATE INDEX IF NOT EXISTS idx_acl_entity_id ON acl(entity_name)
 	`]);
 };
 
@@ -482,7 +482,7 @@ SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName) 
 		JOIN role_permissions rp ON ur.role_id = rp.role_id
 		JOIN permissions p ON rp.permission_id = p.permission_id
 		JOIN acl ON rp.role_id = acl.role_id AND rp.permission_id = acl.permission_id
-		JOIN recipes r ON acl.entity_id = r.recipe_id
+		JOIN recipes r ON acl.entity_name = r.recipe_id
 		WHERE u.user_id = $user_id
 		AND r.recipe_name = $recipe_name
 		AND p.permission_name = 'read'
@@ -507,7 +507,7 @@ SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permis
 		JOIN role_permissions rp ON ur.role_id = rp.role_id
 		JOIN permissions p ON rp.permission_id = p.permission_id
 		JOIN acl ON rp.role_id = acl.role_id AND rp.permission_id = acl.permission_id
-		JOIN bags b ON acl.entity_id = b.bag_id
+		JOIN bags b ON acl.entity_name = b.bag_id
 		WHERE u.user_id = $user_id
 		AND b.bag_name = $bag_name
 		AND p.permission_name = 'read'
@@ -523,79 +523,46 @@ SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permis
 
 SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName, permissionName) {
 	const entityTypeToTableMap = {
-			bag: {
-					table: 'bags',
-					column: 'bag_name'
-			},
-			recipe: {
-					table: 'recipes',
-					column: 'recipe_name'
-			}
+		bag: {
+			table: 'bags',
+			column: 'bag_name'
+		},
+		recipe: {
+			table: 'recipes',
+			column: 'recipe_name'
+		}
 	};
 
 	const entityInfo = entityTypeToTableMap[entityType];
 	if (!entityInfo) {
-			throw new Error('Invalid entity type: ' + entityType);
+		throw new Error('Invalid entity type: ' + entityType);
 	}
 
-	console.log("Starting ACL permission check:", { userId, entityType, entityName, permissionName, entityInfo });
-
-	// Step 1: Get the entity ID
-	const entityQuery = `
-			SELECT ${entityInfo.table.slice(0, -1)}_id as entity_id
-			FROM ${entityInfo.table}
-			WHERE ${entityInfo.column} = $entity_name
+	const query = `
+		SELECT 1
+		FROM users u
+		JOIN user_roles ur ON u.user_id = ur.user_id
+		JOIN roles r ON ur.role_id = r.role_id
+		JOIN acl a ON r.role_id = a.role_id
+		JOIN permissions p ON a.permission_id = p.permission_id
+		WHERE u.user_id = $user_id
+		AND a.entity_type = $entity_type
+		AND a.entity_name = $entity_name
+		AND p.permission_name = $permission_name
+		LIMIT 1
 	`;
-	const entityResult = this.engine.runStatementGet(entityQuery, { $entity_name: entityName });
-	console.log("Entity query result:", entityResult);
 
-	if (!entityResult) {
-			console.log(`${entityType} not found: ${entityName}`);
-			return false;
-	}
-
-	const entityId = entityResult.entity_id;
-
-	// Step 2: Get user's roles
-	const userRolesQuery = `
-			SELECT r.role_id
-			FROM users u
-			JOIN user_roles ur ON u.user_id = ur.user_id
-			JOIN roles r ON ur.role_id = r.role_id
-			WHERE u.user_id = $user_id
-	`;
-	const userRoles = this.engine.runStatementGetAll(userRolesQuery, { $user_id: userId });
-	console.log("User roles:", userRoles);
-
-	if (userRoles.length === 0) {
-			console.log(`No roles found for user: ${userId}`);
-			return false;
-	}
-
-	// Step 3: Check for permission
-	const roleIds = userRoles.map(role => role.role_id);
-	const permissionQuery = `
-			SELECT 1
-			FROM acl a
-			JOIN permissions p ON a.permission_id = p.permission_id
-			WHERE a.role_id IN (${roleIds.join(',')})
-			AND a.entity_type = $entity_type
-			AND a.entity_id = $entity_id
-			AND p.permission_name = $permission_name
-			LIMIT 1
-	`;
-	const permissionResult = this.engine.runStatementGet(permissionQuery, {
-			$entity_type: entityType,
-			$entity_id: entityId,
-			$permission_name: permissionName
+	const result = this.engine.runStatementGet(query, {
+		$user_id: userId,
+		$entity_type: entityType,
+		$entity_name: entityName,
+		$permission_name: permissionName
 	});
-	console.log("Permission query result:", permissionResult);
 
-	const hasPermission = permissionResult !== undefined;
-	console.log("Final permission check result:", hasPermission);
+	const hasPermission = result !== undefined;
 
 	return hasPermission;
-};
+};;
 
 /*
 Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
@@ -1079,7 +1046,7 @@ SqlTiddlerDatabase.prototype.listPermissions = function() {
 // ACL CRUD operations
 SqlTiddlerDatabase.prototype.createACL = function(entityId, entityType, roleId, permissionId) {
 	const result = this.engine.runStatement(`
-			INSERT INTO acl (entity_id, entity_type, role_id, permission_id)
+			INSERT INTO acl (entity_name, entity_type, role_id, permission_id)
 			VALUES ($entityId, $entityType, $roleId, $permissionId)
 	`, {
 			$entityId: entityId,
@@ -1101,7 +1068,7 @@ SqlTiddlerDatabase.prototype.getACL = function(aclId) {
 SqlTiddlerDatabase.prototype.updateACL = function(aclId, entityId, entityType, roleId, permissionId) {
 	this.engine.runStatement(`
 			UPDATE acl
-			SET entity_id = $entityId, entity_type = $entityType, 
+			SET entity_name = $entityId, entity_type = $entityType, 
 					role_id = $roleId, permission_id = $permissionId
 			WHERE acl_id = $aclId
 	`, {
@@ -1123,7 +1090,7 @@ SqlTiddlerDatabase.prototype.deleteACL = function(aclId) {
 
 SqlTiddlerDatabase.prototype.listACLs = function() {
 	return this.engine.runStatementGetAll(`
-			SELECT * FROM acl ORDER BY entity_type, entity_id
+			SELECT * FROM acl ORDER BY entity_type, entity_name
 	`);
 };
 

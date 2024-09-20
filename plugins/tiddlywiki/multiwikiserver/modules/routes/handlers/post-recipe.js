@@ -18,6 +18,8 @@ bag_names: space separated list of bags
 /*global $tw: false */
 "use strict";
 
+var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
+
 exports.method = "POST";
 
 exports.path = /^\/recipes$/;
@@ -27,6 +29,7 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 
 exports.handler = function(request,response,state) {
+	aclMiddleware(request, response, state, "recipe", "WRITE");
 	if(state.data.recipe_name && state.data.bag_names) {
 		const result = $tw.mws.store.createRecipe(state.data.recipe_name,$tw.utils.parseStringArray(state.data.bag_names),state.data.description);
 		if(!result) {

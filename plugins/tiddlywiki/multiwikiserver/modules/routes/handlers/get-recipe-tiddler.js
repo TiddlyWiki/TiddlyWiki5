@@ -16,11 +16,14 @@ fallback=<url> // Optional redirect if the tiddler is not found
 /*global $tw: false */
 "use strict";
 
+var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
+
 exports.method = "GET";
 
 exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
+	aclMiddleware(request, response, state, "recipe", "READ");
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),
@@ -38,27 +41,32 @@ exports.handler = function(request,response,state) {
 		} else {
 			// This is not a JSON API request, we should return the raw tiddler content
 			var type = tiddlerInfo.tiddler.type || "text/plain";
-			response.writeHead(200, "OK",{
+			if(!response.headersSent) {
+				response.writeHead(200, "OK",{
 				Etag: state.makeTiddlerEtag(tiddlerInfo),
-				"Content-Type":  type
-			});
-			response.write(tiddlerInfo.tiddler.text || "",($tw.config.contentTypeInfo[type] ||{encoding: "utf8"}).encoding);
-			response.end();;
+					"Content-Type":  type
+				});
+				response.write(tiddlerInfo.tiddler.text || "",($tw.config.contentTypeInfo[type] ||{encoding: "utf8"}).encoding);
+				response.end();
+			}
 			return;
 		}
 	} else {
-		// Redirect to fallback URL if tiddler not found
-		if(state.queryParameters.fallback) {
-			response.writeHead(302, "OK",{
-				"Location": state.queryParameters.fallback
-			});
-			response.end();
-			return;
-		} else {
-			response.writeHead(404);
-			response.end();
-			return;
+		if(!response.headersSent) {
+			// Redirect to fallback URL if tiddler not found
+			if(state.queryParameters.fallback) {
+				response.writeHead(302, "OK",{
+					"Location": state.queryParameters.fallback
+				});
+				response.end();
+				return;
+			} else {
+				response.writeHead(404);
+				response.end();
+				return;
+			}
 		}
+		return;
 	}
 };
 

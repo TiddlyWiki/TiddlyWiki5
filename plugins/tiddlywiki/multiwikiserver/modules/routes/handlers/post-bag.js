@@ -17,6 +17,8 @@ description
 /*global $tw: false */
 "use strict";
 
+var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
+
 exports.method = "POST";
 
 exports.path = /^\/bags$/;
@@ -26,6 +28,7 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 
 exports.handler = function(request,response,state) {
+	aclMiddleware(request, response, state, "bag", "WRITE");
 	if(state.data.bag_name) {
 		const result = $tw.mws.store.createBag(state.data.bag_name,state.data.description);
 		if(!result) {
