@@ -48,6 +48,6 @@ $caption$
 <<special-button>>
 """>>
 
-<<.warning """If macros are nested, textual substitution will only occur for the outermost macro. Thi is because by the time the inner macros are processed all the substitutions will have already occurred""">>
+<<.warning """If macros are nested, textual substitution will only occur for the outermost macro. This is because by the time the inner macros are processed all the substitutions will have already occurred""">>
 
 A more formal [[presentation|Macro Definition Syntax]] of this syntax is also available.
