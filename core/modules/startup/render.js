@@ -43,21 +43,11 @@ exports.startup = function() {
 		}
 	});
 	// Set up the styles
-	$tw.styleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_STYLESHEET_TITLE,{document: $tw.fakeDocument});
-	$tw.styleContainer = $tw.fakeDocument.createElement("style");
-	$tw.styleWidgetNode.render($tw.styleContainer,null);
-	$tw.styleWidgetNode.assignedStyles = $tw.styleContainer.textContent;
-	$tw.styleElement = document.createElement("style");
-	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
-	document.head.insertBefore($tw.styleElement,document.head.firstChild);
+	var styleParser = $tw.wiki.parseTiddler(ROOT_STYLESHEET_TITLE,{parseAsInline: true}),
+		styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: document});
+	styleWidgetNode.render(document.head,null);
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
-		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
-			var newStyles = $tw.styleContainer.textContent;
-			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
-				$tw.styleWidgetNode.assignedStyles = newStyles;
-				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
-			}
-		}
+		styleWidgetNode.refresh(changes,document.head,null);
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
