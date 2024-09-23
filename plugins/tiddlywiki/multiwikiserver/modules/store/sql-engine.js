@@ -8,9 +8,6 @@ Low level functions to work with the SQLite engine, either via better-sqlite3 or
 This class is intended to encapsulate all engine-specific logic.
 
 \*/
-
-(function() {
-
 /*
 Create a database engine. Options include:
 
@@ -135,5 +132,3 @@ SqlEngine.prototype.transaction = function(fn) {
 };
 
 exports.SqlEngine = SqlEngine;
-
-})();

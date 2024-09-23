@@ -26,9 +26,6 @@ store/
 	database.sql - The database file (managed by sql-tiddler-database.js)
 
 \*/
-
-(function() {
-
 /*
 Class to handle an attachment store. Options include:
 
@@ -177,5 +174,3 @@ AttachmentStore.prototype.getAttachmentMetadata = function(attachmentBlob) {
 	return null;
 };
 exports.AttachmentStore = AttachmentStore;
-
-})();

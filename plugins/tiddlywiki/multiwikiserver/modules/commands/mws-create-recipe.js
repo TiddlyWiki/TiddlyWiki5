@@ -10,8 +10,6 @@ Command to load archive of recipes, bags and tiddlers from a directory
 The parameter "bag-list" should be a space delimited list of bags
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -46,5 +44,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

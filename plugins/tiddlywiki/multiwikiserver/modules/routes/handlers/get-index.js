@@ -6,8 +6,6 @@ module-type: mws-route
 GET /?show_system=true
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -41,5 +39,3 @@ exports.handler = function(request,response,state) {
 		response.end();
 	}
 };
-
-}());

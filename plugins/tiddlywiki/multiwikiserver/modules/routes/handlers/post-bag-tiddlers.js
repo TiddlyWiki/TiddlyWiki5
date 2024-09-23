@@ -6,8 +6,6 @@ module-type: mws-route
 POST /bags/:bag_name/tiddlers/
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -66,5 +64,3 @@ exports.handler = function(request,response,state) {
 		}
 	});
 };
-
-}());

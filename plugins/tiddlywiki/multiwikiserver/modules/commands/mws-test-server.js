@@ -8,8 +8,6 @@ Command to test a local or remote MWS server
 tiddlywiki editions/multiwikiserver/ --listen --mws-test-server http://127.0.0.1:8080/
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -154,5 +152,3 @@ const testSpecs = [
 ];
 
 exports.Command = Command;
-
-})();

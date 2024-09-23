@@ -9,9 +9,6 @@ This class is intended to encapsulate all the SQL queries used to access the dat
 Validation is for the most part left to the caller
 
 \*/
-
-(function() {
-
 /*
 Create a tiddler store. Options include:
 
@@ -576,5 +573,3 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlerAttachmentBlob = function(title,rec
 };
 
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
-
-})();

@@ -12,8 +12,6 @@ Retrieves a system file. System files are stored in configuration tiddlers with 
 GET /.system/:filename
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -48,5 +46,3 @@ exports.handler = function(request,response,state) {
 		response.end();
 	}
 };
-
-}());

@@ -11,8 +11,6 @@ bag_name
 description
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -46,5 +44,3 @@ exports.handler = function(request,response,state) {
 		});
 	}
 };
-
-}());

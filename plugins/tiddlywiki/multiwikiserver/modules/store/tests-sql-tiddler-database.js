@@ -6,8 +6,6 @@ tags: [[$:/tags/test-spec]]
 Tests the SQL tiddler database layer
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -108,5 +106,3 @@ function runSqlDatabaseTests(engine) {
 }
 
 }
-
-})();

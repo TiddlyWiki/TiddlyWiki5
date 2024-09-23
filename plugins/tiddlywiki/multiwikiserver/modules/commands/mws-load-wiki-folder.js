@@ -8,8 +8,6 @@ Command to create and load a bag for the specified core editions
 --mws-load-wiki-folder <path> <bag-name> <bag-description> <recipe-name> <recipe-description>
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -89,5 +87,3 @@ function loadWikiFolder(options) {
 }
 
 exports.Command = Command;
-
-})();

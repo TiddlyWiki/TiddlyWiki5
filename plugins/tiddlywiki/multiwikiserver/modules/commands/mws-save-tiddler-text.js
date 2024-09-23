@@ -8,8 +8,6 @@ Command to load archive of recipes, bags and tiddlers from a directory
 --mws-save-tiddler-text <bag-name> <tiddler-title> <tiddler-text>
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -40,5 +38,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();
