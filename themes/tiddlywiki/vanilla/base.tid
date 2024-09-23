@@ -32,12 +32,12 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 \end
 
 \define if-fluid-fixed(text,hiddenSidebarText)
-<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] [[$:/state/sidebar/posx]!is[missing]] %>
 $text$
-<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
+<%if [{$:/state/sidebar}match[no]] %>
 $hiddenSidebarText$
-</$reveal>
-</$reveal>
+<% endif %>
+<% endif %>
 \end
 
 \define if-editor-height-fixed(then,else)
