@@ -1,0 +1,22 @@
+title: $:/core/macros/sidebar-resizer
+tags: $:/tags/Global
+
+\procedure sidebar-resizer-pointerdown-actions()
+<%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
+	<$action-setfield $tiddler="$:/state/sidebar/resizing" text="yes"/>
+	<$action-setfield $tiddler="$:/state/sidebar/posx" starting-posx=<<event-fromcatcher-posx>> drag-diff=<<event-fromselected-posx>> selectednode-width=<<tv-selectednode-width>> widgetnode-width=<<tv-widgetnode-width>> text=<<event-fromcatcher-posx>> leftbar-width={{{ [<event-fromviewport-posx>subtract<event-fromcatcher-posx>] }}}/>
+<% endif %>
+\end
+\procedure sidebar-resizer-pointerup-actions()
+<%if [[$:/state/sidebar/resizing]!is[missing]] %>
+	<$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
+<% endif %>
+\end
+\procedure sidebar-resizer-pointermove-actions()
+<%if [[$:/state/sidebar/resizing]!is[missing]] %>
+	<$action-setfield $tiddler="$:/state/sidebar/posx" text=<<event-fromcatcher-posx>>/>
+	<%if [<event-fromcatcher-posx>compare:number:lt{$:/state/sidebar/posx!!starting-posx}] %>
+		<$action-setfield $tiddler="$:/state/sidebar/posx" starting-posx=<<event-fromcatcher-posx>>/>
+	<% endif %>
+<% endif %>
+\end
