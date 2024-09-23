@@ -8,6 +8,7 @@ Tests the SQL tiddler store layer
 \*/
 (function(){
 
+/*eslint no-inner-declarations: "off"*/
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -145,6 +146,6 @@ function runSqlStoreTests(engine) {
 	});
 }
 
-}
+} // if($tw.node)
 
 })();
