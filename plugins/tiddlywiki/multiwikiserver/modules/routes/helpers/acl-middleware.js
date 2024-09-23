@@ -27,7 +27,12 @@ Middleware to handle ACL permissions
     } else if(entityType === "bag") {
       entityName = state.params[0]; // Adjust as needed for bag
     }
-    console.log("middleware =>", { entityType, permissionName, entityName })
+    // First, replace '%3A' with ':' to handle TiddlyWiki's system tiddlers
+    var partiallyDecoded = entityName.replace(/%3A/g, ":");
+    // Then use decodeURIComponent for the rest
+    var decodedEntityName = decodeURIComponent(partiallyDecoded);
+
+    // console.log("middleware =>", { entityType, permissionName, entityName, decodedEntityName })
 
     // Check if user is authenticated
     if(!state.authenticatedUser && !response.headersSent) {
@@ -37,8 +42,7 @@ Middleware to handle ACL permissions
     }
 
     // Check ACL permission
-    var hasPermission = sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, entityName, permissionName)
-    console.log("hasPermission =>", hasPermission)
+    var hasPermission = sqlTiddlerDatabase.checkACLPermission(state.authenticatedUser.user_id, entityType, decodedEntityName, permissionName)
     if(!hasPermission) {
       if(!response.headersSent) {
         response.writeHead(403, "Forbidden");

@@ -23,7 +23,7 @@ exports.method = "GET";
 exports.path = /^\/bags\/([^\/]+)\/tiddlers\/(.+)$/;
 
 exports.handler = function(request,response,state) {
-	aclMiddleware(request, response, state, "gab", "READ");
+	aclMiddleware(request, response, state, "bag", "READ");
 	// Get the  parameters
 	const bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),

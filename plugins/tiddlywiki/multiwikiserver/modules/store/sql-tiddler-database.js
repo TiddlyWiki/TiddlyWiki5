@@ -474,51 +474,15 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
 /*
 Checks if a user has permission to access a recipe
 */
-SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName) {
-	const hasPermission = this.engine.runStatementGet(`
-		SELECT 1
-		FROM users u
-		JOIN user_roles ur ON u.user_id = ur.user_id
-		JOIN role_permissions rp ON ur.role_id = rp.role_id
-		JOIN permissions p ON rp.permission_id = p.permission_id
-		JOIN acl ON rp.role_id = acl.role_id AND rp.permission_id = acl.permission_id
-		JOIN recipes r ON acl.entity_name = r.recipe_id
-		WHERE u.user_id = $user_id
-		AND r.recipe_name = $recipe_name
-		AND p.permission_name = 'read'
-		AND acl.entity_type = 'recipe'
-		LIMIT 1
-	`, {
-		$user_id: userId,
-		$recipe_name: recipeName
-	});
-
-	return hasPermission;
+SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName, permissionName) {
+	return this.checkACLPermission(userId, 'recipe', recipeName, permissionName)
 };
 
 /*
 Checks if a user has permission to access a bag
 */
 SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permissionName) {
-	const hasBagPermission = this.engine.runStatementGet(`
-		SELECT 1
-		FROM users u
-		JOIN user_roles ur ON u.user_id = ur.user_id
-		JOIN role_permissions rp ON ur.role_id = rp.role_id
-		JOIN permissions p ON rp.permission_id = p.permission_id
-		JOIN acl ON rp.role_id = acl.role_id AND rp.permission_id = acl.permission_id
-		JOIN bags b ON acl.entity_name = b.bag_id
-		WHERE u.user_id = $user_id
-		AND b.bag_name = $bag_name
-		AND p.permission_name = 'read'
-		AND acl.entity_type = 'bag'
-		LIMIT 1
-	`, {
-		$user_id: userId,
-		$bag_name: bagName
-	});
-
-	return hasBagPermission;
+	return this.checkACLPermission(userId, 'bag', bagName, permissionName)
 };
 
 SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName, permissionName) {
@@ -536,6 +500,11 @@ SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, e
 	const entityInfo = entityTypeToTableMap[entityType];
 	if (!entityInfo) {
 		throw new Error('Invalid entity type: ' + entityType);
+	}
+
+	// if the entityName starts with "$:/", we'll assume its a system tiddler, then grant the user permission
+	if(entityName.startsWith("$:/")){
+		return true
 	}
 
 	const query = `

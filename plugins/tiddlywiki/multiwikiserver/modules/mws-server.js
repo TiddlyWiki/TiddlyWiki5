@@ -339,7 +339,25 @@ Server.prototype.loadAuthRoutes = function () {
 			self.handleLogin(request, response, state);
 		}.bind(self)
 	});
+	self.addRoute({
+		method: "POST",
+		path: /^\/logout$/,
+		csrfDisable: true,
+		handler: function(request, response, state) {
+			self.handleLogout(request, response, state);
+		}.bind(self)
+	});
 };
+
+Server.prototype.handleLogout = function (request, response, state) {
+	var self = this;
+	if (state.authenticatedUser) {
+		self.sqlTiddlerDatabase.deleteSession(state.authenticatedUser.sessionId);
+	}
+	response.setHeader('Set-Cookie', 'session=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
+	response.writeHead(302, { 'Location': '/login' });
+	response.end();
+}
 
 Server.prototype.handleLogin = function (request, response, state) {
 	var self = this;
@@ -359,7 +377,7 @@ Server.prototype.handleLogin = function (request, response, state) {
 	} else {
 		this.wiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/login/error",
-			text: errorMessage
+			text: "Invalid username or password"
 		}));
 		response.writeHead(302, {
 			'Location': '/login'
@@ -468,6 +486,8 @@ Server.prototype.authenticateUser = function(request, response) {
 		return false
 	}
 	delete user.password;
+	// @TODO: implement logic to determine if a user is an admin user
+	user['isAdmin'] = true
 
 	return user
 };
