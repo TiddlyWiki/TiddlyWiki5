@@ -6,6 +6,7 @@ fontsize: 14px
 lineheight: 20px
 storyleft: 0px
 storytop: 0px
+storyminwidth: 350px
 storyright: 770px
 storywidth: 770px
 tiddlerwidth: 686px
