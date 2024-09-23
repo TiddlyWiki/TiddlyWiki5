@@ -8,6 +8,8 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
+<div class="tc-sidebar-resizer"/>
+
 <div class="tc-sidebar-header">
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes">
