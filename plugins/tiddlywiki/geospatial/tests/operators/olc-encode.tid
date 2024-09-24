@@ -1,0 +1,20 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/olc-encode
+description: olc-encode operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Description
+
+Open Location Code operators
++
+title: Output
+
+(<$text text={{{ [olc-encode[51.751944],[-1.257778]] }}}/>)
+(<$text text={{{ [olc-encode[51.751944],[-1.257778],[11]] }}}/>)
+
++
+title: ExpectedResult
+
+<p>(9C3WQP2R+QV)
+(9C3WQP2R+QVH)
+</p>

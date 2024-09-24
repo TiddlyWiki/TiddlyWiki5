@@ -1,0 +1,10 @@
+title: $:/core/macros/testcase
+tags: $:/tags/Macro $:/tags/Global
+
+\whitespace trim
+
+\procedure testcase(tiddler)
+<$tiddler tiddler=<<tiddler>>>
+<$transclude $tiddler="$:/core/ui/TestCaseTemplate">
+</$tiddler>
+\end

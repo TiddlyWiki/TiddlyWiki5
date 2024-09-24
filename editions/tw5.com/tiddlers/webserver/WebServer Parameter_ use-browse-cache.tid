@@ -1,0 +1,25 @@
+caption: use-browse-cache
+created: 20240413042652008
+modified: 20240413050841387
+tags: [[WebServer Parameters]]
+title: WebServer Parameter: use-browser-cache
+type: text/vnd.tiddlywiki
+
+The [[web server configuration parameter|WebServer Parameters]] ''use-browser-cache=yes'' activates 200 OK browser caching via the `Cache-Control` header and a smart a Etag header:
+
+* The server javascript creates an MD5 `hash` object.
+* Adds the data of the current `request:response` (for example: json text or an image binary) to the hash object.
+* Adds the current `headers` of the response to the hash object.
+* If the response data has an `encoding` value, adds the encoding to the hash object.
+* Calculates the final MD5 hash string as a `contentDigest` javascript variable, and saves it as an `Etag: "<<contentDigest>>"` header.
+
+If the incoming request contains a header named `if-none-match`, then the server will check the generated Etag against all values.
+
+If any `if-none-match` value DOES match the current Etag, the server will send a `304 NOT MODIFIED` response with the current response headers, instead of the data with a `200 OK` response.
+
+This saves bandwidth, as the client can be sure they have already received the exact data and has it in their current cache.
+
+If ''use-browser-cache=no'' (or any other value including null), then the server will return a `Cache-Control: no-store` header by default.
+
+If any customer server route module defines custom `Cache-Control` header behavior, then the server will pass that header through instead of the default.
+

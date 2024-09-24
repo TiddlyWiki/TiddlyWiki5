@@ -1,7 +1,7 @@
 title: $:/language/Help/commands
-description: Ausführen von Befehlen aus einem Tiddler
+description: Ausführen von Befehlen aus einem Filter
 
-Sequentielle Abarbeitung von Befehlen aus einem Tiddler.
+Sequentielle Abarbeitung von Befehlen aus einem Filter.
 
 ```
 --commands <filter>

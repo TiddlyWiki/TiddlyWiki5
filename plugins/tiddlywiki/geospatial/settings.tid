@@ -1,0 +1,24 @@
+title: $:/plugins/tiddlywiki/geospatial/settings
+
+! Geospatial Plugin Settings
+
+This plugin runs entirely in the browser, with no backend server component. A consequence of this design is that the API keys required to access external services must be obtained by the end user. These keys are stored in the browser and so only need to be set up once.
+
+!! ~TravelTime API key
+
+# Register for a free account at https://traveltime.com/
+# Visit https://account.traveltime.com/dashboard
+# Copy and paste the values labelled "Application ID" and "Secret Keys" into the boxes below
+
+~TravelTime Application ID: <$password name="traveltime-application-id"/>
+
+~TravelTime Secret Key: <$password name="traveltime-secret-key"/>
+
+!! Flickr API Key
+
+# Register for a free account at https://flickr.com/
+# Visit https://www.flickr.com/services/apps/create/apply and complete the procedure for the appropriate key
+#* The 
+# Copy and paste the value labelled "API Key" into the box below
+
+Flickr API Key: <$password name="flickr-api-key"/>

@@ -1,10 +1,10 @@
 created: 20140216102454178
-modified: 20160617101212889
+modified: 20230803045407958
 tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
 
-A colour palette is a [[data tiddler|DataTiddlers]] that supplies a [[CSS]] colour value, such as ''yellow'' or ''#fe0'', for each of several colour names, like this:
+A colour palette is a [[data tiddler|DataTiddlers]] that supplies a [[CSS|Cascading Style Sheets]] colour value, such as ''yellow'' or ''#fe0'', for each of several colour names, like this:
 
 ```
 page-background: #fe0

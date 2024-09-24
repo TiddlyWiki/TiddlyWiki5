@@ -7,17 +7,17 @@ type: text/vnd.tiddlywiki
 released: 201409201500
 description: First non-beta release
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.18-beta...v5.1.0]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.0.18-beta...v5.1.0]]//
 
 This is the first full release of TiddlyWiki. Documentation updates made up the bulk of the changes since the previous 5.0.18-beta release.
 
 !! Hackability Improvements
 
-* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/b239b3d6230a9f7aab4c9ef6a59aefb4158f45b1]] curly braces from qualified identifiers
+* [[Removed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b239b3d6230a9f7aab4c9ef6a59aefb4158f45b1]] curly braces from qualified identifiers
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/9e6dab06cc2db8263fce083510ae570923b21c0b]] problem with Markdown Maruku mode metadata
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/9e6dab06cc2db8263fce083510ae570923b21c0b]] problem with Markdown Maruku mode metadata
 
 !! Contributors
 

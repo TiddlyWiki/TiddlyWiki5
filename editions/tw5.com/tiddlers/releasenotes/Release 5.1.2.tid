@@ -7,25 +7,25 @@ type: text/vnd.tiddlywiki
 released: 20140927162659979
 description: Minor fixes
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.1...v5.1.2]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.1...v5.1.2]]//
 
 This is another small release with documentation updates and a few bug fixes and improvements.
 
 !! Usability Improvements
 
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/b3df07ae3e190cfb6fc23dbe31c6229fe5e39087]] error handling for malformed or unrecognised ~LaTeX content with [[KaTeX Plugin]]
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b3df07ae3e190cfb6fc23dbe31c6229fe5e39087]] error handling for malformed or unrecognised ~LaTeX content with [[KaTeX Plugin]]
 
 !! Hackability Improvements
 
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/42abef6fbf79342ccbd90b142d48f64ab5c1c38a]] styling of separator before the untagged item in the tags sidebar
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/23c2d90ee8e28f8c68f9ba58fcbc13a56f838d61]] error handling for the upload saver (which is used for saving to TiddlySpot)
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/115245a632e80e9d033957327dfec909a3cd1fc8]] storyview error detection
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/42abef6fbf79342ccbd90b142d48f64ab5c1c38a]] styling of separator before the untagged item in the tags sidebar
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/23c2d90ee8e28f8c68f9ba58fcbc13a56f838d61]] error handling for the upload saver (which is used for saving to TiddlySpot)
+* [[Improved|https://github.com/TiddlyWiki/TiddlyWiki5/commit/115245a632e80e9d033957327dfec909a3cd1fc8]] storyview error detection
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b1fb0a2a070a6abc78564e56fdb4244076ac44ac]] crash caused by incorrectly formatted plugins
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/eacb9e53ebf2a814d61bf005d68f449f7b9e63b5]] problem with tiddler info not being removed by the syncer after deleting a tiddler
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e2046ce4ffb6b8232a4ad5e7f51c431798917787]] HTTP handling to treat response code 201 as success
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/b1fb0a2a070a6abc78564e56fdb4244076ac44ac]] crash caused by incorrectly formatted plugins
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/eacb9e53ebf2a814d61bf005d68f449f7b9e63b5]] problem with tiddler info not being removed by the syncer after deleting a tiddler
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/e2046ce4ffb6b8232a4ad5e7f51c431798917787]] HTTP handling to treat response code 201 as success
 
 !! Contributors
 

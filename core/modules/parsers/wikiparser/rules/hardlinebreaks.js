@@ -45,10 +45,11 @@ exports.parse = function() {
 		reEnd.lastIndex = this.parser.pos;
 		match = reEnd.exec(this.parser.source);
 		if(match) {
+			var start = this.parser.pos;
 			this.parser.pos = reEnd.lastIndex;
 			// Add a line break if the terminator was a line break
 			if(match[2]) {
-				tree.push({type: "element", tag: "br"});
+				tree.push({type: "element", tag: "br", start: start, end: this.parser.pos});
 			}
 		}
 	} while(match && !match[1]);

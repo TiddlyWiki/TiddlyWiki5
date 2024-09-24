@@ -43,7 +43,9 @@ Saves individual tiddlers in their raw text or binary format to the specified fi
 						directory: path.resolve(self.commander.outputPath),
 						pathFilters: [filenameFilter],
 						wiki: wiki,
-						fileInfo: {}
+						fileInfo: {
+							overwrite: true
+						}
 					});
 					if(self.commander.verbose) {
 						console.log("Saving \"" + title + "\" to \"" + fileInfo.filepath + "\"");
