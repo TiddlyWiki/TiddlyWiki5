@@ -96,6 +96,10 @@ Plugins/PluginWillRequireReload: (wymaga przeładowania)
 Plugins/Plugins/Caption: Wtyczki
 Plugins/Plugins/Hint: Wtyczki
 Plugins/Reinstall/Caption: zainstaluj ponownie
+Plugins/Stability/Deprecated: WYCOFANY
+Plugins/Stability/Experimental: EKSPERYMENTALNY
+Plugins/Stability/Legacy: STARY
+Plugins/Stability/Stable: STABILNY
 Plugins/Themes/Caption: Motywy
 Plugins/Themes/Hint: Wtyczki z motywami
 Plugins/Update/Caption: aktualizuj

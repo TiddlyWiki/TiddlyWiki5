@@ -42,7 +42,7 @@ Error/RetrievingSkinny: Bład przy pobieraniu listy tiddlerów
 Error/SavingToTWEdit: Bład przy zapisywaniu do TWEdit
 Error/WhileSaving: Bład przy zapisywaniu
 Error/XMLHttpRequest: Kod błedu XMLHttpRequest
-Error/ZoominTextNode: Story View Error: It appears you tried to interact with a tiddler that displays in a custom container. This is most likely caused by using `$:/tags/StoryTiddlerTemplateFilter` with a template that contains text or whitespace at the start. Please use the pragma `\whitespace trim` and ensure the whole contents of the tiddler is wrapped in a single HTML element. The text that caused this issue:
+Error/ZoominTextNode: Błąd Widoku: Wykryto błędną interakcję z tiddlerem, który wyświetlany jest w niestandardowym kontenerze. Jest to najprawdopodobniej spowodowane użyciem `$:/tags/StoryTiddlerTemplateFilter` z motywem, który ma tekst lub białe znaki na początku. Użyj pragmy `\whitespace trim` i upewnij się, że cała treść tiddlera opakowana jest w jeden element HTML. Tekst, który spowodał problem:
 InternalJavaScriptError/Title: Wewnętrzny bład JavaScript
 InternalJavaScriptError/Hint: Ups, to się nie powinno zdarzyć. Zalecamy ponowne uruchomienie TiddlyWiki poprzez odświeżenie strony w przeglądarce.
 LayoutSwitcher/Description: Otwórzy wybór motywu
