@@ -71,10 +71,20 @@ $else$
 
 {{$:/themes/tiddlywiki/vanilla/reset}}
 
-*, input[type="search"] {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
+input[type="search"] {
+	outline-offset: initial;
+}
+
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
+}
+
+button:-moz-focusring, input:-moz-focusring, textarea:-moz-focusring, select:-moz-focusring {
+	outline: 2px solid <<colour primary>>;
+	outline-offset: -2px;
+	border-radius: 0.25em;
 }
 
 /*
@@ -157,7 +167,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
+	white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -293,10 +303,13 @@ form.tc-form-inline {
 Markdown likes putting code elements inside pre elements
 */
 pre > code {
-	padding: 0;
+	display: block;
+	padding: 0.5em;
 	border: none;
+	white-space: {{$:/themes/tiddlywiki/vanilla/options/codewrapping}};
 	background-color: inherit;
 	color: inherit;
+	overflow-x: auto;
 }
 
 /*
@@ -707,7 +720,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 }
 
 button svg.tc-image-button, button .tc-image-button img {
-	height: 1em;
+	height: auto;
 	width: 1em;
 }
 
@@ -1335,10 +1348,6 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-edit-bitmapeditor-height {
 	display: block;
-}
-
-.tc-tiddler-body {
-	clear: both;
 }
 
 .tc-single-tiddler-window .tc-tiddler-body,
@@ -2760,6 +2769,30 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	float: right;
 }
 
+/* Float tc-clearfix. Needs to be used by elements that allow float:right in their content.
+** So the floating element does not overflow
+*/
+
+.tc-clearfix:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+/* Fix overflow in table and toc */
+.tc-tiddler-body .tc-tabbed-table-of-contents {
+	overflow-x: auto;
+}
+
+.tc-tiddler-body > table {
+  display: block;
+  overflow: auto;
+}
+.tc-tiddler-body > table tbody {
+  display: table;
+  width: 100%;
+}
+
 /*
 ** Chooser
 */
@@ -2819,7 +2852,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-language-chooser .tc-image-button img {
-	width: 2em;
+	width: auto;
 	vertical-align: -0.15em;
 }
 
@@ -3511,3 +3544,4 @@ span.tc-translink > a:first-child {
 .tc-tiny-v-gap-bottom {
 	margin-bottom: 3px;
 }
+

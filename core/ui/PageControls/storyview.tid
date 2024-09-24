@@ -4,19 +4,16 @@ caption: {{$:/core/images/storyview-classic}} {{$:/language/Buttons/StoryView/Ca
 description: {{$:/language/Buttons/StoryView/Hint}}
 
 \whitespace trim
-\define icon()
-$:/core/images/storyview-$(storyview)$
-\end
 <span class="tc-popup-keep">
 <$button popup=<<qualify "$:/state/popup/storyview">> tooltip={{$:/language/Buttons/StoryView/Hint}} aria-label={{$:/language/Buttons/StoryView/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 <$set name="storyview" value={{$:/view}}>
-<$transclude tiddler=<<icon>>/>
+<$transclude tiddler=`$:/core/images/storyview-$(storyview)$`/>
 </$set>
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/StoryView/Caption}}/></span>
-</$list>
+<%endif%>
 </$button>
 </span>
 <$reveal state=<<qualify "$:/state/popup/storyview">> type="popup" position="below" animate="yes">

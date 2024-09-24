@@ -4,23 +4,21 @@ caption: {{$:/core/images/new-here-button}} {{$:/language/Buttons/NewHere/Captio
 description: {{$:/language/Buttons/NewHere/Hint}}
 
 \whitespace trim
-\define newHereActions()
-\whitespace trim
+\procedure newHereActions()
 <$set name="tags" filter="[<currentTiddler>] [enlist{$:/config/NewTiddler/Tags}]">
 <$action-sendmessage $message="tm-new-tiddler" tags=<<tags>>/>
 </$set>
 \end
-\define newHereButton()
-\whitespace trim
+\procedure newHereButton()
 <$button actions=<<newHereActions>> tooltip={{$:/language/Buttons/NewHere/Hint}} aria-label={{$:/language/Buttons/NewHere/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/new-here-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/NewHere/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 \end
 <<newHereButton>>

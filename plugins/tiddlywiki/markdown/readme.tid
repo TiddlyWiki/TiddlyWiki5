@@ -30,3 +30,72 @@ var md = $tw.Wiki.parsers["text/markdown"].prototype.md;
 md.use(plugin1)
   .use(plugin2, opts, ...);
 ```
+
+! Plugin Configuration
+
+<h2 style="margin-top:1.5em">~WikiText Pragma</h2>
+
+The value of [[renderWikiTextPragma|$:/config/markdown/renderWikiTextPragma]] has been carefully tuned to properly integrate markdown with ~TiddlyWiki. Changing this setting may produce unexpected results, but the inclusion of the following parser rules should be fine:
+
+; image
+: embed images using ~TiddlyWiki's image syntax:
+
+<p style="margin-left:1em">
+
+```
+[img[An explanatory tooltip|TiddlerTitle]]
+
+[img width=23 class="tc-image" [https://tiddlywiki.com/fractalveg.jpg]]
+```
+</p>
+
+; prettylink
+: create links the ~TiddlyWiki way:
+
+<p style="margin-left:1em">
+
+```
+[[TiddlerTitle]]
+
+[[Displayed Link Title|Tiddler Title]]
+
+[[TW5|https://tiddlywiki.com/]]
+```
+</p>
+
+; prettyextlink
+: create external links using the following syntax:
+
+<p style="margin-left:1em">
+
+```
+[ext[Open file|index.html]]
+
+[ext[Open file|../README.md]]
+```
+</p>
+
+; wikilink
+: auto-link ~CamelCase titles
+
+; syslink
+: auto-link system tiddlers
+
+<h2 style="margin-top:1.5em">Typographical Replacements</h2>
+
+When [[typographer|$:/config/markdown/typographer]] is enabled, markdown-it will provide these typographical replacements:
+
+```
+(c) (C)   → ©
+(tm) (TM) → ™
+(r) (R)   → ®
++-        → ±
+...       → …
+?....     → ?..
+!....     → !..
+?????     → ???
+!!!!!     → !!!
+,,        → ,
+--        → &ndash;
+---       → &mdash;
+```

@@ -42,6 +42,7 @@ Error/RetrievingSkinny: Bład przy pobieraniu listy tiddlerów
 Error/SavingToTWEdit: Bład przy zapisywaniu do TWEdit
 Error/WhileSaving: Bład przy zapisywaniu
 Error/XMLHttpRequest: Kod błedu XMLHttpRequest
+Error/ZoominTextNode: Story View Error: It appears you tried to interact with a tiddler that displays in a custom container. This is most likely caused by using `$:/tags/StoryTiddlerTemplateFilter` with a template that contains text or whitespace at the start. Please use the pragma `\whitespace trim` and ensure the whole contents of the tiddler is wrapped in a single HTML element. The text that caused this issue:
 InternalJavaScriptError/Title: Wewnętrzny bład JavaScript
 InternalJavaScriptError/Hint: Ups, to się nie powinno zdarzyć. Zalecamy ponowne uruchomienie TiddlyWiki poprzez odświeżenie strony w przeglądarce.
 LayoutSwitcher/Description: Otwórzy wybór motywu
@@ -70,6 +71,7 @@ OfficialPluginLibrary: Oficjalna Biblioteka Wtyczek ~TiddlyWiki
 OfficialPluginLibrary/Hint: Oficjalna biblioteka wtyczek ~TiddlyWiki z tiddlywiki.com. Wtyczki, motywi i paczki językowe są utrzymywane przez główny zespół TiddlyWiki.
 PageTemplate/Description: domyślny motyw ~TiddlyWiki
 PageTemplate/Name: Domyślny szablon strony
+PluginReloadWarning: Zapisz {{$:/core/ui/Buttons/save-wiki}} i odśwież {{$:/core/ui/Buttons/refresh}} ~TiddlyWiki by zastosować zmiany we wtyczkach używajacych ~JavaScriptu
 RecentChanges/DateFormat: 0DD-0MM-YYYY
 Shortcuts/Input/AdvancedSearch/Hint: Otwórzy panel zaawansowanego wyszukiwania z poziomu menu bocznego
 Shortcuts/Input/Accept/Hint: Zaakceptuj zaznaczenia
