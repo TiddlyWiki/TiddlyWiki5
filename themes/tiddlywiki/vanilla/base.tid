@@ -1201,6 +1201,20 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	color: <<colour muted-foreground>>;
 }
 
+.tc-tiddler-lazy-loading {
+	height: 4px;
+	width: 100%;
+	background: no-repeat linear-gradient(<<colour background>> 0 0),no-repeat linear-gradient(<<colour background>> 0 0),<<colour primary>>;
+	background-size: 60% 100%;
+	animation: animation-loading-progress 3s infinite;
+}
+
+@keyframes animation-loading-progress {
+	0%   {background-position:-150% 0,-150% 0}
+	66%  {background-position: 250% 0,-150% 0}
+	100% {background-position: 250% 0, 250% 0}
+}
+
 .tc-titlebar h2 {
 	font-size: 1em;
 	display: inline;
