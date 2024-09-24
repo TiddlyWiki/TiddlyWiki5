@@ -29,7 +29,7 @@ name: Czytelna nazwa powiązana z tiddlerem wtyczki
 parent-plugin: Określa nadrzędną wtyczkę
 plugin-priority: Numeryczna wartość określająca tiddlera wtyczki
 plugin-type: Typ tiddlera wtyczki
-stability: Stan rozwoju wtyczki: wycofany (deprecated), eksperymentalny (experimental), stabilny (stable), stary (legacy)
+stability: Stan rozwoju wtyczki: wycofany, eksperymentalny, stabilny, stary
 revision: Numer rewizji tiddlera przechowywany na serwerze
 released: Data wydania TiddlyWiki
 source: URL źródłowy powiązany z tiddlerem
