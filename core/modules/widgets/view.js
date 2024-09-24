@@ -293,8 +293,8 @@ Initialise date mehods
 */
 ViewWidget.prototype.initialiseDateView = function(View) {
 	var self = this;
-	View.prototype.getValue = function(format) {
-		format = format || "YYYY MM DD 0hh:0mm";
+	View.prototype.getValue = function() {
+		var format = self.viewTemplate || "YYYY MM DD 0hh:0mm";
 		var value = $tw.utils.parseDate(self.getValue());
 		if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
 			return $tw.utils.formatDateString(value,format);
