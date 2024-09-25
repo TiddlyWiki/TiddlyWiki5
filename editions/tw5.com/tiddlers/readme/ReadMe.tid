@@ -1,16 +1,22 @@
 created: 20131129094758194
-modified: 20140920135213536
+modified: 20240925115259828
 title: ReadMe
 type: text/vnd.tiddlywiki
 
 \define tv-wikilink-template() https://tiddlywiki.com/static/$uri_doubleencoded$.html
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 
+! Welcome
+
 Welcome to TiddlyWiki, a non-linear personal web notebook that anyone can use and keep forever, independently of any corporation.
 
-TiddlyWiki is a complete interactive wiki in JavaScript. It can be used as a single HTML file in the browser or as a powerful Node.js application. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
+~TiddlyWiki is a complete interactive wiki in ~JavaScript. It can be used as a single HTML file in the browser or as a powerful Node.js application. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
+
+!! Demo
 
 Learn more and see it in action at https://tiddlywiki.com/
+
+!! Developer Documentation
 
 Developer documentation is in progress at https://tiddlywiki.com/dev/
 
@@ -20,15 +26,19 @@ Developer documentation is in progress at https://tiddlywiki.com/dev/
 <$transclude mode="block" tiddler="Forums"/>
 </$vars>
 
-! Installing TiddlyWiki on Node.js
+---
+
+! Installing ~TiddlyWiki on Node.js
+
+~TiddlyWiki is a SingleFileApplication, which is easy to use. For advanced users and developers there is a possibility to use a Node.js client / server configuration. This configuration is also used to build the ~TiddlyWiki SinglePageApplication
 
 {{Installing TiddlyWiki on Node.js}}
 
-! Using TiddlyWiki on Node.js
+! Using ~TiddlyWiki on Node.js
 
 {{Using TiddlyWiki on Node.js}}
 
-! Upgrading TiddlyWiki on Node.js
+! Upgrading ~TiddlyWiki on Node.js
 
 {{Upgrading TiddlyWiki on Node.js}}
 
