@@ -6,13 +6,8 @@ tags: $:/tags/Global
 	<$let leftOffset={{{ [<event-fromviewport-posx>subtract<event-fromcatcher-posx>] }}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} dragDiff=<<event-fromselected-posx>> leftOffsetPercentage={{{ [<leftOffset>divide<viewportWidth>] }}} dragDiffPercentage={{{ [<dragDiff>divide<viewportWidth>] }}} dragWidthPercentage={{{ [<tv-selectednode-width>divide<viewportWidth>] }}} sidebarOffsetPercentage={{{ [[22]divide<viewportWidth>] }}} storyRiverPercentage={{{ [<event-fromcatcher-posx>divide<viewportWidth>subtract<dragDiffPercentage>] }}} sidebarPercentage={{{ [[1]subtract<storyRiverPercentage>subtract<sidebarOffsetPercentage>subtract<leftOffsetPercentage>] }}} widgetNodeWidthPercentage={{{ [<tv-widgetnode-width>divide<viewportWidth>] }}}>
 		<$action-setfield $tiddler="$:/state/sidebar/dimensions"
 			left-offset=<<leftOffset>>
-			left-offset-percentage=<<leftOffsetPercentage>>
-			widget-node-width-percentage=<<widgetNodeWidthPercentage>>
 			widget-node-width=<<tv-widgetnode-width>>
-			drag-width=<<tv-selectednode-width>>
-			drag-diff=<<dragDiff>>
 			drag-diff-percentage=<<dragDiffPercentage>>
-			drag-width-percentage=<<dragWidthPercentage>>
 			sidebar-offset-percentage=<<sidebarOffsetPercentage>>
 			story-river-percentage=<<storyRiverPercentage>>
 			sidebar-percentage=<<sidebarPercentage>>/>

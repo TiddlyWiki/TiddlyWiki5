@@ -14,8 +14,11 @@ code-body: yes
 
 .tc-sidebar-scrollable {
 	padding-left: 20px;
-	width: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px);
 	z-index: 1;
+}
+
+.tc-story-river {
+	width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 }
 
 .tc-sidebar-resizer-pointerdown-eventcatcher {
@@ -67,6 +70,33 @@ code-body: yes
 	opacity: 0.8;
 }
 
+<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] %>
+
+.tc-sidebar-scrollable {
+	width: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px);
+}
+
+<% elseif [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
+
+.tc-story-river {
+	padding-right: 0px;
+	width: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+}
+
+.tc-sidebar-scrollable {
+	left: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} + 22px);
+}
+
+.tc-sidebar-resizer-pointerdown-eventcatcher {
+	right: calc(-100vw + {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px + {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+}
+
+.tc-sidebar-resizer {
+	right: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} + 20px);
+}
+
+<% endif %>
+
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
 
 	.tc-sidebar-scrollable {
@@ -93,6 +123,28 @@ code-body: yes
 <% endif %>
 
 <%if [[$:/state/sidebar/dimensions]!is[missing]then{$:/state/sidebar}!match[no]] %>
+
+	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
+
+		.tc-story-river {
+			padding-right: 0;
+			position: relative;
+			width: auto;
+			left: 0;
+			margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+		}
+
+		.tc-tiddler-frame {
+			width: 100%;
+		}
+
+		.tc-sidebar-scrollable {
+			left: auto;
+			bottom: 0;
+			right: 0;
+		}
+
+	<% endif %>
 
 	.tc-story-river {
 		width: max(min(calc(({{$:/state/sidebar/dimensions!!story-river-percentage}} * 100vw) - ({{$:/state/sidebar/dimensions!!widget-node-width}}px - 100vw + {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}})),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),{{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}});
