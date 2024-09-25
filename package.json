@@ -29,7 +29,7 @@
 	"bundleDependencies": [],
 	"license": "BSD",
 	"engines": {
-		"node": ">=0.8.2"
+		"node": ">=20.17.0"
 	},
 	"scripts": {
 		"start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
