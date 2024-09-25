@@ -1,0 +1,19 @@
+title: Widgets/ViewWidget/Parameter/field-format-text
+description: Test view-widget parameters tiddler, field and format=*
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: input
+caption: [[HelloThere]]
+
+Some text
++
+title: Output
+
+<$view tiddler="input" field="caption" format="text"/>
+
+<$view tiddler="input" field="caption"/>
++
+title: ExpectedResult
+
+[[HelloThere]]<p>[[HelloThere]]</p>
