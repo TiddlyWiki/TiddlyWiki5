@@ -1,0 +1,32 @@
+title: $:/core/macros/sidebar-resizer
+tags: $:/tags/Global
+
+\procedure sidebar-resizer-pointerdown-actions()
+<%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
+	<$let leftOffset={{{ [<event-fromviewport-posx>subtract<event-fromcatcher-posx>] }}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} dragDiff=<<event-fromselected-posx>> dragDiffPercentage={{{ [<dragDiff>divide<viewportWidth>] }}} dragWidthPercentage={{{ [<tv-selectednode-width>divide<viewportWidth>] }}} sidebarOffsetPercentage={{{ [[22]divide<viewportWidth>] }}} storyRiverPercentage={{{ [<event-fromcatcher-posx>subtract<leftOffset>divide<viewportWidth>subtract<dragDiffPercentage>] }}} sidebarPercentage={{{ [[1]subtract<storyRiverPercentage>subtract<sidebarOffsetPercentage>] }}}>
+		<$action-setfield $tiddler="$:/state/sidebar/posx"
+			drag-width=<<tv-selectednode-width>>
+			drag-diff=<<dragDiff>>
+			drag-diff-percentage=<<dragDiffPercentage>>
+			drag-width-percentage=<<dragWidthPercentage>>
+			sidebar-offset-percentage=<<sidebarOffsetPercentage>>
+			story-river-percentage=<<storyRiverPercentage>>
+			sidebar-percentage=<<sidebarPercentage>>/>
+		<$action-setfield $tiddler="$:/state/sidebar/resizing" text="yes"/>
+	</$let>
+<% endif %>
+\end
+\procedure sidebar-resizer-pointerup-actions()
+<%if [[$:/state/sidebar/resizing]!is[missing]] %>
+	<$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
+<% endif %>
+\end
+\procedure sidebar-resizer-pointermove-actions()
+<%if [[$:/state/sidebar/resizing]!is[missing]] %>
+	<$let leftOffset={{{ [<event-fromviewport-posx>subtract<event-fromcatcher-posx>] }}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} storyRiverPercentage={{{ [<event-fromcatcher-posx>subtract<leftOffset>divide<viewportWidth>subtract{$:/state/sidebar/posx!!drag-diff-percentage}] }}} sidebarPercentage={{{ [[1]subtract<storyRiverPercentage>subtract{$:/state/sidebar/posx!!sidebar-offset-percentage}] }}}>
+		<$action-setfield $tiddler="$:/state/sidebar/posx"
+			story-river-percentage=<<storyRiverPercentage>>
+			sidebar-percentage=<<sidebarPercentage>>/>
+	</$let>
+<% endif %>
+\end
