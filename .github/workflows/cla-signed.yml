@@ -1,0 +1,70 @@
+name: CLA Signed
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - closed
+    paths:
+      - 'licenses/cla-individual.md'
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_REPO: ${{ github.repository }}
+  NUMBER: ${{ github.event.pull_request.number }}
+  AUTHOR: ${{ github.event.pull_request.user.login }}
+
+jobs:
+  # check if PRs updating the CLA are targetting the tiddlywiki-com branch
+  check-signature-branch:
+    if: (github.event.pull_request.merged != true) && (github.event.pull_request.user.login != github.repository_owner)
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+    - run: |
+        if ! $BRANCH == "tiddlywiki-com"; then
+          echo "This CLA signature targets the wrong branch"
+          gh pr comment "$NUMBER" -b "@$AUTHOR Signatures to the CLA must target the 'tiddlywiki-com' branch."
+        fi
+      env:
+        BRANCH: ${{ github.event.pull_request.base.ref }}
+
+  # leave a comment on each open PR by a given author when their signature is added to the CLA
+  cla-signed:
+    if: (github.event.pull_request.merged == true) && (github.event.pull_request.user.login != github.repository_owner)
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+    - name: List open PRs by user
+      id: list-prs
+      uses: actions/github-script@v6
+      with:
+        result-encoding: string
+        script: |
+          const owner = context.repo.owner,
+            repo = context.repo.repo,
+            author = context.payload.pull_request.user.login;
+
+          const { data: pullRequests } = await github.rest.pulls.list({
+            owner: owner,
+            repo: repo,
+            state: 'open',
+            sort: 'created',
+            direction: 'desc',
+            per_page: 100
+          });
+          const userPullRequests = pullRequests.filter(pr => pr.user.login === author),
+            prNumbers = userPullRequests.map(pr => pr.number).join(',');
+          console.log(`Open pull requests by ${author}:${prNumbers}`);
+          return prNumbers;
+          
+    - name: Comment open PRs by the same author
+      run: |
+        prs=($(echo ${{ steps.list-prs.outputs.result }} | tr "," "\n"))  
+  
+        for number in "${prs[@]}"  
+        do  
+          gh pr comment "$number" -b "**$AUTHOR** has signed the Contributor License Agreement (see [contributing.md](https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/contributing.md))"
+        done     
