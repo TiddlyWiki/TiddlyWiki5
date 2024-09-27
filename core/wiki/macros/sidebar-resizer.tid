@@ -4,7 +4,6 @@ tags: $:/tags/Global
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
 	<$let leftOffset={{{ [<event-fromviewport-posx>subtract<event-fromcatcher-posx>] }}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} dragDiff=<<event-fromselected-posx>> storyRiverWidth={{{ [<event-fromviewport-posx>subtract<dragDiff>] }}} sidebarWidth={{{ [<viewportWidth>subtract<event-fromviewport-posx>add<dragDiff>] }}}>
-		<$action-log bla=<<sidebarWidth>>/>
 		<$action-setfield $tiddler="$:/state/sidebar/dimensions"
 			drag-diff=<<dragDiff>>
 			left-offset=<<leftOffset>>
