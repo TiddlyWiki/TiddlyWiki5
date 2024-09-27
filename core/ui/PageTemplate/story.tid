@@ -2,7 +2,7 @@ title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
 \whitespace trim
-<section class="tc-story-river" role="main">
+<%if [{$:/state/sidebar}!match[no]] %>
 
 <$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>> $pointerup=<<sidebar-resizer-pointerup-actions>>>
 
@@ -15,6 +15,10 @@ tags: $:/tags/PageTemplate
 <div class="tc-sidebar-resizer"/>
 
 </$eventcatcher>
+
+<% endif %>
+
+<section class="tc-story-river" role="main">
 
 <section class="story-backdrop">
 
