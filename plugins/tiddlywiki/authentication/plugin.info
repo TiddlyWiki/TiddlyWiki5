@@ -1,9 +1,0 @@
-{
-    "title": "$:/plugins/tiddlywiki/authentication",
-    "description": "Authentication plugin for TiddlyWiki",
-    "author": "Anon",
-    "version": "0.1.0",
-    "core-version": ">=5.0.0",
-    "plugin-type": "plugin",
-    "list": ["login"]
-}

@@ -1,0 +1,89 @@
+<!--
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
+-->
+
+\define lingo-base() $:/language/ControlPanel/Tools/
+
+<h1>User Management</h1>
+
+<!-- Display raw user-list for debugging -->
+<h2>Debug Info</h2>
+<p><strong>Raw user list JSON:</strong> <$text text=<<user-list>>/></p>
+
+<!-- Attempt to parse the user-list JSON -->
+<$set name="userList" value=<<user-list>>>
+  <!-- Display a message if the userList is empty -->
+  <$list filter="[<userList>!is[blank]]" emptyMessage="The user list is empty or not provided.">
+    <p><strong>User list found:</strong> <$text text=<<userList>>/></p>
+    
+    <!-- Attempt to parse the user list -->
+    <$set name="parsedUserList" value={{{ [<userList>jsonparse[]] }}}/>
+
+    <!-- Check if parsedUserList has any entries -->
+    <$list filter="[<parsedUserList>count[]compare:number:gt[0]]" emptyMessage="No users found or failed to parse user data">
+      <!-- Display parsed user list for debugging -->
+      <p><strong>Parsed User List (as JSON):</strong> <$text text={{{ [<parsedUserList>jsonstringify[]] }}}/></p>
+      
+      <!-- Display total user count -->
+      <p><strong>Total users:</strong> <$text text={{{ [<parsedUserList>count[]] }}}/></p>
+
+      <!-- Render the user table if parsing was successful -->
+      <table class="tc-view-field-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>Last Login</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <$list filter="[<userList>jsonindexes[]]" variable="userIndex">
+            <$let currentUser={{{ [<userList>jsonget<userIndex>] }}}>
+              <tr>
+                <td><$text text={{{ [<currentUser>jsonget[username]] }}}/></td>
+                <td><$text text={{{ [<currentUser>jsonget[email]] }}}/></td>
+                <td><$text text={{{ [<currentUser>jsonget[created_at]] }}}/></td>
+                <td><$text text={{{ [<currentUser>jsonget[last_login]] }}}/></td>
+                <td>
+                  <$button message="tm-server-command" param="edit-user" user_id={{{ [<currentUser>jsonget[user_id]] }}} class="tc-btn-invisible">
+                    {{$:/core/images/edit-button}} Edit
+                  </$button>
+                  <$button message="tm-server-command" param="delete-user" user_id={{{ [<currentUser>jsonget[user_id]] }}} class="tc-btn-invisible">
+                    {{$:/core/images/delete-button}} Delete
+                  </$button>
+                </td>
+              </tr>
+            </$let>
+          </$list>
+        </tbody>
+      </table>
+    </$list>
+  </$list>
+</$set>
+
+<$button message="tm-modal" param="$:/plugins/tiddlywiki/multiwikiserver/templates/add-user-modal" class="tc-btn-big-green">
+Add New User
+</$button>
+
+<style>
+.tc-view-field-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tc-view-field-table th, .tc-view-field-table td {
+  border: 1px solid <<colour table-border>>;
+  padding: 0.5em;
+}
+
+.tc-view-field-table th {
+  background-color: <<colour table-header-background>>;
+  font-weight: bold;
+}
+
+.tc-view-field-table tr:nth-child(even) {
+  background-color: <<colour table-header-background>>;
+}
+</style>

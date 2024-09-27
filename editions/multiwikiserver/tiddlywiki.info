@@ -4,8 +4,7 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",
 		"tiddlywiki/multiwikiclient",
-		"tiddlywiki/multiwikiserver",
-		"tiddlywiki/authentication"
+		"tiddlywiki/multiwikiserver"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

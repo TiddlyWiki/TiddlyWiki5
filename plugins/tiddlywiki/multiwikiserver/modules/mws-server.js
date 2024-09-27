@@ -77,8 +77,6 @@ function Server(options) {
 	$tw.modules.forEachModuleOfType("mws-route", function(title,routeDefinition) {
 		self.addRoute(routeDefinition);
 	});
-	// Load tiddler-based routes
-	self.loadAuthRoutes();
 	// Initialise the http vs https
 	this.listenOptions = null;
 	this.protocol = "http";
@@ -302,88 +300,6 @@ Server.prototype.get = function(name) {
 
 Server.prototype.addRoute = function(route) {
 	this.routes.push(route);
-};
-
-Server.prototype.loadAuthRoutes = function () {
-	var self = this;
-	// add the login page route
-	self.addRoute({
-		method: "GET",
-		path: /^\/login$/,
-		handler: function (request, response, state) {
-			// Check if the user already has a valid session
-			const authenticatedUser = self.authenticateUser(request, response);
-			if (authenticatedUser) {
-					// User is already logged in, redirect to home page
-					response.writeHead(302, { 'Location': '/' });
-					response.end();
-					return;
-			}
-			var loginTiddler = self.wiki.getTiddler("$:/plugins/tiddlywiki/authentication/login");
-			if (loginTiddler) {
-				var text = self.wiki.renderTiddler("text/html", loginTiddler.fields.title);
-				response.writeHead(200, { "Content-Type": "text/html" });
-				response.end(text);
-			} else {
-				response.writeHead(404);
-				response.end("Login page not found");
-			}
-		}
-	});
-	// add the login submission handler route
-	self.addRoute({
-		method: "POST",
-		path: /^\/login$/,
-		csrfDisable: true,
-		handler: function(request, response, state) {
-			self.handleLogin(request, response, state);
-		}.bind(self)
-	});
-	self.addRoute({
-		method: "POST",
-		path: /^\/logout$/,
-		csrfDisable: true,
-		handler: function(request, response, state) {
-			self.handleLogout(request, response, state);
-		}.bind(self)
-	});
-};
-
-Server.prototype.handleLogout = function (request, response, state) {
-	var self = this;
-	if (state.authenticatedUser) {
-		self.sqlTiddlerDatabase.deleteSession(state.authenticatedUser.sessionId);
-	}
-	response.setHeader('Set-Cookie', 'session=; HttpOnly; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT');
-	response.writeHead(302, { 'Location': '/login' });
-	response.end();
-}
-
-Server.prototype.handleLogin = function (request, response, state) {
-	var self = this;
-	const querystring = require('querystring');
-	const formData = querystring.parse(state.data);
-	const { username, password } = formData;
-	const user = self.sqlTiddlerDatabase.getUserByUsername(username);
-	const isPasswordValid = self.verifyPassword(password, user?.password)
-
-	if (user && isPasswordValid) {
-		const sessionId = self.createSession(user.user_id);
-		const {returnUrl} = this.parseCookieString(request.headers.cookie)
-		response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
-		response.writeHead(302, {
-			'Location': returnUrl || '/'
-		});
-	} else {
-		this.wiki.addTiddler(new $tw.Tiddler({
-			title: "$:/temp/mws/login/error",
-			text: "Invalid username or password"
-		}));
-		response.writeHead(302, {
-			'Location': '/login'
-		});
-	}
-	response.end();
 };
 
 Server.prototype.verifyPassword = function(inputPassword, storedHash) {
