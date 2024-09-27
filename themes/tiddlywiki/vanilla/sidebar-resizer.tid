@@ -120,7 +120,7 @@ code-body: yes
 
 		<% endif %>
 
-		<%if [[$:/state/sidebar/dimensions]!is[missing]then{$:/state/sidebar}!match[no]] %>
+		<%if [[$:/state/sidebar/dimensions]!is[missing]] %>
 
 			<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
 
