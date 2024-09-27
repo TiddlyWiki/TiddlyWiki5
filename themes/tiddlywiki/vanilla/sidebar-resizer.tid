@@ -12,163 +12,183 @@ code-body: yes
 
 @media (min-width: <<sidebarbreakpoint>>) {
 
-.tc-sidebar-scrollable {
-	padding-left: 20px;
-	z-index: 1;
-}
-
-.tc-story-river {
-	width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
-}
-
-.tc-sidebar-resizer-pointerdown-eventcatcher {
-	position: absolute;
-	top: calc(0px - {{$:/themes/tiddlywiki/vanilla/metrics/storytop}});
-	left: 0;
-	right: calc(-{{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
-	height: 100%;
-	min-height: 100vh;
-	z-index: 0;
-}
-
-.tc-sidebar-resizer-pointermove-eventcatcher {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	min-height: 100vh;
-	z-index: -1;
-}
-
-.tc-sidebar-resizer-pointermove {
-	position: absolute;
-	top: 0;
-	left: calc(100% - 100vw);
-	right: 0;
-	width: 100vw;
-	height: 100%;
-	min-height: 100vh;
-	z-index: -1;
-}
-
-.tc-sidebar-resizer {
-	position: fixed;
-	top: 0;
-	right: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px);
-	height: 100vh;
-	width: 22px;
-	z-index: 2;
-	transition: opacity 100ms;
-	opacity: 0;
-	cursor: ew-resize;
-	background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
-}
-
-.tc-sidebar-resizer:hover {
-	opacity: 0.8;
-}
-
-<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] %>
-
-.tc-sidebar-scrollable {
-	width: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px);
-}
-
-<% elseif [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
-
-.tc-story-river {
-	padding-right: 0px;
-	width: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
-}
-
-.tc-sidebar-scrollable {
-	left: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} + 22px);
-}
-
-.tc-sidebar-resizer-pointerdown-eventcatcher {
-	right: calc(-100vw + {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px + {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
-}
-
-.tc-sidebar-resizer {
-	right: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} + 20px);
-}
-
-<% endif %>
-
-<%if [[$:/state/sidebar/resizing]!is[missing]] %>
-
 	.tc-sidebar-scrollable {
-		z-index: -1;
+		padding-left: 20px;
+		z-index: 1;
+	}
+
+	.tc-story-river {
+		width: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 	}
 
 	.tc-sidebar-resizer-pointerdown-eventcatcher {
-		z-index: 800;
+		position: absolute;
+		top: calc(0px - {{$:/themes/tiddlywiki/vanilla/metrics/storytop}});
+		left: 0;
+		right: calc(-{{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}});
+		height: 100%;
+		min-height: 100vh;
+		z-index: 0;
 	}
 
 	.tc-sidebar-resizer-pointermove-eventcatcher {
-		z-index: 801;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		min-height: 100vh;
+		z-index: -1;
 	}
 
 	.tc-sidebar-resizer-pointermove {
-		z-index: 802;
-		cursor: ew-resize;
+		position: absolute;
+		top: 0;
+		left: calc(100% - 100vw);
+		right: 0;
+		width: 100vw;
+		height: 100%;
+		min-height: 100vh;
+		z-index: -1;
 	}
 
 	.tc-sidebar-resizer {
+		position: fixed;
+		top: 0;
+		right: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px);
+		height: 100vh;
+		width: 22px;
+		z-index: 2;
+		transition: opacity 100ms;
+		opacity: 0;
+		cursor: ew-resize;
+		background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
+	}
+
+	.tc-sidebar-resizer:hover {
 		opacity: 0.8;
 	}
 
-<% endif %>
+	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] %>
 
-<%if [[$:/state/sidebar/dimensions]!is[missing]then{$:/state/sidebar}!match[no]] %>
-
-	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
-
-		.tc-story-river {
-			padding-right: 0;
-			position: relative;
-			width: auto;
-			left: 0;
-			margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+		.tc-sidebar-scrollable {
+			width: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px);
 		}
 
-		.tc-tiddler-frame {
-			width: 100%;
+		<% elseif [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
+
+		.tc-story-river {
+			padding-right: 0px;
+			width: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 		}
 
 		.tc-sidebar-scrollable {
-			left: auto;
-			bottom: 0;
-			right: 0;
+			left: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} + 22px);
+		}
+
+		.tc-sidebar-resizer-pointerdown-eventcatcher {
+			right: calc(-100vw + {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px + {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+		}
+
+		.tc-sidebar-resizer {
+			right: calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} + 20px);
 		}
 
 	<% endif %>
 
-	.tc-story-river {
-		width: min(max(min(max(min(calc(({{$:/state/sidebar/dimensions!!story-river-percentage}} * 100vw) - ({{$:/state/sidebar/dimensions!!widget-node-width}}px - 100vw + {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}) - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!story-river-percentage}})),calc((100vw - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!story-river-percentage}}))),calc({{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!story-river-percentage}}))),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!story-river-percentage}})),{{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),calc((100vw - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
-		width: calc(({{$:/state/sidebar/dimensions!!story-river-percentage}} * 100vw) - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * ({{$:/state/sidebar/dimensions!!story-river-percentage}})) - {{{ [{$:/state/sidebar/dimensions!!left-offset}compare:number:lt{$:/themes/tiddlywiki/vanilla/metrics/storyleft}then{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] ~0px }}});
-	}
+	<%if [[$:/state/sidebar/resizing]!is[missing]] %>
 
-	.tc-sidebar-scrollable {
-		width: max(max(min(max(calc({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!sidebar-percentage}})),calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!sidebar-percentage}}))),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - ({{$:/state/sidebar/dimensions!!widget-node-width}}px - 100vw + {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - 22px - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!sidebar-percentage}}))),calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!sidebar-percentage}}))),calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px));
-		width: calc(({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw) + ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!story-river-percentage}}));
-		width: calc(({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw) + ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * ({{$:/state/sidebar/dimensions!!story-river-percentage}} + {{$:/state/sidebar/dimensions!!sidebar-offset-percentage}})) - {{{ [{$:/state/sidebar/dimensions!!left-offset}compare:number:lt{$:/themes/tiddlywiki/vanilla/metrics/storyleft}then{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] ~0px }}});
-	}
+		.tc-sidebar-scrollable {
+			z-index: -1;
+		}
 
-	.tc-sidebar-resizer-pointerdown-eventcatcher {
-		right: auto;
-		max-width: min(max(min(calc((100% + ({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw) + 22px) - (100vw - 100% - 22px - ({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw))),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}})),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}})),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
-		min-width: min(max(min(calc((100% + ({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw) + 22px) - (100vw - 100% - 22px - ({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw))),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}})),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}})),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
-	}
+		.tc-sidebar-resizer-pointerdown-eventcatcher {
+			z-index: 800;
+		}
 
-	.tc-sidebar-resizer {
-		right: max(min(max(calc({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!sidebar-percentage}})),calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px)),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - ({{$:/state/sidebar/dimensions!!widget-node-width}}px - 100vw + {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}) - ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * {{$:/state/sidebar/dimensions!!sidebar-percentage}}) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - 22px)),calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px));
-		right: calc(({{$:/state/sidebar/dimensions!!sidebar-percentage}} * 100vw) + ((100vw - {{$:/state/sidebar/dimensions!!widget-node-width}}px) * ({{$:/state/sidebar/dimensions!!story-river-percentage}} + {{$:/state/sidebar/dimensions!!sidebar-offset-percentage}})) - {{{ [{$:/state/sidebar/dimensions!!left-offset}compare:number:lt{$:/themes/tiddlywiki/vanilla/metrics/storyleft}then{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] ~0px }}});
-	}
+		.tc-sidebar-resizer-pointermove-eventcatcher {
+			z-index: 801;
+		}
 
-<% endif %>
+		.tc-sidebar-resizer-pointermove {
+			z-index: 802;
+			cursor: ew-resize;
+		}
+
+		.tc-sidebar-resizer {
+			opacity: 0.8;
+		}
+
+	<% endif %>
+
+	<%if [[$:/state/sidebar/dimensions]!is[missing]then{$:/state/sidebar}!match[no]] %>
+
+		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
+
+			.tc-story-river {
+				padding-right: 0;
+				position: relative;
+				width: auto;
+				left: 0;
+				margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+			}
+
+			.tc-tiddler-frame {
+				width: 100%;
+			}
+
+			.tc-sidebar-scrollable {
+				left: auto;
+				bottom: 0;
+				right: 0;
+			}
+
+		<% endif %>
+
+		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
+
+			.tc-story-river {
+				width: clamp(0px,clamp({{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}},calc({{$:/state/sidebar/dimensions!!story-river-width}}px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}})),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
+			}
+
+			.tc-sidebar-scrollable {
+				width: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px),calc(100vw - 22px - {{$:/state/sidebar/dimensions!!story-river-width}}px),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - 22px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+			}
+
+			.tc-sidebar-resizer-pointerdown-eventcatcher {
+				right: auto;
+				min-width: clamp(calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100% + (100vw - {{$:/state/sidebar/dimensions!!story-river-width}}px) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+				max-width: clamp(calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100% + (100vw - {{$:/state/sidebar/dimensions!!story-river-width}}px) - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+			}
+
+			.tc-sidebar-resizer {
+				right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px),calc(100vw - 22px - {{$:/state/sidebar/dimensions!!story-river-width}}px),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - 22px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+			}
+
+		<% else %>
+
+			.tc-story-river {
+				width: clamp(0px,clamp({{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}},calc(100vw - {{$:/state/sidebar/dimensions!!sidebar-width}}px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}})),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}));
+			}
+
+			.tc-sidebar-scrollable {
+				width: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px),calc({{$:/state/sidebar/dimensions!!sidebar-width}}px - 22px),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - 22px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+			}
+
+			.tc-sidebar-resizer-pointerdown-eventcatcher {
+				right: auto;
+				min-width: clamp(calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100% + {{$:/state/sidebar/dimensions!!sidebar-width}}px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+				max-width: clamp(calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100% + {{$:/state/sidebar/dimensions!!sidebar-width}}px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+			}
+
+			.tc-sidebar-resizer {
+				right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} - 22px),calc({{$:/state/sidebar/dimensions!!sidebar-width}}px - 22px),calc(100vw - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - 22px - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
+			}
+
+		<% endif %>
+
+	<% endif %>
 
 }
 

@@ -3,14 +3,13 @@ tags: $:/tags/Global
 
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
-	<$let leftOffset={{{ [<event-fromviewport-posx>subtract<event-fromcatcher-posx>] }}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} dragDiff=<<event-fromselected-posx>> leftOffsetPercentage={{{ [<leftOffset>divide<viewportWidth>] }}} dragDiffPercentage={{{ [<dragDiff>divide<viewportWidth>] }}} dragWidthPercentage={{{ [<tv-selectednode-width>divide<viewportWidth>] }}} sidebarOffsetPercentage={{{ [[22]divide<viewportWidth>] }}} storyRiverPercentage={{{ [<event-fromcatcher-posx>divide<viewportWidth>subtract<dragDiffPercentage>subtract<leftOffsetPercentage>] }}} sidebarPercentage={{{ [[1]subtract<storyRiverPercentage>subtract<sidebarOffsetPercentage>] }}} widgetNodeWidthPercentage={{{ [<tv-widgetnode-width>divide<viewportWidth>] }}}>
+	<$let leftOffset={{{ [<event-fromviewport-posx>subtract<event-fromcatcher-posx>] }}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} dragDiff=<<event-fromselected-posx>> storyRiverWidth={{{ [<event-fromviewport-posx>subtract<dragDiff>] }}} sidebarWidth={{{ [<viewportWidth>subtract<event-fromviewport-posx>add<dragDiff>] }}}>
+		<$action-log bla=<<sidebarWidth>>/>
 		<$action-setfield $tiddler="$:/state/sidebar/dimensions"
+			drag-diff=<<dragDiff>>
 			left-offset=<<leftOffset>>
-			widget-node-width=<<tv-widgetnode-width>>
-			drag-diff-percentage=<<dragDiffPercentage>>
-			sidebar-offset-percentage=<<sidebarOffsetPercentage>>
-			story-river-percentage=<<storyRiverPercentage>>
-			sidebar-percentage=<<sidebarPercentage>>/>
+			story-river-width=<<storyRiverWidth>>
+			sidebar-width=<<sidebarWidth>>/>
 		<$action-setfield $tiddler="$:/state/sidebar/resizing" text="yes"/>
 	</$let>
 <% endif %>
@@ -22,10 +21,10 @@ tags: $:/tags/Global
 \end
 \procedure sidebar-resizer-pointermove-actions()
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
-	<$let leftOffset={{$:/state/sidebar/dimensions!!left-offset}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} leftOffsetPercentage={{{ [<leftOffset>divide<viewportWidth>] }}} storyRiverPercentage={{{ [<event-fromcatcher-posx>divide<viewportWidth>subtract{$:/state/sidebar/dimensions!!drag-diff-percentage}subtract<leftOffsetPercentage>] }}} sidebarPercentage={{{ [[1]subtract<storyRiverPercentage>subtract{$:/state/sidebar/dimensions!!sidebar-offset-percentage}] }}}>
+	<$let leftOffset={{$:/state/sidebar/dimensions!!left-offset}} viewportWidth={{{ [<leftOffset>add<tv-widgetnode-width>] }}} storyRiverWidth={{{ [<event-fromviewport-posx>subtract{$:/state/sidebar/dimensions!!drag-diff}] }}} sidebarWidth={{{ [<viewportWidth>subtract<event-fromviewport-posx>add{$:/state/sidebar/dimensions!!drag-diff}] }}}>
 		<$action-setfield $tiddler="$:/state/sidebar/dimensions"
-			story-river-percentage=<<storyRiverPercentage>>
-			sidebar-percentage=<<sidebarPercentage>>/>
+			story-river-width=<<storyRiverWidth>>
+			sidebar-width=<<sidebarWidth>>/>
 	</$let>
 <% endif %>
 \end
