@@ -1,6 +1,7 @@
 title: $:/themes/tiddlywiki/seamless/base
 tags: [[$:/tags/Stylesheet]]
 list-after: $:/themes/tiddlywiki/vanilla/base
+refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 

@@ -8,6 +8,8 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>> $pointerup=<<sidebar-resizer-pointerup-actions>>>
 
+<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]] -$:/state/sidebar/resizing -$:/state/sidebar/dimensions -$:/state/sidebar" enabled="yes">
+
 <%if [{$:/state/sidebar}!match[no]] %>
 
 <$eventcatcher tag="div" selector=".tc-sidebar-resizer-pointermove" matchSelector=".tc-sidebar-resizer-pointermove" class="tc-sidebar-resizer-pointermove-eventcatcher" $pointerup=<<sidebar-resizer-pointerup-actions>> $pointermove=<<sidebar-resizer-pointermove-actions>> $pointerleave=<<sidebar-resizer-pointerup-actions>> $pointerout=<<sidebar-resizer-pointerup-actions>>>
@@ -20,7 +22,9 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <% endif %>
 
-<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled="yes">
+</$refresh-blocker>
+
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]] [[$:/state/sidebar/resizing]]" enabled="yes">
 
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 

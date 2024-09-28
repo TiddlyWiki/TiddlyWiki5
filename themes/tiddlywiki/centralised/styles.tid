@@ -1,5 +1,6 @@
 title: $:/themes/tiddlywiki/centralised/styles.tid
 tags: [[$:/tags/Stylesheet]]
+refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 

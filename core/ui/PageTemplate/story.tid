@@ -2,7 +2,7 @@ title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
 \whitespace trim
-<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled="yes">
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]] [[$:/state/sidebar/resizing]]" enabled="yes">
 
 <section class="tc-story-river" role="main">
 

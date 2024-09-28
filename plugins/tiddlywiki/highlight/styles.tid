@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/highlight/styles
 tags: [[$:/tags/Stylesheet]]
+refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]
 
 pre.hljs {
   padding: 0;
