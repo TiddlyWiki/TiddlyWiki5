@@ -1,7 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
-list-before:
-refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] [all[tiddlers]is[draft]] -$:/state/sidebar
+list-before: $:/themes/tiddlywiki/vanilla/fluid-fixed
+refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] [all[tiddlers]is[draft]]
 code-body: yes
 
 \define custom-background-datauri()
@@ -30,15 +30,6 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 
 \define sidebarbreakpoint-minus-one()
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
-\end
-
-\define if-fluid-fixed(text,hiddenSidebarText)
-<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] [[$:/state/sidebar/dimensions]!is[missing]] %>
-$text$
-<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
-$hiddenSidebarText$
-</$reveal>
-<% endif %>
 \end
 
 \define if-editor-height-fixed(then,else)
@@ -1469,56 +1460,6 @@ html body.tc-body.tc-single-tiddler-window {
 
 .tc-editor-toolbar button.tc-editortoolbar-stamp-button + .tc-popup .tc-drop-down a.tc-tiddlylink {
 	font-weight: normal;
-}
-
-/*
-** Adjustments for fluid-fixed mode
-*/
-
-@media (min-width: <<sidebarbreakpoint>>) {
-
-<<if-fluid-fixed text:"""
-
-	.tc-story-river {
-		padding-right: 0;
-		position: relative;
-		width: auto;
-		max-width: 100%;
-		left: 0;
-		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
-		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
-	}
-
-	.tc-tiddler-frame {
-		width: 100%;
-	}
-
-	.tc-sidebar-scrollable {
-		left: auto;
-		bottom: 0;
-		right: 0;
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
-	}
-
-	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
-		width: 100%;
-		width: calc(100% - 42px);
-	}
-
-""" hiddenSidebarText:"""
-
-	.tc-story-river {
-		padding-right: 3em;
-		margin-right: 0;
-	}
-
-	body.tc-body .tc-page-container.tc-page-view-zoomin .tc-tiddler-frame {
-		width: 100%;
-		width: calc(100% - 84px);
-	}
-
-""">>
-
 }
 
 /*
