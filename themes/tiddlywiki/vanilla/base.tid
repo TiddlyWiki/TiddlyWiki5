@@ -1047,6 +1047,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		width: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px);
+		max-width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyright}} - 42px);
 		padding: 42px 0px 42px 42px;
 	}
 
@@ -1480,6 +1481,7 @@ html body.tc-body.tc-single-tiddler-window {
 		padding-right: 0;
 		position: relative;
 		width: auto;
+		max-width: 100%;
 		left: 0;
 		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
