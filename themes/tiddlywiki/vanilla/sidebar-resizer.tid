@@ -51,7 +51,7 @@ code-body: yes
 		width: 22px;
 		z-index: 1;
 		transition: opacity 100ms;
-		opacity: 0;
+		opacity: 0.1;
 		cursor: ew-resize;
 		background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
 	}
