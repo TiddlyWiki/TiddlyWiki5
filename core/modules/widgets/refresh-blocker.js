@@ -49,7 +49,6 @@ RefreshBlockerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	var refreshBlockerList = this.wiki.filterTiddlers(this.getAttribute("refreshBlockerList"));
 	if(refreshBlockerList && (this.getAttribute("enabled") === "yes")  && $tw.utils.hopArray(changedTiddlers,refreshBlockerList)) {
-		console.log("false");
 		return false;
 	} else {
 		return this.refreshChildren(changedTiddlers);
