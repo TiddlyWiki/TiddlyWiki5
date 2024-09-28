@@ -1,5 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/sidebar-resizer
 tags: [[$:/tags/Stylesheet]]
+refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] -$:/state/sidebar/dimensions -$:/state/sidebar -$:/state/sidebar/resizing [all[tiddlers]is[draft]]
 code-body: yes
 
 \define sidebarbreakpoint()

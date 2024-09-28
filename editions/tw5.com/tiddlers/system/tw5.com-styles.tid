@@ -3,6 +3,7 @@ modified: 20220719132112414
 tags: $:/tags/Stylesheet
 title: $:/_tw5.com-styles
 type: text/vnd.tiddlywiki
+refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] [all[tiddlers]is[draft]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 

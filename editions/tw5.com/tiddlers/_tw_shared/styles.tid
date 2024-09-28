@@ -1,5 +1,6 @@
 title: $:/_tw_shared/styles
 tags: $:/tags/Stylesheet TiddlyWikiSitesMenu
+refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 

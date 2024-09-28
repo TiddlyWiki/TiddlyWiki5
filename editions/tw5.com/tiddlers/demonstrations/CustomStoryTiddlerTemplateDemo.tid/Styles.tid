@@ -1,5 +1,6 @@
 title: $:/_tw5.com/CustomStoryTiddlerTemplateDemo/Styles
 tags: $:/tags/Stylesheet
+refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] [all[tiddlers]is[draft]]
 
 .tc-custom-tiddler-template {
 	border: 3px solid <<colour muted-foreground>>;
