@@ -28,6 +28,8 @@ Metrics/BodyFontSize: Font size for tiddler body
 Metrics/BodyLineHeight: Line height for tiddler body
 Metrics/StoryLeft: Story left position
 Metrics/StoryLeft/Hint: how far the left margin of the story river<br>(tiddler area) is from the left of the page
+Metrics/StoryMinWidth: Story minimum width
+Metrics/StoryMinWidth/Hint: the minimum width of the story river
 Metrics/StoryTop: Story top position
 Metrics/StoryTop/Hint: how far the top margin of the story river<br>is from the top of the page
 Metrics/StoryRight: Story right

@@ -32,12 +32,12 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 \end
 
 \define if-fluid-fixed(text,hiddenSidebarText)
-<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] [[$:/state/sidebar/dimensions]!is[missing]] %>
 $text$
 <$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
 $hiddenSidebarText$
 </$reveal>
-</$reveal>
+<% endif %>
 \end
 
 \define if-editor-height-fixed(then,else)
@@ -1046,14 +1046,15 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		position: relative;
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
-		padding: 42px 42px 42px 42px;
+		width: calc({{$:/themes/tiddlywiki/vanilla/metrics/storywidth}} - 42px);
+		padding: 42px 0px 42px 42px;
 	}
 
 <<if-no-sidebar "
 
 	.tc-story-river {
 		width: calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+		padding-right: 42px;
 	}
 
 ">>

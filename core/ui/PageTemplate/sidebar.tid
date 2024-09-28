@@ -6,6 +6,20 @@ tags: $:/tags/PageTemplate
 $:/config/SideBarSegments/Visibility/$(listItem)$
 \end
 
+<$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>> $pointerup=<<sidebar-resizer-pointerup-actions>>>
+
+<%if [{$:/state/sidebar}!match[no]] %>
+
+<$eventcatcher tag="div" selector=".tc-sidebar-resizer-pointermove" matchSelector=".tc-sidebar-resizer-pointermove" class="tc-sidebar-resizer-pointermove-eventcatcher" $pointerup=<<sidebar-resizer-pointerup-actions>> $pointermove=<<sidebar-resizer-pointermove-actions>> $pointerleave=<<sidebar-resizer-pointerup-actions>> $pointerout=<<sidebar-resizer-pointerup-actions>>>
+
+<div class="tc-sidebar-resizer-pointermove"/>
+
+</$eventcatcher>
+
+<div class="tc-sidebar-resizer"/>
+
+<% endif %>
+
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
 <div class="tc-sidebar-header">
@@ -27,3 +41,5 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 </div>
 
 </$scrollable>
+
+</$eventcatcher>
