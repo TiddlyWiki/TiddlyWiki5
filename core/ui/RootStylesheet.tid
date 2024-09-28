@@ -4,7 +4,7 @@ code-body: yes
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 \whitespace trim
 \rules only filteredtranscludeinline transcludeinline html
-<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] -[[$:/state/sidebar]] -[[$:/state/sidebar/dimensions]] -[[$:/state/sidebar/resizing]] -[[-$:/state/popup/menubar/hamburger]] +[is[unique]]">
+<$refresh-blocker refreshBlockerList="[all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] -[[$:/state/sidebar]] -[[$:/state/sidebar/dimensions]] -[[$:/state/sidebar/resizing]] -[[$:/state/popup/menubar/hamburger]]">
 	<$let currentTiddler={{$:/language}} languageTitle={{!!name}}>
 		<$list filter="[all[shadows+tiddlers]!is[draft]tag[$:/tags/Stylesheet]]">
 			<$refresh-blocker refreshBlockerList={{{ [<currentTiddler>get[refresh-blocker-list]] }}}>
