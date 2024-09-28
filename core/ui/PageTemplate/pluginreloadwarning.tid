@@ -3,7 +3,7 @@ tags: $:/tags/PageTemplate
 
 \define lingo-base() $:/language/
 
-<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled={{{ [[$:/state/sidebar/resizing]!is[missing]then[yes]] }}}>
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled="yes">
 
 <$list filter="[{$:/status/RequireReloadDueToPluginChange}match[yes]]">
 

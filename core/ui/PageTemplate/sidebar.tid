@@ -20,7 +20,7 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <% endif %>
 
-<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled={{{ [[$:/state/sidebar/resizing]!is[missing]then[yes]] }}}>
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled="yes">
 
 <$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 

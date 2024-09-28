@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate/alerts
 tags: $:/tags/PageTemplate
 
-<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled={{{ [[$:/state/sidebar/resizing]!is[missing]then[yes]] }}}>
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled="yes">
 
 <div class="tc-alerts">
 
