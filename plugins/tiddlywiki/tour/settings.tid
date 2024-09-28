@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/tour/settings
+caption: Tour
+tags: $:/tags/ControlPanel/SettingsTab
 
 \import [[$:/plugins/tiddlywiki/tour/variables]]
 \procedure button-expand-collapse-all(caption,text)
