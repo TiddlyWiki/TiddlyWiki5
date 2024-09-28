@@ -5,7 +5,8 @@
 			"fields": {
 				"type": "text/vnd.tiddlywiki",
 				"title": "$:/plugins/tiddlywiki/railroad/railroad-diagrams.css",
-                                "tags": "$:/tags/Stylesheet"
+				"tags": "$:/tags/Stylesheet",
+				"refresh-blocker-list": "[all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]"
 			}
 		},{
 			"file": "railroad-diagrams.js",

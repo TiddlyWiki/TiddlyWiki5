@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/menubar/styles
 tags: [[$:/tags/Stylesheet]]
-refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] [all[tiddlers]is[draft]] -$:/state/popup/menubar/hamburger
+refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] -$:/state/popup/menubar/hamburger
 
 \define breakpoint-plus-one()
 <$text text={{{ [{$:/config/plugins/menubar/breakpoint}removesuffix[px]add[1]addsuffix[px]] ~[{$:/config/plugins/menubar/breakpoint}] }}} />

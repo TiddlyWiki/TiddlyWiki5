@@ -1,7 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/sidebar-resizer
 tags: [[$:/tags/Stylesheet]]
-refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] [all[tiddlers]is[draft]] -$:/state/sidebar/resizing -$:/state/sidebar/dimensions -$:/state/sidebar
-code-body: yes
+refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] -$:/state/sidebar/resizing -$:/state/sidebar/dimensions -$:/state/sidebar
 
 \define sidebarbreakpoint()
 <$text text={{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}/>
@@ -10,6 +9,8 @@ code-body: yes
 \define sidebarbreakpoint-minus-one()
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
 
 @media (min-width: <<sidebarbreakpoint>>) {
 	

@@ -14,10 +14,6 @@ RefreshBlocker widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var RefreshBlocker = function(parseTreeNode,options) {
-	this.initialise(parseTreeNode,options);
-};
-
 var RefreshBlockerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -41,14 +37,17 @@ RefreshBlockerWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 RefreshBlockerWidget.prototype.execute = function() {
+	this.refreshBlockerList = this.getAttribute("refreshBlockerList");
 	// Make child widgets
 	this.makeChildWidgets();
 };
 
 RefreshBlockerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	var refreshBlockerList = this.wiki.filterTiddlers(this.getAttribute("refreshBlockerList"));
-	if(refreshBlockerList && (this.getAttribute("enabled") === "yes")  && $tw.utils.hopArray(changedTiddlers,refreshBlockerList)) {
+	if(changedAttributes.refreshBlockerList) {
+		this.refreshSelf();
+		return true;
+	} else if(this.refreshBlockerList && $tw.utils.hopArray(changedTiddlers,this.wiki.filterTiddlers(this.refreshBlockerList))) {
 		return false;
 	} else {
 		return this.refreshChildren(changedTiddlers);

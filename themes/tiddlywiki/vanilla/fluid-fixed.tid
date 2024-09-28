@@ -1,7 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/fluid-fixed
 tags: [[$:/tags/Stylesheet]]
 list-before: 
-refresh-blocker-list: [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] [all[tiddlers]is[draft]] -$:/state/sidebar -$:/state/sidebar/dimensions
+refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] -$:/state/sidebar -$:/state/sidebar/dimensions
 
 \define if-fluid-fixed(text,hiddenSidebarText)
 <%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] [[$:/state/sidebar/dimensions]!is[missing]] %>
@@ -19,6 +19,8 @@ $hiddenSidebarText$
 \define sidebarbreakpoint-minus-one()
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
 ** Adjustments for fluid-fixed mode
