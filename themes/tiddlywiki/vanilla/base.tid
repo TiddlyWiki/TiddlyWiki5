@@ -63,7 +63,9 @@ $else$
 </$set>
 \end
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock html
+
+<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]prefix[$:/state/]] [all[tiddlers+shadows]prefix[$:/temp/]]" enabled="yes">
 
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
@@ -1018,7 +1020,11 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
+</$refresh-blocker>
+
 @media (min-width: <<sidebarbreakpoint>>) {
+
+	<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]prefix[$:/state/]] [all[tiddlers+shadows]prefix[$:/temp/]]" enabled="yes">
 
 	.tc-message-box {
 		margin: 21px -21px 21px -21px;
@@ -1051,6 +1057,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		padding: 42px 0px 42px 42px;
 	}
 
+	</$refresh-blocker>
+
 <<if-no-sidebar "
 
 	.tc-story-river {
@@ -1066,6 +1074,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 
 }
+
+<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]prefix[$:/state/]] [all[tiddlers+shadows]prefix[$:/temp/]]" enabled="yes">
 
 @media print {
 
@@ -1156,12 +1166,19 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 }
 
+</$refresh-blocker>
+
 @media (min-width: <<sidebarbreakpoint>>) {
+
+	<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]prefix[$:/state/]] [all[tiddlers+shadows]prefix[$:/temp/]]" enabled="yes">
+
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
 		border-radius: 2px;
 	}
+
+	</$refresh-blocker>
 
 <<if-no-sidebar "
 
@@ -1175,6 +1192,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		margin: 0 -42px 0 -42px;
 	}
 }
+
+<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]prefix[$:/state/]] [all[tiddlers+shadows]prefix[$:/temp/]]" enabled="yes">
 
 .tc-site-title,
 .tc-titlebar {
@@ -3562,3 +3581,4 @@ span.tc-translink > a:first-child {
 	margin-bottom: 3px;
 }
 
+</$refresh-blocker>

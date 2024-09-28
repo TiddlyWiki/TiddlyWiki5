@@ -2,6 +2,7 @@ title: $:/core/ui/PageTemplate/drafts
 tags: $:/tags/PageTemplate
 
 \whitespace trim
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled={{{ [[$:/state/sidebar/resizing]!is[missing]then[yes]] }}}>
 <$reveal state="$:/status/IsReadOnly" type="nomatch" text="yes" tag="div" class="tc-drafts-list">
 <$list filter="[has[draft.of]!sort[modified]] -[list[$:/StoryList]]">
 <$link>
@@ -9,3 +10,4 @@ tags: $:/tags/PageTemplate
 </$link>
 </$list>
 </$reveal>
+</$refresh-blocker>

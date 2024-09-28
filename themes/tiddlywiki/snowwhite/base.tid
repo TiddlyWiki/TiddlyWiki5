@@ -5,7 +5,9 @@ tags: [[$:/tags/Stylesheet]]
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
 \end
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html
+
+<$refresh-blocker refreshBlockerList="[all[tiddlers+shadows]prefix[$:/state/]] [all[tiddlers+shadows]prefix[$:/temp/]]" enabled="yes">
 
 .tc-sidebar-header {
 	text-shadow: 0 1px 0 <<colour sidebar-foreground-shadow>>;
@@ -112,3 +114,5 @@ canvas.tc-edit-bitmapeditor  {
 .tc-plugin-info {
 	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
 }
+
+</$refresh-blocker>

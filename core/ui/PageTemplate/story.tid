@@ -2,6 +2,8 @@ title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
 \whitespace trim
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled={{{ [[$:/state/sidebar/resizing]!is[missing]then[yes]] }}}>
+
 <section class="tc-story-river" role="main">
 
 <section class="story-backdrop">
@@ -27,3 +29,5 @@ tags: $:/tags/PageTemplate
 </section>
 
 </section>
+
+</$refresh-blocker>

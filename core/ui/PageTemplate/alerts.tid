@@ -1,8 +1,12 @@
 title: $:/core/ui/PageTemplate/alerts
 tags: $:/tags/PageTemplate
 
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]]" enabled={{{ [[$:/state/sidebar/resizing]!is[missing]then[yes]] }}}>
+
 <div class="tc-alerts">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Alert]!has[draft.of]]" template="$:/core/ui/AlertTemplate" storyview="pop"/>
 
 </div>
+
+</$refresh-blocker>
