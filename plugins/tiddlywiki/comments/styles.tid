@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/comments/styles
 tags: [[$:/tags/Stylesheet]]
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 

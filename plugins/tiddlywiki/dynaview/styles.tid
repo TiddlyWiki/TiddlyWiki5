@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/dynaview/styles
 tags: $:/tags/Stylesheet
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 \define if-tiddler-is(title,value,text)
 <$reveal stateTitle=<<__title__>> text=<<__value__>> type="match">

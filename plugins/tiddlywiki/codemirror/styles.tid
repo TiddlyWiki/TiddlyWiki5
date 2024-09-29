@@ -2,6 +2,7 @@ title: $:/plugins/tiddlywiki/codemirror/styles
 tags: [[$:/tags/Stylesheet]]
 module-type: codemirror-theme
 name: tiddlywiki
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 \define set-fat-cursor-background-css(colour,colourA,colourB)
 <$set name="backgroundColour" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>

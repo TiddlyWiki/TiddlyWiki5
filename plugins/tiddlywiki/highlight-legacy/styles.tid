@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/highlight-legacy/styles
 tags: [[$:/tags/Stylesheet]]
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 .hljs {
   display: block;

@@ -1,7 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
 list-before: $:/themes/tiddlywiki/vanilla/fluid-fixed
-refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 code-body: yes
 
 \define custom-background-datauri()

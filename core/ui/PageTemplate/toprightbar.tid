@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate/toprightbar
 tags: $:/tags/PageTemplate
 
-<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]] [[$:/state/sidebar/resizing]]" enabled="yes">
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]] [[$:/state/sidebar/resizing]]">
 
 <span class="tc-topbar tc-topbar-right">
 

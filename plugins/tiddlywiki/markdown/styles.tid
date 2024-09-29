@@ -1,6 +1,7 @@
 title: $:/plugins/tiddlywiki/markdown/styles
 tags: [[$:/tags/Stylesheet]]
 code-body: yes
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 .markdown {
 	display: block;

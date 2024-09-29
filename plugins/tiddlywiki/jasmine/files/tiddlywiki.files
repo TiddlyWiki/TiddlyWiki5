@@ -51,7 +51,8 @@
 			"fields": {
 				"type": "text/css",
 				"title": {"source": "filename", "prefix": "$:/plugins/tiddlywiki/jasmine/jasmine-core/jasmine-core/"},
-				"tags": "[[$:/tags/Stylesheet]]"
+				"tags": "[[$:/tags/Stylesheet]]",
+				"refresh-blocker-list": "[is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]"
 			}
 		}
 	]

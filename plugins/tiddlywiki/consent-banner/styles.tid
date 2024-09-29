@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/consent-banner/styles
 tags: $:/tags/Stylesheet
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 .tc-consent-backdrop {
 	z-index: 1999;

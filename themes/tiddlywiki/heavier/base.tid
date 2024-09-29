@@ -1,6 +1,6 @@
 title: $:/themes/tiddlywiki/heavier/base
 tags: [[$:/tags/Stylesheet]]
-refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 

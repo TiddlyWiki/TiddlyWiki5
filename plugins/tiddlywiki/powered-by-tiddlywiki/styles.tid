@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/powered-by-tiddlywiki/styles
 tags: $:/tags/Stylesheet
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 .tc-powered-by-tiddlywiki-banner {
 	position: fixed;

@@ -1,6 +1,6 @@
 title: $:/themes/tiddlywiki/snowwhite/base
 tags: [[$:/tags/Stylesheet]]
-refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]]
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 \define sidebarbreakpoint-minus-one()
 <$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>

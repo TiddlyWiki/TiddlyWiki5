@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/xlsx-utils/styles
 tags: [[$:/tags/Stylesheet]]
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]]
 
 \define quick-colour-selector-background() #bac0f1
 \define quick-colour-selector-border() #9196c1
