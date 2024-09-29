@@ -56,6 +56,7 @@ tags: $:/tags/PageTemplate
 \end tour-step-success-filter-satisfied
 \import [[$:/plugins/tiddlywiki/tour/variables]]
 
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]] [[$:/state/sidebar/resizing]]">
 <%if [{$:/config/ShowTour}!is[blank]else[show]match[show]] %>
 	<div class=`tc-tour-panel tc-tour-panel-${ [{$:/state/tour/step}get[display-mode]else[normal]] }$ ${ [{$:/config/CurrentTour}get[class]] }$`>
 		<$image class="tc-tour-panel-banner-image" source={{{ [{$:/config/CurrentTour}get[logo]] }}}/>
@@ -102,3 +103,4 @@ tags: $:/tags/PageTemplate
 		</div>
 	</div>
 <%endif%>
+</$refresh-blocker>

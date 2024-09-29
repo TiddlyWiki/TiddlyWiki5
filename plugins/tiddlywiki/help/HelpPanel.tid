@@ -1,6 +1,7 @@
 title: $:/plugins/tiddlywiki/help/HelpPanel
 tags: $:/tags/PageTemplate
 
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]] [[$:/state/sidebar/resizing]]">
 <$reveal type="match" state="$:/config/ShowHelp" text="yes">
 <div class="tc-help-panel">
 <div class="tc-tiddler-controls">
@@ -9,4 +10,4 @@ tags: $:/tags/PageTemplate
 <<tabs "[all[shadows+tiddlers]tag[$:/tags/HelpPanel]!has[draft.of]]" "$:/plugins/tiddlywiki/help/HelpPanel/Support" "$:/state/tab/help">>
 </div>
 </$reveal>
-
+</$refresh-blocker>

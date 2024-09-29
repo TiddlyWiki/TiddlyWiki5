@@ -3,4 +3,8 @@ tags: $:/tags/PageTemplate
 caption: ~GitHub ribbon
 description: ~GitHub ribbon for tw5.com/dev
 
+<$refresh-blocker refreshBlockerList="[[$:/state/sidebar/dimensions]] [[$:/state/sidebar/resizing]]">
+
 <div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#DF4848;"><a href="https://github.com/TiddlyWiki/TiddlyWiki5" target="_blank" rel="noopener noreferrer">Find me on ~GitHub</a></div></div>
+
+</$refresh-blocker>
