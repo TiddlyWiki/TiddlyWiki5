@@ -30,7 +30,7 @@ RefreshBlockerWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	this.renderChildren(parent,null);
+	this.renderChildren(parent,nextSibling);
 };
 
 /*
