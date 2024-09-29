@@ -47,7 +47,7 @@ RefreshBlockerWidget.prototype.refresh = function(changedTiddlers) {
 	if(changedAttributes.refreshBlockerList) {
 		this.refreshSelf();
 		return true;
-	} else if(this.refreshBlockerList && $tw.utils.hopArray(changedTiddlers,this.wiki.filterTiddlers(this.refreshBlockerList))) {
+	} else if(this.refreshBlockerList && $tw.utils.hopArray(changedTiddlers,this.wiki.filterTiddlers(this.refreshBlockerList,this))) {
 		return false;
 	} else {
 		return this.refreshChildren(changedTiddlers);
