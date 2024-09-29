@@ -1,7 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/fluid-fixed
 tags: [[$:/tags/Stylesheet]]
 list-before: 
-refresh-blocker-list: [all[tiddlers]is[draft]] [all[tiddlers]prefix[$:/state/]] [all[tiddlers]prefix[$:/temp/]] -$:/state/sidebar -$:/state/sidebar/dimensions
+refresh-blocker-list: [is[draft]] [prefix[$:/state/]] [prefix[$:/temp/]] -$:/state/sidebar -$:/state/sidebar/dimensions
 
 \define if-fluid-fixed(text,hiddenSidebarText)
 <%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] [[$:/state/sidebar/dimensions]!is[missing]] %>
