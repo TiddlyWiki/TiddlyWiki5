@@ -109,8 +109,8 @@ function runSqlDatabaseTests(engine) {
 	it("should manage users correctly", function() {
 		console.log("should manage users correctly")
 		// Create users
-		const userId1 = sqlTiddlerDatabase.createUser("john_doe", "john@example.com");
-		const userId2 = sqlTiddlerDatabase.createUser("jane_doe", "jane@example.com");
+		const userId1 = sqlTiddlerDatabase.createUser("john_doe", "john@example.com", "pass123");
+		const userId2 = sqlTiddlerDatabase.createUser("jane_doe", "jane@example.com", "pass123");
 
 		// Retrieve users
 		const user1 = sqlTiddlerDatabase.getUser(userId1);

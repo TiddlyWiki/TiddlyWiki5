@@ -735,13 +735,14 @@ SqlTiddlerDatabase.prototype.getRecipeTiddlerAttachmentBlob = function(title,rec
 };
 
 // User CRUD operations
-SqlTiddlerDatabase.prototype.createUser = function(username, email) {
+SqlTiddlerDatabase.prototype.createUser = function(username, email, password) {
 	const result = this.engine.runStatement(`
-			INSERT INTO users (username, email)
-			VALUES ($username, $email)
+			INSERT INTO users (username, email, password)
+			VALUES ($username, $email, $password)
 	`, {
 			$username: username,
-			$email: email
+			$email: email,
+			$password: password
 	});
 	return result.lastInsertRowid;
 };
