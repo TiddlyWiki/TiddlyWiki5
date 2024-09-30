@@ -7,6 +7,7 @@ Tests attachments.
 
 \*/
 if(typeof window === 'undefined' && typeof process !== 'undefined' && process.versions && process.versions.node) {
+(function(){
   var fs = require('fs');
   var path = require('path');
   var assert = require('assert');
@@ -178,4 +179,5 @@ if(typeof window === 'undefined' && typeof process !== 'undefined' && process.ve
     });
   }
   })();
+})();
 }

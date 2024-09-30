@@ -6,13 +6,12 @@ tags: [[$:/tags/test-spec]]
 Tests the SQL tiddler store layer
 
 \*/
+if($tw.node) {
 (function(){
 
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-
-if($tw.node) {
 
 describe("SQL tiddler store with node-sqlite3-wasm", function() {
 	runSqlStoreTests("wasm");
@@ -145,6 +144,6 @@ function runSqlStoreTests(engine) {
 	});
 }
 
-}
-
 })();
+
+}
