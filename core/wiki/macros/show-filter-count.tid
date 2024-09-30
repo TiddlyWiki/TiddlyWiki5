@@ -1,0 +1,17 @@
+title: $:/core/macros/show-filter-count
+tags: $:/tags/Macro $:/tags/Global
+
+\whitespace trim
+
+\procedure show-filter-count(filter)
+<$button class="tc-btn-invisible">
+	<$action-setfield $tiddler="$:/temp/advancedsearch" $value=<<filter>>/>
+	<$action-setfield $tiddler="$:/temp/advancedsearch/input" $value=<<filter>>/>
+	<$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/>
+	<$action-setfield $tiddler="$:/state/tab--1498284803" $value="$:/core/ui/AdvancedSearch/Filter"/>
+	<$action-navigate $to="$:/AdvancedSearch"/>
+	<$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
+	<span class="tc-small-gap-right">''<$count filter=<<filter>>/>''</span>
+	{{$:/core/images/advanced-search-button}}
+</$button>
+\end

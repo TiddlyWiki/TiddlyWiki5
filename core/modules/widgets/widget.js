@@ -335,7 +335,7 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 				};
 			} else {
 				opts = opts || {};
-				opts.variables = $tw.utils.extend(variables,opts.variables);
+				opts.variables = $tw.utils.extend({},variables,opts.variables);
 				return self.getVariableInfo(name,opts);
 			};
 		},

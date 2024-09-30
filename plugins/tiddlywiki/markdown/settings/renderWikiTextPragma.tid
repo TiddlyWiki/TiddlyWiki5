@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/markdown/settings/renderWikiTextPragma
+tags: $:/tags/ControlPanel/Settings/Markdown
+caption: Enabled WikiText parser rules
+
+When handing off to the ~WikiText parser, what parser rules should it follow?
+
+|[[Enabled WikiText parser rules|$:/config/markdown/renderWikiTextPragma]]|<$edit tiddler="$:/config/markdown/renderWikiTextPragma" class="tc-edit-texteditor" autoHeight="yes"/> |

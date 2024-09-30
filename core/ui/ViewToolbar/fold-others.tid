@@ -6,12 +6,12 @@ description: {{$:/language/Buttons/FoldOthers/Hint}}
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/FoldOthers/Hint}} aria-label={{$:/language/Buttons/FoldOthers/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-fold-other-tiddlers" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]" variable="listItem">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/fold-others-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/FoldOthers/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
