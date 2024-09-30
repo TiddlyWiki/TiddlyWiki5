@@ -77,14 +77,14 @@ The second ESC tries to close the "draft tiddler"
 <!-- <$action-log /> -->
 
 <!-- create dropdown list -->
-\procedure tag-picker-listTags(filter, suffix)
+\procedure tag-picker-listTags(filter, suffix, empty)
 <$let userInput=<<_tf.getUserInput>> >
 	<$list filter="[<userInput>minlength{$:/config/Tags/MinLength}limit[1]]"
 		emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem"
 	>
 		<$list filter=<<filter>> variable="tag">
 			<$list-empty>
-				<span class="tc-small-gap-left">{{$:/language/EditTemplate/Tags/EmptyMessage}}</span>
+				<span class="tc-small-gap-left"><<empty>></span>
 			</$list-empty>
 			<!-- The buttonClasses filter is used to define tc-tag-button-selected state -->
 			<!-- tf.get-tagpicker-focus-selector has to be resolved for $:/core/ui/TagPickerTagTemplate,
@@ -146,9 +146,9 @@ The second ESC tries to close the "draft tiddler"
 	<div class="tc-block-dropdown-wrapper">
 		<%if [<tf.tagpicker-dropdown-id>has[text]] %>
 			<div class="tc-block-dropdown tc-block-tags-dropdown">
-				<$macrocall $name="tag-picker-listTags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" />
+				<$macrocall $name="tag-picker-listTags" filter=<<nonSystemTagsFilter>> suffix="-primaryList" empty={{$:/language/EditTemplate/Tags/EmptyMessage}}/>
 				<hr>
-				<$macrocall $name="tag-picker-listTags" filter=<<systemTagsFilter>> suffix="-secondaryList" />
+				<$macrocall $name="tag-picker-listTags" filter=<<systemTagsFilter>> suffix="-secondaryList" empty={{$:/language/EditTemplate/Tags/EmptyMessage/System}}/>
 			</div>
 		<%endif%>
 	</div>
