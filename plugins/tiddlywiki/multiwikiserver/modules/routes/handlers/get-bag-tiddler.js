@@ -10,8 +10,6 @@ Parameters:
 fallback=<url> // Optional redirect if the tiddler is not found
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -64,5 +62,3 @@ exports.handler = function(request,response,state) {
 		}
 	}
 };
-
-}());

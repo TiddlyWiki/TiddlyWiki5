@@ -6,8 +6,6 @@ module-type: mws-route
 PUT /bags/:bag_name
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -38,5 +36,3 @@ exports.handler = function(request,response,state) {
 		response.end();
 	}
 };
-
-}());

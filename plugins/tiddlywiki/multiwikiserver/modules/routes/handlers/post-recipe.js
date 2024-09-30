@@ -12,8 +12,6 @@ description
 bag_names: space separated list of bags
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -47,5 +45,3 @@ exports.handler = function(request,response,state) {
 		});
 	}
 };
-
-}());

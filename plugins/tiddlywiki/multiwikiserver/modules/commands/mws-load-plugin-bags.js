@@ -6,8 +6,6 @@ module-type: command
 Command to create and load a bag for each plugin in the repo
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -77,5 +75,3 @@ function loadPluginBags() {
 }
 
 exports.Command = Command;
-
-})();

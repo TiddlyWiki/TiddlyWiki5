@@ -6,8 +6,6 @@ module-type: command
 Command to recursively load a directory of tiddler files into a bag
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -36,5 +34,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

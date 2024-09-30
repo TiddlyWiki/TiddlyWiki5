@@ -6,8 +6,6 @@ module-type: startup
 Multi wiki server initialisation
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -54,5 +52,3 @@ ServerManager.prototype.createServer = function(options) {
 	this.servers.push(server);
 	return server;
 }
-
-})();

@@ -8,8 +8,6 @@ Command to load archive of recipes, bags and tiddlers from a directory
 --mws-create-bag <name> <description>
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -43,5 +41,3 @@ Command.prototype.execute = function() {
 };
 
 exports.Command = Command;
-
-})();

@@ -6,8 +6,6 @@ module-type: command
 Command to load archive of recipes, bags and tiddlers from a directory
 
 \*/
-(function(){
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -89,5 +87,3 @@ function sanitiseTiddler(tiddler) {
 }
 
 exports.Command = Command;
-
-})();

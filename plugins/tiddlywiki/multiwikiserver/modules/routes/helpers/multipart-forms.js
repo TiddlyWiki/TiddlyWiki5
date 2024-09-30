@@ -7,9 +7,6 @@ A function that handles an incoming multipart/form-data stream, streaming the da
 in the store/inbox folder. Once the data is received, it imports any tiddlers and invokes a callback.
 
 \*/
-
-(function() {
-
 /*
 Process an incoming new multipart/form-data stream. Options include:
 
@@ -96,5 +93,3 @@ exports.processIncomingStream = function(options) {
 		}
 	});
 };
-
-})();

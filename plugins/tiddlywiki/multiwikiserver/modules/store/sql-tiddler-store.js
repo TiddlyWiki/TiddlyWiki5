@@ -12,9 +12,6 @@ This class is largely a wrapper for the sql-tiddler-database.js class, adding th
 * Handling large tiddlers as attachments
 
 \*/
-
-(function() {
-
 /*
 Create a tiddler store. Options include:
 
@@ -434,5 +431,3 @@ SqlTiddlerStore.prototype.getRecipeBags = function(recipe_name) {
 };
 
 exports.SqlTiddlerStore = SqlTiddlerStore;
-
-})();

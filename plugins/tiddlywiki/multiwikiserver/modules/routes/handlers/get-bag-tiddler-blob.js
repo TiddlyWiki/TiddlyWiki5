@@ -6,8 +6,6 @@ module-type: mws-route
 GET /bags/:bag_name/tiddler/:title/blob
 
 \*/
-(function() {
-
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
@@ -34,5 +32,3 @@ exports.handler = function(request,response,state) {
 	response.writeHead(404);
 	response.end();
 };
-
-}());
