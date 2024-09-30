@@ -1,6 +1,10 @@
-created: 201308281853
-modified: 201308281853
+created: 20130828185300000
+modified: 20240923162029767
 tags: Definitions
 title: CamelCase
 
-CamelCase is formed by taking a phrase, capitalising the initial letter of each word, and smashing the words together to form a portmanteau word. Most wikis use CamelCase to signal phrases that should automatically become links.
+CamelCase is formed by taking a phrase, capitalising the initial letter of each word, and smashing the words together to form a portmanteau word. Traditionally most wikis including ~TiddlyWiki use CamelCase to signal phrases that should automatically become links.
+
+You can also [[disable CamelCase linking in TiddlyWiki|How to turn off camel case linking]] if you want.
+
+<<.from-version 5.3.0>> ~CamelCase is disabled by default in new wikis.
