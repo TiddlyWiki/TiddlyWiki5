@@ -418,6 +418,66 @@ describe("WikiText parser tests", function() {
 
 		expect(parse(wikitext)).toEqual(expectedParseTree);
         });
+
+
+	it('should parse section marks', function () {
+		expect(
+			parse(
+				"There is a block id that is invisible, but you can find it using developer tool's inspect element feature. ^BlockLevelLinksID1"
+			)
+		).toEqual([
+			{
+				type: 'element',
+				tag: 'p',
+				children: [
+					{
+						type: 'text',
+						text: "There is a block id that is invisible, but you can find it using developer tool's inspect element feature.",
+						start: 0,
+						end: 106,
+					},
+					{
+						type: 'anchor',
+						attributes: {
+							id: { type: 'string', value: 'BlockLevelLinksID1', start: 126, end: 144 },
+							previousSibling: { type: 'string', value: '' },
+						},
+						children: [],
+						start: 106,
+						end: 126,
+						rule: 'anchor',
+					},
+				],
+				start: 0,
+				end: 126,
+			},
+		]);
+	});
+
+
+	it('should parse link to section marks', function () {
+		expect(parse('[[Link to BlockLevelLinksID1|Block Level Links in WikiText^BlockLevelLinksID1]]')).toEqual([
+			{
+				type: 'element',
+				tag: 'p',
+				children: [
+					{
+						type: 'link',
+						attributes: {
+							to: { type: 'string', value: 'Block Level Links in WikiText', start: 29, end: 58 },
+							toAnchor: { type: 'string', value: 'BlockLevelLinksID1', start: 59, end: 77 },
+						},
+						children: [{ type: 'text', text: 'Link to BlockLevelLinksID1', start: 2, end: 28 }],
+						start: 0,
+						end: 79,
+						rule: 'prettylink',
+					},
+				],
+				start: 0,
+				end: 79,
+			},
+		]);
+	});
 });
 
 })();
