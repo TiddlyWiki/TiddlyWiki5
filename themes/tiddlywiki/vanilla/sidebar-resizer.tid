@@ -142,7 +142,7 @@ code-body: yes
 
 	<%if [{$:/state/sidebar}match[no]] %>
 
-		.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer {
+		tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer {
 			display: none;
 		}
 
@@ -152,7 +152,7 @@ code-body: yes
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-	.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer {
+	.tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer {
 		display: none;
 	}
 }
