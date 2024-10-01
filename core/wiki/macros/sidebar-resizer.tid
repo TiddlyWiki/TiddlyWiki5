@@ -2,7 +2,7 @@ title: $:/core/macros/sidebar-resizer
 tags: $:/tags/Global
 
 \procedure sidebar-resizer-pointerdown-actions()
-<%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
+<%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]then<modifier>match[normal]] %>
 	<$let dragDiff=<<event-fromselected-posx>> storyRiverWidth={{{ [<event-fromcatcher-posx>subtract<dragDiff>] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add<dragDiff>] }}}>
 		<$action-setfield $tiddler="$:/state/sidebar/dimensions"
 			drag-diff=<<dragDiff>>

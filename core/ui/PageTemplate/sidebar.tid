@@ -6,17 +6,21 @@ tags: $:/tags/PageTemplate
 $:/config/SideBarSegments/Visibility/$(listItem)$
 \end
 
-<$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>> $pointerup=<<sidebar-resizer-pointerup-actions>>>
+<$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>>>
 
 <%if [{$:/state/sidebar}!match[no]] %>
 
-<$eventcatcher tag="div" selector=".tc-sidebar-resizer-pointermove" matchSelector=".tc-sidebar-resizer-pointermove" class="tc-sidebar-resizer-pointermove-eventcatcher" $pointerup=<<sidebar-resizer-pointerup-actions>> $pointermove=<<sidebar-resizer-pointermove-actions>> $pointerleave=<<sidebar-resizer-pointerup-actions>> $pointerout=<<sidebar-resizer-pointerup-actions>>>
+<$eventcatcher tag="div" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerup={{{ [[$:/state/sidebar/resizing]!is[missing]then<sidebar-resizer-pointerup-actions>] }}}>
+
+<$eventcatcher tag="div" selector=".tc-sidebar-resizer-pointermove" matchSelector=".tc-sidebar-resizer-pointermove" class="tc-sidebar-resizer-pointermove-eventcatcher" $pointerup=<<sidebar-resizer-pointerup-actions>> $pointerleave=<<sidebar-resizer-pointerup-actions>> $pointerout=<<sidebar-resizer-pointerup-actions>>  $pointermove=<<sidebar-resizer-pointermove-actions>>>
 
 <div class="tc-sidebar-resizer-pointermove"/>
 
 </$eventcatcher>
 
 <div class="tc-sidebar-resizer"/>
+
+</$eventcatcher>
 
 <% endif %>
 
