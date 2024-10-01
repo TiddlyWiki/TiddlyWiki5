@@ -1156,6 +1156,17 @@ SqlTiddlerDatabase.prototype.removePermissionFromRole = function(roleId, permiss
 	});
 };
 
+SqlTiddlerDatabase.prototype.getUserRoles = function(userId) {
+	const query = `
+			SELECT r.role_id, r.role_name
+			FROM user_roles ur
+			JOIN roles r ON ur.role_id = r.role_id
+			WHERE ur.user_id = $userId
+	`;
+	
+	return this.engine.runStatementGetAll(query, { $userId: userId });
+};
+
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
 
 })();

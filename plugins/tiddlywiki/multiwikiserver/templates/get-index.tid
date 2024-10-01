@@ -21,26 +21,11 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 	</$genesis>
 \end
 
-<div class="mws-header">
-	<h1>Wikis Available Here</h1>
-	<div class="mws-user-info">
-		<span>Hello, <$text text=<<username>>/></span>
-		<$list filter="[<user-is-admin>match[yes]]">
-			<div class="mws-admin-dropdown">
-				<button class="mws-admin-dropbtn">⚙️</button>
-				<div class="mws-admin-dropdown-content">
-					<a href="/admin/acl">Manage ACL</a>
-					<a href="/admin/users">Manage Users</a>
-					<a href="/admin/permissions">Manage Permissions</a>
-					<a href="/admin/roles">Manage Roles</a>
-				</div>
-			</div>
-		</$list>
-		<form action="/logout" method="post" class="mws-logout-form">
-			<input type="submit" value="Logout" class="mws-logout-button"/>
-		</form>
-	</div>
-</div>
+<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/mws-header">
+	<$set name="page-title" value="Wikis Available Here">
+		<$transclude/>
+	</$set>
+</$tiddler>
 
 <ul class="mws-vertical-list">
 	<$list filter="[<recipe-list>jsonindexes[]] :sort[<currentTiddler>jsonget[recipe_name]]" variable="recipe-index">
@@ -88,7 +73,6 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 		</li>
 	</$list>
 </ul>
-
 <form action="/recipes" method="post" class="mws-form">
 	<div class="mws-form-heading">
 		Create a new recipe or modify and existing one

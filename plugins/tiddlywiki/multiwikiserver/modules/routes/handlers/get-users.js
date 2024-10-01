@@ -34,8 +34,6 @@ GET /admin/users
 			last_login: user.last_login ? new Date(user.last_login).toISOString() : ''
 		}));
 
-		console.log("Processed userList =>", userList);
-
 		response.writeHead(200, "OK", {
 			"Content-Type": "text/html"
 		});
@@ -45,10 +43,12 @@ GET /admin/users
 			variables: {
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/get-users",
 				"user-list": JSON.stringify(userList),
+				"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
+        "user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
 			}
 		});
 		response.write(html);
 		response.end();
 	};
 	
-	}());
+}());

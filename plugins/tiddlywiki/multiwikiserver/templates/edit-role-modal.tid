@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/edit-role-modal
+
+\define save-role-actions()
+<<edit-role-actions {{!!role-id}}>>
+\end
+
+<h1>Edit Role</h1>
+
+<div>
+  <label>Role Name:
+    <$edit-text tiddler="$:/temp/editRoleName" tag="input" default=""/>
+  </label>
+</div>
+<div>
+  <label>Role Description:
+    <$edit-text tiddler="$:/temp/editRoleDescription" tag="input" default=""/>
+  </label>
+</div>
+
+<$button class="tc-btn-invisible">
+  Save Changes
+  <<save-role-actions>>
+  <$action-sendmessage $message="tm-close-tiddler"/>
+</$button>
+<$button class="tc-btn-invisible" message="tm-close-tiddler">
+  Cancel
+</$button>

@@ -1,0 +1,123 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles
+
+\define add-role-actions()
+    <$action-sendmessage $message="tm-server-request"
+        method="POST"
+        url="/admin/roles"
+        headers="Content-Type: application/json"
+        body={{{ [{"name": "$(newRoleName)$", "description": "$(newRoleDescription)$"}jsonify[]] }}}
+        redirectAfterSuccess="/admin/roles"/>
+    <$action-setfield $tiddler="$:/temp/newRoleName" text=""/>
+    <$action-setfield $tiddler="$:/temp/newRoleDescription" text=""/>
+\end
+
+\define edit-role-actions(role-id)
+    <$action-sendmessage $message="tm-server-request"
+        method="PUT"
+        url={{{ [[$:/admin/roles/]addsuffix<role-id>] }}}
+        headers="Content-Type: application/json"
+        body={{{ [{"name": "$(newRoleName)$", "description": "$(newRoleDescription)$"}jsonify[]] }}}
+        redirectAfterSuccess="/admin/roles"/>
+\end
+
+\define delete-role-actions(role-id)
+    <$action-sendmessage $message="tm-server-request"
+        method="DELETE"
+        url={{{ [[$:/admin/roles/]addsuffix<role-id>] }}}
+        redirectAfterSuccess="/admin/roles"/>
+\end
+
+<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/mws-header">
+    <$set name="page-title" value="Manage Roles">
+        <$transclude/>
+    </$set>
+</$tiddler>
+
+<div class="roles-container">
+  <div class="roles-list">
+    <$list filter="[<roles-list>jsonindexes[]]" variable="role-index">
+      <$let role={{{ [<roles-list>jsonextract<role-index>] }}}>
+        <div class="role-item">
+          <span class="role-name">
+            <$text text={{{ [<role>jsonget[role_name]] }}}/>
+          </span>
+          <span class="role-description">
+            <$text text={{{ [<role>jsonget[description]] }}}/>
+          </span>
+          <div class="role-actions">
+            <$button class="tc-btn-invisible">
+              Edit
+              <$action-setfield $tiddler="$:/temp/editRoleName" text={{{ [<role>jsonget[role_name]] }}}/>
+              <$action-setfield $tiddler="$:/temp/editRoleDescription" text={{{ [<role>jsonget[description]] }}}/>
+              <$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/multiwikiserver/templates/edit-role-modal" role-id={{{ [<role>jsonget[role_id]] }}}/>
+            </$button>
+            <$button class="tc-btn-invisible">
+              Delete
+              <$action-confirm $message="Are you sure you want to delete this role?">
+                <<delete-role-actions {{{ [<role>jsonget[role_id]] }}}>>
+              </$action-confirm>
+            </$button>
+          </div>
+        </div>
+      </$let>
+    </$list>
+  </div>
+  
+  <div class="add-role-form">
+    <$edit-text tiddler="$:/temp/newRoleName" tag="input" default="" placeholder="Role Name"/>
+    <$edit-text tiddler="$:/temp/newRoleDescription" tag="input" default="" placeholder="Role Description"/>
+    <$button class="tc-btn-invisible">
+      Add Role
+      <<add-role-actions>>
+    </$button>
+  </div>
+</div>
+
+<style>
+  .roles-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+  .role-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  .role-name {
+    font-weight: bold;
+  }
+  .role-description {
+    color: #666;
+    margin-left: 1rem;
+  }
+  .role-actions button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .add-role-form {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+  }
+  .add-role-form input {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+  }
+  .add-role-form button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+</style>

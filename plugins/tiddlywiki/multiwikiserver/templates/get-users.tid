@@ -1,89 +1,113 @@
-<!--
 title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
--->
 
-\define lingo-base() $:/language/ControlPanel/Tools/
+\define edit-user-actions(user-id)
+  <$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/multiwikiserver/templates/edit-user-modal" user-id=<<user-id>>/>
+\end
 
-<h1>User Management</h1>
+\define delete-user-actions(user-id)
+  <$action-sendmessage $message="tm-server-request"
+    method="DELETE"
+    url={{{ [[$:/admin/users/]addsuffix<user-id>] }}}
+    redirectAfterSuccess="/admin/users"/>
+\end
 
-<!-- Display raw user-list for debugging -->
-<h2>Debug Info</h2>
-<p><strong>Raw user list JSON:</strong> <$text text=<<user-list>>/></p>
+<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/mws-header">
+  <$set name="page-title" value="User Management">
+    <$transclude/>
+  </$set>
+</$tiddler>
 
-<!-- Attempt to parse the user-list JSON -->
-<$set name="userList" value=<<user-list>>>
-  <!-- Display a message if the userList is empty -->
-  <$list filter="[<userList>!is[blank]]" emptyMessage="The user list is empty or not provided.">
-    <p><strong>User list found:</strong> <$text text=<<userList>>/></p>
-    
-    <!-- Attempt to parse the user list -->
-    <$set name="parsedUserList" value={{{ [<userList>jsonparse[]] }}}/>
-
-    <!-- Check if parsedUserList has any entries -->
-    <$list filter="[<parsedUserList>count[]compare:number:gt[0]]" emptyMessage="No users found or failed to parse user data">
-      <!-- Display parsed user list for debugging -->
-      <p><strong>Parsed User List (as JSON):</strong> <$text text={{{ [<parsedUserList>jsonstringify[]] }}}/></p>
-      
-      <!-- Display total user count -->
-      <p><strong>Total users:</strong> <$text text={{{ [<parsedUserList>count[]] }}}/></p>
-
-      <!-- Render the user table if parsing was successful -->
-      <table class="tc-view-field-table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Created At</th>
-            <th>Last Login</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <$list filter="[<userList>jsonindexes[]]" variable="userIndex">
-            <$let currentUser={{{ [<userList>jsonget<userIndex>] }}}>
-              <tr>
-                <td><$text text={{{ [<currentUser>jsonget[username]] }}}/></td>
-                <td><$text text={{{ [<currentUser>jsonget[email]] }}}/></td>
-                <td><$text text={{{ [<currentUser>jsonget[created_at]] }}}/></td>
-                <td><$text text={{{ [<currentUser>jsonget[last_login]] }}}/></td>
-                <td>
-                  <$button message="tm-server-command" param="edit-user" user_id={{{ [<currentUser>jsonget[user_id]] }}} class="tc-btn-invisible">
-                    {{$:/core/images/edit-button}} Edit
-                  </$button>
-                  <$button message="tm-server-command" param="delete-user" user_id={{{ [<currentUser>jsonget[user_id]] }}} class="tc-btn-invisible">
-                    {{$:/core/images/delete-button}} Delete
-                  </$button>
-                </td>
-              </tr>
-            </$let>
-          </$list>
-        </tbody>
-      </table>
+<div class="users-container">
+  <div class="users-list">
+    <$list filter="[<user-list>jsonindexes[]]" variable="user-index">
+      <$let currentUser={{{ [<user-list>jsonextract<user-index>] }}}>
+        <$set name="user-id" value={{{ [<currentUser>jsonget[user_id]] }}}>
+          <a href={{{ [[/admin/users/]addsuffix<user-id>] }}} class="user-item">
+            <div class="user-info">
+              <span class="user-name">
+                <$text text={{{ [<currentUser>jsonget[username]] }}}/>
+              </span>
+              <span class="user-email">
+                <$text text={{{ [<currentUser>jsonget[email]] }}}/>
+              </span>
+            </div>
+            <div class="user-details">
+              <span class="user-created">
+                Created: <$text text={{{ [<currentUser>jsonget[created_at]] }}}/>
+              </span>
+              <span class="user-last-login">
+                Last Login: <$text text={{{ [<currentUser>jsonget[last_login]] }}}/>
+              </span>
+            </div>
+          </a>
+        </$set>
+      </$let>
     </$list>
-  </$list>
-</$set>
-
-<$button message="tm-modal" param="$:/plugins/tiddlywiki/multiwikiserver/templates/add-user-modal" class="tc-btn-big-green">
-Add New User
-</$button>
+  </div>
+    
+  <div class="add-user-form">
+    <$button class="tc-btn-big-green">
+      Add New User
+      <$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/multiwikiserver/templates/add-user-modal"/>
+    </$button>
+  </div>
+</div>
 
 <style>
-.tc-view-field-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.tc-view-field-table th, .tc-view-field-table td {
-  border: 1px solid <<colour table-border>>;
-  padding: 0.5em;
-}
-
-.tc-view-field-table th {
-  background-color: <<colour table-header-background>>;
-  font-weight: bold;
-}
-
-.tc-view-field-table tr:nth-child(even) {
-  background-color: <<colour table-header-background>>;
-}
+  .users-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+  .user-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+  .user-item:hover {
+    background-color: #f5f5f5;
+    text-decoration: none;
+  }
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .user-name {
+    font-weight: bold;
+  }
+  .user-email {
+    color: #666;
+  }
+  .user-details {
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 0.5rem;
+  }
+  .add-user-form {
+    margin-top: 2rem;
+    text-align: right;
+  }
+  .tc-btn-big-green {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  .tc-btn-big-green:hover {
+    background-color: #45a049;
+  }
 </style>
