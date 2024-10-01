@@ -1,5 +1,4 @@
 title: $:/core/macros/sidebar-resizer
-tags: $:/tags/Global
 
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]then<modifier>match[normal]] %>
