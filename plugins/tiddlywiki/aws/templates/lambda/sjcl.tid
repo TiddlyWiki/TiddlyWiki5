@@ -2,6 +2,8 @@ title: $:/plugins/tiddlywiki/aws/lambda/sjcl
 
 \rules only filteredtranscludeinline transcludeinline
 
+(function() {
+
 var module, window = {};
 
 global.sjcl = (function() {
@@ -9,5 +11,7 @@ global.sjcl = (function() {
 {{ $:/library/sjcl.js ||$:/core/templates/plain-text-tiddler}}
 
 return window.sjcl;
+
+})();
 
 })();
