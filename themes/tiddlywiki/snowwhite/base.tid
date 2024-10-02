@@ -1,9 +1,7 @@
 title: $:/themes/tiddlywiki/snowwhite/base
 tags: [[$:/tags/Stylesheet]]
 
-\define sidebarbreakpoint-minus-one()
-<$text text={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}] }}}/>
-\end
+\function sidebarbreakpoint-minus-one() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[0.02]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
