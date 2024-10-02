@@ -336,7 +336,7 @@ Get the browser location.hash. We don't use location.hash because of the way tha
 */
 $tw.utils.getLocationHash = function() {
 	var href = window.location.href;
-	var idx = href.indexOf('#');
+	var idx = href.indexOf("#");
 	if(idx === -1) {
 		return "#";
 	} else if(href.substr(idx + 1,1) === "#" ||  href.substr(idx + 1,3) === "%23") {
@@ -605,7 +605,7 @@ var globalCheck =[
 	"    delete Object.prototype.__temp__;",
 	"  }",
 	"  delete Object.prototype.__temp__;",
-].join('\n');
+].join("\n");
 
 /*
 Run code globally with specified context variables in scope
@@ -1997,7 +1997,7 @@ $tw.loadTiddlersFromSpecification = function(filepath,excludeRegExp) {
 							value = path.relative(rootPath, filename).split(path.sep).slice(0, -1);
 							break;
 						case "filepath":
-							value = path.relative(rootPath, filename).split(path.sep).join('/');
+							value = path.relative(rootPath, filename).split(path.sep).join("/");
 							break;
 						case "filename":
 							value = path.basename(filename);
@@ -2623,7 +2623,7 @@ $tw.boot.executeNextStartupTask = function(callback) {
 		}
 		taskIndex++;
 	}
-	if(typeof callback === 'function') {
+	if(typeof callback === "function") {
 		callback();
 	}
 	return false;

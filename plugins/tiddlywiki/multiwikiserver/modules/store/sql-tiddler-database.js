@@ -924,7 +924,7 @@ SqlTiddlerDatabase.prototype.listGroups = function() {
 // Role CRUD operations
 SqlTiddlerDatabase.prototype.createRole = function(roleName, description) {
 	const result = this.engine.runStatement(`
-			INSERT INTO roles (role_name, description)
+			INSERT OR IGNORE INTO roles (role_name, description)
 			VALUES ($roleName, $description)
 	`, {
 			$roleName: roleName,
@@ -940,6 +940,14 @@ SqlTiddlerDatabase.prototype.getRole = function(roleId) {
 			$roleId: roleId
 	});
 };
+
+SqlTiddlerDatabase.prototype.getRoleByName = function(roleName) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM roles WHERE role_name = $roleName
+	`, {
+			$roleName: roleName
+	});
+}
 
 SqlTiddlerDatabase.prototype.updateRole = function(roleId, roleName, description) {
 	this.engine.runStatement(`
@@ -970,8 +978,8 @@ SqlTiddlerDatabase.prototype.listRoles = function() {
 // Permission CRUD operations
 SqlTiddlerDatabase.prototype.createPermission = function(permissionName, description) {
 	const result = this.engine.runStatement(`
-			INSERT INTO permissions (permission_name, description)
-			VALUES ($permissionName, $description)
+		INSERT OR IGNORE INTO permissions (permission_name, description)
+		VALUES ($permissionName, $description)
 	`, {
 			$permissionName: permissionName,
 			$description: description
@@ -984,6 +992,14 @@ SqlTiddlerDatabase.prototype.getPermission = function(permissionId) {
 			SELECT * FROM permissions WHERE permission_id = $permissionId
 	`, {
 			$permissionId: permissionId
+	});
+};
+
+SqlTiddlerDatabase.prototype.getPermissionByName = function(permissionName) {
+	return this.engine.runStatementGet(`
+			SELECT * FROM permissions WHERE permission_name = $permissionName
+	`, {
+			$permissionName: permissionName
 	});
 };
 

@@ -19,8 +19,6 @@ exports.path = /^\/admin\/users\/([^\/]+)\/?$/;
 
 exports.handler = function(request,response,state) {
 	var user_id = $tw.utils.decodeURIComponentSafe(state.params[0]);
-	console.log("user_id =>", user_id)
-
 	var userData = state.server.sqlTiddlerDatabase.getUser(user_id);
 	
 	if(!userData) {
