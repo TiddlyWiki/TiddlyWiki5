@@ -73,4 +73,4 @@ BlockMarkWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports["block-mark"] = BlockMarkWidget;
+exports.blockmark = BlockMarkWidget;

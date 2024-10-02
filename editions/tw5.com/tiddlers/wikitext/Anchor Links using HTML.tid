@@ -63,6 +63,8 @@ The above example can be adapted to work for many situations in ~TiddlyWiki, suc
 
 Yes, it's that simple. BUT...  in ~TiddlyWiki there are some small differences from standard HTML5 anchor links and some specific ~TiddlyWiki limitations.
 
+To use WikiText style anchor links, see [[Block Level Links in WikiText]].
+
 <a href=<<qualify "##Top">>>Back to the top</a>
 
 <h2 id=<<qualify "#Anchor-link-limitations">>>Limitations and things to watch out for</h2>
