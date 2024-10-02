@@ -143,7 +143,7 @@ exports.serializeParseTree = function serializeParseTree(tree,tiddlerType) {
 				Parser.prototype.pragmaRuleClasses[tree.rule];
 			if(Rule && Rule.prototype.serialize) {
 				output.push(Rule.prototype.serialize(tree,serializeParseTree));
-			} else if(tree.rule === "parseBlock") {
+			} else if(tree.rule === "parseblock") {
 				output.push(serializeParseTree(tree.children,tiddlerType),"\n\n");
 			} else {
 				// when no rule is found, just serialize the children
