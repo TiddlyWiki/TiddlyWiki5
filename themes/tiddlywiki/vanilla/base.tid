@@ -2813,10 +2813,6 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	overflow-x: auto;
 }
 
-.tc-table-wrapper .tc-popup {
-	overflow: visible;
-}
-
 /*
 ** Chooser
 */

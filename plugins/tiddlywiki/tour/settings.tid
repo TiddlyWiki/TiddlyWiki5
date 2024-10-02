@@ -136,7 +136,7 @@ Select a tour:
 								<<display-tour-step-field-text "caption" "Caption">>
 								<<display-tour-step-field-text "step-success-filter" "step-success-filter">>
 								<<display-tour-step-field-text "step-success-filter-var" "step-success-filter Variable">>
-									<<display-tour-step-field-text "display-mode" "Display Mode">>
+								<<display-tour-step-field-text "display-mode" "Display Mode">>
 								<<display-tour-step-field-text "enter-actions" "Enter Actions">>
 								<<display-tour-step-field-text "hint-text" "Hint text">>
 								<<display-tour-step-field-text "hint-selector" "Hint selector">>

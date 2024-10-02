@@ -1,6 +1,5 @@
 title: $:/TagManager
 icon: $:/core/images/tag-button
-class: tc-table-wrapper
 color: #bbb
 
 \define lingo-base() $:/language/TagManager/
@@ -63,6 +62,7 @@ color: #bbb
 \end
 
 \whitespace trim
+<div class="tc-table-wrapper">
 <table class="tc-tag-manager-table">
 <tbody>
 	<tr>
@@ -117,3 +117,4 @@ color: #bbb
 	</tr>
 </tbody>
 </table>
+</div>
