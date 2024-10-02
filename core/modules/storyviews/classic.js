@@ -26,15 +26,15 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
-	// If anchor is provided, find the element the anchor pointing to
-	var foundAnchor = false;
-	if(listItemWidget && historyInfo.anchor) {
-		var anchorWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
-			return widget.anchorId === historyInfo.anchor;
+	// If block mark is provided, find the block element that this mark is pointing to
+	var foundBlockMark = false;
+	if(listItemWidget && historyInfo.blockMark) {
+		var blockMarkWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
+			return widget.blockMarkId === historyInfo.blockMark;
 		});
-		if(anchorWidget) {
-			targetElement = anchorWidget.findAnchorTargetDomNode()
-			foundAnchor = true;
+		if(blockMarkWidget) {
+			targetElement = blockMarkWidget.findBlockMarkTargetDomNode()
+			foundBlockMark = true;
 		}
 	}
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
@@ -42,7 +42,7 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 		return;
 	}
 	// Scroll the node into view
-	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: foundAnchor});
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: foundBlockMark});
 };
 
 ClassicStoryView.prototype.insert = function(widget) {

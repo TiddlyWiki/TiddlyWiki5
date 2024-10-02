@@ -1,18 +1,18 @@
 /*\
-title: $:/core/modules/widgets/anchor.js
+title: $:/core/modules/widgets/block-mark.js
 type: application/javascript
 module-type: widget
 
-An invisible element with anchor id metadata.
+An invisible element with block-mark id metadata.
 \*/
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
-var AnchorWidget = function(parseTreeNode,options) {
+var BlockMarkWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	// only this widget knows target info (if the block is before this node or not), so we need to hook the focus event, and process it here, instead of in the root widget.
 };
-AnchorWidget.prototype = new Widget();
+BlockMarkWidget.prototype = new Widget();
 
-AnchorWidget.prototype.render = function(parent,nextSibling) {
+BlockMarkWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -21,13 +21,13 @@ AnchorWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create an invisible DOM element with data that can be accessed from JS or CSS
 	this.idNode = this.document.createElement("span");
-	this.idNode.setAttribute("data-anchor-id",this.anchorId);
-	this.idNode.setAttribute("data-anchor-title",this.tiddlerTitle);
+	this.idNode.setAttribute("data-block-mark-id",this.blockMarkId);
+	this.idNode.setAttribute("data-block-mark-title",this.tiddlerTitle);
 	// if the actual block is before this node, we need to add a flag to the node
 	if(this.previousSibling) {
-		this.idNode.setAttribute("data-anchor-previous-sibling","true");
+		this.idNode.setAttribute("data-block-mark-previous-sibling","true");
 	}
-	this.idNode.className = "tc-anchor";
+	this.idNode.className = "tc-block-mark";
 	parent.insertBefore(this.idNode,nextSibling);
 	this.domNodes.push(this.idNode);
 };
@@ -35,9 +35,9 @@ AnchorWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-AnchorWidget.prototype.execute = function() {
+BlockMarkWidget.prototype.execute = function() {
 	// Get the id from the parse tree node or manually assigned attributes
-	this.anchorId = this.getAttribute("id");
+	this.blockMarkId = this.getAttribute("id");
 	this.tiddlerTitle = this.getVariable("currentTiddler");
 	this.previousSibling = this.getAttribute("previousSibling") === "yes";
 	// Make the child widgets
@@ -45,9 +45,9 @@ AnchorWidget.prototype.execute = function() {
 };
 
 /*
-Find the DOM node pointed by this anchor
+Find the DOM node pointed by this block mark
 */
-Widget.prototype.findAnchorTargetDomNode = function() {
+Widget.prototype.findBlockMarkTargetDomNode = function() {
 	if(!this.idNode) {
 		return null;
 	}
@@ -63,7 +63,7 @@ Widget.prototype.findAnchorTargetDomNode = function() {
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-AnchorWidget.prototype.refresh = function(changedTiddlers) {
+BlockMarkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(($tw.utils.count(changedAttributes) > 0)) {
 		this.refreshSelf();
@@ -73,4 +73,4 @@ AnchorWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports.anchor = AnchorWidget;
+exports["block-mark"] = BlockMarkWidget;

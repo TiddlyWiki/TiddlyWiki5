@@ -51,14 +51,15 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
-	// If anchor is provided, find the element the anchor pointing to
-	var anchorElement = null;
-	if(listItemWidget && historyInfo.anchor) {
-		var anchorWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
-			return widget.anchorId === historyInfo.anchor;
+	// If block mark is provided, find the block element that this mark is pointing to
+	var foundBlockMark = false;
+	if(listItemWidget && historyInfo.blockMark) {
+		var blockMarkWidget = $tw.utils.findChildNodeInTree(listItemWidget, function(widget) {
+			return widget.blockMarkId === historyInfo.blockMark;
 		});
-		if(anchorWidget) {
-			anchorElement = anchorWidget.findAnchorTargetDomNode()
+		if(blockMarkWidget) {
+			targetElement = blockMarkWidget.findBlockMarkTargetDomNode()
+			foundBlockMark = true;
 		}
 	}
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
@@ -129,10 +130,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		},duration);
 	}
 	// Scroll the target into view
-	if(anchorElement) {
-		this.listWidget.dispatchEvent({type: "tm-scroll", target: anchorElement, highlight: true});
-	}
-  //	$tw.pageScroller.scrollIntoView(targetElement);
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement, highlight: true});
 };
 
 /*

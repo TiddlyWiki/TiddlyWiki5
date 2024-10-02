@@ -34,7 +34,7 @@ exports.parse = function() {
 	// Process the link
 	var text = this.match[1],
 		link = this.match[2] || text,
-		anchor = this.match[3] || "",
+		blockMark = this.match[3] || "",
 		textEndPos = this.parser.source.indexOf("|", start);
 	if (textEndPos < 0 || textEndPos > this.matchRegExp.lastIndex) {
 		textEndPos = this.matchRegExp.lastIndex - 2;
@@ -42,9 +42,9 @@ exports.parse = function() {
 	var linkStart = this.match[2] ? (start + this.match[1].length + 1) : start;
 	var linkEnd = linkStart + link.length;
 	if($tw.utils.isLinkExternal(link)) {
-		// add back the part after `^` to the ext link, if it happen to has one. Here is is not an anchor, but a part of the external URL.
-		if(anchor) {
-			link = link + "^" + anchor;
+		// add back the part after `^` to the ext link, if it happen to has one. Here is is not an block mark, but a part of the external URL.
+		if(blockMark) {
+			link = link + "^" + blockMark;
 		}
 		return [{
 			type: "element",
@@ -60,13 +60,13 @@ exports.parse = function() {
 			}]
 		}];
 	} else {
-		var anchorStart = anchor ? (linkEnd + 1) : linkEnd;
-		var anchorEnd = anchorStart + anchor.length;
+		var blockMarkStart = blockMark ? (linkEnd + 1) : linkEnd;
+		var blockMarkEnd = blockMarkStart + blockMark.length;
 		return [{
 			type: "link",
 			attributes: {
 				to: {type: "string", value: link, start: linkStart, end: linkEnd},
-				toAnchor: {type: "string", value: anchor, start: anchorStart, end: anchorEnd},
+				toBlockMark: {type: "string", value: blockMark, start: blockMarkStart, end: blockMarkEnd},
 			},
 			children: [{
 				type: "text", text: text, start: start, end: textEndPos

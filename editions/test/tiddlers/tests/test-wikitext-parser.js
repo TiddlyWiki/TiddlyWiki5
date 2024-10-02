@@ -437,7 +437,7 @@ describe("WikiText parser tests", function() {
 						end: 106,
 					},
 					{
-						type: 'anchor',
+						type: 'blockmark',
 						attributes: {
 							id: { type: 'string', value: 'BlockLevelLinksID1', start: 126, end: 144 },
 							previousSibling: { type: 'string', value: '' },
@@ -445,7 +445,7 @@ describe("WikiText parser tests", function() {
 						children: [],
 						start: 106,
 						end: 126,
-						rule: 'anchor',
+						rule: 'blockmark',
 					},
 				],
 				start: 0,
@@ -465,7 +465,7 @@ describe("WikiText parser tests", function() {
 						type: 'link',
 						attributes: {
 							to: { type: 'string', value: 'Block Level Links in WikiText', start: 29, end: 58 },
-							toAnchor: { type: 'string', value: 'BlockLevelLinksID1', start: 59, end: 77 },
+							toBlockMark: { type: 'string', value: 'BlockLevelLinksID1', start: 59, end: 77 },
 						},
 						children: [{ type: 'text', text: 'Link to BlockLevelLinksID1', start: 2, end: 28 }],
 						start: 0,

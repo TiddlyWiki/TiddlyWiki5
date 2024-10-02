@@ -152,7 +152,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	if(event.navigateTo) {
 		this.addToStory(event.navigateTo,event.navigateFromTitle);
 		if(!event.navigateSuppressNavigation) {
-			this.addToHistory(event.navigateTo,event.navigateFromClientRect,event.toAnchor);
+			this.addToHistory(event.navigateTo,event.navigateFromClientRect,event.toBlockMark);
 		}
 	}
 	return false;
