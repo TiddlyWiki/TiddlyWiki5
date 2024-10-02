@@ -11,9 +11,9 @@ Command to create users and grant permission
   /*jslint node: true, browser: true */
   /*global $tw: false */
   "use strict";
-  
-  var crypto = require("crypto");
-  
+  if($tw.node) {
+    var crypto = require("crypto");
+  }
   exports.info = {
     name: "mws-add-user",
     synchronous: false
