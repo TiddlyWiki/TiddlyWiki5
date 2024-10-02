@@ -18,3 +18,4 @@ type: text/vnd.tiddlywiki
 
 |`tc-table-no-border` |Removes the borders of a table |
 |`tc-first-col-min-width` |The first column of a table will take up minimal possible width. It adapts to the content |
+|`tc-table-wrapper` |<<.from-version "5.3.6">> A class to be applied to a `div` element outside the table to prevent table from overflowing |

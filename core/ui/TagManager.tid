@@ -1,5 +1,6 @@
 title: $:/TagManager
 icon: $:/core/images/tag-button
+class: tc-table-wrapper
 color: #bbb
 
 \define lingo-base() $:/language/TagManager/
