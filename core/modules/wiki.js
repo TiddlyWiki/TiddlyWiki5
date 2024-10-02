@@ -194,18 +194,24 @@ options.prefix must be a string
 */
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
-	var c = 0,
-		title = baseTitle,
-		template = options.template,
+	var title = baseTitle,
+		template = options.template || "",
+		// test if .startCount is a positive integer. If not set to 0
+		c = (parseInt(options.startCount,10) > 0) ? parseInt(options.startCount,10) : 0,
 		prefix = (typeof(options.prefix) === "string") ? options.prefix : " ";
+
 	if (template) {
 		// "count" is important to avoid an endless loop in while(...)!!
 		template = (/\$count:?(\d+)?\$/i.test(template)) ? template : template + "$count$";
-		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c});
+		// .formatTitleString() expects strings as input
+		title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":c+""});
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
-			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)});
+			title = $tw.utils.formatTitleString(template,{"base":baseTitle,"separator":prefix,"counter":(++c)+""});
 		}
 	} else {
+		if (c > 0) {
+			title = baseTitle + prefix + c;
+		}
 		while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 			title = baseTitle + prefix + (++c);
 		}

@@ -1,0 +1,21 @@
+
+created: 20240804143842924
+modified: 20240804150223291
+tags: Macros [[Core Macros]]
+title: show-filter-count Macro
+type: text/vnd.tiddlywiki
+
+<<.from-version "5.3.6">> -- The <<.def show-filter-count>> [[macro|Macros]] creates an element, that shows a counter and a button to open the provided filter string in $:/AdvancedSearch
+
+!! Parameters
+
+; filter
+: Needs to be a valid [[filter run|Filters]]
+
+!! Examples
+
+<<wikitext-example-without-html src:"""<<show-filter-count filter:"[tag[HelloThere]]">> -- The number and the icon is click-able""">>
+
+<<wikitext-example-without-html src:"""<<show-filter-count filter:"[has[author]sort[]]">> -- The number and the icon is click-able""">>
+
+Also see: [[$:/core/ui/ControlPanel/TiddlerFields]]

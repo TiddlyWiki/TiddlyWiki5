@@ -7,7 +7,7 @@ fill:$(foregroundColor)$;
 color:$(foregroundColor)$;
 \end
 
-<!-- This has no whitespace trim to avoid modifying $actions$. Closing tags omitted for brevity. -->
+<!-- This has no whitespace trim to avoid modifying $actions$ -->
 \define tag-pill-inner(tag,icon,colour,fallbackTarget,colourA,colourB,element-tag,element-attributes,actions)
 \whitespace trim
 <$let

@@ -89,10 +89,13 @@ type: text/vnd.tiddlywiki
 \end
 
 \procedure flex-card(class,bordercolor:"",backgroundcolor:"",textcolor:"",imageField:"image",captionField:"caption",subtitle:"",descriptionField:"description",linkField:"link")
-<$link class={{{ [<class>addprefix[tc-card ]] }}} to={{{ [<currentTiddler>get<linkField>else<currentTiddler>] }}}>
+<$link class={{{ [<class>addprefix[tc-card ]] }}}
+	to={{{ [<currentTiddler>get<linkField>else<currentTiddler>] }}}
+	aria-label=<<currentTiddler>>
+>
 	<div class="tc-card-accent" style.borderTop={{{ [<bordercolor>!is[blank]addprefix[5px solid ]] }}} style.background={{!!background}} style.backgroundColor=<<backgroundcolor>> style.color=<<textcolor>> style.fill=<<textcolor>>>
 		<$list filter="[<currentTiddler>has[ribbon-text]]" variable="ignore">
-			<div class="tc-card-ribbon-wrapper">
+			<div class="tc-card-ribbon-wrapper" aria-hidden="true">
 				<div class="tc-card-ribbon" style.backgroundColor={{{ [<currentTiddler>get[ribbon-color]else[red]] }}}>
 					<div class="tc-card-ribbon-inner">
 						<$text text={{!!ribbon-text}}/>
@@ -102,7 +105,9 @@ type: text/vnd.tiddlywiki
 		</$list>
 		<$list filter="[<currentTiddler>has<imageField>]" variable="ignore">
 			<div class="tc-card-image">
-				<$image source={{{ [<currentTiddler>get<imageField>] }}}/>
+				<$image source={{{ [<currentTiddler>get<imageField>] }}}
+					alt={{{ [<currentTiddler>get<imageField>get[alt-text]else[Image.]] }}}
+				/>
 			</div>
 		</$list>
 		<div class="tc-card-title"><$transclude field=<<captionField>>><$view field="title"/></$transclude></div>

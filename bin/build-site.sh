@@ -164,20 +164,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--rendertiddler $:/core/save/all tour.html text/plain \
 	|| exit 1
 
-# /dev/index.html			Developer docs
-# /dev/favicon.ico			Favicon for dev site
-# /dev/static.html			Static rendering of default tiddlers
-# /dev/alltiddlers.html		Static rendering of all tiddlers
-# /dev/static/*				Static single tiddlers
-# /dev/static/static.css	Static stylesheet
-node $TW5_BUILD_TIDDLYWIKI \
-	./editions/dev \
-	--verbose \
-	--load $TW5_BUILD_OUTPUT/build.tid \
-	--output $TW5_BUILD_OUTPUT/dev \
-	--build index favicon static \
-	|| exit 1
-
 # /share.html				Custom edition for sharing via the URL
 node $TW5_BUILD_TIDDLYWIKI \
 	./editions/share \
