@@ -3,12 +3,11 @@ title: $:/core/modules/widgets/block-mark.js
 type: application/javascript
 module-type: widget
 
-An invisible element with block-mark id metadata.
+An invisible element with block mark id metadata. Marking a block level element, so that it can be jumped to.
 \*/
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var BlockMarkWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	// only this widget knows target info (if the block is before this node or not), so we need to hook the focus event, and process it here, instead of in the root widget.
 };
 BlockMarkWidget.prototype = new Widget();
 
@@ -23,6 +22,8 @@ BlockMarkWidget.prototype.render = function(parent,nextSibling) {
 	this.idNode = this.document.createElement("span");
 	this.idNode.setAttribute("data-block-mark-id",this.blockMarkId);
 	this.idNode.setAttribute("data-block-mark-title",this.tiddlerTitle);
+	// id for anchor jumping in static site
+	this.idNode.setAttribute("id",this.tiddlerTitle + "-" + this.blockMarkId);
 	// if the actual block is before this node, we need to add a flag to the node
 	if(this.previousSibling) {
 		this.idNode.setAttribute("data-block-mark-previous-sibling","true");
