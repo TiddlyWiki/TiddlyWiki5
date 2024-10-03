@@ -57,6 +57,10 @@ code-body: yes
 		z-index: -1;
 	}
 
+	.tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
+		z-index: -1;
+	}
+
 	.tc-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
 		touch-action: none;
 		user-select: none;
@@ -76,12 +80,16 @@ code-body: yes
 			z-index: 800;
 		}
 
-		.tc-sidebar-resizer-pointermove-eventcatcher {
+		.tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
 			z-index: 801;
 		}
 
-		.tc-sidebar-resizer-pointermove {
+		.tc-sidebar-resizer-pointermove-eventcatcher {
 			z-index: 802;
+		}
+
+		.tc-sidebar-resizer-pointermove {
+			z-index: 803;
 			cursor: ew-resize;
 		}
 
