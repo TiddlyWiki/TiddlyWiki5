@@ -16,7 +16,7 @@ var Server = require("$:/core/modules/server/server.js").Server;
 
 exports.info = {
 	name: "listen",
-	synchronous: true,
+	synchronous: false,
 	namedParameterMode: true,
 	mandatoryParameters: []
 };
@@ -38,7 +38,11 @@ Command.prototype.execute = function() {
 		wiki: this.commander.wiki,
 		variables: self.params
 	});
-	var nodeServer = this.server.listen();
+	var nodeServer = this.server.listen(null,null,null,{
+		callback: function() {
+			self.callback();
+		}
+	});
 	$tw.hooks.invokeHook("th-server-command-post-start",this.server,nodeServer,"tiddlywiki");
 	return null;
 };
