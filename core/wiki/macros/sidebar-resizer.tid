@@ -12,10 +12,8 @@ title: $:/core/macros/sidebar-resizer
 	</$let>
 <% endif %>
 \end
-\procedure sidebar-resizer-pointerup-actions()
-<%if [[$:/state/sidebar/resizing]!is[missing]] %>
-	<$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
-<% endif %>
+\procedure sidebar-resizer-pointercancel-actions()
+<$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
 \end
 \procedure sidebar-resizer-pointermove-actions()
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>

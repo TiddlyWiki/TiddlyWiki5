@@ -11,9 +11,9 @@ $:/config/SideBarSegments/Visibility/$(listItem)$
 
 <%if [{$:/state/sidebar}!match[no]] %>
 
-<$eventcatcher tag="div" class="tc-sidebar-resizer-pointermove-eventcatcher-wrapper" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerup={{{ [[$:/state/sidebar/resizing]!is[missing]then<sidebar-resizer-pointerup-actions>] }}}>
+<$eventcatcher tag="div" class="tc-sidebar-resizer-pointermove-eventcatcher-wrapper" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerup={{{ [[$:/state/sidebar/resizing]!is[missing]then<sidebar-resizer-pointercancel-actions>] }}}>
 
-<$eventcatcher tag="div" selector=".tc-sidebar-resizer-pointermove" matchSelector=".tc-sidebar-resizer-pointermove" class="tc-sidebar-resizer-pointermove-eventcatcher" $pointerup=<<sidebar-resizer-pointerup-actions>> $pointerleave=<<sidebar-resizer-pointerup-actions>> $pointerout=<<sidebar-resizer-pointerup-actions>> $pointercancel=<<sidebar-resizer-pointerup-actions>> $pointerdown=<<sidebar-resizer-pointerup-actions>> $pointermove=<<sidebar-resizer-pointermove-actions>>>
+<$eventcatcher tag="div" selector=".tc-sidebar-resizer-pointermove" matchSelector=".tc-sidebar-resizer-pointermove" class="tc-sidebar-resizer-pointermove-eventcatcher" $pointerup=<<sidebar-resizer-pointercancel-actions>> $pointerleave=<<sidebar-resizer-pointercancel-actions>> $pointerout=<<sidebar-resizer-pointercancel-actions>> $pointercancel=<<sidebar-resizer-pointercancel-actions>> $pointerdown=<<sidebar-resizer-pointercancel-actions>> $pointermove=<<sidebar-resizer-pointermove-actions>> $contextmenu=<<sidebar-resizer-pointercancel-actions>>>
 
 <div class="tc-sidebar-resizer-pointermove"/>
 
