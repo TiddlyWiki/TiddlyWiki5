@@ -47,6 +47,17 @@ describe('Backlinks tests', function() {
 
 		it('should have a backlink', function() {
 			expect(wiki.filterTiddlers('TestIncoming +[backlinks[]]').join(',')).toBe('TestOutgoing');
+
+		it("should have a backlink to block mark", function() {
+			wiki.addTiddler({
+				title: "TestIncoming",
+				text: "With a mark. ^ToThisBlock",
+			});
+			wiki.addTiddler({
+				title: "TestOutgoing",
+				text: "A link to [[TestIncoming^ToThisBlock]]",
+			});
+			expect(wiki.filterTiddlers("TestIncoming +[backlinks[]]").join(",")).toBe("TestOutgoing");
 		});
 	});
 
