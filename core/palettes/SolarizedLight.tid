@@ -18,6 +18,14 @@ button-foreground: #586e75
 code-background: #eee8d5
 code-border: #93a1a1
 code-foreground: #586e75
+diff-delete-background: inherit
+diff-delete-foreground: #dc322f
+diff-equal-background: inherit
+diff-equal-foreground: inherit
+diff-insert-background: inherit
+diff-insert-foreground: #859900
+diff-invisible-background: 
+diff-invisible-foreground: <<colour muted-foreground>>
 dirty-indicator: #dc322f
 download-background: #859900
 download-foreground: #eee8d5
