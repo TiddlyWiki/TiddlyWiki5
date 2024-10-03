@@ -1,0 +1,24 @@
+title: Subtitle/modifier-modified
+description: Tiddler ViewTemplate Subtitle. Show modifier and modified in UTC format
+type: text/vnd.tiddlywiki-multiple
+import: [all[shadows+tiddlers]tag[$:/tags/ViewTemplate/Subtitle]!has[draft.of]] $:/core/ui/ViewTemplate/subtitle/default
+tags: $:/tags/wiki-test-spec
+
+title: $:/language/Tiddler/DateFormat
+
+[UTC]DDth MMM YYYY at hh12:0mmam
++
+title: Output
+
+\whitespace trim
+{{test||$:/core/ui/ViewTemplate/subtitle/default}}
++
+title: test
+modifier: test-user
+modified: 20241003111606000
+
+text
++
+title: ExpectedResult
+
+<p><div class=" tc-reveal"><div class="tc-subtitle tc-clearfix"><a class="tc-tiddlylink tc-tiddlylink-missing" href="#test-user">test-user</a>3rd October 2024 at 11:16am</div></div></p>
