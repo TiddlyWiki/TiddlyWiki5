@@ -21,6 +21,7 @@ describe("WikiText tests", function() {
 	wiki.addTiddler({title: "TiddlerTwo", text: "The rain in Spain\nfalls mainly on the plain"});
 	wiki.addTiddler({title: "TiddlerThree", text: "The speed of sound\n\nThe light of speed"});
 	wiki.addTiddler({title: "TiddlerFour", text: "\\define my-macro(adjective:'groovy')\nThis is my ''amazingly'' $adjective$ macro!\n\\end\n\n<$link to=<<my-macro>>>This is a link</$link>"});
+	wiki.addTiddler({title: "TiddlerFive", text: "Paragraph. ^markID"});
 
 	it("should render tiddlers with no special markup as-is", function() {
 		expect(wiki.renderTiddler("text/plain","TiddlerOne")).toBe("The quick brown fox");
@@ -68,6 +69,17 @@ describe("WikiText tests", function() {
 			"some @@background:red;.myClass style and class@@ text")).toBe('<p>some <span class=" myClass " style="background:red;">style and class</span> text</p>');
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki",
 			"some @@background:red;color:white;.myClass 2 style and 1 class@@ text")).toBe('<p>some <span class=" myClass " style="background:red;color:white;">2 style and 1 class</span> text</p>');
+	});
+	it("handles link wikitext notation", function() {
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","A link to [[TiddlerFive]]")).toBe('<p>A link to <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#TiddlerFive">TiddlerFive</a></p>' );
+		wiki.deleteTiddler("TiddlerFive");
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","A link to [[TiddlerFive]]")).toBe('<p>A link to <a class="tc-tiddlylink tc-tiddlylink-missing" href="#TiddlerFive">TiddlerFive</a></p>');
+	});
+	it("handles block mark wikitext notation", function() {
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","Link to section [[TiddlerFive^markID]]")).toBe('<p>Link to section <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#TiddlerFive-markID">TiddlerFive</a></p>' );
+		// It has title as namespace in id when `currentTiddler` is set
+		expect(wiki.renderTiddler("text/html","TiddlerFive", { variables: { currentTiddler: "TiddlerFive" }})).toBe('<p>Paragraph.<span class="tc-block-mark" data-block-mark-id="markID" data-block-mark-title="TiddlerFive" id="TiddlerFive-markID"></span></p>');
+		expect(wiki.renderTiddler("text/html","TiddlerFive")).toBe('<p>Paragraph.<span class="tc-block-mark" data-block-mark-id="markID" id="markID"></span></p>');
 	});
 });
 
