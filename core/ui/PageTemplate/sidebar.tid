@@ -7,7 +7,7 @@ tags: $:/tags/PageTemplate
 $:/config/SideBarSegments/Visibility/$(listItem)$
 \end
 
-<$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>>>
+<$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>> $pointerup=<<sidebar-resizer-pointercancel-actions>>>
 
 <%if [{$:/state/sidebar}!match[no]] %>
 
