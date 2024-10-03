@@ -72,8 +72,10 @@ describe("WikiText tests", function() {
 	});
 	it("handles link wikitext notation", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","A link to [[TiddlerFive]]")).toBe('<p>A link to <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#TiddlerFive">TiddlerFive</a></p>' );
+		var tiddler = wiki.getTiddler("TiddlerFive");
 		wiki.deleteTiddler("TiddlerFive");
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","A link to [[TiddlerFive]]")).toBe('<p>A link to <a class="tc-tiddlylink tc-tiddlylink-missing" href="#TiddlerFive">TiddlerFive</a></p>');
+		wiki.addTiddler(tiddler);
 	});
 	it("handles block mark wikitext notation", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","Link to section [[TiddlerFive^markID]]")).toBe('<p>Link to section <a class="tc-tiddlylink tc-tiddlylink-resolves" href="#TiddlerFive-markID">TiddlerFive</a></p>' );
