@@ -36,7 +36,14 @@
 			"--mws-save-tiddler-text","bag-alpha","$:/SiteTitle","bag-alpha",
 			"--mws-save-tiddler-text","bag-alpha","😀😃😄😁😆🥹😅😂","bag-alpha",
 			"--mws-save-tiddler-text","bag-beta","$:/SiteTitle","bag-beta",
-			"--mws-save-tiddler-text","bag-gamma","$:/SiteTitle","bag-gamma"
+			"--mws-save-tiddler-text","bag-gamma","$:/SiteTitle","bag-gamma",
+			"--mws-add-permission", "READ", "Allows user to create tiddlers",
+			"--mws-add-permission", "WRITE", "Gives the user the permission to edit and delete tiddlers",
+			"--mws-add-role", "ADMIN", "System Administrator",
+			"--mws-add-role", "USER", "Basic User",
+			"--mws-assign-role-permission", "ADMIN", "READ",
+			"--mws-assign-role-permission", "ADMIN", "WRITE",
+			"--mws-assign-role-permission", "USER", "READ",
 			]
 	}
 }

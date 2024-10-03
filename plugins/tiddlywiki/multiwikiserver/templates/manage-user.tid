@@ -39,57 +39,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
         </$list>
       </ul>
     </div>
-
-  <div class="user-actions">
-      <$button class="tc-btn-invisible">
-          {{$:/core/images/edit-button}} Edit
-          <<edit-user-actions {{{ [<currentUser>jsonget[user_id]] }}}>>
-      </$button>
-      <$button class="tc-btn-invisible">
-          {{$:/core/images/delete-button}} Delete
-          <$action-confirm $message="Are you sure you want to delete this user?">
-              <<delete-user-actions {{{ [<currentUser>jsonget[user_id]] }}}>>
-          </$action-confirm>
-      </$button>
-  </div>
-  <hr />
-  <div class="user-profile-roles-management">
-    <h2>Manage User Roles</h2>
-    <select id="roleSelect">
-      <option value="">Select a role to add</option>
-      <$list filter="[<all-roles>jsonindexes[]]" variable="role-index">
-        <$let role={{{ [<all-roles>jsonextract<role-index>] }}}>
-          <option value={{{ [<role>jsonget[role_id]] }}}>
-            <$text text={{{ [<role>jsonget[role_name]] }}}/>
-          </option>
-        </$let>
-      </$list>
-    </select>
-    <button onclick="addRoleToUser()">Add Role</button>
-  </div>
-  </div>
 </div>
-
-<script>
-function addRoleToUser() {
-    const roleId = document.getElementById('roleSelect').value;
-    if (roleId) {
-        fetch('/admin/users/{{{ [<user>jsonget[user_id]] }}}/roles', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ role_id: roleId })
-        }).then(() => location.reload());
-    }
-}
-
-function removeRoleFromUser(roleId) {
-    if (confirm("Are you sure you want to remove this role from the user?")) {
-        fetch('/admin/users/{{{ [<user>jsonget[user_id]] }}}/roles/' + roleId, {
-            method: 'DELETE'
-        }).then(() => location.reload());
-    }
-}
-</script>
 
 <style>
 .user-profile-container {

@@ -198,7 +198,7 @@ Returns the bag_id of the bag
 SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscontrol) {
 	accesscontrol = accesscontrol || "";
 	// Run the queries
-	this.engine.runStatement(`
+	var bag = this.engine.runStatement(`
 		INSERT OR IGNORE INTO bags (bag_name, accesscontrol, description)
 		VALUES ($bag_name, '', '')
 	`,{
@@ -214,6 +214,16 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 		$accesscontrol: accesscontrol,
 		$description: description
 	});
+	
+
+	// update the permissions on ACL records
+	const admin = this.getRoleByName('ADMIN');
+	if(admin) {	
+		const readPermission = this.getPermissionByName('READ');
+		const writePermission = this.getPermissionByName('WRITE');
+		this.createACL(updateBags.lastInsertRowid, 'bag', admin.role_id, readPermission.permission_id);
+		this.createACL(updateBags.lastInsertRowid, 'bag', admin.role_id, writePermission.permission_id);
+	}
 	return updateBags.lastInsertRowid;
 };
 
@@ -277,6 +287,16 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 		$recipe_name: recipe_name,
 		$bag_names: JSON.stringify(bag_names)
 	});
+
+
+	// update the permissions on ACL records
+	const admin = this.getRoleByName('ADMIN');
+	if(admin) {
+		const readPermission = this.getPermissionByName('READ');
+		const writePermission = this.getPermissionByName('WRITE');
+		this.createACL(updateRecipes.lastInsertRowid, 'recipe', admin.role_id, readPermission.permission_id);
+		this.createACL(updateRecipes.lastInsertRowid, 'recipe', admin.role_id, writePermission.permission_id);
+	}
 	return updateRecipes.lastInsertRowid;
 };
 

@@ -40,9 +40,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@playwright/test": "^1.46.1",
+    "@playwright/test": "^1.47.2",
     "better-sqlite3": "^9.4.3",
     "node-sqlite3-wasm": "^0.8.10",
-    "playwright": "^1.46.1"
+    "playwright": "^1.47.2"
   }
 }
