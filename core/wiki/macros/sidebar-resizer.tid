@@ -1,14 +1,35 @@
 title: $:/core/macros/sidebar-resizer
 
+\function is.pixel.value(value) [<value>removesuffix[px]compare:number:eq<value>]
+\function is.percentage.value(value) [<value>removesuffix[%]compare:number:eq<value>]
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]then<modifier>match[normal]] %>
-	<$let dragGripDiff=<<event-fromselected-posx>> storyRiverWidth={{{ [<event-fromcatcher-posx>subtract<dragGripDiff>subtract[14]add[42]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add<dragGripDiff>add[14]] }}}>
+	<$let startPosX=<<event-fromcatcher-posx>> dragGripDiff=<<event-fromselected-posx>> storyRiverWidth={{{ [<event-fromcatcher-posx>subtract<dragGripDiff>subtract[14]add[42]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add<dragGripDiff>add[14]] }}}>
 		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
-			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
+			<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storyright}] %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
+			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storyright}] %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>divide<tv-widgetnode-width>multiply[100]addsuffix[%]] }}}/>
+			<% else %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
+			<% endif %>
 		<% else %>
-			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>addsuffix[px]] }}}/>
+			<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>addsuffix[px]] }}}/>
+			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>divide<tv-widgetnode-width>multiply[100]addsuffix[%]] }}}/>
+			<% else %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>addsuffix[px]] }}}/>
+			<% endif %>
 		<% endif %>
-		<$action-setfield $tiddler="$:/state/sidebar/resizing" text="yes" drag-grip-diff=<<dragGripDiff>>/>
+		<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] %>
+			<$action-setfield $tiddler="$:/state/sidebar/resizing" start-story-left={{{ [{$:/themes/tiddlywiki/vanilla/metrics/storyleft}compare:number:gteq[0]] ~0px }}}/>
+		<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] %>
+			<$action-setfield $tiddler="$:/state/sidebar/resizing" start-story-left={{{ [{$:/themes/tiddlywiki/vanilla/metrics/storyleft}compare:number:gteq[0]] ~0% }}}/>
+		<% else %>
+			<$action-setfield $tiddler="$:/state/sidebar/resizing" start-story-left={{{ [{$:/themes/tiddlywiki/vanilla/metrics/storyleft}compare:number:gteq[0]] ~0px }}}/>
+		<% endif %>
+		<$action-setfield $tiddler="$:/state/sidebar/resizing" text="yes" drag-grip-diff=<<dragGripDiff>> widget-node-width=<<tv-widgetnode-width>> start-posx=<<startPosX>>/>
 	</$let>
 <% endif %>
 \end
@@ -17,11 +38,58 @@ title: $:/core/macros/sidebar-resizer
 \end
 \procedure sidebar-resizer-pointermove-actions()
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
-	<$let storyRiverWidth={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!drag-grip-diff}subtract[14]add[42]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add{$:/state/sidebar/resizing!!drag-grip-diff}add[14]] }}}>
-		<%if  [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
-			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
+	<$let dragDiff={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}] }}} storyRiverWidth={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!drag-grip-diff}subtract[14]add[42]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add{$:/state/sidebar/resizing!!drag-grip-diff}add[14]] }}} widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}}>
+		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
+			<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] %>
+				<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+					<$vars storyLeft={{{ [{$:/state/sidebar/resizing!!start-story-left}add<dragDiff>addsuffix[px]] }}} storyLeftMax={{{ [<widgetNodeWidth>subtract{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}subtract{$:/themes/tiddlywiki/vanilla/metrics/storywidth}addsuffix[px]] }}}>
+						<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" text={{{ [<storyLeft>compare:number:lteq[0]then[0px]] ~[<storyLeft>compare:number:gteq<storyLeftMax>then<storyLeftMax>] ~[<storyLeft>] }}}/>
+					</$vars>
+				<%elseif [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+
+				<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+
+				<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+
+				<% endif %>
+			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] %>
+				<$set name="dragDiffPercentage" value={{{ [<dragDiff>divide<widgetNodeWidth>multiply[100]] }}}>
+					<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" text={{{ [{$:/state/sidebar/resizing!!start-story-left}add<dragDiffPercentage>addsuffix[%]compare:number:gteq[0]] ~0% }}}/>
+				</$set>
+			<% else %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" text={{{ [{$:/state/sidebar/resizing!!start-story-left}add<dragDiff>addsuffix[px]compare:number:gteq[0]] ~0px }}}/>
+			<% endif %>
+			<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storyright}] %>
+				<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+					<$set name="storyRiverLimit" value={{{ [<widgetNodeWidth>subtract{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}>
+						<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]compare:number:lteq{$:/themes/tiddlywiki/vanilla/metrics/storywidth}then{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] [<storyRiverWidth>addsuffix[px]compare:number:gteq<storyRiverLimit>then<storyRiverLimit>addsuffix[px]] ~[<storyRiverWidth>addsuffix[px]] }}}/>
+					</$set>
+				<%elseif [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+					<$let sidebarMinWidth={{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}multiply[100]divide<widgetNodeWidth>] }}} storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}>
+						<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]compare:number:lteq{$:/themes/tiddlywiki/vanilla/metrics/storywidth}then{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] [<storyRiverWidth>addsuffix[px]compare:number:gteq<storyRiverLimit>then<storyRiverLimit>addsuffix[px]] ~[<storyRiverWidth>addsuffix[px]] }}}/>
+					</$let>
+				<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+					<$let storyWidthConverted={{{ [<widgetNodeWidth>multiply{$:/themes/tiddlywiki/vanilla/metrics/storywidth}divide[100]] }}} storyRiverLimit={{{ [<widgetNodeWidth>subtract{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}>
+						<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]compare:number:lteq<storyWidthConverted>then<storyWidthConverted>] [<storyRiverWidth>addsuffix[px]compare:number:gteq<storyRiverLimit>then<storyRiverLimit>addsuffix[px]] ~[<storyRiverWidth>addsuffix[px]] }}}/>
+					</$let>
+				<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] +[is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] %>
+					<$let storyWidthConverted={{{ [<widgetNodeWidth>multiply{$:/themes/tiddlywiki/vanilla/metrics/storywidth}divide[100]] }}} sidebarMinWidth={{{ [<widgetNodeWidth>multiply{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}divide[100]] }}} storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}>
+						<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]compare:number:lteq<storyWidthConverted>then<storyWidthConverted>] [<storyRiverWidth>addsuffix[px]compare:number:gteq<storyRiverLimit>then<storyRiverLimit>addsuffix[px]] ~[<storyRiverWidth>addsuffix[px]] }}}/>
+					</$let>
+				<% endif %>
+			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storyright}] %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>divide<widgetNodeWidth>multiply[100]addsuffix[%]] }}}/>
+			<% else %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
+			<% endif %>
 		<% else %>
-			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>addsuffix[px]] }}}/>
+			<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>addsuffix[px]] }}}/>
+			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>divide<widgetNodeWidth>multiply[100]addsuffix[%]] }}}/>
+			<% else %>
+				<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidth>addsuffix[px]] }}}/>
+			<% endif %>
 		<% endif %>
 	</$let>
 <% endif %>
