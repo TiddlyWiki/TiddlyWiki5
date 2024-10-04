@@ -1,0 +1,26 @@
+title: $:/core/ui/PageTemplate/sidebar-resizer
+tags: $:/tags/PageTemplate
+list-after: $:/core/ui/PageTemplate/story
+
+\import $:/core/macros/sidebar-resizer
+\whitespace trim
+
+<$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>> $pointerup=<<sidebar-resizer-pointercancel-actions>>>
+
+<%if [{$:/state/sidebar}!match[no]] %>
+
+<$eventcatcher tag="div" class="tc-sidebar-resizer-pointermove-eventcatcher-wrapper" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerup={{{ [[$:/state/sidebar/resizing]!is[missing]then<sidebar-resizer-pointercancel-actions>] }}}>
+
+<$eventcatcher tag="div" selector=".tc-sidebar-resizer-pointermove" matchSelector=".tc-sidebar-resizer-pointermove" class="tc-sidebar-resizer-pointermove-eventcatcher" $pointerup=<<sidebar-resizer-pointercancel-actions>> $pointerleave=<<sidebar-resizer-pointercancel-actions>> $pointerout=<<sidebar-resizer-pointercancel-actions>> $pointercancel=<<sidebar-resizer-pointercancel-actions>> $pointerdown=<<sidebar-resizer-pointercancel-actions>> $touchstart=<<sidebar-resizer-pointercancel-actions>> $pointermove=<<sidebar-resizer-pointermove-actions>> $contextmenu=<<sidebar-resizer-pointercancel-actions>>>
+
+<div class="tc-sidebar-resizer-pointermove"/>
+
+</$eventcatcher>
+
+<div class="tc-sidebar-resizer"/>
+
+</$eventcatcher>
+
+<% endif %>
+
+</$eventcatcher>
