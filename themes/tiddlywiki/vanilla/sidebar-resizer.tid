@@ -107,7 +107,7 @@ code-body: yes
 	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
 
 		.tc-sidebar-resizer {
-			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - 36px),calc({{$:/themes/tiddlywiki/vanilla/metrics/storyright}} - 36px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} - 36px));
+			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - 28px),calc({{$:/themes/tiddlywiki/vanilla/metrics/storyright}} - 28px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} - 28px));
 		}
 
 	<% else %>
