@@ -55,10 +55,6 @@ code-body: yes
 
 	<%if [[$:/state/sidebar/resizing]!is[missing]] %>
 
-		.tc-sidebar-resizer-pointerdown-eventcatcher {
-			z-index: 800;
-		}
-
 		.tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
 			z-index: 801;
 		}
