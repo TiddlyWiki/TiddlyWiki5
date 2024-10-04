@@ -37,7 +37,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 }
 
 .mws-logout-form {
-  margin-left: 10px;
+	margin-left: 10px;
 }
 
 .mws-logout-button {
@@ -49,7 +49,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 }
 
 .mws-logout-button:hover {
-  background-color: #d32f2f;
+	background-color: #d32f2f;
 }
 
 .mws-admin-dropdown {
@@ -67,7 +67,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 }
 
 .mws-admin-dropbtn:hover, .mws-admin-dropbtn:focus {
-  cursor: pointer;
+	cursor: pointer;
 	opacity: 0.8;
 }
 

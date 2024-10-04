@@ -38,7 +38,7 @@ Command to create users and grant permission
   
     var username = this.params[0];
     var password = this.params[1];
-    var email = this.params[2] || username + "@tiddlywiki.com";
+    var email = this.params[2] || username + "@example.com";
     var hashedPassword = crypto.createHash("sha256").update(password).digest("hex");
   
     var user = $tw.mws.store.sqlTiddlerDatabase.getUserByUsername(username);

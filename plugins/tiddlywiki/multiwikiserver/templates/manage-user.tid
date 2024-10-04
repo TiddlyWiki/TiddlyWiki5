@@ -7,142 +7,142 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 </$tiddler>
 
 <div class="user-profile-container">
-  <div class="user-profile-header">
-    <div class="user-profile-avatar">
-      <$text text={{{ [<user>jsonget[username]substr[0,1]uppercase[]] }}}/>
-    </div>
-    <h1 class="user-profile-name"><$text text={{{ [<user>jsonget[username]] }}}/></h1>
-    <p class="user-profile-email"><$text text={{{ [<user>jsonget[email]] }}}/></p>
-  </div>
-  
-  <div class="user-profile-details">
-    <div class="user-profile-item">
-      <span class="user-profile-label">User ID:</span>
-      <span class="user-profile-value"><$text text={{{ [<user>jsonget[user_id]] }}}/></span>
-    </div>
-    <div class="user-profile-item">
-      <span class="user-profile-label">Created At:</span>
-      <span class="user-profile-value"><$text text={{{ [<user>jsonget[created_at]split[T]first[]] }}}/></span>
-    </div>
-    <div class="user-profile-item">
-      <span class="user-profile-label">Last Login:</span>
-      <span class="user-profile-value"><$text text={{{ [<user>jsonget[last_login]split[T]first[]] }}}/></span>
-    </div>
-    
-    <div class="user-profile-roles">
-      <h2>User Roles</h2>
-      <ul>
-        <$list filter="[<user-roles>jsonindexes[]]" variable="role-index">
-          <li>
-            <$text text={{{ [<user-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
-          </li>
-        </$list>
-      </ul>
-    </div>
+	<div class="user-profile-header">
+		<div class="user-profile-avatar">
+			<$text text={{{ [<user>jsonget[username]substr[0,1]uppercase[]] }}}/>
+		</div>
+		<h1 class="user-profile-name"><$text text={{{ [<user>jsonget[username]] }}}/></h1>
+		<p class="user-profile-email"><$text text={{{ [<user>jsonget[email]] }}}/></p>
+	</div>
+	
+	<div class="user-profile-details">
+		<div class="user-profile-item">
+			<span class="user-profile-label">User ID:</span>
+			<span class="user-profile-value"><$text text={{{ [<user>jsonget[user_id]] }}}/></span>
+		</div>
+		<div class="user-profile-item">
+			<span class="user-profile-label">Created At:</span>
+			<span class="user-profile-value"><$text text={{{ [<user>jsonget[created_at]split[T]first[]] }}}/></span>
+		</div>
+		<div class="user-profile-item">
+			<span class="user-profile-label">Last Login:</span>
+			<span class="user-profile-value"><$text text={{{ [<user>jsonget[last_login]split[T]first[]] }}}/></span>
+		</div>
+		
+		<div class="user-profile-roles">
+			<h2>User Roles</h2>
+			<ul>
+				<$list filter="[<user-roles>jsonindexes[]]" variable="role-index">
+					<li>
+						<$text text={{{ [<user-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
+					</li>
+				</$list>
+			</ul>
+		</div>
 </div>
 
 <style>
 .user-profile-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+	max-width: 600px;
+	margin: 2rem auto;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
 }
 
 .user-profile-header {
-  background: #3498db;
-  color: #fff;
-  padding: 2rem;
-  text-align: center;
+	background: #3498db;
+	color: #fff;
+	padding: 2rem;
+	text-align: center;
 }
 
 .user-profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 1rem;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  * {
-    color: #3498db;
-  }
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	margin: 0 auto 1rem;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 3rem;
+	* {
+		color: #3498db;
+	}
 }
 
 .user-profile-name {
-  font-size: 1.5rem;
-  margin: 0;
+	font-size: 1.5rem;
+	margin: 0;
 }
 
 .user-profile-email {
-  font-size: 1rem;
-  opacity: 0.8;
-  margin: 0.5rem 0 0;
+	font-size: 1rem;
+	opacity: 0.8;
+	margin: 0.5rem 0 0;
 }
 
 .user-profile-details {
-  padding: 2rem;
+	padding: 2rem;
 }
 
 .user-profile-item {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 .user-profile-label {
-  font-weight: bold;
-  color: #555;
+	font-weight: bold;
+	color: #555;
 }
 
 .user-profile-value {
-  color: #333;
+	color: #333;
 }
 
 .user-profile-roles {
-  margin-top: 2rem;
+	margin-top: 2rem;
 }
 
 .user-profile-roles h2 {
-  font-size: 1.2rem;
-  color: #3498db;
-  margin-bottom: 1rem;
+	font-size: 1.2rem;
+	color: #3498db;
+	margin-bottom: 1rem;
 }
 
 .user-profile-roles ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
 .user-profile-roles li {
-  background: #f1f1f1;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: inline-block;
-  margin-right: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+	background: #f1f1f1;
+	padding: 0.5rem 1rem;
+	border-radius: 20px;
+	display: inline-block;
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
+	font-size: 0.9rem;
 }
 
 .user-profile-roles-management {
-    margin-top: 2rem;
+		margin-top: 2rem;
 }
 
 .user-profile-roles-management select {
-    margin-right: 1rem;
+		margin-right: 1rem;
 }
 
 .user-actions {
-    margin-top: 0.5rem;
+		margin-top: 0.5rem;
 }
 .user-actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    margin-right: 0.5rem;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.25rem 0.5rem;
+		margin-right: 0.5rem;
 }
 </style>

@@ -43,7 +43,7 @@
 			"--mws-add-role", "USER", "Basic User",
 			"--mws-assign-role-permission", "ADMIN", "READ",
 			"--mws-assign-role-permission", "ADMIN", "WRITE",
-			"--mws-assign-role-permission", "USER", "READ",
+			"--mws-assign-role-permission", "USER", "READ"
 			]
 	}
 }

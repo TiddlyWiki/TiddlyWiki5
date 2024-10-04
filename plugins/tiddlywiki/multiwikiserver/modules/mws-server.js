@@ -302,22 +302,6 @@ Server.prototype.addRoute = function(route) {
 	this.routes.push(route);
 };
 
-Server.prototype.verifyPassword = function(inputPassword, storedHash) {
-	const hashedInput = this.hashPassword(inputPassword);
-  return hashedInput === storedHash;
-};
-
-Server.prototype.hashPassword = function(password) {
-	return crypto.createHash('sha256').update(password).digest('hex');
-};
-
-Server.prototype.createSession = function(userId) {
-	const sessionId = crypto.randomBytes(16).toString('hex');
-	// Store the session in your database or in-memory store
-	this.sqlTiddlerDatabase.createOrUpdateUserSession(userId, sessionId);
-	return sessionId;
-};
-
 Server.prototype.addAuthenticator = function(AuthenticatorClass) {
 	// Instantiate and initialise the authenticator
 	var authenticator = new AuthenticatorClass(this),
@@ -419,7 +403,7 @@ Server.prototype.requestAuthentication = function(response) {
 
 Server.prototype.redirectToLogin = function(response, returnUrl) {
 	if (!response.headersSent) {
-			const validReturnUrlRegex = /^\/(?!.*\.(ico|png|jpg|jpeg|gif|svg|css|js|woff|woff2|ttf|eot)$).*$/;
+			const validReturnUrlRegex = /^\/(?!.*\.(ico|png|jpg|jpeg|gif|svg|css|js|woff|woff2|ttf|eot|json)$).*$/;
 			var sanitizedReturnUrl = '/';  // Default to home page
 
 			if (validReturnUrlRegex.test(returnUrl)) {

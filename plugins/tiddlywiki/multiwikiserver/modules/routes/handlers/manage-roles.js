@@ -22,12 +22,12 @@ exports.handler = function(request, response, state) {
   response.writeHead(200, "OK", {"Content-Type": "text/html"});
 
   var html = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
-      variables: {
-        "page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles",
-        "roles-list": JSON.stringify(roles),
-				"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
-        "user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
-      }
+    variables: {
+      "page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles",
+      "roles-list": JSON.stringify(roles),
+      "username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
+      "user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
+    }
   });
   response.write(html);
   response.end();

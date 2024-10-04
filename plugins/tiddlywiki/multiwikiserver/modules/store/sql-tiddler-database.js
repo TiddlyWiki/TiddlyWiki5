@@ -221,8 +221,8 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 	if(admin) {	
 		const readPermission = this.getPermissionByName('READ');
 		const writePermission = this.getPermissionByName('WRITE');
-		this.createACL(updateBags.lastInsertRowid, 'bag', admin.role_id, readPermission.permission_id);
-		this.createACL(updateBags.lastInsertRowid, 'bag', admin.role_id, writePermission.permission_id);
+		this.createACL(bag_name, 'bag', admin.role_id, readPermission.permission_id);
+		this.createACL(bag_name, 'bag', admin.role_id, writePermission.permission_id);
 	}
 	return updateBags.lastInsertRowid;
 };
@@ -294,8 +294,8 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 	if(admin) {
 		const readPermission = this.getPermissionByName('READ');
 		const writePermission = this.getPermissionByName('WRITE');
-		this.createACL(updateRecipes.lastInsertRowid, 'recipe', admin.role_id, readPermission.permission_id);
-		this.createACL(updateRecipes.lastInsertRowid, 'recipe', admin.role_id, writePermission.permission_id);
+		this.createACL(recipe_name, 'recipe', admin.role_id, readPermission.permission_id);
+		this.createACL(recipe_name, 'recipe', admin.role_id, writePermission.permission_id);
 	}
 	return updateRecipes.lastInsertRowid;
 };
@@ -1050,12 +1050,12 @@ SqlTiddlerDatabase.prototype.listPermissions = function() {
 };
 
 // ACL CRUD operations
-SqlTiddlerDatabase.prototype.createACL = function(entityId, entityType, roleId, permissionId) {
+SqlTiddlerDatabase.prototype.createACL = function(entityName, entityType, roleId, permissionId) {
 	const result = this.engine.runStatement(`
-			INSERT INTO acl (entity_name, entity_type, role_id, permission_id)
-			VALUES ($entityId, $entityType, $roleId, $permissionId)
+			INSERT OR IGNORE INTO acl (entity_name, entity_type, role_id, permission_id)
+			VALUES ($entityName, $entityType, $roleId, $permissionId)
 	`, {
-			$entityId: entityId,
+			$entityName: entityName,
 			$entityType: entityType,
 			$roleId: roleId,
 			$permissionId: permissionId
