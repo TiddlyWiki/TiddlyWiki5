@@ -36,10 +36,6 @@ code-body: yes
 			opacity: 0.1;
 		}
 	}
-	
-	.tc-sidebar-resizer-pointerdown-eventcatcher {
-		z-index: 0;
-	}
 
 	.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
 		position: absolute;

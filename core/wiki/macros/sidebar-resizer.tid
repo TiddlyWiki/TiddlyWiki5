@@ -2,7 +2,7 @@ title: $:/core/macros/sidebar-resizer
 
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]then<modifier>match[normal]] %>
-	<$let dragDiff=<<event-fromselected-posx>> dragWidth=<<tv-selectednode-width>> rightDiff={{{ [<dragWidth>subtract<dragDiff>] }}} storyRiverWidth={{{ [<event-fromcatcher-posx>subtract<dragDiff>subtract[14]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add<dragDiff>add[14]] }}}>
+	<$let dragDiff=<<event-fromselected-posx>> dragWidth=<<tv-selectednode-width>> rightDiff={{{ [<dragWidth>subtract<dragDiff>] }}} storyRiverWidth={{{ [<event-fromcatcher-posx>subtract<dragDiff>subtract[14]add[42]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add<dragDiff>add[14]] }}}>
 		<%if  [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
 			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
 			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
@@ -18,7 +18,7 @@ title: $:/core/macros/sidebar-resizer
 \end
 \procedure sidebar-resizer-pointermove-actions()
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
-	<$let storyRiverWidth={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!drag-diff}subtract[14]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add{$:/state/sidebar/resizing!!drag-diff}add[14]] }}}>
+	<$let storyRiverWidth={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!drag-diff}subtract[14]add[42]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add{$:/state/sidebar/resizing!!drag-diff}add[14]] }}}>
 		<%if  [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
 			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
 			<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidth>addsuffix[px]] }}}/>
