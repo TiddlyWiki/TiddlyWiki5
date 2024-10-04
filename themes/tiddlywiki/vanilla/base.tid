@@ -1027,7 +1027,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-sidebar-scrollable {
 		position: fixed;
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
-		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),{{$:/themes/tiddlywiki/vanilla/metrics/storyright}},calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
+		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}),{{$:/themes/tiddlywiki/vanilla/metrics/storyright}},calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
 		bottom: 0;
 		right: 0;
 		overflow-y: auto;
