@@ -1,0 +1,27 @@
+created: 20210101150806938
+modified: 20241004111247100
+original-modified: 20210101151403345
+tags: Community
+title: Community Plugins
+ja-title: コミュニティプラグイン
+caption: プラグイン
+
+~TiddlyWiki[[コミュニティ|Community]]によって作成されたプラグインです。Webサイトにアクセスしてプラグインを試してください。インストール手順をよく読み、インストールする前にバックアップしてください。これらのプラグインは常に最新であるとは限らず、バグや望ましくない動作が含まれている可能性があります。さらに多くのプラグインについては、[[TiddlyWiki グループ|Forums]]にアクセスしてください。新しいプラグインは最初にそこに投稿され、発表されます
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Community Plugins]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>
