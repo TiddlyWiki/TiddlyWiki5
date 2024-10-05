@@ -15,7 +15,6 @@ code-body: yes
 		top: 0;
 		height: 100%;
 		width: 22px;
-		z-index: 1;
 		transition: opacity 100ms;
 		opacity: 0.1;
 		cursor: ew-resize;

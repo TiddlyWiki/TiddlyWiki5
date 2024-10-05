@@ -1,5 +1,6 @@
 title: $:/core/ui/PageTemplate/sidebar-resizer
 tags: $:/tags/PageTemplate
+list-after: $:/core/ui/PageTemplate/story
 
 \import $:/core/macros/sidebar-resizer
 \whitespace trim
