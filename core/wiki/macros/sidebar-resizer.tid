@@ -5,7 +5,7 @@ title: $:/core/macros/sidebar-resizer
 
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
-	<$let startPosX=<<event-fromcatcher-posx>> dragGripDiff=<<event-fromselected-posx>> storyRiverWidth={{{ [<event-fromcatcher-posx>subtract<dragGripDiff>subtract[14]add[42]] }}} sidebarWidth={{{ [<tv-widgetnode-width>subtract<event-fromcatcher-posx>add<dragGripDiff>add[14]] }}}>
+	<$let startPosX=<<event-fromcatcher-posx>> dragGripDiff=<<event-fromselected-posx>>>
 		<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] %>
 			<$action-setfield $tiddler="$:/state/sidebar/resizing" start-story-left={{{ [{$:/themes/tiddlywiki/vanilla/metrics/storyleft}compare:number:gteq[0]] ~0px }}}/>
 		<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] %>
