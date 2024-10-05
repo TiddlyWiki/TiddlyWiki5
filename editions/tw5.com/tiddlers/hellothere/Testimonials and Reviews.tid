@@ -1,0 +1,10 @@
+modified: 20241001141521924
+tags: TableOfContents
+title: Testimonials and Reviews
+type: text/vnd.tiddlywiki
+
+<div class="tc-cards">
+<$list filter="[tag[Testimonial]]">
+<$macrocall $name="flex-card" class="tc-card-quote" captionField="caption" descriptionField="text"/>
+</$list>
+</div>

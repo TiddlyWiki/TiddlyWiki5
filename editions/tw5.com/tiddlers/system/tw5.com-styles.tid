@@ -6,6 +6,10 @@ type: text/vnd.tiddlywiki
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
+.tc-tiddler-frame .tc-tiddler-body {
+	font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+}
+
 .tc-hero-heading a.tc-tiddlylink {
 	font-weight: bold;
 }
@@ -86,53 +90,6 @@ type: text/vnd.tiddlywiki
 
 .tc-wrapper-flex {
 	display: flex;
-}
-
-.tc-saving-sidebar {
-	margin: 0;
-	padding: 0;
-	min-width: 200px;
-	overflow: auto;
-}
-
-.tc-saving-sidebar a {
-	display: block;
-}
-
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	.tc-wrapper-flex {
-		flex-direction: column;
-	}
-	.tc-saving-sidebar {
-		width: 100%;
-		height: auto;
-	}
-	.tc-saving-sidebar a {
-		float: left;
-	}
-}
-
-.tc-saving-sidebar-category {
-	margin-bottom: 10px;
-}
-
-.tc-saving-sidebar-category-title {
-	font-weight: bold;
-	margin-bottom: 5px;
-	font-size: 16px;
-}
-
-.tc-saving-sidebar-category-item {
-	margin-left: 10px;
-}
-
-.tc-saving-introduction {
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	align-items: center;
-	padding: 4em;
-	font-style: italic;
 }
 
 .tc-cards {

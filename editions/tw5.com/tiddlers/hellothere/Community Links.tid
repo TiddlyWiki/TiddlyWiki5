@@ -1,0 +1,34 @@
+modified: 20241001141521924
+tags: TableOfContents
+title: Community Links
+type: text/vnd.tiddlywiki
+
+<div class="tc-cards tc-action-card" style="font-size:0.7em;text-align:center;margin:3em auto;">
+<a href="https://talk.tiddlywiki.org/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/help}} ~TalkTW
+</a>
+<a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="border-radius:4px;background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/video}} ~YouTube
+</a>
+<a href="https://discord.gg/HFFZVQ8" class="tc-btn-big-green" style="border-radius:4px;background-color:#5462EB;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/discord}} Discord
+</a>
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#1DA1F2;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/twitter}} Twitter
+</a>
+<a rel="me" href="https://fosstodon.org/@TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#2b90d9;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/mastodon}} Mastodon
+</a>
+<a href="https://github.com/TiddlyWiki/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/github}} ~GitHub
+</a>
+<a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="border-radius:4px;background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
+{{$:/core/images/gitter}} Gitter
+</a>
+<a href="https://www.reddit.com/r/TiddlyWiki5/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF4500;" target="_blank" rel="noopener noreferrer">
+{{Reddit Logo}} Reddit
+</a>
+<a href="https://opencollective.com/tiddlywiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#0c2c66;" target="_blank" rel="noopener noreferrer">
+{{Open Collective Logo}} Open Collective
+</a>
+</div>
