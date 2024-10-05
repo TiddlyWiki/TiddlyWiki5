@@ -1,0 +1,9 @@
+created: 20221123150512675
+modified: 20240901193539459
+tags: 
+title: enlist Operator-todo-dm-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+same problem as "commnds operator" see: [[commands Operator-todo]]

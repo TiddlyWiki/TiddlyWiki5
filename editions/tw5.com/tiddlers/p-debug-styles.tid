@@ -1,0 +1,10 @@
+created: 20221125104553014
+modified: 20221125104915762
+tags: $:/tags/Stylesheet
+title: p-debug-styles
+type: text/vnd.tiddlywiki
+
+
+p {
+  outline: 1px solid blue;
+}

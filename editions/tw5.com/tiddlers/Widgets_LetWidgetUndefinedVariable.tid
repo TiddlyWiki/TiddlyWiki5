@@ -1,0 +1,10 @@
+created: 20240216233554694
+modified: 20240216233739224
+tags: 
+title: Widgets/LetWidgetUndefinedVariable
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<$let test1=<<test>> test2={{{ [<test1>] }}}>
+<<test2>>
+</$let>

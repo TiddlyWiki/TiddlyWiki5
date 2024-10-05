@@ -1,0 +1,16 @@
+created: 20240216230908147
+modified: 20240216231039038
+tags: 
+title: Actions
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+<!-- Define the <$action.mywidget> widget by defining a transcludable variable with that name -->
+\widget $action.mywidget(one:'Jaguar')
+\whitespace trim
+<$action-setfield $tiddler="Result" $field="text" $value=<<one>>/>
+\end
+
+<$action.mywidget one="Dingo">
+	Crocodile
+</$action.mywidget>

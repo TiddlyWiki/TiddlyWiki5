@@ -23,4 +23,4 @@ title: Output
 +
 title: ExpectedResult
 
-<p><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#1">1</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#2">2</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#3">3</a></span></p><p>None!</p>
+<span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#1">1</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#2">2</a></span><span><a class="tc-tiddlylink tc-tiddlylink-missing" href="#3">3</a></span>None!

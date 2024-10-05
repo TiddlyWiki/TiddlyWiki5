@@ -1,0 +1,13 @@
+created: 20221123150202184
+modified: 20240901193634347
+tags: 
+title: commands Operator-todo-dm-fixed
+type: text/vnd.tiddlywiki
+
+<$link to={{{ [all[current]removesuffix[-todo]] }}}/>
+
+[img[command-operator-old.png]]
+
+----
+
+[img[commands-operator-new.png]]

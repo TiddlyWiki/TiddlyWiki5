@@ -1,0 +1,12 @@
+created: 20240217003617699
+modified: 20240217004716416
+tags: 
+title: Transclude/Parameterised/Positional/Shortcut/Parameters
+type: text/vnd.tiddlywiki
+
+\whitespace trim
+{{TiddlerOneA}}
+{{TiddlerOneA|Ferret}}
+{{TiddlerOneA|Butterfly|Moth}}
+{{TiddlerOneA|Beetle|Scorpion|Snake}}
+{{TiddlerOneA||TiddlerTwoA|Beetle|Scorpion|Snake}}
