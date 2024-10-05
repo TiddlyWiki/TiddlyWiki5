@@ -3,7 +3,7 @@ tags: TableOfContents
 title: Find Out More
 type: text/vnd.tiddlywiki
 
-
+\parsermode inline
 <div class="tc-cards">
 <$list filter="[tag[HelloThumbnail]]">
 <$macrocall $name="flex-card" captionField="caption" descriptionField="text"/>

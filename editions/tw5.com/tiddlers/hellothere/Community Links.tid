@@ -3,7 +3,8 @@ tags: TableOfContents
 title: Community Links
 type: text/vnd.tiddlywiki
 
-<div class="tc-cards tc-action-card" style="font-size:0.7em;text-align:center;margin:3em auto;">
+\parsermode inline
+<div class="tc-cards tc-action-card" style="font-size:0.7em;text-align:center;margin:0 auto;">
 <a href="https://talk.tiddlywiki.org/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
 {{$:/core/images/help}} ~TalkTW
 </a>
