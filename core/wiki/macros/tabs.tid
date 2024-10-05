@@ -2,6 +2,9 @@ title: $:/core/macros/tabs
 tags: $:/tags/Macro
 code-body: yes
 
+<!-- This global function can be used when the explicitState parameter is used with tabs-macros -->
+\function tf.tabs-getExplicitState() [<currentTab>get[explicitState]] ~[<currentTiddler>get[explicitState]] ~[<thisTiddler>get[explicitState]]
+
 \define tabs-button()
 \whitespace trim
 <$button
