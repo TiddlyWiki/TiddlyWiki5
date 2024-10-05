@@ -191,17 +191,23 @@ title: $:/core/macros/sidebar-resizer
 				<<set-storyleft-actions-pixel>>
 			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] %>
 				<<set-storyleft-actions-percentage>>
+			<% else %>
+				<<set-storyleft-actions-pixel>>
 			<% endif %>
 			<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/storyright}] %>
 				<<set-storyright-actions-pixel>>
 			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/storyright}] %>
 				<<set-storyright-actions-percentage>>
+			<% else %>
+				<<set-storyright-actions-pixel>>
 			<% endif %>
 		<% else %>
 			<%if [is.pixel.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] %>
 				<<set-sidebarwidth-actions-pixel>>
 			<%elseif [is.percentage.value{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] %>
 				<<set-sidebarwidth-actions-percentage>>
+			<% else %>
+				<<set-sidebarwidth-actions-pixel>>
 			<% endif %>
 		<% endif %>
 	</$let>
