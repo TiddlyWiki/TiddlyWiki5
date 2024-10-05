@@ -1,0 +1,21 @@
+created: 20231028120432257
+modified: 20240206113509050
+tags: [[lingo Macro]] [[Macro Examples]]
+title: lingo (for custom plugin) Macro (Examples)
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/plugins/tiddlywiki/menubar/language/
+
+Given the `\define lingo-base() $:/plugins/tiddlywiki/menubar/language/`, this example shows the localizaion key `Config/MenuItems/Heading` being translate to the text in [[$:/plugins/tiddlywiki/menubar/language/en-GB/Config/MenuItems/Heading]]:
+
+<$macrocall $name=".example" n="1" eg="""<<lingo Config/MenuItems/Heading>>"""/>
+
+This example shows the `lingo-base` can be prepend to the key, and do a transclusion:
+
+<$macrocall $name=".example" n="2" eg="""{{$:/plugins/tiddlywiki/menubar/language/Config/MenuItems/Heading}}"""/>
+
+When use lingo macro in a [[Inline Mode WikiText]] like [[list|Lists in WikiText]] or [[title|Headings in WikiText]], the parse mode will be inline, so translated text will be inlined too.
+
+<$macrocall $name=".example" n="3" eg="""# <<lingo Config/MenuItems/Heading>>"""/>
+
+<$macrocall $name=".example" n="4" eg="""!! <<lingo Config/MenuItems/Heading>>"""/>
