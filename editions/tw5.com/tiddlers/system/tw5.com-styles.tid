@@ -132,7 +132,8 @@ type: text/vnd.tiddlywiki
 
 .tc-tiddlylink.tc-card {
 	font-weight: normal;
-	max-width: 100%;
+	flex-grow: 1;
+	max-width: 250px;
 	position: relative;
 	background: <<colour background>>;
 	color: <<colour foreground>>;
