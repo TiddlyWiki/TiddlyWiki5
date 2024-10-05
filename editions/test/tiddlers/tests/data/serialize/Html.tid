@@ -1,0 +1,11 @@
+tags: $:/tags/wikitext-serialize-test-spec
+title: Serialize/Html
+type: text/vnd.tiddlywiki
+
+<aside>
+This is an HTML5 aside element
+</aside>
+
+<$slider target="MyTiddler">
+This is a widget invocation
+</$slider>

@@ -84,4 +84,10 @@ exports.parse = function() {
 	}
 };
 
+exports.serialize = function(tree, serialize) {
+	var transcludeblock = require("$:/core/modules/parsers/wikiparser/rules/transcludeblock.js");
+	var result = transcludeblock.serialize(tree, serialize);
+	return result.trimEnd();
+};
+
 })();

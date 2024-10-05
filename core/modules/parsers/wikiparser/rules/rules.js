@@ -57,8 +57,32 @@ exports.parse = function() {
 	if(tokens.length > 0) {
 		this.parser.amendRules(tokens[0],tokens.slice(1));
 	}
-	// No parse tree nodes to return
-	return [];
+	// No widget to render, return void node.
+	return [{
+		type: "void",
+		attributes: {
+			action: {type: "string", value: tokens[0]},
+			rules: {type: "string", value: tokens.slice(1).join(" ")}
+		},
+		children: []
+	}];
+};
+
+exports.serialize = function (tree, serialize) {
+	var result = [];
+	if(tree.attributes.action && tree.attributes.rules) {
+		// tree.attributes.action.value: "except"
+		// tree.attributes.rules.value: "ruleone ruletwo rulethree"
+		result.push("\\rules " + tree.attributes.action.value + " " + tree.attributes.rules.value);
+		tree.children.forEach(function (child) {
+			if(child.type === "void" && child.attributes.action && child.attributes.rules) {
+				// child.attributes.action.value: "only"
+				// child.attributes.rules.value: "ruleone ruletwo rulethree"
+				result.push("\\rules " + child.attributes.action.value + " " + child.attributes.rules.value);
+			}
+		});
+	}
+	return result.join("\n");
 };
 
 })();

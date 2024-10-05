@@ -130,4 +130,13 @@ exports.parseImage = function(source,pos) {
 	return node;
 };
 
+exports.serialize = function(tree) {
+	var width = tree.attributes.width ? " " + $tw.utils.serializeAttribute(tree.attributes.width) : "";
+	var height = tree.attributes.height ? " " + $tw.utils.serializeAttribute(tree.attributes.height) : "";
+	var padSpace = width || height ? " " : "";
+	var tooltip = tree.attributes.tooltip ? tree.attributes.tooltip.value + "|" : "";
+	var source = tree.attributes.source.value;
+	return "[img" + width + height + padSpace + "[" + tooltip + source + "]]";
+};
+
 })();

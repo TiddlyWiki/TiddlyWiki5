@@ -25,7 +25,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(\.(?:[^\r\n\s]+)\s+)?/mg;
+	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?\s*(\.(?:[^\r\n\s]+)\s+)?/mg;
 };
 
 exports.parse = function() {
@@ -53,6 +53,21 @@ exports.parse = function() {
 		$tw.utils.addClassToParseTreeNode(node,"tc-inline-style");
 	}
 	return [node];
+};
+
+exports.serialize = function(tree, serialize) {
+	var result = "@@";
+	// Add styles if present
+	if(tree.attributes && tree.attributes.style) {
+		result += tree.attributes.style.value.trim();
+	}
+	// Add classes if present
+	if(tree.attributes && tree.attributes.class) {
+		result += "." + tree.attributes.class.value.trim().split(" ").join(".");
+	}
+	// Serialize children and append to result
+	result += " " + serialize(tree.children) + "@@";
+	return result;
 };
 
 })();

@@ -25,7 +25,7 @@ Note that the syntax for comments is simplified to an opening "<!--" sequence an
 "use strict";
 
 exports.name = "commentblock";
-exports.types = {block:true, pragma:true};
+exports.types = {block: true, pragma: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
@@ -46,11 +46,25 @@ exports.findNextMatch = function(startPos) {
 	return undefined;
 };
 
+
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.endMatchRegExp.lastIndex;
-	// Don't return any elements
-	return [];
+	// Return a node representing the comment that is not rendered
+	var commentStart = this.match.index;
+	var commentEnd = this.endMatch.index + this.endMatch[0].length;
+	var commentText = this.parser.source.slice(commentStart, commentEnd);
+	return [{
+			type: "void",
+			children: [],
+			text: commentText,
+			start: commentStart,
+			end: commentEnd
+	}];
+};
+
+exports.serialize = function(tree, serialize) {
+	return tree.text + "\n\n" + serialize(tree.children);
 };
 
 })();
