@@ -12,6 +12,27 @@ Wiki text rule for code blocks. For example:
 ```
 
 \*/
+
+/**
+ * @typedef {import("$:/core/modules/parsers/base.js").ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ * @typedef {typeof exports & WikiRuleBase} ThisRule
+ */
+
+/**
+ * Represents the `codeblock` rule.
+ * 
+ * @typedef {Object} ParseTreeCodeblockNode
+ * @property {"codeblock"} rule
+ * @property {"codeblock"} type
+ * @property {number} start
+ * @property {number} end
+ * @property {Object} attributes
+ * @property {ParseTreeAttribute} attributes.code
+ * @property {ParseTreeAttribute} attributes.language
+ */
+
 (function(){
 
 /*jslint node: true, browser: true */
@@ -27,6 +48,12 @@ exports.init = function(parser) {
 	this.matchRegExp = /```([\w-]*)\r?\n/mg;
 };
 
+/**
+ * Parses the code block and returns an array of `codeblock` widgets.
+ * 
+ * @this {ThisRule}
+ * @returns {ParseTreeCodeblockNode[]} An array containing a single codeblock widget object.
+ */
 exports.parse = function() {
 	var reEnd = /(\r?\n```$)/mg;
 	var languageStart = this.parser.pos + 3,

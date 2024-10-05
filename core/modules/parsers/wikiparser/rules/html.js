@@ -17,6 +17,34 @@ This is a widget invocation
 }}}
 
 \*/
+
+
+/**
+ * @typedef {import("$:/core/modules/parsers/base.js").ParseTreeAttribute} ParseTreeAttribute
+ * @typedef {import('../wikirulebase.js').WikiRuleBase} WikiRuleBase
+ * @typedef {import('../../base.js').Parser} Parser
+ * @typedef {typeof exports & WikiRuleBase & {nextTag?:ParseTreeHtmlNode;}} ThisRule
+ */
+
+/**
+ * Represents the parser `html` rule
+ * 
+ * @typedef {Object} ParseTreeHtmlNode
+ * @property {"html"} rule
+ * @property {"element"} type
+ * @property {keyof HTMLElementTagNameMap} tag
+ * @property {number} start
+ * @property {number} end
+ * @property {Record<string,ParseTreeAttribute>} attributes - Contains attributes of HTML element
+ * @property {boolean} isSelfClosing - If tag is self-closing
+ * @property {boolean} isBlock - If tag is a block element
+ * @property {number} openTagStart
+ * @property {number} openTagEnd
+ * @property {number} closeTagStart
+ * @property {number} closeTagEnd
+ * @property {ParseTreeHtmlNode[]} [children]
+ */
+
 (function(){
 
 /*jslint node: true, browser: true */
@@ -26,10 +54,18 @@ This is a widget invocation
 exports.name = "html";
 exports.types = {inline: true, block: true};
 
+/**
+ * @param {Parser} parser 
+ */
 exports.init = function(parser) {
 	this.parser = parser;
 };
 
+/**
+ * @this {ThisRule}
+ * @param {number} startPos 
+ * @returns {number | undefined} Start position of next HTML tag
+ */
 exports.findNextMatch = function(startPos) {
 	// Find the next tag
 	this.nextTag = this.findNextTag(this.parser.source,startPos,{
@@ -38,11 +74,16 @@ exports.findNextMatch = function(startPos) {
 	return this.nextTag ? this.nextTag.start : undefined;
 };
 
-/*
-Parse the most recent match
-*/
+/**
+ * Parse most recent match
+ * @this {ThisRule}
+ * @returns {ParseTreeHtmlNode[]} Array containing parsed HTML tag object
+ */
 exports.parse = function() {
-	// Retrieve the most recent match so that recursive calls don't overwrite it
+	/**
+	 * @type {ParseTreeHtmlNode}
+	 * Retrieve the most recent match so that recursive calls don't overwrite it
+	 */
 	var tag = this.nextTag;
 	if (!tag.isSelfClosing) {
 		tag.openTagStart = tag.start;
@@ -161,6 +202,15 @@ exports.parseTag = function(source,pos,options) {
 	return node;
 };
 
+/**
+ * Find the next HTML tag in the source
+ * 
+ * @this {ThisRule}
+ * @param {string} source
+ * @param {number} pos - Position to start searching from
+ * @param {Object} options
+ * @returns {Object|null} Parsed tag object or null if no valid tag is found
+ */
 exports.findNextTag = function(source,pos,options) {
 	// A regexp for finding candidate HTML tags
 	var reLookahead = /<([a-zA-Z\-\$\.]+)/g;
