@@ -52,6 +52,8 @@ var CsvParser = function(type,text,options) {
 		tag = "td";
 		this.tree[0].children[0].children[0].children.push(row);
 	}
+	this.source = text;
+	this.type = type;
 };
 
 exports["text/csv"] = CsvParser;

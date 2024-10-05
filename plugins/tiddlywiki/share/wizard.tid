@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/share/wizard
 
 \define generate-json()
-<$macrocall $name="jsontiddlers" filter=<<share-filter>> spaces="" $output="text/vnd.tiddlywiki"/>
+<$macrocall $name="jsontiddlers" filter=<<share-filter>> spaces="" $output="text/raw"/>
 \end
 
 \define inner-share-actions()
@@ -12,8 +12,10 @@ title: $:/plugins/tiddlywiki/share/wizard
 
 \define share-actions()
 <$set name="base-url" value={{$:/config/plugins/share/base-url}} emptyValue={{$:/info/url/full}}>
+<$set name="tv-action-refresh-policy" value="always">
 <$set name="share-filter" value={{$:/config/plugins/share/filter}}>
 <<inner-share-actions>>
+</$set>
 </$set>
 </$set>
 \end

@@ -8,4 +8,4 @@ A JSON tiddler is a [[data tiddler|DataTiddlers]] containing a [[JSON|JavaScript
 
 Its [[ContentType]] is `application/json`.
 
-The [[history list|$:/HistoryList]] is an of a JSON tiddler.
+The [[history list|$:/HistoryList]] is an example of a JSON tiddler.

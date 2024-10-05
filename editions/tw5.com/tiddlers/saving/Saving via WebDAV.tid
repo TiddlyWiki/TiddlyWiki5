@@ -34,7 +34,7 @@ Lightweight, portable and easy to use solutions
 *   ~SharePoint / ~OneDrive for Windows
 ** Save your ~TiddlyWiki file with an `.aspx` extension
 ** Copy it to a ~SharePoint/~OneDrive for Business sync'd library
-**   As long as ~WebDAV hasn’t been disabled, renaming single-file wiki from .html to .aspx “just works” when stored in one of these folders
+**   As long as ~WebDAV has not been disabled, renaming single-file wiki from .html to .aspx “just works” when stored in one of these folders
 ** This //might// work with Mac also.
 
 !! OSX

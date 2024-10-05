@@ -1,0 +1,38 @@
+title: Transclude/Typed
+description: Typed transclusion
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure testproc()
+This is ''wikitext''
+\end
+
+<$transclude $variable="testproc"/>
+-
+<$transclude $variable="testproc" $type="text/plain"/>
+
+<$transclude $tiddler="Data" $index="testindex"/>
+-
+<$transclude $tiddler="Data" $index="testindex" $type="text/plain"/>
+
+<$transclude $tiddler="Data" $field="custom"/>
+-
+<$transclude $tiddler="Data" $field="custom" $type="text/plain"/>
++
+title: Data
+type: application/x-tiddler-dictionary
+custom: This is ''wikitext''
+
+testindex: This is ''wikitext''
++
+title: ExpectedResult
+
+<p>This is <strong>wikitext</strong>
+-
+<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong>wikitext</strong>
+-
+<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong>wikitext</strong>
+-
+<pre><code>This is ''wikitext''</code></pre></p>

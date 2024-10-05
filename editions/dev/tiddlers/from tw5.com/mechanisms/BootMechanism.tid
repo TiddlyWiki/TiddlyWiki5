@@ -23,7 +23,7 @@ The boot kernel includes:
 * Several short shared utility functions
 * A handful of methods implementing the module mechanism
 * The `$tw.Tiddler` class (and field definition plugins)
-* The `$tw.Wiki` class (and tiddler deserialization methods)
+* The `$tw.Wiki` class (and tiddler deserialisation methods)
 * Code for the browser to load tiddlers from the HTML DOM
 * Code for the server to load tiddlers from the file system
 

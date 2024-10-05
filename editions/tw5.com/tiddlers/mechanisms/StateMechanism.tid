@@ -36,6 +36,6 @@ Now consider the implementation of the info panel within the tiddler template. W
 
 However, we can't track the state in a tiddler called, say, [[$:/InfoPanelState]] because every tiddler would share the same state; changing the value of the tiddler would affect all tiddlers displayed in the story.
 
-The solution is to dynamically generate a unique title for each state tiddler that we need. We need to ensure that the same state tiddler title is generated each time a user interface element is rendered. To do that, we append together tokens representating each of the stack of transclusions that led to the current rendering location. Then that string of symbols is hashed to a simple numeric value.
+The solution is to dynamically generate a unique title for each state tiddler that we need. We need to ensure that the same state tiddler title is generated each time a user interface element is rendered. To do that, we append together tokens representing each of the stack of transclusions that led to the current rendering location. Then that string of symbols is hashed to a simple numeric value.
 
 The process of generating a state tiddler title is encapsulated in the <<.mlink qualify>> macro.

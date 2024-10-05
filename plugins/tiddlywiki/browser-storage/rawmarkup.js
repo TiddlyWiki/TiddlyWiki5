@@ -14,7 +14,6 @@ $tw = window.$tw || Object.create(null);
 $tw.hooks = $tw.hooks || { names: {}};
 $tw.boot = $tw.boot || {};
 $tw.boot.preloadDirty = $tw.boot.preloadDirty || [];
-
 // Hook the point in the startup process when the tiddlers have been loaded but plugins not unpacked
 var hookName = "th-boot-tiddlers-loaded";
 if(Object.prototype.hasOwnProperty.call($tw.hooks.names,hookName)) {

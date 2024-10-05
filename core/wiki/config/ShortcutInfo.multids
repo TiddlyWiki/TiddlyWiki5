@@ -35,6 +35,7 @@ new-tiddler: {{$:/language/Buttons/NewTiddler/Hint}}
 picture: {{$:/language/Buttons/Picture/Hint}}
 preview: {{$:/language/Buttons/Preview/Hint}}
 quote: {{$:/language/Buttons/Quote/Hint}}
+refresh: {{$:/language/Buttons/Refresh/Hint}}
 save-tiddler: {{$:/language/Buttons/Save/Hint}}
 save-wiki: {{$:/language/Buttons/SaveWiki/Hint}}
 sidebar-search: {{$:/language/Buttons/SidebarSearch/Hint}}

@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/tiddlyweb/save/offline
 
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 \define saveTiddlerFilter()
 [is[tiddler]] -[[$:/boot/boot.css]] -[prefix[$:/HistoryList]] -[status[pending]plugin-type[import]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]] -[prefix[$:/temp/]] +[sort[title]] $(publishFilter)$
 \end

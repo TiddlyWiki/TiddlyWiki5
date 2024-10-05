@@ -168,11 +168,11 @@ ViewWidget.prototype.getValueAsHtmlTextEncoded = function() {
 };
 
 ViewWidget.prototype.getValueAsUrlEncoded = function() {
-	return encodeURIComponent(this.getValueAsText());
+	return $tw.utils.encodeURIComponentExtended(this.getValueAsText());
 };
 
 ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
-	return encodeURIComponent(encodeURIComponent(this.getValueAsText()));
+	return $tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.getValueAsText()));
 };
 
 ViewWidget.prototype.getValueAsDate = function(format) {

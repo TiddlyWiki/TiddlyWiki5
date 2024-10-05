@@ -3,5 +3,6 @@
 	"name": "Mobile Drag Drop",
 	"description": "Mobile drag and drop shim",
 	"author": "Tim Ruffles",
-	"list": "readme license"
+	"list": "readme license",
+	"stability": "STABILITY_0_DEPRECATED"
 }

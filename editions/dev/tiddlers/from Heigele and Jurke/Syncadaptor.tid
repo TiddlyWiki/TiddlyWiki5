@@ -5,6 +5,6 @@ sub.num: 3
 tags: doc
 title: Syncadaptor
 
-A module with ``module-type: syncadaptor`` provides functionality to get a list of tiddlers (this list is provided as ~SkinnyTiddlers, which are normal tiddlers without the text field) and to load, save and delete single tiddlers. A syncadaptor can also provide functions to login and logout so that syncadaptor modules can be used to synchronize tiddlers with a remote server.
+A module with ``module-type: syncadaptor`` provides functionality to get a list of tiddlers (this list is provided as ~SkinnyTiddlers, which are normal tiddlers without the text field) and to load, save and delete single tiddlers. A syncadaptor can also provide functions to login and logout so that syncadaptor modules can be used to synchronise tiddlers with a remote server.
 
 The syncer module only uses one syncadaptor and honours a special [[system tiddler|System Tiddlers]] [[$:/config/SyncFilter]] containing a [[filter string|Tags and Filter Mechanism]]. Tiddlers matching this filter string are saved to the server with a syncadapter. It uses the [[WebServer API|https://tiddlywiki.com/#WebServer%20API%3A%20Get%20All%20Tiddlers]] to load modified tiddlers from the server, which returns only non-system tiddlers.

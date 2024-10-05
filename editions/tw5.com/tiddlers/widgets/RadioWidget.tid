@@ -1,6 +1,6 @@
 caption: radio
 created: 20131212195353929
-modified: 20211009121654734
+modified: 20231113093304323
 tags: Widgets TriggeringWidgets
 title: RadioWidget
 type: text/vnd.tiddlywiki
@@ -22,6 +22,8 @@ The content of the `<$radio>` widget is displayed within an HTML `<label>` eleme
 |class |The CSS classes assigned to the label around the radio button <<.from-version "5.1.14">> `tc-radio` is always applied by default, as well as `tc-radio-selected` when selected |
 |actions|<<.from-version "5.1.23">> Optional string containing ActionWidgets to be triggered when the value changes. <br>The variable: ''actionValue'' is available for the actions  |
 |disabled|<<.from-version "5.1.23">> Optional. Set to "yes" to disable the radio input. Defaults to "no" |
+|data-* |<<.from-version "5.3.2">> Optional [[data attributes|https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes]] to be assigned to the `<input>` HTML element |
+|style.* |<<.from-version "5.3.2">> Optional [[CSS properties|https://developer.mozilla.org/en-US/docs/Web/CSS/Reference]] to be assigned to the `<input>` HTML element |
 
 !! Field Mode
 

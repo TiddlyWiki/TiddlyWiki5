@@ -1,0 +1,11 @@
+created: 20230726143617389
+modified: 20230726150625716
+tags: [[Variable Usage]]
+title: Behaviour of variables invoked via filter operator parameter
+type: text/vnd.tiddlywiki
+
+|tc-first-col-min-width|k
+|!how declared|!behaviour|
+|\define|Textual substitution of parameters is performed on the body text. No further processing takes place. The result after textual substitution is used as the filter operator's parameter.|
+|<<.wlink SetWidget>>, <<.wlink LetWidget>>, <<.wlink VarsWidget>>, \procedure, \widget|Body text is retrieved as-is and used as the filter operator's parameter.|
+|\function|The body text of the function is treated as a filter expression and evaluated. The first result is passed to the operator as a parameter. The remaining results are discarded.|

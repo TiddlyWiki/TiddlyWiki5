@@ -32,7 +32,7 @@ Note that within the subfilter, the "currentTiddler" variable is set to the titl
 
 <<.tip "Compare with the similar [[subfilter|subfilter Operator]] operator which runs a subfilter and directly returns the results">>
 
-<<.tip "Compare with the analagous named filter run prefix `:filter`">>
+<<.tip "Compare with the analogous named filter run prefix `:filter`">>
 
 ```
 \define larger-than-1k() [get[text]length[]compare:integer:gteq[1000]]

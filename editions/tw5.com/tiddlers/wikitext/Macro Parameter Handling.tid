@@ -1,0 +1,78 @@
+created: 20220917154902906
+modified: 20230419103154328
+tags: WikiText Macros
+title: Macro Parameter Handling
+type: text/vnd.tiddlywiki
+
+!! Introduction
+
+[[Macros]] parameters are handled in two different ways:
+
+# Textual substitution is always performed for each parameter before the macro contents is used
+# When the macro contents are wikified the parameters are made available as variables. The variable names are formed by wrapping the parameter name with double underscores
+
+Somewhat confusingly, in some situations both of these mechanisms will occur; this is related to the [[pitfalls of using macros|Macro Pitfalls]].
+
+!! Textual Substitution of Parameters and variables
+
+The following substitutions take place before the text of a macro is used:
+
+* The pattern `$param$` is replaced with the value of the named parameter
+* The pattern `$(variable)$` is replaced with the value of the named variable
+
+The actual value of the parameter or variable is substituted for the placeholder whenever the macro is called:
+
+<$macrocall $name="wikitext-example-without-html" src="""\define say-hi-using-parameters(name,address)
+Hi, I'm $name$ and I live in $address$.
+\end
+
+<<say-hi-using-parameters name:"Bugs" address:"Rabbit Hole Hill">>
+"""/>
+
+Here's an example using variable substitution:
+
+<$macrocall $name="wikitext-example-without-html" src="""\define say-hi-using-variables()
+Hi, I'm $(name)$ and I live in $(address)$.
+\end
+
+\define name() Bugs
+
+<$let address="Rabbit Hole Hill">
+<<say-hi-using-variables>>
+</$let>
+"""/>
+
+<<.warning """It is important to note that if the text being inserted contains any substitution tokens then they will in turn be processed. This can lead to unexpected results.""">>
+
+!! Accessing Parameters as Variables
+
+When macros are wikified, the parameters can be accessed as variables with the name of the parameter wrapped with double underscores. For example, the parameter `address` would be accessed as the variable `__address__`.
+
+Thus, the example above could also be expressed as:
+
+<$macrocall $name="wikitext-example-without-html" src="""\define say-hi-using-parameters(name,address)
+Hi, I'm <<__name__>> and I live in <<__address__>>.
+\end
+
+<<say-hi-using-parameters name:"Bugs" address:"Rabbit Hole Hill">>
+"""/>
+
+Accessing parameters as variables only works in macros that are wikified and not, for example, when a macro is used as an attribute value.
+
+!!! Advantages of Accessing Parameters as Variables
+
+The primary advantage of the technique is that it avoids the parameter value being substituted into the macro as a literal string, which in turn can help avoid issues with parameters that contain quotes.
+
+For example, consider this macro. It invokes another macro using the single parameter as an argument for it:
+
+```
+\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line="""$line$"""/>
+```
+
+The code above will fail if the macro is invoked with the argument containing triple double quotes (for example `<<film-quote 'I quote thrice """ - see!?'>>`). Using parameter variables offers a workaround:
+
+```
+\define film-quote(line) <$macrocall $name="anothermacro" actor="Bugs Bunny" line=<<__line__>>/>
+```
+
+See [[Macro Pitfalls]] for more discussion.

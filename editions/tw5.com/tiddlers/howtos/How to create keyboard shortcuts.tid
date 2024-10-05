@@ -77,11 +77,11 @@ In the [[Keyboard Shortcuts Tab|$:/core/ui/ControlPanel/KeyboardShortcuts]] the 
 > If the tiddler has the tag <<tag $:/tags/KeyboardShortcut>>, the field ''key'' with the [[Keyboard Shortcut Descriptor]] as its value and some actions in its text field, the actions will be triggered when the mechanism detects the configured key-combination
 
 <br>
-<$macrocall $name=".tip" _="""''Macros'' defined ''outside'' a global keyboard-shortcut (through a tiddler tagged `$:/tags/Macro`) need to be ''imported'' in order to be accessible.
+<$macrocall $name=".tip" _="""''Macros'' defined ''outside'' a global keyboard-shortcut (through a tiddler tagged `$:/tags/Global`) need to be ''imported'' in order to be accessible.
 The [[import pragma|Pragma]] can be used for that"""/>
 
 <pre>
-\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]
+\import [subfilter{$:/core/config/GlobalImportFilter}]
 </pre>
 
 If the tiddler that contains the macro definition is known and - for example - titled `my-macro-tiddler`

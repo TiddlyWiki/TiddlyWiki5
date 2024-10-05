@@ -1,0 +1,128 @@
+title: ui/geomarker
+
+\define default-traveltime-time() 5400
+
+\define completion-actions()
+<$action-log/>
+<$action-setfield $tiddler="$:/temp/_StatusCode" text=<<status>>/>
+<$action-setfield $tiddler="$:/temp/_StatusText" text=<<statusText>>/>
+<$action-setfield $tiddler="$:/temp/_Error" text=<<error>>/>
+<$action-setfield $tiddler="$:/temp/_Result" text=<<data>>/>
+<$action-setfield $tiddler="$:/temp/_Headers" text=<<headers>>/>
+<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+<$action-createtiddler $basetitle="$:/temp/_IsochroneLayer" text={{{ [<data>] }}} tags="$:/tags/GeoFeature" caption={{{ [<currentTiddler>get[caption]else<currentTiddler>addprefix[Travel time from ]] }}}/>
+</$list>
+\end
+
+\define progress-actions()
+<$action-log message="In progress-actions"/>
+<$action-log/>
+\end
+
+\define payload-source()
+\rules only transcludeinline transcludeblock filteredtranscludeinline filteredtranscludeblock
+{
+  "departure_searches": [
+    {
+      "id": "My first isochrone",
+      "coords": {
+        "lat": {{!!lat}},
+        "lng": {{!!long}}
+      },
+      "departure_time": "2023-02-27T08:00:00Z",
+      "travel_time": {{{ [[$:/config/plugins/geospatial/traveltime/time]get[text]else<default-traveltime-time>] }}},
+      "transportation": {
+        "type": "driving"
+      }
+    }
+  ]
+}
+\end
+
+\define get-traveltime-actions()
+<$wikify name="payload" text=<<payload-source>>>
+	<$action-log $message="Making payload"/>
+	<$action-log/>
+	<$action-sendmessage
+		$message="tm-http-request"
+		url="https://api.traveltimeapp.com/v4/time-map"
+		method="POST"
+		header-accept="application/geo+json"
+		header-Content-Type="application/json"
+		password-header-X-Api-Key="traveltime-secret-key"
+		password-header-X-Application-Id="traveltime-application-id"
+		body=<<payload>>
+		var-currentTiddler=<<currentTiddler>>
+		bind-status="$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status"
+		bind-progress="$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress"
+		oncompletion=<<completion-actions>>
+		onprogress=<<progress-actions>>
+	/>
+</$wikify>
+\end
+
+!! Mapped
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	startPosition="bounds"
+>
+	<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+</$geomap>
+
+!! Distance to other markers
+
+<$let
+	thisLocation={{{ [geopoint{!!long},{!!lat}] }}}
+>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoMarker]sort[caption]] -[<currentTiddler>]">
+<li>
+<$link><$view field="caption"><$view field="title"/></$view></$link>
+--
+<$let
+	otherLocation={{{ [geopoint{!!long},{!!lat}] }}}
+>
+<$text text={{{ [geodistance<thisLocation>,<otherLocation>,[miles]fixed[0]] }}}/> miles
+</$let>
+</li>
+</$list>
+</ul>
+</$let>
+
+!! GeoFeature Lookups
+
+<$let
+	thisLocation={{{ [geopoint{!!long},{!!lat}] }}}
+>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoFeature]sort[caption]]">
+<li>
+<$text text={{{ [<currentTiddler>get[caption]] :else[<currentTiddler>] }}}/> --
+<$text text={{{ [<thisLocation>geolookup{!!text}] }}}/>
+</li>
+</$list>
+</ul>
+</$let>
+
+!! Travel Time
+
+<$button actions=<<get-traveltime-actions>>>
+Call ~TravelTime
+</$button>
+
+Maximum time: <$edit-text tiddler="$:/config/plugins/geospatial/traveltime/time" default=<<default-traveltime-time>> tag="input"/> seconds
+
+|Status |<$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/status}}/> |
+|Progress |<$text text={{$:/temp/plugins/tiddlywiki/geospatial/demo/traveltime/progress}}/> |
+|Status Code |<$text text={{$:/temp/_StatusCode}}/> |
+|Status Text |<$text text={{$:/temp/_StatusText}}/> |
+|Error |<$text text={{$:/temp/_Error}}/> |
+
+<$list filter="[<currentTiddler>has[photo-url]]" variable="ignore">
+
+!! Photo
+
+<img src={{!!photo-url}}/>
+
+</$list>

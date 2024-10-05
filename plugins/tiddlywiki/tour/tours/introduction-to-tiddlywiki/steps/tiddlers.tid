@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/steps/tiddlers
+caption: How does it work?
+tags: $:/tags/Tour/IntroductionToTiddlyWiki
+display-mode: fullscreen
+
+{{$:/config/Tours/IntroductionToTiddlyWiki/ProductName}} lets you collect and organise all kinds of information into interconnected bite-sized pieces called ''tiddlers''.
+
+A tiddler is like an index card.
+
+<$let tv-wikilinks="no">
+
+{{$:/plugins/tiddlywiki/tour/introduction-to-tiddlywiki/tiddlers/Jupiter||$:/plugins/tiddlywiki/tour/simplified-tiddler}}
+
+</$let>
+
+Each tiddler must have a unique title that is used to distinguish it.

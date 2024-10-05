@@ -1,0 +1,33 @@
+created: 20240310165023000
+modified: 20240310172648116
+tags: [[Procedure Syntax]]
+title: Procedure Call Syntax
+type: text/vnd.tiddlywiki
+
+<<.preamble """What follows is a formal presentation of the syntax of the WikiText syntax for procedure calls, using [[railroad diagrams|Railroad Diagrams]].""">>
+
+!! procedure-name
+
+<$railroad text="""
+"<<" [[ procedure-name |Procedures]] [: [[whitespace|"Filter Whitespace"]] [:{param-value}] ]">>"
+"""/>
+
+* The [[procedure's|Procedures]] <<.place procedure-name>> is a sequence of non-whitespace characters other than `(` or `>`.
+
+* <<.place whitespace>> denotes a sequence of [[whitespace characters|Filter Whitespace]].
+
+!!! param-value
+
+Each ''individual'' <<.place param-value>> has the following syntax:
+
+<$railroad text="""
+\start none
+\end none
+[: param-name [:[[whitespace|"Filter Whitespace"]]] ":" [:[[whitespace|"Filter Whitespace"]]] ] value [: [[whitespace|"Filter Whitespace"]] ]
+"""/>
+
+* The <<.place param-name>> is a sequence of letters (`A`--`Z`, `a`--`z`), digits (`0`--`9`), hyphens (`-`) and underscores (`_`).
+
+* The <<.place value>> is specified as follows:
+
+<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>

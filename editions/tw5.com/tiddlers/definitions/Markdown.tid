@@ -1,0 +1,10 @@
+created: 20220727090611178
+modified: 20220728191637376
+tags: Definitions
+title: Markdown
+
+<<<
+Markdown is a text-to-HTML conversion tool for web writers. Markdown allows you to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML).
+<<<https://daringfireball.net/projects/markdown/
+
+~TiddlyWiki and Markdown share some formatting rules eg: [[inline code|Formatting in WikiText]] and [[code blocks|Code Blocks in WikiText]] but WikiText also offers advanced functions like [[transclusions|Transclusion in WikiText]] and [[macros|Macro Calls in WikiText]]

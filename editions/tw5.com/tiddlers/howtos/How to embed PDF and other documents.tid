@@ -1,5 +1,5 @@
 created: 20141117000000000
-modified: 20161229175752081
+modified: 20230803051806817
 tags: Learning
 title: How to embed PDF and other documents
 type: text/vnd.tiddlywiki
@@ -24,7 +24,7 @@ This method be OK as long as your PDF is not too big. There can be concerns if y
 
 !!! 2. Embedding with '_canonical_uri'
 
-The other way is to create a tiddler link to the external file. In this method the file is not actually incorporated into your TW5 file, but can be accessed with the `{{My Image File.jpg}}` transclusion syntax just like an embedded file. The location address of the file can also be changed under [[node.js]]. See [[ExternalImages]] for details of using external images with node.js.
+The other way is to create a tiddler link to the external file. In this method the file is not actually incorporated into your TW5 file, but can be accessed with the `{{My Image File.jpg}}` transclusion syntax just like an embedded file. The location address of the file can also be changed under [[Node.js]]. See [[ExternalImages]] for details of using external images with node.js.
 
 Create a tiddler with a field `_canonical_uri`. Put in the local address to the external file. Set the `type` field to `application/pdf`.
 

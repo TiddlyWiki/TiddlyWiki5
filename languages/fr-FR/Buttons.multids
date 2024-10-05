@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: résilier le mot de passe
 Encryption/ClearPassword/Hint: Résilie le mot de passe et sauvegarde ce wiki sans chiffrement
 Encryption/SetPassword/Caption: affecter un mot de passe
 Encryption/SetPassword/Hint: Affecte un mot de passe pour sauvegarde une version chiffrée de ce wiki
+EmergencyDownload/Caption: Télécharge les tidders au format json
 ExportPage/Caption: exporter tout
 ExportPage/Hint: Exporte tous les tiddlers
 ExportTiddler/Caption: exporter ce tiddler
@@ -59,12 +60,16 @@ Home/Caption: accueil
 Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
+LayoutSwitcher/Hint: Choix de la mise en page
+LayoutSwitcher/Caption: mise en page
 Manager/Caption: gestionnaire de tiddlers
 Manager/Hint: Ouvre le gestionnaire de tiddlers
 More/Caption: plus
 More/Hint: Actions supplémentaires
 NewHere/Caption: nouveau, à partir d'ici
 NewHere/Hint: Crée un nouveau tiddler avec pour tag le titre du tiddler courant
+NetworkActivity/Caption: activité réseau
+NetworkActivity/Hint: Annule toute l'activité réseau
 NewJournal/Caption: nouveau journal
 NewJournal/Hint: Crée un nouveau tiddler journal
 NewJournalHere/Caption: nouveau journal, à partir d'ici

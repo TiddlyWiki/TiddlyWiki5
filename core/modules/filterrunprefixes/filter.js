@@ -19,23 +19,13 @@ exports.filter = function(operationSubFunction,options) {
 			var resultsToRemove = [],
 				index = 0;
 			results.each(function(title) {
-				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),{
-					getVariable: function(name,opts) {
-						opts = opts || {};
-						opts.variables = {
-							"currentTiddler": "" + title,
-							"..currentTiddler": widget.getVariable("currentTiddler"),
-							"index": "" + index,
-							"revIndex": "" +  (results.length - 1 - index),
-							"length": "" + results.length
-						};
-						if(name in opts.variables) {
-							return opts.variables[name];
-						} else {
-							return widget.getVariable(name,opts);
-						}
-					}
-				});
+				var filtered = operationSubFunction(options.wiki.makeTiddlerIterator([title]),widget.makeFakeWidgetWithVariables({
+					"currentTiddler": "" + title,
+					"..currentTiddler": widget.getVariable("currentTiddler",""),
+					"index": "" + index,
+					"revIndex": "" +  (results.length - 1 - index),
+					"length": "" + results.length
+				}));
 				if(filtered.length === 0) {
 					resultsToRemove.push(title);
 				}

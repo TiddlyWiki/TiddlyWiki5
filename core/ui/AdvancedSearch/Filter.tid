@@ -40,10 +40,8 @@ caption: {{$:/language/Search/Filter/Caption}}
 		<$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
 </$list></$list>
 \end
-
 \whitespace trim
 <<lingo Filter/Hint>>
-
 <div class="tc-search tc-advanced-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
 <$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
@@ -65,11 +63,10 @@ caption: {{$:/language/Search/Filter/Caption}}
 &#32;
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch/FilterButton]!has[draft.of]]"><$transclude/></$list>
 </div>
-
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <$set name="resultCount" value="<$count filter={{$:/temp/advancedsearch}}/>">
 <div class="tc-search-results">
-<<lingo Filter/Matches>>
+<p><<lingo Filter/Matches>></p>
 <$list filter={{$:/temp/advancedsearch}}>
 <span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>

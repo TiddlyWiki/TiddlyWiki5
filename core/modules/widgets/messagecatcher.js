@@ -82,7 +82,7 @@ MessageCatcherWidget.prototype.render = function(parent,nextSibling) {
 		}
 	});
 	// Render children
-	this.renderChildren(parent,null);
+	this.renderChildren(parent,nextSibling);
 };
 
 /*

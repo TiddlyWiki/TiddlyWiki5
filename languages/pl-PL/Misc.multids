@@ -25,6 +25,8 @@ Encryption/RepeatPassword: Powtórz hasło
 Encryption/PasswordNoMatch: Hasła się nie zgadzają
 Encryption/SetPassword: Ustaw hasło
 Error/Caption: Bład
+Error/DeserializeOperator/MissingOperand: Błąd filtra: Nie podano argumentu dla operatora 'deserialize'
+Error/DeserializeOperator/UnknownDeserializer: Błąd filtra: Podano nieznany deserializator jako argument dla operatora 'deserialize'
 Error/Filter: Bład filtra
 Error/FilterSyntax: Bład składniowy filtra
 Error/FilterRunPrefix: Bład filtra: Nieznany prefiks dla filtra 'run'

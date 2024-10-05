@@ -1,7 +1,9 @@
 {
 	"description": "Deutsche Basis Edition",
 	"plugins": [
-		"tiddlywiki/browser-sniff"],
+		"tiddlywiki/browser-sniff",
+		"tiddlywiki/internals"
+	],
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
@@ -9,8 +11,7 @@
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
 		"tiddlywiki/tight",
-		"tiddlywiki/readonly",
-		"tiddlywiki/internals"
+		"tiddlywiki/readonly"
 	],
 	"languages": [
 		"de-AT",

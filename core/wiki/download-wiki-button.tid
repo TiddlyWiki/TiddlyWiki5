@@ -4,5 +4,5 @@ title: $:/snippets/download-wiki-button
 \whitespace trim
 <$button class="tc-btn-big-green">
 <$action-sendmessage $message="tm-download-file" $param="$:/core/save/all" filename="index.html"/>
-<<lingo Full/Caption>>&#32;{{$:/core/images/save-button}}
+<<lingo Full/Caption>>&#32;{{$:/core/images/save-button-dynamic}}
 </$button>

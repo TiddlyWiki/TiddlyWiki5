@@ -65,7 +65,7 @@ Command.prototype.execute = function() {
 	$tw.utils.each(filteredPluginList,function(title) {
 		var tiddler = containerData.tiddlers[title];
 		// Save each JSON file and collect the skinny data
-		var pathname = path.resolve(self.commander.outputPath,basepath + encodeURIComponent(title) + ".json");
+		var pathname = path.resolve(self.commander.outputPath,basepath + $tw.utils.encodeURIComponentExtended(title) + ".json");
 		$tw.utils.createFileDirectories(pathname);
 		fs.writeFileSync(pathname,JSON.stringify(tiddler),"utf8");
 		// Collect the skinny list data

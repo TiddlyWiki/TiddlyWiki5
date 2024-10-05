@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/github-fork-ribbon/template
+
+<!-- Parameters:
+position: "right", "left", "right-bottom" and "left-bottom" 
+url: link target
+text: ribbon text
+color: defaults to "#aa0000" - dark red
+top: offset from the top in px - eg: "30px"
+bottom: offset from the bottom in px - No ;
+left: offset from left in px - No ;
+right: offset from right in px - No ;
+fixed: "fixed" .. If ribbon is at the top, it can be "fixed". Bottom is always fixed
+-->
+\parameters (position:"right", url:"https://github.com/Jermolene/TiddlyWiki5", text:"Fork me on ~GitHub" color:"#aa0000" top:"0" bottom:"0" left:"0" right:"0" fixed:"")
+
+<style>
+{{$:/plugins/tiddlywiki/github-fork-ribbon/styles}}
+</style>
+
+<div class={{{ github-fork-ribbon-wrapper [<position>] [<fixed>] +[join[ ]] }}}>
+	<div class="github-fork-ribbon">
+		<a href=<<url>>>
+			<<text>>
+		</a>
+	</div>
+</div>

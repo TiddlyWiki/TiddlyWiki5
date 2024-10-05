@@ -1,0 +1,8 @@
+title: $:/plugins/tiddlywiki/markdown-legacy/KeyboardShortcuts/new-markdown-tiddler
+tags: $:/tags/KeyboardShortcut
+key: ((new-markdown-tiddler))
+
+\whitespace trim
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+<$action-sendmessage $message="tm-new-tiddler" type="text/markdown"/>
+</$navigator>

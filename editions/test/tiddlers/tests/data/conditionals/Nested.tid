@@ -1,0 +1,38 @@
+title: Conditionals/Nested
+description: Nested conditional shortcut syntax
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\procedure test(animal)
+<% if [<animal>match[Elephant]] %>
+It is an elephant
+<% else %>
+<% if [<animal>match[Giraffe]] %>
+It is a giraffe
+<% else %>
+It is completely unknown
+<% endif %>
+<% endif %>
+\end
+
+<<test "Giraffe">>
+
+<<test "Elephant">>
+
+<<test "Antelope">>
+
++
+title: ExpectedResult
+
+
+
+It is a giraffe
+
+
+It is an elephant
+
+
+It is completely unknown
+

@@ -1,5 +1,5 @@
 created: 20140919155729620
-modified: 20220819093733569
+modified: 20230427125500432
 tags: Macros [[Core Macros]]
 title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
@@ -53,14 +53,20 @@ These two parameters are combined into a single [[filter expression|Filter Expre
 
 <<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>> take additional parameters:
 
-;selectedTiddler
+; selectedTiddler
 : The title of the [[state tiddler|StateMechanism]] for noting the currently selected tiddler, defaulting to `$:/temp/toc/selectedTiddler`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
-;unselectedText
+
+; unselectedText
 : The text to display when no tiddler is selected in the tree
-;missingText
+
+; missingText
 : The text to display if the selected tiddler doesn't exist
-;template
+
+; template
 : Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel
+
+; exclude <<.from-version "5.3.0">>
+: This optional parameter can be used to exclude tiddlers from the TOC list. It allows a [[Title List]] or a <<.olink subfilter>>. Eg: `exclude:"HelloThere [[Title with spaces]]"` or `exclude:"[has[excludeTOC]]"`. Where the former will exclude two tiddlers and the later would exclude every tiddler that has a field <<.field excludeTOC>> independent of its value.<br>''Be aware'' that eg: `[prefix[H]]` is a shortcut for `[all[tiddlers]prefix[H]]`, which can have a performance impact, if used carelessly. So use $:/AdvancedSearch -> ''Filters'' tab to test the <<.param exclude>> parameter
 
 !! Custom Icons
 

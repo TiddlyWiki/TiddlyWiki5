@@ -1,0 +1,40 @@
+created: 20150117152612000
+modified: 20230325101137075
+tags: $:/tags/Stylesheet
+title: $:/editions/tw5.com/doc-styles
+type: text/vnd.tiddlywiki
+
+a.doc-from-version.tc-tiddlylink {
+    display: inline-block;
+    border-radius: 1em;
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+    padding: 0 0.4em;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.5;
+    vertical-align: text-bottom;
+}
+
+a.doc-deprecated-version.tc-tiddlylink {
+    display: inline-block;
+    border-radius: 1em;
+	background: red;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+    padding: 0 0.4em;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.5;
+    vertical-align: text-bottom;
+}
+
+.doc-deprecated-version svg,
+.doc-from-version svg {
+	width: 1em;
+	height: 1em;
+    vertical-align: text-bottom;
+}

@@ -4,7 +4,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/quote
 caption: {{$:/language/Buttons/Quote/Caption}} (Markdown)
 description: {{$:/language/Buttons/Quote/Hint}}
-condition: [<targetTiddler>type[text/x-markdown]]
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 shortcuts: ((quote))
 
 <$action-sendmessage

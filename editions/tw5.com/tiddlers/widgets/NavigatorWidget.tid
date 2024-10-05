@@ -17,7 +17,7 @@ The navigator widget displays any contained content, and responds to Messages di
 |story |Name of the tiddler containing the story list to be manipulated |
 |history |Name of the tiddler containing the history list to be manipulated |
 |openLinkFromInsideRiver |Determines the location for opening new tiddlers from links within the story river: at the ''top'' or ''bottom'' of the story river, or ''above'' or ''below'' the current tiddler |
-|openLinkFromOutsideRiver|Determines the location for opening new tiddlers from linkes outside the story river: at the ''top'' or ''bottom'' of the story river|
+|openLinkFromOutsideRiver|Determines the location for opening new tiddlers from links outside the story river: at the ''top'' or ''bottom'' of the story river|
 |relinkOnRename|<<.from-version "5.1.14">> Determines if tags in other tiddlers are renamed if the tiddler title changes. ''yes'' or ''no''. default: ''no''|
 
 ! Widget Messages

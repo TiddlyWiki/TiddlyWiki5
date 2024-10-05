@@ -29,10 +29,10 @@ It uses the same method as the create new tiddler button, a number is appended t
 : This variable will be replaced by the ''separator'' parameter
 
 ;`$count$`
-: This variable will be createad automatically and is a counter starting with 0
+: This variable will be created automatically and is a counter starting with 0
 
 ;`$count:4$`
-: This variable will be createad automatically and starts at 0000
+: This variable will be created automatically and starts at 0000
 : `:4` represents the number of digits
 
 !! Examples

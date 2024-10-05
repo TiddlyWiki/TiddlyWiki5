@@ -1,26 +1,8 @@
 caption: Macro Calls
-created: 20150220182252000
-modified: 20220122193853161
-tags: WikiText
+created: 20220917074831994
+modified: 20220917074844235
+tags: 
 title: Macro Calls in WikiText
 type: text/vnd.tiddlywiki
 
-To call a [[macro|Macros]], place `<<`double angle brackets`>>` around the name and any parameter values.
-
-By default, parameters are listed in the same order as in the macro's definition. A parameter can be labelled with its name, either for clarity or to modify the order.
-
-If no value is specified for a parameter, the default value given for that parameter in the macro's definition is used instead. (If no default value was defined, the parameter is simply blank.)
-
-Each parameter value can be enclosed in `'`single quotes`'`, `"`double quotes`"`, `"""`triple double quotes`"""` or `[[`double square brackets`]]`. Triple double quotes allow a value to contain almost anything. If a value contains no spaces or single or double quotes, it requires no delimiters.
-
-A more formal [[presentation|Macro Call Syntax]] of this syntax is also available.
-
-The syntax is actually a shorthand for a <<.wlink MacroCallWidget>> widget. The widget itself offers greater flexibility, including the ability to [[transclude|Transclusion]] parameter values or generate them via additional macros.
-
-As macros are simply parameterised [[variables|Variables]], a variable's value can be inserted using the same techniques.
-
-[[Examples|Macro Calls in WikiText (Examples)]] and [[more examples|WikiText parser mode: macro examples]]
-
-!! Named vs.unnamed parameters
-
-In the wikitext notation, using named parameters is always the safer choice compared to defining values only. Not naming parameters may have confusing side effects. For example, imagine the first parameter of some macro specifies a [[state tiddler|StateMechanism]] while the second one is intended for a [[template|Transclusion with Templates]] tiddler. Should you accidentally forget to define the first parameter or are confused about the order, the next time your macro is run, which might even be triggered using the preview, your template tiddler may inadvertently be overriden with what was intended to be the state.
+See [[Macro Calls]].

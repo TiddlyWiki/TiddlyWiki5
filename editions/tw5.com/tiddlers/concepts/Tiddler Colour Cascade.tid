@@ -6,6 +6,8 @@ type: text/vnd.tiddlywiki
 
 The tiddler colour cascade is a [[cascade|Cascades]] used to choose which colour should be used for a particular tiddler.
 
+Core tiddler colour cascades can be found in $:/core/macros/tag, $:/core/ui/Components/tag-link, $:/core/ui/EditTemplate/tags, $:/core/ui/TagPickerTagTemplate, $:/core/ui/TagTemplate and $:/core/ui/ViewTemplate/title
+
 The default tiddler colour cascade consists of:
 
 # If the tiddler has a ''color'' field, use the value as the colour

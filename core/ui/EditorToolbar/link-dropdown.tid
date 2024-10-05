@@ -18,7 +18,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 
 \define external-link()
 \whitespace trim
-<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;" actions=<<add-link-actions>>>
+<$button class="tc-btn-invisible tc-btn-mini" style="width: auto; display: inline-block; background-colour: inherit;" actions=<<add-link-actions>>>
 {{$:/core/images/chevron-right}}
 </$button>
 \end
@@ -45,7 +45,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 <$reveal tag="span" state=<<storeTitle>> type="nomatch" text="">
 <<external-link>>
 &#32;
-<$button class="tc-btn-invisible" style="width: auto; display: inline-block; background-colour: inherit;">
+<$button class="tc-btn-invisible tc-btn-mini" style="width: auto; display: inline-block; background-colour: inherit;">
 <<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
 </$button>

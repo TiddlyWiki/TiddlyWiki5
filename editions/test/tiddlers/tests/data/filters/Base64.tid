@@ -1,0 +1,19 @@
+title: Filters/Base64
+description: Test {encode|decode}base64 operators
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+(<$text text={{{ [[Jeremy1234]encodebase64[]] }}}/>)
+(<$text text={{{ [[]encodebase64[]] }}}/>)
+(<$text text={{{ [[SmVyZW15MTIzNA==]decodebase64[]] }}}/>)
+(<$text text={{{ [[]decodebase64[]] }}}/>)
++
+title: ExpectedResult
+
+<p>(SmVyZW15MTIzNA==)
+()
+(Jeremy1234)
+()</p>

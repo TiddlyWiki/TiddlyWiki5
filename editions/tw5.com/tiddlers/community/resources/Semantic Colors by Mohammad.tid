@@ -5,14 +5,14 @@ title: Semantic Colors by Mohammad
 type: text/vnd.tiddlywiki
 url: https://kookma.github.io/TW-Semantic-Colors/
 
-Semantic colors are set of CSS to apply colorful theme to individual tiddlers for categorization purpose.
+Semantic colors are set of CSS to apply colorful theme to individual tiddlers for categorisation purpose.
 
 {{!!url}}
 
 Tiddlywiki "semantic colors" has two objectives:
 
 # How it is simply possible to apply theme to an individual tiddler
-# Use semantic colors for categorization
+# Use semantic colors for categorisation
 
 ;Some use cases
 :Learning materials (each topic, category can have dedicated semantic color, like learning a foreign language)

@@ -1,0 +1,24 @@
+title: $:/language/Help/rendertiddler
+description: Рендерира запис како назначен вид на содржина
+
+(Note: The `--rendertiddler` command is deprecated in favour of the new, more flexible `--render` command)
+
+Render an individual tiddler as a specified ContentType, defaulting to `text/html` and save it to the specified filename.
+
+Optionally the title of a template tiddler can be specified, in which case the template tiddler is rendered with the "currentTiddler" variable set to the tiddler that is being rendered (the first parameter value).
+
+A name and value for an additional variable may optionally also be specified.
+
+```
+--rendertiddler <title> <filename> [<type>] [<template>] [<name>] [<value>]
+```
+
+By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+
+Any missing directories in the path to the filename are automatically created.
+
+For example, the following command saves all tiddlers matching the filter `[tag[done]]` to a JSON file titled `output.json` by employing the core template `$:/core/templates/exporters/JsonFile`.
+
+```
+--rendertiddler "$:/core/templates/exporters/JsonFile" output.json text/plain "" exportFilter "[tag[done]]"
+```

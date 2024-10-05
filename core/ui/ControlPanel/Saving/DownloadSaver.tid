@@ -2,10 +2,19 @@ title: $:/core/ui/ControlPanel/Saving/DownloadSaver
 tags: $:/tags/ControlPanel/Saving
 caption: {{$:/language/ControlPanel/Saving/DownloadSaver/Caption}}
 
+\whitespace trim
 \define lingo-base() $:/language/ControlPanel/Saving/DownloadSaver/
+
+<div class="tc-control-panel-saving" data-setting-title=<<currentTab>>>
 
 <<lingo Hint>>
 
-!! <$link to="$:/config/DownloadSaver/AutoSave"><<lingo AutoSave/Hint>></$link>
+!!.tc-control-panel-accent <$link to="$:/config/DownloadSaver/AutoSave"><<lingo AutoSave/Hint>></$link>
 
-<$checkbox tiddler="$:/config/DownloadSaver/AutoSave" field="text" checked="yes" unchecked="no" default="no"> <<lingo AutoSave/Description>> </$checkbox>
+<$checkbox tiddler="$:/config/DownloadSaver/AutoSave"
+	field="text" checked="yes" unchecked="no" default="no"
+	class="tc-control-panel-item"
+>
+	<span class="tc-tiny-gap-left"><<lingo AutoSave/Description>></span>
+</$checkbox>
+</div>

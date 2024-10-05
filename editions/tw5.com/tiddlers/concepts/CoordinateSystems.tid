@@ -21,7 +21,7 @@ Relative coordinates are expressed in the form ''(x,y,w,h)''. Where ''x'' and ''
 
 !! Absolute coordinate system
 
-The relative coordinate system works flawless most of the time. Problems occure if the target element (for example, a popup) and the source element (the triggering button) do not share the same positioned ancherstor element. This is often the case if the popup is declared outside a table and the triggering button is declared within a table cell. In this case the coordiante systems have different origins and the popup will be displayed in the wrong location.
+The relative coordinate system works flawless most of the time. Problems occure if the target element (for example, a popup) and the source element (the triggering button) do not share the same positioned ancestor element. This is often the case if the popup is declared outside a table and the triggering button is declared within a table cell. In this case the coordinate systems have different origins and the popup will be displayed in the wrong location.
 
 Absolute coordinates can fix this problem by using the root element of the page (the upper-left corner of the page) as the origin of the coordinate system. Absolute coordinates are expressed in the form ''@(x,y,w,h)''. Where ''x'' and ''y'' represent the position and ''w'' and ''h'' the width and height of the element. The leading ''@''-symbol marks these coordinates as absolute.
 
@@ -30,7 +30,7 @@ The ButtonWidget has an option (''popupAbsCoords'') to put absolute coordinates 
 
 !! Example
 
-The following example shows a popup that is triggerd from within a table cell. The table cell is the nearest positioned ancestor element. The popup was defined outside the table cell. The button using relative coordinates will open the popup in the wrong location because the button and the popup do not agree on the same coordinate system. Using absolute coordinates fixes this problem.
+The following example shows a popup that is triggered from within a table cell. The table cell is the nearest positioned ancestor element. The popup was defined outside the table cell. The button using relative coordinates will open the popup in the wrong location because the button and the popup do not agree on the same coordinate system. Using absolute coordinates fixes this problem.
 
 <<wikitext-example-without-html '<$reveal type="popup" state="$:/state/CoordinateSampleReveal">
 <div class="tc-drop-down">

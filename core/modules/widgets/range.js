@@ -50,6 +50,10 @@ RangeWidget.prototype.render = function(parent,nextSibling) {
 		this.inputDomNode.setAttribute("disabled",true);
 	}
 	this.inputDomNode.value = this.getValue();
+	this.assignAttributes(this.inputDomNode,{
+		sourcePrefix: "data-",
+		destPrefix: "data-"
+	});
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
 		{name:"mousedown", handlerObject:this, handlerMethod:"handleMouseDownEvent"},

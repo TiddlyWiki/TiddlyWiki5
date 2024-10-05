@@ -76,6 +76,10 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			if(err) {
 				return callback(err);
 			}
+			//If Browser-Storage plugin is present, cache pre-loaded tiddlers and add back after sync from server completes 
+			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
+				$tw.browserStorage.cachePreloadTiddlers();
+			}
 			// Decode the status JSON
 			var json = null;
 			try {
@@ -188,6 +192,10 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			}
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
+			// If Browswer Storage tiddlers were cached on reloading the wiki, add them after sync from server completes in the above callback.
+			if($tw.browserStorage && $tw.browserStorage.isEnabled()) { 
+				$tw.browserStorage.addCachedTiddlers();
+			}
 		}
 	});
 };
@@ -210,6 +218,10 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback,options) {
 		callback: function(err,data,request) {
 			if(err) {
 				return callback(err);
+			}
+			//If Browser-Storage plugin is present, remove tiddler from local storage after successful sync to the server
+			if($tw.browserStorage && $tw.browserStorage.isEnabled()) {
+				$tw.browserStorage.removeTiddlerFromLocalStorage(tiddler.fields.title)
 			}
 			// Save the details of the new revision of the tiddler
 			var etag = request.getResponseHeader("Etag");

@@ -29,6 +29,8 @@ var HtmlParser = function(type,text,options) {
 	if($tw.wiki.getTiddlerText("$:/config/HtmlParser/DisableSandbox","no") !== "yes") {
 		this.tree[0].attributes.sandbox = {type: "string", value: $tw.wiki.getTiddlerText("$:/config/HtmlParser/SandboxTokens","")};
 	}
+	this.source = text;
+	this.type = type;
 };
 
 exports["text/html"] = HtmlParser;

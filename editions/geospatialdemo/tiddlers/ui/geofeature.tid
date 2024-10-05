@@ -1,0 +1,39 @@
+title: ui/geofeature
+
+\define create-intersection()
+<$let
+	intersectLayer={{{ =[<currentTiddler>get[text]] =[<otherFeature>get[text]] +[geointersect[]] }}}
+>
+	<$action-createtiddler $basetitle="$:/temp/_IsochroneLayer" text={{{ [<intersectLayer>] }}} tags="$:/tags/GeoFeature" caption={{{ [<captionThisFeature>addsuffix[ intersected with ]addsuffix<captionOtherFeature>] }}}/>
+</$let>
+\end
+
+!! Mapped
+
+<$geomap
+	state=<<qualify "$:/state/demo-map">>
+	startPosition="bounds"
+>
+	<$geolayer json={{!!text}} color={{!!color}}/>
+</$geomap>
+
+!! Intersect with other features
+
+<$let 
+	captionThisFeature={{{ [<currentTiddler>get[caption]else<currentTiddler>] }}}
+>
+<ul>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/GeoFeature]sort[caption]] -[<currentTiddler>]" variable="otherFeature">
+<$let
+	captionOtherFeature={{{ [<otherFeature>get[caption]else<otherFeature>] }}}
+>
+<li>
+<$link to=<<otherFeature>>><$transclude tiddler=<<otherFeature>> field="caption"><$view tiddler=<<otherFeature>> field="title"/></$transclude></$link>
+<$button actions=<<create-intersection>>>
+Create intersection
+</$button>
+</li>
+</$let>
+</$list>
+</ul>
+</$let>

@@ -1,4 +1,5 @@
 title: $:/core/images/print-button
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-print-button tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd"><path d="M112 71V30.5h-.032c-.035-2-.816-3.99-2.343-5.516L86.998 2.357A7.978 7.978 0 0081 .02V0H24a8 8 0 00-8 8v63h8V8h57v14.5c0 4.422 3.582 8 8 8h15V71h8z"/><rect width="64" height="8" x="32" y="36" rx="4"/><rect width="64" height="8" x="32" y="52" rx="4"/><rect width="40" height="8" x="32" y="20" rx="4"/><path d="M0 80.005C0 71.165 7.156 64 16 64h96c8.836 0 16 7.155 16 16.005v31.99c0 8.84-7.156 16.005-16 16.005H16c-8.836 0-16-7.155-16-16.005v-31.99zM104 96a8 8 0 100-16 8 8 0 000 16z"/></g></svg>
+\parameters (size:"22pt")
+<svg width=<<size>> height=<<size>> class="tc-image-print-button tc-image-button" viewBox="0 0 128 128"><g fill-rule="evenodd"><path d="M112 71V30.5h-.032c-.035-2-.816-3.99-2.343-5.516L86.998 2.357A7.978 7.978 0 0081 .02V0H24a8 8 0 00-8 8v63h8V8h57v14.5c0 4.422 3.582 8 8 8h15V71h8z"/><rect width="64" height="8" x="32" y="36" rx="4"/><rect width="64" height="8" x="32" y="52" rx="4"/><rect width="40" height="8" x="32" y="20" rx="4"/><path d="M0 80.005C0 71.165 7.156 64 16 64h96c8.836 0 16 7.155 16 16.005v31.99c0 8.84-7.156 16.005-16 16.005H16c-8.836 0-16-7.155-16-16.005v-31.99zM104 96a8 8 0 100-16 8 8 0 000 16z"/></g></svg>

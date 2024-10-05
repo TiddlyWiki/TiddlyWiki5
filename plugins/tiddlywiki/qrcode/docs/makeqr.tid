@@ -1,0 +1,44 @@
+title: $:/plugins/tiddlywiki/qrcode/docs/qrcode
+tags: $:/tags/QRCodeDocs
+caption: makeqr Macro
+
+The ''makeqr'' [[macro|Macros]] converts text data into an image of the corresponding QR code. The image is returned as [[base64-encoded data URI|https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs]].
+
+!! Parameters
+
+;text
+: The text to encode
+;size
+: The size of the image in pixels (defaults to 500)
+;errorCorrectLevel
+: Determines the amount of error correction applied to the image; see below (defaults to "M").
+;fallback
+: The fallback image to be returned in case of an error (see below)
+
+The conversion will fail if the text is too long and/or complex and the macro will return the provided fallback image. If no fallback image is provided then an error image is generated.
+
+The error correction level is a [[QR code feature|http://www.qrcode.com/en/about/error_correction.html]]:
+
+<<<
+QR Code has error correction capability to restore data if the code is dirty or damaged. ... Level Q or H may be selected for factory environment where QR Code get dirty, whereas Level L may be selected for clean environment with the large amount of data. Typically, Level M (15%) is most frequently selected.
+<<<
+
+!! Examples
+
+Making a QR code for a simple string of text:
+
+```
+<<makeqr "Hello there!">>
+```
+
+Making a QR code for the URL field of the current tiddler:
+
+```
+<$macrocall $name="makeqr" text={{!!url}}/>
+```
+
+Making a QR code for the URL of the current wiki:
+
+```
+<$macrocall $name="makeqr" text={{$:/info/url/full}}/>
+```

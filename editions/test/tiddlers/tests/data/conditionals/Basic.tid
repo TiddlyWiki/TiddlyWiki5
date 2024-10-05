@@ -1,0 +1,26 @@
+title: Conditionals/Basic
+description: Basic conditional shortcut syntax
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Text
+
+This is a <% if [<something>match[one]] %>Elephant<% endif %>, I think.
++
+title: Output
+
+<$let something="one">
+{{Text}}
+</$let>
+
+<$let something="two">
+{{Text}}
+</$let>
++
+title: ExpectedResult
+
+<p>
+This is a Elephant, I think.
+</p><p>
+This is a , I think.
+</p>

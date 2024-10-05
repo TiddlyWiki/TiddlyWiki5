@@ -1,0 +1,10 @@
+title: Quick Start: DIY
+tags: [[Quick Start]]
+caption: DIY
+icon: $:/core/images/theme-button
+button-color: #ff4522
+button-text: Explore
+background: linear-gradient(90deg,#fff4f2, #ffffff)
+link: GettingStarted
+
+Find the configuration that is right for you to get the full benefits of ~TiddlyWiki

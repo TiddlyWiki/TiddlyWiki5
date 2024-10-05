@@ -3,10 +3,8 @@ title: $:/core/ui/UntaggedTemplate
 \define lingo-base() $:/language/SideBar/
 \whitespace trim
 <$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-untagged-label tc-tag-label">
-<<lingo Tags/Untagged/Caption>>
+	<<lingo Tags/Untagged/Caption>>
 </$button>
-<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below">
-<div class="tc-drop-down">
-<$list filter="[untagged[]!is[system]] -[tags[]] +[sort[title]]" template="$:/core/ui/ListItemTemplate"/>
-</div>
+<$reveal class="tc-drop-down" tag="div" state=<<qualify "$:/state/popup/tag">> type="popup" position="below">
+	<$list filter="[untagged[]!is[system]] -[tags[]] +[sort[title]]" template="$:/core/ui/ListItemTemplate"/>
 </$reveal>

@@ -4,7 +4,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/mono-line
 caption: {{$:/language/Buttons/MonoLine/Caption}} (Markdown)
 description: {{$:/language/Buttons/MonoLine/Hint}}
-condition: [<targetTiddler>type[text/x-markdown]]
+condition: [<targetTiddler>type[text/x-markdown]] [<targetTiddler>type[text/markdown]]
 shortcuts: ((mono-line))
 
 <$action-sendmessage

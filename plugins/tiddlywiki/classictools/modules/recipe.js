@@ -69,6 +69,15 @@ exports["text/vnd.tiddlywiki2-recipe"] = function(text,fields) {
 		},
 		sourcePath = fields.title; // Bit of a hack to take advantage of the default title being the path to the tiddler file
 	processRecipe(sourcePath,text);
+	// Add a $:/RecipeTiddlers tiddler with the titles of the loaded tiddlers in order
+	var titles = [];
+	$tw.utils.each(tiddlers,function(tiddler) {
+		titles.push(tiddler.title);
+	});
+	tiddlers.push({
+		title: "$:/RecipeTiddlers",
+		list: $tw.utils.stringifyList(titles)
+	});
 	return tiddlers;
 };
 

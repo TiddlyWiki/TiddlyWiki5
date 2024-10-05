@@ -26,7 +26,7 @@ $button$
 <div class="tc-sidebar-tab-open">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
-<$macrocall $name="droppable-item" button="<$button message='tm-close-tiddler' tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class='tc-btn-invisible tc-btn-mini tc-small-gap-right'>{{$:/core/images/close-button}}</$button><$link to={{!!title}}><$view field='title'/></$link>"/>
+<$macrocall $name="droppable-item" button="<$button message='tm-close-tiddler' tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class='tc-btn-invisible tc-btn-mini tc-small-gap-right'>{{$:/core/images/close-button}}</$button><$link/>"/>
 </div>
 </$list>
 <$tiddler tiddler="">

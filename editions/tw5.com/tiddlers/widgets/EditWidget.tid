@@ -1,6 +1,6 @@
 caption: edit
 created: 20131024141900000
-modified: 20211009121634055
+modified: 20240627220419761
 tags: Widgets TriggeringWidgets
 title: EditWidget
 type: text/vnd.tiddlywiki
@@ -24,3 +24,16 @@ The content of the `<$edit>` widget is ignored.
 |inputActions |<<.from-version 5.1.23>> Optional actions that are triggered every time an input event occurs within the input field or textarea |
 |refreshTitle |<<.from-version 5.1.23>> An optional tiddler title that makes the input field update whenever the specified tiddler changes |
 
+! Examples
+
+!! Edit the contents (text field) of a tiddler titled <%if [<now YYYY-0MM-0DD>is[tiddler]] %> <$tiddler tiddler=<<now YYYY-0MM-0DD>> > <$link/></$tiddler> <%else %> with today’s date <% endif %>
+
+<$macrocall $name=".example" n="1"
+eg="""<$edit tiddler=<<now YYYY-0MM-0DD>> class="tc-edit-texteditor"/>
+"""/>
+
+!! Edit $:/status/UserName with single-line input box, have browser offer autocomplete for email
+
+<$macrocall $name=".example" n="2"
+eg="""<$edit-text tiddler="$:/status/UserName" tag="input" size=40 autocomplete="email"/>
+"""/>

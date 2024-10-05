@@ -1,8 +1,16 @@
 caption: authenticated-user-header
 created: 20180630180213047
-modified: 20180702140416583
+modified: 20230522184416583
 tags: [[WebServer Parameters]]
 title: WebServer Parameter: authenticated-user-header
 type: text/vnd.tiddlywiki
 
-The [[web server configuration parameter|WebServer Parameters]] ''authenticated-user-header'' activates [[header authentication|WebServer Header Authentication]] by specifying the name of the HTTP header that will be used to pass the username to TiddlyWiki.
+The [[web server configuration parameter|WebServer Parameters]] ''authenticated-user-header'' activates [[header authentication|WebServer Header Authentication]] by specifying the name of the HTTP header field that will be used to pass the username to TiddlyWiki.
+
+For example, if the ''authenticated-user-header'' is set to ''X-Authenticated-User'', then the HTTP request must include a header field ''X-Authenticated-User'' with a value that is the username:
+
+```http
+X-Authenticated-User: JeremyRuston
+```
+
+<<.from-version "5.3.0">> Value of this header field should be URI-encoded before transit on the client (using `encodeURIComponent` JS function or [[encodeuricomponent Operator]]), and will be URI-decoded by the server.

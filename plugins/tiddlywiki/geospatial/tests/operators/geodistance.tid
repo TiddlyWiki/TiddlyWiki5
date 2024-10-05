@@ -1,0 +1,30 @@
+title: $:/plugins/tiddlywiki/geospatial/tests/operators/geodistance
+description: geodistance operator
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Description
+
+geodistance operator
++
+title: Output
+
+\whitespace trim
+<$let
+	oxford={{{ [geopoint[51.751944],[-1.257778]] }}}
+	new-york={{{ [geopoint[40.730610],[-73.935242]] }}}
+>
+
+<$text text={{{ [geodistance<oxford>,<new-york>] }}}/>,
+<$text text={{{ [geodistance<oxford>,<new-york>,[miles]] }}}/>,
+<$text text={{{ [geodistance<oxford>,<new-york>,[kilometers]] }}}/>,
+<$text text={{{ [geodistance<oxford>,<new-york>,[degrees]] }}}/>,
+<$text text={{{ [geodistance<oxford>,<new-york>,[radians]] }}}/>,
+<$text text={{{ [geodistance<oxford>,<new-york>,[xxxxxxx]] }}}/>
+
+</$let>
+
++
+title: ExpectedResult
+
+<p>5042.67688063485,5042.67688063485,8115.401781788412,72.89828683394038,1.2738016908387275,5042.67688063485</p>

@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 In order to display Tiddlers (usually the text field), the WikiText parser reads and interprets the content and applies WikiText rules. The parser has three modes:
 
-* ''pragma mode'' - the parser will recognise only [[pragma mode WikiText|Pragma]] punctuation 
+* ''pragma mode'' - the parser will recognise only [[pragma mode WikiText|Pragmas]] punctuation 
 * ''block mode'' - the parser will recognise only [[block mode WikiText|Block Mode WikiText]] punctuation
 * ''inline mode'' - the parser will recognise only [[inline mode WikiText|Inline Mode WikiText]]
 

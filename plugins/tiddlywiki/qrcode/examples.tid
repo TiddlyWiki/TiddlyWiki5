@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/qrcode/examples
+
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/QRCodeExample]!has[draft.of]]" "$:/plugins/tiddlywiki/qrcode/examples/read">>

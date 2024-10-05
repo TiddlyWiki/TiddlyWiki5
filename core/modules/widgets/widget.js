@@ -12,9 +12,6 @@ Widget base class
 /*global $tw: false */
 "use strict";
 
-/* Maximum permitted depth of the widget tree for recursion detection */
-var MAX_WIDGET_TREE_DEPTH = 1000;
-
 /*
 Create a widget object for a parse tree node
 	parseTreeNode: reference to the parse tree node to be rendered
@@ -41,10 +38,7 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.parseTreeNode = parseTreeNode;
 	this.wiki = options.wiki;
 	this.parentWidget = options.parentWidget;
-	this.variables = Object.create(null);
-	if(this.parentWidget) {
-		Object.setPrototypeOf(this.variables,this.parentWidget.variables);
-	}
+	this.variables = Object.create(this.parentWidget ? this.parentWidget.variables : null);
 	this.document = options.document;
 	this.attributes = {};
 	this.children = [];
@@ -92,9 +86,22 @@ name: name of the variable
 value: value of the variable
 params: array of {name:, default:} for each parameter
 isMacroDefinition: true if the variable is set via a \define macro pragma (and hence should have variable substitution performed)
+options includes:
+	isProcedureDefinition: true if the variable is set via a \procedure pragma (and hence should not have variable substitution performed)
+	isFunctionDefinition: true if the variable is set via a \function pragma (and hence should not have variable substitution performed)
+	isWidgetDefinition: true if the variable is set via a \widget pragma (and hence should not have variable substitution performed)
 */
-Widget.prototype.setVariable = function(name,value,params,isMacroDefinition) {
-	this.variables[name] = {value: value, params: params, isMacroDefinition: !!isMacroDefinition};
+Widget.prototype.setVariable = function(name,value,params,isMacroDefinition,options) {
+	options = options || {};
+	this.variables[name] = {
+		value: value,
+		params: params,
+		isMacroDefinition: !!isMacroDefinition,
+		isFunctionDefinition: !!options.isFunctionDefinition,
+		isProcedureDefinition: !!options.isProcedureDefinition,
+		isWidgetDefinition: !!options.isWidgetDefinition,
+		configTrimWhiteSpace: !!options.configTrimWhiteSpace
+	};
 };
 
 /*
@@ -102,42 +109,79 @@ Get the prevailing value of a context variable
 name: name of variable
 options: see below
 Options include
+
 params: array of {name:, value:} for each parameter
 defaultValue: default value if the variable is not defined
+source: optional source iterator for evaluating function invocations
+allowSelfAssigned: if true, includes the current widget in the context chain instead of just the parent
 
 Returns an object with the following fields:
 
-params: array of {name:,value:} of parameters passed to wikitext variables
+params: array of {name:,value:} or {value:} of parameters to be applied
 text: text of variable, with parameters properly substituted
+resultList: result of variable evaluation as an array
+srcVariable: reference to the object defining the variable
 */
 Widget.prototype.getVariableInfo = function(name,options) {
 	options = options || {};
-	var actualParams = options.params || [],
-		parentWidget = this.parentWidget;
+	var self = this,
+		actualParams = options.params || [],
+		variable;
+	if(options.allowSelfAssigned) {
+		variable = this.variables[name];
+	} else {
+		variable = this.parentWidget && this.parentWidget.variables[name];
+	}
 	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
-	if(parentWidget && name in parentWidget.variables) {
-		var variable = parentWidget.variables[name],
-			originalValue = variable.value,
+	if(variable) {
+		var originalValue = variable.value,
 			value = originalValue,
-			params = this.resolveVariableParameters(variable.params,actualParams);
-		// Substitute any parameters specified in the definition
-		$tw.utils.each(params,function(param) {
-			value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
-		});
-		// Only substitute variable references if this variable was defined with the \define pragma
+			params = [],
+			resultList = [value];
+		// Only substitute parameter and variable references if this variable was defined with the \define pragma
 		if(variable.isMacroDefinition) {
-			value = this.substituteVariableReferences(value,options);
+			params = self.resolveVariableParameters(variable.params,actualParams);
+			// Substitute any parameters specified in the definition
+			$tw.utils.each(params,function(param) {
+				value = $tw.utils.replaceString(value,new RegExp("\\$" + $tw.utils.escapeRegExp(param.name) + "\\$","mg"),param.value);
+			});
+			value = self.substituteVariableReferences(value,options);
+			resultList = [value];
+		} else if(variable.isFunctionDefinition) {
+			// Function evaluations
+			params = self.resolveVariableParameters(variable.params,actualParams);
+			var variables = options.variables || Object.create(null);
+			// Apply default parameter values
+			$tw.utils.each(variable.params,function(param,index) {
+				if(param["default"]) {
+					variables[param.name] = param["default"];
+				}
+			});
+			// Parameters are an array of {value:} or {name:, value:} pairs
+			$tw.utils.each(params,function(param) {
+				variables[param.name] = param.value;
+			});
+			resultList = this.wiki.filterTiddlers(value,this.makeFakeWidgetWithVariables(variables),options.source);
+			value = resultList[0] || "";
+		} else {
+			params = variable.params;
 		}
 		return {
 			text: value,
 			params: params,
+			resultList: resultList,
 			srcVariable: variable,
 			isCacheable: originalValue === value
 		};
 	}
 	// If the variable doesn't exist in the parent widget then look for a macro module
+	var text = this.evaluateMacroModule(name,actualParams);
+	if(text === undefined) {
+		text = options.defaultValue;
+	}
 	return {
-		text: this.evaluateMacroModule(name,actualParams,options.defaultValue)
+		text: text,
+		resultList: [text]
 	};
 };
 
@@ -148,6 +192,11 @@ Widget.prototype.getVariable = function(name,options) {
 	return this.getVariableInfo(name,options).text;
 };
 
+/*
+Maps actual parameters onto formal parameters, returning an array of {name:,value:} objects
+formalParams - Array of {name:,default:} (default value is optional)
+actualParams - Array of string values or {name:,value:} (name is optional)
+*/
 Widget.prototype.resolveVariableParameters = function(formalParams,actualParams) {
 	formalParams = formalParams || [];
 	actualParams = actualParams || [];
@@ -160,7 +209,7 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 		paramInfo = formalParams[p];
 		paramValue = undefined;
 		for(var m=0; m<actualParams.length; m++) {
-			if(actualParams[m].name === paramInfo.name) {
+			if(typeof actualParams[m] !== "string" && actualParams[m].name === paramInfo.name) {
 				paramValue = actualParams[m].value;
 			}
 		}
@@ -169,7 +218,8 @@ Widget.prototype.resolveVariableParameters = function(formalParams,actualParams)
 			nextAnonParameter++;
 		}
 		if(paramValue === undefined && nextAnonParameter < actualParams.length) {
-			paramValue = actualParams[nextAnonParameter++].value;
+			var param = actualParams[nextAnonParameter++];
+			paramValue = typeof param === "string" ? param : param.value;
 		}
 		// If we've still not got a value, use the default, if any
 		paramValue = paramValue || paramInfo["default"] || "";
@@ -263,12 +313,53 @@ Widget.prototype.getStateQualifier = function(name) {
 };
 
 /*
-Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed
+Make a fake widget with specified variables, suitable for variable lookup in filters
 */
-Widget.prototype.computeAttributes = function() {
+Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
+	var self = this,
+		variables = variables || {};
+	return {
+		getVariable: function(name,opts) {
+			if($tw.utils.hop(variables,name)) {
+				return variables[name];
+			} else {
+				opts = opts || {};
+				opts.variables = variables;
+				return self.getVariable(name,opts);
+			};
+		},
+		getVariableInfo: function(name,opts) {
+			if($tw.utils.hop(variables,name)) {
+				return {
+					text: variables[name]
+				};
+			} else {
+				opts = opts || {};
+				opts.variables = $tw.utils.extend(variables,opts.variables);
+				return self.getVariableInfo(name,opts);
+			};
+		},
+		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
+		resolveVariableParameters: self.resolveVariableParameters,
+		wiki: self.wiki
+	};
+};
+
+/*
+Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed.
+Options include:
+filterFn: only include attributes where filterFn(name) returns true
+*/
+Widget.prototype.computeAttributes = function(options) {
+	options = options || {};
 	var changedAttributes = {},
 		self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
+		if(options.filterFn) {
+			if(!options.filterFn(name)) {
+				return;
+			}
+		}
 		var value = self.computeAttribute(attribute);
 		if(self.attributes[name] !== value) {
 			self.attributes[name] = value;
@@ -279,13 +370,17 @@ Widget.prototype.computeAttributes = function() {
 };
 
 Widget.prototype.computeAttribute = function(attribute) {
-	var value;
+	var self = this,
+		value;
 	if(attribute.type === "filtered") {
 		value = this.wiki.filterTiddlers(attribute.filter,this)[0] || "";
 	} else if(attribute.type === "indirect") {
-		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler"));
+		value = this.wiki.getTextReference(attribute.textReference,"",this.getVariable("currentTiddler")) || "";
 	} else if(attribute.type === "macro") {
-		value = this.getVariable(attribute.value.name,{params: attribute.value.params});
+		var variableInfo = this.getVariableInfo(attribute.value.name,{params: attribute.value.params});
+		value = variableInfo.text;
+	} else if(attribute.type === "substituted") {
+		value = this.wiki.getSubstitutedText(attribute.rawValue,this) || "";
 	} else { // String attribute
 		value = attribute.value;
 	}
@@ -318,16 +413,34 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 };
 
 /*
-Assign the computed attributes of the widget to a domNode
+Assign the common attributes of the widget to a domNode
 options include:
-excludeEventAttributes: ignores attributes whose name begins with "on"
+sourcePrefix: prefix of attributes that are to be directly assigned (defaults to the empty string meaning all attributes)
+destPrefix: prefix to be applied to attribute names that are to be directly assigned (defaults to the emtpy string which means no prefix is added)
+changedAttributes: hashmap by attribute name of attributes to process (if missing, process all attributes)
+excludeEventAttributes: ignores attributes whose name would begin with "on"
 */
 Widget.prototype.assignAttributes = function(domNode,options) {
 	options = options || {};
-	var self = this;
+	var self = this,
+		changedAttributes = options.changedAttributes || this.attributes,
+		sourcePrefix = options.sourcePrefix || "",
+		destPrefix = options.destPrefix || "",
+		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
+		// Process any style attributes before considering sourcePrefix and destPrefix
+		if(name.substr(0,6) === "style." && name.length > 6) {
+			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
+			return;
+		}
+		// Check if the sourcePrefix is a match
+		if(name.substr(0,sourcePrefix.length) === sourcePrefix) {
+			name = destPrefix + name.substr(sourcePrefix.length);
+		} else {
+			value = undefined;
+		}
 		// Check for excluded attribute names
-		if(options.excludeEventAttributes && name.substr(0,2) === "on") {
+		if(options.excludeEventAttributes && name.substr(0,2).toLowerCase() === EVENT_ATTRIBUTE_PREFIX) {
 			value = undefined;
 		}
 		if(value !== undefined) {
@@ -337,26 +450,24 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 				namespace = "http://www.w3.org/1999/xlink";
 				name = name.substr(6);
 			}
-			// Handle styles
-			if(name.substr(0,6) === "style." && name.length > 6) {
-				domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;
-			} else {
-				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
-				try {
-					domNode.setAttributeNS(namespace,name,value);
-				} catch(e) {
-				}
+			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+			try {
+				domNode.setAttributeNS(namespace,name,value);
+			} catch(e) {
 			}
 		}
-	}
-	// Not all parse tree nodes have the orderedAttributes property
+	};
+	// If the parse tree node has the orderedAttributes property then use that order
 	if(this.parseTreeNode.orderedAttributes) {
 		$tw.utils.each(this.parseTreeNode.orderedAttributes,function(attribute,index) {
-			assignAttribute(attribute.name,self.attributes[attribute.name]);
-		});	
+			if(attribute.name in changedAttributes) {
+				assignAttribute(attribute.name,self.getAttribute(attribute.name));
+			}
+		});
+	// Otherwise update each changed attribute irrespective of order
 	} else {
-		$tw.utils.each(Object.keys(self.attributes).sort(),function(name) {
-			assignAttribute(name,self.attributes[name]);
+		$tw.utils.each(changedAttributes,function(value,name) {
+			assignAttribute(name,self.getAttribute(name));
 		});	
 	}
 };
@@ -383,10 +494,8 @@ Widget.prototype.makeChildWidgets = function(parseTreeNodes,options) {
 	this.children = [];
 	var self = this;
 	// Check for too much recursion
-	if(this.getAncestorCount() > MAX_WIDGET_TREE_DEPTH) {
-		this.children.push(this.makeChildWidget({type: "error", attributes: {
-			"$message": {type: "string", value: $tw.language.getString("Error/RecursiveTransclusion")}
-		}}));
+	if(this.getAncestorCount() > $tw.utils.TranscludeRecursionError.MAX_WIDGET_TREE_DEPTH) {
+		throw new $tw.utils.TranscludeRecursionError();
 	} else {
 		// Create set variable widgets for each variable
 		$tw.utils.each(options.variables,function(value,name) {
@@ -413,7 +522,34 @@ options include:
 	variables: optional hashmap of variables to wrap around the widget
 */
 Widget.prototype.makeChildWidget = function(parseTreeNode,options) {
+	var self = this;
 	options = options || {};
+	// Check whether this node type is defined by a custom widget definition
+	var variableDefinitionName = "$" + parseTreeNode.type;
+	if(this.variables[variableDefinitionName]) {
+		var isOverrideable = function() {
+				// Widget is overrideable if its name contains a period, or if it is an existing JS widget and we're not in safe mode
+				return parseTreeNode.type.indexOf(".") !== -1 || (!!self.widgetClasses[parseTreeNode.type] && !$tw.safeMode);
+			};
+		if(!parseTreeNode.isNotRemappable && isOverrideable()) { 
+			var variableInfo = this.getVariableInfo(variableDefinitionName,{allowSelfAssigned: true});
+			if(variableInfo && variableInfo.srcVariable && variableInfo.srcVariable.value && variableInfo.srcVariable.isWidgetDefinition) {
+				var newParseTreeNode = {
+					type: "transclude",
+					children: parseTreeNode.children,
+					isBlock: parseTreeNode.isBlock
+				};
+				$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,"$variable",variableDefinitionName);
+				$tw.utils.each(parseTreeNode.attributes,function(attr,name) {
+					// If the attribute starts with a dollar then add an extra dollar so that it doesn't clash with the $xxx attributes of transclude
+					name = name.charAt(0) === "$" ? "$" + name : name;
+					$tw.utils.addAttributeToParseTreeNode(newParseTreeNode,$tw.utils.extend({},attr,{name: name}));
+				});
+				parseTreeNode = newParseTreeNode;
+			}
+		}
+	}
+	// Get the widget class for this node type
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
 		WidgetClass = this.widgetClasses.text;
@@ -673,6 +809,35 @@ Widget.prototype.invokeActionsByTag = function(tag,event,variables) {
 
 Widget.prototype.allowActionPropagation = function() {
 	return true;
+};
+
+/*
+Find child <$data> widgets recursively. The tag name allows aliased versions of the widget to be found too
+*/
+Widget.prototype.findChildrenDataWidgets = function(children,tag,callback) {
+	var self = this;
+	$tw.utils.each(children,function(child) {
+		if(child.dataWidgetTag === tag) {
+			callback(child);
+		}
+		if(child.children) {
+			self.findChildrenDataWidgets(child.children,tag,callback);
+		}
+	});
+};
+
+/*
+Evaluate a variable with parameters. This is a static convenience method that attempts to evaluate a variable as a function, returning an array of strings
+*/
+Widget.evaluateVariable  = function(widget,name,options) {
+	var result;
+	if(widget.getVariableInfo) {
+		var variableInfo = widget.getVariableInfo(name,options);
+		result = variableInfo.resultList || [variableInfo.text];
+	} else {
+		result = [widget.getVariable(name)];
+	}
+	return result;
 };
 
 exports.widget = Widget;

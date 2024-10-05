@@ -23,7 +23,7 @@ var BinaryParser = function(type,text,options) {
 		children: [{
 			type: "transclude",
 			attributes: {
-				tiddler: {type: "string", value: BINARY_WARNING_MESSAGE}
+				"$tiddler": {type: "string", value: BINARY_WARNING_MESSAGE}
 			}
 		}]
 	};
@@ -38,7 +38,7 @@ var BinaryParser = function(type,text,options) {
 		children: [{
 			type: "transclude",
 			attributes: {
-				tiddler: {type: "string", value: EXPORT_BUTTON_IMAGE}
+				"$tiddler": {type: "string", value: EXPORT_BUTTON_IMAGE}
 			}
 		}]
 	};
@@ -64,6 +64,8 @@ var BinaryParser = function(type,text,options) {
 		children: [warn, link]
 	}
 	this.tree = [element];
+	this.source = text;
+	this.type = type;
 };
 
 exports["application/octet-stream"] = BinaryParser;

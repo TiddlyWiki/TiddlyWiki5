@@ -10,16 +10,33 @@ caption: Simple
 $example$
 \end
 
+\define search-example-code()
+<!-- 
+The inline filters update the displayed codeblock to reflect the choices the user has made in the UI.
+The rules pragma is used here to evaluate only these filters, but leave everything else untouched.
+The tabs and linebreaks within the parameters to addprefix, though maybe confusing, help with the readability of the codeblock output.
+-->
+\rules only filteredtranscludeinline
+<$dynannotate
+	search="{{{ [{$:/temp/dynannotate-example/search}!is[blank]else[The human mind]] }}}"{{{ [{$:/temp/dynannotate-example/searchMode}!search::some[literal normal]addprefix[
+	searchMode="]addsuffix["]] }}}
+	searchCaseSensitive="{{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[yes]] }}}"{{{ [{$:/temp/dynannotate-example/searchClass}!is[blank]addprefix[
+	searchClass="]addsuffix["]] }}}
+>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-2" mode="block"/>
+</$dynannotate>
+\end
+
 <div class="tc-dynannotation-example-info">
 
-!! Simple annotation
+!! Annotations with `target`
 
-We use the `target*` attributes to specify a target string for the annotation and optionally a prefix and suffix for disambiguating multiple occurances.
+We use the `target*` attributes to specify a target string for the annotation and optionally a prefix and suffix for disambiguating multiple occurences.
 
 </div>
 
-<<show-example """
-<$dynannotate
+<<show-example """<$dynannotate
 	target="the"
 	targetPrefix="Yet "
 	targetSuffix=" speed"
@@ -30,55 +47,35 @@ We use the `target*` attributes to specify a target string for the annotation an
 
 <div class="tc-dynannotation-example-info">
 
-!! Plain text searching
+!! Highlights with `search`
 
-We use the `search` attribute to specify a search string for highlighting:
+We use the `search` attribute to specify a search string for highlighting.
 
-</div>
+The search type can be set with the `searchMode` and `searchCaseSensitive` attributes.
 
-<<show-example """
-<$dynannotate
-	search="the"
->
-<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
-</$dynannotate>
-""">>
-
-<div class="tc-dynannotation-example-info">
-
-!! Regular expression searching
-
-We use the `mode` attribute set to `regexp` to highlight matches of a regular expression:
+We can style the highlights with the `searchClass` attribute, which has some predefined values.
 
 </div>
 
-<<show-example """
+|tc-table-no-border tc-dynannotate-search-parameters|k
+|search term |<$edit-text tiddler="$:/temp/dynannotate-example/search" field="text" tag="input" default="The human mind" />|
+|search mode |<$select tiddler="$:/temp/dynannotate-example/searchMode" field="text" default="literal"><option value="literal">literal</option><option value="normal">normal</option><option value="regexp">regexp</option><option value="whitespace">whitespace</option><option value="some">some</option><option value="words">words</option></$select> |
+|case sensitive |<$checkbox tiddler="$:/temp/dynannotate-example/searchCaseSensitive" field="text" checked="yes" unchecked="no" default="yes"> <$text text={{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[yes]] }}} /></$checkbox> |
+|search class |<$select tiddler="$:/temp/dynannotate-example/searchClass" field="text" default=""><option value="">(none)</option><option value="tc-dynannotation-search-overlay-animated">tc-dynannotation-search-overlay-animated</option><option value="tc-dynannotation-search-overlay-blurred">tc-dynannotation-search-overlay-blurred</option></$select> |
+
 <$dynannotate
-	search="the|an"
-	searchMode="regexp"
-	searchClass="tc-dynannotation-search-overlay-blurred"
+	search={{{ [{$:/temp/dynannotate-example/search}!is[blank]else[The human mind]] }}}
+	searchMode={{{ [{$:/temp/dynannotate-example/searchMode}] }}}
+	searchCaseSensitive={{{ [{$:/temp/dynannotate-example/searchCaseSensitive}!is[blank]else[yes]] }}}
+	searchClass={{{ [{$:/temp/dynannotate-example/searchClass}] }}}
 >
 <$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
+<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-2" mode="block"/>
 </$dynannotate>
-""">>
 
-<div class="tc-dynannotation-example-info">
-
-!! Normalised whitespace searching
-
-We use the `mode` attribute set to `whitespace` to search for a string with whitespace normalised (ie runs of whitespace are collapsed to a single space for matching purposes):
-
-</div>
-
-<<show-example """
-<$dynannotate
-	search="does  not     work that way.     It operates"
-	searchMode="whitespace"
-	searchClass="tc-dynannotation-search-overlay-animated"
->
-<$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>
-</$dynannotate>
-""">>
+<$wikify name="wikifiedCode" text=<<search-example-code>> mode="block" output="text">
+<$codeblock code=<<wikifiedCode>>/>
+</$wikify>
 
 <div class="tc-dynannotation-example-info">
 
@@ -90,8 +87,7 @@ Annotation tiddlers can be used to describe annotations. This example references
 
 <<list-links "[all[shadows+tiddlers]annotate-tiddler[$:/plugins/tiddlywiki/dynannotate/example-text-1]]">>
 
-<<show-example """
-<$dynannotate
+<<show-example """<$dynannotate
 	filter="[all[shadows+tiddlers]annotate-tiddler[$:/plugins/tiddlywiki/dynannotate/example-text-1]]"
 >
 <$transclude tiddler="$:/plugins/tiddlywiki/dynannotate/example-text-1" mode="block"/>

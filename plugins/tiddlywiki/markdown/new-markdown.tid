@@ -6,7 +6,7 @@ list-after: $:/core/ui/Buttons/new-tiddler
 
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/NewMarkdown/Hint}} aria-label={{$:/language/Buttons/NewMarkdown/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-new-tiddler" type="text/x-markdown"/>
+<$action-sendmessage $message="tm-new-tiddler" type="text/markdown"/>
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
 {{$:/plugins/tiddlywiki/markdown/images/new-markdown-button}}
 </$list>

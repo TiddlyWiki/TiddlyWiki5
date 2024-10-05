@@ -1,10 +1,11 @@
 caption: Firefox
 created: 20140811170425199
-modified: 20211114031651878
+modified: 20230803213024843
 tags: GettingStarted
 title: GettingStarted - Firefox
 type: text/vnd.tiddlywiki
 
-Firefox provides the best user experience for using TiddlyWiki with the TiddlyFox browser extension.
+Firefox provides the best user experience for using TiddlyWiki with the following browser extensions:
+<<list-links filter:"[tag[Firefox]delivery[Browser Extension]] -[[Saving with TiddlyFox]]">>
 
-{{Saving with TiddlyFox}}
+{{Saving with FireFox}}

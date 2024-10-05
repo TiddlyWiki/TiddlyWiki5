@@ -3,5 +3,6 @@
 	"name": "CodeMirror Keymap Emacs",
 	"description": "Keymap compatible with Emacs for CodeMirror",
 	"parent-plugin": "$:/plugins/tiddlywiki/codemirror",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_2_STABLE"
 }

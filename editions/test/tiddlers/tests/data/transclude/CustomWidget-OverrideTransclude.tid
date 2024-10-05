@@ -1,0 +1,33 @@
+title: Transclude/CustomWidget/OverrideTransclude
+description: Custom widget definition attempting to override transclude
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<$transclude $tiddler='TiddlerOne' one='Ferret'>
+</$transclude>
++
+title: TiddlerZero
+
+Antelope
++
+title: TiddlerOne
+
+\whitespace trim
+<!-- Redefine the <$transclude> widget by defining a transcludable variable with that name -->
+\widget $transclude(one:'Jaguar')
+\whitespace trim
+	<$text text=<<one>>/>
+	<$slot $name="body">
+		Whale
+	</$slot>
+\end
+<$genesis $type="$transclude" $remappable="no" $$tiddler="TiddlerZero">
+	Crocodile
+</$genesis>
++
+title: ExpectedResult
+
+<p>Antelope</p>

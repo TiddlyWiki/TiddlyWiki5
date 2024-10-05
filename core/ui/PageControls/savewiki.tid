@@ -1,6 +1,6 @@
 title: $:/core/ui/Buttons/save-wiki
 tags: $:/tags/PageControls
-caption: {{$:/core/images/save-button}} {{$:/language/Buttons/SaveWiki/Caption}}
+caption: {{$:/core/images/save-button-dynamic}} {{$:/language/Buttons/SaveWiki/Caption}}
 description: {{$:/language/Buttons/SaveWiki/Hint}}
 
 \whitespace trim
@@ -10,7 +10,7 @@ description: {{$:/language/Buttons/SaveWiki/Hint}}
 </$wikify>
 <span class="tc-dirty-indicator">
 <$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/core/images/save-button}}
+{{$:/core/images/save-button-dynamic}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>match[yes]]">
 <span class="tc-btn-text">

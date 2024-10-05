@@ -48,7 +48,17 @@ SetWidget.prototype.execute = function() {
 	this.setValue = this.getAttribute("value");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
-	this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,!!this.parseTreeNode.isMacroDefinition);
+	if(this.parseTreeNode.isMacroDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,true);
+	} else if(this.parseTreeNode.isFunctionDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isFunctionDefinition: true});
+	} else if(this.parseTreeNode.isProcedureDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isProcedureDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+	} else if(this.parseTreeNode.isWidgetDefinition) {
+		this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params,undefined,{isWidgetDefinition: true, configTrimWhiteSpace: this.parseTreeNode.configTrimWhiteSpace});
+	} else {
+		this.setVariable(this.setName,this.getValue());
+	}
 	// Construct the child widgets
 	this.makeChildWidgets();
 };

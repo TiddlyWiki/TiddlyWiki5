@@ -434,6 +434,15 @@ describe("'reduce' and 'intersection' filter prefix tests", function() {
 		expect(wiki.filterTiddlers("[tag[shopping]] :map[get[title]addprefix[-]addprefix<length>addprefix[of]addprefix<index>]").join(",")).toBe("0of4-Brownies,1of4-Chick Peas,2of4-Milk,3of4-Rice Pudding");
 	});
 
+	it("should handle the :then prefix", function() {
+		expect(wiki.filterTiddlers("[[one]] :then[[two]]").join(",")).toBe("two");
+		expect(wiki.filterTiddlers("[[one]] :then[tag[shopping]]").join(",")).toBe("Brownies,Chick Peas,Milk,Rice Pudding");
+		expect(wiki.filterTiddlers("[[one]] [[two]] [[three]] :then[[four]]").join(",")).toBe("four");
+		expect(wiki.filterTiddlers("[[one]] :then[tag[nonexistent]]").join(",")).toBe("one");
+		expect(wiki.filterTiddlers(":then[[two]]").length).toBe(0);
+		expect(wiki.filterTiddlers("[[notatiddler]is[tiddler]] :then[[two]]").length).toBe(0);
+	});
+
 	it("should handle macro parameters for filter run prefixes",function() {
 		var widget = require("$:/core/modules/widgets/widget.js");
 		var rootWidget = new widget.widget({ type:"widget", children:[ {type:"widget", children:[]} ] },

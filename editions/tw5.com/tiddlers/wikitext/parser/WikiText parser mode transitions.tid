@@ -27,11 +27,11 @@ This is a <<.em rough>> diagram whose lines mostly correspond to the parser mode
 
 By default the parser starts in [[block mode|Block Mode WikiText]]. However, a tiddler can instead be transcluded with [[inline mode|Inline Mode WikiText]] in which case [[block mode WikiText|Block Mode WikiText]] will not be recognised.
 
-At the start of text only, the parser will also recognise any [[pragma mode WikiText|Pragma]].
+At the start of text only, the parser will also recognise any [[pragma mode WikiText|Pragmas]].
 
 !! Transitions from pragma mode
 
-At the start of text, the parser will recognise any [[pragma|Pragma]]. If none are found then it will move to [[inline|Inline Mode WikiText]] or [[block|Block Mode WikiText]] mode depending on the transclusion mode. If any [[pragma|Pragma]] are found then it will continue looking for [[pragma|Pragma]] until it finds one or more blank lines not followed by the start of a new pragma.
+At the start of text, the parser will recognise any [[pragma|Pragmas]]. If none are found then it will move to [[inline|Inline Mode WikiText]] or [[block|Block Mode WikiText]] mode depending on the transclusion mode. If any [[pragma|Pragmas]] are found then it will continue looking for [[pragma|Pragmas]] until it finds one or more blank lines not followed by the start of a new pragma.
 
 !! Transitions from block mode
 

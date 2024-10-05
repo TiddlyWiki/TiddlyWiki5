@@ -20,19 +20,10 @@ exports.filter = function(source,operator,options) {
 		results = [],
 		target = operator.prefix !== "!";
 	source(function(tiddler,title) {
-		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),{
-				getVariable: function(name,opts) {
-					opts = opts || {};
-					switch(name) {
-						case "currentTiddler":
-							return "" + title;
-						case "..currentTiddler":
-							return options.widget.getVariable("currentTiddler");
-						default:
-							return options.widget.getVariable(name,opts);
-					}
-				}
-			});
+		var list = filterFn.call(options.wiki,options.wiki.makeTiddlerIterator([title]),options.widget.makeFakeWidgetWithVariables({
+			"currentTiddler": "" + title,
+			"..currentTiddler": options.widget.getVariable("currentTiddler","")
+		}));
 		if((list.length > 0) === target) {
 			results.push(title);
 		}

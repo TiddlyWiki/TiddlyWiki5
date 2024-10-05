@@ -20,6 +20,7 @@ Note that widgets inherit all the features of [[HTML in WikiText]]:
 ** Macro invocations (eg `attr=<<myMacro>>`)
 ** Transclusions (eg, `attr={{MyTiddler!!field}}`)
 ** Filtered transclusions (eg, `attr={{{ [filter[op]] }}}`)
+** <<.from-version "5.3.0">> [[Substituted Attribute Values]]
 * The content of a widget is [[parsed|WikiText Parser Modes]] in [[inline mode|Inline Mode WikiText]] unless the opening tag is followed by two linebreaks, which forces [[block mode|Block Mode WikiText]]
 ** [[inline mode|Inline Mode WikiText]] means that [[block mode|Block Mode WikiText]] parse rules like headings, tables and lists are not recognised
 

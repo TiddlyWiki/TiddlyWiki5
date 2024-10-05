@@ -14,12 +14,16 @@ The plain text parser processes blocks of source text into a degenerate parse tr
 
 var TextParser = function(type,text,options) {
 	this.tree = [{
-		type: "codeblock",
+		type: "genesis",
 		attributes: {
-			code: {type: "string", value: text},
-			language: {type: "string", value: type}
+			$type: {name: "$type", type: "string", value: "$codeblock"},
+			code: {name: "code", type: "string", value: text},
+			language: {name: "language", type: "string", value: type},
+			$remappable: {name: "$remappable", type:"string", value: "no"}
 		}
 	}];
+	this.source = text;
+	this.type = type;
 };
 
 exports["text/plain"] = TextParser;
@@ -30,4 +34,3 @@ exports["text/css"] = TextParser;
 exports["application/x-tiddler-dictionary"] = TextParser;
 
 })();
-

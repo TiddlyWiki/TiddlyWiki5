@@ -13,19 +13,17 @@ Read tiddlers from the browser location hash
 "use strict";
 
 // Get the hash
-var rawHash = document.location.hash.substring(1);
-if(rawHash.charAt(0) === "#") {
-	var hash;
-	try{
-		hash = $tw.utils.decodeURIComponentSafe(rawHash.substring(1));
-	} catch(ex) {
-		console.log("Share plugin: Error decoding location hash",ex);
-	}
+var hash;
+try {
+	hash = decodeURIComponent(document.location.hash.substring(1));
+} catch(e) {
+}
+if(hash && hash.charAt(0) === "#") {
 	// Try to parse the hash as JSON
 	if(hash) {
 		var tiddlers;
 		try {
-			tiddlers= JSON.parse(hash);
+			tiddlers= JSON.parse(hash.substr(1));
 		} catch(ex) {
 			console.log("Share plugin: Error parsing JSON from location hash",ex);
 		}

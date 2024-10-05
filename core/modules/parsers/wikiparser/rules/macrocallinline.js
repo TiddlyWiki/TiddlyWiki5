@@ -27,7 +27,7 @@ exports.findNextMatch = function(startPos) {
 	var nextStart = startPos;
 	// Try parsing at all possible macrocall openers until we match
 	while((nextStart = this.parser.source.indexOf("<<",nextStart)) >= 0) {
-		this.nextCall = $tw.utils.parseMacroInvocation(this.parser.source,nextStart);
+		this.nextCall = $tw.utils.parseMacroInvocationAsTransclusion(this.parser.source,nextStart);
 		if(this.nextCall) {
 			return nextStart;
 		}

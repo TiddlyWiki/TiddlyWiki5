@@ -1,0 +1,4 @@
+title: $:/core/ui/testcases/RawJSONTemplate
+
+\whitespace trim
+<$text text=<<payloadTiddlers>>/>
