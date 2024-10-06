@@ -8,7 +8,7 @@ sidebarbreakpoint: 960px
 sidebarminwidth: 350px
 sidebarwidth: 350px
 storyleft: 0px
-storyminwidth: 350px
+storyminwidth: 168px
 storytop: 0px
 storyright: 770px
 storywidth: 770px
