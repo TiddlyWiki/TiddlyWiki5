@@ -74,7 +74,7 @@ title: $:/core/macros/sidebar-resizer
 		storyRightMetric={{$:/state/sidebar/resizing!!story-right-metric}}
 		storyRiverWidthConverted={{{ [function[convert.to.result],<storyRiverWidth>,<storyRightMetric>] }}}
 		storyRiverLimitConverted={{{ [function[convert.to.result],<storyRiverLimit>,<storyRightMetric>] }}}
-		storyDiffConverted={{{ [{$:/state/sidebar/resizing!!modifier}!match[ctrl]then<convert.storydiff.to.result>] ~0 }}}
+		storyDiffConverted={{{ [<modifier>!match[ctrl]then<convert.storydiff.to.result>] ~0 }}}
 		storyWidthConverted={{{ [function[convert.to.result],<storyWidth>,<storyRightMetric>] }}}
 		result={{{ [<storyRiverWidthConverted>subtract<storyDiffConverted>compare:number:lt<storyWidthConverted>then<storyWidthConverted>add<storyDiffConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>compare:number:gteq<storyRiverLimitConverted>then<storyRiverLimitConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>addsuffix<storyRightMetric>] }}}>
 
