@@ -4,7 +4,8 @@ title: Find Out More
 type: text/vnd.tiddlywiki
 icon: $:/core/images/help
 
-\parsermode inline
+Resources to help you learn more about ~TiddlyWiki and its community.
+
 <div class="tc-cards">
 <$list filter="[tag[HelloThumbnail]]">
 <$macrocall $name="flex-card" captionField="caption" descriptionField="text"/>
