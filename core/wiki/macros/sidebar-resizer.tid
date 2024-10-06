@@ -43,6 +43,7 @@ title: $:/core/macros/sidebar-resizer
 		start-story-left={{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}
 		story-left-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
 		start-story-right={{$:/themes/tiddlywiki/vanilla/metrics/storyright}}
+		saved-story-right={{$:/themes/tiddlywiki/vanilla/metrics/storyright}}
 		story-right-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/storyright}] }}}
 		start-sidebar-width={{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}
 		sidebar-width-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] }}}
@@ -54,27 +55,59 @@ title: $:/core/macros/sidebar-resizer
 <$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
 \end
 
+\function convert.storydiffintermediate.to.result() [function[convert.to.result],<storyDiffIntermediate>,<storyRightMetric>]
 \function convert.storydiff.to.result() [function[convert.to.result],<storyDiff>,<storyRightMetric>]
+\function convert.leftdiff.to.result() [function[convert.to.result],<storyDiff>,<storyLeftMetric>]
 
-\procedure set-storyright-actions()
-<$let storyLeftStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-left}] }}} storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] }}} sidebarMinWidthConverted={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}} storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidthConverted>] }}} storyDiff={{{ [<storyWidth>add<storyLeftStart>subtract<storyRightStart>multiply[-1]] }}}>
-	<$let storyRightMetric={{$:/state/sidebar/resizing!!story-right-metric}} storyRiverWidthConverted={{{ [function[convert.to.result],<storyRiverWidth>,<storyRightMetric>] }}} storyRiverLimitConverted={{{ [function[convert.to.result],<storyRiverLimit>,<storyRightMetric>] }}} storyDiffConverted={{{ [<modifier>!match[ctrl]then{$:/state/sidebar/resizing!!modifier}!match[ctrl]then<convert.storydiff.to.result>] ~0 }}} storyWidthConverted={{{ [function[convert.to.result],<storyWidth>,<storyRightMetric>] }}}>
-		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text={{{ [<storyRiverWidthConverted>subtract<storyDiffConverted>compare:number:lt<storyWidthConverted>then<storyWidthConverted>add<storyDiffConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>compare:number:gteq<storyRiverLimitConverted>then<storyRiverLimitConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>addsuffix<storyRightMetric>] }}}/>
-	</$let>
-</$let>
-\end
+\procedure set-storyleft-storyright-actions()
+<$let
+	storyLeftStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-left}] }}}
+	storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}}
+	storyWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] }}}
+	storyLeft={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-left}add<dragDiff>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
+	storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}
+	storyDiff={{{ [<storyWidth>add<storyLeftStart>subtract<storyRightStart>multiply[-1]] }}}
+	storyLeftMax={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<storyWidth>subtract<storyDiff>] }}}>
 
-\procedure set-storyleft-actions()
-<$let storyLeftStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-left}] }}} storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyLeft={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-left}add<dragDiff>] }}} storyWidthPixelConverted={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] }}} sidebarMinWidthPixelConverted={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}} storyDiff={{{ [<storyWidthPixelConverted>add<storyLeftStart>subtract<storyRightStart>multiply[-1]] }}} storyLeftMax={{{ [<widgetNodeWidth>subtract<sidebarMinWidthPixelConverted>subtract<storyWidthPixelConverted>subtract<storyDiff>] }}}>
-	<$let storyLeftMetric={{$:/state/sidebar/resizing!!story-left-metric}} storyLeftStart={{{ [function[convert.to.result],<storyLeftStart>,<storyLeftMetric>] }}} storyLeftConverted={{{ [function[convert.to.result],<storyLeft>,<storyLeftMetric>] }}} storyLeftMaxConverted={{{ [function[convert.to.result],<storyLeftMax>,<storyLeftMetric>] }}}>
-		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" text={{{ [<storyLeftConverted>compare:number:lt[0]then[0]addsuffix<storyLeftMetric>] ~[<storyLeftConverted>compare:number:gteq<storyLeftMaxConverted>then<storyLeftMaxConverted>addsuffix<storyLeftMetric>] ~[<storyLeftConverted>addsuffix<storyLeftMetric>] }}}/>
+	<$let
+		storyRightMetric={{$:/state/sidebar/resizing!!story-right-metric}}
+		storyRiverWidthConverted={{{ [function[convert.to.result],<storyRiverWidth>,<storyRightMetric>] }}}
+		storyRiverLimitConverted={{{ [function[convert.to.result],<storyRiverLimit>,<storyRightMetric>] }}}
+		storyDiffConverted={{{ [{$:/state/sidebar/resizing!!modifier}!match[ctrl]then<convert.storydiff.to.result>] ~0 }}}
+		storyWidthConverted={{{ [function[convert.to.result],<storyWidth>,<storyRightMetric>] }}}
+		result={{{ [<storyRiverWidthConverted>subtract<storyDiffConverted>compare:number:lt<storyWidthConverted>then<storyWidthConverted>add<storyDiffConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>compare:number:gteq<storyRiverLimitConverted>then<storyRiverLimitConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>addsuffix<storyRightMetric>] }}}>
+
+		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text=<<result>>/>
+
 	</$let>
+
+	<$let
+		storyLeftMetric={{$:/state/sidebar/resizing!!story-left-metric}}
+		storyLeftConverted={{{ [function[convert.to.result],<storyLeft>,<storyLeftMetric>] }}}
+		storyLeftMaxConverted={{{ [function[convert.to.result],<storyLeftMax>,<storyLeftMetric>] }}}
+		result={{{ [<storyLeftConverted>compare:number:lt[0]then[0]addsuffix<storyLeftMetric>] ~[<storyLeftConverted>compare:number:gteq<storyLeftMaxConverted>then<storyLeftMaxConverted>addsuffix<storyLeftMetric>] ~[<storyLeftConverted>addsuffix<storyLeftMetric>] }}}>
+
+		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" text=<<result>>/>
+
+	</$let>
+
 </$let>
 \end
 
 \procedure set-sidebarwidth-actions()
-<$let sidebarWidthMetric={{$:/state/sidebar/resizing!!sidebar-width-metric}} sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}} storyLeftConverted={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}} storyMinWidthConverted={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}] }}} sidebarMaxWidth={{{ [<widgetNodeWidth>subtract<storyLeftConverted>subtract<storyMinWidthConverted>] }}}>
-	<$vars sidebarWidthConverted={{{ [function[convert.to.result],<sidebarWidth>,<sidebarWidthMetric>] }}} sidebarMaxWidthConverted={{{ [function[convert.to.result],<sidebarMaxWidth>,<sidebarWidthMetric>] }}} sidebarMinWidthConverted={{{ [function[convert.to.result],<sidebarMinWidth>,<sidebarWidthMetric>] }}}>
+<$let
+	sidebarWidthMetric={{$:/state/sidebar/resizing!!sidebar-width-metric}}
+	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
+	storyLeft={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
+	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}] }}}
+	sidebarMaxWidth={{{ [<widgetNodeWidth>subtract<storyLeft>subtract<storyMinWidth>] }}}>
+
+	<$vars
+		sidebarWidthConverted={{{ [function[convert.to.result],<sidebarWidth>,<sidebarWidthMetric>] }}}
+		sidebarMaxWidthConverted={{{ [function[convert.to.result],<sidebarMaxWidth>,<sidebarWidthMetric>] }}}
+		sidebarMinWidthConverted={{{ [function[convert.to.result],<sidebarMinWidth>,<sidebarWidthMetric>] }}}>
+
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" text={{{ [<sidebarWidthConverted>compare:number:gteq<sidebarMaxWidthConverted>then<sidebarMaxWidthConverted>addsuffix<sidebarWidthMetric>] ~[<sidebarWidthConverted>compare:number:lt<sidebarMinWidthConverted>then<sidebarMinWidthConverted>addsuffix<sidebarWidthMetric>] ~[<sidebarWidthConverted>addsuffix<sidebarWidthMetric>] }}}/>
 	</$vars>
 </$let>
@@ -83,14 +116,8 @@ title: $:/core/macros/sidebar-resizer
 \procedure sidebar-resizer-pointermove-actions()
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
 	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}] }}} startStoryRight={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
-		<%if [<modifier>match[ctrl]then{$:/state/sidebar/resizing!!modifier}!match[ctrl]] %>
-			<$action-setfield $tiddler="$:/state/sidebar/resizing" modifier="ctrl"/>
-		<%elseif [<modifier>match[shift]then{$:/state/sidebar/resizing!!modifier}match[ctrl]] %>
-			<$action-setfield $tiddler="$:/state/sidebar/resizing" modifier="shift"/>
-		<% endif %>
 		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
-			<<set-storyleft-actions>>
-			<<set-storyright-actions>>
+			<<set-storyleft-storyright-actions>>
 		<% else %>
 			<<set-sidebarwidth-actions>>
 		<% endif %>
