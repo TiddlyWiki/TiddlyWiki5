@@ -4,6 +4,7 @@ modified: 20241001141521924
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
+icon: $:/core/icon
 
 !!.tc-hero-heading ''Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information''
 

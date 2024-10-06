@@ -114,6 +114,9 @@ type: text/vnd.tiddlywiki
 	background: none;
 }
 
+.tc-cards.tc-cards-vertical {
+}
+
 .tc-cards.tc-action-card .tc-card-button {
 	border: 1px solid <<colour foreground>>;
 	background: <<colour foreground>>;
@@ -179,7 +182,14 @@ type: text/vnd.tiddlywiki
 
 .tc-cards.tc-cards-vertical .tc-card-accent {
 	flex-direction: row;
+	justify-content: start;
+	padding: 5px 7px;
 	align-items: center;
+}
+
+.tc-cards.tc-cards-vertical .tc-card-icon {
+	line-height: 0;
+	order: 1;
 }
 
 .tc-tiddlylink.tc-card:hover {
@@ -258,9 +268,9 @@ type: text/vnd.tiddlywiki
 }
 
 .tc-cards.tc-cards-vertical .tc-card-title {
-	font-size: 1em;
+	font-size: 1.1em;
 	min-width: 10em;
-	text-align: right;
+	order: 2;
 }
 
 .tc-cards.tc-cards-vertical .tc-card-title svg {

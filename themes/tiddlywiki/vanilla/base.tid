@@ -1075,7 +1075,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 .tc-tiddler-frame {
 	position: relative;
-	margin-bottom: 28px;
+	margin-bottom: 14px;
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
 }
@@ -1127,18 +1127,18 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 @media (max-width: <<sidebarbreakpoint-minus-one>>) {
 	.tc-tiddler-frame {
-		padding: 14px 14px 14px 14px;
+		padding: 7px 7px 7px 7px;
 		margin-bottom: .5em;
 	}
 
 	.tc-tiddler-info {
-		margin: 0 -14px 0 -14px;
+		margin: 0 -7px 0 -7px;
 	}
 }
 
 @media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
-		padding: 28px 42px 42px 42px;
+		padding: 14px 21px 21px 21px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
 		border-radius: 2px;
 	}
@@ -1175,8 +1175,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tiddler-title-icon svg {
-	width: 0.9em;
-	height: 0.9em;
+	width: 0.8em;
+	height: 0.8em;
 }
 
 .tc-system-title-prefix {
@@ -1184,12 +1184,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-titlebar h2 {
-	font-size: 1em;
+	font-size: 0.8em;
 	display: inline;
 }
 
 .tc-titlebar img {
-	height: 1em;
+	height: 0.8em;
 }
 
 .tc-subtitle {
