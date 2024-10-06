@@ -26,6 +26,7 @@ Metrics/FontSize: Font size
 Metrics/LineHeight: Line height
 Metrics/BodyFontSize: Font size for tiddler body
 Metrics/BodyLineHeight: Line height for tiddler body
+Metrics/SidebarResizer/Hint: the values for `storyleft`, `storyright`, `storywidth`, `storyminwidth`, `sidebarwidth` and `sidebarminwidth` need to be ''absolute'' CSS units, ''percentages'' or ''em'' units in order for the sidebar resizer to work
 Metrics/StoryLeft: Story left position
 Metrics/StoryLeft/Hint: how far the left margin of the story river<br>(tiddler area) is from the left of the page
 Metrics/StoryMinWidth: Minimum Story width

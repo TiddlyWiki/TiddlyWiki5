@@ -64,6 +64,8 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 ! <<lingo Metrics>>
 
+<<lingo Metrics/SidebarResizer/Hint>>
+
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/fontsize"><<lingo Metrics/FontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/lineheight"><<lingo Metrics/LineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/> |
 |<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize"><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |
