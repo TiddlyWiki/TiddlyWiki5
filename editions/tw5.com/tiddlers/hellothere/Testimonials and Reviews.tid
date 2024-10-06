@@ -3,6 +3,7 @@ tags: TableOfContents
 title: Testimonials and Reviews
 type: text/vnd.tiddlywiki
 icon: $:/core/images/star-filled
+color: #088
 
 \parsermode inline
 <div class="tc-cards">
