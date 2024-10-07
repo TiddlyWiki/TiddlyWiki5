@@ -17,20 +17,20 @@ exports.method = "GET";
 exports.path = /^\/admin\/roles\/?$/;
 
 exports.handler = function(request, response, state) {
-  var roles = state.server.sqlTiddlerDatabase.listRoles();
+	var roles = state.server.sqlTiddlerDatabase.listRoles();
 
-  response.writeHead(200, "OK", {"Content-Type": "text/html"});
+	response.writeHead(200, "OK", {"Content-Type": "text/html"});
 
-  var html = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
-    variables: {
-      "page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles",
-      "roles-list": JSON.stringify(roles),
-      "username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
-      "user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
-    }
-  });
-  response.write(html);
-  response.end();
+	var html = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/page", {
+		variables: {
+			"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles",
+			"roles-list": JSON.stringify(roles),
+			"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
+			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"
+		}
+	});
+	response.write(html);
+	response.end();
 };
 
 }());

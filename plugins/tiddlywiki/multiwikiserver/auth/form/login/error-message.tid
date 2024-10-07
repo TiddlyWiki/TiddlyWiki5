@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/auth/form/login/error-message
 
 <$list filter="[[$:/temp/mws/login/error]!is[missing]]" variable="errorTiddler">
-  <div class="tc-error-message">
-    {{$:/temp/mws/login/error}}
-  </div>
+	<div class="tc-error-message">
+		{{$:/temp/mws/login/error}}
+	</div>
 </$list>
