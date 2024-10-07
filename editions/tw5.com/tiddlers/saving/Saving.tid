@@ -8,6 +8,6 @@ type: text/vnd.tiddlywiki
 
 <div class="tc-cards">
 <$list filter="[tag[Saving]sort[caption]]">
-{{||$:/_tw5.com-card-template}}
+<$macrocall $name="flex-card" bordercolor={{!!color}} captionField="caption" subtitle={{{ [{!!community-author}!is[blank]addprefix[by ]] }}}/>
 </$list>
 </div>
