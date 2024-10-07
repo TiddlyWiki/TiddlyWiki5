@@ -1,0 +1,20 @@
+caption: ~FireFoxでの保存 
+created: 20230803205140949
+modified: 20241007111525319
+original-modified: 20230803213246739
+tags: Saving Firefox
+title: Saving with FireFox
+ja-title: FireFoxでの保存
+
+# [[Firefox]]を再起動します
+# このボタンをクリックして、空のTiddlyWikiを[[ダウンロード|Download]]します:
+#> {{$:/editions/tw5.com/snippets/download-empty-button}}
+# ダウンロードしたファイルを見つけます
+#* ファイル名を変更することもできますが、拡張子`.html`か`.htm`はそのままとしてください
+# [[Firefox]]でファイルを開きます
+
+# サイドバーの''新しいTiddlerを作成します'' <<.icon $:/core/images/new-button>>ボタンを使用して、新しいTiddlerを作成してみてください。Tiddlerのコンテンツを入力し、<<.icon $:/core/images/done-button>> ''編集内容を確定します''ボタンをクリックします
+# サイドバーの<<.icon $:/core/images/save-button-dynamic>> ''Wikiを保存します''ボタンをクリックして変更を保存します
+#* ウィンドウの右上にある黄色の通知''Wikiを保存しました''を確認します
+# ブラウザのウィンドウをリフレッシュして、変更が正しく保存されたことを確認してください
+
