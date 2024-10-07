@@ -84,7 +84,7 @@ function loadWikiFolder(options) {
 		// Create the recipe
 		recipeList.push(options.bagName);
 		$tw.mws.store.createRecipe(options.recipeName,recipeList,options.recipeDescription);
-		$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath,$tw.config.editionsPath,options.wikiPath,$tw.config.wikiTiddlersSubDir),options.bagName);	
+		$tw.mws.store.saveTiddlersFromPath(path.resolve(options.wikiPath,$tw.config.wikiTiddlersSubDir),options.bagName);
 	}
 }
 

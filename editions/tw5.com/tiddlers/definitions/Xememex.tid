@@ -1,7 +1,8 @@
-title: Xememex
-tags: Definitions
 created: 20230410105035569
 modified: 20230410105035569
+tags: Definitions
+title: Xememex
+type: text/vnd.tiddlywiki
 
 <span style="float:right;">[img width=340 [Xememex Logo]]</span>
 
@@ -10,5 +11,3 @@ Xememex is a multiuser TiddlyWiki from [[Intertwingled Innovations]]. It allows 
 The largest customer implementation has hundreds of online wikis with thousands of users. See https://manuals.annafreud.org/
 
 Xememex is currently only available under commercial terms from Intertwingled Innovations. Contact [[Jeremy Ruston at Intertwingled Innovations|mailto:jeremy@intertwingledinnovations.com]] for more details.
-
-<div style="clear: both;"/>

@@ -65,6 +65,13 @@ sidebar-tab-foreground-selected: Tekst wybranej zakładki w menu bocznym
 sidebar-tab-foreground: Tekst zakładki w menu bocznym
 sidebar-tiddler-link-foreground-hover: Tekst po najechaniu linku do tiddlera w menu bocznym
 sidebar-tiddler-link-foreground: Tekst linka do tiddlera w menu bocznym
+stability-stable: Odznaka dla stanu wtyczki "stabilna" (stable)
+stability-experimental: Odznaka dla stanu wtyczki "eksperymentalna" (experimental)
+stability-deprecated: Odznaka dla stanu wtyczki "wycofana" (deprecated)
+stability-legacy: Odznaka dla stanu wtyczki "stara" (legacy)
+testcase-accent-level-1: Akcent kolorystyczny niezagnieżdzonego przypadku testowego
+testcase-accent-level-2: Akcent kolorystyczny pojedynczo zagnieżdzonego przypadku testowego
+testcase-accent-level-3: Akcent kolorystyczny podwójnie zagnieżdzonego przypadku testowego
 site-title-foreground: Tekst nazwy strony
 static-alert-foreground: Tekst statycznego alertu
 tab-background-selected: Tło wybranej zakładki

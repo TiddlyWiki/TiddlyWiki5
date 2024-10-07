@@ -23,13 +23,13 @@ type: text/vnd.tiddlywiki
 These new token-based shortcuts allow a richer structure and expressivity than existing features such as widgets or pragmas. For example:
 
 ```
-<% if [<animal>match[Elephant]] %>
+<%if [<animal>match[Elephant]] %>
   It is an elephant
-<% elseif [<animal>match[Giraffe]] %>
+<%elseif [<animal>match[Giraffe]] %>
 	It is a giraffe
-<% else %>
+<%else%>
 	It is completely unknown
-<% endif %>
+<%endif%>
 ```
 
 Behind the scenes, the conditional shortcut syntax is rendered as the equivalent [[ListWidgets|ListWidget]].

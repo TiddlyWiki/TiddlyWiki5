@@ -26,6 +26,7 @@ Tags/ClearInput/Caption: wyczyść
 Tags/ClearInput/Hint: Wyczyść tagi
 Tags/Dropdown/Caption: lista tagów
 Tags/Dropdown/Hint: Pokaż listę tagów
+Tags/EmptyMessage: (brak wyników)
 Title/BadCharacterWarning: Uwaga: unikaj używania któregokolwiek z tych znaków w nazwach tiddlerów: <<bad-chars>>
 Title/Exists/Prompt: Docelowy tiddler już istnieje
 Title/Relink/Prompt: Zaktualizuj ''<$text text=<<fromTitle>>/>'' na ''<$text text=<<toTitle>>/>'' w //tagach// i //listach// pól innych tiddlerów

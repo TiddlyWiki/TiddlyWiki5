@@ -6,14 +6,14 @@ description: {{$:/language/Buttons/Import/Hint}}
 \whitespace trim
 <div class="tc-file-input-wrapper">
 <$button tooltip={{$:/language/Buttons/Import/Hint}} aria-label={{$:/language/Buttons/Import/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
+<%if [<tv-config-toolbar-icons>match[yes]] %>
 {{$:/core/images/import-button}}
-</$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
+<%endif%>
+<%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">
 <$text text={{$:/language/Buttons/Import/Caption}}/>
 </span>
-</$list>
+<%endif%>
 </$button>
 <$browse tooltip={{$:/language/Buttons/Import/Hint}}/>
 </div>

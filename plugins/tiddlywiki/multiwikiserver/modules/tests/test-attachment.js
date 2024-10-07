@@ -7,11 +7,12 @@ Tests attachments.
 
 \*/
 if(typeof window === 'undefined' && typeof process !== 'undefined' && process.versions && process.versions.node) {
-	var fs = require('fs');
-	var path = require('path');
-	var assert = require('assert');
-	var AttachmentStore = require('$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js').AttachmentStore;
-	const {Buffer} = require('buffer');
+(function(){
+  var fs = require('fs');
+  var path = require('path');
+  var assert = require('assert');
+  var AttachmentStore = require('$:/plugins/tiddlywiki/multiwikiserver/store/attachments.js').AttachmentStore;
+  const {Buffer} = require('buffer');
 
 	function generateFileWithSize(filePath, sizeInBytes) {
 		return new Promise((resolve, reject) => {
@@ -159,23 +160,24 @@ if(typeof window === 'undefined' && typeof process !== 'undefined' && process.ve
 				}
 			});
 
-			it('getAttachmentStream multiple large files', async function() {
-				var sizeInMB = 10;
-				var numFiles = 5;
-				for (var i = 0; i < numFiles; i++) {
-					const file = await generateFileWithSize(`./editions/test/test-store/large-file-${i}.txt`, 1024 * 1024 * sizeInMB);
-					var options = {
-						text: file,
-						type: 'application/octet-stream',
-						reference: `test-reference-${i}`,
-					};
-					var contentHash = attachmentStore.saveAttachment(options);
-					var stream = attachmentStore.getAttachmentStream(contentHash);
-					assert.notStrictEqual(stream, null);
-					assert.strictEqual(stream.type, 'application/octet-stream');
-				}
-			});
-		});
-	}
-	})();
+      it('getAttachmentStream multiple large files', async function() {
+        var sizeInMB = 10;
+        var numFiles = 5;
+        for (var i = 0; i < numFiles; i++) {
+          const file = await generateFileWithSize(`./editions/test/test-store/large-file-${i}.txt`, 1024 * 1024 * sizeInMB);
+          var options = {
+            text: file,
+            type: 'application/octet-stream',
+            reference: `test-reference-${i}`,
+          };
+          var contentHash = attachmentStore.saveAttachment(options);
+          var stream = attachmentStore.getAttachmentStream(contentHash);
+          assert.notStrictEqual(stream, null);
+          assert.strictEqual(stream.type, 'application/octet-stream');
+        }
+      });
+    });
+  }
+  })();
+})();
 }
