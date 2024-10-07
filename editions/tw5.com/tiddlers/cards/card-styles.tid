@@ -170,6 +170,14 @@ type: text/vnd.tiddlywiki
 	transform: scale(1.05);
 }
 
+.tc-card .tc-card-icon svg {
+	transition: transform 0.3s ease-in-out;
+}
+
+.tc-card:hover .tc-card-icon svg {
+	transform: scale(1.1);
+}
+
 .tc-card-title {
 	font-size: 1.2em;
 	line-height: 1.2;
