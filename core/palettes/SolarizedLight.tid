@@ -24,8 +24,8 @@ diff-equal-background: inherit
 diff-equal-foreground: inherit
 diff-insert-background: inherit
 diff-insert-foreground: #859900
-diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
+diff-invisible-background: inherit
+diff-invisible-foreground: #b58900
 dirty-indicator: #dc322f
 download-background: #859900
 download-foreground: #eee8d5
