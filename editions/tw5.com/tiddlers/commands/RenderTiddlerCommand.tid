@@ -1,6 +1,9 @@
-title: RenderTiddlerCommand
-tags: Commands
 caption: rendertiddler
+created: 20241007001432813
+modified: 20241007001436537
+tags: Commands $:/deprecated
+title: RenderTiddlerCommand
+type: text/vnd.tiddlywiki
 
 <<.deprecated-since "5.1.15" "RenderCommand">>.
 
