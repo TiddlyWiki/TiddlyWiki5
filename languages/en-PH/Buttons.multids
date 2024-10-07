@@ -1,0 +1,19 @@
+title: $:/language/Buttons/
+
+Clear/Hint: Clear image to solid color
+EmergencyDownload/Caption: download tiddlers as JSON
+Excise/Caption: cut out
+Excise/Caption/Excise: Cut out
+Excise/Caption/Replace: Replace cut out text with:
+Excise/Hint: Cut out the selected text into a new tiddler
+FullScreen/Hint: Enter or leave fullscreen mode
+MonoBlock/Caption: monospace block
+MonoBlock/Hint: Apply monospace block formatting to lines containing selection
+MonoLine/Caption: monospace
+MonoLine/Hint: Apply monospace character formatting to selection
+Paint/Caption: paint color
+Paint/Hint: Set painting color
+Palette/Hint: Choose the color palette
+Save/Caption: OK
+Stamp/Hint: Insert a pre–configured snippet of text
+StoryView/Hint: Choose the story visualization

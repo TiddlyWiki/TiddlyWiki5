@@ -1,0 +1,17 @@
+title: $:/language/ControlPanel/
+
+Appearance/Hint: Ways to customize the appearance of your TiddlyWiki.
+Basics/Language/Prompt: Mabuhay! Current language:
+KeyboardShortcuts/Platform/NonLinux: Non–Linux platforms only
+KeyboardShortcuts/Platform/NonMac: Non–Macintosh platforms only
+KeyboardShortcuts/Platform/NonWindows: Non–Windows platforms only
+LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicized modules lack a source tiddler, typically because they were setup during the boot process.
+Palette/Editor/Names/External/Show: Show color names that are not part of the current palette
+Plugins/SubPluginPrompt: With <<count>> sub–plugins available
+Saving/GitService/GitHub/Password: Password, OAuth token, or personal access token (see [[GitHub help page|https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line]] for details)
+Settings/CamelCase/Caption: camelCase and PascalCase Wiki Links
+Settings/CamelCase/Description: Enable automatic ~camelCase and PascalCase linking
+Settings/CamelCase/Hint: You can globally disable automatic linking of ~camelCase and PascalCase phrases. Requires reload to take effect
+Settings/Hint: These settings let you customize the behaviour of TiddlyWiki.
+TiddlerColour/Caption: Tiddler Color
+TiddlerColour/Hint: This rules cascade is used to dynamically choose the color for a tiddler (used for the icon and the associated tag pill).

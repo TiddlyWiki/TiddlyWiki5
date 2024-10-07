@@ -5,6 +5,5 @@
 	"description": "English (PH)",
 	"author": "JC John Sese Cuneta",
 	"core-version": ">=5.3.5",
-	"dependents": ["$:/languages/en-GB"],
-  "plugin-priority": 110
+	"dependents": ["$:/languages/en-GB"]
 }

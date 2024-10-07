@@ -1,0 +1,7 @@
+title: $:/language/Docs/PaletteColours/
+
+pre-background: Pre–formatted code background
+pre-border: Pre–formatted code border
+testcase-accent-level-1: Test case accent color with no nesting
+testcase-accent-level-2: Test case accent color with 2nd level nesting
+testcase-accent-level-3: Test case accent color with 3rd level nesting or higher
