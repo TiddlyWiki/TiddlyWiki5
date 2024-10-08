@@ -4,7 +4,7 @@ title: $:/core/ui/ViewTemplate/subtitle/default
 <$reveal type="nomatch" stateTitle=<<folded-state>> text="hide" tag="div" retain="yes" animate="yes">
 <div class="tc-subtitle tc-clearfix">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewTemplate/Subtitle]!has[draft.of]]" variable="subtitleTiddler">
-<$transclude tiddler=<<subtitleTiddler>> mode="inline"/><$list-join>&nbsp;</$list-join>
+<$transclude tiddler=<<subtitleTiddler>> mode="inline"/>
 </$list>
 </div>
 </$reveal>
