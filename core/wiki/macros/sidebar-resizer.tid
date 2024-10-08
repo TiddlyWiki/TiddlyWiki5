@@ -90,9 +90,9 @@ title: $:/core/macros/sidebar-resizer
 		tiddlerMinWidthConverted={{{ [<tiddlerWidthMetric>match[%]then<tiddlerMinWidth>multiply[100]divide<innerStoryWidth>] ~[function[convert.to.result],<tiddlerMinWidth>,<tiddlerWidthMetric>] }}}
 		tiddlerMaxWidthConverted={{{ [<tiddlerWidthMetric>match[%]then<tiddlerMaxWidth>multiply[100]divide<innerStoryWidth>] ~[function[convert.to.result],<tiddlerMaxWidth>,<tiddlerWidthMetric>] }}}
 
-		storyWidthResult={{{ [<storyWidthConverted>compare:number:lt<storyMinWidthConverted>then<storyMinWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidthConverted>compare:number:gteq<storyMaxWidthConverted>then<storyMaxWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidthConverted>addsuffix<storyWidthMetric>] }}}
+		storyWidthResult={{{ [<storyWidth>compare:number:lt<storyMinWidth>then<storyMinWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidth>compare:number:gteq<storyMaxWidth>then<storyMaxWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidthConverted>addsuffix<storyWidthMetric>] }}}
 
-		tiddlerWidthResult={{{ [<tiddlerWidthMetric>match[%]then<storyWidthConverted>compare:number:lt<storyMinWidthConverted>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] ~[<tiddlerWidthMetric>match[%]then<storyWidthConverted>compare:number:gteq<storyMaxWidthConverted>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:lt<tiddlerMinWidth>then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:gteq<tiddlerMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthConverted>addsuffix<tiddlerWidthMetric>] }}}>
+		tiddlerWidthResult={{{ [<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:lt<storyMinWidth>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] ~[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:gteq<storyMaxWidth>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:lt<tiddlerMinWidth>then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:gteq<tiddlerMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthConverted>addsuffix<tiddlerWidthMetric>] }}}>
 
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" text=<<tiddlerWidthResult>>/>
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" text=<<storyWidthResult>>/>
@@ -105,7 +105,7 @@ title: $:/core/macros/sidebar-resizer
 		storyRiverLimitConverted={{{ [function[convert.to.result],<storyRiverLimit>,<storyRightMetric>] }}}
 		storyMinWidthAddLeftConverted={{{ [function[convert.to.result],<storyMinWidthAddLeft>,<storyRightMetric>] }}}
 
-		result={{{ [<storyRiverWidthConverted>compare:number:lt<storyMinWidthAddLeftConverted>then<storyMinWidthAddLeftConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>compare:number:gteq<storyRiverLimitConverted>then<storyRiverLimitConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>addsuffix<storyRightMetric>] }}}>
+		result={{{ [<storyRiverWidth>compare:number:lt<storyMinWidthAddLeft>then<storyMinWidthAddLeftConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidth>compare:number:gteq<storyRiverLimit>then<storyRiverLimitConverted>addsuffix<storyRightMetric>] ~[<storyRiverWidthConverted>addsuffix<storyRightMetric>] }}}>
 
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" text=<<result>>/>
 

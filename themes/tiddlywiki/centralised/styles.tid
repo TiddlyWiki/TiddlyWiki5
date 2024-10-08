@@ -22,5 +22,6 @@ tags: [[$:/tags/Stylesheet]]
 		left: 50%;
 		right: 0;
 		margin-left: calc({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 42px);
+		width: auto;
 	}
 }
