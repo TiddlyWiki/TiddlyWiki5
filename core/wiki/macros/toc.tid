@@ -449,7 +449,7 @@ If a toc-item link is clicked it will open the tiddler in the story river
 			<$reveal stateTitle=<<selectedTiddler>> type="nomatch" text="">
 				<$transclude mode="block" tiddler=<<template>>>
 					<h1><<_itemTemplate>></h1>
-					<$transclude mode="block">$missingText$</$transclude>
+					<$transclude mode="block"><<missingText>></$transclude>
 				</$transclude>
 			</$reveal>
 			<$reveal stateTitle=<<selectedTiddler>> type="match" text="">
