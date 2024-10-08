@@ -24,4 +24,8 @@ tags: [[$:/tags/Stylesheet]]
 		margin-left: calc({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 42px);
 		width: auto;
 	}
+
+	html .tc-tiddler-frame {
+		width: 100%;
+	}
 }
