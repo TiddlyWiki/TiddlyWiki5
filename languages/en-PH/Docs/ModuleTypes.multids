@@ -1,5 +1,3 @@
 title: $:/language/Docs/ModuleTypes/
 
-allfilteroperator: A sub–operator for the ''all'' filter operator.
-info: Publishes system information via the [[$:/temp/info-plugin]] pseudo–plugin.
 storyview: Story views customize the animation and behaviour of list widgets.
