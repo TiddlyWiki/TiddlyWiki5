@@ -139,7 +139,8 @@ title: $:/core/macros/sidebar-resizer
 	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}] }}}
 	storyMaxWidth={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<sidebarMinWidth>] }}}
 	dragDiffMultiplied={{{ [<dragDiff>multiply[2]] }}}
-	storyWidth={{{ [<storyWidthStart>add<dragDiffMultiplied>] }}}>
+	storyWidthClamped={{{ [<storyWidthStart>add<sidebarMinWidth>add<sidebarMinWidth>subtract<widgetNodeWidth>] }}}
+	storyWidth={{{ [<storyWidthStart>add<dragDiffMultiplied>subtract<storyWidthClamped>] }}}>
 
 	<$let
 		storyWidthMetric={{$:/state/sidebar/resizing!!centralised-story-width-metric}}
