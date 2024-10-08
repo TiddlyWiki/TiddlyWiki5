@@ -1,4 +1,5 @@
 title: $:/themes/tiddlywiki/centralised/metrics/
 
-storyminwidth: 168px
+sidebarminwidth: 350px
+storyminwidth: 350px
 storywidth: 770px

@@ -134,9 +134,9 @@ title: $:/core/macros/sidebar-resizer
 
 \procedure set-centralised-actions()
 <$let
-	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}] }}}
+	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/centralised/metrics/storyminwidth}] }}}
 	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-centralised-story-width}] }}}
-	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
+	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}] }}}
 	storyMaxWidth={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<sidebarMinWidth>] }}}
 	dragDiffMultiplied={{{ [<dragDiff>multiply[2]] }}}
 	storyWidth={{{ [<storyWidthStart>add<dragDiffMultiplied>] }}}>
