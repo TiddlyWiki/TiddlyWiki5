@@ -256,6 +256,11 @@ input[type="search"]::-webkit-search-results-decoration {
 	-webkit-appearance:none;
 }
 
+input:disabled {
+	color: <<colour muted-foreground>>;
+	border: none;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -1047,6 +1052,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/storywidth}};
+		min-width: 500px;
 		padding: 42px 42px 42px 42px;
 	}
 
@@ -1158,6 +1164,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+		min-width: 500px;
 		border-radius: 2px;
 	}
 

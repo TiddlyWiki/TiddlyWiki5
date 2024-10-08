@@ -1,0 +1,12 @@
+created: 20210616162849364
+modified: 20210616171702660
+tags: 
+title: $:/themes/tiddlywiki/centralised/themetweaks/fluid-fixed
+type: application/x-tiddler-dictionary
+
+# lookup dictionary to disable theme tweaks sizes. yes = disabled
+storyleft: yes
+storyright:  yes
+storywidth: yes
+tiddlerwidth: yes
+sidebarwidth: no
