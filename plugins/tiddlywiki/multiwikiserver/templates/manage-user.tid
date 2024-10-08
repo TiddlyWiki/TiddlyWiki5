@@ -39,6 +39,32 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 				</$list>
 			</ul>
 		</div>
+	</div>
+
+	<$reveal type="match" state="is-current-user-profile" text="yes">
+		<div class="user-profile-management">
+			<h2>Manage Your Account</h2>
+			<form class="user-profile-form">
+				<div class="form-group">
+					<label for="username">Username:</label>
+					<input type="text" id="username" name="username" value={{{ [<user>jsonget[username]] }}} />
+				</div>
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" value={{{ [<user>jsonget[email]] }}} />
+				</div>
+				<div class="form-group">
+					<label for="new-password">New Password:</label>
+					<input type="password" id="new-password" name="new-password" />
+				</div>
+				<div class="form-group">
+					<label for="confirm-password">Confirm New Password:</label>
+					<input type="password" id="confirm-password" name="confirm-password" />
+				</div>
+				<button type="submit" class="update-profile-btn">Update Profile</button>
+			</form>
+		</div>
+	</$reveal>
 </div>
 
 <style>
@@ -68,9 +94,10 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 	align-items: center;
 	justify-content: center;
 	font-size: 3rem;
-	* {
-		color: #3498db;
-	}
+}
+
+.user-profile-avatar * {
+	color: #3498db;
 }
 
 .user-profile-name {
@@ -127,22 +154,47 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 	font-size: 0.9rem;
 }
 
-.user-profile-roles-management {
-		margin-top: 2rem;
+.user-profile-management {
+	margin-top: 2rem;
+	padding: 2rem;
+	border-top: 1px solid #e0e0e0;
 }
 
-.user-profile-roles-management select {
-		margin-right: 1rem;
+.user-profile-management h2 {
+	font-size: 1.2rem;
+	color: #3498db;
+	margin-bottom: 1rem;
 }
 
-.user-actions {
-		margin-top: 0.5rem;
+.user-profile-form .form-group {
+	margin-bottom: 1rem;
 }
-.user-actions button {
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0.25rem 0.5rem;
-		margin-right: 0.5rem;
+
+.user-profile-form label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: bold;
+	color: #555;
+}
+
+.user-profile-form input {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.update-profile-btn {
+	background: #3498db;
+	color: #fff;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 1rem;
+}
+
+.update-profile-btn:hover {
+	background: #2980b9;
 }
 </style>
