@@ -69,7 +69,6 @@ title: $:/core/macros/sidebar-resizer
 	innerStoryWidth={{{ [<storyWidth>subtract[84]] }}}
 	innerStoryWidthStart={{{ [<storyWidthStart>subtract[84]] }}}
 	storyLeft={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
-	storyWidthAddLeft={{{ [<storyWidth>add<storyLeft>] }}}
 	storyMinWidthAddLeft={{{ [<storyMinWidth>add<storyLeft>] }}}
 	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
 	storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}
@@ -93,7 +92,7 @@ title: $:/core/macros/sidebar-resizer
 
 		storyWidthResult={{{ [<storyWidthConverted>compare:number:lt<storyMinWidthConverted>then<storyMinWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidthConverted>compare:number:gteq<storyMaxWidthConverted>then<storyMaxWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidthConverted>addsuffix<storyWidthMetric>] }}}
 
-		tiddlerWidthResult={{{ [<tiddlerWidth>compare:number:lt<tiddlerMinWidth>then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidth>compare:number:gteq<tiddlerMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthConverted>addsuffix<tiddlerWidthMetric>] }}}>
+		tiddlerWidthResult={{{ [<tiddlerWidthMetric>match[%]then<storyWidthConverted>compare:number:lt<storyMinWidthConverted>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] ~[<tiddlerWidthMetric>match[%]then<storyWidthConverted>compare:number:gteq<storyMaxWidthConverted>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:lt<tiddlerMinWidth>then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:gteq<tiddlerMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthConverted>addsuffix<tiddlerWidthMetric>] }}}>
 
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" text=<<tiddlerWidthResult>>/>
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" text=<<storyWidthResult>>/>
