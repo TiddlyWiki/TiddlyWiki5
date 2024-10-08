@@ -140,7 +140,8 @@ title: $:/core/macros/sidebar-resizer
 	storyMaxWidth={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<sidebarMinWidth>] }}}
 	dragDiffMultiplied={{{ [<dragDiff>multiply[2]] }}}
 	storyWidthClamped={{{ [<storyWidthStart>add<sidebarMinWidth>add<sidebarMinWidth>subtract<widgetNodeWidth>] }}}
-	storyWidth={{{ [<storyWidthStart>add<dragDiffMultiplied>subtract<storyWidthClamped>] }}}>
+	storyWidth={{{ [<storyWidthStart>add<dragDiffMultiplied>] }}}
+	storyWidth={{{ [<storyWidthClamped>compare:number:gt[0]then<storyWidth>subtract<storyWidthClamped>] ~[<storyWidth>] }}}
 
 	<$let
 		storyWidthMetric={{$:/state/sidebar/resizing!!centralised-story-width-metric}}
