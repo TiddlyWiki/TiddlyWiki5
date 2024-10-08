@@ -95,7 +95,7 @@ code-body: yes
 	<%elseif [{$:/theme}match[$:/themes/tiddlywiki/centralised]] %>
 
 		.tc-sidebar-resizer {
-			left: calc(50% + ({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2) - 28px);
+			left: min(calc(50% + ({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2) - 28px),calc(100% - {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}} - 28px));
 		}
 
 	<% endif %>

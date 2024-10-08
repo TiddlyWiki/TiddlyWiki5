@@ -11,7 +11,7 @@ tags: [[$:/tags/Stylesheet]]
 
 	html .tc-story-river {
 		position: relative;
-		width: {{$:/themes/tiddlywiki/centralised/metrics/storywidth}};
+		width: min({{$:/themes/tiddlywiki/centralised/metrics/storywidth}},calc(100% - (2 * {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}})));
 		padding: 42px;
 		margin: 0 auto;
 		text-align: left;
@@ -21,7 +21,7 @@ tags: [[$:/tags/Stylesheet]]
 		text-align: left;
 		left: 50%;
 		right: 0;
-		margin-left: calc({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 42px);
+		margin-left: min(calc((100% - (2 * {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}})) / 2 - 42px),calc({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 42px));
 		width: auto;
 	}
 
