@@ -6,10 +6,6 @@ type: text/vnd.tiddlywiki
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
-.tc-tiddler-frame .tc-tiddler-body {
-	font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
-}
-
 .tc-hero-heading a.tc-tiddlylink {
 	font-weight: bold;
 }
