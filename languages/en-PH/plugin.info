@@ -4,6 +4,5 @@
 	"plugin-type": "language",
 	"description": "English (PH)",
 	"author": "JC John Sese Cuneta",
-	"core-version": ">=5.3.5",
-	"dependents": ["$:/languages/en-GB"]
+	"core-version": ">=5.3.5"
 }
