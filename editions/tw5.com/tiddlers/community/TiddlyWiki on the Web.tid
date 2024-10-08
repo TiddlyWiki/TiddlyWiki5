@@ -1,0 +1,15 @@
+modified: 20241001141521924
+tags: TableOfContents
+title: TiddlyWiki on the Web
+type: text/vnd.tiddlywiki
+icon: $:/core/images/link
+color: #808
+list: TalkTiddlyWiki [[TiddlyWiki on YouTube]]  [[TiddlyWiki on Reddit]] [[TiddlyWiki on Discord]] [[TiddlyWiki on GitHub]] [[TiddlyWiki on Mastodon]] [[TiddlyWiki on Twitter]] [[TiddlyWiki on Gitter]] [[TiddlyWiki on Open Collective]]
+
+Links to the ~TiddlyWiki community elsewhere on the web.
+
+<div class="tc-cards tc-cards-vertical">
+<$list filter="[tag[TiddlyWiki on the Web]]">
+<$macrocall $name="flex-card-external" backgroundcolor={{!!background-color}} textcolor={{!!text-color}} captionField="caption"/>
+</$list>
+</div>
