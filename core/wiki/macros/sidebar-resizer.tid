@@ -79,7 +79,8 @@ title: $:/core/macros/sidebar-resizer
 	tiddlerWidthMetric={{$:/state/sidebar/resizing!!tiddler-width-metric}}
 	tiddlerWidthStart={{$:/state/sidebar/resizing!!start-tiddler-width}}
 	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] ~[convert.to.pixels<tiddlerWidthStart>] }}}
-	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>] }}}
+	tiddlerWidthClampedDiff={{{ [<tiddlerWidthStartPixels>add[84]add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
+	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>subtract<tiddlerWidthClampedDiff>] }}}
 	tiddlerWidthDiff={{{ [<storyWidth>subtract<tiddlerWidth>] }}}
 	tiddlerMinWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMinWidth>subtract<tiddlerWidthDiff>] }}}
 	tiddlerMaxWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMaxWidth>subtract<tiddlerWidthDiff>] }}}
