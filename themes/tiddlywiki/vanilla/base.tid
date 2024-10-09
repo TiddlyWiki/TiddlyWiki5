@@ -1481,7 +1481,7 @@ html body.tc-body.tc-single-tiddler-window {
 		width: auto;
 		left: 0;
 		margin-left: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
-		margin-right: max({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}},{{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}});
+		margin-right: clamp({{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}},{{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}},calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}));
 	}
 
 	.tc-tiddler-frame {
