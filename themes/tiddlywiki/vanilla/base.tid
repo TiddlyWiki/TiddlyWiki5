@@ -2807,6 +2807,12 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
   width: 100%;
 }
 
+/* A wrapper to fix table overflow */
+
+.tc-table-wrapper {
+	overflow-x: auto;
+}
+
 /*
 ** Chooser
 */

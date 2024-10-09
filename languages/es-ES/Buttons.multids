@@ -28,6 +28,7 @@ Encryption/ClearPassword/Caption: Borrar contraseña
 Encryption/ClearPassword/Hint: Borra la contraseña actual y guarda este wiki sin cifrar
 Encryption/SetPassword/Caption: Asignar contraseña
 Encryption/SetPassword/Hint: Asigna contraseña de cifrado
+EmergencyDownload/Caption: descargar tiddlers como json
 ExportPage/Caption: Exportar todos
 ExportPage/Hint: Exporta todos los tiddlers
 ExportTiddler/Caption: Exportar tiddler
@@ -79,6 +80,7 @@ NewMarkdown/Caption: Nuevo tiddler en Markdown
 NewMarkdown/Hint: Crea un nuevo tiddler en Markdown
 NewTiddler/Caption: Nuevo tiddler
 NewTiddler/Hint: Crea un tiddler nuevo
+OpenControlPanel/Hint: Abrir panel de control
 OpenWindow/Caption: Abrir en ventana nueva
 OpenWindow/Hint: Abre el tiddler en una nueva ventana
 Palette/Caption: Paleta
@@ -103,6 +105,8 @@ ShowSideBar/Caption: Mostrar barra lateral
 ShowSideBar/Hint: Muestra la barra lateral
 TagManager/Caption: Administrador de etiquetas
 TagManager/Hint: Abre el gestor de etiquetas
+TestCaseImport/Caption: importar tiddlers
+TestCaseImport/Hint: Importar tiddlers
 Timestamp/Caption: Marcas de tiempo
 Timestamp/Hint: Elige si las modificaciones actualizan las marcas de tiempo
 Timestamp/On/Caption: las marcas de tiempo están activadas
@@ -129,6 +133,7 @@ Excise/Caption/Replace/Link: enlace
 Excise/Caption/Replace/Transclusion: transclusión
 Excise/Caption/Tag: Etiqueta el nuevo tiddler con el título de este
 Excise/Caption/TiddlerExists: ¡Atención! El tiddler ya existe
+Excise/DefaultTitle: Nueva Escisión
 Excise/Hint: Corta el texto seleccionado y lo pega en un tiddler nuevo
 Heading1/Caption: Encabezamiento 1
 Heading1/Hint: Aplica formato de encabezamiento 1 a la selección
