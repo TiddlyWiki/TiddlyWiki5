@@ -65,23 +65,25 @@ title: $:/core/macros/sidebar-resizer
 	storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}}
 	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-width}] }}}
 	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}] }}}
+	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
+	storyLeft={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
+	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
+	storyWidthStart={{{ [<storyWidthStart>subtract<clampedDiff>] }}}
+	storyRightStart={{{ [<storyRightStart>subtract<clampedDiff>] }}}
 	storyWidth={{{ [<storyWidthStart>add<dragDiff>] }}}
 	innerStoryWidth={{{ [<storyWidth>subtract[84]] }}}
 	innerStoryWidthStart={{{ [<storyWidthStart>subtract[84]] }}}
-	storyLeft={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
 	storyMinWidthAddLeft={{{ [<storyMinWidth>add<storyLeft>] }}}
-	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
 	storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}
 	storyMaxWidth={{{ [<storyRiverLimit>subtract<storyLeft>] }}}
-	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	tiddlerWidthMetric={{$:/state/sidebar/resizing!!tiddler-width-metric}}
 	tiddlerWidthStart={{$:/state/sidebar/resizing!!start-tiddler-width}}
 	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] ~[convert.to.pixels<tiddlerWidthStart>] }}}
+	tiddlerWidthStartPixels={{{ [<tiddlerWidthStartPixels>subtract<clampedDiff>] }}}
 	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>] }}}
 	tiddlerWidthDiff={{{ [<storyWidth>subtract<tiddlerWidth>] }}}
 	tiddlerMinWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMinWidth>subtract<tiddlerWidthDiff>] }}}
 	tiddlerMaxWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMaxWidth>subtract<tiddlerWidthDiff>] }}}
-	storyWidth={{{ [<storyWidth>subtract<clampedDiff>] }}}
 	storyRiverWidth={{{ [<storyRiverWidth>subtract<clampedDiff>] }}}>
 
 	<$let
