@@ -17,3 +17,5 @@ type: text/vnd.tiddlywiki
 [[TiddlyHost.com|https://tiddlyhost.com/]]は、Simon Bairdが作成したTiddlyWikiのホスティングサービスです。サインアップしてメールアドレスを確認すると、オンライン保存をサポートする"サイト"(すなわち~TiddlyWiki)を作成できます。サイトは非公開・公開の切替えができ、オプションでタグ付けや検索が可能な[[TiddlyHostハブ|https://tiddlyhost.com/hub]]のリストに掲載して、他のユーザーが見つけられるようにすることができます。
 
 [[TiddlySpot|Saving on TiddlySpot]]とは異なり、[[TiddlyHost|https://tiddlyhost.com]]は安全で、オープンソースであり、TiddlyWiki5を適切にサポートしています。また、既存の~TiddlyWikiファイルのアップロードが可能で、TiddlyWikiClassicをサポートし、~TiddlySpotサイトの所有権を主張できます。詳細については、[[FAQ|https://github.com/simonbaird/tiddlyhost/wiki/FAQ]]や[[About|https://tiddlyhost.com/about]]ページを参照してください。
+
+Tiddlyhostがあなたの役に立ったら、[[寄付かスポンサーシップ|https://tiddlyhost.com/donate]]をご検討ください。
