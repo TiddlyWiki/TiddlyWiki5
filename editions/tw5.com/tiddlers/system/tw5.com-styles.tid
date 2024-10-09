@@ -122,3 +122,7 @@ type: text/vnd.tiddlywiki
 		column-count: 2;
 	}
 }
+
+.tc-saving-sidebar-category { margin-bottom:10px; }
+.tc-saving-sidebar-category-title { margin-bottom:5px; font-weight:bold; }
+.tc-saving-sidebar-category-item { margin-left:10px; white-space:nowrap; }
