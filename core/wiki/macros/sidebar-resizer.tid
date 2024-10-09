@@ -60,7 +60,7 @@ title: $:/core/macros/sidebar-resizer
 <$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
 \end
 
-\procedure set-storyleft-storyright-actions()
+\procedure set-storywidth-storyright-actions()
 <$let
 	storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}}
 	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-width}] }}}
@@ -73,13 +73,16 @@ title: $:/core/macros/sidebar-resizer
 	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
 	storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}
 	storyMaxWidth={{{ [<storyRiverLimit>subtract<storyLeft>] }}}
+	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	tiddlerWidthMetric={{$:/state/sidebar/resizing!!tiddler-width-metric}}
 	tiddlerWidthStart={{$:/state/sidebar/resizing!!start-tiddler-width}}
 	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] ~[convert.to.pixels<tiddlerWidthStart>] }}}
 	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>] }}}
 	tiddlerWidthDiff={{{ [<storyWidth>subtract<tiddlerWidth>] }}}
 	tiddlerMinWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMinWidth>subtract<tiddlerWidthDiff>] }}}
-	tiddlerMaxWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMaxWidth>subtract<tiddlerWidthDiff>] }}}>
+	tiddlerMaxWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMaxWidth>subtract<tiddlerWidthDiff>] }}}
+	storyWidth={{{ [<storyWidth>subtract<clampedDiff>] }}}
+	storyRiverWidth={{{ [<storyRiverWidth>subtract<clampedDiff>] }}}>
 
 	<$let
 		storyWidthMetric={{$:/state/sidebar/resizing!!story-width-metric}}
@@ -139,9 +142,9 @@ title: $:/core/macros/sidebar-resizer
 	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}] }}}
 	storyMaxWidth={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<sidebarMinWidth>] }}}
 	dragDiffMultiplied={{{ [<dragDiff>multiply[2]] }}}
-	storyWidthClamped={{{ [<storyWidthStart>add<sidebarMinWidth>add<sidebarMinWidth>subtract<widgetNodeWidth>] }}}
+	storyWidthClamped={{{ [<storyWidthStart>add<sidebarMinWidth>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	storyWidth={{{ [<storyWidthStart>add<dragDiffMultiplied>] }}}
-	storyWidth={{{ [<storyWidthClamped>compare:number:gt[0]then<storyWidth>subtract<storyWidthClamped>] ~[<storyWidth>] }}}>
+	storyWidth={{{ [<storyWidth>subtract<storyWidthClamped>] }}}>
 
 	<$let
 		storyWidthMetric={{$:/state/sidebar/resizing!!centralised-story-width-metric}}
@@ -160,7 +163,7 @@ title: $:/core/macros/sidebar-resizer
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
 	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}] }}} startStoryRight={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
 		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]then{$:/theme}!match[$:/themes/tiddlywiki/centralised]] %>
-			<<set-storyleft-storyright-actions>>
+			<<set-storywidth-storyright-actions>>
 		<%elseif [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]then{$:/theme}!match[$:/themes/tiddlywiki/centralised]] %>
 			<<set-sidebarwidth-actions>>
 		<%elseif [{$:/theme}match[$:/themes/tiddlywiki/centralised]] %>
