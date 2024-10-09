@@ -1,0 +1,6 @@
+created: 20200507002521489
+modified: 20220719134613555
+title: $:/_tw5.com-card-template
+type: text/vnd.tiddlywiki
+
+<$macrocall $name="flex-card" bordercolor={{!!color}} captionField="caption" subtitle={{{ [{!!community-author}!is[blank]addprefix[by ]] }}}/>
