@@ -1,9 +1,11 @@
-title: Quick Start
-modified: 20241001141521924
-icon: $:/core/images/tip
 color: #cc9
-tags: TableOfContents
+created: 20241009163451663
+icon: $:/core/images/tip
 list: GettingStarted [[Getting Started Video]] [[Find Out More]] [[TiddlyWiki on the Web]] [[Testimonials and Reviews]]
+modified: 20241009163521037
+tags: Welcome
+title: Quick Start
+type: text/vnd.tiddlywiki
 
 Choose how to get started quickly with ~TiddlyWiki.
 

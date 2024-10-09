@@ -1,10 +1,11 @@
-modified: 20241001141521924
-tags: [[Quick Start]]
+color: #808
+created: 20241009150445080
+icon: $:/core/images/link
+list: TalkTiddlyWiki [[TiddlyWiki on YouTube]] [[TiddlyWiki on Reddit]] [[TiddlyWiki on Discord]] [[TiddlyWiki on GitHub]] [[TiddlyWiki on Mastodon]] [[TiddlyWiki on Twitter]] [[TiddlyWiki on Gitter]] [[TiddlyWiki on Open Collective]]
+modified: 20241009150453139
+tags: Welcome
 title: TiddlyWiki on the Web
 type: text/vnd.tiddlywiki
-icon: $:/core/images/link
-color: #808
-list: TalkTiddlyWiki [[TiddlyWiki on YouTube]]  [[TiddlyWiki on Reddit]] [[TiddlyWiki on Discord]] [[TiddlyWiki on GitHub]] [[TiddlyWiki on Mastodon]] [[TiddlyWiki on Twitter]] [[TiddlyWiki on Gitter]] [[TiddlyWiki on Open Collective]]
 
 Links to the ~TiddlyWiki community elsewhere on the web.
 
