@@ -1157,7 +1157,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 @media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
-		width: min({{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}},100%);
+		width: clamp(0px,{{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}},100%);
 		border-radius: 2px;
 	}
 
