@@ -1,9 +1,9 @@
+color: #088
+icon: $:/core/images/star-filled
 modified: 20241001141521924
-tags: [[Quick Start]]
+tags: Welcome
 title: Testimonials and Reviews
 type: text/vnd.tiddlywiki
-icon: $:/core/images/star-filled
-color: #088
 
 \parsermode inline
 <div class="tc-cards">
