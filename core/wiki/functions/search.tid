@@ -1,3 +1,4 @@
 title: $:/core/wiki/functions/search
 tags: $:/tags/Global
 
+\function tf.story-river.filter() [[list]addsuffix[<tv-story-list>]addsuffix[$(searchSuffix)$]substitute[]addsuffix[ ]addsuffix[:filter]addsuffix[$(searchPrefix)$]substitute[]addsuffix[{$:/state/story-river/filter}match]addsuffix[$(searchPrefix)$]substitute[]addsuffix[yes]addsuffix[$(searchSuffix)$]substitute[]addsuffix[then<currentTiddler>]addsuffix[search:]addsuffix{$:/config/StoryFilter/fields}addsuffix[:]addsuffix{$:/config/StoryFilter/flags}addsuffix[{$:/temp/search/input}]addsuffix[else{$:/state/story-river/filter}!match]addsuffix[$(searchPrefix)$]substitute[]addsuffix[yes]addsuffix[$(searchSuffix)$]substitute[]addsuffix[then<currentTiddler>]] +[addprefix[$(searchPrefix)$]substitute[]addsuffix[$(searchSuffix)$]substitute[]]

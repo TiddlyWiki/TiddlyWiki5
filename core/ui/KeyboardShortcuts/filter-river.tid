@@ -1,0 +1,9 @@
+title: $:/core/ui/KeyboardShortcuts/filter-river
+tags: $:/tags/KeyboardShortcut
+key: ((filter-river))
+
+<%if [{$:/state/story-river/filter}!match[yes]] %>
+	<$action-setfield $tiddler="$:/state/story-river/filter" text="yes"/>
+<% else %>
+	<$action-deletetiddler $tiddler="$:/state/story-river/filter"/>
+<% endif %>
