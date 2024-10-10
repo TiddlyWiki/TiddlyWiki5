@@ -4,7 +4,7 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 \define lingo-base() $:/language/ThemeTweaks/
 
-\function get.theme(metric) [{$:/theme}addsuffix[/]addsuffix<metric>] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>]
+\function get.theme(metric) [{$:/theme}addsuffix[/]addsuffix<metric>!is[missing]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>]
 
 \define replacement-text()
 [img[$(imageTitle)$]]
