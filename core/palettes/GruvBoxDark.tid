@@ -21,9 +21,9 @@ diff-delete-foreground: <<colour foreground>>
 diff-equal-background: 
 diff-equal-foreground: <<colour foreground>>
 diff-insert-background: #b8bb26
-diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
+diff-insert-foreground: <<colour background>>
+diff-invisible-background: #ffff97
+diff-invisible-foreground: #444347
 dirty-indicator: #fb4934
 download-background: #b8bb26
 download-foreground: <<colour background>>
