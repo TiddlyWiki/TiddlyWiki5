@@ -13,6 +13,7 @@ const compat = new FlatCompat({
 
 module.exports = [{
     ignores: [
+        // Ignore "third party" code whose style we will not change.
         "boot/sjcl.js",
         "core/modules/utils/base64-utf8/base64-utf8.module.js",
         "core/modules/utils/base64-utf8/base64-utf8.module.min.js",
