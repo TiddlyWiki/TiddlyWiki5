@@ -71,13 +71,13 @@ title: $:/core/macros/sidebar-resizer
 <$let
 	storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}}
 	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-width}] }}}
-	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}] }}}
-	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
+	storyMinWidth={{{ [convert.to.pixels<get.theme.metric metrics/storyminwidth>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels<get.theme.metric metrics/sidebarminwidth>] }}}
 	storyPaddingLeft={{{ [get.theme.metric[metrics/storypaddingleft]] }}}
 	storyPaddingLeft={{{ [convert.to.pixels<storyPaddingLeft>] }}}
 	storyPaddingRight={{{ [get.theme.metric[metrics/storypaddingright]] }}}
 	storyPaddingRight={{{ [convert.to.pixels<storyPaddingRight>] }}}
-	storyLeft={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
+	storyLeft={{{ [convert.to.pixels<get.theme.metric metrics/storyleft>] }}}
 	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	storyWidthStart={{{ [<storyWidthStart>subtract<clampedDiff>] }}}
 	storyRightStart={{{ [<storyRightStart>subtract<clampedDiff>] }}}
@@ -108,7 +108,7 @@ title: $:/core/macros/sidebar-resizer
 
 		storyWidthResult={{{ [<storyWidth>compare:number:lt<storyMinWidth>then<storyMinWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidth>compare:number:gteq<storyMaxWidth>then<storyMaxWidthConverted>addsuffix<storyWidthMetric>] ~[<storyWidthConverted>addsuffix<storyWidthMetric>] }}}
 
-		tiddlerWidthResult={{{  [<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:lt<storyMinWidth>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}compare:number:gteq[0]then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}]  ~[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:gt<storyMaxWidth>then{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:lt<tiddlerMinWidth>then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:gteq<tiddlerMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidth>compare:number:lt[0]then[0]addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthConverted>addsuffix<tiddlerWidthMetric>] }}}>
+		tiddlerWidthResult={{{  [<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:lt<storyMinWidth>then<get.theme.metric metrics/tiddlerwidth>compare:number:gteq[0]then<get.theme.metric metrics/tiddlerwidth>]  ~[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:gt<storyMaxWidth>then<get.theme.metric metrics/tiddlerwidth>] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:lt<tiddlerMinWidth>then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:gteq<tiddlerMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidth>compare:number:lt[0]then[0]addsuffix<tiddlerWidthMetric>] ~[<tiddlerWidthConverted>addsuffix<tiddlerWidthMetric>] }}}>
 
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" text=<<tiddlerWidthResult>>/>
 		<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" text=<<storyWidthResult>>/>
@@ -133,9 +133,9 @@ title: $:/core/macros/sidebar-resizer
 \procedure set-sidebarwidth-actions()
 <$let
 	sidebarWidthMetric={{$:/state/sidebar/resizing!!sidebar-width-metric}}
-	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
-	storyLeft={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
-	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}] }}}
+	sidebarMinWidth={{{ [convert.to.pixels<get.theme.metric metrics/sidebarminwidth>] }}}
+	storyLeft={{{ [convert.to.pixels<get.theme.metric metrics/storyleft>] }}}
+	storyMinWidth={{{ [convert.to.pixels<get.theme.metric metrics/storyminwidth>] }}}
 	sidebarMaxWidth={{{ [<widgetNodeWidth>subtract<storyLeft>subtract<storyMinWidth>] }}}
 	clampedDiff={{{ [<storyLeft>add<storyMinWidth>add<startSidebarWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	sidebarWidth={{{ [<sidebarWidth>subtract<clampedDiff>] }}}>
