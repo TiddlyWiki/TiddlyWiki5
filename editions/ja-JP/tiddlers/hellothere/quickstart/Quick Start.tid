@@ -1,10 +1,13 @@
+color: #cc9
+created: 20241009163451663
+icon: $:/core/images/tip
+list: GettingStarted [[Getting Started Video]] [[Find Out More]] [[TiddlyWiki on the Web]] [[Testimonials and Reviews]]
+modified: 20241010112536263
+original-modified: 20241009163521037
+tags: Welcome
 title: Quick Start
 ja-title: クイックスタート
-modified: 20241009112502036
-original-modified: 20241001141521924
-list: [[Quick Start: Tiddlyhost]] [[Quick Start: Desktop]] [[Quick Start: DIY]] [[Quick Start: Xememex]]
-icon: $:/core/images/tip
-color: #cc9
+type: text/vnd.tiddlywiki
 
 ~TiddlyWikiをすぐに使い始める方法を選択してください。
 

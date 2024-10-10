@@ -1,12 +1,12 @@
 created: 20130822170200000
+icon: $:/core/icon
 list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
-modified: 20240928113631553
-original-modified: 20241001141521924
-tags: TableOfContents
+modified: 20241010112232871
+original-modified: 20241009150333146
+tags: Welcome
 title: HelloThere
 ja-title: こんにちは
 type: text/vnd.tiddlywiki
-icon: $:/core/icon
 
 !!.tc-hero-heading ''TiddlyWikiへようこそ。 TiddlyWikiは複雑な情報を[[収集|Creating and editing tiddlers]]し、[[整理|Structuring TiddlyWiki]]し、[[共有|Sharing your tiddlers with others]]するためのユニークな[[非線形|Philosophy of Tiddlers]]ノートブックです。''
 
