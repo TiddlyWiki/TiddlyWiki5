@@ -3,6 +3,8 @@ tags: [[$:/tags/Stylesheet]]
 list-before:
 code-body: yes
 
+\function get.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>get[text]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>get[text]]
+
 \define custom-background-datauri()
 <$set name="background" value={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}>
 <$list filter="[<background>is[image]]">
@@ -1157,7 +1159,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 @media (min-width: <<sidebarbreakpoint>>) {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
-		width: clamp(0px,{{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}},100%);
+		width: clamp(0px,<<get.theme.metric metrics/tiddlerwidth>>,100%);
 		border-radius: 2px;
 	}
 
