@@ -1,5 +1,5 @@
 created: 20130828190200000
-modified: 20241007003103647
+modified: 20241008031135403
 tags: [[TiddlyWiki on Node.js]]
 title: Generating Static Sites with TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -17,12 +17,12 @@ You can explore a static representation of the main TiddlyWiki site at https://t
 The following commands are used to generate the sample static version of the TiddlyWiki5 site:
 
 ```sh
-tiddlywiki wikipath --render '[!is[system]]' '[encodeuricomponent[]addprefix[static/]]' text/plain $:/core/templates/static.tiddler.html
+tiddlywiki wikipath --render '[!is[system]]' '[encodeuricomponent[]addprefix[static/]addsuffix[.html]]' text/plain $:/core/templates/static.tiddler.html
 tiddlywiki wikipath --render $:/core/templates/static.template.html static.html text/plain
 tiddlywiki wikipath --render $:/core/templates/static.template.css static/static.css text/plain
 ```
 
-The first RenderCommand generates the HTML representations of individual tiddlers, `[encodeuricomponent[]addprefix[static/]]` applies URI encoding to each title, and then adds the prefix `static/`. The second RenderCommand saves the static version of the DefaultTiddlers, and the final RenderCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
+The first RenderCommand generates the HTML representations of all individual non-system tiddlers using the filter `[!is[system]]`, and the next filter `[encodeuricomponent[]addprefix[static/]addsufixx[.html]]` applies URI encoding to each title, and then adds the prefix `static/`, and finally adds the suffix `.html`. The second RenderCommand saves the static version of the DefaultTiddlers in `static.html`, and the final RenderCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
 
 ! Wiki Snapshot with Internal Links
 
