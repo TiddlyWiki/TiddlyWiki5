@@ -53,6 +53,7 @@ exports.startup = function() {
 			basicAuthUsernameFromStore: params["basic-auth-username-from-store"],
 			basicAuthPassword: params["basic-auth-password"],
 			basicAuthPasswordFromStore: params["basic-auth-password-from-store"],
+			bearerAuthToken: params["bearer-auth-token"],
 			bearerAuthTokenFromStore: params["bearer-auth-token-from-store"]
 		});
 	});
