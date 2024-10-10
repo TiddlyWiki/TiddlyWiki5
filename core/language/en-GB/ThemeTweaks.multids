@@ -34,7 +34,7 @@ Metrics/StoryMinWidth/Hint: the minimun width of the story river
 Metrics/StoryPaddingLeft: Story Padding Left
 Metrics/StoryPaddingLeft/Hint: the left padding of the story river
 Metrics/StoryPaddingRight: Story Padding Right
-Metrics/StoryPaddingRight/Hint: the right padding of the story river
+Metrics/StoryPaddingRight/Hint: the right padding of the story river, also controls the width and positioning of the resizer
 Metrics/StoryTop: Story top position
 Metrics/StoryTop/Hint: how far the top margin of the story river<br>is from the top of the page
 Metrics/StoryRight: Story right
