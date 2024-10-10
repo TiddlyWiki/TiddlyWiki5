@@ -27,7 +27,7 @@ tags: [[$:/tags/Stylesheet]]
 	}
 
 	html body.tc-body section.tc-story-river {
-		padding: 0px;
+		padding: 0px {{$:/themes/tiddlywiki/tight/metrics/storypaddingright}} 0px {{$:/themes/tiddlywiki/tight/metrics/storypaddingleft}};
 	}
 
 	html body.tc-body div.tc-tiddler-frame {
