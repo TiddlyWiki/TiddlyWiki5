@@ -28,4 +28,8 @@ tags: [[$:/tags/Stylesheet]]
 	html .tc-tiddler-frame {
 		width: 100%;
 	}
+
+	html .tc-sidebar-resizer {
+		left: min(calc(50% + ({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2) - (2 * {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} / 3)),calc(100% - {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}} - (2 * {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} / 3)));
+	}
 }

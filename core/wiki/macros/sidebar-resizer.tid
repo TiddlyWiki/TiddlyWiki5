@@ -60,26 +60,32 @@ title: $:/core/macros/sidebar-resizer
 <$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
 \end
 
+\function get.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>get[text]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>get[text]]
+
 \procedure set-storywidth-storyright-actions()
 <$let
 	storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}}
 	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-width}] }}}
 	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}] }}}
 	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}] }}}
+	storyPaddingLeft={{{ [get.theme.metric[metrics/storypaddingleft]] }}}
+	storyPaddingLeft={{{ [convert.to.pixels<storyPaddingLeft>] }}}
+	storyPaddingRight={{{ [get.theme.metric[metrics/storypaddingright]] }}}
+	storyPaddingRight={{{ [convert.to.pixels<storyPaddingRight>] }}}
 	storyLeft={{{ [convert.to.pixels{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
 	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	storyWidthStart={{{ [<storyWidthStart>subtract<clampedDiff>] }}}
 	storyRightStart={{{ [<storyRightStart>subtract<clampedDiff>] }}}
 	storyWidth={{{ [<storyWidthStart>add<dragDiff>] }}}
-	innerStoryWidth={{{ [<storyWidth>subtract[84]] }}}
-	innerStoryWidthStart={{{ [<storyWidthStart>subtract[84]] }}}
+	innerStoryWidth={{{ [<storyWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
+	innerStoryWidthStart={{{ [<storyWidthStart>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
 	storyMinWidthAddLeft={{{ [<storyMinWidth>add<storyLeft>] }}}
 	storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}
 	storyMaxWidth={{{ [<storyRiverLimit>subtract<storyLeft>] }}}
 	tiddlerWidthMetric={{$:/state/sidebar/resizing!!tiddler-width-metric}}
 	tiddlerWidthStart={{$:/state/sidebar/resizing!!start-tiddler-width}}
 	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] ~[convert.to.pixels<tiddlerWidthStart>] }}}
-	tiddlerWidthClampedDiff={{{ [<tiddlerWidthStartPixels>add[84]add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
+	tiddlerWidthClampedDiff={{{ [<tiddlerWidthStartPixels>add<storyPaddingLeft>add<storyPaddingRight>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>subtract<tiddlerWidthClampedDiff>] }}}
 	tiddlerWidthDiff={{{ [<storyWidth>subtract<tiddlerWidth>] }}}
 	tiddlerMinWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] ~[<storyMinWidth>subtract<tiddlerWidthDiff>] }}}

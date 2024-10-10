@@ -1047,7 +1047,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		left: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		width: clamp({{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}},{{$:/themes/tiddlywiki/vanilla/metrics/storywidth}},calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
-		padding: 42px 42px 42px 42px;
+		padding: 42px {{$:/themes/tiddlywiki/vanilla/metrics/storypaddingright}} 42px {{$:/themes/tiddlywiki/vanilla/metrics/storypaddingleft}};
 	}
 
 <<if-no-sidebar "
