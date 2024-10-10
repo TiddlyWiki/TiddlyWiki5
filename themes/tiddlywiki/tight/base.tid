@@ -41,7 +41,7 @@ tags: [[$:/tags/Stylesheet]]
 	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
 
 		html body.tc-body div.tc-sidebar-scrollable {
-			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} + 42px),calc({{$:/themes/tiddlywiki/vanilla/metrics/storyright}} + 42px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + 42px));
+			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} + 42px),calc({{$:/themes/tiddlywiki/tight/metrics/storyright}} + 42px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + 42px));
 		}
 
 	<% endif %>
