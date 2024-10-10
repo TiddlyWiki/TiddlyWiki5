@@ -147,7 +147,7 @@ tags: [[$:/tags/Stylesheet]]
 	fill: #000;
 }
 
-.ai-conversation .ai-user-prompt-help {
+.ai-conversation .ai-user-prompt-type {
 	font-size: 0.8em;
 	line-height: 1.5;
 }

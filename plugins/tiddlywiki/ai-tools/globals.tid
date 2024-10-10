@@ -106,6 +106,7 @@ Procedure to display a message from an AI conversation. Current tiddler is the c
 <$wikify
 	name="messageText"
 	text={{!!text}}
+	type={{!!type}}
 	output="text"
 >
 	<$text text={{{ [<messageText>jsonstringify[]] }}}/>
@@ -123,12 +124,13 @@ Action procedure to get the next response from the LLM
 	<$action-createtiddler
 		$basetitle=<<resultTitlePrefix>>
 		tags=<<resultTags>>
-		type="text/markdown"
 		role="user"
 		text={{!!current-response-text}}
+		type={{!!current-response-type}}
 		image={{!!current-response-image}}
 	>
 		<$action-deletefield $tiddler=<<currentTiddler>> $field="current-response-text"/>
+		<$action-setfield $tiddler=<<currentTiddler>> $field="current-response-type" $value="text/vnd.tiddlywiki"/>
 		<$action-deletefield $tiddler=<<currentTiddler>> $field="current-response-image"/>
 		<$transclude
 			$variable="ai-tools-get-llm-completion"
@@ -210,7 +212,8 @@ Action procedure to get the next response from the LLM
 				</div>
 			</div>
 		</div>
-		<div class="ai-user-prompt-help">
+		<div class="ai-user-prompt-type">
+			<$edit-text tiddler=<<currentTiddler>> field="current-response-type" tag="input" class="tc-edit-texteditor"/>
 			Note that your text will be wikified before being sent to the LLM. Use &#x7B;&#x7B;transclusion&#x7D;&#x7D; to include other tiddlers in your messages
 		</div>
 	</div>
@@ -223,6 +226,7 @@ Action procedure to get the next response from the LLM
 	tags="$:/tags/AI/Conversation"
 	system-prompt="Transcript of a never ending dialog, where the User interacts with an Assistant. The Assistant is helpful, kind, honest, good at writing, and never fails to answer the User's requests immediately and with precision."
 	current-response-text="Please list the 10 most important mechanical inventions of the Twentieth Century"
+	current-response-type="text/vnd.tiddlywiki"
 >
 <$action-navigate $to=<<createTiddler-title>>/>
 </$action-createtiddler>
