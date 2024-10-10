@@ -147,6 +147,11 @@ tags: [[$:/tags/Stylesheet]]
 	fill: #000;
 }
 
+.ai-conversation .ai-user-prompt-help {
+	font-size: 0.8em;
+	line-height: 1.5;
+}
+
 .ai-request-spinner {
 	animation: ai-request-spinner-animation-rotate 1s infinite;
 	height: 50px;

@@ -24,7 +24,7 @@ Wikified JSON text to be sent to server
 				"content": [
 					{
 						"type": "text",
-						"text": "<$text text={{{ [<currentTiddler>get[text]jsonstringify[]] }}}/>"
+						"text": "<<ai-tools-get-message>>"
 					}
 					<%if [<currentTiddler>get[image]else[]!match[]] %>
 						,

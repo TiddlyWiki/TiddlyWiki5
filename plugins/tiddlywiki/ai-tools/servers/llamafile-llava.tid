@@ -54,7 +54,7 @@ Wikified JSON text to be sent to server
 <%if [<currentTiddler>has[image]] %>
 [img-<$text text=<<counter>>/>]
 <%endif%>
-<$text text={{{ [<currentTiddler>get[text]jsonstringify[]] }}}/>
+<<ai-tools-get-message>>
 </$list>
 \nLlama: 
 \end json-prompt-text

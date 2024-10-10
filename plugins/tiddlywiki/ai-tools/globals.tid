@@ -101,6 +101,17 @@ Procedure to display a message from an AI conversation. Current tiddler is the c
 </$qualify>
 \end ai-tools-message
 
+\procedure ai-tools-get-message()
+\whitespace trim
+<$wikify
+	name="messageText"
+	text={{!!text}}
+	output="text"
+>
+	<$text text={{{ [<messageText>jsonstringify[]] }}}/>
+</$wikify>
+\end
+
 <!--
 Action procedure to get the next response from the LLM
 -->
@@ -198,6 +209,9 @@ Action procedure to get the next response from the LLM
 					<$image source={{!!current-response-image}}/>
 				</div>
 			</div>
+		</div>
+		<div class="ai-user-prompt-help">
+			Note that your text will be wikified before being sent to the LLM. Use &#x7B;&#x7B;transclusion&#x7D;&#x7D; to include other tiddlers in your messages
 		</div>
 	</div>
 </$let>
