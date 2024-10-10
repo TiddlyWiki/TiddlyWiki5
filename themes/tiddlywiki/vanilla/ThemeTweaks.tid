@@ -4,6 +4,8 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 \define lingo-base() $:/language/ThemeTweaks/
 
+\function get.theme(metric) [{$:/theme}addsuffix[/]addsuffix<metric>] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>]
+
 \define replacement-text()
 [img[$(imageTitle)$]]
 \end
@@ -66,30 +68,18 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 
 <<lingo Metrics/SidebarResizer/Hint>>
 
-<%if [{$:/theme}!match[$:/themes/tiddlywiki/centralised]] %>
-
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/fontsize"><<lingo Metrics/FontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/lineheight"><<lingo Metrics/LineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize"><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight"><<lingo Metrics/BodyLineHeight>></$link> |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyleft"><<lingo Metrics/StoryLeft>></$link><br>//<<lingo Metrics/StoryLeft/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storytop"><<lingo Metrics/StoryTop>></$link><br>//<<lingo Metrics/StoryTop/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyright"><<lingo Metrics/StoryRight>></$link><br>//<<lingo Metrics/StoryRight/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storywidth"><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storyminwidth"><<lingo Metrics/StoryMinWidth>></$link><br>//<<lingo Metrics/StoryMinWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyminwidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storypaddingleft"><<lingo Metrics/StoryPaddingLeft>></$link><br>//<<lingo Metrics/StoryPaddingLeft/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storypaddingleft" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/storypaddingright"><<lingo Metrics/StoryPaddingRight>></$link><br>//<<lingo Metrics/StoryPaddingRight/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storypaddingright" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth"><<lingo Metrics/TiddlerWidth>></$link><br>//<<lingo Metrics/TiddlerWidth/Hint>>//<br> |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint"><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth"><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth"><<lingo Metrics/SidebarMinWidth>></$link><br>//<<lingo Metrics/SidebarMinWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth" default="" tag="input"/> |
-
-<% else %>
-
-|<$link to="$:/themes/tiddlywiki/centralised/metrics/storywidth"><<lingo Centralised/Metrics/StoryWidth>></$link><br>//<<lingo Centralised/Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/storywidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/centralised/metrics/storyminwidth"><<lingo Centralised/Metrics/StoryMinWidth>></$link><br>//<<lingo Centralised/Metrics/StoryMinWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/storyminwidth" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/centralised/metrics/storypaddingleft"><<lingo Centralised/Metrics/StoryPaddingLeft>></$link><br>//<<lingo Centralised/Metrics/StoryPaddingLeft/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/storypaddingleft" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/centralised/metrics/storypaddingright"><<lingo Centralised/Metrics/StoryPaddingRight>></$link><br>//<<lingo Centralised/Metrics/StoryPaddingRight/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/storypaddingright" default="" tag="input"/> |
-|<$link to="$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth"><<lingo Centralised/Metrics/SidebarMinWidth>></$link><br>//<<lingo Centralised/Metrics/SidebarMinWidth/Hint>>// |^<$edit-text tiddler="$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth" default="" tag="input"/> |
-
-<% endif %>
+|<$link to=<<get.theme metrics/fontsize>>><<lingo Metrics/FontSize>></$link> |<$edit-text tiddler=<<get.theme metrics/fontsize>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/lineheight>>><<lingo Metrics/LineHeight>></$link> |<$edit-text tiddler=<<get.theme metrics/lineheight>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/bodyfontsize>>><<lingo Metrics/BodyFontSize>></$link> |<$edit-text tiddler=<<get.theme metrics/bodyfontsize>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/bodylineheight>>><<lingo Metrics/BodyLineHeight>></$link> |<$edit-text tiddler=<<get.theme metrics/bodylineheight>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/storyleft>>><<lingo Metrics/StoryLeft>></$link><br>//<<lingo Metrics/StoryLeft/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/storyleft>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/storytop>>><<lingo Metrics/StoryTop>></$link><br>//<<lingo Metrics/StoryTop/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/storytop>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/storyright>>><<lingo Metrics/StoryRight>></$link><br>//<<lingo Metrics/StoryRight/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/storyright>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/storywidth>>><<lingo Metrics/StoryWidth>></$link><br>//<<lingo Metrics/StoryWidth/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/storywidth>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/storyminwidth>>><<lingo Metrics/StoryMinWidth>></$link><br>//<<lingo Metrics/StoryMinWidth/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/storyminwidth>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/storypaddingleft>>><<lingo Metrics/StoryPaddingLeft>></$link><br>//<<lingo Metrics/StoryPaddingLeft/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/storypaddingleft>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/storypaddingright>>><<lingo Metrics/StoryPaddingRight>></$link><br>//<<lingo Metrics/StoryPaddingRight/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/storypaddingright>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/tiddlerwidth>>><<lingo Metrics/TiddlerWidth>></$link><br>//<<lingo Metrics/TiddlerWidth/Hint>>//<br> |^<$edit-text tiddler=<<get.theme metrics/tiddlerwidth>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/sidebarbreakpoint>>><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/sidebarbreakpoint>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/sidebarwidth>>><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/sidebarwidth>> default="" tag="input"/> |
+|<$link to=<<get.theme metrics/sidebarminwidth>>><<lingo Metrics/SidebarMinWidth>></$link><br>//<<lingo Metrics/SidebarMinWidth/Hint>>// |^<$edit-text tiddler=<<get.theme metrics/sidebarminwidth>> default="" tag="input"/> |
