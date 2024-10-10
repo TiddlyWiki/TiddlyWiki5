@@ -12,14 +12,15 @@ PUT /bags/:bag_name
 /*global $tw: false */
 "use strict";
 
-var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
-
 exports.method = "PUT";
 
 exports.path = /^\/bags\/(.+)$/;
 
+exports.useACL = true;
+
+exports.entityName = "bag"
+
 exports.handler = function(request,response,state) {
-	aclMiddleware(request, response, state, "bag", "WRITE");
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		data = $tw.utils.parseJSONSafe(state.data);

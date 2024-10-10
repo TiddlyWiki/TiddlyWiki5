@@ -214,15 +214,13 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 		$accesscontrol: accesscontrol,
 		$description: description
 	});
-	
 
-	// update the permissions on ACL records
-	const admin = this.getRoleByName('ADMIN');
+	const admin = this.getRoleByName("ADMIN");
 	if(admin) {	
-		const readPermission = this.getPermissionByName('READ');
-		const writePermission = this.getPermissionByName('WRITE');
-		this.createACL(bag_name, 'bag', admin.role_id, readPermission.permission_id);
-		this.createACL(bag_name, 'bag', admin.role_id, writePermission.permission_id);
+		const readPermission = this.getPermissionByName("READ");
+		const writePermission = this.getPermissionByName("WRITE");
+		this.createACL(bag_name, "bag", admin.role_id, readPermission.permission_id);
+		this.createACL(bag_name, "bag", admin.role_id, writePermission.permission_id);
 	}
 	return updateBags.lastInsertRowid;
 };
@@ -290,12 +288,12 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 
 
 	// update the permissions on ACL records
-	const admin = this.getRoleByName('ADMIN');
+	const admin = this.getRoleByName("ADMIN");
 	if(admin) {
-		const readPermission = this.getPermissionByName('READ');
-		const writePermission = this.getPermissionByName('WRITE');
-		this.createACL(recipe_name, 'recipe', admin.role_id, readPermission.permission_id);
-		this.createACL(recipe_name, 'recipe', admin.role_id, writePermission.permission_id);
+		const readPermission = this.getPermissionByName("READ");
+		const writePermission = this.getPermissionByName("WRITE");
+		this.createACL(recipe_name, "recipe", admin.role_id, readPermission.permission_id);
+		this.createACL(recipe_name, "recipe", admin.role_id, writePermission.permission_id);
 	}
 	return updateRecipes.lastInsertRowid;
 };
@@ -495,34 +493,34 @@ SqlTiddlerDatabase.prototype.getRecipeTiddler = function(title,recipe_name) {
 Checks if a user has permission to access a recipe
 */
 SqlTiddlerDatabase.prototype.hasRecipePermission = function(userId, recipeName, permissionName) {
-	return this.checkACLPermission(userId, 'recipe', recipeName, permissionName)
+	return this.checkACLPermission(userId, "recipe", recipeName, permissionName)
 };
 
 /*
 Checks if a user has permission to access a bag
 */
 SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permissionName) {
-	return this.checkACLPermission(userId, 'bag', bagName, permissionName)
+	return this.checkACLPermission(userId, "bag", bagName, permissionName)
 };
 
 SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName, permissionName) {
 	const entityTypeToTableMap = {
 		bag: {
-			table: 'bags',
-			column: 'bag_name'
+			table: "bags",
+			column: "bag_name"
 		},
 		recipe: {
-			table: 'recipes',
-			column: 'recipe_name'
+			table: "recipes",
+			column: "recipe_name"
 		}
 	};
 
 	const entityInfo = entityTypeToTableMap[entityType];
 	if (!entityInfo) {
-		throw new Error('Invalid entity type: ' + entityType);
+		throw new Error("Invalid entity type: " + entityType);
 	}
 
-	// if the entityName starts with "$:/", we'll assume its a system tiddler, then grant the user permission
+	// if the entityName starts with "$:/", we'll assume its a system bag/recipe, then grant the user permission
 	if(entityName.startsWith("$:/")){
 		return true
 	}

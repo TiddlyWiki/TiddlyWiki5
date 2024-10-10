@@ -1,6 +1,5 @@
 title: $:/plugins/tiddlywiki/multiwikiserver/auth/form/login/form
 
-<$macrocall $name="loginForm"/>
 <form class="login-form" method="POST" action="/login">
 	<input type="hidden" name="returnUrl" value=<<returnUrl>>/>
 	<input type="text" name="username" placeholder="Username"/>

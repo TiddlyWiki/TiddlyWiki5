@@ -16,14 +16,15 @@ fallback=<url> // Optional redirect if the tiddler is not found
 /*global $tw: false */
 "use strict";
 
-var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
-
 exports.method = "GET";
 
 exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
+exports.useACL = true;
+
+exports.entityName = "recipe"
+
 exports.handler = function(request,response,state) {
-	aclMiddleware(request, response, state, "recipe", "READ");
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),

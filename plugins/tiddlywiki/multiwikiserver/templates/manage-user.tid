@@ -5,43 +5,45 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 		<$transclude/>
 	</$set>
 </$tiddler>
-
-<div class="user-profile-container">
-	<div class="user-profile-header">
-		<div class="user-profile-avatar">
-			<$text text={{{ [<user>jsonget[username]substr[0,1]uppercase[]] }}}/>
-		</div>
-		<h1 class="user-profile-name"><$text text={{{ [<user>jsonget[username]] }}}/></h1>
-		<p class="user-profile-email"><$text text={{{ [<user>jsonget[email]] }}}/></p>
-	</div>
-	
-	<div class="user-profile-details">
-		<div class="user-profile-item">
-			<span class="user-profile-label">User ID:</span>
-			<span class="user-profile-value"><$text text={{{ [<user>jsonget[user_id]] }}}/></span>
-		</div>
-		<div class="user-profile-item">
-			<span class="user-profile-label">Created At:</span>
-			<span class="user-profile-value"><$text text={{{ [<user>jsonget[created_at]split[T]first[]] }}}/></span>
-		</div>
-		<div class="user-profile-item">
-			<span class="user-profile-label">Last Login:</span>
-			<span class="user-profile-value"><$text text={{{ [<user>jsonget[last_login]split[T]first[]] }}}/></span>
+<div class="main-wrapper">
+	<div class="user-profile-container">
+		<div class="user-profile-header">
+			<div class="user-profile-avatar">
+				<$text text={{{ [<user>jsonget[username]substr[0,1]uppercase[]] }}}/>
+			</div>
+			<h1 class="user-profile-name"><$text text={{{ [<user>jsonget[username]] }}}/></h1>
+			<p class="user-profile-email"><$text text={{{ [<user>jsonget[email]] }}}/></p>
 		</div>
 		
-		<div class="user-profile-roles">
-			<h2>User Roles</h2>
-			<ul>
-				<$list filter="[<user-roles>jsonindexes[]]" variable="role-index">
-					<li>
-						<$text text={{{ [<user-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
-					</li>
-				</$list>
-			</ul>
+		<div class="user-profile-details">
+			<div class="user-profile-item">
+				<span class="user-profile-label">User ID:</span>
+				<span class="user-profile-value"><$text text={{{ [<user>jsonget[user_id]] }}}/></span>
+			</div>
+			<div class="user-profile-item">
+				<span class="user-profile-label">Created At:</span>
+				<span class="user-profile-value"><$text text={{{ [<user>jsonget[created_at]split[T]first[]] }}}/></span>
+			</div>
+			<div class="user-profile-item">
+				<span class="user-profile-label">Last Login:</span>
+				<span class="user-profile-value"><$text text={{{ [<user>jsonget[last_login]split[T]first[]] }}}/></span>
+			</div>
+			
+			<div class="user-profile-roles">
+				<h2>User Roles</h2>
+				<ul>
+					<$list filter="[<user-roles>jsonindexes[]]" variable="role-index">
+						<li>
+							<$text text={{{ [<user-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
+						</li>
+					</$list>
+				</ul>
+			</div>
 		</div>
 	</div>
 
-	<$reveal type="match" state="is-current-user-profile" text="yes">
+
+	<!-- <$reveal type="match" state="is-current-user-profile" text="yes"> -->
 		<div class="user-profile-management">
 			<h2>Manage Your Account</h2>
 			<form class="user-profile-form">
@@ -53,28 +55,42 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 					<label for="email">Email:</label>
 					<input type="email" id="email" name="email" value={{{ [<user>jsonget[email]] }}} />
 				</div>
+				<button type="submit" class="update-profile-btn">Update Profile</button>
+			</form>
+			<hr />
+			<h2>Danger Zone</h2>
+			<form class="user-profile-form">
 				<div class="form-group">
 					<label for="new-password">New Password:</label>
-					<input type="password" id="new-password" name="new-password" />
+					<input type="password" id="new-password" name="new-password" required />
 				</div>
 				<div class="form-group">
 					<label for="confirm-password">Confirm New Password:</label>
-					<input type="password" id="confirm-password" name="confirm-password" />
+					<input type="password" id="confirm-password" name="confirm-password" required />
 				</div>
-				<button type="submit" class="update-profile-btn">Update Profile</button>
+				<button type="submit" class="update-password-btn">Change Password</button>
 			</form>
 		</div>
-	</$reveal>
+	<!-- </$reveal> -->
 </div>
 
 <style>
+.main-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	max-width: 80vw;
+	margin: auto;
+}
+
 .user-profile-container {
-	max-width: 600px;
+	flex: 1;
 	margin: 2rem auto;
 	background: #fff;
 	border-radius: 8px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
+	max-width: 600px;
 }
 
 .user-profile-header {
@@ -155,15 +171,17 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 }
 
 .user-profile-management {
-	margin-top: 2rem;
-	padding: 2rem;
-	border-top: 1px solid #e0e0e0;
+	padding: 20px;
 }
 
 .user-profile-management h2 {
 	font-size: 1.2rem;
 	color: #3498db;
 	margin-bottom: 1rem;
+}
+
+.user-profile-form {
+	margin-bottom: 20px;
 }
 
 .user-profile-form .form-group {
@@ -184,7 +202,8 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 	border-radius: 4px;
 }
 
-.update-profile-btn {
+.update-profile-btn,
+.update-password-btn {
 	background: #3498db;
 	color: #fff;
 	border: none;
@@ -194,7 +213,15 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 	font-size: 1rem;
 }
 
+.update-password-btn {
+	background: #00796b;
+}
+
 .update-profile-btn:hover {
 	background: #2980b9;
+}
+
+.update-password-btn:hover {
+	background: #00695c;
 }
 </style>

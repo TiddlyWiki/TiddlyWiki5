@@ -12,14 +12,15 @@ PUT /recipes/:recipe_name/tiddlers/:title
 /*global $tw: false */
 "use strict";
 
-var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
-
 exports.method = "PUT";
 
 exports.path = /^\/recipes\/([^\/]+)\/tiddlers\/(.+)$/;
 
+exports.useACL = true;
+
+exports.entityName = "recipe"
+
 exports.handler = function (request, response, state) {
-	aclMiddleware(request, response, state, "recipe", "WRITE");
 	// Get the  parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		title = $tw.utils.decodeURIComponentSafe(state.params[1]),

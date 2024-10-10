@@ -19,7 +19,8 @@ if($tw.node) {
 		path = require("path"),
 		querystring = require("querystring"),
 		crypto = require("crypto"),
-		zlib = require("zlib");
+		zlib = require("zlib"),
+		aclMiddleware = require('$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js').middleware;
 }
 
 /*
@@ -34,7 +35,7 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
-	this.sqlTiddlerDatabase = $tw.mws.store.sqlTiddlerDatabase;
+	this.sqlTiddlerDatabase = options.sqlTiddlerDatabase || $tw.mws.store.sqlTiddlerDatabase;
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -158,9 +159,10 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 			data = zlib.gzipSync(data);
 		}
 	}
-
-	response.writeHead(statusCode,headers);
-	response.end(data,encoding);
+	if(!response.headersSent) {
+		response.writeHead(statusCode,headers);
+		response.end(data,encoding);
+	}
 }
 
 function redirect(request,response,statusCode,location) {
@@ -351,6 +353,13 @@ Server.prototype.methodMappings = {
 	"DELETE": "writers"
 };
 
+Server.prototype.methodACLPermMappings = {
+	"GET": "READ",
+	"PUT": "WRITE",
+	"POST": "WRITE",
+	"DELETE": "WRITE"
+}
+
 /*
 Check whether a given user is authorized for the specified authorizationType ("readers" or "writers"). Pass null or undefined as the username to check for anonymous access
 */
@@ -411,8 +420,7 @@ Server.prototype.redirectToLogin = function(response, returnUrl) {
 			} else {
 					console.log(`Invalid return URL detected: ${returnUrl}. Redirecting to home page.`);
 			}
-			response.setHeader('Set-Cookie', `returnUrl=${encodeURIComponent(sanitizedReturnUrl)}; HttpOnly; Path=/`);
-			const loginUrl = '/login';
+			response.setHeader('Set-Cookie', `returnUrl=${encodeURIComponent(sanitizedReturnUrl)}; HttpOnly; Secure; SameSite=Strict; Path=/`);			const loginUrl = '/login';
 			response.writeHead(302, {
 					'Location': loginUrl
 			});
@@ -468,6 +476,12 @@ Server.prototype.requestHandler = function(request,response,options) {
 
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
+
+	// If the route is configured to use ACL middleware, check that the user has permission
+	if(route?.useACL) {
+		const permissionName = this.methodACLPermMappings[route.method];
+		aclMiddleware(request,response,state,route.entityName,permissionName)
+	}
 	
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {

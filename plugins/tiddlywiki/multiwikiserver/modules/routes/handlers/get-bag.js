@@ -13,11 +13,13 @@ GET /bags/:bag_name
 /*global $tw: false */
 "use strict";
 
-var aclMiddleware = require('$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js').middleware;
-
 exports.method = "GET";
 
 exports.path = /^\/bags\/([^\/]+)(\/?)$/;
+
+exports.useACL = true;
+
+exports.entityName = "bag"
 
 exports.handler = function (request, response, state) {
 	// Redirect if there is no trailing slash. We do this so that the relative URL specified in the upload form works correctly
@@ -33,7 +35,6 @@ exports.handler = function (request, response, state) {
 		if (request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
 			state.sendResponse(200, { "Content-Type": "application/json" }, JSON.stringify(bagTiddlers), "utf8");
 		} else {
-			aclMiddleware(request, response, state, 'bag', 'READ');
 			if (!response.headersSent) {
 				// This is not a JSON API request, we should return the raw tiddler content
 				response.writeHead(200, "OK", {

@@ -37,17 +37,29 @@ exports.handler = function(request,response,state) {
 		var sessionId = auth.createSession(user.user_id);
 		var returnUrl = state.server.parseCookieString(request.headers.cookie).returnUrl
 		response.setHeader('Set-Cookie', `session=${sessionId}; HttpOnly; Path=/`);
-		response.writeHead(302, {
-			'Location': returnUrl || '/'
-		});
+		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
+			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify({
+				"sessionId": sessionId
+			}));
+		} else {
+			response.writeHead(302, {
+				'Location': returnUrl || '/'
+			});
+		}
 	} else {
 		$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
 			title: "$:/temp/mws/login/error",
 			text: "Invalid username or password"
 		}));
-		response.writeHead(302, {
-			'Location': '/login'
-		});
+		if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
+			state.sendResponse(200,{"Content-Type": "application/json"},JSON.stringify({
+				"message": "Invalid username or password"
+			}));
+		} else {
+			response.writeHead(302, {
+				'Location': '/login'
+			});
+		}
 	}
 	response.end();
 };

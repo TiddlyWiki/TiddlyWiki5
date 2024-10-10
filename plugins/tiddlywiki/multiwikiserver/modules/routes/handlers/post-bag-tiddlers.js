@@ -12,8 +12,6 @@ POST /bags/:bag_name/tiddlers/
 /*global $tw: false */
 "use strict";
 
-var aclMiddleware = require("$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js").middleware;
-
 exports.method = "POST";
 
 exports.path = /^\/bags\/([^\/]+)\/tiddlers\/$/;
@@ -22,8 +20,11 @@ exports.bodyFormat = "stream";
 
 exports.csrfDisable = true;
 
+exports.useACL = true;
+
+exports.entityName = "bag"
+
 exports.handler = function(request,response,state) {
-	aclMiddleware(request, response, state, "bag", "WRITE");
 	const path = require("path"),
 		fs = require("fs"),
 		processIncomingStream = require("$:/plugins/tiddlywiki/multiwikiserver/routes/helpers/multipart-forms.js").processIncomingStream;

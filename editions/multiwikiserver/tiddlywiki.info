@@ -11,9 +11,6 @@
 		"tiddlywiki/snowwhite"
 	],
 	"build": {
-		"--mws-list-users": [
-			"--mws-list-users"
-		],
 		"mws-add-user": [
 			"--mws-add-permission", "READ", "Allows user to create tiddlers",
 			"--mws-add-permission", "WRITE", "Gives the user the permission to edit and delete tiddlers",
