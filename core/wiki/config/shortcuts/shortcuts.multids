@@ -7,6 +7,7 @@ cancel-edit-tiddler: escape
 change-sidebar-layout: shift-alt-Down
 delete-field: shift-alt-D
 excise: ctrl-E
+filter-river: alt-F
 sidebar-search: ctrl-shift-F
 heading-1: ctrl-1
 heading-2: ctrl-2

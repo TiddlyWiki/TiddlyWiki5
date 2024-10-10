@@ -14,7 +14,11 @@ tags: $:/tags/PageTemplate
 
 </section>
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/StoryTiddlerTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
+<$vars searchPrefix="[" searchSuffix="]">
+
+<$list filter=<<tf.story-river.filter>> history="$:/HistoryList" template="$:/core/ui/StoryTiddlerTemplate" storyview={{$:/view}} emptyMessage={{$:/config/EmptyStoryMessage}}/>
+
+</$vars>
 
 <section class="story-frontdrop">
 
