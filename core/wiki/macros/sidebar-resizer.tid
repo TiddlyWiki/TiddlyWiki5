@@ -32,35 +32,40 @@ title: $:/core/macros/sidebar-resizer
 
 \function convert.to.result(value,suffix) [<suffix>match[px]then<value>] [<suffix>match[%]then<convert.to.percentage.value>] [<suffix>match[cm]then<convert.to.cm.value>] [<suffix>match[mm]then<convert.to.mm.value>] [<suffix>match[Q]then<convert.to.Q.value>] [<suffix>match[in]then<convert.to.in.value>] [<suffix>match[pc]then<convert.to.pc.value>] [<suffix>match[pt]then<convert.to.pt.value>] [<suffix>match[em]then<convert.to.em.value>]
 
+\function get.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>get[text]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>get[text]]
+
 \function get.value.metric(value) [<value>suffix[px]then[px]] ~[<value>suffix[%]then[%]] ~[<value>suffix[cm]then[cm]] ~[<value>suffix[mm]then[mm]] ~[<value>suffix[Q]then[Q]] ~[<value>suffix[in]then[in]] ~[<value>suffix[pc]then[pc]] ~[<value>suffix[pt]then[pt]] ~[<value>suffix[em]then[em]]
 
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
-	<$action-setfield $tiddler="$:/state/sidebar/resizing"
-		text="yes"
-		widget-node-width=<<tv-widgetnode-width>>
-		start-posx=<<event-fromcatcher-posx>>
-		start-story-left={{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}
-		story-left-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/storyleft}] }}}
-		start-story-right={{$:/themes/tiddlywiki/vanilla/metrics/storyright}}
-		story-right-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/storyright}] }}}
-		start-sidebar-width={{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}}
-		sidebar-width-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}] }}}
-		start-tiddler-width={{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}}
-		tiddler-width-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}] }}}
-		start-story-width={{$:/themes/tiddlywiki/vanilla/metrics/storywidth}}
-		story-width-metric={{{ [get.value.metric{$:/themes/tiddlywiki/vanilla/metrics/storywidth}] }}}
-		start-centralised-story-width={{$:/themes/tiddlywiki/centralised/metrics/storywidth}}
-		centralised-story-width-metric={{{ [get.value.metric{$:/themes/tiddlywiki/centralised/metrics/storywidth}] }}}
-	/>
+	<$vars
+		startStoryLeft={{{ [get.theme.metric[metrics/storyleft]] }}}
+		startStoryRight={{{ [get.theme.metric[metrics/storyright]] }}}
+		startSidebarWidth={{{ [get.theme.metric[metrics/sidebarwidth]] }}}
+		startTiddlerWidth={{{ [get.theme.metric[metrics/tiddlerwidth]] }}}
+		startStoryWidth={{{ [get.theme.metric[metrics/storywidth]] }}}>
+		<$action-setfield $tiddler="$:/state/sidebar/resizing"
+			text="yes"
+			widget-node-width=<<tv-widgetnode-width>>
+			start-posx=<<event-fromcatcher-posx>>
+			start-story-left=<<startStoryLeft>>
+			story-left-metric={{{ [get.value.metric<startStoryLeft>] }}}
+			start-story-right=<<startStoryRight>>
+			story-right-metric={{{ [get.value.metric<startStoryRight>] }}}
+			start-sidebar-width=<<startSidebarWidth>>
+			sidebar-width-metric={{{ [get.value.metric<startSidebarWidth>] }}}
+			start-tiddler-width=<<startTiddlerWidth>>
+			tiddler-width-metric={{{ [get.value.metric<startTiddlerWidth>] }}}
+			start-story-width=<<startStoryWidth>>
+			story-width-metric={{{ [get.value.metric<startStoryWidth>] }}}
+		/>
+	</$vars>
 <% endif %>
 \end
 
 \procedure sidebar-resizer-pointercancel-actions()
 <$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
 \end
-
-\function get.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>get[text]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>get[text]]
 
 \procedure set-storywidth-storyright-actions()
 <$let
@@ -148,7 +153,7 @@ title: $:/core/macros/sidebar-resizer
 \procedure set-centralised-actions()
 <$let
 	storyMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/centralised/metrics/storyminwidth}] }}}
-	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-centralised-story-width}] }}}
+	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-width}] }}}
 	sidebarMinWidth={{{ [convert.to.pixels{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}] }}}
 	storyMaxWidth={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<sidebarMinWidth>] }}}
 	dragDiffMultiplied={{{ [<dragDiff>multiply[2]] }}}
@@ -157,7 +162,7 @@ title: $:/core/macros/sidebar-resizer
 	storyWidth={{{ [<storyWidth>subtract<storyWidthClamped>] }}}>
 
 	<$let
-		storyWidthMetric={{$:/state/sidebar/resizing!!centralised-story-width-metric}}
+		storyWidthMetric={{$:/state/sidebar/resizing!!story-width-metric}}
 		storyWidthConverted={{{ [function[convert.to.result],<storyWidth>,<storyWidthMetric>] }}}
 		storyMinWidthConverted={{{ [function[convert.to.result],<storyMinWidth>,<storyWidthMetric>] }}}
 		storyMaxWidthConverted={{{ [function[convert.to.result],<storyMaxWidth>,<storyWidthMetric>] }}}>
