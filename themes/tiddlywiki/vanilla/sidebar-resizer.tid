@@ -6,6 +6,8 @@ code-body: yes
 
 \function sidebarbreakpoint-minus-one() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
 
+\function get.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>get[text]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>get[text]]
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
 
 @media (min-width: <<sidebarbreakpoint>>) {
@@ -14,7 +16,7 @@ code-body: yes
 		position: fixed;
 		top: 0;
 		height: 100%;
-		width: min(calc({{$:/themes/tiddlywiki/vanilla/metrics/storypaddingright}} / 2),21px);
+		width: min(calc(<<get.theme.metric metrics/storypaddingright>> / 2),21px);
 		transition: opacity 100ms;
 		opacity: 0.1;
 		cursor: ew-resize;
