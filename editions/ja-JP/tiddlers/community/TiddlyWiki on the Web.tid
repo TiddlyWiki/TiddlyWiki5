@@ -1,0 +1,18 @@
+color: #808
+created: 20241009150445080
+icon: $:/core/images/link
+list: TalkTiddlyWiki [[TiddlyWiki on YouTube]] [[TiddlyWiki on Reddit]] [[TiddlyWiki on Discord]] [[TiddlyWiki on GitHub]] [[TiddlyWiki on Mastodon]] [[TiddlyWiki on Twitter]] [[TiddlyWiki on Gitter]] [[TiddlyWiki on Open Collective]]
+modified: 20241010114936568
+original-modified: 20241009150453139
+tags: Welcome
+title: TiddlyWiki on the Web
+ja-title: ウェブ上のTiddlyWiki
+type: text/vnd.tiddlywiki
+
+ウェブ上にある~TiddlyWikiコミュニティへのリンクです。
+
+<div class="tc-cards tc-cards-vertical">
+<$list filter="[tag[TiddlyWiki on the Web]]">
+<$macrocall $name="flex-card-external" backgroundcolor={{!!background-color}} textcolor={{!!text-color}} captionField="caption"/>
+</$list>
+</div>
