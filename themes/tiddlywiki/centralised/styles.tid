@@ -12,7 +12,7 @@ tags: [[$:/tags/Stylesheet]]
 	html .tc-story-river {
 		position: relative;
 		width: min({{$:/themes/tiddlywiki/centralised/metrics/storywidth}},calc(100% - (2 * {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}})));
-		padding: 42px;
+		padding: 42px {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} 42px {{$:/themes/tiddlywiki/centralised/metrics/storypaddingleft}};
 		margin: 0 auto;
 		text-align: left;
 	}
