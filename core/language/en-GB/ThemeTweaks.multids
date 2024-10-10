@@ -4,6 +4,10 @@ Centralised/Metrics/SidebarMinWidth: Centralised Minimum Sidebar Width
 Centralised/Metrics/SidebarMinWidth/Hint: the minimum width of the sidebar in the centralised theme
 Centralised/Metrics/StoryMinWidth: Centralised Minimum Story Width
 Centralised/Metrics/StoryMinWidth/Hint: the minimum width of the story river in the centralised theme
+Centralised/Metrics/StoryPaddingLeft: Centralised Story Padding Left
+Centralised/Metrics/StoryPaddingLeft/Hint: the left padding of the story river in the centralised theme
+Centralised/Metrics/StoryPaddingRight: Centralised Story Padding Right
+Centralised/Metrics/StoryPaddingRight/Hint: the right padding of the story river in the centralised theme
 Centralised/Metrics/StoryWidth: Centralised Story Width
 Centralised/Metrics/StoryWidth/Hint: the overall width of the story river in the centralised theme
 ThemeTweaks: Theme Tweaks
@@ -37,6 +41,10 @@ Metrics/StoryLeft: Story left position
 Metrics/StoryLeft/Hint: how far the left margin of the story river<br>(tiddler area) is from the left of the page
 Metrics/StoryMinWidth: Minimum Story width
 Metrics/StoryMinWidth/Hint: the minimun width of the story river
+Metrics/StoryPaddingLeft: Story Padding Left
+Metrics/StoryPaddingLeft/Hint: the left padding of the story river
+Metrics/StoryPaddingRight: Story Padding Right
+Metrics/StoryPaddingRight/Hint: the right padding of the story river
 Metrics/StoryTop: Story top position
 Metrics/StoryTop/Hint: how far the top margin of the story river<br>is from the top of the page
 Metrics/StoryRight: Story right
