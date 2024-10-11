@@ -42,36 +42,48 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 		</div>
 	</div>
 
-
 	<!-- <$reveal type="match" state="is-current-user-profile" text="yes"> -->
 		<div class="user-profile-management">
 			<h2>Manage Your Account</h2>
-			<form class="user-profile-form">
+			<form class="user-profile-form" action="/update-user-profile" method="POST">
 				<div class="form-group">
 					<label for="username">Username:</label>
-					<input type="text" id="username" name="username" value={{{ [<user>jsonget[username]] }}} />
+					<input type="text" id="username" name="username" value={{{ [<user>jsonget[username]] }}} required />
 				</div>
 				<div class="form-group">
 					<label for="email">Email:</label>
-					<input type="email" id="email" name="email" value={{{ [<user>jsonget[email]] }}} />
+					<input type="email" id="email" name="email" value={{{ [<user>jsonget[email]] }}} required />
 				</div>
 				<button type="submit" class="update-profile-btn">Update Profile</button>
 			</form>
 			<hr />
-			<h2>Danger Zone</h2>
-			<form class="user-profile-form">
+			<h2>Change Password</h2>
+			<form class="user-profile-form" action="/change-user-password" method="POST">
+				<div class="form-group">
+					<label for="current-password">Current Password:</label>
+					<input type="password" id="current-password" name="currentPassword" required />
+				</div>
 				<div class="form-group">
 					<label for="new-password">New Password:</label>
-					<input type="password" id="new-password" name="new-password" required />
+					<input type="password" id="new-password" name="newPassword" required />
 				</div>
 				<div class="form-group">
 					<label for="confirm-password">Confirm New Password:</label>
-					<input type="password" id="confirm-password" name="confirm-password" required />
+					<input type="password" id="confirm-password" name="confirmPassword" required />
 				</div>
 				<button type="submit" class="update-password-btn">Change Password</button>
 			</form>
 		</div>
 	<!-- </$reveal> -->
+
+	<$let flash-message={{{ [[$:/state/mws/flash-message]get[text]] }}}>
+		<$reveal type="nomatch" state="$:/state/mws/flash-message" text="">
+			<div class="flash-message">
+				<$text text=<<flash-message>>/>
+			</div>
+			<$action-setfield $tiddler="$:/state/mws/flash-message" text=""/>
+		</$reveal>
+	</$let>
 </div>
 
 <style>

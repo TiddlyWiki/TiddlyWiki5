@@ -781,16 +781,66 @@ SqlTiddlerDatabase.prototype.getUserByUsername = function(username) {
 	});
 };
 
-SqlTiddlerDatabase.prototype.updateUser = function(userId, username, email) {
-	this.engine.runStatement(`
-			UPDATE users
-			SET username = $username, email = $email
-			WHERE user_id = $userId
-	`, {
+SqlTiddlerDatabase.prototype.updateUser = function (userId, username, email) {
+	const existingUser = this.engine.runStatement(`
+		SELECT user_id FROM users
+		WHERE email = $email AND user_id != $userId
+`, {
+		$email: email,
+		$userId: userId
+	});
+
+	if (existingUser.length > 0) {
+		return {
+			success: false,
+			message: "Email address already in use by another user."
+		};
+	}
+
+	try {
+		this.engine.runStatement(`
+				UPDATE users
+				SET username = $username, email = $email
+				WHERE user_id = $userId
+		`, {
 			$userId: userId,
 			$username: username,
 			$email: email
-	});
+		});
+
+		return {
+			success: true,
+			message: "User profile updated successfully."
+		};
+	} catch (error) {
+		return {
+			success: false,
+			message: "Failed to update user profile: " + error.message
+		};
+	}
+};
+
+SqlTiddlerDatabase.prototype.updateUserPassword = function (userId, newHash) {
+	try {
+		this.engine.runStatement(`
+				UPDATE users
+				SET password = $newHash
+				WHERE user_id = $userId
+		`, {
+			$userId: userId,
+			$newHash: newHash,
+		});
+
+		return {
+			success: true,
+			message: "Password updated successfully."
+		};
+	} catch (error) {
+		return {
+			success: false,
+			message: "Failed to update password: " + error.message
+		};
+	}
 };
 
 SqlTiddlerDatabase.prototype.deleteUser = function(userId) {
