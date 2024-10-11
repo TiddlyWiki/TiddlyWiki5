@@ -15,16 +15,20 @@ tags: $:/tags/Stylesheet
 		);
 	}
 
-	<$list filter=<<tf.story-river.filter.match>> variable="filteredTiddler">
+	<%if [{$:/temp/search/input}!is[blank]] %>
 
-		<$set name="CSSEscapedTitle" value={{{ [<filteredTiddler>escapecss[]] }}}>
+		<$list filter=<<tf.story-river.filter.match>> variable="filteredTiddler">
 
-			[data-tiddler-title={{{ [<CSSEscapedTitle>] }}}].tc-tiddler-frame {
-				border: 3px solid <<colour primary>>;
-			}
+			<$set name="CSSEscapedTitle" value={{{ [<filteredTiddler>escapecss[]] }}}>
 
-		</$set>
+				[data-tiddler-title={{{ [<CSSEscapedTitle>] }}}].tc-tiddler-frame {
+					border: 3px solid <<colour primary>>;
+				}
 
-	</$list>
+			</$set>
+
+		</$list>
+
+	<% endif %>
 
 <% endif %>
