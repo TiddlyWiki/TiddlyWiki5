@@ -22,7 +22,7 @@ tags: $:/tags/Stylesheet
 
 			<$set name="CSSEscapedTitle" value={{{ [<filteredTiddler>escapecss[]] }}}>
 
-				[data-tiddler-title={{{ [<CSSEscapedTitle>] }}}].tc-tiddler-frame {
+				[data-tiddler-title="<<CSSEscapedTitle>>"].tc-tiddler-frame {
 					outline: 2px solid <<colour primary>>;
 				}
 
