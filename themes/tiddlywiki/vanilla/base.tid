@@ -1275,7 +1275,8 @@ button.tc-btn-invisible.tc-remove-tag-button {
 }
 
 .tc-tiddler-controls button.tc-selected svg,
-.tc-page-controls button.tc-selected svg  {
+.tc-page-controls button.tc-selected svg,
+button.tc-filter-story-btn.tc-selected svg  {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 

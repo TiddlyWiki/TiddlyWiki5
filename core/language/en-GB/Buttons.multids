@@ -187,6 +187,7 @@ Stamp/Caption/New: Add your own
 Stamp/Hint: Insert a preconfigured snippet of text
 Stamp/New/Title: Name as shown in menu
 Stamp/New/Text: Text of snippet. (Remember to add a descriptive title in the caption field).
+StoryFilter/Hint: Filter the story river
 Strikethrough/Caption: strikethrough
 Strikethrough/Hint: Apply strikethrough formatting to selection
 Subscript/Caption: subscript

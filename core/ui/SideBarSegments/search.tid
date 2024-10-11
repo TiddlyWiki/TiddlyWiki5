@@ -62,18 +62,18 @@ tags: $:/tags/SideBarSegment
 </$keyboard>
 </$keyboard>
 </$keyboard>
-<$reveal state=<<searchTiddler>> type="nomatch" text="">
-<$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
-<<advanced-search-actions>>
-{{$:/core/images/advanced-search-button}}
-</$button>
-<$button tooltip="filter" class={{{ [{$:/state/story-river/filter}match[yes]then[tc-selected]] tc-btn-invisible +[join[ ]] }}}>
+<$button tooltip={{$:/language/Buttons/StoryFilter/Hint}} class={{{ [{$:/state/story-river/filter}match[yes]then[tc-selected]] tc-filter-story-btn tc-btn-invisible +[join[ ]] }}}>
 <%if [{$:/state/story-river/filter}!match[yes]] %>
 <$action-setfield $tiddler="$:/state/story-river/filter" text="yes"/>
 <% else %>
 <$action-deletetiddler $tiddler="$:/state/story-river/filter"/>
 <% endif %>
 {{$:/core/images/github}}
+</$button>
+<$reveal state=<<searchTiddler>> type="nomatch" text="">
+<$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
+<<advanced-search-actions>>
+{{$:/core/images/advanced-search-button}}
 </$button>
 <$button class="tc-btn-invisible">
 <<cancel-search-actions>><$action-sendmessage $message="tm-focus-selector" $param=".tc-search input"/>
