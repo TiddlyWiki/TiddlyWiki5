@@ -1,0 +1,18 @@
+title: $:/themes/tiddlywiki/vanilla/filter
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
+
+<%if [{$:/state/story-river/filter}match[yes]] %>
+
+	.tc-story-river {
+		background: repeating-linear-gradient(
+			to right,
+			<<colour page-background>>,
+			<<colour page-background>> 10px,
+			<<colour tiddler-background>> 10px,
+			<<colour tiddler-background>> 20px
+		);
+	}
+
+<% endif %>
