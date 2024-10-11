@@ -175,6 +175,10 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Update addres
 Settings/PerformanceInstrumentation/Caption: Performance Instrumentation
 Settings/PerformanceInstrumentation/Hint: Displays performance statistics in the browser developer console. Requires reload to take effect
 Settings/PerformanceInstrumentation/Description: Enable performance instrumentation
+Settings/StoryFilterFields/Caption: Story Filter Fields
+Settings/StoryFilterFields/Hint: The fields for the `search` filter of the story river
+Settings/StoryFilterFlags/Caption: Story Filter Flags
+Settings/StoryFilterFlags/Hint: The flags for the `search` filter of the story river
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
 Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
 Settings/ToolbarButtonStyle/Styles/Borderless: Borderless

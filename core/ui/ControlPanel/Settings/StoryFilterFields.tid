@@ -1,0 +1,13 @@
+title: $:/core/ui/ControlPanel/Settings/StoryFilterFields
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/StoryFilterFields/Caption}}
+
+\whitespace trim
+\define lingo-base() $:/language/ControlPanel/Settings/StoryFilterFields/
+
+<$link to="$:/config/StoryFilter/fields" class="tc-control-panel-item">
+	<<lingo Hint>>
+</$link>
+
+<$edit-text tag="input" tiddler="$:/config/StoryFilter/fields" default=""/><br>
+

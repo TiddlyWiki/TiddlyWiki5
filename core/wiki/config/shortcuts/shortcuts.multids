@@ -8,7 +8,6 @@ change-sidebar-layout: shift-alt-Down
 delete-field: shift-alt-D
 excise: ctrl-E
 filter-river: alt-F
-sidebar-search: ctrl-shift-F
 heading-1: ctrl-1
 heading-2: ctrl-2
 heading-3: ctrl-3
@@ -35,6 +34,7 @@ preview: alt-P
 quote: ctrl-Q
 save-tiddler: ctrl+enter
 save-wiki: ctrl-S
+sidebar-search: ctrl-shift-F
 stamp: ctrl-S
 strikethrough: ctrl-T
 subscript: ctrl-shift-B
