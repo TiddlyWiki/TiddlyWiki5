@@ -6,6 +6,7 @@ tags: $:/tags/Stylesheet
 <%if [{$:/state/story-river/filter}match[yes]] %>
 
 	.tc-story-river {
+		min-height: 50vh;
 		background: repeating-linear-gradient(
 			to right,
 			<<colour page-background>>,
