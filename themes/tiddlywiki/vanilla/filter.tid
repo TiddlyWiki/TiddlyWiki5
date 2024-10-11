@@ -1,7 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/filter
 tags: $:/tags/Stylesheet
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional html
 
 <%if [{$:/state/story-river/filter}match[yes]] %>
 
@@ -14,5 +14,17 @@ tags: $:/tags/Stylesheet
 			<<colour tiddler-background>> 20px
 		);
 	}
+
+	<$list filter=<<tf.story-river.filter.match>> variable="filteredTiddler">
+
+		<$set name="CSSEscapedTitle" value={{{ [<filteredTiddler>escapecss[]] }}}>
+
+			[data-tiddler-title={{{ [<CSSEscapedTitle>] }}}].tc-tiddler-frame {
+				border: 3px solid <<colour primary>>;
+			}
+
+		</$set>
+
+	</$list>
 
 <% endif %>
