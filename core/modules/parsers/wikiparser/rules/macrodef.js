@@ -55,9 +55,10 @@ exports.parse = function() {
 		}
 	}
 	// Is the remainder of the \define line blank after the parameter close paren?
-	var reEnd;
+	var reEnd,inline = true;
 	if(this.match[3]) {
 		// If so, it is a multiline definition and the end of the body is marked with \end
+		inline = false;
 		reEnd = new RegExp("((?:^|\\r?\\n)[^\\S\\n\\r]*\\\\end[^\\S\\n\\r]*(?:" + $tw.utils.escapeRegExp(this.match[1]) + ")?(?:$|\\r?\\n))","mg");
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
@@ -82,7 +83,8 @@ exports.parse = function() {
 		attributes: {},
 		children: [],
 		params: params,
-		isMacroDefinition: true
+		isMacroDefinition: true,
+		inline: inline && !!endMatch
 	}];
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"name",this.match[1]);
 	$tw.utils.addAttributeToParseTreeNode(parseTreeNodes[0],"value",text);
@@ -95,6 +97,9 @@ exports.serialize = function(tree,serialize) {
 			return param.name + (param.default ? ":" + param.default : "");
 	}).join(",");
 	var definition = tree.attributes.value.value;
+	if(tree.inline) {
+		return "\\define " + name + "(" + params + ") " + definition + "\n\n" + serialize(tree.children);
+	}
 	return "\\define " + name + "(" + params + ")\n" + definition + "\n\\end\n\n" + serialize(tree.children);
 };
 

@@ -114,7 +114,12 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end\n")).toEqual(
 
-			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":30,"rule":"macrodef"}]
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"inline":false,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":30,"rule":"macrodef"}]
+
+		);
+		expect(parse("\\define myMacro() nothing\n\n")).toEqual(
+
+			[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"myMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"inline":true,"orderedAttributes":[{"name":"name","type":"string","value":"myMacro"},{"name":"value","type":"string","value":"nothing"}],"start":0,"end":25,"rule":"macrodef"}]
 
 		);
 	});
@@ -185,7 +190,7 @@ describe("WikiText parser tests", function() {
 	it("should parse comment in pragma area. Comment will be invisible", function() {
 		expect(parse("<!-- comment in pragma area -->\n\\define aMacro()\nnothing\n\\end\n")).toEqual(
 
-			[{"type":"void","children":[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"aMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"orderedAttributes":[{"name":"name","type":"string","value":"aMacro"},{"name":"value","type":"string","value":"nothing"}],"start":32,"end":61,"rule":"macrodef"}],"text":"<!-- comment in pragma area -->","start":0,"end":31,"rule":"commentblock"}]
+			[{"type":"void","children":[{"type":"set","attributes":{"name":{"name":"name","type":"string","value":"aMacro"},"value":{"name":"value","type":"string","value":"nothing"}},"children":[],"params":[],"isMacroDefinition":true,"inline":false,"orderedAttributes":[{"name":"name","type":"string","value":"aMacro"},{"name":"value","type":"string","value":"nothing"}],"start":32,"end":61,"rule":"macrodef"}],"text":"<!-- comment in pragma area -->","start":0,"end":31,"rule":"commentblock"}]
 
 		);
 	});
