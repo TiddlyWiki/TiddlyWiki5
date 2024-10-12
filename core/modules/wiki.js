@@ -1053,7 +1053,7 @@ Options include:
 exports.parseText = function(type,text,options) {
 	text = text || "";
 	options = options || {};
-	var Parser = this.getParser(type,options)
+	var Parser = $tw.utils.getParser(type,options)
 	// Return the parser instance
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
@@ -1061,22 +1061,6 @@ exports.parseText = function(type,text,options) {
 		_canonical_uri: options._canonical_uri,
 		configTrimWhiteSpace: options.configTrimWhiteSpace
 	});
-};
-
-exports.getParser = function(type,options) {
-	options = options || {};
-	// Select a parser
-	var Parser = $tw.Wiki.parsers[type];
-	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
-		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
-	}
-	if(!Parser) {
-		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
-	}
-	if(!Parser) {
-		return null;
-	}
-	return Parser;
 };
 
 /*

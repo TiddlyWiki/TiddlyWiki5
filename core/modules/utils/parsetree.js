@@ -123,11 +123,28 @@ exports.getParseTreeText = function getParseTreeText(tree) {
 	return output.join("");
 };
 
+exports.getParser = function(type,options) {
+	options = options || {};
+	// Select a parser
+	var Parser = $tw.Wiki.parsers[type];
+	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
+		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
+	}
+	if(!Parser) {
+		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
+	}
+	if(!Parser) {
+		return null;
+	}
+	return Parser;
+};
+
 /*
 Utility to get the (similarly but not 1:1 equal) original wikitext of a parse tree node or array of nodes.
 Based on `node.rule` metadata added in `wikiparser.js`.
 */
-exports.serializeParseTree = function serializeParseTree(tree,tiddlerType) {
+exports.serializeParseTree = function serializeParseTree(tree,tiddlerType,options) {
+	options = options || {};
 	var output = [];
 	if($tw.utils.isArray(tree)) {
 		$tw.utils.each(tree,function(node) {
@@ -137,7 +154,11 @@ exports.serializeParseTree = function serializeParseTree(tree,tiddlerType) {
 		if(tree.type === "text" && !tree.rule) {
 			output.push(tree.text);
 		} else {
-			var Parser = $tw.wiki.getParser(tiddlerType);
+			var Parser = $tw.utils.getParser(tiddlerType);
+			if(!Parser.prototype.blockRuleClasses && !Parser.prototype.inlineRuleClasses && !Parser.prototype.pragmaRuleClasses) {
+				// Wiki parser initialize blockRuleClasses when first new an instance
+				new Parser(tiddlerType,undefined,{wiki: options.wiki || $tw.wiki});
+			}
 			var Rule = Parser.prototype.blockRuleClasses[tree.rule] ||
 				Parser.prototype.inlineRuleClasses[tree.rule] ||
 				Parser.prototype.pragmaRuleClasses[tree.rule];
