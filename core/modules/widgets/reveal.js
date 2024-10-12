@@ -96,6 +96,21 @@ RevealWidget.prototype.positionPopup = function(domNode) {
 		left = Math.max(0,left);
 		top = Math.max(0,top);
 	}
+	if(this.clampToParent) {
+		var offsetParentDomNode = domNode.offsetParent,
+			parentWidth = offsetParentDomNode.offsetWidth,
+			parentHeight = offsetParentDomNode.offsetHeight,
+			right = left + domNode.offsetWidth,
+			bottom = top + domNode.offsetHeight;
+		if(domNode.offsetWidth <= parentWidth && right > parentWidth) {
+			left = parentWidth - domNode.offsetWidth;
+		}
+		if(domNode.offsetHeight <= parentHeight && bottom > parentHeight) {
+			top = parentHeight - domNode.offsetHeight;
+		}
+		// clamping on left and top sides is taken care of by positionAllowNegative
+	}
+	// TODO: clampToParent handling for absolute positions
 	if (this.popup.absolute) {
 		// Traverse the offsetParent chain and correct the offset to make it relative to the parent node.
 		for (var offsetParentDomNode = domNode.offsetParent; offsetParentDomNode; offsetParentDomNode = offsetParentDomNode.offsetParent) {
@@ -126,6 +141,7 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	this.updatePopupPosition = this.getAttribute("updatePopupPosition","no") === "yes";
+	this.clampToParent = this.getAttribute("clamp","no") === "yes";
 	// Compute the title of the state tiddler and read it
 	this.stateTiddlerTitle = this.state;
 	this.stateTitle = this.getAttribute("stateTitle");
