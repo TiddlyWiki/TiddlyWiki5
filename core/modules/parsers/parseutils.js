@@ -388,28 +388,33 @@ exports.parseAttribute = function(source,pos) {
 /*
 Serialize a parsed attribute node
 */
-exports.serializeAttribute = function(node) {
+exports.serializeAttribute = function(node,options) {
+	options = options || {};
 	if(!node || typeof node !== "object" || !node.name || !node.type) {
 		return null;
 	}
-	var attributeString = node.name;
+	// If name is number, means it is a positional attribute and name is omitted
+	var positional = parseInt(node.name) >= 0,
+		// `=` in a widget and might be `:` in a macro
+		assign = positional ? "" : (options.assignmentSymbol || "="),
+		attributeString = positional ? "" : node.name;
 	if(node.type === "string") {
 		if(node.value === "true") {
 			return attributeString;
 		}
-		attributeString += '="' + node.value + '"';
+		attributeString += assign + '"' + node.value + '"';
 	} else if(node.type === "filtered") {
-		attributeString += "={{{" + node.filter + "}}}";
+		attributeString += assign + "{{{" + node.filter + "}}}";
 	} else if(node.type === "indirect") {
-		attributeString += "={{" + node.textReference + "}}";
+		attributeString += assign + "{{" + node.textReference + "}}";
 	} else if(node.type === "substituted") {
-		attributeString += "=`" + node.rawValue + "`";
+		attributeString += assign + "`" + node.rawValue + "`";
 	} else if(node.type === "macro") {
 		if(node.value && typeof node.value === "object" && node.value.type === "macrocall") {
 			var params = node.value.params.map(function(param) {
 				return param.value;
 			}).join(" ");
-			attributeString += "=<<" + node.value.name + " " + params + ">>";
+			attributeString += assign + "<<" + node.value.name + " " + params + ">>";
 		} else {
 			// Unsupported macro structure
 			return null;

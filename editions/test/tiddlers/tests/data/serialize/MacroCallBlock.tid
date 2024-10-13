@@ -5,3 +5,5 @@ type: text/vnd.tiddlywiki
 <<name "value" "value2">>
 
 <<.def "macro calls">>
+
+<<alert "primary" "primary alert" width:"60%">>

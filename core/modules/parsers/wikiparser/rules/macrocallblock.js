@@ -64,9 +64,9 @@ exports.serialize = function (node) {
 	}
 	// Append ordered arguments if any
 	if(node.orderedAttributes) {
-		node.orderedAttributes.forEach(function (attr) {
-			if(attr.name !== "$variable") {
-				result += " " + '"' + attr.value + '"';
+		node.orderedAttributes.forEach(function (attribute) {
+			if(attribute.name !== "$variable") {
+				result += " " + $tw.utils.serializeAttribute(attribute,{assignmentSymbol:":"});
 			}
 		});
 	}
