@@ -85,7 +85,7 @@ exports.serialize = function (tree, serialize) {
 		});
 		result.push("<<<");
 	}
-	return result.join("\n");
+	return result.join("\n") + "\n\n";
 };
 
 })();

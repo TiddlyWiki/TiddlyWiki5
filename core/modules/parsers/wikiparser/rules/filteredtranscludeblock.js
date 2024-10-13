@@ -83,7 +83,7 @@ exports.serialize = function(tree, serialize) {
 	serialized += "}"
 	// CSS classes
 	if(tree.attributes.itemClass) serialized += "." + tree.attributes.itemClass.value.split(" ").join(".");
-	return serialized + "\n";
+	return serialized + "\n\n";
 };
 
 })();
