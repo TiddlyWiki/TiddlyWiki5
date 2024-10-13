@@ -105,7 +105,7 @@ The second ESC tries to close the "draft tiddler"
 <div class={{{ [[tc-edit-add-tag]] [<tf.tagpicker-dropdown-class>] +[join[ ]] }}}>
 	<div class="tc-edit-add-tag-ui">
 		<span class="tc-add-tag-name tc-small-gap-right">
-			<$macrocall	$name="keyboard-driven-input"
+			<$macrocall $name="keyboard-driven-input"
 				tiddler=<<newTagNameTiddler>>
 				storeTitle=<<storeTitle>>
 				refreshTitle=<<refreshTitle>>
