@@ -405,8 +405,15 @@ exports.serializeAttribute = function(node) {
 	} else if(node.type === "substituted") {
 		attributeString += "=`" + node.rawValue + "`";
 	} else if(node.type === "macro") {
-		// Assuming macro serialization is complex and handled elsewhere
-		attributeString += "=" + node.value.serialize();
+		if(node.value && typeof node.value === "object" && node.value.type === "macrocall") {
+			var params = node.value.params.map(function(param) {
+				return param.value;
+			}).join(" ");
+			attributeString += "=<<" + node.value.name + " " + params + ">>";
+		} else {
+			// Unsupported macro structure
+			return null;
+		}
 	} else {
 		 // Unsupported type
 		return null;
