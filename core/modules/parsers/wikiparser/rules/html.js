@@ -202,12 +202,18 @@ exports.serialize = function(tree,serialize) {
 	}).join(" ");
 	// Children
 	var children = tree.children ? serialize(tree.children) : "";
+	var result = "";
 	// Self-closing tag
 	if(tree.isSelfClosing) {
-			return "<" + tag + (attributes ? " " + attributes : "") + " />";
+			result += "<" + tag + (attributes ? " " + attributes : "") + " />";
+	} else {
+		// Opening and closing tags
+		result += "<" + tag + (attributes ? " " + attributes : "") + ">" + children + "</" + tag + ">";
 	}
-	// Opening and closing tags
-	return "<" + tag + (attributes ? " " + attributes : "") + ">" + children + "</" + tag + ">";
+	if(tree.isBlock) {
+		result += "\n\n";
+	}
+	return result;
 };
 
 })();

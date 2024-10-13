@@ -9,3 +9,7 @@ This is an HTML5 aside element
 <$slider target="MyTiddler">
 This is a widget invocation
 </$slider>
+
+<$list filter="[tag[ExampleTag]sort[title]]" />
+
+Plain text in next paragraph.
