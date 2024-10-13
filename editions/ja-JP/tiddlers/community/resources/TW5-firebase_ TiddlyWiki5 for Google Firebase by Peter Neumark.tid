@@ -20,7 +20,6 @@ TiddlyWiki5のGoogle-Firebaseホストバージョン。
 <<<
 私は1年以上、Google FirebaseでTiddlyWiki5を使っています。毎日使っても十分安定しています。独自のインスタンスを作成する方法については、多くのスクリーンショットを含んだ詳細なチュートリアルがあります。プロセス全体は30分もかかりません: https://neumark.github.io/tw5-firebase/
 
-Please consider this version a proof of concept rather than a polished product! My focus was on multi-device or small-team collaboration:
 このバージョンは、洗練された製品というよりは概念実証と考えてください。私の焦点は、複数のデバイスや小規模チームのコラボレーションでした:
 
 * 基本認証(バッグには、誰が読み取り/書き込みできるかを決定するアクセスポリシーがあります)。
