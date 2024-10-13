@@ -109,6 +109,7 @@ exports.startup = function() {
 			}
 			timerId = setTimeout(throttledRefresh,timeout);
 			$tw.utils.extend(deferredChanges,changes);
+			console.log("skip");
 		} else {
 			$tw.utils.extend(deferredChanges,changes);
 			refresh();
