@@ -205,17 +205,17 @@ exports.serialize = function(tree, serialize) {
 				if(cell.tag === "th") {
 					serialized += "!";
 				}
-				// Serialize the cell content
+				// Cell content
 				serialized += serialize(cell.children);
-				// End the cell with a tailing space
-				serialized += " |";
+				// End the cell
+				serialized += "|";
 			}
 			// End the row
 			serialized += "\n";
 		}
 	}
-	// Return the complete serialized string
-	return serialized;
+	// Return the completed block
+	return serialized + "\n";
 };
 
 })();
