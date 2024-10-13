@@ -32,15 +32,25 @@ title: $:/core/macros/sidebar-resizer
 
 \function convert.to.result(value,suffix) [<suffix>match[px]then<value>] [<suffix>match[%]then<convert.to.percentage.value>] [<suffix>match[cm]then<convert.to.cm.value>] [<suffix>match[mm]then<convert.to.mm.value>] [<suffix>match[Q]then<convert.to.Q.value>] [<suffix>match[in]then<convert.to.in.value>] [<suffix>match[pc]then<convert.to.pc.value>] [<suffix>match[pt]then<convert.to.pt.value>] [<suffix>match[em]then<convert.to.em.value>]
 
+\function get.theme(metric) [{$:/theme}addsuffix[/]addsuffix<metric>!is[missing]] ~[{$:/theme}addsuffix[/]addsuffix<metric>is[shadow]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>]
+
 \function get.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>get[text]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>get[text]]
 
 \function set.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>is[shadow]] ~[{$:/theme}addsuffix[/]addsuffix<metric>is[shadow]!is[missing]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>]
 
 \function get.value.metric(value) [<value>suffix[px]then[px]] ~[<value>suffix[%]then[%]] ~[<value>suffix[cm]then[cm]] ~[<value>suffix[mm]then[mm]] ~[<value>suffix[Q]then[Q]] ~[<value>suffix[in]then[in]] ~[<value>suffix[pc]then[pc]] ~[<value>suffix[pt]then[pt]] ~[<value>suffix[em]then[em]]
 
+\procedure set_theme_throttling(metric)
+<$set name="metricsTiddler" value={{{ [function[get.theme],<metric>] }}}>
+	<%if [<metricsTiddler>!has[throttle.refresh]] %>
+		<$action-setfield $tiddler=<<metricsTiddler>> throttle.refresh="yes"/>
+	<% endif %>
+</$set>
+\end
+
 \procedure sidebar-resizer-pointerdown-actions()
 <%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
-	<$vars
+	<$let
 		startStoryLeft={{{ [get.theme.metric[metrics/storyleft]] }}}
 		startStoryRight={{{ [get.theme.metric[metrics/storyright]] }}}
 		startSidebarWidth={{{ [get.theme.metric[metrics/sidebarwidth]] }}}
@@ -61,7 +71,7 @@ title: $:/core/macros/sidebar-resizer
 			start-story-width=<<startStoryWidth>>
 			story-width-metric={{{ [get.value.metric<startStoryWidth>] }}}
 		/>
-	</$vars>
+	</$let>
 <% endif %>
 \end
 
@@ -142,13 +152,13 @@ title: $:/core/macros/sidebar-resizer
 	clampedDiff={{{ [<storyLeft>add<storyMinWidth>add<startSidebarWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	sidebarWidth={{{ [<sidebarWidth>subtract<clampedDiff>] }}}>
 	
-	<$vars
+	<$let
 		sidebarWidthConverted={{{ [function[convert.to.result],<sidebarWidth>,<sidebarWidthMetric>] }}}
 		sidebarMaxWidthConverted={{{ [function[convert.to.result],<sidebarMaxWidth>,<sidebarWidthMetric>] }}}
 		sidebarMinWidthConverted={{{ [function[convert.to.result],<sidebarMinWidth>,<sidebarWidthMetric>] }}}>
 		
 		<$action-setfield $tiddler=<<set.theme.metric metrics/sidebarwidth>> text={{{ [<sidebarWidth>compare:number:gteq<sidebarMaxWidth>then<sidebarMaxWidthConverted>addsuffix<sidebarWidthMetric>] ~[<sidebarWidth>compare:number:lt<sidebarMinWidth>then<sidebarMinWidthConverted>addsuffix<sidebarWidthMetric>] ~[<sidebarWidthConverted>addsuffix<sidebarWidthMetric>] }}}/>
-	</$vars>
+	</$let>
 </$let>
 \end
 
@@ -180,10 +190,15 @@ title: $:/core/macros/sidebar-resizer
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
 	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff={{{ [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}] }}} startStoryRight={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
 		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]then{$:/theme}!match[$:/themes/tiddlywiki/centralised]] %>
+			<<set_theme_throttling metrics/storyright>>
+			<<set_theme_throttling metrics/tiddlerwidth>>
+			<<set_theme_throttling metrics/storywidth>>
 			<<set-storywidth-storyright-actions>>
 		<%elseif [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]then{$:/theme}!match[$:/themes/tiddlywiki/centralised]] %>
+			<<set_theme_throttling metrics/sidebarwidth>>
 			<<set-sidebarwidth-actions>>
 		<%elseif [{$:/theme}match[$:/themes/tiddlywiki/centralised]] %>
+			<<set_theme_throttling metrics/storywidth>>
 			<<set-centralised-actions>>
 		<% endif %>
 	</$let>
