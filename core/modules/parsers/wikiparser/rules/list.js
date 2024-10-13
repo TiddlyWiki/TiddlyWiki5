@@ -66,6 +66,12 @@ var listTypes = {
 var listTags = Object.values(listTypes).map(function(type) {
 	return type.listTag;
 });
+/*
+Check if the child is a nested list or a simple line of list item
+*/
+function isListNode(node) {
+	return node && node.type === "element" && listTags.includes(node.tag);
+}
 var itemTags = Object.values(listTypes).map(function(type) {
 	return type.itemTag;
 });
@@ -174,7 +180,7 @@ exports.serialize = function (tree,serialize) {
 	// Recursive function to serialize list nodes, handling nested lists and formatting output
 	function serializeList(node, markerPrefix) {
 		var result = [];
-		if(node.type === "element" && listTags.includes(node.tag)) {
+		if(node.type === "element" && isListNode(node)) {
 			node.children.forEach(function (child) {
 				if(itemTags.includes(child.tag)) {
 					var currentMarker = findMarker(node.tag, child.tag);
@@ -183,8 +189,7 @@ exports.serialize = function (tree,serialize) {
 					// same level text nodes may be split into multiple children, and separated by deeper list sub-tree. We collect same level text nodes into this list, and concat then submit them before enter deeper list.
 					var content = [];
 					$tw.utils.each(child.children,function (subNode) {
-						// Check if the child is a nested list or a simple line of list item
-						if(listTags.includes(subNode.tag)) {
+						if(isListNode(subNode)) {
 							// Recursive call for nested lists
 							if(content.length > 0) {
 								result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
@@ -196,7 +201,8 @@ exports.serialize = function (tree,serialize) {
 						}
 						return ""; // Default return for unhandled node types
 					});
-					if(content.length > 0) {
+					// prepend `#` mark to a new line, if it has content (and has or hasn't nested list), or if it has no content and also no nested list
+					if(content.length > 0 || child.children.length === 0) {
 						result.push(markerPrefix + currentMarker + classAttr + " " + content.join("").trim());
 						content = []
 					}
