@@ -63,7 +63,7 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	return tree.text + "\n\n" + serialize(tree.children);
 };
 

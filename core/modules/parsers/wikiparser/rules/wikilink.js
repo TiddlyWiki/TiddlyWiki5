@@ -65,7 +65,7 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	var isSuppressed = tree.children[0].text.substr(0,1) === $tw.config.textPrimitives.unWikiLink;
 
 	var serialized = isSuppressed ? $tw.config.textPrimitives.unWikiLink : "";

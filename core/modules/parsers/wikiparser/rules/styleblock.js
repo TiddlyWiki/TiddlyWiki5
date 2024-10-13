@@ -73,7 +73,7 @@ exports.parse = function() {
 	}]
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	var lines = [];
 	var classes = [];
 	var styles = [];

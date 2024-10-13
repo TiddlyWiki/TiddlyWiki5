@@ -160,7 +160,7 @@ exports.parse = function() {
 	return [listStack[0]];
 };
 
-exports.serialize = function (tree, serialize) {
+exports.serialize = function (tree,serialize) {
 	// Helper function to find the marker for a given list container tag and item tag
 	function findMarker(listTag, itemTag) {
 		for(var key in listTypes) {

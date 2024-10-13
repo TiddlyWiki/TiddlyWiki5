@@ -117,7 +117,7 @@ exports.parseLink = function(source,pos) {
 	return node;
 };
 
-exports.serialize = function(tree) {
+exports.serialize = function(tree,serialize) {
 	var tooltip = tree.children[0].text;
 	var url = tree.attributes.href.value;
 	return "[ext[" + (tooltip !== url ? tooltip + "|" : "") + url + "]]";

@@ -93,7 +93,7 @@ exports.parse = function() {
 	return parseTreeNodes;
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	// Type of definition: "function", "procedure", or "widget"
 	var type = tree.isFunctionDefinition ? "function" : (tree.isProcedureDefinition ? "procedure" : "widget");
 	// Name of the function, procedure, or widget

@@ -55,7 +55,7 @@ exports.parse = function() {
 	return [node];
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	var result = "@@";
 	// Add styles if present
 	if(tree.attributes && tree.attributes.style) {

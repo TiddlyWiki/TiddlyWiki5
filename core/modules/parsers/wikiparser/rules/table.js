@@ -188,7 +188,7 @@ exports.parse = function() {
 	return [table];
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	var serialized = "";
 	// Iterate over the table rows
 	for(var i = 0; i < tree.children.length; i++) {

@@ -195,7 +195,7 @@ exports.isLegalTag = function(tag) {
 	}
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	var tag = tree.tag;
 	var attributes = tree.orderedAttributes.map(function(attribute) {
 			return $tw.utils.serializeAttribute(attribute);

@@ -37,7 +37,7 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree) {
+exports.serialize = function(tree,serialize) {
 	return tree.entity === "&ndash;" ? "--" : "---";
 };
 

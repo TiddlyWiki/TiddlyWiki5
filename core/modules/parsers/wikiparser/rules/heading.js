@@ -46,7 +46,7 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	// Get heading level from number after `h`
 	var headingLevel = parseInt(tree.tag.substr(1),10);
 	var classes = tree.attributes.class ? tree.attributes.class.value.split(" ").join(".") : "";

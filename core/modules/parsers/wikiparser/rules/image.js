@@ -130,7 +130,7 @@ exports.parseImage = function(source,pos) {
 	return node;
 };
 
-exports.serialize = function(tree) {
+exports.serialize = function(tree,serialize) {
 	var width = tree.attributes.width ? " " + $tw.utils.serializeAttribute(tree.attributes.width) : "";
 	var height = tree.attributes.height ? " " + $tw.utils.serializeAttribute(tree.attributes.height) : "";
 	var padSpace = width || height ? " " : "";

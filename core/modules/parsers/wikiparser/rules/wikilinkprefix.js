@@ -37,7 +37,7 @@ exports.parse = function() {
 	return [{type: "text", text: linkText.substr(1)}];
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	var serialized = $tw.config.textPrimitives.unWikiLink;
 	serialized += tree.text;
 	return serialized;

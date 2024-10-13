@@ -68,7 +68,7 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function (tree, serialize) {
+exports.serialize = function (tree,serialize) {
 	var result = [];
 	if(tree.attributes.action && tree.attributes.rules) {
 		// tree.attributes.action.value: "except"

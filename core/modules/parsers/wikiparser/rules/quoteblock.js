@@ -73,7 +73,7 @@ exports.parse = function() {
 	}];
 };
 
-exports.serialize = function (tree, serialize) {
+exports.serialize = function (tree,serialize) {
 	var result = [];
 	if(tree.type === "element" && tree.tag === "blockquote") {
 		// tree.attributes.class.value: "tc-quote"

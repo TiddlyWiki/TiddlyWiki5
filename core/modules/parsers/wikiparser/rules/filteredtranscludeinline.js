@@ -70,9 +70,9 @@ exports.parse = function() {
 	return [node];
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	var filteredtranscludeblock = require("$:/core/modules/parsers/wikiparser/rules/filteredtranscludeblock.js");
-	var result = filteredtranscludeblock.serialize(tree, serialize);
+	var result = filteredtranscludeblock.serialize(tree,serialize);
 	return result.trimEnd();
 };
 

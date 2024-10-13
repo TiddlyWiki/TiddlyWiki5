@@ -98,7 +98,7 @@ exports.parse = function() {
 	}
 };
 
-exports.serialize = function (tree, serialize) {
+exports.serialize = function (tree,serialize) {
 	if(tree.type === "void") {
 		return "$$$" + tree.parseType + (tree.renderType ? " > " + tree.renderType : "") + "\n" + tree.text + "\n$$$\n\n";
 	}

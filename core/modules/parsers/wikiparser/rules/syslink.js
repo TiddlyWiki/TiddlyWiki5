@@ -50,7 +50,7 @@ exports.parse = function() {
 	}
 };
 
-exports.serialize = function(tree, serialize) {
+exports.serialize = function(tree,serialize) {
 	// Check if the link is suppressed
 	var isSuppressed = tree.children[0].text.substr(0,1) === "~";
 	var serialized = isSuppressed ? "~" : "";
