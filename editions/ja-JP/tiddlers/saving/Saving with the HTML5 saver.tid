@@ -8,7 +8,7 @@ modified: 20241006115553166
 original-modified: 20221210215716269
 tags: Chrome Firefox [[Internet Explorer]] Opera Safari Saving Edge Windows Mac Linux Android iOS
 title: Saving with the HTML5 saver
-ja-title: HTML5のダウンロード保存による保存
+ja-title: HTML5セーバーによる保存
 type: text/vnd.tiddlywiki
 
 これは、他の方法がインストールされていない場合のデフォルトの保存方法です。ブラウザに組み込まれている"ファイルのダウンロード"ハンドラを使用し、ほぼすべてのデスクトップブラウザと多くのモバイルブラウザで動作するという利点があります。
