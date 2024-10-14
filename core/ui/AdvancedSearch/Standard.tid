@@ -3,7 +3,9 @@ tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/Standard/Caption}}
 
 \define lingo-base() $:/language/Search/
-\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" beforeafter="$beforeafter$" defaultState="$:/core/ui/AdvancedSearch/System" actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
+\define set-next-input-tab() <$macrocall $name="change-input-tab-after" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" defaultState="$:/core/ui/AdvancedSearch/System" actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
+
+\define set-previous-input-tab() <$macrocall $name="change-input-tab-before" stateTitle="$:/state/tab--1498284803" tag="$:/tags/AdvancedSearch" defaultState="$:/core/ui/AdvancedSearch/System" actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
 
 \define next-search-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/advancedsearch" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/advancedsearch/standard/currentTab' text=<<nextTab>>/>"/>
 
@@ -19,7 +21,7 @@ caption: {{$:/language/Search/Standard/Caption}}
 
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
 <$keyboard key="shift-alt-Right" actions=<<next-search-tab>>>
 <$keyboard key="shift-alt-Left" actions=<<next-search-tab "before">>>
 <$macrocall $name="keyboard-driven-input"

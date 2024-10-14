@@ -4,11 +4,18 @@ caption: {{$:/language/Search/System/Caption}}
 first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]
 
 \define lingo-base() $:/language/Search/
-\define set-next-input-tab(beforeafter:"after",stateTitle,tag,defaultState,currentTabTiddler)
-<$macrocall $name="change-input-tab"
+\define set-next-input-tab()
+<$macrocall $name="change-input-tab-after"
 	stateTitle="$:/state/tab--1498284803"
 	tag="$:/tags/AdvancedSearch"
-	beforeafter="$beforeafter$"
+	defaultState="$:/core/ui/AdvancedSearch/System"
+	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
+\end
+
+\define set-previous-input-tab()
+<$macrocall $name="change-input-tab-before"
+	stateTitle="$:/state/tab--1498284803"
+	tag="$:/tags/AdvancedSearch"
 	defaultState="$:/core/ui/AdvancedSearch/System"
 	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
 \end
@@ -49,7 +56,7 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
 <$macrocall $name="keyboard-driven-input"
 	tiddler="$:/temp/advancedsearch/input"
 	storeTitle="$:/temp/advancedsearch"

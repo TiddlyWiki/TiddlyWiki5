@@ -23,7 +23,9 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 </$button>
 \end
 
-\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
+\define set-next-input-tab() <$macrocall $name="change-input-tab-after" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
+
+\define set-previous-input-tab() <$macrocall $name="change-input-tab-before" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" defaultState={{$:/config/SearchResults/Default}} actions="<$action-setfield $tiddler='$:/state/search/currentTab' text=<<nextTab>>/>"/>
 
 \define body(config-title)
 \whitespace trim
@@ -33,7 +35,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 
 <$vars linkTiddler=<<searchTiddler>>>
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">> class="tc-create-wikitext-link">
+<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>> class="tc-create-wikitext-link">
 <$macrocall $name="keyboard-driven-input" tiddler=<<searchTiddler>> storeTitle=<<storeTitle>>
 		selectionStateTitle=<<searchListState>> refreshTitle=<<refreshTitle>> type="search" filterMinLength="1"
 		tag="input" focus="true" class="tc-popup-handle" inputCancelActions=<<cancel-search-actions>>

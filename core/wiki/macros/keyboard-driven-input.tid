@@ -1,14 +1,29 @@
 title: $:/core/macros/keyboard-driven-input
-tags: $:/tags/Macro
+tags: $:/tags/Global
 
-\procedure change-input-tab(stateTitle,tag,beforeafter,defaultState,actions)
+\procedure change-input-tab-after(stateTitle,tag,defaultState,actions)
 \whitespace trim
 <$set name="tabsList" filter="[all[shadows+tiddlers]tag<tag>!has[draft.of]]">
 	<$let
 		currentState={{{ [<stateTitle>!is[missing]get[text]] ~[<defaultState>] }}}
 		firstTab={{{ [enlist<tabsList>nth[1]] }}}
 		lastTab={{{ [enlist<tabsList>last[]] }}}
-		nextTab={{{ [all[shadows+tiddlers]tag<tag>!has[draft.of]$beforeafter$<currentState>] ~[[$beforeafter$]removeprefix[after]suffix[]addprefix<firstTab>] ~[[$beforeafter$]removeprefix[before]suffix[]addprefix<lastTab>] }}}
+		nextTab={{{ [all[shadows+tiddlers]tag<tag>!has[draft.of]after<currentState>] ~[<firstTab>] }}}
+	>
+		<$action-setfield $tiddler=<<stateTitle>> text=<<nextTab>>/>
+		$actions$
+	</$let>
+</$set>
+\end
+
+\procedure change-input-tab-before(stateTitle,tag,beforeafter,defaultState,actions)
+\whitespace trim
+<$set name="tabsList" filter="[all[shadows+tiddlers]tag<tag>!has[draft.of]]">
+	<$let
+		currentState={{{ [<stateTitle>!is[missing]get[text]] ~[<defaultState>] }}}
+		firstTab={{{ [enlist<tabsList>nth[1]] }}}
+		lastTab={{{ [enlist<tabsList>last[]] }}}
+		nextTab={{{ [all[shadows+tiddlers]tag<tag>!has[draft.of]before<currentState>] ~[<lastTab>] }}}
 	>
 		<$action-setfield $tiddler=<<stateTitle>> text=<<nextTab>>/>
 		$actions$
@@ -59,7 +74,7 @@ tags: $:/tags/Macro
 				firstItem={{{ [enlist<filteredList>nth[1]] }}}
 				lastItem={{{ [enlist<filteredList>last[]] }}}
 			>
-				<%if [<selectedItem>match<firstItem>!match<lastItem>] %>
+				<%if [<selectedItem>match<firstItem>!match<lastItem>] [<selectedItem>!match<firstItem>!match<lastItem>] %>
 					<<input-next-actions-inner>>
 				<%elseif [<selectedItem>match<lastItem>!match<firstItem>] %>
 					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
@@ -69,8 +84,6 @@ tags: $:/tags/Macro
 					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
 						<<input-next-actions-inner>>
 					</$set>
-				<%elseif [<selectedItem>!match<firstItem>!match<lastItem>] %>
-					<<input-next-actions-inner>>
 				<% endif %>
 			</$let>
 		</$set>
@@ -101,14 +114,12 @@ tags: $:/tags/Macro
 					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
 						<<input-next-actions-inner>>
 					</$set>
-				<%elseif [<selectedItem>match<lastItem>!match<firstItem>] %>
+				<%elseif [<selectedItem>match<lastItem>!match<firstItem>] [<selectedItem>!match<firstItem>!match<lastItem>] %>
 					<<input-next-actions-inner>>
 				<%elseif [<selectedItem>match<firstItem>match<lastItem>] %>
 					<$set name="nextItem" value={{{ [<userInput>addsuffix[-userInput]] }}}>
 						<<input-next-actions-inner>>
 					</$set>
-				<%elseif [<selectedItem>!match<firstItem>!match<lastItem>] %>
-					<<input-next-actions-inner>>
 				<% endif %>
 			</$let>
 		</$set>
