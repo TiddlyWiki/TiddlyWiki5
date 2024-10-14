@@ -27,7 +27,8 @@ exports.startup = function() {
 	// Handle open window message
 	$tw.rootWidget.addEventListener("tm-open-window",function(event) {
 		// Get the parameters
-		var refreshHandler,
+		var mainRefreshHandler,
+			styleRefreshHandler,
 			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
 			windowTitle = paramObject.windowTitle || title,
@@ -61,7 +62,8 @@ exports.startup = function() {
 		srcDocument.title = windowTitle;
 		srcWindow.addEventListener("beforeunload",function(event) {
 			delete $tw.windows[windowID];
-			$tw.wiki.removeEventListener("change",refreshHandler);
+			$tw.wiki.removeEventListener("change",styleRefreshHandler);
+			$tw.wiki.removeEventListener("change",mainRefreshHandler);
 		},false);
 		// Set up the styles
 		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{
@@ -72,19 +74,62 @@ exports.startup = function() {
 		styleWidgetNode.render(styleContainer,null);
 		var styleElement = srcDocument.createElement("style");
 		styleElement.innerHTML = styleContainer.textContent;
+		styleWidgetNode.assignedStyles = styleContainer.textContent;
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
-		// Function to handle refreshes
-		refreshHandler = function(changes) {
+		// Prepare refresh mechanism
+		var deferredChanges = Object.create(null),
+			timerId,
+			throttledRefreshFn = function(changes,callback,mainCondition,styleCondition) {
+				// Check if only tiddlers that are throttled have changed
+				var onlyThrottledTiddlersHaveChanged = true;
+				for(var title in changes) {
+					var tiddler = $tw.wiki.getTiddler(title);
+					if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh") || (mainCondition && tiddler.hasField("throttle.refresh.main")) || (styleCondition && tiddler.hasField("throttle.refresh.style"))))) {
+						onlyThrottledTiddlersHaveChanged = false;
+					}
+				}
+				// Defer the change if only drafts have changed
+				if(timerId) {
+					clearTimeout(timerId);
+				}
+				timerId = null;
+				if(onlyThrottledTiddlersHaveChanged) {
+					var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
+					if(isNaN(timeout)) {
+						timeout = THROTTLE_REFRESH_TIMEOUT;
+					}
+					timerId = setTimeout(throttledRefresh,timeout);
+					$tw.utils.extend(deferredChanges,changes);
+				} else {
+					$tw.utils.extend(deferredChanges,changes);
+					callback(changes);
+				}
+			};
+		var styleRefresh = function(changes) {
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
-				styleElement.innerHTML = styleContainer.textContent;
+				var newStyles = styleContainer.textContent;
+				if(newStyles !== styleWidgetNode.assignedStyles) {
+					styleWidgetNode.assignedStyles = newStyles;
+					styleElement.innerHTML = styleWidgetNode.assignedStyles;
+				}
 			}
-			widgetNode.refresh(changes);
 		};
-		$tw.wiki.addEventListener("change",refreshHandler);
+		var mainRefresh = function(changes) {
+			widgetNode.refresh(changes);
+			deferredChanges = Object.create(null);
+		};
+		styleRefreshHandler = function(changes) {
+			throttledRefreshFn(changes,styleRefresh,false,true);
+		};
+		mainRefreshHandler = function(changes) {
+			throttledRefreshFn(changes,mainRefresh,true,false);
+		};
+		$tw.wiki.addEventListener("change",styleRefreshHandler);
+		$tw.wiki.addEventListener("change",mainRefreshHandler);
 		// Listen for keyboard shortcuts
 		$tw.utils.addEventListeners(srcDocument,[{
 			name: "keydown",
