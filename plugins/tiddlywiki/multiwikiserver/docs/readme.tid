@@ -33,3 +33,82 @@ To run the tests:
 ```
 ./bin/test.sh
 ```
+
+# Authentication & Authorization
+
+## Overview
+
+Our application has transitioned from a conventional username/password authentication system to a more robust Authentication and Authorization implementation. This new system supports multiple user accounts, roles, permissions, and a comprehensive access control list.
+
+## Key Features
+
+1. Multiple User Accounts
+2. Role-based Access Control
+3. Granular Permissions
+4. Access Control List (ACL)
+
+## Setting Up the Admin User
+
+To initialize the system with an admin user, use the following command:
+
+```bash
+npm run mws-add-user
+```
+
+This command performs the following actions:
+- Creates a default admin user with the credentials:
+  - Username: `user`
+  - Password: `pass123`
+- Establishes `READ` and `WRITE` permissions
+- Creates an `ADMIN` role
+- Assigns `READ` and `WRITE` permissions to the `ADMIN` role
+- Assigns the `ADMIN` role to the newly created user
+
+## User Management
+
+Users can be managed through the application interface or via command-line tools. Each user account consists of:
+- Unique username
+- Securely hashed password
+- Assigned role(s)
+
+## Roles and Permissions
+
+### Roles
+
+Roles are used to group sets of permissions. The default setup includes an `ADMIN` role, but additional roles can be created as needed (e.g., `USER`, `MANAGER`).
+
+### Permissions
+
+Permissions define specific actions that can be performed. The default permissions are:
+- `READ`: Allows viewing of resources
+- `WRITE`: Allows creation, modification, and deletion of resources
+
+Additional permissions can be created to suit specific application needs.
+
+## Access Control List (ACL)
+
+The ACL maintains a mapping between roles, permissions, and entities (such as recipes or bags). This allows for fine-grained control over who can perform what actions on which resources.
+
+## Authentication Flow
+
+1. User provides credentials (username and password)
+2. System verifies credentials against stored user data
+3. If valid, a session is created for the user
+
+## Authorization Flow
+
+1. User attempts to perform an action on a resource
+2. System checks the user's role
+3. System verifies if the role has the required permission for the action
+4. System checks the ACL to ensure the role has permission for the specific entity
+5. If all checks pass, the action is allowed; otherwise, it's denied
+
+## Extending the System
+
+To add new roles, permissions, or modify the ACL:
+
+1. Use the provided administrative interface or CLI tools
+2. Update the ACL structure in the application's configuration
+3. Implement new permission checks in the relevant parts of the application
+
+By following this documentation, you can effectively manage and utilize the new Authentication and Authorization system in your application.
