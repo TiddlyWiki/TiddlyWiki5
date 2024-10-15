@@ -47,6 +47,13 @@ Our application has transitioned from a conventional username/password authentic
 3. Granular Permissions
 4. Access Control List (ACL)
 
+## Running the App
+By default, the Multiwiki Server starts up without authentication enabled. In order to enabled authentication, start the app using the following command:
+
+```bash
+npm run start -- --mws-use-auth
+```
+
 ## Setting Up the Admin User
 
 To initialize the system with an admin user, use the following command:

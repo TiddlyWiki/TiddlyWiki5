@@ -20,7 +20,8 @@ exports.handler = function(request,response,state) {
 	// Get the bag and recipe information
 	var bagList = $tw.mws.store.listBags(),
 		recipeList = $tw.mws.store.listRecipes(),
-		sqlTiddlerDatabase = state.server.sqlTiddlerDatabase;
+		sqlTiddlerDatabase = state.server.sqlTiddlerDatabase,
+		useAuth = $tw.mws.serverManager.useAuth;
 
 	// If application/json is requested then this is an API request, and gets the response in JSON
 	if(request.headers.accept && request.headers.accept.indexOf("application/json") !== -1) {
@@ -31,8 +32,8 @@ exports.handler = function(request,response,state) {
 			"Content-Type":  "text/html"
 		});
 		// filter bags and recipies by user's read access from ACL
-		var allowedRecipes = recipeList.filter(recipe => sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'READ'));
-    var allowedBags = bagList.filter(bag => sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, 'READ'));
+		var allowedRecipes = recipeList.filter(recipe => !useAuth ? true : sqlTiddlerDatabase.hasRecipePermission(state.authenticatedUser?.user_id, recipe.recipe_name, 'READ'));
+    var allowedBags = bagList.filter(bag => !useAuth ? true : sqlTiddlerDatabase.hasBagPermission(state.authenticatedUser?.user_id, bag.bag_name, 'READ'));
 
 		// Render the html
 		var html = $tw.mws.store.adminWiki.renderTiddler("text/plain","$:/plugins/tiddlywiki/multiwikiserver/templates/page",{

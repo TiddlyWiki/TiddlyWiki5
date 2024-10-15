@@ -412,19 +412,20 @@ Server.prototype.requestAuthentication = function(response) {
 
 Server.prototype.redirectToLogin = function(response, returnUrl) {
 	if (!response.headersSent) {
-			const validReturnUrlRegex = /^\/(?!.*\.(ico|png|jpg|jpeg|gif|svg|css|js|woff|woff2|ttf|eot|json)$).*$/;
-			var sanitizedReturnUrl = '/';  // Default to home page
+		const validReturnUrlRegex = /^\/(?!.*\.(ico|png|jpg|jpeg|gif|svg|css|js|woff|woff2|ttf|eot|json)$).*$/;
+		var sanitizedReturnUrl = '/';  // Default to home page
 
-			if (validReturnUrlRegex.test(returnUrl)) {
-					sanitizedReturnUrl = returnUrl;
-			} else {
-					console.log(`Invalid return URL detected: ${returnUrl}. Redirecting to home page.`);
-			}
-			response.setHeader('Set-Cookie', `returnUrl=${encodeURIComponent(sanitizedReturnUrl)}; HttpOnly; Secure; SameSite=Strict; Path=/`);			const loginUrl = '/login';
-			response.writeHead(302, {
-					'Location': loginUrl
-			});
-			response.end();
+		if (validReturnUrlRegex.test(returnUrl)) {
+			sanitizedReturnUrl = returnUrl;
+			response.setHeader('Set-Cookie', `returnUrl=${encodeURIComponent(sanitizedReturnUrl)}; HttpOnly; Secure; SameSite=Strict; Path=/`);			
+		} else {
+			console.log(`Invalid return URL detected: ${returnUrl}. Redirecting to home page.`);
+		}
+		const loginUrl = '/login';
+		response.writeHead(302, {
+			'Location': loginUrl
+		});
+		response.end();
 	}
 };
 
@@ -456,7 +457,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
 	
 	// Check whether anonymous access is granted
-	state.allowAnon = false;//this.isAuthorized(state.authorizationType,null);
+	state.allowAnon = !$tw.mws.serverManager.useAuth; //this.isAuthorized(state.authorizationType,null);
 
 	// If not authenticated and anonymous access is not allowed, request authentication
 	if(!authenticatedUsername && !state.allowAnon) {
@@ -468,7 +469,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	}
 
 	// Authorize with the authenticated username
-	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername) && !response.headersSent) {
+	if($tw.mws.serverManager.useAuth && !this.isAuthorized(state.authorizationType,state.authenticatedUsername) && !response.headersSent) {
 		response.writeHead(403,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 		response.end();
 		return;
@@ -478,7 +479,7 @@ Server.prototype.requestHandler = function(request,response,options) {
 	var route = self.findMatchingRoute(request,state);
 
 	// If the route is configured to use ACL middleware, check that the user has permission
-	if(route?.useACL) {
+	if(route?.useACL && $tw.mws.serverManager.useAuth) {
 		const permissionName = this.methodACLPermMappings[route.method];
 		aclMiddleware(request,response,state,route.entityName,permissionName)
 	}
