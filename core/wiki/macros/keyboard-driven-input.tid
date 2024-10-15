@@ -14,8 +14,9 @@ tags: $:/tags/Global
 		firstTab={{{ [enlist<tabsList>nth[1]] }}}
 		lastTab={{{ [enlist<tabsList>last[]] }}}
 		nextTab=<<tf.change-input-tab.next-tab>>
+		nextTab={{{ [subfilter<nextTab>] }}}
 	>
-		<$action-setfield $tiddler=<<stateTitle>> text={{{ [subfilter<nextTab>] }}}/>
+		<$action-setfield $tiddler=<<stateTitle>> text=<<nextTab>>/>
 		`${[<actions>]}$`
 	</$let>
 </$set>
