@@ -55,30 +55,32 @@ exports.startup = function() {
 		styleDeferredChanges = Object.create(null),
 		mainTimerId,
 		styleTimerId,
-		throttledRefreshFn = function(changes,deferredChanges,timerId,throttledRefresh,callback,mainCondition,styleCondition) {
+		throttledRefreshFn = function(changes,options) {
+			options = options || {};
 			// Check if only tiddlers that are throttled have changed
 			var onlyThrottledTiddlersHaveChanged = true;
 			for(var title in changes) {
 				var tiddler = $tw.wiki.getTiddler(title);
-				if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh") || (mainCondition && tiddler.hasField("throttle.refresh.main")) || (styleCondition && tiddler.hasField("throttle.refresh.style"))))) {
+				if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh") || 
+					(options.mainCondition && tiddler.hasField("throttle.refresh.main")) || (options.styleCondition && tiddler.hasField("throttle.refresh.style"))))) {
 					onlyThrottledTiddlersHaveChanged = false;
 				}
 			}
 			// Defer the change if only drafts have changed
-			if(timerId) {
-				clearTimeout(timerId);
+			if(options.timerId) {
+				clearTimeout(options.timerId);
 			}
-			timerId = null;
+			options.timerId = null;
 			if(onlyThrottledTiddlersHaveChanged) {
 				var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
 				if(isNaN(timeout)) {
 					timeout = THROTTLE_REFRESH_TIMEOUT;
 				}
-				timerId = setTimeout(throttledRefresh,timeout);
-				$tw.utils.extend(deferredChanges,changes);
+				options.timerId = setTimeout(options.throttledRefresh,timeout);
+				$tw.utils.extend(options.deferredChanges,changes);
 			} else {
-				$tw.utils.extend(deferredChanges,changes);
-				callback();
+				$tw.utils.extend(options.deferredChanges,changes);
+				options.callback();
 			}
 		};
 	function refresh() {
@@ -101,7 +103,14 @@ exports.startup = function() {
 	var mainThrottledRefresh = $tw.perf.report("throttledMainRefresh",refresh),
 		styleThrottledRefresh = $tw.perf.report("throttledStyleRefresh",styleRefresh);
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
-		throttledRefreshFn(changes,styleDeferredChanges,styleTimerId,styleThrottledRefresh,styleRefresh,false,true);
+		throttledRefreshFn(changes,{
+			deferredChanges: styleDeferredChanges,
+			timerId: styleTimerId,
+			throttledRefresh: styleThrottledRefresh,
+			callback: styleRefresh,
+			mainCondition: false,
+			styleCondition: true
+		});
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
@@ -121,7 +130,14 @@ exports.startup = function() {
 	});
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
-		throttledRefreshFn(changes,mainDeferredChanges,mainTimerId,mainThrottledRefresh,refresh,true,false);
+		throttledRefreshFn(changes,{
+			deferredChanges: mainDeferredChanges,
+			timerId: mainTimerId,
+			throttledRefresh: mainThrottledRefresh,
+			callback: refresh,
+			mainCondition: true,
+			styleCondition: false
+		});
 	}));
 	// Fix up the link between the root widget and the page container
 	$tw.rootWidget.domNodes = [$tw.pageContainer];
