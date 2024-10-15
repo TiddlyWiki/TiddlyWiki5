@@ -4,11 +4,14 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 
 \procedure add-link-actions()
 \whitespace trim
-<$action-sendmessage $message="tm-edit-text-operation" $param="make-link" text={{$(linkTiddler)$}} />
+<$action-sendmessage $message="tm-edit-text-operation" $param="make-link" text={{{ [<linkTiddler>get[text]] }}} />
 <$action-deletetiddler $filter="[<dropdown-state>] [<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]"/>
 \end
 
-\procedure get-focus-selector() [data-tiddler-title="$(cssEscapedTitle)$"] .tc-create-wikitext-link input
+\procedure prefix.bracket() [
+\procedure suffix.bracket() ]
+
+\function tf.get-focus-selector() [[data-tiddler-title=]addprefix[$(prefix.bracket)$]substitute[]addsuffix<cssEscapedTitle>addsuffix[$(suffix.bracket)$]substitute[]] .tc-create-wikitext-link input :and[join[ ]]
 
 \procedure cancel-search-actions-inner()
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}><$list filter="[<searchTiddler>get[text]!match<userInput>]" emptyMessage="<$action-deletetiddler $filter='[<searchTiddler>] [<linkTiddler>] [<storeTitle>] [<searchListState>]'/>"><$action-setfield $tiddler=<<searchTiddler>> text=<<userInput>>/><$action-setfield $tiddler=<<refreshTitle>> text="yes"/></$list></$set>
@@ -48,7 +51,7 @@ title: $:/core/ui/EditorToolbar/link-dropdown
 <<external-link>>
 &#32;
 <$button class="tc-btn-invisible tc-btn-mini" style="width: auto; display: inline-block; background-colour: inherit;">
-<<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<get-focus-selector>>/></$set>
+<<cancel-search-actions>><$set name="cssEscapedTitle" value={{{ [<storyTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<tf.get-focus-selector>>/></$set>
 {{$:/core/images/close-button}}
 </$button>
 </$reveal>
