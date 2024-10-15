@@ -51,9 +51,11 @@ exports.startup = function() {
 	$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 	document.head.insertBefore($tw.styleElement,document.head.firstChild);
 	// Prepare refresh mechanism
-	var deferredChanges = Object.create(null),
-		timerId,
-		throttledRefreshFn = function(changes,callback,mainCondition,styleCondition) {
+	var mainDeferredChanges = Object.create(null),
+		styleDeferredChanges = Object.create(null),
+		mainTimerId,
+		styleTimerId,
+		throttledRefreshFn = function(changes,deferredChanges,timerId,throttledRefresh,callback,mainCondition,styleCondition) {
 			// Check if only tiddlers that are throttled have changed
 			var onlyThrottledTiddlersHaveChanged = true;
 			for(var title in changes) {
@@ -76,20 +78,30 @@ exports.startup = function() {
 				$tw.utils.extend(deferredChanges,changes);
 			} else {
 				$tw.utils.extend(deferredChanges,changes);
-				callback(changes);
+				callback();
 			}
 		};
-	function styleRefresh(changes) {
-		if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
+	function refresh() {
+		// Process the refresh
+		$tw.hooks.invokeHook("th-page-refreshing");
+		$tw.pageWidgetNode.refresh(mainDeferredChanges);
+		mainDeferredChanges = Object.create(null);
+		$tw.hooks.invokeHook("th-page-refreshed");
+	}
+	function styleRefresh() {
+		if($tw.styleWidgetNode.refresh(styleDeferredChanges,$tw.styleContainer,null)) {
 			var newStyles = $tw.styleContainer.textContent;
 			if(newStyles !== $tw.styleWidgetNode.assignedStyles) {
 				$tw.styleWidgetNode.assignedStyles = newStyles;
 				$tw.styleElement.innerHTML = $tw.styleWidgetNode.assignedStyles;
 			}
-		}		
+		}
+		styleDeferredChanges = Object.create(null);
 	}
+	var mainThrottledRefresh = $tw.perf.report("throttledRefresh",refresh),
+		styleThrottledRefresh = $tw.perf.report("throttledRefresh",styleRefresh);
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
-		throttledRefreshFn(changes,styleRefresh,false,true);
+		throttledRefreshFn(changes,styleDeferredChanges,styleTimerId,styleThrottledRefresh,styleRefresh,false,true);
 	}));
 	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
@@ -107,18 +119,9 @@ exports.startup = function() {
 			removeItem.parentNode.removeChild(removeItem);
 		}
 	});
-	function refresh() {
-		// Process the refresh
-		$tw.hooks.invokeHook("th-page-refreshing");
-		$tw.pageWidgetNode.refresh(deferredChanges);
-		deferredChanges = Object.create(null);
-		$tw.hooks.invokeHook("th-page-refreshed");
-	}
-	var throttledRefresh = $tw.perf.report("throttledRefresh",refresh);
-
 	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
-		throttledRefreshFn(changes,refresh,true,false);
+		throttledRefreshFn(changes,mainDeferredChanges,mainTimerId,mainThrottledRefresh,refresh,true,false);
 	}));
 	// Fix up the link between the root widget and the page container
 	$tw.rootWidget.domNodes = [$tw.pageContainer];

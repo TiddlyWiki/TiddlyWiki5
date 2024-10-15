@@ -81,9 +81,11 @@ exports.startup = function() {
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: variables});
 		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Prepare refresh mechanism
-		var deferredChanges = Object.create(null),
-			timerId,
-			throttledRefreshFn = function(changes,callback,mainCondition,styleCondition) {
+		var mainDeferredChanges = Object.create(null),
+			styleDeferredChanges = Object.create(null),
+			mainTimerId,
+			styleTimerId,
+			throttledRefreshFn = function(changes,deferredChanges,timerId,throttledRefresh,callback,mainCondition,styleCondition) {
 				// Check if only tiddlers that are throttled have changed
 				var onlyThrottledTiddlersHaveChanged = true;
 				for(var title in changes) {
@@ -106,27 +108,30 @@ exports.startup = function() {
 					$tw.utils.extend(deferredChanges,changes);
 				} else {
 					$tw.utils.extend(deferredChanges,changes);
-					callback(changes);
+					callback();
 				}
 			};
-		var styleRefresh = function(changes) {
-			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
+		var styleRefresh = function() {
+			if(styleWidgetNode.refresh(styleDeferredChanges,styleContainer,null)) {
 				var newStyles = styleContainer.textContent;
 				if(newStyles !== styleWidgetNode.assignedStyles) {
 					styleWidgetNode.assignedStyles = newStyles;
 					styleElement.innerHTML = styleWidgetNode.assignedStyles;
 				}
 			}
+			styleDeferredChanges = Object.create(null);
 		};
-		var mainRefresh = function(changes) {
-			widgetNode.refresh(changes);
-			deferredChanges = Object.create(null);
+		var mainRefresh = function() {
+			widgetNode.refresh(mainDeferredChanges);
+			mainDeferredChanges = Object.create(null);
 		};
+		var mainThrottledRefresh = $tw.perf.report("throttledRefresh",mainRefresh),
+			styleThrottledRefresh = $tw.perf.report("throttledRefresh",styleRefresh);
 		styleRefreshHandler = function(changes) {
-			throttledRefreshFn(changes,styleRefresh,false,true);
+			throttledRefreshFn(changes,styleDeferredChanges,styleTimerId,styleThrottledRefresh,styleRefresh,false,true);
 		};
 		mainRefreshHandler = function(changes) {
-			throttledRefreshFn(changes,mainRefresh,true,false);
+			throttledRefreshFn(changes,mainDeferredChanges,mainTimerId,mainThrottledRefresh,mainRefresh,true,false);
 		};
 		$tw.wiki.addEventListener("change",styleRefreshHandler);
 		$tw.wiki.addEventListener("change",mainRefreshHandler);
