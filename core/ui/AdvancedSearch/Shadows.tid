@@ -6,17 +6,19 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 \procedure lingo-base() $:/language/Search/
 
 \procedure set-next-input-tab()
-<$transclude $variable="change-input-tab-after"
+<$transclude $variable="change-input-tab"
 	stateTitle="$:/state/tab--1498284803"
 	tag="$:/tags/AdvancedSearch"
+	beforeafter="after"
 	defaultState="$:/core/ui/AdvancedSearch/System"
 	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
 \end
 
 \procedure set-previous-input-tab()
-<$transclude $variable="change-input-tab-before"
+<$transclude $variable="change-input-tab"
 	stateTitle="$:/state/tab--1498284803"
 	tag="$:/tags/AdvancedSearch"
+	beforeafter="before"
 	defaultState="$:/core/ui/AdvancedSearch/System"
 	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
 \end
