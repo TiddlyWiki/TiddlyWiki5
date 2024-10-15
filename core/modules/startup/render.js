@@ -98,8 +98,8 @@ exports.startup = function() {
 		}
 		styleDeferredChanges = Object.create(null);
 	}
-	var mainThrottledRefresh = $tw.perf.report("throttledRefresh",refresh),
-		styleThrottledRefresh = $tw.perf.report("throttledRefresh",styleRefresh);
+	var mainThrottledRefresh = $tw.perf.report("throttledMainRefresh",refresh),
+		styleThrottledRefresh = $tw.perf.report("throttledStyleRefresh",styleRefresh);
 	$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
 		throttledRefreshFn(changes,styleDeferredChanges,styleTimerId,styleThrottledRefresh,styleRefresh,false,true);
 	}));

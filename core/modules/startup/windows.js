@@ -125,8 +125,8 @@ exports.startup = function() {
 			widgetNode.refresh(mainDeferredChanges);
 			mainDeferredChanges = Object.create(null);
 		};
-		var mainThrottledRefresh = $tw.perf.report("throttledRefresh",mainRefresh),
-			styleThrottledRefresh = $tw.perf.report("throttledRefresh",styleRefresh);
+		var mainThrottledRefresh = $tw.perf.report("throttledMainRefresh",mainRefresh),
+			styleThrottledRefresh = $tw.perf.report("throttledStyleRefresh",styleRefresh);
 		styleRefreshHandler = function(changes) {
 			throttledRefreshFn(changes,styleDeferredChanges,styleTimerId,styleThrottledRefresh,styleRefresh,false,true);
 		};
