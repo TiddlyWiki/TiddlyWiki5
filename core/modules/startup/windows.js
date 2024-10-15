@@ -89,6 +89,7 @@ exports.startup = function() {
 				options = options || {};
 				// Check if only tiddlers that are throttled have changed
 				var onlyThrottledTiddlersHaveChanged = true;
+				var deferredChanges = options.mainCondition ? mainDeferredChanges : styleDeferredChanges;
 				for(var title in changes) {
 					var tiddler = $tw.wiki.getTiddler(title);
 					if(!$tw.wiki.isVolatileTiddler(title) && (!tiddler || !(tiddler.hasField("draft.of") || tiddler.hasField("throttle.refresh") ||
@@ -97,19 +98,30 @@ exports.startup = function() {
 					}
 				}
 				// Defer the change if only drafts have changed
-				if(options.timerId) {
-					clearTimeout(options.timerId);
+				if(options.mainCondition) {
+					if(mainTimerId) {
+						clearTimeout(mainTimerId);
+					}
+					mainTimerId = null;
+				} else if(options.styleCondition) {
+					if(styleTimerId) {
+						clearTimeout(styleTimerId);
+					}
+					styleTimerId = null;
 				}
-				options.timerId = null;
 				if(onlyThrottledTiddlersHaveChanged) {
 					var timeout = parseInt($tw.wiki.getTiddlerText(DRAFT_TIDDLER_TIMEOUT_TITLE,""),10);
 					if(isNaN(timeout)) {
 						timeout = THROTTLE_REFRESH_TIMEOUT;
 					}
-					options.timerId = setTimeout(options.throttledRefresh,timeout);
-					$tw.utils.extend(options.deferredChanges,changes);
+					if(options.mainCondition) {
+						mainTimerId = setTimeout(options.throttledRefresh,timeout);
+					} else if(options.styleCondition) {
+						styleTimerId = setTimeout(options.throttledRefresh,timeout);
+					}
+					$tw.utils.extend(deferredChanges,changes);
 				} else {
-					$tw.utils.extend(options.deferredChanges,changes);
+					$tw.utils.extend(deferredChanges,changes);
 					options.callback();
 				}
 			};
@@ -131,8 +143,6 @@ exports.startup = function() {
 			styleThrottledRefresh = $tw.perf.report("throttledStyleRefresh",styleRefresh);
 		styleRefreshHandler = function(changes) {
 			throttledRefreshFn(changes,{
-				deferredChanged: styleDeferredChanges,
-				timerId: styleTimerId,
 				throttledRefresh: styleThrottledRefresh,
 				callback: styleRefresh,
 				mainCondition: false,
@@ -141,8 +151,6 @@ exports.startup = function() {
 		};
 		mainRefreshHandler = function(changes) {
 			throttledRefreshFn(changes,{
-				deferredChanges: mainDeferredChanges,
-				timerId: mainTimerId,
 				throttledRefresh: mainThrottledRefresh,
 				callback: mainRefresh,
 				mainCondition: true,
