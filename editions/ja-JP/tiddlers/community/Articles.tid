@@ -1,0 +1,28 @@
+created: 20140320230543190
+modified: 20241004114128016
+original-modified: 20160602172752299
+tags: Community
+title: Articles
+ja-title: 記事
+caption: 記事
+type: text/vnd.tiddlywiki
+
+~TiddlyWikiについて書かれた最近の記事をいくつか紹介します。新しい記事は、GitHub、Twitter、または[[TiddlyWikiグループ|Forums]]に投稿して送信してください。
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Articles]!sort[modified]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>
