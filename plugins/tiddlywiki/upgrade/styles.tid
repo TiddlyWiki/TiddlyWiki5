@@ -48,7 +48,6 @@ tags: $:/tags/Stylesheet
 	left: 0;
 	right: 0;
 	bottom: 0;
-	font-size: 999px;
 	max-width: 100%;
 	max-height: 100%;
 	filter: alpha(opacity=0);
