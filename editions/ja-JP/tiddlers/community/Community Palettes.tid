@@ -1,0 +1,27 @@
+created: 20210101152520906
+modified: 20241004112603568
+original-modified: 20210101152533358
+tags: Community
+title: Community Palettes
+ja-title: コミュニティパレット
+caption: パレット
+
+~TiddlyWiki[[コミュニティ|Community]]のメンバーによって作成されたパレットのリストです。パレットはTiddlyWikiのカラースキームを変更し、テーマと組み合わせて使用​​できます
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Community Palettes]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

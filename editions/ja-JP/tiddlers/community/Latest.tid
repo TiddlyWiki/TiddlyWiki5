@@ -1,0 +1,28 @@
+created: 20140321090511826
+modified: 20241002114417236
+original-modified: 20140919170549958
+tags: Community
+title: Latest
+ja-title: 最新情報
+caption: 最新
+type: text/vnd.tiddlywiki
+
+最新のニュース、記事、リソース、使用例
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Articles]] [tag[Examples]] [tag[Resources]] [tag[Tutorials]] +[!sort[modified]limit[8]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

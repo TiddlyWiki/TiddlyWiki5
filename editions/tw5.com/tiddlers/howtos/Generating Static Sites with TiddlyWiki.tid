@@ -1,5 +1,5 @@
 created: 20130828190200000
-modified: 20200421003440463
+modified: 20241007003103647
 tags: [[TiddlyWiki on Node.js]]
 title: Generating Static Sites with TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -16,13 +16,13 @@ You can explore a static representation of the main TiddlyWiki site at https://t
 
 The following commands are used to generate the sample static version of the TiddlyWiki5 site:
 
-```
-tiddlywiki wikipath --rendertiddlers '[!is[system]]' $:/core/templates/static.tiddler.html static text/plain
-tiddlywiki wikipath --rendertiddler $:/core/templates/static.template.html static.html text/plain
-tiddlywiki wikipath --rendertiddler $:/core/templates/static.template.css static/static.css text/plain
+```sh
+tiddlywiki wikipath --render '[!is[system]]' '[encodeuricomponent[]addprefix[static/]]' text/plain $:/core/templates/static.tiddler.html
+tiddlywiki wikipath --render $:/core/templates/static.template.html static.html text/plain
+tiddlywiki wikipath --render $:/core/templates/static.template.css static/static.css text/plain
 ```
 
-The first RenderTiddlersCommand generates the HTML representations of individual tiddlers, the second RenderTiddlerCommand saves the static version of the DefaultTiddlers, and the final RenderTiddlerCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
+The first RenderCommand generates the HTML representations of individual tiddlers, `[encodeuricomponent[]addprefix[static/]]` applies URI encoding to each title, and then adds the prefix `static/`. The second RenderCommand saves the static version of the DefaultTiddlers, and the final RenderCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
 
 ! Wiki Snapshot with Internal Links
 
@@ -33,5 +33,5 @@ For example: https://tiddlywiki.com/alltiddlers.html
 The example is built by the following commands:
 
 ```
---rendertiddler $:/core/templates/alltiddlers.template.html alltiddlers.html text/plain
+--render $:/core/templates/alltiddlers.template.html alltiddlers.html text/plain
 ```

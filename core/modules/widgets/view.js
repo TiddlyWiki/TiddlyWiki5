@@ -18,89 +18,6 @@ var ViewWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
-var ViewHandler = function(widget) {
-	this.wiki = widget.wiki;
-	this.widget = widget;
-	this.document = widget.document;
-};
-
-/*
-Base ViewHandler render method
-*/
-ViewHandler.prototype.render = function(parent,nextSibling) {
-	this.text = this.getValue();
-	this.createTextNode(parent,nextSibling);
-};
-
-/*
-Base ViewHandler render method for wikified views
-*/
-ViewHandler.prototype.renderWikified = function(parent,nextSibling) {
-	this.createFakeWidget();
-	this.text = this.getValue();
-	this.createWikifiedTextNode(parent,nextSibling);
-};
-
-/*
-ViewHandler method to create a simple text node
-*/
-ViewHandler.prototype.createTextNode = function(parent,nextSibling) {
-	if(this.text) {
-		var textNode = this.document.createTextNode(this.text);
-		parent.insertBefore(textNode,nextSibling);
-		this.widget.domNodes.push(textNode);
-	} else {
-		this.widget.makeChildWidgets();
-		this.widget.renderChildren(parent,nextSibling);
-	}
-};
-
-/*
-ViewHandler method to always create a text node, even if there's no text
-*/
-ViewHandler.prototype.createWikifiedTextNode = function(parent,nextSibling) {
-	var textNode = this.document.createTextNode(this.text || "");
-	parent.insertBefore(textNode,nextSibling);
-	this.widget.domNodes.push(textNode);
-};
-
-/*
-ViewHandler method to create a fake widget used by wikified views
-*/
-ViewHandler.prototype.createFakeWidget = function() {
-	this.fakeWidget = this.wiki.makeTranscludeWidget(this.widget.viewTitle,{
-		document: $tw.fakeDocument,
-		field: this.widget.viewField,
-		index: this.widget.viewIndex,
-		parseAsInline: this.widget.viewMode !== "block",
-		mode: this.widget.viewMode === "block" ? "block" : "inline",
-		parentWidget: this.widget,
-		subTiddler: this.widget.viewSubTiddler
-	});
-	this.fakeNode = $tw.fakeDocument.createElement("div");
-	this.fakeWidget.makeChildWidgets();
-	this.fakeWidget.render(this.fakeNode,null);
-};
-
-ViewHandler.prototype.refreshWikified = function(changedTiddlers) {
-	var refreshed = this.fakeWidget.refresh(changedTiddlers);
-	if(refreshed) {
-		var newText = this.getValue();
-		if(newText !== this.text) {
-			this.widget.domNodes[0].textContent = newText;
-			this.text = newText;
-		}
-	}
-	return refreshed;
-};
-
-/*
-Base ViewHandler refresh method
-*/
-ViewHandler.prototype.refresh = function(changedTiddlers) {
-	return false;
-};
-
 /*
 Inherit from the base widget class
 */
@@ -113,8 +30,14 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	this.view = this.getView(this.viewFormat);
-	this.view.render(parent,nextSibling);
+	if(this.text) {
+		var textNode = this.document.createTextNode(this.text);
+		parent.insertBefore(textNode,nextSibling);
+		this.domNodes.push(textNode);
+	} else {
+		this.makeChildWidgets();
+		this.renderChildren(parent,nextSibling);
+	}
 };
 
 /*
@@ -129,238 +52,49 @@ ViewWidget.prototype.execute = function() {
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
 	this.viewMode = this.getAttribute("mode","block");
-};
-
-/*
-Initialise the view subclasses
-*/
-ViewWidget.prototype.getView = function(format) {
-	var View = this.initialiseView();
-	View.prototype = Object.create(ViewHandler.prototype);
-	switch(format) {
+	switch(this.viewFormat) {
 		case "htmlwikified":
-			View = this.initialiseHTMLWikifiedView(View);
+			this.text = this.getValueAsHtmlWikified(this.viewMode);
 			break;
 		case "plainwikified":
-			View = this.initialisePlainWikifiedView(View);
+			this.text = this.getValueAsPlainWikified(this.viewMode);
 			break;
 		case "htmlencodedplainwikified":
-			View = this.initialiseHTMLEncodedPlainWikifiedView(View);
+			this.text = this.getValueAsHtmlEncodedPlainWikified(this.viewMode);
 			break;
 		case "htmlencoded":
-			View = this.initialiseHTMLEncodedView(View);
+			this.text = this.getValueAsHtmlEncoded();
 			break;
 		case "htmltextencoded":
-			View = this.initialiseHTMLTextEncodedView(View);
+			this.text = this.getValueAsHtmlTextEncoded();
 			break;
 		case "urlencoded":
-			View = this.initialiseURLEncodedView(View);
+			this.text = this.getValueAsUrlEncoded();
 			break;
 		case "doubleurlencoded":
-			View = this.initialiseDoubleURLEncodedView(View);
+			this.text = this.getValueAsDoubleUrlEncoded();
 			break;
 		case "date":
-			View = this.initialiseDateView(View);
+			this.text = this.getValueAsDate(this.viewTemplate);
 			break;
 		case "relativedate":
-			View = this.initialiseRelativeDateView(View);
+			this.text = this.getValueAsRelativeDate();
 			break;
 		case "stripcomments":
-			View = this.initialiseStripCommentsView(View);
+			this.text = this.getValueAsStrippedComments();
 			break;
 		case "jsencoded":
-			View = this.initialiseJSEncodedView(View);
+			this.text = this.getValueAsJsEncoded();
 			break;
 		default: // "text"
-			View = this.initialiseTextView(View);
+			this.text = this.getValueAsText();
 			break;
-	};
-	return new View(this);
+	}
 };
 
 /*
-Return the function to intitialise the view subclass
+The various formatter functions are baked into this widget for the moment. Eventually they will be replaced by macro functions
 */
-ViewWidget.prototype.initialiseView = function() {
-	return function(widget) {
-		ViewHandler.call(this,widget);
-	};
-};
-
-/*
-Initialise HTML wikified view methods
-*/
-ViewWidget.prototype.initialiseHTMLWikifiedView = function(View) {
-
-	View.prototype.render = function(parent,nextSibling) {
-		this.renderWikified(parent,nextSibling);
-	};
-
-	View.prototype.getValue = function() {
-		return this.fakeNode.innerHTML;
-	};
-
-	View.prototype.refresh = function(changedTiddlers) {
-		return this.refreshWikified(changedTiddlers);
-	};
-	return View;
-};
-
-/*
-Initialise plain wikified view methods
-*/
-ViewWidget.prototype.initialisePlainWikifiedView = function(View) {
-
-	View.prototype.render = function(parent,nextSibling) {
-		this.renderWikified(parent,nextSibling);
-	};
-
-	View.prototype.getValue = function() {
-		return this.fakeNode.textContent;
-	};
-
-	View.prototype.refresh = function(changedTiddlers) {
-		return this.refreshWikified(changedTiddlers);
-	};
-	return View;
-};
-
-/*
-Initialise HTML encoded plain wikified methods
-*/
-ViewWidget.prototype.initialiseHTMLEncodedPlainWikifiedView = function(View) {
-	
-	View.prototype.render = function(parent,nextSibling) {
-		this.renderWikified(parent,nextSibling);
-	};
-
-	View.prototype.getValue = function() {
-		return $tw.utils.htmlEncode(this.fakeNode.textContent);
-	};
-
-	View.prototype.refresh = function(changedTiddlers) {
-		return this.refreshWikified(changedTiddlers);
-	};
-	return View;
-};
-
-/*
-Initialise HTML encoded mehods
-*/
-ViewWidget.prototype.initialiseHTMLEncodedView = function(View) {
-	var self = this;
-	View.prototype.getValue = function() {
-		return $tw.utils.htmlEncode(self.getValueAsText());
-	};
-	return View;
-};
-
-/*
-Initialise HTML text encoded mehods
-*/
-ViewWidget.prototype.initialiseHTMLTextEncodedView = function(View) {
-	var self = this;
-	View.prototype.getValue = function() {
-		return $tw.utils.htmlTextEncode(self.getValueAsText());
-	};
-	return View;
-};
-
-/*
-Initialise URL encoded mehods
-*/
-ViewWidget.prototype.initialiseURLEncodedView = function(View) {
-	var self = this;
-	View.prototype.getValue = function() {
-		return $tw.utils.encodeURIComponentExtended(self.getValueAsText());
-	};
-	return View;
-};
-
-/*
-Initialise double URL encoded mehods
-*/
-ViewWidget.prototype.initialiseDoubleURLEncodedView = function(View) {
-	var self = this;
-	View.prototype.getValue = function() {
-		return $tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(self.getValueAsText()));
-	};
-	return View;
-};
-
-/*
-Initialise date mehods
-*/
-ViewWidget.prototype.initialiseDateView = function(View) {
-	var self = this;
-	View.prototype.getValue = function(format) {
-		format = format || "YYYY MM DD 0hh:0mm";
-		var value = $tw.utils.parseDate(self.getValue());
-		if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
-			return $tw.utils.formatDateString(value,format);
-		} else {
-			return "";
-		}
-	};
-	return View;
-};
-
-/*
-Initialise relative date mehods
-*/
-ViewWidget.prototype.initialiseRelativeDateView = function(View) {
-	var self = this;
-	View.prototype.getValue = function(format) {
-		var value = $tw.utils.parseDate(self.getValue());
-		if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
-			return $tw.utils.getRelativeDate((new Date()) - (new Date(value))).description;
-		} else {
-			return "";
-		}
-	};
-	return View;
-};
-
-/*
-Initialise stripcomments mehods
-*/
-ViewWidget.prototype.initialiseStripCommentsView = function(View) {
-	var self = this;
-	View.prototype.getValue = function() {
-		var lines = self.getValueAsText().split("\n"),
-			out = [];
-		for(var line=0; line<lines.length; line++) {
-			var text = lines[line];
-			if(!/^\s*\/\/#/.test(text)) {
-				out.push(text);
-			}
-		}
-		return out.join("\n");
-	};
-	return View;
-};
-
-/*
-Initialise JS encoded mehods
-*/
-ViewWidget.prototype.initialiseJSEncodedView = function(View) {
-	var self = this;
-	View.prototype.getValue = function() {
-		return $tw.utils.stringify(self.getValueAsText());
-	};
-	return View;
-};
-
-/*
-Initialise text mehods
-*/
-ViewWidget.prototype.initialiseTextView = function(View) {
-	var self = this;
-	View.prototype.getValue = function() {
-		return self.getValueAsText();
-	};
-	return View;
-};
 
 /*
 Retrieve the value of the widget. Options are:
@@ -404,6 +138,78 @@ ViewWidget.prototype.getValueAsText = function() {
 	return this.getValue({asString: true});
 };
 
+ViewWidget.prototype.getValueAsHtmlWikified = function(mode) {
+	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	});
+};
+
+ViewWidget.prototype.getValueAsPlainWikified = function(mode) {
+	return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	});
+};
+
+ViewWidget.prototype.getValueAsHtmlEncodedPlainWikified = function(mode) {
+	return $tw.utils.htmlEncode(this.wiki.renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText(),{
+		parseAsInline: mode !== "block",
+		parentWidget: this
+	}));
+};
+
+ViewWidget.prototype.getValueAsHtmlEncoded = function() {
+	return $tw.utils.htmlEncode(this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsHtmlTextEncoded = function() {
+	return $tw.utils.htmlTextEncode(this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsUrlEncoded = function() {
+	return $tw.utils.encodeURIComponentExtended(this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
+	return $tw.utils.encodeURIComponentExtended($tw.utils.encodeURIComponentExtended(this.getValueAsText()));
+};
+
+ViewWidget.prototype.getValueAsDate = function(format) {
+	format = format || "YYYY MM DD 0hh:0mm";
+	var value = $tw.utils.parseDate(this.getValue());
+	if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
+		return $tw.utils.formatDateString(value,format);
+	} else {
+		return "";
+	}
+};
+
+ViewWidget.prototype.getValueAsRelativeDate = function(format) {
+	var value = $tw.utils.parseDate(this.getValue());
+	if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
+		return $tw.utils.getRelativeDate((new Date()) - (new Date(value))).description;
+	} else {
+		return "";
+	}
+};
+
+ViewWidget.prototype.getValueAsStrippedComments = function() {
+	var lines = this.getValueAsText().split("\n"),
+		out = [];
+	for(var line=0; line<lines.length; line++) {
+		var text = lines[line];
+		if(!/^\s*\/\/#/.test(text)) {
+			out.push(text);
+		}
+	}
+	return out.join("\n");
+};
+
+ViewWidget.prototype.getValueAsJsEncoded = function() {
+	return $tw.utils.stringify(this.getValueAsText());
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
@@ -413,7 +219,7 @@ ViewWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.view.refresh(changedTiddlers);
+		return false;
 	}
 };
 

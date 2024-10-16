@@ -292,7 +292,7 @@ GeomapWidget.prototype.setMapView = function() {
 		this.map.setMaxZoom($tw.utils.parseInt(this.getAttribute("maxZoom")));
 	}
 	// Set the view to the content of the state tiddler
-	var stateTiddler = this.geomapStateTitle && this.wiki.getTiddler(this.geomapStateTitle);
+	var stateTiddler = this.getAttribute("state") && this.wiki.getTiddler(this.getAttribute("state"));
 	if(stateTiddler) {
 		this.map.setView([$tw.utils.parseNumber(stateTiddler.fields.lat,0),$tw.utils.parseNumber(stateTiddler.fields.long,0)], $tw.utils.parseNumber(stateTiddler.fields.zoom,0));
 		return true;
