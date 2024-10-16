@@ -1,5 +1,5 @@
 title: $:/core/macros/keyboard-driven-input
-tags: $:/tags/Macro
+tags: $:/tags/Macro $:/tags/Global
 
 \procedure prefix.bracket() [
 \procedure suffix.bracket() ]
