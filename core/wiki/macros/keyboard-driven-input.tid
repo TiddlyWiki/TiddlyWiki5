@@ -1,14 +1,14 @@
 title: $:/core/macros/keyboard-driven-input
-tags: $:/tags/Global
+tags: $:/tags/Macro
 
 \procedure prefix.bracket() [
 \procedure suffix.bracket() ]
 
-\function tf.change-input-tab.next-tab() [[all]addprefix[$(prefix.bracket)$]substitute[]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[shadows+tiddlers]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[tag<tag>!has]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[draft.of]addsuffix[$(suffix.bracket)$]substitute[]addsuffix<beforeafter>addsuffix[<currentState>]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[ :else]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[<beforeafter>match]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[after]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[then<firstTab>]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[ :else]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[<beforeafter>match]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[before]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[then<lastTab>]addsuffix[$(suffix.bracket)$]substitute[]]
+\function tf.change-input-tab.next-tab() [[all]addprefix[$(prefix.bracket)$]substitute[]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[shadows+tiddlers]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[tag<tag>!has]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[draft.of]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[$(beforeafter)$]substitute[]addsuffix[<currentState>]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[ :else]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[$(beforeafter)$]substitute[]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[match]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[after]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[then<firstTab>]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[ :else]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[$(beforeafter)$]substitute[]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[match]addsuffix[$(prefix.bracket)$]substitute[]addsuffix[before]addsuffix[$(suffix.bracket)$]substitute[]addsuffix[then<lastTab>]addsuffix[$(suffix.bracket)$]substitute[]]
 
 \procedure change-input-tab(stateTitle,tag,beforeafter,defaultState,actions)
 \whitespace trim
-<$set name="tabsList" filter="[all[shadows+tiddlers]tag<tag>!has[draft.of]]">
+<$set name="tabsList" filter="[<explicitTabList>!is[blank]enlist-input[]] :else[all[shadows+tiddlers]tag<tag>!has[draft.of]]">
 	<$let
 		currentState={{{ [<stateTitle>!is[missing]get[text]] :else[<defaultState>] }}}
 		firstTab={{{ [enlist<tabsList>nth[1]] }}}
@@ -17,7 +17,7 @@ tags: $:/tags/Global
 		nextTab={{{ [subfilter<nextTab>] }}}
 	>
 		<$action-setfield $tiddler=<<stateTitle>> text=<<nextTab>>/>
-		`${[<actions>]}$`
+		<<actions>>
 	</$let>
 </$set>
 \end
