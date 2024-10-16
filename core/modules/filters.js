@@ -70,7 +70,7 @@ function parseFilterOperation(operators,filterString,p) {
 		operator.operands = [];
 		var parseOperand = function(bracketType) {
 			var operand = {};
-			switch (bracketType) {
+			switch(bracketType) {
 				case "{": // Curly brackets
 					operand.indirect = true;
 					nextBracketPos = filterString.indexOf("}",p);
@@ -144,7 +144,7 @@ exports.parseFilter = function(filterString) {
 		p = 0, // Current position in the filter string
 		match;
 	var whitespaceRegExp = /(\s+)/mg,
-		operandRegExp = /((?:\+|\-|~|=|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
+		operandRegExp = /((?:\+|\-|~|=|\/\/|#|\:(\w+)(?:\:([\w\:, ]*))?)?)(?:(\[)|(?:"([^"]*)")|(?:'([^']*)')|([^\s\[\]]+))/mg;
 	while(p < filterString.length) {
 		// Skip any whitespace
 		whitespaceRegExp.lastIndex = p;
@@ -171,7 +171,7 @@ exports.parseFilter = function(filterString) {
 				}
 				if(match[3]) {
 					operation.suffixes = [];
-					 $tw.utils.each(match[3].split(":"),function(subsuffix) {
+					$tw.utils.each(match[3].split(":"),function(subsuffix) {
 						operation.suffixes.push([]);
 						$tw.utils.each(subsuffix.split(","),function(entry) {
 							entry = $tw.utils.trim(entry);
@@ -179,7 +179,7 @@ exports.parseFilter = function(filterString) {
 								operation.suffixes[operation.suffixes.length -1].push(entry);
 							}
 						});
-					 });
+					});
 				}
 			}
 			if(match[4]) { // Opening square bracket
@@ -322,7 +322,10 @@ exports.compileFilter = function(filterString) {
 					return filterRunPrefixes["and"](operationSubFunction, options);
 				case "~": // This operation is unioned into the result only if the main result so far is empty
 					return filterRunPrefixes["else"](operationSubFunction, options);
-				default: 
+				case "#": // Filter comment (fallthrough is intentional)
+				case "//": // This operation is ignored and passes through all results
+					return filterRunPrefixes["comment"](operationSubFunction, options);
+				default:
 					if(operation.namedPrefix && filterRunPrefixes[operation.namedPrefix]) {
 						return filterRunPrefixes[operation.namedPrefix](operationSubFunction, options);
 					} else {
