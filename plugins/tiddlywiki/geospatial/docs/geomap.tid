@@ -57,6 +57,9 @@ If no base layers are defined by `<$geobaselayer>` widgets within the `<$geomap>
 <$data title="Output" text="""<$geomap
 	state=<<qualify "$:/state/demo-map">>
 >
+	<$list filter="[all[tiddlers+shadows]tag[$:/tags/GeoMarker]]">
+		<$geolayer lat={{!!lat}} long={{!!long}} alt={{!!alt}} color={{!!color}}/>
+	</$list>
 </$geomap>
 """/>
 <$data $tiddler="$:/plugins/tiddlywiki/geospatial"/>
