@@ -78,9 +78,9 @@ function loadWikiFolder(options) {
 				recipeList.push(makePluginBagName(type,publisher,name));
 			});	
 		};
-		processPlugins("plugin",wikiInfo.plugins);
-		processPlugins("theme",wikiInfo.themes);
-		processPlugins("language",wikiInfo.languages);
+		processPlugins("plugins",wikiInfo.plugins);
+		processPlugins("themes",wikiInfo.themes);
+		processPlugins("languages",wikiInfo.languages);
 		// Create the recipe
 		recipeList.push(options.bagName);
 		$tw.mws.store.createRecipe(options.recipeName,recipeList,options.recipeDescription);

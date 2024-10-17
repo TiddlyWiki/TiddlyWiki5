@@ -66,13 +66,13 @@ function loadPluginBags() {
 			}
 		};
 	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.pluginsPath,$tw.config.pluginsEnvVar),function(folder) {
-		collectPublisherPlugins(folder,"plugin");
+		collectPublisherPlugins(folder,"plugins");
 	});
 	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.themesPath,$tw.config.themesEnvVar),function(folder) {
-		collectPublisherPlugins(folder,"theme");
+		collectPublisherPlugins(folder,"themes");
 	});
 	$tw.utils.each($tw.getLibraryItemSearchPaths($tw.config.languagesPath,$tw.config.languagesEnvVar),function(folder) {
-		collectPlugins(folder,"language");
+		collectPlugins(folder,"languages");
 	});
 }
 
