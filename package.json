@@ -13,6 +13,7 @@
   "bin": {
     "tiddlywiki": "./tiddlywiki.js"
   },
+  "types": "./types/tw.d.ts",
   "main": "./boot/boot.js",
   "repository": {
     "type": "git",
