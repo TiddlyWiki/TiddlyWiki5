@@ -1,7 +1,8 @@
 created: 20130822170200000
+icon: $:/core/icon
 list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
-modified: 20240710115948992
-tags: TableOfContents
+modified: 20241009150333146
+tags: Welcome
 title: HelloThere
 type: text/vnd.tiddlywiki
 
@@ -9,65 +10,8 @@ type: text/vnd.tiddlywiki
 
 Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-~TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
+* ~TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will [[still be able to use|Future Proof]] the notes you take today.
 
-!! ''Quick Start''
+* ~TiddlyWiki is infinitely customisable and extensible with many plugins that add new features
 
-<div class="tc-cards tc-action-card">
-<$list filter="[tag[Quick Start]]">
-<$macrocall $name="flex-card" bordercolor={{!!color}} textcolor={{!!text-color}} backgroundcolor={{!!background-color}} captionField="caption" descriptionField="text"/>
-</$list>
-</div>
-<div class="tc-cards tc-small">
-<$link to="中文社区 - Chinese Community" class="tc-btn-big-green tc-card" aria-label="Chinese Community">
-中文社区<br/>Chinese Community
-</$link>
-</div>
-
-!! ''Find Out More''
-
-<div class="tc-cards">
-<$list filter="[tag[HelloThumbnail]]">
-<$macrocall $name="flex-card" captionField="caption" descriptionField="text"/>
-</$list>
-</div>
-
-!! ''Community''
-
-<div class="tc-cards" style="font-size:0.7em;text-align:center;margin:3em auto;">
-<a href="https://talk.tiddlywiki.org/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF8C19;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/help}} ~TalkTW
-</a>
-<a href="https://www.youtube.com/c/JeremyRuston" class="tc-btn-big-green" style="border-radius:4px;background-color:#e52d27;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/video}} ~YouTube
-</a>
-<a href="https://discord.gg/HFFZVQ8" class="tc-btn-big-green" style="border-radius:4px;background-color:#5462EB;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/discord}} Discord
-</a>
-<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#1DA1F2;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/twitter}} Twitter
-</a>
-<a rel="me" href="https://fosstodon.org/@TiddlyWiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#2b90d9;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/mastodon}} Mastodon
-</a>
-<a href="https://github.com/TiddlyWiki/TiddlyWiki5" class="tc-btn-big-green" style="border-radius:4px;background-color:#444;" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/github}} ~GitHub
-</a>
-<a href="https://gitter.im/TiddlyWiki/public" class="tc-btn-big-green" style="border-radius:4px;background-color:#753a88;background-image:linear-gradient(to left,#cc2b5e,#753a88);" target="_blank" rel="noopener noreferrer">
-{{$:/core/images/gitter}} Gitter
-</a>
-<a href="https://www.reddit.com/r/TiddlyWiki5/" class="tc-btn-big-green" style="border-radius:4px;background-color:#FF4500;" target="_blank" rel="noopener noreferrer">
-{{Reddit Logo}} Reddit
-</a>
-<a href="https://opencollective.com/tiddlywiki" class="tc-btn-big-green" style="border-radius:4px;background-color:#0c2c66;" target="_blank" rel="noopener noreferrer">
-{{Open Collective Logo}} Open Collective
-</a>
-</div>
-
-!! ''Testimonials & Reviews''
-
-<div class="tc-cards">
-<$list filter="[tag[Testimonial]]">
-<$macrocall $name="flex-card" class="tc-card-quote" captionField="caption" descriptionField="text"/>
-</$list>
-</div>
+* ~TiddlyWiki is the product of a collective of developers, part of an extensive community of users

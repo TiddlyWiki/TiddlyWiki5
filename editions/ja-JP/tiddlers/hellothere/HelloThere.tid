@@ -1,0 +1,19 @@
+created: 20130822170200000
+icon: $:/core/icon
+list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
+modified: 20241010112232871
+original-modified: 20241009150333146
+tags: Welcome
+title: HelloThere
+ja-title: こんにちは
+type: text/vnd.tiddlywiki
+
+!!.tc-hero-heading ''TiddlyWikiへようこそ。 TiddlyWikiは複雑な情報を[[収集|Creating and editing tiddlers]]し、[[整理|Structuring TiddlyWiki]]し、[[共有|Sharing your tiddlers with others]]するためのユニークな[[非線形|Philosophy of Tiddlers]]ノートブックです。''
+
+[[ToDo リスト|TaskManagementExample]]を管理したり、[[エッセイや小説|"TiddlyWiki for Scholars" by Alberto Molina]]を練ったり、結婚式を準備したりするために使えます。頭をよぎるすべての考えを記録し、柔軟で応答性の高いWebサイトを構築できます。
+
+* ~TiddlyWikiを使用すると、データの保存場所を選択でき、今日とったメモを今後数十年も[[使用できること|Future Proof]]が保証されます。
+
+* ~TiddlyWikiは、新しい機能を追加する多くのプラグインにより、無限にカスタマイズ、拡張可能です。
+
+* ~TiddlyWikiは、大規模なユーザーコミュニティの一部である開発者集団の製品です。

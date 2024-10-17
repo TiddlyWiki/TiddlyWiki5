@@ -23,8 +23,8 @@ jobs:
       pull-requests: write
     steps:
     - run: |
-        if ! $BRANCH == "tiddlywiki-com"; then
-          echo "This CLA signature targets the wrong branch"
+        if [[ "$BRANCH" != "tiddlywiki-com" ]]; then
+          echo "This CLA signature targets the wrong branch: $BRANCH"
           gh pr comment "$NUMBER" -b "@$AUTHOR Signatures to the CLA must target the 'tiddlywiki-com' branch."
         fi
       env:

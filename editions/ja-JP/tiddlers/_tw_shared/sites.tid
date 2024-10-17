@@ -1,0 +1,33 @@
+title: $:/_tw_shared/sites
+ja-title: $:/_tw_shared/sites
+tags: $:/tags/MenuBar TiddlyWikiSitesMenu
+caption: [img class=tc-sites-icon [Motovun Jack.svg]] サイト
+is-dropdown: yes
+list-after: $:/plugins/tiddlywiki/menubar/items/hamburger
+
+\define link-body()
+\whitespace trim
+<$image source={{!!icon}} class="tc-sites-menu-icon"/><strong><$transclude field="caption" mode="inline"/></strong><$text text=" – "/><$transclude field="description" mode="inline"/>
+\end
+
+\define current-link-body()
+\whitespace trim
+<div class="tc-sites-menu-disabled">
+<<link-body>><span class="tc-sites-menu-this-site"><$text text="this site"/></span>
+</div>
+\end
+
+\whitespace trim
+<div class="tc-sites-menu">
+<ol>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlyWikiSites]]">
+<li>
+<$list filter="[{!!url}!match{$:/info/url/full}]" emptyMessage=<<current-link-body>> variable="ignore">
+<a class="tc-tiddlylink-external" href={{!!url}} rel="noopener noreferrer" target="_blank">
+<<link-body>>
+</a>
+</$list>
+</li>
+</$list>
+</ol>
+</div>

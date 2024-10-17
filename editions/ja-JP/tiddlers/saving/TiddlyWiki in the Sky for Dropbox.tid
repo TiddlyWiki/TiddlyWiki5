@@ -1,0 +1,19 @@
+caption: ~TiddlyWikiクラウドコネクタ
+color: #29B6F6
+created: 20171113135053055
+delivery: Web Service
+description: DropboxでTiddlyWikiドキュメントを編集するためのオンラインサービス
+method: save
+modified: 20241014103214583
+original-modified: 20200507202922556
+tags: Android Chrome Firefox [[Internet Explorer]] Linux Mac Opera PHP Safari Saving Windows iOS Edge
+title: TiddlyWiki Cloud
+ja-title: TiddlyWikiクラウド
+type: text/vnd.tiddlywiki
+url: https://twcloud.github.io/tw5-dropbox/
+
+もともとJeremy Rustonによって構築され、現在はArlen Beilerによって管理されているTiddlyWikiクラウド(以前はTiddlyWiki in the Sky for Dropboxとして知られていました)は、ブラウザーだけを使用して自分のDropboxでTiddlyWikiドキュメントを直接編集できるオンラインサービスです。
+
+TiddlyWiki 5で動作します。TiddlyWiki Classicに関しては、主流のローダーは動作せず、新しいローダーが動作する可能性があります。
+
+https://twcloud.github.io/

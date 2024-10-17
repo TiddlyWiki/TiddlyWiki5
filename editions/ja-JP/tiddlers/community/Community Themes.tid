@@ -1,0 +1,27 @@
+created: 20210101152520906
+modified: 20241004112108104
+original-modified: 20210101152533358
+tags: Community
+title: Community Themes
+ja-title: コミュニティテーマ
+caption: テーマ
+
+~TiddlyWiki[[コミュニティ|Community]]のメンバーによって作成されたテーマのリストです。テーマはTiddlyWikiのルック・アンド・フィールを変更し、さらにカスタマイズを可能にします。テーマのインストールは[[プラグインと同じように|Manually installing a plugin]]機能します。
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Community Themes]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>
