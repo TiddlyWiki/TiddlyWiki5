@@ -35,9 +35,7 @@ DroppableWidget.prototype.render = function(parent,nextSibling) {
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
-	if(this.droppableTag && $tw.config.htmlUnsafeElements.indexOf(this.droppableTag) === -1) {
-		tag = this.droppableTag;
-	}
+	tag = $tw.utils.makeTagNameSafe(this.droppableTag,tag);
 	// Create element and assign classes
 	domNode = this.document.createElement(tag);
 	this.domNode = domNode;
