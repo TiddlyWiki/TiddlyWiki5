@@ -3,12 +3,12 @@ tags: $:/tags/SideBarSegment
 
 \whitespace trim
 
-\define count-popup-button()
+\procedure count-popup-button()
 \whitespace trim
 <$button popup=<<qualify "$:/state/popup/search-dropdown">> class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
-<$list filter="[{$(searchTiddler)$}minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
-<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}} replaceRegexp="limit\[\d+\]">
+<$list filter="[<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]]" variable="listItem">
+<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}] }}} replaceRegexp="limit\[\d+\]">
 <$vars primaryListFilter={{{ [<configTiddler>get[first-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}} secondaryListFilter={{{ [<configTiddler>get[second-search-filter]search-replace:g:regexp<replaceRegexp>,[]] }}}>
 <$set name="resultCount" value="""<$count filter="[subfilter<primaryListFilter>] [subfilter<secondaryListFilter>]"/>""">
 {{$:/language/Search/Matches}}
@@ -19,9 +19,9 @@ tags: $:/tags/SideBarSegment
 </$button>
 \end
 
-\define search-results-list()
+\procedure search-results-list()
 \whitespace trim
-<$vars userInput={{$(searchTiddler)$}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}] }}}>
+<$vars userInput={{{ [<searchTiddler>get[text]] }}} configTiddler={{{ [[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}] }}}>
 <$list filter="[<userInput>minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="""<div class="tc-search-results">{{$:/language/Search/Search/TooShort}}</div>""" variable="listItem">
 
 <$tiddler tiddler=<<configTiddler>>>
@@ -34,30 +34,32 @@ tags: $:/tags/SideBarSegment
 </$vars>
 \end
 
-\define cancel-search-actions() <$list filter="[<searchTiddler>get[text]!match{$:/temp/search}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>"""><$action-setfield $tiddler="$:/temp/search" text={{{ [<searchTiddler>get[text]] }}}/><$action-setfield $tiddler="$:/temp/search/refresh" text="yes"/></$list>
+\procedure cancel-search-actions() <$list filter="[<searchTiddler>get[text]!match{$:/temp/search}]" emptyMessage="""<$action-deletetiddler $filter="[[$:/temp/search]] [<searchTiddler>] [<searchListState>]"/>"""><$action-setfield $tiddler="$:/temp/search" text={{{ [<searchTiddler>get[text]] }}}/><$action-setfield $tiddler="$:/temp/search/refresh" text="yes"/></$list>
 
-\define input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>
+\procedure input-accept-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]"><$action-navigate $to={{{ [<tiddler>get[text]] }}}/></$list>"""><$action-navigate $to={{{ [<tiddler>get[text]] }}}/></$list>
 
-\define input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]"><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>"""><$list filter="[<__tiddler__>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>
+\procedure input-accept-variant-actions() <$list filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]" emptyMessage="""<$list filter="[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]"><$list filter="[<tiddler>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/></$list></$list>"""><$list filter="[<tiddler>get[text]minlength[1]]"><$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/></$list></$list>
 
-\define set-next-input-tab(beforeafter:"after") <$macrocall $name="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="$beforeafter$" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+\procedure set-next-input-tab() <$transclude $variable="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="after" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
 
-\define advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/><$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/><$action-deletetiddler $filter="$:/temp/search $:/temp/search/input $:/temp/search/refresh [<searchListState>]"/>
+\procedure set-previous-input-tab() <$transclude $variable="change-input-tab" stateTitle="$:/state/tab/search-results/sidebar" tag="$:/tags/SearchResults" beforeafter="before" defaultState={{$:/config/SearchResults/Default}} actions="""<$action-setfield $tiddler="$:/state/search/currentTab" text=<<nextTab>>/>"""/>
+
+\procedure advanced-search-actions() <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search/input}}/><$action-setfield $tiddler="$:/temp/advancedsearch/input" text={{$:/temp/search/input}}/><<delete-state-tiddlers>><$action-navigate $to="$:/AdvancedSearch"/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/><$action-sendmessage $message="tm-focus-selector" $param="""[data-tiddler-title="$:/AdvancedSearch"] .tc-search input""" preventScroll="true"/><$action-deletetiddler $filter="$:/temp/search $:/temp/search/input $:/temp/search/refresh [<searchListState>]"/>
 
 <div class="tc-sidebar-lists tc-sidebar-search">
 
 <$vars editTiddler="$:/temp/search" searchTiddler="$:/temp/search/input" searchListState=<<qualify "$:/state/search-list/selected-item">>>
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
+<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
 <$keyboard key="((advanced-search-sidebar))" actions=<<advanced-search-actions>>>
 <form class="tc-form-inline">
-<$macrocall $name="keyboard-driven-input" tiddler=<<editTiddler>> storeTitle=<<searchTiddler>> 
+<$transclude $variable="keyboard-driven-input" tiddler=<<editTiddler>> storeTitle=<<searchTiddler>> 
 		selectionStateTitle=<<searchListState>> refreshTitle="$:/temp/search/refresh" type="search" 
 		tag="input" focus={{$:/config/Search/AutoFocus}} focusPopup=<<qualify "$:/state/popup/search-dropdown">> 
 		class="tc-tiny-gap-right tc-popup-handle" filterMinLength={{$:/config/Search/MinLength}} inputCancelActions=<<cancel-search-actions>> 
 		inputAcceptActions=<<input-accept-actions>> inputAcceptVariantActions=<<input-accept-variant-actions>> cancelPopups="yes" 
-		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] ~[{$:/config/SearchResults/Default}]"/>
+		configTiddlerFilter="[[$:/state/search/currentTab]!is[missing]get[text]] :else[{$:/config/SearchResults/Default}]"/>
 </form>
 </$keyboard>
 </$keyboard>
