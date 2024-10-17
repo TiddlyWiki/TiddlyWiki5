@@ -46,7 +46,6 @@ function setupStore() {
 
 function ServerManager(store) {
 	this.servers = [];
-	this.useAuth = false;
 }
 
 ServerManager.prototype.createServer = function(options) {
@@ -54,10 +53,6 @@ ServerManager.prototype.createServer = function(options) {
 		server = new MWSServer(options);
 	this.servers.push(server);
 	return server;
-}
-
-ServerManager.prototype.toggleServerAuth = function(shouldUseAuth = false){
-	this.useAuth = shouldUseAuth;
 }
 
 })();

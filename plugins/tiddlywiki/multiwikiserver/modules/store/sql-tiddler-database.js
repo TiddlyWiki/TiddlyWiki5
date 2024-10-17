@@ -219,8 +219,8 @@ SqlTiddlerDatabase.prototype.createBag = function(bag_name,description,accesscon
 	if(admin) {	
 		const readPermission = this.getPermissionByName("READ");
 		const writePermission = this.getPermissionByName("WRITE");
-		this.createACL(bag_name, "bag", admin.role_id, readPermission.permission_id);
-		this.createACL(bag_name, "bag", admin.role_id, writePermission.permission_id);
+		// this.createACL(bag_name, "bag", admin.role_id, readPermission.permission_id);
+		// this.createACL(bag_name, "bag", admin.role_id, writePermission.permission_id);
 	}
 	return updateBags.lastInsertRowid;
 };
@@ -292,8 +292,8 @@ SqlTiddlerDatabase.prototype.createRecipe = function(recipe_name,bag_names,descr
 	if(admin) {
 		const readPermission = this.getPermissionByName("READ");
 		const writePermission = this.getPermissionByName("WRITE");
-		this.createACL(recipe_name, "recipe", admin.role_id, readPermission.permission_id);
-		this.createACL(recipe_name, "recipe", admin.role_id, writePermission.permission_id);
+		// this.createACL(recipe_name, "recipe", admin.role_id, readPermission.permission_id);
+		// this.createACL(recipe_name, "recipe", admin.role_id, writePermission.permission_id);
 	}
 	return updateRecipes.lastInsertRowid;
 };
@@ -503,7 +503,7 @@ SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permis
 	return this.checkACLPermission(userId, "bag", bagName, permissionName)
 };
 
-SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName, permissionName) {
+SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName) {
 	const entityTypeToTableMap = {
 		bag: {
 			table: "bags",
@@ -521,35 +521,54 @@ SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, e
 	}
 
 	// if the entityName starts with "$:/", we'll assume its a system bag/recipe, then grant the user permission
-	if(entityName.startsWith("$:/")){
-		return true
+	if(entityName.startsWith("$:/")) {
+		return true;
 	}
 
-	const query = `
+	// First, check if there's an ACL record for the entity and get the permission_id
+	const checkACLExistsQuery = `
+		SELECT permission_id
+		FROM acl
+		WHERE entity_type = $entity_type
+		AND entity_name = $entity_name
+		LIMIT 1
+	`;
+
+	const aclRecord = this.engine.runStatementGet(checkACLExistsQuery, {
+			$entity_type: entityType,
+			$entity_name: entityName
+	});
+
+	// If no ACL record exists, return true for hasPermission
+	if (!aclRecord) {
+			return true;
+	}
+
+	// If ACL record exists, check for user permission using the retrieved permission_id
+	const checkPermissionQuery = `
 		SELECT 1
 		FROM users u
 		JOIN user_roles ur ON u.user_id = ur.user_id
 		JOIN roles r ON ur.role_id = r.role_id
 		JOIN acl a ON r.role_id = a.role_id
-		JOIN permissions p ON a.permission_id = p.permission_id
 		WHERE u.user_id = $user_id
 		AND a.entity_type = $entity_type
 		AND a.entity_name = $entity_name
-		AND p.permission_name = $permission_name
+		AND a.permission_id = $permission_id
 		LIMIT 1
 	`;
 
-	const result = this.engine.runStatementGet(query, {
+	const result = this.engine.runStatementGet(checkPermissionQuery, {
 		$user_id: userId,
 		$entity_type: entityType,
 		$entity_name: entityName,
-		$permission_name: permissionName
+		$permission_id: aclRecord.permission_id
 	});
 
 	const hasPermission = result !== undefined;
 
 	return hasPermission;
-};;
+};
 
 /*
 Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
@@ -1099,16 +1118,19 @@ SqlTiddlerDatabase.prototype.listPermissions = function() {
 
 // ACL CRUD operations
 SqlTiddlerDatabase.prototype.createACL = function(entityName, entityType, roleId, permissionId) {
-	const result = this.engine.runStatement(`
+	if(!entityName.startsWith("$:/")) {
+		const result = this.engine.runStatement(`
 			INSERT OR IGNORE INTO acl (entity_name, entity_type, role_id, permission_id)
 			VALUES ($entityName, $entityType, $roleId, $permissionId)
-	`, {
+		`, 
+		{
 			$entityName: entityName,
 			$entityType: entityType,
 			$roleId: roleId,
 			$permissionId: permissionId
-	});
-	return result.lastInsertRowid;
+		});
+		return result.lastInsertRowid;
+	}
 };
 
 SqlTiddlerDatabase.prototype.getACL = function(aclId) {
