@@ -36,20 +36,27 @@
 		"start": "node ./tiddlywiki.js ./editions/tw5.com-server --listen",
 		"test": "node ./tiddlywiki.js ./editions/test --verbose --version --build index",
 
-		"edition:info": "echo \"use: npm run edition --edition=<wiki> [tw5.com, de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
-		"wiki:info": "echo \"use: npm run wiki --edition=<wiki> [empty, prerelease, dev, tour, tw.org, upgrade, full]\"",
-		"lazy:info": "echo \"use: npm run lazy --edition=tw5.com [de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
+		"server:info": "echo \"use: npm run server --edition=<name> [tw5.com, de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
+		"wiki:info": "echo \"use: npm run wiki --edition=<name> [empty, prerelease, dev, tour, tw.org, upgrade, full]\"",
+		"lazy:info": "echo \"use: npm run lazy --edition=<name> [tw5.com, de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
 		"library:info": "echo \"use: npm run library\" && echo \"IMPORTANT: It starts on port:8888\"",
-		"watch:info": "echo \"npm run watch\" needs Node.js V20.x to work",
 
-		"edition": "export npm_config_edition=tw5.com || set npm_config_edition=tw5.com && node ./tiddlywiki.js ./editions/%npm_config_edition%-server --listen",
+		"watch:info": "echo \"npm run watch\" needs Node.js V20.x to work",
+		"build:info": "echo \"use: npm run build --edition=<name> [tw5.com, de-AT, es-ES, fr-FR, ko-KR, xlsx-utils]\"",
+
+		"server": "node ./tiddlywiki.js ./editions/%npm_config_edition%-server --listen",
 		"wiki": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/%npm_config_edition% --listen",
 		"lazy": "node ./tiddlywiki.js ./editions/%npm_config_edition%-server --listen root-tiddler=$:/core/save/lazy-all",
+
 		"library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
 		"watch": "node --watch-path=./core --watch-preserve-output ./tiddlywiki.js ./editions/tw5.com-server --listen",
 
-		"server": "node ./tiddlywiki.js ./editions/server --listen",
+		"server-empty": "node ./tiddlywiki.js ./editions/server --listen",
 		"server-external-js": "node ./tiddlywiki.js ./editions/server-external-js --listen",
+
+		"build": "node ./tiddlywiki.js ./editions/%npm_config_edition%-server --build index",
+		"build:all": "node ./tiddlywiki.js ./editions/%npm_config_edition%-server --build",
+
 		"help": "node ./tiddlywiki.js --help",
 
 		"lint": "eslint .",
@@ -58,8 +65,9 @@
 		"prewiki": "npm run wiki:info -s",
 		"postwiki:info" : "echo \"or: [translators, aws, classicparserdemo, codemirrordemo, d3demo, dynaviewdemo, geospatialdemo, highlightdemo, innerwikidemo, introduction, ja-JP, katexdemo, markdowndemo, prerelease, resumebuilder, share, tw5.com-docs, text-slicer, twitter-archivist, zh-Hans, zh-Hant\"",
 
-		"preedition": "npm run edition:info -s",
-		"pre:lazy": "npm run edition:lazy:info -s",
-		"prelibrary": "npm run library:info -s"
+		"preserver": "npm run server:info -s",
+		"prelazy": "npm run lazy:info -s",
+		"prelibrary": "npm run library:info -s",
+		"prebuild": "npm run build:info -s"
 	}
 }
