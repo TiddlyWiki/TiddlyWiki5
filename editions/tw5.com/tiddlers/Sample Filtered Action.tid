@@ -1,0 +1,5 @@
+title: Sample Filtered Action
+tags: $:/tags/FilteredActions
+filter: [list[$:/StoryList]match[Sample Filtered Action]]
+
+<$action-setfield $tiddler="$:/SiteTitle" text={{{ [{$:/SiteTitle}addsuffix[!]] }}}/>

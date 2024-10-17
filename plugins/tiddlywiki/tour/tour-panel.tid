@@ -48,7 +48,6 @@ tags: $:/tags/PageTemplate
 <$let tour-task="">
 	<$transclude tiddler=<<currentTourStep>> mode="block"/>
 </$let>
-<$confetti/>
 <p>
 	Congratulations, you may proceed
 </p>
