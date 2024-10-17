@@ -1,0 +1,32 @@
+title: $:/plugins/tiddlywiki/menubar/languages/de-DE/readme
+
+!! Einführung
+
+Dieses Plugin enthält eine "Top" Menü-Leiste mit folgenden Funktionen:
+
+* Menü Elemente werden als einfache Text-Links oder "drop-down" Menüs dargestellt.
+* Elemente können einzeln aktiviert werden.
+* Für schmale Bildschirme wird nur ein "Menü-Icon" angezeigt.
+
+!! Menü Elemente
+
+Elemente werden mit <<tag $:/tags/MenuBar>> getaggt. Folgende Felder weden verwendet:
+
+|! Feld |! Beschreibung |
+|title |Jedes Menü Element braucht einen ''eindeutigen'' Titel. (Wird nicht angezeigt) |
+|description |Beschreibung für Listen |
+|tags |Muss unter anderm `$:/tags/MenuBar` enthalten |
+|caption |Dieser Text wird angezeigt. Wichtig: `[[Links]]` ''vermeiden''. `~` verwenden, um ~CamelCase Links zu unterdrücken |
+|target |Für einfache Menü-Elemente. Spezifiziert einen Tiddler Titel als Ziel für den Link |
+|is-dropdown |`yes`, um ein "drop-down" Menü zu erzeugen |
+|dropdown-position |Optional: Position für "drop-down":  `left`=links, `above`=oben, `aboveleft`=oben links, `aboveright`=oben rechts, `right`=rechts, `belowleft`=unten links, `belowright`=unten rechts or `below`=unten |
+|text |Für "drop-down" Elemente: Spezifiziert den Inhalt des "drop-downs" |
+|custom-menu-content |Optional: "Wikitext" der an Stelle der "caption" angezeigt werden soll |
+|custom-menu-styles-wide |Optional: CSS Stiele, die für ein ''breites'' Menü verwendet werden sollen |
+|custom-menu-styles-narrow |Optional: CSS Stiele, die für ein ''schmales'' Menü verwendet werden sollen |
+
+''Wichtig:''
+
+* Das erste HTML "Kind-Element" eines Menüs sollte ein "Button" sein, um Probleme beim "anklicken" zu vermeiden.
+
+* Elemente können mit dem Feld: ''custom-menu-styles'' = `float: right;` nach rechts verschoben werden.
