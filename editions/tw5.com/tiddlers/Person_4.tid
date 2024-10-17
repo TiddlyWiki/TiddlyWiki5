@@ -1,0 +1,12 @@
+caption: Barney Rubble
+created: 20240204195544323
+first-name: Barney
+last-name: Rubble
+modified: 20240204201551863
+tags: Person
+title: Person/4
+type: text/vnd.tiddlywiki
+
+\import [[b b]]
+
+<<list-fields>>
