@@ -1,0 +1,94 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
+
+<div class="mws-header">
+	<h1><$text text=<<page-title>>/></h1>
+	<div class="mws-user-info">
+		<span>Hello, <$text text=<<username>>/></span>
+		<$list filter="[<user-is-admin>match[yes]]">
+			<div class="mws-admin-dropdown">
+				<button class="mws-admin-dropbtn">⚙️</button>
+				<div class="mws-admin-dropdown-content">
+					<a href="/admin/users">Manage Users</a>
+					<a href="/admin/roles">Manage Roles</a>
+				</div>
+			</div>
+		</$list>
+		<form action="/logout" method="post" class="mws-logout-form">
+			<input type="submit" value="Logout" class="mws-logout-button"/>
+		</form>
+	</div>
+</div>
+
+<style>
+.mws-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #f0f0f0;
+	margin-bottom: 20px;
+}
+
+.mws-user-info {
+	display: flex;
+	align-items: center;
+}
+
+.mws-logout-form {
+	margin-left: 10px;
+}
+
+.mws-logout-button {
+	padding: 5px 10px;
+	background-color: #f44336;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.mws-logout-button:hover {
+	background-color: #d32f2f;
+}
+
+.mws-admin-dropdown {
+	position: relative;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.mws-admin-dropbtn {
+	color: white;
+	padding: 5px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.mws-admin-dropbtn:hover, .mws-admin-dropbtn:focus {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.mws-admin-dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	right: 0;
+}
+
+.mws-admin-dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.mws-admin-dropdown-content a:hover {background-color: #ddd;}
+
+.mws-admin-dropdown:hover .mws-admin-dropdown-content {display: block;}
+
+.mws-admin-dropdown:hover {background-color: #2980B9;}
+</style>
