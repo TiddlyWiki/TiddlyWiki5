@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/routes/handlers/manage-roles.js
 type: application/javascript
 module-type: mws-route
 
-GET /admin/roles
+GET /admin/manage-roles
 
 \*/
 (function() {
