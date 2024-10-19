@@ -21,6 +21,50 @@ exports.log = function(text,colour) {
 	console.log($tw.node ? exports.terminalColour(colour) + text + exports.terminalColour() : text);
 };
 
+/*
+Prompts the user for input and handles the input using a callback function. Options:
+promptText: Prompt text
+defaultResult: Default result returned if the user types enter
+callback: callback invoked (err,usertext)
+input: optional input stream
+output: optional output stream
+*/
+exports.terminalQuestion = function(options) {
+	var readline = require("readline"),
+		promptText = options.promptText,
+		defaultResult = options.defaultResult,
+		callback = options.callback,
+		inputStream = options.input || process.stdin,
+		outputStream = options.output || process.stdout;
+	var rl = readline.createInterface({
+		input: inputStream,
+		output: outputStream
+	});
+	// Handle errors on the input stream
+	rl.on("error",function(err) {
+		rl.close();
+		callback(err); // Pass the error to the callback
+	});
+	// Prompt user for input
+	var prompt = exports.terminalColourText(promptText,"yellow");
+	if(defaultResult) {
+		prompt += exports.terminalColourText(" (" + defaultResult + ")","blue");
+	}
+	prompt += exports.terminalColourText(": ");
+	rl.question(prompt,function(input) {
+		// Use default value for the empty string
+		if(input === "" && defaultResult) {
+			input = defaultResult;
+		}
+		callback(null,input);  // Pass the input to the callback
+		rl.close();
+	});
+};
+
+exports.terminalColourText = function(text,colour) {
+	return exports.terminalColour(colour) + text + exports.terminalColour("reset");
+};
+
 exports.terminalColour = function(colour) {
 	if(!$tw.browser && $tw.node && process.stdout.isTTY) {
 		if(colour) {
@@ -36,14 +80,24 @@ exports.terminalColour = function(colour) {
 };
 
 exports.terminalColourLookup = {
+	"reset": "0;0",
 	"black": "0;30",
 	"red": "0;31",
 	"green": "0;32",
-	"brown/orange": "0;33",
+	"yellow": "0;33",
+	"brown/orange": "0;33", // Backwards compatbility
 	"blue": "0;34",
 	"purple": "0;35",
 	"cyan": "0;36",
-	"light gray": "0;37"
+	"white": "0;37",
+	"gray": "0;90",
+	"light red": "0;91",
+	"light green": "0;92",
+	"light yellow": "0;93",
+	"light blue": "0;94",
+	"light purple": "0;95",
+	"light cyan": "0;96",
+	"light gray": "0;97"
 };
 
 /*

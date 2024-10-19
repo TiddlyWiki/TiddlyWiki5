@@ -33,6 +33,12 @@
 			{
 				"type": "filter",
 				"text": "[<version>!match[5.3.6-prerelease]then[text/html]else[text/plain]]"
+			},
+			"dinghy",
+			{
+				"type": "prompt",
+				"prompt": "Please enter the name of your new wiki",
+				"default": "untitled"
 			}
 		],
 		"index": [
