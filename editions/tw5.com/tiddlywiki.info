@@ -23,22 +23,23 @@
 	"languages": [
 	],
 	"build": {
-		"dynamic": [
+		"dynamic-example": [
 			"--echo","testing",
+			"the following argument is wikified",
 			{
 				"type": "wikify",
 				"text": "<<version>>-prod.html"
 			},
-			"thingy",
+			"the following argument is a filter result",
 			{
 				"type": "filter",
 				"text": "[<version>!match[5.3.6-prerelease]then[text/html]else[text/plain]]"
 			},
-			"dinghy",
+			"the following argument was provided by the user",
 			{
 				"type": "prompt",
-				"prompt": "Please enter the name of your new wiki",
-				"default": "untitled"
+				"prompt": "Please enter some text and type enter",
+				"default": "Nothing"
 			}
 		],
 		"index": [
