@@ -1,11 +1,12 @@
+caption: Simple
 created: 20150221201838000
 modified: 20150221203742000
-title: Example Table of Contents: Simple
-caption: Simple
-tags: table-of-contents-example
 order: 1
+tags: table-of-contents-example
+title: Example Table of Contents: Simple
+type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1"
 eg="""<div class="tc-table-of-contents">
-<<toc "Contents">>
+<<toc tag:"Contents">>
 </div>"""/>
