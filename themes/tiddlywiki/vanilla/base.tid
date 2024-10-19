@@ -720,8 +720,8 @@ html body.tc-body .tc-btn-rounded:hover svg {
 }
 
 button svg.tc-image-button, button .tc-image-button img {
-	height: auto;
-	width: 1em;
+	max-height: 1em;
+	max-width: 1em;
 }
 
 .tc-unfold-banner {
@@ -2623,6 +2623,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	flex-grow: 0;
 	flex-shrink: 0;
 	line-height: 1;
+	height: 2em;
+	width: 2em;
+	display: grid;
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-description {
@@ -2689,8 +2692,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-icon img, .tc-plugin-info-chunk.tc-plugin-info-icon svg {
-	width: 2em;
-	height: auto;
+	max-width: 2em;
+	max-height: 2em;
+	margin: auto;
 }
 
 .tc-plugin-info-dropdown {
@@ -2857,12 +2861,13 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 
 .tc-chooser-item svg,
 .tc-chooser-item img{
-	width: 1em;
-	height: 1em;
+	max-width: 1em;
+	max-height: 1em;
 	vertical-align: middle;
 }
 
 .tc-language-chooser .tc-image-button img {
+	max-width: 2em;
 	width: auto;
 	vertical-align: -0.15em;
 }
