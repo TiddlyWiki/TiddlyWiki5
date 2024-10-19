@@ -65,64 +65,115 @@ Commander.prototype.execute = function() {
 };
 
 /*
+Returns the next string token without consuming it, or null if there are none left
+*/
+Commander.prototype.peekNextToken = function() {
+	if(this.nextToken >= this.commandTokens.length) {
+		return null;
+	} else {
+		return this.stringifyToken(this.nextToken);
+	}
+};
+
+/*
+Returns and consumes the next string token, or null if there are none left
+*/
+Commander.prototype.getNextToken = function() {
+	if(this.nextToken >= this.commandTokens.length) {
+		return null;
+	} else {
+		return this.stringifyToken(this.nextToken++);
+	}
+};
+
+
+/*
+Returns a specified stringified token, or null if the index does not exist
+*/
+Commander.prototype.stringifyToken = function(index) {
+	if(index >= this.commandTokens.length) {
+		return null;
+	} else {
+		var token = this.commandTokens[index];
+		if(typeof token === "string") {
+			return token;
+		} else if(typeof token === "object") {
+			switch(token.type) {
+				case "filter":
+					return this.wiki.filterTiddlers(token.text)[0] || "";
+					break;
+				case "wikified":
+					return this.wiki.renderText("text/plain","text/vnd.tiddlywiki",token.text,{
+						parseAsInline: false,
+						parentWidget: $tw.rootWidget
+					});
+					break;
+				default:
+					throw "Unknown dynamic command token type: " + token.type;
+					break;
+			}
+		}
+	}
+};
+
+/*
 Execute the next command in the sequence
 */
 Commander.prototype.executeNextCommand = function() {
 	var self = this;
-	// Invoke the callback if there are no more commands
-	if(this.nextToken >= this.commandTokens.length) {
-		this.callback(null);
+	// Get and check the command token
+	var commandName = this.getNextToken();
+	if(!commandName) {
+		return this.callback(null);
+	}
+	if(commandName.substr(0,2) !== "--") {
+		this.callback("Missing command: " + commandName);
 	} else {
-		// Get and check the command token
-		var commandName = this.commandTokens[this.nextToken++];
-		if(commandName.substr(0,2) !== "--") {
-			this.callback("Missing command: " + commandName);
+		commandName = commandName.substr(2); // Trim off the --
+		// Accumulate the parameters to the command
+		var params = [],
+			nextToken = this.peekNextToken();
+		while(typeof nextToken === "string" && nextToken.substr(0,2) !== "--") {
+			params.push(this.getNextToken());
+			nextToken = this.peekNextToken();
+		}
+		// Get the command info
+		var command = $tw.commands[commandName],
+			c,err;
+		if(!command) {
+			this.callback("Unknown command: " + commandName);
 		} else {
-			commandName = commandName.substr(2); // Trim off the --
-			// Accumulate the parameters to the command
-			var params = [];
-			while(this.nextToken < this.commandTokens.length && 
-				this.commandTokens[this.nextToken].substr(0,2) !== "--") {
-				params.push(this.commandTokens[this.nextToken++]);
+			if(this.verbose) {
+				this.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
 			}
-			// Get the command info
-			var command = $tw.commands[commandName],
-				c,err;
-			if(!command) {
-				this.callback("Unknown command: " + commandName);
-			} else {
-				if(this.verbose) {
-					this.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
+			// Parse named parameters if required
+			if(command.info.namedParameterMode) {
+				params = this.extractNamedParameters(params,command.info.mandatoryParameters);
+				if(typeof params === "string") {
+					return this.callback(params);
 				}
-				// Parse named parameters if required
-				if(command.info.namedParameterMode) {
-					params = this.extractNamedParameters(params,command.info.mandatoryParameters);
-					if(typeof params === "string") {
-						return this.callback(params);
-					}
-				}
-				if(command.info.synchronous) {
-					// Synchronous command
-					c = new command.Command(params,this);
-					err = c.execute();
-					if(err) {
-						this.callback(err);
-					} else {
-						this.executeNextCommand();
-					}
+			}
+			if(command.info.synchronous) {
+				// Synchronous command
+				c = new command.Command(params,this);
+				err = c.execute();
+				if(err) {
+					this.callback(err);
 				} else {
-					// Asynchronous command
-					c = new command.Command(params,this,function(err) {
-						if(err) {
-							self.callback(err);
-						} else {
-							self.executeNextCommand();
-						}
-					});
-					err = c.execute();
+					this.executeNextCommand();
+				}
+			} else {
+				// Asynchronous command
+				c = new command.Command(params,this,function(err) {
 					if(err) {
-						this.callback(err);
+						self.callback(err);
+					} else {
+						self.executeNextCommand();
 					}
+				});
+				err = c.execute();
+				if(err) {
+					this.callback(err);
 				}
 			}
 		}

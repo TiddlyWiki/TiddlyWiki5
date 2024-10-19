@@ -23,6 +23,18 @@
 	"languages": [
 	],
 	"build": {
+		"dynamic": [
+			"--echo","testing",
+			{
+				"type": "wikified",
+				"text": "<<version>>-prod.html"
+			},
+			"thingy",
+			{
+				"type": "filter",
+				"text": "[<version>!match[5.3.6-prerelease]then[text/html]else[text/plain]]"
+			}
+		],
 		"index": [
 			"--savetiddlers","[tag[external-image]]","images",
 			"--render","[tag[external-text]]","[encodeuricomponent[]addprefix[text/]addsuffix[.tid]]","text/plain","$:/core/templates/tid-tiddler",
