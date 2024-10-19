@@ -79,6 +79,7 @@ EventWidget.prototype.render = function(parent,nextSibling) {
 			if(actions) {
 				// Add a variable for the modifier key
 				variables.modifier = $tw.keyboardManager.getEventModifierKeyDescriptor(event);
+				variables["html-direction"] = domNode.ownerDocument.getElementsByTagName("html")[0].getAttribute("dir") || "ltr";
 				// Add a variable for the mouse button
 				if("button" in event) {
 					if(event.button === 0) {
