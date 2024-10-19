@@ -1,0 +1,8 @@
+title: $:/language/Help/echo
+description: Displays all the passed arguments
+
+Displays all the passed arguments to a command. Useful for debugging.
+
+```
+--echo <text> *
+```

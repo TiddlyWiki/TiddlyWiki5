@@ -1,17 +1,17 @@
 created: 20161015114042793
-modified: 20211114101249016
+modified: 20241019145819938
 tags: TiddlyWikiFolders [[TiddlyWiki on Node.js]]
 title: tiddlywiki.info Files
 type: text/vnd.tiddlywiki
 
 [[TiddlyWikiFolders]] are configured with a single `tiddlywiki.info` file in the root of the wiki folder. It should contain a JSON object comprising the following properties:
 
-* ''plugins'' - an array of plugin names to be included in the wiki
-* ''themes'' - an array of theme names to be included in the wiki
-* ''languages'' - an array of language names to be included in the wiki
-* ''includeWikis'' - an array of references to external wiki folders to be included in the wiki
-* ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
-* ''config'' - an optional hashmap of configuration options (see below)
+* ''plugins'' - optional array of plugin names to be included in the wiki
+* ''themes'' - optional array of theme names to be included in the wiki
+* ''languages'' - optional array of language names to be included in the wiki
+* ''includeWikis'' - optional array of references to external wiki folders to be included in the wiki
+* ''build'' - optional hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
+* ''config'' - optional hashmap of configuration options (see below)
 
 !!! ''includeWikis''
 
@@ -22,7 +22,44 @@ The entries in the ''includeWikis'' array can be either a string specifying the 
 
 !!! ''build''
 
+The ''build'' property contains a hashmap of named build targets. Each of the build targets is defined as an array of command tokens.
+
 Note that the build targets of included wikis are merged if a target of that name isn't defined in the current `tiddlywiki.info` file.
+
+Command tokens can be a simple string or a command token object with a ''type'' property. The following types are defined to allow the command token to be dynamically defined:
+
+* ''filter'': the value of the first result of a filter expression specified in the ''text'' property of the command token object
+* ''wikify'': the result of wikifying a text string specified in the ''text'' property of the command token object
+* ''prompt'': the result of prompting the user for a string. The ''prompt'' property of the command token object specifies the textual prompt to be used. The optional ''default'' property specifies a string value to be used if the user presses enter in response to the prompt
+
+The EchoCommand is useful for debugging complex dynamic command tokens.
+
+For example:
+
+```
+"build": {
+	"dynamic": [
+		"--echo","testing",
+		"the following argument is wikified",
+		{
+			"type": "wikify",
+			"text": "<<version>>-prod.html"
+		},
+		"the following argument is a filter result",
+		{
+			"type": "filter",
+			"text": "[<version>!match[5.3.6-prerelease]then[text/html]else[text/plain]]"
+		},
+		"the following argument was provided by the user",
+		{
+			"type": "prompt",
+			"prompt": "Please enter some text and type enter",
+			"default": "Nothing"
+		}
+	],
+...
+```
+
 
 !!! ''config''
 

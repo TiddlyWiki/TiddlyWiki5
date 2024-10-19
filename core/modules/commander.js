@@ -136,7 +136,7 @@ Commander.prototype.stringifyToken = function(index,callback) {
 			switch(token.type) {
 				case "filter":
 					return callback(null,this.wiki.filterTiddlers(token.text)[0] || "");
-				case "wikified":
+				case "wikify":
 					return callback(null,this.wiki.renderText("text/plain","text/vnd.tiddlywiki",token.text,{
 						parseAsInline: false,
 						parentWidget: $tw.rootWidget
