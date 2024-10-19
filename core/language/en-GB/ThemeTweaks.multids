@@ -21,6 +21,7 @@ Settings/BackgroundImageSize: Page background image size
 Settings/BackgroundImageSize/Auto: Auto
 Settings/BackgroundImageSize/Cover: Cover
 Settings/BackgroundImageSize/Contain: Contain
+Settings/SidebarResizer: Sidebar resizer
 Metrics: Sizes
 Metrics/FontSize: Font size
 Metrics/LineHeight: Line height

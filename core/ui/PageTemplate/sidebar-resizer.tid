@@ -5,6 +5,8 @@ list-after: $:/core/ui/PageTemplate/story
 \import $:/core/macros/sidebar-resizer
 \whitespace trim
 
+<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarresizer}match[show]] %>
+
 <$eventcatcher tag="div" class="tc-sidebar-resizer-pointerdown-eventcatcher" selector=".tc-sidebar-resizer" matchSelector=".tc-sidebar-resizer" $pointerdown=<<sidebar-resizer-pointerdown-actions>> $pointerup=<<sidebar-resizer-pointercancel-actions>>>
 
 <%if [{$:/state/sidebar}!match[no]] %>
@@ -24,3 +26,5 @@ list-after: $:/core/ui/PageTemplate/story
 <% endif %>
 
 </$eventcatcher>
+
+<% endif %>
