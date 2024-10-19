@@ -46,9 +46,10 @@ exports.terminalQuestion = function(options) {
 		callback(err); // Pass the error to the callback
 	});
 	// Prompt user for input
-	var prompt = exports.terminalColourText(promptText,"yellow");
+	var prompt = exports.terminalColourText(promptText,["yellow","bold"]);
 	if(defaultResult) {
-		prompt += exports.terminalColourText(" (" + defaultResult + ")","blue");
+		prompt += " ";
+		prompt += exports.terminalColourText("(" + defaultResult + ")",["blue","underline"]);
 	}
 	prompt += exports.terminalColourText(": ");
 	rl.question(prompt,function(input) {
@@ -61,43 +62,86 @@ exports.terminalQuestion = function(options) {
 	});
 };
 
+/*
+Wrap a string in colour codes. Colour can be an array
+*/
 exports.terminalColourText = function(text,colour) {
-	return exports.terminalColour(colour) + text + exports.terminalColour("reset");
+	if(!$tw.utils.isArray(colour)) {
+		colour = [colour];
+	}
+	$tw.utils.each(colour,function(code) {
+		text = exports.terminalColour(code) + text + exports.terminalColour(code,true);
+	});
+	return text;
 };
 
-exports.terminalColour = function(colour) {
+/*
+Returns a terminal colour string. Set "closed" to true to return the closing code
+*/
+exports.terminalColour = function(colour,closed) {
 	if(!$tw.browser && $tw.node && process.stdout.isTTY) {
 		if(colour) {
 			var code = exports.terminalColourLookup[colour];
 			if(code) {
-				return "\x1b[" + code + "m";
+				return "\x1b[" + code[closed ? 1 : 0] + "m";
 			}
-		} else {
-			return "\x1b[0m"; // Cancel colour
 		}
+		return "\x1b[0m"; // Reset
 	}
 	return "";
 };
 
 exports.terminalColourLookup = {
-	"reset": "0;0",
-	"black": "0;30",
-	"red": "0;31",
-	"green": "0;32",
-	"yellow": "0;33",
-	"brown/orange": "0;33", // Backwards compatbility
-	"blue": "0;34",
-	"purple": "0;35",
-	"cyan": "0;36",
-	"white": "0;37",
-	"gray": "0;90",
-	"light red": "0;91",
-	"light green": "0;92",
-	"light yellow": "0;93",
-	"light blue": "0;94",
-	"light purple": "0;95",
-	"light cyan": "0;96",
-	"light gray": "0;97"
+	// Modifiers
+	"reset": [0,0],
+	"bold": [1,22],
+	"dim": [2,22],
+	"italic": [3,23],
+	"underline": [4,24],
+	"overline": [53,55],
+	"inverse": [7,27],
+	"hidden": [8,28],
+	"strikethrough": [9,29],
+	// Colours
+	"black": [30,39],
+	"red": [31,39],
+	"green": [32,39],
+	"yellow": [33,39],
+	"brown/orange": [33,39], // Backwards compatbility
+	"blue": [34,39],
+	"magenta": [35,39], // Backwards compatbility
+	"purple": [35,39],
+	"cyan": [36,39],
+	"white": [37,39],
+	"gray": [90,39],
+	"light red": [91,39],
+	"light green": [92,39],
+	"light yellow": [93,39],
+	"light blue": [94,39],
+	"light magenta": [95,39],
+	"light purple": [95,39], // Backwards compatbility
+	"light cyan": [96,39],
+	"light gray": [97,39],
+	// Background colours
+	"black background": [40,49],
+	"red background": [41,49],
+	"green background": [42,49],
+	"yellow background": [43,49],
+	"brown/orange background": [43,49], // Backwards compatbility
+	"blue background": [44,49],
+	"magenta background": [45,49], // Backwards compatbility
+	"purple background": [45,49],
+	"cyan background": [46,49],
+	"white background": [47,49],
+	"gray background": [100,49],
+	"light red background": [101,49],
+	"light green background": [102,49],
+	"light yellow background": [103,49],
+	"light blue background": [104,49],
+	"light magenta background": [105,49],
+	"light purple background": [105,49], // Backwards compatbility
+	"light cyan background": [106,49],
+	"light gray background": [107,49]
 };
 
 /*
