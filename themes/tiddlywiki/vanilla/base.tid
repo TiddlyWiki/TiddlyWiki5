@@ -3615,6 +3615,36 @@ span.tc-translink > a:first-child {
 	word-break: break-all;
 }
 
+html[dir="rtl"] .tc-tiny-gap-left {
+	margin-right: .25em;
+	margin-left: auto;
+}
+
+html[dir="rtl"] .tc-tiny-gap-right {
+	margin-left: .25em;
+	margin-right: auto;
+}
+
+html[dir="rtl"] .tc-small-gap-left {
+	margin-right: .5em;
+	margin-left: auto;
+}
+
+html[dir="rtl"] .tc-small-gap-right {
+	margin-left: .5em;
+	margin-right: auto;
+}
+
+html[dir="rtl"] .tc-big-gap-left {
+	margin-right: 1em;
+	margin-left: auto;
+}
+
+html[dir="rtl"] .tc-big-gap-right {
+	margin-left: 1em;
+	margin-right: auto;
+}
+
 /* Vertical gaps */
 
 .tc-tiny-v-gap-bottom {

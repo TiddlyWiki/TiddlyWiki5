@@ -34,8 +34,12 @@ tags: [[$:/tags/Stylesheet]]
 		padding: 12px;
 	}
 
-	html body.tc-body div.tc-sidebar-scrollable {
+	html body.tc-body div.tc-sidebar-scrollable, html[dir="rtl"] body.tc-body div.tc-sidebar-scrollable {
 		padding: 12px 0 12px 12px;
+	}
+
+	html body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable, html[dir="rtl"] body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
+		padding: 12px 12px 12px 0;
 	}
 
 	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
@@ -110,6 +114,7 @@ tags: [[$:/tags/Stylesheet]]
 
 	html body.tc-body .tc-sidebar-resizer {
 		width: 12px;
+		right: auto;
 		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),clamp(calc({{$:/themes/tiddlywiki/tight/metrics/storywidth}}),max(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/tight/metrics/storywidth}}),calc({{$:/themes/tiddlywiki/tight/metrics/storyright}})),max(calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + ({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/tight/metrics/storywidth}} - {{$:/themes/tiddlywiki/tight/metrics/storyright}})),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}))),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
 	}
 
@@ -122,6 +127,7 @@ tags: [[$:/tags/Stylesheet]]
 
 		html body.tc-body .tc-sidebar-resizer {
 			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),calc(100% - {{$:/themes/tiddlywiki/tight/metrics/sidebarwidth}}),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
+			right: auto;
 		}
 
 		html body.tc-body .tc-sidebar-left .tc-sidebar-resizer {
