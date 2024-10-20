@@ -720,8 +720,8 @@ html body.tc-body .tc-btn-rounded:hover svg {
 }
 
 button svg.tc-image-button, button .tc-image-button img {
-	max-height: 1em;
-	max-width: 1em;
+	height: 1em;
+	width: 1em;
 }
 
 .tc-unfold-banner {
@@ -2868,7 +2868,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 
 .tc-language-chooser .tc-image-button img {
 	max-width: 2em;
+	max-height: 1em;
 	width: auto;
+	height: auto;
 	vertical-align: -0.15em;
 }
 
