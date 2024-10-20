@@ -58,6 +58,9 @@ function SimpleEngine(options) {
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
 	}
+	if(this.widget.editDirection) {
+		this.domNode.setAttribute("dir",this.widget.editDirection);
+	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(this.domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},

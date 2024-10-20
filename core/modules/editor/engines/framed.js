@@ -81,6 +81,9 @@ function FramedEngine(options) {
 	if(this.widget.isDisabled === "yes") {
 		this.domNode.setAttribute("disabled",true);
 	}
+	if(this.widget.editDirection) {
+		this.domNode.setAttribute("dir",this.widget.editDirection);
+	}
 	// Copy the styles from the dummy textarea
 	this.copyStyles();
 	// Add event listeners
