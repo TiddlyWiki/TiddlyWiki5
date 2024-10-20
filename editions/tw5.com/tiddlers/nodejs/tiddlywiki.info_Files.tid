@@ -26,7 +26,7 @@ The ''build'' property contains a hashmap of named build targets. Each of the bu
 
 Note that the build targets of included wikis are merged if a target of that name isn't defined in the current `tiddlywiki.info` file.
 
-Command tokens can be a simple string or a command token object with a ''type'' property. The following types are defined to allow the command token to be dynamically defined:
+Command tokens can be a simple string or <<.from-version "5.3.6">> a command token object with a ''type'' property. The following types are defined to allow the command token to be dynamically defined:
 
 * ''filter'': the value of the first result of a filter expression specified in the ''text'' property of the command token object
 * ''wikify'': the result of wikifying a text string specified in the ''text'' property of the command token object
