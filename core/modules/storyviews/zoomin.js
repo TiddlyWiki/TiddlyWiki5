@@ -52,7 +52,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!targetElement || listItemWidget.getVariable("tv-disable-storyview-scroll") === "yes") {
+	if(!targetElement) {
 		return;
 	} else if (targetElement.nodeType === Node.TEXT_NODE) {
 		this.logTextNodeRoot(targetElement);
@@ -119,7 +119,9 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		},duration);
 	}
 	// Scroll the target into view
-//	$tw.pageScroller.scrollIntoView(targetElement);
+	/* if(listItemWidget.getVariable("tv-disable-storyview-scroll") !== "yes") {
+		$tw.pageScroller.scrollIntoView(targetElement);
+	}*/
 };
 
 /*
