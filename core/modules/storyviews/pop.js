@@ -24,7 +24,7 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Abandon if the list entry isn't a DOM element (it might be a text node)
-	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE) {
+	if(!targetElement || targetElement.nodeType === Node.TEXT_NODE || listItemWidget.getVariable("tv-inherit-storyview-scroll") === "yes") {
 		return;
 	}
 	// Scroll the node into view
