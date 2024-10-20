@@ -23,10 +23,6 @@ tags: [[$:/tags/Stylesheet]]
 		padding-left: {{$:/themes/tiddlywiki/centralised/metrics/storypaddingleft}};
 	}
 
-	html[dir="rtl"] .tc-story-river, html[dir="rtl"] .tc-sidebar-scrollable {
-		text-align: right;
-	}
-
 	html .tc-sidebar-scrollable {
 		text-align: left;
 		left: 50%;
@@ -40,8 +36,17 @@ tags: [[$:/tags/Stylesheet]]
 		right: 50%;
 		left: 0;
 		margin-right: min(calc((100% - (2 * {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}})) / 2 - 42px),calc({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 42px));
+		padding-right: 0px;
+		padding-left: 42px;
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable {
 		padding-right: 42px;
 		padding-left: 0;
+	}
+
+	html[dir="rtl"] .tc-story-river, html[dir="rtl"] .tc-sidebar-scrollable {
+		text-align: right;
 	}
 
 	html .tc-tiddler-frame {
