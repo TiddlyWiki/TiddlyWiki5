@@ -23,6 +23,7 @@ $button$
 </$droppable>
 \end
 
+<$set name="tv-inherit-storyview-scroll" value="yes">
 <div class="tc-sidebar-tab-open">
 <$list filter="[list<tv-story-list>]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
@@ -35,3 +36,4 @@ $button$
 </div>
 </$tiddler>
 </div>
+</$set>
