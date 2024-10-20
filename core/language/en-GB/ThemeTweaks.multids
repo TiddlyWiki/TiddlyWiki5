@@ -6,6 +6,8 @@ Options: Options
 Options/SidebarLayout: Sidebar layout
 Options/SidebarLayout/Fixed-Fluid: Fixed story, fluid sidebar
 Options/SidebarLayout/Fluid-Fixed: Fluid story, fixed sidebar
+Options/SidebarPosition: Sidebar position
+Options/SidebarResizer: Sidebar resizer
 Options/StickyTitles: Sticky titles
 Options/StickyTitles/Hint: Causes tiddler titles to "stick" to the top of the browser window
 Options/CodeWrapping: Wrap long lines in code blocks
@@ -21,7 +23,6 @@ Settings/BackgroundImageSize: Page background image size
 Settings/BackgroundImageSize/Auto: Auto
 Settings/BackgroundImageSize/Cover: Cover
 Settings/BackgroundImageSize/Contain: Contain
-Settings/SidebarResizer: Sidebar resizer
 Metrics: Sizes
 Metrics/FontSize: Font size
 Metrics/LineHeight: Line height

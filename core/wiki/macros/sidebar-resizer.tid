@@ -186,9 +186,11 @@ title: $:/core/macros/sidebar-resizer
 </$let>
 \end
 
+\function get.drag.diff() [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}] :map[{$:/themes/tiddlywiki/vanilla/options/sidebarposition}match[left]then<currentTiddler>multiply[-1]else<currentTiddler>]
+
 \procedure sidebar-resizer-pointermove-actions()
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
-	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff={{{ [<html-direction>!match[rtl]then<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}] :else[<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}multiply[-1]] }}} startStoryRight={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
+	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff=<<get.drag.diff>> startStoryRight={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
 		<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]then{$:/theme}!match[$:/themes/tiddlywiki/centralised]] %>
 			<<set_theme_throttling metrics/storyright>>
 			<<set_theme_throttling metrics/tiddlerwidth>>

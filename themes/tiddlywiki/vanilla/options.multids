@@ -1,6 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/options/
 
-stickytitles: no
-sidebarlayout: fixed-fluid
-sidebarresizer: hide
 codewrapping: pre-wrap
+sidebarlayout: fixed-fluid
+sidebarposition: right
+sidebarresizer: hide
+stickytitles: no

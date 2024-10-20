@@ -54,7 +54,8 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 |<$link to="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><<lingo Options/SidebarLayout>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><option value="fixed-fluid"><<lingo Options/SidebarLayout/Fixed-Fluid>></option><option value="fluid-fixed"><<lingo Options/SidebarLayout/Fluid-Fixed>></option></$select> |
 |<$link to="$:/themes/tiddlywiki/vanilla/options/stickytitles"><<lingo Options/StickyTitles>></$link><br>//<<lingo Options/StickyTitles/Hint>>// |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/stickytitles"><option value="no">{{$:/language/No}}</option><option value="yes">{{$:/language/Yes}}</option></$select> |
 |<$link to="$:/themes/tiddlywiki/vanilla/options/codewrapping"><<lingo Options/CodeWrapping>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/codewrapping"><option value="pre">{{$:/language/No}}</option><option value="pre-wrap">{{$:/language/Yes}}</option></$select> |
-|<$link to="$:/themes/tiddlywiki/vanilla/options/sidebarresizer"><<lingo Settings/SidebarResizer>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarresizer"><option value="hide">{{$:/language/No}}</option><option value="show">{{$:/language/Yes}}</option></$select> |
+|<$link to="$:/themes/tiddlywiki/vanilla/options/sidebarposition"><<lingo Options/SidebarPosition>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarposition"><option value="right">{{$:/language/Right}}</option><option value="left">{{$:/language/Left}}</option></$select> |
+|<$link to="$:/themes/tiddlywiki/vanilla/options/sidebarresizer"><<lingo Options/SidebarResizer>></$link> |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarresizer"><option value="hide">{{$:/language/No}}</option><option value="show">{{$:/language/Yes}}</option></$select> |
 
 ! <<lingo Settings>>
 
