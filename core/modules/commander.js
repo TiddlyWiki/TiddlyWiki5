@@ -146,7 +146,14 @@ Commander.prototype.stringifyToken = function(index,callback) {
 						promptText: token.prompt || "Please enter a value",
 						defaultResult: token["default"] || "",
 						callback: function(err,userText) {
-							callback(err,userText);
+							if(err) {
+								callback(err);
+							} else {
+								if(token.transformFilter) {
+									userText = self.wiki.filterTiddlers(token.transformFilter,null,self.wiki.makeTiddlerIterator([userText]))[0] || "";
+								}
+								callback(null,userText);
+							}
 						},
 						input: self.streams.input,
 						output: self.streams.output,

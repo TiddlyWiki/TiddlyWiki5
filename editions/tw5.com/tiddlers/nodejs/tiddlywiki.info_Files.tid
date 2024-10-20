@@ -30,7 +30,7 @@ Command tokens can be a simple string or <<.from-version "5.3.6">> a command tok
 
 * ''filter'': the value of the first result of a filter expression specified in the ''text'' property of the command token object
 * ''wikify'': the result of wikifying a text string specified in the ''text'' property of the command token object
-* ''prompt'': the result of prompting the user for a string. The ''prompt'' property of the command token object specifies the textual prompt to be used. The optional ''default'' property specifies a string value to be used if the user presses enter in response to the prompt
+* ''prompt'': the result of prompting the user for a string. The ''prompt'' property of the command token object specifies the textual prompt to be used. The optional ''default'' property specifies a string value to be used if the user presses enter in response to the prompt. The optional ''transformFilter'' property specifies a filter to be applied to the user input to transform it into a command token. The string input by the user is available in the variable `user-input`
 
 The EchoCommand is useful for debugging complex dynamic command tokens.
 

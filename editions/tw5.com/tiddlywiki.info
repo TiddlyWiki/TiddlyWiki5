@@ -39,7 +39,8 @@
 			{
 				"type": "prompt",
 				"prompt": "Please enter some text and type enter",
-				"default": "Nothing"
+				"default": "Nothing",
+				"transformFilter": "[addprefix[testing ]]"
 			}
 		],
 		"index": [
