@@ -105,7 +105,7 @@ Commander.prototype.getTokensUntilCommand = function(callback) {
 			if(err) {
 				return callback(err);
 			}
-			if(!data || data.substr(0,2) === "--") {
+			if(data === null || data.substr(0,2) === "--") {
 				return callback(null,tokens);
 			} else {
 				self.getNextToken(function(err,data) {
