@@ -119,7 +119,9 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		},duration);
 	}
 	// Scroll the target into view
-//	$tw.pageScroller.scrollIntoView(targetElement);
+	/* if(listItemWidget.getVariable("tv-disable-storyview-scroll") !== "yes") {
+		$tw.pageScroller.scrollIntoView(targetElement);
+	}*/
 };
 
 /*

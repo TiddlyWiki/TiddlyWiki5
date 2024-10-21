@@ -7,14 +7,16 @@ tags: $:/tags/ViewTemplate
 <div class="tc-tiddler-title tc-clearfix">
 	<div class="tc-titlebar">
 		<span class="tc-tiddler-controls">
-			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] :filter[lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]]"
-				storyview="pop"
-				variable="listItem"
-			>
-				<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
-					<$transclude tiddler=<<listItem>>/>
-				</$set>
-			</$list>
+			<$set name="tv-disable-storyview-scroll" value="yes">
+				<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] :filter[lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]]"
+					storyview="pop"
+					variable="listItem"
+				>
+					<$set name="tv-config-toolbar-class" filter="[<tv-config-toolbar-class>] [<listItem>encodeuricomponent[]addprefix[tc-btn-]]">
+						<$transclude tiddler=<<listItem>>/>
+					</$set>
+				</$list>
+			</$set>
 		</span>
 		<$set name="tv-wikilinks" value={{$:/config/Tiddlers/TitleLinks}}>
 			<$link>
