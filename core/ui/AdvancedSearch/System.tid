@@ -1,19 +1,28 @@
 title: $:/core/ui/AdvancedSearch/System
 tags: $:/tags/AdvancedSearch
 caption: {{$:/language/Search/System/Caption}}
-first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]
+first-search-filter: [is[system]search<userInput>sort[title]limit[250]] :except[[$:/temp/advancedsearch]] :except[[$:/temp/advancedsearch/input]] :except[[$:/temp/advancedsearch/selected-item]]
 
-\define lingo-base() $:/language/Search/
-\define set-next-input-tab(beforeafter:"after",stateTitle,tag,defaultState,currentTabTiddler)
-<$macrocall $name="change-input-tab"
+\procedure lingo-base() $:/language/Search/
+\procedure set-next-input-tab()
+<$transclude $variable="change-input-tab"
 	stateTitle="$:/state/tab--1498284803"
 	tag="$:/tags/AdvancedSearch"
-	beforeafter="$beforeafter$"
+	beforeafter="after"
 	defaultState="$:/core/ui/AdvancedSearch/System"
 	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
 \end
 
-\define cancel-search-actions()
+\procedure set-previous-input-tab()
+<$transclude $variable="change-input-tab"
+	stateTitle="$:/state/tab--1498284803"
+	tag="$:/tags/AdvancedSearch"
+	beforeafter="before"
+	defaultState="$:/core/ui/AdvancedSearch/System"
+	actions="<$action-setfield $tiddler='$:/state/advancedsearch/currentTab' text=<<nextTab>>/>"/>
+\end
+
+\procedure cancel-search-actions()
 \whitespace trim
 <$list
 	filter="[{$:/temp/advancedsearch}!match{$:/temp/advancedsearch/input}]"
@@ -24,22 +33,22 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 <$action-sendmessage $message="tm-focus-selector" $param=".tc-advanced-search input"/>
 \end
 
-\define input-accept-actions()
+\procedure input-accept-actions()
 \whitespace trim
 <$list
 	filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]"
-	emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'><$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/></$list>">
-	<$action-navigate $to={{{ [<__tiddler__>get[text]] }}}/>
+	emptyMessage="<$list filter='[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]'><$action-navigate $to={{{ [<tiddler>get[text]] }}}/></$list>">
+	<$action-navigate $to={{{ [<tiddler>get[text]] }}}/>
 </$list>
 \end
 
-\define input-accept-variant-actions()
+\procedure input-accept-variant-actions()
 \whitespace trim
 <$list
 	filter="[{$:/config/Search/NavigateOnEnter/enable}match[yes]]"
-	emptyMessage="<$list filter='[<__tiddler__>get[text]!is[missing]] ~[<__tiddler__>get[text]is[shadow]]'><$list filter='[<__tiddler__>get[text]minlength[1]]'><$action-sendmessage $message='tm-edit-tiddler' $param={{{  [<__tiddler__>get[text]] }}}/></$list></$list>">
-	<$list filter="[<__tiddler__>get[text]minlength[1]]">
-		<$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<__tiddler__>get[text]] }}}/>
+	emptyMessage="<$list filter='[<tiddler>get[text]!is[missing]] :else[<tiddler>get[text]is[shadow]]'><$list filter='[<tiddler>get[text]minlength[1]]'><$action-sendmessage $message='tm-edit-tiddler' $param={{{  [<tiddler>get[text]] }}}/></$list></$list>">
+	<$list filter="[<tiddler>get[text]minlength[1]]">
+		<$action-sendmessage $message="tm-edit-tiddler" $param={{{  [<tiddler>get[text]] }}}/>
 </$list></$list>
 \end
 
@@ -49,8 +58,8 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 
 <div class="tc-search">
 <$keyboard key="((input-tab-right))" actions=<<set-next-input-tab>>>
-<$keyboard key="((input-tab-left))" actions=<<set-next-input-tab "before">>>
-<$macrocall $name="keyboard-driven-input"
+<$keyboard key="((input-tab-left))" actions=<<set-previous-input-tab>>>
+<$transclude $variable="keyboard-driven-input"
 	tiddler="$:/temp/advancedsearch/input"
 	storeTitle="$:/temp/advancedsearch"
 	refreshTitle="$:/temp/advancedsearch/refresh"
@@ -78,7 +87,7 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 
 <$list filter="[{$:/temp/advancedsearch}minlength{$:/config/Search/MinLength}limit[1]]" emptyMessage="<div class='tc-search-results'>{{$:/language/Search/Search/TooShort}}</div>" variable="listItem">
 
-<$set name="resultCount" value={{{ [is[system]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]] +[count[]] }}}>
+<$set name="resultCount" value={{{ [is[system]search{$:/temp/advancedsearch}] :except[[$:/temp/advancedsearch]] :except[[$:/temp/advancedsearch/input]] :except[[$:/temp/advancedsearch/selected-item]] +[count[]] }}}>
 
 <div class="tc-search-results">
 
@@ -88,8 +97,8 @@ first-search-filter: [is[system]search<userInput>sort[title]limit[250]] -[[$:/te
 	<<lingo System/Matches>>
 <%endif%>
 
-<$list filter="[is[system]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]] -[[$:/temp/advancedsearch/input]] -[[$:/temp/advancedsearch/selected-item]]">
-<span class={{{[<currentTiddler>addsuffix[-primaryList]] -[[$:/temp/advancedsearch/selected-item]get[text]] +[then[]else[tc-list-item-selected]] }}}>
+<$list filter="[is[system]search{$:/temp/advancedsearch}sort[title]limit[250]] :except[[$:/temp/advancedsearch]] :except[[$:/temp/advancedsearch/input]] :except[[$:/temp/advancedsearch/selected-item]]">
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] :except[[$:/temp/advancedsearch/selected-item]get[text]] :and[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
