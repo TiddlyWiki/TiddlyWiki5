@@ -722,7 +722,7 @@ html body.tc-body .tc-btn-rounded:hover svg {
 }
 
 button svg.tc-image-button, button .tc-image-button img {
-	height: auto;
+	height: 1em;
 	width: 1em;
 }
 
@@ -2699,6 +2699,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	flex-grow: 0;
 	flex-shrink: 0;
 	line-height: 1;
+	height: 2em;
+	width: 2em;
+	display: grid;
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-description {
@@ -2765,8 +2768,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-plugin-info-chunk.tc-plugin-info-icon img, .tc-plugin-info-chunk.tc-plugin-info-icon svg {
-	width: 2em;
-	height: auto;
+	max-width: 2em;
+	max-height: 2em;
+	margin: auto;
 }
 
 .tc-plugin-info-dropdown {
@@ -2869,18 +2873,9 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	display: table;
 }
 
-/* Fix overflow in table and toc */
-.tc-tiddler-body .tc-tabbed-table-of-contents {
+/* Fix overflow toc, manager and testcase output */
+.tc-tiddler-body .tc-tabbed-table-of-contents, .tc-manager-list-item-content, .tc-test-case-output {
 	overflow-x: auto;
-}
-
-.tc-tiddler-body > table {
-  display: block;
-  overflow: auto;
-}
-.tc-tiddler-body > table tbody {
-  display: table;
-  width: 100%;
 }
 
 /* A wrapper to fix table overflow */
@@ -2942,13 +2937,16 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 
 .tc-chooser-item svg,
 .tc-chooser-item img{
-	width: 1em;
-	height: 1em;
+	max-width: 1em;
+	max-height: 1em;
 	vertical-align: middle;
 }
 
 .tc-language-chooser .tc-image-button img {
+	max-width: 2em;
+	max-height: 1em;
 	width: auto;
+	height: auto;
 	vertical-align: -0.15em;
 }
 

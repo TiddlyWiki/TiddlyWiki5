@@ -1,0 +1,17 @@
+created: 20131129090249275
+modified: 20240929111358719
+original-modified: 20220819041016415
+tags: [[Working with TiddlyWiki]] Welcome
+title: GettingStarted
+ja-title: はじめに
+type: text/vnd.tiddlywiki
+
+~TiddlyWikiを使い始める簡単な方法は、独立運営されているコミュニティサービスの[[Tiddlyhost|https://tiddlyhost.com/]]で無料アカウントにサインアップすることです。Tiddlyhostが有益に感じられた場合は、[[寄付やスポンサーになる|https://tiddlyhost.com/donate]]ことをご検討ください。
+
+~TiddlyWikiのコンテンツの無いコピーをダウンロードするにはここをクリックしてください: {{$:/editions/ja-JP/snippets/download-empty-button}}
+
+次のステップは、変更を保存する方法を選択することです。さまざまな方法が利用可能で、それぞれ特徴および制限があります。メソッドのバッジをクリックすると、そのメソッドの詳細が表示されます。プラットフォームフィルターの1つをクリックすると、そのプラットフォームで動作するメソッドに絞り込んだリストにできます。
+
+<<.warning "変更を保存するために、ブラウザの''ファイル''/''保存''メニューを使用しないでください(正しく機能しません)。">><br/><br/>
+
+{{Saving}}

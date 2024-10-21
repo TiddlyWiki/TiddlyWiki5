@@ -1,0 +1,27 @@
+created: 20210101152520906
+modified: 20241004113444185
+original-modified: 20210101152533358
+tags: Community
+title: Other Resources
+ja-title: その他のリソース
+caption: その他
+
+このリストには、~TiddlyWikiコミュニティと共有されている、前のカテゴリに該当する有用なリソースが含まれています。それらは、マクロ、ウィジェット、スニペット、アイデアなどである可能性があります。
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Other Resources]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>
