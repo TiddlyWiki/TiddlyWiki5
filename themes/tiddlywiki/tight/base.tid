@@ -34,11 +34,15 @@ tags: [[$:/tags/Stylesheet]]
 		padding: 12px;
 	}
 
-	html body.tc-body div.tc-sidebar-scrollable, html[dir="rtl"] body.tc-body div.tc-sidebar-scrollable {
+	html body.tc-body div.tc-sidebar-scrollable {
 		padding: 12px 0 12px 12px;
 	}
 
-	html body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable, html[dir="rtl"] body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
+	html body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
+		padding: 12px 12px 12px 12px;
+	}
+
+	html[dir="rtl"] body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
 		padding: 12px 12px 12px 0;
 	}
 
