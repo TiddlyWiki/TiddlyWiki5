@@ -1,0 +1,2 @@
+title: $:/tags/SyncerDropdown
+list: $:/plugins/tiddlywiki/multiwikiclient/syncer-actions/login-status $:/plugins/tiddlywiki/multiwikiclient/syncer-actions/login $:/plugins/tiddlywiki/multiwikiclient/syncer-actions/refresh $:/plugins/tiddlywiki/multiwikiclient/syncer-actions/logout $:/plugins/tiddlywiki/multiwikiclient/syncer-actions/save-snapshot $:/plugins/tiddlywiki/multiwikiclient/syncer-actions/copy-logs
