@@ -1,0 +1,14 @@
+{
+	"tiddlers": [
+		{
+			"file": "color.global.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/core/modules/utils/dom/color.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ";\nexports.Color = Color;"
+		}
+	]
+}
