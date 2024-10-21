@@ -37,9 +37,11 @@ code-body: yes
 
 \define tabs-tab-list()
 \whitespace trim
-<$list filter=<<__tabsList__>> variable="currentTab" storyview="pop">
-	<<tabs-tab>>
-</$list>
+<$set name="tv-disable-storyview-scroll" value="yes">
+	<$list filter=<<__tabsList__>> variable="currentTab" storyview="pop">
+		<<tabs-tab>>
+	</$list>
+</$set>
 \end
 
 \define tabs-tab-body()
