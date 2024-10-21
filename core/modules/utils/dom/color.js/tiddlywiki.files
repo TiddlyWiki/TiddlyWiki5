@@ -1,7 +1,7 @@
 {
 	"tiddlers": [
 		{
-			"file": "color.global.js",
+			"file": "color.global.0.5.2.js",
 			"fields": {
 				"type": "application/javascript",
 				"title": "$:/core/modules/utils/dom/color.js",
@@ -9,6 +9,13 @@
 			},
 			"prefix": "",
 			"suffix": ";\nexports.Color = Color;"
+		},
+		{
+			"file": "LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/core/modules/utils/dom/color.js/license"
+			}
 		}
 	]
 }
