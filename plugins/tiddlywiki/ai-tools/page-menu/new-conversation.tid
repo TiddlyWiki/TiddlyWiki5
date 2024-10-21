@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/ai-tools/page-menu/new-conversation
+tags: $:/tags/AI/PageMenu
+
+<$button actions=<<ai-tools-new-conversation>> class="tc-btn-invisible">
+{{$:/core/images/new-button}} New Conversation
+</$button>
