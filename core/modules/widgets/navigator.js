@@ -641,7 +641,7 @@ NavigatorWidget.prototype.handleManageACLTiddlersEvent = function() {
 	var paths = pathname.split("/");
 	var recipeName = paths[paths.length - 1];
 	var bagName = document.querySelector("h1.tc-site-title").innerHTML;
-	window.location.href = "/admin/manage-acl/"+recipeName+"/"+bagName
+	window.location.href = "/admin/acl/"+recipeName+"/"+bagName
 };
 
 exports.navigator = NavigatorWidget;

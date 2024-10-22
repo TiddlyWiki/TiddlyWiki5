@@ -410,24 +410,6 @@ Server.prototype.requestAuthentication = function(response) {
 	}
 };
 
-Server.prototype.redirectToLogin = function(response, returnUrl) {
-	if (!response.headersSent) {
-		const validReturnUrlRegex = /^\/(?!.*\.(ico|png|jpg|jpeg|gif|svg|css|js|woff|woff2|ttf|eot|json)$).*$/;
-		var sanitizedReturnUrl = '/';  // Default to home page
-
-		if (validReturnUrlRegex.test(returnUrl)) {
-			sanitizedReturnUrl = returnUrl;
-			response.setHeader('Set-Cookie', `returnUrl=${encodeURIComponent(sanitizedReturnUrl)}; HttpOnly; Secure; SameSite=Strict; Path=/`);			
-		} else {
-			console.log(`Invalid return URL detected: ${returnUrl}. Redirecting to home page.`);
-		}
-		const loginUrl = '/login';
-		response.writeHead(302, {
-			'Location': loginUrl
-		});
-		response.end();
-	}
-};
 
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
@@ -458,15 +440,6 @@ Server.prototype.requestHandler = function(request,response,options) {
 	
 	// Check whether anonymous access is granted
 	state.allowAnon = false; //this.isAuthorized(state.authorizationType,null);
-
-	// If not authenticated and anonymous access is not allowed, request authentication
-	if(!authenticatedUsername && !state.allowAnon) {
-		// Don't redirect if this is already a request to the login page
-		if(state.urlInfo.pathname !== '/login') {
-			this.redirectToLogin(response, request.url);
-			return;
-		}
-	}
 
 	// Authorize with the authenticated username
 	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername) && !response.headersSent) {

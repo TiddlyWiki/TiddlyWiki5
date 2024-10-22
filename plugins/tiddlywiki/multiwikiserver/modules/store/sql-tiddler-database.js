@@ -25,6 +25,16 @@ function SqlTiddlerDatabase(options) {
 		databasePath: options.databasePath,
 		engine: options.engine
 	});
+	this.entityTypeToTableMap = {
+		bag: {
+			table: "bags",
+			column: "bag_name"
+		},
+		recipe: {
+			table: "recipes",
+			column: "recipe_name"
+		}
+	};
 }
 
 SqlTiddlerDatabase.prototype.close = function() {
@@ -503,45 +513,43 @@ SqlTiddlerDatabase.prototype.hasBagPermission = function(userId, bagName, permis
 	return this.checkACLPermission(userId, "bag", bagName, permissionName)
 };
 
-SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName) {
-	const entityTypeToTableMap = {
-		bag: {
-			table: "bags",
-			column: "bag_name"
-		},
-		recipe: {
-			table: "recipes",
-			column: "recipe_name"
-		}
-	};
-
-	const entityInfo = entityTypeToTableMap[entityType];
+SqlTiddlerDatabase.prototype.getACLByName = function(entityType, entityName, fetchAll) {
+	const entityInfo = this.entityTypeToTableMap[entityType];
 	if (!entityInfo) {
 		throw new Error("Invalid entity type: " + entityType);
 	}
 
+	// First, check if there's an ACL record for the entity and get the permission_id
+	var checkACLExistsQuery = `
+		SELECT *
+		FROM acl
+		WHERE entity_type = $entity_type
+		AND entity_name = $entity_name
+	`;
+
+	if (!fetchAll) {
+		checkACLExistsQuery += ' LIMIT 1'
+	}
+
+	const aclRecord = this.engine[fetchAll ? 'runStatementGetAll' : 'runStatementGet'](checkACLExistsQuery, {
+		$entity_type: entityType,
+		$entity_name: entityName
+	});
+
+	return aclRecord;
+}
+
+SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, entityName) {
 	// if the entityName starts with "$:/", we'll assume its a system bag/recipe, then grant the user permission
 	if(entityName.startsWith("$:/")) {
 		return true;
 	}
 
-	// First, check if there's an ACL record for the entity and get the permission_id
-	const checkACLExistsQuery = `
-		SELECT permission_id
-		FROM acl
-		WHERE entity_type = $entity_type
-		AND entity_name = $entity_name
-		LIMIT 1
-	`;
-
-	const aclRecord = this.engine.runStatementGet(checkACLExistsQuery, {
-			$entity_type: entityType,
-			$entity_name: entityName
-	});
+	const aclRecord = this.getACLByName(entityType, entityName);
 
 	// If no ACL record exists, return true for hasPermission
 	if (!aclRecord) {
-			return true;
+		return true;
 	}
 
 	// If ACL record exists, check for user permission using the retrieved permission_id
@@ -564,11 +572,28 @@ SqlTiddlerDatabase.prototype.checkACLPermission = function(userId, entityType, e
 		$entity_name: entityName,
 		$permission_id: aclRecord.permission_id
 	});
-
+	
 	const hasPermission = result !== undefined;
 
 	return hasPermission;
 };
+
+/**
+ * Returns the ACL records for an entity (bag or recipe)
+ */
+SqlTiddlerDatabase.prototype.getEntityAclRecords = function(entityName) {
+	const checkACLExistsQuery = `
+		SELECT *
+		FROM acl
+		WHERE entity_name = $entity_name
+	`;
+
+	const aclRecords = this.engine.runStatementGetAll(checkACLExistsQuery, {
+		$entity_name: entityName
+	});
+
+	return aclRecords
+}
 
 /*
 Get the titles of the tiddlers in a bag. Returns an empty array for bags that do not exist
