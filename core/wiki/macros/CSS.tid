@@ -2,16 +2,13 @@ title: $:/core/macros/CSS
 tags: $:/tags/Macro $:/tags/Global
 
 <!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
-\define colour(name)
-\whitespace trim
-<$transclude tiddler={{$:/palette}} index="$name$">
-	<$transclude tiddler="$:/palettes/Vanilla" index="$name$">
-		<$transclude tiddler="$:/config/DefaultColourMappings/$name$"/>
-	</$transclude>
-</$transclude>
-\end
+\function colour(name)
+[{$:/palette}getindex<name>] :else[{$:/palettes/Vanilla}getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :and[wikify[text],[inline]]
+\end colour
 
-\define color(name) <<colour $name$>>
+\function color(name)
+[function[colour],<name>]
+\end function
 
 \function box-shadow(shadow)
 [[ -webkit-box-shadow: $(shadow)$;

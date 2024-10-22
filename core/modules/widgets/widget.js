@@ -341,7 +341,11 @@ Widget.prototype.makeFakeWidgetWithVariables = function(variables) {
 		},
 		makeFakeWidgetWithVariables: self.makeFakeWidgetWithVariables,
 		resolveVariableParameters: self.resolveVariableParameters,
-		wiki: self.wiki
+		wiki: self.wiki,
+		variables: variables,
+		getAncestorCount: function() {
+			return 0;
+		}
 	};
 };
 
