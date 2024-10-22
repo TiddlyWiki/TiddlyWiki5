@@ -1,4 +1,4 @@
-tags: $:/tags/Macro $:/tags/Global
+tags: $:/tags/Macro
 title: $:/core/macros/timeline
 
 <!-- Override one or both of the following two macros with a global or local macro of the same name 

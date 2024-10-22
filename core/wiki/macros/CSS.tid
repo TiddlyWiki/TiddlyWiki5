@@ -1,5 +1,5 @@
 title: $:/core/macros/CSS
-tags: $:/tags/Macro $:/tags/Global
+tags: $:/tags/Macro
 
 <!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
 \define colour(name)
