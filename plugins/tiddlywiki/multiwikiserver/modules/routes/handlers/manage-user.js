@@ -42,8 +42,10 @@ GET /admin/users/:user_id
 		};
 	
 		// Get all roles which the user has been assigned
-		var userRoles = state.server.sqlTiddlerDatabase.getUserRoles(user_id);
+		var userRole = state.server.sqlTiddlerDatabase.getUserRoles(user_id);
 		var allRoles = state.server.sqlTiddlerDatabase.listRoles();
+
+		console.log("userRole", userRole, state.authenticatedUser.isAdmin);
 		
 		response.writeHead(200, "OK", {
 			"Content-Type": "text/html"
@@ -54,9 +56,9 @@ GET /admin/users/:user_id
 			variables: {
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-user",
 				"user": JSON.stringify(user),
-				"user-roles": JSON.stringify(userRoles),
+				"user-role": JSON.stringify(userRole),
 				"all-roles": JSON.stringify(allRoles),
-				"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === user_id ? "yes" : "no",
+				"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id == user_id ? "yes" : "no",
 				"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"		
 			}

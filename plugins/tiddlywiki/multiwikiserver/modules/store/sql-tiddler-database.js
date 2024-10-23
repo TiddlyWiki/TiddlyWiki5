@@ -825,7 +825,7 @@ SqlTiddlerDatabase.prototype.getUserByUsername = function(username) {
 	});
 };
 
-SqlTiddlerDatabase.prototype.updateUser = function (userId, username, email) {
+SqlTiddlerDatabase.prototype.updateUser = function (userId, username, email, roleId) {
 	const existingUser = this.engine.runStatement(`
 		SELECT user_id FROM users
 		WHERE email = $email AND user_id != $userId
@@ -842,19 +842,41 @@ SqlTiddlerDatabase.prototype.updateUser = function (userId, username, email) {
 	}
 
 	try {
-		this.engine.runStatement(`
+		this.engine.transaction(() => {
+			// Update user information
+			this.engine.runStatement(`
 				UPDATE users
 				SET username = $username, email = $email
 				WHERE user_id = $userId
-		`, {
-			$userId: userId,
-			$username: username,
-			$email: email
+			`, {
+				$userId: userId,
+				$username: username,
+				$email: email
+			});
+
+			if (roleId) {
+				// Remove all existing roles for the user
+				this.engine.runStatement(`
+					DELETE FROM user_roles
+					WHERE user_id = $userId
+				`, {
+					$userId: userId
+				});
+
+				// Add the new role
+				this.engine.runStatement(`
+					INSERT INTO user_roles (user_id, role_id)
+					VALUES ($userId, $roleId)
+				`, {
+					$userId: userId,
+					$roleId: roleId
+				});
+			}
 		});
 
 		return {
 			success: true,
-			message: "User profile updated successfully."
+			message: "User profile and role updated successfully."
 		};
 	} catch (error) {
 		return {
@@ -1293,9 +1315,10 @@ SqlTiddlerDatabase.prototype.getUserRoles = function(userId) {
 			FROM user_roles ur
 			JOIN roles r ON ur.role_id = r.role_id
 			WHERE ur.user_id = $userId
+			LIMIT 1
 	`;
 	
-	return this.engine.runStatementGetAll(query, { $userId: userId });
+	return this.engine.runStatementGet(query, { $userId: userId });
 };
 
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;

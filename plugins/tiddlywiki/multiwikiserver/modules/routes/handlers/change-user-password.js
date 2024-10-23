@@ -30,7 +30,6 @@ exports.handler = function (request, response, state) {
   var auth = authenticator($tw);
 
   var userId = state.authenticatedUser.user_id;
-  var currentPassword = state.data.currentPassword;
   var newPassword = state.data.newPassword;
   var confirmPassword = state.data.confirmPassword;
 
@@ -45,14 +44,6 @@ exports.handler = function (request, response, state) {
 
   if(!userData) {
     response.setHeader("Set-Cookie", "flashMessage=User not found; Path=/; HttpOnly; Max-Age=5");
-    response.writeHead(302, { "Location": "/admin/users/" + userId });
-    response.end();
-    return;
-  }
-
-  var isCurrentPasswordValid = auth.verifyPassword(currentPassword, userData.password);
-  if(!isCurrentPasswordValid) {
-    response.setHeader("Set-Cookie", "flashMessage=Current password is incorrect; Path=/; HttpOnly; Max-Age=5");
     response.writeHead(302, { "Location": "/admin/users/" + userId });
     response.end();
     return;

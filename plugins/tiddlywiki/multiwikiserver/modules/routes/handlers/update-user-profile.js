@@ -30,14 +30,15 @@ exports.handler = function (request,response,state) {
   var userId = state.authenticatedUser.user_id;
   var username = state.data.username;
   var email = state.data.email;
+  var roleId = state.data.role;
 
-  var result = state.server.sqlTiddlerDatabase.updateUser(userId, username, email);
+  var result = state.server.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
 
   if(result.success) {
-    response.setHeader("Set-Cookie", "flashMessage="+result.mesasge+"; Path=/; HttpOnly; Max-Age=5");
+    response.setHeader("Set-Cookie", "flashMessage="+result.message+"; Path=/; HttpOnly; Max-Age=5");
     response.writeHead(302, { "Location": "/admin/users/" + userId });
   } else {
-    response.setHeader("Set-Cookie", "flashMessage="+result.mesasge+"; Path=/; HttpOnly; Max-Age=5");
+    response.setHeader("Set-Cookie", "flashMessage="+result.message+"; Path=/; HttpOnly; Max-Age=5");
     response.writeHead(302, { "Location": "/admin/users/" + userId });
   }
   response.end();

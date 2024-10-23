@@ -395,8 +395,8 @@ Server.prototype.authenticateUser = function(request, response) {
 		return false
 	}
 	delete user.password;
-	// @TODO: implement logic to determine if a user is an admin user
-	user['isAdmin'] = true
+	const userRole = this.sqlTiddlerDatabase.getUserRoles(user.user_id);
+	user['isAdmin'] = userRole?.role_name?.toLowerCase() === 'admin'
 
 	return user
 };

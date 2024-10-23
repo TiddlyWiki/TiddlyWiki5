@@ -30,39 +30,50 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 			</div>
 			
 			<div class="user-profile-roles">
-				<h2>User Roles</h2>
+				<h2>User Role</h2>
 				<ul>
-					<$list filter="[<user-roles>jsonindexes[]]" variable="role-index">
-						<li>
-							<$text text={{{ [<user-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
-						</li>
-					</$list>
+					<li>
+						<$text text={{{ [<user-role>jsonget[role_name]] }}}/>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
-	<!-- <$reveal type="match" state="is-current-user-profile" text="yes"> -->
+	<$list filter="[<user-is-admin>match[yes]] [<is-current-user-profile>match[yes]]">
 		<div class="user-profile-management">
-			<h2>Manage Your Account</h2>
-			<form class="user-profile-form" action="/update-user-profile" method="POST">
-				<div class="form-group">
-					<label for="username">Username:</label>
-					<input type="text" id="username" name="username" value={{{ [<user>jsonget[username]] }}} required />
-				</div>
-				<div class="form-group">
-					<label for="email">Email:</label>
-					<input type="email" id="email" name="email" value={{{ [<user>jsonget[email]] }}} required />
-				</div>
-				<button type="submit" class="update-profile-btn">Update Profile</button>
-			</form>
+			<h2>Manage Account</h2>
+			<$set name="current-role-id" value={{{ [<user-role>jsonget[role_id]] }}}>
+				<form class="user-profile-form" action="/update-user-profile" method="POST">
+					<div class="form-group">
+						<label for="username">Username:</label>
+						<input type="text" id="username" name="username" value={{{ [<user>jsonget[username]] }}} required />
+					</div>
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input type="email" id="email" name="email" value={{{ [<user>jsonget[email]] }}} required />
+					</div>
+					<$list filter="[<user-is-admin>match[yes]]">
+						<div class="form-group">
+							<label for="role">Role:</label>
+							<select id="role" name="role" required>
+								<$list filter="[<all-roles>jsonindexes[]]" variable="role-index">
+									<$set name="role-id" value={{{ [<all-roles>jsonextract<role-index>jsonget[role_id]] }}}>
+										<option value=<<role-id>>
+											<$list filter="[<current-role-id>match<role-id>]" variable="ignore">selected</$list>
+											<$text text={{{ [<all-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
+										</option>
+									</$set>
+								</$list>
+							</select>
+						</div>
+					</$list>
+					<button type="submit" class="update-profile-btn">Update Profile</button>
+				</form>
+			</$set>
 			<hr />
 			<h2>Change Password</h2>
 			<form class="user-profile-form" action="/change-user-password" method="POST">
-				<div class="form-group">
-					<label for="current-password">Current Password:</label>
-					<input type="password" id="current-password" name="currentPassword" required />
-				</div>
 				<div class="form-group">
 					<label for="new-password">New Password:</label>
 					<input type="password" id="new-password" name="newPassword" required />
@@ -74,7 +85,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 				<button type="submit" class="update-password-btn">Change Password</button>
 			</form>
 		</div>
-	<!-- </$reveal> -->
+	</$list>
 
 	<$let flash-message={{{ [[$:/state/mws/flash-message]get[text]] }}}>
 		<$reveal type="nomatch" state="$:/state/mws/flash-message" text="">
@@ -235,5 +246,13 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 
 .update-password-btn:hover {
 	background: #00695c;
+}
+
+.user-profile-form select {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: white;
 }
 </style>
