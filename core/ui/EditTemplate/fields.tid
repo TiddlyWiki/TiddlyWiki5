@@ -77,6 +77,7 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 <div class="tc-edit-fields">
 <table class={{{ [all[current]fields[]] :filter[lookup[$:/config/EditTemplateFields/Visibility/]!match[hide]] +[count[]!match[0]] +[then[tc-edit-fields]] ~[[tc-edit-fields tc-edit-fields-small]] }}}>
 <tbody>
+<$set name="tv-disable-storyview-scroll" value="yes">
 <$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField" storyview="pop">
 <$list filter=<<config-filter>> variable="temp">
 <tr class="tc-edit-field">
@@ -96,6 +97,7 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 </tr>
 </$list>
 </$list>
+</$set>
 </tbody>
 </table>
 </div>

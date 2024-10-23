@@ -15,6 +15,7 @@ caption: {{$:/language/Manager/Item/Tags}}
 \end
 
 <p>
+<$set name="tv-disable-storyview-scroll" value="yes">
 <$list filter="[all[current]tags[]] [list[$:/config/Manager/RecentTags]] +[sort[title]] " variable="tag" storyview="pop">
 <div>
 <$checkbox tiddler=<<currentTiddler>> tag=<<tag>> actions=<<tag-checkbox-actions>>>
@@ -22,6 +23,7 @@ caption: {{$:/language/Manager/Item/Tags}}
 </$checkbox>
 </div>
 </$list>
+</$set>
 </p>
 <p>
 <$fieldmangler>

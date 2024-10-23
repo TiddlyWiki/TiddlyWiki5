@@ -3,10 +3,14 @@ tags: $:/tags/PageTemplate
 
 <span class="tc-topbar tc-topbar-right">
 
+<$set name="tv-disable-storyview-scroll" value="yes">
+
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TopRightBar]!has[draft.of]]" variable="listItem" storyview="pop">
 
 <$transclude tiddler=<<listItem>> mode="inline"/>
 
 </$list>
+
+</$set>
 
 </span>
