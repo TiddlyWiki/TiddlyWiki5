@@ -1,0 +1,27 @@
+created: 20210101150806938
+modified: 20241004110635297
+original-modified: 20230803053451496
+tags: Community
+title: Community Editions
+ja-title: コミュニティエディション
+caption: エディション
+
+これらは~TiddlyWiki[[コミュニティ|Community]]によって作成されたプレパッケージのエディションです。これらは、特定のユースケースを促進するためにプラグインと構成が追加された~TiddlyWikiです。これらは、設定に時間をかけずにTiddlyWikiにすぐにアクセスして使い始めたい場合に最適な出発点です。
+
+<div class="tc-link-info">
+
+<$list filter='[tag[Community Editions]!sort[modified]]'>
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+<div class="tc-subtitle"> <$view field="modified" format="relativedate"/> の投稿</div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

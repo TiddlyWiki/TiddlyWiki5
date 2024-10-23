@@ -1,4 +1,6 @@
 title: $:/plugins/tiddlywiki/freelinks/settings
+caption: Freelinks
+tags: $:/tags/ControlPanel/SettingsTab
 
 Filter defining tiddlers to which freelinks are made: <$edit-text tiddler="$:/config/Freelinks/TargetFilter" tag="input" placeholder="Filter expression..." default=""/>
 

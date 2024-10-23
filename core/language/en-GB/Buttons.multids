@@ -80,6 +80,7 @@ NewMarkdown/Caption: new Markdown tiddler
 NewMarkdown/Hint: Create a new Markdown tiddler
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
+OpenControlPanel/Hint: Open control panel
 OpenWindow/Caption: open in new window
 OpenWindow/Hint: Open tiddler in new window
 Palette/Caption: palette
@@ -104,6 +105,8 @@ ShowSideBar/Caption: show sidebar
 ShowSideBar/Hint: Show sidebar
 TagManager/Caption: tag manager
 TagManager/Hint: Open tag manager
+TestCaseImport/Caption: import tiddlers
+TestCaseImport/Hint: Import tiddlers
 Timestamp/Caption: timestamps
 Timestamp/Hint: Choose whether modifications update timestamps
 Timestamp/On/Caption: timestamps are on
@@ -130,6 +133,7 @@ Excise/Caption/Replace/Link: link
 Excise/Caption/Replace/Transclusion: transclusion
 Excise/Caption/Tag: Tag new tiddler with the title of this tiddler
 Excise/Caption/TiddlerExists: Warning: tiddler already exists
+Excise/DefaultTitle: New Excision
 Excise/Hint: Excise the selected text into a new tiddler
 Heading1/Caption: heading 1
 Heading1/Hint: Apply heading level 1 formatting to lines containing selection

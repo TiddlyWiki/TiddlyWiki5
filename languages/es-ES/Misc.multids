@@ -30,7 +30,7 @@ Error/DeserializeOperator/UnknownDeserializer: Error de filtro: Deserializador d
 Error/Filter: Error de filtro
 Error/FilterSyntax: Error de sintaxis en la expresión de filtro
 Error/FilterRunPrefix: Error en Filtro: Prefijo desconocido para la ejecución del filtro
-Error/IsFilterOperator: Error en Filtro: Operando desconocido para el operador de filtro 'is'
+Error/IsFilterOperator: Error en Filtro: Parámetro desconocido para el operador de filtro 'is'
 Error/FormatFilterOperator: Error en Filtro: Sufijo desconocido para el operador de filtro 'format'
 Error/LoadingPluginLibrary: Error al cargar la biblioteca de complementos
 Error/NetworkErrorAlert: `<h2>''Error de Red''</h2>Parece que se perdió la conexión con el servidor. Esto puede indicar un problema con tu conexión de red. Intenta restaurar la conectividad de red antes de continuar.<br><br>''Cualquier cambio no guardado se sincronizará automáticamente cuando se restaure la conectividad''.`
@@ -70,7 +70,7 @@ No: No
 OfficialPluginLibrary: Librería de complementos oficiales de ~TiddlyWiki
 OfficialPluginLibrary/Hint: Librería de complementos oficiales de ~TiddlyWiki en tiddlywiki.com<br> Plugins, temas y paquetes de idioma que mantiene el equipo de TiddlyWiki
 PageTemplate/Description: la disposición por defecto de ~TiddlyWiki
-PageTemplate/Name: ~PageTemplate por defecto
+PageTemplate/Name: Disposición Estándar
 PluginReloadWarning: Guarda {{$:/core/ui/Buttons/save-wiki}} y recarga {{$:/core/ui/Buttons/refresh}} para que los cambios surtan efecto.
 RecentChanges/DateFormat: DD MMM YYYY
 Shortcuts/Input/AdvancedSearch/Hint: Abre el panel ~AdvancedSearch desde el campo de búsqueda de la barra lateral

@@ -3,5 +3,6 @@
 	"name": "Tour",
 	"description": "A tour of TiddlyWiki",
 	"list": "readme docs settings",
-	"dependents": ["$:/plugins/tiddlywiki/confetti","$:/plugins/tiddlywiki/dynannotate"]
+	"dependents": ["$:/plugins/tiddlywiki/confetti","$:/plugins/tiddlywiki/dynannotate"],
+	"stability": "STABILITY_1_EXPERIMENTAL"
 }

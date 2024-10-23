@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/d3",
 	"name": "D3",
 	"description": "D3 data visualisation demo",
-	"list": "readme"
+	"list": "readme",
+	"stability": "STABILITY_0_DEPRECATED"
 }

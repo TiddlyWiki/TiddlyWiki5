@@ -11,7 +11,7 @@ The ''makeqr'' [[macro|Macros]] converts text data into an image of the correspo
 ;size
 : The size of the image in pixels (defaults to 500)
 ;errorCorrectLevel
-: Determines the amount of error correction applied to the image; see below (defaults to "M").
+: Determines the amount of error correction applied to the image (see below, defaults to "M")
 ;fallback
 : The fallback image to be returned in case of an error (see below)
 
@@ -19,26 +19,30 @@ The conversion will fail if the text is too long and/or complex and the macro wi
 
 The error correction level is a [[QR code feature|http://www.qrcode.com/en/about/error_correction.html]]:
 
-<<<
-QR Code has error correction capability to restore data if the code is dirty or damaged. ... Level Q or H may be selected for factory environment where QR Code get dirty, whereas Level L may be selected for clean environment with the large amount of data. Typically, Level M (15%) is most frequently selected.
-<<<
+|errorCorrectLevel |Redundancy |Use cases |h
+|L | 7%|Clean environment, large amount of data |
+|M | 15%|Default value, most common choice |
+|Q | 25%|Dirty environment, small amount of data |
+|H | 30%|~|
 
 !! Examples
 
-Making a QR code for a simple string of text:
+Making a QR code data URI for a simple string of text:
 
 ```
 <<makeqr "Hello there!">>
 ```
 
-Making a QR code for the URL field of the current tiddler:
+Displaying a QR code for a simple string of text:
 
 ```
-<$macrocall $name="makeqr" text={{!!url}}/>
+<img src=<<makeqr "Hello there!">> />
 ```
 
-Making a QR code for the URL of the current wiki:
+Displaying a QR code for a transcluded value (URL of the current wiki):
 
 ```
-<$macrocall $name="makeqr" text={{$:/info/url/full}}/>
+\define qr(content) <img src=<<makeqr text:"""$content$""">> />
+
+<$transclude $variable="qr" content={{$:/info/url/full}} />
 ```

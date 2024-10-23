@@ -4,7 +4,7 @@ tags: $:/tags/ViewTemplate
 \whitespace trim
 \define title-styles() fill:$(foregroundColor)$;
 
-<div class="tc-tiddler-title">
+<div class="tc-tiddler-title tc-clearfix">
 	<div class="tc-titlebar">
 		<span class="tc-tiddler-controls">
 			<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] :filter[lookup[$:/config/ViewToolbarButtons/Visibility/]!match[hide]]"

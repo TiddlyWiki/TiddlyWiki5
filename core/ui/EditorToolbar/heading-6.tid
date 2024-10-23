@@ -3,7 +3,7 @@ tags: $:/tags/EditorToolbar
 icon: $:/core/images/heading-6
 caption: {{$:/language/Buttons/Heading6/Caption}}
 description: {{$:/language/Buttons/Heading6/Hint}}
-condition: [<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]
+condition: [<targetTiddler>!has[type]] [<targetTiddler>get[type]prefix[text/vnd.tiddlywiki]]
 shortcuts: ((heading-6))
 
 <$action-sendmessage
