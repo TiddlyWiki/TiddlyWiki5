@@ -1,13 +1,30 @@
 title: $:/snippets/allfields
 
-\define renderfield(title)
-<tr class="tc-view-field"><td class="tc-view-field-name">''<$text text=<<__title__>>/>'':</td><td class="tc-view-field-value">//{{$:/language/Docs/Fields/$title$}}//</td></tr>
-\end
 \whitespace trim
+
+\procedure lingo-base() $:/language/Docs/Fields/
+
+\function tf.getLingoText() [<lingo-base>] [<title>] +[join[]get[text]]
+
+\procedure renderfield(title)
+<tr class="tc-view-field">
+	<td class="tc-view-field-name">
+		''<$text text=<<title>>/>'':
+	</td>
+	<td class="tc-view-field-value">
+		//<<tf.getLingoText>>//
+	</td>
+	<td class="tc-view-field-list">
+		<$macrocall $name="show-filter-count" filter=`[has[$(title)$]sort[]]`>>
+	</td>
+</tr>
+\end
+
 <table class="tc-view-field-table">
-<tbody>
-<$list filter="[fields[]sort[title]]" variable="listItem">
-<$macrocall $name="renderfield" title=<<listItem>>/>
-</$list>
-</tbody>
+	<tbody>
+		<!-- <<renderfieldHeader>> -->
+		<$list filter="[fields[]sort[title]]" variable="listItem">
+			<$macrocall $name="renderfield" title=<<listItem>>/>
+		</$list>
+	</tbody>
 </table>

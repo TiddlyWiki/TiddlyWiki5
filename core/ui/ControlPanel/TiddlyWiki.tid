@@ -9,7 +9,7 @@ list-before:
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings]]">
 
-<div class="tc-control-panel-setting" data-setting-title=<<currentTiddler>> style="border-top:1px solid #eee;">
+<div class="tc-control-panel-setting" data-setting-title=<<currentTiddler>> >
 
 !!.tc-control-panel-accent <$link><$transclude field="caption"/></$link>
 

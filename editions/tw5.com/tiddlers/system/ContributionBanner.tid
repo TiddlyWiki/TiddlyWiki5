@@ -5,7 +5,7 @@ tags: $:/tags/EditTemplate
 title: $:/ContributionBanner
 
 \define base-github()
-https://github.com/Jermolene/TiddlyWiki5/edit/tiddlywiki-com/editions/tw5.com/tiddlers/
+https://github.com/TiddlyWiki/TiddlyWiki5/edit/tiddlywiki-com/editions/tw5.com/tiddlers/
 \end
 
 <$set name="draft-of" value={{{ [<currentTiddler>get[draft.of]] }}}>

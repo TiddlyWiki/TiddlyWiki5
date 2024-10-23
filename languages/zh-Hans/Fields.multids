@@ -30,6 +30,7 @@ name: 具可读性的插件条目的名称
 parent-plugin: 对于一个插件，指定其为哪个插件的子插件
 plugin-priority: 插件条目的优先级数值
 plugin-type: 插件条目的类型
+stability: 插件的开发状态：已弃用、实验性、稳定或旧版
 released: TiddlyWiki 的发布日期
 revision: 条目存放于服务器中的修订版本
 source: 条目的网址

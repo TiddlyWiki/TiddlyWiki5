@@ -33,7 +33,8 @@ exports.parse = function() {
 	// Look for the end marker
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
-		text;
+		text,
+		start = this.parser.pos;
 	// Process the text
 	if(match) {
 		text = this.parser.source.substring(this.parser.pos,match.index);
@@ -50,7 +51,9 @@ exports.parse = function() {
 			attributes: {
 				class: {type: "string", value: "tc-emphasis tc-code"}
 			},
-			text: text
+			text: text,
+			start: start,
+			end: this.parser.pos
 		}]
 	}];
 };

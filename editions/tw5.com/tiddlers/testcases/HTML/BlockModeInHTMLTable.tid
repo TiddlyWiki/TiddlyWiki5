@@ -1,0 +1,30 @@
+created: 20240713164810184
+description: Block mode for table cells
+modified: 20240713164810184
+tags: $:/tags/wiki-test-spec
+title: TestCases/HTML/BlockModeInHTMLTable
+type: text/vnd.tiddlywiki-multiple
+
+title: Narrative
+
+Unlike the table wiki syntax, the less convenient `<table>`, `<tr>`, `<td>` html tags can use a blank line
+to get block mode punctuation regognised inside of table cells.
++
+title: Output
+
+<table>
+<tr><td>
+
+* list item one
+* list item two
+</td><td>
+
+|nested|table|
+</td></tr>
+</table>
++
+title: ExpectedResult
+
+<p><table>
+<tr><td><ul><li>list item one</li><li>list item two</li></ul></td><td><table><tbody><tr class="evenRow"><td>nested</td><td>table</td></tr></tbody></table></td></tr>
+</table></p>

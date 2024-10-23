@@ -1,6 +1,6 @@
 caption: tag-picker
 created: 20161128191316701
-modified: 20230616114543787
+modified: 20240708175550512
 tags: Macros [[Core Macros]]
 title: tag-picker Macro
 type: text/vnd.tiddlywiki
@@ -19,7 +19,8 @@ The <<.def tag-picker>> [[macro|Macros]] generates a combination of a text box a
 : <<.from-version 5.3.4>> Defines the target tiddler, which should be manipulated. Defaults to: <<.var currentTiddler>>.
 
 ; tagListFilter
-: <<.from-version 5.3.4>> This parameter defaults to: `[tags[]]` which creates a list of all existing tags. If the tag list should come from a different source the filter should look similar to eg: `[<listSource>get[field-name]enlist-input[]]`. 
+: <<.from-version 5.3.4>> This parameter defaults to: `[tags[]]` which creates a list of all existing tags. If the tag list should come from a different source the filter should look similar to eg: `[<listSource>get[field-name]enlist-input[]]`. See examples.
+: <<.from-version 5.3.5>> This parameter defaults to: `[tags[]sort[]]`. This change allows a custom sort order, since `sort[]` is not hardcoded into the tag-picker macro anymore. 
 
 
 <<.macro-examples "tag-picker">>

@@ -1,0 +1,7 @@
+title: $:/language/Snippets/FunctionDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Definición Función
+
+\function f.name(param1,param2:"valor defecto") [<param1>!is[blank]else<param2>]
+
+<<f.name>>

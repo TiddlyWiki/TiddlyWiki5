@@ -1,13 +1,14 @@
+caption: transcludes
 created: 20211002204500000
+modified: 20240610085927867
+op-input: a [[selection of titles|Title Selection]]
+op-output: the titles which the input tiddlers [[hard-transclude|Hard and Soft Transclusions]]
+op-parameter: none
+op-purpose: find the titles transcluded by each input title
 tags: [[Filter Operators]] [[Common Operators]]
 title: transcludes Operator
 type: text/vnd.tiddlywiki
-caption: transcludes
-op-purpose: find the titles linked to by each input title
-op-input: a [[selection of titles|Title Selection]]
-op-parameter: none
-op-output: the titles to which the input tiddlers [[transcludes|Transclusion]]
 
-Each input title is processed in turn. The corresponding tiddler's list of transcludes is generated, in the order in which they appear in the tiddler's text, and [[dominantly appended|Dominant Append]] to the operator's overall output.
+<<.from-version 5.3.4>> Each input title is processed in turn. The corresponding tiddler's list of transclusions is generated, in the order in which they appear in the tiddler's text, and [[dominantly appended|Dominant Append]] to the operator's overall output.
 
 <<.operator-examples "transcludes">>

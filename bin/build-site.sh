@@ -5,7 +5,7 @@
 # Default to the current version number for building the plugin library
 
 if [  -z "$TW5_BUILD_VERSION" ]; then
-    TW5_BUILD_VERSION=v5.3.3
+    TW5_BUILD_VERSION=v5.3.6
 fi
 
 echo "Using TW5_BUILD_VERSION as [$TW5_BUILD_VERSION]"
@@ -162,20 +162,6 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all tour.html text/plain \
-	|| exit 1
-
-# /dev/index.html			Developer docs
-# /dev/favicon.ico			Favicon for dev site
-# /dev/static.html			Static rendering of default tiddlers
-# /dev/alltiddlers.html		Static rendering of all tiddlers
-# /dev/static/*				Static single tiddlers
-# /dev/static/static.css	Static stylesheet
-node $TW5_BUILD_TIDDLYWIKI \
-	./editions/dev \
-	--verbose \
-	--load $TW5_BUILD_OUTPUT/build.tid \
-	--output $TW5_BUILD_OUTPUT/dev \
-	--build index favicon static \
 	|| exit 1
 
 # /share.html				Custom edition for sharing via the URL
@@ -391,6 +377,17 @@ node $TW5_BUILD_TIDDLYWIKI \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/highlight/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/highlight/empty.html text/plain \
+	|| exit 1
+
+# /plugins/tiddlywiki/geospatial/index.html		Demo wiki with geospatial plugin
+# /plugins/tiddlywiki/geospatial/empty.html		Empty wiki with geospatial plugin
+node $TW5_BUILD_TIDDLYWIKI \
+	./editions/geospatialdemo \
+	--verbose \
+	--load $TW5_BUILD_OUTPUT/build.tid \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all plugins/tiddlywiki/geospatial/index.html text/plain \
+	--rendertiddler $:/core/save/empty plugins/tiddlywiki/geospatial/empty.html text/plain \
 	|| exit 1
 
 ######################################################
