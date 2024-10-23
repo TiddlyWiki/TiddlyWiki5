@@ -8,7 +8,7 @@ tags: $:/tags/Macro
 
 \function color(name)
 [function[colour],<name>]
-\end function
+\end color
 
 \define box-shadow(shadow)
 ``
