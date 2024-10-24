@@ -1,0 +1,18 @@
+title: Operators/Colour/ColourFunctionDiv
+description: Simple colour function applied to a DIV
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<div style.background=<<colour page-background>>>
+Something
+</div>
++
+title: ExpectedResult
+
+<div style="background:#f4f4f4;">
+Something
+</div>
