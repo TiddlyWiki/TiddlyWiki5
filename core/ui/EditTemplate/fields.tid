@@ -1,35 +1,32 @@
 title: $:/core/ui/EditTemplate/fields
 tags: $:/tags/EditTemplate
 
-\define lingo-base() $:/language/EditTemplate/
-\define config-title()
-$:/config/EditTemplateFields/Visibility/$(currentField)$
-\end
+\procedure lingo-base() $:/language/EditTemplate/
+\function tf.config-title() [[$:/config/EditTemplateFields/Visibility/]addsuffix[$(currentField)$]substitute[]get[text]]
 
-\define config-filter()
-[[hide]] -[title{$(config-title)$}]
-\end
+\function tf.config-filter() [[hide]] :except[title<tf.config-title>]
 
 <!-- Beware this is duplicated from EditTemplate.tid. For details see bug #7054 -->
-\define get-field-value-tiddler-filter() [subfilter<get-field-editor-filter>sha256[16]addprefix[/]addprefix<newFieldValueTiddlerPrefix>]
-\define get-field-editor-filter() [<newFieldNameTiddler>get[text]else[]] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}]
+\procedure get-field-value-tiddler-filter() [subfilter<get-field-editor-filter>sha256[16]addprefix[/]addprefix<newFieldValueTiddlerPrefix>]
+\procedure get-field-editor-filter() [<newFieldNameTiddler>get[text]else[]] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}]
 
-\define current-tiddler-new-field-selector()
-[data-tiddler-title="$(currentTiddlerCSSescaped)$"] .tc-edit-field-add-name-wrapper input
-\end
+\procedure prefix.bracket() [
+\procedure suffix.bracket() ]
 
-\define new-field-actions()
+\function tf.current-tiddler-new-field-selector() [[data-tiddler-title=]addprefix[$(prefix.bracket)$]substitute[]addsuffix<currentTiddlerCSSescaped>addsuffix[$(suffix.bracket)$]substitute[]] .tc-edit-field-add-name-wrapper input :and[join[ ]]
+
+\procedure new-field-actions()
 \whitespace trim
 <$action-sendmessage $message="tm-add-field" $name={{{ [<newFieldNameTiddler>get[text]] }}} $value={{{ [<newFieldNameTiddler>get[text]] :map[subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 <$set name="safeNewFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
 	<$action-deletetiddler $filter="[<newFieldNameTiddler>] [prefix[$:/temp/NewFieldValue]prefix<safeNewFieldValueTiddlerPrefix>] [<storeTitle>] [<searchListState>]"/>
 </$set>
-<$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/>
+<$action-sendmessage $message="tm-focus-selector" $param=<<tf.current-tiddler-new-field-selector>>/>
 \end
 
-\define delete-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<storeTitle>] [<searchListState>]"/>
+\procedure delete-state-tiddlers() <$action-deletetiddler $filter="[<newFieldNameTiddler>] [<storeTitle>] [<searchListState>]"/>
 
-\define cancel-search-actions-inner()
+\procedure cancel-search-actions-inner()
 \whitespace trim
 <$list
 	filter="[<storeTitle>has[text]] [<newFieldNameTiddler>has[text]]"
@@ -39,7 +36,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 </$list>
 \end
 
-\define cancel-search-actions()
+\procedure cancel-search-actions()
 \whitespace trim
 <$set name="userInput" value={{{ [<storeTitle>get[text]] }}}>
 <$list
@@ -50,7 +47,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 </$set>
 \end
 
-\define new-field()
+\procedure new-field()
 \whitespace trim
 <$vars name={{{ [<newFieldNameTiddler>get[text]] }}}>
 <$reveal type="nomatch" text="" default=<<name>>>
@@ -75,15 +72,15 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 
 <$set name="newFieldValueTiddlerPrefix" value=<<newFieldValueTiddlerPrefix>> emptyValue=<<qualify "$:/temp/NewFieldValue">> >
 <div class="tc-edit-fields">
-<table class={{{ [all[current]fields[]] :filter[lookup[$:/config/EditTemplateFields/Visibility/]!match[hide]] +[count[]!match[0]] +[then[tc-edit-fields]] ~[[tc-edit-fields tc-edit-fields-small]] }}}>
+<table class={{{ [all[current]fields[]] :filter[lookup[$:/config/EditTemplateFields/Visibility/]!match[hide]] :and[count[]!match[0]] :and[then[tc-edit-fields]] :else[[tc-edit-fields tc-edit-fields-small]] }}}>
 <tbody>
-<$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField" storyview="pop">
-<$list filter=<<config-filter>> variable="temp">
+<$list filter="[all[current]fields[]] :and[sort[title]]" variable="currentField" storyview="pop">
+<$list filter=<<tf.config-filter>> variable="temp">
 <tr class="tc-edit-field">
 <td class="tc-edit-field-name">
 <$text text=<<currentField>>/>:</td>
 <td class="tc-edit-field-value">
-<$keyboard key="((delete-field))" actions="""<$action-deletefield $field=<<currentField>>/><$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<current-tiddler-new-field-selector>>/></$set>""">
+<$keyboard key="((delete-field))" actions="""<$action-deletefield $field=<<currentField>>/><$set name="currentTiddlerCSSescaped" value={{{ [<currentTiddler>escapecss[]] }}}><$action-sendmessage $message="tm-focus-selector" $param=<<tf.current-tiddler-new-field-selector>>/></$set>""">
 <$transclude tiddler={{{ [<currentField>] :cascade[all[shadows+tiddlers]tag[$:/tags/FieldEditorFilter]!is[draft]get[text]] :and[!is[blank]else{$:/core/ui/EditTemplate/fieldEditor/default}] }}} />
 </$keyboard>
 </td>
@@ -107,10 +104,10 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 </em>
 <$vars refreshTitle=<<qualify "$:/temp/fieldname/refresh">> storeTitle=<<newFieldNameInputTiddler>> searchListState=<<newFieldNameSelectionTiddler>>>
 <div class="tc-edit-field-add-name-wrapper">
-<$macrocall $name="keyboard-driven-input" tiddler=<<newFieldNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
+<$transclude $variable="keyboard-driven-input" tiddler=<<newFieldNameTiddler>> storeTitle=<<storeTitle>> refreshTitle=<<refreshTitle>>
 		selectionStateTitle=<<searchListState>> tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}}
 		focusPopup=<<qualify "$:/state/popup/field-dropdown">> class="tc-edit-texteditor tc-popup-handle" tabindex={{$:/config/EditTabIndex}}
-		focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] ~[[false]] }}} cancelPopups="yes"
+		focus={{{ [{$:/config/AutoFocus}match[fields]then[true]] :else[[false]] }}} cancelPopups="yes"
 		configTiddlerFilter="[[$:/config/EditMode/fieldname-filter]]" inputCancelActions=<<cancel-search-actions>> />
 <$button popup=<<qualify "$:/state/popup/field-dropdown">> class="tc-btn-invisible tc-btn-dropdown tc-small-gap" tooltip={{$:/language/EditTemplate/Field/Dropdown/Hint}} aria-label={{$:/language/EditTemplate/Field/Dropdown/Caption}}>{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/field-dropdown">> type="nomatch" text="" default="">
@@ -121,8 +118,8 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 <<lingo Fields/Add/Dropdown/User>>
 </div>
 <$set name="newFieldName" value={{{ [<storeTitle>get[text]] }}}>
-<$list filter="[!is[shadow]!is[system]fields[]search:title<newFieldName>sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
-<$list filter="[<currentField>addsuffix[-primaryList]] -[<searchListState>get[text]]" emptyMessage="""<$link to=<<currentField>> class="tc-list-item-selected"><$text text=<<currentField>>/></$link>""">
+<$list filter="[!is[shadow]!is[system]fields[]search:title<newFieldName>sort[]] :except[[created]] :except[[creator]] :except[[draft.of]] :except[[draft.title]] :except[[modified]] :except[[modifier]] :except[[tags]] :except[[text]] :except[[title]] :except[[type]]"  variable="currentField">
+<$list filter="[<currentField>addsuffix[-primaryList]] :except[<searchListState>get[text]]" emptyMessage="""<$link to=<<currentField>> class="tc-list-item-selected"><$text text=<<currentField>>/></$link>""">
 <$link to=<<currentField>>>
 <$text text=<<currentField>>/>
 </$link>
@@ -131,8 +128,8 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 <div class="tc-dropdown-item">
 <<lingo Fields/Add/Dropdown/System>>
 </div>
-<$list filter="[fields[]search:title<newFieldName>sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
-<$list filter="[<currentField>addsuffix[-secondaryList]] -[<searchListState>get[text]]" emptyMessage="""<$link to=<<currentField>> class="tc-list-item-selected"><$text text=<<currentField>>/></$link>""">
+<$list filter="[fields[]search:title<newFieldName>sort[]] :except[!is[shadow]!is[system]fields[]]" variable="currentField">
+<$list filter="[<currentField>addsuffix[-secondaryList]] :except[<searchListState>get[text]]" emptyMessage="""<$link to=<<currentField>> class="tc-list-item-selected"><$text text=<<currentField>>/></$link>""">
 <$link to=<<currentField>>>
 <$text text=<<currentField>>/>
 </$link>
@@ -151,7 +148,7 @@ $value={{{ [subfilter<get-field-value-tiddler-filter>get[text]] }}}/>
 </$keyboard>
 </span>
 <span class="tc-edit-field-add-button">
-<$macrocall $name="new-field"/>
+<$transclude $variable="new-field"/>
 </span>
 </$let>
 </$vars>
