@@ -19,7 +19,8 @@ if($tw.node) {
 		path = require("path"),
 		querystring = require("querystring"),
 		crypto = require("crypto"),
-		zlib = require("zlib");
+		zlib = require("zlib"),
+		aclMiddleware = require('$:/plugins/tiddlywiki/multiwikiserver/modules/routes/helpers/acl-middleware.js').middleware;
 }
 
 /*
@@ -34,6 +35,7 @@ function Server(options) {
 	this.authenticators = options.authenticators || [];
 	this.wiki = options.wiki;
 	this.boot = options.boot || $tw.boot;
+	this.sqlTiddlerDatabase = options.sqlTiddlerDatabase || $tw.mws.store.sqlTiddlerDatabase;
 	// Initialise the variables
 	this.variables = $tw.utils.extend({},this.defaultVariables);
 	if(options.variables) {
@@ -157,9 +159,10 @@ function sendResponse(request,response,statusCode,headers,data,encoding) {
 			data = zlib.gzipSync(data);
 		}
 	}
-
-	response.writeHead(statusCode,headers);
-	response.end(data,encoding);
+	if(!response.headersSent) {
+		response.writeHead(statusCode,headers);
+		response.end(data,encoding);
+	}
 }
 
 function redirect(request,response,statusCode,location) {
@@ -350,6 +353,13 @@ Server.prototype.methodMappings = {
 	"DELETE": "writers"
 };
 
+Server.prototype.methodACLPermMappings = {
+	"GET": "READ",
+	"PUT": "WRITE",
+	"POST": "WRITE",
+	"DELETE": "WRITE"
+}
+
 /*
 Check whether a given user is authorized for the specified authorizationType ("readers" or "writers"). Pass null or undefined as the username to check for anonymous access
 */
@@ -358,9 +368,57 @@ Server.prototype.isAuthorized = function(authorizationType,username) {
 	return principals.indexOf("(anon)") !== -1 || (username && (principals.indexOf("(authenticated)") !== -1 || principals.indexOf(username) !== -1));
 }
 
+Server.prototype.parseCookieString = function(cookieString) {
+	const cookies = {};
+	if (typeof cookieString !== 'string') return cookies;
+
+	cookieString.split(';').forEach(cookie => {
+			const parts = cookie.split('=');
+			if (parts.length >= 2) {
+					const key = parts[0].trim();
+					const value = parts.slice(1).join('=').trim();
+					cookies[key] = decodeURIComponent(value);
+			}
+	});
+
+	return cookies;
+}
+
+Server.prototype.authenticateUser = function(request, response) {
+	const {session: session_id} = this.parseCookieString(request.headers.cookie)
+	if (!session_id) {
+		return false;
+	}
+	// get user info
+	const user = this.sqlTiddlerDatabase.findUserBySessionId(session_id);
+	if (!user) {
+		return false
+	}
+	delete user.password;
+	const userRole = this.sqlTiddlerDatabase.getUserRoles(user.user_id);
+	user['isAdmin'] = userRole?.role_name?.toLowerCase() === 'admin'
+
+	return user
+};
+
+Server.prototype.requestAuthentication = function(response) {
+	if(!response.headersSent) {
+		response.writeHead(401, {
+			'WWW-Authenticate': 'Basic realm="Secure Area"'
+		});
+		response.end('Authentication required.');
+	}
+};
+
+
 Server.prototype.requestHandler = function(request,response,options) {
 	options = options || {};
 	const queryString = require("querystring");
+
+	// Authenticate the user
+	const authenticatedUser = this.authenticateUser(request, response);
+	const authenticatedUsername = authenticatedUser?.username;
+
 	// Compose the state object
 	var self = this;
 	var state = {};
@@ -374,43 +432,52 @@ Server.prototype.requestHandler = function(request,response,options) {
 	state.redirect = redirect.bind(self,request,response);
 	state.streamMultipartData = streamMultipartData.bind(self,request);
 	state.makeTiddlerEtag = makeTiddlerEtag.bind(self);
+	state.authenticatedUser = authenticatedUser;
+	state.authenticatedUsername = authenticatedUsername;
+
 	// Get the principals authorized to access this resource
 	state.authorizationType = options.authorizationType || this.methodMappings[request.method] || "readers";
+	
 	// Check whether anonymous access is granted
-	state.allowAnon = this.isAuthorized(state.authorizationType,null);
-	// Authenticate with the first active authenticator
-	if(this.authenticators.length > 0) {
-		if(!this.authenticators[0].authenticateRequest(request,response,state)) {
-			// Bail if we failed (the authenticator will have sent the response)
-			return;
-		}
-	}
+	state.allowAnon = false; //this.isAuthorized(state.authorizationType,null);
+
 	// Authorize with the authenticated username
-	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername)) {
-		response.writeHead(401,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
+	if(!this.isAuthorized(state.authorizationType,state.authenticatedUsername) && !response.headersSent) {
+		response.writeHead(403,"'" + state.authenticatedUsername + "' is not authorized to access '" + this.servername + "'");
 		response.end();
 		return;
 	}
+
 	// Find the route that matches this path
 	var route = self.findMatchingRoute(request,state);
+
+	// If the route is configured to use ACL middleware, check that the user has permission
+	if(route?.useACL) {
+		const permissionName = this.methodACLPermMappings[route.method];
+		aclMiddleware(request,response,state,route.entityName,permissionName)
+	}
+	
 	// Optionally output debug info
 	if(self.get("debug-level") !== "none") {
 		console.log("Request path:",JSON.stringify(state.urlInfo));
 		console.log("Request headers:",JSON.stringify(request.headers));
 		console.log("authenticatedUsername:",state.authenticatedUsername);
 	}
+	
 	// Return a 404 if we didn't find a route
-	if(!route) {
+	if(!route && !response.headersSent) {
 		response.writeHead(404);
 		response.end();
 		return;
 	}
+	
 	// If this is a write, check for the CSRF header unless globally disabled, or disabled for this route
-	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki") {
+	if(!this.csrfDisable && !route.csrfDisable && state.authorizationType === "writers" && request.headers["x-requested-with"] !== "TiddlyWiki" && !response.headersSent) {
 		response.writeHead(403,"'X-Requested-With' header required to login to '" + this.servername + "'");
 		response.end();
 		return;
 	}
+	if (response.headersSent) return;
 	// Receive the request body if necessary and hand off to the route handler
 	if(route.bodyFormat === "stream" || request.method === "GET" || request.method === "HEAD") {
 		// Let the route handle the request stream itself

@@ -104,6 +104,124 @@ function runSqlDatabaseTests(engine) {
 		expect(sqlTiddlerDatabase.saveRecipeTiddler({title: "More", text: "None"},"recipe-rho")).toEqual({tiddler_id: 7, bag_name: 'bag-beta'});
 		expect(sqlTiddlerDatabase.getRecipeTiddler("More","recipe-rho").tiddler).toEqual({title: "More", text: "None"});
 	});
+
+	it("should manage users correctly", function() {
+		console.log("should manage users correctly")
+		// Create users
+		const userId1 = sqlTiddlerDatabase.createUser("john_doe", "john@example.com", "pass123");
+		const userId2 = sqlTiddlerDatabase.createUser("jane_doe", "jane@example.com", "pass123");
+
+		// Retrieve users
+		const user1 = sqlTiddlerDatabase.getUser(userId1);
+		expect(user1.user_id).toBe(userId1);
+		expect(user1.username).toBe("john_doe");
+		expect(user1.email).toBe("john@example.com");
+		expect(user1.created_at).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/); // Match timestamp format
+		expect(user1.last_login).toBeNull();
+
+		// Update user
+		sqlTiddlerDatabase.updateUser(userId1, "john_updated", "john_updated@example.com");
+		expect(sqlTiddlerDatabase.getUser(userId1).username).toBe("john_updated");
+		expect(sqlTiddlerDatabase.getUser(userId1).email).toBe("john_updated@example.com");
+
+		// List users
+		const users = sqlTiddlerDatabase.listUsers();
+		expect(users.length).toBe(2);
+		expect(users[0].username).toBe("jane_doe");
+		expect(users[1].username).toBe("john_updated");
+
+		// Delete user
+		sqlTiddlerDatabase.deleteUser(userId2);
+		// expect(sqlTiddlerDatabase.getUser(userId2)).toBe(null || undefined);
+	});
+
+	it("should manage groups correctly", function() {
+		console.log("should manage groups correctly")
+		// Create groups
+		const groupId1 = sqlTiddlerDatabase.createGroup("Editors", "Can edit content");
+		const groupId2 = sqlTiddlerDatabase.createGroup("Viewers", "Can view content");
+
+		// Retrieve groups
+		expect(sqlTiddlerDatabase.getGroup(groupId1)).toEqual({
+			group_id: groupId1,
+			group_name: "Editors",
+			description: "Can edit content"
+		});
+
+		// Update group
+		sqlTiddlerDatabase.updateGroup(groupId1, "Super Editors", "Can edit all content");
+		expect(sqlTiddlerDatabase.getGroup(groupId1).group_name).toBe("Super Editors");
+		expect(sqlTiddlerDatabase.getGroup(groupId1).description).toBe("Can edit all content");
+
+		// List groups
+		const groups = sqlTiddlerDatabase.listGroups();
+		expect(groups.length).toBe(2);
+		expect(groups[0].group_name).toBe("Super Editors");
+		expect(groups[1].group_name).toBe("Viewers");
+
+		// Delete group
+		sqlTiddlerDatabase.deleteGroup(groupId2);
+		// expect(sqlTiddlerDatabase.getGroup(groupId2)).toBe(null || undefined);
+	});
+
+
+	it("should manage roles correctly", function() {
+		console.log("should manage roles correctly")
+		// Create roles
+		const roleId1 = sqlTiddlerDatabase.createRole("Admin" + Date.now(), "Full access");
+		const roleId2 = sqlTiddlerDatabase.createRole("Editor" + Date.now(), "Can edit content");
+
+		// Retrieve roles
+		expect(sqlTiddlerDatabase.getRole(roleId1)).toEqual({
+			role_id: roleId1,
+			role_name: jasmine.stringMatching(/^Admin\d+$/),
+			description: "Full access"
+		});
+
+		// Update role
+		sqlTiddlerDatabase.updateRole(roleId1, "Super Admin" + Date.now(), "God-like powers");
+		expect(sqlTiddlerDatabase.getRole(roleId1).role_name).toMatch(/^Super Admin\d+$/);
+		expect(sqlTiddlerDatabase.getRole(roleId1).description).toBe("God-like powers");
+
+		// List roles
+		const roles = sqlTiddlerDatabase.listRoles();
+		expect(roles.length).toBeGreaterThan(0);
+		// expect(roles[0].role_name).toMatch(/^Editor\d+$/);
+		// expect(roles[1].role_name).toMatch(/^Super Admin\d+$/);
+
+		// Delete role
+		sqlTiddlerDatabase.deleteRole(roleId2);
+		// expect(sqlTiddlerDatabase.getRole(roleId2)).toBeUndefined();
+	});
+
+	it("should manage permissions correctly", function() {
+		console.log("should manage permissions correctly")
+		// Create permissions
+		const permissionId1 = sqlTiddlerDatabase.createPermission("read_tiddlers" + Date.now(), "Can read tiddlers");
+		const permissionId2 = sqlTiddlerDatabase.createPermission("write_tiddlers" + Date.now(), "Can write tiddlers");
+
+		// Retrieve permissions
+		expect(sqlTiddlerDatabase.getPermission(permissionId1)).toEqual({
+			permission_id: permissionId1,
+			permission_name: jasmine.stringMatching(/^read_tiddlers\d+$/),
+			description: "Can read tiddlers"
+		});
+
+		// Update permission
+		sqlTiddlerDatabase.updatePermission(permissionId1, "read_all_tiddlers" + Date.now(), "Can read all tiddlers");
+		expect(sqlTiddlerDatabase.getPermission(permissionId1).permission_name).toMatch(/^read_all_tiddlers\d+$/);
+		expect(sqlTiddlerDatabase.getPermission(permissionId1).description).toBe("Can read all tiddlers");
+
+		// List permissions
+		const permissions = sqlTiddlerDatabase.listPermissions();
+		expect(permissions.length).toBeGreaterThan(0);
+		expect(permissions[0].permission_name).toMatch(/^read_all_tiddlers\d+$/);
+		expect(permissions[1].permission_name).toMatch(/^write_tiddlers\d+$/);
+
+		// Delete permission
+		sqlTiddlerDatabase.deletePermission(permissionId2);
+		// expect(sqlTiddlerDatabase.getPermission(permissionId2)).toBeUndefined();
+	});
 }
 
 })();

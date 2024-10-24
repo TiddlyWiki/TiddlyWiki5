@@ -1,0 +1,93 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/add-user-form
+
+<h1>Add New User</h1>
+<form method="POST" action="/admin/post-user">
+	<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" class="form-input" required>
+	</div>
+	<div class="form-group">
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" class="form-input" required>
+	</div>
+	<div class="form-group">
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password" class="form-input" required>
+	</div>
+	<div class="form-group">
+		<label for="confirmPassword">Confirm Password:</label>
+		<input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required>
+	</div>
+
+	<div class="form-actions">
+		<$button class="btn btn-primary">
+			Add User
+			<<add-user-actions>>
+			<$action-sendmessage $message="tm-close-tiddler"/>
+		</$button>
+	</div>
+</form>
+
+<style>
+.add-user-form {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.add-user-form h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5em;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-actions {
+  margin-top: 20px;
+	display: flex;
+	gap: 1rem;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn {
+	width: 100%;
+	margin: auto;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+</style>
