@@ -37,7 +37,10 @@ tags: $:/tags/Macro
 \end
 
 \define toc(tag,sort:"",itemClassFilter:"", exclude)
-<$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>>/>
+\whitespace trim
+<$let __tag__={{{ [<__tag__>is[blank]then<currentTiddler>else<__tag__>] }}} >
+  <$macrocall $name="toc-body"  tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> exclude=<<__exclude__>>/>
+</$let>
 \end
 
 \define toc-linked-expandable-body(tag,sort:"",itemClassFilter,exclude,path)
@@ -99,7 +102,7 @@ tags: $:/tags/Macro
 
 \define toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path)
 \whitespace trim
-<$let tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+<$let __tag__={{{ [<__tag__>is[blank]then<currentTiddler>else<__tag__>] }}} tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
   <$set name="excluded" filter="[subfilter<__exclude__>] [<__tag__>]">
     <ol class="tc-toc toc-expandable">
       <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[subfilter<__exclude__>]""">
@@ -173,7 +176,7 @@ tags: $:/tags/Macro
 
 \define toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path)
 \whitespace trim
-<$let tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
+<$let __tag__={{{ [<__tag__>is[blank]then<currentTiddler>else<__tag__>] }}} tag=<<__tag__>> sort=<<__sort__>> itemClassFilter=<<__itemClassFilter__>> path={{{ [<__path__>addsuffix[/]addsuffix<__tag__>] }}}>
   <$set name="excluded" filter="[subfilter<__exclude__>] [<__tag__>]">
     <ol class="tc-toc toc-selective-expandable">
       <$list filter="""[all[shadows+tiddlers]tag<__tag__>!has[draft.of]$sort$] -[<__tag__>] -[subfilter<__exclude__>]""">
@@ -188,31 +191,35 @@ tags: $:/tags/Macro
 
 \define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
 \whitespace trim
-<$tiddler tiddler={{{ [<__selectedTiddler__>get[text]] }}}>
-  <div class="tc-tabbed-table-of-contents">
-    <$linkcatcher to=<<__selectedTiddler__>>>
-      <div class="tc-table-of-contents">
-        <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="[all[current]] -[<__selectedTiddler__>get[text]]" exclude=<<__exclude__>>/>
+<$let __tag__={{{ [<__tag__>is[blank]then<currentTiddler>else<__tag__>] }}}>
+  <$tiddler tiddler={{{ [<__selectedTiddler__>get[text]] }}}>
+    <div class="tc-tabbed-table-of-contents">
+      <$linkcatcher to=<<__selectedTiddler__>>>
+        <div class="tc-table-of-contents">
+          <$macrocall $name="toc-selective-expandable" tag=<<__tag__>> sort=<<__sort__>> itemClassFilter="[all[current]] -[<__selectedTiddler__>get[text]]" exclude=<<__exclude__>>/>
+        </div>
+      </$linkcatcher>
+      <div class="tc-tabbed-table-of-contents-content">
+        <$reveal stateTitle=<<__selectedTiddler__>> type="nomatch" text="">
+          <$transclude mode="block" tiddler=<<__template__>>>
+            <h1><<toc-caption>></h1>
+            <$transclude mode="block">$missingText$</$transclude>
+          </$transclude>
+        </$reveal>
+        <$reveal stateTitle=<<__selectedTiddler__>> type="match" text="">
+          $unselectedText$
+        </$reveal>
       </div>
-    </$linkcatcher>
-    <div class="tc-tabbed-table-of-contents-content">
-      <$reveal stateTitle=<<__selectedTiddler__>> type="nomatch" text="">
-        <$transclude mode="block" tiddler=<<__template__>>>
-          <h1><<toc-caption>></h1>
-          <$transclude mode="block">$missingText$</$transclude>
-        </$transclude>
-      </$reveal>
-      <$reveal stateTitle=<<__selectedTiddler__>> type="match" text="">
-        $unselectedText$
-      </$reveal>
     </div>
-  </div>
-</$tiddler>
+  </$tiddler>
+</$let>
 \end
 
 \define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude)
 \whitespace trim
-<$linkcatcher to=<<__selectedTiddler__>>>
-  <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>> exclude=<<__exclude__>> />
-</$linkcatcher>
+<$let __tag__={{{ [<__tag__>is[blank]then<currentTiddler>else<__tag__>] }}}>
+  <$linkcatcher to=<<__selectedTiddler__>>>
+    <$macrocall $name="toc-tabbed-external-nav" tag=<<__tag__>> sort=<<__sort__>> selectedTiddler=<<__selectedTiddler__>> unselectedText=<<__unselectedText__>> missingText=<<__missingText__>> template=<<__template__>> exclude=<<__exclude__>> />
+  </$linkcatcher>
+</$let>
 \end
