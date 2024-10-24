@@ -1,0 +1,18 @@
+title: Operators/Colour/ColourDarken
+description: Darken colour function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+[function[colour],[primary]colour-darken[0.5]]
++
+title: ExpectedResult
+
+#0f1d77

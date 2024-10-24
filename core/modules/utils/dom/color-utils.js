@@ -12,20 +12,34 @@ Color.js related utilities
 /*global $tw: false */
 "use strict";
 
+var Color = require("$:/core/modules/utils/dom/color.js").Color;
+
+/*
+For backwards compatibility
+*/
 exports.parseCSSColor = function(colourString) {
-	var Color = require("$:/core/modules/utils/dom/color.js").Color,
-		c = null;
-	try {
-		c = new Color(colourString);
-	} catch(e) {
-		// Do nothing on an error
-	}
+	var c = exports.parseCSSColorObject(colourString);
 	if(c) {
 		var rgb = c.srgb;
 		return [rgb[0],rgb[1],rgb[2],c.alpha];
 	} else {
 		return null;
 	}
+};
+
+
+/*
+Preferred way to parse a Color.js colour
+*/
+exports.parseCSSColorObject = function(colourString) {
+	var Color = require("$:/core/modules/utils/dom/color.js").Color,
+		c = null;
+	try {
+		c = new Color(colourString);
+	} catch(e) {
+		// Return null if there is an error
+	}
+	return c;
 };
 
 })();
