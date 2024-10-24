@@ -428,6 +428,11 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 		destPrefix = options.destPrefix || "",
 		EVENT_ATTRIBUTE_PREFIX = "on";
 	var assignAttribute = function(name,value) {
+		// Process any CSS custom properties
+		if(name.substr(0,2) === "--" && name.length > 2) {
+			domNode.style.setProperty(name,value);
+			return;
+		}
 		// Process any style attributes before considering sourcePrefix and destPrefix
 		if(name.substr(0,6) === "style." && name.length > 6) {
 			domNode.style[$tw.utils.unHyphenateCss(name.substr(6))] = value;

@@ -1,0 +1,15 @@
+title: Widgets/ElementWidgetCSSCustomProps
+description: Element widget should support CSS custom properties
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\whitespace trim
+<div class="hello" onclick="clicked" style.color="blue" style.color="red" style.background="yellow" --bg-color="purple">
+TiddlyWiki
+</div>
++
+title: ExpectedResult
+
+<p><div class="hello" style="color:red;background:yellow;--bg-color:purple;">TiddlyWiki</div></p>
