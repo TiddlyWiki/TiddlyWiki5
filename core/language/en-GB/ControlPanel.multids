@@ -175,6 +175,8 @@ Settings/NavigationPermalinkviewMode/UpdateAddressBar/Description: Update addres
 Settings/PerformanceInstrumentation/Caption: Performance Instrumentation
 Settings/PerformanceInstrumentation/Hint: Displays performance statistics in the browser developer console. Requires reload to take effect
 Settings/PerformanceInstrumentation/Description: Enable performance instrumentation
+Settings/RecentLimit/Caption: Recent Tab Limit 
+Settings/RecentLimit/Hint: Maximum number of tiddlers to be displayed under the sidebar "Recent" tab
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
 Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
 Settings/ToolbarButtonStyle/Styles/Borderless: Borderless
