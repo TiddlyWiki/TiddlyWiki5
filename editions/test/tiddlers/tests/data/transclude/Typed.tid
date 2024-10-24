@@ -29,10 +29,10 @@ testindex: This is ''wikitext''
 +
 title: ExpectedResult
 
-<p>This is <strong>wikitext</strong>
+<p>This is <strong class="tc-emphasis tc-strong">wikitext</strong>
 -
-<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong>wikitext</strong>
+<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong class="tc-emphasis tc-strong">wikitext</strong>
 -
-<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong>wikitext</strong>
+<pre><code>This is ''wikitext''</code></pre></p><p>This is <strong class="tc-emphasis tc-strong">wikitext</strong>
 -
 <pre><code>This is ''wikitext''</code></pre></p>

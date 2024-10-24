@@ -30,7 +30,7 @@ title: ExpectedResult
 
 ! Not Heading
 
-Text with <strong>bold</strong><h1 class="">Heading</h1><p>Text with <strong>bold</strong></p><p>! Not Heading
+Text with <strong class="tc-emphasis tc-strong">bold</strong><h1 class="">Heading</h1><p>Text with <strong class="tc-emphasis tc-strong">bold</strong></p><p>! Not Heading
 
-Text with <strong>bold</strong><h1 class="">Heading</h1><p>Text with <strong>bold</strong></p>
+Text with <strong class="tc-emphasis tc-strong">bold</strong><h1 class="">Heading</h1><p>Text with <strong class="tc-emphasis tc-strong">bold</strong></p>
 </p>

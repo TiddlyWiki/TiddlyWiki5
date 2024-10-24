@@ -43,6 +43,9 @@ exports.parse = function() {
 	return [{
 		type: "element",
 		tag: "strike",
+		attributes: {
+			class: {type: "string", value: "tc-emphasis tc-strike"}
+		},
 		children: tree
 	}];
 };
