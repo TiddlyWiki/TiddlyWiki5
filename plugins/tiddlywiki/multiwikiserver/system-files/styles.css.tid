@@ -1,0 +1,113 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/system-files/styles.css
+tags: $:/tags/MWS/SystemFileWikified
+system-file-type: text/css
+
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+/* Import TiddlyWiki theme styles */
+
+{{$:/core/ui/PageStylesheet}}
+
+/* MWS Styles */
+
+body {
+	padding: 1rem;
+}
+
+.mws-wiki-card {
+	display: flex;
+	margin: 1em 0;
+	width: 100%;
+	text-decoration: none;
+	color: <<colour foreground>>;
+	background: <<colour background>>;
+	border-radius: 0.28571429rem;
+	box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+	padding: 0.5em 0.5em 0.5em 1em;
+}
+
+
+.mws-wiki-card:hover {
+	background: <<colour tiddler-info-background>>;
+	color: <<colour foreground>>;
+}
+
+.mws-wiki-card-image {
+	display: flex;
+	align-items: center;
+}
+
+.mws-wiki-card-content {
+	padding-left: 1em;
+}
+
+.mws-wiki-card-header {
+	font-size: 1.3em;
+	font-weight: bold;
+	margin: 0 0 0.25em 0;
+}
+
+.mws-wiki-card-meta {
+	color: <<colour muted-foreground>>;
+}
+
+.mws-wiki-card-description {
+
+}
+
+.mws-vertical-list {
+	list-style: none;
+	padding: 0;
+	line-height: 1.5;
+}
+
+.mws-horizontal-list {
+	list-style: none;
+	padding: 0;
+}
+
+.mws-horizontal-list > li {
+	display: inline-block;
+}
+
+.mws-bag-pill {
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+	margin-right: 0.5em;
+	border-radius: 0.25em;
+	padding: 0 0.25em;
+}
+
+.mws-bag-pill:hover {
+	background: <<colour foreground>>;
+	color: <<colour background>>;
+	fill: <<colour background>>;
+}
+
+.mws-bag-pill-topmost {
+	background: <<colour very-muted-foreground>>;
+}
+
+.mws-bag-pill .mws-bag-pill-label {
+	margin-left: 0.5em;
+}
+
+.mws-bag-pill-link {
+	text-decoration: none;
+	color: currentcolor;
+}
+
+.mws-favicon {
+	object-fit: contain;
+	width: 4em;
+	max-height: 4em;
+}
+
+.mws-favicon-small {
+	object-fit: contain;
+	vertical-align: text-bottom;
+	width: 1em;
+	max-height: 1em;
+}
