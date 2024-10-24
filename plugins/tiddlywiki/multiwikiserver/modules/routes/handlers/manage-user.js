@@ -44,8 +44,6 @@ GET /admin/users/:user_id
 		// Get all roles which the user has been assigned
 		var userRole = state.server.sqlTiddlerDatabase.getUserRoles(user_id);
 		var allRoles = state.server.sqlTiddlerDatabase.listRoles();
-
-		console.log("userRole", userRole, state.authenticatedUser.isAdmin);
 		
 		response.writeHead(200, "OK", {
 			"Content-Type": "text/html"
@@ -58,7 +56,7 @@ GET /admin/users/:user_id
 				"user": JSON.stringify(user),
 				"user-role": JSON.stringify(userRole),
 				"all-roles": JSON.stringify(allRoles),
-				"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id == user_id ? "yes" : "no",
+				"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === parseInt(user_id) ? "yes" : "no",
 				"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"		
 			}

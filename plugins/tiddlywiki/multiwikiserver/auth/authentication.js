@@ -15,11 +15,11 @@ Handles authentication related operations
 
 var crypto = require("crypto");
 
-function Authenticator($tw) {
+function Authenticator(database) {
 	if(!(this instanceof Authenticator)) {
-		return new Authenticator($tw);
+		return new Authenticator(database);
 	}
-	this.sqlTiddlerDatabase = $tw.mws.store.sqlTiddlerDatabase;
+	this.sqlTiddlerDatabase = database;
 }
 
 Authenticator.prototype.verifyPassword = function(inputPassword, storedHash) {

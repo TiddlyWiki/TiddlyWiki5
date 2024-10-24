@@ -1321,6 +1321,51 @@ SqlTiddlerDatabase.prototype.getUserRoles = function(userId) {
 	return this.engine.runStatementGet(query, { $userId: userId });
 };
 
+SqlTiddlerDatabase.prototype.isRoleInUse = function(roleId) {
+	// Check if the role is assigned to any users
+	const userRoleCheck = this.engine.runStatementGet(`
+		SELECT 1
+		FROM user_roles
+		WHERE role_id = $roleId
+		LIMIT 1
+	`, {
+		$roleId: roleId
+	});
+
+	if(userRoleCheck) {
+		return true;
+	}
+
+	// Check if the role is used in any ACLs
+	const aclRoleCheck = this.engine.runStatementGet(`
+		SELECT 1
+		FROM acl
+		WHERE role_id = $roleId
+		LIMIT 1
+	`, {
+		$roleId: roleId
+	});
+
+	if(aclRoleCheck) {
+		return true;
+	}
+
+	// If we've reached this point, the role is not in use
+	return false;
+};
+
+SqlTiddlerDatabase.prototype.getRoleById = function(roleId) {
+	const role = this.engine.runStatementGet(`
+		SELECT role_id, role_name, description
+		FROM roles
+		WHERE role_id = $roleId
+	`, {
+		$roleId: roleId
+	});
+
+	return role;
+};
+
 exports.SqlTiddlerDatabase = SqlTiddlerDatabase;
 
 })();

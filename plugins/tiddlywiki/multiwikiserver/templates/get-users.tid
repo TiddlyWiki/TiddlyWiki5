@@ -44,19 +44,30 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
 			</$let>
 		</$list>
 	</div>
-		
-	<div class="add-user-form">
-		<$button class="tc-btn-big-green">
-			Add New User
-			<$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/multiwikiserver/templates/add-user-modal"/>
-		</$button>
-	</div>
+
+	<$list filter="[<user-is-admin>match[yes]]">		
+		<div class="add-user-card">
+			<$transclude tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/add-user-form" mode="inline"/>
+		</div>
+	</$list>
 </div>
 
 <style>
 	.users-container {
-		max-width: 800px;
-		margin: 2rem auto;
+		max-width: 1200px;
+		display: flex;
+		justify-content: space-between;
+		gap: 2rem;
+	}
+	.users-list {
+		flex: 1;
+		background: #fff;
+		border-radius: 8px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		padding: 2rem;
+	}
+	.add-user-card {
+		width: 300px;
 		background: #fff;
 		border-radius: 8px;
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -95,8 +106,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
 		margin-top: 0.5rem;
 	}
 	.add-user-form {
-		margin-top: 2rem;
-		text-align: right;
+		display: none; /* Hide the original add user button */
 	}
 	.tc-btn-big-green {
 		background-color: #4CAF50;

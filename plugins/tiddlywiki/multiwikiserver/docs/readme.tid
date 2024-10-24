@@ -48,11 +48,21 @@ Our application has transitioned from a conventional username/password authentic
 4. Access Control List (ACL)
 
 ## Running the App
-By default, the Multiwiki Server starts up without authentication enabled. In order to enabled authentication, start the app using the following command:
+By default, the Multiwiki Server starts up without the need for authentication. An admin user is created by default with the username `user` and password `pass123`.
+This user has the `ADMIN` role which grants full access to all recipes. This user is automatically assigned the `READ` and `WRITE` permissions.
+You can create additional users and roles through the admin interface.
+
+Access control is enforced at the recipe level. A user can read or write to a recipe if they have the `READ` or `WRITE` permission for that recipe.
+Roles can be assigned to users and can have the `READ` and `WRITE` permissions assigned to them.
+
+Guest users have no permissions and can only access recipes that do not have an ACL assigned to them.
+
+To start the app, run the following command:
 
 ```bash
-npm run start -- --mws-use-auth
+npm run start
 ```
+
 
 ## Setting Up the Admin User
 

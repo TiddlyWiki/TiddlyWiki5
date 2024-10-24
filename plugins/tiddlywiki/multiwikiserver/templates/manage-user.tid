@@ -39,53 +39,16 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 			</div>
 		</div>
 	</div>
-
-	<$list filter="[<user-is-admin>match[yes]] [<is-current-user-profile>match[yes]]">
-		<div class="user-profile-management">
-			<h2>Manage Account</h2>
-			<$set name="current-role-id" value={{{ [<user-role>jsonget[role_id]] }}}>
-				<form class="user-profile-form" action="/update-user-profile" method="POST">
-					<div class="form-group">
-						<label for="username">Username:</label>
-						<input type="text" id="username" name="username" value={{{ [<user>jsonget[username]] }}} required />
-					</div>
-					<div class="form-group">
-						<label for="email">Email:</label>
-						<input type="email" id="email" name="email" value={{{ [<user>jsonget[email]] }}} required />
-					</div>
-					<$list filter="[<user-is-admin>match[yes]]">
-						<div class="form-group">
-							<label for="role">Role:</label>
-							<select id="role" name="role" required>
-								<$list filter="[<all-roles>jsonindexes[]]" variable="role-index">
-									<$set name="role-id" value={{{ [<all-roles>jsonextract<role-index>jsonget[role_id]] }}}>
-										<option value=<<role-id>>
-											<$list filter="[<current-role-id>match<role-id>]" variable="ignore">selected</$list>
-											<$text text={{{ [<all-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
-										</option>
-									</$set>
-								</$list>
-							</select>
-						</div>
-					</$list>
-					<button type="submit" class="update-profile-btn">Update Profile</button>
-				</form>
-			</$set>
-			<hr />
-			<h2>Change Password</h2>
-			<form class="user-profile-form" action="/change-user-password" method="POST">
-				<div class="form-group">
-					<label for="new-password">New Password:</label>
-					<input type="password" id="new-password" name="newPassword" required />
-				</div>
-				<div class="form-group">
-					<label for="confirm-password">Confirm New Password:</label>
-					<input type="password" id="confirm-password" name="confirmPassword" required />
-				</div>
-				<button type="submit" class="update-password-btn">Change Password</button>
-			</form>
-		</div>
-	</$list>
+ 
+	<% if [<user-is-admin>match[yes]] %>
+		<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account">
+			<$transclude/>
+		</$tiddler>
+	<% elseif [<is-current-user-profile>match[yes]] %>
+		<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account">
+			<$transclude/>
+		</$tiddler>
+	<% endif %>
 
 	<$let flash-message={{{ [[$:/state/mws/flash-message]get[text]] }}}>
 		<$reveal type="nomatch" state="$:/state/mws/flash-message" text="">
@@ -191,68 +154,5 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 	margin-right: 0.5rem;
 	margin-bottom: 0.5rem;
 	font-size: 0.9rem;
-}
-
-.user-profile-management {
-	padding: 20px;
-}
-
-.user-profile-management h2 {
-	font-size: 1.2rem;
-	color: #3498db;
-	margin-bottom: 1rem;
-}
-
-.user-profile-form {
-	margin-bottom: 20px;
-}
-
-.user-profile-form .form-group {
-	margin-bottom: 1rem;
-}
-
-.user-profile-form label {
-	display: block;
-	margin-bottom: 0.5rem;
-	font-weight: bold;
-	color: #555;
-}
-
-.user-profile-form input {
-	width: 100%;
-	padding: 0.5rem;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-}
-
-.update-profile-btn,
-.update-password-btn {
-	background: #3498db;
-	color: #fff;
-	border: none;
-	padding: 0.5rem 1rem;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 1rem;
-}
-
-.update-password-btn {
-	background: #00796b;
-}
-
-.update-profile-btn:hover {
-	background: #2980b9;
-}
-
-.update-password-btn:hover {
-	background: #00695c;
-}
-
-.user-profile-form select {
-	width: 100%;
-	padding: 0.5rem;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	background-color: white;
 }
 </style>

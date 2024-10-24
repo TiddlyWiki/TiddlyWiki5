@@ -5,7 +5,7 @@ description: {{$:/language/Buttons/ManageACL/Hint}}
 
 \whitespace trim
 <$button tooltip={{$:/language/Buttons/ManageACL/Hint}} aria-label={{$:/language/Buttons/ManageACL/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-manage-acl" $param=<<currentTiddler>> foldedStatePrefix="$:/state/folded/"/>
+<$action-managetiddler tiddler=<<currentTiddler>>/>
 {{$:/core/images/globe}}
 <%if [<tv-config-toolbar-text>match[yes]] %>
 <span class="tc-btn-text">

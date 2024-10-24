@@ -27,7 +27,7 @@ exports.handler = function (request, response, state) {
     response.end("Unauthorized");
     return;
   }
-  var auth = authenticator($tw);
+  var auth = authenticator(state.server.sqlTiddlerDatabase);
 
   var userId = state.authenticatedUser.user_id;
   var newPassword = state.data.newPassword;

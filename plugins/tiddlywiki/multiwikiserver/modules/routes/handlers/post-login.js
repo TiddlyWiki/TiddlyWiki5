@@ -27,7 +27,7 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 
 exports.handler = function(request,response,state) {
-	var auth = authenticator($tw);
+	var auth = authenticator(state.server.sqlTiddlerDatabase);
 	var username = state.data.username;
 	var password = state.data.password;
 	var user = state.server.sqlTiddlerDatabase.getUserByUsername(username);
