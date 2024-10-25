@@ -1,5 +1,5 @@
 created: 20140610213500000
-modified: 20140912141341933
+modified: 20241025051628969
 tags: Concepts Features
 title: ExternalImages
 type: text/vnd.tiddlywiki
@@ -35,7 +35,7 @@ For an example see the ''externalimages'' build target of the demo ''tw5.com'' w
 --savetiddlers [is[image]] images
 --setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
 --setfield [is[image]] text "" text/plain
---rendertiddler $:/core/save/all externalimages.html text/plain
+--render $:/core/save/all externalimages.html text/plain
 ```
 
 !! Saving Separate Image Files
