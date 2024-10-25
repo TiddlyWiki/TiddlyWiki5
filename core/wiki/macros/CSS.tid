@@ -1,7 +1,6 @@
 title: $:/core/macros/CSS
 tags: $:/tags/Macro
 
-<!-- Needs to stay that way for backwards compatibility. See GH issue: #8326 -->
 \function colour(name)
 [{$:/palette}getindex<name>] :else[{$:/palettes/Vanilla}getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :and[wikify[text],[inline]]
 \end colour
