@@ -1,0 +1,5 @@
+title: $:/themes/tiddlywiki/centralised/functions
+
+\function set.centralised() yes
+\function set.storywidth.storyright() no
+\function set.sidebarwidth() no
