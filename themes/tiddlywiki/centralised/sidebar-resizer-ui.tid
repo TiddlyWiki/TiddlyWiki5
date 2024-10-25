@@ -1,0 +1,20 @@
+title: $:/core/ui/PageTemplate/sidebar-resizer
+tags: $:/tags/PageTemplate
+list-after: $:/core/ui/PageTemplate/story
+
+\import $:/core/macros/sidebar-resizer
+\whitespace trim
+
+<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarresizer}match[show]] %>
+
+	<$let
+		tv-set-storywidth-storyright="no"
+		tv-set-sidebarwidth="no"
+		tv-set-centralised="yes"
+	>
+
+		<$transclude $variable="sidebar-resizer"/>
+
+	</$let>
+
+<% endif %>
