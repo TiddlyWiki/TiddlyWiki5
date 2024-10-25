@@ -54,6 +54,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-users
 
 <style>
 	.users-container {
+		margin: auto;
 		max-width: 1200px;
 		display: flex;
 		justify-content: space-between;

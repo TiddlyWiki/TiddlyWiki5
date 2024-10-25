@@ -56,7 +56,7 @@ GET /admin/users/:user_id
 				"user": JSON.stringify(user),
 				"user-role": JSON.stringify(userRole),
 				"all-roles": JSON.stringify(allRoles),
-				"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === parseInt(user_id) ? "yes" : "no",
+				"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === $tw.utils.parseInt(user_id, 10) ? "yes" : "no",
 				"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
 				"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"		
 			}
