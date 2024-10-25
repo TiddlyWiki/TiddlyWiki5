@@ -7,14 +7,10 @@ list-after: $:/core/ui/PageTemplate/story
 
 <%if [{$:/themes/tiddlywiki/vanilla/options/sidebarresizer}match[show]] %>
 
-	<$let
-		tv-set-storywidth-storyright="no"
-		tv-set-sidebarwidth="no"
-		tv-set-centralised="yes"
-	>
+	<$set name="tv-set-centralised" value="yes">
 
 		<$transclude $variable="sidebar-resizer"/>
 
-	</$let>
+	</$set>
 
 <% endif %>

@@ -10,7 +10,6 @@ list-after: $:/core/ui/PageTemplate/story
 	<$let
 		tv-set-storywidth-storyright={{{ [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]then[yes]] :else[[no]] }}}
 		tv-set-sidebarwidth={{{ [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]then[yes]] :else[[no]] }}}
-		tv-set-centralised="no"
 	>
 
 		<$transclude $variable="sidebar-resizer"/>
