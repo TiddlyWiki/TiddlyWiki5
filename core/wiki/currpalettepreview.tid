@@ -1,52 +1,47 @@
 title: $:/snippets/currpalettepreview
 
-\define resolve-colour(macrocall)
-\import $:/core/macros/utils
 \whitespace trim
-<$wikify name="name" text="""$macrocall$""">
-<<name>>
-</$wikify>
-\end
-\define swatchStyle()
-background-color: $(swatchColour)$;
-\end
-\define swatch-inner()
-\whitespace trim
-<$set name="swatchColour" value={{##$(colourResolved)$}}>
-<$list filter="[<swatchColour>!prefix[<<colour ]!suffix[>>]]" variable="ignore">
-<div class="tc-swatch" style=<<swatchStyle>> title=<<swatchTitle>>/>
-&#32;
-</$list>
-<$list filter="[<swatchColour>prefix[<<colour ]suffix[>>]]" variable="ignore">
-<$wikify name="colourResolved" text="<$macrocall $name='resolve-colour' macrocall=<<swatchColour>>/>">
-<<swatch-inner>>
-</$wikify>
-</$list>
-</$set>
-\end
-\define swatch()
-\whitespace trim
-<$set name="swatchColour" value={{##$(colour)$}}>
-<$set name="swatchTitle" value=<<colour>>>
-<$list filter="[<swatchColour>!prefix[<<colour ]!suffix[>>]]" variable="ignore">
-<div class="tc-swatch" style=<<swatchStyle>> title=<<swatchTitle>>/>
-&#32;
-</$list>
-<$list filter="[<swatchColour>prefix[<<colour ]suffix[>>]]" variable="ignore">
-<$wikify name="colourResolved" text="<$macrocall $name='resolve-colour' macrocall=<<swatchColour>>/>">
-<<swatch-inner>>
-</$wikify>
-</$list>
-</$set>
-</$set>
-\end
-\whitespace trim
-<div class="tc-swatches-horiz"><$list filter="
-foreground
-background
-muted-foreground
-primary
-page-background
-tab-background
-tiddler-info-background
-" variable="colour"><<swatch>></$list></div>
+
+\function colour(name)
+[<currentTiddler>getindex<name>] :else[{$:/palettes/Vanilla}getindex<name>] :else[[$:/config/DefaultColourMappings/]addsuffix<name>get[text]] :and[wikify[text],[inline]]
+\end colour
+
+\procedure palette-preview-thumbnail-tiddler(title)
+<div class="tc-palette-preview-thumbnail-tiddler" style.backgroundColor=<<colour tiddler-background>>>
+	<div class="tc-palette-preview-thumbnail-tiddler-header">
+		<div class="tc-palette-preview-thumbnail-tiddler-title" style.color=<<colour tiddler-title-foreground>>>
+			<$text text=<<title>>/>
+		</div>
+		<div class="tc-palette-preview-thumbnail-tiddler-toolbar" style.fill=<<colour tiddler-controls-foreground>>>
+			{{$:/core/images/down-arrow}}
+			{{$:/core/images/edit-button}}
+			{{$:/core/images/close-button}}
+		</div>
+	</div>
+	<div class="tc-palette-preview-thumbnail-tiddler-subtitle" style.color=<<colour tiddler-subtitle-foreground>>>
+		Motovun Jack
+	</div>
+	<div class="tc-palette-preview-thumbnail-tiddler-body" style.color=<<colour foreground>>>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non arcu ultricies, egestas odio tempus, vestibulum ipsum. Praesent diam lorem, elementum in venenatis eget, tincidunt quis lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam efficitur velit tortor, sit amet tristique felis viverra sit amet. Nullam posuere facilisis purus sed consectetur. Integer vel elit euismod, posuere ligula et, dictum tellus. Donec in odio diam. Sed metus magna, placerat at ligula et, imperdiet sagittis ex.
+	</div>
+</div>
+\end palette-preview-thumbnail-tiddler
+
+\procedure palette-preview-thumbnail()
+<div class="tc-palette-preview-thumbnail" style.backgroundColor=<<colour page-background>>>
+	<div class="tc-palette-preview-thumbnail-story">
+		<<palette-preview-thumbnail-tiddler "HelloThere">>
+		<<palette-preview-thumbnail-tiddler "Getting Started">>
+	</div>
+	<div class="tc-palette-preview-thumbnail-sidebar" style.color=<<colour sidebar-foreground>>>
+		<div class="tc-palette-preview-thumbnail-sidebar-title">
+			~TiddlyWiki
+		</div>
+		<div class="tc-palette-preview-thumbnail-sidebar-subtitle">
+			a non-linear personal web notebook
+		</div>
+	</div>
+</div>
+\end palette-preview-thumbnail
+
+<<palette-preview-thumbnail>>
