@@ -2830,8 +2830,8 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 
 .tc-chooser.tc-chooser-cards .tc-chooser-item {
 	width: 15em;
-	margin: 0.25em;
-	padding: 3px;
+	margin: 0.5em;
+	padding: 6px;
 	border: 1px solid <<colour muted-foreground>>;
 	border-radius: 3px;
 }
@@ -2855,6 +2855,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	text-decoration: none;
 	background-color: transparent;
 	font-weight: normal;
+	color: <<colour foreground>>;
 }
 
 .tc-chooser-item:hover .tc-tiddlylink:hover {
@@ -2874,6 +2875,10 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-chooser-item .tc-chooser-item-description {
+	padding: 3px;
+}
+
+.tc-chooser-item .tc-chooser-item-subtitle {
 	font-size: 0.8em;
 	line-height: 1.2;
 }
@@ -2965,6 +2970,16 @@ input.tc-palette-manager-colour-input {
 
 .tc-palette-preview-thumbnail-sidebar-subtitle {
 	font-size: 3px;
+}
+
+.tc-palette-preview-thumbnail-sidebar-search {
+	margin:3px 0;
+	line-height: 0;
+	width: 70%;
+}
+
+.tc-palette-preview-thumbnail-sidebar-search-box {
+	height: 4px;
 }
 
 /*

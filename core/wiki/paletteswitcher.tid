@@ -8,9 +8,11 @@ title: $:/snippets/paletteswitcher
 <div class=<<cls>>>
 <$link to={{!!title}}>
 {{||$:/snippets/currpalettepreview}}
-''<$view field="name" format="text"/>''
 <div class="tc-chooser-item-description">
+''<$view field="name" format="text"/>''
+<div class="tc-chooser-item-subtitle">
 <$view field="description" format="text"/>
+</div>
 </div>
 </$link>
 </div>

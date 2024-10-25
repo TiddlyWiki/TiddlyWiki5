@@ -40,6 +40,10 @@ title: $:/snippets/currpalettepreview
 		<div class="tc-palette-preview-thumbnail-sidebar-subtitle">
 			a non-linear personal web notebook
 		</div>
+		<div class="tc-palette-preview-thumbnail-sidebar-search" style.backgroundColor=<<colour background>>>
+			<div class="tc-palette-preview-thumbnail-sidebar-search-box">
+			</div>
+		</div>
 	</div>
 </div>
 \end palette-preview-thumbnail
