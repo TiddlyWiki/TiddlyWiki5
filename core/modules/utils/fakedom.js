@@ -63,18 +63,18 @@ var TW_Style = function(el) {
 		get: function() {
 			return el._style;
 		},
-		// Method to set styles using a string (e.g. "color: red; background-color: blue;")
-		set: function(styleString) {
-			styleString = styleString || "";
-			var declarations = styleString.split(";");
-			for (var i = 0; i < declarations.length; i++) {
-				var declaration = declarations[i].split(":");
-				var name = $tw.utils.trim(declaration[0]);
-				var value = $tw.utils.trim(declaration[1]);
-				if (name && value) {
+		// Method to set styles using a string (e.g. "color:red; background-color:blue;")
+		set: function(str) {
+			var self = this;
+			str = str || "";
+			$tw.utils.each(str.split(";"),function(declaration) {
+				var parts = declaration.split(":"),
+					name = $tw.utils.trim(parts[0]),
+					value = $tw.utils.trim(parts[1]);
+				if(name && value) {
 					el._style[$tw.utils.convertStyleNameToPropertyName(name)] = value;
 				}
-			}
+			});
 		},
 		// Method to set a specific property without transforming the property name, such as a custom property
 		setProperty: function(name, value) {
