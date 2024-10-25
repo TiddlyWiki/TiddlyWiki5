@@ -1,6 +1,8 @@
 title: $:/themes/tiddlywiki/tight/base
 tags: [[$:/tags/Stylesheet]]
 
+\function get.theme.metric(metric) [{$:/theme}addsuffix[/]addsuffix<metric>get[text]] ~[[$:/themes/tiddlywiki/vanilla/]addsuffix<metric>get[text]]
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline conditional
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
@@ -27,7 +29,7 @@ tags: [[$:/tags/Stylesheet]]
 	}
 
 	html body.tc-body section.tc-story-river {
-		padding: 0px {{$:/themes/tiddlywiki/tight/metrics/storypaddingright}} 0px {{$:/themes/tiddlywiki/tight/metrics/storypaddingleft}};
+		padding: 0px <<get.theme.metric metrics/storypaddingright>> 0px <<get.theme.metric metrics/storypaddingleft>>;
 	}
 
 	html body.tc-body div.tc-tiddler-frame {
@@ -49,12 +51,12 @@ tags: [[$:/tags/Stylesheet]]
 	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]] %>
 
 		html body.tc-body div.tc-sidebar-scrollable {
-			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} + 42px),calc({{$:/themes/tiddlywiki/tight/metrics/storyright}} + 42px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + 42px));
+			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} + 42px),calc(<<get.theme.metric metrics/storyright>> + 42px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + 42px));
 		}
 
 		html body.tc-body .tc-sidebar-left div.tc-sidebar-scrollable {
 			left: 0;
-			right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} + 42px),calc({{$:/themes/tiddlywiki/tight/metrics/storyright}} + 42px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + 42px));
+			right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} + 42px),calc(<<get.theme.metric metrics/storyright>> + 42px),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + 42px));
 		}
 
 	<% endif %>
@@ -119,24 +121,24 @@ tags: [[$:/tags/Stylesheet]]
 	html body.tc-body .tc-sidebar-resizer {
 		width: 12px;
 		right: auto;
-		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),clamp(calc({{$:/themes/tiddlywiki/tight/metrics/storywidth}}),max(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/tight/metrics/storywidth}}),calc({{$:/themes/tiddlywiki/tight/metrics/storyright}})),max(calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + ({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/tight/metrics/storywidth}} - {{$:/themes/tiddlywiki/tight/metrics/storyright}})),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}))),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
+		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),clamp(calc(<<get.theme.metric metrics/storywidth>>),max(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + <<get.theme.metric metrics/storywidth>>),calc(<<get.theme.metric metrics/storyright>>)),max(calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + ({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + <<get.theme.metric metrics/storywidth>> - <<get.theme.metric metrics/storyright>>)),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}))),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
 	}
 
 	html body.tc-body .tc-sidebar-left .tc-sidebar-resizer {
 		left: auto;
-		right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),clamp(calc({{$:/themes/tiddlywiki/tight/metrics/storywidth}}),max(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/tight/metrics/storywidth}}),calc({{$:/themes/tiddlywiki/tight/metrics/storyright}})),max(calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + ({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/tight/metrics/storywidth}} - {{$:/themes/tiddlywiki/tight/metrics/storyright}})),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}))),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
+		right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),clamp(calc(<<get.theme.metric metrics/storywidth>>),max(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + <<get.theme.metric metrics/storywidth>>),calc(<<get.theme.metric metrics/storyright>>)),max(calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} + ({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + <<get.theme.metric metrics/storywidth>> - <<get.theme.metric metrics/storyright>>)),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}))),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
 	}
 
 	<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]] %>
 
 		html body.tc-body .tc-sidebar-resizer {
-			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),calc(100% - {{$:/themes/tiddlywiki/tight/metrics/sidebarwidth}}),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
+			left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),calc(100% - <<get.theme.metric metrics/sidebarwidth>>),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
 			right: auto;
 		}
 
 		html body.tc-body .tc-sidebar-left .tc-sidebar-resizer {
 			left: auto;
-			right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),calc(100% - {{$:/themes/tiddlywiki/tight/metrics/sidebarwidth}}),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
+			right: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}),calc(100% - <<get.theme.metric metrics/sidebarwidth>>),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}));
 		}
 
 	<% endif %>
