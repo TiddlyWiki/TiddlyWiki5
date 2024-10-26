@@ -17,7 +17,7 @@ tags: $:/tags/Global
 
 \function get.theme(metric) [function[get.base.theme],{$:/theme},<metric>addsuffix[/metrics/]addsuffix<metric>!is[missing]] :else[function[get.base.theme],{$:/theme},<metric>addsuffix[/metrics/]addsuffix<metric>is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 
-\function set.theme.metric(metric) [function[get.base.theme.metric],{$:/theme},<metric>is[shadow]] :else[function[get.base.theme.metric],{$:/theme},<metric>!is[shadow]!is[missing]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
+\function set.theme.metric(metric) [function[get.base.theme.metric],{$:/theme},<metric>first[]is[shadow]] :else[function[get.base.theme.metric],{$:/theme},<metric>first[]!is[shadow]!is[missing]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 
 \function get.base.functions.theme.recursive(theme) [<theme>get[dependents]enlist-input[]] :map[function[get.base.functions.theme],<currentTiddler>]
 
