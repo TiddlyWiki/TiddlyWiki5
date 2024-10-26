@@ -27,7 +27,7 @@ tags: [[$:/tags/Stylesheet]]
 		text-align: left;
 		left: 50%;
 		right: 0;
-		margin-left: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - 42px),calc(<<get.theme.metric storywidth>> / 2 - 42px));
+		margin-left: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - <<get.theme.metric storypaddingright>>),calc(<<get.theme.metric storywidth>> / 2 - <<get.theme.metric storypaddingright>>));
 		width: auto;
 	}
 
@@ -35,7 +35,7 @@ tags: [[$:/tags/Stylesheet]]
 		margin-left: 0;
 		right: 50%;
 		left: 0;
-		margin-right: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - 42px),calc(<<get.theme.metric storywidth>> / 2 - 42px));
+		margin-right: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - <<get.theme.metric storypaddingleft>>),calc(<<get.theme.metric storywidth>> / 2 - <<get.theme.metric storypaddingleft>>));
 		padding-right: 0px;
 		padding-left: 42px;
 	}
