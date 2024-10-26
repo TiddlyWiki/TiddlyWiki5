@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/tiddlywiki/example",
+	"name": "Example",
+	"author": "SimonHuber",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Builds on top of various other themes",
+	"dependents": ["$:/themes/tiddlywiki/tight","$:/themes/tiddlywiki/seamless","$:/themes/tiddlywiki/snowwhite"]
+}

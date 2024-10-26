@@ -18,7 +18,8 @@
 		"tiddlywiki/tight",
 		"tiddlywiki/heavier",
 		"tiddlywiki/tight-heavier",
-		"tiddlywiki/readonly"
+		"tiddlywiki/readonly",
+		"tiddlywiki/example"
 	],
 	"languages": [
 	],
