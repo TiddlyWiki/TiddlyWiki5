@@ -1,8 +1,8 @@
-title: $:/themes/tiddlywiki/vanilla/functions
+title: $:/themes/tiddlywiki/tight/functions
 
 \function set.centralised() no
 \function set.storywidth.storyright() [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fixed-fluid]then[yes]] :else[[no]]
 \function set.sidebarwidth() [{$:/themes/tiddlywiki/vanilla/options/sidebarlayout}match[fluid-fixed]then[yes]] :else[[no]]
 
-\function sidebar.resizer.maxwidth() 21px
-\function sidebar.resizer.width() [[min(calc(]addsuffix<get.theme.metric storypaddingright>addsuffix[ / 2),]addsuffix<sidebar.resizer.maxwidth>addsuffix[)]]
+\function sidebar.resizer.maxwidth() 12px
+\function sidebar.resizer.width() <<sidebar.resizer.maxwidth>>

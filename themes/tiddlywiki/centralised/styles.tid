@@ -53,12 +53,4 @@ tags: [[$:/tags/Stylesheet]]
 		width: 100%;
 	}
 
-	html .tc-sidebar-resizer {
-		left: min(calc(50% + ({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2) - (2 * {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} / 3)),calc(100% - {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}} - (2 * {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} / 3)));
-	}
-
-	html body.tc-body .tc-sidebar-left .tc-sidebar-resizer {
-		left: auto;
-		right: min(calc(50% + ({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2) - (2 * {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} / 3)),calc(100% - {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}} - (2 * {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} / 3)));
-	}
 }

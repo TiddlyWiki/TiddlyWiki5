@@ -2,7 +2,7 @@ title: $:/themes/tiddlywiki/vanilla/ui/sidebar-resizer
 tags: $:/tags/PageTemplate
 list-after: $:/core/ui/PageTemplate/story
 
-\import [{$:/theme}addsuffix[/functions]!is[missing]else{$:/theme}addsuffix[/functions]is[shadow]else[$:/themes/tiddlywiki/vanilla/functions]] [[$:/core/macros/sidebar-resizer]]
+\import [function[get.base.functions.theme],{$:/theme}!is[missing]] :else[function[get.base.functions.theme],{$:/theme}is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]] [[$:/core/macros/sidebar-resizer]]
 \whitespace trim
 
 <%if [{$:/themes/tiddlywiki/vanilla/options/sidebarresizer}match[show]] %>
