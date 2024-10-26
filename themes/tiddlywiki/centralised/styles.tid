@@ -11,23 +11,23 @@ tags: [[$:/tags/Stylesheet]]
 
 	html .tc-story-river {
 		position: relative;
-		width: min({{$:/themes/tiddlywiki/centralised/metrics/storywidth}},calc(100% - (2 * {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}})));
-		padding: 42px {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}} 42px {{$:/themes/tiddlywiki/centralised/metrics/storypaddingleft}};
+		width: min(<<get.theme.metric storywidth>>,calc(100% - (2 * <<get.theme.metric sidebarminwidth>>)));
+		padding: 42px <<get.theme.metric storypaddingright>> 42px <<get.theme.metric storypaddingleft>>;
 		margin: 0 auto;
 		text-align: left;
 	}
 
 	html body.tc-body .tc-sidebar-left .tc-story-river {
 		margin: 0 auto;
-		padding-right: {{$:/themes/tiddlywiki/centralised/metrics/storypaddingright}};
-		padding-left: {{$:/themes/tiddlywiki/centralised/metrics/storypaddingleft}};
+		padding-right: <<get.theme.metric storypaddingright>>;
+		padding-left: <<get.theme.metric storypaddingleft>>;
 	}
 
 	html .tc-sidebar-scrollable {
 		text-align: left;
 		left: 50%;
 		right: 0;
-		margin-left: min(calc((100% - (2 * {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}})) / 2 - 42px),calc({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 42px));
+		margin-left: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - 42px),calc(<<get.theme.metric storywidth>> / 2 - 42px));
 		width: auto;
 	}
 
@@ -35,7 +35,7 @@ tags: [[$:/tags/Stylesheet]]
 		margin-left: 0;
 		right: 50%;
 		left: 0;
-		margin-right: min(calc((100% - (2 * {{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}})) / 2 - 42px),calc({{$:/themes/tiddlywiki/centralised/metrics/storywidth}} / 2 - 42px));
+		margin-right: min(calc((100% - (2 * <<get.theme.metric sidebarminwidth>>)) / 2 - 42px),calc(<<get.theme.metric storywidth>> / 2 - 42px));
 		padding-right: 0px;
 		padding-left: 42px;
 	}
