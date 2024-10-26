@@ -68,7 +68,7 @@
 			"--render","$:/plugins/tiddlywiki/translators/templates/SiteTitle.tid","language/SiteTitle.tid","text/plain",
 			"--render","$:/plugins/tiddlywiki/translators/templates/ThemeTweaks.multids","language/ThemeTweaks.multids","text/plain",
 			"--render","$:/plugins/tiddlywiki/translators/templates/TiddlerInfo.multids","language/TiddlerInfo.multids","text/plain",
-			"--render","[prefix[$:/language/Docs/Types/]removeprefix[$:/language/Docs/Types/]]","[search-replace:g:regexp[/|\\\\],[_]addprefix[language/Types/]addsuffix[.tid]]","text/plain","$:/plugins/tiddlywiki/translators/templates/type-tid",
+			"--render","[prefix[$:/language/Docs/Types/]]","[removeprefix[$:/language/Docs/Types/]search-replace:g:regexp[/|\\\\],[_]addprefix[language/Types/]addsuffix[.tid]]","text/plain","$:/plugins/tiddlywiki/translators/templates/type-tid",
 			"--render","[prefix[$:/language/Help/]]","[removeprefix[$:/]addsuffix[.tid]]","text/plain","$:/plugins/tiddlywiki/translators/templates/help-tid",
 			"--render","[prefix[$:/language/Modals/]]","[removeprefix[$:/]addsuffix[.tid]]","text/plain","$:/plugins/tiddlywiki/translators/templates/modal-tid",
 			"--render","[prefix[$:/language/Snippets/]]","[removeprefix[$:/]addsuffix[.tid]]","text/plain","$:/plugins/tiddlywiki/translators/templates/snippet-tid"]
