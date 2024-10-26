@@ -2,7 +2,7 @@ title: $:/themes/tiddlywiki/vanilla/sidebar-resizer
 tags: [[$:/tags/Stylesheet]]
 code-body: yes
 
-\import [function[get.base.functions.theme],{$:/theme}!is[missing]] :else[function[get.base.functions.theme],{$:/theme}is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]]
+\import [function[get.base.functions.theme],{$:/theme}first[]!is[missing]] :else[function[get.base.functions.theme],{$:/theme}first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]]
 
 \function sidebarbreakpoint() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
 

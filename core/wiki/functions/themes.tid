@@ -1,15 +1,15 @@
 title: $:/core/functions/themes
 tags: $:/tags/Global
 
-\function get.base.theme.metric.recursive(theme,metric) [<theme>get[dependents]enlist-input[]first[]] :map[function[get.base.theme.metric],<currentTiddler>,<metric>]
+\function get.base.theme.metric.recursive(theme,metric) [<theme>get[dependents]enlist-input[]] :map[function[get.base.theme.metric],<currentTiddler>,<metric>]
 
 \function get.base.theme.metric(theme,metric) [<theme>addsuffix[/metrics/]addsuffix<metric>!is[missing]] :else[<theme>addsuffix[/metrics/]addsuffix<metric>is[shadow]] :else[function[get.base.theme.metric.recursive],<theme>,<metric>]
 
-\function get.base.theme(theme,metric) [function[get.base.theme.metric],<theme>,<metric>removesuffix<metric>removesuffix[/metrics/]]
+\function get.base.theme(theme,metric) [function[get.base.theme.metric],<theme>,<metric>first[]removesuffix<metric>removesuffix[/metrics/]]
 
 \function get.theme.metric(metric) [function[get.base.theme.metric],{$:/theme},<metric>first[]get[text]]
 
-\function get.base.theme.option.recursive(theme,option) [<theme>get[dependents]enlist-input[]first[]] :map[function[get.base.theme.option],<currentTiddler>,<option>]
+\function get.base.theme.option.recursive(theme,option) [<theme>get[dependents]enlist-input[]] :map[function[get.base.theme.option],<currentTiddler>,<option>]
 
 \function get.base.theme.option(theme,option) [<theme>addsuffix[/options/]addsuffix<option>!is[missing]] :else[<theme>addsuffix[/options/]addsuffix<option>is[shadow]] :else[function[get.base.theme.option.recursive],<theme>,<option>]
 
@@ -19,7 +19,7 @@ tags: $:/tags/Global
 
 \function set.theme.metric(metric) [function[get.base.theme.metric],{$:/theme},<metric>is[shadow]] :else[function[get.base.theme.metric],{$:/theme},<metric>!is[shadow]!is[missing]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 
-\function get.base.functions.theme.recursive(theme) [<theme>get[dependents]enlist-input[]first[]] :map[function[get.base.functions.theme],<currentTiddler>]
+\function get.base.functions.theme.recursive(theme) [<theme>get[dependents]enlist-input[]] :map[function[get.base.functions.theme],<currentTiddler>]
 
 \function get.base.functions.theme(theme) [<theme>addsufix[/functions]!is[missing]] :else[<theme>addsuffix[/functions]is[shadow]] :else[function[get.base.functions.theme.recursive],<theme>]
 
