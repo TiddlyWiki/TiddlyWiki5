@@ -1,6 +1,24 @@
 title: $:/core/functions/themes
 tags: $:/tags/Global
 
+\function is.pixel.value(value) [<value>removesuffix[px]]
+\function is.percentage.value(value) [<value>removesuffix[%]]
+\function is.cm.value(value) [<value>removesuffix[cm]]
+\function is.mm.value(value) [<value>removesuffix[mm]]
+\function is.Q.value(value) [<value>removesuffix[Q]]
+\function is.in.value(value) [<value>removesuffix[in]]
+\function is.pc.value(value) [<value>removesuffix[pc]]
+\function is.pt.value(value) [<value>removesuffix[pt]]
+\function is.em.value(value) [<value>removesuffix[em]]
+
+\function convert.to.pixels(value,metric) [<metric>match[cm]then<value>multiply[37.8]] [<metric>match[mm]then<value>multiply[37.8]divide[10]] [<metric>match[Q]then<value>multiply[37.8]divide[40]] [<metric>match[in]then<value>multiply[96]] [<metric>match[pc]then<value>multiply[96]divide[6]] [<metric>match[pt]then<value>multiply[96]divide[72]] [<metric>match[em]then<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/fontsize}]
+
+\function subtract.one.from.sidebarbreakpoint(value) [is.pixel.value<value>subtract[1]addsuffix[px]] :else[is.cm.value<value>function[convert.to.pixels],<value>,[cm]subtract[1]divide[37.8]addsuffix[cm]] :else[is.mm.value<value>function[convert.to.pixels],<value>,[mm]subtract[1]divide[37.8]multiply[10]addsuffix[mm]] :else[is.Q.value<value>function[convert.to.pixels],<value>,[Q]subtract[1]divide[37.8]multiply[40]addsuffix[Q]] :else[is.in.value<value>function[convert.to.pixels],<value>,[in]subtract[1]divide[96]addsuffix[in]] :else[is.pc.value<value>function[convert.to.pixels],<value>,[pc]subtract[1]divide[96]multiply[6]addsuffix[pc]] :else[is.pt.value<value>function[convert.to.pixels],<value>,[pt]subtract[1]divide[96]multiply[72]addsuffix[pt]] :else[is.em.value<value>function[convert.to.pixels],<value>,[em]subtract[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
+
+\function sidebarbreakpoint() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
+
+\function sidebarbreakpoint-minus-one() [function[subtract.one.from.sidebarbreakpoint],<sidebarbreakpoint>] :else[<sidebarbreakpoint>]
+
 \function get.base.theme.metric.recursive(theme,metric) [<theme>get[dependents]enlist-input[]] :map[function[get.base.theme.metric],<currentTiddler>,<metric>]
 
 \function get.base.theme.metric(theme,metric) [<theme>addsuffix[/metrics/]addsuffix<metric>!is[missing]] :else[<theme>addsuffix[/metrics/]addsuffix<metric>is[shadow]] :else[function[get.base.theme.metric.recursive],<theme>,<metric>]

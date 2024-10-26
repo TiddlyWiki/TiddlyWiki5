@@ -1,15 +1,5 @@
 title: $:/core/macros/sidebar-resizer
 
-\function is.pixel.value(value) [<value>removesuffix[px]]
-\function is.percentage.value(value) [<value>removesuffix[%]]
-\function is.cm.value(value) [<value>removesuffix[cm]]
-\function is.mm.value(value) [<value>removesuffix[mm]]
-\function is.Q.value(value) [<value>removesuffix[Q]]
-\function is.in.value(value) [<value>removesuffix[in]]
-\function is.pc.value(value) [<value>removesuffix[pc]]
-\function is.pt.value(value) [<value>removesuffix[pt]]
-\function is.em.value(value) [<value>removesuffix[em]]
-
 \function convert.to.percentage(value) [<value>divide<widgetNodeWidth>multiply[100]]
 \function convert.to.cm(value) [<value>divide[37.8]]
 \function convert.to.mm(value) [convert.to.cm<value>multiply[10]]

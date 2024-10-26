@@ -3,10 +3,10 @@ tags: [[$:/tags/Stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline conditional
 
-@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 }
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+@media (min-width: <<sidebarbreakpoint>>) {
 
 	html body.tc-body {
 		font-size: 13px;

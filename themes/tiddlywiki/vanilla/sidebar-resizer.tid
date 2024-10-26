@@ -4,10 +4,6 @@ code-body: yes
 
 \import [function[get.base.functions.theme],{$:/theme}first[]!is[missing]] :else[function[get.base.functions.theme],{$:/theme}first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]]
 
-\function sidebarbreakpoint() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
-
-\function sidebarbreakpoint-minus-one() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}removesuffix[px]subtract[1]addsuffix[px]] ~[{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
-
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
 
 @media (min-width: <<sidebarbreakpoint>>) {
