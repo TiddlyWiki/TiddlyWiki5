@@ -3,5 +3,5 @@ title: $:/themes/tiddlywiki/vanilla/options/
 codewrapping: pre-wrap
 sidebarlayout: fixed-fluid
 sidebarposition: right
-sidebarresizer: hide
+sidebarresizer: show
 stickytitles: no

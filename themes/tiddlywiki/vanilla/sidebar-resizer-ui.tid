@@ -5,7 +5,7 @@ list-after: $:/core/ui/PageTemplate/story
 \import [function[get.base.functions.theme],{$:/theme}!is[missing]] :else[function[get.base.functions.theme],{$:/theme}is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]] [[$:/core/macros/sidebar-resizer]]
 \whitespace trim
 
-<%if [{$:/themes/tiddlywiki/vanilla/options/sidebarresizer}match[show]] %>
+<%if [<get.theme.option sidebarresizer>match[show]] %>
 
 	<$let
 		tv-set-storywidth-storyright=<<set.storywidth.storyright>>

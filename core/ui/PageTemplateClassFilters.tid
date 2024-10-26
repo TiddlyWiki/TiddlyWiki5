@@ -1,4 +1,4 @@
 title: $:/core/ui/PageTemplateClassFilters
 tags: $:/tags/ClassFilters/PageTemplate
 
-[{$:/themes/tiddlywiki/vanilla/options/sidebarposition}match[left]then[tc-sidebar-left]]
+[<get.theme.option sidebarposition>match[left]then[tc-sidebar-left]]
