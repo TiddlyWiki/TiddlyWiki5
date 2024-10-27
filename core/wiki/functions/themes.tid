@@ -45,6 +45,8 @@ tags: $:/tags/Global
 
 \function get.theme.option(option) [function[get.base.theme.option],<get.current.theme>,<option>first[]get[text]]
 
+\function get.theme.explicit.option(option) [<get.current.theme>addsuffix[/options/]addsuffix<option>get[text]]
+
 \function get.theme(metric) [function[get.base.theme],<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>!is[missing]] :else[function[get.base.theme],<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 
 \function set.theme.metric(metric) [function[get.base.theme.metric],<get.current.theme>,<metric>first[]is[shadow]] :else[function[get.base.theme.metric],<get.current.theme>,<metric>first[]!is[shadow]!is[missing]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]

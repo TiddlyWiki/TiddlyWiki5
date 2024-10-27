@@ -6,130 +6,134 @@ code-body: yes
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
 
-@media (min-width: <<sidebarbreakpoint>>) {
+<%if [<get.theme.explicit.option sidebarresizer>match[show]] %>
 
-	.tc-sidebar-resizer {
-		position: fixed;
-		top: 0;
-		height: 100%;
-		width: <<sidebar.resizer.width>>;
-		transition: opacity 100ms;
-		opacity: 0.1;
-		cursor: ew-resize;
-		background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
-	}
-
-	.tc-sidebar-resizer:hover {
-		opacity: 0.6;
-	}
-
-	@media (pointer: coarse) {
+	@media (min-width: <<sidebarbreakpoint>>) {
 
 		.tc-sidebar-resizer {
-			background: <<colour muted-foreground>>;
+			position: fixed;
+			top: 0;
+			height: 100%;
+			width: <<sidebar.resizer.width>>;
+			transition: opacity 100ms;
+			opacity: 0.1;
+			cursor: ew-resize;
+			background: linear-gradient(<<colour muted-foreground>>, <<colour muted-foreground>>) no-repeat center/2px 100%;
 		}
 
 		.tc-sidebar-resizer:hover {
-			opacity: 0.1;
-		}
-	}
-
-	.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		width: 100%;
-		height: 100%;
-		min-height: 100%;
-		z-index: -1;
-	}
-
-	.tc-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
-		touch-action: none;
-		user-select: none;
-	}
-
-	<%if [[$:/state/sidebar/resizing]!is[missing]] %>
-
-		.tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
-			z-index: 801;
-		}
-
-		.tc-sidebar-resizer-pointermove-eventcatcher {
-			z-index: 802;
-		}
-
-		.tc-sidebar-resizer-pointermove {
-			z-index: 803;
-			cursor: ew-resize;
-		}
-
-		.tc-sidebar-resizer {
 			opacity: 0.6;
 		}
 
 		@media (pointer: coarse) {
 
 			.tc-sidebar-resizer {
-				opacity: 0.25;
+				background: <<colour muted-foreground>>;
+			}
+
+			.tc-sidebar-resizer:hover {
+				opacity: 0.1;
 			}
 		}
 
-	<% endif %>
-
-	<%if [<set.storywidth.storyright>match[yes]] %>
-
-		.tc-sidebar-resizer {
-			left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingright>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+		.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			height: 100%;
+			min-height: 100%;
+			z-index: -1;
 		}
 
-		.tc-sidebar-left .tc-sidebar-resizer {
-			left: auto;
-			right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingright>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+		.tc-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
+			touch-action: none;
+			user-select: none;
 		}
 
-	<% endif %>
+		<%if [[$:/state/sidebar/resizing]!is[missing]] %>
 
-	<%if [<set.sidebarwidth>match[yes]] %>
+			.tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
+				z-index: 801;
+			}
 
-		.tc-sidebar-resizer {
-			left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingright>> / 3)));
-		}
+			.tc-sidebar-resizer-pointermove-eventcatcher {
+				z-index: 802;
+			}
 
-		.tc-sidebar-left .tc-sidebar-resizer {
-			left: auto;
-			right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingright>> / 3)));
-		}
+			.tc-sidebar-resizer-pointermove {
+				z-index: 803;
+				cursor: ew-resize;
+			}
 
-	<% endif %>
+			.tc-sidebar-resizer {
+				opacity: 0.6;
+			}
 
-	<%if [<set.centralised>match[yes]] %>
+			@media (pointer: coarse) {
 
-		.tc-sidebar-resizer {
-			left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
-		}
+				.tc-sidebar-resizer {
+					opacity: 0.25;
+				}
+			}
 
-		.tc-sidebar-left .tc-sidebar-resizer {
-			left: auto;
-			right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
-		}
+		<% endif %>
 
-	<% endif %>
+		<%if [<set.storywidth.storyright>match[yes]] %>
 
-	<%if [{$:/state/sidebar}match[no]] %>
+			.tc-sidebar-resizer {
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingright>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+			}
+
+			.tc-sidebar-left .tc-sidebar-resizer {
+				left: auto;
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingright>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+			}
+
+		<% endif %>
+
+		<%if [<set.sidebarwidth>match[yes]] %>
+
+			.tc-sidebar-resizer {
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingright>> / 3)));
+			}
+
+			.tc-sidebar-left .tc-sidebar-resizer {
+				left: auto;
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingright>> / 3)));
+			}
+
+		<% endif %>
+
+		<%if [<set.centralised>match[yes]] %>
+
+			.tc-sidebar-resizer {
+				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+			}
+
+			.tc-sidebar-left .tc-sidebar-resizer {
+				left: auto;
+				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+			}
+
+		<% endif %>
+
+		<%if [{$:/state/sidebar}match[no]] %>
+
+			.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove, .tc-sidebar-resizer {
+				display: none;
+			}
+
+		<% endif %>
+
+	}
+
+	@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
 		.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove, .tc-sidebar-resizer {
 			display: none;
 		}
-
-	<% endif %>
-
-}
-
-@media (max-width: <<sidebarbreakpoint-minus-one>>) {
-
-	.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove, .tc-sidebar-resizer {
-		display: none;
 	}
-}
+
+<% endif %>
