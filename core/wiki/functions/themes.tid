@@ -37,19 +37,21 @@ tags: $:/tags/Global
 
 \function get.base.theme(theme,metric) [function[get.base.theme.metric],<theme>,<metric>first[]removesuffix<metric>removesuffix[/metrics/]]
 
-\function get.theme.metric(metric) [function[get.base.theme.metric],{$:/theme},<metric>first[]get[text]]
+\function get.theme.metric(metric) [function[get.base.theme.metric],<get.current.theme>,<metric>first[]get[text]]
 
 \function get.base.theme.option.recursive(theme,option) [<theme>get[dependents]enlist-input[]] :map[function[get.base.theme.option],<currentTiddler>,<option>]
 
 \function get.base.theme.option(theme,option) [<theme>addsuffix[/options/]addsuffix<option>!is[missing]] :else[<theme>addsuffix[/options/]addsuffix<option>is[shadow]] :else[function[get.base.theme.option.recursive],<theme>,<option>]
 
-\function get.theme.option(option) [function[get.base.theme.option],{$:/theme},<option>first[]get[text]]
+\function get.theme.option(option) [function[get.base.theme.option],<get.current.theme>,<option>first[]get[text]]
 
-\function get.theme(metric) [function[get.base.theme],{$:/theme},<metric>addsuffix[/metrics/]addsuffix<metric>!is[missing]] :else[function[get.base.theme],{$:/theme},<metric>addsuffix[/metrics/]addsuffix<metric>is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
+\function get.theme(metric) [function[get.base.theme],<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>!is[missing]] :else[function[get.base.theme],<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 
-\function set.theme.metric(metric) [function[get.base.theme.metric],{$:/theme},<metric>first[]is[shadow]] :else[function[get.base.theme.metric],{$:/theme},<metric>first[]!is[shadow]!is[missing]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
+\function set.theme.metric(metric) [function[get.base.theme.metric],<get.current.theme>,<metric>first[]is[shadow]] :else[function[get.base.theme.metric],<get.current.theme>,<metric>first[]!is[shadow]!is[missing]] :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 
 \function get.base.functions.theme.recursive(theme) [<theme>get[dependents]enlist-input[]] :map[function[get.base.functions.theme],<currentTiddler>]
 
 \function get.base.functions.theme(theme) [<theme>addsufix[/functions]!is[missing]] :else[<theme>addsuffix[/functions]is[shadow]] :else[function[get.base.functions.theme.recursive],<theme>]
+
+\function get.current.theme() [{$:/theme}!is[blank]] :else[all[tiddlers+shadows]plugin-type[theme]first[]]
 
