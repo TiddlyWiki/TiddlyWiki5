@@ -27,6 +27,10 @@ tags: $:/tags/Global
 
 \function sidebarbreakpoint-minus-one() [function[subtract.one.from.sidebarbreakpoint],<sidebarbreakpoint>] :else[<sidebarbreakpoint>]
 
+\function add.one.to.breakpoint(value) [is.pixel.value<value>add[1]addsuffix[px]] :else[is.cm.value<value>function[convert.to.pixels],<value>,[cm]add[1]divide[37.8]addsuffix[cm]] :else[is.mm.value<value>function[convert.to.pixels],<value>,[mm]add[1]divide[37.8]multiply[10]addsuffix[mm]] :else[is.Q.value<value>function[convert.to.pixels],<value>,[Q]add[1]divide[37.8]multiply[40]addsuffix[Q]] :else[is.in.value<value>function[convert.to.pixels],<value>,[in]add[1]divide[96]addsuffix[in]] :else[is.pc.value<value>function[convert.to.pixels],<value>,[pc]add[1]divide[96]multiply[6]addsuffix[pc]] :else[is.pt.value<value>function[convert.to.pixels],<value>,[pt]add[1]divide[96]multiply[72]addsuffix[pt]] :else[is.em.value<value>function[convert.to.pixels],<value>,[em]add[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
+
+\function breakpoint-plus-one() [function[add.one.to.breakpoint],{$:/config/plugins/menubar/breakpoint}] :else[{$:/config/plugins/menubar/breakpoint}]
+
 \function get.base.theme.metric.recursive(theme,metric) [<theme>get[dependents]enlist-input[]] :map[function[get.base.theme.metric],<currentTiddler>,<metric>]
 
 \function get.base.theme.metric(theme,metric) [<theme>addsuffix[/metrics/]addsuffix<metric>!is[missing]] :else[<theme>addsuffix[/metrics/]addsuffix<metric>is[shadow]] :else[function[get.base.theme.metric.recursive],<theme>,<metric>]
