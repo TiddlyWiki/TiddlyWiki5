@@ -53,5 +53,5 @@ tags: $:/tags/Global
 
 \function get.base.functions.theme(theme) [<theme>addsufix[/functions]!is[missing]] :else[<theme>addsuffix[/functions]is[shadow]] :else[function[get.base.functions.theme.recursive],<theme>]
 
-\function get.current.theme() [{$:/theme}!is[blank]] :else[all[tiddlers+shadows]plugin-type[theme]first[]]
+\function get.current.theme() [{$:/theme}!is[blank]] :else[all[tiddlers+shadows]plugin-type[theme]plugin-priority[0]first[]]
 
