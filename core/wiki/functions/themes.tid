@@ -20,26 +20,29 @@ code-body: yes
 \function convert.to.pt(value) [convert.to.in<value>multiply[72]]
 \function convert.to.em(value) [[storyTiddler]is[variable]then<value>divide{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}] [[storyTiddler]!is[variable]then<value>divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}]
 
-\function convert.to.pixels(value,metric)
-[<metric>match[cm]then<value>multiply[37.8]]
-[<metric>match[mm]then<value>multiply[37.8]divide[10]]
-[<metric>match[Q]then<value>multiply[37.8]divide[40]]
-[<metric>match[in]then<value>multiply[96]]
-[<metric>match[pc]then<value>multiply[96]divide[6]]
-[<metric>match[pt]then<value>multiply[96]divide[72]]
-[<metric>match[em]then[storyTiddler]is[variable]then<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}]
-[<metric>match[em]then[storyTiddler]!is[variable]then<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/fontsize}]
+\function convert.to.pixels(value)
+[is.pixel.value<value>]
+:else[is.cm.value<value>multiply[37.8]]
+:else[is.mm.value<value>multiply[37.8]divide[10]]
+:else[is.Q.value<value>multiply[37.8]divide[40]]
+:else[is.in.value<value>multiply[96]]
+:else[is.pc.value<value>multiply[96]divide[6]]
+:else[is.pt.value<value>multiply[96]divide[72]]
+:else[is.em.value<value>then[storyTiddler]is[variable]then<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}]
+:else[is.em.value<value>then[storyTiddler]!is[variable]then<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/fontsize}]
 \end
+
+\function convert.to.pixels.metric(value,metric) [<value>addsuffix<metric>] :map[convert.to.pixels<currentTiddler>]
 
 \function subtract.one.from.sidebarbreakpoint(value)
 [is.pixel.value<value>subtract[1]addsuffix[px]]
-:else[is.cm.value<value>convert.to.pixels<value>,[cm]subtract[1]divide[37.8]addsuffix[cm]]
-:else[is.mm.value<value>convert.to.pixels<value>,[mm]subtract[1]divide[37.8]multiply[10]addsuffix[mm]]
-:else[is.Q.value<value>convert.to.pixels<value>,[Q]subtract[1]divide[37.8]multiply[40]addsuffix[Q]]
-:else[is.in.value<value>convert.to.pixels<value>,[in]subtract[1]divide[96]addsuffix[in]]
-:else[is.pc.value<value>convert.to.pixels<value>,[pc]subtract[1]divide[96]multiply[6]addsuffix[pc]]
-:else[is.pt.value<value>convert.to.pixels<value>,[pt]subtract[1]divide[96]multiply[72]addsuffix[pt]]
-:else[is.em.value<value>convert.to.pixels<value>,[em]subtract[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
+:else[is.cm.value<value>convert.to.pixels.metric<value>,[cm]subtract[1]divide[37.8]addsuffix[cm]]
+:else[is.mm.value<value>convert.to.pixels.metric<value>,[mm]subtract[1]divide[37.8]multiply[10]addsuffix[mm]]
+:else[is.Q.value<value>convert.to.pixels.metric<value>,[Q]subtract[1]divide[37.8]multiply[40]addsuffix[Q]]
+:else[is.in.value<value>convert.to.pixels.metric<value>,[in]subtract[1]divide[96]addsuffix[in]]
+:else[is.pc.value<value>convert.to.pixels.metric<value>,[pc]subtract[1]divide[96]multiply[6]addsuffix[pc]]
+:else[is.pt.value<value>convert.to.pixels.metric<value>,[pt]subtract[1]divide[96]multiply[72]addsuffix[pt]]
+:else[is.em.value<value>convert.to.pixels.metric<value>,[em]subtract[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
 \end
 
 \function sidebarbreakpoint() [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}]
@@ -48,13 +51,13 @@ code-body: yes
 
 \function add.one.to.breakpoint(value)
 [is.pixel.value<value>add[1]addsuffix[px]]
-:else[is.cm.value<value>convert.to.pixels<value>,[cm]add[1]divide[37.8]addsuffix[cm]]
-:else[is.mm.value<value>convert.to.pixels<value>,[mm]add[1]divide[37.8]multiply[10]addsuffix[mm]]
-:else[is.Q.value<value>convert.to.pixels<value>,[Q]add[1]divide[37.8]multiply[40]addsuffix[Q]]
-:else[is.in.value<value>convert.to.pixels<value>,[in]add[1]divide[96]addsuffix[in]]
-:else[is.pc.value<value>convert.to.pixels<value>,[pc]add[1]divide[96]multiply[6]addsuffix[pc]]
-:else[is.pt.value<value>convert.to.pixels<value>,[pt]add[1]divide[96]multiply[72]addsuffix[pt]]
-:else[is.em.value<value>convert.to.pixels<value>,[em]add[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
+:else[is.cm.value<value>convert.to.pixels.metric<value>,[cm]add[1]divide[37.8]addsuffix[cm]]
+:else[is.mm.value<value>convert.to.pixels.metric<value>,[mm]add[1]divide[37.8]multiply[10]addsuffix[mm]]
+:else[is.Q.value<value>convert.to.pixels.metric<value>,[Q]add[1]divide[37.8]multiply[40]addsuffix[Q]]
+:else[is.in.value<value>convert.to.pixels.metric<value>,[in]add[1]divide[96]addsuffix[in]]
+:else[is.pc.value<value>convert.to.pixels.metric<value>,[pc]add[1]divide[96]multiply[6]addsuffix[pc]]
+:else[is.pt.value<value>convert.to.pixels.metric<value>,[pt]add[1]divide[96]multiply[72]addsuffix[pt]]
+:else[is.em.value<value>convert.to.pixels.metric<value>,[em]add[1]divide{$:/themes/tiddlywiki/vanilla/metrics/fontsize}addsuffix[em]]
 \end
 
 \function breakpoint-plus-one() [add.one.to.breakpoint{$:/config/plugins/menubar/breakpoint}] :else[{$:/config/plugins/menubar/breakpoint}]

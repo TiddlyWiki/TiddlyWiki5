@@ -11,7 +11,7 @@ title: $:/core/procedures/sidebar-resizer
 \function convert.to.pt.value() [convert.to.pt<value>]
 \function convert.to.em.value() [convert.to.em<value>]
 
-\function convert.to.pixels(value) [is.pixel.value<value>] [is.percentage.value<value>multiply<widgetNodeWidth>divide[100]] [is.cm.value<value>multiply[37.8]] [is.mm.value<value>multiply[37.8]divide[10]] [is.Q.value<value>multiply[37.8]divide[40]] [is.in.value<value>multiply[96]] [is.pc.value<value>multiply[96]divide[6]] [is.pt.value<value>multiply[96]divide[72]] [is.em.value<value>multiply{$:/themes/tiddlywiki/vanilla/metrics/fontsize}]
+\function convert.to.pixels.locally(value) [is.percentage.value<value>multiply<widgetNodeWidth>divide[100]] :else[convert.to.pixels<value>]
 
 \function convert.to.result(value,suffix) [<suffix>match[px]then<value>] [<suffix>match[%]then<convert.to.percentage.value>] [<suffix>match[cm]then<convert.to.cm.value>] [<suffix>match[mm]then<convert.to.mm.value>] [<suffix>match[Q]then<convert.to.Q.value>] [<suffix>match[in]then<convert.to.in.value>] [<suffix>match[pc]then<convert.to.pc.value>] [<suffix>match[pt]then<convert.to.pt.value>] [<suffix>match[em]then<convert.to.em.value>]
 
@@ -67,18 +67,18 @@ title: $:/core/procedures/sidebar-resizer
 
 \procedure set-storywidth-storyright-actions()
 <$let
-	storyRightStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}}
-	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-width}] }}}
+	storyRightStart={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-right}] }}}
+	storyWidthStart={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-width}] }}}
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric storyminwidth>] }}}
-	storyMinWidth={{{ [convert.to.pixels<storyMinWidthValue>] }}}
+	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric sidebarminwidth>] }}}
-	sidebarMinWidth={{{ [convert.to.pixels<sidebarMinWidthValue>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
 	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]get[text]] :else[get.theme.metric[metrics/storypaddingleft]] }}}
-	storyPaddingLeft={{{ [convert.to.pixels<storyPaddingLeftValue>] }}}
+	storyPaddingLeft={{{ [convert.to.pixels.locally<storyPaddingLeftValue>] }}}
 	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]get[text]] :else[get.theme.metric[metrics/storypaddingright]] }}}
-	storyPaddingRight={{{ [convert.to.pixels<storyPaddingRightValue>] }}}
+	storyPaddingRight={{{ [convert.to.pixels.locally<storyPaddingRightValue>] }}}
 	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
-	storyLeft={{{ [convert.to.pixels<storyLeftValue>] }}}
+	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
 	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	storyWidthStart={{{ [<storyWidthStart>subtract<clampedDiff>] }}}
 	storyRightStart={{{ [<storyRightStart>subtract<clampedDiff>] }}}
@@ -90,7 +90,7 @@ title: $:/core/procedures/sidebar-resizer
 	storyMaxWidth={{{ [<storyRiverLimit>subtract<storyLeft>] }}}
 	tiddlerWidthMetric={{$:/state/sidebar/resizing!!tiddler-width-metric}}
 	tiddlerWidthStart={{$:/state/sidebar/resizing!!start-tiddler-width}}
-	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] :else[convert.to.pixels<tiddlerWidthStart>] }}}
+	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] :else[convert.to.pixels.locally<tiddlerWidthStart>] }}}
 	tiddlerWidthClampedDiff={{{ [<tiddlerWidthStartPixels>add<storyPaddingLeft>add<storyPaddingRight>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>subtract<tiddlerWidthClampedDiff>] }}}
 	tiddlerWidthDiff={{{ [<storyWidth>subtract<tiddlerWidth>] }}}
@@ -138,11 +138,11 @@ title: $:/core/procedures/sidebar-resizer
 <$let
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric sidebarminwidth>] }}}
 	sidebarWidthMetric={{$:/state/sidebar/resizing!!sidebar-width-metric}}
-	sidebarMinWidth={{{ [convert.to.pixels<sidebarMinWidthValue>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
 	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
-	storyLeft={{{ [convert.to.pixels<storyLeftValue>] }}}
+	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric storyminwidth>] }}}
-	storyMinWidth={{{ [convert.to.pixels<storyMinWidthValue>] }}}
+	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
 	sidebarMaxWidth={{{ [<widgetNodeWidth>subtract<storyLeft>subtract<storyMinWidth>] }}}
 	clampedDiff={{{ [<storyLeft>add<storyMinWidth>add<startSidebarWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	sidebarWidth={{{ [<sidebarWidth>subtract<clampedDiff>] }}}>
@@ -161,10 +161,10 @@ title: $:/core/procedures/sidebar-resizer
 \procedure set-centralised-actions()
 <$let
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]get[text]] :else[{$:/themes/tiddlywiki/centralised/metrics/storyminwidth}] }}}
-	storyMinWidth={{{ [convert.to.pixels<storyMinWidthValue>] }}}
-	storyWidthStart={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-width}] }}}
+	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
+	storyWidthStart={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-width}] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]get[text]] :else[{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}] }}}
-	sidebarMinWidth={{{ [convert.to.pixels<sidebarMinWidthValue>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
 	storyMaxWidth={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<sidebarMinWidth>] }}}
 	dragDiffMultiplied={{{ [<dragDiff>multiply[2]] }}}
 	storyWidthClamped={{{ [<storyWidthStart>add<sidebarMinWidth>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
@@ -189,7 +189,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \procedure sidebar-resizer-pointermove-actions()
 <%if [[$:/state/sidebar/resizing]!is[missing]] %>
-	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff=<<get.drag.diff>> startStoryRight={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
+	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff=<<get.drag.diff>> startStoryRight={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
 		<%if [<tv-set-storywidth-storyright>match[yes]] %>
 			<<set_theme_throttling storyright>>
 			<<set_theme_throttling tiddlerwidth>>
