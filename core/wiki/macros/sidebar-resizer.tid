@@ -1,4 +1,4 @@
-title: $:/core/macros/sidebar-resizer
+title: $:/core/procedures/sidebar-resizer
 
 \function convert.to.percentage(value) [<value>divide<widgetNodeWidth>multiply[100]]
 

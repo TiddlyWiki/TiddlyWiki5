@@ -2,7 +2,7 @@ title: $:/core/ui/PageTemplate/sidebar-resizer
 tags: $:/tags/PageTemplate
 list-after: $:/core/ui/PageTemplate/story
 
-\import [function[get.base.functions.theme],<get.current.theme>first[]!is[missing]] :else[function[get.base.functions.theme],<get.current.theme>first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]] [[$:/core/macros/sidebar-resizer]]
+\import [function[get.base.functions.theme],<get.current.theme>first[]!is[missing]] :else[function[get.base.functions.theme],<get.current.theme>first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]] [[$:/core/procedures/sidebar-resizer]]
 \whitespace trim
 
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>
@@ -11,6 +11,16 @@ list-after: $:/core/ui/PageTemplate/story
 		tv-set-storywidth-storyright=<<set.storywidth.storyright>>
 		tv-set-sidebarwidth=<<set.sidebarwidth>>
 		tv-set-centralised=<<set.centralised>>
+
+		storyLeftTiddler=<<get.story-left.tiddler>>
+		storyRightTiddler=<<get.story-right.tiddler>>
+		sidebarWidthTiddler=<<get.sidebar-width.tiddler>>
+		tiddlerWidthTiddler=<<get.tiddler-width.tiddler>>
+		storyWidthTiddler=<<get.story-width.tiddler>>
+		storyMinWidthTiddler=<<get.story-minwidth.tiddler>>
+		sidebarMinWidthTiddler=<<get.sidebar-minwidth.tiddler>>
+		storyPaddingLeftTiddler=<<get.story-padding-left.tiddler>>
+		storyPaddingRightTiddler=<<get.story-padding-right.tiddler>>
 	>
 
 		<$transclude $variable="sidebar-resizer"/>
