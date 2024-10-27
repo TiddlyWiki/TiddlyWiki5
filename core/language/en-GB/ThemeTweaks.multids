@@ -1,7 +1,7 @@
 title: $:/language/ThemeTweaks/
 
 ThemeTweaks: Theme Tweaks
-ThemeTweaks/Hint: You can tweak certain aspects of the ''<$text text={{{ [{$:/theme}get[name]] :else[[current]] }}}/>'' theme.
+ThemeTweaks/Hint: You can tweak certain aspects of the ''<$text text={{{ [<get.current.theme>get[name]] :else[[current]] }}}/>'' theme.
 Options: Options
 Options/SidebarLayout: Sidebar layout
 Options/SidebarLayout/Fixed-Fluid: Fixed story, fluid sidebar
