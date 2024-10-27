@@ -73,9 +73,9 @@ title: $:/core/procedures/sidebar-resizer
 	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric sidebarminwidth>] }}}
 	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
-	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]get[text]] :else[get.theme.metric[metrics/storypaddingleft]] }}}
+	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]get[text]] :else[get.theme.metric[storypaddingleft]] }}}
 	storyPaddingLeft={{{ [convert.to.pixels.locally<storyPaddingLeftValue>] }}}
-	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]get[text]] :else[get.theme.metric[metrics/storypaddingright]] }}}
+	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]get[text]] :else[get.theme.metric[storypaddingright]] }}}
 	storyPaddingRight={{{ [convert.to.pixels.locally<storyPaddingRightValue>] }}}
 	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
