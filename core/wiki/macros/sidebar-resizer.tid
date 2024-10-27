@@ -26,29 +26,38 @@ title: $:/core/procedures/sidebar-resizer
 \end
 
 \procedure sidebar-resizer-pointerdown-actions()
-<%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
-	<$let
-		startStoryLeft={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[get.theme.metric[storyleft]] }}}
-		startStoryRight={{{ [<storyRightTiddler>!is[blank]get[text]] :else[get.theme.metric[storyright]] }}}
-		startSidebarWidth={{{ [<sidebarWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[sidebarwidth]] }}}
-		startTiddlerWidth={{{ [<tiddlerWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[tiddlerwidth]] }}}
-		startStoryWidth={{{ [<storyWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[storywidth]] }}}>
-		<$action-setfield $tiddler="$:/state/sidebar/resizing"
-			text="yes"
-			widget-node-width=<<tv-widgetnode-width>>
-			start-posx=<<event-fromcatcher-posx>>
-			start-story-left=<<startStoryLeft>>
-			story-left-metric={{{ [get.value.metric<startStoryLeft>] }}}
-			start-story-right=<<startStoryRight>>
-			story-right-metric={{{ [get.value.metric<startStoryRight>] }}}
-			start-sidebar-width=<<startSidebarWidth>>
-			sidebar-width-metric={{{ [get.value.metric<startSidebarWidth>] }}}
-			start-tiddler-width=<<startTiddlerWidth>>
-			tiddler-width-metric={{{ [get.value.metric<startTiddlerWidth>] }}}
-			start-story-width=<<startStoryWidth>>
-			story-width-metric={{{ [get.value.metric<startStoryWidth>] }}}
-		/>
-	</$let>
+<%if [[$:/state/sidebar]get[click-time]subtract<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>abs[]compare:number:lteq[500]] %>
+	<<sidebar-resizer-pointercancel-actions>>
+	<$action-setfield $tiddler="$:/state/sidebar" text="no"/>
+<% else %>
+	<%if [[$:/state/sidebar]is[missing]] %>
+		<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
+	<% endif %>
+	<$action-setfield $tiddler="$:/state/sidebar" click-time=<<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>>/>
+	<%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
+		<$let
+			startStoryLeft={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[get.theme.metric[storyleft]] }}}
+			startStoryRight={{{ [<storyRightTiddler>!is[blank]get[text]] :else[get.theme.metric[storyright]] }}}
+			startSidebarWidth={{{ [<sidebarWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[sidebarwidth]] }}}
+			startTiddlerWidth={{{ [<tiddlerWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[tiddlerwidth]] }}}
+			startStoryWidth={{{ [<storyWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[storywidth]] }}}>
+			<$action-setfield $tiddler="$:/state/sidebar/resizing"
+				text="yes"
+				widget-node-width=<<tv-widgetnode-width>>
+				start-posx=<<event-fromcatcher-posx>>
+				start-story-left=<<startStoryLeft>>
+				story-left-metric={{{ [get.value.metric<startStoryLeft>] }}}
+				start-story-right=<<startStoryRight>>
+				story-right-metric={{{ [get.value.metric<startStoryRight>] }}}
+				start-sidebar-width=<<startSidebarWidth>>
+				sidebar-width-metric={{{ [get.value.metric<startSidebarWidth>] }}}
+				start-tiddler-width=<<startTiddlerWidth>>
+				tiddler-width-metric={{{ [get.value.metric<startTiddlerWidth>] }}}
+				start-story-width=<<startStoryWidth>>
+				story-width-metric={{{ [get.value.metric<startStoryWidth>] }}}
+			/>
+		</$let>
+	<% endif %>
 <% endif %>
 \end
 
