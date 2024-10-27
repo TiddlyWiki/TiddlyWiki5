@@ -2310,8 +2310,7 @@ html body.tc-body.tc-single-tiddler-window {
 	border-left: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
-	overflow-x: auto;
-	overflow-y: hidden;
+	overflow: auto;
 }
 
 .tc-sidebar-lists .tc-tab-buttons {
