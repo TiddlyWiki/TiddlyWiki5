@@ -13,9 +13,29 @@ title: $:/core/procedures/sidebar-resizer
 
 \function convert.to.pixels.locally(value) [is.percentage.value<value>multiply<widgetNodeWidth>divide[100]] :else[convert.to.pixels<value>]
 
-\function convert.to.result(value,suffix) [<suffix>match[px]then<value>] [<suffix>match[%]then<convert.to.percentage.value>] [<suffix>match[cm]then<convert.to.cm.value>] [<suffix>match[mm]then<convert.to.mm.value>] [<suffix>match[Q]then<convert.to.Q.value>] [<suffix>match[in]then<convert.to.in.value>] [<suffix>match[pc]then<convert.to.pc.value>] [<suffix>match[pt]then<convert.to.pt.value>] [<suffix>match[em]then<convert.to.em.value>]
+\function convert.to.result(value,suffix)
+[<suffix>match[px]then<value>]
+:else[<suffix>match[%]then<convert.to.percentage.value>]
+:else[<suffix>match[cm]then<convert.to.cm.value>]
+:else[<suffix>match[mm]then<convert.to.mm.value>]
+:else[<suffix>match[Q]then<convert.to.Q.value>]
+:else[<suffix>match[in]then<convert.to.in.value>]
+:else[<suffix>match[pc]then<convert.to.pc.value>]
+:else[<suffix>match[pt]then<convert.to.pt.value>]
+:else[<suffix>match[em]then<convert.to.em.value>]
+\end
 
-\function get.value.metric(value) [<value>suffix[px]then[px]] :else[<value>suffix[%]then[%]] :else[<value>suffix[cm]then[cm]] :else[<value>suffix[mm]then[mm]] :else[<value>suffix[Q]then[Q]] :else[<value>suffix[in]then[in]] :else[<value>suffix[pc]then[pc]] :else[<value>suffix[pt]then[pt]] :else[<value>suffix[em]then[em]]
+\function get.value.metric(value)
+[<value>suffix[px]then[px]]
+:else[<value>suffix[%]then[%]]
+:else[<value>suffix[cm]then[cm]]
+:else[<value>suffix[mm]then[mm]]
+:else[<value>suffix[Q]then[Q]]
+:else[<value>suffix[in]then[in]]
+:else[<value>suffix[pc]then[pc]]
+:else[<value>suffix[pt]then[pt]]
+:else[<value>suffix[em]then[em]]
+\end
 
 \procedure set_theme_throttling(metric)
 <$set name="metricsTiddler" value={{{ [function[get.theme],<metric>] }}}>
