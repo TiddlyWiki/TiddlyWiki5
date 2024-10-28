@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The wikify widget parses and renders a string of text and assigns the result to a specified [[variable|Variables]]. The new value of the variable is available to the content within the wikify widget.
+The wikify widget parses and renders a string of text (opposite of [[TextWidget]]) and assigns the result to a specified [[variable|Variables]]. The new value of the variable is available to the content within the wikify widget.
 
 ! Content and Attributes
 
@@ -28,3 +28,15 @@ The available output types are:
 |html |Return the rendered HTML of the output |
 |parsetree |Return a formatted JSON representation of the parse tree |
 |widgettree |Return a formatted JSON representation of the widget tree |
+
+The widget is mostly used to generate [[WikiText]] and [[Filters]]: for example, a filter that is built from list of tags could look like this:
+
+<$macrocall $name="wikitext-example-without-html" src="""<$vars listOfTags="Concepts Reference">
+<$wikify name="tagsFilter" text="[<$list filter='[enlist<listOfTags>]' variable='currentTag'>tag[<<currentTag>>]</$list>first[5]]">
+
+Text of the filter: <<tagsFilter>>
+
+<$list filter=<<tagsFilter>>/>
+
+</$wikify>
+</$vars>"""/>
