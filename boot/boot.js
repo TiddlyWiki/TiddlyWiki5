@@ -96,34 +96,42 @@ Push entries onto an array, removing them first if they already exist in the arr
 $tw.utils.pushTop = function(array,value) {
 	var t,p;
 	if($tw.utils.isArray(value)) {
-		// Remove any array entries that are duplicated in the new values
-		if(value.length !== 0) {
-			if(array.length !== 0) {
-				if(value.length < array.length) {
-					for(t=0; t<value.length; t++) {
-						p = array.indexOf(value[t]);
-						if(p !== -1) {
-							array.splice(p,1);
+		if($tw.config._temp_allowDuplicates) {
+			Array.prototype.push.apply(array,value);
+		} else {
+			// Remove any array entries that are duplicated in the new values
+			if(value.length !== 0) {
+				if(array.length !== 0) {
+					if(value.length < array.length) {
+						for(t=0; t<value.length; t++) {
+							p = array.indexOf(value[t]);
+							if(p !== -1) {
+								array.splice(p,1);
+							}
 						}
-					}
-				} else {
-					for(t=array.length-1; t>=0; t--) {
-						p = value.indexOf(array[t]);
-						if(p !== -1) {
-							array.splice(t,1);
+					} else {
+						for(t=array.length-1; t>=0; t--) {
+							p = value.indexOf(array[t]);
+							if(p !== -1) {
+								array.splice(t,1);
+							}
 						}
 					}
 				}
-			}
-			// Push the values on top of the main array
-			array.push.apply(array,value);
+				// Push the values on top of the main array
+				Array.prototype.push.apply(array,value);
+			}			
 		}
 	} else {
-		p = array.indexOf(value);
-		if(p !== -1) {
-			array.splice(p,1);
+		if($tw.config._temp_allowDuplicates) {
+			array.push(value);
+		} else {
+			p = array.indexOf(value);
+			if(p !== -1) {
+				array.splice(p,1);
+			}
+			array.push(value);
 		}
-		array.push(value);
 	}
 	return array;
 };
@@ -423,7 +431,7 @@ $tw.utils.parseStringArray = function(value, allowDuplicate) {
 			match = memberRegExp.exec(value);
 			if(match) {
 				var item = match[1] || match[2];
-				if(item !== undefined && (!$tw.utils.hop(names,item) || allowDuplicate)) {
+				if(item !== undefined && (!$tw.utils.hop(names,item) || allowDuplicate || $tw.config._temp_allowDuplicates)) {
 					results.push(item);
 					names[item] = true;
 				}
@@ -2374,13 +2382,24 @@ $tw.loadTiddlersNode = function() {
 Startup TiddlyWiki
 */
 $tw.boot.initStartup = function(options) {
+	var _temp_allowDuplicates;
+	options = options || {};
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
 	if($tw.browser && !$tw.node) {
 		if(location.hash === "#:safe") {
 			$tw.safeMode = true;
+		} else if(location.hash === "#dupes") {
+			_temp_allowDuplicates = true;
+			$tw.locationHash = $tw.utils.getLocationHash();
 		} else {
 			$tw.locationHash = $tw.utils.getLocationHash();
+		}
+	} else {
+		var p = $tw.boot.argv.indexOf("--dupes");
+		if(p !== -1) {
+			_temp_allowDuplicates = true;
+			$tw.boot.argv.splice(p,1);
 		}
 	}
 	// Initialise some more $tw properties
@@ -2390,6 +2409,7 @@ $tw.boot.initStartup = function(options) {
 			types: {} // hashmap by module type of hashmap of exports
 		},
 		config: { // Configuration overridables
+			_temp_allowDuplicates: _temp_allowDuplicates,
 			pluginsPath: "../plugins/",
 			themesPath: "../themes/",
 			languagesPath: "../languages/",
@@ -2546,6 +2566,14 @@ $tw.boot.execStartup = function(options){
 	// Make sure the crypto state tiddler is up to date
 	if($tw.crypto) {
 		$tw.crypto.updateCryptoStateTiddler();
+	}
+	// Warn if using duplicates mode
+	console.log("\x1b[0;31m--------=====>>>>>> " + $tw.wiki.getTiddler("$:/core/_temp_allowDuplicates/Heading").fields.text + "\x1b[0m");
+	console.log("\x1b[0;34m--------=====>>>>>> " + $tw.wiki.getTiddler("$:/core/_temp_allowDuplicates/Warning").fields.text + "\x1b[0m");
+	if($tw.config._temp_allowDuplicates) {
+		console.log("\x1b[0;31m--------=====>>>>>> " + $tw.wiki.getTiddler("$:/core/_temp_allowDuplicates/StatusOn").fields.text + "\x1b[0m");
+	} else {
+		console.log("\x1b[0;32m--------=====>>>>>> " + $tw.wiki.getTiddler("$:/core/_temp_allowDuplicates/StatusOff").fields.text + "\x1b[0m");
 	}
 	// Gather up any startup modules
 	$tw.boot.remainingStartupModules = []; // Array of startup modules
