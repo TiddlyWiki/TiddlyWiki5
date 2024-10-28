@@ -234,7 +234,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \function get.drag.diff()
 [<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}]
-:map[{$:/themes/tiddlywiki/vanilla/options/sidebarposition}match[left]then<currentTiddler>multiply[-1]else<currentTiddler>]
+:map[<get.theme.option sidebarposition>match[left]then<currentTiddler>multiply[-1]else<currentTiddler>]
 \end
 
 \procedure sidebar-resizer-pointermove-actions()
