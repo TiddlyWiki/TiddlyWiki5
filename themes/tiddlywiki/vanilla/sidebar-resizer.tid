@@ -27,13 +27,17 @@ code-body: yes
 
 		@media (pointer: coarse) {
 
-			.tc-sidebar-resizer {
+			.tc-sidebar-resizer.tc-main-sidebar-resizer {
 				background: <<colour muted-foreground>>;
 			}
 
-			.tc-sidebar-resizer:hover {
+			.tc-sidebar-resizer.tc-main-sidebar-resizer:hover {
 				opacity: 0.1;
 			}
+		}
+
+		.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
+			height: 100%;
 		}
 
 		.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
@@ -52,28 +56,28 @@ code-body: yes
 			user-select: none;
 		}
 
+		.tc-sidebar-resizer-pointermove-eventcatcher-wrapper.tc-resizer-active {
+			z-index: 801;
+		}
+
+		.tc-sidebar-resizer-pointermove-eventcatcher.tc-resizer-active {
+			z-index: 802;
+		}
+
+		.tc-sidebar-resizer-pointermove.tc-resizer-active {
+			z-index: 803;
+			cursor: ew-resize;
+		}
+
+		.tc-sidebar-resizer.tc-resizer-active {
+			opacity: 0.6;
+		}
+
 		<%if [[$:/state/sidebar/resizing]!is[missing]] %>
-
-			.tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
-				z-index: 801;
-			}
-
-			.tc-sidebar-resizer-pointermove-eventcatcher {
-				z-index: 802;
-			}
-
-			.tc-sidebar-resizer-pointermove {
-				z-index: 803;
-				cursor: ew-resize;
-			}
-
-			.tc-sidebar-resizer {
-				opacity: 0.6;
-			}
 
 			@media (pointer: coarse) {
 
-				.tc-sidebar-resizer {
+				.tc-sidebar-resizer.tc-main-sidebar-resizer {
 					opacity: 0.25;
 				}
 			}
@@ -82,11 +86,11 @@ code-body: yes
 
 		<%if [<set.storywidth.storyright>match[yes]] %>
 
-			.tc-sidebar-resizer {
+			.tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingright>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
 			}
 
-			.tc-sidebar-left .tc-sidebar-resizer {
+			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
 				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingright>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
 			}
@@ -95,11 +99,11 @@ code-body: yes
 
 		<%if [<set.sidebarwidth>match[yes]] %>
 
-			.tc-sidebar-resizer {
+			.tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingright>> / 3)));
 			}
 
-			.tc-sidebar-left .tc-sidebar-resizer {
+			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
 				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingright>> / 3)));
 			}
@@ -108,11 +112,11 @@ code-body: yes
 
 		<%if [<set.centralised>match[yes]] %>
 
-			.tc-sidebar-resizer {
+			.tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
 			}
 
-			.tc-sidebar-left .tc-sidebar-resizer {
+			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
 				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
 			}
@@ -121,7 +125,7 @@ code-body: yes
 
 		<%if [{$:/state/sidebar}match[no]] %>
 
-			.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove, .tc-sidebar-resizer {
+			.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove, .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				display: none;
 			}
 
@@ -131,7 +135,7 @@ code-body: yes
 
 	@media (max-width: <<sidebarbreakpoint-minus-one>>) {
 
-		.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove, .tc-sidebar-resizer {
+		.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove, .tc-sidebar-resizer.tc-main-sidebar-resizer {
 			display: none;
 		}
 	}

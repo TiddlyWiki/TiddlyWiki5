@@ -37,12 +37,51 @@ title: $:/core/procedures/sidebar-resizer
 :else[<value>suffix[em]then[em]]
 \end
 
-\procedure set_theme_throttling(metric)
-<$set name="metricsTiddler" value={{{ [function[get.theme],<metric>] }}}>
-	<%if [<metricsTiddler>!has[throttle.refresh]] %>
-		<$action-setfield $tiddler=<<metricsTiddler>> throttle.refresh="yes"/>
-	<% endif %>
-</$set>
+\function get.sidebar.width.tiddler()
+[<sidebarWidthTiddler>!is[blank]]
+:else[get.theme[sidebarwidth]]
+\end
+
+\function get.resizer.state()
+[<resizer.state.tiddler>!is[blank]]
+:else[<qualify>addsuffix[-]addsuffix<get.sidebar.width.tiddler>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizing-]]
+\end
+
+\procedure set_theme_throttling(metric,tiddler)
+<%if [<set.throttling>match[yes]] %>
+	<$set name="metricsTiddler" value={{{ [<tiddler>getvariable[]!is[blank]] :else[function[get.theme],<metric>] }}}>
+		<%if [<metricsTiddler>!has[throttle.refresh]] %>
+			<$action-setfield $tiddler=<<metricsTiddler>> throttle.refresh="yes"/>
+		<% endif %>
+	</$set>
+<% endif %>
+\end
+
+\procedure sidebar-resizer-pointerdown-actions-inner()
+<%if [<get.resizer.state>is[missing]then<event-mousebutton>match[left]] %>
+	<$let
+		startStoryLeft={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[get.theme.metric[storyleft]] }}}
+		startStoryRight={{{ [<storyRightTiddler>!is[blank]get[text]] :else[get.theme.metric[storyright]] }}}
+		startSidebarWidth={{{ [<sidebarWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[sidebarwidth]] }}}
+		startTiddlerWidth={{{ [<tiddlerWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[tiddlerwidth]] }}}
+		startStoryWidth={{{ [<storyWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[storywidth]] }}}>
+		<$action-setfield $tiddler=<<get.resizer.state>>
+			text="yes"
+			widget-node-width=<<tv-widgetnode-width>>
+			start-posx=<<event-fromcatcher-posx>>
+			start-story-left=<<startStoryLeft>>
+			story-left-metric={{{ [get.value.metric<startStoryLeft>] }}}
+			start-story-right=<<startStoryRight>>
+			story-right-metric={{{ [get.value.metric<startStoryRight>] }}}
+			start-sidebar-width=<<startSidebarWidth>>
+			sidebar-width-metric={{{ [get.value.metric<startSidebarWidth>] }}}
+			start-tiddler-width=<<startTiddlerWidth>>
+			tiddler-width-metric={{{ [get.value.metric<startTiddlerWidth>] }}}
+			start-story-width=<<startStoryWidth>>
+			story-width-metric={{{ [get.value.metric<startStoryWidth>] }}}
+		/>
+	</$let>
+<% endif %>
 \end
 
 \procedure sidebar-resizer-pointerdown-actions()
@@ -54,35 +93,12 @@ title: $:/core/procedures/sidebar-resizer
 		<$action-setfield $tiddler="$:/state/sidebar" text="yes"/>
 	<% endif %>
 	<$action-setfield $tiddler="$:/state/sidebar" click-time=<<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>>/>
-	<%if [[$:/state/sidebar/resizing]is[missing]then<event-mousebutton>match[left]] %>
-		<$let
-			startStoryLeft={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[get.theme.metric[storyleft]] }}}
-			startStoryRight={{{ [<storyRightTiddler>!is[blank]get[text]] :else[get.theme.metric[storyright]] }}}
-			startSidebarWidth={{{ [<sidebarWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[sidebarwidth]] }}}
-			startTiddlerWidth={{{ [<tiddlerWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[tiddlerwidth]] }}}
-			startStoryWidth={{{ [<storyWidthTiddler>!is[blank]get[text]] :else[get.theme.metric[storywidth]] }}}>
-			<$action-setfield $tiddler="$:/state/sidebar/resizing"
-				text="yes"
-				widget-node-width=<<tv-widgetnode-width>>
-				start-posx=<<event-fromcatcher-posx>>
-				start-story-left=<<startStoryLeft>>
-				story-left-metric={{{ [get.value.metric<startStoryLeft>] }}}
-				start-story-right=<<startStoryRight>>
-				story-right-metric={{{ [get.value.metric<startStoryRight>] }}}
-				start-sidebar-width=<<startSidebarWidth>>
-				sidebar-width-metric={{{ [get.value.metric<startSidebarWidth>] }}}
-				start-tiddler-width=<<startTiddlerWidth>>
-				tiddler-width-metric={{{ [get.value.metric<startTiddlerWidth>] }}}
-				start-story-width=<<startStoryWidth>>
-				story-width-metric={{{ [get.value.metric<startStoryWidth>] }}}
-			/>
-		</$let>
-	<% endif %>
+	<<sidebar-resizer-pointerdown-actions-inner>>
 <% endif %>
 \end
 
 \procedure sidebar-resizer-pointercancel-actions()
-<$action-deletetiddler $tiddler="$:/state/sidebar/resizing"/>
+<$action-deletetiddler $tiddler=<<get.resizer.state>>/>
 \end
 
 \function get.story-width.result()
@@ -108,8 +124,10 @@ title: $:/core/procedures/sidebar-resizer
 
 \procedure set-storywidth-storyright-actions()
 <$let
-	storyRightStart={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-right}] }}}
-	storyWidthStart={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-width}] }}}
+	storyRightStart={{{ [<get.resizer.state>get[start-story-right]] }}}
+	storyWidthStart={{{ [<get.resizer.state>get[start-story-width]] }}}
+	storyRightStart={{{ [convert.to.pixels.locally<storyRightStart>] }}}
+	storyWidthStart={{{ [convert.to.pixels.locally<storyWidthStart>] }}}
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric storyminwidth>] }}}
 	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric sidebarminwidth>] }}}
@@ -129,8 +147,8 @@ title: $:/core/procedures/sidebar-resizer
 	storyMinWidthAddLeft={{{ [<storyMinWidth>add<storyLeft>] }}}
 	storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}
 	storyMaxWidth={{{ [<storyRiverLimit>subtract<storyLeft>] }}}
-	tiddlerWidthMetric={{$:/state/sidebar/resizing!!tiddler-width-metric}}
-	tiddlerWidthStart={{$:/state/sidebar/resizing!!start-tiddler-width}}
+	tiddlerWidthMetric={{{ [<get.resizer.state>get[tiddler-width-metric]] }}}
+	tiddlerWidthStart={{{ [<get.resizer.state>get[start-tiddler-width]] }}}
 	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] :else[convert.to.pixels.locally<tiddlerWidthStart>] }}}
 	tiddlerWidthClampedDiff={{{ [<tiddlerWidthStartPixels>add<storyPaddingLeft>add<storyPaddingRight>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>subtract<tiddlerWidthClampedDiff>] }}}
@@ -140,7 +158,7 @@ title: $:/core/procedures/sidebar-resizer
 	storyRiverWidth={{{ [<storyRiverWidth>subtract<clampedDiff>] }}}>
 
 	<$let
-		storyWidthMetric={{$:/state/sidebar/resizing!!story-width-metric}}
+		storyWidthMetric={{{ [<get.resizer.state>get[story-width-metric]] }}}
 		storyWidthConverted={{{ [function[convert.to.result],<storyWidth>,<storyWidthMetric>] }}}
 		storyMinWidthConverted={{{ [function[convert.to.result],<storyMinWidth>,<storyWidthMetric>] }}}
 		storyMaxWidthConverted={{{ [function[convert.to.result],<storyMaxWidth>,<storyWidthMetric>] }}}
@@ -156,7 +174,7 @@ title: $:/core/procedures/sidebar-resizer
 	</$let>
 
 	<$let
-		storyRightMetric={{$:/state/sidebar/resizing!!story-right-metric}}
+		storyRightMetric={{{ [<get.resizer.state>get[story-right-metric]] }}}
 		storyRiverWidthConverted={{{ [function[convert.to.result],<storyRiverWidth>,<storyRightMetric>] }}}
 		storyRiverLimitConverted={{{ [function[convert.to.result],<storyRiverLimit>,<storyRightMetric>] }}}
 		storyMinWidthAddLeftConverted={{{ [function[convert.to.result],<storyMinWidthAddLeft>,<storyRightMetric>] }}}
@@ -178,7 +196,7 @@ title: $:/core/procedures/sidebar-resizer
 \procedure set-sidebarwidth-actions()
 <$let
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]get[text]] :else[<get.theme.metric sidebarminwidth>] }}}
-	sidebarWidthMetric={{$:/state/sidebar/resizing!!sidebar-width-metric}}
+	sidebarWidthMetric={{{ [<get.resizer.state>get[sidebar-width-metric]] }}}
 	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
 	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
@@ -195,6 +213,7 @@ title: $:/core/procedures/sidebar-resizer
 		sidebarWidthSetTiddler={{{ [<sidebarWidthTiddler>!is[blank]] :else[<set.theme.metric sidebarwidth>] }}}>
 		
 		<$action-setfield $tiddler=<<sidebarWidthSetTiddler>> text=<<get.sidebar-width.result>>/>
+
 	</$let>
 </$let>
 \end
@@ -209,7 +228,8 @@ title: $:/core/procedures/sidebar-resizer
 <$let
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]get[text]] :else[{$:/themes/tiddlywiki/centralised/metrics/storyminwidth}] }}}
 	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
-	storyWidthStart={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-width}] }}}
+	storyWidthStart={{{ [<get.resizer.state>get[start-story-width]] }}}
+	storyWidthStart={{{ [convert.to.pixels.locally<storyWidthStart>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]get[text]] :else[{$:/themes/tiddlywiki/centralised/metrics/sidebarminwidth}] }}}
 	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
 	storyMaxWidth={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>subtract<sidebarMinWidth>] }}}
@@ -219,7 +239,7 @@ title: $:/core/procedures/sidebar-resizer
 	storyWidth={{{ [<storyWidth>subtract<storyWidthClamped>] }}}>
 
 	<$let
-		storyWidthMetric={{$:/state/sidebar/resizing!!story-width-metric}}
+		storyWidthMetric={{{ [<get.resizer.state>get[story-width-metric]] }}}
 		storyWidthConverted={{{ [function[convert.to.result],<storyWidth>,<storyWidthMetric>] }}}
 		storyMinWidthConverted={{{ [function[convert.to.result],<storyMinWidth>,<storyWidthMetric>] }}}
 		storyMaxWidthConverted={{{ [function[convert.to.result],<storyMaxWidth>,<storyWidthMetric>] }}}
@@ -233,54 +253,72 @@ title: $:/core/procedures/sidebar-resizer
 \end
 
 \function get.drag.diff()
-[<event-fromcatcher-posx>subtract{$:/state/sidebar/resizing!!start-posx}]
+[<event-fromcatcher-posx>subtract<startPosX>]
 :map[<get.theme.option sidebarposition>match[left]then<currentTiddler>multiply[-1]else<currentTiddler>]
 \end
 
 \procedure sidebar-resizer-pointermove-actions()
-<%if [[$:/state/sidebar/resizing]!is[missing]] %>
-	<$let widgetNodeWidth={{$:/state/sidebar/resizing!!widget-node-width}} dragDiff=<<get.drag.diff>> startStoryRight={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-story-right}] }}} storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}} startSidebarWidth={{{ [convert.to.pixels.locally{$:/state/sidebar/resizing!!start-sidebar-width}] }}} sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
+<%if [<get.resizer.state>!is[missing]] %>
+	<$let
+		startPosX={{{ [<get.resizer.state>get[start-posx]] }}}
+		widgetNodeWidth={{{ [<get.resizer.state>get[widget-node-width]] }}}
+		dragDiff=<<get.drag.diff>>
+		startStoryRight={{{ [<get.resizer.state>get[start-story-right]] }}}
+		startStoryRight={{{ [convert.to.pixels.locally<startStoryRight>] }}}
+		storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}}
+		startSidebarWidth={{{ [<get.resizer.state>get[start-sidebar-width]] }}}
+		startSidebarWidth={{{ [convert.to.pixels.locally<startSidebarWidth>] }}}
+		sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
 		<%if [<tv-set-storywidth-storyright>match[yes]] %>
-			<<set_theme_throttling storyright>>
-			<<set_theme_throttling tiddlerwidth>>
-			<<set_theme_throttling storywidth>>
+			<<set_theme_throttling storyright storyRightTiddler>>
+			<<set_theme_throttling tiddlerwidth tiddlerWidthTiddler>>
+			<<set_theme_throttling storywidth storyWidthTiddler>>
 			<<set-storywidth-storyright-actions>>
 		<% endif %>
 		<%if [<tv-set-sidebarwidth>match[yes]] %>
-			<<set_theme_throttling sidebarwidth>>
+			<<set_theme_throttling sidebarwidth sidebarWidthTiddler>>
 			<<set-sidebarwidth-actions>>
 		<% endif %>
 		<%if [<tv-set-centralised>match[yes]] %>
-			<<set_theme_throttling storywidth>>
+			<<set_theme_throttling storywidth storyWidthTiddler>>
 			<<set-centralised-actions>>
 		<% endif %>
 	</$let>
 <% endif %>
 \end
 
-\procedure sidebar-resizer()
+\function get.sidebar-resizer.class() tc-sidebar-resizer [<get.resizer.state>!is[missing]then[tc-resizer-active]] [resizer.class[]] [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-]] +[join[ ]]
+
+\function get.active.class(class) [<class>] [<get.resizer.state>!is[missing]then[tc-resizer-active]] +[join[ ]]
+
+\function get.sidebar-resizer.pointerdown.actions()
+[<get.resizer.state>match[$:/state/sidebar/resizing]then<sidebar-resizer-pointerdown-actions>]
+:else[<sidebar-resizer-pointerdown-actions-inner>]
+\end
+
+\procedure sidebar-resizer(templateLeft:"",templateRight:"")
 <$eventcatcher
 	tag="div"
-	class="tc-sidebar-resizer-pointerdown-eventcatcher"
+	class=<<get.active.class tc-sidebar-resizer-pointerdown-eventcatcher>>
 	selector=".tc-sidebar-resizer"
 	matchSelector=".tc-sidebar-resizer"
-	$pointerdown=<<sidebar-resizer-pointerdown-actions>>
+	$pointerdown=<<get.sidebar-resizer.pointerdown.actions>>
 	$pointerup=<<sidebar-resizer-pointercancel-actions>>>
 
-	<%if [{$:/state/sidebar}!match[no]] %>
+	<%if [<resizer.state>!match[no]] %>
 
 		<$eventcatcher
 			tag="div"
-			class="tc-sidebar-resizer-pointermove-eventcatcher-wrapper"
+			class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher-wrapper>>
 			selector=".tc-sidebar-resizer"
 			matchSelector=".tc-sidebar-resizer"
-			$pointerup={{{ [[$:/state/sidebar/resizing]!is[missing]then<sidebar-resizer-pointercancel-actions>] }}}>
+			$pointerup={{{ [<get.resizer.state>!is[missing]then<sidebar-resizer-pointercancel-actions>] }}}>
 
 			<$eventcatcher
 				tag="div"
 				selector=".tc-sidebar-resizer-pointermove"
 				matchSelector=".tc-sidebar-resizer-pointermove"
-				class="tc-sidebar-resizer-pointermove-eventcatcher"
+				class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher>>
 				$pointerup=<<sidebar-resizer-pointercancel-actions>>
 				$pointerleave=<<sidebar-resizer-pointercancel-actions>>
 				$pointerout=<<sidebar-resizer-pointercancel-actions>>
@@ -290,11 +328,26 @@ title: $:/core/procedures/sidebar-resizer
 				$pointermove=<<sidebar-resizer-pointermove-actions>>
 				$contextmenu=<<sidebar-resizer-pointercancel-actions>>>
 
-				<div class="tc-sidebar-resizer-pointermove"/>
+				<div class=<<get.active.class tc-sidebar-resizer-pointermove>>/>
 
 			</$eventcatcher>
 
-			<div class="tc-sidebar-resizer"/>
+			<%if [<templateLeft>!is[blank]] %>
+
+				<$transclude $tiddler=<<templateLeft>> mode="block"/>
+
+			<% endif %>
+
+			<div
+				class=<<get.sidebar-resizer.class>>
+				style.position={{{ [get.style.position[]] }}}
+				style.left={{{ [get.style.left[]] }}}/>
+
+			<%if [<templateRight>!is[blank]] %>
+
+				<$transclude $tiddler=<<templateRight>> mode="block"/>
+
+			<% endif %>
 
 		</$eventcatcher>
 
