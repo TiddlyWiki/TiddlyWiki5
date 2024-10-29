@@ -51,6 +51,16 @@ code-body: yes
 			z-index: -1;
 		}
 
+		.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+		}
+
+		.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+			position: relative;
+		}
+
 		.tc-sidebar-resizer, .tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
 			touch-action: none;
 			user-select: none;
