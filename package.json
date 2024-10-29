@@ -41,7 +41,7 @@
 
 		"dev": "node ./tiddlywiki.js +plugins/tiddlywiki/filesystem +plugins/tiddlywiki/tiddlyweb ./editions/dev --listen",
 
-		"library:info": "echo The Warning below: \"Plugin(s) required for client-server operation are missing\" is INTENTIONAL, so no files will be saved back.",
+		"library:info": "echo The Warning: \"Plugin(s) required for client-server operation are missing\" is INTENTIONAL, so no files will be saved back.",
 		"library": "node ./tiddlywiki.js ./editions/pluginlibrary --build test-server",
 
 		"build": "node ./tiddlywiki.js ./editions/tw5.com --build",
