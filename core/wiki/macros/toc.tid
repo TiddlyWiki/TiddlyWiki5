@@ -26,19 +26,23 @@ The very first toc macro is _not_ reused. So it can be used as a simple referenc
 
 <!-- Use this item template as a default -->
 \procedure toc-defaultItemTemplate()
-<$let tv-wikilinks="no"
-	field={{{ [<currentTiddler>] :cascade[<_hasItemTemplate>append<_hasCaptionField>append<_hasCaption>append[title]] }}}
->
-	<span class=""
-		data-fieldClass=`field-$(field)$`
-		title=<<tf.toc-getTooltip>>
+<%if [<_mode>match[tagMode][toc-caption]is[variable]] %>
+	<$transclude $variable="toc-caption"/>
+<%else%>
+	<$let tv-wikilinks="no"
+		field={{{ [<currentTiddler>] :cascade[<_hasItemTemplate>append<_hasCaptionField>append<_hasCaption>append[title]] }}}
 	>
-		<$transclude $field=<<field>>/>
-	</span>
-	<<toc-newChildButton>>
-	<!-- Do not remove next line it's needed for debugging -->
-	<!-- <sup class="tc-small-gap-left"><<_mode>></sup> -->
-</$let>
+		<span class=""
+			data-fieldClass=`field-$(field)$`
+			title=<<tf.toc-getTooltip>>
+		>
+			<$transclude $field=<<field>>/>
+		</span>
+		<<toc-newChildButton>>
+		<!-- Do not remove next line it's needed for debugging -->
+		<!-- <sup class="tc-small-gap-left"><<_mode>></sup> -->
+	</$let>
+<%endif%>
 \end
 
 \procedure toc-newChildButton()
@@ -129,7 +133,9 @@ This macro is _not_ used by other toc-macros
 v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-itemClass()
 ========================================================================================== -->
 \procedure toc(tag,sort:"",itemClassFilter,exclude,captionField,tagField,parentField,itemTemplate)
+<$let tag={{{ [<tag>is[blank]then<currentTiddler>else<tag>] }}} >
 	<$macrocall $name="toc-body" tag=<<tag>> sort=<<sort>> exclude=<<exclude>>/>
+</$let>
 \end
 
 <!-- Simple toc helper body -->
@@ -184,7 +190,9 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 	:else[<toc-tagChildFilter>]
 \end
 
-\function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
+<!-- Last path separator needs to be "-" for backwards compatibility :/ -->
+\function tf.toc-stateTitle() [[$:/state/toc]] [<path>] "-" [<currentTiddler>] +[join[]]
+\function tf.toc-closePrefix() [[$:/state/toc]] [<path>] "/" [<currentTiddler>] +[join[]]
 
 <!-- toc-openBranch internally uses a recursiveOpen() procedure -->
 \procedure toc-openBranch(path,currentTiddler,manual:"no")
@@ -222,8 +230,9 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 
 \procedure toc-closeBranch(path,currentTiddler,manual:"no")
 <% if [<modifier>match[ctrl]] :else[<manual>match[yes]] %>
-	<$let prefix={{{ [<tf.toc-stateTitle>] }}} >
+	<$let prefix={{{ [<tf.toc-closePrefix>] }}} >
 		<$action-deletetiddler $filter="[prefix<prefix>]"/>
+		<$action-deletetiddler $filter="[prefix<tf.toc-stateTitle>]"/>
 	</$let>
 <% endif %>
 \end
@@ -236,7 +245,6 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 -->
 \procedure toc-item(isUnlinked:"")
 <% if [<toc-state>get[text]else[close]match[close]] %>
-	<!-- <$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible" tooltip=<<toc-state>>> -->
 	<$button actions=<<toc-openBranch>> setTitle=<<toc-state>> setTo="open" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-closed-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
@@ -244,7 +252,6 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 		<% endif %>
 	</$button>
 <% elseif [<toc-state>get[text]match[open]] %>
-	<!-- <$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible" tooltip=<<toc-state>>> -->
 	<$button actions=<<toc-closeBranch>> setTitle=<<toc-state>> setTo="close" class="tc-btn-invisible tc-tiny-gap-right">
 		<$transclude tiddler=<<toc-open-icon>> />
 		<% if [<isUnlinked>match[yes]] %>
@@ -294,34 +301,36 @@ v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter see: tf.toc-i
 Shows an expandable toc. Item always have an open/close chevron
 =============================================================== -->
 \procedure toc-expandable(tag,sort:"",itemClassFilter:"",exclude,path,captionField,tagField,parentField,itemTemplate)
-<$set name=currentTiddler filter="[<parentField>!is[blank]then<tag>else<currentTiddler>]">
-<ol class="tc-toc toc-expandable">
-	<!-- Text substitution is needed for backwards compatibility -->
-	<$list filter=` [subfilter<tf.toc-filter>]
-					:else[subfilter<tf.toc-filterString>$(sort)$]
-					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
-		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
-			<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
-				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
-					<% if [all[current]toc-link[no]] %>
-						<$macrocall $name="toc-unlinked-expandable-body"
-							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
-							itemTemplate=<<itemTemplate>>
-						/>
-					<% else %>
-						<$macrocall $name="toc-linked-expandable-body"
-							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
-							itemTemplate=<<itemTemplate>>
-						/>
-					<% endif %>
-				</$set>
-			</$let>
-		<% endif %>
-	</$list>
-</ol>
-</$set>
+<$let tag={{{ [<tag>is[blank]then<currentTiddler>else<tag>] }}} >
+	<$set name=currentTiddler filter="[<parentField>!is[blank]then<tag>else<currentTiddler>]">
+		<ol class="tc-toc toc-expandable">
+			<!-- Text substitution is needed for backwards compatibility -->
+			<$list filter=` [subfilter<tf.toc-filter>]
+							:else[subfilter<tf.toc-filterString>$(sort)$]
+							[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+				<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
+					<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
+						<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
+							<% if [all[current]toc-link[no]] %>
+								<$macrocall $name="toc-unlinked-expandable-body"
+									tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
+									captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
+									itemTemplate=<<itemTemplate>>
+								/>
+							<% else %>
+								<$macrocall $name="toc-linked-expandable-body"
+									tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
+									captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
+									itemTemplate=<<itemTemplate>>
+								/>
+							<% endif %>
+						</$set>
+					</$let>
+				<% endif %>
+			</$list>
+		</ol>
+	</$set>
+</$let>
 \end
 
 \function tf.toc-curTidInclude() [<currentTiddler>get<toc-includeField>] [<currentTiddler>get<toc-filterField>]
@@ -397,34 +406,36 @@ Shows a selctive expandable toc.
 If an item has no children, there is no open/close chevron
 ========================================================== -->
 \procedure toc-selective-expandable(tag,sort:"",itemClassFilter,exclude,path,captionField,tagField,parentField,itemTemplate)
-<$set name=currentTiddler filter="[<parentField>!is[blank]then<tag>else<currentTiddler>]">
-<ol class="tc-toc toc-selective-expandable">
-	<!-- text substitution is needed for backwards compatibility -->
-	<$list filter=` [subfilter<tf.toc-filter>]
-					:else[subfilter<tf.toc-filterString>$(sort)$]
-					[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
-		<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
-			<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
-				<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
-					<% if [all[current]toc-link[no]] %>
-						<$macrocall $name="toc-unlinked-selective-expandable-body"
-							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
-							itemTemplate=<<itemTemplate>>
-						/>
-					<% else %>
-						<$macrocall $name="toc-linked-selective-expandable-body"
-							tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
-							captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
-							itemTemplate=<<itemTemplate>>
-						/>
-					<% endif %>
-				</$set>
-			</$let>
-		<% endif %>
-	</$list>
-</ol>
-</$set>
+<$let tag={{{ [<tag>is[blank]then<currentTiddler>else<tag>] }}} >
+	<$set name=currentTiddler filter="[<parentField>!is[blank]then<tag>else<currentTiddler>]">
+		<ol class="tc-toc toc-selective-expandable">
+			<!-- text substitution is needed for backwards compatibility -->
+			<$list filter=` [subfilter<tf.toc-filter>]
+							:else[subfilter<tf.toc-filterString>$(sort)$]
+							[subfilter<tf.toc-include>] -[<tag>] -[subfilter<exclude>]`>
+				<%if [<currentTiddler>] -[subfilter<tf.toc-hide>] %>
+					<$let _path=<<tf.toc-newPath>> _mode=<<tf.toc-mode>> >
+						<$set name="_excluded" filter="[subfilter<exclude>] [<tag>] [subfilter<tf.toc-hide>]">
+							<% if [all[current]toc-link[no]] %>
+								<$macrocall $name="toc-unlinked-selective-expandable-body"
+									tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
+									captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
+									itemTemplate=<<itemTemplate>>
+								/>
+							<% else %>
+								<$macrocall $name="toc-linked-selective-expandable-body"
+									tag=<<tag>> sort=<<sort>> exclude=<<_excluded>> path=<<_path>>
+									captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
+									itemTemplate=<<itemTemplate>>
+								/>
+							<% endif %>
+						</$set>
+					</$let>
+				<% endif %>
+			</$list>
+		</ol>
+	</$set>
+</$let>
 \end
 
 <!-- ====================================================================
@@ -432,31 +443,33 @@ Shows a tabbed toc.
 If a toc-item link is clicked it will open the tiddler in the story river
 ========================================================================= -->
 \procedure toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude,captionField,tagField,parentField,itemTemplate)
-<$tiddler tiddler={{{ [<selectedTiddler>get[text]] }}}>
-	<div class="tc-tabbed-table-of-contents">
-		<$linkcatcher to=<<selectedTiddler>>>
-			<div class="tc-table-of-contents">
-				<!-- v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter -->
-				<$macrocall $name="toc-selective-expandable"
-					tag=<<tag>> sort=<<sort>> exclude=<<exclude>>
-					captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
-					itemTemplate=<<itemTemplate>>
-				/>
+<$let tag={{{ [<tag>is[blank]then<currentTiddler>else<tag>] }}} >
+	<$tiddler tiddler={{{ [<selectedTiddler>get[text]] }}}>
+		<div class="tc-tabbed-table-of-contents">
+			<$linkcatcher to=<<selectedTiddler>>>
+				<div class="tc-table-of-contents">
+					<!-- v5.3.4 itemClassFilter has been replaced by tf.toc-itemClassFilter -->
+					<$macrocall $name="toc-selective-expandable"
+						tag=<<tag>> sort=<<sort>> exclude=<<exclude>>
+						captionField=<<captionField>> tagField=<<tagField>> parentField=<<parentField>>
+						itemTemplate=<<itemTemplate>>
+					/>
+				</div>
+			</$linkcatcher>
+			<div class="tc-tabbed-table-of-contents-content">
+				<$reveal stateTitle=<<selectedTiddler>> type="nomatch" text="">
+					<$transclude mode="block" tiddler=<<template>>>
+						<h1><<_itemTemplate>></h1>
+						<$transclude mode="block"><<missingText>></$transclude>
+					</$transclude>
+				</$reveal>
+				<$reveal stateTitle=<<selectedTiddler>> type="match" text="">
+					<<unselectedText>>
+				</$reveal>
 			</div>
-		</$linkcatcher>
-		<div class="tc-tabbed-table-of-contents-content">
-			<$reveal stateTitle=<<selectedTiddler>> type="nomatch" text="">
-				<$transclude mode="block" tiddler=<<template>>>
-					<h1><<_itemTemplate>></h1>
-					<$transclude mode="block"><<missingText>></$transclude>
-				</$transclude>
-			</$reveal>
-			<$reveal stateTitle=<<selectedTiddler>> type="match" text="">
-				<<unselectedText>>
-			</$reveal>
 		</div>
-	</div>
-</$tiddler>
+	</$tiddler>
+</$let>
 \end
 
 <!-- ========================================================
@@ -464,19 +477,21 @@ Shows a tabbed toc. If a toc-item link is clicked
 it will open the tiddler in the view area of the same tiddler
 ============================================================= -->
 \procedure toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,missingText,template:"",exclude,captionField,tagField,parentField,itemTemplate)
-<$linkcatcher to=<<selectedTiddler>>>
-	<$macrocall $name="toc-tabbed-external-nav"
-		tag=<<tag>>
-		sort=<<sort>>
-		selectedTiddler=<<selectedTiddler>>
-		unselectedText=<<unselectedText>>
-		missingText=<<missingText>>
-		template=<<template>>
-		exclude=<<exclude>>
-		captionField=<<captionField>>
-		tagField=<<tagField>>
-		parentField=<<parentField>>
-		itemTemplate=<<itemTemplate>>
-	/>
-</$linkcatcher>
+<$let tag={{{ [<tag>is[blank]then<currentTiddler>else<tag>] }}} >
+	<$linkcatcher to=<<selectedTiddler>>>
+		<$macrocall $name="toc-tabbed-external-nav"
+			tag=<<tag>>
+			sort=<<sort>>
+			selectedTiddler=<<selectedTiddler>>
+			unselectedText=<<unselectedText>>
+			missingText=<<missingText>>
+			template=<<template>>
+			exclude=<<exclude>>
+			captionField=<<captionField>>
+			tagField=<<tagField>>
+			parentField=<<parentField>>
+			itemTemplate=<<itemTemplate>>
+		/>
+	</$linkcatcher>
+</$let>
 \end
