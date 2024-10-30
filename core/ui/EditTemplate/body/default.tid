@@ -49,6 +49,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	template="tp-tiddler-preview"
 	mode="inline"
 	padding="0px"
+	sliderWidth="6px"
 />
 
 </$let>

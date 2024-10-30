@@ -166,7 +166,7 @@ code-body: yes
 	<$let classIdentifier={{{ [<textEditorWidthTiddler>removeprefix[$:/state/resizer/texteditorwidth-]] }}}>
 
 		.tc-edit-texteditor.tc-edit-texteditor-<<classIdentifier>> {
-			width: calc(2 * (100% - {{{ [<textEditorWidthTiddler>get[text]] }}}));
+			width: calc(2 * (100% - {{{ [<textEditorWidthTiddler>get[text]] }}}) - 3px);
 			max-width: 200%;
 		}
 
