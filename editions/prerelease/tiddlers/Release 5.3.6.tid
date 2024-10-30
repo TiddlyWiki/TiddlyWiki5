@@ -12,11 +12,14 @@ description: Under development
 
 ! Translation improvements
 
-<<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8531">> support for new language "Chinese (Hong Kong)"
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8531">> support for new language "Chinese (Hong Kong)"
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8669">> support for new language "English (Philippines)"
 
 This release includes improvements to the following translations:
 
 * Chinese
+* Spanish
+* Polish
 
 ! Plugin Improvements
 
@@ -25,15 +28,22 @@ This release includes improvements to the following translations:
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8404">> support for custom wikitext popups to be attached to map features
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8437">> ordering of latitude and longitude in geospatial operators
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8484">> crash when geomap contains an empty geolayer widget
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8511">> loading map state from saved tiddlers
 
 !! Markdown Plugin
 
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8486">> support for dragging and dropping images directly into Markdown tiddlers
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8395">> strikethrough, superscript and subscript editor toolbar buttons
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8402">> readability of Markdown links to other tiddlers
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8459">> image toolbar dropdown to editor toolbar
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8492">> colour for target footnote background
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8585">> settings tab
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8595">> reorganised "readme" and "config" tabs
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8498">> support for the excision tool
+
+!! Browser Storage Plugin
+
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8602">> added support for separate messages to delete the cookie saved by the Browser Storage Plugin and for disabling the plugin entirely
 
 ! TestCaseWidget and Related Improvements
 
@@ -57,6 +67,7 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 
 ! Usability Improvements
 
+* <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8643">> presentation of core plugin settings by adding them to the main "Settings" tab in $:/ControlPanel
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8530">> language descriptions by localising them
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8407">> the contrast of plugin stability badges on hover
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8430">> a "copy to clipboard" button to the view template body template used for code tiddlers
@@ -65,6 +76,10 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8558">> empty message to tag picker, search dropdown and advanced search
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8157">> a search button to the control panel tiddler fields tab
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8323">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8324">>) the view and edit toolbars with more descriptive Aria labels
+* <<.link-badge-extended "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8594">> export button so that it can be dragged to export the tiddlers to another wiki
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8606">> $:/TagManager to use the [[colour-picker Macro]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8505">> an animation while lazily loaded tiddlers are being loaded
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8628">> font stacks used in "Vanilla" theme to contemporary best practice
 
 ! Hackability Improvements
 
@@ -79,6 +94,10 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8559">> [[WidgetMessage: tm-new-tiddler]] to allow tiddlers to be created with no tags field
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7941">> ''startCount'' parameter to [[unusedtitle Macro]]
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/7944">> trimSelection parameter to [[WidgetMessage: tm-edit-text-operation]]
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8350">> option to set a keyboard shortcut for the menubar search text input
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8614">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8642">>) [[Plugin Stability]] badges to support translation of the labels
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8665">> all core colour palettes to use six digit hex colours
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/commit/a51afc8b818d81ea153c889295359c79562a5f7b">> support for HTTP Bearer authentication to the [[WidgetMessage: tm-http-request]]
 
 ! Bug Fixes
 
@@ -104,6 +123,10 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/commit/7dfdbae812306875bac2445ca4ee505b406e3be1">> crash if the KeyboardWidget is used within a [[startup action|StartupActions]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8574">> suffix in the [[encodebase64 Operator]] and [[decodebase64 Operator]]
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8557">> overflow of floated elements
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8523">> (and <<.link-badge-here "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8652">>) tables overflowing  tiddler margins on narrow screens
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8610">> the [[colour-picker Macro]] wrongly autoclosing when selecting or typing a colour
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/issues/8593">> confusing message when the tag picker dropdown is empty
+* <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8672">> misaligned tiddler subtitle
 
 ! Node.js Improvements
 
@@ -121,18 +144,25 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 
 <<.contributors """
 BramChen
+BurningTreeC
 btheado
+EvidentlyCube
 flibbles
 hoelzro
+IchijikuIchigo
+jeremyredhead
+joebordes
 kookma
 Leilei332
 linonetwo
+mateuszwilczek
 michaeljmcd
 pmario
 PotOfCoffee2Go
 saqimtiaz
 simonbaird
 springerspandrel
+techmagus
 twMat
 valpackett
 webplusai

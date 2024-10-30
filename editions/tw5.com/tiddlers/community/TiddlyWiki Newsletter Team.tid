@@ -1,0 +1,60 @@
+title: TiddlyWiki Newsletter Team
+modified: 20241009171916728
+tags: Community
+
+The ~TiddlyWiki Newsletter is produced by a small team of volunteers. We would love to have your help if you want to get involved.
+
+! Team
+
+The newsletter team currently consists of:
+
+* [[@jeremyruston|https://talk.tiddlywiki.org/u/jeremyruston]]
+* [[@CodaCoder|https://talk.tiddlywiki.org/u/codacoder]]
+* [[@Springer|https://talk.tiddlywiki.org/u/springer]]
+
+! Audience
+
+The newsletter is intended for TiddlyWiki end users who do not track all the discussions on https://talk.tiddlywiki.org/.
+
+Coverage of developer topics such as JavaScript and intricate wikitext should be handled thoughtfully to avoid alienating the core audience of end users.
+
+Subscribing to the newsletter should give people confidence that they will not miss any important developments.
+
+! Process
+
+The process is:
+
+# Determine which discussion forum threads should be included
+# Decide whether to link to the thread itself or to link to the subject of the thread
+# Write a 30-70 word introduction
+# Optionally, choose or make an image/screenshot to illustrate the story
+
+These steps are described in more detail below.
+
+!! Criteria for Inclusion
+
+The criteria for inclusion are necessarily loose. Editorial judgement is required to decide whether an item is sufficiently interesting to a broad enough audience.
+
+Important categories of threads that should be considered:
+
+* All announcements of new releases of TiddlyWiki and TiddlyDesktop
+* Community news and developments
+* New plugins
+* Updates to widely used plugins
+* Showcases of interesting TiddlyWiki's in the wild
+
+!! Linking
+
+In most cases, news items should link to the opening post in the corresponding thread. There might be situations where it makes more sense to link to the item concerned which will be listed here.
+
+!! Writing News Items
+
+Items would be a 30-70 word introduction with a link, and optionally an image (the newsletter looks much more inviting with some images included).
+
+!! Images
+
+Well chosen images can be informative and add visual interest to the newsletter as a whole. Some points to consider when choosing an image:
+
+* Images that work best of all are those that trigger an emotional response by including a human face. It is fairly unlikely that a ~TiddlyWiki news story would have a reason to be illustrated by a picture of a smiling baby, but we should strive to do so if we can
+* If using a screenshot, remember that the image will be displayed fairly small in the newsletter so it is better to crop screenshots to show a smaller area of interest rather than the entire browser window
+* Avoid using AI generated images
