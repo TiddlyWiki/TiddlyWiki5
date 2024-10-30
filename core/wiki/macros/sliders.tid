@@ -78,7 +78,7 @@ code-body: yes
 		tv-set-centralised="no"
 		storyLeftTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]] }}}
 		storyRightTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]] }}}
-		sidebarWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/rightwidth-]] }}}
+		sidebarWidthTiddler={{{ [<sidebarWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/rightwidth-]] }}}
 		tiddlerWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]] }}}
 		storyWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
 		storyMinWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
