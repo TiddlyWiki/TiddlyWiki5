@@ -289,7 +289,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>!is[missing]then[tc-resizer-active]] [<resizer.class>] [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-]] +[join[ ]]
 
-\function get.active.class(class) [<class>] [<resizer.class>] [<get.resizer.state>!is[missing]then[tc-resizer-active]] +[join[ ]]
+\function get.active.class(class) [<class>] [<resizer.class>] [<eventCatcherClass>] [<get.resizer.state>!is[missing]then[tc-resizer-active]] +[join[ ]]
 
 \function get.sidebar-resizer.pointerdown.actions()
 [<get.resizer.state>match[$:/state/sidebar/resizing]then<sidebar-resizer-pointerdown-actions>]
@@ -302,7 +302,7 @@ title: $:/core/procedures/sidebar-resizer
 
 \function get.template-right.style.flex-basis() [<sliderCondition>match[no]then[0%]] :else[[calc(]addsuffix<get.template-right.width>addsuffix[ - ]addsuffix<resizerWidthDivided>addsuffix[px)]]
 
-\procedure sidebar-resizer(templateLeft:"",templateRight:"",mode:"block",sliderCondition:"yes")
+\procedure sidebar-resizer(templateLeft:"",templateRight:"",mode:"block",sliderCondition:"yes",eventCatcherClass:"",zIndexLeft:"")
 <$set name="resizerWidthDivided" value={{{ [<get.resizer.style.width>divide[2]] }}}>
 
 	<$eventcatcher
@@ -340,7 +340,7 @@ title: $:/core/procedures/sidebar-resizer
 
 				</$eventcatcher>
 
-				<%if [<templateLeft>!is[blank]] %>
+				<%if [<templateLeft>is[variable]] [<templateLeft>is[tiddler]] %>
 
 					<div
 						style.display="flex"
@@ -349,6 +349,7 @@ title: $:/core/procedures/sidebar-resizer
 						style.top="0"
 						style.left="0"
 						style.flex-basis=<<get.template-left.style.flex-basis>>
+						style.z-index=<<zIndexLeft>>
 					>
 
 						<%if [<templateLeft>is[variable]] %>
@@ -376,7 +377,7 @@ title: $:/core/procedures/sidebar-resizer
 
 				<% endif %>
 
-				<%if [<templateRight>!is[blank]then<sliderCondition>!match[no]] %>
+				<%if [<templateRight>is[variable]then<sliderCondition>!match[no]] [<templateRight>is[tiddler]then<sliderCondition>!match[no]] %>
 
 					<div
 						style.display="flex"

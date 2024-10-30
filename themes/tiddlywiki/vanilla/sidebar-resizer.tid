@@ -4,7 +4,7 @@ code-body: yes
 
 \import [function[get.base.functions.theme],<get.current.theme>first[]!is[missing]] :else[function[get.base.functions.theme],<get.current.theme>first[]is[shadow]] :else[[$:/themes/tiddlywiki/vanilla/functions]]
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock conditional html
 
 <%if [<get.theme.explicit.option sidebarresizer>match[show]] %>
 
@@ -38,6 +38,11 @@ code-body: yes
 
 		.tc-sidebar-resizer-pointerdown-eventcatcher, .tc-sidebar-resizer-pointermove-eventcatcher-wrapper {
 			height: 100%;
+		}
+
+		.tc-sidebar-resizer-pointerdown-eventcatcher.tc-one-cell-eventcatcher {
+			width: 200%;
+			left: -100%;
 		}
 
 		.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
@@ -155,3 +160,16 @@ code-body: yes
 	}
 
 <% endif %>
+
+<$list filter="[all[tiddlers]prefix[$:/state/resizer/texteditorwidth-]]" variable="textEditorWidthTiddler">
+
+	<$let classIdentifier={{{ [<textEditorWidthTiddler>removeprefix[$:/state/resizer/texteditorwidth-]] }}}>
+
+		.tc-edit-texteditor.tc-edit-texteditor-<<classIdentifier>> {
+			width: calc(2 * (100% - {{{ [<textEditorWidthTiddler>get[text]] }}}));
+			max-width: 200%;
+		}
+
+	</$let>
+
+</$list>
