@@ -128,9 +128,11 @@ var processRow = function(prevColumns,options) {
 			// Move back to the closing `|`
 			this.parser.pos--;
 			cell.end = this.parser.pos;
-			$tw.utils.addClassToParseTreeNode(cell,colCount%2 ? "oddCol" : "evenCol");
-			$tw.utils.addAttributeToParseTreeNode(cell,"data-col",colCount);
-			$tw.utils.addAttributeToParseTreeNode(cell,"data-addr",options.rowCount + "/" + colCount);
+			if(this.addData) {
+				$tw.utils.addClassToParseTreeNode(cell,colCount%2 ? "oddCol" : "evenCol");
+				$tw.utils.addAttributeToParseTreeNode(cell,"data-col",colCount);
+				$tw.utils.addAttributeToParseTreeNode(cell,"data-addr",options.rowCount + "/" + colCount);
+			}
 		}
 		col++;
 		cellRegExp.lastIndex = this.parser.pos;
@@ -155,6 +157,7 @@ exports.parse = function() {
 		var rowType = rowMatch[2];
 		// Check if it is a class assignment
 		if(rowType === "k") {
+			this.addData = rowMatch[1].split(" ").indexOf("tc-table-data") !== -1;
 			$tw.utils.addClassToParseTreeNode(table,rowMatch[1]);
 			this.parser.pos = rowMatch.index + rowMatch[0].length;
 		} else {
@@ -181,7 +184,9 @@ exports.parse = function() {
 				// Create the row
 				var theRow = {type: "element", tag: "tr", children: [], start: rowMatch.index};
 				$tw.utils.addClassToParseTreeNode(theRow,rowCount%2 ? "oddRow" : "evenRow");
-				$tw.utils.addAttributeToParseTreeNode(theRow,"data-row",rowCount);
+				if(this.addData) {
+					$tw.utils.addAttributeToParseTreeNode(theRow,"data-row",rowCount);
+				}
 				rowContainer.children.push(theRow);
 				// Process the row
 				theRow.children = processRow.call(this,prevColumns,{rowCount: rowCount});
