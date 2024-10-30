@@ -18,9 +18,9 @@ Adds the following properties to the wiki object:
 \*/
 (function(){
 
-	/*jslint node: true, browser: true */
-	/*global $tw: false */
-	"use strict";
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
