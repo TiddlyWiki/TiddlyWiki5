@@ -1,9 +1,3 @@
-/*\
-title: $:/core/modules/parsers/base.js
-type: application/javascript
-module-type: library
-\*/
-
 /**
  * Represents an attribute in a parse tree node
  * 
