@@ -24,6 +24,12 @@ exports.handler = function(request,response,state) {
 		userList = [];
 		console.error("userList is not an array");
 	}
+
+	if(!state.authenticatedUser.isAdmin) {
+		response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
+		response.end("Forbidden");
+		return;
+	}
 	
 	// Convert dates to strings and ensure all necessary fields are present
 	userList = userList.map(user => ({

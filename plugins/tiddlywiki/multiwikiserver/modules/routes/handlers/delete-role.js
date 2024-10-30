@@ -38,16 +38,14 @@ POST /admin/delete-role
 			return;
 		}
 
+		// Delete the role
+		sqlTiddlerDatabase.deleteRole(role_id);
+
 		// Check if the role is in use
 		var isRoleInUse = sqlTiddlerDatabase.isRoleInUse(role_id);
 		if(isRoleInUse) {
-			response.writeHead(400, "Bad Request");
-			response.end("Cannot delete role as it is still in use");
-			return;
+			sqlTiddlerDatabase.deleteUserRolesByRoleId(role_id);
 		}
-
-		// Delete the role
-		sqlTiddlerDatabase.deleteRole(role_id);
 
 		// Redirect back to the roles management page
 		response.writeHead(302, { "Location": "/admin/roles" });

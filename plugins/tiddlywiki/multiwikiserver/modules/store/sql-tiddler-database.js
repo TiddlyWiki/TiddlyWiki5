@@ -1009,6 +1009,15 @@ SqlTiddlerDatabase.prototype.deleteSession = function(sessionId) {
 	});
 };
 
+SqlTiddlerDatabase.prototype.deleteUserSessions = function(userId) {
+	this.engine.runStatement(`
+			DELETE FROM sessions
+			WHERE user_id = $userId
+	`, {
+			$userId: userId
+	});
+};
+
 // Group CRUD operations
 SqlTiddlerDatabase.prototype.createGroup = function(groupName, description) {
 	const result = this.engine.runStatement(`
@@ -1319,6 +1328,24 @@ SqlTiddlerDatabase.prototype.getUserRoles = function(userId) {
 	`;
 	
 	return this.engine.runStatementGet(query, { $userId: userId });
+};
+
+SqlTiddlerDatabase.prototype.deleteUserRolesByRoleId = function(roleId) {
+	this.engine.runStatement(`
+			DELETE FROM user_roles
+			WHERE role_id = $roleId
+	`, {
+			$roleId: roleId
+	});
+};
+
+SqlTiddlerDatabase.prototype.deleteUserRolesByUserId = function(userId) {
+	this.engine.runStatement(`
+			DELETE FROM user_roles
+			WHERE user_id = $userId
+	`, {
+			$userId: userId
+	});
 };
 
 SqlTiddlerDatabase.prototype.isRoleInUse = function(roleId) {

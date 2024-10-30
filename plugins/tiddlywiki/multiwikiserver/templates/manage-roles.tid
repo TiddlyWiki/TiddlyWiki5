@@ -47,29 +47,44 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles
 								<$text text={{{ [<role>jsonget[description]] }}}/>
 							</span>
 						</div>
-						<div class="role-actions">
-							<$button class="tc-btn-invisible btn-edit">
-								Edit
-								<$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/multiwikiserver/templates/edit-role-modal" role-id={{{ [<role>jsonget[role_id]] }}}/>
-							</$button>
-							<form method="POST" action="/admin/delete-role">
-								<input type="hidden" name="role_id" value={{{ [<role>jsonget[role_id]] }}}/>
-								<button type="submit" class="tc-btn-invisible btn-delete">Delete</button>
-							</form>
-						</div>
+						<$list filter="[<role>jsonget[role_name]lowercase[]!match[admin]]" variable="ignore">
+							<div class="role-actions">
+								<a href={{{ [<role>jsonget[role_id]addprefix[/admin/roles/?edit=]] }}}>
+									<$button class="tc-btn-invisible btn-edit">
+										Edit
+									</$button>
+								</a>
+								<form method="POST" action="/admin/delete-role">
+									<input type="hidden" name="role_id" value={{{ [<role>jsonget[role_id]] }}}/>
+									<button type="submit" class="tc-btn-invisible btn-delete">Delete</button>
+								</form>
+							</div>
+						</$list>
 					</div>
 			</$let>
 		</$list>
 	</div>
 	
-	<div class="add-role-card">
-		<h2>Add New Role</h2>
-		<form method="POST" action="/admin/post-role" class="add-role-form">
-			<input name="role_name" type="text" placeholder="Role Name" required/>
-			<input name="role_description" type="text" placeholder="Role Description" required/>
-			<button type="submit" class="tc-btn-invisible btn-add">Add Role</button>
-		</form>
-	</div>
+	<$let edit-role-id={{{ [<edit-role>jsonget[role_id]] }}}>
+		<div class="add-role-card">
+			<$list filter="[<edit-role-id>!is[blank]]" variable="ignore">
+				<h2>Edit Role</h2>
+				<form method="POST" action={{{ [<edit-role-id>addprefix[/admin/roles/]] }}} class="add-role-form">
+					<input name="role_name" type="text" placeholder="Role Name" required value={{{ [<edit-role>jsonget[role_name]] }}}/>
+					<input name="role_description" type="text" placeholder="Role Description" required value={{{ [<edit-role>jsonget[description]] }}}/>
+					<button type="submit" class="tc-btn-invisible btn-add">Update Role</button>
+				</form>
+			</$list>
+			<$list filter="[<edit-role-id>is[blank]]" variable="ignore">
+				<h2>Add New Role</h2>
+				<form method="POST" action="/admin/post-role" class="add-role-form">
+					<input name="role_name" type="text" placeholder="Role Name" required/>
+					<input name="role_description" type="text" placeholder="Role Description" required/>
+					<button type="submit" class="tc-btn-invisible btn-add">Add Role</button>
+				</form>
+			</$list>
+		</div>
+	</$let>
 </div>
 
 <style>

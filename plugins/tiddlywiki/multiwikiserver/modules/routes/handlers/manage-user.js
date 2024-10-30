@@ -32,18 +32,29 @@ GET /admin/users/:user_id
 			return;
 		}
 		
+		// Check if the user is trying to access their own profile or is an admin
+		var hasPermission = ($tw.utils.parseInt(user_id, 10) === state.authenticatedUser.user_id) || state.authenticatedUser.isAdmin;
+		if(!hasPermission) {
+			response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
+			response.end("Forbidden");
+			return;
+		}
+
 		// Convert dates to strings and ensure all necessary fields are present
-		const user = {
-			user_id: userData.user_id || '',
-			username: userData.username || '',
-			email: userData.email || '',
-			created_at: userData.created_at ? new Date(userData.created_at).toISOString() : '',
-			last_login: userData.last_login ? new Date(userData.last_login).toISOString() : ''
+		var user = {
+			user_id: userData.user_id || "",
+			username: userData.username || "",
+			email: userData.email || "",
+			created_at: userData.created_at ? new Date(userData.created_at).toISOString() : "",
+			last_login: userData.last_login ? new Date(userData.last_login).toISOString() : ""
 		};
 	
 		// Get all roles which the user has been assigned
 		var userRole = state.server.sqlTiddlerDatabase.getUserRoles(user_id);
 		var allRoles = state.server.sqlTiddlerDatabase.listRoles();
+
+		// sort allRoles by placing the user's role at the top of the list
+		allRoles.sort(function(a, b){ (a.role_id === userRole.role_id ? -1 : 1) });
 		
 		response.writeHead(200, "OK", {
 			"Content-Type": "text/html"
@@ -54,6 +65,7 @@ GET /admin/users/:user_id
 			variables: {
 				"page-content": "$:/plugins/tiddlywiki/multiwikiserver/templates/manage-user",
 				"user": JSON.stringify(user),
+				"user-initials": user.username.split(" ").map(name => name[0]).join(""),
 				"user-role": JSON.stringify(userRole),
 				"all-roles": JSON.stringify(allRoles),
 				"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === $tw.utils.parseInt(user_id, 10) ? "yes" : "no",
