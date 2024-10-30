@@ -16,6 +16,10 @@ exports.method = "GET";
 
 exports.path = /^\/wiki\/([^\/]+)$/;
 
+exports.useACL = true;
+
+exports.entityName = "recipe"
+
 exports.handler = function(request,response,state) {
 	// Get the recipe name from the parameters
 	var recipe_name = $tw.utils.decodeURIComponentSafe(state.params[0]),

@@ -1,0 +1,15 @@
+title: $:/core/ui/Buttons/manage-acl
+tags: $:/tags/PageControls
+caption: {{$:/core/images/globe}} {{$:/language/Buttons/ManageACL/Caption}}
+description: {{$:/language/Buttons/ManageACL/Hint}}
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/ManageACL/Hint}} aria-label={{$:/language/Buttons/ManageACL/Caption}} class=<<tv-config-toolbar-class>>>
+<$action-managetiddler tiddler=<<currentTiddler>>/>
+{{$:/core/images/globe}}
+<%if [<tv-config-toolbar-text>match[yes]] %>
+<span class="tc-btn-text">
+<$text text={{$:/language/Buttons/ManageACL/Caption}}/>
+</span>
+<%endif%>
+</$button>

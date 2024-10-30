@@ -21,7 +21,11 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 	</$genesis>
 \end
 
-! Wikis Available Here
+<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/mws-header">
+	<$set name="page-title" value="Wikis Available Here">
+		<$transclude/>
+	</$set>
+</$tiddler>
 
 <ul class="mws-vertical-list">
 	<$list filter="[<recipe-list>jsonindexes[]] :sort[<currentTiddler>jsonget[recipe_name]]" variable="recipe-index">
@@ -69,7 +73,6 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 		</li>
 	</$list>
 </ul>
-
 <form action="/recipes" method="post" class="mws-form">
 	<div class="mws-form-heading">
 		Create a new recipe or modify and existing one
@@ -150,3 +153,77 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/get-index
 <label for="chkShowSystem">Show system bags</label>
 <button type="submit">Update</button>
 </form>
+
+<style>
+.mws-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #f0f0f0;
+	margin-bottom: 20px;
+}
+
+.mws-user-info {
+	display: flex;
+	align-items: center;
+}
+
+.mws-logout-form {
+  margin-left: 10px;
+}
+
+.mws-logout-button {
+	padding: 5px 10px;
+	background-color: #f44336;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.mws-logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.mws-admin-dropdown {
+	position: relative;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.mws-admin-dropbtn {
+	color: white;
+	padding: 5px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+}
+
+.mws-admin-dropbtn:hover, .mws-admin-dropbtn:focus {
+  cursor: pointer;
+	opacity: 0.8;
+}
+
+.mws-admin-dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	right: 0;
+}
+
+.mws-admin-dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.mws-admin-dropdown-content a:hover {background-color: #ddd;}
+
+.mws-admin-dropdown:hover .mws-admin-dropdown-content {display: block;}
+
+.mws-admin-dropdown:hover {background-color: #2980B9;}
+</style>

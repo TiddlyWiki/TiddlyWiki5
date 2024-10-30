@@ -20,6 +20,10 @@ exports.bodyFormat = "stream";
 
 exports.csrfDisable = true;
 
+exports.useACL = true;
+
+exports.entityName = "bag"
+
 exports.handler = function(request,response,state) {
 	const path = require("path"),
 		fs = require("fs"),
@@ -39,29 +43,31 @@ exports.handler = function(request,response,state) {
 					"imported-tiddlers": results
 				}));
 			} else {
-				response.writeHead(200, "OK",{
-					"Content-Type":  "text/html"
-				});
-				response.write(`
-					<!doctype html>
-					<head>
-						<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-					</head>
-					<body>
-				`);
-				// Render the html
-				var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/post-bag-tiddlers",{
-					variables: {
-						"bag-name": bag_name,
-						"imported-titles": JSON.stringify(results)
-					}
-				});
-				response.write(html);
-				response.write(`
-					</body>
-					</html>
-				`);
-				response.end();
+				if(!response.headersSent) {
+					response.writeHead(200, "OK",{
+						"Content-Type":  "text/html"
+					});
+					response.write(`
+						<!doctype html>
+						<head>
+							<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+						</head>
+						<body>
+					`);
+					// Render the html
+					var html = $tw.mws.store.adminWiki.renderTiddler("text/html","$:/plugins/tiddlywiki/multiwikiserver/templates/post-bag-tiddlers",{
+						variables: {
+							"bag-name": bag_name,
+							"imported-titles": JSON.stringify(results)
+						}
+					});
+					response.write(html);
+					response.write(`
+						</body>
+						</html>
+					`);
+					response.end();
+				}
 			}
 		}
 	});

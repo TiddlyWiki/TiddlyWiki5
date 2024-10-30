@@ -26,6 +26,10 @@ exports.bodyFormat = "www-form-urlencoded";
 
 exports.csrfDisable = true;
 
+exports.useACL = true;
+
+exports.entityName = "recipe"
+
 exports.handler = function(request,response,state) {
 	if(state.data.recipe_name && state.data.bag_names) {
 		const result = $tw.mws.store.createRecipe(state.data.recipe_name,$tw.utils.parseStringArray(state.data.bag_names),state.data.description);

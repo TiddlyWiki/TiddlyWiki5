@@ -50,11 +50,18 @@ TestRunner.prototype.runTests = function(callback) {
 	const self = this;
 	let currentTestSpec = 0;
 	let hasFailed = false;
+	let sessionId;
 	function runNextTest() {
 		if(currentTestSpec < testSpecs.length) {
 			const testSpec = testSpecs[currentTestSpec];
+			if(!!sessionId) {
+				testSpec.headers['Cookie'] = `session=${sessionId}; HttpOnly; Path=/`;
+			}
 			currentTestSpec += 1;
-			self.runTest(testSpec,function(err) {
+			self.runTest(testSpec,function(err, data) {
+				if(data?.sessionId) {
+					sessionId = data?.sessionId;
+				}
 				if(err) {
 					hasFailed = true;
 					console.log(`Failed "${testSpec.description}" with "${err}"`)
@@ -96,7 +103,7 @@ TestRunner.prototype.runTest = function(testSpec,callback) {
 			response.on("end", () => {
 				const jsonData = $tw.utils.parseJSONSafe(buffer,function() {return undefined;});
 				const testResult = testSpec.expectedResult(jsonData,buffer,response.headers);
-				callback(testResult ? null : "Test failed");
+				callback(testResult ? null : "Test failed", jsonData);
 			});
 		});
 		request.on("error", (e) => {
@@ -112,6 +119,20 @@ TestRunner.prototype.runTest = function(testSpec,callback) {
 };
 
 const testSpecs = [
+	{
+		description: "Login Test User",
+		method: "POST",
+		path: "/login",
+		headers: {
+			"Accept": 'application/json',
+			"Content-Type": 'application/x-www-form-urlencoded',
+			"User-Agent": 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+		},
+		data: "username=user&password=pass123",
+		expectedResult: (jsonData,data,headers) => {
+			return !!jsonData.sessionId;
+		}
+	},
 	{
 		description: "Check index page",
 		method: "GET",

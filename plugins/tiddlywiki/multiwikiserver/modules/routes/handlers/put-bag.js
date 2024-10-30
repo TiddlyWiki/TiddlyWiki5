@@ -16,12 +16,16 @@ exports.method = "PUT";
 
 exports.path = /^\/bags\/(.+)$/;
 
+exports.useACL = true;
+
+exports.entityName = "bag"
+
 exports.handler = function(request,response,state) {
 	// Get the  parameters
 	var bag_name = $tw.utils.decodeURIComponentSafe(state.params[0]),
 		data = $tw.utils.parseJSONSafe(state.data);
 	if(bag_name && data) {
-		const result = $tw.mws.store.createBag(bag_name,data.description);
+		var result = $tw.mws.store.createBag(bag_name,data.description);
 		if(!result) {
 			state.sendResponse(204,{
 				"Content-Type": "text/plain"
@@ -34,8 +38,10 @@ exports.handler = function(request,response,state) {
 			"utf8");
 		}
 	} else {
-		response.writeHead(404);
-		response.end();
+		if(!response.headersSent) {
+			response.writeHead(404);
+			response.end();
+		}
 	}
 };
 

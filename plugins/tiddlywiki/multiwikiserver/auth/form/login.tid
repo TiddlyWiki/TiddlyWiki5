@@ -1,0 +1,19 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/auth/form/login
+tags: $:/tags/ServerRoute
+route-method: GET
+route-path: /login
+
+<$transclude tiddler="$:/plugins/tiddlywiki/multiwikiserver/auth/form/login/styles"/>
+
+<html>
+<head>
+	<$transclude tiddler="$:/plugins/tiddlywiki/multiwikiserver/auth/form/login/head"/>
+</head>
+<body>
+	<div class="login-container">
+		<$transclude tiddler="$:/plugins/tiddlywiki/multiwikiserver/auth/form/login/header" mode="block"/>
+		<$transclude tiddler="$:/plugins/tiddlywiki/multiwikiserver/auth/form/login/form" mode="block"/>
+		<$transclude tiddler="$:/plugins/tiddlywiki/multiwikiserver/auth/form/login/error-message" mode="block"/>
+	</div>
+</body>
+</html>

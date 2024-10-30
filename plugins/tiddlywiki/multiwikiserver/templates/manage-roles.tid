@@ -1,0 +1,175 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-roles
+
+\define add-role-actions()
+	<$action-sendmessage $message="tm-server-request"
+			method="POST"
+			url="/admin/roles"
+			headers="Content-Type: application/json"
+			body={{{ [{"name": "$(newRoleName)$", "description": "$(newRoleDescription)$"}jsonify[]] }}}
+			redirectAfterSuccess="/admin/roles"/>
+	<$action-setfield $tiddler="$:/temp/newRoleName" text=""/>
+	<$action-setfield $tiddler="$:/temp/newRoleDescription" text=""/>
+\end
+
+\define edit-role-actions(role-id)
+	<$action-sendmessage $message="tm-server-request"
+			method="PUT"
+			url={{{ [[$:/admin/roles/]addsuffix<role-id>] }}}
+			headers="Content-Type: application/json"
+			body={{{ [{"name": "$(newRoleName)$", "description": "$(newRoleDescription)$"}jsonify[]] }}}
+			redirectAfterSuccess="/admin/roles"/>
+\end
+
+\define delete-role-actions(role-id)
+	<$action-sendmessage $message="tm-server-request"
+			method="DELETE"
+			url={{{ [[$:/admin/roles/]addsuffix<role-id>] }}}
+			redirectAfterSuccess="/admin/roles"/>
+\end
+
+<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/mws-header">
+	<$set name="page-title" value="Manage Roles">
+		<$transclude/>
+	</$set>
+</$tiddler>
+
+<div class="roles-container">
+	<div class="roles-list">
+		<h2>Existing Roles</h2>
+		<$list filter="[<roles-list>jsonindexes[]]" variable="role-index">
+			<$let role={{{ [<roles-list>jsonextract<role-index>] }}}>
+					<div class="role-item">
+						<div class="role-info">
+							<span class="role-name">
+								<$text text={{{ [<role>jsonget[role_name]] }}}/>
+							</span>
+							<span class="role-description">
+								<$text text={{{ [<role>jsonget[description]] }}}/>
+							</span>
+						</div>
+						<div class="role-actions">
+							<$button class="tc-btn-invisible btn-edit">
+								Edit
+								<$action-sendmessage $message="tm-modal" $param="$:/plugins/tiddlywiki/multiwikiserver/templates/edit-role-modal" role-id={{{ [<role>jsonget[role_id]] }}}/>
+							</$button>
+							<form method="POST" action="/admin/delete-role">
+								<input type="hidden" name="role_id" value={{{ [<role>jsonget[role_id]] }}}/>
+								<button type="submit" class="tc-btn-invisible btn-delete">Delete</button>
+							</form>
+						</div>
+					</div>
+			</$let>
+		</$list>
+	</div>
+	
+	<div class="add-role-card">
+		<h2>Add New Role</h2>
+		<form method="POST" action="/admin/post-role" class="add-role-form">
+			<input name="role_name" type="text" placeholder="Role Name" required/>
+			<input name="role_description" type="text" placeholder="Role Description" required/>
+			<button type="submit" class="tc-btn-invisible btn-add">Add Role</button>
+		</form>
+	</div>
+</div>
+
+<style>
+	.roles-container {
+		max-width: 1200px;
+		margin: 2rem auto;
+		display: flex;
+		gap: 2rem;
+		flex-wrap: wrap;
+	}
+	.roles-list {
+		flex: 1 1 60%;
+		min-width: 300px;
+		background: #fff;
+		border-radius: 8px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		padding: 2rem;
+	}
+	.add-role-card {
+		flex: 1 1 30%;
+		min-width: 250px;
+		background: #fff;
+		border-radius: 8px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		padding: 2rem;
+		align-self: flex-start;
+	}
+	.role-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 0;
+		border-bottom: 1px solid #eee;
+	}
+	.role-info {
+		flex-grow: 1;
+	}
+	.role-name {
+		font-weight: bold;
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+	.role-description {
+		color: #666;
+		font-size: 0.9em;
+	}
+	.role-actions {
+		display: flex;
+		gap: 0.5rem;
+	}
+	.role-actions button {
+		padding: 0.5rem 1rem;
+		background: none;
+		border: none;
+		cursor: pointer;
+		border-radius: 4px;
+		transition: background-color 0.3s;
+	}
+	.btn-edit {
+		color: #007bff;
+	}
+	.btn-delete {
+		color: #dc3545;
+	}
+	.btn-edit:hover, .btn-delete:hover {
+		background-color: #f8f9fa;
+	}
+	.add-role-form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+	.add-role-form input {
+		padding: 0.5rem;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+	}
+	.btn-add {
+		padding: 0.5rem 1rem;
+		background-color: #28a745;
+		color: white;
+		border: none;
+		cursor: pointer;
+		border-radius: 4px;
+		transition: background-color 0.3s;
+	}
+	.btn-add:hover {
+		background-color: #218838;
+	}
+	h2 {
+		margin-top: 0;
+		margin-bottom: 1rem;
+		color: #333;
+	}
+	@media (max-width: 768px) {
+		.roles-container {
+			flex-direction: column;
+		}
+		.roles-list, .add-role-card {
+			width: 100%;
+		}
+	}
+</style>

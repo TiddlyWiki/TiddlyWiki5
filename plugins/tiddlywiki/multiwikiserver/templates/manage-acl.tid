@@ -1,0 +1,267 @@
+title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-acl
+
+<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/mws-header">
+  <$set name="page-title" value="Manage ACL">
+    <$transclude />
+  </$set>
+</$tiddler>
+
+
+<div class="container">
+  <h2>Recipe ACL: <$text text={{{ [<recipe>jsonget[recipe_name]] }}}/></h2>
+  <div class="acl-section">
+    <div class="acl-form">
+      <h3>Add Recipe ACL Record</h3>
+      <form method="POST" action="/admin/post-acl">
+        <input type="hidden" name="entity_type" value="recipe" />
+        <input type="hidden" name="recipe_name" value={{{ [<recipe>jsonget[recipe_name]] }}}/>
+        <input type="hidden" name="bag_name" value={{{ [<bag>jsonget[bag_name]] }}}/>
+        <select name="role_id" class="tc-select">
+          <option value="">Select Role</option>
+          <$list filter="[<roles-list>jsonindexes[]]" variable="role-index">
+            <$let role={{{ [<roles-list>jsonextract<role-index>] }}}>
+                <option value={{{ [<role>jsonget[role_id]] }}}><$text text={{{ [<role>jsonget[role_name]] }}}/></option>
+            </$let>
+          </$list>
+        </select>
+
+        <select name="permission_id" class="tc-select">
+          <option value="">Select Permission</option>
+          <$list filter="[<permissions-list>jsonindexes[]]" variable="permission-index">
+            <$let permission={{{ [<permissions-list>jsonextract<permission-index>] }}}>
+                <option value={{{ [<permission>jsonget[permission_id]] }}}><$text text={{{ [<permission>jsonget[permission_name]] }}}/></option>
+            </$let>
+          </$list>
+        </select>
+
+        <button type="submit" class="tc-btn-invisible btn-add">
+          Add ACL Record
+        </button>
+      </form>
+    </div>
+    <div class="acl-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Permission</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <$list filter="[<recipe-acl-records>jsonindexes[]]" variable="acl-index">
+            <$let acl={{{ [<recipe-acl-records>jsonextract<acl-index>] }}}>
+                <tr>
+                  <td>
+                    <$text text={{{ [<acl>jsonget[role_name]] }}}/>
+                  </td>
+                  <td>
+                    <$text text={{{ [<acl>jsonget[permission_name]] }}}/>
+                      (<small><$text text={{{ [<acl>jsonget[permission_description]] }}}/></small>)
+                  </td>
+                  <td>
+                    <form method="POST" action="/admin/delete-acl">
+                      <input type="hidden" name="acl_id" value={{{ [<acl>jsonget[acl_id]] }}}/>
+                      <input type="hidden" name="entity_type" value="recipe" />
+                      <input type="hidden" name="recipe_name" value={{{ [<recipe>jsonget[recipe_name]] }}}/>
+                      <input type="hidden" name="bag_name" value={{{ [<bag>jsonget[bag_name]] }}}/>
+                      <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+            </$let>
+          </$list>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Bag ACL: <$text text={{{ [<bag>jsonget[bag_name]] }}}/></h2>
+  <div class="acl-section">
+    <div class="acl-form">
+      <h3>Add Bag ACL Record</h3>
+      <form method="POST" action="/admin/post-acl">
+        <input type="hidden" name="entity_type" value="bag" />
+        <input type="hidden" name="recipe_name" value={{{ [<recipe>jsonget[recipe_name]] }}}/>
+        <input type="hidden" name="bag_name" value={{{ [<bag>jsonget[bag_name]] }}}/>
+        <select name="role_id" class="tc-select">
+          <option value="">Select Role</option>
+          <$list filter="[<roles-list>jsonindexes[]]" variable="role-index">
+            <$let role={{{ [<roles-list>jsonextract<role-index>] }}}>
+              <option value={{{ [<role>jsonget[role_id]] }}}><$text text={{{ [<role>jsonget[role_name]] }}}/></option>
+            </$let>
+          </$list>
+        </select>
+  
+        <select name="permission_id" class="tc-select">
+          <option value="">Select Permission</option>
+          <$list filter="[<permissions-list>jsonindexes[]]" variable="permission-index">
+            <$let permission={{{ [<permissions-list>jsonextract<permission-index>] }}}>
+              <option value={{{ [<permission>jsonget[permission_id]] }}}><$text text={{{ [<permission>jsonget[permission_name]] }}}/></option>
+            </$let>
+          </$list>
+        </select>
+  
+        <button type="submit" class="tc-btn-invisible btn-add">
+          Add ACL Record
+        </button>
+      </form>
+    </div>
+    <div class="acl-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Permission</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <$list filter="[<bag-acl-records>jsonindexes[]]" variable="acl-index">
+            <$let acl={{{ [<bag-acl-records>jsonextract<acl-index>] }}}>
+                <tr>
+                  <td>
+                    <$text text={{{ [<acl>jsonget[role_name]] }}}/>
+                  </td>
+                  <td>
+                    <$text text={{{ [<acl>jsonget[permission_name]] }}}/>
+                    (<small><$text text={{{ [<acl>jsonget[permission_description]] }}}/></small>)
+                    </td>
+                  <td>
+                    <form method="POST" action="/admin/delete-acl">
+                      <input type="hidden" name="acl_id" value={{{ [<acl>jsonget[acl_id]] }}}/>
+                      <input type="hidden" name="entity_type" value="bag" />
+                      <input type="hidden" name="recipe_name" value={{{ [<recipe>jsonget[recipe_name]] }}}/>
+                      <input type="hidden" name="bag_name" value={{{ [<bag>jsonget[bag_name]] }}}/>
+                      <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+            </$let>
+          </$list>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+
+  .container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+
+  h1,
+  h2 {
+    color: #2c3e50;
+  }
+
+  .acl-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .acl-form {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .acl-table {
+    flex: 2;
+    min-width: 300px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+
+  .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+
+  .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+    padding: 4px 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .btn-delete:hover {
+    background-color: #c0392b;
+  }
+
+  .btn-add {
+    background-color: #3498db;
+    color: white;
+  }
+
+  .btn-add:hover {
+    background-color: #2980b9;
+  }
+
+  select,
+  .tc-btn-invisible {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 768px) {
+    .acl-section {
+      flex-direction: column;
+    }
+
+    .acl-form,
+    .acl-table {
+      width: 100%;
+    }
+  }
+</style>
