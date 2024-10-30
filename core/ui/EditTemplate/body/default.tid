@@ -4,7 +4,7 @@ title: $:/core/ui/EditTemplate/body/default
 [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
 \end
 
-\function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<identifier>addprefix[tc-edit-texteditor-]] +[join[ ]]
+\function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] +[join[ ]]
 
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$

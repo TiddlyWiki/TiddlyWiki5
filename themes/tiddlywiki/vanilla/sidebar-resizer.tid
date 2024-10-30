@@ -161,11 +161,19 @@ code-body: yes
 
 <% endif %>
 
+.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
+	width: calc(100% - 3px);
+}
+
 <$list filter="[all[tiddlers]prefix[$:/state/resizer/texteditorwidth-]]" variable="textEditorWidthTiddler">
 
 	<$let classIdentifier={{{ [<textEditorWidthTiddler>removeprefix[$:/state/resizer/texteditorwidth-]] }}}>
 
-		.tc-edit-texteditor.tc-edit-texteditor-<<classIdentifier>> {
+		.tc-tiddler-frame iframe.tc-edit-texteditor.tc-edit-texteditor-identified-<<classIdentifier>>,
+		.tc-tiddler-frame textarea.tc-edit-texteditor.tc-edit-texteditor-identified-<<classIdentifier>>,
+		.tc-tiddler-frame contenteditable.tc-edit-texteditor.tc-edit-texteditor-identified-<<classIdentifier>> {
 			width: calc(2 * (100% - {{{ [<textEditorWidthTiddler>get[text]] }}}) - 3px);
 			max-width: 200%;
 		}

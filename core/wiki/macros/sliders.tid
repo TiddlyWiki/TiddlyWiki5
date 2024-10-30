@@ -27,15 +27,15 @@ code-body: yes
 		tv-set-storywidth-storyright="no"
 		tv-set-sidebarwidth="yes"
 		tv-set-centralised="no"
-		storyLeftTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]] }}}
-		storyRightTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]] }}}
+		storyLeftTiddler={{{ [<storyLeftTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]] }}}
+		storyRightTiddler={{{ [<storyRightTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]] }}}
 		sidebarWidthTiddler={{{ [<sidebarWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/rightwidth-]] }}}
-		tiddlerWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]] }}}
-		storyWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
-		storyMinWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
-		sidebarMinWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyminwidth-]] }}}
-		storyPaddingLeftTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingleft-]] }}}
-		storyPaddingRightTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingright-]] }}}>
+		tiddlerWidthTiddler={{{ [<tiddlerWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]] }}}
+		storyWidthTiddler={{{ [<storyWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
+		storyMinWidthTiddler={{{ [<storyMinWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
+		sidebarMinWidthTiddler={{{ [<sidebarMinWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyminwidth-]] }}}
+		storyPaddingLeftTiddler={{{ [<storyPaddingLeftTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingleft-]] }}}
+		storyPaddingRightTiddler={{{ [<storyPaddingRightTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingright-]] }}}>
 
 		<$transclude
 			$variable="sidebar-resizer"
@@ -76,15 +76,15 @@ code-body: yes
 		tv-set-storywidth-storyright="no"
 		tv-set-sidebarwidth="yes"
 		tv-set-centralised="no"
-		storyLeftTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]] }}}
-		storyRightTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]] }}}
+		storyLeftTiddler={{{ [<storyLeftTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]] }}}
+		storyRightTiddler={{{ [<storyRightTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]] }}}
 		sidebarWidthTiddler={{{ [<sidebarWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/rightwidth-]] }}}
-		tiddlerWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]] }}}
-		storyWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
-		storyMinWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
-		sidebarMinWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyminwidth-]] }}}
-		storyPaddingLeftTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingleft-]] }}}
-		storyPaddingRightTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingright-]] }}}>
+		tiddlerWidthTiddler={{{ [<tiddlerWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]] }}}
+		storyWidthTiddler={{{ [<storyWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
+		storyMinWidthTiddler={{{ [<storyMinWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
+		sidebarMinWidthTiddler={{{ [<sidebarMinWidthTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyminwidth-]] }}}
+		storyPaddingLeftTiddler={{{ [<storyPaddingLeftTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingleft-]] }}}
+		storyPaddingRightTiddler={{{ [<storyPaddingRightTiddler>!is[blank]] :else[<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingright-]] }}}>
 		
 		<$transclude
 			$variable="sidebar-resizer"
