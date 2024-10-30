@@ -57,6 +57,10 @@ code-body: yes
 			flex-grow: 1;
 		}
 
+		.tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
+			flex-direction: row;
+		}
+
 		.tc-sidebar-resizer-pointerdown-eventcatcher:not(.tc-main-sidebar-resizer), .tc-sidebar-resizer-pointermove-eventcatcher-wrapper:not(.tc-main-sidebar-resizer) {
 			position: relative;
 		}

@@ -1,0 +1,50 @@
+title: $:/core/procedures/sliders
+tags: $:/tags/Global
+code-body: yes
+
+\procedure two-cell-slider(width:"100%",minHeight:"10px",templateLeft:"",templateRight:"",mode:"block",sliderWidth:"12px",padding:"12px",sliderCondition:"yes")
+\import $:/core/procedures/sidebar-resizer
+\function get.resizer.style.position() absolute
+\function get.template-right.width() [<sidebarWidthTiddler>get[text]] :else[[50%]]
+\function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[)]]
+\function get.resizer.style.width() [<sliderWidth>]
+\function set.throttling() no
+\whitespace trim
+
+<div
+	style.width=<<width>>
+	style.min-height=<<minHeight>>
+	style.display="flex"
+	style.flex-direction="column"
+	style.padding-left=<<padding>>
+	style.padding-right=<<padding>>
+	style.padding-top=<<padding>>
+	style.padding-bottom=<<padding>>
+>
+
+	<$let
+		tv-set-storywidth-storyright="no"
+		tv-set-sidebarwidth="yes"
+		tv-set-centralised="no"
+		storyLeftTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyleft-]] }}}
+		storyRightTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyright-]] }}}
+		sidebarWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/rightwidth-]] }}}
+		tiddlerWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/tiddlerwidth-]] }}}
+		storyWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
+		storyMinWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storywidth-]] }}}
+		sidebarMinWidthTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storyminwidth-]] }}}
+		storyPaddingLeftTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingleft-]] }}}
+		storyPaddingRightTiddler={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[$:/state/resizer/storypaddingright-]] }}}>
+		
+		<$transclude
+			$variable="sidebar-resizer"
+			templateLeft=<<templateLeft>>
+			templateRight=<<templateRight>>
+			sliderCondition=<<sliderCondition>>
+			mode=<<mode>>
+		/>
+	
+	</$let>
+
+</div>
+\end
