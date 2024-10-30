@@ -29,9 +29,18 @@ exports.handler = function (request, response, state) {
   }
   var auth = authenticator(state.server.sqlTiddlerDatabase);
 
-  var userId = state.authenticatedUser.user_id;
+  var userId = state.data.userId;
   var newPassword = state.data.newPassword;
   var confirmPassword = state.data.confirmPassword;
+  var currentUserId = state.authenticatedUser.user_id;
+
+  var hasPermission = ($tw.utils.parseInt(userId, 10) === currentUserId) || state.authenticatedUser.isAdmin;
+
+  if(!hasPermission) {
+    response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
+    response.end("Forbidden");
+    return;
+  }
 
   if(newPassword !== confirmPassword) {
     response.setHeader("Set-Cookie", "flashMessage=New passwords do not match; Path=/; HttpOnly; Max-Age=5");

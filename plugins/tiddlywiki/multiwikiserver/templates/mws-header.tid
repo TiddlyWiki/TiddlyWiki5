@@ -4,7 +4,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 	<h1><$text text=<<page-title>>/></h1>
 	<div class="mws-user-info">
 		<span>Hello, <$text text=<<username>>/></span>
-		<$list filter="[<user-is-admin>match[yes]]">
+		<% if [<user-is-admin>match[yes]] %>
 			<div class="mws-admin-dropdown">
 				<button class="mws-admin-dropbtn">⚙️</button>
 				<div class="mws-admin-dropdown-content">
@@ -12,7 +12,11 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 					<a href="/admin/roles">Manage Roles</a>
 				</div>
 			</div>
-		</$list>
+		<% elseif [<username>!match[Guest]] %>
+			<a href={{{ [<user>jsonget[user_id]addprefix[/admin/users/]] }}}>
+				<button class="mws-profile-btn">Profile</button>
+			</a>
+		<% endif %>
 		<form action="/logout" method="post" class="mws-logout-form">
 			<input type="submit" value="Logout" class="mws-logout-button"/>
 		</form>
@@ -91,4 +95,13 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/mws-header
 .mws-admin-dropdown:hover .mws-admin-dropdown-content {display: block;}
 
 .mws-admin-dropdown:hover {background-color: #2980B9;}
+
+.mws-profile-btn {
+	background-color: #2980B9;
+	margin-left: 10px;
+	color: white;
+	border: none;
+	cursor: pointer;
+	padding: 5px 10px;
+}
 </style>

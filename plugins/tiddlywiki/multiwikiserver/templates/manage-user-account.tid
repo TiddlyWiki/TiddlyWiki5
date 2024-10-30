@@ -4,6 +4,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
   <h2>Manage Account</h2>
   <$set name="current-role-id" value={{{ [<user-role>jsonget[role_id]] }}}>
     <form class="user-profile-form" action="/update-user-profile" method="POST">
+      <input type="hidden" name="userId" value={{{ [<user>jsonget[user_id]] }}}>
       <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" value={{{ [<user>jsonget[username]] }}} required />
@@ -16,10 +17,9 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
         <div class="form-group">
           <label for="role">Role:</label>
           <select id="role" name="role" required>
-            <$list filter="[<all-roles>jsonindexes[]]" variable="role-index">
-              <$set name="role-id" value={{{ [<all-roles>jsonextract<role-index>jsonget[role_id]] }}}>
-                <option value=<<role-id>>
-                  <$list filter="[<current-role-id>match<role-id>]" variable="ignore">selected</$list>
+            <$list filter="[<all-roles>jsonindexes[]]" variable="role-index">              
+              <$set name="role-id" value={{{ [<all-roles>jsonextract<role-index>jsonget[role_id]] }}}> 
+                <option value=<<role-id>>>
                   <$text text={{{ [<all-roles>jsonextract<role-index>jsonget[role_name]] }}}/>
                 </option>
               </$set>
@@ -30,19 +30,29 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
       <button type="submit" class="update-profile-btn">Update Profile</button>
     </form>
   </$set>
-  <hr />
-  <h2>Change Password</h2>
-  <form class="user-profile-form" action="/change-user-password" method="POST">
-    <div class="form-group">
-      <label for="new-password">New Password:</label>
-      <input type="password" id="new-password" name="newPassword" required />
-    </div>
-    <div class="form-group">
-      <label for="confirm-password">Confirm New Password:</label>
-      <input type="password" id="confirm-password" name="confirmPassword" required />
-    </div>
-    <button type="submit" class="update-password-btn">Change Password</button>
-  </form>
+  <% if [<user-is-admin>match[yes]] && [<is-current-user-profile>match[no]] %>
+    <hr />
+    <form class="user-profile-form" action="/delete-user-account" method="POST" onsubmit="return confirm('Are you sure you want to delete this user account? This action cannot be undone.');">
+      <input type="hidden" name="userId" value={{{ [<user>jsonget[user_id]] }}}>
+      <button type="submit" class="delete-account-btn">Delete User Account</button>
+    </form>
+  <% endif %>
+  <% if [<is-current-user-profile>match[yes]] %>
+    <hr />
+    <h2>Change Password</h2>
+    <form class="user-profile-form" action="/change-user-password" method="POST">
+      <input type="hidden" name="userId" value={{{ [<user>jsonget[user_id]] }}}>
+      <div class="form-group">
+        <label for="new-password">New Password:</label>
+        <input type="password" id="new-password" name="newPassword" required />
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm New Password:</label>
+        <input type="password" id="confirm-password" name="confirmPassword" required />
+      </div>
+      <button type="submit" class="update-password-btn">Change Password</button>
+    </form>
+  <% endif %>
 </div>
 
 <style>
@@ -107,5 +117,20 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: white;
+}
+
+.delete-account-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.delete-account-btn:hover {
+  background: #c0392b;
 }
 </style>

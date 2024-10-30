@@ -27,10 +27,24 @@ exports.handler = function (request,response,state) {
     return;
   }
 
-  var userId = state.authenticatedUser.user_id;
+  var userId = state.data.userId;
   var username = state.data.username;
   var email = state.data.email;
   var roleId = state.data.role;
+  var currentUserId = state.authenticatedUser.user_id;
+  
+  var hasPermission = ($tw.utils.parseInt(userId, 10) === currentUserId) || state.authenticatedUser.isAdmin;
+
+  if(!hasPermission) {
+    response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
+    response.end("Forbidden");
+    return;
+  }
+
+  if(!state.authenticatedUser.isAdmin) {
+		var userRole = state.server.sqlTiddlerDatabase.getUserRoles(userId);
+    roleId = userRole.role_id;
+  }
 
   var result = state.server.sqlTiddlerDatabase.updateUser(userId, username, email, roleId);
 

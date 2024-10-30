@@ -9,7 +9,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 	<div class="user-profile-container">
 		<div class="user-profile-header">
 			<div class="user-profile-avatar">
-				<$text text={{{ [<user>jsonget[username]substr[0,1]uppercase[]] }}}/>
+				<$text text={{{ [<user-initials>uppercase[]] }}}/>
 			</div>
 			<h1 class="user-profile-name"><$text text={{{ [<user>jsonget[username]] }}}/></h1>
 			<p class="user-profile-email"><$text text={{{ [<user>jsonget[email]] }}}/></p>
@@ -96,6 +96,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 	align-items: center;
 	justify-content: center;
 	font-size: 3rem;
+	color: #3498db;
 }
 
 .user-profile-avatar * {
