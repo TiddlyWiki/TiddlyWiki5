@@ -295,6 +295,13 @@ kbd {
 	color: <<colour highlight-foreground>>;
 }
 
+/* Markdown uses mark element to highlight */
+
+mark {
+	background: <<colour highlight-background>>;
+	color: <<colour highlight-foreground>>;
+}
+
 form.tc-form-inline {
 	display: inline;
 }
