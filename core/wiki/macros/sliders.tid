@@ -2,7 +2,7 @@ title: $:/core/procedures/sliders
 tags: $:/tags/Global
 code-body: yes
 
-\procedure one-cell-slider(width:"100%",minHeight:"10px",template:"",mode:"block",sliderWidth:"12px",padding:"12px",sliderCondition:"yes")
+\procedure one-cell-slider(width:"100%",minHeight:"10px",template:"",mode:"block",sliderWidth:"12px",padding:"12px",sliderCondition:"yes",leftMinWidth:"100px",rightMinWidth:"100px")
 \import $:/core/procedures/sidebar-resizer
 \function get.resizer.style.position() absolute
 \function get.template-right.width() [<sidebarWidthTiddler>get[text]] :else[[50%]]
@@ -10,6 +10,8 @@ code-body: yes
 \function get.resizer.style.width() [<sliderWidth>]
 \function set.throttling() no
 \function get.template.left()
+\function get.left.minwidth() [<leftMinWidth>]
+\function get.right.minwidth() [<rightMinWidth>]
 \whitespace trim
 
 <div
@@ -52,13 +54,15 @@ code-body: yes
 </div>
 \end
 
-\procedure two-cell-slider(width:"100%",minHeight:"10px",templateLeft:"",templateRight:"",mode:"block",sliderWidth:"12px",padding:"12px",sliderCondition:"yes")
+\procedure two-cell-slider(width:"100%",minHeight:"10px",templateLeft:"",templateRight:"",mode:"block",sliderWidth:"12px",padding:"12px",sliderCondition:"yes",leftMinWidth:"100px",rightMinWidth:"100px")
 \import $:/core/procedures/sidebar-resizer
 \function get.resizer.style.position() absolute
 \function get.template-right.width() [<sidebarWidthTiddler>get[text]] :else[[50%]]
 \function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[)]]
 \function get.resizer.style.width() [<sliderWidth>]
 \function set.throttling() no
+\function get.left.minwidth() [<leftMinWidth>]
+\function get.right.minwidth() [<rightMinWidth>]
 \whitespace trim
 
 <div
