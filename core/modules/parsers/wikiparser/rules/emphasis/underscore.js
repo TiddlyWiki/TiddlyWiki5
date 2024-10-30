@@ -43,9 +43,6 @@ exports.parse = function() {
 	return [{
 		type: "element",
 		tag: "u",
-		attributes: {
-			class: {type: "string", value: "tc-emphasis tc-underscore"}
-		},
 		children: tree
 	}];
 };

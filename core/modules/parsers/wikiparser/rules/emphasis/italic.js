@@ -43,10 +43,6 @@ exports.parse = function() {
 	return [{
 		type: "element",
 		tag: "em",
-		attributes: {
-			class: {type: "string", value: "tc-emphasis tc-italic"}
-		},
-
 		children: tree
 	}];
 };
