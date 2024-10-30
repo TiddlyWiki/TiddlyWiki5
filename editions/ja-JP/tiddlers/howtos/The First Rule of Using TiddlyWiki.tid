@@ -1,0 +1,37 @@
+created: 20140419132828051
+modified: 
+original-modified: 20140919154434409
+tags: [[Working with TiddlyWiki]]
+title: The First Rule of Using TiddlyWiki
+ja-title: TiddlyWikiを使用する上での第一ルール
+type: text/vnd.tiddlywiki
+
+! 悲惨な話
+
+時折、TiddlyWikiユーザーが、ディスカッショングループで個人データの損失に関する悲痛な話の報告があります:
+
+> Tiddlyを保存中にFirefoxがクラッシュし、TiddlyWiki全体が消えてしまいました。
+
+https://groups.google.com/d/topic/tiddlywiki/oG2L7OXhUoI/discussion
+
+> 最後に使用したのは昨夜、自宅のWindows 7デスクトップで、最後のエントリの編集を終えるためにチェックマークを押し、TiddlyFox経由で保存し、USBドライブを取り出しました。今朝仕事に来て、USBを差し込み、TW5パスワードを入力しましたが、何度か試しても開きません。TW5 htmlファイルを参照すると、ファイルサイズが3MBではなく、80KBになっていることに気付きました。これで、すべてを失ったと確信しました。
+
+https://groups.google.com/d/topic/tiddlywiki/SXStDJ0ntGI/discussion
+
+あなたはそんなことが起きないようにしてください!
+
+!! The first rule of using TiddlyWiki is:
+TiddlyWikiを使用する上での第一ルールは: 
+
+<p style="font-size:40pt;line-height:48pt;font-weight:700;color:red;">
+データをバックアップしてください!
+</p>
+
+TiddlyWikiは、ユーザーが自分のデータをしっかりと管理できる、非常に柔軟でカスタマイズ可能なシステムです。TiddlyWikiの開発では、ユーザーの最も貴重なデータを安全に保管できる場所となるよう細心の注意が払われていますが、データ損失のリスクを軽減する最終的な責任はユーザーにあります。
+
+データの安全性を確保する最善の方法は、厳格なバックアップシステムを実践することです:
+
+* Dropboxなどのサービスを使用して、個人データをクラウドに継続的にバックアップすることを検討してください。(Dropbox には、ファイルの以前のバージョンを追跡する[[素敵な機能|https://www.dropbox.com/help/11]]があります)
+* TiddlyWikiを新バージョンにアップグレードする前にバックアップしてください
+* 最悪のシナリオを想定して、自分自身を守りましょう: USBスティックやハードドライブが故障したら?コンピューターがランサムウェアウイルスに感染したら?
+* 防御のため冗長性を持たせる: たとえば、複数のバックアップを取り、物理的に別の場所に保管してください
