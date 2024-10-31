@@ -43,6 +43,7 @@ This release includes improvements to the following translations:
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8585">> settings tab
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8595">> reorganised "readme" and "config" tabs
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8498">> support for the excision tool
+* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8704">> Markdown plugin to use the same formatting for highlighted text as ordinary WikiText
 
 !! Browser Storage Plugin
 
@@ -83,7 +84,6 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8606">> $:/TagManager to use the [[colour-picker Macro]]
 * <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8505">> an animation while lazily loaded tiddlers are being loaded
 * <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8628">> font stacks used in "Vanilla" theme to contemporary best practice
-* <<.link-badge-updated "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8704">> Markdown plugin to use the same formatting for highlighted text as ordinary WikiText
 
 ! Hackability Improvements
 
