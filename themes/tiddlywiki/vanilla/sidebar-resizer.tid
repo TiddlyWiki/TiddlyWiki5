@@ -94,7 +94,7 @@ code-body: yes
 			opacity: 0.6;
 		}
 
-		<%if [[$:/state/sidebar/resizing]!is[missing]] %>
+		<%if [[$:/state/sidebar/resizing]is[tiddler]] %>
 
 			@media (pointer: coarse) {
 

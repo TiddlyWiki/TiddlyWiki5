@@ -258,7 +258,7 @@ title: $:/core/procedures/sidebar-resizer
 \end
 
 \procedure sidebar-resizer-pointermove-actions()
-<%if [<get.resizer.state>!is[missing]] %>
+<%if [<get.resizer.state>is[tiddler]] %>
 	<$let
 		startPosX={{{ [<get.resizer.state>get[start-posx]] }}}
 		widgetNodeWidth={{{ [<get.resizer.state>get[widget-node-width]] }}}
@@ -287,9 +287,9 @@ title: $:/core/procedures/sidebar-resizer
 <% endif %>
 \end
 
-\function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>!is[missing]then[tc-resizer-active]] [<resizer.class>] [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-]] +[join[ ]]
+\function get.resizer.class() tc-sidebar-resizer [<get.resizer.state>is[tiddler]then[tc-resizer-active]] [<resizer.class>] [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]addprefix[tc-sidebar-resizer-]] +[join[ ]]
 
-\function get.active.class(class) [<class>] [<resizer.class>] [<eventCatcherClass>] [<get.resizer.state>!is[missing]then[tc-resizer-active]] +[join[ ]]
+\function get.active.class(class) [<class>] [<resizer.class>] [<eventCatcherClass>] [<get.resizer.state>is[tiddler]then[tc-resizer-active]] +[join[ ]]
 
 \function get.sidebar-resizer.pointerdown.actions()
 [<get.resizer.state>match[$:/state/sidebar/resizing]then<sidebar-resizer-pointerdown-actions>]
@@ -320,7 +320,7 @@ title: $:/core/procedures/sidebar-resizer
 				class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher-wrapper>>
 				selector=".tc-sidebar-resizer"
 				matchSelector=".tc-sidebar-resizer"
-				$pointerup={{{ [<get.resizer.state>!is[missing]then<sidebar-resizer-pointercancel-actions>] }}}>
+				$pointerup={{{ [<get.resizer.state>is[tiddler]then<sidebar-resizer-pointercancel-actions>] }}}>
 
 				<$eventcatcher
 					tag="div"
@@ -429,7 +429,7 @@ title: $:/core/procedures/sidebar-resizer
 				class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher-wrapper>>
 				selector=".tc-sidebar-resizer"
 				matchSelector=".tc-sidebar-resizer"
-				$pointerup={{{ [<get.resizer.state>!is[missing]then<sidebar-resizer-pointercancel-actions>] }}}>
+				$pointerup={{{ [<get.resizer.state>is[tiddler]then<sidebar-resizer-pointercancel-actions>] }}}>
 
 				<$eventcatcher
 					tag="div"
