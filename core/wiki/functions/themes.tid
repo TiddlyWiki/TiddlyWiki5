@@ -65,7 +65,7 @@ code-body: yes
 \function get.base.theme.metric.recursive(theme,metric) [<theme>get[dependents]enlist-input[]] :map[get.base.theme.metric<currentTiddler>,<metric>]
 
 \function get.base.theme.metric(theme,metric)
-[<theme>addsuffix[/metrics/]addsuffix<metric>!is[missing]]
+[<theme>addsuffix[/metrics/]addsuffix<metric>is[tiddler]]
 :else[<theme>addsuffix[/metrics/]addsuffix<metric>is[shadow]]
 :else[get.base.theme.metric.recursive<theme>,<metric>]
 \end
@@ -77,7 +77,7 @@ code-body: yes
 \function get.base.theme.option.recursive(theme,option) [<theme>get[dependents]enlist-input[]] :map[get.base.theme.option<currentTiddler>,<option>]
 
 \function get.base.theme.option(theme,option)
-[<theme>addsuffix[/options/]addsuffix<option>!is[missing]]
+[<theme>addsuffix[/options/]addsuffix<option>is[tiddler]]
 :else[<theme>addsuffix[/options/]addsuffix<option>is[shadow]]
 :else[get.base.theme.option.recursive<theme>,<option>]
 \end
@@ -87,21 +87,21 @@ code-body: yes
 \function get.theme.explicit.option(option) [<get.current.theme>addsuffix[/options/]addsuffix<option>get[text]]
 
 \function get.theme(metric)
-[get.base.theme<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>!is[missing]]
+[get.base.theme<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>is[tiddler]]
 :else[get.base.theme<get.current.theme>,<metric>addsuffix[/metrics/]addsuffix<metric>is[shadow]]
 :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 \end
 
 \function set.theme.metric(metric)
 [get.base.theme.metric<get.current.theme>,<metric>first[]is[shadow]]
-:else[get.base.theme.metric<get.current.theme>,<metric>first[]!is[shadow]!is[missing]]
+:else[get.base.theme.metric<get.current.theme>,<metric>first[]!is[shadow]is[tiddler]]
 :else[[$:/themes/tiddlywiki/vanilla/metrics/]addsuffix<metric>]
 \end
 
 \function get.base.functions.theme.recursive(theme) [<theme>get[dependents]enlist-input[]] :map[get.base.functions.theme<currentTiddler>]
 
 \function get.base.functions.theme(theme)
-[<theme>addsufix[/functions]!is[missing]]
+[<theme>addsufix[/functions]is[tiddler]]
 :else[<theme>addsuffix[/functions]is[shadow]]
 :else[get.base.functions.theme.recursive<theme>]
 \end

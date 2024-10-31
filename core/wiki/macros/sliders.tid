@@ -88,3 +88,7 @@ code-body: yes
 
 </div>
 \end
+
+\procedure table-slider()
+
+\end
