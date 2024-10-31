@@ -163,8 +163,19 @@ code-body: yes
 
 <% endif %>
 
-.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
-.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
-.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
-	width: calc(100% - 3px);
+@media (min-width: <<sidebarbreakpoint>>) {
+
+	.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+	.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
+	.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
+		width: calc(100% - 3px);
+		min-width: 0px;
+	}
+
+	.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
+	.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview,
+	.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor + .tc-tiddler-preview-preview {
+		min-width: 0px;
+	}
+
 }
