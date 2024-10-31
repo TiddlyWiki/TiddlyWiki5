@@ -28,6 +28,17 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
         </div>
       <% endif %>
       <button type="submit" class="update-profile-btn">Update Profile</button>
+      <$list filter="[[$:/temp/mws/update-profile/error]!is[missing]]" variable="errorTiddler">
+        <div class="tc-error-message">
+          {{$:/temp/mws/update-profile/error}}
+        </div>
+      </$list>
+
+      <$list filter="[[$:/temp/mws/update-profile/success]!is[missing]]" variable="successTiddler">
+        <div class="tc-success-message">
+          {{$:/temp/mws/update-profile/success}}
+        </div>
+      </$list>
     </form>
   </$set>
   <% if [<user-is-admin>match[yes]] && [<is-current-user-profile>match[no]] %>
@@ -35,6 +46,11 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
     <form class="user-profile-form" action="/delete-user-account" method="POST" onsubmit="return confirm('Are you sure you want to delete this user account? This action cannot be undone.');">
       <input type="hidden" name="userId" value={{{ [<user>jsonget[user_id]] }}}>
       <button type="submit" class="delete-account-btn">Delete User Account</button>
+      <$list filter="[[$:/temp/mws/delete-user/error]!is[missing]]" variable="errorTiddler">
+        <div class="tc-error-message">
+          {{$:/temp/mws/delete-user/error}}
+        </div>
+      </$list>
     </form>
   <% endif %>
   <% if [<is-current-user-profile>match[yes]] %>
@@ -51,6 +67,16 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
         <input type="password" id="confirm-password" name="confirmPassword" required />
       </div>
       <button type="submit" class="update-password-btn">Change Password</button>
+      <$list filter="[[$:/temp/mws/change-password/error]!is[missing]]" variable="errorTiddler">
+        <div class="tc-error-message">
+          {{$:/temp/mws/change-password/error}}
+        </div>
+      </$list>
+      <$list filter="[[$:/temp/mws/change-password/success]!is[missing]]" variable="successTiddler">
+        <div class="tc-success-message">
+          {{$:/temp/mws/change-password/success}}
+        </div>
+      </$list>
     </form>
   <% endif %>
 </div>
@@ -58,6 +84,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
 <style>
 .user-profile-management {
   padding: 20px;
+  flex: 1;
 }
 
 .user-profile-management h2 {
@@ -132,5 +159,15 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
 
 .delete-account-btn:hover {
   background: #c0392b;
+}
+
+.tc-error-message {
+  color: red;
+  font-weight: bold;
+}
+
+.tc-success-message {
+  color: green;
+  font-weight: bold;
 }
 </style>

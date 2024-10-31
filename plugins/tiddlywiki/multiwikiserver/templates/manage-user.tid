@@ -70,7 +70,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 }
 
 .user-profile-container {
-	flex: 1;
+	flex: 4;
 	margin: 2rem auto;
 	background: #fff;
 	border-radius: 8px;

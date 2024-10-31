@@ -825,6 +825,18 @@ SqlTiddlerDatabase.prototype.getUserByUsername = function(username) {
 	});
 };
 
+SqlTiddlerDatabase.prototype.listUsersByRoleId = function(roleId) {
+	return this.engine.runStatementGetAll(`
+			SELECT u.*
+			FROM users u
+			JOIN user_roles ur ON u.user_id = ur.user_id
+			WHERE ur.role_id = $roleId
+			ORDER BY u.username
+	`, {
+			$roleId: roleId
+	});
+};
+
 SqlTiddlerDatabase.prototype.updateUser = function (userId, username, email, roleId) {
 	const existingUser = this.engine.runStatement(`
 		SELECT user_id FROM users

@@ -22,13 +22,22 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 
 exports.handler = function (request, response, state) {
+  // Clean up any existing error/success messages
+  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/error");
+  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/success");
+  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
+
   if(!state.authenticatedUser) {
-    response.writeHead(401, "Unauthorized", { "Content-Type": "text/plain" });
-    response.end("Unauthorized");
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/login/error",
+      text: "You must be logged in to change passwords"
+    }));
+    response.writeHead(302, { "Location": "/login" });
+    response.end();
     return;
   }
-  var auth = authenticator(state.server.sqlTiddlerDatabase);
 
+  var auth = authenticator(state.server.sqlTiddlerDatabase);
   var userId = state.data.userId;
   var newPassword = state.data.newPassword;
   var confirmPassword = state.data.confirmPassword;
@@ -37,13 +46,20 @@ exports.handler = function (request, response, state) {
   var hasPermission = ($tw.utils.parseInt(userId, 10) === currentUserId) || state.authenticatedUser.isAdmin;
 
   if(!hasPermission) {
-    response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
-    response.end("Forbidden");
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/change-password/error",
+      text: "You don't have permission to change this user's password"
+    }));
+    response.writeHead(302, { "Location": "/admin/users/" + userId });
+    response.end();
     return;
   }
 
   if(newPassword !== confirmPassword) {
-    response.setHeader("Set-Cookie", "flashMessage=New passwords do not match; Path=/; HttpOnly; Max-Age=5");
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/change-password/error",
+      text: "New passwords do not match"
+    }));
     response.writeHead(302, { "Location": "/admin/users/" + userId });
     response.end();
     return;
@@ -52,7 +68,10 @@ exports.handler = function (request, response, state) {
   var userData = state.server.sqlTiddlerDatabase.getUser(userId);
 
   if(!userData) {
-    response.setHeader("Set-Cookie", "flashMessage=User not found; Path=/; HttpOnly; Max-Age=5");
+    $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+      title: "$:/temp/mws/change-password/error",
+      text: "User not found"
+    }));
     response.writeHead(302, { "Location": "/admin/users/" + userId });
     response.end();
     return;
@@ -61,7 +80,10 @@ exports.handler = function (request, response, state) {
   var newHash = auth.hashPassword(newPassword);
   var result = state.server.sqlTiddlerDatabase.updateUserPassword(userId, newHash);
 
-  response.setHeader("Set-Cookie", `flashMessage=${result.message}; Path=/; HttpOnly; Max-Age=5`);
+  $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+    title: "$:/temp/mws/change-password/success",
+    text: result.message
+  }));
   response.writeHead(302, { "Location": "/admin/users/" + userId });
   response.end();
 };

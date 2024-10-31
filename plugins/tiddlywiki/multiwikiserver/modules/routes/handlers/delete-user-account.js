@@ -26,23 +26,58 @@ POST /delete-user-account
 
 		// Check if user is admin
 		if(!state.authenticatedUser || !state.authenticatedUser.isAdmin) {
-			response.writeHead(403, "Forbidden");
+			$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+				title: "$:/temp/mws/delete-user/error",
+				text: "You must be an administrator to delete user accounts"
+			}));
+			response.writeHead(302, { "Location": '/admin/users/'+userId });
 			response.end();
 			return;
 		}
 
 		// Prevent admin from deleting their own account
 		if(state.authenticatedUser.user_id === userId) {
-			response.writeHead(400, "Bad Request");
-			response.end("Cannot delete your own account");
+			$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+				title: "$:/temp/mws/delete-user/error",
+				text: "Cannot delete your own account"
+			}));
+			response.writeHead(302, { "Location": '/admin/users/'+userId });
+			response.end();
 			return;
 		}
 
 		// Check if the user exists
 		var user = sqlTiddlerDatabase.getUser(userId);
 		if(!user) {
-			response.writeHead(404, "Not Found");
-			response.end("User not found");
+			$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+				title: "$:/temp/mws/delete-user/error",
+				text: "User not found"
+			}));
+			response.writeHead(302, { "Location": '/admin/users/'+userId });
+			response.end();
+			return;
+		}
+
+		// Check if this is the last admin account
+		var adminRole = sqlTiddlerDatabase.getRoleByName("ADMIN");
+		if(!adminRole) {
+			$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+				title: "$:/temp/mws/delete-user/error",
+				text: "Admin role not found"
+			}));
+			response.writeHead(302, { "Location": '/admin/users/'+userId });
+			response.end();
+			return;
+		}
+
+		var adminUsers = sqlTiddlerDatabase.listUsersByRoleId(adminRole.role_id);
+		if(adminUsers.length <= 1 && adminUsers.some(admin => admin.user_id === parseInt(userId))) {
+			$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
+				title: "$:/temp/mws/delete-user/error",
+				text: "Cannot delete the last admin account"
+			}));
+			response.writeHead(302, { "Location": '/admin/users/'+userId });
+			response.end();
 			return;
 		}
     
