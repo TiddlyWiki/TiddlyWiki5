@@ -2822,6 +2822,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 .tc-chooser {
 	border-right: 1px solid <<colour table-header-background>>;
 	border-left: 1px solid <<colour table-header-background>>;
+	white-space: pre-wrap;
 }
 
 .tc-chooser.tc-chooser-cards {
@@ -2836,7 +2837,7 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 }
 
 .tc-chooser.tc-chooser-cards .tc-chooser-item {
-	width: 15em;
+	width: 220px;
 	margin: 0.5em;
 	padding: 6px;
 	border: 1px solid <<colour muted-foreground>>;
