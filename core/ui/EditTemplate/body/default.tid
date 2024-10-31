@@ -1,10 +1,20 @@
 title: $:/core/ui/EditTemplate/body/default
 
-\function edit-preview-state()
+\function get.edit-preview-state()
 [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] +[get[text]] :else[[no]]
 \end
 
-\function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] +[join[ ]]
+\function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] +[join[ ]]
+
+\function get.preview.width() [<sidebarWidthTiddler>get[text]]
+
+\function get.style.grid-template-columns()
+[<get.edit-preview-state>!match[yes]then[1fr]]
+:else[<sidebarWidthTiddler>!is[missing]then[calc(100% - ]addsuffix<get.preview.width>addsuffix[) ]addsuffix<get.preview.width>]
+:else[[repeat(2, minmax(0px, 1fr))]]
+\end
+
+\function get.slider.condition() [<get.edit-preview-state>match[yes]] :else[[no]]
 
 \define config-visibility-title()
 $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
@@ -14,20 +24,28 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 <$action-popup $state=<<importState>> $coords="(0,0,0,0)" $floating="yes"/>
 \end
 
-\procedure tp-tiddler-preview()
-<$list filter="[<editPreviewStateTiddler>get[text]match[yes]]" variable="ignore">
+\procedure tp-tiddler-editor-preview()
+<div
+	class={{{ [<get.edit-preview-state>match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [[tc-tiddler-editor]] +[join[ ]] }}}
+	style.grid-template-columns=<<get.style.grid-template-columns>>>
 
-<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
+	<$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
-<$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
+	<$list filter="[<editPreviewStateTiddler>get[text]match[yes]]" variable="ignore">
 
-<$transclude tiddler="$:/core/ui/EditTemplate/body/preview/output" mode="inline"/>
+		<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
 
-</$transclude>
+			<$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
+
+				<$transclude tiddler="$:/core/ui/EditTemplate/body/preview/output" mode="inline"/>
+
+			</$transclude>
+
+		</div>
+
+	</$list>
 
 </div>
-
-</$list>
 \end
 
 \whitespace trim
@@ -35,26 +53,21 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	qualified-preview-state=<<qualify "$:/state/showeditpreview">>
 	editPreviewStateTiddler={{{ [{$:/config/ShowEditPreview/PerTiddler}!match[yes]then[$:/state/showeditpreview]] :else[<qualified-preview-state>] }}}
 	importTitle=<<qualify $:/ImportImage>>
-	importState=<<qualify $:/state/ImportImage>> >
+	importState=<<qualify $:/state/ImportImage>>
+	identifier={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]] }}}
+	sidebarWidthTiddler={{{ [<identifier>addprefix[$:/state/resizer/previewwidth-]] }}} >
 <$dropzone importTitle=<<importTitle>> autoOpenOnImport="no" contentTypesFilter={{$:/config/Editor/ImportContentTypesFilter}} class="tc-dropzone-editor" enable={{{ [{$:/config/DragAndDrop/Enable}match[no]] :else[subfilter{$:/config/Editor/EnableImportFilter}then[yes]else[no]] }}} filesOnly="yes" actions=<<importFileActions>> >
 <div>
-<div class={{{ [<edit-preview-state>match[yes]then[tc-tiddler-preview]else[tc-tiddler-preview-hidden]] [[tc-tiddler-editor]] +[join[ ]] }}}>
-
-<$let identifier={{{ [<qualify>addsuffix[-]addsuffix<currentTiddler>sha256[]] }}} sidebarWidthTiddler={{{ [<identifier>addprefix[$:/state/resizer/texteditorwidth-]] }}}>
-
-<$transclude tiddler="$:/core/ui/EditTemplate/body/editor" mode="inline"/>
 
 <$transclude
-	$variable="one-cell-slider"
-	template="tp-tiddler-preview"
+	$variable="editor-preview-slider"
+	class="tc-edit-texteditor-slider"
+	template="tp-tiddler-editor-preview"
+	sliderCondition=<<get.slider.condition>>
 	mode="inline"
 	padding="0px"
 	sliderWidth="6px"
 />
-
-</$let>
-
-</div>
 
 </div>
 

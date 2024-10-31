@@ -40,9 +40,15 @@ code-body: yes
 			height: 100%;
 		}
 
-		.tc-sidebar-resizer-pointerdown-eventcatcher.tc-one-cell-eventcatcher {
-			width: 200%;
-			left: -100%;
+		.tc-edit-texteditor-slider > .tc-sidebar-resizer-pointerdown-eventcatcher.tc-one-cell-eventcatcher {
+			position: absolute;
+			width: 100%;
+			top: 0;
+			left: 0;
+		}
+
+		.tc-editor-toolbar {
+			background-color: <<colour tiddler-background>>;
 		}
 
 		.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
@@ -166,18 +172,3 @@ code-body: yes
 .tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
 	width: calc(100% - 3px);
 }
-
-<$list filter="[all[tiddlers]prefix[$:/state/resizer/texteditorwidth-]]" variable="textEditorWidthTiddler">
-
-	<$let classIdentifier={{{ [<textEditorWidthTiddler>removeprefix[$:/state/resizer/texteditorwidth-]] }}}>
-
-		.tc-tiddler-frame iframe.tc-edit-texteditor.tc-edit-texteditor-identified-<<classIdentifier>>,
-		.tc-tiddler-frame textarea.tc-edit-texteditor.tc-edit-texteditor-identified-<<classIdentifier>>,
-		.tc-tiddler-frame contenteditable.tc-edit-texteditor.tc-edit-texteditor-identified-<<classIdentifier>> {
-			width: calc(2 * (100% - {{{ [<textEditorWidthTiddler>get[text]] }}}) - 3px);
-			max-width: 200%;
-		}
-
-	</$let>
-
-</$list>

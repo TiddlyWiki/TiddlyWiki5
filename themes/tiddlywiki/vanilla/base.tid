@@ -1426,7 +1426,7 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-editor-toolbar {
-	margin-top: 8px;
+	padding-top: 8px;
 }
 
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-editor-toolbar,
@@ -1697,6 +1697,7 @@ html body.tc-body.tc-single-tiddler-window {
 		"editor";
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr;
+	width: 100%;
 }
 
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-tiddler-preview-preview {
@@ -1704,7 +1705,7 @@ html body.tc-body.tc-single-tiddler-window {
 	overflow-wrap: anywhere;
 	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 0 3px 0;
+	margin: 4px 0 3px 9px;
 	padding: 3px 3px 3px 3px;
 }
 

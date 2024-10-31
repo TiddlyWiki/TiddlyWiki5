@@ -410,3 +410,76 @@ title: $:/core/procedures/sidebar-resizer
 
 </$set>
 \end
+
+\procedure editor-resizer(template:"",mode:"block",sliderCondition:"yes",eventCatcherClass:"")
+<$set name="resizerWidthDivided" value={{{ [<get.resizer.style.width>divide[2]] }}}>
+
+	<$eventcatcher
+		tag="div"
+		class=<<get.active.class tc-sidebar-resizer-pointerdown-eventcatcher>>
+		selector=".tc-sidebar-resizer"
+		matchSelector=".tc-sidebar-resizer"
+		$pointerdown=<<get.sidebar-resizer.pointerdown.actions>>
+		$pointerup=<<sidebar-resizer-pointercancel-actions>>>
+
+		<%if [<resizer.state>!match[no]] %>
+
+			<$eventcatcher
+				tag="div"
+				class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher-wrapper>>
+				selector=".tc-sidebar-resizer"
+				matchSelector=".tc-sidebar-resizer"
+				$pointerup={{{ [<get.resizer.state>!is[missing]then<sidebar-resizer-pointercancel-actions>] }}}>
+
+				<$eventcatcher
+					tag="div"
+					selector=".tc-sidebar-resizer-pointermove"
+					matchSelector=".tc-sidebar-resizer-pointermove"
+					class=<<get.active.class tc-sidebar-resizer-pointermove-eventcatcher>>
+					$pointerup=<<sidebar-resizer-pointercancel-actions>>
+					$pointerleave=<<sidebar-resizer-pointercancel-actions>>
+					$pointerout=<<sidebar-resizer-pointercancel-actions>>
+					$pointercancel=<<sidebar-resizer-pointercancel-actions>>
+					$pointerdown=<<sidebar-resizer-pointercancel-actions>>
+					$touchstart=<<sidebar-resizer-pointercancel-actions>>
+					$pointermove=<<sidebar-resizer-pointermove-actions>>
+					$contextmenu=<<sidebar-resizer-pointercancel-actions>>>
+
+					<div class=<<get.active.class tc-sidebar-resizer-pointermove>>/>
+
+				</$eventcatcher>
+
+				<%if [<sliderCondition>match[yes]] %>
+
+					<div
+						class=<<get.resizer.class>>
+						style.position=<<get.resizer.style.position>>
+						style.left=<<get.resizer.style.left>>
+						style.width=<<get.resizer.style.width>>
+					/>
+
+				<% endif %>
+
+				<%if [<template>is[variable]] [<template>is[tiddler]] %>
+
+					<%if [<template>is[variable]] %>
+
+						<$transclude $variable=<<template>> mode=<<mode>>/>
+
+					<% else %>
+
+						<$transclude $tiddler=<<template>> mode=<<mode>>/>
+
+					<% endif %>
+
+				<% endif %>
+
+			</$eventcatcher>
+
+		<% endif %>
+
+	</$eventcatcher>
+
+</$set>
+\end
+
