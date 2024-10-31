@@ -460,17 +460,13 @@ title: $:/core/procedures/sidebar-resizer
 
 				<% endif %>
 
-				<%if [<template>is[variable]] [<template>is[tiddler]] %>
+				<%if [<template>is[variable]] %>
 
-					<%if [<template>is[variable]] %>
+					<$transclude $variable=<<template>> mode=<<mode>>/>
 
-						<$transclude $variable=<<template>> mode=<<mode>>/>
+				<% else %>
 
-					<% else %>
-
-						<$transclude $tiddler=<<template>> mode=<<mode>>/>
-
-					<% endif %>
+					<$transclude $tiddler=<<template>> mode=<<mode>>/>
 
 				<% endif %>
 

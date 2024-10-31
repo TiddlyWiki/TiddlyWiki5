@@ -47,10 +47,6 @@ code-body: yes
 			left: 0;
 		}
 
-		.tc-editor-toolbar {
-			background-color: <<colour tiddler-background>>;
-		}
-
 		.tc-sidebar-resizer-pointermove-eventcatcher, .tc-sidebar-resizer-pointermove {
 			position: absolute;
 			top: 0;

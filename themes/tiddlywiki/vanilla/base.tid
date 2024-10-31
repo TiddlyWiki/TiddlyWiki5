@@ -1426,6 +1426,8 @@ html body.tc-body.tc-single-tiddler-window {
 */
 
 .tc-editor-toolbar {
+	background-color: <<colour tiddler-background>>;
+	z-index: 1;
 	padding-top: 8px;
 }
 
