@@ -6,6 +6,8 @@ title: $:/core/ui/EditTemplate/body/default
 
 \function get.tc-edit-texteditor.class() tc-edit-texteditor tc-edit-texteditor-body [<get.edit-preview-state>match[yes]then<identifier>addprefix[tc-edit-texteditor-identified-]] +[join[ ]]
 
+\function get.tc-tiddler-preview-preview.class() tc-tiddler-preview-preview [<identifier>addprefix[tc-tiddler-preview-preview-identified-]] +[join[ ]]
+
 \function get.preview.width() [<sidebarWidthTiddler>get[text]]
 
 \function get.style.grid-template-columns()
@@ -33,7 +35,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 
 	<$list filter="[<editPreviewStateTiddler>get[text]match[yes]]" variable="ignore">
 
-		<div class="tc-tiddler-preview-preview" data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
+		<div class=<<get.tc-tiddler-preview-preview.class>> data-tiddler-title={{!!draft.title}} data-tags={{!!tags}}>
 
 			<$transclude tiddler={{$:/state/editpreviewtype}} mode="inline">
 

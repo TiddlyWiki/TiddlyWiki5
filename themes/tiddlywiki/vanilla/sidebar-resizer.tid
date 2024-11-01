@@ -178,4 +178,30 @@ code-body: yes
 		min-width: 0px;
 	}
 
+	<$list filter="[all[tiddlers]prefix[$:/state/resizer/previewwidth-]]" variable="previewWidthTiddler">
+
+		<$let
+			identifier={{{ [<previewWidthTiddler>removeprefix[$:/state/resizer/previewwidth-]] }}}
+			width={{{ [<previewWidthTiddler>get[text]] }}}>
+
+			<%if [<width>compare:number:lteq[1]] %>
+
+				.tc-tiddler-preview-preview-identified-<<identifier>> {
+					display: none;
+				}
+
+			<% endif %>
+
+			<%if [<width>compare:number:gteq[99]] %>
+
+				.tc-edit-texteditor-identified-<<identifier>> {
+					display: none;
+				}
+
+			<% endif %>
+
+		</$let>
+
+	</$list>
+
 }
