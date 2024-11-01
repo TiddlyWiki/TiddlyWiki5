@@ -122,6 +122,11 @@ title: $:/core/procedures/sidebar-resizer
 :else[<storyRiverWidthConverted>addsuffix<storyRightMetric>]
 \end
 
+\function get.story-sidebar.padding()
+[<get.theme.option sidebarposition>match[left]then<storyPaddingLeft>]
+:else[<storyPaddingRight>]
+\end
+
 \procedure set-storywidth-storyright-actions()
 <$let
 	storyRightStart={{{ [<get.resizer.state>get[start-story-right]] }}}
@@ -131,11 +136,11 @@ title: $:/core/procedures/sidebar-resizer
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<storyMinWidthTiddler>!is[blank]is[missing]then<get.left.minwidth>] :else[<get.theme.metric storyminwidth>] }}}
 	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<sidebarMinWidthTiddler>!is[blank]is[missing]then<get.right.minwidth>] :else[<get.theme.metric sidebarminwidth>] }}}
-	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
-	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingLeftTiddler>!is[blank]is[missing]then[0px]] :else[get.theme.metric[storypaddingleft]] }}}
+	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingLeftTiddler>!is[blank]is[missing]then[0px]] :else[<get.theme.metric storypaddingleft>] }}}
 	storyPaddingLeft={{{ [convert.to.pixels.locally<storyPaddingLeftValue>] }}}
-	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingRightTiddler>!is[blank]is[missing]then[0px]] :else[get.theme.metric[storypaddingright]] }}}
+	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingRightTiddler>!is[blank]is[missing]then[0px]] :else[<get.theme.metric storypaddingright>] }}}
 	storyPaddingRight={{{ [convert.to.pixels.locally<storyPaddingRightValue>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>subtract<get.story-sidebar.padding>] }}}
 	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
 	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
