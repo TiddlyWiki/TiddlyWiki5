@@ -206,13 +206,13 @@ title: $:/core/procedures/sidebar-resizer
 	clampedDiff={{{ [<storyLeft>add<storyMinWidth>add<startSidebarWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
 	sliderWidth={{{ [convert.to.pixels.locally<get.resizer.style.width>] }}}
 	sidebarWidth={{{ [<sidebarWidth>subtract<clampedDiff>subtract<sliderWidth>] }}}>
-	
+
 	<$let
 		sidebarWidthConverted={{{ [function[convert.to.result],<sidebarWidth>,<sidebarWidthMetric>] }}}
 		sidebarMaxWidthConverted={{{ [function[convert.to.result],<sidebarMaxWidth>,<sidebarWidthMetric>] }}}
 		sidebarMinWidthConverted={{{ [function[convert.to.result],<sidebarMinWidth>,<sidebarWidthMetric>] }}}
 		sidebarWidthSetTiddler={{{ [<sidebarWidthTiddler>!is[blank]] :else[<set.theme.metric sidebarwidth>] }}}>
-		
+
 		<$action-setfield $tiddler=<<sidebarWidthSetTiddler>> text=<<get.sidebar-width.result>>/>
 
 	</$let>
