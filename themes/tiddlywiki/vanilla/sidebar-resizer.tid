@@ -40,7 +40,7 @@ code-body: yes
 			height: 100%;
 		}
 
-		.tc-edit-texteditor-slider > .tc-sidebar-resizer-pointerdown-eventcatcher.tc-one-cell-eventcatcher {
+		.tc-edit-texteditor-slider > .tc-sidebar-resizer-pointerdown-eventcatcher.tc-editor-preview-eventcatcher {
 			position: absolute;
 			width: 100%;
 			top: 0;

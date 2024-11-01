@@ -1708,7 +1708,7 @@ html body.tc-body.tc-single-tiddler-window {
 	overflow-wrap: anywhere;
 	word-break: normal;
 	border: 1px solid <<colour tiddler-editor-border>>;
-	margin: 4px 0 3px 9px;
+	margin: 4px 0 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
 

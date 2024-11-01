@@ -6,7 +6,7 @@ code-body: yes
 \import $:/core/procedures/sidebar-resizer
 \function get.resizer.style.position() absolute
 \function get.template-right.width() [<sidebarWidthTiddler>get[text]] :else[[50%]]
-\function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[)]]
+\function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[ - 3px)]]
 \function get.resizer.style.width() [<sliderWidth>]
 \function set.throttling() no
 \function get.template.left()
@@ -33,7 +33,7 @@ code-body: yes
 		$variable="editor-resizer"
 		template=<<template>>
 		sliderCondition=<<sliderCondition>>
-		eventCatcherClass="tc-one-cell-eventcatcher"
+		eventCatcherClass="tc-editor-preview-eventcatcher"
 		mode=<<mode>>
 	/>
 

@@ -10,7 +10,7 @@ title: $:/core/ui/EditTemplate/body/default
 
 \function get.style.grid-template-columns()
 [<get.edit-preview-state>!match[yes]then[1fr]]
-:else[<sidebarWidthTiddler>!is[missing]then[calc(100% - ]addsuffix<get.preview.width>addsuffix[) ]addsuffix<get.preview.width>]
+:else[<sidebarWidthTiddler>is[tiddler]then[calc(100% - ]addsuffix<get.preview.width>addsuffix[) ]addsuffix[calc(]addsuffix<get.preview.width>addsuffix[)]]
 :else[[repeat(2, minmax(0px, 1fr))]]
 \end
 
