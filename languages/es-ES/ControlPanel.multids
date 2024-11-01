@@ -96,6 +96,10 @@ Plugins/PluginWillRequireReload: (requiere recarga)
 Plugins/Plugins/Caption: Complementos
 Plugins/Plugins/Hint: Complementos y extensiones
 Plugins/Reinstall/Caption: Reinstalar
+Plugins/Stability/Deprecated: OBSOLETO
+Plugins/Stability/Experimental: EXPERIMENTAL
+Plugins/Stability/Legacy: HEREDADO
+Plugins/Stability/Stable: ESTABLE
 Plugins/Themes/Caption: Temas
 Plugins/Themes/Hint: Extensiones de tema
 Plugins/Update/Caption: actualizar
@@ -198,6 +202,12 @@ Settings/TitleLinks/Yes/Description: Mostrar como enlaces
 Settings/MissingLinks/Caption: Enlaces Wiki
 Settings/MissingLinks/Hint: Elige si quieres vincular a tiddlers que aún no existen
 Settings/MissingLinks/Description: Habilitar enlaces a tiddlers inexistentes
+SocialCard/Caption: Tarjeta Red Social
+SocialCard/Domain/Prompt: Nombre de dominio que se mostrará para el enlace (por ejemplo, ''tiddlywiki.com'')
+SocialCard/Hint: Esta información es utilizada por los servicios de redes sociales y mensajería para mostrar una tarjeta de vista previa para los enlaces a este TiddlyWiki cuando se aloja en línea
+SocialCard/PreviewUrl/Prompt: URL completa para obtener una vista previa de la imagen de este TiddlyWiki
+SocialCard/PreviewUrl/Preview: Imagen de vista previa:
+SocialCard/Url/Prompt: URL completa de este TiddlyWiki
 StoryTiddler/Caption: Tiddler de Historia
 StoryTiddler/Hint: Esta cascada de reglas se usa para elegir dinámicamente la plantilla para mostrar un tiddler en el río de la historia.
 StoryView/Caption: Vista
@@ -206,6 +216,12 @@ Stylesheets/Caption: Hojas de estilo
 Stylesheets/Expand/Caption: Expandir todo
 Stylesheets/Hint: Este es el CSS renderizado de los tiddlers CSS etiquetados con <<tag "$:/tags/Stylesheet">>
 Stylesheets/Restore/Caption: Restaurar
+TestCases/Caption: Casos de Prueba
+TestCases/Hint: Los casos de prueba son ejemplos independientes para probar y aprender
+TestCases/All/Caption: Todos los casos de prueba
+TestCases/All/Hint: Todos los casos de prueba
+TestCases/Failed/Caption: Casos de prueba fallidos
+TestCases/Failed/Hint: Solo casos de prueba fallidos
 Theme/Caption: Tema
 Theme/Prompt: Tema actual
 TiddlerFields/Caption: Campos de tiddler
@@ -229,3 +245,7 @@ ViewTemplateBody/Caption: Ver el Cuerpo de la Plantilla
 ViewTemplateBody/Hint: La plantilla de vista predeterminada utiliza esta cascada de reglas para elegir dinámicamente la plantilla para mostrar el cuerpo de un tiddler.
 ViewTemplateTitle/Caption: Ver el Título de la Plantilla
 ViewTemplateTitle/Hint: La plantilla de vista predeterminada utiliza esta cascada de reglas para elegir dinámicamente la plantilla para mostrar el título de un tiddler.
+ViewTemplateSubtitle/Caption: Ver Subtítulo de Plantilla
+ViewTemplateSubtitle/Hint: La plantilla de vista predeterminada utiliza esta regla en cascada para elegir dinámicamente la plantilla para mostrar el subtítulo de un tiddler.
+ViewTemplateTags/Caption: Ver Etiquetas de Plantilla
+ViewTemplateTags/Hint: La plantilla de vista predeterminada utiliza esta regla en cascada para elegir dinámicamente la plantilla para mostrar el área de etiquetas de un tiddler.

@@ -1,20 +1,24 @@
 created: 20140721121924384
-modified: 20220131165124489
+modified: 20240925113748341
 tags: Community
 title: Forums
 type: text/vnd.tiddlywiki
 
 ! Official Forums
 
-The new official forum for talking about ~TiddlyWiki: requests for help, announcements of new releases and plugins, debating new features, or just sharing experiences. You can participate via the associated website, or subscribe via email.
+!! https://talk.tiddlywiki.org/
 
-https://talk.tiddlywiki.org/
+<<<
+The new official forum for talking about ~TiddlyWiki: requests for help, [[announcements|https://talk.tiddlywiki.org/c/announcements/20]] of new releases and plugins, debating new features, or just sharing experiences. You can participate via the associated website, or subscribe via email.
 
-Note that talk.tiddlywiki.org is a community run service that we host and maintain ourselves. The modest running costs are covered by community contributions.
+''talk.tiddlywiki.org'' is a community run service that we host and maintain ourselves. The modest running costs are covered by community contributions.
+<<<
 
-For the convenience of existing users, we also continue to operate the original ~TiddlyWiki group (hosted on Google Groups since 2005):
+!!! Google Groups
 
-https://groups.google.com/group/TiddlyWiki
+<<<
+For the convenience of existing users, we also continue to operate the original ~TiddlyWiki group (hosted on Google Groups since 2005): https://groups.google.com/group/TiddlyWiki
+<<<
 
 ! Developer Forums
 

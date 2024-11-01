@@ -104,6 +104,8 @@ ShowSideBar/Caption: Sidebar einblenden
 ShowSideBar/Hint: Sidebar einblenden
 TagManager/Caption: Tag-Manager
 TagManager/Hint: Öffne den Tag-Manager
+TestCaseImport/Caption: importiere Tiddler
+TestCaseImport/Hint: Importiere im Test enthaltene Tiddler
 Timestamp/Caption: Zeitstempel
 Timestamp/Hint: Einstellung, ob Änderungen den Zeitstempel beeinflussen
 Timestamp/On/Caption: Zeitstempel EIN

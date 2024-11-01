@@ -7,8 +7,8 @@ type: text/vnd.tiddlywiki
 released: 20141219215007260
 description: Hot fix release for v5.1.7
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.6...v5.1.7]]//
+//[[See GitHub for detailed change history of this release|https://github.com/TiddlyWiki/TiddlyWiki5/compare/v5.1.6...v5.1.7]]//
 
 This is an hot fix release with the following change over [[Release 5.1.6]]:
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a31aa25d0c00187ff829d74108f018e44b5cb3c5]] typo in GettingStarted
+* [[Fixed|https://github.com/TiddlyWiki/TiddlyWiki5/commit/a31aa25d0c00187ff829d74108f018e44b5cb3c5]] typo in GettingStarted

@@ -1,0 +1,8 @@
+title: $:/language/Snippets/ProcedureDefinition
+tags: $:/tags/TextEditor/Snippet
+caption: Procedure Definition
+
+\procedure procName(param1:"standard parameter", param2)
+Ihr Text kommt hier her. Zugriff auf <<__param1__>>.
+<<__param2__>>
+\end

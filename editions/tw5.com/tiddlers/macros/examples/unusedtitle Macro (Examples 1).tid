@@ -1,5 +1,5 @@
 created: 20210227212730299
-modified: 20211118025545823
+modified: 20240119151636562
 tags: [[Macro Examples]]
 title: unusedtitle Macro (Examples 1)
 type: text/vnd.tiddlywiki
@@ -14,6 +14,10 @@ type: text/vnd.tiddlywiki
 
 \define testNew()
 <$action-sendmessage $message="tm-new-tiddler" title=<<unusedtitle baseName:"new" template:"$count:2$-$basename$">> />
+\end
+
+\define testStartCount()
+<$action-createtiddler $basetitle=<<unusedtitle startCount:"10" baseName:"new" separator:"-" template:"$count:2$$separator$$basename$">>/>
 \end
 
 ```
@@ -39,6 +43,16 @@ New Tiddler
 ```
 
 <$button actions=<<testCreate1>>>
+<$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
+Create Tiddler
+</$button>
+
+
+```
+<<unusedtitle startCount:"10" baseName:"new" separator:"-" template:"$count:2$$separator$$basename$">>
+```
+
+<$button actions=<<testStartCount>>>
 <$action-setfield $tiddler="$:/state/tab/sidebar--595412856" text="$:/core/ui/SideBar/Recent"/>
 Create Tiddler
 </$button>

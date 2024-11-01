@@ -253,7 +253,7 @@ Tests the checkbox widget thoroughly.
             },
         ];
 
-        // https://github.com/Jermolene/TiddlyWiki5/issues/6871
+        // https://github.com/TiddlyWiki/TiddlyWiki5/issues/6871
         var listModeTestsWithListField = (
             listModeTests
             .filter(data => data.widgetText.includes("listField='colors'"))
