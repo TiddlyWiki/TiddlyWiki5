@@ -123,8 +123,8 @@ title: $:/core/procedures/sidebar-resizer
 \end
 
 \function get.story-sidebar.padding()
-[<get.theme.option sidebarposition>match[left]then<storyPaddingLeft>]
-:else[<storyPaddingRight>]
+[<get.theme.option sidebarposition>match[left]then<currentTiddler>subtract<storyPaddingLeft>]
+:else[<currentTiddler>subtract<storyPaddingRight>]
 \end
 
 \procedure set-storywidth-storyright-actions()
@@ -140,7 +140,7 @@ title: $:/core/procedures/sidebar-resizer
 	storyPaddingLeft={{{ [convert.to.pixels.locally<storyPaddingLeftValue>] }}}
 	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingRightTiddler>!is[blank]is[missing]then[0px]] :else[<get.theme.metric storypaddingright>] }}}
 	storyPaddingRight={{{ [convert.to.pixels.locally<storyPaddingRightValue>] }}}
-	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>subtract<get.story-sidebar.padding>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] :map[<get.story-sidebar.padding>] }}}
 	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
 	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] ~0 }}}
