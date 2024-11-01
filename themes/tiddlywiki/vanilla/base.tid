@@ -1036,6 +1036,7 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 
 	html[dir="rtl"] .tc-sidebar-scrollable {
+		padding-right: 42px;
 		padding-left: 0;
 	}
 
@@ -1054,7 +1055,12 @@ button.tc-btn-invisible.tc-remove-tag-button {
 
 	.tc-sidebar-left .tc-story-river {
 		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}} - <<get.theme.metric storypaddingleft>>),calc(100% - <<get.theme.metric storywidth>> - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} - <<get.theme.metric storypaddingleft>>),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - <<get.theme.metric storypaddingleft>>));
-		right: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + <<get.theme.metric storypaddingleft>>);
+		right: max(0px,calc({{$:/themes/tiddlywiki/vanilla/metrics/storyleft}} + <<get.theme.metric storypaddingleft>>));
+	}
+
+	html[dir="rtl"] .tc-sidebar-left .tc-story-river {
+		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}),calc(100% - <<get.theme.metric storywidth>> - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}}));
+		right: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
 	}
 
 	html[dir="rtl"] .tc-story-river:not(.tc-sidebar-left .tc-story-river) {
