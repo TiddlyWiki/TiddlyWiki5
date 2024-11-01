@@ -25,7 +25,7 @@ The content of the <<.wid genesis>> widget is used as the content of the dynamic
 
 <<.from-version "5.2.6">> If the `$type` attribute is missing or blank, the <<.wlink GenesisWidget>> widget does not render an intrinsic element, instead just rendering its children.
 
-Note that attributes explicitly specified take precedence over attributes with the same name specified in the `$names` filter.
+<<.from-version "5.3.6">> Note that attributes explicitly specified take precedence over attributes with the same name specified in the `$names` filter. This has always been the documented behaviour but prior to [[Release 5.3.6]] the implementation was reversed, and the `$names` attributes took precedence. This was fixed in [[Release 5.3.6]].
 
 ! Examples
 
