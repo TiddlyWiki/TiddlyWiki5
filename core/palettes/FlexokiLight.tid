@@ -71,7 +71,7 @@ alert-background: <<colour flexoki-yellow-100>>
 alert-border: <<colour flexoki-ye-2>>
 alert-highlight: <<colour flexoki-re-2>>
 alert-muted-foreground: <<colour flexoki-tx-2>>
-background: <<colour flexoki-paper>>
+background: #FFFCF0
 blockquote-bar: <<colour flexoki-magenta-600>>
 button-background: <<colour flexoki-bg-2>>
 button-foreground: <<colour flexoki-black>>
@@ -104,7 +104,7 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: <<colour flexoki-bl>>
 external-link-foreground: <<colour flexoki-bl>>
 footnote-target-background: <<colour flexoki-bg-2>>
-foreground: <<colour flexoki-black>>
+foreground: #100F0F
 highlight-background: #ffff00
 highlight-foreground: #000000
 menubar-background: <<colour primary>>
@@ -162,7 +162,7 @@ tab-foreground: <<colour flexoki-tx>>
 table-border: <<colour flexoki-ui-2>>
 table-footer-background: <<colour flexoki-tx-3>>
 table-header-background: <<colour flexoki-bg-2>>
-tag-background: <<colour flexoki-ye-2>>
+tag-background: #AD8301
 tag-foreground: #FFFCF0
 testcase-accent-level-1: <<colour flexoki-blue-400>>
 testcase-accent-level-2: <<colour flexoki-yellow-400>>

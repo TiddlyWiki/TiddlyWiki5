@@ -69,7 +69,7 @@ alert-background: <<colour flexoki-yellow-100>>
 alert-border: <<colour flexoki-ye-2>>
 alert-highlight: <<colour flexoki-re>>
 alert-muted-foreground: <<colour flexoki-ye>>
-background: <<colour flexoki-bg-2>>
+background: #1C1B1A
 blockquote-bar: <<colour flexoki-ma-2>>
 button-background: <<colour flexoki-bg-2>>
 button-foreground: <<colour flexoki-paper>>
@@ -102,14 +102,14 @@ external-link-foreground-hover: inherit
 external-link-foreground-visited: <<colour flexoki-bl>>
 external-link-foreground: <<colour flexoki-bl>>
 footnote-target-background: <<colour flexoki-bg-2>>
-foreground: <<colour flexoki-tx>>
+foreground: #B7B5AC
 highlight-background: #ffff00
 highlight-foreground: #000000
 menubar-background: <<colour primary>>
 menubar-foreground: <<colour flexoki-paper>>
-message-background: #ecf2ff
-message-border: #cfd6e6
-message-foreground: #547599
+message-background: <<colour background>>
+message-border: <<colour foreground>>
+message-foreground: <<colour foreground>>
 modal-backdrop: <<colour foreground>>
 modal-background: <<colour background>>
 modal-border: <<colour flexoki-ui-3>>
@@ -160,7 +160,7 @@ tab-foreground: <<colour flexoki-tx-2>>
 table-border: <<colour flexoki-ui>>
 table-footer-background: <<colour flexoki-ui>>
 table-header-background: <<colour flexoki-ui>>
-tag-background: <<colour flexoki-ye>>
+tag-background: #D0A215
 tag-foreground: #100F0F
 testcase-accent-level-1: <<colour flexoki-bl-2>>
 testcase-accent-level-2: <<colour flexoki-ye-2>>
