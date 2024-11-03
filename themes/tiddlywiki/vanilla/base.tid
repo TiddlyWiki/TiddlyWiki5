@@ -1443,8 +1443,8 @@ html body.tc-body.tc-single-tiddler-window {
 	background-color: <<colour tiddler-background>>;
 	z-index: 1;
 	padding-top: 8px;
-	margin-left: -3px;
-	margin-right: -3px;
+	margin-left: -2px;
+	margin-right: -2px;
 }
 
 .tc-tiddler-frame .tc-tiddler-editor.tc-tiddler-preview .tc-editor-toolbar,
