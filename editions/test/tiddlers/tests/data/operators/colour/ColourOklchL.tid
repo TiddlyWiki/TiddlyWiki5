@@ -1,0 +1,18 @@
+title: Operators/Colour/ColourOklchL
+description: Oklch colour function
+type: text/vnd.tiddlywiki-multiple
+tags: [[$:/tags/wiki-test-spec]]
+
+title: Output
+
+\parsermode inline
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+<$text text={{{ [subfilter{Filter}] }}}/>
++
+title: Filter
+
+=[function[colour],[primary]colour-oklch[0.5]] =[function[colour],[primary]colour-oklch:l[0.5]] +[join[,]]
++
+title: ExpectedResult
+
+#3d5bb8,#3d5bb8
