@@ -68,7 +68,7 @@ $:/config/EditorToolbarButtons/Visibility/$(currentTiddler)$
 	sliderCondition=<<get.slider.condition>>
 	mode="inline"
 	padding="0px"
-	sliderWidth="6px"
+	sliderWidth=<<get.theme.metric previewsliderwidth>>
 />
 
 </div>

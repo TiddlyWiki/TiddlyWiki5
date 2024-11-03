@@ -83,3 +83,5 @@ caption: {{$:/language/ThemeTweaks/ThemeTweaks}}
 |<$link to=<<get.theme sidebarbreakpoint>>><<lingo Metrics/SidebarBreakpoint>></$link><br>//<<lingo Metrics/SidebarBreakpoint/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarbreakpoint>> default="" tag="input"/> |
 |<$link to=<<get.theme sidebarwidth>>><<lingo Metrics/SidebarWidth>></$link><br>//<<lingo Metrics/SidebarWidth/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarwidth>> default="" tag="input"/> |
 |<$link to=<<get.theme sidebarminwidth>>><<lingo Metrics/SidebarMinWidth>></$link><br>//<<lingo Metrics/SidebarMinWidth/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarminwidth>> default="" tag="input"/> |
+|<$link to=<<get.theme sidebarpadding>>><<lingo Metrics/SidebarPadding>></$link><br>//<<lingo Metrics/SidebarPadding/Hint>>// |^<$edit-text tiddler=<<get.theme sidebarpadding>> default="" tag="input"/> |
+|<$link to=<<get.theme previewsliderwidth>>><<lingo Metrics/PreviewSliderWidth>></$link><br>//<<lingo Metrics/PreviewSliderWidth/Hint>>// |^<$edit-text tiddler=<<get.theme previewsliderwidth>> default="" tag="input"/> |

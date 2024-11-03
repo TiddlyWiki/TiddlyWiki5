@@ -108,8 +108,9 @@ title: $:/core/procedures/sidebar-resizer
 \end
 
 \function get.tiddler-width.result()
-[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:lt<storyMinWidth>then<get.theme.metric tiddlerwidth>compare:number:gteq[0]then<get.theme.metric tiddlerwidth>]
-:else[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:gt<storyMaxWidth>then<get.theme.metric tiddlerwidth>]
+[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:lt<storyMinWidth>then<tiddlerWidth>compare:number:gteq[0]then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>]
+:else[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:lt<storyMinWidth>then<tiddlerWidth>compare:number:lt[0]then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>]
+:else[<tiddlerWidthMetric>match[%]then<storyWidth>compare:number:gt<storyMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>]
 :else[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:lt<tiddlerMinWidth>then<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>]
 :else[<tiddlerWidthMetric>!match[%]then<tiddlerWidth>compare:number:gteq<tiddlerMaxWidth>then<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>]
 :else[<tiddlerWidth>compare:number:lt[0]then[0]addsuffix<tiddlerWidthMetric>]
@@ -117,14 +118,9 @@ title: $:/core/procedures/sidebar-resizer
 \end
 
 \function get.story-right.result()
-[<storyRiverWidth>compare:number:lt<storyMinWidthAddLeft>then<storyMinWidthAddLeftConverted>addsuffix<storyRightMetric>]
-:else[<storyRiverWidth>compare:number:gteq<storyRiverLimit>then<storyRiverLimitConverted>addsuffix<storyRightMetric>]
+[<storyWidth>compare:number:lt<storyMinWidth>then<storyMinRightConverted>addsuffix<storyRightMetric>]
+:else[<storyRiverWidth>compare:number:gteq<storyRightLimit>then<storyRightLimitConverted>addsuffix<storyRightMetric>]
 :else[<storyRiverWidthConverted>addsuffix<storyRightMetric>]
-\end
-
-\function get.story-sidebar.padding()
-[<get.theme.option sidebarposition>match[left]then<currentTiddler>subtract<storyPaddingLeft>]
-:else[<currentTiddler>subtract<storyPaddingRight>]
 \end
 
 \procedure set-storywidth-storyright-actions()
@@ -133,34 +129,44 @@ title: $:/core/procedures/sidebar-resizer
 	storyWidthStart={{{ [<get.resizer.state>get[start-story-width]] }}}
 	storyRightStart={{{ [convert.to.pixels.locally<storyRightStart>] }}}
 	storyWidthStart={{{ [convert.to.pixels.locally<storyWidthStart>] }}}
-	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<storyMinWidthTiddler>!is[blank]is[missing]then<get.left.minwidth>] :else[<get.theme.metric storyminwidth>] }}}
-	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
-	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<sidebarMinWidthTiddler>!is[blank]is[missing]then<get.right.minwidth>] :else[<get.theme.metric sidebarminwidth>] }}}
+	storyRiverWidth={{{ [<storyRightStart>add<dragDiff>] }}}
 	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingLeftTiddler>!is[blank]is[missing]then[0px]] :else[<get.theme.metric storypaddingleft>] }}}
 	storyPaddingLeft={{{ [convert.to.pixels.locally<storyPaddingLeftValue>] }}}
 	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingRightTiddler>!is[blank]is[missing]then[0px]] :else[<get.theme.metric storypaddingright>] }}}
 	storyPaddingRight={{{ [convert.to.pixels.locally<storyPaddingRightValue>] }}}
-	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] :map[<get.story-sidebar.padding>] }}}
-	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
+	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<storyMinWidthTiddler>!is[blank]is[missing]then<get.left.minwidth>] :else[<get.theme.metric storyminwidth>] }}}
+	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>add<storyPaddingLeft>add<storyPaddingRight>] }}}
+	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<sidebarMinWidthTiddler>!is[blank]is[missing]then<get.right.minwidth>] :else[<get.theme.metric sidebarminwidth>] }}}
+	sidebarPaddingValue={{{ [<sidebarPaddingTiddler>!is[blank]is[tiddler]get[text]] :else[<sidebarPaddingTiddler>!is[blank]is[missing]then<get.sidebar.padding>] :else[<get.theme.metric sidebarpadding>] }}}
+	sidebarPadding={{{ [convert.to.pixels.locally<sidebarPaddingValue>] }}}
+	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyLeftTiddler>!is[blank]is[missing]then<get.sidebar.minwidth>] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
+	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>subtract<sidebarPadding>subtract<storyLeft>] }}}
 	clampedDiff={{{ [<storyWidthStart>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] :else[[0]] }}}
 	storyWidthStart={{{ [<storyWidthStart>subtract<clampedDiff>] }}}
 	storyRightStart={{{ [<storyRightStart>subtract<clampedDiff>] }}}
 	storyWidth={{{ [<storyWidthStart>add<dragDiff>] }}}
 	innerStoryWidth={{{ [<storyWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
 	innerStoryWidthStart={{{ [<storyWidthStart>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
+	storyMinWidth={{{ [<storyMinWidth>add<sidebarPadding>] }}}
 	storyMinWidthAddLeft={{{ [<storyMinWidth>add<storyLeft>] }}}
 	storyRiverLimit={{{ [<widgetNodeWidth>subtract<sidebarMinWidth>] }}}
 	storyMaxWidth={{{ [<storyRiverLimit>subtract<storyLeft>] }}}
+	innerStoryWidthMin={{{ [<storyMinWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
+	innerStoryWidthMax={{{ [<storyMaxWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
 	tiddlerWidthMetric={{{ [<get.resizer.state>get[tiddler-width-metric]] }}}
 	tiddlerWidthStart={{{ [<get.resizer.state>get[start-tiddler-width]] }}}
 	tiddlerWidthStartPixels={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidthStart>multiply<innerStoryWidthStart>divide[100]] :else[convert.to.pixels.locally<tiddlerWidthStart>] }}}
 	tiddlerWidthClampedDiff={{{ [<tiddlerWidthStartPixels>add<storyPaddingLeft>add<storyPaddingRight>add<storyLeft>add<sidebarMinWidth>subtract<widgetNodeWidth>compare:number:gt[0]] :else[[0]] }}}
-	tiddlerWidth={{{ [<tiddlerWidthStartPixels>add<dragDiff>subtract<tiddlerWidthClampedDiff>] }}}
-	tiddlerWidthDiff={{{ [<storyWidth>subtract<tiddlerWidth>] }}}
-	tiddlerMinWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] :else[<storyMinWidth>subtract<tiddlerWidthDiff>] }}}
-	tiddlerMaxWidth={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>] :else[<storyMaxWidth>subtract<tiddlerWidthDiff>] }}}
-	storyRiverWidth={{{ [<storyRiverWidth>subtract<clampedDiff>] }}}>
+	tiddlerWidth={{{ [<storyWidth>compare:number:lteq<storyMaxWidth>then<storyWidth>compare:number:gteq<storyMinWidth>then<tiddlerWidthStartPixels>add<dragDiff>subtract<tiddlerWidthClampedDiff>] :else[[]] }}}
+	tiddlerWidthDiff={{{ [<storyWidthStart>subtract<tiddlerWidthStartPixels>] }}}
+	tiddlerMinWidth={{{ [<storyMinWidth>subtract<tiddlerWidthDiff>] }}}
+	tiddlerMaxWidth={{{ [<storyMaxWidth>subtract<tiddlerWidthDiff>] }}}
+	storyWidthStoryRightStartDiff={{{ [<storyRightStart>subtract<storyWidthStart>] }}}
+	storyRiverWidth={{{ [<storyWidthStoryRightStartDiff>compare:number:eq<storyLeft>then<storyRiverWidth>] :else[<storyWidthStoryRightStartDiff>compare:number:gt[0]then<storyWidth>add<storyWidthStoryRightStartDiff>] :else[<storyWidthStoryRightStartDiff>compare:number:lt[0]then<storyWidth>subtract<storyWidthStoryRightStartDiff>] :else[<storyRiverWidth>] }}}
+	storyRiverWidth={{{ [<storyRiverWidth>subtract<clampedDiff>] }}}
+	storyRightLimit={{{ [<storyWidthStoryRightStartDiff>compare:number:eq[0]then<storyRiverLimit>subtract<storyLeft>] :else[<storyWidthStoryRightStartDiff>compare:number:gt[0]then<storyRiverLimit>] :else[<storyWidthStoryRightStartDiff>compare:number:lt[0]then<storyRiverLimit>] :else[<storyRiverLimit>] }}}
+	storyMinRight={{{ [<storyMinWidth>add<storyWidthStoryRightStartDiff>] }}}>
 
 	<$let
 		storyWidthMetric={{{ [<get.resizer.state>get[story-width-metric]] }}}
@@ -168,12 +174,18 @@ title: $:/core/procedures/sidebar-resizer
 		storyMinWidthConverted={{{ [function[convert.to.result],<storyMinWidth>,<storyWidthMetric>] }}}
 		storyMaxWidthConverted={{{ [function[convert.to.result],<storyMaxWidth>,<storyWidthMetric>] }}}
 		tiddlerWidthConverted={{{ [<tiddlerWidthMetric>match[%]then<tiddlerWidth>multiply[100]divide<innerStoryWidth>] :else[function[convert.to.result],<tiddlerWidth>,<tiddlerWidthMetric>] }}}
-		tiddlerMinWidthConverted={{{ [<tiddlerWidthMetric>match[%]then<tiddlerMinWidth>multiply[100]divide<innerStoryWidth>] :else[function[convert.to.result],<tiddlerMinWidth>,<tiddlerWidthMetric>] }}}
-		tiddlerMaxWidthConverted={{{ [<tiddlerWidthMetric>match[%]then<tiddlerMaxWidth>multiply[100]divide<innerStoryWidth>] :else[function[convert.to.result],<tiddlerMaxWidth>,<tiddlerWidthMetric>] }}}
+		tiddlerMinWidthConverted={{{ [<tiddlerWidthMetric>match[%]then<tiddlerMinWidth>multiply[100]divide<innerStoryWidthMin>] :else[function[convert.to.result],<tiddlerMinWidth>,<tiddlerWidthMetric>] }}}
+		tiddlerMaxWidthConverted={{{ [<tiddlerWidthMetric>match[%]then<tiddlerMaxWidth>multiply[100]divide<innerStoryWidthMax>] :else[function[convert.to.result],<tiddlerMaxWidth>,<tiddlerWidthMetric>] }}}
 		storyWidthSetTiddler={{{ [<storyWidthTiddler>!is[blank]] :else[<set.theme.metric storywidth>] }}}
 		tiddlerWidthSetTiddler={{{ [<tiddlerWidthTiddler>!is[blank]] :else[<set.theme.metric tiddlerwidth>] }}}>
 
-		<$action-setfield $tiddler=<<tiddlerWidthSetTiddler>> text=<<get.tiddler-width.result>>/>
+		<%if [<tiddlerWidth>!is[blank]] %>
+			<$action-setfield $tiddler=<<tiddlerWidthSetTiddler>> text=<<get.tiddler-width.result>>/>
+		<%elseif [<storyWidth>compare:number:gt<storyMaxWidth>] %>
+			<$action-setfield $tiddler=<<tiddlerWidthSetTiddler>> text={{{ [<tiddlerMaxWidthConverted>addsuffix<tiddlerWidthMetric>] }}}/>
+		<%elseif [<storyWidth>compare:number:lt<storyMinWidth>] %>
+			<$action-setfield $tiddler=<<tiddlerWidthSetTiddler>> text={{{ [<tiddlerMinWidthConverted>addsuffix<tiddlerWidthMetric>] }}}/>
+		<% endif %>
 		<$action-setfield $tiddler=<<storyWidthSetTiddler>> text=<<get.story-width.result>>/>
 
 	</$let>
@@ -181,7 +193,9 @@ title: $:/core/procedures/sidebar-resizer
 	<$let
 		storyRightMetric={{{ [<get.resizer.state>get[story-right-metric]] }}}
 		storyRiverWidthConverted={{{ [function[convert.to.result],<storyRiverWidth>,<storyRightMetric>] }}}
-		storyRiverLimitConverted={{{ [function[convert.to.result],<storyRiverLimit>,<storyRightMetric>] }}}
+		storyRightLimitConverted={{{ [function[convert.to.result],<storyRightLimit>,<storyRightMetric>] }}}
+		storyMinRightConverted={{{ [function[convert.to.result],<storyMinRight>,<storyRightMetric>] }}}
+		storyMinWidthConverted={{{ [function[convert.to.result],<storyMinWidth>,<storyRightMetric>] }}}
 		storyMinWidthAddLeftConverted={{{ [function[convert.to.result],<storyMinWidthAddLeft>,<storyRightMetric>] }}}
 		storyRightSetTiddler={{{ [<storyRightTiddler>!is[blank]] :else[<set.theme.metric storyright>] }}}>
 
@@ -193,7 +207,7 @@ title: $:/core/procedures/sidebar-resizer
 \end
 
 \function get.sidebar-width.result()
-[<sidebarWidth>compare:number:gteq<sidebarMaxWidth>then<sidebarMaxWidthConverted>addsuffix<sidebarWidthMetric>]
+[<innerStoryWidth>compare:number:lt<storyMinWidth>then<sidebarMaxWidthConverted>addsuffix<sidebarWidthMetric>]
 :else[<sidebarWidth>compare:number:lt<sidebarMinWidth>then<sidebarMinWidthConverted>addsuffix<sidebarWidthMetric>]
 :else[<sidebarWidthConverted>addsuffix<sidebarWidthMetric>]
 \end
@@ -206,21 +220,24 @@ title: $:/core/procedures/sidebar-resizer
 
 \procedure set-sidebarwidth-actions()
 <$let
-	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingLeftTiddler>!is[blank]is[missing]then[0px]] :else[<get.theme.metric storypaddingleft>] }}}
+	startSidebarWidth={{{ [<get.resizer.state>get[start-sidebar-width]] }}}
+	startSidebarWidth={{{ [convert.to.pixels.locally<startSidebarWidth>] }}}
+	sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}
+	storyPaddingLeftValue={{{ [<storyPaddingLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingLeftTiddler>!is[blank]is[missing]then<get.story-padding.left>] :else[<get.theme.metric storypaddingleft>] }}}
 	storyPaddingLeft={{{ [convert.to.pixels.locally<storyPaddingLeftValue>] }}}
-	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingRightTiddler>!is[blank]is[missing]then[0px]] :else[<get.theme.metric storypaddingright>] }}}
+	storyPaddingRightValue={{{ [<storyPaddingRightTiddler>!is[blank]is[tiddler]get[text]] :else[<storyPaddingRightTiddler>!is[blank]is[missing]then<get.story-padding.right>] :else[<get.theme.metric storypaddingright>] }}}
 	storyPaddingRight={{{ [convert.to.pixels.locally<storyPaddingRightValue>] }}}
 	sidebarMinWidthValue={{{ [<sidebarMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<sidebarMinWidthTiddler>!is[blank]is[missing]then<get.right.minwidth>] :else[<get.theme.metric sidebarminwidth>] }}}
 	sidebarWidthMetric={{{ [<get.resizer.state>get[sidebar-width-metric]] }}}
 	sidebarMinWidth={{{ [convert.to.pixels.locally<sidebarMinWidthValue>] }}}
-	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]get[text]] :else[<get.theme.metric storyleft>] }}}
+	storyLeftValue={{{ [<storyLeftTiddler>!is[blank]is[tiddler]get[text]] :else[<storyLeftTiddler>!is[blank]is[missing]then<get.story.left>] :else[<get.theme.metric storyleft>] }}}
 	storyLeft={{{ [convert.to.pixels.locally<storyLeftValue>] }}}
 	storyMinWidthValue={{{ [<storyMinWidthTiddler>!is[blank]is[tiddler]get[text]] :else[<storyMinWidthTiddler>!is[blank]is[missing]then<get.left.minwidth>] :else[<get.theme.metric storyminwidth>] }}}
 	storyMinWidth={{{ [convert.to.pixels.locally<storyMinWidthValue>] }}}
-	sidebarMaxWidth={{{ [<widgetNodeWidth>subtract<storyLeft>subtract<storyMinWidth>add<get.fluid.padding>] }}}
+	sidebarMaxWidth={{{ [<widgetNodeWidth>subtract<storyLeft>subtract<storyMinWidth>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}
 	clampedDiff={{{ [<storyLeft>add<storyMinWidth>add<startSidebarWidth>subtract<widgetNodeWidth>compare:number:gt[0]] :else[[0]] }}}
-	sliderWidth={{{ [convert.to.pixels.locally<get.resizer.style.width>] }}}
-	sidebarWidth={{{ [<sidebarWidth>subtract<clampedDiff>subtract<sliderWidth>] }}}>
+	sidebarWidth={{{ [<sidebarWidth>subtract<clampedDiff>] }}}
+	innerStoryWidth={{{ [<widgetNodeWidth>subtract<sidebarWidth>subtract<storyLeft>subtract<storyPaddingLeft>subtract<storyPaddingRight>] }}}>
 
 	<$let
 		sidebarWidthConverted={{{ [function[convert.to.result],<sidebarWidth>,<sidebarWidthMetric>] }}}
@@ -278,13 +295,7 @@ title: $:/core/procedures/sidebar-resizer
 	<$let
 		startPosX={{{ [<get.resizer.state>get[start-posx]] }}}
 		widgetNodeWidth={{{ [<get.resizer.state>get[widget-node-width]] }}}
-		dragDiff=<<get.drag.diff>>
-		startStoryRight={{{ [<get.resizer.state>get[start-story-right]] }}}
-		startStoryRight={{{ [convert.to.pixels.locally<startStoryRight>] }}}
-		storyRiverWidth={{{ [<startStoryRight>add<dragDiff>] }}}
-		startSidebarWidth={{{ [<get.resizer.state>get[start-sidebar-width]] }}}
-		startSidebarWidth={{{ [convert.to.pixels.locally<startSidebarWidth>] }}}
-		sidebarWidth={{{ [<startSidebarWidth>subtract<dragDiff>] }}}>
+		dragDiff=<<get.drag.diff>>>
 		<%if [<tv-set-storywidth-storyright>match[yes]] %>
 			<<set_theme_throttling storyright storyRightTiddler>>
 			<<set_theme_throttling tiddlerwidth tiddlerWidthTiddler>>

@@ -108,12 +108,13 @@ code-body: yes
 		<%if [<set.storywidth.storyright>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingright>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storypaddingright>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),clamp(calc(<<get.theme.metric storywidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(<<get.theme.metric storyright>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric sidebarpadding>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric storypaddingleft>> / 3)),clamp(calc(<<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingleft>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric storypaddingleft>> / 3)),calc(<<get.theme.metric storyright>> - (2 * <<get.theme.metric storypaddingleft>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingleft>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingleft>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storypaddingleft>> - (2 * <<get.theme.metric storypaddingleft>> / 3)));
+				z-index: 1;
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),clamp(calc(<<get.theme.metric storywidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(<<get.theme.metric storyright>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric sidebarpadding>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)));
 			}
 
 		<% endif %>
@@ -121,12 +122,13 @@ code-body: yes
 		<%if [<set.sidebarwidth>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.theme.metric storypaddingright>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingright>> / 3)));
+				left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.theme.metric sidebarpadding>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric sidebarpadding>> / 3)));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.theme.metric storypaddingleft>> + (<<get.theme.metric storypaddingleft>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric storypaddingleft>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric storypaddingleft>> / 3)));
+				z-index: 1;
+				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.theme.metric sidebarpadding>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric sidebarpadding>> / 3)));
 			}
 
 		<% endif %>
@@ -134,12 +136,13 @@ code-body: yes
 		<%if [<set.centralised>match[yes]] %>
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
-				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingright>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingright>> / 3)));
+				left: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)));
 			}
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric storypaddingleft>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric storypaddingleft>> / 3)));
+				z-index: 1;
+				right: min(calc(50% + (<<get.theme.metric storywidth>> / 2) - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)));
 			}
 
 		<% endif %>
@@ -168,7 +171,7 @@ code-body: yes
 	.tc-tiddler-frame iframe[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
 	.tc-tiddler-frame textarea[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor,
 	.tc-tiddler-frame contenteditable[class*="tc-edit-texteditor-identified-"].tc-edit-texteditor {
-		width: calc(100% - 3px);
+		width: calc(100% - <<get.theme.metric previewsliderwidth>>);
 		min-width: 0px;
 	}
 

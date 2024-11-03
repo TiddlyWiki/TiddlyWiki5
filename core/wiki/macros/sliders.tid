@@ -6,13 +6,16 @@ code-body: yes
 \import $:/core/procedures/sidebar-resizer
 \function get.resizer.style.position() absolute
 \function get.template-right.width() [<sidebarWidthTiddler>get[text]] :else[[50%]]
-\function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[ - 3px)]]
+\function get.resizer.style.left() [[calc(100% - ]addsuffix<get.template-right.width>addsuffix[ - ]addsuffix<get.resizer.style.width>addsuffix[)]]
 \function get.resizer.style.width() [<sliderWidth>]
 \function set.throttling() no
 \function get.template.left()
 \function get.preview.slider.class() [<class>]
 \function get.left.minwidth() [<leftMinWidth>]
 \function get.right.minwidth() [<rightMinWidth>]
+\function get.story-padding.right() 0px
+\function get.story-padding.left() 0px
+\function get.story.left() 0
 \whitespace trim
 
 <$let
