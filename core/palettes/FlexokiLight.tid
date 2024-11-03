@@ -58,26 +58,35 @@ flexoki-bl: <<colour flexoki-blue-400>>
 flexoki-pu: <<colour flexoki-purple-400>>
 flexoki-ma: <<colour flexoki-magenta-400>>
 
-alert-background: <<colour flexoki-bg-2>>
-alert-border: <<colour flexoki-ui>>
-alert-highlight: <<colour flexoki-tx-3>>
+flexoki-re-2: <<colour flexoki-red-600>>
+flexoki-or-2: <<colour flexoki-orange-600>>
+flexoki-ye-2: <<colour flexoki-yellow-600>>
+flexoki-gr-2: <<colour flexoki-green-600>>
+flexoki-cy-2: <<colour flexoki-cyan-600>>
+flexoki-bl-2: <<colour flexoki-blue-600>>
+flexoki-pu-2: <<colour flexoki-purple-600>>
+flexoki-ma-2: <<colour flexoki-magenta-600>>
+
+alert-background: <<colour flexoki-yellow-100>>
+alert-border: <<colour flexoki-ye-2>>
+alert-highlight: <<colour flexoki-re-2>>
 alert-muted-foreground: <<colour flexoki-tx-2>>
-background: <<colour flexoki-bg>>
-blockquote-bar: <<colour muted-foreground>>
+background: <<colour flexoki-paper>>
+blockquote-bar: <<colour flexoki-magenta-600>>
 button-background: <<colour flexoki-bg-2>>
 button-foreground: <<colour flexoki-black>>
 button-border: <<colour flexoki-500>>
 code-background: <<colour flexoki-bg>>
 code-border: <<colour flexoki-tx>>
 code-foreground: <<colour flexoki-tx>>
-diff-delete-background: <<colour flexoki-re>>
-diff-delete-foreground: <<colour foreground>>
+diff-delete-background: <<colour flexoki-re-2>>
+diff-delete-foreground: <<colour flexoki-paper>>
 diff-equal-background: 
 diff-equal-foreground: <<colour foreground>>
-diff-insert-background: <<colour flexoki-gr>>
-diff-insert-foreground: <<colour foreground>>
-diff-invisible-background: 
-diff-invisible-foreground: <<colour muted-foreground>>
+diff-insert-background: <<colour flexoki-gr-2>>
+diff-insert-foreground: <<colour flexoki-paper>>
+diff-invisible-background: <<colour flexoki-ye-2>>
+diff-invisible-foreground: <<colour flexoki-paper>>
 dirty-indicator: <<colour flexoki-red-600>>
 download-background: <<colour flexoki-gr>>
 download-foreground: <<colour background>>
@@ -92,12 +101,14 @@ external-link-background-hover: inherit
 external-link-background-visited: inherit
 external-link-background: inherit
 external-link-foreground-hover: inherit
-external-link-foreground-visited: <<colour flexoki-blue-600>>
-external-link-foreground: <<colour flexoki-blue-400>>
-footnote-target-background: #ecf2ff
-foreground: <<colour flexoki-tx>>
+external-link-foreground-visited: <<colour flexoki-bl>>
+external-link-foreground: <<colour flexoki-bl>>
+footnote-target-background: <<colour flexoki-bg-2>>
+foreground: <<colour flexoki-black>>
 highlight-background: #ffff00
 highlight-foreground: #000000
+menubar-background: <<colour primary>>
+menubar-foreground: <<colour flexoki-paper>>
 message-background: <<colour flexoki-bg>>
 message-border: <<colour flexoki-black>>
 message-foreground: <<colour flexoki-black>>
@@ -108,7 +119,7 @@ modal-footer-background: #f5f5f5
 modal-footer-border: #dddddd
 modal-header-border: #eeeeee
 muted-foreground: <<colour flexoki-500>>
-network-activity-foreground: #448844
+network-activity-foreground: <<colour flexoki-cy-2>>
 notification-background: <<colour flexoki-bg>>
 notification-border: <<color flexoki-black>>
 page-background: <<colour flexoki-bg-2>>
@@ -151,8 +162,8 @@ tab-foreground: <<colour flexoki-tx>>
 table-border: <<colour flexoki-ui-2>>
 table-footer-background: <<colour flexoki-tx-3>>
 table-header-background: <<colour flexoki-bg-2>>
-tag-background: #ec6
-tag-foreground: #ffffff
+tag-background: <<colour flexoki-ye-2>>
+tag-foreground: #FFFCF0
 testcase-accent-level-1: <<colour flexoki-blue-400>>
 testcase-accent-level-2: <<colour flexoki-yellow-400>>
 testcase-accent-level-3: <<colour flexoki-green-400>>
@@ -161,11 +172,11 @@ tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: <<colour flexoki-tx-3>>
 tiddler-controls-foreground-selected: <<colour  flexoki-tx-2>>
 tiddler-controls-foreground: <<colour flexoki-ui-3>>
-tiddler-editor-background: <<colour flexoki-050>>
+tiddler-editor-background: <<colour flexoki-bg-2>>
 tiddler-editor-border-image: #ffffff
-tiddler-editor-border: <<colour flexoki-ui-3>>
-tiddler-editor-fields-even: #e0e8e0
-tiddler-editor-fields-odd: #f0f4f0
+tiddler-editor-border: <<colour flexoki-ui-2>>
+tiddler-editor-fields-even: <<colour flexoki-ui-3>>
+tiddler-editor-fields-odd: <<colour flexoki-ui-2>>
 tiddler-info-background: <<colour flexoki-bg-2>>
 tiddler-info-border: <<colour flexoki-200>>
 tiddler-info-tab-background: <<colour flexoki-bg>>
