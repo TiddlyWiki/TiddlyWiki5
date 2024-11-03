@@ -98,8 +98,8 @@ first-search-filter: [all[shadows]search<userInput>sort[title]limit[250]] -[[$:/
 	<<lingo Shadows/Matches>>
 <%endif%>
 
-<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] :else[[$:/temp/advancedsearch]] :else[[$:/temp/advancedsearch/input]]">
-<span class={{{[<currentTiddler>addsuffix[-primaryList]] :else[[$:/temp/advancedsearch/selected-item]get[text]] :and[then[]else[tc-list-item-selected]] }}}>
+<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] :except[[$:/temp/advancedsearch]] :except[[$:/temp/advancedsearch/input]]">
+<span class={{{[<currentTiddler>addsuffix[-primaryList]] :except[[$:/temp/advancedsearch/selected-item]get[text]] :and[then[]else[tc-list-item-selected]] }}}>
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 </span>
 </$list>
