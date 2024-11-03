@@ -50,7 +50,7 @@ color:$(foregroundColor)$;
 		<$macrocall $name="tag-pill-body"
 			tag=<<__tag__>>
 			icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
-			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+			colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] :or[{$:/palette}getindex[tag-background]] :and[limit[1]] }}}
 			palette={{$:/palette}}
 			element-tag=<<__element-tag__>>
 			element-attributes=<<__element-attributes__>>
