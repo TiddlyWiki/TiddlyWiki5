@@ -1029,19 +1029,14 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		padding: 71px 0 28px <<get.theme.metric sidebarpadding>>;
 	}
 
-	.tc-sidebar-left .tc-sidebar-scrollable {
+	html[dir="rtl"] .tc-sidebar-left .tc-sidebar-scrollable, .tc-sidebar-left .tc-sidebar-scrollable {
 		left: 0;
-		right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>>),<<get.theme.metric storyright>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric sidebarpadding>>));
+		right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>>),calc(<<get.theme.metric storyright>> + <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storyleft>> + <<get.theme.metric sidebarpadding>>));
 		margin: 0 -<<get.theme.metric sidebarpadding>> 0 0;
 		z-index: 1;
 	}
 
 	html[dir="rtl"] .tc-sidebar-scrollable {
-		padding-right: <<get.theme.metric sidebarpadding>>;
-		padding-left: 0;
-	}
-
-	html[dir="rtl"] .tc-sidebar-scrollable:not(.tc-sidebar-left .tc-sidebar-scrollable) {
 		padding-right: <<get.theme.metric sidebarpadding>>;
 		padding-left: 0;
 	}
