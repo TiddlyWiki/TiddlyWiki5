@@ -198,6 +198,12 @@ Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des 
 Settings/MissingLinks/Caption: Liens wiki
 Settings/MissingLinks/Hint: Peut-on pointer vers des tiddlers qui n'existent pas encore ?
 Settings/MissingLinks/Description: Active les liens vers les tiddlers inexistants
+SocialCard/Caption: Cartel pour médias sociaux
+SocialCard/Domain/Prompt: Nom de domaine à afficher pour le lien (par exemple, ''tiddlywiki.com'')
+SocialCard/Hint: Cette information est utilisée par les services de messagerie et de médias sociaux pour afficher un cartel de prévisualisation des liens vers ce TiddlyWiki lorsqu'il est accessible en ligne
+SocialCard/PreviewUrl/Prompt: URL complète vers l'image de prévisualisation de ce TiddlyWiki
+SocialCard/PreviewUrl/Preview: Image de prévisualisation :
+SocialCard/Url/Prompt: URL complète pour ce TiddlyWiki
 StoryTiddler/Caption: Tiddlers du déroulé
 StoryTiddler/Hint: Cette cascade de règles sert à choisir dynamiquement le template d'affichage d'un tiddler dans le déroulé.
 StoryView/Caption: Vue sur le déroulé
