@@ -1041,8 +1041,13 @@ button.tc-btn-invisible.tc-remove-tag-button {
 		padding-left: 0;
 	}
 
+	html[dir="rtl"] .tc-sidebar-scrollable:not(.tc-sidebar-left .tc-sidebar-scrollable) {
+		z-index: 1;
+		left: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>>),calc(<<get.theme.metric storyright>> + <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storyleft>> + <<get.theme.metric sidebarpadding>>));
+	}
+
 	.tc-story-river {
-		left: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+		left: max(0px,<<get.theme.metric storyleft>>);
 		right: clamp(calc(<<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storywidth>>),calc(100% - <<get.theme.metric sidebarminwidth>>));
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 		width: clamp(<<get.theme.metric storyminwidth>>,<<get.theme.metric storywidth>>,calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric sidebarpadding>>));
@@ -1059,12 +1064,16 @@ button.tc-btn-invisible.tc-remove-tag-button {
 	}
 
 	html[dir="rtl"] .tc-sidebar-left .tc-story-river {
-		left: clamp(calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarminwidth}}),calc(100% - <<get.theme.metric storywidth>> - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}),calc(100% - {{$:/themes/tiddlywiki/vanilla/metrics/storyminwidth}} - {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}}));
-		right: max(0px,{{$:/themes/tiddlywiki/vanilla/metrics/storyleft}});
+		align-items: flex-start;
+		left: clamp(calc(<<get.theme.metric sidebarminwidth>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
+		right: max(0px,<<get.theme.metric storyleft>>);
 	}
 
 	html[dir="rtl"] .tc-story-river:not(.tc-sidebar-left .tc-story-river) {
-
+		display: flex;
+		align-items: flex-end;
+		flex-direction: column;
+		right: clamp(calc(<<get.theme.metric sidebarminwidth>> - <<get.theme.metric storyleft>> - <<get.theme.metric sidebarpadding>>),calc(100% - <<get.theme.metric storywidth>> - <<get.theme.metric storyleft>>),calc(100% - <<get.theme.metric storyminwidth>> - <<get.theme.metric storyleft>>));
 	}
 
 <<if-no-sidebar """

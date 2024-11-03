@@ -25,6 +25,10 @@ code-body: yes
 			opacity: 0.6;
 		}
 
+		.tc-sidebar-resizer.tc-main-sidebar-resizer {
+			z-index: 1;
+		}
+
 		@media (pointer: coarse) {
 
 			.tc-sidebar-resizer.tc-main-sidebar-resizer {
@@ -113,7 +117,6 @@ code-body: yes
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				z-index: 1;
 				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),clamp(calc(<<get.theme.metric storywidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),max(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3)),calc(<<get.theme.metric storyright>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3))),max(calc(100% - <<get.theme.metric sidebarminwidth>> - (2 * <<get.theme.metric sidebarpadding>> / 3) + (<<get.theme.metric storyleft>> + <<get.theme.metric storywidth>> - <<get.theme.metric storyright>>)),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)))),calc(100% - <<get.theme.metric sidebarminwidth>> + <<get.theme.metric sidebarpadding>> + <<get.theme.metric storyleft>> - (2 * <<get.theme.metric sidebarpadding>> / 3)));
 			}
 
@@ -127,7 +130,6 @@ code-body: yes
 
 			.tc-sidebar-left .tc-sidebar-resizer.tc-main-sidebar-resizer {
 				left: auto;
-				z-index: 1;
 				right: clamp(calc(<<get.theme.metric storyleft>> + <<get.theme.metric storyminwidth>> - <<get.theme.metric sidebarpadding>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarwidth>> + (<<get.theme.metric sidebarpadding>> / 3)),calc(100% - <<get.theme.metric sidebarminwidth>> + (<<get.theme.metric sidebarpadding>> / 3)));
 			}
 
