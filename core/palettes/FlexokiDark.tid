@@ -74,9 +74,9 @@ blockquote-bar: <<colour flexoki-ma-2>>
 button-background: <<colour flexoki-bg-2>>
 button-foreground: <<colour flexoki-paper>>
 button-border: <<colour flexoki-600>>
-code-background: <<colour flexoki-ui-3>>
-code-border: <<colour flexoki-ui-3>>
-code-foreground: <<colour flexoki-re>>
+code-background: <<colour background>>
+code-border: <<colour flexoki-tx>>
+code-foreground: <<colour flexoki-tx>>
 diff-delete-background: <<colour flexoki-re>>
 diff-delete-foreground: <<colour flexoki-paper>>
 diff-equal-background: 
