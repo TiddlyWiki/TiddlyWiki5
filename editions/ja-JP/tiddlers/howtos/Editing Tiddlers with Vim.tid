@@ -1,0 +1,11 @@
+modified: 20241020104154015
+original-modified: 20160111190002
+created: 20140406210404245
+tags: Learning
+title: Editing Tiddlers with Vim
+ja-title: TiddlerをVimで編集する
+type: text/vnd.tiddlywiki
+
+Devin Weaverは https://github.com/sukima/vim-tiddlywiki に[[Vim|http://www.vim.org/]]プラグインを作成しました
+
+TiddlyWikiのシンタックスのほとんどをサポートしており、`modified`フィールドを自動更新するファイルタイププラグインが含まれています

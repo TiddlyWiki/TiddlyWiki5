@@ -18,6 +18,7 @@ description: Under development
 This release includes improvements to the following translations:
 
 * Chinese
+* French
 * Japanese
 * Spanish
 * Polish
@@ -71,6 +72,7 @@ This release includes several fixes and improvements to the TestCaseWidget, its 
 
 ! Usability Improvements
 
+* <<.link-badge-added "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8545">> new light and dark "Flexoki" palettes, originally designed by Steph Ango – see https://stephango.com/flexoki
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8643">> presentation of core plugin settings by adding them to the main "Settings" tab in $:/ControlPanel
 * <<.link-badge-improved "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8530">> language descriptions by localising them
 * <<.link-badge-fixed "https://github.com/TiddlyWiki/TiddlyWiki5/pull/8407">> the contrast of plugin stability badges on hover

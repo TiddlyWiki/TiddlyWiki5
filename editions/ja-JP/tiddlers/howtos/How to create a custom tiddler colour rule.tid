@@ -1,0 +1,38 @@
+created: 20211206114114698
+modified: 20241020110542022
+original-modified: 20211206165150302
+tags: Learning Cascades [[Customise TiddlyWiki]]
+title: How to create a custom tiddler colour rule
+ja-title: カスタムのTiddlerカラールールを作成する方法
+type: text/vnd.tiddlywiki
+
+ここでは、[[Tiddlerカラーカスケード|Tiddler Colour Cascade]]に、<<tag "TableOfContents">>タグを持つTiddlerに明るい青色の着色を、<<tag "Working with TiddlyWiki">>タグを持つTiddlerに濃い紫色の着色を、付与するルールの追加方法を示します。
+
+<<.tip "[[カスタムのTiddlerアイコンルールを作成する方法|How to create a custom tiddler icon rule]]では、同じTiddlerにカスタムアイコンを与える方法について説明します。">>
+
+まず、Tiddlerカラーカスケードに新しいステップを追加します。新しいフィルターステップは次のとおりです。:
+
+```
+[tag[TableOfContents]then[#1e90ff]]
+[tag[Working with TiddlyWiki]then[darkorchid]]
+```
+
+これは次のように読み取れます。:
+
+```
+もしTiddlerが"TableOfContents"タグを持つなら、カラー#1e90ffを返します
+もしTiddlerが"Working with TiddlyWiki"タグを持つなら、カラーdarkorchidを返します
+```
+
+Tiddlerカラーカスケードは<<tag "$:/tags/TiddlerColourFilter">>タグによって定義されます。したがって、そのタグを使用して設定Tiddlerを作成する必要があります。
+
+また、カスケード内の正しい位置に挿入されていることを確認する必要があります。:
+
+* 新しいルールは、明示的な''color''フィールドを持つTiddlerがそのフィールドの値を確実に尊重するように、"colour-field"ルールの後に置く必要があります。
+* 新しいルールは"default"カラーの前になければなりません。そうしないと、デフォルトのカラーが指定されていると、着色されることはありません。
+
+コントロールパネルの"カスケード"タブには、`list-before`フィールドを使用してデフォルトステップの直前に新しいステップを挿入することでこれを実現できることが示されています。
+
+設定Tiddlerの完全なフィールドリストは次のとおりです。:
+
+<<.tiddler-fields "$:/_tw5.com/CustomTiddlerColourCascadeDemo">>

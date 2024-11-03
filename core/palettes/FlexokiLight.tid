@@ -1,0 +1,214 @@
+title: $:/palettes/FlexokiLight
+name: FlexokiLight
+description: An inky color scheme for prose and code from https://stephango.com/flexoki
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+color-scheme: light
+
+flexoki-black:       #100F0F
+flexoki-paper:       #FFFCF0
+flexoki-950:         #1C1B1A
+flexoki-900:         #282726
+flexoki-850:         #343331
+flexoki-800:         #403E3C
+flexoki-700:         #575653
+flexoki-600:         #6F6E69
+flexoki-500:         #878580
+flexoki-300:         #B7B5AC
+flexoki-200:         #CECDC3
+flexoki-150:         #DAD8CE
+flexoki-100:         #E6E4D9
+flexoki-050:          #F2F0E5
+flexoki-red-600:     #AF3029
+flexoki-red-400:     #D14D41
+flexoki-orange-600:  #BC5215
+flexoki-orange-400:  #DA702C
+flexoki-yellow-900:  #4D3A0B
+flexoki-yellow-600:  #AD8301
+flexoki-yellow-400:  #D0A215
+flexoki-yellow-100:  #FCEEB8
+flexoki-green-600:   #66800B
+flexoki-green-400:   #879A39
+flexoki-cyan-950:    #142625
+flexoki-cyan-600:    #24837B
+flexoki-cyan-400:    #3AA99F
+flexoki-cyan-050:     #EBF2E7
+flexoki-blue-600:    #205EA6
+flexoki-blue-400:    #4385BE
+flexoki-purple-600:  #5E409D
+flexoki-purple-400:  #8B7EC8
+flexoki-magenta-600: #A02F6F
+flexoki-magenta-400: #CE5D97
+
+flexoki-tx: <<colour flexoki-black>>
+flexoki-tx-2: <<colour flexoki-600>>
+flexoki-tx-3: <<colour flexoki-300>>
+flexoki-ui-3: <<colour flexoki-200>>
+flexoki-ui-2: <<colour flexoki-150>>
+flexoki-ui: <<colour flexoki-100>>
+flexoki-bg-2: <<colour flexoki-050>>
+flexoki-bg: <<colour flexoki-paper>>
+
+flexoki-re: <<colour flexoki-red-400>>
+flexoki-or: <<colour flexoki-orange-400>>
+flexoki-ye: <<colour flexoki-yellow-400>>
+flexoki-gr: <<colour flexoki-green-400>>
+flexoki-cy: <<colour flexoki-cyan-400>>
+flexoki-bl: <<colour flexoki-blue-400>>
+flexoki-pu: <<colour flexoki-purple-400>>
+flexoki-ma: <<colour flexoki-magenta-400>>
+
+flexoki-re-2: <<colour flexoki-red-600>>
+flexoki-or-2: <<colour flexoki-orange-600>>
+flexoki-ye-2: <<colour flexoki-yellow-600>>
+flexoki-gr-2: <<colour flexoki-green-600>>
+flexoki-cy-2: <<colour flexoki-cyan-600>>
+flexoki-bl-2: <<colour flexoki-blue-600>>
+flexoki-pu-2: <<colour flexoki-purple-600>>
+flexoki-ma-2: <<colour flexoki-magenta-600>>
+
+alert-background: <<colour flexoki-yellow-100>>
+alert-border: <<colour flexoki-ye-2>>
+alert-highlight: <<colour flexoki-re-2>>
+alert-muted-foreground: <<colour flexoki-tx-2>>
+background: #FFFCF0
+blockquote-bar: <<colour flexoki-magenta-600>>
+button-background: <<colour flexoki-bg-2>>
+button-foreground: <<colour flexoki-black>>
+button-border: <<colour flexoki-500>>
+code-background: <<colour flexoki-bg>>
+code-border: <<colour flexoki-tx>>
+code-foreground: <<colour flexoki-tx>>
+diff-delete-background: <<colour flexoki-re-2>>
+diff-delete-foreground: <<colour flexoki-paper>>
+diff-equal-background: 
+diff-equal-foreground: <<colour foreground>>
+diff-insert-background: <<colour flexoki-gr-2>>
+diff-insert-foreground: <<colour flexoki-paper>>
+diff-invisible-background: <<colour flexoki-ye-2>>
+diff-invisible-foreground: <<colour flexoki-paper>>
+dirty-indicator: <<colour flexoki-red-600>>
+download-background: <<colour flexoki-gr>>
+download-foreground: <<colour background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour muted-foreground>>
+dropdown-tab-background-selected: #fff
+dropdown-tab-background: #ececec
+dropzone-background: <<colour flexoki-gr>>
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: <<colour flexoki-bl>>
+external-link-foreground: <<colour flexoki-bl>>
+footnote-target-background: <<colour flexoki-bg-2>>
+foreground: #100F0F
+highlight-background: #ffff00
+highlight-foreground: #000000
+menubar-background: <<colour primary>>
+menubar-foreground: <<colour flexoki-paper>>
+message-background: <<colour flexoki-bg>>
+message-border: <<colour flexoki-black>>
+message-foreground: <<colour flexoki-black>>
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #999999
+modal-footer-background: #f5f5f5
+modal-footer-border: #dddddd
+modal-header-border: #eeeeee
+muted-foreground: <<colour flexoki-500>>
+network-activity-foreground: <<colour flexoki-cy-2>>
+notification-background: <<colour flexoki-bg>>
+notification-border: <<color flexoki-black>>
+page-background: <<colour flexoki-bg-2>>
+pre-background: <<colour flexoki-bg>>
+pre-border: <<colour flexoki-ui-2>>
+primary: <<colour flexoki-cy>>
+selection-background: 
+selection-foreground: 
+select-tag-background: <<colour flexoki-bg>>
+select-tag-foreground: <<color flexoki-black>>
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: <<colour flexoki-tx>>
+sidebar-controls-foreground: <<colour flexoki-tx-3>>
+sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-foreground: <<colour flexoki-300>>
+sidebar-muted-foreground-hover: <<colour flexoki-700>>
+sidebar-muted-foreground: <<colour flexoki-200>>
+sidebar-tab-background-selected: <<colour flexoki-bg-2>>
+sidebar-tab-background: <<colour flexoki-ui>>
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: <<colour tab-border>>
+sidebar-tab-divider: <<colour flexoki-100>>
+sidebar-tab-foreground-selected: 
+sidebar-tab-foreground: <<colour tab-foreground>>
+sidebar-tiddler-link-foreground-hover: <<colour flexoki-500>>
+sidebar-tiddler-link-foreground: <<colour flexoki-700>>
+site-title-foreground: <<colour tiddler-title-foreground>>
+stability-stable: <<colour flexoki-green-600>>
+stability-experimental: <<colour flexoki-yellow-600>>
+stability-deprecated: <<colour flexoki-red-600>>
+stability-legacy: <<colour flexoki-blue-600>>
+static-alert-foreground: <<colour flexoki-tx-3>>
+tab-background-selected: <<colour background>>
+tab-background: <<colour flexoki-bg-2>>
+tab-border-selected: <<colour flexoki-ui-3>>
+tab-border: <<colour flexoki-ui>>
+tab-divider: <<colour flexoki-ui-2>>
+tab-foreground-selected: <<colour tab-foreground>>
+tab-foreground: <<colour flexoki-tx>>
+table-border: <<colour flexoki-ui-2>>
+table-footer-background: <<colour flexoki-tx-3>>
+table-header-background: <<colour flexoki-bg-2>>
+tag-background: #AD8301
+tag-foreground: #FFFCF0
+testcase-accent-level-1: <<colour flexoki-blue-400>>
+testcase-accent-level-2: <<colour flexoki-yellow-400>>
+testcase-accent-level-3: <<colour flexoki-green-400>>
+tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
+tiddler-controls-foreground-hover: <<colour flexoki-tx-3>>
+tiddler-controls-foreground-selected: <<colour  flexoki-tx-2>>
+tiddler-controls-foreground: <<colour flexoki-ui-3>>
+tiddler-editor-background: <<colour flexoki-bg-2>>
+tiddler-editor-border-image: #ffffff
+tiddler-editor-border: <<colour flexoki-ui-2>>
+tiddler-editor-fields-even: <<colour flexoki-ui-3>>
+tiddler-editor-fields-odd: <<colour flexoki-ui-2>>
+tiddler-info-background: <<colour flexoki-bg-2>>
+tiddler-info-border: <<colour flexoki-200>>
+tiddler-info-tab-background: <<colour flexoki-bg>>
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: <<colour flexoki-black>>
+tiddler-title-foreground: <<colour flexoki-magenta-600>>
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: #999999
+very-muted-foreground: #888888
+wikilist-background: <<colour flexoki-ui>>
+wikilist-item: #fff
+wikilist-info: #000
+wikilist-title: #666
+wikilist-title-svg: <<colour wikilist-title>>
+wikilist-url: #aaa
+wikilist-button-open: #4fb82b
+wikilist-button-open-hover: green
+wikilist-button-reveal: #5778d8
+wikilist-button-reveal-hover: blue
+wikilist-button-remove: #d85778
+wikilist-button-remove-hover: red
+wikilist-toolbar-background: #d3d3d3
+wikilist-toolbar-foreground: #888
+wikilist-droplink-dragover: rgba(255,192,192,0.5)
+wikilist-button-background: #acacac
+wikilist-button-foreground: #000
