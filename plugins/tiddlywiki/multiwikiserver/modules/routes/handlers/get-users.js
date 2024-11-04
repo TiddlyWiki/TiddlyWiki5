@@ -18,7 +18,7 @@ exports.path = /^\/admin\/users$/;
 
 exports.handler = function(request,response,state) {
 	var userList = state.server.sqlTiddlerDatabase.listUsers();
-		
+
 	// Ensure userList is an array
 	if (!Array.isArray(userList)) {
 		userList = [];
@@ -30,7 +30,7 @@ exports.handler = function(request,response,state) {
 		response.end("Forbidden");
 		return;
 	}
-	
+
 	// Convert dates to strings and ensure all necessary fields are present
 	userList = userList.map(user => ({
 		user_id: user.user_id || '',
@@ -56,5 +56,5 @@ exports.handler = function(request,response,state) {
 	response.write(html);
 	response.end();
 };
-	
+
 }());

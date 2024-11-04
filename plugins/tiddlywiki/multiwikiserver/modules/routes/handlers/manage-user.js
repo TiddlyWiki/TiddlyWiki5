@@ -31,7 +31,7 @@ exports.handler = function(request,response,state) {
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/error");
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/success");
 	}
-	
+
 	if(!userData) {
 		response.writeHead(404, "Not Found", {"Content-Type": "text/html"});
 		var errorHtml = $tw.mws.store.adminWiki.renderTiddler("text/plain", "$:/plugins/tiddlywiki/multiwikiserver/templates/error", {
@@ -43,9 +43,9 @@ exports.handler = function(request,response,state) {
 		response.end();
 		return;
 	}
-	
+
 	// Check if the user is trying to access their own profile or is an admin
-	var hasPermission = ($tw.utils.parseInt(user_id, 10) === state.authenticatedUser.user_id) || state.authenticatedUser.isAdmin;
+	var hasPermission = ($tw.utils.parseInt(user_id) === state.authenticatedUser.user_id) || state.authenticatedUser.isAdmin;
 	if(!hasPermission) {
 		response.writeHead(403, "Forbidden", { "Content-Type": "text/plain" });
 		response.end("Forbidden");
@@ -72,7 +72,7 @@ exports.handler = function(request,response,state) {
 		title: "$:/temp/mws/user-info/preview-user-id",
 		text: user_id
 	}));
-	
+
 	response.writeHead(200, "OK", {
 		"Content-Type": "text/html"
 	});

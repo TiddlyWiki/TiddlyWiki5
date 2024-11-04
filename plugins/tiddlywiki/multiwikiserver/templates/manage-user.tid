@@ -14,7 +14,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 			<h1 class="user-profile-name"><$text text={{{ [<user>jsonget[username]] }}}/></h1>
 			<p class="user-profile-email"><$text text={{{ [<user>jsonget[email]] }}}/></p>
 		</div>
-		
+
 		<div class="user-profile-details">
 			<div class="user-profile-item">
 				<span class="user-profile-label">User ID:</span>
@@ -39,7 +39,7 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user
 			</div>
 		</div>
 	</div>
- 
+
 	<% if [<user-is-admin>match[yes]] %>
 		<$tiddler tiddler="$:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account">
 			<$transclude/>

@@ -43,7 +43,7 @@ exports.handler = function (request, response, state) {
   var confirmPassword = state.data.confirmPassword;
   var currentUserId = state.authenticatedUser.user_id;
 
-  var hasPermission = ($tw.utils.parseInt(userId, 10) === currentUserId) || state.authenticatedUser.isAdmin;
+  var hasPermission = ($tw.utils.parseInt(userId) === currentUserId) || state.authenticatedUser.isAdmin;
 
   if(!hasPermission) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
