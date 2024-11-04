@@ -4,9 +4,9 @@ tags: Concepts
 title: DefaultTiddlers
 type: text/vnd.tiddlywiki
 
-"Default tiddlers" refers to the list of tiddlers that is opened at startup in the browser if the address bar does not include a [[permalink|PermaLinks]].
+"Default tiddlers" refers to the list of tiddlers that are opened at startup in the browser if the address bar does not include a [[permalink|PermaLinks]].
 
-There are 2 ways default tiddlers can be defined:
+There are two ways default tiddlers can be defined:
 
 * A [[title-list|Title List]] eg: `TiddlerTitles` and `[[Titles with spaces]]`
 * Filter expressions, using [[filter operators|Filter Operators]] eg: `[tag[HelloThere]]`
