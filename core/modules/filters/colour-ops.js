@@ -24,7 +24,6 @@ exports["colour-darken"] = makeColourOperator(function (c, operator, options) {
 
 exports["colour-oklch"] = makeColourOperator(function (c, operator, options) {
 	var prop = ((operator.suffixes || [])[0] || ["l"])[0];
-console.log("Prop",prop,$tw.utils.parseNumber(operator.operand))
 	if(["l","c","h"].indexOf(prop) !== -1) {
 		c.oklch[prop] = $tw.utils.parseNumber(operator.operand);
 	}
