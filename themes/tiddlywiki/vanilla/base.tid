@@ -2858,6 +2858,17 @@ a.tc-tiddlylink.tc-plugin-info:hover > .tc-plugin-info-chunk .tc-plugin-info-sta
 	cursor:default;
 }
 
+.tc-chosen > .tc-tiddlylink:before {
+	margin-left: -10px;
+	position: relative;
+	content: "» ";
+}
+
+.tc-chooser.tc-chooser-cards .tc-chosen > .tc-tiddlylink:before {
+	margin: 0;
+	content: "";
+}
+
 .tc-chooser-item .tc-tiddlylink {
 	display: block;
 	text-decoration: none;
