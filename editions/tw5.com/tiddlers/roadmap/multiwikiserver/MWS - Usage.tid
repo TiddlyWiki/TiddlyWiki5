@@ -1,0 +1,17 @@
+title: MWS: Usage
+tags: MultiWikiServer
+modified: 20241105133737778
+created: 20241105133737778
+
+Once MWS is successfully [[installed|MWS: Installation]], you can access it by visiting http://localhost:8080 in a browser on the same computer.
+
+! MWS Home
+
+The home page of MWS consists of the following elements:
+
+* A listing of the available wikis on this server
+* A form to create a new wiki recipe, or modify an existing one
+* A listing of the available bags on this server
+* A form to create a new bag, or modify an existing one
+* An "Advanced" section containing a checkbox to show system bags
+
