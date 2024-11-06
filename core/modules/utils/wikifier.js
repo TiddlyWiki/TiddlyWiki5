@@ -3,7 +3,7 @@ title: $:/core/modules/utils/wikifier.js
 type: application/javascript
 module-type: utils
 
-A higher level helper class for wikification and parsing
+A high level helper class for wikification and parsing
 
 \*/
 (function(){
