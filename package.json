@@ -42,8 +42,8 @@
   },
   "dependencies": {
     "@playwright/test": "^1.47.2",
-    "better-sqlite3": "^9.4.3",
-    "node-sqlite3-wasm": "^0.8.10",
+    "better-sqlite3": "^11.5.0",
+    "node-sqlite3-wasm": "^0.8.25",
     "playwright": "^1.47.2"
   }
 }
