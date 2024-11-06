@@ -1,13 +1,13 @@
 created: 20140104134911101
-modified: 20241010115857934
+modified: 20241016105446426
 original-modified: 20140919161039197
 tags: Videos [[Working with TiddlyWiki]] [[Quick Start]]
 title: Getting Started Video
 ja-title: 入門動画
 type: text/vnd.tiddlywiki
 
-この簡単なチュートリアルでは、スタンドアロンのTiddlyWikiファイルを使用して変更を保存する基本について説明します。
+この短いチュートリアルでは、スタンドアロンTiddlyWikiファイルを使用して変更を保存する基本を説明します。
 
-//このビデオは少し古いものですが、近日中に更新される予定です!//
+//(注意)この動画は少し古いので、すぐに更新されるでしょう!//
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1g66s7UbyuU" frameborder="0" allowfullscreen></iframe>
