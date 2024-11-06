@@ -41,7 +41,7 @@ exports.handler = function (request,response,state) {
 
   if(!hasPermission) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-      title: "$:/temp/mws/update-profile/error",
+      title: "$:/temp/mws/update-profile/" + userId + "/error",
       text: "You don't have permission to update this profile"
     }));
     response.writeHead(302, { "Location": "/admin/users/" + userId });
@@ -58,12 +58,12 @@ exports.handler = function (request,response,state) {
 
   if(result.success) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-      title: "$:/temp/mws/update-profile/success",
+      title: "$:/temp/mws/update-profile/" + userId + "/success",
       text: result.message
     }));
   } else {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-      title: "$:/temp/mws/update-profile/error",
+      title: "$:/temp/mws/update-profile/" + userId + "/error",
       text: result.message
     }));
   }

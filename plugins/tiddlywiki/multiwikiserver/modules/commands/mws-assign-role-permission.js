@@ -51,8 +51,6 @@ Command.prototype.execute = function() {
 
 
 	$tw.mws.store.sqlTiddlerDatabase.addPermissionToRole(role.role_id, permission.permission_id);
-
-	console.log(permission_name+" permission assigned to "+role_name+" role successfully!")
 	self.callback();
 	return null;
 };

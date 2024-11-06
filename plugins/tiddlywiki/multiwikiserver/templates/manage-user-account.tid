@@ -28,15 +28,15 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
         </div>
       <% endif %>
       <button type="submit" class="update-profile-btn">Update Profile</button>
-      <$list filter="[[$:/temp/mws/update-profile/error]!is[missing]]" variable="errorTiddler">
+      <$list filter="[[$:/temp/mws/update-profile/]addsuffix<user-id>addsuffix[/error]!is[missing]]" variable="errorTiddler">
         <div class="tc-error-message">
-          {{$:/temp/mws/update-profile/error}}
+          <$text text={{{[<errorTiddler>get[text]]}}}/>
         </div>
       </$list>
 
-      <$list filter="[[$:/temp/mws/update-profile/success]!is[missing]]" variable="successTiddler">
+      <$list filter="[[$:/temp/mws/update-profile/]addsuffix<user-id>addsuffix[/success]!is[missing]]" variable="successTiddler">
         <div class="tc-success-message">
-          {{$:/temp/mws/update-profile/success}}
+          <$text text={{{[<successTiddler>get[text]]}}}/>
         </div>
       </$list>
     </form>
@@ -46,9 +46,9 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
     <form class="user-profile-form" action="/delete-user-account" method="POST" onsubmit="return confirm('Are you sure you want to delete this user account? This action cannot be undone.');">
       <input type="hidden" name="userId" value={{{ [<user>jsonget[user_id]] }}}>
       <button type="submit" class="delete-account-btn">Delete User Account</button>
-      <$list filter="[[$:/temp/mws/delete-user/error]!is[missing]]" variable="errorTiddler">
+      <$list filter="[[$:/temp/mws/delete-user/]addsuffix<user-id>addsuffix[/error]!is[missing]]" variable="deleteErrorTiddler">
         <div class="tc-error-message">
-          {{$:/temp/mws/delete-user/error}}
+          <$text text={{{[<deleteErrorTiddler>get[text]]}}}/>
         </div>
       </$list>
     </form>
@@ -67,14 +67,14 @@ title: $:/plugins/tiddlywiki/multiwikiserver/templates/manage-user-account
         <input type="password" id="confirm-password" name="confirmPassword" required />
       </div>
       <button type="submit" class="update-password-btn">Change Password</button>
-      <$list filter="[[$:/temp/mws/change-password/error]!is[missing]]" variable="errorTiddler">
+      <$list filter="[[$:/temp/mws/change-password/]addsuffix<user-id>addsuffix[/error]!is[missing]]" variable="errorTiddler">
         <div class="tc-error-message">
-          {{$:/temp/mws/change-password/error}}
+          <$text text={{{[<errorTiddler>get[text]]}}}/>
         </div>
       </$list>
-      <$list filter="[[$:/temp/mws/change-password/success]!is[missing]]" variable="successTiddler">
+      <$list filter="[[$:/temp/mws/change-password/]addsuffix<user-id>addsuffix[/success]!is[missing]]" variable="successTiddler">
         <div class="tc-success-message">
-          {{$:/temp/mws/change-password/success}}
+          <$text text={{{[<successTiddler>get[text]]}}}/>
         </div>
       </$list>
     </form>

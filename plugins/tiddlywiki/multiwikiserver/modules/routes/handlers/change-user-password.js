@@ -22,9 +22,10 @@ exports.bodyFormat = "www-form-urlencoded";
 exports.csrfDisable = true;
 
 exports.handler = function (request, response, state) {
+  var userId = state.data.userId;
   // Clean up any existing error/success messages
-  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/error");
-  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/success");
+  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + userId + "/error");
+  $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + userId + "/success");
   $tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
 
   if(!state.authenticatedUser) {
@@ -38,7 +39,6 @@ exports.handler = function (request, response, state) {
   }
 
   var auth = authenticator(state.server.sqlTiddlerDatabase);
-  var userId = state.data.userId;
   var newPassword = state.data.newPassword;
   var confirmPassword = state.data.confirmPassword;
   var currentUserId = state.authenticatedUser.user_id;
@@ -47,7 +47,7 @@ exports.handler = function (request, response, state) {
 
   if(!hasPermission) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-      title: "$:/temp/mws/change-password/error",
+      title: "$:/temp/mws/change-password/" + userId + "/error",
       text: "You don't have permission to change this user's password"
     }));
     response.writeHead(302, { "Location": "/admin/users/" + userId });
@@ -57,7 +57,7 @@ exports.handler = function (request, response, state) {
 
   if(newPassword !== confirmPassword) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-      title: "$:/temp/mws/change-password/error",
+      title: "$:/temp/mws/change-password/" + userId + "/error",
       text: "New passwords do not match"
     }));
     response.writeHead(302, { "Location": "/admin/users/" + userId });
@@ -69,7 +69,7 @@ exports.handler = function (request, response, state) {
 
   if(!userData) {
     $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-      title: "$:/temp/mws/change-password/error",
+      title: "$:/temp/mws/change-password/" + userId + "/error",
       text: "User not found"
     }));
     response.writeHead(302, { "Location": "/admin/users/" + userId });
@@ -81,7 +81,7 @@ exports.handler = function (request, response, state) {
   var result = state.server.sqlTiddlerDatabase.updateUserPassword(userId, newHash);
 
   $tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-    title: "$:/temp/mws/change-password/success",
+    title: "$:/temp/mws/change-password/" + userId + "/success",
     text: result.message
   }));
   response.writeHead(302, { "Location": "/admin/users/" + userId });

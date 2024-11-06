@@ -21,15 +21,16 @@ exports.handler = function(request,response,state) {
 	var userData = state.server.sqlTiddlerDatabase.getUser(user_id);
 
 	// Clean up any existing error/success messages if the user_id is different from the "$:/temp/mws/user-info/preview-user-id"
-	var lastPreviewedUser = $tw.wiki.getTiddlerText("$:/temp/mws/user-info/preview-user-id");
+	var lastPreviewedUser = $tw.wiki.getTiddlerText("$:/temp/mws/user-info/" + user_id + "/preview-user-id");
+
 	if(user_id !== lastPreviewedUser) {
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/success");
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/	error");
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/change-password/" + user_id + "/success");
 		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/login/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/success");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/error");
-		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/success");
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/" + user_id + "/error");
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/delete-user/" + user_id + "/success");
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/" + user_id + "/error");
+		$tw.mws.store.adminWiki.deleteTiddler("$:/temp/mws/update-profile/" + user_id + "/success");
 	}
 
 	if(!userData) {
@@ -69,7 +70,7 @@ exports.handler = function(request,response,state) {
 	allRoles.sort(function(a, b){ return (a.role_id === userRole?.role_id ? -1 : 1) });
 
 	$tw.mws.store.adminWiki.addTiddler(new $tw.Tiddler({
-		title: "$:/temp/mws/user-info/preview-user-id",
+		title: "$:/temp/mws/user-info/" + user_id + "/preview-user-id",
 		text: user_id
 	}));
 
@@ -87,7 +88,8 @@ exports.handler = function(request,response,state) {
 			"all-roles": JSON.stringify(allRoles),
 			"is-current-user-profile": state.authenticatedUser && state.authenticatedUser.user_id === $tw.utils.parseInt(user_id, 10) ? "yes" : "no",
 			"username": state.authenticatedUser ? state.authenticatedUser.username : "Guest",
-			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no"		
+			"user-is-admin": state.authenticatedUser && state.authenticatedUser.isAdmin ? "yes" : "no",
+			"user-id": user_id,
 		}
 	});
 	response.write(html);

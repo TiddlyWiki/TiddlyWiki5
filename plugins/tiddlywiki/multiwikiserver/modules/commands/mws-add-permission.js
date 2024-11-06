@@ -38,8 +38,6 @@ Command.prototype.execute = function() {
 	var description = this.params[1];
 
 	$tw.mws.store.sqlTiddlerDatabase.createPermission(permission_name, description);
-
-	console.log(permission_name+" Permission Created Successfully!")
 	self.callback();
 	return null;
 };
