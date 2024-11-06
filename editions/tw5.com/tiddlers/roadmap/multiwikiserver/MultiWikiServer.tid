@@ -5,9 +5,9 @@ created: 20241105133737778
 
 ! Introduction
 
-~MultiWikiServer is a new development that completely overhauls ~TiddlyWiki's capabilities when running as server under Node.js. It brings ~TiddlyWiki up to par with common web-based tools like ~WordPress or ~MediaWiki.
+~MultiWikiServer is a new development that drastically improves ~TiddlyWiki's capabilities when running as server under Node.js. It brings ~TiddlyWiki up to par with common web-based tools like ~WordPress or ~MediaWiki by supporting multiple wikis and multiple users at the same time.
 
-MWS extends the basic single-user, single-wiki functionality of ~TiddlyWiki under Node.js to support multiple wikis and multiple users at the same time. Planned features include:
+Planned features include:
 
 * Hosting multiple wikis at once, using the [[Bags and Recipes]] mechanism for sharing data between them
 * [[Robust authentication and authorisation options|MWS: Security]]
